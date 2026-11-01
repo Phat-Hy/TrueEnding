@@ -74,7 +74,7 @@ index d7bedda..154148c 100644
      const uint32_t size = byte_size(copy.key.format, copy.width, copy.height);
      if (!format || size == 0) {
 diff --git a/lib/gx/texture.cpp b/lib/gx/texture.cpp
-index 33a8c99..114925b 100644
+index 33a8c99..6ba3e92 100644
 --- a/lib/gx/texture.cpp
 +++ b/lib/gx/texture.cpp
 @@ -17,6 +17,8 @@
@@ -94,16 +94,18 @@ index 33a8c99..114925b 100644
  uint64_t s_bindGeneration = 1;
  std::atomic<uint64_t> s_pendingInvalidations = 0;
  std::atomic<uint64_t> s_pendingCacheClears = 0;
-@@ -245,6 +248,62 @@ void update_cache_stats() {
+@@ -245,6 +248,61 @@ void update_cache_stats() {
    s_stats.currentCopyBytes = s_copyCache.pinned_bytes();
  }
  
 +/* AURORA-SPIKE (handover 5c.46 AP-BM): TLS_AURORA_COPYLOG quantifies what keying the copy-texture
 + * map by (destination, width, height, format) changes on a real stream. For every sampled texture
-+ * that names a copy destination it reports whether the bind resolved to a copy written AT THE SIZE
-+ * THE GUEST BOUND (`key-hit`), and whether the most recent write at that address had a DIFFERENT
-+ * size (`stale-at-address`) - that second count is exactly the binds the old pointer-only map
-+ * answered with the later, wrong-size copy. Inert unless set. */
++ * that names a copy destination - and only those; an ordinary texture is not a bind this instrument
++ * has anything to say about, which is why the count below is the copy-destination subset and not the
++ * frame's texture-bind count - it reports whether the bind resolved to a copy written AT THE SIZE THE
++ * GUEST BOUND (`key-hit`), whether it needed a size/format fallback, and whether the most recent write
++ * at that address had a DIFFERENT size or format (`stale-at-address`): that last count is exactly the
++ * binds the old pointer-only map answered with the later, differently-sized copy. Inert unless set. */
 +struct CopyLogStats {
 +  uint64_t writes = 0;
 +  uint64_t writesLogged = 0;
@@ -112,7 +114,6 @@ index 33a8c99..114925b 100644
 +  uint64_t sizeFallbacks = 0;
 +  uint64_t stale = 0;
 +  uint64_t staleLogged = 0;
-+  uint64_t missing = 0;
 +};
 +CopyLogStats s_copyLog;
 +bool copy_log_enabled() noexcept {
@@ -124,12 +125,12 @@ index 33a8c99..114925b 100644
 +
 +void copy_log_bind(const GXState::CopyTextureKey& key, const GXState::CopyTextureRef* resolved,
 +                   const GXState::CopyTextureRef* newest) noexcept {
-+  if (!copy_log_enabled()) {
-+    return;
++  if (!copy_log_enabled() || newest == nullptr) {
++    return; // not a copy destination
 +  }
 +  ++s_copyLog.binds;
 +  if (resolved == nullptr) {
-+    ++s_copyLog.missing;
++    ++s_copyLog.sizeFallbacks; // no copy at that address any more: the sampler falls back to the texels
 +    return;
 +  }
 +  if (resolved->key == key) {
@@ -137,8 +138,7 @@ index 33a8c99..114925b 100644
 +  } else {
 +    ++s_copyLog.sizeFallbacks;
 +  }
-+  if (newest != nullptr && newest->key.width == key.width && newest->key.height == key.height &&
-+      newest->key.format == key.format) {
++  if (newest->key.width == key.width && newest->key.height == key.height && newest->key.format == key.format) {
 +    return;
 +  }
 +  ++s_copyLog.stale;
@@ -148,16 +148,15 @@ index 33a8c99..114925b 100644
 +                 "[copylog] bind %p at %ux%u fmt %u -> resolved %ux%u fmt %u | newest write at this address "
 +                 "%ux%u fmt %u (the pointer-only map would have used the latter)\n",
 +                 key.dest, key.width, key.height, static_cast<unsigned>(key.format), resolved->key.width,
-+                 resolved->key.height, static_cast<unsigned>(resolved->key.format),
-+                 newest != nullptr ? newest->key.width : 0, newest != nullptr ? newest->key.height : 0,
-+                 newest != nullptr ? static_cast<unsigned>(newest->key.format) : 0);
++                 resolved->key.height, static_cast<unsigned>(resolved->key.format), newest->key.width,
++                 newest->key.height, static_cast<unsigned>(newest->key.format));
 +  }
 +}
 +
  void retire_copy_texture(const GXState::CopyTextureRef& copy) {
    for (auto& [_, cache] : s_tlutObjectCaches) {
      absl::erase_if(cache.dynamicPaletteTextures,
-@@ -440,14 +499,14 @@ void touch_bound_texture(const GXTexObj_& obj) {
+@@ -440,14 +498,14 @@ void touch_bound_texture(const GXTexObj_& obj) {
    if (!is_palette_format(obj.format()) || obj.tlut >= g_gxState.loadedTluts.size()) {
      return;
    }
@@ -175,7 +174,7 @@ index 33a8c99..114925b 100644
          dynamicIt != tlutIt->second.dynamicPaletteTextures.end()) {
        dynamicIt->second.lastUsedFrame = s_frameCount;
      }
-@@ -507,10 +566,6 @@ namespace texture {
+@@ -507,10 +565,6 @@ namespace texture {
  GXState::CopyTextureRef resolve_copy_texture(const GXState::CopyTextureKey& key) noexcept {
    ZoneScoped;
    auto* copy = s_copyCache.pin(key);
@@ -186,7 +185,7 @@ index 33a8c99..114925b 100644
    if (copy) {
      ++s_stats.copyCacheHits;
    } else {
-@@ -522,12 +577,83 @@ GXState::CopyTextureRef resolve_copy_texture(const GXState::CopyTextureKey& key)
+@@ -522,12 +576,83 @@ GXState::CopyTextureRef resolve_copy_texture(const GXState::CopyTextureKey& key)
      ++s_stats.copyCacheMisses;
    }
    ++copy->revision;
@@ -270,30 +269,28 @@ index 33a8c99..114925b 100644
  size_t texture_source_size(u32 format, u32 width, u32 height, u32 mipCount) noexcept {
    if (width == 0 || height == 0 || mipCount == 0) {
      return 0;
-@@ -712,6 +838,22 @@ gfx::TextureHandle resolve_static_palette_texture(const GXTexObj_& obj, const GX
+@@ -712,6 +837,20 @@ gfx::TextureHandle resolve_static_palette_texture(const GXTexObj_& obj, const GX
  }
  
  void end_frame() noexcept {
 +  if (copy_log_enabled() && (s_copyLog.writes != 0 || s_copyLog.binds != 0)) {
 +    std::fprintf(stderr,
-+                 "[copylog] frame %llu copy writes=%llu sample-binds-at-a-copy-destination=%llu key-hit=%llu "
-+                 "size-fallback=%llu stale-at-address=%llu missing=%llu copy-destinations=%zu\n",
++                 "[copylog] frame %llu copy writes=%llu copy-destination-sample-binds=%llu key-hit=%llu "
++                 "size-fallback=%llu stale-at-address=%llu copy-destinations=%zu\n",
 +                 static_cast<unsigned long long>(s_frameCount), static_cast<unsigned long long>(s_copyLog.writes),
 +                 static_cast<unsigned long long>(s_copyLog.binds), static_cast<unsigned long long>(s_copyLog.keyHits),
 +                 static_cast<unsigned long long>(s_copyLog.sizeFallbacks),
-+                 static_cast<unsigned long long>(s_copyLog.stale),
-+                 static_cast<unsigned long long>(s_copyLog.missing), g_gxState.copyTextures.size());
++                 static_cast<unsigned long long>(s_copyLog.stale), g_gxState.copyTextures.size());
 +    s_copyLog.writes = 0;
 +    s_copyLog.binds = 0;
 +    s_copyLog.keyHits = 0;
 +    s_copyLog.sizeFallbacks = 0;
 +    s_copyLog.stale = 0;
-+    s_copyLog.missing = 0;
 +  }
    const auto streamingStats = gfx::texture_replacement::process_streaming();
    s_stats.pendingLoads = streamingStats.pendingLoads;
    s_stats.publishes = streamingStats.publishes;
-@@ -815,7 +957,8 @@ void clear_copy_texture_cache() noexcept {
+@@ -815,7 +954,8 @@ void clear_copy_texture_cache() noexcept {
  void clear_static_texture_cache() noexcept { s_pendingCacheClears.fetch_add(1, std::memory_order_release); }
  
  void evict_copy_texture(const void* dest) noexcept {
@@ -303,7 +300,7 @@ index 33a8c99..114925b 100644
    s_copyCache.erase_if([&](const auto& key) { return key.dest == dest; });
    update_cache_stats();
    texture::invalidate_bindings();
-@@ -839,8 +982,7 @@ void resolve_sampled_textures(const ShaderInfo& info) noexcept {
+@@ -839,8 +979,7 @@ void resolve_sampled_textures(const ShaderInfo& info) noexcept {
      }
  
      gfx::TextureHandle handle;
