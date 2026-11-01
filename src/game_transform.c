@@ -23,7 +23,7 @@ extern void fn_801789D8(void);
 extern void fn_8017A228(void);
 extern void fn_8017AC24(void);
 extern void fn_8021A7A0(void);
-extern void fn_805F89F0(void);
+extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSVECNormalize(void);
@@ -631,7 +631,7 @@ lbl_fn_800FC410_000007E4:
     mr r3, r24
     addi r4, r1, 0x138
     addi r5, r1, 0x108
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x108
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -656,7 +656,7 @@ lbl_fn_800FC410_0000088C:
     mr r3, r24
     addi r4, r1, 0x198
     addi r5, r1, 0x168
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x168
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -681,7 +681,7 @@ lbl_fn_800FC410_000008EC:
     mr r3, r24
     addi r4, r1, 0x1f8
     addi r5, r1, 0x1c8
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x1c8
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1290,7 +1290,7 @@ lbl_fn_800FCD24_00001198:
     mr r3, r22
     addi r4, r1, 0x158
     addi r5, r1, 0x128
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x128
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1315,7 +1315,7 @@ lbl_fn_800FCD24_00001240:
     mr r3, r22
     addi r4, r1, 0x1b8
     addi r5, r1, 0x188
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x188
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1340,7 +1340,7 @@ lbl_fn_800FCD24_000012A0:
     mr r3, r22
     addi r4, r1, 0x218
     addi r5, r1, 0x1e8
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x1e8
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0

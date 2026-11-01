@@ -9,7 +9,7 @@ extern void fn_80051CD8(void);
 extern void fn_80056DB8(void);
 extern void atn_ColliBase_destructor(void);
 extern void fn_800575BC(void);
-extern void fn_8005B9CC(void);
+extern void talk_formatQuotedString(void);
 extern void fn_8005BBF8(void);
 extern void fn_8005BCE8(void);
 extern void fn_8006AA20(void);
@@ -57,7 +57,7 @@ extern void fn_803EDCF4(void);
 extern void fn_803F11F8(void);
 extern void fn_80470580(void);
 extern void fn_8047059C(void);
-extern void fn_805F89F0(void);
+extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSVECSquareMag(void);
@@ -732,7 +732,7 @@ asm void fn_8042CA54(void)
     addi r31, r31, lbl_8075387C@l
 lbl_fn_8042CA54_000007F8:
     addi r3, r1, 0x108
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     lbz r0, 0x0(r3)
     mr r30, r3
     cmpwi r0, 0x3b
@@ -742,7 +742,7 @@ lbl_fn_8042CA54_000007F8:
     cmpwi r3, 0x0
     bne lbl_fn_8042CA54_0000084C
     addi r3, r1, 0x108
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     mr r4, r3
     addi r3, r29, 0xf4
     li r5, 0x0
@@ -759,12 +759,12 @@ lbl_fn_8042CA54_0000084C:
     cmpwi r3, 0x0
     bne lbl_fn_8042CA54_00000894
     addi r3, r1, 0x108
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     mr r4, r3
     addi r3, r1, 0x8
     bl strcpy
     addi r3, r1, 0x108
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl fn_800DC288
     addi r3, r29, 0xf4
     addi r4, r1, 0x8
@@ -778,12 +778,12 @@ lbl_fn_8042CA54_00000894:
     cmpwi r3, 0x0
     bne lbl_fn_8042CA54_000008D8
     addi r3, r1, 0x108
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     mr r4, r3
     addi r3, r1, 0x8
     bl strcpy
     addi r3, r1, 0x108
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl fn_802180A8
     mr r4, r3
     addi r3, r29, 0xf4
@@ -1262,7 +1262,7 @@ asm void fn_8042D140(void)
     li r27, 0x1
 lbl_fn_8042D140_00000EF0:
     addi r3, r1, 0x120
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     lbz r0, 0x0(r3)
     mr r24, r3
     cmpwi r0, 0x3b
@@ -1272,7 +1272,7 @@ lbl_fn_8042D140_00000EF0:
     cmpwi r3, 0x0
     bne lbl_fn_8042D140_00001024
     addi r3, r1, 0x120
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     mr r4, r3
     addi r3, r1, 0x20
     bl strcpy
@@ -1353,7 +1353,7 @@ lbl_fn_8042D140_00001024:
     cmpwi r0, 0x0
     beq lbl_fn_8042D140_000010BC
     addi r3, r1, 0x120
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     mr r4, r3
     addi r3, r1, 0x20
     bl strcpy
@@ -1373,7 +1373,7 @@ lbl_fn_8042D140_00001070:
     cmpwi r0, 0x0
     beq lbl_fn_8042D140_000010BC
     addi r3, r1, 0x120
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     mr r4, r3
     addi r3, r1, 0x20
     bl strcpy
@@ -1921,7 +1921,7 @@ lbl_fn_8042D93C_00001720:
     mr r3, r30
     addi r4, r1, 0x1d0
     addi r5, r1, 0x1a0
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x1a0
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1946,7 +1946,7 @@ lbl_fn_8042D93C_000017E8:
     mr r3, r30
     addi r4, r1, 0x230
     addi r5, r1, 0x200
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x200
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1971,7 +1971,7 @@ lbl_fn_8042D93C_00001848:
     mr r3, r30
     addi r4, r1, 0x290
     addi r5, r1, 0x260
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x260
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -2152,7 +2152,7 @@ lbl_fn_8042D93C_00001A7C:
     mr r3, r30
     addi r4, r1, 0x140
     addi r5, r1, 0x170
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x170
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -2177,7 +2177,7 @@ lbl_fn_8042D93C_00001B4C:
     mr r3, r30
     addi r4, r1, 0xe0
     addi r5, r1, 0x110
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x110
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -2202,7 +2202,7 @@ lbl_fn_8042D93C_00001BAC:
     mr r3, r30
     addi r4, r1, 0x80
     addi r5, r1, 0xb0
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0xb0
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0

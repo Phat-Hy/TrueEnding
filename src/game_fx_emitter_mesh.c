@@ -22,7 +22,7 @@ extern void fn_80151448(void);
 extern void fn_80168E60(void);
 extern void actor_setState(void);
 extern void fn_80179D44(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void fn_802376D0(void);
 extern void res_findResourceSlot(void);
 extern void fn_8028ADF4(void);
@@ -1181,7 +1181,7 @@ lbl_fn_80289C98_00000F50:
     cmpwi r0, 0x2
     bne lbl_fn_80289C98_000011A4
     lwz r3, 0x6c(r3)
-    bl fn_80219E6C
+    bl task_findEntryById
     lwz r4, 0x0(r30)
     mr r31, r3
     cmpwi r4, 0x0

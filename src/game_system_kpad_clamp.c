@@ -121,7 +121,7 @@ extern void fn_80570A44(void);
 extern void fn_8059C330(void);
 extern void fn_8059D17C(void);
 extern void fn_8059D26C(void);
-extern void fn_805F89F0(void);
+extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXScale(void);
 
@@ -231,7 +231,7 @@ asm void fn_8037257C(void)
     mr r3, r31
     addi r4, r1, 0x38
     addi r5, r1, 0x8
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x8
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -256,7 +256,7 @@ lbl_fn_8037257C_000000C0:
     mr r3, r31
     addi r4, r1, 0x98
     addi r5, r1, 0x68
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x68
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -281,7 +281,7 @@ lbl_fn_8037257C_00000120:
     mr r3, r31
     addi r4, r1, 0xf8
     addi r5, r1, 0xc8
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0xc8
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -299,7 +299,7 @@ lbl_fn_8037257C_00000180:
     mr r3, r29
     mr r4, r31
     addi r5, r1, 0x158
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x158
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -338,7 +338,7 @@ asm void fn_80372754(void)
     mr r3, r31
     addi r4, r1, 0x8
     addi r5, r1, 0x38
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x38
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0

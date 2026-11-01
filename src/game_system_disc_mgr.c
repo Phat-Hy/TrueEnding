@@ -19,7 +19,7 @@ extern void fn_8016DDB0(void);
 extern void actor_setState(void);
 extern void fn_80178208(void);
 extern void fn_80194E2C(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
@@ -347,7 +347,7 @@ lbl_fn_8034ECE8_00000328:
     bl system_getNextSequenceId
     mr r31, r3
     li r3, 0x780
-    bl fn_80219E6C
+    bl task_findEntryById
     stw r29, 0x8(r1)
     mr r5, r3
     lfs f1, lbl_80885378

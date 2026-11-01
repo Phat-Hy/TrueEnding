@@ -18,8 +18,8 @@ extern void fn_8016DF3C(void);
 extern void actor_setState(void);
 extern void fn_80237654(void);
 extern void fn_8023772C(void);
-extern void fn_8023780C(void);
-extern void fn_8023781C(void);
+extern void res_MsgHandle_destructor(void);
+extern void res_MsgHandle_unload(void);
 extern void fn_8035B694(void);
 extern void fn_80365708(void);
 extern void world_setLocalFlag(void);
@@ -1745,7 +1745,7 @@ lbl_fn_804DE888_000015D8:
     addis r3, r24, 0x1
     lwz r4, lbl_808875A4
     subi r3, r3, 0x694c
-    bl fn_8023780C
+    bl res_MsgHandle_destructor
     addis r3, r24, 0x1
     lwz r4, lbl_808875A8
     subi r3, r3, 0x6940
@@ -1970,7 +1970,7 @@ lbl_fn_804DF120_000018D0:
 lbl_fn_804DF120_000018E0:
     addis r3, r30, 0x1
     subi r3, r3, 0x694c
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addis r3, r30, 0x1
     subi r3, r3, 0x6940
     bl fn_8023772C

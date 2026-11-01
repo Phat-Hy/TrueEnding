@@ -8,7 +8,7 @@ extern void fn_80013DC4(void);
 extern void fn_80013F78(void);
 extern void fn_80041C0C(void);
 extern void fn_8004B338(void);
-extern void fn_8005B9CC(void);
+extern void talk_formatQuotedString(void);
 extern void fn_8005BBF8(void);
 extern void fn_8005BCE8(void);
 extern void fn_80069BF4(void);
@@ -1484,7 +1484,7 @@ asm void fn_80476ED4(void)
     lis r28, lbl_8078FF18@ha
 lbl_fn_80476ED4_000011AC:
     addi r3, r1, 0x138
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     lbz r0, 0x0(r3)
     mr r16, r3
     cmpwi r0, 0x3b
@@ -1495,7 +1495,7 @@ lbl_fn_80476ED4_000011AC:
     bne lbl_fn_80476ED4_000014C4
     stb r17, 0x38(r1)
     addi r3, r1, 0x138
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     cmplw r3, r18
     mr r16, r3
     beq lbl_fn_80476ED4_00001204
@@ -1507,7 +1507,7 @@ lbl_fn_80476ED4_000011AC:
     bl memcpy
 lbl_fn_80476ED4_00001204:
     addi r3, r1, 0x138
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     lwz r12, 0x64(r30)
     mtctr r12
     bctrl
@@ -1710,7 +1710,7 @@ lbl_fn_80476ED4_000014C4:
     cmpwi r0, 0x0
     bne lbl_fn_80476ED4_00001504
     addi r3, r1, 0x138
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     mr r4, r3
     addi r3, r30, 0x6c
     li r5, 0x0

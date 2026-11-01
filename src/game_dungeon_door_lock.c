@@ -17,7 +17,7 @@ extern void fn_801F8598(void);
 extern void fn_801F8830(void);
 extern void fn_80219344(void);
 extern void fn_80219558(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void world_getGlobalFlag(void);
 
 /* External data declarations */
@@ -1235,7 +1235,7 @@ lbl_fn_803E0E10_00001030:
     lwz r3, 0xabc(r23)
     cmpwi r3, 0x0
     ble lbl_fn_803E0E10_00001044
-    bl fn_80219E6C
+    bl task_findEntryById
     b lbl_fn_803E0E10_00001048
 lbl_fn_803E0E10_00001044:
     li r3, 0x0

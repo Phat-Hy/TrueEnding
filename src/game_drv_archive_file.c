@@ -23,7 +23,7 @@ extern void fn_80178864(void);
 extern void fn_8017ABD4(void);
 extern void fn_8017AC08(void);
 extern void fn_80219558(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void fn_8021A77C(void);
 extern void fn_8021A888(void);
 extern void fn_803750E4(void);
@@ -434,7 +434,7 @@ lbl_fn_805A96D8_000004E0:
     lwz r3, 0x70(r31)
     cmpwi r3, 0x0
     ble lbl_fn_805A96D8_0000057C
-    bl fn_80219E6C
+    bl task_findEntryById
     lbz r0, 0x2(r3)
     cmpwi r0, 0x7
     bne lbl_fn_805A96D8_0000093C
@@ -1611,14 +1611,14 @@ lbl_fn_805AA950_00001584:
     b lbl_fn_805AA950_0000159C
 lbl_fn_805AA950_00001590:
     li r3, 0x7531
-    bl fn_80219E6C
+    bl task_findEntryById
     mr r31, r3
 lbl_fn_805AA950_0000159C:
     lwz r0, 0x4(r31)
     cmpwi r0, 0x4ef9
     bne lbl_fn_805AA950_000015B4
     li r3, 0x7532
-    bl fn_80219E6C
+    bl task_findEntryById
     mr r31, r3
 lbl_fn_805AA950_000015B4:
     lwz r3, 0x4(r31)
@@ -1633,7 +1633,7 @@ lbl_fn_805AA950_000015B4:
     cmpwi r0, 0x2
     bne lbl_fn_805AA950_000015EC
     li r3, 0xbbf
-    bl fn_80219E6C
+    bl task_findEntryById
     mr r31, r3
 lbl_fn_805AA950_000015EC:
     lbz r0, 0x2(r31)
@@ -1661,7 +1661,7 @@ lbl_fn_805AA950_00001628:
     cmplwi r0, 0x1
     bgt lbl_fn_805AA950_0000164C
     li r3, 0x7530
-    bl fn_80219E6C
+    bl task_findEntryById
     mr r22, r3
 lbl_fn_805AA950_0000164C:
     lwz r3, 0x4(r22)
@@ -1675,7 +1675,7 @@ lbl_fn_805AA950_0000164C:
     cmpwi r0, 0x2
     bne lbl_fn_805AA950_00001680
     li r3, 0xbbf
-    bl fn_80219E6C
+    bl task_findEntryById
     mr r22, r3
 lbl_fn_805AA950_00001680:
     lwz r3, lbl_8087F490

@@ -11,7 +11,7 @@ extern void _savegpr_21(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void fn_8000FAE4(void);
-extern void fn_8005B9CC(void);
+extern void talk_formatQuotedString(void);
 extern void fn_8005BBF8(void);
 extern void fn_8005BCE8(void);
 extern void mem_free(void);
@@ -1070,7 +1070,7 @@ lbl_fn_8011EF14_00000D4C:
     li r14, 0x0
 lbl_fn_8011EF14_00000DE8:
     addi r3, r1, 0x34
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     lbz r0, 0x0(r3)
     mr r18, r3
     extsb. r0, r0
@@ -1271,7 +1271,7 @@ lbl_fn_8011EF14_00001064:
     lis r28, 0x2aab
 lbl_fn_8011EF14_000010D0:
     addi r3, r1, 0x34
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     lbz r0, 0x0(r3)
     mr r16, r3
     extsb. r0, r0
@@ -1286,13 +1286,13 @@ lbl_fn_8011EF14_000010D0:
     addi r3, r1, 0x34
     add r19, r0, r31
     addi r31, r31, 0x10
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl fn_802180A8
     cmpwi r3, 0x0
     stw r3, 0x0(r19)
     blt lbl_fn_8011EF14_0000147C
     addi r3, r1, 0x34
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl fn_800DC288
     stfs f1, 0x4(r19)
     stw r29, 0x14(r1)
@@ -1300,7 +1300,7 @@ lbl_fn_8011EF14_000010D0:
     stw r29, 0x1c(r1)
 lbl_fn_8011EF14_00001140:
     addi r3, r1, 0x34
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     lbz r0, 0x0(r3)
     extsb. r0, r0
     beq lbl_fn_8011EF14_000013A8

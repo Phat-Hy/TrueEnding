@@ -47,7 +47,7 @@ extern void fn_8017B3C0(void);
 extern void fn_8017B434(void);
 extern void fn_8017C974(void);
 extern void fn_801A1BE4(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void world_getGlobalFlag(void);
 extern void PSMTXRotRad(void);
 extern void PSMTX44Identity(void);
@@ -697,7 +697,7 @@ lbl_fn_80139560_00000818:
     cmpwi r3, 0x0
     beq lbl_fn_80139560_0000089C
     li r3, 0x7de
-    bl fn_80219E6C
+    bl task_findEntryById
     lfs f1, 0x13a4(r31)
     mr r29, r3
     lfs f0, lbl_808819C0
@@ -740,7 +740,7 @@ lbl_fn_80139560_000008A8:
     cmpwi r3, 0x0
     beq lbl_fn_80139560_00000918
     li r3, 0x7e8
-    bl fn_80219E6C
+    bl task_findEntryById
     mr r29, r3
     bl fn_8013A194
     bl system_getNextSequenceId

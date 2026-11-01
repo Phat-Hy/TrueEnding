@@ -23,7 +23,7 @@ extern void actor_setState(void);
 extern void fn_80170A20(void);
 extern void fn_80176548(void);
 extern void fn_801A03E8(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
@@ -38,7 +38,7 @@ extern void fn_8026C844(void);
 extern void fn_8026CDB4(void);
 extern void fn_8026D058(void);
 extern void fn_8026F9BC(void);
-extern void fn_805F89F0(void);
+extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
@@ -1180,7 +1180,7 @@ lbl_fn_802684C0_00000EA4:
     bl fn_8026F9BC
 lbl_fn_802684C0_00000EF4:
     li r3, 0x60e
-    bl fn_80219E6C
+    bl task_findEntryById
     mr r31, r3
     mr r3, r30
     bl fn_80144710
@@ -1528,7 +1528,7 @@ lbl_fn_8026860C_00001374:
     stw r3, 0x134(r1)
     li r3, 0x617
     lwz r30, lbl_8087F048
-    bl fn_80219E6C
+    bl task_findEntryById
     lfs f1, lbl_80883674
     mr r5, r3
     lfs f2, lbl_80883670
@@ -1611,7 +1611,7 @@ lbl_fn_8026860C_00001504:
     stw r3, 0x134(r1)
     li r3, 0x617
     lwz r30, lbl_8087F048
-    bl fn_80219E6C
+    bl task_findEntryById
     lfs f1, lbl_80883674
     mr r5, r3
     lfs f2, lbl_80883670
@@ -1627,7 +1627,7 @@ lbl_fn_8026860C_00001504:
 lbl_fn_8026860C_00001560:
     lwz r30, lbl_8087F048
     li r3, 0x60f
-    bl fn_80219E6C
+    bl task_findEntryById
     lfs f1, lbl_80883674
     mr r5, r3
     lfs f2, lbl_80883670
@@ -1641,7 +1641,7 @@ lbl_fn_8026860C_00001560:
     bl fn_800F8574
     lwz r30, lbl_8087F048
     li r3, 0x60f
-    bl fn_80219E6C
+    bl task_findEntryById
     lfs f1, lbl_80883674
     mr r5, r3
     lfs f2, lbl_80883670
@@ -1732,7 +1732,7 @@ lbl_fn_80268CB4_00001698:
     bl fn_8026F9BC
 lbl_fn_80268CB4_000016E8:
     li r3, 0x610
-    bl fn_80219E6C
+    bl task_findEntryById
     mr r30, r3
     mr r3, r31
     bl fn_80144710
@@ -1770,7 +1770,7 @@ lbl_fn_80268CB4_00001728:
     bl fn_8026F9BC
 lbl_fn_80268CB4_00001778:
     li r3, 0x611
-    bl fn_80219E6C
+    bl task_findEntryById
     mr r30, r3
     mr r3, r31
     bl fn_80144710
@@ -1808,7 +1808,7 @@ lbl_fn_80268CB4_000017B8:
     bl fn_8026F9BC
 lbl_fn_80268CB4_00001808:
     li r3, 0x612
-    bl fn_80219E6C
+    bl task_findEntryById
     mr r30, r3
     mr r3, r31
     bl fn_80144710
@@ -1864,7 +1864,7 @@ lbl_fn_80268CB4_00001844:
     mr r3, r30
     addi r4, r1, 0x68
     addi r5, r1, 0x38
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x38
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1889,7 +1889,7 @@ lbl_fn_80268CB4_00001920:
     mr r3, r30
     addi r4, r1, 0xc8
     addi r5, r1, 0x98
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x98
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1914,7 +1914,7 @@ lbl_fn_80268CB4_00001980:
     mr r3, r30
     addi r4, r1, 0x128
     addi r5, r1, 0xf8
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0xf8
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0

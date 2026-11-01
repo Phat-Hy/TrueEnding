@@ -33,7 +33,7 @@ extern void fn_803E5E64(void);
 extern void fn_80444020(void);
 extern void fn_8047961C(void);
 extern void fn_8054A340(void);
-extern void fn_805F8CA0(void);
+extern void PSMTXInverse(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
@@ -1745,7 +1745,7 @@ lbl_fn_8010D320_000015D8:
     psq_st f4, 0x18(r31), 0, 0
     psq_st f5, 0x20(r31), 0, 0
     psq_st f6, 0x28(r31), 0, 0
-    bl fn_805F8CA0
+    bl PSMTXInverse
     mr r3, r31
     mr r4, r30
     mr r5, r30

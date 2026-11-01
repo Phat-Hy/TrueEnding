@@ -39,7 +39,7 @@ extern void fn_804730D4(void);
 extern void fn_804730E4(void);
 extern void fn_80473104(void);
 extern void fn_80473130(void);
-extern void fn_805F8CA0(void);
+extern void PSMTXInverse(void);
 extern void printf(void);
 extern void strcmp(void);
 extern void abort(void);
@@ -1401,7 +1401,7 @@ lbl_atn_LoadModel_destructor_00001100:
     lwz r0, 0x6c(r30)
     add r3, r0, r29
     mr r4, r3
-    bl fn_805F8CA0
+    bl PSMTXInverse
     addi r29, r29, 0x30
     addi r28, r28, 0x1
 lbl_atn_LoadModel_destructor_00001118:

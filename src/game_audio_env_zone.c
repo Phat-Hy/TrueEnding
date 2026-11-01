@@ -35,7 +35,7 @@ extern void dialog_renderWindow(void);
 extern void fn_80151448(void);
 extern void fn_801533C8(void);
 extern void actor_setState(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
 extern void fn_80239D58(void);
 extern void res_findResourceSlot(void);
@@ -43,7 +43,7 @@ extern void fn_8023A680(void);
 extern void res_registerResource(void);
 extern void fn_802657FC(void);
 extern void fn_8026607C(void);
-extern void fn_805F89F0(void);
+extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXTrans(void);
 extern void PSMTXScale(void);
@@ -714,7 +714,7 @@ lbl_fn_8031CA30_00000864:
     mr r3, r29
     addi r4, r1, 0x1c8
     addi r5, r1, 0x198
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x198
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -739,7 +739,7 @@ lbl_fn_8031CA30_00000930:
     mr r3, r29
     addi r4, r1, 0x228
     addi r5, r1, 0x1f8
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x1f8
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -764,7 +764,7 @@ lbl_fn_8031CA30_00000990:
     mr r3, r29
     addi r4, r1, 0x288
     addi r5, r1, 0x258
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x258
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -818,7 +818,7 @@ lbl_fn_8031CA30_000009F0:
     cmplwi r0, 0x2
     bne lbl_fn_8031CA30_00000CFC
     li r3, 0x76e
-    bl fn_80219E6C
+    bl task_findEntryById
     lwz r6, 0x390(r1)
     mr r30, r3
     lwz r4, 0x590(r31)
@@ -1603,7 +1603,7 @@ lbl_fn_8031D6DC_00001570:
     mr r3, r27
     addi r4, r1, 0x178
     addi r5, r1, 0x148
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x148
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1628,7 +1628,7 @@ lbl_fn_8031D6DC_00001620:
     mr r3, r27
     addi r4, r1, 0x1d8
     addi r5, r1, 0x1a8
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x1a8
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1653,7 +1653,7 @@ lbl_fn_8031D6DC_00001680:
     mr r3, r27
     addi r4, r1, 0x238
     addi r5, r1, 0x208
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x208
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1671,7 +1671,7 @@ lbl_fn_8031D6DC_000016E0:
     mr r3, r30
     mr r4, r27
     addi r5, r1, 0x298
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r4, r1, 0x298
     lfs f8, lbl_80884E04
     psq_l f2, 0x8(r4), 0, 0
@@ -1699,7 +1699,7 @@ lbl_fn_8031D6DC_000016E0:
     mr r3, r30
     addi r4, r1, 0x2f8
     addi r5, r1, 0x2c8
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x2c8
     psq_l f2, 0x8(r3), 0, 0
     psq_l f3, 0x10(r3), 0, 0

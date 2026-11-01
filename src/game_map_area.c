@@ -14,7 +14,7 @@ extern void fn_80017064(void);
 extern void fn_80044E0C(void);
 extern void fn_8004ED34(void);
 extern void fn_80050A1C(void);
-extern void fn_8005B3CC(void);
+extern void talk_parseQuotedString(void);
 extern void fn_8005B6E8(void);
 extern void fn_800697D8(void);
 extern void mem_free(void);
@@ -1885,7 +1885,7 @@ asm void fn_8017CB9C(void)
     la r4, lbl_8087D708
     bl fn_8005B6E8
     addi r3, r1, 0x28
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     lis r4, __files@ha
     lis r28, lbl_807380F8@ha
     mr r17, r3
@@ -2086,7 +2086,7 @@ lbl_fn_8017CB9C_00001AF0:
     bl dtor_80084684
 lbl_fn_8017CB9C_00001BCC:
     addi r3, r1, 0x28
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     mr r17, r3
 lbl_fn_8017CB9C_00001BD8:
     cmpwi r17, 0x0

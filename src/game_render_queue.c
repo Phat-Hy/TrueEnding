@@ -48,7 +48,7 @@ extern void fn_802ABF6C(void);
 extern void world_setLocalFlag(void);
 extern void fn_803E3384(void);
 extern void fn_805A507C(void);
-extern void fn_805F89F0(void);
+extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXScale(void);
 extern void PSMTXMultVec(void);
@@ -1091,7 +1091,7 @@ lbl_fn_802A5A1C_00000E64:
     mr r3, r29
     addi r4, r1, 0xb0
     addi r5, r1, 0x80
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x80
     addi r4, r31, 0x1614
     psq_l f1, 0x0(r3), 0, 0

@@ -12,7 +12,7 @@ extern void fn_8004FF58(void);
 extern void fn_80058078(void);
 extern void fn_800580BC(void);
 extern void fn_800588FC(void);
-extern void fn_8005B9CC(void);
+extern void talk_formatQuotedString(void);
 extern void fn_8005BBF8(void);
 extern void fn_8005BCE8(void);
 extern void fn_80063D3C(void);
@@ -32,12 +32,12 @@ extern void fn_800DC288(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800FAB80(void);
 extern void fn_802180A8(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
-extern void fn_802377B8(void);
-extern void fn_8023780C(void);
-extern void fn_8023781C(void);
-extern void fn_80237874(void);
+extern void res_MsgHandle_constructor(void);
+extern void res_MsgHandle_destructor(void);
+extern void res_MsgHandle_unload(void);
+extern void res_MsgHandle_update(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
 extern void fn_803EC568(void);
@@ -234,15 +234,15 @@ lbl_fn_80407010_0000018C:
     li r31, 0x1
 lbl_fn_80407010_000001A0:
     addi r3, r30, 0x91c
-    bl fn_80237874
+    bl res_MsgHandle_update
     cmpwi r3, 0x0
     bne lbl_fn_80407010_000001D0
     addi r3, r30, 0x928
-    bl fn_80237874
+    bl res_MsgHandle_update
     cmpwi r3, 0x0
     bne lbl_fn_80407010_000001D0
     addi r3, r30, 0x934
-    bl fn_80237874
+    bl res_MsgHandle_update
     cmpwi r3, 0x0
     beq lbl_fn_80407010_000001D4
 lbl_fn_80407010_000001D0:
@@ -306,7 +306,7 @@ asm void fn_804070B4(void)
     addi r31, r31, lbl_80752900@l
 lbl_fn_804070B4_000002A0:
     addi r3, r1, 0x108
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     lbz r0, 0x0(r3)
     mr r30, r3
     cmpwi r0, 0x3b
@@ -316,7 +316,7 @@ lbl_fn_804070B4_000002A0:
     cmpwi r3, 0x0
     bne lbl_fn_804070B4_000002E4
     addi r3, r1, 0x108
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     mr r4, r3
     addi r3, r29, 0xf4
     li r5, 0x0
@@ -329,7 +329,7 @@ lbl_fn_804070B4_000002E4:
     cmpwi r3, 0x0
     bne lbl_fn_804070B4_00000314
     addi r3, r1, 0x108
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     mr r4, r3
     addi r3, r29, 0x4c4
     li r5, 0x0
@@ -342,12 +342,12 @@ lbl_fn_804070B4_00000314:
     cmpwi r3, 0x0
     bne lbl_fn_804070B4_00000378
     addi r3, r1, 0x108
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     mr r4, r3
     addi r3, r1, 0x8
     bl strcpy
     addi r3, r1, 0x108
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl fn_802180A8
     cmpwi r3, 0x2
     beq lbl_fn_804070B4_00000364
@@ -369,7 +369,7 @@ lbl_fn_804070B4_00000378:
     cmpwi r3, 0x0
     bne lbl_fn_804070B4_000003A4
     addi r3, r1, 0x108
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     mr r4, r3
     addi r3, r29, 0x894
     bl fn_80058078
@@ -381,10 +381,10 @@ lbl_fn_804070B4_000003A4:
     cmpwi r3, 0x0
     bne lbl_fn_804070B4_000003D0
     addi r3, r1, 0x108
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     mr r4, r3
     addi r3, r29, 0x91c
-    bl fn_8023780C
+    bl res_MsgHandle_destructor
     b lbl_fn_804070B4_0000047C
 lbl_fn_804070B4_000003D0:
     mr r3, r30
@@ -393,10 +393,10 @@ lbl_fn_804070B4_000003D0:
     cmpwi r3, 0x0
     bne lbl_fn_804070B4_000003FC
     addi r3, r1, 0x108
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     mr r4, r3
     addi r3, r29, 0x928
-    bl fn_8023780C
+    bl res_MsgHandle_destructor
     b lbl_fn_804070B4_0000047C
 lbl_fn_804070B4_000003FC:
     mr r3, r30
@@ -405,10 +405,10 @@ lbl_fn_804070B4_000003FC:
     cmpwi r3, 0x0
     bne lbl_fn_804070B4_00000428
     addi r3, r1, 0x108
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     mr r4, r3
     addi r3, r29, 0x934
-    bl fn_8023780C
+    bl res_MsgHandle_destructor
     b lbl_fn_804070B4_0000047C
 lbl_fn_804070B4_00000428:
     mr r3, r30
@@ -417,19 +417,19 @@ lbl_fn_804070B4_00000428:
     cmpwi r3, 0x0
     bne lbl_fn_804070B4_0000047C
     addi r3, r1, 0x108
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl fn_800DC288
     stfs f1, 0x950(r29)
     addi r3, r1, 0x108
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl fn_800DC288
     stfs f1, 0x954(r29)
     addi r3, r1, 0x108
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl atoi
     stw r3, 0x958(r29)
     addi r3, r1, 0x108
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl atoi
     stw r3, 0x95c(r29)
 lbl_fn_804070B4_0000047C:
@@ -944,7 +944,7 @@ lbl_fn_80407408_00000BCC:
     bl system_getNextSequenceId
     mr r29, r3
     lwz r3, 0x958(r30)
-    bl fn_80219E6C
+    bl task_findEntryById
     li r0, -0x1
     stw r0, 0x8(r1)
     lfs f1, lbl_8088627C
@@ -1618,9 +1618,9 @@ asm void fn_804083A8(void)
     li r5, 0x20
     bl lockon_updateTarget
     addi r3, r31, 0x894
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addi r3, r31, 0x8a0
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     lfs f0, lbl_80886294
     li r4, 0x0
     lfs f3, lbl_80886288
@@ -1665,7 +1665,7 @@ asm void fn_80408464(void)
     addic. r31, r3, 0x8a0
     beq lbl_fn_80408464_000015E8
     mr r3, r31
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r31, 0x4
     beq lbl_fn_80408464_000015E8
     li r4, 0x0
@@ -1674,7 +1674,7 @@ lbl_fn_80408464_000015E8:
     addic. r31, r29, 0x894
     beq lbl_fn_80408464_00001608
     mr r3, r31
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r31, 0x4
     beq lbl_fn_80408464_00001608
     li r4, 0x0

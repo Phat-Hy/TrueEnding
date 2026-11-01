@@ -5,7 +5,7 @@
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8005B3CC(void);
+extern void talk_parseQuotedString(void);
 extern void fn_8005B5F8(void);
 extern void fn_8005B6E8(void);
 extern void mem_realloc(void);
@@ -969,7 +969,7 @@ asm void fn_802130BC(void)
     b lbl_fn_802130BC_00000CC4
 lbl_fn_802130BC_00000CAC:
     addi r3, r1, 0x28
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     lbz r0, 0x0(r3)
     extsb. r0, r0
     bne lbl_fn_802130BC_00000CC4
@@ -1012,12 +1012,12 @@ lbl_fn_802130BC_00000CC4:
     b lbl_fn_802130BC_000012F8
 lbl_fn_802130BC_00000D50:
     addi r3, r1, 0x28
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     lbz r0, 0x0(r3)
     extsb. r0, r0
     bne lbl_fn_802130BC_000012F8
     addi r3, r1, 0x28
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     lwz r0, lbl_8087F238
     add r30, r0, r23
     mr r4, r30
@@ -1025,10 +1025,10 @@ lbl_fn_802130BC_00000D50:
     addi r6, r30, 0x8
     bl fn_80216AFC
     addi r3, r1, 0x28
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
 lbl_fn_802130BC_00000D8C:
     addi r3, r1, 0x28
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     lbz r0, 0x0(r3)
     mr r24, r3
     extsb. r0, r0

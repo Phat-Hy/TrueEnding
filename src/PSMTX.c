@@ -4,16 +4,8 @@
 extern f32 lbl_80888550; /* 1.0f in .sdata2 */
 extern f32 lbl_80888554; /* 0.0f in .sdata2 */
 extern f32 lbl_8087E7B8[2];
-/* Function symbol aliases */
-#define PSMTXIdentity fn_805F8980
-#define PSMTXCopy fn_805F89B0
-#define PSMTXConcat fn_805F89F0
-#define PSMTXConcatArray fn_805F8AC0
-#define PSMTXTranspose fn_805F8C50
-#define PSMTXInverse fn_805F8CA0
-#define PSMTXInvXpose fn_805F8DA0
 
-/* Function 1: PSMTXIdentity (fn_805F8980) */
+/* Function 1: PSMTXIdentity (PSMTXIdentity) */
 asm void PSMTXIdentity(void* m) {
     nofralloc
     lfs f0, lbl_80888554
@@ -29,7 +21,7 @@ asm void PSMTXIdentity(void* m) {
     blr
 }
 
-/* Function 2: PSMTXCopy (fn_805F89B0) */
+/* Function 2: PSMTXCopy (PSMTXCopy) */
 asm void PSMTXCopy(const void* src, void* dst) {
     nofralloc
     psq_l f0, 0x0(r3), 0, 0
@@ -47,7 +39,7 @@ asm void PSMTXCopy(const void* src, void* dst) {
     blr
 }
 
-/* Function 3: PSMTXConcat (fn_805F89F0) */
+/* Function 3: PSMTXConcat (PSMTXConcat) */
 asm void PSMTXConcat(const void* a, const void* b, void* ab) {
     nofralloc
     stwu r1, -0x40(r1)
@@ -103,7 +95,7 @@ asm void PSMTXConcat(const void* a, const void* b, void* ab) {
     blr
 }
 
-/* Function 4: PSMTXConcatArray (fn_805F8AC0) */
+/* Function 4: PSMTXConcatArray (PSMTXConcatArray) */
 asm void PSMTXConcatArray(const void* a, const void* bArray, void* abArray, u32 count) {
     nofralloc
     stwu r1, -0x50(r1)
@@ -207,7 +199,7 @@ lbl_loop:
     blr
 }
 
-/* Function 5: PSMTXTranspose (fn_805F8C50) */
+/* Function 5: PSMTXTranspose (PSMTXTranspose) */
 asm void PSMTXTranspose(const void* src, void* dst) {
     nofralloc
     psq_l f1, 0x0(r3), 0, 0
@@ -232,7 +224,7 @@ asm void PSMTXTranspose(const void* src, void* dst) {
     blr
 }
 
-/* Function 6: PSMTXInverse (fn_805F8CA0) */
+/* Function 6: PSMTXInverse (PSMTXInverse) */
 asm u32 PSMTXInverse(const void* src, void* dst) {
     nofralloc
     psq_l f0, 0x0(r3), 1, 0
@@ -300,7 +292,7 @@ lbl_0394:
     blr
 }
 
-/* Function 7: PSMTXInvXpose (fn_805F8DA0) */
+/* Function 7: PSMTXInvXpose (PSMTXInvXpose) */
 asm u32 PSMTXInvXpose(const void* src, void* dst) {
     nofralloc
     psq_l f0, 0x0(r3), 1, 0

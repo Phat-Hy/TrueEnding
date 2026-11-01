@@ -13,7 +13,7 @@ extern void fn_8018B6A0(void);
 extern void fn_8018BB7C(void);
 extern void fn_8018C0EC(void);
 extern void fn_8018C6B8(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void fn_803CC198(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
@@ -188,7 +188,7 @@ asm void fn_801562A0(void)
     b lbl_fn_801562A0_000001F8
 lbl_fn_801562A0_000001E4:
     li r3, 0xc8
-    bl fn_80219E6C
+    bl task_findEntryById
     lwz r0, 0x638(r28)
     stw r0, 0x63c(r28)
     stw r3, 0x638(r28)
@@ -1402,7 +1402,7 @@ asm void fn_80157444(void)
     b lbl_fn_80157444_0000138C
 lbl_fn_80157444_00001378:
     li r3, 0xc8
-    bl fn_80219E6C
+    bl task_findEntryById
     lwz r0, 0x638(r29)
     stw r0, 0x63c(r29)
     stw r3, 0x638(r29)
@@ -1681,7 +1681,7 @@ asm void fn_8015783C(void)
     b lbl_fn_8015783C_00001784
 lbl_fn_8015783C_00001770:
     li r3, 0xc8
-    bl fn_80219E6C
+    bl task_findEntryById
     lwz r0, 0x638(r29)
     stw r0, 0x63c(r29)
     stw r3, 0x638(r29)

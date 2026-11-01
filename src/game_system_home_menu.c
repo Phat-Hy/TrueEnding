@@ -24,7 +24,7 @@ extern void fn_8004B0E4(void);
 extern void fn_8004B158(void);
 extern void fn_8004B1EC(void);
 extern void fn_80051CD8(void);
-extern void fn_8005B3CC(void);
+extern void talk_parseQuotedString(void);
 extern void fn_8005B5F8(void);
 extern void fn_800616C0(void);
 extern void fn_800629F0(void);
@@ -52,7 +52,7 @@ extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
 extern void fn_800F52F8(void);
 extern void fn_8020A780(void);
-extern void fn_8023781C(void);
+extern void res_MsgHandle_unload(void);
 extern void fn_8035B78C(void);
 extern void fn_8035FBF8(void);
 extern void fn_8035FC00(void);
@@ -159,7 +159,7 @@ lbl_fn_8035DE10_0000004C:
     addic. r31, r29, 0x1510
     beq lbl_fn_8035DE10_0000006C
     mr r3, r31
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r31, 0x4
     beq lbl_fn_8035DE10_0000006C
     li r4, 0x0
@@ -168,7 +168,7 @@ lbl_fn_8035DE10_0000006C:
     addic. r31, r29, 0x1504
     beq lbl_fn_8035DE10_0000008C
     mr r3, r31
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r31, 0x4
     beq lbl_fn_8035DE10_0000008C
     li r4, 0x0
@@ -177,7 +177,7 @@ lbl_fn_8035DE10_0000008C:
     addic. r31, r29, 0x14f8
     beq lbl_fn_8035DE10_000000AC
     mr r3, r31
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r31, 0x4
     beq lbl_fn_8035DE10_000000AC
     li r4, 0x0
@@ -1724,7 +1724,7 @@ asm void fn_8035F3D4(void)
     li r29, 0x0
 lbl_fn_8035F3D4_0000160C:
     addi r3, r1, 0x20
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0x14
     bl fn_8003E4A4
@@ -1734,7 +1734,7 @@ lbl_fn_8035F3D4_0000160C:
     cmpwi r3, 0x0
     beq lbl_fn_8035F3D4_00001734
     addi r3, r1, 0x20
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0x14
     bl fn_8020A780
@@ -1744,7 +1744,7 @@ lbl_fn_8035F3D4_0000160C:
     cmpwi r3, 0x0
     beq lbl_fn_8035F3D4_00001670
     addi r3, r1, 0x20
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     add r27, r27, r3
     b lbl_fn_8035F3D4_00001734
@@ -1755,7 +1755,7 @@ lbl_fn_8035F3D4_00001670:
     cmpwi r3, 0x0
     beq lbl_fn_8035F3D4_00001698
     addi r3, r1, 0x20
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     add r27, r27, r3
     b lbl_fn_8035F3D4_00001734
@@ -1766,7 +1766,7 @@ lbl_fn_8035F3D4_00001698:
     cmpwi r3, 0x0
     beq lbl_fn_8035F3D4_000016C0
     addi r3, r1, 0x20
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     add r27, r27, r3
     b lbl_fn_8035F3D4_00001734
@@ -1777,7 +1777,7 @@ lbl_fn_8035F3D4_000016C0:
     cmpwi r3, 0x0
     beq lbl_fn_8035F3D4_000016E8
     addi r3, r1, 0x20
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     add r27, r27, r3
     b lbl_fn_8035F3D4_00001734
@@ -1788,7 +1788,7 @@ lbl_fn_8035F3D4_000016E8:
     cmpwi r3, 0x0
     beq lbl_fn_8035F3D4_00001710
     addi r3, r1, 0x20
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     add r27, r27, r3
     b lbl_fn_8035F3D4_00001734
@@ -1799,7 +1799,7 @@ lbl_fn_8035F3D4_00001710:
     cmpwi r3, 0x0
     beq lbl_fn_8035F3D4_00001734
     addi r3, r1, 0x20
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     add r29, r29, r3
 lbl_fn_8035F3D4_00001734:
@@ -1835,7 +1835,7 @@ lbl_fn_8035F3D4_00001734:
     addi r31, r3, lbl_8074B538@l
 lbl_fn_8035F3D4_000017AC:
     addi r3, r1, 0x20
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0x8
     bl fn_8003E4A4
@@ -1845,7 +1845,7 @@ lbl_fn_8035F3D4_000017AC:
     cmpwi r3, 0x0
     beq lbl_fn_8035F3D4_00001D44
     addi r3, r1, 0x20
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0x8
     bl fn_8020A780
@@ -1857,7 +1857,7 @@ lbl_fn_8035F3D4_000017AC:
     b lbl_fn_8035F3D4_00001848
 lbl_fn_8035F3D4_00001800:
     addi r3, r1, 0x20
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0x8
     bl fn_8020A780
@@ -1872,7 +1872,7 @@ lbl_fn_8035F3D4_00001800:
     cmpwi r3, 0x0
     beq lbl_fn_8035F3D4_00001848
     addi r3, r1, 0x20
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
 lbl_fn_8035F3D4_00001848:
     addi r3, r1, 0x20
@@ -1888,7 +1888,7 @@ lbl_fn_8035F3D4_00001858:
     b lbl_fn_8035F3D4_000018F0
 lbl_fn_8035F3D4_00001870:
     addi r3, r1, 0x20
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0x8
     bl fn_8020A780
@@ -1935,7 +1935,7 @@ lbl_fn_8035F3D4_00001904:
     b lbl_fn_8035F3D4_0000199C
 lbl_fn_8035F3D4_0000191C:
     addi r3, r1, 0x20
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0x8
     bl fn_8020A780
@@ -1982,7 +1982,7 @@ lbl_fn_8035F3D4_000019B0:
     b lbl_fn_8035F3D4_00001A48
 lbl_fn_8035F3D4_000019C8:
     addi r3, r1, 0x20
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0x8
     bl fn_8020A780
@@ -2029,7 +2029,7 @@ lbl_fn_8035F3D4_00001A5C:
     b lbl_fn_8035F3D4_00001AF4
 lbl_fn_8035F3D4_00001A74:
     addi r3, r1, 0x20
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0x8
     bl fn_8020A780
@@ -2076,7 +2076,7 @@ lbl_fn_8035F3D4_00001B08:
     b lbl_fn_8035F3D4_00001BA0
 lbl_fn_8035F3D4_00001B20:
     addi r3, r1, 0x20
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0x8
     bl fn_8020A780
@@ -2123,7 +2123,7 @@ lbl_fn_8035F3D4_00001BB4:
     b lbl_fn_8035F3D4_00001C68
 lbl_fn_8035F3D4_00001BCC:
     addi r3, r1, 0x20
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0x8
     bl fn_8020A780
@@ -2176,7 +2176,7 @@ lbl_fn_8035F3D4_00001C7C:
     cmpwi r3, 0x0
     beq lbl_fn_8035F3D4_00001D44
     addi r3, r1, 0x20
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     mr r4, r3
     addi r3, r28, 0x64
@@ -2185,7 +2185,7 @@ lbl_fn_8035F3D4_00001C7C:
     b lbl_fn_8035F3D4_00001D34
 lbl_fn_8035F3D4_00001CB0:
     addi r3, r1, 0x20
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0x8
     bl fn_8020A780
@@ -2209,7 +2209,7 @@ lbl_fn_8035F3D4_00001CB0:
     bl fn_8035FF34
     stw r27, 0x0(r3)
     addi r3, r1, 0x20
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     mr r27, r3
     mr r4, r25

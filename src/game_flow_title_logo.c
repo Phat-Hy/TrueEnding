@@ -5,7 +5,7 @@
 extern void _restgpr_24(void);
 extern void _savegpr_24(void);
 extern void fn_802376D0(void);
-extern void fn_80237874(void);
+extern void res_MsgHandle_update(void);
 extern void fn_804E2844(void);
 extern void fn_804E2920(void);
 extern void fn_804E4C60(void);
@@ -41,7 +41,7 @@ asm void fn_804DF408(void)
     bne lbl_fn_804DF408_0000009C
     addis r3, r3, 0x1
     subi r3, r3, 0x694c
-    bl fn_80237874
+    bl res_MsgHandle_update
     cmpwi r3, 0x0
     bne lbl_fn_804DF408_0000009C
     addis r3, r31, 0x1

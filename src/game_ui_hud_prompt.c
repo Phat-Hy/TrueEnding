@@ -27,11 +27,11 @@ extern void fn_80179D44(void);
 extern void fn_801A4E08(void);
 extern void fn_801C3414(void);
 extern void fn_801C3458(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void world_getGlobalFlag(void);
 extern void fn_80373148(void);
 extern void fn_80375184(void);
-extern void fn_805F89F0(void);
+extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
@@ -323,7 +323,7 @@ lbl_fn_801C900C_00000240:
     mr r3, r30
     addi r4, r1, 0x60
     addi r5, r1, 0x30
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x30
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -348,7 +348,7 @@ lbl_fn_801C900C_000002FC:
     mr r3, r30
     addi r4, r1, 0xc0
     addi r5, r1, 0x90
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x90
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -373,7 +373,7 @@ lbl_fn_801C900C_0000035C:
     mr r3, r30
     addi r4, r1, 0x120
     addi r5, r1, 0xf0
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0xf0
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1447,7 +1447,7 @@ lbl_fn_801C9F6C_000012AC:
     lfs f0, lbl_80882944
     li r3, 0xcd
     stfs f0, 0x238(r30)
-    bl fn_80219E6C
+    bl task_findEntryById
     lwz r4, 0x4(r31)
     lwz r0, 0x638(r4)
     stw r0, 0x63c(r4)
@@ -1643,7 +1643,7 @@ lbl_fn_801CA1E0_0000159C:
     psq_st f1, 0x534(r4), 0, 0
     psq_st f1, 0x0(r28), 0, 0
     stfs f2, 0x53c(r4)
-    bl fn_80219E6C
+    bl task_findEntryById
     lwz r4, 0x4(r29)
     lfs f0, lbl_80882928
     lwz r0, 0x638(r4)

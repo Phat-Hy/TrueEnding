@@ -22,11 +22,11 @@ extern void boss_updatePhaseState(void);
 extern void fn_80148990(void);
 extern void actor_setState(void);
 extern void fn_80176548(void);
-extern void fn_80219E6C(void);
-extern void fn_802377B8(void);
-extern void fn_8023780C(void);
-extern void fn_8023781C(void);
-extern void fn_80237874(void);
+extern void task_findEntryById(void);
+extern void res_MsgHandle_constructor(void);
+extern void res_MsgHandle_destructor(void);
+extern void res_MsgHandle_unload(void);
+extern void res_MsgHandle_update(void);
 extern void fn_8031F2A4(void);
 extern void fn_803234C8(void);
 extern void fn_803234F4(void);
@@ -35,7 +35,7 @@ extern void fn_803235D8(void);
 extern void fn_8035B694(void);
 extern void fn_8035B78C(void);
 extern void atn_LoadHandle_destructor(void);
-extern void fn_805F89F0(void);
+extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
@@ -275,7 +275,7 @@ asm void fn_80321900(void)
     mr r4, r29
     mr r5, r29
     addi r3, r1, 0x180
-    bl fn_805F89F0
+    bl PSMTXConcat
     lfs f8, 0x20(r1)
     lfs f7, 0x24(r1)
     lfs f0, 0x28(r1)
@@ -330,7 +330,7 @@ lbl_fn_80321900_000002B0:
     mr r3, r31
     addi r4, r1, 0xf0
     addi r5, r1, 0x120
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x120
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -355,7 +355,7 @@ lbl_fn_80321900_000003A0:
     mr r3, r31
     addi r4, r1, 0x90
     addi r5, r1, 0xc0
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0xc0
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -380,7 +380,7 @@ lbl_fn_80321900_00000400:
     mr r3, r31
     addi r4, r1, 0x30
     addi r5, r1, 0x60
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x60
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -398,7 +398,7 @@ lbl_fn_80321900_00000460:
     mr r4, r29
     mr r5, r29
     addi r3, r1, 0x150
-    bl fn_805F89F0
+    bl PSMTXConcat
     lfs f8, 0x14(r1)
     lfs f7, 0x18(r1)
     lfs f0, 0x1c(r1)
@@ -1541,7 +1541,7 @@ lbl_fn_80322AD4_0000142C:
     cror eq, gt, eq
     bne lbl_fn_80322AD4_00001530
     li r3, 0x686
-    bl fn_80219E6C
+    bl task_findEntryById
     mr r7, r3
     lwz r3, lbl_8087F048
     lwz r8, 0x590(r31)
@@ -1619,7 +1619,7 @@ asm void fn_80322C68(void)
     stw r30, 0x15ec(r31)
     stw r30, 0x15f0(r31)
     stw r30, 0x15f4(r31)
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     lwz r3, 0x12a4(r31)
     lis r9, lbl_807C7030@ha
     lwz r0, 0x958(r31)
@@ -1658,7 +1658,7 @@ asm void fn_80322C68(void)
     stw r6, 0x1554(r31)
     stw r5, 0x1560(r31)
     stw r0, 0x156c(r31)
-    bl fn_8023780C
+    bl res_MsgHandle_destructor
     lwz r0, 0x14a8(r31)
     mr r3, r31
     oris r0, r0, 0x8000
@@ -1697,7 +1697,7 @@ lbl_fn_80322E10_00001738:
     addic. r31, r29, 0x15fc
     beq lbl_fn_80322E10_00001758
     mr r3, r31
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r31, 0x4
     beq lbl_fn_80322E10_00001758
     li r4, 0x0
@@ -1797,7 +1797,7 @@ lbl_fn_80322F74_0000187C:
     li r30, 0x0
 lbl_fn_80322F74_0000189C:
     addi r3, r31, 0x15fc
-    bl fn_80237874
+    bl res_MsgHandle_update
     cmpwi r3, 0x0
     beq lbl_fn_80322F74_000018B0
     li r30, 0x0

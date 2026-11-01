@@ -30,14 +30,14 @@ extern void fn_8015AC48(void);
 extern void actor_setState(void);
 extern void fn_801765D8(void);
 extern void fn_801789D8(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
 extern void fn_8054A340(void);
-extern void fn_805F89F0(void);
+extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSVECNormalize(void);
@@ -373,7 +373,7 @@ lbl_fn_802A94C8_000003BC:
     stw r4, 0x64(r1)
     stw r5, 0x60(r1)
     stw r0, 0x48(r1)
-    bl fn_80219E6C
+    bl task_findEntryById
     mr r29, r3
     mr r3, r31
     bl fn_80144710
@@ -763,7 +763,7 @@ asm void fn_802A9ADC(void)
     mr r3, r22
     addi r4, r1, 0xe0
     addi r5, r1, 0xb0
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0xb0
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -788,7 +788,7 @@ lbl_fn_802A9ADC_00000A20:
     mr r3, r22
     addi r4, r1, 0x140
     addi r5, r1, 0x110
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x110
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -813,7 +813,7 @@ lbl_fn_802A9ADC_00000A80:
     mr r3, r22
     addi r4, r1, 0x1a0
     addi r5, r1, 0x170
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x170
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1580,7 +1580,7 @@ lbl_fn_802AA534_000015C0:
     lwz r29, lbl_8087F048
     stfs f3, 0x20(r1)
     stfs f0, 0x24(r1)
-    bl fn_80219E6C
+    bl task_findEntryById
     li r0, -0x1
     stw r0, 0x8(r1)
     lfs f1, lbl_80883E40

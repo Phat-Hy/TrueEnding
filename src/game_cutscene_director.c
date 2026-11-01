@@ -49,7 +49,7 @@ extern void fn_8032A3D4(void);
 extern void fn_8032A894(void);
 extern void fn_8032A9F4(void);
 extern void world_setLocalFlag(void);
-extern void fn_805F89F0(void);
+extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSVECSquareMag(void);
@@ -564,7 +564,7 @@ asm void fn_803258D4(void)
     mr r4, r29
     mr r5, r29
     addi r3, r1, 0x180
-    bl fn_805F89F0
+    bl PSMTXConcat
     lfs f8, 0x20(r1)
     lfs f7, 0x24(r1)
     lfs f0, 0x28(r1)
@@ -619,7 +619,7 @@ lbl_fn_803258D4_000006C8:
     mr r3, r31
     addi r4, r1, 0xf0
     addi r5, r1, 0x120
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x120
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -644,7 +644,7 @@ lbl_fn_803258D4_000007B8:
     mr r3, r31
     addi r4, r1, 0x90
     addi r5, r1, 0xc0
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0xc0
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -669,7 +669,7 @@ lbl_fn_803258D4_00000818:
     mr r3, r31
     addi r4, r1, 0x30
     addi r5, r1, 0x60
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x60
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -687,7 +687,7 @@ lbl_fn_803258D4_00000878:
     mr r4, r29
     mr r5, r29
     addi r3, r1, 0x150
-    bl fn_805F89F0
+    bl PSMTXConcat
     lfs f8, 0x14(r1)
     lfs f7, 0x18(r1)
     lfs f0, 0x1c(r1)
@@ -746,7 +746,7 @@ asm void fn_80325BA0(void)
     mr r3, r30
     addi r4, r1, 0x90
     addi r5, r1, 0x60
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x60
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -771,7 +771,7 @@ lbl_fn_80325BA0_00000990:
     mr r3, r30
     addi r4, r1, 0xf0
     addi r5, r1, 0xc0
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0xc0
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -796,7 +796,7 @@ lbl_fn_80325BA0_000009F0:
     mr r3, r30
     addi r4, r1, 0x150
     addi r5, r1, 0x120
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x120
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0

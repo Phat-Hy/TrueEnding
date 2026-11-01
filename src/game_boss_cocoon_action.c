@@ -18,7 +18,7 @@ extern void fn_8004203C(void);
 extern void fn_80042108(void);
 extern void fn_8004212C(void);
 extern void fn_80057A64(void);
-extern void fn_8005B3CC(void);
+extern void talk_parseQuotedString(void);
 extern void fn_8005B5F8(void);
 extern void fn_8005B6E8(void);
 extern void fn_80061824(void);
@@ -67,15 +67,15 @@ extern void fn_80178668(void);
 extern void fn_801CCD00(void);
 extern void fn_8020A780(void);
 extern void fn_80219558(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void fn_80237518(void);
 extern void fn_802375C4(void);
 extern void fn_80237654(void);
 extern void fn_802376D0(void);
-extern void fn_802377B8(void);
-extern void fn_8023780C(void);
-extern void fn_8023781C(void);
-extern void fn_80237874(void);
+extern void res_MsgHandle_constructor(void);
+extern void res_MsgHandle_destructor(void);
+extern void res_MsgHandle_unload(void);
+extern void res_MsgHandle_update(void);
 extern void fn_802660FC(void);
 extern void fn_802A36B0(void);
 extern void fn_802A4094(void);
@@ -709,7 +709,7 @@ lbl_fn_80452998_00000698:
     bl fn_8005B6E8
 lbl_fn_80452998_00000768:
     addi r3, r1, 0x8
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     addi r3, r1, 0x8
     bl fn_8005B5F8
     cmpwi r3, 0x0
@@ -872,7 +872,7 @@ lbl_fn_80452B6C_000009A8:
     cmpwi r3, 0x2
     bne lbl_fn_80452B6C_00000B14
     li r3, 0x1395
-    bl fn_80219E6C
+    bl task_findEntryById
     mr r4, r3
     lwz r3, 0x14dc(r31)
     li r5, 0x0
@@ -968,7 +968,7 @@ lbl_fn_80452B6C_00000B14:
     cmpwi r3, 0x3
     bne lbl_fn_80452B6C_00000B70
     li r3, 0x1395
-    bl fn_80219E6C
+    bl task_findEntryById
     mr r4, r3
     lwz r3, 0x14dc(r31)
     li r5, 0x0
@@ -1070,17 +1070,17 @@ asm void fn_80452F14(void)
     stw r29, 0x1910(r31)
     bl fn_8000D114
     addi r3, r31, 0x1928
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addi r3, r31, 0x1934
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addi r3, r31, 0x1940
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     li r0, 0x2
     stw r0, 0x194c(r31)
     addi r3, r31, 0x1950
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addi r3, r31, 0x195c
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addi r3, r31, 0x1968
     bl fn_80057A64
     addi r3, r31, 0x1974
@@ -1088,7 +1088,7 @@ asm void fn_80452F14(void)
     stw r29, 0x1980(r31)
     addi r3, r31, 0x1988
     stw r29, 0x1984(r31)
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addi r3, r31, 0x1994
     bl fn_80237518
     addi r3, r31, 0x19a0
@@ -1102,9 +1102,9 @@ lbl_fn_80452F14_00000CD4:
     cmplw r30, r29
     blt lbl_fn_80452F14_00000CD4
     mr r3, r29
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addi r3, r31, 0x2538
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addi r3, r31, 0x2548
     bl fn_804533B4
     lfs f0, lbl_80886B84
@@ -1268,31 +1268,31 @@ lbl_fn_80452F14_00000E68:
     addi r3, r31, 0x1928
     addi r4, r29, 0xc2
     stw r0, 0x1924(r31)
-    bl fn_8023780C
+    bl res_MsgHandle_destructor
     addi r3, r31, 0x1934
     addi r4, r29, 0xd0
-    bl fn_8023780C
+    bl res_MsgHandle_destructor
     addi r3, r31, 0x1940
     addi r4, r29, 0xde
-    bl fn_8023780C
+    bl res_MsgHandle_destructor
     addi r3, r31, 0x1950
     addi r4, r29, 0xec
-    bl fn_8023780C
+    bl res_MsgHandle_destructor
     addi r3, r31, 0x195c
     addi r4, r29, 0xfa
-    bl fn_8023780C
+    bl res_MsgHandle_destructor
     addi r3, r31, 0x1988
     addi r4, r29, 0x108
-    bl fn_8023780C
+    bl res_MsgHandle_destructor
     addi r3, r31, 0x1994
     addi r4, r29, 0x116
     bl fn_80237654
     addi r3, r31, 0x252c
     addi r4, r29, 0x127
-    bl fn_8023780C
+    bl res_MsgHandle_destructor
     addi r3, r31, 0x2538
     addi r4, r29, 0x135
-    bl fn_8023780C
+    bl res_MsgHandle_destructor
     addi r3, r1, 0x8
     li r4, -0x1
     bl dtor_80013D60
@@ -1484,7 +1484,7 @@ lbl_fn_80453570_0000124C:
     addic. r31, r29, 0x2538
     beq lbl_fn_80453570_0000126C
     mr r3, r31
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r31, 0x4
     beq lbl_fn_80453570_0000126C
     li r4, 0x0
@@ -1493,7 +1493,7 @@ lbl_fn_80453570_0000126C:
     addic. r31, r29, 0x252c
     beq lbl_fn_80453570_0000128C
     mr r3, r31
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r31, 0x4
     beq lbl_fn_80453570_0000128C
     li r4, 0x0
@@ -1517,7 +1517,7 @@ lbl_fn_80453570_000012B8:
     addic. r31, r29, 0x1988
     beq lbl_fn_80453570_000012E4
     mr r3, r31
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r31, 0x4
     beq lbl_fn_80453570_000012E4
     li r4, 0x0
@@ -1526,7 +1526,7 @@ lbl_fn_80453570_000012E4:
     addic. r31, r29, 0x195c
     beq lbl_fn_80453570_00001304
     mr r3, r31
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r31, 0x4
     beq lbl_fn_80453570_00001304
     li r4, 0x0
@@ -1535,7 +1535,7 @@ lbl_fn_80453570_00001304:
     addic. r31, r29, 0x1950
     beq lbl_fn_80453570_00001324
     mr r3, r31
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r31, 0x4
     beq lbl_fn_80453570_00001324
     li r4, 0x0
@@ -1544,7 +1544,7 @@ lbl_fn_80453570_00001324:
     addic. r31, r29, 0x1940
     beq lbl_fn_80453570_00001344
     mr r3, r31
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r31, 0x4
     beq lbl_fn_80453570_00001344
     li r4, 0x0
@@ -1553,7 +1553,7 @@ lbl_fn_80453570_00001344:
     addic. r31, r29, 0x1934
     beq lbl_fn_80453570_00001364
     mr r3, r31
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r31, 0x4
     beq lbl_fn_80453570_00001364
     li r4, 0x0
@@ -1562,7 +1562,7 @@ lbl_fn_80453570_00001364:
     addic. r31, r29, 0x1928
     beq lbl_fn_80453570_00001384
     mr r3, r31
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r31, 0x4
     beq lbl_fn_80453570_00001384
     li r4, 0x0
@@ -1615,27 +1615,27 @@ asm void fn_8045374C(void)
     cmpwi r3, 0x0
     bne lbl_fn_8045374C_000018FC
     addi r3, r31, 0x1928
-    bl fn_80237874
+    bl res_MsgHandle_update
     cmpwi r3, 0x0
     bne lbl_fn_8045374C_000018FC
     addi r3, r31, 0x1934
-    bl fn_80237874
+    bl res_MsgHandle_update
     cmpwi r3, 0x0
     bne lbl_fn_8045374C_000018FC
     addi r3, r31, 0x1940
-    bl fn_80237874
+    bl res_MsgHandle_update
     cmpwi r3, 0x0
     bne lbl_fn_8045374C_000018FC
     addi r3, r31, 0x1950
-    bl fn_80237874
+    bl res_MsgHandle_update
     cmpwi r3, 0x0
     bne lbl_fn_8045374C_000018FC
     addi r3, r31, 0x195c
-    bl fn_80237874
+    bl res_MsgHandle_update
     cmpwi r3, 0x0
     bne lbl_fn_8045374C_000018FC
     addi r3, r31, 0x1988
-    bl fn_80237874
+    bl res_MsgHandle_update
     cmpwi r3, 0x0
     bne lbl_fn_8045374C_000018FC
     addi r3, r31, 0x1994
@@ -1643,11 +1643,11 @@ asm void fn_8045374C(void)
     cmpwi r3, 0x0
     bne lbl_fn_8045374C_000018FC
     addi r3, r31, 0x252c
-    bl fn_80237874
+    bl res_MsgHandle_update
     cmpwi r3, 0x0
     bne lbl_fn_8045374C_000018FC
     addi r3, r31, 0x2538
-    bl fn_80237874
+    bl res_MsgHandle_update
     cmpwi r3, 0x0
     bne lbl_fn_8045374C_000018FC
     lwz r0, 0x7ec(r31)
@@ -1682,7 +1682,7 @@ asm void fn_8045374C(void)
     bl fn_8004203C
 lbl_fn_8045374C_00001528:
     addi r3, r1, 0x120
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     addi r3, r1, 0x120
     bl fn_8005B5F8
     cmpwi r3, 0x0

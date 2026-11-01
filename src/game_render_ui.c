@@ -24,8 +24,8 @@ extern void fn_800BFB70(void);
 extern void fn_800BFCB4(void);
 extern void fn_800C0508(void);
 extern void fn_800C1424(void);
-extern void fn_805F8C50(void);
-extern void fn_805F8CA0(void);
+extern void PSMTXTranspose(void);
+extern void PSMTXInverse(void);
 extern void PSMTXScale(void);
 extern void fn_80612E80(void);
 extern void fn_806134E0(void);
@@ -1356,10 +1356,10 @@ asm void fn_800B1C44(void)
     psq_st f4, 0x18(r29), 0, 0
     psq_st f5, 0x20(r29), 0, 0
     psq_st f6, 0x28(r29), 0, 0
-    bl fn_805F8CA0
+    bl PSMTXInverse
     mr r3, r29
     mr r4, r29
-    bl fn_805F8C50
+    bl PSMTXTranspose
     mr r3, r29
     li r4, 0x0
     bl GXLoadNrmMtxImm3x3

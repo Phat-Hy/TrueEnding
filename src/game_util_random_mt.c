@@ -9,7 +9,7 @@ extern void fn_80049B2C(void);
 extern void fn_80049B74(void);
 extern void fn_8004AFAC(void);
 extern void fn_8004B1EC(void);
-extern void fn_8005B3CC(void);
+extern void talk_parseQuotedString(void);
 extern void fn_80069BF4(void);
 extern void fn_8006A004(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -2011,7 +2011,7 @@ asm void fn_805A4984(void)
     mr r3, r31
     stw r30, 0x8(r1)
     mr r30, r4
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     lbz r0, 0x0(r3)
     mr r3, r31
     extsb r4, r0
@@ -2019,7 +2019,7 @@ asm void fn_805A4984(void)
     cntlzw r0, r0
     srwi r0, r0, 5
     stw r0, 0x0(r30)
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     stw r3, 0x4(r30)
     lwz r31, 0xc(r1)

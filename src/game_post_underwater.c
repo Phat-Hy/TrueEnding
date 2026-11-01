@@ -28,7 +28,7 @@ extern void fn_80148B0C(void);
 extern void fn_8015E7A0(void);
 extern void actor_setState(void);
 extern void fn_801765D8(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
 extern void fn_8023A680(void);
@@ -98,7 +98,7 @@ asm void fn_802DA718(void)
     bl _savegpr_27
     mr r31, r3
     lwz r3, 0x14f8(r3)
-    bl fn_80219E6C
+    bl task_findEntryById
     lwz r0, 0x14c4(r31)
     mr r27, r3
     cmpwi r0, 0x78
@@ -1157,7 +1157,7 @@ lbl_fn_802DB534_00000FAC:
     cmplwi r0, 0xe
     bgt lbl_fn_802DB534_00001090
     lwz r3, 0x1584(r31)
-    bl fn_80219E6C
+    bl task_findEntryById
     li r0, -0x1
     stw r0, 0x8(r1)
     mr r5, r3
@@ -1481,7 +1481,7 @@ lbl_fn_802DBA3C_000013D4:
     bl res_registerResource
 lbl_fn_802DBA3C_00001480:
     lwz r3, 0x1608(r30)
-    bl fn_80219E6C
+    bl task_findEntryById
     lis r4, lbl_80747654@ha
     mr r31, r3
     addi r4, r4, lbl_80747654@l

@@ -5,7 +5,7 @@
 extern void _restgpr_25(void);
 extern void _savegpr_25(void);
 extern void fn_8004ED34(void);
-extern void fn_8005B3CC(void);
+extern void talk_parseQuotedString(void);
 extern void fn_8005B5F8(void);
 extern void fn_8005B6E8(void);
 extern void mem_realloc(void);
@@ -26,7 +26,7 @@ extern void fn_80158BB4(void);
 extern void fn_80158CA4(void);
 extern void fn_8016DA4C(void);
 extern void actor_setState(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
@@ -145,7 +145,7 @@ asm void fn_8025CFF4(void)
     addi r31, r31, lbl_807440F4@l
 lbl_fn_8025CFF4_000000B8:
     addi r3, r1, 0x8
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     lbz r0, 0x0(r3)
     mr r25, r3
     extsb r0, r0
@@ -158,7 +158,7 @@ lbl_fn_8025CFF4_000000B8:
     cmpwi r3, 0x0
     bne lbl_fn_8025CFF4_00000100
     addi r3, r1, 0x8
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     stw r3, 0x15c0(r27)
     b lbl_fn_8025CFF4_0000062C
@@ -169,7 +169,7 @@ lbl_fn_8025CFF4_00000100:
     cmpwi r3, 0x0
     bne lbl_fn_8025CFF4_00000128
     addi r3, r1, 0x8
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC288
     stfs f1, 0x15c4(r27)
     b lbl_fn_8025CFF4_0000062C
@@ -180,7 +180,7 @@ lbl_fn_8025CFF4_00000128:
     cmpwi r3, 0x0
     bne lbl_fn_8025CFF4_00000194
     addi r3, r1, 0x8
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC12C
     lwz r0, 0x78(r28)
     li r4, 0x0
@@ -212,7 +212,7 @@ lbl_fn_8025CFF4_00000194:
     cmpwi r3, 0x0
     bne lbl_fn_8025CFF4_00000200
     addi r3, r1, 0x8
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC12C
     lwz r0, 0x78(r28)
     li r4, 0x0
@@ -245,7 +245,7 @@ lbl_fn_8025CFF4_00000200:
     bne lbl_fn_8025CFF4_00000558
 lbl_fn_8025CFF4_00000214:
     addi r3, r1, 0x8
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     cmpwi r3, 0x0
     ble lbl_fn_8025CFF4_0000062C
@@ -479,9 +479,9 @@ lbl_fn_8025CFF4_00000558:
     cmpwi r3, 0x0
     bne lbl_fn_8025CFF4_00000584
     addi r3, r1, 0x8
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
-    bl fn_80219E6C
+    bl task_findEntryById
     stw r3, 0x151c(r27)
     b lbl_fn_8025CFF4_0000062C
 lbl_fn_8025CFF4_00000584:
@@ -491,9 +491,9 @@ lbl_fn_8025CFF4_00000584:
     cmpwi r3, 0x0
     bne lbl_fn_8025CFF4_000005B0
     addi r3, r1, 0x8
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
-    bl fn_80219E6C
+    bl task_findEntryById
     stw r3, 0x1520(r27)
     b lbl_fn_8025CFF4_0000062C
 lbl_fn_8025CFF4_000005B0:
@@ -503,9 +503,9 @@ lbl_fn_8025CFF4_000005B0:
     cmpwi r3, 0x0
     bne lbl_fn_8025CFF4_000005DC
     addi r3, r1, 0x8
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
-    bl fn_80219E6C
+    bl task_findEntryById
     stw r3, 0x1524(r27)
     b lbl_fn_8025CFF4_0000062C
 lbl_fn_8025CFF4_000005DC:
@@ -515,9 +515,9 @@ lbl_fn_8025CFF4_000005DC:
     cmpwi r3, 0x0
     bne lbl_fn_8025CFF4_00000608
     addi r3, r1, 0x8
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
-    bl fn_80219E6C
+    bl task_findEntryById
     stw r3, 0x1528(r27)
     b lbl_fn_8025CFF4_0000062C
 lbl_fn_8025CFF4_00000608:
@@ -527,7 +527,7 @@ lbl_fn_8025CFF4_00000608:
     cmpwi r3, 0x0
     bne lbl_fn_8025CFF4_0000062C
     addi r3, r1, 0x8
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC288
     stfs f1, 0x1568(r27)
 lbl_fn_8025CFF4_0000062C:
@@ -902,7 +902,7 @@ lbl_fn_8025D90C_00000B20:
     li r3, 0xc8
     stw r30, 0x14f4(r31)
     stw r0, 0x58c(r31)
-    bl fn_80219E6C
+    bl task_findEntryById
     mr r4, r3
     mr r3, r31
     bl fn_801561E4

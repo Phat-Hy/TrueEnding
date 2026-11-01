@@ -33,8 +33,8 @@ extern void fn_80207C34(void);
 extern void fn_802375C4(void);
 extern void fn_802376D0(void);
 extern void fn_8023772C(void);
-extern void fn_8023781C(void);
-extern void fn_80237874(void);
+extern void res_MsgHandle_unload(void);
+extern void res_MsgHandle_update(void);
 extern void world_getGlobalFlag(void);
 extern void fn_803E5E64(void);
 extern void fn_804439FC(void);
@@ -147,7 +147,7 @@ lbl_fn_800EF7F8_000000A0:
     addic. r31, r29, 0x28
     beq lbl_fn_800EF7F8_000000C0
     mr r3, r31
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r31, 0x4
     beq lbl_fn_800EF7F8_000000C0
     li r4, 0x0
@@ -159,7 +159,7 @@ lbl_fn_800EF7F8_000000C0:
     addic. r31, r29, 0x10
     beq lbl_fn_800EF7F8_000000EC
     mr r3, r31
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r31, 0x4
     beq lbl_fn_800EF7F8_000000EC
     li r4, 0x0
@@ -168,7 +168,7 @@ lbl_fn_800EF7F8_000000EC:
     addic. r31, r29, 0x4
     beq lbl_fn_800EF7F8_0000010C
     mr r3, r31
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r31, 0x4
     beq lbl_fn_800EF7F8_0000010C
     li r4, 0x0
@@ -227,14 +227,14 @@ lbl_fn_800EF91C_000001A0:
     lwz r0, lbl_8087F030
     add r29, r0, r31
     addi r3, r29, 0x4
-    bl fn_80237874
+    bl res_MsgHandle_update
     cmpwi r3, 0x0
     beq lbl_fn_800EF91C_000001C0
     li r0, 0x1
     b lbl_fn_800EF91C_00000234
 lbl_fn_800EF91C_000001C0:
     addi r3, r29, 0x10
-    bl fn_80237874
+    bl res_MsgHandle_update
     cmpwi r3, 0x0
     beq lbl_fn_800EF91C_000001D8
     li r0, 0x1
@@ -248,7 +248,7 @@ lbl_fn_800EF91C_000001D8:
     b lbl_fn_800EF91C_00000234
 lbl_fn_800EF91C_000001F0:
     addi r3, r29, 0x28
-    bl fn_80237874
+    bl res_MsgHandle_update
     cmpwi r3, 0x0
     beq lbl_fn_800EF91C_00000208
     li r0, 0x1
@@ -332,13 +332,13 @@ lbl_fn_800EFA18_000002D4:
     beq lbl_fn_800EFA18_000003A4
     stw r31, 0x44(r28)
     addi r3, r28, 0x4
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addi r3, r28, 0x10
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addi r3, r28, 0x1c
     bl fn_8023772C
     addi r3, r28, 0x28
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addi r3, r28, 0x34
     bl fn_80473F88
     addi r3, r28, 0x3c
@@ -357,13 +357,13 @@ lbl_fn_800EFA18_0000033C:
     beq lbl_fn_800EFA18_000003A4
     stw r31, 0x44(r28)
     addi r3, r28, 0x4
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addi r3, r28, 0x10
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addi r3, r28, 0x1c
     bl fn_8023772C
     addi r3, r28, 0x28
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addi r3, r28, 0x34
     bl fn_80473F88
     addi r3, r28, 0x3c
@@ -449,7 +449,7 @@ lbl_fn_800EFBC4_0000047C:
     cmpwi r31, 0x0
     beq lbl_fn_800EFBC4_000004AC
     addi r3, r31, 0x4
-    bl fn_80237874
+    bl res_MsgHandle_update
     cmpwi r3, 0x0
     bne lbl_fn_800EFBC4_000004AC
     addi r3, r31, 0x8
@@ -500,7 +500,7 @@ lbl_fn_800EFC64_0000051C:
     cmpwi r31, 0x0
     beq lbl_fn_800EFC64_0000054C
     addi r3, r31, 0x10
-    bl fn_80237874
+    bl res_MsgHandle_update
     cmpwi r3, 0x0
     bne lbl_fn_800EFC64_0000054C
     addi r3, r31, 0x14
@@ -601,7 +601,7 @@ lbl_fn_800EFDA0_00000658:
     cmpwi r31, 0x0
     beq lbl_fn_800EFDA0_00000684
     addi r3, r31, 0x28
-    bl fn_80237874
+    bl res_MsgHandle_update
     cmpwi r3, 0x0
     bne lbl_fn_800EFDA0_00000684
     lwz r0, 0x28(r31)

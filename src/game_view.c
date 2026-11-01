@@ -32,8 +32,8 @@ extern void fn_8010ED4C(void);
 extern void fn_8010EE38(void);
 extern void fn_80237518(void);
 extern void fn_802375C4(void);
-extern void fn_802377B8(void);
-extern void fn_8023781C(void);
+extern void res_MsgHandle_constructor(void);
+extern void res_MsgHandle_unload(void);
 extern void fn_80441590(void);
 extern void atn_LoadHandle_destructor(void);
 extern void fn_80478714(void);
@@ -231,16 +231,16 @@ lbl_fn_800F1430_000001B4:
     stw r26, 0x63b8(r3)
     stw r0, 0x63bc(r3)
     addi r3, r3, 0x63c0
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addis r3, r31, 0x3
     addi r3, r3, 0x63cc
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addis r3, r31, 0x3
     addi r3, r3, 0x63d8
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addis r3, r31, 0x3
     addi r3, r3, 0x63e4
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addis r3, r31, 0x3
     lis r27, fn_80237518@ha
     lis r30, fn_802375C4@ha
@@ -252,12 +252,12 @@ lbl_fn_800F1430_000001B4:
     bl fn_806958E0
     addis r3, r31, 0x3
     addi r3, r3, 0x64ec
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addis r3, r31, 0x3
-    lis r29, fn_802377B8@ha
+    lis r29, res_MsgHandle_constructor@ha
     lis r28, fn_800EF73C@ha
     li r6, 0xc
-    addi r4, r29, fn_802377B8@l
+    addi r4, r29, res_MsgHandle_constructor@l
     li r7, 0x3
     addi r5, r28, fn_800EF73C@l
     addi r3, r3, 0x64f8
@@ -285,25 +285,25 @@ lbl_fn_800F1430_000001B4:
     bl fn_806958E0
     addis r3, r31, 0x3
     addi r3, r3, 0x65b8
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addis r3, r31, 0x3
     addi r3, r3, 0x65c4
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addis r3, r31, 0x3
     addi r3, r3, 0x65d0
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addis r3, r31, 0x3
     addi r3, r3, 0x65dc
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addis r3, r31, 0x3
-    addi r4, r29, fn_802377B8@l
+    addi r4, r29, res_MsgHandle_constructor@l
     addi r5, r28, fn_800EF73C@l
     li r6, 0xc
     li r7, 0x7
     addi r3, r3, 0x65e8
     bl fn_806958E0
     addis r3, r31, 0x3
-    addi r4, r29, fn_802377B8@l
+    addi r4, r29, res_MsgHandle_constructor@l
     addi r5, r28, fn_800EF73C@l
     li r6, 0xc
     li r7, 0x1f
@@ -464,43 +464,43 @@ lbl_fn_800F1430_00000448:
     bl fn_800E2A24
     addis r3, r31, 0x4
     subi r3, r3, 0x750c
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addis r3, r31, 0x4
     subi r3, r3, 0x7500
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addis r3, r31, 0x4
-    lis r30, fn_802377B8@ha
+    lis r30, res_MsgHandle_constructor@ha
     lis r29, fn_800EF73C@ha
     li r6, 0xc
-    addi r4, r30, fn_802377B8@l
+    addi r4, r30, res_MsgHandle_constructor@l
     li r7, 0x3
     addi r5, r29, fn_800EF73C@l
     subi r3, r3, 0x74f4
     bl fn_806958E0
     addis r3, r31, 0x4
     subi r3, r3, 0x74d0
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addis r3, r31, 0x4
     subi r3, r3, 0x74c4
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addis r3, r31, 0x4
     subi r3, r3, 0x74b8
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addis r3, r31, 0x4
     subi r3, r3, 0x74ac
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addis r3, r31, 0x4
     subi r3, r3, 0x74a0
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addis r3, r31, 0x4
-    addi r4, r30, fn_802377B8@l
+    addi r4, r30, res_MsgHandle_constructor@l
     addi r5, r29, fn_800EF73C@l
     li r6, 0xc
     li r7, 0x3
     subi r3, r3, 0x7494
     bl fn_806958E0
     addis r3, r31, 0x4
-    addi r4, r30, fn_802377B8@l
+    addi r4, r30, res_MsgHandle_constructor@l
     addi r5, r29, fn_800EF73C@l
     li r6, 0xc
     li r7, 0x3
@@ -508,52 +508,52 @@ lbl_fn_800F1430_00000448:
     bl fn_806958E0
     addis r3, r31, 0x4
     subi r3, r3, 0x744c
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addis r3, r31, 0x4
     subi r3, r3, 0x7440
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addis r3, r31, 0x4
     subi r3, r3, 0x7434
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addis r3, r31, 0x4
     subi r3, r3, 0x7428
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addis r3, r31, 0x4
     subi r3, r3, 0x741c
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addis r3, r31, 0x4
     subi r3, r3, 0x7410
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addis r3, r31, 0x4
     subi r3, r3, 0x7404
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addis r3, r31, 0x4
     subi r3, r3, 0x73f8
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addis r3, r31, 0x4
     subi r3, r3, 0x73ec
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addis r3, r31, 0x4
     subi r3, r3, 0x73e0
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addis r3, r31, 0x4
     subi r3, r3, 0x73d4
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addis r3, r31, 0x4
     subi r3, r3, 0x73c8
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addis r3, r31, 0x4
     subi r3, r3, 0x73bc
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addis r3, r31, 0x4
     subi r3, r3, 0x73b0
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addis r3, r31, 0x4
     subi r3, r3, 0x73a4
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addis r3, r31, 0x4
     subi r3, r3, 0x7398
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addis r3, r31, 0x4
     lfs f3, lbl_80881478
     subi r7, r3, 0x6e28
@@ -744,10 +744,10 @@ lbl_fn_800F1430_000009A0:
     lfs f0, lbl_808814AC
     li r29, 0x0
     mr r3, r30
-    lis r4, fn_802377B8@ha
+    lis r4, res_MsgHandle_constructor@ha
     lis r5, fn_800EF73C@ha
     stw r29, -0x1d20(r30)
-    addi r4, r4, fn_802377B8@l
+    addi r4, r4, res_MsgHandle_constructor@l
     li r6, 0xc
     stw r29, -0x1d1c(r30)
     addi r5, r5, fn_800EF73C@l
@@ -934,7 +934,7 @@ asm void fn_800F1F94(void)
     subic. r29, r29, 0x7398
     beq lbl_fn_800F1F94_00000C8C
     mr r3, r29
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r29, 0x4
     beq lbl_fn_800F1F94_00000C8C
     li r4, 0x0
@@ -944,7 +944,7 @@ lbl_fn_800F1F94_00000C8C:
     subic. r29, r29, 0x73a4
     beq lbl_fn_800F1F94_00000CB0
     mr r3, r29
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r29, 0x4
     beq lbl_fn_800F1F94_00000CB0
     li r4, 0x0
@@ -954,7 +954,7 @@ lbl_fn_800F1F94_00000CB0:
     subic. r29, r29, 0x73b0
     beq lbl_fn_800F1F94_00000CD4
     mr r3, r29
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r29, 0x4
     beq lbl_fn_800F1F94_00000CD4
     li r4, 0x0
@@ -964,7 +964,7 @@ lbl_fn_800F1F94_00000CD4:
     subic. r29, r29, 0x73bc
     beq lbl_fn_800F1F94_00000CF8
     mr r3, r29
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r29, 0x4
     beq lbl_fn_800F1F94_00000CF8
     li r4, 0x0
@@ -974,7 +974,7 @@ lbl_fn_800F1F94_00000CF8:
     subic. r29, r29, 0x73c8
     beq lbl_fn_800F1F94_00000D1C
     mr r3, r29
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r29, 0x4
     beq lbl_fn_800F1F94_00000D1C
     li r4, 0x0
@@ -984,7 +984,7 @@ lbl_fn_800F1F94_00000D1C:
     subic. r29, r29, 0x73d4
     beq lbl_fn_800F1F94_00000D40
     mr r3, r29
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r29, 0x4
     beq lbl_fn_800F1F94_00000D40
     li r4, 0x0
@@ -994,7 +994,7 @@ lbl_fn_800F1F94_00000D40:
     subic. r29, r29, 0x73e0
     beq lbl_fn_800F1F94_00000D64
     mr r3, r29
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r29, 0x4
     beq lbl_fn_800F1F94_00000D64
     li r4, 0x0
@@ -1004,7 +1004,7 @@ lbl_fn_800F1F94_00000D64:
     subic. r29, r29, 0x73ec
     beq lbl_fn_800F1F94_00000D88
     mr r3, r29
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r29, 0x4
     beq lbl_fn_800F1F94_00000D88
     li r4, 0x0
@@ -1014,7 +1014,7 @@ lbl_fn_800F1F94_00000D88:
     subic. r29, r29, 0x73f8
     beq lbl_fn_800F1F94_00000DAC
     mr r3, r29
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r29, 0x4
     beq lbl_fn_800F1F94_00000DAC
     li r4, 0x0
@@ -1024,7 +1024,7 @@ lbl_fn_800F1F94_00000DAC:
     subic. r29, r29, 0x7404
     beq lbl_fn_800F1F94_00000DD0
     mr r3, r29
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r29, 0x4
     beq lbl_fn_800F1F94_00000DD0
     li r4, 0x0
@@ -1034,7 +1034,7 @@ lbl_fn_800F1F94_00000DD0:
     subic. r29, r29, 0x7410
     beq lbl_fn_800F1F94_00000DF4
     mr r3, r29
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r29, 0x4
     beq lbl_fn_800F1F94_00000DF4
     li r4, 0x0
@@ -1044,7 +1044,7 @@ lbl_fn_800F1F94_00000DF4:
     subic. r29, r29, 0x741c
     beq lbl_fn_800F1F94_00000E18
     mr r3, r29
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r29, 0x4
     beq lbl_fn_800F1F94_00000E18
     li r4, 0x0
@@ -1054,7 +1054,7 @@ lbl_fn_800F1F94_00000E18:
     subic. r29, r29, 0x7428
     beq lbl_fn_800F1F94_00000E3C
     mr r3, r29
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r29, 0x4
     beq lbl_fn_800F1F94_00000E3C
     li r4, 0x0
@@ -1064,7 +1064,7 @@ lbl_fn_800F1F94_00000E3C:
     subic. r29, r29, 0x7434
     beq lbl_fn_800F1F94_00000E60
     mr r3, r29
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r29, 0x4
     beq lbl_fn_800F1F94_00000E60
     li r4, 0x0
@@ -1074,7 +1074,7 @@ lbl_fn_800F1F94_00000E60:
     subic. r29, r29, 0x7440
     beq lbl_fn_800F1F94_00000E84
     mr r3, r29
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r29, 0x4
     beq lbl_fn_800F1F94_00000E84
     li r4, 0x0
@@ -1084,7 +1084,7 @@ lbl_fn_800F1F94_00000E84:
     subic. r29, r29, 0x744c
     beq lbl_fn_800F1F94_00000EA8
     mr r3, r29
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r29, 0x4
     beq lbl_fn_800F1F94_00000EA8
     li r4, 0x0
@@ -1107,7 +1107,7 @@ lbl_fn_800F1F94_00000EA8:
     subic. r29, r29, 0x74a0
     beq lbl_fn_800F1F94_00000F00
     mr r3, r29
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r29, 0x4
     beq lbl_fn_800F1F94_00000F00
     li r4, 0x0
@@ -1117,7 +1117,7 @@ lbl_fn_800F1F94_00000F00:
     subic. r29, r29, 0x74ac
     beq lbl_fn_800F1F94_00000F24
     mr r3, r29
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r29, 0x4
     beq lbl_fn_800F1F94_00000F24
     li r4, 0x0
@@ -1127,7 +1127,7 @@ lbl_fn_800F1F94_00000F24:
     subic. r29, r29, 0x74b8
     beq lbl_fn_800F1F94_00000F48
     mr r3, r29
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r29, 0x4
     beq lbl_fn_800F1F94_00000F48
     li r4, 0x0
@@ -1137,7 +1137,7 @@ lbl_fn_800F1F94_00000F48:
     subic. r29, r29, 0x74c4
     beq lbl_fn_800F1F94_00000F6C
     mr r3, r29
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r29, 0x4
     beq lbl_fn_800F1F94_00000F6C
     li r4, 0x0
@@ -1147,7 +1147,7 @@ lbl_fn_800F1F94_00000F6C:
     subic. r29, r29, 0x74d0
     beq lbl_fn_800F1F94_00000F90
     mr r3, r29
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r29, 0x4
     beq lbl_fn_800F1F94_00000F90
     li r4, 0x0
@@ -1164,7 +1164,7 @@ lbl_fn_800F1F94_00000F90:
     subic. r29, r29, 0x7500
     beq lbl_fn_800F1F94_00000FD0
     mr r3, r29
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r29, 0x4
     beq lbl_fn_800F1F94_00000FD0
     li r4, 0x0
@@ -1174,7 +1174,7 @@ lbl_fn_800F1F94_00000FD0:
     subic. r29, r29, 0x750c
     beq lbl_fn_800F1F94_00000FF4
     mr r3, r29
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r29, 0x4
     beq lbl_fn_800F1F94_00000FF4
     li r4, 0x0
@@ -1246,7 +1246,7 @@ lbl_fn_800F1F94_000010A8:
     addic. r29, r29, 0x65dc
     beq lbl_fn_800F1F94_00001100
     mr r3, r29
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r29, 0x4
     beq lbl_fn_800F1F94_00001100
     li r4, 0x0
@@ -1256,7 +1256,7 @@ lbl_fn_800F1F94_00001100:
     addic. r29, r29, 0x65d0
     beq lbl_fn_800F1F94_00001124
     mr r3, r29
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r29, 0x4
     beq lbl_fn_800F1F94_00001124
     li r4, 0x0
@@ -1266,7 +1266,7 @@ lbl_fn_800F1F94_00001124:
     addic. r29, r29, 0x65c4
     beq lbl_fn_800F1F94_00001148
     mr r3, r29
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r29, 0x4
     beq lbl_fn_800F1F94_00001148
     li r4, 0x0
@@ -1276,7 +1276,7 @@ lbl_fn_800F1F94_00001148:
     addic. r29, r29, 0x65b8
     beq lbl_fn_800F1F94_0000116C
     mr r3, r29
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r29, 0x4
     beq lbl_fn_800F1F94_0000116C
     li r4, 0x0
@@ -1312,7 +1312,7 @@ lbl_fn_800F1F94_0000116C:
     addic. r29, r29, 0x64ec
     beq lbl_fn_800F1F94_000011F8
     mr r3, r29
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r29, 0x4
     beq lbl_fn_800F1F94_000011F8
     li r4, 0x0
@@ -1329,7 +1329,7 @@ lbl_fn_800F1F94_000011F8:
     addic. r29, r29, 0x63e4
     beq lbl_fn_800F1F94_00001238
     mr r3, r29
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r29, 0x4
     beq lbl_fn_800F1F94_00001238
     li r4, 0x0
@@ -1339,7 +1339,7 @@ lbl_fn_800F1F94_00001238:
     addic. r29, r29, 0x63d8
     beq lbl_fn_800F1F94_0000125C
     mr r3, r29
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r29, 0x4
     beq lbl_fn_800F1F94_0000125C
     li r4, 0x0
@@ -1349,7 +1349,7 @@ lbl_fn_800F1F94_0000125C:
     addic. r29, r29, 0x63cc
     beq lbl_fn_800F1F94_00001280
     mr r3, r29
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r29, 0x4
     beq lbl_fn_800F1F94_00001280
     li r4, 0x0
@@ -1359,7 +1359,7 @@ lbl_fn_800F1F94_00001280:
     addic. r29, r29, 0x63c0
     beq lbl_fn_800F1F94_000012A4
     mr r3, r29
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r29, 0x4
     beq lbl_fn_800F1F94_000012A4
     li r4, 0x0

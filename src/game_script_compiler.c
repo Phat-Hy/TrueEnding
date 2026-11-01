@@ -8,7 +8,7 @@ extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
 extern void fn_80013F78(void);
 extern void fn_80018D5C(void);
-extern void fn_8005B3CC(void);
+extern void talk_parseQuotedString(void);
 extern void fn_8005B5F8(void);
 extern void fn_8005B6E8(void);
 extern void fn_8006AFF8(void);
@@ -35,9 +35,9 @@ extern void fn_8014C540(void);
 extern void actor_setState(void);
 extern void fn_80179D44(void);
 extern void fn_80219558(void);
-extern void fn_802377B8(void);
-extern void fn_8023780C(void);
-extern void fn_8023781C(void);
+extern void res_MsgHandle_constructor(void);
+extern void res_MsgHandle_destructor(void);
+extern void res_MsgHandle_unload(void);
 extern void fn_80255F2C(void);
 extern void fn_80255F68(void);
 extern void fn_8030E490(void);
@@ -201,7 +201,7 @@ asm void fn_8025457C(void)
     addi r3, r30, 0x1508
     stw r0, 0x14d4(r30)
     stw r0, 0x14d8(r30)
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     lwz r0, 0x54c(r30)
     mr r3, r30
     addi r4, r1, 0x108
@@ -257,7 +257,7 @@ asm void fn_80254648(void)
     addic. r31, r3, 0x1508
     beq lbl_fn_80254648_000001A0
     mr r3, r31
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r31, 0x4
     beq lbl_fn_80254648_000001A0
     li r4, 0x0
@@ -415,7 +415,7 @@ asm void fn_80254808(void)
     bl fn_8005B6E8
 lbl_fn_80254808_000003A8:
     addi r3, r1, 0x8
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     addi r3, r1, 0x8
     bl fn_8005B5F8
     cmpwi r3, 0x0
@@ -1636,19 +1636,19 @@ asm void fn_802558B0(void)
     addi r3, r30, 0x15f8
     stw r28, 0x15f0(r30)
     stw r28, 0x15f4(r30)
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addi r3, r30, 0x1604
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addi r3, r30, 0x1610
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addi r3, r30, 0x161c
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addi r3, r30, 0x1628
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addi r3, r30, 0x1634
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addi r3, r30, 0x1640
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     lwz r4, 0x12a4(r30)
     li r5, 0x78
     lfs f13, lbl_808833E0
@@ -1811,7 +1811,7 @@ asm void fn_802558B0(void)
     bl fn_8005B6E8
 lbl_fn_802558B0_0000172C:
     addi r3, r1, 0x94
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     cmpwi r3, 0x0
     mr r26, r3
     beq lbl_fn_802558B0_000017C4
@@ -1970,25 +1970,25 @@ lbl_fn_802558B0_0000183C:
     bl fn_80088FAC
     addi r3, r30, 0x15f8
     addi r4, r31, 0xb8
-    bl fn_8023780C
+    bl res_MsgHandle_destructor
     addi r3, r30, 0x1604
     addi r4, r31, 0xc6
-    bl fn_8023780C
+    bl res_MsgHandle_destructor
     addi r3, r30, 0x1610
     addi r4, r31, 0xd4
-    bl fn_8023780C
+    bl res_MsgHandle_destructor
     addi r3, r30, 0x161c
     addi r4, r31, 0xe2
-    bl fn_8023780C
+    bl res_MsgHandle_destructor
     addi r3, r30, 0x1628
     addi r4, r31, 0xf0
-    bl fn_8023780C
+    bl res_MsgHandle_destructor
     addi r3, r30, 0x1634
     addi r4, r31, 0xfe
-    bl fn_8023780C
+    bl res_MsgHandle_destructor
     addi r3, r30, 0x1640
     addi r4, r31, 0x10c
-    bl fn_8023780C
+    bl res_MsgHandle_destructor
     lwz r0, 0x12a8(r30)
     ori r0, r0, 0x20
     stw r0, 0x12a8(r30)

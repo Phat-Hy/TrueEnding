@@ -10,7 +10,7 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
 extern void fn_80013F78(void);
-extern void fn_8005B9CC(void);
+extern void talk_formatQuotedString(void);
 extern void fn_8005BBF8(void);
 extern void fn_8005BCE8(void);
 extern void mem_alloc(void);
@@ -1747,7 +1747,7 @@ asm void fn_8042A360(void)
     lis r31, 0x2aab
 lbl_fn_8042A360_00001654:
     addi r3, r1, 0x4c
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     lbz r0, 0x0(r3)
     mr r17, r3
     cmpwi r0, 0x3b
@@ -1759,31 +1759,31 @@ lbl_fn_8042A360_00001654:
     cmpwi r16, 0x7
     bge lbl_fn_8042A360_00001B80
     addi r3, r1, 0x4c
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     mr r4, r3
     mr r3, r20
     bl fn_800A03E4
     addi r3, r1, 0x4c
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl fn_802180A8
     stw r3, 0x174(r19)
     addi r3, r1, 0x4c
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl fn_800DC288
     stfs f1, 0x190(r19)
     addi r3, r1, 0x4c
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl fn_800DC288
     stfs f1, 0x1ac(r19)
     addi r3, r1, 0x4c
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl atoi
     subi r0, r3, 0x1
     addi r3, r1, 0x4c
     cntlzw r0, r0
     srwi r0, r0, 5
     stw r0, 0x1c8(r19)
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl atoi
     subi r0, r3, 0x1
     addi r20, r20, 0xc
@@ -1800,7 +1800,7 @@ lbl_fn_8042A360_00001710:
     cmpwi r3, 0x0
     bne lbl_fn_8042A360_0000173C
     addi r3, r1, 0x4c
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     mr r4, r3
     addi r3, r15, 0x200
     bl strcpy
@@ -1812,7 +1812,7 @@ lbl_fn_8042A360_0000173C:
     cmpwi r3, 0x0
     bne lbl_fn_8042A360_00001B5C
     addi r3, r1, 0x4c
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     stw r24, 0x2c(r1)
     mr r17, r3
     stw r24, 0x30(r1)
@@ -2097,7 +2097,7 @@ lbl_fn_8042A360_00001B5C:
     cmpwi r3, 0x0
     bne lbl_fn_8042A360_00001B80
     addi r3, r1, 0x4c
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl atoi
     stw r3, 0xfc(r15)
 lbl_fn_8042A360_00001B80:

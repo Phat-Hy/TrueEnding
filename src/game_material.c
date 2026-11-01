@@ -26,7 +26,7 @@ extern void fn_800B6C70(void);
 extern void fn_800BDB58(void);
 extern void fn_800C1424(void);
 extern void fn_800D5E18(void);
-extern void fn_805F89F0(void);
+extern void PSMTXConcat(void);
 extern void C_MTXLookAt(void);
 extern void PSMTXMultVec(void);
 extern void PSMTXMultVecArray(void);
@@ -2422,11 +2422,11 @@ lbl_fn_800B8F40_00002344:
     fmuls f0, f0, f29
     stfs f9, 0xe0(r1)
     stfs f0, 0xe4(r1)
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0xc8
     addi r4, r1, 0x68
     addi r5, r1, 0x98
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r6, r1, 0x98
     addi r3, r31, 0x2c0
     psq_l f1, 0x0(r6), 0, 0
@@ -2443,11 +2443,11 @@ lbl_fn_800B8F40_00002344:
     psq_st f3, 0x4b0(r31), 0, 0
     psq_st f4, 0x4b8(r31), 0, 0
     psq_st f5, 0x4c0(r31), 0, 0
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0xf8
     addi r4, r1, 0x8
     addi r5, r1, 0x38
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x38
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0

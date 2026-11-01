@@ -22,7 +22,7 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_805EE150(void);
 extern void OSInitMutex(void);
-extern void fn_805F8980(void);
+extern void PSMTXIdentity(void);
 extern void PSMTXMultVecArraySR(void);
 extern void fn_805FA200(void);
 extern void fn_805FA390(void);
@@ -492,7 +492,7 @@ asm void fn_80724920(void)
     li r4, 0x1
     bl fn_80618290
     addi r3, r1, 0x8
-    bl fn_805F8980
+    bl PSMTXIdentity
     addi r3, r1, 0x8
     li r4, 0x0
     bl GXLoadPosMtxImm

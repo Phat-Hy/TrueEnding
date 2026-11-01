@@ -45,10 +45,10 @@ extern void fn_800D3FA4(void);
 extern void fn_801F0544(void);
 extern void fn_801F3FF8(void);
 extern void fn_801FEB9C(void);
-extern void fn_802377B8(void);
-extern void fn_8023780C(void);
-extern void fn_8023781C(void);
-extern void fn_80237874(void);
+extern void res_MsgHandle_constructor(void);
+extern void res_MsgHandle_destructor(void);
+extern void res_MsgHandle_unload(void);
+extern void res_MsgHandle_update(void);
 extern void fn_80239798(void);
 extern void fn_803B27F8(void);
 extern void fn_803B33F8(void);
@@ -732,9 +732,9 @@ asm void fn_80531F48(void)
     addi r3, r28, 0x27c
     bl fn_8004AD9C
     addi r3, r28, 0x290
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addi r3, r28, 0x29c
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     lfs f5, lbl_80887BB4
     li r31, 0x1
     lfs f4, lbl_80887BB8
@@ -1417,7 +1417,7 @@ lbl_spectateManager_init_00001208:
     addic. r29, r30, 0x29c
     beq lbl_spectateManager_init_00001228
     mr r3, r29
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r29, 0x4
     beq lbl_spectateManager_init_00001228
     li r4, 0x0
@@ -1426,7 +1426,7 @@ lbl_spectateManager_init_00001228:
     addic. r29, r30, 0x290
     beq lbl_spectateManager_init_00001248
     mr r3, r29
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r29, 0x4
     beq lbl_spectateManager_init_00001248
     li r4, 0x0
@@ -1634,10 +1634,10 @@ lbl_spectateManager_update_000014FC:
     addi r3, r30, 0x290
     addi r28, r28, lbl_8075D5B0@l
     addi r4, r28, 0x18
-    bl fn_8023780C
+    bl res_MsgHandle_destructor
     addi r3, r30, 0x29c
     addi r4, r28, 0x26
-    bl fn_8023780C
+    bl res_MsgHandle_destructor
     mr r3, r30
     addi r4, r28, 0x34
     li r5, 0x0
@@ -1708,11 +1708,11 @@ lbl_spectateManager_update_000015F4:
     cmpwi r3, 0x0
     bne lbl_spectateManager_update_000021FC
     addi r3, r30, 0x290
-    bl fn_80237874
+    bl res_MsgHandle_update
     cmpwi r3, 0x0
     bne lbl_spectateManager_update_000021FC
     addi r3, r30, 0x29c
-    bl fn_80237874
+    bl res_MsgHandle_update
     cmpwi r3, 0x0
     bne lbl_spectateManager_update_000021FC
     lwz r4, 0x2a8(r30)

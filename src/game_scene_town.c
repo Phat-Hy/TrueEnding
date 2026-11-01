@@ -21,7 +21,7 @@ extern void fn_8019198C(void);
 extern void fn_80192758(void);
 extern void fn_801AB6B8(void);
 extern void fn_801AC14C(void);
-extern void fn_805F89F0(void);
+extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXScale(void);
 extern void PSMTXMultVec(void);
@@ -223,7 +223,7 @@ asm void fn_801A9B80(void)
     mr r3, r31
     addi r4, r1, 0x78
     addi r5, r1, 0x48
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x48
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -248,7 +248,7 @@ lbl_fn_801A9B80_00000210:
     mr r3, r31
     addi r4, r1, 0xd8
     addi r5, r1, 0xa8
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0xa8
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -273,7 +273,7 @@ lbl_fn_801A9B80_00000270:
     mr r3, r31
     addi r4, r1, 0x138
     addi r5, r1, 0x108
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x108
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -291,7 +291,7 @@ lbl_fn_801A9B80_000002D0:
     addi r4, r1, 0x1c8
     addi r3, r1, 0x168
     mr r5, r4
-    bl fn_805F89F0
+    bl PSMTXConcat
     lfs f9, 0x40(r1)
     lfs f8, lbl_8088223C
     lfs f0, 0x3c(r1)
@@ -701,7 +701,7 @@ lbl_fn_801AA230_000007F8:
     mr r3, r31
     addi r4, r1, 0x78
     addi r5, r1, 0x48
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x48
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -726,7 +726,7 @@ lbl_fn_801AA230_000008E4:
     mr r3, r31
     addi r4, r1, 0xd8
     addi r5, r1, 0xa8
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0xa8
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -751,7 +751,7 @@ lbl_fn_801AA230_00000944:
     mr r3, r31
     addi r4, r1, 0x138
     addi r5, r1, 0x108
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x108
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -769,7 +769,7 @@ lbl_fn_801AA230_000009A4:
     addi r4, r1, 0x1c8
     addi r3, r1, 0x168
     mr r5, r4
-    bl fn_805F89F0
+    bl PSMTXConcat
     lfs f9, 0x40(r1)
     lfs f8, lbl_8088223C
     lfs f0, 0x3c(r1)

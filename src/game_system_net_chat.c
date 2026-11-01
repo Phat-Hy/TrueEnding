@@ -37,7 +37,7 @@ extern void fn_8016D3F8(void);
 extern void fn_801781B0(void);
 extern void fn_80206B9C(void);
 extern void fn_80211480(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
@@ -1766,7 +1766,7 @@ asm void fn_803A4A7C(void)
     bl fn_805B4D94
     mr r31, r3
     lwz r3, 0x18(r26)
-    bl fn_80219E6C
+    bl task_findEntryById
     cmpwi r31, 0x0
     mr r28, r3
     beq lbl_fn_803A4A7C_00001B24

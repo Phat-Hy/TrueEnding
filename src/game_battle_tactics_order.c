@@ -40,13 +40,13 @@ extern void fn_800EF73C(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800FAB80(void);
 extern void fn_8021823C(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
 extern void fn_80237518(void);
 extern void fn_802375C4(void);
 extern void fn_802376D0(void);
-extern void fn_802377B8(void);
-extern void fn_80237874(void);
+extern void res_MsgHandle_constructor(void);
+extern void res_MsgHandle_update(void);
 extern void res_findResourceSlot(void);
 extern void fn_8023A680(void);
 extern void res_registerResource(void);
@@ -713,11 +713,11 @@ lbl_fn_803F03D8_00000770:
     addi r3, r3, 0x10
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_802377B8@ha
+    lis r4, res_MsgHandle_constructor@ha
     lis r5, fn_800EF73C@ha
     mr r7, r30
     li r6, 0xc
-    addi r4, r4, fn_802377B8@l
+    addi r4, r4, res_MsgHandle_constructor@l
     addi r5, r5, fn_800EF73C@l
     bl fn_80695720
     stw r3, 0x4(r29)
@@ -973,7 +973,7 @@ lbl_fn_803F06B0_00000A54:
 lbl_fn_803F06B0_00000A6C:
     lwz r0, 0x14(r29)
     add r3, r0, r31
-    bl fn_80237874
+    bl res_MsgHandle_update
     cmpwi r3, 0x0
     beq lbl_fn_803F06B0_00000A88
     li r3, 0x1
@@ -1594,7 +1594,7 @@ lbl_fn_803F0764_00001328:
     bl system_getNextSequenceId
     mr r30, r3
     mr r3, r17
-    bl fn_80219E6C
+    bl task_findEntryById
     stw r28, 0x8(r1)
     mr r5, r3
     lfs f2, lbl_80885F94

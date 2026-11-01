@@ -24,7 +24,7 @@ extern void fn_80188F08(void);
 extern void fn_80188F40(void);
 extern void fn_801EA0B4(void);
 extern void fn_80219558(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void world_getGlobalFlag(void);
 extern void world_setGlobalFlag(void);
 extern void fn_803EA77C(void);
@@ -557,7 +557,7 @@ asm void fn_801C7918(void)
     mr r27, r7
     stw r4, 0x4(r28)
     stw r8, 0x0(r28)
-    bl fn_80219E6C
+    bl task_findEntryById
     psq_l f1, 0x0(r29), 0, 0
     li r4, 0x1
     lfs f2, 0x8(r29)

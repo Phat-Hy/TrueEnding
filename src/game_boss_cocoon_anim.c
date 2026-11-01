@@ -19,7 +19,7 @@ extern void fn_8020EF80(void);
 extern void fn_802114D8(void);
 extern void fn_802114E0(void);
 extern void fn_80213E60(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void fn_8021E444(void);
 extern void fn_80373148(void);
 extern void fn_803E5E64(void);
@@ -246,7 +246,7 @@ lbl_fn_80450778_00000284:
     cmpwi r3, 0x0
     lwz r30, 0x48(r4)
     ble lbl_fn_80450778_000002A0
-    bl fn_80219E6C
+    bl task_findEntryById
     b lbl_fn_80450778_000002A4
 lbl_fn_80450778_000002A0:
     li r3, 0x0

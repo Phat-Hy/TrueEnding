@@ -21,7 +21,7 @@ extern void fn_80237518(void);
 extern void fn_802375C4(void);
 extern void fn_80237654(void);
 extern void fn_802376D0(void);
-extern void fn_802377B8(void);
+extern void res_MsgHandle_constructor(void);
 extern void fn_80239D58(void);
 extern void res_findResourceSlot(void);
 extern void fn_8023A098(void);
@@ -29,7 +29,7 @@ extern void fn_8023A680(void);
 extern void fn_80360780(void);
 extern void fn_804AABA8(void);
 extern void fn_804AAD54(void);
-extern void fn_805F89F0(void);
+extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXRotAxis(void);
 extern void PSMTXTrans(void);
@@ -1250,7 +1250,7 @@ lbl_fn_801829B4_00000F84:
     addi r3, r1, 0x3d8
     addi r4, r1, 0x468
     addi r5, r1, 0x408
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x408
     lfs f8, lbl_80881C48
     psq_l f1, 0x0(r3), 0, 0
@@ -1289,7 +1289,7 @@ lbl_fn_801829B4_00000F84:
     mr r3, r30
     addi r4, r1, 0x148
     addi r5, r1, 0x118
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x118
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1314,7 +1314,7 @@ lbl_fn_801829B4_00001104:
     mr r3, r30
     addi r4, r1, 0x1a8
     addi r5, r1, 0x178
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x178
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1339,7 +1339,7 @@ lbl_fn_801829B4_00001164:
     mr r3, r30
     addi r4, r1, 0x208
     addi r5, r1, 0x1d8
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x1d8
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1362,11 +1362,11 @@ lbl_fn_801829B4_000011C4:
     mr r4, r30
     addi r3, r1, 0x468
     addi r5, r1, 0x378
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x318
     addi r4, r1, 0x378
     addi r5, r1, 0x3a8
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x3a8
     mr r4, r31
     psq_l f1, 0x0(r3), 0, 0
@@ -1915,7 +1915,7 @@ asm void fn_801839FC(void)
     stw r4, 0x50(r31)
     stw r4, 0x54(r31)
     stw r0, 0x58(r31)
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
 lbl_fn_801839FC_00001958:
     stw r31, lbl_8087F0A0
 lbl_fn_801839FC_0000195C:

@@ -28,7 +28,7 @@ extern void fn_80176548(void);
 extern void fn_80178208(void);
 extern void fn_801B4BC8(void);
 extern void fn_801B4C00(void);
-extern void fn_805F89F0(void);
+extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void printf(void);
@@ -1700,7 +1700,7 @@ asm void fn_801B6E70(void)
     mr r3, r29
     addi r4, r1, 0x70
     addi r5, r1, 0x40
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x40
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1725,7 +1725,7 @@ lbl_fn_801B6E70_0000172C:
     mr r3, r29
     addi r4, r1, 0xd0
     addi r5, r1, 0xa0
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0xa0
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1750,7 +1750,7 @@ lbl_fn_801B6E70_0000178C:
     mr r3, r29
     addi r4, r1, 0x130
     addi r5, r1, 0x100
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x100
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0

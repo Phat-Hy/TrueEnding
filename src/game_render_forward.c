@@ -18,10 +18,10 @@ extern void fn_8013A258(void);
 extern void fn_8013CB68(void);
 extern void fn_80158BB4(void);
 extern void actor_setState(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void res_findResourceSlot(void);
 extern void fn_802B6F80(void);
-extern void fn_805F89F0(void);
+extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
@@ -1383,7 +1383,7 @@ asm void fn_802B55B0(void)
     mr r3, r27
     addi r4, r1, 0x88
     addi r5, r1, 0x58
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x58
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1408,7 +1408,7 @@ lbl_fn_802B55B0_000012C8:
     mr r3, r27
     addi r4, r1, 0xe8
     addi r5, r1, 0xb8
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0xb8
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1433,7 +1433,7 @@ lbl_fn_802B55B0_00001328:
     mr r3, r27
     addi r4, r1, 0x148
     addi r5, r1, 0x118
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x118
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1858,7 +1858,7 @@ lbl_fn_802B596C_0000196C:
     lwz r29, lbl_8087F048
     stfs f3, 0x20(r1)
     stfs f0, 0x24(r1)
-    bl fn_80219E6C
+    bl task_findEntryById
     li r0, -0x1
     stw r0, 0x8(r1)
     lfs f1, lbl_80884028

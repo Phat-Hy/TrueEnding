@@ -6,7 +6,7 @@ extern void _restgpr_22(void);
 extern void _restgpr_26(void);
 extern void _savegpr_22(void);
 extern void _savegpr_26(void);
-extern void fn_8005B3CC(void);
+extern void talk_parseQuotedString(void);
 extern void fn_8005B6E8(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void fn_80097CCC(void);
@@ -30,8 +30,8 @@ extern void fn_8020A81C(void);
 extern void sound_initGlobalInstances(void);
 extern void fn_80237518(void);
 extern void fn_80237654(void);
-extern void fn_802377B8(void);
-extern void fn_8023780C(void);
+extern void res_MsgHandle_constructor(void);
+extern void res_MsgHandle_destructor(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
 extern void fn_802FCF14(void);
@@ -1562,27 +1562,27 @@ asm void fn_802FC850(void)
     stfs f0, 0x14fc(r30)
     stw r28, 0x151c(r30)
     stw r28, 0x1520(r30)
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addi r3, r30, 0x1534
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addi r3, r30, 0x1540
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addi r3, r30, 0x154c
     bl fn_80237518
     addi r3, r30, 0x1558
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addi r3, r30, 0x1564
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addi r3, r30, 0x1570
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addi r3, r30, 0x157c
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addi r3, r30, 0x1588
     bl fn_80237518
     addi r3, r30, 0x1594
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addi r3, r30, 0x15a0
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addi r3, r30, 0x15ac
     bl fn_800CB360
     li r0, 0x1
@@ -1656,38 +1656,38 @@ asm void fn_802FC850(void)
     stfs f3, 0x16f0(r30)
     stfs f0, 0x16f4(r30)
     stw r10, 0x16f8(r30)
-    bl fn_8023780C
+    bl res_MsgHandle_destructor
     addi r29, r29, lbl_80748A14@l
     addi r3, r30, 0x1534
     addi r4, r29, 0x16
-    bl fn_8023780C
+    bl res_MsgHandle_destructor
     addi r3, r30, 0x1588
     addi r4, r29, 0x2c
     bl fn_80237654
     addi r3, r30, 0x1540
     addi r4, r29, 0x42
-    bl fn_8023780C
+    bl res_MsgHandle_destructor
     addi r3, r30, 0x154c
     addi r4, r29, 0x58
     bl fn_80237654
     addi r3, r30, 0x1558
     addi r4, r29, 0x6e
-    bl fn_8023780C
+    bl res_MsgHandle_destructor
     addi r3, r30, 0x1564
     addi r4, r29, 0x84
-    bl fn_8023780C
+    bl res_MsgHandle_destructor
     addi r3, r30, 0x1570
     addi r4, r29, 0x99
-    bl fn_8023780C
+    bl res_MsgHandle_destructor
     addi r3, r30, 0x157c
     addi r4, r29, 0xae
-    bl fn_8023780C
+    bl res_MsgHandle_destructor
     addi r3, r30, 0x1594
     addi r4, r29, 0xc3
-    bl fn_8023780C
+    bl res_MsgHandle_destructor
     addi r3, r30, 0x15a0
     addi r4, r29, 0xd8
-    bl fn_8023780C
+    bl res_MsgHandle_destructor
     lwz r12, 0x1674(r30)
     addi r3, r30, 0x1674
     addi r4, r29, 0xe5
@@ -1747,7 +1747,7 @@ lbl_fn_802FC850_0000175C:
     addi r31, r31, lbl_80748A14@l
 lbl_fn_802FC850_000017E4:
     addi r3, r1, 0x14
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     cmpwi r3, 0x0
     mr r28, r3
     beq lbl_fn_802FC850_00001880

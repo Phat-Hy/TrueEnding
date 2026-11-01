@@ -32,10 +32,10 @@ extern void atn_LH_Texture_update(void);
 extern void fn_800D5C84(void);
 extern void fn_800D5E18(void);
 extern void atn_LoadHandle_getStatus(void);
-extern void fn_805F89F0(void);
-extern void fn_805F8C50(void);
-extern void fn_805F8CA0(void);
-extern void fn_805F8DA0(void);
+extern void PSMTXConcat(void);
+extern void PSMTXTranspose(void);
+extern void PSMTXInverse(void);
+extern void PSMTXInvXpose(void);
 extern void PSMTXMultVec(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
@@ -1732,19 +1732,19 @@ lbl_fn_80073194_00001590:
     stfs f8, 0x23c(r1)
     stfs f7, 0x248(r1)
     stfs f0, 0x24c(r1)
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x250
     addi r4, r1, 0x130
     addi r5, r1, 0x160
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x220
     addi r4, r1, 0x160
     addi r5, r1, 0x190
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x2b0
     addi r4, r1, 0x190
     addi r5, r1, 0x1c0
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r4, r1, 0x1c0
     addi r3, r1, 0x2e0
     psq_l f1, 0x0(r4), 0, 0
@@ -1907,15 +1907,15 @@ lbl_fn_80073194_00001860:
     addi r4, r25, 0x1d4
     addi r3, r1, 0x368
     addi r5, r1, 0xa0
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x2b0
     addi r4, r1, 0xa0
     addi r5, r1, 0xd0
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x1f0
     addi r4, r1, 0xd0
     addi r5, r1, 0x100
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r6, r1, 0x100
     addi r5, r1, 0x2e0
     psq_l f1, 0x0(r6), 0, 0
@@ -2924,7 +2924,7 @@ lbl_fn_800742C8_00002808:
     stfs f0, 0x144(r1)
     stfs f0, 0x154(r1)
     stfs f0, 0x164(r1)
-    bl fn_805F8DA0
+    bl PSMTXInvXpose
     lfs f0, lbl_80880A70
     mr r4, r20
     stfs f0, 0x114(r1)
@@ -2932,19 +2932,19 @@ lbl_fn_800742C8_00002808:
     addi r5, r1, 0x78
     stfs f0, 0x124(r1)
     stfs f0, 0x134(r1)
-    bl fn_805F89F0
+    bl PSMTXConcat
     mr r3, r21
     addi r4, r1, 0x78
     addi r5, r1, 0xd8
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r19, 0x370
     addi r4, r19, 0x1d4
     addi r5, r1, 0x48
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x168
     addi r4, r1, 0x48
     addi r5, r1, 0xa8
-    bl fn_805F89F0
+    bl PSMTXConcat
     mr r4, r24
     addi r3, r1, 0xa8
     li r5, 0x0
@@ -3167,11 +3167,11 @@ lbl_fn_800748D8_00002B9C:
     addi r3, r29, 0x370
     addi r4, r29, 0x1d4
     addi r5, r1, 0x8
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x68
     addi r4, r1, 0x8
     addi r5, r1, 0x38
-    bl fn_805F89F0
+    bl PSMTXConcat
     mr r4, r27
     addi r3, r1, 0x38
     li r5, 0x0
@@ -3381,11 +3381,11 @@ lbl_fn_80074B24_00002EB0:
     addi r3, r26, 0x60
     addi r4, r25, 0x1d4
     addi r5, r1, 0x8
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x68
     addi r4, r1, 0x8
     addi r5, r1, 0x38
-    bl fn_805F89F0
+    bl PSMTXConcat
     mr r4, r27
     addi r3, r1, 0x38
     li r5, 0x0
@@ -5198,10 +5198,10 @@ asm void fn_8007642C(void)
     stfs f0, 0xb4(r1)
     stfs f0, 0xc4(r1)
     stfs f0, 0xd4(r1)
-    bl fn_805F8CA0
+    bl PSMTXInverse
     mr r3, r30
     mr r4, r30
-    bl fn_805F8C50
+    bl PSMTXTranspose
     mr r3, r30
     mr r4, r29
     mr r5, r29

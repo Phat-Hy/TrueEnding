@@ -26,7 +26,7 @@ extern void fn_803ACE18(void);
 extern void fn_803ACF88(void);
 extern void fn_803AD3D8(void);
 extern void fn_803E3C78(void);
-extern void fn_805F89F0(void);
+extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXTrans(void);
 extern void PSMTXMultVec(void);
@@ -727,7 +727,7 @@ lbl_fn_8039B2BC_000008B0:
     mr r3, r28
     addi r4, r1, 0xc0
     addi r5, r1, 0x90
-    bl fn_805F89F0
+    bl PSMTXConcat
     psq_l f1, 0x0(r26), 0, 0
     mulli r0, r18, 0x48
     psq_l f2, 0x8(r26), 0, 0

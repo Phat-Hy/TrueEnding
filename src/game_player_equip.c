@@ -30,7 +30,7 @@ extern void fn_8018412C(void);
 extern void fn_80184548(void);
 extern void fn_80218218(void);
 extern void sound_initGlobalInstances(void);
-extern void fn_802377B8(void);
+extern void res_MsgHandle_constructor(void);
 extern void res_findResourceSlot(void);
 extern void fn_8023A680(void);
 extern void res_registerResource(void);
@@ -143,11 +143,11 @@ asm void fn_80120D44(void)
     addi r3, r3, 0x10
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_802377B8@ha
+    lis r4, res_MsgHandle_constructor@ha
     lis r5, fn_800EF73C@ha
     mr r7, r26
     li r6, 0xc
-    addi r4, r4, fn_802377B8@l
+    addi r4, r4, res_MsgHandle_constructor@l
     addi r5, r5, fn_800EF73C@l
     bl fn_80695720
     mr r30, r3

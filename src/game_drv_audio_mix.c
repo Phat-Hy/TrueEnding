@@ -15,7 +15,7 @@ extern void _savegpr_25(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_80013F78(void);
-extern void fn_8005B9CC(void);
+extern void talk_formatQuotedString(void);
 extern void fn_8005BBF8(void);
 extern void fn_8005BCE8(void);
 extern void fn_800874C8(void);
@@ -1537,14 +1537,14 @@ asm void fn_805B7B28(void)
     addi r31, r1, 0x34
 lbl_fn_805B7B28_0000133C:
     addi r3, r1, 0x118
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     mr r25, r3
     addi r4, r29, 0x29
     bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_805B7B28_000013B4
     addi r3, r1, 0x118
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     lwz r0, 0x158(r27)
     mr r26, r3
     srwi. r0, r0, 31
@@ -1575,7 +1575,7 @@ lbl_fn_805B7B28_000013B4:
     cmpwi r3, 0x0
     bne lbl_fn_805B7B28_00001424
     addi r3, r1, 0x118
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     lwz r0, 0x14c(r27)
     mr r26, r3
     srwi. r0, r0, 31
@@ -1606,15 +1606,15 @@ lbl_fn_805B7B28_00001424:
     cmpwi r3, 0x0
     bne lbl_fn_805B7B28_00001470
     addi r3, r1, 0x118
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl atoi
     stw r3, 0x138(r27)
     addi r3, r1, 0x118
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl atoi
     stw r3, 0x13c(r27)
     addi r3, r1, 0x118
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl fn_80683B54
     frsp f0, f1
     stfs f0, 0x134(r27)
@@ -1626,17 +1626,17 @@ lbl_fn_805B7B28_00001470:
     cmpwi r3, 0x0
     bne lbl_fn_805B7B28_000014C4
     addi r3, r1, 0x118
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl fn_80683B54
     frsp f0, f1
     addi r3, r1, 0x118
     stfs f0, 0x140(r27)
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl fn_80683B54
     frsp f0, f1
     addi r3, r1, 0x118
     stfs f0, 0x144(r27)
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl fn_80683B54
     frsp f0, f1
     stfs f0, 0x148(r27)
@@ -1648,7 +1648,7 @@ lbl_fn_805B7B28_000014C4:
     cmpwi r3, 0x0
     bne lbl_fn_805B7B28_00001658
     addi r3, r1, 0x118
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     stw r28, 0x28(r1)
     mr r25, r3
     li r26, 0x0
@@ -1677,7 +1677,7 @@ lbl_fn_805B7B28_00001514:
     add r0, r5, r0
     stwx r0, r30, r26
     addi r26, r26, 0x4
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     mr r25, r3
     mr r3, r29
     mr r4, r25
@@ -1753,7 +1753,7 @@ lbl_fn_805B7B28_00001658:
     cmpwi r3, 0x0
     bne lbl_fn_805B7B28_000017E8
     addi r3, r1, 0x118
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     stw r28, 0x1c(r1)
     mr r25, r3
     li r26, 0x0
@@ -1782,7 +1782,7 @@ lbl_fn_805B7B28_000016A8:
     add r0, r5, r0
     stwx r0, r31, r26
     addi r26, r26, 0x4
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     mr r25, r3
     mr r3, r29
     mr r4, r25

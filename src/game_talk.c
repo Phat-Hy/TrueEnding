@@ -19,13 +19,13 @@ extern u32 lbl_80880990;
 /* Function declarations */
 void fn_8005B05C(void);
 void fn_8005B064(void);
-void fn_8005B3CC(void);
+void talk_parseQuotedString(void);
 void fn_8005B5F8(void);
 void fn_8005B6E8(void);
 void talk_parseDialogue(void);
 void fn_8005B8F8(void);
 void fn_8005B9AC(void);
-void fn_8005B9CC(void);
+void talk_formatQuotedString(void);
 void fn_8005BBF8(void);
 void fn_8005BCE8(void);
 void fn_8005BD10(void);
@@ -295,7 +295,7 @@ lbl_fn_8005B064_00000350:
     blr
 }
 
-asm void fn_8005B3CC(void)
+asm void talk_parseQuotedString(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -311,27 +311,27 @@ asm void fn_8005B3CC(void)
     li r0, 0x0
     li r3, 0x1
     li r4, 0x0
-    b lbl_fn_8005B3CC_000004AC
-lbl_fn_8005B3CC_000003A8:
+    b lbl_talk_parseQuotedString_000004AC
+lbl_talk_parseQuotedString_000003A8:
     cmpwi r0, 0x0
-    beq lbl_fn_8005B3CC_00000428
+    beq lbl_talk_parseQuotedString_00000428
     lwz r6, 0x4(r31)
     lbzx r8, r6, r5
     add r7, r6, r5
     cmpwi r8, 0x22
-    bne lbl_fn_8005B3CC_000003EC
+    bne lbl_talk_parseQuotedString_000003EC
     lbz r6, 0x1(r7)
     cmpwi r6, 0x22
-    bne lbl_fn_8005B3CC_000003E4
+    bne lbl_talk_parseQuotedString_000003E4
     add r6, r31, r4
     addi r4, r4, 0x1
     stb r8, 0x10(r6)
     addi r5, r5, 0x1
-    b lbl_fn_8005B3CC_000004A8
-lbl_fn_8005B3CC_000003E4:
+    b lbl_talk_parseQuotedString_000004A8
+lbl_talk_parseQuotedString_000003E4:
     li r0, 0x0
-    b lbl_fn_8005B3CC_000004A8
-lbl_fn_8005B3CC_000003EC:
+    b lbl_talk_parseQuotedString_000004A8
+lbl_talk_parseQuotedString_000003EC:
     add r6, r31, r4
     addi r4, r4, 0x1
     stb r8, 0x10(r6)
@@ -340,35 +340,35 @@ lbl_fn_8005B3CC_000003EC:
     addi r6, r6, 0x80
     clrlwi r6, r6, 24
     cmplwi r6, 0x1f
-    bgt lbl_fn_8005B3CC_000004A8
+    bgt lbl_talk_parseQuotedString_000004A8
     addi r5, r5, 0x1
     add r6, r31, r4
     lbzx r7, r7, r5
     addi r4, r4, 0x1
     stb r7, 0x10(r6)
-    b lbl_fn_8005B3CC_000004A8
-lbl_fn_8005B3CC_00000428:
+    b lbl_talk_parseQuotedString_000004A8
+lbl_talk_parseQuotedString_00000428:
     lwz r6, 0x4(r31)
     lbzx r7, r6, r5
     extsb r6, r7
     cmpwi r6, 0x22
-    bne lbl_fn_8005B3CC_00000444
+    bne lbl_talk_parseQuotedString_00000444
     li r0, 0x1
-    b lbl_fn_8005B3CC_000004A8
-lbl_fn_8005B3CC_00000444:
+    b lbl_talk_parseQuotedString_000004A8
+lbl_talk_parseQuotedString_00000444:
     cmpwi r6, 0x2c
-    bne lbl_fn_8005B3CC_0000045C
+    bne lbl_talk_parseQuotedString_0000045C
     addi r0, r5, 0x1
     stw r0, 0xc(r31)
     li r3, 0x0
-    b lbl_fn_8005B3CC_000004B8
-lbl_fn_8005B3CC_0000045C:
+    b lbl_talk_parseQuotedString_000004B8
+lbl_talk_parseQuotedString_0000045C:
     cmpwi r6, 0xd
-    bne lbl_fn_8005B3CC_00000470
+    bne lbl_talk_parseQuotedString_00000470
     stw r5, 0xc(r31)
     li r3, 0x0
-    b lbl_fn_8005B3CC_000004B8
-lbl_fn_8005B3CC_00000470:
+    b lbl_talk_parseQuotedString_000004B8
+lbl_talk_parseQuotedString_00000470:
     add r6, r31, r4
     addi r4, r4, 0x1
     stb r7, 0x10(r6)
@@ -377,81 +377,81 @@ lbl_fn_8005B3CC_00000470:
     addi r6, r6, 0x80
     clrlwi r6, r6, 24
     cmplwi r6, 0x1f
-    bgt lbl_fn_8005B3CC_000004A8
+    bgt lbl_talk_parseQuotedString_000004A8
     addi r5, r5, 0x1
     add r6, r31, r4
     lbzx r7, r7, r5
     addi r4, r4, 0x1
     stb r7, 0x10(r6)
-lbl_fn_8005B3CC_000004A8:
+lbl_talk_parseQuotedString_000004A8:
     addi r5, r5, 0x1
-lbl_fn_8005B3CC_000004AC:
+lbl_talk_parseQuotedString_000004AC:
     lwz r6, 0x8(r31)
     cmplw r5, r6
-    blt lbl_fn_8005B3CC_000003A8
-lbl_fn_8005B3CC_000004B8:
+    blt lbl_talk_parseQuotedString_000003A8
+lbl_talk_parseQuotedString_000004B8:
     cmpwi r3, 0x0
-    beq lbl_fn_8005B3CC_000004D8
+    beq lbl_talk_parseQuotedString_000004D8
     lwz r0, 0xc(r31)
     lwz r3, 0x8(r31)
     add r0, r4, r0
     cmplw r0, r3
-    blt lbl_fn_8005B3CC_000004D8
+    blt lbl_talk_parseQuotedString_000004D8
     stw r3, 0xc(r31)
-lbl_fn_8005B3CC_000004D8:
+lbl_talk_parseQuotedString_000004D8:
     lwz r0, 0x630(r31)
     cmpwi r0, 0x0
-    beq lbl_fn_8005B3CC_00000584
+    beq lbl_talk_parseQuotedString_00000584
     li r7, 0x0
     li r6, 0x0
-    b lbl_fn_8005B3CC_00000538
-lbl_fn_8005B3CC_000004F0:
+    b lbl_talk_parseQuotedString_00000538
+lbl_talk_parseQuotedString_000004F0:
     extsb r4, r3
     li r5, 0x0
-    b lbl_fn_8005B3CC_00000514
-lbl_fn_8005B3CC_000004FC:
+    b lbl_talk_parseQuotedString_00000514
+lbl_talk_parseQuotedString_000004FC:
     extsb r0, r3
     cmpw r4, r0
-    bne lbl_fn_8005B3CC_00000510
+    bne lbl_talk_parseQuotedString_00000510
     li r0, 0x1
-    b lbl_fn_8005B3CC_00000528
-lbl_fn_8005B3CC_00000510:
+    b lbl_talk_parseQuotedString_00000528
+lbl_talk_parseQuotedString_00000510:
     addi r5, r5, 0x1
-lbl_fn_8005B3CC_00000514:
+lbl_talk_parseQuotedString_00000514:
     add r3, r31, r5
     lbz r3, 0x610(r3)
     extsb. r0, r3
-    bne lbl_fn_8005B3CC_000004FC
+    bne lbl_talk_parseQuotedString_000004FC
     li r0, 0x0
-lbl_fn_8005B3CC_00000528:
+lbl_talk_parseQuotedString_00000528:
     cmpwi r0, 0x0
-    beq lbl_fn_8005B3CC_00000548
+    beq lbl_talk_parseQuotedString_00000548
     addi r7, r7, 0x1
     addi r6, r6, 0x1
-lbl_fn_8005B3CC_00000538:
+lbl_talk_parseQuotedString_00000538:
     add r3, r31, r6
     lbz r3, 0x10(r3)
     extsb. r0, r3
-    bne lbl_fn_8005B3CC_000004F0
-lbl_fn_8005B3CC_00000548:
+    bne lbl_talk_parseQuotedString_000004F0
+lbl_talk_parseQuotedString_00000548:
     cmpwi r7, 0x0
-    ble lbl_fn_8005B3CC_00000584
+    ble lbl_talk_parseQuotedString_00000584
     add r5, r31, r7
     li r4, 0x0
-    b lbl_fn_8005B3CC_0000056C
-lbl_fn_8005B3CC_0000055C:
+    b lbl_talk_parseQuotedString_0000056C
+lbl_talk_parseQuotedString_0000055C:
     add r3, r31, r4
     addi r4, r4, 0x1
     stb r6, 0x10(r3)
     addi r5, r5, 0x1
-lbl_fn_8005B3CC_0000056C:
+lbl_talk_parseQuotedString_0000056C:
     lbz r6, 0x10(r5)
     extsb. r0, r6
-    bne lbl_fn_8005B3CC_0000055C
+    bne lbl_talk_parseQuotedString_0000055C
     add r3, r31, r4
     li r0, 0x0
     stb r0, 0x10(r3)
-lbl_fn_8005B3CC_00000584:
+lbl_talk_parseQuotedString_00000584:
     addi r3, r31, 0x10
     lwz r31, 0xc(r1)
     lwz r0, 0x14(r1)
@@ -766,7 +766,7 @@ asm void fn_8005B9AC(void)
     blr
 }
 
-asm void fn_8005B9CC(void)
+asm void talk_formatQuotedString(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -782,27 +782,27 @@ asm void fn_8005B9CC(void)
     li r0, 0x0
     li r3, 0x1
     li r4, 0x0
-    b lbl_fn_8005B9CC_00000AAC
-lbl_fn_8005B9CC_000009A8:
+    b lbl_talk_formatQuotedString_00000AAC
+lbl_talk_formatQuotedString_000009A8:
     cmpwi r0, 0x0
-    beq lbl_fn_8005B9CC_00000A28
+    beq lbl_talk_formatQuotedString_00000A28
     lwz r6, 0x4(r31)
     lbzx r8, r6, r5
     add r7, r6, r5
     cmpwi r8, 0x22
-    bne lbl_fn_8005B9CC_000009EC
+    bne lbl_talk_formatQuotedString_000009EC
     lbz r6, 0x1(r7)
     cmpwi r6, 0x22
-    bne lbl_fn_8005B9CC_000009E4
+    bne lbl_talk_formatQuotedString_000009E4
     add r6, r31, r4
     addi r4, r4, 0x1
     stb r8, 0x10(r6)
     addi r5, r5, 0x1
-    b lbl_fn_8005B9CC_00000AA8
-lbl_fn_8005B9CC_000009E4:
+    b lbl_talk_formatQuotedString_00000AA8
+lbl_talk_formatQuotedString_000009E4:
     li r0, 0x0
-    b lbl_fn_8005B9CC_00000AA8
-lbl_fn_8005B9CC_000009EC:
+    b lbl_talk_formatQuotedString_00000AA8
+lbl_talk_formatQuotedString_000009EC:
     add r6, r31, r4
     addi r4, r4, 0x1
     stb r8, 0x10(r6)
@@ -811,35 +811,35 @@ lbl_fn_8005B9CC_000009EC:
     addi r6, r6, 0x80
     clrlwi r6, r6, 24
     cmplwi r6, 0x1f
-    bgt lbl_fn_8005B9CC_00000AA8
+    bgt lbl_talk_formatQuotedString_00000AA8
     addi r5, r5, 0x1
     add r6, r31, r4
     lbzx r7, r7, r5
     addi r4, r4, 0x1
     stb r7, 0x10(r6)
-    b lbl_fn_8005B9CC_00000AA8
-lbl_fn_8005B9CC_00000A28:
+    b lbl_talk_formatQuotedString_00000AA8
+lbl_talk_formatQuotedString_00000A28:
     lwz r6, 0x4(r31)
     lbzx r7, r6, r5
     extsb r6, r7
     cmpwi r6, 0x22
-    bne lbl_fn_8005B9CC_00000A44
+    bne lbl_talk_formatQuotedString_00000A44
     li r0, 0x1
-    b lbl_fn_8005B9CC_00000AA8
-lbl_fn_8005B9CC_00000A44:
+    b lbl_talk_formatQuotedString_00000AA8
+lbl_talk_formatQuotedString_00000A44:
     cmpwi r6, 0x9
-    bne lbl_fn_8005B9CC_00000A5C
+    bne lbl_talk_formatQuotedString_00000A5C
     addi r0, r5, 0x1
     stw r0, 0xc(r31)
     li r3, 0x0
-    b lbl_fn_8005B9CC_00000AB8
-lbl_fn_8005B9CC_00000A5C:
+    b lbl_talk_formatQuotedString_00000AB8
+lbl_talk_formatQuotedString_00000A5C:
     cmpwi r6, 0xd
-    bne lbl_fn_8005B9CC_00000A70
+    bne lbl_talk_formatQuotedString_00000A70
     stw r5, 0xc(r31)
     li r3, 0x0
-    b lbl_fn_8005B9CC_00000AB8
-lbl_fn_8005B9CC_00000A70:
+    b lbl_talk_formatQuotedString_00000AB8
+lbl_talk_formatQuotedString_00000A70:
     add r6, r31, r4
     addi r4, r4, 0x1
     stb r7, 0x10(r6)
@@ -848,81 +848,81 @@ lbl_fn_8005B9CC_00000A70:
     addi r6, r6, 0x80
     clrlwi r6, r6, 24
     cmplwi r6, 0x1f
-    bgt lbl_fn_8005B9CC_00000AA8
+    bgt lbl_talk_formatQuotedString_00000AA8
     addi r5, r5, 0x1
     add r6, r31, r4
     lbzx r7, r7, r5
     addi r4, r4, 0x1
     stb r7, 0x10(r6)
-lbl_fn_8005B9CC_00000AA8:
+lbl_talk_formatQuotedString_00000AA8:
     addi r5, r5, 0x1
-lbl_fn_8005B9CC_00000AAC:
+lbl_talk_formatQuotedString_00000AAC:
     lwz r6, 0x8(r31)
     cmplw r5, r6
-    blt lbl_fn_8005B9CC_000009A8
-lbl_fn_8005B9CC_00000AB8:
+    blt lbl_talk_formatQuotedString_000009A8
+lbl_talk_formatQuotedString_00000AB8:
     cmpwi r3, 0x0
-    beq lbl_fn_8005B9CC_00000AD8
+    beq lbl_talk_formatQuotedString_00000AD8
     lwz r0, 0xc(r31)
     lwz r3, 0x8(r31)
     add r0, r4, r0
     cmplw r0, r3
-    blt lbl_fn_8005B9CC_00000AD8
+    blt lbl_talk_formatQuotedString_00000AD8
     stw r3, 0xc(r31)
-lbl_fn_8005B9CC_00000AD8:
+lbl_talk_formatQuotedString_00000AD8:
     lwz r0, 0x630(r31)
     cmpwi r0, 0x0
-    beq lbl_fn_8005B9CC_00000B84
+    beq lbl_talk_formatQuotedString_00000B84
     li r7, 0x0
     li r6, 0x0
-    b lbl_fn_8005B9CC_00000B38
-lbl_fn_8005B9CC_00000AF0:
+    b lbl_talk_formatQuotedString_00000B38
+lbl_talk_formatQuotedString_00000AF0:
     extsb r4, r3
     li r5, 0x0
-    b lbl_fn_8005B9CC_00000B14
-lbl_fn_8005B9CC_00000AFC:
+    b lbl_talk_formatQuotedString_00000B14
+lbl_talk_formatQuotedString_00000AFC:
     extsb r0, r3
     cmpw r4, r0
-    bne lbl_fn_8005B9CC_00000B10
+    bne lbl_talk_formatQuotedString_00000B10
     li r0, 0x1
-    b lbl_fn_8005B9CC_00000B28
-lbl_fn_8005B9CC_00000B10:
+    b lbl_talk_formatQuotedString_00000B28
+lbl_talk_formatQuotedString_00000B10:
     addi r5, r5, 0x1
-lbl_fn_8005B9CC_00000B14:
+lbl_talk_formatQuotedString_00000B14:
     add r3, r31, r5
     lbz r3, 0x610(r3)
     extsb. r0, r3
-    bne lbl_fn_8005B9CC_00000AFC
+    bne lbl_talk_formatQuotedString_00000AFC
     li r0, 0x0
-lbl_fn_8005B9CC_00000B28:
+lbl_talk_formatQuotedString_00000B28:
     cmpwi r0, 0x0
-    beq lbl_fn_8005B9CC_00000B48
+    beq lbl_talk_formatQuotedString_00000B48
     addi r7, r7, 0x1
     addi r6, r6, 0x1
-lbl_fn_8005B9CC_00000B38:
+lbl_talk_formatQuotedString_00000B38:
     add r3, r31, r6
     lbz r3, 0x10(r3)
     extsb. r0, r3
-    bne lbl_fn_8005B9CC_00000AF0
-lbl_fn_8005B9CC_00000B48:
+    bne lbl_talk_formatQuotedString_00000AF0
+lbl_talk_formatQuotedString_00000B48:
     cmpwi r7, 0x0
-    ble lbl_fn_8005B9CC_00000B84
+    ble lbl_talk_formatQuotedString_00000B84
     add r5, r31, r7
     li r4, 0x0
-    b lbl_fn_8005B9CC_00000B6C
-lbl_fn_8005B9CC_00000B5C:
+    b lbl_talk_formatQuotedString_00000B6C
+lbl_talk_formatQuotedString_00000B5C:
     add r3, r31, r4
     addi r4, r4, 0x1
     stb r6, 0x10(r3)
     addi r5, r5, 0x1
-lbl_fn_8005B9CC_00000B6C:
+lbl_talk_formatQuotedString_00000B6C:
     lbz r6, 0x10(r5)
     extsb. r0, r6
-    bne lbl_fn_8005B9CC_00000B5C
+    bne lbl_talk_formatQuotedString_00000B5C
     add r3, r31, r4
     li r0, 0x0
     stb r0, 0x10(r3)
-lbl_fn_8005B9CC_00000B84:
+lbl_talk_formatQuotedString_00000B84:
     addi r3, r31, 0x10
     lwz r31, 0xc(r1)
     lwz r0, 0x14(r1)

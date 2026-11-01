@@ -61,7 +61,7 @@ extern void fn_801E9ECC(void);
 extern void fn_80210220(void);
 extern void fn_80219344(void);
 extern void fn_80219558(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void fn_8036DAA8(void);
 extern void world_getGlobalFlag(void);
 extern void world_setGlobalFlag(void);
@@ -978,7 +978,7 @@ lbl_fn_800E7BB0_00000BAC:
     beq lbl_fn_800E7BB0_00000CB4
 lbl_fn_800E7BB0_00000BFC:
     mr r3, r31
-    bl fn_80219E6C
+    bl task_findEntryById
     lwz r0, lbl_8087EE68
     mr r5, r3
     cmpwi r0, 0x0
@@ -1011,7 +1011,7 @@ lbl_fn_800E7BB0_00000C48:
     beq lbl_fn_800E7BB0_00000CB4
 lbl_fn_800E7BB0_00000C6C:
     mr r3, r31
-    bl fn_80219E6C
+    bl task_findEntryById
     lwz r0, lbl_8087EE68
     mr r5, r3
     cmpwi r0, 0x0
@@ -1088,7 +1088,7 @@ lbl_fn_800E7BB0_00000D6C:
     cmpwi r0, 0x0
     beq lbl_fn_800E7BB0_00000E40
     mr r3, r31
-    bl fn_80219E6C
+    bl task_findEntryById
     mr r4, r3
     mr r3, r30
     li r5, 0x0
@@ -1110,7 +1110,7 @@ lbl_fn_800E7BB0_00000DB8:
     cmplwi r0, 0x4
     beq lbl_fn_800E7BB0_00000E40
     mr r3, r31
-    bl fn_80219E6C
+    bl task_findEntryById
     lwz r0, 0x48(r30)
     addi r4, r30, 0xf6c
     lwz r5, 0x638(r30)
@@ -1228,7 +1228,7 @@ asm void fn_800E7F04(void)
     bne lbl_fn_800E7F04_00000F80
     li r3, 0x201
 lbl_fn_800E7F04_00000F80:
-    bl fn_80219E6C
+    bl task_findEntryById
     mr r20, r3
     b lbl_fn_800E7F04_00000FC8
 lbl_fn_800E7F04_00000F8C:
@@ -1239,7 +1239,7 @@ lbl_fn_800E7F04_00000F8C:
     bne lbl_fn_800E7F04_00000FA4
     li r3, 0x202
 lbl_fn_800E7F04_00000FA4:
-    bl fn_80219E6C
+    bl task_findEntryById
     mr r20, r3
     b lbl_fn_800E7F04_00000FC8
 lbl_fn_800E7F04_00000FB0:
@@ -1248,7 +1248,7 @@ lbl_fn_800E7F04_00000FB0:
     bne lbl_fn_800E7F04_00000FC0
     li r3, 0x203
 lbl_fn_800E7F04_00000FC0:
-    bl fn_80219E6C
+    bl task_findEntryById
     mr r20, r3
 lbl_fn_800E7F04_00000FC8:
     cmpwi r20, 0x0
@@ -1295,7 +1295,7 @@ lbl_fn_800E7F04_00000FC8:
     lwz r3, 0x6c(r20)
     cmpwi r3, 0x0
     ble lbl_fn_800E7F04_00001080
-    bl fn_80219E6C
+    bl task_findEntryById
     b lbl_fn_800E7F04_00001084
 lbl_fn_800E7F04_00001080:
     li r3, 0x0
@@ -1787,7 +1787,7 @@ asm void fn_800E8688(void)
     mr r24, r3
     beq lbl_fn_800E8688_000017A0
     li r3, 0xe2
-    bl fn_80219E6C
+    bl task_findEntryById
     mr r8, r3
     mr r3, r24
     mr r4, r23
@@ -1843,7 +1843,7 @@ lbl_fn_800E8688_000017C4:
     mr r24, r3
     beq lbl_fn_800E8688_00001878
     li r3, 0xe2
-    bl fn_80219E6C
+    bl task_findEntryById
     mr r8, r3
     mr r3, r24
     mr r4, r23
@@ -2148,7 +2148,7 @@ lbl_fn_800E8688_00001CB0:
     li r24, 0xc9
 lbl_fn_800E8688_00001CC0:
     mr r3, r24
-    bl fn_80219E6C
+    bl task_findEntryById
     cmpwi r24, 0xc8
     mr r29, r3
     bne lbl_fn_800E8688_00001CEC
@@ -2296,7 +2296,7 @@ lbl_fn_800E8688_00001EB0:
     b lbl_fn_800E8688_00001ED8
 lbl_fn_800E8688_00001ECC:
     li r3, 0xc8
-    bl fn_80219E6C
+    bl task_findEntryById
     lwz r0, 0x68(r3)
 lbl_fn_800E8688_00001ED8:
     stw r0, 0x1424(r23)

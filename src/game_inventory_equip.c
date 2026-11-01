@@ -30,7 +30,7 @@ extern void fn_801B1F4C(void);
 extern void fn_801C041C(void);
 extern void fn_80204E04(void);
 extern void fn_80208748(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void fn_8021A8D0(void);
 extern void fn_8023A02C(void);
 extern void fn_8023A098(void);
@@ -219,7 +219,7 @@ lbl_fn_8015487C_000001E4:
     lwz r3, 0xaa4(r3)
     cmpwi r3, 0x0
     ble lbl_fn_8015487C_00000218
-    bl fn_80219E6C
+    bl task_findEntryById
     bl fn_8021A8D0
     cmpwi r3, 0x0
     beq lbl_fn_8015487C_00000218
@@ -232,7 +232,7 @@ lbl_fn_8015487C_00000218:
     lwz r3, 0xaac(r30)
     cmpwi r3, 0x0
     ble lbl_fn_8015487C_0000024C
-    bl fn_80219E6C
+    bl task_findEntryById
     bl fn_8021A8D0
     cmpwi r3, 0x0
     beq lbl_fn_8015487C_0000024C

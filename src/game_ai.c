@@ -14,7 +14,7 @@ extern void fn_80050A1C(void);
 extern void fn_80050E18(void);
 extern void fn_80051684(void);
 extern void fn_80052760(void);
-extern void fn_805F8CA0(void);
+extern void PSMTXInverse(void);
 extern void PSMTXMultVec(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
@@ -1105,7 +1105,7 @@ lbl_fn_8005454C_00000F68:
     psq_st f3, 0x10(r29), 0, 0
     psq_st f4, 0x18(r29), 0, 0
     psq_st f5, 0x20(r29), 0, 0
-    bl fn_805F8CA0
+    bl PSMTXInverse
     addi r28, r1, 0x140
     psq_l f1, 0x0(r26), 0, 0
     lfs f2, 0x8(r26)

@@ -26,7 +26,7 @@ extern void world_getGlobalFlag(void);
 extern void fn_80481654(void);
 extern void fn_804918A4(void);
 extern void fn_80565F38(void);
-extern void fn_805F89F0(void);
+extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSVECSquareMag(void);
 extern void fn_805F99F0(void);
@@ -104,7 +104,7 @@ asm void fn_801495E8(void)
     mr r3, r4
     mr r4, r31
     mr r5, r31
-    bl fn_805F89F0
+    bl PSMTXConcat
     mr r3, r31
     lwz r31, 0xc(r1)
     lwz r0, 0x14(r1)
@@ -127,7 +127,7 @@ asm void fn_80149624(void)
     mr r3, r31
     addi r4, r1, 0x8
     addi r5, r1, 0x38
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x38
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -193,7 +193,7 @@ asm void fn_801496A8(void)
     mr r3, r31
     addi r4, r1, 0xd8
     addi r5, r1, 0x108
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x108
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -218,7 +218,7 @@ lbl_fn_801496A8_00000180:
     mr r3, r31
     addi r4, r1, 0x78
     addi r5, r1, 0xa8
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0xa8
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -243,7 +243,7 @@ lbl_fn_801496A8_000001E0:
     mr r3, r31
     addi r4, r1, 0x18
     addi r5, r1, 0x48
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x48
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -261,7 +261,7 @@ lbl_fn_801496A8_00000240:
     mr r3, r30
     mr r4, r31
     addi r5, r1, 0x168
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x168
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0

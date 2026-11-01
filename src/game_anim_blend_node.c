@@ -29,7 +29,7 @@ extern void fn_8016DDB0(void);
 extern void actor_setState(void);
 extern void fn_80178A6C(void);
 extern void fn_80219558(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
@@ -39,7 +39,7 @@ extern void world_setLocalFlag(void);
 extern void fn_803E3384(void);
 extern void fn_804438E0(void);
 extern void fn_8044D104(void);
-extern void fn_805F89F0(void);
+extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXTrans(void);
 extern void PSMTXMultVec(void);
@@ -1657,7 +1657,7 @@ lbl_fn_8026DB8C_00001640:
     bl system_getNextSequenceId
     mr r27, r3
     li r3, 0x61a
-    bl fn_80219E6C
+    bl task_findEntryById
     mr r30, r3
     mr r3, r28
     li r4, 0x3e8
@@ -2004,7 +2004,7 @@ lbl_fn_8026DB8C_00001B04:
     mr r3, r30
     addi r4, r1, 0x510
     addi r5, r1, 0x540
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x540
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -2029,7 +2029,7 @@ lbl_fn_8026DB8C_00001BB4:
     mr r3, r30
     addi r4, r1, 0x4b0
     addi r5, r1, 0x4e0
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x4e0
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -2054,7 +2054,7 @@ lbl_fn_8026DB8C_00001C14:
     mr r3, r30
     addi r4, r1, 0x450
     addi r5, r1, 0x480
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x480
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -2072,7 +2072,7 @@ lbl_fn_8026DB8C_00001C74:
     mr r3, r29
     mr r4, r30
     addi r5, r1, 0x3f0
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r4, r1, 0x3f0
     addi r3, r1, 0xc4
     psq_l f1, 0x0(r4), 0, 0
@@ -2176,7 +2176,7 @@ lbl_fn_8026DB8C_00001D88:
     li r3, 0x61b
     stfs f2, 0x280(r1)
     lwz r31, 0xc(r4)
-    bl fn_80219E6C
+    bl task_findEntryById
     addi r4, r1, 0x2b4
     lfs f2, 0x2bc(r1)
     addi r27, r1, 0x26c
@@ -2760,7 +2760,7 @@ lbl_fn_8026DB8C_00002688:
     addi r3, r1, 0x5e0
     addi r4, r1, 0x320
     addi r5, r1, 0x2f0
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r4, r1, 0x2f0
     addi r5, r1, 0x5e0
     psq_l f1, 0x0(r4), 0, 0

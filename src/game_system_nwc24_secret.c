@@ -15,7 +15,7 @@ extern void fn_803918EC(void);
 extern void fn_803920C8(void);
 extern void fn_803928C0(void);
 extern void fn_80392A04(void);
-extern void fn_805F89F0(void);
+extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSVECNormalize(void);
@@ -1356,7 +1356,7 @@ lbl_fn_8038C070_00001230:
     mr r3, r28
     addi r4, r1, 0x138
     addi r5, r1, 0x168
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x168
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1381,7 +1381,7 @@ lbl_fn_8038C070_000012F0:
     mr r3, r28
     addi r4, r1, 0xd8
     addi r5, r1, 0x108
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x108
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1406,7 +1406,7 @@ lbl_fn_8038C070_00001350:
     mr r3, r28
     addi r4, r1, 0x78
     addi r5, r1, 0xa8
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0xa8
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0

@@ -31,17 +31,17 @@ extern void fn_802375C4(void);
 extern void fn_80237654(void);
 extern void fn_802376D0(void);
 extern void fn_8023772C(void);
-extern void fn_802377B8(void);
-extern void fn_8023780C(void);
-extern void fn_8023781C(void);
-extern void fn_80237874(void);
+extern void res_MsgHandle_constructor(void);
+extern void res_MsgHandle_destructor(void);
+extern void res_MsgHandle_unload(void);
+extern void res_MsgHandle_update(void);
 extern void fn_80470580(void);
 extern void fn_8047059C(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_80473F88(void);
-extern void fn_805F89F0(void);
+extern void PSMTXConcat(void);
 extern void PSMTXTrans(void);
 extern void PSMTXScale(void);
 extern void PSMTXMultVec(void);
@@ -469,7 +469,7 @@ lbl_fn_80202E48_00000460:
     mr r3, r30
     addi r4, r1, 0x60
     addi r5, r1, 0x30
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r4, r1, 0x30
     lwz r3, 0x48(r31)
     psq_l f1, 0x0(r4), 0, 0
@@ -658,7 +658,7 @@ lbl_fn_8020303C_0000076C:
     mr r3, r31
     addi r4, r1, 0x80
     addi r5, r1, 0x50
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x50
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -718,7 +718,7 @@ asm void fn_80203260(void)
     mr r3, r31
     addi r4, r1, 0x38
     addi r5, r1, 0x8
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x8
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -862,7 +862,7 @@ asm void fn_80203328(void)
     mr r3, r29
     addi r4, r1, 0x110
     addi r5, r1, 0x140
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x140
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -904,7 +904,7 @@ lbl_fn_80203328_00000B30:
     addi r4, r1, 0x260
     addi r3, r30, 0x8c
     mr r5, r4
-    bl fn_805F89F0
+    bl PSMTXConcat
     lwz r0, 0x104(r30)
     extlwi r0, r0, 2, 9
     srawi. r0, r0, 31
@@ -948,7 +948,7 @@ lbl_fn_80203328_00000B30:
     mr r3, r29
     addi r4, r1, 0xb0
     addi r5, r1, 0xe0
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0xe0
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -990,7 +990,7 @@ lbl_fn_80203328_00000C80:
     addi r4, r1, 0x260
     addi r3, r30, 0x8c
     mr r5, r4
-    bl fn_805F89F0
+    bl PSMTXConcat
     lfs f2, lbl_80882CF8
     addi r29, r1, 0xa4
     stfs f2, 0x98(r1)
@@ -1514,11 +1514,11 @@ lbl_fn_80203D7C_00001348:
     bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_80203D7C_00001398
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
 lbl_fn_80203D7C_00001398:
     stw r3, 0x18(r28)
     mr r4, r29
-    bl fn_8023780C
+    bl res_MsgHandle_destructor
     li r0, 0x1
     stw r0, 0x1c(r28)
     b lbl_fn_80203D7C_000013EC
@@ -1566,12 +1566,12 @@ asm void fn_80203E78(void)
     cmpwi r3, 0x1
     bne lbl_fn_80203E78_00001474
     mr r3, r0
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     lwz r31, 0x18(r30)
     cmpwi r31, 0x0
     beq lbl_fn_80203E78_00001490
     mr r3, r31
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r31, 0x4
     beq lbl_fn_80203E78_00001468
     li r4, 0x0
@@ -1612,7 +1612,7 @@ asm void fn_80203F1C(void)
     cmpwi r0, 0x1
     bne lbl_fn_80203F1C_000014E8
     lwz r3, 0x18(r3)
-    bl fn_80237874
+    bl res_MsgHandle_update
     cmpwi r3, 0x0
     beq lbl_fn_80203F1C_000014E8
     li r3, 0x0

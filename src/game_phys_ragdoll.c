@@ -18,7 +18,7 @@ extern void fn_8010D7B4(void);
 extern void fn_8010F4BC(void);
 extern void boss_updatePhaseState(void);
 extern void fn_8015076C(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void fn_8021A960(void);
 extern void fn_8023A02C(void);
 extern void fn_8023A098(void);
@@ -27,7 +27,7 @@ extern void fn_80373164(void);
 extern void fn_80375184(void);
 extern void fn_803EAA7C(void);
 extern void fn_8059B670(void);
-extern void fn_805F8CA0(void);
+extern void PSMTXInverse(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
@@ -970,7 +970,7 @@ lbl_fn_80110858_00000CCC:
     lwz r3, 0x70(r3)
     cmpwi r3, 0x0
     ble lbl_fn_80110858_00001340
-    bl fn_80219E6C
+    bl task_findEntryById
     mr r26, r3
     lwz r3, lbl_8087F048
     bl system_getNextSequenceId
@@ -1336,7 +1336,7 @@ lbl_fn_80110858_00001260:
 lbl_fn_80110858_00001290:
     lwz r3, 0x68(r28)
     lwz r3, 0x6c(r3)
-    bl fn_80219E6C
+    bl task_findEntryById
     cmpwi r3, 0x0
     mr r26, r3
     beq lbl_fn_80110858_0000132C
@@ -1570,7 +1570,7 @@ lbl_fn_80110858_000015C0:
     psq_st f3, 0x10(r27), 0, 0
     psq_st f4, 0x18(r27), 0, 0
     psq_st f5, 0x20(r27), 0, 0
-    bl fn_805F8CA0
+    bl PSMTXInverse
     addi r4, r28, 0x8
     mr r3, r27
     mr r5, r4

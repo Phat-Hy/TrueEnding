@@ -28,8 +28,8 @@ extern void fn_800C08B0(void);
 extern void fn_800C2448(void);
 extern void msg_drawText(void);
 extern void fn_80238560(void);
-extern void fn_805F8C50(void);
-extern void fn_805F8CA0(void);
+extern void PSMTXTranspose(void);
+extern void PSMTXInverse(void);
 extern void PSVECMag(void);
 extern void fn_80612E80(void);
 extern void fn_806134E0(void);
@@ -881,7 +881,7 @@ lbl_font_renderString_00000730:
     psq_st f4, 0x18(r24), 0, 0
     psq_st f5, 0x20(r24), 0, 0
     psq_st f6, 0x28(r24), 0, 0
-    bl fn_805F8CA0
+    bl PSMTXInverse
     addi r23, r1, 0xe8
     psq_l f1, 0x0(r24), 0, 0
     psq_l f2, 0x8(r24), 0, 0
@@ -897,7 +897,7 @@ lbl_font_renderString_00000730:
     psq_st f4, 0x18(r23), 0, 0
     psq_st f5, 0x20(r23), 0, 0
     psq_st f6, 0x28(r23), 0, 0
-    bl fn_805F8C50
+    bl PSMTXTranspose
     mr r3, r23
     li r4, 0x0
     bl GXLoadNrmMtxImm3x3
@@ -1214,7 +1214,7 @@ lbl_font_renderString_00000F28:
     psq_st f3, 0x10(r28), 0, 0
     psq_st f4, 0x18(r28), 0, 0
     psq_st f5, 0x20(r28), 0, 0
-    bl fn_805F8CA0
+    bl PSMTXInverse
     psq_l f1, 0x0(r28), 0, 0
     mr r3, r29
     psq_l f2, 0x8(r28), 0, 0
@@ -1229,7 +1229,7 @@ lbl_font_renderString_00000F28:
     psq_st f4, 0x18(r29), 0, 0
     psq_st f5, 0x20(r29), 0, 0
     psq_st f6, 0x28(r29), 0, 0
-    bl fn_805F8C50
+    bl PSMTXTranspose
     mr r3, r29
     li r4, 0x0
     bl GXLoadNrmMtxImm3x3

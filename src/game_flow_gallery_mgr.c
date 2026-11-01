@@ -9,7 +9,7 @@ extern void fn_800E2A24(void);
 extern void fn_8012111C(void);
 extern void fn_8014F698(void);
 extern void fn_8014F960(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void fn_804AE3BC(void);
 extern void fn_804CF198(void);
 extern void fn_804CF640(void);
@@ -1746,7 +1746,7 @@ lbl_fn_804F2998_000016D4:
     stw r4, 0x84(r1)
     bl fn_800E2A24
     lwz r3, 0x0(r30)
-    bl fn_80219E6C
+    bl task_findEntryById
     stw r3, 0x10(r1)
     mr r3, r29
     addi r4, r1, 0x8

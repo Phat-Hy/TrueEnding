@@ -13,7 +13,7 @@ extern void fn_800C344C(void);
 extern void ref_releaseHandle(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800FAB80(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void res_registerResource(void);
 extern void fn_803E3384(void);
 extern void fn_803EA77C(void);
@@ -453,7 +453,7 @@ lbl_fn_801937CC_00000510:
     bl system_getNextSequenceId
     mr r29, r3
     li r3, 0xcc
-    bl fn_80219E6C
+    bl task_findEntryById
     li r0, -0x1
     stw r0, 0x8(r1)
     mr r5, r3
@@ -1119,7 +1119,7 @@ lbl_fn_80194334_00000EFC:
     lwz r30, 0x4(r28)
     li r3, 0xd1
     lwz r31, lbl_8087F048
-    bl fn_80219E6C
+    bl task_findEntryById
     li r0, -0x1
     stw r0, 0x8(r1)
     mr r5, r3
@@ -1656,7 +1656,7 @@ lbl_fn_80194790_0000171C:
     lwz r28, lbl_8087F048
     stfs f3, 0xa4(r1)
     stfs f0, 0xa8(r1)
-    bl fn_80219E6C
+    bl task_findEntryById
     li r0, -0x1
     stw r0, 0x8(r1)
     mr r5, r3

@@ -49,7 +49,7 @@ extern void fn_801FED24(void);
 extern void fn_801FEE08(void);
 extern void fn_80219344(void);
 extern void fn_80219558(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void fn_802A36B0(void);
 extern void fn_802A4094(void);
 extern void fn_80372574(void);
@@ -1456,7 +1456,7 @@ lbl_fn_805ABE78_0000125C:
     xori r0, r0, 0x1
     stb r0, 0xa5(r28)
     lwz r3, 0xaa4(r30)
-    bl fn_80219E6C
+    bl task_findEntryById
     cmpwi r3, 0x0
     beq lbl_fn_805ABE78_000012A8
     lfs f1, 0x78(r3)
@@ -1638,7 +1638,7 @@ lbl_fn_805ABE78_000014B8:
     lwz r3, 0xaa4(r3)
     cmpwi r3, 0x0
     ble lbl_fn_805ABE78_00001504
-    bl fn_80219E6C
+    bl task_findEntryById
     b lbl_fn_805ABE78_00001508
 lbl_fn_805ABE78_00001504:
     li r3, 0x0
@@ -1657,13 +1657,13 @@ lbl_fn_805ABE78_00001520:
     slwi r0, r0, 3
     add r3, r30, r0
     lwz r3, 0xaa4(r3)
-    bl fn_80219E6C
+    bl task_findEntryById
     stw r3, 0xa8(r24)
     b lbl_fn_805ABE78_00001568
 lbl_fn_805ABE78_00001544:
     add r3, r30, r27
     lwz r3, 0xaa4(r3)
-    bl fn_80219E6C
+    bl task_findEntryById
     stw r3, 0xa8(r24)
     b lbl_fn_805ABE78_00001568
 lbl_fn_805ABE78_00001558:

@@ -45,7 +45,7 @@ extern void fn_801F3FF8(void);
 extern void fn_801F64D0(void);
 extern void fn_801FECE0(void);
 extern void fn_802375C4(void);
-extern void fn_8023781C(void);
+extern void res_MsgHandle_unload(void);
 extern void res_findResourceSlot(void);
 extern void fn_8032AB90(void);
 extern void fn_8032ABA4(void);
@@ -1173,7 +1173,7 @@ lbl_fn_80468D48_00000E44:
     addic. r29, r30, 0x1830
     beq lbl_fn_80468D48_00000E7C
     mr r3, r29
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r29, 0x4
     beq lbl_fn_80468D48_00000E7C
     li r4, 0x0
@@ -1190,7 +1190,7 @@ lbl_fn_80468D48_00000E98:
     addic. r29, r30, 0x179c
     beq lbl_fn_80468D48_00000EB8
     mr r3, r29
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r29, 0x4
     beq lbl_fn_80468D48_00000EB8
     li r4, 0x0
@@ -1199,7 +1199,7 @@ lbl_fn_80468D48_00000EB8:
     addic. r29, r30, 0x1790
     beq lbl_fn_80468D48_00000ED8
     mr r3, r29
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r29, 0x4
     beq lbl_fn_80468D48_00000ED8
     li r4, 0x0

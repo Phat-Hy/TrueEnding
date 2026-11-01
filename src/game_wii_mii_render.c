@@ -20,7 +20,7 @@ extern void fn_8016F5EC(void);
 extern void fn_8031F2A4(void);
 extern void fn_8056B2C4(void);
 extern void fn_8056B2E4(void);
-extern void fn_805F89F0(void);
+extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
@@ -1541,7 +1541,7 @@ lbl_fn_8056A850_000014F0:
     mr r4, r29
     mr r5, r29
     addi r3, r1, 0x50
-    bl fn_805F89F0
+    bl PSMTXConcat
     lfs f2, 0x14(r1)
     lfs f1, 0x18(r1)
     lfs f0, 0x1c(r1)
@@ -1585,7 +1585,7 @@ lbl_fn_8056A850_00001598:
     mr r4, r29
     mr r5, r29
     addi r3, r1, 0x20
-    bl fn_805F89F0
+    bl PSMTXConcat
     lfs f2, 0x8(r1)
     lfs f1, 0xc(r1)
     lfs f0, 0x10(r1)

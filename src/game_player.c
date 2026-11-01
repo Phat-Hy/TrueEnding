@@ -10,7 +10,7 @@ extern void _savegpr_17(void);
 extern void _savegpr_24(void);
 extern void _savegpr_25(void);
 extern void _savegpr_26(void);
-extern void fn_805F8CA0(void);
+extern void PSMTXInverse(void);
 extern void PSMTXMultVec(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
@@ -2146,7 +2146,7 @@ asm void fn_80051CD8(void)
     psq_st f4, 0x18(r31), 0, 0
     psq_st f5, 0x20(r31), 0, 0
     psq_st f6, 0x28(r31), 0, 0
-    bl fn_805F8CA0
+    bl PSMTXInverse
     addi r30, r1, 0x14
     psq_l f1, 0x0(r28), 0, 0
     lfs f2, 0x8(r28)
@@ -2265,7 +2265,7 @@ asm void fn_80051E90(void)
     psq_st f4, 0x18(r31), 0, 0
     psq_st f5, 0x20(r31), 0, 0
     psq_st f6, 0x28(r31), 0, 0
-    bl fn_805F8CA0
+    bl PSMTXInverse
     addi r30, r1, 0x20
     psq_l f1, 0x0(r28), 0, 0
     lfs f2, 0x8(r28)
@@ -2295,7 +2295,7 @@ asm void fn_80051E90(void)
     psq_st f4, 0x18(r31), 0, 0
     psq_st f5, 0x20(r31), 0, 0
     psq_st f6, 0x28(r31), 0, 0
-    bl fn_805F8CA0
+    bl PSMTXInverse
     addi r30, r1, 0x14
     psq_l f1, 0xc(r28), 0, 0
     lfs f2, 0x14(r28)
@@ -2431,7 +2431,7 @@ asm void fn_800520F0(void)
     psq_st f4, 0x18(r31), 0, 0
     psq_st f5, 0x20(r31), 0, 0
     psq_st f6, 0x28(r31), 0, 0
-    bl fn_805F8CA0
+    bl PSMTXInverse
     addi r30, r1, 0x20
     psq_l f1, 0x0(r28), 0, 0
     lfs f2, 0x8(r28)
@@ -2461,7 +2461,7 @@ asm void fn_800520F0(void)
     psq_st f4, 0x18(r31), 0, 0
     psq_st f5, 0x20(r31), 0, 0
     psq_st f6, 0x28(r31), 0, 0
-    bl fn_805F8CA0
+    bl PSMTXInverse
     addi r30, r1, 0x14
     psq_l f1, 0xc(r28), 0, 0
     lfs f2, 0x14(r28)

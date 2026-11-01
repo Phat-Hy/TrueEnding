@@ -5,7 +5,7 @@
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
 extern void fn_80013F78(void);
-extern void fn_8005B3CC(void);
+extern void talk_parseQuotedString(void);
 extern void fn_8005B5F8(void);
 extern void fn_8005B6E8(void);
 extern void fn_800616C0(void);
@@ -450,13 +450,13 @@ asm void fn_80204958(void)
     b lbl_fn_80204958_000004FC
 lbl_fn_80204958_000004C8:
     addi r3, r1, 0x28
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     addi r4, r24, 0x11
     bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80204958_000004FC
     addi r3, r1, 0x28
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     addi r4, r24, 0x11
     bl strcmp
     cmpwi r3, 0x0
@@ -491,13 +491,13 @@ lbl_fn_80204958_000004FC:
     b lbl_fn_80204958_00000890
 lbl_fn_80204958_00000564:
     addi r3, r1, 0x28
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     addi r4, r24, 0x11
     bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80204958_00000890
     addi r3, r1, 0x28
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     mr r26, r3
     bl strlen
     cmplwi r3, 0x3
@@ -612,78 +612,78 @@ lbl_fn_80204958_00000700:
 lbl_fn_80204958_0000071C:
     stw r26, 0x4(r27)
     addi r3, r1, 0x28
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     mr r4, r3
     addi r3, r27, 0x8
     li r5, 0x20
     bl fn_8068236C
     addi r3, r1, 0x28
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     addi r3, r1, 0x28
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC288
     stfs f1, 0x28(r27)
     addi r3, r1, 0x28
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC288
     stfs f1, 0x2c(r27)
     addi r3, r1, 0x28
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC288
     stfs f1, 0x30(r27)
     addi r3, r1, 0x28
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC288
     stfs f1, 0x34(r27)
     addi r3, r1, 0x28
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC288
     stfs f1, 0x38(r27)
     addi r3, r1, 0x28
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     stw r3, 0x3c(r27)
     addi r3, r1, 0x28
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     stw r3, 0x40(r27)
     addi r3, r1, 0x28
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     stw r3, 0x44(r27)
     addi r3, r1, 0x28
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     stw r3, 0x48(r27)
     addi r3, r1, 0x28
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC288
     stfs f1, 0x4c(r27)
     addi r3, r1, 0x28
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC288
     stfs f1, 0x50(r27)
     addi r3, r1, 0x28
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC288
     stfs f1, 0x54(r27)
     addi r3, r1, 0x28
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC288
     stfs f1, 0x58(r27)
     addi r3, r1, 0x28
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC288
     stfs f1, 0x5c(r27)
     addi r3, r1, 0x28
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC288
     stfs f1, 0x60(r27)
     mr r23, r27
     li r26, 0x0
 lbl_fn_80204958_00000838:
     addi r3, r1, 0x28
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC288
     addi r26, r26, 0x1
     stfs f1, 0x64(r23)
@@ -691,11 +691,11 @@ lbl_fn_80204958_00000838:
     addi r23, r23, 0x4
     blt lbl_fn_80204958_00000838
     addi r3, r1, 0x28
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     stw r3, 0x88(r27)
     addi r3, r1, 0x28
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     stw r3, 0x8c(r27)
     b lbl_fn_80204958_0000088C
@@ -799,7 +799,7 @@ asm void fn_80204E54(void)
     b lbl_fn_80204E54_000009DC
 lbl_fn_80204E54_000009C0:
     addi r3, r1, 0x13c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     addi r4, r14, lbl_8073E938@l
     bl strcmp
     cmpwi r3, 0x0
@@ -852,7 +852,7 @@ lbl_fn_80204E54_000009DC:
     b lbl_fn_80204E54_000014D4
 lbl_fn_80204E54_00000A8C:
     addi r3, r1, 0x13c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     lis r4, lbl_8073E938@ha
     addi r4, r4, lbl_8073E938@l
     bl strcmp
@@ -861,7 +861,7 @@ lbl_fn_80204E54_00000A8C:
     lwz r0, lbl_8087F160
     addi r3, r1, 0x13c
     add r16, r0, r20
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     cmpwi r3, 0x0
     mr r15, r3
     beq lbl_fn_80204E54_00000B24
@@ -894,11 +894,11 @@ lbl_fn_80204E54_00000B18:
     stw r3, 0x80(r16)
 lbl_fn_80204E54_00000B24:
     addi r3, r1, 0x13c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     addi r3, r1, 0x13c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     addi r3, r1, 0x13c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     addi r0, r16, 0x8c
     mr r15, r3
     cmplw r3, r0
@@ -911,67 +911,67 @@ lbl_fn_80204E54_00000B24:
     bl memcpy
 lbl_fn_80204E54_00000B64:
     addi r3, r1, 0x13c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     stw r3, 0x7c(r16)
     addi r3, r1, 0x13c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC288
     stfs f1, 0x0(r16)
     addi r3, r1, 0x13c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC288
     stfs f1, 0x4(r16)
     addi r3, r1, 0x13c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC288
     stfs f1, 0x8(r16)
     addi r3, r1, 0x13c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC288
     stfs f1, 0xc(r16)
     addi r3, r1, 0x13c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC288
     stfs f1, 0x10(r16)
     addi r3, r1, 0x13c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC288
     stfs f1, 0x14(r16)
     addi r3, r1, 0x13c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC288
     stfs f1, 0x28(r16)
     addi r3, r1, 0x13c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC288
     stfs f1, 0x2c(r16)
     addi r3, r1, 0x13c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     stw r3, 0x20(r16)
     addi r3, r1, 0x13c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     stw r3, 0x24(r16)
     addi r3, r1, 0x13c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC288
     stfs f1, 0x18(r16)
     addi r3, r1, 0x13c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC288
     stfs f1, 0x1c(r16)
     addi r3, r1, 0x13c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     stw r3, 0x30(r16)
     addi r3, r1, 0x13c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     stw r3, 0x34(r16)
     addi r3, r1, 0x13c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     stw r28, 0x2c(r1)
     mr r15, r3
     stw r28, 0x30(r1)
@@ -1260,27 +1260,27 @@ lbl_fn_80204E54_00001054:
     bl dtor_80084684
 lbl_fn_80204E54_00001070:
     addi r3, r1, 0x13c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     addi r3, r1, 0x13c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     addi r3, r1, 0x13c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     addi r3, r1, 0x13c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     addi r3, r1, 0x13c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     stw r3, 0xac(r16)
     addi r3, r1, 0x13c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     stw r3, 0xb0(r16)
     addi r3, r1, 0x13c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     stw r3, 0xb4(r16)
     addi r3, r1, 0x13c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     mr r15, r3
     lis r3, lbl_8073E900@ha
     addi r21, r3, lbl_8073E900@l
@@ -1301,7 +1301,7 @@ lbl_fn_80204E54_000010F0:
 lbl_fn_80204E54_00001104:
     stw r18, 0xb8(r16)
     addi r3, r1, 0x13c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     lbz r0, 0x0(r3)
     mr r15, r3
     extsb. r0, r0
@@ -1394,30 +1394,30 @@ lbl_fn_80204E54_0000123C:
     blt lbl_fn_80204E54_00001218
 lbl_fn_80204E54_0000124C:
     addi r3, r1, 0x13c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     stw r3, 0xc0(r16)
     mr r15, r16
     li r18, 0x0
 lbl_fn_80204E54_00001264:
     addi r3, r1, 0x13c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     stw r3, 0xc4(r15)
     addi r3, r1, 0x13c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     stw r3, 0xc8(r15)
     addi r3, r1, 0x13c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     stw r3, 0xcc(r15)
     addi r3, r1, 0x13c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     stw r3, 0xd0(r15)
     addi r3, r1, 0x13c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     addi r18, r18, 0x1
     stw r3, 0xd4(r15)
@@ -1425,15 +1425,15 @@ lbl_fn_80204E54_00001264:
     addi r15, r15, 0x14
     blt lbl_fn_80204E54_00001264
     addi r3, r1, 0x13c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     stw r3, 0xec(r16)
     addi r3, r1, 0x13c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     stw r3, 0xf0(r16)
     addi r3, r1, 0x13c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     addi r0, r16, 0xf4
     mr r15, r3
     cmplw r3, r0
@@ -1446,7 +1446,7 @@ lbl_fn_80204E54_00001264:
     bl memcpy
 lbl_fn_80204E54_00001314:
     addi r3, r1, 0x13c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     addi r0, r16, 0x104
     mr r15, r3
     cmplw r3, r0
@@ -1459,11 +1459,11 @@ lbl_fn_80204E54_00001314:
     bl memcpy
 lbl_fn_80204E54_00001344:
     addi r3, r1, 0x13c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     stw r3, 0x114(r16)
     addi r3, r1, 0x13c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     mr r15, r3
     lis r3, lbl_8073E880@ha
     addi r21, r3, lbl_8073E880@l
@@ -1484,7 +1484,7 @@ lbl_fn_80204E54_00001384:
 lbl_fn_80204E54_00001398:
     stw r18, 0x118(r16)
     addi r3, r1, 0x13c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     lbz r0, 0x0(r3)
     mr r15, r3
     extsb. r0, r0
@@ -1514,32 +1514,32 @@ lbl_fn_80204E54_00001400:
     stw r0, 0x11c(r16)
 lbl_fn_80204E54_00001408:
     addi r3, r1, 0x13c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     li r15, 0x0
 lbl_fn_80204E54_00001414:
     addi r3, r1, 0x13c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     addi r3, r1, 0x13c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     addi r15, r15, 0x1
     cmpwi r15, 0x4
     blt lbl_fn_80204E54_00001414
     addi r3, r1, 0x13c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     addi r3, r1, 0x13c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     addi r3, r1, 0x13c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     stw r3, 0x124(r16)
     addi r3, r1, 0x13c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     stw r3, 0x128(r16)
     addi r3, r1, 0x13c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     addi r3, r1, 0x13c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC12C
     cmpwi r26, 0x0
     stw r3, 0x12c(r16)

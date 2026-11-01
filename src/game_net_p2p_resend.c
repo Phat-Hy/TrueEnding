@@ -20,7 +20,7 @@ extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800DC6B4(void);
 extern void fn_800EF73C(void);
 extern void sound_initGlobalInstances(void);
-extern void fn_80237874(void);
+extern void res_MsgHandle_update(void);
 extern void res_findResourceSlot(void);
 extern void fn_8023A108(void);
 extern void res_registerResource(void);
@@ -156,7 +156,7 @@ asm void fn_80512B18(void)
     mflr r0
     addi r3, r3, 0xd8
     stw r0, 0x14(r1)
-    bl fn_80237874
+    bl res_MsgHandle_update
     neg r0, r3
     or r0, r0, r3
     srwi r3, r0, 31

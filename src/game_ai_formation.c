@@ -10,7 +10,7 @@ extern void fn_8000DCF4(void);
 extern void fn_8001047C(void);
 extern void fn_80011034(void);
 extern void fn_80013338(void);
-extern void fn_8005B3CC(void);
+extern void talk_parseQuotedString(void);
 extern void fn_8005B5F8(void);
 extern void fn_8005B6E8(void);
 extern void fn_8009373C(void);
@@ -245,7 +245,7 @@ lbl_fn_8026580C_0000009C:
     addi r30, r30, lbl_80744608@l
 lbl_fn_8026580C_00000130:
     addi r3, r1, 0x8
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     lbz r0, 0x0(r3)
     mr r29, r3
     extsb r0, r0
@@ -261,7 +261,7 @@ lbl_fn_8026580C_00000130:
     cmpwi r0, 0x0
     beq lbl_fn_8026580C_000002D8
     addi r3, r1, 0x8
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     lwz r4, lbl_8087F430
     li r5, 0x0
@@ -301,7 +301,7 @@ lbl_fn_8026580C_000001E8:
     cmpwi r3, 0x0
     bne lbl_fn_8026580C_00000210
     addi r3, r1, 0x8
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     stw r3, 0x14c0(r31)
     b lbl_fn_8026580C_000002D8
@@ -312,7 +312,7 @@ lbl_fn_8026580C_00000210:
     cmpwi r3, 0x0
     bne lbl_fn_8026580C_00000238
     addi r3, r1, 0x8
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     stw r3, 0x1500(r31)
     b lbl_fn_8026580C_000002D8
@@ -323,27 +323,27 @@ lbl_fn_8026580C_00000238:
     cmpwi r3, 0x0
     bne lbl_fn_8026580C_000002B0
     addi r3, r1, 0x8
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     stw r3, 0x14d4(r31)
     addi r3, r1, 0x8
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     stw r3, 0x14d8(r31)
     addi r3, r1, 0x8
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     stw r3, 0x14dc(r31)
     addi r3, r1, 0x8
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     stw r3, 0x14e0(r31)
     addi r3, r1, 0x8
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     stw r3, 0x14e4(r31)
     addi r3, r1, 0x8
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     stw r3, 0x14e8(r31)
     b lbl_fn_8026580C_000002D8
@@ -354,7 +354,7 @@ lbl_fn_8026580C_000002B0:
     cmpwi r3, 0x0
     bne lbl_fn_8026580C_000002D8
     addi r3, r1, 0x8
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     stw r3, 0x165c(r31)
     stw r3, 0x1658(r31)

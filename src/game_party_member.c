@@ -17,7 +17,7 @@ extern void fn_801C3DCC(void);
 extern void fn_801C3FB0(void);
 extern void fn_801C93C4(void);
 extern void fn_80219558(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void fn_8021A888(void);
 extern void fn_803761BC(void);
 extern void fn_80695AD0(void);
@@ -1276,7 +1276,7 @@ asm void fn_8016125C(void)
     mr r30, r3
     beq lbl_fn_8016125C_00001178
     lwz r3, 0x0(r25)
-    bl fn_80219E6C
+    bl task_findEntryById
     fmr f1, f31
     mr r5, r3
     mr r3, r30

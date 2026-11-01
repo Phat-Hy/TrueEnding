@@ -40,8 +40,8 @@ extern void atn_LoadHandle_getStatus(void);
 extern void fn_8047614C(void);
 extern void fn_80476170(void);
 extern void fn_80478198(void);
-extern void fn_805F89F0(void);
-extern void fn_805F8DA0(void);
+extern void PSMTXConcat(void);
+extern void PSMTXInvXpose(void);
 extern void PSVECMag(void);
 extern void GXSetArray(void);
 extern void __GXSetVtxDesc(void);
@@ -208,7 +208,7 @@ asm void atn_Model_loadNodeMatrices(void)
     bl GXLoadPosMtxImm
     mr r3, r31
     addi r4, r1, 0x38
-    bl fn_805F8DA0
+    bl PSMTXInvXpose
     lfs f0, lbl_80880C48
     addi r3, r1, 0x38
     stfs f0, 0x44(r1)
@@ -281,7 +281,7 @@ lbl_atn_Model_loadNodeMatrices_000001C4:
     bl GXLoadPosMtxImm
     mr r3, r30
     addi r4, r1, 0x8
-    bl fn_805F8DA0
+    bl PSMTXInvXpose
     stfs f31, 0x14(r1)
     mr r4, r27
     addi r3, r1, 0x8
@@ -534,7 +534,7 @@ lbl_atn_Model_loadTexMatrices_00000538:
     stfs f8, 0xa4(r1)
     stfs f0, 0xb0(r1)
     stfs f9, 0xb4(r1)
-    bl fn_805F89F0
+    bl PSMTXConcat
     mr r4, r31
     addi r3, r1, 0x8
     li r5, 0x0

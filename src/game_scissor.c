@@ -18,7 +18,7 @@ extern void fn_800FC410(void);
 extern void fn_80133EE8(void);
 extern void fn_80134134(void);
 extern void fn_80148B0C(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
 extern void res_registerResource(void);
 extern void PSMTXRotRad(void);
@@ -786,7 +786,7 @@ lbl_fn_800F8C6C_00000A74:
     stw r26, 0x14c(r4)
 lbl_fn_800F8C6C_00000A98:
     li r3, 0x2329
-    bl fn_80219E6C
+    bl task_findEntryById
     stw r27, 0x8(r1)
     mr r5, r3
     lfs f1, lbl_80881478
@@ -823,7 +823,7 @@ lbl_fn_800F8C6C_00000AFC:
     stw r26, 0x14c(r4)
 lbl_fn_800F8C6C_00000B20:
     li r3, 0x232a
-    bl fn_80219E6C
+    bl task_findEntryById
     stw r27, 0x8(r1)
     mr r5, r3
     lfs f1, lbl_80881478
@@ -913,7 +913,7 @@ lbl_fn_800F8C6C_00000BD4:
     stfs f0, 0x12c(r1)
     stfs f3, 0x130(r1)
     stfs f4, 0x134(r1)
-    bl fn_80219E6C
+    bl task_findEntryById
     stw r27, 0x8(r1)
     mr r5, r3
     lfs f1, lbl_80881478
@@ -963,7 +963,7 @@ lbl_fn_800F8C6C_00000CE0:
     fadds f0, f3, f0
     stfs f4, 0x100(r1)
     stfs f0, 0xfc(r1)
-    bl fn_80219E6C
+    bl task_findEntryById
     stw r27, 0x8(r1)
     mr r5, r3
     lfs f1, lbl_80881478
@@ -1234,7 +1234,7 @@ lbl_fn_800F8C6C_0000110C:
     mr r19, r3
     beq lbl_fn_800F8C6C_00001194
     lwz r3, 0x4(r3)
-    bl fn_80219E6C
+    bl task_findEntryById
     cmpwi r3, 0x0
     beq lbl_fn_800F8C6C_00001194
     lwz r4, lbl_8087F048
@@ -1248,7 +1248,7 @@ lbl_fn_800F8C6C_0000110C:
     stw r26, 0x14c(r4)
 lbl_fn_800F8C6C_00001158:
     lwz r3, 0x4(r19)
-    bl fn_80219E6C
+    bl task_findEntryById
     stw r27, 0x8(r1)
     mr r5, r3
     lfs f1, lbl_80881478

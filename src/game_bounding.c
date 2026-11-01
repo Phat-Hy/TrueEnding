@@ -44,7 +44,7 @@ extern void fn_801FEE08(void);
 extern void fn_80210220(void);
 extern void fn_80211480(void);
 extern void fn_80219558(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void fn_8021A8D0(void);
 extern void fn_8021E48C(void);
 extern void fn_803750E4(void);
@@ -54,7 +54,7 @@ extern void fn_803E5E64(void);
 extern void fn_803EA77C(void);
 extern void fn_80444020(void);
 extern void fn_8047961C(void);
-extern void fn_805F89F0(void);
+extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSVECNormalize(void);
@@ -263,7 +263,7 @@ lbl_fn_800FD658_000001E8:
     mr r3, r27
     addi r4, r1, 0xc8
     addi r5, r1, 0x98
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x98
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -288,7 +288,7 @@ lbl_fn_800FD658_00000290:
     mr r3, r27
     addi r4, r1, 0x128
     addi r5, r1, 0xf8
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0xf8
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -313,7 +313,7 @@ lbl_fn_800FD658_000002F0:
     mr r3, r27
     addi r4, r1, 0x188
     addi r5, r1, 0x158
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x158
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -676,7 +676,7 @@ asm void fn_800FDE60(void)
     li r3, 0x2710
     stw r29, -0x75a4(r4)
     stw r30, -0x75a0(r4)
-    bl fn_80219E6C
+    bl task_findEntryById
     addis r4, r28, 0x4
     li r5, 0x0
     lwz r0, -0x7598(r4)

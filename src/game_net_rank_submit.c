@@ -47,7 +47,7 @@ extern void fn_805112AC(void);
 extern void fn_805118B8(void);
 extern void fn_805119CC(void);
 extern void fn_8052635C(void);
-extern void fn_805F89F0(void);
+extern void PSMTXConcat(void);
 extern void wmemcpy(void);
 extern void fn_80686A48(void);
 extern void fn_80686B24(void);
@@ -1920,7 +1920,7 @@ lbl_fn_805233FC_000019B0:
     addi r4, r1, 0x180
     addi r3, r3, 0x30
     mr r5, r4
-    bl fn_805F89F0
+    bl PSMTXConcat
     lis r31, lbl_8075C6C4@ha
     addi r3, r1, 0x1b0
     addi r31, r31, lbl_8075C6C4@l

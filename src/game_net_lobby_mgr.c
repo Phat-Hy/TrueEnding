@@ -19,7 +19,7 @@ extern void fn_8003E4A4(void);
 extern void fn_8004203C(void);
 extern void fn_8004212C(void);
 extern void fn_80043014(void);
-extern void fn_8005B3CC(void);
+extern void talk_parseQuotedString(void);
 extern void fn_8006B0C8(void);
 extern void fn_8006D008(void);
 extern void mem_alloc(void);
@@ -51,7 +51,7 @@ extern void fn_804918A4(void);
 extern void fn_8049707C(void);
 extern void fn_80497238(void);
 extern void fn_80497864(void);
-extern void fn_805F89F0(void);
+extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXTrans(void);
 extern void PSMTXScale(void);
@@ -173,7 +173,7 @@ asm void fn_80498354(void)
     mr r3, r30
     addi r4, r1, 0x128
     addi r5, r1, 0x158
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x158
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -198,7 +198,7 @@ lbl_fn_80498354_00000100:
     mr r3, r30
     addi r4, r1, 0xc8
     addi r5, r1, 0xf8
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0xf8
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -223,7 +223,7 @@ lbl_fn_80498354_00000160:
     mr r3, r30
     addi r4, r1, 0x68
     addi r5, r1, 0x98
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x98
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -241,7 +241,7 @@ lbl_fn_80498354_000001C0:
     mr r3, r31
     mr r4, r30
     addi r5, r1, 0x8
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x8
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -465,13 +465,13 @@ lbl_fn_804985E4_00000494:
     li r4, 0x1
     bl fn_80499388
     addi r3, r1, 0xdb0
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     addi r3, r1, 0xdb0
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     mr r22, r3
     addi r3, r1, 0xdb0
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     mr r23, r3
     mr r3, r21
@@ -579,9 +579,9 @@ lbl_fn_804985E4_0000061C:
     li r4, 0x1
     bl fn_80499388
     addi r3, r1, 0x77c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     addi r3, r1, 0x77c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     rlwinm r0, r3, 0, 30, 30
     cmpwi r0, 0x2
@@ -709,7 +709,7 @@ lbl_fn_804985E4_00000840:
     fmr f3, f30
     bl fn_8000D114
     addi r3, r1, 0x148
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     mr r22, r3
     mr r4, r24
     addi r3, r21, 0x60
@@ -779,7 +779,7 @@ lbl_fn_804985E4_00000840:
     fmr f4, f1
     bl fn_8030B408
     addi r3, r1, 0x148
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     mr r22, r3
     mr r4, r24
@@ -787,7 +787,7 @@ lbl_fn_804985E4_00000840:
     bl fn_80497864
     stw r22, 0x88(r3)
     addi r3, r1, 0x148
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     mr r22, r3
     mr r4, r24
@@ -795,7 +795,7 @@ lbl_fn_804985E4_00000840:
     bl fn_80497864
     stw r22, 0x8c(r3)
     addi r3, r1, 0x148
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     mr r22, r3
     mr r4, r24
@@ -803,7 +803,7 @@ lbl_fn_804985E4_00000840:
     bl fn_80497864
     stw r22, 0x90(r3)
     addi r3, r1, 0x148
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC288
     fmr f31, f1
     mr r4, r24
@@ -811,7 +811,7 @@ lbl_fn_804985E4_00000840:
     bl fn_80497864
     stfs f31, 0x94(r3)
     addi r3, r1, 0x148
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     mr r22, r3
     mr r4, r24
@@ -1797,7 +1797,7 @@ lbl_fn_8049994C_0000164C:
     mr r3, r30
     addi r4, r1, 0x38
     addi r5, r1, 0x8
-    bl fn_805F89F0
+    bl PSMTXConcat
     psq_l f1, 0x0(r27), 0, 0
     psq_l f2, 0x8(r27), 0, 0
     psq_l f3, 0x10(r27), 0, 0
@@ -1820,7 +1820,7 @@ lbl_fn_8049994C_0000170C:
     mr r3, r30
     addi r4, r1, 0x98
     addi r5, r1, 0x68
-    bl fn_805F89F0
+    bl PSMTXConcat
     psq_l f1, 0x0(r28), 0, 0
     psq_l f2, 0x8(r28), 0, 0
     psq_l f3, 0x10(r28), 0, 0
@@ -1843,7 +1843,7 @@ lbl_fn_8049994C_00001764:
     mr r3, r30
     addi r4, r1, 0xf8
     addi r5, r1, 0xc8
-    bl fn_805F89F0
+    bl PSMTXConcat
     psq_l f1, 0x0(r29), 0, 0
     psq_l f2, 0x8(r29), 0, 0
     psq_l f3, 0x10(r29), 0, 0

@@ -21,7 +21,7 @@ extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
 extern void fn_8031A484(void);
 extern void fn_8031ACC0(void);
-extern void fn_805F89F0(void);
+extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
@@ -1501,7 +1501,7 @@ lbl_fn_80317EF8_00001310:
     mr r3, r27
     addi r4, r1, 0x178
     addi r5, r1, 0x1a8
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x1a8
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1526,7 +1526,7 @@ lbl_fn_80317EF8_00001460:
     mr r3, r27
     addi r4, r1, 0x118
     addi r5, r1, 0x148
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x148
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1551,7 +1551,7 @@ lbl_fn_80317EF8_000014C0:
     mr r3, r27
     addi r4, r1, 0xb8
     addi r5, r1, 0xe8
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0xe8
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0

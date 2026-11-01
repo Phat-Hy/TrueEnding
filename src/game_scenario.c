@@ -7,7 +7,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_23(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8005B9CC(void);
+extern void talk_formatQuotedString(void);
 extern void fn_8005BBF8(void);
 extern void fn_8005BCE8(void);
 extern void fn_80063D3C(void);
@@ -1673,7 +1673,7 @@ asm void fn_8007A530(void)
     la r4, lbl_8087D710
     bl fn_8005BCE8
     addi r3, r1, 0x8
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl fn_800DC12C
     lwz r4, 0x4(r31)
     mr r28, r3
@@ -1706,7 +1706,7 @@ lbl_fn_8007A530_000015F8:
     stw r0, 0x4(r31)
 lbl_fn_8007A530_00001600:
     addi r3, r1, 0x8
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl fn_800DC12C
     lis r28, lbl_80731900@ha
     stw r3, 0x8(r31)
@@ -1715,7 +1715,7 @@ lbl_fn_8007A530_00001600:
     b lbl_fn_8007A530_000016EC
 lbl_fn_8007A530_00001620:
     addi r3, r1, 0x8
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     addi r4, r28, lbl_80731900@l
     bl strcmp
     cmpwi r3, 0x0
@@ -1723,7 +1723,7 @@ lbl_fn_8007A530_00001620:
     lwz r0, 0x4(r31)
     addi r3, r1, 0x8
     add r26, r0, r30
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     mr r27, r3
     addi r4, r29, 0x1
     bl strcmp
@@ -1766,7 +1766,7 @@ lbl_fn_8007A530_000016B8:
 lbl_fn_8007A530_000016D4:
     stw r0, 0x0(r26)
     addi r3, r1, 0x8
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl fn_800DC288
     stfs f1, 0x4(r26)
     addi r30, r30, 0x8

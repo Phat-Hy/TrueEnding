@@ -10,7 +10,7 @@ extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void fn_80097CCC(void);
 extern void fn_80148990(void);
-extern void fn_805F89F0(void);
+extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXScale(void);
 extern void PSMTXMultVec(void);
@@ -1968,7 +1968,7 @@ lbl_fn_803489F4_00001B54:
     mr r3, r29
     addi r4, r1, 0x218
     addi r5, r1, 0x248
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x248
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1993,7 +1993,7 @@ lbl_fn_803489F4_00001C08:
     mr r3, r29
     addi r4, r1, 0x1b8
     addi r5, r1, 0x1e8
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x1e8
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -2018,7 +2018,7 @@ lbl_fn_803489F4_00001C68:
     mr r3, r29
     addi r4, r1, 0x158
     addi r5, r1, 0x188
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x188
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -2036,7 +2036,7 @@ lbl_fn_803489F4_00001CC8:
     mr r3, r30
     mr r4, r29
     addi r5, r1, 0xf8
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r4, r1, 0xf8
     stfs f31, 0x8(r1)
     psq_l f2, 0x8(r4), 0, 0
@@ -2062,7 +2062,7 @@ lbl_fn_803489F4_00001CC8:
     mr r3, r29
     addi r4, r1, 0x98
     addi r5, r1, 0xc8
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0xc8
     lfs f8, 0x0(r28)
     psq_l f1, 0x0(r3), 0, 0

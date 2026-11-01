@@ -27,7 +27,7 @@ extern void fn_801595BC(void);
 extern void fn_8015E7A0(void);
 extern void fn_8016E4C4(void);
 extern void fn_801781B0(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void fn_80310314(void);
 extern void fn_80375184(void);
 extern void fn_803EA77C(void);
@@ -1115,7 +1115,7 @@ lbl_fn_803123D0_00000E6C:
     bl system_getNextSequenceId
     mr r30, r3
     lwz r3, 0x14ec(r29)
-    bl fn_80219E6C
+    bl task_findEntryById
     lwz r5, 0x14e4(r29)
     mr r6, r3
     mr r3, r28

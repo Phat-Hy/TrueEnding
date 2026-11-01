@@ -27,7 +27,7 @@ extern void fn_8016EB48(void);
 extern void fn_8017039C(void);
 extern void fn_80170A20(void);
 extern void fn_80176548(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void fn_803227A0(void);
 extern void fn_80322AD4(void);
 extern void world_getLocalFlag(void);
@@ -607,7 +607,7 @@ lbl_fn_8031FE4C_000006B4:
     mr r3, r31
     bl fn_80144710
     li r3, 0x687
-    bl fn_80219E6C
+    bl task_findEntryById
     mr r30, r3
     lwz r3, lbl_8087F430
     li r4, 0x3d
@@ -637,17 +637,17 @@ lbl_fn_8031FE4C_00000734:
     b lbl_fn_8031FE4C_00000778
 lbl_fn_8031FE4C_00000758:
     li r3, 0x687
-    bl fn_80219E6C
+    bl task_findEntryById
     mr r30, r3
     b lbl_fn_8031FE4C_00000784
 lbl_fn_8031FE4C_00000768:
     li r3, 0x688
-    bl fn_80219E6C
+    bl task_findEntryById
     mr r30, r3
     b lbl_fn_8031FE4C_00000784
 lbl_fn_8031FE4C_00000778:
     li r3, 0x689
-    bl fn_80219E6C
+    bl task_findEntryById
     mr r30, r3
 lbl_fn_8031FE4C_00000784:
     lwz r3, lbl_8087F048

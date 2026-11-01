@@ -33,7 +33,7 @@ extern void fn_801A4B00(void);
 extern void fn_801A4E08(void);
 extern void fn_801A7DC8(void);
 extern void fn_801B1F4C(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void fn_8021FD7C(void);
 extern void fn_803EA77C(void);
 extern void PSMTXRotRad(void);
@@ -1393,7 +1393,7 @@ lbl_fn_801A73A4_0000117C:
     stfs f0, 0x28(r1)
     stfs f3, 0x2c(r1)
     stfs f4, 0x30(r1)
-    bl fn_80219E6C
+    bl task_findEntryById
     li r0, -0x1
     stw r0, 0x8(r1)
     mr r5, r3

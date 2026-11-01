@@ -30,7 +30,7 @@ extern void fn_801240B4(void);
 extern void world_getGlobalFlag(void);
 extern void fn_803E3C78(void);
 extern void fn_8047F580(void);
-extern void fn_805F89F0(void);
+extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXTrans(void);
 extern void PSVECNormalize(void);
@@ -910,7 +910,7 @@ lbl_fn_803ACE18_00000AD8:
     mr r3, r30
     addi r4, r1, 0x38
     addi r5, r1, 0x8
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r5, r1, 0x8
     mr r3, r28
     psq_l f1, 0x0(r5), 0, 0

@@ -14,7 +14,7 @@ extern void fn_800CB5C8(void);
 extern void fn_801248DC(void);
 extern void fn_8012E244(void);
 extern void actor_setState(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void fn_8021A8D0(void);
 extern void fn_8021A918(void);
 extern void fn_8021A960(void);
@@ -547,7 +547,7 @@ lbl_fn_801784BC_0000063C:
     lwz r3, 0x6c(r31)
     cmpwi r3, 0x0
     ble lbl_fn_801784BC_00000654
-    bl fn_80219E6C
+    bl task_findEntryById
     mr r30, r3
     b lbl_fn_801784BC_00000658
 lbl_fn_801784BC_00000654:
@@ -818,7 +818,7 @@ asm void fn_80178864(void)
     cmpwi r0, 0x0
     ble lbl_fn_80178864_000009F0
     mr r3, r0
-    bl fn_80219E6C
+    bl task_findEntryById
     b lbl_fn_80178864_000009F4
 lbl_fn_80178864_000009F0:
     li r3, 0x0
@@ -940,7 +940,7 @@ lbl_fn_801789D8_00000B74:
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     ble lbl_fn_801789D8_00000B8C
-    bl fn_80219E6C
+    bl task_findEntryById
     b lbl_fn_801789D8_00000B98
 lbl_fn_801789D8_00000B8C:
     addi r6, r6, 0x14

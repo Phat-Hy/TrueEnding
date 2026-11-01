@@ -46,7 +46,7 @@ extern void fn_80151448(void);
 extern void actor_setState(void);
 extern void fn_801765D8(void);
 extern void sound_initGlobalInstances(void);
-extern void fn_80237874(void);
+extern void res_MsgHandle_update(void);
 extern void res_registerResource(void);
 extern void fn_8028AC70(void);
 extern void fn_802A7964(void);
@@ -133,11 +133,11 @@ asm void fn_8030A6A0(void)
     cmpwi r3, 0x0
     bne lbl_fn_8030A6A0_00000188
     addi r3, r29, 0x15d4
-    bl fn_80237874
+    bl res_MsgHandle_update
     cmpwi r3, 0x0
     bne lbl_fn_8030A6A0_00000188
     addi r3, r29, 0x15f4
-    bl fn_80237874
+    bl res_MsgHandle_update
     cmpwi r3, 0x0
     bne lbl_fn_8030A6A0_00000188
     mr r30, r29

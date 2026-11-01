@@ -10,7 +10,7 @@ extern void fn_80013F78(void);
 extern void fn_8003E4A4(void);
 extern void fn_8004203C(void);
 extern void fn_8004212C(void);
-extern void fn_8005B3CC(void);
+extern void talk_parseQuotedString(void);
 extern void fn_8005B5F8(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
@@ -36,7 +36,7 @@ extern void fn_80219544(void);
 extern void fn_80237518(void);
 extern void fn_802375C4(void);
 extern void fn_80237654(void);
-extern void fn_8023780C(void);
+extern void res_MsgHandle_destructor(void);
 extern void fn_8035B808(void);
 extern void fn_8035B824(void);
 extern void fn_804741C0(void);
@@ -904,12 +904,12 @@ asm void fn_8011FFF8(void)
     b lbl_fn_8011FFF8_000008D4
 lbl_fn_8011FFF8_000008A8:
     addi r3, r1, 0x50
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     lbz r0, 0x0(r3)
     cmpwi r0, 0x3b
     beq lbl_fn_8011FFF8_000008D4
     addi r3, r1, 0x50
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     lbz r0, 0x0(r3)
     extsb. r0, r0
     beq lbl_fn_8011FFF8_000008D4
@@ -945,14 +945,14 @@ lbl_fn_8011FFF8_000008D4:
     b lbl_fn_8011FFF8_00000B38
 lbl_fn_8011FFF8_00000944:
     addi r3, r1, 0x50
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     lbz r0, 0x0(r3)
     cmpwi r0, 0x3b
     beq lbl_fn_8011FFF8_00000B38
     bl atoi
     mr r26, r3
     addi r3, r1, 0x50
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     lbz r0, 0x0(r3)
     mr r24, r3
     extsb. r0, r0
@@ -967,23 +967,23 @@ lbl_fn_8011FFF8_00000944:
     bl fn_800DC6B4
     stw r3, 0x4(r26)
     addi r3, r1, 0x50
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     stw r3, 0x8(r26)
     addi r3, r1, 0x50
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     addi r4, r27, lbl_807370E8@l
     li r5, 0x8
     bl fn_8011FF78
     stw r3, 0xc(r26)
     addi r3, r1, 0x50
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     addi r4, r28, lbl_80737118@l
     li r5, 0x3
     bl fn_8011FF78
     stw r3, 0x10(r26)
     addi r3, r1, 0x50
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     lwz r4, 0xc(r26)
     mr r24, r3
     subi r0, r4, 0x4
@@ -1048,31 +1048,31 @@ lbl_fn_8011FFF8_00000AC4:
     stw r30, 0x2c(r26)
 lbl_fn_8011FFF8_00000AC8:
     addi r3, r1, 0x50
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC288
     stfs f1, 0x14(r26)
     addi r3, r1, 0x50
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC288
     stfs f1, 0x18(r26)
     addi r3, r1, 0x50
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC288
     stfs f1, 0x1c(r26)
     addi r3, r1, 0x50
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC288
     stfs f1, 0x20(r26)
     addi r3, r1, 0x50
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     stw r3, 0x24(r26)
     addi r3, r1, 0x50
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC6B4
     stw r3, 0x28(r26)
     addi r3, r1, 0x50
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC12C
     stw r3, 0x30(r26)
 lbl_fn_8011FFF8_00000B38:
@@ -1134,7 +1134,7 @@ lbl_fn_8011FFF8_00000BEC:
     addi r3, r31, 0x18
     bl fn_80120E38
     mr r4, r30
-    bl fn_8023780C
+    bl res_MsgHandle_destructor
     addi r24, r24, 0x1
 lbl_fn_8011FFF8_00000C18:
     addi r3, r1, 0x38

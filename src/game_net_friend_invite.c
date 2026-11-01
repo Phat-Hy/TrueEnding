@@ -58,8 +58,8 @@ extern void fn_8020A81C(void);
 extern void fn_8020ED84(void);
 extern void sound_initGlobalInstances(void);
 extern void fn_802375C4(void);
-extern void fn_8023781C(void);
-extern void fn_80237874(void);
+extern void res_MsgHandle_unload(void);
+extern void res_MsgHandle_update(void);
 extern void fn_80239798(void);
 extern void res_findResourceSlot(void);
 extern void fn_80244CA0(void);
@@ -1462,7 +1462,7 @@ lbl_fn_804D201C_00000EA4:
     subic. r26, r26, 0x6698
     beq lbl_fn_804D201C_00000EC8
     mr r3, r26
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r26, 0x4
     beq lbl_fn_804D201C_00000EC8
     li r4, 0x0
@@ -1480,7 +1480,7 @@ lbl_fn_804D201C_00000EC8:
     subic. r26, r26, 0x694c
     beq lbl_fn_804D201C_00000F0C
     mr r3, r26
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r26, 0x4
     beq lbl_fn_804D201C_00000F0C
     li r4, 0x0
@@ -1659,7 +1659,7 @@ asm void fn_804D250C(void)
     bne lbl_fn_804D250C_000011B8
     addis r3, r30, 0x1
     subi r3, r3, 0x6698
-    bl fn_80237874
+    bl res_MsgHandle_update
     cmpwi r3, 0x0
     bne lbl_fn_804D250C_000011B8
     mr r3, r30
@@ -5013,7 +5013,7 @@ lbl_fn_804D25D4_00004220:
     bne lbl_fn_804D25D4_000046D8
     addis r3, r24, 0x1
     subi r3, r3, 0x6698
-    bl fn_80237874
+    bl res_MsgHandle_update
     cmpwi r3, 0x0
     bne lbl_fn_804D25D4_000046D8
     mr r3, r24

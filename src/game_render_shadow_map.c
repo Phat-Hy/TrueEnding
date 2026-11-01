@@ -23,7 +23,7 @@ extern void fn_80176548(void);
 extern void fn_80179D44(void);
 extern void sound_initGlobalInstances(void);
 extern void res_registerResource(void);
-extern void fn_805F89F0(void);
+extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
@@ -189,7 +189,7 @@ lbl_fn_802B0430_000000F8:
     mr r3, r28
     addi r4, r1, 0x68
     addi r5, r1, 0x38
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x38
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -214,7 +214,7 @@ lbl_fn_802B0430_000001C8:
     mr r3, r28
     addi r4, r1, 0xc8
     addi r5, r1, 0x98
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x98
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -239,7 +239,7 @@ lbl_fn_802B0430_00000228:
     mr r3, r28
     addi r4, r1, 0x128
     addi r5, r1, 0xf8
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0xf8
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -600,7 +600,7 @@ lbl_fn_802B07F0_00000720:
     mr r3, r29
     addi r4, r1, 0x138
     addi r5, r1, 0x168
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x168
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -625,7 +625,7 @@ lbl_fn_802B07F0_000007CC:
     mr r3, r29
     addi r4, r1, 0xd8
     addi r5, r1, 0x108
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x108
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -650,7 +650,7 @@ lbl_fn_802B07F0_0000082C:
     mr r3, r29
     addi r4, r1, 0x78
     addi r5, r1, 0xa8
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0xa8
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1488,7 +1488,7 @@ lbl_fn_802B17AC_000013E8:
     mr r3, r31
     addi r4, r1, 0x48
     addi r5, r1, 0x18
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x18
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1513,7 +1513,7 @@ lbl_fn_802B17AC_00001494:
     mr r3, r31
     addi r4, r1, 0xa8
     addi r5, r1, 0x78
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x78
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1538,7 +1538,7 @@ lbl_fn_802B17AC_000014F4:
     mr r3, r31
     addi r4, r1, 0x108
     addi r5, r1, 0xd8
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0xd8
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1730,7 +1730,7 @@ asm void fn_802B1B50(void)
     mr r3, r28
     addi r4, r1, 0x88
     addi r5, r1, 0x58
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x58
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1755,7 +1755,7 @@ lbl_fn_802B1B50_000017F8:
     mr r3, r28
     addi r4, r1, 0xe8
     addi r5, r1, 0xb8
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0xb8
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1780,7 +1780,7 @@ lbl_fn_802B1B50_00001858:
     mr r3, r28
     addi r4, r1, 0x148
     addi r5, r1, 0x118
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x118
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0

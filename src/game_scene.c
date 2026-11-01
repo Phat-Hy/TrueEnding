@@ -24,7 +24,7 @@ extern void dialog_renderWindow(void);
 extern void fn_8036554C(void);
 extern void fn_803CC5E4(void);
 extern void fn_8047FF70(void);
-extern void fn_805F89F0(void);
+extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSVECMag(void);
 extern void printf(void);
@@ -195,7 +195,7 @@ lbl_fn_8000CBD8_000000F8:
     mr r3, r30
     addi r4, r1, 0x170
     addi r5, r1, 0x140
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x140
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -220,7 +220,7 @@ lbl_fn_8000CBD8_000001B8:
     mr r3, r30
     addi r4, r1, 0x1d0
     addi r5, r1, 0x1a0
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x1a0
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -245,7 +245,7 @@ lbl_fn_8000CBD8_00000218:
     mr r3, r30
     addi r4, r1, 0x230
     addi r5, r1, 0x200
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x200
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -317,7 +317,7 @@ lbl_fn_8000CBD8_00000278:
     mr r3, r30
     addi r4, r1, 0x50
     addi r5, r1, 0x20
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x20
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -342,7 +342,7 @@ lbl_fn_8000CBD8_00000394:
     mr r3, r30
     addi r4, r1, 0xb0
     addi r5, r1, 0x80
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x80
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -367,7 +367,7 @@ lbl_fn_8000CBD8_000003F4:
     mr r3, r30
     addi r4, r1, 0x110
     addi r5, r1, 0xe0
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0xe0
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -404,7 +404,7 @@ lbl_fn_8000CBD8_0000049C:
     addi r3, r1, 0x2f0
     addi r4, r31, 0x58
     addi r5, r1, 0x260
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x260
     addi r4, r31, 0x88
     psq_l f1, 0x0(r3), 0, 0
@@ -548,7 +548,7 @@ lbl_fn_8000D1A8_00000638:
     mr r3, r0
     addi r5, r1, 0x50
     addi r4, r4, 0x8
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r4, r1, 0x50
     lwz r31, 0x48(r30)
     psq_l f2, 0x8(r4), 0, 0

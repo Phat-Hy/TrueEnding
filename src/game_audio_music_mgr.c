@@ -6,7 +6,7 @@ extern void __files(void);
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8005B3CC(void);
+extern void talk_parseQuotedString(void);
 extern void fn_8005B6E8(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
@@ -21,10 +21,10 @@ extern void atn_Model_findBoneIndex(void);
 extern void fn_800DC12C(void);
 extern void fn_80148990(void);
 extern void fn_801957F0(void);
-extern void fn_80219E6C(void);
-extern void fn_802377B8(void);
-extern void fn_8023780C(void);
-extern void fn_8023781C(void);
+extern void task_findEntryById(void);
+extern void res_MsgHandle_constructor(void);
+extern void res_MsgHandle_destructor(void);
+extern void res_MsgHandle_unload(void);
 extern void fn_8035B694(void);
 extern void fn_8035B78C(void);
 extern void atn_LoadHandle_destructor(void);
@@ -1073,7 +1073,7 @@ lbl_fn_803098D0_00000DE8:
     mtctr r12
     bctrl
     li r3, 0x658
-    bl fn_80219E6C
+    bl task_findEntryById
     lwz r0, 0x638(r29)
     lis r30, lbl_80748DC0@ha
     addi r30, r30, lbl_80748DC0@l
@@ -1477,7 +1477,7 @@ lbl_fn_8030A07C_000013B4:
     addic. r31, r29, 0x163c
     beq lbl_fn_8030A07C_000013D4
     mr r3, r31
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r31, 0x4
     beq lbl_fn_8030A07C_000013D4
     li r4, 0x0
@@ -1486,7 +1486,7 @@ lbl_fn_8030A07C_000013D4:
     addic. r31, r29, 0x152c
     beq lbl_fn_8030A07C_000013F4
     mr r3, r31
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r31, 0x4
     beq lbl_fn_8030A07C_000013F4
     li r4, 0x0
@@ -1550,13 +1550,13 @@ asm void fn_8030A144(void)
     stw r31, 0x1588(r29)
     stw r31, 0x158c(r29)
     stfs f0, 0x15d0(r29)
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     li r0, 0x2
     stw r0, 0x15e0(r29)
     addi r3, r29, 0x15f4
     stb r31, 0x15f0(r29)
     stb r31, 0x15f1(r29)
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     lfs f3, lbl_80884BB0
     lis r3, lbl_80787F68@ha
     lfs f0, lbl_80884BB4
@@ -1739,7 +1739,7 @@ lbl_fn_8030A144_00001694:
     addi r30, r31, lbl_80748FE8@l
 lbl_fn_8030A144_0000178C:
     addi r3, r1, 0x14
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     cmpwi r3, 0x0
     mr r28, r3
     beq lbl_fn_8030A144_00001878
@@ -1808,10 +1808,10 @@ lbl_fn_8030A144_00001878:
     stb r0, 0x150c(r29)
     addi r3, r29, 0x15d4
     addi r4, r30, 0x19
-    bl fn_8023780C
+    bl res_MsgHandle_destructor
     addi r3, r29, 0x15f4
     addi r4, r30, 0x26
-    bl fn_8023780C
+    bl res_MsgHandle_destructor
     lwz r31, 0x65c(r1)
     mr r3, r29
     lwz r30, 0x658(r1)
@@ -1849,7 +1849,7 @@ lbl_fn_8030A5D8_00001910:
     addic. r31, r29, 0x15f4
     beq lbl_fn_8030A5D8_00001930
     mr r3, r31
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r31, 0x4
     beq lbl_fn_8030A5D8_00001930
     li r4, 0x0
@@ -1858,7 +1858,7 @@ lbl_fn_8030A5D8_00001930:
     addic. r31, r29, 0x15d4
     beq lbl_fn_8030A5D8_00001950
     mr r3, r31
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r31, 0x4
     beq lbl_fn_8030A5D8_00001950
     li r4, 0x0

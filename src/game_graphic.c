@@ -30,8 +30,8 @@ extern void fn_800C0508(void);
 extern void fn_800C1424(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void fn_800D594C(void);
-extern void fn_805F8C50(void);
-extern void fn_805F8CA0(void);
+extern void PSMTXTranspose(void);
+extern void PSMTXInverse(void);
 extern void PSMTXMultVec(void);
 extern void PSVECNormalize(void);
 extern void PSVECDotProduct(void);
@@ -463,10 +463,10 @@ lbl_fn_800AEF68_0000046C:
     stfs f0, 0x10c(r1)
     stfs f0, 0x11c(r1)
     stfs f0, 0x12c(r1)
-    bl fn_805F8CA0
+    bl PSMTXInverse
     mr r3, r27
     mr r4, r27
-    bl fn_805F8C50
+    bl PSMTXTranspose
     addi r3, r1, 0xa4
     addi r4, r1, 0x98
     psq_l f1, 0x0(r3), 0, 0

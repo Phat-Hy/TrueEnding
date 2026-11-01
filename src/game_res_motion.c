@@ -21,7 +21,7 @@ extern void fn_80233B40(void);
 extern void fn_80233D74(void);
 extern void fn_80237B8C(void);
 extern void fn_802383D8(void);
-extern void fn_805F89F0(void);
+extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXTrans(void);
 extern void PSMTXMultVec(void);
@@ -230,7 +230,7 @@ lbl_fn_8022FAC4_00000194:
     mr r3, r25
     addi r4, r1, 0x188
     addi r5, r1, 0x1b8
-    bl fn_805F89F0
+    bl PSMTXConcat
     psq_l f1, 0x0(r28), 0, 0
     psq_l f2, 0x8(r28), 0, 0
     psq_l f3, 0x10(r28), 0, 0
@@ -253,7 +253,7 @@ lbl_fn_8022FAC4_000002BC:
     mr r3, r25
     addi r4, r1, 0x128
     addi r5, r1, 0x158
-    bl fn_805F89F0
+    bl PSMTXConcat
     psq_l f1, 0x0(r27), 0, 0
     psq_l f2, 0x8(r27), 0, 0
     psq_l f3, 0x10(r27), 0, 0
@@ -276,7 +276,7 @@ lbl_fn_8022FAC4_00000314:
     mr r3, r25
     addi r4, r1, 0xc8
     addi r5, r1, 0xf8
-    bl fn_805F89F0
+    bl PSMTXConcat
     psq_l f1, 0x0(r26), 0, 0
     psq_l f2, 0x8(r26), 0, 0
     psq_l f3, 0x10(r26), 0, 0
@@ -298,7 +298,7 @@ lbl_fn_8022FAC4_0000036C:
     mr r4, r25
     addi r3, r1, 0x98
     addi r5, r1, 0x38
-    bl fn_805F89F0
+    bl PSMTXConcat
     psq_l f2, 0x8(r29), 0, 0
     addi r4, r21, 0x3c
     psq_l f3, 0x10(r29), 0, 0

@@ -38,10 +38,10 @@ extern void fn_80176ACC(void);
 extern void fn_80178A6C(void);
 extern void fn_80219558(void);
 extern void sound_initGlobalInstances(void);
-extern void fn_802377B8(void);
-extern void fn_8023780C(void);
-extern void fn_8023781C(void);
-extern void fn_80237874(void);
+extern void res_MsgHandle_constructor(void);
+extern void res_MsgHandle_destructor(void);
+extern void res_MsgHandle_unload(void);
+extern void res_MsgHandle_update(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
 extern void fn_80247DA4(void);
@@ -1570,14 +1570,14 @@ asm void fn_802476D0(void)
     stw r0, 0x14c0(r31)
     stw r0, 0x14c4(r31)
     stw r0, 0x14cc(r31)
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     lwz r0, 0x14c0(r31)
     lis r4, lbl_80743498@ha
     addi r3, r31, 0x14d0
     subf r0, r0, r0
     stw r0, 0x14c0(r31)
     addi r4, r4, lbl_80743498@l
-    bl fn_8023780C
+    bl res_MsgHandle_destructor
     mr r3, r31
     lwz r31, 0xc(r1)
     lwz r0, 0x14(r1)
@@ -1602,7 +1602,7 @@ asm void fn_80247748(void)
     addic. r31, r3, 0x14d0
     beq lbl_fn_80247748_0000154C
     mr r3, r31
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r31, 0x4
     beq lbl_fn_80247748_0000154C
     li r4, 0x0
@@ -1652,7 +1652,7 @@ asm void fn_802477FC(void)
     cmpwi r3, 0x0
     bne lbl_fn_802477FC_00001664
     addi r3, r30, 0x14d0
-    bl fn_80237874
+    bl res_MsgHandle_update
     cmpwi r3, 0x0
     bne lbl_fn_802477FC_00001664
     li r31, 0x0

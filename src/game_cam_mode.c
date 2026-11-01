@@ -23,13 +23,13 @@ extern void fn_80179D44(void);
 extern void fn_80207C00(void);
 extern void fn_80207C08(void);
 extern void fn_80207C34(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void fn_8021A984(void);
 extern void fn_80237518(void);
 extern void fn_80237654(void);
-extern void fn_802377B8(void);
-extern void fn_8023780C(void);
-extern void fn_8023781C(void);
+extern void res_MsgHandle_constructor(void);
+extern void res_MsgHandle_destructor(void);
+extern void res_MsgHandle_unload(void);
 extern void world_getGlobalFlag(void);
 extern void fn_80373148(void);
 extern void fn_803761BC(void);
@@ -884,7 +884,7 @@ lbl_fn_800EE794_00000A24:
     lwz r3, 0xaa4(r26)
     cmpwi r3, 0x0
     ble lbl_fn_800EE794_00000A4C
-    bl fn_80219E6C
+    bl task_findEntryById
     b lbl_fn_800EE794_00000A50
 lbl_fn_800EE794_00000A4C:
     li r3, 0x0
@@ -1660,7 +1660,7 @@ asm void cam_initStickBindings(void)
     beq lbl_cam_initStickBindings_00001460
     mr r4, r30
     addi r3, r31, 0x4
-    bl fn_8023780C
+    bl res_MsgHandle_destructor
 lbl_cam_initStickBindings_00001460:
     lwz r3, 0x0(r31)
     lis r4, lbl_80735428@ha
@@ -1672,7 +1672,7 @@ lbl_cam_initStickBindings_00001460:
     beq lbl_cam_initStickBindings_0000148C
     mr r4, r30
     addi r3, r31, 0x10
-    bl fn_8023780C
+    bl res_MsgHandle_destructor
 lbl_cam_initStickBindings_0000148C:
     lwz r3, 0x0(r31)
     lis r4, lbl_80735428@ha
@@ -1696,7 +1696,7 @@ lbl_cam_initStickBindings_000014B8:
     beq lbl_cam_initStickBindings_000014E4
     mr r4, r30
     addi r3, r31, 0x28
-    bl fn_8023780C
+    bl res_MsgHandle_destructor
 lbl_cam_initStickBindings_000014E4:
     lwz r3, 0x0(r31)
     lis r30, lbl_80735428@ha
@@ -1848,13 +1848,13 @@ asm void fn_800EF6BC(void)
     mr r27, r3
     stw r30, 0x0(r3)
     addi r3, r3, 0x4
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addi r3, r27, 0x10
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addi r3, r27, 0x1c
     bl fn_80237518
     addi r3, r27, 0x28
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addi r29, r27, 0x34
     mr r3, r29
     bl atn_LoadHandle_constructor
@@ -1886,7 +1886,7 @@ asm void fn_800EF73C(void)
     stw r30, 0x8(r1)
     mr r30, r3
     beq lbl_fn_800EF73C_0000179C
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r30, 0x4
     beq lbl_fn_800EF73C_0000178C
     li r4, 0x0

@@ -9,7 +9,7 @@ extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
 extern void fn_80013F78(void);
 extern void fn_8004B338(void);
-extern void fn_8005B3CC(void);
+extern void talk_parseQuotedString(void);
 extern void fn_8005B5F8(void);
 extern void fn_8005B6E8(void);
 extern void fn_8006AA20(void);
@@ -747,7 +747,7 @@ asm void fn_805BCF08(void)
     b lbl_fn_805BCF08_00000BAC
 lbl_fn_805BCF08_000008FC:
     addi r3, r1, 0x58
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     subi r0, r3, 0x1
     cmplwi r0, 0x3
@@ -894,7 +894,7 @@ lbl_fn_805BCF08_00000B04:
     cmpwi r26, 0x0
     beq lbl_fn_805BCF08_00000B40
     addi r3, r1, 0x58
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     lwz r0, 0x4c(r1)
     mr r3, r21
     srwi. r0, r0, 31
@@ -910,7 +910,7 @@ lbl_fn_805BCF08_00000B30:
     b lbl_fn_805BCF08_00000B5C
 lbl_fn_805BCF08_00000B40:
     addi r3, r1, 0x58
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     mr r4, r3
     mr r3, r21
     li r5, 0x0
@@ -925,11 +925,11 @@ lbl_fn_805BCF08_00000B5C:
     lwz r0, 0xfc(r4)
     rlwinm r0, r0, 0, 4, 2
     stw r0, 0xfc(r4)
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC288
     stfs f1, 0x70(r28)
     addi r3, r1, 0x58
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     stw r3, 0x74(r28)
     lwz r0, 0x4c(r1)

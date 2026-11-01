@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void _restgpr_25(void);
 extern void _savegpr_25(void);
-extern void fn_8005B3CC(void);
+extern void talk_parseQuotedString(void);
 extern void fn_8005B5F8(void);
 extern void fn_8005B6E8(void);
 extern void talk_parseDialogue(void);
@@ -134,14 +134,14 @@ asm void event_processScriptAction(void)
     bl fn_8005B6E8
     addi r3, r1, 0x14
     li r21, 0x0
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     addi r4, r19, lbl_8073FA60@l
     addi r4, r4, 0x15
     bl strcmp
     cmpwi r3, 0x0
     bne lbl_event_processScriptAction_000000DC
     addi r3, r1, 0x14
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     mr r21, r3
 lbl_event_processScriptAction_000000DC:
@@ -156,7 +156,7 @@ lbl_event_processScriptAction_000000DC:
     b lbl_event_processScriptAction_00000124
 lbl_event_processScriptAction_00000100:
     addi r3, r1, 0x14
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     addi r4, r19, 0x1d
     bl strcmp
     cmpwi r3, 0x0
@@ -226,65 +226,65 @@ lbl_event_processScriptAction_000001E0:
     bl fn_80219F84
     stb r29, 0x3(r19)
     addi r3, r1, 0x14
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     sth r3, 0xbc(r19)
     addi r3, r1, 0x14
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     addi r3, r1, 0x14
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     addi r3, r1, 0x14
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     stw r3, 0xc4(r19)
     addi r3, r1, 0x14
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     stw r3, 0xc8(r19)
     addi r3, r1, 0x14
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     addi r3, r1, 0x14
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     addi r3, r1, 0x14
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     addi r3, r1, 0x14
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     addi r3, r1, 0x14
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     addi r3, r1, 0x14
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     addi r3, r1, 0x14
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     addi r3, r1, 0x14
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     addi r3, r1, 0x14
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     addi r3, r1, 0x14
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     addi r3, r1, 0x14
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     addi r3, r1, 0x14
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     addi r3, r1, 0x14
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     addi r3, r1, 0x14
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     addi r3, r1, 0x14
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     mr r25, r3
     addi r17, r30, lbl_8073FA10@l
     li r18, 0x0
@@ -304,7 +304,7 @@ lbl_event_processScriptAction_00000324:
 lbl_event_processScriptAction_00000338:
     stb r18, 0xc0(r19)
     addi r3, r1, 0x14
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     mr r18, r3
     addi r17, r31, lbl_8073FA30@l
     li r25, 0x0
@@ -324,15 +324,15 @@ lbl_event_processScriptAction_00000368:
 lbl_event_processScriptAction_0000037C:
     stb r25, 0xc1(r19)
     addi r3, r1, 0x14
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     stb r3, 0xc2(r19)
     addi r3, r1, 0x14
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     stb r3, 0xc3(r19)
     addi r3, r1, 0x14
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     addi r0, r19, 0xcc
     mr r18, r3
     cmplw r3, r0
@@ -414,7 +414,7 @@ lbl_event_processScriptAction_000004B8:
     stb r27, 0xcc(r19)
 lbl_event_processScriptAction_000004BC:
     addi r3, r1, 0x14
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     addi r0, r19, 0xdc
     mr r18, r3
     cmplw r3, r0
@@ -499,23 +499,23 @@ lbl_event_processScriptAction_000005D8:
     li r17, 0x0
 lbl_event_processScriptAction_000005E0:
     addi r3, r1, 0x14
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     stw r3, 0xec(r18)
     addi r3, r1, 0x14
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     stw r3, 0xf0(r18)
     addi r3, r1, 0x14
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     stw r3, 0xf4(r18)
     addi r3, r1, 0x14
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     stw r3, 0xf8(r18)
     addi r3, r1, 0x14
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     addi r17, r17, 0x1
     stw r3, 0xfc(r18)
@@ -523,15 +523,15 @@ lbl_event_processScriptAction_000005E0:
     addi r18, r18, 0x14
     blt lbl_event_processScriptAction_000005E0
     addi r3, r1, 0x14
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     stw r3, 0xb4(r19)
     addi r3, r1, 0x14
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC288
     stfs f1, 0xb8(r19)
     addi r3, r1, 0x14
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     addi r0, r19, 0x114
     mr r18, r3
     cmplw r3, r0
@@ -544,18 +544,18 @@ lbl_event_processScriptAction_000005E0:
     bl memcpy
 lbl_event_processScriptAction_00000690:
     addi r3, r1, 0x14
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     stw r3, 0x130(r19)
     mr r18, r19
     li r17, 0x0
 lbl_event_processScriptAction_000006A8:
     addi r3, r1, 0x14
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     stw r3, 0x11c(r18)
     addi r3, r1, 0x14
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     add r4, r19, r17
     addi r17, r17, 0x1
@@ -564,11 +564,11 @@ lbl_event_processScriptAction_000006A8:
     addi r18, r18, 0x4
     blt lbl_event_processScriptAction_000006A8
     addi r3, r1, 0x14
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     stw r3, 0x134(r19)
     addi r3, r1, 0x14
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     sth r3, 0xbe(r19)
     addi r23, r23, 0x138

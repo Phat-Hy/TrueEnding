@@ -90,10 +90,10 @@ void fn_802376D0(void);
 void fn_8023772C(void);
 void fn_80237784(void);
 void fn_8023779C(void);
-void fn_802377B8(void);
-void fn_8023780C(void);
-void fn_8023781C(void);
-void fn_80237874(void);
+void res_MsgHandle_constructor(void);
+void res_MsgHandle_destructor(void);
+void res_MsgHandle_unload(void);
+void res_MsgHandle_update(void);
 void fn_802378C4(void);
 void fn_802378E0(void);
 void fn_8023793C(void);
@@ -1225,7 +1225,7 @@ lbl_fn_8023779C_00000F44:
     blr
 }
 
-asm void fn_802377B8(void)
+asm void res_MsgHandle_constructor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1251,7 +1251,7 @@ asm void fn_802377B8(void)
     blr
 }
 
-asm void fn_8023780C(void)
+asm void res_MsgHandle_destructor(void)
 {
     nofralloc
     lwzu r12, 0x4(r3)
@@ -1260,7 +1260,7 @@ asm void fn_8023780C(void)
     bctr
 }
 
-asm void fn_8023781C(void)
+asm void res_MsgHandle_unload(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1270,18 +1270,18 @@ asm void fn_8023781C(void)
     mr r31, r3
     lwz r0, 0x0(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_8023781C_00000FF4
+    beq lbl_res_MsgHandle_unload_00000FF4
     lwz r3, lbl_8087F3C0
     cmpwi r3, 0x0
-    beq lbl_fn_8023781C_00000FE4
+    beq lbl_res_MsgHandle_unload_00000FE4
     mr r4, r31
     bl fn_8023A340
-lbl_fn_8023781C_00000FE4:
+lbl_res_MsgHandle_unload_00000FE4:
     addi r3, r31, 0x4
     bl fn_80473F88
     li r0, 0x0
     stw r0, 0x0(r31)
-lbl_fn_8023781C_00000FF4:
+lbl_res_MsgHandle_unload_00000FF4:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0
@@ -1289,7 +1289,7 @@ lbl_fn_8023781C_00000FF4:
     blr
 }
 
-asm void fn_80237874(void)
+asm void res_MsgHandle_update(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1300,15 +1300,15 @@ asm void fn_80237874(void)
     addi r3, r3, 0x4
     bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
-    bne lbl_fn_80237874_00001040
+    bne lbl_res_MsgHandle_update_00001040
     addi r3, r31, 0x4
     bl fn_80473C20
     stw r3, 0x0(r31)
     li r3, 0x0
-    b lbl_fn_80237874_00001044
-lbl_fn_80237874_00001040:
+    b lbl_res_MsgHandle_update_00001044
+lbl_res_MsgHandle_update_00001040:
     li r3, 0x1
-lbl_fn_80237874_00001044:
+lbl_res_MsgHandle_update_00001044:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0

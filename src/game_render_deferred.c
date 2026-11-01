@@ -28,7 +28,7 @@ extern void fn_801765D8(void);
 extern void fn_80178A6C(void);
 extern void sound_initGlobalInstances(void);
 extern void fn_802375C4(void);
-extern void fn_8023781C(void);
+extern void res_MsgHandle_unload(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
 extern void fn_802A7910(void);
@@ -1724,7 +1724,7 @@ lbl_fn_802B73FC_00001704:
     addic. r31, r29, 0x153c
     beq lbl_fn_802B73FC_00001730
     mr r3, r31
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r31, 0x4
     beq lbl_fn_802B73FC_00001730
     li r4, 0x0
@@ -1733,7 +1733,7 @@ lbl_fn_802B73FC_00001730:
     addic. r31, r29, 0x1530
     beq lbl_fn_802B73FC_00001750
     mr r3, r31
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r31, 0x4
     beq lbl_fn_802B73FC_00001750
     li r4, 0x0

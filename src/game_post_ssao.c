@@ -26,7 +26,7 @@ extern void fn_80160170(void);
 extern void fn_8016CDB8(void);
 extern void actor_setState(void);
 extern void fn_801765D8(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void fn_8021A888(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
@@ -599,7 +599,7 @@ asm void fn_802D4378(void)
     stw r29, 0x2c4(r1)
     mr r29, r3
     lwz r3, 0x1534(r3)
-    bl fn_80219E6C
+    bl task_findEntryById
     lfs f31, 0x2e4(r29)
     mr r30, r3
     addi r3, r29, 0xb0

@@ -10,8 +10,8 @@ extern void mem_getAllocSize(void);
 extern void fn_800904E0(void);
 extern void fn_8009ADA4(void);
 extern void fn_800A693C(void);
-extern void fn_805F89F0(void);
-extern void fn_805F8CA0(void);
+extern void PSMTXConcat(void);
+extern void PSMTXInverse(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
@@ -1301,7 +1301,7 @@ lbl_fn_800A7ACC_00000FC8:
     psq_st f4, 0x18(r29), 0, 0
     psq_st f5, 0x20(r29), 0, 0
     psq_st f6, 0x28(r29), 0, 0
-    bl fn_805F8CA0
+    bl PSMTXInverse
     lfs f0, lbl_80880CD4
     addi r28, r1, 0x44
     stfs f0, 0x50(r1)
@@ -1379,7 +1379,7 @@ lbl_fn_800A7ACC_00001138:
     mr r3, r28
     addi r4, r1, 0x170
     addi r5, r1, 0x140
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x140
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1404,7 +1404,7 @@ lbl_fn_800A7ACC_000011F8:
     mr r3, r28
     addi r4, r1, 0x1d0
     addi r5, r1, 0x1a0
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x1a0
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1429,7 +1429,7 @@ lbl_fn_800A7ACC_00001258:
     mr r3, r28
     addi r4, r1, 0x230
     addi r5, r1, 0x200
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x200
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1483,7 +1483,7 @@ lbl_fn_800A7ACC_000012B8:
     addi r3, r1, 0x2c0
     addi r4, r1, 0x110
     addi r5, r1, 0xe0
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r5, r1, 0xe0
     lfs f0, 0x58(r1)
     addi r28, r1, 0x2c0
@@ -1506,7 +1506,7 @@ lbl_fn_800A7ACC_000012B8:
     mr r3, r28
     addi r4, r1, 0xb0
     addi r5, r1, 0x80
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r6, r1, 0x80
     mr r3, r31
     psq_l f1, 0x0(r6), 0, 0
@@ -1523,7 +1523,7 @@ lbl_fn_800A7ACC_000012B8:
     psq_st f4, 0x18(r28), 0, 0
     psq_st f5, 0x20(r28), 0, 0
     psq_st f6, 0x28(r28), 0, 0
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x260
     lfs f11, 0x5c(r1)
     psq_l f2, 0x8(r3), 0, 0

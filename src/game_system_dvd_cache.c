@@ -28,10 +28,10 @@ extern void fn_80208694(void);
 extern void fn_8021771C(void);
 extern void fn_8021F09C(void);
 extern void sound_initGlobalInstances(void);
-extern void fn_802377B8(void);
-extern void fn_8023780C(void);
-extern void fn_8023781C(void);
-extern void fn_80237874(void);
+extern void res_MsgHandle_constructor(void);
+extern void res_MsgHandle_destructor(void);
+extern void res_MsgHandle_unload(void);
+extern void res_MsgHandle_update(void);
 extern void res_registerResource(void);
 extern void world_getGlobalFlag(void);
 extern void world_setGlobalFlag(void);
@@ -1423,7 +1423,7 @@ asm void fn_80376BE8(void)
     stw r3, 0x0(r29)
     addi r3, r29, 0x54
     stw r30, 0x50(r29)
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     stw r30, 0x64(r29)
     addi r3, r29, 0x94
     li r4, 0x0
@@ -1468,7 +1468,7 @@ lbl_fn_80376BE8_0000114C:
     addi r3, r29, 0x54
     addi r31, r31, lbl_8074DEC0@l
     addi r4, r31, 0x5b
-    bl fn_8023780C
+    bl res_MsgHandle_destructor
     addi r31, r31, 0x69
     addi r30, r1, 0x8
     cmplw r31, r30
@@ -1519,7 +1519,7 @@ asm void fn_80376D40(void)
     addic. r31, r29, 0x54
     beq lbl_fn_80376D40_00001224
     mr r3, r31
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r31, 0x4
     beq lbl_fn_80376D40_00001224
     li r4, 0x0
@@ -1558,7 +1558,7 @@ asm void fn_80376DD8(void)
     cmpwi r3, 0x0
     beq lbl_fn_80376DD8_000016FC
     addi r3, r31, 0x54
-    bl fn_80237874
+    bl res_MsgHandle_update
     cmpwi r3, 0x0
     bne lbl_fn_80376DD8_000016FC
     mr r3, r31

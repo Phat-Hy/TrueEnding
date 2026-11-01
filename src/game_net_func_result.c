@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void dtor_80084684(void);
 extern void fn_80049B74(void);
-extern void fn_8005B3CC(void);
+extern void talk_parseQuotedString(void);
 extern void fn_8005B5F8(void);
 extern void fn_8005B6E8(void);
 extern void talk_parseDialogue(void);
@@ -1089,7 +1089,7 @@ asm void fn_805061CC(void)
     b lbl_fn_805061CC_00000FF8
 lbl_fn_805061CC_00000D5C:
     addi r3, r1, 0x10c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     lbz r0, 0x0(r3)
     cmpwi r0, 0x3b
     beq lbl_fn_805061CC_00000FF8
@@ -1098,7 +1098,7 @@ lbl_fn_805061CC_00000D5C:
     cmpwi r3, 0x0
     bne lbl_fn_805061CC_00000FF8
     addi r3, r1, 0x10c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     mr r25, r3
     addi r4, r30, 0x6
     bl strcmp
@@ -1110,7 +1110,7 @@ lbl_fn_805061CC_00000D5C:
     b lbl_fn_805061CC_00000E2C
 lbl_fn_805061CC_00000DAC:
     addi r3, r1, 0x10c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     lbz r0, 0x0(r3)
     cmpwi r0, 0x3b
     beq lbl_fn_805061CC_00000E2C
@@ -1122,7 +1122,7 @@ lbl_fn_805061CC_00000DAC:
     bge lbl_fn_805061CC_00000FF8
 lbl_fn_805061CC_00000DD8:
     addi r3, r1, 0x10c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     cmpwi r3, 0x0
     ble lbl_fn_805061CC_00000E20
@@ -1162,7 +1162,7 @@ lbl_fn_805061CC_00000E40:
     b lbl_fn_805061CC_00000EE4
 lbl_fn_805061CC_00000E64:
     addi r3, r1, 0x10c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     lbz r0, 0x0(r3)
     cmpwi r0, 0x3b
     beq lbl_fn_805061CC_00000EE4
@@ -1174,7 +1174,7 @@ lbl_fn_805061CC_00000E64:
     bge lbl_fn_805061CC_00000FF8
 lbl_fn_805061CC_00000E90:
     addi r3, r1, 0x10c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     cmpwi r3, 0x0
     ble lbl_fn_805061CC_00000ED8
@@ -1215,7 +1215,7 @@ lbl_fn_805061CC_00000EF8:
     b lbl_fn_805061CC_00000F80
 lbl_fn_805061CC_00000F20:
     addi r3, r1, 0x10c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     lbz r0, 0x0(r3)
     cmpwi r0, 0x3b
     beq lbl_fn_805061CC_00000F80
@@ -1226,11 +1226,11 @@ lbl_fn_805061CC_00000F20:
     cmpwi r24, 0x20
     bge lbl_fn_805061CC_00000F90
     addi r3, r1, 0x10c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     stw r3, 0x4(r26)
     addi r3, r1, 0x10c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     cmpwi r3, 0x0
     stw r3, 0x84(r26)

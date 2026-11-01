@@ -22,7 +22,7 @@ extern void fn_804786F8(void);
 extern void fn_805BDCC0(void);
 extern void fn_805BF208(void);
 extern void fn_805BF414(void);
-extern void fn_805F89F0(void);
+extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXTrans(void);
 extern void PSMTXMultVec(void);
@@ -1238,7 +1238,7 @@ lbl_fn_8034DE90_00001060:
     mr r3, r27
     addi r4, r1, 0xc0
     addi r5, r1, 0x90
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x90
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1263,7 +1263,7 @@ lbl_fn_8034DE90_0000111C:
     mr r3, r27
     addi r4, r1, 0x120
     addi r5, r1, 0xf0
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0xf0
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1288,7 +1288,7 @@ lbl_fn_8034DE90_0000117C:
     mr r3, r27
     addi r4, r1, 0x180
     addi r5, r1, 0x150
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x150
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1306,7 +1306,7 @@ lbl_fn_8034DE90_000011DC:
     mr r3, r28
     mr r4, r27
     addi r5, r1, 0x30
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r6, r1, 0x30
     addi r4, r1, 0x20
     psq_l f1, 0x0(r6), 0, 0

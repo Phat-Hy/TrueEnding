@@ -46,7 +46,7 @@ extern void fn_8023686C(void);
 extern void fn_802368B0(void);
 extern void fn_80239AB4(void);
 extern void atn_LoadHandle_getName(void);
-extern void fn_805F89F0(void);
+extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void strstr(void);
@@ -1769,7 +1769,7 @@ lbl_fn_8023AE34_00001604:
     mr r3, r26
     addi r4, r1, 0x78
     addi r5, r1, 0x48
-    bl fn_805F89F0
+    bl PSMTXConcat
     psq_l f1, 0x0(r23), 0, 0
     psq_l f2, 0x8(r23), 0, 0
     psq_l f3, 0x10(r23), 0, 0
@@ -1792,7 +1792,7 @@ lbl_fn_8023AE34_000016F0:
     mr r3, r26
     addi r4, r1, 0xd8
     addi r5, r1, 0xa8
-    bl fn_805F89F0
+    bl PSMTXConcat
     psq_l f1, 0x0(r24), 0, 0
     psq_l f2, 0x8(r24), 0, 0
     psq_l f3, 0x10(r24), 0, 0
@@ -1815,7 +1815,7 @@ lbl_fn_8023AE34_00001748:
     mr r3, r26
     addi r4, r1, 0x138
     addi r5, r1, 0x108
-    bl fn_805F89F0
+    bl PSMTXConcat
     psq_l f1, 0x0(r25), 0, 0
     psq_l f2, 0x8(r25), 0, 0
     psq_l f3, 0x10(r25), 0, 0

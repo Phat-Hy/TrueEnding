@@ -42,11 +42,11 @@ extern void fn_8015E7A0(void);
 extern void actor_setState(void);
 extern void fn_80170A20(void);
 extern void fn_8020A780(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
-extern void fn_802377B8(void);
-extern void fn_8023780C(void);
-extern void fn_80237874(void);
+extern void res_MsgHandle_constructor(void);
+extern void res_MsgHandle_destructor(void);
+extern void res_MsgHandle_update(void);
 extern void res_registerResource(void);
 extern void fn_802AC550(void);
 extern void fn_802BABC0(void);
@@ -609,7 +609,7 @@ asm void fn_80458270(void)
     addi r3, r28, 0x14e0
     bl fn_80057A64
     addi r3, r28, 0x14f0
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     lis r4, fn_802AC550@ha
     lis r5, atn_ColliCapsule_destructor@ha
     addi r3, r28, 0x1500
@@ -632,7 +632,7 @@ asm void fn_80458270(void)
     addi r3, r28, 0x1964
     bl fn_802FCF14
     addi r3, r28, 0x196c
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     stw r31, 0x1978(r28)
     addi r3, r28, 0x1980
     stb r31, 0x197c(r28)
@@ -721,7 +721,7 @@ lbl_fn_80458270_000007D0:
     addi r3, r28, 0x14f0
     addi r30, r30, lbl_80754DE0@l
     addi r4, r30, 0x36
-    bl fn_8023780C
+    bl res_MsgHandle_destructor
     li r31, 0x0
     lis r4, lbl_807C7030@ha
     stw r31, 0x18f8(r28)
@@ -740,7 +740,7 @@ lbl_fn_80458270_000007D0:
     bctrl
     addi r3, r28, 0x196c
     addi r4, r30, 0x66
-    bl fn_8023780C
+    bl res_MsgHandle_destructor
     lwz r0, 0x14a8(r28)
     addi r3, r1, 0x8
     li r4, -0x1
@@ -803,7 +803,7 @@ asm void fn_80458590(void)
     cmpwi r3, 0x0
     bne lbl_fn_80458590_00000BDC
     addi r3, r31, 0x14f0
-    bl fn_80237874
+    bl res_MsgHandle_update
     cmpwi r3, 0x0
     bne lbl_fn_80458590_00000BDC
     addi r3, r31, 0x14b0
@@ -815,7 +815,7 @@ asm void fn_80458590(void)
     cmpwi r3, 0x0
     bne lbl_fn_80458590_00000BDC
     addi r3, r31, 0x196c
-    bl fn_80237874
+    bl res_MsgHandle_update
     cmpwi r3, 0x0
     bne lbl_fn_80458590_00000BDC
     lwz r4, 0x7ec(r31)
@@ -1238,7 +1238,7 @@ lbl_fn_8045883C_00000F94:
     cror eq, lt, eq
     bne lbl_fn_8045883C_000014E4
     li r3, 0x5b8
-    bl fn_80219E6C
+    bl task_findEntryById
     mr r30, r3
     mr r3, r31
     bl fn_80144710
@@ -1342,7 +1342,7 @@ lbl_fn_8045883C_000010E8:
     bl PSVECNormalize
     lwz r29, lbl_8087F048
     li r3, 0x5b7
-    bl fn_80219E6C
+    bl task_findEntryById
     lfs f1, lbl_80886C34
     mr r5, r3
     lfs f2, lbl_80886C30

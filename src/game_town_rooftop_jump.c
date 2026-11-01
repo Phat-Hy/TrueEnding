@@ -20,7 +20,7 @@ extern void fn_801F7590(void);
 extern void fn_801F80A8(void);
 extern void fn_801FECE0(void);
 extern void fn_801FEEFC(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void fn_803E6D4C(void);
 
 /* External data declarations */
@@ -494,7 +494,7 @@ lbl_fn_803DCD34_0000060C:
     lwz r3, 0xaa4(r29)
     cmpwi r3, 0x0
     beq lbl_fn_803DCD34_00000634
-    bl fn_80219E6C
+    bl task_findEntryById
     mr r28, r3
     b lbl_fn_803DCD34_0000064C
 lbl_fn_803DCD34_00000634:

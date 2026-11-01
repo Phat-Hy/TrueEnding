@@ -86,7 +86,7 @@ extern void fn_805381CC(void);
 extern void fn_80541214(void);
 extern void fn_8054FAD8(void);
 extern void fn_805A38F4(void);
-extern void fn_805F8CA0(void);
+extern void PSMTXInverse(void);
 extern void fn_8067E23C(void);
 extern u32 strlen(const char* str);
 
@@ -661,7 +661,7 @@ asm void fn_80487BD0(void)
     psq_st f4, 0x18(r3), 0, 0
     psq_st f5, 0x20(r3), 0, 0
     psq_st f6, 0x28(r3), 0, 0
-    b fn_805F8CA0
+    b PSMTXInverse
 }
 
 asm void fn_80487C08(void)

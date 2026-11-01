@@ -11,7 +11,7 @@ extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
 extern void fn_80013F78(void);
-extern void fn_8005B9CC(void);
+extern void talk_formatQuotedString(void);
 extern void fn_8006B174(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
@@ -266,7 +266,7 @@ asm void fn_800973C0(void)
     cmplwi r0, 0x8
     bge lbl_fn_800973C0_00000320
     mr r3, r29
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl fn_800DC12C
     cmpwi r3, 0x0
     bne lbl_fn_800973C0_000002A4

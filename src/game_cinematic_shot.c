@@ -28,7 +28,7 @@ extern void fn_801765D8(void);
 extern void fn_80178208(void);
 extern void fn_80179D44(void);
 extern void fn_801AFAC0(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
 extern void fn_8023A108(void);
@@ -1680,7 +1680,7 @@ lbl_fn_80336C8C_00001618:
     bl system_getNextSequenceId
     mr r31, r3
     li r3, 0x780
-    bl fn_80219E6C
+    bl task_findEntryById
     stw r29, 0x8(r1)
     mr r5, r3
     lfs f1, lbl_808851B0
@@ -1948,7 +1948,7 @@ lbl_fn_80336C8C_00001ACC:
     extrwi. r0, r0, 1, 26
     bne lbl_fn_80336C8C_00001C30
     li r3, 0xe3
-    bl fn_80219E6C
+    bl task_findEntryById
     lwz r5, 0x14e4(r30)
     mr r6, r3
     li r3, 0x0

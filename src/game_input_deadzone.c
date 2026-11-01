@@ -45,7 +45,7 @@ extern void fn_8016DDB0(void);
 extern void actor_setState(void);
 extern void fn_80176ACC(void);
 extern void fn_801A03E8(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void fn_802F0964(void);
 extern void fn_802F0988(void);
 extern void fn_802F0990(void);
@@ -1699,7 +1699,7 @@ lbl_fn_802F0328_000016B4:
     b lbl_fn_802F0328_00001938
 lbl_fn_802F0328_000016D8:
     lwz r3, 0x14ec(r31)
-    bl fn_80219E6C
+    bl task_findEntryById
     mr r30, r3
     bl fn_8013A194
     lwz r6, 0x14c8(r31)
@@ -1735,7 +1735,7 @@ lbl_fn_802F0328_00001738:
     b lbl_fn_802F0328_00001938
 lbl_fn_802F0328_0000175C:
     lwz r3, 0x14ec(r31)
-    bl fn_80219E6C
+    bl task_findEntryById
     mr r30, r3
     bl fn_8013A194
     lwz r6, 0x14c8(r31)

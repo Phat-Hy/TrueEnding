@@ -43,7 +43,7 @@ extern void fn_80202118(void);
 extern void fn_80202A6C(void);
 extern void fn_80202D00(void);
 extern void sound_initGlobalInstances(void);
-extern void fn_80237874(void);
+extern void res_MsgHandle_update(void);
 extern void res_findResourceSlot(void);
 extern void fn_8023A02C(void);
 extern void res_registerResource(void);
@@ -155,11 +155,11 @@ asm void fn_801CC460(void)
     cmpwi r3, 0x0
     bne lbl_fn_801CC460_00000058
     addi r3, r30, 0x14bc
-    bl fn_80237874
+    bl res_MsgHandle_update
     cmpwi r3, 0x0
     bne lbl_fn_801CC460_00000058
     addi r3, r30, 0x14c8
-    bl fn_80237874
+    bl res_MsgHandle_update
     cmpwi r3, 0x0
     beq lbl_fn_801CC460_0000005C
 lbl_fn_801CC460_00000058:

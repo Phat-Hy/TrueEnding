@@ -13,7 +13,7 @@ extern void fn_80013DC4(void);
 extern void fn_80013F78(void);
 extern void fn_8003E120(void);
 extern void item_useConsumable(void);
-extern void fn_8005B3CC(void);
+extern void talk_parseQuotedString(void);
 extern void fn_8005B5F8(void);
 extern void fn_8005B6E8(void);
 extern void fn_800697D8(void);
@@ -5237,22 +5237,22 @@ asm void fn_8004A3FC(void)
     addi r30, r30, lbl_80730F54@l
 lbl_fn_8004A3FC_000042B8:
     addi r3, r1, 0x130
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     mr r5, r3
     addi r3, r1, 0x30
     addi r4, r30, 0x57
     crclr 6
     bl sprintf
     addi r3, r1, 0x130
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC12C
     mr r31, r3
     addi r3, r1, 0x130
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC12C
     mr r26, r3
     addi r3, r1, 0x130
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC12C
     cmpwi r3, 0x0
     ble lbl_fn_8004A3FC_0000433C
@@ -5271,7 +5271,7 @@ lbl_fn_8004A3FC_000042B8:
     stwx r0, r6, r5
 lbl_fn_8004A3FC_0000433C:
     addi r3, r1, 0x130
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC12C
     mr r26, r3
     addi r3, r1, 0x30

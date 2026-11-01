@@ -10,7 +10,7 @@ extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void fn_8000D430(void);
 extern void fn_8004A2CC(void);
-extern void fn_8005B9CC(void);
+extern void talk_formatQuotedString(void);
 extern void fn_8005BBF8(void);
 extern void fn_8005BCE8(void);
 extern void fn_80061824(void);
@@ -49,8 +49,8 @@ extern void fn_804FB534(void);
 extern void fn_805F0E90(void);
 extern void fn_805F1B50(void);
 extern void fn_805F1D30(void);
-extern void fn_805F8980(void);
-extern void fn_805F89F0(void);
+extern void PSMTXIdentity(void);
+extern void PSMTXConcat(void);
 extern void PSMTXScale(void);
 extern void PSMTXMultVecArraySR(void);
 extern void PSVECMag(void);
@@ -190,7 +190,7 @@ asm void fn_803637D4(void)
     addi r31, r31, lbl_8074B780@l
 lbl_fn_803637D4_000000B0:
     addi r3, r1, 0x34
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     lbz r0, 0x0(r3)
     mr r30, r3
     cmpwi r0, 0x3b
@@ -200,15 +200,15 @@ lbl_fn_803637D4_000000B0:
     cmpwi r3, 0x0
     bne lbl_fn_803637D4_0000010C
     addi r3, r1, 0x34
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl fn_800DC288
     stfs f1, 0x3e0(r29)
     addi r3, r1, 0x34
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl fn_800DC288
     stfs f1, 0x3e4(r29)
     addi r3, r1, 0x34
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl fn_800DC288
     stfs f1, 0x3e8(r29)
     b lbl_fn_803637D4_00000160
@@ -219,7 +219,7 @@ lbl_fn_803637D4_0000010C:
     cmpwi r3, 0x0
     bne lbl_fn_803637D4_00000134
     addi r3, r1, 0x34
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl fn_800DC6B4
     stw r3, 0x3d8(r29)
     b lbl_fn_803637D4_00000160
@@ -317,7 +317,7 @@ lbl_fn_803639A0_00000220:
     mr r3, r31
     addi r4, r1, 0x80
     addi r5, r1, 0x50
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r4, r1, 0x50
     addi r3, r1, 0x14
     psq_l f1, 0x0(r4), 0, 0
@@ -1634,7 +1634,7 @@ lbl_fn_80364BE8_0000149C:
     li r4, 0x1
     bl fn_80618290
     addi r3, r1, 0x8
-    bl fn_805F8980
+    bl PSMTXIdentity
     addi r3, r1, 0x8
     li r4, 0x0
     bl GXLoadPosMtxImm

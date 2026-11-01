@@ -89,7 +89,7 @@ extern void fn_8016D74C(void);
 extern void fn_8016F4D8(void);
 extern void fn_8016F530(void);
 extern void fn_8016F5EC(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void rand(void);
 
 /* External data declarations */
@@ -948,7 +948,7 @@ lbl_fn_8013A4E8_00000B84:
     beq lbl_fn_8013A4E8_00000CE8
     lwz r3, 0xd34(r27)
     lwz r3, 0x0(r3)
-    bl fn_80219E6C
+    bl task_findEntryById
     cmpwi r3, 0x0
     mr r28, r3
     beq lbl_fn_8013A4E8_00000C10

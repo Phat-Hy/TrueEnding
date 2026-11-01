@@ -63,7 +63,7 @@ extern void fn_805F2670(void);
 extern void OSReceiveMessage(void);
 extern void fn_805F2880(void);
 extern void OSInitMutex(void);
-extern void fn_805F8980(void);
+extern void PSMTXIdentity(void);
 extern void fn_806078D0(void);
 extern void fn_80607900(void);
 extern void fn_80607D70(void);
@@ -1117,7 +1117,7 @@ asm void fn_805C3FE0(void)
     stw r0, 0x44(r1)
     bl fn_80614A80
     addi r3, r1, 0x8
-    bl fn_805F8980
+    bl PSMTXIdentity
     addi r3, r1, 0x8
     li r4, 0x0
     bl GXLoadPosMtxImm
@@ -2107,7 +2107,7 @@ lbl_fn_805C4690_00001AA8:
     stb r0, 0x248(r31)
     stfs f0, 0x20(r1)
     stfs f0, 0x23c(r31)
-    bl fn_805F8980
+    bl PSMTXIdentity
     lwz r3, 0x28(r1)
     lis r27, lbl_807CA210@ha
     lwz r0, 0x2c(r1)

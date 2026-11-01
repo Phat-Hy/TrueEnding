@@ -7,7 +7,7 @@ extern void _restgpr_21(void);
 extern void _savegpr_21(void);
 extern void dtor_80084684(void);
 extern void fn_80051CD8(void);
-extern void fn_8005B3CC(void);
+extern void talk_parseQuotedString(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
@@ -1085,14 +1085,14 @@ asm void fn_803CD598(void)
     lis r31, lbl_8078BCB8@ha
 lbl_fn_803CD598_00000CF4:
     mr r3, r17
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     lbz r0, 0x0(r3)
     extsb. r0, r0
     beq lbl_fn_803CD598_00000F70
     bl atoi
     clrlwi r19, r3, 16
     mr r3, r17
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     clrlwi r18, r3, 16
     lwz r4, 0x18(r1)

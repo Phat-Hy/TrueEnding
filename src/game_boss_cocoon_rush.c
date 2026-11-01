@@ -38,7 +38,7 @@ extern void fn_8046F5CC(void);
 extern void fn_8046F834(void);
 extern void atn_Curve_evalHermite(void);
 extern void fn_80473F88(void);
-extern void fn_805F89F0(void);
+extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXTrans(void);
 extern void PSMTXScale(void);
@@ -477,7 +477,7 @@ lbl_fn_80472424_000004A4:
     mr r3, r29
     addi r4, r1, 0x290
     addi r5, r1, 0x2c0
-    bl fn_805F89F0
+    bl PSMTXConcat
     psq_l f1, 0x0(r30), 0, 0
     psq_l f2, 0x8(r30), 0, 0
     psq_l f3, 0x10(r30), 0, 0
@@ -520,7 +520,7 @@ lbl_fn_80472424_00000554:
     mr r3, r24
     addi r4, r1, 0x1a0
     addi r5, r1, 0x170
-    bl fn_805F89F0
+    bl PSMTXConcat
     psq_l f1, 0x0(r25), 0, 0
     psq_l f2, 0x8(r25), 0, 0
     psq_l f3, 0x10(r25), 0, 0
@@ -543,7 +543,7 @@ lbl_fn_80472424_000005FC:
     mr r3, r24
     addi r4, r1, 0x200
     addi r5, r1, 0x1d0
-    bl fn_805F89F0
+    bl PSMTXConcat
     psq_l f1, 0x0(r26), 0, 0
     psq_l f2, 0x8(r26), 0, 0
     psq_l f3, 0x10(r26), 0, 0
@@ -566,7 +566,7 @@ lbl_fn_80472424_00000654:
     mr r3, r24
     addi r4, r1, 0x260
     addi r5, r1, 0x230
-    bl fn_805F89F0
+    bl PSMTXConcat
     psq_l f1, 0x0(r27), 0, 0
     psq_l f2, 0x8(r27), 0, 0
     psq_l f3, 0x10(r27), 0, 0
@@ -583,7 +583,7 @@ lbl_fn_80472424_000006AC:
     mr r3, r29
     mr r4, r24
     addi r5, r1, 0x110
-    bl fn_805F89F0
+    bl PSMTXConcat
     psq_l f1, 0x0(r28), 0, 0
     psq_l f2, 0x8(r28), 0, 0
     psq_l f3, 0x10(r28), 0, 0
@@ -611,7 +611,7 @@ lbl_fn_80472424_000006EC:
     addi r3, r1, 0x2f0
     addi r4, r1, 0xb0
     addi r5, r1, 0xe0
-    bl fn_805F89F0
+    bl PSMTXConcat
     psq_l f1, 0x0(r23), 0, 0
     psq_l f2, 0x8(r23), 0, 0
     psq_l f3, 0x10(r23), 0, 0

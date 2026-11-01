@@ -9,7 +9,7 @@ extern void ref_releaseHandle(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800FAB80(void);
 extern void actor_setState(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
@@ -155,7 +155,7 @@ lbl_fn_8026AC8C_00000078:
     lwz r3, lbl_8087F3C0
     bl res_registerResource
     li r3, 0x619
-    bl fn_80219E6C
+    bl task_findEntryById
     lwz r30, lbl_8087F048
     mr r29, r3
     mr r3, r30

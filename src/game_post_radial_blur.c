@@ -31,7 +31,7 @@ extern void fn_8016DA4C(void);
 extern void actor_setState(void);
 extern void fn_801765D8(void);
 extern void fn_80178A6C(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void fn_802CCFD8(void);
 extern void world_setLocalFlag(void);
 extern void PSMTXRotRad(void);
@@ -761,7 +761,7 @@ lbl_fn_802CB8A0_00000960:
     fcmpo cr0, f3, f0
     ble lbl_fn_802CB8A0_000009CC
     li r3, 0x67e
-    bl fn_80219E6C
+    bl task_findEntryById
     mr r5, r3
     lwz r3, lbl_8087F048
     li r0, -0x1

@@ -16,8 +16,8 @@ extern void fn_800A5648(void);
 extern void fn_800A56A8(void);
 extern void fn_800A58D0(void);
 extern void fn_800A58F8(void);
-extern void fn_805F89F0(void);
-extern void fn_805F8CA0(void);
+extern void PSMTXConcat(void);
+extern void PSMTXInverse(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXRotAxis(void);
 extern void PSMTXTrans(void);
@@ -569,7 +569,7 @@ lbl_item_useConsumable_00000640:
     mr r3, r30
     addi r4, r1, 0x2e0
     addi r5, r1, 0x2b0
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x2b0
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -594,7 +594,7 @@ lbl_item_useConsumable_00000720:
     mr r3, r30
     addi r4, r1, 0x340
     addi r5, r1, 0x310
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x310
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -619,7 +619,7 @@ lbl_item_useConsumable_00000780:
     mr r3, r30
     addi r4, r1, 0x3a0
     addi r5, r1, 0x370
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x370
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -637,7 +637,7 @@ lbl_item_useConsumable_000007E0:
     addi r4, r31, 0x58
     addi r3, r1, 0x4d0
     mr r5, r4
-    bl fn_805F89F0
+    bl PSMTXConcat
     lfs f9, lbl_8088089C
     addi r3, r1, 0x530
     lfs f0, lbl_80880898
@@ -683,7 +683,7 @@ lbl_item_useConsumable_000007E0:
     mr r3, r30
     addi r4, r1, 0x250
     addi r5, r1, 0x280
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x280
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -708,7 +708,7 @@ lbl_item_useConsumable_000008DC:
     mr r3, r30
     addi r4, r1, 0x1f0
     addi r5, r1, 0x220
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x220
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -733,7 +733,7 @@ lbl_item_useConsumable_0000093C:
     mr r3, r30
     addi r4, r1, 0x190
     addi r5, r1, 0x1c0
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x1c0
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -840,7 +840,7 @@ lbl_item_useConsumable_00000AC0:
     psq_st f3, 0x10(r30), 0, 0
     psq_st f4, 0x18(r30), 0, 0
     psq_st f5, 0x20(r30), 0, 0
-    bl fn_805F8CA0
+    bl PSMTXInverse
     lwz r0, 0x4(r31)
     psq_l f1, 0x0(r30), 0, 0
     psq_l f2, 0x8(r30), 0, 0
@@ -4740,7 +4740,7 @@ asm void fn_8004F5B8(void)
     psq_st f4, 0x18(r6), 0, 0
     psq_st f5, 0x20(r6), 0, 0
     psq_st f6, 0x28(r6), 0, 0
-    bl fn_805F8CA0
+    bl PSMTXInverse
     psq_l f1, 0x0(r28), 0, 0
     fneg f11, f25
     psq_l f2, 0x8(r28), 0, 0

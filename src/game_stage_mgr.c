@@ -13,9 +13,9 @@ extern void system_getNextSequenceId(void);
 extern void fn_800FAB80(void);
 extern void magic_dispatchActionCommand(void);
 extern void fn_8016DA4C(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void res_registerResource(void);
-extern void fn_805F89F0(void);
+extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXTrans(void);
 extern void PSMTXMultVec(void);
@@ -1478,7 +1478,7 @@ lbl_fn_80196548_000013EC:
     bl system_getNextSequenceId
     mr r29, r3
     lwz r3, 0x28(r30)
-    bl fn_80219E6C
+    bl task_findEntryById
     li r0, -0x1
     stw r0, 0x8(r1)
     mr r5, r3
@@ -1962,7 +1962,7 @@ lbl_fn_80196CD4_00001A60:
     mr r3, r30
     addi r4, r1, 0x120
     addi r5, r1, 0x150
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r5, r1, 0x150
     lfs f7, lbl_80881FCC
     psq_l f1, 0x0(r5), 0, 0

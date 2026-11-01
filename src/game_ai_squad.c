@@ -26,7 +26,7 @@ extern void fn_8016F3D0(void);
 extern void fn_80176548(void);
 extern void fn_801781B0(void);
 extern void fn_8017A450(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
@@ -189,7 +189,7 @@ lbl_fn_80269168_000000A0:
     bl fn_8026F9BC
 lbl_fn_80269168_000000F0:
     li r3, 0x613
-    bl fn_80219E6C
+    bl task_findEntryById
     mr r31, r3
     mr r3, r30
     bl fn_80144710
@@ -285,7 +285,7 @@ lbl_fn_802692B4_0000022C:
     addi r0, r3, 0x1
     stw r0, 0x14c4(r20)
     li r3, 0x61d
-    bl fn_80219E6C
+    bl task_findEntryById
     lwz r19, lbl_8087F048
     mr r22, r3
     mr r3, r19
@@ -462,7 +462,7 @@ lbl_fn_802692B4_00000408:
     stw r28, 0xb8(r1)
     bl fn_801781B0
     lwz r3, 0x6c(r22)
-    bl fn_80219E6C
+    bl task_findEntryById
     lfs f1, lbl_80883674
     mr r5, r3
     lfs f2, lbl_80883670
@@ -829,7 +829,7 @@ lbl_fn_802696F8_00000A20:
     stw r4, 0xa4(r1)
     stw r0, 0xac(r1)
     stw r4, 0xa8(r1)
-    bl fn_80219E6C
+    bl task_findEntryById
     lis r8, lbl_807C6B90@ha
     lwz r6, 0x150c(r31)
     mr r4, r3
@@ -1190,7 +1190,7 @@ lbl_fn_8026A010_00000F3C:
     bl atn_Anim_setLayerAnimation
 lbl_fn_8026A010_00000FA4:
     li r3, 0x615
-    bl fn_80219E6C
+    bl task_findEntryById
     mr r30, r3
     mr r3, r31
     bl fn_80144710
@@ -1248,7 +1248,7 @@ lbl_fn_8026A010_00001070:
     cror eq, lt, eq
     bne lbl_fn_8026A010_000010C0
     li r3, 0x615
-    bl fn_80219E6C
+    bl task_findEntryById
     mr r30, r3
     mr r3, r31
     bl fn_80144710
@@ -1607,7 +1607,7 @@ lbl_fn_8026A628_00001560:
     bl fn_8026F9BC
 lbl_fn_8026A628_000015B0:
     li r3, 0x61c
-    bl fn_80219E6C
+    bl task_findEntryById
     mr r31, r3
     mr r3, r30
     bl fn_80144710

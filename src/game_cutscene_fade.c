@@ -21,7 +21,7 @@ extern void fn_80179D44(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
-extern void fn_805F89F0(void);
+extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
@@ -319,7 +319,7 @@ asm void fn_8033135C(void)
     mr r3, r30
     addi r4, r1, 0x48
     addi r5, r1, 0x18
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x18
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -344,7 +344,7 @@ lbl_fn_8033135C_000003A0:
     mr r3, r30
     addi r4, r1, 0xa8
     addi r5, r1, 0x78
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x78
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -369,7 +369,7 @@ lbl_fn_8033135C_00000400:
     mr r3, r30
     addi r4, r1, 0x108
     addi r5, r1, 0xd8
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0xd8
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0

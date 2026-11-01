@@ -10,7 +10,7 @@ extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
 extern void fn_80013F78(void);
-extern void fn_8005B3CC(void);
+extern void talk_parseQuotedString(void);
 extern void fn_8005B5F8(void);
 extern void fn_8005B6E8(void);
 extern void fn_8006AFF8(void);
@@ -38,8 +38,8 @@ extern void fn_8021A888(void);
 extern void sound_initGlobalInstances(void);
 extern void fn_80237518(void);
 extern void fn_80237654(void);
-extern void fn_802377B8(void);
-extern void fn_8023780C(void);
+extern void res_MsgHandle_constructor(void);
+extern void res_MsgHandle_destructor(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
 extern void fn_8027688C(void);
@@ -1890,17 +1890,17 @@ asm void fn_8027C990(void)
     stw r28, 0x1544(r29)
     stw r28, 0x1548(r29)
     stw r0, 0x154c(r29)
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addi r3, r29, 0x155c
     bl fn_80237518
     addi r3, r29, 0x1568
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addi r3, r29, 0x1574
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addi r3, r29, 0x1580
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addi r3, r29, 0x158c
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     lfs f0, lbl_8088394C
     addi r3, r29, 0x15a8
     stfs f0, 0x1598(r29)
@@ -2001,7 +2001,7 @@ asm void fn_8027C990(void)
     bl fn_8005B6E8
 lbl_fn_8027C990_00001B08:
     addi r3, r1, 0x44
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     cmpwi r3, 0x0
     mr r26, r3
     beq lbl_fn_8027C990_00001BA0
@@ -2063,22 +2063,22 @@ lbl_fn_8027C990_00001BCC:
     addi r3, r29, 0x1550
     addi r30, r30, lbl_80744EFC@l
     addi r4, r30, 0x35
-    bl fn_8023780C
+    bl res_MsgHandle_destructor
     addi r3, r29, 0x155c
     addi r4, r30, 0x4a
     bl fn_80237654
     addi r3, r29, 0x1568
     addi r4, r30, 0x60
-    bl fn_8023780C
+    bl res_MsgHandle_destructor
     addi r3, r29, 0x1574
     addi r4, r30, 0x75
-    bl fn_8023780C
+    bl res_MsgHandle_destructor
     addi r3, r29, 0x1580
     addi r4, r30, 0x8b
-    bl fn_8023780C
+    bl res_MsgHandle_destructor
     addi r3, r29, 0x158c
     addi r4, r30, 0xa0
-    bl fn_8023780C
+    bl res_MsgHandle_destructor
     lwz r0, 0x20(r1)
     srwi. r0, r0, 31
     beq lbl_fn_8027C990_00001C40

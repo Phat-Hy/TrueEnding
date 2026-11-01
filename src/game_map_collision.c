@@ -9,7 +9,7 @@ extern void _savegpr_18(void);
 extern void _savegpr_19(void);
 extern void dtor_80084684(void);
 extern void fn_8004ED34(void);
-extern void fn_8005B3CC(void);
+extern void talk_parseQuotedString(void);
 extern void fn_8005B6E8(void);
 extern void fn_800616C0(void);
 extern void mem_free(void);
@@ -35,7 +35,7 @@ extern void fn_8035B694(void);
 extern void fn_8035B78C(void);
 extern void fn_803C1560(void);
 extern void fn_803CD958(void);
-extern void fn_805F89F0(void);
+extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXScale(void);
 extern void PSMTXMultVec(void);
@@ -178,7 +178,7 @@ asm void fn_801805A4(void)
     la r4, lbl_8087D708
     bl fn_8005B6E8
     addi r3, r1, 0x28
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     lis r4, __files@ha
     lis r19, lbl_80738154@ha
     mr r18, r3
@@ -353,7 +353,7 @@ lbl_fn_801805A4_0000029C:
     bl dtor_80084684
 lbl_fn_801805A4_00000378:
     addi r3, r1, 0x28
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     mr r18, r3
 lbl_fn_801805A4_00000384:
     cmpwi r18, 0x0
@@ -1478,7 +1478,7 @@ lbl_fn_8018161C_000011EC:
     mr r3, r29
     addi r4, r1, 0x78
     addi r5, r1, 0x48
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x48
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1503,7 +1503,7 @@ lbl_fn_8018161C_00001320:
     mr r3, r29
     addi r4, r1, 0xd8
     addi r5, r1, 0xa8
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0xa8
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1528,7 +1528,7 @@ lbl_fn_8018161C_00001380:
     mr r3, r29
     addi r4, r1, 0x138
     addi r5, r1, 0x108
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x108
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1546,7 +1546,7 @@ lbl_fn_8018161C_000013E0:
     addi r4, r30, 0x14d4
     addi r3, r1, 0x168
     mr r5, r4
-    bl fn_805F89F0
+    bl PSMTXConcat
     lfs f9, 0x44(r1)
     mr r3, r30
     lfs f8, lbl_80881C28

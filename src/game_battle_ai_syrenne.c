@@ -26,7 +26,7 @@ extern void fn_8021D720(void);
 extern void fn_8021D770(void);
 extern void fn_8021E4E4(void);
 extern void sound_initGlobalInstances(void);
-extern void fn_802377B8(void);
+extern void res_MsgHandle_constructor(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
 extern void fn_8037F6D8(void);
@@ -48,7 +48,7 @@ extern void fn_80450A5C(void);
 extern void fn_80450B60(void);
 extern void fn_8054E100(void);
 extern void fn_8054E52C(void);
-extern void fn_805F89F0(void);
+extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSVECNormalize(void);
@@ -208,7 +208,7 @@ lbl_fn_8043465C_00000128:
     mr r3, r28
     addi r4, r1, 0x60
     addi r5, r1, 0x30
-    bl fn_805F89F0
+    bl PSMTXConcat
     psq_l f1, 0x0(r27), 0, 0
     mr r4, r26
     psq_l f2, 0x8(r27), 0, 0
@@ -1703,11 +1703,11 @@ asm void fn_80435CE4(void)
     stw r4, 0x0(r31)
     li r4, 0x9
     bl fn_8008A4E0
-    lis r4, fn_802377B8@ha
+    lis r4, res_MsgHandle_constructor@ha
     lis r5, fn_800EF73C@ha
     addi r3, r31, 0x308
     li r6, 0xc
-    addi r4, r4, fn_802377B8@l
+    addi r4, r4, res_MsgHandle_constructor@l
     addi r5, r5, fn_800EF73C@l
     li r7, 0x3
     bl fn_806958E0
@@ -1777,11 +1777,11 @@ asm void fn_80435DEC(void)
     stw r4, 0x0(r31)
     li r4, 0x9
     bl fn_8008A4E0
-    lis r4, fn_802377B8@ha
+    lis r4, res_MsgHandle_constructor@ha
     lis r5, fn_800EF73C@ha
     addi r3, r31, 0x308
     li r6, 0xc
-    addi r4, r4, fn_802377B8@l
+    addi r4, r4, res_MsgHandle_constructor@l
     addi r5, r5, fn_800EF73C@l
     li r7, 0x3
     bl fn_806958E0

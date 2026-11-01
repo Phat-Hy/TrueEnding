@@ -27,7 +27,7 @@ extern void atn_LoadHandle_isLoading(void);
 extern void fn_80473F88(void*);
 extern void taskManager_updateTasks(void);
 extern void fn_80478158(void);
-extern void fn_805F89F0(void);
+extern void PSMTXConcat(void);
 extern void PSVECNormalize(void);
 extern void PSVECCrossProduct(void);
 extern void fn_80615E00(void);
@@ -853,11 +853,11 @@ lbl_fn_800D5F68_00000AF0:
     stfs f30, 0x384(r1)
     stfs f30, 0x394(r1)
     stfs f30, 0x3a4(r1)
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x3d8
     addi r4, r1, 0x198
     addi r5, r1, 0x1c8
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x1c8
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1062,11 +1062,11 @@ lbl_fn_800D5F68_00000E60:
     stfs f30, 0x2c4(r1)
     stfs f30, 0x2d4(r1)
     stfs f30, 0x2e4(r1)
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x318
     addi r4, r1, 0x138
     addi r5, r1, 0x168
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x168
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1215,11 +1215,11 @@ lbl_fn_800D5F68_00001148:
     addi r3, r1, 0x228
     addi r4, r1, 0x258
     addi r5, r1, 0xd8
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x1f8
     addi r4, r1, 0xd8
     addi r5, r1, 0x108
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x108
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0

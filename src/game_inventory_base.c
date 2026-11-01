@@ -21,7 +21,7 @@ extern void fn_8015076C(void);
 extern void fn_80164DCC(void);
 extern void actor_setState(void);
 extern void fn_801C8938(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void fn_8021AA48(void);
 extern void world_getGlobalFlag(void);
 extern void fn_803E2110(void);
@@ -642,7 +642,7 @@ lbl_fn_80151448_0000076C:
     lwz r3, 0x4(r5)
     cmpwi r3, 0x0
     ble lbl_fn_80151448_00000798
-    bl fn_80219E6C
+    bl task_findEntryById
     b lbl_fn_80151448_000007A4
 lbl_fn_80151448_00000798:
     addi r4, r4, 0x14
@@ -2003,7 +2003,7 @@ lbl_fn_80152A24_00001AF0:
     lwz r3, 0x4(r3)
     cmpwi r3, 0x1789
     bne lbl_fn_80152A24_00001B08
-    bl fn_80219E6C
+    bl task_findEntryById
     b lbl_fn_80152A24_00001B14
 lbl_fn_80152A24_00001B08:
     addi r4, r4, 0x14

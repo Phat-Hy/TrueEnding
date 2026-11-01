@@ -14,7 +14,7 @@ extern void gx_setRenderStateParam(void);
 extern void fn_80076A28(void);
 extern void fn_800B5994(void);
 extern void fn_800D5F68(void);
-extern void fn_805F8980(void);
+extern void PSMTXIdentity(void);
 extern void PSMTXMultVecArraySR(void);
 extern void fn_80612E80(void);
 extern void fn_806134E0(void);
@@ -1460,7 +1460,7 @@ lbl_fn_800BFCB4_000011A8:
     li r4, 0x1
     bl fn_80618290
     addi r3, r1, 0x30
-    bl fn_805F8980
+    bl PSMTXIdentity
     addi r3, r1, 0x30
     li r4, 0x0
     bl GXLoadPosMtxImm

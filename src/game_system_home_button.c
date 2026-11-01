@@ -13,7 +13,7 @@ extern void fn_80049B74(void);
 extern void fn_8004A1D4(void);
 extern void fn_8004B0E4(void);
 extern void fn_8004B1EC(void);
-extern void fn_8005B3CC(void);
+extern void talk_parseQuotedString(void);
 extern void fn_800616C0(void);
 extern void fn_80063D3C(void);
 extern void mem_alloc(void);
@@ -1349,7 +1349,7 @@ asm void fn_80360B40(void)
     stw r30, 0x8(r1)
     mr r30, r3
     mr r3, r31
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     mr r4, r3
     addi r3, r30, 0x4
     li r5, 0x20
@@ -1362,51 +1362,51 @@ asm void fn_80360B40(void)
     stw r3, 0x24(r30)
 lbl_fn_80360B40_00000F94:
     mr r3, r31
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC288
     stfs f1, 0x28(r30)
     mr r3, r31
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC288
     stfs f1, 0x38(r30)
     mr r3, r31
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC288
     stfs f1, 0x3c(r30)
     mr r3, r31
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     mr r3, r31
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     mr r3, r31
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     stw r3, 0x40(r30)
     mr r3, r31
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     mr r3, r31
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     mr r3, r31
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     stw r3, 0x44(r30)
     mr r3, r31
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     stw r3, 0x48(r30)
     mr r3, r31
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     stw r3, 0x4c(r30)
     mr r3, r31
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     stw r3, 0x50(r30)
     mr r3, r31
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     mr r3, r31
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     mr r3, r31
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -1467,11 +1467,11 @@ asm void fn_80360CDC(void)
     stw r28, 0x110(r1)
     mr r28, r4
     mr r3, r28
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     stw r3, 0x4c(r31)
     mr r3, r28
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     lwz r3, 0x50(r31)
     mr r4, r28
     bl fn_80360B40
@@ -1882,17 +1882,17 @@ asm void fn_8036126C(void)
     stw r30, 0x8(r1)
     mr r30, r3
     mr r3, r31
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC288
     lwz r4, 0x50(r30)
     mr r3, r31
     stfs f1, 0x2c(r4)
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC288
     lwz r4, 0x50(r30)
     mr r3, r31
     stfs f1, 0x30(r4)
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC288
     lwz r3, 0x50(r30)
     stfs f1, 0x34(r3)
@@ -2068,7 +2068,7 @@ asm void fn_803614E8(void)
     stmw r14, 0x168(r1)
     mr r29, r3
     mr r3, r4
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     li r14, 0x0
     stw r14, 0x40(r1)
     mr r15, r3

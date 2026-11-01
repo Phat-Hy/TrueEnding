@@ -8,7 +8,7 @@ extern void dtor_80084684(void);
 extern void atn_ColliBase_destructor(void);
 extern void fn_80057F28(void);
 extern void fn_800588FC(void);
-extern void fn_8005B9CC(void);
+extern void talk_formatQuotedString(void);
 extern void fn_8005BBF8(void);
 extern void fn_8005BCE8(void);
 extern void mem_alloc(void);
@@ -33,8 +33,8 @@ extern void fn_8011F91C(void);
 extern void fn_8011FC10(void);
 extern void fn_8011FE3C(void);
 extern void sound_initGlobalInstances(void);
-extern void fn_802377B8(void);
-extern void fn_8023781C(void);
+extern void res_MsgHandle_constructor(void);
+extern void res_MsgHandle_unload(void);
 extern void fn_80239D58(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
@@ -1459,7 +1459,7 @@ asm void fn_80422F78(void)
     addi r31, r31, lbl_80753410@l
 lbl_fn_80422F78_000011D4:
     addi r3, r1, 0x8
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     lbz r0, 0x0(r3)
     mr r30, r3
     cmpwi r0, 0x3b
@@ -1469,7 +1469,7 @@ lbl_fn_80422F78_000011D4:
     cmpwi r3, 0x0
     bne lbl_fn_80422F78_00001214
     addi r3, r1, 0x8
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     mr r4, r3
     addi r3, r29, 0xf8
     bl fn_800C1814
@@ -1481,7 +1481,7 @@ lbl_fn_80422F78_00001214:
     cmpwi r3, 0x0
     bne lbl_fn_80422F78_0000127C
     addi r3, r1, 0x8
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl fn_800DC12C
     subic. r0, r3, 0x2
     blt lbl_fn_80422F78_0000127C
@@ -1490,15 +1490,15 @@ lbl_fn_80422F78_00001214:
     mulli r0, r0, 0xc
     addi r3, r1, 0x8
     add r30, r29, r0
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl fn_800DC288
     stfs f1, 0x154(r30)
     addi r3, r1, 0x8
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl fn_800DC288
     stfs f1, 0x158(r30)
     addi r3, r1, 0x8
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl fn_800DC288
     stfs f1, 0x15c(r30)
 lbl_fn_80422F78_0000127C:
@@ -1743,7 +1743,7 @@ asm void fn_8042335C(void)
     addi r3, r31, 0x894
     bl fn_80057F28
     addi r3, r31, 0x91c
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     li r0, 0x0
     stw r0, 0x54(r31)
 lbl_fn_8042335C_000015B4:
@@ -1778,7 +1778,7 @@ asm void fn_80423434(void)
     addic. r31, r3, 0x91c
     beq lbl_fn_80423434_00001628
     mr r3, r31
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r31, 0x4
     beq lbl_fn_80423434_00001628
     li r4, 0x0

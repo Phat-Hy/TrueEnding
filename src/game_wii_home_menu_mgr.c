@@ -19,8 +19,8 @@ extern void fn_8056A9E8(void);
 extern void fn_8056D070(void);
 extern void fn_8056D440(void);
 extern void fn_80570810(void);
-extern void fn_805F89F0(void);
-extern void fn_805F8CA0(void);
+extern void PSMTXConcat(void);
+extern void PSMTXInverse(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXTrans(void);
 extern void PSMTX44Identity(void);
@@ -203,7 +203,7 @@ asm void fn_8056B3D8(void)
     psq_st f4, 0x18(r3), 0, 0
     psq_st f5, 0x20(r3), 0, 0
     psq_st f6, 0x28(r3), 0, 0
-    bl fn_805F8CA0
+    bl PSMTXInverse
     lwz r3, lbl_8087F8A0
     lwz r30, 0x48(r3)
     b lbl_fn_8056B3D8_00000204
@@ -314,7 +314,7 @@ asm void fn_8056B55C(void)
     stb r0, 0x4(r30)
     lwz r0, 0x34c(r31)
     stb r0, 0x6(r30)
-    bl fn_805F89F0
+    bl PSMTXConcat
     li r0, 0x6
     addi r5, r1, 0xe0
     li r8, 0x0
@@ -961,7 +961,7 @@ lbl_fn_8056BD38_00000BDC:
     mr r4, r31
     addi r3, r27, 0x464
     addi r5, r1, 0x28
-    bl fn_805F89F0
+    bl PSMTXConcat
     fmr f1, f31
     mr r3, r30
     mr r8, r29
@@ -1404,7 +1404,7 @@ asm void fn_8056C3DC(void)
     psq_st f4, 0x18(r22), 0, 0
     psq_st f5, 0x20(r22), 0, 0
     psq_st f6, 0x28(r22), 0, 0
-    bl fn_805F8CA0
+    bl PSMTXInverse
     lwz r4, lbl_8087F8A0
     mr r3, r25
     mr r5, r22
@@ -1886,7 +1886,7 @@ asm void fn_8056CB24(void)
     stb r0, 0x4(r30)
     lwz r0, 0x34c(r31)
     stb r0, 0x6(r30)
-    bl fn_805F89F0
+    bl PSMTXConcat
     li r0, 0x6
     addi r5, r1, 0xe0
     li r8, 0x0

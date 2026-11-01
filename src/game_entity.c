@@ -85,7 +85,7 @@ extern void fn_80161570(void);
 extern void fn_80161880(void);
 extern void fn_80176428(void);
 extern void fn_802180A8(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void fn_8021A984(void);
 extern void world_getGlobalFlag(void);
 extern void fn_803C1560(void);
@@ -690,7 +690,7 @@ lbl_fn_8001BB04_00000700:
     lwz r3, 0x0(r31)
     cmpwi r3, 0x0
     ble lbl_fn_8001BB04_00000750
-    bl fn_80219E6C
+    bl task_findEntryById
     cmpwi r3, 0x0
     beq lbl_fn_8001BB04_00000750
     lbz r0, 0x1(r3)
@@ -790,7 +790,7 @@ asm void fn_8001BCB4(void)
     lwz r3, 0xaa4(r3)
     cmpwi r3, 0x0
     ble lbl_fn_8001BCB4_00000858
-    bl fn_80219E6C
+    bl task_findEntryById
     cmpwi r3, 0x0
     beq lbl_fn_8001BCB4_00000858
     li r31, 0x1

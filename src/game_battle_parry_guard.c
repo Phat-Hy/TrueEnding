@@ -15,7 +15,7 @@ extern void fn_80057F28(void);
 extern void fn_80058078(void);
 extern void fn_800580BC(void);
 extern void fn_800588FC(void);
-extern void fn_8005B9CC(void);
+extern void talk_formatQuotedString(void);
 extern void fn_8005BBF8(void);
 extern void fn_8005BCE8(void);
 extern void mem_alloc(void);
@@ -39,10 +39,10 @@ extern void quest_checkCondition(void);
 extern void fn_802180A8(void);
 extern void fn_80219558(void);
 extern void sound_initGlobalInstances(void);
-extern void fn_802377B8(void);
-extern void fn_8023780C(void);
-extern void fn_8023781C(void);
-extern void fn_80237874(void);
+extern void res_MsgHandle_constructor(void);
+extern void res_MsgHandle_destructor(void);
+extern void res_MsgHandle_unload(void);
+extern void res_MsgHandle_update(void);
 extern void fn_802378C4(void);
 extern void res_findResourceSlot(void);
 extern void fn_8023A02C(void);
@@ -568,7 +568,7 @@ asm void fn_80412E5C(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     li r0, 0x0
     stw r0, 0xc(r31)
     mr r3, r31
@@ -600,7 +600,7 @@ asm void fn_80412EA0(void)
     mr r30, r3
     beq lbl_fn_80412EA0_00000644
     beq lbl_fn_80412EA0_00000634
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r30, 0x4
     beq lbl_fn_80412EA0_00000634
     li r4, 0x0
@@ -1520,7 +1520,7 @@ lbl_fn_80413B1C_000012B8:
     b lbl_fn_80413B1C_0000130C
 lbl_fn_80413B1C_000012D8:
     mr r3, r29
-    bl fn_80237874
+    bl res_MsgHandle_update
     cmpwi r3, 0x0
     beq lbl_fn_80413B1C_000012F0
     li r3, 0x1
@@ -1609,7 +1609,7 @@ asm void fn_80413BD4(void)
     li r23, 0x1
 lbl_fn_80413BD4_0000141C:
     addi r3, r1, 0x108
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     lbz r0, 0x0(r3)
     mr r18, r3
     cmpwi r0, 0x3b
@@ -1696,7 +1696,7 @@ lbl_fn_80413BD4_00001530:
     addi r26, r26, 0xc
     addi r25, r25, 0x8
     addi r24, r24, 0x4
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     mr r4, r3
     mr r3, r18
     li r5, 0x0
@@ -1715,12 +1715,12 @@ lbl_fn_80413BD4_0000158C:
     cmpwi r3, 0x0
     bne lbl_fn_80413BD4_000015D8
     addi r3, r1, 0x108
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     mr r4, r3
     addi r3, r1, 0x8
     bl strcpy
     addi r3, r1, 0x108
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl fn_800DC288
     add r3, r31, r30
     addi r4, r1, 0x8
@@ -1735,13 +1735,13 @@ lbl_fn_80413BD4_000015D8:
     cmpwi r3, 0x0
     bne lbl_fn_80413BD4_00001684
     addi r3, r1, 0x108
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     mr r4, r3
     addi r3, r1, 0x8
     bl strcpy
     add r18, r31, r28
     addi r3, r1, 0x108
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl fn_802180A8
     mr r4, r3
     stw r3, 0x1f9c(r18)
@@ -1750,25 +1750,25 @@ lbl_fn_80413BD4_000015D8:
     addi r3, r3, 0xfc
     bl atn_Anim_applyLayerTransform
     addi r3, r1, 0x108
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl fn_800DC288
     stfs f1, 0x1fa0(r18)
     addi r3, r1, 0x108
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl atoi
     subi r0, r3, 0x1
     addi r3, r1, 0x108
     cntlzw r0, r0
     srwi r0, r0, 5
     stb r0, 0x1fa4(r18)
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl atoi
     subi r0, r3, 0x1
     addi r3, r1, 0x108
     cntlzw r0, r0
     srwi r0, r0, 5
     stb r0, 0x1fa5(r18)
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl fn_800DC288
     stfs f1, 0x1fa8(r18)
     b lbl_fn_80413BD4_00001958
@@ -1791,7 +1791,7 @@ lbl_fn_80413BD4_00001684:
 lbl_fn_80413BD4_000016C0:
     stw r3, 0x203c(r18)
     addi r3, r1, 0x108
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     mr r4, r3
     lwz r3, 0x203c(r18)
     bl fn_80058078
@@ -1818,19 +1818,19 @@ lbl_fn_80413BD4_000016DC:
 lbl_fn_80413BD4_00001724:
     stw r18, 0x2044(r21)
     addi r3, r1, 0x108
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl fn_800DC288
     stfs f1, 0x4c(r18)
     addi r3, r1, 0x108
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl fn_800DC288
     stfs f1, 0x50(r18)
     addi r3, r1, 0x108
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl fn_800DC288
     stfs f1, 0x54(r18)
     addi r3, r1, 0x108
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl fn_800DC288
     stfs f1, 0x58(r18)
     lis r3, 0x8
@@ -1861,12 +1861,12 @@ lbl_fn_80413BD4_000017B0:
     add r4, r31, r27
     addi r3, r1, 0x108
     addi r18, r4, 0x209c
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     mr r4, r3
     mr r3, r18
-    bl fn_8023780C
+    bl res_MsgHandle_destructor
     addi r3, r1, 0x108
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     mr r21, r3
     b lbl_fn_80413BD4_0000183C
 lbl_fn_80413BD4_000017F0:
@@ -1889,7 +1889,7 @@ lbl_fn_80413BD4_00001810:
     stw r0, 0xc(r18)
 lbl_fn_80413BD4_00001830:
     addi r3, r1, 0x108
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     mr r21, r3
 lbl_fn_80413BD4_0000183C:
     lbz r0, 0x0(r21)
@@ -1905,35 +1905,35 @@ lbl_fn_80413BD4_0000184C:
     add r18, r31, r29
     addi r3, r1, 0x108
     stw r23, 0x2160(r18)
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl fn_800DC288
     stfs f1, 0x2164(r18)
     addi r3, r1, 0x108
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl fn_800DC288
     stfs f1, 0x2168(r18)
     addi r3, r1, 0x108
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl fn_800DC288
     stfs f1, 0x216c(r18)
     addi r3, r1, 0x108
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl fn_800DC288
     stfs f1, 0x2170(r18)
     addi r3, r1, 0x108
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl fn_800DC288
     stfs f1, 0x2174(r18)
     addi r3, r1, 0x108
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl fn_800DC288
     stfs f1, 0x2178(r18)
     addi r3, r1, 0x108
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl fn_800DC288
     stfs f1, 0x217c(r18)
     addi r3, r1, 0x108
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl fn_800DC288
     fmuls f0, f31, f1
     li r0, 0x6
@@ -1964,7 +1964,7 @@ lbl_fn_80413BD4_00001934:
     cmpwi r3, 0x0
     bne lbl_fn_80413BD4_00001958
     addi r3, r1, 0x108
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl atoi
     stw r3, 0x2280(r31)
 lbl_fn_80413BD4_00001958:

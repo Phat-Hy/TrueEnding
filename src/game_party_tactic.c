@@ -26,7 +26,7 @@ extern void fn_801BBC48(void);
 extern void fn_801C706C(void);
 extern void fn_80210220(void);
 extern void fn_80219558(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void world_getGlobalFlag(void);
 extern void world_setGlobalFlag(void);
 extern void fn_80375184(void);
@@ -1111,7 +1111,7 @@ asm void fn_80164454(void)
     cmpwi r4, 0x0
     ble lbl_fn_80164454_00000ED8
     mr r3, r4
-    bl fn_80219E6C
+    bl task_findEntryById
     mr r31, r3
     b lbl_fn_80164454_00000EDC
 lbl_fn_80164454_00000ED8:

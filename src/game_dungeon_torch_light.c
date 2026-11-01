@@ -24,7 +24,7 @@ extern void fn_801FECE0(void);
 extern void fn_801FED24(void);
 extern void fn_801FEE08(void);
 extern void fn_80211480(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void world_startMapTransition(void);
 extern void world_reloadMapTransition(void);
 extern int world_isTransitionFinished(void* world);
@@ -210,7 +210,7 @@ lbl_fn_803E598C_00000150:
     cmpwi r6, 0x0
     ble lbl_fn_803E598C_000001A0
     mr r3, r6
-    bl fn_80219E6C
+    bl task_findEntryById
     b lbl_fn_803E598C_000001A4
 lbl_fn_803E598C_000001A0:
     li r3, 0x0

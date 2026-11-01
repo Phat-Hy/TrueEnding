@@ -60,7 +60,7 @@ extern void fn_8047F268(void);
 extern void fn_80547C2C(void);
 extern void fn_8054A3E0(void);
 extern void fn_805B7B08(void);
-extern void fn_805F89F0(void);
+extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSVECSquareMag(void);
@@ -1895,7 +1895,7 @@ lbl_fn_803C1950_00001814:
     mr r3, r28
     addi r4, r1, 0x80
     addi r5, r1, 0x50
-    bl fn_805F89F0
+    bl PSMTXConcat
     psq_l f1, 0x0(r25), 0, 0
     psq_l f2, 0x8(r25), 0, 0
     psq_l f3, 0x10(r25), 0, 0
@@ -1918,7 +1918,7 @@ lbl_fn_803C1950_000018BC:
     mr r3, r28
     addi r4, r1, 0xe0
     addi r5, r1, 0xb0
-    bl fn_805F89F0
+    bl PSMTXConcat
     psq_l f1, 0x0(r26), 0, 0
     psq_l f2, 0x8(r26), 0, 0
     psq_l f3, 0x10(r26), 0, 0
@@ -1941,7 +1941,7 @@ lbl_fn_803C1950_00001914:
     mr r3, r28
     addi r4, r1, 0x140
     addi r5, r1, 0x110
-    bl fn_805F89F0
+    bl PSMTXConcat
     psq_l f1, 0x0(r27), 0, 0
     psq_l f2, 0x8(r27), 0, 0
     psq_l f3, 0x10(r27), 0, 0
@@ -1958,7 +1958,7 @@ lbl_fn_803C1950_0000196C:
     addi r4, r1, 0x170
     lwz r3, 0xc(r22)
     mr r5, r4
-    bl fn_805F89F0
+    bl PSMTXConcat
     lwz r24, 0x4(r22)
     addi r3, r1, 0x14
     psq_l f2, 0x8(r28), 0, 0

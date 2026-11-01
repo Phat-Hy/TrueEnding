@@ -24,7 +24,7 @@ extern void fn_8015B808(void);
 extern void actor_setState(void);
 extern void fn_80176548(void);
 extern void fn_801765D8(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void fn_802CC19C(void);
 extern void fn_802CC4C8(void);
 extern void fn_802CC834(void);
@@ -1178,7 +1178,7 @@ lbl_fn_802CA490_00000F58:
     cror eq, lt, eq
     bne lbl_fn_802CA490_00000FD0
     li r3, 0x67c
-    bl fn_80219E6C
+    bl task_findEntryById
     addi r7, r31, 0x528
     mr r5, r3
     lfs f2, 0x530(r31)
@@ -1209,7 +1209,7 @@ lbl_fn_802CA490_00000FD0:
     cror eq, lt, eq
     bne lbl_fn_802CA490_00001084
     li r3, 0x67c
-    bl fn_80219E6C
+    bl task_findEntryById
     lis r4, lbl_80746DEC@ha
     mr r30, r3
     addi r4, r4, lbl_80746DEC@l
@@ -1293,7 +1293,7 @@ lbl_fn_802CA490_00001120:
     cmpwi r0, 0x0
     beq lbl_fn_802CA490_00001150
     li r3, 0x67c
-    bl fn_80219E6C
+    bl task_findEntryById
     mr r4, r3
     lwz r3, lbl_8087EEB0
     lfs f1, 0x58(r4)

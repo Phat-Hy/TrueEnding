@@ -22,7 +22,7 @@ extern void fn_805D2DB0(void);
 extern void fn_805D9BE0(void);
 extern void fn_805D9C70(void);
 extern void fn_805D9CC0(void);
-extern void fn_805F8980(void);
+extern void PSMTXIdentity(void);
 extern void fn_80612E80(void);
 extern void fn_806134E0(void);
 extern void fn_80613520(void);
@@ -1018,7 +1018,7 @@ asm void fn_805CE830(void)
     addi r3, r3, 0x50
     bl memset
     addi r3, r31, 0x4
-    bl fn_805F8980
+    bl PSMTXIdentity
     mr r3, r31
     lwz r31, 0xc(r1)
     lwz r0, 0x14(r1)

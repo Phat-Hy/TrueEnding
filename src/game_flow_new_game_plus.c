@@ -34,7 +34,7 @@ extern void fn_801681B0(void);
 extern void fn_8016D0A0(void);
 extern void fn_801750FC(void);
 extern void fn_80211480(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void fn_8021A684(void);
 extern void fn_8021A77C(void);
 extern void fn_8021A8D0(void);
@@ -45,7 +45,7 @@ extern void fn_804AE3BC(void);
 extern void fn_804D818C(void);
 extern void fn_804E8BF8(void);
 extern void fn_8050E098(void);
-extern void fn_805F89F0(void);
+extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSVECNormalize(void);
@@ -382,7 +382,7 @@ lbl_fn_804EFC98_000003E8:
     cmpwi r0, 0x0
     beq lbl_fn_804EFC98_000004CC
     lwz r3, 0x0(r31)
-    bl fn_80219E6C
+    bl task_findEntryById
     cmpwi r3, 0x0
     mr r27, r3
     beq lbl_fn_804EFC98_000004CC
@@ -654,7 +654,7 @@ lbl_fn_804EFF78_00000790:
     cmpwi r0, 0x0
     beq lbl_fn_804EFF78_000007E4
     lwz r3, 0x0(r28)
-    bl fn_80219E6C
+    bl task_findEntryById
     bl fn_8021A684
     cmpwi r3, 0x0
     beq lbl_fn_804EFF78_000007E4
@@ -753,7 +753,7 @@ lbl_fn_804EFF78_000008D8:
     stw r3, 0x120(r1)
     bne lbl_fn_804EFF78_00001294
     lwz r3, 0x0(r28)
-    bl fn_80219E6C
+    bl task_findEntryById
     cmpwi r3, 0x0
     mr r29, r3
     beq lbl_fn_804EFF78_000012C4
@@ -1137,7 +1137,7 @@ lbl_fn_804EFF78_00000E5C:
     mr r3, r25
     addi r4, r1, 0x188
     addi r5, r1, 0x158
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x158
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1162,7 +1162,7 @@ lbl_fn_804EFF78_00000F04:
     mr r3, r25
     addi r4, r1, 0x1e8
     addi r5, r1, 0x1b8
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x1b8
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1187,7 +1187,7 @@ lbl_fn_804EFF78_00000F64:
     mr r3, r25
     addi r4, r1, 0x248
     addi r5, r1, 0x218
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x218
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0

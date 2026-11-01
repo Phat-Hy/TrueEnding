@@ -28,7 +28,7 @@ extern void actor_setState(void);
 extern void fn_8017039C(void);
 extern void fn_80170A20(void);
 extern void fn_801C3910(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void fn_802A36B0(void);
 extern void fn_80300654(void);
 extern void fn_8030073C(void);
@@ -1245,7 +1245,7 @@ lbl_fn_802FFFF8_00001064:
     fcmpo cr0, f27, f0
     bge lbl_fn_802FFFF8_00001238
     li r3, 0x64a
-    bl fn_80219E6C
+    bl task_findEntryById
     lfs f1, 0x58(r3)
     lfs f0, lbl_80884A98
     fmuls f0, f0, f1
@@ -1299,14 +1299,14 @@ lbl_fn_802FFFF8_0000114C:
     fcmpo cr0, f28, f0
     bge lbl_fn_802FFFF8_00001198
     li r3, 0x64a
-    bl fn_80219E6C
+    bl task_findEntryById
     lfs f1, 0x58(r3)
     lfs f0, lbl_80884A98
     fmuls f0, f0, f1
     fcmpo cr0, f31, f0
     bge lbl_fn_802FFFF8_00001238
     li r3, 0x64a
-    bl fn_80219E6C
+    bl task_findEntryById
     fmr f1, f30
     lfs f30, 0x50(r3)
     bl fn_80013404
@@ -1333,14 +1333,14 @@ lbl_fn_802FFFF8_000011BC:
     fcmpo cr0, f28, f0
     bge lbl_fn_802FFFF8_00001218
     li r3, 0x64a
-    bl fn_80219E6C
+    bl task_findEntryById
     lfs f1, 0x58(r3)
     lfs f0, lbl_80884A98
     fmuls f0, f0, f1
     fcmpo cr0, f31, f0
     bge lbl_fn_802FFFF8_00001238
     li r3, 0x64a
-    bl fn_80219E6C
+    bl task_findEntryById
     fmr f1, f30
     lfs f30, 0x50(r3)
     bl fn_80013404

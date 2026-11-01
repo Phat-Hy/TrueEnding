@@ -30,7 +30,7 @@ extern void fn_80164B00(void);
 extern void fn_80164DCC(void);
 extern void fn_8016DCD4(void);
 extern void fn_80210220(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void fn_8021FD7C(void);
 extern void world_getGlobalFlag(void);
 extern void world_setGlobalFlag(void);
@@ -608,7 +608,7 @@ asm void fn_801B77DC(void)
     bne lbl_fn_801B77DC_000006E4
     stb r30, 0xd(r31)
     lwz r3, 0x8(r31)
-    bl fn_80219E6C
+    bl task_findEntryById
     lwz r0, lbl_8087F048
     mr r4, r3
     cmpwi r0, 0x0
@@ -674,7 +674,7 @@ lbl_fn_801B77DC_00000764:
     bl fn_803EA77C
 lbl_fn_801B77DC_00000788:
     lwz r3, 0x8(r31)
-    bl fn_80219E6C
+    bl task_findEntryById
     lwz r4, 0x4(r31)
     lwz r0, 0x638(r4)
     stw r0, 0x63c(r4)
@@ -739,7 +739,7 @@ lbl_fn_801B79D8_0000084C:
     li r0, 0x1
     stb r0, 0xc(r3)
     lwz r3, 0x8(r3)
-    bl fn_80219E6C
+    bl task_findEntryById
     lwz r6, 0x4(r29)
     mr r26, r3
     lfs f31, lbl_808824F0
@@ -820,7 +820,7 @@ lbl_fn_801B79D8_00000990:
     bl system_getNextSequenceId
     mr r28, r3
     li r3, 0x1f6
-    bl fn_80219E6C
+    bl task_findEntryById
     li r0, -0x1
     stw r0, 0x8(r1)
     mr r5, r3

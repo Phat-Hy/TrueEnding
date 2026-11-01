@@ -22,7 +22,7 @@ extern void fn_80219558(void);
 extern void weapon_getDamageParam(void);
 extern void fn_804EB754(void);
 extern void fn_8059C088(void);
-extern void fn_805F89F0(void);
+extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXTrans(void);
 
@@ -981,7 +981,7 @@ lbl_fn_8014DEE4_00000D54:
     mr r3, r31
     addi r4, r1, 0x80
     addi r5, r1, 0x50
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x50
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1006,7 +1006,7 @@ lbl_fn_8014DEE4_00000E00:
     mr r3, r31
     addi r4, r1, 0xe0
     addi r5, r1, 0xb0
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0xb0
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1031,7 +1031,7 @@ lbl_fn_8014DEE4_00000E60:
     mr r3, r31
     addi r4, r1, 0x140
     addi r5, r1, 0x110
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x110
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1057,7 +1057,7 @@ lbl_fn_8014DEE4_00000EC0:
     addi r3, r1, 0x20
     addi r4, r1, 0x1a0
     addi r5, r1, 0x170
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x170
     addi r4, r1, 0x20
     psq_l f1, 0x0(r3), 0, 0
@@ -1296,7 +1296,7 @@ lbl_fn_8014EF48_000011C8:
     mr r3, r30
     addi r4, r1, 0x140
     addi r5, r1, 0x170
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x170
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1321,7 +1321,7 @@ lbl_fn_8014EF48_00001274:
     mr r3, r30
     addi r4, r1, 0xe0
     addi r5, r1, 0x110
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x110
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1346,7 +1346,7 @@ lbl_fn_8014EF48_000012D4:
     mr r3, r30
     addi r4, r1, 0x80
     addi r5, r1, 0xb0
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0xb0
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1372,7 +1372,7 @@ lbl_fn_8014EF48_00001334:
     addi r3, r1, 0x1a0
     addi r4, r1, 0x20
     addi r5, r1, 0x50
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r4, r1, 0x50
     addi r3, r1, 0x1a0
     psq_l f1, 0x0(r4), 0, 0

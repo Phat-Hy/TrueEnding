@@ -44,7 +44,7 @@ extern void sound_initGlobalInstances(void);
 extern void fn_80239D58(void);
 extern void res_findResourceSlot(void);
 extern void fn_8023A680(void);
-extern void fn_805F89F0(void);
+extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXTrans(void);
 extern void PSMTXScale(void);
@@ -1228,7 +1228,7 @@ asm void fn_800F80B8(void)
     mr r3, r31
     addi r4, r1, 0x38
     addi r5, r1, 0x8
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x8
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1253,7 +1253,7 @@ lbl_fn_800F80B8_00000F20:
     mr r3, r31
     addi r4, r1, 0x98
     addi r5, r1, 0x68
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x68
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1278,7 +1278,7 @@ lbl_fn_800F80B8_00000F80:
     mr r3, r31
     addi r4, r1, 0xf8
     addi r5, r1, 0xc8
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0xc8
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1296,7 +1296,7 @@ lbl_fn_800F80B8_00000FE0:
     mr r3, r29
     mr r4, r31
     addi r5, r1, 0x158
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x158
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1338,7 +1338,7 @@ asm void fn_800F8290(void)
     mr r3, r31
     addi r4, r1, 0x48
     addi r5, r1, 0x18
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x18
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1781,7 +1781,7 @@ lbl_fn_800F8574_000015B0:
     mr r3, r20
     addi r4, r1, 0xb8
     addi r5, r1, 0x88
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x88
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1806,7 +1806,7 @@ lbl_fn_800F8574_00001660:
     mr r3, r20
     addi r4, r1, 0x118
     addi r5, r1, 0xe8
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0xe8
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1831,7 +1831,7 @@ lbl_fn_800F8574_000016C0:
     mr r3, r20
     addi r4, r1, 0x178
     addi r5, r1, 0x148
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x148
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0

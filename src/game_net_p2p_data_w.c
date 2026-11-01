@@ -29,7 +29,7 @@ extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_8050F2F4(void);
-extern void fn_805F89F0(void);
+extern void PSMTXConcat(void);
 extern void PSMTXScale(void);
 extern void PSMTXQuat(void);
 extern void PSMTXMultVec(void);
@@ -888,7 +888,7 @@ lbl_p2p_sendDataPacket_000009B0:
     psq_st f5, 0x20(r30), 0, 0
     lwz r3, 0x8(r25)
     addi r3, r3, 0x30
-    bl fn_805F89F0
+    bl PSMTXConcat
     lha r0, 0x4(r25)
     cmpwi r0, 0x1
     bne lbl_p2p_sendDataPacket_00000A34
@@ -1129,7 +1129,7 @@ lbl_fn_80510130_00000C10:
     mr r3, r28
     addi r4, r1, 0x90
     addi r5, r1, 0x60
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x60
     lfs f8, 0x50(r1)
     psq_l f2, 0x8(r3), 0, 0
@@ -1255,7 +1255,7 @@ lbl_fn_80510130_00000EC0:
     psq_st f5, 0x20(r4), 0, 0
     lwz r3, 0x8(r29)
     addi r3, r3, 0x30
-    bl fn_805F89F0
+    bl PSMTXConcat
 lbl_fn_80510130_00000F04:
     lha r0, 0x4(r29)
     cmpwi r0, 0x1
@@ -1521,7 +1521,7 @@ lbl_fn_80510724_00001270:
     psq_st f5, 0x20(r30), 0, 0
     lwz r3, 0x8(r31)
     addi r3, r3, 0x30
-    bl fn_805F89F0
+    bl PSMTXConcat
     lfs f0, lbl_808877CC
     addi r3, r1, 0x2c
     lfs f7, 0xd0(r1)
@@ -1570,7 +1570,7 @@ lbl_fn_80510724_00001270:
     mr r3, r30
     addi r4, r1, 0x48
     addi r5, r1, 0x78
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x78
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1736,7 +1736,7 @@ lbl_fn_805109D0_000015A8:
     addi r3, r1, 0xf0
     addi r4, r1, 0x60
     addi r5, r1, 0x30
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x30
     addi r4, r1, 0xf0
     psq_l f1, 0x0(r3), 0, 0
@@ -1765,7 +1765,7 @@ lbl_fn_805109D0_00001634:
     addi r3, r29, 0xc
     addi r4, r1, 0xf0
     addi r5, r1, 0x90
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r4, r1, 0x90
     addi r3, r1, 0xf0
     psq_l f1, 0x0(r4), 0, 0

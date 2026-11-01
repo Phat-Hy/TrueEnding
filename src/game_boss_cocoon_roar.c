@@ -11,7 +11,7 @@ extern void fn_800FAB80(void);
 extern void fn_801079C0(void);
 extern void fn_80107A68(void);
 extern void actor_setState(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
 extern void res_registerResource(void);
 extern void world_setLocalFlag(void);
@@ -138,7 +138,7 @@ lbl_fn_80466370_000000F4:
     cmpwi r0, 0x0
     bne lbl_fn_80466370_0000015C
     li r3, 0x5b5
-    bl fn_80219E6C
+    bl task_findEntryById
     mr r5, r3
     lwz r3, lbl_8087F048
     li r0, -0x1

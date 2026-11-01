@@ -5,7 +5,7 @@
 extern void DCInvalidateRange(void);
 extern void dtor_80084684(void);
 extern void fn_80013F78(void);
-extern void fn_8005B9CC(void);
+extern void talk_formatQuotedString(void);
 extern void fn_800638B0(void);
 extern void fn_80063D3C(void);
 extern void fn_800827E0(void);
@@ -399,7 +399,7 @@ asm void fn_800A85CC(void)
     mr r28, r3
     stw r4, 0x64(r3)
     mr r3, r29
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     lwz r0, 0x6c(r28)
     mr r31, r3
     srwi. r0, r0, 31
@@ -435,42 +435,42 @@ lbl_fn_800A85CC_00000470:
     bl atn_Model_findBoneIndex
     stw r3, 0x38(r28)
     mr r3, r29
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     mr r4, r3
     lwz r3, 0x64(r28)
     li r5, 0x0
     bl atn_Model_findBoneIndex
     stw r3, 0x3c(r28)
     mr r3, r29
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl fn_800DC12C
     stw r3, 0x40(r28)
     mr r3, r29
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl fn_800DC288
     lfs f0, lbl_80880CF8
     mr r3, r29
     fmuls f0, f0, f1
     stfs f0, 0x48(r28)
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl fn_800DC288
     lfs f0, lbl_80880CF8
     mr r3, r29
     fmuls f0, f0, f1
     stfs f0, 0x54(r28)
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl fn_800DC288
     lfs f0, lbl_80880CF8
     mr r3, r29
     fmuls f0, f0, f1
     stfs f0, 0x4c(r28)
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl fn_800DC288
     lfs f0, lbl_80880CF8
     mr r3, r29
     fmuls f0, f0, f1
     stfs f0, 0x58(r28)
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl fn_800DC288
     lfs f0, lbl_80880CD8
     li r3, 0x1

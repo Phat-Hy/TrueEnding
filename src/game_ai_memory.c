@@ -26,7 +26,7 @@ extern void fn_80158CA4(void);
 extern void fn_8015E4B0(void);
 extern void fn_8016D74C(void);
 extern void actor_setState(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
@@ -307,7 +307,7 @@ lbl_fn_802604E0_000002C0:
     fcmpo cr0, f3, f0
     bge lbl_fn_802604E0_00000364
     li r3, 0x5e9
-    bl fn_80219E6C
+    bl task_findEntryById
     li r0, -0x1
     stw r0, 0x8(r1)
     mr r5, r3
@@ -361,7 +361,7 @@ lbl_fn_802604E0_00000364:
     fcmpo cr0, f3, f0
     bge lbl_fn_802604E0_00000548
     li r3, 0x5e3
-    bl fn_80219E6C
+    bl task_findEntryById
     lfs f5, 0x2e4(r31)
     mr r30, r3
     lfs f4, lbl_80883588
@@ -614,7 +614,7 @@ lbl_fn_802604E0_00000688:
     cror eq, lt, eq
     bne lbl_fn_802604E0_00000814
     li r3, 0x5e8
-    bl fn_80219E6C
+    bl task_findEntryById
     mr r7, r3
     lwz r3, lbl_8087F048
     lwz r8, 0x590(r31)
@@ -1085,7 +1085,7 @@ lbl_fn_80261078_00000DEC:
     psq_st f1, 0x0(r5), 0, 0
     stfs f2, 0x1510(r31)
     stw r0, 0x12a4(r31)
-    bl fn_80219E6C
+    bl task_findEntryById
     mr r4, r3
     mr r3, r31
     li r5, 0x0
@@ -1185,7 +1185,7 @@ lbl_fn_80261078_00000FCC:
     li r0, 0x1
     stw r0, 0x58c(r31)
     li r3, 0xc8
-    bl fn_80219E6C
+    bl task_findEntryById
     mr r4, r3
     mr r3, r31
     bl fn_801561E4
@@ -1499,7 +1499,7 @@ lbl_fn_80261948_00001498:
     bl system_getNextSequenceId
     stw r3, 0x590(r30)
     li r3, 0xe5
-    bl fn_80219E6C
+    bl task_findEntryById
     lwz r0, 0x638(r30)
     li r4, 0xf0
     stw r0, 0x63c(r30)
@@ -1717,7 +1717,7 @@ lbl_fn_80261A50_00001724:
     stfs f30, 0x68(r1)
     stw r31, 0x50(r1)
     stfs f31, 0x60(r1)
-    bl fn_80219E6C
+    bl task_findEntryById
     lfs f1, lbl_80883578
     mr r5, r3
     lfs f2, lbl_80883584

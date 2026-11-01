@@ -43,7 +43,7 @@ extern void fn_802A4168(void);
 extern void fn_802A4170(void);
 extern void fn_802A4184(void);
 extern void fn_802A42CC(void);
-extern void fn_805F89F0(void);
+extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
@@ -1408,7 +1408,7 @@ lbl_fn_802A36B8_00001268:
     mr r3, r31
     addi r4, r1, 0xa8
     addi r5, r1, 0x78
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x78
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1433,7 +1433,7 @@ lbl_fn_802A36B8_00001318:
     mr r3, r31
     addi r4, r1, 0x108
     addi r5, r1, 0xd8
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0xd8
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1458,7 +1458,7 @@ lbl_fn_802A36B8_00001378:
     mr r3, r31
     addi r4, r1, 0x168
     addi r5, r1, 0x138
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x138
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0

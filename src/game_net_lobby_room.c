@@ -10,7 +10,7 @@ extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
 extern void fn_80013F78(void);
 extern void fn_800502A8(void);
-extern void fn_8005B9CC(void);
+extern void talk_formatQuotedString(void);
 extern void fn_8006AA20(void);
 extern void fn_8006B0C8(void);
 extern void fn_8006B174(void);
@@ -400,7 +400,7 @@ lbl_fn_8049A09C_000003C8:
     rlwinm r0, r0, 0, 6, 3
     stw r0, 0x340(r29)
     stw r4, 0x348(r29)
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     lwz r12, 0x50(r29)
     mr r31, r3
     addi r3, r29, 0x50
@@ -593,7 +593,7 @@ lbl_fn_8049A09C_000006C0:
     bl fn_8008AD4C
 lbl_fn_8049A09C_000006D0:
     mr r3, r30
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     lis r28, lbl_80756B84@ha
     lfs f31, lbl_80887104
     mr r27, r3
@@ -619,7 +619,7 @@ lbl_fn_8049A09C_00000710:
     mr r3, r30
     oris r0, r0, 0x2000
     stw r0, 0x340(r29)
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl fn_800DC288
     stfs f1, 0x58(r29)
     b lbl_fn_8049A09C_000008CC
@@ -630,7 +630,7 @@ lbl_fn_8049A09C_00000744:
     cmpwi r3, 0x0
     bne lbl_fn_8049A09C_0000078C
     mr r3, r30
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     addi r0, r29, 0x9c
     mr r27, r3
     cmplw r3, r0
@@ -733,7 +733,7 @@ lbl_fn_8049A09C_000008AC:
     stw r0, 0x10c(r29)
 lbl_fn_8049A09C_000008CC:
     mr r3, r30
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     cmpwi r3, 0x0
     mr r27, r3
     beq lbl_fn_8049A09C_000008F4

@@ -56,7 +56,7 @@ extern void fn_80178078(void);
 extern void fn_80198514(void);
 extern void fn_80198C00(void);
 extern void fn_801AE77C(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void res_findResourceSlot(void);
 extern void fn_804F5B0C(void);
 extern void fn_804F5CA0(void);
@@ -1253,7 +1253,7 @@ lbl_fn_8019FEC4_00000E78:
     bl system_getNextSequenceId
     mr r30, r3
     li r3, 0x76f
-    bl fn_80219E6C
+    bl task_findEntryById
     mr r31, r3
     bl fn_8013A194
     li r0, -0x1

@@ -8,7 +8,7 @@ extern void _savegpr_22(void);
 extern void _savegpr_24(void);
 extern void fn_8009A584(void);
 extern void fn_8009A5A8(void);
-extern void fn_805F89F0(void);
+extern void PSMTXConcat(void);
 
 /* External data declarations */
 
@@ -388,7 +388,7 @@ asm void fn_8009076C(void)
     mr r3, r30
     lwz r29, 0x178(r6)
     lwz r31, 0x16c(r6)
-    bl fn_805F89F0
+    bl PSMTXConcat
     cmpwi r29, 0x0
     beq lbl_fn_8009076C_0000052C
     lwz r31, 0x44(r31)
@@ -400,7 +400,7 @@ lbl_fn_8009076C_000004FC:
     mulli r0, r0, 0x30
     add r4, r4, r0
     mr r5, r4
-    bl fn_805F89F0
+    bl PSMTXConcat
     subi r31, r31, 0x1
     addi r29, r29, 0x4
 lbl_fn_8009076C_00000520:
@@ -416,7 +416,7 @@ lbl_fn_8009076C_00000538:
     addi r3, r1, 0x8
     add r4, r0, r31
     mr r5, r4
-    bl fn_805F89F0
+    bl PSMTXConcat
     subi r29, r29, 0x1
     addi r31, r31, 0x30
 lbl_fn_8009076C_00000554:
@@ -457,11 +457,11 @@ lbl_fn_80090834_000005B8:
     addi r5, r1, 0x8
     mulli r0, r0, 0x30
     add r3, r24, r0
-    bl fn_805F89F0
+    bl PSMTXConcat
     mr r3, r27
     addi r4, r1, 0x8
     addi r5, r1, 0x38
-    bl fn_805F89F0
+    bl PSMTXConcat
     psq_l f2, 0x8(r29), 0, 0
     add r3, r22, r31
     psq_l f3, 0x10(r29), 0, 0
@@ -510,11 +510,11 @@ lbl_fn_800908FC_00000678:
     add r3, r26, r31
     add r4, r25, r31
     addi r5, r1, 0x8
-    bl fn_805F89F0
+    bl PSMTXConcat
     mr r3, r28
     addi r4, r1, 0x8
     addi r5, r1, 0x38
-    bl fn_805F89F0
+    bl PSMTXConcat
     psq_l f2, 0x8(r30), 0, 0
     add r3, r24, r31
     psq_l f3, 0x10(r30), 0, 0

@@ -31,7 +31,7 @@ extern void fn_8016E4C4(void);
 extern void actor_setState(void);
 extern void fn_801765D8(void);
 extern void fn_80179D44(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
 extern void fn_8023A02C(void);
 extern void res_registerResource(void);
@@ -1372,12 +1372,12 @@ lbl_fn_80253884_0000122C:
     cmpwi r0, 0xa
     bne lbl_fn_80253884_0000126C
     li r3, 0xe5
-    bl fn_80219E6C
+    bl task_findEntryById
     mr r7, r3
     b lbl_fn_80253884_00001278
 lbl_fn_80253884_0000126C:
     li r3, 0xc8
-    bl fn_80219E6C
+    bl task_findEntryById
     mr r7, r3
 lbl_fn_80253884_00001278:
     lwz r3, lbl_8087F048

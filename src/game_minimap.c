@@ -26,7 +26,7 @@ extern void atn_LoadHandle_getName(void);
 extern void fn_80476130(void);
 extern void fn_80476194(void);
 extern void fn_804761B0(void);
-extern void fn_805F89F0(void);
+extern void PSMTXConcat(void);
 extern void PSMTXMultVec(void);
 extern void PSVECMag(void);
 extern void fn_80695720(void);
@@ -457,7 +457,7 @@ asm void atn_Matrix_concat(void)
     mr r0, r3
     mr r3, r5
     mr r5, r0
-    b fn_805F89F0
+    b PSMTXConcat
 }
 
 asm void fn_8008CD60(void)

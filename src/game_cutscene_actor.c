@@ -21,7 +21,7 @@ extern void fn_8015AF40(void);
 extern void fn_8015B238(void);
 extern void fn_8015B520(void);
 extern void actor_setState(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void res_findResourceSlot(void);
 extern void fn_8032A3D4(void);
 extern void world_getLocalFlag(void);
@@ -108,7 +108,7 @@ asm void fn_803288C4(void)
     li r0, 0x1
     stw r0, 0x14c4(r3)
     li r3, 0x675
-    bl fn_80219E6C
+    bl task_findEntryById
     li r0, -0x1
     stw r0, 0x8(r1)
     mr r5, r3
@@ -788,7 +788,7 @@ lbl_fn_80328C6C_000009BC:
     mr r3, r31
     bl fn_80144710
     li r3, 0x674
-    bl fn_80219E6C
+    bl task_findEntryById
     mr r7, r3
     lwz r3, lbl_8087F048
     lwz r8, 0x15f8(r31)
@@ -866,7 +866,7 @@ lbl_fn_8032932C_00000AD0:
     mr r3, r31
     bl fn_80144710
     li r3, 0x674
-    bl fn_80219E6C
+    bl task_findEntryById
     mr r7, r3
     lwz r3, lbl_8087F048
     lwz r8, 0x590(r31)
@@ -1047,7 +1047,7 @@ lbl_fn_8032943C_00000D9C:
     stfs f0, 0x530(r30)
     bl fn_80144710
     li r3, 0x674
-    bl fn_80219E6C
+    bl task_findEntryById
     mr r7, r3
     lwz r8, 0x590(r30)
     lwz r3, lbl_8087F048

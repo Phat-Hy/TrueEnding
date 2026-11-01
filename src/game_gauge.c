@@ -10,7 +10,7 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
 extern void fn_80013F78(void);
-extern void fn_8005B9CC(void);
+extern void talk_formatQuotedString(void);
 extern void fn_8005BBF8(void);
 extern void fn_8005BCE8(void);
 extern void fn_8006B0C8(void);
@@ -30,7 +30,7 @@ extern void fn_800DC288(void);
 extern void fn_800DC500(void);
 extern void fn_800DC6B4(void);
 extern void fn_802376D0(void);
-extern void fn_80237874(void);
+extern void res_MsgHandle_update(void);
 extern void fn_80470580(void);
 extern void fn_8047059C(void);
 extern void atn_Curve_evaluate(void);
@@ -164,14 +164,14 @@ lbl_fn_800A005C_00000120:
     addi r29, r28, lbl_807326D8@l
 lbl_fn_800A005C_00000130:
     addi r3, r1, 0x430
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     mr r26, r3
     addi r4, r29, 0x15
     bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_800A005C_000001A8
     addi r3, r1, 0x430
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     lwz r0, 0x24(r1)
     mr r27, r3
     srwi. r0, r0, 31
@@ -202,7 +202,7 @@ lbl_fn_800A005C_000001A8:
     cmpwi r3, 0x0
     bne lbl_fn_800A005C_00000260
     addi r3, r1, 0x430
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     lwz r0, 0x24(r1)
     mr r6, r3
     addi r3, r1, 0x330
@@ -217,7 +217,7 @@ lbl_fn_800A005C_000001E8:
     crclr 6
     bl sprintf
     addi r3, r1, 0x430
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     mr r26, r3
     addi r4, r28, lbl_807326D8@l
     bl strcmp
@@ -254,7 +254,7 @@ lbl_fn_800A005C_00000260:
     cmpwi r3, 0x0
     bne lbl_fn_800A005C_000002FC
     addi r3, r1, 0x430
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     lwz r0, 0x24(r1)
     mr r6, r3
     addi r3, r1, 0x130
@@ -269,7 +269,7 @@ lbl_fn_800A005C_000002A0:
     crclr 6
     bl sprintf
     addi r3, r1, 0x430
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     lwz r0, 0x24(r1)
     mr r6, r3
     addi r3, r1, 0x30
@@ -284,7 +284,7 @@ lbl_fn_800A005C_000002D4:
     crclr 6
     bl sprintf
     addi r3, r1, 0x430
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl fn_800DC288
     fmuls f1, f31, f1
     addi r3, r30, 0x10
@@ -765,7 +765,7 @@ lbl_fn_800A091C_0000090C:
 lbl_fn_800A091C_00000924:
     lwz r0, 0x20(r29)
     add r3, r0, r31
-    bl fn_80237874
+    bl res_MsgHandle_update
     cmpwi r3, 0x0
     beq lbl_fn_800A091C_00000940
     li r3, 0x1

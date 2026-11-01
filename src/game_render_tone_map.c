@@ -23,7 +23,7 @@ extern void fn_80170A20(void);
 extern void fn_80176548(void);
 extern void fn_801765D8(void);
 extern void fn_80179D44(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void fn_802BC4EC(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
@@ -770,7 +770,7 @@ lbl_fn_802BD480_00000880:
     stw r4, 0x5c(r1)
     stw r0, 0x64(r1)
     stw r4, 0x60(r1)
-    bl fn_80219E6C
+    bl task_findEntryById
     lis r8, lbl_807C6B90@ha
     mr r4, r3
     mr r5, r31
@@ -1611,7 +1611,7 @@ lbl_fn_802BE180_000014B8:
     cror eq, lt, eq
     bne lbl_fn_802BE180_00001544
     li r3, 0x5bf
-    bl fn_80219E6C
+    bl task_findEntryById
     mr r31, r3
     mr r3, r30
     bl fn_80144710
@@ -1858,7 +1858,7 @@ lbl_fn_802BE2A0_0000184C:
     cror eq, lt, eq
     bne lbl_fn_802BE2A0_000018B0
     li r3, 0x5be
-    bl fn_80219E6C
+    bl task_findEntryById
     mr r31, r3
     mr r3, r30
     bl fn_80144710
@@ -2099,7 +2099,7 @@ lbl_fn_802BE7EC_00001B8C:
     bl PSVECNormalize
     lwz r30, lbl_8087F048
     li r3, 0x5c5
-    bl fn_80219E6C
+    bl task_findEntryById
     lfs f1, lbl_80884190
     mr r5, r3
     lfs f2, lbl_8088417C
@@ -2195,7 +2195,7 @@ lbl_fn_802BE9C8_00001D34:
     srwi r0, r0, 5
     stw r0, 0x1520(r30)
     lwz r31, lbl_8087F048
-    bl fn_80219E6C
+    bl task_findEntryById
     li r0, -0x1
     stw r0, 0x8(r1)
     mr r5, r3
@@ -2862,7 +2862,7 @@ lbl_fn_802BEE44_00002610:
     stfs f4, 0x528(r31)
     stfs f3, 0x52c(r31)
     stfs f0, 0x530(r31)
-    bl fn_80219E6C
+    bl task_findEntryById
     mr r7, r3
     lwz r3, lbl_8087F048
     lfs f1, lbl_80884190

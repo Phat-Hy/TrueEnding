@@ -21,7 +21,7 @@ extern void atn_Model_drawSubNodes(void);
 extern void fn_8009E1E4(void);
 extern void fn_804761CC(void);
 extern void fn_804761E8(void);
-extern void fn_805F89F0(void);
+extern void PSMTXConcat(void);
 extern void PSMTXMultVec(void);
 extern void PSMTXMultVecArray(void);
 extern void PSVECMag(void);
@@ -327,7 +327,7 @@ lbl_fn_8008E304_000003CC:
     addi r4, r3, 0x124
     addi r3, r1, 0x38
     addi r5, r1, 0x68
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x68
     addi r4, r1, 0x38
     psq_l f1, 0x0(r3), 0, 0

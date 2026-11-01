@@ -30,11 +30,11 @@ extern void fn_80148990(void);
 extern void fn_8014C540(void);
 extern void fn_80151448(void);
 extern void actor_setState(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void fn_802375C4(void);
 extern void fn_802376D0(void);
-extern void fn_8023781C(void);
-extern void fn_80237874(void);
+extern void res_MsgHandle_unload(void);
+extern void res_MsgHandle_update(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
 extern void fn_802FF6C4(void);
@@ -175,7 +175,7 @@ lbl_fn_802FCF50_00000088:
     addic. r31, r29, 0x15a0
     beq lbl_fn_802FCF50_000000CC
     mr r3, r31
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r31, 0x4
     beq lbl_fn_802FCF50_000000CC
     li r4, 0x0
@@ -184,7 +184,7 @@ lbl_fn_802FCF50_000000CC:
     addic. r31, r29, 0x1594
     beq lbl_fn_802FCF50_000000EC
     mr r3, r31
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r31, 0x4
     beq lbl_fn_802FCF50_000000EC
     li r4, 0x0
@@ -196,7 +196,7 @@ lbl_fn_802FCF50_000000EC:
     addic. r31, r29, 0x157c
     beq lbl_fn_802FCF50_00000118
     mr r3, r31
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r31, 0x4
     beq lbl_fn_802FCF50_00000118
     li r4, 0x0
@@ -205,7 +205,7 @@ lbl_fn_802FCF50_00000118:
     addic. r31, r29, 0x1570
     beq lbl_fn_802FCF50_00000138
     mr r3, r31
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r31, 0x4
     beq lbl_fn_802FCF50_00000138
     li r4, 0x0
@@ -214,7 +214,7 @@ lbl_fn_802FCF50_00000138:
     addic. r31, r29, 0x1564
     beq lbl_fn_802FCF50_00000158
     mr r3, r31
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r31, 0x4
     beq lbl_fn_802FCF50_00000158
     li r4, 0x0
@@ -223,7 +223,7 @@ lbl_fn_802FCF50_00000158:
     addic. r31, r29, 0x1558
     beq lbl_fn_802FCF50_00000178
     mr r3, r31
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r31, 0x4
     beq lbl_fn_802FCF50_00000178
     li r4, 0x0
@@ -235,7 +235,7 @@ lbl_fn_802FCF50_00000178:
     addic. r31, r29, 0x1540
     beq lbl_fn_802FCF50_000001A4
     mr r3, r31
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r31, 0x4
     beq lbl_fn_802FCF50_000001A4
     li r4, 0x0
@@ -244,7 +244,7 @@ lbl_fn_802FCF50_000001A4:
     addic. r31, r29, 0x1534
     beq lbl_fn_802FCF50_000001C4
     mr r3, r31
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r31, 0x4
     beq lbl_fn_802FCF50_000001C4
     li r4, 0x0
@@ -253,7 +253,7 @@ lbl_fn_802FCF50_000001C4:
     addic. r31, r29, 0x1528
     beq lbl_fn_802FCF50_000001E4
     mr r3, r31
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r31, 0x4
     beq lbl_fn_802FCF50_000001E4
     li r4, 0x0
@@ -293,11 +293,11 @@ asm void fn_802FD134(void)
     li r31, 0x0
 lbl_fn_802FD134_0000024C:
     addi r3, r30, 0x1528
-    bl fn_80237874
+    bl res_MsgHandle_update
     cmpwi r3, 0x0
     bne lbl_fn_802FD134_000002EC
     addi r3, r30, 0x1534
-    bl fn_80237874
+    bl res_MsgHandle_update
     cmpwi r3, 0x0
     bne lbl_fn_802FD134_000002EC
     addi r3, r30, 0x1588
@@ -305,31 +305,31 @@ lbl_fn_802FD134_0000024C:
     cmpwi r3, 0x0
     bne lbl_fn_802FD134_000002EC
     addi r3, r30, 0x1540
-    bl fn_80237874
+    bl res_MsgHandle_update
     cmpwi r3, 0x0
     bne lbl_fn_802FD134_000002EC
     addi r3, r30, 0x1564
-    bl fn_80237874
+    bl res_MsgHandle_update
     cmpwi r3, 0x0
     bne lbl_fn_802FD134_000002EC
     addi r3, r30, 0x157c
-    bl fn_80237874
+    bl res_MsgHandle_update
     cmpwi r3, 0x0
     bne lbl_fn_802FD134_000002EC
     addi r3, r30, 0x1570
-    bl fn_80237874
+    bl res_MsgHandle_update
     cmpwi r3, 0x0
     bne lbl_fn_802FD134_000002EC
     addi r3, r30, 0x1558
-    bl fn_80237874
+    bl res_MsgHandle_update
     cmpwi r3, 0x0
     bne lbl_fn_802FD134_000002EC
     addi r3, r30, 0x1594
-    bl fn_80237874
+    bl res_MsgHandle_update
     cmpwi r3, 0x0
     bne lbl_fn_802FD134_000002EC
     addi r3, r30, 0x15a0
-    bl fn_80237874
+    bl res_MsgHandle_update
     cmpwi r3, 0x0
     beq lbl_fn_802FD134_000002F0
 lbl_fn_802FD134_000002EC:
@@ -500,7 +500,7 @@ lbl_fn_802FD328_00000514:
     mr r3, r31
     bl fn_80144710
     li r3, 0x64a
-    bl fn_80219E6C
+    bl task_findEntryById
     mr r7, r3
     lwz r8, 0x590(r31)
     lwz r3, lbl_8087F048
@@ -516,7 +516,7 @@ lbl_fn_802FD328_00000570:
     cmpwi r0, 0x0
     beq lbl_fn_802FD328_00000760
     li r3, 0x64a
-    bl fn_80219E6C
+    bl task_findEntryById
     lfs f0, 0x40(r3)
     addi r4, r31, 0x528
     lfs f3, 0x8e4(r31)
@@ -562,7 +562,7 @@ lbl_fn_802FD328_00000604:
     mr r3, r31
     bl fn_80144710
     li r3, 0x64b
-    bl fn_80219E6C
+    bl task_findEntryById
     mr r7, r3
     lwz r8, 0x590(r31)
     lwz r3, lbl_8087F048
@@ -578,7 +578,7 @@ lbl_fn_802FD328_00000660:
     cmpwi r0, 0x0
     beq lbl_fn_802FD328_00000760
     li r3, 0x64b
-    bl fn_80219E6C
+    bl task_findEntryById
     lfs f0, 0x40(r3)
     addi r4, r31, 0x528
     lfs f3, 0x8e4(r31)

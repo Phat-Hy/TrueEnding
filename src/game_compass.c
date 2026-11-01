@@ -22,9 +22,9 @@ extern void fn_8009A490(void);
 extern void fn_8009A504(void);
 extern void fn_800DC6B4(void);
 extern void fn_80476130(void);
-extern void fn_805F89F0(void);
-extern void fn_805F8AC0(void);
-extern void fn_805F8CA0(void);
+extern void PSMTXConcat(void);
+extern void PSMTXConcatArray(void);
+extern void PSMTXInverse(void);
 extern void PSMTXMultVec(void);
 extern void PSVECMag(void);
 extern void fn_8067E23C(void);
@@ -775,11 +775,11 @@ lbl_fn_80091A90_00000A40:
     psq_st f3, 0x10(r31), 0, 0
     psq_st f4, 0x18(r31), 0, 0
     psq_st f5, 0x20(r31), 0, 0
-    bl fn_805F8CA0
+    bl PSMTXInverse
     mr r3, r30
     mr r4, r31
     mr r5, r31
-    bl fn_805F89F0
+    bl PSMTXConcat
     psq_l f1, 0x0(r30), 0, 0
     psq_l f2, 0x8(r30), 0, 0
     psq_l f3, 0x10(r30), 0, 0
@@ -800,12 +800,12 @@ lbl_fn_80091A90_00000A40:
     ble lbl_fn_80091A90_00000B04
     mr r3, r31
     mr r5, r4
-    bl fn_805F8AC0
+    bl PSMTXConcatArray
     b lbl_fn_80091A90_00000B10
 lbl_fn_80091A90_00000B04:
     mr r3, r31
     mr r5, r4
-    bl fn_805F89F0
+    bl PSMTXConcat
 lbl_fn_80091A90_00000B10:
     lwz r0, 0x54(r1)
     lwz r31, 0x4c(r1)

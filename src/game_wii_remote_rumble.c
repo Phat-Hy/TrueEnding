@@ -58,8 +58,8 @@ extern void fn_80538DC8(void);
 extern void fn_80541BDC(void);
 extern void fn_80541CF4(void);
 extern void fn_8055A404(void);
-extern void fn_805F89F0(void);
-extern void fn_805F8C50(void);
+extern void PSMTXConcat(void);
+extern void PSMTXTranspose(void);
 extern void PSMTXRotRad(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
@@ -1126,7 +1126,7 @@ asm void fn_80551E98(void)
 {
     nofralloc
     mr r4, r3
-    b fn_805F8C50
+    b PSMTXTranspose
 }
 
 asm void fn_80551EA0(void)
@@ -1162,7 +1162,7 @@ asm void fn_80551EA0(void)
     mr r3, r30
     addi r4, r1, 0xc8
     addi r5, r1, 0xf8
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0xf8
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1187,7 +1187,7 @@ lbl_fn_80551EA0_00000E54:
     mr r3, r30
     addi r4, r1, 0x68
     addi r5, r1, 0x98
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x98
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
@@ -1212,7 +1212,7 @@ lbl_fn_80551EA0_00000EB4:
     mr r3, r30
     addi r4, r1, 0x8
     addi r5, r1, 0x38
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x38
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0

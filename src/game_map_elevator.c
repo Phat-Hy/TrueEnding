@@ -15,7 +15,7 @@ extern void fn_80106878(void);
 extern void fn_8013CB68(void);
 extern void fn_801446F0(void);
 extern void fn_802097C4(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void fn_803EA77C(void);
 extern void fn_80441E8C(void);
 extern void atn_LoadHandle_getName(void);
@@ -1949,7 +1949,7 @@ lbl_fn_8018E438_00001A74:
     li r0, 0x0
     li r3, 0xe3
     stw r0, 0x20(r31)
-    bl fn_80219E6C
+    bl task_findEntryById
     lwz r4, 0x4(r31)
     lwz r0, 0x638(r4)
     stw r0, 0x63c(r4)

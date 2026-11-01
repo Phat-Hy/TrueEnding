@@ -48,9 +48,9 @@ extern void fn_802375C4(void);
 extern void fn_80237654(void);
 extern void fn_802376D0(void);
 extern void fn_8023772C(void);
-extern void fn_8023780C(void);
-extern void fn_8023781C(void);
-extern void fn_80237874(void);
+extern void res_MsgHandle_destructor(void);
+extern void res_MsgHandle_unload(void);
+extern void res_MsgHandle_update(void);
 extern void fn_8023A680(void);
 extern void res_registerResource(void);
 extern void atn_LoadHandle_destructor(void);
@@ -247,11 +247,11 @@ lbl_fn_80183B2C_00000108:
     stw r0, 0x54(r28)
     addi r3, r28, 0x5c
     stw r0, 0x50(r28)
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r31, r28, 0x5c
     beq lbl_fn_80183B2C_0000013C
     mr r3, r31
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r31, 0x4
     beq lbl_fn_80183B2C_0000013C
     li r4, 0x0
@@ -329,7 +329,7 @@ lbl_fn_80183C58_0000020C:
     cmplw r29, r0
     blt lbl_fn_80183C58_000001E8
     addi r3, r28, 0x5c
-    bl fn_80237874
+    bl res_MsgHandle_update
     cmpwi r3, 0x0
     beq lbl_fn_80183C58_0000022C
     li r30, 0x1
@@ -453,7 +453,7 @@ lbl_fn_80183D00_000003A0:
     stw r0, 0x54(r31)
     addi r3, r31, 0x5c
     stw r0, 0x50(r31)
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     lwz r3, 0x54(r31)
     cmpwi r3, 0x0
     beq lbl_fn_80183D00_000003CC
@@ -511,7 +511,7 @@ lbl_fn_80183D00_00000458:
     beq lbl_fn_80183D00_000004C0
     mr r4, r29
     addi r3, r31, 0x5c
-    bl fn_8023780C
+    bl res_MsgHandle_destructor
     b lbl_fn_80183D00_000004C0
 lbl_fn_80183D00_00000490:
     mr r3, r31

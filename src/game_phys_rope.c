@@ -35,7 +35,7 @@ extern void fn_80373164(void);
 extern void fn_805706C4(void);
 extern void fn_8059A000(void);
 extern void fn_8059C5E0(void);
-extern void fn_805F89F0(void);
+extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXTrans(void);
 extern void PSMTXMultVec(void);
@@ -814,7 +814,7 @@ asm void fn_8010F67C(void)
     mr r3, r31
     addi r4, r1, 0x8
     addi r5, r1, 0x38
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x38
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0

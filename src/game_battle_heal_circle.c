@@ -12,7 +12,7 @@ extern void fn_8004B338(void);
 extern void atn_ColliBase_destructor(void);
 extern void fn_80057F28(void);
 extern void fn_800588FC(void);
-extern void fn_8005B9CC(void);
+extern void talk_formatQuotedString(void);
 extern void fn_8005BBF8(void);
 extern void fn_8005BCE8(void);
 extern void fn_8007FAF0(void);
@@ -41,7 +41,7 @@ extern void fn_80179AB4(void);
 extern void fn_80208748(void);
 extern void fn_80216AFC(void);
 extern void sound_initGlobalInstances(void);
-extern void fn_802377B8(void);
+extern void res_MsgHandle_constructor(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
 extern void fn_80373148(void);
@@ -174,7 +174,7 @@ asm void fn_803F33A4(void)
     li r30, 0x1
 lbl_fn_803F33A4_000000BC:
     addi r3, r1, 0x14
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     lbz r0, 0x0(r3)
     mr r23, r3
     cmpwi r0, 0x3b
@@ -184,15 +184,15 @@ lbl_fn_803F33A4_000000BC:
     cmpwi r3, 0x0
     bne lbl_fn_803F33A4_00000124
     addi r3, r1, 0x14
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl atoi
     stw r3, 0xa50(r25)
     addi r3, r1, 0x14
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl fn_800DC288
     stfs f1, 0xa54(r25)
     addi r3, r1, 0x14
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     addi r4, r31, 0xeb
     bl strcmp
     cmpwi r3, 0x0
@@ -206,13 +206,13 @@ lbl_fn_803F33A4_00000124:
     cmpwi r3, 0x0
     bne lbl_fn_803F33A4_000001DC
     addi r3, r1, 0x14
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl atoi
     stw r3, 0xa5c(r25)
     addi r3, r1, 0x14
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     addi r3, r1, 0x14
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     b lbl_fn_803F33A4_000001C4
 lbl_fn_803F33A4_0000015C:
     mr r3, r26
@@ -245,7 +245,7 @@ lbl_fn_803F33A4_000001A4:
     stw r0, 0xa68(r25)
 lbl_fn_803F33A4_000001C4:
     addi r3, r1, 0x14
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl strlen
     cmpwi r3, 0x0
     bne lbl_fn_803F33A4_0000015C
@@ -285,7 +285,7 @@ lbl_fn_803F33A4_0000023C:
     lwz r0, 0xa80(r25)
     addi r3, r1, 0x14
     add r23, r0, r27
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     mr r4, r3
     addi r3, r25, 0x65c
     bl fn_80092954
@@ -293,19 +293,19 @@ lbl_fn_803F33A4_0000023C:
     stw r3, 0x0(r23)
     beq lbl_fn_803F33A4_000002F0
     addi r3, r1, 0x14
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl fn_800DC288
     stfs f1, 0x4(r23)
     addi r3, r1, 0x14
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl fn_800DC288
     stfs f1, 0x8(r23)
     addi r3, r1, 0x14
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl fn_800DC288
     stfs f1, 0xc(r23)
     addi r3, r1, 0x14
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     cmpwi r3, 0x0
     mr r24, r3
     beq lbl_fn_803F33A4_000002F0
@@ -332,7 +332,7 @@ lbl_fn_803F33A4_000002F8:
     cmpwi r3, 0x0
     bne lbl_fn_803F33A4_00000334
     addi r3, r1, 0x14
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     bl atoi
     addi r4, r25, 0x28c
     addi r0, r25, 0x65c
@@ -348,7 +348,7 @@ lbl_fn_803F33A4_00000334:
     cmpwi r3, 0x0
     bne lbl_fn_803F33A4_0000040C
     addi r3, r1, 0x14
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     addi r4, r1, 0x10
     addi r5, r1, 0xc
     addi r6, r1, 0x8
@@ -378,7 +378,7 @@ lbl_fn_803F33A4_00000334:
     b lbl_fn_803F33A4_000003F8
 lbl_fn_803F33A4_000003BC:
     addi r3, r1, 0x14
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     lbz r0, 0x0(r3)
     mr r23, r3
     cmpwi r0, 0x3b
@@ -407,7 +407,7 @@ lbl_fn_803F33A4_0000040C:
     b lbl_fn_803F33A4_00000448
 lbl_fn_803F33A4_00000424:
     addi r3, r1, 0x14
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     lbz r0, 0x0(r3)
     cmpwi r0, 0x3b
     beq lbl_fn_803F33A4_00000448
@@ -1621,10 +1621,10 @@ asm void fn_803F4894(void)
     nofralloc
     stwu r1, -0x10(r1)
     mflr r0
-    lis r4, fn_802377B8@ha
+    lis r4, res_MsgHandle_constructor@ha
     lis r5, fn_800EF73C@ha
     stw r0, 0x14(r1)
-    addi r4, r4, fn_802377B8@l
+    addi r4, r4, res_MsgHandle_constructor@l
     addi r5, r5, fn_800EF73C@l
     li r6, 0xc
     stw r31, 0xc(r1)

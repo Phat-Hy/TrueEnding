@@ -53,10 +53,10 @@ extern void fn_80155DAC(void);
 extern void fn_80160324(void);
 extern void actor_setState(void);
 extern void fn_8017C7F8(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void fn_80237518(void);
-extern void fn_802377B8(void);
-extern void fn_8023780C(void);
+extern void res_MsgHandle_constructor(void);
+extern void res_MsgHandle_destructor(void);
 extern void fn_80239798(void);
 extern void res_findResourceSlot(void);
 extern void world_setLocalFlag(void);
@@ -748,7 +748,7 @@ lbl_fn_804CF640_00000730:
     stfs f2, 0xfb8(r31)
     stfs f0, 0xfbc(r31)
     ble lbl_fn_804CF640_00000794
-    bl fn_80219E6C
+    bl task_findEntryById
     b lbl_fn_804CF640_00000798
 lbl_fn_804CF640_00000794:
     li r3, 0x0
@@ -1840,7 +1840,7 @@ lbl_fn_804D0328_00001618:
     bl fn_806958E0
     addis r3, r29, 0x1
     subi r3, r3, 0x694c
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addis r3, r29, 0x1
     subi r3, r3, 0x6940
     bl fn_80237518
@@ -1851,7 +1851,7 @@ lbl_fn_804D0328_00001618:
     bl fn_8004B290
     addis r3, r29, 0x1
     subi r3, r3, 0x6698
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addis r3, r29, 0x1
     subi r4, r3, 0x6658
     stw r31, -0x665c(r3)
@@ -2678,7 +2678,7 @@ lbl_fn_804D0328_000022C0:
     addi r4, r4, lbl_80759E48@l
     addi r4, r4, 0x151
     subi r3, r3, 0x6698
-    bl fn_8023780C
+    bl res_MsgHandle_destructor
     li r0, 0x0
     stw r0, 0x48(r29)
     lis r4, fn_8050CFCC@ha

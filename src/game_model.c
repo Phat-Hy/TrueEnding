@@ -31,7 +31,7 @@ extern void fn_800D5B58(void);
 extern void fn_800D5F68(void);
 extern void fn_800DCA6C(void);
 extern void fn_805ED390(void);
-extern void fn_805F89F0(void);
+extern void PSMTXConcat(void);
 extern void fn_80615E00(void);
 extern void fn_80615FF0(void);
 extern void fn_80616250(void);
@@ -1014,11 +1014,11 @@ lbl_atn_Model_updateAnimation_00000C60:
     stfs f0, 0xc4(r1)
     stfs f0, 0xd4(r1)
     stfs f0, 0xe4(r1)
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r23, 0x800
     addi r4, r1, 0x148
     addi r5, r1, 0x118
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r3, r1, 0x118
     addi r4, r23, 0x800
     psq_l f1, 0x0(r3), 0, 0

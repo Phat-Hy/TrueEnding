@@ -9,7 +9,7 @@ extern void _savegpr_14(void);
 extern void _savegpr_23(void);
 extern void dtor_80084684(void);
 extern void fn_8004ECC0(void);
-extern void fn_8005B9CC(void);
+extern void talk_formatQuotedString(void);
 extern void fn_8005BBF8(void);
 extern void fn_8005BCE8(void);
 extern void mem_alloc(void);
@@ -35,9 +35,9 @@ extern void fn_80155A88(void);
 extern void fn_8016B8D4(void);
 extern void fn_801781B0(void);
 extern void sound_initGlobalInstances(void);
-extern void fn_802377B8(void);
-extern void fn_8023780C(void);
-extern void fn_80237874(void);
+extern void res_MsgHandle_constructor(void);
+extern void res_MsgHandle_destructor(void);
+extern void res_MsgHandle_update(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
 extern void fn_803750E4(void);
@@ -314,12 +314,12 @@ asm void fn_8043A770(void)
     mr r6, r30
     bl fn_803EC568
     lis r3, lbl_8078F008@ha
-    lis r4, fn_802377B8@ha
+    lis r4, res_MsgHandle_constructor@ha
     addi r3, r3, lbl_8078F008@l
     lis r5, fn_800EF73C@ha
     stw r3, 0x0(r31)
     addi r3, r31, 0xf4
-    addi r4, r4, fn_802377B8@l
+    addi r4, r4, res_MsgHandle_constructor@l
     addi r5, r5, fn_800EF73C@l
     li r6, 0xc
     li r7, 0x5
@@ -376,12 +376,12 @@ asm void fn_8043A850(void)
     lwz r5, 0x18(r30)
     bl fn_803EC568
     lis r3, lbl_8078F008@ha
-    lis r4, fn_802377B8@ha
+    lis r4, res_MsgHandle_constructor@ha
     addi r3, r3, lbl_8078F008@l
     lis r5, fn_800EF73C@ha
     stw r3, 0x0(r31)
     addi r3, r31, 0xf4
-    addi r4, r4, fn_802377B8@l
+    addi r4, r4, res_MsgHandle_constructor@l
     addi r5, r5, fn_800EF73C@l
     li r6, 0xc
     li r7, 0x5
@@ -901,7 +901,7 @@ asm void fn_8043AFC8(void)
     li r30, 0x0
 lbl_fn_8043AFC8_00000AB4:
     mr r3, r31
-    bl fn_80237874
+    bl res_MsgHandle_update
     cmpwi r3, 0x0
     beq lbl_fn_8043AFC8_00000ACC
     li r3, 0x1
@@ -973,7 +973,7 @@ asm void fn_8043B028(void)
     li r31, 0xc
 lbl_fn_8043B028_00000BB4:
     addi r3, r1, 0x8
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     lbz r0, 0x0(r3)
     cmpwi r0, 0x3b
     beq lbl_fn_8043B028_00000C00
@@ -984,13 +984,13 @@ lbl_fn_8043B028_00000BB4:
     cmpwi r29, 0x5
     bge lbl_fn_8043B028_00000C00
     addi r3, r1, 0x8
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     add r5, r28, r31
     mr r4, r3
     addi r3, r5, 0xf4
     addi r29, r29, 0x1
     addi r31, r31, 0xc
-    bl fn_8023780C
+    bl res_MsgHandle_destructor
 lbl_fn_8043B028_00000C00:
     addi r3, r1, 0x8
     bl fn_8005BBF8

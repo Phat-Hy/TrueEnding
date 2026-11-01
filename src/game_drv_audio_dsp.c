@@ -15,7 +15,7 @@ extern void fn_805B697C(void);
 extern void fn_805E4090(void);
 extern void fn_805E7480(void);
 extern void fn_805E7520(void);
-extern void fn_805F8980(void);
+extern void PSMTXIdentity(void);
 extern void PSMTXMultVecArraySR(void);
 extern void fn_805FA270(void);
 extern void fn_805FA390(void);
@@ -236,7 +236,7 @@ asm void fn_805B4F0C(void)
     li r4, 0x0
     bl fn_806185C0
     addi r3, r1, 0x20
-    bl fn_805F8980
+    bl PSMTXIdentity
     addi r3, r1, 0x20
     li r4, 0x0
     bl GXLoadPosMtxImm

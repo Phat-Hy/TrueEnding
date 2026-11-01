@@ -33,7 +33,7 @@ extern void fn_801BDE68(void);
 extern void fn_801BDE98(void);
 extern void fn_80219344(void);
 extern void fn_80219558(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void fn_8021A888(void);
 extern void fn_8021A8D0(void);
 extern void fn_8021A918(void);
@@ -1312,7 +1312,7 @@ lbl_fn_801BE630_00001174:
     bl system_getNextSequenceId
     mr r16, r3
     li r3, 0x17a1
-    bl fn_80219E6C
+    bl task_findEntryById
     li r0, -0x1
     stw r0, 0x8(r1)
     lis r8, lbl_807C7030@ha

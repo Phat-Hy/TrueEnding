@@ -12,7 +12,7 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_80008210(void);
 extern void fn_8004AE84(void);
-extern void fn_8005B3CC(void);
+extern void talk_parseQuotedString(void);
 extern void fn_8005B5F8(void);
 extern void fn_8005B6E8(void);
 extern void fn_8006144C(void);
@@ -753,22 +753,22 @@ asm void spectateView_renderInterface(void)
     lis r14, 0x1555
 lbl_spectateView_renderInterface_0000099C:
     addi r3, r1, 0x50
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     mr r16, r3
     addi r4, r22, 0x286
     bl strcmp
     cmpwi r3, 0x0
     bne lbl_spectateView_renderInterface_000009EC
     addi r3, r1, 0x50
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC288
     stfs f1, 0x440(r15)
     addi r3, r1, 0x50
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC288
     stfs f1, 0x444(r15)
     addi r3, r1, 0x50
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC288
     stfs f1, 0x448(r15)
     b lbl_spectateView_renderInterface_000012DC
@@ -779,15 +779,15 @@ lbl_spectateView_renderInterface_000009EC:
     cmpwi r3, 0x0
     bne lbl_spectateView_renderInterface_00000A34
     addi r3, r1, 0x50
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC288
     stfs f1, 0x44c(r15)
     addi r3, r1, 0x50
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC288
     stfs f1, 0x450(r15)
     addi r3, r1, 0x50
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC288
     stfs f1, 0x454(r15)
     b lbl_spectateView_renderInterface_000012DC
@@ -798,7 +798,7 @@ lbl_spectateView_renderInterface_00000A34:
     cmpwi r3, 0x0
     bne lbl_spectateView_renderInterface_00000A60
     addi r3, r1, 0x50
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC288
     fmuls f0, f31, f1
     stfs f0, 0x458(r15)
@@ -810,7 +810,7 @@ lbl_spectateView_renderInterface_00000A60:
     cmpwi r3, 0x0
     bne lbl_spectateView_renderInterface_00000A88
     addi r3, r1, 0x50
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC288
     stfs f1, 0x45c(r15)
     b lbl_spectateView_renderInterface_000012DC
@@ -821,15 +821,15 @@ lbl_spectateView_renderInterface_00000A88:
     cmpwi r3, 0x0
     bne lbl_spectateView_renderInterface_00000AD0
     addi r3, r1, 0x50
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC288
     stfs f1, 0x460(r15)
     addi r3, r1, 0x50
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC288
     stfs f1, 0x464(r15)
     addi r3, r1, 0x50
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC288
     stfs f1, 0x468(r15)
     b lbl_spectateView_renderInterface_000012DC
@@ -840,15 +840,15 @@ lbl_spectateView_renderInterface_00000AD0:
     cmpwi r3, 0x0
     bne lbl_spectateView_renderInterface_00000B18
     addi r3, r1, 0x50
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC288
     stfs f1, 0x46c(r15)
     addi r3, r1, 0x50
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC288
     stfs f1, 0x470(r15)
     addi r3, r1, 0x50
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC288
     stfs f1, 0x474(r15)
     b lbl_spectateView_renderInterface_000012DC
@@ -859,7 +859,7 @@ lbl_spectateView_renderInterface_00000B18:
     cmpwi r3, 0x0
     bne lbl_spectateView_renderInterface_00000B44
     addi r3, r1, 0x50
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC288
     fmuls f0, f31, f1
     stfs f0, 0x478(r15)
@@ -871,7 +871,7 @@ lbl_spectateView_renderInterface_00000B44:
     cmpwi r3, 0x0
     bne lbl_spectateView_renderInterface_00000B6C
     addi r3, r1, 0x50
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC288
     stfs f1, 0x47c(r15)
     b lbl_spectateView_renderInterface_000012DC
@@ -882,15 +882,15 @@ lbl_spectateView_renderInterface_00000B6C:
     cmpwi r3, 0x0
     bne lbl_spectateView_renderInterface_00000BB4
     addi r3, r1, 0x50
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC288
     stfs f1, 0x480(r15)
     addi r3, r1, 0x50
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC288
     stfs f1, 0x484(r15)
     addi r3, r1, 0x50
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC288
     stfs f1, 0x488(r15)
     b lbl_spectateView_renderInterface_000012DC
@@ -901,15 +901,15 @@ lbl_spectateView_renderInterface_00000BB4:
     cmpwi r3, 0x0
     bne lbl_spectateView_renderInterface_00000BFC
     addi r3, r1, 0x50
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC288
     stfs f1, 0x48c(r15)
     addi r3, r1, 0x50
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC288
     stfs f1, 0x490(r15)
     addi r3, r1, 0x50
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC288
     stfs f1, 0x494(r15)
     b lbl_spectateView_renderInterface_000012DC
@@ -920,7 +920,7 @@ lbl_spectateView_renderInterface_00000BFC:
     cmpwi r3, 0x0
     bne lbl_spectateView_renderInterface_00000C28
     addi r3, r1, 0x50
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC288
     fmuls f0, f31, f1
     stfs f0, 0x498(r15)
@@ -932,7 +932,7 @@ lbl_spectateView_renderInterface_00000C28:
     cmpwi r3, 0x0
     bne lbl_spectateView_renderInterface_00000C50
     addi r3, r1, 0x50
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC288
     stfs f1, 0x49c(r15)
     b lbl_spectateView_renderInterface_000012DC
@@ -943,7 +943,7 @@ lbl_spectateView_renderInterface_00000C50:
     cmpwi r3, 0x0
     bne lbl_spectateView_renderInterface_00000C8C
     addi r3, r1, 0x50
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     addi r4, r22, 0x2f8
     bl strtok
     mr r5, r3
@@ -959,7 +959,7 @@ lbl_spectateView_renderInterface_00000C8C:
     cmpwi r3, 0x0
     bne lbl_spectateView_renderInterface_00000CD0
     addi r3, r1, 0x50
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     lwz r4, lbl_8087F0A8
     lwz r0, 0x15c(r4)
     cmpwi r0, 0x0
@@ -978,7 +978,7 @@ lbl_spectateView_renderInterface_00000CD0:
     cmpwi r3, 0x0
     bne lbl_spectateView_renderInterface_00000D20
     addi r3, r1, 0x50
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     addi r4, r22, 0x2f8
     bl strtok
     lwz r4, lbl_8087F0A8
@@ -1000,14 +1000,14 @@ lbl_spectateView_renderInterface_00000D20:
     cmpwi r3, 0x0
     bne lbl_spectateView_renderInterface_00000D64
     addi r3, r1, 0x50
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     addi r4, r22, 0x34b
     bl strcmp
     cntlzw r0, r3
     addi r3, r1, 0x50
     srwi r0, r0, 5
     stw r0, 0x410(r15)
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC288
     stfs f1, 0x430(r15)
     b lbl_spectateView_renderInterface_000012DC
@@ -1018,7 +1018,7 @@ lbl_spectateView_renderInterface_00000D64:
     cmpwi r3, 0x0
     bne lbl_spectateView_renderInterface_0000104C
     addi r3, r1, 0x50
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     mr r19, r3
     addi r4, r22, 0x358
     li r5, 0x2
@@ -1035,11 +1035,11 @@ lbl_spectateView_renderInterface_00000D64:
     bl fn_800DC12C
     mr r23, r3
     addi r3, r1, 0x50
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC12C
     mr r24, r3
     addi r3, r1, 0x50
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC12C
     lwz r5, 0x2d4(r15)
     mr r25, r3
@@ -1218,11 +1218,11 @@ lbl_spectateView_renderInterface_0000104C:
     cmpwi r3, 0x0
     bne lbl_spectateView_renderInterface_000012DC
     addi r3, r1, 0x50
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC12C
     stw r3, 0x20(r1)
     addi r3, r1, 0x50
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC288
     lwz r4, 0x2e8(r15)
     lwz r3, 0x2ec(r15)

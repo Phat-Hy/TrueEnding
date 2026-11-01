@@ -7,7 +7,7 @@ extern void __register_global_object(void);
 extern void _restgpr_23(void);
 extern void _savegpr_23(void);
 extern void dtor_80084684(void);
-extern void fn_8005B3CC(void);
+extern void talk_parseQuotedString(void);
 extern void fn_8005B5F8(void);
 extern void fn_8005B6E8(void);
 extern void talk_parseDialogue(void);
@@ -824,14 +824,14 @@ asm void fn_805303D4(void)
     addi r31, r31, lbl_8075D31C@l
 lbl_fn_805303D4_00000A84:
     addi r3, r1, 0x8
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     mr r30, r3
     addi r4, r31, 0x11b
     bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_805303D4_00000AB4
     addi r3, r1, 0x8
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC288
     stfs f1, 0x1328(r29)
     b lbl_fn_805303D4_00000B58
@@ -842,19 +842,19 @@ lbl_fn_805303D4_00000AB4:
     cmpwi r3, 0x0
     bne lbl_fn_805303D4_00000B0C
     addi r3, r1, 0x8
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC288
     stfs f1, 0x1318(r29)
     addi r3, r1, 0x8
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC288
     stfs f1, 0x131c(r29)
     addi r3, r1, 0x8
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC288
     stfs f1, 0x1320(r29)
     addi r3, r1, 0x8
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC288
     stfs f1, 0x1324(r29)
     b lbl_fn_805303D4_00000B58
@@ -865,7 +865,7 @@ lbl_fn_805303D4_00000B0C:
     cmpwi r3, 0x0
     bne lbl_fn_805303D4_00000B34
     addi r3, r1, 0x8
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC288
     stfs f1, 0x132c(r29)
     b lbl_fn_805303D4_00000B58
@@ -876,7 +876,7 @@ lbl_fn_805303D4_00000B34:
     cmpwi r3, 0x0
     bne lbl_fn_805303D4_00000B58
     addi r3, r1, 0x8
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC288
     stfs f1, 0x1330(r29)
 lbl_fn_805303D4_00000B58:
@@ -968,7 +968,7 @@ asm void fn_805305D4(void)
     stw r18, 0x88(r1)
 lbl_fn_805305D4_00000C9C:
     addi r3, r1, 0x8c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     lbz r0, 0x0(r3)
     extsb. r0, r0
     beq lbl_fn_805305D4_00001260
@@ -978,71 +978,71 @@ lbl_fn_805305D4_00000C9C:
     addi r3, r1, 0x2c
     bl strcpy
     addi r3, r1, 0x8c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC12C
     stw r3, 0x28(r1)
     addi r3, r1, 0x8c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC12C
     stw r3, 0x4c(r1)
     addi r3, r1, 0x8c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC12C
     stw r3, 0x50(r1)
     addi r3, r1, 0x8c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC12C
     stw r3, 0x54(r1)
     addi r3, r1, 0x8c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC12C
     stw r3, 0x58(r1)
     addi r3, r1, 0x8c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC12C
     stw r3, 0x5c(r1)
     addi r3, r1, 0x8c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC12C
     stw r3, 0x60(r1)
     addi r3, r1, 0x8c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC12C
     stw r3, 0x64(r1)
     addi r3, r1, 0x8c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC12C
     stw r3, 0x68(r1)
     addi r3, r1, 0x8c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC12C
     stw r3, 0x6c(r1)
     addi r3, r1, 0x8c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC12C
     stw r3, 0x70(r1)
     addi r3, r1, 0x8c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC12C
     stw r3, 0x74(r1)
     addi r3, r1, 0x8c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC12C
     stw r3, 0x78(r1)
     addi r3, r1, 0x8c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC12C
     stw r3, 0x7c(r1)
     addi r3, r1, 0x8c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC12C
     stw r3, 0x80(r1)
     addi r3, r1, 0x8c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC12C
     stw r3, 0x84(r1)
     addi r3, r1, 0x8c
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl fn_800DC12C
     lwz r17, 0x4(r20)
     lwz r4, 0x8(r20)

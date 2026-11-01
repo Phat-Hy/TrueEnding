@@ -48,10 +48,10 @@ extern void fn_80237518(void);
 extern void fn_802375C4(void);
 extern void fn_80237654(void);
 extern void fn_802376D0(void);
-extern void fn_802377B8(void);
-extern void fn_8023780C(void);
-extern void fn_8023781C(void);
-extern void fn_80237874(void);
+extern void res_MsgHandle_constructor(void);
+extern void res_MsgHandle_destructor(void);
+extern void res_MsgHandle_unload(void);
+extern void res_MsgHandle_update(void);
 extern void fn_804444E8(void);
 extern void fn_80444BE8(void);
 extern void fn_80444C48(void);
@@ -953,9 +953,9 @@ lbl_fn_8051B988_00000B20:
     stw r30, 0x46d4(r31)
     addi r3, r31, 0x47dc
     stw r30, 0x46d8(r31)
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addi r3, r31, 0x47e8
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addi r3, r31, 0x47f4
     bl fn_80237518
     lis r4, lbl_807C9100@ha
@@ -1299,10 +1299,10 @@ lbl_fn_8051B988_00000F38:
     bctrl
     addi r3, r31, 0x47dc
     addi r4, r30, 0xac
-    bl fn_8023780C
+    bl res_MsgHandle_destructor
     addi r3, r31, 0x47e8
     addi r4, r30, 0xbb
-    bl fn_8023780C
+    bl res_MsgHandle_destructor
     addi r3, r31, 0x47f4
     addi r4, r30, 0xc9
     bl fn_80237654
@@ -1389,7 +1389,7 @@ lbl_fn_8051C2AC_000011B8:
     addic. r31, r29, 0x47e8
     beq lbl_fn_8051C2AC_000011F0
     mr r3, r31
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r31, 0x4
     beq lbl_fn_8051C2AC_000011F0
     li r4, 0x0
@@ -1398,7 +1398,7 @@ lbl_fn_8051C2AC_000011F0:
     addic. r31, r29, 0x47dc
     beq lbl_fn_8051C2AC_00001210
     mr r3, r31
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r31, 0x4
     beq lbl_fn_8051C2AC_00001210
     li r4, 0x0
@@ -1858,14 +1858,14 @@ lbl_fn_8051C754_0000189C:
     b lbl_fn_8051C754_000018F8
 lbl_fn_8051C754_000018B4:
     addi r3, r24, 0x47dc
-    bl fn_80237874
+    bl res_MsgHandle_update
     cmpwi r3, 0x0
     beq lbl_fn_8051C754_000018CC
     li r3, 0x1
     b lbl_fn_8051C754_000018F8
 lbl_fn_8051C754_000018CC:
     addi r3, r24, 0x47e8
-    bl fn_80237874
+    bl res_MsgHandle_update
     cmpwi r3, 0x0
     beq lbl_fn_8051C754_000018E4
     li r3, 0x1

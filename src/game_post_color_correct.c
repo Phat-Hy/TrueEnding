@@ -21,7 +21,7 @@ extern void fn_80170A20(void);
 extern void fn_80176548(void);
 extern void fn_801765D8(void);
 extern void fn_80178A6C(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
@@ -479,12 +479,12 @@ lbl_fn_802C42D4_00000538:
     cmpwi r0, 0x0
     beq lbl_fn_802C42D4_00000578
     li r3, 0x582
-    bl fn_80219E6C
+    bl task_findEntryById
     mr r31, r3
     b lbl_fn_802C42D4_00000584
 lbl_fn_802C42D4_00000578:
     li r3, 0x578
-    bl fn_80219E6C
+    bl task_findEntryById
     mr r31, r3
 lbl_fn_802C42D4_00000584:
     mr r3, r30
@@ -680,12 +680,12 @@ lbl_fn_802C4480_00000828:
     cmpwi r0, 0x0
     beq lbl_fn_802C4480_00000868
     li r3, 0x584
-    bl fn_80219E6C
+    bl task_findEntryById
     mr r31, r3
     b lbl_fn_802C4480_00000874
 lbl_fn_802C4480_00000868:
     li r3, 0x57a
-    bl fn_80219E6C
+    bl task_findEntryById
     mr r31, r3
 lbl_fn_802C4480_00000874:
     mr r3, r30

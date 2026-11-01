@@ -16,7 +16,7 @@ extern void fn_805D9D10(void);
 extern void fn_805D9D80(void);
 extern void fn_805D9DF0(void);
 extern void fn_805D9E10(void);
-extern void fn_805F8CA0(void);
+extern void PSMTXInverse(void);
 extern void PSMTXTrans(void);
 extern void PSMTXMultVec(void);
 extern void fn_80612E80(void);
@@ -1983,7 +1983,7 @@ lbl_fn_805C1630_000018BC:
     lwz r3, 0x2c(r30)
     addi r4, r1, 0x38
     addi r3, r3, 0x84
-    bl fn_805F8CA0
+    bl PSMTXInverse
     lis r3, lbl_80764140@ha
     stfs f30, 0x8(r1)
     lfs f0, lbl_80764140@l(r3)

@@ -15,7 +15,7 @@ extern void fn_800DC6B4(void);
 extern void fn_800DCA6C(void);
 extern void fn_805ED460(void);
 extern void fn_805ED5A0(void);
-extern void fn_805F89F0(void);
+extern void PSMTXConcat(void);
 extern void PSMTXScale(void);
 extern void PSMTXQuat(void);
 extern void PSMTXMultVec(void);
@@ -1387,11 +1387,11 @@ lbl_fn_8009A490_000012E8:
     mr r3, r30
     mr r4, r31
     mr r5, r27
-    bl fn_805F89F0
+    bl PSMTXConcat
     mr r3, r29
     mr r4, r27
     mr r5, r27
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r27, r27, 0x30
     subi r28, r28, 0x1
     addi r31, r31, 0x30
@@ -1426,11 +1426,11 @@ lbl_fn_8009A504_00001360:
     mr r5, r26
     mulli r0, r0, 0x30
     add r3, r27, r0
-    bl fn_805F89F0
+    bl PSMTXConcat
     mr r3, r29
     mr r4, r26
     mr r5, r26
-    bl fn_805F89F0
+    bl PSMTXConcat
     addi r26, r26, 0x30
     addi r30, r30, 0x30
     addi r31, r31, 0x4
@@ -1605,7 +1605,7 @@ lbl_fn_8009A5CC_000015C8:
     mr r4, r17
     addi r3, r1, 0x1b0
     addi r5, r1, 0x150
-    bl fn_805F89F0
+    bl PSMTXConcat
     psq_l f1, 0x0(r27), 0, 0
     psq_l f2, 0x8(r27), 0, 0
     psq_l f3, 0x10(r27), 0, 0
@@ -1765,7 +1765,7 @@ lbl_fn_8009A5CC_00001820:
     stfs f8, 0x12c(r1)
     stfs f7, 0x13c(r1)
     stfs f0, 0x14c(r1)
-    bl fn_805F89F0
+    bl PSMTXConcat
     lfs f2, 0x3c(r20)
     cmpwi r18, 0x0
     psq_l f1, 0x34(r20), 0, 0
@@ -1938,7 +1938,7 @@ lbl_fn_8009A5CC_00001A88:
     psq_st f4, 0x18(r24), 0, 0
     psq_st f5, 0x20(r24), 0, 0
     psq_st f6, 0x28(r24), 0, 0
-    bl fn_805F89F0
+    bl PSMTXConcat
     mulli r0, r19, 0x30
     lwz r3, 0x4(r15)
     psq_l f2, 0x8(r22), 0, 0
@@ -2169,7 +2169,7 @@ lbl_fn_8009ADA4_00001E10:
     mr r4, r17
     addi r3, r1, 0x278
     addi r5, r1, 0x1e8
-    bl fn_805F89F0
+    bl PSMTXConcat
     psq_l f1, 0x0(r14), 0, 0
     psq_l f2, 0x8(r14), 0, 0
     psq_l f3, 0x10(r14), 0, 0
@@ -2427,7 +2427,7 @@ lbl_fn_8009ADA4_000021DC:
     stfs f8, 0x1c4(r1)
     stfs f7, 0x1d4(r1)
     stfs f0, 0x1e4(r1)
-    bl fn_805F89F0
+    bl PSMTXConcat
     lwz r0, 0x0(r18)
     rlwinm r0, r0, 0, 29, 29
     cmplwi r0, 0x4
@@ -2626,7 +2626,7 @@ lbl_fn_8009ADA4_000024A0:
     psq_st f4, 0x18(r24), 0, 0
     psq_st f5, 0x20(r24), 0, 0
     psq_st f6, 0x28(r24), 0, 0
-    bl fn_805F89F0
+    bl PSMTXConcat
     mulli r0, r20, 0x30
     lwz r3, 0x4(r15)
     psq_l f2, 0x8(r22), 0, 0

@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void _restgpr_22(void);
 extern void _savegpr_22(void);
-extern void fn_8005B3CC(void);
+extern void talk_parseQuotedString(void);
 extern void fn_8005B5F8(void);
 extern void fn_8005B6E8(void);
 extern void mem_realloc(void);
@@ -137,7 +137,7 @@ asm void fn_80507314(void)
     b lbl_fn_80507314_000002DC
 lbl_fn_80507314_000000E8:
     addi r3, r1, 0x8
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     lbz r0, 0x0(r3)
     cmpwi r0, 0x3b
     beq lbl_fn_80507314_000002DC
@@ -146,14 +146,14 @@ lbl_fn_80507314_000000E8:
     cmpwi r3, 0x0
     bne lbl_fn_80507314_000002DC
     addi r3, r1, 0x8
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     mr r26, r3
     addi r4, r29, 0x14
     bl strcmp
     cmpwi r3, 0x0
     bne lbl_fn_80507314_0000025C
     addi r3, r1, 0x8
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     lwz r0, 0x4(r30)
     mr r26, r3
@@ -178,7 +178,7 @@ lbl_fn_80507314_00000178:
     b lbl_fn_80507314_000001FC
 lbl_fn_80507314_00000180:
     addi r3, r1, 0x8
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     lbz r0, 0x0(r3)
     cmpwi r0, 0x3b
     beq lbl_fn_80507314_000001FC
@@ -187,7 +187,7 @@ lbl_fn_80507314_00000180:
     cmpwi r3, 0x0
     beq lbl_fn_80507314_0000020C
     addi r3, r1, 0x8
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     subi r5, r3, 0x1
     cmpw r5, r26
@@ -197,15 +197,15 @@ lbl_fn_80507314_00000180:
     addi r3, r1, 0x8
     stwx r5, r4, r0
     add r27, r4, r0
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     stw r3, 0x4(r27)
     addi r3, r1, 0x8
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     stw r3, 0xc(r27)
     addi r3, r1, 0x8
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     stw r3, 0x10(r27)
 lbl_fn_80507314_000001FC:
@@ -248,7 +248,7 @@ lbl_fn_80507314_0000025C:
     b lbl_fn_80507314_000002CC
 lbl_fn_80507314_00000278:
     addi r3, r1, 0x8
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     lbz r0, 0x0(r3)
     cmpwi r0, 0x3b
     beq lbl_fn_80507314_000002CC
@@ -257,12 +257,12 @@ lbl_fn_80507314_00000278:
     cmpwi r3, 0x0
     beq lbl_fn_80507314_000002DC
     addi r3, r1, 0x8
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     addi r26, r27, 0x8
     li r25, 0x2
 lbl_fn_80507314_000002AC:
     addi r3, r1, 0x8
-    bl fn_8005B3CC
+    bl talk_parseQuotedString
     bl atoi
     subic. r25, r25, 0x1
     stw r3, 0x8(r26)

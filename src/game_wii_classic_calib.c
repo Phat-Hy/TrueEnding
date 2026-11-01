@@ -9,7 +9,7 @@ extern void _savegpr_22(void);
 extern void dtor_80084684(void);
 extern void fn_8004B290(void);
 extern void fn_8004B338(void);
-extern void fn_8005B9CC(void);
+extern void talk_formatQuotedString(void);
 extern void fn_8005BBF8(void);
 extern void fn_8005BCE8(void);
 extern void mem_alloc(void);
@@ -2111,7 +2111,7 @@ asm void fn_80564194(void)
     addi r29, r3, lbl_8075FB78@l
 lbl_fn_80564194_00001994:
     addi r3, r1, 0x208
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     lbz r0, 0x0(r3)
     cmpwi r0, 0x3b
     beq lbl_fn_80564194_00001A58
@@ -2120,7 +2120,7 @@ lbl_fn_80564194_00001994:
     cmpwi r3, 0x0
     bne lbl_fn_80564194_00001A58
     addi r3, r1, 0x208
-    bl fn_8005B9CC
+    bl talk_formatQuotedString
     mr r4, r3
     addi r3, r1, 0x8
     bl strcpy

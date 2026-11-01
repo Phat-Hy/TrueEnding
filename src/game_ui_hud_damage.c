@@ -27,10 +27,10 @@ extern void fn_80192758(void);
 extern void fn_8020924C(void);
 extern void fn_802180A8(void);
 extern void fn_80219544(void);
-extern void fn_80219E6C(void);
-extern void fn_802377B8(void);
-extern void fn_8023780C(void);
-extern void fn_8023781C(void);
+extern void task_findEntryById(void);
+extern void res_MsgHandle_constructor(void);
+extern void res_MsgHandle_destructor(void);
+extern void res_MsgHandle_unload(void);
 extern void fn_8035B694(void);
 extern void fn_8035B78C(void);
 extern void fn_803EA77C(void);
@@ -1166,7 +1166,7 @@ lbl_fn_801CB76C_00000DCC:
     extrwi. r0, r0, 1, 1
     beq lbl_fn_801CB76C_00000F04
     li r3, 0x1395
-    bl fn_80219E6C
+    bl task_findEntryById
     lwz r26, lbl_8087F048
     mr r27, r3
     mr r3, r26
@@ -1788,9 +1788,9 @@ lbl_fn_801CC0AC_000016B0:
     stw r28, 0x14b0(r29)
     stw r28, 0x14b4(r29)
     stw r28, 0x14b8(r29)
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addi r3, r29, 0x14c8
-    bl fn_802377B8
+    bl res_MsgHandle_constructor
     addi r27, r29, 0x14d4
     mr r3, r27
     bl atn_LoadHandle_constructor
@@ -1806,11 +1806,11 @@ lbl_fn_801CC0AC_000016B0:
     addi r4, r30, lbl_8073BC30@l
     stw r5, 0x8(r27)
     stw r0, 0x54c(r29)
-    bl fn_8023780C
+    bl res_MsgHandle_destructor
     addi r30, r30, lbl_8073BC30@l
     addi r3, r29, 0x14c8
     addi r4, r30, 0x15
-    bl fn_8023780C
+    bl res_MsgHandle_destructor
     lwz r3, 0x20(r31)
     bl fn_8020924C
     addi r27, r30, 0x2a
@@ -1936,7 +1936,7 @@ lbl_fn_801CC3AC_000018F4:
     addic. r31, r29, 0x14c8
     beq lbl_fn_801CC3AC_00001914
     mr r3, r31
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r31, 0x4
     beq lbl_fn_801CC3AC_00001914
     li r4, 0x0
@@ -1945,7 +1945,7 @@ lbl_fn_801CC3AC_00001914:
     addic. r31, r29, 0x14bc
     beq lbl_fn_801CC3AC_00001934
     mr r3, r31
-    bl fn_8023781C
+    bl res_MsgHandle_unload
     addic. r3, r31, 0x4
     beq lbl_fn_801CC3AC_00001934
     li r4, 0x0

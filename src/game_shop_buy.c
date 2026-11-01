@@ -18,7 +18,7 @@ extern void fn_8018DAE4(void);
 extern void fn_801A5E90(void);
 extern void fn_801C3DCC(void);
 extern void fn_801C9F6C(void);
-extern void fn_80219E6C(void);
+extern void task_findEntryById(void);
 extern void world_getGlobalFlag(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
@@ -90,7 +90,7 @@ asm void fn_80157C34(void)
     b lbl_fn_80157C34_00000068
 lbl_fn_80157C34_00000054:
     li r3, 0xc8
-    bl fn_80219E6C
+    bl task_findEntryById
     lwz r0, 0x638(r29)
     stw r0, 0x63c(r29)
     stw r3, 0x638(r29)
@@ -369,7 +369,7 @@ asm void fn_8015802C(void)
     b lbl_fn_8015802C_00000460
 lbl_fn_8015802C_0000044C:
     li r3, 0xc8
-    bl fn_80219E6C
+    bl task_findEntryById
     lwz r0, 0x638(r28)
     stw r0, 0x63c(r28)
     stw r3, 0x638(r28)
