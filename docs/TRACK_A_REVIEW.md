@@ -63,3 +63,17 @@ Track A and Track B need **separate checkouts**. In one working copy the tree un
 checked out for the other agent, `git grep` answers about the wrong revision unless it names one, and an untracked
 file from one track appears in the other's `git status`. `CONTRIBUTING_TRACKS.md` says this; it is the item worth
 fixing first.
+
+## Round 2 review — `af5f17b..f5cdb32` (4 commits, 463 files, 49 renames + 2 C decompilations)
+
+Checked against the revision (`git grep … origin/track-a`), not the working tree.
+
+| claim | verdict | evidence |
+|---|---|---|
+| "Batch 3 / Batch 4: 49 names" | **verified** | the `symbols.txt` diff has 49 rename pairs; **0 old-name lines remain in `src/`** (excluding block-local `lbl_*`), and **0 new names are missing** from `src/`. That is the consistency bar the earlier batch missed, met. |
+| "Unit A2: `atn_TaskBase_isValid`, `atn_Task_initCookie` to C" | **verified, and they are real C** | `atn_TaskBase_isValid` is now `if (task && task->cookie == *(u64*)lbl_807C75D0) { if (task->taskId != 0) return 1; } return 0;` and `atn_Task_initCookie` is `*(u64*)lbl_807C75D0 = *(u64*)lbl_80734628;` — semantic C with the struct and the cookie seed named, not transliterated asm. |
+| "progress 99.30 % -> 99.30 %" | **consistent** | renames cannot change bytes and neither C function changes its object, so an unchanged figure is the expected result, not a stale copy. |
+
+**One hygiene ask, not a blocker.** The new prototype is `BOOL atn_TaskBase_isValid(atn_TaskBase* task);` in `src/game_depth.c`, but a caller still declares `extern void atn_TaskBase_isValid(void);` (`src/game_bloom.c:6`). C does not diagnose that across translation units, and the caller is an asm block that sets `r3` itself, so it links and matches — but the next person who converts that caller to C will call it with no argument. Worth a sweep: every remaining `extern` for a renamed/decompiled function should carry the real prototype.
+
+**What the log's structure gets right, and one thing to keep.** Each entry carries `Numbers:` (before → after), `Named:` (with evidence) and `Decompiled:` (bytes, instructions, match). Keep quoting the instruction count (`9/9`, `20/20`) — that is the number Track B can check without rebuilding, and it is what made this round verifiable in minutes.
