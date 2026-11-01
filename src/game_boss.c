@@ -28,7 +28,7 @@ extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800D5A3C(void);
 extern void fn_800D5B58(void);
 extern void fn_8046CC90(void);
-extern void fn_8046DC5C(void);
+extern void boss_loadWeakpointResource(void);
 extern void boss_bindArenaInteractions(void);
 extern void fn_8046F4D4(void);
 extern void fn_805F9EF0(void);
@@ -3492,7 +3492,7 @@ asm void fn_8006BA8C(void)
     mr r3, r0
     mr r5, r30
     li r6, 0x20
-    bl fn_8046DC5C
+    bl boss_loadWeakpointResource
     b lbl_fn_8006BA8C_00002DA4
 lbl_fn_8006BA8C_00002D24:
     mr r3, r6

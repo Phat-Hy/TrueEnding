@@ -23,7 +23,7 @@ extern void fn_800A6F88(void);
 extern void fn_800A6FF0(void);
 extern void str_skipWhitespace(void);
 extern void time_wrapMilliseconds(void);
-extern void fn_8046DC5C(void);
+extern void boss_loadWeakpointResource(void);
 extern void boss_bindArenaInteractions(void);
 extern void strcmp(void);
 extern void strncmp(void);
@@ -739,7 +739,7 @@ asm void fn_8020F84C(void)
     stw r29, 0x664(r1)
     stw r30, 0x8(r1)
     lwz r3, lbl_8087F518
-    bl fn_8046DC5C
+    bl boss_loadWeakpointResource
     lis r4, lbl_807772D0@ha
     mr r31, r3
     addi r4, r4, lbl_807772D0@l
@@ -1169,7 +1169,7 @@ asm void fn_8020FDEC(void)
     addi r5, r1, 0x8
     lwz r4, lbl_80882EB0
     li r6, 0x20
-    bl fn_8046DC5C
+    bl boss_loadWeakpointResource
     lwz r12, 0xc(r1)
     mr r30, r3
     mr r4, r30
@@ -1465,7 +1465,7 @@ asm void fn_80210244(void)
     addi r5, r1, 0x8
     lwz r4, lbl_80882ED8
     li r6, 0x20
-    bl fn_8046DC5C
+    bl boss_loadWeakpointResource
     lwz r12, 0xc(r1)
     mr r31, r3
     mr r4, r31

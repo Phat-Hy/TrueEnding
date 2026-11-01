@@ -9,8 +9,8 @@ extern void _savegpr_22(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void path_Object_constructor(void);
-extern void fn_80057F28(void);
-extern void fn_80058078(void);
+extern void mission_initPathTracker(void);
+extern void mission_clearPathTracker(void);
 extern void mission_isObjectiveActive(void);
 extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
@@ -375,7 +375,7 @@ lbl_fn_80419C00_00000380:
     bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_80419C00_000003B8
-    bl fn_80057F28
+    bl mission_initPathTracker
 lbl_fn_80419C00_000003B8:
     lwz r0, 0x4c4(r23)
     cmpwi r0, 0x0
@@ -393,7 +393,7 @@ lbl_fn_80419C00_000003E0:
     bl talk_formatQuotedString
     mr r4, r3
     mr r3, r22
-    bl fn_80058078
+    bl mission_clearPathTracker
     b lbl_fn_80419C00_00000A00
 lbl_fn_80419C00_000003FC:
     mr r3, r22

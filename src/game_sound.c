@@ -52,7 +52,7 @@ extern void fn_800D19FC(void);
 extern void str_parseInt(void);
 extern void str_findChar(void);
 extern void sky_renderStub(void);
-extern void fn_8046DC5C(void);
+extern void boss_loadWeakpointResource(void);
 extern void boss_bindArenaInteractions(void);
 extern void fn_8059D7DC(void);
 extern void fn_8059D828(void);
@@ -5186,7 +5186,7 @@ asm void fn_8004A3FC(void)
     lwz r3, lbl_8087F518
     addi r5, r1, 0x14
     li r6, 0x20
-    bl fn_8046DC5C
+    bl boss_loadWeakpointResource
     lis r4, lbl_807772D0@ha
     mr r28, r3
     addi r4, r4, lbl_807772D0@l

@@ -55,7 +55,7 @@ extern void fn_8014FAD0(void);
 extern void fn_80150178(void);
 extern void inventory_unequipItem(void);
 extern void inventory_calcTotalStats(void);
-extern void fn_80164DCC(void);
+extern void party_evalTacticCondition(void);
 extern void debuff_removeStatusEffect(void);
 extern void fn_8016E5F0(void);
 extern void actor_setState(void);
@@ -1910,7 +1910,7 @@ lbl_fn_8000F1EC_000018A8:
     lwz r3, 0x1c(r29)
     li r4, 0x0
     lwz r3, 0x48(r3)
-    bl fn_80164DCC
+    bl party_evalTacticCondition
     lwz r3, 0x1c(r29)
     lwz r3, 0x48(r3)
     lwz r0, 0x1208(r3)

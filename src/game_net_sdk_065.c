@@ -26,7 +26,7 @@ extern void GXInitLightSpot(void);
 extern void GXInitLightObj(void);
 extern void GXClampLightAngle(void);
 extern void fn_806165B0(void);
-extern void fn_80617200(void);
+extern void GXSetTexCoordScaleManually(void);
 extern void GXInitTexObjDefault(void);
 extern void GXSetTevDirect(void);
 extern void GXSetTevColorIn(void);
@@ -676,7 +676,7 @@ lbl_fn_80726B90_00000758:
     li r8, 0x7d
     bl __GXSetVtxDesc
     li r3, 0x0
-    bl fn_80617200
+    bl GXSetTexCoordScaleManually
     li r3, 0x1
     li r4, 0x4
     li r5, 0x5
@@ -805,7 +805,7 @@ lbl_fn_80726B90_00000954:
     li r8, 0x7d
     bl __GXSetVtxDesc
     li r3, 0x0
-    bl fn_80617200
+    bl GXSetTexCoordScaleManually
     li r3, 0x1
     li r4, 0x4
     li r5, 0x5
@@ -911,7 +911,7 @@ lbl_fn_80726B90_00000AF4:
     li r8, 0x7d
     bl __GXSetVtxDesc
     li r3, 0x0
-    bl fn_80617200
+    bl GXSetTexCoordScaleManually
     li r3, 0x1
     li r4, 0x4
     li r5, 0x5
@@ -1017,7 +1017,7 @@ lbl_fn_80726B90_00000C94:
     li r8, 0x7d
     bl __GXSetVtxDesc
     li r3, 0x0
-    bl fn_80617200
+    bl GXSetTexCoordScaleManually
     li r3, 0x1
     li r4, 0x4
     li r5, 0x5
@@ -1123,7 +1123,7 @@ lbl_fn_80726B90_00000E34:
     li r8, 0x7d
     bl __GXSetVtxDesc
     li r3, 0x0
-    bl fn_80617200
+    bl GXSetTexCoordScaleManually
     li r3, 0x1
     li r4, 0x4
     li r5, 0x5
@@ -1713,7 +1713,7 @@ lbl_fn_80727B60_000016A4:
     li r8, 0x7d
     bl __GXSetVtxDesc
     li r3, 0x0
-    bl fn_80617200
+    bl GXSetTexCoordScaleManually
     li r3, 0x1
     li r4, 0x4
     li r5, 0x5

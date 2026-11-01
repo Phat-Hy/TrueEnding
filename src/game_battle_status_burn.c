@@ -10,8 +10,8 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void ui_destroyWidget(void);
 extern void atn_ColliBase_destructor(void);
-extern void fn_80057F28(void);
-extern void fn_80058078(void);
+extern void mission_initPathTracker(void);
+extern void mission_clearPathTracker(void);
 extern void mission_isObjectiveActive(void);
 extern void mission_updateObjectiveTarget(void);
 extern void fn_80058A1C(void);
@@ -61,7 +61,7 @@ extern void task_updateWorker(void);
 extern void task_initWorkerContext(void);
 extern void barrier_bindFieldAnimation(void);
 extern void dungeon_updateBarrierField(void);
-extern void fn_803EDB18(void);
+extern void barrier_testFieldCollision(void);
 extern void fn_803F11F8(void);
 extern void fn_803F3334(void);
 extern void fn_80424AD4(void);
@@ -1104,7 +1104,7 @@ asm void fn_8042618C(void)
     li r31, 0x0
     stw r31, 0x894(r30)
     addi r3, r30, 0x898
-    bl fn_80057F28
+    bl mission_initPathTracker
     lis r4, res_MsgHandle_constructor@ha
     lis r5, cam_destroyMsgHandle@ha
     addi r3, r30, 0x928
@@ -1221,10 +1221,10 @@ asm void fn_80426344(void)
     bne lbl_fn_80426344_00000FE4
     mr r3, r31
     addi r4, r31, 0xf4
-    bl fn_803EDB18
+    bl barrier_testFieldCollision
     mr r3, r31
     addi r4, r31, 0x4c4
-    bl fn_803EDB18
+    bl barrier_testFieldCollision
     lwz r3, 0x48(r31)
     lwz r4, 0x8a0(r31)
     addis r0, r3, 0x0
@@ -1840,7 +1840,7 @@ lbl_fn_804269E0_00001748:
     bl talk_formatQuotedString
     mr r4, r3
     addi r3, r28, 0x898
-    bl fn_80058078
+    bl mission_clearPathTracker
     b lbl_fn_804269E0_00001830
 lbl_fn_804269E0_00001774:
     mr r3, r29

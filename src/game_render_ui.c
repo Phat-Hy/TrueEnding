@@ -51,7 +51,7 @@ extern void GXDrawDone(void);
 extern void fn_80616EF0(void);
 extern void fn_80617030(void);
 extern void fn_80617130(void);
-extern void fn_80617200(void);
+extern void GXSetTexCoordScaleManually(void);
 extern void GXInitTexObjDefault(void);
 extern void fn_80617270(void);
 extern void GXSetTevDirect(void);
@@ -154,7 +154,7 @@ asm void fn_800B0CD4(void)
     li r3, 0x1
     bl GXSetNumTevStages
     li r3, 0x0
-    bl fn_80617200
+    bl GXSetTexCoordScaleManually
     li r3, 0x4
     li r4, 0x0
     li r5, 0x1
@@ -492,7 +492,7 @@ lbl_fn_800B105C_000003C0:
     li r9, 0x2
     bl GXInitLightSpot
     li r3, 0x1
-    bl fn_80617200
+    bl GXSetTexCoordScaleManually
     li r3, 0x4
     li r4, 0x0
     li r5, 0x1
@@ -1368,7 +1368,7 @@ asm void fn_800B1C44(void)
     li r3, 0x1
     bl GXSetNumTevStages
     li r3, 0x0
-    bl fn_80617200
+    bl GXSetTexCoordScaleManually
     lfs f10, lbl_80880EF4
     addi r4, r1, 0x14
     lfs f0, 0x20(r31)

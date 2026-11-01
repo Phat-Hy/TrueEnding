@@ -27,7 +27,7 @@ extern void npc_updateTalkInteraction(void);
 extern void quest_resetObjectiveBounds(void);
 extern void equip_applyToCharacter(void);
 extern void fn_80164B00(void);
-extern void fn_80164DCC(void);
+extern void party_evalTacticCondition(void);
 extern void fn_8016DCD4(void);
 extern void fn_80210220(void);
 extern void task_findEntryById(void);
@@ -511,7 +511,7 @@ lbl_fn_801B74FC_0000053C:
 lbl_fn_801B74FC_00000548:
     lwz r3, 0x4(r31)
     li r4, 0x1
-    bl fn_80164DCC
+    bl party_evalTacticCondition
 lbl_fn_801B74FC_00000554:
     li r0, 0x1
 lbl_fn_801B74FC_00000558:

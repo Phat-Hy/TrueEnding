@@ -8,8 +8,8 @@ extern void mem_alloc(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
-extern void fn_801059F8(void);
-extern void fn_80105B3C(void);
+extern void colli_findDynamicSlot(void);
+extern void colli_findStaticSlot(void);
 extern void fn_8011BE54(void);
 extern void fn_8011BEB8(void);
 extern void fn_8012D180(void);
@@ -423,10 +423,10 @@ lbl_equip_applyToCharacter_000004B4:
     cmpwi r3, 0x0
     beq lbl_equip_applyToCharacter_000004DC
     mr r4, r29
-    bl fn_801059F8
+    bl colli_findDynamicSlot
     lwz r3, lbl_8087F048
     mr r4, r29
-    bl fn_80105B3C
+    bl colli_findStaticSlot
 lbl_equip_applyToCharacter_000004DC:
     lwz r0, 0x12a8(r29)
     lfs f0, lbl_8088196C

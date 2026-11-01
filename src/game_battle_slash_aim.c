@@ -7,7 +7,7 @@ extern void _savegpr_27(void);
 extern void sound_initChannelParams(void);
 extern void sound_releaseChannel(void);
 extern void item_useConsumable(void);
-extern void fn_80058078(void);
+extern void mission_clearPathTracker(void);
 extern void mission_isObjectiveActive(void);
 extern void mission_updateObjectiveTarget(void);
 extern void talk_formatQuotedString(void);
@@ -1191,7 +1191,7 @@ lbl_fn_803F5C2C_00000FDC:
     bl talk_formatQuotedString
     mr r4, r3
     addi r3, r31, 0x4c4
-    bl fn_80058078
+    bl mission_clearPathTracker
     stw r30, 0x5dc(r31)
     b lbl_fn_803F5C2C_0000132C
 lbl_fn_803F5C2C_0000101C:
@@ -1208,7 +1208,7 @@ lbl_fn_803F5C2C_0000101C:
     bl talk_formatQuotedString
     mr r4, r3
     addi r3, r31, 0x54c
-    bl fn_80058078
+    bl mission_clearPathTracker
     stw r30, 0x5e0(r31)
     b lbl_fn_803F5C2C_0000132C
 lbl_fn_803F5C2C_0000105C:

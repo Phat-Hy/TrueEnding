@@ -23,7 +23,7 @@ extern void fn_8020EF4C(void);
 extern void fn_8020EFEC(void);
 extern void event_findEntryById(void);
 extern void fn_80211940(void);
-extern void fn_80219544(void);
+extern void task_getWorkerByIndex(void);
 extern void world_getGlobalFlag(void);
 extern void world_setGlobalFlag(void);
 extern void gmk_findSlotByIndex(void);
@@ -901,7 +901,7 @@ lbl_fn_8058BE7C_00000B60:
 lbl_fn_8058BE7C_00000B78:
     lwz r21, 0x50(r31)
     mr r3, r21
-    bl fn_80219544
+    bl task_getWorkerByIndex
     lwz r5, 0x78(r22)
     mr r24, r3
     slwi r0, r21, 2
@@ -971,7 +971,7 @@ lbl_fn_8058BE7C_00000C6C:
     bl fn_8044D060
     lwz r20, 0x50(r31)
     mr r3, r20
-    bl fn_80219544
+    bl task_getWorkerByIndex
     lwz r5, 0x78(r23)
     mr r26, r3
     slwi r0, r20, 2
@@ -1056,7 +1056,7 @@ lbl_fn_8058BE7C_00000D78:
     lwz r20, 0x50(r31)
     mr r26, r3
     mr r3, r20
-    bl fn_80219544
+    bl task_getWorkerByIndex
     lwz r5, 0x78(r25)
     mr r22, r3
     slwi r0, r20, 2
@@ -1126,7 +1126,7 @@ lbl_fn_8058BE7C_00000EC0:
     bl fn_8044D060
     lwz r20, 0x50(r31)
     mr r3, r20
-    bl fn_80219544
+    bl task_getWorkerByIndex
     lwz r5, 0x78(r26)
     mr r24, r3
     slwi r0, r20, 2
@@ -1211,7 +1211,7 @@ lbl_fn_8058BE7C_00000FF8:
     mr r22, r3
     lwz r20, 0x54(r31)
     mr r3, r21
-    bl fn_80219544
+    bl task_getWorkerByIndex
     mr r23, r3
     lwz r3, lbl_8087F8A0
     mr r4, r21

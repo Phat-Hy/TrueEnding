@@ -9,8 +9,8 @@ extern void _savegpr_18(void);
 extern void dtor_80084684(void);
 extern void fn_800185B4(void);
 extern void ui_drawColoredQuad(void);
-extern void fn_80057F28(void);
-extern void fn_80058078(void);
+extern void mission_initPathTracker(void);
+extern void mission_clearPathTracker(void);
 extern void mission_isObjectiveActive(void);
 extern void mission_updateObjectiveTarget(void);
 extern void talk_parseQuotedString(void);
@@ -831,12 +831,12 @@ lbl_fn_80256384_000009DC:
     bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_80256384_00000A00
-    bl fn_80057F28
+    bl mission_initPathTracker
 lbl_fn_80256384_00000A00:
     add r4, r24, r19
     stw r3, 0xc(r4)
     addi r4, r30, 0x13b
-    bl fn_80058078
+    bl mission_clearPathTracker
     addi r5, r30, 0x2b
     li r3, 0x88
     mr r6, r5
@@ -845,12 +845,12 @@ lbl_fn_80256384_00000A00:
     bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_80256384_00000A34
-    bl fn_80057F28
+    bl mission_initPathTracker
 lbl_fn_80256384_00000A34:
     add r4, r24, r19
     stw r3, 0x18(r4)
     addi r4, r30, 0x13b
-    bl fn_80058078
+    bl mission_clearPathTracker
     li r29, 0x0
     li r18, 0x0
 lbl_fn_80256384_00000A4C:

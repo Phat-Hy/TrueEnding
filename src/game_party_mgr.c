@@ -14,7 +14,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void dialog_initScriptSlot(void);
 extern void dialog_selectChoice(void);
 extern void fn_80153B44(void);
-extern void fn_80164DCC(void);
+extern void party_evalTacticCondition(void);
 extern void actor_setState(void);
 extern void actor_getMovementFlags(void);
 extern void fn_80196C68(void);
@@ -495,7 +495,7 @@ lbl_party_configureMemberSlot_000005D0:
 lbl_party_configureMemberSlot_000005F8:
     mr r3, r29
     li r4, 0x1
-    bl fn_80164DCC
+    bl party_evalTacticCondition
     lwz r3, 0x1208(r29)
     cmpwi r3, 0x0
     beq lbl_party_configureMemberSlot_00000664

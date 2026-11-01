@@ -6,8 +6,8 @@ extern void menu_renderLayout(void);
 extern void mem_alloc(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
-extern void fn_801059F8(void);
-extern void fn_80105B3C(void);
+extern void colli_findDynamicSlot(void);
+extern void colli_findStaticSlot(void);
 extern void fn_80107850(void);
 extern void fn_80107908(void);
 extern void fn_801079B0(void);
@@ -653,10 +653,10 @@ lbl_fn_80167038_00000854:
     cmpwi r3, 0x0
     beq lbl_fn_80167038_00000874
     mr r4, r31
-    bl fn_801059F8
+    bl colli_findDynamicSlot
     lwz r3, lbl_8087F048
     mr r4, r31
-    bl fn_80105B3C
+    bl colli_findStaticSlot
 lbl_fn_80167038_00000874:
     lwz r0, 0x48(r31)
     li r4, 0x0
@@ -1085,10 +1085,10 @@ lbl_fn_80167640_00000E5C:
     cmpwi r3, 0x0
     beq lbl_fn_80167640_00000E7C
     mr r4, r31
-    bl fn_801059F8
+    bl colli_findDynamicSlot
     lwz r3, lbl_8087F048
     mr r4, r31
-    bl fn_80105B3C
+    bl colli_findStaticSlot
 lbl_fn_80167640_00000E7C:
     lwz r0, 0x48(r31)
     li r4, 0x0

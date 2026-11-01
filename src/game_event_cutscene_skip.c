@@ -35,7 +35,7 @@ extern void actor_setState(void);
 extern void fn_801839FC(void);
 extern void fn_80183D00(void);
 extern void fn_8021771C(void);
-extern void fn_80219544(void);
+extern void task_getWorkerByIndex(void);
 extern void fn_80334B38(void);
 extern void fn_80365464(void);
 extern void world_startMapTransition(void);
@@ -823,7 +823,7 @@ asm void fn_8047FF70(void)
     slwi r0, r0, 2
     add r3, r4, r0
     lwz r3, 0x64a0(r3)
-    bl fn_80219544
+    bl task_getWorkerByIndex
     mr r5, r3
 lbl_fn_8047FF70_00000934:
     cmpwi r27, 0x0

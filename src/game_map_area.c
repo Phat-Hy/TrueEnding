@@ -20,8 +20,8 @@ extern void boss_recordDamage(void);
 extern void mem_free(void);
 extern void fn_80094BD8(void);
 extern void str_parseInt(void);
-extern void fn_801059F8(void);
-extern void fn_80105B3C(void);
+extern void colli_findDynamicSlot(void);
+extern void colli_findStaticSlot(void);
 extern void fn_8011BEB8(void);
 extern void fn_8011C044(void);
 extern void fn_8011D1FC(void);
@@ -518,10 +518,10 @@ lbl_fn_8017B434_00000574:
     cmpwi r3, 0x0
     beq lbl_fn_8017B434_00000594
     mr r4, r29
-    bl fn_801059F8
+    bl colli_findDynamicSlot
     lwz r3, lbl_8087F048
     mr r4, r29
-    bl fn_80105B3C
+    bl colli_findStaticSlot
 lbl_fn_8017B434_00000594:
     lwz r0, 0x12a8(r29)
     addi r3, r29, 0xc58

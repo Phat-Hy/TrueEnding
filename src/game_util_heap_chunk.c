@@ -48,7 +48,7 @@ extern void fn_8020EF4C(void);
 extern void fn_8020EFEC(void);
 extern void event_findEntryById(void);
 extern void fn_80217D9C(void);
-extern void fn_80219544(void);
+extern void task_getWorkerByIndex(void);
 extern void gmk_findSlotByIndex(void);
 extern void fn_80444564(void);
 extern void fn_80444BE8(void);
@@ -918,7 +918,7 @@ asm void fn_805866F8(void)
     stfs f0, 0x78(r1)
     stfs f0, 0x7c(r1)
     stfs f0, 0x80(r1)
-    bl fn_80219544
+    bl task_getWorkerByIndex
     bl mem_findBlockById
     addis r5, r20, 0x2
     slwi r0, r22, 2

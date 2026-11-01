@@ -39,7 +39,7 @@ extern void fn_802114D8(void);
 extern void fn_802114E0(void);
 extern void fn_80218BB4(void);
 extern void fn_80218BC4(void);
-extern void fn_80219544(void);
+extern void task_getWorkerByIndex(void);
 extern void gmk_findSlotByIndex(void);
 extern void fn_8044D034(void);
 extern void wcscmp(void);
@@ -837,7 +837,7 @@ lbl_fn_801DD26C_00000A40:
     bl fn_801D80A0
     mr r23, r3
     lwz r3, 0x0(r24)
-    bl fn_80219544
+    bl task_getWorkerByIndex
     lwzx r4, r28, r23
     mr r18, r3
     mr r3, r25

@@ -74,9 +74,9 @@ void atn_ColliBox_testSphere(void);
 void atn_ColliBox_testCapsule(void);
 void atn_ColliBox_testBox(void);
 void atn_ColliBox_getAABB(void);
-void fn_80057F28(void);
+void mission_initPathTracker(void);
 void atn_LH_ColliObject_destructor(void);
-void fn_80058078(void);
+void mission_clearPathTracker(void);
 void mission_isObjectiveActive(void);
 void atn_ColliObject_testRay(void);
 void atn_ColliObject_testSphere(void);
@@ -462,7 +462,7 @@ asm void atn_ColliBox_getAABB(void)
     blr
 }
 
-asm void fn_80057F28(void)
+asm void mission_initPathTracker(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -492,10 +492,10 @@ asm void fn_80057F28(void)
     bl memset
     lwz r3, lbl_8087EE98
     cmpwi r3, 0x0
-    beq lbl_fn_80057F28_0000053C
+    beq lbl_mission_initPathTracker_0000053C
     mr r4, r30
     bl fn_8004CB70
-lbl_fn_80057F28_0000053C:
+lbl_mission_initPathTracker_0000053C:
     lis r3, lbl_807775C0@ha
     addi r31, r30, 0x3c
     addi r3, r3, lbl_807775C0@l
@@ -558,7 +558,7 @@ lbl_atn_LH_ColliObject_destructor_000005F8:
     blr
 }
 
-asm void fn_80058078(void)
+asm void mission_clearPathTracker(void)
 {
     nofralloc
     stwu r1, -0x10(r1)

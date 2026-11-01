@@ -63,7 +63,7 @@ extern void fn_8021ED08(void);
 extern void fn_8021F100(void);
 extern void fn_8021F47C(void);
 extern void world_getGlobalFlag(void);
-extern void fn_8046DC5C(void);
+extern void boss_loadWeakpointResource(void);
 extern void boss_bindArenaInteractions(void);
 extern void printf(void);
 extern void strncpy(void);
@@ -688,7 +688,7 @@ asm void weaponEffect_loadCSV(void)
     addi r5, r1, 0x8
     lwz r4, lbl_80882D5C
     li r6, 0x20
-    bl fn_8046DC5C
+    bl boss_loadWeakpointResource
     lis r4, lbl_807772D0@ha
     mr r29, r3
     addi r4, r4, lbl_807772D0@l
@@ -964,7 +964,7 @@ asm void fn_80207310(void)
     addi r5, r1, 0x14
     lwz r4, lbl_80882D60
     li r6, 0x20
-    bl fn_8046DC5C
+    bl boss_loadWeakpointResource
     lis r4, lbl_807772D0@ha
     li r0, 0x0
     addi r4, r4, lbl_807772D0@l
@@ -1376,7 +1376,7 @@ asm void fn_802078C4(void)
     li r29, 0x0
     stw r29, 0x8(r1)
     lwz r3, lbl_8087F518
-    bl fn_8046DC5C
+    bl boss_loadWeakpointResource
     lis r4, lbl_807772D0@ha
     mr r25, r3
     addi r4, r4, lbl_807772D0@l
@@ -1697,7 +1697,7 @@ asm void fn_80207CC0(void)
     addi r5, r1, 0x8
     lwz r4, lbl_80882D70
     li r6, 0x20
-    bl fn_8046DC5C
+    bl boss_loadWeakpointResource
     lwz r12, 0xc(r1)
     mr r28, r3
     mr r4, r28
@@ -1992,7 +1992,7 @@ asm void fn_80208144(void)
     addi r5, r1, 0x8
     lwz r4, lbl_80882D80
     li r6, 0x20
-    bl fn_8046DC5C
+    bl boss_loadWeakpointResource
     lis r4, lbl_807772D0@ha
     li r0, 0x0
     addi r4, r4, lbl_807772D0@l

@@ -10,7 +10,7 @@ extern void mem_alloc(void);
 extern void fn_8008B130(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
-extern void fn_8012B988(void);
+extern void enemy_updateNavSteering(void);
 extern void fn_80134774(void);
 extern void dialog_selectChoice(void);
 extern void fn_8014EE48(void);
@@ -1761,7 +1761,7 @@ lbl_fn_801CF3C0_00001758:
     b lbl_fn_801CF3C0_00001770
 lbl_fn_801CF3C0_00001768:
     addi r3, r27, 0x7d4
-    bl fn_8012B988
+    bl enemy_updateNavSteering
 lbl_fn_801CF3C0_00001770:
     cmpwi r29, 0x0
     beq lbl_fn_801CF3C0_000017A0

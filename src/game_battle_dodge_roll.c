@@ -6,8 +6,8 @@ extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void atn_ColliBase_destructor(void);
-extern void fn_80057F28(void);
-extern void fn_80058078(void);
+extern void mission_initPathTracker(void);
+extern void mission_clearPathTracker(void);
 extern void mission_isObjectiveActive(void);
 extern void mission_updateObjectiveTarget(void);
 extern void talk_formatQuotedString(void);
@@ -724,7 +724,7 @@ asm void fn_80414AC4(void)
     li r5, 0x20
     bl lockon_updateTarget
     addi r3, r31, 0x4c4
-    bl fn_80057F28
+    bl mission_initPathTracker
     addi r3, r31, 0x54c
     bl res_MsgHandle_constructor
     stw r30, 0x558(r31)
@@ -926,7 +926,7 @@ lbl_fn_80414C9C_00000AB0:
     bl talk_formatQuotedString
     mr r4, r3
     addi r3, r29, 0x4c4
-    bl fn_80058078
+    bl mission_clearPathTracker
     b lbl_fn_80414C9C_00000B04
 lbl_fn_80414C9C_00000ADC:
     mr r3, r30

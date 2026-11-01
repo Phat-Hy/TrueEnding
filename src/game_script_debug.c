@@ -30,7 +30,7 @@ extern void skill_findNodeBySlotId(void);
 extern void skill_findNodeById(void);
 extern void enemy_updateCombatBehavior(void);
 extern void fn_8012B3E8(void);
-extern void fn_8012B988(void);
+extern void enemy_updateNavSteering(void);
 extern void fn_80133130(void);
 extern void boss_updatePhaseState(void);
 extern void npc_initScriptContext(void);
@@ -860,7 +860,7 @@ lbl_fn_80250ECC_00000A34:
     addi r3, r30, 0x7d4
     bl fn_8012B3E8
     addi r3, r30, 0x7d4
-    bl fn_8012B988
+    bl enemy_updateNavSteering
     lwz r6, 0x5c(r30)
     mr r3, r30
     li r4, 0x0

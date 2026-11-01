@@ -27,7 +27,7 @@ extern void fn_801546F4(void);
 extern void fn_80176DFC(void);
 extern void fn_801EA4B0(void);
 extern void fn_801EB078(void);
-extern void fn_80219544(void);
+extern void task_getWorkerByIndex(void);
 extern void fn_8035B534(void);
 extern void fn_8035E730(void);
 extern void fn_8035E7CC(void);
@@ -789,7 +789,7 @@ lbl_fn_803C0938_000008A8:
     slwi r0, r0, 2
     add r3, r4, r0
     lwz r3, 0x64a0(r3)
-    bl fn_80219544
+    bl task_getWorkerByIndex
     mr r5, r3
 lbl_fn_803C0938_00000908:
     lwz r3, lbl_8087F8A0

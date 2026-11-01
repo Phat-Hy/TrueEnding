@@ -26,7 +26,7 @@ extern void fn_801789D8(void);
 extern void fn_80192758(void);
 extern void mem_findBlockById(void);
 extern void task_lookupTagIndex(void);
-extern void fn_80219544(void);
+extern void task_getWorkerByIndex(void);
 extern void task_findEntryById(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
@@ -1730,7 +1730,7 @@ asm void fn_801CC0AC(void)
     slwi r0, r0, 2
     add r3, r4, r0
     lwz r3, 0x64a0(r3)
-    bl fn_80219544
+    bl task_getWorkerByIndex
     mr r6, r3
     b lbl_fn_801CC0AC_000016B0
 lbl_fn_801CC0AC_00001628:

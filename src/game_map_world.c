@@ -8,12 +8,12 @@ extern void atn_Model_findBoneIndex(void);
 extern void fn_80096218(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
-extern void fn_801059F8(void);
-extern void fn_80105B3C(void);
+extern void colli_findDynamicSlot(void);
+extern void colli_findStaticSlot(void);
 extern void fn_801065F4(void);
 extern void fn_80106680(void);
 extern void fn_8012B3E8(void);
-extern void fn_8012B988(void);
+extern void enemy_updateNavSteering(void);
 extern void fn_8013310C(void);
 extern void actor_testBitFlag(void);
 extern void fn_80134250(void);
@@ -835,7 +835,7 @@ asm void fn_8017A300(void)
     addi r3, r3, 0x7d4
     bl fn_8012B3E8
     addi r3, r31, 0x7d4
-    bl fn_8012B988
+    bl enemy_updateNavSteering
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0
@@ -1232,10 +1232,10 @@ lbl_fn_8017A5D8_00000EE8:
     cmpwi r3, 0x0
     beq lbl_fn_8017A5D8_00000F10
     mr r4, r31
-    bl fn_801059F8
+    bl colli_findDynamicSlot
     lwz r3, lbl_8087F048
     mr r4, r31
-    bl fn_80105B3C
+    bl colli_findStaticSlot
 lbl_fn_8017A5D8_00000F10:
     lwz r0, 0x12a8(r31)
     lis r4, lbl_807C7030@ha

@@ -41,7 +41,7 @@ extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
 extern void thread_dispatchToQueue(void);
 extern void mem_findBlockById(void);
-extern void fn_80219544(void);
+extern void task_getWorkerByIndex(void);
 extern void fn_80365390(void);
 extern void fn_80371320(void);
 extern void kpad_getClampData(void);
@@ -590,7 +590,7 @@ asm void dlc_findItemInCatalog(void)
     stw r31, 0xc(r1)
     mr r31, r3
     mr r3, r4
-    bl fn_80219544
+    bl task_getWorkerByIndex
     lwz r4, 0x48(r31)
     b lbl_dlc_findItemInCatalog_000005EC
 lbl_dlc_findItemInCatalog_000005D4:

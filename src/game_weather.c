@@ -46,7 +46,7 @@ extern void party_configureMemberSlot(void);
 extern void fn_8015F568(void);
 extern void fn_8016125C(void);
 extern void fn_801647BC(void);
-extern void fn_80164DCC(void);
+extern void party_evalTacticCondition(void);
 extern void fn_8016D74C(void);
 extern void fn_8016DDB0(void);
 extern void battle_canTargetActor(void);
@@ -1495,7 +1495,7 @@ lbl_fn_800E7F04_00001358:
     cntlzw r0, r20
     lwz r3, 0x1428(r17)
     srwi r4, r0, 5
-    bl fn_80164DCC
+    bl party_evalTacticCondition
     lwz r0, 0x14a8(r17)
     li r3, 0x0
     stw r3, 0x1428(r17)
@@ -1601,7 +1601,7 @@ asm void fn_800E854C(void)
     cmplwi r0, 0x20
     bne lbl_fn_800E854C_00001570
     li r4, 0x1
-    bl fn_80164DCC
+    bl party_evalTacticCondition
     lwz r0, 0x55c(r30)
     cmpwi r0, 0x6
     bne lbl_fn_800E854C_0000150C

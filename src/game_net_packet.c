@@ -36,7 +36,7 @@ extern void time_wrapMilliseconds(void);
 extern void fn_8020EF4C(void);
 extern void random_generateValue(void);
 extern void event_findEntryById(void);
-extern void fn_80219544(void);
+extern void task_getWorkerByIndex(void);
 extern void fn_80444B64(void);
 extern void fn_80444BE8(void);
 extern void fn_80444C48(void);
@@ -906,7 +906,7 @@ asm void fn_801E6EF0(void)
     mr r29, r6
     mr r30, r7
     mr r31, r8
-    bl fn_80219544
+    bl task_getWorkerByIndex
     mulli r7, r28, 0xc
     li r8, 0x0
     li r4, 0x0
@@ -971,7 +971,7 @@ asm void fn_801E6FC8(void)
     mr r29, r6
     mr r30, r7
     mr r31, r8
-    bl fn_80219544
+    bl task_getWorkerByIndex
     li r7, 0x0
     li r4, 0x0
     mr r5, r7

@@ -36,7 +36,7 @@ extern void fn_8011F970(void);
 extern void equip_getGlobalManager(void);
 extern void fn_801D80B4(void);
 extern void fn_80217D9C(void);
-extern void fn_80219544(void);
+extern void task_getWorkerByIndex(void);
 extern void fn_8023A664(void);
 extern void fn_80244CA0(void);
 extern void fn_802F0990(void);
@@ -266,7 +266,7 @@ lbl_fn_8052C10C_000001B8:
     mr r26, r3
     bne lbl_fn_8052C10C_00000258
     lwz r3, 0x10(r1)
-    bl fn_80219544
+    bl task_getWorkerByIndex
     mr r30, r3
     bl fn_8052C658
     bl fn_8052C994

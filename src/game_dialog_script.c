@@ -19,8 +19,8 @@ extern void fn_800C122C(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void fn_800FC410(void);
-extern void fn_801059F8(void);
-extern void fn_80105B3C(void);
+extern void colli_findDynamicSlot(void);
+extern void colli_findStaticSlot(void);
 extern void fn_80107850(void);
 extern void fn_80107B20(void);
 extern void fn_80107BE8(void);
@@ -29,7 +29,7 @@ extern void fn_8010C00C(void);
 extern void fn_8011BEB8(void);
 extern void fn_8012476C(void);
 extern void fn_8012AD20(void);
-extern void fn_8012B988(void);
+extern void enemy_updateNavSteering(void);
 extern void fn_8012E540(void);
 extern void fn_8012F188(void);
 extern void actor_testBitFlag(void);
@@ -668,7 +668,7 @@ asm void dialog_updateScriptState(void)
     bl fn_8012E540
 lbl_dialog_updateScriptState_000007DC:
     addi r3, r28, 0x7d4
-    bl fn_8012B988
+    bl enemy_updateNavSteering
     mr r3, r28
     bl fn_80178BFC
     lwz r3, 0x48(r28)
@@ -1209,10 +1209,10 @@ lbl_dialog_updateScriptState_00000F94:
     cmpwi r3, 0x0
     beq lbl_dialog_updateScriptState_00000FB4
     mr r4, r28
-    bl fn_801059F8
+    bl colli_findDynamicSlot
     lwz r3, lbl_8087F048
     mr r4, r28
-    bl fn_80105B3C
+    bl colli_findStaticSlot
 lbl_dialog_updateScriptState_00000FB4:
     lwz r0, 0x48(r28)
     li r4, 0x0
@@ -1424,10 +1424,10 @@ lbl_dialog_updateScriptState_00001298:
     cmpwi r3, 0x0
     beq lbl_dialog_updateScriptState_000012B8
     mr r4, r28
-    bl fn_801059F8
+    bl colli_findDynamicSlot
     lwz r3, lbl_8087F048
     mr r4, r28
-    bl fn_80105B3C
+    bl colli_findStaticSlot
 lbl_dialog_updateScriptState_000012B8:
     lwz r0, 0x48(r28)
     li r4, 0x0

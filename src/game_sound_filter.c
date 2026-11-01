@@ -27,7 +27,7 @@ extern void random_generateValue(void);
 extern void event_findEntryById(void);
 extern void fn_802114D8(void);
 extern void fn_802114E0(void);
-extern void fn_80219544(void);
+extern void task_getWorkerByIndex(void);
 extern void fn_8044453C(void);
 extern void wcslen(void);
 extern void wcscmp(void);
@@ -656,7 +656,7 @@ lbl_fn_801E07A4_00000874:
     stw r27, 0x38(r1)
     stw r22, 0x44(r1)
     lwz r3, 0x0(r28)
-    bl fn_80219544
+    bl task_getWorkerByIndex
     stw r3, 0x3c(r1)
     mr r3, r21
     mr r4, r30

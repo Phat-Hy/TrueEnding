@@ -24,7 +24,7 @@ extern void enemy_updateAnimTimer(void);
 extern void fn_80133B30(void);
 extern void fn_801346C8(void);
 extern void fn_801546F4(void);
-extern void fn_80164DCC(void);
+extern void party_evalTacticCondition(void);
 extern void debuff_clearStatus(void);
 extern void actor_setState(void);
 extern void battle_applyStatusEffect(void);
@@ -1004,7 +1004,7 @@ lbl_fn_80374964_00000C70:
     beq lbl_fn_80374964_00000C8C
     mr r3, r31
     li r4, 0x1
-    bl fn_80164DCC
+    bl party_evalTacticCondition
 lbl_fn_80374964_00000C8C:
     lwz r0, 0x7e0(r31)
     rlwinm r0, r0, 0, 26, 26

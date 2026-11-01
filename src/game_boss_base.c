@@ -6,7 +6,7 @@ extern void _restgpr_26(void);
 extern void _savegpr_26(void);
 extern void hurtbox_processHitDamage(void);
 extern void fn_8012B3E8(void);
-extern void fn_8012B988(void);
+extern void enemy_updateNavSteering(void);
 extern void fn_8012C6D4(void);
 extern void fn_8020FCE8(void);
 extern void fn_8021AF50(void);
@@ -821,7 +821,7 @@ asm void fn_80133B30(void)
     srwi r31, r0, 31
     bl fn_8012B3E8
     mr r3, r30
-    bl fn_8012B988
+    bl enemy_updateNavSteering
     cmpwi r31, 0x0
     bne lbl_fn_80133B30_00000AB4
     lwz r3, 0x16c(r30)

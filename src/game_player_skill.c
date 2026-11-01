@@ -32,7 +32,7 @@ extern void fn_80120E38(void);
 extern void fn_80120E48(void);
 extern void fn_80120F4C(void);
 extern void actor_setState(void);
-extern void fn_80219544(void);
+extern void task_getWorkerByIndex(void);
 extern void res_MsgHandle_ctor(void);
 extern void res_Resource_destructor(void);
 extern void res_Resource_unload(void);
@@ -309,7 +309,7 @@ asm void fn_8011F970(void)
     stw r31, 0xc(r1)
     mr r31, r3
     mr r3, r4
-    bl fn_80219544
+    bl task_getWorkerByIndex
     lwz r4, 0x48(r31)
     b lbl_fn_8011F970_00000230
 lbl_fn_8011F970_00000218:

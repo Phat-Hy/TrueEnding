@@ -46,7 +46,7 @@ extern void GXInitLightDistAttn(void);
 extern void GXInitLightSpot(void);
 extern void GXInitLightObj(void);
 extern void GXClampLightAngle(void);
-extern void fn_80617200(void);
+extern void GXSetTexCoordScaleManually(void);
 extern void GXInitTexObjDefault(void);
 extern void GXSetTevDirect(void);
 extern void GXSetTevOrder(void);
@@ -972,7 +972,7 @@ asm void fn_800B2EA0(void)
     li r3, 0x1
     bl GXSetNumTevStages
     li r3, 0x0
-    bl fn_80617200
+    bl GXSetTexCoordScaleManually
     li r3, 0x0
     li r4, 0x3
     bl GXSetTevDirect
@@ -1068,7 +1068,7 @@ asm void fn_800B2EA0(void)
     li r3, 0x1
     bl GXSetNumTevStages
     li r3, 0x0
-    bl fn_80617200
+    bl GXSetTexCoordScaleManually
     lwz r3, lbl_8087EEE0
     addi r4, r1, 0x28
     li r5, 0x0

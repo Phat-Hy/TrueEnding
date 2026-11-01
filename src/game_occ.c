@@ -34,7 +34,7 @@ extern void fn_806163C0(void);
 extern void fn_806163E0(void);
 extern void fn_80616400(void);
 extern void GXDrawDone(void);
-extern void fn_80617200(void);
+extern void GXSetTexCoordScaleManually(void);
 extern void GXInitTexObjDefault(void);
 extern void GXSetTevColorIn(void);
 extern void GXSetTevColorOp(void);
@@ -740,7 +740,7 @@ asm void fn_800D775C(void)
     li r3, 0x5
     bl GXSetNumTevStages
     li r3, 0x0
-    bl fn_80617200
+    bl GXSetTexCoordScaleManually
     lwz r3, lbl_8087EEE0
     li r5, 0x0
     lwz r4, 0x8(r31)
@@ -1106,7 +1106,7 @@ asm void fn_800D7D00(void)
     li r3, 0x1
     bl GXSetNumTevStages
     li r3, 0x0
-    bl fn_80617200
+    bl GXSetTexCoordScaleManually
     li r3, 0x0
     li r4, 0x0
     li r5, 0x1
@@ -1245,7 +1245,7 @@ asm void fn_800D7F18(void)
     li r3, 0x1
     bl GXSetNumTevStages
     li r3, 0x0
-    bl fn_80617200
+    bl GXSetTexCoordScaleManually
     li r3, 0x0
     li r4, 0x3
     li r5, 0x3

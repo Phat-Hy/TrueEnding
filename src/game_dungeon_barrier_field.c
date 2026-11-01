@@ -110,7 +110,7 @@ void fn_803ED8F4(void);
 void fn_803ED92C(void);
 void fn_803EDAF0(void);
 void fn_803EDB0C(void);
-void fn_803EDB18(void);
+void barrier_testFieldCollision(void);
 void fn_803EDCF4(void);
 void fn_803EDE34(void);
 
@@ -1656,7 +1656,7 @@ asm void fn_803EDB0C(void)
     blr
 }
 
-asm void fn_803EDB18(void)
+asm void barrier_testFieldCollision(void)
 {
     nofralloc
     stwu r1, -0x680(r1)
@@ -1668,33 +1668,33 @@ asm void fn_803EDB18(void)
     mr r30, r3
     mr r31, r4
     cmpwi r25, 0x0
-    beq lbl_fn_803EDB18_00001774
+    beq lbl_barrier_testFieldCollision_00001774
     lwz r0, 0x28(r25)
     li r26, 0x0
     cmpwi r0, 0x0
-    bne lbl_fn_803EDB18_00001608
+    bne lbl_barrier_testFieldCollision_00001608
     mr r3, r25
     bl atn_LH_Texture_update
     cmpwi r3, 0x0
-    bne lbl_fn_803EDB18_0000160C
+    bne lbl_barrier_testFieldCollision_0000160C
     addi r3, r25, 0x20
     bl atn_LoadHandle_getStatus
     cmpwi r3, 0x3
-    bne lbl_fn_803EDB18_0000160C
-lbl_fn_803EDB18_00001608:
+    bne lbl_barrier_testFieldCollision_0000160C
+lbl_barrier_testFieldCollision_00001608:
     li r26, 0x1
-lbl_fn_803EDB18_0000160C:
+lbl_barrier_testFieldCollision_0000160C:
     cmpwi r26, 0x0
-    beq lbl_fn_803EDB18_00001774
+    beq lbl_barrier_testFieldCollision_00001774
     lwz r0, 0xac(r30)
     cmpwi r0, 0x0
-    beq lbl_fn_803EDB18_00001774
+    beq lbl_barrier_testFieldCollision_00001774
     mr r3, r31
     bl fn_8008B130
     cmpwi r3, 0x0
-    bne lbl_fn_803EDB18_00001634
-    b lbl_fn_803EDB18_00001774
-lbl_fn_803EDB18_00001634:
+    bne lbl_barrier_testFieldCollision_00001634
+    b lbl_barrier_testFieldCollision_00001774
+lbl_barrier_testFieldCollision_00001634:
     lis r26, lbl_807772D0@ha
     lis r28, lbl_807772B0@ha
     addi r26, r26, lbl_807772D0@l
@@ -1702,17 +1702,17 @@ lbl_fn_803EDB18_00001634:
     addi r28, r28, lbl_807772B0@l
     li r25, 0x0
     li r27, 0x0
-    b lbl_fn_803EDB18_00001764
-lbl_fn_803EDB18_00001654:
+    b lbl_barrier_testFieldCollision_00001764
+lbl_barrier_testFieldCollision_00001654:
     lwz r0, 0x2c(r3)
     lwzx r24, r25, r0
     add r22, r0, r25
     cmpwi r24, 0x0
-    beq lbl_fn_803EDB18_0000175C
+    beq lbl_barrier_testFieldCollision_0000175C
     mr r3, r24
     bl strlen
     cmpwi r3, 0x0
-    beq lbl_fn_803EDB18_0000175C
+    beq lbl_barrier_testFieldCollision_0000175C
     mr r3, r24
     bl strlen
     stw r26, 0x18(r1)
@@ -1748,7 +1748,7 @@ lbl_fn_803EDB18_00001654:
     mr r4, r29
     bl strstr
     cmpwi r3, 0x0
-    beq lbl_fn_803EDB18_0000175C
+    beq lbl_barrier_testFieldCollision_0000175C
     lfs f0, 0x8(r22)
     addi r4, r1, 0x10
     lfs f5, 0xc(r22)
@@ -1769,16 +1769,16 @@ lbl_fn_803EDB18_00001654:
     lwz r4, 0xa8(r30)
     lfs f1, 0xc(r22)
     bl atn_Lockon_updateTargetTextures
-    b lbl_fn_803EDB18_00001774
-lbl_fn_803EDB18_0000175C:
+    b lbl_barrier_testFieldCollision_00001774
+lbl_barrier_testFieldCollision_0000175C:
     addi r25, r25, 0x10
     addi r23, r23, 0x1
-lbl_fn_803EDB18_00001764:
+lbl_barrier_testFieldCollision_00001764:
     lwz r3, 0xac(r30)
     lwz r0, 0x28(r3)
     cmpw r23, r0
-    blt lbl_fn_803EDB18_00001654
-lbl_fn_803EDB18_00001774:
+    blt lbl_barrier_testFieldCollision_00001654
+lbl_barrier_testFieldCollision_00001774:
     addi r11, r1, 0x680
     bl _restgpr_22
     lwz r0, 0x684(r1)

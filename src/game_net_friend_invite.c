@@ -43,7 +43,7 @@ extern void fn_80114AA0(void);
 extern void fn_801156BC(void);
 extern void magic_getOffset6C(void);
 extern void fn_8012B3E8(void);
-extern void fn_8012B988(void);
+extern void enemy_updateNavSteering(void);
 extern void enemy_updateAnimTimer(void);
 extern void fn_80139F4C(void);
 extern void npc_getDialogController(void);
@@ -4051,7 +4051,7 @@ lbl_fn_804D25D4_00003418:
     bl fn_8012B3E8
     lwz r3, 0x0(r28)
     bl proj_getMatrix
-    bl fn_8012B988
+    bl enemy_updateNavSteering
     lwz r3, 0x0(r28)
     bl proj_getMatrix
     bl enemy_updateAnimTimer
@@ -4207,7 +4207,7 @@ lbl_fn_804D25D4_0000367C:
     bl fn_8012B3E8
     lwz r3, 0x0(r30)
     bl proj_getMatrix
-    bl fn_8012B988
+    bl enemy_updateNavSteering
     lwz r3, 0x0(r30)
     bl proj_getMatrix
     bl enemy_updateAnimTimer

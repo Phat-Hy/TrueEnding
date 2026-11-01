@@ -14,7 +14,7 @@ extern void wcs_vformat(void);
 extern void fn_80206B14(void);
 extern void fn_80209294(void);
 extern void fn_802092F8(void);
-extern void fn_8046DC5C(void);
+extern void boss_loadWeakpointResource(void);
 extern void boss_bindArenaInteractions(void);
 extern void atoi(void);
 extern void wcslen(void);
@@ -105,7 +105,7 @@ asm void fn_8021B2F8(void)
     addi r5, r1, 0x8
     lwz r4, lbl_80882F84
     li r6, 0x20
-    bl fn_8046DC5C
+    bl boss_loadWeakpointResource
     lwz r4, 0x8(r1)
     mr r27, r3
     li r19, 0x0
@@ -1322,7 +1322,7 @@ asm void fn_8021C3F4(void)
     addi r5, r1, 0x8
     lwz r4, lbl_80882F88
     li r6, 0x20
-    bl fn_8046DC5C
+    bl boss_loadWeakpointResource
     lwz r4, 0x8(r1)
     mr r30, r3
     srwi r0, r4, 31

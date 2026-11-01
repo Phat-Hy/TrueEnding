@@ -8,7 +8,7 @@ extern void str_findChar(void);
 extern void wcs_vformat(void);
 extern void fn_8010C00C(void);
 extern void actor_findSpawnTemplate(void);
-extern void fn_8012B988(void);
+extern void enemy_updateNavSteering(void);
 extern void enemy_updateAnimTimer(void);
 extern void fn_8013407C(void);
 extern void quest_checkCondition(void);
@@ -196,7 +196,7 @@ lbl_fn_8058CF64_0000011C:
     addis r3, r30, 0x2
     lwz r3, 0x60bc(r3)
     addi r3, r3, 0x7d4
-    bl fn_8012B988
+    bl enemy_updateNavSteering
     addis r3, r30, 0x2
     lwz r3, 0x60bc(r3)
     lwz r0, 0x674(r3)

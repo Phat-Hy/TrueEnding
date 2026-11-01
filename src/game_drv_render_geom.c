@@ -37,7 +37,7 @@ extern void fn_80616640(void);
 extern void fn_80616E80(void);
 extern void fn_80617030(void);
 extern void fn_80617130(void);
-extern void fn_80617200(void);
+extern void GXSetTexCoordScaleManually(void);
 extern void GXInitTexObjDefault(void);
 extern void GXSetTevColorIn(void);
 extern void GXSetTevColorOp(void);
@@ -1313,7 +1313,7 @@ lbl_fn_805D1A40_00001174:
 lbl_fn_805D1A40_00001184:
     lwz r0, 0x50(r26)
     extrwi r3, r0, 3, 14
-    bl fn_80617200
+    bl GXSetTexCoordScaleManually
     lwz r0, 0x50(r26)
     extrwi. r0, r0, 3, 14
     beq lbl_fn_805D1A40_00001228

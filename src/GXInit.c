@@ -63,7 +63,7 @@ extern void GXDrawDone(void);
 extern void fn_80616800(void);
 extern void fn_80616820(void);
 extern void fn_80617030(void);
-extern void fn_80617200(void);
+extern void GXSetTexCoordScaleManually(void);
 extern void GXInitTexObjDefault(void);
 extern void GXSetTevDirect(void);
 extern void GXSetTevKColorSel(void);
@@ -995,7 +995,7 @@ lbl___GXInitGX_00000CE4:
     cmplwi r31, 0x10
     blt lbl___GXInitGX_00000CE4
     li r3, 0x0
-    bl fn_80617200
+    bl GXSetTexCoordScaleManually
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0

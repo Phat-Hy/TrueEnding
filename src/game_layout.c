@@ -27,7 +27,7 @@ extern void GXInitLightSpot(void);
 extern void GXInitLightObj(void);
 extern void GXClampLightAngle(void);
 extern void GXDrawDone(void);
-extern void fn_80617200(void);
+extern void GXSetTexCoordScaleManually(void);
 extern void GXInitTexObjDefault(void);
 extern void GXSetTevDirect(void);
 extern void GXSetTevColorIn(void);
@@ -212,7 +212,7 @@ lbl_layout_drawPane_0000009C:
     li r3, 0x1
     bl GXInitLightDistAttn
     li r3, 0x0
-    bl fn_80617200
+    bl GXSetTexCoordScaleManually
     li r3, 0x4
     li r4, 0x0
     li r5, 0x1
@@ -1601,7 +1601,7 @@ asm void fn_800AAE2C(void)
     li r3, 0x4
     bl GXSetNumTevStages
     li r3, 0x0
-    bl fn_80617200
+    bl GXSetTexCoordScaleManually
     lwz r4, lbl_8087EFB4
     li r5, 0x0
     lwz r3, lbl_8087EEE0

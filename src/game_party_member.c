@@ -5,8 +5,8 @@
 extern void fn_800185B4(void);
 extern void mem_alloc(void);
 extern void atn_Anim_getLayerTrack(void);
-extern void fn_801059F8(void);
-extern void fn_80105B3C(void);
+extern void colli_findDynamicSlot(void);
+extern void colli_findStaticSlot(void);
 extern void actor_setState(void);
 extern void fn_801880D0(void);
 extern void fn_80188BD8(void);
@@ -201,10 +201,10 @@ asm void fn_8016034C(void)
     beq lbl_fn_8016034C_00000214
     mr r3, r0
     mr r4, r31
-    bl fn_801059F8
+    bl colli_findDynamicSlot
     lwz r3, lbl_8087F048
     mr r4, r31
-    bl fn_80105B3C
+    bl colli_findStaticSlot
 lbl_fn_8016034C_00000214:
     lwz r0, 0x12a8(r31)
     lis r4, lbl_807C7030@ha

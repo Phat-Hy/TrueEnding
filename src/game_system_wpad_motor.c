@@ -56,7 +56,7 @@ extern void fn_802085E0(void);
 extern void fn_80208634(void);
 extern void fn_8021771C(void);
 extern void fn_80218268(void);
-extern void fn_80219544(void);
+extern void task_getWorkerByIndex(void);
 extern void fn_80239C14(void);
 extern void fn_8023A5A8(void);
 extern void fn_8023A614(void);
@@ -393,7 +393,7 @@ lbl_world_Manager_draw_00000210:
     slwi r0, r0, 2
     add r3, r4, r0
     lwz r3, 0x64a0(r3)
-    bl fn_80219544
+    bl task_getWorkerByIndex
     mr r30, r3
 lbl_world_Manager_draw_00000254:
     lwz r3, lbl_8087F8A0

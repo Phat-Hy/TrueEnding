@@ -17,7 +17,7 @@ extern void __GXSetVtxDesc(void);
 extern void GXClearVtxDesc(void);
 extern void GXInitLightDistAttn(void);
 extern void GXInitLightSpot(void);
-extern void fn_80617200(void);
+extern void GXSetTexCoordScaleManually(void);
 extern void GXInitTexObjDefault(void);
 extern void GXSetTevDirect(void);
 extern void GXSetTevColorIn(void);
@@ -1741,7 +1741,7 @@ lbl_fn_805D8520_00001784:
     li r8, 0x7d
     bl __GXSetVtxDesc
     li r3, 0x0
-    bl fn_80617200
+    bl GXSetTexCoordScaleManually
     li r3, 0x1
     li r4, 0x4
     li r5, 0x5
@@ -1871,7 +1871,7 @@ lbl_fn_805D8520_00001984:
     li r8, 0x7d
     bl __GXSetVtxDesc
     li r3, 0x0
-    bl fn_80617200
+    bl GXSetTexCoordScaleManually
     li r3, 0x1
     li r4, 0x4
     li r5, 0x5
@@ -1978,7 +1978,7 @@ lbl_fn_805D8520_00001B28:
     li r8, 0x7d
     bl __GXSetVtxDesc
     li r3, 0x0
-    bl fn_80617200
+    bl GXSetTexCoordScaleManually
     li r3, 0x1
     li r4, 0x4
     li r5, 0x5
@@ -2085,7 +2085,7 @@ lbl_fn_805D8520_00001CCC:
     li r8, 0x7d
     bl __GXSetVtxDesc
     li r3, 0x0
-    bl fn_80617200
+    bl GXSetTexCoordScaleManually
     li r3, 0x1
     li r4, 0x4
     li r5, 0x5
@@ -2192,7 +2192,7 @@ lbl_fn_805D8520_00001E70:
     li r8, 0x7d
     bl __GXSetVtxDesc
     li r3, 0x0
-    bl fn_80617200
+    bl GXSetTexCoordScaleManually
     li r3, 0x1
     li r4, 0x4
     li r5, 0x5

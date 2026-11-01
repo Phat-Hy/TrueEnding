@@ -49,8 +49,8 @@ extern void fn_8020A5D4(void);
 extern void str_appendString(void);
 extern void fn_8020A808(void);
 extern void task_lookupTagIndex(void);
-extern void fn_80219544(void);
-extern void fn_8046DC5C(void);
+extern void task_getWorkerByIndex(void);
+extern void boss_loadWeakpointResource(void);
 extern void boss_bindArenaInteractions(void);
 extern void fn_805A52F8(void);
 extern void strcmp(void);
@@ -1040,7 +1040,7 @@ asm void fn_802091E8(void)
     stwu r1, -0x10(r1)
     mflr r0
     stw r0, 0x14(r1)
-    bl fn_80219544
+    bl task_getWorkerByIndex
     lwz r6, lbl_8087F198
     li r4, 0x0
     lwz r0, lbl_8087F19C
@@ -1631,7 +1631,7 @@ asm void fn_80209960(void)
     lwz r4, lbl_80882E04
     addi r5, r1, 0x8
     li r6, 0x20
-    bl fn_8046DC5C
+    bl boss_loadWeakpointResource
     lwz r12, 0x2d4(r1)
     mr r21, r3
     mr r4, r21

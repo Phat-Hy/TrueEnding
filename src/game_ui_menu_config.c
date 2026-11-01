@@ -14,7 +14,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void morph_updateMesh(void);
-extern void fn_80105B3C(void);
+extern void colli_findStaticSlot(void);
 extern void fn_80105B4C(void);
 extern void fn_801070C8(void);
 extern void fn_8010CB2C(void);
@@ -1914,7 +1914,7 @@ lbl_fn_801BE10C_000019C4:
     stfs f0, 0x238(r30)
     lwz r3, lbl_8087F048
     lwz r4, 0x4(r29)
-    bl fn_80105B3C
+    bl colli_findStaticSlot
     li r0, 0x1
     stb r0, 0x1f(r29)
     lwz r0, 0xb0(r31)
@@ -1951,7 +1951,7 @@ lbl_fn_801BE10C_00001A54:
     cmpwi r3, 0x0
     beq lbl_fn_801BE10C_00001A8C
     lwz r4, 0x4(r29)
-    bl fn_80105B3C
+    bl colli_findStaticSlot
 lbl_fn_801BE10C_00001A8C:
     li r0, 0x1
     stb r0, 0x1f(r29)

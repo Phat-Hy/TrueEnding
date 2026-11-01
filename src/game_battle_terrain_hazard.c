@@ -40,7 +40,7 @@ extern void task_updateWorker(void);
 extern void task_initWorkerContext(void);
 extern void barrier_bindFieldAnimation(void);
 extern void dungeon_updateBarrierField(void);
-extern void fn_803EDB18(void);
+extern void barrier_testFieldCollision(void);
 extern void fn_803F11F8(void);
 extern void fn_8041AAC0(void);
 extern void boss_getOffset54(void);
@@ -535,7 +535,7 @@ asm void fn_80418320(void)
     bne lbl_fn_80418320_00000510
     mr r3, r31
     addi r4, r31, 0xf4
-    bl fn_803EDB18
+    bl barrier_testFieldCollision
     lwz r12, 0x0(r31)
     mr r3, r31
     lwz r12, 0x38(r12)
@@ -1643,7 +1643,7 @@ asm void fn_804192A0(void)
     bne lbl_fn_804192A0_000014B4
     mr r3, r31
     addi r4, r31, 0xf4
-    bl fn_803EDB18
+    bl barrier_testFieldCollision
     lis r3, 0x8
     li r0, 0x7
     mr r5, r31

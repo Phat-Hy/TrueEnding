@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
-extern void fn_8012B988(void);
+extern void enemy_updateNavSteering(void);
 extern void enemy_updateAnimTimer(void);
 extern void fn_801342D0(void);
 extern void game_initGlobalDatabases(void);
@@ -1806,7 +1806,7 @@ lbl_fn_804490E0_000017E4:
     mr r5, r30
     bl fn_801342D0
     mr r3, r31
-    bl fn_8012B988
+    bl enemy_updateNavSteering
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_804490E0_00001814

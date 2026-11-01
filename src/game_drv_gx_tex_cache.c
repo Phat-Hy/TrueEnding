@@ -76,7 +76,7 @@ extern void fn_80614A80(void);
 extern void fn_80615400(void);
 extern void GXInitLightDistAttn(void);
 extern void GXInitLightSpot(void);
-extern void fn_80617200(void);
+extern void GXSetTexCoordScaleManually(void);
 extern void GXSetTevColorIn(void);
 extern void GXSetTevColorOp(void);
 extern void GXSetTevIndirect(void);
@@ -1204,7 +1204,7 @@ asm void fn_805C3FE0(void)
     li r3, 0x0
     bl fn_80615400
     li r3, 0x0
-    bl fn_80617200
+    bl GXSetTexCoordScaleManually
     li r3, 0x0
     li r4, 0x0
     li r5, 0x1

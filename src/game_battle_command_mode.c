@@ -9,7 +9,7 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_8004D314(void);
 extern void atn_ColliBase_destructor(void);
-extern void fn_80057F28(void);
+extern void mission_initPathTracker(void);
 extern void mission_updateObjectiveTarget(void);
 extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
@@ -1698,7 +1698,7 @@ asm void fn_804068B8(void)
     li r5, 0x20
     bl lockon_updateTarget
     addi r3, r31, 0x894
-    bl fn_80057F28
+    bl mission_initPathTracker
     addi r3, r31, 0x91c
     bl res_MsgHandle_constructor
     addi r3, r31, 0x928

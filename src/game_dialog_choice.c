@@ -9,7 +9,7 @@ extern void fn_800457A4(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_getLayerTrack(void);
 extern void fn_8010C00C(void);
-extern void fn_8012B988(void);
+extern void enemy_updateNavSteering(void);
 extern void fn_8013407C(void);
 extern void dialog_setScriptSlot(void);
 extern void dialog_initScriptSlot(void);
@@ -216,7 +216,7 @@ lbl_dialog_selectChoice_000001D8:
     stw r0, 0x64c(r30)
 lbl_dialog_selectChoice_00000238:
     addi r3, r30, 0x7d4
-    bl fn_8012B988
+    bl enemy_updateNavSteering
     lwz r3, lbl_8087F9E8
     cmpwi r3, 0x0
     beq lbl_dialog_selectChoice_00000254

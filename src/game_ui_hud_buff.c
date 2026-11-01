@@ -21,7 +21,7 @@ extern void atn_Task_setActive(void);
 extern void str_findChar(void);
 extern void fn_8010C00C(void);
 extern void actor_spawnActorWithId(void);
-extern void fn_8012B988(void);
+extern void enemy_updateNavSteering(void);
 extern void enemy_updateAnimTimer(void);
 extern void fn_8013407C(void);
 extern void boss_updatePhaseState(void);
@@ -1176,7 +1176,7 @@ lbl_fn_801CD210_00000E7C:
 lbl_fn_801CD210_00000ECC:
     lwz r3, 0x490(r30)
     addi r3, r3, 0x7d4
-    bl fn_8012B988
+    bl enemy_updateNavSteering
     lwz r4, 0x490(r30)
     lwz r0, 0x674(r4)
     cmpwi r0, 0x0

@@ -36,7 +36,7 @@ extern void npc_getDialogController(void);
 extern void dialog_setScriptSlot(void);
 extern void fn_8014C468(void);
 extern void fn_80161570(void);
-extern void fn_80164DCC(void);
+extern void party_evalTacticCondition(void);
 extern void fn_8016E484(void);
 extern void battle_applyStatusEffect(void);
 extern void fn_8016F634(void);
@@ -147,7 +147,7 @@ lbl_fn_803A19B4_00000034:
     stw r0, 0x54c(r3)
 lbl_fn_803A19B4_00000050:
     li r4, 0x0
-    bl fn_80164DCC
+    bl party_evalTacticCondition
     lwz r3, lbl_8087F540
     mr r4, r30
     mr r5, r31

@@ -44,7 +44,7 @@ extern void fn_80616E80(void);
 extern void fn_80616EF0(void);
 extern void fn_80617030(void);
 extern void fn_80617130(void);
-extern void fn_80617200(void);
+extern void GXSetTexCoordScaleManually(void);
 extern void GXInitTexObjDefault(void);
 extern void fn_80617270(void);
 extern void GXSetTevDirect(void);
@@ -512,7 +512,7 @@ asm void fn_800AD648(void)
     li r3, 0x8
     bl GXSetNumTevStages
     li r3, 0x0
-    bl fn_80617200
+    bl GXSetTexCoordScaleManually
     lfs f1, lbl_80880DE4
     addi r4, r1, 0xc
     lfs f0, lbl_80880DE0
@@ -707,7 +707,7 @@ asm void fn_800AD834(void)
     li r3, 0x1
     bl GXSetNumTevStages
     li r3, 0x0
-    bl fn_80617200
+    bl GXSetTexCoordScaleManually
     li r3, 0x0
     li r4, 0x3
     bl GXSetTevDirect
@@ -1032,7 +1032,7 @@ lbl_fn_800AD834_00000D20:
     li r3, 0x1
     bl GXSetNumTevStages
     li r3, 0x0
-    bl fn_80617200
+    bl GXSetTexCoordScaleManually
     li r3, 0x0
     li r4, 0x3
     bl GXSetTevDirect
@@ -1213,7 +1213,7 @@ lbl_fn_800AD834_00000F00:
     stfs f1, 0x164(r1)
     bl GXLoadTexMtxImm
     li r3, 0x1
-    bl fn_80617200
+    bl GXSetTexCoordScaleManually
     li r3, 0x0
     li r4, 0x1
     li r5, 0x1
@@ -1367,7 +1367,7 @@ lbl_fn_800AD834_00000F00:
     li r6, 0xff
     bl GXSetTevOrder
     li r3, 0x1
-    bl fn_80617200
+    bl GXSetTexCoordScaleManually
     li r3, 0x0
     li r4, 0x2
     li r5, 0x2
@@ -1604,7 +1604,7 @@ lbl_fn_800AE568_000015A0:
     li r3, 0x1
     bl GXInitLightDistAttn
     li r3, 0x3
-    bl fn_80617200
+    bl GXSetTexCoordScaleManually
     li r3, 0x0
     li r4, 0x1
     li r5, 0x1

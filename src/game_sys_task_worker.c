@@ -22,7 +22,7 @@ extern void fn_8011FFF8(void);
 extern void fn_8021771C(void);
 extern void fn_8021AF98(void);
 extern void fn_8021AFF4(void);
-extern void fn_8046DC5C(void);
+extern void boss_loadWeakpointResource(void);
 extern void boss_bindArenaInteractions(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
@@ -102,7 +102,7 @@ void fn_80219160(void);
 void fn_8021921C(void);
 void fn_80219344(void);
 void fn_8021946C(void);
-void fn_80219544(void);
+void task_getWorkerByIndex(void);
 void task_mapIdToQueue(void);
 void fn_802196D0(void);
 
@@ -1039,7 +1039,7 @@ asm void fn_802189EC(void)
     addi r5, r1, 0x8
     lwz r4, lbl_80882F4C
     li r6, 0x20
-    bl fn_8046DC5C
+    bl boss_loadWeakpointResource
     lwz r12, 0xc(r1)
     mr r30, r3
     mr r4, r30
@@ -1070,7 +1070,7 @@ lbl_fn_802189EC_00000CF4:
     addi r5, r1, 0x8
     lwz r4, lbl_80882F48
     li r6, 0x20
-    bl fn_8046DC5C
+    bl boss_loadWeakpointResource
     lwz r12, 0xc(r1)
     mr r30, r3
     mr r4, r30
@@ -1142,7 +1142,7 @@ lbl_fn_80218BD4_00000DE8:
 lbl_fn_80218BD4_00000DEC:
     addi r5, r1, 0x8
     li r6, 0x20
-    bl fn_8046DC5C
+    bl boss_loadWeakpointResource
     lis r22, lbl_80742404@ha
     mr r27, r3
     addi r5, r22, lbl_80742404@l
@@ -1817,7 +1817,7 @@ lbl_fn_8021946C_00001724:
     blr
 }
 
-asm void fn_80219544(void)
+asm void task_getWorkerByIndex(void)
 {
     nofralloc
     lis r4, lbl_80742418@ha
@@ -1980,7 +1980,7 @@ asm void fn_802196D0(void)
     addi r5, r1, 0x8
     lwz r4, lbl_80882F58
     li r6, 0x20
-    bl fn_8046DC5C
+    bl boss_loadWeakpointResource
     lwz r12, 0xc(r1)
     mr r25, r3
     mr r4, r25

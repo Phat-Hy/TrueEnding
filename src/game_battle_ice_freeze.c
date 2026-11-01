@@ -8,8 +8,8 @@ extern void dtor_80084684(void);
 extern void fn_80041C0C(void);
 extern void fn_80042740(void);
 extern void atn_ColliBase_destructor(void);
-extern void fn_80057F28(void);
-extern void fn_80058078(void);
+extern void mission_initPathTracker(void);
+extern void mission_clearPathTracker(void);
 extern void mission_isObjectiveActive(void);
 extern void mission_updateObjectiveTarget(void);
 extern void talk_formatQuotedString(void);
@@ -42,7 +42,7 @@ extern void task_updateWorker(void);
 extern void task_initWorkerContext(void);
 extern void barrier_bindFieldAnimation(void);
 extern void dungeon_updateBarrierField(void);
-extern void fn_803EDB18(void);
+extern void barrier_testFieldCollision(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_destructor(void);
@@ -1017,9 +1017,9 @@ asm void fn_8041C09C(void)
     li r5, 0x20
     bl lockon_updateTarget
     addi r3, r31, 0x4c4
-    bl fn_80057F28
+    bl mission_initPathTracker
     addi r3, r31, 0x54c
-    bl fn_80057F28
+    bl mission_initPathTracker
     li r0, 0x0
     stw r0, 0x54(r31)
 lbl_fn_8041C09C_00000C60:
@@ -1109,7 +1109,7 @@ asm void fn_8041C21C(void)
     stw r0, 0x54(r31)
     mr r3, r31
     addi r4, r31, 0xf4
-    bl fn_803EDB18
+    bl barrier_testFieldCollision
     li r3, 0x1
     b lbl_fn_8041C21C_00000D84
 lbl_fn_8041C21C_00000D80:
@@ -1608,12 +1608,12 @@ lbl_fn_8041C784_0000143C:
     bne lbl_fn_8041C784_0000148C
     addi r3, r29, 0x4c4
     addi r4, r1, 0x8
-    bl fn_80058078
+    bl mission_clearPathTracker
     b lbl_fn_8041C784_00001498
 lbl_fn_8041C784_0000148C:
     addi r3, r29, 0x54c
     addi r4, r1, 0x8
-    bl fn_80058078
+    bl mission_clearPathTracker
 lbl_fn_8041C784_00001498:
     addi r3, r1, 0x108
     bl talk_parseQuotes

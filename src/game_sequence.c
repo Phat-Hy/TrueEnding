@@ -75,7 +75,7 @@ extern void fn_806168C0(void);
 extern void fn_80616E80(void);
 extern void fn_80617030(void);
 extern void fn_80617130(void);
-extern void fn_80617200(void);
+extern void GXSetTexCoordScaleManually(void);
 extern void GXInitTexObjDefault(void);
 extern void GXSetTevDirect(void);
 extern void GXSetTevColorIn(void);
@@ -842,7 +842,7 @@ lbl_gx_drawScreenQuad_000009C4:
     cmpwi r26, 0x10
     blt lbl_gx_drawScreenQuad_000009C4
     li r3, 0x0
-    bl fn_80617200
+    bl GXSetTexCoordScaleManually
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -3795,7 +3795,7 @@ lbl_gx_beginQuadBatch_000034FC:
     bl GXInitLightDistAttn
     lwz r0, 0x13c(r25)
     clrlwi r3, r0, 24
-    bl fn_80617200
+    bl GXSetTexCoordScaleManually
     lwz r0, 0x13c(r25)
     cmpwi r0, 0x0
     ble lbl_gx_beginQuadBatch_00003598

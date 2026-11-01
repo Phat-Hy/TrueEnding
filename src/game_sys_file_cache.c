@@ -22,7 +22,7 @@ extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void wcs_parseInt(void);
 extern void str_findChar(void);
-extern void fn_8046DC5C(void);
+extern void boss_loadWeakpointResource(void);
 extern void boss_bindArenaInteractions(void);
 extern void printf(void);
 extern void rand(void);
@@ -138,7 +138,7 @@ asm void fn_8021EB04(void)
     addi r5, r1, 0x8
     lwz r4, lbl_80882FD0
     li r6, 0x20
-    bl fn_8046DC5C
+    bl boss_loadWeakpointResource
     lwz r12, 0xc(r1)
     mr r30, r3
     mr r4, r30
@@ -269,7 +269,7 @@ lbl_fn_8021ED08_0000023C:
 lbl_fn_8021ED08_00000240:
     addi r5, r1, 0x8
     li r6, 0x20
-    bl fn_8046DC5C
+    bl boss_loadWeakpointResource
     lwz r5, 0x8(r1)
     li r0, 0x0
     lis r4, lbl_8077A090@ha
@@ -667,7 +667,7 @@ lbl_fn_8021F100_00000788:
 lbl_fn_8021F100_0000078C:
     addi r5, r1, 0x18
     li r6, 0x20
-    bl fn_8046DC5C
+    bl boss_loadWeakpointResource
     lwz r12, 0x34(r1)
     mr r29, r3
     mr r4, r29
@@ -844,7 +844,7 @@ asm void fn_8021F47C(void)
     addi r5, r1, 0x20
     lwz r4, lbl_80882FE8
     li r6, 0x20
-    bl fn_8046DC5C
+    bl boss_loadWeakpointResource
     li r6, 0x0
     addi r0, r1, 0x48
     stw r6, 0x44(r1)

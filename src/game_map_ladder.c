@@ -24,7 +24,7 @@ extern void npc_updateTalkInteraction(void);
 extern void inventory_unequipItem(void);
 extern void fn_80154344(void);
 extern void inventory_calcTotalStats(void);
-extern void fn_80164DCC(void);
+extern void party_evalTacticCondition(void);
 extern void debuff_clearStatus(void);
 extern void fn_801AD34C(void);
 extern void fn_8037D49C(void);
@@ -883,7 +883,7 @@ lbl_fn_8018EEC4_000009DC:
 lbl_fn_8018EEC4_000009F4:
     lwz r3, 0x4(r30)
     li r4, 0x1
-    bl fn_80164DCC
+    bl party_evalTacticCondition
     lwz r5, 0x4(r30)
     addi r3, r1, 0x28
     lfs f0, lbl_80881F74

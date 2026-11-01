@@ -8,8 +8,8 @@ extern void menu_renderLayout(void);
 extern void collision_testLineSegment(void);
 extern void mem_alloc(void);
 extern void atn_Anim_getLayerTrack(void);
-extern void fn_801059F8(void);
-extern void fn_80105B3C(void);
+extern void colli_findDynamicSlot(void);
+extern void colli_findStaticSlot(void);
 extern void fn_8011BEB8(void);
 extern void dialog_initScriptSlot(void);
 extern void dialog_selectChoice(void);
@@ -1681,10 +1681,10 @@ lbl_fn_8016AFE8_000016C4:
     cmpwi r3, 0x0
     beq lbl_fn_8016AFE8_000016E4
     mr r4, r30
-    bl fn_801059F8
+    bl colli_findDynamicSlot
     lwz r3, lbl_8087F048
     mr r4, r30
-    bl fn_80105B3C
+    bl colli_findStaticSlot
 lbl_fn_8016AFE8_000016E4:
     lwz r0, 0x12a8(r30)
     lis r3, lbl_80737A9C@ha

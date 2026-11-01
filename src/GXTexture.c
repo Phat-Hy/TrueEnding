@@ -44,7 +44,7 @@ void fn_80616E80(void);
 void fn_80616EF0(void);
 void fn_80617030(void);
 void fn_80617130(void);
-void fn_80617200(void);
+void GXSetTexCoordScaleManually(void);
 void GXInitTexObjDefault(void);
 void fn_80617270(void);
 void fn_806172D0(void);
@@ -1094,7 +1094,7 @@ lbl_fn_80617130_00000E48:
     blr
 }
 
-asm void fn_80617200(void)
+asm void GXSetTexCoordScaleManually(void)
 {
     nofralloc
     lwz r4, __GXData

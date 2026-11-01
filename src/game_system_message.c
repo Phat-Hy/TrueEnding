@@ -23,7 +23,7 @@ extern void fn_8020EF4C(void);
 extern void fn_8020EFEC(void);
 extern void event_findEntryById(void);
 extern void fn_80216AFC(void);
-extern void fn_8046DC5C(void);
+extern void boss_loadWeakpointResource(void);
 extern void boss_bindArenaInteractions(void);
 extern void strncmp(void);
 extern void atoi(void);
@@ -956,7 +956,7 @@ asm void fn_802130BC(void)
     addi r5, r1, 0x10
     lwz r4, lbl_80882EF0
     li r6, 0x20
-    bl fn_8046DC5C
+    bl boss_loadWeakpointResource
     lwz r12, 0x28(r1)
     mr r31, r3
     mr r4, r31

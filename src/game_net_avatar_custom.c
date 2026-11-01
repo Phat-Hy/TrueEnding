@@ -41,7 +41,7 @@ extern void fn_80202A6C(void);
 extern void perf_getMetricValue(void);
 extern void mem_findBlockById(void);
 extern void fn_8020A81C(void);
-extern void fn_80219544(void);
+extern void task_getWorkerByIndex(void);
 extern void fn_8021AF50(void);
 extern void fn_80372574(void);
 extern void fn_803CF734(void);
@@ -1843,7 +1843,7 @@ lbl_fn_8052793C_000017B4:
     mr r29, r3
 lbl_fn_8052793C_000017C4:
     lwz r3, 0x4(r23)
-    bl fn_80219544
+    bl task_getWorkerByIndex
     bl mem_findBlockById
     mr r19, r3
     bl fn_801D80B4

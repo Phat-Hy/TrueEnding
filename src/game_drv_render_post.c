@@ -36,7 +36,7 @@ extern void GXInitLightObj(void);
 extern void fn_80616200(void);
 extern void GXClampLightAngle(void);
 extern void fn_80616390(void);
-extern void fn_80617200(void);
+extern void GXSetTexCoordScaleManually(void);
 extern void GXInitTexObjDefault(void);
 extern void GXSetTevDirect(void);
 extern void GXSetTevSwapMode(void);
@@ -838,7 +838,7 @@ asm void fn_805CE550(void)
     li r3, 0x1
     bl GXSetNumTevStages
     li r3, 0x0
-    bl fn_80617200
+    bl GXSetTexCoordScaleManually
     li r3, 0x0
     li r4, 0xff
     li r5, 0xff

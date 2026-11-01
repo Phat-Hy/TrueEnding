@@ -40,7 +40,7 @@ extern void mem_findBlockById(void);
 extern void fn_80216544(void);
 extern void fn_8021771C(void);
 extern void fn_80217D9C(void);
-extern void fn_80219544(void);
+extern void task_getWorkerByIndex(void);
 extern void world_getGlobalFlag(void);
 extern void fn_804A436C(void);
 extern void fn_804A53D4(void);
@@ -1935,7 +1935,7 @@ lbl_fn_80572454_000018A0:
     bl save_calculateBlockCrc
     add r31, r27, r26
     lwz r3, 0x70(r31)
-    bl fn_80219544
+    bl task_getWorkerByIndex
     bl mem_findBlockById
     lwz r5, 0x4c(r29)
     mr r6, r3

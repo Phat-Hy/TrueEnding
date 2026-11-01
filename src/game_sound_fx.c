@@ -65,7 +65,7 @@ extern void fn_801562A0(void);
 extern void fn_8015783C(void);
 extern void party_configureMemberSlot(void);
 extern void fn_8015EB2C(void);
-extern void fn_80164DCC(void);
+extern void party_evalTacticCondition(void);
 extern void fn_80165C5C(void);
 extern void fn_8016DC14(void);
 extern void fn_8016F634(void);
@@ -1358,7 +1358,7 @@ lbl_fn_800EBA5C_000010F4:
 lbl_fn_800EBA5C_0000110C:
     mr r3, r31
     li r4, 0x0
-    bl fn_80164DCC
+    bl party_evalTacticCondition
     lwz r0, 0x54c(r31)
     li r30, 0x0
     lfs f0, lbl_808812D8

@@ -36,7 +36,7 @@ extern void task_createWorker(void);
 extern void task_destroyWorker(void);
 extern void task_updateWorker(void);
 extern void fn_803ECBD4(void);
-extern void fn_803EDB18(void);
+extern void barrier_testFieldCollision(void);
 extern void fn_803FFC50(void);
 extern void atn_LoadHandle_destructor(void);
 extern void PSVECSquareMag(void);
@@ -1786,7 +1786,7 @@ lbl_fn_803FE828_000017FC:
     mr r3, r31
     addi r4, r31, 0xf4
     stw r0, 0x35c(r31)
-    bl fn_803EDB18
+    bl barrier_testFieldCollision
     mr r3, r31
     addi r4, r31, 0xf4
     li r5, 0x1

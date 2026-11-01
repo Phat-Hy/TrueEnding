@@ -19,7 +19,7 @@ extern void fn_8012476C(void);
 extern void quest_resetObjectiveBounds(void);
 extern void fn_80154344(void);
 extern void inventory_calcTotalStats(void);
-extern void fn_80164DCC(void);
+extern void party_evalTacticCondition(void);
 extern void debuff_clearStatus(void);
 extern void fn_801750FC(void);
 extern void fn_8018F81C(void);
@@ -1420,7 +1420,7 @@ lbl_fn_801A2290_00001234:
     bl debuff_clearStatus
     lwz r3, 0x4(r30)
     li r4, 0x1
-    bl fn_80164DCC
+    bl party_evalTacticCondition
     lwz r3, 0x4(r30)
     lwz r0, 0x12a4(r3)
     srwi. r0, r0, 31

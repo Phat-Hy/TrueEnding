@@ -18,7 +18,7 @@ extern void skill_findNodeBySlotId(void);
 extern void skill_findNodeById(void);
 extern void skill_findNodeByTag(void);
 extern void fn_8012B3E8(void);
-extern void fn_8012B988(void);
+extern void enemy_updateNavSteering(void);
 extern void enemy_updateAnimTimer(void);
 extern void fn_801333E4(void);
 extern void fn_80133B30(void);
@@ -343,7 +343,7 @@ lbl_fn_8039FBFC_000002C4:
     stfs f0, 0x984(r30)
     bl fn_8012B3E8
     addi r3, r30, 0x7d4
-    bl fn_8012B988
+    bl enemy_updateNavSteering
     addi r3, r30, 0x7d4
     bl enemy_updateAnimTimer
     b lbl_fn_8039FBFC_00000428

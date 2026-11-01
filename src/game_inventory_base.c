@@ -18,7 +18,7 @@ extern void fn_80134168(void);
 extern void fn_801346C8(void);
 extern void fn_80150460(void);
 extern void fn_8015076C(void);
-extern void fn_80164DCC(void);
+extern void party_evalTacticCondition(void);
 extern void actor_setState(void);
 extern void fn_801C8938(void);
 extern void task_findEntryById(void);
@@ -1799,7 +1799,7 @@ lbl_inventory_applyItemStats_00001828:
     bne lbl_inventory_applyItemStats_0000183C
     mr r3, r26
     li r4, 0x1
-    bl fn_80164DCC
+    bl party_evalTacticCondition
 lbl_inventory_applyItemStats_0000183C:
     addi r11, r1, 0x1f0
     psq_l f31, 0x1f8(r1), 0, 0

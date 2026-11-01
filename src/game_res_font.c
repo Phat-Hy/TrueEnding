@@ -45,7 +45,7 @@ extern void GXInitLightSpot(void);
 extern void fn_80616EF0(void);
 extern void fn_80617030(void);
 extern void fn_80617130(void);
-extern void fn_80617200(void);
+extern void GXSetTexCoordScaleManually(void);
 extern void GXInitTexObjDefault(void);
 extern void fn_80617270(void);
 extern void GXSetTevColorIn(void);
@@ -1525,7 +1525,7 @@ asm void fn_80235BF8(void)
     li r3, 0x1
     bl GXSetNumTevStages
     li r3, 0x1
-    bl fn_80617200
+    bl GXSetTexCoordScaleManually
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -1874,7 +1874,7 @@ lbl_fn_80235BF8_000018D4:
     li r3, 0x8
     bl GXSetNumTevStages
     li r3, 0x0
-    bl fn_80617200
+    bl GXSetTexCoordScaleManually
     li r3, 0x0
     li r4, 0x0
     li r5, 0x1

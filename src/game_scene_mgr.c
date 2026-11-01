@@ -15,7 +15,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800A55D4(void);
 extern void fn_80105950(void);
-extern void fn_801059F8(void);
+extern void colli_findDynamicSlot(void);
 extern void fn_80105A08(void);
 extern void fn_8010CA24(void);
 extern void player_evaluateStatusCondition(void);
@@ -1000,7 +1000,7 @@ lbl_fn_801A34D4_00000C68:
     cmpwi r3, 0x0
     beq lbl_fn_801A34D4_00000CCC
     lwz r4, 0x4(r27)
-    bl fn_801059F8
+    bl colli_findDynamicSlot
     lwz r4, 0x4(r27)
     lwz r3, lbl_8087F048
     addi r5, r4, 0xb0
@@ -1135,7 +1135,7 @@ lbl_fn_801A34D4_00000E58:
     bge lbl_fn_801A34D4_00000EB4
     lwz r3, lbl_8087F048
     lwz r4, 0x4(r27)
-    bl fn_801059F8
+    bl colli_findDynamicSlot
 lbl_fn_801A34D4_00000EB4:
     li r0, 0x1
     stw r0, 0x30(r27)
@@ -1436,7 +1436,7 @@ lbl_fn_801A34D4_000012E0:
     bne lbl_fn_801A34D4_00001324
     lwz r3, lbl_8087F048
     lwz r4, 0x4(r27)
-    bl fn_801059F8
+    bl colli_findDynamicSlot
     li r0, 0x1
     stw r0, 0x30(r27)
     li r29, 0x1

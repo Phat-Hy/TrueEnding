@@ -8,7 +8,7 @@ extern void dtor_80084684(void);
 extern void scene_traverseNode(void);
 extern void path_Object_constructor(void);
 extern void atn_ColliBase_destructor(void);
-extern void fn_80057F28(void);
+extern void mission_initPathTracker(void);
 extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
@@ -42,7 +42,7 @@ extern void barrier_formatDialogString(void);
 extern void task_updateWorker(void);
 extern void task_initWorkerContext(void);
 extern void barrier_bindFieldAnimation(void);
-extern void fn_803EDB18(void);
+extern void barrier_testFieldCollision(void);
 extern void fn_803EDCF4(void);
 extern void fn_803F8324(void);
 extern void boss_getOffset54(void);
@@ -1112,7 +1112,7 @@ asm void fn_803F75B8(void)
     li r31, 0x0
     stw r31, 0x4c4(r28)
     addi r3, r28, 0x4c8
-    bl fn_80057F28
+    bl mission_initPathTracker
     addi r30, r28, 0x554
     stw r31, 0x550(r28)
     li r4, 0x2
@@ -1259,7 +1259,7 @@ asm void fn_803F77B8(void)
     beq lbl_fn_803F77B8_00000F60
     mr r3, r15
     addi r4, r15, 0xf4
-    bl fn_803EDB18
+    bl barrier_testFieldCollision
 lbl_fn_803F77B8_00000F60:
     lwz r3, 0x968(r15)
     cmpwi r3, 0x0

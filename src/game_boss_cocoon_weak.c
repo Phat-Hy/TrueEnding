@@ -78,7 +78,7 @@ void fn_8046D7D8(void);
 void fn_8046D84C(void);
 void atn_Loader_constructor(void);
 void fn_8046DBF8(void);
-void fn_8046DC5C(void);
+void boss_loadWeakpointResource(void);
 void boss_bindArenaInteractions(void);
 void atn_Loader_destructor(void);
 void atn_Loader_execute(void);
@@ -883,7 +883,7 @@ lbl_fn_8046DBF8_00000AA8:
     blr
 }
 
-asm void fn_8046DC5C(void)
+asm void boss_loadWeakpointResource(void)
 {
     nofralloc
     stwu r1, -0x20(r1)

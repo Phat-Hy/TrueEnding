@@ -15,7 +15,7 @@ extern void atn_Task_setActive(void);
 extern void bloom_processPasses(void);
 extern void fn_8011F8F4(void);
 extern void fn_8012B3E8(void);
-extern void fn_8012B988(void);
+extern void enemy_updateNavSteering(void);
 extern void enemy_updateAnimTimer(void);
 extern void fn_802085E0(void);
 extern void mem_findBlockById(void);
@@ -26,7 +26,7 @@ extern void fn_802143EC(void);
 extern void fn_8021446C(void);
 extern void fn_8021771C(void);
 extern void fn_80218268(void);
-extern void fn_80219544(void);
+extern void task_getWorkerByIndex(void);
 extern void task_mapIdToQueue(void);
 extern void fn_8036097C(void);
 extern void fn_80360A2C(void);
@@ -265,7 +265,7 @@ lbl_world_Manager_update_000001F0:
     li r28, 0x0
 lbl_world_Manager_update_000001F4:
     mr r3, r28
-    bl fn_80219544
+    bl task_getWorkerByIndex
     bl mem_findBlockById
     cmpwi r3, 0x0
     beq lbl_world_Manager_update_00000218
@@ -1024,7 +1024,7 @@ lbl_world_Manager_update_00000CA8:
     addi r3, r25, 0x7d4
     bl fn_8012B3E8
     addi r3, r25, 0x7d4
-    bl fn_8012B988
+    bl enemy_updateNavSteering
 lbl_world_Manager_update_00000CC8:
     lwz r25, 0x14ac(r25)
 lbl_world_Manager_update_00000CCC:
@@ -1082,7 +1082,7 @@ asm void fn_80367A40(void)
     li r24, 0x0
 lbl_fn_80367A40_00000D7C:
     mr r3, r27
-    bl fn_80219544
+    bl task_getWorkerByIndex
     bl mem_findBlockById
     lwz r3, 0x14(r3)
     bl fn_8020A81C
@@ -1111,7 +1111,7 @@ lbl_fn_80367A40_00000D7C:
     li r27, 0x0
 lbl_fn_80367A40_00000DEC:
     mr r3, r28
-    bl fn_80219544
+    bl task_getWorkerByIndex
     bl mem_findBlockById
     lwz r3, 0x14(r3)
     bl fn_8020A81C
@@ -1153,7 +1153,7 @@ lbl_fn_80367A40_00000E54:
     stfs f0, 0x984(r27)
     bl fn_8012B3E8
     addi r3, r27, 0x7d4
-    bl fn_8012B988
+    bl enemy_updateNavSteering
     addi r3, r27, 0x7d4
     bl enemy_updateAnimTimer
 lbl_fn_80367A40_00000EA0:
@@ -1185,7 +1185,7 @@ lbl_fn_80367A40_00000ED4:
     li r27, 0x0
 lbl_fn_80367A40_00000EF8:
     mr r3, r28
-    bl fn_80219544
+    bl task_getWorkerByIndex
     bl mem_findBlockById
     lwz r3, 0x14(r3)
     bl fn_8020A81C
@@ -1336,7 +1336,7 @@ lbl_fn_80367A40_00001024:
     stw r0, 0x9f4(r26)
     bl fn_8012B3E8
     addi r3, r26, 0x7d4
-    bl fn_8012B988
+    bl enemy_updateNavSteering
     addi r3, r26, 0x7d4
     bl enemy_updateAnimTimer
     lwz r0, lbl_8087F4F0
@@ -1570,7 +1570,7 @@ lbl_fn_80367A40_000014B0:
     addi r3, r26, 0x7d4
     bl fn_8012B3E8
     addi r3, r26, 0x7d4
-    bl fn_8012B988
+    bl enemy_updateNavSteering
     addi r3, r26, 0x7d4
     bl enemy_updateAnimTimer
 lbl_fn_80367A40_000014C8:
