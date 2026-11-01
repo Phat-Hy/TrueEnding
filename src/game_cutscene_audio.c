@@ -14,16 +14,16 @@ extern void vec3_sub(void);
 extern void fn_80013410(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void atn_ColliObject_destructor(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
-extern void fn_8005B6E8(void);
+extern void talk_setSpeakerName(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
 extern void fn_80087E9C(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void skin_applyWeights(void);
 extern void fn_800CB360(void);
 extern void ref_releaseHandle(void);
@@ -33,7 +33,7 @@ extern void fn_800E41FC(void);
 extern void fn_800E854C(void);
 extern void fn_800EF73C(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800FAB80(void);
+extern void clip_calculateFrustum(void);
 extern void fn_80121F00(void);
 extern void magic_getOffset6C(void);
 extern void fn_8012A1B8(void);
@@ -608,7 +608,7 @@ lbl_fn_8032DEA0_0000052C:
     cmpwi r3, 0x0
     beq lbl_fn_8032DEA0_0000064C
     addi r3, r3, 0x10
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0x158c(r31)
     mr r29, r3
     b lbl_fn_8032DEA0_00000650
@@ -853,7 +853,7 @@ asm void fn_8032E3DC(void)
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x38(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
     lis r31, lbl_80749F88@ha
     addi r29, r1, 0x18
     addi r31, r31, lbl_80749F88@l
@@ -1305,7 +1305,7 @@ lbl_fn_8032E938_00000FC0:
     addi r7, r1, 0x1c
     li r9, 0x0
     li r10, 0x1e
-    bl fn_800FAB80
+    bl clip_calculateFrustum
 lbl_fn_8032E938_00001078:
     li r0, -0x1
     stw r0, 0x1570(r31)
@@ -1888,7 +1888,7 @@ lbl_fn_8032F204_00001790:
     li r4, 0x0
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     bne lbl_fn_8032F204_00001858
     li r28, 0x1
@@ -2058,7 +2058,7 @@ lbl_fn_8032F314_000019E4:
     addi r6, r1, 0x14
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     bne lbl_fn_8032F314_00001B00
     addi r4, r1, 0x14

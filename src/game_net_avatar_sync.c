@@ -18,11 +18,11 @@ extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_80087E9C(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void fn_8009EE30(void);
 extern void fn_800A4450(void);
 extern void msg_getMessageById(void);
-extern void fn_800A55AC(void);
+extern void msg_getMessageString(void);
 extern void fn_800A58D0(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CFBA0(void);
@@ -492,13 +492,13 @@ asm void fn_80528698(void)
     mr r3, r29
     li r4, 0x0
     li r5, 0x17
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     bne lbl_fn_80528698_00000468
     mr r3, r29
     li r4, 0x0
     li r5, 0x2
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     beq lbl_fn_80528698_00000478
 lbl_fn_80528698_00000468:
@@ -510,13 +510,13 @@ lbl_fn_80528698_00000478:
     mr r3, r29
     li r4, 0x0
     li r5, 0x18
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     bne lbl_fn_80528698_000004A8
     mr r3, r29
     li r4, 0x0
     li r5, 0x3
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     beq lbl_fn_80528698_000005F8
 lbl_fn_80528698_000004A8:
@@ -1082,7 +1082,7 @@ asm void fn_80528ED8(void)
 lbl_fn_80528ED8_00000C60:
     lwz r4, 0xa0(r29)
 lbl_fn_80528ED8_00000C64:
-    bl fn_8008937C
+    bl node_createNamedChild
     lis r31, lbl_8075CED4@ha
     lfs f1, lbl_80887A7C
     addi r31, r31, lbl_8075CED4@l

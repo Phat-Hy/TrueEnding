@@ -7,7 +7,7 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void mem_alloc(void);
 extern void fn_800897D8(void);
-extern void fn_800C31F4(void);
+extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
@@ -1806,7 +1806,7 @@ asm void fn_803CF938(void)
     lwz r4, 0x10(r4)
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0xc
     li r4, -0x1
     bl ref_releaseHandle
@@ -1960,7 +1960,7 @@ lbl_fn_803CF938_0000198C:
     addi r3, r1, 0x8
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle

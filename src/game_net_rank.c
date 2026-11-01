@@ -11,7 +11,7 @@ extern void _savegpr_23(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void fn_8006F17C(void);
-extern void fn_8006F72C(void);
+extern void str_assignBuffer(void);
 extern void fn_8006FA4C(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
@@ -916,7 +916,7 @@ lbl_fn_801F1818_00000B10:
     add r7, r6, r0
     addi r8, r1, 0xc
     li r4, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
 lbl_fn_801F1818_00000B2C:
     lwz r0, 0x14(r1)
     mtlr r0
@@ -1074,7 +1074,7 @@ lbl_fn_801F19D0_00000CAC:
     li r4, 0x0
     li r5, 0x0
     add r7, r6, r0
-    bl fn_8006F72C
+    bl str_assignBuffer
 lbl_fn_801F19D0_00000CF4:
     lwz r0, 0xc(r30)
     stw r0, 0xc(r28)
@@ -1233,7 +1233,7 @@ lbl_fn_801F19D0_00000EF8:
     li r4, 0x0
     li r5, 0x0
     add r7, r6, r0
-    bl fn_8006F72C
+    bl str_assignBuffer
 lbl_fn_801F19D0_00000F3C:
     lwz r0, 0xc(r30)
     stw r0, 0xc(r27)
@@ -1281,7 +1281,7 @@ lbl_fn_801F19D0_00000FA8:
     lwz r6, 0x8(r27)
     slwi r0, r0, 1
     add r7, r6, r0
-    bl fn_8006F72C
+    bl str_assignBuffer
 lbl_fn_801F19D0_00000FEC:
     lwz r0, 0xc(r27)
     stw r0, 0xc(r31)
@@ -1778,7 +1778,7 @@ lbl_fn_801F2398_000016A0:
     addi r8, r1, 0x10
     li r4, 0x0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     mr r5, r29
     addi r3, r31, 0x134
     li r4, 0x0
@@ -1835,7 +1835,7 @@ lbl_fn_801F2398_000017F4:
     add r7, r28, r0
     addi r8, r1, 0xc
     li r4, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
 lbl_fn_801F2398_00001814:
     lwz r0, 0x18(r1)
     srwi. r0, r0, 31
@@ -1904,7 +1904,7 @@ lbl_fn_801F25E0_000018A8:
     lwz r6, 0x8(r28)
     slwi r0, r0, 1
     add r7, r6, r0
-    bl fn_8006F72C
+    bl str_assignBuffer
 lbl_fn_801F25E0_000018F4:
     slwi r0, r29, 3
     mr r4, r27

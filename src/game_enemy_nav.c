@@ -9,14 +9,14 @@ extern void fn_8000D430(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void fn_80087E9C(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void fn_80129A6C(void);
 extern void fn_8012C6D4(void);
 extern void fn_8012D180(void);
 extern void fn_8012D628(void);
 extern void fn_8012D714(void);
 extern void fn_8020FCE8(void);
-extern void fn_80219558(void);
+extern void task_mapIdToQueue(void);
 extern void world_getGlobalFlag(void);
 extern void fn_80375B78(void);
 extern void std_pow(void);
@@ -187,7 +187,7 @@ asm void fn_8012AD20(void)
     mr r28, r3
     mr r3, r4
     addi r4, r30, 0x23
-    bl fn_8008937C
+    bl node_createNamedChild
     lis r31, fn_8012AC64@ha
     mr r29, r3
     mr r10, r28
@@ -1257,7 +1257,7 @@ lbl_fn_8012B988_00001100:
 lbl_fn_8012B988_00001138:
     lwz r3, 0x2f0(r31)
     lwz r3, 0x50(r3)
-    bl fn_80219558
+    bl task_mapIdToQueue
     lwz r4, 0x2f0(r31)
     cmpwi r3, 0x3
     lwz r3, 0x648(r4)

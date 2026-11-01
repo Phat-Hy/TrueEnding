@@ -9,7 +9,7 @@ extern void _savegpr_27(void);
 extern void fn_80017E90(void);
 extern void fn_80017EB0(void);
 extern void fn_800697D8(void);
-extern void fn_800C31F4(void);
+extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void fn_800FDE60(void);
 extern void fn_8011CD84(void);
@@ -26,7 +26,7 @@ extern void fn_8014DEE4(void);
 extern void fn_8014EEC4(void);
 extern void fn_801539E0(void);
 extern void fn_80183930(void);
-extern void fn_80219558(void);
+extern void task_mapIdToQueue(void);
 extern void fn_8036554C(void);
 extern void world_getGlobalFlag(void);
 extern void world_getLocalFlag(void);
@@ -371,7 +371,7 @@ lbl_fn_8039FBFC_000002C4:
     lwz r4, 0x18(r4)
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0xc
     li r4, -0x1
     bl ref_releaseHandle
@@ -392,7 +392,7 @@ lbl_fn_8039FBFC_000003A8:
     lwz r4, 0x1c(r4)
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -963,7 +963,7 @@ lbl_fn_803A064C_00000B58:
     cmplwi r0, 0x2000
     beq lbl_fn_803A064C_00000BE0
     lwz r3, 0x50(r25)
-    bl fn_80219558
+    bl task_mapIdToQueue
     subi r0, r3, 0x9
     cmplwi r0, 0x1
     ble lbl_fn_803A064C_00000BC4

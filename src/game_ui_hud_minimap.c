@@ -39,7 +39,7 @@ extern void fn_802091E8(void);
 extern void fn_8020BCEC(void);
 extern void fn_8020BD14(void);
 extern void event_findEntryById(void);
-extern void fn_80219558(void);
+extern void task_mapIdToQueue(void);
 extern void fn_804444E8(void);
 extern void fn_80444828(void);
 extern void fn_8044493C(void);
@@ -1592,7 +1592,7 @@ lbl_fn_801D19F0_000015C4:
     lwz r3, lbl_8087F8A0
     lwz r19, 0x48(r3)
     lwz r3, 0x50(r19)
-    bl fn_80219558
+    bl task_mapIdToQueue
     mr r16, r3
 lbl_fn_801D19F0_000015E8:
     cmpwi r16, 0x0

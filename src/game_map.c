@@ -20,7 +20,7 @@ extern void fn_80081BD0(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void fn_8008C850(void);
 extern void fn_8008C950(void);
 extern void fn_8009303C(void);
@@ -1564,7 +1564,7 @@ lbl_fn_8008BD10_000013D8:
     lwz r0, lbl_8087EF10
     cmpwi r0, 0x0
     beq lbl_fn_8008BD10_00001410
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0x210(r26)
     mr r22, r3
     b lbl_fn_8008BD10_00001414

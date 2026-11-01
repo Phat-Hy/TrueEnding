@@ -8,7 +8,7 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_8000D844(void);
 extern void fn_8000E18C(void);
-extern void fn_8006F72C(void);
+extern void str_assignBuffer(void);
 extern void mem_free(void);
 extern void atn_Task_destructor(void);
 extern void fn_800D94E4(void);
@@ -391,7 +391,7 @@ lbl_fn_800DAD6C_00000448:
     li r4, 0x0
     li r5, 0x0
     add r7, r6, r0
-    bl fn_8006F72C
+    bl str_assignBuffer
 lbl_fn_800DAD6C_00000490:
     psq_l f1, 0x14(r29), 0, 0
     psq_st f1, 0x14(r27), 0, 0
@@ -602,7 +602,7 @@ lbl_fn_800DAD6C_0000075C:
     li r4, 0x0
     li r5, 0x0
     add r7, r6, r0
-    bl fn_8006F72C
+    bl str_assignBuffer
 lbl_fn_800DAD6C_000007A0:
     psq_l f1, 0x14(r29), 0, 0
     psq_st f1, 0x14(r27), 0, 0
@@ -676,7 +676,7 @@ lbl_fn_800DAD6C_00000874:
     lwz r6, 0x10(r31)
     slwi r0, r0, 1
     add r7, r6, r0
-    bl fn_8006F72C
+    bl str_assignBuffer
 lbl_fn_800DAD6C_000008B8:
     psq_l f1, 0x14(r31), 0, 0
     psq_st f1, 0x14(r30), 0, 0

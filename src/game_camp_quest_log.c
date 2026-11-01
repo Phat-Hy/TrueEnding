@@ -17,7 +17,7 @@ extern void fn_8004212C(void);
 extern void fn_800422CC(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
-extern void fn_800827E0(void);
+extern void dungeon_initGlobalContext(void);
 extern void mem_alloc(void);
 extern void fn_80089ACC(void);
 extern void fn_8008AD4C(void);
@@ -2396,7 +2396,7 @@ lbl_fn_803C3894_0000207C:
     cmpwi r3, 0x0
     bne lbl_fn_803C3894_00001FF8
 lbl_fn_803C3894_0000208C:
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     li r4, 0x1
     li r5, 0x20
     bl fn_803C5FC4
@@ -2427,7 +2427,7 @@ lbl_fn_803C3894_000020F0:
     bl fn_80089ACC
     cmplw r17, r3
     blt lbl_fn_803C3894_000020B8
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     bl fn_803C5FD0
     addi r3, r1, 0x94
     li r4, -0x1

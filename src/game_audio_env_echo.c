@@ -10,7 +10,7 @@ extern void fn_80012C88(void);
 extern void vec3_sub(void);
 extern void fn_80013410(void);
 extern void fn_8004D388(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void fn_80051BC4(void);
 extern void fn_80057A64(void);
 extern void atn_Matrix_copy(void);
@@ -1086,7 +1086,7 @@ lbl_fn_8031958C_00000D8C:
     addi r7, r7, 0x4
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_8031958C_00000DFC
     addi r3, r1, 0xe4

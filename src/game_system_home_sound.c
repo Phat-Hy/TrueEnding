@@ -31,7 +31,7 @@ extern void fn_80093F58(void);
 extern void fn_80097D9C(void);
 extern void fn_800A4228(void);
 extern void msg_getMessageById(void);
-extern void fn_800C31F4(void);
+extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CF7DC(void);
 extern void atn_Task_setActive(void);
@@ -2019,7 +2019,7 @@ lbl_fn_8036503C_00001A80:
     addi r4, r4, 0x9b
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0xc
     li r4, -0x1
     bl ref_releaseHandle
@@ -2053,7 +2053,7 @@ lbl_fn_8036503C_00001AFC:
     addi r4, r4, 0x9b
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle

@@ -13,7 +13,7 @@ extern void fn_8004212C(void);
 extern void fn_800422CC(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
-extern void fn_8005B6E8(void);
+extern void talk_setSpeakerName(void);
 extern void talk_parseDialogue(void);
 extern void fn_8005B8F8(void);
 extern void fn_8005B9AC(void);
@@ -22,7 +22,7 @@ extern void fn_8006BA30(void);
 extern void fn_8006BA8C(void);
 extern void fn_8006BB6C(void);
 extern void fn_8006F420(void);
-extern void fn_8006F72C(void);
+extern void str_assignBuffer(void);
 extern void mem_realloc(void);
 extern void fn_800DBF68(void);
 extern void str_parseInt(void);
@@ -414,7 +414,7 @@ lbl_fn_802088A4_00000338:
     addi r8, r1, 0x8
     li r4, 0x0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     mr r4, r31
     addi r3, r1, 0x1c
     bl fn_80208814
@@ -532,7 +532,7 @@ lbl_fn_80208A3C_000004CC:
     addi r8, r1, 0xc
     li r4, 0x0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     mr r4, r29
     addi r3, r1, 0x10
     bl fn_80208814
@@ -1180,7 +1180,7 @@ asm void fn_80209300(void)
     addi r4, r4, lbl_807772B0@l
     stw r4, 0xc(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
     lis r29, lbl_8073EB58@ha
     li r24, 0x0
     addi r28, r29, lbl_8073EB58@l

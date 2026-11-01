@@ -9,7 +9,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void wcs_vformat(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800FAB80(void);
+extern void clip_calculateFrustum(void);
 extern void fn_80105BD8(void);
 extern void fn_80108C10(void);
 extern void fn_80109828(void);
@@ -1197,7 +1197,7 @@ lbl_fn_802CA490_00000F58:
     stfs f2, 0x3c(r1)
     lwz r6, 0x590(r31)
     lfs f2, lbl_808843F4
-    bl fn_800FAB80
+    bl clip_calculateFrustum
 lbl_fn_802CA490_00000FD0:
     lfs f3, 0x2e4(r31)
     lfs f0, lbl_8088446C
@@ -1245,7 +1245,7 @@ lbl_fn_802CA490_00001034:
     stfs f3, 0x2c(r1)
     lwz r6, 0x590(r31)
     stfs f0, 0x30(r1)
-    bl fn_800FAB80
+    bl clip_calculateFrustum
 lbl_fn_802CA490_00001084:
     lfs f3, 0x2e4(r31)
     lfs f0, lbl_80884460

@@ -9,12 +9,12 @@ extern void _savegpr_19(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void fn_8004D388(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void mem_free(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800FAB80(void);
+extern void clip_calculateFrustum(void);
 extern void fn_800FB4B0(void);
 extern void fn_8010653C(void);
 extern void fn_80133130(void);
@@ -42,7 +42,7 @@ extern void rand(void);
 extern void strcmp(void);
 extern void abort(void);
 extern void std_atan2(void);
-extern void fn_8068B100(void);
+extern void math_u64DivMod(void);
 extern void __ptmf_scall(void);
 
 /* External data declarations */
@@ -764,7 +764,7 @@ lbl_fn_801A4E08_000008B4:
     li r20, 0x0
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_801A4E08_00000A90
     lwz r3, lbl_8087F430
@@ -983,7 +983,7 @@ lbl_fn_801A4E08_00000B84:
     stfs f2, 0x178(r1)
     stfs f3, 0x180(r1)
     stfs f0, 0x174(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_801A4E08_00000C7C
     lfs f3, 0x314(r1)
@@ -1179,7 +1179,7 @@ lbl_fn_801A4E08_00000E84:
     stfs f2, 0x178(r1)
     stfs f3, 0x180(r1)
     stfs f0, 0x174(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_801A4E08_00000F2C
     lfs f0, 0x310(r1)
@@ -1224,7 +1224,7 @@ lbl_fn_801A4E08_00000F2C:
     fadds f0, f0, f4
     stfs f3, 0x180(r1)
     stfs f0, 0x174(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_801A4E08_00000FF4
     lfs f3, lbl_80882178
@@ -1398,7 +1398,7 @@ lbl_fn_801A4E08_000011B4:
     addi r4, r1, 0x2b8
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_801A4E08_00001270
     lfs f0, 0x2c0(r1)
@@ -1481,7 +1481,7 @@ asm void fn_801A59F4(void)
     fmadds f1, f6, f6, f0
     stfs f3, 0x18(r1)
     stfs f5, 0x1c(r1)
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f3, f1
     lfs f0, lbl_80882190
     lfs f4, lbl_80882188
@@ -1504,7 +1504,7 @@ lbl_fn_801A59F4_000013B0:
     fmadds f1, f6, f6, f0
     stfs f3, 0xc(r1)
     stfs f5, 0x10(r1)
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f3, f1
     lfs f0, lbl_80882190
     fdivs f4, f3, f0
@@ -1655,7 +1655,7 @@ lbl_fn_801A5BDC_00001518:
     addi r8, r27, 0x534
     li r9, 0x0
     li r10, 0x1e
-    bl fn_800FAB80
+    bl clip_calculateFrustum
     lwz r3, 0x4(r30)
     lfs f0, lbl_80882178
     lfs f3, 0xac8(r3)
@@ -1854,7 +1854,7 @@ lbl_fn_801A5E90_00001868:
     addi r4, r1, 0x150
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_801A5E90_00001900
     addi r3, r1, 0x154

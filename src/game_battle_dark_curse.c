@@ -14,7 +14,7 @@ extern void fn_8005BCE8(void);
 extern void mem_alloc(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void lockon_updateTarget(void);
 extern void fn_800971D4(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -656,7 +656,7 @@ asm void fn_80422510(void)
     beq lbl_fn_80422510_0000071C
     mr r3, r30
     addi r4, r1, 0x8
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0xf0(r29)
     mr r30, r3
     b lbl_fn_80422510_00000720
@@ -1602,7 +1602,7 @@ asm void fn_804231C0(void)
     beq lbl_fn_804231C0_000013C8
     mr r3, r26
     addi r4, r1, 0x8
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0xf0(r27)
     mr r28, r3
     b lbl_fn_804231C0_000013CC
@@ -1622,7 +1622,7 @@ lbl_fn_804231C0_000013CC:
     bl route_findNextWaypoint
     mr r3, r28
     addi r4, r31, 0x15
-    bl fn_8008937C
+    bl node_createNamedChild
     lfs f1, lbl_80886630
     mr r29, r3
     lfs f2, lbl_80886650
@@ -1652,7 +1652,7 @@ lbl_fn_804231C0_00001458:
     bl sprintf
     mr r3, r28
     addi r4, r1, 0x8
-    bl fn_8008937C
+    bl node_createNamedChild
     lfs f1, lbl_80886630
     mr r26, r3
     lfs f2, lbl_80886650

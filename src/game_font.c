@@ -10,7 +10,7 @@ extern void actor_dispatchMessage(void);
 extern void fn_8006B0C8(void);
 extern void fn_8006B174(void);
 extern void fn_8006EF48(void);
-extern void fn_800827E0(void);
+extern void dungeon_initGlobalContext(void);
 extern void fn_800838B8(void);
 extern void fn_80083AD4(void);
 extern void mem_alloc(void);
@@ -920,7 +920,7 @@ lbl_fn_800A2DE0_00000C20:
     beq lbl_fn_800A2DE0_00001020
     b lbl_fn_800A2DE0_000018B0
 lbl_fn_800A2DE0_00000C84:
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     lwz r4, 0x150(r31)
     lis r7, lbl_807327B4@ha
     addi r7, r7, lbl_807327B4@l
@@ -957,7 +957,7 @@ lbl_fn_800A2DE0_00000C84:
     cmpwi r3, 0x0
     stw r3, 0x158(r31)
     beq lbl_fn_800A2DE0_000018B0
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     lwz r4, 0x14c(r31)
     bl fn_80083AD4
     lwz r5, 0x15c(r31)
@@ -1357,7 +1357,7 @@ lbl_fn_800A2DE0_00001298:
     beq lbl_fn_800A2DE0_000013FC
     b lbl_fn_800A2DE0_000018B0
 lbl_fn_800A2DE0_00001318:
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     lwz r4, 0x14c(r31)
     bl fn_80083AD4
     li r0, 0x12
@@ -1453,7 +1453,7 @@ lbl_fn_800A2DE0_00001468:
     or r0, r6, r0
     stw r0, 0x16c(r3)
     bne lbl_fn_800A2DE0_00001498
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     lwz r4, 0x14c(r31)
     bl fn_80083AD4
 lbl_fn_800A2DE0_00001498:

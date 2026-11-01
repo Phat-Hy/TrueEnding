@@ -2,7 +2,7 @@
 #pragma function_align 4
 
 /* External function declarations */
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void system_getNextSequenceId(void);
 extern void actor_setState(void);
@@ -25,7 +25,7 @@ extern void PSVECSquareMag(void);
 extern void PSVECCrossProduct(void);
 extern void rand(void);
 extern void std_atan2(void);
-extern void fn_8068B100(void);
+extern void math_u64DivMod(void);
 
 /* External data declarations */
 
@@ -747,7 +747,7 @@ lbl_fn_80350BF0_00000A28:
     lis r7, 0x8000
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_80350BF0_00000A60
     lwz r0, 0x17f0(r31)
@@ -936,7 +936,7 @@ lbl_fn_80350F64_00000C88:
     fmadds f1, f3, f3, f0
     stfs f4, 0x9c(r1)
     stfs f7, 0xa0(r1)
-    bl fn_8068B100
+    bl math_u64DivMod
     lfs f4, 0x88(r1)
     frsp f30, f1
     lfs f0, 0x94(r1)
@@ -952,7 +952,7 @@ lbl_fn_80350F64_00000C88:
     fmadds f1, f5, f5, f0
     stfs f3, 0xa8(r1)
     stfs f6, 0xac(r1)
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f0, f1
     fcmpo cr0, f30, f0
     bge lbl_fn_80350F64_00000D54

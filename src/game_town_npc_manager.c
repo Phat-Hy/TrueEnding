@@ -12,7 +12,7 @@ extern void _savegpr_17(void);
 extern void _savegpr_22(void);
 extern void _savegpr_24(void);
 extern void _savegpr_27(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void fn_80050A1C(void);
 extern void fn_8005361C(void);
 extern void fn_80153B44(void);
@@ -419,7 +419,7 @@ lbl_fn_803CB044_00000480:
     addi r6, r1, 0x38
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_803CB044_000004D4
     li r25, 0x1

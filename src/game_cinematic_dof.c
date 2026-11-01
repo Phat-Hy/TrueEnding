@@ -15,7 +15,7 @@ extern void fn_8000DD0C(void);
 extern void fn_8003E4A4(void);
 extern void fn_8004203C(void);
 extern void fn_8004212C(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void fn_80057A64(void);
 extern void fn_80057A68(void);
 extern void talk_parseQuotedString(void);
@@ -26,7 +26,7 @@ extern void mem_free(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void fn_800897D8(void);
 extern void fn_8009373C(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -277,7 +277,7 @@ asm void fn_803383E4(void)
     stfs f4, 0x14(r1)
     stfs f3, 0x18(r1)
     stfs f0, 0x1c(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     bne lbl_fn_803383E4_00000160
     lfs f2, 0x530(r30)
@@ -327,7 +327,7 @@ asm void fn_80338568(void)
     cmpwi r3, 0x0
     beq lbl_fn_80338568_000001D8
     addi r3, r3, 0x10
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0x156c(r29)
     mr r30, r3
     b lbl_fn_80338568_000001DC

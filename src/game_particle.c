@@ -6,7 +6,7 @@ extern void __files(void);
 extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
-extern void fn_8006F72C(void);
+extern void str_assignBuffer(void);
 extern void fn_800DBF68(void);
 extern void fn_800E2778(void);
 extern void printf(void);
@@ -140,7 +140,7 @@ lbl_fn_800E0908_0000010C:
     stb r4, 0xc(r1)
     li r4, 0x0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r0, 0x34(r1)
     lwz r31, 0x2c(r1)
     lwz r30, 0x28(r1)

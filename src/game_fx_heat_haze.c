@@ -19,7 +19,7 @@ extern void PSVECNormalize(void);
 extern void PSVECMag(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
-extern void fn_8068B100(void);
+extern void math_u64DivMod(void);
 
 /* External data declarations */
 extern u8 lbl_807452F0[];
@@ -1695,7 +1695,7 @@ lbl_fn_80292C9C_000017F4:
     stfs f4, 0x8(r1)
     fmadds f1, f4, f4, f0
     stfs f2, 0xc(r1)
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f0, f1
     fcmpo cr0, f0, f31
     bge lbl_fn_80292C9C_0000184C
@@ -1791,7 +1791,7 @@ lbl_fn_80292DB4_00001948:
     stfs f6, 0xd4(r1)
     fmadds f1, f6, f6, f0
     stfs f3, 0xd8(r1)
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f0, f1
     fcmpo cr0, f0, f30
     ble lbl_fn_80292DB4_000019A0

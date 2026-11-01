@@ -12,9 +12,9 @@ extern void _savegpr_24(void);
 extern void _savegpr_27(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
-extern void fn_8005B6E8(void);
+extern void talk_setSpeakerName(void);
 extern void fn_8006F2F0(void);
-extern void fn_800A55AC(void);
+extern void msg_getMessageString(void);
 extern void ref_releaseHandle(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
@@ -534,13 +534,13 @@ asm void fn_80580B54(void)
     stw r30, 0x18(r1)
     lwz r30, lbl_8087EF70
     mr r3, r30
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     bne lbl_fn_80580B54_00000624
     mr r3, r30
     li r4, 0x0
     li r5, 0x1a
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     beq lbl_fn_80580B54_00000674
 lbl_fn_80580B54_00000624:
@@ -569,13 +569,13 @@ lbl_fn_80580B54_00000674:
     mr r3, r30
     li r4, 0x0
     li r5, 0x1
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     bne lbl_fn_80580B54_000006A4
     mr r3, r30
     li r4, 0x0
     li r5, 0x19
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     beq lbl_fn_80580B54_000006F4
 lbl_fn_80580B54_000006A4:
@@ -604,13 +604,13 @@ lbl_fn_80580B54_000006F4:
     mr r3, r30
     li r4, 0x0
     li r5, 0x2
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     bne lbl_fn_80580B54_00000724
     mr r3, r30
     li r4, 0x0
     li r5, 0x17
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     beq lbl_fn_80580B54_00000774
 lbl_fn_80580B54_00000724:
@@ -639,13 +639,13 @@ lbl_fn_80580B54_00000774:
     mr r3, r30
     li r4, 0x0
     li r5, 0x3
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     bne lbl_fn_80580B54_000007A4
     mr r3, r30
     li r4, 0x0
     li r5, 0x18
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     beq lbl_fn_80580B54_000007F0
 lbl_fn_80580B54_000007A4:
@@ -1653,7 +1653,7 @@ asm void fn_80581A58(void)
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x6c(r1)
     la r4, lbl_8087D720
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
     stw r24, 0x8(r1)
     addi r3, r1, 0x10
     li r4, 0x0

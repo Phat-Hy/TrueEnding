@@ -12,14 +12,14 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
-extern void fn_8005B6E8(void);
+extern void talk_setSpeakerName(void);
 extern void fn_8006AFF8(void);
 extern void mem_free(void);
 extern void route_createSegment(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void fn_800897D8(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
@@ -263,7 +263,7 @@ asm void fn_80281F88(void)
     lfs f0, 0x530(r30)
     fadds f0, f3, f0
     stfs f0, 0xac(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     mr r28, r3
     beq lbl_fn_80281F88_000001E4
@@ -318,7 +318,7 @@ lbl_fn_80281F88_000001E4:
     lfs f0, 0x530(r30)
     fadds f0, f3, f0
     stfs f0, 0xac(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_80281F88_000002B8
     lwz r4, 0x148(r1)
@@ -1119,7 +1119,7 @@ asm void fn_80282AE8(void)
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x44(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
 lbl_fn_80282AE8_00000E48:
     addi r3, r1, 0x44
     bl talk_parseQuotedString
@@ -1418,7 +1418,7 @@ lbl_fn_80283004_0000118C:
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x28(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
     lis r4, lbl_80745100@ha
     lis r3, __files@ha
     lfs f31, lbl_80883A04
@@ -1839,7 +1839,7 @@ lbl_fn_80283004_00001848:
     cmpwi r3, 0x0
     beq lbl_fn_80283004_00001894
     addi r3, r3, 0x10
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0x15d4(r18)
     b lbl_fn_80283004_00001898
 lbl_fn_80283004_00001894:

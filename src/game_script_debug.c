@@ -9,7 +9,7 @@ extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
-extern void fn_8005B6E8(void);
+extern void talk_setSpeakerName(void);
 extern void fn_8006AFF8(void);
 extern void mem_alloc(void);
 extern void fn_800897D8(void);
@@ -52,7 +52,7 @@ extern void fn_80178208(void);
 extern void fn_80179AD0(void);
 extern void fn_801CCD00(void);
 extern void fn_8020A81C(void);
-extern void fn_80219558(void);
+extern void task_mapIdToQueue(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_constructor(void);
@@ -386,7 +386,7 @@ asm void fn_80250A24(void)
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x44(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
 lbl_fn_80250A24_000003AC:
     addi r3, r1, 0x44
     bl talk_parseQuotedString
@@ -671,7 +671,7 @@ lbl_fn_80250ECC_00000690:
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x8(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
     lis r29, lbl_80743AF4@ha
     addi r29, r29, lbl_80743AF4@l
 lbl_fn_80250ECC_000007B4:
@@ -801,7 +801,7 @@ lbl_fn_80250ECC_00000938:
 lbl_fn_80250ECC_00000968:
     lwz r3, 0x1504(r30)
     lwz r3, 0x50(r3)
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmpwi r3, 0x1
     beq lbl_fn_80250ECC_000009A8
     cmpwi r3, 0x2
@@ -925,7 +925,7 @@ asm void fn_80251344(void)
     bl world_setGlobalFlag
     lwz r3, 0x1504(r29)
     lwz r3, 0x50(r3)
-    bl fn_80219558
+    bl task_mapIdToQueue
     subi r0, r3, 0x2
     cmplwi r0, 0x1
     ble lbl_fn_80251344_00000B64

@@ -10,11 +10,11 @@ extern void vec3_copy(void);
 extern void fn_80011034(void);
 extern void fn_8003E4A4(void);
 extern void fn_8004212C(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void fn_80057A64(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
-extern void fn_8005B6E8(void);
+extern void talk_setSpeakerName(void);
 extern void fn_8006AFF8(void);
 extern void fn_8006CA80(void);
 extern void mem_free(void);
@@ -22,7 +22,7 @@ extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
 extern void fn_80087E9C(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void fn_800897D8(void);
 extern void fn_8008A76C(void);
 extern void atn_Model_findBoneIndex(void);
@@ -1482,7 +1482,7 @@ asm void fn_8031B6E0(void)
     cmpwi r3, 0x0
     beq lbl_fn_8031B6E0_00001330
     addi r3, r3, 0x10
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0x15bc(r31)
     mr r29, r3
     b lbl_fn_8031B6E0_00001334
@@ -1568,7 +1568,7 @@ lbl_fn_8031B6E0_00001334:
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x8(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
 lbl_fn_8031B6E0_00001474:
     addi r3, r1, 0x8
     bl talk_parseQuotedString
@@ -2310,7 +2310,7 @@ lbl_fn_8031B9B4_00001ED4:
     stw r0, 0x2e8(r1)
     stw r0, 0x2ec(r1)
     stw r0, 0x2f0(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_8031B9B4_00001F78
     addi r4, r1, 0x2c0

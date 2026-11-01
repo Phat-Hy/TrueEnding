@@ -18,7 +18,7 @@ extern void mem_free(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void route_createSegment(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void fn_800897D8(void);
 extern void fn_8008BBD8(void);
 extern void atn_Model_findBoneIndex(void);
@@ -34,7 +34,7 @@ extern void fn_800ED4D8(void);
 extern void fn_800ED4E0(void);
 extern void fn_800EDFE8(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800FAB80(void);
+extern void clip_calculateFrustum(void);
 extern void fn_80108F38(void);
 extern void boss_updatePhaseState(void);
 extern void fn_80145334(void);
@@ -371,7 +371,7 @@ asm void fn_802B9BC8(void)
     beq lbl_fn_802B9BC8_00000390
     mr r3, r31
     addi r4, r1, 0x8
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0x1508(r30)
     mr r4, r3
     b lbl_fn_802B9BC8_00000394
@@ -1505,7 +1505,7 @@ asm void fn_802BABCC(void)
     cmpwi r3, 0x0
     beq lbl_fn_802BABCC_000013B4
     addi r3, r3, 0x10
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0x1928(r31)
     b lbl_fn_802BABCC_000013B8
 lbl_fn_802BABCC_000013B4:
@@ -1943,7 +1943,7 @@ asm void fn_802BB104(void)
     addi r8, r31, 0x534
     li r9, 0x0
     li r10, 0x1e
-    bl fn_800FAB80
+    bl clip_calculateFrustum
     stw r28, 0x1914(r31)
     b lbl_fn_802BB104_00001AA8
 lbl_fn_802BB104_000019F0:

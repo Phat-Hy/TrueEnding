@@ -22,10 +22,10 @@ extern void fn_800A4BE4(void);
 extern void fn_800A4E08(void);
 extern void fn_800A4F0C(void);
 extern void msg_getMessageById(void);
-extern void fn_800A55AC(void);
+extern void msg_getMessageString(void);
 extern void fn_800A55D4(void);
 extern void fn_800C16B4(void);
-extern void fn_800C31F4(void);
+extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB480(void);
 extern void fn_800CB538(void);
@@ -123,13 +123,13 @@ asm void fn_80533A2C(void)
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x0
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     bne lbl_fn_80533A2C_00000060
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x1a
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     beq lbl_fn_80533A2C_00000068
 lbl_fn_80533A2C_00000060:
@@ -139,13 +139,13 @@ lbl_fn_80533A2C_00000068:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x1
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     bne lbl_fn_80533A2C_00000098
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x19
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     beq lbl_fn_80533A2C_00000120
 lbl_fn_80533A2C_00000098:
@@ -157,13 +157,13 @@ lbl_fn_80533A2C_000000A0:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x2
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     bne lbl_fn_80533A2C_000000D8
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x17
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     beq lbl_fn_80533A2C_000000E0
 lbl_fn_80533A2C_000000D8:
@@ -173,13 +173,13 @@ lbl_fn_80533A2C_000000E0:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x3
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     bne lbl_fn_80533A2C_00000110
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x18
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     beq lbl_fn_80533A2C_00000120
 lbl_fn_80533A2C_00000110:
@@ -211,7 +211,7 @@ lbl_fn_80533A2C_00000154:
     lwz r4, 0x8(r4)
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -694,7 +694,7 @@ lbl_spectateCamera_update_00000810:
     lfs f1, lbl_80887BB8
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x3c
     li r4, -0x1
     bl ref_releaseHandle
@@ -1291,7 +1291,7 @@ lbl_spectateCamera_update_00001194:
     lfs f1, lbl_80887BB8
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x38
     li r4, -0x1
     bl ref_releaseHandle
@@ -1436,7 +1436,7 @@ lbl_spectateCamera_update_00001378:
     lfs f1, lbl_80887BB8
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x34
     li r4, -0x1
     bl ref_releaseHandle
@@ -1451,7 +1451,7 @@ lbl_spectateCamera_update_000013D8:
     addi r3, r1, 0x30
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x30
     li r4, -0x1
     bl ref_releaseHandle
@@ -1477,7 +1477,7 @@ lbl_spectateCamera_update_00001438:
     addi r3, r1, 0x2c
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x2c
     li r4, -0x1
     bl ref_releaseHandle
@@ -1790,7 +1790,7 @@ lbl_spectateCamera_update_000018D0:
     lfs f1, lbl_80887BB8
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x28
     li r4, -0x1
     bl ref_releaseHandle
@@ -1811,7 +1811,7 @@ lbl_spectateCamera_update_00001904:
     addi r3, r1, 0x24
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x24
     li r4, -0x1
     bl ref_releaseHandle
@@ -1918,7 +1918,7 @@ lbl_spectateCamera_update_00001A58:
     lfs f1, lbl_80887BB8
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x20
     li r4, -0x1
     bl ref_releaseHandle
@@ -1939,7 +1939,7 @@ lbl_spectateCamera_update_00001AE8:
     addi r3, r1, 0x1c
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x1c
     li r4, -0x1
     bl ref_releaseHandle
@@ -2275,7 +2275,7 @@ lbl_spectateCamera_update_00001FB4:
     lfs f1, lbl_80887BB8
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x18
     li r4, -0x1
     bl ref_releaseHandle
@@ -2326,7 +2326,7 @@ lbl_spectateCamera_update_00002088:
     lfs f1, lbl_80887BB8
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x14
     li r4, -0x1
     bl ref_releaseHandle
@@ -2341,7 +2341,7 @@ lbl_spectateCamera_update_000020B0:
     addi r3, r1, 0x10
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle

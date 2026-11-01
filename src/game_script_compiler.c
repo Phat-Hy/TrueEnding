@@ -10,13 +10,13 @@ extern void actor_dispatchMessage(void);
 extern void fn_80018D5C(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
-extern void fn_8005B6E8(void);
+extern void talk_setSpeakerName(void);
 extern void fn_8006AFF8(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
 extern void fn_80088FAC(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_applyWeights(void);
@@ -34,7 +34,7 @@ extern void dialog_renderWindow(void);
 extern void fn_8014C540(void);
 extern void actor_setState(void);
 extern void fn_80179D44(void);
-extern void fn_80219558(void);
+extern void task_mapIdToQueue(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_unload(void);
@@ -412,7 +412,7 @@ asm void fn_80254808(void)
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x8(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
 lbl_fn_80254808_000003A8:
     addi r3, r1, 0x8
     bl talk_parseQuotedString
@@ -659,7 +659,7 @@ asm void fn_80254B98(void)
     cmpwi r3, 0x0
     beq lbl_fn_80254B98_000006F4
     lwz r3, 0x50(r3)
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmpwi r3, 0x0
     bne lbl_fn_80254B98_000006F4
     li r3, 0x1
@@ -745,7 +745,7 @@ lbl_fn_80254C9C_000007F4:
     cmpwi r3, 0x0
     beq lbl_fn_80254C9C_000009FC
     lwz r3, 0x50(r3)
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmpwi r3, 0x0
     bne lbl_fn_80254C9C_000009FC
 lbl_fn_80254C9C_0000081C:
@@ -1808,7 +1808,7 @@ asm void fn_802558B0(void)
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x94(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
 lbl_fn_802558B0_0000172C:
     addi r3, r1, 0x94
     bl talk_parseQuotedString
@@ -1879,7 +1879,7 @@ lbl_fn_802558B0_000017F0:
     cmpwi r3, 0x0
     beq lbl_fn_802558B0_00001838
     addi r3, r3, 0x10
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0x16b8(r30)
     mr r26, r3
     b lbl_fn_802558B0_0000183C

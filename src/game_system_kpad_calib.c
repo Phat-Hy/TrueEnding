@@ -7,7 +7,7 @@ extern void _restgpr_26(void);
 extern void _savegpr_14(void);
 extern void _savegpr_26(void);
 extern void fn_8000D430(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void fn_800697D8(void);
 extern void fn_8006A250(void);
 extern void fn_8006A900(void);
@@ -28,7 +28,7 @@ extern void fn_80179D44(void);
 extern void fn_801E97DC(void);
 extern void fn_80216544(void);
 extern void fn_80219160(void);
-extern void fn_80219558(void);
+extern void task_mapIdToQueue(void);
 extern void fn_8021F09C(void);
 extern void world_updateMapTransition(void);
 extern void fn_803701E0(void);
@@ -859,7 +859,7 @@ lbl_world_startTransitionFade_00000A14:
     cmpwi r30, 0x0
     beq lbl_world_startTransitionFade_00000A80
     lwz r3, 0x50(r30)
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmpwi r3, 0x0
     bne lbl_world_startTransitionFade_00000A80
     lwz r0, 0x7e0(r30)
@@ -1987,7 +1987,7 @@ lbl_fn_80371790_000019B8:
     stfs f0, 0x50(r1)
     stfs f7, 0x54(r1)
     stfs f8, 0x58(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_80371790_00001AAC
     lfs f0, 0x78(r1)
@@ -2012,7 +2012,7 @@ lbl_fn_80371790_00001AAC:
     li r19, 0x0
     cmpwi r3, 0x1
     bne lbl_fn_80371790_00001B40
-    bl fn_80219558
+    bl task_mapIdToQueue
     mr r18, r3
     li r17, 0x1
     b lbl_fn_80371790_00001B34
@@ -2052,7 +2052,7 @@ lbl_fn_80371790_00001B34:
     ble lbl_fn_80371790_00001ACC
 lbl_fn_80371790_00001B40:
     lwz r3, 0x50(r20)
-    bl fn_80219558
+    bl task_mapIdToQueue
     lwz r0, 0x7c0(r1)
     li r17, 0x0
     add r4, r0, r31

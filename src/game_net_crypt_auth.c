@@ -11,8 +11,8 @@ extern void dtor_80084684(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void msg_getMessageById(void);
-extern void fn_800A55AC(void);
-extern void fn_800C31F4(void);
+extern void msg_getMessageString(void);
+extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
@@ -563,7 +563,7 @@ lbl_fn_804B67E4_00000698:
     addi r4, r4, 0x1fd
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0xc
     li r4, -0x1
     bl ref_releaseHandle
@@ -576,7 +576,7 @@ lbl_fn_804B67E4_000006D0:
     addi r4, r4, 0x20a
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -1906,13 +1906,13 @@ lbl_fn_804B79F4_00001904:
     li r4, 0x0
     li r5, 0x1a
     mr r3, r30
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     bne lbl_fn_804B79F4_00001938
     mr r3, r30
     li r4, 0x0
     li r5, 0x0
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     beq lbl_fn_804B79F4_00001984
 lbl_fn_804B79F4_00001938:
@@ -1940,13 +1940,13 @@ lbl_fn_804B79F4_00001984:
     mr r3, r30
     li r4, 0x0
     li r5, 0x17
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     bne lbl_fn_804B79F4_000019B4
     mr r3, r30
     li r4, 0x0
     li r5, 0x2
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     beq lbl_fn_804B79F4_00001A1C
 lbl_fn_804B79F4_000019B4:
@@ -1983,13 +1983,13 @@ lbl_fn_804B79F4_00001A1C:
     mr r3, r30
     li r4, 0x0
     li r5, 0x19
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     bne lbl_fn_804B79F4_00001A4C
     mr r3, r30
     li r4, 0x0
     li r5, 0x1
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     beq lbl_fn_804B79F4_00001AA4
 lbl_fn_804B79F4_00001A4C:
@@ -2021,13 +2021,13 @@ lbl_fn_804B79F4_00001AA4:
     mr r3, r30
     li r4, 0x0
     li r5, 0x18
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     bne lbl_fn_804B79F4_00001AD4
     mr r3, r30
     li r4, 0x0
     li r5, 0x3
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     beq lbl_fn_804B79F4_00001B70
 lbl_fn_804B79F4_00001AD4:

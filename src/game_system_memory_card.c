@@ -7,7 +7,7 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
-extern void fn_8005B6E8(void);
+extern void talk_setSpeakerName(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void atn_Task_setActive(void);
 extern void str_parseInt(void);
@@ -15,7 +15,7 @@ extern void str_skipWhitespace(void);
 extern void fn_800E854C(void);
 extern void fn_800EE4D8(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800FAB80(void);
+extern void clip_calculateFrustum(void);
 extern void fn_800FBA9C(void);
 extern void fn_8013322C(void);
 extern void boss_updatePhaseState(void);
@@ -620,7 +620,7 @@ asm void fn_80355DD8(void)
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x1c(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
     lis r29, lbl_8074B0A4@ha
     addi r29, r29, lbl_8074B0A4@l
 lbl_fn_80355DD8_00000714:
@@ -1234,7 +1234,7 @@ lbl_fn_803563E4_00000EF8:
     addi r8, r31, 0x534
     li r9, 0x0
     li r10, 0x1e
-    bl fn_800FAB80
+    bl clip_calculateFrustum
 lbl_fn_803563E4_00000FE8:
     li r0, -0x1
     stw r0, 0x162c(r31)

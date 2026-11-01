@@ -23,7 +23,7 @@ extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_80097E80(void);
 extern void fn_80098698(void);
-extern void fn_800C31F4(void);
+extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void fn_80106728(void);
 extern void fn_8010743C(void);
@@ -40,7 +40,7 @@ extern void fn_80175B18(void);
 extern void fn_80176E30(void);
 extern void fn_80179D44(void);
 extern void fn_802185FC(void);
-extern void fn_80219558(void);
+extern void task_mapIdToQueue(void);
 extern void kpad_getClampData(void);
 extern void fn_80376150(void);
 extern void fn_80418318(void);
@@ -3374,7 +3374,7 @@ lbl_fn_80145334_00002ECC:
     cmpwi r0, 0x0
     beq lbl_fn_80145334_00002F64
     lwz r3, 0x50(r26)
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmpwi r3, 0x0
     bne lbl_fn_80145334_00002F64
     lwz r3, lbl_8087F430
@@ -3634,7 +3634,7 @@ lbl_fn_80145334_00003274:
     lwz r4, 0x1c(r4)
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle

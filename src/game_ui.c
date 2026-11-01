@@ -15,7 +15,7 @@ extern void _savegpr_25(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_8003DEE0(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void mem_alloc(void);
 extern void fn_800EFC64(void);
 extern void fn_800FB1BC(void);
@@ -3571,7 +3571,7 @@ lbl_fn_800413EC_00002EEC:
     li r4, 0x0
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_800413EC_00003024
     mr r3, r27

@@ -6,7 +6,7 @@ extern void __files(void);
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void mem_free(void);
 extern void fn_8008BBD8(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -708,7 +708,7 @@ asm void fn_801883E8(void)
     li r4, 0x0
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     bne lbl_fn_801883E8_00000B08
     lis r8, lbl_807C7030@ha

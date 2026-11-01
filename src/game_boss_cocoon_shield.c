@@ -26,8 +26,8 @@ extern void fn_8006C300(void);
 extern void fn_8006C3F0(void);
 extern void fn_8006D008(void);
 extern void fn_8006F420(void);
-extern void fn_8006F72C(void);
-extern void fn_800827E0(void);
+extern void str_assignBuffer(void);
+extern void dungeon_initGlobalContext(void);
 extern void fn_800839EC(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
@@ -289,7 +289,7 @@ lbl_fn_8046B798_0000027C:
     addi r8, r1, 0x18
     add r7, r24, r0
     li r4, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     addi r3, r1, 0x130
     bl talk_parseDialogue
     stw r30, 0x20(r1)
@@ -310,7 +310,7 @@ lbl_fn_8046B798_0000027C:
     addi r8, r1, 0x10
     li r4, 0x0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r0, 0x48(r28)
     srwi. r4, r0, 31
     bne lbl_fn_8046B798_00000330
@@ -350,7 +350,7 @@ lbl_fn_8046B798_0000036C:
     add r7, r6, r0
     addi r8, r1, 0x8
     li r4, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
 lbl_fn_8046B798_0000038C:
     lwz r0, 0x20(r1)
     addi r27, r27, 0x54
@@ -949,7 +949,7 @@ asm void atn_Arc_loadEntry(void)
     cmpwi r0, 0x0
     li r28, 0x0
     bne lbl_atn_Arc_loadEntry_00000BC8
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     lis r7, lbl_80755608@ha
     mr r4, r29
     addi r7, r7, lbl_80755608@l
@@ -1320,7 +1320,7 @@ lbl_atn_Arc_decompressChunk_000010B0:
     or r0, r0, r3
     srwi r0, r0, 31
     stw r0, 0x44(r30)
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     mr r4, r18
     mr r7, r21
     mr r8, r21

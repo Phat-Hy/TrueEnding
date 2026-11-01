@@ -6,7 +6,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800F8C6C(void);
-extern void fn_800FAB80(void);
+extern void clip_calculateFrustum(void);
 extern void fn_80126214(void);
 extern void fn_8013CB68(void);
 extern void fn_80144710(void);
@@ -1005,7 +1005,7 @@ lbl_fn_80358A5C_00000D78:
     lwz r3, lbl_8087F048
     lwz r5, 0x1564(r31)
     lwz r6, 0x590(r31)
-    bl fn_800FAB80
+    bl clip_calculateFrustum
     b lbl_fn_80358A5C_00001EE8
     lwz r0, 0x14bc(r3)
     cmpwi r0, 0x0

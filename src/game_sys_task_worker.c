@@ -9,7 +9,7 @@ extern void fn_80049E54(void);
 extern void fn_8004A03C(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
-extern void fn_8005B6E8(void);
+extern void talk_setSpeakerName(void);
 extern void fn_8006B174(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
@@ -103,7 +103,7 @@ void fn_8021921C(void);
 void fn_80219344(void);
 void fn_8021946C(void);
 void fn_80219544(void);
-void fn_80219558(void);
+void task_mapIdToQueue(void);
 void fn_802196D0(void);
 
 asm void fn_80217E18(void)
@@ -214,7 +214,7 @@ lbl_fn_80217E18_000000C8:
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x10(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
 lbl_fn_80217E18_000001A0:
     addi r3, r1, 0x10
     bl talk_parseQuotedString
@@ -1011,7 +1011,7 @@ asm void fn_802189EC(void)
     addi r4, r4, lbl_807772B0@l
     stw r4, 0xc(r1)
     la r4, lbl_8087D720
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
     lis r31, lbl_807423B8@ha
     li r3, 0x6ac
     addi r31, r31, lbl_807423B8@l
@@ -1187,7 +1187,7 @@ lbl_fn_80218BD4_00000DEC:
     addi r4, r4, lbl_807772B0@l
     stw r4, 0xc(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
     addi r29, r22, lbl_80742404@l
     li r25, 0x1
     b lbl_fn_80218BD4_000011D0
@@ -1452,7 +1452,7 @@ asm void fn_80219074(void)
     stw r31, 0xc(r1)
     mr r31, r3
     lwz r3, 0x50(r3)
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmplwi r3, 0x6
     lwz r9, 0x874(r31)
     ble lbl_fn_80219074_0000128C
@@ -1588,7 +1588,7 @@ asm void fn_8021921C(void)
     b lbl_fn_8021921C_00001514
 lbl_fn_8021921C_00001430:
     lwz r3, 0x50(r3)
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmplwi r3, 0x6
     lwz r9, 0x874(r30)
     ble lbl_fn_8021921C_0000144C
@@ -1677,7 +1677,7 @@ asm void fn_80219344(void)
     b lbl_fn_80219344_0000163C
 lbl_fn_80219344_00001558:
     lwz r3, 0x50(r3)
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmplwi r3, 0x6
     lwz r9, 0x874(r30)
     ble lbl_fn_80219344_00001574
@@ -1827,7 +1827,7 @@ asm void fn_80219544(void)
     blr
 }
 
-asm void fn_80219558(void)
+asm void task_mapIdToQueue(void)
 {
     nofralloc
     lis r4, lbl_80742418@ha
@@ -1835,108 +1835,108 @@ asm void fn_80219558(void)
     li r5, 0x0
     addi r4, r4, lbl_80742418@l
     mtctr r0
-lbl_fn_80219558_00001754:
+lbl_task_mapIdToQueue_00001754:
     lwz r0, 0x0(r4)
     cmpw r3, r0
-    bne lbl_fn_80219558_00001788
+    bne lbl_task_mapIdToQueue_00001788
     subi r0, r5, 0xf
     cmplwi r0, 0x2
-    bgt lbl_fn_80219558_00001774
+    bgt lbl_task_mapIdToQueue_00001774
     li r3, 0x0
     blr
-lbl_fn_80219558_00001774:
+lbl_task_mapIdToQueue_00001774:
     cmpwi r5, 0xd
     li r3, 0x2
     beqlr
     mr r3, r5
     blr
-lbl_fn_80219558_00001788:
+lbl_task_mapIdToQueue_00001788:
     addi r4, r4, 0x4
     addi r5, r5, 0x1
-    bdnz lbl_fn_80219558_00001754
+    bdnz lbl_task_mapIdToQueue_00001754
     subis r0, r3, 0x1
     cmplwi r0, 0x870e
-    bne lbl_fn_80219558_000017A8
+    bne lbl_task_mapIdToQueue_000017A8
     li r3, 0x1
     blr
-lbl_fn_80219558_000017A8:
+lbl_task_mapIdToQueue_000017A8:
     subis r0, r3, 0x3
     cmplwi r0, 0xf7a
-    bne lbl_fn_80219558_000017BC
+    bne lbl_task_mapIdToQueue_000017BC
     li r3, 0x9
     blr
-lbl_fn_80219558_000017BC:
+lbl_task_mapIdToQueue_000017BC:
     lis r4, lbl_80742460@ha
     li r0, 0x2
     addi r4, r4, lbl_80742460@l
     li r5, 0x0
     mtctr r0
-lbl_fn_80219558_000017D0:
+lbl_task_mapIdToQueue_000017D0:
     lwz r0, 0x0(r4)
     cmpw r3, r0
-    bne lbl_fn_80219558_000017E4
+    bne lbl_task_mapIdToQueue_000017E4
     mr r3, r5
     blr
-lbl_fn_80219558_000017E4:
+lbl_task_mapIdToQueue_000017E4:
     lwz r0, 0x4(r4)
     addi r5, r5, 0x1
     cmpw r3, r0
-    bne lbl_fn_80219558_000017FC
+    bne lbl_task_mapIdToQueue_000017FC
     mr r3, r5
     blr
-lbl_fn_80219558_000017FC:
+lbl_task_mapIdToQueue_000017FC:
     lwz r0, 0x8(r4)
     addi r5, r5, 0x1
     cmpw r3, r0
-    bne lbl_fn_80219558_00001814
+    bne lbl_task_mapIdToQueue_00001814
     mr r3, r5
     blr
-lbl_fn_80219558_00001814:
+lbl_task_mapIdToQueue_00001814:
     lwz r0, 0xc(r4)
     addi r5, r5, 0x1
     cmpw r3, r0
-    bne lbl_fn_80219558_0000182C
+    bne lbl_task_mapIdToQueue_0000182C
     mr r3, r5
     blr
-lbl_fn_80219558_0000182C:
+lbl_task_mapIdToQueue_0000182C:
     lwz r0, 0x10(r4)
     addi r5, r5, 0x1
     cmpw r3, r0
-    bne lbl_fn_80219558_00001844
+    bne lbl_task_mapIdToQueue_00001844
     mr r3, r5
     blr
-lbl_fn_80219558_00001844:
+lbl_task_mapIdToQueue_00001844:
     lwz r0, 0x14(r4)
     addi r5, r5, 0x1
     cmpw r3, r0
-    bne lbl_fn_80219558_0000185C
+    bne lbl_task_mapIdToQueue_0000185C
     mr r3, r5
     blr
-lbl_fn_80219558_0000185C:
+lbl_task_mapIdToQueue_0000185C:
     lwz r0, 0x18(r4)
     addi r5, r5, 0x1
     cmpw r3, r0
-    bne lbl_fn_80219558_00001874
+    bne lbl_task_mapIdToQueue_00001874
     mr r3, r5
     blr
-lbl_fn_80219558_00001874:
+lbl_task_mapIdToQueue_00001874:
     lwz r0, 0x1c(r4)
     addi r5, r5, 0x1
     cmpw r3, r0
-    bne lbl_fn_80219558_0000188C
+    bne lbl_task_mapIdToQueue_0000188C
     mr r3, r5
     blr
-lbl_fn_80219558_0000188C:
+lbl_task_mapIdToQueue_0000188C:
     lwz r0, 0x20(r4)
     addi r5, r5, 0x1
     cmpw r3, r0
-    bne lbl_fn_80219558_000018A4
+    bne lbl_task_mapIdToQueue_000018A4
     mr r3, r5
     blr
-lbl_fn_80219558_000018A4:
+lbl_task_mapIdToQueue_000018A4:
     addi r4, r4, 0x24
     addi r5, r5, 0x1
-    bdnz lbl_fn_80219558_000017D0
+    bdnz lbl_task_mapIdToQueue_000017D0
     li r3, -0x1
     blr
 }
@@ -1969,7 +1969,7 @@ asm void fn_802196D0(void)
     addi r4, r4, lbl_807772B0@l
     stw r4, 0xc(r1)
     la r4, lbl_8087D720
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
     lwz r0, lbl_8087F2C0
     cmpwi r0, 0x0
     bne lbl_fn_802196D0_00001B40

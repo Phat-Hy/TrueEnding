@@ -12,7 +12,7 @@ extern void fn_80011034(void);
 extern void vec3_sub(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
-extern void fn_8005B6E8(void);
+extern void talk_setSpeakerName(void);
 extern void fn_8009373C(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void skin_applyWeights(void);
@@ -240,7 +240,7 @@ lbl_fn_8026580C_0000009C:
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x8(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
     lis r30, lbl_80744608@ha
     addi r30, r30, lbl_80744608@l
 lbl_fn_8026580C_00000130:

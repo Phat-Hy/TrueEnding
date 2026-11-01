@@ -9,7 +9,7 @@ extern void _savegpr_15(void);
 extern void _savegpr_24(void);
 extern void _savegpr_25(void);
 extern void dtor_80084684(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_applyWeights(void);
@@ -36,7 +36,7 @@ extern void fn_8017547C(void);
 extern void fn_801765D8(void);
 extern void fn_80176ACC(void);
 extern void fn_80178A6C(void);
-extern void fn_80219558(void);
+extern void task_mapIdToQueue(void);
 extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
@@ -1079,7 +1079,7 @@ lbl_fn_80246E48_00000D30:
     stfs f0, 0x4c(r1)
     stfs f3, 0x50(r1)
     stfs f4, 0x54(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_80246E48_00000DF8
     addi r3, r1, 0x68
@@ -1392,7 +1392,7 @@ lbl_fn_80247258_000011C8:
     stfs f3, 0x48(r1)
     stfs f2, 0x40(r1)
     stfs f0, 0x3c(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_80247258_0000126C
     psq_l f1, 0x0(r27), 0, 0
@@ -1775,7 +1775,7 @@ lbl_fn_802478C4_00001748:
     bl fn_8017547C
     lwz r3, 0x14b8(r31)
     lwz r3, 0x50(r3)
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmpwi r3, 0x2
     beq lbl_fn_802478C4_000017CC
     cmpwi r3, 0x6

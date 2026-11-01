@@ -12,7 +12,7 @@ extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
-extern void fn_8005B6E8(void);
+extern void talk_setSpeakerName(void);
 extern void fn_8006AFF8(void);
 extern void mem_free(void);
 extern void atn_Model_findBoneIndex(void);
@@ -63,7 +63,7 @@ extern void strcmp(void);
 extern void strncmp(void);
 extern void abort(void);
 extern void std_atan2(void);
-extern void fn_8068B100(void);
+extern void math_u64DivMod(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -625,7 +625,7 @@ lbl_fn_8027B748_000006F8:
     fmadds f1, f4, f4, f0
     stfs f2, 0xc(r1)
     stfs f3, 0x10(r1)
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f1, f1
     lfs f0, 0x1504(r31)
     fcmpo cr0, f1, f0
@@ -1998,7 +1998,7 @@ asm void fn_8027C990(void)
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x44(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
 lbl_fn_8027C990_00001B08:
     addi r3, r1, 0x44
     bl talk_parseQuotedString

@@ -10,11 +10,11 @@ extern void fn_80018608(void);
 extern void fn_80050A1C(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800C31F4(void);
+extern void skin_playAnimationByName(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800FAB80(void);
+extern void clip_calculateFrustum(void);
 extern void fn_800FB4B0(void);
 extern void fn_80102A40(void);
 extern void fn_80105C9C(void);
@@ -658,7 +658,7 @@ lbl_fn_801B77DC_000006E4:
     addi r4, r1, 0x20
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -834,7 +834,7 @@ lbl_fn_801B79D8_00000990:
     addi r8, r27, 0x534
     li r9, 0x0
     li r10, 0x1e
-    bl fn_800FAB80
+    bl clip_calculateFrustum
 lbl_fn_801B79D8_000009F4:
     lfs f31, 0x234(r31)
     mr r3, r31

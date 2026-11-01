@@ -47,7 +47,7 @@ extern void PSMTXScale(void);
 extern void PSMTXMultVec(void);
 extern void PSVECMag(void);
 extern void strstr(void);
-extern void fn_8068B100(void);
+extern void math_u64DivMod(void);
 extern void runtime_registerStaticObject(void);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
@@ -515,7 +515,7 @@ lbl_fn_80202E48_0000051C:
     stfs f8, 0x2c(r1)
     stfs f2, 0x20(r1)
     stfs f2, 0x10(r1)
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f0, f1
     mr r3, r29
     mr r4, r30

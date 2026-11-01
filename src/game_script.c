@@ -27,7 +27,7 @@ extern void fn_8006D680(void);
 extern void fn_80072BDC(void);
 extern void fn_80072D74(void);
 extern void fn_80072E08(void);
-extern void fn_800827E0(void);
+extern void dungeon_initGlobalContext(void);
 extern void fn_800838B8(void);
 extern void fn_800839EC(void);
 extern void mem_alloc(void);
@@ -136,7 +136,7 @@ void fn_8006F420(void);
 void fn_8006F548(void);
 void fn_8006F5E8(void);
 void fn_8006F684(void);
-void fn_8006F72C(void);
+void str_assignBuffer(void);
 void fn_8006FA4C(void);
 void fn_8006FAB0(void);
 void fn_8006FDD8(void);
@@ -632,7 +632,7 @@ lbl_fn_8006F548_00000648:
     add r7, r7, r0
     addi r8, r1, 0x8
     li r4, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     mr r3, r30
     lwz r31, 0x21c(r1)
     lwz r30, 0x218(r1)
@@ -741,7 +741,7 @@ lbl_fn_8006F684_000007DC:
     blr
 }
 
-asm void fn_8006F72C(void)
+asm void str_assignBuffer(void)
 {
     nofralloc
     stwu r1, -0x60(r1)
@@ -755,19 +755,19 @@ asm void fn_8006F72C(void)
     stw r5, 0x8(r1)
     lwz r0, 0x0(r3)
     srwi. r31, r0, 31
-    bne lbl_fn_8006F72C_00000828
+    bne lbl_str_assignBuffer_00000828
     lbz r0, 0x0(r3)
     addi r29, r3, 0x2
     li r27, 0x5
     clrlwi r28, r0, 25
-    b lbl_fn_8006F72C_00000834
-lbl_fn_8006F72C_00000828:
+    b lbl_str_assignBuffer_00000834
+lbl_str_assignBuffer_00000828:
     lwz r29, 0x8(r3)
     clrlwi r27, r0, 1
     lwz r28, 0x4(r3)
-lbl_fn_8006F72C_00000834:
+lbl_str_assignBuffer_00000834:
     cmplw r4, r28
-    ble lbl_fn_8006F72C_00000860
+    ble lbl_str_assignBuffer_00000860
     lis r4, lbl_80731538@ha
     lis r3, __files@ha
     addi r4, r4, lbl_80731538@l
@@ -777,15 +777,15 @@ lbl_fn_8006F72C_00000834:
     crclr 6
     bl printf
     bl abort
-lbl_fn_8006F72C_00000860:
+lbl_str_assignBuffer_00000860:
     lwz r0, 0x8(r1)
     subf r3, r20, r28
     stw r3, 0x14(r1)
     addi r5, r1, 0x8
     cmplw r3, r0
-    bge lbl_fn_8006F72C_0000087C
+    bge lbl_str_assignBuffer_0000087C
     addi r5, r1, 0x14
-lbl_fn_8006F72C_0000087C:
+lbl_str_assignBuffer_0000087C:
     subf r4, r21, r22
     lis r3, 0x8000
     srwi r0, r4, 31
@@ -794,12 +794,12 @@ lbl_fn_8006F72C_0000087C:
     subi r0, r3, 0x2
     srawi r25, r4, 1
     cmplw r25, r0
-    bgt lbl_fn_8006F72C_000008B0
+    bgt lbl_str_assignBuffer_000008B0
     subf r30, r26, r28
     subf r0, r25, r0
     cmplw r30, r0
-    ble lbl_fn_8006F72C_000008D4
-lbl_fn_8006F72C_000008B0:
+    ble lbl_str_assignBuffer_000008D4
+lbl_str_assignBuffer_000008B0:
     lis r4, lbl_80731538@ha
     lis r3, __files@ha
     addi r4, r4, lbl_80731538@l
@@ -809,28 +809,28 @@ lbl_fn_8006F72C_000008B0:
     crclr 6
     bl printf
     bl abort
-lbl_fn_8006F72C_000008D4:
+lbl_str_assignBuffer_000008D4:
     add r24, r25, r30
     add r0, r20, r26
     cmplw r24, r27
     subf r23, r0, r28
-    blt lbl_fn_8006F72C_000009E4
+    blt lbl_str_assignBuffer_000009E4
     addi r3, r27, 0x7
     addi r0, r24, 0x1
     clrrwi r27, r3, 3
-    b lbl_fn_8006F72C_00000904
-lbl_fn_8006F72C_000008F8:
+    b lbl_str_assignBuffer_00000904
+lbl_str_assignBuffer_000008F8:
     slwi r3, r27, 1
     addi r3, r3, 0x7
     clrrwi r27, r3, 3
-lbl_fn_8006F72C_00000904:
+lbl_str_assignBuffer_00000904:
     cmplw r27, r0
-    blt lbl_fn_8006F72C_000008F8
+    blt lbl_str_assignBuffer_000008F8
     slwi r3, r27, 1
     bl mem_free
     cmpwi r3, 0x0
     mr r30, r3
-    bne lbl_fn_8006F72C_00000940
+    bne lbl_str_assignBuffer_00000940
     lis r3, __files@ha
     lis r4, lbl_80777BF8@ha
     addi r3, r3, __files@l
@@ -839,14 +839,14 @@ lbl_fn_8006F72C_00000904:
     crclr 6
     bl printf
     bl abort
-lbl_fn_8006F72C_00000940:
+lbl_str_assignBuffer_00000940:
     cmpwi r20, 0x0
-    beq lbl_fn_8006F72C_00000958
+    beq lbl_str_assignBuffer_00000958
     mr r3, r30
     mr r4, r29
     mr r5, r20
     bl wmemcpy
-lbl_fn_8006F72C_00000958:
+lbl_str_assignBuffer_00000958:
     subf r3, r21, r22
     slwi r22, r20, 1
     srwi r0, r3, 31
@@ -857,7 +857,7 @@ lbl_fn_8006F72C_00000958:
     clrrwi r5, r0, 1
     bl memmove
     cmpwi r23, 0x0
-    beq lbl_fn_8006F72C_000009A0
+    beq lbl_str_assignBuffer_000009A0
     slwi r3, r25, 1
     slwi r4, r26, 1
     add r0, r29, r22
@@ -865,51 +865,51 @@ lbl_fn_8006F72C_00000958:
     add r3, r20, r3
     add r4, r4, r0
     bl wmemcpy
-lbl_fn_8006F72C_000009A0:
+lbl_str_assignBuffer_000009A0:
     cmpwi r31, 0x0
     slwi r0, r24, 1
     lhz r3, lbl_8087D734
     sthx r3, r30, r0
-    beq lbl_fn_8006F72C_000009C0
+    beq lbl_str_assignBuffer_000009C0
     mr r3, r29
     bl dtor_80084684
-    b lbl_fn_8006F72C_000009CC
-lbl_fn_8006F72C_000009C0:
+    b lbl_str_assignBuffer_000009CC
+lbl_str_assignBuffer_000009C0:
     lwz r0, 0x0(r19)
     oris r0, r0, 0x8000
     stw r0, 0x0(r19)
-lbl_fn_8006F72C_000009CC:
+lbl_str_assignBuffer_000009CC:
     lwz r0, 0x0(r19)
     rlwimi r0, r27, 0, 1, 31
     stw r30, 0x8(r19)
     stw r24, 0x4(r19)
     stw r0, 0x0(r19)
-    b lbl_fn_8006F72C_00000AEC
-lbl_fn_8006F72C_000009E4:
+    b lbl_str_assignBuffer_00000AEC
+lbl_str_assignBuffer_000009E4:
     cmpwi r23, 0x0
     li r4, 0x0
     stw r4, 0x18(r1)
     stw r4, 0x1c(r1)
     stw r4, 0x20(r1)
-    beq lbl_fn_8006F72C_00000A74
+    beq lbl_str_assignBuffer_00000A74
     slwi r0, r20, 1
     slwi r3, r25, 1
     add r0, r29, r0
     add r0, r3, r0
     cmplw r0, r22
-    bge lbl_fn_8006F72C_00000A74
+    bge lbl_str_assignBuffer_00000A74
     slwi r0, r28, 1
     add r0, r29, r0
     cmplw r22, r0
-    bgt lbl_fn_8006F72C_00000A74
+    bgt lbl_str_assignBuffer_00000A74
     cmpwi r4, 0x0
-    bne lbl_fn_8006F72C_00000A38
+    bne lbl_str_assignBuffer_00000A38
     lbz r0, 0x18(r1)
     clrlwi r5, r0, 25
-    b lbl_fn_8006F72C_00000A3C
-lbl_fn_8006F72C_00000A38:
+    b lbl_str_assignBuffer_00000A3C
+lbl_str_assignBuffer_00000A38:
     li r5, 0x0
-lbl_fn_8006F72C_00000A3C:
+lbl_str_assignBuffer_00000A3C:
     lbz r0, 0xc(r1)
     mr r6, r21
     stb r0, 0x10(r1)
@@ -917,17 +917,17 @@ lbl_fn_8006F72C_00000A3C:
     addi r3, r1, 0x18
     addi r8, r1, 0x10
     li r4, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r0, 0x18(r1)
     srwi. r0, r0, 31
-    beq lbl_fn_8006F72C_00000A70
+    beq lbl_str_assignBuffer_00000A70
     lwz r21, 0x20(r1)
-    b lbl_fn_8006F72C_00000A74
-lbl_fn_8006F72C_00000A70:
+    b lbl_str_assignBuffer_00000A74
+lbl_str_assignBuffer_00000A70:
     addi r21, r1, 0x1a
-lbl_fn_8006F72C_00000A74:
+lbl_str_assignBuffer_00000A74:
     cmpwi r23, 0x0
-    beq lbl_fn_8006F72C_00000A9C
+    beq lbl_str_assignBuffer_00000A9C
     slwi r0, r20, 1
     slwi r3, r25, 1
     add r4, r29, r0
@@ -936,7 +936,7 @@ lbl_fn_8006F72C_00000A74:
     add r3, r4, r3
     add r4, r4, r0
     bl wmemmove
-lbl_fn_8006F72C_00000A9C:
+lbl_str_assignBuffer_00000A9C:
     slwi r0, r20, 1
     mr r4, r21
     mr r5, r25
@@ -946,20 +946,20 @@ lbl_fn_8006F72C_00000A9C:
     slwi r0, r24, 1
     lhz r3, lbl_8087D736
     sthx r3, r29, r0
-    bne lbl_fn_8006F72C_00000AD4
+    bne lbl_str_assignBuffer_00000AD4
     lbz r0, 0x0(r19)
     rlwimi r0, r24, 0, 25, 31
     stb r0, 0x0(r19)
-    b lbl_fn_8006F72C_00000AD8
-lbl_fn_8006F72C_00000AD4:
+    b lbl_str_assignBuffer_00000AD8
+lbl_str_assignBuffer_00000AD4:
     stw r24, 0x4(r19)
-lbl_fn_8006F72C_00000AD8:
+lbl_str_assignBuffer_00000AD8:
     lwz r0, 0x18(r1)
     srwi. r0, r0, 31
-    beq lbl_fn_8006F72C_00000AEC
+    beq lbl_str_assignBuffer_00000AEC
     lwz r3, 0x20(r1)
     bl dtor_80084684
-lbl_fn_8006F72C_00000AEC:
+lbl_str_assignBuffer_00000AEC:
     mr r3, r19
     lmw r19, 0x2c(r1)
     lwz r0, 0x64(r1)
@@ -2893,7 +2893,7 @@ lbl_fn_800713D4_000026B4:
     rlwinm r3, r3, 0, 16, 27
     mullw r0, r3, r0
     slwi r28, r0, 1
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     lis r27, lbl_807317C0@ha
     lis r4, 0x8
     addi r7, r27, lbl_807317C0@l
@@ -2903,7 +2903,7 @@ lbl_fn_800713D4_000026B4:
     li r9, 0x0
     bl fn_800838B8
     stw r3, 0x54(r30)
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     addi r7, r27, lbl_807317C0@l
     mr r4, r28
     mr r8, r7
@@ -2913,7 +2913,7 @@ lbl_fn_800713D4_000026B4:
     li r10, 0x0
     bl fn_800839EC
     stw r3, 0x70(r30)
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     addi r7, r27, lbl_807317C0@l
     mr r4, r28
     mr r8, r7

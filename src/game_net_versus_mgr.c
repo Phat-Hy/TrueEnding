@@ -18,7 +18,7 @@ extern void _savegpr_25(void);
 extern void dtor_80084684(void);
 extern void mem_free(void);
 extern void msg_getMessageById(void);
-extern void fn_800A55AC(void);
+extern void msg_getMessageString(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void str_findChar(void);
@@ -444,13 +444,13 @@ lbl_fn_804B83F4_000004E4:
     lwz r30, 0x2e4(r3)
     li r5, 0x1a
     mr r3, r31
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     bne lbl_fn_804B83F4_00000528
     mr r3, r31
     li r4, 0x0
     li r5, 0x0
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     beq lbl_fn_804B83F4_00000584
 lbl_fn_804B83F4_00000528:
@@ -482,13 +482,13 @@ lbl_fn_804B83F4_00000584:
     mr r3, r31
     li r4, 0x0
     li r5, 0x19
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     bne lbl_fn_804B83F4_000005B4
     mr r3, r31
     li r4, 0x0
     li r5, 0x1
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     beq lbl_fn_804B83F4_00000610
 lbl_fn_804B83F4_000005B4:
@@ -520,13 +520,13 @@ lbl_fn_804B83F4_00000610:
     mr r3, r31
     li r4, 0x0
     li r5, 0x17
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     bne lbl_fn_804B83F4_00000640
     mr r3, r31
     li r4, 0x0
     li r5, 0x2
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     beq lbl_fn_804B83F4_00000650
 lbl_fn_804B83F4_00000640:
@@ -538,13 +538,13 @@ lbl_fn_804B83F4_00000650:
     mr r3, r31
     li r4, 0x0
     li r5, 0x18
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     bne lbl_fn_804B83F4_00000680
     mr r3, r31
     li r4, 0x0
     li r5, 0x3
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     beq lbl_fn_804B83F4_00000690
 lbl_fn_804B83F4_00000680:

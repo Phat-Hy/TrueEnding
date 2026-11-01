@@ -2,13 +2,13 @@
 #pragma function_align 4
 
 /* External function declarations */
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void mem_alloc(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800F8C6C(void);
-extern void fn_800FAB80(void);
+extern void clip_calculateFrustum(void);
 extern void fn_80144710(void);
 extern void actor_setState(void);
 extern void fn_80170A20(void);
@@ -1585,7 +1585,7 @@ lbl_fn_80328270_00001518:
     stfs f0, 0x1c(r1)
     stfs f3, 0x20(r1)
     stfs f4, 0x24(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_80328270_000016C0
     addi r3, r1, 0x48
@@ -1644,7 +1644,7 @@ lbl_fn_80328270_00001608:
     lwz r6, 0x590(r31)
     li r9, 0x0
     li r10, 0x1e
-    bl fn_800FAB80
+    bl clip_calculateFrustum
     b lbl_fn_80328270_000016C0
 lbl_fn_80328270_00001668:
     lfs f31, 0x2e4(r3)
@@ -1778,7 +1778,7 @@ lbl_fn_8032853C_000017E4:
     stfs f0, 0x1c(r1)
     stfs f3, 0x20(r1)
     stfs f4, 0x24(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_8032853C_00001A48
     addi r3, r1, 0x68
@@ -1837,7 +1837,7 @@ lbl_fn_8032853C_000018D4:
     lwz r6, 0x590(r31)
     li r9, 0x0
     li r10, 0x1e
-    bl fn_800FAB80
+    bl clip_calculateFrustum
     b lbl_fn_8032853C_00001A48
 lbl_fn_8032853C_00001934:
     lfs f31, 0x2e4(r3)

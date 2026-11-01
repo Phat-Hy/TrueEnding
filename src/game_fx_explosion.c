@@ -30,7 +30,7 @@ extern void PSMTXRotRad(void);
 extern void PSMTX44Identity(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
-extern void fn_8068B100(void);
+extern void math_u64DivMod(void);
 
 /* External data declarations */
 extern u8 lbl_807457C0[];
@@ -1432,7 +1432,7 @@ lbl_fn_80296268_00001344:
     fmadds f1, f5, f5, f0
     stfs f3, 0x54(r1)
     stfs f6, 0x58(r1)
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f0, f1
     fcmpo cr0, f0, f31
     ble lbl_fn_80296268_000013AC
@@ -1536,7 +1536,7 @@ lbl_fn_80296268_000014B8:
     fmadds f1, f5, f5, f0
     stfs f3, 0x3c(r1)
     stfs f6, 0x40(r1)
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f0, f1
     fcmpo cr0, f0, f31
     ble lbl_fn_80296268_00001520
@@ -1932,7 +1932,7 @@ lbl_fn_80296268_00001A90:
     fmadds f1, f6, f6, f0
     stfs f3, 0x18(r1)
     stfs f5, 0x1c(r1)
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f0, f1
     fcmpo cr0, f0, f31
     ble lbl_fn_80296268_00001AF8

@@ -33,7 +33,7 @@ extern void fn_806159A0(void);
 extern void fn_80615AD0(void);
 extern void strcmp(void);
 extern void strncmp(void);
-extern void fn_8068B100(void);
+extern void math_u64DivMod(void);
 extern void runtime_registerStaticObject(void);
 extern void runtime_clampDouble(void);
 extern void strchr(void);
@@ -493,7 +493,7 @@ lbl_fn_80079280_000004AC:
     fmuls f5, f27, f27
     fmuls f0, f4, f3
     fsubs f1, f5, f0
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f3, f1
     fneg f0, f27
     fadds f0, f0, f3

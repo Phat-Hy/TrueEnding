@@ -12,7 +12,7 @@ extern void _savegpr_23(void);
 extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void fn_80051A88(void);
 extern void fn_80051CD8(void);
 extern void fn_80060D58(void);
@@ -143,7 +143,7 @@ asm void fn_8039AB10(void)
     stfs f0, 0x8(r1)
     stfs f3, 0xc(r1)
     stfs f6, 0x10(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_8039AB10_00000138
     lfs f4, lbl_80885B10
@@ -432,7 +432,7 @@ asm void fn_8039AF50(void)
     stfs f0, 0x8(r1)
     stfs f3, 0xc(r1)
     stfs f6, 0x10(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_8039AF50_00000558
     lfs f4, lbl_80885B10

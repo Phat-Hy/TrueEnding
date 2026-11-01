@@ -14,7 +14,7 @@ extern void atn_FileList_destructor(void);
 extern void fn_8006C300(void);
 extern void fn_8006C3F0(void);
 extern void fn_8006D008(void);
-extern void fn_800827E0(void);
+extern void dungeon_initGlobalContext(void);
 extern void fn_800838AC(void);
 extern void fn_80083AD4(void);
 extern void mem_alloc(void);
@@ -906,7 +906,7 @@ asm void fn_8046DC5C(void)
     addi r3, r1, 0x8
     bl boss_getOffset50
     stw r3, 0x0(r30)
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     lis r6, lbl_8075561C@ha
     lwz r4, 0x0(r30)
     addi r6, r6, lbl_8075561C@l
@@ -949,7 +949,7 @@ asm void fn_8046DD20(void)
     stw r31, 0xc(r1)
     mr r31, r4
     beq lbl_fn_8046DD20_00000BAC
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     mr r4, r31
     bl fn_80083AD4
 lbl_fn_8046DD20_00000BAC:

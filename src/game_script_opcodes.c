@@ -25,7 +25,7 @@ extern void fn_800EB7A0(void);
 extern void fn_800EC204(void);
 extern void fn_800EE360(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800FAB80(void);
+extern void clip_calculateFrustum(void);
 extern void fn_80105BD8(void);
 extern void fn_8011FC10(void);
 extern void fn_80121F00(void);
@@ -1722,7 +1722,7 @@ lbl_fn_80245BBC_000015A0:
     addi r8, r31, 0x534
     li r9, 0x0
     li r10, 0x1e
-    bl fn_800FAB80
+    bl clip_calculateFrustum
     lwz r12, 0x0(r31)
     mr r3, r31
     lwz r12, 0x48(r12)

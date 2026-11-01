@@ -9,13 +9,13 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
-extern void fn_8005B6E8(void);
+extern void talk_setSpeakerName(void);
 extern void fn_80062C8C(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -278,7 +278,7 @@ asm void fn_80310098(void)
     beq lbl_fn_80310098_0000025C
     mr r3, r28
     addi r4, r1, 0x8
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0x54(r27)
     mr r29, r3
     b lbl_fn_80310098_00000260
@@ -346,7 +346,7 @@ lbl_fn_80310098_00000260:
     bl route_findNextWaypoint
     mr r3, r29
     addi r4, r30, 0x153
-    bl fn_8008937C
+    bl node_createNamedChild
     lis r31, 0x2
     mr r28, r3
     addi r4, r30, 0x15e
@@ -368,7 +368,7 @@ lbl_fn_80310098_00000260:
     bl route_findNextWaypoint
     mr r3, r29
     addi r4, r30, 0x16f
-    bl fn_8008937C
+    bl node_createNamedChild
     mr r28, r3
     addi r4, r30, 0x15e
     addi r5, r27, 0x14fc
@@ -389,7 +389,7 @@ lbl_fn_80310098_00000260:
     bl route_findNextWaypoint
     mr r3, r29
     addi r4, r30, 0x17a
-    bl fn_8008937C
+    bl node_createNamedChild
     addi r4, r30, 0x15e
     addi r5, r27, 0x150c
     subi r7, r31, 0x7961
@@ -400,7 +400,7 @@ lbl_fn_80310098_00000260:
     bl route_findNextWaypoint
     mr r3, r29
     addi r4, r30, 0x184
-    bl fn_8008937C
+    bl node_createNamedChild
     addi r4, r30, 0x15e
     addi r5, r27, 0x151c
     subi r7, r31, 0x7961
@@ -1125,7 +1125,7 @@ asm void fn_80310C64(void)
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x8(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
     lis r31, lbl_80749264@ha
     addi r31, r31, lbl_80749264@l
 lbl_fn_80310C64_00000E58:

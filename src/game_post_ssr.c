@@ -29,7 +29,7 @@ extern void fn_8016E484(void);
 extern void actor_setState(void);
 extern void fn_80176ACC(void);
 extern void fn_80178A6C(void);
-extern void fn_80219558(void);
+extern void task_mapIdToQueue(void);
 extern void sound_initGlobalInstances(void);
 extern void res_registerResource(void);
 extern void fn_8036554C(void);
@@ -550,7 +550,7 @@ lbl_fn_802D5D18_000006D4:
     b lbl_fn_802D5D18_00000738
 lbl_fn_802D5D18_000006E4:
     lwz r3, 0x50(r26)
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmpwi r3, 0x2
     bne lbl_fn_802D5D18_00000734
     lwz r3, 0x7e0(r26)
@@ -630,7 +630,7 @@ lbl_fn_802D5D18_000007E4:
     cmpwi r0, 0x0
     beq lbl_fn_802D5D18_00000820
     lwz r3, 0x50(r29)
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmpwi r3, 0x2
     beq lbl_fn_802D5D18_00000820
     lwz r0, 0x9f8(r29)

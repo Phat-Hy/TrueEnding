@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void _restgpr_20(void);
 extern void _savegpr_20(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
@@ -1893,7 +1893,7 @@ lbl_fn_80277BC0_00001830:
     stw r27, 0x78(r1)
     stw r27, 0x7c(r1)
     stw r27, 0x80(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_80277BC0_00001970
     cmpwi r22, 0x0

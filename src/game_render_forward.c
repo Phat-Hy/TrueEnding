@@ -11,7 +11,7 @@ extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800F8574(void);
-extern void fn_800FAB80(void);
+extern void clip_calculateFrustum(void);
 extern void fn_801010A0(void);
 extern void fn_8010EE78(void);
 extern void fn_8013A258(void);
@@ -1306,7 +1306,7 @@ lbl_fn_802B52D8_00001120:
     lwz r5, 0x1678(r30)
     li r10, 0x1e
     lwz r6, 0x590(r30)
-    bl fn_800FAB80
+    bl clip_calculateFrustum
 lbl_fn_802B52D8_0000117C:
     lfs f3, 0x2e4(r30)
     lfs f0, lbl_808840AC
@@ -1330,7 +1330,7 @@ lbl_fn_802B52D8_0000117C:
     lwz r5, 0x167c(r30)
     li r10, 0x1e
     lwz r6, 0x590(r30)
-    bl fn_800FAB80
+    bl clip_calculateFrustum
 lbl_fn_802B52D8_000011D8:
     lwz r0, 0x74(r1)
     lwz r31, 0x6c(r1)
@@ -1872,7 +1872,7 @@ lbl_fn_802B596C_0000196C:
     li r6, 0x3e8
     li r9, 0x0
     li r10, 0x1e
-    bl fn_800FAB80
+    bl clip_calculateFrustum
 lbl_fn_802B596C_000019C8:
     lwz r0, 0xf4(r1)
     lwz r31, 0xec(r1)

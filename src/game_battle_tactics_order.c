@@ -20,10 +20,10 @@ extern void mem_getAllocSize(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void fn_80087E9C(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void fn_800928B0(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800C31F4(void);
+extern void skin_playAnimationByName(void);
 extern void skin_applyWeights(void);
 extern void fn_800CB360(void);
 extern void fn_800CB36C(void);
@@ -38,7 +38,7 @@ extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void fn_800EF73C(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800FAB80(void);
+extern void clip_calculateFrustum(void);
 extern void fn_8021823C(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
@@ -1607,7 +1607,7 @@ lbl_fn_803F0764_00001328:
     li r4, 0x0
     li r9, 0x0
     li r10, 0x1e
-    bl fn_800FAB80
+    bl clip_calculateFrustum
 lbl_fn_803F0764_0000139C:
     stw r29, 0x24(r23)
 lbl_fn_803F0764_000013A0:
@@ -1753,7 +1753,7 @@ asm void fn_803F11F8(void)
     addi r30, r5, lbl_80752084@l
     mr r3, r4
     addi r4, r30, 0x37
-    bl fn_8008937C
+    bl node_createNamedChild
     lis r31, lbl_80752040@ha
     mr r27, r3
     li r26, 0x0
@@ -1775,7 +1775,7 @@ lbl_fn_803F11F8_00001594:
     bl sprintf
     mr r3, r27
     addi r4, r1, 0x8
-    bl fn_8008937C
+    bl node_createNamedChild
     mr r25, r3
     addi r4, r30, 0x45
     addi r5, r29, 0x4
@@ -2265,7 +2265,7 @@ lbl_fn_803F1508_00001C88:
     addi r4, r28, 0x10
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x10
     addi r4, r1, 0x8
     bl fn_800CB440

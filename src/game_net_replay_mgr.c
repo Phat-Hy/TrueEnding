@@ -7,7 +7,7 @@ extern void _savegpr_24(void);
 extern void dtor_80084684(void);
 extern void mem_alloc(void);
 extern void msg_getMessageById(void);
-extern void fn_800A55AC(void);
+extern void msg_getMessageString(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
@@ -1838,7 +1838,7 @@ lbl_fn_804C4150_000017F4:
     mr r3, r0
     li r4, 0x0
     li r5, 0x0
-    bl fn_800A55AC
+    bl msg_getMessageString
     b lbl_fn_804C4150_00001818
 lbl_fn_804C4150_00001814:
     li r3, 0x0
@@ -1856,7 +1856,7 @@ lbl_fn_804C4150_00001818:
     beq lbl_fn_804C4150_00001854
     li r4, 0x0
     li r5, 0x1a
-    bl fn_800A55AC
+    bl msg_getMessageString
     b lbl_fn_804C4150_00001858
 lbl_fn_804C4150_00001854:
     li r3, 0x0
@@ -1886,7 +1886,7 @@ lbl_fn_804C4150_0000189C:
     beq lbl_fn_804C4150_000018B8
     li r4, 0x0
     li r5, 0x1
-    bl fn_800A55AC
+    bl msg_getMessageString
     b lbl_fn_804C4150_000018BC
 lbl_fn_804C4150_000018B8:
     li r3, 0x0
@@ -1904,7 +1904,7 @@ lbl_fn_804C4150_000018BC:
     beq lbl_fn_804C4150_000018F8
     li r4, 0x0
     li r5, 0x19
-    bl fn_800A55AC
+    bl msg_getMessageString
     b lbl_fn_804C4150_000018FC
 lbl_fn_804C4150_000018F8:
     li r3, 0x0
@@ -1935,7 +1935,7 @@ lbl_fn_804C4150_00001944:
     beq lbl_fn_804C4150_00001960
     li r4, 0x0
     li r5, 0x2
-    bl fn_800A55AC
+    bl msg_getMessageString
     b lbl_fn_804C4150_00001964
 lbl_fn_804C4150_00001960:
     li r3, 0x0
@@ -1953,7 +1953,7 @@ lbl_fn_804C4150_00001964:
     beq lbl_fn_804C4150_000019A0
     li r4, 0x0
     li r5, 0x17
-    bl fn_800A55AC
+    bl msg_getMessageString
     b lbl_fn_804C4150_000019A4
 lbl_fn_804C4150_000019A0:
     li r3, 0x0
@@ -1983,7 +1983,7 @@ lbl_fn_804C4150_000019E8:
     beq lbl_fn_804C4150_00001A04
     li r4, 0x0
     li r5, 0x3
-    bl fn_800A55AC
+    bl msg_getMessageString
     b lbl_fn_804C4150_00001A08
 lbl_fn_804C4150_00001A04:
     li r3, 0x0
@@ -2001,7 +2001,7 @@ lbl_fn_804C4150_00001A08:
     beq lbl_fn_804C4150_00001A44
     li r4, 0x0
     li r5, 0x18
-    bl fn_800A55AC
+    bl msg_getMessageString
     b lbl_fn_804C4150_00001A48
 lbl_fn_804C4150_00001A44:
     li r3, 0x0

@@ -11,10 +11,10 @@ extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_80060D58(void);
-extern void fn_8006F72C(void);
+extern void str_assignBuffer(void);
 extern void fn_8006FA4C(void);
 extern void mem_alloc(void);
-extern void fn_800C31F4(void);
+extern void skin_playAnimationByName(void);
 extern void fn_800C7F08(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
@@ -434,7 +434,7 @@ lbl_fn_80116EB8_00000360:
     add r7, r28, r0
     addi r8, r1, 0xc
     li r4, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     cmpwi r30, 0x0
     bne lbl_fn_80116EB8_000003DC
     lwz r0, lbl_8087F138
@@ -514,7 +514,7 @@ lbl_fn_80116FC0_00000468:
     add r7, r30, r0
     addi r8, r1, 0x8
     li r4, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     cmpwi r27, 0x0
     bne lbl_fn_80116FC0_000004E4
     lwz r0, lbl_8087F138
@@ -600,7 +600,7 @@ lbl_fn_801170C8_00000588:
     add r7, r29, r0
     addi r8, r1, 0xc
     li r4, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     cmpwi r26, 0x0
     bne lbl_fn_801170C8_00000604
     lwz r0, lbl_8087F138
@@ -692,7 +692,7 @@ lbl_actor_spawnActorWithId_000006B0:
     lwzx r4, r5, r0
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     lwz r3, lbl_8087EFE8
     cmpwi r3, 0x0
     beq lbl_actor_spawnActorWithId_000006E4
@@ -886,7 +886,7 @@ lbl_fn_8011745C_00000918:
     add r7, r30, r0
     addi r8, r1, 0x14
     li r4, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r0, lbl_8087F138
     addic. r3, r0, 0x168
     beq lbl_fn_8011745C_00000964
@@ -934,7 +934,7 @@ lbl_fn_8011745C_000009C4:
     add r7, r29, r0
     addi r8, r1, 0xc
     li r4, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r0, lbl_8087F138
     addic. r3, r0, 0x168
     beq lbl_fn_8011745C_00000A10
@@ -1024,7 +1024,7 @@ asm void fn_801175EC(void)
     addi r8, r1, 0x8
     li r4, 0x0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lis r4, fn_8006FA4C@ha
     mr r3, r29
     addi r4, r4, fn_8006FA4C@l

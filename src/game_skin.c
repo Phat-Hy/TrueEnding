@@ -38,7 +38,7 @@ extern void fn_80084A78(void);
 extern void mem_getAllocSize(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void fn_800C507C(void);
 extern void fn_800C8780(void);
 extern void fn_800C8BA4(void);
@@ -117,7 +117,7 @@ void fn_800C317C(void);
 void fn_800C3184(void);
 void fn_800C31E4(void);
 void fn_800C31EC(void);
-void fn_800C31F4(void);
+void skin_playAnimationByName(void);
 void fn_800C32E0(void);
 void skin_applyWeights(void);
 void fn_800C3610(void);
@@ -283,7 +283,7 @@ asm void fn_800C31EC(void)
     b fn_800498D4
 }
 
-asm void fn_800C31F4(void)
+asm void skin_playAnimationByName(void)
 {
     nofralloc
     stwu r1, -0x30(r1)
@@ -303,30 +303,30 @@ asm void fn_800C31F4(void)
     lwz r3, lbl_8087EE90
     lwz r0, 0x4(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_800C31F4_000001DC
+    beq lbl_skin_playAnimationByName_000001DC
     lwz r0, lbl_8087EFE8
     cmpwi r0, 0x0
-    beq lbl_fn_800C31F4_000001DC
+    beq lbl_skin_playAnimationByName_000001DC
     cmpwi r29, 0x0
     li r31, 0x0
-    beq lbl_fn_800C31F4_000001D4
+    beq lbl_skin_playAnimationByName_000001D4
     mr r3, r29
     bl strlen
     cmpwi r3, 0x0
-    beq lbl_fn_800C31F4_000001D4
+    beq lbl_skin_playAnimationByName_000001D4
     li r31, 0x1
-lbl_fn_800C31F4_000001D4:
+lbl_skin_playAnimationByName_000001D4:
     cmpwi r31, 0x0
-    bne lbl_fn_800C31F4_000001F8
-lbl_fn_800C31F4_000001DC:
+    bne lbl_skin_playAnimationByName_000001F8
+lbl_skin_playAnimationByName_000001DC:
     mr r3, r28
     addi r4, r1, 0x8
     bl fn_800CB36C
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
-    b lbl_fn_800C31F4_00000228
-lbl_fn_800C31F4_000001F8:
+    b lbl_skin_playAnimationByName_00000228
+lbl_skin_playAnimationByName_000001F8:
     lwz r3, lbl_8087EE90
     mr r4, r29
     bl fn_80049B74
@@ -339,7 +339,7 @@ lbl_fn_800C31F4_000001F8:
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
-lbl_fn_800C31F4_00000228:
+lbl_skin_playAnimationByName_00000228:
     lwz r0, 0x34(r1)
     lfd f31, 0x28(r1)
     lwz r31, 0x24(r1)
@@ -2466,7 +2466,7 @@ asm void fn_800C4F70(void)
     lwz r4, 0x0(r4)
     lwz r4, 0x10(r4)
     lwz r4, 0x10(r4)
-    bl fn_8008937C
+    bl node_createNamedChild
     lis r6, lbl_80733880@ha
     lis r4, 0x99
     addi r6, r6, lbl_80733880@l

@@ -5,10 +5,10 @@
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
-extern void fn_8005B6E8(void);
+extern void talk_setSpeakerName(void);
 extern void fn_800897D8(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_80092954(void);
@@ -1219,7 +1219,7 @@ lbl_fn_802EE20C_00000EC4:
     stw r0, 0x150(r1)
     stw r0, 0x154(r1)
     stw r0, 0x158(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     bne lbl_fn_802EE20C_00001138
     lfs f3, 0x7c(r1)
@@ -1726,7 +1726,7 @@ asm void fn_802EE9A8(void)
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x8(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
     lis r30, lbl_80748488@ha
     addi r30, r30, lbl_80748488@l
 lbl_fn_802EE9A8_00001658:

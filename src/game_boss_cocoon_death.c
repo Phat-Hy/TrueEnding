@@ -10,20 +10,20 @@ extern void dtor_80084684(void);
 extern void vec3_copy(void);
 extern void fn_8001047C(void);
 extern void fn_8004D388(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void atn_ColliBase_destructor(void);
 extern void atn_ColliCapsule_destructor(void);
 extern void fn_8007708C(void);
 extern void mem_alloc(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void fn_800897D8(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void msg_getMessageById(void);
 extern void fn_800C3094(void);
 extern void fn_800C3124(void);
-extern void fn_800C31F4(void);
+extern void skin_playAnimationByName(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_constructor(void);
@@ -346,7 +346,7 @@ lbl_fn_80468038_00000224:
     stw r26, 0x158(r1)
     stw r26, 0x15c(r1)
     stw r26, 0x160(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_80468038_00000570
     lwz r3, 0x158(r1)
@@ -1598,7 +1598,7 @@ lbl_task_Library_destructor_000013F4:
     cmpwi r3, 0x0
     beq lbl_task_Library_destructor_00001464
     addi r3, r3, 0x10
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0xac(r29)
     mr r30, r3
     b lbl_task_Library_destructor_00001468
@@ -1727,7 +1727,7 @@ lbl_fn_80469494_000015DC:
     addi r3, r1, 0xc
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0xc
     li r4, -0x1
     bl ref_releaseHandle

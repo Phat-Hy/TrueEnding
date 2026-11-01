@@ -12,7 +12,7 @@ extern void route_interpolatePath(void);
 extern void fn_80087AA0(void);
 extern void fn_80087E9C(void);
 extern void fn_80088724(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void fn_80094F98(void);
 extern void fn_80097D40(void);
 extern void fn_800C122C(void);
@@ -45,7 +45,7 @@ extern void fn_801840D8(void);
 extern void fn_801847C0(void);
 extern void fn_8018EEC4(void);
 extern void fn_802096A8(void);
-extern void fn_80219558(void);
+extern void task_mapIdToQueue(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
@@ -154,7 +154,7 @@ asm void fn_8014BDB0(void)
     beq lbl_fn_8014BDB0_000000C8
     mr r3, r28
     addi r4, r1, 0x8
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0x54(r31)
     mr r30, r3
     b lbl_fn_8014BDB0_000000CC
@@ -241,7 +241,7 @@ lbl_fn_8014BDB0_000001E8:
     mr r3, r30
     addi r29, r29, lbl_80737A9C@l
     addi r4, r29, 0x4a7
-    bl fn_8008937C
+    bl node_createNamedChild
     lfs f1, lbl_8088196C
     mr r28, r3
     lfs f2, lbl_80881AF0
@@ -447,7 +447,7 @@ asm void fn_8014C228(void)
     li r5, 0x1a
     bl dialog_setScriptSlot
     lwz r3, 0x50(r31)
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmpwi r3, 0x0
     bne lbl_fn_8014C228_000004DC
     mr r3, r31
@@ -613,7 +613,7 @@ lbl_fn_8014C468_00000708:
     b lbl_fn_8014C468_0000077C
 lbl_fn_8014C468_00000728:
     lwz r3, 0x50(r3)
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmpwi r3, 0x0
     bne lbl_fn_8014C468_0000074C
     mr r3, r31

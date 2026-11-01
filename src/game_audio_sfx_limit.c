@@ -14,14 +14,14 @@ extern void fn_8004212C(void);
 extern void fn_80057A64(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
-extern void fn_8005B6E8(void);
+extern void talk_setSpeakerName(void);
 extern void fn_8006AFF8(void);
 extern void fn_8006CA80(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
 extern void fn_80087E9C(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void fn_8008A4E0(void);
 extern void fn_8008A76C(void);
 extern void fn_8008AD4C(void);
@@ -856,7 +856,7 @@ asm void fn_80316034(void)
     beq lbl_fn_80316034_00000A5C
     mr r3, r28
     addi r4, r1, 0x8
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0x165c(r27)
     mr r29, r3
     b lbl_fn_80316034_00000A60
@@ -870,7 +870,7 @@ lbl_fn_80316034_00000A60:
     mr r3, r29
     addi r30, r30, lbl_80749390@l
     addi r4, r30, 0x170
-    bl fn_8008937C
+    bl node_createNamedChild
     lis r31, 0x2
     mr r28, r3
     addi r4, r30, 0x17c
@@ -892,7 +892,7 @@ lbl_fn_80316034_00000A60:
     bl route_findNextWaypoint
     mr r3, r29
     addi r4, r30, 0x18d
-    bl fn_8008937C
+    bl node_createNamedChild
     mr r28, r3
     addi r4, r30, 0x17c
     addi r5, r27, 0x15d8
@@ -913,7 +913,7 @@ lbl_fn_80316034_00000A60:
     bl route_findNextWaypoint
     mr r3, r29
     addi r4, r30, 0x198
-    bl fn_8008937C
+    bl node_createNamedChild
     mr r28, r3
     addi r4, r30, 0x17c
     addi r5, r27, 0x15e8
@@ -1294,7 +1294,7 @@ lbl_fn_803165EC_00000FFC:
     cmpwi r3, 0x0
     beq lbl_fn_803165EC_000010B4
     addi r3, r3, 0x10
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0x1c8c(r30)
     mr r28, r3
     b lbl_fn_803165EC_000010B8
@@ -1398,7 +1398,7 @@ lbl_fn_803165EC_000010B8:
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x18(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
 lbl_fn_803165EC_00001240:
     addi r3, r1, 0x18
     bl talk_parseQuotedString

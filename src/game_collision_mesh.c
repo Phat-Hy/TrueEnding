@@ -11,7 +11,7 @@ extern void _savegpr_26(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void fn_800FFE68(void);
@@ -733,7 +733,7 @@ asm void fn_80100BF0(void)
     cmpwi r3, 0x0
     beq lbl_fn_80100BF0_00000974
     addi r3, r3, 0x10
-    bl fn_8008937C
+    bl node_createNamedChild
     addis r4, r28, 0x4
     mr r30, r3
     stw r3, -0x75a8(r4)
@@ -793,7 +793,7 @@ lbl_fn_80100BF0_00000978:
     bl route_interpolatePath
     mr r3, r30
     addi r4, r31, 0x29e
-    bl fn_8008937C
+    bl node_createNamedChild
     addis r5, r28, 0x4
     mr r29, r3
     addi r4, r31, 0x2a5
@@ -943,7 +943,7 @@ lbl_fn_80100BF0_00000978:
     bl route_interpolatePath
     mr r3, r30
     addi r4, r31, 0x33a
-    bl fn_8008937C
+    bl node_createNamedChild
     addis r5, r28, 0x4
     lfs f1, lbl_808814CC
     lfs f2, lbl_80881494

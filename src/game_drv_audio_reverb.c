@@ -21,10 +21,10 @@ extern void fn_80013410(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void item_useConsumable(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
-extern void fn_8005B6E8(void);
+extern void talk_setSpeakerName(void);
 extern void fn_8006AC08(void);
 extern void fn_8006AD24(void);
 extern void fn_8006AF38(void);
@@ -41,7 +41,7 @@ extern void fn_80097A20(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void fn_80097E80(void);
 extern void fn_800A03E4(void);
-extern void fn_800C31F4(void);
+extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void fn_800D089C(void);
 extern void atn_Task_setActive(void);
@@ -220,7 +220,7 @@ lbl_fn_805BA938_00000084:
     lfs f1, lbl_8088845C
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -1166,7 +1166,7 @@ asm void fn_805BB658(void)
     addi r4, r4, lbl_807772B0@l
     stw r4, 0xb4(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
     lis r28, lbl_80763F38@ha
     lis r30, lbl_807BB380@ha
     lfs f31, lbl_8088848C
@@ -2193,7 +2193,7 @@ lbl_fn_805BC1C4_00001BF0:
     stfs f0, 0x74(r1)
     stfs f3, 0x78(r1)
     stfs f4, 0x7c(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_805BC1C4_00001CFC
     cmpwi r24, 0x0

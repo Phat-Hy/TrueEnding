@@ -9,20 +9,20 @@ extern void fn_8004212C(void);
 extern void fn_80057A64(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
-extern void fn_8005B6E8(void);
+extern void talk_setSpeakerName(void);
 extern void fn_80063D3C(void);
 extern void fn_8006AFF8(void);
 extern void fn_8006CA80(void);
 extern void route_createSegment(void);
 extern void fn_80088FAC(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void fn_800897D8(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_80092954(void);
 extern void fn_80094958(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800C31F4(void);
+extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D8BB4(void);
@@ -773,7 +773,7 @@ lbl_fn_802CD3BC_00000888:
     cmpwi r3, 0x0
     beq lbl_fn_802CD3BC_000008F0
     addi r3, r3, 0x10
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0x1550(r31)
     mr r29, r3
     b lbl_fn_802CD3BC_000008F4
@@ -841,7 +841,7 @@ lbl_fn_802CD3BC_000008F4:
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x8(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
 lbl_fn_802CD3BC_000009EC:
     addi r3, r1, 0x8
     bl talk_parseQuotedString
@@ -1159,7 +1159,7 @@ lbl_fn_802CD73C_00000DB8:
     li r5, 0x0
     addi r4, r4, 0x106
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x18
     li r4, -0x1
     bl ref_releaseHandle

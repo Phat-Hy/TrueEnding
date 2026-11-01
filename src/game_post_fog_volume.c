@@ -12,7 +12,7 @@ extern void actor_dispatchMessage(void);
 extern void fn_8004203C(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
-extern void fn_8005B6E8(void);
+extern void talk_setSpeakerName(void);
 extern void fn_8006AFF8(void);
 extern void mem_free(void);
 extern void fn_800897D8(void);
@@ -641,7 +641,7 @@ asm void fn_802D7480(void)
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x44(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
 lbl_fn_802D7480_0000077C:
     addi r3, r1, 0x44
     bl talk_parseQuotedString

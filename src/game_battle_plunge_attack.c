@@ -31,7 +31,7 @@ extern void ref_releaseHandle(void);
 extern void str_skipWhitespace(void);
 extern void fn_800EF73C(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800FAB80(void);
+extern void clip_calculateFrustum(void);
 extern void fn_8012476C(void);
 extern void fn_801539E0(void);
 extern void fn_80169F04(void);
@@ -1414,7 +1414,7 @@ lbl_fn_80411BC4_0000115C:
     li r9, 0x0
     stw r0, 0xc(r1)
     lwz r3, lbl_8087F048
-    bl fn_800FAB80
+    bl clip_calculateFrustum
 lbl_fn_80411BC4_00001230:
     li r30, 0x1
     b lbl_fn_80411BC4_00001254

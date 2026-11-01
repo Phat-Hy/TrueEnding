@@ -13,7 +13,7 @@ extern void fn_80011034(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void fn_8003EFB0(void);
 extern void fn_8004D388(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void fn_8005361C(void);
 extern void atn_Matrix_copy_2(void);
 extern void skin_applyWeights(void);
@@ -22,7 +22,7 @@ extern void atn_Task_destructor(void);
 extern void fn_800F7FD8(void);
 extern void fn_800F80B8(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800FAB80(void);
+extern void clip_calculateFrustum(void);
 extern void fn_800FB1BC(void);
 extern void fn_800FB4B0(void);
 extern void fn_80110858(void);
@@ -1102,7 +1102,7 @@ lbl_fn_8010F720_00000DAC:
     lwz r6, 0x7c(r31)
     lfs f1, 0x5c(r31)
     lfs f2, 0x74(r31)
-    bl fn_800FAB80
+    bl clip_calculateFrustum
     mr r28, r3
 lbl_fn_8010F720_00000DE8:
     lwz r3, lbl_8087F430
@@ -1335,7 +1335,7 @@ lbl_fn_8010F720_00001120:
     stw r0, 0x1f4(r1)
     li r9, 0x0
     stw r0, 0x1f8(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_8010F720_00001230
     li r0, 0x1
@@ -1382,7 +1382,7 @@ lbl_fn_8010F720_000011D0:
     stw r0, 0x1a4(r1)
     li r9, 0x0
     stw r0, 0x1a8(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_8010F720_00001230
     lwz r3, 0x8c(r31)
@@ -1895,7 +1895,7 @@ lbl_fn_801100A0_0000198C:
     addi r5, r31, 0x14
     addi r6, r31, 0x8
     li r9, 0x0
-    bl fn_8004ED34
+    bl collision_testLineSegment
     mr r29, r3
 lbl_fn_801100A0_000019A8:
     cmpwi r29, 0x0

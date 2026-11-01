@@ -19,14 +19,14 @@ extern void fn_80063764(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void fn_800F7FA0(void);
 extern void fn_800F7FD8(void);
-extern void fn_800FAB80(void);
+extern void clip_calculateFrustum(void);
 extern void fn_801125F8(void);
 extern void fn_80121F00(void);
 extern void magic_getOffset6C(void);
@@ -440,7 +440,7 @@ lbl_fn_803041C8_000004CC:
     li r6, 0x3e8
     li r9, 0x0
     li r10, 0x1e
-    bl fn_800FAB80
+    bl clip_calculateFrustum
 lbl_fn_803041C8_00000530:
     lwz r0, 0x1a4(r1)
     psq_l f31, 0x198(r1), 0, 0
@@ -1503,7 +1503,7 @@ lbl_fn_80304FC0_00001320:
     li r6, 0x7d0
     li r9, 0x0
     li r10, 0x1e
-    bl fn_800FAB80
+    bl clip_calculateFrustum
     lfs f7, 0x530(r31)
     li r3, 0x64c
     lfs f0, 0x84(r1)
@@ -1531,7 +1531,7 @@ lbl_fn_80304FC0_00001320:
     li r6, 0x7d0
     li r9, 0x0
     li r10, 0x1e
-    bl fn_800FAB80
+    bl clip_calculateFrustum
     lfs f7, 0x530(r31)
     li r3, 0x64c
     lfs f0, 0x78(r1)
@@ -1559,7 +1559,7 @@ lbl_fn_80304FC0_00001320:
     li r6, 0x7d0
     li r9, 0x0
     li r10, 0x1e
-    bl fn_800FAB80
+    bl clip_calculateFrustum
     lwz r0, 0x15bc(r31)
     srwi r3, r0, 31
     clrlwi r0, r0, 31
@@ -1610,7 +1610,7 @@ asm void fn_803057A8(void)
     cmpwi r3, 0x0
     beq lbl_fn_803057A8_00001634
     addi r3, r3, 0x10
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0x168c(r29)
     mr r30, r3
     b lbl_fn_803057A8_00001638

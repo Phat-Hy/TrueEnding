@@ -12,11 +12,11 @@ extern void mem_alloc(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void fn_80087BB4(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void fn_800897D8(void);
 extern void msg_getMessageById(void);
-extern void fn_800A55AC(void);
-extern void fn_800C31F4(void);
+extern void msg_getMessageString(void);
+extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
 extern void fn_800CB518(void);
@@ -215,7 +215,7 @@ lbl_fn_804A2128_0000014C:
     cmpwi r3, 0x0
     beq lbl_fn_804A2128_00000184
     addi r3, r3, 0x10
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0x244(r31)
     mr r28, r3
     b lbl_fn_804A2128_00000188
@@ -405,7 +405,7 @@ lbl_fn_804A233C_000003CC:
     addi r4, r4, 0x21
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r31, 0x23c
     addi r4, r1, 0x8
     bl fn_800CB440
@@ -1179,7 +1179,7 @@ lbl_fn_804A2D2C_00000DE0:
     cmpwi r3, 0x0
     beq lbl_fn_804A2D2C_00000E7C
     addi r3, r3, 0x10
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0x1e8(r31)
     mr r29, r3
     b lbl_fn_804A2D2C_00000E80
@@ -1513,25 +1513,25 @@ lbl_fn_804A3228_00001320:
     mr r3, r30
     li r4, 0x0
     li r5, 0x1a
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     bne lbl_fn_804A3228_00001380
     mr r3, r30
     li r4, 0x0
     li r5, 0x0
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     bne lbl_fn_804A3228_00001380
     mr r3, r30
     li r4, 0x0
     li r5, 0x19
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     bne lbl_fn_804A3228_00001380
     mr r3, r30
     li r4, 0x0
     li r5, 0x1
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     beq lbl_fn_804A3228_000013A8
 lbl_fn_804A3228_00001380:

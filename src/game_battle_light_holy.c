@@ -17,14 +17,14 @@ extern void route_createSegment(void);
 extern void fn_80087BB4(void);
 extern void fn_80087E9C(void);
 extern void fn_80088724(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void fn_8008AD4C(void);
 extern void fn_8008B140(void);
 extern void lockon_updateTarget(void);
 extern void fn_800971D4(void);
 extern void fn_800C1814(void);
 extern void fn_800C1990(void);
-extern void fn_800C31F4(void);
+extern void skin_playAnimationByName(void);
 extern void skin_applyWeights(void);
 extern void fn_800CB360(void);
 extern void ref_releaseHandle(void);
@@ -32,7 +32,7 @@ extern void morph_updateMesh(void);
 extern void fn_800CB688(void);
 extern void str_skipWhitespace(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800FAB80(void);
+extern void clip_calculateFrustum(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_constructor(void);
@@ -56,7 +56,7 @@ extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void rand(void);
 extern void strcmp(void);
-extern void fn_8068B100(void);
+extern void math_u64DivMod(void);
 
 /* External data declarations */
 extern u8 lbl_80753230[];
@@ -491,7 +491,7 @@ asm void fn_80420934(void)
     beq lbl_fn_80420934_00000504
     mr r3, r30
     addi r4, r1, 0x8
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0xf0(r29)
     mr r30, r3
     b lbl_fn_80420934_00000508
@@ -1220,7 +1220,7 @@ lbl_fn_80421308_00000EA0:
     li r4, 0x0
     li r9, 0x0
     li r10, 0x1e
-    bl fn_800FAB80
+    bl clip_calculateFrustum
     lis r4, lbl_807532E0@ha
     lfs f1, lbl_808865EC
     addi r4, r4, lbl_807532E0@l
@@ -1508,10 +1508,10 @@ asm void fn_80421628(void)
     bne lbl_fn_80421628_000013A0
     fmuls f0, f28, f28
     fmadds f1, f29, f29, f0
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f30, f1
     fmr f1, f31
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f0, f1
     lfs f1, lbl_80886604
     fmuls f0, f0, f30
@@ -1519,10 +1519,10 @@ asm void fn_80421628(void)
     bge lbl_fn_80421628_00001304
     fmuls f0, f28, f28
     fmadds f1, f29, f29, f0
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f30, f1
     fmr f1, f31
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f0, f1
     fmuls f1, f0, f30
 lbl_fn_80421628_00001304:
@@ -1532,7 +1532,7 @@ lbl_fn_80421628_00001304:
     li r5, 0x0
     addi r4, r4, 0x1
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     lwz r31, lbl_8087EFE8
     bl rand
     lis r4, 0x4178
@@ -1662,7 +1662,7 @@ asm void fn_80421904(void)
     beq lbl_fn_80421904_000014D8
     mr r3, r29
     addi r4, r1, 0x8
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0xf0(r28)
     mr r29, r3
     b lbl_fn_80421904_000014DC

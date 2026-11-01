@@ -12,7 +12,7 @@ extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800F8574(void);
-extern void fn_800FAB80(void);
+extern void clip_calculateFrustum(void);
 extern void fn_801595BC(void);
 extern void fn_8015AC48(void);
 extern void actor_setState(void);
@@ -442,7 +442,7 @@ lbl_fn_80456194_000004C8:
     addi r8, r30, 0x1974
     li r9, 0x0
     li r10, 0x1e
-    bl fn_800FAB80
+    bl clip_calculateFrustum
     li r31, 0x0
     stw r31, 0x14bc(r30)
     stw r31, 0x14c0(r30)

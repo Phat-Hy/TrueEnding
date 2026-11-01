@@ -8,7 +8,7 @@ extern void dtor_80084684(void);
 extern void fn_8006969C(void);
 extern void fn_800696B4(void);
 extern void mem_alloc(void);
-extern void fn_800C31F4(void);
+extern void skin_playAnimationByName(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void fn_800F8574(void);
@@ -791,7 +791,7 @@ lbl_fn_80441F24_000009E8:
     addi r4, r4, 0x1
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0xc
     li r4, -0x1
     bl ref_releaseHandle

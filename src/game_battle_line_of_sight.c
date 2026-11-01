@@ -21,7 +21,7 @@ extern void fn_800971D4(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void fn_80097E80(void);
 extern void fn_800BFAC8(void);
-extern void fn_800C31F4(void);
+extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void wcs_vformat(void);
 extern void fn_800EF73C(void);
@@ -75,7 +75,7 @@ extern void rand(void);
 extern void strcmp(void);
 extern void fn_8068A850(void);
 extern void fn_8068AD58(void);
-extern void fn_8068B100(void);
+extern void math_u64DivMod(void);
 extern void __destroy_new_array(void);
 
 /* External data declarations */
@@ -1234,7 +1234,7 @@ lbl_fn_8040B200_00000F14:
     lfs f1, lbl_808862F8
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle
@@ -1950,7 +1950,7 @@ asm void fn_8040BC38(void)
     fmuls f1, f1, f1
     stw r31, 0x424(r3)
     fmuls f1, f1, f0
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f31, f1
     bl rand
     lis r27, 0x4178

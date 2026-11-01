@@ -36,7 +36,7 @@ extern void fn_8068AD58(void);
 extern void fn_8068AE24(void);
 extern void fn_8068AE9C(void);
 extern void std_atan2(void);
-extern void fn_8068B100(void);
+extern void math_u64DivMod(void);
 
 /* External data declarations */
 extern u8 lbl_80731038[];
@@ -104,7 +104,7 @@ void atn_ColliBase_testBox(void);
 void fn_8004D314(void);
 void fn_8004D388(void);
 void fn_8004ECC0(void);
-void fn_8004ED34(void);
+void collision_testLineSegment(void);
 void fn_8004F45C(void);
 void fn_8004F50C(void);
 void fn_8004F5B8(void);
@@ -2522,7 +2522,7 @@ lbl_fn_8004D388_00002180:
     stfs f6, 0x1cc(r1)
     stfs f0, 0x1c4(r1)
     stfs f4, 0x1c8(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_8004D388_000025C0
     lwz r3, 0x10(r1)
@@ -3438,7 +3438,7 @@ lbl_fn_8004D388_00002FE0:
     cmplwi r0, 0x1
     bne lbl_fn_8004D388_00003070
     fmr f1, f20
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f4, f1
     lfs f0, 0x204(r1)
     fdivs f5, f4, f17
@@ -3714,7 +3714,7 @@ lbl_fn_8004D388_00003340:
     stfs f0, 0x11c(r1)
     stfs f3, 0x120(r1)
     stfs f4, 0x124(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_8004D388_00003678
     lfs f4, 0x27c(r1)
@@ -4078,7 +4078,7 @@ asm void fn_8004ECC0(void)
     stw r0, 0x40(r1)
     stw r0, 0x44(r1)
     stw r0, 0x48(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_8004ECC0_000039A4
     cmpwi r31, 0x0
@@ -4101,7 +4101,7 @@ lbl_fn_8004ECC0_000039A8:
     blr
 }
 
-asm void fn_8004ED34(void)
+asm void collision_testLineSegment(void)
 {
     nofralloc
     stwu r1, -0x170(r1)
@@ -4156,10 +4156,10 @@ asm void fn_8004ED34(void)
     lfs f0, lbl_80880918
     fmr f27, f1
     fcmpo cr0, f1, f0
-    bge lbl_fn_8004ED34_00003A98
+    bge lbl_collision_testLineSegment_00003A98
     li r3, 0x0
-    b lbl_fn_8004ED34_0000409C
-lbl_fn_8004ED34_00003A98:
+    b lbl_collision_testLineSegment_0000409C
+lbl_collision_testLineSegment_00003A98:
     addi r3, r1, 0x8c
     mr r4, r3
     bl PSVECNormalize
@@ -4169,7 +4169,7 @@ lbl_fn_8004ED34_00003A98:
     li r28, -0x1
     lfs f30, lbl_808808D8
     lfs f31, lbl_808808D4
-lbl_fn_8004ED34_00003ABC:
+lbl_collision_testLineSegment_00003ABC:
     lfs f3, 0xac(r1)
     addi r3, r1, 0x80
     lfs f0, 0xa0(r1)
@@ -4189,14 +4189,14 @@ lbl_fn_8004ED34_00003ABC:
     fcmpo cr0, f0, f28
     mfcr r0
     srwi. r0, r0, 31
-    beq lbl_fn_8004ED34_00003B14
+    beq lbl_collision_testLineSegment_00003B14
     li r3, 0x0
-    b lbl_fn_8004ED34_0000409C
-lbl_fn_8004ED34_00003B14:
+    b lbl_collision_testLineSegment_0000409C
+lbl_collision_testLineSegment_00003B14:
     fcmpo cr0, f1, f29
     mfcr r23
     extrwi. r23, r23, 1, 1
-    beq lbl_fn_8004ED34_00003B7C
+    beq lbl_collision_testLineSegment_00003B7C
     lfs f4, 0x94(r1)
     addi r3, r1, 0x74
     lfs f0, 0x90(r1)
@@ -4219,7 +4219,7 @@ lbl_fn_8004ED34_00003B14:
     stfs f2, 0x7c(r1)
     psq_st f1, 0x0(r26), 0, 0
     stfs f2, 0xac(r1)
-lbl_fn_8004ED34_00003B7C:
+lbl_collision_testLineSegment_00003B7C:
     stw r28, 0x14(r1)
     addi r3, r1, 0x50
     lfs f8, 0xa0(r1)
@@ -4301,22 +4301,22 @@ lbl_fn_8004ED34_00003B7C:
     bl fn_8004CF3C
     cmpwi r3, 0x0
     mr r30, r3
-    beq lbl_fn_8004ED34_0000406C
+    beq lbl_collision_testLineSegment_0000406C
     lfs f26, lbl_80880900
     mr r25, r24
     addis r31, r15, 0x1
     li r22, -0x1
     li r21, 0x0
-    b lbl_fn_8004ED34_00003D48
-lbl_fn_8004ED34_00003CDC:
+    b lbl_collision_testLineSegment_00003D48
+lbl_collision_testLineSegment_00003CDC:
     lwz r0, -0x6fd0(r31)
     cmpwi r0, 0x0
-    beq lbl_fn_8004ED34_00003CF8
+    beq lbl_collision_testLineSegment_00003CF8
     lfs f3, 0x14(r25)
     lfs f0, -0x6fd4(r31)
     fcmpo cr0, f3, f0
-    bgt lbl_fn_8004ED34_00003D40
-lbl_fn_8004ED34_00003CF8:
+    bgt lbl_collision_testLineSegment_00003D40
+lbl_collision_testLineSegment_00003CF8:
     lfs f3, 0xa0(r1)
     addi r3, r1, 0x8
     lfs f0, 0xc(r25)
@@ -4332,19 +4332,19 @@ lbl_fn_8004ED34_00003CF8:
     stfs f0, 0x8(r1)
     bl PSVECMag
     fcmpo cr0, f26, f1
-    ble lbl_fn_8004ED34_00003D40
+    ble lbl_collision_testLineSegment_00003D40
     fmr f26, f1
     mr r22, r21
-lbl_fn_8004ED34_00003D40:
+lbl_collision_testLineSegment_00003D40:
     addi r25, r25, 0x50
     addi r21, r21, 0x1
-lbl_fn_8004ED34_00003D48:
+lbl_collision_testLineSegment_00003D48:
     cmpw r21, r30
-    blt lbl_fn_8004ED34_00003CDC
+    blt lbl_collision_testLineSegment_00003CDC
     cmpwi r22, -0x1
-    beq lbl_fn_8004ED34_0000406C
+    beq lbl_collision_testLineSegment_0000406C
     cmpwi r16, 0x0
-    beq lbl_fn_8004ED34_00004064
+    beq lbl_collision_testLineSegment_00004064
     mulli r18, r22, 0x50
     lfs f3, lbl_808808DC
     lfs f0, lbl_808808D4
@@ -4387,144 +4387,144 @@ lbl_fn_8004ED34_00003D48:
     bl PSVECDotProduct
     lfs f0, lbl_808808F0
     fcmpo cr0, f1, f0
-    ble lbl_fn_8004ED34_00003E44
+    ble lbl_collision_testLineSegment_00003E44
     lwz r0, 0x38(r17)
     mr r3, r17
     addi r4, r3, 0x38
     cmpwi r0, 0x0
-    beq lbl_fn_8004ED34_00003EBC
+    beq lbl_collision_testLineSegment_00003EBC
     lwz r3, 0x38(r3)
     lwz r0, 0x8(r3)
     rlwinm r0, r0, 0, 30, 30
     cmplwi r0, 0x2
-    beq lbl_fn_8004ED34_00003EBC
+    beq lbl_collision_testLineSegment_00003EBC
     lwz r0, 0x3c(r16)
     ori r0, r0, 0x1
     stw r0, 0x3c(r16)
-    b lbl_fn_8004ED34_00003EBC
-lbl_fn_8004ED34_00003E44:
+    b lbl_collision_testLineSegment_00003EBC
+lbl_collision_testLineSegment_00003E44:
     lfs f0, lbl_808808F4
     fcmpo cr0, f1, f0
-    bge lbl_fn_8004ED34_00003E88
+    bge lbl_collision_testLineSegment_00003E88
     lwz r0, 0x38(r17)
     mr r3, r17
     addi r4, r3, 0x38
     cmpwi r0, 0x0
-    beq lbl_fn_8004ED34_00003EBC
+    beq lbl_collision_testLineSegment_00003EBC
     lwz r3, 0x38(r3)
     lwz r0, 0x8(r3)
     rlwinm r0, r0, 0, 30, 30
     cmplwi r0, 0x2
-    beq lbl_fn_8004ED34_00003EBC
+    beq lbl_collision_testLineSegment_00003EBC
     lwz r0, 0x3c(r16)
     ori r0, r0, 0x100
     stw r0, 0x3c(r16)
-    b lbl_fn_8004ED34_00003EBC
-lbl_fn_8004ED34_00003E88:
+    b lbl_collision_testLineSegment_00003EBC
+lbl_collision_testLineSegment_00003E88:
     lwz r0, 0x38(r17)
     mr r3, r17
     addi r4, r3, 0x38
     cmpwi r0, 0x0
-    beq lbl_fn_8004ED34_00003EBC
+    beq lbl_collision_testLineSegment_00003EBC
     lwz r3, 0x38(r3)
     lwz r0, 0x8(r3)
     rlwinm r0, r0, 0, 30, 30
     cmplwi r0, 0x2
-    beq lbl_fn_8004ED34_00003EBC
+    beq lbl_collision_testLineSegment_00003EBC
     lwz r0, 0x3c(r16)
     ori r0, r0, 0x20
     stw r0, 0x3c(r16)
-lbl_fn_8004ED34_00003EBC:
+lbl_collision_testLineSegment_00003EBC:
     lwz r0, 0x0(r4)
     cmpwi r0, 0x0
-    beq lbl_fn_8004ED34_00003EF8
+    beq lbl_collision_testLineSegment_00003EF8
     mulli r0, r22, 0x50
     add r3, r24, r0
     lwz r3, 0x38(r3)
     lwz r0, 0x8(r3)
     rlwinm r0, r0, 0, 30, 30
     cmplwi r0, 0x2
-    bne lbl_fn_8004ED34_00003EF8
+    bne lbl_collision_testLineSegment_00003EF8
     lwz r0, 0x3c(r16)
     ori r0, r0, 0x2
     stw r0, 0x3c(r16)
     lwz r0, 0x0(r4)
     stw r0, 0x38(r16)
-lbl_fn_8004ED34_00003EF8:
+lbl_collision_testLineSegment_00003EF8:
     lwz r5, 0x34(r17)
     addis r3, r15, 0x1
     lwz r3, -0x6fcc(r3)
     addi r4, r1, 0x8c
     cmpwi r5, 0x0
     li r15, 0x0
-    beq lbl_fn_8004ED34_00004000
+    beq lbl_collision_testLineSegment_00004000
     lwz r0, 0x4(r5)
     rlwinm r0, r0, 0, 23, 23
     cmplwi r0, 0x100
-    bne lbl_fn_8004ED34_00003F4C
+    bne lbl_collision_testLineSegment_00003F4C
     cmpwi r3, 0x0
     ori r15, r15, 0x4
-    beq lbl_fn_8004ED34_00003F34
+    beq lbl_collision_testLineSegment_00003F34
     ori r15, r15, 0x1
-lbl_fn_8004ED34_00003F34:
+lbl_collision_testLineSegment_00003F34:
     addi r3, r17, 0x28
     bl PSVECDotProduct
     lfs f0, lbl_808808F8
     fcmpo cr0, f1, f0
-    bge lbl_fn_8004ED34_00003F4C
+    bge lbl_collision_testLineSegment_00003F4C
     ori r15, r15, 0x8
-lbl_fn_8004ED34_00003F4C:
+lbl_collision_testLineSegment_00003F4C:
     lwz r3, 0x34(r17)
     lwz r3, 0x4(r3)
     rlwinm r0, r3, 0, 22, 22
     cmplwi r0, 0x200
-    bne lbl_fn_8004ED34_00003F64
+    bne lbl_collision_testLineSegment_00003F64
     ori r15, r15, 0x10
-lbl_fn_8004ED34_00003F64:
+lbl_collision_testLineSegment_00003F64:
     rlwinm r0, r3, 0, 19, 19
     cmplwi r0, 0x1000
-    bne lbl_fn_8004ED34_00003F84
+    bne lbl_collision_testLineSegment_00003F84
     psq_l f1, 0x4(r17), 0, 0
     ori r15, r15, 0x40
     lfs f2, 0xc(r17)
     stfs f2, 0x4c(r16)
     psq_st f1, 0x44(r16), 0, 0
-lbl_fn_8004ED34_00003F84:
+lbl_collision_testLineSegment_00003F84:
     lwz r3, 0x34(r17)
     lwz r0, 0x4(r3)
     rlwinm r0, r0, 0, 18, 18
     cmplwi r0, 0x2000
-    bne lbl_fn_8004ED34_00003FAC
+    bne lbl_collision_testLineSegment_00003FAC
     psq_l f1, 0x4(r17), 0, 0
     ori r15, r15, 0x80
     lfs f2, 0xc(r17)
     stfs f2, 0x4c(r16)
     psq_st f1, 0x44(r16), 0, 0
-lbl_fn_8004ED34_00003FAC:
+lbl_collision_testLineSegment_00003FAC:
     lwz r3, 0x34(r17)
     lwz r0, 0x4(r3)
     rlwinm r0, r0, 0, 17, 17
     cmplwi r0, 0x4000
-    bne lbl_fn_8004ED34_00003FD4
+    bne lbl_collision_testLineSegment_00003FD4
     psq_l f1, 0x4(r17), 0, 0
     ori r15, r15, 0x200
     lfs f2, 0xc(r17)
     stfs f2, 0x4c(r16)
     psq_st f1, 0x44(r16), 0, 0
-lbl_fn_8004ED34_00003FD4:
+lbl_collision_testLineSegment_00003FD4:
     lwz r3, 0x34(r17)
     lwz r3, 0x4(r3)
     rlwinm r0, r3, 0, 16, 16
     cmplwi r0, 0x8000
-    bne lbl_fn_8004ED34_00003FEC
+    bne lbl_collision_testLineSegment_00003FEC
     ori r15, r15, 0x400
-lbl_fn_8004ED34_00003FEC:
+lbl_collision_testLineSegment_00003FEC:
     rlwinm r3, r3, 0, 13, 13
     subis r0, r3, 0x4
     cmplwi r0, 0x0
-    bne lbl_fn_8004ED34_00004000
+    bne lbl_collision_testLineSegment_00004000
     ori r15, r15, 0x800
-lbl_fn_8004ED34_00004000:
+lbl_collision_testLineSegment_00004000:
     lfs f4, 0x4(r16)
     lfs f3, 0x0(r14)
     lwz r0, 0x3c(r16)
@@ -4535,28 +4535,28 @@ lbl_fn_8004ED34_00004000:
     fadds f4, f0, f27
     fmuls f0, f3, f3
     fcmpo cr0, f0, f4
-    bge lbl_fn_8004ED34_0000405C
+    bge lbl_collision_testLineSegment_0000405C
     lfs f3, 0x8(r16)
     lfs f0, 0x4(r14)
     fsubs f0, f3, f0
     fmuls f0, f0, f0
     fcmpo cr0, f0, f4
-    bge lbl_fn_8004ED34_0000405C
+    bge lbl_collision_testLineSegment_0000405C
     lfs f3, 0xc(r16)
     lfs f0, 0x8(r14)
     fsubs f0, f3, f0
     fmuls f0, f0, f0
     fcmpo cr0, f0, f4
-    blt lbl_fn_8004ED34_00004064
-lbl_fn_8004ED34_0000405C:
+    blt lbl_collision_testLineSegment_00004064
+lbl_collision_testLineSegment_0000405C:
     li r3, 0x0
-    b lbl_fn_8004ED34_0000409C
-lbl_fn_8004ED34_00004064:
+    b lbl_collision_testLineSegment_0000409C
+lbl_collision_testLineSegment_00004064:
     li r3, 0x1
-    b lbl_fn_8004ED34_0000409C
-lbl_fn_8004ED34_0000406C:
+    b lbl_collision_testLineSegment_0000409C
+lbl_collision_testLineSegment_0000406C:
     cmpwi r23, 0x0
-    beq lbl_fn_8004ED34_00004098
+    beq lbl_collision_testLineSegment_00004098
     psq_l f1, 0x0(r26), 0, 0
     lfs f2, 0xac(r1)
     psq_st f1, 0x0(r27), 0, 0
@@ -4565,10 +4565,10 @@ lbl_fn_8004ED34_0000406C:
     lfs f2, 0x8(r17)
     psq_st f1, 0x0(r26), 0, 0
     stfs f2, 0xac(r1)
-    b lbl_fn_8004ED34_00003ABC
-lbl_fn_8004ED34_00004098:
+    b lbl_collision_testLineSegment_00003ABC
+lbl_collision_testLineSegment_00004098:
     li r3, 0x0
-lbl_fn_8004ED34_0000409C:
+lbl_collision_testLineSegment_0000409C:
     addi r11, r1, 0x110
     psq_l f31, 0x168(r1), 0, 0
     lfd f31, 0x160(r1)

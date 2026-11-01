@@ -41,7 +41,7 @@ extern void strcmp(void);
 extern void atoi(void);
 extern void fn_8068A850(void);
 extern void fn_8068AD58(void);
-extern void fn_8068B100(void);
+extern void math_u64DivMod(void);
 extern void runtime_registerStaticObject(void);
 extern void __destroy_arr(void);
 extern u32 strlen(const char* str);
@@ -1045,7 +1045,7 @@ lbl_fn_80404290_00000DDC:
     lfs f0, 0x10(r1)
     fmuls f3, f3, f3
     fmadds f1, f0, f0, f3
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f3, f1
     lfs f0, lbl_8088619C
     lwz r0, 0x10c(r30)
@@ -1598,7 +1598,7 @@ asm void fn_80404E70(void)
     fmuls f1, f1, f1
     stw r31, 0x420(r3)
     fmuls f1, f1, f0
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f31, f1
     bl rand
     lis r27, 0x4178

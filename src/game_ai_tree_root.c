@@ -15,14 +15,14 @@ extern void fn_800580BC(void);
 extern void fn_800588FC(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
-extern void fn_8005B6E8(void);
+extern void talk_setSpeakerName(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_800897D8(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800C31F4(void);
+extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void str_parseInt(void);
@@ -486,7 +486,7 @@ asm void fn_80256384(void)
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x38(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
     lis r30, lbl_80743D18@ha
     lis r31, lbl_80743CF0@ha
     lfs f30, lbl_808833E0
@@ -1167,7 +1167,7 @@ lbl_fn_80256C04_00000E74:
     stw r0, 0x970(r7)
     stfs f0, 0x974(r7)
     stfs f0, 0x978(r7)
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle

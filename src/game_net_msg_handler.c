@@ -5,7 +5,7 @@
 extern void OSGetTime(void);
 extern void __div2i(void);
 extern void __register_global_object(void);
-extern void fn_800827E0(void);
+extern void dungeon_initGlobalContext(void);
 extern void fn_800838B8(void);
 extern void fn_8016F3D0(void);
 extern void fn_80178668(void);
@@ -80,7 +80,7 @@ asm void fn_804F2ED0(void)
     lwz r0, lbl_8087F600
     cmpwi r0, 0x0
     bne lbl_fn_804F2ED0_00000060
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     li r4, 0x1000
     li r5, 0x4
     li r6, 0x5
@@ -99,7 +99,7 @@ lbl_fn_804F2ED0_00000070:
     lwz r0, lbl_8087F600
     cmpwi r0, 0x0
     bne lbl_fn_804F2ED0_000000A4
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     li r4, 0x1000
     li r5, 0x4
     li r6, 0x5
@@ -138,7 +138,7 @@ asm void fn_804F2F94(void)
     lwz r0, lbl_8087F600
     cmpwi r0, 0x0
     bne lbl_fn_804F2F94_00000124
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     li r4, 0x1000
     li r5, 0x4
     li r6, 0x5
@@ -182,7 +182,7 @@ asm void fn_804F3024(void)
     lwz r0, lbl_8087F600
     cmpwi r0, 0x0
     bne lbl_fn_804F3024_000001B4
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     li r4, 0x1000
     li r5, 0x4
     li r6, 0x5
@@ -224,7 +224,7 @@ asm void fn_804F30B4(void)
     lwz r0, lbl_8087F600
     cmpwi r0, 0x0
     bne lbl_fn_804F30B4_0000023C
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     li r4, 0x1000
     li r5, 0x4
     li r6, 0x5
@@ -243,7 +243,7 @@ lbl_fn_804F30B4_0000024C:
     lwz r0, lbl_8087F600
     cmpwi r0, 0x0
     bne lbl_fn_804F30B4_00000280
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     li r4, 0x1000
     li r5, 0x4
     li r6, 0x5
@@ -282,7 +282,7 @@ asm void fn_804F3174(void)
     lwz r0, lbl_8087F600
     cmpwi r0, 0x0
     bne lbl_fn_804F3174_00000300
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     li r4, 0x1000
     li r5, 0x4
     li r6, 0x5
@@ -301,7 +301,7 @@ lbl_fn_804F3174_00000310:
     lwz r0, lbl_8087F600
     cmpwi r0, 0x0
     bne lbl_fn_804F3174_00000344
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     li r4, 0x1000
     li r5, 0x4
     li r6, 0x5
@@ -348,7 +348,7 @@ asm void fn_804F325C(void)
     lwz r0, lbl_8087F600
     cmpwi r0, 0x0
     bne lbl_fn_804F325C_000003E4
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     li r4, 0x1000
     li r5, 0x4
     li r6, 0x5
@@ -367,7 +367,7 @@ lbl_fn_804F325C_000003F4:
     lwz r0, lbl_8087F600
     cmpwi r0, 0x0
     bne lbl_fn_804F325C_00000428
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     li r4, 0x1000
     li r5, 0x4
     li r6, 0x5
@@ -524,7 +524,7 @@ asm void fn_804F34B8(void)
     lwz r0, lbl_8087F600
     cmpwi r0, 0x0
     bne lbl_fn_804F34B8_00000658
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     li r4, 0x1000
     li r5, 0x4
     li r6, 0x5
@@ -589,7 +589,7 @@ lbl_fn_804F34B8_000006F0:
     lwz r0, lbl_8087F600
     cmpwi r0, 0x0
     bne lbl_fn_804F34B8_00000734
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     li r4, 0x1000
     li r5, 0x4
     li r6, 0x5
@@ -697,7 +697,7 @@ asm void fn_804F36FC(void)
     lwz r0, lbl_8087F600
     cmpwi r0, 0x0
     bne lbl_fn_804F36FC_000008A4
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     li r4, 0x1000
     li r5, 0x4
     li r6, 0x5
@@ -762,7 +762,7 @@ lbl_fn_804F36FC_0000093C:
     lwz r0, lbl_8087F600
     cmpwi r0, 0x0
     bne lbl_fn_804F36FC_00000980
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     li r4, 0x1000
     li r5, 0x4
     li r6, 0x5
@@ -804,7 +804,7 @@ asm void fn_804F3884(void)
     lwz r0, lbl_8087F600
     cmpwi r0, 0x0
     bne lbl_fn_804F3884_00000A0C
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     li r4, 0x1000
     li r5, 0x4
     li r6, 0x5
@@ -900,7 +900,7 @@ asm void fn_804F39D8(void)
     lwz r0, lbl_8087F600
     cmpwi r0, 0x0
     bne lbl_fn_804F39D8_00000B5C
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     li r4, 0x1000
     li r5, 0x4
     li r6, 0x5
@@ -984,7 +984,7 @@ asm void fn_804F3AF4(void)
     lwz r0, lbl_8087F600
     cmpwi r0, 0x0
     bne lbl_fn_804F3AF4_00000C7C
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     li r4, 0x1000
     li r5, 0x4
     li r6, 0x5
@@ -1003,7 +1003,7 @@ lbl_fn_804F3AF4_00000C8C:
     lwz r0, lbl_8087F600
     cmpwi r0, 0x0
     bne lbl_fn_804F3AF4_00000CC0
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     li r4, 0x1000
     li r5, 0x4
     li r6, 0x5
@@ -1185,7 +1185,7 @@ asm void fn_804F3D84(void)
     lwz r0, lbl_8087F600
     cmpwi r0, 0x0
     bne lbl_fn_804F3D84_00000F14
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     li r4, 0x1000
     li r5, 0x4
     li r6, 0x5
@@ -1204,7 +1204,7 @@ lbl_fn_804F3D84_00000F24:
     lwz r0, lbl_8087F600
     cmpwi r0, 0x0
     bne lbl_fn_804F3D84_00000F58
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     li r4, 0x1000
     li r5, 0x4
     li r6, 0x5
@@ -1242,7 +1242,7 @@ asm void fn_804F3E54(void)
     lwz r0, lbl_8087F600
     cmpwi r0, 0x0
     bne lbl_fn_804F3E54_00000FD4
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     li r4, 0x1000
     li r5, 0x4
     li r6, 0x5
@@ -1292,7 +1292,7 @@ asm void fn_804F3EF0(void)
     lwz r0, lbl_8087F600
     cmpwi r0, 0x0
     bne lbl_fn_804F3EF0_0000107C
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     li r4, 0x1000
     li r5, 0x4
     li r6, 0x5
@@ -1311,7 +1311,7 @@ lbl_fn_804F3EF0_0000108C:
     lwz r0, lbl_8087F600
     cmpwi r0, 0x0
     bne lbl_fn_804F3EF0_000010C0
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     li r4, 0x1000
     li r5, 0x4
     li r6, 0x5
@@ -1906,7 +1906,7 @@ asm void fn_804F472C(void)
     lwz r0, lbl_8087F600
     cmpwi r0, 0x0
     bne lbl_fn_804F472C_000018B4
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     li r4, 0x1000
     li r5, 0x4
     li r6, 0x5
@@ -1925,7 +1925,7 @@ lbl_fn_804F472C_000018C4:
     lwz r0, lbl_8087F600
     cmpwi r0, 0x0
     bne lbl_fn_804F472C_000018F8
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     li r4, 0x1000
     li r5, 0x4
     li r6, 0x5
@@ -1974,7 +1974,7 @@ asm void fn_804F4800(void)
     lwz r0, lbl_8087F600
     cmpwi r0, 0x0
     bne lbl_fn_804F4800_000019A0
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     li r4, 0x1000
     li r5, 0x4
     li r6, 0x5
@@ -2001,7 +2001,7 @@ lbl_fn_804F4800_000019CC:
     lwz r0, lbl_8087F600
     cmpwi r0, 0x0
     bne lbl_fn_804F4800_00001A00
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     li r4, 0x1000
     li r5, 0x4
     li r6, 0x5

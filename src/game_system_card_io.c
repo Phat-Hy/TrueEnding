@@ -7,7 +7,7 @@ extern void _savegpr_22(void);
 extern void fn_80011034(void);
 extern void vec3_sub(void);
 extern void fn_8003EA3C(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void cursor_updateSlotState(void);
 extern void system_getNextSequenceId(void);
 extern void fn_801255C8(void);
@@ -535,7 +535,7 @@ lbl_fn_803576F8_000005DC:
     li r4, 0x0
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     bne lbl_fn_803576F8_000004A0
 lbl_fn_803576F8_00000684:
@@ -1183,7 +1183,7 @@ lbl_fn_80357F48_00000F74:
     li r4, 0x0
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     bne lbl_fn_80357F48_00001054
     addi r3, r31, 0xc64
@@ -1554,7 +1554,7 @@ lbl_fn_80357F48_000014D0:
     li r4, 0x0
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     bne lbl_fn_80357F48_00001564
     lwz r12, 0x0(r31)

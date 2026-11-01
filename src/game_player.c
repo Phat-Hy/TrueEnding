@@ -17,7 +17,7 @@ extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
 extern void PSVECCrossProduct(void);
-extern void fn_8068B100(void);
+extern void math_u64DivMod(void);
 
 /* External data declarations */
 
@@ -1775,7 +1775,7 @@ lbl_fn_80051684_00001868:
     b lbl_fn_80051684_00001AE0
 lbl_fn_80051684_000018B8:
     fsubs f1, f0, f1
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f7, f1
     lfs f0, 0x14(r28)
     lfs f3, 0x10(r28)

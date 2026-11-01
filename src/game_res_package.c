@@ -33,7 +33,7 @@ extern void fn_801354B4(void);
 extern void fn_80136544(void);
 extern void boss_updatePhaseState(void);
 extern void quest_checkCondition(void);
-extern void fn_80219558(void);
+extern void task_mapIdToQueue(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_getName(void);
 extern void PSMTXTrans(void);
@@ -819,7 +819,7 @@ asm void fn_80225C80(void)
     mr r28, r4
     lwz r3, 0x50(r5)
     addi r29, r6, 0x5bc
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmpwi r28, 0x0
     mr r30, r3
     beq lbl_fn_80225C80_00000A58

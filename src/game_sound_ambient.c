@@ -39,7 +39,7 @@ extern void fn_8020EFEC(void);
 extern void event_findEntryById(void);
 extern void fn_802114D8(void);
 extern void fn_802114E0(void);
-extern void fn_80219558(void);
+extern void task_mapIdToQueue(void);
 extern void fn_804439FC(void);
 extern void fn_804444E8(void);
 extern void fn_804A3C24(void);
@@ -176,7 +176,7 @@ lbl_fn_801D8CC4_000000F4:
     li r4, -0x1
     bl ref_releaseHandle
     lwz r3, 0xc(r28)
-    bl fn_80219558
+    bl task_mapIdToQueue
     lwz r5, 0x14(r28)
     mr r4, r3
     mr r3, r31
@@ -221,7 +221,7 @@ lbl_fn_801D8CC4_000001E0:
     b lbl_fn_801D8CC4_0000055C
 lbl_fn_801D8CC4_00000214:
     lwz r3, 0xc(r28)
-    bl fn_80219558
+    bl task_mapIdToQueue
     mr r26, r3
     lwz r3, 0x48(r31)
     mr r4, r26

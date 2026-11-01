@@ -13,12 +13,12 @@ extern void atn_Model_findBoneIndex(void);
 extern void fn_8009373C(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800C31F4(void);
+extern void skin_playAnimationByName(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800F8574(void);
-extern void fn_800FAB80(void);
+extern void clip_calculateFrustum(void);
 extern void fn_8013310C(void);
 extern void fn_8016E4C4(void);
 extern void actor_setState(void);
@@ -1501,7 +1501,7 @@ lbl_fn_803412AC_000013A0:
     addi r8, r30, 0x534
     li r9, 0x0
     li r10, 0x1e
-    bl fn_800FAB80
+    bl clip_calculateFrustum
     addi r3, r30, 0x168c
     li r4, 0x0
     bl sound_initGlobalInstances
@@ -1541,7 +1541,7 @@ lbl_fn_803412AC_000013A0:
     addi r4, r4, 0x362
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle

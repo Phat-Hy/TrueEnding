@@ -34,7 +34,7 @@ extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
-extern void fn_8068B100(void);
+extern void math_u64DivMod(void);
 
 /* External data declarations */
 extern u8 lbl_80748760[];
@@ -879,7 +879,7 @@ asm void fn_802FA2F4(void)
     fmadds f1, f6, f6, f0
     stfs f3, 0x60(r1)
     stfs f5, 0x64(r1)
-    bl fn_8068B100
+    bl math_u64DivMod
     lfs f2, 0x64(r1)
     addi r3, r1, 0x5c
     frsp f31, f1
@@ -1192,7 +1192,7 @@ asm void fn_802FA764(void)
     fmadds f1, f6, f6, f0
     stfs f3, 0x120(r1)
     stfs f5, 0x124(r1)
-    bl fn_8068B100
+    bl math_u64DivMod
     lfs f2, 0x124(r1)
     addi r3, r1, 0x11c
     frsp f31, f1
@@ -1834,7 +1834,7 @@ asm void fn_802FB0C4(void)
     fmadds f1, f6, f6, f0
     stfs f3, 0x60(r1)
     stfs f5, 0x64(r1)
-    bl fn_8068B100
+    bl math_u64DivMod
     lfs f2, 0x64(r1)
     addi r3, r1, 0x5c
     frsp f31, f1

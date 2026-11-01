@@ -3,7 +3,7 @@
 
 /* External function declarations */
 extern void dtor_80084684(void);
-extern void fn_8006F72C(void);
+extern void str_assignBuffer(void);
 extern void mem_alloc(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
@@ -1090,7 +1090,7 @@ lbl_fn_801F837C_00000E44:
     addi r8, r1, 0x18
     add r7, r29, r0
     li r4, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r0, 0x1dc(r31)
     mr r4, r31
     lwz r5, 0x20(r1)
@@ -1142,7 +1142,7 @@ lbl_fn_801F837C_00000F10:
     add r7, r6, r0
     addi r8, r1, 0xc
     li r4, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     b lbl_fn_801F837C_00000FD0
 lbl_fn_801F837C_00000F30:
     addi r4, r4, 0x10
@@ -1183,7 +1183,7 @@ lbl_fn_801F837C_00000F7C:
     li r4, 0x0
     li r5, 0x0
     add r7, r6, r0
-    bl fn_8006F72C
+    bl str_assignBuffer
 lbl_fn_801F837C_00000FC4:
     lwz r3, 0x1dc(r31)
     addi r0, r3, 0x1
@@ -1278,7 +1278,7 @@ lbl_fn_801F8598_000010D8:
     addi r8, r1, 0xc
     add r7, r7, r0
     li r4, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r0, 0x1dc(r31)
     mr r4, r31
     lwz r5, 0x20(r1)
@@ -1330,7 +1330,7 @@ lbl_fn_801F8598_000011A8:
     add r7, r6, r0
     addi r8, r1, 0x18
     li r4, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     b lbl_fn_801F8598_00001268
 lbl_fn_801F8598_000011C8:
     addi r4, r4, 0x10
@@ -1371,7 +1371,7 @@ lbl_fn_801F8598_00001214:
     li r4, 0x0
     li r5, 0x0
     add r7, r6, r0
-    bl fn_8006F72C
+    bl str_assignBuffer
 lbl_fn_801F8598_0000125C:
     lwz r3, 0x1dc(r31)
     addi r0, r3, 0x1

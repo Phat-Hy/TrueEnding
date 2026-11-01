@@ -8,9 +8,9 @@ extern void fn_8004ECC0(void);
 extern void talk_parseDialogue(void);
 extern void fn_8005B8F8(void);
 extern void fn_8005B9AC(void);
-extern void fn_8006F72C(void);
+extern void str_assignBuffer(void);
 extern void mem_realloc(void);
-extern void fn_800A55AC(void);
+extern void msg_getMessageString(void);
 extern void ref_releaseHandle(void);
 extern void wcs_parseInt(void);
 extern void actor_spawnActorWithId(void);
@@ -107,7 +107,7 @@ asm void fn_8011B570(void)
     mr r3, r0
     li r4, 0x0
     li r5, 0x0
-    bl fn_800A55AC
+    bl msg_getMessageString
     b lbl_fn_8011B570_00000038
 lbl_fn_8011B570_00000034:
     li r3, 0x0
@@ -121,7 +121,7 @@ lbl_fn_8011B570_00000038:
     beq lbl_fn_8011B570_00000064
     li r4, 0x0
     li r5, 0x1a
-    bl fn_800A55AC
+    bl msg_getMessageString
     b lbl_fn_8011B570_00000068
 lbl_fn_8011B570_00000064:
     li r3, 0x0
@@ -152,7 +152,7 @@ lbl_fn_8011B570_000000B0:
     beq lbl_fn_8011B570_000000CC
     li r4, 0x0
     li r5, 0x1
-    bl fn_800A55AC
+    bl msg_getMessageString
     b lbl_fn_8011B570_000000D0
 lbl_fn_8011B570_000000CC:
     li r3, 0x0
@@ -166,7 +166,7 @@ lbl_fn_8011B570_000000D0:
     beq lbl_fn_8011B570_000000FC
     li r4, 0x0
     li r5, 0x19
-    bl fn_800A55AC
+    bl msg_getMessageString
     b lbl_fn_8011B570_00000100
 lbl_fn_8011B570_000000FC:
     li r3, 0x0
@@ -198,7 +198,7 @@ lbl_fn_8011B570_0000014C:
     beq lbl_fn_8011B570_00000168
     li r4, 0x0
     li r5, 0x3
-    bl fn_800A55AC
+    bl msg_getMessageString
     b lbl_fn_8011B570_0000016C
 lbl_fn_8011B570_00000168:
     li r3, 0x0
@@ -212,7 +212,7 @@ lbl_fn_8011B570_0000016C:
     beq lbl_fn_8011B570_00000198
     li r4, 0x0
     li r5, 0x18
-    bl fn_800A55AC
+    bl msg_getMessageString
     b lbl_fn_8011B570_0000019C
 lbl_fn_8011B570_00000198:
     li r3, 0x0
@@ -269,7 +269,7 @@ lbl_fn_8011B570_00000244:
     beq lbl_fn_8011B570_00000260
     li r4, 0x0
     li r5, 0x2
-    bl fn_800A55AC
+    bl msg_getMessageString
     b lbl_fn_8011B570_00000264
 lbl_fn_8011B570_00000260:
     li r3, 0x0
@@ -283,7 +283,7 @@ lbl_fn_8011B570_00000264:
     beq lbl_fn_8011B570_00000290
     li r4, 0x0
     li r5, 0x17
-    bl fn_800A55AC
+    bl msg_getMessageString
     b lbl_fn_8011B570_00000294
 lbl_fn_8011B570_00000290:
     li r3, 0x0
@@ -523,7 +523,7 @@ lbl_fn_8011B8D4_000005B4:
     addi r8, r1, 0x8
     add r7, r28, r0
     li r4, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     addi r30, r30, 0x18
 lbl_fn_8011B8D4_000005E8:
     addi r3, r1, 0x10

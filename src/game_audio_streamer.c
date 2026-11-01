@@ -7,7 +7,7 @@ extern void _restgpr_26(void);
 extern void _savegpr_22(void);
 extern void _savegpr_26(void);
 extern void talk_parseQuotedString(void);
-extern void fn_8005B6E8(void);
+extern void talk_setSpeakerName(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -43,7 +43,7 @@ extern void strcmp(void);
 extern void strncmp(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
-extern void fn_8068B100(void);
+extern void math_u64DivMod(void);
 extern void __construct_new_array(void);
 extern u32 strlen(const char* str);
 
@@ -1279,7 +1279,7 @@ lbl_fn_802FC2E0_000010E4:
     stfs f6, 0x68(r1)
     fmadds f1, f6, f6, f0
     stfs f3, 0x6c(r1)
-    bl fn_8068B100
+    bl math_u64DivMod
     lwz r4, 0x15ac(r29)
     frsp f25, f1
     lfs f0, 0x530(r29)
@@ -1742,7 +1742,7 @@ lbl_fn_802FC850_0000175C:
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x14(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
     lis r31, lbl_80748A14@ha
     addi r31, r31, lbl_80748A14@l
 lbl_fn_802FC850_000017E4:

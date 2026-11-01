@@ -16,7 +16,7 @@ extern void fn_80087E9C(void);
 extern void fn_8008826C(void);
 extern void fn_80088AF4(void);
 extern void fn_80088FAC(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void PSVECNormalize(void);
 extern int sprintf(char* str, const char* format, ...);
 
@@ -526,7 +526,7 @@ asm void fn_800B9618(void)
     cmpwi r3, 0x0
     beq lbl_fn_800B9618_000006B4
     addi r3, r3, 0x10
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0x0(r31)
     b lbl_fn_800B9618_000006B8
 lbl_fn_800B9618_000006B4:
@@ -536,10 +536,10 @@ lbl_fn_800B9618_000006B8:
     stw r3, 0x4c(r31)
     addi r30, r4, lbl_80732F00@l
     addi r4, r30, 0x8
-    bl fn_8008937C
+    bl node_createNamedChild
     mr r25, r3
     addi r4, r30, 0xe
-    bl fn_8008937C
+    bl node_createNamedChild
     mr r26, r3
     mr r3, r25
     addi r4, r30, 0x16
@@ -830,11 +830,11 @@ lbl_fn_800B9618_000006B8:
     bl route_interpolatePath
     lwz r3, 0x4c(r31)
     addi r4, r30, 0x19c
-    bl fn_8008937C
+    bl node_createNamedChild
     mr r28, r3
     lwz r3, 0x4c(r31)
     addi r4, r30, 0x1a3
-    bl fn_8008937C
+    bl node_createNamedChild
     mr r25, r3
     addi r4, r30, 0x1ac
     addi r5, r31, 0x230
@@ -873,7 +873,7 @@ lbl_fn_800B9618_000006B8:
     bl route_interpolatePath
     lwz r3, 0x4c(r31)
     addi r4, r30, 0x1df
-    bl fn_8008937C
+    bl node_createNamedChild
     lfs f1, lbl_80881050
     mr r25, r3
     lfs f2, lbl_80880FF8
@@ -963,7 +963,7 @@ lbl_fn_800B9618_000006B8:
     bl route_createSegment
     lwz r3, 0x4c(r31)
     addi r4, r30, 0x251
-    bl fn_8008937C
+    bl node_createNamedChild
     mr r25, r3
     addi r4, r30, 0x25b
     addi r5, r31, 0x1d0
@@ -1041,7 +1041,7 @@ lbl_fn_800B9618_000006B8:
     bl route_interpolatePath
     mr r3, r28
     addi r4, r30, 0x2c6
-    bl fn_8008937C
+    bl node_createNamedChild
     mr r25, r3
     addi r4, r30, 0x25b
     addi r5, r31, 0x324
@@ -1110,7 +1110,7 @@ lbl_fn_800B9618_000006B8:
     bl route_interpolatePath
     mr r3, r28
     addi r4, r30, 0x31
-    bl fn_8008937C
+    bl node_createNamedChild
     mr r25, r3
     addi r4, r30, 0x25b
     addi r5, r31, 0x3e0
@@ -1176,7 +1176,7 @@ lbl_fn_800B9618_00001068:
     mr r3, r28
     addi r30, r30, lbl_80732F00@l
     addi r4, r30, 0x326
-    bl fn_8008937C
+    bl node_createNamedChild
     mr r25, r3
     addi r4, r30, 0x32d
     addi r5, r31, 0x264
@@ -1275,7 +1275,7 @@ lbl_fn_800B9618_00001068:
     bl route_findNextWaypoint
     mr r3, r28
     addi r4, r30, 0x399
-    bl fn_8008937C
+    bl node_createNamedChild
     mr r25, r3
     addi r4, r30, 0x39f
     addi r5, r31, 0x54
@@ -1479,7 +1479,7 @@ lbl_fn_800B9618_00001068:
     bl route_interpolatePath
     mr r3, r28
     addi r4, r30, 0x481
-    bl fn_8008937C
+    bl node_createNamedChild
     mr r25, r3
     addi r4, r30, 0x485
     addi r5, r31, 0xd4
@@ -1582,7 +1582,7 @@ lbl_fn_800B9618_00001068:
     bl route_interpolatePath
     mr r3, r28
     addi r4, r30, 0x507
-    bl fn_8008937C
+    bl node_createNamedChild
     mr r25, r3
     addi r4, r30, 0x25b
     addi r5, r31, 0x240
@@ -1651,7 +1651,7 @@ lbl_fn_800B9618_00001068:
     bl route_interpolatePath
     mr r3, r28
     addi r4, r30, 0x551
-    bl fn_8008937C
+    bl node_createNamedChild
     mr r25, r3
     addi r4, r30, 0x25b
     addi r5, r31, 0x374
@@ -1702,7 +1702,7 @@ lbl_fn_800B9618_00001068:
     bl fn_80088AF4
     mr r3, r28
     addi r4, r30, 0x569
-    bl fn_8008937C
+    bl node_createNamedChild
     mr r25, r3
     addi r4, r30, 0x25b
     addi r5, r31, 0x2ac
@@ -1735,7 +1735,7 @@ lbl_fn_800B9618_00001068:
     bl route_interpolatePath
     mr r3, r28
     addi r4, r30, 0x578
-    bl fn_8008937C
+    bl node_createNamedChild
     mr r25, r3
     addi r4, r30, 0x25b
     addi r5, r31, 0x2bc
@@ -1804,7 +1804,7 @@ lbl_fn_800B9618_00001068:
     bl fn_8008826C
     lwz r3, 0x4c(r31)
     addi r4, r30, 0x597
-    bl fn_8008937C
+    bl node_createNamedChild
     mr r25, r3
     addi r4, r30, 0x59e
     addi r5, r31, 0x410
@@ -2047,7 +2047,7 @@ lbl_fn_800B9618_00001068:
     bl route_findNextWaypoint
     lwz r3, 0x4c(r31)
     addi r4, r30, 0x6f1
-    bl fn_8008937C
+    bl node_createNamedChild
     mr r25, r3
     addi r4, r30, 0x6f9
     addi r5, r31, 0x2f8
@@ -2092,7 +2092,7 @@ lbl_fn_800B9618_00001068:
     bl fn_80088FAC
     lwz r3, 0x4c(r31)
     addi r4, r30, 0x73a
-    bl fn_8008937C
+    bl node_createNamedChild
     lfs f1, lbl_80880FB8
     mr r25, r3
     lfs f2, lbl_80880FD8

@@ -5,7 +5,7 @@
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void fn_80041A28(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800F8C6C(void);
@@ -197,7 +197,7 @@ lbl_fn_80331094_000000F4:
     li r4, 0x0
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     bne lbl_fn_80331094_000001BC
     li r28, 0x1

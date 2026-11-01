@@ -7,7 +7,7 @@ extern void _restgpr_21(void);
 extern void _savegpr_21(void);
 extern void dtor_80084684(void);
 extern void fn_8006F17C(void);
-extern void fn_8006F72C(void);
+extern void str_assignBuffer(void);
 extern void mem_free(void);
 extern void fn_800DBF68(void);
 extern void fn_800E0908(void);
@@ -892,7 +892,7 @@ lbl_fn_800DFB40_00000B50:
     addi r7, r1, 0x42
     addi r8, r1, 0x34
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     addi r28, r28, 0x2
     addi r30, r30, 0x1
 lbl_fn_800DFB40_00000B74:
@@ -939,7 +939,7 @@ lbl_fn_800DFB40_00000BF4:
     addi r7, r1, 0x40
     addi r8, r1, 0x2c
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     b lbl_fn_800DFB40_00000C5C
 lbl_fn_800DFB40_00000C18:
     lhz r0, 0x0(r29)
@@ -960,7 +960,7 @@ lbl_fn_800DFB40_00000C3C:
     addi r7, r1, 0x3e
     addi r8, r1, 0x24
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
 lbl_fn_800DFB40_00000C5C:
     addi r29, r29, 0x2
     addi r27, r27, 0x1
@@ -1082,7 +1082,7 @@ lbl_fn_800DFB40_00000DEC:
     addi r7, r1, 0x3c
     addi r8, r1, 0x1c
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     addi r28, r28, 0x2
     addi r30, r30, 0x1
 lbl_fn_800DFB40_00000E10:
@@ -1105,7 +1105,7 @@ lbl_fn_800DFB40_00000E38:
     addi r7, r1, 0x3a
     addi r8, r1, 0x14
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r3, 0x44(r1)
     bl fn_800DFADC
     stw r3, 0x44(r1)
@@ -1139,7 +1139,7 @@ lbl_fn_800DFB40_00000E9C:
     addi r8, r1, 0x8
     add r7, r29, r0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
 lbl_fn_800DFB40_00000ED0:
     addi r11, r1, 0x80
     psq_l f31, 0xc8(r1), 0, 0
@@ -1263,7 +1263,7 @@ lbl_fn_800E0000_00001044:
     li r4, 0x0
     li r5, 0x0
     add r7, r6, r0
-    bl fn_8006F72C
+    bl str_assignBuffer
 lbl_fn_800E0000_00001088:
     lwz r3, 0x4(r30)
     addi r0, r3, 0x1
@@ -1395,7 +1395,7 @@ lbl_fn_800E0000_00001224:
     li r4, 0x0
     li r5, 0x0
     add r7, r6, r0
-    bl fn_8006F72C
+    bl str_assignBuffer
 lbl_fn_800E0000_00001268:
     lwz r3, 0x7c(r1)
     subi r6, r29, 0x5555
@@ -1532,7 +1532,7 @@ lbl_fn_800E0000_0000141C:
     li r4, 0x0
     li r5, 0x0
     add r7, r6, r0
-    bl fn_8006F72C
+    bl str_assignBuffer
 lbl_fn_800E0000_00001464:
     lwz r3, 0x4(r30)
     addi r0, r3, 0x1
@@ -1685,7 +1685,7 @@ lbl_fn_800E0000_00001654:
     li r4, 0x0
     li r5, 0x0
     add r7, r6, r0
-    bl fn_8006F72C
+    bl str_assignBuffer
 lbl_fn_800E0000_00001698:
     lwz r0, 0x4(r30)
     lis r3, 0x2aab

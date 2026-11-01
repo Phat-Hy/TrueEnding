@@ -16,7 +16,7 @@ extern void morph_updateMesh(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800FAB80(void);
+extern void clip_calculateFrustum(void);
 extern void fn_8016D3F8(void);
 extern void fn_80170F20(void);
 extern void fn_80174E04(void);
@@ -305,7 +305,7 @@ lbl_fn_803FB870_0000021C:
     mr r9, r26
     addi r8, r1, 0x2c
     li r10, 0x1e
-    bl fn_800FAB80
+    bl clip_calculateFrustum
     lwz r3, lbl_8087F048
     li r0, 0x0
     addis r3, r3, 0x4

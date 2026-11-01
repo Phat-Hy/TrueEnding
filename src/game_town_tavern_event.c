@@ -6,7 +6,7 @@ extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
 extern void fn_80088FAC(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
@@ -99,7 +99,7 @@ asm void fn_803CFC78(void)
     cmpwi r3, 0x0
     beq lbl_fn_803CFC78_00000080
     addi r3, r3, 0x10
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0x2664(r28)
     mr r29, r3
     b lbl_fn_803CFC78_00000084
@@ -260,7 +260,7 @@ lbl_fn_803CFC78_00000084:
     bl fn_80088FAC
     mr r3, r29
     addi r4, r31, 0xc0
-    bl fn_8008937C
+    bl node_createNamedChild
     lfs f2, lbl_80885D60
     mr r30, r3
     lfs f1, lbl_80885D58

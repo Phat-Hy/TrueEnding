@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void __files(void);
 extern void dtor_80084684(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void mem_free(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -12,7 +12,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800FAB80(void);
+extern void clip_calculateFrustum(void);
 extern void actor_setState(void);
 extern void res_findResourceSlot(void);
 extern void world_setGlobalFlag(void);
@@ -1716,7 +1716,7 @@ asm void fn_8029B59C(void)
     stfs f2, 0x10(r1)
     stfs f4, 0x18(r1)
     stfs f0, 0xc(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_8029B59C_000017F4
     addi r3, r1, 0x30
@@ -1902,7 +1902,7 @@ lbl_fn_8029B704_000019CC:
     lwz r6, 0x1588(r30)
     add r5, r30, r0
     lwz r5, 0x14ec(r5)
-    bl fn_800FAB80
+    bl clip_calculateFrustum
     lwz r0, 0x15ac(r30)
     addi r4, r1, 0x48
     lwz r31, 0x15b0(r30)

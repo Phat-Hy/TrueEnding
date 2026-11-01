@@ -67,7 +67,7 @@ extern void fn_8014FD30(void);
 extern void fn_8014FF9C(void);
 extern void fn_8020EE8C(void);
 extern void fn_802180A8(void);
-extern void fn_80219558(void);
+extern void task_mapIdToQueue(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_unload(void);
@@ -1972,7 +1972,7 @@ lbl_fn_801371AC_00001944:
     li r16, 0x0
     beq cr1, lbl_fn_801371AC_000019C0
     lwz r3, 0x50(r17)
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmpwi r3, 0x0
     li r0, 0x0
     blt lbl_fn_801371AC_0000198C
@@ -1983,7 +1983,7 @@ lbl_fn_801371AC_0000198C:
     cmpwi r0, 0x0
     beq lbl_fn_801371AC_000019C0
     lwz r3, 0x50(r17)
-    bl fn_80219558
+    bl task_mapIdToQueue
     mulli r0, r3, 0x43c
     lwz r3, lbl_8087F4F0
     slw r4, r31, r18

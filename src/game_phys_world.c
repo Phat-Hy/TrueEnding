@@ -16,7 +16,7 @@ extern void fn_80012A1C(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_8004B290(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void fn_80076FF8(void);
 extern void mem_free(void);
 extern void fn_800928B0(void);
@@ -112,7 +112,7 @@ lbl_fn_801120B0_00000030:
     stw r0, 0x4c(r1)
     li r9, 0x0
     stw r0, 0x50(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_801120B0_000000B0
     li r0, 0x1
@@ -168,7 +168,7 @@ lbl_fn_80112174_000000F4:
     stw r0, 0x44(r1)
     li r9, 0x0
     stw r0, 0x48(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_80112174_00000154
     lwz r3, 0x8c(r31)

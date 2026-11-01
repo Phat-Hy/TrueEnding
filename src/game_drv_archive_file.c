@@ -22,7 +22,7 @@ extern void fn_801781B0(void);
 extern void fn_80178864(void);
 extern void fn_8017ABD4(void);
 extern void fn_8017AC08(void);
-extern void fn_80219558(void);
+extern void task_mapIdToQueue(void);
 extern void task_findEntryById(void);
 extern void fn_8021A77C(void);
 extern void fn_8021A888(void);
@@ -188,7 +188,7 @@ lbl_fn_805A96D8_00000148:
     stw r0, 0xe8(r25)
     lwz r29, 0x58(r25)
     lwz r3, 0x50(r30)
-    bl fn_80219558
+    bl task_mapIdToQueue
     lwz r0, 0xa0(r25)
     li r27, 0x0
     slwi r0, r0, 2
@@ -744,7 +744,7 @@ asm void fn_805AA018(void)
     stw r30, 0x8(r1)
     mr r30, r5
     lwz r3, 0x50(r4)
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmplwi r3, 0xe
     bgt lbl_fn_805AA018_00000C4C
     lis r4, jumptable_80797644@ha
@@ -991,7 +991,7 @@ asm void fn_805AA394(void)
     bl fn_8017AC08
     mr r31, r3
     lwz r3, 0x50(r30)
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmplwi r3, 0xe
     bgt lbl_fn_805AA394_00000DEC
     lis r4, jumptable_80797680@ha

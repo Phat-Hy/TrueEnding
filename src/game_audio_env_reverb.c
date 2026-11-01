@@ -9,7 +9,7 @@ extern void dtor_80084684(void);
 extern void mem_free(void);
 extern void fn_8008CD60(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_800C31F4(void);
+extern void skin_playAnimationByName(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void system_getNextSequenceId(void);
@@ -559,7 +559,7 @@ lbl_fn_80317360_00000654:
     addi r3, r1, 0x10
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle

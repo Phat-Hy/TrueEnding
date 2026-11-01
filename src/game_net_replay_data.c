@@ -10,7 +10,7 @@ extern void dtor_80084684(void);
 extern void fn_80061AE4(void);
 extern void fn_8006EF48(void);
 extern void mem_alloc(void);
-extern void fn_800C31F4(void);
+extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
@@ -2169,7 +2169,7 @@ lbl_fn_804C5E9C_00001C74:
     addi r4, r4, 0x295
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x1c
     li r4, -0x1
     bl ref_releaseHandle
@@ -2232,7 +2232,7 @@ lbl_fn_804C5E9C_00001D2C:
     addi r4, r31, 0x2a2
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x18
     li r4, -0x1
     bl ref_releaseHandle
@@ -2245,7 +2245,7 @@ lbl_fn_804C5E9C_00001D98:
     addi r4, r31, 0x295
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x14
     li r4, -0x1
     bl ref_releaseHandle
@@ -2272,7 +2272,7 @@ lbl_fn_804C5E9C_00001DEC:
     addi r4, r4, 0x2af
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle

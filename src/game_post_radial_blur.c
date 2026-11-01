@@ -7,14 +7,14 @@ extern void _restgpr_27(void);
 extern void _savegpr_25(void);
 extern void _savegpr_27(void);
 extern void fn_8004ECC0(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void wcs_vformat(void);
 extern void fn_800EB7A0(void);
 extern void fn_800EE360(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800FAB80(void);
+extern void clip_calculateFrustum(void);
 extern void fn_801031D0(void);
 extern void fn_801079C0(void);
 extern void fn_80107A68(void);
@@ -222,7 +222,7 @@ lbl_fn_802CB1CC_000000D4:
     stw r0, 0x98(r1)
     stw r0, 0x9c(r1)
     stw r0, 0xa0(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_802CB1CC_00000224
     lwz r3, 0x98(r1)
@@ -775,7 +775,7 @@ lbl_fn_802CB8A0_00000960:
     li r9, 0x0
     li r10, 0x3c
     lwz r6, 0x590(r31)
-    bl fn_800FAB80
+    bl clip_calculateFrustum
 lbl_fn_802CB8A0_000009CC:
     psq_l f1, 0x528(r31), 0, 0
     addi r4, r1, 0xd0
@@ -1107,7 +1107,7 @@ lbl_fn_802CB8A0_00000E34:
     stw r0, 0x248(r1)
     stw r0, 0x24c(r1)
     stw r0, 0x250(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_802CB8A0_00000EEC
     addi r4, r31, 0x151c

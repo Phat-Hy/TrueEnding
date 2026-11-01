@@ -10,14 +10,14 @@ extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
-extern void fn_8005B6E8(void);
+extern void talk_setSpeakerName(void);
 extern void fn_8006AFF8(void);
 extern void mem_free(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
 extern void fn_80088FAC(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void morph_updateMesh(void);
@@ -26,7 +26,7 @@ extern void str_parseInt(void);
 extern void fn_800EB7A0(void);
 extern void fn_800EE360(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800FAB80(void);
+extern void clip_calculateFrustum(void);
 extern void fn_80108F38(void);
 extern void boss_updatePhaseState(void);
 extern void fn_8015495C(void);
@@ -163,7 +163,7 @@ lbl_fn_802EB814_0000006C:
     lwz r5, 0x1514(r30)
     li r10, 0x1e
     lwz r6, 0x590(r30)
-    bl fn_800FAB80
+    bl clip_calculateFrustum
 lbl_fn_802EB814_000000B8:
     lwz r0, 0x1528(r30)
     cmpwi r0, 0x0
@@ -193,7 +193,7 @@ lbl_fn_802EB814_000000B8:
     addi r8, r30, 0x534
     li r9, 0x0
     li r10, 0x1e
-    bl fn_800FAB80
+    bl clip_calculateFrustum
     lwz r3, lbl_8087F430
     li r4, 0x5
     li r5, 0x1
@@ -938,7 +938,7 @@ asm void fn_802EC38C(void)
     cmpwi r3, 0x0
     beq lbl_fn_802EC38C_00000BCC
     addi r3, r3, 0x10
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0x15bc(r29)
     mr r30, r3
     b lbl_fn_802EC38C_00000BD0
@@ -1228,7 +1228,7 @@ asm void fn_802EC670(void)
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x44(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
 lbl_fn_802EC670_00000FDC:
     addi r3, r1, 0x44
     bl talk_parseQuotedString
@@ -1444,7 +1444,7 @@ lbl_fn_802EC9A8_000011D8:
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x48(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
     lis r3, __files@ha
     lis r4, lbl_80748250@ha
     addi r20, r1, 0x34

@@ -42,7 +42,7 @@ extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
 extern void fn_8068AE9C(void);
-extern void fn_8068B100(void);
+extern void math_u64DivMod(void);
 
 /* External data declarations */
 extern u8 lbl_807C6BB8[];
@@ -71,7 +71,7 @@ void fn_800FA4EC(void);
 void fn_800FA4F4(void);
 void fn_800FA4FC(void);
 void fn_800FA9F4(void);
-void fn_800FAB80(void);
+void clip_calculateFrustum(void);
 void fn_800FB1BC(void);
 void fn_800FB4B0(void);
 void fn_800FBA30(void);
@@ -553,7 +553,7 @@ lbl_fn_800FA9F4_0000068C:
     blr
 }
 
-asm void fn_800FAB80(void)
+asm void clip_calculateFrustum(void)
 {
     nofralloc
     stwu r1, -0xf0(r1)
@@ -582,16 +582,16 @@ asm void fn_800FAB80(void)
     subi r3, r3, 0x75a4
     bl fn_800E2A24
     cmpwi r22, 0x0
-    bne lbl_fn_800FAB80_00000708
+    bne lbl_clip_calculateFrustum_00000708
     li r3, 0x0
-    b lbl_fn_800FAB80_00000CA0
-lbl_fn_800FAB80_00000708:
+    b lbl_clip_calculateFrustum_00000CA0
+lbl_clip_calculateFrustum_00000708:
     lwz r3, lbl_8087F8A0
     li r28, 0x0
     li r19, 0x0
     lwz r25, 0x48(r3)
-    b lbl_fn_800FAB80_00000780
-lbl_fn_800FAB80_0000071C:
+    b lbl_clip_calculateFrustum_00000780
+lbl_clip_calculateFrustum_0000071C:
     mr r3, r20
     mr r4, r21
     mr r5, r25
@@ -603,7 +603,7 @@ lbl_fn_800FAB80_0000071C:
     bl fn_800FBE70
     cmpwi r3, 0x0
     mr r6, r3
-    blt lbl_fn_800FAB80_0000077C
+    blt lbl_clip_calculateFrustum_0000077C
     fmr f1, f30
     stw r19, 0x8(r1)
     fmr f2, f29
@@ -616,16 +616,16 @@ lbl_fn_800FAB80_0000071C:
     mr r10, r27
     bl fn_800FCD24
     li r28, 0x1
-lbl_fn_800FAB80_0000077C:
+lbl_clip_calculateFrustum_0000077C:
     lwz r25, 0x14ac(r25)
-lbl_fn_800FAB80_00000780:
+lbl_clip_calculateFrustum_00000780:
     cmpwi r25, 0x0
-    bne lbl_fn_800FAB80_0000071C
+    bne lbl_clip_calculateFrustum_0000071C
     lwz r3, lbl_8087F408
     li r19, 0x0
     lwz r25, 0x48(r3)
-    b lbl_fn_800FAB80_000007FC
-lbl_fn_800FAB80_00000798:
+    b lbl_clip_calculateFrustum_000007FC
+lbl_clip_calculateFrustum_00000798:
     mr r3, r20
     mr r4, r21
     mr r5, r25
@@ -637,7 +637,7 @@ lbl_fn_800FAB80_00000798:
     bl fn_800FBE70
     cmpwi r3, 0x0
     mr r6, r3
-    blt lbl_fn_800FAB80_000007F8
+    blt lbl_clip_calculateFrustum_000007F8
     fmr f1, f30
     stw r19, 0x8(r1)
     fmr f2, f29
@@ -650,40 +650,40 @@ lbl_fn_800FAB80_00000798:
     mr r10, r27
     bl fn_800FCD24
     li r28, 0x1
-lbl_fn_800FAB80_000007F8:
+lbl_clip_calculateFrustum_000007F8:
     lwz r25, 0x14ac(r25)
-lbl_fn_800FAB80_000007FC:
+lbl_clip_calculateFrustum_000007FC:
     cmpwi r25, 0x0
-    bne lbl_fn_800FAB80_00000798
+    bne lbl_clip_calculateFrustum_00000798
     lfs f30, lbl_80881494
     mr r3, r22
     bl fn_8021A7A0
     cmpwi r3, 0x0
-    beq lbl_fn_800FAB80_0000082C
+    beq lbl_clip_calculateFrustum_0000082C
     cmpwi r21, 0x0
-    beq lbl_fn_800FAB80_0000082C
+    beq lbl_clip_calculateFrustum_0000082C
     mr r3, r21
     bl fn_8017AC24
     fmr f30, f1
-lbl_fn_800FAB80_0000082C:
+lbl_clip_calculateFrustum_0000082C:
     lwz r3, 0x4(r22)
     li r4, 0x1
     subi r0, r3, 0x1f7
     cmplwi r0, 0x2
-    ble lbl_fn_800FAB80_0000084C
+    ble lbl_clip_calculateFrustum_0000084C
     subi r0, r3, 0x201
     cmplwi r0, 0x2
-    bgt lbl_fn_800FAB80_00000850
-lbl_fn_800FAB80_0000084C:
+    bgt lbl_clip_calculateFrustum_00000850
+lbl_clip_calculateFrustum_0000084C:
     li r4, 0x0
-lbl_fn_800FAB80_00000850:
+lbl_clip_calculateFrustum_00000850:
     cmpwi r4, 0x0
-    beq lbl_fn_800FAB80_00000ACC
+    beq lbl_clip_calculateFrustum_00000ACC
     lfs f0, 0x58(r22)
     cmpwi r21, 0x0
     lwz r27, 0x1c(r22)
     fmuls f29, f0, f30
-    beq lbl_fn_800FAB80_00000888
+    beq lbl_clip_calculateFrustum_00000888
     lfs f3, 0x2c(r22)
     lfs f0, 0x8c0(r21)
     fmuls f0, f3, f0
@@ -691,7 +691,7 @@ lbl_fn_800FAB80_00000850:
     stfd f0, 0x80(r1)
     lwz r0, 0x84(r1)
     add r27, r27, r0
-lbl_fn_800FAB80_00000888:
+lbl_clip_calculateFrustum_00000888:
     lwz r3, lbl_8087F4A0
     addi r31, r1, 0x6c
     lwz r26, 0x3c(r22)
@@ -699,16 +699,16 @@ lbl_fn_800FAB80_00000888:
     lwz r25, 0x48(r3)
     addi r29, r1, 0x60
     lis r19, 0x1062
-    b lbl_fn_800FAB80_00000AC4
-lbl_fn_800FAB80_000008A8:
+    b lbl_clip_calculateFrustum_00000AC4
+lbl_clip_calculateFrustum_000008A8:
     lwz r3, 0x38(r25)
     rlwinm r0, r3, 0, 30, 30
     cmplwi r0, 0x2
-    bne lbl_fn_800FAB80_00000AC0
+    bne lbl_clip_calculateFrustum_00000AC0
     andis. r3, r3, 0xdead
     addis r0, r3, 0x2153
     cmplwi r0, 0x0
-    beq lbl_fn_800FAB80_00000AC0
+    beq lbl_clip_calculateFrustum_00000AC0
     lwz r12, 0x0(r25)
     mr r4, r25
     addi r3, r1, 0x10
@@ -738,7 +738,7 @@ lbl_fn_800FAB80_000008A8:
     fsubs f0, f31, f1
     fcmpo cr0, f0, f29
     cror eq, lt, eq
-    bne lbl_fn_800FAB80_00000AC0
+    bne lbl_clip_calculateFrustum_00000AC0
     addi r3, r1, 0x50
     li r4, 0x0
     li r5, 0x30
@@ -756,19 +756,19 @@ lbl_fn_800FAB80_000008A8:
     stw r21, 0x78(r1)
     lwz r0, 0x50(r25)
     cmpwi r0, 0x1
-    beq lbl_fn_800FAB80_000009AC
+    beq lbl_clip_calculateFrustum_000009AC
     cmpwi r0, 0x1c
-    beq lbl_fn_800FAB80_00000A7C
+    beq lbl_clip_calculateFrustum_00000A7C
     cmpwi r0, 0x10
-    beq lbl_fn_800FAB80_00000AA0
+    beq lbl_clip_calculateFrustum_00000AA0
     cmpwi r0, 0x22
-    beq lbl_fn_800FAB80_00000AA0
+    beq lbl_clip_calculateFrustum_00000AA0
     cmpwi r0, 0x30
-    beq lbl_fn_800FAB80_00000AA0
-    b lbl_fn_800FAB80_00000AC0
-lbl_fn_800FAB80_000009AC:
+    beq lbl_clip_calculateFrustum_00000AA0
+    b lbl_clip_calculateFrustum_00000AC0
+lbl_clip_calculateFrustum_000009AC:
     cmpwi r26, 0x2
-    blt lbl_fn_800FAB80_00000AC0
+    blt lbl_clip_calculateFrustum_00000AC0
     lwz r4, 0x48(r25)
     addi r0, r19, 0x4dd3
     mulhw r0, r0, r4
@@ -778,78 +778,78 @@ lbl_fn_800FAB80_000009AC:
     mulli r0, r0, 0x3e8
     subf r0, r0, r4
     cmpwi r0, 0x3a
-    beq lbl_fn_800FAB80_000009EC
+    beq lbl_clip_calculateFrustum_000009EC
     cmpwi r0, 0x6b
-    beq lbl_fn_800FAB80_000009EC
+    beq lbl_clip_calculateFrustum_000009EC
     cmpwi r0, 0x7b
-    bne lbl_fn_800FAB80_00000A08
-lbl_fn_800FAB80_000009EC:
+    bne lbl_clip_calculateFrustum_00000A08
+lbl_clip_calculateFrustum_000009EC:
     lwz r12, 0x0(r25)
     mr r3, r25
     addi r4, r1, 0x50
     lwz r12, 0x44(r12)
     mtctr r12
     bctrl
-    b lbl_fn_800FAB80_00000AC0
-lbl_fn_800FAB80_00000A08:
+    b lbl_clip_calculateFrustum_00000AC0
+lbl_clip_calculateFrustum_00000A08:
     cmpwi r22, 0x0
-    bne lbl_fn_800FAB80_00000A18
+    bne lbl_clip_calculateFrustum_00000A18
     li r0, 0x0
-    b lbl_fn_800FAB80_00000A58
-lbl_fn_800FAB80_00000A18:
+    b lbl_clip_calculateFrustum_00000A58
+lbl_clip_calculateFrustum_00000A18:
     lwz r0, 0x4(r22)
     cmpwi r0, 0x136
-    beq lbl_fn_800FAB80_00000A4C
+    beq lbl_clip_calculateFrustum_00000A4C
     cmpwi r0, 0x139
-    beq lbl_fn_800FAB80_00000A4C
+    beq lbl_clip_calculateFrustum_00000A4C
     cmpwi r0, 0x13c
-    beq lbl_fn_800FAB80_00000A4C
+    beq lbl_clip_calculateFrustum_00000A4C
     cmpwi r0, 0x146
-    beq lbl_fn_800FAB80_00000A4C
+    beq lbl_clip_calculateFrustum_00000A4C
     cmpwi r0, 0x15a
-    beq lbl_fn_800FAB80_00000A4C
+    beq lbl_clip_calculateFrustum_00000A4C
     cmpwi r0, 0x232c
-    bne lbl_fn_800FAB80_00000A54
-lbl_fn_800FAB80_00000A4C:
+    bne lbl_clip_calculateFrustum_00000A54
+lbl_clip_calculateFrustum_00000A4C:
     li r0, 0x1
-    b lbl_fn_800FAB80_00000A58
-lbl_fn_800FAB80_00000A54:
+    b lbl_clip_calculateFrustum_00000A58
+lbl_clip_calculateFrustum_00000A54:
     li r0, 0x0
-lbl_fn_800FAB80_00000A58:
+lbl_clip_calculateFrustum_00000A58:
     cmpwi r0, 0x0
-    bne lbl_fn_800FAB80_00000AC0
+    bne lbl_clip_calculateFrustum_00000AC0
     lwz r12, 0x0(r25)
     mr r3, r25
     addi r4, r1, 0x50
     lwz r12, 0x44(r12)
     mtctr r12
     bctrl
-    b lbl_fn_800FAB80_00000AC0
-lbl_fn_800FAB80_00000A7C:
+    b lbl_clip_calculateFrustum_00000AC0
+lbl_clip_calculateFrustum_00000A7C:
     cmpwi r26, 0x2
-    blt lbl_fn_800FAB80_00000AC0
+    blt lbl_clip_calculateFrustum_00000AC0
     lwz r12, 0x0(r25)
     mr r3, r25
     addi r4, r1, 0x50
     lwz r12, 0x44(r12)
     mtctr r12
     bctrl
-    b lbl_fn_800FAB80_00000AC0
-lbl_fn_800FAB80_00000AA0:
+    b lbl_clip_calculateFrustum_00000AC0
+lbl_clip_calculateFrustum_00000AA0:
     cmpwi r26, 0x0
-    ble lbl_fn_800FAB80_00000AC0
+    ble lbl_clip_calculateFrustum_00000AC0
     lwz r12, 0x0(r25)
     mr r3, r25
     addi r4, r1, 0x50
     lwz r12, 0x44(r12)
     mtctr r12
     bctrl
-lbl_fn_800FAB80_00000AC0:
+lbl_clip_calculateFrustum_00000AC0:
     lwz r25, 0x5c(r25)
-lbl_fn_800FAB80_00000AC4:
+lbl_clip_calculateFrustum_00000AC4:
     cmpwi r25, 0x0
-    bne lbl_fn_800FAB80_000008A8
-lbl_fn_800FAB80_00000ACC:
+    bne lbl_clip_calculateFrustum_000008A8
+lbl_clip_calculateFrustum_00000ACC:
     addis r3, r20, 0x4
     fmr f1, f30
     lwz r8, -0x7510(r3)
@@ -861,21 +861,21 @@ lbl_fn_800FAB80_00000ACC:
     li r9, 0x0
     bl fn_800FB1BC
     cmpwi r28, 0x0
-    beq lbl_fn_800FAB80_00000B8C
+    beq lbl_clip_calculateFrustum_00000B8C
     cmpwi r21, 0x0
-    beq lbl_fn_800FAB80_00000B8C
+    beq lbl_clip_calculateFrustum_00000B8C
     lwz r0, 0x48(r21)
     cmpwi r0, 0x0
-    bne lbl_fn_800FAB80_00000B8C
+    bne lbl_clip_calculateFrustum_00000B8C
     lwz r0, 0x12a4(r21)
     extrwi. r0, r0, 1, 3
-    beq lbl_fn_800FAB80_00000B28
+    beq lbl_clip_calculateFrustum_00000B28
     addis r3, r20, 0x4
     lfs f4, -0x75c8(r3)
-    b lbl_fn_800FAB80_00000B2C
-lbl_fn_800FAB80_00000B28:
+    b lbl_clip_calculateFrustum_00000B2C
+lbl_clip_calculateFrustum_00000B28:
     lfs f4, lbl_80881494
-lbl_fn_800FAB80_00000B2C:
+lbl_clip_calculateFrustum_00000B2C:
     addis r3, r20, 0x4
     lfs f0, -0x75e4(r3)
     lfs f3, -0x75fc(r3)
@@ -883,33 +883,33 @@ lbl_fn_800FAB80_00000B2C:
     lfs f0, -0x75f4(r3)
     fadds f3, f3, f4
     fcmpo cr0, f3, f0
-    bge lbl_fn_800FAB80_00000B50
-    b lbl_fn_800FAB80_00000B54
-lbl_fn_800FAB80_00000B50:
+    bge lbl_clip_calculateFrustum_00000B50
+    b lbl_clip_calculateFrustum_00000B54
+lbl_clip_calculateFrustum_00000B50:
     fmr f3, f0
-lbl_fn_800FAB80_00000B54:
+lbl_clip_calculateFrustum_00000B54:
     lfs f5, lbl_80881478
     fcmpo cr0, f5, f3
-    ble lbl_fn_800FAB80_00000B64
-    b lbl_fn_800FAB80_00000B84
-lbl_fn_800FAB80_00000B64:
+    ble lbl_clip_calculateFrustum_00000B64
+    b lbl_clip_calculateFrustum_00000B84
+lbl_clip_calculateFrustum_00000B64:
     addis r3, r20, 0x4
     lfs f3, -0x75fc(r3)
     lfs f0, -0x75f4(r3)
     fadds f5, f3, f4
     fcmpo cr0, f5, f0
-    bge lbl_fn_800FAB80_00000B80
-    b lbl_fn_800FAB80_00000B84
-lbl_fn_800FAB80_00000B80:
+    bge lbl_clip_calculateFrustum_00000B80
+    b lbl_clip_calculateFrustum_00000B84
+lbl_clip_calculateFrustum_00000B80:
     fmr f5, f0
-lbl_fn_800FAB80_00000B84:
+lbl_clip_calculateFrustum_00000B84:
     addis r3, r20, 0x4
     stfs f5, -0x75fc(r3)
-lbl_fn_800FAB80_00000B8C:
+lbl_clip_calculateFrustum_00000B8C:
     addis r5, r20, 0x4
     lwz r0, -0x6e24(r5)
     cmpwi r0, 0x0
-    beq lbl_fn_800FAB80_00000C8C
+    beq lbl_clip_calculateFrustum_00000C8C
     lfs f3, lbl_80881478
     li r3, 0x0
     lwz r6, -0x732c(r5)
@@ -934,7 +934,7 @@ lbl_fn_800FAB80_00000B8C:
     psq_st f1, 0x0(r6), 0, 0
     stfs f2, 0x44(r1)
     stfs f0, 0x48(r1)
-    blt lbl_fn_800FAB80_00000C1C
+    blt lbl_clip_calculateFrustum_00000C1C
     lwz r4, -0x6e28(r5)
     lwz r3, -0x732c(r5)
     addi r0, r4, 0x1
@@ -942,7 +942,7 @@ lbl_fn_800FAB80_00000B8C:
     stw r4, -0x6e28(r5)
     subi r0, r3, 0x1
     stw r0, -0x732c(r5)
-lbl_fn_800FAB80_00000C1C:
+lbl_clip_calculateFrustum_00000C1C:
     addis r6, r20, 0x4
     addi r5, r1, 0x30
     lwz r3, -0x6e28(r6)
@@ -971,14 +971,14 @@ lbl_fn_800FAB80_00000C1C:
     lwz r3, 0x0(r6)
     addi r0, r3, 0x1
     stw r0, 0x0(r6)
-lbl_fn_800FAB80_00000C8C:
+lbl_clip_calculateFrustum_00000C8C:
     cmpwi r21, 0x0
-    beq lbl_fn_800FAB80_00000C9C
+    beq lbl_clip_calculateFrustum_00000C9C
     li r0, 0x0
     stw r0, 0xad8(r21)
-lbl_fn_800FAB80_00000C9C:
+lbl_clip_calculateFrustum_00000C9C:
     mr r3, r28
-lbl_fn_800FAB80_00000CA0:
+lbl_clip_calculateFrustum_00000CA0:
     addi r11, r1, 0xc0
     psq_l f31, 0xe8(r1), 0, 0
     lfd f31, 0xe0(r1)
@@ -1609,7 +1609,7 @@ asm void fn_800FBA30(void)
     li r9, 0x0
     li r10, 0x1e
     stw r0, 0xc(r1)
-    bl fn_800FAB80
+    bl clip_calculateFrustum
     addis r4, r31, 0x4
     li r0, 0x0
     stw r0, -0x1c68(r4)
@@ -1818,10 +1818,10 @@ lbl_fn_800FBA9C_00001824:
     fcmpo cr0, f26, f30
     ble lbl_fn_800FBA9C_000018C0
     fnmsubs f1, f23, f23, f31
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f23, f1
     fmr f1, f22
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f1, f1
     lfs f0, 0x10(r28)
     fadds f0, f26, f0

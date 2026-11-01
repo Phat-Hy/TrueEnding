@@ -9,7 +9,7 @@ extern void _savegpr_26(void);
 extern void fn_8004B338(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
-extern void fn_8005B6E8(void);
+extern void talk_setSpeakerName(void);
 extern void fn_8005E3E4(void);
 extern void fn_8005E7F4(void);
 extern void fn_80076FF8(void);
@@ -625,7 +625,7 @@ asm void fn_804AA490(void)
     addi r4, r4, lbl_807772B0@l
     stw r4, 0xb4(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
     lis r21, lbl_8075765C@ha
     lfs f31, lbl_80887258
     addi r28, r1, 0x68

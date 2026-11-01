@@ -32,7 +32,7 @@ extern void fn_800CB440(void);
 extern void morph_updateMesh(void);
 extern void str_skipWhitespace(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800FAB80(void);
+extern void clip_calculateFrustum(void);
 extern void fn_802180A8(void);
 extern void task_findEntryById(void);
 extern void res_MsgHandle_constructor(void);
@@ -1192,7 +1192,7 @@ lbl_fn_803F2344_00000EFC:
     addi r8, r31, 0x78
     li r9, 0x0
     li r10, 0x1e
-    bl fn_800FAB80
+    bl clip_calculateFrustum
     lwz r3, lbl_8087F048
     li r0, 0x0
     addis r3, r3, 0x4

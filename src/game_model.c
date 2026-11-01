@@ -14,7 +14,7 @@ extern void fn_80071D80(void);
 extern void fn_80075DEC(void);
 extern void fn_8007A100(void);
 extern void fn_8007A4CC(void);
-extern void fn_800827E0(void);
+extern void dungeon_initGlobalContext(void);
 extern void fn_800839EC(void);
 extern void fn_80083F50(void);
 extern void fn_80084110(void);
@@ -150,7 +150,7 @@ asm void fn_800BD9C0(void)
     clrlwi r3, r30, 16
     bl fn_80615E00
     mr r28, r3
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     lis r31, lbl_807336B0@ha
     mr r4, r28
     addi r7, r31, lbl_807336B0@l

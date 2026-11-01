@@ -14,11 +14,11 @@ extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
-extern void fn_8005B6E8(void);
+extern void talk_setSpeakerName(void);
 extern void fn_8006AFF8(void);
 extern void mem_free(void);
 extern void route_createSegment(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void fn_800897D8(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -64,7 +64,7 @@ extern void atoi(void);
 extern void abort(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
-extern void fn_8068B100(void);
+extern void math_u64DivMod(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
 
@@ -710,7 +710,7 @@ lbl_fn_802F693C_0000081C:
     stfs f6, 0x68(r1)
     fmadds f1, f6, f6, f0
     stfs f3, 0x6c(r1)
-    bl fn_8068B100
+    bl math_u64DivMod
     lwz r4, 0x1570(r29)
     frsp f25, f1
     lfs f0, 0x530(r29)
@@ -1118,7 +1118,7 @@ asm void fn_802F6E64(void)
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x44(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
 lbl_fn_802F6E64_00000E3C:
     addi r3, r1, 0x44
     bl talk_parseQuotedString
@@ -1437,7 +1437,7 @@ lbl_fn_802F73FC_000011BC:
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x28(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
     lis r4, lbl_80748780@ha
     lis r3, __files@ha
     lfs f31, lbl_8088499C
@@ -2000,7 +2000,7 @@ lbl_fn_802F73FC_00001A5C:
     cmpwi r3, 0x0
     beq lbl_fn_802F73FC_00001AE4
     addi r3, r3, 0x10
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0x1614(r18)
     b lbl_fn_802F73FC_00001AE8
 lbl_fn_802F73FC_00001AE4:

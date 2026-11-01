@@ -12,7 +12,7 @@ extern void fn_80011410(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void vec3_sub(void);
 extern void fn_80013410(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void fn_80057A64(void);
 extern void atn_Matrix_copy(void);
 extern void atn_Model_findBoneIndex(void);
@@ -25,7 +25,7 @@ extern void fn_800F7FA8(void);
 extern void fn_800F8524(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800F8574(void);
-extern void fn_800FAB80(void);
+extern void clip_calculateFrustum(void);
 extern void fn_80108C10(void);
 extern void fn_80109828(void);
 extern void fn_801125F8(void);
@@ -598,7 +598,7 @@ lbl_fn_8028CB38_00000644:
     lis r7, 0x8000
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_8028CB38_00000740
     addi r3, r1, 0x54
@@ -617,7 +617,7 @@ lbl_fn_8028CB38_00000644:
     li r9, 0x0
     lwz r6, 0x1550(r31)
     li r10, 0x1e
-    bl fn_800FAB80
+    bl clip_calculateFrustum
 lbl_fn_8028CB38_00000740:
     bl fn_80121F00
     bl magic_getOffset6C
@@ -1830,7 +1830,7 @@ lbl_fn_8028DF34_000018FC:
     lwz r3, lbl_8087F048
     lwz r5, 0x14dc(r31)
     lwz r6, 0x590(r31)
-    bl fn_800FAB80
+    bl clip_calculateFrustum
 lbl_fn_8028DF34_0000194C:
     lwz r0, 0x44(r1)
     psq_l f31, 0x38(r1), 0, 0

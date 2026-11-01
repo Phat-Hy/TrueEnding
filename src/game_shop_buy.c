@@ -3,7 +3,7 @@
 
 /* External function declarations */
 extern void fn_80044E0C(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void mem_alloc(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_801059F8(void);
@@ -1683,7 +1683,7 @@ asm void fn_801591E8(void)
     stfs f4, 0x50(r1)
     stfs f2, 0x54(r1)
     stfs f1, 0x58(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_801591E8_0000196C
     lfs f2, 0x98(r1)

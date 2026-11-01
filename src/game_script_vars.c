@@ -32,7 +32,7 @@ extern void fn_80175A38(void);
 extern void fn_80178208(void);
 extern void fn_80178A6C(void);
 extern void fn_8019AFE8(void);
-extern void fn_80219558(void);
+extern void task_mapIdToQueue(void);
 extern void res_registerResource(void);
 extern void fn_80249588(void);
 extern void fn_8035B694(void);
@@ -932,7 +932,7 @@ lbl_fn_8024845C_00000B80:
     bl fn_8012D8B8
     lwz r3, 0xf54(r29)
     lwz r3, 0x50(r3)
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmpwi r3, 0x2
     beq lbl_fn_8024845C_00000BBC
     cmpwi r3, 0x6

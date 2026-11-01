@@ -20,14 +20,14 @@ extern void fn_8004212C(void);
 extern void fn_80057A64(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
-extern void fn_8005B6E8(void);
+extern void talk_setSpeakerName(void);
 extern void fn_80061824(void);
 extern void fn_8006AFF8(void);
 extern void fn_8006CA80(void);
 extern void fn_8006EF48(void);
 extern void mem_getAllocSize(void);
 extern void route_createSegment(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void fn_800897D8(void);
 extern void fn_8008AD4C(void);
 extern void fn_8008B140(void);
@@ -66,7 +66,7 @@ extern void fn_80178164(void);
 extern void fn_80178668(void);
 extern void fn_801CCD00(void);
 extern void fn_8020A780(void);
-extern void fn_80219558(void);
+extern void task_mapIdToQueue(void);
 extern void task_findEntryById(void);
 extern void fn_80237518(void);
 extern void fn_802375C4(void);
@@ -649,7 +649,7 @@ asm void fn_80452998(void)
     cmpwi r3, 0x0
     beq lbl_fn_80452998_00000694
     addi r3, r3, 0x10
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0x14e0(r29)
     b lbl_fn_80452998_00000698
 lbl_fn_80452998_00000694:
@@ -706,7 +706,7 @@ lbl_fn_80452998_00000698:
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x8(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
 lbl_fn_80452998_00000768:
     addi r3, r1, 0x8
     bl talk_parseQuotedString
@@ -1712,7 +1712,7 @@ lbl_fn_8045374C_000015A4:
     mr r3, r24
     stw r25, 0x118(r1)
     bl fn_8000D9F8
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmpwi r3, 0x0
     beq lbl_fn_8045374C_000015E4
     cmpwi r3, 0x3

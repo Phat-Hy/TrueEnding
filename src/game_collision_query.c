@@ -13,7 +13,7 @@ extern void fn_80045694(void);
 extern void fn_8006B174(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_80097D40(void);
-extern void fn_800C31F4(void);
+extern void skin_playAnimationByName(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB518(void);
@@ -23,7 +23,7 @@ extern void fn_800EFE3C(void);
 extern void fn_800F72F4(void);
 extern void fn_80103600(void);
 extern void fn_80103FD4(void);
-extern void fn_80219558(void);
+extern void task_mapIdToQueue(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
 extern void fn_8023A108(void);
@@ -670,7 +670,7 @@ asm void fn_80105C9C(void)
     mr r3, r30
     bl sound_initGlobalInstances
     lwz r3, 0x50(r30)
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmpwi r3, 0x2
     bne lbl_fn_80105C9C_00000838
     lfs f0, lbl_80881478
@@ -755,7 +755,7 @@ asm void fn_80105DCC(void)
     mr r3, r29
     bl sound_initGlobalInstances
     lwz r3, 0x50(r29)
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmpwi r3, 0x2
     bne lbl_fn_80105DCC_00000970
     lfs f0, lbl_80881478
@@ -863,7 +863,7 @@ asm void fn_80105F4C(void)
     mr r3, r30
     bl sound_initGlobalInstances
     lwz r3, 0x50(r30)
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmpwi r3, 0x2
     bne lbl_fn_80105F4C_00000AE8
     lfs f0, lbl_80881478
@@ -955,7 +955,7 @@ asm void fn_8010608C(void)
     mr r3, r30
     bl sound_initGlobalInstances
     lwz r3, 0x50(r30)
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmpwi r3, 0x2
     bne lbl_fn_8010608C_00000C28
     lfs f0, lbl_80881478
@@ -1041,7 +1041,7 @@ asm void fn_801061BC(void)
     li r29, 0x1
     stw r29, 0xc4(r3)
     lwz r3, 0x50(r28)
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmpwi r3, 0x2
     bne lbl_fn_801061BC_00000D54
     lfs f1, lbl_80881494
@@ -1108,7 +1108,7 @@ lbl_fn_801061BC_00000DC0:
     lwz r4, 0x60(r29)
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x20
     li r4, -0x1
     bl ref_releaseHandle
@@ -1117,7 +1117,7 @@ lbl_fn_801061BC_00000DC0:
     lfs f1, lbl_8088158C
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     cmpwi cr1, r31, 0x0
     lfs f1, lbl_80881494
     li r6, 0x0

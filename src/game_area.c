@@ -19,7 +19,7 @@ extern void fn_8006AA20(void);
 extern void fn_8006AD24(void);
 extern void fn_8006B174(void);
 extern void fn_8007C3F8(void);
-extern void fn_800827E0(void);
+extern void dungeon_initGlobalContext(void);
 extern void fn_80083AD4(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
@@ -71,7 +71,7 @@ extern u32 lbl_80880C00;
 extern u32 lbl_80880C04;
 
 /* Function declarations */
-void fn_8008937C(void);
+void node_createNamedChild(void);
 void fn_80089488(void);
 void fn_80089528(void);
 void fn_8008954C(void);
@@ -108,7 +108,7 @@ void fn_8008A76C(void);
 void fn_8008AA90(void);
 void fn_8008AD4C(void);
 
-asm void fn_8008937C(void)
+asm void node_createNamedChild(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -129,13 +129,13 @@ asm void fn_8008937C(void)
     bl mem_alloc
     cmpwi r3, 0x0
     mr r31, r3
-    beq lbl_fn_8008937C_000000B4
+    beq lbl_node_createNamedChild_000000B4
     addi r0, r3, 0x4
     lis r4, lbl_80778808@ha
     cmplw r30, r0
     addi r4, r4, lbl_80778808@l
     stw r4, 0x0(r3)
-    beq lbl_fn_8008937C_00000080
+    beq lbl_node_createNamedChild_00000080
     mr r3, r30
     bl strlen
     mr r5, r3
@@ -143,7 +143,7 @@ asm void fn_8008937C(void)
     addi r3, r31, 0x4
     addi r5, r5, 0x1
     bl memcpy
-lbl_fn_8008937C_00000080:
+lbl_node_createNamedChild_00000080:
     li r4, 0x0
     stw r4, 0x44(r31)
     lis r3, lbl_80778610@ha
@@ -157,26 +157,26 @@ lbl_fn_8008937C_00000080:
     stw r4, 0x58(r31)
     stw r4, 0x5c(r31)
     stw r4, 0x60(r31)
-lbl_fn_8008937C_000000B4:
+lbl_node_createNamedChild_000000B4:
     cmpwi r31, 0x0
-    beq lbl_fn_8008937C_000000E8
+    beq lbl_node_createNamedChild_000000E8
     lwz r0, 0x58(r29)
     cmpwi r0, 0x0
-    bne lbl_fn_8008937C_000000D4
+    bne lbl_node_createNamedChild_000000D4
     stw r31, 0x58(r29)
     stw r31, 0x5c(r29)
-    b lbl_fn_8008937C_000000E0
-lbl_fn_8008937C_000000D4:
+    b lbl_node_createNamedChild_000000E0
+lbl_node_createNamedChild_000000D4:
     lwz r3, 0x5c(r29)
     stw r31, 0x44(r3)
     stw r31, 0x5c(r29)
-lbl_fn_8008937C_000000E0:
+lbl_node_createNamedChild_000000E0:
     mr r3, r31
-    b lbl_fn_8008937C_000000F0
-lbl_fn_8008937C_000000E8:
+    b lbl_node_createNamedChild_000000F0
+lbl_node_createNamedChild_000000E8:
     lwz r3, lbl_8087EF10
     addi r3, r3, 0x74
-lbl_fn_8008937C_000000F0:
+lbl_node_createNamedChild_000000F0:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)
@@ -2045,7 +2045,7 @@ lbl_fn_8008AA90_0000199C:
     lwz r28, 0x58(r31)
     cmpwi r28, 0x0
     beq lbl_fn_8008AA90_000019BC
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     mr r4, r28
     bl fn_80083AD4
     li r0, 0x0

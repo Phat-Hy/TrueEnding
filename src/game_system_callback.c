@@ -6,7 +6,7 @@ extern void dtor_80084684(void);
 extern void fn_80049B74(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
-extern void fn_8005B6E8(void);
+extern void talk_setSpeakerName(void);
 extern void talk_parseDialogue(void);
 extern void fn_8005B8F8(void);
 extern void fn_8005B9AC(void);
@@ -339,7 +339,7 @@ asm void fn_8021414C(void)
     addi r4, r4, lbl_807772B0@l
     stw r4, 0xc(r1)
     la r4, lbl_8087D720
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
     lwz r0, lbl_8087F240
     cmpwi r0, 0x0
     bne lbl_fn_8021414C_00000520
@@ -600,7 +600,7 @@ lbl_fn_802144A8_00000674:
     addi r4, r4, lbl_807772B0@l
     stw r4, 0xc(r1)
     la r4, lbl_8087D720
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
     lwz r3, lbl_8087F518
     addi r5, r1, 0x8
     lwz r4, lbl_80882F00
@@ -1491,7 +1491,7 @@ asm void fn_802150F0(void)
     addi r4, r4, lbl_807772B0@l
     stw r4, 0xc70(r1)
     la r4, lbl_8087D720
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
     lwz r0, lbl_8087F258
     cmpwi r0, 0x0
     bne lbl_fn_802150F0_00001D8C

@@ -17,7 +17,7 @@ extern void mem_getAllocSize(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void fn_800897D8(void);
 extern void fn_800BFAC8(void);
 extern void atn_Task_constructor(void);
@@ -1196,7 +1196,7 @@ lbl_fn_801EA534_00000EE0:
     cmpwi r3, 0x0
     beq lbl_fn_801EA534_00000F24
     addi r3, r3, 0x10
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0x90(r30)
     mr r28, r3
     b lbl_fn_801EA534_00000F28

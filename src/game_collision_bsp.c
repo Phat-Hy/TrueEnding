@@ -27,7 +27,7 @@ extern void fn_8016F5EC(void);
 extern void fn_801789D8(void);
 extern void fn_8017A5D8(void);
 extern void fn_80210220(void);
-extern void fn_80219558(void);
+extern void task_mapIdToQueue(void);
 extern void world_getGlobalFlag(void);
 extern void kpad_getClampData(void);
 extern void fn_803C1884(void);
@@ -2138,7 +2138,7 @@ lbl_fn_80103FD4_00001BAC:
     stw r0, 0x48c(r3)
 lbl_fn_80103FD4_00001BF8:
     lwz r3, 0x50(r26)
-    bl fn_80219558
+    bl task_mapIdToQueue
     subi r0, r3, 0x9
     cmplwi r0, 0x1
     ble lbl_fn_80103FD4_00001C14

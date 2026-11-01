@@ -52,7 +52,7 @@ extern void fn_8016D454(void);
 extern void fn_8016EB48(void);
 extern void fn_8016F67C(void);
 extern void fn_80179D44(void);
-extern void fn_80219558(void);
+extern void task_mapIdToQueue(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
@@ -292,7 +292,7 @@ asm void fn_805660E0(void)
     cmpwi r3, 0x0
     beq lbl_fn_805660E0_000001EC
     lwz r3, 0x50(r3)
-    bl fn_80219558
+    bl task_mapIdToQueue
     mr r30, r3
     b lbl_fn_805660E0_000001F0
 lbl_fn_805660E0_000001EC:

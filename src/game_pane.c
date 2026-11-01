@@ -15,7 +15,7 @@ extern void fn_8005DFC8(void);
 extern void fn_80075DEC(void);
 extern void fn_80075F58(void);
 extern void fn_800763FC(void);
-extern void fn_800827E0(void);
+extern void dungeon_initGlobalContext(void);
 extern void fn_800839EC(void);
 extern void fn_800A96AC(void);
 extern void layout_drawPane(void);
@@ -1096,7 +1096,7 @@ asm void fn_800AC5F4(void)
     li r3, 0x100
     bl fn_80615E00
     mr r31, r3
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     lis r7, lbl_80732C00@ha
     mr r4, r31
     addi r7, r7, lbl_80732C00@l

@@ -14,14 +14,14 @@ extern void atn_Model_findBoneIndex(void);
 extern void fn_8009373C(void);
 extern void fn_80093B88(void);
 extern void msg_getMessageById(void);
-extern void fn_800C31F4(void);
+extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CFD18(void);
 extern void fn_800EFBC4(void);
 extern void fn_800EFC64(void);
 extern void fn_800EFDA0(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800FAB80(void);
+extern void clip_calculateFrustum(void);
 extern void fn_801092C8(void);
 extern void fn_8011F8F4(void);
 extern void fn_8011F91C(void);
@@ -666,7 +666,7 @@ lbl_fn_803A3AB4_0000071C:
     lwz r4, 0x20(r4)
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -1244,7 +1244,7 @@ lbl_fn_803A3FFC_00000F3C:
     lwz r4, 0x10(r4)
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -1895,7 +1895,7 @@ lbl_fn_803A4A7C_000017AC:
     addi r8, r29, 0x534
     li r9, 0x0
     li r10, 0x1e
-    bl fn_800FAB80
+    bl clip_calculateFrustum
     lwz r3, lbl_8087F048
     addis r3, r3, 0x4
     stw r21, -0x1c64(r3)

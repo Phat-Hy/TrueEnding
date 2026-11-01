@@ -51,7 +51,7 @@ extern void PSVECMag(void);
 extern void rand(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
-extern void fn_8068B100(void);
+extern void math_u64DivMod(void);
 extern void runtime_registerStaticObject(void);
 
 /* External data declarations */
@@ -249,7 +249,7 @@ lbl_fn_80288E38_000000D8:
     stfs f5, 0x104(r1)
     stfs f3, 0x108(r1)
     stfs f6, 0x10c(r1)
-    bl fn_8068B100
+    bl math_u64DivMod
     lwz r0, 0x7e0(r31)
     rlwinm r0, r0, 0, 29, 29
     cmplwi r0, 0x4

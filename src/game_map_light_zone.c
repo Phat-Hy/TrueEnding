@@ -8,11 +8,11 @@ extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void msg_getMessageById(void);
-extern void fn_800C31F4(void);
+extern void skin_playAnimationByName(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800FAB80(void);
+extern void clip_calculateFrustum(void);
 extern void task_findEntryById(void);
 extern void res_registerResource(void);
 extern void fn_803E3384(void);
@@ -467,7 +467,7 @@ lbl_fn_801937CC_00000510:
     mr r8, r28
     li r9, 0x0
     li r10, 0x1e
-    bl fn_800FAB80
+    bl clip_calculateFrustum
     lwz r5, lbl_8087F430
     li r0, 0xa
     lfs f0, lbl_80882008
@@ -614,7 +614,7 @@ lbl_fn_801937CC_00000750:
     addi r4, r4, 0x1a
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle
@@ -1133,7 +1133,7 @@ lbl_fn_80194334_00000EFC:
     li r6, 0x3e8
     li r9, 0x0
     li r10, 0x1e
-    bl fn_800FAB80
+    bl clip_calculateFrustum
     lwz r5, lbl_8087F430
     li r0, 0xa
     lfs f0, lbl_80882008
@@ -1670,7 +1670,7 @@ lbl_fn_80194790_0000171C:
     li r6, 0x3e8
     li r9, 0x0
     li r10, 0x1e
-    bl fn_800FAB80
+    bl clip_calculateFrustum
 lbl_fn_80194790_00001778:
     lfs f23, 0x234(r31)
     mr r3, r31

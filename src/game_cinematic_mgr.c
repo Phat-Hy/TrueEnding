@@ -7,10 +7,10 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
-extern void fn_8005B6E8(void);
+extern void talk_setSpeakerName(void);
 extern void fn_8006AF38(void);
 extern void fn_800897D8(void);
 extern void atn_Anim_applyLayerTransform(void);
@@ -20,7 +20,7 @@ extern void ref_releaseHandle(void);
 extern void fn_800E2DD4(void);
 extern void fn_800E2FE0(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800FAB80(void);
+extern void clip_calculateFrustum(void);
 extern void fn_8011D21C(void);
 extern void fn_8013CB68(void);
 extern void fn_80145334(void);
@@ -1131,7 +1131,7 @@ asm void fn_803338D8(void)
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x8(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
     lis r31, lbl_8074A154@ha
     addi r31, r31, lbl_8074A154@l
 lbl_fn_803338D8_00000E44:
@@ -1374,7 +1374,7 @@ asm void fn_80333C40(void)
     addi r4, r1, 0x20
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_80333C40_000011B4
     lwz r3, 0x14c8(r28)
@@ -1693,7 +1693,7 @@ lbl_fn_80333D68_0000153C:
     addi r8, r31, 0x534
     li r9, 0x0
     li r10, 0x1e
-    bl fn_800FAB80
+    bl clip_calculateFrustum
     lfs f3, 0x7c(r1)
     lfs f0, 0x528(r31)
     lfs f6, 0x80(r1)
@@ -1852,7 +1852,7 @@ lbl_fn_803342EC_00001858:
     addi r4, r1, 0x30
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_803342EC_000018AC
     lwz r3, 0x14bc(r28)
@@ -2158,7 +2158,7 @@ lbl_fn_80334460_00001C10:
     li r9, 0x0
     stw r0, 0x174(r1)
     stw r0, 0x178(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_80334460_00001E18
     lfs f0, 0x140(r1)
@@ -2229,7 +2229,7 @@ lbl_fn_80334460_00001D38:
     addi r8, r31, 0x534
     li r9, 0x0
     li r10, 0x1e
-    bl fn_800FAB80
+    bl clip_calculateFrustum
 lbl_fn_80334460_00001E18:
     lfs f30, 0x2e4(r31)
     addi r3, r31, 0xb0

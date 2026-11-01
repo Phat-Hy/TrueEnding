@@ -7,7 +7,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_800185B4(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void fn_8008BBD8(void);
@@ -48,7 +48,7 @@ extern void printf(void);
 extern void rand(void);
 extern void abort(void);
 extern void std_atan2(void);
-extern void fn_8068B100(void);
+extern void math_u64DivMod(void);
 
 /* External data declarations */
 extern u8 lbl_8073A170[];
@@ -670,7 +670,7 @@ lbl_fn_801A2CEC_0000074C:
     stfs f2, 0x118(r1)
     stfs f4, 0x120(r1)
     stfs f0, 0x114(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_801A2CEC_00000810
     addi r3, r1, 0x27c
@@ -1557,7 +1557,7 @@ asm void fn_801A3DFC(void)
     fmadds f1, f5, f5, f0
     stfs f3, 0x74(r1)
     stfs f6, 0x78(r1)
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f3, f1
     lfs f0, lbl_80882190
     lfs f4, lbl_80882188
@@ -1580,7 +1580,7 @@ lbl_fn_801A3DFC_000014F4:
     fmadds f1, f5, f5, f0
     stfs f3, 0x80(r1)
     stfs f6, 0x84(r1)
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f3, f1
     lfs f0, lbl_80882190
     fdivs f4, f3, f0

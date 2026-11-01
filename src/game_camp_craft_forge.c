@@ -15,7 +15,7 @@ extern void _savegpr_27(void);
 extern void fn_8000D430(void);
 extern void fn_80016888(void);
 extern void fn_80043A24(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void fn_8008B140(void);
 extern void fn_8008B978(void);
 extern void fn_800C7F08(void);
@@ -1688,7 +1688,7 @@ lbl_fn_803C1560_00001560:
     stfs f0, 0x14(r1)
     stfs f5, 0x18(r1)
     stfs f6, 0x1c(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     bne lbl_fn_803C1560_00001604
 lbl_fn_803C1560_000015FC:

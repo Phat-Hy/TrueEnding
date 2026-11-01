@@ -14,10 +14,10 @@ extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void mem_free(void);
 extern void route_interpolatePath(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void atn_Model_findBoneIndex(void);
 extern void msg_getMessageById(void);
-extern void fn_800C31F4(void);
+extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void str_parseInt(void);
@@ -164,7 +164,7 @@ lbl_fn_802AC590_000000E0:
     lis r4, lbl_807462A8@ha
     addi r30, r4, lbl_807462A8@l
     addi r4, r30, 0x89
-    bl fn_8008937C
+    bl node_createNamedChild
     mr r28, r3
     li r27, 0x0
     li r29, 0x0
@@ -213,7 +213,7 @@ lbl_fn_802AC590_000001AC:
     lwz r3, 0x1a9c(r31)
     addi r30, r4, lbl_807462A8@l
     addi r4, r30, 0x9b
-    bl fn_8008937C
+    bl node_createNamedChild
     mr r27, r3
     li r28, 0x0
     li r29, 0x0
@@ -1848,7 +1848,7 @@ lbl_fn_802AD930_000017E4:
     addi r4, r4, 0x18d
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle

@@ -58,7 +58,7 @@ extern void fn_8068A850(void);
 extern void fn_8068AD58(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
-extern void fn_8068B100(void);
+extern void math_u64DivMod(void);
 
 /* External data declarations */
 extern u8 lbl_807366B0[];
@@ -908,7 +908,7 @@ lbl_fn_801157DC_00000AF0:
     fsubs f3, f4, f0
     fmuls f0, f5, f5
     fmadds f1, f3, f3, f0
-    bl fn_8068B100
+    bl math_u64DivMod
     lfs f3, 0x20c(r31)
     frsp f30, f1
     lfs f0, 0x230(r31)
@@ -918,7 +918,7 @@ lbl_fn_801157DC_00000AF0:
     fsubs f3, f4, f0
     fmuls f0, f5, f5
     fmadds f1, f3, f3, f0
-    bl fn_8068B100
+    bl math_u64DivMod
     lfs f0, lbl_808816B0
     frsp f31, f1
     fcmpo cr0, f29, f0
@@ -1018,7 +1018,7 @@ lbl_fn_801157DC_00000C90:
     fsubs f3, f4, f0
     fmuls f0, f5, f5
     fmadds f1, f3, f3, f0
-    bl fn_8068B100
+    bl math_u64DivMod
     lfs f3, 0x20c(r31)
     frsp f31, f1
     lfs f0, 0x230(r31)
@@ -1028,7 +1028,7 @@ lbl_fn_801157DC_00000C90:
     fsubs f3, f4, f0
     fmuls f0, f5, f5
     fmadds f1, f3, f3, f0
-    bl fn_8068B100
+    bl math_u64DivMod
     lfs f0, lbl_808816B0
     frsp f30, f1
     fcmpo cr0, f29, f0

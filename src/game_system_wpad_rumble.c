@@ -27,7 +27,7 @@ extern void fn_8021446C(void);
 extern void fn_8021771C(void);
 extern void fn_80218268(void);
 extern void fn_80219544(void);
-extern void fn_80219558(void);
+extern void task_mapIdToQueue(void);
 extern void fn_8036097C(void);
 extern void fn_80360A2C(void);
 extern void fn_8036562C(void);
@@ -1263,7 +1263,7 @@ lbl_fn_80367A40_00001004:
     b lbl_fn_80367A40_0000139C
 lbl_fn_80367A40_00001024:
     lwz r3, 0x50(r26)
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmpwi r3, 0x0
     blt lbl_fn_80367A40_00001398
     cmpwi r3, 0x7
@@ -1503,7 +1503,7 @@ lbl_fn_80367A40_000013A4:
     b lbl_fn_80367A40_000014CC
 lbl_fn_80367A40_000013BC:
     lwz r3, 0x50(r26)
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmpwi r3, 0x0
     blt lbl_fn_80367A40_000013D4
     cmpwi r3, 0x7

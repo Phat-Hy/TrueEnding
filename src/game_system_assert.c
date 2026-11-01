@@ -6,7 +6,7 @@ extern void __files(void);
 extern void dtor_80084684(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
-extern void fn_8005B6E8(void);
+extern void talk_setSpeakerName(void);
 extern void talk_parseDialogue(void);
 extern void fn_8005B8F8(void);
 extern void fn_8005B9AC(void);
@@ -718,7 +718,7 @@ asm void weaponEffect_loadCSV(void)
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x30(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
     li r23, 0x0
     b lbl_weaponEffect_loadCSV_000007F0
 lbl_weaponEffect_loadCSV_000007A0:
@@ -995,7 +995,7 @@ asm void fn_80207310(void)
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x38(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
     b lbl_fn_80207310_00000B8C
 lbl_fn_80207310_00000B64:
     addi r3, r1, 0x38
@@ -1406,7 +1406,7 @@ asm void fn_802078C4(void)
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x640(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
     li r26, 0x0
     b lbl_fn_802078C4_00001134
 lbl_fn_802078C4_00001114:
@@ -1689,7 +1689,7 @@ asm void fn_80207CC0(void)
     addi r4, r4, lbl_807772B0@l
     stw r4, 0xc(r1)
     la r4, lbl_8087D720
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
     lwz r0, lbl_8087F188
     cmpwi r0, 0x0
     bne lbl_fn_80207CC0_0000166C
@@ -2023,7 +2023,7 @@ asm void fn_80208144(void)
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x70(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
     li r28, 0x0
 lbl_fn_80208144_00001998:
     addi r3, r1, 0x70

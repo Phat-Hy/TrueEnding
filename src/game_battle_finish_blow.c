@@ -18,7 +18,7 @@ extern void route_interpolatePath(void);
 extern void route_createSegment(void);
 extern void fn_80087E9C(void);
 extern void fn_80088724(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void fn_8008B140(void);
 extern void fn_80092A4C(void);
 extern void fn_800971D4(void);
@@ -39,7 +39,7 @@ extern void PSMTXMultVec(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void rand(void);
-extern void fn_8068B100(void);
+extern void math_u64DivMod(void);
 extern void __destroy_arr(void);
 extern void __ptmf_scall(void);
 
@@ -205,7 +205,7 @@ lbl_fn_80401E50_0000013C:
     fmadds f1, f1, f1, f0
     fcmpo cr0, f1, f21
     bge lbl_fn_80401E50_0000025C
-    bl fn_8068B100
+    bl math_u64DivMod
     lwz r0, 0x130(r27)
     frsp f20, f1
     lfs f2, 0x6c(r27)
@@ -229,7 +229,7 @@ lbl_fn_80401E50_0000013C:
     lfs f0, 0x1c(r25)
     fmuls f1, f1, f1
     fmadds f1, f0, f0, f1
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f1, f1
     lfs f0, 0x1c(r25)
     fdivs f1, f22, f1
@@ -339,7 +339,7 @@ lbl_fn_80401E50_0000025C:
     fmadds f1, f0, f0, f1
     fcmpo cr0, f1, f31
     bge lbl_fn_80401E50_000004F4
-    bl fn_8068B100
+    bl math_u64DivMod
     lwz r0, 0x130(r27)
     frsp f20, f1
     lfs f2, 0x6c(r27)
@@ -363,7 +363,7 @@ lbl_fn_80401E50_0000025C:
     lfs f0, 0x1c(r3)
     fmuls f1, f1, f1
     fmadds f1, f0, f0, f1
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f0, f1
     lwz r0, 0x130(r27)
     add r25, r0, r26
@@ -736,7 +736,7 @@ asm void fn_80402768(void)
     beq lbl_fn_80402768_00000978
     mr r3, r30
     addi r4, r1, 0x8
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0xf0(r29)
     mr r30, r3
     b lbl_fn_80402768_0000097C

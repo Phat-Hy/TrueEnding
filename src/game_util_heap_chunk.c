@@ -10,8 +10,8 @@ extern void _savegpr_20(void);
 extern void dtor_80084684(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
-extern void fn_8005B6E8(void);
-extern void fn_8006F72C(void);
+extern void talk_setSpeakerName(void);
+extern void str_assignBuffer(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void msg_getMessageById(void);
@@ -676,7 +676,7 @@ lbl_fn_80586220_000006A8:
     addi r8, r1, 0x10
     li r4, 0x0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lhz r0, 0x8(r21)
     cmpwi r0, 0x0
     beq lbl_fn_80586220_000007F4
@@ -701,7 +701,7 @@ lbl_fn_80586220_000007C0:
     addi r6, r21, 0x8
     addi r8, r1, 0x8
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
 lbl_fn_80586220_000007F4:
     lwz r0, 0x38(r1)
     addi r4, r25, 0x157
@@ -1987,7 +1987,7 @@ asm void fn_80587628(void)
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x4c(r1)
     la r4, lbl_8087D720
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
     lwz r12, 0x4c(r1)
     mr r4, r19
     mr r5, r18

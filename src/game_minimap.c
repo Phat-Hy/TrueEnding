@@ -12,7 +12,7 @@ extern void fn_8006FEBC(void);
 extern void fn_80080048(void);
 extern void fn_80080528(void);
 extern void fn_800816A8(void);
-extern void fn_800827E0(void);
+extern void dungeon_initGlobalContext(void);
 extern void fn_800838B8(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
@@ -226,7 +226,7 @@ lbl_fn_8008C950_0000020C:
     mulli r3, r0, 0x30
     addi r0, r3, 0x1f
     clrrwi r29, r0, 5
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     lis r6, lbl_80732368@ha
     mr r4, r29
     addi r6, r6, lbl_80732368@l

@@ -21,7 +21,7 @@ extern void fn_800F7FF0(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800F8574(void);
 extern void fn_800F8C6C(void);
-extern void fn_800FAB80(void);
+extern void clip_calculateFrustum(void);
 extern void fn_8013C38C(void);
 extern void fn_8013C480(void);
 extern void fn_8014052C(void);
@@ -44,7 +44,7 @@ extern void rand(void);
 extern void abort(void);
 extern void fn_8068AD58(void);
 extern void std_fmod(void);
-extern void fn_8068B100(void);
+extern void math_u64DivMod(void);
 
 /* External data declarations */
 extern u8 lbl_80745C48[];
@@ -333,7 +333,7 @@ asm void fn_8029F3FC(void)
     stfs f4, 0x44(r1)
     stfs f3, 0x48(r1)
     stfs f6, 0x4c(r1)
-    bl fn_8068B100
+    bl math_u64DivMod
     lwz r3, 0x1570(r31)
     lwz r0, 0x1558(r31)
     lwz r3, 0x10(r3)
@@ -1120,7 +1120,7 @@ lbl_fn_8029FD34_00000E90:
     addi r8, r29, 0x534
     li r9, 0x0
     li r10, 0x1e
-    bl fn_800FAB80
+    bl clip_calculateFrustum
     lwz r0, 0x1604(r29)
     addi r30, r1, 0x58
     lwz r27, 0x1608(r29)
@@ -1396,7 +1396,7 @@ lbl_fn_8029FD34_00001274:
     addi r8, r29, 0x534
     li r9, 0x0
     li r10, 0x1e
-    bl fn_800FAB80
+    bl clip_calculateFrustum
     clrlwi. r0, r31, 31
     bne lbl_fn_8029FD34_00001304
     lwz r4, lbl_8087F430
@@ -1520,7 +1520,7 @@ asm void fn_802A057C(void)
     stfs f4, 0x28(r1)
     stfs f3, 0x2c(r1)
     stfs f6, 0x30(r1)
-    bl fn_8068B100
+    bl math_u64DivMod
     lwz r0, 0x14d8(r31)
     cmpwi r0, 0x0
     bne lbl_fn_802A057C_000016B0
@@ -1656,7 +1656,7 @@ lbl_fn_802A057C_00001660:
     lwz r3, lbl_8087F048
     lwz r5, 0x14ec(r31)
     lwz r6, 0x590(r31)
-    bl fn_800FAB80
+    bl clip_calculateFrustum
 lbl_fn_802A057C_000016B0:
     lwz r0, 0x64(r1)
     psq_l f31, 0x58(r1), 0, 0
@@ -1698,7 +1698,7 @@ asm void fn_802A0818(void)
     stfs f4, 0x2c(r1)
     stfs f3, 0x30(r1)
     stfs f6, 0x34(r1)
-    bl fn_8068B100
+    bl math_u64DivMod
     addi r3, r1, 0x2c
     mr r4, r3
     bl PSVECNormalize

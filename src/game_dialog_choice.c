@@ -18,7 +18,7 @@ extern void fn_80206B14(void);
 extern void assert_generateId(void);
 extern void event_findEntryById(void);
 extern void fn_80211940(void);
-extern void fn_80219558(void);
+extern void task_mapIdToQueue(void);
 extern void weapon_getDamageParam(void);
 extern void fn_804EB754(void);
 extern void fn_8059C088(void);
@@ -350,7 +350,7 @@ lbl_fn_8014DEE4_0000029C:
     b lbl_fn_8014DEE4_000009D0
 lbl_fn_8014DEE4_00000440:
     lwz r3, 0x50(r30)
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmpwi r3, 0x0
     bne lbl_fn_8014DEE4_00000464
     mr r3, r30
@@ -522,7 +522,7 @@ lbl_fn_8014DEE4_00000698:
     li r5, 0x1e
     bl dialog_setScriptSlot
     lwz r3, 0x50(r30)
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmpwi r3, 0x0
     li r5, 0x25
     bne lbl_fn_8014DEE4_000006F0
@@ -1418,7 +1418,7 @@ asm void fn_8014F2B4(void)
     cmpwi r0, 0x0
     beq lbl_fn_8014F2B4_000014B0
     lwz r3, 0x50(r3)
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmpwi r3, 0x0
     blt lbl_fn_8014F2B4_000014DC
     cmpwi r3, 0x7

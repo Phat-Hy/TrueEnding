@@ -5,10 +5,10 @@
 extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
-extern void fn_8005B6E8(void);
+extern void talk_setSpeakerName(void);
 extern void fn_8006AFF8(void);
 extern void fn_800897D8(void);
 extern void fn_80094958(void);
@@ -379,7 +379,7 @@ lbl_fn_802621D4_00000354:
     stfs f0, 0xd4(r1)
     stfs f3, 0xd8(r1)
     stfs f4, 0xdc(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_802621D4_000003DC
     addi r3, r1, 0x170
@@ -833,7 +833,7 @@ asm void fn_80262938(void)
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x44(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
 lbl_fn_80262938_00000A34:
     addi r3, r1, 0x44
     bl talk_parseQuotedString
@@ -1134,7 +1134,7 @@ asm void fn_80262E6C(void)
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x8(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
     lis r31, lbl_807443C0@ha
     addi r31, r31, lbl_807443C0@l
 lbl_fn_80262E6C_00000E64:

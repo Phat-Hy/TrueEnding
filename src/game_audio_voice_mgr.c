@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void fn_8004B338(void);
 extern void item_useConsumable(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void fn_80063764(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
@@ -1427,7 +1427,7 @@ lbl_fn_803012AC_0000135C:
     stw r0, 0x1a4(r1)
     li r9, 0x0
     stw r0, 0x1a8(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_803012AC_000013D8
     addi r4, r1, 0x16c

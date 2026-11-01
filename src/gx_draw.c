@@ -33,7 +33,7 @@ extern void fn_80664950(void);
 extern void fn_80666850(void);
 extern void fn_8068A850(void);
 extern void fn_8068AD58(void);
-extern void fn_8068B100(void);
+extern void math_u64DivMod(void);
 extern void fn_8069636C(void);
 
 /* External data declarations */
@@ -432,7 +432,7 @@ asm void fn_80654430(void)
     fmuls f1, f1, f1
     fmuls f0, f0, f0
     fadds f1, f1, f0
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f8, f1
     lfs f0, lbl_80888898
     fcmpu cr0, f0, f8
@@ -474,7 +474,7 @@ lbl_fn_80654430_00000410:
     fmuls f1, f31, f31
     fmuls f0, f30, f30
     fadds f1, f1, f0
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f1, f1
     lfs f0, lbl_80888898
     fcmpu cr0, f0, f1
@@ -545,13 +545,13 @@ asm void fn_806545D0(void)
     fmuls f0, f0, f0
     fadds f30, f1, f0
     fmr f1, f30
-    bl fn_8068B100
+    bl math_u64DivMod
     lfs f0, 0x5c4(r31)
     frsp f31, f1
     fneg f29, f0
     fmuls f0, f29, f29
     fadds f1, f30, f0
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f5, f1
     lfs f0, lbl_80888898
     fcmpu cr0, f0, f5
@@ -583,7 +583,7 @@ lbl_fn_806545D0_000005CC:
     fmuls f1, f31, f31
     fmuls f0, f30, f30
     fadds f1, f1, f0
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f1, f1
     lfs f0, lbl_80888898
     fcmpu cr0, f0, f1
@@ -729,7 +729,7 @@ lbl_fn_80654700_000007B0:
     fmuls f2, f2, f2
     fadds f0, f1, f0
     fadds f1, f2, f0
-    bl fn_8068B100
+    bl math_u64DivMod
     lfs f2, 0x14(r1)
     frsp f6, f1
     lfs f0, 0xc(r30)
@@ -749,7 +749,7 @@ lbl_fn_80654700_000007B0:
     stfs f4, 0x18(r1)
     stfs f3, 0x1c(r1)
     fadds f1, f2, f0
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f0, f1
     mr r3, r30
     stfs f0, 0x1c(r30)
@@ -966,7 +966,7 @@ lbl_fn_80654700_00000B0C:
     fmuls f2, f2, f2
     fadds f0, f1, f0
     fadds f1, f2, f0
-    bl fn_8068B100
+    bl math_u64DivMod
     lfs f2, 0x8(r1)
     frsp f6, f1
     lfs f0, 0x68(r30)
@@ -986,7 +986,7 @@ lbl_fn_80654700_00000B0C:
     stfs f4, 0xc(r1)
     stfs f3, 0x10(r1)
     fadds f1, f2, f0
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f0, f1
     stfs f0, 0x78(r30)
 lbl_fn_80654700_00000BD0:
@@ -1041,7 +1041,7 @@ lbl_fn_80654C90_00000C58:
     fmuls f1, f27, f27
     fmuls f0, f28, f28
     fadds f1, f1, f0
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f0, f1
     lfs f5, 0x11c(r25)
     lfs f2, 0x120(r25)
@@ -1175,7 +1175,7 @@ lbl_fn_80654E80_00000E48:
     fmuls f1, f28, f28
     fmuls f0, f27, f27
     fadds f1, f1, f0
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f2, f1
     lfs f1, 0x630(r31)
     lfs f0, 0x634(r31)
@@ -1564,7 +1564,7 @@ lbl_fn_806553F0_000013E8:
     fmuls f0, f2, f2
     stfs f2, 0xc(r1)
     fadds f1, f1, f0
-    bl fn_8068B100
+    bl math_u64DivMod
     lwz r0, 0x650(r30)
     frsp f2, f1
     cmpwi r0, 0x0
@@ -1595,7 +1595,7 @@ lbl_fn_806553F0_00001444:
     fmuls f0, f2, f2
     stfs f2, 0xc(r1)
     fadds f1, f1, f0
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f4, f1
     lfs f0, 0x8(r1)
     lfs f2, 0xc(r1)
@@ -1612,7 +1612,7 @@ lbl_fn_806553F0_00001444:
     stfs f1, 0x3c(r30)
     fmuls f1, f1, f1
     fadds f1, f1, f0
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f0, f1
     lwz r3, 0x8(r1)
     lwz r0, 0xc(r1)
@@ -1641,7 +1641,7 @@ lbl_fn_806553F0_000014E4:
     fmuls f0, f2, f2
     stfs f2, 0xc(r1)
     fadds f1, f1, f0
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f4, f1
     lfs f0, 0x8(r1)
     lfs f2, 0xc(r1)
@@ -1658,7 +1658,7 @@ lbl_fn_806553F0_000014E4:
     stfs f1, 0x3c(r30)
     fmuls f1, f1, f1
     fadds f1, f1, f0
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f0, f1
     lwz r3, 0x8(r1)
     lwz r0, 0xc(r1)
@@ -1830,7 +1830,7 @@ lbl_fn_806553F0_000017C8:
     fmuls f0, f2, f2
     stfs f2, 0xc(r1)
     fadds f1, f1, f0
-    bl fn_8068B100
+    bl math_u64DivMod
     lwz r0, 0x64c(r30)
     frsp f4, f1
     cmpwi r0, 0x0
@@ -1857,7 +1857,7 @@ lbl_fn_806553F0_00001824:
     fmuls f0, f2, f2
     stfs f2, 0x2c(r30)
     fadds f1, f1, f0
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f4, f1
     lfs f3, 0x20(r30)
     lfs f2, 0x28(r30)
@@ -1886,7 +1886,7 @@ lbl_fn_806553F0_00001880:
     fmuls f0, f2, f2
     stfs f2, 0x2c(r30)
     fadds f1, f1, f0
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f4, f1
     lfs f3, 0x20(r30)
     lfs f2, 0x28(r30)
@@ -2179,7 +2179,7 @@ lbl_fn_806559D0_00001CA4:
     fmuls f1, f30, f30
     fmuls f0, f31, f31
     fadds f1, f1, f0
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f3, f1
     lfs f0, lbl_808888A4
     lhz r0, 0x5e8(r31)
@@ -2296,7 +2296,7 @@ asm void fn_80655E90(void)
     fmuls f0, f30, f30
     fsubs f28, f2, f4
     fadds f1, f1, f0
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f2, f1
     fcmpo cr0, f2, f29
     cror eq, lt, eq
@@ -2480,7 +2480,7 @@ lbl_fn_80655FC0_000020F0:
     fadds f1, f2, f1
     fcmpo cr0, f1, f0
     ble lbl_fn_80655FC0_00002130
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f2, f1
     lfs f1, 0x0(r31)
     lfs f0, 0x4(r31)
@@ -4369,7 +4369,7 @@ lbl_fn_80657B00_00003B3C:
     stw r4, 0x120(r19)
     stw r3, 0x124(r19)
     stw r0, 0x128(r19)
-    bl fn_8068B100
+    bl math_u64DivMod
     lfs f0, 0x124(r19)
     frsp f1, f1
     fcmpo cr0, f0, f31

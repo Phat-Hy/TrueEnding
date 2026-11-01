@@ -11,7 +11,7 @@ extern void dtor_80084684(void);
 extern void fn_8007708C(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void atn_Skin_init(void);
 extern void fn_800C4A90(void);
 extern void fn_800C4E38(void);
@@ -912,7 +912,7 @@ lbl_fn_800C5644_00000BD0:
     addi r20, r21, lbl_80733FD8@l
     lwz r3, 0x4c(r3)
     addi r4, r20, 0x15
-    bl fn_8008937C
+    bl node_createNamedChild
     lis r18, __files@ha
     lwz r30, 0x0(r22)
     mr r23, r3

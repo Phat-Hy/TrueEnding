@@ -16,7 +16,7 @@ extern void fn_801F837C(void);
 extern void fn_801F8598(void);
 extern void fn_801F8830(void);
 extern void fn_80219344(void);
-extern void fn_80219558(void);
+extern void task_mapIdToQueue(void);
 extern void task_findEntryById(void);
 extern void world_getGlobalFlag(void);
 
@@ -90,11 +90,11 @@ lbl_fn_803E0250_00000064:
     lwz r29, 0x0(r31)
     lwz r3, 0x8(r28)
     lwz r3, 0x50(r3)
-    bl fn_80219558
+    bl task_mapIdToQueue
     lwz r4, 0x8(r29)
     mr r27, r3
     lwz r3, 0x50(r4)
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmpwi r27, 0x0
     bge lbl_fn_803E0250_000000A0
     cmpwi r3, 0x0
@@ -203,11 +203,11 @@ lbl_fn_803E0250_000001F0:
     lwz r22, 0x0(r28)
     lwz r3, 0x8(r23)
     lwz r3, 0x50(r3)
-    bl fn_80219558
+    bl task_mapIdToQueue
     lwz r4, 0x8(r22)
     mr r24, r3
     lwz r3, 0x50(r4)
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmpwi r24, 0x0
     bge lbl_fn_803E0250_0000022C
     cmpwi r3, 0x0
@@ -253,11 +253,11 @@ lbl_fn_803E0250_00000298:
     lwz r23, 0x0(r28)
     lwz r3, 0x8(r22)
     lwz r3, 0x50(r3)
-    bl fn_80219558
+    bl task_mapIdToQueue
     lwz r4, 0x8(r23)
     mr r24, r3
     lwz r3, 0x50(r4)
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmpwi r24, 0x0
     bge lbl_fn_803E0250_000002E0
     cmpwi r3, 0x0
@@ -311,11 +311,11 @@ lbl_fn_803E0250_00000370:
     lwz r23, 0x0(r28)
     lwz r3, 0x8(r22)
     lwz r3, 0x50(r3)
-    bl fn_80219558
+    bl task_mapIdToQueue
     lwz r4, 0x8(r23)
     mr r24, r3
     lwz r3, 0x50(r4)
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmpwi r24, 0x0
     bge lbl_fn_803E0250_000003AC
     cmpwi r3, 0x0
@@ -358,11 +358,11 @@ lbl_fn_803E0250_00000418:
     lwz r23, 0x0(r28)
     lwz r3, 0x8(r22)
     lwz r3, 0x50(r3)
-    bl fn_80219558
+    bl task_mapIdToQueue
     lwz r4, 0x8(r23)
     mr r24, r3
     lwz r3, 0x50(r4)
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmpwi r24, 0x0
     bge lbl_fn_803E0250_00000454
     cmpwi r3, 0x0
@@ -421,11 +421,11 @@ lbl_fn_803E0250_000004E0:
     lwz r23, -0x4(r26)
     lwz r3, 0x8(r22)
     lwz r3, 0x50(r3)
-    bl fn_80219558
+    bl task_mapIdToQueue
     lwz r4, 0x8(r23)
     mr r28, r3
     lwz r3, 0x50(r4)
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmpwi r28, 0x0
     bge lbl_fn_803E0250_0000053C
     cmpwi r3, 0x0
@@ -473,11 +473,11 @@ lbl_fn_803E0250_000005B0:
     lwz r23, 0x0(r30)
     lwz r3, 0x8(r22)
     lwz r3, 0x50(r3)
-    bl fn_80219558
+    bl task_mapIdToQueue
     lwz r4, 0x8(r23)
     mr r28, r3
     lwz r3, 0x50(r4)
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmpwi r28, 0x0
     bge lbl_fn_803E0250_000005F4
     cmpwi r3, 0x0
@@ -533,11 +533,11 @@ lbl_fn_803E0250_00000688:
     lwz r23, 0x0(r30)
     lwz r3, 0x8(r22)
     lwz r3, 0x50(r3)
-    bl fn_80219558
+    bl task_mapIdToQueue
     lwz r4, 0x8(r23)
     mr r28, r3
     lwz r3, 0x50(r4)
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmpwi r28, 0x0
     bge lbl_fn_803E0250_000006C4
     cmpwi r3, 0x0
@@ -580,11 +580,11 @@ lbl_fn_803E0250_00000730:
     lwzu r23, -0x4(r29)
     lwz r3, 0x8(r22)
     lwz r3, 0x50(r3)
-    bl fn_80219558
+    bl task_mapIdToQueue
     lwz r4, 0x8(r23)
     mr r28, r3
     lwz r3, 0x50(r4)
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmpwi r28, 0x0
     bge lbl_fn_803E0250_0000076C
     cmpwi r3, 0x0
@@ -677,11 +677,11 @@ asm void fn_803E0AB4(void)
     lwz r26, 0x0(r3)
     lwz r3, 0x8(r31)
     lwz r3, 0x50(r3)
-    bl fn_80219558
+    bl task_mapIdToQueue
     lwz r4, 0x8(r26)
     mr r27, r3
     lwz r3, 0x50(r4)
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmpwi r27, 0x0
     bge lbl_fn_803E0AB4_000008BC
     cmpwi r3, 0x0
@@ -723,11 +723,11 @@ lbl_fn_803E0AB4_00000920:
     srwi r31, r0, 5
     lwz r3, 0x8(r26)
     lwz r3, 0x50(r3)
-    bl fn_80219558
+    bl task_mapIdToQueue
     lwz r4, 0x8(r25)
     mr r27, r3
     lwz r3, 0x50(r4)
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmpwi r27, 0x0
     bge lbl_fn_803E0AB4_00000964
     cmpwi r3, 0x0
@@ -784,11 +784,11 @@ lbl_fn_803E0AB4_00000A04:
     lwz r26, 0x0(r28)
     lwz r3, 0x8(r25)
     lwz r3, 0x50(r3)
-    bl fn_80219558
+    bl task_mapIdToQueue
     lwz r4, 0x8(r26)
     mr r27, r3
     lwz r3, 0x50(r4)
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmpwi r27, 0x0
     bge lbl_fn_803E0AB4_00000A40
     cmpwi r3, 0x0

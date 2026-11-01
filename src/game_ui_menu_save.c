@@ -16,7 +16,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void str_findChar(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800F8574(void);
-extern void fn_800FAB80(void);
+extern void clip_calculateFrustum(void);
 extern void fn_800FB4B0(void);
 extern void fn_801070C8(void);
 extern void fn_80107168(void);
@@ -32,7 +32,7 @@ extern void fn_801B2EDC(void);
 extern void fn_801BDE68(void);
 extern void fn_801BDE98(void);
 extern void fn_80219344(void);
-extern void fn_80219558(void);
+extern void task_mapIdToQueue(void);
 extern void task_findEntryById(void);
 extern void fn_8021A888(void);
 extern void fn_8021A8D0(void);
@@ -525,7 +525,7 @@ lbl_fn_801BE630_00000588:
     addi r8, r8, lbl_807C7030@l
     li r9, 0x0
     li r10, 0x1e
-    bl fn_800FAB80
+    bl clip_calculateFrustum
     b lbl_fn_801BE630_0000158C
 lbl_fn_801BE630_000005E8:
     lfs f4, 0x21c(r1)
@@ -1327,7 +1327,7 @@ lbl_fn_801BE630_00001174:
     addi r8, r8, lbl_807C7030@l
     li r9, 0x0
     li r10, 0x1e
-    bl fn_800FAB80
+    bl clip_calculateFrustum
     lfs f0, lbl_808825F4
     stfs f0, 0x238(r20)
     b lbl_fn_801BE630_0000158C
@@ -1599,7 +1599,7 @@ lbl_fn_801BE630_0000158C:
     bne lbl_fn_801BE630_00001688
 lbl_fn_801BE630_000015E0:
     lwz r3, 0x50(r3)
-    bl fn_80219558
+    bl task_mapIdToQueue
     subi r0, r3, 0x9
     cmplwi r0, 0x1
     ble lbl_fn_801BE630_00001610

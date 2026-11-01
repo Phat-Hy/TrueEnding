@@ -11,7 +11,7 @@ extern void fn_80011034(void);
 extern void fn_80011220(void);
 extern void vec3_sub(void);
 extern void fn_8004ECC0(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void fn_80057A64(void);
 extern void fn_80063D3C(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -1565,7 +1565,7 @@ lbl_fn_80463C58_000013FC:
     stfs f0, 0x8(r1)
     stfs f3, 0xc(r1)
     stfs f4, 0x10(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_80463C58_000014DC
     addi r3, r1, 0x30

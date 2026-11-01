@@ -11,7 +11,7 @@ extern void mem_alloc(void);
 extern void mem_free(void);
 extern void fn_8008BBD8(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_800C31F4(void);
+extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void morph_updateMesh(void);
 extern void fn_80105B3C(void);
@@ -25,7 +25,7 @@ extern void fn_8016F3D0(void);
 extern void fn_801B2EDC(void);
 extern void fn_801C3458(void);
 extern void fn_801C3D1C(void);
-extern void fn_80219558(void);
+extern void task_mapIdToQueue(void);
 extern void task_findEntryById(void);
 extern void fn_8021FD7C(void);
 extern void fn_8036DAA8(void);
@@ -1133,7 +1133,7 @@ lbl_fn_801BC97C_00000EA8:
     stfs f0, 0x160(r1)
     stfs f0, 0x164(r1)
     lwz r3, 0x50(r3)
-    bl fn_80219558
+    bl task_mapIdToQueue
     subi r0, r3, 0x9
     cmplwi r0, 0x1
     ble lbl_fn_801BC97C_00000F3C
@@ -1887,7 +1887,7 @@ lbl_fn_801BE10C_0000194C:
     bne lbl_fn_801BE10C_00001B0C
     lwz r3, 0x4(r3)
     lwz r3, 0x50(r3)
-    bl fn_80219558
+    bl task_mapIdToQueue
     subi r0, r3, 0x9
     cmplwi r0, 0x1
     ble lbl_fn_801BE10C_00001A54
@@ -2099,7 +2099,7 @@ lbl_fn_801BE10C_00001C38:
     addi r4, r1, 0x30
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle

@@ -7,7 +7,7 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_8003EA3C(void);
 extern void fn_8004D388(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -1907,7 +1907,7 @@ lbl_fn_801CA1E0_00001908:
     stw r0, 0x2a8(r1)
     stw r0, 0x2ac(r1)
     stw r0, 0x2b0(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_801CA1E0_000019E4
     lwz r3, lbl_8087F048
@@ -2050,7 +2050,7 @@ lbl_fn_801CA1E0_00001AF8:
     addi r4, r1, 0x220
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_801CA1E0_00001BE0
     lfs f0, 0x228(r1)

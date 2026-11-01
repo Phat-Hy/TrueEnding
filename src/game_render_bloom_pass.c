@@ -18,7 +18,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void fn_800E0AA8(void);
 extern void fn_800E0AB0(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800FAB80(void);
+extern void clip_calculateFrustum(void);
 extern void fn_80103F60(void);
 extern void fn_80108378(void);
 extern void fn_8013A158(void);
@@ -484,7 +484,7 @@ lbl_fn_802BB410_00000410:
     addi r8, r31, 0x534
     li r9, 0x0
     li r10, 0x1e
-    bl fn_800FAB80
+    bl clip_calculateFrustum
     stw r28, 0x1914(r31)
     b lbl_fn_802BB410_000005AC
 lbl_fn_802BB410_00000570:

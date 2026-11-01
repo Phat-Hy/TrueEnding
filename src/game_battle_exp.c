@@ -17,7 +17,7 @@ extern void fn_80135384(void);
 extern void actor_setState(void);
 extern void fn_80177EB8(void);
 extern void fn_80178A6C(void);
-extern void fn_80219558(void);
+extern void task_mapIdToQueue(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
@@ -705,7 +705,7 @@ lbl_fn_80176B68_00000868:
     cmpwi r0, 0x0
     beq lbl_fn_80176B68_000008B0
     lwz r3, 0x50(r30)
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmpwi r3, 0x0
     bne lbl_fn_80176B68_000008B0
     cmpwi r31, 0x0

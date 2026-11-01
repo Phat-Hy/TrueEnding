@@ -7,16 +7,16 @@ extern void _restgpr_27(void);
 extern void _savegpr_22(void);
 extern void _savegpr_27(void);
 extern void item_useConsumable(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
-extern void fn_8005B6E8(void);
+extern void talk_setSpeakerName(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void fn_80087858(void);
 extern void route_createSegment(void);
 extern void fn_80087E9C(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void str_skipWhitespace(void);
 extern void fn_80116BD4(void);
 extern void fn_80124BE4(void);
@@ -179,7 +179,7 @@ asm void fn_8037E12C(void)
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x170(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
     lis r29, lbl_8074E210@ha
     lfs f29, lbl_808858E8
     lfs f30, lbl_80885920
@@ -714,7 +714,7 @@ asm void fn_8037E9E0(void)
     cmpwi r3, 0x0
     beq lbl_fn_8037E9E0_00000908
     addi r3, r3, 0x10
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0x7ec(r29)
     mr r30, r3
     b lbl_fn_8037E9E0_0000090C
@@ -854,7 +854,7 @@ lbl_fn_8037E9E0_0000090C:
     bl route_interpolatePath
     mr r3, r30
     addi r4, r31, 0x133
-    bl fn_8008937C
+    bl node_createNamedChild
     lfs f1, lbl_808859A8
     mr r30, r3
     lfs f2, lbl_808859AC
@@ -908,7 +908,7 @@ asm void fn_8037ECF0(void)
     stw r30, 0x18(r1)
     stw r29, 0x14(r1)
     mr r29, r6
-    bl fn_8008937C
+    bl node_createNamedChild
     lis r31, lbl_8074E210@ha
     lfs f1, lbl_808858F8
     addi r31, r31, lbl_8074E210@l
@@ -1464,7 +1464,7 @@ lbl_fn_8037EF48_00001390:
     stw r0, 0x278(r1)
     stw r0, 0x27c(r1)
     stw r0, 0x280(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_8037EF48_00001438
     addi r4, r1, 0x250

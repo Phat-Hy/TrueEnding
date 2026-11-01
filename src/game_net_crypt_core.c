@@ -10,7 +10,7 @@ extern void dtor_80084684(void);
 extern void fn_8006EF48(void);
 extern void fn_800A4450(void);
 extern void msg_getMessageById(void);
-extern void fn_800A55AC(void);
+extern void msg_getMessageString(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
@@ -1565,13 +1565,13 @@ lbl_fn_804B1E48_000014F4:
     add r6, r29, r0
     lwz r6, 0x25c(r6)
     lwz r30, 0x0(r6)
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     bne lbl_fn_804B1E48_00001538
     mr r3, r31
     li r4, 0x0
     li r5, 0x1a
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     beq lbl_fn_804B1E48_00001574
 lbl_fn_804B1E48_00001538:
@@ -1594,13 +1594,13 @@ lbl_fn_804B1E48_00001574:
     mr r3, r31
     li r4, 0x0
     li r5, 0x1
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     bne lbl_fn_804B1E48_000015A4
     mr r3, r31
     li r4, 0x0
     li r5, 0x19
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     beq lbl_fn_804B1E48_00001610
 lbl_fn_804B1E48_000015A4:

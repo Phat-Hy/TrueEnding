@@ -7,14 +7,14 @@ extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void talk_parseQuotedString(void);
-extern void fn_8005B6E8(void);
+extern void talk_setSpeakerName(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void fn_800897D8(void);
 extern void fn_8008BBD8(void);
 extern void atn_Model_findBoneIndex(void);
@@ -1334,7 +1334,7 @@ asm void fn_80309E6C(void)
     beq lbl_fn_80309E6C_000011C8
     mr r3, r28
     addi r4, r1, 0x8
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0x1650(r27)
     mr r29, r3
     b lbl_fn_80309E6C_000011CC
@@ -1348,7 +1348,7 @@ lbl_fn_80309E6C_000011CC:
     mr r3, r29
     addi r30, r30, lbl_80748DC0@l
     addi r4, r30, 0x1cb
-    bl fn_8008937C
+    bl node_createNamedChild
     lis r31, 0xf
     mr r28, r3
     addi r4, r30, 0x1d8
@@ -1370,7 +1370,7 @@ lbl_fn_80309E6C_000011CC:
     bl route_findNextWaypoint
     mr r3, r29
     addi r4, r30, 0x1e9
-    bl fn_8008937C
+    bl node_createNamedChild
     mr r28, r3
     addi r4, r30, 0x1d8
     addi r5, r27, 0x14e8
@@ -1400,7 +1400,7 @@ lbl_fn_80309E6C_000011CC:
     bl route_findNextWaypoint
     mr r3, r29
     addi r4, r30, 0x1ff
-    bl fn_8008937C
+    bl node_createNamedChild
     addi r4, r30, 0x1d8
     addi r5, r27, 0x14e8
     addi r7, r31, 0x423f
@@ -1734,7 +1734,7 @@ lbl_fn_8030A144_00001694:
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x14(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
     lis r31, lbl_80748FE8@ha
     addi r30, r31, lbl_80748FE8@l
 lbl_fn_8030A144_0000178C:

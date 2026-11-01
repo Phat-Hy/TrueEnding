@@ -21,7 +21,7 @@ extern void route_interpolatePath(void);
 extern void route_createSegment(void);
 extern void fn_80087E9C(void);
 extern void fn_80088724(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void fn_8008AD4C(void);
 extern void fn_8008B140(void);
 extern void fn_80092F1C(void);
@@ -29,7 +29,7 @@ extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void str_skipWhitespace(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800FAB80(void);
+extern void clip_calculateFrustum(void);
 extern void fn_802180A8(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
@@ -1218,7 +1218,7 @@ lbl_fn_8041A8DC_00000F00:
     li r4, 0x0
     li r9, 0x0
     li r10, 0x1e
-    bl fn_800FAB80
+    bl clip_calculateFrustum
 lbl_fn_8041A8DC_00001008:
     lbz r4, 0x1(r28)
     li r0, 0x0
@@ -1723,7 +1723,7 @@ asm void fn_8041B094(void)
     beq lbl_fn_8041B094_000016A8
     mr r3, r28
     addi r4, r1, 0x8
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0xf0(r27)
     mr r30, r3
     b lbl_fn_8041B094_000016AC
@@ -1798,7 +1798,7 @@ lbl_fn_8041B094_00001790:
     bl sprintf
     mr r3, r30
     addi r4, r1, 0x28
-    bl fn_8008937C
+    bl node_createNamedChild
     lwz r5, 0x530(r27)
     mr r28, r3
     lfs f1, lbl_80886514

@@ -7,7 +7,7 @@ extern void _restgpr_23(void);
 extern void _savegpr_18(void);
 extern void _savegpr_23(void);
 extern void mem_alloc(void);
-extern void fn_800C31F4(void);
+extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB688(void);
 extern void wcs_parseInt(void);
@@ -686,7 +686,7 @@ lbl_fn_8054D798_000005A8:
     lfs f0, 0xa0(r6)
     li r6, -0x1
     stfs f0, 0x10(r1)
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     subic. r3, r25, 0x1
     lfs f1, lbl_80887D70
     ble lbl_fn_8054D798_00000674

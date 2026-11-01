@@ -18,7 +18,7 @@ extern void mem_getAllocSize(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void fn_80088AF4(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void fn_800897D8(void);
 extern void fn_800BDB40(void);
 extern void fn_800BDB58(void);
@@ -270,7 +270,7 @@ lbl_fn_80077160_00000234:
     lwz r0, lbl_8087EF10
     cmpwi r0, 0x0
     beq lbl_fn_80077160_00000274
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0x140(r31)
     b lbl_fn_80077160_00000278
 lbl_fn_80077160_00000274:
@@ -306,7 +306,7 @@ lbl_fn_80077160_0000029C:
     bl sprintf
     mr r3, r26
     addi r4, r1, 0x18
-    bl fn_8008937C
+    bl node_createNamedChild
     mr r24, r3
     mr r5, r28
     addi r4, r30, 0x33

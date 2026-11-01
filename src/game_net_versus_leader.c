@@ -9,7 +9,7 @@ extern void _savegpr_17(void);
 extern void _savegpr_25(void);
 extern void _savegpr_26(void);
 extern void fn_80061824(void);
-extern void fn_800A55AC(void);
+extern void msg_getMessageString(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void str_findChar(void);
@@ -1227,7 +1227,7 @@ asm void fn_804C0548(void)
     mr r3, r29
     li r4, 0x0
     li r5, 0x6
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     beq lbl_fn_804C0548_00001158
     subic. r28, r28, 0x1

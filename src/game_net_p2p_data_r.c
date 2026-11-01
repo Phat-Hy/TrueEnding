@@ -8,8 +8,8 @@ extern void __div2u(void);
 extern void __mod2u(void);
 extern void dtor_80084684(void);
 extern void fn_8006F420(void);
-extern void fn_8006F72C(void);
-extern void fn_800827E0(void);
+extern void str_assignBuffer(void);
+extern void dungeon_initGlobalContext(void);
 extern void fn_800838B8(void);
 extern void fn_800A5218(void);
 extern void fn_800DBF68(void);
@@ -622,7 +622,7 @@ lbl_fn_8050E098_0000069C:
     lwz r0, lbl_8087F600
     cmpwi r0, 0x0
     bne lbl_fn_8050E098_000006CC
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     li r4, 0x1000
     li r5, 0x4
     li r6, 0x5
@@ -802,7 +802,7 @@ lbl_fn_8050E414_00000924:
     lwz r0, lbl_8087F600
     cmpwi r0, 0x0
     bne lbl_fn_8050E414_00000954
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     li r4, 0x1000
     li r5, 0x4
     li r6, 0x5
@@ -1244,7 +1244,7 @@ lbl_fn_8050E998_00000E64:
     addi r8, r1, 0x8
     li r4, 0x0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r0, 0x10(r1)
     addi r4, r1, 0x20
     lwz r3, lbl_8087EEC8
@@ -1730,7 +1730,7 @@ lbl_fn_8050EFD0_000014EC:
     addi r8, r1, 0xc
     li r4, 0x0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r0, 0x18(r1)
     srwi. r0, r0, 31
     bne lbl_fn_8050EFD0_00001564
@@ -1752,7 +1752,7 @@ lbl_fn_8050EFD0_00001568:
     addi r6, r28, 0x1c0
     addi r8, r1, 0x14
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r0, 0x18(r1)
     srwi r0, r0, 31
     cntlzw r0, r0
@@ -1828,7 +1828,7 @@ asm void fn_8050F19C(void)
     addi r8, r1, 0x10
     li r4, 0x0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r0, 0x18(r1)
     srwi. r0, r0, 31
     bne lbl_fn_8050F19C_000016BC
@@ -1850,7 +1850,7 @@ lbl_fn_8050F19C_000016C0:
     addi r6, r28, 0x1c0
     addi r8, r1, 0x8
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r0, 0x18(r1)
     srwi r0, r0, 31
     cntlzw r0, r0
@@ -2095,7 +2095,7 @@ lbl_fn_8050F474_000019CC:
     addi r8, r1, 0x8
     li r4, 0x0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lmw r27, 0x21c(r1)
     lwz r0, 0x234(r1)
     mtlr r0

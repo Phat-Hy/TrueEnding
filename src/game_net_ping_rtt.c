@@ -19,7 +19,7 @@ extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_80087E9C(void);
 extern void fn_80088FAC(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void fn_8009EE30(void);
 extern void msg_getMessageById(void);
 extern void ref_releaseHandle(void);
@@ -723,7 +723,7 @@ asm void fn_80516740(void)
 lbl_fn_80516740_00000848:
     lwz r4, 0xa0(r29)
 lbl_fn_80516740_0000084C:
-    bl fn_8008937C
+    bl node_createNamedChild
     lis r31, lbl_8075B7A4@ha
     lfs f1, lbl_808878A4
     addi r31, r31, lbl_8075B7A4@l

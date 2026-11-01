@@ -5,7 +5,7 @@
 extern void fn_8004D314(void);
 extern void fn_8004D388(void);
 extern void fn_8004ECC0(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void mem_alloc(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void fn_80097D40(void);
@@ -27,7 +27,7 @@ extern void fn_8068A850(void);
 extern void fn_8068AD58(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
-extern void fn_8068B100(void);
+extern void math_u64DivMod(void);
 extern void vec3_isNonZero(void);
 
 /* External data declarations */
@@ -865,7 +865,7 @@ lbl_fn_801426A4_00000AEC:
     stfs f2, 0xd0(r1)
     stfs f4, 0xd8(r1)
     stfs f0, 0xcc(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     bne lbl_fn_801426A4_00000B68
     li r28, 0x1
@@ -1197,7 +1197,7 @@ lbl_fn_801426A4_00000FF8:
     lfs f0, 0xcbc(r29)
     fmuls f3, f3, f3
     fmadds f1, f0, f0, f3
-    bl fn_8068B100
+    bl math_u64DivMod
     lfs f0, lbl_808819B8
     frsp f3, f1
     fcmpo cr0, f29, f0

@@ -6,7 +6,7 @@ extern void _restgpr_21(void);
 extern void _savegpr_21(void);
 extern void item_useConsumable(void);
 extern void fn_8004D388(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void fn_800A55D4(void);
 extern void fn_800A56A8(void);
 extern void fn_800A58D0(void);
@@ -33,7 +33,7 @@ extern void fn_8068AD58(void);
 extern void fn_8068AEA0(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
-extern void fn_8068B100(void);
+extern void math_u64DivMod(void);
 
 /* External data declarations */
 extern u8 lbl_8074E008[];
@@ -1381,7 +1381,7 @@ lbl_fn_8037F9AC_00001260:
     stfs f24, 0x8(r1)
     fmuls f7, f7, f7
     fmadds f1, f0, f0, f7
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f7, f1
     lfs f0, lbl_808858E8
     fcmpu cr0, f0, f7
@@ -1390,7 +1390,7 @@ lbl_fn_8037F9AC_00001260:
     frsp f0, f24
     fmuls f7, f7, f7
     fmadds f1, f0, f0, f7
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f9, f1
     lfs f8, lbl_808858F8
     frsp f7, f24
@@ -2080,7 +2080,7 @@ lbl_fn_8037F9AC_00001C10:
     li r8, 0x0
     li r9, 0x0
     stw r10, 0xbb8(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_8037F9AC_00001EC8
     lwz r0, 0x8f0(r29)
@@ -2093,7 +2093,7 @@ lbl_fn_8037F9AC_00001C10:
     addi r7, r28, 0x8
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     bne lbl_fn_8037F9AC_00001EC8
     addi r4, r1, 0xbd8
@@ -2178,7 +2178,7 @@ lbl_fn_8037F9AC_00001DCC:
     addi r7, r7, 0x8
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_8037F9AC_00001EC8
     lwz r0, 0x8f0(r29)
@@ -3061,7 +3061,7 @@ lbl_fn_8037F9AC_00002B08:
     addi r7, r7, 0x8
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_8037F9AC_00002D44
     lwz r0, 0x8f0(r29)

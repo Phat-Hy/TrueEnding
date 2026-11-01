@@ -7,7 +7,7 @@ extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
-extern void fn_8005B6E8(void);
+extern void talk_setSpeakerName(void);
 extern void skill_calculateDamage(void);
 extern void fn_8006A004(void);
 extern void fn_8006AA20(void);
@@ -443,7 +443,7 @@ asm void fn_80204958(void)
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x28(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
     lis r24, lbl_8073E814@ha
     li r23, 0x0
     addi r24, r24, lbl_8073E814@l
@@ -793,7 +793,7 @@ asm void fn_80204E54(void)
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x13c(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
     li r15, 0x0
     lis r14, lbl_8073E938@ha
     b lbl_fn_80204E54_000009DC

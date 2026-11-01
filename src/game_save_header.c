@@ -17,7 +17,7 @@ extern void fn_8005B9AC(void);
 extern void fn_80061824(void);
 extern void fn_8006AD24(void);
 extern void fn_8006EF48(void);
-extern void fn_8006F72C(void);
+extern void str_assignBuffer(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
@@ -638,7 +638,7 @@ lbl_save_updateHeader_00000764:
     add r7, r6, r0
     addi r8, r1, 0x8
     li r4, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
 lbl_save_updateHeader_00000780:
     lwz r0, 0x24(r1)
     srwi. r0, r0, 31
@@ -1374,7 +1374,7 @@ lbl_fn_801F36C8_00001108:
     addi r8, r1, 0x18
     add r7, r22, r0
     li r4, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r0, 0x34(r1)
     srwi. r0, r0, 31
     bne lbl_fn_801F36C8_00001150
@@ -1422,7 +1422,7 @@ lbl_fn_801F36C8_000011A8:
     li r4, 0x0
     li r5, 0x0
     add r7, r6, r0
-    bl fn_8006F72C
+    bl str_assignBuffer
 lbl_fn_801F36C8_000011EC:
     lwz r3, 0x44(r1)
     addi r0, r3, 0x1
@@ -1555,7 +1555,7 @@ lbl_fn_801F36C8_0000138C:
     li r4, 0x0
     li r5, 0x0
     add r7, r6, r0
-    bl fn_8006F72C
+    bl str_assignBuffer
 lbl_fn_801F36C8_000013D0:
     lwz r0, 0x44(r1)
     lwz r16, 0x40(r1)
@@ -1813,7 +1813,7 @@ lbl_fn_801F3E20_00001730:
     addi r8, r1, 0x8
     add r7, r31, r0
     li r4, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     li r3, 0x1
     b lbl_fn_801F3E20_0000177C
 lbl_fn_801F3E20_0000176C:

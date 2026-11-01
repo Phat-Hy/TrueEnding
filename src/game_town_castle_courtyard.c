@@ -5,10 +5,10 @@
 extern void _restgpr_14(void);
 extern void _savegpr_14(void);
 extern void fn_8003E950(void);
-extern void fn_8006F72C(void);
+extern void str_assignBuffer(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_800BFAC8(void);
-extern void fn_800C31F4(void);
+extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void str_findChar(void);
 extern void fn_801346C8(void);
@@ -21,7 +21,7 @@ extern void fn_801F90E0(void);
 extern void thread_findAndNotifySlot(void);
 extern void thread_dispatchToQueue(void);
 extern void fn_80219160(void);
-extern void fn_80219558(void);
+extern void task_mapIdToQueue(void);
 extern void fn_8021AF50(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
@@ -1763,7 +1763,7 @@ lbl_fn_803D83A8_00001860:
     lwz r4, 0x1c(r4)
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x2c
     li r4, -0x1
     bl ref_releaseHandle
@@ -1776,7 +1776,7 @@ lbl_fn_803D83A8_00001890:
     lwz r4, 0x20(r4)
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x28
     li r4, -0x1
     bl ref_releaseHandle
@@ -1789,7 +1789,7 @@ lbl_fn_803D83A8_000018C0:
     lwz r4, 0x24(r4)
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x24
     li r4, -0x1
     bl ref_releaseHandle
@@ -2417,7 +2417,7 @@ lbl_fn_803D83A8_00001DF0:
     beq lbl_fn_803D83A8_000022D0
     lwz r3, 0x110c(r15)
     lwz r3, 0x50(r3)
-    bl fn_80219558
+    bl task_mapIdToQueue
     lwz r4, 0x110c(r15)
     lwz r5, 0x8c(r16)
     lwz r0, 0x874(r4)
@@ -2516,7 +2516,7 @@ lbl_fn_803D83A8_00002328:
     addi r4, r4, 0x128e
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x20
     li r4, -0x1
     bl ref_releaseHandle
@@ -2646,7 +2646,7 @@ lbl_fn_803D83A8_0000253C:
     addi r8, r1, 0x1c
     add r7, r16, r0
     li r4, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     li r0, 0x2
     stw r0, 0xdb0(r15)
 lbl_fn_803D83A8_00002574:

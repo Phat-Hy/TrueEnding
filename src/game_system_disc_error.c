@@ -9,10 +9,10 @@ extern void dtor_80084684(void);
 extern void fn_8000D760(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
-extern void fn_8005B6E8(void);
+extern void talk_setSpeakerName(void);
 extern void fn_8006AF38(void);
 extern void mem_free(void);
 extern void fn_800897D8(void);
@@ -25,7 +25,7 @@ extern void fn_800E2DD4(void);
 extern void fn_800E2FE0(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800F8574(void);
-extern void fn_800FAB80(void);
+extern void clip_calculateFrustum(void);
 extern void fn_8010A308(void);
 extern void fn_80145334(void);
 extern void fn_8014C540(void);
@@ -59,7 +59,7 @@ extern void atoi(void);
 extern void abort(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
-extern void fn_8068B100(void);
+extern void math_u64DivMod(void);
 extern void __destroy_new_array(void);
 extern void __ptmf_scall(void);
 extern u32 strlen(const char* str);
@@ -1114,7 +1114,7 @@ asm void fn_80354910(void)
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x8(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
     lis r31, lbl_8074AF58@ha
     addi r31, r31, lbl_8074AF58@l
 lbl_fn_80354910_00000D24:
@@ -1272,7 +1272,7 @@ lbl_fn_80354AA4_00000E5C:
     addi r8, r31, 0x534
     li r9, 0x0
     li r10, 0x1e
-    bl fn_800FAB80
+    bl clip_calculateFrustum
 lbl_fn_80354AA4_00000F64:
     mr r3, r31
     bl fn_80145334
@@ -1445,7 +1445,7 @@ lbl_fn_80354DA4_00001154:
     stw r31, 0x58(r1)
     stw r31, 0x5c(r1)
     stw r31, 0x60(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_80354DA4_000011E0
     lwz r3, 0x14b8(r30)
@@ -1713,7 +1713,7 @@ lbl_fn_80354EE4_0000152C:
     stfs f2, 0x70(r1)
     fadds f0, f5, f4
     stfs f0, 0x6c(r1)
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f3, f1
     lfs f0, 0x4c(r29)
     lis r0, 0x4330
@@ -1903,7 +1903,7 @@ asm void fn_80355390(void)
     addi r4, r1, 0x130
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_80355390_000018A0
     addi r3, r1, 0x134

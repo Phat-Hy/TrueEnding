@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void fn_80040B40(void);
 extern void fn_8004D314(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void fn_80092954(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
@@ -48,7 +48,7 @@ extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
 extern void fn_8068A850(void);
 extern void std_atan2(void);
-extern void fn_8068B100(void);
+extern void math_u64DivMod(void);
 
 /* External data declarations */
 extern u8 jumptable_80787A68[];
@@ -419,7 +419,7 @@ lbl_fn_802F7E0C_0000041C:
     stw r0, 0x98(r1)
     stw r0, 0x9c(r1)
     stw r0, 0xa0(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_802F7E0C_000004E0
     lwz r3, 0x94(r1)
@@ -1677,7 +1677,7 @@ lbl_fn_802F93F0_000016BC:
     fmadds f1, f4, f4, f0
     stfs f2, 0x18(r1)
     stfs f3, 0x1c(r1)
-    bl fn_8068B100
+    bl math_u64DivMod
     lwz r0, 0x15d4(r31)
     frsp f31, f1
     cmpwi r0, 0x0

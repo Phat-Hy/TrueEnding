@@ -25,7 +25,7 @@ extern void fn_801B9128(void);
 extern void fn_801BBC48(void);
 extern void fn_801C706C(void);
 extern void fn_80210220(void);
-extern void fn_80219558(void);
+extern void task_mapIdToQueue(void);
 extern void task_findEntryById(void);
 extern void world_getGlobalFlag(void);
 extern void world_setGlobalFlag(void);
@@ -1689,7 +1689,7 @@ lbl_fn_80164B00_000016C8:
     cmplwi r0, 0x2000
     beq lbl_fn_80164B00_00001740
     lwz r3, 0x50(r31)
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmpwi r3, 0xb
     beq lbl_fn_80164B00_000016F8
     cmpwi r3, 0xe

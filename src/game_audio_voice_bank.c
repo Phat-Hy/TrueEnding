@@ -5,7 +5,7 @@
 extern void _restgpr_26(void);
 extern void _savegpr_26(void);
 extern void fn_8004D388(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void fn_80063D3C(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -14,7 +14,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800FAB80(void);
+extern void clip_calculateFrustum(void);
 extern void actor_setState(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
@@ -31,7 +31,7 @@ extern void PSVECNormalize(void);
 extern void PSVECDotProduct(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
-extern void fn_8068B100(void);
+extern void math_u64DivMod(void);
 
 /* External data declarations */
 extern u8 lbl_807489F8[];
@@ -321,7 +321,7 @@ lbl_fn_803026F0_000002FC:
     addi r8, r31, 0x534
     li r9, 0x0
     li r10, 0x1e
-    bl fn_800FAB80
+    bl clip_calculateFrustum
     lwz r3, lbl_8087F3C0
     mr r4, r31
     lwz r5, 0x15b4(r31)
@@ -467,7 +467,7 @@ lbl_fn_80302B84_0000056C:
     stfs f10, 0x34(r1)
     fmadds f1, f10, f10, f0
     stfs f7, 0x38(r1)
-    bl fn_8068B100
+    bl math_u64DivMod
     lwz r3, lbl_8087F8A0
     frsp f31, f1
     addi r4, r1, 0x28
@@ -636,7 +636,7 @@ lbl_fn_80302B84_000007B8:
     li r6, 0x3e8
     li r9, 0x0
     li r10, 0x1e
-    bl fn_800FAB80
+    bl clip_calculateFrustum
 lbl_fn_80302B84_00000850:
     lfs f7, 0x538(r31)
     lfs f0, lbl_80884AEC
@@ -1103,7 +1103,7 @@ lbl_fn_80302F94_00000DDC:
     stw r0, 0x690(r1)
     stw r0, 0x694(r1)
     stw r0, 0x698(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_80302F94_00000FCC
     addi r4, r29, 0x15d8
@@ -1583,7 +1583,7 @@ lbl_fn_80302F94_00001628:
     fmadds f1, f10, f10, f0
     stfs f7, 0x164(r1)
     stfs f9, 0x168(r1)
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f7, f1
     lfs f0, lbl_80884A28
     fcmpo cr0, f7, f0
@@ -1784,7 +1784,7 @@ lbl_fn_80302F94_00001914:
     addi r8, r29, 0x534
     li r6, 0x3e8
     li r9, 0x0
-    bl fn_800FAB80
+    bl clip_calculateFrustum
     b lbl_fn_80302F94_00001A70
 lbl_fn_80302F94_00001974:
     cmpwi r0, 0x1

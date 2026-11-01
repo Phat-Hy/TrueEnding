@@ -13,13 +13,13 @@ extern void fn_800185B4(void);
 extern void fn_80041A28(void);
 extern void fn_80044C30(void);
 extern void mem_alloc(void);
-extern void fn_800C31F4(void);
+extern void skin_playAnimationByName(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void fn_800E8FB8(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800F8574(void);
-extern void fn_800FAB80(void);
+extern void clip_calculateFrustum(void);
 extern void fn_800FFE68(void);
 extern void fn_801004FC(void);
 extern void fn_80100BB8(void);
@@ -60,7 +60,7 @@ extern void fn_801E97DC(void);
 extern void fn_801E9ECC(void);
 extern void fn_80210220(void);
 extern void fn_80219344(void);
-extern void fn_80219558(void);
+extern void task_mapIdToQueue(void);
 extern void task_findEntryById(void);
 extern void fn_8036DAA8(void);
 extern void world_getGlobalFlag(void);
@@ -815,7 +815,7 @@ lbl_fn_800E7650_00000974:
     lwz r4, 0x10(r4)
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle
@@ -838,7 +838,7 @@ lbl_fn_800E7650_000009CC:
     lwz r4, 0x10(r4)
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0xc
     li r4, -0x1
     bl ref_releaseHandle
@@ -859,7 +859,7 @@ lbl_fn_800E7650_00000A24:
     lwz r4, 0x10(r4)
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -1133,7 +1133,7 @@ lbl_fn_800E7BB0_00000E14:
     cmpwi r0, 0x0
     bne lbl_fn_800E7BB0_00000E40
     lwz r3, 0x50(r30)
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmpwi r3, 0x0
     beq lbl_fn_800E7BB0_00000E38
     cmpwi r3, 0x2
@@ -1201,7 +1201,7 @@ asm void fn_800E7F04(void)
     beq lbl_fn_800E7F04_00001430
     lwz r3, 0x50(r17)
     li r20, 0x0
-    bl fn_80219558
+    bl task_mapIdToQueue
     lwz r0, 0x408(r16)
     mr r16, r3
     cmpwi r0, 0x0
@@ -1269,7 +1269,7 @@ lbl_fn_800E7F04_00000FC8:
     addi r8, r17, 0x534
     li r9, 0x0
     li r10, 0x1e
-    bl fn_800FAB80
+    bl clip_calculateFrustum
     lfs f1, lbl_808812D8
     lis r8, lbl_807C7030@ha
     stfs f1, 0x38(r1)

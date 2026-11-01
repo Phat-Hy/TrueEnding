@@ -40,7 +40,7 @@ extern void fn_8020DB18(void);
 extern void fn_8020ED84(void);
 extern void fn_8020EF4C(void);
 extern void random_generateValue(void);
-extern void fn_80219558(void);
+extern void task_mapIdToQueue(void);
 extern void fn_804444E8(void);
 extern void fn_80444828(void);
 extern void fn_80444A50(void);
@@ -485,7 +485,7 @@ asm void fn_801D5F04(void)
     bl fn_801CF334
     lwz r3, 0x48(r3)
     lwz r3, 0x50(r3)
-    bl fn_80219558
+    bl task_mapIdToQueue
     lwz r4, lbl_8087F4F0
     slwi r3, r3, 6
     lwz r0, 0x1bac(r31)

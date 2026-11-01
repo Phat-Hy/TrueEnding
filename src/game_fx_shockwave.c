@@ -16,7 +16,7 @@ extern void fn_8004203C(void);
 extern void fn_80057A68(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
-extern void fn_8005B6E8(void);
+extern void talk_setSpeakerName(void);
 extern void fn_8006AFF8(void);
 extern void fn_800897D8(void);
 extern void atn_Model_findBoneIndex(void);
@@ -26,7 +26,7 @@ extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void fn_800EC204(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800FAB80(void);
+extern void clip_calculateFrustum(void);
 extern void fn_80121F00(void);
 extern void fn_8012F034(void);
 extern void fn_8013322C(void);
@@ -83,7 +83,7 @@ extern void PSMTXMultVec(void);
 extern void strcmp(void);
 extern void strncmp(void);
 extern void atoi(void);
-extern void fn_8068B100(void);
+extern void math_u64DivMod(void);
 extern void __construct_new_array(void);
 extern void __destroy_new_array(void);
 extern u32 strlen(const char* str);
@@ -627,7 +627,7 @@ asm void fn_80293738(void)
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x44(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
 lbl_fn_80293738_000006C4:
     addi r3, r1, 0x44
     bl talk_parseQuotedString
@@ -1681,7 +1681,7 @@ lbl_fn_802946BC_00001578:
     addi r8, r31, 0x534
     li r9, 0x0
     li r10, 0x1e
-    bl fn_800FAB80
+    bl clip_calculateFrustum
 lbl_fn_802946BC_000015C8:
     lwz r0, 0x1584(r31)
     lwz r3, 0x1520(r31)
@@ -1920,7 +1920,7 @@ lbl_fn_802946BC_000018EC:
     fmadds f1, f5, f5, f0
     stfs f3, 0x20(r1)
     stfs f6, 0x24(r1)
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f0, f1
     fcmpo cr0, f0, f31
     ble lbl_fn_802946BC_00001954

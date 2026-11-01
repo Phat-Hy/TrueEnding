@@ -8,7 +8,7 @@ extern void _savegpr_18(void);
 extern void _savegpr_27(void);
 extern void fn_80044F54(void);
 extern void fn_80045510(void);
-extern void fn_800C31F4(void);
+extern void skin_playAnimationByName(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void wcs_vformat(void);
@@ -24,7 +24,7 @@ extern void fn_8015E1B8(void);
 extern void fn_8016F3D0(void);
 extern void fn_801789D8(void);
 extern void event_findEntryById(void);
-extern void fn_80219558(void);
+extern void task_mapIdToQueue(void);
 extern void fn_8021E48C(void);
 extern void sound_initGlobalInstances(void);
 extern void res_registerResource(void);
@@ -686,10 +686,10 @@ lbl_fn_8010C3E4_00000804:
     cmpwi r0, 0x3
     bne lbl_fn_8010C3E4_000008A8
     lwz r3, 0x50(r24)
-    bl fn_80219558
+    bl task_mapIdToQueue
     mr r18, r3
     lwz r3, 0x50(r30)
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmpwi r18, 0x1
     beq lbl_fn_8010C3E4_00000844
     subi r0, r18, 0x9
@@ -1387,7 +1387,7 @@ lbl_fn_8010CF28_00001124:
     lwz r4, 0x54(r4)
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x14
     li r4, -0x1
     bl ref_releaseHandle

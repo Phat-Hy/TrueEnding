@@ -6,7 +6,7 @@ extern void __files(void);
 extern void _restgpr_26(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
-extern void fn_8006F72C(void);
+extern void str_assignBuffer(void);
 extern void mem_free(void);
 extern void fn_800DBF68(void);
 extern void str_findChar(void);
@@ -939,7 +939,7 @@ lbl_fn_803D73C8_0000064C:
     li r4, 0x0
     li r5, 0x0
     add r7, r6, r0
-    bl fn_8006F72C
+    bl str_assignBuffer
 lbl_fn_803D73C8_00000694:
     lwz r3, 0x4(r29)
     addi r0, r3, 0x1
@@ -1095,7 +1095,7 @@ lbl_fn_803D73C8_00000890:
     li r4, 0x0
     li r5, 0x0
     add r7, r6, r0
-    bl fn_8006F72C
+    bl str_assignBuffer
 lbl_fn_803D73C8_000008D4:
     lwz r4, 0x28(r1)
     lis r3, 0x2aab

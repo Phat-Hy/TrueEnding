@@ -14,14 +14,14 @@ extern void fn_8004B290(void);
 extern void fn_8005C220(void);
 extern void fn_8006A250(void);
 extern void fn_8007708C(void);
-extern void fn_800827E0(void);
+extern void dungeon_initGlobalContext(void);
 extern void fn_800838B8(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void fn_800CB360(void);
 extern void fn_800CDF84(void);
@@ -1935,7 +1935,7 @@ lbl_fn_804D0328_000017A0:
     addi r4, r4, lbl_80790908@l
     stw r4, 0x0(r3)
     stw r0, 0x4(r3)
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     li r4, 0x1000
     li r5, 0x20
     li r6, 0x5
@@ -1944,7 +1944,7 @@ lbl_fn_804D0328_000017A0:
     li r9, 0x0
     bl fn_800838B8
     stw r3, 0x8(r28)
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     li r4, 0x1000
     li r5, 0x20
     li r6, 0x5
@@ -1965,7 +1965,7 @@ lbl_fn_804D0328_000017A0:
     mtctr r12
     bctrl
     slwi r30, r3, 1
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     addi r4, r30, 0x1
     li r5, 0x4
     li r6, 0x5
@@ -1980,7 +1980,7 @@ lbl_fn_804D0328_000017A0:
     mtctr r12
     bctrl
     mr r30, r3
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     addi r4, r30, 0x1
     li r5, 0x4
     li r6, 0x5
@@ -2389,7 +2389,7 @@ lbl_fn_804D0328_00001ED0:
     cmpwi r3, 0x0
     beq lbl_fn_804D0328_00001F08
     addi r3, r3, 0x10
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0x510(r29)
     mr r27, r3
     b lbl_fn_804D0328_00001F0C
@@ -2439,7 +2439,7 @@ lbl_fn_804D0328_00001F0C:
     bl route_createSegment
     mr r3, r27
     addi r4, r30, 0x67
-    bl fn_8008937C
+    bl node_createNamedChild
     mr r26, r3
     addi r4, r30, 0x6d
     addi r5, r29, 0x564
@@ -2460,7 +2460,7 @@ lbl_fn_804D0328_00001F0C:
     bl route_findNextWaypoint
     mr r3, r27
     addi r4, r30, 0x84
-    bl fn_8008937C
+    bl node_createNamedChild
     mr r26, r3
     mr r3, r27
     addi r4, r30, 0x8c
@@ -2539,7 +2539,7 @@ lbl_fn_804D0328_00001F0C:
     bl route_findNextWaypoint
     mr r3, r27
     addi r4, r30, 0x11c
-    bl fn_8008937C
+    bl node_createNamedChild
     mr r26, r3
     addi r4, r30, 0x125
     addi r5, r29, 0x5c4
@@ -2560,7 +2560,7 @@ lbl_fn_804D0328_00001F0C:
     bl route_interpolatePath
     mr r3, r27
     addi r4, r30, 0x144
-    bl fn_8008937C
+    bl node_createNamedChild
     lis r27, lbl_80790F78@ha
     mr r26, r3
     li r28, 0x0

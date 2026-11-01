@@ -6,13 +6,13 @@ extern void _restgpr_25(void);
 extern void _savegpr_25(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
-extern void fn_8005B6E8(void);
+extern void talk_setSpeakerName(void);
 extern void talk_parseDialogue(void);
 extern void fn_8005B8F8(void);
 extern void fn_8005B9AC(void);
 extern void fn_8006BA8C(void);
 extern void fn_8006BB6C(void);
-extern void fn_800827E0(void);
+extern void dungeon_initGlobalContext(void);
 extern void fn_800839EC(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
@@ -131,7 +131,7 @@ asm void event_processScriptAction(void)
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x14(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
     addi r3, r1, 0x14
     li r21, 0x0
     bl talk_parseQuotedString
@@ -172,7 +172,7 @@ lbl_event_processScriptAction_00000124:
     lwz r3, lbl_8087F224
     addi r0, r3, 0x100
     stw r0, lbl_8087F224
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     lwz r0, lbl_8087F224
     lis r4, lbl_8073FA60@ha
     addi r26, r4, lbl_8073FA60@l

@@ -3,7 +3,7 @@
 
 /* External function declarations */
 extern void dtor_80084684(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void fn_80092954(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -14,7 +14,7 @@ extern void morph_updateMesh(void);
 extern void atn_Task_setActive(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800F8C6C(void);
-extern void fn_800FAB80(void);
+extern void clip_calculateFrustum(void);
 extern void fn_80108F38(void);
 extern void fn_80126214(void);
 extern void boss_updatePhaseState(void);
@@ -392,7 +392,7 @@ lbl_fn_8026F38C_00000390:
     stfs f0, 0x110(r1)
     stfs f3, 0x114(r1)
     stfs f4, 0x118(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_8026F38C_00000418
     addi r3, r1, 0x1a8
@@ -605,7 +605,7 @@ asm void fn_8026F9BC(void)
     stfs f4, 0x34(r1)
     stfs f7, 0x38(r1)
     stfs f5, 0x3c(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_8026F9BC_00000734
     addi r4, r1, 0x98
@@ -654,7 +654,7 @@ lbl_fn_8026F9BC_00000734:
     addi r8, r28, 0x534
     li r9, 0x0
     li r10, 0x1e
-    bl fn_800FAB80
+    bl clip_calculateFrustum
     lis r4, lbl_80744608@ha
     lfs f1, lbl_80883670
     addi r4, r4, lbl_80744608@l

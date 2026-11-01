@@ -26,7 +26,7 @@ extern void fn_8006FA4C(void);
 extern void fn_8008B964(void);
 extern void fn_800A58D0(void);
 extern void fn_800BFAC8(void);
-extern void fn_800C31F4(void);
+extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void wcs_vformat(void);
 extern void fn_800E0000(void);
@@ -1703,7 +1703,7 @@ lbl_fn_803D2A6C_00001414:
     addi r3, r1, 0xc
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0xc
     li r4, -0x1
     bl ref_releaseHandle
@@ -1792,7 +1792,7 @@ lbl_fn_803D2A6C_000014EC:
     addi r3, r1, 0x8
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle

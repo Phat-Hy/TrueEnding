@@ -24,7 +24,7 @@ extern void PSVECNormalize(void);
 extern void PSVECMag(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
-extern void fn_8068B100(void);
+extern void math_u64DivMod(void);
 
 /* External data declarations */
 extern u8 lbl_807452F0[];
@@ -106,7 +106,7 @@ asm void fn_8028E1A0(void)
     stfs f4, 0x2c(r1)
     stfs f3, 0x30(r1)
     stfs f6, 0x34(r1)
-    bl fn_8068B100
+    bl math_u64DivMod
     addi r3, r1, 0x2c
     mr r4, r3
     bl PSVECNormalize

@@ -18,7 +18,7 @@ extern void fn_800133B0(void);
 extern void fn_80013404(void);
 extern void fn_80013410(void);
 extern void fn_80013484(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void fn_80057A64(void);
 extern void fn_80057A68(void);
 extern void mem_alloc(void);
@@ -658,7 +658,7 @@ asm void fn_801C2198(void)
     addi r4, r1, 0x98
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_801C2198_000009F4
     lwz r0, 0xd4(r1)
@@ -888,7 +888,7 @@ lbl_fn_801C2198_000009F4:
     addi r4, r1, 0x98
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_801C2198_00000CF4
     lwz r0, 0xd4(r1)

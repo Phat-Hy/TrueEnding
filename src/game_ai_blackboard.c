@@ -4,10 +4,10 @@
 /* External function declarations */
 extern void _restgpr_25(void);
 extern void _savegpr_25(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
-extern void fn_8005B6E8(void);
+extern void talk_setSpeakerName(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -139,7 +139,7 @@ asm void fn_8025CFF4(void)
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x8(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
     lis r31, lbl_807440F4@ha
     li r29, 0x8
     addi r31, r31, lbl_807440F4@l
@@ -1566,7 +1566,7 @@ lbl_fn_8025E100_000013C8:
     stfs f0, 0xf0(r1)
     stfs f3, 0xf4(r1)
     stfs f9, 0xf8(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_8025E100_00001524
     addi r3, r1, 0x188

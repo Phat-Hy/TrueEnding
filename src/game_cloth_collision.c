@@ -8,7 +8,7 @@ extern void _savegpr_15(void);
 extern void dtor_80084684(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
-extern void fn_8005B6E8(void);
+extern void talk_setSpeakerName(void);
 extern void mem_free(void);
 extern void fn_80092954(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -312,7 +312,7 @@ lbl_fn_8027CF28_000001CC:
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x48(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
     lis r3, __files@ha
     lis r4, lbl_80744EFC@ha
     addi r29, r1, 0x34

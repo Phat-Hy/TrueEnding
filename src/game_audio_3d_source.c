@@ -42,7 +42,7 @@ extern void fn_8068A850(void);
 extern void fn_8068AD58(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
-extern void fn_8068B100(void);
+extern void math_u64DivMod(void);
 extern void vec3_isNonZero(void);
 
 /* External data declarations */
@@ -764,7 +764,7 @@ asm void fn_803202E0(void)
     stfs f2, 0x94(r1)
     fmadds f1, f0, f0, f3
     stfs f31, 0x90(r1)
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f29, f1
 lbl_fn_803202E0_00000930:
     lwz r0, 0x55c(r30)
@@ -1065,7 +1065,7 @@ lbl_fn_803202E0_00000D44:
     fmadds f1, f6, f6, f0
     stfs f3, 0x54(r1)
     stfs f5, 0x58(r1)
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f3, f1
     lfs f0, 0x14fc(r30)
     fcmpo cr0, f3, f0

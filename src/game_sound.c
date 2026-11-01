@@ -15,7 +15,7 @@ extern void fn_8003E120(void);
 extern void item_useConsumable(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
-extern void fn_8005B6E8(void);
+extern void talk_setSpeakerName(void);
 extern void fn_800697D8(void);
 extern void fn_8006A9A4(void);
 extern void fn_8006AA20(void);
@@ -23,7 +23,7 @@ extern void fn_8006AD24(void);
 extern void fn_8006B53C(void);
 extern void fn_8006B594(void);
 extern void fn_8006BA6C(void);
-extern void fn_800827E0(void);
+extern void dungeon_initGlobalContext(void);
 extern void fn_800839EC(void);
 extern void fn_80083AD4(void);
 extern void mem_alloc(void);
@@ -1562,7 +1562,7 @@ lbl_fn_80046EE0_0000117C:
 lbl_fn_80046EE0_00001180:
     bl fn_8059D8B4
     lwz r26, 0x12c(r30)
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     lis r31, lbl_80730F54@ha
     mr r4, r26
     addi r7, r31, lbl_80730F54@l
@@ -1611,7 +1611,7 @@ lbl_fn_80046EE0_00001180:
     stw r0, 0x1d4(r30)
     bne lbl_fn_80046EE0_00001284
     lwz r26, 0x124(r30)
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     addi r7, r31, lbl_80730F54@l
     mr r4, r26
     mr r8, r7
@@ -1634,7 +1634,7 @@ lbl_fn_80046EE0_00001284:
     addi r4, r30, 0x8
     bl fn_8059F100
     slwi r27, r3, 1
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     lis r31, lbl_80730F54@ha
     mr r4, r26
     addi r7, r31, lbl_80730F54@l
@@ -1645,7 +1645,7 @@ lbl_fn_80046EE0_00001284:
     li r10, 0x0
     bl fn_800839EC
     stw r3, 0x2c4(r30)
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     addi r7, r31, lbl_80730F54@l
     mr r4, r27
     mr r8, r7
@@ -1674,7 +1674,7 @@ lbl_fn_80046EE0_00001284:
     addi r4, r30, 0x8
     bl fn_80715DF0
     mr r26, r3
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     addi r7, r31, lbl_80730F54@l
     mr r4, r26
     mr r8, r7
@@ -1781,7 +1781,7 @@ lbl_fn_80047628_00001490:
     lwz r30, 0x194(r31)
     cmpwi r30, 0x0
     beq lbl_fn_80047628_000014CC
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     mr r4, r30
     bl fn_80083AD4
     li r0, 0x0
@@ -1790,7 +1790,7 @@ lbl_fn_80047628_000014CC:
     lwz r30, 0x198(r31)
     cmpwi r30, 0x0
     beq lbl_fn_80047628_000014EC
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     mr r4, r30
     bl fn_80083AD4
     li r0, 0x0
@@ -1799,7 +1799,7 @@ lbl_fn_80047628_000014EC:
     lwz r30, 0x2c4(r31)
     cmpwi r30, 0x0
     beq lbl_fn_80047628_0000150C
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     mr r4, r30
     bl fn_80083AD4
     li r0, 0x0
@@ -1808,7 +1808,7 @@ lbl_fn_80047628_0000150C:
     lwz r30, 0x2c8(r31)
     cmpwi r30, 0x0
     beq lbl_fn_80047628_0000152C
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     mr r4, r30
     bl fn_80083AD4
     li r0, 0x0
@@ -1817,7 +1817,7 @@ lbl_fn_80047628_0000152C:
     lwz r30, 0x390(r31)
     cmpwi r30, 0x0
     beq lbl_fn_80047628_0000154C
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     mr r4, r30
     bl fn_80083AD4
     li r0, 0x0
@@ -2162,7 +2162,7 @@ asm void fn_80047B54(void)
     bl fn_807177D0
     addi r3, r28, 0x300
     bl fn_80717750
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     lwz r4, 0x32c(r28)
     bl fn_80083AD4
     lwz r3, 0x39c(r28)
@@ -2181,7 +2181,7 @@ lbl_fn_80047B54_00001A00:
 lbl_fn_80047B54_00001A08:
     cmpwi r29, 0x0
     beq lbl_fn_80047B54_00001A58
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     lis r7, lbl_80730F54@ha
     mr r4, r29
     addi r7, r7, lbl_80730F54@l
@@ -2224,7 +2224,7 @@ asm void fn_80047C74(void)
     lwz r0, 0x408(r3)
     cmpwi r0, 0x0
     beq lbl_fn_80047C74_00001AF8
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     lis r7, lbl_80730F54@ha
     lwz r4, 0x8c8(r31)
     addi r7, r7, lbl_80730F54@l
@@ -2286,7 +2286,7 @@ lbl_fn_80047D20_00001B70:
     lwz r31, 0x8c4(r30)
     cmpwi r31, 0x0
     beq lbl_fn_80047D20_00001B90
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     mr r4, r31
     bl fn_80083AD4
     li r0, 0x0
@@ -2755,7 +2755,7 @@ lbl_fn_8004829C_000021CC:
 lbl_fn_8004829C_000021D4:
     cmplw r22, r30
     blt lbl_fn_8004829C_000020DC
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     lis r7, lbl_80730F54@ha
     lwz r4, 0x2fc(r28)
     addi r7, r7, lbl_80730F54@l
@@ -3153,7 +3153,7 @@ asm void fn_8004895C(void)
     bl fn_807177D0
     addi r3, r31, 0x2cc
     bl fn_80717750
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     lwz r4, 0x2f8(r31)
     bl fn_80083AD4
     li r0, 0x0
@@ -4201,7 +4201,7 @@ lbl_fn_800496C0_000035A0:
     li r3, 0x1
     b lbl_fn_800496C0_00003694
 lbl_fn_800496C0_000035B4:
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     lis r29, lbl_80730F54@ha
     lwz r4, 0x360(r31)
     addi r7, r29, lbl_80730F54@l
@@ -4301,7 +4301,7 @@ asm void fn_800498D4(void)
     bl fn_807177D0
     addi r3, r31, 0x330
     bl fn_80717750
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     lwz r4, 0x35c(r31)
     bl fn_80083AD4
     li r0, 0x0
@@ -5208,7 +5208,7 @@ asm void fn_8004A3FC(void)
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x130(r1)
     la r4, lbl_8087D720
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
     lwz r12, 0x130(r1)
     mr r4, r28
     addi r3, r1, 0x130

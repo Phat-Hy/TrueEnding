@@ -16,17 +16,17 @@ extern void mem_free(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void fn_8008BBD8(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
-extern void fn_800C31F4(void);
+extern void skin_playAnimationByName(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CF45C(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800FAB80(void);
+extern void clip_calculateFrustum(void);
 extern void fn_80103F60(void);
 extern void fn_80108378(void);
 extern void actor_setState(void);
@@ -52,7 +52,7 @@ extern void abort(void);
 extern void fn_8068AE9C(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
-extern void fn_8068B100(void);
+extern void math_u64DivMod(void);
 extern void __ptmf_scall(void);
 
 /* External data declarations */
@@ -204,7 +204,7 @@ lbl_fn_803520D8_00000100:
     addi r4, r4, 0x39d
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -314,7 +314,7 @@ lbl_fn_8035223C_00000248:
     lwz r3, lbl_8087F048
     lwz r5, 0x153c(r27)
     lwz r6, 0x16ec(r27)
-    bl fn_800FAB80
+    bl clip_calculateFrustum
     lwz r0, 0x1cc4(r27)
     cmpwi r0, 0x0
     beq lbl_fn_8035223C_00000330
@@ -446,7 +446,7 @@ lbl_fn_803524E4_00000458:
     lwz r5, 0x1530(r26)
     li r10, 0x1e
     lwz r6, 0x1a20(r26)
-    bl fn_800FAB80
+    bl clip_calculateFrustum
     lwz r3, 0x1a24(r26)
     addi r3, r3, 0x1
     stw r3, 0x1a24(r26)
@@ -612,7 +612,7 @@ lbl_fn_803526A8_000006B8:
     addi r8, r27, lbl_807C7030@l
     li r9, 0x0
     li r10, 0x1e
-    bl fn_800FAB80
+    bl clip_calculateFrustum
     lwz r3, 0x1cb8(r23)
     addi r0, r28, 0x5556
     addi r4, r3, 0x1
@@ -992,7 +992,7 @@ lbl_fn_80352C3C_00000C44:
     stfs f5, 0x20(r1)
     stfs f4, 0x28(r1)
     stfs f26, 0x24(r1)
-    bl fn_8068B100
+    bl math_u64DivMod
     lwz r12, 0x0(r30)
     frsp f25, f1
     mr r3, r30
@@ -1201,7 +1201,7 @@ lbl_fn_80352F88_00000F44:
     addi r4, r30, 0x3fc
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -1456,7 +1456,7 @@ asm void fn_80353370(void)
     cmpwi r3, 0x0
     beq lbl_fn_80353370_000012F0
     addi r3, r3, 0x10
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0x1cc0(r28)
     mr r29, r3
     b lbl_fn_80353370_000012F4
@@ -1669,7 +1669,7 @@ lbl_fn_8035359C_000015C4:
     fmadds f1, f3, f3, f0
     stfs f2, 0x2c(r1)
     stfs f4, 0x30(r1)
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f0, f1
     fcmpo cr0, f0, f29
     cror eq, gt, eq
@@ -1700,7 +1700,7 @@ lbl_fn_8035359C_0000162C:
     stfs f2, 0x38(r1)
     stfs f1, 0x34(r1)
     fmadds f1, f1, f1, f0
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f0, f1
     fcmpo cr0, f0, f31
     bge lbl_fn_8035359C_00001694

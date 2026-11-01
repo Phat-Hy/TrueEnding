@@ -11,14 +11,14 @@ extern void skill_calculateDamage(void);
 extern void fn_8006BA8C(void);
 extern void fn_8006BB6C(void);
 extern void fn_8006F420(void);
-extern void fn_8006F72C(void);
+extern void str_assignBuffer(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_800A4228(void);
 extern void fn_800A49C4(void);
 extern void msg_getMessageById(void);
-extern void fn_800A55AC(void);
+extern void msg_getMessageString(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
 extern void fn_800DBF68(void);
@@ -448,13 +448,13 @@ lbl_fn_803B2A68_000003A4:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x0
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     bne lbl_fn_803B2A68_000003D4
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x1a
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     beq lbl_fn_803B2A68_00000488
 lbl_fn_803B2A68_000003D4:
@@ -514,13 +514,13 @@ lbl_fn_803B2A68_00000488:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x1
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     bne lbl_fn_803B2A68_000004B8
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x19
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     beq lbl_fn_803B2A68_000004E4
 lbl_fn_803B2A68_000004B8:
@@ -2034,7 +2034,7 @@ lbl_fn_803B3D2C_000018C8:
     addi r8, r1, 0x28
     li r4, 0x0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r0, 0x0(r20)
     srwi. r0, r0, 31
     bne lbl_fn_803B3D2C_00001928
@@ -2079,7 +2079,7 @@ lbl_fn_803B3D2C_00001980:
     addi r8, r1, 0x20
     add r7, r7, r0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     b lbl_fn_803B3D2C_00001ACC
 lbl_fn_803B3D2C_000019B8:
     mr r3, r21
@@ -2107,7 +2107,7 @@ lbl_fn_803B3D2C_000019E8:
     addi r8, r1, 0x18
     add r7, r21, r0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     b lbl_fn_803B3D2C_00001ACC
 lbl_fn_803B3D2C_00001A1C:
     mr r3, r21
@@ -2157,7 +2157,7 @@ lbl_fn_803B3D2C_00001A98:
     addi r8, r1, 0x10
     add r7, r7, r0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
 lbl_fn_803B3D2C_00001ACC:
     lwz r0, 0x54(r1)
     srwi. r0, r0, 31
@@ -2179,7 +2179,7 @@ lbl_fn_803B3D2C_00001AF0:
     subf r5, r30, r5
     add r7, r6, r0
     addi r8, r1, 0x8
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r0, 0x54(r1)
     srwi. r3, r0, 31
     bne lbl_fn_803B3D2C_00001B30

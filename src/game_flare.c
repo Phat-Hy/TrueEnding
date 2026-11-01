@@ -8,7 +8,7 @@ extern void _savegpr_21(void);
 extern void _savegpr_26(void);
 extern void fn_8003EA3C(void);
 extern void fn_8003F1E4(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void fn_80063484(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_800A56A8(void);
@@ -47,7 +47,7 @@ extern void fn_80179FA8(void);
 extern void fn_8017C9AC(void);
 extern void event_findEntryById(void);
 extern void fn_80211734(void);
-extern void fn_80219558(void);
+extern void task_mapIdToQueue(void);
 extern void task_findEntryById(void);
 extern void fn_8036DAF4(void);
 extern void fn_8036DB3C(void);
@@ -302,7 +302,7 @@ lbl_fn_800E3F5C_0000024C:
     addi r8, r28, 0x5b8
     li r27, 0x0
     li r9, 0x0
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_800E3F5C_00000338
     lwz r3, 0x88(r1)
@@ -1371,7 +1371,7 @@ lbl_fn_800E4278_00001170:
     cmpwi r3, 0x0
     beq lbl_fn_800E4278_00001254
     lwz r3, 0x50(r22)
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmpwi r3, 0x0
     bne lbl_fn_800E4278_00001254
     lwz r0, 0x12a4(r22)

@@ -16,7 +16,7 @@ extern void fn_8020EF04(void);
 extern void random_generateValue(void);
 extern void fn_802114E0(void);
 extern void fn_8021150C(void);
-extern void fn_80219558(void);
+extern void task_mapIdToQueue(void);
 extern void fn_803608A4(void);
 extern void fn_803608A8(void);
 extern void kpad_getClampData(void);
@@ -91,7 +91,7 @@ asm void fn_803BD0FC(void)
     mr r31, r4
     mr r3, r5
     mr r24, r6
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmpwi r3, 0x0
     blt lbl_fn_803BD0FC_00000118
     cmpwi r3, 0x7
@@ -177,7 +177,7 @@ asm void fn_803BD22C(void)
     stw r29, 0x14(r1)
     mr r29, r3
     mr r3, r5
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmpwi r3, 0x0
     blt lbl_fn_803BD22C_00000194
     cmpwi r3, 0x7

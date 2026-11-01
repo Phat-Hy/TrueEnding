@@ -12,11 +12,11 @@ extern void actor_dispatchMessage(void);
 extern void fn_800499D0(void);
 extern void fn_8006B174(void);
 extern void fn_8006BA30(void);
-extern void fn_800827E0(void);
+extern void dungeon_initGlobalContext(void);
 extern void fn_800839EC(void);
 extern void fn_80083AD4(void);
 extern void fn_80087BB4(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void fn_800897D8(void);
 extern void fn_800BDB58(void);
 extern void fn_805B55AC(void);
@@ -899,7 +899,7 @@ lbl_fn_800DCA70_00000A5C:
     cmpwi r3, 0x0
     beq lbl_fn_800DCA70_00000A88
     addi r3, r3, 0x10
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0x94(r31)
     mr r29, r3
     b lbl_fn_800DCA70_00000A8C
@@ -1011,7 +1011,7 @@ asm void fn_800DCCE0(void)
     bl fn_805B68EC
     bl fn_805B5A50
     mr r30, r3
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     lis r31, lbl_80734D2C@ha
     mr r4, r30
     addi r31, r31, lbl_80734D2C@l
@@ -1066,7 +1066,7 @@ lbl_fn_800DCDA0_00000CA4:
 lbl_fn_800DCDA0_00000CAC:
     bl fn_805B59C0
     bl fn_805B56C4
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     lwz r4, 0x3c(r31)
     bl fn_80083AD4
     li r0, 0x0

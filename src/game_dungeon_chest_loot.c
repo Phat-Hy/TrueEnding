@@ -16,7 +16,7 @@ extern void fn_80049C3C(void);
 extern void fn_80049CDC(void);
 extern void fn_800697D8(void);
 extern void fn_8006AA20(void);
-extern void fn_800C31F4(void);
+extern void skin_playAnimationByName(void);
 extern void skin_applyWeights(void);
 extern void fn_800C93D4(void);
 extern void fn_800C97F8(void);
@@ -1441,7 +1441,7 @@ lbl_fn_803EA09C_00001404:
     mr r5, r30
     addi r3, r1, 0x8
     li r6, 0x2
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     mr r3, r31
     addi r4, r1, 0x8
     bl fn_800CB440

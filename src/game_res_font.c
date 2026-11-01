@@ -17,7 +17,7 @@ extern void fn_80076A28(void);
 extern void fn_80079994(void);
 extern void mem_realloc(void);
 extern void route_interpolatePath(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void fn_800902C0(void);
 extern void fn_80094D88(void);
 extern void fn_80094F14(void);
@@ -334,7 +334,7 @@ lbl_font_loadGlyphMetrics_000001D8:
     addi r31, r31, lbl_80742FB8@l
     lwz r3, 0x4c(r4)
     addi r4, r31, 0x1
-    bl fn_8008937C
+    bl node_createNamedChild
     lfs f1, lbl_80883118
     mr r30, r3
     lfs f2, lbl_8088311C
