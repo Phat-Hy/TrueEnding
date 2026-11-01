@@ -2,27 +2,39 @@
 
 ## NEXT SESSION — START HERE
 
-> **§5c.46 AP-BM (the last section) FALSIFIES AP-BL AS THE CAUSE OF THE COMPOSITE DIFFERENCE, with an A/B.** The
-> keying was implemented exactly as AP-BL prescribed (patch `0007-copy-texture-key.patch`) and the exit-criterion
-> replay is **byte-identical** to the pre-fix binary (`7E79ACE9…`, luma 86.98 / gradient 20.889 both times), because
-> on this stream no quad samples a copy destination at a size other than the newest write's: the new
-> `TLS_AURORA_COPYLOG` counts **15 copy-destination binds** on the composite frame (the frame samples 225 textures in total, the other
-> 210 are ordinary), 14 exact, 1 format-only fallback
-> and 1 `stale-at-address`, and that one is a *format* mismatch (`0x90536FE0` bound fmt 3 over its fmt-11 copy). The
-> divergence is one layer down: a new mid-frame probe (`--probe-at-cmd`) shows aurora after draw 5 809 is **exactly
-> the cmd-21-669 state again (56.68 / 13.190)** - it repaints the saved 640x448 copy - while the layer's own copy
-> dumps of the same frame end at **56.02 / 0.675** (a full-screen blur at the same level). Copies, sample sizes,
-> identity (AP-BK) and the layer's upload freshness (this session: three `upload=1` uploads with distinct hashes) are
-> all excluded, so what is left is the composition of draws 5 807/5 808/5 809. **Do not chase 43.16 / 1.123 blind**:
-> measure those three passes on the layer with `TLS_BATCH_DUMP_GUEST=2801` **and the gate's `TLS_INPUT_SCRIPT`** -
-> the first attempt at that this session ran without the script and measured a tutorial page instead of the cave
-> (one run lost, recorded in AP-BM item 6).
+> **§5c.46 AP-BM + its two addenda (the last section): AP-BL IS FALSIFIED AS THE CAUSE OF THE COMPOSITE
+> DIFFERENCE, AND SO IS EVERY STATE-LEVEL HYPOTHESIS AFTER IT.** The keying was implemented exactly as AP-BL
+> prescribed (patch `0007-copy-texture-key.patch`) and the exit-criterion replay is **byte-identical** to the pre-fix
+> binary (`7E79ACE9…`, luma 86.98 / gradient 20.889 both ways); the new `TLS_AURORA_COPYLOG` counts 15
+> copy-destination binds on the composite frame (14 exact, 1 format-only fallback, 1 stale-at-address - a *format*
+> mismatch), i.e. no quad samples an address at a size other than the newest write's. A new mid-frame probe
+> (`--probe-at-cmd N`) then measured aurora's composite chain draw by draw (56.68/13.190 → 14.13/2.722 → 14.12/1.421 →
+> **56.68/13.190 again after draw 5 809**, i.e. it repaints the 640x448 copy → 111.87/24.491 → 86.98/20.889), while
+> the layer's own copy dumps of the same frame end at 56.02 / **0.675** (a full-screen blur at the same level).
+> Everything a state dump can compare now agrees: the copies' content, their sizes, the texture identities, the
+> upload freshness, the copy-map key, the bound maps (`TLS_TEV_UNIFORM` shows map0/1/2/3 = `0x905C3000`,
+> `0x90536FE0`, `0x9038D1C0`, `0x90419BE0`), the three TEV stages with coords 0/2/3 and konst 16/20/24
+> (`TLS_AURORA_DUMP_DRAW=113515` reports the same), the blend, the scissor and the NDC geometry - and arming the
+> layer's XF texgen leaves the composite unchanged (56.02 / 0.675 before and after). **The two renderers disagree in
+> the fragment evaluation itself, over identical inputs** - the multi-stage-TEV class AGENTS.md §1 says Aurora already
+> solves - so the exit criterion's direction (move aurora towards the layer's 43.16 / 1.123) is the wrong one and is
+> not to be chased. Next measurement if anyone wants the last inch: `TLS_BATCH_CUTOFF=76|77` (screenshot the frame
+> with and without batch b76 and difference them). The one run lost this session: a cave run **without**
+> `TLS_INPUT_SCRIPT` measured a tutorial page (AP-AO's trap).
+>
+> **Track A is integrated**: `main` contains `origin/track-a` through Batch 35 (+25 `blr` stubs / 268 new names) via
+> merge commits `a8e07bc`/`bf14678`/`158cd10`/`bdbb3d4`; after each merge the rebuilt runner was **byte-identical**
+> (`D7C3D48…`), so the gate evidence transfers. `recomp/tls_sym.c` parses `config/symbols.txt` at runtime, so 977 of
+> 18 103 functions are named in this session's logs already. Re-fetch before the next session - Track A commits
+> several times an hour.
 >
 > **FIRST ACTION, BEFORE ANY MEASUREMENT: re-verify the gate on an IDLE host** —
 > `pwsh tools/invariant.ps1 -Log logs_ap\gate.log`. **PASS on attempt 1 means handover frame 1680,
 > content `B4646917…`, popup `22B1CE31…`, save 1 348 992 / 29 344.** If the handover frame is not 1680 the
-> host is loaded and the run is not evidence. Last state written at `a828a29` on `main`: 21 commits this
-> session, build green (472 objects), gate green (`logs_ap/gate_apbc2.log`), `src/` untouched by Track B.
+> host is loaded and the run is not evidence. This session's state on `main`: patch `0007` + the corrected AP-BM
+> section, four `origin/track-a` merges, build green (472 objects, 0 chunks recompiled), gate **PASS attempt 1**
+> (`logs_ap/gate_bm.log` after the AP-BM change; `logs_ap/gate_merge3.log` after the Track A merges, with the
+> rebuilt runner byte-identical `D7C3D48…` after two further merges), `src/` untouched by Track B.
 >
 > **READ §5c.46 AP-BH (near the end of this file) FIRST — it is the fix the whole "aurora content gap"
 > saga was looking for.** The live aurora path was mapping a **SNAPSHOT** of guest memory: `map_guest_region()`
@@ -16647,26 +16659,47 @@ Next measurement, named: `TLS_TEV_PROBE` / `TLS_TEV_UNIFORM` on the layer for b7
 
 **Cross-track note.** Merging `origin/track-a` (see the merge commits `a8e07bc`/`bf14678`/`158cd10`/`bdbb3d4`) brought in `tools/patch_ldscript.py`, Track A's linker-script patcher that `tools/project.py`'s split rule calls. It was added to track-a long before this session's commits, so a scope check over a *commit range* does not see it: a merge integrates track-a's whole tree since the merge base. It has no bearing on the runner build (`tools/recomp_harness.py` never calls it). The names themselves are live at runtime - `recomp/tls_sym.c` parses `config/symbols.txt` lazily - and the merged runner already prints them (`CXUncompressLZ+0x70`, `weaponEffect_loadCSV+0x240`); symbols now name **977 of 18 103** functions, 17 126 still `fn_`.
 
-### AP-BM second addendum. The layer's **second sampler** for the two composite batches is not the guest's: `tex1 = 0x90419BE0` (b76) and `tex1 = 0` (b77) where the capture binds `m1 = 0x10536FE0` for **both** draws — measured with `TLS_TEV_PROBE=2801`, which is guest-keyed and lands on present 2865
+### AP-BM second addendum (corrected). The composite passes' **state is identical** in both renderers — three stages, maps 0/1/2/3 bound, texcoords 0/2/3, konst 16/20/24, blend off, full-screen — and arming the layer's XF texgen changes nothing (copy 12 stays 56.02 / **0.675**), so what is left is the **TEV evaluation itself**, not anything the state can express
 
-The previous addendum named `TLS_TEV_PROBE`/`TLS_TEV_UNIFORM` for b76/b77 as the next measurement; this is it, and it narrows the composite difference to one field.
+**0. Retraction first.** The previous revision of this addendum claimed "the layer's second sampler is not the guest's (`tex1 = 0x90419BE0` for b76, none for b77)". That was a misreading of the instrument: `GxDrawBatch::tex1` is the second *distinct map the TEV stages name*, and for draw 5 809 that map is 3, not 1. `TLS_TEV_UNIFORM` prints one line per bound map and settles it; the claim below replaces it.
 
-**1. The capture's two composite draws bind two textures each.** `drawstate.py` on frame 7, draws 5 809 (tev 3) and 5 810 (tev 4):
-
-```
-draw 5809 @cmd 21978  tev 3  m0: 0x105C3000 640x448 fmt 6   m1: 0x10536FE0 640x448 fmt 3   full-screen, blend off
-draw 5810 @cmd 22058  tev 4  m0: 0x105C3000 640x448 fmt 6   m1: 0x10536FE0 640x448 fmt 3   full-screen, blend off
-```
-
-**2. The layer's own state for the same two batches** (`TLS_TEV_PROBE=2801`, `TLS_TEV_PROBE_FROM=60`, same run as a `B4646917…` guest-2800 shot):
+**1. The layer's uniform packet for draw 5 809** (`TLS_TEV_UNIFORM=76,2801`; guest-keyed, lands on present 2865, scene control `B4646917…`):
 
 ```
-[TevProbe] frame=2865 b76 vcnt=6 tex=0x905C3000 tex1=0x90419BE0 blend=0 s=4 d=1 texcoord_mask=0x01 ntexgen=4
-[TevProbe] frame=2865 b77 vcnt=6 tex=0x905C3000 tex1=0x00000000 blend=0 s=4 d=1 texcoord_mask=0x01 ntexgen=1
+[TevUniform] frame=2865 b76 vcnt=6 voff=69258 num_stages=3 ind_num=1 ind_used=1 tgneed=0x0 alpha_test=0x0000003F
+[TevUniform]  st0 map=0 coord=0 en=1 uvsrc=0 kc=16 ka=0
+[TevUniform]  st1 map=3 coord=3 en=1 uvsrc=8 kc=20 ka=0
+[TevUniform]  st2 map=2 coord=2 en=1 uvsrc=8 kc=24 ka=0
+[TevUniform]  map0=0x905C3000 640x448 fmt=6  map1=0x90536FE0 640x448 fmt=3
+[TevUniform]  map2=0x9038D1C0 320x224 fmt=6  map3=0x90419BE0 256x256 fmt=1
 ```
 
-`tex` (map 0) is right on both. `tex1` is **not**: 0x90419BE0 is an address **no draw in frame 7 binds anywhere** (the capture contains no `419BE0` at all), and b77 has **no second texture** at all - while the guest binds `0x10536FE0` for both draws. A two-texture composite stage fed a stale texture in one pass and nothing in the other is exactly the shape that turns "blur ⊗ scene" into "blur", which is the layer's observed full-screen blur at the same level (56.02 / 0.675 against aurora's 56.68 / 13.190).
+`map1` **is** the guest's `m1` (`0x10536FE0`) and it is bound: the layer carries the second texture after all, plus the 320x224 copy and the 256x256 I8 mask the stages name.
 
-**3. What this does and does not establish.** It *is* measured: the layer's `tex1` for those two batches differs from the guest's m1 binding, on the same frame, with the rest of the state matching. It is *not* yet established that this is the mechanism, because (a) `TLS_TEV_PROBE`'s `tex1` is the batch's second texture slot, which is not necessarily the sampler a given TEV stage reads, (b) the layer binds `0x90536FE0` thousands of times per run (7 809 uploads, once per frame), so "the address is never bound" would be wrong - it is *not bound for these two batches*, and (c) the batch-to-draw mapping is inferred from (texture, size, blend, scissor), which matched row for row in the first addendum. The decisive next instrument is `TLS_TEV_UNIFORM=76[,2801]`, which prints the *uniform packet the shader actually receives* for a batch (sampler indices, texcoord source), i.e. whether stage 1 of b76 reads m1 at all; aurora's side of the same draw is one `--probe-at-cmd 21979` run away.
+**2. Aurora's per-draw dump for the same draw** (`TLS_AURORA_DUMP_DRAW=113515`; frames 2794-2800 carry 107 706 draws, so 107 706 + 5 809 = 113 515):
 
-**4. Why this is the right place to stop the composite thread for the session.** Four independent hypotheses have now been excluded by measurement (copy content, sample size, texture identity - AP-BK; upload staleness and the copy-map key - AP-BM), the state of the three composite passes is proven equal to the guest's, and the one remaining difference is a layer-side sampler binding. Under the project's renderer strategy that is a defect the migration retires rather than one to fix by hand in `gfx_d3d11.c` (AGENTS.md §1), and the layer's own reference is what the 43.16/1.123 target measures - so the exit criterion stays unreached *for a reason now named*, not for a lack of investigation.
+| | layer (b76) | aurora (draw 113515) |
+|---|---|---|
+| stages | 3 | `tevStages=3` |
+| st0 | map 0, coord 0, kc 16 | `texmap=0 texcoord=0 kc=16` |
+| st1 | map 3, coord 3, kc 20 | `texmap=3 texcoord=3 kc=20` |
+| st2 | map 2, coord 2, kc 24 | `texmap=2 texcoord=2 kc=24` |
+| blend | off, s=4 d=1 | `blend=0 src=4 dst=1` |
+| alpha test | `0x3F` (pass) | `(7 0 0 7 0)` → ALWAYS |
+| geometry | 6 vtx, ndc `[-1..1, -1..1]`, scissor 640x448 | `vcnt=4` (quad), viewport/scissor 0,0,640,448 |
+| maps bound | the four above | the same four |
+
+Nothing in this table differs. Together with the previous addendum (texture, size, blend and scissor match row for row) that leaves no state-level difference at all between the two implementations for these passes.
+
+**3. The one path that could still have made the coordinates differ is excluded too.** Both stages after the first sample texcoords **2 and 3**, which the vertex format does not carry (`texcoord_mask=0x01`; aurora's `vtxDesc` shows only `TEX0`), so they must be generated by XF - the path the layer gates behind `TLS_XF_TEXGEN`. Armed (`TLS_XF_TEXGEN=1`, same window, same dumps):
+
+| layer's 640x448 copy to `0x905C3000` | texgen off | texgen armed |
+|---|---|---|
+| at cmd 21 669 (after draw 5 806) | 42.15 / 8.290 | 42.22 / 8.287 |
+| at cmd 21 986 (after draw 5 809) | 56.02 / **0.675** | 56.02 / **0.675** |
+
+The intermediate moves by 0.07 luma and the composite is unchanged, so XF texgen for coordinates 2..3 is **not** what produces the layer's blur either.
+
+**4. What is left, stated exactly.** Every input the two renderers compare — the copies and their content, the sampled sizes, the texture identities, the upload freshness, the copy-map key, the bound maps, the TEV stage programming, the konst selection, the blend, the scissor, the NDC geometry, the generated coordinates — has been measured and agrees (AP-BK, AP-BM, this addendum). The two implementations therefore disagree in the **fragment evaluation itself**: the same three-stage combiner over the same four textures produces the sharp composite in aurora and a full-screen blur in the layer. That is exactly the class AGENTS.md §1 names (multi-stage TEV / konst / indirect / raster channel - "none of it is game-specific, every one is solved in Aurora"), and it is the class the migration retires. There is no aurora-side change to make here: aurora's chain does what the guest asked, which is why the exit criterion's direction (move aurora towards the layer's 43.16 / 1.123) is the wrong direction, and why this session does not chase it.
+
+**5. The instruments that got here, for the next session.** `--probe-at-cmd N` (aurora's EFB at any command, one run), `TLS_TEV_UNIFORM=<batch>[,<frame>]` (the layer's uniform packet per batch), `TLS_TEV_PROBE=<guest frame>` (the layer's per-batch state), `TLS_AURORA_DUMP_DRAW=<global draw index>` (aurora's per-draw state; global = sum of the earlier frames' draws + the frame-relative index), `TLS_EFB_CHAIN_GUEST`/`_DUMP` (the layer's copy content as PPMs) and `tools/aurora_spike/probe_metrics.py` (luma + gradient of any of them). The one measurement not yet made that could still separate "wrong input" from "wrong arithmetic" inside the layer is TLS_BATCH_CUTOFF=76|77 - draw only the first N batches of the frame and screenshot; the difference between the two screenshots is exactly what b76 paints.
