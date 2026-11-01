@@ -19,7 +19,7 @@ extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
-extern void fn_80087E9C(void);
+extern void route_createWaypoint(void);
 extern void node_createNamedChild(void);
 extern void fn_800928B0(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -1793,7 +1793,7 @@ lbl_fn_803F11F8_00001594:
     addi r5, r29, 0x10
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_80885F90
     mr r3, r25
     lfs f2, lbl_80885FA0

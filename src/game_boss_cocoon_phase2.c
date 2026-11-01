@@ -18,7 +18,7 @@ extern void fn_80011220(void);
 extern void fn_80012C88(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void vec3_sub(void);
-extern void fn_8003E4A4(void);
+extern void str_initFromCStr(void);
 extern void fn_8004212C(void);
 extern void fn_8004ECC0(void);
 extern void fn_80051B14(void);
@@ -39,7 +39,7 @@ extern void atn_Matrix_copy(void);
 extern void fn_80091CFC(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_800BFAC8(void);
+extern void motion_updateFogAdj(void);
 extern void fn_800EC254(void);
 extern void fn_800EC2C4(void);
 extern void fn_800EC440(void);
@@ -65,8 +65,8 @@ extern void quest_updateFlow(void);
 extern void fn_801479E4(void);
 extern void fn_801495E8(void);
 extern void fn_8014C540(void);
-extern void fn_8015495C(void);
-extern void fn_8016DA4C(void);
+extern void equip_applyToCharacter(void);
+extern void debuff_clearStatus(void);
 extern void actor_setState(void);
 extern void fn_80178A6C(void);
 extern void fn_8020A780(void);
@@ -221,9 +221,9 @@ asm void fn_8045ECC4(void)
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     mr r3, r30
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     li r0, 0xc
     stw r0, 0x58c(r30)
     mr r3, r30
@@ -427,7 +427,7 @@ lbl_fn_8045EDEC_000001C8:
     lwz r4, lbl_8087EFB4
     stfs f8, 0xac(r1)
     stfs f0, 0xa8(r1)
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f9, 0xe8(r1)
     addi r4, r1, 0x78
     lfs f8, 0xbc(r1)
@@ -449,7 +449,7 @@ lbl_fn_8045EDEC_000001C8:
     stfs f0, 0x9c(r1)
     stfs f9, 0xa0(r1)
     stfs f8, 0xa4(r1)
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     addi r3, r1, 0x6c
     lfs f2, 0x74(r1)
     psq_l f1, 0x0(r3), 0, 0
@@ -1284,14 +1284,14 @@ asm void fn_8045FAB0(void)
     oris r0, r0, 0x40
     addi r4, r30, lbl_80755188@l
     stw r0, 0x12a4(r28)
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r30, r30, lbl_80755188@l
     addi r3, r1, 0x20
     addi r4, r30, 0x18
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x14
     addi r4, r29, 0x2c
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x74
     addi r4, r30, 0x2b
     li r5, 0x0

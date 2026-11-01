@@ -23,7 +23,7 @@ extern void fn_8050128C(void);
 extern void fn_8050E098(void);
 extern void wcslen(void);
 extern void fn_806A8E40(void);
-extern void fn_806B0E30(void);
+extern void net_getMyAid(void);
 
 /* External data declarations */
 extern u8 lbl_807C8AE8[];
@@ -552,7 +552,7 @@ lbl_fn_804F50E0_00000620:
     beq lbl_fn_804F50E0_00000654
     b lbl_fn_804F50E0_00000678
 lbl_fn_804F50E0_00000654:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r3, r3, 24
     b lbl_fn_804F50E0_00000678
 lbl_fn_804F50E0_00000660:
@@ -676,7 +676,7 @@ lbl_fn_804F50E0_00000794:
     li r0, 0x0
     b lbl_fn_804F50E0_0000081C
 lbl_fn_804F50E0_000007F4:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804F50E0_0000081C
 lbl_fn_804F50E0_00000800:
@@ -734,7 +734,7 @@ lbl_fn_804F50E0_00000884:
     li r0, 0x0
     b lbl_fn_804F50E0_000008DC
 lbl_fn_804F50E0_000008B4:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804F50E0_000008DC
 lbl_fn_804F50E0_000008C0:

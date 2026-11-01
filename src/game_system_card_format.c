@@ -26,7 +26,7 @@ extern void fn_8011FAF0(void);
 extern void fn_8011FB18(void);
 extern void boss_updatePhaseState(void);
 extern void fn_801446F0(void);
-extern void fn_8015495C(void);
+extern void equip_applyToCharacter(void);
 extern void fn_80178208(void);
 extern void fn_801AFAC0(void);
 extern void task_findEntryById(void);
@@ -1496,7 +1496,7 @@ asm void fn_8035BC84(void)
     li r4, 0x0
     lwz r3, 0x4(r3)
     addi r30, r3, 0xb0
-    bl fn_8015495C
+    bl equip_applyToCharacter
     li r31, 0x1
     stw r31, 0x34c(r30)
     lfs f0, lbl_8088560C

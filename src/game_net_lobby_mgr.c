@@ -15,7 +15,7 @@ extern void vec3_set(void);
 extern void vec3_copy(void);
 extern void fn_800109E0(void);
 extern void fn_80013410(void);
-extern void fn_8003E4A4(void);
+extern void str_initFromCStr(void);
 extern void fn_8004203C(void);
 extern void fn_8004212C(void);
 extern void fn_80043014(void);
@@ -326,7 +326,7 @@ asm void fn_804985E4(void)
     bl atn_LoadHandle_getName
     mr r4, r3
     addi r3, r1, 0x54
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0xa8
     addi r4, r1, 0x54
     bl fn_8006B0C8
@@ -677,7 +677,7 @@ lbl_fn_804985E4_00000808:
     bl fn_80499734
     addi r3, r1, 0x6c
     addi r4, r23, 0x63
-    bl fn_8003E4A4
+    bl str_initFromCStr
     li r24, 0x0
     b lbl_fn_804985E4_00000AB8
 lbl_fn_804985E4_00000840:

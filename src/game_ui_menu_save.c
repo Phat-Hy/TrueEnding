@@ -25,8 +25,8 @@ extern void fn_80108C10(void);
 extern void fn_801092C8(void);
 extern void fn_8010CCD8(void);
 extern void fn_8012F034(void);
-extern void fn_8015495C(void);
-extern void fn_8016DA4C(void);
+extern void equip_applyToCharacter(void);
+extern void debuff_clearStatus(void);
 extern void fn_80192758(void);
 extern void fn_801B2EDC(void);
 extern void fn_801BDE68(void);
@@ -415,7 +415,7 @@ lbl_fn_801BE630_00000434:
     cmpwi r21, 0x0
     beq lbl_fn_801BE630_000017D8
     lwz r3, 0x4(r31)
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     li r15, 0x1
     stb r15, 0x1d(r31)
     lwz r0, 0x4(r19)
@@ -1756,13 +1756,13 @@ lbl_fn_801BE630_000017D8:
     stw r3, 0x63c(r4)
     stw r0, 0x638(r4)
     lwz r3, 0x4(r31)
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lwz r3, 0x4(r31)
     li r4, 0x0
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
 lbl_fn_801BE630_00001844:
     li r18, 0x1
     b lbl_fn_801BE630_0000187C

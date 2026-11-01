@@ -12,7 +12,7 @@ extern void dtor_80013D60(void);
 extern void dtor_80084684(void);
 extern void sys_copyString(void);
 extern void fn_8000ECA8(void);
-extern void fn_8003E4A4(void);
+extern void str_initFromCStr(void);
 extern void fn_8004203C(void);
 extern void fn_800422CC(void);
 extern void fn_80049B74(void);
@@ -35,7 +35,7 @@ extern void route_interpolatePath(void);
 extern void node_createNamedChild(void);
 extern void node_destroy(void);
 extern void fn_80089ACC(void);
-extern void fn_800BFAC8(void);
+extern void motion_updateFogAdj(void);
 extern void fn_800C31EC(void);
 extern void fn_800CB360(void);
 extern void ref_releaseHandle(void);
@@ -755,7 +755,7 @@ lbl_fn_8035E5B8_00000838:
     lwz r4, lbl_8087EFB4
     stfs f1, 0xc(r1)
     stfs f0, 0x10(r1)
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f0, 0x1c(r1)
     fcmpo cr0, f30, f0
     bge lbl_fn_8035E5B8_000008D4
@@ -1727,7 +1727,7 @@ lbl_fn_8035F3D4_0000160C:
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0x14
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x14
     addi r4, r26, 0x2c
     bl sys_copyString
@@ -1838,7 +1838,7 @@ lbl_fn_8035F3D4_000017AC:
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0x8
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x8
     addi r4, r31, 0x2c
     bl sys_copyString

@@ -21,8 +21,8 @@ extern void fn_800F8574(void);
 extern void clip_calculateFrustum(void);
 extern void fn_8012A1B8(void);
 extern void fn_8013C38C(void);
-extern void fn_8015495C(void);
-extern void fn_8016DA4C(void);
+extern void equip_applyToCharacter(void);
+extern void debuff_clearStatus(void);
 extern void actor_setState(void);
 extern void fn_801765D8(void);
 extern void fn_80178A6C(void);
@@ -1585,9 +1585,9 @@ asm void fn_802B725C(void)
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     mr r3, r28
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lfs f0, lbl_80884034
     li r0, 0x11
     li r31, 0x1

@@ -10,7 +10,7 @@ extern void fn_800EAECC(void);
 extern void fn_800EB270(void);
 extern void fn_800EB49C(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8C6C(void);
+extern void scissor_clipFrustum(void);
 extern void fn_8012539C(void);
 extern void fn_80126214(void);
 extern void fn_80134270(void);
@@ -659,7 +659,7 @@ lbl_fn_8031FE4C_00000784:
     lwz r10, 0x594(r31)
     li r5, 0x0
     li r9, 0x1e
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     lwz r0, 0x594(r31)
     cmpwi r0, 0x0
     ble lbl_fn_8031FE4C_0000080C

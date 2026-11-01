@@ -38,7 +38,7 @@ extern void fn_80140500(void);
 extern void fn_801446F0(void);
 extern void dialog_renderWindow(void);
 extern void fn_801533C8(void);
-extern void fn_8015495C(void);
+extern void equip_applyToCharacter(void);
 extern void fn_8015E7A0(void);
 extern void fn_80163E70(void);
 extern void fn_8016DDB0(void);
@@ -1404,7 +1404,7 @@ lbl_fn_802EF5FC_000011A4:
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     lwz r0, 0xf14(r31)
     mr r3, r31
     stw r30, 0xd1c(r31)

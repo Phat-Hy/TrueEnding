@@ -36,7 +36,7 @@ extern void fn_801404F8(void);
 extern void fn_80140500(void);
 extern void quest_updateFlow(void);
 extern void fn_801479E4(void);
-extern void fn_8015495C(void);
+extern void equip_applyToCharacter(void);
 extern void fn_8015C0C0(void);
 extern void fn_8015C6A0(void);
 extern void fn_80176ACC(void);
@@ -307,7 +307,7 @@ lbl_fn_80277DC4_000002D4:
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     lfs f2, 0x70(r1)
     mr r3, r23
     psq_l f1, 0x0(r27), 0, 0

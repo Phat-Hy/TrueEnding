@@ -18,7 +18,7 @@ extern void fn_80012C88(void);
 extern void vec3_sub(void);
 extern void fn_800133B0(void);
 extern void fn_80013410(void);
-extern void fn_8003EFB0(void);
+extern void ui_destroyWidget(void);
 extern void collision_testLineSegment(void);
 extern void fn_80057A68(void);
 extern void mem_alloc(void);
@@ -67,7 +67,7 @@ extern void strcmp(void);
 extern void abort(void);
 extern void __ptmf_scall(void);
 extern void fn_806A8E40(void);
-extern void fn_806B0E30(void);
+extern void net_getMyAid(void);
 
 /* External data declarations */
 extern u8 lbl_80739F34[];
@@ -2146,10 +2146,10 @@ asm void fn_801A0C54(void)
     bne lbl_fn_801A0C54_00001990
     lis r3, lbl_807C6BB8@ha
     stwu r6, lbl_807C6BB8@l(r3)
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     lis r5, lbl_807C7BDC@ha
     stw r6, 0x4(r3)
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     addi r5, r5, lbl_807C7BDC@l
     stw r6, 0x8(r3)
     stw r28, 0xc(r3)
@@ -2199,7 +2199,7 @@ lbl_fn_801A0C54_000019FC:
     li r0, 0x0
     b lbl_fn_801A0C54_00001A4C
 lbl_fn_801A0C54_00001A24:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_801A0C54_00001A4C
 lbl_fn_801A0C54_00001A30:
@@ -2239,7 +2239,7 @@ lbl_fn_801A0C54_00001A68:
     li r0, 0x0
     b lbl_fn_801A0C54_00001ACC
 lbl_fn_801A0C54_00001AA4:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_801A0C54_00001ACC
 lbl_fn_801A0C54_00001AB0:

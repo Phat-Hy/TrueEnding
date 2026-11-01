@@ -8,7 +8,7 @@ extern void _savegpr_14(void);
 extern void _savegpr_26(void);
 extern void fn_8009EE30(void);
 extern void atn_Anim_getDuration(void);
-extern void fn_800BFAC8(void);
+extern void motion_updateFogAdj(void);
 extern void atn_Task_unlink(void);
 extern void str_findChar(void);
 extern void fn_80116FC0(void);
@@ -2385,7 +2385,7 @@ lbl_fn_801D19F0_0000213C:
     stfs f8, 0x30(r1)
     stfs f0, 0x2c(r1)
     stfs f10, 0x34(r1)
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f7, 0x134(r1)
     lfs f0, lbl_80882A7C
     fsubs f0, f7, f0

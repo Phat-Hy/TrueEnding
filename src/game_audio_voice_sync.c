@@ -22,7 +22,7 @@ extern void atn_Task_setActive(void);
 extern void str_skipWhitespace(void);
 extern void fn_800E41FC(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8C6C(void);
+extern void scissor_clipFrustum(void);
 extern void clip_calculateFrustum(void);
 extern void fn_80103F60(void);
 extern void fn_80108378(void);
@@ -37,7 +37,7 @@ extern void fn_801426A4(void);
 extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void fn_8014C540(void);
-extern void fn_8015495C(void);
+extern void equip_applyToCharacter(void);
 extern void actor_setState(void);
 extern void fn_80176548(void);
 extern void fn_80176ACC(void);
@@ -2302,7 +2302,7 @@ lbl_fn_803073C4_00001E28:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     lwz r3, 0x14bc(r24)
     addi r0, r3, 0x1
     stw r0, 0x14bc(r24)
@@ -2326,7 +2326,7 @@ lbl_fn_803073C4_00001EC4:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     lwz r3, 0x14bc(r24)
     addi r0, r3, 0x1
     stw r0, 0x14bc(r24)
@@ -3465,7 +3465,7 @@ lbl_fn_803073C4_00002F4C:
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     stw r21, 0xd18(r25)
     mr r3, r25
     mr r4, r31

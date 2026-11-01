@@ -36,7 +36,7 @@ extern void fn_8014052C(void);
 extern void quest_updateFlow(void);
 extern void quest_ctorRewardItem(void);
 extern void fn_80149624(void);
-extern void fn_8015495C(void);
+extern void equip_applyToCharacter(void);
 extern void actor_setState(void);
 extern void fn_80176ACC(void);
 extern void fn_801A03E0(void);
@@ -169,7 +169,7 @@ lbl_fn_8030C1A4_00000084:
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     addi r31, r1, 0x50
     psq_l f1, 0x0(r30), 0, 0
     lfs f2, 0x8(r30)

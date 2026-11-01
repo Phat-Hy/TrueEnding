@@ -62,7 +62,7 @@ extern u32 lbl_80881B1C;
 /* Function declarations */
 void fn_801546F4(void);
 void fn_8015487C(void);
-void fn_8015495C(void);
+void equip_applyToCharacter(void);
 void fn_80154C08(void);
 void fn_80154E38(void);
 void fn_80154EC4(void);
@@ -250,7 +250,7 @@ lbl_fn_8015487C_0000024C:
     blr
 }
 
-asm void fn_8015495C(void)
+asm void equip_applyToCharacter(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -267,23 +267,23 @@ asm void fn_8015495C(void)
     mr r28, r5
     bl fn_8011BEB8
     cmpwi r28, 0x0
-    beq lbl_fn_8015495C_000003EC
+    beq lbl_equip_applyToCharacter_000003EC
     lwz r0, 0x12a4(r29)
     srwi. r0, r0, 31
-    beq lbl_fn_8015495C_000003EC
+    beq lbl_equip_applyToCharacter_000003EC
     lwz r0, 0x12a4(r29)
     clrlwi r0, r0, 2
     stw r0, 0x12a4(r29)
     lwz r3, lbl_8087F430
     lwz r4, 0x10d8(r3)
     cmpwi r4, 0x0
-    beq lbl_fn_8015495C_00000314
+    beq lbl_equip_applyToCharacter_00000314
     lwz r3, 0xc38(r29)
     cmpwi r3, 0x0
-    ble lbl_fn_8015495C_00000314
+    ble lbl_equip_applyToCharacter_00000314
     lwz r0, 0xc3c(r29)
     cmpwi r0, 0x0
-    ble lbl_fn_8015495C_00000314
+    ble lbl_equip_applyToCharacter_00000314
     subi r0, r3, 0x1
     lwz r3, 0xb0(r4)
     slwi r0, r0, 6
@@ -296,50 +296,50 @@ asm void fn_8015495C(void)
     slwi r0, r0, 6
     add r3, r4, r0
     stw r5, 0x3c(r3)
-lbl_fn_8015495C_00000314:
+lbl_equip_applyToCharacter_00000314:
     lwz r4, 0x48(r29)
     cmpwi r4, 0x0
-    bne lbl_fn_8015495C_00000348
+    bne lbl_equip_applyToCharacter_00000348
     lwz r3, lbl_8087F0A8
     lwz r0, 0x278(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_8015495C_00000348
+    beq lbl_equip_applyToCharacter_00000348
     lwz r3, 0x5c(r29)
     lwz r0, 0x11c(r3)
     cmpwi r0, 0x1
-    bne lbl_fn_8015495C_00000348
+    bne lbl_equip_applyToCharacter_00000348
     li r0, 0x1
-    b lbl_fn_8015495C_00000368
-lbl_fn_8015495C_00000348:
+    b lbl_equip_applyToCharacter_00000368
+lbl_equip_applyToCharacter_00000348:
     cmpwi r4, 0x0
-    bne lbl_fn_8015495C_00000364
+    bne lbl_equip_applyToCharacter_00000364
     lwz r0, 0x12a8(r29)
     extrwi. r0, r0, 1, 14
-    beq lbl_fn_8015495C_00000364
+    beq lbl_equip_applyToCharacter_00000364
     li r0, 0x1
-    b lbl_fn_8015495C_00000368
-lbl_fn_8015495C_00000364:
+    b lbl_equip_applyToCharacter_00000368
+lbl_equip_applyToCharacter_00000364:
     li r0, 0x0
-lbl_fn_8015495C_00000368:
+lbl_equip_applyToCharacter_00000368:
     cmpwi r0, 0x0
-    beq lbl_fn_8015495C_000003EC
+    beq lbl_equip_applyToCharacter_000003EC
     lwz r3, lbl_8087F430
     li r4, 0x25
     bl world_getGlobalFlag
     cmpwi r3, 0x1
-    blt lbl_fn_8015495C_000003CC
+    blt lbl_equip_applyToCharacter_000003CC
     lwz r3, 0x648(r29)
     cmpwi r3, 0x0
-    beq lbl_fn_8015495C_00000398
+    beq lbl_equip_applyToCharacter_00000398
     li r4, 0x1
     bl fn_80044E0C
-lbl_fn_8015495C_00000398:
+lbl_equip_applyToCharacter_00000398:
     lwz r3, 0x64c(r29)
     cmpwi r3, 0x0
-    beq lbl_fn_8015495C_000003AC
+    beq lbl_equip_applyToCharacter_000003AC
     li r4, 0x1
     bl fn_80044E0C
-lbl_fn_8015495C_000003AC:
+lbl_equip_applyToCharacter_000003AC:
     li r0, 0x0
     li r3, -0x1
     stw r3, 0x674(r29)
@@ -347,29 +347,29 @@ lbl_fn_8015495C_000003AC:
     stw r0, 0x648(r29)
     stw r0, 0x64c(r29)
     bl fn_8014C228
-    b lbl_fn_8015495C_000003EC
-lbl_fn_8015495C_000003CC:
+    b lbl_equip_applyToCharacter_000003EC
+lbl_equip_applyToCharacter_000003CC:
     lwz r0, 0x674(r29)
     cmpwi r0, 0x0
-    blt lbl_fn_8015495C_000003EC
+    blt lbl_equip_applyToCharacter_000003EC
     mr r3, r29
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
     bl fn_8014DEE4
-lbl_fn_8015495C_000003EC:
+lbl_equip_applyToCharacter_000003EC:
     cmpwi r30, 0x0
-    beq lbl_fn_8015495C_0000040C
+    beq lbl_equip_applyToCharacter_0000040C
     lwz r0, 0x12a4(r29)
     extrwi. r0, r0, 1, 26
-    beq lbl_fn_8015495C_0000040C
+    beq lbl_equip_applyToCharacter_0000040C
     lwz r0, 0x12a4(r29)
     rlwinm r0, r0, 0, 27, 25
     stw r0, 0x12a4(r29)
-lbl_fn_8015495C_0000040C:
+lbl_equip_applyToCharacter_0000040C:
     lwz r7, 0xd1c(r29)
     cmpwi r7, 0x0
-    beq lbl_fn_8015495C_000004B4
+    beq lbl_equip_applyToCharacter_000004B4
     lwz r0, 0x12a8(r7)
     mr r5, r7
     lwz r6, 0x1028(r7)
@@ -377,64 +377,64 @@ lbl_fn_8015495C_0000040C:
     extrwi r0, r0, 1, 15
     cntlzw r0, r0
     srwi r3, r0, 5
-    b lbl_fn_8015495C_00000454
-lbl_fn_8015495C_00000438:
+    b lbl_equip_applyToCharacter_00000454
+lbl_equip_applyToCharacter_00000438:
     lwz r0, 0xfe8(r5)
     cmplw r0, r29
-    bne lbl_fn_8015495C_0000044C
+    bne lbl_equip_applyToCharacter_0000044C
     li r0, 0x1
-    b lbl_fn_8015495C_00000470
-lbl_fn_8015495C_0000044C:
+    b lbl_equip_applyToCharacter_00000470
+lbl_equip_applyToCharacter_0000044C:
     addi r5, r5, 0x4
     addi r4, r4, 0x1
-lbl_fn_8015495C_00000454:
+lbl_equip_applyToCharacter_00000454:
     cmpwi r3, 0x0
     mr r0, r6
-    bne lbl_fn_8015495C_00000464
+    bne lbl_equip_applyToCharacter_00000464
     slwi r0, r6, 1
-lbl_fn_8015495C_00000464:
+lbl_equip_applyToCharacter_00000464:
     cmpw r4, r0
-    blt lbl_fn_8015495C_00000438
+    blt lbl_equip_applyToCharacter_00000438
     li r0, 0x0
-lbl_fn_8015495C_00000470:
+lbl_equip_applyToCharacter_00000470:
     cmpwi r0, 0x0
-    beq lbl_fn_8015495C_000004B4
+    beq lbl_equip_applyToCharacter_000004B4
     li r0, 0x10
     mr r4, r7
     li r3, 0x0
     mtctr r0
-lbl_fn_8015495C_00000488:
+lbl_equip_applyToCharacter_00000488:
     lwz r0, 0xfe8(r4)
     cmplw r0, r29
-    bne lbl_fn_8015495C_000004A8
+    bne lbl_equip_applyToCharacter_000004A8
     slwi r0, r3, 2
     li r4, 0x0
     add r3, r7, r0
     stw r4, 0xfe8(r3)
-    b lbl_fn_8015495C_000004B4
-lbl_fn_8015495C_000004A8:
+    b lbl_equip_applyToCharacter_000004B4
+lbl_equip_applyToCharacter_000004A8:
     addi r4, r4, 0x4
     addi r3, r3, 0x1
-    bdnz lbl_fn_8015495C_00000488
-lbl_fn_8015495C_000004B4:
+    bdnz lbl_equip_applyToCharacter_00000488
+lbl_equip_applyToCharacter_000004B4:
     cmpwi r31, 0x0
-    beq lbl_fn_8015495C_000004F4
+    beq lbl_equip_applyToCharacter_000004F4
     lwz r3, lbl_8087F048
     cmpwi r3, 0x0
-    beq lbl_fn_8015495C_000004DC
+    beq lbl_equip_applyToCharacter_000004DC
     mr r4, r29
     bl fn_801059F8
     lwz r3, lbl_8087F048
     mr r4, r29
     bl fn_80105B3C
-lbl_fn_8015495C_000004DC:
+lbl_equip_applyToCharacter_000004DC:
     lwz r0, 0x12a8(r29)
     lfs f0, lbl_8088196C
     rlwinm r0, r0, 0, 24, 22
     stw r0, 0x12a8(r29)
     stfs f0, 0xfb8(r29)
     stfs f0, 0xfbc(r29)
-lbl_fn_8015495C_000004F4:
+lbl_equip_applyToCharacter_000004F4:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)

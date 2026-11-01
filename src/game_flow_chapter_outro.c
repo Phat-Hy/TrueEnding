@@ -53,7 +53,7 @@ extern void fn_80506530(void);
 extern void fn_8050E098(void);
 extern void rand(void);
 extern void fn_806A8E40(void);
-extern void fn_806B0E30(void);
+extern void net_getMyAid(void);
 
 /* External data declarations */
 extern u8 jumptable_807911B4[];
@@ -109,7 +109,7 @@ asm void fn_804E651C(void)
     li r0, 0x0
     b lbl_fn_804E651C_00000078
 lbl_fn_804E651C_00000050:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804E651C_00000078
 lbl_fn_804E651C_0000005C:
@@ -750,7 +750,7 @@ asm void fn_804E6DD4(void)
     li r0, 0x0
     b lbl_fn_804E6DD4_0000092C
 lbl_fn_804E6DD4_00000904:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804E6DD4_0000092C
 lbl_fn_804E6DD4_00000910:
@@ -820,7 +820,7 @@ lbl_fn_804E6DD4_000009BC:
     beq lbl_fn_804E6DD4_000009F4
     b lbl_fn_804E6DD4_00000A18
 lbl_fn_804E6DD4_000009F4:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r3, r3, 24
     b lbl_fn_804E6DD4_00000A18
 lbl_fn_804E6DD4_00000A00:
@@ -912,7 +912,7 @@ lbl_fn_804E6DD4_00000B08:
     li r0, 0x0
     b lbl_fn_804E6DD4_00000B64
 lbl_fn_804E6DD4_00000B3C:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804E6DD4_00000B64
 lbl_fn_804E6DD4_00000B48:
@@ -1326,7 +1326,7 @@ asm void fn_804E762C(void)
     li r0, 0x0
     b lbl_fn_804E762C_00001180
 lbl_fn_804E762C_00001158:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804E762C_00001180
 lbl_fn_804E762C_00001164:
@@ -1393,7 +1393,7 @@ lbl_fn_804E762C_00001208:
     beq lbl_fn_804E762C_00001240
     b lbl_fn_804E762C_00001264
 lbl_fn_804E762C_00001240:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r3, r3, 24
     b lbl_fn_804E762C_00001264
 lbl_fn_804E762C_0000124C:
@@ -1465,7 +1465,7 @@ lbl_fn_804E762C_00001304:
     li r0, 0x0
     b lbl_fn_804E762C_00001360
 lbl_fn_804E762C_00001338:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804E762C_00001360
 lbl_fn_804E762C_00001344:

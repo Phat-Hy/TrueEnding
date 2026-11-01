@@ -11,7 +11,7 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void mem_alloc(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_800BFAC8(void);
+extern void motion_updateFogAdj(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
@@ -1750,7 +1750,7 @@ lbl_fn_804B5B10_0000168C:
     stfs f2, 0x94(r1)
     lwz r4, lbl_8087EFB4
     psq_st f1, 0x0(r26), 0, 0
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f0, 0x88(r1)
     fcmpo cr0, f27, f0
     cror eq, lt, eq
@@ -1929,7 +1929,7 @@ lbl_fn_804B5B10_00001924:
     stfs f2, 0x7c(r1)
     lwz r4, lbl_8087EFB4
     psq_st f1, 0x0(r26), 0, 0
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f0, 0x70(r1)
     fcmpo cr0, f26, f0
     cror eq, lt, eq

@@ -17,7 +17,7 @@ extern void fn_8006AFF8(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
-extern void fn_80087E9C(void);
+extern void route_createWaypoint(void);
 extern void node_createNamedChild(void);
 extern void node_destroy(void);
 extern void atn_Model_findBoneIndex(void);
@@ -36,16 +36,16 @@ extern void atn_Task_setActive(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8C6C(void);
+extern void scissor_clipFrustum(void);
 extern void clip_calculateFrustum(void);
 extern void boss_updatePhaseState(void);
 extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void fn_8014C540(void);
 extern void fn_80151448(void);
-extern void fn_8015495C(void);
+extern void equip_applyToCharacter(void);
 extern void fn_80158BB4(void);
-extern void fn_8016DA4C(void);
+extern void debuff_clearStatus(void);
 extern void actor_setState(void);
 extern void fn_80170A20(void);
 extern void fn_801781B0(void);
@@ -292,7 +292,7 @@ lbl_fn_802B1F2C_00000074:
     addi r5, r29, 0x1ab4
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_80884014
     mr r3, r30
     lfs f2, lbl_80884018
@@ -301,7 +301,7 @@ lbl_fn_802B1F2C_00000074:
     addi r5, r29, 0x1ac4
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_80884014
     mr r3, r30
     lfs f2, lbl_80884018
@@ -1752,9 +1752,9 @@ lbl_fn_802B3534_0000166C:
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     mr r3, r30
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lfs f0, lbl_80884034
     li r0, 0x11
     li r31, 0x1
@@ -2038,7 +2038,7 @@ lbl_fn_802B3764_00001A94:
     lfs f1, lbl_80884028
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     b lbl_fn_802B3764_00002464
     mr r3, r31
     bl fn_802B52D8

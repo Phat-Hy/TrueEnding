@@ -22,7 +22,7 @@ extern void dungeon_initGlobalContext(void);
 extern void fn_800839EC(void);
 extern void fn_800B3978(void);
 extern void fn_800B64DC(void);
-extern void fn_800BFAC8(void);
+extern void motion_updateFogAdj(void);
 extern void fn_800C0D4C(void);
 extern void PSMTXMultVec(void);
 extern void PSMTXMultVecArray(void);
@@ -1379,7 +1379,7 @@ lbl_fn_800B47AC_0000118C:
     addi r3, r1, 0x74
     stfs f2, 0xa8(r1)
     psq_st f1, 0x0(r30), 0, 0
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f2, 0x7c(r1)
     add r3, r17, r16
     psq_l f1, 0x0(r29), 0, 0
@@ -1426,7 +1426,7 @@ lbl_fn_800B47AC_00001250:
     lwz r4, lbl_8087EFB4
     addi r3, r1, 0x68
     lwz r5, 0x18(r1)
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     addi r3, r1, 0x68
     lwz r4, 0x18(r1)
     lfs f2, 0x70(r1)
@@ -1459,7 +1459,7 @@ lbl_fn_800B47AC_000012C8:
     addi r3, r1, 0x5c
     lwz r4, lbl_8087EFB4
     addi r5, r5, 0xc
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     addi r3, r1, 0x5c
     lwz r4, 0x18(r1)
     lfs f2, 0x64(r1)
@@ -1492,7 +1492,7 @@ lbl_fn_800B47AC_00001344:
     addi r3, r1, 0x50
     lwz r4, lbl_8087EFB4
     addi r5, r5, 0x18
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     addi r3, r1, 0x50
     lwz r4, 0x18(r1)
     lfs f2, 0x58(r1)

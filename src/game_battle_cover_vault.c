@@ -5,7 +5,7 @@
 extern void __register_global_object(void);
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
-extern void fn_8003EFB0(void);
+extern void ui_destroyWidget(void);
 extern void fn_800577D8(void);
 extern void fn_80058078(void);
 extern void fn_800580BC(void);
@@ -30,7 +30,7 @@ extern void fn_8012B3E8(void);
 extern void fn_8012B988(void);
 extern void fn_8012D8B8(void);
 extern void quest_updateFlow(void);
-extern void fn_8015495C(void);
+extern void equip_applyToCharacter(void);
 extern void fn_801644D4(void);
 extern void fn_80176ACC(void);
 extern void fn_8017CB2C(void);
@@ -1778,7 +1778,7 @@ lbl_fn_803F9624_0000171C:
     lwz r3, 0xf8(r30)
     stw r0, 0x58c(r3)
     lwz r3, 0xf8(r30)
-    bl fn_8015495C
+    bl equip_applyToCharacter
     lwz r3, 0xf8(r30)
     addi r3, r3, 0xc58
     bl fn_8011BE54
@@ -1978,11 +1978,11 @@ lbl_fn_803F9624_00001A2C:
     lis r3, lbl_807C6BB8@ha
     li r0, 0x0
     stwu r0, lbl_807C6BB8@l(r3)
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     li r31, 0x1
     lis r5, lbl_807C8740@ha
     stw r0, 0x4(r3)
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     addi r5, r5, lbl_807C8740@l
     stw r0, 0x8(r3)
     stw r31, 0xc(r3)

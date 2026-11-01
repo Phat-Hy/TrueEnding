@@ -13,7 +13,7 @@ extern void ref_releaseHandle(void);
 extern void fn_800E8630(void);
 extern void fn_800EB7A0(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8C6C(void);
+extern void scissor_clipFrustum(void);
 extern void fn_80126214(void);
 extern void fn_8013322C(void);
 extern void fn_8013A258(void);
@@ -1388,7 +1388,7 @@ lbl_fn_80253884_00001278:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
 lbl_fn_80253884_0000129C:
     lwz r0, 0x144(r1)
     psq_l f31, 0x138(r1), 0, 0

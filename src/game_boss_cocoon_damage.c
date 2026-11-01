@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void dtor_80013D60(void);
 extern void vec3_copy(void);
-extern void fn_8003E4A4(void);
+extern void str_initFromCStr(void);
 extern void fn_8004212C(void);
 extern void fn_80056DB8(void);
 extern void fn_80057A64(void);
@@ -30,7 +30,7 @@ extern void fn_800ED4E0(void);
 extern void fn_800EDFE8(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800F8574(void);
-extern void fn_800F8C6C(void);
+extern void scissor_clipFrustum(void);
 extern void fn_8012DB04(void);
 extern void boss_updatePhaseState(void);
 extern void fn_80144710(void);
@@ -646,14 +646,14 @@ asm void fn_80458270(void)
     addi r4, r30, lbl_80754DE0@l
     stfs f0, 0x1988(r28)
     stw r0, 0x12a4(r28)
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r31, r30, lbl_80754DE0@l
     addi r3, r1, 0x20
     addi r4, r31, 0x18
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x14
     addi r4, r29, 0x2c
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x74
     addi r4, r31, 0x2b
     li r5, 0x0
@@ -1251,7 +1251,7 @@ lbl_fn_8045883C_00000F94:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     lwz r0, 0x1984(r31)
     cmpwi r0, 0x0
     beq lbl_fn_8045883C_000014E4

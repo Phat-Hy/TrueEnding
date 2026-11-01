@@ -31,7 +31,7 @@ extern void fn_8050E098(void);
 extern void fn_8054D798(void);
 extern void rand(void);
 extern void fn_806A8E40(void);
-extern void fn_806B0E30(void);
+extern void net_getMyAid(void);
 extern void fn_806B1250(void);
 
 /* External data declarations */
@@ -177,7 +177,7 @@ asm void fn_804EB874(void)
     li r0, 0x0
     b lbl_fn_804EB874_00000184
 lbl_fn_804EB874_0000015C:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804EB874_00000184
 lbl_fn_804EB874_00000168:
@@ -280,7 +280,7 @@ lbl_fn_804EB938_00000280:
     li r0, 0x0
     b lbl_fn_804EB938_000002D8
 lbl_fn_804EB938_000002B0:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804EB938_000002D8
 lbl_fn_804EB938_000002BC:
@@ -331,7 +331,7 @@ lbl_fn_804EB938_00000324:
     li r0, 0x0
     b lbl_fn_804EB938_00000380
 lbl_fn_804EB938_00000358:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804EB938_00000380
 lbl_fn_804EB938_00000364:
@@ -426,7 +426,7 @@ lbl_fn_804EB938_00000460:
     li r0, 0x0
     b lbl_fn_804EB938_000004B8
 lbl_fn_804EB938_00000490:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804EB938_000004B8
 lbl_fn_804EB938_0000049C:
@@ -553,7 +553,7 @@ lbl_fn_804EB938_000005C0:
     li r0, 0x0
     b lbl_fn_804EB938_00000688
 lbl_fn_804EB938_00000660:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804EB938_00000688
 lbl_fn_804EB938_0000066C:
@@ -625,7 +625,7 @@ lbl_fn_804EB938_00000704:
     li r0, 0x0
     b lbl_fn_804EB938_00000778
 lbl_fn_804EB938_00000750:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804EB938_00000778
 lbl_fn_804EB938_0000075C:
@@ -1098,7 +1098,7 @@ lbl_fn_804EB938_00000D2C:
     li r0, 0x0
     b lbl_fn_804EB938_00000DC0
 lbl_fn_804EB938_00000D98:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804EB938_00000DC0
 lbl_fn_804EB938_00000DA4:
@@ -1228,7 +1228,7 @@ lbl_fn_804EB938_00000F08:
     li r0, 0x0
     b lbl_fn_804EB938_00000F84
 lbl_fn_804EB938_00000F5C:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804EB938_00000F84
 lbl_fn_804EB938_00000F68:
@@ -1357,7 +1357,7 @@ lbl_fn_804EB938_000010E4:
     li r0, 0x0
     b lbl_fn_804EB938_00001138
 lbl_fn_804EB938_00001110:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804EB938_00001138
 lbl_fn_804EB938_0000111C:
@@ -1984,7 +1984,7 @@ lbl_fn_804EB938_000019A4:
     beq lbl_fn_804EB938_00001A50
     b lbl_fn_804EB938_00001A78
 lbl_fn_804EB938_00001A50:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r29, r3, 24
     b lbl_fn_804EB938_00001A78
 lbl_fn_804EB938_00001A5C:
@@ -2044,7 +2044,7 @@ lbl_fn_804EB938_00001AF0:
     li r0, 0x0
     b lbl_fn_804EB938_00001B44
 lbl_fn_804EB938_00001B1C:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804EB938_00001B44
 lbl_fn_804EB938_00001B28:
@@ -2183,7 +2183,7 @@ lbl_fn_804EB938_00001CC4:
     li r25, 0x0
     b lbl_fn_804EB938_00001D1C
 lbl_fn_804EB938_00001CF4:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r25, r3, 24
     b lbl_fn_804EB938_00001D1C
 lbl_fn_804EB938_00001D00:
@@ -2240,7 +2240,7 @@ lbl_fn_804EB938_00001D54:
     li r0, 0x0
     b lbl_fn_804EB938_00001DE0
 lbl_fn_804EB938_00001DB8:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804EB938_00001DE0
 lbl_fn_804EB938_00001DC4:
@@ -2281,7 +2281,7 @@ lbl_fn_804EB938_00001E14:
     li r0, 0x0
     b lbl_fn_804EB938_00001E68
 lbl_fn_804EB938_00001E40:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804EB938_00001E68
 lbl_fn_804EB938_00001E4C:

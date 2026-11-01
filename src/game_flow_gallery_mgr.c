@@ -24,7 +24,7 @@ extern void fn_8050E630(void);
 extern void PSVECSquareMag(void);
 extern void PSVECDotProduct(void);
 extern void fn_806A8E40(void);
-extern void fn_806B0E30(void);
+extern void net_getMyAid(void);
 extern void fn_806B1250(void);
 
 /* External data declarations */
@@ -289,7 +289,7 @@ lbl_fn_804F1568_000002D0:
     li r0, 0x0
     b lbl_fn_804F1568_00000328
 lbl_fn_804F1568_00000300:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804F1568_00000328
 lbl_fn_804F1568_0000030C:
@@ -376,7 +376,7 @@ lbl_fn_804F1568_000003F4:
     li r0, 0x0
     b lbl_fn_804F1568_00000448
 lbl_fn_804F1568_00000420:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804F1568_00000448
 lbl_fn_804F1568_0000042C:
@@ -998,7 +998,7 @@ lbl_fn_804F2044_00000C80:
     li r0, 0x0
     b lbl_fn_804F2044_00000CF4
 lbl_fn_804F2044_00000CCC:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804F2044_00000CF4
 lbl_fn_804F2044_00000CD8:

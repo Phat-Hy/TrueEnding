@@ -10,7 +10,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800EE360(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8C6C(void);
+extern void scissor_clipFrustum(void);
 extern void clip_calculateFrustum(void);
 extern void fn_800FBA9C(void);
 extern void fn_800FBE70(void);
@@ -798,7 +798,7 @@ lbl_fn_80328C6C_000009BC:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
 lbl_fn_80328C6C_00000A40:
     lwz r0, 0x144(r1)
     psq_l f31, 0x138(r1), 0, 0
@@ -876,7 +876,7 @@ lbl_fn_8032932C_00000AD0:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
 lbl_fn_8032932C_00000B5C:
     lwz r0, 0x24(r1)
     psq_l f31, 0x18(r1), 0, 0
@@ -1057,7 +1057,7 @@ lbl_fn_8032943C_00000D9C:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     lfs f2, 0x530(r30)
     addi r5, r1, 0x44
     psq_l f1, 0x528(r30), 0, 0

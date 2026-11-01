@@ -28,7 +28,7 @@ extern void fn_8012F440(void);
 extern void fn_8013A258(void);
 extern void fn_8013CB68(void);
 extern void fn_801426A4(void);
-extern void fn_8015495C(void);
+extern void equip_applyToCharacter(void);
 extern void fn_8015C3A8(void);
 extern void fn_8015E7A0(void);
 extern void actor_setState(void);
@@ -1257,7 +1257,7 @@ lbl_fn_8027BE3C_00001020:
     lwz r3, 0x18ec(r30)
     stw r0, 0xf1c(r3)
     lwz r3, 0x18ec(r30)
-    bl fn_8015495C
+    bl equip_applyToCharacter
     li r31, 0x0
     stw r31, 0x18ec(r30)
     mr r3, r30

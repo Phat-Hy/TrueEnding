@@ -12,7 +12,7 @@ extern void dtor_80084684(void);
 extern void mem_free(void);
 extern void atn_Task_setActive(void);
 extern void fn_801539E0(void);
-extern void fn_8015495C(void);
+extern void equip_applyToCharacter(void);
 extern void fn_80155DAC(void);
 extern void actor_setState(void);
 extern void fn_8016F3D0(void);
@@ -29,7 +29,7 @@ extern void abort(void);
 extern void fn_806A8E40(void);
 extern void fn_806A8E70(void);
 extern void fn_806B0DE0(void);
-extern void fn_806B0E30(void);
+extern void net_getMyAid(void);
 extern void fn_806B1250(void);
 
 /* External data declarations */
@@ -98,7 +98,7 @@ asm void fn_804E9C68(void)
     li r14, 0x0
     b lbl_fn_804E9C68_00000068
 lbl_fn_804E9C68_00000040:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r14, r3, 24
     b lbl_fn_804E9C68_00000068
 lbl_fn_804E9C68_0000004C:
@@ -633,7 +633,7 @@ lbl_fn_804E9C68_000007CC:
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     lwz r0, 0x12a4(r16)
     srwi. r0, r0, 31
     beq lbl_fn_804E9C68_0000080C
@@ -999,7 +999,7 @@ asm void fn_804EA8BC(void)
     li r0, 0x0
     b lbl_fn_804EA8BC_00000CE4
 lbl_fn_804EA8BC_00000CBC:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804EA8BC_00000CE4
 lbl_fn_804EA8BC_00000CC8:
@@ -1405,7 +1405,7 @@ lbl_fn_804EAA88_00001214:
     psq_st f1, 0x534(r25), 0, 0
     li r7, 0x1
     stfs f2, 0x53c(r25)
-    bl fn_8015495C
+    bl equip_applyToCharacter
 lbl_fn_804EAA88_00001254:
     addi r11, r1, 0x110
     psq_l f31, 0x128(r1), 0, 0
@@ -1539,7 +1539,7 @@ asm void fn_804EB014(void)
     li r0, 0x0
     b lbl_fn_804EB014_00001418
 lbl_fn_804EB014_000013F0:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804EB014_00001418
 lbl_fn_804EB014_000013FC:
@@ -1663,7 +1663,7 @@ asm void fn_804EB1B0(void)
     li r31, 0x0
     b lbl_fn_804EB1B0_000015A8
 lbl_fn_804EB1B0_00001580:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r31, r3, 24
     b lbl_fn_804EB1B0_000015A8
 lbl_fn_804EB1B0_0000158C:
@@ -1918,7 +1918,7 @@ asm void fn_804EB4B0(void)
     li r0, 0x0
     b lbl_fn_804EB4B0_000018B4
 lbl_fn_804EB4B0_0000188C:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804EB4B0_000018B4
 lbl_fn_804EB4B0_00001898:

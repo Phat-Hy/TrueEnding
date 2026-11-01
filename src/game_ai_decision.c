@@ -24,8 +24,8 @@ extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void fn_8014C540(void);
 extern void fn_80151448(void);
-extern void fn_8015495C(void);
-extern void fn_8016DA4C(void);
+extern void equip_applyToCharacter(void);
+extern void debuff_clearStatus(void);
 extern void actor_setState(void);
 extern void fn_801765D8(void);
 extern void fn_80178A6C(void);
@@ -166,9 +166,9 @@ lbl_fn_802620A8_00000054:
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     mr r3, r30
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     li r31, 0x0
     stw r31, 0x14bc(r30)
     lwz r3, lbl_8087F048
@@ -2046,7 +2046,7 @@ lbl_fn_802639C8_00001B28:
     stfs f0, 0x2e8(r30)
     bl atn_Anim_setLayerAnimation
     mr r3, r30
-    bl fn_8016DA4C
+    bl debuff_clearStatus
 lbl_fn_802639C8_00001B8C:
     lwz r0, 0x7e0(r30)
     rlwinm r0, r0, 0, 26, 26
@@ -2064,9 +2064,9 @@ lbl_fn_802639C8_00001B8C:
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     mr r3, r30
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lfs f0, lbl_808835FC
     li r3, 0x2
     li r0, 0x1

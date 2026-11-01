@@ -7,7 +7,7 @@ extern void __register_global_object(void);
 extern void _restgpr_14(void);
 extern void _savegpr_14(void);
 extern void dtor_80084684(void);
-extern void fn_8003EFB0(void);
+extern void ui_destroyWidget(void);
 extern void dungeon_initGlobalContext(void);
 extern void fn_80083AD4(void);
 extern void atn_Task_setActive(void);
@@ -417,11 +417,11 @@ lbl_fn_804FC5AC_00000454:
     lis r3, lbl_807C6BB8@ha
     li r0, 0x0
     stwu r0, lbl_807C6BB8@l(r3)
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     li r30, 0x1
     lis r5, lbl_807C8F48@ha
     stw r0, 0x4(r3)
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     addi r5, r5, lbl_807C8F48@l
     stw r0, 0x8(r3)
     stw r30, 0xc(r3)

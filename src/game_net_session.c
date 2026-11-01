@@ -14,7 +14,7 @@ extern void fn_800971D4(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
 extern void fn_80097E80(void);
-extern void fn_800BFAC8(void);
+extern void motion_updateFogAdj(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
@@ -1180,7 +1180,7 @@ lbl_fn_801E8534_00000F7C:
     lwz r4, lbl_8087EFB4
     addi r3, r1, 0x12c
     addi r5, r31, 0x80
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f0, lbl_80882B2C
     lis r30, lbl_8073CB8C@ha
     stfs f0, 0x130(r1)

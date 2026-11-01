@@ -7,7 +7,7 @@ extern void fn_8000D760(void);
 extern void fn_8000E18C(void);
 extern void sys_copyString(void);
 extern void fn_8000ECA8(void);
-extern void fn_8003E4A4(void);
+extern void str_initFromCStr(void);
 extern void fn_8004212C(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
@@ -214,7 +214,7 @@ lbl_fn_803C606C_0000014C:
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0x14
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x14
     addi r4, r25, 0xfe
     bl sys_copyString
@@ -255,7 +255,7 @@ lbl_fn_803C606C_000001AC:
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0x8
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x5c
     addi r4, r25, 0x24d
     li r5, 0x0
@@ -623,7 +623,7 @@ lbl_fn_803C65EC_000006CC:
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0x14
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x14
     addi r4, r30, 0xfe
     bl sys_copyString
@@ -664,7 +664,7 @@ lbl_fn_803C65EC_0000072C:
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0x8
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x5c
     addi r4, r30, 0x24d
     li r5, 0x0
@@ -999,7 +999,7 @@ lbl_fn_803C6AE8_00000BC8:
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0x14
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x14
     addi r4, r30, 0xfe
     bl sys_copyString
@@ -1040,7 +1040,7 @@ lbl_fn_803C6AE8_00000C28:
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0x8
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x5c
     addi r4, r30, 0x24d
     li r5, 0x0
@@ -1375,7 +1375,7 @@ lbl_fn_803C6FE4_000010C4:
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0x14
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x14
     addi r4, r30, 0xfe
     bl sys_copyString
@@ -1416,7 +1416,7 @@ lbl_fn_803C6FE4_00001124:
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0x8
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x5c
     addi r4, r30, 0x24d
     li r5, 0x0
@@ -1755,7 +1755,7 @@ lbl_fn_803C74E0_000015D0:
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0x24
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x24
     addi r4, r31, 0xfe
     bl sys_copyString
@@ -1828,7 +1828,7 @@ lbl_fn_803C74E0_00001630:
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0x18
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0xc
     bl fn_80288390
     addi r3, r1, 0x6c

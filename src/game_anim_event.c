@@ -18,7 +18,7 @@ extern void ref_releaseHandle(void);
 extern void wcs_vformat(void);
 extern void fn_800EB7A0(void);
 extern void fn_800EE360(void);
-extern void fn_800F8C6C(void);
+extern void scissor_clipFrustum(void);
 extern void fn_80109828(void);
 extern void fn_80126214(void);
 extern void fn_8013A258(void);
@@ -756,7 +756,7 @@ lbl_fn_80275094_00000918:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
 lbl_fn_80275094_00000970:
     lwz r0, 0x24(r1)
     psq_l f31, 0x18(r1), 0, 0
@@ -813,7 +813,7 @@ lbl_fn_80275160_000009E0:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
 lbl_fn_80275160_00000A38:
     lwz r0, 0x24(r1)
     psq_l f31, 0x18(r1), 0, 0

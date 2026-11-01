@@ -18,7 +18,7 @@ extern void fn_801065E4(void);
 extern void fn_8010A308(void);
 extern void fn_801446F0(void);
 extern void fn_801539E0(void);
-extern void fn_8015495C(void);
+extern void equip_applyToCharacter(void);
 extern void fn_80178078(void);
 extern void actor_getMovementFlags(void);
 extern void world_getGlobalFlag(void);
@@ -1997,7 +1997,7 @@ lbl_fn_801B3098_00001A1C:
     stw r0, 0x638(r7)
     li r7, 0x1
     lwz r3, 0x4(r29)
-    bl fn_8015495C
+    bl equip_applyToCharacter
 lbl_fn_801B3098_00001A60:
     li r3, 0x1
     b lbl_fn_801B3098_00001B54

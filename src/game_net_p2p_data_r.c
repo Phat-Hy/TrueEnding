@@ -30,7 +30,7 @@ extern void fn_806ABCF0(void);
 extern void fn_806ABF40(void);
 extern void fn_806ABF80(void);
 extern void fn_806AC0A0(void);
-extern void fn_806B0E30(void);
+extern void net_getMyAid(void);
 extern void fn_806CF2F0(void);
 extern void fn_806CFAC0(void);
 extern void fn_806CFB00(void);
@@ -384,7 +384,7 @@ lbl_fn_8050DEAC_0000035C:
     li r0, 0x0
     b lbl_fn_8050DEAC_000003AC
 lbl_fn_8050DEAC_00000384:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_8050DEAC_000003AC
 lbl_fn_8050DEAC_00000390:
@@ -455,7 +455,7 @@ lbl_fn_8050DEAC_00000444:
     li r0, 0x0
     b lbl_fn_8050DEAC_00000494
 lbl_fn_8050DEAC_0000046C:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_8050DEAC_00000494
 lbl_fn_8050DEAC_00000478:

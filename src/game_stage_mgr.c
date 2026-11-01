@@ -12,7 +12,7 @@ extern void fn_800EFBC4(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void magic_dispatchActionCommand(void);
-extern void fn_8016DA4C(void);
+extern void debuff_clearStatus(void);
 extern void task_findEntryById(void);
 extern void res_registerResource(void);
 extern void PSMTXConcat(void);
@@ -241,7 +241,7 @@ lbl_fn_801953B8_000001A4:
     li r0, 0x1
     stw r0, 0x28(r3)
     lwz r3, 0x4(r3)
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lwz r6, 0x4(r30)
     lis r4, lbl_80739F34@ha
     mr r3, r31
@@ -698,7 +698,7 @@ lbl_fn_80195AD0_00000850:
     li r0, 0x1
     stb r0, 0x38(r3)
     lwz r3, 0x4(r3)
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lwz r6, 0x4(r30)
     lis r4, lbl_80739F34@ha
     mr r3, r31
@@ -1614,7 +1614,7 @@ asm void fn_80196974(void)
     lwz r4, 0x4(r3)
     stw r0, 0x560(r4)
     lwz r3, 0x4(r3)
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lwz r3, 0x4(r30)
     li r0, 0x1
     lfs f0, lbl_80881FBC

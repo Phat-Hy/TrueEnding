@@ -22,7 +22,7 @@ extern void talk_setSpeakerName(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
-extern void fn_80087E9C(void);
+extern void route_createWaypoint(void);
 extern void node_createNamedChild(void);
 extern void skin_applyWeights(void);
 extern void fn_800CB360(void);
@@ -699,7 +699,7 @@ lbl_fn_8032DEA0_00000650:
     addi r5, r31, 0x528
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     mr r3, r29
     addi r4, r30, 0xa7
     addi r5, r31, 0x1570

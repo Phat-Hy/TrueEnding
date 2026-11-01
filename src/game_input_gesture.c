@@ -32,7 +32,7 @@ extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void fn_8014C540(void);
 extern void fn_80151448(void);
-extern void fn_8015495C(void);
+extern void equip_applyToCharacter(void);
 extern void actor_setState(void);
 extern void fn_8017039C(void);
 extern void fn_801765D8(void);
@@ -2095,7 +2095,7 @@ lbl_fn_802EEBA8_00001AEC:
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     lwz r0, 0xf14(r31)
     mr r3, r31
     stw r30, 0xd1c(r31)

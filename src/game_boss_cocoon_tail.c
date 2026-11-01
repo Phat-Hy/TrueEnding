@@ -22,7 +22,7 @@ extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void fn_800F7FD8(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8C6C(void);
+extern void scissor_clipFrustum(void);
 extern void fn_80107A68(void);
 extern void fn_8012A1B8(void);
 extern void fn_8012A288(void);
@@ -1476,7 +1476,7 @@ lbl_fn_804638A4_0000131C:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
 lbl_fn_804638A4_00001378:
     lwz r0, 0x124(r1)
     psq_l f31, 0x118(r1), 0, 0
@@ -2142,7 +2142,7 @@ lbl_fn_80463F20_00001CA0:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     lwz r0, 0x18f4(r31)
     cmpwi r0, 0x0
     beq lbl_fn_80463F20_00001D2C

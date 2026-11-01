@@ -13,7 +13,7 @@ extern void vec3_copy(void);
 extern void fn_8000D9E8(void);
 extern void fn_8000D9F8(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
-extern void fn_8003E4A4(void);
+extern void str_initFromCStr(void);
 extern void fn_8004203C(void);
 extern void fn_80042108(void);
 extern void fn_8004212C(void);
@@ -35,7 +35,7 @@ extern void fn_8008B978(void);
 extern void lockon_updateTarget(void);
 extern void fn_800971D4(void);
 extern void atn_Anim_applyLayerTransform(void);
-extern void fn_800BFAC8(void);
+extern void motion_updateFogAdj(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
 extern void fn_800EC254(void);
@@ -57,7 +57,7 @@ extern void equip_getGlobalManager(void);
 extern void boss_updatePhaseState(void);
 extern void fn_8013C504(void);
 extern void fn_80154654(void);
-extern void fn_8015495C(void);
+extern void equip_applyToCharacter(void);
 extern void fn_80158BB4(void);
 extern void fn_8016DF3C(void);
 extern void fn_8016E4C4(void);
@@ -481,14 +481,14 @@ asm void fn_80452710(void)
     stw r4, 0x12a4(r28)
     addi r4, r30, lbl_807548FC@l
     stw r0, 0x7ec(r28)
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r30, r30, lbl_807548FC@l
     addi r3, r1, 0x20
     addi r4, r30, 0x18
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x14
     addi r4, r29, 0x2c
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x74
     addi r4, r30, 0x2b
     li r5, 0x0
@@ -807,7 +807,7 @@ lbl_fn_80452B6C_0000087C:
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     li r0, 0x0
     stw r0, 0xd1c(r30)
     mr r3, r30
@@ -831,7 +831,7 @@ lbl_fn_80452B6C_000008F4:
     lwz r30, 0x48(r3)
     li r7, 0x1
     mr r3, r30
-    bl fn_8015495C
+    bl equip_applyToCharacter
     li r0, 0x0
     stw r0, 0xd1c(r30)
     mr r3, r30
@@ -903,7 +903,7 @@ lbl_fn_80452B6C_00000A04:
     lwz r4, lbl_8087EFB4
     addi r3, r1, 0x8
     addi r5, r1, 0x14
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f1, 0x10(r1)
     lfs f3, lbl_80886B6C
     fcmpo cr0, f1, f3
@@ -1151,14 +1151,14 @@ lbl_fn_80452F14_00000D28:
     lis r29, lbl_807549D0@ha
     addi r3, r1, 0x2c
     addi r4, r29, lbl_807549D0@l
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r30, r29, lbl_807549D0@l
     addi r3, r1, 0x20
     addi r4, r30, 0x18
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x14
     addi r4, r28, 0x2c
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x74
     addi r4, r30, 0x2b
     li r5, 0x0

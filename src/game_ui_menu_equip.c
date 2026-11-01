@@ -25,7 +25,7 @@ extern void fn_801070C8(void);
 extern void fn_80134168(void);
 extern void fn_8013CB68(void);
 extern void fn_801446F0(void);
-extern void fn_8015495C(void);
+extern void equip_applyToCharacter(void);
 extern void fn_80164B00(void);
 extern void fn_80164DCC(void);
 extern void fn_8016DCD4(void);
@@ -295,7 +295,7 @@ asm void fn_801B73F0(void)
     li r4, 0x0
     lwz r3, 0x4(r3)
     addi r31, r3, 0xb0
-    bl fn_8015495C
+    bl equip_applyToCharacter
     li r0, 0x1
     stw r0, 0x34c(r31)
     lfs f0, lbl_808824F0
@@ -596,7 +596,7 @@ asm void fn_801B77DC(void)
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     lwz r3, 0x4(r31)
     lwz r0, 0x12a4(r3)
     rlwinm r0, r0, 0, 27, 25

@@ -24,9 +24,9 @@ extern void fn_801240B4(void);
 extern void fn_80133130(void);
 extern void fn_801446F0(void);
 extern void fn_801539E0(void);
-extern void fn_8015495C(void);
+extern void equip_applyToCharacter(void);
 extern void fn_80155DAC(void);
-extern void fn_8016DA4C(void);
+extern void debuff_clearStatus(void);
 extern void actor_getMovementFlags(void);
 extern void fn_80192758(void);
 extern void fn_801A4B00(void);
@@ -227,7 +227,7 @@ lbl_fn_801A6364_00000130:
     li r0, 0x1
     stw r0, 0x28(r3)
     lwz r3, 0x4(r3)
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lwz r27, 0x4(r29)
     addi r3, r1, 0x58
     lfs f3, lbl_80882178
@@ -383,7 +383,7 @@ lbl_fn_801A6364_0000036C:
     stw r0, 0x638(r7)
     li r7, 0x1
     lwz r3, 0x4(r29)
-    bl fn_8015495C
+    bl equip_applyToCharacter
 lbl_fn_801A6364_000003A8:
     li r31, 0x1
 lbl_fn_801A6364_000003AC:
@@ -843,7 +843,7 @@ lbl_fn_801A6CFC_00000A0C:
     psq_st f1, 0x528(r4), 0, 0
     stfs f2, 0x530(r4)
     lwz r3, 0x4(r3)
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lwz r29, 0x4(r31)
     addi r3, r1, 0x38
     lfs f3, lbl_80882178
@@ -938,7 +938,7 @@ lbl_fn_801A6CFC_00000B70:
     stw r0, 0x638(r7)
     li r7, 0x1
     lwz r3, 0x4(r31)
-    bl fn_8015495C
+    bl equip_applyToCharacter
 lbl_fn_801A6CFC_00000BC8:
     li r27, 0x1
 lbl_fn_801A6CFC_00000BCC:

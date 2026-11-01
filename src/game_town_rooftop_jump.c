@@ -7,7 +7,7 @@ extern void _savegpr_27(void);
 extern void fn_80044C30(void);
 extern void fn_80064AC4(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_800BFAC8(void);
+extern void motion_updateFogAdj(void);
 extern void str_findChar(void);
 extern void fn_80133BD8(void);
 extern void fn_801F48C8(void);
@@ -371,7 +371,7 @@ lbl_fn_803DCD34_00000440:
     stfs f2, 0x28(r1)
     lwz r4, lbl_8087EFB4
     psq_st f1, 0x0(r5), 0, 0
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f6, 0x1c(r1)
     lfs f0, lbl_80885D60
     fcmpo cr0, f6, f0

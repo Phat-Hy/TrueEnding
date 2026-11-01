@@ -16,7 +16,7 @@ extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void route_interpolatePath(void);
-extern void fn_80087E9C(void);
+extern void route_createWaypoint(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
 extern void atn_LH_Texture_destructAndFree(void);
@@ -988,7 +988,7 @@ lbl_fn_80079BC8_00000BD0:
     addi r5, r29, 0x8
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     addi r31, r31, lbl_807318A0@l
     lfs f1, lbl_80880B00
     lfs f2, lbl_80880B34
@@ -1046,7 +1046,7 @@ lbl_fn_80079BC8_00000CB4:
     addi r5, r29, 0x8
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     addi r31, r31, lbl_807318A0@l
     lfs f1, lbl_80880B24
     lfs f2, lbl_80880B04
@@ -1056,7 +1056,7 @@ lbl_fn_80079BC8_00000CB4:
     addi r5, r29, 0x14
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_80880B00
     mr r3, r30
     lfs f2, lbl_80880B34
@@ -1123,7 +1123,7 @@ lbl_fn_80079BC8_00000DE0:
     addi r5, r29, 0x14
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_80880B00
     mr r3, r30
     lfs f2, lbl_80880B04

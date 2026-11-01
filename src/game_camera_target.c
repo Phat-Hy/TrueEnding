@@ -25,14 +25,14 @@ extern void wcs_vformat(void);
 extern void fn_800EB7A0(void);
 extern void fn_800EE360(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8C6C(void);
+extern void scissor_clipFrustum(void);
 extern void fn_801092C8(void);
 extern void fn_80109828(void);
 extern void boss_updatePhaseState(void);
 extern void quest_updateFlow(void);
 extern void fn_8014C540(void);
-extern void fn_8015495C(void);
-extern void fn_8016DA4C(void);
+extern void equip_applyToCharacter(void);
+extern void debuff_clearStatus(void);
 extern void actor_setState(void);
 extern void fn_8017039C(void);
 extern void fn_80170A20(void);
@@ -663,9 +663,9 @@ asm void fn_802E177C(void)
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     mr r3, r28
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     li r0, 0x2
     stw r0, 0x58c(r28)
     mr r3, r28
@@ -2029,7 +2029,7 @@ lbl_fn_802E289C_00001A44:
     lfs f1, lbl_808846EC
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     b lbl_fn_802E289C_00001CCC
     lfs f31, 0x2e4(r31)
     addi r3, r31, 0xb0
@@ -2068,7 +2068,7 @@ lbl_fn_802E289C_00001ADC:
     lfs f1, lbl_808846EC
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     b lbl_fn_802E289C_00001CCC
     lfs f31, 0x2e4(r31)
     addi r3, r31, 0xb0
@@ -2107,7 +2107,7 @@ lbl_fn_802E289C_00001B74:
     lfs f1, lbl_808846EC
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     b lbl_fn_802E289C_00001CCC
     lwz r0, 0x55c(r31)
     cmpwi r0, 0x6

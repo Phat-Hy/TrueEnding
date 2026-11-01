@@ -14,7 +14,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void quest_updateFlow(void);
 extern void fn_801539E0(void);
 extern void fn_80154344(void);
-extern void fn_8015495C(void);
+extern void equip_applyToCharacter(void);
 extern void fn_80155DAC(void);
 extern void fn_80178208(void);
 extern void fn_80192758(void);
@@ -191,7 +191,7 @@ asm void fn_801B3EEC(void)
     stw r0, 0x638(r7)
     li r7, 0x1
     lwz r3, 0x4(r30)
-    bl fn_8015495C
+    bl equip_applyToCharacter
 lbl_fn_801B3EEC_00000114:
     li r3, 0x1
     b lbl_fn_801B3EEC_000001BC
@@ -632,7 +632,7 @@ lbl_fn_801B44E8_000006E8:
     ori r0, r0, 0x1
     stw r0, 0x5c0(r3)
     lwz r3, 0x4(r30)
-    bl fn_8015495C
+    bl equip_applyToCharacter
     lwz r3, 0x4(r30)
     li r0, 0x1
     lfs f1, lbl_80882484

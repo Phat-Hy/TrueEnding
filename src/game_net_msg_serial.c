@@ -31,7 +31,7 @@ extern void fn_8050E098(void);
 extern void fn_80624D40(void);
 extern void fn_80698828(void);
 extern void fn_806A8E40(void);
-extern void fn_806B0E30(void);
+extern void net_getMyAid(void);
 extern void fn_806B1250(void);
 
 /* External data declarations */
@@ -920,7 +920,7 @@ asm void fn_804FB224(void)
     beq lbl_fn_804FB224_00000ADC
     b lbl_fn_804FB224_00000B04
 lbl_fn_804FB224_00000ADC:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r31, r3, 24
     b lbl_fn_804FB224_00000B04
 lbl_fn_804FB224_00000AE8:
@@ -2031,7 +2031,7 @@ asm void fn_804FC0D8(void)
     li r29, 0x0
     b lbl_fn_804FC0D8_0000197C
 lbl_fn_804FC0D8_00001954:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r29, r3, 24
     b lbl_fn_804FC0D8_0000197C
 lbl_fn_804FC0D8_00001960:

@@ -7,14 +7,14 @@ extern void __register_global_object(void);
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8003EFB0(void);
+extern void ui_destroyWidget(void);
 extern void fn_80051B70(void);
 extern void mem_alloc(void);
 extern void route_interpolatePath(void);
-extern void fn_80087E9C(void);
+extern void route_createWaypoint(void);
 extern void fn_80088724(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_800BFAC8(void);
+extern void motion_updateFogAdj(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_constructor(void);
@@ -366,7 +366,7 @@ lbl_fn_805A4A58_000000F4:
     lwz r4, lbl_8087EFB4
     stfs f8, 0xa8(r1)
     stfs f0, 0xa4(r1)
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f9, 0xe0(r1)
     addi r4, r1, 0x68
     lfs f8, 0xb8(r1)
@@ -388,7 +388,7 @@ lbl_fn_805A4A58_000000F4:
     stfs f0, 0x98(r1)
     stfs f9, 0x9c(r1)
     stfs f8, 0xa0(r1)
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     addi r3, r1, 0x5c
     lfs f2, 0x64(r1)
     psq_l f1, 0x0(r3), 0, 0
@@ -570,11 +570,11 @@ asm void fn_805A4F84(void)
     lis r3, lbl_807C6BB8@ha
     li r0, 0x0
     stwu r0, lbl_807C6BB8@l(r3)
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     li r31, 0x1
     lis r5, lbl_807C95A0@ha
     stw r0, 0x4(r3)
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     addi r5, r5, lbl_807C95A0@l
     stw r0, 0x8(r3)
     stw r31, 0xc(r3)
@@ -765,7 +765,7 @@ asm void fn_805A5224(void)
     mr r29, r3
     mr r3, r30
     addi r5, r29, 0x528
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_80888284
     mr r3, r30
     lfs f2, lbl_80888288
@@ -783,7 +783,7 @@ asm void fn_805A5224(void)
     addi r5, r29, 0x540
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_8088824C
     mr r3, r30
     lfs f2, lbl_80888280

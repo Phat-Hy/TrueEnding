@@ -19,8 +19,8 @@ extern void atn_Anim_getLayerDuration(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void fn_800FB4B0(void);
-extern void fn_8015495C(void);
-extern void fn_8016DA4C(void);
+extern void equip_applyToCharacter(void);
+extern void debuff_clearStatus(void);
 extern void fn_80178864(void);
 extern void fn_801789D8(void);
 extern void fn_80192758(void);
@@ -771,7 +771,7 @@ lbl_fn_801CB2D4_0000084C:
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
 lbl_fn_801CB2D4_00000900:
     li r30, 0x1
 lbl_fn_801CB2D4_00000904:
@@ -1138,7 +1138,7 @@ lbl_fn_801CB76C_00000DCC:
     li r29, 0x1
     stw r29, 0x30(r3)
     lwz r3, 0x4(r3)
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lwz r27, 0x4(r30)
     lwz r26, lbl_8087F048
     lwz r28, 0x638(r27)

@@ -10,7 +10,7 @@ extern void fn_80062C8C(void);
 extern void fn_80063484(void);
 extern void fn_80063764(void);
 extern void fn_8006F2F0(void);
-extern void fn_800BFAC8(void);
+extern void motion_updateFogAdj(void);
 extern void fn_801255C8(void);
 extern void fn_80128A30(void);
 extern void fn_80139560(void);
@@ -1574,7 +1574,7 @@ lbl_fn_8017D13C_000013E0:
     stfs f0, 0x2c(r1)
     stfs f1, 0x30(r1)
     stfs f2, 0x34(r1)
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f1, 0x1a0(r1)
     lfs f0, lbl_80881B78
     fcmpo cr0, f1, f0

@@ -9,7 +9,7 @@ extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800F8574(void);
-extern void fn_800F8C6C(void);
+extern void scissor_clipFrustum(void);
 extern void fn_80107A68(void);
 extern void fn_80108C10(void);
 extern void fn_8012DF7C(void);
@@ -537,7 +537,7 @@ lbl_fn_80464608_00000634:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     lwz r0, 0x18f4(r31)
     cmpwi r0, 0x0
     beq lbl_fn_80464608_000006C0
@@ -767,7 +767,7 @@ lbl_fn_80464CF0_000009AC:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     b lbl_fn_80464CF0_00000C6C
 lbl_fn_80464CF0_00000A04:
     li r4, 0x0

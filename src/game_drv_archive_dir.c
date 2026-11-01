@@ -20,7 +20,7 @@ extern void str_assignBuffer(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_800BFAC8(void);
+extern void motion_updateFogAdj(void);
 extern void fn_800DBF68(void);
 extern void str_findChar(void);
 extern void wcs_vformat(void);
@@ -42,7 +42,7 @@ extern void fn_801F4CB4(void);
 extern void saveSlot_readSummary(void);
 extern void save_computeCrc32(void);
 extern void fn_801F72D4(void);
-extern void fn_801F837C(void);
+extern void save_findEntryByName(void);
 extern void fn_801F8830(void);
 extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
@@ -1745,7 +1745,7 @@ lbl_fn_805AC75C_00001658:
     lwz r4, lbl_8087EFB4
     mr r5, r16
     addi r3, r1, 0x98
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lwz r4, 0x15b0(r15)
     lis r16, lbl_807639F8@ha
     addi r16, r16, lbl_807639F8@l
@@ -2270,12 +2270,12 @@ lbl_fn_805AC75C_00001DDC:
     addi r4, r17, 0x194
     lwz r3, 0x15bc(r14)
     lwz r5, 0x8(r5)
-    bl fn_801F837C
+    bl save_findEntryByName
     lwz r5, 0xa8(r14)
     addi r4, r17, 0x199
     lwz r3, 0x15bc(r14)
     lwz r5, 0x8(r5)
-    bl fn_801F837C
+    bl save_findEntryByName
     lwz r0, 0x5c(r15)
     cmpw r16, r0
     bne lbl_fn_805AC75C_00001E7C

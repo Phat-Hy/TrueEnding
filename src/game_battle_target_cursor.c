@@ -5,7 +5,7 @@
 extern void __register_global_object(void);
 extern void _restgpr_16(void);
 extern void _savegpr_16(void);
-extern void fn_8003EFB0(void);
+extern void ui_destroyWidget(void);
 extern void fn_80051BC4(void);
 extern void talk_formatQuotedString(void);
 extern void fn_8005BBF8(void);
@@ -13,7 +13,7 @@ extern void fn_8005BCE8(void);
 extern void mem_alloc(void);
 extern void route_findNextWaypoint(void);
 extern void route_createSegment(void);
-extern void fn_80087E9C(void);
+extern void route_createWaypoint(void);
 extern void fn_80088724(void);
 extern void node_createNamedChild(void);
 extern void fn_8008AD4C(void);
@@ -64,7 +64,7 @@ extern void strcmp(void);
 extern void atoi(void);
 extern void __construct_new_array(void);
 extern void fn_806A8E40(void);
-extern void fn_806B0E30(void);
+extern void net_getMyAid(void);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
 
@@ -838,7 +838,7 @@ lbl_fn_804091FC_000009A0:
     addi r5, r29, 0x6c
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_808862AC
     mr r3, r30
     lfs f2, lbl_808862B0
@@ -856,7 +856,7 @@ lbl_fn_804091FC_000009A0:
     addi r5, r29, 0x90
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     mr r3, r30
     addi r4, r31, 0x4f
     addi r5, r29, 0x9c
@@ -889,7 +889,7 @@ lbl_fn_804091FC_000009A0:
     addi r5, r29, 0x924
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lwz r0, 0x44(r1)
     lwz r31, 0x3c(r1)
     lwz r30, 0x38(r1)
@@ -1558,7 +1558,7 @@ lbl_fn_804096D4_000013F0:
     li r0, 0x0
     b lbl_fn_804096D4_0000144C
 lbl_fn_804096D4_00001424:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804096D4_0000144C
 lbl_fn_804096D4_00001430:
@@ -1807,11 +1807,11 @@ lbl_fn_804096D4_00001778:
     lis r3, lbl_807C6BB8@ha
     li r0, 0x0
     stwu r0, lbl_807C6BB8@l(r3)
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     li r16, 0x1
     lis r5, lbl_807C8888@ha
     stw r0, 0x4(r3)
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     addi r5, r5, lbl_807C8888@l
     stw r0, 0x8(r3)
     stw r16, 0xc(r3)
@@ -1842,11 +1842,11 @@ lbl_fn_804096D4_000017B8:
     extsb. r0, r0
     bne lbl_fn_804096D4_00001844
     li r16, 0x1
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     lis r5, lbl_807C8888@ha
     stw r19, 0x0(r18)
     mr r3, r18
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     stw r19, 0x4(r18)
     addi r5, r5, lbl_807C8888@l
     stw r19, 0x8(r18)
@@ -1902,7 +1902,7 @@ lbl_fn_804096D4_000018B8:
     li r0, 0x0
     b lbl_fn_804096D4_00001918
 lbl_fn_804096D4_000018F0:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804096D4_00001918
 lbl_fn_804096D4_000018FC:

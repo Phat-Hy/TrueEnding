@@ -15,7 +15,7 @@ extern void fn_8000DB1C(void);
 extern void fn_80012A1C(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
-extern void fn_8003E4A4(void);
+extern void str_initFromCStr(void);
 extern void mem_alloc(void);
 extern void str_calcHash(void);
 extern void fn_800DC980(void);
@@ -332,7 +332,7 @@ lbl_fn_80223A10_00000298:
     bl sprintf
     addi r3, r1, 0x44
     addi r4, r1, 0x70
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x60
     addi r4, r1, 0x44
     bl fn_801207D4
@@ -351,7 +351,7 @@ lbl_fn_80223A10_00000298:
     bl sprintf
     addi r3, r1, 0x38
     addi r4, r1, 0x70
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x60
     addi r4, r1, 0x38
     bl fn_801207D4
@@ -367,7 +367,7 @@ lbl_fn_80223A10_00000298:
     bl sprintf
     addi r3, r1, 0x2c
     addi r4, r1, 0x70
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x60
     addi r4, r1, 0x2c
     bl fn_801207D4
@@ -383,7 +383,7 @@ lbl_fn_80223A10_00000298:
     bl sprintf
     addi r3, r1, 0x20
     addi r4, r1, 0x70
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x60
     addi r4, r1, 0x20
     bl fn_801207D4
@@ -403,7 +403,7 @@ lbl_fn_80223A10_00000298:
     bl sprintf
     addi r3, r1, 0x14
     addi r4, r1, 0x70
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x60
     addi r4, r1, 0x14
     bl fn_801207D4
@@ -419,7 +419,7 @@ lbl_fn_80223A10_00000298:
     bl sprintf
     addi r3, r1, 0x8
     addi r4, r1, 0x70
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x60
     addi r4, r1, 0x8
     bl fn_801207D4
@@ -697,7 +697,7 @@ lbl_fn_80223F50_00000728:
     bl fn_80222A24
     mr r4, r3
     addi r3, r1, 0x38
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x54
     addi r4, r1, 0x38
     bl fn_801207D4
@@ -708,7 +708,7 @@ lbl_fn_80223F50_00000728:
     bl fn_80218218
     mr r4, r3
     addi r3, r1, 0x2c
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x54
     addi r4, r1, 0x2c
     bl fn_801207D4
@@ -743,7 +743,7 @@ lbl_fn_80223F50_00000728:
     beq lbl_fn_80223F50_00000834
     addi r4, r31, 0x337
 lbl_fn_80223F50_00000834:
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x54
     addi r4, r1, 0x8
     bl fn_801207D4
@@ -837,7 +837,7 @@ asm void fn_80224184(void)
 lbl_fn_80224184_00000984:
     addi r3, r1, 0x8
     addi r4, r29, 0x14
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x24
     addi r4, r1, 0x8
     bl fn_801207D4
@@ -1210,7 +1210,7 @@ lbl_fn_80224638_00000E00:
     bl fn_80222A24
     mr r4, r3
     addi r3, r1, 0x44
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x54
     addi r4, r1, 0x44
     bl fn_801207D4
@@ -1242,7 +1242,7 @@ lbl_fn_80224638_00000ECC:
 lbl_fn_80224638_00000ED4:
     mr r4, r3
     addi r3, r1, 0x38
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x54
     addi r4, r1, 0x38
     bl fn_801207D4
@@ -1255,7 +1255,7 @@ lbl_fn_80224638_00000ED4:
     bge lbl_fn_80224638_00000F20
     addi r3, r1, 0x2c
     addi r4, r30, 0x14
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r4, r1, 0x2c
     li r29, 0x1
     b lbl_fn_80224638_00000F3C
@@ -1288,7 +1288,7 @@ lbl_fn_80224638_00000F6C:
     bge lbl_fn_80224638_00000F94
     addi r3, r1, 0x14
     addi r4, r30, 0x14
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r4, r1, 0x14
     li r28, 0x1
     b lbl_fn_80224638_00000FB0

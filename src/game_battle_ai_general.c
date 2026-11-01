@@ -13,7 +13,7 @@ extern void _savegpr_23(void);
 extern void _savegpr_26(void);
 extern void dtor_80013D60(void);
 extern void dtor_80084684(void);
-extern void fn_8003E4A4(void);
+extern void str_initFromCStr(void);
 extern void fn_8004212C(void);
 extern void fn_80043EAC(void);
 extern void Arms_destructor(void);
@@ -30,7 +30,7 @@ extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void route_findNextWaypoint(void);
 extern void route_createSegment(void);
-extern void fn_80087E9C(void);
+extern void route_createWaypoint(void);
 extern void fn_80088724(void);
 extern void node_createNamedChild(void);
 extern void fn_8008A4E0(void);
@@ -2141,7 +2141,7 @@ lbl_fn_8043DD78_00001B20:
     stw r3, 0x8(r1)
     addi r3, r1, 0x18
     addi r4, r1, 0x30
-    bl fn_8003E4A4
+    bl str_initFromCStr
     mr r3, r29
     addi r4, r1, 0x18
     bl fn_8043E134
@@ -2180,7 +2180,7 @@ lbl_fn_8043DD78_00001B9C:
     bl talk_formatQuotedString
     mr r4, r3
     addi r3, r1, 0xc
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r29, 0x114
     addi r4, r1, 0xc
     bl fn_801207D4
@@ -2710,7 +2710,7 @@ lbl_fn_8043E580_000022B0:
     addi r5, r29, 0x6c
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_808869E4
     mr r3, r30
     lfs f2, lbl_808869E8
@@ -2728,7 +2728,7 @@ lbl_fn_8043E580_000022B0:
     addi r5, r29, 0x90
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     mr r3, r30
     addi r4, r31, 0x73
     addi r5, r29, 0x198

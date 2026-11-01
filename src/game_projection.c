@@ -14,7 +14,7 @@ extern void fn_80063D3C(void);
 extern void fn_8006EF48(void);
 extern void fn_8006F2F0(void);
 extern void fn_8008CD60(void);
-extern void fn_800BFAC8(void);
+extern void motion_updateFogAdj(void);
 extern void str_findChar(void);
 extern void wcs_vformat(void);
 extern void fn_80103484(void);
@@ -559,7 +559,7 @@ lbl_fn_800F5314_0000067C:
     fadds f0, f3, f0
     lwz r4, lbl_8087EFB4
     stfs f0, 0x2b4(r1)
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     addi r3, r1, 0x1f0
     lfs f2, 0x1f8(r1)
     psq_l f1, 0x0(r3), 0, 0
@@ -716,7 +716,7 @@ lbl_fn_800F5314_000008C0:
     addi r3, r1, 0x2a4
     lwz r4, lbl_8087EFB4
     addi r5, r5, 0x528
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f0, 0x2ac(r1)
     fcmpo cr0, f0, f30
     blt lbl_fn_800F5314_00000D30
@@ -1063,7 +1063,7 @@ lbl_fn_800F5314_00000DBC:
     lwz r4, lbl_8087EFB4
     addi r3, r1, 0x298
     addi r5, r21, 0x528
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f0, 0x2a0(r1)
     fcmpo cr0, f0, f29
     blt lbl_fn_800F5314_00001148
@@ -1351,7 +1351,7 @@ lbl_fn_800F5314_0000118C:
     stfs f0, 0x1cc(r1)
     stfs f3, 0x1d0(r1)
     stfs f4, 0x1d4(r1)
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     addis r3, r31, 0x3
     lwz r5, 0x63bc(r3)
     cmpwi r5, 0x12c
@@ -1420,7 +1420,7 @@ lbl_fn_800F5314_000012E4:
     stfs f0, 0x1b4(r1)
     stfs f3, 0x1b8(r1)
     stfs f4, 0x1bc(r1)
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f0, 0x27c(r1)
     fcmpo cr0, f0, f28
     blt lbl_fn_800F5314_000013A0
@@ -2062,7 +2062,7 @@ lbl_fn_800F5314_00001CF8:
     mulli r0, r0, 0x28
     add r5, r5, r0
     addi r5, r5, 0xc
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f0, 0x234(r1)
     fcmpo cr0, f29, f0
     cror eq, lt, eq

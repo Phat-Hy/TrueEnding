@@ -18,7 +18,7 @@ extern void morph_updateMesh(void);
 extern void atn_Task_setActive(void);
 extern void str_parseInt(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8C6C(void);
+extern void scissor_clipFrustum(void);
 extern void fn_80108F38(void);
 extern void boss_updatePhaseState(void);
 extern void quest_updateFlow(void);
@@ -1068,7 +1068,7 @@ lbl_fn_8027D838_00000D5C:
     lfs f1, lbl_80883948
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     b lbl_fn_8027D838_00001260
     lfs f31, 0x2e4(r31)
     addi r3, r31, 0xb0
@@ -1115,7 +1115,7 @@ lbl_fn_8027D838_00000E14:
     lfs f1, lbl_80883948
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     b lbl_fn_8027D838_00001260
     lfs f31, 0x2e4(r31)
     addi r3, r31, 0xb0
@@ -1162,7 +1162,7 @@ lbl_fn_8027D838_00000ECC:
     lfs f1, lbl_80883948
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     b lbl_fn_8027D838_00001260
     mr r3, r31
     bl fn_8027F8A8

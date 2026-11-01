@@ -32,7 +32,7 @@ extern void saveSlot_readSummary(void);
 extern void fn_801F64D0(void);
 extern void save_computeCrc32(void);
 extern void fn_801F6E78(void);
-extern void fn_801F837C(void);
+extern void save_findEntryByName(void);
 extern void fn_801F8598(void);
 extern void thread_dispatchToQueue(void);
 extern void fn_801FEF40(void);
@@ -1945,7 +1945,7 @@ lbl_fn_80572454_000018A0:
     stw r0, 0x38(r5)
     lwz r3, 0x4c(r29)
     lwz r5, 0x8(r6)
-    bl fn_801F837C
+    bl save_findEntryByName
     lwz r3, lbl_8087F8A0
     lwz r4, 0x70(r31)
     bl fn_8054A340

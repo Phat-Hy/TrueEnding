@@ -19,7 +19,7 @@ extern void mem_alloc(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
-extern void fn_80087E9C(void);
+extern void route_createWaypoint(void);
 extern void fn_80088724(void);
 extern void node_createNamedChild(void);
 extern void fn_8008AD4C(void);
@@ -1749,7 +1749,7 @@ lbl_fn_8041B094_000016AC:
     addi r5, r27, 0x6c
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_80886520
     mr r3, r30
     lfs f2, lbl_80886504
@@ -1767,7 +1767,7 @@ lbl_fn_8041B094_000016AC:
     addi r5, r27, 0x90
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     mr r3, r30
     addi r4, r31, 0x93
     addi r5, r27, 0x9c
@@ -1808,7 +1808,7 @@ lbl_fn_8041B094_00001790:
     lfs f3, lbl_8088651C
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lwz r5, 0x530(r27)
     mr r3, r28
     lfs f1, lbl_80886514

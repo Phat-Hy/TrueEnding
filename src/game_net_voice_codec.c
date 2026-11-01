@@ -14,7 +14,7 @@ extern void fn_8050DDE0(void);
 extern void fn_8050DE38(void);
 extern void fn_8050E098(void);
 extern void fn_806A8E40(void);
-extern void fn_806B0E30(void);
+extern void net_getMyAid(void);
 extern void fn_806B1250(void);
 
 /* External data declarations */
@@ -488,7 +488,7 @@ asm void fn_804D8614(void)
     li r0, 0x0
     b lbl_fn_804D8614_0000060C
 lbl_fn_804D8614_000005E4:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804D8614_0000060C
 lbl_fn_804D8614_000005F0:
@@ -536,7 +536,7 @@ lbl_fn_804D8614_00000658:
     li r29, 0x0
     b lbl_fn_804D8614_000006A8
 lbl_fn_804D8614_00000680:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r29, r3, 24
     b lbl_fn_804D8614_000006A8
 lbl_fn_804D8614_0000068C:
@@ -613,7 +613,7 @@ asm void fn_804D87B4(void)
     li r30, 0x0
     b lbl_fn_804D87B4_000007A0
 lbl_fn_804D87B4_00000778:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r30, r3, 24
     b lbl_fn_804D87B4_000007A0
 lbl_fn_804D87B4_00000784:
@@ -718,7 +718,7 @@ asm void fn_804D8914(void)
     li r0, 0x0
     b lbl_fn_804D8914_00000900
 lbl_fn_804D8914_000008D8:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804D8914_00000900
 lbl_fn_804D8914_000008E4:
@@ -1252,7 +1252,7 @@ asm void fn_804D90E4(void)
     li r0, 0x0
     b lbl_fn_804D90E4_000010D4
 lbl_fn_804D90E4_000010AC:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804D90E4_000010D4
 lbl_fn_804D90E4_000010B8:
@@ -1762,7 +1762,7 @@ asm void fn_804D97F4(void)
     li r30, 0x0
     b lbl_fn_804D97F4_000017E0
 lbl_fn_804D97F4_000017B8:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r30, r3, 24
     b lbl_fn_804D97F4_000017E0
 lbl_fn_804D97F4_000017C4:
@@ -1879,7 +1879,7 @@ asm void fn_804D9970(void)
     li r0, 0x0
     b lbl_fn_804D9970_00001960
 lbl_fn_804D9970_00001938:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804D9970_00001960
 lbl_fn_804D9970_00001944:
@@ -1927,7 +1927,7 @@ lbl_fn_804D9970_000019AC:
     li r29, 0x0
     b lbl_fn_804D9970_000019FC
 lbl_fn_804D9970_000019D4:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r29, r3, 24
     b lbl_fn_804D9970_000019FC
 lbl_fn_804D9970_000019E0:

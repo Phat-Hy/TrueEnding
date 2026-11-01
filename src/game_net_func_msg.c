@@ -6,9 +6,9 @@ extern void __register_global_object(void);
 extern void _restgpr_18(void);
 extern void _savegpr_18(void);
 extern void dtor_80084684(void);
-extern void fn_8003EFB0(void);
+extern void ui_destroyWidget(void);
 extern void mem_alloc(void);
-extern void fn_800BFAC8(void);
+extern void motion_updateFogAdj(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
@@ -2798,11 +2798,11 @@ asm void fn_805010C4(void)
     lis r3, lbl_807C6BB8@ha
     li r0, 0x0
     stwu r0, lbl_807C6BB8@l(r3)
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     li r31, 0x1
     lis r5, lbl_807C8F98@ha
     stw r0, 0x4(r3)
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     addi r5, r5, lbl_807C8F98@l
     stw r0, 0x8(r3)
     stw r31, 0xc(r3)
@@ -2832,11 +2832,11 @@ lbl_fn_805010C4_00001360:
     lis r3, lbl_807C6BB8@ha
     li r0, 0x0
     stwu r0, lbl_807C6BB8@l(r3)
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     li r31, 0x1
     lis r5, lbl_807C8F98@ha
     stw r0, 0x4(r3)
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     addi r5, r5, lbl_807C8F98@l
     stw r0, 0x8(r3)
     stw r31, 0xc(r3)
@@ -3399,7 +3399,7 @@ lbl_fn_8050158C_00001AE4:
     addi r3, r1, 0x14
     lwz r4, lbl_8087EFB4
     addi r5, r5, 0x1a4
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f0, 0x1c(r1)
     fcmpo cr0, f31, f0
     cror eq, lt, eq

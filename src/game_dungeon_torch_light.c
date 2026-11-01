@@ -5,7 +5,7 @@
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void str_assignBuffer(void);
-extern void fn_800BFAC8(void);
+extern void motion_updateFogAdj(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_unlink(void);
@@ -393,7 +393,7 @@ lbl_fn_803E5C60_000003D0:
     lwz r4, lbl_8087EFB4
     addi r3, r1, 0xc
     addi r5, r1, 0x18
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f0, lbl_80885D58
     lfs f1, 0x14(r1)
     fcmpo cr0, f0, f1

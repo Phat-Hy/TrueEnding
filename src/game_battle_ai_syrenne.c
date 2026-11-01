@@ -15,7 +15,7 @@ extern void fn_80051CD8(void);
 extern void mem_alloc(void);
 extern void fn_8008A4E0(void);
 extern void fn_8008A76C(void);
-extern void fn_800BFAC8(void);
+extern void motion_updateFogAdj(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB688(void);
@@ -498,7 +498,7 @@ lbl_fn_804348C4_000003EC:
     lwz r4, lbl_8087EFB4
     stfs f8, 0x110(r1)
     stfs f0, 0x10c(r1)
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f9, 0x148(r1)
     addi r4, r1, 0xc8
     lfs f8, 0x120(r1)
@@ -520,7 +520,7 @@ lbl_fn_804348C4_000003EC:
     stfs f0, 0x100(r1)
     stfs f9, 0x104(r1)
     stfs f8, 0x108(r1)
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     addi r3, r1, 0xbc
     lfs f2, 0xc4(r1)
     psq_l f1, 0x0(r3), 0, 0

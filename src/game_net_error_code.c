@@ -18,7 +18,7 @@ extern void mem_getAllocSize(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
 extern void fn_80087BB4(void);
-extern void fn_80087E9C(void);
+extern void route_createWaypoint(void);
 extern void fn_80088724(void);
 extern void fn_80088AF4(void);
 extern void node_createNamedChild(void);
@@ -34,7 +34,7 @@ extern void fn_801D082C(void);
 extern void save_validateHeader(void);
 extern void save_computeCrc32(void);
 extern void fn_801F7590(void);
-extern void fn_801F837C(void);
+extern void save_findEntryByName(void);
 extern void fn_801F8598(void);
 extern void thread_findAndNotify(void);
 extern void fn_80201E78(void);
@@ -196,7 +196,7 @@ lbl_fn_8051B168_00000034:
     mr r3, r29
     addi r4, r24, 0x157
     addi r5, r25, 0x8
-    bl fn_801F837C
+    bl save_findEntryByName
     b lbl_fn_8051B168_000000D0
 lbl_fn_8051B168_000000B0:
     lwz r3, lbl_8087F4F0
@@ -211,7 +211,7 @@ lbl_fn_8051B168_000000D0:
     lwz r5, 0x8(r22)
     mr r3, r29
     addi r4, r24, 0x15b
-    bl fn_801F837C
+    bl save_findEntryByName
     lwz r3, lbl_8087F4F0
     mr r4, r22
     bl fn_80444BE8
@@ -228,7 +228,7 @@ lbl_fn_8051B168_00000104:
     mr r3, r29
     addi r4, r24, 0x157
     addi r5, r25, 0xe
-    bl fn_801F837C
+    bl save_findEntryByName
     lwz r5, 0xb8(r26)
     mr r3, r29
     lwz r6, lbl_8087F1E4
@@ -243,7 +243,7 @@ lbl_fn_8051B168_00000104:
 lbl_fn_8051B168_0000014C:
     la r5, lbl_808813D0
 lbl_fn_8051B168_00000150:
-    bl fn_801F837C
+    bl save_findEntryByName
     lwz r3, lbl_8087F4F0
     bl fn_80444C48
     mr r22, r3
@@ -1466,7 +1466,7 @@ lbl_fn_8051C3E0_000012B4:
     addi r5, r28, 0x4864
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_80887970
     mr r3, r30
     lfs f2, lbl_80887974
@@ -1475,7 +1475,7 @@ lbl_fn_8051C3E0_000012B4:
     addi r5, r28, 0x4870
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     mr r3, r30
     addi r4, r31, 0xee
     addi r5, r28, 0x48a8
@@ -1508,7 +1508,7 @@ lbl_fn_8051C3E0_000012B4:
     addi r5, r28, 0x487c
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     mr r3, r30
     addi r4, r31, 0x119
     bl node_createNamedChild
@@ -1625,7 +1625,7 @@ lbl_fn_8051C3E0_000012B4:
     addi r5, r28, 0xa4
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_80887970
     mr r3, r30
     lfs f2, lbl_80887974
@@ -1634,7 +1634,7 @@ lbl_fn_8051C3E0_000012B4:
     addi r5, r28, 0xb0
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_80887970
     mr r3, r30
     lfs f2, lbl_80887974
@@ -1643,7 +1643,7 @@ lbl_fn_8051C3E0_000012B4:
     addi r5, r28, 0xbc
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_80887970
     mr r3, r30
     lfs f2, lbl_80887974
@@ -1652,7 +1652,7 @@ lbl_fn_8051C3E0_000012B4:
     addi r5, r28, 0xc8
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)

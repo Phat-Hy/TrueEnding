@@ -16,7 +16,7 @@ extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800A2D20(void);
-extern void fn_800BFAC8(void);
+extern void motion_updateFogAdj(void);
 extern void atn_Task_setActive(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
@@ -39,8 +39,8 @@ extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void fn_8014C540(void);
 extern void fn_80151448(void);
-extern void fn_8015495C(void);
-extern void fn_8016DA4C(void);
+extern void equip_applyToCharacter(void);
+extern void debuff_clearStatus(void);
 extern void actor_setState(void);
 extern void fn_801765D8(void);
 extern void fn_80178208(void);
@@ -1492,7 +1492,7 @@ lbl_fn_802458BC_000012FC:
     lwz r4, lbl_8087EFB4
     stfs f1, 0x1c(r1)
     stfs f0, 0x18(r1)
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f0, lbl_80883190
     lfs f1, 0x10(r1)
     fcmpo cr0, f0, f1
@@ -1735,9 +1735,9 @@ lbl_fn_80245BBC_000015A0:
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     mr r3, r31
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lwz r0, 0x14b8(r31)
     li r3, 0x2
     lfs f0, lbl_8088318C
@@ -1804,9 +1804,9 @@ lbl_fn_80245BBC_00001758:
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     mr r3, r27
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     stw r30, 0x58c(r27)
     stw r29, 0x3fc(r27)
     stfs f31, 0x2fc(r27)

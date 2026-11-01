@@ -9,7 +9,7 @@ extern void dtor_80084684(void);
 extern void sys_copyString(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
-extern void fn_8003E4A4(void);
+extern void str_initFromCStr(void);
 extern void fn_80041C0C(void);
 extern void fn_8004203C(void);
 extern void fn_8004212C(void);
@@ -2107,7 +2107,7 @@ lbl_fn_803EF780_00001948:
     bl talk_formatQuotedString
     mr r4, r3
     addi r3, r1, 0x20
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x38
     addi r4, r1, 0x20
     bl fn_801207D4

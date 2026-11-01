@@ -29,9 +29,9 @@ extern void fn_801446F0(void);
 extern void fn_801539E0(void);
 extern void fn_80154344(void);
 extern void fn_80154654(void);
-extern void fn_8015495C(void);
+extern void equip_applyToCharacter(void);
 extern void fn_80155DAC(void);
-extern void fn_8016DA4C(void);
+extern void debuff_clearStatus(void);
 extern void fn_80188F08(void);
 extern void fn_80188F40(void);
 extern void fn_80191960(void);
@@ -180,7 +180,7 @@ lbl_fn_8018FF6C_000000A0:
     bl fn_8013310C
 lbl_fn_8018FF6C_000000C0:
     lwz r3, 0x4(r31)
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lwz r4, lbl_8087F1E4
     addi r3, r1, 0x10
     lwz r5, 0x4(r31)
@@ -313,7 +313,7 @@ lbl_fn_80190150_00000290:
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     lwz r3, 0x4(r31)
     li r0, 0x0
     stw r0, 0xd1c(r3)
@@ -786,7 +786,7 @@ asm void fn_80190844(void)
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     lwz r4, 0x4(r31)
     lwz r6, 0x7e0(r4)
     rlwinm r0, r6, 0, 26, 26
@@ -849,7 +849,7 @@ asm void fn_801908F0(void)
     rlwinm r0, r0, 0, 27, 25
     stw r0, 0x12a4(r3)
     lwz r3, 0x4(r31)
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lwz r3, 0x4(r31)
     lwz r0, 0x12a4(r3)
     srwi. r0, r0, 31
@@ -1488,7 +1488,7 @@ asm void fn_80191170(void)
     rlwinm r0, r0, 0, 27, 25
     stw r0, 0x12a4(r3)
     lwz r3, 0x4(r30)
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lwz r3, 0x4(r30)
     lwz r0, 0x12a4(r3)
     srwi. r0, r0, 31

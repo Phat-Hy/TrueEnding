@@ -7,14 +7,14 @@ extern void mem_getAllocSize(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8C6C(void);
+extern void scissor_clipFrustum(void);
 extern void fn_80126214(void);
 extern void fn_8013A258(void);
 extern void fn_8013CB68(void);
 extern void quest_ctorRewardItem(void);
 extern void fn_80151448(void);
-extern void fn_8015495C(void);
-extern void fn_8016DA4C(void);
+extern void equip_applyToCharacter(void);
+extern void debuff_clearStatus(void);
 extern void actor_setState(void);
 extern void fn_8017039C(void);
 extern void fn_80170A20(void);
@@ -214,7 +214,7 @@ lbl_fn_802E683C_000001D8:
     lfs f1, lbl_80884768
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     b lbl_fn_802E683C_0000089C
 lbl_fn_802E683C_00000228:
     lfs f28, 0x2e4(r3)
@@ -254,7 +254,7 @@ lbl_fn_802E683C_00000270:
     lfs f1, lbl_80884768
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     b lbl_fn_802E683C_0000089C
 lbl_fn_802E683C_000002C0:
     lwz r0, 0x55c(r3)
@@ -1784,9 +1784,9 @@ asm void fn_802E8084(void)
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     mr r3, r29
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     li r0, 0x2
     stw r0, 0x58c(r29)
     mr r3, r29

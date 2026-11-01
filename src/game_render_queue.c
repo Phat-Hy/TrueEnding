@@ -14,7 +14,7 @@ extern void ref_releaseHandle(void);
 extern void morph_updateMesh(void);
 extern void wcs_vformat(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8C6C(void);
+extern void scissor_clipFrustum(void);
 extern void fn_80109828(void);
 extern void fn_8013A258(void);
 extern void fn_8013CB68(void);
@@ -312,7 +312,7 @@ lbl_fn_802A5A1C_000002D4:
     lfs f1, lbl_80883E40
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     b lbl_fn_802A5A1C_00000DFC
     mr r3, r31
     bl fn_802A8BBC

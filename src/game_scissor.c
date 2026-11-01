@@ -56,9 +56,9 @@ extern u32 lbl_80881510;
 extern u32 lbl_8088151C;
 
 /* Function declarations */
-void fn_800F8C6C(void);
+void scissor_clipFrustum(void);
 
-asm void fn_800F8C6C(void)
+asm void scissor_clipFrustum(void)
 {
     nofralloc
     stwu r1, -0x4f0(r1)
@@ -94,10 +94,10 @@ asm void fn_800F8C6C(void)
     mr r18, r8
     stw r9, 0x18(r1)
     stw r10, 0x1c(r1)
-    bne lbl_fn_800F8C6C_00000090
+    bne lbl_scissor_clipFrustum_00000090
     li r3, 0x0
-    b lbl_fn_800F8C6C_00001820
-lbl_fn_800F8C6C_00000090:
+    b lbl_scissor_clipFrustum_00001820
+lbl_scissor_clipFrustum_00000090:
     lfs f3, lbl_80881478
     li r22, 0x0
     lfs f0, lbl_80881494
@@ -133,8 +133,8 @@ lbl_fn_800F8C6C_00000090:
     lis r27, 0xe39
     li r26, 0x0
     li r23, 0xc
-    b lbl_fn_800F8C6C_000004DC
-lbl_fn_800F8C6C_00000120:
+    b lbl_scissor_clipFrustum_000004DC
+lbl_scissor_clipFrustum_00000120:
     fmr f1, f27
     mr r3, r15
     mr r4, r16
@@ -144,7 +144,7 @@ lbl_fn_800F8C6C_00000120:
     bl fn_800FBA9C
     cmpwi r3, 0x0
     mr r20, r3
-    blt lbl_fn_800F8C6C_000004D8
+    blt lbl_scissor_clipFrustum_000004D8
     mr r3, r21
     mr r4, r20
     bl fn_80148B0C
@@ -169,18 +169,18 @@ lbl_fn_800F8C6C_00000120:
     fsubs f24, f1, f3
     stfs f29, 0x1c0(r1)
     fcmpu cr0, f29, f0
-    bne lbl_fn_800F8C6C_000001C4
+    bne lbl_scissor_clipFrustum_000001C4
     fcmpu cr0, f29, f29
-    bne lbl_fn_800F8C6C_000001C4
+    bne lbl_scissor_clipFrustum_000001C4
     lfs f0, 0x1c4(r1)
     fcmpu cr0, f29, f0
-    bne lbl_fn_800F8C6C_000001C4
+    bne lbl_scissor_clipFrustum_000001C4
     li r0, 0x1
-lbl_fn_800F8C6C_000001C4:
+lbl_scissor_clipFrustum_000001C4:
     cmpwi r0, 0x0
-    beq lbl_fn_800F8C6C_000001D0
+    beq lbl_scissor_clipFrustum_000001D0
     stfs f28, 0x1c0(r1)
-lbl_fn_800F8C6C_000001D0:
+lbl_scissor_clipFrustum_000001D0:
     addi r3, r1, 0x1bc
     mr r4, r3
     bl PSVECNormalize
@@ -195,7 +195,7 @@ lbl_fn_800F8C6C_000001D0:
     cmplw r3, r30
     stw r20, 0x154(r1)
     stfs f24, 0x158(r1)
-    bge lbl_fn_800F8C6C_00000230
+    bge lbl_scissor_clipFrustum_00000230
     addi r4, r3, 0x1
     lwz r3, 0x1d4(r1)
     subi r0, r4, 0x1
@@ -204,12 +204,12 @@ lbl_fn_800F8C6C_000001D0:
     stwux r21, r3, r0
     stw r20, 0x4(r3)
     stfs f24, 0x8(r3)
-    b lbl_fn_800F8C6C_000004D8
-lbl_fn_800F8C6C_00000230:
+    b lbl_scissor_clipFrustum_000004D8
+lbl_scissor_clipFrustum_00000230:
     addi r0, r29, 0x5555
     subf r0, r30, r0
     cmplwi r0, 0x1
-    bge lbl_fn_800F8C6C_0000025C
+    bge lbl_scissor_clipFrustum_0000025C
     lis r3, lbl_80736040@ha
     addi r3, r3, lbl_80736040@l
     addi r4, r3, 0x21d
@@ -217,10 +217,10 @@ lbl_fn_800F8C6C_00000230:
     crclr 6
     bl printf
     bl abort
-lbl_fn_800F8C6C_0000025C:
+lbl_scissor_clipFrustum_0000025C:
     addi r0, r28, 0x71c7
     cmplw r30, r0
-    bge lbl_fn_800F8C6C_00000290
+    bge lbl_scissor_clipFrustum_00000290
     addi r3, r30, 0x1
     subi r4, r24, 0x3333
     slwi r0, r3, 2
@@ -228,18 +228,18 @@ lbl_fn_800F8C6C_0000025C:
     mulhwu r0, r4, r0
     srwi r0, r0, 2
     cmplwi r0, 0x1
-    bge lbl_fn_800F8C6C_000002AC
-    b lbl_fn_800F8C6C_000002AC
-    b lbl_fn_800F8C6C_000002AC
-lbl_fn_800F8C6C_00000290:
+    bge lbl_scissor_clipFrustum_000002AC
+    b lbl_scissor_clipFrustum_000002AC
+    b lbl_scissor_clipFrustum_000002AC
+lbl_scissor_clipFrustum_00000290:
     subi r0, r27, 0x1c72
     cmplw r30, r0
-    bge lbl_fn_800F8C6C_000002AC
+    bge lbl_scissor_clipFrustum_000002AC
     addi r0, r30, 0x1
     srwi r0, r0, 1
     cmplwi r0, 0x1
     cmplwi r0, 0x1
-lbl_fn_800F8C6C_000002AC:
+lbl_scissor_clipFrustum_000002AC:
     lwz r3, 0x1d8(r1)
     addi r0, r29, 0x5555
     lwz r20, 0x1dc(r1)
@@ -253,7 +253,7 @@ lbl_fn_800F8C6C_000002AC:
     stw r25, 0x200(r1)
     stw r26, 0x204(r1)
     stw r3, 0x4c(r1)
-    ble lbl_fn_800F8C6C_00000300
+    ble lbl_scissor_clipFrustum_00000300
     lis r3, lbl_80736040@ha
     addi r3, r3, lbl_80736040@l
     addi r4, r3, 0x21d
@@ -261,10 +261,10 @@ lbl_fn_800F8C6C_000002AC:
     crclr 6
     bl printf
     bl abort
-lbl_fn_800F8C6C_00000300:
+lbl_scissor_clipFrustum_00000300:
     addi r0, r28, 0x71c7
     cmplw r20, r0
-    bge lbl_fn_800F8C6C_00000348
+    bge lbl_scissor_clipFrustum_00000348
     addi r4, r20, 0x1
     subi r5, r24, 0x3333
     slwi r3, r4, 2
@@ -275,34 +275,34 @@ lbl_fn_800F8C6C_00000300:
     srwi r4, r4, 2
     stw r4, 0x44(r1)
     cmplw r4, r0
-    bge lbl_fn_800F8C6C_0000033C
+    bge lbl_scissor_clipFrustum_0000033C
     addi r3, r1, 0x4c
-lbl_fn_800F8C6C_0000033C:
+lbl_scissor_clipFrustum_0000033C:
     lwz r0, 0x0(r3)
     add r20, r20, r0
-    b lbl_fn_800F8C6C_00000384
-lbl_fn_800F8C6C_00000348:
+    b lbl_scissor_clipFrustum_00000384
+lbl_scissor_clipFrustum_00000348:
     subi r0, r27, 0x1c72
     cmplw r20, r0
-    bge lbl_fn_800F8C6C_00000380
+    bge lbl_scissor_clipFrustum_00000380
     addi r3, r20, 0x1
     lwz r0, 0x4c(r1)
     srwi r3, r3, 1
     stw r3, 0x48(r1)
     cmplw r3, r0
     addi r3, r1, 0x48
-    bge lbl_fn_800F8C6C_00000374
+    bge lbl_scissor_clipFrustum_00000374
     addi r3, r1, 0x4c
-lbl_fn_800F8C6C_00000374:
+lbl_scissor_clipFrustum_00000374:
     lwz r0, 0x0(r3)
     add r20, r20, r0
-    b lbl_fn_800F8C6C_00000384
-lbl_fn_800F8C6C_00000380:
+    b lbl_scissor_clipFrustum_00000384
+lbl_scissor_clipFrustum_00000380:
     addi r20, r29, 0x5555
-lbl_fn_800F8C6C_00000384:
+lbl_scissor_clipFrustum_00000384:
     addi r0, r29, 0x5555
     cmplw r20, r0
-    ble lbl_fn_800F8C6C_000003AC
+    ble lbl_scissor_clipFrustum_000003AC
     lis r3, lbl_80736040@ha
     addi r3, r3, lbl_80736040@l
     addi r4, r3, 0x21d
@@ -310,19 +310,19 @@ lbl_fn_800F8C6C_00000384:
     crclr 6
     bl printf
     bl abort
-lbl_fn_800F8C6C_000003AC:
+lbl_scissor_clipFrustum_000003AC:
     mulli r3, r20, 0xc
     bl mem_free
     cmpwi r3, 0x0
     mr r30, r3
-    bne lbl_fn_800F8C6C_000003D8
+    bne lbl_scissor_clipFrustum_000003D8
     lis r4, lbl_80779DD8@ha
     addi r3, r31, 0xa0
     addi r4, r4, lbl_80779DD8@l
     crclr 6
     bl printf
     bl abort
-lbl_fn_800F8C6C_000003D8:
+lbl_scissor_clipFrustum_000003D8:
     lwz r6, 0x1d8(r1)
     lwz r0, 0x1f8(r1)
     mulli r4, r6, 0xc
@@ -353,26 +353,26 @@ lbl_fn_800F8C6C_000003D8:
     add r6, r5, r4
     mtctr r0
     cmplw r3, r7
-    ble lbl_fn_800F8C6C_00000494
-lbl_fn_800F8C6C_00000454:
+    ble lbl_scissor_clipFrustum_00000494
+lbl_scissor_clipFrustum_00000454:
     subic. r6, r6, 0xc
     subi r3, r3, 0xc
-    beq lbl_fn_800F8C6C_00000478
+    beq lbl_scissor_clipFrustum_00000478
     lwz r0, 0x0(r3)
     stw r0, 0x0(r6)
     lwz r0, 0x4(r3)
     stw r0, 0x4(r6)
     lfs f0, 0x8(r3)
     stfs f0, 0x8(r6)
-lbl_fn_800F8C6C_00000478:
+lbl_scissor_clipFrustum_00000478:
     lwz r5, 0x204(r1)
     lwz r4, 0x1f8(r1)
     subi r0, r5, 0x1
     stw r0, 0x204(r1)
     addi r0, r4, 0x1
     stw r0, 0x1f8(r1)
-    bdnz lbl_fn_800F8C6C_00000454
-lbl_fn_800F8C6C_00000494:
+    bdnz lbl_scissor_clipFrustum_00000454
+lbl_scissor_clipFrustum_00000494:
     lwz r0, 0x1f8(r1)
     cmpwi r19, 0x0
     lwz r6, 0x1dc(r1)
@@ -385,16 +385,16 @@ lbl_fn_800F8C6C_00000494:
     stw r3, 0x1f4(r1)
     stw r0, 0x1d8(r1)
     stw r26, 0x1f8(r1)
-    beq lbl_fn_800F8C6C_000004D8
+    beq lbl_scissor_clipFrustum_000004D8
     cmpwi r3, 0x0
-    beq lbl_fn_800F8C6C_000004D8
+    beq lbl_scissor_clipFrustum_000004D8
     stw r26, 0x1f8(r1)
     bl dtor_80084684
-lbl_fn_800F8C6C_000004D8:
+lbl_scissor_clipFrustum_000004D8:
     lwz r21, 0x14ac(r21)
-lbl_fn_800F8C6C_000004DC:
+lbl_scissor_clipFrustum_000004DC:
     cmpwi r21, 0x0
-    bne lbl_fn_800F8C6C_00000120
+    bne lbl_scissor_clipFrustum_00000120
     lwz r4, lbl_8087F408
     lis r3, __files@ha
     lfs f29, lbl_80881478
@@ -411,8 +411,8 @@ lbl_fn_800F8C6C_000004DC:
     lis r27, 0xe39
     li r26, 0x0
     li r23, 0xc
-    b lbl_fn_800F8C6C_000008D0
-lbl_fn_800F8C6C_00000528:
+    b lbl_scissor_clipFrustum_000008D0
+lbl_scissor_clipFrustum_00000528:
     fmr f1, f27
     mr r3, r15
     mr r4, r16
@@ -422,7 +422,7 @@ lbl_fn_800F8C6C_00000528:
     bl fn_800FBA9C
     cmpwi r3, 0x0
     mr r20, r3
-    blt lbl_fn_800F8C6C_000008CC
+    blt lbl_scissor_clipFrustum_000008CC
     mr r3, r21
     mr r4, r20
     bl fn_80148B0C
@@ -447,18 +447,18 @@ lbl_fn_800F8C6C_00000528:
     fsubs f24, f1, f3
     stfs f29, 0x1b4(r1)
     fcmpu cr0, f29, f0
-    bne lbl_fn_800F8C6C_000005CC
+    bne lbl_scissor_clipFrustum_000005CC
     fcmpu cr0, f29, f29
-    bne lbl_fn_800F8C6C_000005CC
+    bne lbl_scissor_clipFrustum_000005CC
     lfs f0, 0x1b8(r1)
     fcmpu cr0, f29, f0
-    bne lbl_fn_800F8C6C_000005CC
+    bne lbl_scissor_clipFrustum_000005CC
     li r0, 0x1
-lbl_fn_800F8C6C_000005CC:
+lbl_scissor_clipFrustum_000005CC:
     cmpwi r0, 0x0
-    beq lbl_fn_800F8C6C_000005D8
+    beq lbl_scissor_clipFrustum_000005D8
     stfs f28, 0x1b4(r1)
-lbl_fn_800F8C6C_000005D8:
+lbl_scissor_clipFrustum_000005D8:
     addi r3, r1, 0x1b0
     mr r4, r3
     bl PSVECNormalize
@@ -473,7 +473,7 @@ lbl_fn_800F8C6C_000005D8:
     cmplw r3, r30
     stw r20, 0x148(r1)
     stfs f24, 0x14c(r1)
-    bge lbl_fn_800F8C6C_00000638
+    bge lbl_scissor_clipFrustum_00000638
     addi r4, r3, 0x1
     lwz r3, 0x1d4(r1)
     subi r0, r4, 0x1
@@ -482,12 +482,12 @@ lbl_fn_800F8C6C_000005D8:
     stwux r21, r3, r0
     stw r20, 0x4(r3)
     stfs f24, 0x8(r3)
-    b lbl_fn_800F8C6C_000008CC
-lbl_fn_800F8C6C_00000638:
+    b lbl_scissor_clipFrustum_000008CC
+lbl_scissor_clipFrustum_00000638:
     addi r0, r29, 0x5555
     subf r0, r30, r0
     cmplwi r0, 0x1
-    bge lbl_fn_800F8C6C_00000664
+    bge lbl_scissor_clipFrustum_00000664
     lis r3, lbl_80736040@ha
     addi r3, r3, lbl_80736040@l
     addi r4, r3, 0x21d
@@ -495,10 +495,10 @@ lbl_fn_800F8C6C_00000638:
     crclr 6
     bl printf
     bl abort
-lbl_fn_800F8C6C_00000664:
+lbl_scissor_clipFrustum_00000664:
     addi r0, r28, 0x71c7
     cmplw r30, r0
-    bge lbl_fn_800F8C6C_00000698
+    bge lbl_scissor_clipFrustum_00000698
     addi r3, r30, 0x1
     subi r4, r24, 0x3333
     slwi r0, r3, 2
@@ -506,18 +506,18 @@ lbl_fn_800F8C6C_00000664:
     mulhwu r0, r4, r0
     srwi r0, r0, 2
     cmplwi r0, 0x1
-    bge lbl_fn_800F8C6C_000006B4
-    b lbl_fn_800F8C6C_000006B4
-    b lbl_fn_800F8C6C_000006B4
-lbl_fn_800F8C6C_00000698:
+    bge lbl_scissor_clipFrustum_000006B4
+    b lbl_scissor_clipFrustum_000006B4
+    b lbl_scissor_clipFrustum_000006B4
+lbl_scissor_clipFrustum_00000698:
     subi r0, r27, 0x1c72
     cmplw r30, r0
-    bge lbl_fn_800F8C6C_000006B4
+    bge lbl_scissor_clipFrustum_000006B4
     addi r0, r30, 0x1
     srwi r0, r0, 1
     cmplwi r0, 0x1
     cmplwi r0, 0x1
-lbl_fn_800F8C6C_000006B4:
+lbl_scissor_clipFrustum_000006B4:
     lwz r3, 0x1d8(r1)
     addi r0, r29, 0x5555
     lwz r20, 0x1dc(r1)
@@ -531,7 +531,7 @@ lbl_fn_800F8C6C_000006B4:
     stw r25, 0x1ec(r1)
     stw r26, 0x1f0(r1)
     stw r3, 0x40(r1)
-    ble lbl_fn_800F8C6C_00000708
+    ble lbl_scissor_clipFrustum_00000708
     lis r3, lbl_80736040@ha
     addi r3, r3, lbl_80736040@l
     addi r4, r3, 0x21d
@@ -539,10 +539,10 @@ lbl_fn_800F8C6C_000006B4:
     crclr 6
     bl printf
     bl abort
-lbl_fn_800F8C6C_00000708:
+lbl_scissor_clipFrustum_00000708:
     addi r0, r28, 0x71c7
     cmplw r20, r0
-    bge lbl_fn_800F8C6C_00000750
+    bge lbl_scissor_clipFrustum_00000750
     addi r4, r20, 0x1
     subi r5, r24, 0x3333
     slwi r3, r4, 2
@@ -553,34 +553,34 @@ lbl_fn_800F8C6C_00000708:
     srwi r4, r4, 2
     stw r4, 0x38(r1)
     cmplw r4, r0
-    bge lbl_fn_800F8C6C_00000744
+    bge lbl_scissor_clipFrustum_00000744
     addi r3, r1, 0x40
-lbl_fn_800F8C6C_00000744:
+lbl_scissor_clipFrustum_00000744:
     lwz r0, 0x0(r3)
     add r20, r20, r0
-    b lbl_fn_800F8C6C_0000078C
-lbl_fn_800F8C6C_00000750:
+    b lbl_scissor_clipFrustum_0000078C
+lbl_scissor_clipFrustum_00000750:
     subi r0, r27, 0x1c72
     cmplw r20, r0
-    bge lbl_fn_800F8C6C_00000788
+    bge lbl_scissor_clipFrustum_00000788
     addi r3, r20, 0x1
     lwz r0, 0x40(r1)
     srwi r3, r3, 1
     stw r3, 0x3c(r1)
     cmplw r3, r0
     addi r3, r1, 0x3c
-    bge lbl_fn_800F8C6C_0000077C
+    bge lbl_scissor_clipFrustum_0000077C
     addi r3, r1, 0x40
-lbl_fn_800F8C6C_0000077C:
+lbl_scissor_clipFrustum_0000077C:
     lwz r0, 0x0(r3)
     add r20, r20, r0
-    b lbl_fn_800F8C6C_0000078C
-lbl_fn_800F8C6C_00000788:
+    b lbl_scissor_clipFrustum_0000078C
+lbl_scissor_clipFrustum_00000788:
     addi r20, r29, 0x5555
-lbl_fn_800F8C6C_0000078C:
+lbl_scissor_clipFrustum_0000078C:
     addi r0, r29, 0x5555
     cmplw r20, r0
-    ble lbl_fn_800F8C6C_000007B4
+    ble lbl_scissor_clipFrustum_000007B4
     lis r3, lbl_80736040@ha
     addi r3, r3, lbl_80736040@l
     addi r4, r3, 0x21d
@@ -588,19 +588,19 @@ lbl_fn_800F8C6C_0000078C:
     crclr 6
     bl printf
     bl abort
-lbl_fn_800F8C6C_000007B4:
+lbl_scissor_clipFrustum_000007B4:
     mulli r3, r20, 0xc
     bl mem_free
     cmpwi r3, 0x0
     mr r30, r3
-    bne lbl_fn_800F8C6C_000007E0
+    bne lbl_scissor_clipFrustum_000007E0
     lis r4, lbl_80779DD8@ha
     addi r3, r31, 0xa0
     addi r4, r4, lbl_80779DD8@l
     crclr 6
     bl printf
     bl abort
-lbl_fn_800F8C6C_000007E0:
+lbl_scissor_clipFrustum_000007E0:
     lwz r7, 0x1d8(r1)
     lwz r6, 0x1e4(r1)
     mulli r3, r7, 0xc
@@ -626,26 +626,26 @@ lbl_fn_800F8C6C_000007E0:
     divwu r0, r0, r23
     mtctr r0
     cmplw r6, r5
-    ble lbl_fn_800F8C6C_00000888
-lbl_fn_800F8C6C_00000848:
+    ble lbl_scissor_clipFrustum_00000888
+lbl_scissor_clipFrustum_00000848:
     subic. r3, r3, 0xc
     subi r6, r6, 0xc
-    beq lbl_fn_800F8C6C_0000086C
+    beq lbl_scissor_clipFrustum_0000086C
     lwz r0, 0x0(r6)
     stw r0, 0x0(r3)
     lwz r0, 0x4(r6)
     stw r0, 0x4(r3)
     lfs f0, 0x8(r6)
     stfs f0, 0x8(r3)
-lbl_fn_800F8C6C_0000086C:
+lbl_scissor_clipFrustum_0000086C:
     lwz r5, 0x1f0(r1)
     lwz r4, 0x1e4(r1)
     subi r0, r5, 0x1
     stw r0, 0x1f0(r1)
     addi r0, r4, 0x1
     stw r0, 0x1e4(r1)
-    bdnz lbl_fn_800F8C6C_00000848
-lbl_fn_800F8C6C_00000888:
+    bdnz lbl_scissor_clipFrustum_00000848
+lbl_scissor_clipFrustum_00000888:
     lwz r0, 0x1e4(r1)
     cmpwi r19, 0x0
     lwz r6, 0x1dc(r1)
@@ -658,16 +658,16 @@ lbl_fn_800F8C6C_00000888:
     stw r3, 0x1e0(r1)
     stw r0, 0x1d8(r1)
     stw r26, 0x1e4(r1)
-    beq lbl_fn_800F8C6C_000008CC
+    beq lbl_scissor_clipFrustum_000008CC
     cmpwi r3, 0x0
-    beq lbl_fn_800F8C6C_000008CC
+    beq lbl_scissor_clipFrustum_000008CC
     stw r26, 0x1e4(r1)
     bl dtor_80084684
-lbl_fn_800F8C6C_000008CC:
+lbl_scissor_clipFrustum_000008CC:
     lwz r21, 0x14ac(r21)
-lbl_fn_800F8C6C_000008D0:
+lbl_scissor_clipFrustum_000008D0:
     cmpwi r21, 0x0
-    bne lbl_fn_800F8C6C_00000528
+    bne lbl_scissor_clipFrustum_00000528
     lwz r0, 0x1d8(r1)
     addi r3, r1, 0x30
     lwz r6, 0x1d4(r1)
@@ -689,14 +689,14 @@ lbl_fn_800F8C6C_000008D0:
     li r28, 0x1
     lis r29, lbl_807C7030@ha
     li r26, 0x0
-    b lbl_fn_800F8C6C_000011C8
-lbl_fn_800F8C6C_00000930:
+    b lbl_scissor_clipFrustum_000011C8
+lbl_scissor_clipFrustum_00000930:
     lwz r0, 0x1c(r1)
     cmpwi r0, 0x0
-    blt lbl_fn_800F8C6C_00000944
+    blt lbl_scissor_clipFrustum_00000944
     cmpw r22, r0
-    bge lbl_fn_800F8C6C_000011D4
-lbl_fn_800F8C6C_00000944:
+    bge lbl_scissor_clipFrustum_000011D4
+lbl_scissor_clipFrustum_00000944:
     lwz r0, 0x1d4(r1)
     mr r3, r15
     lwz r9, 0x18(r1)
@@ -712,21 +712,21 @@ lbl_fn_800F8C6C_00000944:
     li r3, 0x0
     subi r0, r4, 0x1
     cmplwi r0, 0x4
-    bgt lbl_fn_800F8C6C_00000994
+    bgt lbl_scissor_clipFrustum_00000994
     slw r0, r28, r0
     andi. r0, r0, 0x19
-    beq lbl_fn_800F8C6C_00000994
+    beq lbl_scissor_clipFrustum_00000994
     li r3, 0x1
-lbl_fn_800F8C6C_00000994:
+lbl_scissor_clipFrustum_00000994:
     cmpwi r3, 0x0
-    beq lbl_fn_800F8C6C_00001194
+    beq lbl_scissor_clipFrustum_00001194
     lwz r0, 0x1d4(r1)
     add r4, r0, r31
     lwzx r3, r31, r0
     lwz r4, 0x4(r4)
     bl fn_80148B0C
     cmpwi r3, 0x0
-    beq lbl_fn_800F8C6C_00001194
+    beq lbl_scissor_clipFrustum_00001194
     addis r5, r15, 0x4
     lwz r6, 0x1d4(r1)
     subi r5, r5, 0x7588
@@ -768,13 +768,13 @@ lbl_fn_800F8C6C_00000994:
     stfs f0, 0x198(r1)
     bl fn_80133EE8
     cmpwi r3, 0x0
-    bne lbl_fn_800F8C6C_00000A74
+    bne lbl_scissor_clipFrustum_00000A74
     addi r3, r16, 0x7d4
     li r4, 0x28
     bl fn_80134134
     cmpwi r3, 0x0
-    beq lbl_fn_800F8C6C_00000AD4
-lbl_fn_800F8C6C_00000A74:
+    beq lbl_scissor_clipFrustum_00000AD4
+lbl_scissor_clipFrustum_00000A74:
     lwz r4, lbl_8087F048
     lis r3, 0x2
     subi r0, r3, 0x7960
@@ -782,9 +782,9 @@ lbl_fn_800F8C6C_00000A74:
     addi r3, r19, 0x1
     stw r3, 0x14c(r4)
     cmpw r3, r0
-    ble lbl_fn_800F8C6C_00000A98
+    ble lbl_scissor_clipFrustum_00000A98
     stw r26, 0x14c(r4)
-lbl_fn_800F8C6C_00000A98:
+lbl_scissor_clipFrustum_00000A98:
     li r3, 0x2329
     bl task_findEntryById
     stw r27, 0x8(r1)
@@ -800,18 +800,18 @@ lbl_fn_800F8C6C_00000A98:
     li r9, 0x0
     li r10, 0x1e
     bl clip_calculateFrustum
-lbl_fn_800F8C6C_00000AD4:
+lbl_scissor_clipFrustum_00000AD4:
     addi r3, r16, 0x7d4
     li r4, 0x2f
     bl fn_80133EE8
     cmpwi r3, 0x0
-    bne lbl_fn_800F8C6C_00000AFC
+    bne lbl_scissor_clipFrustum_00000AFC
     addi r3, r16, 0x7d4
     li r4, 0x2f
     bl fn_80134134
     cmpwi r3, 0x0
-    beq lbl_fn_800F8C6C_00000B5C
-lbl_fn_800F8C6C_00000AFC:
+    beq lbl_scissor_clipFrustum_00000B5C
+lbl_scissor_clipFrustum_00000AFC:
     lwz r4, lbl_8087F048
     lis r3, 0x2
     subi r0, r3, 0x7960
@@ -819,9 +819,9 @@ lbl_fn_800F8C6C_00000AFC:
     addi r3, r19, 0x1
     stw r3, 0x14c(r4)
     cmpw r3, r0
-    ble lbl_fn_800F8C6C_00000B20
+    ble lbl_scissor_clipFrustum_00000B20
     stw r26, 0x14c(r4)
-lbl_fn_800F8C6C_00000B20:
+lbl_scissor_clipFrustum_00000B20:
     li r3, 0x232a
     bl task_findEntryById
     stw r27, 0x8(r1)
@@ -837,29 +837,29 @@ lbl_fn_800F8C6C_00000B20:
     li r9, 0x0
     li r10, 0x1e
     bl clip_calculateFrustum
-lbl_fn_800F8C6C_00000B5C:
+lbl_scissor_clipFrustum_00000B5C:
     addi r3, r16, 0x7d4
     li r4, 0x32
     bl fn_80133EE8
     cmpwi r3, 0x0
-    bne lbl_fn_800F8C6C_00000B84
+    bne lbl_scissor_clipFrustum_00000B84
     addi r3, r16, 0x7d4
     li r4, 0x32
     bl fn_80134134
     cmpwi r3, 0x0
-    beq lbl_fn_800F8C6C_00000D78
-lbl_fn_800F8C6C_00000B84:
+    beq lbl_scissor_clipFrustum_00000D78
+lbl_scissor_clipFrustum_00000B84:
     lwz r3, 0x1d4(r1)
     lwzx r19, r3, r31
     lwz r3, 0x50(r19)
     subis r0, r3, 0x4
     cmplwi r0, 0xa31f
-    bne lbl_fn_800F8C6C_00000CBC
+    bne lbl_scissor_clipFrustum_00000CBC
     mr r3, r19
     li r4, 0x2
     bl fn_80148B0C
     cmpwi r3, 0x0
-    beq lbl_fn_800F8C6C_00000CBC
+    beq lbl_scissor_clipFrustum_00000CBC
     lwz r4, lbl_8087F048
     lis r3, 0x2
     subi r0, r3, 0x7960
@@ -867,9 +867,9 @@ lbl_fn_800F8C6C_00000B84:
     addi r3, r20, 0x1
     stw r3, 0x14c(r4)
     cmpw r3, r0
-    ble lbl_fn_800F8C6C_00000BD4
+    ble lbl_scissor_clipFrustum_00000BD4
     stw r26, 0x14c(r4)
-lbl_fn_800F8C6C_00000BD4:
+lbl_scissor_clipFrustum_00000BD4:
     stfs f29, 0x108(r1)
     addi r3, r1, 0x2a8
     li r4, 0x79
@@ -927,8 +927,8 @@ lbl_fn_800F8C6C_00000BD4:
     li r9, 0x0
     li r10, 0x1e
     bl clip_calculateFrustum
-    b lbl_fn_800F8C6C_00000D78
-lbl_fn_800F8C6C_00000CBC:
+    b lbl_scissor_clipFrustum_00000D78
+lbl_scissor_clipFrustum_00000CBC:
     lwz r4, lbl_8087F048
     lis r3, 0x2
     subi r0, r3, 0x7960
@@ -936,9 +936,9 @@ lbl_fn_800F8C6C_00000CBC:
     addi r3, r20, 0x1
     stw r3, 0x14c(r4)
     cmpw r3, r0
-    ble lbl_fn_800F8C6C_00000CE0
+    ble lbl_scissor_clipFrustum_00000CE0
     stw r26, 0x14c(r4)
-lbl_fn_800F8C6C_00000CE0:
+lbl_scissor_clipFrustum_00000CE0:
     stfs f29, 0xf0(r1)
     addi r3, r1, 0x278
     li r4, 0x79
@@ -977,12 +977,12 @@ lbl_fn_800F8C6C_00000CE0:
     li r9, 0x0
     li r10, 0x1e
     bl clip_calculateFrustum
-lbl_fn_800F8C6C_00000D78:
+lbl_scissor_clipFrustum_00000D78:
     addi r3, r16, 0x7d4
     li r4, 0x34
     bl fn_80133EE8
     cmpwi r3, 0x0
-    beq lbl_fn_800F8C6C_00000E28
+    beq lbl_scissor_clipFrustum_00000E28
     stfs f25, 0xe0(r1)
     addi r20, r16, 0x534
     li r3, 0x232d
@@ -992,7 +992,7 @@ lbl_fn_800F8C6C_00000D78:
     bl fn_800EFDA0
     cmpwi r3, 0x0
     mr r19, r3
-    beq lbl_fn_800F8C6C_00000DF0
+    beq lbl_scissor_clipFrustum_00000DF0
     li r3, 0x0
     li r4, 0x0
     bl sound_initGlobalInstances
@@ -1008,11 +1008,11 @@ lbl_fn_800F8C6C_00000D78:
     li r6, 0x0
     li r10, -0x1
     bl res_registerResource
-lbl_fn_800F8C6C_00000DF0:
+lbl_scissor_clipFrustum_00000DF0:
     li r3, 0x232d
     bl fn_800EFE3C
     cmpwi r3, 0x0
-    beq lbl_fn_800F8C6C_00000E28
+    beq lbl_scissor_clipFrustum_00000E28
     lfs f1, lbl_80881494
     mr r4, r3
     addi r3, r1, 0x2c
@@ -1023,23 +1023,23 @@ lbl_fn_800F8C6C_00000DF0:
     addi r3, r1, 0x2c
     li r4, -0x1
     bl ref_releaseHandle
-lbl_fn_800F8C6C_00000E28:
+lbl_scissor_clipFrustum_00000E28:
     addi r3, r16, 0x7d4
     li r4, 0x7
     bl fn_80133EE8
     cmpwi r3, 0x0
-    bne lbl_fn_800F8C6C_00000E64
+    bne lbl_scissor_clipFrustum_00000E64
     addi r3, r16, 0x7d4
     li r4, 0x8
     bl fn_80133EE8
     cmpwi r3, 0x0
-    bne lbl_fn_800F8C6C_00000E64
+    bne lbl_scissor_clipFrustum_00000E64
     addi r3, r16, 0x7d4
     li r4, 0x9
     bl fn_80133EE8
     cmpwi r3, 0x0
-    beq lbl_fn_800F8C6C_0000110C
-lbl_fn_800F8C6C_00000E64:
+    beq lbl_scissor_clipFrustum_0000110C
+lbl_scissor_clipFrustum_00000E64:
     lwz r4, 0x1d4(r1)
     addi r3, r1, 0xd0
     lfs f6, 0x530(r16)
@@ -1067,7 +1067,7 @@ lbl_fn_800F8C6C_00000E64:
     bl fn_800EFDA0
     cmpwi r3, 0x0
     mr r19, r3
-    beq lbl_fn_800F8C6C_00000F10
+    beq lbl_scissor_clipFrustum_00000F10
     li r3, 0x0
     li r4, 0x0
     bl sound_initGlobalInstances
@@ -1083,11 +1083,11 @@ lbl_fn_800F8C6C_00000E64:
     li r6, 0x0
     li r10, -0x1
     bl res_registerResource
-lbl_fn_800F8C6C_00000F10:
+lbl_scissor_clipFrustum_00000F10:
     li r3, 0x232f
     bl fn_800EFE3C
     cmpwi r3, 0x0
-    beq lbl_fn_800F8C6C_00000F48
+    beq lbl_scissor_clipFrustum_00000F48
     lfs f1, lbl_80881494
     mr r4, r3
     addi r3, r1, 0x28
@@ -1098,12 +1098,12 @@ lbl_fn_800F8C6C_00000F10:
     addi r3, r1, 0x28
     li r4, -0x1
     bl ref_releaseHandle
-lbl_fn_800F8C6C_00000F48:
+lbl_scissor_clipFrustum_00000F48:
     addic. r0, r1, 0x3c4
     stw r26, 0x3c0(r1)
-    beq lbl_fn_800F8C6C_00000F58
+    beq lbl_scissor_clipFrustum_00000F58
     stw r16, 0x3c4(r1)
-lbl_fn_800F8C6C_00000F58:
+lbl_scissor_clipFrustum_00000F58:
     lwz r5, 0x3c0(r1)
     addi r3, r16, 0x7d4
     li r4, 0x8
@@ -1111,73 +1111,73 @@ lbl_fn_800F8C6C_00000F58:
     stw r0, 0x3c0(r1)
     bl fn_80133EE8
     cmpwi r3, 0x0
-    beq lbl_fn_800F8C6C_00001048
+    beq lbl_scissor_clipFrustum_00001048
     lwz r3, lbl_8087F8A0
     lwz r3, 0x48(r3)
-    b lbl_fn_800F8C6C_00001040
-lbl_fn_800F8C6C_00000F84:
+    b lbl_scissor_clipFrustum_00001040
+lbl_scissor_clipFrustum_00000F84:
     lwz r4, 0x38(r3)
     li r5, 0x0
     li r6, 0x0
     li r7, 0x0
     rlwinm r0, r4, 0, 29, 29
     cmplwi r0, 0x4
-    beq lbl_fn_800F8C6C_00000FB0
+    beq lbl_scissor_clipFrustum_00000FB0
     clrlwi r0, r4, 31
     cmplwi r0, 0x1
-    beq lbl_fn_800F8C6C_00000FB0
+    beq lbl_scissor_clipFrustum_00000FB0
     li r7, 0x1
-lbl_fn_800F8C6C_00000FB0:
+lbl_scissor_clipFrustum_00000FB0:
     cmpwi r7, 0x0
-    beq lbl_fn_800F8C6C_00000FCC
+    beq lbl_scissor_clipFrustum_00000FCC
     lwz r0, 0x7e0(r3)
     rlwinm r0, r0, 0, 26, 26
     cmplwi r0, 0x20
-    beq lbl_fn_800F8C6C_00000FCC
+    beq lbl_scissor_clipFrustum_00000FCC
     li r6, 0x1
-lbl_fn_800F8C6C_00000FCC:
+lbl_scissor_clipFrustum_00000FCC:
     cmpwi r6, 0x0
-    beq lbl_fn_800F8C6C_00001000
+    beq lbl_scissor_clipFrustum_00001000
     lwz r0, 0x55c(r3)
     li r4, 0x0
     cmpwi r0, 0x6
-    bne lbl_fn_800F8C6C_00000FF4
+    bne lbl_scissor_clipFrustum_00000FF4
     lwz r0, 0x560(r3)
     cmpwi r0, 0x1c
-    bne lbl_fn_800F8C6C_00000FF4
+    bne lbl_scissor_clipFrustum_00000FF4
     li r4, 0x1
-lbl_fn_800F8C6C_00000FF4:
+lbl_scissor_clipFrustum_00000FF4:
     cmpwi r4, 0x0
-    bne lbl_fn_800F8C6C_00001000
+    bne lbl_scissor_clipFrustum_00001000
     li r5, 0x1
-lbl_fn_800F8C6C_00001000:
+lbl_scissor_clipFrustum_00001000:
     cmpwi r5, 0x0
-    beq lbl_fn_800F8C6C_0000103C
+    beq lbl_scissor_clipFrustum_0000103C
     lwz r0, 0x54c(r3)
     rlwinm r0, r0, 0, 18, 18
     cmplwi r0, 0x2000
-    beq lbl_fn_800F8C6C_0000103C
+    beq lbl_scissor_clipFrustum_0000103C
     lwz r0, 0x3c0(r1)
     addi r4, r1, 0x3c4
     slwi r0, r0, 2
     add. r4, r4, r0
-    beq lbl_fn_800F8C6C_00001030
+    beq lbl_scissor_clipFrustum_00001030
     stw r3, 0x0(r4)
-lbl_fn_800F8C6C_00001030:
+lbl_scissor_clipFrustum_00001030:
     lwz r4, 0x3c0(r1)
     addi r0, r4, 0x1
     stw r0, 0x3c0(r1)
-lbl_fn_800F8C6C_0000103C:
+lbl_scissor_clipFrustum_0000103C:
     lwz r3, 0x14ac(r3)
-lbl_fn_800F8C6C_00001040:
+lbl_scissor_clipFrustum_00001040:
     cmpwi r3, 0x0
-    bne lbl_fn_800F8C6C_00000F84
-lbl_fn_800F8C6C_00001048:
+    bne lbl_scissor_clipFrustum_00000F84
+lbl_scissor_clipFrustum_00001048:
     lwz r30, 0x3c0(r1)
     addi r23, r1, 0x3c0
     li r20, 0x0
-    b lbl_fn_800F8C6C_00001104
-lbl_fn_800F8C6C_00001058:
+    b lbl_scissor_clipFrustum_00001104
+lbl_scissor_clipFrustum_00001058:
     lwz r19, 0x4(r23)
     li r3, 0x2330
     stfs f25, 0xb0(r1)
@@ -1188,7 +1188,7 @@ lbl_fn_800F8C6C_00001058:
     bl fn_800EFDA0
     cmpwi r3, 0x0
     mr r25, r3
-    beq lbl_fn_800F8C6C_000010C0
+    beq lbl_scissor_clipFrustum_000010C0
     li r3, 0x0
     li r4, 0x0
     bl sound_initGlobalInstances
@@ -1204,12 +1204,12 @@ lbl_fn_800F8C6C_00001058:
     li r6, 0x0
     li r10, -0x1
     bl res_registerResource
-lbl_fn_800F8C6C_000010C0:
+lbl_scissor_clipFrustum_000010C0:
     addi r19, r19, 0x528
     li r3, 0x2330
     bl fn_800EFE3C
     cmpwi r3, 0x0
-    beq lbl_fn_800F8C6C_000010FC
+    beq lbl_scissor_clipFrustum_000010FC
     lfs f1, lbl_80881494
     mr r4, r3
     mr r5, r19
@@ -1220,23 +1220,23 @@ lbl_fn_800F8C6C_000010C0:
     addi r3, r1, 0x24
     li r4, -0x1
     bl ref_releaseHandle
-lbl_fn_800F8C6C_000010FC:
+lbl_scissor_clipFrustum_000010FC:
     addi r23, r23, 0x4
     addi r20, r20, 0x1
-lbl_fn_800F8C6C_00001104:
+lbl_scissor_clipFrustum_00001104:
     cmplw r20, r30
-    blt lbl_fn_800F8C6C_00001058
-lbl_fn_800F8C6C_0000110C:
+    blt lbl_scissor_clipFrustum_00001058
+lbl_scissor_clipFrustum_0000110C:
     addi r3, r16, 0x7d4
     li r4, 0x3e
     bl fn_80133EE8
     cmpwi r3, 0x0
     mr r19, r3
-    beq lbl_fn_800F8C6C_00001194
+    beq lbl_scissor_clipFrustum_00001194
     lwz r3, 0x4(r3)
     bl task_findEntryById
     cmpwi r3, 0x0
-    beq lbl_fn_800F8C6C_00001194
+    beq lbl_scissor_clipFrustum_00001194
     lwz r4, lbl_8087F048
     lis r3, 0x2
     subi r0, r3, 0x7960
@@ -1244,9 +1244,9 @@ lbl_fn_800F8C6C_0000110C:
     addi r3, r20, 0x1
     stw r3, 0x14c(r4)
     cmpw r3, r0
-    ble lbl_fn_800F8C6C_00001158
+    ble lbl_scissor_clipFrustum_00001158
     stw r26, 0x14c(r4)
-lbl_fn_800F8C6C_00001158:
+lbl_scissor_clipFrustum_00001158:
     lwz r3, 0x4(r19)
     bl task_findEntryById
     stw r27, 0x8(r1)
@@ -1262,29 +1262,29 @@ lbl_fn_800F8C6C_00001158:
     li r9, 0x0
     li r10, 0x1e
     bl clip_calculateFrustum
-lbl_fn_800F8C6C_00001194:
+lbl_scissor_clipFrustum_00001194:
     lwz r0, 0x14(r1)
     cmpw r22, r0
-    bge lbl_fn_800F8C6C_000011B8
+    bge lbl_scissor_clipFrustum_000011B8
     lwz r0, 0x10(r1)
     addis r3, r15, 0x4
     stwx r16, r14, r0
     add r4, r0, r14
     lwz r0, -0x7510(r3)
     stw r0, 0x4(r4)
-lbl_fn_800F8C6C_000011B8:
+lbl_scissor_clipFrustum_000011B8:
     addi r22, r22, 0x1
     addi r14, r14, 0x8
     addi r21, r21, 0x1
     addi r31, r31, 0xc
-lbl_fn_800F8C6C_000011C8:
+lbl_scissor_clipFrustum_000011C8:
     lwz r0, 0x1d8(r1)
     cmplw r21, r0
-    blt lbl_fn_800F8C6C_00000930
-lbl_fn_800F8C6C_000011D4:
+    blt lbl_scissor_clipFrustum_00000930
+lbl_scissor_clipFrustum_000011D4:
     cmpwi r16, 0x0
     lwz r14, 0x14(r17)
-    beq lbl_fn_800F8C6C_000011FC
+    beq lbl_scissor_clipFrustum_000011FC
     lfs f3, 0x28(r17)
     lfs f0, 0x8bc(r16)
     fmuls f0, f3, f0
@@ -1292,7 +1292,7 @@ lbl_fn_800F8C6C_000011D4:
     stfd f0, 0x408(r1)
     lwz r0, 0x40c(r1)
     add r14, r14, r0
-lbl_fn_800F8C6C_000011FC:
+lbl_scissor_clipFrustum_000011FC:
     lfs f3, 0x40(r17)
     cmpwi r14, 0x0
     lfs f0, 0x8e4(r16)
@@ -1300,7 +1300,7 @@ lbl_fn_800F8C6C_000011FC:
     lwz r0, 0x8ec(r16)
     fadds f28, f3, f0
     add r18, r3, r0
-    ble lbl_fn_800F8C6C_0000163C
+    ble lbl_scissor_clipFrustum_0000163C
     lwz r3, lbl_8087F4A0
     addi r21, r1, 0x180
     lfs f29, lbl_80881478
@@ -1314,8 +1314,8 @@ lbl_fn_800F8C6C_000011FC:
     lfs f26, lbl_808814D4
     addi r25, r1, 0x50
     addi r27, r1, 0x3ac
-    b lbl_fn_800F8C6C_00001634
-lbl_fn_800F8C6C_00001254:
+    b lbl_scissor_clipFrustum_00001634
+lbl_scissor_clipFrustum_00001254:
     lwz r12, 0x0(r19)
     mr r4, r19
     addi r3, r1, 0x18c
@@ -1352,11 +1352,11 @@ lbl_fn_800F8C6C_00001254:
     bl PSVECSquareMag
     fcmpo cr0, f1, f29
     fmr f23, f1
-    ble lbl_fn_800F8C6C_000012F4
+    ble lbl_scissor_clipFrustum_000012F4
     mr r3, r20
     mr r4, r20
     bl PSVECNormalize
-lbl_fn_800F8C6C_000012F4:
+lbl_scissor_clipFrustum_000012F4:
     stfs f29, 0x168(r1)
     addi r3, r1, 0x308
     li r4, 0x79
@@ -1375,17 +1375,17 @@ lbl_fn_800F8C6C_000012F4:
     fcmpo cr0, f24, f28
     fmr f25, f1
     cror eq, lt, eq
-    bne lbl_fn_800F8C6C_00001630
+    bne lbl_scissor_clipFrustum_00001630
     lfs f0, 0x50(r17)
     fmuls f1, f31, f0
     bl std_sin
     frsp f0, f1
     fcmpo cr0, f25, f0
     cror eq, gt, eq
-    bne lbl_fn_800F8C6C_00001630
+    bne lbl_scissor_clipFrustum_00001630
     lfs f0, 0x54(r17)
     fcmpo cr0, f0, f29
-    ble lbl_fn_800F8C6C_000013A8
+    ble lbl_scissor_clipFrustum_000013A8
     fnmsubs f1, f25, f25, f30
     bl math_u64DivMod
     frsp f25, f1
@@ -1401,27 +1401,27 @@ lbl_fn_800F8C6C_000012F4:
     fmuls f0, f24, f25
     fadds f3, f3, f1
     fcmpo cr0, f0, f3
-    bgt lbl_fn_800F8C6C_00001630
-lbl_fn_800F8C6C_000013A8:
+    bgt lbl_scissor_clipFrustum_00001630
+lbl_scissor_clipFrustum_000013A8:
     lfs f0, 0x180(r1)
     fcmpu cr0, f29, f0
     mfcr r0
     extrwi. r0, r0, 1, 2
-    beq lbl_fn_800F8C6C_000013CC
+    beq lbl_scissor_clipFrustum_000013CC
     lfs f0, 0x184(r1)
     fcmpu cr0, f29, f0
     mfcr r0
     extrwi r0, r0, 1, 2
-lbl_fn_800F8C6C_000013CC:
+lbl_scissor_clipFrustum_000013CC:
     cmpwi r0, 0x0
-    beq lbl_fn_800F8C6C_000013E4
+    beq lbl_scissor_clipFrustum_000013E4
     lfs f0, 0x188(r1)
     fcmpu cr0, f29, f0
     mfcr r0
     extrwi r0, r0, 1, 2
-lbl_fn_800F8C6C_000013E4:
+lbl_scissor_clipFrustum_000013E4:
     cmpwi r0, 0x0
-    bne lbl_fn_800F8C6C_00001410
+    bne lbl_scissor_clipFrustum_00001410
     psq_l f1, 0x0(r21), 0, 0
     mr r3, r23
     lfs f2, 0x188(r1)
@@ -1430,13 +1430,13 @@ lbl_fn_800F8C6C_000013E4:
     stfs f2, 0xac(r1)
     bl PSVECNormalize
     mr r3, r23
-    b lbl_fn_800F8C6C_00001420
-lbl_fn_800F8C6C_00001410:
+    b lbl_scissor_clipFrustum_00001420
+lbl_scissor_clipFrustum_00001410:
     stfs f29, 0x98(r1)
     addi r3, r1, 0x98
     stfs f30, 0x9c(r1)
     stfs f29, 0xa0(r1)
-lbl_fn_800F8C6C_00001420:
+lbl_scissor_clipFrustum_00001420:
     lfs f2, 0x8(r3)
     psq_l f1, 0x0(r3), 0, 0
     fabs f0, f2
@@ -1444,24 +1444,24 @@ lbl_fn_800F8C6C_00001420:
     stfs f2, 0x164(r1)
     frsp f0, f0
     fcmpo cr0, f0, f26
-    bge lbl_fn_800F8C6C_00001460
+    bge lbl_scissor_clipFrustum_00001460
     lfs f0, 0x15c(r1)
     fcmpo cr0, f0, f29
-    ble lbl_fn_800F8C6C_00001454
+    ble lbl_scissor_clipFrustum_00001454
     lfs f0, lbl_808814D8
-    b lbl_fn_800F8C6C_00001458
-lbl_fn_800F8C6C_00001454:
+    b lbl_scissor_clipFrustum_00001458
+lbl_scissor_clipFrustum_00001454:
     lfs f0, lbl_808814DC
-lbl_fn_800F8C6C_00001458:
+lbl_scissor_clipFrustum_00001458:
     stfs f0, 0x54(r1)
-    b lbl_fn_800F8C6C_00001474
-lbl_fn_800F8C6C_00001460:
+    b lbl_scissor_clipFrustum_00001474
+lbl_scissor_clipFrustum_00001460:
     frsp f2, f2
     lfs f1, 0x15c(r1)
     bl std_atan2
     frsp f0, f1
     stfs f0, 0x54(r1)
-lbl_fn_800F8C6C_00001474:
+lbl_scissor_clipFrustum_00001474:
     lfs f0, 0x54(r1)
     addi r3, r1, 0x248
     li r4, 0x79
@@ -1519,25 +1519,25 @@ lbl_fn_800F8C6C_00001474:
     fabs f0, f2
     frsp f0, f0
     fcmpo cr0, f0, f26
-    bge lbl_fn_800F8C6C_00001580
+    bge lbl_scissor_clipFrustum_00001580
     lfs f0, 0x60(r1)
     fcmpo cr0, f0, f29
-    ble lbl_fn_800F8C6C_00001570
+    ble lbl_scissor_clipFrustum_00001570
     lfs f0, lbl_808814D8
-    b lbl_fn_800F8C6C_00001574
-lbl_fn_800F8C6C_00001570:
+    b lbl_scissor_clipFrustum_00001574
+lbl_scissor_clipFrustum_00001570:
     lfs f0, lbl_808814DC
-lbl_fn_800F8C6C_00001574:
+lbl_scissor_clipFrustum_00001574:
     fneg f0, f0
     stfs f0, 0x50(r1)
-    b lbl_fn_800F8C6C_00001594
-lbl_fn_800F8C6C_00001580:
+    b lbl_scissor_clipFrustum_00001594
+lbl_scissor_clipFrustum_00001580:
     lfs f1, 0x60(r1)
     bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x50(r1)
-lbl_fn_800F8C6C_00001594:
+lbl_scissor_clipFrustum_00001594:
     fmr f2, f29
     psq_l f1, 0x0(r25), 0, 0
     stfs f29, 0x58(r1)
@@ -1555,52 +1555,52 @@ lbl_fn_800F8C6C_00001594:
     stw r16, 0x3b8(r1)
     lwz r0, 0x50(r19)
     cmpwi r0, 0x1
-    beq lbl_fn_800F8C6C_000015E8
+    beq lbl_scissor_clipFrustum_000015E8
     cmpwi r0, 0x10
-    beq lbl_fn_800F8C6C_0000160C
-    b lbl_fn_800F8C6C_00001630
-lbl_fn_800F8C6C_000015E8:
+    beq lbl_scissor_clipFrustum_0000160C
+    b lbl_scissor_clipFrustum_00001630
+lbl_scissor_clipFrustum_000015E8:
     cmpwi r18, 0x2
-    blt lbl_fn_800F8C6C_00001630
+    blt lbl_scissor_clipFrustum_00001630
     lwz r12, 0x0(r19)
     mr r3, r19
     addi r4, r1, 0x390
     lwz r12, 0x44(r12)
     mtctr r12
     bctrl
-    b lbl_fn_800F8C6C_00001630
-lbl_fn_800F8C6C_0000160C:
+    b lbl_scissor_clipFrustum_00001630
+lbl_scissor_clipFrustum_0000160C:
     lwz r0, 0x48(r16)
     cmpwi r0, 0x0
-    bne lbl_fn_800F8C6C_00001630
+    bne lbl_scissor_clipFrustum_00001630
     lwz r12, 0x0(r19)
     mr r3, r19
     addi r4, r1, 0x390
     lwz r12, 0x44(r12)
     mtctr r12
     bctrl
-lbl_fn_800F8C6C_00001630:
+lbl_scissor_clipFrustum_00001630:
     lwz r19, 0x5c(r19)
-lbl_fn_800F8C6C_00001634:
+lbl_scissor_clipFrustum_00001634:
     cmpwi r19, 0x0
-    bne lbl_fn_800F8C6C_00001254
-lbl_fn_800F8C6C_0000163C:
+    bne lbl_scissor_clipFrustum_00001254
+lbl_scissor_clipFrustum_0000163C:
     cmpwi r22, 0x0
-    ble lbl_fn_800F8C6C_000016D4
+    ble lbl_scissor_clipFrustum_000016D4
     cmpwi r16, 0x0
-    beq lbl_fn_800F8C6C_000016D4
+    beq lbl_scissor_clipFrustum_000016D4
     lwz r0, 0x48(r16)
     cmpwi r0, 0x0
-    bne lbl_fn_800F8C6C_000016D4
+    bne lbl_scissor_clipFrustum_000016D4
     lwz r0, 0x12a4(r16)
     extrwi. r0, r0, 1, 3
-    beq lbl_fn_800F8C6C_00001670
+    beq lbl_scissor_clipFrustum_00001670
     addis r3, r15, 0x4
     lfs f4, -0x75c8(r3)
-    b lbl_fn_800F8C6C_00001674
-lbl_fn_800F8C6C_00001670:
+    b lbl_scissor_clipFrustum_00001674
+lbl_scissor_clipFrustum_00001670:
     lfs f4, lbl_80881494
-lbl_fn_800F8C6C_00001674:
+lbl_scissor_clipFrustum_00001674:
     addis r3, r15, 0x4
     lfs f0, -0x75ec(r3)
     lfs f3, -0x75fc(r3)
@@ -1608,33 +1608,33 @@ lbl_fn_800F8C6C_00001674:
     lfs f0, -0x75f4(r3)
     fadds f3, f3, f4
     fcmpo cr0, f3, f0
-    bge lbl_fn_800F8C6C_00001698
-    b lbl_fn_800F8C6C_0000169C
-lbl_fn_800F8C6C_00001698:
+    bge lbl_scissor_clipFrustum_00001698
+    b lbl_scissor_clipFrustum_0000169C
+lbl_scissor_clipFrustum_00001698:
     fmr f3, f0
-lbl_fn_800F8C6C_0000169C:
+lbl_scissor_clipFrustum_0000169C:
     lfs f5, lbl_80881478
     fcmpo cr0, f5, f3
-    ble lbl_fn_800F8C6C_000016AC
-    b lbl_fn_800F8C6C_000016CC
-lbl_fn_800F8C6C_000016AC:
+    ble lbl_scissor_clipFrustum_000016AC
+    b lbl_scissor_clipFrustum_000016CC
+lbl_scissor_clipFrustum_000016AC:
     addis r3, r15, 0x4
     lfs f3, -0x75fc(r3)
     lfs f0, -0x75f4(r3)
     fadds f5, f3, f4
     fcmpo cr0, f5, f0
-    bge lbl_fn_800F8C6C_000016C8
-    b lbl_fn_800F8C6C_000016CC
-lbl_fn_800F8C6C_000016C8:
+    bge lbl_scissor_clipFrustum_000016C8
+    b lbl_scissor_clipFrustum_000016CC
+lbl_scissor_clipFrustum_000016C8:
     fmr f5, f0
-lbl_fn_800F8C6C_000016CC:
+lbl_scissor_clipFrustum_000016CC:
     addis r3, r15, 0x4
     stfs f5, -0x75fc(r3)
-lbl_fn_800F8C6C_000016D4:
+lbl_scissor_clipFrustum_000016D4:
     addis r5, r15, 0x4
     lwz r0, -0x6e24(r5)
     cmpwi r0, 0x0
-    beq lbl_fn_800F8C6C_000017E4
+    beq lbl_scissor_clipFrustum_000017E4
     lfs f0, lbl_80881478
     li r0, 0x0
     stfs f0, 0x370(r1)
@@ -1663,7 +1663,7 @@ lbl_fn_800F8C6C_000016D4:
     stfs f2, 0x384(r1)
     stfs f3, 0x380(r1)
     stfs f0, 0x388(r1)
-    blt lbl_fn_800F8C6C_00001774
+    blt lbl_scissor_clipFrustum_00001774
     lwz r4, -0x6e28(r5)
     lwz r3, -0x732c(r5)
     addi r0, r4, 0x1
@@ -1671,7 +1671,7 @@ lbl_fn_800F8C6C_000016D4:
     stw r4, -0x6e28(r5)
     subi r0, r3, 0x1
     stw r0, -0x732c(r5)
-lbl_fn_800F8C6C_00001774:
+lbl_scissor_clipFrustum_00001774:
     addis r6, r15, 0x4
     addi r5, r1, 0x370
     lwz r3, -0x6e28(r6)
@@ -1700,25 +1700,25 @@ lbl_fn_800F8C6C_00001774:
     lwz r3, 0x0(r6)
     addi r0, r3, 0x1
     stw r0, 0x0(r6)
-lbl_fn_800F8C6C_000017E4:
+lbl_scissor_clipFrustum_000017E4:
     cmpwi r16, 0x0
-    beq lbl_fn_800F8C6C_000017F4
+    beq lbl_scissor_clipFrustum_000017F4
     li r0, 0x0
     stw r0, 0xad8(r16)
-lbl_fn_800F8C6C_000017F4:
+lbl_scissor_clipFrustum_000017F4:
     addic. r0, r1, 0x1d4
-    beq lbl_fn_800F8C6C_0000181C
-    beq lbl_fn_800F8C6C_0000181C
+    beq lbl_scissor_clipFrustum_0000181C
+    beq lbl_scissor_clipFrustum_0000181C
     lwz r3, 0x1d4(r1)
     cmpwi r3, 0x0
-    beq lbl_fn_800F8C6C_0000181C
+    beq lbl_scissor_clipFrustum_0000181C
     lwz r0, 0x1d8(r1)
     subf r0, r0, r0
     stw r0, 0x1d8(r1)
     bl dtor_80084684
-lbl_fn_800F8C6C_0000181C:
+lbl_scissor_clipFrustum_0000181C:
     mr r3, r22
-lbl_fn_800F8C6C_00001820:
+lbl_scissor_clipFrustum_00001820:
     addi r11, r1, 0x460
     psq_l f31, 0x4e8(r1), 0, 0
     lfd f31, 0x4e0(r1)

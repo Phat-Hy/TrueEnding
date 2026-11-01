@@ -28,9 +28,9 @@ extern void boss_updatePhaseState(void);
 extern void fn_80144710(void);
 extern void quest_updateFlow(void);
 extern void fn_8014C540(void);
-extern void fn_8015495C(void);
+extern void equip_applyToCharacter(void);
 extern void fn_801603CC(void);
-extern void fn_8016DA4C(void);
+extern void debuff_clearStatus(void);
 extern void actor_setState(void);
 extern void fn_8017547C(void);
 extern void fn_801765D8(void);
@@ -623,9 +623,9 @@ asm void fn_80246914(void)
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     mr r3, r30
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     li r0, 0xe
     stw r0, 0x58c(r30)
     mr r3, r30
@@ -923,7 +923,7 @@ lbl_fn_80246C30_00000B74:
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     lfs f2, 0x530(r31)
     mr r3, r25
     psq_l f1, 0x528(r31), 0, 0
@@ -1424,7 +1424,7 @@ lbl_fn_80247258_000012A4:
     stw r15, 0x58c(r20)
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     lfs f2, 0x70(r1)
     mr r3, r20
     psq_l f1, 0x0(r26), 0, 0

@@ -8,9 +8,9 @@ extern void _savegpr_27(void);
 extern void dtor_80013D60(void);
 extern void fn_8000D430(void);
 extern void fn_8000EC88(void);
-extern void fn_8003E4A4(void);
+extern void str_initFromCStr(void);
 extern void fn_8003EA3C(void);
-extern void fn_8003EFB0(void);
+extern void ui_destroyWidget(void);
 extern void fn_80041A28(void);
 extern void fn_8004203C(void);
 extern void fn_8004212C(void);
@@ -58,7 +58,7 @@ extern void fn_801446F0(void);
 extern void fn_8014DEE4(void);
 extern void fn_8014EEC4(void);
 extern void fn_801539E0(void);
-extern void fn_8015495C(void);
+extern void equip_applyToCharacter(void);
 extern void fn_80155DAC(void);
 extern void fn_801561E4(void);
 extern void fn_801562A0(void);
@@ -187,11 +187,11 @@ lbl_fn_800EA9D4_00000074:
     lis r3, lbl_807C6BB8@ha
     li r0, 0x0
     stwu r0, lbl_807C6BB8@l(r3)
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     li r30, 0x1
     lis r5, lbl_807C7828@ha
     stw r0, 0x4(r3)
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     addi r5, r5, lbl_807C7828@l
     stw r0, 0x8(r3)
     stw r30, 0xc(r3)
@@ -287,11 +287,11 @@ lbl_fn_800EA9D4_000001F8:
     lis r3, lbl_807C6BB8@ha
     li r0, 0x0
     stwu r0, lbl_807C6BB8@l(r3)
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     li r30, 0x1
     lis r5, lbl_807C7828@ha
     stw r0, 0x4(r3)
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     addi r5, r5, lbl_807C7828@l
     stw r0, 0x8(r3)
     stw r30, 0xc(r3)
@@ -605,7 +605,7 @@ lbl_fn_800EAFD4_0000064C:
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
 lbl_fn_800EAFD4_00000664:
     lwz r0, 0x7e0(r30)
     rlwinm r0, r0, 0, 26, 26
@@ -1679,7 +1679,7 @@ asm void fn_800EBF1C(void)
     bl fn_801388B8
     mr r4, r29
     addi r3, r1, 0x2c
-    bl fn_8003E4A4
+    bl str_initFromCStr
     lis r4, lbl_80735324@ha
     addi r3, r1, 0x74
     addi r29, r4, lbl_80735324@l
@@ -1713,7 +1713,7 @@ lbl_fn_800EBF1C_000015C0:
     bl fn_8004212C
     mr r4, r3
     addi r3, r1, 0x20
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x20
     bl fn_8000EC88
     mr r31, r3
@@ -1770,7 +1770,7 @@ lbl_fn_800EBF1C_000016A0:
     bl fn_8004212C
     mr r4, r3
     addi r3, r1, 0x14
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x14
     bl fn_8000EC88
     mr r31, r3
@@ -1806,7 +1806,7 @@ lbl_fn_800EBF1C_0000172C:
     bl fn_8004212C
     mr r4, r3
     addi r3, r1, 0x8
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x8
     bl fn_8000EC88
     mr r31, r3

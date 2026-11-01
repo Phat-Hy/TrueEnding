@@ -83,7 +83,7 @@ void fn_8003DBA4(void);
 void fn_8003DD50(void);
 void fn_8003DEE0(void);
 void fn_8003E120(void);
-void fn_8003E4A4(void);
+void str_initFromCStr(void);
 void fn_8003E530(void);
 
 asm void fn_80039950(void)
@@ -5511,7 +5511,7 @@ lbl_fn_8003E120_00004B44:
     blr
 }
 
-asm void fn_8003E4A4(void)
+asm void str_initFromCStr(void)
 {
     nofralloc
     stwu r1, -0x20(r1)

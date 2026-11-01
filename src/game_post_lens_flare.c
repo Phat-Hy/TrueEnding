@@ -15,8 +15,8 @@ extern void fn_8012D8B8(void);
 extern void fn_8013A258(void);
 extern void fn_8013CB68(void);
 extern void quest_ctorRewardItem(void);
-extern void fn_8015495C(void);
-extern void fn_8016DA4C(void);
+extern void equip_applyToCharacter(void);
+extern void debuff_clearStatus(void);
 extern void actor_setState(void);
 extern void fn_801765D8(void);
 extern void fn_80178A6C(void);
@@ -111,9 +111,9 @@ lbl_fn_802CE504_00000038:
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     mr r3, r31
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     li r0, 0x2
     stw r0, 0x58c(r31)
     mr r3, r31
@@ -1466,7 +1466,7 @@ lbl_fn_802CF728_000013C0:
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     cmpwi r30, 0x0
     li r3, 0x0
     stw r3, 0xd1c(r29)

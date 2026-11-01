@@ -20,7 +20,7 @@ extern void fn_801070C8(void);
 extern void fn_8010CB2C(void);
 extern void fn_8011BF3C(void);
 extern void fn_801240B4(void);
-extern void fn_8016DA4C(void);
+extern void debuff_clearStatus(void);
 extern void fn_8016F3D0(void);
 extern void fn_801B2EDC(void);
 extern void fn_801C3458(void);
@@ -448,7 +448,7 @@ lbl_fn_801BC97C_000004C0:
     stw r3, 0x63c(r4)
     stw r0, 0x638(r4)
     lwz r3, 0x4(r25)
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     li r28, 0x1
     b lbl_fn_801BC97C_00000B58
 lbl_fn_801BC97C_000004EC:

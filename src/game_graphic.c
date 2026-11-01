@@ -23,7 +23,7 @@ extern void mem_getAllocSize(void);
 extern void fn_800A96AC(void);
 extern void layout_drawPane(void);
 extern void fn_800AE568(void);
-extern void fn_800BFAC8(void);
+extern void motion_updateFogAdj(void);
 extern void fn_800BFB70(void);
 extern void fn_800BFC18(void);
 extern void fn_800C0508(void);
@@ -264,7 +264,7 @@ lbl_fn_800AEF68_000001CC:
     lwz r4, lbl_8087EFB4
     stfs f2, 0xe0(r1)
     stfs f0, 0xe4(r1)
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f7, 0xc8(r1)
     addi r29, r1, 0xbc
     lfs f0, 0xcc(r1)

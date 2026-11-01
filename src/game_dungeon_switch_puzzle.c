@@ -12,7 +12,7 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void mem_free(void);
 extern void fn_800A58D0(void);
-extern void fn_800BFAC8(void);
+extern void motion_updateFogAdj(void);
 extern void str_findChar(void);
 extern void fn_801333A4(void);
 extern void fn_80160324(void);
@@ -24,7 +24,7 @@ extern void save_computeCrc32(void);
 extern void fn_801F6D7C(void);
 extern void fn_801F791C(void);
 extern void fn_801F80A8(void);
-extern void fn_801F837C(void);
+extern void save_findEntryByName(void);
 extern void fn_801F8598(void);
 extern void fn_801F8FE4(void);
 extern void fn_801F90E0(void);
@@ -389,7 +389,7 @@ lbl_fn_803E2410_00000410:
     lwz r4, lbl_8087EFB4
     addi r3, r1, 0xd4
     addi r5, r1, 0xe0
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lwz r0, 0x48(r31)
     cmpwi r0, 0x0
     bne lbl_fn_803E2410_00000494
@@ -521,7 +521,7 @@ lbl_fn_803E2410_0000060C:
     lwz r4, lbl_8087EFB4
     addi r3, r1, 0xbc
     addi r5, r1, 0xc8
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f0, lbl_80885D58
     lfs f3, 0xc4(r1)
     fcmpo cr0, f0, f3
@@ -618,7 +618,7 @@ lbl_fn_803E2410_00000764:
     stfs f0, 0xb0(r1)
     stfs f3, 0xb4(r1)
     stfs f4, 0xb8(r1)
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lwz r0, lbl_8087F610
     li r3, 0x1
     cmpwi r0, 0x0
@@ -679,7 +679,7 @@ lbl_fn_803E2410_0000084C:
     stfs f0, 0x98(r1)
     stfs f3, 0x9c(r1)
     stfs f4, 0xa0(r1)
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f0, lbl_80885D58
     lfs f3, 0x94(r1)
     fcmpo cr0, f0, f3
@@ -827,7 +827,7 @@ lbl_fn_803E2A30_00000A08:
     addi r5, r5, lbl_8078C638@l
     addi r4, r20, 0x1181
     addi r5, r5, 0x54
-    bl fn_801F837C
+    bl save_findEntryByName
     b lbl_fn_803E2A30_00000AE0
 lbl_fn_803E2A30_00000ACC:
     mr r3, r29

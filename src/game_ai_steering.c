@@ -20,7 +20,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void atn_Task_setActive(void);
 extern void fn_800F8574(void);
-extern void fn_800F8C6C(void);
+extern void scissor_clipFrustum(void);
 extern void fn_80126214(void);
 extern void boss_updatePhaseState(void);
 extern void fn_8013A258(void);
@@ -673,7 +673,7 @@ lbl_fn_8026442C_00000788:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
 lbl_fn_8026442C_000007E8:
     lfs f3, 0x2e4(r30)
     lfs f0, lbl_808835FC
@@ -1257,7 +1257,7 @@ lbl_fn_80264C88_00000FEC:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     li r0, 0x0
     stb r0, 0x59f(r30)
     b lbl_fn_80264C88_000010A4

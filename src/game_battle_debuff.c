@@ -53,7 +53,7 @@ extern u32 lbl_80881A00;
 void fn_8016D3F8(void);
 void fn_8016D454(void);
 void fn_8016D74C(void);
-void fn_8016DA4C(void);
+void debuff_clearStatus(void);
 void fn_8016DAB0(void);
 void fn_8016DC14(void);
 void fn_8016DCD4(void);
@@ -521,7 +521,7 @@ lbl_fn_8016D74C_00000640:
     blr
 }
 
-asm void fn_8016DA4C(void)
+asm void debuff_clearStatus(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -531,14 +531,14 @@ asm void fn_8016DA4C(void)
     mr r31, r3
     lwz r0, lbl_8087F048
     cmpwi r0, 0x0
-    beq lbl_fn_8016DA4C_0000068C
+    beq lbl_debuff_clearStatus_0000068C
     mr r3, r0
     mr r4, r31
     bl fn_801059F8
     lwz r3, lbl_8087F048
     mr r4, r31
     bl fn_80105B3C
-lbl_fn_8016DA4C_0000068C:
+lbl_debuff_clearStatus_0000068C:
     lwz r0, 0x12a8(r31)
     lfs f0, lbl_8088196C
     rlwinm r0, r0, 0, 24, 22

@@ -13,7 +13,7 @@ extern void magic_dispatchActionCommand(void);
 extern void fn_80144710(void);
 extern void fn_801539E0(void);
 extern void fn_80155DAC(void);
-extern void fn_8016DA4C(void);
+extern void debuff_clearStatus(void);
 extern void fn_80176548(void);
 extern void fn_80188A70(void);
 extern void fn_80188AA0(void);
@@ -335,7 +335,7 @@ asm void fn_80197528(void)
     lwz r4, 0x4(r3)
     stw r0, 0x560(r4)
     lwz r3, 0x4(r3)
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lwz r3, 0x4(r31)
     lwz r0, 0x12a4(r3)
     extrwi. r0, r0, 1, 25
@@ -591,7 +591,7 @@ asm void fn_801978C0(void)
     lwz r4, 0x4(r3)
     stw r0, 0x560(r4)
     lwz r3, 0x4(r3)
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lwz r3, 0x4(r31)
     lwz r0, 0x12a4(r3)
     extrwi. r0, r0, 1, 25

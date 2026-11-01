@@ -11,7 +11,7 @@ extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
 extern void fn_80013410(void);
 extern void fn_80013484(void);
-extern void fn_8003EFB0(void);
+extern void ui_destroyWidget(void);
 extern void fn_80045694(void);
 extern void collision_testLineSegment(void);
 extern void mem_alloc(void);
@@ -59,7 +59,7 @@ extern void fn_80160324(void);
 extern void fn_801681B0(void);
 extern void fn_80168824(void);
 extern void fn_801698E4(void);
-extern void fn_8016DA4C(void);
+extern void debuff_clearStatus(void);
 extern void fn_8016F5EC(void);
 extern void fn_801750FC(void);
 extern void fn_80175A38(void);
@@ -188,11 +188,11 @@ asm void fn_8014F8F4(void)
     lis r3, lbl_807C6BB8@ha
     li r0, 0x0
     stwu r0, lbl_807C6BB8@l(r3)
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     li r31, 0x1
     lis r5, lbl_807C7B10@ha
     stw r0, 0x4(r3)
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     addi r5, r5, lbl_807C7B10@l
     stw r0, 0x8(r3)
     stw r31, 0xc(r3)
@@ -263,11 +263,11 @@ lbl_fn_8014F960_000001A0:
     lis r3, lbl_807C6BB8@ha
     li r0, 0x0
     stwu r0, lbl_807C6BB8@l(r3)
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     li r30, 0x1
     lis r5, lbl_807C7B10@ha
     stw r0, 0x4(r3)
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     addi r5, r5, lbl_807C7B10@l
     stw r0, 0x8(r3)
     stw r30, 0xc(r3)
@@ -1474,7 +1474,7 @@ lbl_fn_8015076C_00001158:
     addi r3, r1, 0x19c
     bl fn_80013484
     mr r3, r23
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lwz r0, 0x1208(r23)
     cmpwi r0, 0x0
     beq lbl_fn_8015076C_00001270
@@ -1580,7 +1580,7 @@ lbl_fn_8015076C_00001310:
     bl vec3_copy
 lbl_fn_8015076C_000013E8:
     mr r3, r23
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     mr r3, r23
     addi r4, r1, 0xe0
     bl fn_801698E4
@@ -1745,7 +1745,7 @@ lbl_fn_8015076C_0000162C:
     bne lbl_fn_8015076C_000016A4
 lbl_fn_8015076C_00001648:
     mr r3, r23
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lwz r0, 0x55c(r23)
     cmpwi r0, 0x6
     bne lbl_fn_8015076C_00001668
@@ -1828,7 +1828,7 @@ lbl_fn_8015076C_0000176C:
     cmpwi r27, 0x0
     beq lbl_fn_8015076C_000017B4
     mr r3, r23
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     cmpwi r28, 0x0
     mr r3, r23
     mr r4, r25

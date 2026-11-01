@@ -18,7 +18,7 @@ extern void fn_800CB440(void);
 extern void morph_updateMesh(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800F8574(void);
-extern void fn_800F8C6C(void);
+extern void scissor_clipFrustum(void);
 extern void fn_80126214(void);
 extern void fn_8013A258(void);
 extern void fn_8013C38C(void);
@@ -873,7 +873,7 @@ lbl_fn_8027EB14_00000AC8:
     lwz r8, 0x590(r31)
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     b lbl_fn_8027EB14_00000B94
 lbl_fn_8027EB14_00000B84:
     cmpwi r0, 0x6

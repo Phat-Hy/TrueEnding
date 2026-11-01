@@ -27,7 +27,7 @@ extern void fn_801763E0(void);
 extern void fn_80178864(void);
 extern void save_computeCrc32(void);
 extern void fn_801F7590(void);
-extern void fn_801F837C(void);
+extern void save_findEntryByName(void);
 extern void fn_801F8598(void);
 extern void assert_formatLocation(void);
 extern void task_findEntryById(void);
@@ -139,7 +139,7 @@ lbl_fn_80598534_00000088:
     mr r3, r30
     addi r4, r4, lbl_80761D5C@l
     addi r4, r4, 0x380
-    bl fn_801F837C
+    bl save_findEntryByName
     b lbl_fn_80598534_000000C0
 lbl_fn_80598534_000000A0:
     lis r4, lbl_80761D5C@ha
@@ -149,7 +149,7 @@ lbl_fn_80598534_000000A0:
     addi r5, r5, lbl_80796ACC@l
     addi r4, r4, 0x380
     addi r5, r5, 0x1a
-    bl fn_801F837C
+    bl save_findEntryByName
 lbl_fn_80598534_000000C0:
     lis r28, lbl_80761D5C@ha
     lis r29, lbl_80796ACC@ha
@@ -158,7 +158,7 @@ lbl_fn_80598534_000000C0:
     addi r29, r29, lbl_80796ACC@l
     addi r4, r28, 0x389
     addi r5, r29, 0x20
-    bl fn_801F837C
+    bl save_findEntryByName
     lfs f1, lbl_80888150
     mr r3, r30
     addi r4, r28, 0x391
@@ -166,7 +166,7 @@ lbl_fn_80598534_000000C0:
     mr r3, r30
     addi r4, r28, 0x39a
     addi r5, r29, 0x10
-    bl fn_801F837C
+    bl save_findEntryByName
     lwz r3, lbl_8087F4F0
     bl fn_80444C48
     mr r28, r3
@@ -177,7 +177,7 @@ lbl_fn_80598534_00000110:
     addi r29, r29, lbl_80761D5C@l
     mr r3, r30
     addi r4, r29, 0x380
-    bl fn_801F837C
+    bl save_findEntryByName
     cmpwi r26, 0x0
     bge lbl_fn_80598534_0000014C
     lis r5, lbl_80796ACC@ha
@@ -185,7 +185,7 @@ lbl_fn_80598534_00000110:
     addi r5, r5, lbl_80796ACC@l
     addi r4, r29, 0x389
     addi r5, r5, 0x20
-    bl fn_801F837C
+    bl save_findEntryByName
     b lbl_fn_80598534_00000160
 lbl_fn_80598534_0000014C:
     mr r3, r30
@@ -207,7 +207,7 @@ lbl_fn_80598534_00000160:
     addi r5, r5, lbl_80796ACC@l
     addi r4, r29, 0x39a
     addi r5, r5, 0x10
-    bl fn_801F837C
+    bl save_findEntryByName
     b lbl_fn_80598534_000001C8
 lbl_fn_80598534_0000019C:
     lis r29, lbl_80761D5C@ha
@@ -240,7 +240,7 @@ lbl_fn_80598534_000001D8:
     addi r5, r5, lbl_80796ACC@l
     addi r4, r29, 0x3a8
     addi r5, r5, 0x10
-    bl fn_801F837C
+    bl save_findEntryByName
     b lbl_fn_80598534_00000240
 lbl_fn_80598534_00000214:
     lis r29, lbl_80761D5C@ha

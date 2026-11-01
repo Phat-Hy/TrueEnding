@@ -7,7 +7,7 @@ extern void _restgpr_25(void);
 extern void _restgpr_27(void);
 extern void _savegpr_25(void);
 extern void _savegpr_27(void);
-extern void fn_8003EFB0(void);
+extern void ui_destroyWidget(void);
 extern void dungeon_initGlobalContext(void);
 extern void fn_800838B8(void);
 extern void fn_800EFD04(void);
@@ -93,7 +93,7 @@ extern void fn_8067CE80(void);
 extern void strcmp(void);
 extern void __dynamic_cast(void);
 extern void fn_806A8E40(void);
-extern void fn_806B0E30(void);
+extern void net_getMyAid(void);
 extern void fn_806B1250(void);
 extern void fn_806B3AE0(void);
 extern void fn_806B3B80(void);
@@ -557,7 +557,7 @@ asm void fn_804EDCD0(void)
     li r30, 0x0
     b lbl_fn_804EDCD0_000005CC
 lbl_fn_804EDCD0_000005A4:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r30, r3, 24
     b lbl_fn_804EDCD0_000005CC
 lbl_fn_804EDCD0_000005B0:
@@ -653,7 +653,7 @@ lbl_fn_804EDCD0_000006B0:
     li r30, 0x0
     b lbl_fn_804EDCD0_00000718
 lbl_fn_804EDCD0_000006F0:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r30, r3, 24
     b lbl_fn_804EDCD0_00000718
 lbl_fn_804EDCD0_000006FC:
@@ -706,7 +706,7 @@ lbl_fn_804EDCD0_00000750:
     li r30, 0x0
     b lbl_fn_804EDCD0_000007CC
 lbl_fn_804EDCD0_000007A4:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r30, r3, 24
     b lbl_fn_804EDCD0_000007CC
 lbl_fn_804EDCD0_000007B0:
@@ -1477,7 +1477,7 @@ lbl_fn_804EE908_000011F8:
     li r0, 0x0
     b lbl_fn_804EE908_0000124C
 lbl_fn_804EE908_00001224:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804EE908_0000124C
 lbl_fn_804EE908_00001230:
@@ -1548,7 +1548,7 @@ lbl_fn_804EE9F4_000012E4:
     li r0, 0x0
     b lbl_fn_804EE9F4_00001338
 lbl_fn_804EE9F4_00001310:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804EE9F4_00001338
 lbl_fn_804EE9F4_0000131C:
@@ -1713,11 +1713,11 @@ lbl_fn_804EEB38_000014D4:
     bne lbl_fn_804EEB38_00001578
     lis r3, lbl_807C6BB8@ha
     stwu r30, lbl_807C6BB8@l(r3)
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     li r29, 0x1
     lis r5, lbl_807C8F48@ha
     stw r30, 0x4(r3)
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     stw r30, 0x8(r3)
     addi r5, r5, lbl_807C8F48@l
     stw r29, 0xc(r3)
@@ -1742,11 +1742,11 @@ lbl_fn_804EEB38_00001578:
     extsb. r0, r0
     bne lbl_fn_804EEB38_000015EC
     li r31, 0x1
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     lis r5, lbl_807C8F48@ha
     stw r29, 0x0(r30)
     mr r3, r30
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     stw r29, 0x4(r30)
     addi r5, r5, lbl_807C8F48@l
     stw r29, 0x8(r30)
@@ -1854,11 +1854,11 @@ lbl_fn_804EED80_00001724:
     lis r3, lbl_807C6BB8@ha
     li r0, 0x0
     stwu r0, lbl_807C6BB8@l(r3)
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     li r28, 0x1
     lis r5, lbl_807C8F48@ha
     stw r0, 0x4(r3)
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     addi r5, r5, lbl_807C8F48@l
     stw r0, 0x8(r3)
     stw r28, 0xc(r3)
@@ -1989,11 +1989,11 @@ lbl_fn_804EED80_000018A8:
     lis r3, lbl_807C6BB8@ha
     li r0, 0x0
     stwu r0, lbl_807C6BB8@l(r3)
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     li r30, 0x1
     lis r5, lbl_807C8F48@ha
     stw r0, 0x4(r3)
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     addi r5, r5, lbl_807C8F48@l
     stw r0, 0x8(r3)
     stw r30, 0xc(r3)
@@ -2064,11 +2064,11 @@ lbl_fn_804EF0F4_000019F4:
     lis r3, lbl_807C6BB8@ha
     li r0, 0x0
     stwu r0, lbl_807C6BB8@l(r3)
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     li r25, 0x1
     lis r5, lbl_807C8F48@ha
     stw r0, 0x4(r3)
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     addi r5, r5, lbl_807C8F48@l
     stw r0, 0x8(r3)
     stw r25, 0xc(r3)
@@ -2220,7 +2220,7 @@ lbl_fn_804EF0F4_00001C2C:
     li r25, 0x0
     b lbl_fn_804EF0F4_00001C94
 lbl_fn_804EF0F4_00001C6C:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r25, r3, 24
     b lbl_fn_804EF0F4_00001C94
 lbl_fn_804EF0F4_00001C78:
@@ -2278,11 +2278,11 @@ lbl_fn_804EF0F4_00001CFC:
     bne lbl_fn_804EF0F4_00001D5C
     lis r3, lbl_807C6BB8@ha
     stwu r6, lbl_807C6BB8@l(r3)
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     li r25, 0x1
     lis r5, lbl_807C8F48@ha
     stw r6, 0x4(r3)
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     stw r6, 0x8(r3)
     addi r5, r5, lbl_807C8F48@l
     stw r25, 0xc(r3)
@@ -2303,11 +2303,11 @@ lbl_fn_804EF0F4_00001D5C:
     extsb. r0, r0
     bne lbl_fn_804EF0F4_00001DC0
     li r0, 0x0
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     lis r5, lbl_807C8F48@ha
     stw r0, 0x0(r31)
     mr r3, r31
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     stw r0, 0x4(r31)
     addi r5, r5, lbl_807C8F48@l
     stw r0, 0x8(r31)
@@ -2361,7 +2361,7 @@ lbl_fn_804EF0F4_00001E30:
     li r25, 0x0
     b lbl_fn_804EF0F4_00001E88
 lbl_fn_804EF0F4_00001E60:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r25, r3, 24
     b lbl_fn_804EF0F4_00001E88
 lbl_fn_804EF0F4_00001E6C:
@@ -2425,7 +2425,7 @@ lbl_fn_804EF0F4_00001F0C:
     li r25, 0x0
     b lbl_fn_804EF0F4_00001F5C
 lbl_fn_804EF0F4_00001F34:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r25, r3, 24
     b lbl_fn_804EF0F4_00001F5C
 lbl_fn_804EF0F4_00001F40:
@@ -2614,11 +2614,11 @@ lbl_fn_804EF0F4_000021D4:
     lis r3, lbl_807C6BB8@ha
     li r0, 0x0
     stwu r0, lbl_807C6BB8@l(r3)
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     li r26, 0x1
     lis r5, lbl_807C8F48@ha
     stw r0, 0x4(r3)
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     addi r5, r5, lbl_807C8F48@l
     stw r0, 0x8(r3)
     stw r26, 0xc(r3)

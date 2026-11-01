@@ -31,7 +31,7 @@ extern void atn_Task_setActive(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8C6C(void);
+extern void scissor_clipFrustum(void);
 extern void fn_80102824(void);
 extern void boss_updatePhaseState(void);
 extern void fn_801446F0(void);
@@ -187,7 +187,7 @@ asm void fn_802F0964(void)
     mr r8, r0
     li r4, 0x0
     li r5, 0x0
-    b fn_800F8C6C
+    b scissor_clipFrustum
 }
 
 asm void fn_802F0988(void)
@@ -571,7 +571,7 @@ lbl_fn_802F09D4_000004F4:
     lfs f1, lbl_80884850
     li r5, 0x0
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
 lbl_fn_802F09D4_00000550:
     addi r3, r1, 0x48
     lfs f2, 0x50(r1)
@@ -2070,7 +2070,7 @@ lbl_fn_802F2294_00001A4C:
     lfs f1, lbl_808848DC
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     b lbl_fn_802F2294_00001E9C
     mr r3, r31
     bl fn_802F3BE8

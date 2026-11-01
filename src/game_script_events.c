@@ -8,7 +8,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
-extern void fn_800F8C6C(void);
+extern void scissor_clipFrustum(void);
 extern void fn_80103F60(void);
 extern void fn_80108378(void);
 extern void fn_80133130(void);
@@ -19,7 +19,7 @@ extern void dialog_renderWindow(void);
 extern void fn_8014C540(void);
 extern void fn_80151448(void);
 extern void fn_8015E4B0(void);
-extern void fn_8016DA4C(void);
+extern void debuff_clearStatus(void);
 extern void actor_setState(void);
 extern void fn_80170A20(void);
 extern void sound_initGlobalInstances(void);
@@ -232,7 +232,7 @@ lbl_fn_8024B4F0_00000140:
     bl res_registerResource
 lbl_fn_8024B4F0_000001CC:
     mr r3, r31
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     li r30, 0x0
     stw r30, 0x58c(r31)
     mr r3, r31
@@ -338,7 +338,7 @@ lbl_fn_8024B4F0_00000338:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
 lbl_fn_8024B4F0_0000035C:
     lfs f30, 0x2e4(r31)
     addi r3, r31, 0xb0

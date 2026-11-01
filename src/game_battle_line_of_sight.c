@@ -9,7 +9,7 @@ extern void _savegpr_25(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_8000D430(void);
-extern void fn_8003EFB0(void);
+extern void ui_destroyWidget(void);
 extern void fn_8004ECC0(void);
 extern void talk_formatQuotedString(void);
 extern void fn_8005BBF8(void);
@@ -20,7 +20,7 @@ extern void lockon_updateTarget(void);
 extern void fn_800971D4(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void fn_80097E80(void);
-extern void fn_800BFAC8(void);
+extern void motion_updateFogAdj(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void wcs_vformat(void);
@@ -28,7 +28,7 @@ extern void fn_800EF73C(void);
 extern void fn_8014F698(void);
 extern void fn_801F6D7C(void);
 extern void fn_801F791C(void);
-extern void fn_801F837C(void);
+extern void save_findEntryByName(void);
 extern void fn_80206B9C(void);
 extern void assert_formatLocation(void);
 extern void fn_8020EF04(void);
@@ -382,7 +382,7 @@ lbl_fn_8040A32C_00000360:
     lwz r4, lbl_8087EFB4
     addi r3, r1, 0x2c
     addi r5, r1, 0x44
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f0, lbl_808862C0
     lfs f1, 0x34(r1)
     fcmpo cr0, f0, f1
@@ -525,7 +525,7 @@ lbl_fn_8040A32C_00000548:
     beq lbl_fn_8040A32C_00000560
     mr r4, r29
     addi r5, r1, 0x50
-    bl fn_801F837C
+    bl save_findEntryByName
 lbl_fn_8040A32C_00000560:
     addi r28, r28, 0x4
 lbl_fn_8040A32C_00000564:
@@ -547,7 +547,7 @@ lbl_fn_8040A32C_00000590:
     beq lbl_fn_8040A32C_000005A8
     mr r4, r28
     mr r5, r29
-    bl fn_801F837C
+    bl save_findEntryByName
 lbl_fn_8040A32C_000005A8:
     addi r27, r27, 0x4
 lbl_fn_8040A32C_000005AC:
@@ -1141,11 +1141,11 @@ lbl_fn_8040AB64_00000DE8:
     lis r3, lbl_807C6BB8@ha
     li r0, 0x0
     stwu r0, lbl_807C6BB8@l(r3)
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     li r30, 0x1
     lis r5, lbl_807C8888@ha
     stw r0, 0x4(r3)
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     addi r5, r5, lbl_807C8888@l
     stw r0, 0x8(r3)
     stw r30, 0xc(r3)

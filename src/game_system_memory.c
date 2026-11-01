@@ -8,7 +8,7 @@ extern void dtor_80013D60(void);
 extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
-extern void fn_8003E4A4(void);
+extern void str_initFromCStr(void);
 extern void fn_8004212C(void);
 extern void fn_800422CC(void);
 extern void talk_parseQuotedString(void);
@@ -1881,7 +1881,7 @@ lbl_fn_80209960_000017D0:
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0x24
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x1a4
     addi r4, r31, 0x1
     li r5, 0x0
@@ -2112,7 +2112,7 @@ lbl_fn_80209960_00001B2C:
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0x18
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x6c
     addi r4, r31, 0x1
     li r5, 0x0

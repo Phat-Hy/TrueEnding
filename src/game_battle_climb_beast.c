@@ -19,7 +19,7 @@ extern void fn_80012C88(void);
 extern void vec3_sub(void);
 extern void fn_80013410(void);
 extern void fn_80013484(void);
-extern void fn_8003EFB0(void);
+extern void ui_destroyWidget(void);
 extern void fn_8004ECC0(void);
 extern void collision_testLineSegment(void);
 extern void fn_80057A64(void);
@@ -1537,10 +1537,10 @@ lbl_fn_803FAF8C_00001258:
     bne lbl_fn_803FAF8C_00001310
     lis r3, lbl_807C6BB8@ha
     stwu r27, lbl_807C6BB8@l(r3)
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     lis r5, lbl_807C8750@ha
     stw r27, 0x4(r3)
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     addi r5, r5, lbl_807C8750@l
     stw r27, 0x8(r3)
     stw r28, 0xc(r3)
@@ -1571,11 +1571,11 @@ lbl_fn_803FAF8C_00001310:
     extsb. r0, r0
     bne lbl_fn_803FAF8C_0000139C
     li r29, 0x1
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     lis r5, lbl_807C8750@ha
     stw r27, 0x0(r28)
     mr r3, r28
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     stw r27, 0x4(r28)
     addi r5, r5, lbl_807C8750@l
     stw r27, 0x8(r28)
@@ -1927,11 +1927,11 @@ lbl_fn_803FAF8C_000018A0:
     lis r3, lbl_807C6BB8@ha
     li r0, 0x0
     stwu r0, lbl_807C6BB8@l(r3)
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     li r29, 0x1
     lis r5, lbl_807C8750@ha
     stw r0, 0x4(r3)
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     addi r5, r5, lbl_807C8750@l
     stw r0, 0x8(r3)
     stw r29, 0xc(r3)

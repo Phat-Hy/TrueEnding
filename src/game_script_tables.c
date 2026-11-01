@@ -31,7 +31,7 @@ extern void boss_updatePhaseState(void);
 extern void fn_80139560(void);
 extern void fn_80151448(void);
 extern void fn_80152D10(void);
-extern void fn_8015495C(void);
+extern void equip_applyToCharacter(void);
 extern void fn_8015E7A0(void);
 extern void fn_8015EB2C(void);
 extern void fn_8016EB48(void);
@@ -1072,7 +1072,7 @@ lbl_fn_8024A1E0_00000D58:
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
 lbl_fn_8024A1E0_00000D7C:
     lwz r0, 0x7e0(r30)
     rlwinm r0, r0, 0, 26, 26

@@ -10,7 +10,7 @@ extern void dtor_80084684(void);
 extern void sys_copyString(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
-extern void fn_8003E4A4(void);
+extern void str_initFromCStr(void);
 extern void fn_8004212C(void);
 extern void fn_80042218(void);
 extern void talk_parseDialogue(void);
@@ -1639,7 +1639,7 @@ asm void fn_8046CC90(void)
     mr r4, r3
     addi r3, r1, 0x20
     addi r4, r4, 0x1
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r30, r1, 0x20
     li r31, 0x1
 lbl_fn_8046CC90_00001554:
@@ -1706,7 +1706,7 @@ lbl_fn_8046CC90_000015AC:
     bl fn_8046D19C
     mr r4, r3
     mr r3, r29
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x5c
     li r4, -0x1
     bl atn_FileList_destructor

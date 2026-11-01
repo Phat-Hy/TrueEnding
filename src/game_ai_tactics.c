@@ -15,7 +15,7 @@ extern void str_findChar(void);
 extern void fn_800F52F0(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800F8574(void);
-extern void fn_800F8C6C(void);
+extern void scissor_clipFrustum(void);
 extern void fn_8013C38C(void);
 extern void fn_8014052C(void);
 extern void fn_80144710(void);
@@ -1193,7 +1193,7 @@ lbl_fn_802684C0_00000EF4:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
 lbl_fn_802684C0_00000F30:
     lwz r0, 0x24(r1)
     psq_l f31, 0x18(r1), 0, 0
@@ -1745,7 +1745,7 @@ lbl_fn_80268CB4_000016E8:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     b lbl_fn_80268CB4_00001844
 lbl_fn_80268CB4_00001728:
     lfs f7, 0x2e4(r31)
@@ -1783,7 +1783,7 @@ lbl_fn_80268CB4_00001778:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     b lbl_fn_80268CB4_00001844
 lbl_fn_80268CB4_000017B8:
     lfs f7, 0x2e4(r31)
@@ -1821,7 +1821,7 @@ lbl_fn_80268CB4_00001808:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
 lbl_fn_80268CB4_00001844:
     lwz r4, lbl_8087F0A8
     lis r0, 0x4330

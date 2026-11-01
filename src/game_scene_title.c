@@ -20,7 +20,7 @@ extern void fn_8010653C(void);
 extern void fn_80133130(void);
 extern void fn_801446F0(void);
 extern void fn_801539E0(void);
-extern void fn_8016DA4C(void);
+extern void debuff_clearStatus(void);
 extern void fn_80178864(void);
 extern void fn_801789D8(void);
 extern void actor_getMovementFlags(void);
@@ -1636,7 +1636,7 @@ lbl_fn_801A5BDC_00001518:
     li r29, 0x1
     stw r29, 0x28(r3)
     lwz r3, 0x4(r3)
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lwz r27, 0x4(r30)
     lwz r26, lbl_8087F048
     lwz r28, 0x638(r27)

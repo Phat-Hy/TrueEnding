@@ -17,7 +17,7 @@ extern void sys_copyString(void);
 extern void fn_8000ECA8(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
-extern void fn_8003E4A4(void);
+extern void str_initFromCStr(void);
 extern void fn_800502A8(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
@@ -497,7 +497,7 @@ lbl_fn_80041D44_00000348:
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0x28
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x28
     bl fn_80042218
     cmpwi r3, 0x0

@@ -6,7 +6,7 @@ extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8C6C(void);
+extern void scissor_clipFrustum(void);
 extern void clip_calculateFrustum(void);
 extern void actor_setState(void);
 extern void res_findResourceSlot(void);
@@ -440,7 +440,7 @@ lbl_fn_80298850_00000494:
     stfs f2, 0x20(r1)
     lfs f1, lbl_80883BE8
     stfs f0, 0x28(r1)
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     b lbl_fn_80298850_00000570
 lbl_fn_80298850_00000564:
     lwz r3, lbl_8087F048

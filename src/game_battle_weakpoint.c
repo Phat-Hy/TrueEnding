@@ -6,7 +6,7 @@ extern void __register_global_object(void);
 extern void _restgpr_25(void);
 extern void _savegpr_25(void);
 extern void dtor_80084684(void);
-extern void fn_8003EFB0(void);
+extern void ui_destroyWidget(void);
 extern void fn_8003F030(void);
 extern void mem_alloc(void);
 extern void fn_800971D4(void);
@@ -43,7 +43,7 @@ extern void PSVECSquareMag(void);
 extern void PSVECDotProduct(void);
 extern void std_fmod(void);
 extern void fn_806A8E40(void);
-extern void fn_806B0E30(void);
+extern void net_getMyAid(void);
 extern void fn_806B1250(void);
 
 /* External data declarations */
@@ -395,11 +395,11 @@ lbl_fn_803FB870_00000310:
     lis r3, lbl_807C6BB8@ha
     li r0, 0x0
     stwu r0, lbl_807C6BB8@l(r3)
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     li r29, 0x1
     lis r5, lbl_807C8750@ha
     stw r0, 0x4(r3)
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     addi r5, r5, lbl_807C8750@l
     stw r0, 0x8(r3)
     stw r29, 0xc(r3)
@@ -430,11 +430,11 @@ lbl_fn_803FB870_000003F8:
     extsb. r0, r0
     bne lbl_fn_803FB870_00000484
     li r30, 0x1
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     lis r5, lbl_807C8750@ha
     stw r29, 0x0(r31)
     mr r3, r31
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     stw r29, 0x4(r31)
     addi r5, r5, lbl_807C8750@l
     stw r29, 0x8(r31)
@@ -864,7 +864,7 @@ lbl_fn_803FC134_00000A04:
     li r29, 0x0
     b lbl_fn_803FC134_00000A60
 lbl_fn_803FC134_00000A38:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r29, r3, 24
     b lbl_fn_803FC134_00000A60
 lbl_fn_803FC134_00000A44:
@@ -1150,11 +1150,11 @@ lbl_fn_803FC540_00000E14:
     lis r3, lbl_807C6BB8@ha
     li r0, 0x0
     stwu r0, lbl_807C6BB8@l(r3)
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     li r29, 0x1
     lis r5, lbl_807C8760@ha
     stw r0, 0x4(r3)
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     addi r5, r5, lbl_807C8760@l
     stw r0, 0x8(r3)
     stw r29, 0xc(r3)

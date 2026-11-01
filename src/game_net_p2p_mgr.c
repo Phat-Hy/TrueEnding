@@ -20,7 +20,7 @@ extern void fn_806AC070(void);
 extern void fn_806B0180(void);
 extern void fn_806B0950(void);
 extern void fn_806B0CF0(void);
-extern void fn_806B0E30(void);
+extern void net_getMyAid(void);
 extern void fn_806B0EB0(void);
 extern void fn_806B1170(void);
 extern void fn_806B1250(void);
@@ -296,7 +296,7 @@ asm void fn_8050A994(void)
     li r30, 0x0
     b lbl_fn_8050A994_000002D8
 lbl_fn_8050A994_000002B0:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r30, r3, 24
     b lbl_fn_8050A994_000002D8
 lbl_fn_8050A994_000002BC:
@@ -803,7 +803,7 @@ asm void fn_8050B01C(void)
     li r30, 0x0
     b lbl_fn_8050B01C_00000954
 lbl_fn_8050B01C_0000092C:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r30, r3, 24
     b lbl_fn_8050B01C_00000954
 lbl_fn_8050B01C_00000938:
@@ -990,7 +990,7 @@ lbl_fn_8050B228_00000B54:
     li r0, 0x0
     b lbl_fn_8050B228_00000BB0
 lbl_fn_8050B228_00000B88:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_8050B228_00000BB0
 lbl_fn_8050B228_00000B94:
@@ -1074,7 +1074,7 @@ lbl_fn_8050B228_00000C8C:
     li r0, 0x0
     b lbl_fn_8050B228_00000CD4
 lbl_fn_8050B228_00000CAC:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_8050B228_00000CD4
 lbl_fn_8050B228_00000CB8:
@@ -1298,7 +1298,7 @@ lbl_fn_8050B674_00000F84:
     li r0, 0x0
     b lbl_fn_8050B674_00000FCC
 lbl_fn_8050B674_00000FA4:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_8050B674_00000FCC
 lbl_fn_8050B674_00000FB0:
@@ -1634,7 +1634,7 @@ lbl_fn_8050BAC8_000013D8:
     li r0, 0x0
     b lbl_fn_8050BAC8_00001420
 lbl_fn_8050BAC8_000013F8:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_8050BAC8_00001420
 lbl_fn_8050BAC8_00001404:
@@ -1730,7 +1730,7 @@ lbl_fn_8050BAC8_00001514:
     li r3, 0x0
     b lbl_fn_8050BAC8_00001560
 lbl_fn_8050BAC8_00001538:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r3, r3, 24
     b lbl_fn_8050BAC8_00001560
 lbl_fn_8050BAC8_00001544:
@@ -1798,7 +1798,7 @@ lbl_fn_8050BAC8_000015EC:
     li r0, 0x0
     b lbl_fn_8050BAC8_00001648
 lbl_fn_8050BAC8_00001620:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_8050BAC8_00001648
 lbl_fn_8050BAC8_0000162C:
@@ -1857,7 +1857,7 @@ asm void fn_8050BDC8(void)
     li r0, 0x0
     b lbl_fn_8050BDC8_00001700
 lbl_fn_8050BDC8_000016D8:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_8050BDC8_00001700
 lbl_fn_8050BDC8_000016E4:
@@ -1893,7 +1893,7 @@ lbl_fn_8050BDC8_0000172C:
     li r0, 0x0
     b lbl_fn_8050BDC8_00001778
 lbl_fn_8050BDC8_00001750:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_8050BDC8_00001778
 lbl_fn_8050BDC8_0000175C:
@@ -1923,7 +1923,7 @@ lbl_fn_8050BDC8_00001778:
     li r29, 0x0
     b lbl_fn_8050BDC8_000017DC
 lbl_fn_8050BDC8_000017B4:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r29, r3, 24
     b lbl_fn_8050BDC8_000017DC
 lbl_fn_8050BDC8_000017C0:

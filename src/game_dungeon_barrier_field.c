@@ -14,7 +14,7 @@ extern void talk_formatQuotedString(void);
 extern void skill_calculateDamage(void);
 extern void route_findNextWaypoint(void);
 extern void route_createSegment(void);
-extern void fn_80087E9C(void);
+extern void route_createWaypoint(void);
 extern void fn_80088724(void);
 extern void node_createNamedChild(void);
 extern void node_destroy(void);
@@ -24,7 +24,7 @@ extern void fn_800902C0(void);
 extern void fn_80092A4C(void);
 extern void atn_Lockon_updateTargetTextures(void);
 extern void fn_80097E80(void);
-extern void fn_800BFAC8(void);
+extern void motion_updateFogAdj(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
@@ -1331,7 +1331,7 @@ asm void fn_803ED610(void)
     lwz r4, lbl_8087EFB4
     addi r3, r1, 0x8
     addi r5, r30, 0x6c
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f0, lbl_80885F54
     lfs f1, 0x10(r1)
     fcmpo cr0, f0, f1
@@ -1426,7 +1426,7 @@ asm void fn_803ED774(void)
     lwz r4, lbl_8087EFB4
     addi r3, r1, 0x14
     addi r5, r30, 0x6c
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f0, lbl_80885F54
     lfs f1, 0x1c(r1)
     fcmpo cr0, f0, f1
@@ -1583,7 +1583,7 @@ lbl_fn_803ED92C_00001468:
     addi r5, r29, 0x6c
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_80885F70
     mr r3, r30
     lfs f2, lbl_80885F74
@@ -1610,7 +1610,7 @@ lbl_fn_803ED92C_00001468:
     addi r5, r29, 0x90
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     mr r3, r30
     addi r4, r31, 0xbc
     addi r5, r29, 0x9c
@@ -1819,7 +1819,7 @@ asm void fn_803EDCF4(void)
     lwz r4, lbl_8087EFB4
     addi r3, r1, 0x14
     addi r5, r30, 0x6c
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f0, lbl_80885F54
     lfs f1, 0x1c(r1)
     fcmpo cr0, f0, f1

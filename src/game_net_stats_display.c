@@ -9,7 +9,7 @@ extern void dtor_80084684(void);
 extern void fn_80063484(void);
 extern void mem_free(void);
 extern void msg_getMessageById(void);
-extern void fn_800BFAC8(void);
+extern void motion_updateFogAdj(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void str_calcHash(void);
@@ -27,7 +27,7 @@ extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void fn_8014C540(void);
 extern void fn_80151448(void);
-extern void fn_8015495C(void);
+extern void equip_applyToCharacter(void);
 extern void fn_8015EB2C(void);
 extern void fn_80161570(void);
 extern void fn_8016AB0C(void);
@@ -583,7 +583,7 @@ lbl_fn_8054622C_00000650:
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
 lbl_fn_8054622C_0000067C:
     mr r3, r31
     bl quest_updateFlow
@@ -1106,7 +1106,7 @@ asm void fn_80546A4C(void)
     fmuls f31, f31, f4
     stfs f0, 0x2c(r1)
     stfs f3, 0x30(r1)
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f0, lbl_80887CE0
     lfs f3, 0x28(r1)
     fcmpo cr0, f0, f3
@@ -1477,7 +1477,7 @@ lbl_fn_80546B88_000012D4:
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     lfs f1, lbl_80887D1C
     li r17, 0x1
     stw r17, 0xd18(r18)

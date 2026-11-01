@@ -10,7 +10,7 @@ extern void fn_8000D430(void);
 extern void fn_8000D7DC(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
-extern void fn_8003EFB0(void);
+extern void ui_destroyWidget(void);
 extern void fn_8004B290(void);
 extern void fn_8004B338(void);
 extern void atn_ColliBase_destructor(void);
@@ -297,11 +297,11 @@ lbl_fn_80136138_000001DC:
     lis r3, lbl_807C6BB8@ha
     li r0, 0x0
     stwu r0, lbl_807C6BB8@l(r3)
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     li r29, 0x1
     lis r5, lbl_807C7B10@ha
     stw r0, 0x4(r3)
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     addi r5, r5, lbl_807C7B10@l
     stw r0, 0x8(r3)
     stw r29, 0xc(r3)

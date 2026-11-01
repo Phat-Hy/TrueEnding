@@ -25,7 +25,7 @@ extern void fn_80133B30(void);
 extern void fn_801346C8(void);
 extern void fn_801546F4(void);
 extern void fn_80164DCC(void);
-extern void fn_8016DA4C(void);
+extern void debuff_clearStatus(void);
 extern void actor_setState(void);
 extern void fn_8016EB48(void);
 extern void fn_801750FC(void);
@@ -936,7 +936,7 @@ lbl_fn_80374964_00000B8C:
     b lbl_fn_80374964_00000BCC
 lbl_fn_80374964_00000B98:
     mr r3, r27
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lwz r0, 0x55c(r27)
     cmpwi r0, 0x6
     bne lbl_fn_80374964_00000BC8

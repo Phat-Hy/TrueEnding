@@ -14,7 +14,7 @@ extern void node_destroy(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800BFAC8(void);
+extern void motion_updateFogAdj(void);
 extern void atn_Task_setActive(void);
 extern void bloom_processPasses(void);
 extern void str_findChar(void);
@@ -1006,7 +1006,7 @@ lbl_fn_802C85B0_00000C58:
     lwz r4, lbl_8087EFB4
     stfs f1, 0x1c(r1)
     stfs f0, 0x18(r1)
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lwz r4, 0x1540(r31)
     lis r30, lbl_80746DEC@ha
     addi r30, r30, lbl_80746DEC@l

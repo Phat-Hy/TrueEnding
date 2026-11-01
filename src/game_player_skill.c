@@ -7,7 +7,7 @@ extern void dtor_80013D60(void);
 extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
-extern void fn_8003E4A4(void);
+extern void str_initFromCStr(void);
 extern void fn_8004203C(void);
 extern void fn_8004212C(void);
 extern void talk_parseQuotedString(void);
@@ -1005,7 +1005,7 @@ lbl_fn_8011FFF8_00000A20:
     stw r3, 0x2c(r26)
     mr r4, r24
     addi r3, r1, 0x20
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x44
     addi r4, r1, 0x20
     bl fn_801207D4
@@ -1019,7 +1019,7 @@ lbl_fn_8011FFF8_00000A54:
     stw r3, 0x2c(r26)
     mr r4, r24
     addi r3, r1, 0x14
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x38
     addi r4, r1, 0x14
     bl fn_801207D4
@@ -1033,7 +1033,7 @@ lbl_fn_8011FFF8_00000A88:
     stw r3, 0x2c(r26)
     mr r4, r24
     addi r3, r1, 0x8
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x2c
     addi r4, r1, 0x8
     bl fn_801207D4

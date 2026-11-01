@@ -22,8 +22,8 @@ extern void fn_8013A258(void);
 extern void fn_8013C38C(void);
 extern void fn_8013C504(void);
 extern void fn_8013CB68(void);
-extern void fn_8015495C(void);
-extern void fn_8016DA4C(void);
+extern void equip_applyToCharacter(void);
+extern void debuff_clearStatus(void);
 extern void actor_setState(void);
 extern void fn_8017039C(void);
 extern void fn_80170A20(void);
@@ -276,9 +276,9 @@ asm void fn_802FF550(void)
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     mr r3, r31
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     li r4, 0x0
     li r3, 0x50
     li r0, 0x1e

@@ -36,7 +36,7 @@ extern void fn_8014C540(void);
 extern void fn_8015E7A0(void);
 extern void fn_8015ECC4(void);
 extern void fn_80166A54(void);
-extern void fn_8016DA4C(void);
+extern void debuff_clearStatus(void);
 extern void actor_setState(void);
 extern void task_findEntryById(void);
 extern void res_MsgHandle_unload(void);
@@ -1073,7 +1073,7 @@ asm void fn_80256C04(void)
     stw r3, 0x58c(r15)
     mr r3, r15
     stw r0, 0x14c8(r15)
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lwz r3, 0x5c0(r15)
     li r0, 0x1
     stw r0, 0x14d4(r15)
@@ -1619,7 +1619,7 @@ lbl_fn_80256C04_00001564:
     li r14, 0x0
     stw r14, 0x14d4(r15)
     mr r3, r15
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lwz r0, 0x16b0(r15)
     li r3, 0x6
     li r4, 0x2

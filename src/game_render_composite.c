@@ -7,7 +7,7 @@ extern void _restgpr_26(void);
 extern void _savegpr_26(void);
 extern void dtor_80013D60(void);
 extern void dtor_80084684(void);
-extern void fn_8003E4A4(void);
+extern void str_initFromCStr(void);
 extern void fn_8004212C(void);
 extern void fn_80057A64(void);
 extern void atn_ColliCapsule_destructor(void);
@@ -1356,14 +1356,14 @@ asm void fn_802BA92C(void)
     addi r4, r30, lbl_80746B20@l
     stfs f0, 0x1930(r28)
     stw r0, 0x12a4(r28)
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r30, r30, lbl_80746B20@l
     addi r3, r1, 0x20
     addi r4, r30, 0x18
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x14
     addi r4, r29, 0x2c
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x74
     addi r4, r30, 0x2b
     li r5, 0x0

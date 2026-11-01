@@ -21,10 +21,10 @@ extern void fn_8010B250(void);
 extern void magic_dispatchActionCommand(void);
 extern void fn_8014DEE4(void);
 extern void fn_8014EF48(void);
-extern void fn_8015495C(void);
+extern void equip_applyToCharacter(void);
 extern void fn_8015D8C0(void);
 extern void fn_80161570(void);
-extern void fn_8016DA4C(void);
+extern void debuff_clearStatus(void);
 extern void fn_8016DDB0(void);
 extern void actor_setState(void);
 extern void fn_80178A6C(void);
@@ -183,9 +183,9 @@ asm void fn_8026C844(void)
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     mr r3, r30
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     li r0, 0x15
     stw r0, 0x58c(r30)
     mr r3, r30

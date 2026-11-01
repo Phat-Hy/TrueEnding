@@ -11,7 +11,7 @@ extern void vec3_set(void);
 extern void fn_8000DD0C(void);
 extern void vec3_toEulerAngles(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
-extern void fn_8003EFB0(void);
+extern void ui_destroyWidget(void);
 extern void fn_8004D388(void);
 extern void collision_testLineSegment(void);
 extern void fn_8005361C(void);
@@ -267,11 +267,11 @@ asm void fn_8010EE78(void)
     bne lbl_fn_8010EE78_00000254
     lis r3, lbl_807C6BB8@ha
     stwu r29, lbl_807C6BB8@l(r3)
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     li r30, 0x1
     lis r5, lbl_807C7888@ha
     stw r29, 0x4(r3)
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     stw r29, 0x8(r3)
     addi r5, r5, lbl_807C7888@l
     stw r30, 0xc(r3)

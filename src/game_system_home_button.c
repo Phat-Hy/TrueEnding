@@ -21,10 +21,10 @@ extern void mem_free(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void route_interpolatePath(void);
-extern void fn_80087E9C(void);
+extern void route_createWaypoint(void);
 extern void node_createNamedChild(void);
 extern void node_destroy(void);
-extern void fn_800BFAC8(void);
+extern void motion_updateFogAdj(void);
 extern void fn_800C3184(void);
 extern void fn_800C31E4(void);
 extern void skin_playAnimationByName(void);
@@ -1533,7 +1533,7 @@ lbl_fn_80360CDC_000011DC:
     addi r4, r29, 0xb
     addi r5, r5, 0x2c
     addi r6, r30, fn_80361100@l
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_8088569C
     mr r3, r28
     lwz r5, 0x50(r31)
@@ -1952,7 +1952,7 @@ lbl_fn_803612F4_00001758:
     addi r3, r1, 0x8
     lwz r4, lbl_8087EFB4
     addi r5, r5, 0x2c
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f0, lbl_808856A0
     lfs f1, 0x10(r1)
     fcmpo cr0, f0, f1

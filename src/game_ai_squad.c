@@ -12,7 +12,7 @@ extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800F8574(void);
-extern void fn_800F8C6C(void);
+extern void scissor_clipFrustum(void);
 extern void clip_calculateFrustum(void);
 extern void fn_80108C10(void);
 extern void fn_80144710(void);
@@ -202,7 +202,7 @@ lbl_fn_80269168_000000F0:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
 lbl_fn_80269168_0000012C:
     lwz r0, 0x24(r1)
     psq_l f31, 0x18(r1), 0, 0
@@ -1203,7 +1203,7 @@ lbl_fn_8026A010_00000FA4:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     b lbl_fn_8026A010_000010C0
 lbl_fn_8026A010_00000FE4:
     cmpwi r0, 0x2
@@ -1261,7 +1261,7 @@ lbl_fn_8026A010_00001070:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
 lbl_fn_8026A010_000010C0:
     lfs f4, 0x1538(r31)
     lis r6, 0x4330
@@ -1620,7 +1620,7 @@ lbl_fn_8026A628_000015B0:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
 lbl_fn_8026A628_000015EC:
     lwz r0, 0x24(r1)
     psq_l f31, 0x18(r1), 0, 0

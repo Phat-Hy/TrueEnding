@@ -6,7 +6,7 @@ extern void __register_global_object(void);
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8003EFB0(void);
+extern void ui_destroyWidget(void);
 extern void fn_8004B290(void);
 extern void fn_8004B338(void);
 extern void atn_ColliBase_destructor(void);
@@ -20,7 +20,7 @@ extern void mem_alloc(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
-extern void fn_80087E9C(void);
+extern void route_createWaypoint(void);
 extern void fn_80088724(void);
 extern void node_createNamedChild(void);
 extern void atn_Model_findBoneIndex(void);
@@ -845,11 +845,11 @@ lbl_fn_803F3820_00000A68:
     lis r3, lbl_807C6BB8@ha
     li r0, 0x0
     stwu r0, lbl_807C6BB8@l(r3)
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     li r29, 0x1
     lis r5, lbl_807C8730@ha
     stw r0, 0x4(r3)
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     addi r5, r5, lbl_807C8730@l
     stw r0, 0x8(r3)
     stw r29, 0xc(r3)
@@ -1017,7 +1017,7 @@ lbl_fn_803F3FBC_00000C80:
     addi r5, r28, 0x6c
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_80885FD8
     mr r3, r30
     lfs f2, lbl_80885FDC
@@ -1035,7 +1035,7 @@ lbl_fn_803F3FBC_00000C80:
     addi r5, r28, 0x90
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     mr r3, r30
     addi r4, r31, 0x152
     addi r5, r28, 0x9c
@@ -1053,7 +1053,7 @@ lbl_fn_803F3FBC_00000C80:
     addi r5, r28, 0x260
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_80885FB0
     mr r3, r29
     lfs f2, lbl_80885FD0

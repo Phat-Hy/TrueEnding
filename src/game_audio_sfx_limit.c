@@ -9,7 +9,7 @@ extern void vec3_set(void);
 extern void fn_8000D3A8(void);
 extern void fn_8000DD14(void);
 extern void fn_8000DD98(void);
-extern void fn_8003E4A4(void);
+extern void str_initFromCStr(void);
 extern void fn_8004212C(void);
 extern void fn_80057A64(void);
 extern void talk_parseQuotedString(void);
@@ -20,7 +20,7 @@ extern void fn_8006CA80(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
-extern void fn_80087E9C(void);
+extern void route_createWaypoint(void);
 extern void node_createNamedChild(void);
 extern void fn_8008A4E0(void);
 extern void fn_8008A76C(void);
@@ -1070,14 +1070,14 @@ asm void fn_803161F8(void)
     addi r4, r29, lbl_8074959C@l
     stw r5, 0x1c98(r31)
     stw r0, 0x1c9c(r31)
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r29, r29, lbl_8074959C@l
     addi r3, r1, 0x20
     addi r4, r29, 0x18
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x14
     addi r4, r28, 0x2c
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x74
     addi r4, r29, 0x2b
     li r5, 0x0
@@ -1359,7 +1359,7 @@ lbl_fn_803165EC_000010B8:
     addi r5, r30, 0x528
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     addi r3, r30, 0x14b0
     bl boss_getOffset54
     cmpwi r3, 0x0

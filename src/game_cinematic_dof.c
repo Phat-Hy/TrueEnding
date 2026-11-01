@@ -12,7 +12,7 @@ extern void fn_8000D760(void);
 extern void fn_8000D9E8(void);
 extern void fn_8000DCF4(void);
 extern void fn_8000DD0C(void);
-extern void fn_8003E4A4(void);
+extern void str_initFromCStr(void);
 extern void fn_8004203C(void);
 extern void fn_8004212C(void);
 extern void collision_testLineSegment(void);
@@ -663,14 +663,14 @@ asm void fn_803388A4(void)
     stfs f0, 0x1774(r31)
     stw r5, 0x1778(r31)
     stw r0, 0x12a4(r31)
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r29, r29, lbl_8074A4C0@l
     addi r3, r1, 0x20
     addi r4, r29, 0x18
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x14
     addi r4, r27, 0x2c
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x74
     addi r4, r29, 0x32
     li r5, 0x0

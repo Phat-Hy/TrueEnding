@@ -37,10 +37,10 @@ extern void fn_8013A258(void);
 extern void fn_8013CB68(void);
 extern void dialog_renderWindow(void);
 extern void fn_80151448(void);
-extern void fn_8015495C(void);
+extern void equip_applyToCharacter(void);
 extern void fn_8015E4B0(void);
 extern void fn_801603CC(void);
-extern void fn_8016DA4C(void);
+extern void debuff_clearStatus(void);
 extern void actor_setState(void);
 extern void fn_80178208(void);
 extern void fn_80178A6C(void);
@@ -366,9 +366,9 @@ lbl_fn_8025B7DC_000002F0:
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     mr r3, r30
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lfs f0, lbl_808834B0
     li r3, 0x2
     li r0, 0x1

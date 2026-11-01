@@ -23,11 +23,11 @@ extern void fn_80109828(void);
 extern void fn_8012DF7C(void);
 extern void fn_8013CB68(void);
 extern void fn_80148B0C(void);
-extern void fn_8015495C(void);
+extern void equip_applyToCharacter(void);
 extern void fn_8015BAF0(void);
 extern void fn_8015BDD8(void);
 extern void fn_8015E7A0(void);
-extern void fn_8016DA4C(void);
+extern void debuff_clearStatus(void);
 extern void actor_setState(void);
 extern void fn_801765D8(void);
 extern void fn_80178A6C(void);
@@ -1394,7 +1394,7 @@ asm void fn_802CC39C(void)
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
 lbl_fn_802CC39C_000012D0:
     li r0, 0x0
     stw r0, 0x14d0(r31)
@@ -1593,9 +1593,9 @@ asm void fn_802CC708(void)
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     mr r3, r31
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lfs f0, lbl_808843F4
     li r3, 0x2
     li r0, 0x1
@@ -1642,7 +1642,7 @@ asm void fn_802CC708(void)
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     li r0, 0x0
     stw r0, 0x14d0(r31)
 lbl_fn_802CC708_0000164C:

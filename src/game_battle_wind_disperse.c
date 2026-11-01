@@ -14,7 +14,7 @@ extern void fn_800C18BC(void);
 extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_8011FE3C(void);
 extern void fn_80144710(void);
-extern void fn_8015495C(void);
+extern void equip_applyToCharacter(void);
 extern void actor_setState(void);
 extern void fn_8016EB48(void);
 extern void fn_80170F20(void);
@@ -531,7 +531,7 @@ asm void fn_8041EF90(void)
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     lwz r3, 0x120(r31)
     li r4, 0x0
     li r5, 0x0
@@ -1027,7 +1027,7 @@ asm void fn_8041F6A4(void)
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     lwz r3, 0x120(r31)
     li r4, 0x0
     li r5, 0x0
@@ -1480,7 +1480,7 @@ lbl_fn_8041F6A4_0000101C:
     lwz r0, 0x50(r8)
     stw r0, 0x128(r3)
     mr r3, r8
-    bl fn_8015495C
+    bl equip_applyToCharacter
     lwz r3, 0x120(r31)
     li r4, 0x0
     li r5, 0x0

@@ -11,7 +11,7 @@ extern void atn_Task_setActive(void);
 extern void fn_800EE360(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800F8574(void);
-extern void fn_800F8C6C(void);
+extern void scissor_clipFrustum(void);
 extern void clip_calculateFrustum(void);
 extern void fn_80134674(void);
 extern void fn_80139560(void);
@@ -293,7 +293,7 @@ lbl_fn_802604E0_000002C0:
     lfs f1, lbl_80883578
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     b lbl_fn_802604E0_00000920
     mr r3, r31
     bl fn_80261A50
@@ -624,7 +624,7 @@ lbl_fn_802604E0_00000688:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     b lbl_fn_802604E0_0000089C
 lbl_fn_802604E0_00000814:
     lfs f31, 0x2e4(r31)

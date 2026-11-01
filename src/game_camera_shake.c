@@ -29,11 +29,11 @@ extern void fn_8012D8B8(void);
 extern void fn_8013310C(void);
 extern void fn_80133130(void);
 extern void quest_updateFlow(void);
-extern void fn_8015495C(void);
+extern void equip_applyToCharacter(void);
 extern void fn_80166760(void);
 extern void fn_80166D3C(void);
 extern void fn_80167F1C(void);
-extern void fn_8016DA4C(void);
+extern void debuff_clearStatus(void);
 extern void actor_setState(void);
 extern void fn_80178A6C(void);
 extern void sound_initGlobalInstances(void);
@@ -412,9 +412,9 @@ asm void fn_802DC618(void)
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     mr r3, r28
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     li r0, 0x2
     stw r0, 0x58c(r28)
     mr r3, r28
@@ -1735,7 +1735,7 @@ lbl_fn_802DD1B4_00001794:
     stw r17, 0xd18(r22)
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     lfs f2, 0xc(r21)
     mr r3, r22
     psq_l f1, 0x4(r21), 0, 0
@@ -1860,7 +1860,7 @@ lbl_fn_802DDA90_00001954:
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     mr r3, r28
     bl fn_802E3D60
 lbl_fn_802DDA90_00001980:

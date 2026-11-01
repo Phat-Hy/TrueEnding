@@ -22,7 +22,7 @@ extern void node_createNamedChild(void);
 extern void node_destroy(void);
 extern void fn_800BDB40(void);
 extern void fn_800BDB58(void);
-extern void fn_800BFAC8(void);
+extern void motion_updateFogAdj(void);
 extern void fn_800C169C(void);
 extern void fn_800C2448(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
@@ -2213,7 +2213,7 @@ asm void fn_80078938(void)
     mr r4, r30
     addi r3, r1, 0x170
     addi r5, r1, 0x194
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f2, lbl_80880AD0
     lis r4, 0x4330
     lwz r3, lbl_8087EEE0

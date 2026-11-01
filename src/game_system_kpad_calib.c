@@ -22,7 +22,7 @@ extern void quest_checkCondition(void);
 extern void fn_8014DEE4(void);
 extern void fn_80154344(void);
 extern void fn_80155DAC(void);
-extern void fn_8016DA4C(void);
+extern void debuff_clearStatus(void);
 extern void fn_8016EB48(void);
 extern void actor_getMovementFlags(void);
 extern void fn_801E97DC(void);
@@ -1467,7 +1467,7 @@ lbl_fn_80371334_000012A8:
     cmpwi r0, 0xd
     bne lbl_fn_80371334_00001300
     mr r3, r30
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     mr r3, r30
     li r4, 0x0
     li r5, 0x0

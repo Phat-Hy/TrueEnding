@@ -25,7 +25,7 @@ extern void fn_8013CB68(void);
 extern void fn_801539E0(void);
 extern void fn_80155DAC(void);
 extern void fn_80164DCC(void);
-extern void fn_8016DA4C(void);
+extern void debuff_clearStatus(void);
 extern void actor_getMovementFlags(void);
 extern void fn_801905AC(void);
 extern void fn_801905DC(void);
@@ -126,7 +126,7 @@ asm void fn_8019A580(void)
     stfs f2, 0x14(r3)
     stw r0, 0x560(r4)
     lwz r3, 0x4(r3)
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lwz r3, 0x4(r31)
     lwz r0, 0x12a4(r3)
     srwi. r0, r0, 31
@@ -1065,7 +1065,7 @@ lbl_fn_8019B29C_00000D94:
     clrrwi r0, r0, 1
     stw r0, 0x5c0(r3)
     lwz r3, 0x4(r30)
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lwz r3, 0x4(r30)
     li r4, 0x1
     bl fn_80164DCC

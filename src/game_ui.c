@@ -110,7 +110,7 @@ void fn_8003E6B8(void);
 void fn_8003E918(void);
 void fn_8003E950(void);
 void fn_8003EA3C(void);
-void fn_8003EFB0(void);
+void ui_destroyWidget(void);
 void fn_8003F030(void);
 void fn_8003F1E4(void);
 void fn_8003F440(void);
@@ -740,11 +740,11 @@ lbl_fn_8003EA3C_0000083C:
     lis r3, lbl_807C6BB8@ha
     li r0, 0x0
     stwu r0, lbl_807C6BB8@l(r3)
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     li r25, 0x1
     lis r5, lbl_807C6BA8@ha
     stw r0, 0x4(r3)
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     addi r5, r5, lbl_807C6BA8@l
     stw r0, 0x8(r3)
     stw r25, 0xc(r3)
@@ -791,7 +791,7 @@ lbl_fn_8003EA3C_0000090C:
     blr
 }
 
-asm void fn_8003EFB0(void)
+asm void ui_destroyWidget(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -802,25 +802,25 @@ asm void fn_8003EFB0(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    beq lbl_fn_8003EFB0_0000098C
-    beq lbl_fn_8003EFB0_0000097C
-    beq lbl_fn_8003EFB0_0000097C
-    beq lbl_fn_8003EFB0_0000097C
-    beq lbl_fn_8003EFB0_0000097C
+    beq lbl_ui_destroyWidget_0000098C
+    beq lbl_ui_destroyWidget_0000097C
+    beq lbl_ui_destroyWidget_0000097C
+    beq lbl_ui_destroyWidget_0000097C
+    beq lbl_ui_destroyWidget_0000097C
     lwz r4, 0x0(r3)
     cmpwi r4, 0x0
-    beq lbl_fn_8003EFB0_0000097C
+    beq lbl_ui_destroyWidget_0000097C
     lwz r0, 0x4(r3)
     subf r0, r0, r0
     stw r0, 0x4(r3)
     mr r3, r4
     bl dtor_80084684
-lbl_fn_8003EFB0_0000097C:
+lbl_ui_destroyWidget_0000097C:
     cmpwi r31, 0x0
-    ble lbl_fn_8003EFB0_0000098C
+    ble lbl_ui_destroyWidget_0000098C
     mr r3, r30
     bl dtor_80084684
-lbl_fn_8003EFB0_0000098C:
+lbl_ui_destroyWidget_0000098C:
     mr r3, r30
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -1074,11 +1074,11 @@ lbl_fn_8003F1E4_00000CD4:
     lis r3, lbl_807C6BB8@ha
     li r0, 0x0
     stwu r0, lbl_807C6BB8@l(r3)
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     li r30, 0x1
     lis r5, lbl_807C6BA8@ha
     stw r0, 0x4(r3)
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     addi r5, r5, lbl_807C6BA8@l
     stw r0, 0x8(r3)
     stw r30, 0xc(r3)

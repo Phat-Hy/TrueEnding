@@ -28,7 +28,7 @@ extern void fn_800CB6E4(void);
 extern void atn_Task_setActive(void);
 extern void str_parseInt(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8C6C(void);
+extern void scissor_clipFrustum(void);
 extern void clip_calculateFrustum(void);
 extern void boss_updatePhaseState(void);
 extern void quest_updateFlow(void);
@@ -1684,7 +1684,7 @@ lbl_fn_802E9590_00001610:
     lfs f1, lbl_808847A8
     li r9, 0x3c
     li r10, 0x5
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
 lbl_fn_802E9590_0000165C:
     lwz r4, 0x14f4(r31)
     cmpwi r4, 0x0

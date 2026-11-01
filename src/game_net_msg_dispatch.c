@@ -12,7 +12,7 @@ extern void skill_calculateDamage(void);
 extern void fn_80061824(void);
 extern void fn_8006F2F0(void);
 extern void str_assignBuffer(void);
-extern void fn_800BFAC8(void);
+extern void motion_updateFogAdj(void);
 extern void fn_800DBF68(void);
 extern void fn_8050284C(void);
 extern void fn_80502874(void);
@@ -23,7 +23,7 @@ extern void fn_8068B2A0(void);
 extern void fn_806A8E40(void);
 extern void fn_806A8E70(void);
 extern void fn_806B0DE0(void);
-extern void fn_806B0E30(void);
+extern void net_getMyAid(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -1360,7 +1360,7 @@ lbl_fn_804F7F58_00001154:
     li r0, 0x0
     b lbl_fn_804F7F58_000011B0
 lbl_fn_804F7F58_00001188:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804F7F58_000011B0
 lbl_fn_804F7F58_00001194:
@@ -1437,7 +1437,7 @@ lbl_fn_804F7F58_0000123C:
     stfs f0, 0x2c(r1)
     stfs f1, 0x30(r1)
     stfs f2, 0x34(r1)
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f0, 0x4c(r1)
     fcmpo cr0, f31, f0
     cror eq, lt, eq
@@ -1580,7 +1580,7 @@ lbl_fn_804F7F58_00001468:
     stfs f0, 0x14(r1)
     stfs f1, 0x18(r1)
     stfs f2, 0x1c(r1)
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f0, 0x40(r1)
     fcmpo cr0, f28, f0
     cror eq, lt, eq
@@ -2795,7 +2795,7 @@ lbl_fn_804F8468_0000263C:
     li r0, 0x0
     b lbl_fn_804F8468_00002688
 lbl_fn_804F8468_00002660:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804F8468_00002688
 lbl_fn_804F8468_0000266C:
@@ -3317,7 +3317,7 @@ lbl_fn_804F8468_00002DA4:
     li r0, 0x0
     b lbl_fn_804F8468_00002DF4
 lbl_fn_804F8468_00002DCC:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804F8468_00002DF4
 lbl_fn_804F8468_00002DD8:

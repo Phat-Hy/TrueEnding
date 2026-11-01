@@ -14,7 +14,7 @@ extern void fn_8008CD60(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_8009373C(void);
 extern void fn_80094F98(void);
-extern void fn_800BFAC8(void);
+extern void motion_updateFogAdj(void);
 extern void wcs_vformat(void);
 extern void fn_8010A4A8(void);
 extern void fn_8011D21C(void);
@@ -547,7 +547,7 @@ lbl_dialog_renderWindow_00000620:
     lwz r4, lbl_8087EFB4
     addi r3, r1, 0x1c4
     addi r5, r1, 0x1d0
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f0, 0x1cc(r1)
     lfs f4, lbl_8088196C
     fcmpo cr0, f0, f4
@@ -1484,7 +1484,7 @@ lbl_dialog_renderWindow_00001384:
     lwz r4, lbl_8087EFB4
     addi r3, r1, 0x190
     addi r5, r24, 0x528
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lwz r3, lbl_8087F0A8
     lfs f3, 0x194(r1)
     lfs f0, lbl_808819E0
@@ -2245,7 +2245,7 @@ lbl_dialog_renderWindow_00001ECC:
     lwz r4, lbl_8087EFB4
     addi r3, r1, 0x178
     addi r5, r1, 0x184
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f4, 0x180(r1)
     lfs f3, lbl_8088196C
     fcmpo cr0, f4, f3
@@ -2314,7 +2314,7 @@ lbl_dialog_renderWindow_00001FD4:
     lwz r4, lbl_8087EFB4
     addi r3, r1, 0x160
     addi r5, r1, 0x16c
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f4, 0x168(r1)
     lfs f3, lbl_8088196C
     fcmpo cr0, f4, f3
@@ -2383,7 +2383,7 @@ lbl_dialog_renderWindow_000020DC:
     lwz r4, lbl_8087EFB4
     addi r3, r1, 0x148
     addi r5, r1, 0x154
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f4, 0x150(r1)
     lfs f3, lbl_8088196C
     fcmpo cr0, f4, f3
@@ -2527,7 +2527,7 @@ lbl_dialog_renderWindow_000022E4:
     lwz r4, lbl_8087EFB4
     addi r3, r1, 0x130
     addi r5, r1, 0x13c
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f3, 0x138(r1)
     lfs f0, lbl_8088196C
     fcmpo cr0, f3, f0
@@ -2702,7 +2702,7 @@ lbl_dialog_renderWindow_00002540:
     lwz r4, lbl_8087EFB4
     addi r3, r1, 0x118
     addi r5, r1, 0x124
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f4, 0x120(r1)
     lfs f3, lbl_8088196C
     fcmpo cr0, f4, f3
@@ -2796,7 +2796,7 @@ lbl_dialog_renderWindow_000026AC:
     lwz r4, lbl_8087EFB4
     addi r3, r1, 0x100
     addi r5, r1, 0x10c
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f4, 0x108(r1)
     lfs f3, lbl_8088196C
     fcmpo cr0, f4, f3

@@ -26,7 +26,7 @@ extern void fn_800A04A0(void);
 extern void atn_Anim_getDuration(void);
 extern void fn_800A08E0(void);
 extern void str_skipWhitespace(void);
-extern void fn_8015495C(void);
+extern void equip_applyToCharacter(void);
 extern void fn_8016EB48(void);
 extern void fn_80170F20(void);
 extern void fn_802180A8(void);
@@ -622,7 +622,7 @@ lbl_fn_8042952C_0000077C:
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     lwz r3, 0xf8(r28)
     lwz r0, 0x55c(r3)
     cmpwi r0, 0x6

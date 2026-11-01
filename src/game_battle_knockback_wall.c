@@ -22,7 +22,7 @@ extern void fn_80011410(void);
 extern void fn_80012C88(void);
 extern void vec3_sub(void);
 extern void fn_80013410(void);
-extern void fn_8003EFB0(void);
+extern void ui_destroyWidget(void);
 extern void fn_8004CCA0(void);
 extern void collision_testLineSegment(void);
 extern void fn_80057A64(void);
@@ -1332,11 +1332,11 @@ lbl_fn_80416CB8_0000103C:
     lis r3, lbl_807C6BB8@ha
     li r0, 0x0
     stwu r0, lbl_807C6BB8@l(r3)
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     li r30, 0x1
     lis r5, lbl_807C88E0@ha
     stw r0, 0x4(r3)
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     addi r5, r5, lbl_807C88E0@l
     stw r0, 0x8(r3)
     stw r30, 0xc(r3)

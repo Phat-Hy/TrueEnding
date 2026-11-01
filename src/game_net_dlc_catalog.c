@@ -15,7 +15,7 @@ extern void mem_alloc(void);
 extern void node_createNamedChild(void);
 extern void node_destroy(void);
 extern void fn_800A4450(void);
-extern void fn_800BFAC8(void);
+extern void motion_updateFogAdj(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
@@ -1906,7 +1906,7 @@ lbl_fn_8054B328_00001804:
     lwz r4, lbl_8087EFB4
     addi r3, r1, 0x58
     addi r5, r1, 0x64
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f3, 0x58(r1)
     lfs f0, 0x6c(r19)
     lfs f4, 0x5c(r1)

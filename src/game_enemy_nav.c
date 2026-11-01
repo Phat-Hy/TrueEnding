@@ -8,7 +8,7 @@ extern void dtor_80084684(void);
 extern void fn_8000D430(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
-extern void fn_80087E9C(void);
+extern void route_createWaypoint(void);
 extern void node_createNamedChild(void);
 extern void fn_80129A6C(void);
 extern void fn_8012C6D4(void);
@@ -206,7 +206,7 @@ asm void fn_8012AD20(void)
     addi r4, r30, 0x2e
     addi r5, r28, 0xc
     addi r6, r31, fn_8012AC64@l
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_808818A8
     mr r3, r29
     lfs f2, lbl_808818B8
@@ -233,7 +233,7 @@ asm void fn_8012AD20(void)
     addi r4, r30, 0x43
     addi r5, r28, 0x54
     addi r6, r31, fn_8012AC64@l
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_808818A8
     mr r3, r29
     lfs f2, lbl_808818B8

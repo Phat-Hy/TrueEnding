@@ -40,7 +40,7 @@ extern void fn_801F4E30(void);
 extern void saveSlot_readSummary(void);
 extern void save_computeCrc32(void);
 extern void fn_801F6E78(void);
-extern void fn_801F837C(void);
+extern void save_findEntryByName(void);
 extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
 extern void thread_dispatchToQueue(void);
@@ -776,7 +776,7 @@ lbl_fn_8046A20C_00000964:
     lwz r3, 0x58(r27)
     addi r4, r30, 0x168
     addi r5, r29, 0x14
-    bl fn_801F837C
+    bl save_findEntryByName
     cmpwi r28, 0x0
     lwz r3, 0x58(r27)
     addi r4, r30, 0x171

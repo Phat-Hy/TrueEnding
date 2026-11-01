@@ -26,7 +26,7 @@ extern void fn_801F64D0(void);
 extern void fn_801F6C2C(void);
 extern void save_computeCrc32(void);
 extern void fn_801F6D7C(void);
-extern void fn_801F837C(void);
+extern void save_findEntryByName(void);
 extern void fn_801F8598(void);
 extern void thread_findAndNotifySlot(void);
 extern void fn_80207C34(void);
@@ -1904,17 +1904,17 @@ lbl_fn_800F0D14_000018A8:
     lwz r5, 0x60(r24)
     lwz r3, 0x54(r28)
     lwz r5, 0x8(r5)
-    bl fn_801F837C
+    bl save_findEntryByName
     lwz r5, 0x60(r24)
     addi r4, r22, 0x133
     lwz r3, 0x70(r28)
     lwz r5, 0x8(r5)
-    bl fn_801F837C
+    bl save_findEntryByName
     lwz r5, 0x60(r24)
     addi r4, r22, 0x138
     lwz r3, 0x70(r28)
     lwz r5, 0x8(r5)
-    bl fn_801F837C
+    bl save_findEntryByName
     addi r28, r28, 0x4
     addi r27, r27, 0x90
     addi r26, r26, 0x1
@@ -1941,11 +1941,11 @@ lbl_fn_800F0D14_000018FC:
     lwz r3, 0x17c(r23)
     addi r4, r26, 0x141
     la r5, lbl_8087D970
-    bl fn_801F837C
+    bl save_findEntryByName
     lwz r3, 0x17c(r23)
     addi r4, r26, 0x148
     la r5, lbl_8087D970
-    bl fn_801F837C
+    bl save_findEntryByName
     lwz r3, 0x180(r23)
     fmr f1, f29
     lfs f0, lbl_808813B8
@@ -1956,11 +1956,11 @@ lbl_fn_800F0D14_000018FC:
     lwz r3, 0x180(r23)
     addi r4, r26, 0x141
     la r5, lbl_8087D970
-    bl fn_801F837C
+    bl save_findEntryByName
     lwz r3, 0x180(r23)
     addi r4, r26, 0x148
     la r5, lbl_8087D970
-    bl fn_801F837C
+    bl save_findEntryByName
     li r0, -0x1
     li r25, 0x1
     stw r24, 0x168(r23)
@@ -2004,11 +2004,11 @@ lbl_fn_800F0D14_000019CC:
     lwz r3, 0x17c(r23)
     addi r4, r1, 0x20
     addi r5, r1, 0xc0
-    bl fn_801F837C
+    bl save_findEntryByName
     lwz r3, 0x180(r23)
     addi r4, r1, 0x20
     addi r5, r1, 0xc0
-    bl fn_801F837C
+    bl save_findEntryByName
     cmpwi r22, 0x1
     blt lbl_fn_800F0D14_00001A84
     lwz r0, 0x1c(r1)
@@ -2067,11 +2067,11 @@ lbl_fn_800F0D14_00001AA8:
     addi r24, r24, lbl_80735460@l
     addi r5, r1, 0x40
     addi r4, r24, 0x148
-    bl fn_801F837C
+    bl save_findEntryByName
     lwz r3, 0x180(r23)
     addi r4, r24, 0x148
     addi r5, r1, 0x40
-    bl fn_801F837C
+    bl save_findEntryByName
     addi r22, r22, 0x1
 lbl_fn_800F0D14_00001B50:
     lis r4, lbl_80735460@ha

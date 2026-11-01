@@ -17,7 +17,7 @@ extern void saveSlot_readSummary(void);
 extern void save_computeCrc32(void);
 extern void fn_801F6E78(void);
 extern void fn_801F7DF0(void);
-extern void fn_801F837C(void);
+extern void save_findEntryByName(void);
 extern void thread_findAndNotify(void);
 extern void thread_dispatchToQueue(void);
 extern void fn_80206B9C(void);
@@ -2146,7 +2146,7 @@ lbl_fn_80597558_00001E08:
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0x38(r3)
     lwz r3, 0x5ba8(r6)
-    bl fn_801F837C
+    bl save_findEntryByName
     b lbl_fn_80597558_00001E80
 lbl_fn_80597558_00001E74:
     addis r3, r22, 0x2

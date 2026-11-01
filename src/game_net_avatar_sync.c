@@ -17,7 +17,7 @@ extern void fn_8006EF48(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_80087E9C(void);
+extern void route_createWaypoint(void);
 extern void node_createNamedChild(void);
 extern void fn_8009EE30(void);
 extern void fn_800A4450(void);
@@ -42,7 +42,7 @@ extern void fn_801F4CB4(void);
 extern void saveSlot_readSummary(void);
 extern void save_computeCrc32(void);
 extern void fn_801F6E78(void);
-extern void fn_801F837C(void);
+extern void save_findEntryByName(void);
 extern void fn_801FEC74(void);
 extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
@@ -1093,7 +1093,7 @@ lbl_fn_80528ED8_00000C64:
     addi r5, r29, 0x5f0
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_80887A7C
     mr r3, r30
     lfs f2, lbl_80887A80
@@ -1102,7 +1102,7 @@ lbl_fn_80528ED8_00000C64:
     addi r5, r29, 0xa4
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_80887A7C
     mr r3, r30
     lfs f2, lbl_80887A80
@@ -1111,7 +1111,7 @@ lbl_fn_80528ED8_00000C64:
     addi r5, r29, 0xb0
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_80887A7C
     mr r3, r30
     lfs f2, lbl_80887A80
@@ -1120,7 +1120,7 @@ lbl_fn_80528ED8_00000C64:
     addi r5, r29, 0xbc
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_80887A7C
     mr r3, r30
     lfs f2, lbl_80887A80
@@ -1129,7 +1129,7 @@ lbl_fn_80528ED8_00000C64:
     addi r5, r29, 0xc8
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)
@@ -1681,7 +1681,7 @@ lbl_fn_80529528_00001428:
     bl perf_getMetricValue
     mr r5, r25
     addi r4, r30, 0xa4
-    bl fn_801F837C
+    bl save_findEntryByName
     lwz r4, 0x8(r27)
     li r3, 0x0
     bl fn_80116FC0
@@ -1690,7 +1690,7 @@ lbl_fn_80529528_00001428:
     bl perf_getMetricValue
     mr r5, r25
     addi r4, r30, 0xaa
-    bl fn_801F837C
+    bl save_findEntryByName
     lwz r4, 0xc(r27)
     li r3, 0x0
     bl fn_80116FC0
@@ -1699,7 +1699,7 @@ lbl_fn_80529528_00001428:
     bl perf_getMetricValue
     mr r5, r25
     addi r4, r30, 0xb3
-    bl fn_801F837C
+    bl save_findEntryByName
     lwz r3, 0x14(r27)
     bl perf_getMetricValue
     addi r4, r30, 0x94
@@ -1713,7 +1713,7 @@ lbl_fn_80529528_00001428:
     bl perf_getMetricValue
     mr r5, r25
     addi r4, r30, 0xa4
-    bl fn_801F837C
+    bl save_findEntryByName
     lwz r3, 0x14(r27)
     bl perf_getMetricValue
     lwz r0, 0x4(r27)

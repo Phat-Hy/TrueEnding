@@ -15,7 +15,7 @@ extern void fn_800A5584(void);
 extern void fn_800A55D4(void);
 extern void fn_800A56A8(void);
 extern void fn_800A58D0(void);
-extern void fn_800BFAC8(void);
+extern void motion_updateFogAdj(void);
 extern void str_findChar(void);
 extern void fn_80112974(void);
 extern void fn_80114468(void);
@@ -1911,7 +1911,7 @@ lbl_fn_8055E724_00001810:
     stfs f0, 0x9c(r1)
     addi r5, r1, 0x90
     lwz r4, lbl_8087EFB4
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f5, lbl_80887EB8
     addi r3, r1, 0x74
     lfs f6, 0x9c(r1)
@@ -1929,7 +1929,7 @@ lbl_fn_8055E724_00001810:
     stfs f0, 0x38(r1)
     stfs f3, 0x3c(r1)
     stfs f4, 0x40(r1)
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f0, 0x9c(r1)
     addi r3, r1, 0x68
     lfs f5, lbl_80887EB8
@@ -1949,7 +1949,7 @@ lbl_fn_8055E724_00001810:
     stfs f8, 0x20(r1)
     stfs f0, 0x24(r1)
     stfs f7, 0x28(r1)
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f5, 0x84(r1)
     addi r3, r1, 0x5c
     lfs f0, 0x78(r1)

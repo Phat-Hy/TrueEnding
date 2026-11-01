@@ -20,9 +20,9 @@ extern void system_getNextSequenceId(void);
 extern void fn_80109828(void);
 extern void fn_8012A1B8(void);
 extern void fn_8013C38C(void);
-extern void fn_8015495C(void);
+extern void equip_applyToCharacter(void);
 extern void fn_8015AC48(void);
-extern void fn_8016DA4C(void);
+extern void debuff_clearStatus(void);
 extern void actor_setState(void);
 extern void fn_80178A6C(void);
 extern void sound_initGlobalInstances(void);
@@ -1489,9 +1489,9 @@ lbl_fn_802ABF6C_000013C8:
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     mr r3, r30
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lfs f0, lbl_80883E44
     li r3, 0x1b
     li r0, 0x1

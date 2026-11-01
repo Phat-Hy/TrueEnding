@@ -28,7 +28,7 @@ extern void fn_801F6C38(void);
 extern void save_computeCrc32(void);
 extern void fn_801F72D4(void);
 extern void fn_801F7590(void);
-extern void fn_801F837C(void);
+extern void save_findEntryByName(void);
 extern void fn_801F8830(void);
 extern void fn_8020924C(void);
 extern void fn_803B3D2C(void);
@@ -1165,7 +1165,7 @@ lbl_fn_803B4C38_00000F24:
 lbl_fn_803B4C38_00000F4C:
     lwz r5, 0x8(r5)
 lbl_fn_803B4C38_00000F50:
-    bl fn_801F837C
+    bl save_findEntryByName
     lwz r5, 0x40(r1)
     lis r4, lbl_8074FD38@ha
     addi r4, r4, lbl_8074FD38@l
@@ -1179,7 +1179,7 @@ lbl_fn_803B4C38_00000F50:
 lbl_fn_803B4C38_00000F7C:
     lwz r5, 0x14(r5)
 lbl_fn_803B4C38_00000F80:
-    bl fn_801F837C
+    bl save_findEntryByName
     lwz r5, 0x40(r1)
     lis r4, lbl_8074FD38@ha
     addi r4, r4, lbl_8074FD38@l
@@ -1193,7 +1193,7 @@ lbl_fn_803B4C38_00000F80:
 lbl_fn_803B4C38_00000FAC:
     lwz r5, 0x20(r5)
 lbl_fn_803B4C38_00000FB0:
-    bl fn_801F837C
+    bl save_findEntryByName
     lwz r5, 0x40(r1)
     lis r4, lbl_8074FD38@ha
     addi r4, r4, lbl_8074FD38@l
@@ -1207,7 +1207,7 @@ lbl_fn_803B4C38_00000FB0:
 lbl_fn_803B4C38_00000FDC:
     lwz r5, 0x2c(r5)
 lbl_fn_803B4C38_00000FE0:
-    bl fn_801F837C
+    bl save_findEntryByName
     lwz r5, 0x40(r1)
     lis r4, lbl_8074FD38@ha
     addi r4, r4, lbl_8074FD38@l
@@ -1221,7 +1221,7 @@ lbl_fn_803B4C38_00000FE0:
 lbl_fn_803B4C38_0000100C:
     lwz r5, 0x8(r5)
 lbl_fn_803B4C38_00001010:
-    bl fn_801F837C
+    bl save_findEntryByName
     lwz r5, 0x40(r1)
     lis r4, lbl_8074FD38@ha
     addi r4, r4, lbl_8074FD38@l
@@ -1235,7 +1235,7 @@ lbl_fn_803B4C38_00001010:
 lbl_fn_803B4C38_0000103C:
     lwz r5, 0x14(r5)
 lbl_fn_803B4C38_00001040:
-    bl fn_801F837C
+    bl save_findEntryByName
     lwz r5, 0x40(r1)
     lis r4, lbl_8074FD38@ha
     addi r4, r4, lbl_8074FD38@l
@@ -1249,7 +1249,7 @@ lbl_fn_803B4C38_00001040:
 lbl_fn_803B4C38_0000106C:
     lwz r5, 0x20(r5)
 lbl_fn_803B4C38_00001070:
-    bl fn_801F837C
+    bl save_findEntryByName
     lwz r5, 0x40(r1)
     lis r4, lbl_8074FD38@ha
     addi r4, r4, lbl_8074FD38@l
@@ -1263,7 +1263,7 @@ lbl_fn_803B4C38_00001070:
 lbl_fn_803B4C38_0000109C:
     lwz r5, 0x2c(r5)
 lbl_fn_803B4C38_000010A0:
-    bl fn_801F837C
+    bl save_findEntryByName
     lis r14, lbl_8074FD38@ha
     lwz r3, 0x50(r15)
     addi r14, r14, lbl_8074FD38@l
@@ -2164,7 +2164,7 @@ lbl_fn_803B5974_00001C3C:
     lwz r3, 0x48(r29)
     addi r4, r30, 0x158
     lwz r5, 0x4(r31)
-    bl fn_801F837C
+    bl save_findEntryByName
     lwz r0, 0x78(r1)
     addi r4, r30, 0x161
     lwz r3, 0x48(r29)
@@ -2175,7 +2175,7 @@ lbl_fn_803B5974_00001C3C:
 lbl_fn_803B5974_00001CB8:
     lwz r5, 0x80(r1)
 lbl_fn_803B5974_00001CBC:
-    bl fn_801F837C
+    bl save_findEntryByName
     lwz r0, 0x6c(r1)
     lis r4, lbl_8074FD38@ha
     addi r4, r4, lbl_8074FD38@l
@@ -2188,7 +2188,7 @@ lbl_fn_803B5974_00001CBC:
 lbl_fn_803B5974_00001CE4:
     lwz r5, 0x74(r1)
 lbl_fn_803B5974_00001CE8:
-    bl fn_801F837C
+    bl save_findEntryByName
     lwz r0, 0x60(r1)
     lis r4, lbl_8074FD38@ha
     addi r4, r4, lbl_8074FD38@l
@@ -2201,7 +2201,7 @@ lbl_fn_803B5974_00001CE8:
 lbl_fn_803B5974_00001D10:
     lwz r5, 0x68(r1)
 lbl_fn_803B5974_00001D14:
-    bl fn_801F837C
+    bl save_findEntryByName
     b lbl_fn_803B5974_00001DC4
 lbl_fn_803B5974_00001D1C:
     lis r30, lbl_8074FD38@ha
@@ -2214,7 +2214,7 @@ lbl_fn_803B5974_00001D1C:
     lwz r3, 0x48(r29)
     addi r4, r30, 0x158
     addi r5, r5, 0x4
-    bl fn_801F837C
+    bl save_findEntryByName
     lwz r0, 0x78(r1)
     addi r4, r30, 0x188
     lwz r3, 0x48(r29)
@@ -2225,7 +2225,7 @@ lbl_fn_803B5974_00001D1C:
 lbl_fn_803B5974_00001D64:
     lwz r5, 0x80(r1)
 lbl_fn_803B5974_00001D68:
-    bl fn_801F837C
+    bl save_findEntryByName
     lwz r0, 0x6c(r1)
     lis r4, lbl_8074FD38@ha
     addi r4, r4, lbl_8074FD38@l
@@ -2238,7 +2238,7 @@ lbl_fn_803B5974_00001D68:
 lbl_fn_803B5974_00001D90:
     lwz r5, 0x74(r1)
 lbl_fn_803B5974_00001D94:
-    bl fn_801F837C
+    bl save_findEntryByName
     lwz r0, 0x60(r1)
     lis r4, lbl_8074FD38@ha
     addi r4, r4, lbl_8074FD38@l
@@ -2251,7 +2251,7 @@ lbl_fn_803B5974_00001D94:
 lbl_fn_803B5974_00001DBC:
     lwz r5, 0x68(r1)
 lbl_fn_803B5974_00001DC0:
-    bl fn_801F837C
+    bl save_findEntryByName
 lbl_fn_803B5974_00001DC4:
     lwz r0, 0x60(r1)
     srwi. r0, r0, 31

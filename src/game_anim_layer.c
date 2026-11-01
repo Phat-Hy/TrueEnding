@@ -13,7 +13,7 @@ extern void ref_releaseHandle(void);
 extern void morph_updateMesh(void);
 extern void atn_Task_setActive(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8C6C(void);
+extern void scissor_clipFrustum(void);
 extern void clip_calculateFrustum(void);
 extern void fn_80108F38(void);
 extern void fn_80126214(void);
@@ -1098,7 +1098,7 @@ lbl_fn_8026FFE4_00000D98:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     b lbl_fn_8026FFE4_00001144
     lfs f31, 0x2e4(r3)
     li r4, 0x0
@@ -1148,7 +1148,7 @@ lbl_fn_8026FFE4_00000E64:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     b lbl_fn_8026FFE4_00001144
     mr r3, r31
     bl fn_80271104

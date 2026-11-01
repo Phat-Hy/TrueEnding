@@ -16,7 +16,7 @@ extern void fn_8005BCE8(void);
 extern void mem_alloc(void);
 extern void route_findNextWaypoint(void);
 extern void route_createSegment(void);
-extern void fn_80087E9C(void);
+extern void route_createWaypoint(void);
 extern void fn_80088724(void);
 extern void node_createNamedChild(void);
 extern void fn_8008AD4C(void);
@@ -26,7 +26,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800A4228(void);
-extern void fn_800BFAC8(void);
+extern void motion_updateFogAdj(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void event_findEntryById(void);
@@ -1146,7 +1146,7 @@ lbl_fn_80436D04_00000D68:
     addi r5, r29, 0x6c
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_808868F0
     mr r3, r30
     lfs f2, lbl_808868F4
@@ -1164,7 +1164,7 @@ lbl_fn_80436D04_00000D68:
     addi r5, r29, 0x90
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     mr r3, r30
     addi r4, r31, 0x37
     addi r5, r29, 0x9c
@@ -2213,7 +2213,7 @@ lbl_fn_804375C0_00001BE0:
     lwz r4, lbl_8087EFB4
     stfs f8, 0x104(r1)
     stfs f0, 0x100(r1)
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f9, 0x140(r1)
     addi r4, r1, 0xb4
     lfs f8, 0x114(r1)
@@ -2235,7 +2235,7 @@ lbl_fn_804375C0_00001BE0:
     stfs f0, 0xf4(r1)
     stfs f9, 0xf8(r1)
     stfs f8, 0xfc(r1)
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     addi r3, r1, 0xa8
     lfs f2, 0xb0(r1)
     psq_l f1, 0x0(r3), 0, 0

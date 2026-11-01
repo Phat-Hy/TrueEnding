@@ -17,7 +17,7 @@ extern void mem_alloc(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_80087E9C(void);
+extern void route_createWaypoint(void);
 extern void fn_80088FAC(void);
 extern void node_createNamedChild(void);
 extern void fn_8009EE30(void);
@@ -37,7 +37,7 @@ extern void fn_801F6E78(void);
 extern void fn_801F7590(void);
 extern void fn_801F791C(void);
 extern void fn_801F7DF0(void);
-extern void fn_801F837C(void);
+extern void save_findEntryByName(void);
 extern void thread_findAndNotify(void);
 extern void thread_dispatchToQueue(void);
 extern void fn_80201E78(void);
@@ -611,7 +611,7 @@ lbl_fn_80516548_00000668:
     mr r3, r27
     addi r4, r30, 0x11c
     addi r5, r24, 0x28
-    bl fn_801F837C
+    bl save_findEntryByName
     lwz r0, 0x4(r24)
     cmpwi r0, 0x0
     beq lbl_fn_80516548_00000714
@@ -734,7 +734,7 @@ lbl_fn_80516740_0000084C:
     addi r5, r29, 0x144
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_80887848
     mr r3, r30
     lfs f2, lbl_80887840
@@ -779,7 +779,7 @@ lbl_fn_80516740_0000084C:
     addi r5, r29, 0x150
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_808878A4
     mr r3, r30
     lfs f2, lbl_808878A8
@@ -788,7 +788,7 @@ lbl_fn_80516740_0000084C:
     addi r5, r29, 0xa4
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_808878A4
     mr r3, r30
     lfs f2, lbl_808878A8
@@ -797,7 +797,7 @@ lbl_fn_80516740_0000084C:
     addi r5, r29, 0xb0
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_808878A4
     mr r3, r30
     lfs f2, lbl_808878A8
@@ -806,7 +806,7 @@ lbl_fn_80516740_0000084C:
     addi r5, r29, 0xbc
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_808878A4
     mr r3, r30
     lfs f2, lbl_808878A8
@@ -815,7 +815,7 @@ lbl_fn_80516740_0000084C:
     addi r5, r29, 0xc8
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)

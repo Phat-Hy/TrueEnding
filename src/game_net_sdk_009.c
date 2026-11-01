@@ -85,7 +85,7 @@ extern u8 lbl_8085FF7C[];
 void pad_03_806AB8A4_text(void);
 void fn_806AB8B0(void);
 void fn_806AB920(void);
-void fn_806AB980(void);
+void http_formatParam(void);
 void fn_806ABA10(void);
 void fn_806ABB70(void);
 void fn_806ABCC0(void);
@@ -181,7 +181,7 @@ asm void fn_806AB920(void)
     blr
 }
 
-asm void fn_806AB980(void)
+asm void http_formatParam(void)
 {
     nofralloc
     stwu r1, -0x20(r1)

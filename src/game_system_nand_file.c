@@ -23,7 +23,7 @@ extern void fn_800F7FA8(void);
 extern void fn_800F8524(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800F8574(void);
-extern void fn_800F8C6C(void);
+extern void scissor_clipFrustum(void);
 extern void fn_801010A0(void);
 extern void fn_8010B250(void);
 extern void fn_8010EE78(void);
@@ -1551,7 +1551,7 @@ lbl_fn_8034A194_00001490:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     lwz r5, lbl_8087F430
     li r0, 0xa
     lfs f0, lbl_80885398
@@ -1873,7 +1873,7 @@ lbl_fn_8034A644_00001940:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     lwz r5, lbl_8087F430
     li r0, 0xa
     lfs f3, lbl_80885438
@@ -2101,7 +2101,7 @@ lbl_fn_8034A644_00001C90:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     lwz r5, lbl_8087F430
     li r0, 0xa
     lfs f3, lbl_80885438

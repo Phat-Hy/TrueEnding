@@ -21,7 +21,7 @@ extern void fn_80095F10(void);
 extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800BFAC8(void);
+extern void motion_updateFogAdj(void);
 extern void fn_800C122C(void);
 extern void fn_800C2C20(void);
 extern void fn_800D5908(void);
@@ -695,7 +695,7 @@ lbl_fn_803F53E0_00000824:
     stfs f2, 0x70(r1)
     psq_st f1, 0x0(r30), 0, 0
     stfs f2, 0x64(r1)
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f12, lbl_80885FF0
     addi r4, r1, 0x2c
     lfs f11, lbl_80885FFC
@@ -718,7 +718,7 @@ lbl_fn_803F53E0_00000824:
     stfs f0, 0x50(r1)
     stfs f9, 0x54(r1)
     stfs f10, 0x58(r1)
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f0, 0x64(r1)
     addi r3, r1, 0x14
     lfs f10, lbl_80885FF0

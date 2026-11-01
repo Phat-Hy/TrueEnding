@@ -13,7 +13,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_801539E0(void);
 extern void fn_80155DAC(void);
-extern void fn_8016DA4C(void);
+extern void debuff_clearStatus(void);
 extern void fn_80188A70(void);
 extern void fn_80188AA0(void);
 extern void fn_80191960(void);
@@ -1349,7 +1349,7 @@ asm void fn_801AAB64(void)
     stw r8, 0x98(r3)
     stw r0, 0x560(r4)
     lwz r3, 0x4(r3)
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lwz r3, 0x4(r30)
     lwz r0, 0x12a4(r3)
     extrwi. r0, r0, 1, 25

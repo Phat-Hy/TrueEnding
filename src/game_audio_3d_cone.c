@@ -16,7 +16,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Task_setActive(void);
 extern void fn_800F29D0(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8C6C(void);
+extern void scissor_clipFrustum(void);
 extern void fn_8012A288(void);
 extern void boss_updatePhaseState(void);
 extern void quest_ctorRewardItem(void);
@@ -1551,7 +1551,7 @@ lbl_fn_80322AD4_0000142C:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
 lbl_fn_80322AD4_00001530:
     lwz r0, 0x84(r1)
     lwz r31, 0x7c(r1)

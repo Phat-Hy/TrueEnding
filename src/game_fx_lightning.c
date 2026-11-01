@@ -12,8 +12,8 @@ extern void system_getNextSequenceId(void);
 extern void quest_updateFlow(void);
 extern void quest_ctorRewardItem(void);
 extern void fn_8014C540(void);
-extern void fn_8015495C(void);
-extern void fn_8016DA4C(void);
+extern void equip_applyToCharacter(void);
+extern void debuff_clearStatus(void);
 extern void actor_setState(void);
 extern void fn_80178A6C(void);
 extern void fn_8028A1F8(void);
@@ -647,9 +647,9 @@ asm void fn_8029DEF8(void)
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     mr r3, r29
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     li r31, 0x0
     li r0, 0x2
     stw r0, 0x58c(r29)

@@ -22,7 +22,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void str_skipWhitespace(void);
 extern void str_findChar(void);
 extern void fn_800F29D0(void);
-extern void fn_8015495C(void);
+extern void equip_applyToCharacter(void);
 extern void fn_8016D3F8(void);
 extern void actor_setState(void);
 extern void fn_8016EB48(void);
@@ -858,7 +858,7 @@ lbl_fn_803FD328_00000AF8:
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     lwz r3, 0xf8(r25)
     lwz r0, 0x55c(r3)
     cmpwi r0, 0x6

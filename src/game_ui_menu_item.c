@@ -23,7 +23,7 @@ extern void fn_8013A13C(void);
 extern void fn_801539E0(void);
 extern void fn_80155DAC(void);
 extern void fn_8015E4B0(void);
-extern void fn_8016DA4C(void);
+extern void debuff_clearStatus(void);
 extern void fn_80176548(void);
 extern void fn_80178208(void);
 extern void fn_801B4BC8(void);
@@ -723,7 +723,7 @@ asm void fn_801B618C(void)
     stw r6, 0xc(r3)
     stw r0, 0x560(r4)
     lwz r3, 0x4(r3)
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lwz r3, 0x4(r30)
     lwz r0, 0x12a4(r3)
     extrwi. r0, r0, 1, 25

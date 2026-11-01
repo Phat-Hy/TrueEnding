@@ -24,7 +24,7 @@ extern void fn_801070C8(void);
 extern void fn_80107208(void);
 extern void fn_8013CB68(void);
 extern void fn_801539E0(void);
-extern void fn_8015495C(void);
+extern void equip_applyToCharacter(void);
 extern void fn_80155DAC(void);
 extern void fn_80176DFC(void);
 extern void actor_getMovementFlags(void);
@@ -1762,7 +1762,7 @@ asm void fn_801AE9A4(void)
     ori r0, r0, 0x1
     stw r0, 0x5c0(r8)
     lwz r3, 0x4(r3)
-    bl fn_8015495C
+    bl equip_applyToCharacter
     li r5, 0x1
 lbl_fn_801AE9A4_0000173C:
     lwz r0, 0x14(r1)

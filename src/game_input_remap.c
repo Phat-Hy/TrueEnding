@@ -33,8 +33,8 @@ extern void system_getNextSequenceId(void);
 extern void fn_80103F60(void);
 extern void fn_80108378(void);
 extern void boss_updatePhaseState(void);
-extern void fn_8015495C(void);
-extern void fn_8016DA4C(void);
+extern void equip_applyToCharacter(void);
+extern void debuff_clearStatus(void);
 extern void actor_setState(void);
 extern void fn_8017039C(void);
 extern void fn_80178A6C(void);
@@ -468,9 +468,9 @@ lbl_fn_802F66CC_0000048C:
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     mr r3, r31
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     li r0, 0x2
     stw r0, 0x58c(r31)
     lfs f1, lbl_808848DC

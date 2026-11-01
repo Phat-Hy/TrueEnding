@@ -77,7 +77,7 @@ extern void fn_8001E720(void);
 extern void fn_8001E730(void);
 extern void fn_8001EA18(void);
 extern void fn_8001ECD0(void);
-extern void fn_8003E4A4(void);
+extern void str_initFromCStr(void);
 extern void fn_8003F440(void);
 extern void mem_alloc(void);
 extern void atn_Model_findBoneIndex(void);
@@ -1286,7 +1286,7 @@ asm void fn_8001C284(void)
     stw r31, 0xb0c(r1)
     lis r31, lbl_807307A0@ha
     addi r4, r31, lbl_807307A0@l
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r4, r31, lbl_807307A0@l
     li r3, 0x4
     addi r5, r4, 0x10
@@ -1318,7 +1318,7 @@ lbl_fn_8001C284_00000E28:
     addi r3, r1, 0xad8
     addi r31, r31, lbl_807307A0@l
     addi r4, r31, 0x11
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r5, r31, 0x10
     li r3, 0x4
     mr r6, r5
@@ -1349,7 +1349,7 @@ lbl_fn_8001C284_00000EA0:
     addi r3, r1, 0xab8
     addi r31, r31, lbl_807307A0@l
     addi r4, r31, 0x20
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r5, r31, 0x10
     li r3, 0x4
     mr r6, r5
@@ -1380,7 +1380,7 @@ lbl_fn_8001C284_00000F18:
     addi r3, r1, 0xa98
     addi r31, r31, lbl_807307A0@l
     addi r4, r31, 0x2a
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r5, r31, 0x10
     li r3, 0x4
     mr r6, r5
@@ -1411,7 +1411,7 @@ lbl_fn_8001C284_00000F90:
     addi r3, r1, 0xa78
     addi r31, r31, lbl_807307A0@l
     addi r4, r31, 0x40
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r5, r31, 0x10
     li r3, 0x4
     mr r6, r5
@@ -1442,7 +1442,7 @@ lbl_fn_8001C284_00001008:
     addi r3, r1, 0xa58
     addi r31, r31, lbl_807307A0@l
     addi r4, r31, 0x4f
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r5, r31, 0x10
     li r3, 0x4
     mr r6, r5
@@ -1473,7 +1473,7 @@ lbl_fn_8001C284_00001080:
     addi r3, r1, 0xa38
     addi r31, r31, lbl_807307A0@l
     addi r4, r31, 0x5e
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r5, r31, 0x10
     li r3, 0x4
     mr r6, r5
@@ -1504,7 +1504,7 @@ lbl_fn_8001C284_000010F8:
     addi r3, r1, 0xa18
     addi r31, r31, lbl_807307A0@l
     addi r4, r31, 0x72
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r5, r31, 0x10
     li r3, 0x4
     mr r6, r5
@@ -1535,7 +1535,7 @@ lbl_fn_8001C284_00001170:
     addi r3, r1, 0x9f8
     addi r31, r31, lbl_807307A0@l
     addi r4, r31, 0x85
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r5, r31, 0x10
     li r3, 0x4
     mr r6, r5
@@ -1566,7 +1566,7 @@ lbl_fn_8001C284_000011E8:
     addi r3, r1, 0x9d8
     addi r31, r31, lbl_807307A0@l
     addi r4, r31, 0x96
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r5, r31, 0x10
     li r3, 0x4
     mr r6, r5
@@ -1597,7 +1597,7 @@ lbl_fn_8001C284_00001260:
     addi r3, r1, 0x9b8
     addi r31, r31, lbl_807307A0@l
     addi r4, r31, 0xaa
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r5, r31, 0x10
     li r3, 0x4
     mr r6, r5
@@ -1628,7 +1628,7 @@ lbl_fn_8001C284_000012D8:
     addi r3, r1, 0x998
     addi r31, r31, lbl_807307A0@l
     addi r4, r31, 0xb3
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r5, r31, 0x10
     li r3, 0x4
     mr r6, r5
@@ -1659,7 +1659,7 @@ lbl_fn_8001C284_00001350:
     addi r3, r1, 0x978
     addi r31, r31, lbl_807307A0@l
     addi r4, r31, 0xc5
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r5, r31, 0x10
     li r3, 0x4
     mr r6, r5
@@ -1690,7 +1690,7 @@ lbl_fn_8001C284_000013C8:
     addi r3, r1, 0x958
     addi r31, r31, lbl_807307A0@l
     addi r4, r31, 0xd7
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r5, r31, 0x10
     li r3, 0x4
     mr r6, r5
@@ -1721,7 +1721,7 @@ lbl_fn_8001C284_00001440:
     addi r3, r1, 0x938
     addi r31, r31, lbl_807307A0@l
     addi r4, r31, 0xed
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r5, r31, 0x10
     li r3, 0x4
     mr r6, r5
@@ -1752,7 +1752,7 @@ lbl_fn_8001C284_000014B8:
     addi r3, r1, 0x918
     addi r31, r31, lbl_807307A0@l
     addi r4, r31, 0xf8
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r5, r31, 0x10
     li r3, 0x4
     mr r6, r5
@@ -1783,7 +1783,7 @@ lbl_fn_8001C284_00001530:
     addi r3, r1, 0x8f8
     addi r31, r31, lbl_807307A0@l
     addi r4, r31, 0x103
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r5, r31, 0x10
     li r3, 0x4
     mr r6, r5
@@ -1814,7 +1814,7 @@ lbl_fn_8001C284_000015A8:
     addi r3, r1, 0x8d8
     addi r31, r31, lbl_807307A0@l
     addi r4, r31, 0x10e
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r5, r31, 0x10
     li r3, 0x4
     mr r6, r5
@@ -1845,7 +1845,7 @@ lbl_fn_8001C284_00001620:
     addi r3, r1, 0x8b8
     addi r31, r31, lbl_807307A0@l
     addi r4, r31, 0x119
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r5, r31, 0x10
     li r3, 0x4
     mr r6, r5
@@ -1876,7 +1876,7 @@ lbl_fn_8001C284_00001698:
     addi r3, r1, 0x898
     addi r31, r31, lbl_807307A0@l
     addi r4, r31, 0x124
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r5, r31, 0x10
     li r3, 0x4
     mr r6, r5
@@ -1907,7 +1907,7 @@ lbl_fn_8001C284_00001710:
     addi r3, r1, 0x878
     addi r31, r31, lbl_807307A0@l
     addi r4, r31, 0x12f
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r5, r31, 0x10
     li r3, 0x4
     mr r6, r5
@@ -1938,7 +1938,7 @@ lbl_fn_8001C284_00001788:
     addi r3, r1, 0x858
     addi r31, r31, lbl_807307A0@l
     addi r4, r31, 0x13a
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r5, r31, 0x10
     li r3, 0x4
     mr r6, r5
@@ -1969,7 +1969,7 @@ lbl_fn_8001C284_00001800:
     addi r3, r1, 0x838
     addi r31, r31, lbl_807307A0@l
     addi r4, r31, 0x14b
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r5, r31, 0x10
     li r3, 0x4
     mr r6, r5
@@ -2000,7 +2000,7 @@ lbl_fn_8001C284_00001878:
     addi r3, r1, 0x818
     addi r31, r31, lbl_807307A0@l
     addi r4, r31, 0x15c
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r5, r31, 0x10
     li r3, 0x4
     mr r6, r5
@@ -2031,7 +2031,7 @@ lbl_fn_8001C284_000018F0:
     addi r3, r1, 0x7f8
     addi r31, r31, lbl_807307A0@l
     addi r4, r31, 0x16d
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r5, r31, 0x10
     li r3, 0x4
     mr r6, r5
@@ -2062,7 +2062,7 @@ lbl_fn_8001C284_00001968:
     addi r3, r1, 0x7d8
     addi r31, r31, lbl_807307A0@l
     addi r4, r31, 0x17d
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r5, r31, 0x10
     li r3, 0x4
     mr r6, r5
@@ -2093,7 +2093,7 @@ lbl_fn_8001C284_000019E0:
     addi r3, r1, 0x7b8
     addi r31, r31, lbl_807307A0@l
     addi r4, r31, 0x18d
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r5, r31, 0x10
     li r3, 0x4
     mr r6, r5
@@ -2124,7 +2124,7 @@ lbl_fn_8001C284_00001A58:
     addi r3, r1, 0x798
     addi r31, r31, lbl_807307A0@l
     addi r4, r31, 0x198
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r5, r31, 0x10
     li r3, 0x4
     mr r6, r5
@@ -2155,7 +2155,7 @@ lbl_fn_8001C284_00001AD0:
     addi r3, r1, 0x778
     addi r31, r31, lbl_807307A0@l
     addi r4, r31, 0x1aa
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r5, r31, 0x10
     li r3, 0x4
     mr r6, r5
@@ -2186,7 +2186,7 @@ lbl_fn_8001C284_00001B48:
     addi r3, r1, 0x758
     addi r31, r31, lbl_807307A0@l
     addi r4, r31, 0x1ba
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r5, r31, 0x10
     li r3, 0x4
     mr r6, r5
@@ -2217,7 +2217,7 @@ lbl_fn_8001C284_00001BC0:
     addi r3, r1, 0x738
     addi r31, r31, lbl_807307A0@l
     addi r4, r31, 0x1ce
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r5, r31, 0x10
     li r3, 0x4
     mr r6, r5
@@ -2248,7 +2248,7 @@ lbl_fn_8001C284_00001C38:
     addi r3, r1, 0x718
     addi r31, r31, lbl_807307A0@l
     addi r4, r31, 0x1e4
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r5, r31, 0x10
     li r3, 0x4
     mr r6, r5
@@ -2279,7 +2279,7 @@ lbl_fn_8001C284_00001CB0:
     addi r3, r1, 0x6f8
     addi r31, r31, lbl_807307A0@l
     addi r4, r31, 0x1ef
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r5, r31, 0x10
     li r3, 0x4
     mr r6, r5
@@ -2310,7 +2310,7 @@ lbl_fn_8001C284_00001D28:
     addi r3, r1, 0x6d8
     addi r31, r31, lbl_807307A0@l
     addi r4, r31, 0x202
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r5, r31, 0x10
     li r3, 0x4
     mr r6, r5
@@ -2341,7 +2341,7 @@ lbl_fn_8001C284_00001DA0:
     addi r3, r1, 0x6b8
     addi r31, r31, lbl_807307A0@l
     addi r4, r31, 0x20b
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r5, r31, 0x10
     li r3, 0x4
     mr r6, r5
@@ -2372,7 +2372,7 @@ lbl_fn_8001C284_00001E18:
     addi r3, r1, 0x698
     addi r31, r31, lbl_807307A0@l
     addi r4, r31, 0x21a
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r5, r31, 0x10
     li r3, 0x4
     mr r6, r5
@@ -2403,7 +2403,7 @@ lbl_fn_8001C284_00001E90:
     addi r3, r1, 0x678
     addi r31, r31, lbl_807307A0@l
     addi r4, r31, 0x22b
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r5, r31, 0x10
     li r3, 0x4
     mr r6, r5
@@ -2434,7 +2434,7 @@ lbl_fn_8001C284_00001F08:
     addi r3, r1, 0x658
     addi r31, r31, lbl_807307A0@l
     addi r4, r31, 0x23a
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r5, r31, 0x10
     li r3, 0x4
     mr r6, r5
@@ -2465,7 +2465,7 @@ lbl_fn_8001C284_00001F80:
     addi r3, r1, 0x638
     addi r31, r31, lbl_807307A0@l
     addi r4, r31, 0x24f
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r5, r31, 0x10
     li r3, 0x4
     mr r6, r5
@@ -2496,7 +2496,7 @@ lbl_fn_8001C284_00001FF8:
     addi r3, r1, 0x618
     addi r31, r31, lbl_807307A0@l
     addi r4, r31, 0x25c
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r5, r31, 0x10
     li r3, 0x4
     mr r6, r5
@@ -2527,7 +2527,7 @@ lbl_fn_8001C284_00002070:
     addi r3, r1, 0x5f8
     addi r31, r31, lbl_807307A0@l
     addi r4, r31, 0x26a
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r5, r31, 0x10
     li r3, 0x4
     mr r6, r5
@@ -2558,7 +2558,7 @@ lbl_fn_8001C284_000020E8:
     addi r3, r1, 0x5d8
     addi r31, r31, lbl_807307A0@l
     addi r4, r31, 0x27a
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r5, r31, 0x10
     li r3, 0x4
     mr r6, r5
@@ -2589,7 +2589,7 @@ lbl_fn_8001C284_00002160:
     addi r3, r1, 0x5b8
     addi r31, r31, lbl_807307A0@l
     addi r4, r31, 0x288
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r5, r31, 0x10
     li r3, 0x4
     mr r6, r5
@@ -2620,7 +2620,7 @@ lbl_fn_8001C284_000021D8:
     addi r3, r1, 0x598
     addi r31, r31, lbl_807307A0@l
     addi r4, r31, 0x294
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r5, r31, 0x10
     li r3, 0x4
     mr r6, r5
@@ -2651,7 +2651,7 @@ lbl_fn_8001C284_00002250:
     addi r3, r1, 0x578
     addi r31, r31, lbl_807307A0@l
     addi r4, r31, 0x2a5
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r5, r31, 0x10
     li r3, 0x4
     mr r6, r5
@@ -2682,7 +2682,7 @@ lbl_fn_8001C284_000022C8:
     addi r3, r1, 0x558
     addi r31, r31, lbl_807307A0@l
     addi r4, r31, 0x2b6
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r5, r31, 0x10
     li r3, 0x4
     mr r6, r5
@@ -2713,7 +2713,7 @@ lbl_fn_8001C284_00002340:
     addi r3, r1, 0x538
     addi r31, r31, lbl_807307A0@l
     addi r4, r31, 0x2c7
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r5, r31, 0x10
     li r3, 0x4
     mr r6, r5
@@ -2744,7 +2744,7 @@ lbl_fn_8001C284_000023B8:
     addi r3, r1, 0x518
     addi r31, r31, lbl_807307A0@l
     addi r4, r31, 0x2d2
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r5, r31, 0x10
     li r3, 0x4
     mr r6, r5
@@ -2775,7 +2775,7 @@ lbl_fn_8001C284_00002430:
     addi r3, r1, 0x4f8
     addi r31, r31, lbl_807307A0@l
     addi r4, r31, 0x2dd
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r5, r31, 0x10
     li r3, 0x4
     mr r6, r5
@@ -2806,7 +2806,7 @@ lbl_fn_8001C284_000024A8:
     addi r3, r1, 0x4d8
     addi r31, r31, lbl_807307A0@l
     addi r4, r31, 0x2e8
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r5, r31, 0x10
     li r3, 0x4
     mr r6, r5
@@ -2837,7 +2837,7 @@ lbl_fn_8001C284_00002520:
     addi r3, r1, 0x4b8
     addi r31, r31, lbl_807307A0@l
     addi r4, r31, 0x2f3
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r5, r31, 0x10
     li r3, 0x4
     mr r6, r5
@@ -2868,7 +2868,7 @@ lbl_fn_8001C284_00002598:
     addi r3, r1, 0x498
     addi r31, r31, lbl_807307A0@l
     addi r4, r31, 0x2fe
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r5, r31, 0x10
     li r3, 0x4
     mr r6, r5
@@ -2899,7 +2899,7 @@ lbl_fn_8001C284_00002610:
     addi r3, r1, 0x478
     addi r31, r31, lbl_807307A0@l
     addi r4, r31, 0x30f
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r5, r31, 0x10
     li r3, 0x4
     mr r6, r5
@@ -2930,7 +2930,7 @@ lbl_fn_8001C284_00002688:
     addi r3, r1, 0x458
     addi r31, r31, lbl_807307A0@l
     addi r4, r31, 0x326
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r5, r31, 0x10
     li r3, 0x4
     mr r6, r5
@@ -2961,7 +2961,7 @@ lbl_fn_8001C284_00002700:
     addi r3, r1, 0x438
     addi r31, r31, lbl_807307A0@l
     addi r4, r31, 0x33e
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r5, r31, 0x10
     li r3, 0x4
     mr r6, r5
@@ -2992,7 +2992,7 @@ lbl_fn_8001C284_00002778:
     addi r3, r1, 0x418
     addi r31, r31, lbl_807307A0@l
     addi r4, r31, 0x354
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r5, r31, 0x10
     li r3, 0x4
     mr r6, r5
@@ -3023,7 +3023,7 @@ lbl_fn_8001C284_000027F0:
     addi r3, r1, 0x3f8
     addi r31, r31, lbl_807307A0@l
     addi r4, r31, 0x35c
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r5, r31, 0x10
     li r3, 0x4
     mr r6, r5
@@ -3054,7 +3054,7 @@ lbl_fn_8001C284_00002868:
     addi r3, r1, 0x3d8
     addi r31, r31, lbl_807307A0@l
     addi r4, r31, 0x364
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r5, r31, 0x10
     li r3, 0x4
     mr r6, r5
@@ -3085,7 +3085,7 @@ lbl_fn_8001C284_000028E0:
     addi r3, r1, 0x3b8
     addi r31, r31, lbl_807307A0@l
     addi r4, r31, 0x374
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r5, r31, 0x10
     li r3, 0x4
     mr r6, r5
@@ -3116,7 +3116,7 @@ lbl_fn_8001C284_00002958:
     addi r3, r1, 0x398
     addi r31, r31, lbl_807307A0@l
     addi r4, r31, 0x382
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r5, r31, 0x10
     li r3, 0x4
     mr r6, r5
@@ -3147,7 +3147,7 @@ lbl_fn_8001C284_000029D0:
     addi r3, r1, 0x378
     addi r31, r31, lbl_807307A0@l
     addi r4, r31, 0x396
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r5, r31, 0x10
     li r3, 0x4
     mr r6, r5
@@ -3178,7 +3178,7 @@ lbl_fn_8001C284_00002A48:
     addi r3, r1, 0x358
     addi r31, r31, lbl_807307A0@l
     addi r4, r31, 0x3aa
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r5, r31, 0x10
     li r3, 0x4
     mr r6, r5
@@ -3209,7 +3209,7 @@ lbl_fn_8001C284_00002AC0:
     addi r3, r1, 0x338
     addi r31, r31, lbl_807307A0@l
     addi r4, r31, 0x3be
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r5, r31, 0x10
     li r3, 0x4
     mr r6, r5
@@ -3240,7 +3240,7 @@ lbl_fn_8001C284_00002B38:
     addi r3, r1, 0x318
     addi r31, r31, lbl_807307A0@l
     addi r4, r31, 0x3d1
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r5, r31, 0x10
     li r3, 0x4
     mr r6, r5

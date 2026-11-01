@@ -6,7 +6,7 @@ extern void __register_global_object(void);
 extern void _restgpr_26(void);
 extern void _savegpr_26(void);
 extern void fn_8000D430(void);
-extern void fn_8003EFB0(void);
+extern void ui_destroyWidget(void);
 extern void fn_8004B290(void);
 extern void fn_8004B338(void);
 extern void item_useConsumable(void);
@@ -3578,11 +3578,11 @@ lbl_quest_updateFlow_000031B4:
     lis r3, lbl_807C6BB8@ha
     li r0, 0x0
     stwu r0, lbl_807C6BB8@l(r3)
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     li r27, 0x1
     lis r5, lbl_807C7B10@ha
     stw r0, 0x4(r3)
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     addi r5, r5, lbl_807C7B10@l
     stw r0, 0x8(r3)
     stw r27, 0xc(r3)

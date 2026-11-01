@@ -19,7 +19,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void morph_updateMesh(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8C6C(void);
+extern void scissor_clipFrustum(void);
 extern void fn_8012A1B8(void);
 extern void fn_80139F24(void);
 extern void fn_80139F3C(void);
@@ -32,7 +32,7 @@ extern void fn_8013CB68(void);
 extern void fn_8014052C(void);
 extern void fn_801446F0(void);
 extern void fn_801539E0(void);
-extern void fn_8015495C(void);
+extern void equip_applyToCharacter(void);
 extern void fn_80176548(void);
 extern void actor_getMovementFlags(void);
 extern void fn_801A03E8(void);
@@ -787,7 +787,7 @@ lbl_fn_801C074C_00000868:
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
 lbl_fn_801C074C_000008AC:
     li r30, 0x1
 lbl_fn_801C074C_000008B0:
@@ -1048,7 +1048,7 @@ asm void fn_801C0D04(void)
     lfs f1, lbl_808826A4
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
 lbl_fn_801C0D04_00000C28:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
@@ -1550,7 +1550,7 @@ lbl_fn_801C1084_00001364:
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
 lbl_fn_801C1084_00001388:
     lwz r3, 0x4(r31)
     li r5, 0x0

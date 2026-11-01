@@ -31,7 +31,7 @@ extern void save_computeCrc32(void);
 extern void fn_801F6E78(void);
 extern void fn_801F7590(void);
 extern void fn_801F7DF0(void);
-extern void fn_801F837C(void);
+extern void save_findEntryByName(void);
 extern void profile_getMetricValue(void);
 extern void perf_getMetricValue(void);
 extern void fn_8020BCEC(void);
@@ -1551,7 +1551,7 @@ lbl_fn_801D6C1C_000013FC:
     mulli r25, r0, 0x54
     add r5, r18, r25
     addi r5, r5, 0x10
-    bl fn_801F837C
+    bl save_findEntryByName
     cmpwi r28, 0x0
     li r19, 0x1
     beq lbl_fn_801D6C1C_000014E8
@@ -1729,7 +1729,7 @@ lbl_fn_801D6F84_000016C4:
     mr r3, r27
     addi r4, r31, 0x16
     addi r5, r1, 0x8
-    bl fn_801F837C
+    bl save_findEntryByName
     stfs f30, 0x50(r27)
     b lbl_fn_801D6F84_0000170C
 lbl_fn_801D6F84_00001708:

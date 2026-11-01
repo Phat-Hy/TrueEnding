@@ -12,7 +12,7 @@ extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800F8574(void);
-extern void fn_800F8C6C(void);
+extern void scissor_clipFrustum(void);
 extern void clip_calculateFrustum(void);
 extern void fn_8015ECC4(void);
 extern void fn_8016C7D8(void);
@@ -583,7 +583,7 @@ lbl_fn_8034AE48_00000668:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     lwz r8, lbl_8087F430
     li r0, 0xa
     lfs f3, lbl_80885398
@@ -712,7 +712,7 @@ lbl_fn_8034AE48_00000854:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     lwz r5, lbl_8087F430
     li r0, 0xa
     lfs f0, lbl_80885398

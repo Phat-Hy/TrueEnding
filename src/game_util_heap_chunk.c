@@ -33,7 +33,7 @@ extern void save_computeCrc32(void);
 extern void fn_801F6E78(void);
 extern void fn_801F7590(void);
 extern void fn_801F7DF0(void);
-extern void fn_801F837C(void);
+extern void save_findEntryByName(void);
 extern void fn_801F8598(void);
 extern void thread_findAndNotify(void);
 extern void thread_dispatchToQueue(void);
@@ -713,7 +713,7 @@ lbl_fn_80586220_000007F4:
 lbl_fn_80586220_00000810:
     lwz r5, 0x40(r1)
 lbl_fn_80586220_00000814:
-    bl fn_801F837C
+    bl save_findEntryByName
     lwz r4, 0x0(r21)
     mr r3, r17
     bl fn_80444564
@@ -751,18 +751,18 @@ lbl_fn_80586220_00000860:
 lbl_fn_80586220_0000089C:
     la r5, lbl_808813D0
 lbl_fn_80586220_000008A0:
-    bl fn_801F837C
+    bl save_findEntryByName
     b lbl_fn_80586220_000008B8
 lbl_fn_80586220_000008A8:
     lwz r3, 0xac(r18)
     addi r4, r25, 0x157
     addi r5, r28, lbl_807968D0@l
-    bl fn_801F837C
+    bl save_findEntryByName
 lbl_fn_80586220_000008B8:
     lwz r3, 0xac(r18)
     addi r4, r25, 0x160
     addi r5, r29, 0xe
-    bl fn_801F837C
+    bl save_findEntryByName
     lwz r3, lbl_8087F4F0
     bl fn_80444C48
     mr r20, r3

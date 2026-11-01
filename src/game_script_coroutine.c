@@ -7,7 +7,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800EE360(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8C6C(void);
+extern void scissor_clipFrustum(void);
 extern void fn_8015F568(void);
 extern void actor_setState(void);
 extern void fn_80170A20(void);
@@ -1951,7 +1951,7 @@ lbl_fn_8024E7E4_00001B10:
     lfs f1, lbl_80883268
     stfs f2, 0x94(r1)
     lwz r3, lbl_8087F048
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     b lbl_fn_8024E7E4_00001C20
 lbl_fn_8024E7E4_00001BE4:
     lfs f30, 0x2e4(r3)

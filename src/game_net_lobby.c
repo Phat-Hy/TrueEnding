@@ -19,7 +19,7 @@ extern void route_interpolatePath(void);
 extern void route_createSegment(void);
 extern void node_createNamedChild(void);
 extern void node_destroy(void);
-extern void fn_800BFAC8(void);
+extern void motion_updateFogAdj(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void bloom_processPasses(void);
@@ -1745,7 +1745,7 @@ lbl_fn_801EAB24_00001658:
     lwz r4, lbl_8087EFB4
     addi r3, r1, 0x40
     addi r5, r28, 0xc
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f0, 0x48(r1)
     lfs f24, 0x44(r1)
     fcmpo cr0, f0, f26

@@ -11,7 +11,7 @@ extern void fn_8000E18C(void);
 extern void sys_copyString(void);
 extern void fn_8000ECA8(void);
 extern void fn_80013410(void);
-extern void fn_8003E4A4(void);
+extern void str_initFromCStr(void);
 extern void fn_8004203C(void);
 extern void fn_8004212C(void);
 extern void fn_800422CC(void);
@@ -1357,7 +1357,7 @@ lbl_fn_803C3894_00001040:
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0xc4
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0xb8
     bl fn_80288390
     addi r3, r1, 0x1bc
@@ -1559,7 +1559,7 @@ lbl_fn_803C3894_00001370:
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0xac
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0xa0
     bl fn_80288390
     addi r3, r1, 0x15c

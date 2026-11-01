@@ -27,7 +27,7 @@ extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void fn_80087858(void);
 extern void route_createSegment(void);
-extern void fn_80087E9C(void);
+extern void route_createWaypoint(void);
 extern void node_createNamedChild(void);
 extern void node_destroy(void);
 extern void fn_800BC2E0(void);
@@ -2347,7 +2347,7 @@ lbl_spectateManager_update_00001FC8:
     addi r5, r30, 0x31c
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_80887C04
     mr r3, r29
     lfs f2, lbl_80887C08
@@ -2356,7 +2356,7 @@ lbl_spectateManager_update_00001FC8:
     addi r5, r30, 0x328
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_80887BB4
     mr r3, r29
     lfs f2, lbl_80887C0C

@@ -22,7 +22,7 @@ extern void fn_801240B4(void);
 extern void fn_80134168(void);
 extern void fn_8013CB68(void);
 extern void fn_801539E0(void);
-extern void fn_8016DA4C(void);
+extern void debuff_clearStatus(void);
 extern void fn_80192758(void);
 extern void fn_801A471C(void);
 extern void fn_801A474C(void);
@@ -1142,13 +1142,13 @@ lbl_fn_801A34D4_00000EB4:
     b lbl_fn_801A34D4_00000EE4
 lbl_fn_801A34D4_00000EC0:
     lwz r3, 0x4(r27)
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lfs f0, lbl_80882178
     stfs f0, 0x2c(r27)
     b lbl_fn_801A34D4_00000EE4
 lbl_fn_801A34D4_00000ED4:
     lwz r3, 0x4(r27)
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lfs f0, lbl_80882178
     stfs f0, 0x2c(r27)
 lbl_fn_801A34D4_00000EE4:
@@ -1289,7 +1289,7 @@ lbl_fn_801A34D4_000010C8:
     cmpwi r0, 0x0
     bne lbl_fn_801A34D4_00001100
 lbl_fn_801A34D4_000010EC:
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lfs f0, lbl_80882178
     li r29, 0x1
     stfs f0, 0x2c(r27)

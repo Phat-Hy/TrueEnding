@@ -13,7 +13,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8C6C(void);
+extern void scissor_clipFrustum(void);
 extern void clip_calculateFrustum(void);
 extern void fn_800FBA9C(void);
 extern void fn_80126214(void);
@@ -1341,7 +1341,7 @@ lbl_fn_80336C8C_000011D8:
     lfs f1, lbl_808851B0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     b lbl_fn_80336C8C_00001E70
 lbl_fn_80336C8C_00001228:
     cmpwi r0, 0x1
@@ -2032,7 +2032,7 @@ lbl_fn_80336C8C_00001C30:
     lfs f1, lbl_808851B0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     cmpwi r3, 0x0
     ble lbl_fn_80336C8C_00001C90
     lwz r0, 0x14d8(r30)

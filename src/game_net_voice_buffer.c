@@ -34,7 +34,7 @@ extern void rand(void);
 extern void fn_806A8E40(void);
 extern void fn_806A8E70(void);
 extern void fn_806B0DE0(void);
-extern void fn_806B0E30(void);
+extern void net_getMyAid(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -755,7 +755,7 @@ lbl_fn_804DA4A4_000008D0:
     li r0, 0x0
     b lbl_fn_804DA4A4_00000944
 lbl_fn_804DA4A4_0000091C:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804DA4A4_00000944
 lbl_fn_804DA4A4_00000928:
@@ -896,7 +896,7 @@ asm void fn_804DA694(void)
     li r0, 0x0
     b lbl_fn_804DA694_00000B20
 lbl_fn_804DA694_00000AF8:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804DA694_00000B20
 lbl_fn_804DA694_00000B04:
@@ -950,7 +950,7 @@ lbl_fn_804DA694_00000B78:
     li r0, 0x0
     b lbl_fn_804DA694_00000BD0
 lbl_fn_804DA694_00000BA8:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804DA694_00000BD0
 lbl_fn_804DA694_00000BB4:
@@ -1204,7 +1204,7 @@ lbl_fn_804DA694_00000F10:
     li r0, 0x0
     b lbl_fn_804DA694_00000F6C
 lbl_fn_804DA694_00000F44:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804DA694_00000F6C
 lbl_fn_804DA694_00000F50:
@@ -1285,7 +1285,7 @@ lbl_fn_804DA694_0000101C:
     li r3, 0x0
     b lbl_fn_804DA694_00001078
 lbl_fn_804DA694_00001050:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r3, r3, 24
     b lbl_fn_804DA694_00001078
 lbl_fn_804DA694_0000105C:
@@ -1342,7 +1342,7 @@ lbl_fn_804DA694_000010E0:
     li r3, 0x0
     b lbl_fn_804DA694_00001130
 lbl_fn_804DA694_00001108:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r3, r3, 24
     b lbl_fn_804DA694_00001130
 lbl_fn_804DA694_00001114:
@@ -1442,7 +1442,7 @@ lbl_fn_804DA694_00001228:
     li r0, 0x0
     b lbl_fn_804DA694_00001280
 lbl_fn_804DA694_00001258:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804DA694_00001280
 lbl_fn_804DA694_00001264:
@@ -1525,7 +1525,7 @@ lbl_fn_804DA694_00001324:
     li r0, 0x0
     b lbl_fn_804DA694_00001398
 lbl_fn_804DA694_00001370:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804DA694_00001398
 lbl_fn_804DA694_0000137C:
@@ -1582,7 +1582,7 @@ lbl_fn_804DA694_00001400:
     li r0, 0x0
     b lbl_fn_804DA694_00001450
 lbl_fn_804DA694_00001428:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804DA694_00001450
 lbl_fn_804DA694_00001434:
@@ -1769,7 +1769,7 @@ lbl_fn_804DB1C8_00001644:
     li r0, 0x0
     b lbl_fn_804DB1C8_000016D8
 lbl_fn_804DB1C8_000016B0:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804DB1C8_000016D8
 lbl_fn_804DB1C8_000016BC:

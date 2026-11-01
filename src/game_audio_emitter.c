@@ -21,7 +21,7 @@ extern void wcs_vformat(void);
 extern void fn_800EB7A0(void);
 extern void atn_LH_Xsca_destructor(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8C6C(void);
+extern void scissor_clipFrustum(void);
 extern void fn_80109828(void);
 extern void boss_updatePhaseState(void);
 extern void fn_80144710(void);
@@ -510,7 +510,7 @@ lbl_fn_802FD328_00000514:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
 lbl_fn_802FD328_00000570:
     lwz r0, 0x1690(r31)
     cmpwi r0, 0x0
@@ -572,7 +572,7 @@ lbl_fn_802FD328_00000604:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
 lbl_fn_802FD328_00000660:
     lwz r0, 0x1690(r31)
     cmpwi r0, 0x0

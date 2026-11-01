@@ -21,7 +21,7 @@ extern void node_createNamedChild(void);
 extern void fn_800902C0(void);
 extern void fn_80094D88(void);
 extern void fn_80094F14(void);
-extern void fn_800BFAC8(void);
+extern void motion_updateFogAdj(void);
 extern void fn_800C0508(void);
 extern void fn_800C06B0(void);
 extern void fn_800C08B0(void);
@@ -1833,7 +1833,7 @@ lbl_fn_80235BF8_00001850:
     lwz r4, lbl_8087EFB4
     stfs f1, 0x74(r1)
     stfs f2, 0x78(r1)
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f2, 0x8(r17)
     addi r19, r19, 0x1
     lfs f1, 0x4(r17)
@@ -2121,7 +2121,7 @@ lbl_fn_80235BF8_00001CC0:
     lwz r4, lbl_8087EFB4
     addi r3, r1, 0x88
     addi r5, r17, 0x2c
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f1, 0x8c(r1)
     lfs f0, 0x88(r1)
     fdivs f1, f1, f25
@@ -2158,7 +2158,7 @@ lbl_fn_80235BF8_00001D3C:
     lwz r4, lbl_8087EFB4
     stfs f1, 0x54(r1)
     stfs f2, 0x58(r1)
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f1, 0x80(r1)
     lfs f0, 0x7c(r1)
     fdivs f1, f1, f25

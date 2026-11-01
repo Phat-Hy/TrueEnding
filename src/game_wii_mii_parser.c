@@ -28,7 +28,7 @@ extern void fn_800EB270(void);
 extern void fn_800EB49C(void);
 extern void fn_800F29D0(void);
 extern void fn_800F7FD8(void);
-extern void fn_800F8C6C(void);
+extern void scissor_clipFrustum(void);
 extern void fn_801125F8(void);
 extern void fn_8011C044(void);
 extern void fn_80126214(void);
@@ -1637,7 +1637,7 @@ lbl_fn_80566FB8_00001420:
     lfs f1, lbl_80887F40
     li r9, 0x1e
     lwz r10, 0x594(r31)
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     lwz r0, 0x594(r31)
     cmpwi r0, 0x0
     ble lbl_fn_80566FB8_000014D8

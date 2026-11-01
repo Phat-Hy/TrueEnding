@@ -40,7 +40,7 @@ extern void fn_806A8E70(void);
 extern void fn_806ABE70(void);
 extern void fn_806ABEE0(void);
 extern void fn_806B0DE0(void);
-extern void fn_806B0E30(void);
+extern void net_getMyAid(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
 
@@ -1887,7 +1887,7 @@ asm void fn_804DD3F4(void)
     li r0, 0x0
     b lbl_fn_804DD3F4_000017D4
 lbl_fn_804DD3F4_000017AC:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804DD3F4_000017D4
 lbl_fn_804DD3F4_000017B8:

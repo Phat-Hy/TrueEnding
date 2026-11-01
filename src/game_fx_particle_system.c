@@ -32,14 +32,14 @@ extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void fn_800EB7A0(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8C6C(void);
+extern void scissor_clipFrustum(void);
 extern void boss_updatePhaseState(void);
 extern void fn_80144710(void);
 extern void quest_updateFlow(void);
 extern void fn_8014C540(void);
-extern void fn_8015495C(void);
+extern void equip_applyToCharacter(void);
 extern void fn_80158BB4(void);
-extern void fn_8016DA4C(void);
+extern void debuff_clearStatus(void);
 extern void actor_setState(void);
 extern void fn_8017039C(void);
 extern void fn_80170A20(void);
@@ -943,9 +943,9 @@ lbl_fn_802829DC_00000B44:
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     mr r3, r31
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     li r0, 0xa
     stw r0, 0x58c(r31)
     lfs f1, lbl_80883948
@@ -1983,7 +1983,7 @@ lbl_fn_802837F4_00001A2C:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     b lbl_fn_802837F4_00001D48
     mr r3, r31
     bl fn_80285064

@@ -29,7 +29,7 @@ extern void clip_calculateFrustum(void);
 extern void fn_8010A308(void);
 extern void quest_updateFlow(void);
 extern void fn_8014C540(void);
-extern void fn_8015495C(void);
+extern void equip_applyToCharacter(void);
 extern void fn_8015ECC4(void);
 extern void fn_80161570(void);
 extern void fn_8016E4C4(void);
@@ -1223,7 +1223,7 @@ lbl_fn_80354AA4_00000E5C:
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     mr r3, r31
     li r4, 0x0
     li r5, 0x0
@@ -1782,7 +1782,7 @@ lbl_fn_80354EE4_00001678:
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     mr r3, r31
     li r4, 0x0
     li r5, 0x0

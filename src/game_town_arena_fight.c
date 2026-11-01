@@ -25,7 +25,7 @@ extern void fn_8006EF48(void);
 extern void fn_8006FA4C(void);
 extern void fn_8008B964(void);
 extern void fn_800A58D0(void);
-extern void fn_800BFAC8(void);
+extern void motion_updateFogAdj(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void wcs_vformat(void);
@@ -88,7 +88,7 @@ extern void fn_801F4CB4(void);
 extern void fn_801F6C2C(void);
 extern void save_computeCrc32(void);
 extern void fn_801F6D7C(void);
-extern void fn_801F837C(void);
+extern void save_findEntryByName(void);
 extern void fn_801F8598(void);
 extern void perf_getMetricValue(void);
 extern void fn_802168BC(void);
@@ -1360,7 +1360,7 @@ lbl_fn_803D2A6C_00000F68:
     mr r4, r3
     addi r3, r1, 0x44c
     addi r5, r1, 0x458
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f1, 0x454(r1)
     lfs f0, lbl_80885D58
     fcmpo cr0, f1, f0
@@ -1466,7 +1466,7 @@ lbl_fn_803D2A6C_00001100:
     mr r4, r3
     addi r3, r1, 0x434
     addi r5, r1, 0x440
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f0, 0x43c(r1)
     fcmpo cr0, f0, f27
     cror eq, gt, eq
@@ -1607,7 +1607,7 @@ lbl_fn_803D2A6C_000012EC:
     mr r4, r3
     mr r5, r21
     addi r3, r1, 0x404
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lis r21, lbl_807506A0@ha
     lwz r3, 0x874(r24)
     addi r21, r21, lbl_807506A0@l
@@ -1647,7 +1647,7 @@ lbl_fn_803D2A6C_00001394:
     mr r4, r3
     mr r5, r22
     addi r3, r1, 0x3f8
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lwz r3, 0x878(r23)
     addi r4, r21, 0x10a2
     lfs f1, 0x3f8(r1)
@@ -1853,7 +1853,7 @@ lbl_fn_803D2A6C_00001698:
     mr r4, r3
     addi r3, r1, 0x1fc
     addi r5, r1, 0x3dc
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     addi r3, r1, 0x3d0
     addi r4, r1, 0x1fc
     bl vec3_copy
@@ -2153,7 +2153,7 @@ lbl_fn_803D2A6C_00001ADC:
     mr r5, r3
     lwz r3, 0x318(r21)
     addi r4, r31, 0x1107
-    bl fn_801F837C
+    bl save_findEntryByName
     cmpwi r19, 0x1
     bne lbl_fn_803D2A6C_00001B48
     lwz r0, 0x2660(r24)
@@ -2500,7 +2500,7 @@ lbl_fn_803D2A6C_00001FF8:
     mr r4, r3
     addi r3, r1, 0x1e4
     addi r5, r1, 0x3c4
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     addi r3, r1, 0x3c4
     addi r4, r1, 0x1e4
     bl vec3_copy
@@ -2511,7 +2511,7 @@ lbl_fn_803D2A6C_00001FF8:
     mr r4, r3
     addi r3, r1, 0x1d8
     addi r5, r1, 0x3b8
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     addi r3, r1, 0x3b8
     addi r4, r1, 0x1d8
     bl vec3_copy
@@ -3580,7 +3580,7 @@ lbl_fn_803D2A6C_00002FCC:
     mr r4, r3
     addi r3, r1, 0x32c
     addi r5, r1, 0x338
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f0, 0x334(r1)
     fcmpo cr0, f29, f0
     bge lbl_fn_803D2A6C_00003088
@@ -4018,7 +4018,7 @@ lbl_fn_803D2A6C_00003610:
     mr r4, r3
     addi r3, r1, 0xe4
     addi r5, r1, 0x314
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     addi r3, r1, 0x308
     addi r4, r1, 0xe4
     bl vec3_copy
@@ -4196,7 +4196,7 @@ lbl_fn_803D2A6C_00003864:
     mr r4, r3
     addi r3, r1, 0xcc
     addi r5, r1, 0x2fc
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     addi r3, r1, 0x2f0
     addi r4, r1, 0xcc
     bl vec3_copy
@@ -4244,21 +4244,21 @@ lbl_fn_803D2A6C_00003968:
     mr r5, r3
     lwz r3, 0x6fc(r21)
     addi r4, r23, 0x11a0
-    bl fn_801F837C
+    bl save_findEntryByName
     bl fn_803D70A0
     li r4, 0xe8
     bl fn_803D7084
     mr r5, r3
     lwz r3, 0x6fc(r21)
     addi r4, r23, 0x11ab
-    bl fn_801F837C
+    bl save_findEntryByName
     bl fn_803D70A0
     li r4, 0xe8
     bl fn_803D7084
     mr r5, r3
     lwz r3, 0x6fc(r21)
     addi r4, r23, 0x11b9
-    bl fn_801F837C
+    bl save_findEntryByName
     b lbl_fn_803D2A6C_00003A28
 lbl_fn_803D2A6C_000039D4:
     bl fn_803D70A0
@@ -4267,21 +4267,21 @@ lbl_fn_803D2A6C_000039D4:
     mr r5, r3
     lwz r3, 0x6fc(r21)
     addi r4, r23, 0x11a0
-    bl fn_801F837C
+    bl save_findEntryByName
     bl fn_803D70A0
     li r4, 0xe9
     bl fn_803D7084
     mr r5, r3
     lwz r3, 0x6fc(r21)
     addi r4, r23, 0x11ab
-    bl fn_801F837C
+    bl save_findEntryByName
     bl fn_803D70A0
     li r4, 0xe9
     bl fn_803D7084
     mr r5, r3
     lwz r3, 0x6fc(r21)
     addi r4, r23, 0x11b9
-    bl fn_801F837C
+    bl save_findEntryByName
 lbl_fn_803D2A6C_00003A28:
     addi r18, r18, 0x1
     addi r21, r21, 0x4
@@ -4349,7 +4349,7 @@ lbl_fn_803D2A6C_00003A84:
     mr r4, r3
     addi r3, r1, 0xb4
     addi r5, r1, 0x2fc
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     addi r3, r1, 0x2f0
     addi r4, r1, 0xb4
     bl vec3_copy
@@ -4397,21 +4397,21 @@ lbl_fn_803D2A6C_00003BB0:
     mr r5, r3
     lwz r3, 0x6fc(r21)
     addi r4, r23, 0x11a0
-    bl fn_801F837C
+    bl save_findEntryByName
     bl fn_803D70A0
     li r4, 0xe8
     bl fn_803D7084
     mr r5, r3
     lwz r3, 0x6fc(r21)
     addi r4, r23, 0x11ab
-    bl fn_801F837C
+    bl save_findEntryByName
     bl fn_803D70A0
     li r4, 0xe8
     bl fn_803D7084
     mr r5, r3
     lwz r3, 0x6fc(r21)
     addi r4, r23, 0x11b9
-    bl fn_801F837C
+    bl save_findEntryByName
     b lbl_fn_803D2A6C_00003C70
 lbl_fn_803D2A6C_00003C1C:
     bl fn_803D70A0
@@ -4420,21 +4420,21 @@ lbl_fn_803D2A6C_00003C1C:
     mr r5, r3
     lwz r3, 0x6fc(r21)
     addi r4, r23, 0x11a0
-    bl fn_801F837C
+    bl save_findEntryByName
     bl fn_803D70A0
     li r4, 0xe9
     bl fn_803D7084
     mr r5, r3
     lwz r3, 0x6fc(r21)
     addi r4, r23, 0x11ab
-    bl fn_801F837C
+    bl save_findEntryByName
     bl fn_803D70A0
     li r4, 0xe9
     bl fn_803D7084
     mr r5, r3
     lwz r3, 0x6fc(r21)
     addi r4, r23, 0x11b9
-    bl fn_801F837C
+    bl save_findEntryByName
 lbl_fn_803D2A6C_00003C70:
     addi r18, r18, 0x1
     addi r21, r21, 0x4
@@ -4627,7 +4627,7 @@ lbl_fn_803D2A6C_00003F2C:
     mr r4, r3
     addi r3, r1, 0x6c
     addi r5, r1, 0x2e4
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     addi r3, r24, 0xd60
     addi r4, r1, 0x6c
     bl vec3_copy
@@ -4795,7 +4795,7 @@ lbl_fn_803D2A6C_000041B0:
     mr r4, r3
     addi r3, r1, 0x2cc
     addi r5, r1, 0x2d8
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f0, lbl_80885D58
     lfs f1, 0x2d4(r1)
     fcmpo cr0, f0, f1
@@ -4854,7 +4854,7 @@ lbl_fn_803D2A6C_00004258:
     mr r4, r3
     addi r3, r1, 0x2c0
     addi r5, r1, 0x3c
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f0, lbl_80885D58
     lfs f1, 0x2c8(r1)
     fcmpo cr0, f0, f1

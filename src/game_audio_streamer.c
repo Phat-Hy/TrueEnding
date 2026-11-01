@@ -19,8 +19,8 @@ extern void fn_800EE360(void);
 extern void atn_LH_Xsca_destructor(void);
 extern void system_getNextSequenceId(void);
 extern void fn_8013CB68(void);
-extern void fn_8015495C(void);
-extern void fn_8016DA4C(void);
+extern void equip_applyToCharacter(void);
+extern void debuff_clearStatus(void);
 extern void fn_8016E864(void);
 extern void actor_setState(void);
 extern void fn_8017039C(void);
@@ -1094,9 +1094,9 @@ asm void fn_802FC188(void)
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     mr r3, r31
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lwz r3, 0x14f4(r31)
     li r0, 0x0
     stw r0, 0x14b0(r31)

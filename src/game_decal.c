@@ -23,7 +23,7 @@ extern void fn_800E8688(void);
 extern void fn_800E8FB8(void);
 extern void fn_800E9110(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8C6C(void);
+extern void scissor_clipFrustum(void);
 extern void fn_800FFE68(void);
 extern void fn_80108A54(void);
 extern void fn_8010CA34(void);
@@ -40,7 +40,7 @@ extern void fn_80158BB4(void);
 extern void fn_80158CA4(void);
 extern void fn_8016AFE8(void);
 extern void fn_8016D74C(void);
-extern void fn_8016DA4C(void);
+extern void debuff_clearStatus(void);
 extern void fn_8016DC14(void);
 extern void fn_8016DCD4(void);
 extern void fn_8016E484(void);
@@ -215,7 +215,7 @@ lbl_fn_800E589C_0000010C:
     beq lbl_fn_800E589C_00000158
 lbl_fn_800E589C_00000150:
     mr r3, r30
-    bl fn_8016DA4C
+    bl debuff_clearStatus
 lbl_fn_800E589C_00000158:
     lwz r0, 0x55c(r30)
     li r4, 0x0
@@ -660,7 +660,7 @@ lbl_fn_800E589C_00000794:
 lbl_fn_800E589C_00000798:
     lwz r10, 0x594(r30)
     li r9, 0x1e
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     cmpwi r3, 0x0
     ble lbl_fn_800E589C_00000838
     lwz r0, 0x594(r30)
@@ -1808,7 +1808,7 @@ lbl_fn_800E62AC_000017CC:
     fcmpo cr0, f1, f0
     ble lbl_fn_800E62AC_000017EC
     mr r3, r25
-    bl fn_8016DA4C
+    bl debuff_clearStatus
 lbl_fn_800E62AC_000017EC:
     mr r3, r25
     bl fn_800E7BB0

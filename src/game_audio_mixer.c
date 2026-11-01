@@ -11,7 +11,7 @@ extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void morph_updateMesh(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8C6C(void);
+extern void scissor_clipFrustum(void);
 extern void fn_80108F38(void);
 extern void fn_80126214(void);
 extern void fn_8012DB04(void);
@@ -219,7 +219,7 @@ lbl_fn_802F7E0C_00000168:
     lfs f1, lbl_80884980
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     b lbl_fn_802F7E0C_0000041C
     mr r3, r31
     bl fn_802F97B8

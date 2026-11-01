@@ -24,7 +24,7 @@ extern void fn_8050A994(void);
 extern void fn_8050E098(void);
 extern void fn_8054D798(void);
 extern void fn_806A8E40(void);
-extern void fn_806B0E30(void);
+extern void net_getMyAid(void);
 extern void fn_806B1250(void);
 
 /* External data declarations */
@@ -550,7 +550,7 @@ lbl_fn_804F34B8_00000668:
     li r29, 0x0
     b lbl_fn_804F34B8_000006B8
 lbl_fn_804F34B8_00000690:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r29, r3, 24
     b lbl_fn_804F34B8_000006B8
 lbl_fn_804F34B8_0000069C:
@@ -723,7 +723,7 @@ lbl_fn_804F36FC_000008B4:
     li r30, 0x0
     b lbl_fn_804F36FC_00000904
 lbl_fn_804F36FC_000008DC:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r30, r3, 24
     b lbl_fn_804F36FC_00000904
 lbl_fn_804F36FC_000008E8:
@@ -1075,7 +1075,7 @@ lbl_fn_804F3BB0_00000D40:
     li r0, 0x0
     b lbl_fn_804F3BB0_00000DB8
 lbl_fn_804F3BB0_00000D90:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804F3BB0_00000DB8
 lbl_fn_804F3BB0_00000D9C:
@@ -1750,7 +1750,7 @@ lbl_fn_804F3EF0_00001618:
     li r0, 0x0
     b lbl_fn_804F3EF0_000016AC
 lbl_fn_804F3EF0_00001684:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804F3EF0_000016AC
 lbl_fn_804F3EF0_00001690:
@@ -1838,7 +1838,7 @@ lbl_fn_804F3EF0_0000178C:
     li r0, 0x0
     b lbl_fn_804F3EF0_000017E0
 lbl_fn_804F3EF0_000017B8:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804F3EF0_000017E0
 lbl_fn_804F3EF0_000017C4:
@@ -2148,7 +2148,7 @@ lbl_fn_804F4800_00001BCC:
     li r0, 0x0
     b lbl_fn_804F4800_00001C20
 lbl_fn_804F4800_00001BF8:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804F4800_00001C20
 lbl_fn_804F4800_00001C04:

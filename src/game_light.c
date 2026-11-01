@@ -18,7 +18,7 @@ extern void skill_calculateDamage(void);
 extern void fn_80063D3C(void);
 extern void node_destroy(void);
 extern void map_debugLog(void);
-extern void fn_800BFAC8(void);
+extern void motion_updateFogAdj(void);
 extern void fn_800C7E70(void);
 extern void fn_800C81CC(void);
 extern void fn_800C8278(void);
@@ -1338,7 +1338,7 @@ lbl_fn_800CECF0_000011E4:
     lwz r4, lbl_8087EFB4
     addi r3, r1, 0x8
     addi r5, r24, 0x70
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f0, 0x10(r1)
     fcmpo cr0, f0, f29
     blt lbl_fn_800CECF0_000012C4

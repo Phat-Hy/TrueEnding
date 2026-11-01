@@ -8,7 +8,7 @@ extern void actor_dispatchMessage(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_80087E9C(void);
+extern void route_createWaypoint(void);
 extern void node_createNamedChild(void);
 extern void atn_Model_findBoneIndex(void);
 extern void msg_getMessageString(void);
@@ -361,7 +361,7 @@ lbl_fn_805112FC_00000378:
     addi r5, r29, 0xa4
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_808877D4
     mr r3, r30
     lfs f2, lbl_808877D8
@@ -370,7 +370,7 @@ lbl_fn_805112FC_00000378:
     addi r5, r29, 0xb0
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_808877D4
     mr r3, r30
     lfs f2, lbl_808877D8
@@ -379,7 +379,7 @@ lbl_fn_805112FC_00000378:
     addi r5, r29, 0xbc
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_808877D4
     mr r3, r30
     lfs f2, lbl_808877D8
@@ -388,7 +388,7 @@ lbl_fn_805112FC_00000378:
     addi r5, r29, 0xc8
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)

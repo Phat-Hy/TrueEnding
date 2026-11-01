@@ -7,7 +7,7 @@ extern void __register_global_object(void);
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8003EFB0(void);
+extern void ui_destroyWidget(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void map_debugLog(void);
@@ -20,7 +20,7 @@ extern void fn_801446F0(void);
 extern void fn_80154344(void);
 extern void fn_80155DAC(void);
 extern void fn_80164DCC(void);
-extern void fn_8016DA4C(void);
+extern void debuff_clearStatus(void);
 extern void fn_801750FC(void);
 extern void fn_8018F81C(void);
 extern void fn_8018F84C(void);
@@ -491,11 +491,11 @@ lbl_fn_801A1548_000004D8:
     bne lbl_fn_801A1548_00000578
     lis r3, lbl_807C6BB8@ha
     stwu r6, lbl_807C6BB8@l(r3)
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     li r29, 0x1
     lis r5, lbl_807C7BDC@ha
     stw r6, 0x4(r3)
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     stw r6, 0x8(r3)
     addi r5, r5, lbl_807C7BDC@l
     stw r29, 0xc(r3)
@@ -510,10 +510,10 @@ lbl_fn_801A1548_00000578:
     bne lbl_fn_801A1548_000005C0
     li r0, 0x0
     li r29, 0x1
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     lis r5, lbl_807C7BDC@ha
     stw r0, 0x0(r3)
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     addi r5, r5, lbl_807C7BDC@l
     stw r0, 0x4(r3)
     stw r0, 0x8(r3)
@@ -529,10 +529,10 @@ lbl_fn_801A1548_000005C0:
     stw r29, 0xc(r3)
     bne lbl_fn_801A1548_00000608
     li r0, 0x0
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     lis r5, lbl_807C7BDC@ha
     stw r0, 0x0(r3)
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     stw r0, 0x4(r3)
     addi r5, r5, lbl_807C7BDC@l
     stw r0, 0x8(r3)
@@ -578,11 +578,11 @@ lbl_fn_801A1548_00000674:
     lis r3, lbl_807C6BB8@ha
     li r0, 0x0
     stwu r0, lbl_807C6BB8@l(r3)
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     li r30, 0x1
     lis r5, lbl_807C7BDC@ha
     stw r0, 0x4(r3)
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     addi r5, r5, lbl_807C7BDC@l
     stw r0, 0x8(r3)
     stw r30, 0xc(r3)
@@ -1417,7 +1417,7 @@ lbl_fn_801A2290_00001234:
     lwz r4, 0x4(r3)
     stw r0, 0x560(r4)
     lwz r3, 0x4(r3)
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lwz r3, 0x4(r30)
     li r4, 0x1
     bl fn_80164DCC

@@ -8,7 +8,7 @@ extern void _savegpr_19(void);
 extern void _savegpr_22(void);
 extern void dtor_80084684(void);
 extern void fn_80064AC4(void);
-extern void fn_800BFAC8(void);
+extern void motion_updateFogAdj(void);
 extern void str_findChar(void);
 extern void fn_800E0000(void);
 extern void magic_dispatchActionCommand(void);
@@ -254,7 +254,7 @@ lbl_fn_803DAB4C_0000023C:
     stfs f4, 0x80(r1)
     stfs f3, 0x88(r1)
     stfs f0, 0x9c(r1)
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lwz r3, lbl_8087F9F8
     lwz r0, 0x48(r3)
     cmpwi r0, 0x0
@@ -1630,7 +1630,7 @@ lbl_fn_803DBD44_000015AC:
     stfs f4, 0x94(r1)
     stfs f3, 0x98(r1)
     stfs f0, 0x9c(r1)
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f6, 0x90(r1)
     lfs f0, lbl_80885D60
     fcmpo cr0, f6, f0
@@ -1675,7 +1675,7 @@ lbl_fn_803DBD44_00001658:
     stfs f2, 0x68(r1)
     psq_st f1, 0x0(r29), 0, 0
     stfs f2, 0xc0(r1)
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f2, 0x5c(r1)
     psq_l f1, 0x0(r27), 0, 0
     fcmpo cr0, f2, f30

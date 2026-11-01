@@ -14,7 +14,7 @@ extern void talk_setSpeakerName(void);
 extern void skill_calculateDamage(void);
 extern void mem_free(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_800BFAC8(void);
+extern void motion_updateFogAdj(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void str_parseInt(void);
@@ -610,7 +610,7 @@ lbl_fn_80180AE0_000006A0:
     stfs f0, 0x64(r1)
     stfs f1, 0x68(r1)
     stfs f2, 0x6c(r1)
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f1, 0x78(r1)
     lfs f0, lbl_80881C04
     fcmpo cr0, f1, f0

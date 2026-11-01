@@ -12,7 +12,7 @@ extern void fn_801F6E78(void);
 extern void fn_801F7590(void);
 extern void fn_801F7A18(void);
 extern void fn_801F7DF0(void);
-extern void fn_801F837C(void);
+extern void save_findEntryByName(void);
 extern void fn_801F8598(void);
 extern void fn_801F8830(void);
 extern void fn_80219344(void);
@@ -1388,7 +1388,7 @@ lbl_fn_803E0E10_000011A8:
     lwz r5, 0x60(r23)
     lwz r3, 0xc(r24)
     lwz r5, 0x8(r5)
-    bl fn_801F837C
+    bl save_findEntryByName
     lwz r3, 0xc(r24)
     addi r4, r31, 0x10d6
     lfs f1, 0x3c(r24)
@@ -1425,11 +1425,11 @@ lbl_fn_803E0E10_000011A8:
     addi r25, r25, lbl_8078C638@l
     addi r4, r31, 0x1317
     addi r5, r25, 0x52
-    bl fn_801F837C
+    bl save_findEntryByName
     lwz r3, 0xc(r24)
     addi r4, r31, 0x1412
     addi r5, r25, 0x52
-    bl fn_801F837C
+    bl save_findEntryByName
 lbl_fn_803E0E10_00001314:
     lfs f3, 0x948(r23)
     lfs f0, lbl_80885D58
@@ -2009,7 +2009,7 @@ lbl_fn_803E0E10_00001B68:
     lwz r3, 0x18(r24)
     lwz r5, 0x8(r4)
     addi r4, r25, 0x13ed
-    bl fn_801F837C
+    bl save_findEntryByName
     lwz r3, 0x18(r24)
     addi r4, r25, 0x1317
     lwz r5, 0x934(r23)

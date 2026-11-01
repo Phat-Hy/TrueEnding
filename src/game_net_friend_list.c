@@ -8,7 +8,7 @@ extern void __register_global_object(void);
 extern void _restgpr_26(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
-extern void fn_8003EFB0(void);
+extern void ui_destroyWidget(void);
 extern void fn_8004829C(void);
 extern void fn_8004B290(void);
 extern void fn_8005C220(void);
@@ -2133,10 +2133,10 @@ lbl_fn_804D0328_000019C0:
     bne lbl_fn_804D0328_00001B64
     lis r3, lbl_807C6BB8@ha
     stwu r31, lbl_807C6BB8@l(r3)
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     lis r5, lbl_807C8F48@ha
     stw r31, 0x4(r3)
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     addi r5, r5, lbl_807C8F48@l
     stw r31, 0x8(r3)
     stw r30, 0xc(r3)
@@ -2153,10 +2153,10 @@ lbl_fn_804D0328_00001B64:
     bne lbl_fn_804D0328_00001BB4
     li r0, 0x0
     li r30, 0x1
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     lis r5, lbl_807C8F48@ha
     stw r0, 0x0(r3)
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     addi r5, r5, lbl_807C8F48@l
     stw r0, 0x4(r3)
     stw r0, 0x8(r3)

@@ -46,7 +46,7 @@ extern void __destroy_new_array(void);
 extern void fn_806A8E40(void);
 extern void fn_806A8E70(void);
 extern void fn_806B0DE0(void);
-extern void fn_806B0E30(void);
+extern void net_getMyAid(void);
 extern void fn_806B1250(void);
 
 /* External data declarations */
@@ -1516,7 +1516,7 @@ lbl_fn_804BC628_000013D8:
     beq lbl_fn_804BC628_00001418
     b lbl_fn_804BC628_00001440
 lbl_fn_804BC628_00001418:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r31, r3, 24
     b lbl_fn_804BC628_00001440
 lbl_fn_804BC628_00001424:

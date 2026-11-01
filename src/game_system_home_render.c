@@ -26,14 +26,14 @@ extern void mem_alloc(void);
 extern void mem_getAllocSize(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
-extern void fn_80087E9C(void);
+extern void route_createWaypoint(void);
 extern void node_createNamedChild(void);
 extern void node_destroy(void);
 extern void fn_8008AD4C(void);
 extern void fn_8008B140(void);
 extern void lockon_updateTarget(void);
 extern void atn_Anim_applyLayerTransform(void);
-extern void fn_800BFAC8(void);
+extern void motion_updateFogAdj(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void bloom_processPasses(void);
@@ -489,7 +489,7 @@ lbl_fn_8036205C_000004B4:
     stfs f0, 0x20(r1)
     stfs f3, 0x24(r1)
     stfs f6, 0x28(r1)
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f0, 0x10(r1)
     fcmpo cr0, f30, f0
     bge lbl_fn_8036205C_00000590
@@ -807,7 +807,7 @@ lbl_fn_80362598_00000944:
     lwz r4, lbl_8087EFB4
     addi r3, r1, 0x8
     addi r5, r31, 0x64
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f0, lbl_808856A0
     lfs f1, 0x10(r1)
     fcmpo cr0, f0, f1
@@ -1242,7 +1242,7 @@ lbl_fn_80362B94_00000F44:
     lwz r4, lbl_8087EFB4
     stfs f1, 0x18(r1)
     stfs f0, 0x1c(r1)
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f0, lbl_808856A0
     lfs f1, 0x10(r1)
     fcmpo cr0, f0, f1
@@ -1463,7 +1463,7 @@ lbl_fn_80362E8C_0000123C:
     addi r3, r1, 0x8
     lwz r4, lbl_8087EFB4
     addi r5, r5, 0x2c
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f0, lbl_808856A0
     lfs f1, 0x10(r1)
     fcmpo cr0, f0, f1
@@ -1655,7 +1655,7 @@ lbl_fn_80363108_000014EC:
     addi r4, r30, 0xb
     addi r5, r28, 0x34
     addi r6, r31, fn_8036324C@l
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_808856A0
     mr r3, r29
     lfs f2, lbl_808856A4

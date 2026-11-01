@@ -13,7 +13,7 @@ extern void fn_8012476C(void);
 extern void fn_8012DF7C(void);
 extern void fn_8013CB68(void);
 extern void fn_80155DAC(void);
-extern void fn_8016DA4C(void);
+extern void debuff_clearStatus(void);
 extern void fn_80192758(void);
 extern void world_getGlobalFlag(void);
 extern void PSMTXRotRad(void);
@@ -112,7 +112,7 @@ asm void fn_801A7DC8(void)
     lwz r4, 0x4(r3)
     stw r0, 0x560(r4)
     lwz r3, 0x4(r3)
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lwz r3, 0x4(r30)
     li r0, 0x1
     lfs f0, lbl_80882230

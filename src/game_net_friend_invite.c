@@ -10,7 +10,7 @@ extern void dtor_80084684(void);
 extern void vec3_set(void);
 extern void fn_8000D9E8(void);
 extern void fn_8000DCF4(void);
-extern void fn_8003EFB0(void);
+extern void ui_destroyWidget(void);
 extern void fn_8004895C(void);
 extern void fn_80049654(void);
 extern void fn_8004B338(void);
@@ -1380,11 +1380,11 @@ lbl_fn_804D201C_00000D74:
     bne lbl_fn_804D201C_00000DBC
     lis r3, lbl_807C6BB8@ha
     stwu r6, lbl_807C6BB8@l(r3)
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     li r29, 0x1
     lis r5, lbl_807C8F48@ha
     stw r6, 0x4(r3)
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     stw r6, 0x8(r3)
     addi r5, r5, lbl_807C8F48@l
     stw r29, 0xc(r3)

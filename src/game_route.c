@@ -58,7 +58,7 @@ void fn_80087858(void);
 void route_createSegment(void);
 void fn_80087AA0(void);
 void fn_80087BB4(void);
-void fn_80087E9C(void);
+void route_createWaypoint(void);
 
 asm void fn_80086560(void)
 {
@@ -1876,7 +1876,7 @@ lbl_fn_80087BB4_0000191C:
     blr
 }
 
-asm void fn_80087E9C(void)
+asm void route_createWaypoint(void)
 {
     nofralloc
     stwu r1, -0x40(r1)
@@ -1904,13 +1904,13 @@ asm void fn_80087E9C(void)
     bl mem_alloc
     cmpwi r3, 0x0
     mr r31, r3
-    beq lbl_fn_80087E9C_00001A0C
+    beq lbl_route_createWaypoint_00001A0C
     addi r0, r3, 0x4
     lis r4, lbl_80778808@ha
     cmplw r25, r0
     addi r4, r4, lbl_80778808@l
     stw r4, 0x0(r3)
-    beq lbl_fn_80087E9C_000019D8
+    beq lbl_route_createWaypoint_000019D8
     mr r3, r25
     bl strlen
     mr r5, r3
@@ -1918,7 +1918,7 @@ asm void fn_80087E9C(void)
     addi r3, r31, 0x4
     addi r5, r5, 0x1
     bl memcpy
-lbl_fn_80087E9C_000019D8:
+lbl_route_createWaypoint_000019D8:
     li r4, 0x0
     stw r4, 0x44(r31)
     lis r3, lbl_80778610@ha
@@ -1932,9 +1932,9 @@ lbl_fn_80087E9C_000019D8:
     stw r4, 0x58(r31)
     stw r4, 0x5c(r31)
     stw r4, 0x60(r31)
-lbl_fn_80087E9C_00001A0C:
+lbl_route_createWaypoint_00001A0C:
     cmpwi r31, 0x0
-    beq lbl_fn_80087E9C_00001CEC
+    beq lbl_route_createWaypoint_00001CEC
     lis r8, lbl_807321F0@ha
     li r3, 0xa8
     addi r8, r8, lbl_807321F0@l
@@ -1946,13 +1946,13 @@ lbl_fn_80087E9C_00001A0C:
     bl mem_alloc
     cmpwi r3, 0x0
     mr r25, r3
-    beq lbl_fn_80087E9C_00001AB0
+    beq lbl_route_createWaypoint_00001AB0
     addi r0, r3, 0x4
     lis r4, lbl_80778808@ha
     cmplw r26, r0
     addi r4, r4, lbl_80778808@l
     stw r4, 0x0(r3)
-    beq lbl_fn_80087E9C_00001A78
+    beq lbl_route_createWaypoint_00001A78
     mr r3, r26
     bl strlen
     mr r5, r3
@@ -1960,7 +1960,7 @@ lbl_fn_80087E9C_00001A0C:
     addi r3, r25, 0x4
     addi r5, r5, 0x1
     bl memcpy
-lbl_fn_80087E9C_00001A78:
+lbl_route_createWaypoint_00001A78:
     li r0, 0x0
     stw r0, 0x44(r25)
     lis r3, lbl_80778730@ha
@@ -1975,9 +1975,9 @@ lbl_fn_80087E9C_00001A78:
     stfs f30, 0x60(r25)
     stfs f31, 0x64(r25)
     stb r0, 0x68(r25)
-lbl_fn_80087E9C_00001AB0:
+lbl_route_createWaypoint_00001AB0:
     cmpwi r25, 0x0
-    beq lbl_fn_80087E9C_00001AF8
+    beq lbl_route_createWaypoint_00001AF8
     lwz r12, 0x0(r25)
     mr r3, r25
     mr r4, r29
@@ -1987,15 +1987,15 @@ lbl_fn_80087E9C_00001AB0:
     bctrl
     lwz r0, 0x58(r31)
     cmpwi r0, 0x0
-    bne lbl_fn_80087E9C_00001AEC
+    bne lbl_route_createWaypoint_00001AEC
     stw r25, 0x58(r31)
     stw r25, 0x5c(r31)
-    b lbl_fn_80087E9C_00001AF8
-lbl_fn_80087E9C_00001AEC:
+    b lbl_route_createWaypoint_00001AF8
+lbl_route_createWaypoint_00001AEC:
     lwz r3, 0x5c(r31)
     stw r25, 0x44(r3)
     stw r25, 0x5c(r31)
-lbl_fn_80087E9C_00001AF8:
+lbl_route_createWaypoint_00001AF8:
     lis r8, lbl_807321F0@ha
     li r3, 0xa8
     addi r8, r8, lbl_807321F0@l
@@ -2007,13 +2007,13 @@ lbl_fn_80087E9C_00001AF8:
     bl mem_alloc
     cmpwi r3, 0x0
     mr r26, r3
-    beq lbl_fn_80087E9C_00001B98
+    beq lbl_route_createWaypoint_00001B98
     addi r0, r3, 0x4
     lis r4, lbl_80778808@ha
     cmplw r25, r0
     addi r4, r4, lbl_80778808@l
     stw r4, 0x0(r3)
-    beq lbl_fn_80087E9C_00001B5C
+    beq lbl_route_createWaypoint_00001B5C
     mr r3, r25
     bl strlen
     mr r5, r3
@@ -2021,7 +2021,7 @@ lbl_fn_80087E9C_00001AF8:
     addi r3, r26, 0x4
     addi r5, r5, 0x1
     bl memcpy
-lbl_fn_80087E9C_00001B5C:
+lbl_route_createWaypoint_00001B5C:
     li r4, 0x0
     stw r4, 0x44(r26)
     lis r3, lbl_80778730@ha
@@ -2037,9 +2037,9 @@ lbl_fn_80087E9C_00001B5C:
     stfs f30, 0x60(r26)
     stfs f31, 0x64(r26)
     stb r4, 0x68(r26)
-lbl_fn_80087E9C_00001B98:
+lbl_route_createWaypoint_00001B98:
     cmpwi r26, 0x0
-    beq lbl_fn_80087E9C_00001BE0
+    beq lbl_route_createWaypoint_00001BE0
     lwz r12, 0x0(r26)
     mr r3, r26
     mr r4, r29
@@ -2049,15 +2049,15 @@ lbl_fn_80087E9C_00001B98:
     bctrl
     lwz r0, 0x58(r31)
     cmpwi r0, 0x0
-    bne lbl_fn_80087E9C_00001BD4
+    bne lbl_route_createWaypoint_00001BD4
     stw r26, 0x58(r31)
     stw r26, 0x5c(r31)
-    b lbl_fn_80087E9C_00001BE0
-lbl_fn_80087E9C_00001BD4:
+    b lbl_route_createWaypoint_00001BE0
+lbl_route_createWaypoint_00001BD4:
     lwz r3, 0x5c(r31)
     stw r26, 0x44(r3)
     stw r26, 0x5c(r31)
-lbl_fn_80087E9C_00001BE0:
+lbl_route_createWaypoint_00001BE0:
     lis r8, lbl_807321F0@ha
     li r3, 0xa8
     addi r8, r8, lbl_807321F0@l
@@ -2069,13 +2069,13 @@ lbl_fn_80087E9C_00001BE0:
     bl mem_alloc
     cmpwi r3, 0x0
     mr r26, r3
-    beq lbl_fn_80087E9C_00001C80
+    beq lbl_route_createWaypoint_00001C80
     addi r0, r3, 0x4
     lis r4, lbl_80778808@ha
     cmplw r25, r0
     addi r4, r4, lbl_80778808@l
     stw r4, 0x0(r3)
-    beq lbl_fn_80087E9C_00001C44
+    beq lbl_route_createWaypoint_00001C44
     mr r3, r25
     bl strlen
     mr r5, r3
@@ -2083,7 +2083,7 @@ lbl_fn_80087E9C_00001BE0:
     addi r3, r26, 0x4
     addi r5, r5, 0x1
     bl memcpy
-lbl_fn_80087E9C_00001C44:
+lbl_route_createWaypoint_00001C44:
     li r4, 0x0
     stw r4, 0x44(r26)
     lis r3, lbl_80778730@ha
@@ -2099,9 +2099,9 @@ lbl_fn_80087E9C_00001C44:
     stfs f30, 0x60(r26)
     stfs f31, 0x64(r26)
     stb r4, 0x68(r26)
-lbl_fn_80087E9C_00001C80:
+lbl_route_createWaypoint_00001C80:
     cmpwi r26, 0x0
-    beq lbl_fn_80087E9C_00001CC8
+    beq lbl_route_createWaypoint_00001CC8
     lwz r12, 0x0(r26)
     mr r3, r26
     mr r4, r29
@@ -2111,26 +2111,26 @@ lbl_fn_80087E9C_00001C80:
     bctrl
     lwz r0, 0x58(r31)
     cmpwi r0, 0x0
-    bne lbl_fn_80087E9C_00001CBC
+    bne lbl_route_createWaypoint_00001CBC
     stw r26, 0x58(r31)
     stw r26, 0x5c(r31)
-    b lbl_fn_80087E9C_00001CC8
-lbl_fn_80087E9C_00001CBC:
+    b lbl_route_createWaypoint_00001CC8
+lbl_route_createWaypoint_00001CBC:
     lwz r3, 0x5c(r31)
     stw r26, 0x44(r3)
     stw r26, 0x5c(r31)
-lbl_fn_80087E9C_00001CC8:
+lbl_route_createWaypoint_00001CC8:
     lwz r0, 0x58(r27)
     cmpwi r0, 0x0
-    bne lbl_fn_80087E9C_00001CE0
+    bne lbl_route_createWaypoint_00001CE0
     stw r31, 0x58(r27)
     stw r31, 0x5c(r27)
-    b lbl_fn_80087E9C_00001CEC
-lbl_fn_80087E9C_00001CE0:
+    b lbl_route_createWaypoint_00001CEC
+lbl_route_createWaypoint_00001CE0:
     lwz r3, 0x5c(r27)
     stw r31, 0x44(r3)
     stw r31, 0x5c(r27)
-lbl_fn_80087E9C_00001CEC:
+lbl_route_createWaypoint_00001CEC:
     lfd f31, 0x38(r1)
     lfd f30, 0x30(r1)
     lfd f29, 0x28(r1)

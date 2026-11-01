@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void dtor_80013D60(void);
 extern void dtor_80084684(void);
-extern void fn_8003E4A4(void);
+extern void str_initFromCStr(void);
 extern void fn_8004212C(void);
 extern void fn_80057A64(void);
 extern void talk_parseQuotedString(void);
@@ -43,7 +43,7 @@ extern void fn_800EE360(void);
 extern void fn_800F52F0(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800F8574(void);
-extern void fn_800F8C6C(void);
+extern void scissor_clipFrustum(void);
 extern void magic_dispatchActionCommand(void);
 extern void boss_updatePhaseState(void);
 extern void fn_80144710(void);
@@ -51,8 +51,8 @@ extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void fn_8014C540(void);
 extern void fn_80151448(void);
-extern void fn_8015495C(void);
-extern void fn_8016DA4C(void);
+extern void equip_applyToCharacter(void);
+extern void debuff_clearStatus(void);
 extern void fn_8016DDB0(void);
 extern void actor_setState(void);
 extern void fn_80170A20(void);
@@ -231,9 +231,9 @@ lbl_fn_802CCC24_000000E0:
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     mr r3, r31
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     li r0, 0x2
     stw r0, 0x58c(r31)
     mr r3, r31
@@ -549,14 +549,14 @@ asm void fn_802CCFD8(void)
     ori r0, r0, 0x40
     stw r0, 0x7ec(r28)
     addi r4, r29, lbl_80746EE0@l
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r29, r29, lbl_80746EE0@l
     addi r3, r1, 0x20
     addi r4, r29, 0x18
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x14
     addi r4, r30, 0x2c
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x74
     addi r4, r29, 0x2b
     li r5, 0x0
@@ -1439,7 +1439,7 @@ lbl_fn_802CD73C_00001250:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
 lbl_fn_802CD73C_000012AC:
     lwz r0, 0x1554(r31)
     cmpwi r0, 0x0
@@ -1798,9 +1798,9 @@ lbl_fn_802CD73C_00001760:
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     mr r3, r31
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     li r0, 0x2
     stw r0, 0x58c(r31)
     mr r3, r31
