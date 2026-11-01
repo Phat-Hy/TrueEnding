@@ -114,7 +114,7 @@ extern u32 lbl_80880484;
 
 /* Function declarations */
 void pad_03_806A6568_text(void);
-void fn_806A6570(void);
+u32 fn_806A6570(void);
 u32 fn_806A6580(void);
 void fn_806A6590(void);
 void fn_806A65A0(void);
@@ -125,7 +125,7 @@ void fn_806A66D0(void);
 void fn_806A6740(void);
 void fn_806A6760(void);
 void fn_806A68F0(void);
-void fn_806A6A80(void);
+u32 fn_806A6A80(u32 val);
 void fn_806A6A90(void);
 void fn_806A6BA0(void);
 void fn_806A6C90(void);
@@ -170,11 +170,9 @@ asm void pad_03_806A6568_text(void)
     opword 0x00000000
 }
 
-asm void fn_806A6570(void)
+u32 fn_806A6570(void)
 {
-    nofralloc
-    li r3, 0x2
-    blr
+    return 2;
 }
 
 u32 fn_806A6580(void)
@@ -213,12 +211,9 @@ lbl_fn_806A65A0_0000005C:
     blr
 }
 
-asm void fn_806A65E0(void)
+void fn_806A65E0(void)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, lbl_80880458
-    blr
+    lbl_80880458 = 0;
 }
 
 void fn_806A65F0(void) {
@@ -564,13 +559,11 @@ lbl_fn_806A68F0_000004F4:
     blr
 }
 
-asm void fn_806A6A80(void)
+u32 fn_806A6A80(u32 val)
 {
-    nofralloc
-    mr r0, r3
-    lwz r3, lbl_8088047C
-    stw r0, lbl_8088047C
-    blr
+    u32 old = lbl_8088047C;
+    lbl_8088047C = val;
+    return old;
 }
 
 asm void fn_806A6A90(void)
