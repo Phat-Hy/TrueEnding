@@ -5602,7 +5602,6 @@ asm void fn_805FF4D0(void) {
 }
 
 
-asm void fn_805FF4E0(void) {
-    nofralloc
-    blr 
+void fn_805FF4E0(void)
+{
 }

@@ -1808,10 +1808,8 @@ asm void fn_8030D9F0(void)
     blr
 }
 
-asm void fn_8030DA1C(void)
+void fn_8030DA1C(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_8030DA20(void)

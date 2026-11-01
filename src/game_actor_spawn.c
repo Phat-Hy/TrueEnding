@@ -157,10 +157,8 @@ asm void fn_80116BAC(void)
     blr
 }
 
-asm void fn_80116BB4(void)
+void fn_80116BB4(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_80116BB8(void)
@@ -395,16 +393,12 @@ asm void fn_80116EA8(void)
     blr
 }
 
-asm void fn_80116EB0(void)
+void fn_80116EB0(void)
 {
-    nofralloc
-    blr
 }
 
-asm void fn_80116EB4(void)
+void fn_80116EB4(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_80116EB8(void)

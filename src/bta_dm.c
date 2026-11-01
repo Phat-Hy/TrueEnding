@@ -3367,10 +3367,8 @@ asm void fn_8062C900(void)
     bctr
 }
 
-asm void fn_8062C91C(void)
+void fn_8062C91C(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_8062C920(void)

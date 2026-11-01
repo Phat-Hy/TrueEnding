@@ -944,16 +944,12 @@ lbl_fn_80119030_00000BAC:
     blr
 }
 
-asm void fn_801191A0(void)
+void fn_801191A0(void)
 {
-    nofralloc
-    blr
 }
 
-asm void fn_801191A4(void)
+void fn_801191A4(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_801191A8(void)
