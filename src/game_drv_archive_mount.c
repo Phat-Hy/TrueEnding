@@ -48,7 +48,7 @@ extern void save_createWorkerTask(void);
 extern void task_mapIdToQueue(void);
 extern void task_findEntryById(void);
 extern void fn_8021A77C(void);
-extern void fn_80375184(void);
+extern void kpad_testActiveFlags(void);
 extern void fn_8037F744(void);
 extern void fn_80390A88(void);
 extern void fn_803D8344(void);
@@ -3398,7 +3398,7 @@ lbl_fn_805A7820_00002D68:
     stw r4, 0xa4(r1)
     stw r0, 0xa8(r1)
     beq lbl_fn_805A7820_00002DBC
-    bl fn_80375184
+    bl kpad_testActiveFlags
     cmpwi r3, 0x0
     beq lbl_fn_805A7820_00002DBC
     li r0, 0xd

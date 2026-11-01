@@ -19,13 +19,13 @@ extern void morph_updateWeights(void);
 extern void morph_updateMesh(void);
 extern void atn_Task_setActive(void);
 extern void wcs_vformat(void);
-extern void fn_800EB7A0(void);
+extern void sound_playSpatialEffect(void);
 extern void system_getNextSequenceId(void);
 extern void fn_801077A8(void);
 extern void fn_80107850(void);
 extern void fn_801092C8(void);
-extern void fn_80109828(void);
-extern void fn_8012D8B8(void);
+extern void hurtbox_dispatchHitEvent(void);
+extern void enemy_updateAnimTimer(void);
 extern void fn_8013310C(void);
 extern void fn_80133130(void);
 extern void quest_updateFlow(void);
@@ -42,7 +42,7 @@ extern void res_registerResource(void);
 extern void fn_802E2328(void);
 extern void fn_802E3D60(void);
 extern void fn_802E55B0(void);
-extern void fn_80375184(void);
+extern void kpad_testActiveFlags(void);
 extern void fn_803EEE10(void);
 extern void printf(void);
 extern void rand(void);
@@ -214,7 +214,7 @@ lbl_fn_802DC1C0_000001D8:
     bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x68
-    bl fn_80109828
+    bl hurtbox_dispatchHitEvent
     lwz r0, 0x284(r1)
     lwz r31, 0x27c(r1)
     lwz r30, 0x278(r1)
@@ -508,7 +508,7 @@ lbl_fn_802DC618_00000578:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_802DC618_00000668
-    bl fn_80375184
+    bl kpad_testActiveFlags
     cmpwi r3, 0x0
     beq lbl_fn_802DC618_00000668
     lwz r0, 0x48(r28)
@@ -546,7 +546,7 @@ lbl_fn_802DC618_00000668:
     li r4, -0x1
     bl ref_releaseHandle
     mr r3, r28
-    bl fn_800EB7A0
+    bl sound_playSpatialEffect
     lwz r0, 0x64(r1)
     lwz r31, 0x5c(r1)
     lwz r30, 0x58(r1)
@@ -1108,7 +1108,7 @@ lbl_fn_802DCA34_00000E9C:
     bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x60
-    bl fn_80109828
+    bl hurtbox_dispatchHitEvent
     b lbl_fn_802DCA34_00000F88
 lbl_fn_802DCA34_00000EBC:
     li r16, 0x0
@@ -1146,7 +1146,7 @@ lbl_fn_802DCA34_00000F20:
     bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x60
-    bl fn_80109828
+    bl hurtbox_dispatchHitEvent
     b lbl_fn_802DCA34_00000F88
 lbl_fn_802DCA34_00000F40:
     li r15, 0x0
@@ -1727,7 +1727,7 @@ lbl_fn_802DD1B4_000016BC:
     stw r0, 0x12a4(r22)
 lbl_fn_802DD1B4_00001794:
     addi r3, r22, 0x7d4
-    bl fn_8012D8B8
+    bl enemy_updateAnimTimer
     stw r16, 0x58c(r22)
     mr r3, r22
     li r4, 0x0
@@ -1776,7 +1776,7 @@ lbl_fn_802DD1B4_00001834:
     bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0xa0
-    bl fn_80109828
+    bl hurtbox_dispatchHitEvent
     addic. r0, r1, 0x5c
     beq lbl_fn_802DD1B4_0000187C
     beq lbl_fn_802DD1B4_0000187C
@@ -1853,7 +1853,7 @@ lbl_fn_802DDA90_00001918:
     stw r0, 0x12a4(r28)
 lbl_fn_802DDA90_00001954:
     addi r3, r28, 0x7d4
-    bl fn_8012D8B8
+    bl enemy_updateAnimTimer
     stw r31, 0xd18(r28)
     mr r3, r28
     li r4, 0x0
@@ -1889,7 +1889,7 @@ lbl_fn_802DDA90_000019C0:
     bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x8
-    bl fn_80109828
+    bl hurtbox_dispatchHitEvent
     lmw r27, 0x20c(r1)
     lwz r0, 0x224(r1)
     mtlr r0

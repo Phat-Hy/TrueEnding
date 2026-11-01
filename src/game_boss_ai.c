@@ -36,7 +36,7 @@ extern void fn_8020924C(void);
 extern void fn_802092C0(void);
 extern void fn_8020A81C(void);
 extern void fn_8020A888(void);
-extern void fn_8020ED84(void);
+extern void time_wrapMilliseconds(void);
 extern void task_lookupTagIndex(void);
 extern void fn_80218260(void);
 extern void fn_80219EB4(void);
@@ -547,7 +547,7 @@ lbl_fn_80134800_0000062C:
     mr r4, r30
 lbl_fn_80134800_00000640:
     mr r3, r20
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
     mr r5, r3
     mr r3, r23
     mr r4, r22
@@ -648,7 +648,7 @@ lbl_fn_80134800_00000794:
     mr r4, r30
 lbl_fn_80134800_000007A8:
     mr r3, r20
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
     cmpwi r3, 0x0
     beq lbl_fn_80134800_00000890
     lwz r4, 0xe4(r3)

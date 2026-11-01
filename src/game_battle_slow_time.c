@@ -15,7 +15,7 @@ extern void fn_800588FC(void);
 extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
-extern void fn_80063D3C(void);
+extern void magic_castSpellCircle(void);
 extern void mem_alloc(void);
 extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
@@ -171,7 +171,7 @@ lbl_fn_80406EC4_00000068:
     stfs f2, 0x28(r1)
     fmr f2, f0
     stfs f0, 0x24(r1)
-    bl fn_80063D3C
+    bl magic_castSpellCircle
     lfs f6, 0x954(r31)
     addi r4, r1, 0x14
     lfs f4, 0x28(r1)
@@ -197,7 +197,7 @@ lbl_fn_80406EC4_00000068:
     stfs f3, 0x14(r1)
     stfs f4, 0x18(r1)
     stfs f5, 0x1c(r1)
-    bl fn_80063D3C
+    bl magic_castSpellCircle
 lbl_fn_80406EC4_00000138:
     lwz r0, 0x44(r1)
     lwz r31, 0x3c(r1)

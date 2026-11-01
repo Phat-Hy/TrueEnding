@@ -8,7 +8,7 @@ extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_8006A9A4(void);
-extern void fn_8006B174(void);
+extern void boss_decodePhaseBitfield(void);
 extern void fn_8006BBCC(void);
 extern void atn_FileList_destructor(void);
 extern void fn_8006C300(void);
@@ -191,7 +191,7 @@ lbl_fn_8046D1EC_000000CC:
     bl actor_dispatchMessage
     mr r4, r28
     addi r3, r1, 0x48
-    bl fn_8006B174
+    bl boss_decodePhaseBitfield
     lwz r0, 0x30(r1)
     srwi. r0, r0, 31
     beq lbl_fn_8046D1EC_00000154

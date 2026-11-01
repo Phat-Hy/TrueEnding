@@ -30,7 +30,7 @@ extern void morph_updateMesh(void);
 extern void atn_Task_setActive(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
-extern void fn_800EB7A0(void);
+extern void sound_playSpatialEffect(void);
 extern void system_getNextSequenceId(void);
 extern void scissor_clipFrustum(void);
 extern void boss_updatePhaseState(void);
@@ -967,7 +967,7 @@ lbl_fn_802829DC_00000B44:
     li r8, 0x1
     bl atn_Anim_setLayerAnimation
     mr r3, r31
-    bl fn_800EB7A0
+    bl sound_playSpatialEffect
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0

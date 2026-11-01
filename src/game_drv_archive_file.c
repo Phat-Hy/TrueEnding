@@ -26,7 +26,7 @@ extern void task_mapIdToQueue(void);
 extern void task_findEntryById(void);
 extern void fn_8021A77C(void);
 extern void fn_8021A888(void);
-extern void fn_803750E4(void);
+extern void kpad_validateButtonIndex(void);
 extern void fn_803E4A20(void);
 extern void fn_803E5C60(void);
 extern void fn_8059A268(void);
@@ -1177,10 +1177,10 @@ lbl_fn_805AA4E8_00000F68:
     cmpwi r3, 0x0
     beq lbl_fn_805AA4E8_00000F94
     li r4, 0xbb
-    bl fn_803750E4
+    bl kpad_validateButtonIndex
     lwz r3, lbl_8087F430
     li r4, 0xbc
-    bl fn_803750E4
+    bl kpad_validateButtonIndex
 lbl_fn_805AA4E8_00000F94:
     lwz r3, lbl_8087EF70
     li r4, 0x0

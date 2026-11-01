@@ -32,7 +32,7 @@ extern void perf_getMetricValue(void);
 extern void assert_generateId(void);
 extern void assert_formatLocation(void);
 extern void fn_8020924C(void);
-extern void fn_8020ED84(void);
+extern void time_wrapMilliseconds(void);
 extern void fn_8020EF4C(void);
 extern void random_generateValue(void);
 extern void event_findEntryById(void);
@@ -1237,7 +1237,7 @@ lbl_fn_801E714C_00000FD8:
 lbl_fn_801E714C_0000103C:
     lwz r4, -0x7d70(r27)
     li r3, 0x0
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
     mr r24, r3
     bl random_generateValue
     mr r28, r3
@@ -1305,14 +1305,14 @@ lbl_fn_801E714C_000010E0:
 lbl_fn_801E714C_00001144:
     lwz r4, -0x7d68(r27)
     li r3, 0x1
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
     mr r24, r3
     bl fn_8020EF4C
     cmpwi r3, 0x0
     beq lbl_fn_801E714C_00001170
     lwz r4, -0x7d70(r27)
     li r3, 0x0
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
     mr r24, r3
 lbl_fn_801E714C_00001170:
     mr r3, r24
@@ -1495,7 +1495,7 @@ lbl_fn_801E75F8_0000140C:
     lwz r3, 0x1e4(r26)
     slwi r0, r3, 3
     lwzx r4, r22, r0
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
     bl fn_8020EF4C
     cmpwi r3, 0x0
     beq lbl_fn_801E75F8_00001450

@@ -40,8 +40,8 @@ extern void fn_8021A918(void);
 extern void fn_8021A984(void);
 extern void world_getGlobalFlag(void);
 extern void world_setGlobalFlag(void);
-extern void fn_803750E4(void);
-extern void fn_80375184(void);
+extern void kpad_validateButtonIndex(void);
+extern void kpad_testActiveFlags(void);
 extern void fn_803761AC(void);
 extern void chest_spawnLoot(void);
 extern void fn_8054A340(void);
@@ -1574,7 +1574,7 @@ lbl_fn_801BE630_0000155C:
     blt lbl_fn_801BE630_0000158C
     lwz r3, lbl_8087F430
     li r4, 0x9c
-    bl fn_803750E4
+    bl kpad_validateButtonIndex
 lbl_fn_801BE630_0000158C:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
@@ -1617,7 +1617,7 @@ lbl_fn_801BE630_00001610:
     beq lbl_fn_801BE630_00001688
     lwz r3, lbl_8087F430
     li r4, 0xe0
-    bl fn_803750E4
+    bl kpad_validateButtonIndex
     b lbl_fn_801BE630_00001688
 lbl_fn_801BE630_00001630:
     mr r3, r19
@@ -1626,7 +1626,7 @@ lbl_fn_801BE630_00001630:
     beq lbl_fn_801BE630_00001688
     lwz r3, lbl_8087F430
     li r4, 0xf5
-    bl fn_803750E4
+    bl kpad_validateButtonIndex
     b lbl_fn_801BE630_00001688
 lbl_fn_801BE630_00001650:
     mr r3, r19
@@ -1642,12 +1642,12 @@ lbl_fn_801BE630_00001650:
     cmpw r5, r0
     blt lbl_fn_801BE630_00001688
     li r4, 0x1c2
-    bl fn_803750E4
+    bl kpad_validateButtonIndex
 lbl_fn_801BE630_00001688:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_801BE630_000016DC
-    bl fn_80375184
+    bl kpad_testActiveFlags
     cmpwi r3, 0x0
     beq lbl_fn_801BE630_000016DC
     lwz r5, 0x4(r31)

@@ -23,7 +23,7 @@ extern void fn_80206B68(void);
 extern void fn_80206B70(void);
 extern void game_initGlobalDatabases(void);
 extern void assert_formatLocation(void);
-extern void fn_8020ED84(void);
+extern void time_wrapMilliseconds(void);
 extern void fn_8020EE58(void);
 extern void fn_8020EE60(void);
 extern void fn_8020EF04(void);
@@ -1729,7 +1729,7 @@ lbl_fn_80211940_00001680:
     add r0, r0, r4
     mulli r0, r0, 0x3e8
     subf r4, r0, r5
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
     lwz r0, 0x7c(r27)
     addi r4, r25, 0x4dd3
     lfs f0, 0x0(r3)

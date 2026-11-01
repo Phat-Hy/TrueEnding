@@ -15,7 +15,7 @@ extern void morph_updateMesh(void);
 extern void wcs_vformat(void);
 extern void system_getNextSequenceId(void);
 extern void scissor_clipFrustum(void);
-extern void fn_80109828(void);
+extern void hurtbox_dispatchHitEvent(void);
 extern void npc_initScriptContext(void);
 extern void npc_updateTalkInteraction(void);
 extern void quest_updateFlow(void);
@@ -781,7 +781,7 @@ lbl_fn_802A5A1C_00000A2C:
     bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x140
-    bl fn_80109828
+    bl hurtbox_dispatchHitEvent
     b lbl_fn_802A5A1C_00000DFC
     lwz r3, 0x1660(r31)
     cmpw r0, r3

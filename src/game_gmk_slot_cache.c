@@ -16,7 +16,7 @@ extern void fn_802085E0(void);
 extern void fn_8020BD3C(void);
 extern void fn_8020BD78(void);
 extern void fn_8020BDAC(void);
-extern void fn_8020ED84(void);
+extern void time_wrapMilliseconds(void);
 extern void fn_8020EF04(void);
 extern void random_generateValue(void);
 extern void fn_8020EFEC(void);
@@ -31,7 +31,7 @@ extern void fn_8021E444(void);
 extern void fn_8021E5A4(void);
 extern void world_getGlobalFlag(void);
 extern void kpad_getClampData(void);
-extern void fn_803750E4(void);
+extern void kpad_validateButtonIndex(void);
 extern void fn_80445F44(void);
 extern void fn_804490E0(void);
 extern void atn_LoadHandle_isLoading(void);
@@ -503,7 +503,7 @@ lbl_fn_804439FC_000005B0:
     cmpwi r3, 0x0
     beq lbl_fn_804439FC_000005D0
     li r4, 0xa1
-    bl fn_803750E4
+    bl kpad_validateButtonIndex
 lbl_fn_804439FC_000005D0:
     cmpwi r26, 0x0
     beq lbl_fn_804439FC_000005DC
@@ -516,14 +516,14 @@ lbl_fn_804439FC_000005DC:
     cmpwi r0, 0x74
     bne lbl_fn_804439FC_000005FC
     li r4, 0x91
-    bl fn_803750E4
+    bl kpad_validateButtonIndex
 lbl_fn_804439FC_000005FC:
     lwz r0, 0x8(r1)
     cmpwi r0, 0x143
     bne lbl_fn_804439FC_00000614
     lwz r3, lbl_8087F430
     li r4, 0x1b8
-    bl fn_803750E4
+    bl kpad_validateButtonIndex
 lbl_fn_804439FC_00000614:
     lwz r3, 0x8(r1)
     bl game_initGlobalDatabases
@@ -541,7 +541,7 @@ lbl_fn_804439FC_00000634:
     cmpw r4, r0
     blt lbl_fn_804439FC_00000654
     li r4, 0x148
-    bl fn_803750E4
+    bl kpad_validateButtonIndex
 lbl_fn_804439FC_00000654:
     lha r0, 0xbc(r30)
     cmpwi r0, 0x6
@@ -551,7 +551,7 @@ lbl_fn_804439FC_00000654:
     bne lbl_fn_804439FC_00000678
     lwz r3, lbl_8087F430
     li r4, 0x146
-    bl fn_803750E4
+    bl kpad_validateButtonIndex
 lbl_fn_804439FC_00000678:
     lwz r3, 0x8(r1)
     bl game_initGlobalDatabases
@@ -569,7 +569,7 @@ lbl_fn_804439FC_00000678:
     cmpw r4, r0
     blt lbl_fn_804439FC_000006BC
     li r4, 0x151
-    bl fn_803750E4
+    bl kpad_validateButtonIndex
 lbl_fn_804439FC_000006BC:
     lwz r3, 0x8(r1)
     bl fn_8020EF04
@@ -599,7 +599,7 @@ lbl_fn_804439FC_000006F4:
 lbl_fn_804439FC_0000071C:
     lwz r3, lbl_8087F430
     li r4, 0x1af
-    bl fn_803750E4
+    bl kpad_validateButtonIndex
 lbl_fn_804439FC_00000728:
     lwz r3, 0x8(r1)
     bl game_initGlobalDatabases
@@ -632,7 +632,7 @@ lbl_fn_804439FC_00000770:
 lbl_fn_804439FC_00000790:
     lwz r3, lbl_8087F430
     li r4, 0x1b4
-    bl fn_803750E4
+    bl kpad_validateButtonIndex
 lbl_fn_804439FC_0000079C:
     lwz r3, 0xc(r1)
 lbl_fn_804439FC_000007A0:
@@ -1119,7 +1119,7 @@ lbl_fn_80444564_00000DE0:
 lbl_fn_80444564_00000DF4:
     lwz r4, 0x0(r29)
     mr r3, r27
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
     cmpwi r3, 0x0
     beq lbl_fn_80444564_00000E18
     bl random_generateValue

@@ -87,7 +87,7 @@ extern u32 lbl_808813B0;
 /* Function declarations */
 void fn_800EDFE8(void);
 void fn_800EE180(void);
-void fn_800EE360(void);
+void camera_updateTargetMode(void);
 void fn_800EE494(void);
 void fn_800EE4D8(void);
 void fn_800EE5A4(void);
@@ -375,7 +375,7 @@ lbl_fn_800EE180_00000368:
     blr
 }
 
-asm void fn_800EE360(void)
+asm void camera_updateTargetMode(void)
 {
     nofralloc
     stwu r1, -0x30(r1)
@@ -385,55 +385,55 @@ asm void fn_800EE360(void)
     mr r31, r3
     lwz r0, lbl_8087F610
     cmpwi r0, 0x0
-    beq lbl_fn_800EE360_000003A8
+    beq lbl_camera_updateTargetMode_000003A8
     mr r3, r0
     bl fn_804EB1B0
     cmpwi r3, 0x0
-    beq lbl_fn_800EE360_00000498
-lbl_fn_800EE360_000003A8:
+    beq lbl_camera_updateTargetMode_00000498
+lbl_camera_updateTargetMode_000003A8:
     lwz r0, 0x12a4(r31)
     extrwi r0, r0, 1, 9
     cmplwi r0, 0x1
-    beq lbl_fn_800EE360_000003D4
+    beq lbl_camera_updateTargetMode_000003D4
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
-    beq lbl_fn_800EE360_000003D4
+    beq lbl_camera_updateTargetMode_000003D4
     li r4, 0x399
     bl world_getGlobalFlag
     cmpwi r3, 0x0
-    bgt lbl_fn_800EE360_00000498
-lbl_fn_800EE360_000003D4:
+    bgt lbl_camera_updateTargetMode_00000498
+lbl_camera_updateTargetMode_000003D4:
     lwz r3, 0x5c(r31)
     lwz r0, 0x9c(r3)
     rlwinm r0, r0, 0, 17, 17
     cmplwi r0, 0x4000
-    bne lbl_fn_800EE360_0000042C
+    bne lbl_camera_updateTargetMode_0000042C
     lwz r5, lbl_8087F040
     cmpwi r5, 0x0
-    beq lbl_fn_800EE360_00000498
+    beq lbl_camera_updateTargetMode_00000498
     lwz r0, 0x170(r5)
     lwz r3, 0xd0(r3)
     cmplwi r0, 0x2
-    bge lbl_fn_800EE360_00000498
+    bge lbl_camera_updateTargetMode_00000498
     lwz r0, 0x170(r5)
     slwi r0, r0, 2
     add r0, r5, r0
     addic. r4, r0, 0x174
-    beq lbl_fn_800EE360_0000041C
+    beq lbl_camera_updateTargetMode_0000041C
     stw r3, 0x0(r4)
-lbl_fn_800EE360_0000041C:
+lbl_camera_updateTargetMode_0000041C:
     lwz r3, 0x170(r5)
     addi r0, r3, 0x1
     stw r0, 0x170(r5)
-    b lbl_fn_800EE360_00000498
-lbl_fn_800EE360_0000042C:
+    b lbl_camera_updateTargetMode_00000498
+lbl_camera_updateTargetMode_0000042C:
     lwz r5, 0x1438(r31)
     cmpwi r5, 0x0
-    beq lbl_fn_800EE360_00000498
+    beq lbl_camera_updateTargetMode_00000498
     lwz r0, 0x38(r5)
     rlwinm r0, r0, 0, 29, 29
     cmplwi r0, 0x4
-    bne lbl_fn_800EE360_00000498
+    bne lbl_camera_updateTargetMode_00000498
     lwz r4, 0x38(r5)
     li r3, 0x0
     lfs f0, lbl_808812DC
@@ -454,7 +454,7 @@ lbl_fn_800EE360_0000042C:
     lwz r12, 0x40(r12)
     mtctr r12
     bctrl
-lbl_fn_800EE360_00000498:
+lbl_camera_updateTargetMode_00000498:
     lwz r0, 0x34(r1)
     lwz r31, 0x2c(r1)
     mtlr r0

@@ -29,7 +29,7 @@ extern void fn_8009EE30(void);
 extern void fn_8009F788(void);
 extern void fn_8009FFCC(void);
 extern void str_skipWhitespace(void);
-extern void fn_80178208(void);
+extern void battle_generateLootDrops(void);
 extern void fn_80187D04(void);
 extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_constructor(void);
@@ -571,7 +571,7 @@ lbl_fn_8041482C_000005C8:
     mr r4, r3
 lbl_fn_8041482C_0000062C:
     mr r3, r31
-    bl fn_80178208
+    bl battle_generateLootDrops
 lbl_fn_8041482C_00000634:
     lwz r0, 0x34(r1)
     lwz r31, 0x2c(r1)

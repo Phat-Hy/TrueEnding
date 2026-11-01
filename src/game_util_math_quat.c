@@ -36,7 +36,7 @@ extern void thread_findAndNotifySlot(void);
 extern void thread_dispatchToQueue(void);
 extern void game_initGlobalDatabases(void);
 extern void assert_formatLocation(void);
-extern void fn_8020ED84(void);
+extern void time_wrapMilliseconds(void);
 extern void fn_8020EF04(void);
 extern void fn_8020EF4C(void);
 extern void fn_8020EFEC(void);
@@ -1130,7 +1130,7 @@ lbl_fn_805811E0_00000DF0:
     beq lbl_fn_805811E0_00000E34
     lwz r4, 0x7c(r29)
     li r3, 0x1
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
     mr r28, r3
 lbl_fn_805811E0_00000E34:
     li r30, 0x0

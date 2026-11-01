@@ -21,8 +21,8 @@ extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void morph_updateWeights(void);
 extern void morph_updateMesh(void);
-extern void fn_800EB7A0(void);
-extern void fn_800EE360(void);
+extern void sound_playSpatialEffect(void);
+extern void camera_updateTargetMode(void);
 extern void system_getNextSequenceId(void);
 extern void viewport_updateCulling(void);
 extern void equip_applyToCharacter(void);
@@ -602,7 +602,7 @@ lbl_fn_80271654_000006E8:
     mr r3, r31
     bl battle_awardExp
     mr r3, r31
-    bl fn_800EE360
+    bl camera_updateTargetMode
     b lbl_fn_80271654_0000070C
 lbl_fn_80271654_00000704:
     li r0, 0x1e
@@ -1703,7 +1703,7 @@ lbl_fn_80272660_0000162C:
     li r8, 0x1
     bl atn_Anim_setLayerAnimation
     mr r3, r31
-    bl fn_800EB7A0
+    bl sound_playSpatialEffect
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0

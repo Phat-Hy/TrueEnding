@@ -42,7 +42,7 @@ extern void game_initGlobalDatabases(void);
 extern void assert_formatLocation(void);
 extern void fn_80206D18(void);
 extern void fn_8020924C(void);
-extern void fn_8020ED84(void);
+extern void time_wrapMilliseconds(void);
 extern void fn_8020EF04(void);
 extern void fn_8020EF4C(void);
 extern void fn_8020EFEC(void);
@@ -1162,7 +1162,7 @@ lbl_fn_805866F8_00000E40:
     mr r3, r23
     lwzx r28, r28, r0
     mr r4, r28
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
     mr r29, r3
     bl fn_8020EF4C
     cmpwi r3, 0x0
@@ -1171,7 +1171,7 @@ lbl_fn_805866F8_00000E40:
     blt lbl_fn_805866F8_00000F44
     mr r4, r28
     li r3, 0x0
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
     lis r4, 0x1062
     mr r31, r3
     addi r0, r4, 0x4dd3
@@ -1182,7 +1182,7 @@ lbl_fn_805866F8_00000E40:
     add r0, r0, r4
     mulli r0, r0, 0x3e8
     subf r4, r0, r28
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
     cmpwi r31, 0x0
     beq lbl_fn_805866F8_00000F20
     cmpwi r3, 0x0

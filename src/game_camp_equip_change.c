@@ -11,7 +11,7 @@ extern void fn_8012AFE8(void);
 extern void fn_80206B14(void);
 extern void game_initGlobalDatabases(void);
 extern void assert_generateId(void);
-extern void fn_8020ED84(void);
+extern void time_wrapMilliseconds(void);
 extern void fn_8020EF04(void);
 extern void random_generateValue(void);
 extern void fn_802114E0(void);
@@ -473,7 +473,7 @@ lbl_fn_803BD49C_00000560:
 lbl_fn_803BD49C_00000568:
     lwz r4, 0x0(r28)
     mr r3, r24
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
     cmpwi r3, 0x0
     beq lbl_fn_803BD49C_0000058C
     bl random_generateValue

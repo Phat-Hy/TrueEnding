@@ -34,7 +34,7 @@ extern void res_Shader_bindParams(void);
 extern void res_registerResource(void);
 extern void world_getGlobalFlag(void);
 extern void kpad_getClampData(void);
-extern void fn_80375184(void);
+extern void kpad_testActiveFlags(void);
 extern void atn_LoadHandle_constructor(void);
 extern void fn_8050F940(void);
 extern void fn_8050FB3C(void);
@@ -170,7 +170,7 @@ lbl_fn_80520B08_000000E4:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_80520B08_0000013C
-    bl fn_80375184
+    bl kpad_testActiveFlags
     cmpwi r3, 0x0
     bne lbl_fn_80520B08_00000138
     lwz r3, lbl_8087F430

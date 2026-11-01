@@ -36,7 +36,7 @@ void fn_8012CE4C(void);
 void fn_8012D180(void);
 void fn_8012D628(void);
 void fn_8012D714(void);
-void fn_8012D8B8(void);
+void enemy_updateAnimTimer(void);
 void fn_8012DB04(void);
 
 asm void fn_8012C6D4(void)
@@ -1307,7 +1307,7 @@ lbl_fn_8012D714_00001054:
     blr
 }
 
-asm void fn_8012D8B8(void)
+asm void enemy_updateAnimTimer(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -1327,14 +1327,14 @@ asm void fn_8012D8B8(void)
     lfd f0, 0x8(r1)
     fsubs f0, f0, f1
     stfs f0, 0x4(r3)
-    beq lbl_fn_8012D8B8_00001244
+    beq lbl_enemy_updateAnimTimer_00001244
     lwz r0, 0x48(r6)
     cmpwi r0, 0x0
-    bne lbl_fn_8012D8B8_00001244
+    bne lbl_enemy_updateAnimTimer_00001244
     lfs f0, lbl_80881900
     stfs f0, 0x8(r3)
-    b lbl_fn_8012D8B8_0000126C
-lbl_fn_8012D8B8_00001244:
+    b lbl_enemy_updateAnimTimer_0000126C
+lbl_enemy_updateAnimTimer_00001244:
     lwz r5, 0x170(r3)
     lis r0, 0x4330
     stw r0, 0x8(r1)
@@ -1345,7 +1345,7 @@ lbl_fn_8012D8B8_00001244:
     lfd f0, 0x8(r1)
     fsubs f0, f0, f1
     stfs f0, 0x8(r3)
-lbl_fn_8012D8B8_0000126C:
+lbl_enemy_updateAnimTimer_0000126C:
     li r0, 0x4
     li r5, 0x0
     mr r7, r31
@@ -1354,60 +1354,60 @@ lbl_fn_8012D8B8_0000126C:
     li r4, 0x1
     stw r5, 0x10(r3)
     mtctr r0
-lbl_fn_8012D8B8_0000128C:
+lbl_enemy_updateAnimTimer_0000128C:
     slw r0, r4, r6
     cmplw r0, r0
-    bne lbl_fn_8012D8B8_0000129C
+    bne lbl_enemy_updateAnimTimer_0000129C
     stw r5, 0x24c(r7)
-lbl_fn_8012D8B8_0000129C:
+lbl_enemy_updateAnimTimer_0000129C:
     addi r6, r6, 0x1
     slw r0, r4, r6
     cmplw r0, r0
-    bne lbl_fn_8012D8B8_000012B0
+    bne lbl_enemy_updateAnimTimer_000012B0
     stw r5, 0x250(r7)
-lbl_fn_8012D8B8_000012B0:
+lbl_enemy_updateAnimTimer_000012B0:
     addi r6, r6, 0x1
     slw r0, r4, r6
     cmplw r0, r0
-    bne lbl_fn_8012D8B8_000012C4
+    bne lbl_enemy_updateAnimTimer_000012C4
     stw r5, 0x254(r7)
-lbl_fn_8012D8B8_000012C4:
+lbl_enemy_updateAnimTimer_000012C4:
     addi r6, r6, 0x1
     slw r0, r4, r6
     cmplw r0, r0
-    bne lbl_fn_8012D8B8_000012D8
+    bne lbl_enemy_updateAnimTimer_000012D8
     stw r5, 0x258(r7)
-lbl_fn_8012D8B8_000012D8:
+lbl_enemy_updateAnimTimer_000012D8:
     addi r6, r6, 0x1
     slw r0, r4, r6
     cmplw r0, r0
-    bne lbl_fn_8012D8B8_000012EC
+    bne lbl_enemy_updateAnimTimer_000012EC
     stw r5, 0x25c(r7)
-lbl_fn_8012D8B8_000012EC:
+lbl_enemy_updateAnimTimer_000012EC:
     addi r6, r6, 0x1
     slw r0, r4, r6
     cmplw r0, r0
-    bne lbl_fn_8012D8B8_00001300
+    bne lbl_enemy_updateAnimTimer_00001300
     stw r5, 0x260(r7)
-lbl_fn_8012D8B8_00001300:
+lbl_enemy_updateAnimTimer_00001300:
     addi r6, r6, 0x1
     slw r0, r4, r6
     cmplw r0, r0
-    bne lbl_fn_8012D8B8_00001314
+    bne lbl_enemy_updateAnimTimer_00001314
     stw r5, 0x264(r7)
-lbl_fn_8012D8B8_00001314:
+lbl_enemy_updateAnimTimer_00001314:
     addi r6, r6, 0x1
     slw r0, r4, r6
     cmplw r0, r0
-    bne lbl_fn_8012D8B8_00001328
+    bne lbl_enemy_updateAnimTimer_00001328
     stw r5, 0x268(r7)
-lbl_fn_8012D8B8_00001328:
+lbl_enemy_updateAnimTimer_00001328:
     addi r7, r7, 0x20
     addi r6, r6, 0x1
-    bdnz lbl_fn_8012D8B8_0000128C
+    bdnz lbl_enemy_updateAnimTimer_0000128C
     lwz r5, 0x2f0(r3)
     cmpwi r5, 0x0
-    beq lbl_fn_8012D8B8_000013AC
+    beq lbl_enemy_updateAnimTimer_000013AC
     lwz r4, 0xc(r3)
     li r6, 0x0
     lwz r0, 0x10(r3)
@@ -1416,54 +1416,54 @@ lbl_fn_8012D8B8_00001328:
     stw r4, 0xc(r3)
     rlwinm r0, r0, 0, 12, 10
     stw r0, 0x10(r3)
-    b lbl_fn_8012D8B8_000013A0
-lbl_fn_8012D8B8_00001364:
+    b lbl_enemy_updateAnimTimer_000013A0
+lbl_enemy_updateAnimTimer_00001364:
     add r4, r5, r7
     lwz r4, 0x654(r4)
     lwz r4, 0x274(r4)
     lwz r0, 0xf0(r4)
     cmpwi r0, 0x0
-    beq lbl_fn_8012D8B8_00001398
+    beq lbl_enemy_updateAnimTimer_00001398
     lwz r4, 0xc(r3)
     lwz r0, 0x10(r3)
     oris r4, r4, 0x10
     stw r4, 0xc(r3)
     oris r0, r0, 0x10
     stw r0, 0x10(r3)
-    b lbl_fn_8012D8B8_000013AC
-lbl_fn_8012D8B8_00001398:
+    b lbl_enemy_updateAnimTimer_000013AC
+lbl_enemy_updateAnimTimer_00001398:
     addi r7, r7, 0x4
     addi r6, r6, 0x1
-lbl_fn_8012D8B8_000013A0:
+lbl_enemy_updateAnimTimer_000013A0:
     lwz r0, 0x650(r5)
     cmplw r6, r0
-    blt lbl_fn_8012D8B8_00001364
-lbl_fn_8012D8B8_000013AC:
+    blt lbl_enemy_updateAnimTimer_00001364
+lbl_enemy_updateAnimTimer_000013AC:
     lwz r3, 0x2f0(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_8012D8B8_000013C8
+    beq lbl_enemy_updateAnimTimer_000013C8
     lwz r12, 0x0(r3)
     lwz r12, 0x48(r12)
     mtctr r12
     bctrl
-lbl_fn_8012D8B8_000013C8:
+lbl_enemy_updateAnimTimer_000013C8:
     lwz r0, 0x380(r31)
     addi r4, r31, 0x384
     li r3, 0x0
     mtctr r0
     cmplwi r0, 0x0
-    ble lbl_fn_8012D8B8_00001400
-lbl_fn_8012D8B8_000013E0:
+    ble lbl_enemy_updateAnimTimer_00001400
+lbl_enemy_updateAnimTimer_000013E0:
     lwz r5, 0x0(r4)
     lwz r0, 0x0(r5)
     cmpwi r0, 0x39
-    bne lbl_fn_8012D8B8_000013F8
+    bne lbl_enemy_updateAnimTimer_000013F8
     lwz r0, 0x4(r5)
     add r3, r3, r0
-lbl_fn_8012D8B8_000013F8:
+lbl_enemy_updateAnimTimer_000013F8:
     addi r4, r4, 0x14
-    bdnz lbl_fn_8012D8B8_000013E0
-lbl_fn_8012D8B8_00001400:
+    bdnz lbl_enemy_updateAnimTimer_000013E0
+lbl_enemy_updateAnimTimer_00001400:
     lfs f1, lbl_80881900
     li r0, 0x0
     lfs f0, 0x4(r31)

@@ -17,7 +17,7 @@ extern void fn_8014EEC4(void);
 extern void fn_8014F5D4(void);
 extern void game_initGlobalDatabases(void);
 extern void assert_formatLocation(void);
-extern void fn_8020ED84(void);
+extern void time_wrapMilliseconds(void);
 extern void fn_8020EF04(void);
 extern void fn_8020EF4C(void);
 extern void fn_8020EFEC(void);
@@ -888,7 +888,7 @@ lbl_fn_8058BE7C_00000B3C:
     bne lbl_fn_8058BE7C_00000B60
     lwz r4, 0x7c(r22)
     li r3, 0x2
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
     mr r23, r3
     b lbl_fn_8058BE7C_00000B78
 lbl_fn_8058BE7C_00000B60:
@@ -896,7 +896,7 @@ lbl_fn_8058BE7C_00000B60:
     bne lbl_fn_8058BE7C_00000B78
     lwz r4, 0x7c(r22)
     li r3, 0x3
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
     mr r23, r3
 lbl_fn_8058BE7C_00000B78:
     lwz r21, 0x50(r31)
@@ -1048,11 +1048,11 @@ lbl_fn_8058BE7C_00000D78:
     beq lbl_fn_8058BE7C_00000FE4
     lwz r4, 0x7c(r22)
     li r3, 0x1
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
     lwz r4, 0x7c(r22)
     mr r25, r3
     li r3, 0x3
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
     lwz r20, 0x50(r31)
     mr r26, r3
     mr r3, r20

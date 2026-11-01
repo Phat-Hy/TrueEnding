@@ -19,7 +19,7 @@ extern void fn_801A90BC(void);
 extern void fn_801A9A94(void);
 extern void fn_801AD34C(void);
 extern void world_getGlobalFlag(void);
-extern void fn_803750E4(void);
+extern void kpad_validateButtonIndex(void);
 extern void vec3_isNonZero(void);
 
 /* External data declarations */
@@ -1596,7 +1596,7 @@ lbl_fn_8015A46C_000015D8:
     cmpwi r3, 0x0
     beq lbl_fn_8015A46C_00001600
     li r4, 0xb5
-    bl fn_803750E4
+    bl kpad_validateButtonIndex
 lbl_fn_8015A46C_00001600:
     mr r3, r28
     li r4, 0x1

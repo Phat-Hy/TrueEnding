@@ -12,7 +12,7 @@ extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
 extern void fn_800629F0(void);
 extern void fn_80063764(void);
-extern void fn_80063D3C(void);
+extern void magic_castSpellCircle(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB518(void);
@@ -250,7 +250,7 @@ lbl_fn_80438814_00000230:
     lfs f1, lbl_80886908
     stfs f0, 0x64(r1)
     lfs f2, lbl_80886900
-    bl fn_80063D3C
+    bl magic_castSpellCircle
     lfs f28, lbl_80886900
     b lbl_fn_80438814_000005B0
 lbl_fn_80438814_00000278:

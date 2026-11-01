@@ -24,7 +24,7 @@ extern void fn_8023A02C(void);
 extern void fn_8023A098(void);
 extern void fn_8023A108(void);
 extern void fn_80373164(void);
-extern void fn_80375184(void);
+extern void kpad_testActiveFlags(void);
 extern void fn_803EAA7C(void);
 extern void fn_8059B670(void);
 extern void PSMTXInverse(void);
@@ -1620,7 +1620,7 @@ lbl_fn_80110858_00001680:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_80110858_000018B0
-    bl fn_80375184
+    bl kpad_testActiveFlags
     cmpwi r3, 0x0
     bne lbl_fn_80110858_000018B0
     lwz r0, 0x88(r28)

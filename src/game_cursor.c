@@ -12,7 +12,7 @@ extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void talk_formatQuotedString(void);
-extern void fn_8006B174(void);
+extern void boss_decodePhaseBitfield(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
@@ -1245,7 +1245,7 @@ lbl_fn_80097E80_00000EC0:
     bl actor_dispatchMessage
     addi r4, r1, 0x64
     addi r3, r1, 0x58
-    bl fn_8006B174
+    bl boss_decodePhaseBitfield
     addi r3, r24, 0x3c8
     bl strlen
     lwz r0, 0x58(r1)
@@ -1357,7 +1357,7 @@ lbl_fn_80097E80_00001060:
     bl actor_dispatchMessage
     mr r4, r14
     addi r3, r1, 0x40
-    bl fn_8006B174
+    bl boss_decodePhaseBitfield
     addi r3, r24, 0x3c8
     bl strlen
     lwz r0, 0x40(r1)

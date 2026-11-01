@@ -16,7 +16,7 @@ extern void fn_8012B0B0(void);
 extern void fn_8012B3A8(void);
 extern void fn_8012DB04(void);
 extern void fn_80176548(void);
-extern void fn_80178208(void);
+extern void battle_generateLootDrops(void);
 extern void fn_801B3E70(void);
 extern void fn_801C0C70(void);
 extern void PSMTXConcat(void);
@@ -1544,7 +1544,7 @@ asm void fn_80568DF0(void)
     mr r4, r3
 lbl_fn_80568DF0_000014F0:
     mr r3, r30
-    bl fn_80178208
+    bl battle_generateLootDrops
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -1580,7 +1580,7 @@ asm void fn_80568E6C(void)
     mr r4, r3
 lbl_fn_80568E6C_00001568:
     mr r3, r30
-    bl fn_80178208
+    bl battle_generateLootDrops
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)

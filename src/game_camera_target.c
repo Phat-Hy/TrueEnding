@@ -22,12 +22,12 @@ extern void atn_Task_setActive(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void wcs_vformat(void);
-extern void fn_800EB7A0(void);
-extern void fn_800EE360(void);
+extern void sound_playSpatialEffect(void);
+extern void camera_updateTargetMode(void);
 extern void system_getNextSequenceId(void);
 extern void scissor_clipFrustum(void);
 extern void fn_801092C8(void);
-extern void fn_80109828(void);
+extern void hurtbox_dispatchHitEvent(void);
 extern void boss_updatePhaseState(void);
 extern void quest_updateFlow(void);
 extern void dialog_updateScriptState(void);
@@ -54,7 +54,7 @@ extern void fn_802E470C(void);
 extern void fn_802E8084(void);
 extern void entity_Instance_constructor(void);
 extern void entity_Instance_destructor(void);
-extern void fn_80375184(void);
+extern void kpad_testActiveFlags(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
@@ -166,7 +166,7 @@ lbl_fn_802E1054_0000003C:
     clrrwi r0, r0, 1
     stw r0, 0x5c0(r3)
     mr r3, r31
-    bl fn_800EE360
+    bl camera_updateTargetMode
     lwz r0, 0x12a4(r31)
     mr r3, r31
     ori r0, r0, 0x8000
@@ -531,7 +531,7 @@ lbl_fn_802E1414_00000598:
     bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x68
-    bl fn_80109828
+    bl hurtbox_dispatchHitEvent
     lwz r0, 0x284(r1)
     lwz r31, 0x27c(r1)
     lwz r30, 0x278(r1)
@@ -768,7 +768,7 @@ lbl_fn_802E177C_00000874:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_802E177C_00000964
-    bl fn_80375184
+    bl kpad_testActiveFlags
     cmpwi r3, 0x0
     beq lbl_fn_802E177C_00000964
     lwz r0, 0x48(r28)
@@ -793,7 +793,7 @@ lbl_fn_802E177C_00000964:
     li r4, -0x1
     bl ref_releaseHandle
     mr r3, r28
-    bl fn_800EB7A0
+    bl sound_playSpatialEffect
     lwz r0, 0x64(r1)
     lwz r31, 0x5c(r1)
     lwz r30, 0x58(r1)

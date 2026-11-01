@@ -9,7 +9,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void wcs_vformat(void);
 extern void system_getNextSequenceId(void);
 extern void viewport_updateCulling(void);
-extern void fn_80109828(void);
+extern void hurtbox_dispatchHitEvent(void);
 extern void actor_setState(void);
 extern void sound_initGlobalInstances(void);
 extern void res_registerResource(void);
@@ -129,7 +129,7 @@ lbl_fn_8028FB30_000000C4:
     bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x8
-    bl fn_80109828
+    bl hurtbox_dispatchHitEvent
 lbl_fn_8028FB30_000000E0:
     lwz r0, 0x214(r1)
     lwz r31, 0x20c(r1)

@@ -8,7 +8,7 @@ extern void vec3_toEulerAngles(void);
 extern void vec3_sub(void);
 extern void fn_800133B0(void);
 extern void fn_80013404(void);
-extern void fn_80063D3C(void);
+extern void magic_castSpellCircle(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_80103F60(void);
 extern void fn_80108378(void);
@@ -35,7 +35,7 @@ extern void fn_8030073C(void);
 extern void fn_803009F4(void);
 extern void fn_80304B40(void);
 extern void world_getLocalFlag(void);
-extern void fn_80375184(void);
+extern void kpad_testActiveFlags(void);
 extern void PSMTXRotRad(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
@@ -201,7 +201,7 @@ lbl_fn_802FF2E4_00000190:
     lfs f1, lbl_80884A38
     addi r4, r6, 0x18
     lfs f2, lbl_80884A70
-    bl fn_80063D3C
+    bl magic_castSpellCircle
 lbl_fn_802FF2E4_000001BC:
     lwz r0, 0x44(r1)
     lwz r31, 0x3c(r1)
@@ -288,7 +288,7 @@ asm void fn_802FF550(void)
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_802FF550_0000030C
-    bl fn_80375184
+    bl kpad_testActiveFlags
     cmpwi r3, 0x0
     beq lbl_fn_802FF550_0000030C
     lwz r0, 0x48(r31)

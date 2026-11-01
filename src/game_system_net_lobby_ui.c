@@ -28,7 +28,7 @@ extern void fn_8011FE3C(void);
 extern void equip_getGlobalManager(void);
 extern void fn_8012A190(void);
 extern void fn_8012A1B8(void);
-extern void fn_8012D8B8(void);
+extern void enemy_updateAnimTimer(void);
 extern void npc_getPosition(void);
 extern void fn_8013C404(void);
 extern void fn_8013C42C(void);
@@ -652,7 +652,7 @@ lbl_fn_803A1DB0_00000750:
     cmplwi r0, 0x20
     bne lbl_fn_803A1DB0_0000077C
     addi r3, r27, 0x7d4
-    bl fn_8012D8B8
+    bl enemy_updateAnimTimer
     stw r28, 0x58c(r27)
 lbl_fn_803A1DB0_0000077C:
     lwz r27, 0x14ac(r27)

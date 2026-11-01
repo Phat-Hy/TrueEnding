@@ -14,8 +14,8 @@ extern void atn_Anim_getLayerDuration(void);
 extern void morph_reset(void);
 extern void morph_updateMesh(void);
 extern void str_parseInt(void);
-extern void fn_800EB7A0(void);
-extern void fn_800EE360(void);
+extern void sound_playSpatialEffect(void);
+extern void camera_updateTargetMode(void);
 extern void atn_LH_Xsca_destructor(void);
 extern void system_getNextSequenceId(void);
 extern void npc_updateTalkInteraction(void);
@@ -171,7 +171,7 @@ lbl_fn_802FB39C_00000104:
     mr r3, r30
     bl battle_awardExp
     mr r3, r30
-    bl fn_800EE360
+    bl camera_updateTargetMode
     b lbl_fn_802FB39C_000002E8
 lbl_fn_802FB39C_00000120:
     lfs f2, 0x6c0(r30)
@@ -1145,7 +1145,7 @@ lbl_fn_802FC188_00000E98:
     li r8, 0x1
     bl atn_Anim_setLayerAnimation
     mr r3, r31
-    bl fn_800EB7A0
+    bl sound_playSpatialEffect
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0

@@ -29,7 +29,7 @@ extern void fn_80161880(void);
 extern void fn_8016D74C(void);
 extern void actor_setState(void);
 extern void battle_updateTargetAggro(void);
-extern void fn_80178208(void);
+extern void battle_generateLootDrops(void);
 extern void actor_getMovementFlags(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
@@ -675,7 +675,7 @@ lbl_fn_8035C8CC_000007E4:
     mr r4, r3
 lbl_fn_8035C8CC_0000085C:
     mr r3, r31
-    bl fn_80178208
+    bl battle_generateLootDrops
     lwz r3, lbl_8087F430
     li r4, 0x67
     li r5, 0x1

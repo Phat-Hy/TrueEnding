@@ -14,7 +14,7 @@ extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void ref_releaseHandle(void);
-extern void fn_800EE360(void);
+extern void camera_updateTargetMode(void);
 extern void fn_800F7FD8(void);
 extern void system_getNextSequenceId(void);
 extern void viewport_updateCulling(void);
@@ -850,7 +850,7 @@ lbl_fn_802B6758_00000AB4:
     mr r3, r31
     bl battle_awardExp
     mr r3, r31
-    bl fn_800EE360
+    bl camera_updateTargetMode
     b lbl_fn_802B6758_00000B68
 lbl_fn_802B6758_00000AD0:
     lwz r0, 0x2dc(r31)

@@ -12,7 +12,7 @@ extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
 extern void fn_800638B0(void);
-extern void fn_80063D3C(void);
+extern void magic_castSpellCircle(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -30,7 +30,7 @@ extern void skill_findNodeById(void);
 extern void fn_801255C8(void);
 extern void enemy_updateCombatBehavior(void);
 extern void fn_80128930(void);
-extern void fn_8012D8B8(void);
+extern void enemy_updateAnimTimer(void);
 extern void boss_updatePhaseState(void);
 extern void npc_updateTalkInteraction(void);
 extern void fn_801426A4(void);
@@ -185,7 +185,7 @@ asm void fn_80305BB8(void)
     lfs f1, 0x16e0(r31)
     li r5, -0x1
     lfs f2, lbl_80884A70
-    bl fn_80063D3C
+    bl magic_castSpellCircle
 lbl_fn_80305BB8_000000A8:
     lwz r0, 0x34(r1)
     lwz r31, 0x2c(r1)
@@ -3459,7 +3459,7 @@ lbl_fn_803073C4_00002F4C:
     bl atn_Task_setActive
     stw r20, 0x58c(r25)
     addi r3, r25, 0x7d4
-    bl fn_8012D8B8
+    bl enemy_updateAnimTimer
     mr r3, r25
     li r4, 0x0
     li r5, 0x1

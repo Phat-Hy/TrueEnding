@@ -24,7 +24,7 @@ extern void fn_8021150C(void);
 extern void fn_80213E60(void);
 extern void task_mapIdToQueue(void);
 extern void kpad_getClampData(void);
-extern void fn_803750E4(void);
+extern void kpad_validateButtonIndex(void);
 extern void fn_804439FC(void);
 extern void fn_8044F434(void);
 extern void fn_8044F96C(void);
@@ -1971,7 +1971,7 @@ lbl_fn_8044E644_00001800:
     bne lbl_fn_8044E644_0000184C
     lwz r3, lbl_8087F430
     li r4, 0xba
-    bl fn_803750E4
+    bl kpad_validateButtonIndex
 lbl_fn_8044E644_0000184C:
     lwz r0, 0x34(r1)
     lwz r31, 0x2c(r1)

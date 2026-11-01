@@ -24,7 +24,7 @@ extern void fn_800C16B4(void);
 extern void fn_800DBC1C(void);
 extern void fn_800DC3C8(void);
 extern void fn_8016E484(void);
-extern void fn_8020ED84(void);
+extern void time_wrapMilliseconds(void);
 extern void fn_8020EF4C(void);
 extern void task_mapIdToQueue(void);
 extern void fn_80228AF4(void);
@@ -1205,7 +1205,7 @@ asm void fn_805634D4(void)
 lbl_fn_805634D4_00000D04:
     mr r3, r29
     mr r4, r22
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
     stw r3, 0x414(r28)
     lwz r4, 0x88(r3)
     lwz r0, 0x8c(r3)

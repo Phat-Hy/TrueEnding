@@ -37,7 +37,7 @@ extern void perf_getMetricValue(void);
 extern void fn_8020BCEC(void);
 extern void fn_8020D608(void);
 extern void fn_8020DB18(void);
-extern void fn_8020ED84(void);
+extern void time_wrapMilliseconds(void);
 extern void fn_8020EF4C(void);
 extern void random_generateValue(void);
 extern void task_mapIdToQueue(void);
@@ -274,7 +274,7 @@ lbl_fn_801D5AB0_0000025C:
     addis r4, r4, 0x1
     add r4, r4, r0
     lwz r4, -0x7d70(r4)
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
     bl fn_8020EF4C
     cmpwi r3, 0x0
     beq lbl_fn_801D5AB0_000002E4
@@ -553,7 +553,7 @@ lbl_fn_801D5F04_00000668:
     addis r4, r4, 0x1
     add r4, r4, r0
     lwz r4, -0x7d70(r4)
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
     bl fn_8020EF4C
     cmpwi r3, 0x0
     beq lbl_fn_801D5F04_000006F0

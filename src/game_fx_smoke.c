@@ -27,7 +27,7 @@ extern void viewport_getNextSequenceId(void);
 extern void system_getNextSequenceId(void);
 extern void viewport_updateCulling(void);
 extern void clip_calculateFrustum(void);
-extern void fn_80109828(void);
+extern void hurtbox_dispatchHitEvent(void);
 extern void npc_getPosition(void);
 extern void fn_8014052C(void);
 extern void actor_setState(void);
@@ -638,7 +638,7 @@ lbl_fn_80297114_000007CC:
     bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x38
-    bl fn_80109828
+    bl hurtbox_dispatchHitEvent
     lis r4, lbl_80745818@ha
     addi r3, r31, 0xb0
     addi r4, r4, lbl_80745818@l
@@ -904,7 +904,7 @@ lbl_fn_80297474_00000BB4:
     bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x68
-    bl fn_80109828
+    bl hurtbox_dispatchHitEvent
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0x3ea

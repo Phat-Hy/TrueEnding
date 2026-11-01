@@ -6,7 +6,7 @@ extern void dtor_80084684(void);
 extern void skill_calculateDamage(void);
 extern void fn_80063200(void);
 extern void fn_800638B0(void);
-extern void fn_80063D3C(void);
+extern void magic_castSpellCircle(void);
 extern void chapter_updateProgression(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
@@ -18,11 +18,11 @@ extern void atn_Anim_getLayerDuration(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void wcs_vformat(void);
-extern void fn_800EB7A0(void);
+extern void sound_playSpatialEffect(void);
 extern void atn_LH_Xsca_destructor(void);
 extern void system_getNextSequenceId(void);
 extern void scissor_clipFrustum(void);
-extern void fn_80109828(void);
+extern void hurtbox_dispatchHitEvent(void);
 extern void boss_updatePhaseState(void);
 extern void quest_evaluateConditions(void);
 extern void quest_updateFlow(void);
@@ -524,7 +524,7 @@ lbl_fn_802FD328_00000570:
     lwz r3, lbl_8087EEB0
     fadds f1, f3, f0
     lfs f2, lbl_80884A20
-    bl fn_80063D3C
+    bl magic_castSpellCircle
     b lbl_fn_802FD328_00000760
     lfs f30, 0x2e4(r31)
     addi r3, r31, 0xb0
@@ -586,7 +586,7 @@ lbl_fn_802FD328_00000660:
     lwz r3, lbl_8087EEB0
     fadds f1, f3, f0
     lfs f2, lbl_80884A20
-    bl fn_80063D3C
+    bl magic_castSpellCircle
     b lbl_fn_802FD328_00000760
     lwz r12, 0x0(r31)
     mr r3, r31
@@ -658,7 +658,7 @@ lbl_fn_802FD328_00000784:
     lfs f1, 0x1694(r31)
     li r5, -0x100
     lfs f2, lbl_80884A20
-    bl fn_80063D3C
+    bl magic_castSpellCircle
     lwz r3, lbl_8087EEF0
     li r30, 0x0
     lwz r0, 0xd90(r3)
@@ -915,7 +915,7 @@ lbl_fn_802FD328_00000B50:
     bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x310
-    bl fn_80109828
+    bl hurtbox_dispatchHitEvent
 lbl_fn_802FD328_00000B70:
     lwz r3, lbl_8087EEF0
     li r30, 0x0
@@ -979,7 +979,7 @@ lbl_fn_802FD328_00000C40:
     bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x110
-    bl fn_80109828
+    bl hurtbox_dispatchHitEvent
 lbl_fn_802FD328_00000C60:
     lwz r3, lbl_8087EEF0
     li r30, 0x0
@@ -1087,7 +1087,7 @@ lbl_fn_802FD328_00000DE4:
     lfs f1, lbl_80884A34
     li r5, -0x1
     lfs f2, lbl_80884A70
-    bl fn_80063D3C
+    bl magic_castSpellCircle
     lfs f3, 0x1620(r31)
     addi r4, r31, 0x1618
     lfs f0, 0x15fc(r31)
@@ -1116,7 +1116,7 @@ lbl_fn_802FD328_00000DE4:
     lfs f1, 0x1694(r31)
     addi r4, r4, 0x4
     lfs f2, lbl_80884A7C
-    bl fn_80063D3C
+    bl magic_castSpellCircle
 lbl_fn_802FD328_00000E70:
     lwz r0, 0x544(r1)
     psq_l f31, 0x538(r1), 0, 0
@@ -1658,7 +1658,7 @@ lbl_fn_802FE3E4_0000155C:
     li r6, 0x1
     bl res_findResourceSlot
     mr r3, r30
-    bl fn_800EB7A0
+    bl sound_playSpatialEffect
     b lbl_fn_802FE3E4_00001704
 lbl_fn_802FE3E4_00001640:
     lwz r3, lbl_8087F3C0
@@ -1709,7 +1709,7 @@ lbl_fn_802FE3E4_00001640:
     lwz r3, lbl_8087F430
     bl world_setGlobalFlag
     mr r3, r30
-    bl fn_800EB7A0
+    bl sound_playSpatialEffect
 lbl_fn_802FE3E4_00001704:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)

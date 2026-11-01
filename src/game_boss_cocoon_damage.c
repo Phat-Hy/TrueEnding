@@ -9,7 +9,7 @@ extern void str_getData(void);
 extern void fn_80056DB8(void);
 extern void mission_updateStub(void);
 extern void atn_ColliCapsule_destructor(void);
-extern void fn_80063D3C(void);
+extern void magic_castSpellCircle(void);
 extern void boss_initActionStream(void);
 extern void fn_8006CA80(void);
 extern void route_interpolatePath(void);
@@ -1262,7 +1262,7 @@ lbl_fn_8045883C_00000F94:
     lwz r3, lbl_8087EEB0
     fadds f1, f3, f0
     lfs f2, lbl_80886C34
-    bl fn_80063D3C
+    bl magic_castSpellCircle
     b lbl_fn_8045883C_000014E4
     mr r3, r31
     bl fn_8045E780

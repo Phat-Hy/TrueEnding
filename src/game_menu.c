@@ -66,7 +66,7 @@ extern void res_MsgHandle_unload(void);
 extern void res_MsgHandle_update(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
-extern void fn_80375184(void);
+extern void kpad_testActiveFlags(void);
 extern void fn_803B6970(void);
 extern void fn_803B78B4(void);
 extern void fn_803CC6B4(void);
@@ -4689,7 +4689,7 @@ lbl_fn_80045510_00003B48:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_80045510_00003BDC
-    bl fn_80375184
+    bl kpad_testActiveFlags
     cmpwi r3, 0x0
     beq lbl_fn_80045510_00003C30
 lbl_fn_80045510_00003BDC:

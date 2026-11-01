@@ -39,7 +39,7 @@ extern void fn_801603CC(void);
 extern void fn_80161570(void);
 extern void fn_80164B00(void);
 extern void battle_updateTargetAggro(void);
-extern void fn_80178208(void);
+extern void battle_generateLootDrops(void);
 extern void fn_80179A34(void);
 extern void fn_80179AB4(void);
 extern void fn_801A59F4(void);
@@ -1317,7 +1317,7 @@ lbl_fn_800E2FE0_00000F7C:
     mr r4, r3
 lbl_fn_800E2FE0_00000FF0:
     mr r3, r30
-    bl fn_80178208
+    bl battle_generateLootDrops
     li r0, 0x0
     sth r0, 0x1470(r30)
     b lbl_fn_800E2FE0_000016E0
@@ -1582,7 +1582,7 @@ lbl_fn_800E2FE0_00001324:
     mr r4, r3
 lbl_fn_800E2FE0_000013DC:
     mr r3, r30
-    bl fn_80178208
+    bl battle_generateLootDrops
     li r0, 0x0
     sth r0, 0x1470(r30)
     b lbl_fn_800E2FE0_000016E0

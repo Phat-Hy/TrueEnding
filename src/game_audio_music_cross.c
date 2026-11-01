@@ -20,7 +20,7 @@ extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void atn_Task_setActive(void);
-extern void fn_800EB7A0(void);
+extern void sound_playSpatialEffect(void);
 extern void fn_800EC204(void);
 extern void fn_800F530C(void);
 extern void fn_800F72CC(void);
@@ -28,7 +28,7 @@ extern void viewport_updateCulling(void);
 extern void fn_8010A308(void);
 extern void fn_8010F668(void);
 extern void equip_getGlobalManager(void);
-extern void fn_8012D8B8(void);
+extern void enemy_updateAnimTimer(void);
 extern void fn_8013A194(void);
 extern void fn_8013C480(void);
 extern void fn_8013C504(void);
@@ -161,7 +161,7 @@ lbl_fn_8030C1A4_00000084:
     lfs f0, lbl_80884C1C
     addi r3, r29, 0x7d4
     stfs f0, 0x570(r29)
-    bl fn_8012D8B8
+    bl enemy_updateAnimTimer
     li r0, 0x0
     stw r0, 0x58c(r29)
     mr r3, r29
@@ -1016,7 +1016,7 @@ lbl_fn_8030CBC0_00000CC8:
     stw r4, 0x14ec(r31)
     stb r4, 0x15f0(r31)
     stw r0, 0x14e8(r31)
-    bl fn_8012D8B8
+    bl enemy_updateAnimTimer
     lwz r3, lbl_8087F430
     li r5, 0x0
     lwz r4, 0x1514(r31)
@@ -1327,7 +1327,7 @@ lbl_fn_8030D0D8_0000116C:
     stfs f2, 0x10(r1)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x15ec(r30)
-    bl fn_800EB7A0
+    bl sound_playSpatialEffect
     lwz r0, 0x74(r1)
     lwz r31, 0x6c(r1)
     lwz r30, 0x68(r1)

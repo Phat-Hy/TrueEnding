@@ -21,7 +21,7 @@ extern void fn_8012B0B0(void);
 extern void fn_8012B3A8(void);
 extern void fn_80148B0C(void);
 extern void fn_8015D8C0(void);
-extern void fn_80178208(void);
+extern void battle_generateLootDrops(void);
 extern void fn_8018D4AC(void);
 extern void fn_8020BD3C(void);
 extern void fn_8020C000(void);
@@ -366,7 +366,7 @@ lbl_fn_80441F24_0000034C:
     mr r4, r3
 lbl_fn_80441F24_000003BC:
     mr r3, r20
-    bl fn_80178208
+    bl battle_generateLootDrops
     lfs f8, lbl_80886A80
     addi r3, r1, 0x2c0
     lfs f7, lbl_80886AAC

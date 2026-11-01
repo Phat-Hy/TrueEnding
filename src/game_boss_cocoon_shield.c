@@ -19,7 +19,7 @@ extern void fn_8005B9AC(void);
 extern void fn_8006A9A4(void);
 extern void fn_8006AC08(void);
 extern void fn_8006AF38(void);
-extern void fn_8006B174(void);
+extern void boss_decodePhaseBitfield(void);
 extern void fn_8006BBCC(void);
 extern void atn_FileList_destructor(void);
 extern void fn_8006C300(void);
@@ -1679,7 +1679,7 @@ lbl_fn_8046CC90_000015AC:
     beq lbl_fn_8046CC90_00001698
     addi r3, r1, 0x38
     addi r4, r1, 0x50
-    bl fn_8006B174
+    bl boss_decodePhaseBitfield
     addi r3, r1, 0x5c
     bl fn_8006BBCC
     addi r3, r1, 0x44
@@ -1930,7 +1930,7 @@ lbl_fn_8046CC90_00001960:
     beq lbl_fn_8046CC90_000019AC
     addi r3, r1, 0x8
     addi r4, r1, 0x50
-    bl fn_8006B174
+    bl boss_decodePhaseBitfield
     mr r3, r29
     mr r4, r30
     addi r5, r1, 0x8

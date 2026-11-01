@@ -47,7 +47,7 @@ extern void task_findEntryById(void);
 extern void fn_8021A684(void);
 extern void fn_8021A9CC(void);
 extern void world_getGlobalFlag(void);
-extern void fn_803750E4(void);
+extern void kpad_validateButtonIndex(void);
 extern void fn_8044D6E0(void);
 extern void fn_804EB4B0(void);
 extern void fn_804EB7C8(void);
@@ -3333,7 +3333,7 @@ lbl_fn_80040B44_00002C4C:
     cmpwi r3, 0x0
     beq lbl_fn_80040B44_00002CD0
     li r4, 0x15b
-    bl fn_803750E4
+    bl kpad_validateButtonIndex
     b lbl_fn_80040B44_00002CD0
 lbl_fn_80040B44_00002C74:
     cmpwi r0, -0x1
@@ -3356,7 +3356,7 @@ lbl_fn_80040B44_00002C88:
     cmpwi r3, 0x0
     beq lbl_fn_80040B44_00002CD0
     li r4, 0x15a
-    bl fn_803750E4
+    bl kpad_validateButtonIndex
     b lbl_fn_80040B44_00002CD0
 lbl_fn_80040B44_00002CC8:
     li r0, 0x1

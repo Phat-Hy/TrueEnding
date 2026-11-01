@@ -31,7 +31,7 @@ extern void fn_801E7D78(void);
 extern void assert_generateId(void);
 extern void assert_formatLocation(void);
 extern void fn_8020924C(void);
-extern void fn_8020ED84(void);
+extern void time_wrapMilliseconds(void);
 extern void fn_8020EF04(void);
 extern void fn_8020EF4C(void);
 extern void random_generateValue(void);
@@ -611,7 +611,7 @@ lbl_fn_801D9388_00000750:
     addis r4, r4, 0x1
     add r4, r4, r0
     lwz r4, -0x7d70(r4)
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
     bl fn_8020EF4C
     cmpwi r3, 0x0
     bne lbl_fn_801D9388_000007D8
@@ -1599,7 +1599,7 @@ lbl_fn_801D94D0_0000153C:
     addis r4, r4, 0x1
     add r4, r4, r0
     lwz r4, -0x7d70(r4)
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
     bl fn_8020EF4C
     cmpwi r3, 0x0
     bne lbl_fn_801D94D0_000015C4

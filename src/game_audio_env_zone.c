@@ -18,7 +18,7 @@ extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void morph_updateWeights(void);
 extern void morph_updateMesh(void);
-extern void fn_800EB7A0(void);
+extern void sound_playSpatialEffect(void);
 extern void fn_800F72CC(void);
 extern void viewport_getGlobalContext(void);
 extern void fn_800F7FA8(void);
@@ -27,7 +27,7 @@ extern void viewport_getNextSequenceId(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800FDB20(void);
 extern void fn_80101434(void);
-extern void fn_8012D8B8(void);
+extern void enemy_updateAnimTimer(void);
 extern void npc_getPosition(void);
 extern void fn_801404F8(void);
 extern void fn_80140500(void);
@@ -209,7 +209,7 @@ lbl_fn_8031C584_00000130:
     fmuls f3, f3, f6
     fmuls f0, f0, f3
     stfs f0, 0x14fc(r31)
-    bl fn_800EB7A0
+    bl sound_playSpatialEffect
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0x65
@@ -352,7 +352,7 @@ asm void fn_8031C894(void)
     cmpwi r0, 0x78
     blt lbl_fn_8031C894_000004A4
     addi r3, r3, 0x7d4
-    bl fn_8012D8B8
+    bl enemy_updateAnimTimer
     li r0, 0x0
     stw r0, 0x14bc(r29)
     lis r30, lbl_807C7030@ha

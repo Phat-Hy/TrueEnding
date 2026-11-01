@@ -12,13 +12,13 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
 extern void atn_Task_setActive(void);
 extern void wcs_vformat(void);
-extern void fn_800EB7A0(void);
+extern void sound_playSpatialEffect(void);
 extern void system_getNextSequenceId(void);
 extern void fn_801077A8(void);
 extern void fn_80107850(void);
 extern void fn_801092C8(void);
-extern void fn_80109828(void);
-extern void fn_8012D8B8(void);
+extern void hurtbox_dispatchHitEvent(void);
+extern void enemy_updateAnimTimer(void);
 extern void fn_8013310C(void);
 extern void quest_updateFlow(void);
 extern void equip_applyToCharacter(void);
@@ -34,7 +34,7 @@ extern void sound_initGlobalInstances(void);
 extern void res_registerResource(void);
 extern void fn_8036554C(void);
 extern void world_setGlobalFlag(void);
-extern void fn_80375184(void);
+extern void kpad_testActiveFlags(void);
 extern void fn_80389838(void);
 extern void fn_805A4A20(void);
 extern void PSMTXRotRad(void);
@@ -151,7 +151,7 @@ lbl_fn_802D5674_000000F8:
     bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x38
-    bl fn_80109828
+    bl hurtbox_dispatchHitEvent
     li r0, 0x0
     stw r0, 0x1504(r30)
     stw r0, 0x1508(r30)
@@ -283,7 +283,7 @@ lbl_fn_802D57B8_000002F8:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_802D57B8_00000334
-    bl fn_80375184
+    bl kpad_testActiveFlags
     cmpwi r3, 0x0
     beq lbl_fn_802D57B8_00000334
     lwz r0, 0x48(r31)
@@ -297,7 +297,7 @@ lbl_fn_802D57B8_000002F8:
     bl fn_801092C8
 lbl_fn_802D57B8_00000334:
     mr r3, r31
-    bl fn_800EB7A0
+    bl sound_playSpatialEffect
     addi r4, r31, 0x15bc
     li r0, 0x0
     lfs f2, 0x15c4(r31)
@@ -1799,7 +1799,7 @@ lbl_fn_802D67F8_000017D4:
     stw r0, 0x12a4(r22)
 lbl_fn_802D67F8_000018A8:
     addi r3, r22, 0x7d4
-    bl fn_8012D8B8
+    bl enemy_updateAnimTimer
     stw r16, 0x58c(r22)
     mr r3, r22
     li r4, 0x0
@@ -1848,7 +1848,7 @@ lbl_fn_802D67F8_00001948:
     bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0xa0
-    bl fn_80109828
+    bl hurtbox_dispatchHitEvent
     addic. r0, r1, 0x5c
     beq lbl_fn_802D67F8_00001990
     beq lbl_fn_802D67F8_00001990

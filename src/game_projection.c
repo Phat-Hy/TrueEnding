@@ -10,7 +10,7 @@ extern void skill_calcTrajectory(void);
 extern void fn_80062C8C(void);
 extern void fn_80063484(void);
 extern void fn_80063764(void);
-extern void fn_80063D3C(void);
+extern void magic_castSpellCircle(void);
 extern void script_executeOpcode(void);
 extern void fn_8006F2F0(void);
 extern void fn_8008CD60(void);
@@ -2050,7 +2050,7 @@ lbl_fn_800F5314_00001CC4:
     add r4, r20, r0
     lfs f1, 0x24(r4)
     addi r4, r4, 0xc
-    bl fn_80063D3C
+    bl magic_castSpellCircle
 lbl_fn_800F5314_00001CF8:
     lwz r5, 0x50(r1)
     addi r3, r1, 0x22c

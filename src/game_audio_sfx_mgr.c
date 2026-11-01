@@ -23,7 +23,7 @@ extern void fn_80097E80(void);
 extern void skin_applyWeights(void);
 extern void atn_Task_setActive(void);
 extern void str_skipWhitespace(void);
-extern void fn_8012D8B8(void);
+extern void enemy_updateAnimTimer(void);
 extern void boss_updatePhaseState(void);
 extern void quest_updateFlow(void);
 extern void quest_ctorRewardItem(void);
@@ -1564,7 +1564,7 @@ lbl_fn_803111AC_00001438:
     cmplwi r0, 0x20
     bne lbl_fn_803111AC_0000145C
     addi r3, r31, 0x7d4
-    bl fn_8012D8B8
+    bl enemy_updateAnimTimer
     lwz r0, 0x54c(r31)
     ori r0, r0, 0x2000
     stw r0, 0x54c(r31)

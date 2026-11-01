@@ -44,7 +44,7 @@ extern void fn_8021DE88(void);
 extern void fn_8021DECC(void);
 extern void res_MsgHandle_unload(void);
 extern void world_setGlobalFlag(void);
-extern void fn_803750E4(void);
+extern void kpad_validateButtonIndex(void);
 extern void fn_803CC6B4(void);
 extern void fn_803E3BE8(void);
 extern void fn_803E5E64(void);
@@ -1087,7 +1087,7 @@ lbl_fn_80431774_00000D3C:
     cmpwi r3, 0x0
     beq lbl_fn_80431774_00000DD4
     li r4, 0xdc
-    bl fn_803750E4
+    bl kpad_validateButtonIndex
 lbl_fn_80431774_00000DD4:
     li r3, 0x1
     li r0, 0x2

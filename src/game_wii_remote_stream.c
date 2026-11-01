@@ -16,7 +16,7 @@ extern void fn_8001296C(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_80069BF4(void);
-extern void fn_8006B174(void);
+extern void boss_decodePhaseBitfield(void);
 extern void mem_getAllocSize(void);
 extern void fn_8008B130(void);
 extern void fn_800928B0(void);
@@ -471,7 +471,7 @@ asm void fn_80557F88(void)
     bl actor_dispatchMessage
     mr r4, r30
     addi r3, r1, 0xa0
-    bl fn_8006B174
+    bl boss_decodePhaseBitfield
     lwz r0, 0x94(r1)
     srwi. r0, r0, 31
     beq lbl_fn_80557F88_0000057C

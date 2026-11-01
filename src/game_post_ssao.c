@@ -12,13 +12,13 @@ extern void atn_Anim_getLayerDuration(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void wcs_vformat(void);
-extern void fn_800EE360(void);
+extern void camera_updateTargetMode(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void fn_80103600(void);
 extern void fn_80107850(void);
 extern void fn_80108C10(void);
-extern void fn_80109828(void);
+extern void hurtbox_dispatchHitEvent(void);
 extern void fn_8012DF7C(void);
 extern void fn_80148B0C(void);
 extern void fn_8015E7A0(void);
@@ -274,7 +274,7 @@ lbl_fn_802D3C74_00000298:
     bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x50
-    bl fn_80109828
+    bl hurtbox_dispatchHitEvent
     b lbl_fn_802D3C74_00000398
 lbl_fn_802D3C74_000002B8:
     mr r3, r31
@@ -456,7 +456,7 @@ lbl_fn_802D404C_00000530:
     bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x38
-    bl fn_80109828
+    bl hurtbox_dispatchHitEvent
 lbl_fn_802D404C_0000054C:
     lwz r0, 0x14e4(r31)
     cmpwi r0, 0x186
@@ -744,7 +744,7 @@ lbl_fn_802D4378_00000944:
     bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0xc0
-    bl fn_80109828
+    bl hurtbox_dispatchHitEvent
     lis r4, lbl_807470A4@ha
     lfs f1, lbl_8088458C
     addi r4, r4, lbl_807470A4@l
@@ -1440,7 +1440,7 @@ lbl_fn_802D4E9C_00001370:
     bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x8
-    bl fn_80109828
+    bl hurtbox_dispatchHitEvent
 lbl_fn_802D4E9C_0000138C:
     lwz r0, 0x224(r1)
     psq_l f31, 0x218(r1), 0, 0
@@ -1517,7 +1517,7 @@ lbl_fn_802D5020_00001484:
     bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x58
-    bl fn_80109828
+    bl hurtbox_dispatchHitEvent
 lbl_fn_802D5020_000014A0:
     lwz r0, 0x14e8(r31)
     cmpwi r0, 0x50
@@ -1832,7 +1832,7 @@ lbl_fn_802D52A0_000018C8:
     lwz r3, lbl_8087F430
     bl world_setGlobalFlag
     mr r3, r31
-    bl fn_800EE360
+    bl camera_updateTargetMode
     lwz r0, 0x12a4(r31)
     mr r3, r31
     ori r0, r0, 0x8000

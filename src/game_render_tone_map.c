@@ -6,7 +6,7 @@ extern void _restgpr_22(void);
 extern void _savegpr_22(void);
 extern void fn_8003EA3C(void);
 extern void collision_queryGeometry(void);
-extern void fn_80063D3C(void);
+extern void magic_castSpellCircle(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_80094958(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -1635,7 +1635,7 @@ lbl_fn_802BE180_000014B8:
     lwz r3, lbl_8087EEB0
     fadds f1, f1, f0
     lfs f2, lbl_80884190
-    bl fn_80063D3C
+    bl magic_castSpellCircle
 lbl_fn_802BE180_00001544:
     lwz r0, 0x24(r1)
     psq_l f31, 0x18(r1), 0, 0

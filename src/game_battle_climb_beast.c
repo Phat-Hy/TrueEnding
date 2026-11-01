@@ -79,7 +79,7 @@ extern void fn_80315644(void);
 extern void fn_80316E38(void);
 extern void fn_80317034(void);
 extern void kpad_getClampData(void);
-extern void fn_803750E4(void);
+extern void kpad_validateButtonIndex(void);
 extern void fn_803D6E24(void);
 extern void task_createWorker(void);
 extern void task_destroyWorker(void);
@@ -1688,11 +1688,11 @@ lbl_fn_803FAF8C_000014EC:
     cmpwi r0, 0x3
     bne lbl_fn_803FAF8C_00001538
     li r4, 0xf4
-    bl fn_803750E4
+    bl kpad_validateButtonIndex
     b lbl_fn_803FAF8C_00001540
 lbl_fn_803FAF8C_00001538:
     li r4, 0x94
-    bl fn_803750E4
+    bl kpad_validateButtonIndex
 lbl_fn_803FAF8C_00001540:
     lwz r3, 0x4c8(r30)
     cmpwi r3, 0x0

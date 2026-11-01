@@ -8,7 +8,7 @@ extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_8006B0C8(void);
-extern void fn_8006B174(void);
+extern void boss_decodePhaseBitfield(void);
 extern void script_executeOpcode(void);
 extern void dungeon_initGlobalContext(void);
 extern void town_synchronizedDispatch(void);
@@ -466,7 +466,7 @@ lbl_fn_800A2DE0_00000588:
     bl actor_dispatchMessage
     mr r4, r30
     addi r3, r1, 0xc0
-    bl fn_8006B174
+    bl boss_decodePhaseBitfield
     lwz r0, 0xb4(r1)
     srwi. r0, r0, 31
     beq lbl_fn_800A2DE0_00000600
@@ -607,7 +607,7 @@ lbl_fn_800A2DE0_00000794:
     bl actor_dispatchMessage
     mr r4, r30
     addi r3, r1, 0x9c
-    bl fn_8006B174
+    bl boss_decodePhaseBitfield
     lwz r0, 0xa8(r1)
     srwi. r0, r0, 31
     beq lbl_fn_800A2DE0_0000080C
@@ -748,7 +748,7 @@ lbl_fn_800A2DE0_0000099C:
     bl actor_dispatchMessage
     mr r4, r30
     addi r3, r1, 0x84
-    bl fn_8006B174
+    bl boss_decodePhaseBitfield
     lwz r0, 0x90(r1)
     srwi. r0, r0, 31
     beq lbl_fn_800A2DE0_00000A20
@@ -837,7 +837,7 @@ lbl_fn_800A2DE0_00000AF0:
     bl actor_dispatchMessage
     mr r4, r30
     addi r3, r1, 0x6c
-    bl fn_8006B174
+    bl boss_decodePhaseBitfield
     lwz r0, 0x78(r1)
     srwi. r0, r0, 31
     beq lbl_fn_800A2DE0_00000B68
@@ -1567,7 +1567,7 @@ lbl_fn_800A2DE0_000015E0:
     bl actor_dispatchMessage
     mr r4, r29
     addi r3, r1, 0x54
-    bl fn_8006B174
+    bl boss_decodePhaseBitfield
     lwz r0, 0x60(r1)
     srwi. r0, r0, 31
     beq lbl_fn_800A2DE0_00001658

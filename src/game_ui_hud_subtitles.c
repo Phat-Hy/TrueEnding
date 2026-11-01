@@ -29,7 +29,7 @@ extern void fn_80206B14(void);
 extern void fn_8020BD78(void);
 extern void fn_8020BDE0(void);
 extern void fn_8020BE10(void);
-extern void fn_8020ED84(void);
+extern void time_wrapMilliseconds(void);
 extern void world_getGlobalFlag(void);
 extern void atn_LoadHandle_destructor(void);
 extern void fn_8050FB3C(void);
@@ -149,7 +149,7 @@ asm void fn_801CFAA8(void)
     add r4, r5, r4
     add r4, r4, r0
     lwz r4, -0x7d70(r4)
-    b fn_8020ED84
+    b time_wrapMilliseconds
 }
 
 asm void fn_801CFACC(void)

@@ -15,7 +15,7 @@ extern void fn_8004B0E4(void);
 extern void fn_8004B1EC(void);
 extern void talk_parseQuotedString(void);
 extern void skill_calculateDamage(void);
-extern void fn_80063D3C(void);
+extern void magic_castSpellCircle(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
@@ -1941,7 +1941,7 @@ asm void fn_803612F4(void)
     beq lbl_fn_803612F4_00001758
     li r5, -0x7f80
 lbl_fn_803612F4_00001758:
-    bl fn_80063D3C
+    bl magic_castSpellCircle
     lwz r5, 0x50(r31)
     addi r3, r1, 0x8
     lwz r4, lbl_8087EFB4

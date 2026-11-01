@@ -29,7 +29,7 @@ struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct 
 extern void atn_LH_Texture_destructAndFree(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
-extern void fn_800EB7A0(void);
+extern void sound_playSpatialEffect(void);
 extern void fn_800EC204(void);
 extern void fn_800EC24C(void);
 extern void fn_800F7FD8(void);
@@ -457,7 +457,7 @@ lbl_fn_80287788_000003F8:
     lfs f2, 0x8(r4)
     stfs f2, 0x6c0(r31)
     psq_st f1, 0x6b8(r31), 0, 0
-    bl fn_800EB7A0
+    bl sound_playSpatialEffect
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0

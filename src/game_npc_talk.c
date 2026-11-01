@@ -11,7 +11,7 @@ extern void fn_8004D314(void);
 extern void collision_queryGeometry(void);
 extern void item_testLineOfSight(void);
 extern void collision_testLineSegment(void);
-extern void fn_8006B174(void);
+extern void boss_decodePhaseBitfield(void);
 extern void mem_alloc(void);
 extern void fn_8008B130(void);
 extern void fn_80125474(void);
@@ -27,7 +27,7 @@ extern void fn_801C59D4(void);
 extern void fn_801C61EC(void);
 extern void fn_801C8938(void);
 extern void world_getGlobalFlag(void);
-extern void fn_803750E4(void);
+extern void kpad_validateButtonIndex(void);
 extern void fn_803761DC(void);
 extern void fn_805B96AC(void);
 extern void PSMTXRotRad(void);
@@ -1065,7 +1065,7 @@ lbl_npc_updateTalkInteraction_00000D3C:
     blt lbl_npc_updateTalkInteraction_00000DB4
     lwz r3, lbl_8087F430
     li r4, 0x132
-    bl fn_803750E4
+    bl kpad_validateButtonIndex
 lbl_npc_updateTalkInteraction_00000DB4:
     lwz r0, 0x48(r27)
     cmpwi r0, 0x0
@@ -1493,7 +1493,7 @@ lbl_npc_updateTalkInteraction_00001348:
     bl actor_dispatchMessage
     mr r4, r23
     addi r3, r1, 0x1b4
-    bl fn_8006B174
+    bl boss_decodePhaseBitfield
     lwz r0, 0x1c0(r1)
     srwi r0, r0, 31
     cntlzw r0, r0

@@ -16,7 +16,7 @@ extern void fn_80062F7C(void);
 extern void fn_80063200(void);
 extern void fn_80063764(void);
 extern void fn_800638B0(void);
-extern void fn_80063D3C(void);
+extern void magic_castSpellCircle(void);
 extern void fn_8008CD60(void);
 extern void world_getGlobalFlag(void);
 extern void world_getLocalFlag(void);
@@ -577,7 +577,7 @@ lbl_fn_803C221C_000006AC:
     lfs f2, lbl_80885CBC
     lfs f1, 0x14(r4)
     addi r4, r4, 0x4
-    bl fn_80063D3C
+    bl magic_castSpellCircle
 lbl_fn_803C221C_000006F4:
     addi r21, r21, 0x1
     addi r15, r15, 0x40
@@ -835,7 +835,7 @@ lbl_fn_803C221C_00000A90:
     lfs f2, lbl_80885CBC
     lfs f1, 0x14(r4)
     addi r4, r4, 0x4
-    bl fn_80063D3C
+    bl magic_castSpellCircle
 lbl_fn_803C221C_00000AAC:
     addi r21, r21, 0x1
     addi r15, r15, 0x28

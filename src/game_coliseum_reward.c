@@ -13,7 +13,7 @@ extern void fn_80042108(void);
 extern void str_getData(void);
 extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
-extern void fn_8006B174(void);
+extern void boss_decodePhaseBitfield(void);
 extern void fn_8006B2D8(void);
 extern void fn_80079BC8(void);
 extern void mem_alloc(void);
@@ -366,7 +366,7 @@ lbl_fn_80494354_000003F0:
     bl str_initFromCStr
     addi r3, r1, 0x3c
     addi r4, r1, 0x48
-    bl fn_8006B174
+    bl boss_decodePhaseBitfield
     addi r3, r1, 0x30
     addi r4, r1, 0x3c
     bl fn_8006B2D8
@@ -423,7 +423,7 @@ lbl_fn_80494354_000004B0:
     bl str_initFromCStr
     addi r3, r1, 0x18
     addi r4, r1, 0x24
-    bl fn_8006B174
+    bl boss_decodePhaseBitfield
     addi r3, r1, 0xc
     addi r4, r1, 0x18
     bl fn_8006B2D8

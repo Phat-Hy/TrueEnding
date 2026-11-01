@@ -20,7 +20,7 @@ extern void fn_801058F8(void);
 extern void fn_8010ABF4(void);
 extern void fn_8010AC60(void);
 extern void fn_80124BE4(void);
-extern void fn_8012D8B8(void);
+extern void enemy_updateAnimTimer(void);
 extern void fn_80133B30(void);
 extern void fn_801346C8(void);
 extern void fn_801546F4(void);
@@ -117,8 +117,8 @@ void fn_80374710(void);
 void fn_803748E0(void);
 void fn_80374964(void);
 void fn_80374D64(void);
-void fn_803750E4(void);
-void fn_80375184(void);
+void kpad_validateButtonIndex(void);
+void kpad_testActiveFlags(void);
 void fn_80375194(void);
 void fn_80375254(void);
 void fn_8037529C(void);
@@ -1036,7 +1036,7 @@ lbl_fn_80374964_00000CF0:
     li r4, 0x0
     bl fn_80133B30
     addi r3, r31, 0x7d4
-    bl fn_8012D8B8
+    bl enemy_updateAnimTimer
     lwz r0, 0x954(r31)
     mr r3, r31
     stw r0, 0x9f8(r31)
@@ -1344,7 +1344,7 @@ lbl_fn_80374D64_00001158:
     blr
 }
 
-asm void fn_803750E4(void)
+asm void kpad_validateButtonIndex(void)
 {
     nofralloc
     stwu r1, -0x110(r1)
@@ -1355,10 +1355,10 @@ asm void fn_803750E4(void)
     mr r31, r4
     stw r30, 0x108(r1)
     mr r30, r3
-    ble lbl_fn_803750E4_000011CC
+    ble lbl_kpad_validateButtonIndex_000011CC
     lwz r0, lbl_8087EEB8
     cmpwi r0, 0x0
-    beq lbl_fn_803750E4_000011C4
+    beq lbl_kpad_validateButtonIndex_000011C4
     lis r4, lbl_8074DC1C@ha
     mr r5, r31
     addi r4, r4, lbl_8074DC1C@l
@@ -1369,22 +1369,22 @@ asm void fn_803750E4(void)
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x8
     bl boss_recordDamage
-lbl_fn_803750E4_000011C4:
+lbl_kpad_validateButtonIndex_000011C4:
     li r0, 0x0
-    b lbl_fn_803750E4_000011D8
-lbl_fn_803750E4_000011CC:
+    b lbl_kpad_validateButtonIndex_000011D8
+lbl_kpad_validateButtonIndex_000011CC:
     slwi r0, r4, 2
     add r3, r3, r0
     lwz r0, 0x10e4(r3)
-lbl_fn_803750E4_000011D8:
+lbl_kpad_validateButtonIndex_000011D8:
     cmpwi r0, 0x0
-    bne lbl_fn_803750E4_000011F4
+    bne lbl_kpad_validateButtonIndex_000011F4
     mr r3, r30
     mr r4, r31
     li r5, 0x1
     li r6, 0x0
     bl world_setGlobalFlag
-lbl_fn_803750E4_000011F4:
+lbl_kpad_validateButtonIndex_000011F4:
     lwz r0, 0x114(r1)
     lwz r31, 0x10c(r1)
     lwz r30, 0x108(r1)
@@ -1393,7 +1393,7 @@ lbl_fn_803750E4_000011F4:
     blr
 }
 
-asm void fn_80375184(void)
+asm void kpad_testActiveFlags(void)
 {
     nofralloc
     lwz r0, 0x5638(r3)

@@ -57,7 +57,7 @@ void fn_80108A5C(void);
 void fn_80108C10(void);
 void fn_80108F38(void);
 void fn_801092C8(void);
-void fn_80109828(void);
+void hurtbox_dispatchHitEvent(void);
 void fn_80109864(void);
 void fn_80109950(void);
 
@@ -1222,7 +1222,7 @@ lbl_fn_801092C8_00000F5C:
     blr
 }
 
-asm void fn_80109828(void)
+asm void hurtbox_dispatchHitEvent(void)
 {
     nofralloc
     lwz r3, lbl_8087F0A8
@@ -1231,9 +1231,9 @@ asm void fn_80109828(void)
     blelr
     lwz r3, lbl_8087F528
     cmpwi r3, 0x0
-    bne lbl_fn_80109828_00000F90
+    bne lbl_hurtbox_dispatchHitEvent_00000F90
     blr
-lbl_fn_80109828_00000F90:
+lbl_hurtbox_dispatchHitEvent_00000F90:
     cmpwi r4, 0x0
     beqlr
     li r5, -0x3301

@@ -14,7 +14,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void atn_Task_setActive(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
-extern void fn_800EE360(void);
+extern void camera_updateTargetMode(void);
 extern void system_getNextSequenceId(void);
 extern void boss_updatePhaseState(void);
 extern void quest_updateFlow(void);
@@ -921,7 +921,7 @@ lbl_fn_802E58C8_00000BC4:
     mr r3, r31
     bl battle_awardExp
     mr r3, r31
-    bl fn_800EE360
+    bl camera_updateTargetMode
     b lbl_fn_802E58C8_00000BE8
 lbl_fn_802E58C8_00000BE0:
     li r0, 0x1e

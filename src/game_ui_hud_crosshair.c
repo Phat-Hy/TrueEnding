@@ -57,13 +57,13 @@ extern void perf_getMetricValue(void);
 extern void assert_generateId(void);
 extern void fn_8020BE40(void);
 extern void fn_8020BF20(void);
-extern void fn_8020ED84(void);
+extern void time_wrapMilliseconds(void);
 extern void fn_8020EF4C(void);
 extern void random_generateValue(void);
 extern void event_findEntryById(void);
 extern void world_getGlobalFlag(void);
 extern void world_setGlobalFlag(void);
-extern void fn_803750E4(void);
+extern void kpad_validateButtonIndex(void);
 extern void fn_804444E8(void);
 extern void fn_80444A50(void);
 extern void fn_80444B64(void);
@@ -1104,7 +1104,7 @@ lbl_fn_801D4A0C_00000E84:
     cmpwi r3, 0x0
     beq lbl_fn_801D4A0C_00000EAC
     li r4, 0xe7
-    bl fn_803750E4
+    bl kpad_validateButtonIndex
 lbl_fn_801D4A0C_00000EAC:
     mr r3, r31
     li r4, 0x6
@@ -1718,7 +1718,7 @@ asm void fn_801D54C0(void)
 lbl_fn_801D54C0_00001754:
     lwz r4, -0x7d70(r3)
     li r3, 0x0
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
     bl fn_8020EF4C
     cmpwi r3, 0x0
     beq lbl_fn_801D54C0_000017A4
@@ -1757,7 +1757,7 @@ lbl_fn_801D54C0_000017C8:
 lbl_fn_801D54C0_000017E4:
     lwz r4, -0x7d70(r3)
     li r3, 0x0
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
     bl fn_8020EF4C
     cmpwi r3, 0x0
     beq lbl_fn_801D54C0_00001834
@@ -1824,7 +1824,7 @@ lbl_fn_801D54C0_000018C0:
 lbl_fn_801D54C0_000018DC:
     lwz r4, -0x7d70(r3)
     li r3, 0x0
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
     bl fn_8020EF4C
     cmpwi r3, 0x0
     beq lbl_fn_801D54C0_0000192C
@@ -1873,7 +1873,7 @@ lbl_fn_801D54C0_00001978:
 lbl_fn_801D54C0_00001994:
     lwz r4, -0x7d70(r3)
     li r3, 0x0
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
     bl fn_8020EF4C
     cmpwi r3, 0x0
     beq lbl_fn_801D54C0_000019E4
@@ -1902,7 +1902,7 @@ lbl_fn_801D54C0_000019E4:
 lbl_fn_801D54C0_00001A00:
     lwz r4, -0x7d70(r3)
     li r3, 0x0
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
     bl fn_8020EF4C
     cmpwi r3, 0x0
     beq lbl_fn_801D54C0_00001A50

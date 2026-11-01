@@ -19,7 +19,7 @@ extern void fn_800E854C(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void fn_80105BD8(void);
-extern void fn_8012D8B8(void);
+extern void enemy_updateAnimTimer(void);
 extern void fn_8012DB04(void);
 extern void fn_80139560(void);
 extern void quest_evaluateConditions(void);
@@ -980,7 +980,7 @@ lbl_fn_8054622C_00000BC0:
     stfs f0, 0x52c(r31)
     bl quest_evaluateConditions
     addi r3, r31, 0x7d4
-    bl fn_8012D8B8
+    bl enemy_updateAnimTimer
     lfs f0, 0x14ec(r31)
     li r4, 0xfa
     stfs f0, 0x7d8(r31)
@@ -1466,7 +1466,7 @@ lbl_fn_80546B88_000012D4:
     stfs f2, 0x53c(r18)
     psq_st f1, 0x534(r18), 0, 0
     stw r0, 0x58c(r18)
-    bl fn_8012D8B8
+    bl enemy_updateAnimTimer
     lwz r0, 0x5c0(r18)
     li r19, 0x0
     stw r19, 0x9f8(r18)

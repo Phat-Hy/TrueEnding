@@ -64,7 +64,7 @@ extern void fn_801750FC(void);
 extern void battle_awardExp(void);
 extern void fn_80176ACC(void);
 extern void fn_80176DFC(void);
-extern void fn_80178208(void);
+extern void battle_generateLootDrops(void);
 extern void fn_8017A33C(void);
 extern void fn_8017AC44(void);
 extern void fn_8047FF70(void);
@@ -1404,7 +1404,7 @@ lbl_fn_8000F1EC_00001110:
     bne lbl_fn_8000F1EC_00001150
     lwz r3, 0x48(r5)
     li r4, 0x0
-    bl fn_80178208
+    bl battle_generateLootDrops
 lbl_fn_8000F1EC_00001150:
     lwz r6, 0x1c(r29)
     li r5, 0x0

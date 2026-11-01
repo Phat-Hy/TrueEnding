@@ -77,7 +77,7 @@ void fn_8020DF88(void);
 void fn_8020E990(void);
 void fn_8020EACC(void);
 void fn_8020EB0C(void);
-void fn_8020ED84(void);
+void time_wrapMilliseconds(void);
 void fn_8020EE58(void);
 void fn_8020EE60(void);
 void fn_8020EE8C(void);
@@ -1716,13 +1716,13 @@ lbl_fn_8020EB0C_000016E8:
     blr
 }
 
-asm void fn_8020ED84(void)
+asm void time_wrapMilliseconds(void)
 {
     nofralloc
     cmpwi r4, 0x3e8
-    blt lbl_fn_8020ED84_0000177C
+    blt lbl_time_wrapMilliseconds_0000177C
     cmpwi r3, 0x2
-    blt lbl_fn_8020ED84_00001730
+    blt lbl_time_wrapMilliseconds_00001730
     lis r5, 0x1062
     addi r0, r5, 0x4dd3
     mulhw r0, r0, r4
@@ -1731,10 +1731,10 @@ asm void fn_8020ED84(void)
     add r0, r0, r5
     mulli r0, r0, 0x3e8
     subf r4, r0, r4
-    b lbl_fn_8020ED84_0000177C
-lbl_fn_8020ED84_00001730:
+    b lbl_time_wrapMilliseconds_0000177C
+lbl_time_wrapMilliseconds_00001730:
     cmpwi r3, 0x1
-    bne lbl_fn_8020ED84_0000177C
+    bne lbl_time_wrapMilliseconds_0000177C
     lis r5, 0x1062
     addi r0, r5, 0x4dd3
     mulhw r6, r0, r4
@@ -1744,37 +1744,37 @@ lbl_fn_8020ED84_00001730:
     mulli r0, r0, 0x3e8
     subf r0, r0, r4
     cmpwi r0, 0x1c2
-    blt lbl_fn_8020ED84_0000177C
+    blt lbl_time_wrapMilliseconds_0000177C
     cmpwi r0, 0x1e0
-    bgt lbl_fn_8020ED84_0000177C
+    bgt lbl_time_wrapMilliseconds_0000177C
     srawi r0, r6, 6
     srwi r5, r0, 31
     add r0, r0, r5
     mulli r0, r0, 0x3e8
     subf r4, r0, r4
-lbl_fn_8020ED84_0000177C:
+lbl_time_wrapMilliseconds_0000177C:
     lwz r6, lbl_8087F1F0
     li r7, 0x0
     lwz r0, lbl_8087F1F8
     mr r5, r6
     mtctr r0
     cmplwi r0, 0x0
-    ble lbl_fn_8020ED84_000017C8
-lbl_fn_8020ED84_00001798:
+    ble lbl_time_wrapMilliseconds_000017C8
+lbl_time_wrapMilliseconds_00001798:
     lwz r0, 0x78(r5)
     cmpw r3, r0
-    bne lbl_fn_8020ED84_000017BC
+    bne lbl_time_wrapMilliseconds_000017BC
     lwz r0, 0x7c(r5)
     cmpw r4, r0
-    bne lbl_fn_8020ED84_000017BC
+    bne lbl_time_wrapMilliseconds_000017BC
     mulli r0, r7, 0x10c
     add r3, r6, r0
     blr
-lbl_fn_8020ED84_000017BC:
+lbl_time_wrapMilliseconds_000017BC:
     addi r5, r5, 0x10c
     addi r7, r7, 0x1
-    bdnz lbl_fn_8020ED84_00001798
-lbl_fn_8020ED84_000017C8:
+    bdnz lbl_time_wrapMilliseconds_00001798
+lbl_time_wrapMilliseconds_000017C8:
     li r3, 0x0
     blr
 }

@@ -10,7 +10,7 @@ extern void fn_8004A03C(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
-extern void fn_8006B174(void);
+extern void boss_decodePhaseBitfield(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void atn_Task_constructor(void);
@@ -714,7 +714,7 @@ asm void fn_802185FC(void)
     bl actor_dispatchMessage
     mr r4, r31
     addi r3, r1, 0x10
-    bl fn_8006B174
+    bl boss_decodePhaseBitfield
     lwz r0, 0x10(r1)
     srwi. r0, r0, 31
     bne lbl_fn_802185FC_0000086C

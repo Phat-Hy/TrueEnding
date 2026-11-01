@@ -19,7 +19,7 @@ extern void skill_findNodeById(void);
 extern void fn_8011FE3C(void);
 extern void fn_8012B3E8(void);
 extern void fn_8012B988(void);
-extern void fn_8012D8B8(void);
+extern void enemy_updateAnimTimer(void);
 extern void fn_801333E4(void);
 extern void fn_80133B30(void);
 extern void dialog_selectChoice(void);
@@ -250,7 +250,7 @@ lbl_fn_8039FBFC_00000144:
     cmpwi r0, 0x1
     bne lbl_fn_8039FBFC_00000428
     addi r3, r30, 0x7d4
-    bl fn_8012D8B8
+    bl enemy_updateAnimTimer
     b lbl_fn_8039FBFC_00000428
     xoris r0, r31, 0x8000
     stw r0, 0x2c(r1)
@@ -345,13 +345,13 @@ lbl_fn_8039FBFC_000002C4:
     addi r3, r30, 0x7d4
     bl fn_8012B988
     addi r3, r30, 0x7d4
-    bl fn_8012D8B8
+    bl enemy_updateAnimTimer
     b lbl_fn_8039FBFC_00000428
     mr r4, r31
     addi r3, r30, 0x7d4
     bl fn_80133B30
     addi r3, r30, 0x7d4
-    bl fn_8012D8B8
+    bl enemy_updateAnimTimer
     b lbl_fn_8039FBFC_00000428
     lwz r0, 0x48(r30)
     cmpwi r0, 0x2

@@ -30,7 +30,7 @@ extern void fn_80188F08(void);
 extern void fn_80188F40(void);
 extern void fn_80191960(void);
 extern void fn_8019198C(void);
-extern void fn_803750E4(void);
+extern void kpad_validateButtonIndex(void);
 extern void chest_spawnLoot(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
@@ -1133,7 +1133,7 @@ lbl_fn_801AFAC0_00000DE0:
     cmpwi r3, 0x0
     beq lbl_fn_801AFAC0_00000E30
     li r4, 0xb5
-    bl fn_803750E4
+    bl kpad_validateButtonIndex
 lbl_fn_801AFAC0_00000E30:
     lwz r3, 0x4(r30)
     li r4, 0x1

@@ -24,7 +24,7 @@ extern void atn_Task_setActive(void);
 extern void str_skipWhitespace(void);
 extern void fn_800EAECC(void);
 extern void fn_800EB49C(void);
-extern void fn_800EE360(void);
+extern void camera_updateTargetMode(void);
 extern void fn_8011CD84(void);
 extern void skill_findNodeById(void);
 extern void boss_updatePhaseState(void);
@@ -36,7 +36,7 @@ extern void fn_8015E7A0(void);
 extern void fn_8015EB2C(void);
 extern void battle_applyStatusEffect(void);
 extern void battle_awardExp(void);
-extern void fn_80178208(void);
+extern void battle_generateLootDrops(void);
 extern void fn_8017C904(void);
 extern void fn_8019A3F4(void);
 extern void fn_8019A580(void);
@@ -168,7 +168,7 @@ asm void fn_80249588(void)
     mr r4, r3
 lbl_fn_80249588_000000A0:
     lwz r3, 0x14fc(r31)
-    bl fn_80178208
+    bl battle_generateLootDrops
     li r0, 0x0
     stw r0, 0x14fc(r31)
     b lbl_fn_80249588_000001CC
@@ -239,7 +239,7 @@ lbl_fn_80249588_0000015C:
     mr r4, r3
 lbl_fn_80249588_000001A0:
     lwz r3, 0x14fc(r31)
-    bl fn_80178208
+    bl battle_generateLootDrops
     b lbl_fn_80249588_000001CC
 lbl_fn_80249588_000001AC:
     li r0, 0x0
@@ -504,7 +504,7 @@ lbl_fn_80249588_00000504:
 lbl_fn_80249588_00000580:
     lwz r3, 0x14fc(r31)
     mr r4, r29
-    bl fn_80178208
+    bl battle_generateLootDrops
     li r0, 0x0
     stw r0, 0x14fc(r31)
     li r4, 0xe6
@@ -558,7 +558,7 @@ lbl_fn_80249588_000005F4:
     mr r4, r3
 lbl_fn_80249588_00000650:
     lwz r3, 0x14fc(r31)
-    bl fn_80178208
+    bl battle_generateLootDrops
     li r0, 0x0
     stw r0, 0x14fc(r31)
 lbl_fn_80249588_00000660:
@@ -647,7 +647,7 @@ lbl_fn_80249C14_00000738:
     mr r4, r3
 lbl_fn_80249C14_00000790:
     lwz r3, 0x14fc(r30)
-    bl fn_80178208
+    bl battle_generateLootDrops
     li r0, 0x0
     stw r0, 0x14fc(r30)
 lbl_fn_80249C14_000007A0:
@@ -1277,7 +1277,7 @@ lbl_fn_8024A4A0_0000103C:
     stw r0, 0x14b0(r31)
     bl battle_awardExp
     mr r3, r31
-    bl fn_800EE360
+    bl camera_updateTargetMode
 lbl_fn_8024A4A0_00001060:
     lwz r0, 0x5c0(r31)
     clrrwi r0, r0, 1

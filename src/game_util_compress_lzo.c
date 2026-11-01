@@ -9,7 +9,7 @@ extern void wcs_vformat(void);
 extern void fn_8010C00C(void);
 extern void actor_findSpawnTemplate(void);
 extern void fn_8012B988(void);
-extern void fn_8012D8B8(void);
+extern void enemy_updateAnimTimer(void);
 extern void fn_8013407C(void);
 extern void quest_checkCondition(void);
 extern void fn_8014FAD0(void);
@@ -23,7 +23,7 @@ extern void fn_80206B14(void);
 extern void game_initGlobalDatabases(void);
 extern void assert_generateId(void);
 extern void assert_formatLocation(void);
-extern void fn_8020ED84(void);
+extern void time_wrapMilliseconds(void);
 extern void fn_8020EF04(void);
 extern void random_generateValue(void);
 extern void fn_8020EFEC(void);
@@ -203,7 +203,7 @@ lbl_fn_8058CF64_0000011C:
     cmpwi r0, 0x0
     bge lbl_fn_8058CF64_00000148
     addi r3, r3, 0x7d4
-    bl fn_8012D8B8
+    bl enemy_updateAnimTimer
 lbl_fn_8058CF64_00000148:
     addis r3, r30, 0x2
     lwz r3, 0x60bc(r3)
@@ -1126,7 +1126,7 @@ lbl_fn_8058DB14_00000E2C:
 lbl_fn_8058DB14_00000E4C:
     lwzx r4, r24, r25
     mr r3, r28
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
     cmpwi r3, 0x0
     beq lbl_fn_8058DB14_00000EF0
     addis r4, r27, 0x2

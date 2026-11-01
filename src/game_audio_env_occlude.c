@@ -29,7 +29,7 @@ extern void atn_Model_findBoneIndex(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void morph_updateMesh(void);
-extern void fn_800EB7A0(void);
+extern void sound_playSpatialEffect(void);
 extern void fn_800EC254(void);
 extern void fn_800EC2C4(void);
 extern void fn_800EC440(void);
@@ -273,7 +273,7 @@ lbl_fn_8031A484_00000148:
     stw r0, 0x15b4(r31)
 lbl_fn_8031A484_000001CC:
     mr r3, r31
-    bl fn_800EB7A0
+    bl sound_playSpatialEffect
     lwz r0, 0x44(r1)
     lwz r31, 0x3c(r1)
     lwz r30, 0x38(r1)

@@ -13,7 +13,7 @@ extern void fn_8012AE50(void);
 extern void fn_8012AFE8(void);
 extern void fn_8012B3E8(void);
 extern void fn_8012B988(void);
-extern void fn_8012D8B8(void);
+extern void enemy_updateAnimTimer(void);
 extern void fn_80133B30(void);
 extern void quest_updateFlow(void);
 extern void dialog_selectChoice(void);
@@ -1846,7 +1846,7 @@ lbl_fn_803BAD6C_000017A0:
     addi r3, r30, 0x7d4
     bl fn_8012B988
     addi r3, r30, 0x7d4
-    bl fn_8012D8B8
+    bl enemy_updateAnimTimer
     lwz r0, 0x954(r30)
     stw r0, 0x9f8(r30)
 lbl_fn_803BAD6C_00001808:

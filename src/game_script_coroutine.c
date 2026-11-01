@@ -5,7 +5,7 @@
 extern void collision_queryGeometry(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800EE360(void);
+extern void camera_updateTargetMode(void);
 extern void system_getNextSequenceId(void);
 extern void scissor_clipFrustum(void);
 extern void fn_8015F568(void);
@@ -1588,7 +1588,7 @@ lbl_fn_8024E690_00001684:
     mr r3, r31
     bl battle_awardExp
     mr r3, r31
-    bl fn_800EE360
+    bl camera_updateTargetMode
     b lbl_fn_8024E690_000016A8
 lbl_fn_8024E690_000016A0:
     li r0, 0x1e

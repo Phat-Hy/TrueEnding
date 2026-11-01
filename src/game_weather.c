@@ -53,7 +53,7 @@ extern void battle_canTargetActor(void);
 extern void fn_80178018(void);
 extern void fn_80178078(void);
 extern void fn_801781B0(void);
-extern void fn_80178208(void);
+extern void battle_generateLootDrops(void);
 extern void fn_8018E438(void);
 extern void fn_801B77DC(void);
 extern void fn_801E97DC(void);
@@ -65,7 +65,7 @@ extern void task_findEntryById(void);
 extern void fn_8036DAA8(void);
 extern void world_getGlobalFlag(void);
 extern void world_setGlobalFlag(void);
-extern void fn_80375184(void);
+extern void kpad_testActiveFlags(void);
 extern void fn_8037EF30(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
@@ -1078,7 +1078,7 @@ lbl_fn_800E7BB0_00000D0C:
     mr r4, r3
 lbl_fn_800E7BB0_00000D60:
     mr r3, r30
-    bl fn_80178208
+    bl battle_generateLootDrops
     b lbl_fn_800E7BB0_00000E40
 lbl_fn_800E7BB0_00000D6C:
     lwz r0, 0x48(r30)
@@ -1667,7 +1667,7 @@ lbl_fn_800E8630_000015B4:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_800E8630_000015C4
-    bl fn_80375184
+    bl kpad_testActiveFlags
 lbl_fn_800E8630_000015C4:
     li r0, 0x0
     sth r0, 0x1470(r31)
@@ -1796,7 +1796,7 @@ asm void fn_800E8688(void)
 lbl_fn_800E8688_000017A0:
     mr r3, r23
     mr r4, r24
-    bl fn_80178208
+    bl battle_generateLootDrops
     lwz r3, 0x12a4(r23)
     li r0, 0x1
     stw r0, 0x58c(r23)
@@ -1852,7 +1852,7 @@ lbl_fn_800E8688_000017C4:
 lbl_fn_800E8688_00001878:
     mr r3, r23
     mr r4, r24
-    bl fn_80178208
+    bl battle_generateLootDrops
     lwz r3, 0x12a4(r23)
     li r0, 0x1
     stw r0, 0x58c(r23)

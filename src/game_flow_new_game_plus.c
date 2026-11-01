@@ -38,7 +38,7 @@ extern void task_findEntryById(void);
 extern void fn_8021A684(void);
 extern void fn_8021A77C(void);
 extern void fn_8021A8D0(void);
-extern void fn_803750E4(void);
+extern void kpad_validateButtonIndex(void);
 extern void fn_8037D4C0(void);
 extern void fn_803E9B7C(void);
 extern void net_getPacketManager(void);
@@ -1856,7 +1856,7 @@ lbl_fn_804F1128_000018AC:
     li r4, 0x1b0
     stw r0, 0x7c(r3)
     lwz r3, lbl_8087F430
-    bl fn_803750E4
+    bl kpad_validateButtonIndex
     lwz r3, lbl_8087F9C0
     li r0, 0x0
     stw r0, 0x7c(r3)

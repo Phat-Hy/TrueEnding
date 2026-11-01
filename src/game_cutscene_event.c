@@ -46,7 +46,7 @@ extern void res_registerResource(void);
 extern void entity_Instance_constructor(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
-extern void fn_803750E4(void);
+extern void kpad_validateButtonIndex(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
@@ -1161,7 +1161,7 @@ lbl_fn_8032CBFC_00000E88:
     blt lbl_fn_8032CBFC_00000EA8
     lwz r3, lbl_8087F430
     li r4, 0xf7
-    bl fn_803750E4
+    bl kpad_validateButtonIndex
 lbl_fn_8032CBFC_00000EA8:
     mr r3, r31
     bl quest_updateFlow

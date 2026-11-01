@@ -22,7 +22,7 @@ extern void fn_8004AE84(void);
 extern void fn_8004B158(void);
 extern void fn_8004B1EC(void);
 extern void fn_80057A68(void);
-extern void fn_80063D3C(void);
+extern void magic_castSpellCircle(void);
 extern void fn_8008B964(void);
 extern void fn_800A56A8(void);
 extern void fn_800C16B4(void);
@@ -960,7 +960,7 @@ lbl_fn_80487FA0_00000B7C:
     lfs f1, 0x1ea0(r31)
     li r5, -0x100
     lfs f2, lbl_80886F8C
-    bl fn_80063D3C
+    bl magic_castSpellCircle
 lbl_fn_80487FA0_00000BAC:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)

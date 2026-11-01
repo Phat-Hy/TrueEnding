@@ -19,7 +19,7 @@ extern void fn_801F6C2C(void);
 extern void save_computeCrc32(void);
 extern void save_findEntryByName(void);
 extern void perf_getMetricValue(void);
-extern void fn_803750E4(void);
+extern void kpad_validateButtonIndex(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_804A3C24(void);
 extern void fn_804A62C8(void);
@@ -1618,7 +1618,7 @@ lbl_fn_80525A0C_00001598:
     bne lbl_fn_80525A0C_000015D0
     lwz r3, lbl_8087F430
     li r4, 0x155
-    bl fn_803750E4
+    bl kpad_validateButtonIndex
 lbl_fn_80525A0C_000015D0:
     mr r3, r31
     li r4, 0x0

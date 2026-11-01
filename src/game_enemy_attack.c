@@ -33,7 +33,7 @@ extern void fn_8017AC2C(void);
 extern void fn_80219344(void);
 extern void fn_8021A8D0(void);
 extern void fn_8021A960(void);
-extern void fn_80375184(void);
+extern void kpad_testActiveFlags(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 
@@ -378,7 +378,7 @@ lbl_fn_8012DF7C_000003E4:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_8012DF7C_000004BC
-    bl fn_80375184
+    bl kpad_testActiveFlags
     cmpwi r3, 0x0
     beq lbl_fn_8012DF7C_000004BC
     lwz r3, lbl_8087F048
@@ -1531,7 +1531,7 @@ asm void fn_8012F188(void)
     cmpwi r0, 0x0
     beq lbl_fn_8012F188_0000146C
     mr r3, r0
-    bl fn_80375184
+    bl kpad_testActiveFlags
     cmpwi r3, 0x0
     beq lbl_fn_8012F188_00001634
 lbl_fn_8012F188_0000146C:

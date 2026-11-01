@@ -22,7 +22,7 @@ extern void thread_findAndNotify(void);
 extern void thread_dispatchToQueue(void);
 extern void game_initGlobalDatabases(void);
 extern void assert_formatLocation(void);
-extern void fn_8020ED84(void);
+extern void time_wrapMilliseconds(void);
 extern void fn_8020EF04(void);
 extern void fn_8020EF4C(void);
 extern void fn_8020EFEC(void);
@@ -1743,7 +1743,7 @@ lbl_fn_80597558_00001778:
     beq lbl_fn_80597558_00001BD8
     lwz r4, 0x7c(r18)
     li r3, 0x1
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
     mr r20, r3
     b lbl_fn_80597558_00001BD8
 lbl_fn_80597558_00001888:
@@ -1964,7 +1964,7 @@ lbl_fn_80597558_00001B88:
     beq lbl_fn_80597558_00001BD4
     lwz r4, 0x7c(r18)
     li r3, 0x1
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
     mr r20, r3
 lbl_fn_80597558_00001BD4:
     li r19, 0x1
@@ -2208,7 +2208,7 @@ lbl_fn_80597558_00001F1C:
     beq lbl_fn_80597558_00001F60
     lwz r4, 0x7c(r24)
     li r3, 0x1
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
     mr r22, r3
     mr r23, r20
 lbl_fn_80597558_00001F60:

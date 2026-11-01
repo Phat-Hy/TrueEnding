@@ -64,7 +64,7 @@ extern void fn_8016F5EC(void);
 extern void fn_801750FC(void);
 extern void fn_80175A38(void);
 extern void fn_8017B16C(void);
-extern void fn_8020ED84(void);
+extern void time_wrapMilliseconds(void);
 extern void random_generateValue(void);
 extern void event_findEntryById(void);
 extern void fn_80211940(void);
@@ -722,7 +722,7 @@ lbl_fn_8014FF9C_00000784:
     blt lbl_fn_8014FF9C_0000084C
     mr r3, r26
     mr r4, r27
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
     cmpwi r3, 0x0
     bne lbl_fn_8014FF9C_0000084C
     lis r24, 0x1062
@@ -734,7 +734,7 @@ lbl_fn_8014FF9C_00000784:
     add r0, r0, r4
     mulli r0, r0, 0x3e8
     subf r4, r0, r27
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
     bl random_generateValue
     bl event_findEntryById
     addi r0, r24, 0x4dd3

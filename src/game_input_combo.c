@@ -23,8 +23,8 @@ extern void atn_Anim_getLayerDuration(void);
 extern void morph_updateMesh(void);
 extern void atn_Task_setActive(void);
 extern void str_parseInt(void);
-extern void fn_800EB7A0(void);
-extern void fn_800EE360(void);
+extern void sound_playSpatialEffect(void);
+extern void camera_updateTargetMode(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void fn_80108F38(void);
@@ -291,7 +291,7 @@ lbl_fn_802EB9F8_00000264:
     stw r0, 0x12a4(r31)
     bl battle_awardExp
     mr r3, r31
-    bl fn_800EE360
+    bl camera_updateTargetMode
     b lbl_fn_802EB9F8_0000028C
 lbl_fn_802EB9F8_00000284:
     li r0, 0x0
@@ -910,7 +910,7 @@ asm void fn_802EC280(void)
     li r5, 0x0
     bl morph_updateMesh
     mr r3, r31
-    bl fn_800EB7A0
+    bl sound_playSpatialEffect
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0

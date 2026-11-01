@@ -15,7 +15,7 @@ extern void fn_8004A388(void);
 extern void fn_8004A660(void);
 extern void fn_80060D58(void);
 extern void skill_calculateDamage(void);
-extern void fn_80063D3C(void);
+extern void magic_castSpellCircle(void);
 extern void node_destroy(void);
 extern void map_debugLog(void);
 extern void motion_updateFogAdj(void);
@@ -1370,7 +1370,7 @@ lbl_fn_800CECF0_0000126C:
     lfs f1, lbl_808811A8
     addi r4, r24, 0x70
     lfs f2, lbl_8088118C
-    bl fn_80063D3C
+    bl magic_castSpellCircle
     lwz r29, lbl_8087EEB0
     mr r3, r24
     bl fn_800CA834

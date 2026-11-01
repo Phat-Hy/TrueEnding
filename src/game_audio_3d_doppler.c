@@ -14,7 +14,7 @@ extern void fn_80057A68(void);
 extern void fn_80063484(void);
 extern void atn_Matrix_copy(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_800EB7A0(void);
+extern void sound_playSpatialEffect(void);
 extern void fn_800EC1F4(void);
 extern void system_getNextSequenceId(void);
 extern void fn_80103F60(void);
@@ -1078,7 +1078,7 @@ lbl_fn_80323E50_00000BE4:
     bl battle_applyStatusEffect
 lbl_fn_80323E50_00000CA4:
     mr r3, r30
-    bl fn_800EB7A0
+    bl sound_playSpatialEffect
 lbl_fn_80323E50_00000CAC:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)

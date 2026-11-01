@@ -11,7 +11,7 @@ extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void collision_testLineSegment(void);
-extern void fn_8006B174(void);
+extern void boss_decodePhaseBitfield(void);
 extern void mem_free(void);
 extern void map_debugLog(void);
 extern void atn_Model_findBoneIndex(void);
@@ -511,7 +511,7 @@ lbl_fn_801AD34C_0000055C:
     bl actor_dispatchMessage
     mr r4, r25
     addi r3, r1, 0xb8
-    bl fn_8006B174
+    bl boss_decodePhaseBitfield
     lwz r0, 0x88(r1)
     srwi. r0, r0, 31
     beq lbl_fn_801AD34C_000005E4

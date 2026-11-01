@@ -10,7 +10,7 @@ extern void fn_80043B34(void);
 extern void fn_80043BDC(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void str_findChar(void);
-extern void fn_80109828(void);
+extern void hurtbox_dispatchHitEvent(void);
 extern void fn_8011F8F4(void);
 extern void fn_8011F91C(void);
 extern void skill_findNodeById(void);
@@ -789,7 +789,7 @@ asm void fn_803A5A10(void)
     beq lbl_fn_803A5A10_00000938
     lwz r3, lbl_8087F048
     lwz r4, 0x8(r4)
-    bl fn_80109828
+    bl hurtbox_dispatchHitEvent
 lbl_fn_803A5A10_00000938:
     lwz r0, 0x0(r31)
     lis r3, lbl_8074ED24@ha

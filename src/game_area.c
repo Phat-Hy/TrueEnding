@@ -17,7 +17,7 @@ extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
 extern void fn_8006AA20(void);
 extern void fn_8006AD24(void);
-extern void fn_8006B174(void);
+extern void boss_decodePhaseBitfield(void);
 extern void fn_8007C3F8(void);
 extern void dungeon_initGlobalContext(void);
 extern void fn_80083AD4(void);
@@ -2234,7 +2234,7 @@ lbl_area_updateZoneState_00001C10:
     bl actor_dispatchMessage
     mr r4, r28
     addi r3, r1, 0x50
-    bl fn_8006B174
+    bl boss_decodePhaseBitfield
     lwz r0, 0x50(r1)
     srwi. r0, r0, 31
     bne lbl_area_updateZoneState_00001C80
@@ -2279,7 +2279,7 @@ lbl_area_updateZoneState_00001CB4:
     bl actor_dispatchMessage
     mr r4, r28
     addi r3, r1, 0x38
-    bl fn_8006B174
+    bl boss_decodePhaseBitfield
     lwz r0, 0x38(r1)
     srwi. r0, r0, 31
     bne lbl_area_updateZoneState_00001D24

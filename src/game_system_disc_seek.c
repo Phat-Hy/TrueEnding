@@ -10,7 +10,7 @@ extern void _savegpr_22(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_80063D3C(void);
+extern void magic_castSpellCircle(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void route_findNextWaypoint(void);
@@ -336,7 +336,7 @@ lbl_fn_8035223C_00000248:
     stfs f0, 0x10(r1)
     lwz r6, 0x153c(r27)
     lfs f1, 0x58(r6)
-    bl fn_80063D3C
+    bl magic_castSpellCircle
 lbl_fn_8035223C_00000330:
     addi r28, r28, 0x1
     cmpwi r28, 0xb4

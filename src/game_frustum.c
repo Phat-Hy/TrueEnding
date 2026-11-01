@@ -42,7 +42,7 @@ extern void res_MsgHandle_unload(void);
 extern void res_MsgHandle_update(void);
 extern void fn_8036554C(void);
 extern void world_getGlobalFlag(void);
-extern void fn_80375184(void);
+extern void kpad_testActiveFlags(void);
 extern void fn_803761BC(void);
 extern void fn_8059AFDC(void);
 extern void fn_8059B0F4(void);
@@ -2548,7 +2548,7 @@ lbl_fn_800F3EF4_000021BC:
     mr r3, r31
     bl fn_80109F7C
     lwz r3, lbl_8087F430
-    bl fn_80375184
+    bl kpad_testActiveFlags
     cmpwi r3, 0x0
     beq lbl_fn_800F3EF4_0000232C
     lwz r3, lbl_8087F408

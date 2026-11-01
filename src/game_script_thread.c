@@ -18,18 +18,18 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
-extern void fn_800EB7A0(void);
+extern void sound_playSpatialEffect(void);
 extern void system_getNextSequenceId(void);
 extern void viewport_updateCulling(void);
 extern void clip_calculateFrustum(void);
-extern void fn_8012D8B8(void);
+extern void enemy_updateAnimTimer(void);
 extern void fn_8012DD70(void);
 extern void fn_80139560(void);
 extern void equip_applyToCharacter(void);
 extern void debuff_clearStatus(void);
 extern void actor_setState(void);
 extern void fn_80176ACC(void);
-extern void fn_80178208(void);
+extern void battle_generateLootDrops(void);
 extern void battle_updateActorStatus(void);
 extern void actor_getMovementFlags(void);
 extern void fn_801C02F4(void);
@@ -334,7 +334,7 @@ lbl_fn_8024ED68_00000348:
     mr r4, r3
 lbl_fn_8024ED68_0000039C:
     mr r3, r22
-    bl fn_80178208
+    bl battle_generateLootDrops
 lbl_fn_8024ED68_000003A4:
     li r21, 0x0
     b lbl_fn_8024ED68_000003C0
@@ -1209,7 +1209,7 @@ lbl_fn_8024FCDC_00000FA8:
     li r6, 0x0
     bl res_findResourceSlot
     mr r3, r29
-    bl fn_800EB7A0
+    bl sound_playSpatialEffect
     mr r31, r29
     li r30, 0x0
     b lbl_fn_8024FCDC_0000107C
@@ -1732,7 +1732,7 @@ lbl_fn_8024FFE8_00001808:
     bl fn_80176ACC
     lwz r3, 0x16dc(r25)
     addi r3, r3, 0x7d4
-    bl fn_8012D8B8
+    bl enemy_updateAnimTimer
     lwz r3, 0x16dc(r25)
     mr r26, r25
     lfs f0, 0x7d8(r29)

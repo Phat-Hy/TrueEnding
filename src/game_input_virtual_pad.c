@@ -2,14 +2,14 @@
 #pragma function_align 4
 
 /* External function declarations */
-extern void fn_80063D3C(void);
+extern void magic_castSpellCircle(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
-extern void fn_800EB7A0(void);
-extern void fn_800EE360(void);
+extern void sound_playSpatialEffect(void);
+extern void camera_updateTargetMode(void);
 extern void system_getNextSequenceId(void);
 extern void actor_testBitFlag(void);
 extern void fn_801426A4(void);
@@ -1144,7 +1144,7 @@ lbl_fn_802F5370_00000F74:
     lfs f1, lbl_80884950
     lis r5, 0xffff
     lfs f2, lbl_80884954
-    bl fn_80063D3C
+    bl magic_castSpellCircle
 lbl_fn_802F5370_00000FA0:
     lwz r0, 0x124(r1)
     psq_l f31, 0x118(r1), 0, 0
@@ -1376,7 +1376,7 @@ asm void fn_802F58A0(void)
     mtctr r12
     bctrl
     mr r3, r31
-    bl fn_800EB7A0
+    bl sound_playSpatialEffect
     b lbl_fn_802F58A0_00001320
 lbl_fn_802F58A0_00001304:
     ori r0, r4, 0x8000
@@ -1462,7 +1462,7 @@ asm void fn_802F59D8(void)
     mtctr r12
     bctrl
     mr r3, r31
-    bl fn_800EB7A0
+    bl sound_playSpatialEffect
     b lbl_fn_802F59D8_00001514
 lbl_fn_802F59D8_0000143C:
     ori r0, r4, 0x8000
@@ -1470,7 +1470,7 @@ lbl_fn_802F59D8_0000143C:
     mr r3, r31
     bl battle_awardExp
     mr r3, r31
-    bl fn_800EE360
+    bl camera_updateTargetMode
     b lbl_fn_802F59D8_00001514
 lbl_fn_802F59D8_00001458:
     lwz r0, 0x1594(r31)

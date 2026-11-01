@@ -28,10 +28,10 @@ extern void viewport_getGlobalContext(void);
 extern void fn_800F7FA8(void);
 extern void fn_800F80B8(void);
 extern void fn_800F8290(void);
-extern void fn_80109828(void);
+extern void hurtbox_dispatchHitEvent(void);
 extern void fn_8010EDFC(void);
 extern void fn_801162A0(void);
-extern void fn_8012D8B8(void);
+extern void enemy_updateAnimTimer(void);
 extern void fn_801404F8(void);
 extern void fn_80140500(void);
 extern void quest_updateFlow(void);
@@ -300,7 +300,7 @@ lbl_fn_80277DC4_0000026C:
     stw r0, 0x12a4(r23)
 lbl_fn_80277DC4_000002D4:
     addi r3, r23, 0x7d4
-    bl fn_8012D8B8
+    bl enemy_updateAnimTimer
     stw r19, 0x58c(r23)
     mr r3, r23
     li r4, 0x0
@@ -355,7 +355,7 @@ lbl_fn_80277DC4_0000038C:
     bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x120
-    bl fn_80109828
+    bl hurtbox_dispatchHitEvent
 lbl_fn_80277DC4_000003A8:
     addi r11, r1, 0x360
     psq_l f31, 0x388(r1), 0, 0

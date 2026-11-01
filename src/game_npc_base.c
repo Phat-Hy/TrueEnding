@@ -42,7 +42,7 @@ extern void fn_80171F3C(void);
 extern void fn_801750FC(void);
 extern void fn_80178018(void);
 extern void fn_80178078(void);
-extern void fn_80178208(void);
+extern void battle_generateLootDrops(void);
 extern void fn_8017B3C0(void);
 extern void fn_8017B434(void);
 extern void fn_8017C974(void);
@@ -246,7 +246,7 @@ lbl_fn_80139560_00000160:
     mr r4, r3
 lbl_fn_80139560_000001B0:
     mr r3, r31
-    bl fn_80178208
+    bl battle_generateLootDrops
     b lbl_fn_80139560_00000924
 lbl_fn_80139560_000001BC:
     mr r3, r31

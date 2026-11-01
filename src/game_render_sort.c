@@ -12,7 +12,7 @@ extern void morph_updateMesh(void);
 extern void wcs_vformat(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
-extern void fn_80109828(void);
+extern void hurtbox_dispatchHitEvent(void);
 extern void actor_testBitFlag(void);
 extern void fn_801426A4(void);
 extern void fn_801595BC(void);
@@ -2031,7 +2031,7 @@ lbl_fn_802A8BBC_00001BD0:
     bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0xe8
-    bl fn_80109828
+    bl hurtbox_dispatchHitEvent
     b lbl_fn_802A8BBC_00001CB4
 lbl_fn_802A8BBC_00001BF0:
     lwz r4, lbl_8087F1E4
@@ -2049,7 +2049,7 @@ lbl_fn_802A8BBC_00001C0C:
     bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0xe8
-    bl fn_80109828
+    bl hurtbox_dispatchHitEvent
     b lbl_fn_802A8BBC_00001CB4
 lbl_fn_802A8BBC_00001C2C:
     li r30, 0x0

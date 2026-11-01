@@ -48,8 +48,8 @@ extern void fn_8036E098(void);
 extern void fn_8036E92C(void);
 extern void world_getGlobalFlag(void);
 extern void world_setGlobalFlag(void);
-extern void fn_803750E4(void);
-extern void fn_80375184(void);
+extern void kpad_validateButtonIndex(void);
+extern void kpad_testActiveFlags(void);
 extern void fn_803E3050(void);
 extern void task_createWorker(void);
 extern void task_destroyWorker(void);
@@ -337,7 +337,7 @@ lbl_fn_804360D4_0000025C:
     lwz r0, 0x32c(r31)
     cmpwi r0, 0x0
     beq lbl_fn_804360D4_00000368
-    bl fn_80375184
+    bl kpad_testActiveFlags
     cmpwi r3, 0x0
     bne lbl_fn_804360D4_0000029C
     lwz r3, lbl_8087F430
@@ -431,12 +431,12 @@ lbl_fn_804360D4_00000380:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_804360D4_000005A4
-    bl fn_80375184
+    bl kpad_testActiveFlags
     cmpwi r3, 0x0
     beq lbl_fn_804360D4_000005A4
     lwz r3, lbl_8087F430
     li r4, 0x145
-    bl fn_803750E4
+    bl kpad_validateButtonIndex
     b lbl_fn_804360D4_000005A4
 lbl_fn_804360D4_00000400:
     cmpwi r0, 0x1

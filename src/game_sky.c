@@ -10,7 +10,7 @@ extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_800499D0(void);
-extern void fn_8006B174(void);
+extern void boss_decodePhaseBitfield(void);
 extern void fn_8006BA30(void);
 extern void dungeon_initGlobalContext(void);
 extern void fn_800839EC(void);
@@ -880,7 +880,7 @@ lbl_fn_800DCA70_000009C0:
     bl actor_dispatchMessage
     mr r4, r30
     addi r3, r1, 0x10
-    bl fn_8006B174
+    bl boss_decodePhaseBitfield
     lwz r0, 0x10(r1)
     srwi. r0, r0, 31
     bne lbl_fn_800DCA70_00000A58

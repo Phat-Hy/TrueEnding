@@ -15,8 +15,8 @@ extern void fn_80094958(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void atn_Task_setActive(void);
-extern void fn_800EB7A0(void);
-extern void fn_800EE360(void);
+extern void sound_playSpatialEffect(void);
+extern void camera_updateTargetMode(void);
 extern void system_getNextSequenceId(void);
 extern void fn_80129978(void);
 extern void boss_updatePhaseState(void);
@@ -1275,7 +1275,7 @@ lbl_fn_80262FB4_00001010:
     stw r0, 0x12a4(r31)
     bl battle_awardExp
     mr r3, r31
-    bl fn_800EE360
+    bl camera_updateTargetMode
     b lbl_fn_80262FB4_00001488
 lbl_fn_80262FB4_0000105C:
     mr r3, r31
@@ -2084,7 +2084,7 @@ lbl_fn_802639C8_00001B8C:
     stfs f0, 0x2e8(r30)
     bl atn_Anim_setLayerAnimation
     mr r3, r30
-    bl fn_800EB7A0
+    bl sound_playSpatialEffect
 lbl_fn_802639C8_00001C20:
     lwz r0, 0x104(r1)
     psq_l f31, 0xf8(r1), 0, 0

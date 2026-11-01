@@ -25,7 +25,7 @@ extern void inventory_calcTotalStats(void);
 extern void fn_8015E4B0(void);
 extern void debuff_clearStatus(void);
 extern void fn_80176548(void);
-extern void fn_80178208(void);
+extern void battle_generateLootDrops(void);
 extern void fn_801B4BC8(void);
 extern void fn_801B4C00(void);
 extern void PSMTXConcat(void);
@@ -857,7 +857,7 @@ lbl_fn_801B6278_00000A80:
 lbl_fn_801B6278_00000B1C:
     lwz r3, 0x8(r31)
     mr r4, r30
-    bl fn_80178208
+    bl battle_generateLootDrops
     li r3, 0x1
     b lbl_fn_801B6278_00000BE4
 lbl_fn_801B6278_00000B30:

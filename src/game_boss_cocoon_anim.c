@@ -11,7 +11,7 @@ extern void fn_80206B68(void);
 extern void fn_80206B70(void);
 extern void game_initGlobalDatabases(void);
 extern void assert_generateId(void);
-extern void fn_8020ED84(void);
+extern void time_wrapMilliseconds(void);
 extern void fn_8020EE58(void);
 extern void fn_8020EE60(void);
 extern void fn_8020EF04(void);
@@ -2081,14 +2081,14 @@ lbl_fn_804515A8_00001C18:
     bne lbl_fn_804515A8_00001C64
     lwz r4, 0x7c(r3)
     li r3, 0x0
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
     b lbl_fn_804515A8_00001C78
 lbl_fn_804515A8_00001C64:
     cmpwi r0, 0x3
     bne lbl_fn_804515A8_00001C78
     lwz r4, 0x7c(r3)
     li r3, 0x1
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
 lbl_fn_804515A8_00001C78:
     bl random_generateValue
     mr r4, r3

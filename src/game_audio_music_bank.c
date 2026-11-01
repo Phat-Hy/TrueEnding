@@ -25,7 +25,7 @@ extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800D8814(void);
-extern void fn_800EB7A0(void);
+extern void sound_playSpatialEffect(void);
 extern void fn_800EC204(void);
 extern void fn_800F7250(void);
 extern void fn_800F7FD8(void);
@@ -675,7 +675,7 @@ lbl_fn_8030A848_000007C8:
     stfs f2, 0x34(r1)
     psq_st f1, 0x0(r5), 0, 0
     stfs f2, 0x15ec(r30)
-    bl fn_800EB7A0
+    bl sound_playSpatialEffect
 lbl_fn_8030A848_000007FC:
     lwz r3, lbl_8087EEF0
     li r30, 0x0

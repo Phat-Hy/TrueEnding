@@ -48,7 +48,7 @@ extern void fn_8016E4C4(void);
 extern void actor_setState(void);
 extern void battle_applyStatusEffect(void);
 extern void battle_canTargetActor(void);
-extern void fn_80178208(void);
+extern void battle_generateLootDrops(void);
 extern void fn_80179AD0(void);
 extern void fn_801CCD00(void);
 extern void fn_8020A81C(void);
@@ -1587,7 +1587,7 @@ lbl_fn_80251344_0000144C:
 lbl_fn_80251344_000014D4:
     mr r3, r29
     mr r4, r22
-    bl fn_80178208
+    bl battle_generateLootDrops
     li r0, 0x0
     sth r0, 0x1470(r29)
     b lbl_fn_80251344_00001684

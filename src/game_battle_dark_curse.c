@@ -40,7 +40,7 @@ extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
 extern void world_getGlobalFlag(void);
 extern void world_setGlobalFlag(void);
-extern void fn_80375184(void);
+extern void kpad_testActiveFlags(void);
 extern void fn_80376730(void);
 extern void task_createWorker(void);
 extern void task_destroyWorker(void);
@@ -465,7 +465,7 @@ lbl_fn_80422084_00000458:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_80422084_00000494
-    bl fn_80375184
+    bl kpad_testActiveFlags
     cmpwi r3, 0x0
     bne lbl_fn_80422084_00000494
     lwz r3, lbl_8087F9C0

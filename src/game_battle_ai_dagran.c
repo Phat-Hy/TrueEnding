@@ -14,7 +14,7 @@ extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
 extern void fn_800629F0(void);
-extern void fn_80063D3C(void);
+extern void magic_castSpellCircle(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
@@ -567,7 +567,7 @@ asm void fn_8043329C(void)
     lfs f1, lbl_808868A0
     li r5, -0x100
     lfs f2, lbl_80886894
-    bl fn_80063D3C
+    bl magic_castSpellCircle
 lbl_fn_8043329C_00000668:
     lfs f30, lbl_80886894
     addi r26, r1, 0x20

@@ -29,7 +29,7 @@ extern void task_mapIdToQueue(void);
 extern void task_findEntryById(void);
 extern void world_getGlobalFlag(void);
 extern void world_setGlobalFlag(void);
-extern void fn_80375184(void);
+extern void kpad_testActiveFlags(void);
 extern void vec3_isNonZero(void);
 
 /* External data declarations */
@@ -1624,7 +1624,7 @@ lbl_fn_80164B00_000015F0:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_80164B00_0000174C
-    bl fn_80375184
+    bl kpad_testActiveFlags
     cmpwi r3, 0x0
     bne lbl_fn_80164B00_0000174C
     lwz r3, lbl_8087F430

@@ -6,7 +6,7 @@ extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_80069BF4(void);
-extern void fn_8006B174(void);
+extern void boss_decodePhaseBitfield(void);
 extern void fn_8006B2D8(void);
 extern void str_assignBuffer(void);
 extern void mem_realloc(void);
@@ -159,7 +159,7 @@ lbl_fn_801FD5A0_000000B8:
     bl actor_dispatchMessage
     mr r4, r27
     addi r3, r1, 0x58
-    bl fn_8006B174
+    bl boss_decodePhaseBitfield
     lwz r0, 0x64(r1)
     srwi. r3, r0, 31
     bne lbl_fn_801FD5A0_0000016C
@@ -496,7 +496,7 @@ lbl_fn_801FDA20_0000054C:
     bl actor_dispatchMessage
     mr r4, r27
     addi r3, r1, 0x58
-    bl fn_8006B174
+    bl boss_decodePhaseBitfield
     lwz r0, 0x64(r1)
     srwi. r3, r0, 31
     bne lbl_fn_801FDA20_00000600

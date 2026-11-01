@@ -15,7 +15,7 @@ extern void ref_releaseHandle(void);
 extern void morph_updateMesh(void);
 extern void fn_800CB688(void);
 extern void fn_800CB6E4(void);
-extern void fn_800EE360(void);
+extern void camera_updateTargetMode(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void fn_801010A0(void);
@@ -1747,7 +1747,7 @@ lbl_fn_802AA89C_00001844:
     mr r3, r31
     bl battle_awardExp
     mr r3, r31
-    bl fn_800EE360
+    bl camera_updateTargetMode
     b lbl_fn_802AA89C_000019E8
 lbl_fn_802AA89C_00001860:
     lwz r3, 0x2dc(r31)

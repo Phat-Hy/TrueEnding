@@ -13,7 +13,7 @@ extern void fn_800502A8(void);
 extern void talk_formatQuotedString(void);
 extern void fn_8006AA20(void);
 extern void fn_8006B0C8(void);
-extern void fn_8006B174(void);
+extern void boss_decodePhaseBitfield(void);
 extern void fn_8006B2D8(void);
 extern void fn_80070C98(void);
 extern void mem_alloc(void);
@@ -184,7 +184,7 @@ asm void fn_80499E14(void)
     bl actor_dispatchMessage
     mr r4, r29
     addi r3, r1, 0x1c
-    bl fn_8006B174
+    bl boss_decodePhaseBitfield
     lwz r0, 0x10(r1)
     srwi. r0, r0, 31
     beq lbl_fn_80499E14_00000148
@@ -447,7 +447,7 @@ lbl_fn_8049A09C_0000045C:
     bl actor_dispatchMessage
     mr r4, r28
     addi r3, r1, 0x48
-    bl fn_8006B174
+    bl boss_decodePhaseBitfield
     addi r3, r1, 0x3c
     addi r4, r1, 0x48
     bl fn_8006B2D8
@@ -521,7 +521,7 @@ lbl_fn_8049A09C_0000056C:
     bl actor_dispatchMessage
     mr r4, r28
     addi r3, r1, 0x24
-    bl fn_8006B174
+    bl boss_decodePhaseBitfield
     addi r3, r1, 0x18
     addi r4, r1, 0x24
     bl fn_8006B2D8

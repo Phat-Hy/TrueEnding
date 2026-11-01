@@ -6,7 +6,7 @@ extern void _restgpr_14(void);
 extern void _savegpr_14(void);
 extern void fn_80056DB8(void);
 extern void atn_Task_setActive(void);
-extern void fn_8012D8B8(void);
+extern void enemy_updateAnimTimer(void);
 extern void quest_updateFlow(void);
 extern void fn_80154654(void);
 extern void battle_awardExp(void);
@@ -1700,7 +1700,7 @@ lbl_fn_803965FC_00001624:
     cmpwi r23, 0x0
     beq lbl_fn_803965FC_0000167C
     addi r3, r22, 0x7d4
-    bl fn_8012D8B8
+    bl enemy_updateAnimTimer
     lwz r0, 0x954(r22)
     mr r3, r22
     stw r0, 0x9f8(r22)

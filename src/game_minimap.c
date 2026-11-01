@@ -6,7 +6,7 @@ extern void _restgpr_26(void);
 extern void _savegpr_26(void);
 extern void fn_8004FF58(void);
 extern void fn_80063764(void);
-extern void fn_80063D3C(void);
+extern void magic_castSpellCircle(void);
 extern void boss_recordDamage(void);
 extern void fn_8006FEBC(void);
 extern void fn_80080048(void);
@@ -858,7 +858,7 @@ lbl_fn_8008CD60_00000ADC:
     lfs f1, lbl_80880C08
     stfs f0, 0x40(r1)
     lfs f2, 0x98(r31)
-    bl fn_80063D3C
+    bl magic_castSpellCircle
     lwz r0, 0x1c(r26)
     cmpwi r0, 0x0
     blt lbl_fn_8008CD60_00000B80
@@ -1054,7 +1054,7 @@ lbl_fn_8008CD60_00000DA8:
     fmuls f1, f0, f17
     stfs f1, 0x64(r1)
     lfs f2, 0x98(r31)
-    bl fn_80063D3C
+    bl magic_castSpellCircle
 lbl_fn_8008CD60_00000E08:
     addi r11, r1, 0x1a0
     psq_l f31, 0x288(r1), 0, 0

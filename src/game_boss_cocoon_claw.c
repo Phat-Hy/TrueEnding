@@ -3,7 +3,7 @@
 
 /* External function declarations */
 extern void collision_queryGeometry(void);
-extern void fn_80063D3C(void);
+extern void magic_castSpellCircle(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -548,7 +548,7 @@ lbl_fn_80464608_00000634:
     lwz r3, lbl_8087EEB0
     fadds f1, f3, f0
     lfs f2, lbl_80886D60
-    bl fn_80063D3C
+    bl magic_castSpellCircle
 lbl_fn_80464608_000006C0:
     lwz r0, 0x144(r1)
     psq_l f31, 0x138(r1), 0, 0

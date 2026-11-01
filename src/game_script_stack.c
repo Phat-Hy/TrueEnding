@@ -16,13 +16,13 @@ extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void wcs_vformat(void);
-extern void fn_800EB7A0(void);
-extern void fn_800EE360(void);
+extern void sound_playSpatialEffect(void);
+extern void camera_updateTargetMode(void);
 extern void system_getNextSequenceId(void);
 extern void fn_80105BD8(void);
-extern void fn_80109828(void);
+extern void hurtbox_dispatchHitEvent(void);
 extern void fn_8010CB2C(void);
-extern void fn_8012D8B8(void);
+extern void enemy_updateAnimTimer(void);
 extern void actor_testBitFlag(void);
 extern void boss_updatePhaseState(void);
 extern void quest_evaluateConditions(void);
@@ -346,7 +346,7 @@ asm void fn_80246508(void)
     cmpwi r0, 0x2
     beq lbl_fn_80246508_00000334
     mr r3, r31
-    bl fn_800EE360
+    bl camera_updateTargetMode
 lbl_fn_80246508_00000334:
     lwz r0, 0x24(r1)
     psq_l f31, 0x18(r1), 0, 0
@@ -797,7 +797,7 @@ lbl_fn_80246914_00000994:
     psq_st f1, 0x0(r31), 0, 0
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x15b8(r30)
-    bl fn_800EB7A0
+    bl sound_playSpatialEffect
     lwz r0, 0x124(r1)
     psq_l f31, 0x118(r1), 0, 0
     lfd f31, 0x110(r1)
@@ -916,7 +916,7 @@ lbl_fn_80246C30_00000B34:
     stw r0, 0x12a4(r25)
 lbl_fn_80246C30_00000B74:
     addi r3, r25, 0x7d4
-    bl fn_8012D8B8
+    bl enemy_updateAnimTimer
     stw r27, 0x58c(r25)
     mr r3, r25
     li r4, 0x0
@@ -1416,7 +1416,7 @@ lbl_fn_80247258_0000126C:
     stw r0, 0x12a4(r20)
 lbl_fn_80247258_000012A4:
     addi r3, r20, 0x7d4
-    bl fn_8012D8B8
+    bl enemy_updateAnimTimer
     stw r15, 0x9f8(r20)
     mr r3, r20
     li r4, 0x0
@@ -1498,7 +1498,7 @@ lbl_fn_80247258_000013C0:
     bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0xa8
-    bl fn_80109828
+    bl hurtbox_dispatchHitEvent
 lbl_fn_80247258_000013E0:
     addi r11, r1, 0x190
     psq_l f31, 0x1f8(r1), 0, 0

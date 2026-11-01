@@ -22,7 +22,7 @@ extern void fn_80055C40(void);
 extern void mission_updateStub(void);
 extern void fn_80057A68(void);
 extern void fn_80057A78(void);
-extern void fn_80063D3C(void);
+extern void magic_castSpellCircle(void);
 extern void fn_8006471C(void);
 extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
@@ -607,7 +607,7 @@ asm void atn_ColliSphere_testBox(void)
     lfs f1, 0x48(r6)
     subi r5, r5, 0x100
     lfs f2, lbl_80880960
-    b fn_80063D3C
+    b magic_castSpellCircle
 }
 
 asm void atn_ColliSphere_getAABB(void)

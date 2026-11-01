@@ -20,7 +20,7 @@ extern void fn_80107A68(void);
 extern void fn_80107A78(void);
 extern void fn_80107FD8(void);
 extern void fn_80108080(void);
-extern void fn_80109828(void);
+extern void hurtbox_dispatchHitEvent(void);
 extern void fn_8012476C(void);
 extern void fn_8013310C(void);
 extern void fn_80133130(void);
@@ -197,7 +197,7 @@ lbl_fn_8018FF6C_000000EC:
     bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x10
-    bl fn_80109828
+    bl hurtbox_dispatchHitEvent
     lwz r3, 0x4(r31)
     li r0, 0x1
     lfs f0, lbl_80881F7C

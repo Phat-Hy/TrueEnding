@@ -27,7 +27,7 @@ extern void system_getNextSequenceId(void);
 extern void viewport_updateCulling(void);
 extern void clip_calculateFrustum(void);
 extern void fn_80108C10(void);
-extern void fn_80109828(void);
+extern void hurtbox_dispatchHitEvent(void);
 extern void fn_801125F8(void);
 extern void equip_getGlobalManager(void);
 extern void magic_getOffset6C(void);
@@ -230,7 +230,7 @@ lbl_fn_8028C834_00000154:
     bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x30
-    bl fn_80109828
+    bl hurtbox_dispatchHitEvent
     lis r4, lbl_80745314@ha
     addi r3, r31, 0xb0
     addi r4, r4, lbl_80745314@l

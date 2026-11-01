@@ -23,7 +23,7 @@ extern void fn_80124B60(void);
 extern void fn_8016E4C4(void);
 extern void world_getGlobalFlag(void);
 extern void kpad_getClampData(void);
-extern void fn_80375184(void);
+extern void kpad_testActiveFlags(void);
 extern void fn_803761FC(void);
 extern void fn_8037D4C0(void);
 extern void fn_803AC230(void);
@@ -1817,7 +1817,7 @@ lbl_fn_803CDF84_000016AC:
     bne lbl_fn_803CDF84_000016D4
     b lbl_fn_803CDF84_00001760
 lbl_fn_803CDF84_000016D4:
-    bl fn_80375184
+    bl kpad_testActiveFlags
     cmpwi r3, 0x0
     beq lbl_fn_803CDF84_00001760
     lwz r3, lbl_8087F430

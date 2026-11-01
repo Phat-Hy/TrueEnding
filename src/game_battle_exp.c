@@ -23,7 +23,7 @@ extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
 extern void kpad_getClampData(void);
-extern void fn_80375184(void);
+extern void kpad_testActiveFlags(void);
 extern void fn_80376150(void);
 extern void fn_803CC718(void);
 extern void PSMTXRotRad(void);
@@ -1374,7 +1374,7 @@ lbl_fn_80176E30_000011D0:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_80176E30_00001234
-    bl fn_80375184
+    bl kpad_testActiveFlags
     cmpwi r3, 0x0
     beq lbl_fn_80176E30_00001234
     lwz r3, lbl_8087F048

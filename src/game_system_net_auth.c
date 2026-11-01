@@ -8,7 +8,7 @@ extern void _savegpr_14(void);
 extern void _savegpr_27(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Task_setActive(void);
-extern void fn_8012D8B8(void);
+extern void enemy_updateAnimTimer(void);
 extern void quest_updateFlow(void);
 extern void fn_80154654(void);
 extern void actor_setState(void);
@@ -641,7 +641,7 @@ lbl_fn_803972A8_000007B8:
     cmpwi r23, 0x0
     beq lbl_fn_803972A8_00000810
     addi r3, r22, 0x7d4
-    bl fn_8012D8B8
+    bl enemy_updateAnimTimer
     lwz r0, 0x954(r22)
     mr r3, r22
     stw r0, 0x9f8(r22)
@@ -1322,7 +1322,7 @@ lbl_fn_80397BEC_000010FC:
     cmpwi r23, 0x0
     beq lbl_fn_80397BEC_00001154
     addi r3, r22, 0x7d4
-    bl fn_8012D8B8
+    bl enemy_updateAnimTimer
     lwz r0, 0x954(r22)
     mr r3, r22
     stw r0, 0x9f8(r22)

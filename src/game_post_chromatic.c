@@ -10,7 +10,7 @@ extern void mission_updateStub(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
-extern void fn_80063D3C(void);
+extern void magic_castSpellCircle(void);
 extern void boss_initActionStream(void);
 extern void fn_8006CA80(void);
 extern void route_createSegment(void);
@@ -28,7 +28,7 @@ extern void atn_Task_setActive(void);
 extern void fn_800D8BB4(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
-extern void fn_800EB7A0(void);
+extern void sound_playSpatialEffect(void);
 extern void fn_800EC254(void);
 extern void fn_800EC2C4(void);
 extern void fn_800EC440(void);
@@ -39,7 +39,7 @@ extern void fn_800ED42C(void);
 extern void fn_800ED4D8(void);
 extern void fn_800ED4E0(void);
 extern void fn_800EDFE8(void);
-extern void fn_800EE360(void);
+extern void camera_updateTargetMode(void);
 extern void fn_800F52F0(void);
 extern void system_getNextSequenceId(void);
 extern void viewport_updateCulling(void);
@@ -391,7 +391,7 @@ asm void fn_802CCE94(void)
     cmpwi r0, 0x1e
     bne lbl_fn_802CCE94_0000037C
     mr r3, r31
-    bl fn_800EB7A0
+    bl sound_playSpatialEffect
     b lbl_fn_802CCE94_00000400
 lbl_fn_802CCE94_0000037C:
     cmpwi r0, 0xf
@@ -439,7 +439,7 @@ lbl_fn_802CCE94_00000410:
     stw r0, 0x12a4(r31)
     bl battle_awardExp
     mr r3, r31
-    bl fn_800EE360
+    bl camera_updateTargetMode
     b lbl_fn_802CCE94_00000438
 lbl_fn_802CCE94_00000430:
     li r0, 0x3c
@@ -1453,7 +1453,7 @@ lbl_fn_802CD73C_000012AC:
     lwz r3, lbl_8087EEB0
     fadds f1, f3, f0
     lfs f2, lbl_808844E8
-    bl fn_80063D3C
+    bl magic_castSpellCircle
     b lbl_fn_802CD73C_00001478
 lbl_fn_802CD73C_000012E4:
     cmpwi r0, 0x3c

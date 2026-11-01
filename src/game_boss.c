@@ -117,7 +117,7 @@ void fn_8006AD24(void);
 void fn_8006AF38(void);
 void boss_initActionStream(void);
 void fn_8006B0C8(void);
-void fn_8006B174(void);
+void boss_decodePhaseBitfield(void);
 void fn_8006B2D8(void);
 void fn_8006B404(void);
 void fn_8006B46C(void);
@@ -2787,7 +2787,7 @@ lbl_fn_8006B0C8_000023BC:
     b fn_80069BF4
 }
 
-asm void fn_8006B174(void)
+asm void boss_decodePhaseBitfield(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -2807,60 +2807,60 @@ asm void fn_8006B174(void)
     srwi r11, r0, 5
     cntlzw r0, r11
     srwi r6, r0, 5
-    b lbl_fn_8006B174_00002460
-lbl_fn_8006B174_0000240C:
+    b lbl_boss_decodePhaseBitfield_00002460
+lbl_boss_decodePhaseBitfield_0000240C:
     cmpwi r6, 0x0
-    beq lbl_fn_8006B174_00002420
+    beq lbl_boss_decodePhaseBitfield_00002420
     lbz r0, 0x0(r4)
     clrlwi r5, r0, 25
-    b lbl_fn_8006B174_00002424
-lbl_fn_8006B174_00002420:
+    b lbl_boss_decodePhaseBitfield_00002424
+lbl_boss_decodePhaseBitfield_00002420:
     lwz r5, 0x4(r4)
-lbl_fn_8006B174_00002424:
+lbl_boss_decodePhaseBitfield_00002424:
     cmpwi r6, 0x0
     subi r0, r5, 0x1
     subf r7, r8, r0
-    beq lbl_fn_8006B174_0000243C
+    beq lbl_boss_decodePhaseBitfield_0000243C
     mr r5, r9
-    b lbl_fn_8006B174_00002440
-lbl_fn_8006B174_0000243C:
+    b lbl_boss_decodePhaseBitfield_00002440
+lbl_boss_decodePhaseBitfield_0000243C:
     lwz r5, 0x8(r4)
-lbl_fn_8006B174_00002440:
+lbl_boss_decodePhaseBitfield_00002440:
     lbzx r0, r5, r7
     extsb r0, r0
     cmpwi r0, 0x5c
-    beq lbl_fn_8006B174_00002484
+    beq lbl_boss_decodePhaseBitfield_00002484
     cmpwi r0, 0x2f
-    bne lbl_fn_8006B174_0000245C
-    b lbl_fn_8006B174_00002484
-lbl_fn_8006B174_0000245C:
+    bne lbl_boss_decodePhaseBitfield_0000245C
+    b lbl_boss_decodePhaseBitfield_00002484
+lbl_boss_decodePhaseBitfield_0000245C:
     addi r8, r8, 0x1
-lbl_fn_8006B174_00002460:
+lbl_boss_decodePhaseBitfield_00002460:
     cmpwi r11, 0x0
-    beq lbl_fn_8006B174_00002470
+    beq lbl_boss_decodePhaseBitfield_00002470
     lwz r0, 0x4(r4)
-    b lbl_fn_8006B174_00002478
-lbl_fn_8006B174_00002470:
+    b lbl_boss_decodePhaseBitfield_00002478
+lbl_boss_decodePhaseBitfield_00002470:
     lbz r0, 0x0(r4)
     clrlwi r0, r0, 25
-lbl_fn_8006B174_00002478:
+lbl_boss_decodePhaseBitfield_00002478:
     cmplw r8, r0
-    blt lbl_fn_8006B174_0000240C
+    blt lbl_boss_decodePhaseBitfield_0000240C
     li r7, -0x1
-lbl_fn_8006B174_00002484:
+lbl_boss_decodePhaseBitfield_00002484:
     addis r0, r7, 0x1
     cmplwi r0, 0xffff
-    bne lbl_fn_8006B174_000024FC
+    bne lbl_boss_decodePhaseBitfield_000024FC
     cmpwi r10, 0x0
-    bne lbl_fn_8006B174_000024B4
+    bne lbl_boss_decodePhaseBitfield_000024B4
     lwz r5, 0x0(r4)
     lwz r0, 0x4(r4)
     stw r0, 0x4(r3)
     stw r5, 0x0(r3)
     lwz r0, 0x8(r4)
     stw r0, 0x8(r3)
-    b lbl_fn_8006B174_00002510
-lbl_fn_8006B174_000024B4:
+    b lbl_boss_decodePhaseBitfield_00002510
+lbl_boss_decodePhaseBitfield_000024B4:
     li r0, 0x0
     stw r0, 0x0(r3)
     stw r0, 0x4(r3)
@@ -2878,14 +2878,14 @@ lbl_fn_8006B174_000024B4:
     lwz r0, 0x4(r31)
     add r7, r6, r0
     bl actor_dispatchMessage
-    b lbl_fn_8006B174_00002510
-lbl_fn_8006B174_000024FC:
+    b lbl_boss_decodePhaseBitfield_00002510
+lbl_boss_decodePhaseBitfield_000024FC:
     mr r3, r30
     mr r4, r31
     addi r5, r7, 0x1
     li r6, -0x1
     bl fn_80069BF4
-lbl_fn_8006B174_00002510:
+lbl_boss_decodePhaseBitfield_00002510:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)

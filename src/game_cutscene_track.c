@@ -12,7 +12,7 @@ extern void clip_calculateFrustum(void);
 extern void quest_evaluateConditions(void);
 extern void actor_setState(void);
 extern void battle_updateTargetAggro(void);
-extern void fn_80178208(void);
+extern void battle_generateLootDrops(void);
 extern void fn_80197528(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
@@ -1162,7 +1162,7 @@ lbl_fn_80327A64_00000F04:
     mr r4, r3
 lbl_fn_80327A64_00000F88:
     lwz r3, 0x1598(r29)
-    bl fn_80178208
+    bl battle_generateLootDrops
 lbl_fn_80327A64_00000F90:
     lwz r0, 0x134(r1)
     psq_l f31, 0x128(r1), 0, 0

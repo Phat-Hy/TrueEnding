@@ -8,7 +8,7 @@ extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void atn_Task_setActive(void);
-extern void fn_800EE360(void);
+extern void camera_updateTargetMode(void);
 extern void system_getNextSequenceId(void);
 extern void viewport_updateCulling(void);
 extern void scissor_clipFrustum(void);
@@ -180,7 +180,7 @@ lbl_fn_802604E0_000000E0:
     stfs f0, 0x2e8(r31)
     bl atn_Task_setActive
     mr r3, r31
-    bl fn_800EE360
+    bl camera_updateTargetMode
     b lbl_fn_802604E0_000009A8
 lbl_fn_802604E0_00000148:
     mr r3, r31
@@ -686,7 +686,7 @@ lbl_fn_802604E0_0000089C:
     stfs f0, 0x2e8(r31)
     bl atn_Task_setActive
     mr r3, r31
-    bl fn_800EE360
+    bl camera_updateTargetMode
     b lbl_fn_802604E0_00000920
 lbl_fn_802604E0_00000904:
     mr r3, r31

@@ -29,7 +29,7 @@ extern void fn_8016E4C4(void);
 extern void fn_801781B0(void);
 extern void task_findEntryById(void);
 extern void fn_80310314(void);
-extern void fn_80375184(void);
+extern void kpad_testActiveFlags(void);
 extern void chest_spawnLoot(void);
 extern void fn_8044D6AC(void);
 extern void fn_805A40BC(void);
@@ -99,7 +99,7 @@ asm void fn_80311BB8(void)
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_80311BB8_00000068
-    bl fn_80375184
+    bl kpad_testActiveFlags
     cmpwi r3, 0x0
     bne lbl_fn_80311BB8_00000068
     lwz r0, 0x58c(r27)
@@ -824,7 +824,7 @@ lbl_fn_803123D0_00000A6C:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_803123D0_00001300
-    bl fn_80375184
+    bl kpad_testActiveFlags
     cmpwi r3, 0x0
     beq lbl_fn_803123D0_00001300
     lwz r3, 0x54c(r29)

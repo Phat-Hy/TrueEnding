@@ -8,7 +8,7 @@ extern void system_getNextSequenceId(void);
 extern void actor_setState(void);
 extern void fn_80206B14(void);
 extern void assert_generateId(void);
-extern void fn_8020ED84(void);
+extern void time_wrapMilliseconds(void);
 extern void random_generateValue(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
@@ -1956,7 +1956,7 @@ lbl_fn_80351AB8_00001BE4:
 lbl_fn_80351AB8_00001BF8:
     lwz r4, 0x0(r31)
     mr r3, r29
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
     cmpwi r3, 0x0
     beq lbl_fn_80351AB8_00001C34
     bl random_generateValue

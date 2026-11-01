@@ -22,7 +22,7 @@ extern void fn_800A6F7C(void);
 extern void fn_800A6F88(void);
 extern void fn_800A6FF0(void);
 extern void str_skipWhitespace(void);
-extern void fn_8020ED84(void);
+extern void time_wrapMilliseconds(void);
 extern void fn_8046DC5C(void);
 extern void fn_8046DD20(void);
 extern void strcmp(void);
@@ -123,7 +123,7 @@ asm void fn_8020EFEC(void)
     mulli r0, r0, 0x3e8
     subf r3, r3, r8
     add r4, r4, r0
-    b fn_8020ED84
+    b time_wrapMilliseconds
 }
 
 asm void fn_8020F064(void)

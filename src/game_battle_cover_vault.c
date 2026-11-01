@@ -13,7 +13,7 @@ extern void fn_800588FC(void);
 extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
-extern void fn_80063D3C(void);
+extern void magic_castSpellCircle(void);
 extern void mem_alloc(void);
 extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
@@ -28,7 +28,7 @@ extern void fn_8011F91C(void);
 extern void skill_findNodeById(void);
 extern void fn_8012B3E8(void);
 extern void fn_8012B988(void);
-extern void fn_8012D8B8(void);
+extern void enemy_updateAnimTimer(void);
 extern void quest_updateFlow(void);
 extern void equip_applyToCharacter(void);
 extern void fn_801644D4(void);
@@ -421,7 +421,7 @@ lbl_fn_803F86E0_0000045C:
     lfs f1, lbl_80886020
     li r5, -0x100
     lfs f2, lbl_80886018
-    bl fn_80063D3C
+    bl magic_castSpellCircle
 lbl_fn_803F86E0_000004A8:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
@@ -1766,7 +1766,7 @@ lbl_fn_803F9624_000016EC:
 lbl_fn_803F9624_0000171C:
     lwz r3, 0xf8(r30)
     addi r3, r3, 0x7d4
-    bl fn_8012D8B8
+    bl enemy_updateAnimTimer
     lwz r7, 0xf8(r30)
     li r0, 0x0
     li r4, 0x0

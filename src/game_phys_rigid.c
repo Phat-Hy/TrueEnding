@@ -35,8 +35,8 @@ extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
 extern void world_getGlobalFlag(void);
 extern void kpad_getClampData(void);
-extern void fn_803750E4(void);
-extern void fn_80375184(void);
+extern void kpad_validateButtonIndex(void);
+extern void kpad_testActiveFlags(void);
 extern void fn_80376210(void);
 extern void fn_803C1884(void);
 extern void fn_8054E100(void);
@@ -109,7 +109,7 @@ asm void fn_80109F7C(void)
     cmpwi r0, 0x0
     beq lbl_fn_80109F7C_00000050
     mr r3, r4
-    bl fn_80375184
+    bl kpad_testActiveFlags
     cmpwi r3, 0x0
     bne lbl_fn_80109F7C_00000364
 lbl_fn_80109F7C_00000050:
@@ -692,7 +692,7 @@ lbl_fn_8010A4A8_00000840:
     blt lbl_fn_8010A4A8_0000088C
     lwz r3, lbl_8087F430
     li r4, 0xb4
-    bl fn_803750E4
+    bl kpad_validateButtonIndex
 lbl_fn_8010A4A8_0000088C:
     addi r11, r1, 0x100
     psq_l f31, 0x108(r1), 0, 0
@@ -1226,7 +1226,7 @@ asm void fn_8010AEF4(void)
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_8010AEF4_000011A0
-    bl fn_80375184
+    bl kpad_testActiveFlags
     cmpwi r3, 0x0
     beq lbl_fn_8010AEF4_000011A0
     addis r3, r31, 0x4

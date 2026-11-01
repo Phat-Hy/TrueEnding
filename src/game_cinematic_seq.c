@@ -38,7 +38,7 @@ extern void fn_8015E4B0(void);
 extern void fn_80168F3C(void);
 extern void fn_8016D74C(void);
 extern void actor_setState(void);
-extern void fn_80178208(void);
+extern void battle_generateLootDrops(void);
 extern void fn_8017BC58(void);
 extern void fn_8018E438(void);
 extern void task_findEntryById(void);
@@ -1232,7 +1232,7 @@ lbl_fn_80335788_00000E4C:
     mr r4, r3
 lbl_fn_80335788_00000F10:
     mr r3, r30
-    bl fn_80178208
+    bl battle_generateLootDrops
     lfs f0, lbl_808851BC
     stfs f0, 0x2e4(r30)
 lbl_fn_80335788_00000F20:
@@ -1420,7 +1420,7 @@ asm void fn_80335988(void)
     mr r4, r3
 lbl_fn_80335988_000011C8:
     mr r3, r31
-    bl fn_80178208
+    bl battle_generateLootDrops
     b lbl_fn_80335988_000011EC
 lbl_fn_80335988_000011D4:
     lwz r5, 0x14e4(r31)

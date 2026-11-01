@@ -43,7 +43,7 @@ extern void fn_8010F6FC(void);
 extern void fn_80129A48(void);
 extern void fn_80129A6C(void);
 extern void fn_8012A1B8(void);
-extern void fn_8012D8B8(void);
+extern void enemy_updateAnimTimer(void);
 extern void fn_801370B8(void);
 extern void fn_80139F24(void);
 extern void fn_80139F3C(void);
@@ -663,7 +663,7 @@ lbl_fn_803729B4_00000694:
     lwz r26, 0x0(r3)
     mr r3, r26
     bl fn_800F52F0
-    bl fn_8012D8B8
+    bl enemy_updateAnimTimer
     mr r3, r26
     bl battle_updateActorStatus
     mr r3, r26

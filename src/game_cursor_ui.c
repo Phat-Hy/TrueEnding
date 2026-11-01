@@ -7,7 +7,7 @@ extern void dtor_80084684(void);
 extern void actor_dispatchMessage(void);
 extern void talk_formatQuotedString(void);
 extern void fn_800638B0(void);
-extern void fn_80063D3C(void);
+extern void magic_castSpellCircle(void);
 extern void dungeon_initGlobalContext(void);
 extern void fn_800839EC(void);
 extern void mem_alloc(void);
@@ -551,7 +551,7 @@ lbl_fn_800A8740_000005B0:
     stfs f8, 0xa4(r1)
     stfs f7, 0xa8(r1)
     stfs f0, 0xac(r1)
-    bl fn_80063D3C
+    bl magic_castSpellCircle
     lfs f0, 0x2c(r29)
     addi r4, r1, 0x98
     lfs f7, 0x1c(r29)
@@ -563,7 +563,7 @@ lbl_fn_800A8740_000005B0:
     lfs f1, lbl_80880CE8
     stfs f0, 0xa0(r1)
     lfs f2, lbl_80880CD4
-    bl fn_80063D3C
+    bl magic_castSpellCircle
     lfs f0, lbl_80880CD4
     addi r4, r1, 0xb0
     lfs f7, lbl_80880CD8

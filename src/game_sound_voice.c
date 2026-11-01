@@ -42,14 +42,14 @@ extern void fn_802091E8(void);
 extern void fn_8020924C(void);
 extern void fn_8020BCEC(void);
 extern void fn_8020BD14(void);
-extern void fn_8020ED84(void);
+extern void time_wrapMilliseconds(void);
 extern void fn_8020EF4C(void);
 extern void random_generateValue(void);
 extern void event_findEntryById(void);
 extern void task_mapIdToQueue(void);
 extern void world_getGlobalFlag(void);
 extern void world_setGlobalFlag(void);
-extern void fn_803750E4(void);
+extern void kpad_validateButtonIndex(void);
 extern void fn_804444E8(void);
 extern void fn_8044493C(void);
 extern void fn_804A3C24(void);
@@ -1208,7 +1208,7 @@ lbl_fn_801D80BC_00000F28:
     cmpwi r3, 0x0
     beq lbl_fn_801D80BC_000011EC
     li r4, 0x159
-    bl fn_803750E4
+    bl kpad_validateButtonIndex
     b lbl_fn_801D80BC_000011EC
 lbl_fn_801D80BC_00000F9C:
     addi r3, r1, 0x24
@@ -1269,7 +1269,7 @@ lbl_fn_801D80BC_00001054:
     cmpwi r3, 0x0
     beq lbl_fn_801D80BC_000011EC
     li r4, 0x159
-    bl fn_803750E4
+    bl kpad_validateButtonIndex
     b lbl_fn_801D80BC_000011EC
 lbl_fn_801D80BC_00001084:
     mr r3, r31
@@ -1284,7 +1284,7 @@ lbl_fn_801D80BC_00001084:
     bne lbl_fn_801D80BC_000010E0
     lwz r4, -0x7d70(r3)
     li r3, 0x0
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
     bl fn_8020EF4C
     cmpwi r3, 0x0
     beq lbl_fn_801D80BC_000010E0
@@ -1464,7 +1464,7 @@ lbl_fn_801D8560_00001334:
     bne lbl_fn_801D8560_000013A0
     lwz r4, -0x7d70(r3)
     li r3, 0x0
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
     bl fn_8020EF4C
     cmpwi r3, 0x0
     beq lbl_fn_801D8560_000013A0

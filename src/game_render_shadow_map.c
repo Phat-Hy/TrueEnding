@@ -11,7 +11,7 @@ extern void _savegpr_27(void);
 extern void fn_8004D314(void);
 extern void collision_testLineSegment(void);
 extern void fn_800638B0(void);
-extern void fn_80063D3C(void);
+extern void magic_castSpellCircle(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -853,7 +853,7 @@ lbl_fn_802B0D90_00000AA8:
     add r4, r4, r29
     lfs f2, lbl_80883F40
     subi r5, r28, 0x1
-    bl fn_80063D3C
+    bl magic_castSpellCircle
     lfs f3, 0x88(r1)
     mr r4, r25
     lfs f0, 0x7c(r1)
@@ -971,13 +971,13 @@ lbl_fn_802B0D90_00000BB8:
     lfs f1, lbl_80883F74
     mr r4, r24
     li r5, -0x100
-    bl fn_80063D3C
+    bl magic_castSpellCircle
     lwz r3, lbl_8087EEB0
     mr r4, r25
     lfs f1, lbl_80883F74
     li r5, -0x5600
     lfs f2, lbl_80883F40
-    bl fn_80063D3C
+    bl magic_castSpellCircle
     lis r29, 0xff01
     lwz r3, lbl_8087EEB0
     lfs f1, lbl_80883F74
@@ -1033,7 +1033,7 @@ lbl_fn_802B0D90_00000D84:
     addi r4, r30, 0x1ac4
     lfs f2, lbl_80883F40
     addi r5, r5, 0x44aa
-    bl fn_80063D3C
+    bl magic_castSpellCircle
     b lbl_fn_802B0D90_00000E38
 lbl_fn_802B0D90_00000E20:
     lwz r3, lbl_8087EEB0
@@ -1041,7 +1041,7 @@ lbl_fn_802B0D90_00000E20:
     lfs f1, lbl_80883FAC
     lis r5, 0xffaa
     lfs f2, lbl_80883F40
-    bl fn_80063D3C
+    bl magic_castSpellCircle
 lbl_fn_802B0D90_00000E38:
     psq_l f31, 0x1e8(r1), 0, 0
     mr r3, r23

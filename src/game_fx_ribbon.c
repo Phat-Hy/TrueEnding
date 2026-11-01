@@ -10,7 +10,7 @@ extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
 extern void vec3_sub(void);
 extern void fn_800133B0(void);
-extern void fn_80063D3C(void);
+extern void magic_castSpellCircle(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -847,7 +847,7 @@ lbl_fn_8028AFD8_00000A68:
     lfs f2, lbl_80883B28
     add r4, r4, r0
     addi r4, r4, 0x4
-    bl fn_80063D3C
+    bl magic_castSpellCircle
 lbl_fn_8028AFD8_00000AE0:
     addi r11, r1, 0x80
     psq_l f31, 0x88(r1), 0, 0

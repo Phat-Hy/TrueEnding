@@ -10,7 +10,7 @@ extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_80045694(void);
-extern void fn_8006B174(void);
+extern void boss_decodePhaseBitfield(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_getLayerTrack(void);
 extern void skin_playAnimationByName(void);
@@ -1546,7 +1546,7 @@ asm void fn_80106878(void)
     bl actor_dispatchMessage
     mr r4, r27
     addi r3, r1, 0xd4
-    bl fn_8006B174
+    bl boss_decodePhaseBitfield
     lwz r0, 0xc8(r1)
     srwi. r0, r0, 31
     beq lbl_fn_80106878_00001410

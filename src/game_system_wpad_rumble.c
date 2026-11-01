@@ -16,7 +16,7 @@ extern void bloom_processPasses(void);
 extern void fn_8011F8F4(void);
 extern void fn_8012B3E8(void);
 extern void fn_8012B988(void);
-extern void fn_8012D8B8(void);
+extern void enemy_updateAnimTimer(void);
 extern void fn_802085E0(void);
 extern void fn_8020924C(void);
 extern void fn_8020A81C(void);
@@ -1155,7 +1155,7 @@ lbl_fn_80367A40_00000E54:
     addi r3, r27, 0x7d4
     bl fn_8012B988
     addi r3, r27, 0x7d4
-    bl fn_8012D8B8
+    bl enemy_updateAnimTimer
 lbl_fn_80367A40_00000EA0:
     lwz r27, 0x14ac(r27)
 lbl_fn_80367A40_00000EA4:
@@ -1338,7 +1338,7 @@ lbl_fn_80367A40_00001024:
     addi r3, r26, 0x7d4
     bl fn_8012B988
     addi r3, r26, 0x7d4
-    bl fn_8012D8B8
+    bl enemy_updateAnimTimer
     lwz r0, lbl_8087F4F0
     addi r5, r26, 0x7f8
     lfs f0, 0x7d8(r26)
@@ -1572,7 +1572,7 @@ lbl_fn_80367A40_000014B0:
     addi r3, r26, 0x7d4
     bl fn_8012B988
     addi r3, r26, 0x7d4
-    bl fn_8012D8B8
+    bl enemy_updateAnimTimer
 lbl_fn_80367A40_000014C8:
     lwz r26, 0x14ac(r26)
 lbl_fn_80367A40_000014CC:

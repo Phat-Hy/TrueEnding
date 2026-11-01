@@ -5,7 +5,7 @@
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void morph_updateMesh(void);
-extern void fn_800EE360(void);
+extern void camera_updateTargetMode(void);
 extern void system_getNextSequenceId(void);
 extern void actor_setState(void);
 extern void battle_awardExp(void);
@@ -1053,7 +1053,7 @@ lbl_fn_80280EF8_00000E90:
     mr r3, r31
     bl battle_awardExp
     mr r3, r31
-    bl fn_800EE360
+    bl camera_updateTargetMode
     b lbl_fn_80280EF8_00000EB4
 lbl_fn_80280EF8_00000EAC:
     li r0, 0x1e

@@ -30,7 +30,7 @@ extern void fn_801C3458(void);
 extern void task_findEntryById(void);
 extern void world_getGlobalFlag(void);
 extern void kpad_getClampData(void);
-extern void fn_80375184(void);
+extern void kpad_testActiveFlags(void);
 extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
@@ -906,7 +906,7 @@ lbl_fn_801C951C_00000B20:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_801C951C_00000B7C
-    bl fn_80375184
+    bl kpad_testActiveFlags
     cmpwi r3, 0x0
     beq lbl_fn_801C951C_00000B7C
     lwz r5, 0x4(r29)

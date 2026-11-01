@@ -19,7 +19,7 @@ extern void equip_applyToCharacter(void);
 extern void debuff_clearStatus(void);
 extern void fn_8016DDB0(void);
 extern void actor_setState(void);
-extern void fn_80178208(void);
+extern void battle_generateLootDrops(void);
 extern void battle_updateActorStatus(void);
 extern void fn_80196428(void);
 extern void task_findEntryById(void);
@@ -1386,7 +1386,7 @@ lbl_fn_8045DF34_000012BC:
     mr r4, r3
 lbl_fn_8045DF34_00001314:
     mr r3, r28
-    bl fn_80178208
+    bl battle_generateLootDrops
     mr r3, r31
     bl fn_8045ECC4
     lwz r3, lbl_8087F490

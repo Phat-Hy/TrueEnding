@@ -11,7 +11,7 @@ extern void talk_setSpeakerName(void);
 extern void skill_calculateDamage(void);
 extern void fn_8006A004(void);
 extern void fn_8006AA20(void);
-extern void fn_8006B174(void);
+extern void boss_decodePhaseBitfield(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void atn_Task_constructor(void);
@@ -253,7 +253,7 @@ lbl_fn_80204690_000001DC:
     addi r4, r30, 0x8
     stw r0, 0x4c(r31)
     stb r0, 0x50(r31)
-    bl fn_8006B174
+    bl boss_decodePhaseBitfield
     lwz r0, 0x8(r1)
     srwi. r0, r0, 31
     bne lbl_fn_80204690_00000260

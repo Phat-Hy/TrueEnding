@@ -20,7 +20,7 @@ extern void fn_8021A918(void);
 extern void fn_8021A960(void);
 extern void fn_8021A984(void);
 extern void fn_8021A9A8(void);
-extern void fn_803750E4(void);
+extern void kpad_validateButtonIndex(void);
 extern void fn_8059A268(void);
 extern void fn_8059C088(void);
 extern void fn_8059C804(void);
@@ -73,7 +73,7 @@ void fn_80178078(void);
 void fn_80178088(void);
 void fn_80178164(void);
 void fn_801781B0(void);
-void fn_80178208(void);
+void battle_generateLootDrops(void);
 void fn_801784BC(void);
 void fn_80178668(void);
 void fn_80178864(void);
@@ -334,7 +334,7 @@ asm void fn_801781B0(void)
     blr
 }
 
-asm void fn_80178208(void)
+asm void battle_generateLootDrops(void)
 {
     nofralloc
     stwu r1, -0x60(r1)
@@ -349,10 +349,10 @@ asm void fn_80178208(void)
     mr r29, r3
     lwz r0, 0x55c(r3)
     cmpwi r0, 0x6
-    bne lbl_fn_80178208_00000408
+    bne lbl_battle_generateLootDrops_00000408
     lwz r0, 0xf80(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_80178208_000003B0
+    bne lbl_battle_generateLootDrops_000003B0
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x2c(r1)
@@ -360,8 +360,8 @@ asm void fn_80178208(void)
     lwz r0, 0x8(r5)
     stw r3, 0x30(r1)
     stw r0, 0x34(r1)
-    b lbl_fn_80178208_000003CC
-lbl_fn_80178208_000003B0:
+    b lbl_battle_generateLootDrops_000003CC
+lbl_battle_generateLootDrops_000003B0:
     addi r3, r31, 0x1cd4
     lwz r5, 0x1cd4(r31)
     lwz r4, 0x4(r3)
@@ -369,7 +369,7 @@ lbl_fn_80178208_000003B0:
     stw r5, 0x2c(r1)
     stw r4, 0x30(r1)
     stw r0, 0x34(r1)
-lbl_fn_80178208_000003CC:
+lbl_battle_generateLootDrops_000003CC:
     lwz r5, 0x2c(r1)
     addi r3, r1, 0x20
     lwz r4, 0x30(r1)
@@ -379,26 +379,26 @@ lbl_fn_80178208_000003CC:
     stw r0, 0x28(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_80178208_00000408
+    beq lbl_battle_generateLootDrops_00000408
     lwz r3, 0xf80(r29)
     lwz r12, 0x0(r3)
     lwz r12, 0x1c(r12)
     mtctr r12
     bctrl
-lbl_fn_80178208_00000408:
+lbl_battle_generateLootDrops_00000408:
     lwz r0, 0x55c(r29)
     cmpwi r0, 0x6
-    beq lbl_fn_80178208_000005BC
+    beq lbl_battle_generateLootDrops_000005BC
     cmpwi r0, 0x8
-    beq lbl_fn_80178208_00000420
+    beq lbl_battle_generateLootDrops_00000420
     stw r0, 0x564(r29)
-lbl_fn_80178208_00000420:
+lbl_battle_generateLootDrops_00000420:
     lwz r0, 0x55c(r29)
     cmpwi r0, 0x6
-    bne lbl_fn_80178208_000005BC
+    bne lbl_battle_generateLootDrops_000005BC
     lwz r0, 0xf80(r29)
     cmpwi r0, 0x0
-    bne lbl_fn_80178208_00000458
+    bne lbl_battle_generateLootDrops_00000458
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x38(r1)
@@ -406,8 +406,8 @@ lbl_fn_80178208_00000420:
     lwz r0, 0x8(r5)
     stw r3, 0x3c(r1)
     stw r0, 0x40(r1)
-    b lbl_fn_80178208_00000474
-lbl_fn_80178208_00000458:
+    b lbl_battle_generateLootDrops_00000474
+lbl_battle_generateLootDrops_00000458:
     addi r3, r31, 0x1ce0
     lwz r5, 0x1ce0(r31)
     lwz r4, 0x4(r3)
@@ -415,7 +415,7 @@ lbl_fn_80178208_00000458:
     stw r5, 0x38(r1)
     stw r4, 0x3c(r1)
     stw r0, 0x40(r1)
-lbl_fn_80178208_00000474:
+lbl_battle_generateLootDrops_00000474:
     lwz r5, 0x38(r1)
     addi r3, r1, 0x8
     lwz r4, 0x3c(r1)
@@ -425,26 +425,26 @@ lbl_fn_80178208_00000474:
     stw r0, 0x10(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_80178208_000004B0
+    beq lbl_battle_generateLootDrops_000004B0
     lwz r3, 0xf80(r29)
     lwz r12, 0x0(r3)
     lwz r12, 0x1c(r12)
     mtctr r12
     bctrl
-lbl_fn_80178208_000004B0:
+lbl_battle_generateLootDrops_000004B0:
     lwz r0, 0x55c(r29)
     cmpwi r0, 0x6
-    beq lbl_fn_80178208_0000058C
+    beq lbl_battle_generateLootDrops_0000058C
     cmpwi r0, 0x8
-    beq lbl_fn_80178208_000004C8
+    beq lbl_battle_generateLootDrops_000004C8
     stw r0, 0x564(r29)
-lbl_fn_80178208_000004C8:
+lbl_battle_generateLootDrops_000004C8:
     lwz r0, 0x55c(r29)
     cmpwi r0, 0x6
-    bne lbl_fn_80178208_0000058C
+    bne lbl_battle_generateLootDrops_0000058C
     lwz r0, 0xf80(r29)
     cmpwi r0, 0x0
-    bne lbl_fn_80178208_00000500
+    bne lbl_battle_generateLootDrops_00000500
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x44(r1)
@@ -452,8 +452,8 @@ lbl_fn_80178208_000004C8:
     lwz r0, 0x8(r5)
     stw r3, 0x48(r1)
     stw r0, 0x4c(r1)
-    b lbl_fn_80178208_0000051C
-lbl_fn_80178208_00000500:
+    b lbl_battle_generateLootDrops_0000051C
+lbl_battle_generateLootDrops_00000500:
     addi r3, r31, 0x1cec
     lwz r5, 0x1cec(r31)
     lwz r4, 0x4(r3)
@@ -461,7 +461,7 @@ lbl_fn_80178208_00000500:
     stw r5, 0x44(r1)
     stw r4, 0x48(r1)
     stw r0, 0x4c(r1)
-lbl_fn_80178208_0000051C:
+lbl_battle_generateLootDrops_0000051C:
     lwz r5, 0x44(r1)
     addi r3, r1, 0x14
     lwz r4, 0x48(r1)
@@ -471,13 +471,13 @@ lbl_fn_80178208_0000051C:
     stw r0, 0x1c(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_80178208_00000558
+    beq lbl_battle_generateLootDrops_00000558
     lwz r3, 0xf80(r29)
     lwz r12, 0x0(r3)
     lwz r12, 0x1c(r12)
     mtctr r12
     bctrl
-lbl_fn_80178208_00000558:
+lbl_battle_generateLootDrops_00000558:
     mr r3, r29
     li r4, 0x6
     bl actor_setState
@@ -485,38 +485,38 @@ lbl_fn_80178208_00000558:
     li r0, 0x0
     cmpwi r3, 0x0
     stw r0, 0xf80(r29)
-    beq lbl_fn_80178208_0000058C
+    beq lbl_battle_generateLootDrops_0000058C
     lwz r12, 0x0(r3)
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-lbl_fn_80178208_0000058C:
+lbl_battle_generateLootDrops_0000058C:
     lwz r3, 0xf80(r29)
     li r4, 0x6
     li r0, 0x0
     stw r4, 0x55c(r29)
     cmpwi r3, 0x0
     stw r0, 0xf80(r29)
-    beq lbl_fn_80178208_000005BC
+    beq lbl_battle_generateLootDrops_000005BC
     lwz r12, 0x0(r3)
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-lbl_fn_80178208_000005BC:
+lbl_battle_generateLootDrops_000005BC:
     lwz r3, 0xf80(r29)
     li r0, 0x6
     stw r0, 0x55c(r29)
     cmpwi r3, 0x0
     stw r30, 0xf80(r29)
-    beq lbl_fn_80178208_000005E8
+    beq lbl_battle_generateLootDrops_000005E8
     lwz r12, 0x0(r3)
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-lbl_fn_80178208_000005E8:
+lbl_battle_generateLootDrops_000005E8:
     lwz r0, 0x64(r1)
     lwz r31, 0x5c(r1)
     lwz r30, 0x58(r1)
@@ -2028,7 +2028,7 @@ lbl_fn_80179730_00001A58:
     lwz r3, lbl_8087F430
     rlwinm r31, r31, 0, 30, 26
     li r4, 0xe9
-    bl fn_803750E4
+    bl kpad_validateButtonIndex
 lbl_fn_80179730_00001A80:
     lwz r0, 0xac(r30)
     rlwinm r3, r0, 0, 9, 9

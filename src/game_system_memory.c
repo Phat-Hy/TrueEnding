@@ -17,7 +17,7 @@ extern void talk_setSpeakerName(void);
 extern void talk_parseDialogue(void);
 extern void fn_8005B8F8(void);
 extern void fn_8005B9AC(void);
-extern void fn_8006B174(void);
+extern void boss_decodePhaseBitfield(void);
 extern void fn_8006BA30(void);
 extern void fn_8006BA8C(void);
 extern void fn_8006BB6C(void);
@@ -1426,7 +1426,7 @@ asm void fn_802096A8(void)
     bl actor_dispatchMessage
     mr r4, r31
     addi r3, r1, 0x10
-    bl fn_8006B174
+    bl boss_decodePhaseBitfield
     lwz r0, 0x10(r1)
     srwi. r0, r0, 31
     bne lbl_fn_802096A8_0000117C
@@ -1510,7 +1510,7 @@ asm void fn_802097C4(void)
     bl actor_dispatchMessage
     mr r4, r31
     addi r3, r1, 0x10
-    bl fn_8006B174
+    bl boss_decodePhaseBitfield
     lwz r0, 0x10(r1)
     srwi. r0, r0, 31
     bne lbl_fn_802097C4_00001298

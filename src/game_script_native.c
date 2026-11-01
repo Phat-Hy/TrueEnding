@@ -11,7 +11,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void fn_800E8630(void);
-extern void fn_800EB7A0(void);
+extern void sound_playSpatialEffect(void);
 extern void system_getNextSequenceId(void);
 extern void scissor_clipFrustum(void);
 extern void enemy_updateCombatBehavior(void);
@@ -342,7 +342,7 @@ lbl_fn_80252C40_00000304:
     stfs f0, 0x2e8(r31)
     bl atn_Anim_setLayerAnimation
     mr r3, r31
-    bl fn_800EB7A0
+    bl sound_playSpatialEffect
     b lbl_fn_80252C40_00000468
 lbl_fn_80252C40_00000364:
     lwz r0, 0x14bc(r31)

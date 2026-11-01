@@ -16,13 +16,13 @@ extern void wcs_vformat(void);
 extern void system_getNextSequenceId(void);
 extern void viewport_updateCulling(void);
 extern void clip_calculateFrustum(void);
-extern void fn_80109828(void);
+extern void hurtbox_dispatchHitEvent(void);
 extern void fn_80139560(void);
 extern void quest_ctorRewardItem(void);
 extern void fn_8016D74C(void);
 extern void debuff_clearStatus(void);
 extern void actor_setState(void);
-extern void fn_80178208(void);
+extern void battle_generateLootDrops(void);
 extern void fn_801C02F4(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
@@ -1047,7 +1047,7 @@ lbl_fn_80258574_00000DD0:
     bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x68
-    bl fn_80109828
+    bl hurtbox_dispatchHitEvent
     mr r3, r31
     bl fn_802598DC
     lwz r4, 0x1510(r31)
@@ -1487,7 +1487,7 @@ lbl_fn_80258A50_00001418:
     mr r4, r3
 lbl_fn_80258A50_0000146C:
     mr r3, r20
-    bl fn_80178208
+    bl battle_generateLootDrops
     b lbl_fn_80258A50_00001488
 lbl_fn_80258A50_00001478:
     li r4, 0x6
@@ -1576,7 +1576,7 @@ asm void fn_80258F1C(void)
     mr r4, r3
 lbl_fn_80258F1C_000015B0:
     mr r3, r30
-    bl fn_80178208
+    bl battle_generateLootDrops
     b lbl_fn_80258F1C_000017F8
 lbl_fn_80258F1C_000015BC:
     lfs f4, 0x2e4(r30)

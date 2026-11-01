@@ -8,7 +8,7 @@ extern void actor_dispatchMessage(void);
 extern void atn_LH_Binary_destructor(void);
 extern void item_useConsumable(void);
 extern void skill_calculateDamage(void);
-extern void fn_80063D3C(void);
+extern void magic_castSpellCircle(void);
 extern void fn_8006AA20(void);
 extern void fn_8006B2D8(void);
 extern void fn_8006CA80(void);
@@ -1349,7 +1349,7 @@ asm void fn_8039328C(void)
     addi r4, r29, 0x8a4
     lfs f1, 0x8c(r5)
     li r5, -0x100
-    bl fn_80063D3C
+    bl magic_castSpellCircle
 lbl_fn_8039328C_000012C0:
     lwz r0, 0x124(r1)
     lwz r31, 0x11c(r1)

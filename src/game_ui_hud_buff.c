@@ -22,7 +22,7 @@ extern void str_findChar(void);
 extern void fn_8010C00C(void);
 extern void actor_spawnActorWithId(void);
 extern void fn_8012B988(void);
-extern void fn_8012D8B8(void);
+extern void enemy_updateAnimTimer(void);
 extern void fn_8013407C(void);
 extern void boss_updatePhaseState(void);
 extern void quest_updateFlow(void);
@@ -1189,7 +1189,7 @@ lbl_fn_801CD210_00000ECC:
     bne lbl_fn_801CD210_00000F08
 lbl_fn_801CD210_00000F00:
     addi r3, r4, 0x7d4
-    bl fn_8012D8B8
+    bl enemy_updateAnimTimer
 lbl_fn_801CD210_00000F08:
     addi r30, r30, 0xc
     addi r28, r28, 0x1

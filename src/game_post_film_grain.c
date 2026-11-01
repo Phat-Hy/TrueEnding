@@ -3,7 +3,7 @@
 
 /* External function declarations */
 extern void collision_queryGeometry(void);
-extern void fn_80063D3C(void);
+extern void magic_castSpellCircle(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -12,7 +12,7 @@ extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void fn_80105BD8(void);
 extern void fn_80108C10(void);
-extern void fn_80109828(void);
+extern void hurtbox_dispatchHitEvent(void);
 extern void enemy_updateCombatBehavior(void);
 extern void fn_8012DF7C(void);
 extern void npc_initScriptContext(void);
@@ -484,7 +484,7 @@ lbl_fn_802C9BF8_00000564:
     bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x1d0
-    bl fn_80109828
+    bl hurtbox_dispatchHitEvent
     lwz r0, 0x14c4(r31)
     cmpwi r0, 0x1
     bne lbl_fn_802C9BF8_000005C8
@@ -503,7 +503,7 @@ lbl_fn_802C9BF8_000005A8:
     bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x1d0
-    bl fn_80109828
+    bl hurtbox_dispatchHitEvent
     b lbl_fn_802C9BF8_00000600
 lbl_fn_802C9BF8_000005C8:
     lwz r4, lbl_8087F1E4
@@ -521,7 +521,7 @@ lbl_fn_802C9BF8_000005E4:
     bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x1d0
-    bl fn_80109828
+    bl hurtbox_dispatchHitEvent
 lbl_fn_802C9BF8_00000600:
     li r30, 0x0
     stw r30, 0x14b8(r31)
@@ -731,7 +731,7 @@ lbl_fn_802C9BF8_000008EC:
     bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x1d0
-    bl fn_80109828
+    bl hurtbox_dispatchHitEvent
     lfs f0, lbl_808843E8
     mr r3, r31
     stfs f0, 0xb0(r1)
@@ -792,7 +792,7 @@ lbl_fn_802C9BF8_000009C8:
     bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x1d0
-    bl fn_80109828
+    bl hurtbox_dispatchHitEvent
     mr r3, r31
     li r4, 0x6
     li r5, 0x0
@@ -827,7 +827,7 @@ lbl_fn_802C9BF8_00000A44:
     bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x1d0
-    bl fn_80109828
+    bl hurtbox_dispatchHitEvent
 lbl_fn_802C9BF8_00000A64:
     lwz r0, 0x14bc(r31)
     cmpwi r0, 0x2d
@@ -850,7 +850,7 @@ lbl_fn_802C9BF8_00000A94:
     bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0x1d0
-    bl fn_80109828
+    bl hurtbox_dispatchHitEvent
     li r0, 0x0
     stw r0, 0x14b8(r31)
     stw r0, 0x14bc(r31)
@@ -1069,7 +1069,7 @@ lbl_fn_802CA490_00000DC4:
     bl wcs_vformat
     lwz r3, lbl_8087F048
     addi r4, r1, 0xb0
-    bl fn_80109828
+    bl hurtbox_dispatchHitEvent
 lbl_fn_802CA490_00000DE0:
     li r0, 0x0
     stw r0, 0x14b8(r31)
@@ -1300,7 +1300,7 @@ lbl_fn_802CA490_00001120:
     addi r4, r31, 0x528
     lfs f2, lbl_808843E8
     lis r5, 0xffff
-    bl fn_80063D3C
+    bl magic_castSpellCircle
 lbl_fn_802CA490_00001150:
     lwz r0, 0x2d4(r1)
     psq_l f31, 0x2c8(r1), 0, 0
@@ -1773,7 +1773,7 @@ lbl_fn_802CA8C0_00001798:
     lfs f1, lbl_80884438
     stfs f0, 0x80(r1)
     lfs f2, lbl_808843E8
-    bl fn_80063D3C
+    bl magic_castSpellCircle
 lbl_fn_802CA8C0_00001834:
     lwz r0, 0x1d4(r1)
     psq_l f31, 0x1c8(r1), 0, 0

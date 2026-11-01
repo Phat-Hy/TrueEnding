@@ -7,7 +7,7 @@ extern void _savegpr_24(void);
 extern void menu_renderLayout(void);
 extern void fn_80050A1C(void);
 extern void skill_calcTrajectory(void);
-extern void fn_80063D3C(void);
+extern void magic_castSpellCircle(void);
 extern void script_executeOpcode(void);
 extern void fn_8006F2F0(void);
 extern void fn_8008CD60(void);
@@ -1500,7 +1500,7 @@ lbl_dialog_renderWindow_00001384:
     lfs f1, 0x620(r24)
     li r5, -0x100
     lfs f2, lbl_8088196C
-    bl fn_80063D3C
+    bl magic_castSpellCircle
     lfs f3, 0x198(r1)
     lfs f0, lbl_8088196C
     fcmpo cr0, f3, f0
@@ -2114,7 +2114,7 @@ lbl_dialog_renderWindow_00001CF0:
     psq_st f1, 0x0(r26), 0, 0
     lfs f1, 0x10(r6)
     stfs f1, 0x5c(r1)
-    bl fn_80063D3C
+    bl magic_castSpellCircle
     addi r27, r27, 0x1
     addi r25, r25, 0x14
 lbl_dialog_renderWindow_00001D2C:

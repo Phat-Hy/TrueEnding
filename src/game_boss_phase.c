@@ -56,7 +56,7 @@ extern void fn_801298EC(void);
 extern void fn_8012B3A8(void);
 extern void fn_8012B3E8(void);
 extern void fn_8012B988(void);
-extern void fn_8012D8B8(void);
+extern void enemy_updateAnimTimer(void);
 extern void fn_801352F8(void);
 extern void fn_80137E68(void);
 extern void fn_80137FC0(void);
@@ -1304,7 +1304,7 @@ lbl_boss_updatePhaseState_00001000:
     addi r3, r30, 0x7d4
     bl fn_8012B988
     addi r3, r30, 0x7d4
-    bl fn_8012D8B8
+    bl enemy_updateAnimTimer
     lwz r0, 0x954(r30)
     mr r3, r30
     stw r0, 0x9f8(r30)

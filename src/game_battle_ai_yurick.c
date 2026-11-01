@@ -40,7 +40,7 @@ extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_update(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
-extern void fn_803750E4(void);
+extern void kpad_validateButtonIndex(void);
 extern void fn_803CCA84(void);
 extern void task_createWorker(void);
 extern void task_destroyWorker(void);
@@ -690,7 +690,7 @@ lbl_fn_8043AAE0_00000778:
     cmpwi r3, 0x0
     beq lbl_fn_8043AAE0_000007D8
     li r4, 0x1bd
-    bl fn_803750E4
+    bl kpad_validateButtonIndex
 lbl_fn_8043AAE0_000007D8:
     lwz r3, 0x12a4(r29)
     extrwi. r0, r3, 1, 25

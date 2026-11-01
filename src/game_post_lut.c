@@ -17,7 +17,7 @@ extern void clip_calculateFrustum(void);
 extern void fn_800FDB20(void);
 extern void fn_80101434(void);
 extern void skill_findNodeById(void);
-extern void fn_8012D8B8(void);
+extern void enemy_updateAnimTimer(void);
 extern void quest_updateFlow(void);
 extern void equip_applyToCharacter(void);
 extern void fn_8015E4B0(void);
@@ -892,7 +892,7 @@ lbl_fn_802C6878_00000B6C:
     stw r0, 0x12a4(r30)
 lbl_fn_802C6878_00000BB0:
     addi r3, r30, 0x7d4
-    bl fn_8012D8B8
+    bl enemy_updateAnimTimer
     li r0, 0x0
     stw r0, 0x58c(r30)
     mr r3, r30

@@ -9,7 +9,7 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
-extern void fn_8006B174(void);
+extern void boss_decodePhaseBitfield(void);
 extern void fn_8006B2D8(void);
 extern void mem_alloc(void);
 extern void fn_8008B130(void);
@@ -147,7 +147,7 @@ lbl_fn_804A06B4_000000CC:
     bl actor_dispatchMessage
     mr r4, r24
     addi r3, r1, 0x70
-    bl fn_8006B174
+    bl boss_decodePhaseBitfield
     addi r3, r1, 0xa0
     addi r4, r1, 0x70
     bl fn_8006B2D8
@@ -199,7 +199,7 @@ lbl_fn_804A06B4_0000017C:
     bl actor_dispatchMessage
     mr r4, r30
     addi r3, r1, 0x58
-    bl fn_8006B174
+    bl boss_decodePhaseBitfield
     addi r3, r1, 0x94
     addi r4, r1, 0x58
     bl fn_8006B2D8
@@ -348,7 +348,7 @@ lbl_fn_804A06B4_00000388:
     bl actor_dispatchMessage
     mr r4, r28
     addi r3, r1, 0x40
-    bl fn_8006B174
+    bl boss_decodePhaseBitfield
     addi r3, r1, 0x88
     addi r4, r1, 0x40
     bl fn_8006B2D8
@@ -541,7 +541,7 @@ lbl_fn_804A0BCC_000005FC:
     bl actor_dispatchMessage
     mr r4, r30
     addi r3, r1, 0x30
-    bl fn_8006B174
+    bl boss_decodePhaseBitfield
     addi r3, r1, 0x54
     addi r4, r1, 0x30
     bl fn_8006B2D8
@@ -607,7 +607,7 @@ lbl_fn_804A0BCC_000006F8:
     bl actor_dispatchMessage
     mr r4, r29
     addi r3, r1, 0x18
-    bl fn_8006B174
+    bl boss_decodePhaseBitfield
     addi r3, r1, 0x48
     addi r4, r1, 0x18
     bl fn_8006B2D8

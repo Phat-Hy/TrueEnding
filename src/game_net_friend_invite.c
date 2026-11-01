@@ -44,7 +44,7 @@ extern void fn_801156BC(void);
 extern void magic_getOffset6C(void);
 extern void fn_8012B3E8(void);
 extern void fn_8012B988(void);
-extern void fn_8012D8B8(void);
+extern void enemy_updateAnimTimer(void);
 extern void fn_80139F4C(void);
 extern void fn_8013C504(void);
 extern void dialog_selectChoice(void);
@@ -55,7 +55,7 @@ extern void fn_80198C00(void);
 extern void fn_80206B14(void);
 extern void fn_8020A3E4(void);
 extern void fn_8020A81C(void);
-extern void fn_8020ED84(void);
+extern void time_wrapMilliseconds(void);
 extern void sound_initGlobalInstances(void);
 extern void res_Resource_destructor(void);
 extern void res_MsgHandle_unload(void);
@@ -3563,7 +3563,7 @@ lbl_fn_804D25D4_00002CC0:
     add r4, r3, r21
     mr r3, r25
     lwz r4, 0x108(r4)
-    bl fn_8020ED84
+    bl time_wrapMilliseconds
     mr r22, r3
     lwz r3, 0x0(r23)
     mr r4, r25
@@ -4064,7 +4064,7 @@ lbl_fn_804D25D4_00003418:
     bl fn_8012B988
     lwz r3, 0x0(r28)
     bl fn_800F52F0
-    bl fn_8012D8B8
+    bl enemy_updateAnimTimer
 lbl_fn_804D25D4_0000346C:
     lwz r3, 0x0(r28)
     bl fn_800F530C
@@ -4220,7 +4220,7 @@ lbl_fn_804D25D4_0000367C:
     bl fn_8012B988
     lwz r3, 0x0(r30)
     bl fn_800F52F0
-    bl fn_8012D8B8
+    bl enemy_updateAnimTimer
     lwz r3, 0x0(r30)
     bl fn_800F530C
     stw r27, 0xc0(r3)

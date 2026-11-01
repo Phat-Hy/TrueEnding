@@ -16,7 +16,7 @@ extern void bloom_processPasses(void);
 extern void str_findChar(void);
 extern void fn_800FDE60(void);
 extern void actor_findSpawnTemplate(void);
-extern void fn_8012D8B8(void);
+extern void enemy_updateAnimTimer(void);
 extern void fn_801446F0(void);
 extern void fn_8016E4C4(void);
 extern void fn_80176ACC(void);
@@ -2868,7 +2868,7 @@ asm void fn_805011D0(void)
     cmpwi r4, 0x0
     beq lbl_fn_805011D0_00001470
     addi r3, r4, 0x7d4
-    bl fn_8012D8B8
+    bl enemy_updateAnimTimer
     lwz r3, 0x0(r31)
     li r4, 0x0
     bl atn_Task_setActive

@@ -7,11 +7,11 @@ extern void mem_getAllocSize(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800EB7A0(void);
-extern void fn_800EE360(void);
+extern void sound_playSpatialEffect(void);
+extern void camera_updateTargetMode(void);
 extern void system_getNextSequenceId(void);
 extern void fn_801028E4(void);
-extern void fn_8012D8B8(void);
+extern void enemy_updateAnimTimer(void);
 extern void npc_initScriptContext(void);
 extern void npc_updateTalkInteraction(void);
 extern void quest_ctorRewardItem(void);
@@ -1487,7 +1487,7 @@ lbl_fn_802CF728_0000142C:
     bl fn_8017A300
 lbl_fn_802CF728_0000144C:
     addi r3, r29, 0x7d4
-    bl fn_8012D8B8
+    bl enemy_updateAnimTimer
     lwz r0, 0x954(r29)
     li r31, 0x0
     stw r0, 0x9f8(r29)
@@ -1535,7 +1535,7 @@ asm void fn_802CF9AC(void)
     cmpwi r0, 0x1e
     bne lbl_fn_802CF9AC_00001500
     mr r3, r31
-    bl fn_800EB7A0
+    bl sound_playSpatialEffect
     b lbl_fn_802CF9AC_00001598
 lbl_fn_802CF9AC_00001500:
     cmpwi r0, 0xf
@@ -1588,7 +1588,7 @@ lbl_fn_802CF9AC_000015A8:
     stw r0, 0x12a4(r31)
     bl battle_awardExp
     mr r3, r31
-    bl fn_800EE360
+    bl camera_updateTargetMode
 lbl_fn_802CF9AC_000015C4:
     lwz r0, 0x54(r1)
     psq_l f31, 0x48(r1), 0, 0

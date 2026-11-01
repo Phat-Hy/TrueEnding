@@ -14,7 +14,7 @@ extern void str_getData(void);
 extern void collision_testLineSegment(void);
 extern void mission_updateStub(void);
 extern void fn_80057A68(void);
-extern void fn_80063D3C(void);
+extern void magic_castSpellCircle(void);
 extern void boss_initActionStream(void);
 extern void fn_8006CA80(void);
 extern void route_findNextWaypoint(void);
@@ -735,7 +735,7 @@ lbl_fn_803441AC_00000784:
     stfs f0, 0x10(r1)
     lwz r6, 0x14d8(r27)
     lfs f1, 0x58(r6)
-    bl fn_80063D3C
+    bl magic_castSpellCircle
 lbl_fn_803441AC_0000086C:
     addi r28, r28, 0x1
     cmpwi r28, 0xb4

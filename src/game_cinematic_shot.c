@@ -25,7 +25,7 @@ extern void fn_80158CA4(void);
 extern void fn_8016E4C4(void);
 extern void actor_setState(void);
 extern void battle_awardExp(void);
-extern void fn_80178208(void);
+extern void battle_generateLootDrops(void);
 extern void actor_getMovementFlags(void);
 extern void fn_801AFAC0(void);
 extern void task_findEntryById(void);
@@ -2018,7 +2018,7 @@ lbl_fn_80336C8C_00001BA0:
 lbl_fn_80336C8C_00001C18:
     lwz r3, 0x14e4(r30)
     mr r4, r28
-    bl fn_80178208
+    bl battle_generateLootDrops
     lwz r3, 0x14e4(r30)
     lfs f0, 0x2e4(r30)
     stfs f0, 0x2e4(r3)

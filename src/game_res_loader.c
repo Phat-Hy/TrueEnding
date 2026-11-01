@@ -16,7 +16,7 @@ extern void actor_dispatchMessage(void);
 extern void sound_releaseChannel(void);
 extern void fn_80069BF4(void);
 extern void fn_8006AA20(void);
-extern void fn_8006B174(void);
+extern void boss_decodePhaseBitfield(void);
 extern void script_executeOpcode(void);
 extern void str_assignBuffer(void);
 extern void fn_8007A748(void);
@@ -636,7 +636,7 @@ asm void fn_80227A94(void)
     bl actor_dispatchMessage
     mr r4, r26
     addi r3, r1, 0x2c
-    bl fn_8006B174
+    bl boss_decodePhaseBitfield
     addi r3, r1, 0x20
     addi r4, r1, 0x2c
     li r5, 0x0
