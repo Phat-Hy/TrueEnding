@@ -7,7 +7,7 @@ extern void __va_arg(void);
 extern void _restgpr_16(void);
 extern void _savegpr_16(void);
 extern void dtor_80084684(void);
-extern void fn_80013DC4(void);
+extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_800499D0(void);
 extern void fn_8006B174(void);
@@ -40,9 +40,9 @@ extern void fn_805B6C10(void);
 extern void fn_805B6C48(void);
 extern void fn_806140C0(void);
 extern void vsprintf(void);
-extern void fn_80686A48(void);
-extern void fn_80686AC4(void);
-extern void fn_80686B64(void);
+extern void wcslen(void);
+extern void wcscat(void);
+extern void wcschr(void);
 extern void fn_80686B90(void);
 extern void fn_8068B1A4(void);
 extern void fn_8068B29C(void);
@@ -88,7 +88,7 @@ void fn_800DC3C8(void);
 void fn_800DC3CC(void);
 void fn_800DC500(void);
 void str_findChar(void);
-void fn_800DC880(void);
+void str_calcHash(void);
 void fn_800DC978(void);
 void fn_800DC97C(void);
 void fn_800DC980(void);
@@ -656,7 +656,7 @@ lbl_str_findChar_00000730:
     blr
 }
 
-asm void fn_800DC880(void)
+asm void str_calcHash(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -668,62 +668,62 @@ asm void fn_800DC880(void)
     li r4, -0x1
     mtctr r3
     cmpwi r3, 0x0
-    ble lbl_fn_800DC880_00000830
-lbl_fn_800DC880_0000077C:
+    ble lbl_str_calcHash_00000830
+lbl_str_calcHash_0000077C:
     lbz r0, 0x0(r31)
     slwi r0, r0, 24
     xor r4, r4, r0
     clrrwi. r0, r4, 31
     slwi r4, r4, 1
-    beq lbl_fn_800DC880_0000079C
+    beq lbl_str_calcHash_0000079C
     xoris r4, r4, 0x4c1
     xori r4, r4, 0x1db7
-lbl_fn_800DC880_0000079C:
+lbl_str_calcHash_0000079C:
     clrrwi. r0, r4, 31
     slwi r4, r4, 1
-    beq lbl_fn_800DC880_000007B0
+    beq lbl_str_calcHash_000007B0
     xoris r4, r4, 0x4c1
     xori r4, r4, 0x1db7
-lbl_fn_800DC880_000007B0:
+lbl_str_calcHash_000007B0:
     clrrwi. r0, r4, 31
     slwi r4, r4, 1
-    beq lbl_fn_800DC880_000007C4
+    beq lbl_str_calcHash_000007C4
     xoris r4, r4, 0x4c1
     xori r4, r4, 0x1db7
-lbl_fn_800DC880_000007C4:
+lbl_str_calcHash_000007C4:
     clrrwi. r0, r4, 31
     slwi r4, r4, 1
-    beq lbl_fn_800DC880_000007D8
+    beq lbl_str_calcHash_000007D8
     xoris r4, r4, 0x4c1
     xori r4, r4, 0x1db7
-lbl_fn_800DC880_000007D8:
+lbl_str_calcHash_000007D8:
     clrrwi. r0, r4, 31
     slwi r4, r4, 1
-    beq lbl_fn_800DC880_000007EC
+    beq lbl_str_calcHash_000007EC
     xoris r4, r4, 0x4c1
     xori r4, r4, 0x1db7
-lbl_fn_800DC880_000007EC:
+lbl_str_calcHash_000007EC:
     clrrwi. r0, r4, 31
     slwi r4, r4, 1
-    beq lbl_fn_800DC880_00000800
+    beq lbl_str_calcHash_00000800
     xoris r4, r4, 0x4c1
     xori r4, r4, 0x1db7
-lbl_fn_800DC880_00000800:
+lbl_str_calcHash_00000800:
     clrrwi. r0, r4, 31
     slwi r4, r4, 1
-    beq lbl_fn_800DC880_00000814
+    beq lbl_str_calcHash_00000814
     xoris r4, r4, 0x4c1
     xori r4, r4, 0x1db7
-lbl_fn_800DC880_00000814:
+lbl_str_calcHash_00000814:
     clrrwi. r0, r4, 31
     slwi r4, r4, 1
-    beq lbl_fn_800DC880_00000828
+    beq lbl_str_calcHash_00000828
     xoris r4, r4, 0x4c1
     xori r4, r4, 0x1db7
-lbl_fn_800DC880_00000828:
+lbl_str_calcHash_00000828:
     addi r31, r31, 0x1
-    bdnz lbl_fn_800DC880_0000077C
-lbl_fn_800DC880_00000830:
+    bdnz lbl_str_calcHash_0000077C
+lbl_str_calcHash_00000830:
     li r0, -0x1
     lwz r31, 0xc(r1)
     xor r3, r4, r0
@@ -791,7 +791,7 @@ lbl_fn_800DC980_00000890:
     mr r31, r3
     mr r3, r30
     mr r4, r31
-    bl fn_80013DC4
+    bl actor_validateIndex
     addi r6, r1, 0x80
     lbz r0, 0x6c(r1)
     mr r7, r6
@@ -871,7 +871,7 @@ lbl_fn_800DCA70_000009C0:
     mr r29, r3
     mr r3, r30
     mr r4, r29
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0xc(r1)
     mr r3, r30
     stb r0, 0x8(r1)
@@ -1400,7 +1400,7 @@ asm void fn_800DD1EC(void)
     stw r29, 0x14(r1)
     mr r29, r3
     mr r3, r30
-    bl fn_80686A48
+    bl wcslen
     mr r31, r3
     mr r3, r29
     bl fn_800DC1DC
@@ -1432,7 +1432,7 @@ lbl_fn_800DD1EC_00001140:
     sthx r3, r29, r0
     mr r3, r29
     mr r4, r30
-    bl fn_80686AC4
+    bl wcscat
     mr r30, r29
 lbl_fn_800DD1EC_0000115C:
     mr r3, r30
@@ -1462,21 +1462,21 @@ asm void fn_800DD2A8(void)
     li r27, 0x2c
 lbl_fn_800DD2A8_000011AC:
     mr r3, r31
-    bl fn_80686A48
+    bl wcslen
     mr r29, r3
     mr r3, r31
     mr r4, r27
-    bl fn_80686B64
+    bl wcschr
     cmpwi r3, 0x0
     mr r27, r3
     beq lbl_fn_800DD2A8_000011D8
-    bl fn_80686A48
+    bl wcslen
     subf r29, r3, r29
 lbl_fn_800DD2A8_000011D8:
     cmpwi r27, 0x0
     beq lbl_fn_800DD2A8_000011F0
     addi r3, r27, 0x2
-    bl fn_80686A48
+    bl wcslen
     mr r27, r3
     b lbl_fn_800DD2A8_000011F4
 lbl_fn_800DD2A8_000011F0:
@@ -1484,7 +1484,7 @@ lbl_fn_800DD2A8_000011F0:
 lbl_fn_800DD2A8_000011F4:
     mr r3, r30
     li r4, 0x2e
-    bl fn_80686B64
+    bl wcschr
     cmpwi r3, 0x0
     beq lbl_fn_800DD2A8_00001218
     addi r3, r3, 0x2
@@ -1531,9 +1531,9 @@ lbl_fn_800DD2A8_00001284:
     sthx r29, r30, r0
     mr r3, r30
     mr r4, r31
-    bl fn_80686AC4
+    bl wcscat
     mr r3, r31
-    bl fn_80686A48
+    bl wcslen
     subf r0, r28, r27
     mr r31, r30
     subf r0, r0, r3
@@ -1797,7 +1797,7 @@ lbl_fn_800DD3FC_00001644:
     li r5, 0xa
     bl fn_8068B2A0
     mr r24, r3
-    bl fn_80686A48
+    bl wcslen
     mr r29, r3
     bl fn_8006BA30
     subi r0, r3, 0x2

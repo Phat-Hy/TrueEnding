@@ -9,16 +9,16 @@ extern void _savegpr_25(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void fn_8000E18C(void);
-extern void fn_80013DC4(void);
+extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_8003EA3C(void);
 extern void fn_8004203C(void);
 extern void talk_parseQuotedString(void);
-extern void fn_8005B5F8(void);
+extern void talk_scanQuotedString(void);
 extern void fn_8005B6E8(void);
 extern void fn_8006AFF8(void);
 extern void mem_free(void);
-extern void fn_80087994(void);
+extern void route_createSegment(void);
 extern void fn_8008937C(void);
 extern void atn_Model_findBoneIndex(void);
 extern void skin_applyWeights(void);
@@ -155,7 +155,7 @@ lbl_fn_802DDBB0_0000004C:
     li r6, 0x0
     addi r4, r4, 0x32b
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0
@@ -432,7 +432,7 @@ asm void fn_802DDDB8(void)
     mr r26, r3
     mr r3, r27
     mr r4, r26
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x1c(r1)
     mr r3, r27
     stb r0, 0x18(r1)
@@ -452,7 +452,7 @@ asm void fn_802DDDB8(void)
     mr r25, r3
     mr r3, r26
     mr r4, r25
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x14(r1)
     mr r3, r26
     stb r0, 0x10(r1)
@@ -532,7 +532,7 @@ lbl_fn_802DDDB8_0000054C:
     bl actor_dispatchMessage
 lbl_fn_802DDDB8_0000057C:
     addi r3, r1, 0x44
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_802DDDB8_000004F4
 lbl_fn_802DDDB8_0000058C:
@@ -867,7 +867,7 @@ lbl_fn_802DE27C_000009E0:
     bl fn_802DEB00
 lbl_fn_802DE27C_00000A44:
     addi r3, r1, 0x28
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_802DE27C_000009E0
     b lbl_fn_802DE27C_00000B84
@@ -954,7 +954,7 @@ lbl_fn_802DE27C_00000B5C:
     bl res_MsgHandle_destructor
 lbl_fn_802DE27C_00000B84:
     addi r3, r1, 0x28
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_802DE27C_000007E0
 lbl_fn_802DE27C_00000B94:

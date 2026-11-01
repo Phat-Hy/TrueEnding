@@ -5,7 +5,7 @@
 extern void dtor_80084684(void);
 extern void fn_80049B74(void);
 extern void talk_parseQuotedString(void);
-extern void fn_8005B5F8(void);
+extern void talk_scanQuotedString(void);
 extern void fn_8005B6E8(void);
 extern void talk_parseDialogue(void);
 extern void fn_8005B8F8(void);
@@ -26,8 +26,8 @@ extern void atn_Task_destructor(void);
 extern void fn_800DC1DC(void);
 extern void str_findChar(void);
 extern void fn_800DD3FC(void);
-extern void fn_80117228(void);
-extern void fn_801FEE08(void);
+extern void actor_spawnActorWithId(void);
+extern void thread_dispatchToQueue(void);
 extern void fn_80206B9C(void);
 extern void fn_80209184(void);
 extern void fn_8020C07C(void);
@@ -49,7 +49,7 @@ extern void rand(void);
 extern void strcmp(void);
 extern void atoi(void);
 extern void wmemcpy(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 extern void runtime_registerStaticObject(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
@@ -180,7 +180,7 @@ lbl_fn_80505514_00000080:
     ble lbl_fn_80505514_000003C0
     addi r3, r1, 0x8
     li r4, 0x8
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -199,7 +199,7 @@ lbl_fn_80505514_00000080:
     mr r4, r3
     mr r3, r29
     mr r5, r28
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r3, 0x25b4(r31)
     subi r0, r3, 0x1
     stw r0, 0x25b4(r31)
@@ -238,7 +238,7 @@ lbl_fn_80505514_000001A4:
 lbl_fn_80505514_000001C4:
     la r3, lbl_808813D0
 lbl_fn_80505514_000001C8:
-    bl fn_80686A48
+    bl wcslen
     cmpwi r3, 0x0
     beq lbl_fn_80505514_00000308
     cmpwi r27, 0x0
@@ -251,7 +251,7 @@ lbl_fn_80505514_000001E4:
     cmplw r27, r0
     beq lbl_fn_80505514_0000020C
     mr r3, r27
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r4, r27
     addi r3, r31, 0xfc
@@ -265,7 +265,7 @@ lbl_fn_80505514_0000020C:
 lbl_fn_80505514_0000021C:
     la r3, lbl_808813D0
 lbl_fn_80505514_00000220:
-    bl fn_80686A48
+    bl wcslen
     lwz r26, 0x1c(r1)
     lis r29, lbl_8075AEDC@ha
     stw r3, 0x25b4(r31)
@@ -290,7 +290,7 @@ lbl_fn_80505514_00000244:
     mr r4, r3
     mr r3, r27
     addi r5, r1, 0x30
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     addi r30, r30, 0x2
     addi r25, r25, 0x1
 lbl_fn_80505514_0000028C:
@@ -301,7 +301,7 @@ lbl_fn_80505514_0000028C:
 lbl_fn_80505514_0000029C:
     mr r3, r26
 lbl_fn_80505514_000002A0:
-    bl fn_80686A48
+    bl wcslen
     cmplw r25, r3
     blt lbl_fn_80505514_00000244
     lis r28, lbl_8075AEDC@ha
@@ -324,7 +324,7 @@ lbl_fn_80505514_000002C0:
     mr r4, r3
     mr r3, r27
     addi r5, r1, 0x30
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     addi r25, r25, 0x1
 lbl_fn_80505514_00000300:
     cmplwi r25, 0x8
@@ -332,7 +332,7 @@ lbl_fn_80505514_00000300:
 lbl_fn_80505514_00000308:
     addi r3, r1, 0x10
     li r4, 0x1
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle
@@ -361,7 +361,7 @@ lbl_fn_80505514_00000324:
     mr r4, r3
     mr r3, r27
     addi r5, r1, 0x30
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r3, 0x25b4(r31)
     addi r0, r3, 0x1
     stw r0, 0x25b4(r31)
@@ -374,7 +374,7 @@ lbl_fn_80505514_00000324:
 lbl_fn_80505514_000003A8:
     addi r3, r1, 0xc
     li r4, 0x1
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0xc
     li r4, -0x1
     bl ref_releaseHandle
@@ -425,7 +425,7 @@ lbl_fn_805058EC_00000424:
 lbl_fn_805058EC_00000438:
     addi r3, r1, 0x8
     li r4, 0x3
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -457,7 +457,7 @@ lbl_fn_80505974_00000490:
     stwu r0, 0x8(r5)
     bdnz lbl_fn_80505974_00000490
     addi r3, r1, 0x10
-    bl fn_80686A48
+    bl wcslen
     cmpwi r3, 0x0
     bne lbl_fn_80505974_000004BC
     li r0, 0x1
@@ -477,11 +477,11 @@ lbl_fn_80505974_000004DC:
     addi r31, r31, 0x1
 lbl_fn_80505974_000004E4:
     addi r3, r1, 0x10
-    bl fn_80686A48
+    bl wcslen
     cmplw r31, r3
     blt lbl_fn_80505974_000004CC
     addi r3, r1, 0x10
-    bl fn_80686A48
+    bl wcslen
     subf r0, r3, r30
     orc r3, r30, r3
     srwi r0, r0, 1
@@ -492,7 +492,7 @@ lbl_fn_80505974_00000510:
     bne lbl_fn_80505974_0000053C
     addi r3, r1, 0x8
     li r4, 0x1
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -569,7 +569,7 @@ asm void fn_80505AB8(void)
     ble lbl_fn_80505AB8_0000068C
     addi r3, r1, 0x8
     li r4, 0x8
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -588,7 +588,7 @@ asm void fn_80505AB8(void)
     mr r4, r3
     mr r3, r30
     mr r5, r31
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r3, 0x25b4(r29)
     subi r0, r3, 0x1
     stw r0, 0x25b4(r29)
@@ -612,14 +612,14 @@ asm void fn_80505BBC(void)
     mr r31, r3
     lwz r4, lbl_8087F628
     addi r3, r4, 0x5f0
-    bl fn_80686A48
+    bl wcslen
     cmpwi r3, 0x0
     beq lbl_fn_80505BBC_000006F8
     li r0, 0x0
     stw r0, 0x25b8(r31)
     addi r3, r1, 0x8
     li r4, 0x2
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -967,7 +967,7 @@ lbl_fn_80505FC8_00000B7C:
     beq lbl_fn_80505FC8_00000BB4
     addi r3, r1, 0x8
     bl talk_parseDialogue
-    bl fn_80686A48
+    bl wcslen
     add r3, r3, r26
     addi r26, r3, 0x1
 lbl_fn_80505FC8_00000BB4:
@@ -1023,7 +1023,7 @@ lbl_fn_80505FC8_00000C1C:
     mr r3, r28
     add r0, r0, r29
     stw r0, 0x4c(r31)
-    bl fn_80686A48
+    bl wcslen
     addi r26, r26, 0x1
     add r3, r3, r27
     cmpwi r26, 0x139
@@ -1146,7 +1146,7 @@ lbl_fn_805061CC_00000E20:
     addi r24, r24, 0x1
 lbl_fn_805061CC_00000E2C:
     addi r3, r1, 0x10c
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_805061CC_00000DAC
     b lbl_fn_805061CC_00000FF8
@@ -1198,7 +1198,7 @@ lbl_fn_805061CC_00000ED8:
     addi r24, r24, 0x1
 lbl_fn_805061CC_00000EE4:
     addi r3, r1, 0x10c
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_805061CC_00000E64
     b lbl_fn_805061CC_00000FF8
@@ -1241,7 +1241,7 @@ lbl_fn_805061CC_00000F78:
     addi r24, r24, 0x1
 lbl_fn_805061CC_00000F80:
     addi r3, r1, 0x10c
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_805061CC_00000F20
 lbl_fn_805061CC_00000F90:
@@ -1276,7 +1276,7 @@ lbl_fn_805061CC_00000FEC:
     stw r0, 0x0(r28)
 lbl_fn_805061CC_00000FF8:
     addi r3, r1, 0x10c
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_805061CC_00000D5C
     lmw r24, 0x740(r1)
@@ -2006,7 +2006,7 @@ lbl_fn_80506D98_00001940:
     bge lbl_fn_80506D98_0000198C
     addi r3, r1, 0x128
     bl talk_parseDialogue
-    bl fn_80686A48
+    bl wcslen
     add r3, r3, r20
     addi r20, r3, 0x1
 lbl_fn_80506D98_0000198C:
@@ -2092,7 +2092,7 @@ lbl_fn_80506D98_00001A0C:
     mr r3, r27
     add r0, r0, r22
     stw r0, 0x20(r1)
-    bl fn_80686A48
+    bl wcslen
     lwz r0, 0xc(r1)
     add r3, r3, r20
     addi r20, r3, 0x1

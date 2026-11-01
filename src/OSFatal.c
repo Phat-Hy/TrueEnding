@@ -60,7 +60,7 @@ extern void fn_80604FB0(void);
 extern void fn_80605140(void);
 extern void fn_806051C0(void);
 extern void fn_80613E30(void);
-extern void fn_806809C0(void);
+extern void snprintf(void);
 extern void strncmp(void);
 extern int sprintf(char* str, const char* format, ...);
 
@@ -191,7 +191,7 @@ lbl_fn_805EF630_00000118:
     lwz r8, 0x44(r1)
     add r3, r3, r0
     crclr 6
-    bl fn_806809C0
+    bl snprintf
 lbl_fn_805EF630_0000018C:
     li r3, 0x20
     li r4, 0x20

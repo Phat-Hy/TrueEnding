@@ -9,17 +9,17 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_8000D760(void);
 extern void fn_8000D9E8(void);
-extern void fn_80013DC4(void);
+extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_80056DB8(void);
 extern void atn_ColliBase_destructor(void);
 extern void talk_parseQuotedString(void);
-extern void fn_8005B5F8(void);
+extern void talk_scanQuotedString(void);
 extern void fn_8005B6E8(void);
 extern void fn_8006AFF8(void);
 extern void fn_8007708C(void);
 extern void route_findNextWaypoint(void);
-extern void fn_80087994(void);
+extern void route_createSegment(void);
 extern void fn_8008937C(void);
 extern void fn_800897D8(void);
 extern void fn_80092954(void);
@@ -1158,7 +1158,7 @@ asm void fn_802A4BBC(void)
     mr r25, r3
     mr r3, r27
     mr r4, r25
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x1c(r1)
     mr r3, r27
     stb r0, 0x18(r1)
@@ -1178,7 +1178,7 @@ asm void fn_802A4BBC(void)
     mr r25, r3
     mr r3, r27
     mr r4, r25
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x14(r1)
     mr r3, r27
     stb r0, 0x10(r1)
@@ -1258,7 +1258,7 @@ lbl_fn_802A4BBC_00000EEC:
     bl actor_dispatchMessage
 lbl_fn_802A4BBC_00000F1C:
     addi r3, r1, 0x44
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_802A4BBC_00000E94
 lbl_fn_802A4BBC_00000F2C:
@@ -1875,7 +1875,7 @@ lbl_fn_802A51F4_00001794:
     stw r3, 0x14ec(r30)
 lbl_fn_802A51F4_000017B8:
     addi r3, r1, 0x20
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_802A51F4_0000134C
 lbl_fn_802A51F4_000017C8:
@@ -1958,13 +1958,13 @@ lbl_fn_802A51F4_000018DC:
     addi r4, r31, 0x17c
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r28
     addi r4, r31, 0x101
     addi r5, r30, 0x1854
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r28
     addi r4, r31, 0x186
     addi r5, r30, 0x1858

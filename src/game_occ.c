@@ -21,7 +21,7 @@ extern void fn_800D6BE0(void);
 extern void str_findChar(void);
 extern void fn_80478198(void);
 extern void __GXSetVtxDesc(void);
-extern void fn_80613BB0(void);
+extern void GXClearVtxDesc(void);
 extern void GXFlush(void);
 extern void fn_806140C0(void);
 extern void fn_80614190(void);
@@ -734,7 +734,7 @@ asm void fn_800D775C(void)
     stw r31, 0x6c(r1)
     mr r31, r3
     li r3, 0x3
-    bl fn_80613BB0
+    bl GXClearVtxDesc
     li r3, 0x0
     bl fn_80615D20
     li r3, 0x5
@@ -1100,7 +1100,7 @@ asm void fn_800D7D00(void)
     stw r31, 0x3c(r1)
     mr r31, r3
     li r3, 0x1
-    bl fn_80613BB0
+    bl GXClearVtxDesc
     li r3, 0x0
     bl fn_80615D20
     li r3, 0x1
@@ -1239,7 +1239,7 @@ asm void fn_800D7F18(void)
     stw r31, 0x3c(r1)
     mr r31, r3
     li r3, 0x1
-    bl fn_80613BB0
+    bl GXClearVtxDesc
     li r3, 0x0
     bl fn_80615D20
     li r3, 0x1

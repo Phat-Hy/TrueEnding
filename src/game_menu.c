@@ -15,12 +15,12 @@ extern void dtor_80013D60(void);
 extern void dtor_80084684(void);
 extern void sys_copyString(void);
 extern void fn_8000ECA8(void);
-extern void fn_80013DC4(void);
+extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_8003E4A4(void);
 extern void fn_800502A8(void);
 extern void talk_parseQuotedString(void);
-extern void fn_8005B5F8(void);
+extern void talk_scanQuotedString(void);
 extern void fn_8005B6E8(void);
 extern void talk_formatQuotedString(void);
 extern void fn_8005BBF8(void);
@@ -54,8 +54,8 @@ extern void fn_8010D770(void);
 extern void fn_8014FCC4(void);
 extern void fn_8014FCE8(void);
 extern void fn_80179A34(void);
-extern void fn_801F3FF8(void);
-extern void fn_801FECE0(void);
+extern void save_validateHeader(void);
+extern void thread_findAndNotify(void);
 extern void fn_80206B14(void);
 extern void fn_802072AC(void);
 extern void task_findEntryById(void);
@@ -639,7 +639,7 @@ lbl_fn_80041D44_00000550:
     bl dtor_80013D60
 lbl_fn_80041D44_0000055C:
     addi r3, r1, 0x80
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_80041D44_00000348
     addi r3, r1, 0x34
@@ -2222,7 +2222,7 @@ lbl_ArenaTask_constructor_000019F4:
     mr r3, r31
     add r27, r31, r28
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x2b8(r27)
     lwz r0, 0xfc(r3)
     rlwinm r0, r0, 0, 4, 2
@@ -2629,7 +2629,7 @@ lbl_ArenaTask_draw_00001F44:
     addi r3, r30, 0x58
     lfd f0, 0x210(r1)
     fsubs f1, f0, f1
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lwz r0, 0x2c8(r31)
     cmpwi r0, 0x0
     beq lbl_ArenaTask_draw_00001FB0
@@ -3088,7 +3088,7 @@ asm void fn_80043EAC(void)
     mr r29, r3
     mr r3, r28
     mr r4, r29
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0xc(r1)
     mr r3, r28
     stb r0, 0x8(r1)

@@ -8,7 +8,7 @@ extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void fn_8004203C(void);
 extern void talk_parseQuotedString(void);
-extern void fn_8005B5F8(void);
+extern void talk_scanQuotedString(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void fn_800897D8(void);
@@ -47,8 +47,8 @@ extern void fn_80178208(void);
 extern void fn_80178A6C(void);
 extern void fn_801A03E0(void);
 extern void fn_801C02F4(void);
-extern void fn_801FED24(void);
-extern void fn_801FEE08(void);
+extern void thread_findAndNotifySlot(void);
+extern void thread_dispatchToQueue(void);
 extern void task_findEntryById(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_unload(void);
@@ -493,7 +493,7 @@ lbl_fn_80244898_000004F8:
     blt lbl_fn_80244898_000004F8
 lbl_fn_80244898_0000051C:
     addi r3, r1, 0x118
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_80244898_000002C4
 lbl_fn_80244898_0000052C:
@@ -1517,7 +1517,7 @@ lbl_fn_802458BC_000012FC:
     mr r4, r3
     mr r3, r29
     li r5, 0x0
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
     lwz r4, 0x15bc(r31)
     addi r3, r30, 0x144
     lfs f31, 0xc(r1)
@@ -1527,7 +1527,7 @@ lbl_fn_802458BC_000012FC:
     mr r4, r3
     mr r3, r29
     li r5, 0x1
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
     lwz r3, lbl_8087F1E4
     lwz r29, 0xb64(r3)
     cmpwi r29, 0x0
@@ -1547,7 +1547,7 @@ lbl_fn_802458BC_000013D0:
     mr r4, r3
     mr r3, r28
     mr r5, r29
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r4, 0x15bc(r31)
     addi r3, r30, 0x15d
     addi r28, r4, 0x58
@@ -1555,7 +1555,7 @@ lbl_fn_802458BC_000013D0:
     mr r4, r3
     mr r3, r28
     mr r5, r29
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r4, 0x15bc(r31)
     addi r3, r30, 0x16b
     addi r28, r4, 0x58
@@ -1563,7 +1563,7 @@ lbl_fn_802458BC_000013D0:
     mr r4, r3
     mr r3, r28
     mr r5, r29
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
 lbl_fn_802458BC_00001440:
     lwz r0, 0x44(r1)
     psq_l f31, 0x38(r1), 0, 0

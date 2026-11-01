@@ -19,7 +19,7 @@ extern void str_findChar(void);
 extern void fn_800DD3FC(void);
 extern void fn_80103484(void);
 extern void fn_8016F3D0(void);
-extern void fn_801FECE0(void);
+extern void thread_findAndNotify(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
@@ -254,7 +254,7 @@ lbl_fn_800F5314_00000214:
     fmr f1, f24
     mr r4, r3
     mr r3, r19
-    bl fn_801FECE0
+    bl thread_findAndNotify
     b lbl_fn_800F5314_000002C0
 lbl_fn_800F5314_00000248:
     lwz r4, -0x34d0(r5)
@@ -464,7 +464,7 @@ lbl_fn_800F5314_00000530:
     fmr f1, f25
     mr r4, r3
     mr r3, r20
-    bl fn_801FECE0
+    bl thread_findAndNotify
     addis r4, r31, 0x1
     addi r3, r19, 0x1cd
     lwz r4, -0x34a0(r4)
@@ -473,7 +473,7 @@ lbl_fn_800F5314_00000530:
     fmr f1, f25
     mr r4, r3
     mr r3, r20
-    bl fn_801FECE0
+    bl thread_findAndNotify
     addis r3, r31, 0x1
     li r0, 0x0
     stw r0, -0x34cc(r3)

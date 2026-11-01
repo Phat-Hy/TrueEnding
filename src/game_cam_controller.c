@@ -3,7 +3,7 @@
 
 /* External function declarations */
 extern void dtor_80084684(void);
-extern void fn_80013DC4(void);
+extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern u32 strlen(const char* str);
 
@@ -155,7 +155,7 @@ lbl_fn_800EC2C4_00000160:
     mr r3, r31
     stw r0, 0x4(r31)
     stw r0, 0x8(r31)
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r5, 0x8(r1)
     mr r3, r31
     stb r5, 0xc(r1)
@@ -183,7 +183,7 @@ lbl_fn_800EC2C4_000001C8:
     addi r3, r31, 0xc
     stw r0, 0x10(r31)
     stw r0, 0x14(r31)
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r5, 0x10(r1)
     addi r3, r31, 0xc
     stb r5, 0x14(r1)
@@ -236,7 +236,7 @@ asm void fn_800EC440(void)
     mr r30, r3
     addi r3, r26, 0xc
     mr r4, r30
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x14(r1)
     mr r6, r27
     stb r0, 0x10(r1)
@@ -399,7 +399,7 @@ lbl_fn_800EC654_000004AC:
     mr r3, r29
     stw r0, 0x24(r1)
     stw r0, 0x28(r1)
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r5, 0x8(r1)
     mr r3, r29
     stb r5, 0xc(r1)
@@ -428,7 +428,7 @@ lbl_fn_800EC654_00000514:
     stw r0, 0x10(r29)
     addi r28, r31, 0x18
     stw r0, 0x14(r29)
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r5, 0x10(r1)
     addi r3, r29, 0xc
     stb r5, 0x14(r1)
@@ -513,7 +513,7 @@ lbl_fn_800EC7F0_0000064C:
     stw r0, 0x4(r3)
     stw r0, 0x8(r3)
     lwz r4, 0x4(r4)
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x18(r1)
     mr r3, r28
     stb r0, 0x1c(r1)
@@ -541,7 +541,7 @@ lbl_fn_800EC7F0_000006B0:
     stw r0, 0x10(r28)
     stw r0, 0x14(r28)
     lwz r4, 0x10(r29)
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x20(r1)
     addi r3, r28, 0xc
     stb r0, 0x24(r1)

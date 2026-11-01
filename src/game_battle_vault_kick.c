@@ -28,7 +28,7 @@ extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void fn_800D3FA4(void);
 extern void fn_80206B9C(void);
-extern void fn_80211480(void);
+extern void event_findEntryById(void);
 extern void fn_802180A8(void);
 extern void fn_8021E444(void);
 extern void fn_8021E5A4(void);
@@ -1171,7 +1171,7 @@ lbl_fn_8040E620_00000E38:
     bl fn_80445130
 lbl_fn_8040E620_00000E9C:
     lwz r3, 0x18(r1)
-    bl fn_80211480
+    bl event_findEntryById
     mr r28, r3
 lbl_fn_8040E620_00000EA8:
     cmpwi r28, 0x0

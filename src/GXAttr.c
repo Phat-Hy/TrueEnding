@@ -14,24 +14,24 @@ extern u32 lbl_8087E874;
 extern u8 lbl_8087E878[8];
 
 /* Function declarations */
-void fn_80612E80(void);
+void GXSetVtxDesc(void);
 void fn_806130F0(void);
 void __GXSetVtxDescs(void);
 void fn_806133B0(void);
 void fn_806134E0(void);
-void fn_80613520(void);
+void GXSetVtxAttrFmt(void);
 void fn_806136C0(void);
 void fn_80613890(void);
 void GXSetArray(void);
 void GXInvalidateVtxCache(void);
 void __GXSetVtxDesc(void);
-void fn_80613BB0(void);
+void GXClearVtxDesc(void);
 
-asm void fn_80612E80(void)
+asm void GXSetVtxDesc(void)
 {
     nofralloc
     cmplwi r3, 0x19
-    bgt lbl_fn_80612E80_00000214
+    bgt lbl_GXSetVtxDesc_00000214
     lis r5, jumptable_807B0750@ha
     slwi r0, r3, 2
     addi r5, r5, jumptable_807B0750@l
@@ -42,149 +42,149 @@ asm void fn_80612E80(void)
     lwz r0, 0x14(r3)
     rlwimi r0, r4, 0, 31, 31
     stw r0, 0x14(r3)
-    b lbl_fn_80612E80_00000214
+    b lbl_GXSetVtxDesc_00000214
     lwz r3, __GXData
     lwz r0, 0x14(r3)
     rlwimi r0, r4, 1, 30, 30
     stw r0, 0x14(r3)
-    b lbl_fn_80612E80_00000214
+    b lbl_GXSetVtxDesc_00000214
     lwz r3, __GXData
     lwz r0, 0x14(r3)
     rlwimi r0, r4, 2, 29, 29
     stw r0, 0x14(r3)
-    b lbl_fn_80612E80_00000214
+    b lbl_GXSetVtxDesc_00000214
     lwz r3, __GXData
     lwz r0, 0x14(r3)
     rlwimi r0, r4, 3, 28, 28
     stw r0, 0x14(r3)
-    b lbl_fn_80612E80_00000214
+    b lbl_GXSetVtxDesc_00000214
     lwz r3, __GXData
     lwz r0, 0x14(r3)
     rlwimi r0, r4, 4, 27, 27
     stw r0, 0x14(r3)
-    b lbl_fn_80612E80_00000214
+    b lbl_GXSetVtxDesc_00000214
     lwz r3, __GXData
     lwz r0, 0x14(r3)
     rlwimi r0, r4, 5, 26, 26
     stw r0, 0x14(r3)
-    b lbl_fn_80612E80_00000214
+    b lbl_GXSetVtxDesc_00000214
     lwz r3, __GXData
     lwz r0, 0x14(r3)
     rlwimi r0, r4, 6, 25, 25
     stw r0, 0x14(r3)
-    b lbl_fn_80612E80_00000214
+    b lbl_GXSetVtxDesc_00000214
     lwz r3, __GXData
     lwz r0, 0x14(r3)
     rlwimi r0, r4, 7, 24, 24
     stw r0, 0x14(r3)
-    b lbl_fn_80612E80_00000214
+    b lbl_GXSetVtxDesc_00000214
     lwz r3, __GXData
     lwz r0, 0x14(r3)
     rlwimi r0, r4, 8, 23, 23
     stw r0, 0x14(r3)
-    b lbl_fn_80612E80_00000214
+    b lbl_GXSetVtxDesc_00000214
     lwz r3, __GXData
     lwz r0, 0x14(r3)
     rlwimi r0, r4, 9, 21, 22
     stw r0, 0x14(r3)
-    b lbl_fn_80612E80_00000214
+    b lbl_GXSetVtxDesc_00000214
     cmpwi r4, 0x0
-    beq lbl_fn_80612E80_0000010C
+    beq lbl_GXSetVtxDesc_0000010C
     lwz r5, __GXData
     li r3, 0x1
     li r0, 0x0
     stb r3, 0x524(r5)
     stb r0, 0x525(r5)
     stw r4, 0x520(r5)
-    b lbl_fn_80612E80_00000214
-lbl_fn_80612E80_0000010C:
+    b lbl_GXSetVtxDesc_00000214
+lbl_GXSetVtxDesc_0000010C:
     lwz r3, __GXData
     li r0, 0x0
     stb r0, 0x524(r3)
-    b lbl_fn_80612E80_00000214
+    b lbl_GXSetVtxDesc_00000214
     cmpwi r4, 0x0
-    beq lbl_fn_80612E80_00000140
+    beq lbl_GXSetVtxDesc_00000140
     lwz r5, __GXData
     li r3, 0x1
     li r0, 0x0
     stb r3, 0x525(r5)
     stb r0, 0x524(r5)
     stw r4, 0x520(r5)
-    b lbl_fn_80612E80_00000214
-lbl_fn_80612E80_00000140:
+    b lbl_GXSetVtxDesc_00000214
+lbl_GXSetVtxDesc_00000140:
     lwz r3, __GXData
     li r0, 0x0
     stb r0, 0x525(r3)
-    b lbl_fn_80612E80_00000214
+    b lbl_GXSetVtxDesc_00000214
     lwz r3, __GXData
     lwz r0, 0x14(r3)
     rlwimi r0, r4, 13, 17, 18
     stw r0, 0x14(r3)
-    b lbl_fn_80612E80_00000214
+    b lbl_GXSetVtxDesc_00000214
     lwz r3, __GXData
     lwz r0, 0x14(r3)
     rlwimi r0, r4, 15, 15, 16
     stw r0, 0x14(r3)
-    b lbl_fn_80612E80_00000214
+    b lbl_GXSetVtxDesc_00000214
     lwz r3, __GXData
     lwz r0, 0x18(r3)
     rlwimi r0, r4, 0, 30, 31
     stw r0, 0x18(r3)
-    b lbl_fn_80612E80_00000214
+    b lbl_GXSetVtxDesc_00000214
     lwz r3, __GXData
     lwz r0, 0x18(r3)
     rlwimi r0, r4, 2, 28, 29
     stw r0, 0x18(r3)
-    b lbl_fn_80612E80_00000214
+    b lbl_GXSetVtxDesc_00000214
     lwz r3, __GXData
     lwz r0, 0x18(r3)
     rlwimi r0, r4, 4, 26, 27
     stw r0, 0x18(r3)
-    b lbl_fn_80612E80_00000214
+    b lbl_GXSetVtxDesc_00000214
     lwz r3, __GXData
     lwz r0, 0x18(r3)
     rlwimi r0, r4, 6, 24, 25
     stw r0, 0x18(r3)
-    b lbl_fn_80612E80_00000214
+    b lbl_GXSetVtxDesc_00000214
     lwz r3, __GXData
     lwz r0, 0x18(r3)
     rlwimi r0, r4, 8, 22, 23
     stw r0, 0x18(r3)
-    b lbl_fn_80612E80_00000214
+    b lbl_GXSetVtxDesc_00000214
     lwz r3, __GXData
     lwz r0, 0x18(r3)
     rlwimi r0, r4, 10, 20, 21
     stw r0, 0x18(r3)
-    b lbl_fn_80612E80_00000214
+    b lbl_GXSetVtxDesc_00000214
     lwz r3, __GXData
     lwz r0, 0x18(r3)
     rlwimi r0, r4, 12, 18, 19
     stw r0, 0x18(r3)
-    b lbl_fn_80612E80_00000214
+    b lbl_GXSetVtxDesc_00000214
     lwz r3, __GXData
     lwz r0, 0x18(r3)
     rlwimi r0, r4, 14, 16, 17
     stw r0, 0x18(r3)
-lbl_fn_80612E80_00000214:
+lbl_GXSetVtxDesc_00000214:
     lwz r4, __GXData
     lbz r0, 0x524(r4)
     cmpwi r0, 0x0
-    bne lbl_fn_80612E80_00000230
+    bne lbl_GXSetVtxDesc_00000230
     lbz r0, 0x525(r4)
     cmpwi r0, 0x0
-    beq lbl_fn_80612E80_00000248
-lbl_fn_80612E80_00000230:
+    beq lbl_GXSetVtxDesc_00000248
+lbl_GXSetVtxDesc_00000230:
     lwz r5, __GXData
     lwz r0, 0x520(r5)
     lwz r3, 0x14(r5)
     rlwimi r3, r0, 11, 19, 20
     stw r3, 0x14(r5)
-    b lbl_fn_80612E80_00000254
-lbl_fn_80612E80_00000248:
+    b lbl_GXSetVtxDesc_00000254
+lbl_GXSetVtxDesc_00000248:
     lwz r0, 0x14(r4)
     rlwinm r0, r0, 0, 21, 18
     stw r0, 0x14(r4)
-lbl_fn_80612E80_00000254:
+lbl_GXSetVtxDesc_00000254:
     lwz r0, 0x5fc(r4)
     ori r0, r0, 0x8
     stw r0, 0x5fc(r4)
@@ -487,7 +487,7 @@ asm void fn_806134E0(void)
     blr
 }
 
-asm void fn_80613520(void)
+asm void GXSetVtxAttrFmt(void)
 {
     nofralloc
     subi r0, r4, 0x9
@@ -495,7 +495,7 @@ asm void fn_80613520(void)
     cmplwi r0, 0x10
     slwi r4, r3, 2
     add r8, r8, r4
-    bgt lbl_fn_80613520_00000810
+    bgt lbl_GXSetVtxAttrFmt_00000810
     lis r4, jumptable_807B0820@ha
     slwi r0, r0, 2
     addi r4, r4, jumptable_807B0820@l
@@ -507,57 +507,57 @@ asm void fn_80613520(void)
     rlwimi r0, r6, 1, 28, 30
     rlwimi r0, r7, 4, 23, 27
     stw r0, 0x1c(r8)
-    b lbl_fn_80613520_00000810
+    b lbl_GXSetVtxAttrFmt_00000810
     lwz r0, 0x1c(r8)
     cmpwi r5, 0x2
     rlwimi r0, r6, 10, 19, 21
     stw r0, 0x1c(r8)
-    bne lbl_fn_80613520_00000710
+    bne lbl_GXSetVtxAttrFmt_00000710
     lwz r0, 0x1c(r8)
     ori r0, r0, 0x200
     oris r0, r0, 0x8000
     stw r0, 0x1c(r8)
-    b lbl_fn_80613520_00000810
-lbl_fn_80613520_00000710:
+    b lbl_GXSetVtxAttrFmt_00000810
+lbl_GXSetVtxAttrFmt_00000710:
     lwz r0, 0x1c(r8)
     rlwimi r0, r5, 9, 22, 22
     clrlwi r0, r0, 1
     stw r0, 0x1c(r8)
-    b lbl_fn_80613520_00000810
+    b lbl_GXSetVtxAttrFmt_00000810
     lwz r0, 0x1c(r8)
     rlwimi r0, r5, 13, 18, 18
     rlwimi r0, r6, 14, 15, 17
     stw r0, 0x1c(r8)
-    b lbl_fn_80613520_00000810
+    b lbl_GXSetVtxAttrFmt_00000810
     lwz r0, 0x1c(r8)
     rlwimi r0, r5, 17, 14, 14
     rlwimi r0, r6, 18, 11, 13
     stw r0, 0x1c(r8)
-    b lbl_fn_80613520_00000810
+    b lbl_GXSetVtxAttrFmt_00000810
     lwz r0, 0x1c(r8)
     rlwimi r0, r5, 21, 10, 10
     rlwimi r0, r6, 22, 7, 9
     rlwimi r0, r7, 25, 2, 6
     stw r0, 0x1c(r8)
-    b lbl_fn_80613520_00000810
+    b lbl_GXSetVtxAttrFmt_00000810
     lwz r0, 0x3c(r8)
     rlwimi r0, r5, 0, 31, 31
     rlwimi r0, r6, 1, 28, 30
     rlwimi r0, r7, 4, 23, 27
     stw r0, 0x3c(r8)
-    b lbl_fn_80613520_00000810
+    b lbl_GXSetVtxAttrFmt_00000810
     lwz r0, 0x3c(r8)
     rlwimi r0, r5, 9, 22, 22
     rlwimi r0, r6, 10, 19, 21
     rlwimi r0, r7, 13, 14, 18
     stw r0, 0x3c(r8)
-    b lbl_fn_80613520_00000810
+    b lbl_GXSetVtxAttrFmt_00000810
     lwz r0, 0x3c(r8)
     rlwimi r0, r5, 18, 13, 13
     rlwimi r0, r6, 19, 10, 12
     rlwimi r0, r7, 22, 5, 9
     stw r0, 0x3c(r8)
-    b lbl_fn_80613520_00000810
+    b lbl_GXSetVtxAttrFmt_00000810
     lwz r0, 0x3c(r8)
     rlwimi r0, r5, 27, 4, 4
     rlwimi r0, r6, 28, 1, 3
@@ -565,25 +565,25 @@ lbl_fn_80613520_00000710:
     lwz r0, 0x5c(r8)
     rlwimi r0, r7, 0, 27, 31
     stw r0, 0x5c(r8)
-    b lbl_fn_80613520_00000810
+    b lbl_GXSetVtxAttrFmt_00000810
     lwz r0, 0x5c(r8)
     rlwimi r0, r5, 5, 26, 26
     rlwimi r0, r6, 6, 23, 25
     rlwimi r0, r7, 9, 18, 22
     stw r0, 0x5c(r8)
-    b lbl_fn_80613520_00000810
+    b lbl_GXSetVtxAttrFmt_00000810
     lwz r0, 0x5c(r8)
     rlwimi r0, r5, 14, 17, 17
     rlwimi r0, r6, 15, 14, 16
     rlwimi r0, r7, 18, 9, 13
     stw r0, 0x5c(r8)
-    b lbl_fn_80613520_00000810
+    b lbl_GXSetVtxAttrFmt_00000810
     lwz r0, 0x5c(r8)
     rlwimi r0, r5, 23, 8, 8
     rlwimi r0, r6, 24, 5, 7
     rlwimi r0, r7, 27, 0, 4
     stw r0, 0x5c(r8)
-lbl_fn_80613520_00000810:
+lbl_GXSetVtxAttrFmt_00000810:
     lwz r5, __GXData
     clrlwi r0, r3, 24
     li r3, 0x1
@@ -958,7 +958,7 @@ lbl___GXSetVtxDesc_00000D14:
     blr
 }
 
-asm void fn_80613BB0(void)
+asm void GXClearVtxDesc(void)
 {
     nofralloc
     lwz r4, __GXData

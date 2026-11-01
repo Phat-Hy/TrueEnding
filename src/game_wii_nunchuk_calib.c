@@ -20,7 +20,7 @@ extern void str_findChar(void);
 extern void fn_80112974(void);
 extern void fn_80114468(void);
 extern void fn_8011447C(void);
-extern void fn_801FECE0(void);
+extern void thread_findAndNotify(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
 extern void fn_8023A680(void);
@@ -34,7 +34,7 @@ extern void fn_80481800(void);
 extern void fn_80481818(void);
 extern void fn_80531E84(void);
 extern void fn_805381A4(void);
-extern void fn_805381CC(void);
+extern void spectate_getRootNode(void);
 extern void fn_805384D0(void);
 extern void fn_80538DC8(void);
 extern void fn_80541370(void);
@@ -160,7 +160,7 @@ asm void fn_8055D0BC(void)
     stw r0, 0x88(r1)
     mr r3, r28
     stw r0, 0x90(r1)
-    bl fn_805381CC
+    bl spectate_getRootNode
     lwz r6, 0x30(r28)
     lwz r29, 0x18(r28)
     cmpwi r6, 0x0
@@ -712,7 +712,7 @@ lbl_fn_8055D818_00000878:
     bl fn_805381A4
     mr r30, r3
     mr r3, r29
-    bl fn_805381CC
+    bl spectate_getRootNode
     lwz r0, 0x30(r29)
     mr r31, r3
     cmpwi r0, 0x0
@@ -828,7 +828,7 @@ lbl_fn_8055D818_00000A0C:
     bl fn_805381A4
     mr r30, r3
     mr r3, r29
-    bl fn_805381CC
+    bl spectate_getRootNode
     lwz r4, 0x1c(r29)
     lis r5, lbl_8075EC98@ha
     lwz r0, 0x14(r29)
@@ -1002,7 +1002,7 @@ asm void fn_8055DBF8(void)
     b lbl_fn_8055DBF8_00001230
 lbl_fn_8055DBF8_00000C34:
     mr r3, r26
-    bl fn_805381CC
+    bl spectate_getRootNode
     lwz r0, 0x30(r26)
     mr r28, r3
     cmpwi r0, 0x0
@@ -1326,7 +1326,7 @@ lbl_fn_8055DBF8_0000108C:
     b lbl_fn_8055DBF8_00001230
 lbl_fn_8055DBF8_0000109C:
     mr r3, r26
-    bl fn_805381CC
+    bl spectate_getRootNode
     lwz r0, 0x30(r26)
     mr r27, r3
     mr r3, r26
@@ -1411,7 +1411,7 @@ lbl_fn_8055DBF8_00001180:
     b lbl_fn_8055DBF8_00001230
 lbl_fn_8055DBF8_000011B8:
     mr r3, r26
-    bl fn_805381CC
+    bl spectate_getRootNode
     lwz r0, 0x30(r26)
     cmpwi r0, 0x1
     ble lbl_fn_8055DBF8_000011D8
@@ -1471,7 +1471,7 @@ asm void fn_8055E258(void)
     mr r3, r31
     bl fn_805381A4
     mr r3, r31
-    bl fn_805381CC
+    bl spectate_getRootNode
     lwz r0, 0x30(r31)
     cmpwi r0, 0x0
     ble lbl_fn_8055E258_00001294
@@ -1523,7 +1523,7 @@ lbl_fn_8055E258_0000131C:
     fmr f1, f31
     mr r4, r3
     mr r3, r31
-    bl fn_801FECE0
+    bl thread_findAndNotify
 lbl_fn_8055E258_00001330:
     psq_l f31, 0x18(r1), 0, 0
     li r3, 0x0
@@ -1551,7 +1551,7 @@ asm void fn_8055E354(void)
     mr r3, r31
     bl fn_805381A4
     mr r3, r31
-    bl fn_805381CC
+    bl spectate_getRootNode
     lwz r0, 0x30(r31)
     cmpwi r0, 0x0
     ble lbl_fn_8055E354_0000139C
@@ -1628,7 +1628,7 @@ lbl_fn_8055E354_00001474:
     mr r3, r31
     bl fn_805381A4
     mr r3, r31
-    bl fn_805381CC
+    bl spectate_getRootNode
     lwz r0, 0x30(r31)
     cmpwi r0, 0x0
     ble lbl_fn_8055E354_00001498
@@ -1701,7 +1701,7 @@ lbl_fn_8055E520_0000155C:
     b lbl_fn_8055E520_00001704
 lbl_fn_8055E520_00001568:
     mr r3, r31
-    bl fn_805381CC
+    bl spectate_getRootNode
     lwz r5, 0x30(r31)
     cmpwi r5, 0x0
     ble lbl_fn_8055E520_00001584
@@ -1762,7 +1762,7 @@ lbl_fn_8055E520_00001628:
 lbl_fn_8055E520_0000162C:
     lwz r30, 0x4(r3)
     mr r3, r31
-    bl fn_805381CC
+    bl spectate_getRootNode
     mr r4, r30
     bl fn_80541370
     li r3, 0x1
@@ -1789,7 +1789,7 @@ lbl_fn_8055E520_00001680:
     cmpwi r0, 0x1
     bne lbl_fn_8055E520_00001704
     mr r3, r31
-    bl fn_805381CC
+    bl spectate_getRootNode
     lwz r0, 0x30(r31)
     cmpwi r0, 0x2
     ble lbl_fn_8055E520_000016AC
@@ -1849,7 +1849,7 @@ asm void fn_8055E724(void)
     mr r3, r27
     bl fn_805381A4
     mr r3, r27
-    bl fn_805381CC
+    bl spectate_getRootNode
     lwz r5, 0x30(r27)
     mr r30, r3
     cmpwi r5, 0x0

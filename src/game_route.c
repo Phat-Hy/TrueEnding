@@ -55,7 +55,7 @@ void fn_800875EC(void);
 void fn_800875F8(void);
 void route_interpolatePath(void);
 void fn_80087858(void);
-void fn_80087994(void);
+void route_createSegment(void);
 void fn_80087AA0(void);
 void fn_80087BB4(void);
 void fn_80087E9C(void);
@@ -1519,7 +1519,7 @@ lbl_fn_80087858_00001414:
     blr
 }
 
-asm void fn_80087994(void)
+asm void route_createSegment(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -1541,13 +1541,13 @@ asm void fn_80087994(void)
     bl mem_alloc
     cmpwi r3, 0x0
     mr r31, r3
-    beq lbl_fn_80087994_000014E4
+    beq lbl_route_createSegment_000014E4
     addi r0, r3, 0x4
     lis r4, lbl_80778808@ha
     cmplw r27, r0
     addi r4, r4, lbl_80778808@l
     stw r4, 0x0(r3)
-    beq lbl_fn_80087994_000014B8
+    beq lbl_route_createSegment_000014B8
     mr r3, r27
     bl strlen
     mr r5, r3
@@ -1555,7 +1555,7 @@ asm void fn_80087994(void)
     addi r3, r31, 0x4
     addi r5, r5, 0x1
     bl memcpy
-lbl_fn_80087994_000014B8:
+lbl_route_createSegment_000014B8:
     li r4, 0x0
     stw r4, 0x44(r31)
     lis r3, lbl_807786E8@ha
@@ -1567,9 +1567,9 @@ lbl_fn_80087994_000014B8:
     stw r4, 0x54(r31)
     stw r3, 0x0(r31)
     stw r28, 0x58(r31)
-lbl_fn_80087994_000014E4:
+lbl_route_createSegment_000014E4:
     cmpwi r31, 0x0
-    beq lbl_fn_80087994_0000152C
+    beq lbl_route_createSegment_0000152C
     lwz r12, 0x0(r31)
     mr r3, r31
     mr r4, r29
@@ -1579,15 +1579,15 @@ lbl_fn_80087994_000014E4:
     bctrl
     lwz r0, 0x58(r26)
     cmpwi r0, 0x0
-    bne lbl_fn_80087994_00001520
+    bne lbl_route_createSegment_00001520
     stw r31, 0x58(r26)
     stw r31, 0x5c(r26)
-    b lbl_fn_80087994_0000152C
-lbl_fn_80087994_00001520:
+    b lbl_route_createSegment_0000152C
+lbl_route_createSegment_00001520:
     lwz r3, 0x5c(r26)
     stw r31, 0x44(r3)
     stw r31, 0x5c(r26)
-lbl_fn_80087994_0000152C:
+lbl_route_createSegment_0000152C:
     lmw r26, 0x8(r1)
     lwz r0, 0x24(r1)
     mtlr r0

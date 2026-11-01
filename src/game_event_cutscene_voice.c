@@ -12,7 +12,7 @@ extern void fn_80079044(void);
 extern void mem_alloc(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
-extern void fn_80087994(void);
+extern void route_createSegment(void);
 extern void fn_8008937C(void);
 extern void fn_800C16C0(void);
 extern void fn_800C1814(void);
@@ -26,7 +26,7 @@ extern void fn_8010D98C(void);
 extern void fn_80112254(void);
 extern void fn_801856A4(void);
 extern void fn_801856AC(void);
-extern void fn_801F3FF8(void);
+extern void save_validateHeader(void);
 extern void fn_80221E08(void);
 extern void fn_803D7000(void);
 extern void fn_8047DC98(void);
@@ -2591,7 +2591,7 @@ lbl_fn_8047CF7C_000020F0:
     stw r6, 0x1dec(r31)
     stw r6, 0x1df0(r31)
     stw r6, 0x1df4(r31)
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x1a7c(r31)
     li r4, 0x1
     bl atn_Task_setActive
@@ -2599,7 +2599,7 @@ lbl_fn_8047CF7C_000020F0:
     mr r3, r31
     addi r4, r4, 0x22
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x1a80(r31)
     li r4, 0x1
     bl atn_Task_setActive
@@ -2680,31 +2680,31 @@ lbl_fn_8047CF7C_000022C8:
     addi r4, r29, 0x51
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r27
     addi r4, r29, 0x5d
     addi r5, r31, 0x1a44
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r27
     addi r4, r29, 0x6e
     addi r5, r31, 0x1e90
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r27
     addi r4, r29, 0x82
     addi r5, r31, 0x2384
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r27
     addi r4, r29, 0x8f
     addi r5, r31, 0x2388
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r27
     addi r4, r29, 0x9d
     addi r5, r31, 0x1f60
@@ -2866,21 +2866,21 @@ lbl_fn_8047CF7C_000022C8:
     psq_st f1, 0x0(r28), 0, 0
     psq_st f2, 0x8(r28), 0, 0
     stb r0, 0x2404(r31)
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x23ac(r31)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r31
     addi r4, r29, 0x14d
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x23b0(r31)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r31
     addi r4, r29, 0x16c
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x48(r31)
     li r4, 0x1
     bl atn_Task_setActive
@@ -2900,7 +2900,7 @@ lbl_fn_8047CF7C_000022C8:
     stfs f2, 0x54(r31)
     stfs f3, 0x5c(r31)
     stfs f0, 0x60(r31)
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x241c(r31)
     li r4, 0x1
     bl atn_Task_setActive
@@ -2917,7 +2917,7 @@ lbl_fn_8047CF7C_000022C8:
     psq_l f1, 0x0(r6), 0, 0
     psq_st f1, 0x0(r7), 0, 0
     stfs f0, 0x2434(r31)
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x2438(r31)
     li r4, 0x1
     bl atn_Task_setActive

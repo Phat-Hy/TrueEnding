@@ -12,7 +12,7 @@ extern void _savegpr_23(void);
 extern void _savegpr_24(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
-extern void fn_8067E23C(void);
+extern void memcmp(void);
 extern void strcmp(void);
 extern void strncmp(void);
 extern void strstr(void);
@@ -25,13 +25,13 @@ extern void fn_806A4264(void);
 extern void fn_806A426C(void);
 extern void fn_806A4270(void);
 extern void fn_806D58F0(void);
-extern void fn_806D5900(void);
+extern void net_bufferGetElement(void);
 extern void fn_806D62F0(void);
 extern void fn_806D63A0(void);
 extern void fn_806D6420(void);
 extern void fn_806D64B0(void);
 extern void fn_806D6610(void);
-extern void fn_806D7AC0(void);
+extern void net_socketClose(void);
 extern void fn_806D7AE0(void);
 extern void fn_806D7B30(void);
 extern void fn_806D7CF0(void);
@@ -164,7 +164,7 @@ lbl_fn_806FCFE0_00000068:
 lbl_fn_806FCFE0_00000084:
     lwz r3, lbl_808627E0@l(r31)
     mr r4, r30
-    bl fn_806D5900
+    bl net_bufferGetElement
     bl fn_806FC9C0
     subi r30, r30, 0x1
 lbl_fn_806FCFE0_00000098:
@@ -443,7 +443,7 @@ asm void fn_806FD420(void)
     mr r29, r3
     addi r4, r6, lbl_807C5D00@l
     li r5, 0x6
-    bl fn_8067E23C
+    bl memcmp
     cntlzw r0, r3
     srwi. r0, r0, 5
     beq lbl_fn_806FD420_0000086C
@@ -480,7 +480,7 @@ lbl_fn_806FD420_000004F0:
 lbl_fn_806FD420_000004F8:
     lwz r3, lbl_808627E0@l(r29)
     mr r4, r28
-    bl fn_806D5900
+    bl net_bufferGetElement
     lwz r0, 0x4(r3)
     cmpw r0, r31
     bne lbl_fn_806FD420_00000518
@@ -637,7 +637,7 @@ lbl_fn_806FD420_00000730:
 lbl_fn_806FD420_00000738:
     lwz r3, lbl_808627E0@l(r29)
     mr r4, r28
-    bl fn_806D5900
+    bl net_bufferGetElement
     lwz r0, 0x4(r3)
     cmpw r0, r30
     bne lbl_fn_806FD420_00000758
@@ -700,7 +700,7 @@ lbl_fn_806FD420_00000810:
 lbl_fn_806FD420_00000818:
     lwz r3, lbl_808627E0@l(r31)
     mr r4, r28
-    bl fn_806D5900
+    bl net_bufferGetElement
     lwz r0, 0x4(r3)
     cmpw r0, r29
     bne lbl_fn_806FD420_00000834
@@ -1897,7 +1897,7 @@ asm void fn_806FE830(void)
 {
     nofralloc
     lwz r3, 0x0(r3)
-    b fn_806D7AC0
+    b net_socketClose
 }
 
 asm void fn_806FE840(void)
@@ -1971,7 +1971,7 @@ asm void fn_806FE900(void)
     li r0, 0x0
     stw r0, 0x18(r31)
     mr r3, r31
-    bl fn_806D7AC0
+    bl net_socketClose
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0

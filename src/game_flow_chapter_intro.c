@@ -24,7 +24,7 @@ extern void fn_80178864(void);
 extern void fn_8017C7F8(void);
 extern void fn_80206B9C(void);
 extern void fn_8020EF04(void);
-extern void fn_80211480(void);
+extern void event_findEntryById(void);
 extern void task_findEntryById(void);
 extern void world_setGlobalFlag(void);
 extern void world_getLocalFlag(void);
@@ -36,7 +36,7 @@ extern void fn_803BD49C(void);
 extern void fn_803E9608(void);
 extern void fn_803EBA54(void);
 extern void fn_804439FC(void);
-extern void fn_804AE3BC(void);
+extern void net_getPacketManager(void);
 extern void fn_804B6204(void);
 extern void fn_804B671C(void);
 extern void fn_804D818C(void);
@@ -448,13 +448,13 @@ lbl_fn_804E4490_000004A8:
     stw r0, 0xc(r1)
     lwz r0, -0x698c(r3)
     stw r0, 0x10(r1)
-    bl fn_804AE3BC
+    bl net_getPacketManager
     mr r6, r28
     li r4, -0x1
     li r5, 0x1012
     li r7, 0x1
     bl fn_8050E098
-    bl fn_804AE3BC
+    bl net_getPacketManager
     li r4, -0x1
     li r5, 0x1
     bl fn_8050DDE0
@@ -480,7 +480,7 @@ asm void fn_804E49A8(void)
     lwz r3, -0x698c(r4)
     cmpwi r3, 0x0
     ble lbl_fn_804E49A8_00000580
-    bl fn_80211480
+    bl event_findEntryById
     cmpwi r3, 0x0
     beq lbl_fn_804E49A8_00000580
     lwz r3, 0x514(r31)
@@ -1099,7 +1099,7 @@ lbl_fn_804E4EB4_00000D24:
     lwz r0, 0x9f8(r3)
 lbl_fn_804E4EB4_00000D28:
     stb r0, 0x3e(r1)
-    bl fn_804AE3BC
+    bl net_getPacketManager
     addi r6, r1, 0x3c
     li r4, -0x1
     li r5, 0x103b
@@ -1368,7 +1368,7 @@ lbl_fn_804E4EB4_000010D8:
     stw r28, lbl_8087F5FC
     sth r0, 0x28(r1)
     stw r18, 0x2c(r1)
-    bl fn_804AE3BC
+    bl net_getPacketManager
     addi r6, r1, 0x2c
     li r4, -0x1
     li r5, 0x1002
@@ -1523,13 +1523,13 @@ lbl_fn_804E4EB4_00001304:
     lbz r0, 0xcc(r23)
     stb r0, 0x24(r1)
     stb r27, 0x25(r1)
-    bl fn_804AE3BC
+    bl net_getPacketManager
     addi r6, r1, 0x24
     li r4, -0x1
     li r5, 0x103a
     li r7, 0x1
     bl fn_8050E098
-    bl fn_804AE3BC
+    bl net_getPacketManager
     li r4, -0x1
     li r5, 0x1
     bl fn_8050DDE0
@@ -1581,7 +1581,7 @@ lbl_fn_804E4EB4_000013E4:
     lbz r0, 0xcc(r23)
     stb r0, 0x34(r1)
     stb r28, 0x35(r1)
-    bl fn_804AE3BC
+    bl net_getPacketManager
     addi r6, r1, 0x34
     li r4, -0x1
     li r5, 0x103b
@@ -1887,13 +1887,13 @@ lbl_fn_804E5BC8_00001844:
     lbz r0, 0xcc(r31)
     stb r0, 0x10(r1)
     stb r24, 0x11(r1)
-    bl fn_804AE3BC
+    bl net_getPacketManager
     mr r6, r30
     li r4, -0x1
     li r5, 0x103a
     li r7, 0x1
     bl fn_8050E098
-    bl fn_804AE3BC
+    bl net_getPacketManager
     li r4, -0x1
     li r5, 0x1
     bl fn_8050DDE0

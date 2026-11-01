@@ -21,7 +21,7 @@ extern void fn_80616360(void);
 extern void fn_80616EF0(void);
 extern void fn_8061A0F0(void);
 extern void fn_8061A100(void);
-extern void fn_8068236C(void);
+extern void strncpy(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
 
@@ -467,7 +467,7 @@ asm void fn_805CFC20(void)
     stw r0, 0x50(r15)
     stb r14, 0x54(r15)
     stw r14, 0x58(r15)
-    bl fn_8068236C
+    bl strncpy
     lha r0, 0x14(r16)
     addi r21, r16, 0x40
     sth r0, 0x24(r15)

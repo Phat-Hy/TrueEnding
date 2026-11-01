@@ -11,7 +11,7 @@ extern void fn_800A555C(void);
 extern void ref_releaseHandle(void);
 extern void fn_800DD3FC(void);
 extern void fn_80116FC0(void);
-extern void fn_80117228(void);
+extern void actor_spawnActorWithId(void);
 extern void fn_801CF334(void);
 extern void fn_801CF3C0(void);
 extern void fn_801CFA5C(void);
@@ -28,15 +28,15 @@ extern void fn_801E6B10(void);
 extern void fn_801E6FC8(void);
 extern void fn_801E7098(void);
 extern void fn_801E7D78(void);
-extern void fn_80206BE4(void);
-extern void fn_80206C50(void);
+extern void assert_generateId(void);
+extern void assert_formatLocation(void);
 extern void fn_8020924C(void);
 extern void fn_8020ED84(void);
 extern void fn_8020EF04(void);
 extern void fn_8020EF4C(void);
-extern void fn_8020EF80(void);
+extern void random_generateValue(void);
 extern void fn_8020EFEC(void);
-extern void fn_80211480(void);
+extern void event_findEntryById(void);
 extern void fn_802114D8(void);
 extern void fn_802114E0(void);
 extern void fn_80219558(void);
@@ -49,7 +49,7 @@ extern void fn_804A4494(void);
 extern void fn_80510D68(void);
 extern void fn_80530388(void);
 extern void printf(void);
-extern void fn_80686AF0(void);
+extern void wcscmp(void);
 extern void abort(void);
 
 /* External data declarations */
@@ -94,7 +94,7 @@ asm void fn_801D8CC4(void)
     lwz r3, 0xb4c(r3)
     add r30, r3, r0
     lwz r3, 0x4(r30)
-    bl fn_80206C50
+    bl assert_formatLocation
     lwz r0, 0x8(r30)
     mr r28, r3
     lwz r3, 0xacc(r31)
@@ -102,8 +102,8 @@ asm void fn_801D8CC4(void)
     srwi r5, r0, 31
     bl fn_801E7D78
     mr r3, r28
-    bl fn_80206BE4
-    bl fn_80211480
+    bl assert_generateId
+    bl event_findEntryById
     cmpwi r3, 0x0
     mr r4, r3
     beq lbl_fn_801D8CC4_00000080
@@ -129,7 +129,7 @@ lbl_fn_801D8CC4_00000080:
     bne lbl_fn_801D8CC4_000000F4
     addi r3, r1, 0x24
     li r4, 0xb
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x24
     li r4, -0x1
     bl ref_releaseHandle
@@ -171,7 +171,7 @@ lbl_fn_801D8CC4_000000F4:
     bne lbl_fn_801D8CC4_00000214
     addi r3, r1, 0x20
     li r4, 0xb
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x20
     li r4, -0x1
     bl ref_releaseHandle
@@ -207,8 +207,8 @@ lbl_fn_801D8CC4_000001DC:
     la r28, lbl_808813D0
 lbl_fn_801D8CC4_000001E0:
     mr r3, r27
-    bl fn_80206BE4
-    bl fn_80211480
+    bl assert_generateId
+    bl event_findEntryById
     lwz r6, 0x8(r3)
     mr r4, r28
     lwz r5, 0x4(r31)
@@ -229,7 +229,7 @@ lbl_fn_801D8CC4_00000214:
     lwz r25, 0x4(r3)
     mr r3, r27
     stw r27, 0x58(r1)
-    bl fn_80206BE4
+    bl assert_generateId
     li r7, -0x1
     stw r3, 0x5c(r1)
     li r0, 0x1
@@ -283,7 +283,7 @@ lbl_fn_801D8CC4_000002C0:
 lbl_fn_801D8CC4_000002FC:
     addi r3, r1, 0x1c
     li r4, 0xd
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x1c
     li r4, -0x1
     bl ref_releaseHandle
@@ -291,7 +291,7 @@ lbl_fn_801D8CC4_000002FC:
 lbl_fn_801D8CC4_00000318:
     addi r3, r1, 0x18
     li r4, 0xb
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x18
     li r4, -0x1
     bl ref_releaseHandle
@@ -305,13 +305,13 @@ lbl_fn_801D8CC4_00000334:
     beq lbl_fn_801D8CC4_00000398
     addi r3, r1, 0x14
     li r4, 0x2
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x14
     li r4, -0x1
     bl ref_releaseHandle
     addi r3, r1, 0x10
     li r4, 0xa
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle
@@ -334,7 +334,7 @@ lbl_fn_801D8CC4_00000398:
     beq lbl_fn_801D8CC4_00000460
     addi r3, r1, 0xc
     li r4, 0x12
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0xc
     li r4, -0x1
     bl ref_releaseHandle
@@ -386,7 +386,7 @@ lbl_fn_801D8CC4_00000460:
     beq lbl_fn_801D8CC4_00000528
     addi r3, r1, 0x8
     li r4, 0x12
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -489,7 +489,7 @@ asm void fn_801D924C(void)
 lbl_fn_801D924C_000005D4:
     addi r3, r1, 0x10
     li r4, 0x12
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle
@@ -503,7 +503,7 @@ lbl_fn_801D924C_000005D4:
 lbl_fn_801D924C_00000608:
     addi r3, r1, 0xc
     li r4, 0x12
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0xc
     li r4, -0x1
     bl ref_releaseHandle
@@ -523,7 +523,7 @@ lbl_fn_801D924C_0000063C:
     beq lbl_fn_801D924C_00000688
     addi r3, r1, 0x8
     li r4, 0x2
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -691,7 +691,7 @@ lbl_fn_801D94D0_0000088C:
     mr r3, r15
     mr r5, r22
     bl fn_801CFA5C
-    bl fn_80206BE4
+    bl assert_generateId
     cmpwi r3, 0x0
     mr r4, r3
     ble lbl_fn_801D94D0_000008E8
@@ -716,7 +716,7 @@ lbl_fn_801D94D0_00000900:
     mr r3, r15
     mr r5, r22
     bl fn_801CFAA8
-    bl fn_8020EF80
+    bl random_generateValue
     cmpwi r3, 0x0
     mr r4, r3
     ble lbl_fn_801D94D0_00000960
@@ -1742,16 +1742,16 @@ lbl_fn_801DA308_00001734:
     frsp f2, f2
     fcmpo cr0, f2, f31
     bge lbl_fn_801DA308_00001788
-    bl fn_8020EF80
-    bl fn_80211480
+    bl random_generateValue
+    bl event_findEntryById
     mr r22, r3
     lwz r3, 0x0(r25)
-    bl fn_8020EF80
-    bl fn_80211480
+    bl random_generateValue
+    bl event_findEntryById
     mr r4, r3
     lwz r3, 0x8(r22)
     lwz r4, 0x8(r4)
-    bl fn_80686AF0
+    bl wcscmp
     srwi r0, r3, 31
     b lbl_fn_801DA308_00001794
 lbl_fn_801DA308_00001788:
@@ -1889,16 +1889,16 @@ lbl_fn_801DA308_00001944:
     frsp f2, f2
     fcmpo cr0, f2, f31
     bge lbl_fn_801DA308_00001998
-    bl fn_8020EF80
-    bl fn_80211480
+    bl random_generateValue
+    bl event_findEntryById
     mr r22, r3
     lwz r3, 0x0(r29)
-    bl fn_8020EF80
-    bl fn_80211480
+    bl random_generateValue
+    bl event_findEntryById
     mr r4, r3
     lwz r3, 0x8(r22)
     lwz r4, 0x8(r4)
-    bl fn_80686AF0
+    bl wcscmp
     srwi r0, r3, 31
     b lbl_fn_801DA308_000019A4
 lbl_fn_801DA308_00001998:
@@ -1946,16 +1946,16 @@ lbl_fn_801DA308_00001A10:
     frsp f2, f2
     fcmpo cr0, f2, f31
     bge lbl_fn_801DA308_00001A64
-    bl fn_8020EF80
-    bl fn_80211480
+    bl random_generateValue
+    bl event_findEntryById
     mr r22, r3
     lwz r3, 0x0(r29)
-    bl fn_8020EF80
-    bl fn_80211480
+    bl random_generateValue
+    bl event_findEntryById
     mr r4, r3
     lwz r3, 0x8(r22)
     lwz r4, 0x8(r4)
-    bl fn_80686AF0
+    bl wcscmp
     srwi r0, r3, 31
     b lbl_fn_801DA308_00001A70
 lbl_fn_801DA308_00001A64:
@@ -2031,16 +2031,16 @@ lbl_fn_801DA308_00001B44:
     frsp f2, f2
     fcmpo cr0, f2, f31
     bge lbl_fn_801DA308_00001B98
-    bl fn_8020EF80
-    bl fn_80211480
+    bl random_generateValue
+    bl event_findEntryById
     mr r22, r3
     lwz r3, 0x0(r29)
-    bl fn_8020EF80
-    bl fn_80211480
+    bl random_generateValue
+    bl event_findEntryById
     mr r4, r3
     lwz r3, 0x8(r22)
     lwz r4, 0x8(r4)
-    bl fn_80686AF0
+    bl wcscmp
     srwi r0, r3, 31
     b lbl_fn_801DA308_00001BA4
 lbl_fn_801DA308_00001B98:
@@ -2086,16 +2086,16 @@ lbl_fn_801DA308_00001C08:
     frsp f2, f2
     fcmpo cr0, f2, f31
     bge lbl_fn_801DA308_00001C5C
-    bl fn_8020EF80
-    bl fn_80211480
+    bl random_generateValue
+    bl event_findEntryById
     mr r22, r3
     lwz r3, 0x0(r29)
-    bl fn_8020EF80
-    bl fn_80211480
+    bl random_generateValue
+    bl event_findEntryById
     mr r4, r3
     lwz r3, 0x8(r22)
     lwz r4, 0x8(r4)
-    bl fn_80686AF0
+    bl wcscmp
     srwi r0, r3, 31
     b lbl_fn_801DA308_00001C68
 lbl_fn_801DA308_00001C5C:
@@ -2202,16 +2202,16 @@ lbl_fn_801DA308_00001DC0:
     frsp f2, f2
     fcmpo cr0, f2, f31
     bge lbl_fn_801DA308_00001E14
-    bl fn_8020EF80
-    bl fn_80211480
+    bl random_generateValue
+    bl event_findEntryById
     mr r29, r3
     lwz r3, 0x0(r30)
-    bl fn_8020EF80
-    bl fn_80211480
+    bl random_generateValue
+    bl event_findEntryById
     mr r4, r3
     lwz r3, 0x8(r29)
     lwz r4, 0x8(r4)
-    bl fn_80686AF0
+    bl wcscmp
     srwi r0, r3, 31
     b lbl_fn_801DA308_00001E20
 lbl_fn_801DA308_00001E14:
@@ -2263,16 +2263,16 @@ lbl_fn_801DA308_00001E98:
     frsp f2, f2
     fcmpo cr0, f2, f31
     bge lbl_fn_801DA308_00001EEC
-    bl fn_8020EF80
-    bl fn_80211480
+    bl random_generateValue
+    bl event_findEntryById
     mr r29, r3
     lwz r3, 0x0(r23)
-    bl fn_8020EF80
-    bl fn_80211480
+    bl random_generateValue
+    bl event_findEntryById
     mr r4, r3
     lwz r3, 0x8(r29)
     lwz r4, 0x8(r4)
-    bl fn_80686AF0
+    bl wcscmp
     srwi r0, r3, 31
     b lbl_fn_801DA308_00001EF8
 lbl_fn_801DA308_00001EEC:
@@ -2351,16 +2351,16 @@ lbl_fn_801DA308_00001FD4:
     frsp f2, f2
     fcmpo cr0, f2, f31
     bge lbl_fn_801DA308_00002028
-    bl fn_8020EF80
-    bl fn_80211480
+    bl random_generateValue
+    bl event_findEntryById
     mr r29, r3
     lwz r3, 0x0(r23)
-    bl fn_8020EF80
-    bl fn_80211480
+    bl random_generateValue
+    bl event_findEntryById
     mr r4, r3
     lwz r3, 0x8(r29)
     lwz r4, 0x8(r4)
-    bl fn_80686AF0
+    bl wcscmp
     srwi r0, r3, 31
     b lbl_fn_801DA308_00002034
 lbl_fn_801DA308_00002028:
@@ -2407,16 +2407,16 @@ lbl_fn_801DA308_0000209C:
     frsp f2, f2
     fcmpo cr0, f2, f31
     bge lbl_fn_801DA308_000020F0
-    bl fn_8020EF80
-    bl fn_80211480
+    bl random_generateValue
+    bl event_findEntryById
     mr r29, r3
     lwz r3, 0x0(r30)
-    bl fn_8020EF80
-    bl fn_80211480
+    bl random_generateValue
+    bl event_findEntryById
     mr r4, r3
     lwz r3, 0x8(r29)
     lwz r4, 0x8(r4)
-    bl fn_80686AF0
+    bl wcscmp
     srwi r0, r3, 31
     b lbl_fn_801DA308_000020FC
 lbl_fn_801DA308_000020F0:

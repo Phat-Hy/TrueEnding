@@ -11,8 +11,8 @@ extern void fn_8061B9F0(void);
 extern void fn_8061BAC0(void);
 extern void fn_8061BB80(void);
 extern void fn_80622170(void);
-extern void fn_806809C0(void);
-extern void fn_8068236C(void);
+extern void snprintf(void);
+extern void strncpy(void);
 extern void atoi(void);
 extern void vsnprintf(void);
 
@@ -269,7 +269,7 @@ lbl_asyncRoutine_00000308:
     addi r3, r1, 0x18
     addi r4, r4, 0x7
     li r5, 0x11
-    bl fn_8068236C
+    bl strncpy
     lis r3, 0x8208
     li r5, 0x2d
     addi r0, r3, 0x2083
@@ -302,7 +302,7 @@ lbl_asyncRoutine_00000308:
     addi r8, r8, 0x1
     lwz r10, 0x60(r1)
     crclr 6
-    bl fn_806809C0
+    bl snprintf
     cmpwi r3, 0x100
     bge lbl_asyncRoutine_000003F8
     addi r4, r31, 0x200

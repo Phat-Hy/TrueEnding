@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
-extern void fn_80087994(void);
+extern void route_createSegment(void);
 extern void fn_80088FAC(void);
 extern void fn_8008937C(void);
 extern void atn_Task_unlink(void);
@@ -13,7 +13,7 @@ extern void fn_800D3FA4(void);
 extern void atn_LH_Texture_release(void);
 extern void fn_800D5908(void);
 extern void atn_LH_Texture_update(void);
-extern void fn_801F3FF8(void);
+extern void save_validateHeader(void);
 extern void fn_801F4FF4(void);
 extern void fn_801F64D0(void);
 extern void fn_801F8994(void);
@@ -113,7 +113,7 @@ lbl_fn_803CFC78_00000084:
     addi r4, r31, 0x8
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     lfs f2, lbl_80885D60
     mr r3, r29
     lfs f1, lbl_80885D58
@@ -383,7 +383,7 @@ lbl_fn_803CFC78_00000084:
     addi r5, r28, 0xd80
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     lfs f2, lbl_80885D60
     mr r3, r29
     lfs f1, lbl_80885D58
@@ -663,7 +663,7 @@ lbl_fn_803D022C_000008B8:
     addi r20, r20, lbl_807506A0@l
     li r5, 0x0
     addi r4, r20, 0x46f
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x3ec(r19)
     li r4, 0x1
     bl atn_Task_setActive
@@ -697,14 +697,14 @@ lbl_fn_803D022C_00000920:
     addi r20, r20, lbl_807506A0@l
     li r5, 0x0
     addi r4, r20, 0x48c
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x5b8(r19)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r19
     addi r4, r20, 0x4c2
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x3d8(r19)
     li r4, 0x1
     bl atn_Task_setActive
@@ -743,42 +743,42 @@ lbl_fn_803D022C_000009E8:
     addi r20, r20, lbl_807506A0@l
     li r5, 0x0
     addi r4, r20, 0x522
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x714(r19)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r19
     addi r4, r20, 0x542
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x71c(r19)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r19
     addi r4, r20, 0x522
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x718(r19)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r19
     addi r4, r20, 0x542
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x720(r19)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r19
     addi r4, r20, 0x562
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x72c(r19)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r19
     addi r4, r20, 0x589
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x730(r19)
     li r4, 0x1
     bl atn_Task_setActive
@@ -801,119 +801,119 @@ lbl_fn_803D022C_00000ACC:
     addi r20, r4, lbl_807506A0@l
     li r5, 0x0
     addi r4, r20, 0x5cc
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0xa84(r19)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r19
     addi r4, r20, 0x5ee
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0xa88(r19)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r19
     addi r4, r20, 0x613
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x73c(r19)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r19
     addi r4, r20, 0x632
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x740(r19)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r19
     addi r4, r20, 0x651
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x744(r19)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r19
     addi r4, r20, 0x676
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x7b8(r19)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r19
     addi r4, r20, 0x695
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x7bc(r19)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r19
     addi r4, r20, 0x6b4
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x814(r19)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r19
     addi r4, r20, 0x6dc
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x81c(r19)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r19
     addi r4, r20, 0x704
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x824(r19)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r19
     addi r4, r20, 0x651
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x82c(r19)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r19
     addi r4, r20, 0x72d
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x818(r19)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r19
     addi r4, r20, 0x756
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x820(r19)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r19
     addi r4, r20, 0x77f
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x828(r19)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r19
     addi r4, r20, 0x7a9
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x830(r19)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r19
     addi r4, r20, 0x7cf
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x83c(r19)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r19
     addi r4, r20, 0x7f9
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x840(r19)
     li r4, 0x1
     bl atn_Task_setActive
@@ -991,49 +991,49 @@ lbl_fn_803D022C_00000CF8:
     addi r20, r20, lbl_807506A0@l
     li r5, 0x0
     addi r4, r20, 0x976
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x2654(r19)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r19
     addi r4, r20, 0x997
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0xd70(r19)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r19
     addi r4, r20, 0x9c4
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0xd74(r19)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r19
     addi r4, r20, 0x9f1
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0xdb4(r19)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r19
     addi r4, r20, 0xa11
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0xdb8(r19)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r19
     addi r4, r20, 0xa2f
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0xdbc(r19)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r19
     addi r4, r20, 0xa4f
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0xdc0(r19)
     li r4, 0x1
     bl atn_Task_setActive
@@ -1164,35 +1164,35 @@ lbl_fn_803D0B20_00001048:
     addi r30, r30, lbl_807506A0@l
     li r5, 0x0
     addi r4, r30, 0xbc2
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x10f4(r31)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r31
     addi r4, r30, 0xbdd
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x10f8(r31)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r31
     addi r4, r30, 0xbff
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x844(r31)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r31
     addi r4, r30, 0xc20
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x870(r31)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r31
     addi r4, r30, 0xc42
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x848(r31)
     li r4, 0x1
     bl atn_Task_setActive
@@ -1215,7 +1215,7 @@ lbl_fn_803D0B20_00001114:
     addi r30, r30, lbl_807506A0@l
     li r5, 0x0
     addi r4, r30, 0xc42
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x874(r31)
     li r4, 0x1
     bl atn_Task_setActive
@@ -1238,56 +1238,56 @@ lbl_fn_803D0B20_0000116C:
     addi r30, r4, lbl_807506A0@l
     li r5, 0x0
     addi r4, r30, 0xc63
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0xb08(r31)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r31
     addi r4, r30, 0xc83
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0xb0c(r31)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r31
     addi r4, r30, 0xca3
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0xb10(r31)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r31
     addi r4, r30, 0xcc9
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0xb14(r31)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r31
     addi r4, r30, 0xcef
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0xb18(r31)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r31
     addi r4, r30, 0xd0d
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0xb1c(r31)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r31
     addi r4, r30, 0xd2d
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0xb20(r31)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r31
     addi r4, r30, 0xd52
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0xb24(r31)
     li r4, 0x1
     bl atn_Task_setActive
@@ -1297,7 +1297,7 @@ lbl_fn_803D0B20_00001284:
     mr r3, r31
     addi r4, r30, 0xd6d
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0xb28(r28)
     li r4, 0x1
     bl atn_Task_setActive
@@ -1310,49 +1310,49 @@ lbl_fn_803D0B20_00001284:
     addi r30, r30, lbl_807506A0@l
     li r5, 0x0
     addi r4, r30, 0xd8d
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x1104(r31)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r31
     addi r4, r30, 0xdb8
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x1108(r31)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r31
     addi r4, r30, 0xddc
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x1110(r31)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r31
     addi r4, r30, 0xe00
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x1114(r31)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r31
     addi r4, r30, 0xe26
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x1140(r31)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r31
     addi r4, r30, 0xe4e
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x1144(r31)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r31
     addi r4, r30, 0xe76
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x1148(r31)
     li r4, 0x1
     bl atn_Task_setActive
@@ -1389,38 +1389,38 @@ lbl_fn_803D0B20_00001284:
     mr r3, r31
     addi r4, r30, 0x997
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x2544(r31)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r31
     addi r4, r30, 0x9c4
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x2548(r31)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r31
     addi r4, r30, 0xf9e
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x254c(r31)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r31
     addi r4, r30, 0xfbb
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x2550(r31)
     mr r3, r31
     addi r4, r30, 0xfe0
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x2554(r31)
     mr r3, r31
     addi r4, r30, 0x1002
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x2558(r31)
     mr r28, r31
     li r26, 0x0
@@ -1440,7 +1440,7 @@ lbl_fn_803D0B20_000014A0:
     addi r30, r30, lbl_807506A0@l
     li r5, 0x0
     addi r4, r30, 0x1023
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x2564(r31)
     li r4, 0x1
     bl atn_Task_setActive
@@ -1463,14 +1463,14 @@ lbl_fn_803D0B20_000014E0:
     addi r30, r30, lbl_807506A0@l
     li r5, 0x0
     addi r4, r30, 0x1060
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x2628(r31)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r31
     addi r4, r30, 0x107c
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0xdc4(r31)
     li r4, 0x1
     bl atn_Task_setActive

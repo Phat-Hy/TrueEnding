@@ -9,7 +9,7 @@ extern void _savegpr_14(void);
 extern void _savegpr_23(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_80013DC4(void);
+extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_800697D8(void);
 extern void fn_8007AA64(void);
@@ -33,8 +33,8 @@ extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800D5908(void);
 extern void str_findChar(void);
 extern void fn_800DCA6C(void);
-extern void fn_8067E23C(void);
-extern void fn_806823B0(void);
+extern void memcmp(void);
+extern void strcat(void);
 extern void fn_8068AD58(void);
 extern void std_fmod(void);
 extern void fn_806952C4(void);
@@ -1009,7 +1009,7 @@ lbl_fn_80080C20_00000C60:
     mr r15, r3
     addi r3, r1, 0x4c
     mr r4, r15
-    bl fn_80013DC4
+    bl actor_validateIndex
     stb r18, 0xc(r1)
     mr r6, r24
     addi r3, r1, 0x4c
@@ -1134,7 +1134,7 @@ lbl_fn_80080C20_00000E24:
     addi r5, r1, 0x2c
 lbl_fn_80080C20_00000E40:
     lwz r5, 0x0(r5)
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_80080C20_00000E74
     lwz r0, 0x24(r1)
@@ -1192,7 +1192,7 @@ lbl_fn_80080C20_00000EE8:
     addi r5, r1, 0x1c
 lbl_fn_80080C20_00000F04:
     lwz r5, 0x0(r5)
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_80080C20_00000F38
     lwz r0, 0x14(r1)
@@ -1323,7 +1323,7 @@ lbl_fn_80081080_0000109C:
     mr r3, r31
     addi r4, r4, lbl_80731D40@l
     addi r4, r4, 0xd0
-    bl fn_806823B0
+    bl strcat
 lbl_fn_80081080_000010B8:
     lbz r0, 0x4a(r30)
     li r4, 0x0
@@ -1353,7 +1353,7 @@ lbl_fn_80081080_00001100:
     mr r3, r31
     addi r4, r4, lbl_80731D40@l
     addi r4, r4, 0xd6
-    bl fn_806823B0
+    bl strcat
 lbl_fn_80081080_0000111C:
     lbz r0, 0x4a(r30)
     li r4, 0x0
@@ -1383,7 +1383,7 @@ lbl_fn_80081080_00001164:
     mr r3, r31
     addi r4, r4, lbl_80731D40@l
     addi r4, r4, 0xda
-    bl fn_806823B0
+    bl strcat
 lbl_fn_80081080_00001180:
     lbz r0, 0x4a(r30)
     li r4, 0x0
@@ -1413,7 +1413,7 @@ lbl_fn_80081080_000011C8:
     mr r3, r31
     addi r4, r4, lbl_80731D40@l
     addi r4, r4, 0xdf
-    bl fn_806823B0
+    bl strcat
 lbl_fn_80081080_000011E4:
     lbz r0, 0x4a(r30)
     li r4, 0x0
@@ -1443,7 +1443,7 @@ lbl_fn_80081080_0000122C:
     mr r3, r31
     addi r4, r4, lbl_80731D40@l
     addi r4, r4, 0xe6
-    bl fn_806823B0
+    bl strcat
 lbl_fn_80081080_00001248:
     lbz r0, 0x4a(r30)
     li r4, 0x0
@@ -1473,7 +1473,7 @@ lbl_fn_80081080_00001290:
     mr r3, r31
     addi r4, r4, lbl_80731D40@l
     addi r4, r4, 0xea
-    bl fn_806823B0
+    bl strcat
 lbl_fn_80081080_000012AC:
     lbz r0, 0x4a(r30)
     li r4, 0x0
@@ -1503,7 +1503,7 @@ lbl_fn_80081080_000012F4:
     mr r3, r31
     addi r4, r4, lbl_80731D40@l
     addi r4, r4, 0xee
-    bl fn_806823B0
+    bl strcat
 lbl_fn_80081080_00001310:
     lbz r0, 0x4a(r30)
     li r4, 0x0
@@ -1533,7 +1533,7 @@ lbl_fn_80081080_00001358:
     mr r3, r31
     addi r4, r4, lbl_80731D40@l
     addi r4, r4, 0xf2
-    bl fn_806823B0
+    bl strcat
 lbl_fn_80081080_00001374:
     lbz r0, 0x4a(r30)
     li r4, 0x0
@@ -1563,7 +1563,7 @@ lbl_fn_80081080_000013BC:
     mr r3, r31
     addi r4, r4, lbl_80731D40@l
     addi r4, r4, 0xf7
-    bl fn_806823B0
+    bl strcat
 lbl_fn_80081080_000013D8:
     lwz r3, lbl_8087EFE0
     mr r4, r31

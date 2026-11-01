@@ -25,11 +25,11 @@ extern void fn_80129A6C(void);
 extern void fn_80147A18(void);
 extern void quest_checkCondition(void);
 extern void fn_8016E800(void);
-extern void fn_801F3FF8(void);
+extern void save_validateHeader(void);
 extern void fn_801F64D0(void);
 extern void fn_801F6D7C(void);
-extern void fn_801FEE08(void);
-extern void fn_80202118(void);
+extern void thread_dispatchToQueue(void);
+extern void profile_getMetricValue(void);
 extern void fn_8020787C(void);
 extern void fn_80219EB4(void);
 extern void fn_80219EBC(void);
@@ -44,7 +44,7 @@ extern void PSMTXTrans(void);
 extern void PSMTXScale(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
-extern void fn_80686A64(void);
+extern void wcscpy(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -110,7 +110,7 @@ asm void fn_801E7D78(void)
     mr r23, r4
     mr r24, r5
     beq lbl_fn_801E7D78_0000011C
-    bl fn_80202118
+    bl profile_getMetricValue
     cmpwi r3, 0x0
     bne lbl_fn_801E7D78_00000034
     b lbl_fn_801E7D78_0000011C
@@ -136,14 +136,14 @@ lbl_fn_801E7D78_00000074:
     bne lbl_fn_801E7D78_0000008C
     mr r3, r28
     addi r4, r29, 0x12
-    bl fn_80686A64
+    bl wcscpy
     b lbl_fn_801E7D78_000000CC
 lbl_fn_801E7D78_0000008C:
     cmpwi r24, 0x0
     bne lbl_fn_801E7D78_000000A4
     mr r3, r28
     addi r4, r29, 0x1e
-    bl fn_80686A64
+    bl wcscpy
     b lbl_fn_801E7D78_000000CC
 lbl_fn_801E7D78_000000A4:
     cmpwi r27, 0x0
@@ -156,7 +156,7 @@ lbl_fn_801E7D78_000000A4:
 lbl_fn_801E7D78_000000C0:
     mr r3, r28
     addi r4, r29, 0x12
-    bl fn_80686A64
+    bl wcscpy
 lbl_fn_801E7D78_000000CC:
     mr r5, r25
     addi r3, r1, 0x8
@@ -164,14 +164,14 @@ lbl_fn_801E7D78_000000CC:
     crclr 6
     bl sprintf
     mr r3, r22
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r31, r3
     addi r3, r1, 0x8
     bl str_findChar
     mr r4, r3
     mr r5, r26
     addi r3, r31, 0x58
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     addi r25, r25, 0x1
     addi r27, r27, 0x14
     cmpwi r25, 0x2
@@ -198,7 +198,7 @@ asm void fn_801E7EA8(void)
     mr r23, r4
     mr r24, r5
     beq lbl_fn_801E7EA8_0000024C
-    bl fn_80202118
+    bl profile_getMetricValue
     cmpwi r3, 0x0
     bne lbl_fn_801E7EA8_00000164
     b lbl_fn_801E7EA8_0000024C
@@ -224,14 +224,14 @@ lbl_fn_801E7EA8_000001A4:
     bne lbl_fn_801E7EA8_000001BC
     mr r3, r28
     addi r4, r29, 0x12
-    bl fn_80686A64
+    bl wcscpy
     b lbl_fn_801E7EA8_000001FC
 lbl_fn_801E7EA8_000001BC:
     cmpwi r24, 0x0
     bne lbl_fn_801E7EA8_000001D4
     mr r3, r28
     addi r4, r29, 0x1e
-    bl fn_80686A64
+    bl wcscpy
     b lbl_fn_801E7EA8_000001FC
 lbl_fn_801E7EA8_000001D4:
     cmpwi r27, 0x0
@@ -244,7 +244,7 @@ lbl_fn_801E7EA8_000001D4:
 lbl_fn_801E7EA8_000001F0:
     mr r3, r28
     addi r4, r29, 0x12
-    bl fn_80686A64
+    bl wcscpy
 lbl_fn_801E7EA8_000001FC:
     mr r5, r25
     addi r3, r1, 0x8
@@ -252,14 +252,14 @@ lbl_fn_801E7EA8_000001FC:
     crclr 6
     bl sprintf
     mr r3, r22
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r31, r3
     addi r3, r1, 0x8
     bl str_findChar
     mr r4, r3
     mr r5, r26
     addi r3, r31, 0x58
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     addi r25, r25, 0x1
     addi r27, r27, 0x14
     cmpwi r25, 0x2
@@ -1707,7 +1707,7 @@ asm void fn_801E9398(void)
     stw r0, 0x158(r30)
     stw r6, 0x15c(r30)
     stw r6, 0x160(r30)
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x48(r30)
     li r4, 0x1
     bl atn_Task_setActive

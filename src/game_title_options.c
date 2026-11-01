@@ -27,7 +27,7 @@ extern void fn_800E0908(void);
 extern void fn_80119ECC(void);
 extern void fn_8012AFE8(void);
 extern void fn_80209120(void);
-extern void fn_80211480(void);
+extern void event_findEntryById(void);
 extern void fn_8021E444(void);
 extern void fn_80366364(void);
 extern void world_getGlobalFlag(void);
@@ -56,8 +56,8 @@ extern void boss_getOffset50(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_80473F88(void);
 extern void fn_80572B70(void);
-extern void fn_80686A48(void);
-extern void fn_80686A64(void);
+extern void wcslen(void);
+extern void wcscpy(void);
 extern void fn_8068B2A0(void);
 extern void fn_8068B770(void);
 extern void fn_8068BC30(void);
@@ -1329,7 +1329,7 @@ lbl_fn_803B35FC_00000F5C:
     bl talk_parseDialogue
     addi r3, r1, 0x18
     bl talk_parseDialogue
-    bl fn_80686A48
+    bl wcslen
     add r3, r3, r30
     addi r30, r3, 0x1
 lbl_fn_803B35FC_00000FA0:
@@ -1434,9 +1434,9 @@ lbl_fn_803B35FC_000010A8:
     bl talk_parseDialogue
     mr r4, r3
     lwz r3, 0x8(r30)
-    bl fn_80686A64
+    bl wcscpy
     lwz r3, 0x8(r30)
-    bl fn_80686A48
+    bl wcslen
     li r6, 0x0
     li r4, 0x0
     b lbl_fn_803B35FC_0000124C
@@ -1564,7 +1564,7 @@ lbl_fn_803B35FC_000012C8:
     stw r3, 0x34(r30)
     addi r31, r31, 0x38
     lwz r3, 0x8(r30)
-    bl fn_80686A48
+    bl wcslen
     add r3, r3, r29
     addi r29, r3, 0x1
 lbl_fn_803B35FC_000012FC:
@@ -2020,7 +2020,7 @@ lbl_fn_803B3D2C_000018C8:
     mr r3, r28
     stw r31, 0x58(r1)
     stw r31, 0x5c(r1)
-    bl fn_80686A48
+    bl wcslen
     mr r19, r3
     mr r3, r27
     mr r4, r19
@@ -2070,7 +2070,7 @@ lbl_fn_803B3D2C_00001980:
     lbz r0, 0x24(r1)
     addi r3, r1, 0x60
     stb r0, 0x20(r1)
-    bl fn_80686A48
+    bl wcslen
     addi r6, r1, 0x60
     slwi r0, r3, 1
     mr r7, r6
@@ -2083,7 +2083,7 @@ lbl_fn_803B3D2C_00001980:
     b lbl_fn_803B3D2C_00001ACC
 lbl_fn_803B3D2C_000019B8:
     mr r3, r21
-    bl fn_80211480
+    bl event_findEntryById
     cmpwi r3, 0x0
     beq lbl_fn_803B3D2C_00001ACC
     lwz r0, 0x54(r1)
@@ -2099,7 +2099,7 @@ lbl_fn_803B3D2C_000019E8:
     lbz r0, 0x1c(r1)
     mr r3, r21
     stb r0, 0x18(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r4, r19
     mr r6, r21
@@ -2148,7 +2148,7 @@ lbl_fn_803B3D2C_00001A98:
     lbz r0, 0x14(r1)
     addi r3, r1, 0xa0
     stb r0, 0x10(r1)
-    bl fn_80686A48
+    bl wcslen
     addi r6, r1, 0xa0
     slwi r0, r3, 1
     mr r7, r6

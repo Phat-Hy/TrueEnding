@@ -9,7 +9,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_17(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_80013DC4(void);
+extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void talk_parseDialogue(void);
 extern void fn_8005B8F8(void);
@@ -47,8 +47,8 @@ extern void atn_LoadHandle_isLoading(void);
 extern void fn_80473F88(void);
 extern void taskManager_updateTasks(void);
 extern void printf(void);
-extern void fn_80686A48(void);
-extern void fn_80686A64(void);
+extern void wcslen(void);
+extern void wcscpy(void);
 extern void abort(void);
 extern void runtime_clampDouble(void);
 extern u32 strlen(const char* str);
@@ -102,7 +102,7 @@ void fn_801F3E20(void);
 void fn_801F3EF4(void);
 void fn_801F3F74(void);
 void save_dummyCallback2(void);
-void fn_801F3FF8(void);
+void save_validateHeader(void);
 void fn_801F407C(void);
 
 asm void fn_801F275C(void)
@@ -1366,7 +1366,7 @@ lbl_fn_801F36C8_00001108:
     lbz r0, 0x1c(r1)
     mr r3, r22
     stb r0, 0x18(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r5, r16
     mr r6, r22
@@ -1710,7 +1710,7 @@ lbl_fn_801F36C8_000015B0:
 lbl_fn_801F36C8_000015FC:
     lwz r4, 0xc(r4)
 lbl_fn_801F36C8_00001600:
-    bl fn_80686A64
+    bl wcscpy
     lwz r0, 0x40(r1)
     add r3, r0, r17
     lwz r0, 0x4(r3)
@@ -1804,7 +1804,7 @@ lbl_fn_801F3E20_00001730:
     lbz r0, 0xc(r1)
     mr r3, r31
     stb r0, 0x8(r1)
-    bl fn_80686A48
+    bl wcslen
     mr r0, r3
     mr r3, r29
     slwi r0, r0, 1
@@ -1913,7 +1913,7 @@ void save_dummyCallback2(void)
 {
 }
 
-asm void fn_801F3FF8(void)
+asm void save_validateHeader(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -1926,7 +1926,7 @@ asm void fn_801F3FF8(void)
     mr r30, r4
     stw r29, 0x14(r1)
     mr r29, r3
-    beq lbl_fn_801F3FF8_00001900
+    beq lbl_save_validateHeader_00001900
     lis r5, lbl_8073E420@ha
     li r3, 0x110
     addi r5, r5, lbl_8073E420@l
@@ -1935,15 +1935,15 @@ asm void fn_801F3FF8(void)
     li r7, 0x0
     bl mem_alloc
     cmpwi r3, 0x0
-    beq lbl_fn_801F3FF8_00001904
+    beq lbl_save_validateHeader_00001904
     mr r4, r29
     mr r5, r30
     mr r6, r31
     bl fn_801F407C
-    b lbl_fn_801F3FF8_00001904
-lbl_fn_801F3FF8_00001900:
+    b lbl_save_validateHeader_00001904
+lbl_save_validateHeader_00001900:
     li r3, 0x0
-lbl_fn_801F3FF8_00001904:
+lbl_save_validateHeader_00001904:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)
@@ -1999,7 +1999,7 @@ asm void fn_801F407C(void)
     mr r27, r3
     mr r3, r29
     mr r4, r27
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x14(r1)
     mr r3, r29
     stb r0, 0x10(r1)
@@ -2021,7 +2021,7 @@ asm void fn_801F407C(void)
     mr r30, r3
     mr r3, r27
     mr r4, r30
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0xc(r1)
     mr r3, r27
     stb r0, 0x8(r1)

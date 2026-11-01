@@ -7,7 +7,7 @@ extern void _savegpr_22(void);
 extern void dtor_80013D60(void);
 extern void dtor_80084684(void);
 extern void sys_copyString(void);
-extern void fn_80013DC4(void);
+extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_8003E4A4(void);
 extern void fn_80041C0C(void);
@@ -15,7 +15,7 @@ extern void fn_8004203C(void);
 extern void fn_8004212C(void);
 extern void fn_8004274C(void);
 extern void talk_parseQuotedString(void);
-extern void fn_8005B5F8(void);
+extern void talk_scanQuotedString(void);
 extern void talk_formatQuotedString(void);
 extern void fn_8005BBF8(void);
 extern void fn_8006AA20(void);
@@ -1586,7 +1586,7 @@ lbl_fn_803EEEDC_000011BC:
     mr r17, r3
     mr r3, r21
     mr r4, r17
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0xc(r1)
     mr r3, r21
     stb r0, 0x8(r1)
@@ -1736,7 +1736,7 @@ lbl_fn_803EEEDC_000013FC:
     bl dtor_80084684
 lbl_fn_803EEEDC_00001458:
     addi r3, r1, 0x280
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_803EEEDC_00001070
     addi r3, r18, 0x48

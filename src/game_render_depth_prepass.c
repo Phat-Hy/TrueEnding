@@ -5,18 +5,18 @@
 extern void _restgpr_25(void);
 extern void _savegpr_25(void);
 extern void dtor_80084684(void);
-extern void fn_80013DC4(void);
+extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_8004D124(void);
 extern void fn_80056DB8(void);
 extern void atn_ColliCapsule_destructor(void);
 extern void talk_parseQuotedString(void);
-extern void fn_8005B5F8(void);
+extern void talk_scanQuotedString(void);
 extern void fn_8005B6E8(void);
 extern void fn_8006AFF8(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
-extern void fn_80087994(void);
+extern void route_createSegment(void);
 extern void fn_80087E9C(void);
 extern void fn_8008937C(void);
 extern void fn_800897D8(void);
@@ -204,13 +204,13 @@ lbl_fn_802B1F2C_00000074:
     addi r4, r31, 0x1d9
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r30
     addi r4, r31, 0x1e3
     addi r5, r29, 0x1aa4
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     lis r6, 0x2
     mr r3, r30
     subi r7, r6, 0x7960
@@ -316,7 +316,7 @@ lbl_fn_802B1F2C_00000074:
     addi r5, r29, 0x1a44
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r30
     addi r4, r31, 0x252
     addi r5, r29, 0x14c0
@@ -660,7 +660,7 @@ asm void fn_802B23E8(void)
     mr r25, r3
     mr r3, r27
     mr r4, r25
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x1c(r1)
     mr r3, r27
     stb r0, 0x18(r1)
@@ -680,7 +680,7 @@ asm void fn_802B23E8(void)
     mr r25, r3
     mr r3, r27
     mr r4, r25
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x14(r1)
     mr r3, r27
     stb r0, 0x10(r1)
@@ -760,7 +760,7 @@ lbl_fn_802B23E8_00000894:
     bl actor_dispatchMessage
 lbl_fn_802B23E8_000008C4:
     addi r3, r1, 0x44
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_802B23E8_0000083C
 lbl_fn_802B23E8_000008D4:
@@ -1217,7 +1217,7 @@ lbl_fn_802B28BC_00000F10:
     stw r3, 0x1508(r30)
 lbl_fn_802B28BC_00000F34:
     addi r3, r1, 0x8
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_802B28BC_00000B3C
 lbl_fn_802B28BC_00000F44:
@@ -1264,7 +1264,7 @@ lbl_fn_802B28BC_00000FCC:
     li r6, 0x0
     addi r4, r4, 0x130
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     lwz r3, 0x1438(r30)
     cmpwi r3, 0x0
     beq lbl_fn_802B28BC_0000100C

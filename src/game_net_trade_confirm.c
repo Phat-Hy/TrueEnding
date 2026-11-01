@@ -8,7 +8,7 @@ extern void _restgpr_23(void);
 extern void _savegpr_23(void);
 extern void dtor_80084684(void);
 extern void talk_parseQuotedString(void);
-extern void fn_8005B5F8(void);
+extern void talk_scanQuotedString(void);
 extern void fn_8005B6E8(void);
 extern void talk_parseDialogue(void);
 extern void fn_8005B8F8(void);
@@ -17,7 +17,7 @@ extern void fn_8006A250(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
 extern void route_interpolatePath(void);
-extern void fn_80087994(void);
+extern void route_createSegment(void);
 extern void fn_8008937C(void);
 extern void fn_800897D8(void);
 extern void fn_8008C828(void);
@@ -51,8 +51,8 @@ extern void fn_80531814(void);
 extern void printf(void);
 extern void strcmp(void);
 extern void wmemcpy(void);
-extern void fn_80686A48(void);
-extern void fn_80686AF0(void);
+extern void wcslen(void);
+extern void wcscmp(void);
 extern void abort(void);
 extern void runtime_registerStaticObject(void);
 extern void fn_80695A50(void);
@@ -881,7 +881,7 @@ lbl_fn_805303D4_00000B34:
     stfs f1, 0x1330(r29)
 lbl_fn_805303D4_00000B58:
     addi r3, r1, 0x8
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_805303D4_00000A84
     addi r3, r29, 0x1334
@@ -1351,7 +1351,7 @@ lbl_fn_805305D4_0000121C:
     bl dtor_80084684
 lbl_fn_805305D4_00001260:
     addi r3, r1, 0x8c
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_805305D4_00000C9C
     addi r3, r30, 0x1344
@@ -1706,7 +1706,7 @@ lbl_fn_80531090_00001724:
     addi r4, r31, 0x34
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     lfs f1, lbl_80887B30
     mr r3, r30
     lfs f2, lbl_80887B38
@@ -1940,7 +1940,7 @@ lbl_fn_80531398_00001A50:
     bl talk_parseDialogue
     mr r29, r3
     addi r4, r28, lbl_807938C0@l
-    bl fn_80686AF0
+    bl wcscmp
     cmpwi r3, 0x0
     bne lbl_fn_80531398_00001A74
     li r0, 0x1
@@ -1948,7 +1948,7 @@ lbl_fn_80531398_00001A50:
 lbl_fn_80531398_00001A74:
     mr r3, r29
     addi r4, r27, 0xa
-    bl fn_80686AF0
+    bl wcscmp
     cmpwi r3, 0x0
     bne lbl_fn_80531398_00001A90
     li r0, 0x4
@@ -1956,7 +1956,7 @@ lbl_fn_80531398_00001A74:
 lbl_fn_80531398_00001A90:
     mr r3, r29
     addi r4, r27, 0x12
-    bl fn_80686AF0
+    bl wcscmp
     cmpwi r3, 0x0
     bne lbl_fn_80531398_00001AAC
     li r0, 0x3
@@ -1964,7 +1964,7 @@ lbl_fn_80531398_00001A90:
 lbl_fn_80531398_00001AAC:
     mr r3, r29
     addi r4, r27, 0x1e
-    bl fn_80686AF0
+    bl wcscmp
     neg r0, r3
     or r0, r0, r3
     srawi r0, r0, 31
@@ -2041,7 +2041,7 @@ lbl_fn_80531398_00001BB4:
     bl talk_parseDialogue
     mr r24, r3
     addi r4, r29, lbl_807938C0@l
-    bl fn_80686AF0
+    bl wcscmp
     cmpwi r3, 0x0
     bne lbl_fn_80531398_00001BE4
     li r0, 0x1
@@ -2049,7 +2049,7 @@ lbl_fn_80531398_00001BB4:
 lbl_fn_80531398_00001BE4:
     mr r3, r24
     addi r4, r30, 0xa
-    bl fn_80686AF0
+    bl wcscmp
     cmpwi r3, 0x0
     bne lbl_fn_80531398_00001C00
     li r0, 0x4
@@ -2057,7 +2057,7 @@ lbl_fn_80531398_00001BE4:
 lbl_fn_80531398_00001C00:
     mr r3, r24
     addi r4, r30, 0x12
-    bl fn_80686AF0
+    bl wcscmp
     cmpwi r3, 0x0
     bne lbl_fn_80531398_00001C1C
     li r0, 0x3
@@ -2065,7 +2065,7 @@ lbl_fn_80531398_00001C00:
 lbl_fn_80531398_00001C1C:
     mr r3, r24
     addi r4, r30, 0x1e
-    bl fn_80686AF0
+    bl wcscmp
     neg r0, r3
     or r0, r0, r3
     srawi r0, r0, 31
@@ -2086,7 +2086,7 @@ lbl_fn_80531398_00001C38:
     stfs f0, 0x4(r23)
     bl talk_parseDialogue
     addi r4, r30, 0x32
-    bl fn_80686AF0
+    bl wcscmp
     lwz r0, 0x70(r26)
     addi r3, r1, 0x8
     add r4, r0, r28
@@ -2094,7 +2094,7 @@ lbl_fn_80531398_00001C38:
     bl talk_parseDialogue
     mr r24, r3
     addi r4, r30, 0x3a
-    bl fn_80686AF0
+    bl wcscmp
     cmpwi r3, 0x0
     bne lbl_fn_80531398_00001CA8
     li r5, 0x0
@@ -2102,7 +2102,7 @@ lbl_fn_80531398_00001C38:
 lbl_fn_80531398_00001CA8:
     mr r3, r24
     addi r4, r30, 0x48
-    bl fn_80686AF0
+    bl wcscmp
     cmpwi r3, 0x0
     bne lbl_fn_80531398_00001CC4
     li r5, 0x1
@@ -2110,7 +2110,7 @@ lbl_fn_80531398_00001CA8:
 lbl_fn_80531398_00001CC4:
     mr r3, r24
     addi r4, r30, 0x52
-    bl fn_80686AF0
+    bl wcscmp
     cmpwi r3, 0x0
     bne lbl_fn_80531398_00001CE0
     li r5, 0x2
@@ -2118,7 +2118,7 @@ lbl_fn_80531398_00001CC4:
 lbl_fn_80531398_00001CE0:
     mr r3, r24
     addi r4, r30, 0x5e
-    bl fn_80686AF0
+    bl wcscmp
     cmpwi r3, 0x0
     bne lbl_fn_80531398_00001CFC
     li r5, 0x3
@@ -2126,7 +2126,7 @@ lbl_fn_80531398_00001CE0:
 lbl_fn_80531398_00001CFC:
     mr r3, r24
     addi r4, r30, 0x6c
-    bl fn_80686AF0
+    bl wcscmp
     neg r0, r3
     or r0, r0, r3
     srawi r0, r0, 31
@@ -2143,7 +2143,7 @@ lbl_fn_80531398_00001D18:
     addi r24, r24, 0x10
     cmplw r3, r24
     beq lbl_fn_80531398_00001D5C
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r3, r24
     mr r4, r23

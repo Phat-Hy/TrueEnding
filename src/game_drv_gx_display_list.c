@@ -21,7 +21,7 @@ extern void fn_805D9590(void);
 extern void fn_805DFA30(void);
 extern void fn_805DFB50(void);
 extern void vswprintf(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 extern void fn_80695B00(void);
 
 /* External data declarations */
@@ -734,7 +734,7 @@ asm void fn_805DE750(void)
     mr r17, r4
     mr r31, r3
     mr r3, r17
-    bl fn_80686A48
+    bl wcslen
     lis r4, lbl_80764630@ha
     lwz r15, 0x0(r31)
     lfs f3, lbl_80764630@l(r4)
@@ -908,7 +908,7 @@ asm void fn_805DE9E0(void)
     mr r17, r4
     mr r31, r3
     mr r3, r17
-    bl fn_80686A48
+    bl wcslen
     lis r4, lbl_80764630@ha
     lwz r15, 0x0(r31)
     lfs f3, lbl_80764630@l(r4)
@@ -1071,7 +1071,7 @@ asm void fn_805DEC40(void)
     mr r31, r3
     mr r17, r4
     mr r3, r18
-    bl fn_80686A48
+    bl wcslen
     lwz r15, 0x0(r31)
     mr r4, r17
     lwz r16, 0x4(r31)
@@ -1511,7 +1511,7 @@ asm void fn_805DF2D0(void)
     stw r30, 0x68(r1)
     mr r30, r4
     mr r3, r30
-    bl fn_80686A48
+    bl wcslen
     lwz r0, 0x0(r31)
     mr r5, r3
     stw r0, 0x8(r1)
@@ -1643,7 +1643,7 @@ asm void fn_805DF4A0(void)
 asm void fn_805DF4B0(void)
 {
     nofralloc
-    b fn_80686A48
+    b wcslen
 }
 
 asm void fn_805DF4C0(void)

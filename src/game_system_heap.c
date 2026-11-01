@@ -21,7 +21,7 @@ extern void fn_801EC784(void);
 extern void fn_801F04FC(void);
 extern void fn_801F0544(void);
 extern void fn_801FE99C(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -256,7 +256,7 @@ lbl_fn_801F91DC_000002C8:
     lbz r0, 0x8(r1)
     addi r3, r1, 0x70
     stb r0, 0xc(r1)
-    bl fn_80686A48
+    bl wcslen
     addi r6, r1, 0x70
     slwi r0, r3, 1
     mr r7, r6

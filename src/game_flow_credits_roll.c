@@ -16,7 +16,7 @@ extern void fn_8015495C(void);
 extern void fn_80155DAC(void);
 extern void actor_setState(void);
 extern void fn_8016F3D0(void);
-extern void fn_804AE3BC(void);
+extern void net_getPacketManager(void);
 extern void fn_804D818C(void);
 extern void fn_804FC7E4(void);
 extern void fn_8050BA6C(void);
@@ -734,7 +734,7 @@ lbl_fn_804EA538_00000930:
     stw r3, lbl_8087F5FC
     sth r0, 0x8(r1)
     stw r31, 0xc(r1)
-    bl fn_804AE3BC
+    bl net_getPacketManager
     addi r6, r1, 0xc
     li r4, -0x1
     li r5, 0x1001
@@ -802,7 +802,7 @@ lbl_fn_804EA60C_00000A04:
     stw r3, lbl_8087F5FC
     sth r0, 0x8(r1)
     stw r31, 0xc(r1)
-    bl fn_804AE3BC
+    bl net_getPacketManager
     addi r6, r1, 0xc
     li r4, -0x1
     li r5, 0x1002
@@ -851,7 +851,7 @@ lbl_fn_804EA6B4_00000AAC:
     stw r3, lbl_8087F5FC
     sth r0, 0x8(r1)
     stb r31, 0xc(r1)
-    bl fn_804AE3BC
+    bl net_getPacketManager
     addi r6, r1, 0xc
     li r4, -0x1
     li r5, 0x1033
@@ -904,7 +904,7 @@ lbl_fn_804EA760_00000B64:
     stw r3, lbl_8087F5FC
     sth r0, 0x8(r1)
     stw r31, 0xc(r1)
-    bl fn_804AE3BC
+    bl net_getPacketManager
     addi r6, r1, 0xc
     li r4, -0x1
     li r5, 0x1003
@@ -953,7 +953,7 @@ lbl_fn_804EA814_00000C0C:
     stw r3, lbl_8087F5FC
     sth r0, 0x8(r1)
     stb r31, 0xc(r1)
-    bl fn_804AE3BC
+    bl net_getPacketManager
     addi r6, r1, 0xc
     li r4, -0x1
     li r5, 0x103c
@@ -978,13 +978,13 @@ asm void fn_804EA8BC(void)
     stmw r27, 0xc(r1)
     mr r29, r3
     mr r30, r4
-    bl fn_804AE3BC
+    bl net_getPacketManager
     li r4, -0x1
     li r5, 0x1013
     li r6, 0x0
     li r7, 0x1
     bl fn_8050E098
-    bl fn_804AE3BC
+    bl net_getPacketManager
     li r4, -0x1
     li r5, 0x1
     bl fn_8050DDE0

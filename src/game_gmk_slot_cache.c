@@ -10,18 +10,18 @@ extern void fn_80108C10(void);
 extern void fn_801092C8(void);
 extern void fn_80206B14(void);
 extern void fn_80206B9C(void);
-extern void fn_80206BE4(void);
-extern void fn_80206C50(void);
+extern void assert_generateId(void);
+extern void assert_formatLocation(void);
 extern void fn_802085E0(void);
 extern void fn_8020BD3C(void);
 extern void fn_8020BD78(void);
 extern void fn_8020BDAC(void);
 extern void fn_8020ED84(void);
 extern void fn_8020EF04(void);
-extern void fn_8020EF80(void);
+extern void random_generateValue(void);
 extern void fn_8020EFEC(void);
 extern void fn_80210AC4(void);
-extern void fn_80211480(void);
+extern void event_findEntryById(void);
 extern void fn_802114D8(void);
 extern void fn_802114E0(void);
 extern void fn_8021150C(void);
@@ -234,7 +234,7 @@ lbl_fn_804439FC_000001EC:
     b lbl_fn_804439FC_000007A0
 lbl_fn_804439FC_000001F4:
     lwz r3, 0x8(r1)
-    bl fn_80211480
+    bl event_findEntryById
     cmpwi r3, 0x0
     mr r30, r3
     bne lbl_fn_804439FC_00000210
@@ -260,7 +260,7 @@ lbl_fn_804439FC_0000023C:
     cmpwi r3, 0x0
     beq lbl_fn_804439FC_00000314
     mr r3, r23
-    bl fn_80206C50
+    bl assert_formatLocation
     mr r24, r3
     mr r3, r23
     bl fn_8021150C
@@ -472,7 +472,7 @@ lbl_fn_804439FC_0000054C:
 lbl_fn_804439FC_00000554:
     lwz r23, 0x8(r1)
     mr r3, r23
-    bl fn_80211480
+    bl event_findEntryById
     cmpwi r3, 0x0
     beq lbl_fn_804439FC_000005AC
     lha r0, 0xbc(r3)
@@ -558,7 +558,7 @@ lbl_fn_804439FC_00000678:
     cmpwi r3, 0x0
     beq lbl_fn_804439FC_000006BC
     lwz r3, 0x8(r1)
-    bl fn_80206C50
+    bl assert_formatLocation
     lwz r0, 0xf0(r3)
     cmpwi r0, 0x0
     beq lbl_fn_804439FC_000006BC
@@ -606,7 +606,7 @@ lbl_fn_804439FC_00000728:
     cmpwi r3, 0x0
     beq lbl_fn_804439FC_0000079C
     lwz r3, 0x8(r1)
-    bl fn_80206C50
+    bl assert_formatLocation
     lwz r0, 0xc4(r3)
     cmpwi r0, 0x3f
     bne lbl_fn_804439FC_00000758
@@ -709,7 +709,7 @@ lbl_fn_80444020_00000868:
     lis r21, lbl_807C6B90@ha
     li r22, 0x1
     lis r23, 0xf
-    bl fn_80211480
+    bl event_findEntryById
     cmpwi r3, 0x0
     mr r31, r3
     bne lbl_fn_80444020_000008CC
@@ -1090,7 +1090,7 @@ lbl_fn_80444564_00000D68:
 lbl_fn_80444564_00000D90:
     cmpwi r3, 0x0
     beq lbl_fn_80444564_00000DA8
-    bl fn_80206BE4
+    bl assert_generateId
     cmpw r31, r3
     bne lbl_fn_80444564_00000DA8
     addi r28, r28, 0x1
@@ -1122,7 +1122,7 @@ lbl_fn_80444564_00000DF4:
     bl fn_8020ED84
     cmpwi r3, 0x0
     beq lbl_fn_80444564_00000E18
-    bl fn_8020EF80
+    bl random_generateValue
     cmpw r31, r3
     bne lbl_fn_80444564_00000E18
     addi r28, r28, 0x1
@@ -1513,7 +1513,7 @@ asm void fn_80444B64(void)
     mflr r0
     mr r3, r4
     stw r0, 0x14(r1)
-    bl fn_80211480
+    bl event_findEntryById
     cmpwi r3, 0x0
     li r0, 0x0
     bne lbl_fn_80444B64_00001320
@@ -1644,7 +1644,7 @@ asm void fn_80444CF8(void)
     stw r28, 0x10(r1)
     mr r28, r3
     mr r3, r4
-    bl fn_80211480
+    bl event_findEntryById
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_80444CF8_000014E8
@@ -1681,7 +1681,7 @@ lbl_fn_80444CF8_00001524:
     b lbl_fn_80444CF8_0000166C
 lbl_fn_80444CF8_00001534:
     lwz r3, 0x4(r31)
-    bl fn_80206C50
+    bl assert_formatLocation
     cmpwi r3, 0x0
     beq lbl_fn_80444CF8_0000166C
     lwz r3, 0xb8(r3)
@@ -2788,7 +2788,7 @@ lbl_fn_80445130_000024BC:
     b lbl_fn_80445130_000024F4
 lbl_fn_80445130_000024CC:
     lwz r3, 0x0(r18)
-    bl fn_80211480
+    bl event_findEntryById
     lha r0, 0xbc(r3)
     addi r19, r19, 0x1
     slwi r0, r0, 2

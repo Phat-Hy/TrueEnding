@@ -3,12 +3,12 @@
 
 /* External function declarations */
 extern void dtor_80084684(void);
-extern void fn_80013DC4(void);
+extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_8003DD50(void);
 extern void fn_8003DEE0(void);
 extern void fn_8003E530(void);
-extern void fn_8067E23C(void);
+extern void memcmp(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -191,7 +191,7 @@ lbl_fn_8001E0B8_00000058:
     lwz r4, 0x4(r4)
     stw r0, 0x4(r3)
     stw r0, 0x8(r3)
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r5, 0xc(r1)
     mr r3, r29
     stb r5, 0x8(r1)
@@ -315,7 +315,7 @@ lbl_fn_8001E1D0_000001EC:
     addi r5, r1, 0x14
 lbl_fn_8001E1D0_00000204:
     lwz r5, 0x0(r5)
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_8001E1D0_00000238
     lwz r0, 0x1c(r1)
@@ -1165,7 +1165,7 @@ asm void fn_8001EA18(void)
     mr r28, r3
     mr r3, r29
     mr r4, r28
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0xc(r1)
     mr r3, r29
     stb r0, 0x8(r1)
@@ -1229,7 +1229,7 @@ lbl_fn_8001EA18_00000A74:
     addi r5, r1, 0x18
 lbl_fn_8001EA18_00000A8C:
     lwz r5, 0x0(r5)
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_8001EA18_00000AC0
     lwz r0, 0x10(r1)
@@ -1306,7 +1306,7 @@ lbl_fn_8001EA18_00000B70:
     addi r5, r1, 0x24
 lbl_fn_8001EA18_00000B8C:
     lwz r5, 0x0(r5)
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_8001EA18_00000BC0
     lwz r0, 0x2c(r1)

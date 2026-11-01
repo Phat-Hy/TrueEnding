@@ -18,8 +18,8 @@ extern void fn_801F4B4C(void);
 extern void fn_801F4CB4(void);
 extern void fn_801F8FE4(void);
 extern void fn_801F90E0(void);
-extern void fn_801FED24(void);
-extern void fn_801FEE08(void);
+extern void thread_findAndNotifySlot(void);
+extern void thread_dispatchToQueue(void);
 extern void fn_80219160(void);
 extern void fn_80219558(void);
 extern void fn_8021AF50(void);
@@ -41,7 +41,7 @@ extern void PSMTXScale(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECMag(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 extern void std_atan2(void);
 
 /* External data declarations */
@@ -1482,7 +1482,7 @@ lbl_fn_803D83A8_00001428:
     mr r4, r3
     mr r3, r17
     mr r5, r16
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r0, 0x256c(r15)
     cmpwi r0, 0x6
     bge lbl_fn_803D83A8_0000147C
@@ -2074,7 +2074,7 @@ lbl_fn_803D83A8_00001CA8:
     mr r4, r3
     mr r3, r16
     li r5, 0x0
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
     lwz r4, 0x2628(r15)
     addi r3, r14, 0x1215
     lfs f20, 0x1a0(r1)
@@ -2084,7 +2084,7 @@ lbl_fn_803D83A8_00001CA8:
     mr r4, r3
     mr r3, r14
     li r5, 0x1
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
 lbl_fn_803D83A8_00001D10:
     lwz r0, 0x2620(r15)
     cmpwi r0, 0x0
@@ -2545,7 +2545,7 @@ lbl_fn_803D83A8_000023D8:
     mr r4, r3
     mr r3, r14
     mr r5, r16
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r0, 0x1124(r15)
     slwi r0, r0, 2
     add r3, r15, r0
@@ -2566,7 +2566,7 @@ lbl_fn_803D83A8_00002424:
     mr r4, r3
     mr r3, r14
     mr r5, r16
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r0, 0x1124(r15)
     slwi r0, r0, 2
     add r3, r15, r0
@@ -2587,7 +2587,7 @@ lbl_fn_803D83A8_00002470:
     mr r4, r3
     mr r3, r14
     mr r5, r16
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r0, 0x1124(r15)
     slwi r0, r0, 2
     add r3, r15, r0
@@ -2608,7 +2608,7 @@ lbl_fn_803D83A8_000024BC:
     mr r4, r3
     mr r3, r14
     mr r5, r16
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r0, 0x1124(r15)
     slwi r0, r0, 2
     add r3, r15, r0
@@ -2638,7 +2638,7 @@ lbl_fn_803D83A8_0000253C:
     lbz r0, 0x18(r1)
     mr r3, r16
     stb r0, 0x1c(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r5, r14
     mr r6, r16

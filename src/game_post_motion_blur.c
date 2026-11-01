@@ -26,7 +26,7 @@ extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECMag(void);
 extern void rand(void);
-extern void fn_80686A64(void);
+extern void wcscpy(void);
 extern void fn_8068AD58(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
@@ -893,7 +893,7 @@ asm void fn_802C2AE8(void)
     beq lbl_fn_802C2AE8_00000B64
     lwz r4, 0x8(r3)
     mr r3, r31
-    bl fn_80686A64
+    bl wcscpy
     li r3, 0x1
     b lbl_fn_802C2AE8_00000B68
 lbl_fn_802C2AE8_00000B64:

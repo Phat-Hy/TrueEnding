@@ -8,8 +8,8 @@ extern void fn_800DD3FC(void);
 extern void fn_8011728C(void);
 extern void fn_801173A8(void);
 extern void fn_80206B9C(void);
-extern void fn_80206C50(void);
-extern void fn_80211480(void);
+extern void assert_formatLocation(void);
+extern void event_findEntryById(void);
 extern void fn_8021150C(void);
 extern void fn_80211648(void);
 extern void fn_80444804(void);
@@ -17,9 +17,9 @@ extern void fn_8044D500(void);
 extern void fn_8044D560(void);
 extern void fn_804A251C(void);
 extern void fn_80584178(void);
-extern void fn_80686A48(void);
-extern void fn_80686AF0(void);
-extern void fn_80686B64(void);
+extern void wcslen(void);
+extern void wcscmp(void);
+extern void wcschr(void);
 
 /* External data declarations */
 extern u8 lbl_80761220[];
@@ -107,7 +107,7 @@ lbl_fn_80581FDC_000000B8:
     beq lbl_fn_80581FDC_000002CC
     lwz r25, 0x0(r3)
     mr r3, r25
-    bl fn_80211480
+    bl event_findEntryById
     cmpwi r3, 0x0
     mr r26, r3
     beq lbl_fn_80581FDC_000002CC
@@ -124,7 +124,7 @@ lbl_fn_80581FDC_000000B8:
     mr r3, r25
     stw r30, 0x54(r1)
     stw r29, 0x58(r1)
-    bl fn_80211480
+    bl event_findEntryById
     cmpwi r3, 0x0
     bne lbl_fn_80581FDC_00000130
     li r0, 0x0
@@ -256,7 +256,7 @@ lbl_fn_80581FDC_00000300:
     mr r4, r28
     bl fn_8044D500
     mr r26, r3
-    bl fn_80211480
+    bl event_findEntryById
     cmpwi r3, 0x0
     mr r25, r3
     beq lbl_fn_80581FDC_00000500
@@ -270,7 +270,7 @@ lbl_fn_80581FDC_00000300:
     mr r3, r26
     stw r30, 0x54(r1)
     stw r28, 0x58(r1)
-    bl fn_80211480
+    bl event_findEntryById
     cmpwi r3, 0x0
     bne lbl_fn_80581FDC_0000035C
     li r0, 0x0
@@ -309,7 +309,7 @@ lbl_fn_80581FDC_000003A8:
     b lbl_fn_80581FDC_00000410
 lbl_fn_80581FDC_000003D4:
     lwz r3, 0x4(r3)
-    bl fn_80206C50
+    bl assert_formatLocation
     cmpwi r3, 0x0
     beq lbl_fn_80581FDC_0000040C
     lwz r0, 0x124(r3)
@@ -743,7 +743,7 @@ lbl_fn_805828B4_000009D0:
     cmpwi r3, 0x0
     beq lbl_fn_805828B4_000009F4
     lwz r3, 0x0(r27)
-    bl fn_80206C50
+    bl assert_formatLocation
     mr r26, r3
 lbl_fn_805828B4_000009F4:
     lwz r3, 0x0(r28)
@@ -751,7 +751,7 @@ lbl_fn_805828B4_000009F4:
     cmpwi r3, 0x0
     beq lbl_fn_805828B4_00000A10
     lwz r3, 0x0(r28)
-    bl fn_80206C50
+    bl assert_formatLocation
     mr r25, r3
 lbl_fn_805828B4_00000A10:
     cmpwi r26, 0x0
@@ -814,7 +814,7 @@ lbl_fn_805828B4_00000AC8:
     bl fn_800DD3FC
     addi r3, r1, 0x88
     li r4, 0x2b
-    bl fn_80686B64
+    bl wcschr
     cmpwi r3, 0x0
     beq lbl_fn_805828B4_00000B00
     li r0, 0x0
@@ -829,7 +829,7 @@ lbl_fn_805828B4_00000B00:
     bl fn_800DD3FC
     addi r3, r1, 0x8
     li r4, 0x2b
-    bl fn_80686B64
+    bl wcschr
     cmpwi r3, 0x0
     beq lbl_fn_805828B4_00000B38
     li r0, 0x0
@@ -837,7 +837,7 @@ lbl_fn_805828B4_00000B00:
 lbl_fn_805828B4_00000B38:
     addi r3, r1, 0x88
     addi r4, r1, 0x8
-    bl fn_80686AF0
+    bl wcscmp
     cmpwi r3, 0x0
     bne lbl_fn_805828B4_00000BE8
     lwz r0, 0x48(r27)
@@ -850,7 +850,7 @@ lbl_fn_805828B4_00000B38:
     lwz r30, 0x8(r31)
     mr r4, r29
     mr r3, r30
-    bl fn_80686AF0
+    bl wcscmp
     cmpwi r3, 0x0
     bne lbl_fn_805828B4_00000BA0
     lwz r4, 0x4c(r27)
@@ -864,15 +864,15 @@ lbl_fn_805828B4_00000B38:
 lbl_fn_805828B4_00000BA0:
     mr r3, r30
     mr r4, r29
-    bl fn_80686AF0
+    bl wcscmp
     srwi r3, r3, 31
     b lbl_fn_805828B4_00000BF8
 lbl_fn_805828B4_00000BB4:
     mr r3, r29
-    bl fn_80686A48
+    bl wcslen
     mr r27, r3
     mr r3, r26
-    bl fn_80686A48
+    bl wcslen
     cmpw r27, r3
     beq lbl_fn_805828B4_00000BE8
     xor r0, r3, r27
@@ -884,7 +884,7 @@ lbl_fn_805828B4_00000BB4:
 lbl_fn_805828B4_00000BE8:
     mr r3, r29
     mr r4, r26
-    bl fn_80686AF0
+    bl wcscmp
     srwi r3, r3, 31
 lbl_fn_805828B4_00000BF8:
     lmw r25, 0x114(r1)
@@ -1321,7 +1321,7 @@ lbl_fn_805830D8_000011F8:
     cmpwi r3, 0x0
     beq lbl_fn_805830D8_0000121C
     lwz r3, 0x0(r30)
-    bl fn_80206C50
+    bl assert_formatLocation
     mr r17, r3
 lbl_fn_805830D8_0000121C:
     lwz r3, 0x0(r28)
@@ -1329,7 +1329,7 @@ lbl_fn_805830D8_0000121C:
     cmpwi r3, 0x0
     beq lbl_fn_805830D8_00001238
     lwz r3, 0x0(r28)
-    bl fn_80206C50
+    bl assert_formatLocation
     mr r18, r3
 lbl_fn_805830D8_00001238:
     cmpwi r17, 0x0
@@ -1392,7 +1392,7 @@ lbl_fn_805830D8_000012F0:
     bl fn_800DD3FC
     addi r3, r1, 0x380
     li r4, 0x2b
-    bl fn_80686B64
+    bl wcschr
     cmpwi r3, 0x0
     beq lbl_fn_805830D8_00001328
     li r0, 0x0
@@ -1407,7 +1407,7 @@ lbl_fn_805830D8_00001328:
     bl fn_800DD3FC
     addi r3, r1, 0x400
     li r4, 0x2b
-    bl fn_80686B64
+    bl wcschr
     cmpwi r3, 0x0
     beq lbl_fn_805830D8_00001360
     li r0, 0x0
@@ -1415,7 +1415,7 @@ lbl_fn_805830D8_00001328:
 lbl_fn_805830D8_00001360:
     addi r3, r1, 0x380
     addi r4, r1, 0x400
-    bl fn_80686AF0
+    bl wcscmp
     cmpwi r3, 0x0
     bne lbl_fn_805830D8_00001410
     lwz r0, 0x48(r30)
@@ -1428,7 +1428,7 @@ lbl_fn_805830D8_00001360:
     lwz r15, 0x8(r16)
     mr r4, r14
     mr r3, r15
-    bl fn_80686AF0
+    bl wcscmp
     cmpwi r3, 0x0
     bne lbl_fn_805830D8_000013C8
     lwz r4, 0x4c(r30)
@@ -1442,15 +1442,15 @@ lbl_fn_805830D8_00001360:
 lbl_fn_805830D8_000013C8:
     mr r3, r15
     mr r4, r14
-    bl fn_80686AF0
+    bl wcscmp
     srwi r0, r3, 31
     b lbl_fn_805830D8_00001420
 lbl_fn_805830D8_000013DC:
     mr r3, r14
-    bl fn_80686A48
+    bl wcslen
     mr r15, r3
     mr r3, r17
-    bl fn_80686A48
+    bl wcslen
     cmpw r15, r3
     beq lbl_fn_805830D8_00001410
     xor r0, r3, r15
@@ -1462,7 +1462,7 @@ lbl_fn_805830D8_000013DC:
 lbl_fn_805830D8_00001410:
     mr r3, r14
     mr r4, r17
-    bl fn_80686AF0
+    bl wcscmp
     srwi r0, r3, 31
 lbl_fn_805830D8_00001420:
     lwz r16, 0x54(r29)
@@ -1535,7 +1535,7 @@ lbl_fn_805830D8_00001508:
     cmpwi r3, 0x0
     beq lbl_fn_805830D8_0000152C
     lwz r3, 0x0(r29)
-    bl fn_80206C50
+    bl assert_formatLocation
     mr r17, r3
 lbl_fn_805830D8_0000152C:
     lwz r3, 0x0(r30)
@@ -1543,7 +1543,7 @@ lbl_fn_805830D8_0000152C:
     cmpwi r3, 0x0
     beq lbl_fn_805830D8_00001548
     lwz r3, 0x0(r30)
-    bl fn_80206C50
+    bl assert_formatLocation
     mr r18, r3
 lbl_fn_805830D8_00001548:
     cmpwi r17, 0x0
@@ -1606,7 +1606,7 @@ lbl_fn_805830D8_00001600:
     bl fn_800DD3FC
     addi r3, r1, 0x280
     li r4, 0x2b
-    bl fn_80686B64
+    bl wcschr
     cmpwi r3, 0x0
     beq lbl_fn_805830D8_00001638
     li r0, 0x0
@@ -1621,7 +1621,7 @@ lbl_fn_805830D8_00001638:
     bl fn_800DD3FC
     addi r3, r1, 0x300
     li r4, 0x2b
-    bl fn_80686B64
+    bl wcschr
     cmpwi r3, 0x0
     beq lbl_fn_805830D8_00001670
     li r0, 0x0
@@ -1629,7 +1629,7 @@ lbl_fn_805830D8_00001638:
 lbl_fn_805830D8_00001670:
     addi r3, r1, 0x280
     addi r4, r1, 0x300
-    bl fn_80686AF0
+    bl wcscmp
     cmpwi r3, 0x0
     bne lbl_fn_805830D8_00001720
     lwz r0, 0x48(r29)
@@ -1642,7 +1642,7 @@ lbl_fn_805830D8_00001670:
     lwz r15, 0x8(r16)
     mr r4, r14
     mr r3, r15
-    bl fn_80686AF0
+    bl wcscmp
     cmpwi r3, 0x0
     bne lbl_fn_805830D8_000016D8
     lwz r4, 0x4c(r29)
@@ -1656,15 +1656,15 @@ lbl_fn_805830D8_00001670:
 lbl_fn_805830D8_000016D8:
     mr r3, r15
     mr r4, r14
-    bl fn_80686AF0
+    bl wcscmp
     srwi r0, r3, 31
     b lbl_fn_805830D8_00001730
 lbl_fn_805830D8_000016EC:
     mr r3, r14
-    bl fn_80686A48
+    bl wcslen
     mr r15, r3
     mr r3, r17
-    bl fn_80686A48
+    bl wcslen
     cmpw r15, r3
     beq lbl_fn_805830D8_00001720
     xor r0, r3, r15
@@ -1676,7 +1676,7 @@ lbl_fn_805830D8_000016EC:
 lbl_fn_805830D8_00001720:
     mr r3, r14
     mr r4, r17
-    bl fn_80686AF0
+    bl wcscmp
     srwi r0, r3, 31
 lbl_fn_805830D8_00001730:
     cmpwi r31, 0x0
@@ -1873,7 +1873,7 @@ lbl_fn_805830D8_00001A00:
     cmpwi r3, 0x0
     beq lbl_fn_805830D8_00001A24
     lwz r3, 0x0(r29)
-    bl fn_80206C50
+    bl assert_formatLocation
     mr r17, r3
 lbl_fn_805830D8_00001A24:
     lwz r3, 0x0(r28)
@@ -1881,7 +1881,7 @@ lbl_fn_805830D8_00001A24:
     cmpwi r3, 0x0
     beq lbl_fn_805830D8_00001A40
     lwz r3, 0x0(r28)
-    bl fn_80206C50
+    bl assert_formatLocation
     mr r18, r3
 lbl_fn_805830D8_00001A40:
     cmpwi r17, 0x0
@@ -1944,7 +1944,7 @@ lbl_fn_805830D8_00001AF8:
     bl fn_800DD3FC
     addi r3, r1, 0x120
     li r4, 0x2b
-    bl fn_80686B64
+    bl wcschr
     cmpwi r3, 0x0
     beq lbl_fn_805830D8_00001B30
     li r0, 0x0
@@ -1959,7 +1959,7 @@ lbl_fn_805830D8_00001B30:
     bl fn_800DD3FC
     addi r3, r1, 0x1a0
     li r4, 0x2b
-    bl fn_80686B64
+    bl wcschr
     cmpwi r3, 0x0
     beq lbl_fn_805830D8_00001B68
     li r0, 0x0
@@ -1967,7 +1967,7 @@ lbl_fn_805830D8_00001B30:
 lbl_fn_805830D8_00001B68:
     addi r3, r1, 0x120
     addi r4, r1, 0x1a0
-    bl fn_80686AF0
+    bl wcscmp
     cmpwi r3, 0x0
     bne lbl_fn_805830D8_00001C18
     lwz r0, 0x48(r29)
@@ -1980,7 +1980,7 @@ lbl_fn_805830D8_00001B68:
     lwz r15, 0x8(r16)
     mr r4, r14
     mr r3, r15
-    bl fn_80686AF0
+    bl wcscmp
     cmpwi r3, 0x0
     bne lbl_fn_805830D8_00001BD0
     lwz r4, 0x4c(r29)
@@ -1994,15 +1994,15 @@ lbl_fn_805830D8_00001B68:
 lbl_fn_805830D8_00001BD0:
     mr r3, r15
     mr r4, r14
-    bl fn_80686AF0
+    bl wcscmp
     srwi r0, r3, 31
     b lbl_fn_805830D8_00001C28
 lbl_fn_805830D8_00001BE4:
     mr r3, r14
-    bl fn_80686A48
+    bl wcslen
     mr r15, r3
     mr r3, r17
-    bl fn_80686A48
+    bl wcslen
     cmpw r15, r3
     beq lbl_fn_805830D8_00001C18
     xor r0, r3, r15
@@ -2014,7 +2014,7 @@ lbl_fn_805830D8_00001BE4:
 lbl_fn_805830D8_00001C18:
     mr r3, r14
     mr r4, r17
-    bl fn_80686AF0
+    bl wcscmp
     srwi r0, r3, 31
 lbl_fn_805830D8_00001C28:
     cmpwi r0, 0x0

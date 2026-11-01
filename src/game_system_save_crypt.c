@@ -19,7 +19,7 @@ extern void fn_8006AFF8(void);
 extern void fn_8006CA80(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
-extern void fn_80087994(void);
+extern void route_createSegment(void);
 extern void fn_8008937C(void);
 extern void fn_800897D8(void);
 extern void atn_Model_findBoneIndex(void);
@@ -42,7 +42,7 @@ extern void fn_80108378(void);
 extern void fn_80121F00(void);
 extern void fn_8016E4C4(void);
 extern void actor_setState(void);
-extern void fn_801F3FF8(void);
+extern void save_validateHeader(void);
 extern void fn_8020A780(void);
 extern void sound_initGlobalInstances(void);
 extern void fn_80237518(void);
@@ -1062,7 +1062,7 @@ lbl_fn_80344780_00000CD0:
     addi r4, r30, 0x391
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     lis r31, 0xf
     mr r3, r29
     addi r4, r30, 0x129
@@ -2147,14 +2147,14 @@ lbl_fn_80345384_00001B20:
     mr r3, r31
     addi r4, r30, 0x13b
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x17f4(r31)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r31
     addi r4, r30, 0x15c
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x17f8(r31)
     li r4, 0x1
     bl atn_Task_setActive

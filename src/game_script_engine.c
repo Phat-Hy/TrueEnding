@@ -3,7 +3,7 @@
 
 /* External function declarations */
 extern void dtor_80084684(void);
-extern void fn_80013DC4(void);
+extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void mem_free(void);
 extern void fn_800E1D5C(void);
@@ -84,7 +84,7 @@ lbl_fn_8024069C_00000060:
     stw r0, 0x4(r3)
     stw r0, 0x8(r3)
     lwz r4, 0x1c(r4)
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0xc(r1)
     mr r3, r30
     stb r0, 0x8(r1)
@@ -129,7 +129,7 @@ lbl_fn_80240734_000000F8:
     stw r0, 0x4(r3)
     stw r0, 0x8(r3)
     lwz r4, 0x28(r4)
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0xc(r1)
     mr r3, r30
     stb r0, 0x8(r1)
@@ -1665,7 +1665,7 @@ lbl_fn_80241C20_000015E4:
     lwz r4, 0x4(r5)
     stw r0, 0x4(r3)
     stw r0, 0x8(r3)
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r5, 0xc(r1)
     mr r3, r30
     stb r5, 0x8(r1)

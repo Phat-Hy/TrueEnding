@@ -5,7 +5,7 @@
 extern void dtor_80084684(void);
 extern void fn_8003EA3C(void);
 extern void talk_parseQuotedString(void);
-extern void fn_8005B5F8(void);
+extern void talk_scanQuotedString(void);
 extern void fn_8005B6E8(void);
 extern void mem_alloc(void);
 extern void fn_8008937C(void);
@@ -832,7 +832,7 @@ lbl_fn_80334FDC_0000094C:
     bl fn_805A4984
 lbl_fn_80334FDC_00000970:
     addi r3, r1, 0x8
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_80334FDC_000006A4
     lwz r0, 0x654(r1)

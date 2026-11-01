@@ -65,7 +65,7 @@ extern void fn_807219D0(void);
 extern void fn_80721A60(void);
 extern void fn_80721B80(void);
 extern void fn_80721CA0(void);
-extern void fn_80724DF0(void);
+extern void net_packetDebugLog(void);
 extern void fn_80724E90(void);
 
 /* External data declarations */
@@ -151,7 +151,7 @@ asm void fn_805A1288(void)
     addi r3, r3, lbl_80762810@l
     addi r5, r3, 0x821
     crclr 6
-    bl fn_80724DF0
+    bl net_packetDebugLog
 lbl_fn_805A1288_00000054:
     lwz r0, 0x8(r27)
     cmpwi r17, 0x0
@@ -221,7 +221,7 @@ lbl_fn_805A1288_00000138:
     addi r3, r3, lbl_80762810@l
     addi r5, r3, 0x846
     crclr 6
-    bl fn_80724DF0
+    bl net_packetDebugLog
 lbl_fn_805A1288_00000158:
     lwz r3, 0x10(r24)
     mr r5, r16
@@ -303,7 +303,7 @@ lbl_fn_805A1288_00000268:
     addi r5, r17, lbl_80797104@l
     li r4, 0x1f1
     crclr 6
-    bl fn_80724DF0
+    bl net_packetDebugLog
 lbl_fn_805A1288_00000280:
     lwz r18, 0x4c(r24)
     cmpwi r18, 0x0
@@ -312,7 +312,7 @@ lbl_fn_805A1288_00000280:
     addi r5, r20, lbl_807970A4@l
     li r4, 0x23d
     crclr 6
-    bl fn_80724DF0
+    bl net_packetDebugLog
 lbl_fn_805A1288_000002A0:
     subic. r18, r18, 0xf0
     bne lbl_fn_805A1288_000002BC
@@ -320,7 +320,7 @@ lbl_fn_805A1288_000002A0:
     addi r5, r22, lbl_807970D4@l
     li r4, 0x193
     crclr 6
-    bl fn_80724DF0
+    bl net_packetDebugLog
 lbl_fn_805A1288_000002BC:
     cmplw r25, r18
     bne lbl_fn_805A1288_00000314
@@ -380,7 +380,7 @@ lbl_fn_805A1288_00000368:
     addi r3, r3, lbl_80762810@l
     addi r5, r3, 0x8f2
     crclr 6
-    bl fn_80724DF0
+    bl net_packetDebugLog
 lbl_fn_805A1288_00000390:
     cmpwi r26, 0x0
     bne lbl_fn_805A1288_000003B0
@@ -389,7 +389,7 @@ lbl_fn_805A1288_00000390:
     addi r3, r3, lbl_80762810@l
     addi r5, r3, 0x918
     crclr 6
-    bl fn_80724DF0
+    bl net_packetDebugLog
 lbl_fn_805A1288_000003B0:
     lwz r4, 0x10(r26)
     lis r0, 0x4330
@@ -534,7 +534,7 @@ lbl_fn_805A1764_00000594:
     addi r5, r22, lbl_80797044@l
     li r4, 0x1f1
     crclr 6
-    bl fn_80724DF0
+    bl net_packetDebugLog
 lbl_fn_805A1764_000005AC:
     lwz r23, 0x74(r29)
     cmpwi r23, 0x0
@@ -543,7 +543,7 @@ lbl_fn_805A1764_000005AC:
     addi r5, r25, lbl_80796FE4@l
     li r4, 0x23d
     crclr 6
-    bl fn_80724DF0
+    bl net_packetDebugLog
 lbl_fn_805A1764_000005CC:
     subic. r23, r23, 0xf0
     bne lbl_fn_805A1764_000005E8
@@ -551,7 +551,7 @@ lbl_fn_805A1764_000005CC:
     addi r5, r27, lbl_80797014@l
     li r4, 0x193
     crclr 6
-    bl fn_80724DF0
+    bl net_packetDebugLog
 lbl_fn_805A1764_000005E8:
     cmplw r30, r23
     bne lbl_fn_805A1764_00000624
@@ -624,7 +624,7 @@ lbl_fn_805A1764_000006C0:
     addi r3, r3, lbl_80762810@l
     addi r5, r3, 0x846
     crclr 6
-    bl fn_80724DF0
+    bl net_packetDebugLog
 lbl_fn_805A1764_000006E0:
     lwz r3, 0x10(r29)
     mr r5, r21
@@ -653,7 +653,7 @@ lbl_fn_805A1764_00000728:
     addi r3, r3, lbl_80762810@l
     addi r5, r3, 0x8f2
     crclr 6
-    bl fn_80724DF0
+    bl net_packetDebugLog
 lbl_fn_805A1764_00000748:
     cmpwi r31, 0x0
     bne lbl_fn_805A1764_00000768
@@ -662,7 +662,7 @@ lbl_fn_805A1764_00000748:
     addi r3, r3, lbl_80762810@l
     addi r5, r3, 0x918
     crclr 6
-    bl fn_80724DF0
+    bl net_packetDebugLog
 lbl_fn_805A1764_00000768:
     lwz r4, 0x10(r31)
     lis r0, 0x4330
@@ -717,7 +717,7 @@ asm void fn_805A1A64(void)
     addi r3, r3, lbl_80762810@l
     addi r5, r3, 0x821
     crclr 6
-    bl fn_80724DF0
+    bl net_packetDebugLog
 lbl_fn_805A1A64_00000828:
     lwz r4, 0x0(r28)
     mr r3, r26
@@ -767,7 +767,7 @@ lbl_fn_805A1A64_000008B0:
     addi r3, r3, lbl_80762810@l
     addi r5, r3, 0x8f2
     crclr 6
-    bl fn_80724DF0
+    bl net_packetDebugLog
 lbl_fn_805A1A64_000008D0:
     cmpwi r28, 0x0
     bne lbl_fn_805A1A64_000008F0
@@ -776,7 +776,7 @@ lbl_fn_805A1A64_000008D0:
     addi r3, r3, lbl_80762810@l
     addi r5, r3, 0x918
     crclr 6
-    bl fn_80724DF0
+    bl net_packetDebugLog
 lbl_fn_805A1A64_000008F0:
     lwz r4, 0x10(r28)
     lis r0, 0x4330
@@ -838,7 +838,7 @@ asm void fn_805A1C04(void)
     addi r3, r3, lbl_80762810@l
     addi r5, r3, 0x2e3
     crclr 6
-    bl fn_80724DF0
+    bl net_packetDebugLog
 lbl_fn_805A1C04_000009CC:
     lwz r3, 0x10(r28)
     cmpwi r3, 0x0
@@ -911,7 +911,7 @@ lbl_fn_805A1C04_00000A98:
     addi r5, r3, 0x4c6
     li r7, 0x0
     crclr 6
-    bl fn_80724DF0
+    bl net_packetDebugLog
 lbl_fn_805A1C04_00000AC4:
     lwz r3, 0x14(r28)
     slwi r0, r29, 3
@@ -940,7 +940,7 @@ lbl_fn_805A1C04_00000B00:
     addi r5, r3, 0x4c6
     li r7, 0x0
     crclr 6
-    bl fn_80724DF0
+    bl net_packetDebugLog
 lbl_fn_805A1C04_00000B2C:
     lwz r3, 0x14(r28)
     slwi r0, r29, 3
@@ -1101,7 +1101,7 @@ lbl_fn_805A1F30_00000CFC:
     addi r3, r3, lbl_80762810@l
     addi r5, r3, 0x2cb
     crclr 6
-    bl fn_80724DF0
+    bl net_packetDebugLog
 lbl_fn_805A1F30_00000D24:
     lwz r31, 0x10(r31)
     addi r5, r1, 0x20
@@ -1152,7 +1152,7 @@ lbl_fn_805A1F30_00000DBC:
     li r4, 0x32
     addi r5, r5, lbl_807972B4@l
     crclr 6
-    bl fn_80724DF0
+    bl net_packetDebugLog
 lbl_fn_805A1F30_00000DDC:
     stw r31, 0x1c(r1)
     mr r4, r30
@@ -1212,7 +1212,7 @@ lbl_fn_805A20A8_00000E7C:
     addi r3, r3, lbl_80762810@l
     addi r5, r3, 0x2cb
     crclr 6
-    bl fn_80724DF0
+    bl net_packetDebugLog
 lbl_fn_805A20A8_00000EA4:
     lwz r3, 0x4(r24)
     mr r4, r31
@@ -1277,7 +1277,7 @@ asm void fn_805A21C4(void)
     li r4, 0xc9
     addi r5, r5, lbl_807972E8@l
     crclr 6
-    bl fn_80724DF0
+    bl net_packetDebugLog
 lbl_fn_805A21C4_00000F80:
     lwz r3, 0x10(r30)
     mr r4, r31

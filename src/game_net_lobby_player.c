@@ -7,7 +7,7 @@ extern void _restgpr_26(void);
 extern void _savegpr_24(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
-extern void fn_80013DC4(void);
+extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_800458D4(void);
 extern void fn_800458F4(void);
@@ -17,7 +17,7 @@ extern void fn_80070C98(void);
 extern void mem_alloc(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
-extern void fn_80087994(void);
+extern void route_createSegment(void);
 extern void fn_8008937C(void);
 extern void fn_800897D8(void);
 extern void fn_8008B130(void);
@@ -59,7 +59,7 @@ extern void fn_805B6C60(void);
 extern void fn_80616250(void);
 extern void fn_806163C0(void);
 extern void fn_806163E0(void);
-extern void fn_8067E23C(void);
+extern void memcmp(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
 
@@ -1140,7 +1140,7 @@ lbl_fn_8049DEE4_00000D84:
     mr r29, r3
     mr r3, r28
     mr r4, r29
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0xc(r1)
     mr r3, r28
     stb r0, 0x8(r1)
@@ -1216,7 +1216,7 @@ lbl_fn_8049DEE4_00000E88:
     addi r4, r26, 0xd2
     addi r5, r27, 0x118
     addi r6, r6, fn_8049D264@l
-    bl fn_80087994
+    bl route_createSegment
     lwz r3, 0xcc(r27)
     addi r4, r26, 0xd9
     bl fn_8008937C
@@ -1611,7 +1611,7 @@ lbl_fn_8049E480_00001408:
     mr r15, r3
     mr r3, r18
     mr r4, r15
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x20(r1)
     mr r3, r18
     stb r0, 0x1c(r1)
@@ -1707,7 +1707,7 @@ lbl_fn_8049E480_00001568:
     addi r5, r1, 0x4c
 lbl_fn_8049E480_00001580:
     lwz r5, 0x0(r5)
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_8049E480_000015B4
     lwz r0, 0x44(r1)
@@ -1751,7 +1751,7 @@ lbl_fn_8049E480_000015F0:
     mr r19, r3
     mr r3, r17
     mr r4, r19
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x18(r1)
     mr r3, r17
     stb r0, 0x14(r1)
@@ -1847,7 +1847,7 @@ lbl_fn_8049E480_00001748:
     addi r5, r1, 0x3c
 lbl_fn_8049E480_00001760:
     lwz r5, 0x0(r5)
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_8049E480_00001794
     lwz r0, 0x34(r1)
@@ -1890,7 +1890,7 @@ lbl_fn_8049E480_000017C8:
     mr r19, r3
     mr r3, r16
     mr r4, r19
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x10(r1)
     mr r3, r16
     stb r0, 0xc(r1)
@@ -1986,7 +1986,7 @@ lbl_fn_8049E480_00001924:
     addi r5, r1, 0x2c
 lbl_fn_8049E480_0000193C:
     lwz r5, 0x0(r5)
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_8049E480_00001970
     lwz r0, 0x24(r1)

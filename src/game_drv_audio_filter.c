@@ -6,11 +6,11 @@ extern void __files(void);
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_80013DC4(void);
+extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_8004B338(void);
 extern void talk_parseQuotedString(void);
-extern void fn_8005B5F8(void);
+extern void talk_scanQuotedString(void);
 extern void fn_8005B6E8(void);
 extern void fn_8006AA20(void);
 extern void fn_8006AC08(void);
@@ -29,9 +29,9 @@ extern void str_skipWhitespace(void);
 extern void str_findChar(void);
 extern void fn_80116FC0(void);
 extern void magic_dispatchActionCommand(void);
-extern void fn_801F3FF8(void);
+extern void save_validateHeader(void);
 extern void fn_801F4C14(void);
-extern void fn_801FED24(void);
+extern void thread_findAndNotifySlot(void);
 extern void fn_8021A4CC(void);
 extern void fn_8021F09C(void);
 extern void boss_getOffset54(void);
@@ -53,7 +53,7 @@ extern void fn_805BEE08(void);
 extern void fn_805BEEC8(void);
 extern void fn_805BF168(void);
 extern void fn_805BF664(void);
-extern void fn_8067E23C(void);
+extern void memcmp(void);
 extern void printf(void);
 extern void atoi(void);
 extern void abort(void);
@@ -202,7 +202,7 @@ lbl_fn_805BC740_0000011C:
     mr r27, r3
     mr r3, r29
     mr r4, r27
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0xc(r1)
     mr r3, r29
     stb r0, 0x8(r1)
@@ -258,7 +258,7 @@ lbl_fn_805BC740_00000204:
     addi r5, r1, 0x18
 lbl_fn_805BC740_00000220:
     lwz r5, 0x0(r5)
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_805BC740_00000254
     lwz r0, 0x10(r1)
@@ -319,7 +319,7 @@ lbl_fn_805BC740_000002C8:
     addi r4, r4, lbl_80763F38@l
     li r5, 0x0
     addi r4, r4, 0x8a
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0xb0(r30)
     li r4, 0x1
     bl atn_Task_setActive
@@ -401,7 +401,7 @@ lbl_fn_805BC9F4_000003C0:
     mr r4, r3
     mr r3, r29
     li r5, 0x1
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
 lbl_fn_805BC9F4_00000420:
     addi r27, r27, 0x1
     addi r28, r28, 0x10
@@ -431,7 +431,7 @@ lbl_fn_805BC9F4_00000420:
     mr r4, r3
     mr r3, r29
     li r5, 0x1
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
     lis r3, 0x89
     lwz r29, lbl_8087EEC8
     addi r4, r3, 0x5472
@@ -454,7 +454,7 @@ lbl_fn_805BC9F4_00000420:
     mr r3, r29
     li r5, 0x0
     fsubs f1, f0, f31
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
     lwz r4, 0xb0(r31)
     addi r3, r30, 0xa2
     addi r29, r4, 0x58
@@ -464,7 +464,7 @@ lbl_fn_805BC9F4_00000420:
     mr r3, r29
     li r5, 0x0
     fsubs f1, f0, f31
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
 lbl_fn_805BC9F4_00000518:
     lwz r0, 0x68(r31)
     lfs f0, lbl_80888454
@@ -765,7 +765,7 @@ lbl_fn_805BCF08_000008FC:
     mr r31, r3
     mr r3, r25
     mr r4, r31
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x14(r1)
     mr r3, r25
     stb r0, 0x10(r1)
@@ -794,7 +794,7 @@ lbl_fn_805BCF08_00000990:
     mr r31, r3
     mr r3, r24
     mr r4, r31
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0xc(r1)
     mr r3, r24
     stb r0, 0x8(r1)
@@ -848,7 +848,7 @@ lbl_fn_805BCF08_00000A58:
     addi r5, r1, 0x20
 lbl_fn_805BCF08_00000A74:
     lwz r5, 0x0(r5)
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_805BCF08_00000AA8
     lwz r0, 0x18(r1)
@@ -905,7 +905,7 @@ lbl_fn_805BCF08_00000B2C:
     lwz r4, 0x54(r1)
 lbl_fn_805BCF08_00000B30:
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x6c(r28)
     b lbl_fn_805BCF08_00000B5C
 lbl_fn_805BCF08_00000B40:
@@ -914,7 +914,7 @@ lbl_fn_805BCF08_00000B40:
     mr r4, r3
     mr r3, r21
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x6c(r28)
 lbl_fn_805BCF08_00000B5C:
     lwz r3, 0x6c(r28)
@@ -939,7 +939,7 @@ lbl_fn_805BCF08_00000B5C:
     bl dtor_80084684
 lbl_fn_805BCF08_00000BAC:
     addi r3, r1, 0x58
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_805BCF08_000008FC
     lmw r21, 0x694(r1)

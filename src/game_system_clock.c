@@ -40,7 +40,7 @@ extern void fn_80201DC4(void*);
 extern void profile_initMetric(void*);
 extern void fn_80201DE8(void);
 extern void printf(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 extern void abort(void);
 extern void runtime_registerStaticObject(void);
 extern void fn_80695A50(void);
@@ -1379,7 +1379,7 @@ lbl_player_clock_updateIntervals_00001240:
 lbl_player_clock_updateIntervals_00001244:
     stb r24, 0x8(r1)
     addi r3, r1, 0xd8
-    bl fn_80686A48
+    bl wcslen
     addi r6, r1, 0xd8
     slwi r0, r3, 1
     mr r7, r6

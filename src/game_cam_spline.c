@@ -21,14 +21,14 @@ extern void fn_800D3FA4(void);
 extern void str_findChar(void);
 extern void cam_initStickBindings(void);
 extern void fn_801334CC(void);
-extern void fn_801F3FF8(void);
+extern void save_validateHeader(void);
 extern void fn_801F64D0(void);
 extern void fn_801F6C2C(void);
-extern void fn_801F6C80(void);
+extern void save_computeCrc32(void);
 extern void fn_801F6D7C(void);
 extern void fn_801F837C(void);
 extern void fn_801F8598(void);
-extern void fn_801FED24(void);
+extern void thread_findAndNotifySlot(void);
 extern void fn_80207C34(void);
 extern void fn_802375C4(void);
 extern void fn_802376D0(void);
@@ -785,7 +785,7 @@ asm void fn_800EFFD8(void)
     stw r0, 0xe8(r31)
     stfs f0, 0x15c(r31)
     stw r0, 0x170(r31)
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x50(r31)
     li r4, 0x1
     bl atn_Task_setActive
@@ -937,7 +937,7 @@ lbl_fn_800F01BC_00000AAC:
     lwz r3, 0x54(r29)
     lfd f0, 0x8(r1)
     fsubs f1, f0, f31
-    bl fn_801F6C80
+    bl save_computeCrc32
     lwz r3, 0x54(r29)
     li r4, 0x0
     bl atn_Task_setActive
@@ -952,7 +952,7 @@ lbl_fn_800F01BC_00000AAC:
     ori r0, r0, 0x4
     stw r0, 0x38(r3)
     lwz r3, 0x70(r29)
-    bl fn_801F6C80
+    bl save_computeCrc32
     lwz r3, 0x70(r29)
     li r4, 0x0
     bl atn_Task_setActive
@@ -967,7 +967,7 @@ lbl_fn_800F01BC_00000AAC:
     ori r0, r0, 0x4
     stw r0, 0x38(r3)
     lwz r3, 0x8c(r29)
-    bl fn_801F6C80
+    bl save_computeCrc32
     lwz r3, 0x8c(r29)
     li r4, 0x0
     bl atn_Task_setActive
@@ -982,7 +982,7 @@ lbl_fn_800F01BC_00000AAC:
     ori r0, r0, 0x4
     stw r0, 0x38(r3)
     lwz r3, 0xa8(r29)
-    bl fn_801F6C80
+    bl save_computeCrc32
     lwz r3, 0xa8(r29)
     li r4, 0x0
     bl atn_Task_setActive
@@ -1644,7 +1644,7 @@ lbl_fn_800F0BC0_00001480:
     fmr f1, f29
     lwz r3, 0x54(r28)
     addi r4, r31, 0x113
-    bl fn_801F6C80
+    bl save_computeCrc32
 lbl_fn_800F0BC0_00001500:
     lwz r3, 0x70(r28)
     cmpwi r3, 0x0
@@ -1656,7 +1656,7 @@ lbl_fn_800F0BC0_00001500:
     fmr f1, f29
     lwz r3, 0x70(r28)
     addi r4, r31, 0x113
-    bl fn_801F6C80
+    bl save_computeCrc32
 lbl_fn_800F0BC0_0000152C:
     addi r29, r29, 0x10
     addi r28, r28, 0x4
@@ -1755,7 +1755,7 @@ lbl_fn_800F0D14_00001668:
     mr r4, r3
     mr r3, r24
     li r5, 0x4
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
     mr r21, r23
     li r24, 0x0
 lbl_fn_800F0D14_0000169C:
@@ -1937,7 +1937,7 @@ lbl_fn_800F0D14_000018FC:
     stfs f0, 0x50(r3)
     fmr f1, f29
     lwz r3, 0x17c(r23)
-    bl fn_801F6C80
+    bl save_computeCrc32
     lwz r3, 0x17c(r23)
     addi r4, r26, 0x141
     la r5, lbl_8087D970
@@ -1952,7 +1952,7 @@ lbl_fn_800F0D14_000018FC:
     addi r4, r26, 0x107
     stfs f0, 0x50(r3)
     lwz r3, 0x180(r23)
-    bl fn_801F6C80
+    bl save_computeCrc32
     lwz r3, 0x180(r23)
     addi r4, r26, 0x141
     la r5, lbl_8087D970
@@ -2085,7 +2085,7 @@ lbl_fn_800F0D14_00001B50:
 lbl_fn_800F0D14_00001B70:
     lfs f1, lbl_808813B8
 lbl_fn_800F0D14_00001B74:
-    bl fn_801F6C80
+    bl save_computeCrc32
     lis r4, lbl_80735460@ha
     cmpwi r22, 0x2
     addi r4, r4, lbl_80735460@l
@@ -2097,7 +2097,7 @@ lbl_fn_800F0D14_00001B74:
 lbl_fn_800F0D14_00001B98:
     lfs f1, lbl_808813B8
 lbl_fn_800F0D14_00001B9C:
-    bl fn_801F6C80
+    bl save_computeCrc32
     li r0, 0x0
     stw r0, 0x170(r23)
     psq_l f31, 0x1a8(r1), 0, 0

@@ -5,13 +5,13 @@
 extern void __files(void);
 extern void dtor_80013D60(void);
 extern void dtor_80084684(void);
-extern void fn_80013DC4(void);
+extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_8003E4A4(void);
 extern void fn_8004203C(void);
 extern void fn_8004212C(void);
 extern void talk_parseQuotedString(void);
-extern void fn_8005B5F8(void);
+extern void talk_scanQuotedString(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
@@ -916,7 +916,7 @@ lbl_fn_8011FFF8_000008A8:
     addi r24, r24, 0x1
 lbl_fn_8011FFF8_000008D4:
     addi r3, r1, 0x50
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_8011FFF8_000008A8
     mr r3, r31
@@ -1077,7 +1077,7 @@ lbl_fn_8011FFF8_00000AC8:
     stw r3, 0x30(r26)
 lbl_fn_8011FFF8_00000B38:
     addi r3, r1, 0x50
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_8011FFF8_00000944
     addi r3, r1, 0x44
@@ -1500,7 +1500,7 @@ lbl_fn_801207D4_000010C0:
     mr r3, r31
     stw r0, 0x4(r31)
     stw r0, 0x8(r31)
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r5, 0x10(r1)
     mr r3, r31
     stb r5, 0x14(r1)
@@ -1652,7 +1652,7 @@ lbl_fn_801207D4_000012F4:
     lwz r4, 0x4(r30)
     stw r0, 0x4(r31)
     stw r0, 0x8(r31)
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r5, 0xc(r1)
     mr r3, r31
     stb r5, 0x8(r1)

@@ -4,11 +4,11 @@
 /* External function declarations */
 extern void fn_80206B68(void);
 extern void fn_80206B70(void);
-extern void fn_80206BE4(void);
+extern void assert_generateId(void);
 extern void fn_8020EE58(void);
 extern void fn_8020EE60(void);
-extern void fn_8020EF80(void);
-extern void fn_80211480(void);
+extern void random_generateValue(void);
+extern void event_findEntryById(void);
 extern void fn_802114D8(void);
 extern void fn_802114E0(void);
 extern void fn_80213B78(void);
@@ -72,7 +72,7 @@ lbl_fn_80445F44_00000060:
     cmpwi r3, 0x0
     beq lbl_fn_80445F44_000001E4
     mr r3, r29
-    bl fn_80206BE4
+    bl assert_generateId
     lwz r0, lbl_8087F430
     mr r22, r3
     li r19, -0x1
@@ -119,7 +119,7 @@ lbl_fn_80445F44_000000F8:
     ble lbl_fn_80445F44_000001A0
 lbl_fn_80445F44_00000134:
     mr r3, r29
-    bl fn_80206BE4
+    bl assert_generateId
     mr r4, r3
     mr r3, r25
     bl fn_80444564
@@ -148,7 +148,7 @@ lbl_fn_80445F44_00000170:
     ble lbl_fn_80445F44_000001E4
 lbl_fn_80445F44_000001A0:
     mr r3, r29
-    bl fn_80206BE4
+    bl assert_generateId
     lwz r0, 0x0(r26)
     cmplwi r0, 0x180
     bge lbl_fn_80445F44_000001E4
@@ -353,7 +353,7 @@ lbl_fn_80445F44_00000458:
     cmpwi r3, 0x0
     beq lbl_fn_80445F44_000004BC
     mr r3, r20
-    bl fn_8020EF80
+    bl random_generateValue
     lwz r0, 0x0(r26)
     cmplwi r0, 0x180
     bge lbl_fn_80445F44_000004BC
@@ -524,7 +524,7 @@ lbl_fn_80445F44_000006D4:
     blt lbl_fn_80445F44_00000610
     b lbl_fn_80445F44_000007C8
     mr r3, r27
-    bl fn_80211480
+    bl event_findEntryById
     cmpwi r3, 0x0
     beq lbl_fn_80445F44_00000758
     li r20, 0x0
@@ -534,7 +534,7 @@ lbl_fn_80445F44_000006F8:
     bl fn_80444EFC
     extsh r19, r3
     mr r3, r27
-    bl fn_80211480
+    bl event_findEntryById
     lwz r0, 0x0(r26)
     cmplwi r0, 0x180
     bge lbl_fn_80445F44_00000748
@@ -561,12 +561,12 @@ lbl_fn_80445F44_00000758:
     b lbl_fn_80445F44_00000898
 lbl_fn_80445F44_00000760:
     mr r3, r27
-    bl fn_80211480
+    bl event_findEntryById
     cmpwi r3, 0x0
     beq lbl_fn_80445F44_000007C0
     mr r3, r27
     extsh r19, r19
-    bl fn_80211480
+    bl event_findEntryById
     lwz r0, 0x0(r26)
     cmplwi r0, 0x180
     bge lbl_fn_80445F44_000007C8
@@ -619,7 +619,7 @@ lbl_fn_80445F44_00000814:
     bne lbl_fn_80445F44_00000894
 lbl_fn_80445F44_0000082C:
     li r3, 0x143
-    bl fn_80211480
+    bl event_findEntryById
     cmpwi r3, 0x0
     beq lbl_fn_80445F44_00000894
     lbz r0, 0xc3(r3)

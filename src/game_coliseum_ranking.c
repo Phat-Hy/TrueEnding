@@ -13,7 +13,7 @@ extern void _savegpr_24(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_80013DC4(void);
+extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void atn_ColliBase_destructor(void);
 extern void fn_80058A1C(void);
@@ -1900,7 +1900,7 @@ lbl_fn_80497374_0000161C:
     mr r27, r3
     mr r3, r29
     mr r4, r27
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x8(r1)
     mr r3, r29
     stb r0, 0xc(r1)

@@ -18,8 +18,8 @@ extern void atn_Task_constructor(void);
 extern void atn_Task_setActive(void);
 extern void str_findChar(void);
 extern void fn_800DD3FC(void);
-extern void fn_80117228(void);
-extern void fn_801F3FF8(void);
+extern void actor_spawnActorWithId(void);
+extern void save_validateHeader(void);
 extern void saveSlot_readSummary(void);
 extern void atn_LoadHandle_constructor(void);
 extern void fn_804A29C4(void);
@@ -81,7 +81,7 @@ void fn_804AE11C(void);
 void fn_804AE124(void);
 void fn_804AE264(void);
 void fn_804AE2DC(void);
-void fn_804AE3BC(void);
+u32 net_getPacketManager(void);
 void fn_804AE3C4(void);
 void fn_804AE3CC(void);
 void fn_804AE4C4(void);
@@ -110,7 +110,7 @@ lbl_fn_804AD738_00000030:
     stw r0, 0x4c(r3)
     addi r3, r1, 0xc
     li r4, 0x1
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0xc
     li r4, -0x1
     bl ref_releaseHandle
@@ -120,7 +120,7 @@ lbl_fn_804AD738_00000054:
     stw r0, 0x4c(r3)
     addi r3, r1, 0x8
     li r4, 0x2
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -298,7 +298,7 @@ lbl_fn_804AD8CC_000002BC:
     bne lbl_fn_804AD8CC_000002EC
     addi r3, r1, 0xc
     li r4, 0x2
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0xc
     li r4, -0x1
     bl ref_releaseHandle
@@ -306,7 +306,7 @@ lbl_fn_804AD8CC_000002BC:
 lbl_fn_804AD8CC_000002EC:
     addi r3, r1, 0x8
     li r4, 0x1
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -942,13 +942,13 @@ asm void fn_804AE2DC(void)
 lbl_fn_804AE2DC_00000BD8:
     stw r4, 0xc(r1)
 lbl_fn_804AE2DC_00000BDC:
-    bl fn_804AE3BC
+    bl net_getPacketManager
     lwz r12, 0x0(r3)
     lwz r12, 0xc(r12)
     mtctr r12
     bctrl
     clrlwi r31, r3, 24
-    bl fn_804AE3BC
+    bl net_getPacketManager
     addi r4, r1, 0xc
     li r5, 0x0
     bl fn_8050E414
@@ -988,11 +988,9 @@ lbl_fn_804AE2DC_00000C68:
     blr
 }
 
-asm void fn_804AE3BC(void)
+u32 net_getPacketManager(void)
 {
-    nofralloc
-    lwz r3, lbl_8087F62C
-    blr
+    return lbl_8087F62C;
 }
 
 asm void fn_804AE3C4(void)
@@ -1432,7 +1430,7 @@ asm void fn_804AE888(void)
     stw r7, 0x25c(r31)
     stw r6, 0x260(r31)
     stw r0, 0x264(r31)
-    bl fn_801F3FF8
+    bl save_validateHeader
     lwz r0, 0x158(r31)
     stw r3, 0x48(r31)
     cmplwi r0, 0x40
@@ -1453,7 +1451,7 @@ lbl_fn_804AE888_000012DC:
     addi r4, r4, lbl_80757B7C@l
     li r5, 0x0
     addi r4, r4, 0x29
-    bl fn_801F3FF8
+    bl save_validateHeader
     lwz r0, 0x158(r31)
     stw r3, 0x4c(r31)
     cmplwi r0, 0x40
@@ -1474,7 +1472,7 @@ lbl_fn_804AE888_00001328:
     addi r4, r4, lbl_80757B7C@l
     li r5, 0x0
     addi r4, r4, 0x4d
-    bl fn_801F3FF8
+    bl save_validateHeader
     lwz r0, 0x158(r31)
     stw r3, 0x50(r31)
     cmplwi r0, 0x40
@@ -1495,7 +1493,7 @@ lbl_fn_804AE888_00001374:
     addi r4, r4, lbl_80757B7C@l
     li r5, 0x0
     addi r4, r4, 0x78
-    bl fn_801F3FF8
+    bl save_validateHeader
     lwz r0, 0x158(r31)
     stw r3, 0x54(r31)
     cmplwi r0, 0x40
@@ -1520,7 +1518,7 @@ lbl_fn_804AE888_000013D0:
     add r27, r31, r26
     addi r4, r29, 0xa3
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x58(r27)
     lwz r0, 0x158(r31)
     cmplwi r0, 0x40
@@ -1545,7 +1543,7 @@ lbl_fn_804AE888_00001418:
     addi r4, r4, lbl_80757B7C@l
     li r5, 0x0
     addi r4, r4, 0xc6
-    bl fn_801F3FF8
+    bl save_validateHeader
     lwz r0, 0x158(r31)
     stw r3, 0x64(r31)
     cmplwi r0, 0x40
@@ -1566,7 +1564,7 @@ lbl_fn_804AE888_00001474:
     addi r4, r4, lbl_80757B7C@l
     li r5, 0x0
     addi r4, r4, 0xe7
-    bl fn_801F3FF8
+    bl save_validateHeader
     lwz r0, 0x158(r31)
     stw r3, 0x68(r31)
     cmplwi r0, 0x40
@@ -1587,7 +1585,7 @@ lbl_fn_804AE888_000014C0:
     addi r4, r4, lbl_80757B7C@l
     li r5, 0x0
     addi r4, r4, 0x111
-    bl fn_801F3FF8
+    bl save_validateHeader
     lwz r0, 0x158(r31)
     stw r3, 0x6c(r31)
     cmplwi r0, 0x40
@@ -1608,7 +1606,7 @@ lbl_fn_804AE888_0000150C:
     addi r4, r4, lbl_80757B7C@l
     li r5, 0x0
     addi r4, r4, 0x13b
-    bl fn_801F3FF8
+    bl save_validateHeader
     lwz r0, 0x158(r31)
     stw r3, 0xb8(r31)
     cmplwi r0, 0x40
@@ -1629,7 +1627,7 @@ lbl_fn_804AE888_00001558:
     addi r4, r4, lbl_80757B7C@l
     li r5, 0x0
     addi r4, r4, 0x161
-    bl fn_801F3FF8
+    bl save_validateHeader
     lwz r0, 0x158(r31)
     stw r3, 0x70(r31)
     cmplwi r0, 0x40
@@ -1650,7 +1648,7 @@ lbl_fn_804AE888_000015A4:
     addi r4, r4, lbl_80757B7C@l
     li r5, 0x0
     addi r4, r4, 0x184
-    bl fn_801F3FF8
+    bl save_validateHeader
     lwz r0, 0x158(r31)
     stw r3, 0x74(r31)
     cmplwi r0, 0x40
@@ -1671,7 +1669,7 @@ lbl_fn_804AE888_000015F0:
     addi r4, r4, lbl_80757B7C@l
     li r5, 0x0
     addi r4, r4, 0x1a9
-    bl fn_801F3FF8
+    bl save_validateHeader
     lwz r0, 0x158(r31)
     stw r3, 0x78(r31)
     cmplwi r0, 0x40
@@ -1692,7 +1690,7 @@ lbl_fn_804AE888_0000163C:
     addi r4, r4, lbl_80757B7C@l
     li r5, 0x0
     addi r4, r4, 0x1ce
-    bl fn_801F3FF8
+    bl save_validateHeader
     lwz r0, 0x158(r31)
     stw r3, 0x7c(r31)
     cmplwi r0, 0x40
@@ -1713,7 +1711,7 @@ lbl_fn_804AE888_00001688:
     addi r4, r4, lbl_80757B7C@l
     li r5, 0x0
     addi r4, r4, 0x1f4
-    bl fn_801F3FF8
+    bl save_validateHeader
     lwz r0, 0x158(r31)
     stw r3, 0x80(r31)
     cmplwi r0, 0x40
@@ -1734,7 +1732,7 @@ lbl_fn_804AE888_000016D4:
     addi r4, r4, lbl_80757B7C@l
     li r5, 0x0
     addi r4, r4, 0x21a
-    bl fn_801F3FF8
+    bl save_validateHeader
     lwz r0, 0x158(r31)
     stw r3, 0x84(r31)
     cmplwi r0, 0x40
@@ -1755,7 +1753,7 @@ lbl_fn_804AE888_00001720:
     addi r4, r4, lbl_80757B7C@l
     li r5, 0x0
     addi r4, r4, 0x240
-    bl fn_801F3FF8
+    bl save_validateHeader
     lwz r0, 0x158(r31)
     stw r3, 0x88(r31)
     cmplwi r0, 0x40
@@ -1776,7 +1774,7 @@ lbl_fn_804AE888_0000176C:
     addi r4, r4, lbl_80757B7C@l
     li r5, 0x0
     addi r4, r4, 0x268
-    bl fn_801F3FF8
+    bl save_validateHeader
     lwz r0, 0x158(r31)
     stw r3, 0xb4(r31)
     cmplwi r0, 0x40
@@ -1801,7 +1799,7 @@ lbl_fn_804AE888_000017C8:
     add r27, r31, r26
     addi r4, r29, 0x285
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x8c(r27)
     lwz r0, 0x158(r31)
     cmplwi r0, 0x40
@@ -1892,7 +1890,7 @@ lbl_fn_804AE888_00001910:
     add r27, r30, r26
     addi r4, r29, 0x2ab
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0xb8(r27)
     li r4, 0x1
     bl atn_Task_setActive

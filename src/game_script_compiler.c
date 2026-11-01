@@ -5,16 +5,16 @@
 extern void _restgpr_25(void);
 extern void _savegpr_25(void);
 extern void dtor_80084684(void);
-extern void fn_80013DC4(void);
+extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_80018D5C(void);
 extern void talk_parseQuotedString(void);
-extern void fn_8005B5F8(void);
+extern void talk_scanQuotedString(void);
 extern void fn_8005B6E8(void);
 extern void fn_8006AFF8(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
-extern void fn_80087994(void);
+extern void route_createSegment(void);
 extern void fn_80088FAC(void);
 extern void fn_8008937C(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -417,7 +417,7 @@ lbl_fn_80254808_000003A8:
     addi r3, r1, 0x8
     bl talk_parseQuotedString
     addi r3, r1, 0x8
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_80254808_000003A8
     lwz r0, 0x654(r1)
@@ -1748,7 +1748,7 @@ asm void fn_802558B0(void)
     mr r29, r3
     mr r3, r26
     mr r4, r29
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x1c(r1)
     mr r3, r26
     stb r0, 0x18(r1)
@@ -1768,7 +1768,7 @@ asm void fn_802558B0(void)
     mr r25, r3
     mr r3, r29
     mr r4, r25
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x14(r1)
     mr r3, r29
     stb r0, 0x10(r1)
@@ -1848,7 +1848,7 @@ lbl_fn_802558B0_00001784:
     bl actor_dispatchMessage
 lbl_fn_802558B0_000017B4:
     addi r3, r1, 0x94
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_802558B0_0000172C
 lbl_fn_802558B0_000017C4:
@@ -1893,7 +1893,7 @@ lbl_fn_802558B0_0000183C:
     addi r4, r31, 0x45
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     lis r6, 0xf
     mr r3, r26
     addi r7, r6, 0x4240

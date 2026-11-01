@@ -11,7 +11,7 @@ extern void fn_8001047C(void);
 extern void fn_80011034(void);
 extern void vec3_sub(void);
 extern void talk_parseQuotedString(void);
-extern void fn_8005B5F8(void);
+extern void talk_scanQuotedString(void);
 extern void fn_8005B6E8(void);
 extern void fn_8009373C(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -45,7 +45,7 @@ extern void fn_8016D0A0(void);
 extern void actor_setState(void);
 extern void fn_80198514(void);
 extern void fn_801D80B4(void);
-extern void fn_80206BE4(void);
+extern void assert_generateId(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
@@ -360,7 +360,7 @@ lbl_fn_8026580C_000002B0:
     stw r3, 0x1658(r31)
 lbl_fn_8026580C_000002D8:
     addi r3, r1, 0x8
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_8026580C_00000130
     lwz r0, 0x654(r1)
@@ -1806,7 +1806,7 @@ lbl_fn_80266A24_000016C4:
     cmpwi r3, 0x0
     beq lbl_fn_80266A24_00001788
     bl fn_80266FAC
-    bl fn_80206BE4
+    bl assert_generateId
     mr r31, r3
     bl fn_801D80B4
     mr r4, r31

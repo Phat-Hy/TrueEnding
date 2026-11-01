@@ -23,7 +23,7 @@ extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
-extern void fn_800DC880(void);
+extern void str_calcHash(void);
 extern void fn_80102890(void);
 extern void fn_8011CD84(void);
 extern void fn_8011D1FC(void);
@@ -1701,7 +1701,7 @@ asm void fn_80548C9C(void)
     lis r30, lbl_8075E3C8@ha
     addi r30, r30, lbl_8075E3C8@l
     addi r3, r30, 0x14
-    bl fn_800DC880
+    bl str_calcHash
     lfs f0, lbl_80887D38
     lis r31, lbl_80794888@ha
     stfs f0, 0x14(r1)
@@ -1711,7 +1711,7 @@ asm void fn_80548C9C(void)
     stw r3, 0x4(r31)
     addi r3, r30, 0x1a
     stw r0, 0xc(r31)
-    bl fn_800DC880
+    bl str_calcHash
     lfs f0, lbl_80887D38
     li r4, 0x0
     stfs f0, 0x10(r1)
@@ -1719,7 +1719,7 @@ asm void fn_80548C9C(void)
     stw r3, 0x1c(r31)
     addi r3, r30, 0x20
     stw r0, 0x24(r31)
-    bl fn_800DC880
+    bl str_calcHash
     lfs f0, lbl_80887D38
     li r4, 0x0
     stfs f0, 0xc(r1)
@@ -1727,7 +1727,7 @@ asm void fn_80548C9C(void)
     stw r3, 0x34(r31)
     addi r3, r30, 0x26
     stw r0, 0x3c(r31)
-    bl fn_800DC880
+    bl str_calcHash
     lfs f0, lbl_80887D38
     stfs f0, 0x8(r1)
     lwz r0, 0x8(r1)

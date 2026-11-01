@@ -13,12 +13,12 @@ extern void fn_8000D9E8(void);
 extern void fn_8000E18C(void);
 extern void fn_80011034(void);
 extern void vec3_sub(void);
-extern void fn_80013DC4(void);
+extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_8004203C(void);
 extern void fn_80057A68(void);
 extern void talk_parseQuotedString(void);
-extern void fn_8005B5F8(void);
+extern void talk_scanQuotedString(void);
 extern void fn_8005B6E8(void);
 extern void fn_8006AFF8(void);
 extern void fn_800897D8(void);
@@ -997,7 +997,7 @@ lbl_fn_80287E7C_00000BC8:
     mr r26, r3
     mr r3, r27
     mr r4, r26
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x1c(r1)
     mr r3, r27
     stb r0, 0x18(r1)
@@ -1017,7 +1017,7 @@ lbl_fn_80287E7C_00000BC8:
     mr r25, r3
     mr r3, r26
     mr r4, r25
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x14(r1)
     mr r3, r26
     stb r0, 0x10(r1)
@@ -1097,7 +1097,7 @@ lbl_fn_80287E7C_00000DF8:
     bl actor_dispatchMessage
 lbl_fn_80287E7C_00000E28:
     addi r3, r1, 0x44
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_80287E7C_00000DA0
 lbl_fn_80287E7C_00000E38:
@@ -1877,7 +1877,7 @@ lbl_fn_802885EC_00001900:
     stw r3, 0x14e4(r31)
 lbl_fn_802885EC_00001928:
     addi r3, r1, 0x38
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_802885EC_00001334
 lbl_fn_802885EC_00001938:

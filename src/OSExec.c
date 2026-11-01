@@ -35,7 +35,7 @@ extern void fn_80600EC0(void);
 extern void fn_806015E0(void);
 extern void fn_8061BCF0(void);
 extern void fn_8061C2A0(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
 
@@ -321,7 +321,7 @@ lbl_fn_805EEB00_00000350:
 lbl_fn_805EEB00_0000037C:
     lwz r25, 0x0(r26)
     mr r3, r25
-    bl fn_80686A48
+    bl wcslen
     slwi r3, r3, 2
     mr r4, r25
     addi r0, r3, 0x1

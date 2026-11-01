@@ -5,7 +5,7 @@
 extern void OSGetTime(void);
 extern void __div2i(void);
 extern void dtor_80084684(void);
-extern void fn_80013DC4(void);
+extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_800183E0(void);
 extern void fn_80018608(void);
@@ -1941,7 +1941,7 @@ asm void fn_804DB478(void)
     mr r24, r3
     mr r3, r25
     mr r4, r24
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x54(r1)
     mr r3, r25
     stb r0, 0x50(r1)
@@ -2076,7 +2076,7 @@ lbl_fn_804DB478_00001AA0:
     mr r24, r3
     mr r3, r27
     mr r4, r24
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x3c(r1)
     mr r3, r27
     stb r0, 0x38(r1)
@@ -2211,7 +2211,7 @@ lbl_fn_804DB478_00001C84:
     mr r24, r3
     mr r3, r27
     mr r4, r24
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x24(r1)
     mr r3, r27
     stb r0, 0x20(r1)
@@ -2347,7 +2347,7 @@ lbl_fn_804DB478_00001E6C:
     mr r27, r3
     mr r3, r26
     mr r4, r27
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0xc(r1)
     mr r3, r26
     stb r0, 0x8(r1)

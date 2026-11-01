@@ -6,7 +6,7 @@ extern void __files(void);
 extern void _restgpr_14(void);
 extern void _savegpr_14(void);
 extern void dtor_80084684(void);
-extern void fn_80013DC4(void);
+extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void talk_formatQuotedString(void);
 extern void fn_8006AC08(void);
@@ -35,7 +35,7 @@ extern void fn_80473F88(void);
 extern void fn_80494354(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
-extern void fn_8067E23C(void);
+extern void memcmp(void);
 extern void printf(void);
 extern void strcmp(void);
 extern void abort(void);
@@ -267,7 +267,7 @@ lbl_fn_8049248C_00000290:
     mr r16, r3
     mr r3, r14
     mr r4, r16
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x14(r1)
     mr r3, r14
     stb r0, 0x10(r1)
@@ -322,7 +322,7 @@ lbl_fn_8049248C_00000364:
     addi r5, r1, 0x50
 lbl_fn_8049248C_00000380:
     lwz r5, 0x0(r5)
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_8049248C_000003B4
     lwz r0, 0x48(r1)

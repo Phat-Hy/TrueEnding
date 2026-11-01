@@ -31,7 +31,7 @@ extern void fn_801656A4(void);
 extern void fn_8016E484(void);
 extern void fn_8016F368(void);
 extern void fn_8016F3D0(void);
-extern void fn_801F3FF8(void);
+extern void save_validateHeader(void);
 extern void fn_8020BD78(void);
 extern void fn_80219558(void);
 extern void fn_80237654(void);
@@ -1160,7 +1160,7 @@ asm void fn_800F39A4(void)
     lwz r4, lbl_808813D4
     mr r3, r28
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     addis r5, r28, 0x1
     li r4, 0x1
     stw r3, -0x34d0(r5)
@@ -1168,7 +1168,7 @@ asm void fn_800F39A4(void)
     lwz r4, lbl_808813D8
     mr r3, r28
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     addis r5, r28, 0x1
     li r4, 0x1
     stw r3, -0x34a0(r5)
@@ -1176,7 +1176,7 @@ asm void fn_800F39A4(void)
     mr r3, r28
     addi r4, r31, 0x182
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     addis r5, r28, 0x4
     li r4, 0x1
     stw r3, -0x1d0c(r5)

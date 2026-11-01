@@ -9,7 +9,7 @@ extern void _savegpr_21(void);
 extern void _savegpr_23(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_80013DC4(void);
+extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void talk_formatQuotedString(void);
 extern void fn_8005BBF8(void);
@@ -39,7 +39,7 @@ extern void dialog_renderWindow(void);
 extern void fn_801765D8(void);
 extern void fn_80176ACC(void);
 extern void fn_8017C974(void);
-extern void fn_80211480(void);
+extern void event_findEntryById(void);
 extern void fn_8021DE88(void);
 extern void fn_8021DECC(void);
 extern void res_MsgHandle_unload(void);
@@ -67,7 +67,7 @@ extern void PSVECDotProduct(void);
 extern void rand(void);
 extern void strcmp(void);
 extern void atoi(void);
-extern void fn_80686A64(void);
+extern void wcscpy(void);
 extern void fn_8068B2A0(void);
 extern void fn_806959D8(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -265,7 +265,7 @@ lbl_fn_80431458_000001C4:
     mr r22, r3
     addi r3, r1, 0x10
     mr r4, r22
-    bl fn_80013DC4
+    bl actor_validateIndex
     stb r30, 0x8(r1)
     mr r6, r28
     addi r3, r1, 0x10
@@ -716,7 +716,7 @@ lbl_fn_80431774_00000770:
     b lbl_fn_80431774_000008A4
 lbl_fn_80431774_00000840:
     lwz r3, 0x10(r1)
-    bl fn_80211480
+    bl event_findEntryById
     cmpwi r3, 0x0
     beq lbl_fn_80431774_000008A4
     lwz r5, 0xc8(r3)
@@ -1010,12 +1010,12 @@ lbl_fn_80431774_00000C9C:
     stwu r3, 0x8(r4)
     bdnz lbl_fn_80431774_00000C9C
     lwz r3, 0x2eb8(r30)
-    bl fn_80211480
+    bl event_findEntryById
     cmpwi r3, 0x0
     beq lbl_fn_80431774_00000CC8
     lwz r4, 0x8(r3)
     addi r3, r1, 0x590
-    bl fn_80686A64
+    bl wcscpy
     b lbl_fn_80431774_00000CF0
 lbl_fn_80431774_00000CC8:
     lis r4, lbl_807540A0@ha

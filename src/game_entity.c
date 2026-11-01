@@ -95,7 +95,7 @@ extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void PSVECCrossProduct(void);
 extern void rand(void);
-extern void fn_8068236C(void);
+extern void strncpy(void);
 
 /* External data declarations */
 extern u8 lbl_8072FF50[];
@@ -1102,7 +1102,7 @@ asm void fn_8001C068(void)
     beqlr
     li r5, 0x100
     addi r3, r3, 0xe08
-    b fn_8068236C
+    b strncpy
     blr
 }
 

@@ -8,7 +8,7 @@ extern void _restgpr_26(void);
 extern void _savegpr_25(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
-extern void fn_80013DC4(void);
+extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_8004ED34(void);
 extern void fn_8006B174(void);
@@ -43,7 +43,7 @@ extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
-extern void fn_8067E23C(void);
+extern void memcmp(void);
 extern void printf(void);
 extern void rand(void);
 extern void abort(void);
@@ -499,7 +499,7 @@ lbl_fn_801AD34C_0000055C:
     mr r29, r3
     mr r3, r25
     mr r4, r29
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0xc(r1)
     mr r3, r25
     stb r0, 0x8(r1)
@@ -560,7 +560,7 @@ lbl_fn_801AD34C_00000654:
     addi r5, r1, 0x38
 lbl_fn_801AD34C_00000670:
     lwz r5, 0x0(r5)
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_801AD34C_000006A4
     lwz r0, 0x30(r1)
@@ -624,7 +624,7 @@ lbl_fn_801AD34C_0000072C:
     addi r5, r1, 0x28
 lbl_fn_801AD34C_00000748:
     lwz r5, 0x0(r5)
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_801AD34C_0000077C
     lwz r0, 0x20(r1)
@@ -688,7 +688,7 @@ lbl_fn_801AD34C_00000804:
     addi r5, r1, 0x18
 lbl_fn_801AD34C_00000820:
     lwz r5, 0x0(r5)
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_801AD34C_00000854
     lwz r0, 0x10(r1)

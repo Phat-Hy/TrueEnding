@@ -13,7 +13,7 @@ extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
-extern void fn_80087994(void);
+extern void route_createSegment(void);
 extern void fn_80087E9C(void);
 extern void fn_8008937C(void);
 extern void fn_8008AD4C(void);
@@ -859,7 +859,7 @@ lbl_fn_803FF9A4_00000A8C:
     addi r5, r26, 0x9c
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     addi r30, r26, 0x314
     li r28, 0x0
 lbl_fn_803FF9A4_00000AFC:

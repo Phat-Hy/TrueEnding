@@ -27,11 +27,11 @@ extern void fn_800C1424(void);
 extern void PSMTXTranspose(void);
 extern void PSMTXInverse(void);
 extern void PSMTXScale(void);
-extern void fn_80612E80(void);
+extern void GXSetVtxDesc(void);
 extern void fn_806134E0(void);
-extern void fn_80613520(void);
+extern void GXSetVtxAttrFmt(void);
 extern void __GXSetVtxDesc(void);
-extern void fn_80613BB0(void);
+extern void GXClearVtxDesc(void);
 extern void fn_80614190(void);
 extern void fn_80614790(void);
 extern void fn_806149C0(void);
@@ -164,7 +164,7 @@ asm void fn_800B0CD4(void)
     li r9, 0x2
     bl fn_80615D50
     li r3, 0x1
-    bl fn_80613BB0
+    bl GXClearVtxDesc
     li r3, 0x0
     li r4, 0x1
     li r5, 0x4
@@ -470,7 +470,7 @@ lbl_fn_800B105C_000003C0:
     li r6, 0x3
     bl fn_80617D50
     li r3, 0x1
-    bl fn_80613BB0
+    bl GXClearVtxDesc
     li r3, 0x1
     bl fn_80615D20
     li r3, 0x1
@@ -502,7 +502,7 @@ lbl_fn_800B105C_000003C0:
     li r9, 0x2
     bl fn_80615D50
     li r3, 0x2
-    bl fn_80613BB0
+    bl GXClearVtxDesc
     li r3, 0x0
     li r4, 0x1
     li r5, 0x4
@@ -1254,10 +1254,10 @@ asm void fn_800B1C44(void)
     li r5, 0x1
     li r6, 0x4
     li r7, 0x0
-    bl fn_80613520
+    bl GXSetVtxAttrFmt
     li r3, 0x9
     li r4, 0x1
-    bl fn_80612E80
+    bl GXSetVtxDesc
     li r3, 0x1
     bl fn_80615D20
     li r3, 0x4
@@ -1364,7 +1364,7 @@ asm void fn_800B1C44(void)
     li r4, 0x0
     bl GXLoadNrmMtxImm3x3
     li r3, 0x0
-    bl fn_80613BB0
+    bl GXClearVtxDesc
     li r3, 0x1
     bl GXSetNumTevStages
     li r3, 0x0

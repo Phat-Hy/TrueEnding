@@ -25,7 +25,7 @@ extern void fn_8004B158(void);
 extern void fn_8004B1EC(void);
 extern void fn_80051CD8(void);
 extern void talk_parseQuotedString(void);
-extern void fn_8005B5F8(void);
+extern void talk_scanQuotedString(void);
 extern void skill_calculateDamage(void);
 extern void fn_800629F0(void);
 extern void mem_alloc(void);
@@ -1807,7 +1807,7 @@ lbl_fn_8035F3D4_00001734:
     li r4, -0x1
     bl dtor_80013D60
     addi r3, r1, 0x20
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_8035F3D4_0000160C
     mr r4, r27
@@ -1876,7 +1876,7 @@ lbl_fn_8035F3D4_00001800:
     bl atoi
 lbl_fn_8035F3D4_00001848:
     addi r3, r1, 0x20
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_8035F3D4_00001800
 lbl_fn_8035F3D4_00001858:
@@ -1922,7 +1922,7 @@ lbl_fn_8035F3D4_000018EC:
     addi r30, r30, 0x1
 lbl_fn_8035F3D4_000018F0:
     addi r3, r1, 0x20
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_8035F3D4_00001870
     b lbl_fn_8035F3D4_00001D44
@@ -1969,7 +1969,7 @@ lbl_fn_8035F3D4_00001998:
     addi r30, r30, 0x1
 lbl_fn_8035F3D4_0000199C:
     addi r3, r1, 0x20
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_8035F3D4_0000191C
     b lbl_fn_8035F3D4_00001D44
@@ -2016,7 +2016,7 @@ lbl_fn_8035F3D4_00001A44:
     addi r30, r30, 0x1
 lbl_fn_8035F3D4_00001A48:
     addi r3, r1, 0x20
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_8035F3D4_000019C8
     b lbl_fn_8035F3D4_00001D44
@@ -2063,7 +2063,7 @@ lbl_fn_8035F3D4_00001AF0:
     addi r30, r30, 0x1
 lbl_fn_8035F3D4_00001AF4:
     addi r3, r1, 0x20
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_8035F3D4_00001A74
     b lbl_fn_8035F3D4_00001D44
@@ -2110,7 +2110,7 @@ lbl_fn_8035F3D4_00001B9C:
     addi r30, r30, 0x1
 lbl_fn_8035F3D4_00001BA0:
     addi r3, r1, 0x20
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_8035F3D4_00001B20
     b lbl_fn_8035F3D4_00001D44
@@ -2165,7 +2165,7 @@ lbl_fn_8035F3D4_00001C64:
     stw r26, 0x4(r27)
 lbl_fn_8035F3D4_00001C68:
     addi r3, r1, 0x20
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_8035F3D4_00001BCC
     b lbl_fn_8035F3D4_00001D44
@@ -2219,7 +2219,7 @@ lbl_fn_8035F3D4_00001CB0:
     addi r25, r25, 0x1
 lbl_fn_8035F3D4_00001D34:
     addi r3, r1, 0x20
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_8035F3D4_00001CB0
 lbl_fn_8035F3D4_00001D44:
@@ -2227,7 +2227,7 @@ lbl_fn_8035F3D4_00001D44:
     li r4, -0x1
     bl dtor_80013D60
     addi r3, r1, 0x20
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_8035F3D4_000017AC
     li r25, 0x0

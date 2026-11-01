@@ -5,7 +5,7 @@
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_80013DC4(void);
+extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_8006A9A4(void);
 extern void fn_8006B174(void);
@@ -25,7 +25,7 @@ extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void fn_800D3FA4(void);
 extern void str_findChar(void);
-extern void fn_801FECE0(void);
+extern void thread_findAndNotify(void);
 extern void fn_8046C1C8(void);
 extern void atn_Arc_loadEntry(void);
 extern void fn_8046CBB0(void);
@@ -41,7 +41,7 @@ extern void atn_LoadHandle_getStatus(void);
 extern void fn_80473F88(void);
 extern void taskManager_updateTasks(void);
 extern void fn_805F9EF0(void);
-extern void fn_8068236C(void);
+extern void strncpy(void);
 extern void strcmp(void);
 extern void strrchr(void);
 extern void strstr(void);
@@ -179,7 +179,7 @@ lbl_fn_8046D1EC_000000CC:
     mr r27, r3
     mr r3, r28
     mr r4, r27
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x14(r1)
     mr r3, r28
     stb r0, 0x10(r1)
@@ -278,7 +278,7 @@ lbl_fn_8046D1EC_0000023C:
     beq lbl_fn_8046D1EC_00000278
     addi r4, r28, 0x149
     li r5, 0x4
-    bl fn_8068236C
+    bl strncpy
 lbl_fn_8046D1EC_00000278:
     lwz r4, lbl_8087F518
     lis r5, lbl_8075561C@ha
@@ -314,7 +314,7 @@ lbl_fn_8046D1EC_000002CC:
     mr r26, r3
     mr r3, r28
     mr r4, r26
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x8(r1)
     mr r3, r28
     stb r0, 0xc(r1)
@@ -633,7 +633,7 @@ asm void fn_8046D84C(void)
     mr r30, r3
     addi r3, r29, 0x3efc
     mr r4, r30
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0xc(r1)
     mr r6, r31
     stb r0, 0x8(r1)
@@ -875,7 +875,7 @@ asm void fn_8046DBF8(void)
     beq lbl_fn_8046DBF8_00000AA8
     addi r4, r31, 0x149
     li r5, 0x4
-    bl fn_8068236C
+    bl strncpy
 lbl_fn_8046DBF8_00000AA8:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
@@ -1274,7 +1274,7 @@ lbl_atn_Loader_finish_00000FB0:
     lfs f1, lbl_80886EC0
     mr r4, r3
     mr r3, r30
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lwz r4, 0x3ee0(r31)
     addi r3, r29, 0x15f
     addi r29, r4, 0x58
@@ -1282,7 +1282,7 @@ lbl_atn_Loader_finish_00000FB0:
     lfs f1, lbl_80886EC0
     mr r4, r3
     mr r3, r29
-    bl fn_801FECE0
+    bl thread_findAndNotify
     b lbl_atn_Loader_finish_00001104
 lbl_atn_Loader_finish_00001030:
     lwz r4, 0x3ee0(r31)
@@ -1294,7 +1294,7 @@ lbl_atn_Loader_finish_00001030:
     lfs f1, lbl_80886ECC
     mr r4, r3
     mr r3, r30
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lwz r4, 0x3ee0(r31)
     addi r3, r29, 0x15f
     addi r29, r4, 0x58
@@ -1302,7 +1302,7 @@ lbl_atn_Loader_finish_00001030:
     lfs f1, lbl_80886ED0
     mr r4, r3
     mr r3, r29
-    bl fn_801FECE0
+    bl thread_findAndNotify
     b lbl_atn_Loader_finish_00001104
 lbl_atn_Loader_finish_0000107C:
     lwz r6, 0x3ee0(r3)
@@ -1340,7 +1340,7 @@ lbl_atn_Loader_finish_000010DC:
     lfs f1, lbl_80886EC0
     mr r4, r3
     mr r3, r29
-    bl fn_801FECE0
+    bl thread_findAndNotify
 lbl_atn_Loader_finish_00001104:
     li r29, 0x0
     b lbl_atn_Loader_finish_00001118

@@ -25,7 +25,7 @@ extern void fn_801F0544(void);
 extern void fn_801F64D0(void);
 extern void fn_801F6C2C(void);
 extern void fn_801F6C38(void);
-extern void fn_801F6C80(void);
+extern void save_computeCrc32(void);
 extern void fn_801F72D4(void);
 extern void fn_801F7590(void);
 extern void fn_801F837C(void);
@@ -34,7 +34,7 @@ extern void fn_8020924C(void);
 extern void fn_803B3D2C(void);
 extern void fn_803CC6B4(void);
 extern void printf(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 extern void abort(void);
 
 /* External data declarations */
@@ -643,11 +643,11 @@ lbl_fn_803B4564_00000764:
     lwz r3, 0x50(r31)
     addi r4, r30, 0xb5
     lfs f1, lbl_80885C34
-    bl fn_801F6C80
+    bl save_computeCrc32
     lwz r3, 0x50(r31)
     addi r4, r30, 0xbf
     lfs f1, lbl_80885C20
-    bl fn_801F6C80
+    bl save_computeCrc32
     lwz r4, 0x4c(r31)
     addi r3, r1, 0x30
     addi r5, r30, 0xca
@@ -669,11 +669,11 @@ lbl_fn_803B4564_00000764:
     lwz r3, 0x54(r31)
     addi r4, r30, 0xb5
     lfs f1, lbl_80885C34
-    bl fn_801F6C80
+    bl save_computeCrc32
     lwz r3, 0x54(r31)
     addi r4, r30, 0xbf
     lfs f1, lbl_80885C20
-    bl fn_801F6C80
+    bl save_computeCrc32
     lwz r4, 0x4c(r31)
     addi r3, r1, 0x1c
     addi r5, r30, 0xd7
@@ -695,11 +695,11 @@ lbl_fn_803B4564_00000764:
     lwz r3, 0x58(r31)
     addi r4, r30, 0xb5
     lfs f1, lbl_80885C34
-    bl fn_801F6C80
+    bl save_computeCrc32
     lwz r3, 0x58(r31)
     addi r4, r30, 0xbf
     lfs f1, lbl_80885C20
-    bl fn_801F6C80
+    bl save_computeCrc32
     lwz r4, 0x4c(r31)
     addi r3, r1, 0x8
     addi r5, r30, 0xe1
@@ -721,11 +721,11 @@ lbl_fn_803B4564_00000764:
     lwz r3, 0x5c(r31)
     addi r4, r30, 0xb5
     lfs f1, lbl_80885C34
-    bl fn_801F6C80
+    bl save_computeCrc32
     lwz r3, 0x5c(r31)
     addi r4, r30, 0xbf
     lfs f1, lbl_80885C20
-    bl fn_801F6C80
+    bl save_computeCrc32
     lwz r0, 0x94(r1)
     lwz r31, 0x8c(r1)
     lwz r30, 0x88(r1)
@@ -765,7 +765,7 @@ asm void fn_803B4C38(void)
     mr r3, r16
     stw r14, 0x50(r1)
     stw r14, 0x54(r1)
-    bl fn_80686A48
+    bl wcslen
     mr r18, r3
     mr r3, r17
     mr r4, r18
@@ -825,7 +825,7 @@ lbl_fn_803B4C38_00000A6C:
     mr r3, r21
     stw r30, 0x38(r1)
     stw r30, 0x3c(r1)
-    bl fn_80686A48
+    bl wcslen
     mr r16, r3
     mr r3, r20
     mr r4, r16
@@ -1269,23 +1269,23 @@ lbl_fn_803B4C38_000010A0:
     addi r14, r14, lbl_8074FD38@l
     lfs f1, lbl_80885C20
     addi r4, r14, 0x10e
-    bl fn_801F6C80
+    bl save_computeCrc32
     lwz r3, 0x54(r15)
     addi r4, r14, 0x10e
     lfs f1, lbl_80885C20
-    bl fn_801F6C80
+    bl save_computeCrc32
     lwz r3, 0x58(r15)
     addi r4, r14, 0x10e
     lfs f1, lbl_80885C20
-    bl fn_801F6C80
+    bl save_computeCrc32
     lwz r3, 0x5c(r15)
     addi r4, r14, 0x10e
     lfs f1, lbl_80885C20
-    bl fn_801F6C80
+    bl save_computeCrc32
     lwz r3, 0x58(r15)
     addi r4, r14, 0x115
     lfs f1, lbl_80885C20
-    bl fn_801F6C80
+    bl save_computeCrc32
     addic. r0, r1, 0x40
     beq lbl_fn_803B4C38_0000115C
     beq lbl_fn_803B4C38_0000115C
@@ -1773,7 +1773,7 @@ lbl_fn_803B5974_0000171C:
     mr r3, r30
     stw r0, 0x88(r1)
     stw r0, 0x8c(r1)
-    bl fn_80686A48
+    bl wcslen
     mr r28, r3
     mr r3, r31
     mr r4, r28
@@ -2150,7 +2150,7 @@ lbl_fn_803B5974_00001C3C:
     lwz r3, 0x48(r29)
     lfs f1, lbl_80885C34
     addi r4, r30, 0x147
-    bl fn_801F6C80
+    bl save_computeCrc32
     cmpwi r31, 0x0
     beq lbl_fn_803B5974_00001D1C
     lwz r3, 0x4c(r29)
@@ -2160,7 +2160,7 @@ lbl_fn_803B5974_00001C3C:
     lwz r3, 0x48(r29)
     addi r4, r30, 0x14f
     lfs f1, lbl_80885C34
-    bl fn_801F6C80
+    bl save_computeCrc32
     lwz r3, 0x48(r29)
     addi r4, r30, 0x158
     lwz r5, 0x4(r31)
@@ -2209,7 +2209,7 @@ lbl_fn_803B5974_00001D1C:
     addi r30, r30, lbl_8074FD38@l
     lfs f1, lbl_80885C20
     addi r4, r30, 0x14f
-    bl fn_801F6C80
+    bl save_computeCrc32
     la r5, lbl_8087DD88
     lwz r3, 0x48(r29)
     addi r4, r30, 0x158

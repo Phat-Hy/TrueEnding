@@ -3,10 +3,10 @@
 
 /* External function declarations */
 extern void dtor_80084684(void);
-extern void fn_80013DC4(void);
+extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void talk_parseQuotedString(void);
-extern void fn_8005B5F8(void);
+extern void talk_scanQuotedString(void);
 extern void fn_8005B6E8(void);
 extern void skill_calculateDamage(void);
 extern void fn_8006A004(void);
@@ -26,7 +26,7 @@ extern void fn_8020685C(void);
 extern void fn_8020689C(void);
 extern void fn_8046DC5C(void);
 extern void fn_8046DD20(void);
-extern void fn_8068236C(void);
+extern void strncpy(void);
 extern void strcmp(void);
 extern void strncmp(void);
 extern void atoi(void);
@@ -464,7 +464,7 @@ lbl_fn_80204958_000004C8:
     addi r23, r23, 0x1
 lbl_fn_80204958_000004FC:
     addi r3, r1, 0x28
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_80204958_000004C8
     lis r3, lbl_8073E814@ha
@@ -560,7 +560,7 @@ lbl_fn_80204958_0000063C:
     mr r23, r3
     mr r3, r31
     mr r4, r23
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x8(r1)
     add r4, r26, r23
     stb r0, 0xc(r1)
@@ -616,7 +616,7 @@ lbl_fn_80204958_0000071C:
     mr r4, r3
     addi r3, r27, 0x8
     li r5, 0x20
-    bl fn_8068236C
+    bl strncpy
     addi r3, r1, 0x28
     bl talk_parseQuotedString
     addi r3, r1, 0x28
@@ -703,12 +703,12 @@ lbl_fn_80204958_0000087C:
     mr r4, r26
     addi r3, r27, 0x8
     li r5, 0x20
-    bl fn_8068236C
+    bl strncpy
 lbl_fn_80204958_0000088C:
     addi r30, r30, 0x90
 lbl_fn_80204958_00000890:
     addi r3, r1, 0x28
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_80204958_00000564
     lwz r3, lbl_8087F518
@@ -807,7 +807,7 @@ lbl_fn_80204E54_000009C0:
     addi r15, r15, 0x1
 lbl_fn_80204E54_000009DC:
     addi r3, r1, 0x13c
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_80204E54_000009C0
     addi r14, r15, 0x80
@@ -980,7 +980,7 @@ lbl_fn_80204E54_00000B64:
     mr r18, r3
     mr r3, r14
     mr r4, r18
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x24(r1)
     mr r3, r14
     stb r0, 0x20(r1)
@@ -1002,7 +1002,7 @@ lbl_fn_80204E54_00000B64:
     mr r18, r3
     addi r3, r1, 0xbc
     mr r4, r18
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x18(r1)
     mr r6, r15
     stb r0, 0x1c(r1)
@@ -1053,7 +1053,7 @@ lbl_fn_80204E54_00000D78:
     lwz r4, 0xb4(r1)
     stw r28, 0x11c(r1)
     stw r28, 0x120(r1)
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r5, 0x14(r1)
     mr r3, r26
     stb r5, 0x10(r1)
@@ -1080,7 +1080,7 @@ lbl_fn_80204E54_00000DDC:
     stw r28, 0xc(r26)
     stw r28, 0x10(r26)
     stw r28, 0x14(r26)
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r5, 0xc(r1)
     addi r3, r26, 0xc
     stb r5, 0x8(r1)
@@ -1569,7 +1569,7 @@ lbl_fn_80204E54_000014C0:
     bl dtor_80084684
 lbl_fn_80204E54_000014D4:
     addi r3, r1, 0x13c
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_80204E54_00000A8C
     mulli r5, r17, 0x130
@@ -1720,7 +1720,7 @@ lbl_fn_80205BE8_000016E4:
     stw r0, 0x4(r3)
     stw r0, 0x8(r3)
     lwz r4, 0x4(r4)
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x24(r1)
     mr r3, r30
     stb r0, 0x20(r1)
@@ -1748,7 +1748,7 @@ lbl_fn_80205BE8_00001748:
     stw r0, 0x10(r30)
     stw r0, 0x14(r30)
     lwz r4, 0x10(r31)
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x1c(r1)
     addi r3, r30, 0xc
     stb r0, 0x18(r1)
@@ -1790,7 +1790,7 @@ lbl_fn_80205BE8_000017E8:
     stw r0, 0x34(r30)
     stw r0, 0x38(r30)
     lwz r4, 0x34(r31)
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x28(r1)
     addi r3, r30, 0x30
     stb r0, 0x2c(r1)

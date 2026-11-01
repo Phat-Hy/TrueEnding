@@ -13,14 +13,14 @@ extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
 extern void morph_updateMesh(void);
 extern void str_findChar(void);
-extern void fn_80117228(void);
+extern void actor_spawnActorWithId(void);
 extern void magic_dispatchActionCommand(void);
 extern void fn_801F4728(void);
 extern void fn_801F4CB4(void);
 extern void saveSlot_readSummary(void);
-extern void fn_801FECE0(void);
+extern void thread_findAndNotify(void);
 extern void fn_801FEDBC(void);
-extern void fn_801FEE08(void);
+extern void thread_dispatchToQueue(void);
 extern void fn_804A53D4(void);
 extern void fn_804C54FC(void);
 extern void fn_804C8D80(void);
@@ -200,7 +200,7 @@ lbl_fn_804C9C88_000001A4:
     beq lbl_fn_804C9C88_000001D0
     addi r3, r1, 0x10
     li r4, 0x3
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle
@@ -222,7 +222,7 @@ lbl_fn_804C9C88_000001D0:
 lbl_fn_804C9C88_00000200:
     addi r3, r1, 0xc
     li r4, 0x1
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0xc
     li r4, -0x1
     bl ref_releaseHandle
@@ -237,7 +237,7 @@ lbl_fn_804C9C88_00000220:
     beq lbl_fn_804C9C88_00000254
     addi r3, r1, 0x8
     li r4, 0x2
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -289,7 +289,7 @@ lbl_fn_804C9EF8_000002D0:
     beq lbl_fn_804C9EF8_00000310
     addi r3, r1, 0x14
     li r4, 0x1
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x14
     li r4, -0x1
     bl ref_releaseHandle
@@ -318,7 +318,7 @@ lbl_fn_804C9EF8_0000034C:
     stw r29, lbl_8087F5D8
     addi r3, r1, 0x10
     li r4, 0x3
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle
@@ -345,7 +345,7 @@ lbl_fn_804C9EF8_000003AC:
     stw r29, lbl_8087F5D8
     addi r3, r1, 0xc
     li r4, 0x3
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0xc
     li r4, -0x1
     bl ref_releaseHandle
@@ -862,7 +862,7 @@ lbl_fn_804CA250_00000AAC:
     addi r3, r1, 0xc
     stfs f0, 0x170(r29)
     li r4, 0x3
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0xc
     li r4, -0x1
     bl ref_releaseHandle
@@ -1422,7 +1422,7 @@ lbl_fn_804CAD90_0000114C:
     lfs f1, lbl_808874FC
     mr r4, r3
     mr r3, r29
-    bl fn_801FECE0
+    bl thread_findAndNotify
     addi r11, r1, 0xd0
     bl _restgpr_26
     lwz r0, 0xd4(r1)
@@ -1756,7 +1756,7 @@ lbl_fn_804CB2F0_00001750:
     mr r4, r3
     mr r3, r27
     mr r5, r30
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     b lbl_fn_804CB2F0_000017D4
 lbl_fn_804CB2F0_000017AC:
     lwz r4, 0x4c(r29)
@@ -1768,7 +1768,7 @@ lbl_fn_804CB2F0_000017AC:
     mr r4, r3
     mr r3, r27
     mr r5, r30
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
 lbl_fn_804CB2F0_000017D4:
     lis r28, lbl_80759374@ha
     lfs f28, lbl_808874E0

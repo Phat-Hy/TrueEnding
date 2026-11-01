@@ -14,7 +14,7 @@ extern void vec3_sub(void);
 extern void fn_80013410(void);
 extern void fn_80057A64(void);
 extern void talk_parseQuotedString(void);
-extern void fn_8005B5F8(void);
+extern void talk_scanQuotedString(void);
 extern void fn_8005B6E8(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -455,7 +455,7 @@ lbl_fn_8030DEB0_00000474:
     stw r3, 0x151c(r29)
 lbl_fn_8030DEB0_00000498:
     addi r3, r1, 0x8
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_8030DEB0_000002B4
     lwz r0, 0x654(r1)

@@ -3,7 +3,7 @@
 
 /* External function declarations */
 extern void dtor_80084684(void);
-extern void fn_80013DC4(void);
+extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_80049B2C(void);
 extern void fn_80049B74(void);
@@ -1158,7 +1158,7 @@ lbl_fn_805A3D6C_00000DC8:
     mr r27, r3
     mr r3, r28
     mr r4, r27
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x14(r1)
     add r4, r30, r27
     stb r0, 0x10(r1)

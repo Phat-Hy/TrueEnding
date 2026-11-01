@@ -20,7 +20,7 @@ extern void fn_800C31F4(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB688(void);
 extern void fn_800EF73C(void);
-extern void fn_80211480(void);
+extern void event_findEntryById(void);
 extern void fn_80216AFC(void);
 extern void fn_8021D720(void);
 extern void fn_8021D770(void);
@@ -1015,7 +1015,7 @@ lbl_fn_804348C4_00000D64:
     stw r4, -0x24d8(r3)
 lbl_fn_804348C4_00000DA0:
     lwz r3, 0x28(r1)
-    bl fn_80211480
+    bl event_findEntryById
     cmpwi r3, 0x0
     mr r26, r3
     beq lbl_fn_804348C4_00000E44

@@ -13,15 +13,15 @@ extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
 extern void str_findChar(void);
 extern void fn_800DD3FC(void);
-extern void fn_80117228(void);
+extern void actor_spawnActorWithId(void);
 extern void fn_801173A8(void);
-extern void fn_801F3FF8(void);
+extern void save_validateHeader(void);
 extern void saveSlot_readSummary(void);
 extern void fn_801F64D0(void);
-extern void fn_801F6C80(void);
+extern void save_computeCrc32(void);
 extern void fn_801F6E78(void);
 extern void fn_80206B9C(void);
-extern void fn_80206C50(void);
+extern void assert_formatLocation(void);
 extern void fn_8020EF04(void);
 extern void fn_804439FC(void);
 extern void fn_8044441C(void);
@@ -65,9 +65,9 @@ extern void fn_805860F4(void);
 extern void fn_80586220(void);
 extern void fn_80586624(void);
 extern void printf(void);
-extern void fn_80686A48(void);
-extern void fn_80686AF0(void);
-extern void fn_80686B64(void);
+extern void wcslen(void);
+extern void wcscmp(void);
+extern void wcschr(void);
 extern void abort(void);
 extern int sprintf(char* str, const char* format, ...);
 
@@ -206,7 +206,7 @@ lbl_fn_80584178_0000012C:
     cmpwi r3, 0x0
     beq lbl_fn_80584178_00000150
     lwz r3, 0x0(r14)
-    bl fn_80206C50
+    bl assert_formatLocation
     mr r18, r3
 lbl_fn_80584178_00000150:
     lwz r3, 0x0(r29)
@@ -214,7 +214,7 @@ lbl_fn_80584178_00000150:
     cmpwi r3, 0x0
     beq lbl_fn_80584178_0000016C
     lwz r3, 0x0(r29)
-    bl fn_80206C50
+    bl assert_formatLocation
     mr r19, r3
 lbl_fn_80584178_0000016C:
     cmpwi r18, 0x0
@@ -275,7 +275,7 @@ lbl_fn_80584178_00000224:
     bl fn_800DD3FC
     addi r3, r1, 0xe8
     li r4, 0x2b
-    bl fn_80686B64
+    bl wcschr
     cmpwi r3, 0x0
     beq lbl_fn_80584178_00000250
     sth r31, 0x0(r3)
@@ -287,14 +287,14 @@ lbl_fn_80584178_00000250:
     bl fn_800DD3FC
     addi r3, r1, 0x68
     li r4, 0x2b
-    bl fn_80686B64
+    bl wcschr
     cmpwi r3, 0x0
     beq lbl_fn_80584178_0000027C
     sth r31, 0x0(r3)
 lbl_fn_80584178_0000027C:
     addi r3, r1, 0xe8
     addi r4, r1, 0x68
-    bl fn_80686AF0
+    bl wcscmp
     cmpwi r3, 0x0
     bne lbl_fn_80584178_0000032C
     lwz r0, 0x48(r14)
@@ -307,7 +307,7 @@ lbl_fn_80584178_0000027C:
     lwz r15, 0x8(r15)
     mr r4, r16
     mr r3, r15
-    bl fn_80686AF0
+    bl wcscmp
     cmpwi r3, 0x0
     bne lbl_fn_80584178_000002E4
     lwz r4, 0x4c(r14)
@@ -321,15 +321,15 @@ lbl_fn_80584178_0000027C:
 lbl_fn_80584178_000002E4:
     mr r3, r15
     mr r4, r16
-    bl fn_80686AF0
+    bl wcscmp
     srwi r0, r3, 31
     b lbl_fn_80584178_0000033C
 lbl_fn_80584178_000002F8:
     mr r3, r17
-    bl fn_80686A48
+    bl wcslen
     mr r15, r3
     mr r3, r18
-    bl fn_80686A48
+    bl wcslen
     cmpw r15, r3
     beq lbl_fn_80584178_0000032C
     xor r0, r3, r15
@@ -341,7 +341,7 @@ lbl_fn_80584178_000002F8:
 lbl_fn_80584178_0000032C:
     mr r3, r17
     mr r4, r18
-    bl fn_80686AF0
+    bl wcscmp
     srwi r0, r3, 31
 lbl_fn_80584178_0000033C:
     cmpwi r0, 0x0
@@ -555,7 +555,7 @@ asm void fn_80584754(void)
     lwz r3, 0x68(r26)
     addi r4, r31, 0x2b1
     lfs f1, lbl_808880D4
-    bl fn_801F6C80
+    bl save_computeCrc32
     lwz r3, 0x68(r26)
     mr r4, r28
     mr r5, r29
@@ -1069,7 +1069,7 @@ lbl_fn_80584DDC_00000D28:
     cmpwi r5, 0x0
     bne lbl_fn_80584DDC_00000D78
     lwz r3, 0x4(r4)
-    bl fn_80206C50
+    bl assert_formatLocation
     cmpwi r3, 0x0
     beq lbl_fn_80584DDC_00000D70
     lwz r0, 0x124(r3)
@@ -1128,7 +1128,7 @@ asm void fn_80584F48(void)
     b lbl_fn_80584F48_00000E44
 lbl_fn_80584F48_00000DF8:
     lwz r3, 0x4(r4)
-    bl fn_80206C50
+    bl assert_formatLocation
     cmpwi r3, 0x0
     beq lbl_fn_80584F48_00000E40
     lwz r4, 0x124(r3)
@@ -1239,7 +1239,7 @@ asm void fn_80585084(void)
     addi r4, r4, lbl_807616DC@l
     li r5, 0x0
     addi r4, r4, 0x1
-    bl fn_801F3FF8
+    bl save_validateHeader
     addis r5, r29, 0x2
     li r4, 0x1
     stw r3, 0x5b68(r5)
@@ -1251,7 +1251,7 @@ lbl_fn_80585084_00000F84:
     addi r4, r4, lbl_807616DC@l
     li r5, 0x0
     addi r4, r4, 0x26
-    bl fn_801F3FF8
+    bl save_validateHeader
     addis r5, r29, 0x2
     li r4, 0x1
     stw r3, 0x5b68(r5)
@@ -1262,7 +1262,7 @@ lbl_fn_80585084_00000FAC:
     addi r26, r4, lbl_807616DC@l
     li r5, 0x0
     addi r4, r26, 0x4f
-    bl fn_801F3FF8
+    bl save_validateHeader
     addis r5, r29, 0x2
     li r4, 0x1
     stw r3, 0x5b6c(r5)
@@ -1275,7 +1275,7 @@ lbl_fn_80585084_00000FDC:
     addi r22, r4, 0x5b70
     li r5, 0x0
     addi r4, r26, 0x7b
-    bl fn_801F3FF8
+    bl save_validateHeader
     stwx r3, r29, r22
     li r4, 0x1
     bl atn_Task_setActive
@@ -1946,7 +1946,7 @@ lbl_fn_80585994_00001960:
     bne lbl_fn_80585994_00001AE0
     addi r3, r1, 0xc
     li r4, 0xb
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0xc
     li r4, -0x1
     bl ref_releaseHandle
@@ -1987,7 +1987,7 @@ lbl_fn_80585994_000019FC:
     bne lbl_fn_80585994_00001AE0
     addi r3, r1, 0x8
     li r4, 0xb
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle

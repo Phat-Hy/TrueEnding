@@ -21,20 +21,20 @@ extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
 extern void str_findChar(void);
 extern void fn_80116FC0(void);
-extern void fn_80117228(void);
+extern void actor_spawnActorWithId(void);
 extern void fn_8011770C(void);
 extern void fn_8012B028(void);
 extern void fn_80134800(void);
-extern void fn_801F3FF8(void);
+extern void save_validateHeader(void);
 extern void fn_801F4AA0(void);
 extern void fn_801F4CB4(void);
 extern void saveSlot_readSummary(void);
 extern void fn_801F64D0(void);
-extern void fn_801F6C80(void);
+extern void save_computeCrc32(void);
 extern void fn_801F6E78(void);
 extern void fn_801F837C(void);
 extern void fn_801F8598(void);
-extern void fn_801FEE08(void);
+extern void thread_dispatchToQueue(void);
 extern void fn_801FEF40(void);
 extern void fn_8020924C(void);
 extern void fn_80216544(void);
@@ -874,7 +874,7 @@ lbl_fn_805716B4_00000A3C:
     stw r30, 0xb8(r28)
     stw r0, 0xc4(r28)
     stw r0, 0xc8(r28)
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x48(r28)
     li r4, 0x1
     bl atn_Task_setActive
@@ -898,7 +898,7 @@ lbl_fn_805716B4_00000A88:
     addi r4, r4, lbl_8075FFD0@l
     li r5, 0x0
     addi r4, r4, 0x4b
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x68(r28)
     li r4, 0x1
     bl atn_Task_setActive
@@ -1006,7 +1006,7 @@ lbl_fn_8057185C_00000BD4:
     bl fn_80571C68
     addi r3, r1, 0x8
     li r4, 0x1e
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -1273,7 +1273,7 @@ lbl_fn_80571C68_00000FAC:
     mr r4, r3
     mr r3, r30
     mr r5, r31
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     b lbl_fn_80571C68_000010A8
 lbl_fn_80571C68_00001000:
     lwz r3, lbl_8087F1E4
@@ -1293,7 +1293,7 @@ lbl_fn_80571C68_00001018:
     mr r4, r3
     mr r3, r31
     mr r5, r30
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     b lbl_fn_80571C68_000010A8
 lbl_fn_80571C68_00001044:
     li r0, 0x0
@@ -1315,7 +1315,7 @@ lbl_fn_80571C68_00001064:
     mr r4, r3
     mr r3, r31
     mr r5, r30
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     b lbl_fn_80571C68_000010A8
 lbl_fn_80571C68_00001090:
     bl fn_8011770C
@@ -1361,7 +1361,7 @@ asm void fn_80571DBC(void)
     bl fn_80571C68
     addi r3, r1, 0x20
     li r4, 0x2
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x20
     li r4, -0x1
     bl ref_releaseHandle
@@ -1402,7 +1402,7 @@ lbl_fn_80571DBC_000011A0:
     bl fn_80571C68
     addi r3, r1, 0x1c
     li r4, 0x1
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x1c
     li r4, -0x1
     bl ref_releaseHandle
@@ -1413,7 +1413,7 @@ lbl_fn_80571DBC_000011A0:
 lbl_fn_80571DBC_000011D4:
     addi r3, r1, 0x18
     li r4, 0xb
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x18
     li r4, -0x1
     bl ref_releaseHandle
@@ -1426,7 +1426,7 @@ lbl_fn_80571DBC_000011F0:
     beq lbl_fn_80571DBC_00001220
     addi r3, r1, 0x14
     li r4, 0xb
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x14
     li r4, -0x1
     bl ref_releaseHandle
@@ -1443,7 +1443,7 @@ lbl_fn_80571DBC_00001220:
 lbl_fn_80571DBC_00001240:
     addi r3, r1, 0x10
     li r4, 0xb
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle
@@ -1453,7 +1453,7 @@ lbl_fn_80571DBC_0000125C:
     stb r0, 0x74(r3)
     addi r3, r1, 0xc
     li r4, 0x1
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0xc
     li r4, -0x1
     bl ref_releaseHandle
@@ -1474,7 +1474,7 @@ lbl_fn_80571DBC_000012A8:
     stb r0, 0x74(r3)
     addi r3, r1, 0x8
     li r4, 0x1
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -1514,7 +1514,7 @@ asm void fn_80571FDC(void)
     bl fn_80571C68
     addi r3, r1, 0x10
     li r4, 0x2
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle
@@ -1587,7 +1587,7 @@ lbl_fn_80571FDC_0000142C:
 lbl_fn_80571FDC_00001438:
     addi r3, r1, 0xc
     li r4, 0x1
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0xc
     li r4, -0x1
     bl ref_releaseHandle
@@ -1598,7 +1598,7 @@ lbl_fn_80571FDC_00001454:
     bl fn_80571C68
     addi r3, r1, 0x8
     li r4, 0x2
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -1641,7 +1641,7 @@ asm void fn_80572198(void)
     bl fn_80571C68
     addi r3, r1, 0x10
     li r4, 0x2
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle
@@ -1661,7 +1661,7 @@ lbl_fn_80572198_00001510:
     bl fn_80571C68
     addi r3, r1, 0xc
     li r4, 0x1
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0xc
     li r4, -0x1
     bl ref_releaseHandle
@@ -1672,7 +1672,7 @@ lbl_fn_80572198_0000155C:
     bl fn_80571C68
     addi r3, r1, 0x8
     li r4, 0x2
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -2012,7 +2012,7 @@ lbl_fn_80572454_00001A0C:
 lbl_fn_80572454_00001A34:
     lwz r3, 0x4c(r29)
     addi r4, r30, 0xec
-    bl fn_801F6C80
+    bl save_computeCrc32
     lbz r0, 0x74(r31)
     cmpwi r0, 0x0
     beq lbl_fn_80572454_00001A58

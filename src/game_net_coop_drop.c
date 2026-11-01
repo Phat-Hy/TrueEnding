@@ -8,7 +8,7 @@ extern void _savegpr_19(void);
 extern void _savegpr_26(void);
 extern void fn_8004B338(void);
 extern void talk_parseQuotedString(void);
-extern void fn_8005B5F8(void);
+extern void talk_scanQuotedString(void);
 extern void fn_8005B6E8(void);
 extern void fn_8005E3E4(void);
 extern void fn_8005E7F4(void);
@@ -18,7 +18,7 @@ extern void fn_800DC12C(void);
 extern void str_skipWhitespace(void);
 extern void str_findChar(void);
 extern void fn_801F4728(void);
-extern void fn_801FECE0(void);
+extern void thread_findAndNotify(void);
 extern void world_getGlobalFlag(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
@@ -262,7 +262,7 @@ asm void fn_804A9EB4(void)
     fmr f1, f25
     mr r4, r3
     mr r3, r28
-    bl fn_801FECE0
+    bl thread_findAndNotify
     fneg f3, f26
     lfs f0, lbl_808872BC
     lwz r4, 0x5d8(r29)
@@ -273,7 +273,7 @@ asm void fn_804A9EB4(void)
     fmr f1, f25
     mr r4, r3
     mr r3, r28
-    bl fn_801FECE0
+    bl thread_findAndNotify
     fneg f3, f26
     lfs f0, lbl_808872BC
     lwz r4, 0x5d8(r29)
@@ -284,7 +284,7 @@ asm void fn_804A9EB4(void)
     fmr f1, f25
     mr r4, r3
     mr r3, r26
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lfs f30, lbl_80887258
     addi r31, r29, 0x834
     lfs f25, lbl_80887250
@@ -1021,7 +1021,7 @@ lbl_fn_804AA490_00000C9C:
     stfs f31, 0x1608(r23)
 lbl_fn_804AA490_00000D04:
     addi r3, r1, 0xb4
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_804AA490_00000750
     addi r11, r1, 0x720

@@ -10,11 +10,11 @@ extern void fn_805CDDD0(void);
 extern void fn_805CE420(void);
 extern void fn_805D2A40(void);
 extern void fn_805D9830(void);
-extern void fn_80612E80(void);
+extern void GXSetVtxDesc(void);
 extern void fn_806134E0(void);
-extern void fn_80613520(void);
+extern void GXSetVtxAttrFmt(void);
 extern void __GXSetVtxDesc(void);
-extern void fn_80613BB0(void);
+extern void GXClearVtxDesc(void);
 extern void fn_80615D20(void);
 extern void fn_80615D50(void);
 extern void fn_80617200(void);
@@ -1736,7 +1736,7 @@ lbl_fn_805D8520_00001784:
     li r9, 0x2
     bl fn_80615D50
     li r3, 0x1
-    bl fn_80613BB0
+    bl GXClearVtxDesc
     li r3, 0x0
     li r4, 0x1
     li r5, 0x4
@@ -1795,29 +1795,29 @@ lbl_fn_805D8520_00001784:
     li r5, 0x1
     li r6, 0x4
     li r7, 0x0
-    bl fn_80613520
+    bl GXSetVtxAttrFmt
     li r3, 0x0
     li r4, 0xb
     li r5, 0x1
     li r6, 0x5
     li r7, 0x0
-    bl fn_80613520
+    bl GXSetVtxAttrFmt
     li r3, 0x0
     li r4, 0xd
     li r5, 0x1
     li r6, 0x2
     li r7, 0xf
-    bl fn_80613520
+    bl GXSetVtxAttrFmt
     bl fn_806134E0
     li r3, 0x9
     li r4, 0x1
-    bl fn_80612E80
+    bl GXSetVtxDesc
     li r3, 0xb
     li r4, 0x1
-    bl fn_80612E80
+    bl GXSetVtxDesc
     li r3, 0xd
     li r4, 0x1
-    bl fn_80612E80
+    bl GXSetVtxDesc
     b lbl_fn_805D8520_00001FF8
 lbl_fn_805D8520_0000196C:
     lbz r0, 0x0(r30)
@@ -1866,7 +1866,7 @@ lbl_fn_805D8520_00001984:
     li r9, 0x2
     bl fn_80615D50
     li r3, 0x1
-    bl fn_80613BB0
+    bl GXClearVtxDesc
     li r3, 0x0
     li r4, 0x1
     li r5, 0x4
@@ -1902,29 +1902,29 @@ lbl_fn_805D8520_00001984:
     li r5, 0x1
     li r6, 0x4
     li r7, 0x0
-    bl fn_80613520
+    bl GXSetVtxAttrFmt
     li r3, 0x0
     li r4, 0xb
     li r5, 0x1
     li r6, 0x5
     li r7, 0x0
-    bl fn_80613520
+    bl GXSetVtxAttrFmt
     li r3, 0x0
     li r4, 0xd
     li r5, 0x1
     li r6, 0x2
     li r7, 0xf
-    bl fn_80613520
+    bl GXSetVtxAttrFmt
     bl fn_806134E0
     li r3, 0x9
     li r4, 0x1
-    bl fn_80612E80
+    bl GXSetVtxDesc
     li r3, 0xb
     li r4, 0x1
-    bl fn_80612E80
+    bl GXSetVtxDesc
     li r3, 0xd
     li r4, 0x1
-    bl fn_80612E80
+    bl GXSetVtxDesc
     b lbl_fn_805D8520_00001FF8
 lbl_fn_805D8520_00001B10:
     lbz r0, 0x0(r30)
@@ -1973,7 +1973,7 @@ lbl_fn_805D8520_00001B28:
     li r9, 0x2
     bl fn_80615D50
     li r3, 0x1
-    bl fn_80613BB0
+    bl GXClearVtxDesc
     li r3, 0x0
     li r4, 0x1
     li r5, 0x4
@@ -2009,29 +2009,29 @@ lbl_fn_805D8520_00001B28:
     li r5, 0x1
     li r6, 0x4
     li r7, 0x0
-    bl fn_80613520
+    bl GXSetVtxAttrFmt
     li r3, 0x0
     li r4, 0xb
     li r5, 0x1
     li r6, 0x5
     li r7, 0x0
-    bl fn_80613520
+    bl GXSetVtxAttrFmt
     li r3, 0x0
     li r4, 0xd
     li r5, 0x1
     li r6, 0x2
     li r7, 0xf
-    bl fn_80613520
+    bl GXSetVtxAttrFmt
     bl fn_806134E0
     li r3, 0x9
     li r4, 0x1
-    bl fn_80612E80
+    bl GXSetVtxDesc
     li r3, 0xb
     li r4, 0x1
-    bl fn_80612E80
+    bl GXSetVtxDesc
     li r3, 0xd
     li r4, 0x1
-    bl fn_80612E80
+    bl GXSetVtxDesc
     b lbl_fn_805D8520_00001FF8
 lbl_fn_805D8520_00001CB4:
     lbz r0, 0x0(r30)
@@ -2080,7 +2080,7 @@ lbl_fn_805D8520_00001CCC:
     li r9, 0x2
     bl fn_80615D50
     li r3, 0x1
-    bl fn_80613BB0
+    bl GXClearVtxDesc
     li r3, 0x0
     li r4, 0x1
     li r5, 0x4
@@ -2116,29 +2116,29 @@ lbl_fn_805D8520_00001CCC:
     li r5, 0x1
     li r6, 0x4
     li r7, 0x0
-    bl fn_80613520
+    bl GXSetVtxAttrFmt
     li r3, 0x0
     li r4, 0xb
     li r5, 0x1
     li r6, 0x5
     li r7, 0x0
-    bl fn_80613520
+    bl GXSetVtxAttrFmt
     li r3, 0x0
     li r4, 0xd
     li r5, 0x1
     li r6, 0x2
     li r7, 0xf
-    bl fn_80613520
+    bl GXSetVtxAttrFmt
     bl fn_806134E0
     li r3, 0x9
     li r4, 0x1
-    bl fn_80612E80
+    bl GXSetVtxDesc
     li r3, 0xb
     li r4, 0x1
-    bl fn_80612E80
+    bl GXSetVtxDesc
     li r3, 0xd
     li r4, 0x1
-    bl fn_80612E80
+    bl GXSetVtxDesc
     b lbl_fn_805D8520_00001FF8
 lbl_fn_805D8520_00001E58:
     lbz r0, 0x0(r30)
@@ -2187,7 +2187,7 @@ lbl_fn_805D8520_00001E70:
     li r9, 0x2
     bl fn_80615D50
     li r3, 0x1
-    bl fn_80613BB0
+    bl GXClearVtxDesc
     li r3, 0x0
     li r4, 0x1
     li r5, 0x4
@@ -2223,29 +2223,29 @@ lbl_fn_805D8520_00001E70:
     li r5, 0x1
     li r6, 0x4
     li r7, 0x0
-    bl fn_80613520
+    bl GXSetVtxAttrFmt
     li r3, 0x0
     li r4, 0xb
     li r5, 0x1
     li r6, 0x5
     li r7, 0x0
-    bl fn_80613520
+    bl GXSetVtxAttrFmt
     li r3, 0x0
     li r4, 0xd
     li r5, 0x1
     li r6, 0x2
     li r7, 0xf
-    bl fn_80613520
+    bl GXSetVtxAttrFmt
     bl fn_806134E0
     li r3, 0x9
     li r4, 0x1
-    bl fn_80612E80
+    bl GXSetVtxDesc
     li r3, 0xb
     li r4, 0x1
-    bl fn_80612E80
+    bl GXSetVtxDesc
     li r3, 0xd
     li r4, 0x1
-    bl fn_80612E80
+    bl GXSetVtxDesc
 lbl_fn_805D8520_00001FF8:
     lwz r0, 0x34(r1)
     lwz r31, 0x2c(r1)

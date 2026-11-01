@@ -15,15 +15,15 @@ extern void fn_800A5218(void);
 extern void fn_800DBF68(void);
 extern void fn_800DC500(void);
 extern void fn_800DD3FC(void);
-extern void fn_804AE3BC(void);
+extern void net_getPacketManager(void);
 extern void fn_805089E4(void);
 extern void fn_8050B7F0(void);
 extern void fn_8050BA6C(void);
 extern void fn_8050D7F0(void);
-extern void fn_80686A48(void);
-extern void fn_80686A64(void);
-extern void fn_80686A80(void);
-extern void fn_80686AF0(void);
+extern void wcslen(void);
+extern void wcscpy(void);
+extern void wcsncpy(void);
+extern void wcscmp(void);
 extern void fn_8069641C(void);
 extern void fn_806A8E40(void);
 extern void fn_806ABCF0(void);
@@ -599,7 +599,7 @@ lbl_fn_8050E098_00000640:
     subf r0, r31, r21
     cmpw r0, r28
     bge lbl_fn_8050E098_00000754
-    bl fn_804AE3BC
+    bl net_getPacketManager
     lwz r4, 0x8(r1)
     mr r26, r3
     lwz r12, 0x0(r3)
@@ -645,7 +645,7 @@ lbl_fn_8050E098_000006CC:
     mtctr r12
     bctrl
 lbl_fn_8050E098_000006FC:
-    bl fn_804AE3BC
+    bl net_getPacketManager
     lwz r12, 0x0(r3)
     lwz r12, 0xc(r12)
     mtctr r12
@@ -1230,7 +1230,7 @@ lbl_fn_8050E998_00000E64:
     mr r29, r3
     stw r31, 0x14(r1)
     stw r31, 0x18(r1)
-    bl fn_80686A48
+    bl wcslen
     mr r27, r3
     mr r3, r28
     mr r4, r27
@@ -1275,7 +1275,7 @@ lbl_fn_8050E998_00000F20:
     addi r4, r4, lbl_807931B4@l
     li r5, 0x10
     addi r4, r4, 0x18
-    bl fn_80686A80
+    bl wcsncpy
     addi r3, r24, 0x7f0
     li r4, 0x0
     li r5, 0x1e0
@@ -1679,12 +1679,12 @@ asm void fn_8050EFD0(void)
     stw r28, 0x130(r1)
     mr r28, r3
     addi r3, r3, 0x1c0
-    bl fn_80686AF0
+    bl wcscmp
     cmpwi r3, 0x0
     beq lbl_fn_8050EFD0_00001604
     mr r4, r30
     addi r3, r28, 0x1c0
-    bl fn_80686A64
+    bl wcscpy
     cmpwi r29, 0x0
     beq lbl_fn_8050EFD0_000014EC
     mr r3, r28
@@ -1716,7 +1716,7 @@ lbl_fn_8050EFD0_000014EC:
     stw r0, 0x1c(r1)
     mr r3, r30
     stw r0, 0x20(r1)
-    bl fn_80686A48
+    bl wcslen
     mr r29, r3
     mr r3, r31
     mr r4, r29
@@ -1743,7 +1743,7 @@ lbl_fn_8050EFD0_00001568:
     lbz r0, 0x10(r1)
     addi r3, r28, 0x1c0
     stb r0, 0x14(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r4, r29
     add r5, r28, r0
@@ -1814,7 +1814,7 @@ asm void fn_8050F19C(void)
     stw r0, 0x18(r1)
     stw r0, 0x1c(r1)
     stw r0, 0x20(r1)
-    bl fn_80686A48
+    bl wcslen
     mr r29, r3
     mr r3, r30
     mr r4, r29
@@ -1841,7 +1841,7 @@ lbl_fn_8050F19C_000016C0:
     lbz r0, 0xc(r1)
     addi r3, r28, 0x1c0
     stb r0, 0x8(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r4, r29
     add r5, r28, r0
@@ -2080,7 +2080,7 @@ lbl_fn_8050F474_000019CC:
     addi r3, r1, 0x10
     stw r0, 0x4(r27)
     stw r0, 0x8(r27)
-    bl fn_80686A48
+    bl wcslen
     mr r30, r3
     mr r3, r27
     mr r4, r30

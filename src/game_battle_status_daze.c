@@ -7,14 +7,14 @@ extern void fn_80056DB8(void);
 extern void atn_ColliBase_destructor(void);
 extern void fn_800575BC(void);
 extern void talk_parseQuotedString(void);
-extern void fn_8005B5F8(void);
+extern void talk_scanQuotedString(void);
 extern void fn_8005B6E8(void);
 extern void talk_formatQuotedString(void);
 extern void fn_8005BBF8(void);
 extern void fn_8005BCE8(void);
 extern void mem_alloc(void);
 extern void route_findNextWaypoint(void);
-extern void fn_80087994(void);
+extern void route_createSegment(void);
 extern void fn_80087E9C(void);
 extern void fn_80088724(void);
 extern void fn_8008937C(void);
@@ -1352,7 +1352,7 @@ lbl_fn_8042EF4C_00000FDC:
     addi r5, r29, 0x9c
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r30
     addi r4, r31, 0x4d
     addi r5, r29, 0x58
@@ -1652,7 +1652,7 @@ lbl_fn_8042F2DC_00001480:
     stw r0, 0x110(r31)
 lbl_fn_8042F2DC_0000148C:
     addi r3, r1, 0x48
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_8042F2DC_000013C0
 lbl_fn_8042F2DC_0000149C:

@@ -19,7 +19,7 @@ extern void PSMTXMultVec(void);
 extern void PSVECMag(void);
 extern void rand(void);
 extern void wmemcpy(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 
 /* External data declarations */
 extern u8 jumptable_80794A60[];
@@ -357,7 +357,7 @@ lbl_fn_8054D798_000000F8:
     stw r20, 0x1c(r1)
     beq lbl_fn_8054D798_000001A8
     mr r3, r21
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r3, r18
     mr r4, r21
@@ -637,7 +637,7 @@ lbl_fn_8054D798_000004E4:
     cmplw r21, r20
     beq lbl_fn_8054D798_00000550
     mr r3, r21
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r3, r20
     mr r4, r21

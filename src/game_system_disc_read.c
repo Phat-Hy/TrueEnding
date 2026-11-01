@@ -7,9 +7,9 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void system_getNextSequenceId(void);
 extern void actor_setState(void);
 extern void fn_80206B14(void);
-extern void fn_80206BE4(void);
+extern void assert_generateId(void);
 extern void fn_8020ED84(void);
-extern void fn_8020EF80(void);
+extern void random_generateValue(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
 extern void fn_8023A108(void);
@@ -1937,7 +1937,7 @@ lbl_fn_80351AB8_00001BA8:
     bl fn_80206B14
     cmpwi r3, 0x0
     beq lbl_fn_80351AB8_00001BE4
-    bl fn_80206BE4
+    bl assert_generateId
     mr r4, r3
     lwz r3, lbl_8087F4F0
     li r5, 0x1
@@ -1959,7 +1959,7 @@ lbl_fn_80351AB8_00001BF8:
     bl fn_8020ED84
     cmpwi r3, 0x0
     beq lbl_fn_80351AB8_00001C34
-    bl fn_8020EF80
+    bl random_generateValue
     mr r4, r3
     lwz r3, lbl_8087F4F0
     li r5, 0x1

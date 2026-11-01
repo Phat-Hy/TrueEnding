@@ -6,7 +6,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void talk_parseQuotedString(void);
-extern void fn_8005B5F8(void);
+extern void talk_scanQuotedString(void);
 extern void fn_8005B6E8(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void atn_Task_setActive(void);
@@ -993,7 +993,7 @@ lbl_fn_80355DD8_00000C38:
     bl fn_805A4984
 lbl_fn_80355DD8_00000C5C:
     addi r3, r1, 0x1c
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_80355DD8_00000714
     addi r11, r1, 0x670

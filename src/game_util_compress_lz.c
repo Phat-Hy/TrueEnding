@@ -21,27 +21,27 @@ extern void atn_Task_setActive(void);
 extern void str_findChar(void);
 extern void fn_80116FC0(void);
 extern void fn_801170C8(void);
-extern void fn_80117228(void);
-extern void fn_801F3FF8(void);
+extern void actor_spawnActorWithId(void);
+extern void save_validateHeader(void);
 extern void fn_801F48C8(void);
 extern void fn_801F4CB4(void);
 extern void saveSlot_readSummary(void);
 extern void fn_801F64D0(void);
-extern void fn_801F6C80(void);
+extern void save_computeCrc32(void);
 extern void fn_801F6E78(void);
 extern void fn_801F7590(void);
 extern void fn_801F7DF0(void);
 extern void fn_801F837C(void);
 extern void fn_801F8598(void);
 extern void fn_801FEC74(void);
-extern void fn_801FECE0(void);
-extern void fn_801FED24(void);
-extern void fn_801FEE08(void);
+extern void thread_findAndNotify(void);
+extern void thread_findAndNotifySlot(void);
+extern void thread_dispatchToQueue(void);
 extern void fn_80206B9C(void);
-extern void fn_80206C50(void);
+extern void assert_formatLocation(void);
 extern void fn_8020EF04(void);
 extern void fn_8020EFEC(void);
-extern void fn_80211480(void);
+extern void event_findEntryById(void);
 extern void fn_8021154C(void);
 extern void fn_80211648(void);
 extern void fn_80212714(void);
@@ -69,7 +69,7 @@ extern void fn_80584754(void);
 extern void fn_8058480C(void);
 extern void fn_80584DDC(void);
 extern void printf(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 extern void abort(void);
 extern int sprintf(char* str, const char* format, ...);
 
@@ -148,7 +148,7 @@ asm void fn_805895B8(void)
     cmpwi r0, 0x0
     beq lbl_fn_805895B8_000000BC
     lwz r3, 0x4(r30)
-    bl fn_80211480
+    bl event_findEntryById
     cmpwi r3, 0x0
     beq lbl_fn_805895B8_00000098
     bl fn_80211648
@@ -180,7 +180,7 @@ lbl_fn_805895B8_000000D8:
     bne lbl_fn_805895B8_00000128
     addi r3, r1, 0x14
     li r4, 0x1
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x14
     li r4, -0x1
     bl ref_releaseHandle
@@ -201,7 +201,7 @@ lbl_fn_805895B8_00000128:
     bne lbl_fn_805895B8_00000178
     addi r3, r1, 0x10
     li r4, 0x1
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle
@@ -220,7 +220,7 @@ lbl_fn_805895B8_00000128:
 lbl_fn_805895B8_00000178:
     addi r3, r1, 0xc
     li r4, 0xb
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0xc
     li r4, -0x1
     bl ref_releaseHandle
@@ -245,7 +245,7 @@ lbl_fn_805895B8_000001C0:
     beq lbl_fn_805895B8_00000208
     addi r3, r1, 0x8
     li r4, 0x2
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -338,7 +338,7 @@ lbl_fn_805897D8_0000030C:
     bl fn_8044D56C
     addi r3, r1, 0x8
     li r4, 0x1
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -562,7 +562,7 @@ lbl_fn_80589AF8_000005B4:
     slwi r0, r4, 4
     add r23, r3, r0
     lwz r3, 0x4(r23)
-    bl fn_80211480
+    bl event_findEntryById
     lwz r0, 0xc(r23)
     mr r21, r3
     cmpwi r0, 0x0
@@ -574,11 +574,11 @@ lbl_fn_80589AF8_000005B4:
     lwz r3, 0x5b74(r28)
     addi r4, r30, 0x10d
     lfs f1, lbl_80888134
-    bl fn_801F6C80
+    bl save_computeCrc32
     lwz r3, 0x5b74(r28)
     addi r4, r30, 0x117
     lfs f1, lbl_80888130
-    bl fn_801F6C80
+    bl save_computeCrc32
     lwz r3, 0x5b74(r28)
     addi r4, r30, 0x121
     la r5, lbl_8087E690
@@ -610,7 +610,7 @@ lbl_fn_80589AF8_000006F8:
     b lbl_fn_80589AF8_000007BC
 lbl_fn_80589AF8_00000714:
     lwz r3, 0x4(r23)
-    bl fn_80206C50
+    bl assert_formatLocation
     cmpwi r3, 0x0
     beq lbl_fn_80589AF8_0000075C
     lwz r3, 0xb8(r3)
@@ -638,11 +638,11 @@ lbl_fn_80589AF8_0000076C:
     lwz r3, 0x5b74(r28)
     addi r4, r30, 0x10d
     lfs f1, lbl_80888130
-    bl fn_801F6C80
+    bl save_computeCrc32
     lwz r3, 0x5b74(r28)
     addi r4, r30, 0x117
     lfs f1, lbl_80888134
-    bl fn_801F6C80
+    bl save_computeCrc32
     lwz r3, 0x5b74(r28)
     addi r4, r30, 0x121
     lwz r5, 0x8(r23)
@@ -714,7 +714,7 @@ asm void fn_80589DE4(void)
     lwz r5, 0x6000(r5)
     bl fn_801F4CB4
     lwz r3, 0x4(r30)
-    bl fn_80211480
+    bl event_findEntryById
     lwz r0, 0xc(r30)
     mr r26, r3
     cmpwi r0, 0x0
@@ -735,7 +735,7 @@ lbl_fn_80589DE4_000008B4:
     lfs f1, lbl_80888134
     mr r4, r3
     mr r3, r28
-    bl fn_801FECE0
+    bl thread_findAndNotify
     b lbl_fn_80589DE4_00000944
 lbl_fn_80589DE4_000008E4:
     addis r3, r29, 0x2
@@ -748,7 +748,7 @@ lbl_fn_80589DE4_000008E4:
     lfs f1, lbl_80888130
     mr r4, r3
     mr r3, r27
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lfs f1, lbl_80888130
     mr r3, r29
     mr r4, r26
@@ -810,7 +810,7 @@ lbl_fn_80589DE4_000009BC:
     fsubs f1, f1, f31
     li r5, 0x0
     fsubs f1, f1, f0
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
     addis r3, r29, 0x2
     addi r4, r28, 0x159
     lwz r3, 0x5b6c(r3)
@@ -856,14 +856,14 @@ lbl_fn_80589DE4_00000A68:
     fsubs f1, f1, f31
     li r5, 0x0
     fsubs f1, f1, f0
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
     cmpwi r31, 0x0
     beq lbl_fn_80589DE4_00000B1C
     lwz r0, 0xc(r30)
     cmpwi r0, 0x0
     beq lbl_fn_80589DE4_00000AE0
     lwz r3, 0x4(r30)
-    bl fn_80211480
+    bl event_findEntryById
     cmpwi r3, 0x0
     mr r4, r3
     beq lbl_fn_80589DE4_00000B00
@@ -918,10 +918,10 @@ asm void fn_8058A0F4(void)
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0x38(r3)
     lwz r3, 0x4(r4)
-    bl fn_80211480
+    bl event_findEntryById
     mr r31, r3
     lwz r3, 0x4(r27)
-    bl fn_80206C50
+    bl assert_formatLocation
     cmpwi r3, 0x0
     li r0, 0x0
     stw r0, 0x40(r1)
@@ -958,7 +958,7 @@ lbl_fn_8058A0F4_00000BFC:
     lbz r0, 0xc(r1)
     mr r3, r28
     stb r0, 0x8(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r5, r29
     mr r6, r28
@@ -994,7 +994,7 @@ lbl_fn_8058A0F4_00000C54:
     mr r4, r3
     mr r3, r27
     mr r5, r28
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     addis r3, r30, 0x2
     lwz r28, 0x8(r31)
     lwz r4, 0x5b9c(r3)
@@ -1004,7 +1004,7 @@ lbl_fn_8058A0F4_00000C54:
     mr r4, r3
     mr r3, r27
     mr r5, r28
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r3, lbl_8087F4F0
     mr r4, r31
     bl fn_80444BE8
@@ -1067,7 +1067,7 @@ lbl_fn_8058A0F4_00000D6C:
     fsubs f3, f3, f31
     li r5, 0x0
     fsubs f1, f3, f0
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
     lwz r0, 0x40(r1)
     srwi. r0, r0, 31
     beq lbl_fn_8058A0F4_00000DBC
@@ -1644,7 +1644,7 @@ lbl_fn_8058AAC0_000015B4:
     cmpwi r3, 0x0
     beq lbl_fn_8058AAC0_000015F8
     lwz r3, 0x0(r27)
-    bl fn_80206C50
+    bl assert_formatLocation
     cmpwi r3, 0x0
     beq lbl_fn_8058AAC0_000015F8
     lwz r3, 0x80(r3)
@@ -1666,7 +1666,7 @@ lbl_fn_8058AAC0_00001608:
     cmpwi r25, 0x0
     bne lbl_fn_8058AAC0_00001620
     lwz r3, 0x0(r27)
-    bl fn_80211480
+    bl event_findEntryById
     bl fn_80212714
     stw r30, 0x0(r27)
 lbl_fn_8058AAC0_00001620:
@@ -2027,7 +2027,7 @@ lbl_fn_8058AC94_00001B50:
     addi r4, r4, lbl_80761D5C@l
     li r5, 0x0
     addi r4, r4, 0x1
-    bl fn_801F3FF8
+    bl save_validateHeader
     addis r5, r31, 0x2
     li r4, 0x1
     stw r3, 0x5b6c(r5)
@@ -2039,7 +2039,7 @@ lbl_fn_8058AC94_00001B7C:
     addi r4, r4, lbl_80761D5C@l
     li r5, 0x0
     addi r4, r4, 0x29
-    bl fn_801F3FF8
+    bl save_validateHeader
     addis r5, r31, 0x2
     li r4, 0x1
     stw r3, 0x5b6c(r5)
@@ -2051,7 +2051,7 @@ lbl_fn_8058AC94_00001BA8:
     addi r4, r4, lbl_80761D5C@l
     li r5, 0x0
     addi r4, r4, 0x4f
-    bl fn_801F3FF8
+    bl save_validateHeader
     addis r5, r31, 0x2
     li r4, 0x1
     stw r3, 0x5b6c(r5)
@@ -2062,7 +2062,7 @@ lbl_fn_8058AC94_00001BD0:
     addi r30, r30, lbl_80761D5C@l
     li r5, 0x0
     addi r4, r30, 0x7d
-    bl fn_801F3FF8
+    bl save_validateHeader
     addis r5, r31, 0x2
     li r4, 0x1
     stw r3, 0x5b70(r5)
@@ -2070,7 +2070,7 @@ lbl_fn_8058AC94_00001BD0:
     mr r3, r31
     addi r4, r30, 0xa4
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     addis r5, r31, 0x2
     li r4, 0x1
     stw r3, 0x5b74(r5)
@@ -2078,7 +2078,7 @@ lbl_fn_8058AC94_00001BD0:
     mr r3, r31
     addi r4, r30, 0xcb
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     addis r5, r31, 0x2
     li r4, 0x1
     stw r3, 0x5b78(r5)
@@ -2193,7 +2193,7 @@ lbl_fn_8058AC94_00001D70:
     mr r3, r31
     addi r4, r30, 0x1e4
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     addis r5, r31, 0x2
     li r4, 0x1
     stw r3, 0x5be4(r5)
@@ -2201,7 +2201,7 @@ lbl_fn_8058AC94_00001D70:
     mr r3, r31
     addi r4, r30, 0x202
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     addis r5, r31, 0x2
     li r4, 0x1
     stw r3, 0x5be8(r5)
@@ -2209,7 +2209,7 @@ lbl_fn_8058AC94_00001D70:
     mr r3, r31
     addi r4, r30, 0x227
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     addis r5, r31, 0x2
     li r4, 0x1
     stw r3, 0x5bec(r5)

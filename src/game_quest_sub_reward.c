@@ -82,12 +82,12 @@ extern void fn_80484E6C(void);
 extern void fn_80489280(void);
 extern void fn_80491528(void);
 extern void fn_805381BC(void);
-extern void fn_805381CC(void);
+extern void spectate_getRootNode(void);
 extern void fn_80541214(void);
 extern void fn_8054FAD8(void);
 extern void fn_805A38F4(void);
 extern void PSMTXInverse(void);
-extern void fn_8067E23C(void);
+extern void memcmp(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -982,7 +982,7 @@ asm void fn_80488050(void)
     mr r30, r3
     bne lbl_fn_80488050_00000BF0
     mr r3, r31
-    bl fn_805381CC
+    bl spectate_getRootNode
     mr r4, r3
 lbl_fn_80488050_00000BF0:
     lwz r0, 0x30(r31)
@@ -1612,7 +1612,7 @@ lbl_fn_8048871C_000013C0:
     cmpwi r27, 0x0
     bne lbl_fn_8048871C_00001400
     mr r3, r30
-    bl fn_805381CC
+    bl spectate_getRootNode
     mr r27, r3
 lbl_fn_8048871C_00001400:
     lwz r0, 0x30(r30)
@@ -2296,7 +2296,7 @@ lbl_fn_80488E00_00001CC8:
     addi r5, r1, 0x14
 lbl_fn_80488E00_00001CE0:
     lwz r5, 0x0(r5)
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_80488E00_00001D14
     lwz r0, 0xc(r1)

@@ -7,7 +7,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_24(void);
 extern void _savegpr_25(void);
 extern void _savegpr_27(void);
-extern void fn_80629810(void);
+extern void bta_sys_logEvent(void);
 extern void bta_sys_log(void);
 extern void fn_80629850(void);
 extern void fn_806298D0(void);
@@ -35,8 +35,8 @@ extern void fn_8063E568(void);
 extern void fn_8063E7B0(void);
 extern void fn_8063E82C(void);
 extern void fn_8064465C(void);
-extern void fn_8067E23C(void);
-extern void fn_8068236C(void);
+extern void memcmp(void);
+extern void strncpy(void);
 
 /* External data declarations */
 extern u8 lbl_807B3FB0[];
@@ -119,7 +119,7 @@ lbl_fn_8062FE10_00000038:
     mr r4, r30
     addi r3, r29, 0x8
     li r5, 0x6
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_8062FE10_00000060
     b lbl_fn_8062FE10_00000074
@@ -263,7 +263,7 @@ lbl_fn_8062FE10_00000248:
     addi r3, r30, 0x8
     addi r4, r31, 0x8
     li r5, 0x6
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_8062FE10_00000270
     b lbl_fn_8062FE10_00000284
@@ -338,7 +338,7 @@ lbl_fn_80630124_00000340:
     mr r4, r29
     addi r3, r30, 0x8
     li r5, 0x6
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_80630124_00000368
     b lbl_fn_80630124_0000037C
@@ -435,7 +435,7 @@ lbl_fn_8063024C_00000480:
     mr r4, r28
     addi r3, r31, 0x8
     li r5, 0x6
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_8063024C_000004A8
     b lbl_fn_8063024C_000004BC
@@ -477,7 +477,7 @@ lbl_fn_8063024C_000004FC:
     lis r4, lbl_807B4010@ha
     addi r3, r3, 0x4
     addi r4, r4, lbl_807B4010@l
-    bl fn_80629810
+    bl bta_sys_logEvent
 lbl_fn_8063024C_00000530:
     li r3, 0x2
     b lbl_fn_8063024C_00000640
@@ -775,7 +775,7 @@ lbl_fn_806305D8_00000930:
     mr r4, r28
     addi r3, r31, 0x8
     li r5, 0x6
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_806305D8_00000958
     b lbl_fn_806305D8_0000096C
@@ -1043,7 +1043,7 @@ lbl_fn_80630968_00000CC8:
     addi r3, r29, 0x8
     addi r4, r31, 0x8
     li r5, 0x6
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_80630968_00000CF0
     b lbl_fn_80630968_00000D04
@@ -1138,7 +1138,7 @@ lbl_fn_80630BA4_00000E00:
     mr r4, r29
     addi r3, r30, 0x8
     li r5, 0x6
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_80630BA4_00000E28
     b lbl_fn_80630BA4_00000E3C
@@ -1226,7 +1226,7 @@ lbl_fn_80630CE8_00000F04:
     mr r4, r29
     addi r3, r30, 0x8
     li r5, 0x6
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_80630CE8_00000F2C
     b lbl_fn_80630CE8_00000F40
@@ -1334,7 +1334,7 @@ lbl_fn_80630E20_0000105C:
     mr r4, r27
     addi r3, r29, 0x8
     li r5, 0x6
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_80630E20_00001084
     b lbl_fn_80630E20_00001098
@@ -1374,7 +1374,7 @@ lbl_fn_80630E20_000010EC:
     addi r3, r27, 0x8
     addi r4, r29, 0x8
     li r5, 0x6
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_80630E20_00001114
     b lbl_fn_80630E20_00001128
@@ -1496,7 +1496,7 @@ lbl_fn_80631070_00001288:
     mr r4, r27
     addi r3, r29, 0x8
     li r5, 0x6
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_80631070_000012B0
     b lbl_fn_80631070_000012C4
@@ -1519,7 +1519,7 @@ lbl_fn_80631070_000012DC:
     addi r30, r30, lbl_80820018@l
     li r5, 0x6
     addi r3, r30, 0x630
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_80631070_00001300
     lhz r28, 0x654(r30)
@@ -1736,7 +1736,7 @@ lbl_fn_8063132C_000015A4:
     mr r4, r28
     addi r3, r30, 0x8
     li r5, 0x6
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_8063132C_000015CC
     b lbl_fn_8063132C_000015E0
@@ -1828,7 +1828,7 @@ lbl_fn_80631468_000016E0:
     mr r4, r28
     addi r3, r30, 0x8
     li r5, 0x6
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_80631468_00001708
     b lbl_fn_80631468_0000171C
@@ -2058,7 +2058,7 @@ lbl_fn_806317D8_000019F4:
     mr r4, r29
     addi r3, r30, 0x8
     li r5, 0x6
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_806317D8_00001A1C
     b lbl_fn_806317D8_00001A30
@@ -2278,7 +2278,7 @@ lbl_fn_80631AB4_00001CE0:
     mr r4, r24
     addi r3, r30, 0x1c
     li r5, 0x6
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_80631AB4_00001D08
     b lbl_fn_80631AB4_00001D1C
@@ -2328,7 +2328,7 @@ lbl_fn_80631AB4_00001D70:
     li r5, 0x40
     ori r0, r0, 0x8
     stb r0, 0x76(r30)
-    bl fn_8068236C
+    bl strncpy
 lbl_fn_80631AB4_00001DB0:
     cmpwi r27, 0x0
     beq lbl_fn_80631AB4_00001DCC
@@ -2388,7 +2388,7 @@ lbl_fn_80631C3C_00001E58:
     mr r4, r29
     addi r3, r30, 0x1c
     li r5, 0x6
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_80631C3C_00001E80
     b lbl_fn_80631C3C_00001E94
@@ -2443,7 +2443,7 @@ lbl_fn_80631CE8_00001F0C:
     mr r4, r28
     addi r3, r30, 0x1c
     li r5, 0x6
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_80631CE8_00001F34
     b lbl_fn_80631CE8_00001F48
@@ -2629,7 +2629,7 @@ lbl_fn_80631F60_0000217C:
     mr r4, r29
     addi r3, r31, 0x1c
     li r5, 0x6
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_80631F60_000021A8
     mr r3, r31

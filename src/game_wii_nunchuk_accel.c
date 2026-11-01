@@ -16,7 +16,7 @@ extern void fn_8047F8A4(void);
 extern void fn_80481818(void);
 extern void fn_80491528(void);
 extern void fn_805381A4(void);
-extern void fn_805381CC(void);
+extern void spectate_getRootNode(void);
 extern void fn_80541214(void);
 extern void fn_8055D004(void);
 extern void strcmp(void);
@@ -79,7 +79,7 @@ asm void fn_8055B5E8(void)
     mr r3, r30
     stw r0, 0x8(r1)
     stw r0, 0x10(r1)
-    bl fn_805381CC
+    bl spectate_getRootNode
     mr r31, r3
     mr r3, r30
     bl fn_805381A4
@@ -179,7 +179,7 @@ asm void fn_8055B72C(void)
     bl fn_805381A4
     mr r31, r3
     mr r3, r30
-    bl fn_805381CC
+    bl spectate_getRootNode
     lwz r0, 0x30(r30)
     cmpwi r0, 0x0
     ble lbl_fn_8055B72C_000001A0
@@ -352,7 +352,7 @@ asm void fn_8055B980(void)
     bl fn_805381A4
     mr r30, r3
     mr r3, r31
-    bl fn_805381CC
+    bl spectate_getRootNode
     lwz r6, 0x10(r31)
     lis r0, 0x4330
     lwz r5, 0x18(r31)
@@ -1707,7 +1707,7 @@ lbl_fn_8055BCAC_00001660:
     oris r6, r25, 0xff00
     bl fn_8047F850
     mr r3, r31
-    bl fn_805381CC
+    bl spectate_getRootNode
     lwz r0, 0x190(r3)
     cmpwi r0, 0x151e
     bne lbl_fn_8055BCAC_000018D0
@@ -1830,7 +1830,7 @@ lbl_fn_8055BCAC_000017B4:
     b lbl_fn_8055BCAC_000018D0
 lbl_fn_8055BCAC_00001844:
     mr r3, r31
-    bl fn_805381CC
+    bl spectate_getRootNode
     cmpwi r3, 0x0
     mr r25, r3
     beq lbl_fn_8055BCAC_0000188C
@@ -1853,7 +1853,7 @@ lbl_fn_8055BCAC_0000188C:
     bl fn_8047F8A4
 lbl_fn_8055BCAC_00001898:
     mr r3, r31
-    bl fn_805381CC
+    bl spectate_getRootNode
     lwz r0, 0x190(r3)
     cmpwi r0, 0x151e
     bne lbl_fn_8055BCAC_000018D0

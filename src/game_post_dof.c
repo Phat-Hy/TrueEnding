@@ -10,7 +10,7 @@ extern void dtor_80084684(void);
 extern void fn_8003EA3C(void);
 extern void fn_80056DB8(void);
 extern void atn_ColliCapsule_destructor(void);
-extern void fn_80087994(void);
+extern void route_createSegment(void);
 extern void fn_8008937C(void);
 extern void fn_800897D8(void);
 extern void atn_Model_findBoneIndex(void);
@@ -1243,7 +1243,7 @@ lbl_fn_802C0F28_00000F7C:
     li r6, 0x0
     addi r4, r30, 0xb9
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     lwz r5, 0x7ec(r31)
     addi r4, r30, 0xc3
     lwz r0, 0x1654(r31)

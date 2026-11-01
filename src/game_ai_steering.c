@@ -5,14 +5,14 @@
 extern void _restgpr_25(void);
 extern void _savegpr_25(void);
 extern void dtor_80084684(void);
-extern void fn_80013DC4(void);
+extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_800457A4(void);
 extern void talk_parseQuotedString(void);
-extern void fn_8005B5F8(void);
+extern void talk_scanQuotedString(void);
 extern void fn_8005B6E8(void);
 extern void fn_8006AFF8(void);
-extern void fn_80087994(void);
+extern void route_createSegment(void);
 extern void fn_8008937C(void);
 extern void fn_800897D8(void);
 extern void atn_Model_findBoneIndex(void);
@@ -28,7 +28,7 @@ extern void fn_8013CB68(void);
 extern void fn_80144710(void);
 extern void fn_80158BB4(void);
 extern void actor_setState(void);
-extern void fn_80206C50(void);
+extern void assert_formatLocation(void);
 extern void task_findEntryById(void);
 extern void fn_80237518(void);
 extern void fn_802375C4(void);
@@ -1409,7 +1409,7 @@ asm void fn_80264DB4(void)
     mr r26, r3
     mr r3, r27
     mr r4, r26
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x1c(r1)
     mr r3, r27
     stb r0, 0x18(r1)
@@ -1429,7 +1429,7 @@ asm void fn_80264DB4(void)
     mr r25, r3
     mr r3, r26
     mr r4, r25
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x14(r1)
     mr r3, r26
     stb r0, 0x10(r1)
@@ -1509,7 +1509,7 @@ lbl_fn_80264DB4_000013E0:
     bl actor_dispatchMessage
 lbl_fn_80264DB4_00001410:
     addi r3, r1, 0x44
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_80264DB4_00001388
 lbl_fn_80264DB4_00001420:
@@ -1552,7 +1552,7 @@ lbl_fn_80264DB4_00001494:
     li r6, 0x0
     addi r4, r31, 0x49
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     addi r3, r30, 0x1564
     addi r4, r31, 0x53
     bl res_MsgHandle_destructor
@@ -1606,7 +1606,7 @@ lbl_fn_80264DB4_00001494:
     subi r3, r3, 0x778b
     ori r0, r0, 0x800
     stw r0, 0x12a8(r30)
-    bl fn_80206C50
+    bl assert_formatLocation
     mr r4, r3
     lwz r3, 0x78(r3)
     lwz r4, 0x80(r4)

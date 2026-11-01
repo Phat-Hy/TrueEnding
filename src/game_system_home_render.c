@@ -9,7 +9,7 @@ extern void _savegpr_21(void);
 extern void _savegpr_22(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_80013DC4(void);
+extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_80051CD8(void);
 extern void fn_8005454C(void);
@@ -57,7 +57,7 @@ extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
-extern void fn_8067E23C(void);
+extern void memcmp(void);
 extern void strcmp(void);
 extern void atoi(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -1764,7 +1764,7 @@ asm void fn_80363284(void)
     mr r28, r3
     mr r3, r27
     mr r4, r28
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0xc(r1)
     mr r3, r27
     stb r0, 0x8(r1)
@@ -1819,7 +1819,7 @@ lbl_fn_80363284_00001730:
     addi r5, r1, 0x18
 lbl_fn_80363284_0000174C:
     lwz r5, 0x0(r5)
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_80363284_00001780
     lwz r0, 0x10(r1)

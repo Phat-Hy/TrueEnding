@@ -14,15 +14,15 @@ extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void str_findChar(void);
 extern void fn_800DD3FC(void);
-extern void fn_80117228(void);
+extern void actor_spawnActorWithId(void);
 extern void fn_801F4728(void);
 extern void fn_801F4998(void);
 extern void fn_801F4CB4(void);
 extern void saveSlot_readSummary(void);
 extern void fn_801F4F08(void);
-extern void fn_801FECE0(void);
+extern void thread_findAndNotify(void);
 extern void fn_801FEDBC(void);
-extern void fn_801FEE08(void);
+extern void thread_dispatchToQueue(void);
 extern void fn_804A3C24(void);
 extern void fn_804AC734(void);
 extern void fn_804AC83C(void);
@@ -358,7 +358,7 @@ lbl_fn_804BF550_00000348:
     fmr f1, f31
     mr r4, r3
     mr r3, r29
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lwz r0, 0xd88(r31)
     cmpwi r0, 0x4
     bne lbl_fn_804BF550_0000040C
@@ -1087,7 +1087,7 @@ lbl_fn_804C0094_00000E3C:
     mr r4, r3
     mr r3, r26
     mr r5, r29
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r3, lbl_8087F610
     lwz r5, 0x564(r3)
     cmpwi r5, -0x1
@@ -1112,7 +1112,7 @@ lbl_fn_804C0094_00000E3C:
     mr r4, r3
     mr r3, r26
     addi r5, r1, 0x8
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
 lbl_fn_804C0094_00000EC8:
     addi r11, r1, 0x70
     bl _restgpr_26
@@ -1169,7 +1169,7 @@ lbl_fn_804C0430_00000F38:
     fmr f1, f31
     mr r4, r3
     mr r3, r31
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lwz r0, 0xdcc(r30)
     cmpwi r0, 0x1d
     bge lbl_fn_804C0430_00000FC0
@@ -1185,7 +1185,7 @@ lbl_fn_804C0430_00000F38:
 lbl_fn_804C0430_00000FC0:
     addi r3, r1, 0x8
     li r4, 0x8
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -1631,7 +1631,7 @@ lbl_fn_804C0A40_000015C4:
     mr r4, r3
     mr r3, r29
     mr r5, r27
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r4, 0x4c(r28)
     addi r3, r25, 0x298
     addi r26, r26, 0x18
@@ -1640,7 +1640,7 @@ lbl_fn_804C0A40_000015C4:
     mr r4, r3
     mr r3, r25
     mr r5, r26
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
 lbl_fn_804C0A40_00001634:
     lwz r3, 0x4c(r28)
     lis r25, lbl_80790D74@ha
@@ -1654,7 +1654,7 @@ lbl_fn_804C0A40_00001634:
     mr r4, r3
     mr r3, r27
     mr r5, r26
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r4, 0x4c(r28)
     addi r25, r25, 0x18
     addi r3, r31, 0x28a
@@ -1663,7 +1663,7 @@ lbl_fn_804C0A40_00001634:
     mr r4, r3
     mr r3, r26
     mr r5, r25
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r0, 0xd88(r28)
     cmpwi r0, 0x5
     beq lbl_fn_804C0A40_0000191C

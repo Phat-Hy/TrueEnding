@@ -25,7 +25,7 @@ extern void fn_80365708(void);
 extern void world_setLocalFlag(void);
 extern void fn_80374964(void);
 extern void fn_8037624C(void);
-extern void fn_804AE3BC(void);
+extern void net_getPacketManager(void);
 extern void fn_804C566C(void);
 extern void fn_804D8250(void);
 extern void fn_804DCA58(void);
@@ -400,13 +400,13 @@ lbl_fn_804DDD54_0000041C:
     clrlwi r0, r0, 24
     cmplw r3, r0
     bne lbl_fn_804DDD54_00000454
-    bl fn_804AE3BC
+    bl net_getPacketManager
     li r4, -0x1
     li r5, 0x1047
     li r6, 0x0
     li r7, 0x1
     bl fn_8050E098
-    bl fn_804AE3BC
+    bl net_getPacketManager
     li r4, -0x1
     li r5, 0x1
     bl fn_8050DDE0
@@ -542,7 +542,7 @@ lbl_fn_804DDE38_000005E8:
     rlwinm r0, r0, 0, 22, 19
     stw r0, 0xd0(r30)
     bl fn_804D8250
-    bl fn_804AE3BC
+    bl net_getPacketManager
     li r4, -0x1
     li r5, 0x1
     bl fn_8050DDE0
@@ -772,7 +772,7 @@ lbl_fn_804DE000_000008DC:
     mr r4, r30
     li r5, 0x2
     bl fn_804D8250
-    bl fn_804AE3BC
+    bl net_getPacketManager
     li r4, -0x1
     li r5, 0x1
     bl fn_8050DDE0

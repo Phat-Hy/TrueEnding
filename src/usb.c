@@ -76,7 +76,7 @@ extern void fn_80673210(void);
 extern void fn_80673CB0(void);
 extern void fn_80673E20(void);
 extern void fn_80673F00(void);
-extern void fn_806809C0(void);
+extern void snprintf(void);
 extern void iosAllocAligned(void);
 extern void iosCreateHeap(void);
 extern void iosFree(void);
@@ -492,7 +492,7 @@ lbl_fn_8065BCF0_000003F0:
     addi r5, r31, 0x19c
     li r4, 0x40
     crclr 6
-    bl fn_806809C0
+    bl snprintf
     addi r3, r31, 0x1b0
     addi r4, r29, 0x40
     crclr 6

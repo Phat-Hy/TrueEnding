@@ -25,11 +25,11 @@ extern void fn_8016F3D0(void);
 extern void fn_8017639C(void);
 extern void fn_801763E0(void);
 extern void fn_80178864(void);
-extern void fn_801F6C80(void);
+extern void save_computeCrc32(void);
 extern void fn_801F7590(void);
 extern void fn_801F837C(void);
 extern void fn_801F8598(void);
-extern void fn_80206C50(void);
+extern void assert_formatLocation(void);
 extern void task_findEntryById(void);
 extern void fn_8021A4E0(void);
 extern void fn_8021A960(void);
@@ -118,7 +118,7 @@ asm void fn_80598534(void)
     cmpwi r9, 0x0
     bne lbl_fn_80598534_00000110
     lwz r3, 0x4(r5)
-    bl fn_80206C50
+    bl assert_formatLocation
     cmpwi r3, 0x0
     beq lbl_fn_80598534_000000A0
     lwz r3, 0xb8(r3)
@@ -162,7 +162,7 @@ lbl_fn_80598534_000000C0:
     lfs f1, lbl_80888150
     mr r3, r30
     addi r4, r28, 0x391
-    bl fn_801F6C80
+    bl save_computeCrc32
     mr r3, r30
     addi r4, r28, 0x39a
     addi r5, r29, 0x10
@@ -201,7 +201,7 @@ lbl_fn_80598534_00000160:
     addi r29, r29, lbl_80761D5C@l
     mr r3, r30
     addi r4, r29, 0x391
-    bl fn_801F6C80
+    bl save_computeCrc32
     lis r5, lbl_80796ACC@ha
     mr r3, r30
     addi r5, r5, lbl_80796ACC@l
@@ -215,7 +215,7 @@ lbl_fn_80598534_0000019C:
     addi r29, r29, lbl_80761D5C@l
     mr r3, r30
     addi r4, r29, 0x391
-    bl fn_801F6C80
+    bl save_computeCrc32
     mr r3, r30
     mr r5, r27
     addi r4, r29, 0x39a
@@ -234,7 +234,7 @@ lbl_fn_80598534_000001D8:
     addi r29, r29, lbl_80761D5C@l
     mr r3, r30
     addi r4, r29, 0x39e
-    bl fn_801F6C80
+    bl save_computeCrc32
     lis r5, lbl_80796ACC@ha
     mr r3, r30
     addi r5, r5, lbl_80796ACC@l
@@ -248,7 +248,7 @@ lbl_fn_80598534_00000214:
     addi r29, r29, lbl_80761D5C@l
     mr r3, r30
     addi r4, r29, 0x39e
-    bl fn_801F6C80
+    bl save_computeCrc32
     mr r3, r30
     mr r5, r31
     addi r4, r29, 0x3a8

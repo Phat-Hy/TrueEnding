@@ -10,12 +10,12 @@ extern void fn_801092C8(void);
 extern void fn_80206B68(void);
 extern void fn_80206B70(void);
 extern void fn_80206B9C(void);
-extern void fn_80206BE4(void);
+extern void assert_generateId(void);
 extern void fn_8020ED84(void);
 extern void fn_8020EE58(void);
 extern void fn_8020EE60(void);
 extern void fn_8020EF04(void);
-extern void fn_8020EF80(void);
+extern void random_generateValue(void);
 extern void fn_802114D8(void);
 extern void fn_802114E0(void);
 extern void fn_80213E60(void);
@@ -30,7 +30,7 @@ extern void fn_80445F44(void);
 extern void fn_8044D678(void);
 extern void rand(void);
 extern void wmemcpy(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 
 /* External data declarations */
 extern u8 lbl_80754850[];
@@ -105,7 +105,7 @@ lbl_fn_80450590_00000088:
     cmplw r29, r30
     beq lbl_fn_80450590_000000BC
     mr r3, r29
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r3, r30
     mr r4, r29
@@ -123,7 +123,7 @@ lbl_fn_80450590_000000BC:
     cmplw r30, r0
     beq lbl_fn_80450590_000001C8
     mr r3, r30
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r4, r30
     addi r3, r31, 0x2c
@@ -150,7 +150,7 @@ lbl_fn_80450590_00000138:
     cmplw r30, r0
     beq lbl_fn_80450590_000001C8
     mr r3, r30
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r4, r30
     addi r3, r31, 0x6c
@@ -177,7 +177,7 @@ lbl_fn_80450590_0000019C:
     cmplw r30, r0
     beq lbl_fn_80450590_000001C8
     mr r3, r30
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r4, r30
     addi r3, r31, 0x2c
@@ -2055,7 +2055,7 @@ lbl_fn_804515A8_00001BB4:
     bl rand
 lbl_fn_804515A8_00001BF4:
     mr r3, r14
-    bl fn_80206BE4
+    bl assert_generateId
     lwz r0, 0xec(r15)
     mr r4, r3
     mr r3, r16
@@ -2090,7 +2090,7 @@ lbl_fn_804515A8_00001C64:
     li r3, 0x1
     bl fn_8020ED84
 lbl_fn_804515A8_00001C78:
-    bl fn_8020EF80
+    bl random_generateValue
     mr r4, r3
     mr r3, r16
     li r5, 0x1

@@ -68,10 +68,10 @@ extern void fn_806078D0(void);
 extern void fn_80607900(void);
 extern void fn_80607D70(void);
 extern void fn_80609D00(void);
-extern void fn_80612E80(void);
+extern void GXSetVtxDesc(void);
 extern void fn_806134E0(void);
-extern void fn_80613520(void);
-extern void fn_80613BB0(void);
+extern void GXSetVtxAttrFmt(void);
+extern void GXClearVtxDesc(void);
 extern void fn_80614A80(void);
 extern void fn_80615400(void);
 extern void fn_80615D20(void);
@@ -100,7 +100,7 @@ extern void fn_80625BF0(void);
 extern void fn_80625C90(void);
 extern void fn_806263E0(void);
 extern void fn_8065F520(void);
-extern void fn_806823B0(void);
+extern void strcat(void);
 extern void strcmp(void);
 extern void std_sqrt(void);
 extern char* strcpy(char* dest, const char* src);
@@ -1126,13 +1126,13 @@ asm void fn_805C3FE0(void)
     bl fn_806134E0
     li r3, 0x9
     li r4, 0x1
-    bl fn_80612E80
+    bl GXSetVtxDesc
     li r3, 0x0
     li r4, 0x9
     li r5, 0x0
     li r6, 0x4
     li r7, 0x0
-    bl fn_80613520
+    bl GXSetVtxAttrFmt
     li r3, 0x1
     bl fn_80615D20
     li r3, 0x4
@@ -1152,7 +1152,7 @@ asm void fn_805C3FE0(void)
     li r9, 0x2
     bl fn_80615D50
     li r3, 0x0
-    bl fn_80613BB0
+    bl GXClearVtxDesc
     li r3, 0x1
     bl GXSetNumTevStages
     li r3, 0x0
@@ -1757,7 +1757,7 @@ lbl_fn_805C4690_000015D4:
     addi r3, r1, 0x58
     slwi r0, r0, 2
     lwzx r4, r30, r0
-    bl fn_806823B0
+    bl strcat
     lwz r3, 0x1ec(r31)
     addi r5, r1, 0x58
     li r4, 0x0
@@ -1847,7 +1847,7 @@ lbl_fn_805C4690_00001724:
     addi r3, r1, 0x58
     slwi r0, r0, 2
     lwzx r4, r29, r0
-    bl fn_806823B0
+    bl strcat
     lwz r3, 0x1ec(r31)
     addi r5, r1, 0x58
     li r4, 0x0
@@ -1932,7 +1932,7 @@ lbl_fn_805C4690_0000186C:
     bl strcpy
     lwz r4, 0x0(r29)
     addi r3, r1, 0x58
-    bl fn_806823B0
+    bl strcat
     lwz r3, 0x1ec(r31)
     addi r5, r1, 0x58
     li r4, 0x0

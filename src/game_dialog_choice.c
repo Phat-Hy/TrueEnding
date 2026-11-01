@@ -15,8 +15,8 @@ extern void dialog_setScriptSlot(void);
 extern void fn_8014C228(void);
 extern void fn_8014FD30(void);
 extern void fn_80206B14(void);
-extern void fn_80206BE4(void);
-extern void fn_80211480(void);
+extern void assert_generateId(void);
+extern void event_findEntryById(void);
 extern void fn_80211940(void);
 extern void fn_80219558(void);
 extern void weapon_getDamageParam(void);
@@ -1452,8 +1452,8 @@ asm void fn_8014F2B4(void)
     mulli r0, r0, 0x3e8
     subf r4, r0, r28
     bl fn_80206B14
-    bl fn_80206BE4
-    bl fn_80211480
+    bl assert_generateId
+    bl event_findEntryById
     addi r0, r29, 0x4dd3
     mulhw r0, r0, r28
     srawi r0, r0, 6

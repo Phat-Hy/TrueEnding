@@ -7,7 +7,7 @@ extern void _savegpr_24(void);
 extern void dtor_80084684(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
-extern void fn_80087994(void);
+extern void route_createSegment(void);
 extern void fn_8008937C(void);
 extern void fn_800897D8(void);
 extern void fn_800A555C(void);
@@ -18,12 +18,12 @@ extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
 extern void str_findChar(void);
-extern void fn_80117228(void);
-extern void fn_801F3FF8(void);
+extern void actor_spawnActorWithId(void);
+extern void save_validateHeader(void);
 extern void saveSlot_readSummary(void);
 extern void fn_801F64D0(void);
-extern void fn_801FECE0(void);
-extern void fn_801FEE08(void);
+extern void thread_findAndNotify(void);
+extern void thread_dispatchToQueue(void);
 extern void fn_8036E89C(void);
 extern void fn_803E627C(void);
 extern void fn_803E63D0(void);
@@ -242,19 +242,19 @@ lbl_fn_8057EAF4_0000005C:
     addi r5, r28, 0x5c
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r29
     addi r4, r31, 0xaf
     addi r5, r28, 0x60
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r29
     addi r4, r31, 0xbe
     addi r5, r28, 0x64
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r30
     addi r4, r31, 0xce
     bl fn_8008937C
@@ -263,13 +263,13 @@ lbl_fn_8057EAF4_0000005C:
     addi r5, r28, 0x78
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r29
     addi r4, r31, 0xe1
     addi r5, r28, 0x7c
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r29
     addi r4, r31, 0xee
     addi r5, r28, 0x80
@@ -284,7 +284,7 @@ lbl_fn_8057EAF4_0000005C:
     addi r5, r28, 0x84
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r30
     addi r4, r31, 0x10f
     bl fn_8008937C
@@ -338,19 +338,19 @@ lbl_fn_8057EAF4_0000005C:
     addi r5, r28, 0xc
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r30
     addi r4, r31, 0x96
     addi r5, r28, 0x18
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r30
     addi r4, r31, 0x159
     addi r5, r28, 0x10
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r30
     addi r4, r31, 0x162
     addi r5, r28, 0x1c
@@ -365,7 +365,7 @@ lbl_fn_8057EAF4_0000005C:
     addi r5, r28, 0x14
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r30
     addi r4, r31, 0x17c
     addi r5, r28, 0x4
@@ -380,7 +380,7 @@ lbl_fn_8057EAF4_0000005C:
     addi r5, r28, 0x8
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)
@@ -788,35 +788,35 @@ lbl_fn_8057F284_00000998:
     mr r3, r29
     addi r4, r31, 0x20
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x70(r29)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r29
     addi r4, r31, 0x3c
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x74(r29)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r29
     addi r4, r31, 0x58
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x80(r29)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r29
     addi r4, r31, 0x75
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x90(r29)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r29
     addi r4, r31, 0x9e
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x94(r29)
     li r4, 0x1
     bl atn_Task_setActive
@@ -840,7 +840,7 @@ lbl_fn_8057F284_00000A50:
     addi r31, r31, lbl_807612E4@l
     li r5, 0x0
     addi r4, r31, 0xf1
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0xa8(r29)
     li r4, 0x1
     bl atn_Task_setActive
@@ -864,21 +864,21 @@ lbl_fn_8057F284_00000AAC:
     addi r31, r31, lbl_807612E4@l
     li r5, 0x0
     addi r4, r31, 0x140
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0xd4(r29)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r29
     addi r4, r31, 0x168
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0xd8(r29)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r29
     addi r4, r31, 0x18f
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     addis r5, r29, 0x2
     li r4, 0x1
     stw r3, 0x5b2c(r5)
@@ -908,21 +908,21 @@ lbl_fn_8057F284_00000B74:
     li r6, 0x0
     li r7, 0x0
     addi r5, r5, 0x5b50
-    bl fn_80087994
+    bl route_createSegment
     addis r5, r29, 0x2
     mr r3, r25
     addi r4, r31, 0x1cf
     li r6, 0x0
     li r7, 0x0
     addi r5, r5, 0x5b54
-    bl fn_80087994
+    bl route_createSegment
     addis r5, r29, 0x2
     mr r3, r25
     addi r4, r31, 0x1de
     li r6, 0x0
     li r7, 0x0
     addi r5, r5, 0x5b58
-    bl fn_80087994
+    bl route_createSegment
     addis r5, r29, 0x2
     lis r6, 0xf
     addi r7, r6, 0x423f
@@ -1130,7 +1130,7 @@ lbl_fn_8057F8FC_00000E78:
     bctrl
     addi r3, r1, 0x8
     li r4, 0x1e
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -1304,7 +1304,7 @@ lbl_fn_8057FB6C_000010F0:
     bctrl
     addi r3, r1, 0x8
     li r4, 0x1e
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -1494,7 +1494,7 @@ asm void fn_8057FDE8(void)
 lbl_fn_8057FDE8_0000138C:
     addi r3, r1, 0xc
     li r4, 0x2
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0xc
     li r4, -0x1
     bl ref_releaseHandle
@@ -1520,7 +1520,7 @@ lbl_fn_8057FDE8_000013D4:
     beq lbl_fn_8057FDE8_00001430
     addi r3, r1, 0x8
     li r4, 0x2
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -1579,7 +1579,7 @@ asm void fn_8057FF3C(void)
     bne lbl_fn_8057FF3C_000014DC
     addi r3, r1, 0x14
     li r4, 0xb
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x14
     li r4, -0x1
     bl ref_releaseHandle
@@ -1610,7 +1610,7 @@ lbl_fn_8057FF3C_00001528:
     bne lbl_fn_8057FF3C_00001564
     addi r3, r1, 0x10
     li r4, 0x1
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle
@@ -1624,7 +1624,7 @@ lbl_fn_8057FF3C_00001528:
 lbl_fn_8057FF3C_00001564:
     addi r3, r1, 0xc
     li r4, 0xb
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0xc
     li r4, -0x1
     bl ref_releaseHandle
@@ -1649,7 +1649,7 @@ lbl_fn_8057FF3C_000015AC:
     beq lbl_fn_8057FF3C_000015F4
     addi r3, r1, 0x8
     li r4, 0x2
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -1729,7 +1729,7 @@ lbl_fn_80580100_000016CC:
     bl fn_80581FDC
     addi r3, r1, 0xc
     li r4, 0x19
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0xc
     li r4, -0x1
     bl ref_releaseHandle
@@ -1749,7 +1749,7 @@ lbl_fn_80580100_00001714:
     beq lbl_fn_80580100_0000175C
     addi r3, r1, 0x8
     li r4, 0x2
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -1903,7 +1903,7 @@ lbl_fn_80580370_0000192C:
     mr r4, r3
     mr r3, r29
     mr r5, r30
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r3, 0x64(r31)
     lwz r4, lbl_8087F1E4
     addi r0, r3, 0x1d1
@@ -1925,7 +1925,7 @@ lbl_fn_80580370_0000197C:
     mr r4, r3
     mr r3, r28
     mr r5, r29
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r12, 0x0(r31)
     mr r3, r31
     lwz r12, 0x3c(r12)
@@ -1948,7 +1948,7 @@ lbl_fn_80580370_000019DC:
     lfs f1, lbl_808880C4
     mr r4, r3
     mr r3, r28
-    bl fn_801FECE0
+    bl thread_findAndNotify
     b lbl_fn_80580370_00001A68
 lbl_fn_80580370_00001A00:
     lwz r4, 0x70(r31)
@@ -1958,7 +1958,7 @@ lbl_fn_80580370_00001A00:
     lfs f1, lbl_808880C0
     mr r4, r3
     mr r3, r28
-    bl fn_801FECE0
+    bl thread_findAndNotify
     b lbl_fn_80580370_00001A68
 lbl_fn_80580370_00001A24:
     lwz r4, 0x70(r31)
@@ -1968,7 +1968,7 @@ lbl_fn_80580370_00001A24:
     lfs f1, lbl_808880D0
     mr r4, r3
     mr r3, r28
-    bl fn_801FECE0
+    bl thread_findAndNotify
     b lbl_fn_80580370_00001A68
 lbl_fn_80580370_00001A48:
     lwz r4, 0x70(r31)
@@ -1978,7 +1978,7 @@ lbl_fn_80580370_00001A48:
     lfs f1, lbl_808880CC
     mr r4, r3
     mr r3, r28
-    bl fn_801FECE0
+    bl thread_findAndNotify
 lbl_fn_80580370_00001A68:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)

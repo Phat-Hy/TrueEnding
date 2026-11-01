@@ -10,11 +10,11 @@ extern void _savegpr_25(void);
 extern void dtor_80013D60(void);
 extern void dtor_80084684(void);
 extern void sys_copyString(void);
-extern void fn_80013DC4(void);
+extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_8004212C(void);
 extern void talk_parseQuotedString(void);
-extern void fn_8005B5F8(void);
+extern void talk_scanQuotedString(void);
 extern void fn_8005B6E8(void);
 extern void fn_8006AFF8(void);
 extern void mem_alloc(void);
@@ -32,7 +32,7 @@ extern void fn_800E114C(void);
 extern void fn_800E19AC(void);
 extern void fn_800E1D5C(void);
 extern void fn_800E2778(void);
-extern void fn_801F3FF8(void);
+extern void save_validateHeader(void);
 extern void task_findEntryById(void);
 extern void fn_80237518(void);
 extern void fn_802375C4(void);
@@ -1051,7 +1051,7 @@ asm void fn_80243514(void)
     mr r31, r3
     mr r3, r29
     mr r4, r31
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0xc(r1)
     mr r3, r29
     stb r0, 0x8(r1)
@@ -1112,7 +1112,7 @@ lbl_fn_802435B8_00000D20:
     stw r0, 0x4(r3)
     stw r0, 0x8(r3)
     lwz r4, 0x10(r4)
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0xc(r1)
     mr r3, r30
     stb r0, 0x8(r1)
@@ -2123,7 +2123,7 @@ asm void fn_80244228(void)
     mr r26, r3
     mr r3, r27
     mr r4, r26
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x1c(r1)
     mr r3, r27
     stb r0, 0x18(r1)
@@ -2143,7 +2143,7 @@ asm void fn_80244228(void)
     mr r25, r3
     mr r3, r26
     mr r4, r25
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x14(r1)
     mr r3, r26
     stb r0, 0x10(r1)
@@ -2223,7 +2223,7 @@ lbl_fn_80244228_00001BF4:
     bl actor_dispatchMessage
 lbl_fn_80244228_00001C24:
     addi r3, r1, 0x44
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_80244228_00001B9C
 lbl_fn_80244228_00001C34:
@@ -2287,7 +2287,7 @@ lbl_fn_80244228_00001CF0:
     mr r3, r28
     addi r4, r29, 0x91
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x15bc(r28)
     li r4, 0x1
     bl atn_Task_setActive

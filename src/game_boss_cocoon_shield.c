@@ -8,7 +8,7 @@ extern void __files(void);
 extern void dtor_80013D60(void);
 extern void dtor_80084684(void);
 extern void sys_copyString(void);
-extern void fn_80013DC4(void);
+extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_8003E4A4(void);
 extern void fn_8004212C(void);
@@ -58,9 +58,9 @@ extern void fn_806250D0(void);
 extern void fn_80625110(void);
 extern void CXUncompressAny(void);
 extern void printf(void);
-extern void fn_806823B0(void);
+extern void strcat(void);
 extern void strstr(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 extern void abort(void);
 extern void runtime_registerStaticObject(void);
 extern void fn_80695A50(void);
@@ -261,7 +261,7 @@ lbl_fn_8046B798_000001B4:
     beq lbl_fn_8046B798_00000254
     addi r3, r1, 0x30
     addi r4, r31, 0x22d
-    bl fn_806823B0
+    bl strcat
     addi r3, r28, 0xc
     addi r4, r1, 0x30
     bl fn_800D5908
@@ -281,7 +281,7 @@ lbl_fn_8046B798_0000027C:
     lbz r0, 0x1c(r1)
     mr r3, r24
     stb r0, 0x18(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r5, r23
     mr r6, r24
@@ -296,7 +296,7 @@ lbl_fn_8046B798_0000027C:
     mr r24, r3
     stw r30, 0x24(r1)
     stw r30, 0x28(r1)
-    bl fn_80686A48
+    bl wcslen
     mr r23, r3
     mr r3, r29
     mr r4, r23
@@ -1577,7 +1577,7 @@ asm void fn_8046CBC0(void)
     mr r30, r3
     mr r3, r31
     mr r4, r30
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0xc(r1)
     mr r3, r31
     stb r0, 0x8(r1)

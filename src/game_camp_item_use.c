@@ -7,7 +7,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_16(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_80013DC4(void);
+extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void atn_LH_Binary_destructor(void);
 extern void fn_8004318C(void);
@@ -489,7 +489,7 @@ lbl_fn_803BEC40_0000053C:
     mr r23, r3
     mr r3, r22
     mr r4, r23
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x54(r1)
     mr r3, r22
     stb r0, 0x50(r1)
@@ -604,7 +604,7 @@ lbl_fn_803BEC40_0000071C:
     mr r16, r3
     addi r3, r1, 0x80
     mr r4, r16
-    bl fn_80013DC4
+    bl actor_validateIndex
     addi r6, r1, 0x2e0
     stb r28, 0x40(r1)
     mr r7, r6
@@ -747,7 +747,7 @@ lbl_fn_803BEC40_0000090C:
     mr r16, r3
     mr r3, r22
     mr r4, r16
-    bl fn_80013DC4
+    bl actor_validateIndex
     addi r6, r1, 0x2e0
     lbz r0, 0x24(r1)
     mr r7, r6
@@ -770,7 +770,7 @@ lbl_fn_803BEC40_0000090C:
     mr r16, r3
     mr r3, r24
     mr r4, r16
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x1c(r1)
     mr r3, r24
     stb r0, 0x18(r1)
@@ -814,7 +814,7 @@ lbl_fn_803BEC40_000009F4:
     mr r16, r3
     mr r3, r22
     mr r4, r16
-    bl fn_80013DC4
+    bl actor_validateIndex
     addi r6, r1, 0x2e0
     lbz r0, 0x14(r1)
     mr r7, r6
@@ -837,7 +837,7 @@ lbl_fn_803BEC40_000009F4:
     mr r16, r3
     mr r3, r24
     mr r4, r16
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0xc(r1)
     mr r3, r24
     stb r0, 0x8(r1)

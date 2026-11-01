@@ -10,10 +10,10 @@ extern void fn_8012AE50(void);
 extern void fn_8012AFE8(void);
 extern void fn_80206B14(void);
 extern void fn_80206B9C(void);
-extern void fn_80206BE4(void);
+extern void assert_generateId(void);
 extern void fn_8020ED84(void);
 extern void fn_8020EF04(void);
-extern void fn_8020EF80(void);
+extern void random_generateValue(void);
 extern void fn_802114E0(void);
 extern void fn_8021150C(void);
 extern void fn_80219558(void);
@@ -438,7 +438,7 @@ lbl_fn_803BD49C_000004C4:
 lbl_fn_803BD49C_000004EC:
     cmpwi r3, 0x0
     beq lbl_fn_803BD49C_00000524
-    bl fn_80206BE4
+    bl assert_generateId
     subi r4, r27, 0x217d
     addi r0, r28, 0x4240
     mulhw r4, r4, r3
@@ -476,7 +476,7 @@ lbl_fn_803BD49C_00000568:
     bl fn_8020ED84
     cmpwi r3, 0x0
     beq lbl_fn_803BD49C_0000058C
-    bl fn_8020EF80
+    bl random_generateValue
     cmpw r30, r3
     bne lbl_fn_803BD49C_0000058C
     addi r31, r31, 0x1

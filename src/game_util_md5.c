@@ -12,8 +12,8 @@ extern void OSUnlockMutex(void);
 extern void fn_805F9EF0(void);
 extern void fn_805FA4E0(void);
 extern void fn_805FA5D0(void);
-extern void fn_8068236C(void);
-extern void fn_806823DC(void);
+extern void strncpy(void);
+extern void strncat(void);
 extern void strrchr(void);
 extern void fn_8070C650(void);
 extern void fn_8070C740(void);
@@ -48,7 +48,7 @@ extern void fn_80717AA0(void);
 extern void fn_80718770(void);
 extern void fn_80718ED0(void);
 extern void fn_80718F50(void);
-extern void fn_80724DF0(void);
+extern void net_packetDebugLog(void);
 extern void fn_80724E90(void);
 extern void fn_80725170(void);
 extern void fn_80726310(void);
@@ -207,7 +207,7 @@ lbl_fn_8059DA90_0000004C:
     addi r3, r3, lbl_807623A4@l
     addi r5, r3, 0x7e
     crclr 6
-    bl fn_80724DF0
+    bl net_packetDebugLog
 lbl_fn_8059DA90_0000009C:
     lwz r4, 0x70(r29)
     mr r3, r29
@@ -282,7 +282,7 @@ lbl_fn_8059DB5C_00000154:
     addi r3, r3, lbl_807623A4@l
     addi r5, r3, 0x7e
     crclr 6
-    bl fn_80724DF0
+    bl net_packetDebugLog
 lbl_fn_8059DB5C_0000019C:
     lwz r4, 0x70(r28)
     mr r3, r28
@@ -325,7 +325,7 @@ asm void fn_8059DC68(void)
     addi r3, r3, lbl_807623A4@l
     addi r5, r3, 0xe5
     crclr 6
-    bl fn_80724DF0
+    bl net_packetDebugLog
 lbl_fn_8059DC68_00000214:
     addi r0, r1, 0x27
     lis r7, fn_80046398@ha
@@ -397,7 +397,7 @@ asm void fn_8059DD4C(void)
     addi r3, r3, lbl_807623A4@l
     addi r5, r3, 0xe5
     crclr 6
-    bl fn_80724DF0
+    bl net_packetDebugLog
 lbl_fn_8059DD4C_00000308:
     lwz r31, 0x124(r28)
     lwz r6, 0x120(r28)
@@ -481,7 +481,7 @@ asm void fn_8059DE68(void)
     addi r3, r3, lbl_807623A4@l
     addi r5, r3, 0xe5
     crclr 6
-    bl fn_80724DF0
+    bl net_packetDebugLog
 lbl_fn_8059DE68_00000424:
     lwz r31, 0x11c(r28)
     lwz r6, 0x118(r28)
@@ -550,7 +550,7 @@ asm void fn_8059DF58(void)
     li r4, 0x17d
     addi r5, r3, 0x211
     crclr 6
-    bl fn_80724DF0
+    bl net_packetDebugLog
 lbl_fn_8059DF58_00000510:
     clrlwi. r0, r31, 27
     beq lbl_fn_8059DF58_00000534
@@ -560,7 +560,7 @@ lbl_fn_8059DF58_00000510:
     li r4, 0x17e
     addi r5, r3, 0x256
     crclr 6
-    bl fn_80724DF0
+    bl net_packetDebugLog
 lbl_fn_8059DF58_00000534:
     lwz r5, 0x18(r29)
     lwz r4, 0x70(r29)
@@ -616,7 +616,7 @@ lbl_fn_8059E018_000005D0:
     addi r3, r3, lbl_807623A4@l
     addi r5, r3, 0x29e
     crclr 6
-    b fn_80724DF0
+    b net_packetDebugLog
 lbl_fn_8059E018_000005E8:
     lwz r5, 0x70(r3)
     cmpw r4, r5
@@ -715,7 +715,7 @@ asm void fn_8059E0F0(void)
     li r4, 0x3a
     addi r5, r5, lbl_80796CD8@l
     crclr 6
-    bl fn_80724DF0
+    bl net_packetDebugLog
 lbl_fn_8059E0F0_000006A0:
     lwz r0, 0x14(r1)
     li r3, 0x0
@@ -742,7 +742,7 @@ asm void fn_8059E144(void)
     li r4, 0x35
     addi r5, r5, lbl_80796C98@l
     crclr 6
-    bl fn_80724DF0
+    bl net_packetDebugLog
 lbl_fn_8059E144_000006F4:
     lwz r0, 0x14(r1)
     li r3, 0x0
@@ -879,7 +879,7 @@ asm void fn_8059E298(void)
     addi r3, r3, lbl_80762660@l
     addi r5, r3, 0x15
     crclr 6
-    bl fn_80724DF0
+    bl net_packetDebugLog
 lbl_fn_8059E298_00000844:
     stw r31, 0x4(r30)
     lwz r31, 0xc(r1)
@@ -1129,11 +1129,11 @@ lbl_fn_8059E3B8_00000A4C:
     addi r3, r1, 0x250
     addi r4, r28, 0x8
     addi r5, r5, 0x1
-    bl fn_8068236C
+    bl strncpy
     addi r3, r1, 0x250
     addi r4, r1, 0x350
     addi r5, r27, 0x1
-    bl fn_806823DC
+    bl strncat
     addi r6, r1, 0x250
 lbl_fn_8059E3B8_00000A70:
     lwz r12, 0x0(r28)
@@ -1176,11 +1176,11 @@ lbl_fn_8059E3B8_00000AF8:
     addi r3, r1, 0x150
     addi r4, r28, 0x8
     addi r5, r5, 0x1
-    bl fn_8068236C
+    bl strncpy
     mr r4, r31
     addi r3, r1, 0x150
     addi r5, r27, 0x1
-    bl fn_806823DC
+    bl strncat
     addi r31, r1, 0x150
 lbl_fn_8059E3B8_00000B1C:
     lwz r12, 0x0(r28)
@@ -1259,11 +1259,11 @@ lbl_fn_8059E3B8_00000C28:
     addi r3, r1, 0x50
     addi r4, r28, 0x8
     addi r5, r5, 0x1
-    bl fn_8068236C
+    bl strncpy
     mr r4, r26
     addi r3, r1, 0x50
     addi r5, r31, 0x1
-    bl fn_806823DC
+    bl strncat
     addi r26, r1, 0x50
 lbl_fn_8059E3B8_00000C4C:
     lwz r12, 0x0(r28)
@@ -1327,7 +1327,7 @@ lbl_fn_8059E740_00000D04:
     addi r3, r3, lbl_80762660@l
     addi r5, r3, 0x68
     crclr 6
-    bl fn_80724DF0
+    bl net_packetDebugLog
 lbl_fn_8059E740_00000D24:
     add r3, r28, r30
     li r0, 0x0
@@ -1335,7 +1335,7 @@ lbl_fn_8059E740_00000D24:
     mr r4, r29
     mr r5, r31
     addi r3, r28, 0x8
-    bl fn_8068236C
+    bl strncpy
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)
@@ -1682,7 +1682,7 @@ asm void fn_8059EBD8(void)
     addi r3, r3, lbl_80762810@l
     addi r5, r3, 0x1b
     crclr 6
-    bl fn_80724DF0
+    bl net_packetDebugLog
 lbl_fn_8059EBD8_00001194:
     bl fn_80718770
     cmpwi r3, 0x0
@@ -1697,7 +1697,7 @@ lbl_fn_8059EBD8_000011A8:
     addi r3, r3, lbl_80762810@l
     addi r5, r3, 0x59
     crclr 6
-    bl fn_80724DF0
+    bl net_packetDebugLog
 lbl_fn_8059EBD8_000011C8:
     cmpwi r27, 0x0
     bne lbl_fn_8059EBD8_000011E8
@@ -1706,7 +1706,7 @@ lbl_fn_8059EBD8_000011C8:
     addi r3, r3, lbl_80762810@l
     addi r5, r3, 0x7d
     crclr 6
-    bl fn_80724DF0
+    bl net_packetDebugLog
 lbl_fn_8059EBD8_000011E8:
     cmpwi r30, 0x0
     beq lbl_fn_8059EBD8_00001210
@@ -1717,7 +1717,7 @@ lbl_fn_8059EBD8_000011E8:
     addi r3, r3, lbl_80762810@l
     addi r5, r3, 0xa4
     crclr 6
-    bl fn_80724DF0
+    bl net_packetDebugLog
 lbl_fn_8059EBD8_00001210:
     cmpwi r26, 0x0
     bne lbl_fn_8059EBD8_00001230
@@ -1726,7 +1726,7 @@ lbl_fn_8059EBD8_00001210:
     addi r3, r3, lbl_80762810@l
     addi r5, r3, 0x59
     crclr 6
-    bl fn_80724DF0
+    bl net_packetDebugLog
 lbl_fn_8059EBD8_00001230:
     mr r3, r26
     addi r4, r1, 0x40
@@ -1746,7 +1746,7 @@ lbl_fn_8059EBD8_0000124C:
     addi r3, r3, lbl_80762810@l
     addi r5, r3, 0xcf
     crclr 6
-    bl fn_80724DF0
+    bl net_packetDebugLog
 lbl_fn_8059EBD8_00001278:
     mr r3, r25
     mr r4, r26
@@ -1765,7 +1765,7 @@ lbl_fn_8059EBD8_0000129C:
     addi r3, r3, lbl_80762810@l
     addi r5, r3, 0x59
     crclr 6
-    bl fn_80724DF0
+    bl net_packetDebugLog
 lbl_fn_8059EBD8_000012BC:
     mr r3, r26
     addi r4, r1, 0x24
@@ -1861,7 +1861,7 @@ lbl_fn_8059EDE8_000013B4:
     li r4, 0x56
     addi r5, r5, lbl_80797274@l
     crclr 6
-    bl fn_80724DF0
+    bl net_packetDebugLog
 lbl_fn_8059EDE8_00001404:
     addi r31, r28, 0x54
     mr r3, r31
@@ -1882,7 +1882,7 @@ lbl_fn_8059EDE8_00001404:
     li r4, 0x56
     addi r5, r5, lbl_80797234@l
     crclr 6
-    bl fn_80724DF0
+    bl net_packetDebugLog
 lbl_fn_8059EDE8_00001454:
     addi r31, r28, 0x7c
     mr r3, r31
@@ -1903,7 +1903,7 @@ lbl_fn_8059EDE8_00001454:
     li r4, 0x56
     addi r5, r5, lbl_807971F4@l
     crclr 6
-    bl fn_80724DF0
+    bl net_packetDebugLog
 lbl_fn_8059EDE8_000014A4:
     addi r31, r28, 0xa4
     mr r3, r31
@@ -1950,7 +1950,7 @@ asm void fn_8059EF94(void)
     addi r3, r3, lbl_80762810@l
     addi r5, r3, 0x59
     crclr 6
-    bl fn_80724DF0
+    bl net_packetDebugLog
 lbl_fn_8059EF94_00001544:
     mr r3, r30
     bl fn_8059E308
@@ -2050,7 +2050,7 @@ asm void fn_8059F100(void)
     addi r3, r3, lbl_80762810@l
     addi r5, r3, 0x59
     crclr 6
-    bl fn_80724DF0
+    bl net_packetDebugLog
 lbl_fn_8059F100_000016A4:
     mr r3, r31
     addi r4, r1, 0x8
@@ -2088,7 +2088,7 @@ asm void fn_8059F170(void)
     addi r3, r3, lbl_80762810@l
     addi r5, r3, 0x59
     crclr 6
-    bl fn_80724DF0
+    bl net_packetDebugLog
 lbl_fn_8059F170_00001720:
     cmpwi r29, 0x0
     bne lbl_fn_8059F170_00001740
@@ -2097,7 +2097,7 @@ lbl_fn_8059F170_00001720:
     addi r3, r3, lbl_80762810@l
     addi r5, r3, 0x7d
     crclr 6
-    bl fn_80724DF0
+    bl net_packetDebugLog
 lbl_fn_8059F170_00001740:
     clrlwi. r0, r29, 30
     beq lbl_fn_8059F170_00001764
@@ -2107,7 +2107,7 @@ lbl_fn_8059F170_00001740:
     li r4, 0x132
     addi r5, r3, 0x118
     crclr 6
-    bl fn_80724DF0
+    bl net_packetDebugLog
 lbl_fn_8059F170_00001764:
     mr r3, r27
     mr r4, r28
@@ -2119,7 +2119,7 @@ lbl_fn_8059F170_00001764:
     addi r3, r3, lbl_80762810@l
     addi r5, r3, 0x15f
     crclr 6
-    bl fn_80724DF0
+    bl net_packetDebugLog
 lbl_fn_8059F170_00001790:
     add r31, r29, r30
     stw r29, 0x8(r1)
@@ -2243,7 +2243,7 @@ lbl_fn_8059F170_00001928:
     li r4, 0x43
     addi r5, r5, lbl_807971B4@l
     crclr 6
-    bl fn_80724DF0
+    bl net_packetDebugLog
 lbl_fn_8059F170_0000194C:
     addi r26, r27, 0x54
     mr r3, r26
@@ -2263,7 +2263,7 @@ lbl_fn_8059F170_0000194C:
     addi r3, r3, lbl_80762810@l
     addi r5, r3, 0x197
     crclr 6
-    bl fn_80724DF0
+    bl net_packetDebugLog
 lbl_fn_8059F170_00001998:
     stw r24, 0x8(r1)
     li r0, 0x1
@@ -2292,7 +2292,7 @@ lbl_fn_8059F170_000019D8:
     li r4, 0x43
     addi r5, r5, lbl_80797134@l
     crclr 6
-    bl fn_80724DF0
+    bl net_packetDebugLog
 lbl_fn_8059F170_000019FC:
     addi r26, r27, 0x7c
     mr r3, r26
@@ -2312,7 +2312,7 @@ lbl_fn_8059F170_000019FC:
     addi r3, r3, lbl_80762810@l
     addi r5, r3, 0x197
     crclr 6
-    bl fn_80724DF0
+    bl net_packetDebugLog
 lbl_fn_8059F170_00001A48:
     stw r23, 0x8(r1)
     li r0, 0x1
@@ -2341,7 +2341,7 @@ lbl_fn_8059F170_00001A88:
     li r4, 0x43
     addi r5, r5, lbl_80797174@l
     crclr 6
-    bl fn_80724DF0
+    bl net_packetDebugLog
 lbl_fn_8059F170_00001AAC:
     addi r25, r27, 0xa4
     mr r3, r25
@@ -2361,7 +2361,7 @@ lbl_fn_8059F170_00001AAC:
     addi r3, r3, lbl_80762810@l
     addi r5, r3, 0x197
     crclr 6
-    bl fn_80724DF0
+    bl net_packetDebugLog
 lbl_fn_8059F170_00001AF8:
     stw r23, 0x8(r1)
     li r0, 0x1
@@ -2391,7 +2391,7 @@ lbl_fn_8059F170_00001B38:
     addi r3, r3, lbl_80762810@l
     addi r5, r3, 0x1c4
     crclr 6
-    bl fn_80724DF0
+    bl net_packetDebugLog
 lbl_fn_8059F170_00001B60:
     stw r23, 0x8(r1)
     li r0, 0x1
@@ -2413,7 +2413,7 @@ lbl_fn_8059F170_00001B78:
     addi r3, r3, lbl_80762810@l
     addi r5, r3, 0x1f1
     crclr 6
-    bl fn_80724DF0
+    bl net_packetDebugLog
 lbl_fn_8059F170_00001BAC:
     stw r28, 0x10(r27)
     li r3, 0x1

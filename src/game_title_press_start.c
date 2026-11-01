@@ -6,7 +6,7 @@ extern void __files(void);
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_80013DC4(void);
+extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_8004ECC0(void);
 extern void mem_free(void);
@@ -898,7 +898,7 @@ lbl_fn_803AB428_00000A7C:
     mr r18, r3
     mr r3, r23
     mr r4, r18
-    bl fn_80013DC4
+    bl actor_validateIndex
     addi r6, r1, 0x150
     lbz r0, 0x1c(r1)
     mr r7, r6
@@ -932,7 +932,7 @@ lbl_fn_803AB428_00000B34:
     stw r30, 0x4(r18)
     stw r30, 0x8(r18)
     lwz r4, 0x30(r1)
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r5, 0xc(r1)
     mr r3, r18
     stb r5, 0x8(r1)
@@ -1064,7 +1064,7 @@ lbl_fn_803AB428_00000D14:
     stw r30, 0x4(r18)
     stw r30, 0x8(r18)
     lwz r4, 0x30(r1)
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r5, 0x10(r1)
     mr r3, r18
     stb r5, 0x14(r1)
@@ -1234,7 +1234,7 @@ asm void fn_803AB96C(void)
     mr r27, r3
     mr r3, r28
     mr r4, r27
-    bl fn_80013DC4
+    bl actor_validateIndex
     addi r6, r1, 0x58
     lbz r0, 0x24(r1)
     mr r7, r6
@@ -1268,7 +1268,7 @@ lbl_fn_803AB96C_00000FF4:
     stw r31, 0x4(r28)
     stw r31, 0x8(r28)
     lwz r4, 0x38(r1)
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r5, 0x14(r1)
     mr r3, r28
     stb r5, 0x10(r1)
@@ -1421,7 +1421,7 @@ lbl_fn_803AB96C_00001228:
     stw r0, 0x4(r28)
     stw r0, 0x8(r28)
     lwz r4, 0x38(r1)
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r5, 0x18(r1)
     mr r3, r28
     stb r5, 0x1c(r1)

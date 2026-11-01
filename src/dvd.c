@@ -86,7 +86,7 @@ extern void fn_80602700(void);
 extern void fn_80602730(void);
 extern void fn_80602BB0(void);
 extern void fn_80602D20(void);
-extern void fn_8067E23C(void);
+extern void memcmp(void);
 
 /* External SDA variables */
 extern u32 DVDInitialized_8087FD3C;
@@ -1590,7 +1590,7 @@ lbl_138c:
     lwz r4, IDShouldBe_8087FD8C
     addi r3, r30, 0x4bc0
     li r5, 0x20
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     beq lbl_1440
     bl OSDisableInterrupts

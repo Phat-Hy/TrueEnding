@@ -36,7 +36,7 @@ extern void PSMTXMultVec(void);
 extern void PSVECNormalize(void);
 extern void PSVECDotProduct(void);
 extern void __GXSetVtxDesc(void);
-extern void fn_80613BB0(void);
+extern void GXClearVtxDesc(void);
 extern void fn_80614190(void);
 extern void GXSetTexCopySrc(void);
 extern void GXSetTexCopyDst(void);
@@ -633,7 +633,7 @@ lbl_fn_800AF544_0000065C:
     li r3, 0x2
     bl GXSetNumTevStages
     li r3, 0x3
-    bl fn_80613BB0
+    bl GXClearVtxDesc
     li r3, 0x1
     bl fn_80615D20
     li r3, 0x1
@@ -655,7 +655,7 @@ lbl_fn_800AF544_00000790:
     li r3, 0x1
     bl GXSetNumTevStages
     li r3, 0x2
-    bl fn_80613BB0
+    bl GXClearVtxDesc
     li r3, 0x1
     bl fn_80615D20
     li r3, 0x1
@@ -897,7 +897,7 @@ lbl_fn_800AF544_00000B20:
     blt lbl_fn_800AF544_00000AE4
 lbl_fn_800AF544_00000B2C:
     li r3, 0x2
-    bl fn_80613BB0
+    bl GXClearVtxDesc
     li r3, 0x0
     bl fn_80615D20
     li r3, 0x2
@@ -1589,7 +1589,7 @@ lbl_fn_800AFFEC_000014D0:
     rotlwi r0, r0, 2
     add r29, r0, r4
     divw r26, r30, r5
-    bl fn_80613BB0
+    bl GXClearVtxDesc
     li r3, 0x0
     bl fn_80615D20
     li r3, 0x1
@@ -1647,7 +1647,7 @@ lbl_fn_800AFFEC_000014D0:
     lwz r3, 0x84(r3)
     bl GXCopyTex
     li r3, 0x1
-    bl fn_80613BB0
+    bl GXClearVtxDesc
     li r3, 0x1
     bl fn_80615D20
     li r3, 0x1
@@ -2027,7 +2027,7 @@ asm void fn_800B0A70(void)
     li r9, 0x2
     bl fn_80615D50
     li r3, 0x1
-    bl fn_80613BB0
+    bl GXClearVtxDesc
     li r3, 0x0
     li r4, 0x1
     li r5, 0x4

@@ -5,7 +5,7 @@
 extern void dtor_80013D60(void);
 extern void dtor_80084684(void);
 extern void fn_8000EC88(void);
-extern void fn_80013DC4(void);
+extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_8003E4A4(void);
 extern void fn_8004203C(void);
@@ -800,7 +800,7 @@ asm void fn_80138528(void)
     mr r28, r3
     mr r3, r29
     mr r4, r28
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x1c(r1)
     mr r3, r29
     stb r0, 0x18(r1)
@@ -846,7 +846,7 @@ lbl_fn_80138528_00000A70:
     mr r28, r3
     mr r3, r30
     mr r4, r28
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0xc(r1)
     mr r3, r30
     stb r0, 0x8(r1)

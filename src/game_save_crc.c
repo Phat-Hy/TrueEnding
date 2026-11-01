@@ -12,18 +12,18 @@ extern void atn_Task_setActive(void);
 extern void fn_800DBF68(void);
 extern void str_findChar(void);
 extern void fn_800DD3FC(void);
-extern void fn_801F3FF8(void);
+extern void save_validateHeader(void);
 extern void fn_801F465C(void);
 extern void fn_801F8914(void);
 extern void fn_801F8928(void);
 extern void fn_801FEB9C(void);
-extern void fn_801FECE0(void);
-extern void fn_801FED24(void);
+extern void thread_findAndNotify(void);
+extern void thread_findAndNotifySlot(void);
 extern void fn_801FED70(void);
 extern void fn_801FEDBC(void);
-extern void fn_801FEE08(void);
+extern void thread_dispatchToQueue(void);
 extern void fn_801FEEFC(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
 
@@ -57,7 +57,7 @@ void fn_801F6A98(void);
 void fn_801F6C10(void);
 void fn_801F6C2C(void);
 void fn_801F6C38(void);
-void fn_801F6C80(void);
+void save_computeCrc32(void);
 void fn_801F6D7C(void);
 void fn_801F6E78(void);
 void fn_801F72D4(void);
@@ -293,7 +293,7 @@ lbl_fn_801F5E9C_0000032C:
     lbz r0, 0x1c(r1)
     mr r3, r29
     stb r0, 0x18(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r5, r30
     mr r6, r29
@@ -480,7 +480,7 @@ lbl_fn_801F60B8_000005C0:
     lbz r0, 0x8(r1)
     addi r3, r1, 0x70
     stb r0, 0xc(r1)
-    bl fn_80686A48
+    bl wcslen
     addi r6, r1, 0x70
     slwi r0, r3, 1
     mr r7, r6
@@ -797,7 +797,7 @@ lbl_fn_801F64D0_00000A00:
     mr r4, r29
     lwz r3, 0x24(r28)
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0xc(r1)
     li r4, 0x1
     bl atn_Task_setActive
@@ -1195,7 +1195,7 @@ lbl_fn_801F6A98_00000F38:
     lfs f1, 0x8(r29)
     lwz r4, 0x4(r29)
     addi r3, r3, 0x58
-    bl fn_801FECE0
+    bl thread_findAndNotify
     b lbl_fn_801F6A98_00000FC4
 lbl_fn_801F6A98_00000F50:
     lwz r3, 0x48(r31)
@@ -1204,7 +1204,7 @@ lbl_fn_801F6A98_00000F50:
     addi r3, r3, 0x58
     lwz r4, 0x4(r29)
     extsb r5, r5
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
     b lbl_fn_801F6A98_00000FC4
 lbl_fn_801F6A98_00000F70:
     lwz r3, 0x48(r31)
@@ -1253,7 +1253,7 @@ lbl_fn_801F6A98_00000FE8:
 lbl_fn_801F6A98_00001008:
     lwz r5, 0xc(r30)
 lbl_fn_801F6A98_0000100C:
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     addi r30, r30, 0x10
     addi r29, r29, 0x10
     addi r28, r28, 0x1
@@ -1315,7 +1315,7 @@ asm void fn_801F6C38(void)
     blr
 }
 
-asm void fn_801F6C80(void)
+asm void save_computeCrc32(void)
 {
     nofralloc
     stwu r1, -0x30(r1)
@@ -1341,45 +1341,45 @@ asm void fn_801F6C80(void)
     stfs f31, 0x10(r1)
     mtctr r8
     cmplwi r8, 0x0
-    ble lbl_fn_801F6C80_00001164
-lbl_fn_801F6C80_00001118:
+    ble lbl_save_computeCrc32_00001164
+lbl_save_computeCrc32_00001118:
     lbz r0, 0x5c(r7)
     extsb r0, r0
     cmpw r5, r0
-    bne lbl_fn_801F6C80_00001158
+    bne lbl_save_computeCrc32_00001158
     lbz r0, 0x5d(r7)
     extsb r0, r0
     cmpw r4, r0
-    bne lbl_fn_801F6C80_00001158
+    bne lbl_save_computeCrc32_00001158
     lwz r0, 0x60(r7)
     cmplw r3, r0
-    bne lbl_fn_801F6C80_00001158
+    bne lbl_save_computeCrc32_00001158
     mulli r0, r6, 0xc
     lwz r4, 0x10(r1)
     add r3, r31, r0
     stw r4, 0x64(r3)
-    b lbl_fn_801F6C80_0000119C
-lbl_fn_801F6C80_00001158:
+    b lbl_save_computeCrc32_0000119C
+lbl_save_computeCrc32_00001158:
     addi r7, r7, 0xc
     addi r6, r6, 0x1
-    bdnz lbl_fn_801F6C80_00001118
-lbl_fn_801F6C80_00001164:
+    bdnz lbl_save_computeCrc32_00001118
+lbl_save_computeCrc32_00001164:
     lwz r0, 0x58(r31)
     mulli r0, r0, 0xc
     add r0, r31, r0
     addic. r3, r0, 0x5c
-    beq lbl_fn_801F6C80_00001190
+    beq lbl_save_computeCrc32_00001190
     lwz r0, 0x8(r1)
     stw r0, 0x0(r3)
     lwz r0, 0xc(r1)
     stw r0, 0x4(r3)
     lwz r0, 0x10(r1)
     stw r0, 0x8(r3)
-lbl_fn_801F6C80_00001190:
+lbl_save_computeCrc32_00001190:
     lwz r3, 0x58(r31)
     addi r0, r3, 0x1
     stw r0, 0x58(r31)
-lbl_fn_801F6C80_0000119C:
+lbl_save_computeCrc32_0000119C:
     lwz r0, 0x34(r1)
     lfd f31, 0x28(r1)
     lwz r31, 0x24(r1)

@@ -12,7 +12,7 @@ extern void _savegpr_25(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_80013DC4(void);
+extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_8003E120(void);
 extern void fn_8006969C(void);
@@ -955,7 +955,7 @@ lbl_fn_805BEEC8_00000BAC:
     mr r31, r3
     addi r3, r29, 0x18
     mr r4, r31
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0xc(r1)
     cmpwi r30, 0x0
     stb r0, 0x8(r1)

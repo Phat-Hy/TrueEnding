@@ -8,7 +8,7 @@ extern void _savegpr_27(void);
 extern void scapi_initContext(void);
 extern void fn_80628150(void);
 extern void fn_80628160(void);
-extern void fn_80629810(void);
+extern void bta_sys_logEvent(void);
 extern void bta_sys_log(void);
 extern void fn_80629850(void);
 extern void fn_80629870(void);
@@ -225,7 +225,7 @@ asm void fn_8062DDA8(void)
     lis r4, lbl_807B3540@ha
     li r3, 0x504
     addi r4, r4, lbl_807B3540@l
-    bl fn_80629810
+    bl bta_sys_logEvent
 lbl_fn_8062DDA8_0000019C:
     lbz r0, 0x16(r31)
     cmplwi r0, 0xff
@@ -773,7 +773,7 @@ lbl_fn_8062E344_000008F4:
     blt lbl_fn_8062E344_0000090C
     addi r4, r30, 0x23c
     li r3, 0x504
-    bl fn_80629810
+    bl bta_sys_logEvent
 lbl_fn_8062E344_0000090C:
     lbz r4, 0x15(r31)
     addi r5, r31, 0x8
@@ -1166,7 +1166,7 @@ lbl_fn_8062E9C0_00000E60:
     lis r4, lbl_807B3840@ha
     li r3, 0x504
     addi r4, r4, lbl_807B3840@l
-    bl fn_80629810
+    bl bta_sys_logEvent
 lbl_fn_8062E9C0_00000E7C:
     lis r5, lbl_8081FDE8@ha
     addi r4, r1, 0x10
@@ -1707,7 +1707,7 @@ lbl_fn_8062F1C4_000015C8:
     lis r4, lbl_807B39E0@ha
     li r3, 0x500
     addi r4, r4, lbl_807B39E0@l
-    bl fn_80629810
+    bl bta_sys_logEvent
 lbl_fn_8062F1C4_000015E4:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
@@ -2504,7 +2504,7 @@ asm void fn_8062FC90(void)
     blt lbl_fn_8062FC90_00002054
     addi r4, r30, 0x1e4
     li r3, 0x504
-    bl fn_80629810
+    bl bta_sys_logEvent
 lbl_fn_8062FC90_00002054:
     lis r3, lbl_8081FDE8@ha
     li r29, 0x0
@@ -2543,7 +2543,7 @@ lbl_fn_8062FC90_000020BC:
     blt lbl_fn_8062FC90_000020E0
     addi r4, r30, 0x280
     li r3, 0x504
-    bl fn_80629810
+    bl bta_sys_logEvent
 lbl_fn_8062FC90_000020E0:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)

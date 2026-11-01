@@ -5,7 +5,7 @@
 extern void _restgpr_22(void);
 extern void _savegpr_22(void);
 extern void dtor_80084684(void);
-extern void fn_80013DC4(void);
+extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_8004D314(void);
 extern void fn_8004D388(void);
@@ -36,7 +36,7 @@ extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
-extern void fn_8067E23C(void);
+extern void memcmp(void);
 extern void fn_8068A850(void);
 extern void fn_8068AD58(void);
 extern void std_atan2(void);
@@ -1481,7 +1481,7 @@ lbl_fn_8013CB68_00001348:
     mr r22, r3
     mr r3, r23
     mr r4, r22
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x8(r1)
     mr r3, r23
     stb r0, 0xc(r1)
@@ -1556,7 +1556,7 @@ lbl_fn_8013CB68_00001490:
     lwz r5, 0x0(r4)
     mr r3, r6
     mr r4, r23
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_8013CB68_000014CC
     lwz r0, 0x1c(r1)
@@ -1625,7 +1625,7 @@ lbl_fn_8013CB68_00001580:
     lwz r5, 0x0(r4)
     mr r3, r6
     mr r4, r23
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_8013CB68_000015BC
     lwz r0, 0x2c(r1)
@@ -1694,7 +1694,7 @@ lbl_fn_8013CB68_00001670:
     lwz r5, 0x0(r4)
     mr r3, r6
     mr r4, r23
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_8013CB68_000016AC
     lwz r0, 0x3c(r1)
@@ -1763,7 +1763,7 @@ lbl_fn_8013CB68_00001760:
     lwz r5, 0x0(r4)
     mr r3, r6
     mr r4, r23
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_8013CB68_0000179C
     lwz r0, 0x4c(r1)
@@ -1832,7 +1832,7 @@ lbl_fn_8013CB68_00001850:
     lwz r5, 0x0(r4)
     mr r3, r6
     mr r4, r23
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_8013CB68_0000188C
     lwz r0, 0x5c(r1)
@@ -1901,7 +1901,7 @@ lbl_fn_8013CB68_00001940:
     lwz r5, 0x0(r4)
     mr r3, r6
     mr r4, r23
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_8013CB68_0000197C
     lwz r0, 0x6c(r1)

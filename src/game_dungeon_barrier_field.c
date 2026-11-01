@@ -13,7 +13,7 @@ extern void fn_8005B6E8(void);
 extern void talk_formatQuotedString(void);
 extern void skill_calculateDamage(void);
 extern void route_findNextWaypoint(void);
-extern void fn_80087994(void);
+extern void route_createSegment(void);
 extern void fn_80087E9C(void);
 extern void fn_80088724(void);
 extern void fn_8008937C(void);
@@ -1620,7 +1620,7 @@ lbl_fn_803ED92C_00001468:
     addi r5, r29, 0x9c
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r30
     addi r4, r31, 0xc3
     addi r5, r29, 0x58

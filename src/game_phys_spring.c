@@ -23,7 +23,7 @@ extern void fn_801346C8(void);
 extern void fn_8015E1B8(void);
 extern void fn_8016F3D0(void);
 extern void fn_801789D8(void);
-extern void fn_80211480(void);
+extern void event_findEntryById(void);
 extern void fn_80219558(void);
 extern void fn_8021E48C(void);
 extern void sound_initGlobalInstances(void);
@@ -1333,7 +1333,7 @@ lbl_fn_8010CF28_00001004:
     li r0, 0x1
     stb r0, 0x92e(r30)
     lwz r3, 0x1c(r1)
-    bl fn_80211480
+    bl event_findEntryById
     cmpwi r3, 0x0
     mr r6, r3
     beq lbl_fn_8010CF28_000010CC

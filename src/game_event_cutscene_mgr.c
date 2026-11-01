@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void __files(void);
 extern void dtor_80084684(void);
-extern void fn_80013DC4(void);
+extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_80041C0C(void);
 extern void fn_8004B338(void);
@@ -43,7 +43,7 @@ extern void fn_80473130(void);
 extern void atn_LoadHandle_destructor(void);
 extern void fn_80473F88(void);
 extern void printf(void);
-extern void fn_806823B0(void);
+extern void strcat(void);
 extern void strcmp(void);
 extern void strrchr(void);
 extern void strstr(void);
@@ -154,7 +154,7 @@ asm void fn_80475E14(void)
     stbx r0, r29, r30
     mr r3, r29
     addi r4, r4, 0x2
-    bl fn_806823B0
+    bl strcat
     b lbl_fn_80475E14_000000EC
 lbl_fn_80475E14_00000098:
     addi r31, r31, lbl_80755F30@l
@@ -177,7 +177,7 @@ lbl_fn_80475E14_00000098:
     stbx r0, r29, r30
     mr r3, r29
     addi r4, r31, 0x2
-    bl fn_806823B0
+    bl strcat
 lbl_fn_80475E14_000000EC:
     mr r3, r28
     bl fn_80473F88
@@ -479,7 +479,7 @@ asm void fn_80476220(void)
     mr r28, r3
     mr r3, r29
     mr r4, r28
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x1c(r1)
     mr r3, r29
     stb r0, 0x18(r1)

@@ -18,7 +18,7 @@ extern void fn_805D9BE0(void);
 extern void fn_805D9C70(void);
 extern void fn_805D9CC0(void);
 extern void __GXSetVtxDesc(void);
-extern void fn_80613BB0(void);
+extern void GXClearVtxDesc(void);
 extern void fn_80615C40(void);
 extern void fn_80615D20(void);
 extern void fn_80615D50(void);
@@ -55,7 +55,7 @@ extern void GXSetNumTevStages(void);
 extern void fn_80617D50(void);
 extern void GXLoadTexMtxImm(void);
 extern void fn_8061A100(void);
-extern void fn_8068236C(void);
+extern void strncpy(void);
 
 /* External data declarations */
 extern u8 lbl_80764558[];
@@ -626,7 +626,7 @@ lbl_fn_805D1A40_00000738:
     stb r31, 0x65(r1)
     lwz r0, 0x50(r26)
     extrwi r3, r0, 4, 8
-    bl fn_80613BB0
+    bl GXClearVtxDesc
     lwz r0, 0x50(r26)
     extrwi. r0, r0, 4, 8
     beq lbl_fn_805D1A40_0000080C
@@ -1700,11 +1700,11 @@ asm void fn_805D2B50(void)
     addi r4, r4, 0xc
     stb r0, 0xcc(r3)
     addi r3, r3, 0xb4
-    bl fn_8068236C
+    bl strncpy
     addi r3, r30, 0xc4
     addi r4, r31, 0x1c
     li r5, 0x8
-    bl fn_8068236C
+    bl strncpy
     lfs f0, 0x24(r31)
     mr r3, r30
     stfs f0, 0x2c(r30)

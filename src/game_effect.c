@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void __files(void);
 extern void dtor_80084684(void);
-extern void fn_80013DC4(void);
+extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_8001A464(void);
 extern void fn_8001A65C(void);
@@ -25,7 +25,7 @@ extern void fn_8001BF44(void);
 extern void fn_8001BF58(void);
 extern void fn_8001BF64(void);
 extern void mem_free(void);
-extern void fn_8067E23C(void);
+extern void memcmp(void);
 extern void printf(void);
 extern void rand(void);
 extern void abort(void);
@@ -5033,7 +5033,7 @@ lbl_fn_8003DD50_000044C4:
     mr r3, r25
     stw r0, 0x4(r25)
     stw r0, 0x8(r25)
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r5, 0xc(r1)
     mr r3, r25
     stb r5, 0x8(r1)
@@ -5531,7 +5531,7 @@ asm void fn_8003E4A4(void)
     mr r31, r3
     mr r3, r29
     mr r4, r31
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x8(r1)
     mr r3, r29
     stb r0, 0xc(r1)
@@ -5620,7 +5620,7 @@ lbl_fn_8003E530_00004CA8:
     addi r5, r1, 0x10
 lbl_fn_8003E530_00004CC0:
     lwz r5, 0x0(r5)
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_8003E530_00004CF4
     lwz r0, 0x8(r1)

@@ -16,13 +16,13 @@ extern void fn_800A56A8(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void str_findChar(void);
-extern void fn_80117228(void);
+extern void actor_spawnActorWithId(void);
 extern void fn_801D082C(void);
-extern void fn_801F3FF8(void);
-extern void fn_801FECE0(void);
+extern void save_validateHeader(void);
+extern void thread_findAndNotify(void);
 extern void fn_80201E78(void);
 extern void fn_802020B4(void);
-extern void fn_80202118(void);
+extern void profile_getMetricValue(void);
 extern void fn_80202CA4(void);
 extern void fn_80216544(void);
 extern void fn_80216700(void);
@@ -822,7 +822,7 @@ lbl_fn_805212C0_000009BC:
     beq lbl_fn_805212C0_000009F0
     addi r3, r1, 0x8
     li r4, 0x3
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -1455,19 +1455,19 @@ lbl_fn_80521D48_0000127C:
     lwzx r3, r3, r29
     cmpwi r3, 0x0
     beq lbl_fn_80521D48_000012C0
-    bl fn_80202118
+    bl profile_getMetricValue
     cmpwi r3, 0x0
     beq lbl_fn_80521D48_000012C0
     lwz r3, 0x50(r27)
     lwzx r3, r3, r29
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r31, r3
     mr r3, r30
     bl str_findChar
     fmr f1, f31
     mr r4, r3
     addi r3, r31, 0x58
-    bl fn_801FECE0
+    bl thread_findAndNotify
 lbl_fn_80521D48_000012C0:
     addi r29, r29, 0x40
     addi r28, r28, 0x1
@@ -1999,21 +1999,21 @@ lbl_fn_80521E84_00001980:
     li r5, 0x0
     stfs f0, 0x150(r31)
     stw r30, 0x170(r31)
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x174(r31)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r31
     addi r4, r29, 0x1e5
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x178(r31)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r31
     addi r4, r29, 0x206
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x17c(r31)
     li r4, 0x1
     bl atn_Task_setActive

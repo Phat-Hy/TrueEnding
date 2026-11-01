@@ -5,7 +5,7 @@
 extern void _restgpr_14(void);
 extern void _savegpr_14(void);
 extern void dtor_80084684(void);
-extern void fn_80013DC4(void);
+extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_8006AC08(void);
 extern void fn_8007A994(void);
@@ -24,7 +24,7 @@ extern void atn_LoadHandle_getStatus(void);
 extern void fn_80478198(void);
 extern void fn_80616250(void);
 extern void fn_80616360(void);
-extern void fn_8067E23C(void);
+extern void memcmp(void);
 extern void strncmp(void);
 extern void fn_80695A50(void);
 extern u32 strlen(const char* str);
@@ -415,7 +415,7 @@ lbl_fn_8007B260_0000048C:
     mr r22, r3
     mr r3, r28
     mr r4, r22
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0xc(r1)
     mr r3, r28
     stb r0, 0x8(r1)
@@ -474,7 +474,7 @@ lbl_fn_8007B260_0000055C:
     addi r5, r1, 0x18
 lbl_fn_8007B260_00000578:
     lwz r5, 0x0(r5)
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_8007B260_000005AC
     lwz r0, 0x10(r1)

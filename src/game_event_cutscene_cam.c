@@ -45,7 +45,7 @@ extern void fn_805BDD78(void);
 extern void fn_80615FF0(void);
 extern void printf(void);
 extern void wmemcpy(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 extern void abort(void);
 extern void fn_8068AD58(void);
 extern void runtime_registerStaticObject(void);
@@ -1443,7 +1443,7 @@ lbl_fn_804788BC_00001108:
     cmplw r25, r0
     beq lbl_fn_804788BC_00001148
     mr r3, r25
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r4, r25
     addi r3, r29, 0x4

@@ -49,7 +49,7 @@ extern void fn_8054A340(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void fn_80622180(void);
-extern void fn_8067E23C(void);
+extern void memcmp(void);
 extern void rand(void);
 extern void fn_806958E0(void);
 
@@ -185,7 +185,7 @@ lbl_fn_803B9638_00000110:
     mr r5, r25
     addi r4, r31, 0x160
     subi r3, r3, 0xe00
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_803B9638_00000160
     li r26, 0x0

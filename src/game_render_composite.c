@@ -17,7 +17,7 @@ extern void mem_alloc(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_80087994(void);
+extern void route_createSegment(void);
 extern void fn_8008937C(void);
 extern void fn_800897D8(void);
 extern void fn_8008BBD8(void);
@@ -1517,7 +1517,7 @@ lbl_fn_802BABCC_000013B8:
     li r6, 0x0
     addi r4, r4, 0x59
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     li r0, 0xa
     lfs f2, lbl_80884184
     lfs f1, lbl_80884188

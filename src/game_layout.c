@@ -17,7 +17,7 @@ extern void fn_800C0508(void);
 extern void fn_800C1424(void);
 extern void PSMTXTrans(void);
 extern void __GXSetVtxDesc(void);
-extern void fn_80613BB0(void);
+extern void GXClearVtxDesc(void);
 extern void fn_80614190(void);
 extern void GXSetTexCopySrc(void);
 extern void GXSetTexCopyDst(void);
@@ -222,7 +222,7 @@ lbl_layout_drawPane_0000009C:
     li r9, 0x2
     bl fn_80615D50
     li r3, 0x5
-    bl fn_80613BB0
+    bl GXClearVtxDesc
     li r3, 0x0
     li r4, 0x1
     li r5, 0x4
@@ -672,7 +672,7 @@ asm void fn_800A9E64(void)
     bl GXCopyTex
     bl fn_80614190
     li r3, 0x1
-    bl fn_80613BB0
+    bl GXClearVtxDesc
     li r3, 0x0
     bl fn_80615D20
     li r3, 0x1
@@ -724,7 +724,7 @@ asm void fn_800A9E64(void)
     bl GXCopyTex
     bl fn_80614190
     li r3, 0x1
-    bl fn_80613BB0
+    bl GXClearVtxDesc
     li r3, 0x0
     bl fn_80615D20
     li r3, 0x1
@@ -906,7 +906,7 @@ lbl_fn_800A9E64_00000A28:
     li r6, 0x3
     bl fn_80617D50
     li r3, 0x1
-    bl fn_80613BB0
+    bl GXClearVtxDesc
     li r3, 0x1
     bl fn_80615D20
     li r3, 0x1
@@ -1595,7 +1595,7 @@ asm void fn_800AAE2C(void)
     bl fn_800C0508
     bl GXDrawDone
     li r3, 0x1
-    bl fn_80613BB0
+    bl GXClearVtxDesc
     li r3, 0x0
     bl fn_80615D20
     li r3, 0x4

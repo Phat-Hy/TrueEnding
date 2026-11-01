@@ -36,14 +36,14 @@ extern void fn_800EC204(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800FBA9C(void);
 extern void fn_800FBE70(void);
-extern void fn_80117228(void);
+extern void actor_spawnActorWithId(void);
 extern void fn_80121F00(void);
 extern void fn_8013C504(void);
 extern void fn_80158E1C(void);
 extern void actor_setState(void);
-extern void fn_801F3FF8(void);
+extern void save_validateHeader(void);
 extern void fn_801F64D0(void);
-extern void fn_801FECE0(void);
+extern void thread_findAndNotify(void);
 extern void fn_802375C4(void);
 extern void res_MsgHandle_unload(void);
 extern void res_findResourceSlot(void);
@@ -1363,14 +1363,14 @@ asm void fn_80468FBC(void)
     stw r0, 0xa4(r28)
     stw r0, 0xa8(r28)
     stw r0, 0xac(r28)
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x50(r28)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r28
     addi r4, r31, 0x20
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x54(r28)
     li r4, 0x1
     bl atn_Task_setActive
@@ -1394,14 +1394,14 @@ lbl_fn_80468FBC_0000112C:
     addi r31, r31, lbl_80755394@l
     li r5, 0x0
     addi r4, r31, 0x63
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x84(r28)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r28
     addi r4, r31, 0x85
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x88(r28)
     li r4, 0x1
     bl atn_Task_setActive
@@ -1747,7 +1747,7 @@ lbl_fn_80469494_00001658:
     beq lbl_fn_80469494_000016E8
     addi r3, r1, 0x8
     li r4, 0x2
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -1882,7 +1882,7 @@ asm void fn_80469650(void)
     lfs f0, lbl_80886EA4
     fsubs f1, f1, f2
     fdivs f1, f1, f0
-    bl fn_801FECE0
+    bl thread_findAndNotify
     b lbl_fn_80469650_000018F0
 lbl_fn_80469650_00001878:
     cmpwi r29, 0x3
@@ -1903,7 +1903,7 @@ lbl_fn_80469650_00001878:
     lfs f0, lbl_80886EA4
     fsubs f1, f1, f2
     fdivs f1, f1, f0
-    bl fn_801FECE0
+    bl thread_findAndNotify
     b lbl_fn_80469650_000018F0
 lbl_fn_80469650_000018C8:
     lwz r4, 0x84(r30)
@@ -1915,7 +1915,7 @@ lbl_fn_80469650_000018C8:
     lfs f1, lbl_80886E8C
     mr r4, r3
     mr r3, r28
-    bl fn_801FECE0
+    bl thread_findAndNotify
 lbl_fn_80469650_000018F0:
     cmpwi r31, 0x7
     ble lbl_fn_80469650_00001944
@@ -1936,7 +1936,7 @@ lbl_fn_80469650_000018F0:
     lfs f0, lbl_80886EA4
     fsubs f1, f1, f2
     fdivs f1, f1, f0
-    bl fn_801FECE0
+    bl thread_findAndNotify
     b lbl_fn_80469650_00001A08
 lbl_fn_80469650_00001944:
     cmpwi r31, 0x3
@@ -1957,7 +1957,7 @@ lbl_fn_80469650_00001944:
     lfs f0, lbl_80886EA4
     fsubs f1, f1, f2
     fdivs f1, f1, f0
-    bl fn_801FECE0
+    bl thread_findAndNotify
     b lbl_fn_80469650_00001A08
 lbl_fn_80469650_00001994:
     lwz r4, 0x88(r30)
@@ -1969,7 +1969,7 @@ lbl_fn_80469650_00001994:
     lfs f1, lbl_80886E8C
     mr r4, r3
     mr r3, r28
-    bl fn_801FECE0
+    bl thread_findAndNotify
     b lbl_fn_80469650_00001A08
 lbl_fn_80469650_000019C0:
     lwz r4, 0x84(r30)
@@ -1981,7 +1981,7 @@ lbl_fn_80469650_000019C0:
     lfs f1, lbl_80886E88
     mr r4, r3
     mr r3, r28
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lwz r4, 0x88(r30)
     addi r3, r31, 0x118
     addi r28, r4, 0x58
@@ -1989,7 +1989,7 @@ lbl_fn_80469650_000019C0:
     lfs f1, lbl_80886E88
     mr r4, r3
     mr r3, r28
-    bl fn_801FECE0
+    bl thread_findAndNotify
 lbl_fn_80469650_00001A08:
     lwz r0, 0x90(r30)
     cmpwi r0, 0x2

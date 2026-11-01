@@ -12,7 +12,7 @@ extern void mem_realloc(void);
 extern void fn_80084A78(void);
 extern void mem_getAllocSize(void);
 extern void route_interpolatePath(void);
-extern void fn_80087994(void);
+extern void route_createSegment(void);
 extern void fn_80087E9C(void);
 extern void fn_800B6218(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
@@ -2157,7 +2157,7 @@ asm void fn_800C2E30(void)
     mr r28, r3
     addi r5, r28, 0x120
     mr r3, r29
-    bl fn_80087994
+    bl route_createSegment
     lis r31, fn_800C2EE0@ha
     lfs f1, lbl_8088111C
     lfs f2, lbl_808810EC

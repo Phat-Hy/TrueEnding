@@ -14,7 +14,7 @@ extern void fn_80058078(void);
 extern void fn_800580BC(void);
 extern void fn_800588FC(void);
 extern void talk_parseQuotedString(void);
-extern void fn_8005B5F8(void);
+extern void talk_scanQuotedString(void);
 extern void fn_8005B6E8(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
@@ -1014,7 +1014,7 @@ lbl_fn_80256384_00000C78:
     stw r3, 0x1514(r22)
 lbl_fn_80256384_00000CA0:
     addi r3, r1, 0x38
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_80256384_00000540
     addi r11, r1, 0x6b0

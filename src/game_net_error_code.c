@@ -16,7 +16,7 @@ extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void route_interpolatePath(void);
-extern void fn_80087994(void);
+extern void route_createSegment(void);
 extern void fn_80087BB4(void);
 extern void fn_80087E9C(void);
 extern void fn_80088724(void);
@@ -29,20 +29,20 @@ extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
 extern void str_findChar(void);
 extern void fn_80116FC0(void);
-extern void fn_80117228(void);
+extern void actor_spawnActorWithId(void);
 extern void fn_801D082C(void);
-extern void fn_801F3FF8(void);
-extern void fn_801F6C80(void);
+extern void save_validateHeader(void);
+extern void save_computeCrc32(void);
 extern void fn_801F7590(void);
 extern void fn_801F837C(void);
 extern void fn_801F8598(void);
-extern void fn_801FECE0(void);
+extern void thread_findAndNotify(void);
 extern void fn_80201E78(void);
-extern void fn_80202118(void);
+extern void profile_getMetricValue(void);
 extern void fn_80202A6C(void);
-extern void fn_80202D00(void);
-extern void fn_80206C50(void);
-extern void fn_80211480(void);
+extern void perf_getMetricValue(void);
+extern void assert_formatLocation(void);
+extern void event_findEntryById(void);
 extern void fn_8021175C(void);
 extern void fn_80237518(void);
 extern void fn_802375C4(void);
@@ -169,7 +169,7 @@ asm void fn_8051B168(void)
 lbl_fn_8051B168_00000034:
     add r3, r28, r27
     lwz r3, 0xf4(r3)
-    bl fn_80202D00
+    bl perf_getMetricValue
     cmpwi r3, 0x0
     mr r29, r3
     beq lbl_fn_8051B168_000001A8
@@ -183,7 +183,7 @@ lbl_fn_8051B168_00000034:
     lwz r3, 0xd4(r28)
     add r26, r3, r0
     lwzx r3, r3, r0
-    bl fn_80211480
+    bl event_findEntryById
     cmpwi r3, 0x0
     mr r22, r3
     beq lbl_fn_8051B168_00000194
@@ -223,7 +223,7 @@ lbl_fn_8051B168_000000D0:
     b lbl_fn_8051B168_00000160
 lbl_fn_8051B168_00000104:
     lwz r3, 0x4(r3)
-    bl fn_80206C50
+    bl assert_formatLocation
     mr r26, r3
     mr r3, r29
     addi r4, r24, 0x157
@@ -401,7 +401,7 @@ lbl_fn_8051B440_00000338:
 lbl_fn_8051B440_0000036C:
     addi r3, r1, 0xc
     li r4, 0x1
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0xc
     li r4, -0x1
     bl ref_releaseHandle
@@ -418,7 +418,7 @@ lbl_fn_8051B440_00000388:
     bl fn_8052DEF0
     addi r3, r1, 0x8
     li r4, 0x8
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -471,7 +471,7 @@ lbl_fn_8051B548_0000043C:
     bl fn_8051B168
     addi r3, r1, 0x10
     li r4, 0x2
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle
@@ -485,7 +485,7 @@ lbl_fn_8051B548_00000480:
     beq lbl_fn_8051B548_00000520
     addi r3, r1, 0xc
     li r4, 0x12
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0xc
     li r4, -0x1
     bl ref_releaseHandle
@@ -526,7 +526,7 @@ lbl_fn_8051B548_00000520:
     beq lbl_fn_8051B548_000005BC
     addi r3, r1, 0x8
     li r4, 0x12
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -569,7 +569,7 @@ lbl_fn_8051B548_000005BC:
     cmpwi r0, 0x0
     beq lbl_fn_8051B548_0000060C
     lwz r3, 0x0(r30)
-    bl fn_80211480
+    bl event_findEntryById
     cmpwi r3, 0x0
     mr r4, r3
     beq lbl_fn_8051B548_0000062C
@@ -631,34 +631,34 @@ lbl_fn_8051B7CC_0000069C:
     lwz r3, 0x0(r3)
     cmpwi r3, 0x0
     beq lbl_fn_8051B7CC_00000728
-    bl fn_80202D00
+    bl perf_getMetricValue
     cmpwi r3, 0x0
     beq lbl_fn_8051B7CC_00000728
     lwz r3, 0x50(r26)
     lwzx r3, r3, r28
-    bl fn_80202D00
+    bl perf_getMetricValue
     fmr f1, f31
     addi r4, r30, 0x167
-    bl fn_801F6C80
+    bl save_computeCrc32
     b lbl_fn_8051B7CC_00000728
 lbl_fn_8051B7CC_000006E4:
     lwz r3, 0x0(r3)
     cmpwi r3, 0x0
     beq lbl_fn_8051B7CC_00000728
-    bl fn_80202118
+    bl profile_getMetricValue
     cmpwi r3, 0x0
     beq lbl_fn_8051B7CC_00000728
     lwz r3, 0x50(r26)
     addi r29, r30, 0x167
     lwzx r3, r3, r28
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r31, r3
     mr r3, r29
     bl str_findChar
     fmr f1, f31
     mr r4, r3
     addi r3, r31, 0x58
-    bl fn_801FECE0
+    bl thread_findAndNotify
 lbl_fn_8051B7CC_00000728:
     addi r28, r28, 0x40
     addi r27, r27, 0x1
@@ -667,21 +667,21 @@ lbl_fn_8051B7CC_00000730:
     cmpw r27, r0
     blt lbl_fn_8051B7CC_0000069C
     lwz r3, 0x11c(r26)
-    bl fn_80202118
+    bl profile_getMetricValue
     cmpwi r3, 0x0
     beq lbl_fn_8051B7CC_0000077C
     lis r4, lbl_8075BB80@ha
     lwz r3, 0x11c(r26)
     addi r4, r4, lbl_8075BB80@l
     addi r29, r4, 0x167
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r31, r3
     mr r3, r29
     bl str_findChar
     fmr f1, f31
     mr r4, r3
     addi r3, r31, 0x58
-    bl fn_801FECE0
+    bl thread_findAndNotify
 lbl_fn_8051B7CC_0000077C:
     addi r11, r1, 0x20
     psq_l f31, 0x28(r1), 0, 0
@@ -1202,7 +1202,7 @@ lbl_fn_8051B988_00000EFC:
     addi r4, r4, lbl_8075BF40@l
     li r5, 0x0
     addi r4, r4, 0x31
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x1994(r31)
     li r4, 0x1
     bl atn_Task_setActive
@@ -1261,14 +1261,14 @@ lbl_fn_8051B988_00000F38:
     addi r30, r30, lbl_8075BF40@l
     li r5, 0x0
     addi r4, r30, 0x4d
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x18e8(r31)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r31
     addi r4, r30, 0x64
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x18ec(r31)
     li r4, 0x1
     bl atn_Task_setActive
@@ -1285,7 +1285,7 @@ lbl_fn_8051B988_00000F38:
     psq_st f1, 0x0(r6), 0, 0
     stfs f2, 0x18f8(r31)
     stfs f2, 0x18fc(r31)
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x1904(r31)
     li r4, 0x1
     bl atn_Task_setActive
@@ -1481,7 +1481,7 @@ lbl_fn_8051C3E0_000012B4:
     addi r5, r28, 0x48a8
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     lfs f1, lbl_80887970
     mr r3, r30
     lfs f2, lbl_80887974

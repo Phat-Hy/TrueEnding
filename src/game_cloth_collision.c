@@ -7,7 +7,7 @@ extern void _restgpr_15(void);
 extern void _savegpr_15(void);
 extern void dtor_80084684(void);
 extern void talk_parseQuotedString(void);
-extern void fn_8005B5F8(void);
+extern void talk_scanQuotedString(void);
 extern void fn_8005B6E8(void);
 extern void mem_free(void);
 extern void fn_80092954(void);
@@ -818,7 +818,7 @@ lbl_fn_8027CF28_00000A14:
     bne lbl_fn_8027CF28_0000078C
 lbl_fn_8027CF28_00000A1C:
     addi r3, r1, 0x48
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_8027CF28_00000320
 lbl_fn_8027CF28_00000A2C:

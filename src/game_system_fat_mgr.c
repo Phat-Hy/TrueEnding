@@ -9,12 +9,12 @@ extern void _savegpr_27(void);
 extern void item_useConsumable(void);
 extern void fn_8004ED34(void);
 extern void talk_parseQuotedString(void);
-extern void fn_8005B5F8(void);
+extern void talk_scanQuotedString(void);
 extern void fn_8005B6E8(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void fn_80087858(void);
-extern void fn_80087994(void);
+extern void route_createSegment(void);
 extern void fn_80087E9C(void);
 extern void fn_8008937C(void);
 extern void str_skipWhitespace(void);
@@ -532,7 +532,7 @@ lbl_fn_8037E12C_00000650:
     stw r28, 0x424(r24)
 lbl_fn_8037E12C_00000660:
     addi r3, r1, 0x170
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_8037E12C_0000014C
     cmpwi r26, 0x0
@@ -788,7 +788,7 @@ lbl_fn_8037E9E0_0000090C:
     addi r5, r29, 0x7f0
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     lfs f1, lbl_808858E8
     mr r3, r30
     lfs f2, lbl_8088599C
@@ -887,7 +887,7 @@ lbl_fn_8037E9E0_0000090C:
     addi r5, r29, 0x518
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)

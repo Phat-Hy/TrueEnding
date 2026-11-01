@@ -24,7 +24,7 @@ extern void dialog_renderWindow(void);
 extern void fn_8014DEE4(void);
 extern void fn_8016EB48(void);
 extern void fn_801E9EA4(void);
-extern void fn_801FECE0(void);
+extern void thread_findAndNotify(void);
 extern void fn_8035E7CC(void);
 extern void fn_80360B00(void);
 extern void fn_8036CFA4(void);
@@ -1296,7 +1296,7 @@ lbl_world_Manager_postUpdate_000010E0:
     lfs f1, lbl_8088570C
     mr r4, r3
     mr r3, r29
-    bl fn_801FECE0
+    bl thread_findAndNotify
     li r29, 0x1
     b lbl_world_Manager_postUpdate_000015C8
     lwz r4, lbl_8087F490
@@ -1353,7 +1353,7 @@ lbl_world_Manager_postUpdate_000011D8:
     lfs f1, lbl_8088570C
     mr r4, r3
     mr r3, r29
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lwz r3, lbl_8087F9F8
     li r29, 0x1
     cmpwi r3, 0x0

@@ -22,7 +22,7 @@ extern void fn_806070F0(void);
 extern void fn_80607230(void);
 extern void fn_8061C8A0(void);
 extern void IOS_IoctlvAsync(void);
-extern void fn_8068236C(void);
+extern void strncpy(void);
 extern void fn_80696324(void);
 extern void lowCallback_806003F0(u32);
 
@@ -550,7 +550,7 @@ lbl_DVDLowInit_5f8:
     lwz r3, lbl_8087FDD0
     la r4, lbl_8087E800
     li r5, 0x20
-    bl fn_8068236C
+    bl strncpy
     lwz r3, lbl_8087FDD0
     li r4, 0x0
     bl IOS_Open

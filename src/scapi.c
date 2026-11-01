@@ -96,7 +96,7 @@ void fn_806267F0(void);
 void fn_80626AA0(void);
 void scapi_initContext(void);
 void fn_80626C60(void);
-void fn_80626D50(void);
+void scapi_cleanupContext(void);
 void fn_80626EC0(void);
 void fn_80626F10(void);
 void fn_806270D0(void);
@@ -2804,7 +2804,7 @@ lbl_fn_80626C60_000023B0:
     blr
 }
 
-asm void fn_80626D50(void)
+asm void scapi_cleanupContext(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -2814,32 +2814,32 @@ asm void fn_80626D50(void)
     stw r0, 0x14(r1)
     addi r5, r5, lbl_807B3168@l
     stw r31, 0xc(r1)
-    beq lbl_fn_80626D50_00002468
+    beq lbl_scapi_cleanupContext_00002468
     subi r31, r3, 0x8
     clrlwi. r0, r31, 31
-    beq lbl_fn_80626D50_00002404
+    beq lbl_scapi_cleanupContext_00002404
     li r0, 0x0
-    b lbl_fn_80626D50_00002430
-lbl_fn_80626D50_00002404:
+    b lbl_scapi_cleanupContext_00002430
+lbl_scapi_cleanupContext_00002404:
     lbz r0, 0x4(r31)
     cmplwi r0, 0x9
-    bge lbl_fn_80626D50_0000242C
+    bge lbl_scapi_cleanupContext_0000242C
     lis r4, lbl_807F3760@ha
     clrlslwi r0, r0, 24, 4
     addi r4, r4, lbl_807F3760@l
     addis r4, r4, 0x3
     add r4, r4, r0
     lhz r0, -0x7618(r4)
-    b lbl_fn_80626D50_00002430
-lbl_fn_80626D50_0000242C:
+    b lbl_scapi_cleanupContext_00002430
+lbl_scapi_cleanupContext_0000242C:
     li r0, 0x0
-lbl_fn_80626D50_00002430:
+lbl_scapi_cleanupContext_00002430:
     add r4, r3, r0
     clrlwi. r0, r4, 31
-    beq lbl_fn_80626D50_00002444
+    beq lbl_scapi_cleanupContext_00002444
     li r0, 0x1
-    b lbl_fn_80626D50_00002460
-lbl_fn_80626D50_00002444:
+    b lbl_scapi_cleanupContext_00002460
+lbl_scapi_cleanupContext_00002444:
     lis r3, 0xddbb
     lwz r4, 0x0(r4)
     subi r0, r3, 0x2246
@@ -2847,37 +2847,37 @@ lbl_fn_80626D50_00002444:
     subf r0, r0, r4
     or r0, r3, r0
     srwi r0, r0, 31
-lbl_fn_80626D50_00002460:
+lbl_scapi_cleanupContext_00002460:
     clrlwi. r0, r0, 24
-    beq lbl_fn_80626D50_00002480
-lbl_fn_80626D50_00002468:
+    beq lbl_scapi_cleanupContext_00002480
+lbl_scapi_cleanupContext_00002468:
     lis r3, 0x1
     addi r4, r5, 0x30
     subi r0, r3, 0x1
     clrlwi r3, r0, 16
     bl fn_806282C0
-    b lbl_fn_80626D50_0000252C
-lbl_fn_80626D50_00002480:
+    b lbl_scapi_cleanupContext_0000252C
+lbl_scapi_cleanupContext_00002480:
     lbz r0, 0x6(r31)
     cmplwi r0, 0x1
-    beq lbl_fn_80626D50_000024A4
+    beq lbl_scapi_cleanupContext_000024A4
     lis r3, 0x1
     addi r4, r5, 0x48
     subi r0, r3, 0x4
     clrlwi r3, r0, 16
     bl fn_806282C0
-    b lbl_fn_80626D50_0000252C
-lbl_fn_80626D50_000024A4:
+    b lbl_scapi_cleanupContext_0000252C
+lbl_scapi_cleanupContext_000024A4:
     lbz r0, 0x4(r31)
     cmplwi r0, 0x9
-    blt lbl_fn_80626D50_000024C8
+    blt lbl_scapi_cleanupContext_000024C8
     lis r3, 0x1
     addi r4, r5, 0x5c
     subi r0, r3, 0x3
     clrlwi r3, r0, 16
     bl fn_806282C0
-    b lbl_fn_80626D50_0000252C
-lbl_fn_80626D50_000024C8:
+    b lbl_scapi_cleanupContext_0000252C
+lbl_scapi_cleanupContext_000024C8:
     bl fn_80628270
     lbz r0, 0x4(r31)
     lis r3, lbl_807F3760@ha
@@ -2887,12 +2887,12 @@ lbl_fn_80626D50_000024C8:
     add r4, r3, r0
     lwz r3, -0x761c(r4)
     cmpwi r3, 0x0
-    beq lbl_fn_80626D50_000024F8
+    beq lbl_scapi_cleanupContext_000024F8
     stw r31, 0x0(r3)
-    b lbl_fn_80626D50_000024FC
-lbl_fn_80626D50_000024F8:
+    b lbl_scapi_cleanupContext_000024FC
+lbl_scapi_cleanupContext_000024F8:
     stw r31, -0x7620(r4)
-lbl_fn_80626D50_000024FC:
+lbl_scapi_cleanupContext_000024FC:
     stw r31, -0x761c(r4)
     li r3, 0x0
     li r0, 0xf0
@@ -2901,12 +2901,12 @@ lbl_fn_80626D50_000024FC:
     stb r0, 0x5(r31)
     lhz r3, -0x7614(r4)
     cmpwi r3, 0x0
-    beq lbl_fn_80626D50_00002528
+    beq lbl_scapi_cleanupContext_00002528
     subi r0, r3, 0x1
     sth r0, -0x7614(r4)
-lbl_fn_80626D50_00002528:
+lbl_scapi_cleanupContext_00002528:
     bl fn_80628240
-lbl_fn_80626D50_0000252C:
+lbl_scapi_cleanupContext_0000252C:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0
@@ -2972,7 +2972,7 @@ lbl_fn_80626F10_000025F0:
     clrlwi r3, r0, 16
     bl fn_806282C0
     mr r3, r31
-    bl fn_80626D50
+    bl scapi_cleanupContext
     b lbl_fn_80626F10_0000272C
 lbl_fn_80626F10_00002610:
     subi r31, r5, 0x8

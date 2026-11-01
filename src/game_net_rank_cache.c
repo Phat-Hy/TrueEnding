@@ -14,11 +14,11 @@ extern void fn_800A58D0(void);
 extern void ref_releaseHandle(void);
 extern void fn_80116EB8(void);
 extern void fn_80116FC0(void);
-extern void fn_80117228(void);
+extern void actor_spawnActorWithId(void);
 extern void fn_801F6C2C(void);
-extern void fn_801F6C80(void);
+extern void save_computeCrc32(void);
 extern void fn_801F837C(void);
-extern void fn_80202D00(void);
+extern void perf_getMetricValue(void);
 extern void fn_803750E4(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_804A3C24(void);
@@ -279,7 +279,7 @@ lbl_fn_80524824_00000268:
     bl fn_80116EB8
     mr r29, r3
     lwz r3, 0x18(r26)
-    bl fn_80202D00
+    bl perf_getMetricValue
     mr r5, r29
     addi r4, r31, 0x24b
     bl fn_801F837C
@@ -669,7 +669,7 @@ lbl_fn_80524E84_000006E8:
     bl fn_805256C8
     addi r3, r1, 0x18
     li r4, 0x1
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x18
     li r4, -0x1
     bl ref_releaseHandle
@@ -707,7 +707,7 @@ lbl_fn_80524E84_00000874:
     bl fn_805256C8
     addi r3, r1, 0x14
     li r4, 0x2
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x14
     li r4, -0x1
     bl ref_releaseHandle
@@ -724,7 +724,7 @@ lbl_fn_80524E84_00000874:
     bl fn_8052293C
     addi r3, r1, 0xc
     li r4, 0x1
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0xc
     li r4, -0x1
     bl ref_releaseHandle
@@ -736,7 +736,7 @@ lbl_fn_80524E84_00000874:
 lbl_fn_80524E84_0000090C:
     addi r3, r1, 0x10
     li r4, 0x2
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle
@@ -764,7 +764,7 @@ lbl_fn_80524E84_00000934:
     bl fn_805256C8
     addi r3, r1, 0x8
     li r4, 0x1
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -1272,7 +1272,7 @@ lbl_fn_80525804_000010A8:
     bl fn_8052DEF0
     addi r3, r1, 0xc
     li r4, 0x8
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0xc
     li r4, -0x1
     bl ref_releaseHandle
@@ -1338,7 +1338,7 @@ lbl_fn_80525804_000011A4:
 lbl_fn_80525804_000011B4:
     addi r3, r1, 0x8
     li r4, 0x1
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -1439,7 +1439,7 @@ lbl_fn_80525A0C_00001314:
     lwz r3, 0x18(r30)
     cmpwi r3, 0x0
     beq lbl_fn_80525A0C_00001598
-    bl fn_80202D00
+    bl perf_getMetricValue
     cmpwi r3, 0x0
     beq lbl_fn_80525A0C_00001598
     lwz r3, 0x0(r30)
@@ -1450,7 +1450,7 @@ lbl_fn_80525A0C_00001314:
     lwz r28, 0x8(r30)
     cmpwi r3, 0x0
     beq lbl_fn_80525A0C_00001598
-    bl fn_80202D00
+    bl perf_getMetricValue
     cmpwi r3, 0x0
     beq lbl_fn_80525A0C_00001598
     lwz r3, 0x0(r30)
@@ -1458,7 +1458,7 @@ lbl_fn_80525A0C_00001314:
     cmplwi r0, 0x1
     ble lbl_fn_80525A0C_00001598
     lwz r3, 0x18(r30)
-    bl fn_80202D00
+    bl perf_getMetricValue
     xoris r4, r28, 0x8000
     lis r0, 0x4330
     stw r4, 0x14(r1)
@@ -1470,16 +1470,16 @@ lbl_fn_80525A0C_00001314:
     addi r4, r4, 0x35d
     lfd f0, 0x10(r1)
     fsubs f1, f0, f1
-    bl fn_801F6C80
+    bl save_computeCrc32
     b lbl_fn_80525A0C_00001598
 lbl_fn_80525A0C_000013A4:
     lwz r3, 0x18(r30)
-    bl fn_80202D00
+    bl perf_getMetricValue
     mr r28, r3
     bl fn_801F6C2C
     stfs f1, 0x50(r28)
     lwz r3, 0x18(r30)
-    bl fn_80202D00
+    bl perf_getMetricValue
     lfs f0, lbl_808879FC
     stfs f0, 0x54(r3)
     b lbl_fn_80525A0C_00001598
@@ -1500,7 +1500,7 @@ lbl_fn_80525A0C_000013FC:
     lwz r3, 0x18(r30)
     cmpwi r3, 0x0
     beq lbl_fn_80525A0C_00001598
-    bl fn_80202D00
+    bl perf_getMetricValue
     cmpwi r3, 0x0
     beq lbl_fn_80525A0C_00001598
     lwz r3, 0x0(r30)
@@ -1511,7 +1511,7 @@ lbl_fn_80525A0C_000013FC:
     lwz r28, 0x8(r30)
     cmpwi r3, 0x0
     beq lbl_fn_80525A0C_00001598
-    bl fn_80202D00
+    bl perf_getMetricValue
     cmpwi r3, 0x0
     beq lbl_fn_80525A0C_00001598
     lwz r3, 0x0(r30)
@@ -1519,7 +1519,7 @@ lbl_fn_80525A0C_000013FC:
     cmplwi r0, 0x1
     ble lbl_fn_80525A0C_00001598
     lwz r3, 0x18(r30)
-    bl fn_80202D00
+    bl perf_getMetricValue
     xoris r4, r28, 0x8000
     lis r0, 0x4330
     stw r4, 0x14(r1)
@@ -1531,15 +1531,15 @@ lbl_fn_80525A0C_000013FC:
     addi r4, r4, 0x35d
     lfd f0, 0x10(r1)
     fsubs f1, f0, f1
-    bl fn_801F6C80
+    bl save_computeCrc32
     b lbl_fn_80525A0C_00001598
 lbl_fn_80525A0C_0000148C:
     lwz r3, 0x18(r30)
-    bl fn_80202D00
+    bl perf_getMetricValue
     lfs f0, lbl_808879F0
     stfs f0, 0x50(r3)
     lwz r3, 0x18(r30)
-    bl fn_80202D00
+    bl perf_getMetricValue
     lfs f0, lbl_808879F8
     stfs f0, 0x54(r3)
     b lbl_fn_80525A0C_00001598
@@ -1548,7 +1548,7 @@ lbl_fn_80525A0C_000014B0:
     subf r28, r28, r4
     cmpwi r3, 0x0
     beq lbl_fn_80525A0C_00001598
-    bl fn_80202D00
+    bl perf_getMetricValue
     cmpwi r3, 0x0
     beq lbl_fn_80525A0C_00001598
     lwz r3, 0x0(r30)
@@ -1559,7 +1559,7 @@ lbl_fn_80525A0C_000014B0:
     lwz r28, 0x8(r30)
     cmpwi r3, 0x0
     beq lbl_fn_80525A0C_00001598
-    bl fn_80202D00
+    bl perf_getMetricValue
     cmpwi r3, 0x0
     beq lbl_fn_80525A0C_00001598
     lwz r3, 0x0(r30)
@@ -1567,7 +1567,7 @@ lbl_fn_80525A0C_000014B0:
     cmplwi r0, 0x1
     ble lbl_fn_80525A0C_00001598
     lwz r3, 0x18(r30)
-    bl fn_80202D00
+    bl perf_getMetricValue
     xoris r4, r28, 0x8000
     lis r0, 0x4330
     stw r4, 0x14(r1)
@@ -1579,29 +1579,29 @@ lbl_fn_80525A0C_000014B0:
     addi r4, r4, 0x35d
     lfd f0, 0x10(r1)
     fsubs f1, f0, f1
-    bl fn_801F6C80
+    bl save_computeCrc32
     b lbl_fn_80525A0C_00001598
 lbl_fn_80525A0C_00001544:
     cmpwi r28, 0x0
     bge lbl_fn_80525A0C_00001570
     lwz r3, 0x18(r30)
-    bl fn_80202D00
+    bl perf_getMetricValue
     lfs f0, lbl_808879F0
     stfs f0, 0x50(r3)
     lwz r3, 0x18(r30)
-    bl fn_80202D00
+    bl perf_getMetricValue
     lfs f0, lbl_808879F8
     stfs f0, 0x54(r3)
     b lbl_fn_80525A0C_00001598
 lbl_fn_80525A0C_00001570:
     ble lbl_fn_80525A0C_00001598
     lwz r3, 0x18(r30)
-    bl fn_80202D00
+    bl perf_getMetricValue
     mr r28, r3
     bl fn_801F6C2C
     stfs f1, 0x50(r28)
     lwz r3, 0x18(r30)
-    bl fn_80202D00
+    bl perf_getMetricValue
     lfs f0, lbl_808879FC
     stfs f0, 0x54(r3)
 lbl_fn_80525A0C_00001598:
@@ -1632,7 +1632,7 @@ lbl_fn_80525A0C_000015D0:
     bl fn_805256C8
     addi r3, r1, 0x8
     li r4, 0x2
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -1820,7 +1820,7 @@ lbl_fn_80525F0C_0000188C:
     bl fn_805256C8
     addi r3, r1, 0x8
     li r4, 0x2
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle

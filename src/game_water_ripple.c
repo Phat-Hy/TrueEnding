@@ -17,7 +17,7 @@ extern void fn_80660C50(void);
 extern void fn_80660C90(void);
 extern void fn_80661010(void);
 extern void printf(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 extern void abort(void);
 
 /* External data declarations */
@@ -1130,7 +1130,7 @@ lbl_fn_800DFB40_00000E9C:
     lbz r0, 0xc(r1)
     mr r3, r29
     stb r0, 0x8(r1)
-    bl fn_80686A48
+    bl wcslen
     mr r0, r3
     mr r3, r21
     slwi r0, r0, 1

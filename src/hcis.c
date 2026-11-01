@@ -8,12 +8,12 @@ extern void _restgpr_14(void);
 extern void _savegpr_14(void);
 extern void fn_806267F0(void);
 extern void fn_80626C60(void);
-extern void fn_80626D50(void);
+extern void scapi_cleanupContext(void);
 extern void fn_80626EC0(void);
 extern void fn_80626F10(void);
 extern void fn_80627A70(void);
 extern void fn_80629330(void);
-extern void fn_80629810(void);
+extern void bta_sys_logEvent(void);
 extern void fn_80629A30(void);
 extern void fn_80644F60(void);
 extern void fn_80645130(void);
@@ -385,7 +385,7 @@ lbl_fn_80628330_00000440:
 lbl_fn_80628330_00000478:
     addi r4, r14, lbl_807B32B0@l
     lis r3, 0x7
-    bl fn_80629810
+    bl bta_sys_logEvent
     stb r24, 0x1a(r22)
 lbl_fn_80628330_00000488:
     lbz r0, 0x14(r22)
@@ -439,13 +439,13 @@ lbl_fn_80628330_00000518:
     cmplw r0, r4
     ble lbl_fn_80628330_00000568
     lwzx r3, r15, r23
-    bl fn_80626D50
+    bl scapi_cleanupContext
     stwx r29, r15, r23
     lis r3, lbl_807B32EC@ha
     addi r4, r3, lbl_807B32EC@l
     stb r30, 0x1a(r22)
     lis r3, 0x7
-    bl fn_80629810
+    bl bta_sys_logEvent
     b lbl_fn_80628330_0000068C
 lbl_fn_80628330_00000568:
     cmpwi r18, 0x0

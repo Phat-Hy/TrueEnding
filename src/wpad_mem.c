@@ -35,7 +35,7 @@ extern void fn_80668C40(void);
 extern void fn_80669490(void);
 extern void fn_806696B0(void);
 extern void fn_80669D80(void);
-extern void fn_8067E23C(void);
+extern void memcmp(void);
 extern void fn_8068A850(void);
 extern void fn_8068AD58(void);
 extern void fn_80696324(void);
@@ -2416,7 +2416,7 @@ lbl_fn_8066C250_0000211C:
     mr r3, r26
     mr r5, r27
     addi r4, r4, lbl_807651A0@l
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_8066C250_00002150
     li r0, -0x4
@@ -2427,7 +2427,7 @@ lbl_fn_8066C250_00002150:
     mr r3, r26
     mr r5, r27
     addi r4, r4, lbl_80765188@l
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_8066C250_00002180
     li r0, -0x7

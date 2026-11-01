@@ -17,7 +17,7 @@ extern void fn_802092F8(void);
 extern void fn_8046DC5C(void);
 extern void fn_8046DD20(void);
 extern void atoi(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 extern void runtime_registerStaticObject(void);
 extern void fn_80695A50(void);
 extern u32 strlen(const char* str);
@@ -152,7 +152,7 @@ lbl_fn_8021B2F8_00000104:
     beq lbl_fn_8021B2F8_00000150
     addi r3, r1, 0xc
     bl talk_parseDialogue
-    bl fn_80686A48
+    bl wcslen
     add r3, r3, r20
     addi r19, r19, 0x1
     addi r20, r3, 0x1
@@ -176,7 +176,7 @@ lbl_fn_8021B2F8_0000015C:
     beq lbl_fn_8021B2F8_000001A8
     addi r3, r1, 0xc
     bl talk_parseDialogue
-    bl fn_80686A48
+    bl wcslen
     add r3, r3, r20
     addi r19, r19, 0x1
     addi r20, r3, 0x1
@@ -226,7 +226,7 @@ lbl_fn_8021B2F8_00000210:
     beq lbl_fn_8021B2F8_0000025C
     addi r3, r1, 0xc
     bl talk_parseDialogue
-    bl fn_80686A48
+    bl wcslen
     add r3, r3, r20
     addi r19, r19, 0x1
     addi r20, r3, 0x1
@@ -276,7 +276,7 @@ lbl_fn_8021B2F8_000002C4:
     beq lbl_fn_8021B2F8_00000310
     addi r3, r1, 0xc
     bl talk_parseDialogue
-    bl fn_80686A48
+    bl wcslen
     add r3, r3, r20
     addi r19, r19, 0x1
     addi r20, r3, 0x1
@@ -326,7 +326,7 @@ lbl_fn_8021B2F8_00000378:
     beq lbl_fn_8021B2F8_000003C4
     addi r3, r1, 0xc
     bl talk_parseDialogue
-    bl fn_80686A48
+    bl wcslen
     add r3, r3, r20
     addi r19, r19, 0x1
     addi r20, r3, 0x1
@@ -376,7 +376,7 @@ lbl_fn_8021B2F8_0000042C:
     beq lbl_fn_8021B2F8_00000478
     addi r3, r1, 0xc
     bl talk_parseDialogue
-    bl fn_80686A48
+    bl wcslen
     add r3, r3, r20
     addi r19, r19, 0x1
     addi r20, r3, 0x1
@@ -426,7 +426,7 @@ lbl_fn_8021B2F8_000004E0:
     beq lbl_fn_8021B2F8_0000052C
     addi r3, r1, 0xc
     bl talk_parseDialogue
-    bl fn_80686A48
+    bl wcslen
     add r3, r3, r20
     addi r19, r19, 0x1
     addi r20, r3, 0x1
@@ -571,7 +571,7 @@ lbl_fn_8021B2F8_000006A8:
     stw r0, 0x4(r3)
 lbl_fn_8021B2F8_00000720:
     mr r3, r19
-    bl fn_80686A48
+    bl wcslen
     add r3, r3, r29
     addi r30, r30, 0x1
     addi r29, r3, 0x1
@@ -615,7 +615,7 @@ lbl_fn_8021B2F8_00000744:
     add r4, r0, r6
     add r0, r5, r20
     stw r0, 0x8(r4)
-    bl fn_80686A48
+    bl wcslen
     add r3, r3, r29
     addi r29, r3, 0x1
     b lbl_fn_8021B2F8_00000B18
@@ -658,7 +658,7 @@ lbl_fn_8021B2F8_000007E8:
     add r4, r0, r6
     add r0, r5, r20
     stw r0, 0x8(r4)
-    bl fn_80686A48
+    bl wcslen
     add r3, r3, r29
     addi r29, r3, 0x1
     b lbl_fn_8021B2F8_00000B18
@@ -701,7 +701,7 @@ lbl_fn_8021B2F8_0000088C:
     add r4, r0, r6
     add r0, r5, r20
     stw r0, 0x8(r4)
-    bl fn_80686A48
+    bl wcslen
     add r3, r3, r29
     addi r29, r3, 0x1
     b lbl_fn_8021B2F8_00000B18
@@ -744,7 +744,7 @@ lbl_fn_8021B2F8_00000930:
     add r4, r0, r6
     add r0, r5, r20
     stw r0, 0x8(r4)
-    bl fn_80686A48
+    bl wcslen
     add r3, r3, r29
     addi r29, r3, 0x1
     b lbl_fn_8021B2F8_00000B18
@@ -787,7 +787,7 @@ lbl_fn_8021B2F8_000009D4:
     add r4, r0, r6
     add r0, r5, r20
     stw r0, 0x8(r4)
-    bl fn_80686A48
+    bl wcslen
     add r3, r3, r29
     addi r29, r3, 0x1
     b lbl_fn_8021B2F8_00000B18
@@ -830,7 +830,7 @@ lbl_fn_8021B2F8_00000A78:
     add r4, r0, r6
     add r0, r5, r20
     stw r0, 0x8(r4)
-    bl fn_80686A48
+    bl wcslen
     add r3, r3, r29
     addi r29, r3, 0x1
     b lbl_fn_8021B2F8_00000B18
@@ -1359,7 +1359,7 @@ lbl_fn_8021C3F4_000011C8:
     bl talk_parseDialogue
     addi r3, r1, 0xc
     bl talk_parseDialogue
-    bl fn_80686A48
+    bl wcslen
     lwz r4, lbl_8087F2FC
     add r3, r3, r23
     addi r23, r3, 0x1
@@ -1450,7 +1450,7 @@ lbl_fn_8021C3F4_000012B0:
     add r4, r0, r29
     add r0, r5, r24
     stw r0, 0xc(r4)
-    bl fn_80686A48
+    bl wcslen
     add r4, r3, r31
     addi r3, r1, 0xc
     addi r31, r4, 0x1

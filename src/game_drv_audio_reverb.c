@@ -18,12 +18,12 @@ extern void fn_80011034(void);
 extern void fn_80011410(void);
 extern void vec3_sub(void);
 extern void fn_80013410(void);
-extern void fn_80013DC4(void);
+extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void item_useConsumable(void);
 extern void fn_8004ED34(void);
 extern void talk_parseQuotedString(void);
-extern void fn_8005B5F8(void);
+extern void talk_scanQuotedString(void);
 extern void fn_8005B6E8(void);
 extern void fn_8006AC08(void);
 extern void fn_8006AD24(void);
@@ -68,10 +68,10 @@ extern void fn_80147A08(void);
 extern void quest_checkCondition(void);
 extern void fn_801498F0(void);
 extern void fn_80179D44(void);
-extern void fn_801F3FF8(void);
+extern void save_validateHeader(void);
 extern void fn_801F45F4(void);
 extern void saveSlot_readSummary(void);
-extern void fn_801FED24(void);
+extern void thread_findAndNotifySlot(void);
 extern void fn_80244CAC(void);
 extern void fn_802A4968(void);
 extern void fn_802A49BC(void);
@@ -103,7 +103,7 @@ extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
 extern void fn_805F9AB0(void);
 extern void fn_805F9D20(void);
-extern void fn_8067E23C(void);
+extern void memcmp(void);
 extern void strcmp(void);
 extern void atoi(void);
 extern void std_atan2(void);
@@ -307,7 +307,7 @@ lbl_fn_805BA938_00000084:
     mr r4, r3
     mr r3, r28
     li r5, 0x0
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
     lwz r0, 0x5b0(r29)
     addi r3, r31, 0x43
     lfs f31, 0x1c(r1)
@@ -320,7 +320,7 @@ lbl_fn_805BA938_00000084:
     mr r4, r3
     mr r3, r28
     li r5, 0x1
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
     lwz r0, 0x5b0(r29)
     addi r3, r31, 0x43
     lfs f31, 0x28(r1)
@@ -333,7 +333,7 @@ lbl_fn_805BA938_00000084:
     mr r4, r3
     mr r3, r28
     li r5, 0x4
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
     lwz r3, lbl_8087EFE8
     cmpwi r3, 0x0
     beq lbl_fn_805BA938_000002C0
@@ -1196,7 +1196,7 @@ lbl_fn_805BB658_00000E18:
     mr r4, r3
     mr r3, r15
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x478(r26)
     li r4, 0x1
     bl atn_Task_setActive
@@ -1268,7 +1268,7 @@ lbl_fn_805BB658_00000EB0:
     mr r16, r3
     mr r3, r23
     mr r4, r16
-    bl fn_80013DC4
+    bl actor_validateIndex
     addi r6, r1, 0xc4
     lbz r0, 0x1c(r1)
     mr r7, r6
@@ -1392,7 +1392,7 @@ lbl_fn_805BB658_000010F4:
     addi r5, r1, 0x28
 lbl_fn_805BB658_00001110:
     lwz r5, 0x0(r5)
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_805BB658_00001144
     lwz r0, 0x20(r1)
@@ -1557,7 +1557,7 @@ lbl_fn_805BB658_00001310:
     mr r17, r3
     mr r3, r22
     mr r4, r17
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0xc(r1)
     mr r3, r22
     stb r0, 0x8(r1)
@@ -1590,7 +1590,7 @@ lbl_fn_805BB658_000013C8:
     lwz r4, 0x8c(r1)
 lbl_fn_805BB658_000013CC:
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x4b4(r26)
     li r4, 0x1
     bl atn_Task_setActive
@@ -1617,7 +1617,7 @@ lbl_fn_805BB658_00001418:
     bl dtor_80084684
 lbl_fn_805BB658_0000142C:
     addi r3, r1, 0xb4
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_805BB658_00000E18
     addi r11, r1, 0x730

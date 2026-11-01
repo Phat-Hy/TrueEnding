@@ -12,7 +12,7 @@ extern void fn_800A555C(void);
 extern void fn_800BFAC8(void);
 extern void fn_800C31F4(void);
 extern void ref_releaseHandle(void);
-extern void fn_800DC880(void);
+extern void str_calcHash(void);
 extern void fn_800E2DD4(void);
 extern void fn_800E2FE0(void);
 extern void fn_800E854C(void);
@@ -146,62 +146,62 @@ asm void fn_80545CEC(void)
     lis r28, lbl_8075E148@ha
     addi r28, r28, lbl_8075E148@l
     addi r3, r28, 0xdd
-    bl fn_800DC880
+    bl str_calcHash
     lis r29, lbl_807940F0@ha
     li r4, 0x0
     addi r29, r29, lbl_807940F0@l
     stw r3, 0x4(r29)
     addi r3, r28, 0xe2
     stw r28, 0xc(r29)
-    bl fn_800DC880
+    bl str_calcHash
     stw r3, 0x1c(r29)
     li r30, 0x1
     addi r3, r28, 0xe7
     li r4, 0x0
     stw r30, 0x24(r29)
-    bl fn_800DC880
+    bl str_calcHash
     stw r3, 0x34(r29)
     li r31, 0x0
     addi r3, r28, 0xf1
     li r4, 0x0
     stw r31, 0x3c(r29)
-    bl fn_800DC880
+    bl str_calcHash
     stw r3, 0x4c(r29)
     li r0, 0x2
     addi r3, r28, 0xfa
     li r4, 0x0
     stw r0, 0x54(r29)
-    bl fn_800DC880
+    bl str_calcHash
     stw r3, 0x64(r29)
     addi r3, r28, 0x101
     li r4, 0x0
     stw r31, 0x6c(r29)
-    bl fn_800DC880
+    bl str_calcHash
     stw r3, 0x7c(r29)
     addi r3, r28, 0x109
     li r4, 0x0
     stw r31, 0x84(r29)
-    bl fn_800DC880
+    bl str_calcHash
     stw r3, 0x94(r29)
     addi r3, r28, 0x112
     li r4, 0x0
     stw r28, 0x9c(r29)
-    bl fn_800DC880
+    bl str_calcHash
     stw r3, 0xac(r29)
     addi r3, r28, 0x11c
     li r4, 0x0
     stw r31, 0xb4(r29)
-    bl fn_800DC880
+    bl str_calcHash
     stw r3, 0xc4(r29)
     addi r3, r28, 0x122
     li r4, 0x0
     stw r30, 0xcc(r29)
-    bl fn_800DC880
+    bl str_calcHash
     stw r3, 0xdc(r29)
     addi r3, r28, 0x126
     li r4, 0x0
     stw r30, 0xe4(r29)
-    bl fn_800DC880
+    bl str_calcHash
     lfs f0, lbl_80887CA0
     li r4, 0x0
     stfs f0, 0x38(r1)
@@ -209,7 +209,7 @@ asm void fn_80545CEC(void)
     stw r3, 0xf4(r29)
     addi r3, r28, 0x12f
     stw r0, 0xfc(r29)
-    bl fn_800DC880
+    bl str_calcHash
     lfs f0, lbl_80887CA0
     li r4, 0x0
     stfs f0, 0x34(r1)
@@ -217,7 +217,7 @@ asm void fn_80545CEC(void)
     stw r3, 0x10c(r29)
     addi r3, r28, 0x138
     stw r0, 0x114(r29)
-    bl fn_800DC880
+    bl str_calcHash
     lfs f0, lbl_80887CA0
     li r4, 0x0
     stfs f0, 0x30(r1)
@@ -225,7 +225,7 @@ asm void fn_80545CEC(void)
     stw r3, 0x124(r29)
     addi r3, r28, 0x141
     stw r0, 0x12c(r29)
-    bl fn_800DC880
+    bl str_calcHash
     lfs f0, lbl_80887CA0
     li r4, 0x0
     stfs f0, 0x2c(r1)
@@ -233,7 +233,7 @@ asm void fn_80545CEC(void)
     stw r3, 0x13c(r29)
     addi r3, r28, 0x147
     stw r0, 0x144(r29)
-    bl fn_800DC880
+    bl str_calcHash
     lfs f0, lbl_80887CA0
     li r4, 0x0
     stfs f0, 0x28(r1)
@@ -241,7 +241,7 @@ asm void fn_80545CEC(void)
     stw r3, 0x154(r29)
     addi r3, r28, 0x14d
     stw r0, 0x15c(r29)
-    bl fn_800DC880
+    bl str_calcHash
     lfs f0, lbl_80887CA0
     li r4, 0x0
     stfs f0, 0x24(r1)
@@ -249,7 +249,7 @@ asm void fn_80545CEC(void)
     stw r3, 0x16c(r29)
     addi r3, r28, 0x153
     stw r0, 0x174(r29)
-    bl fn_800DC880
+    bl str_calcHash
     lfs f0, lbl_80887CA0
     li r4, 0x0
     stfs f0, 0x20(r1)
@@ -257,12 +257,12 @@ asm void fn_80545CEC(void)
     stw r3, 0x184(r29)
     addi r3, r28, 0x15b
     stw r0, 0x18c(r29)
-    bl fn_800DC880
+    bl str_calcHash
     stw r3, 0x19c(r29)
     addi r3, r28, 0x163
     li r4, 0x0
     stw r31, 0x1a4(r29)
-    bl fn_800DC880
+    bl str_calcHash
     lfs f0, lbl_80887CA0
     li r4, 0x0
     stfs f0, 0x1c(r1)
@@ -270,7 +270,7 @@ asm void fn_80545CEC(void)
     stw r3, 0x1b4(r29)
     addi r3, r28, 0x16d
     stw r0, 0x1bc(r29)
-    bl fn_800DC880
+    bl str_calcHash
     lfs f0, lbl_80887CA0
     li r4, 0x0
     stfs f0, 0x18(r1)
@@ -278,7 +278,7 @@ asm void fn_80545CEC(void)
     stw r3, 0x1cc(r29)
     addi r3, r28, 0x177
     stw r0, 0x1d4(r29)
-    bl fn_800DC880
+    bl str_calcHash
     lfs f0, lbl_80887CA0
     li r4, 0x0
     stfs f0, 0x14(r1)
@@ -286,7 +286,7 @@ asm void fn_80545CEC(void)
     stw r3, 0x1e4(r29)
     addi r3, r28, 0x181
     stw r0, 0x1ec(r29)
-    bl fn_800DC880
+    bl str_calcHash
     lfs f0, lbl_80887CA0
     li r4, 0x0
     stfs f0, 0x10(r1)
@@ -294,7 +294,7 @@ asm void fn_80545CEC(void)
     stw r3, 0x1fc(r29)
     addi r3, r28, 0x18b
     stw r0, 0x204(r29)
-    bl fn_800DC880
+    bl str_calcHash
     lfs f0, lbl_80887CA0
     li r4, 0x0
     stfs f0, 0xc(r1)
@@ -302,7 +302,7 @@ asm void fn_80545CEC(void)
     stw r3, 0x214(r29)
     addi r3, r28, 0x195
     stw r0, 0x21c(r29)
-    bl fn_800DC880
+    bl str_calcHash
     lfs f0, lbl_80887CA0
     li r4, 0x0
     stfs f0, 0x8(r1)
@@ -310,17 +310,17 @@ asm void fn_80545CEC(void)
     stw r3, 0x22c(r29)
     addi r3, r28, 0x19f
     stw r0, 0x234(r29)
-    bl fn_800DC880
+    bl str_calcHash
     stw r3, 0x244(r29)
     addi r3, r28, 0x1a3
     li r4, 0x0
     stw r30, 0x24c(r29)
-    bl fn_800DC880
+    bl str_calcHash
     stw r3, 0x25c(r29)
     addi r3, r28, 0x1ab
     li r4, 0x0
     stw r31, 0x264(r29)
-    bl fn_800DC880
+    bl str_calcHash
     stw r31, 0x27c(r29)
     lwz r31, 0x4c(r1)
     stw r3, 0x274(r29)

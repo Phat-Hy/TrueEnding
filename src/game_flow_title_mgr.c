@@ -12,7 +12,7 @@ extern void fn_8006F2F0(void);
 extern void fn_8006F420(void);
 extern void fn_800DC97C(void);
 extern void fn_8016F3D0(void);
-extern void fn_804AE3BC(void);
+extern void net_getPacketManager(void);
 extern void fn_804D818C(void);
 extern void fn_804FB224(void);
 extern void fn_8050128C(void);
@@ -34,7 +34,7 @@ extern void rand(void);
 extern void strcmp(void);
 extern void strstr(void);
 extern void atoi(void);
-extern void fn_80686AF0(void);
+extern void wcscmp(void);
 extern void fn_806A8E40(void);
 extern void fn_806A8E70(void);
 extern void fn_806ABE70(void);
@@ -1091,7 +1091,7 @@ lbl_fn_804DC85C_00000CFC:
     bl fn_8050F728
     mr r4, r3
     addi r3, r1, 0x270
-    bl fn_80686AF0
+    bl wcscmp
     cmpwi r3, 0x0
     beq lbl_fn_804DC85C_00000D6C
     mr r3, r31
@@ -1632,7 +1632,7 @@ lbl_fn_804DCA58_00001468:
     li r5, 0x8
     subi r4, r4, 0x6674
     bl memcpy
-    bl fn_804AE3BC
+    bl net_getPacketManager
     mr r6, r14
     li r4, -0x1
     li r5, 0x1034

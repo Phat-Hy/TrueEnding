@@ -18,27 +18,27 @@ extern void atn_Task_setActive(void);
 extern void fn_800DBF68(void);
 extern void str_findChar(void);
 extern void fn_800E0000(void);
-extern void fn_80117228(void);
+extern void actor_spawnActorWithId(void);
 extern void fn_801F0544(void);
 extern void fn_801F48C8(void);
 extern void fn_801F6C2C(void);
 extern void fn_801F6C38(void);
-extern void fn_801F6C80(void);
+extern void save_computeCrc32(void);
 extern void fn_801F6D7C(void);
 extern void fn_801F7590(void);
 extern void fn_801F791C(void);
 extern void fn_801FEB9C(void);
-extern void fn_801FECE0(void);
+extern void thread_findAndNotify(void);
 extern void fn_801FEDBC(void);
-extern void fn_801FEE08(void);
-extern void fn_80202D00(void);
+extern void thread_dispatchToQueue(void);
+extern void perf_getMetricValue(void);
 extern void fn_8020303C(void);
 extern void fn_80203260(void);
 extern void fn_802091E8(void);
 extern void fn_804A660C(void);
 extern void fn_804A71F0(void);
 extern void printf(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 extern void abort(void);
 extern char* strcpy(char* dest, const char* src);
 
@@ -222,7 +222,7 @@ lbl_fn_804A3C24_000001C4:
     mr r3, r22
     stw r23, 0x30(r1)
     stw r23, 0x34(r1)
-    bl fn_80686A48
+    bl wcslen
     mr r17, r3
     mr r3, r21
     mr r4, r17
@@ -540,7 +540,7 @@ lbl_fn_804A3C24_00000648:
     mr r4, r3
     mr r3, r17
     mr r5, r18
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r4, 0x1c8(r15)
     lis r3, lbl_807573D0@ha
     addi r3, r3, lbl_807573D0@l
@@ -556,7 +556,7 @@ lbl_fn_804A3C24_00000680:
     mr r4, r3
     mr r3, r17
     mr r5, r19
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r4, 0x1c8(r15)
     lis r3, lbl_807573D0@ha
     addi r3, r3, lbl_807573D0@l
@@ -572,7 +572,7 @@ lbl_fn_804A3C24_000006B8:
     mr r4, r3
     mr r3, r17
     mr r5, r14
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r4, 0x1c8(r15)
     lis r3, lbl_807573D0@ha
     addi r3, r3, lbl_807573D0@l
@@ -583,7 +583,7 @@ lbl_fn_804A3C24_000006B8:
     mr r4, r3
     mr r3, r17
     mr r5, r14
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     addic. r0, r1, 0x38
     stw r16, 0x1c4(r15)
     beq lbl_fn_804A3C24_0000075C
@@ -663,7 +663,7 @@ asm void fn_804A4294(void)
     mr r4, r3
     mr r3, r31
     mr r5, r30
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     li r0, 0x1
     stw r0, 0x4c(r29)
     lwz r31, 0x1c(r1)
@@ -695,7 +695,7 @@ asm void fn_804A4300(void)
     mr r4, r3
     mr r3, r31
     mr r5, r30
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     li r0, 0x1
     stw r0, 0x54(r29)
     lwz r31, 0x1c(r1)
@@ -781,7 +781,7 @@ lbl_fn_804A436C_0000096C:
     beq lbl_fn_804A436C_00000990
     mr r4, r29
     addi r3, r1, 0x8
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -972,7 +972,7 @@ lbl_fn_804A4494_00000C10:
     beq lbl_fn_804A4494_00000C34
     mr r4, r29
     addi r3, r1, 0x8
-    bl fn_80117228
+    bl actor_spawnActorWithId
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -1095,13 +1095,13 @@ lbl_fn_804A473C_00000DB4:
     fmr f1, f30
     mr r4, r3
     addi r3, r27, 0x58
-    bl fn_801FECE0
+    bl thread_findAndNotify
     addi r3, r31, 0x194
     bl str_findChar
     fmr f1, f31
     mr r4, r3
     addi r3, r27, 0x58
-    bl fn_801FECE0
+    bl thread_findAndNotify
     addi r3, r31, 0x19e
     bl str_findChar
     xoris r0, r28, 0x8000
@@ -1112,7 +1112,7 @@ lbl_fn_804A473C_00000DB4:
     addi r3, r27, 0x58
     lfd f0, 0x8(r1)
     fsubs f1, f0, f1
-    bl fn_801FECE0
+    bl thread_findAndNotify
 lbl_fn_804A473C_00000E18:
     addi r11, r1, 0x30
     psq_l f31, 0x48(r1), 0, 0
@@ -1228,11 +1228,11 @@ lbl_fn_804A4934_00000F90:
     addi r31, r31, lbl_807573D0@l
     mr r3, r27
     addi r4, r31, 0x18e
-    bl fn_801F6C80
+    bl save_computeCrc32
     fmr f1, f31
     mr r3, r27
     addi r4, r31, 0x194
-    bl fn_801F6C80
+    bl save_computeCrc32
     xoris r0, r28, 0x8000
     stw r0, 0xc(r1)
     lis r4, lbl_80757108@ha
@@ -1241,7 +1241,7 @@ lbl_fn_804A4934_00000F90:
     addi r4, r31, 0x19e
     lfd f0, 0x8(r1)
     fsubs f1, f0, f1
-    bl fn_801F6C80
+    bl save_computeCrc32
 lbl_fn_804A4934_00000FDC:
     addi r11, r1, 0x30
     psq_l f31, 0x38(r1), 0, 0
@@ -1564,7 +1564,7 @@ asm void fn_804A4EEC(void)
     lwz r3, 0x78(r29)
     bl fn_80203260
     lwz r3, 0x78(r29)
-    bl fn_80202D00
+    bl perf_getMetricValue
     lis r30, lbl_807573D0@ha
     fmr f1, f27
     addi r30, r30, lbl_807573D0@l
@@ -1572,36 +1572,36 @@ asm void fn_804A4EEC(void)
     addi r4, r30, 0x128
     bl fn_801F6D7C
     lwz r3, 0x78(r29)
-    bl fn_80202D00
+    bl perf_getMetricValue
     fmr f1, f28
     addi r4, r30, 0x128
     li r5, 0x1
     bl fn_801F6D7C
     lwz r3, 0x78(r29)
-    bl fn_80202D00
+    bl perf_getMetricValue
     fmr f1, f31
     addi r4, r30, 0x128
     li r5, 0x4
     bl fn_801F6D7C
     lwz r3, 0x78(r29)
-    bl fn_80202D00
+    bl perf_getMetricValue
     fmr f1, f29
     addi r4, r30, 0x133
-    bl fn_801F6C80
+    bl save_computeCrc32
     lwz r3, 0x78(r29)
-    bl fn_80202D00
+    bl perf_getMetricValue
     fmr f1, f30
     addi r4, r30, 0x139
-    bl fn_801F6C80
+    bl save_computeCrc32
     cmpwi r28, 0x0
     beq lbl_fn_804A4EEC_00001538
     lwz r3, 0x78(r29)
-    bl fn_80202D00
+    bl perf_getMetricValue
     bl fn_801F6C2C
     lfs f0, lbl_80887220
     lwz r3, 0x78(r29)
     fsubs f31, f1, f0
-    bl fn_80202D00
+    bl perf_getMetricValue
     stfs f31, 0x50(r3)
 lbl_fn_804A4EEC_00001538:
     cmpwi r26, 0x0
@@ -1730,7 +1730,7 @@ asm void fn_804A5160(void)
     lwz r3, 0x78(r29)
     bl fn_80203260
     lwz r3, 0x78(r29)
-    bl fn_80202D00
+    bl perf_getMetricValue
     lis r30, lbl_807573D0@ha
     fmr f1, f27
     addi r30, r30, lbl_807573D0@l
@@ -1738,36 +1738,36 @@ asm void fn_804A5160(void)
     addi r4, r30, 0x128
     bl fn_801F6D7C
     lwz r3, 0x78(r29)
-    bl fn_80202D00
+    bl perf_getMetricValue
     fmr f1, f28
     addi r4, r30, 0x128
     li r5, 0x1
     bl fn_801F6D7C
     lwz r3, 0x78(r29)
-    bl fn_80202D00
+    bl perf_getMetricValue
     fmr f1, f31
     addi r4, r30, 0x128
     li r5, 0x4
     bl fn_801F6D7C
     lwz r3, 0x78(r29)
-    bl fn_80202D00
+    bl perf_getMetricValue
     fmr f1, f29
     addi r4, r30, 0x133
-    bl fn_801F6C80
+    bl save_computeCrc32
     lwz r3, 0x78(r29)
-    bl fn_80202D00
+    bl perf_getMetricValue
     fmr f1, f30
     addi r4, r30, 0x139
-    bl fn_801F6C80
+    bl save_computeCrc32
     cmpwi r28, 0x0
     beq lbl_fn_804A5160_000017AC
     lwz r3, 0x78(r29)
-    bl fn_80202D00
+    bl perf_getMetricValue
     bl fn_801F6C2C
     lfs f0, lbl_80887220
     lwz r3, 0x78(r29)
     fsubs f31, f1, f0
-    bl fn_80202D00
+    bl perf_getMetricValue
     stfs f31, 0x50(r3)
 lbl_fn_804A5160_000017AC:
     cmpwi r26, 0x0
@@ -1904,14 +1904,14 @@ asm void fn_804A53D4(void)
     slwi r0, r0, 2
     add r3, r27, r0
     lwz r3, 0x8c(r3)
-    bl fn_801F6C80
+    bl save_computeCrc32
     lwz r0, 0x88(r27)
     addi r4, r26, 0x139
     lfs f1, 0xc(r30)
     slwi r0, r0, 2
     add r3, r27, r0
     lwz r3, 0x8c(r3)
-    bl fn_801F6C80
+    bl save_computeCrc32
     cmpwi r31, 0x0
     beq lbl_fn_804A53D4_000019FC
     lwz r0, 0x88(r27)

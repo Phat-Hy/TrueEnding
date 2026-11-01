@@ -31,7 +31,7 @@ extern void PSVECCrossProduct(void);
 extern void fn_80615E00(void);
 extern void fn_80615FF0(void);
 extern void fn_80616250(void);
-extern void fn_8067E23C(void);
+extern void memcmp(void);
 extern void fn_8068A6D8(void);
 extern void fn_8068A918(void);
 extern void runtime_clampDouble(void);
@@ -579,7 +579,7 @@ lbl_fn_800B4694_0000069C:
     psq_st f3, 0x10(r31), 0, 0
     psq_st f4, 0x18(r31), 0, 0
     psq_st f5, 0x20(r31), 0, 0
-    bl fn_8067E23C
+    bl memcmp
     cntlzw r3, r3
     lwz r4, 0x16c(r27)
     lwz r0, 0x18(r29)

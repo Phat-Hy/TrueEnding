@@ -13,7 +13,7 @@ extern void fn_80063D3C(void);
 extern void fn_8006AFF8(void);
 extern void fn_8006CA80(void);
 extern void route_interpolatePath(void);
-extern void fn_80087994(void);
+extern void route_createSegment(void);
 extern void fn_8008937C(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -539,13 +539,13 @@ lbl_fn_8045817C_0000058C:
     addi r4, r31, 0x1a9
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r30
     addi r4, r31, 0x1b3
     addi r5, r29, 0x2a4c
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     lfs f1, lbl_80886B78
     mr r3, r30
     lfs f2, lbl_80886C0C
@@ -846,7 +846,7 @@ lbl_fn_80458590_000009F8:
     li r6, 0x0
     addi r4, r4, 0x83
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     addi r3, r31, 0x14b0
     bl boss_getOffset54
     cmpwi r3, 0x0

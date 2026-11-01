@@ -18,8 +18,8 @@ extern void fn_80134250(void);
 extern void fn_80134270(void);
 extern void fn_801F6D7C(void);
 extern void fn_801F80A8(void);
-extern void fn_801FED24(void);
-extern void fn_80202D00(void);
+extern void thread_findAndNotifySlot(void);
+extern void perf_getMetricValue(void);
 extern void fn_803B57B0(void);
 extern void fn_803B6970(void);
 extern void fn_803B6C88(void);
@@ -30,7 +30,7 @@ extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 extern void std_atan2(void);
 
 /* External data declarations */
@@ -581,7 +581,7 @@ lbl_fn_803E41AC_000006C0:
     mr r4, r3
     mr r3, r29
     li r5, 0x0
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
     lwz r4, 0x1104(r31)
     addi r3, r30, 0x10a2
     lfs f31, 0x10(r1)
@@ -591,7 +591,7 @@ lbl_fn_803E41AC_000006C0:
     mr r4, r3
     mr r3, r29
     li r5, 0x1
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
     lwz r4, 0x1108(r31)
     addi r3, r30, 0x10a2
     lfs f31, 0xc(r1)
@@ -601,7 +601,7 @@ lbl_fn_803E41AC_000006C0:
     mr r4, r3
     mr r3, r29
     li r5, 0x0
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
     lwz r4, 0x1108(r31)
     addi r3, r30, 0x10a2
     lfs f31, 0x10(r1)
@@ -611,7 +611,7 @@ lbl_fn_803E41AC_000006C0:
     mr r4, r3
     mr r3, r29
     li r5, 0x1
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
 lbl_fn_803E41AC_00000798:
     lwz r0, 0x54(r1)
     psq_l f31, 0x48(r1), 0, 0
@@ -1078,7 +1078,7 @@ lbl_fn_803E4978_00000DE4:
     lbz r0, 0xc(r1)
     mr r3, r30
     stb r0, 0x8(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r5, r31
     mr r6, r30
@@ -1573,7 +1573,7 @@ lbl_fn_803E4E58_000014B4:
     stfs f2, 0x3c(r1)
     stfs f1, 0x40(r1)
     stfs f0, 0x44(r1)
-    bl fn_80202D00
+    bl perf_getMetricValue
     lis r29, lbl_807506A0@ha
     addi r5, r1, 0x38
     addi r29, r29, lbl_807506A0@l
@@ -1588,7 +1588,7 @@ lbl_fn_803E4E58_000014B4:
     stfs f2, 0x2c(r1)
     stfs f1, 0x30(r1)
     stfs f0, 0x34(r1)
-    bl fn_80202D00
+    bl perf_getMetricValue
     addi r4, r29, 0x156a
     addi r5, r1, 0x28
     bl fn_801F80A8
@@ -1601,7 +1601,7 @@ lbl_fn_803E4E58_000014B4:
     stfs f2, 0x1c(r1)
     stfs f1, 0x20(r1)
     stfs f0, 0x24(r1)
-    bl fn_80202D00
+    bl perf_getMetricValue
     addi r4, r29, 0x1576
     addi r5, r1, 0x18
     bl fn_801F80A8
@@ -1614,29 +1614,29 @@ lbl_fn_803E4E58_000014B4:
     stfs f2, 0xc(r1)
     stfs f1, 0x10(r1)
     stfs f0, 0x14(r1)
-    bl fn_80202D00
+    bl perf_getMetricValue
     addi r4, r29, 0x1582
     addi r5, r1, 0x8
     bl fn_801F80A8
     lfs f31, lbl_80885D58
     mr r3, r30
     lfs f30, lbl_80885F00
-    bl fn_80202D00
+    bl perf_getMetricValue
     lfs f0, 0x50(r3)
     fcmpo cr0, f31, f0
     ble lbl_fn_803E4E58_000015B4
     mr r3, r30
-    bl fn_80202D00
+    bl perf_getMetricValue
     stfs f31, 0x50(r3)
 lbl_fn_803E4E58_000015B4:
     mr r3, r30
-    bl fn_80202D00
+    bl perf_getMetricValue
     lfs f0, 0x50(r3)
     fcmpo cr0, f30, f0
     cror eq, lt, eq
     bne lbl_fn_803E4E58_000015D8
     mr r3, r30
-    bl fn_80202D00
+    bl perf_getMetricValue
     stfs f31, 0x50(r3)
 lbl_fn_803E4E58_000015D8:
     lfs f1, 0x4(r31)
@@ -2071,7 +2071,7 @@ lbl_fn_803E5200_00001AF0:
     psq_st f5, 0xe8(r30), 0, 0
     psq_st f1, 0xf8(r30), 0, 0
     stfs f2, 0x100(r30)
-    bl fn_80202D00
+    bl perf_getMetricValue
     lis r29, lbl_807506A0@ha
     lfs f1, lbl_80885D58
     addi r29, r29, lbl_807506A0@l
@@ -2079,13 +2079,13 @@ lbl_fn_803E5200_00001AF0:
     addi r4, r29, 0x1596
     bl fn_801F6D7C
     mr r3, r30
-    bl fn_80202D00
+    bl perf_getMetricValue
     lfs f1, lbl_80885D58
     addi r4, r29, 0x1596
     li r5, 0x1
     bl fn_801F6D7C
     mr r3, r30
-    bl fn_80202D00
+    bl perf_getMetricValue
     fmr f1, f31
     addi r4, r29, 0x1596
     li r5, 0x4

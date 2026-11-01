@@ -14,19 +14,19 @@ extern void str_findChar(void);
 extern void fn_800DD3FC(void);
 extern void net_player_interpolateState(void);
 extern void fn_801EFA78(void);
-extern void fn_801F3FF8(void);
+extern void save_validateHeader(void);
 extern void fn_801F45F4(void);
 extern void fn_801F465C(void);
 extern void fn_801F6A98(void);
 extern void fn_801F9474(void);
 extern void fn_801F9488(void);
-extern void fn_801FECE0(void);
-extern void fn_801FED24(void);
+extern void thread_findAndNotify(void);
+extern void thread_findAndNotifySlot(void);
 extern void fn_801FED70(void);
 extern void fn_801FEDBC(void);
-extern void fn_801FEE08(void);
+extern void thread_dispatchToQueue(void);
 extern void fn_801FEEFC(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
 
@@ -1082,7 +1082,7 @@ lbl_fn_801F837C_00000E44:
     lbz r0, 0x1c(r1)
     mr r3, r29
     stb r0, 0x18(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r5, r30
     mr r6, r29
@@ -1269,7 +1269,7 @@ lbl_fn_801F8598_000010D8:
     lbz r0, 0x8(r1)
     addi r3, r1, 0x70
     stb r0, 0xc(r1)
-    bl fn_80686A48
+    bl wcslen
     addi r6, r1, 0x70
     slwi r0, r3, 1
     mr r7, r6
@@ -1580,7 +1580,7 @@ lbl_fn_801F8994_000014FC:
     mr r4, r29
     lwz r3, 0x24(r28)
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0xc(r1)
     li r4, 0x1
     bl atn_Task_setActive
@@ -1903,7 +1903,7 @@ lbl_fn_801F8E6C_00001944:
     lfs f1, 0x8(r29)
     lwz r4, 0x4(r29)
     addi r3, r3, 0x58
-    bl fn_801FECE0
+    bl thread_findAndNotify
     b lbl_fn_801F8E6C_000019D0
 lbl_fn_801F8E6C_0000195C:
     lwz r3, 0x48(r31)
@@ -1912,7 +1912,7 @@ lbl_fn_801F8E6C_0000195C:
     addi r3, r3, 0x58
     lwz r4, 0x4(r29)
     extsb r5, r5
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
     b lbl_fn_801F8E6C_000019D0
 lbl_fn_801F8E6C_0000197C:
     lwz r3, 0x48(r31)
@@ -1961,7 +1961,7 @@ lbl_fn_801F8E6C_000019F4:
 lbl_fn_801F8E6C_00001A14:
     lwz r5, 0xc(r30)
 lbl_fn_801F8E6C_00001A18:
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     addi r30, r30, 0x10
     addi r29, r29, 0x10
     addi r28, r28, 0x1

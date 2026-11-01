@@ -53,7 +53,7 @@ extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
 extern void rand(void);
-extern void fn_8068236C(void);
+extern void strncpy(void);
 extern void strcmp(void);
 extern void atoi(void);
 extern void fn_8068A850(void);
@@ -1600,7 +1600,7 @@ lbl_fn_8041C784_0000143C:
     mr r4, r3
     addi r3, r1, 0x8
     li r5, 0x100
-    bl fn_8068236C
+    bl strncpy
     addi r3, r1, 0x108
     bl talk_formatQuotedString
     bl atoi

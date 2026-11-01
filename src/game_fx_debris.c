@@ -10,12 +10,12 @@ extern void dtor_80084684(void);
 extern void vec3_copy(void);
 extern void fn_8000D760(void);
 extern void fn_8000E18C(void);
-extern void fn_80013DC4(void);
+extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_8004203C(void);
 extern void fn_80057A68(void);
 extern void talk_parseQuotedString(void);
-extern void fn_8005B5F8(void);
+extern void talk_scanQuotedString(void);
 extern void fn_8005B6E8(void);
 extern void fn_8006AFF8(void);
 extern void atn_Model_findBoneIndex(void);
@@ -1176,7 +1176,7 @@ asm void fn_8029CB00(void)
     mr r26, r3
     mr r3, r27
     mr r4, r26
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x1c(r1)
     mr r3, r27
     stb r0, 0x18(r1)
@@ -1196,7 +1196,7 @@ asm void fn_8029CB00(void)
     mr r25, r3
     mr r3, r26
     mr r4, r25
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x14(r1)
     mr r3, r26
     stb r0, 0x10(r1)
@@ -1276,7 +1276,7 @@ lbl_fn_8029CB00_00001034:
     bl actor_dispatchMessage
 lbl_fn_8029CB00_00001064:
     addi r3, r1, 0x44
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_8029CB00_00000FDC
 lbl_fn_8029CB00_00001074:
@@ -1913,7 +1913,7 @@ lbl_fn_8029CF00_00001934:
     stw r3, 0x164c(r31)
 lbl_fn_8029CF00_00001968:
     addi r3, r1, 0x2c
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_8029CF00_00001224
 lbl_fn_8029CF00_00001978:

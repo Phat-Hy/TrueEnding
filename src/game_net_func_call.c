@@ -22,7 +22,7 @@ extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
 extern void fn_80119ECC(void);
 extern void fn_8012AFE8(void);
-extern void fn_801F3FF8(void);
+extern void save_validateHeader(void);
 extern void fn_803B33F8(void);
 extern void fn_803B3530(void);
 extern void fn_803B8144(void);
@@ -1163,14 +1163,14 @@ lbl_fn_805029E0_00000990:
     addi r31, r4, lbl_8075AEDC@l
     li r5, 0x0
     addi r4, r31, 0x1
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x48(r30)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r30
     addi r4, r31, 0x24
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x4c(r30)
     li r4, 0x1
     bl atn_Task_setActive
@@ -1181,7 +1181,7 @@ lbl_fn_805029E0_00000F14:
     add r25, r30, r24
     addi r4, r31, 0x47
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x50(r25)
     li r4, 0x1
     bl atn_Task_setActive
@@ -1204,7 +1204,7 @@ lbl_fn_805029E0_00000F64:
     addi r4, r31, 0x6a
     li r5, 0x0
     addi r25, r25, 0xe8
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x0(r25)
     b lbl_fn_805029E0_00000FA0
 lbl_fn_805029E0_00000F84:
@@ -1213,7 +1213,7 @@ lbl_fn_805029E0_00000F84:
     addi r4, r31, 0x8d
     li r5, 0x0
     addi r25, r25, 0xe8
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x0(r25)
 lbl_fn_805029E0_00000FA0:
     lwz r3, 0x0(r25)

@@ -18,7 +18,7 @@ extern void mem_alloc(void);
 extern void mem_free(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
-extern void fn_80087994(void);
+extern void route_createSegment(void);
 extern void fn_80087BB4(void);
 extern void fn_80087E9C(void);
 extern void fn_8008826C(void);
@@ -133,13 +133,13 @@ asm void fn_800BB4FC(void)
     mr r29, r3
     mr r5, r29
     mr r3, r30
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r30
     addi r4, r31, 0x8
     addi r5, r29, 0x4
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r30
     addi r4, r31, 0x336
     addi r5, r29, 0x18
@@ -154,7 +154,7 @@ asm void fn_800BB4FC(void)
     addi r5, r29, 0x10
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     lfs f1, lbl_80881060
     mr r3, r30
     lfs f2, lbl_80881044
@@ -196,7 +196,7 @@ asm void fn_800BB4FC(void)
     addi r5, r29, 0x14
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     lfs f1, lbl_80880FB8
     mr r3, r30
     lfs f2, lbl_80880FF8
@@ -400,13 +400,13 @@ asm void fn_800BB8D8(void)
     mr r29, r3
     mr r5, r29
     mr r3, r30
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r30
     addi r4, r31, 0x8
     addi r5, r29, 0x4
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     lfs f1, lbl_80880FB8
     mr r3, r30
     lfs f2, lbl_80880FD8
@@ -514,13 +514,13 @@ asm void fn_800BBA64(void)
     mr r29, r3
     mr r5, r29
     mr r3, r30
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r30
     addi r4, r31, 0x8
     addi r5, r29, 0x4
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     lfs f1, lbl_80881064
     mr r3, r30
     lfs f2, lbl_80881010
@@ -834,7 +834,7 @@ asm void fn_800BBEFC(void)
     mr r29, r3
     mr r5, r29
     mr r3, r30
-    bl fn_80087994
+    bl route_createSegment
     lfs f1, lbl_80880FE4
     mr r3, r30
     lfs f2, lbl_80880FBC
@@ -1011,7 +1011,7 @@ asm void fn_800BC194(void)
     mr r29, r3
     mr r5, r29
     mr r3, r30
-    bl fn_80087994
+    bl route_createSegment
     mr r3, r30
     addi r4, r31, 0x2d2
     addi r5, r29, 0x44
@@ -1062,7 +1062,7 @@ asm void fn_800BC194(void)
     addi r5, r29, 0x48
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     lfs f1, lbl_80880FB8
     mr r3, r30
     lfs f2, lbl_80881058

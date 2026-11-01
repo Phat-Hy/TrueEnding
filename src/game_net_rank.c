@@ -35,17 +35,17 @@ extern void fn_801F3490(void);
 extern void fn_801F34F8(void);
 extern void fn_801F35B4(void);
 extern void fn_801F362C(void);
-extern void fn_801F3FF8(void);
+extern void save_validateHeader(void);
 extern void fn_801F4484(void);
 extern void fn_801F465C(void);
 extern void fn_801F48C8(void);
 extern void fn_801FEA9C(void);
-extern void fn_801FECE0(void);
-extern void fn_801FED24(void);
+extern void thread_findAndNotify(void);
+extern void thread_findAndNotifySlot(void);
 extern void fn_801FEDBC(void);
 extern void printf(void);
-extern void fn_80686A48(void);
-extern void fn_80686B24(void);
+extern void wcslen(void);
+extern void wcsncmp(void);
 extern void abort(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
@@ -186,7 +186,7 @@ lbl_fn_801F0DF0_00000118:
     mr r3, r27
     add r29, r27, r31
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x180(r29)
     li r4, 0x1
     lwz r0, 0xfc(r3)
@@ -421,7 +421,7 @@ lbl_fn_801F10E0_000003C8:
     mr r4, r3
     mr r3, r31
     li r5, 0x0
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
     lis r31, lbl_8073CE90@ha
     lwz r4, 0x180(r24)
     addi r31, r31, lbl_8073CE90@l
@@ -437,7 +437,7 @@ lbl_fn_801F10E0_000003C8:
     mr r4, r3
     mr r3, r23
     li r5, 0x1
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
     add r4, r31, r29
     lwz r5, 0x180(r24)
     lfs f3, 0x8(r27)
@@ -450,7 +450,7 @@ lbl_fn_801F10E0_000003C8:
     mr r4, r3
     mr r3, r23
     li r5, 0x2
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
     add r4, r31, r29
     lwz r5, 0x180(r24)
     lfs f3, 0xc(r27)
@@ -463,7 +463,7 @@ lbl_fn_801F10E0_000003C8:
     mr r4, r3
     mr r3, r23
     li r5, 0x3
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
     lwz r4, 0x180(r24)
     addi r3, r30, 0x41
     lfs f31, 0x10(r27)
@@ -473,7 +473,7 @@ lbl_fn_801F10E0_000003C8:
     mr r4, r3
     mr r3, r23
     li r5, 0x4
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
     lwz r4, 0x180(r24)
     addi r3, r30, 0x49
     addi r23, r4, 0x58
@@ -492,7 +492,7 @@ lbl_fn_801F10E0_000003C8:
     fmr f1, f31
     mr r4, r3
     mr r3, r23
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lwz r3, lbl_8087EF70
     li r4, 0x0
     bl fn_800A58D0
@@ -599,7 +599,7 @@ asm void fn_801F1418(void)
     bne lbl_fn_801F1418_00000758
     lwz r28, 0x0(r4)
     mr r3, r28
-    bl fn_80686A48
+    bl wcslen
     lis r30, lbl_8073CE90@ha
     mr r31, r3
     addi r30, r30, lbl_8073CE90@l
@@ -612,7 +612,7 @@ lbl_fn_801F1418_000006E4:
     bgt lbl_fn_801F1418_00000744
     mr r3, r28
     addi r4, r29, 0x2
-    bl fn_80686B24
+    bl wcsncmp
     cmpwi r3, 0x0
     bne lbl_fn_801F1418_00000744
     mulli r0, r27, 0x34
@@ -682,7 +682,7 @@ lbl_fn_801F14FC_000007D4:
     cmplwi r28, 0x24
     bne lbl_fn_801F14FC_00000868
     mr r3, r24
-    bl fn_80686A48
+    bl wcslen
     addi r26, r30, lbl_8073CE90@l
     mr r29, r3
     mr r25, r26
@@ -694,7 +694,7 @@ lbl_fn_801F14FC_00000804:
     bgt lbl_fn_801F14FC_00000854
     mr r3, r24
     addi r4, r25, 0x2
-    bl fn_80686B24
+    bl wcsncmp
     cmpwi r3, 0x0
     bne lbl_fn_801F14FC_00000854
     mulli r0, r27, 0x34
@@ -779,7 +779,7 @@ lbl_fn_801F1658_0000091C:
     mr r3, r30
     mr r4, r31
     bl fn_801F1990
-    bl fn_80686A48
+    bl wcslen
     addi r23, r26, lbl_8073CE90@l
     mr r25, r3
     mr r22, r23
@@ -795,7 +795,7 @@ lbl_fn_801F1658_0000095C:
     mr r5, r20
     add r3, r3, r21
     addi r4, r22, 0x2
-    bl fn_80686B24
+    bl wcsncmp
     cmpwi r3, 0x0
     bne lbl_fn_801F1658_00000A04
     subi r0, r31, 0x1
@@ -1764,7 +1764,7 @@ lbl_fn_801F2398_000016A0:
     mr r3, r30
     stw r0, 0x28(r1)
     stw r0, 0x2c(r1)
-    bl fn_80686A48
+    bl wcslen
     mr r28, r3
     mr r3, r29
     mr r4, r28

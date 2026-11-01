@@ -10,10 +10,10 @@ extern void _savegpr_19(void);
 extern void dtor_80084684(void);
 extern void fn_80051B70(void);
 extern void talk_parseQuotedString(void);
-extern void fn_8005B5F8(void);
+extern void talk_scanQuotedString(void);
 extern void fn_8005B6E8(void);
 extern void mem_free(void);
-extern void fn_80087994(void);
+extern void route_createSegment(void);
 extern void fn_8008937C(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_800CB360(void);
@@ -196,7 +196,7 @@ lbl_fn_802797DC_000000A0:
     li r6, 0x0
     addi r4, r4, 0x20b
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0
@@ -1016,7 +1016,7 @@ lbl_fn_802799C0_00000C4C:
     bne lbl_fn_802799C0_00000A00
 lbl_fn_802799C0_00000C54:
     addi r3, r1, 0x48
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_802799C0_000004A4
 lbl_fn_802799C0_00000C64:

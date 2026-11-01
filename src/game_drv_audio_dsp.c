@@ -25,11 +25,11 @@ extern void fn_805FEF70(void);
 extern void fn_806077A0(void);
 extern void fn_806077F0(void);
 extern void fn_80607870(void);
-extern void fn_80612E80(void);
+extern void GXSetVtxDesc(void);
 extern void fn_806134E0(void);
-extern void fn_80613520(void);
+extern void GXSetVtxAttrFmt(void);
 extern void __GXSetVtxDesc(void);
-extern void fn_80613BB0(void);
+extern void GXClearVtxDesc(void);
 extern void fn_80614790(void);
 extern void fn_80615400(void);
 extern void fn_80615D20(void);
@@ -121,7 +121,7 @@ asm void fn_805B4DF4(void)
     li r6, 0xf
     bl fn_80617D50
     li r3, 0x1
-    bl fn_80613BB0
+    bl GXClearVtxDesc
     li r3, 0x0
     bl fn_80615D20
     li r3, 0x1
@@ -260,7 +260,7 @@ asm void fn_805B4F0C(void)
     li r3, 0x0
     bl fn_80615D20
     li r3, 0x2
-    bl fn_80613BB0
+    bl GXClearVtxDesc
     li r3, 0x0
     li r4, 0x1
     li r5, 0x4
@@ -279,22 +279,22 @@ asm void fn_805B4F0C(void)
     bl fn_806134E0
     li r3, 0x9
     li r4, 0x1
-    bl fn_80612E80
+    bl GXSetVtxDesc
     li r3, 0xd
     li r4, 0x1
-    bl fn_80612E80
+    bl GXSetVtxDesc
     li r3, 0x7
     li r4, 0x9
     li r5, 0x1
     li r6, 0x3
     li r7, 0x0
-    bl fn_80613520
+    bl GXSetVtxAttrFmt
     li r3, 0x7
     li r4, 0xd
     li r5, 0x1
     li r6, 0x2
     li r7, 0x0
-    bl fn_80613520
+    bl GXSetVtxAttrFmt
     li r3, 0x4
     bl GXSetNumTevStages
     li r3, 0x0

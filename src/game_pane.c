@@ -27,7 +27,7 @@ extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800D594C(void);
 extern void fn_800D5C84(void);
 extern void __GXSetVtxDesc(void);
-extern void fn_80613BB0(void);
+extern void GXClearVtxDesc(void);
 extern void fn_80614190(void);
 extern void GXSetTexCopySrc(void);
 extern void GXSetTexCopyDst(void);
@@ -254,7 +254,7 @@ lbl_fn_800AB774_000000A8:
     li r9, 0x2
     bl fn_80615D50
     li r3, 0x5
-    bl fn_80613BB0
+    bl GXClearVtxDesc
     li r3, 0x0
     li r4, 0x1
     li r5, 0x4
@@ -668,7 +668,7 @@ lbl_fn_800ABD94_000006A0:
     bl GXCopyTex
     bl fn_80614190
     li r3, 0x1
-    bl fn_80613BB0
+    bl GXClearVtxDesc
     li r3, 0x0
     bl fn_80615D20
     li r3, 0x1
@@ -735,7 +735,7 @@ lbl_fn_800ABD94_000006A0:
     li r6, 0x3
     bl fn_80617D50
     li r3, 0x1
-    bl fn_80613BB0
+    bl GXClearVtxDesc
     li r3, 0x1
     bl fn_80615D20
     li r3, 0x1
@@ -778,7 +778,7 @@ lbl_fn_800ABD94_000006A0:
     lwz r3, lbl_8087EFB4
     bl fn_800BFB70
     li r3, 0x2
-    bl fn_80613BB0
+    bl GXClearVtxDesc
     li r3, 0x0
     bl fn_80615D20
     li r3, 0x2
@@ -1250,7 +1250,7 @@ asm void fn_800AC6DC(void)
     li r3, 0x0
     bl fn_80615D20
     li r3, 0x4
-    bl fn_80613BB0
+    bl GXClearVtxDesc
     li r3, 0x0
     li r4, 0x1
     li r5, 0x4

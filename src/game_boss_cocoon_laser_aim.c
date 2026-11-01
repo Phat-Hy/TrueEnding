@@ -6,7 +6,7 @@ extern void __files(void);
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_80013DC4(void);
+extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_800698DC(void);
 extern void fn_8006AC08(void);
@@ -17,11 +17,11 @@ extern void mem_free(void);
 extern void fn_800A4450(void);
 extern void fn_800A5B38(void);
 extern void str_findChar(void);
-extern void fn_801F3FF8(void);
+extern void save_validateHeader(void);
 extern void saveSlot_readSummary(void);
 extern void fn_801FEC74(void);
-extern void fn_801FECE0(void);
-extern void fn_801FED24(void);
+extern void thread_findAndNotify(void);
+extern void thread_findAndNotifySlot(void);
 extern void fn_80470604(void);
 extern void fn_804730D4(void);
 extern void fn_804730E4(void);
@@ -31,7 +31,7 @@ extern void atn_LoadHandle_isLoading(void);
 extern void fn_80473F88(void);
 extern void taskManager_updateTasks(void);
 extern void fn_805F9EF0(void);
-extern void fn_8067E23C(void);
+extern void memcmp(void);
 extern void printf(void);
 extern void strcmp(void);
 extern void strncmp(void);
@@ -163,7 +163,7 @@ asm void fn_8046EC7C(void)
     li r5, 0x0
     addi r4, r4, lbl_8075561C@l
     addi r4, r4, 0x16f
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x3ee0(r31)
 lbl_fn_8046EC7C_000000F0:
     lwz r0, 0x14(r1)
@@ -204,7 +204,7 @@ asm void fn_8046ECDC(void)
     lfs f1, lbl_80886EC0
     mr r4, r3
     mr r3, r29
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lwz r3, 0x3ee0(r31)
     addi r4, r30, 0x18b
     addi r3, r3, 0x58
@@ -256,7 +256,7 @@ lbl_fn_8046ECDC_000001F8:
     mr r3, r28
     li r5, 0x0
     fadds f1, f0, f31
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
 lbl_fn_8046ECDC_00000228:
     cmpwi r27, 0x0
     beq lbl_fn_8046ECDC_000002E0
@@ -280,7 +280,7 @@ lbl_fn_8046ECDC_00000228:
     lfs f1, lbl_80886EC4
     mr r4, r3
     mr r3, r28
-    bl fn_801FECE0
+    bl thread_findAndNotify
     li r0, 0x1
     stw r0, 0x3ef0(r31)
 lbl_fn_8046ECDC_0000028C:
@@ -307,7 +307,7 @@ lbl_fn_8046ECDC_000002B8:
     fmr f1, f31
     mr r4, r3
     mr r3, r28
-    bl fn_801FECE0
+    bl thread_findAndNotify
 lbl_fn_8046ECDC_000002E0:
     lwz r0, 0x3ef4(r31)
     cmpwi r0, 0x0
@@ -1607,7 +1607,7 @@ lbl_fn_8046FD7C_00001414:
     mr r15, r3
     mr r3, r31
     mr r4, r15
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0xc(r1)
     mr r3, r31
     stb r0, 0x8(r1)
@@ -1662,7 +1662,7 @@ lbl_fn_8046FD7C_000014E0:
     addi r5, r1, 0x18
 lbl_fn_8046FD7C_000014FC:
     lwz r5, 0x0(r5)
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_8046FD7C_00001530
     lwz r0, 0x10(r1)

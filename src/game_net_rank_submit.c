@@ -28,11 +28,11 @@ extern void fn_801F6C2C(void);
 extern void fn_801F6D7C(void);
 extern void fn_801F837C(void);
 extern void fn_801F8830(void);
-extern void fn_801FECE0(void);
+extern void thread_findAndNotify(void);
 extern void fn_801FEDBC(void);
-extern void fn_801FEE08(void);
-extern void fn_80202118(void);
-extern void fn_80202D00(void);
+extern void thread_dispatchToQueue(void);
+extern void profile_getMetricValue(void);
+extern void perf_getMetricValue(void);
 extern void fn_8044D878(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
@@ -49,8 +49,8 @@ extern void fn_805119CC(void);
 extern void fn_8052635C(void);
 extern void PSMTXConcat(void);
 extern void wmemcpy(void);
-extern void fn_80686A48(void);
-extern void fn_80686B24(void);
+extern void wcslen(void);
+extern void wcsncmp(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -375,7 +375,7 @@ lbl_fn_8052293C_00000384:
     bl talk_parseDialogue
     la r4, lbl_8087E498
     li r5, 0x1
-    bl fn_80686B24
+    bl wcsncmp
     cmpwi r3, 0x0
     beq lbl_fn_8052293C_00000708
     stw r26, 0x8(r1)
@@ -411,7 +411,7 @@ lbl_fn_8052293C_00000404:
     cmplw r3, r28
     mr r22, r3
     beq lbl_fn_8052293C_00000430
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r3, r28
     mr r4, r22
@@ -423,7 +423,7 @@ lbl_fn_8052293C_00000430:
     cmplw r3, r29
     mr r22, r3
     beq lbl_fn_8052293C_0000045C
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r3, r29
     mr r4, r22
@@ -435,7 +435,7 @@ lbl_fn_8052293C_0000045C:
     cmplw r3, r30
     mr r22, r3
     beq lbl_fn_8052293C_00000488
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r3, r30
     mr r4, r22
@@ -447,7 +447,7 @@ lbl_fn_8052293C_00000488:
     cmplw r3, r31
     mr r22, r3
     beq lbl_fn_8052293C_000004B4
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r3, r31
     mr r4, r22
@@ -634,18 +634,18 @@ asm void fn_80522DDC(void)
     addi r29, r4, 0x250
 lbl_fn_80522DDC_00000760:
     lwz r3, 0x13c(r28)
-    bl fn_80202118
+    bl profile_getMetricValue
     cmpwi r3, 0x0
     beq lbl_fn_80522DDC_00000794
     lwz r3, 0x13c(r28)
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r30, r3
     mr r3, r29
     bl str_findChar
     lfs f1, lbl_808879F0
     mr r4, r3
     addi r3, r30, 0x58
-    bl fn_801FECE0
+    bl thread_findAndNotify
 lbl_fn_80522DDC_00000794:
     addi r27, r27, 0x1
     addi r28, r28, 0x4
@@ -661,7 +661,7 @@ lbl_fn_80522DDC_00000794:
     cmplw r29, r30
     beq lbl_fn_80522DDC_000007E4
     mr r3, r29
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r3, r30
     mr r4, r29
@@ -673,7 +673,7 @@ lbl_fn_80522DDC_000007E4:
     cmplw r29, r0
     beq lbl_fn_80522DDC_00000810
     mr r3, r29
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r4, r29
     addi r3, r31, 0x800
@@ -685,7 +685,7 @@ lbl_fn_80522DDC_00000810:
     cmplw r29, r0
     beq lbl_fn_80522DDC_0000083C
     mr r3, r29
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r4, r29
     addi r3, r31, 0x910
@@ -697,7 +697,7 @@ lbl_fn_80522DDC_0000083C:
     cmplw r29, r30
     beq lbl_fn_80522DDC_00000868
     mr r3, r29
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r3, r30
     mr r4, r29
@@ -709,7 +709,7 @@ lbl_fn_80522DDC_00000868:
     cmplw r29, r0
     beq lbl_fn_80522DDC_00000894
     mr r3, r29
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r4, r29
     addi r3, r31, 0x840
@@ -721,7 +721,7 @@ lbl_fn_80522DDC_00000894:
     cmplw r29, r0
     beq lbl_fn_80522DDC_000008C0
     mr r3, r29
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r4, r29
     addi r3, r31, 0x950
@@ -733,7 +733,7 @@ lbl_fn_80522DDC_000008C0:
     cmplw r29, r30
     beq lbl_fn_80522DDC_000008EC
     mr r3, r29
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r3, r30
     mr r4, r29
@@ -745,7 +745,7 @@ lbl_fn_80522DDC_000008EC:
     cmplw r29, r0
     beq lbl_fn_80522DDC_00000918
     mr r3, r29
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r4, r29
     addi r3, r31, 0xee0
@@ -757,7 +757,7 @@ lbl_fn_80522DDC_00000918:
     cmplw r29, r0
     beq lbl_fn_80522DDC_00000944
     mr r3, r29
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r4, r29
     addi r3, r31, 0xff0
@@ -769,7 +769,7 @@ lbl_fn_80522DDC_00000944:
     cmplw r29, r30
     beq lbl_fn_80522DDC_00000970
     mr r3, r29
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r3, r30
     mr r4, r29
@@ -781,7 +781,7 @@ lbl_fn_80522DDC_00000970:
     cmplw r29, r0
     beq lbl_fn_80522DDC_0000099C
     mr r3, r29
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r4, r29
     addi r3, r31, 0xf20
@@ -793,7 +793,7 @@ lbl_fn_80522DDC_0000099C:
     cmplw r29, r0
     beq lbl_fn_80522DDC_000009C8
     mr r3, r29
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r4, r29
     addi r3, r31, 0x1030
@@ -807,18 +807,18 @@ lbl_fn_80522DDC_000009C8:
     addi r29, r3, 0x250
 lbl_fn_80522DDC_000009DC:
     lwz r3, 0x13c(r28)
-    bl fn_80202118
+    bl profile_getMetricValue
     cmpwi r3, 0x0
     beq lbl_fn_80522DDC_00000A10
     lwz r3, 0x13c(r28)
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r30, r3
     mr r3, r29
     bl str_findChar
     lfs f1, lbl_808879F8
     mr r4, r3
     addi r3, r30, 0x58
-    bl fn_801FECE0
+    bl thread_findAndNotify
 lbl_fn_80522DDC_00000A10:
     addi r27, r27, 0x1
     addi r28, r28, 0x4
@@ -833,7 +833,7 @@ lbl_fn_80522DDC_00000A20:
     cmplw r29, r30
     beq lbl_fn_80522DDC_00000A58
     mr r3, r29
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r3, r30
     mr r4, r29
@@ -845,7 +845,7 @@ lbl_fn_80522DDC_00000A58:
     cmplw r29, r0
     beq lbl_fn_80522DDC_00000A84
     mr r3, r29
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r4, r29
     addi r3, r31, 0xa20
@@ -857,7 +857,7 @@ lbl_fn_80522DDC_00000A84:
     cmplw r29, r0
     beq lbl_fn_80522DDC_00000AB0
     mr r3, r29
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r4, r29
     addi r3, r31, 0xb30
@@ -869,7 +869,7 @@ lbl_fn_80522DDC_00000AB0:
     cmplw r29, r30
     beq lbl_fn_80522DDC_00000ADC
     mr r3, r29
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r3, r30
     mr r4, r29
@@ -881,7 +881,7 @@ lbl_fn_80522DDC_00000ADC:
     cmplw r29, r0
     beq lbl_fn_80522DDC_00000B08
     mr r3, r29
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r4, r29
     addi r3, r31, 0xa60
@@ -893,7 +893,7 @@ lbl_fn_80522DDC_00000B08:
     cmplw r29, r0
     beq lbl_fn_80522DDC_00000B34
     mr r3, r29
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r4, r29
     addi r3, r31, 0xb70
@@ -940,7 +940,7 @@ lbl_fn_805231F4_00000BA0:
     cmpwi r28, 0x0
     beq lbl_fn_805231F4_00000BF8
     mr r3, r28
-    bl fn_80202D00
+    bl perf_getMetricValue
     cmpwi r3, 0x0
     beq lbl_fn_805231F4_00000BF8
     lwz r3, 0x0(r29)
@@ -948,7 +948,7 @@ lbl_fn_805231F4_00000BA0:
     cmplwi r0, 0x1
     ble lbl_fn_805231F4_00000BF8
     lwz r3, 0x18(r29)
-    bl fn_80202D00
+    bl perf_getMetricValue
     lfs f0, 0x54(r3)
     fabs f0, f0
     frsp f0, f0
@@ -962,11 +962,11 @@ lbl_fn_805231F4_00000BFC:
     cmpwi r0, 0x0
     beq lbl_fn_805231F4_00000C68
     mr r3, r28
-    bl fn_80202D00
+    bl perf_getMetricValue
     cmpwi r3, 0x0
     beq lbl_fn_805231F4_00000C68
     mr r3, r28
-    bl fn_80202D00
+    bl perf_getMetricValue
     lfs f0, 0x54(r3)
     mr r28, r3
     fcmpo cr0, f0, f31
@@ -1375,42 +1375,42 @@ lbl_fn_805233FC_000011A0:
     add r4, r0, r21
     bl fn_8051125C
     lwz r3, 0x13c(r20)
-    bl fn_80202118
+    bl profile_getMetricValue
     cmpwi r3, 0x0
     beq lbl_fn_805233FC_00001264
     cmpw r31, r19
     bne lbl_fn_805233FC_00001200
     lwz r3, 0x13c(r20)
-    bl fn_80202118
+    bl profile_getMetricValue
     stfs f30, 0x104(r3)
     b lbl_fn_805233FC_0000120C
 lbl_fn_805233FC_00001200:
     lwz r3, 0x13c(r20)
-    bl fn_80202118
+    bl profile_getMetricValue
     stfs f28, 0x104(r3)
 lbl_fn_805233FC_0000120C:
     lfs f31, 0x160(r25)
     addi r22, r27, 0x26d
     lwz r3, 0x13c(r20)
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r26, r3
     mr r3, r22
     bl str_findChar
     fmr f1, f31
     mr r4, r3
     addi r3, r26, 0x58
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lfs f31, 0x164(r25)
     addi r22, r27, 0x275
     lwz r3, 0x13c(r20)
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r26, r3
     mr r3, r22
     bl str_findChar
     fmr f1, f31
     mr r4, r3
     addi r3, r26, 0x58
-    bl fn_801FECE0
+    bl thread_findAndNotify
 lbl_fn_805233FC_00001264:
     addi r19, r19, 0x1
     addi r20, r20, 0x4
@@ -1426,7 +1426,7 @@ lbl_fn_805233FC_00001264:
     slwi r30, r0, 6
 lbl_fn_805233FC_00001294:
     lwz r3, 0x13c(r21)
-    bl fn_80202118
+    bl profile_getMetricValue
     cmpwi r3, 0x0
     beq lbl_fn_805233FC_0000131C
     addi r20, r25, 0x190
@@ -1437,14 +1437,14 @@ lbl_fn_805233FC_000012B0:
     lwz r3, 0x13c(r21)
     addi r0, r4, 0x10
     add r19, r0, r30
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r26, r3
     mr r3, r20
     bl str_findChar
     mr r4, r3
     mr r5, r19
     addi r3, r26, 0x58
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     addi r20, r20, 0x110
     addi r22, r22, 0x1
 lbl_fn_805233FC_000012E8:
@@ -1453,14 +1453,14 @@ lbl_fn_805233FC_000012E8:
     blt lbl_fn_805233FC_000012B0
     lwz r3, 0x13c(r21)
     addi r22, r27, 0x259
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r26, r3
     mr r3, r22
     bl str_findChar
     lfs f1, lbl_808879F8
     mr r4, r3
     addi r3, r26, 0x58
-    bl fn_801FECE0
+    bl thread_findAndNotify
 lbl_fn_805233FC_0000131C:
     addi r23, r23, 0x1
     addi r24, r24, 0x80
@@ -1468,7 +1468,7 @@ lbl_fn_805233FC_0000131C:
     addi r21, r21, 0x4
     blt lbl_fn_805233FC_00001294
     lwz r3, 0x18(r29)
-    bl fn_80202D00
+    bl perf_getMetricValue
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_805233FC_00001470
@@ -1478,7 +1478,7 @@ lbl_fn_805233FC_0000131C:
     lwz r3, 0x18(r29)
     cmpwi r3, 0x0
     beq lbl_fn_805233FC_000013A0
-    bl fn_80202D00
+    bl perf_getMetricValue
     cmpwi r3, 0x0
     beq lbl_fn_805233FC_000013A0
     lwz r3, 0x0(r29)
@@ -1486,7 +1486,7 @@ lbl_fn_805233FC_0000131C:
     cmplwi r0, 0x1
     ble lbl_fn_805233FC_000013A0
     lwz r3, 0x18(r29)
-    bl fn_80202D00
+    bl perf_getMetricValue
     lfs f7, 0x54(r3)
     lfs f0, lbl_80887A00
     fabs f7, f7
@@ -1553,7 +1553,7 @@ lbl_fn_805233FC_00001418:
     bl fn_801F837C
 lbl_fn_805233FC_00001470:
     lwz r3, 0xfc(r25)
-    bl fn_80202118
+    bl profile_getMetricValue
     lwz r5, 0xe8(r25)
     lis r4, 0x2aab
     subi r0, r4, 0x5555
@@ -1595,7 +1595,7 @@ lbl_fn_805233FC_000014D8:
     add r4, r0, r24
     bl fn_8051125C
     lwz r3, 0x144(r23)
-    bl fn_80202118
+    bl profile_getMetricValue
     cmpwi r3, 0x0
     beq lbl_fn_805233FC_0000160C
     cmpwi r26, 0x0
@@ -1607,7 +1607,7 @@ lbl_fn_805233FC_000014D8:
     addi r3, r1, 0x168
     bl saveSlot_readSummary
     lwz r3, 0x144(r23)
-    bl fn_80202118
+    bl profile_getMetricValue
     addi r4, r29, 0x2a5
     addi r5, r1, 0x168
     bl fn_801F4728
@@ -1639,7 +1639,7 @@ lbl_fn_805233FC_00001598:
     addi r22, r29, 0x2ae
     lwz r3, 0x144(r23)
     fmuls f27, f31, f0
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r27, r3
     mr r3, r22
     bl str_findChar
@@ -1658,14 +1658,14 @@ lbl_fn_805233FC_000015E0:
 lbl_fn_805233FC_000015E4:
     lwz r3, 0x144(r23)
     addi r22, r29, 0x2b9
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r27, r3
     mr r3, r22
     bl str_findChar
     fmr f1, f27
     mr r4, r3
     addi r3, r27, 0x58
-    bl fn_801FECE0
+    bl thread_findAndNotify
 lbl_fn_805233FC_0000160C:
     addi r19, r19, 0x1
     addi r23, r23, 0x4
@@ -1673,7 +1673,7 @@ lbl_fn_805233FC_0000160C:
     blt lbl_fn_805233FC_000014D8
     lwz r19, lbl_8087F9C0
     lwz r3, 0xfc(r25)
-    bl fn_80202118
+    bl profile_getMetricValue
     lwz r0, 0x28(r19)
     mr r29, r3
     cmpwi r0, 0x1
@@ -1686,24 +1686,24 @@ lbl_fn_805233FC_0000160C:
     lfs f1, lbl_808879F0
     mr r4, r3
     mr r3, r21
-    bl fn_801FECE0
+    bl thread_findAndNotify
     mr r21, r25
     addi r22, r26, 0x2c1
     li r20, 0x0
 lbl_fn_805233FC_00001668:
     lwz r3, 0x144(r21)
-    bl fn_80202118
+    bl profile_getMetricValue
     cmpwi r3, 0x0
     beq lbl_fn_805233FC_0000169C
     lwz r3, 0x144(r21)
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r26, r3
     mr r3, r22
     bl str_findChar
     lfs f1, lbl_808879F0
     mr r4, r3
     addi r3, r26, 0x58
-    bl fn_801FECE0
+    bl thread_findAndNotify
 lbl_fn_805233FC_0000169C:
     addi r20, r20, 0x1
     addi r21, r21, 0x4
@@ -1719,24 +1719,24 @@ lbl_fn_805233FC_000016B0:
     lfs f1, lbl_808879F8
     mr r4, r3
     mr r3, r21
-    bl fn_801FECE0
+    bl thread_findAndNotify
     mr r21, r25
     addi r22, r26, 0x2c1
     li r20, 0x0
 lbl_fn_805233FC_000016E0:
     lwz r3, 0x144(r21)
-    bl fn_80202118
+    bl profile_getMetricValue
     cmpwi r3, 0x0
     beq lbl_fn_805233FC_00001714
     lwz r3, 0x144(r21)
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r26, r3
     mr r3, r22
     bl str_findChar
     lfs f1, lbl_808879F8
     mr r4, r3
     addi r3, r26, 0x58
-    bl fn_801FECE0
+    bl thread_findAndNotify
 lbl_fn_805233FC_00001714:
     addi r20, r20, 0x1
     addi r21, r21, 0x4
@@ -1761,7 +1761,7 @@ lbl_fn_805233FC_00001724:
     mr r4, r3
     mr r3, r21
     mr r5, r22
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     addi r4, r27, 0x42aa
     li r3, 0x0
     bl fn_80116FC0
@@ -1771,7 +1771,7 @@ lbl_fn_805233FC_00001724:
     mr r4, r3
     mr r3, r21
     mr r5, r22
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     b lbl_fn_805233FC_0000186C
 lbl_fn_805233FC_0000179C:
     lwz r0, 0x30(r19)
@@ -1790,7 +1790,7 @@ lbl_fn_805233FC_0000179C:
     mr r4, r3
     mr r3, r21
     mr r5, r22
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     addi r4, r27, 0x42a8
     li r3, 0x0
     bl fn_80116FC0
@@ -1800,7 +1800,7 @@ lbl_fn_805233FC_0000179C:
     mr r4, r3
     mr r3, r21
     mr r5, r22
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     b lbl_fn_805233FC_0000186C
 lbl_fn_805233FC_0000180C:
     lis r27, 0xf
@@ -1816,7 +1816,7 @@ lbl_fn_805233FC_0000180C:
     mr r4, r3
     mr r3, r21
     mr r5, r22
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     addi r4, r27, 0x42a9
     li r3, 0x0
     bl fn_80116FC0
@@ -1826,7 +1826,7 @@ lbl_fn_805233FC_0000180C:
     mr r4, r3
     mr r3, r21
     mr r5, r22
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
 lbl_fn_805233FC_0000186C:
     lwz r5, lbl_8087F9C0
     li r4, 0x0
@@ -1931,7 +1931,7 @@ lbl_fn_805233FC_000019B0:
     mulli r0, r0, 0xc
     add r3, r25, r0
     lwz r3, 0xf0(r3)
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r22, r3
     addi r3, r1, 0x1b0
     bl str_findChar
@@ -2020,12 +2020,12 @@ lbl_fn_805233FC_00001AF4:
     cmpwi r3, 0x0
     beq lbl_fn_805233FC_00001B54
     lwz r3, 0x140(r25)
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r26, r3
     b lbl_fn_805233FC_00001B60
 lbl_fn_805233FC_00001B54:
     lwz r3, 0x13c(r25)
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r26, r3
 lbl_fn_805233FC_00001B60:
     addi r3, r1, 0x1b0
@@ -2035,7 +2035,7 @@ lbl_fn_805233FC_00001B60:
     addi r3, r1, 0x12c
     bl saveSlot_readSummary
     lwz r3, 0x138(r25)
-    bl fn_80202118
+    bl profile_getMetricValue
     lis r4, lbl_8075C6C4@ha
     addi r5, r1, 0x12c
     addi r4, r4, lbl_8075C6C4@l
@@ -2062,7 +2062,7 @@ lbl_fn_805233FC_00001B98:
     mulli r0, r0, 0xc
     add r3, r25, r0
     lwz r3, 0xf0(r3)
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r22, r3
     addi r3, r1, 0x1b0
     bl str_findChar
@@ -2087,25 +2087,25 @@ lbl_fn_805233FC_00001C34:
     cmpwi r0, 0x2
     bne lbl_fn_805233FC_00001CA0
     lwz r3, 0x18(r21)
-    bl fn_80202D00
+    bl perf_getMetricValue
     lfs f1, lbl_80887A1C
     addi r4, r31, 0x320
     li r5, 0x0
     bl fn_801F6D7C
     lwz r3, 0x18(r21)
-    bl fn_80202D00
+    bl perf_getMetricValue
     lfs f1, lbl_80887A20
     addi r4, r31, 0x32b
     li r5, 0x0
     bl fn_801F6D7C
     lwz r3, 0x18(r21)
-    bl fn_80202D00
+    bl perf_getMetricValue
     lfs f1, lbl_80887A24
     addi r4, r31, 0x336
     li r5, 0x0
     bl fn_801F6D7C
     lwz r3, 0x18(r21)
-    bl fn_80202D00
+    bl perf_getMetricValue
     lfs f1, lbl_80887A28
     addi r4, r31, 0x336
     li r5, 0x2
@@ -2118,7 +2118,7 @@ lbl_fn_805233FC_00001CA0:
     crclr 6
     bl sprintf
     lwz r3, 0x18(r21)
-    bl fn_80202D00
+    bl perf_getMetricValue
     mr r4, r3
     addi r3, r1, 0xdc
     addi r5, r1, 0x1b0
@@ -2143,7 +2143,7 @@ lbl_fn_805233FC_00001D10:
     lwz r4, 0x50(r25)
     lwz r3, 0x18(r21)
     addi r21, r4, 0xc0
-    bl fn_80202D00
+    bl perf_getMetricValue
     lis r5, lbl_8075C6C4@ha
     mr r4, r3
     addi r5, r5, lbl_8075C6C4@l
@@ -2158,7 +2158,7 @@ lbl_fn_805233FC_00001D48:
     lwz r4, 0x50(r25)
     lwz r3, 0x18(r21)
     addi r21, r4, 0xc0
-    bl fn_80202D00
+    bl perf_getMetricValue
     mr r4, r3
     mr r3, r25
     mr r6, r21
@@ -2192,7 +2192,7 @@ lbl_fn_805233FC_00001DC8:
     lwz r4, 0x50(r25)
     lwz r3, 0x18(r21)
     addi r21, r4, 0xc0
-    bl fn_80202D00
+    bl perf_getMetricValue
     lis r5, lbl_8075C6C4@ha
     mr r4, r3
     addi r5, r5, lbl_8075C6C4@l
@@ -2207,7 +2207,7 @@ lbl_fn_805233FC_00001E00:
     lwz r4, 0x50(r25)
     lwz r3, 0x18(r21)
     addi r21, r4, 0xc0
-    bl fn_80202D00
+    bl perf_getMetricValue
     mr r4, r3
     mr r3, r25
     mr r6, r21
@@ -2247,7 +2247,7 @@ lbl_fn_805233FC_00001E6C:
     fmr f1, f27
     mr r4, r3
     mr r3, r21
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lwz r4, 0x17c(r25)
     addi r3, r26, 0x34e
     addi r21, r4, 0x58
@@ -2255,7 +2255,7 @@ lbl_fn_805233FC_00001E6C:
     lfs f1, lbl_808879F0
     mr r4, r3
     mr r3, r21
-    bl fn_801FECE0
+    bl thread_findAndNotify
     b lbl_fn_805233FC_00001F68
 lbl_fn_805233FC_00001EC8:
     bge lbl_fn_805233FC_00001F20
@@ -2268,7 +2268,7 @@ lbl_fn_805233FC_00001EC8:
     lfs f1, lbl_808879F0
     mr r4, r3
     mr r3, r21
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lfs f0, 0x180(r25)
     addi r3, r26, 0x34e
     lwz r4, 0x17c(r25)
@@ -2278,7 +2278,7 @@ lbl_fn_805233FC_00001EC8:
     fmr f1, f27
     mr r4, r3
     mr r3, r21
-    bl fn_801FECE0
+    bl thread_findAndNotify
     b lbl_fn_805233FC_00001F68
 lbl_fn_805233FC_00001F20:
     lwz r4, 0x17c(r25)
@@ -2290,7 +2290,7 @@ lbl_fn_805233FC_00001F20:
     lfs f1, lbl_808879F0
     mr r4, r3
     mr r3, r21
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lwz r4, 0x17c(r25)
     addi r3, r26, 0x34e
     addi r21, r4, 0x58
@@ -2298,7 +2298,7 @@ lbl_fn_805233FC_00001F20:
     lfs f1, lbl_808879F0
     mr r4, r3
     mr r3, r21
-    bl fn_801FECE0
+    bl thread_findAndNotify
 lbl_fn_805233FC_00001F68:
     lwz r3, 0x178(r25)
     lwz r0, 0x38(r3)
@@ -2361,7 +2361,7 @@ lbl_fn_805233FC_00001F68:
     fmr f1, f27
     mr r4, r3
     mr r3, r21
-    bl fn_801FECE0
+    bl thread_findAndNotify
     lwz r0, 0xd8(r25)
     cmpwi r0, 0x7
     bne lbl_fn_805233FC_0000208C

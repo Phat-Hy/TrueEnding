@@ -9,10 +9,10 @@ extern void _savegpr_14(void);
 extern void _savegpr_17(void);
 extern void _savegpr_25(void);
 extern void dtor_80084684(void);
-extern void fn_80013DC4(void);
+extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void talk_parseQuotedString(void);
-extern void fn_8005B5F8(void);
+extern void talk_scanQuotedString(void);
 extern void fn_8005B6E8(void);
 extern void talk_parseDialogue(void);
 extern void fn_8005B8F8(void);
@@ -33,7 +33,7 @@ extern void str_findChar(void);
 extern void fn_800DD3FC(void);
 extern void strcmp(void);
 extern void atoi(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
 extern u32 strlen(const char* str);
@@ -550,7 +550,7 @@ lbl_fn_8020C0BC_0000057C:
     beq lbl_fn_8020C0BC_000005AC
     addi r3, r1, 0xc64
     bl talk_parseDialogue
-    bl fn_80686A48
+    bl wcslen
     add r3, r3, r24
     addi r24, r3, 0x1
 lbl_fn_8020C0BC_000005AC:
@@ -568,7 +568,7 @@ lbl_fn_8020C0BC_000005BC:
     beq lbl_fn_8020C0BC_000005EC
     addi r3, r1, 0x10
     bl talk_parseDialogue
-    bl fn_80686A48
+    bl wcslen
     add r3, r3, r24
     addi r24, r3, 0x1
 lbl_fn_8020C0BC_000005EC:
@@ -643,7 +643,7 @@ lbl_fn_8020C0BC_00000694:
     mr r3, r24
     add r0, r0, r25
     stw r0, 0x4(r4)
-    bl fn_80686A48
+    bl wcslen
     add r3, r3, r31
     addi r26, r26, 0x8
     addi r31, r3, 0x1
@@ -679,7 +679,7 @@ lbl_fn_8020C0BC_0000071C:
     mr r3, r24
     add r0, r0, r25
     stw r0, 0x4(r4)
-    bl fn_80686A48
+    bl wcslen
     add r3, r3, r31
     addi r26, r26, 0x8
     addi r31, r3, 0x1
@@ -1245,7 +1245,7 @@ lbl_fn_8020C5D4_00000F3C:
     stw r0, 0x10dc(r31)
 lbl_fn_8020C5D4_00000F48:
     addi r3, r1, 0x8
-    bl fn_8005B5F8
+    bl talk_scanQuotedString
     cmpwi r3, 0x0
     bne lbl_fn_8020C5D4_000009C8
 lbl_fn_8020C5D4_00000F58:
@@ -1513,7 +1513,7 @@ lbl_fn_8020CC64_000012C4:
     mr r19, r3
     mr r3, r28
     mr r4, r19
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x34(r1)
     mr r3, r28
     stb r0, 0x30(r1)
@@ -1540,7 +1540,7 @@ lbl_fn_8020CC64_0000133C:
     mr r16, r3
     mr r3, r14
     mr r4, r16
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x2c(r1)
     mr r3, r14
     stb r0, 0x28(r1)
@@ -1558,7 +1558,7 @@ lbl_fn_8020CC64_0000133C:
     mr r16, r3
     mr r3, r27
     mr r4, r16
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x24(r1)
     mr r3, r27
     stb r0, 0x20(r1)

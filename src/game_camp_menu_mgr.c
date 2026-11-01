@@ -24,7 +24,7 @@ extern void fn_801F0544(void);
 extern void fn_801F64D0(void);
 extern void fn_801F6C2C(void);
 extern void fn_801F6C38(void);
-extern void fn_801F6C80(void);
+extern void save_computeCrc32(void);
 extern void fn_801F837C(void);
 extern void fn_8020924C(void);
 extern void fn_8021F3E8(void);
@@ -44,7 +44,7 @@ extern void fn_803EB394(void);
 extern void fn_803EB4A8(void);
 extern void fn_803EBC04(void);
 extern void fn_8046ECDC(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -1272,7 +1272,7 @@ lbl_fn_803B710C_00001070:
     mr r3, r30
     stw r0, 0x88(r1)
     stw r0, 0x8c(r1)
-    bl fn_80686A48
+    bl wcslen
     mr r28, r3
     mr r3, r31
     mr r4, r28
@@ -1655,7 +1655,7 @@ lbl_fn_803B710C_00001590:
     addi r30, r30, lbl_8074FD38@l
     lfs f1, lbl_80885C34
     addi r4, r30, 0x14f
-    bl fn_801F6C80
+    bl save_computeCrc32
     lwz r3, 0x48(r29)
     addi r4, r30, 0x158
     lwz r5, 0x4(r31)
@@ -1704,7 +1704,7 @@ lbl_fn_803B710C_00001660:
     addi r30, r30, lbl_8074FD38@l
     lfs f1, lbl_80885C20
     addi r4, r30, 0x14f
-    bl fn_801F6C80
+    bl save_computeCrc32
     la r5, lbl_8087DD88
     lwz r3, 0x48(r29)
     addi r4, r30, 0x158

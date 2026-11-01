@@ -18,7 +18,7 @@ extern void fn_8050284C(void);
 extern void fn_80502874(void);
 extern void fn_8050B96C(void);
 extern void fn_8050E7E0(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 extern void fn_8068B2A0(void);
 extern void fn_806A8E40(void);
 extern void fn_806A8E70(void);
@@ -1722,7 +1722,7 @@ asm void fn_804F8468(void)
     addi r15, r1, 0x260
     stw r0, 0x264(r1)
     stw r0, 0x268(r1)
-    bl fn_80686A48
+    bl wcslen
     mr r16, r3
     mr r3, r15
     mr r4, r16
@@ -1778,7 +1778,7 @@ lbl_fn_804F8468_00001790:
     lbz r0, 0x224(r1)
     mr r3, r14
     stb r0, 0x220(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r4, r15
     mr r6, r14
@@ -1801,7 +1801,7 @@ lbl_fn_804F8468_000017E4:
     lbz r0, 0x21c(r1)
     mr r3, r14
     stb r0, 0x218(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r4, r15
     mr r6, r14
@@ -1841,7 +1841,7 @@ lbl_fn_804F8468_0000186C:
     lbz r0, 0x214(r1)
     mr r3, r14
     stb r0, 0x210(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r4, r15
     mr r6, r14
@@ -1964,7 +1964,7 @@ lbl_fn_804F8468_000018B4:
     addi r15, r1, 0x254
     stw r0, 0x258(r1)
     stw r0, 0x25c(r1)
-    bl fn_80686A48
+    bl wcslen
     mr r16, r3
     mr r3, r15
     mr r4, r16
@@ -2068,7 +2068,7 @@ lbl_fn_804F8468_00001BE0:
     lbz r0, 0x204(r1)
     mr r3, r14
     stb r0, 0x200(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r4, r15
     mr r6, r14
@@ -2091,7 +2091,7 @@ lbl_fn_804F8468_00001C34:
     lbz r0, 0x1fc(r1)
     mr r3, r14
     stb r0, 0x1f8(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r4, r15
     mr r6, r14
@@ -2136,7 +2136,7 @@ lbl_fn_804F8468_00001CCC:
     lbz r0, 0x1f4(r1)
     mr r3, r14
     stb r0, 0x1f0(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r4, r15
     mr r6, r14
@@ -2159,7 +2159,7 @@ lbl_fn_804F8468_00001D20:
     lbz r0, 0x1ec(r1)
     mr r3, r14
     stb r0, 0x1e8(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r4, r15
     mr r6, r14
@@ -2226,7 +2226,7 @@ lbl_fn_804F8468_00001E1C:
     lbz r0, 0x1e4(r1)
     mr r3, r14
     stb r0, 0x1e0(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r4, r15
     mr r6, r14
@@ -2253,7 +2253,7 @@ lbl_fn_804F8468_00001E80:
     lbz r0, 0x1dc(r1)
     mr r3, r14
     stb r0, 0x1d8(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r4, r15
     mr r6, r14
@@ -2274,7 +2274,7 @@ lbl_fn_804F8468_00001ECC:
     lbz r0, 0x1d4(r1)
     addi r3, r1, 0x770
     stb r0, 0x1d0(r1)
-    bl fn_80686A48
+    bl wcslen
     addi r6, r1, 0x770
     slwi r0, r3, 1
     mr r7, r6
@@ -2302,7 +2302,7 @@ lbl_fn_804F8468_00001F34:
     lbz r0, 0x1cc(r1)
     mr r3, r14
     stb r0, 0x1c8(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r4, r15
     mr r6, r14
@@ -2323,7 +2323,7 @@ lbl_fn_804F8468_00001F80:
     lbz r0, 0x1c4(r1)
     addi r3, r1, 0x770
     stb r0, 0x1c0(r1)
-    bl fn_80686A48
+    bl wcslen
     addi r6, r1, 0x770
     slwi r0, r3, 1
     mr r7, r6
@@ -2379,7 +2379,7 @@ lbl_fn_804F8468_00002050:
     lbz r0, 0x1bc(r1)
     mr r3, r14
     stb r0, 0x1b8(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r5, r15
     mr r6, r14
@@ -2410,7 +2410,7 @@ lbl_fn_804F8468_000020C0:
 lbl_fn_804F8468_000020C4:
     stb r15, 0x1b0(r1)
     addi r3, r1, 0x770
-    bl fn_80686A48
+    bl wcslen
     addi r6, r1, 0x770
     slwi r0, r3, 1
     mr r7, r6
@@ -2431,7 +2431,7 @@ lbl_fn_804F8468_0000210C:
 lbl_fn_804F8468_00002110:
     stb r14, 0x1a8(r1)
     mr r3, r16
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r4, r17
     mr r6, r16
@@ -2490,7 +2490,7 @@ lbl_fn_804F8468_000021E8:
     lbz r0, 0x1a4(r1)
     mr r3, r14
     stb r0, 0x1a0(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r5, r15
     mr r6, r14
@@ -2521,7 +2521,7 @@ lbl_fn_804F8468_00002258:
 lbl_fn_804F8468_0000225C:
     stb r15, 0x198(r1)
     addi r3, r1, 0x770
-    bl fn_80686A48
+    bl wcslen
     addi r6, r1, 0x770
     slwi r0, r3, 1
     mr r7, r6
@@ -2542,7 +2542,7 @@ lbl_fn_804F8468_000022A4:
 lbl_fn_804F8468_000022A8:
     stb r14, 0x190(r1)
     mr r3, r16
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r4, r17
     mr r6, r16
@@ -2569,7 +2569,7 @@ lbl_fn_804F8468_00002308:
     lbz r0, 0x18c(r1)
     mr r3, r14
     stb r0, 0x188(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r4, r15
     mr r6, r14
@@ -2594,7 +2594,7 @@ lbl_fn_804F8468_00002364:
     lbz r0, 0x184(r1)
     addi r3, r1, 0x770
     stb r0, 0x180(r1)
-    bl fn_80686A48
+    bl wcslen
     addi r6, r1, 0x770
     slwi r0, r3, 1
     mr r7, r6
@@ -2647,7 +2647,7 @@ lbl_fn_804F8468_000023B0:
     addi r15, r1, 0x248
     stw r0, 0x24c(r1)
     stw r0, 0x250(r1)
-    bl fn_80686A48
+    bl wcslen
     mr r16, r3
     mr r3, r15
     mr r4, r16
@@ -2699,7 +2699,7 @@ lbl_fn_804F8468_000024E8:
     lbz r0, 0x174(r1)
     addi r3, r1, 0x570
     stb r0, 0x170(r1)
-    bl fn_80686A48
+    bl wcslen
     addi r6, r1, 0x570
     slwi r0, r3, 1
     mr r7, r6
@@ -2830,7 +2830,7 @@ lbl_fn_804F8468_000026C4:
 lbl_fn_804F8468_000026C8:
     stb r22, 0x168(r1)
     mr r3, r20
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r5, r15
     mr r6, r20
@@ -2850,7 +2850,7 @@ lbl_fn_804F8468_0000270C:
 lbl_fn_804F8468_00002710:
     stb r23, 0x160(r1)
     addi r3, r1, 0x570
-    bl fn_80686A48
+    bl wcslen
     addi r6, r1, 0x570
     slwi r0, r3, 1
     mr r7, r6
@@ -2871,7 +2871,7 @@ lbl_fn_804F8468_00002758:
 lbl_fn_804F8468_0000275C:
     stb r14, 0x158(r1)
     mr r3, r19
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r4, r15
     mr r6, r19
@@ -2896,7 +2896,7 @@ lbl_fn_804F8468_000027B4:
     lwz r0, 0x980(r1)
     addi r3, r1, 0x570
     stb r0, 0x150(r1)
-    bl fn_80686A48
+    bl wcslen
     addi r6, r1, 0x570
     slwi r0, r3, 1
     mr r7, r6
@@ -2918,7 +2918,7 @@ lbl_fn_804F8468_00002804:
     lwz r0, 0x984(r1)
     mr r3, r18
     stb r0, 0x148(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r4, r15
     mr r6, r18
@@ -2943,7 +2943,7 @@ lbl_fn_804F8468_00002860:
     lwz r0, 0x988(r1)
     addi r3, r1, 0x570
     stb r0, 0x140(r1)
-    bl fn_80686A48
+    bl wcslen
     addi r6, r1, 0x570
     slwi r0, r3, 1
     mr r7, r6
@@ -2965,7 +2965,7 @@ lbl_fn_804F8468_000028B0:
     lwz r0, 0x98c(r1)
     mr r3, r17
     stb r0, 0x138(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r4, r15
     mr r6, r17
@@ -2990,7 +2990,7 @@ lbl_fn_804F8468_0000290C:
     lbz r0, 0x134(r1)
     mr r3, r16
     stb r0, 0x130(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r4, r15
     mr r6, r16
@@ -3016,7 +3016,7 @@ lbl_fn_804F8468_00002968:
     lbz r0, 0x12c(r1)
     mr r3, r16
     stb r0, 0x128(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r4, r15
     mr r6, r16
@@ -3042,7 +3042,7 @@ lbl_fn_804F8468_000029C4:
     lbz r0, 0x124(r1)
     mr r3, r16
     stb r0, 0x120(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r4, r15
     mr r6, r16
@@ -3064,7 +3064,7 @@ lbl_fn_804F8468_00002A10:
     lwz r0, 0x990(r1)
     mr r3, r31
     stb r0, 0x118(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r4, r15
     mr r6, r31
@@ -3085,7 +3085,7 @@ lbl_fn_804F8468_00002A5C:
     lwz r0, 0x994(r1)
     addi r3, r29, 0x10
     stb r0, 0x110(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r4, r15
     add r5, r29, r0
@@ -3107,7 +3107,7 @@ lbl_fn_804F8468_00002AAC:
     lwz r0, 0x998(r1)
     mr r3, r30
     stb r0, 0x108(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r4, r15
     mr r6, r30
@@ -3132,7 +3132,7 @@ lbl_fn_804F8468_00002B08:
     lwz r0, 0x99c(r1)
     addi r3, r1, 0x570
     stb r0, 0x100(r1)
-    bl fn_80686A48
+    bl wcslen
     addi r6, r1, 0x570
     slwi r0, r3, 1
     mr r7, r6
@@ -3195,7 +3195,7 @@ lbl_fn_804F8468_00002BD4:
     addi r15, r1, 0x23c
     stw r0, 0x240(r1)
     stw r0, 0x244(r1)
-    bl fn_80686A48
+    bl wcslen
     mr r16, r3
     mr r3, r15
     mr r4, r16
@@ -3226,7 +3226,7 @@ lbl_fn_804F8468_00002C68:
     lbz r0, 0xf4(r1)
     addi r3, r1, 0x370
     stb r0, 0xf0(r1)
-    bl fn_80686A48
+    bl wcslen
     addi r6, r1, 0x370
     slwi r0, r3, 1
     mr r7, r6
@@ -3358,7 +3358,7 @@ lbl_fn_804F8468_00002E44:
 lbl_fn_804F8468_00002E48:
     stb r22, 0xe8(r1)
     mr r3, r24
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r5, r29
     mr r6, r24
@@ -3382,7 +3382,7 @@ lbl_fn_804F8468_00002E9C:
 lbl_fn_804F8468_00002EA0:
     stb r21, 0xe0(r1)
     addi r3, r1, 0x370
-    bl fn_80686A48
+    bl wcslen
     addi r6, r1, 0x370
     slwi r0, r3, 1
     mr r7, r6
@@ -3403,7 +3403,7 @@ lbl_fn_804F8468_00002EE8:
 lbl_fn_804F8468_00002EEC:
     stb r20, 0xd8(r1)
     mr r3, r26
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r4, r29
     mr r6, r26
@@ -3427,7 +3427,7 @@ lbl_fn_804F8468_00002F40:
 lbl_fn_804F8468_00002F44:
     stb r31, 0xd0(r1)
     addi r3, r1, 0x370
-    bl fn_80686A48
+    bl wcslen
     addi r6, r1, 0x370
     slwi r0, r3, 1
     mr r7, r6
@@ -3449,7 +3449,7 @@ lbl_fn_804F8468_00002F90:
     lwz r0, 0x9a0(r1)
     mr r3, r27
     stb r0, 0xc8(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r4, r29
     mr r6, r27
@@ -3474,7 +3474,7 @@ lbl_fn_804F8468_00002FEC:
     lbz r0, 0xc4(r1)
     mr r3, r29
     stb r0, 0xc0(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r4, r30
     mr r6, r29
@@ -3500,7 +3500,7 @@ lbl_fn_804F8468_00003048:
     lbz r0, 0xbc(r1)
     mr r3, r29
     stb r0, 0xb8(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r4, r30
     mr r6, r29
@@ -3526,7 +3526,7 @@ lbl_fn_804F8468_000030A4:
     lbz r0, 0xb4(r1)
     mr r3, r29
     stb r0, 0xb0(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r4, r30
     mr r6, r29
@@ -3552,7 +3552,7 @@ lbl_fn_804F8468_00003100:
     lbz r0, 0xac(r1)
     mr r3, r29
     stb r0, 0xa8(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r4, r30
     mr r6, r29
@@ -3578,7 +3578,7 @@ lbl_fn_804F8468_0000315C:
     lbz r0, 0xa4(r1)
     mr r3, r29
     stb r0, 0xa0(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r4, r30
     mr r6, r29
@@ -3604,7 +3604,7 @@ lbl_fn_804F8468_000031B8:
     lbz r0, 0x9c(r1)
     mr r3, r29
     stb r0, 0x98(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r4, r30
     mr r6, r29
@@ -3630,7 +3630,7 @@ lbl_fn_804F8468_00003218:
     lbz r0, 0x94(r1)
     addi r3, r1, 0x370
     stb r0, 0x90(r1)
-    bl fn_80686A48
+    bl wcslen
     addi r6, r1, 0x370
     slwi r0, r3, 1
     mr r7, r6
@@ -3653,7 +3653,7 @@ lbl_fn_804F8468_0000326C:
     lbz r0, 0x8c(r1)
     mr r3, r29
     stb r0, 0x88(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r4, r30
     mr r6, r29
@@ -3679,7 +3679,7 @@ lbl_fn_804F8468_000032C8:
     lbz r0, 0x84(r1)
     mr r3, r29
     stb r0, 0x80(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r4, r30
     mr r6, r29
@@ -3705,7 +3705,7 @@ lbl_fn_804F8468_00003328:
     lbz r0, 0x7c(r1)
     addi r3, r1, 0x370
     stb r0, 0x78(r1)
-    bl fn_80686A48
+    bl wcslen
     addi r6, r1, 0x370
     slwi r0, r3, 1
     mr r7, r6
@@ -3728,7 +3728,7 @@ lbl_fn_804F8468_0000337C:
     lbz r0, 0x74(r1)
     mr r3, r29
     stb r0, 0x70(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r4, r30
     mr r6, r29
@@ -3750,7 +3750,7 @@ lbl_fn_804F8468_000033C8:
     lwz r0, 0x9a4(r1)
     mr r3, r14
     stb r0, 0x68(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r4, r29
     mr r6, r14
@@ -3775,7 +3775,7 @@ lbl_fn_804F8468_00003424:
     lbz r0, 0x64(r1)
     mr r3, r29
     stb r0, 0x60(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r4, r30
     mr r6, r29
@@ -3803,7 +3803,7 @@ lbl_fn_804F8468_00003488:
     lbz r0, 0x5c(r1)
     mr r3, r29
     stb r0, 0x58(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r4, r30
     mr r6, r29
@@ -3827,7 +3827,7 @@ lbl_fn_804F8468_000034DC:
     lbz r0, 0x54(r1)
     mr r3, r29
     stb r0, 0x50(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r4, r30
     mr r6, r29
@@ -3855,7 +3855,7 @@ lbl_fn_804F8468_00003540:
     lbz r0, 0x4c(r1)
     mr r3, r29
     stb r0, 0x48(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r4, r30
     mr r6, r29
@@ -3879,7 +3879,7 @@ lbl_fn_804F8468_00003594:
     lbz r0, 0x44(r1)
     mr r3, r29
     stb r0, 0x40(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r4, r30
     mr r6, r29
@@ -3906,7 +3906,7 @@ lbl_fn_804F8468_000035F4:
     lbz r0, 0x3c(r1)
     mr r3, r29
     stb r0, 0x38(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r4, r30
     mr r6, r29
@@ -3933,7 +3933,7 @@ lbl_fn_804F8468_00003654:
     lbz r0, 0x34(r1)
     mr r3, r29
     stb r0, 0x30(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r4, r30
     mr r6, r29
@@ -3959,7 +3959,7 @@ lbl_fn_804F8468_000036B0:
     lbz r0, 0x2c(r1)
     mr r3, r29
     stb r0, 0x28(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r4, r30
     mr r6, r29
@@ -3985,7 +3985,7 @@ lbl_fn_804F8468_0000370C:
     lbz r0, 0x24(r1)
     mr r3, r29
     stb r0, 0x20(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r4, r30
     mr r6, r29
@@ -4009,7 +4009,7 @@ lbl_fn_804F8468_00003760:
     lbz r0, 0x1c(r1)
     mr r3, r29
     stb r0, 0x18(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r4, r30
     mr r6, r29
@@ -4031,7 +4031,7 @@ lbl_fn_804F8468_000037AC:
     lwz r0, 0x9a8(r1)
     mr r3, r15
     stb r0, 0x10(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r4, r29
     mr r6, r15
@@ -4056,7 +4056,7 @@ lbl_fn_804F8468_00003808:
     lwz r0, 0x9ac(r1)
     addi r3, r1, 0x370
     stb r0, 0x8(r1)
-    bl fn_80686A48
+    bl wcslen
     addi r6, r1, 0x370
     slwi r0, r3, 1
     mr r7, r6

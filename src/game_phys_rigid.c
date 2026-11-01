@@ -28,7 +28,7 @@ extern void fn_801341B8(void);
 extern void fn_8014FCE8(void);
 extern void fn_8016F3D0(void);
 extern void fn_80171DB0(void);
-extern void fn_80211480(void);
+extern void event_findEntryById(void);
 extern void sound_initGlobalInstances(void);
 extern void fn_80239D58(void);
 extern void res_findResourceSlot(void);
@@ -43,7 +43,7 @@ extern void fn_8054E100(void);
 extern void PSVECSquareMag(void);
 extern void rand(void);
 extern void wmemcpy(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 
 /* External data declarations */
 extern u8 lbl_80735DD0[];
@@ -627,7 +627,7 @@ lbl_fn_8010A4A8_00000788:
     cmplw r26, r29
     beq lbl_fn_8010A4A8_000007B0
     mr r3, r26
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r3, r29
     mr r4, r26
@@ -2036,7 +2036,7 @@ lbl_fn_8010B398_00001AD4:
     slwi r0, r0, 2
     add r3, r3, r0
     lwz r3, 0x50(r3)
-    bl fn_80211480
+    bl event_findEntryById
     cmpwi r3, 0x0
     beq lbl_fn_8010B398_00001BEC
     addi r21, r3, 0xec

@@ -10,7 +10,7 @@ extern void _restgpr_26(void);
 extern void _savegpr_20(void);
 extern void _savegpr_25(void);
 extern void _savegpr_26(void);
-extern void fn_805C0120(void);
+extern void gx_selectActiveParam(void);
 extern void fn_805C02F0(void);
 extern void fn_805C1F90(void);
 extern void fn_805C2040(void);
@@ -66,7 +66,7 @@ extern void fn_80661410(void);
 extern void fn_80661640(void);
 extern void fn_80663160(void);
 extern void fn_806631A0(void);
-extern void fn_8068236C(void);
+extern void strncpy(void);
 
 /* External data declarations */
 extern u8 jumptable_80798C5C[];
@@ -124,7 +124,7 @@ lbl_fn_805C4FA0_00000060:
     stw r3, 0xb0(r29)
     mr r4, r31
     mr r5, r28
-    bl fn_8068236C
+    bl strncpy
     lwz r4, 0xb0(r29)
     add r3, r28, r31
     addi r31, r3, 0x1
@@ -149,7 +149,7 @@ lbl_fn_805C4FA0_000000B8:
     stw r3, 0xb4(r29)
     mr r4, r31
     mr r5, r28
-    bl fn_8068236C
+    bl strncpy
     lwz r3, 0xb4(r29)
     li r4, 0x0
     mr r5, r29
@@ -667,7 +667,7 @@ lbl_fn_805C56B0_0000084C:
     add r3, r29, r0
     lwz r25, 0x290(r3)
     mr r3, r25
-    bl fn_805C0120
+    bl gx_selectActiveParam
     stw r26, 0x14(r25)
     b lbl_fn_805C56B0_000008DC
 lbl_fn_805C56B0_00000868:
@@ -702,7 +702,7 @@ lbl_fn_805C56B0_000008C4:
     add r3, r29, r0
     lwz r25, 0x290(r3)
     mr r3, r25
-    bl fn_805C0120
+    bl gx_selectActiveParam
     stw r26, 0x14(r25)
 lbl_fn_805C56B0_000008DC:
     addi r30, r30, 0x1
@@ -875,7 +875,7 @@ lbl_fn_805C59E0_00000B2C:
     add r3, r24, r0
     lwz r20, 0x290(r3)
     mr r3, r20
-    bl fn_805C0120
+    bl gx_selectActiveParam
     stw r31, 0x14(r20)
     add r3, r24, r25
     mr r4, r26
@@ -931,7 +931,7 @@ lbl_fn_805C59E0_00000BF4:
     add r3, r24, r0
     lwz r20, 0x290(r3)
     mr r3, r20
-    bl fn_805C0120
+    bl gx_selectActiveParam
     stw r31, 0x14(r20)
     add r3, r24, r25
     stb r21, 0x80(r3)
@@ -1224,7 +1224,7 @@ lbl_fn_805C5C50_00001014:
     add r3, r28, r0
     lwz r27, 0x290(r3)
     mr r3, r27
-    bl fn_805C0120
+    bl gx_selectActiveParam
     cmpwi r29, 0x0
     li r0, 0x1
     stw r0, 0x14(r27)
@@ -1281,7 +1281,7 @@ lbl_fn_805C5C50_000010EC:
     add r3, r28, r0
     lwz r27, 0x290(r3)
     mr r3, r27
-    bl fn_805C0120
+    bl gx_selectActiveParam
     li r0, 0x25
     li r3, 0x1
     stw r3, 0x14(r27)
@@ -1315,7 +1315,7 @@ lbl_fn_805C5C50_00001164:
     add r3, r28, r0
     lwz r27, 0x290(r3)
     mr r3, r27
-    bl fn_805C0120
+    bl gx_selectActiveParam
     li r0, 0x1
     stw r0, 0x14(r27)
     b lbl_fn_805C5C50_00001278
@@ -1352,7 +1352,7 @@ lbl_fn_805C5C50_000011E4:
     add r3, r28, r0
     lwz r27, 0x290(r3)
     mr r3, r27
-    bl fn_805C0120
+    bl gx_selectActiveParam
     li r0, 0x25
     li r3, 0x1
     stw r3, 0x14(r27)
@@ -1386,7 +1386,7 @@ lbl_fn_805C5C50_0000125C:
     add r3, r28, r0
     lwz r27, 0x290(r3)
     mr r3, r27
-    bl fn_805C0120
+    bl gx_selectActiveParam
     li r0, 0x1
     stw r0, 0x14(r27)
 lbl_fn_805C5C50_00001278:
@@ -1448,7 +1448,7 @@ lbl_fn_805C5C50_000012F4:
     stw r0, 0x18(r28)
     lwz r27, 0x3cc(r28)
     mr r3, r27
-    bl fn_805C0120
+    bl gx_selectActiveParam
     li r0, 0x1
     stw r0, 0x14(r27)
 lbl_fn_805C5C50_0000135C:
@@ -1600,7 +1600,7 @@ lbl_fn_805C5C50_00001574:
     add r3, r28, r0
     lwz r26, 0x290(r3)
     mr r3, r26
-    bl fn_805C0120
+    bl gx_selectActiveParam
     addi r25, r25, 0x1
     stw r27, 0x14(r26)
     cmpwi r25, 0x5
@@ -1612,7 +1612,7 @@ lbl_fn_805C5C50_00001574:
     stw r0, 0x18(r3)
     lwz r25, 0x3f0(r28)
     mr r3, r25
-    bl fn_805C0120
+    bl gx_selectActiveParam
     li r0, 0x1
     stw r0, 0x14(r25)
 lbl_fn_805C5C50_000015C0:
@@ -1772,7 +1772,7 @@ lbl_fn_805C5C50_000017C0:
     stw r0, 0x18(r28)
     lwz r25, 0x3d0(r28)
     mr r3, r25
-    bl fn_805C0120
+    bl gx_selectActiveParam
     li r0, 0x1
     stw r0, 0x14(r25)
     li r3, 0x8
@@ -1835,7 +1835,7 @@ lbl_fn_805C5C50_000018E4:
     add r3, r28, r0
     lwz r25, 0x290(r3)
     mr r3, r25
-    bl fn_805C0120
+    bl gx_selectActiveParam
     li r0, 0x25
     li r3, 0x1
     stw r3, 0x14(r25)
@@ -1869,7 +1869,7 @@ lbl_fn_805C5C50_0000195C:
     add r3, r28, r0
     lwz r25, 0x290(r3)
     mr r3, r25
-    bl fn_805C0120
+    bl gx_selectActiveParam
     li r0, 0x1
     stw r0, 0x14(r25)
     addi r3, r31, 0x9e4
@@ -1991,7 +1991,7 @@ lbl_fn_805C5C50_00001B00:
     stw r0, 0x18(r28)
     lwz r25, 0x3e0(r28)
     mr r3, r25
-    bl fn_805C0120
+    bl gx_selectActiveParam
     li r0, 0x1
     stw r0, 0x14(r25)
     li r3, 0x0
@@ -2027,7 +2027,7 @@ lbl_fn_805C5C50_00001B88:
     stw r0, 0x18(r28)
     lwz r25, 0x3d4(r28)
     mr r3, r25
-    bl fn_805C0120
+    bl gx_selectActiveParam
     li r0, 0x1
     stw r0, 0x14(r25)
     li r0, 0xc
@@ -2088,7 +2088,7 @@ lbl_fn_805C5C50_00001C98:
     stw r0, 0x18(r28)
     lwz r25, 0x3ec(r28)
     mr r3, r25
-    bl fn_805C0120
+    bl gx_selectActiveParam
     li r0, 0x1
     stw r0, 0x14(r25)
     li r0, 0x8
@@ -2201,7 +2201,7 @@ lbl_fn_805C5C50_00001E30:
     add r3, r28, r0
     lwz r25, 0x290(r3)
     mr r3, r25
-    bl fn_805C0120
+    bl gx_selectActiveParam
     li r0, 0x1
     stw r0, 0x14(r25)
     li r3, 0x10
@@ -2539,7 +2539,7 @@ lbl_fn_805C5C50_00002314:
     add r3, r28, r0
     lwz r25, 0x290(r3)
     mr r3, r25
-    bl fn_805C0120
+    bl gx_selectActiveParam
     li r0, 0x25
     li r3, 0x1
     stw r3, 0x14(r25)
@@ -2573,7 +2573,7 @@ lbl_fn_805C5C50_0000238C:
     add r3, r28, r0
     lwz r25, 0x290(r3)
     mr r3, r25
-    bl fn_805C0120
+    bl gx_selectActiveParam
     li r0, 0x1
     stw r0, 0x14(r25)
     b lbl_fn_805C5C50_000024A0
@@ -2610,7 +2610,7 @@ lbl_fn_805C5C50_0000240C:
     add r3, r28, r0
     lwz r25, 0x290(r3)
     mr r3, r25
-    bl fn_805C0120
+    bl gx_selectActiveParam
     li r0, 0x25
     li r3, 0x1
     stw r3, 0x14(r25)
@@ -2644,7 +2644,7 @@ lbl_fn_805C5C50_00002484:
     add r3, r28, r0
     lwz r25, 0x290(r3)
     mr r3, r25
-    bl fn_805C0120
+    bl gx_selectActiveParam
     li r0, 0x1
     stw r0, 0x14(r25)
 lbl_fn_805C5C50_000024A0:
@@ -2688,7 +2688,7 @@ lbl_fn_805C5C50_0000251C:
     cmpwi r0, 0x0
     beq lbl_fn_805C5C50_000025B4
     lwz r3, 0x3cc(r28)
-    bl fn_805C0120
+    bl gx_selectActiveParam
     lwz r3, 0x3cc(r28)
     li r27, 0x0
     li r5, 0x1
@@ -2719,7 +2719,7 @@ lbl_fn_805C5C50_0000251C:
     lwz r0, 0x14(r3)
     cmpwi r0, 0x1
     bne lbl_fn_805C5C50_000025B4
-    bl fn_805C0120
+    bl gx_selectActiveParam
     lwz r3, 0x3f0(r28)
     stw r27, 0x14(r3)
 lbl_fn_805C5C50_000025B4:
@@ -2806,7 +2806,7 @@ lbl_fn_805C5C50_000026B4:
     add r3, r28, r0
     lwz r25, 0x3b8(r3)
     mr r3, r25
-    bl fn_805C0120
+    bl gx_selectActiveParam
     li r0, 0x1
     stw r0, 0x14(r25)
     lwz r0, 0x6c(r28)
@@ -2972,7 +2972,7 @@ lbl_fn_805C5C50_000028FC:
     add r3, r28, r0
     lwz r25, 0x290(r3)
     mr r3, r25
-    bl fn_805C0120
+    bl gx_selectActiveParam
     li r0, 0x1
     stw r0, 0x14(r25)
     lwz r0, 0x70(r28)

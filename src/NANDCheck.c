@@ -32,7 +32,7 @@ extern void fn_8061BAC0(void);
 extern void fn_8061BB70(void);
 extern void fn_8061BB80(void);
 extern void fn_80621610(void);
-extern void fn_8068236C(void);
+extern void strncpy(void);
 extern void strcmp(void);
 extern void nandConvertErrorCode(void);
 extern void nandGenerateAbsPath(void);
@@ -1447,7 +1447,7 @@ lbl_fn_80620EF0_000012D8:
     mr r3, r29
     mr r4, r30
     mr r5, r31
-    bl fn_8068236C
+    bl strncpy
     li r0, 0x0
     stbx r0, r29, r31
     b lbl_fn_80620EF0_00001328
@@ -1493,7 +1493,7 @@ lbl_fn_80620FD0_0000137C:
     mr r3, r27
     mr r4, r29
     mr r5, r30
-    bl fn_8068236C
+    bl strncpy
     add r4, r30, r29
     li r3, 0x0
     lbz r0, 0x1(r4)
@@ -1513,7 +1513,7 @@ lbl_fn_80620FD0_000013CC:
     mr r3, r27
     mr r4, r29
     mr r5, r30
-    bl fn_8068236C
+    bl strncpy
     li r0, 0x0
     stbx r0, r27, r30
     stb r0, 0x0(r28)

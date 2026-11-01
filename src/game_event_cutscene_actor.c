@@ -11,7 +11,7 @@ extern void SCGetLanguage(void);
 extern void _restgpr_24(void);
 extern void _savegpr_24(void);
 extern void dtor_80084684(void);
-extern void fn_80013DC4(void);
+extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_800463A8(void);
 extern void fn_80047DCC(void);
@@ -92,7 +92,7 @@ extern void VISetNextFrameBuffer(void);
 extern void strcmp(void);
 extern void wmemcpy(void);
 extern void wmemcmp(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 extern void fn_806952C4(void);
 extern void runtime_registerStaticObject(void);
 extern void fn_80695A50(void);
@@ -205,7 +205,7 @@ asm void fn_8047961C(void)
     add r30, r3, r0
     beq lbl_fn_8047961C_000000B0
     mr r3, r26
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r3, r29
     mr r4, r26
@@ -215,7 +215,7 @@ lbl_fn_8047961C_000000B0:
     addi r30, r30, 0x50
     addi r24, r1, 0x20
     mr r3, r30
-    bl fn_80686A48
+    bl wcslen
     cmpwi r24, 0x0
     mr r29, r3
     beq lbl_fn_8047961C_000000D4
@@ -224,7 +224,7 @@ lbl_fn_8047961C_000000B0:
 lbl_fn_8047961C_000000D4:
     la r3, lbl_808813D0
 lbl_fn_8047961C_000000D8:
-    bl fn_80686A48
+    bl wcslen
     cmplw r3, r29
     ble lbl_fn_8047961C_00000104
     cmpwi r24, 0x0
@@ -234,12 +234,12 @@ lbl_fn_8047961C_000000D8:
 lbl_fn_8047961C_000000F4:
     la r3, lbl_808813D0
 lbl_fn_8047961C_000000F8:
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     b lbl_fn_8047961C_00000110
 lbl_fn_8047961C_00000104:
     mr r3, r30
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
 lbl_fn_8047961C_00000110:
     cmpwi r24, 0x0
@@ -275,7 +275,7 @@ lbl_fn_8047961C_00000158:
     cmplw r24, r0
     beq lbl_fn_8047961C_00000198
     mr r3, r24
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r4, r24
     addi r3, r29, 0x4
@@ -304,7 +304,7 @@ lbl_fn_8047961C_000001D0:
     addi r30, r1, 0x10
     stw r29, 0x14(r1)
     stw r29, 0x18(r1)
-    bl fn_80686A48
+    bl wcslen
     mr r24, r3
     mr r3, r30
     mr r4, r24
@@ -339,7 +339,7 @@ lbl_fn_8047961C_0000025C:
     cmplw r24, r26
     beq lbl_fn_8047961C_00000284
     mr r3, r24
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r3, r26
     mr r4, r24
@@ -1689,7 +1689,7 @@ lbl_taskManager_initSystem_00001464:
     mr r29, r3
     mr r3, r31
     mr r4, r29
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0x14(r1)
     mr r3, r31
     stb r0, 0x10(r1)
@@ -1723,7 +1723,7 @@ lbl_taskManager_initSystem_00001594:
     mr r31, r3
     mr r3, r30
     mr r4, r31
-    bl fn_80013DC4
+    bl actor_validateIndex
     lbz r0, 0xc(r1)
     mr r3, r30
     stb r0, 0x8(r1)

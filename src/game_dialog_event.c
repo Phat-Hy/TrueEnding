@@ -65,8 +65,8 @@ extern void fn_801750FC(void);
 extern void fn_80175A38(void);
 extern void fn_8017B16C(void);
 extern void fn_8020ED84(void);
-extern void fn_8020EF80(void);
-extern void fn_80211480(void);
+extern void random_generateValue(void);
+extern void event_findEntryById(void);
 extern void fn_80211940(void);
 extern void fn_80219558(void);
 extern void task_findEntryById(void);
@@ -735,8 +735,8 @@ lbl_fn_8014FF9C_00000784:
     mulli r0, r0, 0x3e8
     subf r4, r0, r27
     bl fn_8020ED84
-    bl fn_8020EF80
-    bl fn_80211480
+    bl random_generateValue
+    bl event_findEntryById
     addi r0, r24, 0x4dd3
     mulhw r0, r0, r27
     srawi r0, r0, 6

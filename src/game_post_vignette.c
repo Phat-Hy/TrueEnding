@@ -8,7 +8,7 @@ extern void atn_ColliBase_destructor(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void route_interpolatePath(void);
-extern void fn_80087994(void);
+extern void route_createSegment(void);
 extern void fn_8008937C(void);
 extern void fn_800897D8(void);
 extern void atn_Model_findBoneIndex(void);
@@ -31,9 +31,9 @@ extern void fn_80151448(void);
 extern void actor_setState(void);
 extern void fn_80170A20(void);
 extern void fn_80178A6C(void);
-extern void fn_801F3FF8(void);
-extern void fn_801FED24(void);
-extern void fn_801FEE08(void);
+extern void save_validateHeader(void);
+extern void thread_findAndNotifySlot(void);
+extern void thread_dispatchToQueue(void);
 extern void task_findEntryById(void);
 extern void fn_802375C4(void);
 extern void res_MsgHandle_unload(void);
@@ -285,7 +285,7 @@ asm void fn_802C7BE4(void)
     stfs f1, 0x1550(r31)
     stfs f0, 0x1554(r31)
     stw r0, 0x12a4(r31)
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x1540(r31)
     li r4, 0x1
     bl atn_Task_setActive
@@ -397,7 +397,7 @@ lbl_fn_802C7D3C_00000394:
     addi r4, r30, 0x19
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087994
+    bl route_createSegment
     lfs f1, lbl_808843E8
     mr r3, r29
     lfs f2, lbl_808843F4
@@ -1018,7 +1018,7 @@ lbl_fn_802C85B0_00000C58:
     mr r4, r3
     mr r3, r29
     li r5, 0x0
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
     lwz r4, 0x1540(r31)
     addi r3, r30, 0x5a
     lfs f31, 0xc(r1)
@@ -1028,7 +1028,7 @@ lbl_fn_802C85B0_00000C58:
     mr r4, r3
     mr r3, r29
     li r5, 0x1
-    bl fn_801FED24
+    bl thread_findAndNotifySlot
     lwz r3, lbl_8087F1E4
     lwz r29, 0xb6c(r3)
     cmpwi r29, 0x0
@@ -1048,7 +1048,7 @@ lbl_fn_802C85B0_00000CF8:
     mr r4, r3
     mr r3, r28
     mr r5, r29
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r4, 0x1540(r31)
     addi r3, r30, 0x73
     addi r28, r4, 0x58
@@ -1056,7 +1056,7 @@ lbl_fn_802C85B0_00000CF8:
     mr r4, r3
     mr r3, r28
     mr r5, r29
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     lwz r4, 0x1540(r31)
     addi r3, r30, 0x81
     addi r28, r4, 0x58
@@ -1064,7 +1064,7 @@ lbl_fn_802C85B0_00000CF8:
     mr r4, r3
     mr r3, r28
     mr r5, r29
-    bl fn_801FEE08
+    bl thread_dispatchToQueue
     b lbl_fn_802C85B0_00000D8C
 lbl_fn_802C85B0_00000D6C:
     lwz r3, 0x1540(r31)

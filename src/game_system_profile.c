@@ -10,7 +10,7 @@ extern void mem_alloc(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
-extern void fn_801F3FF8(void);
+extern void save_validateHeader(void);
 extern void fn_801F4484(void);
 extern void fn_801F465C(void);
 extern void fn_801FD5A0(void);
@@ -63,7 +63,7 @@ void fn_80201E78(void);
 void fn_80201EFC(void);
 void fn_8020205C(void);
 void fn_802020B4(void);
-void fn_80202118(void);
+void profile_getMetricValue(void);
 void fn_80202138(void);
 void fn_802021D0(void);
 void fn_80202260(void);
@@ -1258,7 +1258,7 @@ asm void fn_80201EFC(void)
     mr r3, r29
     addi r4, r29, 0x4c
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x48(r29)
     li r4, 0x1
     lwz r0, 0xfc(r3)
@@ -1319,7 +1319,7 @@ asm void fn_802020B4(void)
     stw r0, 0x104(r3)
     mr r5, r4
     addi r4, r3, 0x4c
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x48(r31)
     li r4, 0x1
     lwz r0, 0xfc(r3)
@@ -1335,16 +1335,16 @@ asm void fn_802020B4(void)
     blr
 }
 
-asm void fn_80202118(void)
+asm void profile_getMetricValue(void)
 {
     nofralloc
     lwz r0, 0x104(r3)
     srawi r0, r0, 24
     cmpwi r0, 0x1
-    bne lbl_fn_80202118_00001260
+    bne lbl_profile_getMetricValue_00001260
     li r3, 0x0
     blr
-lbl_fn_80202118_00001260:
+lbl_profile_getMetricValue_00001260:
     lwz r3, 0x48(r3)
     blr
 }

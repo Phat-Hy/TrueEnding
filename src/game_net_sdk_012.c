@@ -10,16 +10,16 @@ extern void _savegpr_15(void);
 extern void _savegpr_22(void);
 extern void _savegpr_25(void);
 extern void _savegpr_27(void);
-extern void fn_8067E23C(void);
-extern void fn_806809C0(void);
-extern void fn_8068236C(void);
+extern void memcmp(void);
+extern void snprintf(void);
+extern void strncpy(void);
 extern void strcmp(void);
 extern void fn_8068446C(void);
 extern void fn_806A7110(void);
 extern void fn_806A7130(void);
 extern void fn_806A72E0(void);
 extern void fn_806A7400(void);
-extern void fn_806A76B0(void);
+extern void net_formatLog(void);
 extern void fn_806AB920(void);
 extern void fn_806AB980(void);
 extern void fn_806ACCF0(void);
@@ -120,7 +120,7 @@ asm void fn_806B1A00(void)
     li r3, 0x4
     mr r5, r28
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     lis r31, lbl_8085FF98@ha
     lwz r0, lbl_8085FF98@l(r31)
     cmpwi r0, 0x0
@@ -138,7 +138,7 @@ lbl_fn_806B1A00_00000074:
     addi r4, r30, 0xe4
     li r3, 0x4
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     li r3, -0x1
     b lbl_fn_806B1A00_00000140
 lbl_fn_806B1A00_0000008C:
@@ -179,7 +179,7 @@ lbl_fn_806B1A00_000000EC:
     addi r4, r30, 0x5b8
     li r3, 0x4
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     li r3, -0x2
     b lbl_fn_806B1A00_00000140
 lbl_fn_806B1A00_0000011C:
@@ -243,7 +243,7 @@ asm void fn_806B1B60(void)
     stw r8, 0x34(r1)
     lwzx r5, r5, r0
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     lwz r4, lbl_8085FF98@l(r29)
     li r0, 0x3
     lwz r3, 0x24(r4)
@@ -276,7 +276,7 @@ lbl_fn_806B1B60_00000218:
     stw r8, 0x1c(r1)
     lwzx r5, r5, r0
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     lwz r4, lbl_8085FF98@l(r29)
     li r0, 0x0
     lwz r3, 0x24(r4)
@@ -360,7 +360,7 @@ asm void fn_806B1CF0(void)
     stw r7, 0x4c(r1)
     lwzx r5, r5, r0
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     lwz r4, lbl_8085FF98@l(r31)
     li r0, 0x3
     lwz r3, 0x24(r4)
@@ -395,7 +395,7 @@ lbl_fn_806B1CF0_000003C0:
     stw r6, 0x34(r1)
     lwzx r5, r5, r0
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     lwz r4, lbl_8085FF98@l(r31)
     li r0, 0x5
     lwz r3, 0x24(r4)
@@ -408,7 +408,7 @@ lbl_fn_806B1CF0_00000440:
     addi r4, r30, 0x60c
     li r3, 0x4
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     li r22, 0x0
     li r24, 0x0
     lis r31, lbl_8085FF98@ha
@@ -427,7 +427,7 @@ lbl_fn_806B1CF0_00000468:
     addi r4, r30, 0x61c
     li r3, 0x4
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     addi r24, r24, 0x30
     addi r22, r22, 0x1
 lbl_fn_806B1CF0_000004A8:
@@ -438,7 +438,7 @@ lbl_fn_806B1CF0_000004A8:
     addi r4, r30, 0x648
     li r3, 0x4
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     li r23, 0x0
     li r24, 0x0
     lis r31, lbl_8085FF98@ha
@@ -455,7 +455,7 @@ lbl_fn_806B1CF0_000004D8:
     lbz r9, 0x3ea(r10)
     lbz r10, 0x3eb(r10)
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     addi r24, r24, 0x30
     addi r23, r23, 0x1
 lbl_fn_806B1CF0_00000510:
@@ -509,7 +509,7 @@ lbl_fn_806B1CF0_00000558:
     stw r7, 0x1c(r1)
     lwzx r5, r5, r0
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     lwz r4, lbl_8085FF98@l(r25)
     li r0, 0x3
     lwz r3, 0x24(r4)
@@ -549,7 +549,7 @@ lbl_fn_806B2000_00000648:
     addi r4, r31, 0x688
     li r3, 0x4
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     b lbl_fn_806B2000_00000A54
 lbl_fn_806B2000_0000065C:
     lwz r0, 0x0(r4)
@@ -850,31 +850,31 @@ lbl_fn_806B2000_000009D8:
     addi r4, r31, 0xaa4
     li r3, 0x2
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     b lbl_fn_806B2000_00000A08
 lbl_fn_806B2000_000009F8:
     addi r4, r31, 0xab4
     li r3, 0x2
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
 lbl_fn_806B2000_00000A08:
     lwz r6, 0x0(r28)
     mr r5, r29
     addi r4, r31, 0xabc
     li r3, 0x2
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     lwz r6, 0x4(r28)
     mr r5, r30
     addi r4, r31, 0xad0
     li r3, 0x2
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     lwz r5, 0x8(r28)
     addi r4, r31, 0xae8
     li r3, 0x2
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     li r3, 0x3
     bl fn_806B17B0
 lbl_fn_806B2000_00000A54:
@@ -910,14 +910,14 @@ asm void fn_806B2470(void)
     mr r5, r3
     mr r3, r30
     addi r4, r31, 0xafc
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     beq lbl_fn_806B2470_00000AE4
     mr r5, r30
     addi r4, r31, 0xb08
     li r3, 0x8
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     b lbl_fn_806B2470_00000BD0
 lbl_fn_806B2470_00000AE4:
     addi r3, r31, 0xafc
@@ -930,7 +930,7 @@ lbl_fn_806B2470_00000AE4:
     mr r4, r30
     mr r5, r29
     addi r3, r1, 0x8
-    bl fn_8068236C
+    bl strncpy
     cmplwi r29, 0xa
     bgt lbl_fn_806B2470_00000B30
     addi r3, r1, 0x8
@@ -944,7 +944,7 @@ lbl_fn_806B2470_00000B30:
     addi r4, r31, 0xb30
     li r3, 0x8
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     b lbl_fn_806B2470_00000BD0
 lbl_fn_806B2470_00000B48:
     add r4, r29, r30
@@ -954,7 +954,7 @@ lbl_fn_806B2470_00000B48:
     mr r5, r3
     mr r3, r30
     addi r4, r31, 0xb68
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_806B2470_00000BD0
     lis r3, lbl_8085FF98@ha
@@ -982,7 +982,7 @@ lbl_fn_806B2470_00000BC0:
     addi r4, r31, 0xb6c
     li r3, 0x4
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
 lbl_fn_806B2470_00000BD0:
     addi r11, r1, 0x30
     bl _restgpr_27
@@ -1020,7 +1020,7 @@ asm void fn_806B2600(void)
     addi r4, r18, 0xb94
     li r3, 0x8
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     b lbl_fn_806B2600_000015AC
 lbl_fn_806B2600_00000C58:
     cmplwi r24, 0x1
@@ -1048,7 +1048,7 @@ lbl_fn_806B2600_00000C98:
     addi r4, r18, 0xbd0
     li r3, 0x4
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     cmpwi r26, 0x0
     bne lbl_fn_806B2600_00000E68
     cmpwi r16, 0x0
@@ -1075,7 +1075,7 @@ lbl_fn_806B2600_00000CFC:
     clrlwi r5, r25, 24
     li r3, 0x4
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     bl fn_806CCEA0
     cmpwi r3, 0x0
     beq lbl_fn_806B2600_00000D48
@@ -1088,7 +1088,7 @@ lbl_fn_806B2600_00000CFC:
     li r28, 0x1
     li r3, 0x4
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
 lbl_fn_806B2600_00000D48:
     clrlwi r3, r25, 24
     bl fn_806CCF50
@@ -1160,7 +1160,7 @@ lbl_fn_806B2600_00000E2C:
     li r3, 0x4
     mr r5, r31
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
 lbl_fn_806B2600_00000E48:
     cmpwi r16, 0x0
     bne lbl_fn_806B2600_00000E68
@@ -1205,7 +1205,7 @@ lbl_fn_806B2600_00000EC8:
     addi r4, r18, 0x458
     li r3, 0x8
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     li r0, 0xff
     b lbl_fn_806B2600_00000EF4
 lbl_fn_806B2600_00000EF0:
@@ -1373,7 +1373,7 @@ lbl_fn_806B2600_00001108:
     li r3, 0x4
     lwz r5, 0xc1c(r5)
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
 lbl_fn_806B2600_00001130:
     cmpwi r24, 0x0
     beq lbl_fn_806B2600_0000122C
@@ -1408,7 +1408,7 @@ lbl_fn_806B2600_0000118C:
     addi r4, r18, 0x458
     li r3, 0x8
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     li r0, 0xff
     b lbl_fn_806B2600_000011B8
 lbl_fn_806B2600_000011B4:
@@ -1469,7 +1469,7 @@ lbl_fn_806B2600_00001278:
     addi r4, r18, 0xc94
     li r3, 0x4
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     b lbl_fn_806B2600_000015AC
 lbl_fn_806B2600_0000128C:
     mr r3, r26
@@ -1481,7 +1481,7 @@ lbl_fn_806B2600_0000128C:
     addi r4, r18, 0xcb8
     li r3, 0x4
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     b lbl_fn_806B2600_000015AC
 lbl_fn_806B2600_000012B8:
     cmpwi r26, 0x0
@@ -1520,7 +1520,7 @@ lbl_fn_806B2600_0000132C:
     addi r4, r18, 0x60c
     li r3, 0x4
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     li r19, 0x0
     li r16, 0x0
     lis r15, lbl_8085FF98@ha
@@ -1539,7 +1539,7 @@ lbl_fn_806B2600_0000134C:
     addi r4, r18, 0x61c
     li r3, 0x4
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     addi r16, r16, 0x30
     addi r19, r19, 0x1
 lbl_fn_806B2600_0000138C:
@@ -1550,7 +1550,7 @@ lbl_fn_806B2600_0000138C:
     addi r4, r18, 0x648
     li r3, 0x4
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     li r17, 0x0
     li r16, 0x0
     lis r15, lbl_8085FF98@ha
@@ -1567,7 +1567,7 @@ lbl_fn_806B2600_000013BC:
     lbz r9, 0x3ea(r10)
     lbz r10, 0x3eb(r10)
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     addi r16, r16, 0x30
     addi r17, r17, 0x1
 lbl_fn_806B2600_000013F4:
@@ -1649,7 +1649,7 @@ lbl_fn_806B2600_000014A0:
     stw r8, 0x1c(r1)
     lwzx r5, r5, r0
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     lwz r4, lbl_8085FF98@l(r15)
     li r0, 0x3
     lwz r3, 0x24(r4)
@@ -1720,7 +1720,7 @@ asm void fn_806B2FD0(void)
     mr r5, r31
     addi r4, r4, lbl_807BE9A8@l
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     mr r3, r30
     mr r4, r31
     bl fn_806CE1E0
@@ -1747,7 +1747,7 @@ asm void fn_806B3030(void)
     li r3, 0x2
     addi r4, r4, lbl_807BE9B4@l
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     lis r4, 0xffff
     li r3, 0x9
     subi r4, r4, 0x7aeb
@@ -1797,7 +1797,7 @@ lbl_fn_806B30A0_000016FC:
     li r3, 0x8
     addi r4, r4, lbl_807BE128@l
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     li r31, 0xff
     b lbl_fn_806B30A0_0000172C
 lbl_fn_806B30A0_00001728:
@@ -1864,7 +1864,7 @@ lbl_fn_806B3160_000017D4:
     li r3, 0x4
     addi r4, r4, lbl_807BEA14@l
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
 lbl_fn_806B3160_000017FC:
     li r3, 0x0
 lbl_fn_806B3160_00001800:
@@ -2057,7 +2057,7 @@ lbl_fn_806B3220_00001A18:
     lbz r6, 0x17(r6)
     addi r6, r6, 0x1
     crclr 6
-    bl fn_806809C0
+    bl snprintf
     addi r3, r31, 0x60
     addi r4, r1, 0x8
     addi r5, r1, 0x14
@@ -2076,7 +2076,7 @@ lbl_fn_806B3220_00001AE0:
     addi r5, r31, 0x5c
     li r4, 0xc
     crclr 6
-    bl fn_806809C0
+    bl snprintf
     addi r3, r31, 0x64
     addi r4, r1, 0x8
     addi r5, r1, 0x14
@@ -2087,7 +2087,7 @@ lbl_fn_806B3220_00001AE0:
     li r4, 0xc
     li r6, 0x5a
     crclr 6
-    bl fn_806809C0
+    bl snprintf
     addi r3, r31, 0x68
     addi r4, r1, 0x8
     addi r5, r1, 0x14
@@ -2130,7 +2130,7 @@ lbl_fn_806B3220_00001B9C:
     srwi r6, r0, 31
     li r4, 0xc
     crclr 6
-    bl fn_806809C0
+    bl snprintf
     addi r3, r31, 0x6c
     addi r4, r1, 0x8
     addi r5, r1, 0x14
@@ -2170,7 +2170,7 @@ lbl_fn_806B3220_00001C34:
     addi r4, r31, 0x70
     li r3, 0x4
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     stw r30, 0x8(r27)
     clrlwi r3, r28, 24
     lwz r4, 0x4(r27)
@@ -2364,7 +2364,7 @@ lbl_fn_806B3680_00001E7C:
     lbz r6, 0x17(r6)
     addi r6, r6, 0x1
     crclr 6
-    bl fn_806809C0
+    bl snprintf
     addi r3, r31, 0x60
     addi r4, r1, 0x8
     addi r5, r1, 0x14
@@ -2383,7 +2383,7 @@ lbl_fn_806B3680_00001F44:
     addi r5, r31, 0x5c
     li r4, 0xc
     crclr 6
-    bl fn_806809C0
+    bl snprintf
     addi r3, r31, 0x64
     addi r4, r1, 0x8
     addi r5, r1, 0x14
@@ -2394,7 +2394,7 @@ lbl_fn_806B3680_00001F44:
     li r4, 0xc
     li r6, 0x5a
     crclr 6
-    bl fn_806809C0
+    bl snprintf
     addi r3, r31, 0x68
     addi r4, r1, 0x8
     addi r5, r1, 0x14
@@ -2437,7 +2437,7 @@ lbl_fn_806B3680_00002000:
     srwi r6, r0, 31
     li r4, 0xc
     crclr 6
-    bl fn_806809C0
+    bl snprintf
     addi r3, r31, 0x6c
     addi r4, r1, 0x8
     addi r5, r1, 0x14
@@ -2477,7 +2477,7 @@ lbl_fn_806B3680_00002098:
     addi r4, r31, 0x98
     li r3, 0x4
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     stw r30, 0x8(r27)
     clrlwi r3, r28, 24
     lwz r4, 0x4(r27)
