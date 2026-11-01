@@ -16068,3 +16068,73 @@ Two facts follow, and both matter more than the numbers themselves.
 |---|---|---|
 | 9 | 2 810 frames, `TLS_SHOT_FRAMES=2800` + aurora 2794..2800, one launch | layer `2864` = the Gurgan Cave (luma 35.64); aurora `2801` = `mean=(10.37,12.72,7.09)`; **mean &#124;d&#124; 33.37, 87.9 % changed**; exit code 0 in 256 s |
 | 10 | the same plus shots at guest 2798, 2799, 2800, 2801 | the alignment table above; the layer's own neighbouring frames spread **33-48**, aurora matches the black one best at **11.82** |
+
+---
+
+### AP-BE. CORRECTION TO 5c.19 / AP-AD ITEM 19: `fn_802189EC` IS NOT THE TASK MANAGER'S CONSTRUCTOR — the dossier read r13 as `0x808852A0` when the retail binary sets it to **`0x808856C0`**, an exact `0x420` error that shifted every target; with the real base the task-manager slot has **exactly one writer in the whole image, `fn_8047A4C8` at `0x8047A604`, called only from `main`**, and `fn_802189EC` writes the two player-priority tables instead
+
+Triggered by Track A (see below), verified independently here against `orig/main.dol` because the dossier is Track B's and this correction changes where the Chapter-1 task-creation search should look.
+
+**1. Ground truth: `_SDA_BASE_` is read out of the retail binary's own `__init_registers` (`0x80004210`), not derived from a probe.**
+
+```
+0x8000428C  3c408088  addis r2,  r0, 0x8088
+0x80004290  604285a0  ori   r2,  r2, 0x85A0      ; _SDA2_BASE_ = 0x808885A0
+0x80004294  3da08088  addis r13, r0, 0x8088
+0x80004298  61ad56c0  ori   r13, r13, 0x56C0     ; _SDA_BASE_  = 0x808856C0
+```
+
+`5c.19` used **`r13 = 0x808852A0`**, derived from a runtime probe (`r13-25232 = 0x8087F010`); the difference is exactly **`0x420`**. Every SDA-relative address in that item is therefore off by `0x420`, which is why `stw r3, -25612(r13)` decoded to `0x8087EE94` (the task-manager slot) instead of `0x8087F2B4`.
+
+**2. The three writes it attributed to the task manager, decoded with the real base.** Instruction bytes read from the DOL at their guest addresses:
+
+| instruction | bytes | decode | **real target** |
+|---|---|---|---|
+| `0x80218A78` | `906D9BF0` | `stw r3, -25616(r13)` | **`0x8087F2B0`** (`lbl_8087F2B0`) |
+| `0x80218A94` | `906D9BF4` | `stw r3, -25612(r13)` | **`0x8087F2B4`** (`lbl_8087F2B4`) |
+| `0x80218AF8` (`+0x10C` of the *cited* list) | `800D9BF4` | `lwz r0, -25612(r13)` | **`0x8087F2B4`** - a *read* of the protector table, not a write |
+| `0x80218BCC` (`+0x1E0`) | `7C630214` | `op31` (arithmetic) | touches no SDA slot at all |
+
+**3. A whole-image scan settles the task-manager slot.** Over all seven `.text` sections, decoding every `stw`/`stb`/`sth` with an `r13` base and resolving with `0x808856C0`, plus every `lis`+`ori` pair that materialises the address absolutely:
+
+| target | writers found | where |
+|---|---|---|
+| `0x8087EE94` (task-manager slot) | **1** | `0x8047A604`, inside **`fn_8047A4C8`** (+0x13C, 2 548 B) |
+| `0x8087F2B0` (player weapon priority table) | 1 | `0x80218A78`, inside `fn_802189EC` |
+| `0x8087F2B4` (player protector priority table) | 1 | `0x80218A94`, inside `fn_802189EC` |
+| absolute (`lis`+`ori`) materialisations of any of the three | **none** | - |
+
+and the single writer's context is a constructor: `addi r3,r0,12` / `addi r4,r0,1` / `addi r5,r13,-30276` / `addi r6,r13,-30280` / `addi r7,r0,0` / `bl 0x80084320` (a 12-byte object back in `r3`), then `stw r0,0(r3)` / `4(r3)` / `8(r3)` (three words cleared), then `0x8047A604 stw r3,-26668(r13)` → `0x8087EE94`. So **`fn_8047A4C8` is the task manager's constructor**, and its only caller in the image is `0x80479A28`, i.e. `main`.
+
+**4. What the correction means.**
+* `fn_802189EC` is the **player weapon/protector priority CSV loader** for seven party members: next to the two stores it allocates `0x6AC` bytes (`7 x 0xF4`), loads/parses `/boot/player_param.csv` through `atn::CsvTab`, and has directly adjacent accessors (`fn_80218BB4` computes `char_id * 0xF4 + 0x8087F2B0`). **This is Track A's finding** (it reported the same conclusion from the same instructions); the independent decode above confirms it, and its string-xref chain is consistent with the real SDA2 base (`lwz r4,-22100(r2)` at `0x80218ABC` → `0x80882F4C` at `_SDA2_BASE_ = 0x808885A0`).
+* **The Chapter-1 task-creation question moves.** `5c.19`'s conclusion - "`fn_802189EC` is the only code that names the manager, so every registration must go through a copy of that pointer held in some other object" - was built on the wrong function. The manager is created by `fn_8047A4C8` from `main`, so the next place to look for *task registration* is the manager's methods (the 12-byte object's `+0`, `+4`, `+8` words) and the callers that pass it, not `fn_802189EC`.
+
+**5. Method, so it is reproducible without a run.** DOL header parse (text offsets `0x00`, addresses `0x48`, sizes `0x90`), instruction decode in Python at guest addresses, and the `__init_registers` read for the base. The scan is 4-byte aligned over each `.text` section, so a store at an unaligned offset would be missed; there are none in this game's code. Nothing here needed the GPU.
+
+**6. Consequence for the two tracks, stated because it is the first real payoff of the split.** This is the shape the parallel work was supposed to take: Track A read the same instructions and reported the CSV loader; Track B held the authority on the dossier and the retail-image tooling, re-derived the base from `__init_registers`, and confirmed it with a whole-image scan that also found the *actual* constructor. Neither half alone would have produced both the corrected identification and the new target.
+
+### AP-BF. THE AURORA CONTENT GAP IS THE **TEXTURE** INPUT, MEASURED BY TWO SWITCHES: forcing the TEV output white saturates the frame to **255.00**, so the geometry rasterises the whole screen; forcing the raster/material input white changes **nothing** (`10.38` vs `10.37`), so the darkness comes from the TEV's texture argument - not from culling, depth, viewport or the raster channel
+
+After AP-BC made the feed whole-frame and AP-BD showed the readback is a mostly-empty frame, the obvious suspects were geometry-side: culling, scissor, viewport, depth. Two runs at the same field window (`FROM=2794 TO=2800`, same launch shape, exit code 0 in 250-260 s) settle it, because the harness already carries the discriminators:
+
+| configuration | readback mean | what it means |
+|---|---|---|
+| default (AP-BD) | `(10.37, 12.72, 7.09)` | mostly empty frame |
+| `TLS_AURORA_TEST_WHITE_TEV=1` | **`(255.00, 255.00, 255.00)`** | **every draw rasterises and covers the screen** - the geometry, the transforms, the viewport, the scissor and the depth test are all fine |
+| `TLS_AURORA_TEST_MAT_WHITE=1` | `(10.38, 12.73, 7.09)` | forcing the raster/material input to white changes **nothing**, so the raster channel is not what cancels the colour |
+
+The only input left is the **texture** - either the texel is zero, or the TEV combines it in a way that yields zero. That agrees with AP-AN's independent number (68 % of that copy's texels are still zero) and with AP-AQ item 11 (aurora's EFB copies live as GPU-side shadow textures, so a copy destination read as a texture must be produced by aurora, not read out of guest RAM).
+
+**What this rules out, with numbers.** Culling/scissor/viewport/depth would have left the WHITE_TEV frame dark; it is saturated. A wrong raster channel would have shown up under MAT_WHITE; it did not. A blend/destination problem would scale a non-zero source rather than produce `10.4` from a scene the layer renders at `35.6`; the white test shows the pixels are being produced at all.
+
+**The next instrument, named, and it is one run.** `TLS_AURORA_DUMP_DRAW=<n>` prints everything aurora holds for a single draw in the fed stream: projection, viewport/scissor, PN matrix, TEV stage arguments, channel colours, `vtxDesc`, the indexed POS fetch and its decoded position. On a draw from this same window (the feed reports 203 draws), that dump says whether the texture object is bound at all (`GXTexObj::data` set, size/format right), or bound with a size/format that makes the sample read zero. That distinguishes "the texobj never reached aurora" from "aurora sampled it and got zero", which is the last fork before the fix.
+
+**Run log** (one at a time, idle host, `--window --minimized`, exit 0 without `Stop-Process`).
+
+| # | what | result |
+|---|---|---|
+| 1 | `TLS_AURORA_TEST_WHITE_TEV=1` + `TLS_AURORA_STATS=1`, 2 810 frames, fields 2794..2800 | 260 s; readback **255.00** - geometry rasterises |
+| 2 | `TLS_AURORA_TEST_MAT_WHITE=1` + `TLS_AURORA_STATS=1`, same window | 250 s; readback **10.38** - raster is not the cause |
+
+Neither run touches the default path (both are env-gated inside the aurora DLL), so the gate is unaffected; the last gate on this build is `gate_apbc2.log`, PASS attempt 1.
