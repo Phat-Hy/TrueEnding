@@ -44,7 +44,7 @@ extern void fn_80163E70(void);
 extern void fn_8016DDB0(void);
 extern void actor_setState(void);
 extern void battle_activateExpReward(void);
-extern void fn_801A03E8(void);
+extern void vec3_dot(void);
 extern void task_findEntryById(void);
 extern void fn_802F0964(void);
 extern void fn_802F0988(void);
@@ -1663,7 +1663,7 @@ lbl_fn_802F0328_00001648:
     addi r4, r1, 0x5c
     oris r0, r0, 0x8000
     stw r0, 0x14cc(r31)
-    bl fn_801A03E8
+    bl vec3_dot
     lfs f0, lbl_80884894
     fcmpo cr0, f1, f0
     ble lbl_fn_802F0328_00001678
@@ -1677,7 +1677,7 @@ lbl_fn_802F0328_00001678:
 lbl_fn_802F0328_00001684:
     addi r3, r31, 0x14d8
     addi r4, r1, 0x5c
-    bl fn_801A03E8
+    bl vec3_dot
     lfs f0, lbl_80884898
     fcmpo cr0, f1, f0
     bge lbl_fn_802F0328_000016B4
@@ -1713,7 +1713,7 @@ lbl_fn_802F0328_000016D8:
 lbl_fn_802F0328_00001708:
     addi r3, r31, 0x14d8
     addi r4, r1, 0x5c
-    bl fn_801A03E8
+    bl vec3_dot
     lfs f0, lbl_80884898
     fcmpo cr0, f1, f0
     bge lbl_fn_802F0328_00001738

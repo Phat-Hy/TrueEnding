@@ -13,7 +13,7 @@ extern void talk_copyUtf16String(void);
 extern void fn_8005BFCC(void);
 extern void fn_8005C1F8(void);
 extern void fn_8006BA8C(void);
-extern void fn_8006BB6C(void);
+extern void boss_triggerEventAction(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
@@ -336,7 +336,7 @@ lbl_fn_8020689C_00000288:
     bne lbl_fn_8020689C_000001E0
     mr r3, r31
     li r4, 0x0
-    bl fn_8006BB6C
+    bl boss_triggerEventAction
 lbl_fn_8020689C_000002A4:
     lmw r27, 0xc6c(r1)
     lwz r0, 0xc84(r1)

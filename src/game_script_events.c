@@ -11,7 +11,7 @@ extern void ref_releaseHandle(void);
 extern void scissor_clipFrustum(void);
 extern void bsp_findLeafNode(void);
 extern void fn_80108378(void);
-extern void fn_80133130(void);
+extern void boss_setPartCollisionFlags(void);
 extern void fn_80133EE8(void);
 extern void npc_calcTargetDistance(void);
 extern void quest_updateFlow(void);
@@ -1708,7 +1708,7 @@ lbl_fn_8024C46C_000016DC:
     lis r4, 0x8000
     li r5, 0x64
     li r6, 0x0
-    bl fn_80133130
+    bl boss_setPartCollisionFlags
     b lbl_fn_8024C46C_00001758
 lbl_fn_8024C46C_00001734:
     mr r3, r29

@@ -7,7 +7,7 @@ extern void _restgpr_25(void);
 extern void _savegpr_14(void);
 extern void _savegpr_25(void);
 extern void fn_80018394(void);
-extern void fn_800185B4(void);
+extern void battle_findTargetSlotById(void);
 extern void fn_800EEFDC(void);
 extern void fn_801081D8(void);
 extern void fn_801083D8(void);
@@ -2259,7 +2259,7 @@ lbl_fn_80103FD4_00001D8C:
     cmpwi r3, 0x0
     beq lbl_fn_80103FD4_00001DBC
     li r5, 0x0
-    bl fn_800185B4
+    bl battle_findTargetSlotById
     mr r16, r3
     b lbl_fn_80103FD4_00001DC0
 lbl_fn_80103FD4_00001DBC:

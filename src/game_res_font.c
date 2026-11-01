@@ -52,7 +52,7 @@ extern void GXSetTevColorIn(void);
 extern void GXSetTevColorOp(void);
 extern void GXSetTevIndirect(void);
 extern void GXSetTevIndTile(void);
-extern void fn_806175F0(void);
+extern void GXSetIndTexMatrix(void);
 extern void GXSetTevKColorSel(void);
 extern void GXSetTevKAlphaSel(void);
 extern void GXSetTevSwapMode(void);
@@ -2003,7 +2003,7 @@ lbl_fn_80235BF8_000019E8:
     lwz r0, 0xc(r1)
     stfs f2, 0x6c(r1)
     stw r0, 0x1c(r1)
-    bl fn_806175F0
+    bl GXSetIndTexMatrix
     bl __GXInitVtxDesc
     li r3, 0x9
     li r4, 0x1

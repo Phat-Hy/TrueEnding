@@ -18,7 +18,7 @@ extern void fn_801076D0(void);
 extern void fn_80107798(void);
 extern void fn_80107860(void);
 extern void player_testStatusCondition(void);
-extern void fn_8013310C(void);
+extern void boss_enablePartStatusFlags(void);
 extern void actor_testBitFlag(void);
 extern void npc_updateTalkInteraction(void);
 extern void inventory_unequipItem(void);
@@ -844,7 +844,7 @@ asm void fn_8018EEC4(void)
     stw r0, 0x560(r6)
     lwz r3, 0x4(r3)
     addi r3, r3, 0x7d4
-    bl fn_8013310C
+    bl boss_enablePartStatusFlags
     lwz r3, 0x4(r30)
     li r0, 0x0
     stw r0, 0xf94(r3)
@@ -1604,7 +1604,7 @@ asm void fn_8018F970(void)
     stw r0, 0x560(r6)
     lwz r3, 0x4(r3)
     addi r3, r3, 0x7d4
-    bl fn_8013310C
+    bl boss_enablePartStatusFlags
     lwz r3, 0x4(r31)
     lwz r0, 0x12a4(r3)
     rlwinm r0, r0, 0, 27, 25

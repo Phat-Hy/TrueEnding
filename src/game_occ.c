@@ -24,7 +24,7 @@ extern void __GXSetVtxDesc(void);
 extern void GXClearVtxDesc(void);
 extern void GXFlush(void);
 extern void fn_806140C0(void);
-extern void fn_80614190(void);
+extern void __GXFlushPixelEngine(void);
 extern void GXSetTexCopySrc(void);
 extern void GXSetTexCopyDst(void);
 extern void GXCopyTex(void);
@@ -40,7 +40,7 @@ extern void GXSetTevColorIn(void);
 extern void GXSetTevColorOp(void);
 extern void GXSetTevIndirect(void);
 extern void GXSetTevIndTile(void);
-extern void fn_806175F0(void);
+extern void GXSetIndTexMatrix(void);
 extern void GXSetTevKColorSel(void);
 extern void GXSetTevKAlphaSel(void);
 extern void GXSetTevSwapMode(void);
@@ -491,7 +491,7 @@ lbl_tex_bakeCharacterTexture_000005A4:
     b lbl_tex_bakeCharacterTexture_0000061C
 lbl_tex_bakeCharacterTexture_000005B8:
     bl GXDrawDone
-    bl fn_80614190
+    bl __GXFlushPixelEngine
     cmpwi r17, 0x0
     bne lbl_tex_bakeCharacterTexture_000005E4
     lwz r3, lbl_8087EEE0
@@ -550,7 +550,7 @@ lbl_tex_bakeCharacterTexture_00000684:
     li r4, 0x1
     bl GXCopyTex
     bl GXDrawDone
-    bl fn_80614190
+    bl __GXFlushPixelEngine
     bl GXFlush
     bl fn_806140C0
     mr r5, r21
@@ -812,7 +812,7 @@ asm void fn_800D775C(void)
     stb r0, 0xf(r1)
     lwz r0, 0xc(r1)
     stw r0, 0x14(r1)
-    bl fn_806175F0
+    bl GXSetIndTexMatrix
     lfs f4, lbl_8088120C
     addi r4, r1, 0x10
     lfs f0, 0x20(r31)
@@ -842,7 +842,7 @@ asm void fn_800D775C(void)
     stb r0, 0xb(r1)
     lwz r0, 0x8(r1)
     stw r0, 0x10(r1)
-    bl fn_806175F0
+    bl GXSetIndTexMatrix
     li r3, 0x0
     li r4, 0x0
     li r5, 0x1
@@ -1171,7 +1171,7 @@ asm void fn_800D7D00(void)
     stb r0, 0xb(r1)
     lwz r0, 0x8(r1)
     stw r0, 0xc(r1)
-    bl fn_806175F0
+    bl GXSetIndTexMatrix
     li r3, 0x0
     li r4, 0xc
     bl GXSetTevKColorSel
@@ -1292,7 +1292,7 @@ asm void fn_800D7F18(void)
     stb r0, 0xb(r1)
     lwz r0, 0x8(r1)
     stw r0, 0xc(r1)
-    bl fn_806175F0
+    bl GXSetIndTexMatrix
     li r3, 0x0
     li r4, 0xc
     bl GXSetTevKColorSel

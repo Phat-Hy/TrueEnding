@@ -45,7 +45,7 @@ extern void fn_804FAB44(void);
 extern void fn_804FC014(void);
 extern void fn_8050BA6C(void);
 extern void runtime_clampDouble(void);
-extern void fn_806A8E70(void);
+extern void net_getInterfaceHandle(void);
 extern void net_isSessionActive(void);
 extern int sprintf(char* str, const char* format, ...);
 
@@ -165,7 +165,7 @@ lbl_fn_804BF550_000000E4:
     li r3, 0x1
     b lbl_fn_804BF550_000000FC
 lbl_fn_804BF550_000000F8:
-    bl fn_806A8E70
+    bl net_getInterfaceHandle
 lbl_fn_804BF550_000000FC:
     cmpwi r3, 0x1
     bgt lbl_fn_804BF550_00000118
@@ -237,7 +237,7 @@ lbl_fn_804BF550_000001E8:
     beq lbl_fn_804BF550_000001F8
     b lbl_fn_804BF550_00000200
 lbl_fn_804BF550_000001F8:
-    bl fn_806A8E70
+    bl net_getInterfaceHandle
     mr r30, r3
 lbl_fn_804BF550_00000200:
     cmpwi r30, 0x1
@@ -288,7 +288,7 @@ lbl_fn_804BF550_0000029C:
     li r3, 0x1
     b lbl_fn_804BF550_000002B4
 lbl_fn_804BF550_000002B0:
-    bl fn_806A8E70
+    bl net_getInterfaceHandle
 lbl_fn_804BF550_000002B4:
     cmpwi r3, 0x1
     bne lbl_fn_804BF550_000002EC
@@ -1421,7 +1421,7 @@ lbl_fn_804C06C8_000012F8:
     li r3, 0x1
     b lbl_fn_804C06C8_00001310
 lbl_fn_804C06C8_0000130C:
-    bl fn_806A8E70
+    bl net_getInterfaceHandle
 lbl_fn_804C06C8_00001310:
     cmpwi r3, 0x2
     blt lbl_fn_804C06C8_0000138C
@@ -1593,7 +1593,7 @@ lbl_fn_804C0A40_00001570:
     li r3, 0x1
     b lbl_fn_804C0A40_00001588
 lbl_fn_804C0A40_00001584:
-    bl fn_806A8E70
+    bl net_getInterfaceHandle
 lbl_fn_804C0A40_00001588:
     cmpwi r3, 0x2
     blt lbl_fn_804C0A40_000015A0

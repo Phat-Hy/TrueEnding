@@ -28,7 +28,7 @@ extern void atn_LoadHandle_getStatus(void);
 extern void PSMTXScale(void);
 extern void __GXSetVtxDesc(void);
 extern void GXClearVtxDesc(void);
-extern void fn_80614190(void);
+extern void __GXFlushPixelEngine(void);
 extern void GXSetTexCopySrc(void);
 extern void GXSetTexCopyDst(void);
 extern void GXCopyTex(void);
@@ -50,7 +50,7 @@ extern void fn_80617270(void);
 extern void GXSetTevDirect(void);
 extern void GXSetTevColorIn(void);
 extern void GXSetTevIndirect(void);
-extern void fn_806175F0(void);
+extern void GXSetIndTexMatrix(void);
 extern void GXSetTevKColorSel(void);
 extern void GXSetTevSwapMode(void);
 extern void GXSetTevSwapModeTable(void);
@@ -537,7 +537,7 @@ asm void fn_800AD648(void)
     lwz r0, 0x8(r1)
     stfs f1, 0x1c(r1)
     stw r0, 0xc(r1)
-    bl fn_806175F0
+    bl GXSetIndTexMatrix
     li r31, 0x0
 lbl_fn_800AD648_00000614:
     lwz r0, 0x16c(r30)
@@ -598,7 +598,7 @@ lbl_fn_800AD648_00000684:
     bl fn_80075F58
     lwz r3, lbl_8087EFB4
     bl fn_800BFB70
-    bl fn_80614190
+    bl __GXFlushPixelEngine
     li r3, 0x0
     li r4, 0x0
     li r5, 0x1
@@ -637,7 +637,7 @@ asm void fn_800AD834(void)
     lwz r0, 0x3e0(r4)
     cmpwi r0, 0x0
     beq lbl_fn_800AD834_00001450
-    bl fn_80614190
+    bl __GXFlushPixelEngine
     lwz r3, lbl_8087EFB4
     li r4, 0x0
     bl fn_800C0508
@@ -738,7 +738,7 @@ asm void fn_800AD834(void)
     bl fn_80075F58
     lwz r3, lbl_8087EFB4
     bl fn_800BFB70
-    bl fn_80614190
+    bl __GXFlushPixelEngine
 lbl_fn_800AD834_00000914:
     clrlslwi r5, r28, 17, 1
     clrlslwi r6, r27, 17, 1
@@ -1023,7 +1023,7 @@ lbl_fn_800AD834_00000D04:
     bge lbl_fn_800AD834_00000D20
     mr r15, r18
 lbl_fn_800AD834_00000D20:
-    bl fn_80614190
+    bl __GXFlushPixelEngine
     bl GXDrawDone
     li r3, 0x1
     bl GXClearVtxDesc
@@ -1058,7 +1058,7 @@ lbl_fn_800AD834_00000D20:
     bl fn_80075F58
     lwz r3, lbl_8087EFB4
     bl fn_800BFB70
-    bl fn_80614190
+    bl __GXFlushPixelEngine
     clrlslwi r5, r15, 17, 1
     clrlslwi r6, r19, 17, 1
     li r3, 0x0
@@ -1149,7 +1149,7 @@ lbl_fn_800AD834_00000EEC:
     cmpw r18, r0
     bge lbl_fn_800AD834_00000D04
 lbl_fn_800AD834_00000F00:
-    bl fn_80614190
+    bl __GXFlushPixelEngine
     bl GXDrawDone
     mr r3, r26
     bl fn_800AD648
@@ -1259,7 +1259,7 @@ lbl_fn_800AD834_00000F00:
     bl fn_80075F58
     lwz r3, lbl_8087EFB4
     bl fn_800BFB70
-    bl fn_80614190
+    bl __GXFlushPixelEngine
     li r3, 0x0
     li r4, 0x0
     li r5, 0x40
@@ -1273,7 +1273,7 @@ lbl_fn_800AD834_00000F00:
     lwz r3, 0x318(r26)
     li r4, 0x1
     bl GXCopyTex
-    bl fn_80614190
+    bl __GXFlushPixelEngine
     bl GXDrawDone
     li r3, 0x3
     bl GXClearVtxDesc
@@ -1835,7 +1835,7 @@ lbl_fn_800AE568_000017F8:
     addi r4, r1, 0x8
     stw r0, 0x8(r1)
     li r3, 0x0
-    bl fn_806175F0
+    bl GXSetIndTexMatrix
     li r3, 0x0
     li r4, 0xc
     bl GXSetTevKColorSel
@@ -1964,7 +1964,7 @@ lbl_fn_800AE568_000017F8:
     mr r3, r28
     li r4, 0x0
     bl GXCopyTex
-    bl fn_80614190
+    bl __GXFlushPixelEngine
     bl GXDrawDone
     li r3, 0x1
     bl GXInitTexObjDefault

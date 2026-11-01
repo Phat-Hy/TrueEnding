@@ -71,7 +71,7 @@ extern void fn_804AB060(void);
 extern void fn_804AB79C(void);
 extern void __GXSetVtxDesc(void);
 extern void GXClearVtxDesc(void);
-extern void fn_80614190(void);
+extern void __GXFlushPixelEngine(void);
 extern void GXSetTexCopySrc(void);
 extern void GXSetTexCopyDst(void);
 extern void GXCopyTex(void);
@@ -296,7 +296,7 @@ lbl_fn_804ABA2C_00000144:
     mr r3, r25
     li r4, 0x0
     bl GXCopyTex
-    bl fn_80614190
+    bl __GXFlushPixelEngine
     bl fn_803D71C4
     bl gx_drawScreenQuad
     bl fn_803D71C4

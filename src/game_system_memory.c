@@ -20,7 +20,7 @@ extern void talk_copyUtf16String(void);
 extern void boss_decodePhaseBitfield(void);
 extern void fn_8006BA30(void);
 extern void fn_8006BA8C(void);
-extern void fn_8006BB6C(void);
+extern void boss_triggerEventAction(void);
 extern void fn_8006F420(void);
 extern void str_assignBuffer(void);
 extern void mem_realloc(void);
@@ -902,7 +902,7 @@ lbl_fn_80208BE8_00000A64:
     bne lbl_fn_80208BE8_000008BC
     mr r3, r31
     li r4, 0x0
-    bl fn_8006BB6C
+    bl boss_triggerEventAction
     lmw r27, 0xd8c(r1)
     lwz r0, 0xda4(r1)
     mtlr r0
@@ -1387,7 +1387,7 @@ lbl_fn_80209300_000010C4:
     bne lbl_fn_80209300_00000F14
     mr r3, r31
     li r4, 0x0
-    bl fn_8006BB6C
+    bl boss_triggerEventAction
     lmw r21, 0x644(r1)
     lwz r0, 0x674(r1)
     mtlr r0

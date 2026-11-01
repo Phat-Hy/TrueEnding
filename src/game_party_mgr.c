@@ -6,7 +6,7 @@ extern void _restgpr_23(void);
 extern void _restgpr_26(void);
 extern void _savegpr_23(void);
 extern void _savegpr_26(void);
-extern void fn_800185B4(void);
+extern void battle_findTargetSlotById(void);
 extern void menu_renderLayout(void);
 extern void collision_testLineSegment(void);
 extern void mem_alloc(void);
@@ -1508,7 +1508,7 @@ lbl_fn_8015F568_00001454:
     beq lbl_fn_8015F568_00001478
     mr r4, r27
     mr r5, r30
-    bl fn_800185B4
+    bl battle_findTargetSlotById
     b lbl_fn_8015F568_0000147C
 lbl_fn_8015F568_00001478:
     li r3, 0x0

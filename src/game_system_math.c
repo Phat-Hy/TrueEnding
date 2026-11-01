@@ -21,7 +21,7 @@ extern void boss_initActionStream(void);
 extern void fn_8006B0C8(void);
 extern void boss_parseStateCondition(void);
 extern void fn_8006BA8C(void);
-extern void fn_8006BB6C(void);
+extern void boss_triggerEventAction(void);
 extern void fn_8006D008(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
@@ -690,10 +690,10 @@ lbl_fn_8020C0BC_00000784:
     bne lbl_fn_8020C0BC_0000071C
     mr r3, r30
     li r4, 0x0
-    bl fn_8006BB6C
+    bl boss_triggerEventAction
     mr r3, r29
     li r4, 0x0
-    bl fn_8006BB6C
+    bl boss_triggerEventAction
     mr r3, r28
     lmw r23, 0x18bc(r1)
     lwz r0, 0x18e4(r1)

@@ -134,7 +134,7 @@ void fn_8019FC6C(void);
 void fn_8019FE4C(void);
 void fn_8019FEC4(void);
 void bgm_getGlobalManager(void);
-void fn_801A03E8(void);
+void vec3_dot(void);
 void fn_801A03EC(void);
 void fn_801A03F4(void);
 void fn_801A0400(void);
@@ -1113,7 +1113,7 @@ lbl_fn_8019FEC4_00000CEC:
     bl viewport_getNextSequenceId
     addi r3, r1, 0x94
     addi r4, r1, 0x88
-    bl fn_801A03E8
+    bl vec3_dot
     fcmpo cr0, f1, f31
     ble lbl_fn_8019FEC4_00000D50
     fcmpo cr0, f28, f29
@@ -1335,7 +1335,7 @@ asm void bgm_getGlobalManager(void)
     blr
 }
 
-asm void fn_801A03E8(void)
+asm void vec3_dot(void)
 {
     nofralloc
     b PSVECDotProduct

@@ -19,7 +19,7 @@ extern void ref_releaseHandle(void);
 extern void system_getNextSequenceId(void);
 extern void viewport_updateCulling(void);
 extern void clip_calculateFrustum(void);
-extern void fn_8013310C(void);
+extern void boss_enablePartStatusFlags(void);
 extern void debuff_removeStatusEffect(void);
 extern void actor_setState(void);
 extern void battle_awardExp(void);
@@ -1428,7 +1428,7 @@ lbl_fn_803412AC_00001318:
     stfs f0, 0x7d8(r30)
     li r4, 0x20
     li r5, 0x0
-    bl fn_8013310C
+    bl boss_enablePartStatusFlags
     lwz r3, lbl_8087F430
     li r4, 0xce
     li r5, 0x1

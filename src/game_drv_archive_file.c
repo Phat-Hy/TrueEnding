@@ -7,7 +7,7 @@ extern void _restgpr_25(void);
 extern void _savegpr_21(void);
 extern void _savegpr_25(void);
 extern void fn_800183E0(void);
-extern void fn_800185B4(void);
+extern void battle_findTargetSlotById(void);
 extern void fn_80018608(void);
 extern void fn_8003E918(void);
 extern void msg_lookupFormattedEntry(void);
@@ -149,13 +149,13 @@ lbl_fn_805A96D8_000000B0:
     beq lbl_fn_805A96D8_00000140
     mr r4, r26
     li r5, 0x0
-    bl fn_800185B4
+    bl battle_findTargetSlotById
     cmpwi r3, 0x0
     beq lbl_fn_805A96D8_00000140
     lwz r3, lbl_8087EE68
     mr r4, r26
     li r5, 0x0
-    bl fn_800185B4
+    bl battle_findTargetSlotById
     lwz r0, 0x4(r3)
     stw r0, 0x70(r25)
     lwz r0, 0x8(r3)
@@ -380,7 +380,7 @@ lbl_fn_805A96D8_00000420:
     beq lbl_fn_805A96D8_00000444
     mr r4, r30
     li r5, 0x0
-    bl fn_800185B4
+    bl battle_findTargetSlotById
     b lbl_fn_805A96D8_00000448
 lbl_fn_805A96D8_00000444:
     li r3, 0x0

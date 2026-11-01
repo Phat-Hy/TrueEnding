@@ -32,7 +32,7 @@ extern void PSMTXMultVec(void);
 extern void PSMTXMultVecArray(void);
 extern void PSVECNormalize(void);
 extern void PSVECDotProduct(void);
-extern void fn_80614190(void);
+extern void __GXFlushPixelEngine(void);
 extern void GXSetTexCopySrc(void);
 extern void GXSetTexCopyDst(void);
 extern void fn_80615190(void);
@@ -2151,7 +2151,7 @@ lbl_fn_800B8F40_00001F64:
     li r9, 0x0
     li r10, 0x0
     bl GXInitLightObj
-    bl fn_80614190
+    bl __GXFlushPixelEngine
     li r0, 0x0
     stb r0, lbl_8087EFB0
     lwz r3, lbl_8087EEE0

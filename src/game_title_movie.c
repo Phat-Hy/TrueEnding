@@ -19,7 +19,7 @@ extern void fn_8011F8F4(void);
 extern void skill_findNodeBySlotId(void);
 extern void skill_findNodeById(void);
 extern void skill_findNodeByTag(void);
-extern void fn_8013310C(void);
+extern void boss_enablePartStatusFlags(void);
 extern void actor_testBitFlag(void);
 extern void party_updateMemberCoords(void);
 extern void actor_setState(void);
@@ -1020,7 +1020,7 @@ lbl_fn_803A9C40_00000C3C:
     li r5, 0x0
     ori r0, r0, 0x4
     stw r0, 0x54c(r28)
-    bl fn_8013310C
+    bl boss_enablePartStatusFlags
 lbl_fn_803A9C40_00000CA4:
     mr r3, r29
     mr r4, r30
@@ -1596,7 +1596,7 @@ lbl_fn_803A9DBC_00001490:
     addi r3, r30, 0x7d4
     li r4, 0x1000
     li r5, 0x0
-    bl fn_8013310C
+    bl boss_enablePartStatusFlags
     b lbl_fn_803A9DBC_000014BC
 lbl_fn_803A9DBC_000014B0:
     addi r3, r30, 0x7d4

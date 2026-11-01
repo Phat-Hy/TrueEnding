@@ -54,7 +54,7 @@ void pad_03_806A8D84_text(void);
 void fn_806A8D90(void);
 void fn_806A8DB0(void);
 void net_getSocket(void);
-void fn_806A8E70(void);
+void net_getInterfaceHandle(void);
 void fn_806A8E80(void);
 void fn_806A8F20(void);
 void fn_806A8F40(void);
@@ -153,7 +153,7 @@ lbl_net_getSocket_000000DC:
     blr
 }
 
-asm void fn_806A8E70(void)
+asm void net_getInterfaceHandle(void)
 {
     nofralloc
     lis r3, lbl_8085FF44@ha

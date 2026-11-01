@@ -35,7 +35,7 @@ extern void player_evaluateStatusCondition(void);
 extern void mtx_rotYRad(void);
 extern void fn_8013C3B4(void);
 extern void fn_80178088(void);
-extern void fn_801A03E8(void);
+extern void vec3_dot(void);
 extern void fn_801C3910(void);
 extern void fn_8032EC94(void);
 extern void world_getGlobalFlag(void);
@@ -562,7 +562,7 @@ lbl_fn_80387910_00000680:
     bl viewport_getNextSequenceId
     addi r3, r1, 0xd4
     addi r4, r1, 0xe0
-    bl fn_801A03E8
+    bl vec3_dot
     lfs f0, lbl_808858E8
     fcmpo cr0, f1, f0
     bge lbl_fn_80387910_000006E4

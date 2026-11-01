@@ -21,7 +21,7 @@ extern void atn_Task_setActive(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void skill_findNodeById(void);
-extern void fn_80133130(void);
+extern void boss_setPartCollisionFlags(void);
 extern void fn_80134270(void);
 extern void fn_80134290(void);
 extern void boss_updatePhaseState(void);
@@ -1089,7 +1089,7 @@ lbl_fn_80273970_00000DE4:
     li r4, 0x4
     li r5, 0xa
     li r6, 0x0
-    bl fn_80133130
+    bl boss_setPartCollisionFlags
 lbl_fn_80273970_00000E00:
     lwz r0, 0x18f0(r21)
     cmpwi r0, 0x0

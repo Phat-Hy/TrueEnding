@@ -76,7 +76,7 @@ extern void fn_801799BC(void);
 extern void fn_80179FA8(void);
 extern void fn_80198C00(void);
 extern void bgm_getGlobalManager(void);
-extern void fn_801A03E8(void);
+extern void vec3_dot(void);
 extern void fn_801A03EC(void);
 extern void fn_801A0408(void);
 extern void fn_801F19B4(void);
@@ -1029,7 +1029,7 @@ lbl_fn_803D2A6C_00000A5C:
     bl quest_initMarkerCoords
     addi r3, r1, 0x470
     addi r4, r1, 0x2a8
-    bl fn_801A03E8
+    bl vec3_dot
     fsubs f0, f27, f1
     fmadds f29, f26, f0, f29
 lbl_fn_803D2A6C_00000AD4:

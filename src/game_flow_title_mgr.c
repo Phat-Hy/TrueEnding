@@ -36,7 +36,7 @@ extern void strstr(void);
 extern void atoi(void);
 extern void wcscmp(void);
 extern void net_getSocket(void);
-extern void fn_806A8E70(void);
+extern void net_getInterfaceHandle(void);
 extern void fn_806ABE70(void);
 extern void fn_806ABEE0(void);
 extern void net_isSessionActive(void);
@@ -751,7 +751,7 @@ lbl_fn_804DC454_000008D0:
     li r3, 0x1
     b lbl_fn_804DC454_000008E8
 lbl_fn_804DC454_000008E4:
-    bl fn_806A8E70
+    bl net_getInterfaceHandle
 lbl_fn_804DC454_000008E8:
     addi r4, r1, 0x10
     li r5, 0xa
@@ -1172,7 +1172,7 @@ lbl_fn_804DCA58_00000E38:
     li r3, 0x1
     b lbl_fn_804DCA58_00000E50
 lbl_fn_804DCA58_00000E4C:
-    bl fn_806A8E70
+    bl net_getInterfaceHandle
 lbl_fn_804DCA58_00000E50:
     mr r25, r3
 lbl_fn_804DCA58_00000E54:

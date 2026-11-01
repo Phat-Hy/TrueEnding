@@ -21,7 +21,7 @@ extern void fn_8050E7E0(void);
 extern void wcslen(void);
 extern void fn_8068B2A0(void);
 extern void net_getSocket(void);
-extern void fn_806A8E70(void);
+extern void net_getInterfaceHandle(void);
 extern void net_isSessionActive(void);
 extern void net_getMyAid(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -2682,7 +2682,7 @@ lbl_fn_804F8468_000024A8:
     li r3, 0x1
     b lbl_fn_804F8468_000024C0
 lbl_fn_804F8468_000024BC:
-    bl fn_806A8E70
+    bl net_getInterfaceHandle
 lbl_fn_804F8468_000024C0:
     addi r4, r1, 0x570
     li r5, 0xa

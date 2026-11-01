@@ -39,7 +39,7 @@ extern void fn_804C822C(void);
 extern void fn_804DA3F8(void);
 extern void fn_804E82C8(void);
 extern void net_getLocalPlayerAid(void);
-extern void fn_806A8E70(void);
+extern void net_getInterfaceHandle(void);
 extern void net_isSessionActive(void);
 extern int sprintf(char* str, const char* format, ...);
 
@@ -134,7 +134,7 @@ lbl_fn_804C4530_00000058:
     li r3, 0x1
     b lbl_fn_804C4530_00000070
 lbl_fn_804C4530_0000006C:
-    bl fn_806A8E70
+    bl net_getInterfaceHandle
 lbl_fn_804C4530_00000070:
     cmpwi r3, 0x1
     ble lbl_fn_804C4530_0000031C

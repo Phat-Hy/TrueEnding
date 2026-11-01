@@ -38,7 +38,7 @@ extern void fn_804761B0(void);
 extern void PSMTXMultVecArraySR(void);
 extern void __GXSetVtxDesc(void);
 extern void GXClearVtxDesc(void);
-extern void fn_80614190(void);
+extern void __GXFlushPixelEngine(void);
 extern void GXSetTexCopySrc(void);
 extern void GXSetTexCopyDst(void);
 extern void GXCopyTex(void);
@@ -907,7 +907,7 @@ asm void fn_800B2EA0(void)
     mr r27, r3
     lwz r31, 0x3c(r4)
     lwz r30, 0x40(r4)
-    bl fn_80614190
+    bl __GXFlushPixelEngine
     lwz r3, lbl_8087EFB4
     li r4, 0x1
     bl fn_800C0508
@@ -1016,7 +1016,7 @@ asm void fn_800B2EA0(void)
     mr r3, r29
     li r4, 0x1
     bl GXCopyTex
-    bl fn_80614190
+    bl __GXFlushPixelEngine
     lwz r3, lbl_8087EFA8
     lfs f1, 0x420(r3)
     bl std_cos

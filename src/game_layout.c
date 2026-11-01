@@ -18,7 +18,7 @@ extern void fn_800C1424(void);
 extern void PSMTXTrans(void);
 extern void __GXSetVtxDesc(void);
 extern void GXClearVtxDesc(void);
-extern void fn_80614190(void);
+extern void __GXFlushPixelEngine(void);
 extern void GXSetTexCopySrc(void);
 extern void GXSetTexCopyDst(void);
 extern void GXCopyTex(void);
@@ -32,7 +32,7 @@ extern void GXInitTexObjDefault(void);
 extern void GXSetTevDirect(void);
 extern void GXSetTevColorIn(void);
 extern void GXSetTevIndirect(void);
-extern void fn_806175F0(void);
+extern void GXSetIndTexMatrix(void);
 extern void GXSetTevKColorSel(void);
 extern void GXSetTevSwapMode(void);
 extern void GXSetTevSwapModeTable(void);
@@ -202,11 +202,11 @@ lbl_layout_drawPane_0000009C:
     stb r5, 0x17(r1)
     lwz r0, 0x14(r1)
     stw r0, 0xc(r1)
-    bl fn_806175F0
+    bl GXSetIndTexMatrix
     stw r25, 0x8(r1)
     addi r4, r1, 0x8
     li r3, 0x1
-    bl fn_806175F0
+    bl GXSetIndTexMatrix
     li r3, 0x5
     bl GXSetNumTevStages
     li r3, 0x1
@@ -492,7 +492,7 @@ lbl_layout_drawPane_0000054C:
     mr r3, r27
     li r4, 0x0
     bl GXCopyTex
-    bl fn_80614190
+    bl __GXFlushPixelEngine
     bl GXDrawDone
     addi r11, r1, 0x2e0
     psq_l f31, 0x2f8(r1), 0, 0
@@ -670,7 +670,7 @@ asm void fn_800A9E64(void)
     mr r3, r23
     li r4, 0x0
     bl GXCopyTex
-    bl fn_80614190
+    bl __GXFlushPixelEngine
     li r3, 0x1
     bl GXClearVtxDesc
     li r3, 0x0
@@ -722,7 +722,7 @@ asm void fn_800A9E64(void)
     mr r3, r27
     li r4, 0x1
     bl GXCopyTex
-    bl fn_80614190
+    bl __GXFlushPixelEngine
     li r3, 0x1
     bl GXClearVtxDesc
     li r3, 0x0
@@ -822,7 +822,7 @@ lbl_fn_800A9E64_00000A28:
     stb r0, 0xb(r1)
     lwz r0, 0x8(r1)
     stw r0, 0xc(r1)
-    bl fn_806175F0
+    bl GXSetIndTexMatrix
     li r3, 0x1
     li r4, 0x2
     li r5, 0x0
@@ -853,7 +853,7 @@ lbl_fn_800A9E64_00000A28:
     mr r3, r26
     li r4, 0x0
     bl GXCopyTex
-    bl fn_80614190
+    bl __GXFlushPixelEngine
     lwz r3, lbl_8087EFA8
     lfs f1, 0x74(r3)
     addi r23, r3, 0x78
@@ -1935,7 +1935,7 @@ lbl_fn_800AAE2C_00001978:
     stfs f1, 0xb8(r1)
     stfs f0, 0xbc(r1)
     stw r0, 0x28(r1)
-    bl fn_806175F0
+    bl GXSetIndTexMatrix
     lfs f4, lbl_80880D70
     addi r4, r1, 0x24
     lfs f0, 0x90(r1)
@@ -1965,7 +1965,7 @@ lbl_fn_800AAE2C_00001978:
     stb r0, 0x13(r1)
     lwz r0, 0x10(r1)
     stw r0, 0x24(r1)
-    bl fn_806175F0
+    bl GXSetIndTexMatrix
     lfs f4, lbl_80880D70
     addi r4, r1, 0x20
     lfs f0, 0xa0(r1)
@@ -1995,7 +1995,7 @@ lbl_fn_800AAE2C_00001978:
     stb r0, 0xf(r1)
     lwz r0, 0xc(r1)
     stw r0, 0x20(r1)
-    bl fn_806175F0
+    bl GXSetIndTexMatrix
     lfs f4, lbl_80880D70
     addi r4, r1, 0x1c
     lfs f0, 0xb0(r1)
@@ -2025,7 +2025,7 @@ lbl_fn_800AAE2C_00001978:
     stb r0, 0xb(r1)
     lwz r0, 0x8(r1)
     stw r0, 0x1c(r1)
-    bl fn_806175F0
+    bl GXSetIndTexMatrix
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0

@@ -22,7 +22,7 @@ extern void fn_800C0590(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800D5B58(void);
-extern void fn_80614190(void);
+extern void __GXFlushPixelEngine(void);
 extern void GXSetTexCopySrc(void);
 extern void GXSetTexCopyDst(void);
 extern void fn_80615190(void);
@@ -765,7 +765,7 @@ asm void fn_800B6A00(void)
     mr r3, r29
     li r4, 0x1
     bl GXCopyTex
-    bl fn_80614190
+    bl __GXFlushPixelEngine
     mr r3, r28
     bl fn_800B3454
     lwz r3, lbl_8087EEE0

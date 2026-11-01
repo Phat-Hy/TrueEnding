@@ -37,7 +37,7 @@ extern void PSVECNormalize(void);
 extern void PSVECDotProduct(void);
 extern void __GXSetVtxDesc(void);
 extern void GXClearVtxDesc(void);
-extern void fn_80614190(void);
+extern void __GXFlushPixelEngine(void);
 extern void GXSetTexCopySrc(void);
 extern void GXSetTexCopyDst(void);
 extern void GXCopyTex(void);
@@ -58,7 +58,7 @@ extern void GXSetTevColorIn(void);
 extern void GXSetTevColorOp(void);
 extern void GXSetTevIndirect(void);
 extern void GXSetTevIndTile(void);
-extern void fn_806175F0(void);
+extern void GXSetIndTexMatrix(void);
 extern void GXSetTevKColorSel(void);
 extern void GXSetTevSwapMode(void);
 extern void GXSetTevOrder(void);
@@ -821,7 +821,7 @@ lbl_fn_800AF544_00000A10:
     mr r3, r28
     li r4, 0x1
     bl GXCopyTex
-    bl fn_80614190
+    bl __GXFlushPixelEngine
     lwz r3, lbl_8087EEE0
     bl seq_stepPlaybackTimer
     lfs f1, lbl_80880E0C
@@ -1002,7 +1002,7 @@ lbl_fn_800AF544_00000C1C:
     stb r0, 0xb(r1)
     lwz r0, 0x8(r1)
     stw r0, 0xc(r1)
-    bl fn_806175F0
+    bl GXSetIndTexMatrix
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0

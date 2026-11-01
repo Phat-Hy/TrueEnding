@@ -42,7 +42,7 @@ extern void GXSetTevColorOp(void);
 extern void GXSetTevIndirect(void);
 extern void GXSetTevIndTile(void);
 extern void fn_80617580(void);
-extern void fn_806175F0(void);
+extern void GXSetIndTexMatrix(void);
 extern void GXSetTevKColorSel(void);
 extern void GXSetTevKAlphaSel(void);
 extern void GXSetTevSwapMode(void);
@@ -464,17 +464,17 @@ asm void fn_805B4F0C(void)
     addi r4, r1, 0x10
     stw r0, 0x10(r1)
     li r3, 0x0
-    bl fn_806175F0
+    bl GXSetIndTexMatrix
     lwz r0, lbl_808883C4
     addi r4, r1, 0xc
     stw r0, 0xc(r1)
     li r3, 0x1
-    bl fn_806175F0
+    bl GXSetIndTexMatrix
     lwz r0, lbl_808883C8
     addi r4, r1, 0x8
     stw r0, 0x8(r1)
     li r3, 0x2
-    bl fn_806175F0
+    bl GXSetIndTexMatrix
     li r3, 0x0
     li r4, 0x0
     li r5, 0x1

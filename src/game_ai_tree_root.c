@@ -7,7 +7,7 @@ extern void _restgpr_18(void);
 extern void _savegpr_14(void);
 extern void _savegpr_18(void);
 extern void dtor_80084684(void);
-extern void fn_800185B4(void);
+extern void battle_findTargetSlotById(void);
 extern void ui_drawColoredQuad(void);
 extern void mission_initPathTracker(void);
 extern void mission_clearPathTracker(void);
@@ -1580,7 +1580,7 @@ lbl_fn_80256C04_000014F4:
     beq lbl_fn_80256C04_00001510
     mr r4, r16
     li r5, 0x0
-    bl fn_800185B4
+    bl battle_findTargetSlotById
     b lbl_fn_80256C04_00001514
 lbl_fn_80256C04_00001510:
     li r3, 0x0

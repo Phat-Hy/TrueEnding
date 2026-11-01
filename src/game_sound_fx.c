@@ -47,7 +47,7 @@ extern void fn_8011CD84(void);
 extern void fn_8011D21C(void);
 extern void fn_8012539C(void);
 extern void enemy_updateAnimTimer(void);
-extern void fn_8013310C(void);
+extern void boss_enablePartStatusFlags(void);
 extern void fn_80133B30(void);
 extern void fn_80133BD8(void);
 extern void fn_80134134(void);
@@ -255,7 +255,7 @@ lbl_fn_800EA9D4_00000158:
     addi r3, r31, 0x7d4
     li r4, 0x20
     li r5, 0x0
-    bl fn_8013310C
+    bl boss_enablePartStatusFlags
 lbl_fn_800EA9D4_0000019C:
     lwz r0, 0x24(r1)
     li r12, 0x0
@@ -430,7 +430,7 @@ lbl_fn_800EACEC_000003D0:
     addi r3, r31, 0x7d4
     li r4, 0x20
     li r5, 0x0
-    bl fn_8013310C
+    bl boss_enablePartStatusFlags
 lbl_fn_800EACEC_00000408:
     lwz r0, 0x24(r1)
     li r12, 0x0

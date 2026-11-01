@@ -56,7 +56,7 @@ extern void fn_804FB474(void);
 extern void fn_804FC014(void);
 extern void fn_8050A4E4(void);
 extern void fn_8050BA6C(void);
-extern void fn_806A8E70(void);
+extern void net_getInterfaceHandle(void);
 extern void net_isSessionActive(void);
 extern void net_isSessionConnected(void);
 extern void fn_806B3CC0(void);
@@ -463,7 +463,7 @@ lbl_fn_804BDD68_00000510:
     li r3, 0x1
     b lbl_fn_804BDD68_00000528
 lbl_fn_804BDD68_00000524:
-    bl fn_806A8E70
+    bl net_getInterfaceHandle
 lbl_fn_804BDD68_00000528:
     cmpwi r3, 0x1
     beq lbl_fn_804BDD68_00000538
@@ -959,7 +959,7 @@ lbl_fn_804BE4A4_00000C20:
     li r3, 0x1
     b lbl_fn_804BE4A4_00000C38
 lbl_fn_804BE4A4_00000C34:
-    bl fn_806A8E70
+    bl net_getInterfaceHandle
 lbl_fn_804BE4A4_00000C38:
     cmpwi r3, 0x1
     beq lbl_fn_804BE4A4_00000C48
@@ -1079,7 +1079,7 @@ lbl_fn_804BE610_00000DBC:
     li r3, 0x1
     b lbl_fn_804BE610_00000DD4
 lbl_fn_804BE610_00000DD0:
-    bl fn_806A8E70
+    bl net_getInterfaceHandle
 lbl_fn_804BE610_00000DD4:
     cmpwi r3, 0x1
     bne lbl_fn_804BE610_00000E2C
@@ -1215,7 +1215,7 @@ lbl_fn_804BE610_00000FAC:
     li r3, 0x1
     b lbl_fn_804BE610_00000FC4
 lbl_fn_804BE610_00000FC0:
-    bl fn_806A8E70
+    bl net_getInterfaceHandle
 lbl_fn_804BE610_00000FC4:
     cmpwi r3, 0x1
     bne lbl_fn_804BE610_00000FDC
@@ -1308,7 +1308,7 @@ lbl_fn_804BE610_000010DC:
     li r3, 0x1
     b lbl_fn_804BE610_000010F4
 lbl_fn_804BE610_000010F0:
-    bl fn_806A8E70
+    bl net_getInterfaceHandle
 lbl_fn_804BE610_000010F4:
     cmpw r30, r3
     blt lbl_fn_804BE610_00000FFC
@@ -1703,7 +1703,7 @@ lbl_fn_804BEDB8_0000166C:
     li r3, 0x1
     b lbl_fn_804BEDB8_00001684
 lbl_fn_804BEDB8_00001680:
-    bl fn_806A8E70
+    bl net_getInterfaceHandle
 lbl_fn_804BEDB8_00001684:
     cmpwi r3, 0x1
     bgt lbl_fn_804BEDB8_000016A0
@@ -1822,7 +1822,7 @@ lbl_fn_804BEDB8_0000180C:
     li r3, 0x1
     b lbl_fn_804BEDB8_00001824
 lbl_fn_804BEDB8_00001820:
-    bl fn_806A8E70
+    bl net_getInterfaceHandle
 lbl_fn_804BEDB8_00001824:
     mr r28, r3
 lbl_fn_804BEDB8_00001828:
@@ -1972,7 +1972,7 @@ lbl_fn_804BEDB8_00001A08:
     li r3, 0x1
     b lbl_fn_804BEDB8_00001A20
 lbl_fn_804BEDB8_00001A1C:
-    bl fn_806A8E70
+    bl net_getInterfaceHandle
 lbl_fn_804BEDB8_00001A20:
     cmpw r31, r3
     blt lbl_fn_804BEDB8_00001928

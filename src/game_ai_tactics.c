@@ -22,7 +22,7 @@ extern void quest_evaluateConditions(void);
 extern void actor_setState(void);
 extern void battle_updateTargetAggro(void);
 extern void battle_calcExpPosition(void);
-extern void fn_801A03E8(void);
+extern void vec3_dot(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
@@ -244,7 +244,7 @@ lbl_fn_802676BC_000001DC:
     bl quest_initMarkerCoords
     addi r3, r1, 0x14
     addi r4, r1, 0x8
-    bl fn_801A03E8
+    bl vec3_dot
     lfs f0, lbl_80883674
     fcmpo cr0, f1, f0
     cror eq, gt, eq

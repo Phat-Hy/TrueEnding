@@ -19,7 +19,7 @@ extern void PSMTXMultVecArraySR(void);
 extern void GXSetVtxDesc(void);
 extern void __GXInitVtxDesc(void);
 extern void GXSetVtxAttrFmt(void);
-extern void fn_80614190(void);
+extern void __GXFlushPixelEngine(void);
 extern void GXBegin(void);
 extern void GXSetTexCopySrc(void);
 extern void GXSetTexCopyDst(void);
@@ -1591,7 +1591,7 @@ asm void fn_800C0508(void)
     lwz r3, 0x774(r28)
     clrlwi r4, r29, 24
     bl GXCopyTex
-    bl fn_80614190
+    bl __GXFlushPixelEngine
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)
@@ -1629,7 +1629,7 @@ asm void fn_800C0590(void)
     lwz r3, 0x79c(r27)
     clrlwi r4, r28, 24
     bl GXCopyTex
-    bl fn_80614190
+    bl __GXFlushPixelEngine
     cmpwi r29, 0x16
     beq lbl_fn_800C0590_00001560
     lwz r4, 0x79c(r27)

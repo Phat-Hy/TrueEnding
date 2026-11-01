@@ -44,7 +44,7 @@ extern void fn_8050BA6C(void);
 extern void __construct_new_array(void);
 extern void __destroy_new_array(void);
 extern void net_getSocket(void);
-extern void fn_806A8E70(void);
+extern void net_getInterfaceHandle(void);
 extern void net_isSessionActive(void);
 extern void net_getMyAid(void);
 extern void net_isSessionConnected(void);
@@ -827,7 +827,7 @@ lbl_fn_804BC458_00000A04:
     li r3, 0x1
     b lbl_fn_804BC458_00000A1C
 lbl_fn_804BC458_00000A18:
-    bl fn_806A8E70
+    bl net_getInterfaceHandle
 lbl_fn_804BC458_00000A1C:
     cmpw r31, r3
     blt lbl_fn_804BC458_00000924
@@ -1772,7 +1772,7 @@ lbl_fn_804BC628_00001794:
     li r3, 0x1
     b lbl_fn_804BC628_000017AC
 lbl_fn_804BC628_000017A8:
-    bl fn_806A8E70
+    bl net_getInterfaceHandle
 lbl_fn_804BC628_000017AC:
     cmpw r30, r3
     blt lbl_fn_804BC628_000016A0

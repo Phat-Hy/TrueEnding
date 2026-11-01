@@ -2,7 +2,7 @@
 #pragma function_align 4
 
 /* External function declarations */
-extern void fn_800185B4(void);
+extern void battle_findTargetSlotById(void);
 extern void menu_renderLayout(void);
 extern void mem_alloc(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -482,7 +482,7 @@ lbl_fn_80154C08_0000057C:
     beq lbl_fn_80154C08_00000598
     mr r4, r30
     li r5, 0x0
-    bl fn_800185B4
+    bl battle_findTargetSlotById
     b lbl_fn_80154C08_0000059C
 lbl_fn_80154C08_00000598:
     li r3, 0x0

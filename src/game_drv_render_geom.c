@@ -44,7 +44,7 @@ extern void GXSetTevColorOp(void);
 extern void GXSetTevIndirect(void);
 extern void GXSetTevIndTile(void);
 extern void fn_80617580(void);
-extern void fn_806175F0(void);
+extern void GXSetIndTexMatrix(void);
 extern void GXSetTevKColorSel(void);
 extern void GXSetTevKAlphaSel(void);
 extern void GXSetTevSwapMode(void);
@@ -787,22 +787,22 @@ lbl_fn_805D1A40_0000095C:
     addi r4, r1, 0x1c
     stw r0, 0x1c(r1)
     li r3, 0x0
-    bl fn_806175F0
+    bl GXSetIndTexMatrix
     lwz r0, 0x40(r26)
     addi r4, r1, 0x18
     stw r0, 0x18(r1)
     li r3, 0x1
-    bl fn_806175F0
+    bl GXSetIndTexMatrix
     lwz r0, 0x44(r26)
     addi r4, r1, 0x14
     stw r0, 0x14(r1)
     li r3, 0x2
-    bl fn_806175F0
+    bl GXSetIndTexMatrix
     lwz r0, 0x48(r26)
     addi r4, r1, 0x10
     stw r0, 0x10(r1)
     li r3, 0x3
-    bl fn_806175F0
+    bl GXSetIndTexMatrix
     lwz r8, 0x4c(r26)
     extrwi. r0, r8, 1, 17
     beq lbl_fn_805D1A40_00000A70

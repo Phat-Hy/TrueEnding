@@ -35,7 +35,7 @@ extern void inventory_unequipItem(void);
 extern void equip_applyToCharacter(void);
 extern void battle_calcExpPosition(void);
 extern void actor_getMovementFlags(void);
-extern void fn_801A03E8(void);
+extern void vec3_dot(void);
 extern void fn_801B2EDC(void);
 extern void chest_spawnLoot(void);
 extern void PSMTXRotRad(void);
@@ -1097,7 +1097,7 @@ asm void fn_801C0D80(void)
     bl quest_initMarkerCoords
     mr r4, r30
     addi r3, r1, 0x80
-    bl fn_801A03E8
+    bl vec3_dot
     fmr f31, f1
     lfs f1, lbl_808826D4
     bl fn_801C1060

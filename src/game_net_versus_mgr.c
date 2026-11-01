@@ -30,7 +30,7 @@ extern void thread_findAndNotify(void);
 extern void thread_findTaskById(void);
 extern void thread_dispatchToQueue(void);
 extern void fn_804A4738(void);
-extern void fn_804A53D4(void);
+extern void net_broadcastCoopPacket(void);
 extern void fn_804AC734(void);
 extern void fn_804AC79C(void);
 extern void fn_804AC7EC(void);
@@ -1027,7 +1027,7 @@ asm void fn_804B8C54(void)
     li r4, 0x0
     li r5, 0x0
     li r7, 0x0
-    bl fn_804A53D4
+    bl net_broadcastCoopPacket
 lbl_fn_804B8C54_00000D54:
     lwz r4, 0x24c(r31)
     lis r3, lbl_807583DC@ha

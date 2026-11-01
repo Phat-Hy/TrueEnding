@@ -82,7 +82,7 @@ extern void GXSetTevColorIn(void);
 extern void GXSetTevColorOp(void);
 extern void GXSetTevIndirect(void);
 extern void GXSetTevIndTile(void);
-extern void fn_806175F0(void);
+extern void GXSetIndTexMatrix(void);
 extern void GXSetTevKColorSel(void);
 extern void GXSetTevKAlphaSel(void);
 extern void GXSetTevSwapMode(void);
@@ -2338,7 +2338,7 @@ lbl_fn_80073A6C_00001F7C:
     mr r3, r29
     stw r0, 0x10(r1)
     addi r4, r1, 0x10
-    bl fn_806175F0
+    bl GXSetIndTexMatrix
     mr r3, r21
     mr r8, r19
     li r4, 0x0
@@ -3551,7 +3551,7 @@ lbl_gx_beginQuadBatch_00003188:
     stw r0, 0x10(r1)
     addi r4, r1, 0x10
     li r3, 0x3
-    bl fn_806175F0
+    bl GXSetIndTexMatrix
     cmpwi r29, 0x0
     li r3, 0x0
     li r0, 0xff

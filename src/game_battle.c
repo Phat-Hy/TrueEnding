@@ -140,7 +140,7 @@ void fn_80018240(void);
 void fn_80018394(void);
 void fn_800183E0(void);
 void fn_800184F4(void);
-void fn_800185B4(void);
+void battle_findTargetSlotById(void);
 void fn_80018608(void);
 void fn_80018834(void);
 void fn_80018BAC(void);
@@ -1599,7 +1599,7 @@ lbl_fn_800184F4_00001468:
     blr
 }
 
-asm void fn_800185B4(void)
+asm void battle_findTargetSlotById(void)
 {
     nofralloc
     lwz r0, 0x48c(r3)
@@ -1607,24 +1607,24 @@ asm void fn_800185B4(void)
     mulli r0, r0, 0x34
     add r3, r3, r0
     addi r3, r3, 0x490
-    b lbl_fn_800185B4_000014D0
-lbl_fn_800185B4_000014A4:
+    b lbl_battle_findTargetSlotById_000014D0
+lbl_battle_findTargetSlotById_000014A4:
     lwz r0, 0x4(r6)
     cmplw r0, r4
-    bne lbl_fn_800185B4_000014CC
+    bne lbl_battle_findTargetSlotById_000014CC
     cmpwi r5, 0x0
-    beq lbl_fn_800185B4_000014C4
+    beq lbl_battle_findTargetSlotById_000014C4
     lwz r0, 0x28(r6)
     cmplw r0, r5
-    bne lbl_fn_800185B4_000014CC
-lbl_fn_800185B4_000014C4:
+    bne lbl_battle_findTargetSlotById_000014CC
+lbl_battle_findTargetSlotById_000014C4:
     mr r3, r6
     blr
-lbl_fn_800185B4_000014CC:
+lbl_battle_findTargetSlotById_000014CC:
     addi r6, r6, 0x34
-lbl_fn_800185B4_000014D0:
+lbl_battle_findTargetSlotById_000014D0:
     cmplw r6, r3
-    bne lbl_fn_800185B4_000014A4
+    bne lbl_battle_findTargetSlotById_000014A4
     li r3, 0x0
     blr
 }

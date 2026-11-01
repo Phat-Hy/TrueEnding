@@ -9,7 +9,7 @@ extern void _savegpr_16(void);
 extern void _savegpr_22(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
-extern void fn_800185B4(void);
+extern void battle_findTargetSlotById(void);
 extern void fn_80041A28(void);
 extern void fn_80044C30(void);
 extern void mem_alloc(void);
@@ -982,7 +982,7 @@ lbl_fn_800E7BB0_00000BFC:
     beq lbl_fn_800E7BB0_00000C24
     mr r3, r0
     mr r4, r30
-    bl fn_800185B4
+    bl battle_findTargetSlotById
     b lbl_fn_800E7BB0_00000C28
 lbl_fn_800E7BB0_00000C24:
     li r3, 0x0
@@ -1015,7 +1015,7 @@ lbl_fn_800E7BB0_00000C6C:
     beq lbl_fn_800E7BB0_00000C94
     mr r3, r0
     mr r4, r30
-    bl fn_800185B4
+    bl battle_findTargetSlotById
     b lbl_fn_800E7BB0_00000C98
 lbl_fn_800E7BB0_00000C94:
     li r3, 0x0

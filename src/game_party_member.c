@@ -2,7 +2,7 @@
 #pragma function_align 4
 
 /* External function declarations */
-extern void fn_800185B4(void);
+extern void battle_findTargetSlotById(void);
 extern void mem_alloc(void);
 extern void atn_Anim_getLayerTrack(void);
 extern void colli_findDynamicSlot(void);
@@ -105,7 +105,7 @@ lbl_fn_80160170_000000B0:
     beq lbl_fn_80160170_000000D8
     mr r4, r29
     mr r5, r30
-    bl fn_800185B4
+    bl battle_findTargetSlotById
     mr r28, r3
     b lbl_fn_80160170_000000DC
 lbl_fn_80160170_000000D8:

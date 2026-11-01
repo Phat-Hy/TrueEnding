@@ -18,7 +18,7 @@ extern void fn_80188A70(void);
 extern void fn_80188AA0(void);
 extern void fn_80191960(void);
 extern void fn_8019198C(void);
-extern void fn_80192758(void);
+extern void map_processStreamChunk(void);
 extern void fn_801AB6B8(void);
 extern void fn_801AC14C(void);
 extern void PSMTXConcat(void);
@@ -1136,7 +1136,7 @@ asm void fn_801AA94C(void)
     lwz r5, 0x4(r4)
     li r0, 0x0
     stw r0, 0x560(r5)
-    b fn_80192758
+    b map_processStreamChunk
 }
 
 asm void fn_801AA95C(void)

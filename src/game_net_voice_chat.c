@@ -19,7 +19,7 @@ extern void fn_8050CDAC(void);
 extern void printf(void);
 extern void abort(void);
 extern void net_getSocket(void);
-extern void fn_806A8E70(void);
+extern void net_getInterfaceHandle(void);
 extern void net_isSessionActive(void);
 extern void net_getMyAid(void);
 extern void net_isSessionConnected(void);
@@ -608,7 +608,7 @@ lbl_fn_804D6304_00000428:
     li r3, 0x1
     blr
 lbl_fn_804D6304_0000043C:
-    b fn_806A8E70
+    b net_getInterfaceHandle
     blr
 }
 

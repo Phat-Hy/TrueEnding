@@ -17,7 +17,7 @@ extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void fn_800FB4B0(void);
 extern void fn_8010653C(void);
-extern void fn_80133130(void);
+extern void boss_setPartCollisionFlags(void);
 extern void quest_resetObjectiveBounds(void);
 extern void inventory_unequipItem(void);
 extern void debuff_clearStatus(void);
@@ -1720,7 +1720,7 @@ lbl_fn_801A5BDC_000016E4:
     li r6, 0x0
     lwz r3, 0x4(r30)
     addi r3, r3, 0x7d4
-    bl fn_80133130
+    bl boss_setPartCollisionFlags
 lbl_fn_801A5BDC_00001700:
     lfs f31, 0x234(r31)
     mr r3, r31

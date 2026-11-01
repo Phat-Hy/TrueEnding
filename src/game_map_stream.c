@@ -12,7 +12,7 @@ extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void player_testStatusCondition(void);
-extern void fn_8013310C(void);
+extern void boss_enablePartStatusFlags(void);
 extern void actor_testBitFlag(void);
 extern void quest_resetObjectiveBounds(void);
 extern void inventory_unequipItem(void);
@@ -108,7 +108,7 @@ void fn_801924F8(void);
 void fn_80192538(void);
 void fn_80192578(void);
 void fn_80192590(void);
-void fn_80192758(void);
+void map_processStreamChunk(void);
 void fn_80192908(void);
 void fn_80192948(void);
 void fn_80192FB4(void);
@@ -276,7 +276,7 @@ asm void fn_80191B50(void)
     lwz r0, 0x564(r8)
     cmpwi r0, 0x7
     bne lbl_fn_80191B50_00000220
-    bl fn_80192758
+    bl map_processStreamChunk
     b lbl_fn_80191B50_000003B8
 lbl_fn_80191B50_00000220:
     lis r4, lbl_8077D650@ha
@@ -420,7 +420,7 @@ asm void fn_80191D30(void)
     lis r4, 0x2
     lwz r3, 0x4(r3)
     addi r3, r3, 0x7d4
-    bl fn_8013310C
+    bl boss_enablePartStatusFlags
     lwz r3, 0x4(r30)
     lwz r0, 0x12a4(r3)
     rlwinm r0, r0, 0, 27, 25
@@ -732,7 +732,7 @@ asm void fn_80192198(void)
     lwz r0, 0x564(r8)
     cmpwi r0, 0x7
     bne lbl_fn_80192198_00000868
-    bl fn_80192758
+    bl map_processStreamChunk
     b lbl_fn_80192198_00000A00
 lbl_fn_80192198_00000868:
     lis r4, lbl_8077D668@ha
@@ -1161,7 +1161,7 @@ lbl_fn_80192590_00000DA8:
     blr
 }
 
-asm void fn_80192758(void)
+asm void map_processStreamChunk(void)
 {
     nofralloc
     stwu r1, -0x70(r1)
@@ -1193,7 +1193,7 @@ asm void fn_80192758(void)
     stw r4, 0x58(r1)
     stw r8, 0x5c(r1)
     stw r7, 0x60(r1)
-    bne lbl_fn_80192758_00000E98
+    bne lbl_map_processStreamChunk_00000E98
     lis r6, lbl_807C7B78@ha
     lis r4, fn_801905AC@ha
     lis r3, fn_801905DC@ha
@@ -1204,7 +1204,7 @@ asm void fn_80192758(void)
     stw r4, 0x4(r5)
     stw r3, lbl_807C7B78@l(r6)
     stb r0, lbl_8087F0BB
-lbl_fn_80192758_00000E98:
+lbl_map_processStreamChunk_00000E98:
     lwz r7, 0x50(r1)
     addi r3, r1, 0x3c
     lwz r6, 0x54(r1)
@@ -1219,7 +1219,7 @@ lbl_fn_80192758_00000E98:
     crclr 6
     bl map_debugLog
     cmpwi r3, 0x0
-    bne lbl_fn_80192758_00000F6C
+    bne lbl_map_processStreamChunk_00000F6C
     lwz r7, 0x3c(r1)
     li r3, 0x14
     lwz r6, 0x40(r1)
@@ -1234,7 +1234,7 @@ lbl_fn_80192758_00000E98:
     bl mem_free
     cmpwi r3, 0x0
     mr r30, r3
-    bne lbl_fn_80192758_00000F30
+    bne lbl_map_processStreamChunk_00000F30
     lis r3, __files@ha
     lis r4, lbl_8077DC10@ha
     addi r3, r3, __files@l
@@ -1243,9 +1243,9 @@ lbl_fn_80192758_00000E98:
     crclr 6
     bl printf
     bl abort
-lbl_fn_80192758_00000F30:
+lbl_map_processStreamChunk_00000F30:
     cmpwi r30, 0x0
-    beq lbl_fn_80192758_00000F60
+    beq lbl_map_processStreamChunk_00000F60
     lwz r0, 0x28(r1)
     stw r0, 0x0(r30)
     lwz r0, 0x2c(r1)
@@ -1256,23 +1256,23 @@ lbl_fn_80192758_00000F30:
     stw r0, 0xc(r30)
     lwz r0, 0x38(r1)
     stw r0, 0x10(r30)
-lbl_fn_80192758_00000F60:
+lbl_map_processStreamChunk_00000F60:
     stw r30, 0x4(r31)
     li r0, 0x1
-    b lbl_fn_80192758_00000F70
-lbl_fn_80192758_00000F6C:
+    b lbl_map_processStreamChunk_00000F70
+lbl_map_processStreamChunk_00000F6C:
     li r0, 0x0
-lbl_fn_80192758_00000F70:
+lbl_map_processStreamChunk_00000F70:
     cmpwi r0, 0x0
-    beq lbl_fn_80192758_00000F88
+    beq lbl_map_processStreamChunk_00000F88
     lis r3, lbl_807C7B78@ha
     addi r3, r3, lbl_807C7B78@l
     stw r3, 0x0(r31)
-    b lbl_fn_80192758_00000F90
-lbl_fn_80192758_00000F88:
+    b lbl_map_processStreamChunk_00000F90
+lbl_map_processStreamChunk_00000F88:
     li r0, 0x0
     stw r0, 0x0(r31)
-lbl_fn_80192758_00000F90:
+lbl_map_processStreamChunk_00000F90:
     lwz r0, 0x74(r1)
     lwz r31, 0x6c(r1)
     lwz r30, 0x68(r1)

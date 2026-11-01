@@ -37,7 +37,7 @@ extern void fn_8044D878(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_destructor(void);
-extern void fn_804A53D4(void);
+extern void net_broadcastCoopPacket(void);
 extern void fn_804A5E40(void);
 extern void fn_8050FA80(void);
 extern void fn_8050FD24(void);
@@ -1996,7 +1996,7 @@ lbl_fn_805233FC_000019B0:
     stfs f7, 0x160(r1)
     stfs f0, 0x164(r1)
     lwz r4, 0x178(r25)
-    bl fn_804A53D4
+    bl net_broadcastCoopPacket
     b lbl_fn_805233FC_00001E2C
 lbl_fn_805233FC_00001AF4:
     cmpwi r0, 0x1

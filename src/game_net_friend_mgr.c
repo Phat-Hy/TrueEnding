@@ -26,7 +26,7 @@ extern void thread_findAndNotifySlot(void);
 extern void thread_dispatchToQueue(void);
 extern void mem_findBlockById(void);
 extern void net_initCoopSession(void);
-extern void fn_804A53D4(void);
+extern void net_broadcastCoopPacket(void);
 extern void fn_804A5CD8(void);
 extern void fn_804AC79C(void);
 extern void fn_804AC7EC(void);
@@ -1944,7 +1944,7 @@ lbl_fn_804CEAA0_00001818:
     stfs f2, 0x24(r1)
     stfs f1, 0x28(r1)
     stfs f0, 0x2c(r1)
-    bl fn_804A53D4
+    bl net_broadcastCoopPacket
 lbl_fn_804CEAA0_00001918:
     lwz r0, 0x78(r31)
     cmpwi r0, 0x2

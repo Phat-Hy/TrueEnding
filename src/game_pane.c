@@ -28,7 +28,7 @@ extern void fn_800D594C(void);
 extern void fn_800D5C84(void);
 extern void __GXSetVtxDesc(void);
 extern void GXClearVtxDesc(void);
-extern void fn_80614190(void);
+extern void __GXFlushPixelEngine(void);
 extern void GXSetTexCopySrc(void);
 extern void GXSetTexCopyDst(void);
 extern void GXCopyTex(void);
@@ -49,7 +49,7 @@ extern void GXSetTevColorIn(void);
 extern void GXSetTevColorOp(void);
 extern void GXSetTevIndirect(void);
 extern void GXSetTevIndTile(void);
-extern void fn_806175F0(void);
+extern void GXSetIndTexMatrix(void);
 extern void GXSetTevKColorSel(void);
 extern void GXSetTevKAlphaSel(void);
 extern void GXSetTevSwapMode(void);
@@ -234,11 +234,11 @@ lbl_fn_800AB774_000000A8:
     stb r0, 0x18(r1)
     lwz r0, 0x18(r1)
     stw r0, 0xc(r1)
-    bl fn_806175F0
+    bl GXSetIndTexMatrix
     stw r26, 0x8(r1)
     addi r4, r1, 0x8
     li r3, 0x1
-    bl fn_806175F0
+    bl GXSetIndTexMatrix
     li r3, 0x5
     bl GXSetNumTevStages
     li r3, 0x1
@@ -493,7 +493,7 @@ lbl_fn_800AB774_00000514:
     mr r3, r28
     li r4, 0x0
     bl GXCopyTex
-    bl fn_80614190
+    bl __GXFlushPixelEngine
     bl GXDrawDone
     addi r11, r1, 0x190
     psq_l f31, 0x1c8(r1), 0, 0
@@ -666,7 +666,7 @@ lbl_fn_800ABD94_000006A0:
     mr r3, r21
     li r4, 0x0
     bl GXCopyTex
-    bl fn_80614190
+    bl __GXFlushPixelEngine
     li r3, 0x1
     bl GXClearVtxDesc
     li r3, 0x0
@@ -718,7 +718,7 @@ lbl_fn_800ABD94_000006A0:
     mr r3, r24
     li r4, 0x1
     bl GXCopyTex
-    bl fn_80614190
+    bl __GXFlushPixelEngine
     lwz r7, lbl_8087EFA8
     mr r4, r24
     mr r5, r23
@@ -938,7 +938,7 @@ lbl_fn_800ABD94_00000BC0:
     stb r0, 0xa(r1)
     lwz r0, 0x8(r1)
     stw r0, 0xc(r1)
-    bl fn_806175F0
+    bl GXSetIndTexMatrix
     li r3, 0x0
     li r4, 0xc
     bl GXSetTevKColorSel
@@ -1204,7 +1204,7 @@ asm void fn_800AC6DC(void)
     li r7, 0x0
     li r8, 0x0
     bl GXClampLightAngle
-    bl fn_80614190
+    bl __GXFlushPixelEngine
     bl GXDrawDone
     lwz r3, lbl_8087EFB4
     li r4, 0x0
@@ -1222,7 +1222,7 @@ asm void fn_800AC6DC(void)
     mr r3, r26
     li r4, 0x1
     bl GXCopyTex
-    bl fn_80614190
+    bl __GXFlushPixelEngine
     lwz r3, lbl_8087EFA8
     mr r4, r25
     lfs f2, lbl_80880DA8
@@ -1413,7 +1413,7 @@ asm void fn_800AC6DC(void)
     addi r4, r1, 0x8
     stw r0, 0x8(r1)
     li r3, 0x1
-    bl fn_806175F0
+    bl GXSetIndTexMatrix
     li r3, 0x2
     li r4, 0xd
     bl GXSetTevKColorSel

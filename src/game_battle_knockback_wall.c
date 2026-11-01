@@ -66,7 +66,7 @@ extern void npc_getDialogController(void);
 extern void quest_getGlobalManager(void);
 extern void fn_80140500(void);
 extern void bgm_getGlobalManager(void);
-extern void fn_801A03E8(void);
+extern void vec3_dot(void);
 extern void fn_801A03F4(void);
 extern void task_findEntryById(void);
 extern void res_MsgHandle_constructor(void);
@@ -2042,7 +2042,7 @@ lbl_fn_8041766C_000019C4:
     bl vec3_set
     mr r4, r3
     addi r3, r1, 0x218
-    bl fn_801A03E8
+    bl vec3_dot
     fcmpo cr0, f1, f27
     ble lbl_fn_8041766C_000019F0
     li r19, 0x0

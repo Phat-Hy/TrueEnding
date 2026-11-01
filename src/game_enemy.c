@@ -33,7 +33,7 @@ extern void GXSetTevColorIn(void);
 extern void GXSetTevColorOp(void);
 extern void GXSetTevIndirect(void);
 extern void GXSetTevIndTile(void);
-extern void fn_806175F0(void);
+extern void GXSetIndTexMatrix(void);
 extern void GXSetTevKColorSel(void);
 extern void GXSetTevSwapMode(void);
 extern void GXSetTevSwapModeTable(void);
@@ -1347,7 +1347,7 @@ lbl_atn_ComDrawTextureMono_execute_00001108:
     stb r0, 0x13(r1)
     lwz r0, 0x10(r1)
     stw r0, 0x20(r1)
-    bl fn_806175F0
+    bl GXSetIndTexMatrix
     lfs f4, lbl_808809E0
     addi r4, r1, 0x1c
     lfs f0, 0x98(r1)
@@ -1377,7 +1377,7 @@ lbl_atn_ComDrawTextureMono_execute_00001108:
     stb r0, 0xf(r1)
     lwz r0, 0xc(r1)
     stw r0, 0x1c(r1)
-    bl fn_806175F0
+    bl GXSetIndTexMatrix
     lfs f4, lbl_808809E0
     addi r4, r1, 0x18
     lfs f0, 0xa8(r1)
@@ -1407,7 +1407,7 @@ lbl_atn_ComDrawTextureMono_execute_00001108:
     stb r0, 0xb(r1)
     lwz r0, 0x8(r1)
     stw r0, 0x18(r1)
-    bl fn_806175F0
+    bl GXSetIndTexMatrix
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -1986,7 +1986,7 @@ lbl_atn_ComDrawTextureMaskMono_execute_00001AEC:
     stb r0, 0x13(r1)
     lwz r0, 0x10(r1)
     stw r0, 0x20(r1)
-    bl fn_806175F0
+    bl GXSetIndTexMatrix
     lfs f4, lbl_808809E0
     addi r4, r1, 0x1c
     lfs f0, 0x98(r1)
@@ -2016,7 +2016,7 @@ lbl_atn_ComDrawTextureMaskMono_execute_00001AEC:
     stb r0, 0xf(r1)
     lwz r0, 0xc(r1)
     stw r0, 0x1c(r1)
-    bl fn_806175F0
+    bl GXSetIndTexMatrix
     lfs f4, lbl_808809E0
     addi r4, r1, 0x18
     lfs f0, 0xa8(r1)
@@ -2046,7 +2046,7 @@ lbl_atn_ComDrawTextureMaskMono_execute_00001AEC:
     stb r0, 0xb(r1)
     lwz r0, 0x8(r1)
     stw r0, 0x18(r1)
-    bl fn_806175F0
+    bl GXSetIndTexMatrix
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0

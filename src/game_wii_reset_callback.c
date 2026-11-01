@@ -8,7 +8,7 @@ extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void boss_decodePhaseBitfield(void);
 extern void boss_parseStateCondition(void);
-extern void fn_8006BB6C(void);
+extern void boss_triggerEventAction(void);
 extern void fn_8006D008(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
@@ -110,7 +110,7 @@ asm void fn_80575FD0(void)
     bne lbl_fn_80575FD0_000000A0
     lwz r3, 0x1d0(r3)
     li r4, 0x0
-    bl fn_8006BB6C
+    bl boss_triggerEventAction
     li r0, 0x0
     stw r0, 0x1d0(r31)
     stw r0, 0x1cc(r31)

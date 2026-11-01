@@ -10,7 +10,7 @@ extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
 extern void fn_8006BA8C(void);
-extern void fn_8006BB6C(void);
+extern void boss_triggerEventAction(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void fn_800A5D14(void);
@@ -606,7 +606,7 @@ lbl_fn_8020F248_000006F0:
     bne lbl_fn_8020F248_000003F0
     mr r3, r25
     li r4, 0x0
-    bl fn_8006BB6C
+    bl boss_triggerEventAction
 lbl_fn_8020F248_0000070C:
     addi r11, r1, 0x6d0
     bl _restgpr_22

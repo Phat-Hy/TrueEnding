@@ -129,7 +129,7 @@ void fn_8006BA54(void);
 u32 fn_8006BA6C(void);
 void fn_8006BA74(void);
 void fn_8006BA8C(void);
-void fn_8006BB6C(void);
+void boss_triggerEventAction(void);
 void fn_8006BBCC(void);
 void atn_FileList_destructor(void);
 void fn_8006BD78(void);
@@ -3537,7 +3537,7 @@ lbl_fn_8006BA8C_00002DA4:
     blr
 }
 
-asm void fn_8006BB6C(void)
+asm void boss_triggerEventAction(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -3547,20 +3547,20 @@ asm void fn_8006BB6C(void)
     mr r31, r3
     lwz r0, lbl_8087F518
     cmpwi r0, 0x0
-    beq lbl_fn_8006BB6C_00002DF4
+    beq lbl_boss_triggerEventAction_00002DF4
     cmpwi r4, 0x0
-    bne lbl_fn_8006BB6C_00002DF4
+    bne lbl_boss_triggerEventAction_00002DF4
     mr r3, r0
     mr r4, r31
     bl boss_bindArenaInteractions
-    b lbl_fn_8006BB6C_00002E08
-lbl_fn_8006BB6C_00002DF4:
+    b lbl_boss_triggerEventAction_00002E08
+lbl_boss_triggerEventAction_00002DF4:
     cmpwi r3, 0x0
-    beq lbl_fn_8006BB6C_00002E08
+    beq lbl_boss_triggerEventAction_00002E08
     bl dungeon_initGlobalContext
     mr r4, r31
     bl town_updateInteractionPoints
-lbl_fn_8006BB6C_00002E08:
+lbl_boss_triggerEventAction_00002E08:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0

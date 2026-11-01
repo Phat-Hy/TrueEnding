@@ -25,7 +25,7 @@ extern void magic_dispatchActionCommand(void);
 extern void player_evaluateStatusCondition(void);
 extern void fn_801248DC(void);
 extern void fn_80124B60(void);
-extern void fn_8013310C(void);
+extern void boss_enablePartStatusFlags(void);
 extern void dialog_renderWindow(void);
 extern void fn_80153698(void);
 extern void inventory_unequipItem(void);
@@ -1432,7 +1432,7 @@ lbl_fn_800E4278_00001278:
     addi r3, r24, 0x7d4
     li r4, 0x20
     li r5, 0x0
-    bl fn_8013310C
+    bl boss_enablePartStatusFlags
 lbl_fn_800E4278_000012B0:
     lwz r0, 0x14c(r1)
     li r12, 0x0

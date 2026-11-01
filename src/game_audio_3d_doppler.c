@@ -26,7 +26,7 @@ extern void fn_8011BF3C(void);
 extern void enemy_updateCombatBehavior(void);
 extern void fn_80129978(void);
 extern void path_resetWaypointVelocity(void);
-extern void fn_80133130(void);
+extern void boss_setPartCollisionFlags(void);
 extern void actor_testBitFlag(void);
 extern void fn_80133EE8(void);
 extern void npc_getGlobalManager(void);
@@ -957,7 +957,7 @@ lbl_fn_80323E50_00000AB4:
     li r4, 0x4000
     li r5, 0xa
     li r6, 0x0
-    bl fn_80133130
+    bl boss_setPartCollisionFlags
     addi r3, r30, 0x7d4
     lis r4, 0x100
     bl actor_testBitFlag

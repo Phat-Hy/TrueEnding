@@ -45,7 +45,7 @@ extern void fn_804A39EC(void);
 extern void fn_804A3A68(void);
 extern void fn_804A436C(void);
 extern void fn_804A4494(void);
-extern void fn_804A53D4(void);
+extern void net_broadcastCoopPacket(void);
 extern void fn_80580B54(void);
 extern void fn_80581678(void);
 extern void fn_80581820(void);
@@ -1824,7 +1824,7 @@ lbl_fn_80580268_000017BC:
     li r4, 0x0
     li r5, 0x0
     li r7, 0x0
-    bl fn_804A53D4
+    bl net_broadcastCoopPacket
     b lbl_fn_80580268_0000185C
 lbl_fn_80580268_00001854:
     lfs f0, lbl_808880C8

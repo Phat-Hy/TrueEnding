@@ -62,7 +62,7 @@ extern void fn_80148334(void);
 extern void fn_801750FC(void);
 extern void fn_80198C00(void);
 extern void bgm_getGlobalManager(void);
-extern void fn_801A03E8(void);
+extern void vec3_dot(void);
 extern void fn_801A03EC(void);
 extern void fn_801A0408(void);
 extern void sound_initGlobalInstances(void);
@@ -1054,13 +1054,13 @@ lbl_fn_803FA5C8_00000C08:
     bl vec3_set
     mr r4, r3
     addi r3, r1, 0x1b8
-    bl fn_801A03E8
+    bl vec3_dot
     lfs f0, lbl_80886048
     fcmpo cr0, f1, f0
     bge lbl_fn_803FA5C8_00000D04
     addi r3, r1, 0x1b8
     addi r4, r31, 0x4e4
-    bl fn_801A03E8
+    bl vec3_dot
     addi r3, r1, 0xc0
     addi r4, r1, 0x1b8
     bl fn_803FAE8C

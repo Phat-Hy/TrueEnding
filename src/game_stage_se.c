@@ -26,7 +26,7 @@ extern void fn_8018F81C(void);
 extern void fn_8018F84C(void);
 extern void fn_80191960(void);
 extern void fn_8019198C(void);
-extern void fn_80192758(void);
+extern void map_processStreamChunk(void);
 extern void fn_801A2A48(void);
 extern void fn_801AD34C(void);
 extern void fn_801C3414(void);
@@ -324,7 +324,7 @@ lbl_fn_801A10CC_00000308:
     stw r0, 0x0(r30)
     b lbl_fn_801A10CC_00000318
 lbl_fn_801A10CC_00000314:
-    bl fn_80192758
+    bl map_processStreamChunk
 lbl_fn_801A10CC_00000318:
     addi r11, r1, 0xd0
     bl _restgpr_27
@@ -1281,7 +1281,7 @@ lbl_fn_801A2058_000010B4:
     stw r0, 0x0(r31)
     b lbl_fn_801A2058_000010C4
 lbl_fn_801A2058_000010C0:
-    bl fn_80192758
+    bl map_processStreamChunk
 lbl_fn_801A2058_000010C4:
     lwz r0, 0x64(r1)
     lwz r31, 0x5c(r1)
@@ -1824,7 +1824,7 @@ lbl_fn_801A24E4_00001800:
 lbl_fn_801A24E4_0000180C:
     mr r3, r31
     mr r4, r30
-    bl fn_80192758
+    bl map_processStreamChunk
 lbl_fn_801A24E4_00001818:
     lwz r0, 0x114(r1)
     lwz r31, 0x10c(r1)

@@ -6,7 +6,7 @@ extern void __files(void);
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_800185B4(void);
+extern void battle_findTargetSlotById(void);
 extern void collision_testLineSegment(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
@@ -23,7 +23,7 @@ extern void fn_80134168(void);
 extern void npc_updateTalkInteraction(void);
 extern void inventory_unequipItem(void);
 extern void debuff_clearStatus(void);
-extern void fn_80192758(void);
+extern void map_processStreamChunk(void);
 extern void fn_801A471C(void);
 extern void fn_801A474C(void);
 extern void fn_801A4868(void);
@@ -1309,7 +1309,7 @@ lbl_fn_801A34D4_00001128:
     lwz r3, lbl_8087EE68
     mr r5, r30
     lwz r4, 0x4(r27)
-    bl fn_800185B4
+    bl battle_findTargetSlotById
     cmpwi r3, 0x0
     beq lbl_fn_801A34D4_000011E0
     lwz r0, 0x8(r3)
@@ -2099,7 +2099,7 @@ lbl_fn_801A3DFC_00001CAC:
     stw r0, 0x0(r28)
     b lbl_fn_801A3DFC_00001CBC
 lbl_fn_801A3DFC_00001CB8:
-    bl fn_80192758
+    bl map_processStreamChunk
 lbl_fn_801A3DFC_00001CBC:
     addi r11, r1, 0x1b0
     bl _restgpr_27

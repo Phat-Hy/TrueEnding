@@ -40,7 +40,7 @@ extern void equip_applyToCharacter(void);
 extern void fn_8015C0C0(void);
 extern void fn_8015C6A0(void);
 extern void battle_activateExpReward(void);
-extern void fn_801A03E8(void);
+extern void vec3_dot(void);
 extern void fn_801A03F4(void);
 extern void fn_801A0400(void);
 extern void sound_initGlobalInstances(void);
@@ -1660,7 +1660,7 @@ lbl_fn_80279280_0000160C:
     bl vec3_sub
     addi r3, r1, 0x90
     addi r4, r1, 0x54
-    bl fn_801A03E8
+    bl vec3_dot
     fneg f0, f1
     fdivs f1, f0, f30
     fcmpo cr0, f28, f1

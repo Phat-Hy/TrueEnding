@@ -33,7 +33,7 @@ extern void enemy_stepBehavior(void);
 extern void enemy_updateCombatBehavior(void);
 extern void fn_80128930(void);
 extern void fn_8012F440(void);
-extern void fn_8013310C(void);
+extern void boss_enablePartStatusFlags(void);
 extern void boss_updatePhaseState(void);
 extern void npc_updateDialogueTarget(void);
 extern void fn_80139F58(void);
@@ -684,7 +684,7 @@ lbl_fn_8030E36C_0000073C:
     addi r3, r31, 0x7d4
     li r4, 0x4000
     li r5, 0x0
-    bl fn_8013310C
+    bl boss_enablePartStatusFlags
     b lbl_fn_8030E36C_000007E0
 lbl_fn_8030E36C_000007B0:
     lwz r0, 0x58c(r3)
@@ -749,7 +749,7 @@ asm void fn_8030E4AC(void)
     addi r3, r31, 0x7d4
     li r4, 0x4000
     li r5, 0x0
-    bl fn_8013310C
+    bl boss_enablePartStatusFlags
 lbl_fn_8030E4AC_00000880:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)

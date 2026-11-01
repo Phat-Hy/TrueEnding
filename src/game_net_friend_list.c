@@ -44,8 +44,8 @@ extern void fn_80107E68(void);
 extern void fn_80107F10(void);
 extern void fn_80107F20(void);
 extern void fn_80107FC8(void);
-extern void fn_8013310C(void);
-extern void fn_80133130(void);
+extern void boss_enablePartStatusFlags(void);
+extern void boss_setPartCollisionFlags(void);
 extern void actor_testBitFlag(void);
 extern void dialog_selectChoice(void);
 extern void dialog_activateChoiceWindow(void);
@@ -821,7 +821,7 @@ lbl_fn_804CF640_0000086C:
     subi r5, r4, 0x7960
     li r6, 0x0
     lis r4, 0x8
-    bl fn_80133130
+    bl boss_setPartCollisionFlags
     lwz r3, lbl_8087F048
     cmpwi r3, 0x0
     beq lbl_fn_804CF640_00000940
@@ -874,7 +874,7 @@ lbl_fn_804CF640_00000940:
     subi r5, r4, 0x7960
     li r6, 0x0
     li r4, 0x4
-    bl fn_80133130
+    bl boss_setPartCollisionFlags
     lwz r3, lbl_8087F048
     cmpwi r3, 0x0
     beq lbl_fn_804CF640_000009EC
@@ -920,7 +920,7 @@ lbl_fn_804CF640_000009EC:
     subi r5, r4, 0x7960
     li r6, 0x0
     lis r4, 0x200
-    bl fn_80133130
+    bl boss_setPartCollisionFlags
     lwz r3, lbl_8087F048
     cmpwi r3, 0x0
     beq lbl_fn_804CF640_00000AA0
@@ -967,7 +967,7 @@ lbl_fn_804CF640_00000AA0:
     subi r5, r4, 0x7960
     li r6, 0x0
     lis r4, 0x40
-    bl fn_80133130
+    bl boss_setPartCollisionFlags
     lwz r3, lbl_8087F048
     cmpwi r3, 0x0
     beq lbl_fn_804CF640_00000B3C
@@ -1007,7 +1007,7 @@ lbl_fn_804CF640_00000B3C:
     subi r5, r4, 0x7960
     li r6, 0x0
     li r4, 0x1
-    bl fn_80133130
+    bl boss_setPartCollisionFlags
     lwz r3, lbl_8087F048
     cmpwi r3, 0x0
     beq lbl_fn_804CF640_00000BD0
@@ -1047,7 +1047,7 @@ lbl_fn_804CF640_00000BD0:
     li r6, 0x0
     addi r4, r4, -0x8000
     subi r5, r5, 0x7960
-    bl fn_80133130
+    bl boss_setPartCollisionFlags
     lwz r3, lbl_8087F048
     cmpwi r3, 0x0
     beq lbl_fn_804CF640_00000C90
@@ -1096,7 +1096,7 @@ lbl_fn_804CF640_00000C90:
     subi r5, r4, 0x7960
     li r6, 0x0
     li r4, 0x80
-    bl fn_80133130
+    bl boss_setPartCollisionFlags
     lwz r3, lbl_8087F048
     cmpwi r3, 0x0
     beq lbl_fn_804CF640_00000D3C
@@ -1170,7 +1170,7 @@ lbl_fn_804CF640_00000D78:
     addi r3, r31, 0x7d4
     li r4, 0x20
     li r5, 0x0
-    bl fn_8013310C
+    bl boss_enablePartStatusFlags
     b lbl_fn_804CF640_00000DF0
 lbl_fn_804CF640_00000DDC:
     lwz r12, 0x0(r31)

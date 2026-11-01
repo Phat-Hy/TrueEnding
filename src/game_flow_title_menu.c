@@ -40,7 +40,7 @@ extern void fn_8050DDE0(void);
 extern void net_p2p_readPayload(void);
 extern void rand(void);
 extern void net_getSocket(void);
-extern void fn_806A8E70(void);
+extern void net_getInterfaceHandle(void);
 extern void net_isSessionActive(void);
 extern void net_getMyAid(void);
 extern void net_isSessionConnected(void);
@@ -154,7 +154,7 @@ lbl_fn_804DDA08_000000D0:
     li r3, 0x1
     b lbl_fn_804DDA08_000000E8
 lbl_fn_804DDA08_000000E4:
-    bl fn_806A8E70
+    bl net_getInterfaceHandle
 lbl_fn_804DDA08_000000E8:
     cmpw r23, r3
     blt lbl_fn_804DDA08_00000078
@@ -762,7 +762,7 @@ lbl_fn_804DE000_000008C4:
     li r3, 0x1
     b lbl_fn_804DE000_000008DC
 lbl_fn_804DE000_000008D8:
-    bl fn_806A8E70
+    bl net_getInterfaceHandle
 lbl_fn_804DE000_000008DC:
     cmpw r31, r3
     blt lbl_fn_804DE000_000007DC
@@ -1111,7 +1111,7 @@ lbl_fn_804DE564_00000D3C:
     li r3, 0x1
     b lbl_fn_804DE564_00000D54
 lbl_fn_804DE564_00000D50:
-    bl fn_806A8E70
+    bl net_getInterfaceHandle
 lbl_fn_804DE564_00000D54:
     mr r31, r3
 lbl_fn_804DE564_00000D58:
@@ -1208,7 +1208,7 @@ lbl_fn_804DE564_00000E78:
     li r3, 0x1
     b lbl_fn_804DE564_00000E90
 lbl_fn_804DE564_00000E8C:
-    bl fn_806A8E70
+    bl net_getInterfaceHandle
 lbl_fn_804DE564_00000E90:
     addi r0, r27, 0x1
     cmpw r0, r3

@@ -32,7 +32,7 @@ extern void __GXInitVtxDesc(void);
 extern void GXSetVtxAttrFmt(void);
 extern void __GXSetVtxDesc(void);
 extern void GXClearVtxDesc(void);
-extern void fn_80614190(void);
+extern void __GXFlushPixelEngine(void);
 extern void GXBegin(void);
 extern void fn_806149C0(void);
 extern void fn_80614A00(void);
@@ -59,7 +59,7 @@ extern void GXSetTevColorIn(void);
 extern void GXSetTevColorOp(void);
 extern void GXSetTevIndirect(void);
 extern void GXSetTevIndTile(void);
-extern void fn_806175F0(void);
+extern void GXSetIndTexMatrix(void);
 extern void GXSetTevKColorSel(void);
 extern void GXSetTevKAlphaSel(void);
 extern void GXSetTevOrder(void);
@@ -416,7 +416,7 @@ lbl_fn_800B105C_000003C0:
     li r7, 0x0
     li r8, 0x0
     bl GXClampLightAngle
-    bl fn_80614190
+    bl __GXFlushPixelEngine
     li r0, 0x7f
     stb r0, 0xc(r1)
     lis r30, 0x100
@@ -462,7 +462,7 @@ lbl_fn_800B105C_000003C0:
     mr r3, r25
     li r4, 0x1
     bl GXCopyTex
-    bl fn_80614190
+    bl __GXFlushPixelEngine
     bl GXDrawDone
     li r3, 0x0
     li r4, 0x1
@@ -1398,7 +1398,7 @@ asm void fn_800B1C44(void)
     stb r0, 0xb(r1)
     lwz r0, 0x8(r1)
     stw r0, 0x14(r1)
-    bl fn_806175F0
+    bl GXSetIndTexMatrix
     li r3, 0x0
     li r4, 0xc
     bl GXSetTevKColorSel

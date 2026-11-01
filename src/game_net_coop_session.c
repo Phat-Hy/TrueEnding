@@ -81,7 +81,7 @@ void fn_804A4AEC(void);
 void fn_804A4CE4(void);
 void fn_804A4EEC(void);
 void fn_804A5160(void);
-void fn_804A53D4(void);
+void net_broadcastCoopPacket(void);
 
 asm void fn_804A3AF0(void)
 {
@@ -1853,7 +1853,7 @@ lbl_fn_804A5160_000018A4:
     blr
 }
 
-asm void fn_804A53D4(void)
+asm void net_broadcastCoopPacket(void)
 {
     nofralloc
     stwu r1, -0x70(r1)
@@ -1869,13 +1869,13 @@ asm void fn_804A53D4(void)
     mr r30, r6
     cmpwi r4, 0x4
     mr r31, r7
-    bge lbl_fn_804A53D4_000019FC
+    bge lbl_net_broadcastCoopPacket_000019FC
     slwi r0, r4, 2
     stw r4, 0x88(r3)
     add r3, r3, r0
     lwz r3, 0x8c(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_804A53D4_000019FC
+    beq lbl_net_broadcastCoopPacket_000019FC
     lis r26, lbl_807573D0@ha
     lfs f1, 0x0(r6)
     addi r26, r26, lbl_807573D0@l
@@ -1913,7 +1913,7 @@ asm void fn_804A53D4(void)
     lwz r3, 0x8c(r3)
     bl save_computeCrc32
     cmpwi r31, 0x0
-    beq lbl_fn_804A53D4_000019FC
+    beq lbl_net_broadcastCoopPacket_000019FC
     lwz r0, 0x88(r27)
     slwi r0, r0, 2
     add r3, r27, r0
@@ -1926,12 +1926,12 @@ asm void fn_804A53D4(void)
     fsubs f0, f1, f0
     lwz r3, 0x8c(r3)
     stfs f0, 0x50(r3)
-lbl_fn_804A53D4_000019FC:
+lbl_net_broadcastCoopPacket_000019FC:
     cmpwi r28, 0x0
-    beq lbl_fn_804A53D4_00001AF4
+    beq lbl_net_broadcastCoopPacket_00001AF4
     lwz r0, 0x9c(r27)
     cmplwi r0, 0x4
-    bge lbl_fn_804A53D4_00001AF4
+    bge lbl_net_broadcastCoopPacket_00001AF4
     li r0, 0x0
     stw r0, 0x8(r1)
     addi r3, r1, 0x10
@@ -1941,16 +1941,16 @@ lbl_fn_804A53D4_000019FC:
     bl memset
     cmpwi r29, 0x0
     stw r28, 0x8(r1)
-    beq lbl_fn_804A53D4_00001A44
+    beq lbl_net_broadcastCoopPacket_00001A44
     mr r4, r29
     addi r3, r1, 0x10
     bl strcpy
-lbl_fn_804A53D4_00001A44:
+lbl_net_broadcastCoopPacket_00001A44:
     lwz r0, 0x9c(r27)
     mulli r0, r0, 0x48
     add r0, r27, r0
     addic. r4, r0, 0xa0
-    beq lbl_fn_804A53D4_00001AE8
+    beq lbl_net_broadcastCoopPacket_00001AE8
     lwz r0, 0x8(r1)
     stw r0, 0x0(r4)
     lwz r0, 0xc(r1)
@@ -1987,11 +1987,11 @@ lbl_fn_804A53D4_00001A44:
     lwz r3, 0x48(r1)
     stw r3, 0x40(r4)
     stw r0, 0x44(r4)
-lbl_fn_804A53D4_00001AE8:
+lbl_net_broadcastCoopPacket_00001AE8:
     lwz r3, 0x9c(r27)
     addi r0, r3, 0x1
     stw r0, 0x9c(r27)
-lbl_fn_804A53D4_00001AF4:
+lbl_net_broadcastCoopPacket_00001AF4:
     addi r11, r1, 0x70
     bl _restgpr_26
     lwz r0, 0x74(r1)

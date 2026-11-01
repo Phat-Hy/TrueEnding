@@ -29,7 +29,7 @@ extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void net_initCoopSession(void);
 extern void fn_804A4738(void);
-extern void fn_804A53D4(void);
+extern void net_broadcastCoopPacket(void);
 extern void fn_804DCA50(void);
 extern void fn_804EA538(void);
 extern void fn_804EA60C(void);
@@ -168,7 +168,7 @@ lbl_fn_804B2C20_00000048:
     li r4, 0x0
     li r5, 0x0
     li r7, 0x0
-    bl fn_804A53D4
+    bl net_broadcastCoopPacket
     lwz r4, 0xbc(r31)
     mr r3, r31
     lwz r5, 0xe4(r31)
@@ -225,7 +225,7 @@ lbl_fn_804B2C20_00000048:
     li r4, 0x0
     li r5, 0x0
     li r7, 0x0
-    bl fn_804A53D4
+    bl net_broadcastCoopPacket
     lwz r4, 0xbc(r31)
     mr r3, r31
     lwz r5, 0xe4(r31)
@@ -344,7 +344,7 @@ lbl_fn_804B2C20_0000033C:
     li r4, 0x0
     li r5, 0x0
     li r7, 0x0
-    bl fn_804A53D4
+    bl net_broadcastCoopPacket
     lwz r4, 0xbc(r31)
     mr r3, r31
     lwz r5, 0xe4(r31)
@@ -731,7 +731,7 @@ lbl_fn_804B3494_0000090C:
     li r4, 0x0
     li r5, 0x0
     li r7, 0x0
-    bl fn_804A53D4
+    bl net_broadcastCoopPacket
     lwz r4, 0xbc(r30)
     mr r3, r30
     lwz r5, 0xe4(r30)
@@ -1071,7 +1071,7 @@ asm void fn_804B39F8(void)
     li r4, 0x0
     li r5, 0x0
     li r7, 0x0
-    bl fn_804A53D4
+    bl net_broadcastCoopPacket
     lwz r4, 0xbc(r31)
     mr r3, r31
     lwz r5, 0xe4(r31)

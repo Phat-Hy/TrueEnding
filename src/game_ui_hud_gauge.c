@@ -42,8 +42,8 @@ extern void quest_resetObjectiveBounds(void);
 extern void actor_getMovementFlags(void);
 extern void fn_80188A70(void);
 extern void fn_80188AA0(void);
-extern void fn_80192758(void);
-extern void fn_801A03E8(void);
+extern void map_processStreamChunk(void);
+extern void vec3_dot(void);
 extern void fn_801C0738(void);
 extern void fn_801C1060(void);
 extern void fn_801C1578(void);
@@ -1708,7 +1708,7 @@ lbl_fn_801C2CC0_00001650:
     stw r0, 0x0(r31)
     b lbl_fn_801C2CC0_00001660
 lbl_fn_801C2CC0_0000165C:
-    bl fn_80192758
+    bl map_processStreamChunk
 lbl_fn_801C2CC0_00001660:
     lwz r0, 0x214(r1)
     lwz r31, 0x20c(r1)
@@ -2157,7 +2157,7 @@ lbl_fn_801C346C_00001BE4:
 lbl_fn_801C346C_00001C50:
     addi r3, r1, 0xc8
     addi r4, r1, 0xe0
-    bl fn_801A03E8
+    bl vec3_dot
     lfs f0, lbl_80882760
     fmr f29, f1
     fmuls f1, f0, f31

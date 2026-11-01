@@ -72,7 +72,7 @@ extern void fn_80444C48(void);
 extern void fn_80444C50(void);
 extern void fn_804A4294(void);
 extern void fn_804A4930(void);
-extern void fn_804A53D4(void);
+extern void net_broadcastCoopPacket(void);
 extern void fn_80510FBC(void);
 extern void fn_8051125C(void);
 extern void fn_805118B8(void);
@@ -567,7 +567,7 @@ lbl_fn_801D3DF4_00000494:
     stfs f2, 0xdc(r1)
     stfs f1, 0xe0(r1)
     stfs f0, 0xe4(r1)
-    bl fn_804A53D4
+    bl net_broadcastCoopPacket
     b lbl_fn_801D3DF4_00000768
     lwz r5, 0x1bc0(r28)
     lis r4, lbl_8073C56C@ha
@@ -599,7 +599,7 @@ lbl_fn_801D3DF4_00000494:
     stfs f2, 0xdc(r1)
     stfs f1, 0xe0(r1)
     stfs f0, 0xe4(r1)
-    bl fn_804A53D4
+    bl net_broadcastCoopPacket
 lbl_fn_801D3DF4_00000768:
     cmpwi r31, 0x2
     bne lbl_fn_801D3DF4_00000830

@@ -12,7 +12,7 @@ void GXSetTevIndirect(void);
 void GXSetTevIndTile(void);
 void fn_80617520(void);
 void fn_80617580(void);
-void fn_806175F0(void);
+void GXSetIndTexMatrix(void);
 
 asm void GXSetTevDirect(void)
 {
@@ -217,7 +217,7 @@ asm void fn_80617580(void)
     blr
 }
 
-asm void fn_806175F0(void)
+asm void GXSetIndTexMatrix(void)
 {
     nofralloc
     lwz r9, 0x0(r4)

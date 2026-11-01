@@ -26,8 +26,8 @@ extern void fn_80107850(void);
 extern void hurtbox_processHitDamage(void);
 extern void hurtbox_dispatchHitEvent(void);
 extern void enemy_updateAnimTimer(void);
-extern void fn_8013310C(void);
-extern void fn_80133130(void);
+extern void boss_enablePartStatusFlags(void);
+extern void boss_setPartCollisionFlags(void);
 extern void quest_updateFlow(void);
 extern void equip_applyToCharacter(void);
 extern void fn_80166760(void);
@@ -1121,7 +1121,7 @@ lbl_fn_802DCA34_00000EC8:
     li r6, 0x0
     lwzx r3, r3, r15
     addi r3, r3, 0x7d4
-    bl fn_80133130
+    bl boss_setPartCollisionFlags
     lwz r3, 0x20(r1)
     lwzx r3, r3, r15
     bl fn_80167F1C
@@ -1158,7 +1158,7 @@ lbl_fn_802DCA34_00000F4C:
     li r5, 0x0
     lwzx r3, r3, r14
     addi r3, r3, 0x7d4
-    bl fn_8013310C
+    bl boss_enablePartStatusFlags
     lwz r3, 0x20(r1)
     li r4, 0x1
     lwzx r3, r3, r14

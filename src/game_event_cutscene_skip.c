@@ -17,7 +17,7 @@ extern void fn_8006A204(void);
 extern void fn_8006A900(void);
 extern void boss_triggerEventSequence(void);
 extern void fn_8006BA8C(void);
-extern void fn_8006BB6C(void);
+extern void boss_triggerEventAction(void);
 extern void mem_free(void);
 extern void map_debugLog(void);
 extern void fn_800C3094(void);
@@ -1339,7 +1339,7 @@ asm void fn_804805F0(void)
     bl fn_803C3894
     mr r3, r18
     li r4, 0x0
-    bl fn_8006BB6C
+    bl boss_triggerEventAction
     cmpwi r21, 0x1
     bne lbl_fn_804805F0_000010F8
     lwz r3, lbl_8087F0A8
@@ -1366,7 +1366,7 @@ asm void fn_804805F0(void)
     bl fn_803C3894
     mr r3, r14
     li r4, 0x0
-    bl fn_8006BB6C
+    bl boss_triggerEventAction
 lbl_fn_804805F0_0000109C:
     lis r4, lbl_80756380@ha
     addi r3, r1, 0x1a8
@@ -1390,7 +1390,7 @@ lbl_fn_804805F0_0000109C:
     bl fn_803C3894
     mr r3, r14
     li r4, 0x0
-    bl fn_8006BB6C
+    bl boss_triggerEventAction
 lbl_fn_804805F0_000010F8:
     lwz r0, lbl_8087F4A0
     cmpwi r0, 0x0

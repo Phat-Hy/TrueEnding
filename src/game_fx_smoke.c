@@ -31,7 +31,7 @@ extern void hurtbox_dispatchHitEvent(void);
 extern void npc_getPosition(void);
 extern void quest_initMarkerCoords(void);
 extern void actor_setState(void);
-extern void fn_801A03E8(void);
+extern void vec3_dot(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
@@ -185,7 +185,7 @@ lbl_fn_80296B8C_0000012C:
     bl quest_initMarkerCoords
     addi r3, r1, 0x14
     addi r4, r1, 0x8
-    bl fn_801A03E8
+    bl vec3_dot
     fcmpo cr0, f1, f31
     ble lbl_fn_80296B8C_000001C4
     lwz r0, 0x14c8(r31)

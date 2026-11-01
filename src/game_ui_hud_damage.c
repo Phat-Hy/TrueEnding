@@ -23,7 +23,7 @@ extern void equip_applyToCharacter(void);
 extern void debuff_clearStatus(void);
 extern void fn_80178864(void);
 extern void battle_evalDropTable(void);
-extern void fn_80192758(void);
+extern void map_processStreamChunk(void);
 extern void mem_findBlockById(void);
 extern void task_lookupTagIndex(void);
 extern void task_getWorkerByIndex(void);
@@ -1515,7 +1515,7 @@ lbl_fn_801CBB34_0000136C:
     stw r0, 0x0(r31)
     b lbl_fn_801CBB34_0000137C
 lbl_fn_801CBB34_00001378:
-    bl fn_80192758
+    bl map_processStreamChunk
 lbl_fn_801CBB34_0000137C:
     addi r11, r1, 0x1d0
     bl _restgpr_27

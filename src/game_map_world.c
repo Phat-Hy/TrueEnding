@@ -14,7 +14,7 @@ extern void fn_801065F4(void);
 extern void fn_80106680(void);
 extern void fn_8012B3E8(void);
 extern void enemy_updateNavSteering(void);
-extern void fn_8013310C(void);
+extern void boss_enablePartStatusFlags(void);
 extern void actor_testBitFlag(void);
 extern void fn_80134250(void);
 extern void fn_80134270(void);
@@ -1065,7 +1065,7 @@ lbl_fn_8017A5D8_00000C5C:
     li r4, 0x800
     li r5, 0x0
     addi r3, r3, 0x7d4
-    bl fn_8013310C
+    bl boss_enablePartStatusFlags
     lwz r0, 0xc04(r31)
     cmpwi r0, 0x0
     bgt lbl_fn_8017A5D8_00000C9C

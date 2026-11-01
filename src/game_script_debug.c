@@ -31,7 +31,7 @@ extern void skill_findNodeById(void);
 extern void enemy_updateCombatBehavior(void);
 extern void fn_8012B3E8(void);
 extern void enemy_updateNavSteering(void);
-extern void fn_80133130(void);
+extern void boss_setPartCollisionFlags(void);
 extern void boss_updatePhaseState(void);
 extern void npc_initScriptContext(void);
 extern void npc_updateTalkInteraction(void);
@@ -1528,7 +1528,7 @@ lbl_fn_80251344_0000138C:
     li r6, 0x1
     subi r5, r4, 0x3601
     lis r4, 0x20
-    bl fn_80133130
+    bl boss_setPartCollisionFlags
 lbl_fn_80251344_00001400:
     lha r4, 0x1470(r29)
     cmpwi r4, 0x0

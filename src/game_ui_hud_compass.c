@@ -17,7 +17,7 @@ extern void inventory_calcTotalStats(void);
 extern void fn_80178018(void);
 extern void fn_80178078(void);
 extern void fn_8017AC3C(void);
-extern void fn_80192758(void);
+extern void map_processStreamChunk(void);
 extern void fn_801A86C0(void);
 extern void fn_801A86F0(void);
 extern void fn_801A90BC(void);
@@ -1540,7 +1540,7 @@ lbl_fn_801C6CDC_000014D4:
     stw r0, 0x0(r31)
     b lbl_fn_801C6CDC_000014E4
 lbl_fn_801C6CDC_000014E0:
-    bl fn_80192758
+    bl map_processStreamChunk
 lbl_fn_801C6CDC_000014E4:
     lwz r0, 0x74(r1)
     lwz r31, 0x6c(r1)

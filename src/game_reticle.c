@@ -59,7 +59,7 @@ extern void GXSetTevColorOp(void);
 extern void GXSetTevIndirect(void);
 extern void GXSetTevIndTile(void);
 extern void fn_80617520(void);
-extern void fn_806175F0(void);
+extern void GXSetIndTexMatrix(void);
 extern void GXSetTevSwapMode(void);
 extern void GXSetTevSwapModeTable(void);
 extern void GXSetTevOrder(void);
@@ -682,14 +682,14 @@ lbl_atn_Model_setupMeshMaterial_00000670:
     addi r4, r1, 0x58
     stw r0, 0x58(r1)
     li r3, 0x1
-    bl fn_806175F0
+    bl GXSetIndTexMatrix
     b lbl_atn_Model_setupMeshMaterial_000007D0
 lbl_atn_Model_setupMeshMaterial_000007BC:
     lwz r0, lbl_80880C50
     addi r4, r1, 0x5c
     stw r0, 0x5c(r1)
     li r3, 0x1
-    bl fn_806175F0
+    bl GXSetIndTexMatrix
 lbl_atn_Model_setupMeshMaterial_000007D0:
     lfs f12, lbl_80880C58
     addi r4, r1, 0x60
@@ -720,7 +720,7 @@ lbl_atn_Model_setupMeshMaterial_000007D0:
     stb r0, 0x6b(r1)
     lwz r0, 0x68(r1)
     stw r0, 0x60(r1)
-    bl fn_806175F0
+    bl GXSetIndTexMatrix
     lwz r0, 0x4c(r1)
     addi r4, r1, 0x64
     stw r0, 0x64(r1)
@@ -764,7 +764,7 @@ lbl_atn_Model_setupMeshMaterial_0000088C:
     stb r7, 0x2d(r1)
     lwz r0, 0x2c(r1)
     stw r0, 0x38(r1)
-    bl fn_806175F0
+    bl GXSetIndTexMatrix
     lwz r0, 0x24(r29)
     addi r4, r1, 0x3c
     stw r0, 0x3c(r1)
@@ -852,14 +852,14 @@ lbl_atn_Model_setupMeshMaterial_0000088C:
     addi r4, r1, 0x18
     stw r0, 0x18(r1)
     li r3, 0x1
-    bl fn_806175F0
+    bl GXSetIndTexMatrix
     b lbl_atn_Model_setupMeshMaterial_00000A6C
 lbl_atn_Model_setupMeshMaterial_00000A58:
     lwz r0, lbl_80880C54
     addi r4, r1, 0x1c
     stw r0, 0x1c(r1)
     li r3, 0x1
-    bl fn_806175F0
+    bl GXSetIndTexMatrix
 lbl_atn_Model_setupMeshMaterial_00000A6C:
     lfs f12, lbl_80880C58
     addi r4, r1, 0x20
@@ -890,7 +890,7 @@ lbl_atn_Model_setupMeshMaterial_00000A6C:
     stb r0, 0x2b(r1)
     lwz r0, 0x28(r1)
     stw r0, 0x20(r1)
-    bl fn_806175F0
+    bl GXSetIndTexMatrix
     lwz r0, 0xc(r1)
     addi r4, r1, 0x24
     stw r0, 0x24(r1)

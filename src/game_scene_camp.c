@@ -14,7 +14,7 @@ extern void enemy_calcAttackTrajectory(void);
 extern void npc_updateTalkInteraction(void);
 extern void inventory_calcTotalStats(void);
 extern void debuff_clearStatus(void);
-extern void fn_80192758(void);
+extern void map_processStreamChunk(void);
 extern void world_getGlobalFlag(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
@@ -720,7 +720,7 @@ lbl_fn_801A84AC_000008D0:
     stw r0, 0x0(r31)
     b lbl_fn_801A84AC_000008E0
 lbl_fn_801A84AC_000008DC:
-    bl fn_80192758
+    bl map_processStreamChunk
 lbl_fn_801A84AC_000008E0:
     lwz r0, 0x74(r1)
     lwz r31, 0x6c(r1)

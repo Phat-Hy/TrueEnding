@@ -14,7 +14,7 @@ extern void talk_setSpeakerName(void);
 extern void talk_parseDialogue(void);
 extern void talk_parseDialogueTokens(void);
 extern void talk_copyUtf16String(void);
-extern void fn_8006BB6C(void);
+extern void boss_triggerEventAction(void);
 extern void fn_8006F420(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
@@ -996,7 +996,7 @@ lbl_fn_8020A90C_00000C50:
     bne lbl_fn_8020A90C_00000674
     mr r3, r30
     li r4, 0x0
-    bl fn_8006BB6C
+    bl boss_triggerEventAction
     lwz r0, 0x664(r1)
     psq_l f31, 0x658(r1), 0, 0
     lfd f31, 0x650(r1)

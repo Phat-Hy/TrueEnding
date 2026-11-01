@@ -35,7 +35,7 @@ extern void boss_updatePhaseState(void);
 extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void dialog_updateScriptState(void);
-extern void fn_801A03E8(void);
+extern void vec3_dot(void);
 extern void sound_initGlobalInstances(void);
 extern void res_Shader_findParameter(void);
 extern void res_findResourceSlot(void);
@@ -771,7 +771,7 @@ lbl_fn_8031E8BC_00000928:
     bl vec3_normalize
     mr r4, r31
     addi r3, r1, 0x3c
-    bl fn_801A03E8
+    bl vec3_dot
     lfs f0, lbl_80884E3C
     fcmpo cr0, f1, f0
     ble lbl_fn_8031E8BC_00000980
@@ -787,7 +787,7 @@ lbl_fn_8031E8BC_00000980:
     bl vec3_normalize
     addi r3, r1, 0x30
     addi r4, r28, 0x3c
-    bl fn_801A03E8
+    bl vec3_dot
     lfs f0, lbl_80884DFC
     fcmpo cr0, f1, f0
     bge lbl_fn_8031E8BC_000009BC

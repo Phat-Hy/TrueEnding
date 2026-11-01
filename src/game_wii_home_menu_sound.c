@@ -43,7 +43,7 @@ extern void fn_80217D9C(void);
 extern void task_getWorkerByIndex(void);
 extern void world_getGlobalFlag(void);
 extern void fn_804A436C(void);
-extern void fn_804A53D4(void);
+extern void net_broadcastCoopPacket(void);
 extern void dlc_findItemInCatalog(void);
 extern void fn_805C3F10(void);
 extern void fn_805F3780(void);
@@ -1169,7 +1169,7 @@ lbl_fn_80571A2C_00000E4C:
     li r4, 0x0
     li r5, 0x0
     li r7, 0x0
-    bl fn_804A53D4
+    bl net_broadcastCoopPacket
     b lbl_fn_80571A2C_00000F58
 lbl_fn_80571A2C_00000E84:
     bl fn_80572454
@@ -1197,7 +1197,7 @@ lbl_fn_80571A2C_00000E84:
     li r4, 0x0
     li r5, 0x0
     li r7, 0x0
-    bl fn_804A53D4
+    bl net_broadcastCoopPacket
     b lbl_fn_80571A2C_00000F58
 lbl_fn_80571A2C_00000EF0:
     bl fn_80572454
@@ -1225,7 +1225,7 @@ lbl_fn_80571A2C_00000EF0:
     li r4, 0x0
     li r5, 0x0
     li r7, 0x0
-    bl fn_804A53D4
+    bl net_broadcastCoopPacket
 lbl_fn_80571A2C_00000F58:
     lwz r0, 0x114(r1)
     lwz r31, 0x10c(r1)

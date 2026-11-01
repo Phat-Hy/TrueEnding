@@ -11,7 +11,7 @@ extern void talk_parseDialogue(void);
 extern void talk_parseDialogueTokens(void);
 extern void talk_copyUtf16String(void);
 extern void fn_8006BA8C(void);
-extern void fn_8006BB6C(void);
+extern void boss_triggerEventAction(void);
 extern void dungeon_initGlobalContext(void);
 extern void town_registerInteractionPoint(void);
 extern void mem_realloc(void);
@@ -600,7 +600,7 @@ lbl_event_processScriptAction_00000750:
     blt lbl_event_processScriptAction_0000072C
     mr r3, r22
     li r4, 0x0
-    bl fn_8006BB6C
+    bl boss_triggerEventAction
     bl fn_80211244
     lmw r17, 0x654(r1)
     lwz r0, 0x694(r1)
@@ -757,7 +757,7 @@ lbl_fn_80211244_00000980:
     bne lbl_fn_80211244_0000093C
     mr r3, r28
     li r4, 0x0
-    bl fn_8006BB6C
+    bl boss_triggerEventAction
 lbl_fn_80211244_0000099C:
     lwz r0, 0xc84(r1)
     lwz r31, 0xc7c(r1)

@@ -12,7 +12,7 @@ extern void talk_parseDialogue(void);
 extern void talk_parseDialogueTokens(void);
 extern void talk_copyUtf16String(void);
 extern void fn_8006BA8C(void);
-extern void fn_8006BB6C(void);
+extern void boss_triggerEventAction(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void str_skipWhitespace(void);
@@ -292,7 +292,7 @@ lbl_fn_8021996C_00000290:
     bne lbl_fn_8021996C_000001CC
     mr r3, r31
     li r4, 0x0
-    bl fn_8006BB6C
+    bl boss_triggerEventAction
     bl fn_80219C30
     lmw r24, 0x650(r1)
     lwz r0, 0x674(r1)
@@ -449,7 +449,7 @@ lbl_fn_80219C30_000004C4:
     bne lbl_fn_80219C30_00000480
     mr r3, r28
     li r4, 0x0
-    bl fn_8006BB6C
+    bl boss_triggerEventAction
 lbl_fn_80219C30_000004E0:
     lwz r0, 0xc84(r1)
     lwz r31, 0xc7c(r1)

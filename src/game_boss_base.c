@@ -34,8 +34,8 @@ extern u32 lbl_80881908;
 extern u32 lbl_80881918;
 
 /* Function declarations */
-void fn_8013310C(void);
-void fn_80133130(void);
+void boss_enablePartStatusFlags(void);
+void boss_setPartCollisionFlags(void);
 void actor_testBitFlag(void);
 void fn_801333A4(void);
 void fn_801333E4(void);
@@ -62,7 +62,7 @@ void fn_801342D0(void);
 void fn_8013459C(void);
 void fn_80134674(void);
 
-asm void fn_8013310C(void)
+asm void boss_enablePartStatusFlags(void)
 {
     nofralloc
     lwz r0, 0xc(r3)
@@ -76,81 +76,81 @@ asm void fn_8013310C(void)
     blr
 }
 
-asm void fn_80133130(void)
+asm void boss_setPartCollisionFlags(void)
 {
     nofralloc
     lwz r0, 0xc(r3)
     cmpwi r6, 0x0
     or r0, r0, r4
     stw r0, 0xc(r3)
-    beq lbl_fn_80133130_00000044
+    beq lbl_boss_setPartCollisionFlags_00000044
     lwz r0, 0x10(r3)
     or r0, r0, r4
     stw r0, 0x10(r3)
-lbl_fn_80133130_00000044:
+lbl_boss_setPartCollisionFlags_00000044:
     li r0, 0x4
     li r8, 0x0
     li r6, 0x1
     mtctr r0
-lbl_fn_80133130_00000054:
+lbl_boss_setPartCollisionFlags_00000054:
     slw r7, r6, r8
     and r0, r7, r4
     cmplw r7, r0
-    bne lbl_fn_80133130_00000068
+    bne lbl_boss_setPartCollisionFlags_00000068
     stw r5, 0x24c(r3)
-lbl_fn_80133130_00000068:
+lbl_boss_setPartCollisionFlags_00000068:
     addi r8, r8, 0x1
     slw r7, r6, r8
     and r0, r7, r4
     cmplw r7, r0
-    bne lbl_fn_80133130_00000080
+    bne lbl_boss_setPartCollisionFlags_00000080
     stw r5, 0x250(r3)
-lbl_fn_80133130_00000080:
+lbl_boss_setPartCollisionFlags_00000080:
     addi r8, r8, 0x1
     slw r7, r6, r8
     and r0, r7, r4
     cmplw r7, r0
-    bne lbl_fn_80133130_00000098
+    bne lbl_boss_setPartCollisionFlags_00000098
     stw r5, 0x254(r3)
-lbl_fn_80133130_00000098:
+lbl_boss_setPartCollisionFlags_00000098:
     addi r8, r8, 0x1
     slw r7, r6, r8
     and r0, r7, r4
     cmplw r7, r0
-    bne lbl_fn_80133130_000000B0
+    bne lbl_boss_setPartCollisionFlags_000000B0
     stw r5, 0x258(r3)
-lbl_fn_80133130_000000B0:
+lbl_boss_setPartCollisionFlags_000000B0:
     addi r8, r8, 0x1
     slw r7, r6, r8
     and r0, r7, r4
     cmplw r7, r0
-    bne lbl_fn_80133130_000000C8
+    bne lbl_boss_setPartCollisionFlags_000000C8
     stw r5, 0x25c(r3)
-lbl_fn_80133130_000000C8:
+lbl_boss_setPartCollisionFlags_000000C8:
     addi r8, r8, 0x1
     slw r7, r6, r8
     and r0, r7, r4
     cmplw r7, r0
-    bne lbl_fn_80133130_000000E0
+    bne lbl_boss_setPartCollisionFlags_000000E0
     stw r5, 0x260(r3)
-lbl_fn_80133130_000000E0:
+lbl_boss_setPartCollisionFlags_000000E0:
     addi r8, r8, 0x1
     slw r7, r6, r8
     and r0, r7, r4
     cmplw r7, r0
-    bne lbl_fn_80133130_000000F8
+    bne lbl_boss_setPartCollisionFlags_000000F8
     stw r5, 0x264(r3)
-lbl_fn_80133130_000000F8:
+lbl_boss_setPartCollisionFlags_000000F8:
     addi r8, r8, 0x1
     slw r7, r6, r8
     and r0, r7, r4
     cmplw r7, r0
-    bne lbl_fn_80133130_00000110
+    bne lbl_boss_setPartCollisionFlags_00000110
     stw r5, 0x268(r3)
-lbl_fn_80133130_00000110:
+lbl_boss_setPartCollisionFlags_00000110:
     addi r3, r3, 0x20
     addi r8, r8, 0x1
-    bdnz lbl_fn_80133130_00000054
+    bdnz lbl_boss_setPartCollisionFlags_00000054
     blr
 }
 
