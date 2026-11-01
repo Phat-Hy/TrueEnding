@@ -16,7 +16,7 @@ extern void fn_8014DEE4(void);
 extern void fn_8014EEC4(void);
 extern void fn_8014F5D4(void);
 extern void fn_80206B9C(void);
-extern void fn_80206C50(void);
+extern void assert_formatLocation(void);
 extern void fn_8020ED84(void);
 extern void fn_8020EF04(void);
 extern void fn_8020EF4C(void);
@@ -1206,7 +1206,7 @@ lbl_fn_8058BE7C_00000FF8:
     cmpwi r3, 0x0
     beq lbl_fn_8058BE7C_000010F0
     mr r3, r29
-    bl fn_80206C50
+    bl assert_formatLocation
     lwz r21, 0x50(r31)
     mr r22, r3
     lwz r20, 0x54(r31)

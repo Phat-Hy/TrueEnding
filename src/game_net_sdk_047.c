@@ -14,7 +14,7 @@ extern void _savegpr_24(void);
 extern void _savegpr_25(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
-extern void fn_8067E23C(void);
+extern void memcmp(void);
 extern void strncmp(void);
 extern void fn_806A4260(void);
 extern void fn_806A4264(void);
@@ -989,7 +989,7 @@ lbl_fn_80701F90_00000BEC:
     addi r3, r28, 0x1
     addi r4, r4, lbl_807C5E20@l
     li r5, 0x4
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_80701F90_00000C10
     li r3, -0x1

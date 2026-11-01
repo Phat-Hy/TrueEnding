@@ -43,7 +43,7 @@ extern u32 lbl_80887C78;
 void fn_805381A4(void);
 void fn_805381B0(void);
 void fn_805381BC(void);
-void fn_805381CC(void);
+void spectate_getRootNode(void);
 void fn_805381E0(void);
 void fn_805381F4(void);
 void fn_805382C0(void);
@@ -87,7 +87,7 @@ asm void fn_805381BC(void)
     blr
 }
 
-asm void fn_805381CC(void)
+asm void spectate_getRootNode(void)
 {
     nofralloc
     lwz r3, 0x8(r3)

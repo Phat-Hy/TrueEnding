@@ -43,7 +43,7 @@ extern void fn_80160170(void);
 extern void fn_80160324(void);
 extern void fn_8016034C(void);
 extern void fn_8017ABD4(void);
-extern void fn_801F3FF8(void);
+extern void save_validateHeader(void);
 extern void fn_801F64D0(void);
 extern void fn_80219558(void);
 extern void task_findEntryById(void);
@@ -1304,21 +1304,21 @@ lbl_fn_805A715C_00000FA0:
     addi r29, r29, lbl_807639F8@l
     li r5, 0x0
     addi r4, r29, 0x1
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x15b0(r30)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r30
     addi r4, r29, 0x25
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x15b8(r30)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r30
     addi r4, r29, 0x4b
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x15b4(r30)
     li r4, 0x1
     bl atn_Task_setActive

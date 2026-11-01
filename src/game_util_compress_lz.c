@@ -22,12 +22,12 @@ extern void str_findChar(void);
 extern void fn_80116FC0(void);
 extern void fn_801170C8(void);
 extern void actor_spawnActorWithId(void);
-extern void fn_801F3FF8(void);
+extern void save_validateHeader(void);
 extern void fn_801F48C8(void);
 extern void fn_801F4CB4(void);
 extern void saveSlot_readSummary(void);
 extern void fn_801F64D0(void);
-extern void fn_801F6C80(void);
+extern void save_computeCrc32(void);
 extern void fn_801F6E78(void);
 extern void fn_801F7590(void);
 extern void fn_801F7DF0(void);
@@ -38,7 +38,7 @@ extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
 extern void thread_dispatchToQueue(void);
 extern void fn_80206B9C(void);
-extern void fn_80206C50(void);
+extern void assert_formatLocation(void);
 extern void fn_8020EF04(void);
 extern void fn_8020EFEC(void);
 extern void event_findEntryById(void);
@@ -574,11 +574,11 @@ lbl_fn_80589AF8_000005B4:
     lwz r3, 0x5b74(r28)
     addi r4, r30, 0x10d
     lfs f1, lbl_80888134
-    bl fn_801F6C80
+    bl save_computeCrc32
     lwz r3, 0x5b74(r28)
     addi r4, r30, 0x117
     lfs f1, lbl_80888130
-    bl fn_801F6C80
+    bl save_computeCrc32
     lwz r3, 0x5b74(r28)
     addi r4, r30, 0x121
     la r5, lbl_8087E690
@@ -610,7 +610,7 @@ lbl_fn_80589AF8_000006F8:
     b lbl_fn_80589AF8_000007BC
 lbl_fn_80589AF8_00000714:
     lwz r3, 0x4(r23)
-    bl fn_80206C50
+    bl assert_formatLocation
     cmpwi r3, 0x0
     beq lbl_fn_80589AF8_0000075C
     lwz r3, 0xb8(r3)
@@ -638,11 +638,11 @@ lbl_fn_80589AF8_0000076C:
     lwz r3, 0x5b74(r28)
     addi r4, r30, 0x10d
     lfs f1, lbl_80888130
-    bl fn_801F6C80
+    bl save_computeCrc32
     lwz r3, 0x5b74(r28)
     addi r4, r30, 0x117
     lfs f1, lbl_80888134
-    bl fn_801F6C80
+    bl save_computeCrc32
     lwz r3, 0x5b74(r28)
     addi r4, r30, 0x121
     lwz r5, 0x8(r23)
@@ -921,7 +921,7 @@ asm void fn_8058A0F4(void)
     bl event_findEntryById
     mr r31, r3
     lwz r3, 0x4(r27)
-    bl fn_80206C50
+    bl assert_formatLocation
     cmpwi r3, 0x0
     li r0, 0x0
     stw r0, 0x40(r1)
@@ -1644,7 +1644,7 @@ lbl_fn_8058AAC0_000015B4:
     cmpwi r3, 0x0
     beq lbl_fn_8058AAC0_000015F8
     lwz r3, 0x0(r27)
-    bl fn_80206C50
+    bl assert_formatLocation
     cmpwi r3, 0x0
     beq lbl_fn_8058AAC0_000015F8
     lwz r3, 0x80(r3)
@@ -2027,7 +2027,7 @@ lbl_fn_8058AC94_00001B50:
     addi r4, r4, lbl_80761D5C@l
     li r5, 0x0
     addi r4, r4, 0x1
-    bl fn_801F3FF8
+    bl save_validateHeader
     addis r5, r31, 0x2
     li r4, 0x1
     stw r3, 0x5b6c(r5)
@@ -2039,7 +2039,7 @@ lbl_fn_8058AC94_00001B7C:
     addi r4, r4, lbl_80761D5C@l
     li r5, 0x0
     addi r4, r4, 0x29
-    bl fn_801F3FF8
+    bl save_validateHeader
     addis r5, r31, 0x2
     li r4, 0x1
     stw r3, 0x5b6c(r5)
@@ -2051,7 +2051,7 @@ lbl_fn_8058AC94_00001BA8:
     addi r4, r4, lbl_80761D5C@l
     li r5, 0x0
     addi r4, r4, 0x4f
-    bl fn_801F3FF8
+    bl save_validateHeader
     addis r5, r31, 0x2
     li r4, 0x1
     stw r3, 0x5b6c(r5)
@@ -2062,7 +2062,7 @@ lbl_fn_8058AC94_00001BD0:
     addi r30, r30, lbl_80761D5C@l
     li r5, 0x0
     addi r4, r30, 0x7d
-    bl fn_801F3FF8
+    bl save_validateHeader
     addis r5, r31, 0x2
     li r4, 0x1
     stw r3, 0x5b70(r5)
@@ -2070,7 +2070,7 @@ lbl_fn_8058AC94_00001BD0:
     mr r3, r31
     addi r4, r30, 0xa4
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     addis r5, r31, 0x2
     li r4, 0x1
     stw r3, 0x5b74(r5)
@@ -2078,7 +2078,7 @@ lbl_fn_8058AC94_00001BD0:
     mr r3, r31
     addi r4, r30, 0xcb
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     addis r5, r31, 0x2
     li r4, 0x1
     stw r3, 0x5b78(r5)
@@ -2193,7 +2193,7 @@ lbl_fn_8058AC94_00001D70:
     mr r3, r31
     addi r4, r30, 0x1e4
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     addis r5, r31, 0x2
     li r4, 0x1
     stw r3, 0x5be4(r5)
@@ -2201,7 +2201,7 @@ lbl_fn_8058AC94_00001D70:
     mr r3, r31
     addi r4, r30, 0x202
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     addis r5, r31, 0x2
     li r4, 0x1
     stw r3, 0x5be8(r5)
@@ -2209,7 +2209,7 @@ lbl_fn_8058AC94_00001D70:
     mr r3, r31
     addi r4, r30, 0x227
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     addis r5, r31, 0x2
     li r4, 0x1
     stw r3, 0x5bec(r5)

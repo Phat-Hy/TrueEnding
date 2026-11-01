@@ -17,7 +17,7 @@ extern void fn_801EF9B4(void);
 extern void fn_801EFA78(void);
 extern void fn_801EFB00(void);
 extern void fn_801F362C(void);
-extern void fn_801F3FF8(void);
+extern void save_validateHeader(void);
 extern void fn_801F6450(void);
 extern void fn_801F6464(void);
 extern void fn_801FD5A0(void);
@@ -1182,7 +1182,7 @@ lbl_fn_801F4FF4_00000EBC:
     mr r4, r29
     lwz r3, 0x24(r28)
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0xc(r1)
     li r4, 0x1
     bl atn_Task_setActive

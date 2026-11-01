@@ -20,7 +20,7 @@ extern void atn_Task_unlink(void);
 extern void fn_800DC12C(void);
 extern void actor_spawnActorWithId(void);
 extern void fn_801F4D80(void);
-extern void fn_80202118(void);
+extern void profile_getMetricValue(void);
 extern void res_findResourceSlot(void);
 extern void world_updateMapTransition(void);
 extern void fn_8036FB4C(void);
@@ -118,7 +118,7 @@ lbl_fn_8051EC54_0000003C:
     lwzx r3, r3, r27
     cmpwi r3, 0x0
     beq lbl_fn_8051EC54_000000C0
-    bl fn_80202118
+    bl profile_getMetricValue
     cmpwi r3, 0x0
     beq lbl_fn_8051EC54_000000C0
     add r28, r31, r30
@@ -136,7 +136,7 @@ lbl_fn_8051EC54_0000003C:
     bl sprintf
     lwz r3, 0x50(r31)
     lwzx r3, r3, r27
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r4, r25
     addi r5, r1, 0x18
     bl fn_801F4D80
@@ -750,7 +750,7 @@ lbl_fn_8051F13C_00000954:
     lwzx r3, r3, r26
     cmpwi r3, 0x0
     beq lbl_fn_8051F13C_000009D4
-    bl fn_80202118
+    bl profile_getMetricValue
     cmpwi r3, 0x0
     beq lbl_fn_8051F13C_000009D4
     add r3, r31, r29
@@ -767,7 +767,7 @@ lbl_fn_8051F13C_00000954:
     bl sprintf
     lwz r3, 0x50(r31)
     lwzx r3, r3, r26
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r4, r28
     addi r5, r1, 0xc8
     bl fn_801F4D80

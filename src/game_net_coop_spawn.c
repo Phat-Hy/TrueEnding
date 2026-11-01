@@ -20,7 +20,7 @@ extern void fn_801EFA78(void);
 extern void fn_801F48C8(void);
 extern void saveSlot_readSummary(void);
 extern void fn_801F6C2C(void);
-extern void fn_801F6C80(void);
+extern void save_computeCrc32(void);
 extern void fn_801F6D7C(void);
 extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
@@ -119,14 +119,14 @@ asm void fn_804A55FC(void)
     slwi r0, r0, 2
     add r3, r27, r0
     lwz r3, 0x8c(r3)
-    bl fn_801F6C80
+    bl save_computeCrc32
     lwz r0, 0x88(r27)
     addi r4, r26, 0x139
     lfs f1, 0xc(r30)
     slwi r0, r0, 2
     add r3, r27, r0
     lwz r3, 0x8c(r3)
-    bl fn_801F6C80
+    bl save_computeCrc32
     cmpwi r31, 0x0
     beq lbl_fn_804A55FC_00000118
     lwz r0, 0x88(r27)
@@ -356,14 +356,14 @@ lbl_fn_804A5824_00000360:
     slwi r0, r0, 2
     add r3, r31, r0
     lwz r3, 0x8c(r3)
-    bl fn_801F6C80
+    bl save_computeCrc32
     lwz r0, 0x88(r31)
     addi r4, r27, 0x139
     lfs f1, 0x20(r1)
     slwi r0, r0, 2
     add r3, r31, r0
     lwz r3, 0x8c(r3)
-    bl fn_801F6C80
+    bl save_computeCrc32
     cmpwi r30, 0x0
     beq lbl_fn_804A5824_00000488
     lwz r0, 0x88(r31)

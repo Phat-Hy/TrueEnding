@@ -33,7 +33,7 @@ extern void fn_807149C0(void);
 extern void fn_80715B20(void);
 extern void fn_80715BA0(void);
 extern void fn_80717630(void);
-extern void fn_80724DF0(void);
+extern void net_packetDebugLog(void);
 extern void fn_807252A0(void);
 extern void fn_807252D0(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -1453,7 +1453,7 @@ asm void fn_800C7DC4(void)
     li r4, 0x233
     addi r5, r5, lbl_80779540@l
     crclr 6
-    bl fn_80724DF0
+    bl net_packetDebugLog
 lbl_fn_800C7DC4_00001168:
     stw r31, 0x8(r1)
     addi r3, r30, 0x370
@@ -1495,7 +1495,7 @@ asm void fn_800C7E70(void)
     li r4, 0x233
     addi r5, r5, lbl_80779540@l
     crclr 6
-    bl fn_80724DF0
+    bl net_packetDebugLog
 lbl_fn_800C7E70_000011F8:
     addi r3, r31, 0x370
     addi r4, r29, 0x68
@@ -2108,7 +2108,7 @@ lbl_fn_800C82FC_00001A28:
     li r7, 0x0
     li r8, 0x7f
     crclr 6
-    bl fn_80724DF0
+    bl net_packetDebugLog
 lbl_fn_800C82FC_00001A58:
     lwz r3, 0x4(r30)
     cmpwi r3, 0x0

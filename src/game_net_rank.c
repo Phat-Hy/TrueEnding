@@ -35,7 +35,7 @@ extern void fn_801F3490(void);
 extern void fn_801F34F8(void);
 extern void fn_801F35B4(void);
 extern void fn_801F362C(void);
-extern void fn_801F3FF8(void);
+extern void save_validateHeader(void);
 extern void fn_801F4484(void);
 extern void fn_801F465C(void);
 extern void fn_801F48C8(void);
@@ -186,7 +186,7 @@ lbl_fn_801F0DF0_00000118:
     mr r3, r27
     add r29, r27, r31
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x180(r29)
     li r4, 0x1
     lwz r0, 0xfc(r3)

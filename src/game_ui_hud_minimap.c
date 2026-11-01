@@ -27,13 +27,13 @@ extern void fn_801E714C(void);
 extern void fn_801E75F8(void);
 extern void fn_801F4728(void);
 extern void saveSlot_readSummary(void);
-extern void fn_801F6C80(void);
+extern void save_computeCrc32(void);
 extern void fn_801F6E78(void);
 extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
 extern void fn_801FEDBC(void);
 extern void thread_dispatchToQueue(void);
-extern void fn_80202118(void);
+extern void profile_getMetricValue(void);
 extern void perf_getMetricValue(void);
 extern void fn_802091E8(void);
 extern void fn_8020BCEC(void);
@@ -232,19 +232,19 @@ lbl_fn_801D162C_00000190:
     bl perf_getMetricValue
     fmr f1, f31
     addi r4, r29, 0x307
-    bl fn_801F6C80
+    bl save_computeCrc32
     b lbl_fn_801D162C_0000021C
 lbl_fn_801D162C_000001D8:
     lwz r3, 0x0(r3)
     cmpwi r3, 0x0
     beq lbl_fn_801D162C_0000021C
-    bl fn_80202118
+    bl profile_getMetricValue
     cmpwi r3, 0x0
     beq lbl_fn_801D162C_0000021C
     lwz r3, 0x50(r31)
     addi r28, r29, 0x307
     lwzx r3, r3, r27
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r30, r3
     mr r3, r28
     bl str_findChar
@@ -262,14 +262,14 @@ lbl_fn_801D162C_00000224:
     lwz r3, 0xacc(r31)
     cmpwi r3, 0x0
     beq lbl_fn_801D162C_00000278
-    bl fn_80202118
+    bl profile_getMetricValue
     cmpwi r3, 0x0
     beq lbl_fn_801D162C_00000278
     lis r4, lbl_8073C56C@ha
     lwz r3, 0xacc(r31)
     addi r4, r4, lbl_8073C56C@l
     addi r28, r4, 0x307
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r30, r3
     mr r3, r28
     bl str_findChar
@@ -281,14 +281,14 @@ lbl_fn_801D162C_00000278:
     lwz r3, 0xad0(r31)
     cmpwi r3, 0x0
     beq lbl_fn_801D162C_000002C0
-    bl fn_80202118
+    bl profile_getMetricValue
     cmpwi r3, 0x0
     beq lbl_fn_801D162C_000002C0
     lis r4, lbl_8073C56C@ha
     lwz r3, 0xad0(r31)
     addi r4, r4, lbl_8073C56C@l
     addi r28, r4, 0x307
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r30, r3
     mr r3, r28
     bl str_findChar
@@ -300,14 +300,14 @@ lbl_fn_801D162C_000002C0:
     lwz r3, 0xad4(r31)
     cmpwi r3, 0x0
     beq lbl_fn_801D162C_00000308
-    bl fn_80202118
+    bl profile_getMetricValue
     cmpwi r3, 0x0
     beq lbl_fn_801D162C_00000308
     lis r4, lbl_8073C56C@ha
     lwz r3, 0xad4(r31)
     addi r4, r4, lbl_8073C56C@l
     addi r28, r4, 0x307
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r30, r3
     mr r3, r28
     bl str_findChar
@@ -319,14 +319,14 @@ lbl_fn_801D162C_00000308:
     lwz r3, 0xad8(r31)
     cmpwi r3, 0x0
     beq lbl_fn_801D162C_00000350
-    bl fn_80202118
+    bl profile_getMetricValue
     cmpwi r3, 0x0
     beq lbl_fn_801D162C_00000350
     lis r4, lbl_8073C56C@ha
     lwz r3, 0xad8(r31)
     addi r4, r4, lbl_8073C56C@l
     addi r28, r4, 0x307
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r30, r3
     mr r3, r28
     bl str_findChar
@@ -338,14 +338,14 @@ lbl_fn_801D162C_00000350:
     lwz r3, 0xadc(r31)
     cmpwi r3, 0x0
     beq lbl_fn_801D162C_00000398
-    bl fn_80202118
+    bl profile_getMetricValue
     cmpwi r3, 0x0
     beq lbl_fn_801D162C_00000398
     lis r4, lbl_8073C56C@ha
     lwz r3, 0xadc(r31)
     addi r4, r4, lbl_8073C56C@l
     addi r28, r4, 0x307
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r30, r3
     mr r3, r28
     bl str_findChar
@@ -357,14 +357,14 @@ lbl_fn_801D162C_00000398:
     lwz r3, 0xae0(r31)
     cmpwi r3, 0x0
     beq lbl_fn_801D162C_000003E0
-    bl fn_80202118
+    bl profile_getMetricValue
     cmpwi r3, 0x0
     beq lbl_fn_801D162C_000003E0
     lis r4, lbl_8073C56C@ha
     lwz r3, 0xae0(r31)
     addi r4, r4, lbl_8073C56C@l
     addi r28, r4, 0x307
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r30, r3
     mr r3, r28
     bl str_findChar
@@ -376,14 +376,14 @@ lbl_fn_801D162C_000003E0:
     lwz r3, 0xb0c(r31)
     cmpwi r3, 0x0
     beq lbl_fn_801D162C_00000428
-    bl fn_80202118
+    bl profile_getMetricValue
     cmpwi r3, 0x0
     beq lbl_fn_801D162C_00000428
     lis r4, lbl_8073C56C@ha
     lwz r3, 0xb0c(r31)
     addi r4, r4, lbl_8073C56C@l
     addi r28, r4, 0x307
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r30, r3
     mr r3, r28
     bl str_findChar
@@ -401,11 +401,11 @@ lbl_fn_801D162C_0000043C:
     lwz r3, 0x13c(r29)
     cmpwi r3, 0x0
     beq lbl_fn_801D162C_00000478
-    bl fn_80202118
+    bl profile_getMetricValue
     cmpwi r3, 0x0
     beq lbl_fn_801D162C_00000478
     lwz r3, 0x13c(r29)
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r30, r3
     mr r3, r28
     bl str_findChar
@@ -421,14 +421,14 @@ lbl_fn_801D162C_00000478:
     lwz r3, 0xb24(r31)
     cmpwi r3, 0x0
     beq lbl_fn_801D162C_000004D0
-    bl fn_80202118
+    bl profile_getMetricValue
     cmpwi r3, 0x0
     beq lbl_fn_801D162C_000004D0
     lis r4, lbl_8073C56C@ha
     lwz r3, 0xb24(r31)
     addi r4, r4, lbl_8073C56C@l
     addi r28, r4, 0x307
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r30, r3
     mr r3, r28
     bl str_findChar
@@ -1068,7 +1068,7 @@ lbl_fn_801D19F0_00000D28:
     lwz r3, 0xadc(r15)
     cmpwi r3, 0x0
     beq lbl_fn_801D19F0_00000FD4
-    bl fn_80202118
+    bl profile_getMetricValue
     cmpwi r3, 0x0
     beq lbl_fn_801D19F0_00000FD4
     mr r3, r15
@@ -1096,7 +1096,7 @@ lbl_fn_801D19F0_00000D28:
     ble lbl_fn_801D19F0_00000F18
     lwz r3, 0xadc(r15)
     addi r19, r18, 0x33e
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r14, r3
     mr r3, r19
     bl str_findChar
@@ -1106,7 +1106,7 @@ lbl_fn_801D19F0_00000D28:
     bl thread_dispatchToQueue
     lwz r3, 0xadc(r15)
     addi r19, r18, 0x348
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r14, r3
     mr r3, r19
     bl str_findChar
@@ -1117,7 +1117,7 @@ lbl_fn_801D19F0_00000D28:
     lwz r17, 0x8(r16)
     addi r16, r18, 0x355
     lwz r3, 0xadc(r15)
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r14, r3
     mr r3, r16
     bl str_findChar
@@ -1128,7 +1128,7 @@ lbl_fn_801D19F0_00000D28:
     lwz r3, 0xadc(r15)
     addi r16, r18, 0x360
     la r17, lbl_8087DA58
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r14, r3
     mr r3, r16
     bl str_findChar
@@ -1144,7 +1144,7 @@ lbl_fn_801D19F0_00000F18:
     lwz r3, 0xadc(r15)
     addi r19, r17, 0x2
     addi r18, r16, 0x33e
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r14, r3
     mr r3, r18
     bl str_findChar
@@ -1155,7 +1155,7 @@ lbl_fn_801D19F0_00000F18:
     lwz r3, 0xadc(r15)
     mr r18, r19
     addi r17, r16, 0x348
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r14, r3
     mr r3, r17
     bl str_findChar
@@ -1166,7 +1166,7 @@ lbl_fn_801D19F0_00000F18:
     lwz r3, 0xadc(r15)
     addi r17, r16, 0x355
     la r18, lbl_8087DA58
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r14, r3
     mr r3, r17
     bl str_findChar
@@ -1177,7 +1177,7 @@ lbl_fn_801D19F0_00000F18:
     lwz r3, 0xadc(r15)
     addi r16, r16, 0x360
     la r17, lbl_8087DA58
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r14, r3
     mr r3, r16
     bl str_findChar
@@ -1189,7 +1189,7 @@ lbl_fn_801D19F0_00000FD4:
     lwz r3, 0xae0(r15)
     cmpwi r3, 0x0
     beq lbl_fn_801D19F0_00001294
-    bl fn_80202118
+    bl profile_getMetricValue
     cmpwi r3, 0x0
     beq lbl_fn_801D19F0_00001294
     mr r3, r15
@@ -1216,7 +1216,7 @@ lbl_fn_801D19F0_00000FD4:
     addi r16, r16, lbl_8073C56C@l
     lwz r3, 0xae0(r15)
     addi r17, r16, 0x33e
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r14, r3
     mr r3, r17
     bl str_findChar
@@ -1230,7 +1230,7 @@ lbl_fn_801D19F0_00000FD4:
     mr r18, r3
     lwz r3, 0xae0(r15)
     addi r17, r16, 0x348
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r14, r3
     mr r3, r17
     bl str_findChar
@@ -1241,7 +1241,7 @@ lbl_fn_801D19F0_00000FD4:
     lwz r3, 0xae0(r15)
     addi r17, r16, 0x355
     la r18, lbl_8087DA58
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r14, r3
     mr r3, r17
     bl str_findChar
@@ -1252,7 +1252,7 @@ lbl_fn_801D19F0_00000FD4:
     lwz r3, 0xae0(r15)
     addi r16, r16, 0x360
     la r17, lbl_8087DA58
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r14, r3
     mr r3, r16
     bl str_findChar
@@ -1275,7 +1275,7 @@ lbl_fn_801D19F0_00001100:
     lwz r3, 0xae0(r15)
     addi r16, r16, lbl_8073C56C@l
     addi r18, r16, 0x33e
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r14, r3
     mr r3, r18
     bl str_findChar
@@ -1285,7 +1285,7 @@ lbl_fn_801D19F0_00001100:
     bl thread_dispatchToQueue
     lwz r3, 0xae0(r15)
     addi r18, r16, 0x348
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r14, r3
     mr r3, r18
     bl str_findChar
@@ -1296,7 +1296,7 @@ lbl_fn_801D19F0_00001100:
     lwz r3, 0xae0(r15)
     addi r17, r16, 0x355
     la r18, lbl_8087DA58
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r14, r3
     mr r3, r17
     bl str_findChar
@@ -1307,7 +1307,7 @@ lbl_fn_801D19F0_00001100:
     lwz r3, 0xae0(r15)
     addi r16, r16, 0x360
     la r17, lbl_8087DA58
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r14, r3
     mr r3, r16
     bl str_findChar
@@ -1323,7 +1323,7 @@ lbl_fn_801D19F0_000011D8:
     lwz r3, 0xae0(r15)
     addi r19, r17, 0x2
     addi r18, r16, 0x33e
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r14, r3
     mr r3, r18
     bl str_findChar
@@ -1334,7 +1334,7 @@ lbl_fn_801D19F0_000011D8:
     lwz r3, 0xae0(r15)
     mr r18, r19
     addi r17, r16, 0x348
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r14, r3
     mr r3, r17
     bl str_findChar
@@ -1345,7 +1345,7 @@ lbl_fn_801D19F0_000011D8:
     lwz r3, 0xae0(r15)
     addi r17, r16, 0x355
     la r18, lbl_8087DA58
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r14, r3
     mr r3, r17
     bl str_findChar
@@ -1356,7 +1356,7 @@ lbl_fn_801D19F0_000011D8:
     lwz r3, 0xae0(r15)
     addi r16, r16, 0x360
     la r17, lbl_8087DA58
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r14, r3
     mr r3, r16
     bl str_findChar
@@ -1625,7 +1625,7 @@ lbl_fn_801D19F0_00001644:
     lwz r3, 0xb0c(r15)
     cmpwi r3, 0x0
     beq lbl_fn_801D19F0_0000165C
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r18, r3
     b lbl_fn_801D19F0_00001660
 lbl_fn_801D19F0_0000165C:
@@ -1658,7 +1658,7 @@ lbl_fn_801D19F0_00001660:
     stfs f7, 0x1d8(r1)
     stfs f0, 0x1dc(r1)
     lwz r3, 0xb10(r15)
-    bl fn_80202118
+    bl profile_getMetricValue
     addi r4, r17, 0x324
     addi r5, r1, 0x1cc
     bl fn_801F4728
@@ -1691,13 +1691,13 @@ lbl_fn_801D19F0_00001738:
     cntlzw r0, r0
     lwz r3, 0xb10(r15)
     srwi r17, r0, 5
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r4, r14
     mr r5, r16
     mr r6, r17
     bl fn_80511AE0
     lwz r3, 0xacc(r15)
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r5, r3
     mr r3, r15
     mr r4, r16
@@ -1710,7 +1710,7 @@ lbl_fn_801D19F0_00001738:
     lwz r3, 0xb0c(r15)
     cmpwi r3, 0x0
     beq lbl_fn_801D19F0_000017FC
-    bl fn_80202118
+    bl profile_getMetricValue
     cmpwi r3, 0x0
     beq lbl_fn_801D19F0_000017FC
     lis r18, lbl_8073C56C@ha
@@ -1718,7 +1718,7 @@ lbl_fn_801D19F0_00001738:
     addi r18, r18, lbl_8073C56C@l
     lwz r3, 0xb0c(r15)
     addi r20, r18, 0x377
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r17, r3
     mr r3, r20
     bl str_findChar
@@ -1729,7 +1729,7 @@ lbl_fn_801D19F0_00001738:
     lwz r19, 0x8(r19)
     addi r18, r18, 0x37f
     lwz r3, 0xb0c(r15)
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r17, r3
     mr r3, r18
     bl str_findChar
@@ -1909,11 +1909,11 @@ lbl_fn_801D19F0_00001A34:
     lwz r3, 0xad8(r15)
     cmpwi r3, 0x0
     beq lbl_fn_801D19F0_00001AE8
-    bl fn_80202118
+    bl profile_getMetricValue
     cmpwi r3, 0x0
     beq lbl_fn_801D19F0_00001AE8
     lwz r3, 0xad8(r15)
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r21, r3
     mr r5, r20
     addi r3, r1, 0x1e0
@@ -1949,7 +1949,7 @@ lbl_fn_801D19F0_00001B1C:
     lwz r3, 0xad8(r15)
     cmpwi r3, 0x0
     beq lbl_fn_801D19F0_00001BE8
-    bl fn_80202118
+    bl profile_getMetricValue
     cmpwi r3, 0x0
     beq lbl_fn_801D19F0_00001BE8
     lwz r14, lbl_8087F4F0
@@ -1975,7 +1975,7 @@ lbl_fn_801D19F0_00001B7C:
     lwz r3, 0xad8(r15)
     addi r4, r4, lbl_8073C56C@l
     addi r16, r4, 0x39f
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r14, r3
     mr r3, r16
     bl str_findChar
@@ -1990,7 +1990,7 @@ lbl_fn_801D19F0_00001BB4:
     lwz r3, 0xad8(r15)
     addi r4, r4, lbl_8073C56C@l
     addi r16, r4, 0x39f
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r14, r3
     mr r3, r16
     bl str_findChar
@@ -2108,7 +2108,7 @@ lbl_fn_801D19F0_00001BF4:
     crclr 6
     bl sprintf
     lwz r3, 0x184(r15)
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r16, r3
     addi r3, r1, 0x198
     bl str_findChar
@@ -2117,13 +2117,13 @@ lbl_fn_801D19F0_00001BF4:
     addi r3, r1, 0x180
     bl saveSlot_readSummary
     lwz r3, 0xb18(r15)
-    bl fn_80202118
+    bl profile_getMetricValue
     addi r4, r14, 0x324
     addi r5, r1, 0x180
     bl fn_801F4728
     lwz r3, 0xb18(r15)
     addi r16, r14, 0x3b6
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r14, r3
     mr r3, r16
     bl str_findChar
@@ -2143,7 +2143,7 @@ lbl_fn_801D19F0_00001E08:
     lwz r3, 0xb18(r15)
     addi r4, r4, lbl_8073C56C@l
     addi r16, r4, 0x3c0
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r14, r3
     mr r3, r16
     bl str_findChar
@@ -2163,7 +2163,7 @@ lbl_fn_801D19F0_00001E50:
     lwz r3, 0xb18(r15)
     addi r4, r4, lbl_8073C56C@l
     addi r16, r4, 0x3d1
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r14, r3
     mr r3, r16
     bl str_findChar
@@ -2183,7 +2183,7 @@ lbl_fn_801D19F0_00001E98:
     lwz r3, 0xb18(r15)
     addi r16, r16, lbl_8073C56C@l
     addi r17, r16, 0x3de
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r14, r3
     mr r3, r17
     bl str_findChar
@@ -2196,7 +2196,7 @@ lbl_fn_801D19F0_00001E98:
     bne lbl_fn_801D19F0_00001F84
     lwz r3, 0xb18(r15)
     addi r17, r16, 0x3ea
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r14, r3
     mr r3, r17
     bl str_findChar
@@ -2206,7 +2206,7 @@ lbl_fn_801D19F0_00001E98:
     bl thread_findAndNotify
     lwz r3, 0xb18(r15)
     addi r16, r16, 0x3f1
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r14, r3
     mr r3, r16
     bl str_findChar
@@ -2242,7 +2242,7 @@ lbl_fn_801D19F0_00001F34:
 lbl_fn_801D19F0_00001F84:
     lwz r3, 0xb18(r15)
     addi r17, r16, 0x3ea
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r14, r3
     mr r3, r17
     bl str_findChar
@@ -2252,7 +2252,7 @@ lbl_fn_801D19F0_00001F84:
     bl thread_findAndNotify
     lwz r3, 0xb18(r15)
     addi r16, r16, 0x3f1
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r14, r3
     mr r3, r16
     bl str_findChar

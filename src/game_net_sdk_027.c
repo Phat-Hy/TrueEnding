@@ -22,7 +22,7 @@ extern void fn_8067AEC4(void);
 extern void fn_8067AF64(void);
 extern void fn_8067B094(void);
 extern void fn_8067B3AC(void);
-extern void fn_8067E23C(void);
+extern void memcmp(void);
 extern void strcmp(void);
 extern void strncmp(void);
 extern void fn_806A38C8(void);
@@ -177,7 +177,7 @@ lbl_fn_806D7860_00000074:
     addi r3, r1, 0x14
     addi r4, r31, 0x8
     li r5, 0x4
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     beq lbl_fn_806D7860_00000098
     li r5, 0x1
@@ -194,7 +194,7 @@ lbl_fn_806D7860_000000B0:
     addi r3, r1, 0x18
     addi r4, r4, lbl_807C2AAC@l
     li r5, 0x3
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     beq lbl_fn_806D7860_000000D4
     li r5, 0x1
@@ -2399,7 +2399,7 @@ asm void fn_806D9620(void)
 {
     nofralloc
     li r5, 0x10
-    b fn_8067E23C
+    b memcmp
 }
 
 asm void fn_806D9630(void)
@@ -2408,7 +2408,7 @@ asm void fn_806D9630(void)
     li r5, 0x10
     addi r3, r3, 0x10
     addi r4, r4, 0x10
-    b fn_8067E23C
+    b memcmp
 }
 
 asm void fn_806D9640(void)

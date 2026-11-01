@@ -37,7 +37,7 @@ extern void fn_800CF7DC(void);
 extern void atn_Task_setActive(void);
 extern void str_skipWhitespace(void);
 extern void str_findChar(void);
-extern void fn_801F3FF8(void);
+extern void save_validateHeader(void);
 extern void saveSlot_readSummary(void);
 extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
@@ -599,7 +599,7 @@ asm void dvd_renderFatalErrorScreen(void)
     addi r31, r31, lbl_8074D8C0@l
     li r5, 0x0
     addi r4, r31, 0x1
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x24(r30)
     li r4, 0x1
     bl atn_Task_setActive
@@ -609,21 +609,21 @@ asm void dvd_renderFatalErrorScreen(void)
     li r5, 0x0
     stw r0, 0x108(r3)
     lwz r3, lbl_8087F530
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x28(r30)
     li r4, 0x1
     bl atn_Task_setActive
     lwz r3, lbl_8087F530
     addi r4, r31, 0x1e
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x2c(r30)
     li r4, 0x1
     bl atn_Task_setActive
     lwz r3, lbl_8087F530
     addi r4, r31, 0x3b
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x30(r30)
     li r4, 0x1
     bl atn_Task_setActive

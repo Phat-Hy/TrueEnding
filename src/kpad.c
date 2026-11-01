@@ -36,7 +36,7 @@ extern void fn_80673D70(void);
 extern void fn_80673DD0(void);
 extern void fn_80673E20(void);
 extern void fn_80673EA0(void);
-extern void fn_8067E23C(void);
+extern void memcmp(void);
 
 /* External data declarations */
 extern u8 lbl_807B93B0[];
@@ -116,7 +116,7 @@ asm void fn_806604A0(void)
     mr r3, r29
     li r5, 0x10
     addi r4, r4, lbl_807B93B0@l
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_806604A0_00000078
     lis r3, lbl_80829DF0@ha
@@ -211,7 +211,7 @@ asm void fn_806605C0(void)
     addi r4, r4, lbl_807B93C4@l
     lwzx r30, r5, r0
     li r5, 0x10
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_806605C0_000001A8
     li r0, 0x0
@@ -223,7 +223,7 @@ lbl_fn_806605C0_000001A8:
     mr r3, r31
     addi r4, r4, lbl_807B93B0@l
     li r5, 0x10
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_806605C0_000001E4
     bl fn_8066E8F0

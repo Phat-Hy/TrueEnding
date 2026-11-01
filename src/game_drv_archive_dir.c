@@ -40,7 +40,7 @@ extern void fn_801F4818(void);
 extern void fn_801F4AA0(void);
 extern void fn_801F4CB4(void);
 extern void saveSlot_readSummary(void);
-extern void fn_801F6C80(void);
+extern void save_computeCrc32(void);
 extern void fn_801F72D4(void);
 extern void fn_801F837C(void);
 extern void fn_801F8830(void);
@@ -1891,12 +1891,12 @@ lbl_fn_805AC75C_00001658:
     lwz r3, 0x15bc(r15)
     addi r4, r16, 0x134
     lfs f1, lbl_80888334
-    bl fn_801F6C80
+    bl save_computeCrc32
     b lbl_fn_805AC75C_000018C0
 lbl_fn_805AC75C_000018B4:
     lwz r3, 0x15bc(r15)
     addi r4, r16, 0x134
-    bl fn_801F6C80
+    bl save_computeCrc32
 lbl_fn_805AC75C_000018C0:
     lwz r4, 0x15d0(r15)
     lis r3, lbl_807639B8@ha
@@ -2265,7 +2265,7 @@ lbl_fn_805AC75C_00001DDC:
     bl fn_8006EF48
     lwz r3, 0x15bc(r14)
     addi r4, r17, 0x18d
-    bl fn_801F6C80
+    bl save_computeCrc32
     lwz r5, 0xa8(r14)
     addi r4, r17, 0x194
     lwz r3, 0x15bc(r14)
@@ -2282,13 +2282,13 @@ lbl_fn_805AC75C_00001DDC:
     lwz r3, 0x15bc(r14)
     addi r4, r17, 0x1a1
     lfs f1, lbl_808882F8
-    bl fn_801F6C80
+    bl save_computeCrc32
     b lbl_fn_805AC75C_00001E8C
 lbl_fn_805AC75C_00001E7C:
     lwz r3, 0x15bc(r14)
     addi r4, r17, 0x1a1
     lfs f1, lbl_808882F4
-    bl fn_801F6C80
+    bl save_computeCrc32
 lbl_fn_805AC75C_00001E8C:
     lwz r0, 0xd8(r14)
     cmpwi r0, 0x0
@@ -2296,13 +2296,13 @@ lbl_fn_805AC75C_00001E8C:
     lwz r3, 0x15bc(r14)
     addi r4, r17, 0x1ac
     lfs f1, lbl_808882F4
-    bl fn_801F6C80
+    bl save_computeCrc32
     b lbl_fn_805AC75C_00001EC8
 lbl_fn_805AC75C_00001EAC:
     lwz r3, 0x15bc(r14)
     addi r4, r17, 0x1ac
     lfs f1, lbl_808882F8
-    bl fn_801F6C80
+    bl save_computeCrc32
     lwz r3, 0x15bc(r14)
     lwz r4, 0xd8(r14)
     bl fn_803DDD54
@@ -2314,7 +2314,7 @@ lbl_fn_805AC75C_00001EC8:
     stw r0, 0x35c(r1)
     lfd f0, 0x358(r1)
     fsubs f1, f0, f30
-    bl fn_801F6C80
+    bl save_computeCrc32
     lwz r0, 0x15cc(r15)
     cmpwi r0, 0x0
     bne lbl_fn_805AC75C_00001F14

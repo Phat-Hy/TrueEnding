@@ -35,7 +35,7 @@ extern void fn_80473F88(void);
 extern void fn_80494354(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
-extern void fn_8067E23C(void);
+extern void memcmp(void);
 extern void printf(void);
 extern void strcmp(void);
 extern void abort(void);
@@ -322,7 +322,7 @@ lbl_fn_8049248C_00000364:
     addi r5, r1, 0x50
 lbl_fn_8049248C_00000380:
     lwz r5, 0x0(r5)
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_8049248C_000003B4
     lwz r0, 0x48(r1)

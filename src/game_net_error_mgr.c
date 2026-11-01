@@ -5,7 +5,7 @@
 extern void fn_800DD3FC(void);
 extern void fn_801173A8(void);
 extern void fn_80206B9C(void);
-extern void fn_80206C50(void);
+extern void assert_formatLocation(void);
 extern void fn_80518FB8(void);
 extern void fn_80518FD0(void);
 extern void fn_80518FF0(void);
@@ -536,7 +536,7 @@ lbl_fn_8051994C_0000068C:
     cmpwi r3, 0x0
     beq lbl_fn_8051994C_000006B0
     lwz r3, 0x0(r27)
-    bl fn_80206C50
+    bl assert_formatLocation
     mr r26, r3
 lbl_fn_8051994C_000006B0:
     lwz r3, 0x0(r28)
@@ -544,7 +544,7 @@ lbl_fn_8051994C_000006B0:
     cmpwi r3, 0x0
     beq lbl_fn_8051994C_000006CC
     lwz r3, 0x0(r28)
-    bl fn_80206C50
+    bl assert_formatLocation
     mr r25, r3
 lbl_fn_8051994C_000006CC:
     cmpwi r26, 0x0
@@ -1122,7 +1122,7 @@ lbl_fn_8051A19C_00000EE8:
     cmpwi r3, 0x0
     beq lbl_fn_8051A19C_00000F0C
     lwz r3, 0x0(r24)
-    bl fn_80206C50
+    bl assert_formatLocation
     mr r22, r3
 lbl_fn_8051A19C_00000F0C:
     lwz r3, 0x0(r25)
@@ -1130,7 +1130,7 @@ lbl_fn_8051A19C_00000F0C:
     cmpwi r3, 0x0
     beq lbl_fn_8051A19C_00000F28
     lwz r3, 0x0(r25)
-    bl fn_80206C50
+    bl assert_formatLocation
     mr r23, r3
 lbl_fn_8051A19C_00000F28:
     cmpwi r22, 0x0
@@ -1333,7 +1333,7 @@ lbl_fn_8051A19C_000011EC:
     cmpwi r3, 0x0
     beq lbl_fn_8051A19C_00001210
     lwz r3, 0x0(r23)
-    bl fn_80206C50
+    bl assert_formatLocation
     mr r22, r3
 lbl_fn_8051A19C_00001210:
     lwz r3, 0x0(r24)
@@ -1341,7 +1341,7 @@ lbl_fn_8051A19C_00001210:
     cmpwi r3, 0x0
     beq lbl_fn_8051A19C_0000122C
     lwz r3, 0x0(r24)
-    bl fn_80206C50
+    bl assert_formatLocation
     mr r21, r3
 lbl_fn_8051A19C_0000122C:
     cmpwi r22, 0x0
@@ -1592,7 +1592,7 @@ lbl_fn_8051A19C_000015A8:
     cmpwi r3, 0x0
     beq lbl_fn_8051A19C_000015CC
     lwz r3, 0x0(r24)
-    bl fn_80206C50
+    bl assert_formatLocation
     mr r21, r3
 lbl_fn_8051A19C_000015CC:
     lwz r3, 0x0(r23)
@@ -1600,7 +1600,7 @@ lbl_fn_8051A19C_000015CC:
     cmpwi r3, 0x0
     beq lbl_fn_8051A19C_000015E8
     lwz r3, 0x0(r23)
-    bl fn_80206C50
+    bl assert_formatLocation
     mr r22, r3
 lbl_fn_8051A19C_000015E8:
     cmpwi r21, 0x0
@@ -1950,7 +1950,7 @@ lbl_fn_8051AD58_00001AD0:
     cmpwi r3, 0x0
     beq lbl_fn_8051AD58_00001AF4
     lwz r3, 0x0(r21)
-    bl fn_80206C50
+    bl assert_formatLocation
     mr r19, r3
 lbl_fn_8051AD58_00001AF4:
     lwz r3, 0x0(r29)
@@ -1958,7 +1958,7 @@ lbl_fn_8051AD58_00001AF4:
     cmpwi r3, 0x0
     beq lbl_fn_8051AD58_00001B10
     lwz r3, 0x0(r29)
-    bl fn_80206C50
+    bl assert_formatLocation
     mr r25, r3
 lbl_fn_8051AD58_00001B10:
     cmpwi r19, 0x0

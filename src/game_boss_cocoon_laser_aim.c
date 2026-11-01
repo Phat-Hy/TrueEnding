@@ -17,7 +17,7 @@ extern void mem_free(void);
 extern void fn_800A4450(void);
 extern void fn_800A5B38(void);
 extern void str_findChar(void);
-extern void fn_801F3FF8(void);
+extern void save_validateHeader(void);
 extern void saveSlot_readSummary(void);
 extern void fn_801FEC74(void);
 extern void thread_findAndNotify(void);
@@ -31,7 +31,7 @@ extern void atn_LoadHandle_isLoading(void);
 extern void fn_80473F88(void);
 extern void taskManager_updateTasks(void);
 extern void fn_805F9EF0(void);
-extern void fn_8067E23C(void);
+extern void memcmp(void);
 extern void printf(void);
 extern void strcmp(void);
 extern void strncmp(void);
@@ -163,7 +163,7 @@ asm void fn_8046EC7C(void)
     li r5, 0x0
     addi r4, r4, lbl_8075561C@l
     addi r4, r4, 0x16f
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x3ee0(r31)
 lbl_fn_8046EC7C_000000F0:
     lwz r0, 0x14(r1)
@@ -1662,7 +1662,7 @@ lbl_fn_8046FD7C_000014E0:
     addi r5, r1, 0x18
 lbl_fn_8046FD7C_000014FC:
     lwz r5, 0x0(r5)
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_8046FD7C_00001530
     lwz r0, 0x10(r1)

@@ -119,7 +119,7 @@ void wcstombs(void);
 void memmove(void);
 void memchr(void);
 void __memrchr(void);
-void fn_8067E23C(void);
+void memcmp(void);
 void fn_8067E288(void);
 void fn_8067E344(void);
 void fn_8067E3EC(void);
@@ -3666,18 +3666,18 @@ lbl___memrchr_00002DC0:
     blr
 }
 
-asm void fn_8067E23C(void)
+asm void memcmp(void)
 {
     nofralloc
     subi r7, r4, 0x1
     subi r6, r3, 0x1
     addi r4, r5, 0x1
-    b lbl_fn_8067E23C_00002E0C
-lbl_fn_8067E23C_00002DE0:
+    b lbl_memcmp_00002E0C
+lbl_memcmp_00002DE0:
     lbzu r3, 0x1(r6)
     lbzu r0, 0x1(r7)
     cmplw r3, r0
-    beq lbl_fn_8067E23C_00002E0C
+    beq lbl_memcmp_00002E0C
     lbz r4, 0x0(r6)
     li r3, 0x1
     lbz r0, 0x0(r7)
@@ -3685,9 +3685,9 @@ lbl_fn_8067E23C_00002DE0:
     bgelr
     li r3, -0x1
     blr
-lbl_fn_8067E23C_00002E0C:
+lbl_memcmp_00002E0C:
     subic. r4, r4, 0x1
-    bne lbl_fn_8067E23C_00002DE0
+    bne lbl_memcmp_00002DE0
     li r3, 0x0
     blr
 }

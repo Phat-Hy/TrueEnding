@@ -10,7 +10,7 @@ extern void _savegpr_24(void);
 extern void _savegpr_25(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
-extern void fn_8067E23C(void);
+extern void memcmp(void);
 extern void fn_806A4264(void);
 extern void fn_806A4270(void);
 extern void fn_806D57A0(void);
@@ -141,7 +141,7 @@ lbl_fn_806EC780_00000088:
     mr r3, r31
     addi r4, r4, lbl_807C4330@l
     li r5, 0x2
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_806EC780_000000B4
     li r25, 0x1
@@ -327,7 +327,7 @@ lbl_fn_806EC780_0000032C:
     addi r3, r31, 0x2
     addi r4, r4, lbl_807C4330@l
     li r5, 0x2
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_806EC780_00000374
     lbz r3, 0x1(r27)
@@ -1558,7 +1558,7 @@ asm void fn_806EDB70(void)
     lwz r0, 0x44(r3)
     add r3, r4, r0
     addi r4, r6, lbl_807C4330@l
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     beq lbl_fn_806EDB70_00001468
 lbl_fn_806EDB70_00001440:

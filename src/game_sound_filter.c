@@ -21,7 +21,7 @@ extern void fn_801E66F8(void);
 extern void fn_801E6700(void);
 extern void fn_80206B9C(void);
 extern void assert_generateId(void);
-extern void fn_80206C50(void);
+extern void assert_formatLocation(void);
 extern void fn_80206D18(void);
 extern void random_generateValue(void);
 extern void event_findEntryById(void);
@@ -704,7 +704,7 @@ lbl_fn_801E07A4_00000920:
     cmpwi r3, 0x0
     beq lbl_fn_801E07A4_00000A60
     lwz r3, 0x4(r25)
-    bl fn_80206C50
+    bl assert_formatLocation
     cmpwi r3, 0x0
     mr r22, r3
     beq lbl_fn_801E07A4_00000A60

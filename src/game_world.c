@@ -33,7 +33,7 @@ extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800D5908(void);
 extern void str_findChar(void);
 extern void fn_800DCA6C(void);
-extern void fn_8067E23C(void);
+extern void memcmp(void);
 extern void strcat(void);
 extern void fn_8068AD58(void);
 extern void std_fmod(void);
@@ -1134,7 +1134,7 @@ lbl_fn_80080C20_00000E24:
     addi r5, r1, 0x2c
 lbl_fn_80080C20_00000E40:
     lwz r5, 0x0(r5)
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_80080C20_00000E74
     lwz r0, 0x24(r1)
@@ -1192,7 +1192,7 @@ lbl_fn_80080C20_00000EE8:
     addi r5, r1, 0x1c
 lbl_fn_80080C20_00000F04:
     lwz r5, 0x0(r5)
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_80080C20_00000F38
     lwz r0, 0x14(r1)

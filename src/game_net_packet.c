@@ -27,10 +27,10 @@ extern void fn_801F837C(void);
 extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
 extern void thread_dispatchToQueue(void);
-extern void fn_80202118(void);
+extern void profile_getMetricValue(void);
 extern void perf_getMetricValue(void);
 extern void assert_generateId(void);
-extern void fn_80206C50(void);
+extern void assert_formatLocation(void);
 extern void fn_8020924C(void);
 extern void fn_8020ED84(void);
 extern void fn_8020EF4C(void);
@@ -411,7 +411,7 @@ lbl_fn_801E6714_00000464:
     cmpwi r3, 0x0
     subi r27, r4, 0x7d70
     beq lbl_fn_801E6714_000004B4
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r20, r3
     mr r3, r22
     bl fn_801CF334
@@ -676,7 +676,7 @@ lbl_fn_801E6B10_00000854:
     lwz r3, 0x13c(r3)
     cmpwi r3, 0x0
     beq lbl_fn_801E6B10_00000884
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r21, r3
     mr r3, r23
     bl fn_801CF334
@@ -723,7 +723,7 @@ lbl_fn_801E6B10_000008D0:
     bl event_findEntryById
     mr r20, r3
     lwz r3, 0x4(r26)
-    bl fn_80206C50
+    bl assert_formatLocation
     cmpwi r20, 0x0
     mr r21, r3
     beq lbl_fn_801E6B10_00000B18
@@ -1411,13 +1411,13 @@ asm void fn_801E75F8(void)
     lwz r3, 0x0(r7)
     cmpwi r3, 0x0
     beq lbl_fn_801E75F8_000019D4
-    bl fn_80202118
+    bl profile_getMetricValue
     cmpwi r3, 0x0
     bne lbl_fn_801E75F8_000012E4
     b lbl_fn_801E75F8_000019D4
 lbl_fn_801E75F8_000012E4:
     lwz r3, 0x0(r27)
-    bl fn_80202118
+    bl profile_getMetricValue
     lwz r4, lbl_8087F4F0
     mr r29, r3
     li r0, 0x0
@@ -1591,7 +1591,7 @@ lbl_fn_801E75F8_0000155C:
     lwz r3, 0xb4c(r26)
     add r3, r3, r0
     lwz r3, 0x4(r3)
-    bl fn_80206C50
+    bl assert_formatLocation
     mr r6, r3
 lbl_fn_801E75F8_00001598:
     cmpwi r6, 0x0
@@ -1785,11 +1785,11 @@ lbl_fn_801E75F8_00001848:
     li r28, 0x0
 lbl_fn_801E75F8_00001878:
     lwz r3, 0xae4(r31)
-    bl fn_80202118
+    bl profile_getMetricValue
     cmpwi r3, 0x0
     beq lbl_fn_801E75F8_000019C0
     lwz r3, 0xaf8(r31)
-    bl fn_80202118
+    bl profile_getMetricValue
     cmpwi r3, 0x0
     beq lbl_fn_801E75F8_000019C0
     lwz r4, 0xae4(r31)
@@ -1848,7 +1848,7 @@ lbl_fn_801E75F8_0000190C:
     oris r0, r0, 0x80
     stw r0, 0x104(r19)
     lfs f29, 0x28(r1)
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r25, r3
     mr r3, r22
     bl str_findChar
@@ -1859,7 +1859,7 @@ lbl_fn_801E75F8_0000190C:
     bl thread_findAndNotifySlot
     lfs f29, 0x2c(r1)
     mr r3, r19
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r25, r3
     mr r3, r22
     bl str_findChar

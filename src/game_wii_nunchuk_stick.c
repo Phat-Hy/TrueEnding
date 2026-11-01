@@ -31,7 +31,7 @@ extern void fn_8048B3B8(void);
 extern void fn_8048BD64(void);
 extern void fn_8048C884(void);
 extern void fn_805381A4(void);
-extern void fn_805381CC(void);
+extern void spectate_getRootNode(void);
 extern void fn_80538DC8(void);
 extern void fn_80541BDC(void);
 extern void PSMTXMultVec(void);
@@ -98,7 +98,7 @@ asm void fn_80559B30(void)
     bl fn_805381A4
     mr r24, r3
     mr r3, r25
-    bl fn_805381CC
+    bl spectate_getRootNode
     lwz r0, 0x168(r3)
     li r4, 0x0
     lwz r5, 0x10(r24)
@@ -281,7 +281,7 @@ lbl_fn_80559B30_000002D4:
     bl fn_805381A4
     mr r24, r3
     mr r3, r25
-    bl fn_805381CC
+    bl spectate_getRootNode
     lwz r0, 0x168(r3)
     li r4, 0x0
     lwz r5, 0x10(r24)
@@ -785,7 +785,7 @@ lbl_fn_8055A4A0_000009A8:
     bl fn_805381A4
     mr r25, r3
     mr r3, r31
-    bl fn_805381CC
+    bl spectate_getRootNode
     lwz r0, 0x30(r31)
     mr r27, r3
     cmpwi r0, 0x0
@@ -1917,7 +1917,7 @@ lbl_fn_8055A4A0_00001890:
     b lbl_fn_8055A4A0_00001A9C
 lbl_fn_8055A4A0_000018A0:
     mr r3, r31
-    bl fn_805381CC
+    bl spectate_getRootNode
     lwz r5, 0x30(r31)
     mr r25, r3
     cmpwi r5, 0x0

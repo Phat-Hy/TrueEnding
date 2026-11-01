@@ -10,8 +10,8 @@ extern void _savegpr_24(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void fn_80626C60(void);
-extern void fn_80626D50(void);
-extern void fn_80629810(void);
+extern void scapi_cleanupContext(void);
+extern void bta_sys_logEvent(void);
 extern void bta_sys_log(void);
 extern void fn_80629850(void);
 extern void fn_806298D0(void);
@@ -25,7 +25,7 @@ extern void fn_8063D068(void);
 extern void fn_8063D4EC(void);
 extern void fn_8063D5E8(void);
 extern void fn_8063D6D0(void);
-extern void fn_8067E23C(void);
+extern void memcmp(void);
 
 /* External data declarations */
 extern u8 lbl_807B4880[];
@@ -81,7 +81,7 @@ asm void fn_80636408(void)
     lis r4, lbl_807B4880@ha
     lis r3, 0xd
     addi r4, r4, lbl_807B4880@l
-    bl fn_80629810
+    bl bta_sys_logEvent
     b lbl_fn_80636408_000001C4
 lbl_fn_80636408_00000064:
     cmplwi r26, 0x3
@@ -331,7 +331,7 @@ lbl_fn_80636770_000003B8:
     mr r4, r30
     addi r3, r27, 0x28
     li r5, 0x6
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_80636770_00000458
     li r0, 0x1
@@ -422,7 +422,7 @@ lbl_fn_80636770_000004F4:
     lis r4, lbl_807B49AC@ha
     addi r3, r3, 0x1
     addi r4, r4, lbl_807B49AC@l
-    bl fn_80629810
+    bl bta_sys_logEvent
 lbl_fn_80636770_0000051C:
     mr r5, r30
     li r3, 0x3
@@ -471,7 +471,7 @@ lbl_fn_80636950_00000584:
     mr r4, r25
     addi r3, r31, 0x28
     li r5, 0x6
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_80636950_000006C0
 lbl_fn_80636950_000005C8:
@@ -634,7 +634,7 @@ lbl_fn_80636BA8_000007CC:
     mr r4, r29
     addi r3, r31, 0x28
     li r5, 0x6
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_80636BA8_000007F8
     clrlwi r3, r30, 16
@@ -762,7 +762,7 @@ lbl_fn_80636D40_0000096C:
     mr r4, r28
     addi r3, r30, 0x28
     li r5, 0x6
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_80636D40_000009BC
     lbz r0, 0xd(r30)
@@ -793,7 +793,7 @@ lbl_fn_80636D40_000009BC:
 asm void fn_80636DF4(void)
 {
     nofralloc
-    b fn_80626D50
+    b scapi_cleanupContext
 }
 
 asm void fn_80636DF8(void)
@@ -1079,7 +1079,7 @@ lbl_fn_80637174_00000D98:
     mr r4, r29
     addi r3, r30, 0x28
     li r5, 0x6
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_80637174_00000DC4
     lhz r0, 0x8(r30)
@@ -1130,7 +1130,7 @@ asm void fn_806371FC(void)
     lis r4, lbl_807B4B80@ha
     addi r3, r3, 0x3
     addi r4, r4, lbl_807B4B80@l
-    bl fn_80629810
+    bl bta_sys_logEvent
 lbl_fn_806371FC_00000E58:
     lwz r0, 0x14(r1)
     li r3, 0x1

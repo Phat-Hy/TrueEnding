@@ -33,7 +33,7 @@ extern void fn_8036554C(void);
 extern void world_setGlobalFlag(void);
 extern void atn_LoadHandle_getName(void);
 extern void fn_8054D798(void);
-extern void fn_8067E23C(void);
+extern void memcmp(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -1597,7 +1597,7 @@ lbl_fn_80106878_00001488:
     addi r5, r1, 0x84
 lbl_fn_80106878_000014A4:
     lwz r5, 0x0(r5)
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_80106878_000014D8
     lwz r0, 0x7c(r1)
@@ -1660,7 +1660,7 @@ lbl_fn_80106878_0000155C:
     addi r5, r1, 0x74
 lbl_fn_80106878_00001578:
     lwz r5, 0x0(r5)
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_80106878_000015AC
     lwz r0, 0x6c(r1)
@@ -1723,7 +1723,7 @@ lbl_fn_80106878_00001630:
     addi r5, r1, 0x64
 lbl_fn_80106878_0000164C:
     lwz r5, 0x0(r5)
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_80106878_00001680
     lwz r0, 0x5c(r1)
@@ -1786,7 +1786,7 @@ lbl_fn_80106878_00001704:
     addi r5, r1, 0x54
 lbl_fn_80106878_00001720:
     lwz r5, 0x0(r5)
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_80106878_00001754
     lwz r0, 0x4c(r1)
@@ -1849,7 +1849,7 @@ lbl_fn_80106878_000017D8:
     addi r5, r1, 0x44
 lbl_fn_80106878_000017F4:
     lwz r5, 0x0(r5)
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_80106878_00001828
     lwz r0, 0x3c(r1)
@@ -1912,7 +1912,7 @@ lbl_fn_80106878_000018AC:
     addi r5, r1, 0x34
 lbl_fn_80106878_000018C8:
     lwz r5, 0x0(r5)
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_80106878_000018FC
     lwz r0, 0x2c(r1)
@@ -1975,7 +1975,7 @@ lbl_fn_80106878_00001980:
     addi r5, r1, 0x24
 lbl_fn_80106878_0000199C:
     lwz r5, 0x0(r5)
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_80106878_000019D0
     lwz r0, 0x1c(r1)

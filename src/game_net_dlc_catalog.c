@@ -33,7 +33,7 @@ extern void fn_8016DF3C(void);
 extern void fn_8016EB48(void);
 extern void fn_801765D8(void);
 extern void fn_80176ACC(void);
-extern void fn_801F3FF8(void);
+extern void save_validateHeader(void);
 extern void fn_801F4484(void);
 extern void fn_801F465C(void);
 extern void fn_801FEC74(void);
@@ -942,7 +942,7 @@ asm void fn_8054A754(void)
     addi r4, r4, lbl_8075E49C@l
     li r5, 0x0
     addi r4, r4, 0x1
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x16d4(r30)
     li r4, 0x1
     bl atn_Task_setActive
@@ -1105,7 +1105,7 @@ asm void fn_8054A9AC(void)
     stw r0, 0x48(r3)
     addi r4, r31, 0x1b
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x16e0(r30)
     li r4, 0x1
     bl atn_Task_setActive
@@ -1120,7 +1120,7 @@ asm void fn_8054A9AC(void)
     lwz r0, 0xfc(r6)
     rlwinm r0, r0, 0, 4, 2
     stw r0, 0xfc(r6)
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x16ec(r30)
     li r4, 0x1
     bl atn_Task_setActive
@@ -1144,7 +1144,7 @@ asm void fn_8054A9AC(void)
     mr r3, r30
     addi r4, r31, 0x63
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x16f8(r30)
     li r4, 0x1
     bl atn_Task_setActive
@@ -1155,7 +1155,7 @@ asm void fn_8054A9AC(void)
     lwz r0, 0xfc(r6)
     rlwinm r0, r0, 0, 2, 0
     stw r0, 0xfc(r6)
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x1704(r30)
     li r4, 0x1
     lwz r0, 0xfc(r3)
@@ -1174,7 +1174,7 @@ asm void fn_8054A9AC(void)
     lwz r0, 0xfc(r6)
     rlwinm r0, r0, 0, 4, 2
     stw r0, 0xfc(r6)
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x1710(r30)
     li r4, 0x1
     bl atn_Task_setActive
@@ -1189,7 +1189,7 @@ asm void fn_8054A9AC(void)
     lwz r0, 0xfc(r6)
     rlwinm r0, r0, 0, 4, 2
     stw r0, 0xfc(r6)
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x171c(r30)
     li r4, 0x1
     bl atn_Task_setActive
@@ -1204,7 +1204,7 @@ asm void fn_8054A9AC(void)
     lwz r0, 0xfc(r6)
     rlwinm r0, r0, 0, 4, 2
     stw r0, 0xfc(r6)
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x1728(r30)
     li r4, 0x1
     bl atn_Task_setActive
@@ -1219,7 +1219,7 @@ asm void fn_8054A9AC(void)
     lwz r0, 0xfc(r6)
     rlwinm r0, r0, 0, 4, 2
     stw r0, 0xfc(r6)
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x1734(r30)
     li r4, 0x1
     bl atn_Task_setActive
@@ -1234,7 +1234,7 @@ asm void fn_8054A9AC(void)
     lwz r0, 0xfc(r6)
     rlwinm r0, r0, 0, 4, 2
     stw r0, 0xfc(r6)
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x1740(r30)
     li r4, 0x1
     bl atn_Task_setActive
@@ -1249,7 +1249,7 @@ asm void fn_8054A9AC(void)
     lwz r0, 0xfc(r6)
     rlwinm r0, r0, 0, 4, 2
     stw r0, 0xfc(r6)
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x174c(r30)
     li r4, 0x1
     bl atn_Task_setActive
@@ -1264,7 +1264,7 @@ asm void fn_8054A9AC(void)
     lwz r0, 0xfc(r6)
     rlwinm r0, r0, 0, 4, 2
     stw r0, 0xfc(r6)
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x1758(r30)
     li r4, 0x1
     bl atn_Task_setActive
@@ -1279,7 +1279,7 @@ asm void fn_8054A9AC(void)
     lwz r0, 0xfc(r6)
     rlwinm r0, r0, 0, 4, 2
     stw r0, 0xfc(r6)
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x1764(r30)
     li r4, 0x1
     bl atn_Task_setActive
@@ -1294,7 +1294,7 @@ asm void fn_8054A9AC(void)
     lwz r0, 0xfc(r6)
     rlwinm r0, r0, 0, 4, 2
     stw r0, 0xfc(r6)
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x1770(r30)
     li r4, 0x1
     bl atn_Task_setActive
@@ -1309,7 +1309,7 @@ asm void fn_8054A9AC(void)
     lwz r0, 0xfc(r6)
     rlwinm r0, r0, 0, 4, 2
     stw r0, 0xfc(r6)
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x177c(r30)
     li r4, 0x1
     bl atn_Task_setActive
@@ -1324,7 +1324,7 @@ asm void fn_8054A9AC(void)
     lwz r0, 0xfc(r6)
     rlwinm r0, r0, 0, 4, 2
     stw r0, 0xfc(r6)
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x1788(r30)
     li r4, 0x1
     bl atn_Task_setActive
@@ -1339,7 +1339,7 @@ asm void fn_8054A9AC(void)
     lwz r0, 0xfc(r6)
     rlwinm r0, r0, 0, 4, 2
     stw r0, 0xfc(r6)
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x1794(r30)
     li r4, 0x1
     bl atn_Task_setActive
@@ -1354,7 +1354,7 @@ asm void fn_8054A9AC(void)
     lwz r0, 0xfc(r6)
     rlwinm r0, r0, 0, 4, 2
     stw r0, 0xfc(r6)
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x17a0(r30)
     li r4, 0x1
     bl atn_Task_setActive
@@ -1369,7 +1369,7 @@ asm void fn_8054A9AC(void)
     lwz r0, 0xfc(r6)
     rlwinm r0, r0, 0, 4, 2
     stw r0, 0xfc(r6)
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x17ac(r30)
     li r4, 0x1
     bl atn_Task_setActive
@@ -1384,7 +1384,7 @@ asm void fn_8054A9AC(void)
     lwz r0, 0xfc(r6)
     rlwinm r0, r0, 0, 4, 2
     stw r0, 0xfc(r6)
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x17b8(r30)
     li r4, 0x1
     bl atn_Task_setActive
@@ -1399,7 +1399,7 @@ asm void fn_8054A9AC(void)
     lwz r0, 0xfc(r6)
     rlwinm r0, r0, 0, 4, 2
     stw r0, 0xfc(r6)
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x17c4(r30)
     li r4, 0x1
     bl atn_Task_setActive
@@ -1414,7 +1414,7 @@ asm void fn_8054A9AC(void)
     lwz r0, 0xfc(r6)
     rlwinm r0, r0, 0, 4, 2
     stw r0, 0xfc(r6)
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x17d0(r30)
     li r4, 0x1
     bl atn_Task_setActive

@@ -23,7 +23,7 @@ extern void fn_800D3FA4(void);
 extern void str_findChar(void);
 extern void fn_800DD3FC(void);
 extern void actor_spawnActorWithId(void);
-extern void fn_801F3FF8(void);
+extern void save_validateHeader(void);
 extern void fn_801F4728(void);
 extern void fn_801F4C14(void);
 extern void saveSlot_readSummary(void);
@@ -317,7 +317,7 @@ asm void fn_804B9DAC(void)
     stw r0, 0x100(r31)
     stw r0, 0x104(r31)
     stw r0, 0x108(r31)
-    bl fn_801F3FF8
+    bl save_validateHeader
     lwz r0, 0xb8(r31)
     stw r3, 0x48(r31)
     cmplwi r0, 0x10
@@ -338,7 +338,7 @@ lbl_fn_804B9DAC_000002EC:
     addi r4, r4, lbl_80758640@l
     li r5, 0x0
     addi r4, r4, 0x2b
-    bl fn_801F3FF8
+    bl save_validateHeader
     lwz r0, 0xb8(r31)
     stw r3, 0x4c(r31)
     cmplwi r0, 0x10
@@ -359,7 +359,7 @@ lbl_fn_804B9DAC_00000338:
     addi r4, r4, lbl_80758640@l
     li r5, 0x0
     addi r4, r4, 0x55
-    bl fn_801F3FF8
+    bl save_validateHeader
     lwz r0, 0xb8(r31)
     stw r3, 0x84(r31)
     cmplwi r0, 0x10
@@ -380,7 +380,7 @@ lbl_fn_804B9DAC_00000384:
     addi r4, r4, lbl_80758640@l
     li r5, 0x0
     addi r4, r4, 0x7b
-    bl fn_801F3FF8
+    bl save_validateHeader
     lwz r0, 0xb8(r31)
     stw r3, 0x78(r31)
     cmplwi r0, 0x10
@@ -401,7 +401,7 @@ lbl_fn_804B9DAC_000003D0:
     addi r4, r4, lbl_80758640@l
     li r5, 0x0
     addi r4, r4, 0x9e
-    bl fn_801F3FF8
+    bl save_validateHeader
     lwz r0, 0xb8(r31)
     stw r3, 0x7c(r31)
     cmplwi r0, 0x10
@@ -426,7 +426,7 @@ lbl_fn_804B9DAC_0000042C:
     add r28, r31, r29
     addi r4, r30, 0xc3
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x50(r28)
     lwz r0, 0xb8(r31)
     cmplwi r0, 0x10
@@ -451,7 +451,7 @@ lbl_fn_804B9DAC_00000474:
     addi r4, r4, lbl_80758640@l
     li r5, 0x0
     addi r4, r4, 0xed
-    bl fn_801F3FF8
+    bl save_validateHeader
     lwz r0, 0xb8(r31)
     stw r3, 0x80(r31)
     cmplwi r0, 0x10

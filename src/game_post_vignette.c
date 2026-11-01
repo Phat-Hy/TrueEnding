@@ -31,7 +31,7 @@ extern void fn_80151448(void);
 extern void actor_setState(void);
 extern void fn_80170A20(void);
 extern void fn_80178A6C(void);
-extern void fn_801F3FF8(void);
+extern void save_validateHeader(void);
 extern void thread_findAndNotifySlot(void);
 extern void thread_dispatchToQueue(void);
 extern void task_findEntryById(void);
@@ -285,7 +285,7 @@ asm void fn_802C7BE4(void)
     stfs f1, 0x1550(r31)
     stfs f0, 0x1554(r31)
     stw r0, 0x12a4(r31)
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x1540(r31)
     li r4, 0x1
     bl atn_Task_setActive

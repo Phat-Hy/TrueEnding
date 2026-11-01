@@ -46,7 +46,7 @@ extern void str_findChar(void);
 extern void fn_800E0000(void);
 extern void fn_800F7258(void);
 extern void fn_80116BD4(void);
-extern void fn_801F3FF8(void);
+extern void save_validateHeader(void);
 extern void thread_findAndNotifySlot(void);
 extern void thread_dispatchToQueue(void);
 extern void fn_80316F9C(void);
@@ -988,42 +988,42 @@ asm void fn_804AC488(void)
     addi r4, r31, 0x1
     li r5, 0x0
     stw r0, 0x4c(r30)
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x54(r30)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r30
     addi r4, r31, 0x1d
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x58(r30)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r30
     addi r4, r31, 0x3a
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x5c(r30)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r30
     addi r4, r31, 0x57
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x60(r30)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r30
     addi r4, r31, 0x74
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x64(r30)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r30
     addi r4, r31, 0x91
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x68(r30)
     li r4, 0x1
     bl atn_Task_setActive

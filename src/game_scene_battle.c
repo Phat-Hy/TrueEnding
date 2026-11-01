@@ -43,7 +43,7 @@ extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
-extern void fn_8067E23C(void);
+extern void memcmp(void);
 extern void printf(void);
 extern void rand(void);
 extern void abort(void);
@@ -560,7 +560,7 @@ lbl_fn_801AD34C_00000654:
     addi r5, r1, 0x38
 lbl_fn_801AD34C_00000670:
     lwz r5, 0x0(r5)
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_801AD34C_000006A4
     lwz r0, 0x30(r1)
@@ -624,7 +624,7 @@ lbl_fn_801AD34C_0000072C:
     addi r5, r1, 0x28
 lbl_fn_801AD34C_00000748:
     lwz r5, 0x0(r5)
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_801AD34C_0000077C
     lwz r0, 0x20(r1)
@@ -688,7 +688,7 @@ lbl_fn_801AD34C_00000804:
     addi r5, r1, 0x18
 lbl_fn_801AD34C_00000820:
     lwz r5, 0x0(r5)
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_801AD34C_00000854
     lwz r0, 0x10(r1)

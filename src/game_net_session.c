@@ -25,11 +25,11 @@ extern void fn_80129A6C(void);
 extern void fn_80147A18(void);
 extern void quest_checkCondition(void);
 extern void fn_8016E800(void);
-extern void fn_801F3FF8(void);
+extern void save_validateHeader(void);
 extern void fn_801F64D0(void);
 extern void fn_801F6D7C(void);
 extern void thread_dispatchToQueue(void);
-extern void fn_80202118(void);
+extern void profile_getMetricValue(void);
 extern void fn_8020787C(void);
 extern void fn_80219EB4(void);
 extern void fn_80219EBC(void);
@@ -110,7 +110,7 @@ asm void fn_801E7D78(void)
     mr r23, r4
     mr r24, r5
     beq lbl_fn_801E7D78_0000011C
-    bl fn_80202118
+    bl profile_getMetricValue
     cmpwi r3, 0x0
     bne lbl_fn_801E7D78_00000034
     b lbl_fn_801E7D78_0000011C
@@ -164,7 +164,7 @@ lbl_fn_801E7D78_000000CC:
     crclr 6
     bl sprintf
     mr r3, r22
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r31, r3
     addi r3, r1, 0x8
     bl str_findChar
@@ -198,7 +198,7 @@ asm void fn_801E7EA8(void)
     mr r23, r4
     mr r24, r5
     beq lbl_fn_801E7EA8_0000024C
-    bl fn_80202118
+    bl profile_getMetricValue
     cmpwi r3, 0x0
     bne lbl_fn_801E7EA8_00000164
     b lbl_fn_801E7EA8_0000024C
@@ -252,7 +252,7 @@ lbl_fn_801E7EA8_000001FC:
     crclr 6
     bl sprintf
     mr r3, r22
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r31, r3
     addi r3, r1, 0x8
     bl str_findChar
@@ -1707,7 +1707,7 @@ asm void fn_801E9398(void)
     stw r0, 0x158(r30)
     stw r6, 0x15c(r30)
     stw r6, 0x160(r30)
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x48(r30)
     li r4, 0x1
     bl atn_Task_setActive

@@ -102,7 +102,7 @@ void fn_801F3E20(void);
 void fn_801F3EF4(void);
 void fn_801F3F74(void);
 void save_dummyCallback2(void);
-void fn_801F3FF8(void);
+void save_validateHeader(void);
 void fn_801F407C(void);
 
 asm void fn_801F275C(void)
@@ -1913,7 +1913,7 @@ void save_dummyCallback2(void)
 {
 }
 
-asm void fn_801F3FF8(void)
+asm void save_validateHeader(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -1926,7 +1926,7 @@ asm void fn_801F3FF8(void)
     mr r30, r4
     stw r29, 0x14(r1)
     mr r29, r3
-    beq lbl_fn_801F3FF8_00001900
+    beq lbl_save_validateHeader_00001900
     lis r5, lbl_8073E420@ha
     li r3, 0x110
     addi r5, r5, lbl_8073E420@l
@@ -1935,15 +1935,15 @@ asm void fn_801F3FF8(void)
     li r7, 0x0
     bl mem_alloc
     cmpwi r3, 0x0
-    beq lbl_fn_801F3FF8_00001904
+    beq lbl_save_validateHeader_00001904
     mr r4, r29
     mr r5, r30
     mr r6, r31
     bl fn_801F407C
-    b lbl_fn_801F3FF8_00001904
-lbl_fn_801F3FF8_00001900:
+    b lbl_save_validateHeader_00001904
+lbl_save_validateHeader_00001900:
     li r3, 0x0
-lbl_fn_801F3FF8_00001904:
+lbl_save_validateHeader_00001904:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)

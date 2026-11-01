@@ -12,7 +12,7 @@ extern void _savegpr_23(void);
 extern void _savegpr_24(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
-extern void fn_8067E23C(void);
+extern void memcmp(void);
 extern void strcmp(void);
 extern void strncmp(void);
 extern void strstr(void);
@@ -443,7 +443,7 @@ asm void fn_806FD420(void)
     mr r29, r3
     addi r4, r6, lbl_807C5D00@l
     li r5, 0x6
-    bl fn_8067E23C
+    bl memcmp
     cntlzw r0, r3
     srwi. r0, r0, 5
     beq lbl_fn_806FD420_0000086C

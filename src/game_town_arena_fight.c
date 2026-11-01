@@ -86,7 +86,7 @@ extern void fn_801F465C(void);
 extern void fn_801F48C8(void);
 extern void fn_801F4CB4(void);
 extern void fn_801F6C2C(void);
-extern void fn_801F6C80(void);
+extern void save_computeCrc32(void);
 extern void fn_801F6D7C(void);
 extern void fn_801F837C(void);
 extern void fn_801F8598(void);
@@ -2058,7 +2058,7 @@ lbl_fn_803D2A6C_00001978:
     addi r4, r31, 0x109d
     lfd f0, 0xa60(r1)
     fsubs f1, f0, f26
-    bl fn_801F6C80
+    bl save_computeCrc32
     cmpwi r21, 0x0
     bne lbl_fn_803D2A6C_00001ABC
     mr r3, r25
@@ -2342,7 +2342,7 @@ lbl_fn_803D2A6C_00001DC0:
     fmr f1, f24
     lwz r3, 0x3dc(r21)
     addi r4, r23, 0x10d6
-    bl fn_801F6C80
+    bl save_computeCrc32
     lfs f0, 0x174(r25)
     fcmpo cr0, f0, f28
     ble lbl_fn_803D2A6C_00001E00
@@ -2351,13 +2351,13 @@ lbl_fn_803D2A6C_00001DC0:
     fmr f1, f27
     lwz r3, 0x3dc(r21)
     addi r4, r23, 0x10f2
-    bl fn_801F6C80
+    bl save_computeCrc32
     b lbl_fn_803D2A6C_00001E10
 lbl_fn_803D2A6C_00001E00:
     lwz r3, 0x3dc(r21)
     addi r4, r23, 0x10f2
     lfs f1, lbl_80885D58
-    bl fn_801F6C80
+    bl save_computeCrc32
 lbl_fn_803D2A6C_00001E10:
     addi r21, r21, 0x4
     addi r18, r18, 0x1
@@ -3146,13 +3146,13 @@ lbl_fn_803D2A6C_000028C4:
     lfs f0, 0x378(r1)
     addi r4, r23, 0x1146
     fdivs f1, f0, f27
-    bl fn_801F6C80
+    bl save_computeCrc32
     mr r3, r26
     bl perf_getMetricValue
     lfs f0, 0x378(r1)
     addi r4, r23, 0x114c
     fdivs f1, f0, f27
-    bl fn_801F6C80
+    bl save_computeCrc32
 lbl_fn_803D2A6C_000029B8:
     cmpwi r27, 0x0
     beq lbl_fn_803D2A6C_00002ACC
@@ -3191,13 +3191,13 @@ lbl_fn_803D2A6C_000029B8:
     lfs f0, 0x378(r1)
     addi r4, r23, 0x1146
     fdivs f1, f0, f27
-    bl fn_801F6C80
+    bl save_computeCrc32
     mr r3, r27
     bl perf_getMetricValue
     lfs f0, 0x378(r1)
     addi r4, r23, 0x114c
     fdivs f1, f0, f27
-    bl fn_801F6C80
+    bl save_computeCrc32
     b lbl_fn_803D2A6C_00002ACC
 lbl_fn_803D2A6C_00002A6C:
     lwz r3, 0xb38(r30)
@@ -4042,7 +4042,7 @@ lbl_fn_803D2A6C_00003610:
     lwz r3, 0x574(r22)
     addi r4, r23, 0x1192
     lfs f1, lbl_80885D58
-    bl fn_801F6C80
+    bl save_computeCrc32
     lwz r3, 0x0(r21)
     bl fn_800F52F0
     lwz r0, 0x16c(r3)
@@ -4056,7 +4056,7 @@ lbl_fn_803D2A6C_00003610:
     addi r4, r23, 0x10d6
     lwz r3, 0x574(r22)
     fdivs f1, f0, f29
-    bl fn_801F6C80
+    bl save_computeCrc32
     lwz r3, 0x0(r21)
     bl fn_800F7F80
     cmpwi r3, 0x0
@@ -4069,29 +4069,29 @@ lbl_fn_803D2A6C_000036F0:
     lwz r3, 0x574(r22)
     addi r4, r23, 0x10dd
     lfs f1, lbl_80885E38
-    bl fn_801F6C80
+    bl save_computeCrc32
     lwz r3, 0x574(r22)
     addi r4, r23, 0x10e4
     lfs f1, lbl_80885E3C
-    bl fn_801F6C80
+    bl save_computeCrc32
     lwz r3, 0x574(r22)
     addi r4, r23, 0x10eb
     lfs f1, lbl_80885E34
-    bl fn_801F6C80
+    bl save_computeCrc32
     b lbl_fn_803D2A6C_00003774
 lbl_fn_803D2A6C_00003724:
     lwz r3, 0x574(r22)
     addi r4, r23, 0x10dd
     lfs f1, lbl_80885E6C
-    bl fn_801F6C80
+    bl save_computeCrc32
     lwz r3, 0x574(r22)
     addi r4, r23, 0x10e4
     lfs f1, lbl_80885E70
-    bl fn_801F6C80
+    bl save_computeCrc32
     lwz r3, 0x574(r22)
     addi r4, r23, 0x10eb
     lfs f1, lbl_80885E70
-    bl fn_801F6C80
+    bl save_computeCrc32
     lwz r3, 0x0(r21)
     bl fn_803D719C
     cmpwi r3, 0x0
@@ -4099,7 +4099,7 @@ lbl_fn_803D2A6C_00003724:
     lwz r3, 0x574(r22)
     addi r4, r23, 0x1192
     lfs f1, lbl_80885D60
-    bl fn_801F6C80
+    bl save_computeCrc32
 lbl_fn_803D2A6C_00003774:
     lwz r3, 0x0(r21)
     bl fn_801799BC
@@ -4113,7 +4113,7 @@ lbl_fn_803D2A6C_00003794:
     lwz r3, 0x574(r22)
     addi r4, r23, 0x10f2
     lfs f1, lbl_80885D60
-    bl fn_801F6C80
+    bl save_computeCrc32
     b lbl_fn_803D2A6C_000037C0
 lbl_fn_803D2A6C_000037A8:
     lwz r3, 0x574(r22)
@@ -4121,7 +4121,7 @@ lbl_fn_803D2A6C_000037A8:
     lwz r3, 0x574(r22)
     addi r4, r23, 0x10f2
     lfs f1, lbl_80885D58
-    bl fn_801F6C80
+    bl save_computeCrc32
 lbl_fn_803D2A6C_000037C0:
     lwz r3, 0x0(r21)
     bl fn_803D719C

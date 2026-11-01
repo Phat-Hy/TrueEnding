@@ -29,7 +29,7 @@ extern void fn_801E6FC8(void);
 extern void fn_801E7098(void);
 extern void fn_801E7D78(void);
 extern void assert_generateId(void);
-extern void fn_80206C50(void);
+extern void assert_formatLocation(void);
 extern void fn_8020924C(void);
 extern void fn_8020ED84(void);
 extern void fn_8020EF04(void);
@@ -94,7 +94,7 @@ asm void fn_801D8CC4(void)
     lwz r3, 0xb4c(r3)
     add r30, r3, r0
     lwz r3, 0x4(r30)
-    bl fn_80206C50
+    bl assert_formatLocation
     lwz r0, 0x8(r30)
     mr r28, r3
     lwz r3, 0xacc(r31)

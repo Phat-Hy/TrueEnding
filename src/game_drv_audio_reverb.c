@@ -68,7 +68,7 @@ extern void fn_80147A08(void);
 extern void quest_checkCondition(void);
 extern void fn_801498F0(void);
 extern void fn_80179D44(void);
-extern void fn_801F3FF8(void);
+extern void save_validateHeader(void);
 extern void fn_801F45F4(void);
 extern void saveSlot_readSummary(void);
 extern void thread_findAndNotifySlot(void);
@@ -103,7 +103,7 @@ extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
 extern void fn_805F9AB0(void);
 extern void fn_805F9D20(void);
-extern void fn_8067E23C(void);
+extern void memcmp(void);
 extern void strcmp(void);
 extern void atoi(void);
 extern void std_atan2(void);
@@ -1196,7 +1196,7 @@ lbl_fn_805BB658_00000E18:
     mr r4, r3
     mr r3, r15
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x478(r26)
     li r4, 0x1
     bl atn_Task_setActive
@@ -1392,7 +1392,7 @@ lbl_fn_805BB658_000010F4:
     addi r5, r1, 0x28
 lbl_fn_805BB658_00001110:
     lwz r5, 0x0(r5)
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_805BB658_00001144
     lwz r0, 0x20(r1)
@@ -1590,7 +1590,7 @@ lbl_fn_805BB658_000013C8:
     lwz r4, 0x8c(r1)
 lbl_fn_805BB658_000013CC:
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x4b4(r26)
     li r4, 0x1
     bl atn_Task_setActive

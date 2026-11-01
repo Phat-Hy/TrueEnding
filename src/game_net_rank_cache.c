@@ -16,7 +16,7 @@ extern void fn_80116EB8(void);
 extern void fn_80116FC0(void);
 extern void actor_spawnActorWithId(void);
 extern void fn_801F6C2C(void);
-extern void fn_801F6C80(void);
+extern void save_computeCrc32(void);
 extern void fn_801F837C(void);
 extern void perf_getMetricValue(void);
 extern void fn_803750E4(void);
@@ -1470,7 +1470,7 @@ lbl_fn_80525A0C_00001314:
     addi r4, r4, 0x35d
     lfd f0, 0x10(r1)
     fsubs f1, f0, f1
-    bl fn_801F6C80
+    bl save_computeCrc32
     b lbl_fn_80525A0C_00001598
 lbl_fn_80525A0C_000013A4:
     lwz r3, 0x18(r30)
@@ -1531,7 +1531,7 @@ lbl_fn_80525A0C_000013FC:
     addi r4, r4, 0x35d
     lfd f0, 0x10(r1)
     fsubs f1, f0, f1
-    bl fn_801F6C80
+    bl save_computeCrc32
     b lbl_fn_80525A0C_00001598
 lbl_fn_80525A0C_0000148C:
     lwz r3, 0x18(r30)
@@ -1579,7 +1579,7 @@ lbl_fn_80525A0C_000014B0:
     addi r4, r4, 0x35d
     lfd f0, 0x10(r1)
     fsubs f1, f0, f1
-    bl fn_801F6C80
+    bl save_computeCrc32
     b lbl_fn_80525A0C_00001598
 lbl_fn_80525A0C_00001544:
     cmpwi r28, 0x0

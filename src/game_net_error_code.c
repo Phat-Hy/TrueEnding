@@ -31,17 +31,17 @@ extern void str_findChar(void);
 extern void fn_80116FC0(void);
 extern void actor_spawnActorWithId(void);
 extern void fn_801D082C(void);
-extern void fn_801F3FF8(void);
-extern void fn_801F6C80(void);
+extern void save_validateHeader(void);
+extern void save_computeCrc32(void);
 extern void fn_801F7590(void);
 extern void fn_801F837C(void);
 extern void fn_801F8598(void);
 extern void thread_findAndNotify(void);
 extern void fn_80201E78(void);
-extern void fn_80202118(void);
+extern void profile_getMetricValue(void);
 extern void fn_80202A6C(void);
 extern void perf_getMetricValue(void);
-extern void fn_80206C50(void);
+extern void assert_formatLocation(void);
 extern void event_findEntryById(void);
 extern void fn_8021175C(void);
 extern void fn_80237518(void);
@@ -223,7 +223,7 @@ lbl_fn_8051B168_000000D0:
     b lbl_fn_8051B168_00000160
 lbl_fn_8051B168_00000104:
     lwz r3, 0x4(r3)
-    bl fn_80206C50
+    bl assert_formatLocation
     mr r26, r3
     mr r3, r29
     addi r4, r24, 0x157
@@ -639,19 +639,19 @@ lbl_fn_8051B7CC_0000069C:
     bl perf_getMetricValue
     fmr f1, f31
     addi r4, r30, 0x167
-    bl fn_801F6C80
+    bl save_computeCrc32
     b lbl_fn_8051B7CC_00000728
 lbl_fn_8051B7CC_000006E4:
     lwz r3, 0x0(r3)
     cmpwi r3, 0x0
     beq lbl_fn_8051B7CC_00000728
-    bl fn_80202118
+    bl profile_getMetricValue
     cmpwi r3, 0x0
     beq lbl_fn_8051B7CC_00000728
     lwz r3, 0x50(r26)
     addi r29, r30, 0x167
     lwzx r3, r3, r28
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r31, r3
     mr r3, r29
     bl str_findChar
@@ -667,14 +667,14 @@ lbl_fn_8051B7CC_00000730:
     cmpw r27, r0
     blt lbl_fn_8051B7CC_0000069C
     lwz r3, 0x11c(r26)
-    bl fn_80202118
+    bl profile_getMetricValue
     cmpwi r3, 0x0
     beq lbl_fn_8051B7CC_0000077C
     lis r4, lbl_8075BB80@ha
     lwz r3, 0x11c(r26)
     addi r4, r4, lbl_8075BB80@l
     addi r29, r4, 0x167
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r31, r3
     mr r3, r29
     bl str_findChar
@@ -1202,7 +1202,7 @@ lbl_fn_8051B988_00000EFC:
     addi r4, r4, lbl_8075BF40@l
     li r5, 0x0
     addi r4, r4, 0x31
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x1994(r31)
     li r4, 0x1
     bl atn_Task_setActive
@@ -1261,14 +1261,14 @@ lbl_fn_8051B988_00000F38:
     addi r30, r30, lbl_8075BF40@l
     li r5, 0x0
     addi r4, r30, 0x4d
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x18e8(r31)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r31
     addi r4, r30, 0x64
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x18ec(r31)
     li r4, 0x1
     bl atn_Task_setActive
@@ -1285,7 +1285,7 @@ lbl_fn_8051B988_00000F38:
     psq_st f1, 0x0(r6), 0, 0
     stfs f2, 0x18f8(r31)
     stfs f2, 0x18fc(r31)
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x1904(r31)
     li r4, 0x1
     bl atn_Task_setActive

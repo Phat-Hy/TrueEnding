@@ -37,7 +37,7 @@ extern void fn_80721890(void);
 extern void fn_80721990(void);
 extern void fn_80722440(void);
 extern void fn_80722500(void);
-extern void fn_80724DF0(void);
+extern void net_packetDebugLog(void);
 
 /* External data declarations */
 extern u8 lbl_80734120[];
@@ -979,7 +979,7 @@ lbl_fn_800CAE64_00000AD0:
     addi r5, r29, lbl_80779618@l
     li r4, 0x242
     crclr 6
-    bl fn_80724DF0
+    bl net_packetDebugLog
 lbl_fn_800CAE64_00000AEC:
     subic. r19, r31, 0x64
     bne lbl_fn_800CAE64_00000B0C
@@ -988,7 +988,7 @@ lbl_fn_800CAE64_00000AEC:
     addi r5, r4, lbl_80779648@l
     li r4, 0x1bf
     crclr 6
-    bl fn_80724DF0
+    bl net_packetDebugLog
 lbl_fn_800CAE64_00000B0C:
     cmpwi r31, 0x0
     stw r16, 0x14(r15)
@@ -997,7 +997,7 @@ lbl_fn_800CAE64_00000B0C:
     addi r5, r29, lbl_80779618@l
     li r4, 0x242
     crclr 6
-    bl fn_80724DF0
+    bl net_packetDebugLog
 lbl_fn_800CAE64_00000B2C:
     cmpwi r19, 0x0
     bne lbl_fn_800CAE64_00000B4C
@@ -1006,7 +1006,7 @@ lbl_fn_800CAE64_00000B2C:
     addi r5, r4, lbl_80779648@l
     li r4, 0x1bf
     crclr 6
-    bl fn_80724DF0
+    bl net_packetDebugLog
 lbl_fn_800CAE64_00000B4C:
     cmpwi r27, 0x0
     stw r19, 0x18(r15)
@@ -1237,7 +1237,7 @@ lbl_fn_800CB1F4_00000E04:
     li r4, 0x242
     addi r5, r5, lbl_80779618@l
     crclr 6
-    bl fn_80724DF0
+    bl net_packetDebugLog
 lbl_fn_800CB1F4_00000E48:
     subic. r31, r31, 0x64
     bne lbl_fn_800CB1F4_00000E6C
@@ -1247,7 +1247,7 @@ lbl_fn_800CB1F4_00000E48:
     li r4, 0x1bf
     addi r5, r5, lbl_80779648@l
     crclr 6
-    bl fn_80724DF0
+    bl net_packetDebugLog
 lbl_fn_800CB1F4_00000E6C:
     lwz r4, 0x98(r29)
     addi r3, r28, 0x8

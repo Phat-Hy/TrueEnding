@@ -24,7 +24,7 @@ extern void world_getGlobalFlag(void);
 extern void world_setGlobalFlag(void);
 extern void fn_8049D1A4(void);
 extern void fn_8049E480(void);
-extern void fn_8067E23C(void);
+extern void memcmp(void);
 extern void runtime_clampDouble(void);
 extern u32 strlen(const char* str);
 
@@ -283,7 +283,7 @@ lbl_fn_804A06B4_000002E4:
     addi r5, r1, 0x38
 lbl_fn_804A06B4_000002FC:
     lwz r5, 0x0(r5)
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_804A06B4_00000330
     lwz r0, 0x30(r1)
@@ -432,7 +432,7 @@ lbl_fn_804A06B4_000004E0:
     addi r5, r1, 0x28
 lbl_fn_804A06B4_000004F8:
     lwz r5, 0x0(r5)
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_804A06B4_0000052C
     lwz r0, 0x20(r1)

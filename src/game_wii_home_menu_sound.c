@@ -25,12 +25,12 @@ extern void actor_spawnActorWithId(void);
 extern void fn_8011770C(void);
 extern void fn_8012B028(void);
 extern void fn_80134800(void);
-extern void fn_801F3FF8(void);
+extern void save_validateHeader(void);
 extern void fn_801F4AA0(void);
 extern void fn_801F4CB4(void);
 extern void saveSlot_readSummary(void);
 extern void fn_801F64D0(void);
-extern void fn_801F6C80(void);
+extern void save_computeCrc32(void);
 extern void fn_801F6E78(void);
 extern void fn_801F837C(void);
 extern void fn_801F8598(void);
@@ -874,7 +874,7 @@ lbl_fn_805716B4_00000A3C:
     stw r30, 0xb8(r28)
     stw r0, 0xc4(r28)
     stw r0, 0xc8(r28)
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x48(r28)
     li r4, 0x1
     bl atn_Task_setActive
@@ -898,7 +898,7 @@ lbl_fn_805716B4_00000A88:
     addi r4, r4, lbl_8075FFD0@l
     li r5, 0x0
     addi r4, r4, 0x4b
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x68(r28)
     li r4, 0x1
     bl atn_Task_setActive
@@ -2012,7 +2012,7 @@ lbl_fn_80572454_00001A0C:
 lbl_fn_80572454_00001A34:
     lwz r3, 0x4c(r29)
     addi r4, r30, 0xec
-    bl fn_801F6C80
+    bl save_computeCrc32
     lbz r0, 0x74(r31)
     cmpwi r0, 0x0
     beq lbl_fn_80572454_00001A58

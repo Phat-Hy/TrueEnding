@@ -8,7 +8,7 @@ extern void _savegpr_24(void);
 extern void _savegpr_27(void);
 extern void atn_Task_setActive(void);
 extern void fn_801F6C2C(void);
-extern void fn_801F6C80(void);
+extern void save_computeCrc32(void);
 extern void perf_getMetricValue(void);
 extern void fn_803DF5B4(void);
 
@@ -314,7 +314,7 @@ lbl_fn_803D164C_000003FC:
     stw r0, 0x38(r3)
     fsubs f1, f0, f31
     lwz r3, 0x3dc(r26)
-    bl fn_801F6C80
+    bl save_computeCrc32
     addi r24, r24, 0x1
     addi r26, r26, 0x4
     cmpwi r24, 0x4

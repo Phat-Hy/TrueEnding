@@ -28,7 +28,7 @@ extern void fn_8013CB68(void);
 extern void fn_80144710(void);
 extern void fn_80158BB4(void);
 extern void actor_setState(void);
-extern void fn_80206C50(void);
+extern void assert_formatLocation(void);
 extern void task_findEntryById(void);
 extern void fn_80237518(void);
 extern void fn_802375C4(void);
@@ -1606,7 +1606,7 @@ lbl_fn_80264DB4_00001494:
     subi r3, r3, 0x778b
     ori r0, r0, 0x800
     stw r0, 0x12a8(r30)
-    bl fn_80206C50
+    bl assert_formatLocation
     mr r4, r3
     lwz r3, 0x78(r3)
     lwz r4, 0x80(r4)

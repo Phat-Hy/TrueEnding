@@ -25,7 +25,7 @@ extern void fn_8061ECE0(void);
 extern void fn_8061F3D0(void);
 extern void fn_8061FBE0(void);
 extern void fn_806220A0(void);
-extern void fn_8067E23C(void);
+extern void memcmp(void);
 extern void memmove(void);
 extern u32 strlen(const char* str);
 
@@ -570,13 +570,13 @@ asm void fn_80623510(void)
     la r4, lbl_8087EA38
     li r5, 0x4
     subi r31, r31, 0x4
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_80623510_0000089C
     mr r3, r31
     la r4, lbl_8087EA40
     li r5, 0x4
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_80623510_0000089C
     cmplwi r26, 0x4000
@@ -671,7 +671,7 @@ lbl_fn_80623510_00000808:
     mr r3, r22
     mr r5, r21
     addi r4, r4, 0x1
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_80623510_0000085C
     lwz r0, 0x4(r27)
@@ -1235,7 +1235,7 @@ lbl_fn_80623DE0_00000FC8:
     lwz r3, 0x20(r1)
     mr r4, r27
     mr r5, r28
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     beq lbl_fn_80623DE0_00001018
     lwz r3, 0x20(r1)
@@ -1494,7 +1494,7 @@ lbl_fn_806241B0_00001384:
     lwz r3, 0x28(r1)
     addi r4, r1, 0x8
     lwz r5, 0x20(r1)
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     beq lbl_fn_806241B0_000013C8
     lwz r3, 0x28(r1)

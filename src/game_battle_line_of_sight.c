@@ -30,7 +30,7 @@ extern void fn_801F6D7C(void);
 extern void fn_801F791C(void);
 extern void fn_801F837C(void);
 extern void fn_80206B9C(void);
-extern void fn_80206C50(void);
+extern void assert_formatLocation(void);
 extern void fn_8020EF04(void);
 extern void fn_8020EFEC(void);
 extern void event_findEntryById(void);
@@ -962,7 +962,7 @@ lbl_fn_8040AB64_00000B38:
     stw r27, 0x17c(r28)
     lwz r3, 0x160(r28)
     lwz r3, 0x4(r3)
-    bl fn_80206C50
+    bl assert_formatLocation
     cmpwi r3, 0x0
     beq lbl_fn_8040AB64_00000B94
     lwz r0, 0x78(r3)
@@ -1222,7 +1222,7 @@ lbl_fn_8040B200_00000F10:
     li r30, 0x0
 lbl_fn_8040B200_00000F14:
     lwz r3, 0x4(r4)
-    bl fn_80206C50
+    bl assert_formatLocation
     mr r31, r3
     lwz r3, lbl_8087F3C0
     mr r4, r29
@@ -1338,7 +1338,7 @@ lbl_fn_8040B394_000010A0:
     cmpwi r3, 0x0
     beq lbl_fn_8040B394_000010DC
     mr r3, r29
-    bl fn_80206C50
+    bl assert_formatLocation
     cmpwi r3, 0x0
     beq lbl_fn_8040B394_00001150
     lwz r0, 0x78(r3)

@@ -50,9 +50,9 @@ extern void fn_801E6FC8(void);
 extern void fn_801F4728(void);
 extern void fn_801F48C8(void);
 extern void saveSlot_readSummary(void);
-extern void fn_801F6C80(void);
+extern void save_computeCrc32(void);
 extern void thread_dispatchToQueue(void);
-extern void fn_80202118(void);
+extern void profile_getMetricValue(void);
 extern void perf_getMetricValue(void);
 extern void assert_generateId(void);
 extern void fn_8020BE40(void);
@@ -174,7 +174,7 @@ asm void fn_801D3DF4(void)
     crclr 6
     bl sprintf
     lwz r3, 0xacc(r28)
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r27, r3
     addi r3, r1, 0x2f8
     bl str_findChar
@@ -193,7 +193,7 @@ asm void fn_801D3DF4(void)
     stfs f1, 0xe0(r1)
     stfs f0, 0xe4(r1)
     lwz r3, 0xacc(r28)
-    bl fn_80202118
+    bl profile_getMetricValue
     lwz r0, 0x1b98(r28)
     lis r5, lbl_8073C2EC@ha
     lwz r6, 0x50(r28)
@@ -223,7 +223,7 @@ asm void fn_801D3DF4(void)
     crclr 6
     bl sprintf
     lwz r3, 0x13c(r28)
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r26, r3
     addi r3, r1, 0x2f8
     bl str_findChar
@@ -248,7 +248,7 @@ asm void fn_801D3DF4(void)
     beq lbl_fn_801D3DF4_00000218
     lfs f1, lbl_80882AC4
     addi r4, r27, 0x430
-    bl fn_801F6C80
+    bl save_computeCrc32
     lwz r4, 0x88(r28)
     mr r3, r26
     lwz r5, 0x84(r28)
@@ -281,7 +281,7 @@ lbl_fn_801D3DF4_00000258:
     lfs f1, lbl_80882AC4
     addi r4, r4, lbl_8073C56C@l
     addi r4, r4, 0x430
-    bl fn_801F6C80
+    bl save_computeCrc32
     mr r3, r26
     li r4, 0x0
     li r5, 0x1
@@ -304,7 +304,7 @@ lbl_fn_801D3DF4_00000258:
     crclr 6
     bl sprintf
     lwz r3, 0x1cc(r28)
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r26, r3
     addi r3, r1, 0x2f8
     bl str_findChar
@@ -329,7 +329,7 @@ lbl_fn_801D3DF4_00000258:
     beq lbl_fn_801D3DF4_00000354
     lfs f1, lbl_80882AC8
     addi r4, r27, 0x430
-    bl fn_801F6C80
+    bl save_computeCrc32
     lwz r4, 0x88(r28)
     mr r3, r26
     lwz r5, 0x84(r28)
@@ -362,7 +362,7 @@ lbl_fn_801D3DF4_00000394:
     lfs f1, lbl_80882AC4
     addi r4, r4, lbl_8073C56C@l
     addi r4, r4, 0x430
-    bl fn_801F6C80
+    bl save_computeCrc32
     mr r3, r26
     li r4, 0x0
     li r5, 0x1
@@ -378,7 +378,7 @@ lbl_fn_801D3DF4_00000394:
     crclr 6
     bl sprintf
     lwz r3, 0xad8(r28)
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r26, r3
     addi r3, r1, 0x2f8
     bl str_findChar
@@ -397,7 +397,7 @@ lbl_fn_801D3DF4_00000394:
     stfs f1, 0xe0(r1)
     stfs f0, 0xe4(r1)
     lwz r3, 0xad8(r28)
-    bl fn_80202118
+    bl profile_getMetricValue
     lwz r0, 0x1ba0(r28)
     lis r5, lbl_8073C420@ha
     lwz r6, 0x50(r28)
@@ -427,7 +427,7 @@ lbl_fn_801D3DF4_00000494:
     crclr 6
     bl sprintf
     lwz r3, 0x184(r28)
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r26, r3
     addi r3, r1, 0x2f8
     bl str_findChar
@@ -467,7 +467,7 @@ lbl_fn_801D3DF4_00000494:
     crclr 6
     bl sprintf
     lwz r3, 0x184(r28)
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r26, r3
     addi r3, r1, 0x2f8
     bl str_findChar
@@ -634,11 +634,11 @@ lbl_fn_801D3DF4_00000768:
     cmpwi r29, 0x0
     beq lbl_fn_801D3DF4_00000830
     mr r3, r29
-    bl fn_80202118
+    bl profile_getMetricValue
     cmpwi r3, 0x0
     beq lbl_fn_801D3DF4_00000830
     mr r3, r29
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r26, r3
     addi r3, r1, 0x2f8
     bl str_findChar
@@ -647,7 +647,7 @@ lbl_fn_801D3DF4_00000768:
     addi r3, r1, 0xc0
     bl saveSlot_readSummary
     lwz r3, 0xb90(r28)
-    bl fn_80202118
+    bl profile_getMetricValue
     addi r4, r31, 0x396
     addi r5, r1, 0xc0
     bl fn_801F4728

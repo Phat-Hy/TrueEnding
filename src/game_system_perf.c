@@ -22,7 +22,7 @@ extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
-extern void fn_801F3FF8(void);
+extern void save_validateHeader(void);
 extern void fn_801F64D0(void);
 extern void fn_801F69A8(void);
 extern void fn_801F6A38(void);
@@ -1305,7 +1305,7 @@ lbl_fn_80203A44_000010F0:
     lwz r4, 0x2c(r1)
 lbl_fn_80203A44_000010F4:
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     li r0, 0x1
     stw r3, 0x18(r30)
     li r4, 0x1

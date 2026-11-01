@@ -14,7 +14,7 @@ extern void fn_800DBF68(void);
 extern void str_findChar(void);
 extern void fn_800DD3FC(void);
 extern void fn_8016DAB0(void);
-extern void fn_801F3FF8(void);
+extern void save_validateHeader(void);
 extern void fn_801F4CB4(void);
 extern void fn_801F5644(void);
 extern void fn_801F583C(void);
@@ -837,7 +837,7 @@ asm void fn_803E627C(void)
     mr r3, r31
     addi r4, r1, 0x8
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x262c(r31)
     li r4, 0x1
     bl atn_Task_setActive
@@ -862,7 +862,7 @@ lbl_fn_803E627C_00000A2C:
     mr r3, r31
     addi r4, r1, 0x8
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x2630(r31)
     li r4, 0x1
     bl atn_Task_setActive
@@ -887,7 +887,7 @@ lbl_fn_803E627C_00000A8C:
     mr r3, r31
     addi r4, r1, 0x8
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x2634(r31)
     li r4, 0x1
     bl atn_Task_setActive

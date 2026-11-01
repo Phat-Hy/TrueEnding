@@ -27,7 +27,7 @@ extern void PSMTXConcatArray(void);
 extern void PSMTXInverse(void);
 extern void PSMTXMultVec(void);
 extern void PSVECMag(void);
-extern void fn_8067E23C(void);
+extern void memcmp(void);
 extern void fn_8068AE24(void);
 
 /* External data declarations */
@@ -756,7 +756,7 @@ lbl_fn_80091A90_00000A40:
     mr r4, r30
     li r5, 0x30
     addi r3, r3, 0x60
-    bl fn_8067E23C
+    bl memcmp
     cntlzw r0, r3
     srwi. r0, r0, 5
     bne lbl_fn_80091A90_00000B10

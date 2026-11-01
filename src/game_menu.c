@@ -54,7 +54,7 @@ extern void fn_8010D770(void);
 extern void fn_8014FCC4(void);
 extern void fn_8014FCE8(void);
 extern void fn_80179A34(void);
-extern void fn_801F3FF8(void);
+extern void save_validateHeader(void);
 extern void thread_findAndNotify(void);
 extern void fn_80206B14(void);
 extern void fn_802072AC(void);
@@ -2222,7 +2222,7 @@ lbl_ArenaTask_constructor_000019F4:
     mr r3, r31
     add r27, r31, r28
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x2b8(r27)
     lwz r0, 0xfc(r3)
     rlwinm r0, r0, 0, 4, 2

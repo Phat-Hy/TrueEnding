@@ -21,7 +21,7 @@ extern void str_findChar(void);
 extern void atn_LoadHandle_getName(void);
 extern void fn_80473F88(void);
 extern void fn_80475DF8(void);
-extern void fn_8067E23C(void);
+extern void memcmp(void);
 extern void runtime_registerStaticObject(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
@@ -643,7 +643,7 @@ lbl_fn_80093158_00000780:
     addi r5, r1, 0x30
 lbl_fn_80093158_0000079C:
     lwz r5, 0x0(r5)
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_80093158_000007D0
     lwz r0, 0x28(r1)

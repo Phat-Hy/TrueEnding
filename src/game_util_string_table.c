@@ -5,7 +5,7 @@
 extern void _restgpr_14(void);
 extern void _savegpr_14(void);
 extern void fn_800DD3FC(void);
-extern void fn_80206C50(void);
+extern void assert_formatLocation(void);
 extern void fn_8020EFEC(void);
 extern void event_findEntryById(void);
 extern void fn_8058ECD8(void);
@@ -19,7 +19,7 @@ extern void fn_8058FEC8(void);
 extern void fn_8058FED4(void);
 extern void fn_8058FEE8(void);
 extern void fn_8058FEF4(void);
-extern void fn_8058FF04(void);
+extern void hash_getHashValue(void);
 extern void fn_8058FF0C(void);
 extern void fn_80593030(void);
 extern void wcslen(void);
@@ -1079,10 +1079,10 @@ lbl_fn_8059185C_00000F38:
     bl fn_8058FEF4
 lbl_fn_8059185C_00000F40:
     addi r3, r1, 0x38
-    bl fn_8058FF04
+    bl hash_getHashValue
     mr r30, r3
     addi r3, r1, 0x40
-    bl fn_8058FF04
+    bl hash_getHashValue
     mr r4, r3
     mr r3, r29
     mr r5, r30
@@ -1098,10 +1098,10 @@ lbl_fn_8059185C_00000F6C:
     cmpwi r3, 0x0
     beq lbl_fn_8059185C_00000FB4
     addi r3, r1, 0x38
-    bl fn_8058FF04
+    bl hash_getHashValue
     mr r30, r3
     addi r3, r1, 0x3c
-    bl fn_8058FF04
+    bl hash_getHashValue
     mr r4, r3
     mr r3, r29
     mr r5, r30
@@ -1115,10 +1115,10 @@ lbl_fn_8059185C_00000FB4:
     cmpwi r3, 0x0
     beq lbl_fn_8059185C_00001090
     addi r3, r1, 0x3c
-    bl fn_8058FF04
+    bl hash_getHashValue
     mr r30, r3
     addi r3, r1, 0x40
-    bl fn_8058FF04
+    bl hash_getHashValue
     mr r4, r30
     bl fn_8058ED2C
     addi r3, r1, 0x40
@@ -1129,10 +1129,10 @@ lbl_fn_8059185C_00000FF0:
     bl fn_8058FEF4
 lbl_fn_8059185C_00000FF8:
     addi r3, r1, 0x38
-    bl fn_8058FF04
+    bl hash_getHashValue
     mr r30, r3
     addi r3, r1, 0x40
-    bl fn_8058FF04
+    bl hash_getHashValue
     mr r4, r3
     mr r3, r29
     mr r5, r30
@@ -1141,11 +1141,11 @@ lbl_fn_8059185C_00000FF8:
     bne lbl_fn_8059185C_00000FF0
 lbl_fn_8059185C_00001024:
     addi r3, r1, 0x38
-    bl fn_8058FF04
+    bl hash_getHashValue
     mr r30, r3
     addi r3, r1, 0x3c
     bl fn_8058FF0C
-    bl fn_8058FF04
+    bl hash_getHashValue
     mr r4, r3
     mr r3, r29
     mr r5, r30
@@ -1158,10 +1158,10 @@ lbl_fn_8059185C_00001024:
     cmpwi r3, 0x0
     bne lbl_fn_8059185C_00001090
     addi r3, r1, 0x3c
-    bl fn_8058FF04
+    bl hash_getHashValue
     mr r30, r3
     addi r3, r1, 0x40
-    bl fn_8058FF04
+    bl hash_getHashValue
     mr r4, r30
     bl fn_8058ED2C
     addi r3, r1, 0x40
@@ -1174,10 +1174,10 @@ lbl_fn_8059185C_00001090:
     cmpwi r3, 0x0
     beq lbl_fn_8059185C_00001248
     addi r3, r1, 0x38
-    bl fn_8058FF04
+    bl hash_getHashValue
     mr r30, r3
     addi r3, r1, 0x40
-    bl fn_8058FF04
+    bl hash_getHashValue
     mr r4, r30
     bl fn_8058ED2C
     addi r3, r1, 0x40
@@ -1187,10 +1187,10 @@ lbl_fn_8059185C_00001090:
     bl fn_8058FEE8
     addi r3, r1, 0x3c
     bl fn_8058FF0C
-    bl fn_8058FF04
+    bl hash_getHashValue
     mr r30, r3
     mr r3, r27
-    bl fn_8058FF04
+    bl hash_getHashValue
     mr r4, r3
     mr r3, r29
     mr r5, r30
@@ -1208,10 +1208,10 @@ lbl_fn_8059185C_00001110:
     cmpwi r3, 0x0
     beq lbl_fn_8059185C_00001150
     addi r3, r1, 0x40
-    bl fn_8058FF04
+    bl hash_getHashValue
     mr r30, r3
     mr r3, r27
-    bl fn_8058FF04
+    bl hash_getHashValue
     mr r4, r3
     mr r3, r29
     mr r5, r30
@@ -1225,10 +1225,10 @@ lbl_fn_8059185C_00001150:
     cmpwi r3, 0x0
     beq lbl_fn_8059185C_00001180
     addi r3, r1, 0x3c
-    bl fn_8058FF04
+    bl hash_getHashValue
     mr r30, r3
     addi r3, r1, 0x40
-    bl fn_8058FF04
+    bl hash_getHashValue
     mr r4, r30
     bl fn_8058ED2C
 lbl_fn_8059185C_00001180:
@@ -1243,10 +1243,10 @@ lbl_fn_8059185C_00001198:
     bl fn_8058FEF4
 lbl_fn_8059185C_000011A0:
     addi r3, r1, 0x40
-    bl fn_8058FF04
+    bl hash_getHashValue
     mr r30, r3
     mr r3, r27
-    bl fn_8058FF04
+    bl hash_getHashValue
     mr r4, r3
     mr r3, r29
     mr r5, r30
@@ -1256,10 +1256,10 @@ lbl_fn_8059185C_000011A0:
 lbl_fn_8059185C_000011CC:
     addi r3, r1, 0x3c
     bl fn_8058FF0C
-    bl fn_8058FF04
+    bl hash_getHashValue
     mr r30, r3
     mr r3, r27
-    bl fn_8058FF04
+    bl hash_getHashValue
     mr r4, r3
     mr r3, r29
     mr r5, r30
@@ -1272,10 +1272,10 @@ lbl_fn_8059185C_000011CC:
     cmpwi r3, 0x0
     bne lbl_fn_8059185C_00001238
     addi r3, r1, 0x3c
-    bl fn_8058FF04
+    bl hash_getHashValue
     mr r30, r3
     addi r3, r1, 0x40
-    bl fn_8058FF04
+    bl hash_getHashValue
     mr r4, r30
     bl fn_8058ED2C
     addi r3, r1, 0x40
@@ -1341,10 +1341,10 @@ asm void fn_80591D8C(void)
     stw r30, 0x118(r1)
     mr r30, r5
     stw r29, 0x114(r1)
-    bl fn_80206C50
+    bl assert_formatLocation
     mr r29, r3
     lwz r3, 0x0(r30)
-    bl fn_80206C50
+    bl assert_formatLocation
     cmpwi r29, 0x0
     beq lbl_fn_80591D8C_0000132C
     cmpwi r3, 0x0
@@ -1560,10 +1560,10 @@ lbl_fn_80591F38_00001614:
     bl fn_8058FEF4
 lbl_fn_80591F38_0000161C:
     addi r3, r1, 0x38
-    bl fn_8058FF04
+    bl hash_getHashValue
     mr r30, r3
     addi r3, r1, 0x40
-    bl fn_8058FF04
+    bl hash_getHashValue
     mr r4, r3
     mr r3, r29
     mr r5, r30
@@ -1579,10 +1579,10 @@ lbl_fn_80591F38_00001648:
     cmpwi r3, 0x0
     beq lbl_fn_80591F38_00001690
     addi r3, r1, 0x38
-    bl fn_8058FF04
+    bl hash_getHashValue
     mr r30, r3
     addi r3, r1, 0x3c
-    bl fn_8058FF04
+    bl hash_getHashValue
     mr r4, r3
     mr r3, r29
     mr r5, r30
@@ -1596,10 +1596,10 @@ lbl_fn_80591F38_00001690:
     cmpwi r3, 0x0
     beq lbl_fn_80591F38_0000176C
     addi r3, r1, 0x3c
-    bl fn_8058FF04
+    bl hash_getHashValue
     mr r30, r3
     addi r3, r1, 0x40
-    bl fn_8058FF04
+    bl hash_getHashValue
     mr r4, r30
     bl fn_8058ED2C
     addi r3, r1, 0x40
@@ -1610,10 +1610,10 @@ lbl_fn_80591F38_000016CC:
     bl fn_8058FEF4
 lbl_fn_80591F38_000016D4:
     addi r3, r1, 0x38
-    bl fn_8058FF04
+    bl hash_getHashValue
     mr r30, r3
     addi r3, r1, 0x40
-    bl fn_8058FF04
+    bl hash_getHashValue
     mr r4, r3
     mr r3, r29
     mr r5, r30
@@ -1622,11 +1622,11 @@ lbl_fn_80591F38_000016D4:
     bne lbl_fn_80591F38_000016CC
 lbl_fn_80591F38_00001700:
     addi r3, r1, 0x38
-    bl fn_8058FF04
+    bl hash_getHashValue
     mr r30, r3
     addi r3, r1, 0x3c
     bl fn_8058FF0C
-    bl fn_8058FF04
+    bl hash_getHashValue
     mr r4, r3
     mr r3, r29
     mr r5, r30
@@ -1639,10 +1639,10 @@ lbl_fn_80591F38_00001700:
     cmpwi r3, 0x0
     bne lbl_fn_80591F38_0000176C
     addi r3, r1, 0x3c
-    bl fn_8058FF04
+    bl hash_getHashValue
     mr r30, r3
     addi r3, r1, 0x40
-    bl fn_8058FF04
+    bl hash_getHashValue
     mr r4, r30
     bl fn_8058ED2C
     addi r3, r1, 0x40
@@ -1655,10 +1655,10 @@ lbl_fn_80591F38_0000176C:
     cmpwi r3, 0x0
     beq lbl_fn_80591F38_00001924
     addi r3, r1, 0x38
-    bl fn_8058FF04
+    bl hash_getHashValue
     mr r30, r3
     addi r3, r1, 0x40
-    bl fn_8058FF04
+    bl hash_getHashValue
     mr r4, r30
     bl fn_8058ED2C
     addi r3, r1, 0x40
@@ -1668,10 +1668,10 @@ lbl_fn_80591F38_0000176C:
     bl fn_8058FEE8
     addi r3, r1, 0x3c
     bl fn_8058FF0C
-    bl fn_8058FF04
+    bl hash_getHashValue
     mr r30, r3
     mr r3, r27
-    bl fn_8058FF04
+    bl hash_getHashValue
     mr r4, r3
     mr r3, r29
     mr r5, r30
@@ -1689,10 +1689,10 @@ lbl_fn_80591F38_000017EC:
     cmpwi r3, 0x0
     beq lbl_fn_80591F38_0000182C
     addi r3, r1, 0x40
-    bl fn_8058FF04
+    bl hash_getHashValue
     mr r30, r3
     mr r3, r27
-    bl fn_8058FF04
+    bl hash_getHashValue
     mr r4, r3
     mr r3, r29
     mr r5, r30
@@ -1706,10 +1706,10 @@ lbl_fn_80591F38_0000182C:
     cmpwi r3, 0x0
     beq lbl_fn_80591F38_0000185C
     addi r3, r1, 0x3c
-    bl fn_8058FF04
+    bl hash_getHashValue
     mr r30, r3
     addi r3, r1, 0x40
-    bl fn_8058FF04
+    bl hash_getHashValue
     mr r4, r30
     bl fn_8058ED2C
 lbl_fn_80591F38_0000185C:
@@ -1724,10 +1724,10 @@ lbl_fn_80591F38_00001874:
     bl fn_8058FEF4
 lbl_fn_80591F38_0000187C:
     addi r3, r1, 0x40
-    bl fn_8058FF04
+    bl hash_getHashValue
     mr r30, r3
     mr r3, r27
-    bl fn_8058FF04
+    bl hash_getHashValue
     mr r4, r3
     mr r3, r29
     mr r5, r30
@@ -1737,10 +1737,10 @@ lbl_fn_80591F38_0000187C:
 lbl_fn_80591F38_000018A8:
     addi r3, r1, 0x3c
     bl fn_8058FF0C
-    bl fn_8058FF04
+    bl hash_getHashValue
     mr r30, r3
     mr r3, r27
-    bl fn_8058FF04
+    bl hash_getHashValue
     mr r4, r3
     mr r3, r29
     mr r5, r30
@@ -1753,10 +1753,10 @@ lbl_fn_80591F38_000018A8:
     cmpwi r3, 0x0
     bne lbl_fn_80591F38_00001914
     addi r3, r1, 0x3c
-    bl fn_8058FF04
+    bl hash_getHashValue
     mr r30, r3
     addi r3, r1, 0x40
-    bl fn_8058FF04
+    bl hash_getHashValue
     mr r4, r30
     bl fn_8058ED2C
     addi r3, r1, 0x40
@@ -1823,10 +1823,10 @@ asm void fn_80592468(void)
     lwz r16, 0x0(r5)
     lwz r15, 0x0(r3)
     lwz r3, 0x0(r16)
-    bl fn_80206C50
+    bl assert_formatLocation
     mr r14, r3
     lwz r3, 0x0(r15)
-    bl fn_80206C50
+    bl assert_formatLocation
     cmpwi r14, 0x0
     beq lbl_fn_80592468_00001A0C
     cmpwi r3, 0x0
@@ -1928,10 +1928,10 @@ lbl_fn_80592468_00001B50:
     lwz r15, 0x0(r30)
     srwi r31, r0, 5
     lwz r3, 0x0(r16)
-    bl fn_80206C50
+    bl assert_formatLocation
     mr r14, r3
     lwz r3, 0x0(r15)
-    bl fn_80206C50
+    bl assert_formatLocation
     cmpwi r14, 0x0
     beq lbl_fn_80592468_00001B8C
     cmpwi r3, 0x0
@@ -2154,10 +2154,10 @@ lbl_fn_80592468_00001EB4:
     lwz r16, 0x0(r29)
     lwz r15, 0x0(r28)
     lwz r3, 0x0(r16)
-    bl fn_80206C50
+    bl assert_formatLocation
     mr r14, r3
     lwz r3, 0x0(r15)
-    bl fn_80206C50
+    bl assert_formatLocation
     cmpwi r14, 0x0
     beq lbl_fn_80592468_00001EE8
     cmpwi r3, 0x0

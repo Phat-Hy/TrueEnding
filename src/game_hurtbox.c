@@ -9,7 +9,7 @@ extern void _savegpr_27(void);
 extern void fn_800DD3FC(void);
 extern void fn_800FFE68(void);
 extern void fn_8016F3D0(void);
-extern void fn_80206C50(void);
+extern void assert_formatLocation(void);
 extern void event_findEntryById(void);
 extern void task_findEntryById(void);
 extern void fn_8021AF50(void);
@@ -919,7 +919,7 @@ lbl_fn_801092C8_00000B40:
     b lbl_fn_801092C8_00000F44
     mr r3, r28
     li r31, 0x1
-    bl fn_80206C50
+    bl assert_formatLocation
     cmpwi r3, 0x0
     beq lbl_fn_801092C8_00000BCC
     lwz r3, 0xb8(r3)

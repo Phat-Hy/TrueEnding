@@ -72,7 +72,7 @@ extern void fn_805393A8(void);
 extern void fn_8053A2EC(void);
 extern void fn_80564060(void);
 extern void fn_80566014(void);
-extern void fn_8067E23C(void);
+extern void memcmp(void);
 extern void printf(void);
 extern void atoi(void);
 extern void abort(void);
@@ -899,7 +899,7 @@ lbl_sys_copyString_00000A88:
     addi r5, r1, 0xc
 lbl_sys_copyString_00000AA4:
     lwz r5, 0x0(r5)
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_sys_copyString_00000AD8
     lwz r0, 0x14(r1)

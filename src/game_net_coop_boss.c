@@ -39,7 +39,7 @@ extern void fn_800D5908(void);
 extern void atn_LH_Texture_update(void);
 extern void str_findChar(void);
 extern void fn_800DD3FC(void);
-extern void fn_801F3FF8(void);
+extern void save_validateHeader(void);
 extern void event_findEntryById(void);
 extern void world_getGlobalFlag(void);
 extern void atn_LoadHandle_constructor(void);
@@ -1389,7 +1389,7 @@ lbl_fn_804A7F18_00001074:
     mr r3, r30
     addi r4, r31, 0x11c
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x5d8(r30)
     li r4, 0x1
     bl atn_Task_setActive

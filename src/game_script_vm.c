@@ -32,7 +32,7 @@ extern void fn_800E114C(void);
 extern void fn_800E19AC(void);
 extern void fn_800E1D5C(void);
 extern void fn_800E2778(void);
-extern void fn_801F3FF8(void);
+extern void save_validateHeader(void);
 extern void task_findEntryById(void);
 extern void fn_80237518(void);
 extern void fn_802375C4(void);
@@ -2287,7 +2287,7 @@ lbl_fn_80244228_00001CF0:
     mr r3, r28
     addi r4, r29, 0x91
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x15bc(r28)
     li r4, 0x1
     bl atn_Task_setActive

@@ -57,7 +57,7 @@ extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
-extern void fn_8067E23C(void);
+extern void memcmp(void);
 extern void strcmp(void);
 extern void atoi(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -1819,7 +1819,7 @@ lbl_fn_80363284_00001730:
     addi r5, r1, 0x18
 lbl_fn_80363284_0000174C:
     lwz r5, 0x0(r5)
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_80363284_00001780
     lwz r0, 0x10(r1)

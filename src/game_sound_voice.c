@@ -30,12 +30,12 @@ extern void fn_801E7EA8(void);
 extern void fn_801F45F4(void);
 extern void fn_801F48C8(void);
 extern void saveSlot_readSummary(void);
-extern void fn_801F6C80(void);
+extern void save_computeCrc32(void);
 extern void fn_801F6E78(void);
 extern void fn_801F7590(void);
 extern void fn_801F7DF0(void);
 extern void fn_801F8830(void);
-extern void fn_80202118(void);
+extern void profile_getMetricValue(void);
 extern void perf_getMetricValue(void);
 extern void assert_generateId(void);
 extern void fn_802091E8(void);
@@ -114,13 +114,13 @@ asm void fn_801D7354(void)
     mr r22, r4
     beq lbl_fn_801D7354_000001EC
     mr r3, r22
-    bl fn_80202118
+    bl profile_getMetricValue
     cmpwi r3, 0x0
     bne lbl_fn_801D7354_00000040
     b lbl_fn_801D7354_000001EC
 lbl_fn_801D7354_00000040:
     mr r3, r22
-    bl fn_80202118
+    bl profile_getMetricValue
     lfs f0, lbl_80882AD8
     mr r24, r3
     stfs f0, 0x1c(r1)
@@ -212,7 +212,7 @@ lbl_fn_801D7354_0000017C:
     stw r0, 0x74(r1)
     lfd f0, 0x70(r1)
     fsubs f1, f0, f31
-    bl fn_801F6C80
+    bl save_computeCrc32
     lwz r3, 0x4(r25)
     bl perf_getMetricValue
     lwz r0, 0xc(r25)
@@ -222,7 +222,7 @@ lbl_fn_801D7354_0000017C:
     stw r0, 0x7c(r1)
     lfd f0, 0x78(r1)
     fsubs f1, f0, f31
-    bl fn_801F6C80
+    bl save_computeCrc32
 lbl_fn_801D7354_000001CC:
     addi r22, r22, 0x1
     addi r25, r25, 0x10
@@ -261,7 +261,7 @@ asm void fn_801D7560(void)
     cmpwi r7, 0x0
     beq lbl_fn_801D7560_00000434
     mr r3, r26
-    bl fn_80202118
+    bl profile_getMetricValue
     cmpwi r3, 0x0
     bne lbl_fn_801D7560_00000258
     b lbl_fn_801D7560_00000434
@@ -289,7 +289,7 @@ lbl_fn_801D7560_00000258:
     crclr 6
     bl sprintf
     mr r3, r26
-    bl fn_80202118
+    bl profile_getMetricValue
     lbz r4, 0x231(r27)
     mr r27, r3
     subic. r26, r4, 0x1
@@ -381,14 +381,14 @@ lbl_fn_801D7560_00000370:
     bl perf_getMetricValue
     lfs f1, lbl_80882AD0
     addi r4, r29, 0x44
-    bl fn_801F6C80
+    bl save_computeCrc32
     b lbl_fn_801D7560_00000434
 lbl_fn_801D7560_00000420:
     lwz r3, 0x1378(r30)
     bl perf_getMetricValue
     lfs f1, lbl_80882AD8
     addi r4, r29, 0x44
-    bl fn_801F6C80
+    bl save_computeCrc32
 lbl_fn_801D7560_00000434:
     addi r11, r1, 0xc0
     bl _restgpr_26
@@ -568,7 +568,7 @@ lbl_fn_801D77A4_00000610:
     bl perf_getMetricValue
     lfs f1, lbl_80882AD0
     addi r4, r25, 0x44
-    bl fn_801F6C80
+    bl save_computeCrc32
     mr r3, r22
     bl perf_getMetricValue
     lfs f4, 0x4(r26)
@@ -588,7 +588,7 @@ lbl_fn_801D77A4_00000700:
     bl perf_getMetricValue
     lfs f1, lbl_80882AD8
     addi r4, r25, 0x44
-    bl fn_801F6C80
+    bl save_computeCrc32
 lbl_fn_801D77A4_00000714:
     addi r23, r23, 0x1
     addi r24, r24, 0x4
@@ -711,7 +711,7 @@ lbl_fn_801D7AC0_000008B8:
     psq_l f2, 0x8(r26), 0, 0
     psq_st f1, 0x0(r25), 0, 0
     psq_st f2, 0x8(r25), 0, 0
-    bl fn_80202118
+    bl profile_getMetricValue
     lis r4, lbl_8073CA28@ha
     mr r5, r25
     addi r25, r4, lbl_8073CA28@l
@@ -723,7 +723,7 @@ lbl_fn_801D7AC0_000008B8:
     mr r3, r31
     psq_st f1, 0x0(r24), 0, 0
     psq_st f2, 0x8(r24), 0, 0
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r5, r24
     addi r4, r25, 0x68
     bl fn_801F48C8
@@ -757,7 +757,7 @@ lbl_fn_801D7AC0_0000092C:
     crclr 6
     bl sprintf
     mr r3, r31
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r24, r3
     addi r3, r1, 0x78
     bl str_findChar
@@ -782,7 +782,7 @@ lbl_fn_801D7AC0_0000092C:
     bl perf_getMetricValue
     lfs f1, lbl_80882AD0
     addi r4, r25, 0x44
-    bl fn_801F6C80
+    bl save_computeCrc32
     mr r3, r21
     bl perf_getMetricValue
     lfs f4, 0x4(r26)
@@ -802,7 +802,7 @@ lbl_fn_801D7AC0_00000A28:
     bl perf_getMetricValue
     lfs f1, lbl_80882AD8
     addi r4, r25, 0x44
-    bl fn_801F6C80
+    bl save_computeCrc32
 lbl_fn_801D7AC0_00000A3C:
     addi r22, r22, 0x1
     addi r23, r23, 0x4

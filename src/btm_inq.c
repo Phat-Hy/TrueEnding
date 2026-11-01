@@ -13,9 +13,9 @@ extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void scapi_initContext(void);
 extern void fn_80626C60(void);
-extern void fn_80626D50(void);
+extern void scapi_cleanupContext(void);
 extern void fn_80627B30(void);
-extern void fn_80629810(void);
+extern void bta_sys_logEvent(void);
 extern void bta_sys_log(void);
 extern void fn_80629850(void);
 extern void fn_80629870(void);
@@ -55,7 +55,7 @@ extern void fn_8063E5FC(void);
 extern void fn_8063ECC4(void);
 extern void fn_8063ECF4(void);
 extern void fn_8063ED24(void);
-extern void fn_8067E23C(void);
+extern void memcmp(void);
 
 /* External data declarations */
 extern u8 lbl_80764F50[];
@@ -613,7 +613,7 @@ asm void fn_80634250(void)
     lis r4, lbl_807B46E0@ha
     addi r3, r3, 0x2
     addi r4, r4, lbl_807B46E0@l
-    bl fn_80629810
+    bl bta_sys_logEvent
 lbl_fn_80634250_0000065C:
     bl fn_80632414
     clrlwi. r0, r3, 24
@@ -653,7 +653,7 @@ lbl_fn_80634250_000006C8:
     stw r0, 0x16c0(r30)
     cmpwi r3, 0x0
     beq lbl_fn_80634250_000006F4
-    bl fn_80626D50
+    bl scapi_cleanupContext
     li r0, 0x0
     stw r0, 0x16dc(r31)
 lbl_fn_80634250_000006F4:
@@ -835,7 +835,7 @@ lbl_fn_8063450C_00000944:
     mr r4, r27
     addi r3, r31, 0xa
     li r5, 0x6
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_8063450C_0000096C
     b lbl_fn_8063450C_00000980
@@ -880,7 +880,7 @@ asm void fn_806345F4(void)
     lis r4, lbl_807B4774@ha
     addi r3, r3, 0x2
     addi r4, r4, lbl_807B4774@l
-    bl fn_80629810
+    bl bta_sys_logEvent
 lbl_fn_806345F4_000009F4:
     lbz r0, 0x16ae(r31)
     clrlwi. r0, r0, 31
@@ -938,7 +938,7 @@ lbl_fn_8063466C_00000A98:
     mr r4, r29
     addi r3, r30, 0xa
     li r5, 0x6
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_8063466C_00000AC4
     addi r3, r30, 0x8
@@ -1148,7 +1148,7 @@ lbl_fn_80634920_00000D40:
     mr r4, r27
     addi r3, r28, 0xa
     li r5, 0x6
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_80634920_00000D8C
 lbl_fn_80634920_00000D6C:
@@ -1269,7 +1269,7 @@ lbl_fn_806349F0_00000EEC:
     lwz r3, 0x16dc(r31)
     cmpwi r3, 0x0
     beq lbl_fn_806349F0_00000F1C
-    bl fn_80626D50
+    bl scapi_cleanupContext
     li r0, 0x0
     stw r0, 0x16dc(r31)
 lbl_fn_806349F0_00000F1C:
@@ -1320,7 +1320,7 @@ lbl_fn_80634B8C_00000FA0:
     mr r4, r27
     addi r3, r29, 0x4
     li r5, 0x6
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_80634B8C_00000FD0
     lwz r3, 0x0(r29)
@@ -1623,7 +1623,7 @@ lbl_fn_80634E50_000013A8:
     lwz r3, 0x16dc(r30)
     cmpwi r3, 0x0
     beq lbl_fn_80634E50_000013C8
-    bl fn_80626D50
+    bl scapi_cleanupContext
     li r0, 0x0
     stw r0, 0x16dc(r30)
 lbl_fn_80634E50_000013C8:
@@ -1744,7 +1744,7 @@ lbl_fn_80635070_00001554:
     addi r3, r25, 0xa
     addi r4, r1, 0xc
     li r5, 0x6
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_80635070_0000157C
     b lbl_fn_80635070_00001590
@@ -1876,7 +1876,7 @@ lbl_fn_806352E8_00001700:
     stb r30, 0x1847(r29)
     stw r30, 0x16b0(r29)
     beq lbl_fn_806352E8_00001740
-    bl fn_80626D50
+    bl scapi_cleanupContext
     stw r30, 0x16dc(r31)
 lbl_fn_806352E8_00001740:
     lis r3, lbl_80820018@ha
@@ -1946,7 +1946,7 @@ lbl_fn_806353EC_00001804:
     mr r3, r23
     addi r4, r31, 0x16a8
     li r5, 0x6
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_806353EC_00001840
     li r30, 0x0
@@ -2251,7 +2251,7 @@ lbl_fn_806357EC_00001C08:
     mr r4, r26
     addi r3, r30, 0x8
     li r5, 0x6
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     beq lbl_fn_806357EC_00001C3C
 lbl_fn_806357EC_00001C2C:
@@ -2375,7 +2375,7 @@ lbl_fn_806359BC_00001DB8:
     mr r4, r28
     addi r3, r30, 0x8
     li r5, 0x6
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     beq lbl_fn_806359BC_00001DEC
 lbl_fn_806359BC_00001DDC:
@@ -2877,7 +2877,7 @@ lbl_fn_80635EB8_00002474:
     cmplwi r0, 0x4
     bne lbl_fn_80635EB8_00002490
     mr r3, r31
-    bl fn_80626D50
+    bl scapi_cleanupContext
 lbl_fn_80635EB8_00002490:
     li r3, 0x1
 lbl_fn_80635EB8_00002494:

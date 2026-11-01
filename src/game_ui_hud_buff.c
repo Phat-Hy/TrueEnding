@@ -39,7 +39,7 @@ extern void fn_801E9218(void);
 extern void saveSlot_readSummary(void);
 extern void fn_801F6E78(void);
 extern void fn_80201E78(void);
-extern void fn_80202118(void);
+extern void profile_getMetricValue(void);
 extern void fn_80202A6C(void);
 extern void perf_getMetricValue(void);
 extern void sound_initGlobalInstances(void);
@@ -1728,7 +1728,7 @@ lbl_fn_801CDA00_00001620:
     add r26, r3, r0
     beq lbl_fn_801CDA00_000018A4
     mr r3, r25
-    bl fn_80202118
+    bl profile_getMetricValue
     cmpwi r3, 0x0
     beq lbl_fn_801CDA00_000018A4
     lfs f1, lbl_808829C8
@@ -1786,7 +1786,7 @@ lbl_fn_801CDA00_00001620:
     crclr 6
     bl sprintf
     mr r3, r25
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r28, r3
     addi r3, r1, 0x90
     bl str_findChar
@@ -1847,7 +1847,7 @@ lbl_fn_801CDA00_000017C0:
     crclr 6
     bl sprintf
     mr r3, r25
-    bl fn_80202118
+    bl profile_getMetricValue
     mr r28, r3
     addi r3, r1, 0x90
     bl str_findChar

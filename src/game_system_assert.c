@@ -130,7 +130,7 @@ void fn_80206B68(void);
 void fn_80206B70(void);
 void fn_80206B9C(void);
 void assert_generateId(void);
-void fn_80206C50(void);
+void assert_formatLocation(void);
 void fn_80206D18(void);
 void weaponEffect_loadCSV(void);
 void fn_80207250(void);
@@ -455,7 +455,7 @@ lbl_assert_generateId_00000398:
     blr
 }
 
-asm void fn_80206C50(void)
+asm void assert_formatLocation(void)
 {
     nofralloc
     subis r4, r3, 0x2
@@ -493,22 +493,22 @@ asm void fn_80206C50(void)
     add r4, r4, r3
     mtctr r12
     cmplwi r12, 0x0
-    ble lbl_fn_80206C50_000004B4
-lbl_fn_80206C50_00000484:
+    ble lbl_assert_formatLocation_000004B4
+lbl_assert_formatLocation_00000484:
     lwz r3, 0x78(r11)
     cmpw r5, r3
-    bne lbl_fn_80206C50_000004A8
+    bne lbl_assert_formatLocation_000004A8
     lwz r3, 0x80(r11)
     cmpw r4, r3
-    bne lbl_fn_80206C50_000004A8
+    bne lbl_assert_formatLocation_000004A8
     mulli r3, r10, 0x130
     add r3, r0, r3
     blr
-lbl_fn_80206C50_000004A8:
+lbl_assert_formatLocation_000004A8:
     addi r11, r11, 0x130
     addi r10, r10, 0x1
-    bdnz lbl_fn_80206C50_00000484
-lbl_fn_80206C50_000004B4:
+    bdnz lbl_assert_formatLocation_00000484
+lbl_assert_formatLocation_000004B4:
     li r3, 0x0
     blr
 }

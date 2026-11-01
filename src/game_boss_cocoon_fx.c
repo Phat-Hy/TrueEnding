@@ -32,13 +32,13 @@ extern void fn_800DC1DC(void);
 extern void str_findChar(void);
 extern void fn_800DFB40(void);
 extern void fn_800E0908(void);
-extern void fn_801F3FF8(void);
+extern void save_validateHeader(void);
 extern void fn_801F4728(void);
 extern void fn_801F4CB4(void);
 extern void fn_801F4DDC(void);
 extern void fn_801F4E30(void);
 extern void saveSlot_readSummary(void);
-extern void fn_801F6C80(void);
+extern void save_computeCrc32(void);
 extern void fn_801F6E78(void);
 extern void fn_801F837C(void);
 extern void thread_findAndNotify(void);
@@ -265,7 +265,7 @@ lbl_fn_80469AB8_000001E0:
     lwz r3, 0x80(r31)
     addi r4, r30, 0x13c
     lfs f1, lbl_80886EA8
-    bl fn_801F6C80
+    bl save_computeCrc32
     lwz r3, 0x80(r31)
     li r6, 0xa
     lwz r0, 0x38(r3)
@@ -786,7 +786,7 @@ lbl_fn_8046A20C_00000964:
 lbl_fn_8046A20C_0000098C:
     lfs f1, lbl_80886E88
 lbl_fn_8046A20C_00000990:
-    bl fn_801F6C80
+    bl save_computeCrc32
     lwz r3, 0x58(r27)
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 30, 28
@@ -845,7 +845,7 @@ asm void fn_8046A370(void)
     stw r0, 0x94(r29)
     stw r0, 0x98(r29)
     stw r0, 0x9c(r29)
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x50(r29)
     li r4, 0x1
     bl atn_Task_setActive
@@ -858,14 +858,14 @@ lbl_fn_8046A370_00000A84:
     mr r3, r29
     add r26, r29, r27
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x54(r26)
     li r4, 0x1
     bl atn_Task_setActive
     lwz r4, 0x0(r28)
     mr r3, r29
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x60(r26)
     li r4, 0x1
     bl atn_Task_setActive

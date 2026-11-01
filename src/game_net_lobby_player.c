@@ -59,7 +59,7 @@ extern void fn_805B6C60(void);
 extern void fn_80616250(void);
 extern void fn_806163C0(void);
 extern void fn_806163E0(void);
-extern void fn_8067E23C(void);
+extern void memcmp(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
 
@@ -1707,7 +1707,7 @@ lbl_fn_8049E480_00001568:
     addi r5, r1, 0x4c
 lbl_fn_8049E480_00001580:
     lwz r5, 0x0(r5)
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_8049E480_000015B4
     lwz r0, 0x44(r1)
@@ -1847,7 +1847,7 @@ lbl_fn_8049E480_00001748:
     addi r5, r1, 0x3c
 lbl_fn_8049E480_00001760:
     lwz r5, 0x0(r5)
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_8049E480_00001794
     lwz r0, 0x34(r1)
@@ -1986,7 +1986,7 @@ lbl_fn_8049E480_00001924:
     addi r5, r1, 0x2c
 lbl_fn_8049E480_0000193C:
     lwz r5, 0x0(r5)
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_8049E480_00001970
     lwz r0, 0x24(r1)

@@ -30,7 +30,7 @@ extern void atn_Task_setActive(void);
 extern void str_findChar(void);
 extern void magic_dispatchActionCommand(void);
 extern void boss_updatePhaseState(void);
-extern void fn_801F3FF8(void);
+extern void save_validateHeader(void);
 extern void fn_801FEC74(void);
 extern void thread_findAndNotify(void);
 extern void fn_80204230(void);
@@ -1385,7 +1385,7 @@ lbl_fn_8053F81C_00001144:
     addi r4, r4, lbl_8075E148@l
     li r5, 0x0
     addi r4, r4, 0x52
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x2c0(r24)
     li r4, 0x1
     bl atn_Task_setActive

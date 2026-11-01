@@ -6,7 +6,7 @@ extern void _restgpr_18(void);
 extern void _restgpr_23(void);
 extern void _savegpr_18(void);
 extern void _savegpr_23(void);
-extern void fn_8067E23C(void);
+extern void memcmp(void);
 extern void snprintf(void);
 extern void fn_806A420C(void);
 extern void fn_806A4260(void);
@@ -771,7 +771,7 @@ lbl_fn_806FB750_00000940:
     addi r3, r25, 0x0
     addi r4, r26, lbl_807C5D00@l
     li r5, 0x6
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     beq lbl_fn_806FB750_00000960
     li r3, 0x1

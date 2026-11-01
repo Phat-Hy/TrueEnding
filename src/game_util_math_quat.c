@@ -25,7 +25,7 @@ extern void actor_spawnActorWithId(void);
 extern void fn_8011728C(void);
 extern void fn_801F4CB4(void);
 extern void saveSlot_readSummary(void);
-extern void fn_801F6C80(void);
+extern void save_computeCrc32(void);
 extern void fn_801F6E78(void);
 extern void fn_801F7590(void);
 extern void fn_801F7DF0(void);
@@ -35,7 +35,7 @@ extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
 extern void thread_dispatchToQueue(void);
 extern void fn_80206B9C(void);
-extern void fn_80206C50(void);
+extern void assert_formatLocation(void);
 extern void fn_8020ED84(void);
 extern void fn_8020EF04(void);
 extern void fn_8020EF4C(void);
@@ -341,7 +341,7 @@ lbl_fn_805807A8_000002E4:
     lwz r3, 0x68(r25)
     addi r4, r30, 0x2b1
     lfs f1, lbl_808880D4
-    bl fn_801F6C80
+    bl save_computeCrc32
     lwz r3, 0x68(r25)
     mr r4, r22
     mr r5, r23
@@ -419,7 +419,7 @@ lbl_fn_805807A8_00000380:
     b lbl_fn_805807A8_000004D8
 lbl_fn_805807A8_00000464:
     lwz r3, 0x3300(r21)
-    bl fn_80206C50
+    bl assert_formatLocation
     cmpwi r3, 0x0
     beq lbl_fn_805807A8_000004AC
     lwz r3, 0xb8(r3)
@@ -464,11 +464,11 @@ lbl_fn_805807A8_000004D8:
     lwz r3, 0xac(r28)
     addi r4, r30, 0x2de
     lfs f1, lbl_808880C4
-    bl fn_801F6C80
+    bl save_computeCrc32
     lwz r3, 0xac(r28)
     addi r4, r30, 0x2e8
     lfs f1, lbl_808880C0
-    bl fn_801F6C80
+    bl save_computeCrc32
     b lbl_fn_805807A8_00000558
 lbl_fn_805807A8_00000520:
     lfs f1, lbl_808880DC
@@ -480,11 +480,11 @@ lbl_fn_805807A8_00000520:
     lwz r3, 0xac(r28)
     addi r4, r30, 0x2de
     lfs f1, lbl_808880C0
-    bl fn_801F6C80
+    bl save_computeCrc32
     lwz r3, 0xac(r28)
     addi r4, r30, 0x2e8
     lfs f1, lbl_808880C4
-    bl fn_801F6C80
+    bl save_computeCrc32
 lbl_fn_805807A8_00000558:
     lwz r3, 0xac(r28)
     addi r4, r30, 0x2f2
@@ -1028,7 +1028,7 @@ asm void fn_805811E0(void)
     cmpwi r3, 0x0
     bne lbl_fn_805811E0_00000CB8
     mr r3, r21
-    bl fn_80206C50
+    bl assert_formatLocation
     cmpwi r3, 0x0
     beq lbl_fn_805811E0_00000FE0
 lbl_fn_805811E0_00000CB8:
@@ -1081,7 +1081,7 @@ lbl_fn_805811E0_00000CF0:
     bl fn_8020EFEC
     mr r29, r3
     mr r3, r21
-    bl fn_80206C50
+    bl assert_formatLocation
     lis r26, lbl_807612E4@ha
     mr r22, r3
     mr r25, r27
@@ -1277,7 +1277,7 @@ asm void fn_80581574(void)
     cmpwi r30, 0x0
     beq lbl_fn_80581574_00001064
     lwz r3, 0x4(r31)
-    bl fn_80206C50
+    bl assert_formatLocation
     cmpwi r3, 0x0
     mr r4, r3
     beq lbl_fn_80581574_000010D0

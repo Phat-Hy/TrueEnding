@@ -29,7 +29,7 @@ extern void str_skipWhitespace(void);
 extern void str_findChar(void);
 extern void fn_80116FC0(void);
 extern void magic_dispatchActionCommand(void);
-extern void fn_801F3FF8(void);
+extern void save_validateHeader(void);
 extern void fn_801F4C14(void);
 extern void thread_findAndNotifySlot(void);
 extern void fn_8021A4CC(void);
@@ -53,7 +53,7 @@ extern void fn_805BEE08(void);
 extern void fn_805BEEC8(void);
 extern void fn_805BF168(void);
 extern void fn_805BF664(void);
-extern void fn_8067E23C(void);
+extern void memcmp(void);
 extern void printf(void);
 extern void atoi(void);
 extern void abort(void);
@@ -258,7 +258,7 @@ lbl_fn_805BC740_00000204:
     addi r5, r1, 0x18
 lbl_fn_805BC740_00000220:
     lwz r5, 0x0(r5)
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_805BC740_00000254
     lwz r0, 0x10(r1)
@@ -319,7 +319,7 @@ lbl_fn_805BC740_000002C8:
     addi r4, r4, lbl_80763F38@l
     li r5, 0x0
     addi r4, r4, 0x8a
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0xb0(r30)
     li r4, 0x1
     bl atn_Task_setActive
@@ -848,7 +848,7 @@ lbl_fn_805BCF08_00000A58:
     addi r5, r1, 0x20
 lbl_fn_805BCF08_00000A74:
     lwz r5, 0x0(r5)
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_805BCF08_00000AA8
     lwz r0, 0x18(r1)
@@ -905,7 +905,7 @@ lbl_fn_805BCF08_00000B2C:
     lwz r4, 0x54(r1)
 lbl_fn_805BCF08_00000B30:
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x6c(r28)
     b lbl_fn_805BCF08_00000B5C
 lbl_fn_805BCF08_00000B40:
@@ -914,7 +914,7 @@ lbl_fn_805BCF08_00000B40:
     mr r4, r3
     mr r3, r21
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x6c(r28)
 lbl_fn_805BCF08_00000B5C:
     lwz r3, 0x6c(r28)

@@ -23,7 +23,7 @@ extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800DC12C(void);
 extern void str_skipWhitespace(void);
 extern void str_findChar(void);
-extern void fn_8067E23C(void);
+extern void memcmp(void);
 extern void strncmp(void);
 extern void runtime_registerStaticObject(void);
 extern void fn_80695A50(void);
@@ -1684,7 +1684,7 @@ lbl_fn_8007C46C_0000173C:
     addi r5, r1, 0x94
 lbl_fn_8007C46C_00001754:
     lwz r5, 0x0(r5)
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_8007C46C_00001788
     lwz r0, 0x8c(r1)
@@ -1849,7 +1849,7 @@ lbl_fn_8007C46C_0000198C:
     addi r5, r1, 0x84
 lbl_fn_8007C46C_000019A4:
     lwz r5, 0x0(r5)
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_8007C46C_000019D8
     lwz r0, 0x7c(r1)
@@ -2039,7 +2039,7 @@ lbl_fn_8007C46C_00001C4C:
     lwz r5, 0x0(r4)
     mr r3, r6
     mr r4, r18
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_8007C46C_00001C88
     lwz r0, 0x6c(r1)
@@ -2109,7 +2109,7 @@ lbl_fn_8007C46C_00001D3C:
     lwz r5, 0x0(r4)
     mr r3, r6
     mr r4, r18
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_8007C46C_00001D78
     lwz r0, 0x5c(r1)
@@ -2264,7 +2264,7 @@ lbl_fn_8007C46C_00001F58:
     addi r5, r1, 0x54
 lbl_fn_8007C46C_00001F70:
     lwz r5, 0x0(r5)
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_8007C46C_00001FA4
     lwz r0, 0x4c(r1)

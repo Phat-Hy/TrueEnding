@@ -20,7 +20,7 @@ extern void fn_8016DAB0(void);
 extern void fn_801789D8(void);
 extern void fn_801F48C8(void);
 extern void fn_801F4C14(void);
-extern void fn_801F6C80(void);
+extern void save_computeCrc32(void);
 extern void fn_801F6D7C(void);
 extern void fn_801F791C(void);
 extern void fn_801F80A8(void);
@@ -982,25 +982,25 @@ lbl_fn_803E2A30_00000CB0:
     lfs f1, lbl_80885D58
     mr r3, r29
     addi r4, r22, 0x14a0
-    bl fn_801F6C80
+    bl save_computeCrc32
     lfs f1, lbl_80885EB0
     mr r3, r29
     lfs f0, 0x38(r1)
     addi r4, r22, 0x14a6
     fmuls f1, f1, f0
-    bl fn_801F6C80
+    bl save_computeCrc32
     lfs f1, lbl_80885EB0
     mr r3, r29
     lfs f0, 0x3c(r1)
     addi r4, r22, 0x14ab
     fmuls f1, f1, f0
-    bl fn_801F6C80
+    bl save_computeCrc32
     lfs f1, lbl_80885EB0
     mr r3, r29
     lfs f0, 0x40(r1)
     addi r4, r22, 0x14b0
     fmuls f1, f1, f0
-    bl fn_801F6C80
+    bl save_computeCrc32
     li r31, 0x0
 lbl_fn_803E2A30_00000D44:
     addi r3, r1, 0x48

@@ -22,7 +22,7 @@ extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
 extern void fn_800DCA6C(void);
-extern void fn_801F3FF8(void);
+extern void save_validateHeader(void);
 extern void fn_802085E0(void);
 extern void fn_80208694(void);
 extern void fn_8021771C(void);
@@ -1441,14 +1441,14 @@ asm void fn_80376BE8(void)
     stw r30, 0x28c(r29)
     addi r4, r31, 0x1
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x48(r29)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r29
     addi r4, r31, 0x1f
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x4c(r29)
     li r4, 0x1
     bl atn_Task_setActive
@@ -1459,7 +1459,7 @@ asm void fn_80376BE8(void)
     mr r3, r29
     addi r4, r31, 0x3d
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x50(r29)
     li r4, 0x1
     bl atn_Task_setActive

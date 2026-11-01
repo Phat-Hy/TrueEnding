@@ -20,13 +20,13 @@ extern void fn_8012D8B8(void);
 extern void fn_801446F0(void);
 extern void fn_8016E4C4(void);
 extern void fn_80176ACC(void);
-extern void fn_801F3FF8(void);
+extern void save_validateHeader(void);
 extern void fn_801F4AA0(void);
 extern void fn_801F4CB4(void);
 extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
 extern void thread_dispatchToQueue(void);
-extern void fn_80206C50(void);
+extern void assert_formatLocation(void);
 extern void fn_8021C6A4(void);
 extern void fn_80450A5C(void);
 extern void fn_804EB874(void);
@@ -2988,7 +2988,7 @@ lbl_fn_805012C8_00001584:
     mr r3, r31
     mr r4, r29
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     lwz r0, 0x48(r31)
     cmplwi r0, 0x4
     bge lbl_fn_805012C8_000015C4
@@ -3233,7 +3233,7 @@ lbl_fn_8050158C_00001894:
     beq lbl_fn_8050158C_00001A5C
     addi r3, r20, 0x19c
     bl fn_80450A5C
-    bl fn_80206C50
+    bl assert_formatLocation
     cmpwi r3, 0x0
     beq lbl_fn_8050158C_00001A5C
     lfs f1, 0x74(r20)
@@ -3447,7 +3447,7 @@ lbl_fn_8050158C_00001BC8:
     lwz r3, 0x0(r29)
     addi r3, r3, 0x19c
     bl fn_80450A5C
-    bl fn_80206C50
+    bl assert_formatLocation
     cmpwi r19, 0x0
     mr r21, r3
     beq lbl_fn_8050158C_00002284

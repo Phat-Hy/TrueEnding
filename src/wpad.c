@@ -39,7 +39,7 @@ extern void fn_8066E3D0(void);
 extern void fn_8066E4B0(void);
 extern void fn_8066E5C0(void);
 extern void fn_8066E8F0(void);
-extern void fn_8067E23C(void);
+extern void memcmp(void);
 extern void fn_8068A4A8(void);
 extern void fn_8068AE24(void);
 
@@ -6700,7 +6700,7 @@ lbl_fn_806696B0_00006074:
     mr r3, r25
     addi r4, r4, lbl_80765188@l
     li r5, 0x10
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     beq lbl_fn_806696B0_000060A8
     lbz r0, 0xc(r25)

@@ -26,7 +26,7 @@ extern void fn_801DEF68(void);
 extern void fn_801DF3D4(void);
 extern void fn_801E07A4(void);
 extern void assert_generateId(void);
-extern void fn_80206C50(void);
+extern void assert_formatLocation(void);
 extern void fn_80206D18(void);
 extern void fn_8020ED84(void);
 extern void fn_8020EF04(void);
@@ -475,7 +475,7 @@ lbl_fn_801DCDAC_00000554:
     cmpwi r0, 0x0
     bge lbl_fn_801DCDAC_00000598
     lwz r3, 0x4(r31)
-    bl fn_80206C50
+    bl assert_formatLocation
     mr r24, r3
     mr r3, r23
     mr r4, r29

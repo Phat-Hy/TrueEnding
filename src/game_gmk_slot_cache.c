@@ -11,7 +11,7 @@ extern void fn_801092C8(void);
 extern void fn_80206B14(void);
 extern void fn_80206B9C(void);
 extern void assert_generateId(void);
-extern void fn_80206C50(void);
+extern void assert_formatLocation(void);
 extern void fn_802085E0(void);
 extern void fn_8020BD3C(void);
 extern void fn_8020BD78(void);
@@ -260,7 +260,7 @@ lbl_fn_804439FC_0000023C:
     cmpwi r3, 0x0
     beq lbl_fn_804439FC_00000314
     mr r3, r23
-    bl fn_80206C50
+    bl assert_formatLocation
     mr r24, r3
     mr r3, r23
     bl fn_8021150C
@@ -558,7 +558,7 @@ lbl_fn_804439FC_00000678:
     cmpwi r3, 0x0
     beq lbl_fn_804439FC_000006BC
     lwz r3, 0x8(r1)
-    bl fn_80206C50
+    bl assert_formatLocation
     lwz r0, 0xf0(r3)
     cmpwi r0, 0x0
     beq lbl_fn_804439FC_000006BC
@@ -606,7 +606,7 @@ lbl_fn_804439FC_00000728:
     cmpwi r3, 0x0
     beq lbl_fn_804439FC_0000079C
     lwz r3, 0x8(r1)
-    bl fn_80206C50
+    bl assert_formatLocation
     lwz r0, 0xc4(r3)
     cmpwi r0, 0x3f
     bne lbl_fn_804439FC_00000758
@@ -1681,7 +1681,7 @@ lbl_fn_80444CF8_00001524:
     b lbl_fn_80444CF8_0000166C
 lbl_fn_80444CF8_00001534:
     lwz r3, 0x4(r31)
-    bl fn_80206C50
+    bl assert_formatLocation
     cmpwi r3, 0x0
     beq lbl_fn_80444CF8_0000166C
     lwz r3, 0xb8(r3)

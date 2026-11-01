@@ -6,7 +6,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void scapi_initContext(void);
 extern void fn_80626C60(void);
-extern void fn_80629810(void);
+extern void bta_sys_logEvent(void);
 extern void bta_sys_log(void);
 extern void fn_80629850(void);
 extern void fn_80629890(void);
@@ -372,7 +372,7 @@ asm void fn_806327B8(void)
     lis r4, lbl_807B4400@ha
     addi r3, r3, 0x3
     addi r4, r4, lbl_807B4400@l
-    bl fn_80629810
+    bl bta_sys_logEvent
 lbl_fn_806327B8_000003E0:
     lis r31, lbl_80820018@ha
     addi r31, r31, lbl_80820018@l
@@ -1225,7 +1225,7 @@ lbl_fn_806332CC_00000F0C:
     lis r4, lbl_807B44AC@ha
     addi r3, r3, 0x3
     addi r4, r4, lbl_807B44AC@l
-    bl fn_80629810
+    bl bta_sys_logEvent
 lbl_fn_806332CC_00000F40:
     li r3, 0x2
     b lbl_fn_806332CC_00000F9C
@@ -1339,7 +1339,7 @@ asm void fn_8063346C(void)
     lis r4, lbl_807B44F0@ha
     addi r3, r3, 0x3
     addi r4, r4, lbl_807B44F0@l
-    bl fn_80629810
+    bl bta_sys_logEvent
 lbl_fn_8063346C_000010AC:
     lwz r12, 0x56c(r31)
     li r0, 0x0

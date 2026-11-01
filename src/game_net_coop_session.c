@@ -23,7 +23,7 @@ extern void fn_801F0544(void);
 extern void fn_801F48C8(void);
 extern void fn_801F6C2C(void);
 extern void fn_801F6C38(void);
-extern void fn_801F6C80(void);
+extern void save_computeCrc32(void);
 extern void fn_801F6D7C(void);
 extern void fn_801F7590(void);
 extern void fn_801F791C(void);
@@ -1228,11 +1228,11 @@ lbl_fn_804A4934_00000F90:
     addi r31, r31, lbl_807573D0@l
     mr r3, r27
     addi r4, r31, 0x18e
-    bl fn_801F6C80
+    bl save_computeCrc32
     fmr f1, f31
     mr r3, r27
     addi r4, r31, 0x194
-    bl fn_801F6C80
+    bl save_computeCrc32
     xoris r0, r28, 0x8000
     stw r0, 0xc(r1)
     lis r4, lbl_80757108@ha
@@ -1241,7 +1241,7 @@ lbl_fn_804A4934_00000F90:
     addi r4, r31, 0x19e
     lfd f0, 0x8(r1)
     fsubs f1, f0, f1
-    bl fn_801F6C80
+    bl save_computeCrc32
 lbl_fn_804A4934_00000FDC:
     addi r11, r1, 0x30
     psq_l f31, 0x38(r1), 0, 0
@@ -1587,12 +1587,12 @@ asm void fn_804A4EEC(void)
     bl perf_getMetricValue
     fmr f1, f29
     addi r4, r30, 0x133
-    bl fn_801F6C80
+    bl save_computeCrc32
     lwz r3, 0x78(r29)
     bl perf_getMetricValue
     fmr f1, f30
     addi r4, r30, 0x139
-    bl fn_801F6C80
+    bl save_computeCrc32
     cmpwi r28, 0x0
     beq lbl_fn_804A4EEC_00001538
     lwz r3, 0x78(r29)
@@ -1753,12 +1753,12 @@ asm void fn_804A5160(void)
     bl perf_getMetricValue
     fmr f1, f29
     addi r4, r30, 0x133
-    bl fn_801F6C80
+    bl save_computeCrc32
     lwz r3, 0x78(r29)
     bl perf_getMetricValue
     fmr f1, f30
     addi r4, r30, 0x139
-    bl fn_801F6C80
+    bl save_computeCrc32
     cmpwi r28, 0x0
     beq lbl_fn_804A5160_000017AC
     lwz r3, 0x78(r29)
@@ -1904,14 +1904,14 @@ asm void fn_804A53D4(void)
     slwi r0, r0, 2
     add r3, r27, r0
     lwz r3, 0x8c(r3)
-    bl fn_801F6C80
+    bl save_computeCrc32
     lwz r0, 0x88(r27)
     addi r4, r26, 0x139
     lfs f1, 0xc(r30)
     slwi r0, r0, 2
     add r3, r27, r0
     lwz r3, 0x8c(r3)
-    bl fn_801F6C80
+    bl save_computeCrc32
     cmpwi r31, 0x0
     beq lbl_fn_804A53D4_000019FC
     lwz r0, 0x88(r27)

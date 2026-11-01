@@ -25,7 +25,7 @@ extern void fn_8001BF44(void);
 extern void fn_8001BF58(void);
 extern void fn_8001BF64(void);
 extern void mem_free(void);
-extern void fn_8067E23C(void);
+extern void memcmp(void);
 extern void printf(void);
 extern void rand(void);
 extern void abort(void);
@@ -5620,7 +5620,7 @@ lbl_fn_8003E530_00004CA8:
     addi r5, r1, 0x10
 lbl_fn_8003E530_00004CC0:
     lwz r5, 0x0(r5)
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_8003E530_00004CF4
     lwz r0, 0x8(r1)

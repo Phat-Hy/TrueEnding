@@ -14,7 +14,7 @@ extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_800DC1DC(void);
 extern void fn_80206B9C(void);
-extern void fn_80206C50(void);
+extern void assert_formatLocation(void);
 extern void fn_8020EF04(void);
 extern void fn_8020EFEC(void);
 extern void fn_80213B08(void);
@@ -121,7 +121,7 @@ lbl_fn_80213E60_0000003C:
     cmpwi r3, 0x0
     beq lbl_fn_80213E60_00000128
     lwz r3, 0x4(r31)
-    bl fn_80206C50
+    bl assert_formatLocation
     mr r31, r3
     mr r3, r28
     mr r4, r29

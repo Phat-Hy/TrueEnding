@@ -43,7 +43,7 @@ extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
 extern void fn_801F0544(void);
-extern void fn_801F3FF8(void);
+extern void save_validateHeader(void);
 extern void fn_801FEB9C(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
@@ -1641,42 +1641,42 @@ lbl_spectateManager_update_000014FC:
     mr r3, r30
     addi r4, r28, 0x34
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x48(r30)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r30
     addi r4, r28, 0x5b
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x4c(r30)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r30
     addi r4, r28, 0x85
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x50(r30)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r30
     addi r4, r28, 0xa5
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x54(r30)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r30
     addi r4, r28, 0xd4
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x58(r30)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r30
     addi r4, r28, 0x105
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x60(r30)
     li r4, 0x1
     bl atn_Task_setActive
@@ -1735,7 +1735,7 @@ lbl_spectateManager_update_000015F4:
     mr r3, r30
     addi r4, r30, 0x5a0
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x5c(r30)
     li r4, 0x1
     bl atn_Task_setActive

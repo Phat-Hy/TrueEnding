@@ -27,12 +27,12 @@ extern void fn_801D4E74(void);
 extern void fn_801D7DE8(void);
 extern void fn_801F45F4(void);
 extern void saveSlot_readSummary(void);
-extern void fn_801F6C80(void);
+extern void save_computeCrc32(void);
 extern void fn_801F6E78(void);
 extern void fn_801F7590(void);
 extern void fn_801F7DF0(void);
 extern void fn_801F837C(void);
-extern void fn_80202118(void);
+extern void profile_getMetricValue(void);
 extern void perf_getMetricValue(void);
 extern void fn_8020BCEC(void);
 extern void fn_8020D608(void);
@@ -1457,7 +1457,7 @@ lbl_fn_801D6C1C_00001324:
     lwz r3, 0x1cc(r3)
     cmpwi r3, 0x0
     beq lbl_fn_801D6C1C_000013C4
-    bl fn_80202118
+    bl profile_getMetricValue
     cmpwi r17, 0x0
     mr r18, r3
     blt lbl_fn_801D6C1C_000013A8
@@ -1581,14 +1581,14 @@ lbl_fn_801D6C1C_000014E8:
     stfs f29, 0x50(r21)
     mr r3, r21
     addi r4, r31, 0x7
-    bl fn_801F6C80
+    bl save_computeCrc32
     b lbl_fn_801D6C1C_0000151C
 lbl_fn_801D6C1C_00001508:
     stfs f30, 0x50(r21)
     mr r3, r21
     lfs f1, lbl_80882AD8
     addi r4, r31, 0x7
-    bl fn_801F6C80
+    bl save_computeCrc32
 lbl_fn_801D6C1C_0000151C:
     cmpwi r17, 0x2
     bne lbl_fn_801D6C1C_0000152C
@@ -1770,13 +1770,13 @@ asm void fn_801D70EC(void)
     mr r22, r4
     beq lbl_fn_801D70EC_0000197C
     mr r3, r22
-    bl fn_80202118
+    bl profile_getMetricValue
     cmpwi r3, 0x0
     bne lbl_fn_801D70EC_00001794
     b lbl_fn_801D70EC_0000197C
 lbl_fn_801D70EC_00001794:
     mr r3, r22
-    bl fn_80202118
+    bl profile_getMetricValue
     lfs f0, lbl_80882AD8
     mr r24, r3
     stfs f0, 0x1c(r1)
@@ -1883,7 +1883,7 @@ lbl_fn_801D70EC_0000190C:
     stw r0, 0x74(r1)
     lfd f0, 0x70(r1)
     fsubs f1, f0, f31
-    bl fn_801F6C80
+    bl save_computeCrc32
     lwz r3, 0x4(r25)
     bl perf_getMetricValue
     lwz r0, 0xc(r25)
@@ -1893,7 +1893,7 @@ lbl_fn_801D70EC_0000190C:
     stw r0, 0x7c(r1)
     lfd f0, 0x78(r1)
     fsubs f1, f0, f31
-    bl fn_801F6C80
+    bl save_computeCrc32
 lbl_fn_801D70EC_0000195C:
     addi r22, r22, 0x1
     addi r25, r25, 0x10

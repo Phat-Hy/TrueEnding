@@ -23,13 +23,13 @@ extern void fn_800DC12C(void);
 extern void str_findChar(void);
 extern void fn_80116FC0(void);
 extern void actor_spawnActorWithId(void);
-extern void fn_801F3FF8(void);
+extern void save_validateHeader(void);
 extern void fn_801F4728(void);
 extern void fn_801F48C8(void);
 extern void fn_801F4CB4(void);
 extern void saveSlot_readSummary(void);
 extern void fn_801F64D0(void);
-extern void fn_801F6C80(void);
+extern void save_computeCrc32(void);
 extern void fn_801F6E78(void);
 extern void fn_801F7590(void);
 extern void fn_801F7DF0(void);
@@ -39,7 +39,7 @@ extern void thread_findAndNotify(void);
 extern void thread_dispatchToQueue(void);
 extern void fn_80206B14(void);
 extern void fn_80206B9C(void);
-extern void fn_80206C50(void);
+extern void assert_formatLocation(void);
 extern void fn_80206D18(void);
 extern void fn_8020924C(void);
 extern void fn_8020ED84(void);
@@ -734,7 +734,7 @@ lbl_fn_80586220_00000814:
     b lbl_fn_80586220_000008D4
 lbl_fn_80586220_00000860:
     lwz r3, 0x0(r21)
-    bl fn_80206C50
+    bl assert_formatLocation
     cmpwi r3, 0x0
     beq lbl_fn_80586220_000008A8
     lwz r3, 0xb8(r3)
@@ -788,11 +788,11 @@ lbl_fn_80586220_00000914:
     lwz r3, 0xac(r18)
     addi r4, r25, 0x16c
     lfs f1, lbl_808880F0
-    bl fn_801F6C80
+    bl save_computeCrc32
     lwz r3, 0xac(r18)
     addi r4, r25, 0x176
     lfs f1, lbl_808880F4
-    bl fn_801F6C80
+    bl save_computeCrc32
     lwz r3, 0xac(r18)
     addi r4, r25, 0x180
     lwz r5, 0x4(r21)
@@ -1039,7 +1039,7 @@ lbl_fn_805866F8_00000C9C:
     cmpwi r3, 0x0
     beq lbl_fn_805866F8_00000E40
     mr r3, r21
-    bl fn_80206C50
+    bl assert_formatLocation
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_805866F8_00000D48
@@ -1425,7 +1425,7 @@ asm void fn_80586E40(void)
     stw r0, 0x5bbc(r6)
     stw r0, 0x5bc0(r6)
     stw r0, 0x5bc4(r6)
-    bl fn_801F3FF8
+    bl save_validateHeader
     addis r5, r31, 0x2
     li r4, 0x1
     stw r3, 0x5b6c(r5)
@@ -1433,7 +1433,7 @@ asm void fn_80586E40(void)
     mr r3, r31
     addi r4, r30, 0x27
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     addis r5, r31, 0x2
     li r4, 0x1
     stw r3, 0x5b70(r5)
@@ -1441,7 +1441,7 @@ asm void fn_80586E40(void)
     mr r3, r31
     addi r4, r30, 0x4c
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     addis r5, r31, 0x2
     li r4, 0x1
     stw r3, 0x5b68(r5)
@@ -1449,7 +1449,7 @@ asm void fn_80586E40(void)
     mr r3, r31
     addi r4, r30, 0x68
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     addis r5, r31, 0x2
     li r4, 0x1
     stw r3, 0x5b74(r5)

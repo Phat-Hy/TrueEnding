@@ -35,7 +35,7 @@ extern void fn_805FA200(void);
 extern void fn_805FA390(void);
 extern void strncpy(void);
 extern void fn_80716280(void);
-extern void fn_80724DF0(void);
+extern void net_packetDebugLog(void);
 extern void fn_80724E90(void);
 extern u32 strlen(const char* str);
 
@@ -2005,7 +2005,7 @@ lbl_fn_8059D8B4_00001938:
     addi r3, r3, lbl_807623A4@l
     addi r5, r3, 0x56
     crclr 6
-    bl fn_80724DF0
+    bl net_packetDebugLog
 lbl_fn_8059D8B4_00001958:
     cmpwi r31, 0x100
     blt lbl_fn_8059D8B4_00001968

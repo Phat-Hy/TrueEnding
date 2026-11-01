@@ -19,7 +19,7 @@ extern void str_findChar(void);
 extern void fn_801EDCB8(void);
 extern void fn_801F04FC(void);
 extern void fn_801F25E0(void);
-extern void fn_8067E23C(void);
+extern void memcmp(void);
 extern void strrchr(void);
 extern void wcslen(void);
 extern char* strcpy(char* dest, const char* src);
@@ -319,7 +319,7 @@ lbl_fn_801FD5A0_00000340:
     addi r5, r1, 0x38
 lbl_fn_801FD5A0_0000035C:
     lwz r5, 0x0(r5)
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_801FD5A0_00000390
     lwz r0, 0x30(r1)
@@ -656,7 +656,7 @@ lbl_fn_801FDA20_000007D4:
     addi r5, r1, 0x38
 lbl_fn_801FDA20_000007F0:
     lwz r5, 0x0(r5)
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_801FDA20_00000824
     lwz r0, 0x30(r1)

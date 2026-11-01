@@ -20,7 +20,7 @@ extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
 extern void str_findChar(void);
 extern void fn_801F0758(void);
-extern void fn_801F3FF8(void);
+extern void save_validateHeader(void);
 extern void saveSlot_readSummary(void);
 extern void fn_801FEC74(void);
 extern void thread_findAndNotify(void);
@@ -309,7 +309,7 @@ asm void font_calcTextExtents(void)
     mr r3, r30
     addi r4, r4, 0x1
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     addis r5, r30, 0x1
     li r4, 0x1
     stw r3, -0x7d40(r5)

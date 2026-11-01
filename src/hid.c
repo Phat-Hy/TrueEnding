@@ -11,8 +11,8 @@ extern void _savegpr_24(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void fn_80626C60(void);
-extern void fn_80626D50(void);
-extern void fn_80629810(void);
+extern void scapi_cleanupContext(void);
+extern void bta_sys_logEvent(void);
 extern void bta_sys_log(void);
 extern void fn_80629850(void);
 extern void fn_80629E20(void);
@@ -34,7 +34,7 @@ extern void fn_8064E72C(void);
 extern void fn_8064EAA4(void);
 extern void fn_8064EB64(void);
 extern void fn_8064EC58(void);
-extern void fn_8067E23C(void);
+extern void memcmp(void);
 
 /* External data declarations */
 extern u8 lbl_80764F80[];
@@ -144,7 +144,7 @@ asm void fn_8063EEB0(void)
     lis r4, lbl_807B59E0@ha
     addi r3, r3, 0x3
     addi r4, r4, lbl_807B59E0@l
-    bl fn_80629810
+    bl bta_sys_logEvent
 lbl_fn_8063EEB0_000000A8:
     li r0, 0x0
     li r30, 0x1
@@ -166,7 +166,7 @@ lbl_fn_8063EEB0_000000A8:
     lis r4, lbl_807B59F8@ha
     addi r3, r3, 0x1
     addi r4, r4, lbl_807B59F8@l
-    bl fn_80629810
+    bl bta_sys_logEvent
 lbl_fn_8063EEB0_000000FC:
     li r3, 0xe
     b lbl_fn_8063EEB0_0000010C
@@ -199,7 +199,7 @@ asm void fn_8063EF70(void)
     lis r4, lbl_807B5A10@ha
     addi r3, r3, 0x4
     addi r4, r4, lbl_807B5A10@l
-    bl fn_80629810
+    bl bta_sys_logEvent
 lbl_fn_8063EF70_00000160:
     lis r31, lbl_80822B90@ha
     addi r31, r31, lbl_80822B90@l
@@ -1017,7 +1017,7 @@ lbl_fn_8063FA70_00000C68:
     mr r3, r26
     addi r4, r31, 0x1
     li r5, 0x6
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     beq lbl_fn_8063FA70_00000C90
     addi r29, r29, 0x1
@@ -1227,7 +1227,7 @@ asm void fn_8063FD2C(void)
     blt lbl_fn_8063FD2C_00000F48
     addi r4, r31, 0x0
     lis r3, 0x1e
-    bl fn_80629810
+    bl bta_sys_logEvent
 lbl_fn_8063FD2C_00000F48:
     li r24, 0x1
 lbl_fn_8063FD2C_00000F4C:
@@ -1247,7 +1247,7 @@ lbl_fn_8063FD2C_00000F6C:
     blt lbl_fn_8063FD2C_00000F8C
     addi r4, r31, 0x18
     lis r3, 0x1e
-    bl fn_80629810
+    bl bta_sys_logEvent
 lbl_fn_8063FD2C_00000F8C:
     li r24, 0x5
 lbl_fn_8063FD2C_00000F90:
@@ -1273,7 +1273,7 @@ lbl_fn_8063FD2C_00000FCC:
     cmpwi r30, 0x0
     beq lbl_fn_8063FD2C_00001008
     mr r3, r30
-    bl fn_80626D50
+    bl scapi_cleanupContext
     b lbl_fn_8063FD2C_00001008
 lbl_fn_8063FD2C_00000FE8:
     mr r3, r25
@@ -1374,7 +1374,7 @@ asm void fn_8063FF0C(void)
     blt lbl_fn_8063FF0C_00001134
     addi r4, r31, 0x54
     lis r3, 0x1e
-    bl fn_80629810
+    bl bta_sys_logEvent
 lbl_fn_8063FF0C_00001134:
     li r3, 0x3
     b lbl_fn_8063FF0C_000012D0
@@ -1396,7 +1396,7 @@ lbl_fn_8063FF0C_0000113C:
     blt lbl_fn_8063FF0C_00001184
     addi r4, r31, 0x74
     lis r3, 0x1e
-    bl fn_80629810
+    bl bta_sys_logEvent
 lbl_fn_8063FF0C_00001184:
     li r3, 0x3
     b lbl_fn_8063FF0C_000012D0
@@ -1418,7 +1418,7 @@ lbl_fn_8063FF0C_0000118C:
     blt lbl_fn_8063FF0C_000011D4
     addi r4, r31, 0x94
     lis r3, 0x1e
-    bl fn_80629810
+    bl bta_sys_logEvent
 lbl_fn_8063FF0C_000011D4:
     li r3, 0x3
     b lbl_fn_8063FF0C_000012D0
@@ -1440,7 +1440,7 @@ lbl_fn_8063FF0C_000011DC:
     blt lbl_fn_8063FF0C_00001224
     addi r4, r31, 0xb4
     lis r3, 0x1e
-    bl fn_80629810
+    bl bta_sys_logEvent
 lbl_fn_8063FF0C_00001224:
     li r3, 0x3
     b lbl_fn_8063FF0C_000012D0
@@ -1462,7 +1462,7 @@ lbl_fn_8063FF0C_0000122C:
     blt lbl_fn_8063FF0C_00001274
     addi r4, r31, 0xd4
     lis r3, 0x1e
-    bl fn_80629810
+    bl bta_sys_logEvent
 lbl_fn_8063FF0C_00001274:
     li r3, 0x3
     b lbl_fn_8063FF0C_000012D0
@@ -1484,7 +1484,7 @@ lbl_fn_8063FF0C_0000127C:
     blt lbl_fn_8063FF0C_000012C4
     addi r4, r31, 0xf4
     lis r3, 0x1e
-    bl fn_80629810
+    bl bta_sys_logEvent
 lbl_fn_8063FF0C_000012C4:
     li r3, 0x3
     b lbl_fn_8063FF0C_000012D0
@@ -1530,7 +1530,7 @@ asm void fn_80640134(void)
     lis r4, lbl_807B5B48@ha
     lis r3, 0x1e
     addi r4, r4, lbl_807B5B48@l
-    bl fn_80629810
+    bl bta_sys_logEvent
 lbl_fn_80640134_0000135C:
     li r3, 0xe
     b lbl_fn_80640134_0000142C
@@ -1548,7 +1548,7 @@ lbl_fn_80640134_00001364:
     lis r4, lbl_807B5B68@ha
     lis r3, 0x1e
     addi r4, r4, lbl_807B5B68@l
-    bl fn_80629810
+    bl bta_sys_logEvent
 lbl_fn_80640134_0000139C:
     li r3, 0xe
     b lbl_fn_80640134_0000142C
@@ -1614,7 +1614,7 @@ asm void fn_8064028C(void)
     lis r4, lbl_807B5B8C@ha
     addi r3, r3, 0x3
     addi r4, r4, lbl_807B5B8C@l
-    bl fn_80629810
+    bl bta_sys_logEvent
 lbl_fn_8064028C_00001484:
     lhz r0, 0x14(r31)
     cmpwi r0, 0x0
@@ -1701,7 +1701,7 @@ lbl_fn_80640330_00001574:
     lis r4, lbl_807B5B8C@ha
     addi r3, r3, 0x3
     addi r4, r4, lbl_807B5B8C@l
-    bl fn_80629810
+    bl bta_sys_logEvent
 lbl_fn_80640330_000015B4:
     lhz r0, 0x14(r31)
     cmpwi r0, 0x0
@@ -1770,7 +1770,7 @@ lbl_fn_80640460_0000167C:
     mr r3, r26
     addi r4, r30, 0x1
     li r5, 0x6
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     beq lbl_fn_80640460_000016B0
 lbl_fn_80640460_000016A0:
@@ -1804,7 +1804,7 @@ lbl_fn_80640460_000016D4:
     lis r3, 0x1e
     addi r4, r31, 0x8c
     addi r3, r3, 0x1
-    bl fn_80629810
+    bl bta_sys_logEvent
 lbl_fn_80640460_00001714:
     li r25, 0x0
 lbl_fn_80640460_00001718:
@@ -1943,7 +1943,7 @@ asm void fn_806406B8(void)
     lis r4, lbl_807B5CAC@ha
     addi r3, r3, 0x1
     addi r4, r4, lbl_807B5CAC@l
-    bl fn_80629810
+    bl bta_sys_logEvent
 lbl_fn_806406B8_00001908:
     lis r5, lbl_80822CD8@ha
     lis r3, 0x4ec5
@@ -2027,7 +2027,7 @@ asm void fn_80640804(void)
     lis r3, 0x1e
     addi r4, r31, 0x180
     addi r3, r3, 0x3
-    bl fn_80629810
+    bl bta_sys_logEvent
 lbl_fn_80640804_00001A38:
     mulli r0, r30, 0x34
     lis r27, lbl_80822CD8@ha
@@ -2047,7 +2047,7 @@ lbl_fn_80640804_00001A38:
     lis r3, 0x1e
     addi r4, r31, 0x1a0
     addi r3, r3, 0x1
-    bl fn_80629810
+    bl bta_sys_logEvent
 lbl_fn_80640804_00001A84:
     lis r3, lbl_80822CD8@ha
     addi r3, r3, lbl_80822CD8@l
@@ -2057,7 +2057,7 @@ lbl_fn_80640804_00001A84:
     lis r3, 0x1e
     addi r4, r31, 0x44
     addi r3, r3, 0x3
-    bl fn_80629810
+    bl bta_sys_logEvent
 lbl_fn_80640804_00001AA8:
     lhz r0, 0x14(r26)
     cmpwi r0, 0x0
@@ -2113,7 +2113,7 @@ lbl_fn_80640804_00001B24:
     lis r3, 0x1e
     addi r4, r31, 0x44
     addi r3, r3, 0x3
-    bl fn_80629810
+    bl bta_sys_logEvent
 lbl_fn_80640804_00001B6C:
     lhz r0, 0x14(r27)
     cmpwi r0, 0x0
@@ -2300,7 +2300,7 @@ lbl_fn_80640A18_00001DD0:
     lis r3, 0x1e
     addi r4, r31, 0x44
     addi r3, r3, 0x3
-    bl fn_80629810
+    bl bta_sys_logEvent
 lbl_fn_80640A18_00001E00:
     lhz r0, 0x14(r28)
     cmpwi r0, 0x0
@@ -2710,7 +2710,7 @@ lbl_fn_80641008_00002380:
     lis r3, 0x1e
     addi r4, r31, 0x44
     addi r3, r3, 0x3
-    bl fn_80629810
+    bl bta_sys_logEvent
 lbl_fn_80641008_000023BC:
     lhz r0, 0x14(r27)
     cmpwi r0, 0x0
@@ -3406,7 +3406,7 @@ lbl_fn_80641A18_00002D34:
     bl bta_sys_log
 lbl_fn_80641A18_00002D64:
     mr r3, r30
-    bl fn_80626D50
+    bl scapi_cleanupContext
     b lbl_fn_80641A18_00002F4C
 lbl_fn_80641A18_00002D70:
     lbz r7, 0x8(r7)
@@ -3443,7 +3443,7 @@ lbl_fn_80641A18_00002DC8:
     mtctr r12
     bctrl
     mr r3, r30
-    bl fn_80626D50
+    bl scapi_cleanupContext
     b lbl_fn_80641A18_00002F4C
 lbl_fn_80641A18_00002DF8:
     cmpwi r8, 0x5
@@ -3462,7 +3462,7 @@ lbl_fn_80641A18_00002E04:
     lis r4, lbl_807B5B8C@ha
     addi r3, r3, 0x3
     addi r4, r4, lbl_807B5B8C@l
-    bl fn_80629810
+    bl bta_sys_logEvent
 lbl_fn_80641A18_00002E38:
     lhz r0, 0x14(r29)
     cmpwi r0, 0x0
@@ -3498,7 +3498,7 @@ lbl_fn_80641A18_00002E84:
     bctrl
 lbl_fn_80641A18_00002EA8:
     mr r3, r30
-    bl fn_80626D50
+    bl scapi_cleanupContext
     b lbl_fn_80641A18_00002F4C
 lbl_fn_80641A18_00002EB4:
     clrlwi r3, r31, 24
@@ -3542,7 +3542,7 @@ lbl_fn_80641A18_00002F24:
     b lbl_fn_80641A18_00002F4C
 lbl_fn_80641A18_00002F44:
     mr r3, r30
-    bl fn_80626D50
+    bl scapi_cleanupContext
 lbl_fn_80641A18_00002F4C:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
@@ -3576,7 +3576,7 @@ asm void fn_80641DB0(void)
     cmpwi r8, 0x0
     beq lbl_fn_80641DB0_00002FBC
     mr r3, r19
-    bl fn_80626D50
+    bl scapi_cleanupContext
 lbl_fn_80641DB0_00002FBC:
     li r3, 0x8
     b lbl_fn_80641DB0_000031EC
@@ -3789,7 +3789,7 @@ lbl_fn_8064204C_00003240:
     lis r4, lbl_807B5CAC@ha
     addi r3, r3, 0x1
     addi r4, r4, lbl_807B5CAC@l
-    bl fn_80629810
+    bl bta_sys_logEvent
 lbl_fn_8064204C_00003294:
     lis r5, lbl_80822CD8@ha
     lis r3, 0x4ec5

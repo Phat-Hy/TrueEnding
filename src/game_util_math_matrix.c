@@ -19,7 +19,7 @@ extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
 extern void str_findChar(void);
 extern void actor_spawnActorWithId(void);
-extern void fn_801F3FF8(void);
+extern void save_validateHeader(void);
 extern void saveSlot_readSummary(void);
 extern void fn_801F64D0(void);
 extern void thread_findAndNotify(void);
@@ -788,35 +788,35 @@ lbl_fn_8057F284_00000998:
     mr r3, r29
     addi r4, r31, 0x20
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x70(r29)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r29
     addi r4, r31, 0x3c
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x74(r29)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r29
     addi r4, r31, 0x58
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x80(r29)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r29
     addi r4, r31, 0x75
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x90(r29)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r29
     addi r4, r31, 0x9e
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x94(r29)
     li r4, 0x1
     bl atn_Task_setActive
@@ -840,7 +840,7 @@ lbl_fn_8057F284_00000A50:
     addi r31, r31, lbl_807612E4@l
     li r5, 0x0
     addi r4, r31, 0xf1
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0xa8(r29)
     li r4, 0x1
     bl atn_Task_setActive
@@ -864,21 +864,21 @@ lbl_fn_8057F284_00000AAC:
     addi r31, r31, lbl_807612E4@l
     li r5, 0x0
     addi r4, r31, 0x140
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0xd4(r29)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r29
     addi r4, r31, 0x168
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0xd8(r29)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r29
     addi r4, r31, 0x18f
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     addis r5, r29, 0x2
     li r4, 0x1
     stw r3, 0x5b2c(r5)

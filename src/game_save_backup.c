@@ -14,7 +14,7 @@ extern void str_findChar(void);
 extern void fn_800DD3FC(void);
 extern void net_player_interpolateState(void);
 extern void fn_801EFA78(void);
-extern void fn_801F3FF8(void);
+extern void save_validateHeader(void);
 extern void fn_801F45F4(void);
 extern void fn_801F465C(void);
 extern void fn_801F6A98(void);
@@ -1580,7 +1580,7 @@ lbl_fn_801F8994_000014FC:
     mr r4, r29
     lwz r3, 0x24(r28)
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0xc(r1)
     li r4, 0x1
     bl atn_Task_setActive

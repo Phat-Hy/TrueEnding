@@ -33,7 +33,7 @@ extern void fn_8048EE78(void);
 extern void fn_8048F184(void);
 extern void fn_80491528(void);
 extern void fn_804A0614(void);
-extern void fn_805381CC(void);
+extern void spectate_getRootNode(void);
 extern void fn_805381F4(void);
 extern void fn_805384D0(void);
 extern void fn_80538B1C(void);
@@ -96,7 +96,7 @@ asm void fn_80560D90(void)
     stw r30, 0x8(r1)
     mr r30, r3
     mr r3, r31
-    bl fn_805381CC
+    bl spectate_getRootNode
     lwz r0, 0x30(r31)
     cmpwi r0, 0x0
     ble lbl_fn_80560D90_00000038
@@ -219,7 +219,7 @@ asm void fn_80560F08(void)
     b lbl_fn_80560F08_000001F4
 lbl_fn_80560F08_000001A0:
     mr r3, r31
-    bl fn_805381CC
+    bl spectate_getRootNode
     mr r4, r31
     addi r3, r1, 0x8
     li r5, 0x2
@@ -290,7 +290,7 @@ asm void fn_80560FEC(void)
     mr r27, r4
     mr r31, r3
     mr r3, r27
-    bl fn_805381CC
+    bl spectate_getRootNode
     lwz r0, 0x30(r27)
     mr r29, r3
     cmpwi r0, 0x0
@@ -648,7 +648,7 @@ lbl_fn_8056142C_00000738:
     b lbl_fn_8056142C_000007BC
 lbl_fn_8056142C_00000744:
     mr r3, r30
-    bl fn_805381CC
+    bl spectate_getRootNode
     lwz r0, 0x30(r30)
     cmpwi r0, 0x1
     ble lbl_fn_8056142C_00000764
@@ -749,7 +749,7 @@ lbl_fn_80561568_0000087C:
     b lbl_fn_80561568_000008FC
 lbl_fn_80561568_00000888:
     mr r3, r31
-    bl fn_805381CC
+    bl spectate_getRootNode
     lwz r0, 0x30(r31)
     cmpwi r0, 0x0
     ble lbl_fn_80561568_000008A4
@@ -1210,7 +1210,7 @@ asm void fn_80561BD4(void)
     stw r0, 0x198(r1)
     mr r3, r31
     stw r0, 0x1a0(r1)
-    bl fn_805381CC
+    bl spectate_getRootNode
     cmpwi r3, 0x0
     bne lbl_fn_80561BD4_00000E84
     li r3, 0x0
@@ -2002,7 +2002,7 @@ asm void fn_805626E8(void)
     cmpwi r5, 0x0
     bne lbl_fn_805626E8_00001B14
     mr r3, r31
-    bl fn_805381CC
+    bl spectate_getRootNode
     mr r29, r3
     lwz r3, lbl_8087F540
     bl fn_80480438
@@ -2063,7 +2063,7 @@ lbl_fn_805626E8_00001A38:
     b lbl_fn_805626E8_00001B14
 lbl_fn_805626E8_00001A4C:
     mr r3, r31
-    bl fn_805381CC
+    bl spectate_getRootNode
     mr r29, r3
     lwz r3, lbl_8087F540
     bl fn_80480438

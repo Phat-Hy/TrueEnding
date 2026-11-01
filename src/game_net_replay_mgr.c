@@ -18,7 +18,7 @@ extern void str_findChar(void);
 extern void fn_800DD3FC(void);
 extern void actor_spawnActorWithId(void);
 extern void fn_80124BFC(void);
-extern void fn_801F3FF8(void);
+extern void save_validateHeader(void);
 extern void thread_findAndNotify(void);
 extern void fn_801FEDBC(void);
 extern void thread_dispatchToQueue(void);
@@ -612,7 +612,7 @@ asm void fn_804C3060(void)
     stw r0, 0xa8(r31)
     stw r0, 0xac(r31)
     stfs f0, 0xb0(r31)
-    bl fn_801F3FF8
+    bl save_validateHeader
     lwz r0, 0x50(r31)
     stw r3, 0x48(r31)
     cmplwi r0, 0x10
@@ -633,7 +633,7 @@ lbl_fn_804C3060_00000768:
     addi r4, r4, lbl_80758D4C@l
     li r5, 0x0
     addi r4, r4, 0x28
-    bl fn_801F3FF8
+    bl save_validateHeader
     lwz r0, 0x50(r31)
     stw r3, 0x4c(r31)
     cmplwi r0, 0x10

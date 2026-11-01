@@ -40,7 +40,7 @@ extern void atn_LoadHandle_getData(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_80491528(void);
 extern void fn_805381A4(void);
-extern void fn_805381CC(void);
+extern void spectate_getRootNode(void);
 extern void fn_8053B02C(void);
 extern void fn_8054119C(void);
 extern void fn_80541214(void);
@@ -422,7 +422,7 @@ asm void fn_80562BEC(void)
     bl fn_805381A4
     mr r30, r3
     mr r3, r31
-    bl fn_805381CC
+    bl spectate_getRootNode
     lwz r10, 0x280(r3)
     cmpwi r10, 0x0
     beq lbl_fn_80562BEC_00000478
@@ -536,7 +536,7 @@ asm void fn_80562D50(void)
     bl fn_805381A4
     mr r31, r3
     mr r3, r24
-    bl fn_805381CC
+    bl spectate_getRootNode
     lwz r30, 0x280(r3)
     cmpwi r30, 0x0
     beq lbl_fn_80562D50_000006CC
@@ -709,7 +709,7 @@ asm void fn_80562FB4(void)
     mr r3, r30
     bl fn_805381A4
     mr r3, r30
-    bl fn_805381CC
+    bl spectate_getRootNode
     lwz r4, 0x10(r30)
     mr r31, r3
     lwz r0, 0x14(r30)

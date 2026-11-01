@@ -41,7 +41,7 @@ extern void fn_80121F00(void);
 extern void fn_8013C504(void);
 extern void fn_80158E1C(void);
 extern void actor_setState(void);
-extern void fn_801F3FF8(void);
+extern void save_validateHeader(void);
 extern void fn_801F64D0(void);
 extern void thread_findAndNotify(void);
 extern void fn_802375C4(void);
@@ -1363,14 +1363,14 @@ asm void fn_80468FBC(void)
     stw r0, 0xa4(r28)
     stw r0, 0xa8(r28)
     stw r0, 0xac(r28)
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x50(r28)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r28
     addi r4, r31, 0x20
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x54(r28)
     li r4, 0x1
     bl atn_Task_setActive
@@ -1394,14 +1394,14 @@ lbl_fn_80468FBC_0000112C:
     addi r31, r31, lbl_80755394@l
     li r5, 0x0
     addi r4, r31, 0x63
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x84(r28)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r28
     addi r4, r31, 0x85
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x88(r28)
     li r4, 0x1
     bl atn_Task_setActive

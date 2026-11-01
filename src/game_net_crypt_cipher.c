@@ -19,7 +19,7 @@ extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
 extern void str_findChar(void);
 extern void fn_800DD3FC(void);
-extern void fn_801F3FF8(void);
+extern void save_validateHeader(void);
 extern void fn_801F4728(void);
 extern void fn_801F4998(void);
 extern void fn_801F4AA0(void);
@@ -622,7 +622,7 @@ asm void fn_804B4CB8(void)
     stw r0, 0xa4(r29)
     stw r0, 0xa8(r29)
     stw r0, 0x10c(r29)
-    bl fn_801F3FF8
+    bl save_validateHeader
     lwz r0, 0xa8(r29)
     stw r3, 0x48(r29)
     cmplwi r0, 0x18
@@ -643,7 +643,7 @@ lbl_fn_804B4CB8_000006C8:
     addi r4, r4, lbl_80758150@l
     li r5, 0x0
     addi r4, r4, 0x25
-    bl fn_801F3FF8
+    bl save_validateHeader
     lwz r0, 0xa8(r29)
     stw r3, 0x4c(r29)
     cmplwi r0, 0x18
@@ -668,7 +668,7 @@ lbl_fn_804B4CB8_00000724:
     add r27, r29, r31
     addi r4, r28, 0x44
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x50(r27)
     lwz r0, 0xa8(r29)
     cmplwi r0, 0x18
@@ -688,7 +688,7 @@ lbl_fn_804B4CB8_0000076C:
     add r27, r29, r31
     addi r4, r28, 0x61
     li r5, 0x0
-    bl fn_801F3FF8
+    bl save_validateHeader
     stw r3, 0x70(r27)
     lwz r0, 0xa8(r29)
     cmplwi r0, 0x18
@@ -713,7 +713,7 @@ lbl_fn_804B4CB8_000007B4:
     addi r4, r4, lbl_80758150@l
     li r5, 0x0
     addi r4, r4, 0x82
-    bl fn_801F3FF8
+    bl save_validateHeader
     lwz r0, 0xa8(r29)
     stw r3, 0x90(r29)
     cmplwi r0, 0x18
@@ -734,7 +734,7 @@ lbl_fn_804B4CB8_00000810:
     addi r4, r4, lbl_80758150@l
     li r5, 0x0
     addi r4, r4, 0xa2
-    bl fn_801F3FF8
+    bl save_validateHeader
     lwz r0, 0xa8(r29)
     stw r3, 0x94(r29)
     cmplwi r0, 0x18
@@ -755,7 +755,7 @@ lbl_fn_804B4CB8_0000085C:
     addi r4, r4, lbl_80758150@l
     li r5, 0x0
     addi r4, r4, 0xc4
-    bl fn_801F3FF8
+    bl save_validateHeader
     lwz r0, 0xa8(r29)
     stw r3, 0x98(r29)
     cmplwi r0, 0x18

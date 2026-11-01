@@ -38,7 +38,7 @@ extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_getData(void);
 extern void fn_80476130(void);
 extern void PSMTXMultVec(void);
-extern void fn_8067E23C(void);
+extern void memcmp(void);
 extern void runtime_registerStaticObject(void);
 extern void fn_80695A50(void);
 extern void vec3_isNonZero(void);
@@ -982,7 +982,7 @@ lbl_fn_80095B08_00000C9C:
     addi r5, r1, 0x10
 lbl_fn_80095B08_00000CB4:
     lwz r5, 0x0(r5)
-    bl fn_8067E23C
+    bl memcmp
     cmpwi r3, 0x0
     bne lbl_fn_80095B08_00000CE8
     lwz r0, 0x8(r1)
