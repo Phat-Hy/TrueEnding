@@ -13,7 +13,7 @@ extern void mem_alloc(void);
 extern void msg_getMessageById(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void str_findChar(void);
 extern void wcs_vformat(void);
 extern void actor_spawnActorWithId(void);
@@ -1088,7 +1088,7 @@ asm void fn_80588908(void)
     addi r11, r1, 0x40
     bl _savegpr_26
     mr r31, r3
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_80588908_00000F8C
     mr r3, r31

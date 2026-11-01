@@ -26,13 +26,13 @@ extern void fn_80084A78(void);
 extern void mem_getAllocSize(void);
 extern void node_createNamedChild(void);
 extern void fn_800897D8(void);
-extern void fn_8008BBD8(void);
+extern void map_debugLog(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void str_skipWhitespace(void);
 extern void str_findChar(void);
 extern void fn_800DCA6C(void);
@@ -49,7 +49,7 @@ extern void fn_801206EC(void);
 extern void fn_80120700(void);
 extern void fn_801207D4(void);
 extern void fn_80120D34(void);
-extern void fn_80121F00(void);
+extern void equip_getGlobalManager(void);
 extern void fn_8017CB2C(void);
 extern void fn_80205BE8(void);
 extern void fn_80216AFC(void);
@@ -499,7 +499,7 @@ lbl_fn_803EE1F0_000003A8:
     bl fn_803ED8F4
     b lbl_fn_803EE1F0_000003E4
 lbl_fn_803EE1F0_000003B0:
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_803EE1F0_000003E4
     lwz r4, 0x80(r31)
@@ -843,7 +843,7 @@ lbl_fn_803EE5AC_000007D0:
     stw r4, 0x20(r1)
     stw r0, 0x24(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_803EE5AC_00000844
     addic. r0, r1, 0x74
@@ -1745,7 +1745,7 @@ lbl_fn_803EEEDC_00001458:
     stw r0, 0x64(r18)
 lbl_fn_803EEEDC_00001478:
     mr r3, r18
-    bl fn_800D3FA4
+    bl bloom_processPasses
 lbl_fn_803EEEDC_00001480:
     lmw r17, 0x8c4(r1)
     lwz r0, 0x904(r1)
@@ -2162,14 +2162,14 @@ lbl_fn_803EF780_000019E0:
     bl fn_80216AFC
     cmpwi r3, 0x0
     beq lbl_fn_803EF780_00001B14
-    bl fn_80121F00
+    bl equip_getGlobalManager
     cmpwi r3, 0x0
     beq lbl_fn_803EF780_00001B14
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl kpad_getClampData
     cmpwi r3, 0x0
     beq lbl_fn_803EF780_00001B14
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl kpad_getClampData
     mr r25, r3
     bl fn_803EFD9C

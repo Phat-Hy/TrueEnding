@@ -6,7 +6,7 @@ extern void __files(void);
 extern void dtor_80084684(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_8008BBD8(void);
+extern void map_debugLog(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_8012476C(void);
@@ -376,7 +376,7 @@ lbl_fn_801A8080_000003F4:
     stw r4, 0x48(r1)
     stw r0, 0x4c(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_801A8080_000004C8
     lwz r7, 0x3c(r1)
@@ -663,7 +663,7 @@ lbl_fn_801A84AC_000007E0:
     stw r4, 0x48(r1)
     stw r0, 0x4c(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_801A84AC_000008B4
     lwz r7, 0x3c(r1)
@@ -1366,7 +1366,7 @@ lbl_fn_801A8E68_000011DC:
     stw r4, 0x48(r1)
     stw r0, 0x4c(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_801A8E68_000012B0
     lwz r7, 0x3c(r1)

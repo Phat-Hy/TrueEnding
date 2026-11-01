@@ -28,8 +28,8 @@ extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
-extern void fn_8068A850(void);
-extern void fn_8068AD58(void);
+extern void std_sin(void);
+extern void std_cos(void);
 extern void fn_8068AEA0(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
@@ -3290,7 +3290,7 @@ lbl_fn_8037F9AC_00002EA0:
     fmr f25, f0
 lbl_fn_8037F9AC_00002EA4:
     lfs f1, 0x464(r1)
-    bl fn_8068A850
+    bl std_sin
     lfs f0, 0xc(r31)
     frsp f9, f1
     lfs f7, 0x484(r1)
@@ -3307,7 +3307,7 @@ lbl_fn_8037F9AC_00002EDC:
     fmr f24, f0
 lbl_fn_8037F9AC_00002EE0:
     lfs f1, 0x464(r1)
-    bl fn_8068AD58
+    bl std_cos
     lfs f7, 0xc(r31)
     frsp f8, f1
     addi r3, r1, 0x490

@@ -8,7 +8,7 @@ extern void _savegpr_22(void);
 extern void _savegpr_23(void);
 extern void dtor_80084684(void);
 extern void vec3_copy(void);
-extern void fn_8001047C(void);
+extern void vec3_assign(void);
 extern void fn_8004D388(void);
 extern void collision_testLineSegment(void);
 extern void atn_ColliBase_destructor(void);
@@ -30,14 +30,14 @@ extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void str_findChar(void);
 extern void fn_800EC204(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800FBA9C(void);
 extern void fn_800FBE70(void);
 extern void actor_spawnActorWithId(void);
-extern void fn_80121F00(void);
+extern void equip_getGlobalManager(void);
 extern void fn_8013C504(void);
 extern void fn_80158E1C(void);
 extern void actor_setState(void);
@@ -1011,13 +1011,13 @@ asm void fn_80468B68(void)
     addi r4, r29, lbl_807C7030@l
     li r28, 0x0
     li r27, 0x0
-    bl fn_8001047C
+    bl vec3_assign
     addi r3, r1, 0x20
     addi r4, r29, lbl_807C7030@l
-    bl fn_8001047C
+    bl vec3_assign
     addi r3, r1, 0x14
     addi r4, r29, lbl_807C7030@l
-    bl fn_8001047C
+    bl vec3_assign
     lis r3, lbl_80755018@ha
     li r0, 0xa
     addi r3, r3, lbl_80755018@l
@@ -1056,7 +1056,7 @@ lbl_fn_80468B68_00000CDC:
     addi r4, r4, 0x1
     bdnz lbl_fn_80468B68_00000C7C
 lbl_fn_80468B68_00000CE8:
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_8013C504
     mr r4, r25
     bl fn_800EC204
@@ -1067,7 +1067,7 @@ lbl_fn_80468B68_00000CE8:
     addi r4, r4, 0x4
     bl vec3_copy
 lbl_fn_80468B68_00000D10:
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_8013C504
     mr r4, r27
     bl fn_800EC204
@@ -1078,7 +1078,7 @@ lbl_fn_80468B68_00000D10:
     addi r4, r4, 0x4
     bl vec3_copy
 lbl_fn_80468B68_00000D38:
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_8013C504
     mr r4, r28
     bl fn_800EC204
@@ -1517,7 +1517,7 @@ asm void task_Library_destructor(void)
     b lbl_task_Library_destructor_00001528
 lbl_task_Library_destructor_00001314:
     mr r3, r29
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     bne lbl_task_Library_destructor_0000132C
     li r3, 0x0

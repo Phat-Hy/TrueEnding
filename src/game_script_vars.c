@@ -19,7 +19,7 @@ extern void fn_80126214(void);
 extern void fn_8012D8B8(void);
 extern void fn_80139560(void);
 extern void fn_80144710(void);
-extern void fn_80145334(void);
+extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void fn_8014C540(void);
 extern void fn_8015495C(void);
@@ -1056,7 +1056,7 @@ asm void fn_80248854(void)
     psq_l f1, 0x0(r4), 0, 0
     psq_st f1, 0x528(r27), 0, 0
     stfs f2, 0x530(r27)
-    bl fn_80145334
+    bl quest_updateFlow
     lfs f0, lbl_808831D8
     li r0, 0x3
     stw r0, 0x50(r1)
@@ -1548,7 +1548,7 @@ lbl_fn_80249004_00001458:
     mr r3, r30
     bl fn_80249394
     mr r3, r30
-    bl fn_80145334
+    bl quest_updateFlow
     mr r3, r30
     bl fn_8014C540
     b lbl_fn_80249004_000015FC
@@ -1556,7 +1556,7 @@ lbl_fn_80249004_00001474:
     mr r3, r30
     bl fn_80249588
     mr r3, r30
-    bl fn_80145334
+    bl quest_updateFlow
     mr r3, r30
     bl fn_8014C540
     b lbl_fn_80249004_000015FC
@@ -1623,7 +1623,7 @@ lbl_fn_80249004_00001490:
     stw r0, 0x1504(r30)
     mr r3, r30
     stw r0, 0x1500(r30)
-    bl fn_80145334
+    bl quest_updateFlow
     mr r3, r30
     bl fn_8014C540
     li r31, 0x0

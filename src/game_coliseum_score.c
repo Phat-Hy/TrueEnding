@@ -26,7 +26,7 @@ extern void fn_800C2634(void);
 extern void fn_800C289C(void);
 extern void fn_800C2B24(void);
 extern void fn_800C2C20(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void fn_800D5908(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
@@ -113,7 +113,7 @@ lbl_fn_804923B4_00000068:
     cmpwi r30, 0x0
     beq lbl_fn_804923B4_000000BC
     mr r3, r28
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_804923B4_000000BC
     li r3, 0x1

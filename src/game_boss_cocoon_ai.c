@@ -57,7 +57,7 @@ extern void printf(void);
 extern void rand(void);
 extern void abort(void);
 extern void fn_8068A918(void);
-extern void fn_8068AD58(void);
+extern void std_cos(void);
 
 /* External data declarations */
 extern u8 lbl_807549B0[];
@@ -1384,7 +1384,7 @@ lbl_fn_80454F08_000011C0:
     fsubs f4, f4, f5
     fdivs f3, f4, f3
     fmuls f1, f0, f3
-    bl fn_8068AD58
+    bl std_cos
     lwz r3, lbl_8087F430
     frsp f3, f1
     lfs f0, lbl_80886BBC
@@ -1732,7 +1732,7 @@ lbl_fn_8045531C_000016FC:
     lfs f0, lbl_80886BB8
     fdivs f1, f2, f1
     fmuls f1, f0, f1
-    bl fn_8068AD58
+    bl std_cos
     frsp f2, f1
     lfs f1, lbl_80886B94
     lis r4, lbl_807C8A48@ha

@@ -10,7 +10,7 @@ extern void fn_800185B4(void);
 extern void collision_testLineSegment(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_8008BBD8(void);
+extern void map_debugLog(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800A55D4(void);
@@ -1660,7 +1660,7 @@ lbl_fn_801A3DFC_0000162C:
     stw r4, 0x138(r1)
     stw r0, 0x13c(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_801A3DFC_00001700
     lwz r7, 0x12c(r1)
@@ -1791,7 +1791,7 @@ lbl_fn_801A3DFC_00001814:
     stw r4, 0x110(r1)
     stw r0, 0x114(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_801A3DFC_000018E8
     lwz r7, 0x104(r1)
@@ -1922,7 +1922,7 @@ lbl_fn_801A3DFC_000019FC:
     stw r4, 0xe8(r1)
     stw r0, 0xec(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_801A3DFC_00001AD0
     lwz r7, 0xdc(r1)
@@ -2042,7 +2042,7 @@ lbl_fn_801A3DFC_00001BBC:
     stw r4, 0xc0(r1)
     stw r0, 0xc4(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_801A3DFC_00001C90
     lwz r7, 0xb4(r1)

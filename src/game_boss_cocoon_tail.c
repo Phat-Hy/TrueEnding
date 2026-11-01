@@ -6,8 +6,8 @@ extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void vec3_copy(void);
 extern void fn_8000D3A4(void);
-extern void fn_8001047C(void);
-extern void fn_80011034(void);
+extern void vec3_assign(void);
+extern void vec3_toEulerAngles(void);
 extern void fn_80011220(void);
 extern void vec3_sub(void);
 extern void fn_8004ECC0(void);
@@ -750,7 +750,7 @@ asm void fn_80463174(void)
     bl fn_8013C38C
     mr r4, r3
     addi r3, r1, 0x8c
-    bl fn_8001047C
+    bl vec3_assign
     addi r3, r1, 0x80
     addi r4, r1, 0x8c
     addi r5, r31, 0x528
@@ -833,7 +833,7 @@ lbl_fn_80463174_000009CC:
     bl fn_800F7FD8
     addi r3, r1, 0x38
     addi r4, r1, 0x2c
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lfs f0, 0x3c(r1)
     fsubs f1, f0, f29
     bl fn_802A7964
@@ -862,7 +862,7 @@ lbl_fn_80463174_00000A9C:
     addi r3, r1, 0x20
     addi r4, r1, 0x74
     stw r0, 0x14c4(r31)
-    bl fn_8001047C
+    bl vec3_assign
     mr r5, r3
     mr r3, r31
     mr r4, r28
@@ -936,7 +936,7 @@ lbl_fn_80463174_00000B8C:
     bl fn_800F7FD8
     addi r3, r1, 0x14
     addi r4, r1, 0x8
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lfs f0, 0x18(r1)
     fsubs f1, f0, f31
     bl fn_802A7964
@@ -951,14 +951,14 @@ lbl_fn_80463174_00000B8C:
     bge lbl_fn_80463174_00000CB8
     addi r3, r1, 0x50
     addi r4, r31, 0x528
-    bl fn_8001047C
+    bl vec3_assign
     lfs f1, 0x54(r1)
     addi r3, r1, 0x44
     lfs f0, lbl_80886D9C
     addi r4, r1, 0x8c
     fadds f0, f1, f0
     stfs f0, 0x54(r1)
-    bl fn_8001047C
+    bl vec3_assign
     lfs f1, 0x48(r1)
     lfs f0, lbl_80886D9C
     fadds f0, f1, f0

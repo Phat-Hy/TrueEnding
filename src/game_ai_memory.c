@@ -16,7 +16,7 @@ extern void clip_calculateFrustum(void);
 extern void fn_80134674(void);
 extern void fn_80139560(void);
 extern void fn_80144710(void);
-extern void fn_80145334(void);
+extern void quest_updateFlow(void);
 extern void dialog_setScriptSlot(void);
 extern void fn_8014C540(void);
 extern void fn_80151448(void);
@@ -738,7 +738,7 @@ lbl_fn_802604E0_000009A8:
     mr r3, r31
     bl fn_8014C540
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     lwz r0, 0xc4(r1)
     psq_l f31, 0xb8(r1), 0, 0
     lfd f31, 0xb0(r1)

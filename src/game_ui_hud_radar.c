@@ -10,7 +10,7 @@ extern void dtor_80084684(void);
 extern void fn_8000D114(void);
 extern void vec3_copy(void);
 extern void fn_8000DD0C(void);
-extern void fn_80011034(void);
+extern void vec3_toEulerAngles(void);
 extern void fn_800133B0(void);
 extern void fn_8004D388(void);
 extern void collision_testLineSegment(void);
@@ -44,7 +44,7 @@ extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void rand(void);
-extern void fn_8068A850(void);
+extern void std_sin(void);
 extern void std_atan2(void);
 
 /* External data declarations */
@@ -1117,7 +1117,7 @@ asm void fn_801C0D80(void)
     bl atn_Anim_setLayerAnimation
     addi r3, r1, 0x74
     addi r4, r29, 0x8
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lwz r3, 0x4(r29)
     addi r4, r1, 0x74
     bl fn_801C0738
@@ -1129,7 +1129,7 @@ lbl_fn_801C0D80_00000D34:
     ble lbl_fn_801C0D80_00000E3C
     mr r4, r30
     addi r3, r1, 0x68
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lfs f31, 0x6c(r1)
     lwz r3, 0x4(r29)
     bl fn_8012A1B8
@@ -1159,7 +1159,7 @@ lbl_fn_801C0D80_00000D34:
     bl fn_8013C394
     addi r3, r1, 0x5c
     addi r4, r1, 0x50
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lwz r3, 0x4(r29)
     addi r4, r1, 0x5c
     bl fn_801C0738
@@ -1185,7 +1185,7 @@ lbl_fn_801C0D80_00000DD8:
     bl fn_8013C394
     addi r3, r1, 0x38
     addi r4, r1, 0x2c
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lwz r3, 0x4(r29)
     addi r4, r1, 0x38
     bl fn_801C0738
@@ -1205,7 +1205,7 @@ lbl_fn_801C0D80_00000E3C:
     bl fn_8013C3B4
     addi r3, r1, 0x14
     addi r4, r1, 0x8
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lwz r3, 0x4(r29)
     addi r4, r1, 0x14
     bl fn_801C0738
@@ -1261,7 +1261,7 @@ asm void fn_801C1060(void)
     stwu r1, -0x10(r1)
     mflr r0
     stw r0, 0x14(r1)
-    bl fn_8068A850
+    bl std_sin
     lwz r0, 0x14(r1)
     frsp f1, f1
     mtlr r0

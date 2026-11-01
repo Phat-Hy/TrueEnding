@@ -20,7 +20,7 @@ extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void fn_800DCA6C(void);
 extern void save_validateHeader(void);
 extern void fn_802085E0(void);
@@ -1554,7 +1554,7 @@ asm void fn_80376DD8(void)
     stw r30, 0x1e8(r1)
     stw r29, 0x1e4(r1)
     stw r28, 0x1e0(r1)
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_80376DD8_000016FC
     addi r3, r31, 0x54

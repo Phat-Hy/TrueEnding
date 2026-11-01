@@ -36,7 +36,7 @@ extern void fn_80102824(void);
 extern void boss_updatePhaseState(void);
 extern void fn_801446F0(void);
 extern void fn_80144710(void);
-extern void fn_80145334(void);
+extern void quest_updateFlow(void);
 extern void fn_8014C540(void);
 extern void fn_801539E0(void);
 extern void fn_80155DAC(void);
@@ -92,7 +92,7 @@ extern void strcmp(void);
 extern void strncmp(void);
 extern void atoi(void);
 extern void abort(void);
-extern void fn_8068A850(void);
+extern void std_sin(void);
 extern void std_fmod(void);
 extern void math_u64DivMod(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -667,7 +667,7 @@ asm void fn_802F0F60(void)
     fmr f31, f1
     lis r3, lbl_80748470@ha
     lfd f1, lbl_80748470@l(r3)
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     fcmpo cr0, f31, f0
     bge lbl_fn_802F0F60_000006E4
@@ -817,7 +817,7 @@ lbl_fn_802F1120_00000820:
     stfs f2, 0x53c(r3)
     stfs f0, 0x10(r1)
     lwz r3, 0x152c(r31)
-    bl fn_80145334
+    bl quest_updateFlow
 lbl_fn_802F1120_000008C8:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
@@ -2420,7 +2420,7 @@ lbl_fn_802F2294_00001FB0:
     mr r3, r31
     bl fn_8014C540
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     lwz r0, 0x58c(r31)
     cmpwi r0, 0x11
     bne lbl_fn_802F2294_00002170

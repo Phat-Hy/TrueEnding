@@ -16,7 +16,7 @@ extern void fn_8005BCE8(void);
 extern void mem_alloc(void);
 extern void fn_8008AD4C(void);
 extern void fn_8008B140(void);
-extern void fn_8008BBD8(void);
+extern void map_debugLog(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_80092F1C(void);
 extern void lockon_updateTarget(void);
@@ -52,7 +52,7 @@ extern void PSMTXConcat(void);
 extern void PSMTXTrans(void);
 extern void strcmp(void);
 extern void atoi(void);
-extern void fn_8068AD58(void);
+extern void std_cos(void);
 extern void std_fmod(void);
 extern void __ptmf_scall(void);
 extern char* strcpy(char* dest, const char* src);
@@ -463,7 +463,7 @@ lbl_fn_8040F690_000004A8:
     stw r4, 0x40(r1)
     stw r0, 0x44(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_8040F690_0000051C
     addic. r0, r1, 0x84
@@ -1382,7 +1382,7 @@ lbl_fn_8041044C_0000112C:
     bge lbl_fn_8041044C_00001138
     fadds f1, f1, f30
 lbl_fn_8041044C_00001138:
-    bl fn_8068AD58
+    bl std_cos
     frsp f9, f1
     lwz r31, 0x5dc(r25)
     lfs f0, 0x0(r30)
@@ -1402,7 +1402,7 @@ lbl_fn_8041044C_00001174:
     bge lbl_fn_8041044C_00001180
     fadds f1, f1, f30
 lbl_fn_8041044C_00001180:
-    bl fn_8068AD58
+    bl std_cos
     lfs f7, 0x5cc(r25)
     frsp f9, f1
     lfs f0, 0x5d0(r25)

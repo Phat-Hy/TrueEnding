@@ -20,7 +20,7 @@ extern void fn_800EE360(void);
 extern void system_getNextSequenceId(void);
 extern void fn_80129978(void);
 extern void boss_updatePhaseState(void);
-extern void fn_80145334(void);
+extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void fn_8014C540(void);
 extern void fn_80151448(void);
@@ -1566,7 +1566,7 @@ lbl_fn_80262FB4_00001488:
     stfs f0, 0x5b0(r31)
     bl fn_8014C540
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     lwz r0, 0x164(r1)
     psq_l f31, 0x158(r1), 0, 0
     lfd f31, 0x150(r1)

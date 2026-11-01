@@ -39,7 +39,7 @@ extern void PSVECMag(void);
 extern void PSVECCrossProduct(void);
 extern void rand(void);
 extern void fn_8068A4A8(void);
-extern void fn_8068AD58(void);
+extern void std_cos(void);
 extern void fn_8068AE24(void);
 extern void std_atan2(void);
 
@@ -588,7 +588,7 @@ lbl_fn_803792F0_000006AC:
     fmsubs f10, f11, f12, f10
     fmuls f9, f9, f10
     fmuls f1, f0, f9
-    bl fn_8068AD58
+    bl std_cos
     lfs f0, 0x334(r28)
     frsp f11, f1
     lfs f25, 0x328(r28)
@@ -1490,7 +1490,7 @@ lbl_fn_803792F0_00001458:
     lfs f0, lbl_8088583C
     fmr f30, f1
     fmuls f1, f0, f1
-    bl fn_8068AD58
+    bl std_cos
     lwz r3, 0x210(r28)
     frsp f9, f1
     lfs f0, lbl_808858B4
@@ -3098,7 +3098,7 @@ lbl_fn_803792F0_00002CC8:
     lfs f9, lbl_80885868
     lfs f0, lbl_8088587C
     fmsubs f1, f9, f11, f0
-    bl fn_8068AD58
+    bl std_cos
     lfs f9, 0x52c(r1)
     addi r3, r1, 0x434
     lfs f0, 0x520(r1)

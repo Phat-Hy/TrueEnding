@@ -34,8 +34,8 @@ extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void rand(void);
-extern void fn_8068A850(void);
-extern void fn_8068AD58(void);
+extern void std_sin(void);
+extern void std_cos(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
 extern void runtime_registerStaticObject(void);
@@ -194,12 +194,12 @@ lbl_fn_8040BE88_00000130:
     fmuls f1, f1, f2
     fadds f1, f0, f1
     stfs f1, 0x3e4(r30)
-    bl fn_8068AD58
+    bl std_cos
     lfs f0, 0x3e4(r30)
     frsp f2, f1
     fneg f1, f0
     stfs f2, 0x3ec(r30)
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     stfs f0, 0x3f4(r30)
 lbl_fn_8040BE88_000001AC:
@@ -308,12 +308,12 @@ lbl_fn_8040C058_000002E0:
     stfs f0, 0x3e4(r31)
 lbl_fn_8040C058_00000330:
     lfs f1, 0x3e4(r31)
-    bl fn_8068AD58
+    bl std_cos
     lfs f0, 0x3e4(r31)
     frsp f3, f1
     fneg f1, f0
     stfs f3, 0x3ec(r31)
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     stfs f0, 0x3f4(r31)
     b lbl_fn_8040C058_00000368
@@ -425,7 +425,7 @@ lbl_fn_8040C058_0000045C:
     lfs f0, 0x50(r1)
     lfd f1, lbl_80752AD8@l(r3)
     fmadds f30, f3, f0, f4
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     fcmpo cr0, f30, f0
     ble lbl_fn_8040C058_000005C4
@@ -578,12 +578,12 @@ lbl_fn_8040C058_000006DC:
     stfs f0, 0x3e4(r31)
 lbl_fn_8040C058_00000730:
     lfs f1, 0x3e4(r31)
-    bl fn_8068AD58
+    bl std_cos
     lfs f0, 0x3e4(r31)
     frsp f3, f1
     fneg f1, f0
     stfs f3, 0x3ec(r31)
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     stfs f0, 0x3f4(r31)
 lbl_fn_8040C058_00000754:
@@ -696,12 +696,12 @@ lbl_fn_8040C610_00000898:
     stfs f0, 0x3e4(r30)
 lbl_fn_8040C610_000008E8:
     lfs f1, 0x3e4(r30)
-    bl fn_8068AD58
+    bl std_cos
     lfs f0, 0x3e4(r30)
     frsp f3, f1
     fneg f1, f0
     stfs f3, 0x3ec(r30)
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     stfs f0, 0x3f4(r30)
     b lbl_fn_8040C610_00000920
@@ -813,7 +813,7 @@ lbl_fn_8040C610_00000A14:
     lfs f0, 0x5c(r1)
     lfd f1, lbl_80752AD8@l(r3)
     fmadds f30, f3, f0, f4
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     fcmpo cr0, f30, f0
     ble lbl_fn_8040C610_00000B7C
@@ -896,7 +896,7 @@ lbl_fn_8040C610_00000B7C:
     lfs f0, 0x50(r1)
     lfd f1, lbl_80752AD8@l(r3)
     fmadds f30, f3, f0, f4
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     fcmpo cr0, f30, f0
     ble lbl_fn_8040C610_00000CBC
@@ -1059,12 +1059,12 @@ lbl_fn_8040C610_00000DF8:
     stfs f0, 0x3e4(r30)
 lbl_fn_8040C610_00000E4C:
     lfs f1, 0x3e4(r30)
-    bl fn_8068AD58
+    bl std_cos
     lfs f0, 0x3e4(r30)
     frsp f3, f1
     fneg f1, f0
     stfs f3, 0x3ec(r30)
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     stfs f0, 0x3f4(r30)
 lbl_fn_8040C610_00000E70:
@@ -1180,12 +1180,12 @@ lbl_fn_8040CD2C_00000FB0:
     stfs f0, 0x3e4(r31)
 lbl_fn_8040CD2C_00001008:
     lfs f1, 0x3e4(r31)
-    bl fn_8068AD58
+    bl std_cos
     lfs f0, 0x3e4(r31)
     frsp f3, f1
     fneg f1, f0
     stfs f3, 0x3ec(r31)
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     stfs f0, 0x3f4(r31)
     b lbl_fn_8040CD2C_00001320

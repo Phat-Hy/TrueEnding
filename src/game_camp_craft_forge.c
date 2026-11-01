@@ -20,7 +20,7 @@ extern void fn_8008B140(void);
 extern void fn_8008B978(void);
 extern void fn_800C7F08(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void fn_801027A4(void);
 extern void fn_80154654(void);
 extern void fn_801546F4(void);
@@ -67,8 +67,8 @@ extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
 extern void rand(void);
-extern void fn_8068A850(void);
-extern void fn_8068AD58(void);
+extern void std_sin(void);
+extern void std_cos(void);
 
 /* External data declarations */
 extern u8 lbl_807500B0[];
@@ -356,7 +356,7 @@ lbl_fn_803C01C0_000002C8:
 lbl_fn_803C01C0_0000032C:
     cmpwi r0, 0x1
     bne lbl_fn_803C01C0_000003B8
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_803C01C0_000003B8
     addi r3, r31, 0x11c
@@ -1350,20 +1350,20 @@ lbl_fn_803C11A4_00001040:
     fdivs f4, f5, f4
     fmuls f3, f3, f4
     fmuls f1, f0, f3
-    bl fn_8068AD58
+    bl std_cos
     frsp f4, f1
     lfs f3, 0x14(r31)
     lfs f0, lbl_80885CD4
     fmr f1, f30
     fmuls f3, f3, f4
     fmuls f29, f0, f3
-    bl fn_8068AD58
+    bl std_cos
     frsp f3, f1
     lfs f0, 0xc(r31)
     fmr f1, f30
     lfs f31, 0x8(r31)
     fmadds f30, f29, f3, f0
-    bl fn_8068A850
+    bl std_sin
     frsp f3, f1
     lfs f0, 0x4(r31)
     fmr f2, f30
@@ -1471,17 +1471,17 @@ lbl_fn_803C1338_00001248:
     fdivs f0, f0, f26
     fmuls f0, f28, f0
     fmuls f1, f29, f0
-    bl fn_8068AD58
+    bl std_cos
     frsp f3, f1
     lfs f0, 0x14(r28)
     fmr f1, f24
     fmuls f0, f0, f3
     fmuls f23, f30, f0
-    bl fn_8068AD58
+    bl std_cos
     frsp f0, f1
     fmr f1, f24
     fmuls f24, f23, f0
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     stfs f31, 0xc(r1)
     fmr f2, f24

@@ -7,7 +7,7 @@ extern void dtor_80084684(void);
 extern void fn_8003EA3C(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_8008BBD8(void);
+extern void map_debugLog(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -563,7 +563,7 @@ lbl_fn_8019DF0C_000006A8:
     stw r4, 0x9c(r1)
     stw r0, 0xa0(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_8019DF0C_0000077C
     lwz r7, 0x90(r1)
@@ -702,7 +702,7 @@ lbl_fn_8019DF0C_000008B4:
     stw r4, 0x74(r1)
     stw r0, 0x78(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_8019DF0C_00000988
     lwz r7, 0x68(r1)

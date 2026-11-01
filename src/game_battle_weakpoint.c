@@ -14,7 +14,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void ref_releaseHandle(void);
 extern void morph_updateMesh(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void fn_8016D3F8(void);
@@ -804,7 +804,7 @@ asm void fn_803FC0E0(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_803FC0E0_00000994
     li r0, 0x2

@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void fn_8008B978(void);
 extern void fn_8012DD70(void);
-extern void fn_80145334(void);
+extern void quest_updateFlow(void);
 extern void fn_8014DEE4(void);
 extern void fn_80153698(void);
 extern void fn_801765D8(void);
@@ -85,7 +85,7 @@ lbl_fn_803BB0E0_00000064:
     cmpwi r0, 0x4
     bne lbl_fn_803BB0E0_000000C0
     mr r3, r30
-    bl fn_80145334
+    bl quest_updateFlow
     lwz r3, lbl_8087F430
     mr r5, r30
     addi r4, r1, 0x8

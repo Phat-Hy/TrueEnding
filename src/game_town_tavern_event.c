@@ -9,7 +9,7 @@ extern void fn_80088FAC(void);
 extern void node_createNamedChild(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void atn_LH_Texture_release(void);
 extern void fn_800D5908(void);
 extern void atn_LH_Texture_update(void);
@@ -1796,7 +1796,7 @@ lbl_fn_803D1574_000019B4:
     blt lbl_fn_803D1574_00001990
 lbl_fn_803D1574_000019C8:
     mr r3, r27
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     bne lbl_fn_803D1574_000019DC
     li r29, 0x1

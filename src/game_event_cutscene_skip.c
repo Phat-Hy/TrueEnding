@@ -19,7 +19,7 @@ extern void fn_8006AA20(void);
 extern void fn_8006BA8C(void);
 extern void fn_8006BB6C(void);
 extern void mem_free(void);
-extern void fn_8008BBD8(void);
+extern void map_debugLog(void);
 extern void fn_800C3094(void);
 extern void fn_800CB480(void);
 extern void fn_800CF680(void);
@@ -544,7 +544,7 @@ lbl_fn_8047FAD0_00000524:
     stw r4, 0x10(r1)
     stw r0, 0x14(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_8047FAD0_00000570
     addic. r0, r1, 0x24

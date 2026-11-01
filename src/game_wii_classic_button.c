@@ -10,7 +10,7 @@ extern void fn_80010374(void);
 extern void fn_8001260C(void);
 extern void fn_8001296C(void);
 extern void fn_8004ECC0(void);
-extern void fn_8008BBD8(void);
+extern void map_debugLog(void);
 extern void fn_800928B0(void);
 extern void msg_getMessageById(void);
 extern void fn_800C16B4(void);
@@ -1671,7 +1671,7 @@ lbl_fn_80561BD4_00001518:
     stw r4, 0x20(r1)
     stw r0, 0x24(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_80561BD4_0000158C
     addic. r0, r1, 0xe4

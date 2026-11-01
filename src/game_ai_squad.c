@@ -53,7 +53,7 @@ extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
 extern void PSVECSquareMag(void);
 extern void PSVECDotProduct(void);
-extern void fn_8068A850(void);
+extern void std_sin(void);
 extern void std_atan2(void);
 
 /* External data declarations */
@@ -647,7 +647,7 @@ lbl_fn_802696F8_00000718:
     bl PSVECDotProduct
     fmr f30, f1
     lfd f1, lbl_807445E0@l(r30)
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     fcmpo cr0, f30, f0
     cror eq, gt, eq

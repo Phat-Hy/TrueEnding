@@ -13,8 +13,8 @@ extern void fn_8000D3A8(void);
 extern void fn_8000D430(void);
 extern void fn_8000D9E8(void);
 extern void fn_8000DCF4(void);
-extern void fn_8001047C(void);
-extern void fn_80011034(void);
+extern void vec3_assign(void);
+extern void vec3_toEulerAngles(void);
 extern void fn_80012C88(void);
 extern void vec3_sub(void);
 extern void fn_80013410(void);
@@ -40,7 +40,7 @@ extern void fn_800CB440(void);
 extern void morph_updateMesh(void);
 extern void fn_800CB6E4(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void str_skipWhitespace(void);
 extern void fn_800F52F8(void);
 extern void fn_800F72CC(void);
@@ -50,7 +50,7 @@ extern void fn_800F80A8(void);
 extern void fn_800F80B8(void);
 extern void fn_800F84C8(void);
 extern void fn_801162A0(void);
-extern void fn_80121F00(void);
+extern void equip_getGlobalManager(void);
 extern void fn_8013A18C(void);
 extern void fn_8013C38C(void);
 extern void fn_8013C3B4(void);
@@ -423,7 +423,7 @@ asm void fn_803FA148(void)
     cmpwi r3, 0x0
     bne lbl_fn_803FA148_000003B8
     mr r3, r31
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_803FA148_000003B8
     lwz r3, 0x51c(r31)
@@ -749,10 +749,10 @@ asm void fn_803FA5C8(void)
     lwz r0, 0x7c(r4)
     cmpwi r0, 0x0
     beq lbl_fn_803FA5C8_00000FB8
-    bl fn_80121F00
+    bl equip_getGlobalManager
     cmpwi r3, 0x0
     beq lbl_fn_803FA5C8_0000084C
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_803D6E24
     subi r0, r3, 0x8
     cmplwi r0, 0x3
@@ -863,19 +863,19 @@ lbl_fn_803FA5C8_00000944:
     li r4, -0x1
     bl ref_releaseHandle
 lbl_fn_803FA5C8_0000098C:
-    bl fn_80121F00
+    bl equip_getGlobalManager
     cmpwi r3, 0x0
     beq lbl_fn_803FA5C8_000009F0
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl kpad_getClampData
     cmpwi r3, 0x0
     beq lbl_fn_803FA5C8_000009F0
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl kpad_getClampData
     bl fn_803EFDA4
     cmpwi r3, 0xb
     bne lbl_fn_803FA5C8_000009F0
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl kpad_getClampData
     bl fn_803EFDAC
     cmpwi r3, 0x3
@@ -978,7 +978,7 @@ lbl_fn_803FA5C8_00000B08:
     stfs f1, 0x4d4(r31)
     fadds f0, f0, f1
     stfs f0, 0x70(r31)
-    bl fn_8001047C
+    bl vec3_assign
     lfs f1, 0xf4(r1)
     addi r3, r1, 0xe4
     lfs f0, lbl_80886044
@@ -1010,7 +1010,7 @@ lbl_fn_803FA5C8_00000BA8:
     bne lbl_fn_803FA5C8_00000DC8
     addi r3, r1, 0xd8
     addi r4, r31, 0x6c
-    bl fn_8001047C
+    bl vec3_assign
     bl fn_800F52F8
     bl fn_802F0998
     lfs f0, 0x4e8(r31)
@@ -1138,7 +1138,7 @@ lbl_fn_803FA5C8_00000D88:
     bl fn_800F7FD8
     addi r3, r1, 0x30
     addi r4, r1, 0x24
-    bl fn_80011034
+    bl vec3_toEulerAngles
     addi r3, r31, 0x78
     addi r4, r1, 0x30
     bl vec3_copy
@@ -1152,7 +1152,7 @@ lbl_fn_803FA5C8_00000DC8:
     bne lbl_fn_803FA5C8_00000E38
     addi r3, r1, 0xa8
     addi r4, r31, 0x6c
-    bl fn_8001047C
+    bl vec3_assign
     addi r3, r31, 0x6c
     addi r4, r31, 0x4e4
     bl fn_80012C88
@@ -1167,7 +1167,7 @@ lbl_fn_803FA5C8_00000DC8:
     bl fn_800F7FD8
     addi r3, r1, 0x18
     addi r4, r1, 0xc
-    bl fn_80011034
+    bl vec3_toEulerAngles
     addi r3, r31, 0x78
     addi r4, r1, 0x18
     bl vec3_copy

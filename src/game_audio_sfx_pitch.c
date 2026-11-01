@@ -7,8 +7,8 @@ extern void fn_8000D0F8(void);
 extern void fn_8000D114(void);
 extern void vec3_copy(void);
 extern void fn_8000D3A4(void);
-extern void fn_8001047C(void);
-extern void fn_80011034(void);
+extern void vec3_assign(void);
+extern void vec3_toEulerAngles(void);
 extern void fn_80011220(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void vec3_sub(void);
@@ -59,7 +59,7 @@ extern void fn_801404F8(void);
 extern void fn_80140500(void);
 extern void fn_8014052C(void);
 extern void fn_80140588(void);
-extern void fn_80145334(void);
+extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void fn_8014C540(void);
 extern void fn_80164168(void);
@@ -873,7 +873,7 @@ lbl_fn_80313E44_000009FC:
     extrwi. r0, r0, 1, 6
     bne lbl_fn_80313E44_00000A28
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
 lbl_fn_80313E44_00000A28:
     lwz r0, 0x58c(r31)
     cmpwi r0, 0x9
@@ -1781,7 +1781,7 @@ asm void fn_80314BD8(void)
     addi r3, r1, 0x1a0
     stw r29, 0x204(r1)
     addi r4, r30, 0x534
-    bl fn_8001047C
+    bl vec3_assign
     lwz r0, 0x55c(r30)
     li r31, 0x0
     cmpwi r0, 0x2
@@ -1805,7 +1805,7 @@ asm void fn_80314BD8(void)
     bl fn_80139F58
     mr r4, r3
     addi r3, r1, 0x194
-    bl fn_8001047C
+    bl vec3_assign
     addi r3, r1, 0x194
     bl fn_8000D3A4
     lfs f0, lbl_80884D18
@@ -1817,7 +1817,7 @@ asm void fn_80314BD8(void)
     bl fn_800F7FD8
     addi r3, r1, 0x11c
     addi r4, r1, 0x110
-    bl fn_80011034
+    bl vec3_toEulerAngles
     addi r3, r1, 0x1a0
     addi r4, r1, 0x11c
     bl vec3_copy
@@ -1872,7 +1872,7 @@ lbl_fn_80314BD8_00001820:
     bl fn_8013C3B4
     addi r3, r1, 0x104
     addi r4, r1, 0xf8
-    bl fn_80011034
+    bl vec3_toEulerAngles
     addi r3, r1, 0x1a0
     addi r4, r1, 0x104
     bl vec3_copy
@@ -1885,7 +1885,7 @@ lbl_fn_80314BD8_00001848:
     lfs f30, lbl_80884CF4
     addi r3, r1, 0xec
     addi r4, r1, 0x188
-    bl fn_80011034
+    bl vec3_toEulerAngles
     addi r3, r1, 0x1a0
     addi r4, r1, 0xec
     bl vec3_copy
@@ -1922,7 +1922,7 @@ lbl_fn_80314BD8_000018D0:
     ble lbl_fn_80314BD8_00001904
     addi r3, r1, 0xe0
     addi r4, r1, 0x170
-    bl fn_80011034
+    bl vec3_toEulerAngles
     addi r3, r1, 0x1a0
     addi r4, r1, 0xe0
     bl vec3_copy
@@ -1957,7 +1957,7 @@ lbl_fn_80314BD8_00001918:
     bl fn_8013C394
     addi r3, r1, 0xc8
     addi r4, r1, 0xbc
-    bl fn_80011034
+    bl vec3_toEulerAngles
     addi r3, r1, 0x1a0
     addi r4, r1, 0xc8
     bl vec3_copy
@@ -1973,7 +1973,7 @@ lbl_fn_80314BD8_00001984:
     bl fn_8013C394
     addi r3, r1, 0xa4
     addi r4, r1, 0x98
-    bl fn_80011034
+    bl vec3_toEulerAngles
     addi r3, r1, 0x1a0
     addi r4, r1, 0xa4
     bl vec3_copy
@@ -1981,7 +1981,7 @@ lbl_fn_80314BD8_00001984:
 lbl_fn_80314BD8_000019C0:
     addi r3, r1, 0x80
     addi r4, r1, 0x170
-    bl fn_80011034
+    bl vec3_toEulerAngles
     addi r3, r1, 0x1a0
     addi r4, r1, 0x80
     bl vec3_copy
@@ -1994,7 +1994,7 @@ lbl_fn_80314BD8_000019E8:
     lfs f30, lbl_80884CF0
     addi r3, r1, 0x74
     addi r4, r1, 0x188
-    bl fn_80011034
+    bl vec3_toEulerAngles
     addi r3, r1, 0x1a0
     addi r4, r1, 0x74
     bl vec3_copy
@@ -2040,14 +2040,14 @@ lbl_fn_80314BD8_000019E8:
     bl fn_80140500
     addi r3, r1, 0x158
     addi r4, r30, 0x15f8
-    bl fn_8001047C
+    bl vec3_assign
     lfs f1, 0x15c(r1)
     addi r3, r1, 0x14c
     lfs f0, lbl_80884CF4
     addi r4, r1, 0x158
     fadds f0, f1, f0
     stfs f0, 0x15c(r1)
-    bl fn_8001047C
+    bl vec3_assign
     lfs f1, 0x150(r1)
     lfs f0, lbl_80884D1C
     fsubs f0, f1, f0
@@ -2083,7 +2083,7 @@ lbl_fn_80314BD8_00001B38:
     bl vec3_sub
     addi r3, r1, 0x44
     addi r4, r1, 0x140
-    bl fn_80011034
+    bl vec3_toEulerAngles
     addi r3, r30, 0x1604
     addi r4, r1, 0x44
     bl vec3_copy
@@ -2242,7 +2242,7 @@ lbl_fn_80314BD8_00001D4C:
 lbl_fn_80314BD8_00001D9C:
     addi r3, r1, 0x2c
     addi r4, r1, 0x134
-    bl fn_80011034
+    bl vec3_toEulerAngles
     addi r3, r1, 0x1a0
     addi r4, r1, 0x2c
     bl vec3_copy
@@ -2339,7 +2339,7 @@ lbl_fn_80314BD8_00001ED0:
     bl fn_80139F58
     mr r4, r3
     addi r3, r1, 0x128
-    bl fn_8001047C
+    bl vec3_assign
     addi r3, r1, 0x128
     bl fn_8000D3A4
     lfs f0, lbl_80884D18
@@ -2351,7 +2351,7 @@ lbl_fn_80314BD8_00001ED0:
     bl fn_800F7FD8
     addi r3, r1, 0x20
     addi r4, r1, 0x14
-    bl fn_80011034
+    bl vec3_toEulerAngles
     addi r3, r1, 0x1a0
     addi r4, r1, 0x20
     bl vec3_copy

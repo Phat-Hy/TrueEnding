@@ -16,10 +16,10 @@ extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void node_createNamedChild(void);
 extern void fn_800897D8(void);
-extern void fn_8008BBD8(void);
+extern void map_debugLog(void);
 extern void atn_Model_findBoneIndex(void);
 extern void str_parseInt(void);
-extern void fn_80148990(void);
+extern void quest_ctorRewardItem(void);
 extern void fn_801957F0(void);
 extern void task_findEntryById(void);
 extern void res_MsgHandle_constructor(void);
@@ -261,9 +261,9 @@ lbl_fn_80308E6C_00000240:
     la r6, lbl_8087D9E0
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     li r5, 0x0
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r6, 0x14
     li r7, 0x8
     bl runtime_registerStaticObject
@@ -375,9 +375,9 @@ lbl_fn_80308E6C_000003E0:
     addi r3, r3, 0x10
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     mr r7, r30
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r5, 0x0
     li r6, 0x14
     bl runtime_registerStaticObject
@@ -507,9 +507,9 @@ lbl_fn_80308E6C_000005DC:
     la r6, lbl_8087D9E0
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     li r5, 0x0
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r6, 0x14
     li r7, 0x8
     bl runtime_registerStaticObject
@@ -620,9 +620,9 @@ lbl_fn_80308E6C_0000077C:
     addi r3, r3, 0x10
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     mr r7, r30
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r5, 0x0
     li r6, 0x14
     bl runtime_registerStaticObject
@@ -1137,7 +1137,7 @@ lbl_fn_803098D0_00000EE4:
     stw r4, 0xa8(r1)
     stw r0, 0xac(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_803098D0_00000FB8
     lwz r7, 0x9c(r1)

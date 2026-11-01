@@ -53,7 +53,7 @@ extern void fn_800F8014(void);
 extern void fn_8010EDFC(void);
 extern void fn_8011F91C(void);
 extern void fn_8011FC10(void);
-extern void fn_80121F00(void);
+extern void equip_getGlobalManager(void);
 extern void boss_updatePhaseState(void);
 extern void fn_8013C504(void);
 extern void fn_80154654(void);
@@ -1658,10 +1658,10 @@ asm void fn_8045374C(void)
     bl boss_getOffset54
     cmpwi r3, 0x0
     beq lbl_fn_8045374C_00001540
-    bl fn_80121F00
+    bl equip_getGlobalManager
     cmpwi r3, 0x0
     beq lbl_fn_8045374C_00001540
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_8013C504
     cmpwi r3, 0x0
     beq lbl_fn_8045374C_00001540

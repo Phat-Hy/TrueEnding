@@ -11,7 +11,7 @@ extern void vec3_copy(void);
 extern void fn_8000D760(void);
 extern void fn_8000D9E8(void);
 extern void fn_8000E18C(void);
-extern void fn_80011034(void);
+extern void vec3_toEulerAngles(void);
 extern void vec3_sub(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
@@ -35,7 +35,7 @@ extern void fn_800EC24C(void);
 extern void fn_800F7FD8(void);
 extern void system_getNextSequenceId(void);
 extern void fn_8011F91C(void);
-extern void fn_80121F00(void);
+extern void equip_getGlobalManager(void);
 extern void boss_updatePhaseState(void);
 extern void fn_8013C504(void);
 extern void fn_8015495C(void);
@@ -1434,7 +1434,7 @@ asm void fn_802885EC(void)
     ori r0, r0, 0xc219
     oris r0, r0, 0x380
     stw r0, 0x7ec(r31)
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_8013C504
     mr r30, r3
     addi r3, r31, 0x1984
@@ -1647,7 +1647,7 @@ lbl_fn_802885EC_000015E0:
     bl talk_parseQuotedString
     bl str_parseInt
     mr r29, r3
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_8013C504
     mr r4, r29
     bl fn_800EC204
@@ -1672,7 +1672,7 @@ lbl_fn_802885EC_00001638:
     bl talk_parseQuotedString
     bl str_parseInt
     mr r29, r3
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_8013C504
     mr r4, r29
     bl fn_800EC204
@@ -1696,7 +1696,7 @@ lbl_fn_802885EC_0000167C:
     bl talk_parseQuotedString
     bl str_parseInt
     mr r29, r3
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_8013C504
     mr r4, r29
     bl fn_800EC204
@@ -1883,7 +1883,7 @@ lbl_fn_802885EC_00001928:
 lbl_fn_802885EC_00001938:
     mr r3, r31
     bl fn_802914F8
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_8013C504
     li r4, 0x3e9
     bl fn_800EC204
@@ -1910,7 +1910,7 @@ lbl_fn_802885EC_00001980:
     bl fn_800F7FD8
     addi r3, r1, 0x2c
     addi r4, r1, 0x20
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lfs f0, 0x30(r1)
     li r3, 0x1
     stfs f0, 0x538(r31)

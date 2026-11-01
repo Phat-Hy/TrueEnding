@@ -22,7 +22,7 @@ extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void str_calcHash(void);
 extern void fn_80102890(void);
 extern void fn_8011CD84(void);
@@ -35,7 +35,7 @@ extern void fn_801354B4(void);
 extern void fn_80136138(void);
 extern void boss_updatePhaseState(void);
 extern void fn_80139560(void);
-extern void fn_80145334(void);
+extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void fn_8016F3D0(void);
 extern void sound_initGlobalInstances(void);
@@ -273,7 +273,7 @@ asm void fn_80547908(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_80547908_00000260
     lwz r0, 0x54(r31)
@@ -646,7 +646,7 @@ asm void fn_80547DC4(void)
     mr r31, r3
     bl fn_80139560
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0
@@ -1820,7 +1820,7 @@ asm void fn_80548E48(void)
     stwu r1, -0x10(r1)
     mflr r0
     stw r0, 0x14(r1)
-    bl fn_800D3FA4
+    bl bloom_processPasses
     neg r0, r3
     or r0, r0, r3
     srwi r3, r0, 31

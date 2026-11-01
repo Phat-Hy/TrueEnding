@@ -12,7 +12,7 @@ extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void fn_8000D114(void);
 extern void vec3_copy(void);
-extern void fn_80011034(void);
+extern void vec3_toEulerAngles(void);
 extern void fn_80011410(void);
 extern void fn_80012774(void);
 extern void vec3_sub(void);
@@ -423,7 +423,7 @@ lbl_fn_80487490_0000040C:
     bl fn_800F7FF0
     addi r3, r1, 0x60
     addi r4, r1, 0x78
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lfs f1, 0x64(r1)
     addi r3, r1, 0x108
     bl fn_8013A13C
@@ -495,7 +495,7 @@ lbl_fn_80487490_000004D4:
     bne lbl_fn_80487490_00000538
     addi r3, r1, 0x3c
     addi r4, r31, 0x243c
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lfs f1, 0x40(r1)
     bl fn_802A7964
     fmr f31, f1

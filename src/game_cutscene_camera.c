@@ -14,11 +14,11 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void vec3_copy(void);
 extern void fn_8000D844(void);
-extern void fn_8001047C(void);
+extern void vec3_assign(void);
 extern void fn_8004D388(void);
 extern void mem_free(void);
 extern void fn_800EC204(void);
-extern void fn_80121F00(void);
+extern void equip_getGlobalManager(void);
 extern void fn_8013C504(void);
 extern void fn_8032BE88(void);
 extern void fn_8032C1EC(void);
@@ -520,13 +520,13 @@ asm void fn_8032A9F4(void)
     addi r4, r29, lbl_807C7030@l
     li r28, 0x0
     li r27, 0x0
-    bl fn_8001047C
+    bl vec3_assign
     addi r3, r1, 0x20
     addi r4, r29, lbl_807C7030@l
-    bl fn_8001047C
+    bl vec3_assign
     addi r3, r1, 0x14
     addi r4, r29, lbl_807C7030@l
-    bl fn_8001047C
+    bl vec3_assign
     lis r3, lbl_80749B00@ha
     li r0, 0xa
     addi r3, r3, lbl_80749B00@l
@@ -560,7 +560,7 @@ lbl_fn_8032A9F4_000006D0:
     addi r4, r4, 0x1
     bdnz lbl_fn_8032A9F4_00000680
 lbl_fn_8032A9F4_000006DC:
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_8013C504
     mr r4, r26
     bl fn_800EC204
@@ -571,7 +571,7 @@ lbl_fn_8032A9F4_000006DC:
     addi r4, r4, 0x4
     bl vec3_copy
 lbl_fn_8032A9F4_00000704:
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_8013C504
     mr r4, r27
     bl fn_800EC204
@@ -582,7 +582,7 @@ lbl_fn_8032A9F4_00000704:
     addi r4, r4, 0x4
     bl vec3_copy
 lbl_fn_8032A9F4_0000072C:
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_8013C504
     mr r4, r28
     bl fn_800EC204

@@ -10,8 +10,8 @@ extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void fn_8000D114(void);
 extern void fn_8000D9F8(void);
-extern void fn_8001047C(void);
-extern void fn_80011034(void);
+extern void vec3_assign(void);
+extern void vec3_toEulerAngles(void);
 extern void fn_80011220(void);
 extern void vec3_sub(void);
 extern void fn_80013410(void);
@@ -25,7 +25,7 @@ extern void fn_8011F8F4(void);
 extern void fn_8011F91C(void);
 extern void fn_8011FC10(void);
 extern void fn_8011FE3C(void);
-extern void fn_80121F00(void);
+extern void equip_getGlobalManager(void);
 extern void fn_8012A190(void);
 extern void fn_8012A1B8(void);
 extern void fn_8012D8B8(void);
@@ -1185,7 +1185,7 @@ lbl_fn_803A26F4_00000EA8:
     bl fn_8012A1B8
     mr r4, r3
     addi r3, r1, 0xec
-    bl fn_8001047C
+    bl vec3_assign
     lfs f0, 0x14(r26)
     mr r3, r31
     stfs f0, 0xf0(r1)
@@ -1287,7 +1287,7 @@ lbl_fn_803A26F4_0000102C:
     bne lbl_fn_803A26F4_00001064
     addi r3, r1, 0x50
     addi r4, r1, 0xd4
-    bl fn_80011034
+    bl vec3_toEulerAngles
     mr r3, r31
     bl fn_8013C38C
     lfs f1, 0x54(r1)
@@ -1302,20 +1302,20 @@ lbl_fn_803A26F4_00001064:
     bl fn_8012A1B8
     mr r4, r3
     addi r3, r1, 0xc8
-    bl fn_8001047C
+    bl vec3_assign
     addi r3, r1, 0x44
     addi r4, r1, 0xd4
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lfs f0, 0x48(r1)
     mr r3, r31
     stfs f0, 0xcc(r1)
     addi r4, r1, 0xc8
     bl fn_801C0738
     b lbl_fn_803A26F4_000013B0
-    bl fn_80121F00
+    bl equip_getGlobalManager
     cmpwi r3, 0x0
     beq lbl_fn_803A26F4_000010B8
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_8013C504
     mr r23, r3
     b lbl_fn_803A26F4_000010BC
@@ -1372,10 +1372,10 @@ lbl_fn_803A26F4_00001158:
     bl fn_8017039C
     b lbl_fn_803A26F4_000013B0
 lbl_fn_803A26F4_00001174:
-    bl fn_80121F00
+    bl equip_getGlobalManager
     cmpwi r3, 0x0
     beq lbl_fn_803A26F4_0000118C
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_8013C504
     b lbl_fn_803A26F4_00001190
 lbl_fn_803A26F4_0000118C:
@@ -1404,10 +1404,10 @@ lbl_fn_803A26F4_000011AC:
     mr r3, r31
     bl fn_801C0738
     b lbl_fn_803A26F4_000013B0
-    bl fn_80121F00
+    bl equip_getGlobalManager
     cmpwi r3, 0x0
     beq lbl_fn_803A26F4_000011FC
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_8013C504
     b lbl_fn_803A26F4_00001200
 lbl_fn_803A26F4_000011FC:
@@ -1443,7 +1443,7 @@ lbl_fn_803A26F4_0000125C:
     bne lbl_fn_803A26F4_00001294
     addi r3, r1, 0x2c
     addi r4, r1, 0xa4
-    bl fn_80011034
+    bl vec3_toEulerAngles
     mr r3, r31
     bl fn_8013C38C
     lfs f1, 0x30(r1)
@@ -1458,20 +1458,20 @@ lbl_fn_803A26F4_00001294:
     bl fn_8012A1B8
     mr r4, r3
     addi r3, r1, 0x98
-    bl fn_8001047C
+    bl vec3_assign
     addi r3, r1, 0x20
     addi r4, r1, 0xa4
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lfs f0, 0x24(r1)
     mr r3, r31
     stfs f0, 0x9c(r1)
     addi r4, r1, 0x98
     bl fn_801C0738
     b lbl_fn_803A26F4_000013B0
-    bl fn_80121F00
+    bl equip_getGlobalManager
     cmpwi r3, 0x0
     beq lbl_fn_803A26F4_000012E4
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_8013C504
     b lbl_fn_803A26F4_000012E8
 lbl_fn_803A26F4_000012E4:
@@ -1507,7 +1507,7 @@ lbl_fn_803A26F4_00001344:
     bne lbl_fn_803A26F4_0000137C
     addi r3, r1, 0x14
     addi r4, r1, 0x8c
-    bl fn_80011034
+    bl vec3_toEulerAngles
     mr r3, r31
     bl fn_8013C38C
     lfs f1, 0x18(r1)
@@ -1522,10 +1522,10 @@ lbl_fn_803A26F4_0000137C:
     bl fn_8012A1B8
     mr r4, r3
     addi r3, r1, 0x80
-    bl fn_8001047C
+    bl vec3_assign
     addi r3, r1, 0x8
     addi r4, r1, 0x8c
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lfs f0, 0xc(r1)
     mr r3, r31
     stfs f0, 0x84(r1)

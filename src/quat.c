@@ -7,8 +7,8 @@ extern f32 lbl_8088858C;
 extern u32 lbl_80764798[];
 
 extern void PSVECNormalize(void);
-extern void fn_8068AD58(void);
-extern void fn_8068A850(void);
+extern void std_cos(void);
+extern void std_sin(void);
 extern void math_u64DivMod(void);
 extern void fn_8068AE9C(void);
 extern void _savegpr_25(void);
@@ -91,10 +91,10 @@ asm void fn_805F9AB0(void) {
     lfs f0, lbl_80888588
     fmuls f30, f0, f30
     fmr f1, f30
-    bl fn_8068AD58
+    bl std_cos
     frsp f31, f1
     fmr f1, f30
-    bl fn_8068A850
+    bl std_sin
     lfs f0, 0x8(r1)
     frsp f1, f1
     fmuls f0, f31, f0
@@ -291,16 +291,16 @@ lbl_03cc:
     bl fn_8068AE9C
     frsp f29, f1
     fmr f1, f29
-    bl fn_8068AD58
+    bl std_cos
     lfs f0, lbl_80888580
     frsp f28, f1
     fsubs f0, f0, f31
     fmuls f1, f0, f29
-    bl fn_8068AD58
+    bl std_cos
     frsp f0, f1
     fmuls f1, f31, f29
     fdivs f31, f0, f28
-    bl fn_8068AD58
+    bl std_cos
     frsp f0, f1
     fdivs f0, f0, f28
     fmuls f30, f30, f0

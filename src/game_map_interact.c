@@ -27,7 +27,7 @@ extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB688(void);
 extern void atn_Task_destructor(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void fn_800D8814(void);
 extern void fn_800F7FD8(void);
 extern void fn_800F833C(void);
@@ -292,7 +292,7 @@ lbl_fn_80183B2C_00000184:
 asm void fn_80183C54(void)
 {
     nofralloc
-    b fn_800D3FA4
+    b bloom_processPasses
 }
 
 asm void fn_80183C58(void)

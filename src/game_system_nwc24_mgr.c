@@ -7,9 +7,9 @@ extern void _savegpr_27(void);
 extern void fn_8000D114(void);
 extern void vec3_copy(void);
 extern void fn_8000D3A4(void);
-extern void fn_8001047C(void);
+extern void vec3_assign(void);
 extern void fn_800109E0(void);
-extern void fn_80011034(void);
+extern void vec3_toEulerAngles(void);
 extern void fn_80011410(void);
 extern void fn_80012C88(void);
 extern void vec3_sub(void);
@@ -68,8 +68,8 @@ extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
 extern void PSVECCrossProduct(void);
-extern void fn_8068A850(void);
-extern void fn_8068AD58(void);
+extern void std_sin(void);
+extern void std_cos(void);
 extern void std_atan2(void);
 
 /* External data declarations */
@@ -196,10 +196,10 @@ asm void fn_80382A1C(void)
     bl fn_80113CCC
     mr r4, r3
     addi r3, r1, 0x188
-    bl fn_8001047C
+    bl vec3_assign
     addi r3, r1, 0x17c
     addi r4, r30, 0x868
-    bl fn_8001047C
+    bl vec3_assign
     addi r3, r1, 0x170
     addi r4, r1, 0x17c
     addi r5, r1, 0x188
@@ -216,7 +216,7 @@ asm void fn_80382A1C(void)
     bl fn_8013C3B4
     addi r3, r1, 0x164
     addi r4, r1, 0xec
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lfs f1, lbl_808858E8
     addi r3, r1, 0x158
     lfs f2, lbl_808858F8
@@ -234,7 +234,7 @@ asm void fn_80382A1C(void)
     bl fn_8012A1B8
     mr r4, r3
     addi r3, r1, 0x140
-    bl fn_8001047C
+    bl vec3_assign
     mr r4, r31
     addi r3, r1, 0x17c
     bl vec3_copy
@@ -363,7 +363,7 @@ lbl_fn_80382A1C_000001E4:
     bl fn_8013C3B4
     addi r3, r1, 0xa4
     addi r4, r1, 0x98
-    bl fn_80011034
+    bl vec3_toEulerAngles
     addi r3, r1, 0x128
     addi r4, r1, 0xa4
     bl vec3_copy
@@ -1339,13 +1339,13 @@ lbl_fn_8038378C_0000116C:
     psq_st f1, 0x0(r4), 0, 0
     fmr f1, f7
     stfs f2, 0x870(r30)
-    bl fn_8068A850
+    bl std_sin
     frsp f7, f1
     lfs f0, 0xc8(r1)
     lfs f1, 0xd8(r1)
     fmadds f0, f30, f7, f0
     stfs f0, 0xc8(r1)
-    bl fn_8068AD58
+    bl std_cos
     frsp f10, f1
     lfs f7, lbl_808858E8
     fneg f9, f30

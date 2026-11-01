@@ -14,7 +14,7 @@ extern void mem_alloc(void);
 extern void fn_8008A4E0(void);
 extern void fn_8008A76C(void);
 extern void fn_8008B140(void);
-extern void fn_8008BBD8(void);
+extern void map_debugLog(void);
 extern void fn_800902C0(void);
 extern void fn_800920B8(void);
 extern void fn_800928B0(void);
@@ -42,8 +42,8 @@ extern void atn_LoadHandle_destructor(void);
 extern void PSVECSquareMag(void);
 extern void rand(void);
 extern void strcmp(void);
-extern void fn_8068A850(void);
-extern void fn_8068AD58(void);
+extern void std_sin(void);
+extern void std_cos(void);
 extern void std_fmod(void);
 extern void __ptmf_scall(void);
 
@@ -1679,7 +1679,7 @@ lbl_fn_803FE828_00001664:
     stw r4, 0x50(r1)
     stw r0, 0x54(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_803FE828_000016D8
     addic. r0, r1, 0x84
@@ -1947,7 +1947,7 @@ lbl_fn_803FEC54_00001A30:
     lfs f1, 0x384(r31)
     lfs f0, 0x14(r30)
     fadds f1, f1, f0
-    bl fn_8068AD58
+    bl std_cos
     lfs f2, lbl_808860C8
     frsp f4, f1
     lfs f0, 0x10(r30)
@@ -1960,7 +1960,7 @@ lbl_fn_803FEC54_00001A30:
     fmuls f0, f0, f2
     fmuls f0, f0, f4
     stfs f0, 0x378(r31)
-    bl fn_8068AD58
+    bl std_cos
     lfs f0, 0x8(r30)
     frsp f4, f1
     lfs f1, 0x384(r31)
@@ -1971,7 +1971,7 @@ lbl_fn_803FEC54_00001A30:
     fmuls f0, f3, f4
     fmuls f0, f2, f0
     stfs f0, 0x37c(r31)
-    bl fn_8068AD58
+    bl std_cos
     lfs f0, 0x8(r30)
     frsp f4, f1
     lfs f5, lbl_808860CC
@@ -2008,7 +2008,7 @@ lbl_fn_803FEC54_00001B08:
     lfs f0, 0x384(r31)
     fnmsubs f1, f2, f3, f1
     fdivs f1, f0, f1
-    bl fn_8068A850
+    bl std_sin
     frsp f3, f1
     lfs f0, lbl_808860C4
     lfs f2, 0x20(r30)

@@ -19,7 +19,7 @@ extern void system_getNextSequenceId(void);
 extern void fn_8011BF3C(void);
 extern void fn_80126214(void);
 extern void fn_8013A258(void);
-extern void fn_80148990(void);
+extern void quest_ctorRewardItem(void);
 extern void dialog_renderWindow(void);
 extern void fn_80151448(void);
 extern void fn_8015B238(void);
@@ -35,8 +35,8 @@ extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
-extern void fn_8068A850(void);
-extern void fn_8068AD58(void);
+extern void std_sin(void);
+extern void std_cos(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
 extern void runtime_registerStaticObject(void);
@@ -461,7 +461,7 @@ asm void fn_80460F18(void)
     psq_l f1, 0x0(r4), 0, 0
     li r22, 0x0
     stw r0, 0x20(r1)
-    lis r31, fn_80148990@ha
+    lis r31, quest_ctorRewardItem@ha
     li r26, 0x8
     stfs f2, 0x10(r1)
     psq_st f1, 0x0(r29), 0, 0
@@ -506,7 +506,7 @@ lbl_fn_80460F18_00000560:
     la r6, lbl_8087D9E0
     li r7, 0x0
     bl mem_realloc
-    addi r4, r31, fn_80148990@l
+    addi r4, r31, quest_ctorRewardItem@l
     li r5, 0x0
     li r6, 0x14
     li r7, 0x8
@@ -620,7 +620,7 @@ lbl_fn_80460F18_000006F8:
     li r7, 0x0
     bl mem_realloc
     mr r7, r27
-    addi r4, r31, fn_80148990@l
+    addi r4, r31, quest_ctorRewardItem@l
     li r5, 0x0
     li r6, 0x14
     bl runtime_registerStaticObject
@@ -1783,7 +1783,7 @@ lbl_fn_80462038_00001798:
     fmuls f0, f0, f4
     stfs f3, 0x574(r30)
     stfs f0, 0x57c(r30)
-    bl fn_8068AD58
+    bl std_cos
     frsp f4, f1
     lfs f3, 0x570(r30)
     lfs f0, lbl_80886D60
@@ -1791,7 +1791,7 @@ lbl_fn_80462038_00001798:
     fmuls f3, f3, f4
     stfs f0, 0xa0(r1)
     stfs f3, 0x9c(r1)
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     lfs f6, 0x570(r30)
     lfs f4, 0x9c(r1)

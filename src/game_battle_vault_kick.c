@@ -16,7 +16,7 @@ extern void fn_8005BCE8(void);
 extern void mem_alloc(void);
 extern void fn_8008AD4C(void);
 extern void fn_8008B140(void);
-extern void fn_8008BBD8(void);
+extern void map_debugLog(void);
 extern void fn_8008CD60(void);
 extern void lockon_updateTarget(void);
 extern void fn_800971D4(void);
@@ -26,7 +26,7 @@ extern void fn_80097D40(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void fn_80206B9C(void);
 extern void event_findEntryById(void);
 extern void fn_802180A8(void);
@@ -402,7 +402,7 @@ asm void fn_8040DDE0(void)
     cmpwi r3, 0x0
     bne lbl_fn_8040DDE0_000003E8
     mr r3, r31
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_8040DDE0_000003E8
     addi r3, r31, 0x560
@@ -1854,7 +1854,7 @@ lbl_fn_8040F018_000017C0:
     stw r4, 0xb0(r1)
     stw r0, 0xb4(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_8040F018_00001844
     addic. r0, r1, 0x11c

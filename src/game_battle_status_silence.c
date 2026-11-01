@@ -39,7 +39,7 @@ extern void fn_801354B4(void);
 extern void fn_80136138(void);
 extern void fn_80136544(void);
 extern void boss_updatePhaseState(void);
-extern void fn_80145334(void);
+extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void fn_80176548(void);
 extern void fn_802180A8(void);
@@ -62,7 +62,7 @@ extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSVECSquareMag(void);
 extern void strcmp(void);
-extern void fn_8068AD58(void);
+extern void std_cos(void);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
 
@@ -560,7 +560,7 @@ lbl_fn_8042C5AC_00000588:
     fmr f1, f0
     lfs f2, 0x844(r31)
     stfs f2, 0x74(r31)
-    bl fn_8068AD58
+    bl std_cos
     frsp f4, f1
     lfs f3, 0x84c(r31)
     lfs f0, 0x70(r31)
@@ -1537,7 +1537,7 @@ asm void fn_8042D5A0(void)
 asm void fn_8042D5A4(void)
 {
     nofralloc
-    b fn_80145334
+    b quest_updateFlow
 }
 
 asm void fn_8042D5A8(void)

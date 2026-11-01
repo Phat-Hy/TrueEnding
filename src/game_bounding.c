@@ -62,7 +62,7 @@ extern void PSVECSquareMag(void);
 extern void PSVECDotProduct(void);
 extern void rand(void);
 extern void strcmp(void);
-extern void fn_8068A850(void);
+extern void std_sin(void);
 
 /* External data declarations */
 extern u8 jumptable_80779CEC[];
@@ -786,7 +786,7 @@ lbl_fn_800FDF14_00000998:
     bl PSVECDotProduct
     fmr f30, f1
     lfd f1, 0x8f8(r31)
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     fcmpo cr0, f30, f0
     bge lbl_fn_800FDF14_000009F8

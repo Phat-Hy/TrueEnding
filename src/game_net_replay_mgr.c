@@ -13,7 +13,7 @@ extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void str_findChar(void);
 extern void wcs_vformat(void);
 extern void actor_spawnActorWithId(void);
@@ -726,7 +726,7 @@ asm void fn_804C3220(void)
     stw r30, 0x18(r1)
     stw r29, 0x14(r1)
     stw r28, 0x10(r1)
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_804C3220_00000C38
     addi r29, r31, 0x54

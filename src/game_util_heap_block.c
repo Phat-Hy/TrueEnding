@@ -10,7 +10,7 @@ extern void mem_alloc(void);
 extern void mem_free(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void str_findChar(void);
 extern void wcs_vformat(void);
 extern void actor_spawnActorWithId(void);
@@ -1441,7 +1441,7 @@ asm void fn_8058537C(void)
     psq_st f30, 0x28(r1), 0, 0
     bl _savegpr_26
     mr r26, r3
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_8058537C_00001428
     mr r3, r26

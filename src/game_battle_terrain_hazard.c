@@ -53,7 +53,7 @@ extern void PSVECSquareMag(void);
 extern void rand(void);
 extern void strcmp(void);
 extern void fn_8068AC5C(void);
-extern void fn_8068AD58(void);
+extern void std_cos(void);
 extern void std_fmod(void);
 extern void __construct_new_array(void);
 extern void __destroy_new_array(void);
@@ -857,7 +857,7 @@ lbl_fn_804186D8_00000904:
     bge lbl_fn_804186D8_00000910
     fadds f1, f1, f30
 lbl_fn_804186D8_00000910:
-    bl fn_8068AD58
+    bl std_cos
     frsp f7, f1
     lfs f0, 0x4c4(r29)
     addi r26, r26, 0x1

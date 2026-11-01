@@ -22,7 +22,7 @@ extern void fn_800897D8(void);
 extern void fn_800BFAC8(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void str_findChar(void);
 extern void wcs_vformat(void);
 extern void fn_801E9544(void);
@@ -1352,7 +1352,7 @@ lbl_fn_801EA874_00001128:
 asm void fn_801EA920(void)
 {
     nofralloc
-    b fn_800D3FA4
+    b bloom_processPasses
 }
 
 asm void fn_801EA924(void)

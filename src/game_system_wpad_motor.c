@@ -25,7 +25,7 @@ extern void fn_800D0240(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
 extern void atn_Fog_apply(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void fn_800D8448(void);
 extern void fn_800D8458(void);
 extern void fn_800E3F5C(void);
@@ -1317,7 +1317,7 @@ lbl_world_Manager_draw_00000F04:
     cmpwi r3, 0x0
     bne lbl_world_Manager_draw_000031A0
     lwz r3, lbl_8087F8A8
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_world_Manager_draw_000031A0
     addi r3, r28, 0x5690

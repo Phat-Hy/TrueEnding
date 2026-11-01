@@ -25,7 +25,7 @@ extern void str_skipWhitespace(void);
 extern void fn_800EC204(void);
 extern void fn_800F8574(void);
 extern void fn_8011FC10(void);
-extern void fn_80121F00(void);
+extern void equip_getGlobalManager(void);
 extern void boss_updatePhaseState(void);
 extern void fn_8013C504(void);
 extern void fn_80179D44(void);
@@ -1369,10 +1369,10 @@ asm void fn_8029CF00(void)
     oris r0, r0, 0x8
     ori r0, r0, 0x4
     stw r0, 0x7ec(r31)
-    bl fn_80121F00
+    bl equip_getGlobalManager
     cmpwi r3, 0x0
     beq lbl_fn_8029CF00_000011CC
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_8013C504
     mr r26, r3
     b lbl_fn_8029CF00_000011D0

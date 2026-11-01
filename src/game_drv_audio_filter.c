@@ -24,7 +24,7 @@ extern void mem_getAllocSize(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void str_skipWhitespace(void);
 extern void str_findChar(void);
 extern void fn_80116FC0(void);
@@ -359,7 +359,7 @@ asm void fn_805BC9F4(void)
     bl fn_80473F88
     b lbl_fn_805BC9F4_00000610
 lbl_fn_805BC9F4_00000380:
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_805BC9F4_00000610
     lwz r3, lbl_8087F0A8

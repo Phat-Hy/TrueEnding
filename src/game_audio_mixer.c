@@ -18,7 +18,7 @@ extern void fn_8012DB04(void);
 extern void fn_8013A258(void);
 extern void fn_8013CB68(void);
 extern void fn_801426A4(void);
-extern void fn_80145334(void);
+extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void fn_8014C540(void);
 extern void fn_80151448(void);
@@ -46,7 +46,7 @@ extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
-extern void fn_8068A850(void);
+extern void std_sin(void);
 extern void std_atan2(void);
 extern void math_u64DivMod(void);
 
@@ -494,7 +494,7 @@ lbl_fn_802F7E0C_000005B0:
     mr r3, r31
     bl fn_8014C540
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     lwz r0, 0xc4(r1)
     lwz r31, 0xbc(r1)
     lwz r30, 0xb8(r1)
@@ -878,7 +878,7 @@ lbl_fn_802F87E0_00000AFC:
     lfs f0, lbl_8088499C
     fmuls f3, f4, f3
     fmuls f1, f0, f3
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     fcmpo cr0, f31, f0
     ble lbl_fn_802F87E0_00000B94

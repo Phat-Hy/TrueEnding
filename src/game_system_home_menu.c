@@ -49,7 +49,7 @@ extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void fn_800F52F8(void);
 extern void fn_8020A780(void);
 extern void res_MsgHandle_unload(void);
@@ -661,7 +661,7 @@ asm void fn_8035E524(void)
     stwu r1, -0x10(r1)
     mflr r0
     stw r0, 0x14(r1)
-    bl fn_800D3FA4
+    bl bloom_processPasses
     neg r0, r3
     or r0, r0, r3
     srwi r3, r0, 31
@@ -842,7 +842,7 @@ lbl_fn_8035E730_00000958:
 lbl_fn_8035E730_00000978:
     cmpwi r0, 0x3
     bne lbl_fn_8035E730_000009A4
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     bne lbl_fn_8035E730_00000994
     li r3, 0x1

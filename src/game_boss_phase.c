@@ -28,7 +28,7 @@ extern void fn_800899DC(void);
 extern void fn_8008AD4C(void);
 extern void fn_8008B130(void);
 extern void fn_8008B140(void);
-extern void fn_8008BBD8(void);
+extern void map_debugLog(void);
 extern void fn_80091CFC(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_80092EC8(void);
@@ -893,7 +893,7 @@ lbl_boss_updatePhaseState_000009F8:
     stw r4, 0xb8(r1)
     stw r0, 0xbc(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_boss_updatePhaseState_00000A7C
     addic. r0, r1, 0x144

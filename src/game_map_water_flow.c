@@ -6,7 +6,7 @@ extern void __files(void);
 extern void dtor_80084684(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_8008BBD8(void);
+extern void map_debugLog(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_applyWeights(void);
@@ -403,7 +403,7 @@ lbl_fn_80190270_000003B8:
     stw r4, 0x90(r1)
     stw r0, 0x94(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_80190270_0000048C
     lwz r7, 0x84(r1)
@@ -506,7 +506,7 @@ lbl_fn_80190270_00000538:
     stw r4, 0x68(r1)
     stw r0, 0x6c(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_80190270_0000060C
     lwz r7, 0x5c(r1)
@@ -1063,7 +1063,7 @@ lbl_fn_80190AB8_00000CB8:
     stw r4, 0x48(r1)
     stw r0, 0x4c(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_80190AB8_00000D8C
     lwz r7, 0x3c(r1)
@@ -1373,7 +1373,7 @@ lbl_fn_80190F90_000010EC:
     stw r4, 0x48(r1)
     stw r0, 0x4c(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_80190F90_000011D0
     lwz r7, 0x3c(r1)
@@ -1961,7 +1961,7 @@ lbl_fn_80191828_00001950:
     stw r4, 0x20(r1)
     stw r0, 0x24(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_80191828_000019C4
     lwz r5, 0x18(r1)

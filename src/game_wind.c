@@ -41,8 +41,8 @@ extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECDotProduct(void);
 extern void PSVECCrossProduct(void);
-extern void fn_8068A850(void);
-extern void fn_8068AD58(void);
+extern void std_sin(void);
+extern void std_cos(void);
 extern void vec3_isNonZero(void);
 
 /* External data declarations */
@@ -553,13 +553,13 @@ lbl_fn_800E932C_00000608:
     fadds f0, f3, f0
     stfs f0, 0x4(r28)
     lfs f1, 0x538(r27)
-    bl fn_8068A850
+    bl std_sin
     frsp f3, f1
     lfs f0, 0x0(r28)
     fmadds f0, f31, f3, f0
     stfs f0, 0x0(r28)
     lfs f1, 0x538(r27)
-    bl fn_8068AD58
+    bl std_cos
     frsp f4, f1
     lfs f0, 0x8(r28)
     fneg f3, f31

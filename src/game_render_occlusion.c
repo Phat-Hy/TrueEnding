@@ -10,7 +10,7 @@ extern void _savegpr_24(void);
 extern void _savegpr_27(void);
 extern void fn_8000D0F8(void);
 extern void vec3_copy(void);
-extern void fn_8001047C(void);
+extern void vec3_assign(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void fn_8004D124(void);
 extern void fn_80051A88(void);
@@ -26,7 +26,7 @@ extern void fn_80139F3C(void);
 extern void fn_8013A194(void);
 extern void fn_8013CB68(void);
 extern void fn_801404F8(void);
-extern void fn_80148990(void);
+extern void quest_ctorRewardItem(void);
 extern void actor_setState(void);
 extern void fn_802B0430(void);
 extern void fn_802B07F0(void);
@@ -241,7 +241,7 @@ asm void fn_802AE0B8(void)
     psq_l f1, 0x0(r4), 0, 0
     li r25, 0x0
     stw r0, 0x20(r1)
-    lis r31, fn_80148990@ha
+    lis r31, quest_ctorRewardItem@ha
     li r28, 0x8
     stfs f2, 0x10(r1)
     psq_st f1, 0x0(r30), 0, 0
@@ -302,7 +302,7 @@ lbl_fn_802AE0B8_00000284:
     la r6, lbl_8087D9E0
     li r7, 0x0
     bl mem_realloc
-    addi r4, r31, fn_80148990@l
+    addi r4, r31, quest_ctorRewardItem@l
     li r5, 0x0
     li r6, 0x14
     li r7, 0x8
@@ -416,7 +416,7 @@ lbl_fn_802AE0B8_0000041C:
     li r7, 0x0
     bl mem_realloc
     mr r7, r24
-    addi r4, r31, fn_80148990@l
+    addi r4, r31, quest_ctorRewardItem@l
     li r5, 0x0
     li r6, 0x14
     bl runtime_registerStaticObject
@@ -1868,7 +1868,7 @@ asm void fn_802AF7D8(void)
     stw r30, 0x78(r1)
     addi r4, r31, 0x534
     stw r29, 0x74(r1)
-    bl fn_8001047C
+    bl vec3_assign
     lwz r0, 0x55c(r31)
     cmpwi r0, 0x2
     bne lbl_fn_802AF7D8_0000246C

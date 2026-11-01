@@ -25,7 +25,7 @@ extern void fn_80133130(void);
 extern void fn_80134270(void);
 extern void fn_80134290(void);
 extern void boss_updatePhaseState(void);
-extern void fn_80145334(void);
+extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void fn_8014C540(void);
 extern void fn_80151448(void);
@@ -56,7 +56,7 @@ extern void printf(void);
 extern void strcmp(void);
 extern void atoi(void);
 extern void abort(void);
-extern void fn_8068A850(void);
+extern void std_sin(void);
 extern void __destroy_new_array(void);
 
 /* External data declarations */
@@ -1375,7 +1375,7 @@ lbl_fn_80273970_00001224:
     mr r3, r21
     bl fn_8014C540
     mr r3, r21
-    bl fn_80145334
+    bl quest_updateFlow
     mr r3, r21
     bl fn_80279280
     lwz r3, 0x14e0(r21)
@@ -1706,7 +1706,7 @@ lbl_fn_80274268_00001684:
     fmr f31, f1
     lfs f0, lbl_80883854
     fmuls f1, f3, f0
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     fcmpo cr0, f31, f0
     ble lbl_fn_80274268_0000172C

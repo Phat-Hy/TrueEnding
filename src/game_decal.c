@@ -65,7 +65,7 @@ extern void fn_8037EF30(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSVECDotProduct(void);
-extern void fn_8068A850(void);
+extern void std_sin(void);
 extern void fn_806952C4(void);
 extern void vec3_isNonZero(void);
 extern char* strcpy(char* dest, const char* src);
@@ -773,7 +773,7 @@ asm void fn_800E610C(void)
     bl PSMTXMultVec
     lis r3, lbl_80735260@ha
     lfd f1, lbl_80735260@l(r3)
-    bl fn_8068A850
+    bl std_sin
     frsp f31, f1
     addi r3, r1, 0x2c
     addi r4, r1, 0x38

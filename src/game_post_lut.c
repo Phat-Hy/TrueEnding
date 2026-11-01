@@ -18,7 +18,7 @@ extern void fn_800FDB20(void);
 extern void fn_80101434(void);
 extern void fn_8011FC10(void);
 extern void fn_8012D8B8(void);
-extern void fn_80145334(void);
+extern void quest_updateFlow(void);
 extern void fn_8015495C(void);
 extern void fn_8015E4B0(void);
 extern void fn_80176ACC(void);
@@ -923,7 +923,7 @@ lbl_fn_802C6878_00000BB0:
     stfs f3, 0x10(r1)
     psq_st f1, 0x574(r30), 0, 0
     stfs f2, 0x57c(r30)
-    bl fn_80145334
+    bl quest_updateFlow
     li r0, 0x1
     stw r0, 0xd18(r30)
     lis r4, lbl_807C7030@ha

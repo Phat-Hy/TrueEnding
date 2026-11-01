@@ -35,7 +35,7 @@ extern void str_findChar(void);
 extern void fn_800DCA6C(void);
 extern void memcmp(void);
 extern void strcat(void);
-extern void fn_8068AD58(void);
+extern void std_cos(void);
 extern void std_fmod(void);
 extern void fn_806952C4(void);
 extern void runtime_registerStaticObject(void);
@@ -170,7 +170,7 @@ lbl_fn_80080048_000000E4:
     lfs f1, 0x34(r28)
     lfs f0, 0x38(r28)
     fmadds f1, f1, f2, f0
-    bl fn_8068AD58
+    bl std_cos
     frsp f1, f1
     lfs f0, 0x30(r28)
     fmuls f0, f0, f1
@@ -237,7 +237,7 @@ lbl_fn_80080048_000001CC:
     lfs f1, 0x40(r28)
     lfs f0, 0x44(r28)
     fmadds f1, f1, f2, f0
-    bl fn_8068AD58
+    bl std_cos
     frsp f1, f1
     lfs f0, 0x3c(r28)
     fmuls f0, f0, f1

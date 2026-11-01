@@ -38,7 +38,7 @@ extern void fn_80103F60(void);
 extern void fn_80108378(void);
 extern void fn_80109828(void);
 extern void boss_updatePhaseState(void);
-extern void fn_80145334(void);
+extern void quest_updateFlow(void);
 extern void fn_8014C540(void);
 extern void fn_801513D0(void);
 extern void fn_8015E4B0(void);
@@ -2338,7 +2338,7 @@ lbl_fn_8025ACA0_00001FCC:
     mr r3, r31
     bl fn_8014C540
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     lwz r3, lbl_8087F8A0
     lfs f31, lbl_808834C8
     lwz r29, 0x48(r3)

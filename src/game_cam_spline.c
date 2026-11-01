@@ -17,7 +17,7 @@ extern void ref_releaseHandle(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void str_findChar(void);
 extern void cam_initStickBindings(void);
 extern void fn_801334CC(void);
@@ -906,7 +906,7 @@ asm void fn_800F01BC(void)
     stw r0, 0x8(r1)
     mr r27, r3
     stw r0, 0x10(r1)
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_800F01BC_00000C00
     lwz r0, 0x38(r27)

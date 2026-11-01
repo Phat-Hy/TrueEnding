@@ -5,7 +5,7 @@
 extern void _restgpr_19(void);
 extern void _savegpr_19(void);
 extern void fn_8000D3A4(void);
-extern void fn_8001047C(void);
+extern void vec3_assign(void);
 extern void vec3_sub(void);
 extern void collision_testLineSegment(void);
 extern void atn_Model_findBoneIndex(void);
@@ -933,7 +933,7 @@ asm void fn_8027F504(void)
     bl fn_8013C38C
     mr r4, r3
     addi r3, r1, 0x14
-    bl fn_8001047C
+    bl vec3_assign
     addi r3, r1, 0x8
     addi r4, r1, 0x14
     addi r5, r31, 0x528

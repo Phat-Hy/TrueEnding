@@ -16,8 +16,8 @@ extern void mem_getAllocSize(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800D594C(void);
-extern void fn_8068A850(void);
-extern void fn_8068AD58(void);
+extern void std_sin(void);
+extern void std_cos(void);
 
 /* External data declarations */
 extern u8 lbl_8073113C[];
@@ -1822,7 +1822,7 @@ asm void atn_CosinusCurve_getDuration(void)
     fmadds f1, f2, f1, f0
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_8068A850
+    bl std_sin
     frsp f1, f1
     lfs f0, 0xc(r31)
     lwz r31, 0xc(r1)
@@ -1853,7 +1853,7 @@ asm void atn_SinusCurve_getDuration(void)
     fmadds f1, f2, f1, f0
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_8068AD58
+    bl std_cos
     frsp f1, f1
     lfs f0, 0xc(r31)
     lwz r31, 0xc(r1)

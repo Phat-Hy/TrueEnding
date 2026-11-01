@@ -10,7 +10,7 @@ extern void fn_8006BA30(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_8008BBD8(void);
+extern void map_debugLog(void);
 extern void fn_800C622C(void);
 extern void fn_800C62B4(void);
 extern void fn_800C63D8(void);
@@ -1313,7 +1313,7 @@ lbl_fn_8050314C_000010BC:
     stw r4, 0x10(r1)
     stw r0, 0x14(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_8050314C_00001130
     lwz r5, 0x8(r1)
@@ -1488,7 +1488,7 @@ lbl_fn_80503390_00001300:
     stw r4, 0x10(r1)
     stw r0, 0x14(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_80503390_00001374
     lwz r5, 0x8(r1)
@@ -1663,7 +1663,7 @@ lbl_fn_805035D4_00001544:
     stw r4, 0x10(r1)
     stw r0, 0x14(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_805035D4_000015B8
     lwz r5, 0x8(r1)
@@ -1838,7 +1838,7 @@ lbl_fn_80503818_00001788:
     stw r4, 0x10(r1)
     stw r0, 0x14(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_80503818_000017FC
     lwz r5, 0x8(r1)

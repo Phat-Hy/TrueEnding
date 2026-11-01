@@ -79,11 +79,11 @@ extern u32 lbl_80880698;
 /* Function declarations */
 void fn_8001011C(void);
 void fn_80010374(void);
-void fn_8001047C(void);
+void vec3_assign(void);
 void fn_80010490(void);
 void fn_800109E0(void);
 void fn_80010B68(void);
-void fn_80011034(void);
+void vec3_toEulerAngles(void);
 void fn_80011220(void);
 void fn_8001122C(void);
 void fn_800112E0(void);
@@ -379,7 +379,7 @@ lbl_fn_80010374_00000344:
     blr
 }
 
-asm void fn_8001047C(void)
+asm void vec3_assign(void)
 {
     nofralloc
     psq_l f1, 0x0(r4), 0, 0
@@ -1192,7 +1192,7 @@ lbl_fn_80010B68_00000EF0:
     blr
 }
 
-asm void fn_80011034(void)
+asm void vec3_toEulerAngles(void)
 {
     nofralloc
     stwu r1, -0xf0(r1)
@@ -1212,25 +1212,25 @@ asm void fn_80011034(void)
     mr r31, r3
     psq_st f1, 0x0(r3), 0, 0
     stfs f2, 0x8(r3)
-    bge lbl_fn_80011034_00000F84
+    bge lbl_vec3_toEulerAngles_00000F84
     lfs f3, 0x0(r3)
     lfs f0, lbl_80880668
     fcmpo cr0, f3, f0
-    ble lbl_fn_80011034_00000F78
+    ble lbl_vec3_toEulerAngles_00000F78
     lfs f0, lbl_80880684
-    b lbl_fn_80011034_00000F7C
-lbl_fn_80011034_00000F78:
+    b lbl_vec3_toEulerAngles_00000F7C
+lbl_vec3_toEulerAngles_00000F78:
     lfs f0, lbl_80880688
-lbl_fn_80011034_00000F7C:
+lbl_vec3_toEulerAngles_00000F7C:
     stfs f0, 0xc(r1)
-    b lbl_fn_80011034_00000F98
-lbl_fn_80011034_00000F84:
+    b lbl_vec3_toEulerAngles_00000F98
+lbl_vec3_toEulerAngles_00000F84:
     frsp f2, f2
     lfs f1, 0x0(r3)
     bl std_atan2
     frsp f0, f1
     stfs f0, 0xc(r1)
-lbl_fn_80011034_00000F98:
+lbl_vec3_toEulerAngles_00000F98:
     lfs f0, 0xc(r1)
     addi r3, r1, 0x90
     li r4, 0x79
@@ -1291,26 +1291,26 @@ lbl_fn_80011034_00000F98:
     fabs f3, f2
     frsp f3, f3
     fcmpo cr0, f3, f0
-    bge lbl_fn_80011034_000010B4
+    bge lbl_vec3_toEulerAngles_000010B4
     lfs f3, 0x18(r1)
     lfs f0, lbl_80880668
     fcmpo cr0, f3, f0
-    ble lbl_fn_80011034_000010A4
+    ble lbl_vec3_toEulerAngles_000010A4
     lfs f0, lbl_80880684
-    b lbl_fn_80011034_000010A8
-lbl_fn_80011034_000010A4:
+    b lbl_vec3_toEulerAngles_000010A8
+lbl_vec3_toEulerAngles_000010A4:
     lfs f0, lbl_80880688
-lbl_fn_80011034_000010A8:
+lbl_vec3_toEulerAngles_000010A8:
     fneg f0, f0
     stfs f0, 0x8(r1)
-    b lbl_fn_80011034_000010C8
-lbl_fn_80011034_000010B4:
+    b lbl_vec3_toEulerAngles_000010C8
+lbl_vec3_toEulerAngles_000010B4:
     lfs f1, 0x18(r1)
     bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x8(r1)
-lbl_fn_80011034_000010C8:
+lbl_vec3_toEulerAngles_000010C8:
     addi r3, r1, 0x8
     lfs f2, lbl_80880668
     psq_l f1, 0x0(r3), 0, 0
@@ -3471,7 +3471,7 @@ lbl_fn_80012D34_00002C80:
     beq lbl_fn_80012D34_00002F00
     mr r4, r28
     addi r3, r1, 0x17c
-    bl fn_8001047C
+    bl vec3_assign
     mr r3, r26
     bl fn_800128FC
     bl fn_8000DD0C
@@ -3509,10 +3509,10 @@ lbl_fn_80012D34_00002C80:
     bl vec3_sub
     addi r3, r1, 0x158
     addi r4, r1, 0xbc
-    bl fn_80011034
+    bl vec3_toEulerAngles
     addi r3, r1, 0xa4
     addi r4, r1, 0x164
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lfs f1, 0xa4(r1)
     lfs f0, 0x158(r1)
     fsubs f1, f0, f1
@@ -3520,7 +3520,7 @@ lbl_fn_80012D34_00002C80:
     fmr f31, f1
     addi r3, r1, 0x98
     addi r4, r1, 0x164
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lfs f1, 0x9c(r1)
     lfs f0, 0x15c(r1)
     fsubs f1, f0, f1

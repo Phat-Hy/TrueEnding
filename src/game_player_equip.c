@@ -98,7 +98,7 @@ void fn_8012111C(void);
 void fn_8012133C(void);
 void fn_80121E14(void);
 void fn_80121EB0(void);
-void fn_80121F00(void);
+void equip_getGlobalManager(void);
 void fn_80121F08(void);
 void fn_80121FD4(void);
 void fn_801220A0(void);
@@ -1422,7 +1422,7 @@ asm void fn_80121EB0(void)
     blr
 }
 
-asm void fn_80121F00(void)
+asm void equip_getGlobalManager(void)
 {
     nofralloc
     lwz r3, lbl_8087F430

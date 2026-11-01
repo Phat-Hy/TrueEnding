@@ -9,8 +9,8 @@ extern void dtor_80084684(void);
 extern void fn_8000D114(void);
 extern void vec3_copy(void);
 extern void fn_8000D3A4(void);
-extern void fn_8001047C(void);
-extern void fn_80011034(void);
+extern void vec3_assign(void);
+extern void vec3_toEulerAngles(void);
 extern void fn_80011410(void);
 extern void fn_80012C88(void);
 extern void vec3_sub(void);
@@ -24,7 +24,7 @@ extern void fn_80057A68(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void fn_8008B964(void);
-extern void fn_8008BBD8(void);
+extern void map_debugLog(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800A56A8(void);
@@ -1527,7 +1527,7 @@ lbl_fn_801C2CC0_00001360:
     psq_st f1, 0x0(r7), 0, 0
     stfs f2, 0x180(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_801C2CC0_0000147C
     lwz r6, 0x168(r1)
@@ -1651,7 +1651,7 @@ lbl_fn_801C2CC0_00001560:
     stw r4, 0xb8(r1)
     stw r0, 0xbc(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_801C2CC0_00001634
     lwz r7, 0xac(r1)
@@ -1987,7 +1987,7 @@ asm void fn_801C346C(void)
     bl fn_8012A1B8
     mr r4, r3
     addi r3, r1, 0xec
-    bl fn_8001047C
+    bl vec3_assign
     lfs f0, lbl_8088274C
     fcmpo cr0, f28, f0
     cror eq, gt, eq
@@ -1998,7 +1998,7 @@ asm void fn_801C346C(void)
     lfs f27, 0x4(r3)
     addi r3, r1, 0xb0
     addi r4, r1, 0xf8
-    bl fn_80011034
+    bl vec3_toEulerAngles
     addi r3, r1, 0xec
     addi r4, r1, 0xb0
     bl vec3_copy
@@ -2167,11 +2167,11 @@ lbl_fn_801C346C_00001C50:
     bge lbl_fn_801C346C_00001D40
     addi r3, r1, 0x2c
     addi r4, r1, 0xe0
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lfs f27, 0x30(r1)
     addi r3, r1, 0x20
     addi r4, r1, 0xc8
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lfs f28, 0x24(r1)
     fsubs f1, f27, f28
     bl fn_800133B0
@@ -2222,10 +2222,10 @@ lbl_fn_801C346C_00001D40:
     bl fn_8012A1B8
     mr r4, r3
     addi r3, r1, 0xbc
-    bl fn_8001047C
+    bl vec3_assign
     addi r3, r1, 0x8
     addi r4, r1, 0xe0
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lfs f0, 0xc(r1)
     addi r4, r1, 0xbc
     stfs f0, 0xc0(r1)

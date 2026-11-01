@@ -40,7 +40,7 @@ extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
-extern void fn_8068A850(void);
+extern void std_sin(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
 extern void math_u64DivMod(void);
@@ -374,7 +374,7 @@ lbl_fn_802F2D1C_0000038C:
     lfs f0, lbl_808848EC
     fmuls f3, f4, f3
     fmuls f1, f0, f3
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     fcmpo cr0, f31, f0
     bge lbl_fn_802F2D1C_00000424

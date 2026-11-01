@@ -9,7 +9,7 @@ extern void dtor_80084684(void);
 extern void fn_8000D0F8(void);
 extern void fn_8000D114(void);
 extern void fn_8000DD0C(void);
-extern void fn_80011034(void);
+extern void vec3_toEulerAngles(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void fn_8003EFB0(void);
 extern void fn_8004D388(void);
@@ -723,7 +723,7 @@ asm void fn_8010F4BC(void)
     bl fn_8010F6FC
     addi r3, r1, 0x68
     addi r4, r1, 0x2c
-    bl fn_80011034
+    bl vec3_toEulerAngles
     addi r3, r30, 0x2c
     bl fn_8010EDFC
     addi r3, r30, 0x2c
@@ -754,7 +754,7 @@ lbl_fn_8010F4BC_000008AC:
     bl fn_800F7FD8
     addi r3, r1, 0x44
     addi r4, r1, 0x14
-    bl fn_80011034
+    bl vec3_toEulerAngles
     addi r3, r30, 0x2c
     bl fn_8010EDFC
     addi r3, r30, 0x2c
@@ -770,7 +770,7 @@ lbl_fn_8010F4BC_00000924:
     bl fn_800F7FD8
     addi r3, r1, 0x38
     addi r4, r1, 0x8
-    bl fn_80011034
+    bl vec3_toEulerAngles
     addi r3, r30, 0x2c
     bl fn_8010EDFC
     addi r3, r30, 0x2c

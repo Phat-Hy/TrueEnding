@@ -14,7 +14,7 @@ extern void skin_playAnimationByName(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void fn_800DBF68(void);
 extern void fn_800DFB40(void);
 extern void fn_800E0000(void);
@@ -229,7 +229,7 @@ asm void fn_803B4494(void)
     stw r30, 0x18(r1)
     stw r29, 0x14(r1)
     mr r29, r3
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_803B4494_00000254
     lwz r3, 0x4c(r29)
@@ -1435,7 +1435,7 @@ asm void fn_803B55BC(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_803B55BC_00001318
     lwz r3, 0x48(r31)

@@ -3,8 +3,8 @@
 
 /* External function declarations */
 extern void ref_releaseHandle(void);
-extern void fn_800D3FA4(void);
-extern void fn_80145334(void);
+extern void bloom_processPasses(void);
+extern void quest_updateFlow(void);
 extern void fn_801539E0(void);
 extern void actor_setState(void);
 extern void fn_8036554C(void);
@@ -944,7 +944,7 @@ lbl_fn_8039D274_00000B64:
     lwz r3, lbl_8087FA20
     cmpwi r3, 0x0
     beq lbl_fn_8039D274_00000B7C
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_8039D274_00000BB0
 lbl_fn_8039D274_00000B7C:
@@ -1126,7 +1126,7 @@ lbl_fn_8039D4C4_00000DA4:
     lwz r0, 0x5c0(r28)
     stfs f0, 0x34(r1)
     clrlwi r29, r0, 31
-    bl fn_80145334
+    bl quest_updateFlow
     cmpwi r29, 0x0
     beq lbl_fn_8039D4C4_00000E04
     lwz r0, 0x5c0(r28)
@@ -1194,7 +1194,7 @@ lbl_fn_8039D4C4_00000E9C:
     lwz r0, 0x5c0(r28)
     stfs f0, 0x28(r1)
     clrlwi r29, r0, 31
-    bl fn_80145334
+    bl quest_updateFlow
     cmpwi r29, 0x0
     beq lbl_fn_8039D4C4_00000EFC
     lwz r0, 0x5c0(r28)
@@ -1261,7 +1261,7 @@ lbl_fn_8039D4C4_00000F8C:
     lwz r0, 0x5c0(r28)
     stfs f0, 0x1c(r1)
     clrlwi r29, r0, 31
-    bl fn_80145334
+    bl quest_updateFlow
     cmpwi r29, 0x0
     beq lbl_fn_8039D4C4_00000FEC
     lwz r0, 0x5c0(r28)
@@ -1329,7 +1329,7 @@ lbl_fn_8039D4C4_00001080:
     lwz r0, 0x5c0(r28)
     stfs f0, 0x10(r1)
     clrlwi r29, r0, 31
-    bl fn_80145334
+    bl quest_updateFlow
     cmpwi r29, 0x0
     beq lbl_fn_8039D4C4_000010E0
     lwz r0, 0x5c0(r28)

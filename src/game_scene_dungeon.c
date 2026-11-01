@@ -27,7 +27,7 @@ extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
 extern void PSVECCrossProduct(void);
 extern void rand(void);
-extern void fn_8068A850(void);
+extern void std_sin(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
 
@@ -1105,7 +1105,7 @@ asm void fn_801AC434(void)
     fmr f31, f1
     lis r3, lbl_8073A9B8@ha
     lfd f1, lbl_8073A9B8@l(r3)
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     fcmpo cr0, f31, f0
     ble lbl_fn_801AC434_00001040

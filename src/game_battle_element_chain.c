@@ -46,7 +46,7 @@ extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSVECMag(void);
 extern void strcmp(void);
-extern void fn_8068A850(void);
+extern void std_sin(void);
 extern void runtime_registerStaticObject(void);
 extern char* strcpy(char* dest, const char* src);
 
@@ -1332,7 +1332,7 @@ asm void fn_8042499C(void)
     fsubs f1, f1, f3
     fdivs f1, f2, f1
     fmuls f1, f0, f1
-    bl fn_8068A850
+    bl std_sin
     frsp f2, f1
     lfs f1, lbl_80886674
     lfs f0, lbl_8088667C

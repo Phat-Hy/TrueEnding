@@ -19,7 +19,7 @@ extern void morph_updateMesh(void);
 extern void fn_800CB6E4(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void fn_80179F98(void);
 extern void fn_801F583C(void);
 extern void fn_801F5BC8(void);
@@ -1552,7 +1552,7 @@ asm void fn_803E8A24(void)
     stwu r1, -0x10(r1)
     mflr r0
     stw r0, 0x14(r1)
-    bl fn_800D3FA4
+    bl bloom_processPasses
     neg r0, r3
     or r0, r0, r3
     srwi r3, r0, 31

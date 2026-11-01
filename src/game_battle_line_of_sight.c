@@ -73,8 +73,8 @@ extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void rand(void);
 extern void strcmp(void);
-extern void fn_8068A850(void);
-extern void fn_8068AD58(void);
+extern void std_sin(void);
+extern void std_cos(void);
 extern void math_u64DivMod(void);
 extern void __destroy_new_array(void);
 
@@ -2020,12 +2020,12 @@ asm void fn_8040BC38(void)
     fsubs f1, f1, f2
     fmuls f1, f0, f1
     stfs f1, 0x3e4(r30)
-    bl fn_8068AD58
+    bl std_cos
     lfs f0, 0x3e4(r30)
     frsp f2, f1
     fneg f1, f0
     stfs f2, 0x3ec(r30)
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     addi r3, r30, 0x3ec
     mr r4, r3

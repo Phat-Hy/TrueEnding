@@ -108,8 +108,8 @@ extern void fn_80618570(void);
 extern void fn_806185C0(void);
 extern void fn_80618630(void);
 extern void __GXSetIndTexMtx(void);
-extern void fn_8068A850(void);
-extern void fn_8068AD58(void);
+extern void std_sin(void);
+extern void std_cos(void);
 extern void runtime_clampDouble(void);
 
 /* External data declarations */
@@ -1666,10 +1666,10 @@ lbl_fn_80073194_00001568:
     bl fn_806165B0
 lbl_fn_80073194_00001590:
     fmr f1, f29
-    bl fn_8068A850
+    bl std_sin
     frsp f28, f1
     fmr f1, f29
-    bl fn_8068AD58
+    bl std_cos
     frsp f3, f1
     lfs f1, lbl_80880A74
     lfs f5, lbl_80880A70

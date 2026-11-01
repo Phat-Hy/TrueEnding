@@ -16,7 +16,7 @@ extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_8008B140(void);
-extern void fn_8008BBD8(void);
+extern void map_debugLog(void);
 extern void fn_80096218(void);
 extern void lockon_updateTarget(void);
 extern void fn_800971D4(void);
@@ -233,7 +233,7 @@ lbl_fn_805628E0_000000E4:
     stw r4, 0x20(r1)
     stw r0, 0x24(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_805628E0_00000158
     addic. r0, r1, 0x54

@@ -23,7 +23,7 @@ extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECDotProduct(void);
 extern void PSVECCrossProduct(void);
-extern void fn_8068A850(void);
+extern void std_sin(void);
 extern void std_atan2(void);
 extern void vec3_isNonZero(void);
 
@@ -757,7 +757,7 @@ lbl_fn_8017380C_000009D0:
     bl PSVECNormalize
     lis r3, lbl_80737830@ha
     lfd f1, lbl_80737830@l(r3)
-    bl fn_8068A850
+    bl std_sin
     lfs f3, lbl_8088196C
     frsp f31, f1
     lfs f0, lbl_80881964
@@ -1481,7 +1481,7 @@ lbl_fn_80174104_0000143C:
     fmr f31, f1
     lis r3, lbl_80737838@ha
     lfd f1, lbl_80737838@l(r3)
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     fcmpo cr0, f31, f0
     ble lbl_fn_80174104_00001ABC

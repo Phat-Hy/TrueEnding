@@ -10,7 +10,7 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_8000D0F8(void);
 extern void fn_8000D3A4(void);
-extern void fn_8001047C(void);
+extern void vec3_assign(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void vec3_sub(void);
 extern void fn_80057A68(void);
@@ -49,7 +49,7 @@ extern void PSVECNormalize(void);
 extern void printf(void);
 extern void rand(void);
 extern void abort(void);
-extern void fn_8068AD58(void);
+extern void std_cos(void);
 extern void math_u64DivMod(void);
 
 /* External data declarations */
@@ -115,7 +115,7 @@ asm void fn_80296B8C(void)
     bl fn_8013C38C
     mr r4, r3
     addi r3, r1, 0x2c
-    bl fn_8001047C
+    bl vec3_assign
     lis r4, lbl_80745818@ha
     addi r3, r31, 0xb0
     addi r4, r4, lbl_80745818@l
@@ -355,7 +355,7 @@ lbl_fn_80296DB8_00000394:
     fadds f4, f4, f5
     stfs f4, 0x152c(r31)
     fmsubs f1, f3, f4, f0
-    bl fn_8068AD58
+    bl std_cos
     frsp f4, f1
     lfs f3, lbl_80883BF0
     lfs f0, 0x152c(r31)

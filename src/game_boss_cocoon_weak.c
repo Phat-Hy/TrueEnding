@@ -23,7 +23,7 @@ extern void fn_800A4460(void);
 extern void fn_800A55D4(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void str_findChar(void);
 extern void thread_findAndNotify(void);
 extern void fn_8046C1C8(void);
@@ -963,7 +963,7 @@ lbl_fn_8046DD20_00000BAC:
 asm void atn_Loader_destructor(void)
 {
     nofralloc
-    b fn_800D3FA4
+    b bloom_processPasses
 }
 
 asm void atn_Loader_execute(void)

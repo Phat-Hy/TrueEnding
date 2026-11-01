@@ -23,7 +23,7 @@ extern void fn_801255C8(void);
 extern void fn_80126214(void);
 extern void fn_80128818(void);
 extern void fn_80139560(void);
-extern void fn_80145334(void);
+extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void dialog_setScriptSlot(void);
 extern void fn_8014C228(void);
@@ -473,12 +473,12 @@ lbl_fn_801809F4_00000514:
     mr r3, r31
     bl fn_80139560
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     b lbl_fn_801809F4_00000534
 lbl_fn_801809F4_00000528:
     bl fn_80180AE0
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
 lbl_fn_801809F4_00000534:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)

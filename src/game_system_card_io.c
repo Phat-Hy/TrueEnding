@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void _restgpr_22(void);
 extern void _savegpr_22(void);
-extern void fn_80011034(void);
+extern void vec3_toEulerAngles(void);
 extern void vec3_sub(void);
 extern void fn_8003EA3C(void);
 extern void collision_testLineSegment(void);
@@ -821,7 +821,7 @@ lbl_fn_803579FC_00000A7C:
     bl vec3_sub
     addi r3, r1, 0x14
     addi r4, r1, 0x8
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lfs f0, 0x18(r1)
     stfs f0, 0x538(r31)
     b lbl_fn_803579FC_00000B90

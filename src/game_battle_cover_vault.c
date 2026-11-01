@@ -29,7 +29,7 @@ extern void fn_8011FC10(void);
 extern void fn_8012B3E8(void);
 extern void fn_8012B988(void);
 extern void fn_8012D8B8(void);
-extern void fn_80145334(void);
+extern void quest_updateFlow(void);
 extern void fn_8015495C(void);
 extern void fn_801644D4(void);
 extern void fn_80176ACC(void);
@@ -1957,7 +1957,7 @@ lbl_fn_803F9624_000019D4:
     bctrl
 lbl_fn_803F9624_000019F0:
     lwz r3, 0xf8(r30)
-    bl fn_80145334
+    bl quest_updateFlow
     lwz r3, 0x10c(r30)
     addi r0, r3, 0x1
     stw r0, 0x10c(r30)

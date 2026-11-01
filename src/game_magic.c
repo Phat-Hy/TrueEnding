@@ -34,8 +34,8 @@ extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
 extern void PSVECCrossProduct(void);
-extern void fn_8068A850(void);
-extern void fn_8068AD58(void);
+extern void std_sin(void);
+extern void std_cos(void);
 extern void runtime_registerStaticObject(void);
 
 /* External data declarations */
@@ -1348,7 +1348,7 @@ lbl_fn_800641CC_00001144:
     bl PSMTXConcat
     lfs f0, lbl_808809D4
     fmuls f1, f0, f28
-    bl fn_8068AD58
+    bl std_cos
     xoris r3, r25, 0x8000
     lis r0, 0x4330
     lis r4, lbl_80731150@ha
@@ -1376,20 +1376,20 @@ lbl_fn_800641CC_0000130C:
     stfs f30, 0x80(r1)
     stfs f30, 0x84(r1)
     stfs f31, 0x88(r1)
-    bl fn_8068AD58
+    bl std_cos
     frsp f0, f1
     fmr f1, f29
     fneg f24, f0
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     stfs f24, 0x78(r1)
     fadds f1, f29, f28
     stfs f0, 0x74(r1)
-    bl fn_8068AD58
+    bl std_cos
     frsp f0, f1
     fadds f1, f29, f28
     fneg f24, f0
-    bl fn_8068A850
+    bl std_sin
     frsp f8, f30
     lfs f10, 0x74(r1)
     frsp f12, f30

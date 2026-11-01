@@ -78,7 +78,7 @@ void fn_8008B964(void);
 void fn_8008B96C(void);
 void fn_8008B974(void);
 void fn_8008B978(void);
-void fn_8008BBD8(void);
+void map_debugLog(void);
 void fn_8008BC2C(void);
 void fn_8008BC58(void);
 void fn_8008BD10(void);
@@ -530,7 +530,7 @@ lbl_fn_8008B140_000005E8:
     stw r4, 0x58(r1)
     stw r0, 0x5c(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_8008B140_0000065C
     lwz r5, 0x50(r1)
@@ -807,7 +807,7 @@ lbl_fn_8008B978_00000980:
     stw r4, 0x58(r1)
     stw r0, 0x5c(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_8008B978_000009F4
     lwz r5, 0x50(r1)
@@ -884,11 +884,11 @@ lbl_fn_8008B978_00000A94:
     blr
 }
 
-asm void fn_8008BBD8(void)
+asm void map_debugLog(void)
 {
     nofralloc
     stwu r1, -0x70(r1)
-    bne cr1, lbl_fn_8008BBD8_00000AD0
+    bne cr1, lbl_map_debugLog_00000AD0
     stfd f1, 0x28(r1)
     stfd f2, 0x30(r1)
     stfd f3, 0x38(r1)
@@ -897,7 +897,7 @@ asm void fn_8008BBD8(void)
     stfd f6, 0x50(r1)
     stfd f7, 0x58(r1)
     stfd f8, 0x60(r1)
-lbl_fn_8008BBD8_00000AD0:
+lbl_map_debugLog_00000AD0:
     stw r3, 0x8(r1)
     li r3, 0x0
     stw r4, 0xc(r1)

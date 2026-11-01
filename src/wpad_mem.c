@@ -36,8 +36,8 @@ extern void fn_80669490(void);
 extern void fn_806696B0(void);
 extern void fn_80669D80(void);
 extern void memcmp(void);
-extern void fn_8068A850(void);
-extern void fn_8068AD58(void);
+extern void std_sin(void);
+extern void std_cos(void);
 extern void fn_80696324(void);
 
 /* External data declarations */
@@ -979,12 +979,12 @@ lbl_fn_8066AA60_00000C30:
     lfsx f0, r31, r27
     fsubs f29, f4, f3
     fsubs f27, f2, f0
-    bl fn_8068AD58
+    bl std_cos
     frsp f2, f1
     lfsx f0, r23, r27
     fmuls f1, f31, f0
     fmuls f28, f27, f2
-    bl fn_8068A850
+    bl std_sin
     frsp f1, f1
     lfsx f0, r29, r27
     fmuls f1, f29, f1
@@ -996,12 +996,12 @@ lbl_fn_8066AA60_00000C30:
     sth r0, 0x8(r22)
     lfsx f0, r23, r27
     fmuls f1, f31, f0
-    bl fn_8068A850
+    bl std_sin
     frsp f2, f1
     lfsx f0, r23, r27
     fmuls f1, f31, f0
     fmuls f28, f27, f2
-    bl fn_8068AD58
+    bl std_cos
     frsp f1, f1
     lwz r0, 0x0(r24)
     lfsx f0, r31, r27

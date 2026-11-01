@@ -7,7 +7,7 @@ extern void _restgpr_26(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void vec3_copy(void);
-extern void fn_80011034(void);
+extern void vec3_toEulerAngles(void);
 extern void vec3_sub(void);
 extern void fn_80013410(void);
 extern void collision_testLineSegment(void);
@@ -1164,7 +1164,7 @@ asm void fn_8031D350(void)
     bl fn_800F7FD8
     addi r3, r1, 0x20
     addi r4, r1, 0x14
-    bl fn_80011034
+    bl vec3_toEulerAngles
     addi r3, r31, 0x534
     addi r4, r1, 0x20
     bl vec3_copy

@@ -25,7 +25,7 @@ extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
 extern void PSVECSquareMag(void);
 extern void swprintf(void);
-extern void fn_8068AD58(void);
+extern void std_cos(void);
 extern void fn_8068AEA0(void);
 extern void std_atan2(void);
 extern void runtime_clampDouble(void);
@@ -1710,7 +1710,7 @@ lbl_fn_800F5314_00001490:
     fcmpo cr0, f0, f29
     ble lbl_fn_800F5314_00001CF8
     fmuls f1, f30, f0
-    bl fn_8068AD58
+    bl std_cos
     lwz r3, 0x50(r1)
     frsp f3, f1
     lwz r4, 0x54(r1)
@@ -1727,7 +1727,7 @@ lbl_fn_800F5314_00001490:
     ble lbl_fn_800F5314_00001CF8
     lfs f0, 0x50(r3)
     fmuls f1, f30, f0
-    bl fn_8068AD58
+    bl std_cos
     lwz r3, 0x50(r1)
     frsp f4, f1
     lwz r0, 0x54(r1)

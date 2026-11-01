@@ -12,7 +12,7 @@ extern void fn_8006D0C8(void);
 extern void fn_8006D3F8(void);
 extern void fn_800A6BDC(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void fn_8011F8F4(void);
 extern void fn_8012B3E8(void);
 extern void fn_8012B988(void);
@@ -226,7 +226,7 @@ lbl_world_Manager_update_00000150:
     cmpwi r0, 0x0
     bne lbl_world_Manager_update_0000068C
     mr r3, r30
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_world_Manager_update_00000CE4
     lwz r3, lbl_8087F4F0
@@ -651,25 +651,25 @@ lbl_world_Manager_update_00000750:
     li r25, 0x0
 lbl_world_Manager_update_00000764:
     mr r3, r30
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     bne lbl_world_Manager_update_00000778
     li r25, 0x0
 lbl_world_Manager_update_00000778:
     lwz r3, lbl_8087F8A0
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     bne lbl_world_Manager_update_0000078C
     li r25, 0x0
 lbl_world_Manager_update_0000078C:
     lwz r3, lbl_8087F408
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     bne lbl_world_Manager_update_000007A0
     li r25, 0x0
 lbl_world_Manager_update_000007A0:
     lwz r3, lbl_8087F890
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     bne lbl_world_Manager_update_000007B4
     li r25, 0x0

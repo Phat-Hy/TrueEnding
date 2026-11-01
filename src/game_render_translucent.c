@@ -25,7 +25,7 @@ extern void fn_80128A30(void);
 extern void fn_8012DB04(void);
 extern void boss_updatePhaseState(void);
 extern void fn_8013CB68(void);
-extern void fn_80145334(void);
+extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void fn_8014C540(void);
 extern void fn_8015DBC8(void);
@@ -557,7 +557,7 @@ lbl_fn_802B7CE0_000005F4:
     extrwi. r0, r0, 1, 6
     bne lbl_fn_802B7CE0_00000620
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
 lbl_fn_802B7CE0_00000620:
     mr r3, r31
     bl fn_802B98B0

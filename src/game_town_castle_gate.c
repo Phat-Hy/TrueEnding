@@ -29,7 +29,7 @@ extern void PSVECNormalize(void);
 extern void PSVECMag(void);
 extern void printf(void);
 extern void abort(void);
-extern void fn_8068AD58(void);
+extern void std_cos(void);
 extern void std_atan2(void);
 
 /* External data declarations */
@@ -216,7 +216,7 @@ asm void fn_803D6E7C(void)
     stwu r1, -0x10(r1)
     mflr r0
     stw r0, 0x14(r1)
-    bl fn_8068AD58
+    bl std_cos
     lwz r0, 0x14(r1)
     frsp f1, f1
     mtlr r0

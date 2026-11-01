@@ -30,8 +30,8 @@ extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
 extern void PSVECCrossProduct(void);
-extern void fn_8068A850(void);
-extern void fn_8068AD58(void);
+extern void std_sin(void);
+extern void std_cos(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
 extern void math_u64DivMod(void);
@@ -237,14 +237,14 @@ lbl_fn_80140588_000001B8:
     lfs f29, lbl_8088196C
 lbl_fn_80140588_000001BC:
     lfs f1, 0x4(r28)
-    bl fn_8068AD58
+    bl std_cos
     frsp f3, f1
     lfs f0, lbl_8088196C
     stfs f0, 0xf8(r1)
     lfs f1, 0x4(r28)
     fmuls f0, f29, f3
     stfs f0, 0xf4(r1)
-    bl fn_8068A850
+    bl std_sin
     frsp f5, f1
     lfs f3, 0xf4(r1)
     lfs f0, 0xf8(r1)

@@ -18,7 +18,7 @@ extern void fn_800F8C6C(void);
 extern void fn_80109828(void);
 extern void fn_8013A258(void);
 extern void fn_8013CB68(void);
-extern void fn_80145334(void);
+extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void dialog_setScriptSlot(void);
 extern void fn_8014C540(void);
@@ -1031,7 +1031,7 @@ lbl_fn_802A5A1C_00000DFC:
     stw r0, 0x15e4(r31)
     bl fn_8014C540
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     mr r3, r31
     bl fn_802A7970
     lwz r3, 0x58c(r31)

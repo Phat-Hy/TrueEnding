@@ -16,7 +16,7 @@ extern void fn_800D0240(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void str_findChar(void);
 extern void actor_spawnActorWithId(void);
 extern void save_validateHeader(void);
@@ -1059,7 +1059,7 @@ asm void fn_8057F884(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     bne lbl_fn_8057F884_00000DB8
     li r3, 0x1

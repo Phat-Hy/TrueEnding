@@ -24,7 +24,7 @@ extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void rand(void);
-extern void fn_8068A850(void);
+extern void std_sin(void);
 extern void std_atan2(void);
 extern void __construct_new_array(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -430,7 +430,7 @@ lbl_fn_80392510_000004D4:
 lbl_fn_80392510_00000534:
     lfs f0, lbl_808858EC
     fmuls f1, f0, f6
-    bl fn_8068A850
+    bl std_sin
     frsp f4, f1
     lfs f3, lbl_808858F8
     lbz r0, 0x910(r31)
@@ -562,7 +562,7 @@ lbl_fn_80392510_000006D4:
 lbl_fn_80392510_00000734:
     lfs f0, lbl_808858EC
     fmuls f1, f0, f6
-    bl fn_8068A850
+    bl std_sin
     frsp f4, f1
     lfs f3, lbl_808858F8
     lbz r0, 0x910(r31)

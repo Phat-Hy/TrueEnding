@@ -31,7 +31,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void skin_playAnimationByName(void);
 extern void fn_800CB360(void);
 extern void ref_releaseHandle(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void str_skipWhitespace(void);
 extern void fn_802180A8(void);
 extern void res_MsgHandle_constructor(void);
@@ -144,7 +144,7 @@ asm void fn_8042F97C(void)
     cmpwi r3, 0x0
     bne lbl_fn_8042F97C_00000074
     mr r3, r31
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_8042F97C_00000074
     li r0, 0x1

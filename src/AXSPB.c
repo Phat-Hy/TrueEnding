@@ -8,7 +8,7 @@ extern void DCFlushRange(void *, u32);
 extern BOOL OSDisableInterrupts(void);
 extern BOOL OSRestoreInterrupts(BOOL);
 extern void fn_80607F60(void);
-extern void fn_8068A850(void);
+extern void std_sin(void);
 extern void math_u64DivMod(void);
 
 /* External large data symbols */
@@ -394,7 +394,7 @@ asm void fn_8060AFC0(void)
     stw r30, 0x18(r1)
     mr r30, r4
     fdivs f1, f1, f0
-    bl fn_8068A850
+    bl std_sin
     frsp f2, f1
     lfs f1, lbl_808885A0
     lfs f0, lbl_808885AC

@@ -14,7 +14,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void system_getNextSequenceId(void);
 extern void fn_80133130(void);
 extern void fn_8013322C(void);
-extern void fn_80148990(void);
+extern void quest_ctorRewardItem(void);
 extern void dialog_renderWindow(void);
 extern void fn_80151448(void);
 extern void actor_setState(void);
@@ -939,7 +939,7 @@ asm void fn_80295BE4(void)
     stw r30, 0x78(r1)
     mr r30, r3
     addi r3, r1, 0x5c
-    bl fn_80148990
+    bl quest_ctorRewardItem
     lfs f0, lbl_80883C3C
     lis r31, lbl_80745818@ha
     addi r31, r31, lbl_80745818@l

@@ -38,8 +38,8 @@ extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void rand(void);
-extern void fn_8068A850(void);
-extern void fn_8068AD58(void);
+extern void std_sin(void);
+extern void std_cos(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
 extern void math_u64DivMod(void);
@@ -1345,7 +1345,7 @@ lbl_fn_803209E0_0000112C:
     fmuls f0, f0, f4
     stfs f3, 0x574(r29)
     stfs f0, 0x57c(r29)
-    bl fn_8068AD58
+    bl std_cos
     frsp f4, f1
     lfs f3, 0x570(r29)
     lfs f0, lbl_80884E48
@@ -1353,7 +1353,7 @@ lbl_fn_803209E0_0000112C:
     fmuls f3, f3, f4
     stfs f0, 0xac(r1)
     stfs f3, 0xa8(r1)
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     lfs f6, 0x570(r29)
     lfs f4, 0xa8(r1)

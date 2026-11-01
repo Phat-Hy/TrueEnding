@@ -30,7 +30,7 @@ extern void fn_800CFD18(void);
 extern void fn_800E2DD4(void);
 extern void fn_800E2FE0(void);
 extern void fn_800EF73C(void);
-extern void fn_80145334(void);
+extern void quest_updateFlow(void);
 extern void fn_8014C540(void);
 extern void fn_80151448(void);
 extern void sound_initGlobalInstances(void);
@@ -1149,7 +1149,7 @@ lbl_fn_8032CBFC_00000E6C:
     mr r3, r31
     bl fn_8032D1F4
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     mr r3, r31
     bl fn_8014C540
     b lbl_fn_8032CBFC_00001060
@@ -1164,7 +1164,7 @@ lbl_fn_8032CBFC_00000E88:
     bl fn_803750E4
 lbl_fn_8032CBFC_00000EA8:
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     mr r3, r31
     bl fn_8014C540
     b lbl_fn_8032CBFC_00001060
@@ -1187,7 +1187,7 @@ lbl_fn_8032CBFC_00000EF0:
     stw r0, 0x58c(r31)
 lbl_fn_8032CBFC_00000EF8:
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     mr r3, r31
     bl fn_8014C540
     b lbl_fn_8032CBFC_00001060
@@ -1273,7 +1273,7 @@ lbl_fn_8032CBFC_00000FFC:
     stw r0, 0x1608(r31)
 lbl_fn_8032CBFC_00001044:
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     mr r3, r31
     bl fn_8014C540
     b lbl_fn_8032CBFC_00001060

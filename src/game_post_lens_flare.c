@@ -14,7 +14,7 @@ extern void fn_801028E4(void);
 extern void fn_8012D8B8(void);
 extern void fn_8013A258(void);
 extern void fn_8013CB68(void);
-extern void fn_80148990(void);
+extern void quest_ctorRewardItem(void);
 extern void fn_8015495C(void);
 extern void fn_8016DA4C(void);
 extern void actor_setState(void);
@@ -421,9 +421,9 @@ lbl_fn_802CE8EC_000004D0:
     la r6, lbl_8087D9E0
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     li r5, 0x0
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r6, 0x14
     li r7, 0x8
     bl runtime_registerStaticObject
@@ -535,9 +535,9 @@ lbl_fn_802CE8EC_00000670:
     addi r3, r3, 0x10
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     mr r7, r30
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r5, 0x0
     li r6, 0x14
     bl runtime_registerStaticObject

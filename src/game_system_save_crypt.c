@@ -39,7 +39,7 @@ extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void fn_80103F60(void);
 extern void fn_80108378(void);
-extern void fn_80121F00(void);
+extern void equip_getGlobalManager(void);
 extern void fn_8016E4C4(void);
 extern void actor_setState(void);
 extern void save_validateHeader(void);
@@ -2158,12 +2158,12 @@ lbl_fn_80345384_00001B20:
     stw r3, 0x17f8(r31)
     li r4, 0x1
     bl atn_Task_setActive
-    bl fn_80121F00
+    bl equip_getGlobalManager
     li r4, 0x65
     li r5, 0x1
     li r6, 0x0
     bl world_setGlobalFlag
-    bl fn_80121F00
+    bl equip_getGlobalManager
     li r4, 0x68
     li r5, 0x1
     li r6, 0x0

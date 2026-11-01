@@ -16,7 +16,7 @@ extern void ref_releaseHandle(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void str_findChar(void);
 extern void wcs_vformat(void);
 extern void save_validateHeader(void);
@@ -840,7 +840,7 @@ asm void fn_804B4FE0(void)
     stw r31, 0xc(r1)
     stw r30, 0x8(r1)
     mr r30, r3
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_804B4FE0_00000A2C
     addi r31, r30, 0xac

@@ -4,8 +4,8 @@
 /* External function declarations */
 extern void vec3_copy(void);
 extern void fn_8000DD0C(void);
-extern void fn_8001047C(void);
-extern void fn_80011034(void);
+extern void vec3_assign(void);
+extern void vec3_toEulerAngles(void);
 extern void fn_80011220(void);
 extern void vec3_sub(void);
 extern void fn_8004D388(void);
@@ -31,7 +31,7 @@ extern void fn_8013322C(void);
 extern void fn_80133EE8(void);
 extern void fn_8013A194(void);
 extern void fn_8013A258(void);
-extern void fn_80145334(void);
+extern void quest_updateFlow(void);
 extern void fn_801495E8(void);
 extern void fn_80149624(void);
 extern void dialog_renderWindow(void);
@@ -85,8 +85,8 @@ extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void rand(void);
 extern void strcmp(void);
-extern void fn_8068A850(void);
-extern void fn_8068AD58(void);
+extern void std_sin(void);
+extern void std_cos(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
 extern void __ptmf_scall(void);
@@ -330,10 +330,10 @@ asm void fn_80323690(void)
     stw r5, 0x14c8(r3)
     stw r0, 0x14bc(r3)
     addi r3, r1, 0x58
-    bl fn_8001047C
+    bl vec3_assign
     addi r3, r1, 0x4c
     addi r4, r30, 0x534
-    bl fn_8001047C
+    bl vec3_assign
     mr r3, r30
     bl fn_80323C18
     lwz r0, 0xd18(r30)
@@ -407,7 +407,7 @@ lbl_fn_80323690_00000274:
     bl vec3_sub
     addi r3, r1, 0x1c
     addi r4, r1, 0x10
-    bl fn_80011034
+    bl vec3_toEulerAngles
     addi r3, r30, 0x14e8
     addi r4, r1, 0x1c
     bl vec3_copy
@@ -646,7 +646,7 @@ lbl_fn_80323690_000006A0:
     mr r3, r30
     bl fn_8014C540
     mr r3, r30
-    bl fn_80145334
+    bl quest_updateFlow
     lwz r3, 0x15ec(r30)
     cmpwi r31, 0x0
     subi r0, r3, 0x1
@@ -1847,7 +1847,7 @@ lbl_fn_80324A38_00001760:
     fmuls f0, f0, f4
     stfs f3, 0x574(r30)
     stfs f0, 0x57c(r30)
-    bl fn_8068AD58
+    bl std_cos
     frsp f4, f1
     lfs f3, 0x570(r30)
     lfs f0, lbl_80884F10
@@ -1855,7 +1855,7 @@ lbl_fn_80324A38_00001760:
     fmuls f3, f3, f4
     stfs f0, 0xa0(r1)
     stfs f3, 0x9c(r1)
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     lfs f6, 0x570(r30)
     lfs f4, 0x9c(r1)

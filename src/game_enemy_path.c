@@ -11,8 +11,8 @@ extern void fn_8000D0F8(void);
 extern void fn_8000D114(void);
 extern void vec3_copy(void);
 extern void fn_8000DD0C(void);
-extern void fn_8001047C(void);
-extern void fn_80011034(void);
+extern void vec3_assign(void);
+extern void vec3_toEulerAngles(void);
 extern void fn_80011410(void);
 extern void fn_80012C88(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
@@ -768,7 +768,7 @@ asm void fn_80129A6C(void)
     bl fn_8000D114
     addi r3, r1, 0xe8
     addi r4, r31, 0x24
-    bl fn_8001047C
+    bl vec3_assign
     lha r0, 0x36(r31)
     lfs f0, lbl_808818A8
     cmpwi r0, 0x0
@@ -854,7 +854,7 @@ lbl_fn_80129A6C_00000A80:
     beq lbl_fn_80129A6C_00000C28
     addi r3, r1, 0xdc
     addi r4, r31, 0xc
-    bl fn_8001047C
+    bl vec3_assign
     lwz r0, 0x4(r31)
     cmpwi r0, 0x1
     bne lbl_fn_80129A6C_00000AC0
@@ -908,7 +908,7 @@ lbl_fn_80129A6C_00000B4C:
     bl fn_800F7FF0
     addi r3, r1, 0x58
     addi r4, r1, 0xd0
-    bl fn_80011034
+    bl vec3_toEulerAngles
     addi r3, r1, 0xf4
     addi r4, r1, 0x58
     bl vec3_copy
@@ -1035,7 +1035,7 @@ lbl_fn_80129A6C_00000D18:
     beq lbl_fn_80129A6C_00000F74
     addi r3, r1, 0xac
     addi r4, r31, 0x54
-    bl fn_8001047C
+    bl vec3_assign
     lwz r0, 0x4c(r31)
     cmpwi r0, 0x1
     bne lbl_fn_80129A6C_00000D58
@@ -1108,7 +1108,7 @@ lbl_fn_80129A6C_00000E2C:
     bl fn_800F7FF0
     addi r3, r1, 0x1c
     addi r4, r1, 0xa0
-    bl fn_80011034
+    bl vec3_toEulerAngles
     mr r3, r28
     addi r4, r1, 0x1c
     bl vec3_copy
@@ -1133,7 +1133,7 @@ lbl_fn_80129A6C_00000E4C:
     bl fn_80011410
     addi r3, r1, 0x88
     addi r4, r1, 0x94
-    bl fn_80011034
+    bl vec3_toEulerAngles
     addi r3, r1, 0x88
     addi r4, r30, fn_800133B0@l
     bl fn_8012A218

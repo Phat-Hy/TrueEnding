@@ -30,7 +30,7 @@ extern void fn_80095300(void);
 extern void fn_8009E690(void);
 extern void fn_800C16B4(void);
 extern void atn_Task_destructor(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void fn_800D4558(void);
 extern void fn_800D4DB8(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
@@ -989,7 +989,7 @@ lbl_fn_8049A7D8_00000C38:
     cmpwi r29, 0x0
     beq lbl_fn_8049A7D8_00000C98
     mr r3, r31
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_8049A7D8_00000C98
     lwz r12, 0x0(r31)

@@ -47,7 +47,7 @@ extern void fn_800F8C6C(void);
 extern void magic_dispatchActionCommand(void);
 extern void boss_updatePhaseState(void);
 extern void fn_80144710(void);
-extern void fn_80145334(void);
+extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void fn_8014C540(void);
 extern void fn_80151448(void);
@@ -1567,7 +1567,7 @@ lbl_fn_802CD73C_00001478:
     mr r3, r31
     bl fn_8014C540
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     lis r30, lbl_80746EE0@ha
     addi r3, r31, 0xb0
     addi r30, r30, lbl_80746EE0@l

@@ -12,7 +12,7 @@ extern void PSMTXMultVec(void);
 extern void PSVECNormalize(void);
 extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
-extern void fn_8068A850(void);
+extern void std_sin(void);
 
 /* External data declarations */
 
@@ -74,7 +74,7 @@ asm void fn_800FFE68(void)
 lbl_fn_800FFE68_00000094:
     lfs f0, lbl_80881500
     fmuls f1, f0, f2
-    bl fn_8068A850
+    bl std_sin
     frsp f28, f1
     lfs f27, lbl_808814B8
     mr r3, r23

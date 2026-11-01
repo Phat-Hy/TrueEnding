@@ -15,7 +15,7 @@ extern void fn_8011F8F4(void);
 extern void fn_8011F91C(void);
 extern void fn_8011FC10(void);
 extern void fn_8011FE3C(void);
-extern void fn_80145334(void);
+extern void quest_updateFlow(void);
 extern void fn_8015E7A0(void);
 extern void fn_80171420(void);
 extern void fn_80171DB0(void);
@@ -230,7 +230,7 @@ lbl_fn_803A5118_00000118:
     bl atn_Anim_getLayerDuration
     stfs f1, 0x2e4(r29)
     mr r3, r29
-    bl fn_80145334
+    bl quest_updateFlow
     lwz r0, 0x38(r29)
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0x38(r29)

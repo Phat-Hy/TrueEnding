@@ -53,7 +53,7 @@ extern void PSVECDotProduct(void);
 extern void rand(void);
 extern void strcmp(void);
 extern void atoi(void);
-extern void fn_8068A850(void);
+extern void std_sin(void);
 extern void vec3_isNonZero(void);
 extern int sprintf(char* str, const char* format, ...);
 extern char* strcpy(char* dest, const char* src);
@@ -1967,7 +1967,7 @@ lbl_fn_8041B28C_000019EC:
     fcmpo cr0, f27, f0
     bge lbl_fn_8041B28C_00001A3C
     fmr f1, f29
-    bl fn_8068A850
+    bl std_sin
     frsp f27, f1
     addi r3, r1, 0x20
     addi r4, r1, 0x14

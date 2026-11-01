@@ -26,7 +26,7 @@ extern void msg_getMessageById(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void str_findChar(void);
 extern void fn_80116FC0(void);
 extern void actor_spawnActorWithId(void);
@@ -1851,7 +1851,7 @@ lbl_fn_8051C754_00001870:
     b lbl_fn_8051C754_000018F8
 lbl_fn_8051C754_0000189C:
     mr r3, r24
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     bne lbl_fn_8051C754_000018B4
     li r3, 0x1

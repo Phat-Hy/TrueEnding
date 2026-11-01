@@ -31,8 +31,8 @@ extern void fn_806635D0(void);
 extern void fn_80663610(void);
 extern void fn_80664950(void);
 extern void fn_80666850(void);
-extern void fn_8068A850(void);
-extern void fn_8068AD58(void);
+extern void std_sin(void);
+extern void std_cos(void);
 extern void math_u64DivMod(void);
 extern void fn_8069636C(void);
 
@@ -4517,13 +4517,13 @@ lbl_fn_80657B00_00003DD0:
     stfs f2, 0x8(r14)
     stfs f2, 0xc(r14)
     stfs f2, 0x10(r14)
-    bl fn_8068A850
+    bl std_sin
     frsp f1, f1
     lfs f2, lbl_8088891C
     lfs f0, lbl_8087EBA4
     stfs f1, 0x14(r14)
     fmuls f1, f2, f0
-    bl fn_8068AD58
+    bl std_cos
     fneg f3, f1
     lfs f2, lbl_80888898
     lfs f1, lbl_8088891C
@@ -4533,13 +4533,13 @@ lbl_fn_80657B00_00003DD0:
     fmuls f1, f1, f0
     stfs f3, 0x18(r14)
     stfs f2, 0x20(r14)
-    bl fn_8068AD58
+    bl std_cos
     frsp f1, f1
     lfs f2, lbl_8088891C
     lfs f0, lbl_8087EBA4
     stfs f1, 0x24(r14)
     fmuls f1, f2, f0
-    bl fn_8068A850
+    bl std_sin
     frsp f1, f1
     lfs f0, lbl_80888898
     li r0, 0x1

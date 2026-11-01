@@ -40,7 +40,7 @@ extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
 extern void PSVECCrossProduct(void);
-extern void fn_8068AD58(void);
+extern void std_cos(void);
 extern void fn_8068AE9C(void);
 extern void std_atan2(void);
 extern void __construct_new_array(void);
@@ -1187,14 +1187,14 @@ lbl_fn_801829B4_00000F00:
     lfs f0, lbl_80881C70
     fmuls f7, f8, f7
     fmuls f1, f0, f7
-    bl fn_8068AD58
+    bl std_cos
     frsp f8, f1
     lfs f7, lbl_80881C74
     lfs f0, 0x10c(r1)
     lfs f1, 0xe4(r1)
     fmadds f0, f7, f8, f0
     stfs f0, 0x10c(r1)
-    bl fn_8068AD58
+    bl std_cos
     frsp f8, f1
     lwz r0, 0x12a4(r29)
     lfs f7, lbl_80881C78

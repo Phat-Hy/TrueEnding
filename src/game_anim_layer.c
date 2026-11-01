@@ -22,7 +22,7 @@ extern void fn_8013A258(void);
 extern void fn_8013CB68(void);
 extern void fn_801426A4(void);
 extern void fn_80144710(void);
-extern void fn_80145334(void);
+extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void fn_8014C540(void);
 extern void fn_80151448(void);
@@ -60,7 +60,7 @@ extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
 extern void rand(void);
-extern void fn_8068A850(void);
+extern void std_sin(void);
 extern void std_atan2(void);
 
 /* External data declarations */
@@ -1323,7 +1323,7 @@ lbl_fn_8026FFE4_00001144:
     mr r3, r31
     bl fn_8014C540
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     lwz r0, 0x44(r1)
     psq_l f31, 0x38(r1), 0, 0
     lfd f31, 0x30(r1)
@@ -1579,7 +1579,7 @@ lbl_fn_80270774_00001464:
     bgt lbl_fn_80270774_00001534
     lis r3, lbl_80744930@ha
     lfd f1, lbl_80744930@l(r3)
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     fneg f0, f0
     fcmpo cr0, f31, f0
@@ -1589,7 +1589,7 @@ lbl_fn_80270774_00001464:
 lbl_fn_80270774_00001534:
     lis r3, lbl_80744930@ha
     lfd f1, lbl_80744930@l(r3)
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     fcmpo cr0, f31, f0
     ble lbl_fn_80270774_00001550

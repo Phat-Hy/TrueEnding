@@ -8,7 +8,7 @@ extern void fn_8000D114(void);
 extern void vec3_copy(void);
 extern void fn_8000D9E8(void);
 extern void fn_8000D9F8(void);
-extern void fn_8001047C(void);
+extern void vec3_assign(void);
 extern void fn_80012C88(void);
 extern void fn_80013410(void);
 extern void fn_8004B338(void);
@@ -33,7 +33,7 @@ extern void fn_801156C4(void);
 extern void fn_80116BD4(void);
 extern void actor_spawnActorWithId(void);
 extern void fn_8011F970(void);
-extern void fn_80121F00(void);
+extern void equip_getGlobalManager(void);
 extern void fn_801D80B4(void);
 extern void fn_80217D9C(void);
 extern void fn_80219544(void);
@@ -174,7 +174,7 @@ asm void fn_8052C10C(void)
     addi r3, r31, 0x1268
     addi r4, r1, 0x10
     bl fn_8052C960
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_8052C650
     bl fn_80217D9C
     cmpwi r3, 0x0
@@ -200,22 +200,22 @@ lbl_fn_8052C10C_000000C4:
     beq lbl_fn_8052C10C_000001A8
     b lbl_fn_8052C10C_000001B8
 lbl_fn_8052C10C_00000104:
-    bl fn_80121F00
+    bl equip_getGlobalManager
     li r4, 0x124
     bl world_getGlobalFlag
     mr r30, r3
     b lbl_fn_8052C10C_000001B8
 lbl_fn_8052C10C_00000118:
-    bl fn_80121F00
+    bl equip_getGlobalManager
     li r4, 0x125
     bl world_getGlobalFlag
     mr r30, r3
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_8052C650
     subi r0, r29, 0x5638
     cmpw r3, r0
     bgt lbl_fn_8052C10C_000001B8
-    bl fn_80121F00
+    bl equip_getGlobalManager
     li r4, 0x764
     bl world_getGlobalFlag
     cmpwi r3, 0x1
@@ -223,31 +223,31 @@ lbl_fn_8052C10C_00000118:
     li r30, 0x1
     b lbl_fn_8052C10C_000001B8
 lbl_fn_8052C10C_00000158:
-    bl fn_80121F00
+    bl equip_getGlobalManager
     li r4, 0x126
     bl world_getGlobalFlag
     mr r30, r3
     b lbl_fn_8052C10C_000001B8
 lbl_fn_8052C10C_0000016C:
-    bl fn_80121F00
+    bl equip_getGlobalManager
     li r4, 0x127
     bl world_getGlobalFlag
     mr r30, r3
     b lbl_fn_8052C10C_000001B8
 lbl_fn_8052C10C_00000180:
-    bl fn_80121F00
+    bl equip_getGlobalManager
     li r4, 0x128
     bl world_getGlobalFlag
     mr r30, r3
     b lbl_fn_8052C10C_000001B8
 lbl_fn_8052C10C_00000194:
-    bl fn_80121F00
+    bl equip_getGlobalManager
     li r4, 0x12a
     bl world_getGlobalFlag
     mr r30, r3
     b lbl_fn_8052C10C_000001B8
 lbl_fn_8052C10C_000001A8:
-    bl fn_80121F00
+    bl equip_getGlobalManager
     li r4, 0x129
     bl world_getGlobalFlag
     mr r30, r3
@@ -340,10 +340,10 @@ lbl_fn_8052C10C_000002E8:
     cmplwi r27, 0x7
     blt lbl_fn_8052C10C_000000C4
 lbl_fn_8052C10C_000002F4:
-    bl fn_80121F00
+    bl equip_getGlobalManager
     cmpwi r3, 0x0
     beq lbl_fn_8052C10C_0000031C
-    bl fn_80121F00
+    bl equip_getGlobalManager
     li r4, -0x1
     li r5, 0x0
     li r6, 0x0
@@ -414,7 +414,7 @@ lbl_fn_8052C10C_000003F4:
 lbl_fn_8052C10C_00000408:
     mr r4, r3
     addi r3, r1, 0x54
-    bl fn_8001047C
+    bl vec3_assign
     lwz r3, 0x11d4(r31)
     bl fn_8052C684
     li r4, 0x0
@@ -1583,7 +1583,7 @@ lbl_fn_8052D46C_00001478:
 lbl_fn_8052D46C_0000148C:
     mr r4, r3
     addi r3, r1, 0x17c
-    bl fn_8001047C
+    bl vec3_assign
     bl fn_801156BC
     lwz r0, 0x121c(r31)
     cmpwi r0, 0x0
@@ -1669,7 +1669,7 @@ lbl_fn_8052D46C_000015C8:
     addi r4, r4, lbl_807C7030@l
 lbl_fn_8052D46C_000015D0:
     addi r3, r1, 0x170
-    bl fn_8001047C
+    bl vec3_assign
     lwz r0, 0x136c(r31)
     li r3, 0x0
     cmpwi r0, 0x0
@@ -1771,7 +1771,7 @@ lbl_fn_8052D46C_00001744:
     addi r4, r4, lbl_807C7030@l
 lbl_fn_8052D46C_0000174C:
     addi r3, r1, 0x164
-    bl fn_8001047C
+    bl vec3_assign
     lwz r0, 0x136c(r31)
     li r3, 0x0
     cmpwi r0, 0x0
@@ -1793,7 +1793,7 @@ lbl_fn_8052D46C_00001790:
     addi r4, r4, lbl_807C7030@l
 lbl_fn_8052D46C_00001798:
     addi r3, r1, 0x158
-    bl fn_8001047C
+    bl vec3_assign
     lwz r0, 0x136c(r31)
     li r3, 0x0
     cmpwi r0, 0x0

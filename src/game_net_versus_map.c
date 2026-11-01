@@ -12,7 +12,7 @@ extern void mem_alloc(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void str_findChar(void);
 extern void wcs_vformat(void);
 extern void save_validateHeader(void);
@@ -747,7 +747,7 @@ asm void fn_804BC458(void)
     stw r31, 0x1c(r1)
     stw r30, 0x18(r1)
     mr r30, r3
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_804BC458_00000AAC
     li r31, 0x0

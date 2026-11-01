@@ -29,8 +29,8 @@ extern void PSVECMag(void);
 extern void fn_805F99F0(void);
 extern void fn_805F9AB0(void);
 extern void strcmp(void);
-extern void fn_8068A850(void);
-extern void fn_8068AD58(void);
+extern void std_sin(void);
+extern void std_cos(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
 extern void vec3_isNonZero(void);
@@ -262,7 +262,7 @@ lbl_fn_8056796C_00000200:
     fmuls f0, f0, f4
     stfs f3, 0x574(r29)
     stfs f0, 0x57c(r29)
-    bl fn_8068AD58
+    bl std_cos
     frsp f4, f1
     lfs f3, 0x570(r29)
     lfs f0, lbl_80887F40
@@ -270,7 +270,7 @@ lbl_fn_8056796C_00000200:
     fmuls f3, f3, f4
     stfs f0, 0xbc(r1)
     stfs f3, 0xb8(r1)
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     lfs f6, 0x570(r29)
     lfs f4, 0xb8(r1)

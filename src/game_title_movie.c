@@ -42,8 +42,8 @@ extern void fn_803EEE10(void);
 extern void fn_80444020(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
-extern void fn_8068A850(void);
-extern void fn_8068AD58(void);
+extern void std_sin(void);
+extern void std_cos(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -307,7 +307,7 @@ lbl_fn_803A914C_00000250:
     stfs f7, 0x24(r1)
     fmuls f3, f3, f4
     fmuls f1, f3, f0
-    bl fn_8068A850
+    bl std_sin
     lfs f5, 0xb8(r27)
     frsp f4, f1
     lfs f0, lbl_80885BB8
@@ -526,7 +526,7 @@ lbl_fn_803A956C_00000540:
     stfs f7, 0x24(r1)
     fmuls f3, f3, f4
     fmuls f1, f3, f0
-    bl fn_8068AD58
+    bl std_cos
     lfs f4, 0xb8(r31)
     frsp f3, f1
     lfs f0, lbl_80885BB8

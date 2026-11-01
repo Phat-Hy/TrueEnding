@@ -7,7 +7,7 @@ extern void _savegpr_27(void);
 extern void fn_8000D0F8(void);
 extern void fn_8000D114(void);
 extern void fn_8000DD04(void);
-extern void fn_80011034(void);
+extern void vec3_toEulerAngles(void);
 extern void fn_80011410(void);
 extern void fn_800133B0(void);
 extern void fn_80013404(void);
@@ -85,7 +85,7 @@ void fn_80147A18(void);
 void fn_80147B04(void);
 void fn_80148334(void);
 void fn_80148340(void);
-void fn_80148990(void);
+void quest_ctorRewardItem(void);
 void fn_801489CC(void);
 void fn_80148B0C(void);
 void quest_checkCondition(void);
@@ -819,9 +819,9 @@ lbl_fn_80148340_000009B0:
     la r6, lbl_8087D9E0
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     li r5, 0x0
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r6, 0x14
     li r7, 0x1
     bl runtime_registerStaticObject
@@ -980,9 +980,9 @@ lbl_fn_80148340_00000C0C:
     la r6, lbl_8087D9E0
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     li r5, 0x0
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r6, 0x14
     li r7, 0x8
     bl runtime_registerStaticObject
@@ -1094,9 +1094,9 @@ lbl_fn_80148340_00000DAC:
     addi r3, r3, 0x10
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     mr r7, r30
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r5, 0x0
     li r6, 0x14
     bl runtime_registerStaticObject
@@ -1221,7 +1221,7 @@ lbl_fn_80148340_00000F54:
     blr
 }
 
-asm void fn_80148990(void)
+asm void quest_ctorRewardItem(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -1538,7 +1538,7 @@ lbl_fn_80148CC4_000013E8:
 lbl_fn_80148CC4_000013F8:
     addi r3, r1, 0x178
     addi r4, r30, 0xfa4
-    bl fn_80011034
+    bl vec3_toEulerAngles
     mr r4, r31
     addi r3, r1, 0x16c
     bl fn_8000D0F8
@@ -1593,7 +1593,7 @@ lbl_fn_80148CC4_0000149C:
     beq lbl_fn_80148CC4_00001BE8
     addi r3, r1, 0x154
     addi r4, r30, 0xfa4
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lfs f1, 0x158(r1)
     lfs f0, 0x538(r30)
     fsubs f1, f1, f0
@@ -1665,7 +1665,7 @@ lbl_fn_80148CC4_000015A8:
     beq lbl_fn_80148CC4_00001BE8
     addi r3, r1, 0x130
     addi r4, r30, 0xfa4
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lfs f1, 0x134(r1)
     lfs f0, 0x538(r30)
     fsubs f1, f1, f0
@@ -1709,7 +1709,7 @@ lbl_fn_80148CC4_00001658:
     bne lbl_fn_80148CC4_00001BE8
     addi r3, r1, 0x118
     addi r4, r30, 0xfa4
-    bl fn_80011034
+    bl vec3_toEulerAngles
     mr r4, r31
     addi r3, r1, 0x10c
     bl fn_8000D0F8
@@ -1759,7 +1759,7 @@ lbl_fn_80148CC4_00001700:
     beq lbl_fn_80148CC4_00001800
     addi r3, r1, 0x100
     addi r4, r30, 0xfa4
-    bl fn_80011034
+    bl vec3_toEulerAngles
     mr r4, r31
     addi r3, r1, 0xf4
     bl fn_8000D0F8
@@ -1844,7 +1844,7 @@ lbl_fn_80148CC4_00001850:
     bne lbl_fn_80148CC4_00001BE8
     addi r3, r1, 0xe8
     addi r4, r30, 0xfa4
-    bl fn_80011034
+    bl vec3_toEulerAngles
     mr r4, r31
     addi r3, r1, 0xdc
     bl fn_8000D0F8
@@ -1889,7 +1889,7 @@ lbl_fn_80148CC4_000018E8:
 lbl_fn_80148CC4_00001910:
     addi r3, r1, 0xd0
     addi r4, r30, 0xfa4
-    bl fn_80011034
+    bl vec3_toEulerAngles
     mr r4, r31
     addi r3, r1, 0xc4
     bl fn_8000D0F8

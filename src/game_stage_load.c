@@ -5,7 +5,7 @@
 extern void __files(void);
 extern void fn_8004D388(void);
 extern void mem_free(void);
-extern void fn_8008BBD8(void);
+extern void map_debugLog(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_80108C10(void);
@@ -234,7 +234,7 @@ lbl_fn_801971B8_00000200:
     psq_st f1, 0x0(r7), 0, 0
     stfs f2, 0x144(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_801971B8_0000031C
     lwz r6, 0x12c(r1)
@@ -848,7 +848,7 @@ lbl_fn_80197A68_00000AB0:
     psq_st f1, 0x0(r7), 0, 0
     stfs f2, 0x144(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_80197A68_00000BCC
     lwz r6, 0x12c(r1)

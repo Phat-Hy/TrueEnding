@@ -54,8 +54,8 @@ extern void GXSetNumTevStages(void);
 extern void fn_80617D50(void);
 extern void GXSetZCompLoc(void);
 extern void rand(void);
-extern void fn_8068A850(void);
-extern void fn_8068AD58(void);
+extern void std_sin(void);
+extern void std_cos(void);
 
 /* External data declarations */
 extern u8 lbl_80732D28[];
@@ -1019,12 +1019,12 @@ asm void fn_800B2EA0(void)
     bl fn_80614190
     lwz r3, lbl_8087EFA8
     lfs f1, 0x420(r3)
-    bl fn_8068AD58
+    bl std_cos
     lwz r3, lbl_8087EFA8
     frsp f31, f1
     lfs f1, 0x420(r3)
     lfs f30, 0x418(r3)
-    bl fn_8068A850
+    bl std_sin
     lwz r3, lbl_8087EFA8
     fneg f0, f31
     frsp f1, f1
@@ -1041,12 +1041,12 @@ asm void fn_800B2EA0(void)
     bl layout_drawPane
     lwz r3, lbl_8087EFA8
     lfs f1, 0x420(r3)
-    bl fn_8068A850
+    bl std_sin
     lwz r3, lbl_8087EFA8
     frsp f30, f1
     lfs f1, 0x420(r3)
     lfs f31, 0x41c(r3)
-    bl fn_8068AD58
+    bl std_cos
     frsp f0, f1
     lwz r3, lbl_8087EFA8
     fmuls f2, f30, f31

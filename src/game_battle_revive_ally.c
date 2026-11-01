@@ -39,8 +39,8 @@ extern void PSVECMag(void);
 extern void rand(void);
 extern void strcmp(void);
 extern void atoi(void);
-extern void fn_8068A850(void);
-extern void fn_8068AD58(void);
+extern void std_sin(void);
+extern void std_cos(void);
 extern void math_u64DivMod(void);
 extern void runtime_registerStaticObject(void);
 extern void __destroy_arr(void);
@@ -923,11 +923,11 @@ asm void fn_80404290(void)
     fmadds f0, f5, f3, f0
     stfs f0, 0x418(r3)
     lfs f1, 0x7c(r30)
-    bl fn_8068A850
+    bl std_sin
     lfs f0, 0x7c(r30)
     frsp f30, f1
     fmr f1, f0
-    bl fn_8068AD58
+    bl std_cos
     frsp f0, f1
     lwz r0, 0x10c(r30)
     stfs f30, 0x14(r1)
@@ -990,12 +990,12 @@ asm void fn_80404290(void)
     stfs f6, 0x1c(r1)
     stfs f3, 0x20(r1)
     stfs f2, 0x2c(r1)
-    bl fn_8068AD58
+    bl std_cos
     lwz r0, 0x10c(r30)
     frsp f30, f1
     add r26, r0, r31
     lfs f1, 0x420(r26)
-    bl fn_8068A850
+    bl std_sin
     lwz r0, 0x10c(r30)
     frsp f4, f1
     lfs f0, 0x40c(r26)
@@ -1007,12 +1007,12 @@ asm void fn_80404290(void)
     lwz r0, 0x10c(r30)
     add r3, r0, r31
     lfs f1, 0x420(r3)
-    bl fn_8068AD58
+    bl std_cos
     lwz r0, 0x10c(r30)
     frsp f30, f1
     add r26, r0, r31
     lfs f1, 0x420(r26)
-    bl fn_8068A850
+    bl std_sin
     lwz r0, 0x10c(r30)
     frsp f5, f1
     lfs f3, 0x404(r26)
@@ -1067,11 +1067,11 @@ lbl_fn_80404290_00000DDC:
     fmadds f0, f3, f4, f0
     stfs f0, 0x40c(r3)
     lfs f1, 0x7c(r30)
-    bl fn_8068A850
+    bl std_sin
     lfs f0, 0x7c(r30)
     frsp f30, f1
     fmr f1, f0
-    bl fn_8068AD58
+    bl std_cos
     lfs f0, 0x14(r1)
     frsp f5, f1
     lfs f3, 0x10(r1)
@@ -1668,12 +1668,12 @@ asm void fn_80404E70(void)
     fsubs f1, f1, f2
     fmuls f1, f0, f1
     stfs f1, 0x3e4(r30)
-    bl fn_8068AD58
+    bl std_cos
     lfs f0, 0x3e4(r30)
     frsp f2, f1
     fneg f1, f0
     stfs f2, 0x3ec(r30)
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     addi r3, r30, 0x3ec
     mr r4, r3
@@ -1867,12 +1867,12 @@ lbl_fn_804050C0_0000197C:
     fmuls f1, f1, f2
     fadds f1, f0, f1
     stfs f1, 0x3e4(r30)
-    bl fn_8068AD58
+    bl std_cos
     lfs f0, 0x3e4(r30)
     frsp f2, f1
     fneg f1, f0
     stfs f2, 0x3ec(r30)
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     stfs f0, 0x3f4(r30)
 lbl_fn_804050C0_000019F8:

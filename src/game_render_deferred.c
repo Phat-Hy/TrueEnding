@@ -4,8 +4,8 @@
 /* External function declarations */
 extern void dtor_80084684(void);
 extern void fn_8000D3A4(void);
-extern void fn_8001047C(void);
-extern void fn_80011034(void);
+extern void vec3_assign(void);
+extern void vec3_toEulerAngles(void);
 extern void vec3_sub(void);
 extern void fn_8004D124(void);
 extern void atn_ColliBase_destructor(void);
@@ -1360,7 +1360,7 @@ asm void fn_802B6F80(void)
     bl fn_8013C38C
     mr r4, r3
     addi r3, r1, 0x2c
-    bl fn_8001047C
+    bl vec3_assign
     addi r3, r1, 0x20
     addi r4, r1, 0x2c
     addi r5, r31, 0x528
@@ -1376,7 +1376,7 @@ asm void fn_802B6F80(void)
     bl fn_800F7FD8
     addi r3, r1, 0x14
     addi r4, r1, 0x8
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lfs f0, 0x18(r1)
     fsubs f1, f0, f31
     bl fn_802A7964

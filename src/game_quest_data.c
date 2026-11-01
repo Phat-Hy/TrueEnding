@@ -23,8 +23,8 @@ extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
-extern void fn_8068A850(void);
-extern void fn_8068AD58(void);
+extern void std_sin(void);
+extern void std_cos(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
 extern void math_u64DivMod(void);
@@ -343,7 +343,7 @@ lbl_fn_801426A4_000003A8:
     lfs f1, 0x130(r1)
     fnmsubs f0, f0, f5, f0
     stfs f0, 0x57c(r29)
-    bl fn_8068AD58
+    bl std_cos
     frsp f4, f1
     lfs f3, 0x570(r29)
     lfs f0, lbl_8088196C
@@ -351,7 +351,7 @@ lbl_fn_801426A4_000003A8:
     fmuls f3, f3, f4
     stfs f0, 0x124(r1)
     stfs f3, 0x120(r1)
-    bl fn_8068A850
+    bl std_sin
     frsp f5, f1
     lfs f4, 0x570(r29)
     lfs f3, 0x120(r1)
@@ -1421,7 +1421,7 @@ lbl_fn_801437D0_00001300:
     bl PSVECDotProduct
     fmr f26, f1
     lfd f1, 0x488(r31)
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     fcmpo cr0, f26, f0
     ble lbl_fn_801437D0_000013A0
@@ -1437,7 +1437,7 @@ lbl_fn_801437D0_00001300:
     b lbl_fn_801437D0_00001618
 lbl_fn_801437D0_000013A0:
     lfd f1, 0x490(r31)
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     fcmpo cr0, f26, f0
     ble lbl_fn_801437D0_000015F4

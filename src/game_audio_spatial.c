@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void fn_8000D3A4(void);
 extern void fn_8000D9E8(void);
-extern void fn_80011034(void);
+extern void vec3_toEulerAngles(void);
 extern void vec3_sub(void);
 extern void fn_800133B0(void);
 extern void fn_80013404(void);
@@ -14,7 +14,7 @@ extern void fn_80103F60(void);
 extern void fn_80108378(void);
 extern void fn_801092C8(void);
 extern void fn_801125F8(void);
-extern void fn_80121F00(void);
+extern void equip_getGlobalManager(void);
 extern void fn_80126214(void);
 extern void fn_80127D8C(void);
 extern void fn_8012DD70(void);
@@ -1033,7 +1033,7 @@ asm void fn_802FFFF8(void)
     cmpwi r0, 0x16
     beq lbl_fn_802FFFF8_00001318
 lbl_fn_802FFFF8_00000D84:
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_8013C504
     bl fn_8000D9E8
     bl fn_802A36B0
@@ -1084,7 +1084,7 @@ lbl_fn_802FFFF8_00000E18:
     fmr f31, f1
     addi r3, r1, 0x2c
     addi r4, r1, 0x44
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lfs f1, 0x30(r1)
     lfs f0, 0x538(r29)
     fsubs f1, f1, f0
@@ -1104,7 +1104,7 @@ lbl_fn_802FFFF8_00000E64:
     fmr f26, f1
     addi r3, r1, 0x20
     addi r4, r1, 0x38
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lfs f1, 0x24(r1)
     lfs f0, 0x538(r29)
     fsubs f1, f1, f0

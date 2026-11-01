@@ -57,7 +57,7 @@ extern void atn_LoadHandle_destructor(void);
 extern void fn_80491528(void);
 extern void PSVECSquareMag(void);
 extern void strcmp(void);
-extern void fn_8068AD58(void);
+extern void std_cos(void);
 extern void std_fmod(void);
 extern void __destroy_arr(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -1320,7 +1320,7 @@ lbl_fn_80422BF4_00000FBC:
     psq_st f1, 0x104(r31), 0, 0
     fmr f1, f7
     stfs f5, 0x8(r1)
-    bl fn_8068AD58
+    bl std_cos
     frsp f4, f1
     lfs f3, lbl_8088664C
     lfs f0, 0x104(r31)
@@ -1331,7 +1331,7 @@ lbl_fn_80422BF4_00000FBC:
     b lbl_fn_80422BF4_0000104C
 lbl_fn_80422BF4_00001034:
     lfs f1, 0x150(r31)
-    bl fn_8068AD58
+    bl std_cos
     frsp f4, f1
     lfs f3, lbl_8088664C
     lfs f0, 0x104(r31)
@@ -1339,7 +1339,7 @@ lbl_fn_80422BF4_00001034:
 lbl_fn_80422BF4_0000104C:
     lfs f1, 0x150(r31)
     stfs f5, 0x104(r31)
-    bl fn_8068AD58
+    bl std_cos
     frsp f4, f1
     lfs f3, lbl_8088664C
     lfs f0, 0x108(r31)
@@ -1350,7 +1350,7 @@ lbl_fn_80422BF4_0000104C:
     b lbl_fn_80422BF4_00001090
 lbl_fn_80422BF4_00001078:
     lfs f1, 0x150(r31)
-    bl fn_8068AD58
+    bl std_cos
     frsp f4, f1
     lfs f3, lbl_8088664C
     lfs f0, 0x108(r31)

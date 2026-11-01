@@ -7,7 +7,7 @@ extern void _savegpr_21(void);
 extern void dtor_80084684(void);
 extern void fn_8000D7DC(void);
 extern void mem_getAllocSize(void);
-extern void fn_8008BBD8(void);
+extern void map_debugLog(void);
 extern void fn_80099010(void);
 extern void fn_8011C074(void);
 extern void fn_8011E200(void);
@@ -726,7 +726,7 @@ lbl_fn_8011D424_00000880:
     stw r4, 0x20(r1)
     stw r0, 0x24(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_8011D424_000008F4
     addic. r0, r1, 0x7c

@@ -31,8 +31,8 @@ extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
 extern void PSVECCrossProduct(void);
-extern void fn_8068A850(void);
-extern void fn_8068AD58(void);
+extern void std_sin(void);
+extern void std_cos(void);
 extern void fn_8068AE24(void);
 extern void fn_8068AE9C(void);
 extern void std_atan2(void);
@@ -465,11 +465,11 @@ lbl_item_useConsumable_000004E8:
     fmr f1, f0
     lfs f2, 0x70(r1)
     stfs f2, 0xc4(r1)
-    bl fn_8068A850
+    bl std_sin
     lfs f0, 0x38(r31)
     frsp f31, f1
     fmr f1, f0
-    bl fn_8068AD58
+    bl std_cos
     frsp f24, f1
     lfs f9, 0xc8(r1)
     lfs f0, 0xd0(r1)
@@ -3212,7 +3212,7 @@ lbl_fn_8004D388_00002C5C:
     bl fn_8068AE9C
     frsp f0, f1
     fmuls f1, f26, f0
-    bl fn_8068A850
+    bl std_sin
     mulli r0, r26, 0x50
     lfs f7, 0x30(r16)
     lfs f5, 0x2c(r16)

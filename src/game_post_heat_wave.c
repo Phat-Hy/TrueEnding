@@ -8,7 +8,7 @@ extern void mem_alloc(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_8008BBD8(void);
+extern void map_debugLog(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
@@ -20,8 +20,8 @@ extern void morph_updateMesh(void);
 extern void system_getNextSequenceId(void);
 extern void fn_8013A258(void);
 extern void fn_8013CB68(void);
-extern void fn_80145334(void);
-extern void fn_80148990(void);
+extern void quest_updateFlow(void);
+extern void quest_ctorRewardItem(void);
 extern void dialog_renderWindow(void);
 extern void fn_8014C540(void);
 extern void fn_80151448(void);
@@ -492,7 +492,7 @@ lbl_fn_802D8B7C_0000057C:
     mr r3, r31
     bl fn_8014C540
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     lfs f4, 0x16a0(r31)
     lfs f3, lbl_80884604
     lfs f0, lbl_808845F0
@@ -716,9 +716,9 @@ lbl_fn_802D92E4_00000864:
     la r6, lbl_8087D9E0
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     li r5, 0x0
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r6, 0x14
     li r7, 0x8
     bl runtime_registerStaticObject
@@ -830,9 +830,9 @@ lbl_fn_802D92E4_00000A04:
     addi r3, r3, 0x10
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     mr r7, r30
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r5, 0x0
     li r6, 0x14
     bl runtime_registerStaticObject
@@ -1219,7 +1219,7 @@ lbl_fn_802D99D8_00000F8C:
     stw r4, 0x54(r1)
     stw r0, 0x58(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_802D99D8_00001060
     lwz r7, 0x48(r1)

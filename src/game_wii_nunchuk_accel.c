@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void _restgpr_25(void);
 extern void _savegpr_25(void);
-extern void fn_8008BBD8(void);
+extern void map_debugLog(void);
 extern void fn_800C16B4(void);
 extern void fn_800CF45C(void);
 extern void fn_800CF7DC(void);
@@ -1095,7 +1095,7 @@ lbl_fn_8055BCAC_00000DE4:
     stw r4, 0x60(r1)
     stw r0, 0x64(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_8055BCAC_00000E58
     addic. r0, r1, 0x108
@@ -1634,7 +1634,7 @@ lbl_fn_8055BCAC_0000155C:
     stw r4, 0x28(r1)
     stw r0, 0x2c(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_8055BCAC_000015D0
     addic. r0, r1, 0xf4

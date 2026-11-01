@@ -15,7 +15,7 @@ extern void fn_8012B3E8(void);
 extern void fn_8012B988(void);
 extern void fn_8012D8B8(void);
 extern void fn_80133B30(void);
-extern void fn_80145334(void);
+extern void quest_updateFlow(void);
 extern void fn_8014DEE4(void);
 extern void fn_8014EEC4(void);
 extern void fn_80153698(void);
@@ -1505,7 +1505,7 @@ lbl_fn_803BA620_00001324:
     cmpwi r0, 0x4
     bne lbl_fn_803BA620_0000136C
     mr r3, r29
-    bl fn_80145334
+    bl quest_updateFlow
     lwz r3, lbl_8087F430
     mr r5, r29
     addi r4, r1, 0x50

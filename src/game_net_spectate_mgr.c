@@ -41,7 +41,7 @@ extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void fn_801F0544(void);
 extern void save_validateHeader(void);
 extern void fn_801FEB9C(void);
@@ -1696,7 +1696,7 @@ lbl_spectateManager_update_000015F4:
     cmpwi r4, 0x1
     bne lbl_spectateManager_update_00001774
     mr r3, r30
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_spectateManager_update_000021FC
     li r3, 0x0
@@ -1794,7 +1794,7 @@ lbl_spectateManager_update_00001774:
     bne lbl_spectateManager_update_00001D1C
     mr r3, r30
     li r26, 0x1
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_spectateManager_update_000017C4
     addi r3, r30, 0x268

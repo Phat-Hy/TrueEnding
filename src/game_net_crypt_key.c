@@ -13,7 +13,7 @@ extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void str_findChar(void);
 extern void wcs_vformat(void);
 extern void fn_80116FC0(void);
@@ -1719,7 +1719,7 @@ asm void fn_804B43A8(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_804B43A8_000017C8
     addi r3, r31, 0x48

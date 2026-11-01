@@ -14,7 +14,7 @@ extern void fn_80084F84(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void str_findChar(void);
 extern void wcs_vformat(void);
 extern void fn_800E426C(void);
@@ -1590,7 +1590,7 @@ lbl_world_Manager_postUpdate_00001594:
     lwz r3, lbl_8087FA20
     cmpwi r3, 0x0
     beq lbl_world_Manager_postUpdate_000015B4
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_world_Manager_postUpdate_000015BC
 lbl_world_Manager_postUpdate_000015B4:

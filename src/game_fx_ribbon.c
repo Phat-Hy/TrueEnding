@@ -6,8 +6,8 @@ extern void _restgpr_24(void);
 extern void _savegpr_24(void);
 extern void vec3_copy(void);
 extern void fn_8000D3A4(void);
-extern void fn_8001047C(void);
-extern void fn_80011034(void);
+extern void vec3_assign(void);
+extern void vec3_toEulerAngles(void);
 extern void vec3_sub(void);
 extern void fn_800133B0(void);
 extern void fn_80063D3C(void);
@@ -20,7 +20,7 @@ extern void fn_800F7FF0(void);
 extern void fn_800F8524(void);
 extern void system_getNextSequenceId(void);
 extern void fn_801162A0(void);
-extern void fn_80121F00(void);
+extern void equip_getGlobalManager(void);
 extern void fn_8013C38C(void);
 extern void actor_setState(void);
 extern void fn_80179D44(void);
@@ -192,7 +192,7 @@ lbl_fn_8028AA38_00000118:
     bl fn_800F7FF0
     addi r3, r1, 0x94
     addi r4, r1, 0xa0
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lwz r0, 0x58c(r30)
     cmpwi r0, 0x7
     bne lbl_fn_8028AA38_00000170
@@ -247,15 +247,15 @@ lbl_fn_8028AA38_000001EC:
     bl fn_800F7FF0
     addi r3, r1, 0x58
     addi r4, r1, 0x88
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lfs f31, 0x5c(r1)
     addi r3, r1, 0x4c
     addi r4, r1, 0x7c
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lfs f30, 0x50(r1)
     addi r3, r1, 0x40
     addi r4, r1, 0x70
-    bl fn_80011034
+    bl vec3_toEulerAngles
     fsubs f1, f30, f31
     lfs f31, 0x44(r1)
     bl fn_800133B0
@@ -276,7 +276,7 @@ lbl_fn_8028AA38_000001EC:
     bl vec3_sub
     addi r3, r1, 0x34
     addi r4, r1, 0x28
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lfs f1, 0x38(r1)
     bl fn_800133B0
     lfs f0, lbl_80883AB4
@@ -290,7 +290,7 @@ lbl_fn_8028AA38_0000029C:
     bl vec3_sub
     addi r3, r1, 0x1c
     addi r4, r1, 0x10
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lfs f1, 0x20(r1)
     bl fn_800133B0
     stfs f1, 0x538(r30)
@@ -876,7 +876,7 @@ asm void fn_8028B47C(void)
     bl fn_8013C38C
     mr r4, r3
     addi r3, r1, 0x14
-    bl fn_8001047C
+    bl vec3_assign
     addi r3, r1, 0x8
     addi r4, r1, 0x14
     addi r5, r30, 0x528
@@ -1043,7 +1043,7 @@ lbl_fn_8028B47C_00000D88:
     lwz r0, 0x1628(r30)
     cmpwi r0, 0x0
     bne lbl_fn_8028B47C_00000DB0
-    bl fn_80121F00
+    bl equip_getGlobalManager
     li r4, 0x9b
     bl world_getLocalFlag
     cmpwi r3, 0x0

@@ -21,7 +21,7 @@ extern void system_getNextSequenceId(void);
 extern void fn_800F8C6C(void);
 extern void fn_80108F38(void);
 extern void boss_updatePhaseState(void);
-extern void fn_80145334(void);
+extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void fn_8014C540(void);
 extern void fn_80151448(void);
@@ -61,7 +61,7 @@ extern void printf(void);
 extern void strcmp(void);
 extern void atoi(void);
 extern void abort(void);
-extern void fn_8068A850(void);
+extern void std_sin(void);
 
 /* External data declarations */
 extern u8 jumptable_807854B0[];
@@ -1394,7 +1394,7 @@ lbl_fn_8027D838_00001260:
     stfs f0, 0x5b0(r31)
     bl fn_8014C540
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     addi r29, r1, 0x80
     psq_l f1, 0x528(r31), 0, 0
     psq_st f1, 0x0(r29), 0, 0
@@ -1743,7 +1743,7 @@ lbl_fn_8027E410_00001700:
     bgt lbl_fn_8027E410_000017BC
     lis r3, lbl_80744E78@ha
     lfd f1, lbl_80744E78@l(r3)
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     fneg f0, f0
     fcmpo cr0, f31, f0
@@ -1753,7 +1753,7 @@ lbl_fn_8027E410_00001700:
 lbl_fn_8027E410_000017BC:
     lis r3, lbl_80744E78@ha
     lfd f1, lbl_80744E78@l(r3)
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     fcmpo cr0, f31, f0
     ble lbl_fn_8027E410_000017D8

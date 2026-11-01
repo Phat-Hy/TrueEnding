@@ -39,7 +39,7 @@ extern void system_getNextSequenceId(void);
 extern void fn_800F8C6C(void);
 extern void clip_calculateFrustum(void);
 extern void boss_updatePhaseState(void);
-extern void fn_80145334(void);
+extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void fn_8014C540(void);
 extern void fn_80151448(void);
@@ -1430,7 +1430,7 @@ lbl_fn_802B2F64_0000120C:
     mr r3, r31
     bl fn_8014C540
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     mr r3, r31
     bl fn_802B4B08
     lwz r0, 0x1518(r31)

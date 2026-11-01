@@ -34,7 +34,7 @@ extern void fn_800E854C(void);
 extern void fn_800EF73C(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
-extern void fn_80121F00(void);
+extern void equip_getGlobalManager(void);
 extern void magic_getOffset6C(void);
 extern void fn_8012A1B8(void);
 extern void fn_8013322C(void);
@@ -43,7 +43,7 @@ extern void fn_80139560(void);
 extern void fn_8013A194(void);
 extern void fn_8013C38C(void);
 extern void fn_8014052C(void);
-extern void fn_80145334(void);
+extern void quest_updateFlow(void);
 extern void fn_8014C540(void);
 extern void fn_801513D0(void);
 extern void fn_8015E7A0(void);
@@ -1242,12 +1242,12 @@ lbl_fn_8032E938_00000F64:
     addi r3, r31, 0x14ec
     bl fn_8032ECA8
     mr r29, r3
-    bl fn_80121F00
+    bl equip_getGlobalManager
     lwz r4, 0x0(r29)
     bl world_getLocalFlag
     cmpwi r3, 0x1
     beq lbl_fn_8032E938_00001080
-    bl fn_80121F00
+    bl equip_getGlobalManager
     lwz r4, 0x4(r29)
     bl world_getLocalFlag
     cmpwi r3, 0x1
@@ -1313,7 +1313,7 @@ lbl_fn_8032E938_00001080:
     lwz r0, 0x58c(r31)
     cmpwi r0, 0x9
     beq lbl_fn_8032E938_000010CC
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl magic_getOffset6C
     lwz r0, 0x14cc(r31)
     mr r29, r3
@@ -1381,7 +1381,7 @@ lbl_fn_8032E938_0000117C:
     mr r3, r31
     bl fn_8014C540
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     mr r3, r31
     bl fn_8032FBF4
     cmpwi r3, 0x0

@@ -22,7 +22,7 @@ extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void str_findChar(void);
 extern void fn_80116FC0(void);
 extern void actor_setState(void);
@@ -1593,7 +1593,7 @@ lbl_fn_805BA16C_00001438:
     cmpwi r27, 0x0
     bne lbl_fn_805BA16C_00001570
     mr r3, r29
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_805BA16C_00001570
     lis r28, lbl_80763F38@ha

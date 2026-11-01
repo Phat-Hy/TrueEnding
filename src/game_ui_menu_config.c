@@ -9,7 +9,7 @@ extern void dtor_80084684(void);
 extern void fn_8004ECC0(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_8008BBD8(void);
+extern void map_debugLog(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
@@ -1383,7 +1383,7 @@ lbl_fn_801BDA9C_00001268:
     stw r4, 0xa8(r1)
     stw r0, 0xac(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_801BDA9C_00001354
     lwz r8, 0x98(r1)
@@ -1511,7 +1511,7 @@ lbl_fn_801BDA9C_00001450:
     stw r4, 0x74(r1)
     stw r0, 0x78(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_801BDA9C_00001524
     lwz r7, 0x68(r1)

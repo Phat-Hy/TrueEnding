@@ -13,8 +13,8 @@ extern void fn_8000D9F8(void);
 extern void fn_8000DB1C(void);
 extern void fn_8000DCF4(void);
 extern void fn_8000DD0C(void);
-extern void fn_8001047C(void);
-extern void fn_80011034(void);
+extern void vec3_assign(void);
+extern void vec3_toEulerAngles(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void vec3_sub(void);
 extern void fn_80013404(void);
@@ -50,7 +50,7 @@ extern void fn_801156C4(void);
 extern void fn_801162A0(void);
 extern void fn_80116BAC(void);
 extern void fn_80116E6C(void);
-extern void fn_80121F00(void);
+extern void equip_getGlobalManager(void);
 extern void magic_getOffset6C(void);
 extern void magic_getOffset244(void);
 extern void fn_80124C6C(void);
@@ -640,7 +640,7 @@ lbl_fn_803D2A6C_00000464:
     beq lbl_fn_803D2A6C_00004300
 lbl_fn_803D2A6C_00000518:
     li r21, 0x0
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_803D6E24
     cmpwi r3, 0x8
     bne lbl_fn_803D2A6C_0000054C
@@ -654,7 +654,7 @@ lbl_fn_803D2A6C_00000518:
     li r21, 0x1
 lbl_fn_803D2A6C_0000054C:
     li r29, 0x0
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_803D6E24
     cmpwi r3, 0x8
     bne lbl_fn_803D2A6C_00000580
@@ -671,7 +671,7 @@ lbl_fn_803D2A6C_00000580:
     bl fn_8000D9E8
     bl fn_8000DCF4
     mr r31, r3
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl magic_getOffset6C
     cmpwi r21, 0x0
     mr r28, r3
@@ -736,12 +736,12 @@ lbl_fn_803D2A6C_00000660:
 lbl_fn_803D2A6C_0000067C:
     cmpwi r29, 0x0
     bne lbl_fn_803D2A6C_00000694
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_803D6E24
     cmpwi r3, 0x0
     bne lbl_fn_803D2A6C_00002C30
 lbl_fn_803D2A6C_00000694:
-    bl fn_80121F00
+    bl equip_getGlobalManager
     li r4, 0x2b
     bl world_getGlobalFlag
     cmpwi r3, 0x1
@@ -770,7 +770,7 @@ lbl_fn_803D2A6C_00000694:
     bl fn_80366DAC
     b lbl_fn_803D2A6C_00000930
 lbl_fn_803D2A6C_00000704:
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_803D6E70
     cmpwi r3, 0x0
     bne lbl_fn_803D2A6C_00000930
@@ -968,7 +968,7 @@ lbl_fn_803D2A6C_0000096C:
     bl fn_8013C38C
     mr r4, r3
     addi r3, r1, 0x488
-    bl fn_8001047C
+    bl vec3_assign
     mr r3, r31
     bl fn_8013C42C
     lfs f0, 0x48c(r1)
@@ -1109,7 +1109,7 @@ lbl_fn_803D2A6C_00000B90:
     bl fn_800F7FF0
     addi r3, r1, 0x464
     bl fn_80139F60
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl magic_getOffset6C
     bl fn_803D6EEC
     bl fn_80116E6C
@@ -1255,19 +1255,19 @@ lbl_fn_803D2A6C_00000DE8:
     lwz r3, 0x83c(r24)
     lfs f1, lbl_80885D60
     bl fn_803D6F68
-    bl fn_80121F00
+    bl equip_getGlobalManager
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00000E64
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_8013C504
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00000E64
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_8013C504
     bl fn_80244CA0
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00000E64
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_8013C504
     bl fn_803CC900
     cmpwi r3, 0x0
@@ -1351,7 +1351,7 @@ lbl_fn_803D2A6C_00000F58:
     addi r4, r3, 0xc
 lbl_fn_803D2A6C_00000F68:
     addi r3, r1, 0x458
-    bl fn_8001047C
+    bl vec3_assign
     lfs f1, 0x45c(r1)
     lfs f0, lbl_80885DDC
     fadds f0, f1, f0
@@ -1414,7 +1414,7 @@ lbl_fn_803D2A6C_0000100C:
     bl fn_8013C43C
     cmpwi r3, 0x0
     bne lbl_fn_803D2A6C_0000118C
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_803761A4
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_0000118C
@@ -1458,7 +1458,7 @@ lbl_fn_803D2A6C_000010E4:
     addi r4, r3, 0xc
 lbl_fn_803D2A6C_00001100:
     addi r3, r1, 0x440
-    bl fn_8001047C
+    bl vec3_assign
     lfs f0, 0x444(r1)
     fadds f0, f0, f28
     stfs f0, 0x444(r1)
@@ -1513,7 +1513,7 @@ lbl_fn_803D2A6C_0000118C:
     mr r4, r3
     addi r3, r1, 0x428
     addi r4, r4, 0xc
-    bl fn_8001047C
+    bl vec3_assign
     addi r3, r1, 0x608
     bl fn_803D7280
     bl fn_801A03E0
@@ -1537,7 +1537,7 @@ lbl_fn_803D2A6C_000011F0:
     beq lbl_fn_803D2A6C_00001250
     addi r3, r1, 0x274
     addi r4, r1, 0x41c
-    bl fn_8001047C
+    bl vec3_assign
     mr r4, r3
     mr r5, r20
     addi r3, r1, 0x280
@@ -1570,7 +1570,7 @@ lbl_fn_803D2A6C_0000128C:
     bl fn_803D731C
     mr r4, r3
     addi r3, r1, 0x410
-    bl fn_8001047C
+    bl vec3_assign
     addi r3, r1, 0x268
     addi r4, r1, 0x428
     addi r5, r1, 0x410
@@ -1952,10 +1952,10 @@ lbl_fn_803D2A6C_0000181C:
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00001BEC
 lbl_fn_803D2A6C_00001838:
-    bl fn_80121F00
+    bl equip_getGlobalManager
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00001864
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_803D7058
     bl fn_803D7044
     cmpwi r3, 0x0
@@ -2271,7 +2271,7 @@ lbl_fn_803D2A6C_00001CBC:
     bl fn_800F7FB4
     cmpwi r3, 0x5
     bne lbl_fn_803D2A6C_00001D4C
-    bl fn_80121F00
+    bl equip_getGlobalManager
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00001D4C
     mr r3, r19
@@ -2279,12 +2279,12 @@ lbl_fn_803D2A6C_00001CBC:
     subis r0, r3, 0x4
     cmplwi r0, 0x9a85
     bne lbl_fn_803D2A6C_00001D20
-    bl fn_80121F00
+    bl equip_getGlobalManager
     li r4, 0x4ba
     bl world_getGlobalFlag
     cmpwi r3, 0x1e
     beq lbl_fn_803D2A6C_00001D1C
-    bl fn_80121F00
+    bl equip_getGlobalManager
     li r4, 0x4c2
     bl world_getGlobalFlag
     cmpwi r3, 0xe
@@ -2292,12 +2292,12 @@ lbl_fn_803D2A6C_00001CBC:
 lbl_fn_803D2A6C_00001D1C:
     li r20, 0x1
 lbl_fn_803D2A6C_00001D20:
-    bl fn_80121F00
+    bl equip_getGlobalManager
     li r4, 0x4ba
     bl world_getGlobalFlag
     cmpwi r3, 0x1f
     beq lbl_fn_803D2A6C_00001D48
-    bl fn_80121F00
+    bl equip_getGlobalManager
     li r4, 0x4c2
     bl world_getGlobalFlag
     cmpwi r3, 0xf
@@ -2381,7 +2381,7 @@ lbl_fn_803D2A6C_00001E2C:
     bl fn_803D71F4
     mr r4, r3
     addi r3, r1, 0x1f0
-    bl fn_8001047C
+    bl vec3_assign
     mr r23, r3
     bl fn_8013A194
     mr r4, r23
@@ -2495,7 +2495,7 @@ lbl_fn_803D2A6C_00001FF8:
     bne lbl_fn_803D2A6C_00002154
     addi r3, r1, 0x3c4
     addi r4, r24, 0x888
-    bl fn_8001047C
+    bl vec3_assign
     bl fn_8008B964
     mr r4, r3
     addi r3, r1, 0x1e4
@@ -2506,7 +2506,7 @@ lbl_fn_803D2A6C_00001FF8:
     bl vec3_copy
     addi r3, r1, 0x3b8
     addi r4, r24, 0x894
-    bl fn_8001047C
+    bl vec3_assign
     bl fn_8008B964
     mr r4, r3
     addi r3, r1, 0x1d8
@@ -2797,7 +2797,7 @@ lbl_fn_803D2A6C_00002464:
     bl fn_803D73A4
     lfs f24, lbl_80885D58
     mr r31, r3
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl magic_getOffset6C
     bl fn_803D6EEC
     bl fn_80113CCC
@@ -3062,7 +3062,7 @@ lbl_fn_803D2A6C_000027AC:
 lbl_fn_803D2A6C_00002858:
     addi r3, r1, 0x374
     addi r4, r1, 0x398
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lfs f1, 0x2668(r24)
     addi r3, r1, 0x368
     fmr f2, f1
@@ -3323,23 +3323,23 @@ lbl_fn_803D2A6C_00002BA4:
 lbl_fn_803D2A6C_00002C30:
     cmpwi r29, 0x0
     bne lbl_fn_803D2A6C_00002C88
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_803D6E24
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00002C88
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_803D6E24
     cmpwi r3, 0x7
     beq lbl_fn_803D2A6C_00002C88
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_803D6E24
     cmpwi r3, 0x9
     beq lbl_fn_803D2A6C_00002C88
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_803D6E24
     cmpwi r3, 0xa
     beq lbl_fn_803D2A6C_00002C88
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_803D6E24
     cmpwi r3, 0xe
     bne lbl_fn_803D2A6C_00002F18
@@ -3524,15 +3524,15 @@ lbl_fn_803D2A6C_00002F10:
 lbl_fn_803D2A6C_00002F18:
     cmpwi r29, 0x0
     bne lbl_fn_803D2A6C_00002F50
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_803D6E24
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00002F50
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_803D6E24
     cmpwi r3, 0x7
     beq lbl_fn_803D2A6C_00002F50
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_803D6E24
     cmpwi r3, 0xe
     bne lbl_fn_803D2A6C_000042F8
@@ -3572,7 +3572,7 @@ lbl_fn_803D2A6C_00002FBC:
     addi r4, r3, 0xc
 lbl_fn_803D2A6C_00002FCC:
     addi r3, r1, 0x338
-    bl fn_8001047C
+    bl vec3_assign
     lfs f0, 0x33c(r1)
     fadds f0, f0, f30
     stfs f0, 0x33c(r1)
@@ -4578,7 +4578,7 @@ lbl_fn_803D2A6C_00003E5C:
     beq lbl_fn_803D2A6C_00003F50
     addi r3, r1, 0x2e4
     addi r4, r24, 0xd44
-    bl fn_8001047C
+    bl vec3_assign
     lwz r3, 0xd50(r24)
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00003F2C

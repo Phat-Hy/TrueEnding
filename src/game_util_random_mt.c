@@ -47,7 +47,7 @@ extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
 extern void strstr(void);
 extern void atoi(void);
-extern void fn_8068A850(void);
+extern void std_sin(void);
 extern void std_atan2(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
@@ -1796,7 +1796,7 @@ asm void fn_805A45FC(void)
     bl PSMTXMultVec
     lfs f0, lbl_80888268
     fmuls f1, f0, f29
-    bl fn_8068A850
+    bl std_sin
     lwz r3, lbl_8087F8A0
     frsp f31, f1
     cmpwi r3, 0x0

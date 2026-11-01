@@ -30,7 +30,7 @@ extern void fn_800CB640(void);
 extern void fn_800CB6F8(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void dialog_renderWindow(void);
 extern void fn_80207EE8(void);
 extern void fn_80207F34(void);
@@ -473,7 +473,7 @@ asm void fn_8037CAF0(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_8037CAF0_00000490
     li r0, 0x7

@@ -25,7 +25,7 @@ extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void atn_LH_Texture_destructAndFree(void);
 extern void atn_LH_Texture_update(void);
 extern void wcs_parseInt(void);
@@ -1052,7 +1052,7 @@ asm void task_Book_destructor(void)
     b lbl_task_Book_destructor_00000EE4
 lbl_task_Book_destructor_00000D2C:
     mr r3, r31
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     bne lbl_task_Book_destructor_00000D44
     li r3, 0x0

@@ -56,7 +56,7 @@ extern void rand(void);
 extern void strncpy(void);
 extern void strcmp(void);
 extern void atoi(void);
-extern void fn_8068A850(void);
+extern void std_sin(void);
 extern void __construct_new_array(void);
 extern char* strcpy(char* dest, const char* src);
 
@@ -243,7 +243,7 @@ lbl_fn_8041B4D8_000001A8:
     fcmpo cr0, f27, f0
     bge lbl_fn_8041B4D8_000001F8
     fmr f1, f29
-    bl fn_8068A850
+    bl std_sin
     frsp f27, f1
     addi r3, r1, 0x20
     addi r4, r1, 0x14
@@ -407,7 +407,7 @@ lbl_fn_8041B724_000003F4:
     fcmpo cr0, f27, f0
     bge lbl_fn_8041B724_00000444
     fmr f1, f29
-    bl fn_8068A850
+    bl std_sin
     frsp f27, f1
     addi r3, r1, 0x20
     addi r4, r1, 0x14

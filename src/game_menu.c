@@ -47,7 +47,7 @@ extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void str_skipWhitespace(void);
 extern void str_findChar(void);
 extern void fn_8010D770(void);
@@ -2278,7 +2278,7 @@ lbl_ArenaTask_destructor_00001A9C:
 asm void ArenaTask_slot1(void)
 {
     nofralloc
-    b fn_800D3FA4
+    b bloom_processPasses
 }
 
 asm void ArenaTask_execute(void)

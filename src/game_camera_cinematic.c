@@ -14,7 +14,7 @@ extern void fn_80126214(void);
 extern void fn_8013A258(void);
 extern void fn_8013C38C(void);
 extern void fn_8013CB68(void);
-extern void fn_80148990(void);
+extern void quest_ctorRewardItem(void);
 extern void dialog_renderWindow(void);
 extern void fn_80151448(void);
 extern void fn_801595BC(void);
@@ -40,7 +40,7 @@ extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
-extern void fn_8068A850(void);
+extern void std_sin(void);
 extern void fn_8068AE9C(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
@@ -385,9 +385,9 @@ lbl_fn_802E315C_000003E0:
     la r6, lbl_8087D9E0
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     li r5, 0x0
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r6, 0x14
     li r7, 0x8
     bl runtime_registerStaticObject
@@ -499,9 +499,9 @@ lbl_fn_802E315C_00000580:
     addi r3, r3, 0x10
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     mr r7, r30
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r5, 0x0
     li r6, 0x14
     bl runtime_registerStaticObject
@@ -2193,7 +2193,7 @@ lbl_fn_802E470C_00001D84:
     bl PSMTXMultVec
     lis r3, lbl_80747D70@ha
     lfd f1, lbl_80747D70@l(r3)
-    bl fn_8068A850
+    bl std_sin
     frsp f31, f1
     mr r4, r29
     addi r3, r1, 0x68

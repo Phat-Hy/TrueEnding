@@ -32,7 +32,7 @@ extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void atn_LH_Texture_update(void);
 extern void fn_800E0000(void);
 extern void fn_800EE794(void);
@@ -1551,7 +1551,7 @@ asm void fn_805A76E4(void)
     mr r31, r3
     stw r30, 0x18(r1)
     stw r29, 0x14(r1)
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_805A76E4_000013F4
     lwz r3, 0x15b0(r31)

@@ -23,7 +23,7 @@ extern void fn_8012D8B8(void);
 extern void fn_8012DB04(void);
 extern void fn_80139560(void);
 extern void fn_80144710(void);
-extern void fn_80145334(void);
+extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void fn_8014C540(void);
 extern void fn_80151448(void);
@@ -64,7 +64,7 @@ extern void PSVECDotProduct(void);
 extern void printf(void);
 extern void rand(void);
 extern void abort(void);
-extern void fn_8068A850(void);
+extern void std_sin(void);
 extern void std_atan2(void);
 
 /* External data declarations */
@@ -586,7 +586,7 @@ lbl_fn_8054622C_00000650:
     bl fn_8015495C
 lbl_fn_8054622C_0000067C:
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     mr r3, r31
     bl fn_8014C540
     lwz r4, 0x14a8(r31)
@@ -657,7 +657,7 @@ lbl_fn_8054622C_000006B4:
     stfs f0, 0x74(r1)
     bl fn_8023A184
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     mr r3, r31
     bl fn_8014C540
     lwz r0, 0x14e8(r31)
@@ -713,7 +713,7 @@ lbl_fn_8054622C_00000858:
     mtctr r12
     bctrl
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     mr r3, r31
     bl fn_8014C540
     b lbl_fn_8054622C_00000C94
@@ -727,7 +727,7 @@ lbl_fn_8054622C_00000884:
     mtctr r12
     bctrl
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     mr r3, r31
     bl fn_8014C540
     b lbl_fn_8054622C_00000C94
@@ -1496,7 +1496,7 @@ lbl_fn_80546B88_000012D4:
     mr r3, r18
     rlwinm r0, r0, 0, 7, 5
     stw r0, 0x12a4(r18)
-    bl fn_80145334
+    bl quest_updateFlow
     li r3, 0x0
     li r4, 0x0
     bl sound_initGlobalInstances
@@ -1518,7 +1518,7 @@ lbl_fn_80546B88_000012D4:
     mr r3, r18
     addi r0, r4, 0x1
     stw r0, 0x14e4(r18)
-    bl fn_80145334
+    bl quest_updateFlow
     b lbl_fn_80546B88_000016CC
 lbl_fn_80546B88_0000141C:
     addi r3, r1, 0x90
@@ -1674,7 +1674,7 @@ lbl_fn_80546B88_00001628:
     stfs f2, 0x53c(r18)
     bl fn_80144710
     mr r3, r18
-    bl fn_80145334
+    bl quest_updateFlow
     psq_l f1, 0x528(r18), 0, 0
     addi r3, r1, 0xc8
     psq_st f1, 0x0(r3), 0, 0
@@ -1849,7 +1849,7 @@ lbl_fn_8054746C_00001830:
     fmr f31, f1
     lis r3, lbl_8075E308@ha
     lfd f1, lbl_8075E308@l(r3)
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     fcmpo cr0, f31, f0
     ble lbl_fn_8054746C_00001928

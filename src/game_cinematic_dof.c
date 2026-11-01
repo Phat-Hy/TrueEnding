@@ -31,7 +31,7 @@ extern void fn_800897D8(void);
 extern void fn_8009373C(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_80099E9C(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void fn_800EC254(void);
@@ -48,7 +48,7 @@ extern void fn_800F52F0(void);
 extern void fn_800F7FA0(void);
 extern void fn_800F7FA8(void);
 extern void fn_8011FC10(void);
-extern void fn_80121F00(void);
+extern void equip_getGlobalManager(void);
 extern void magic_getOffset6C(void);
 extern void fn_80129978(void);
 extern void fn_80129A48(void);
@@ -59,7 +59,7 @@ extern void fn_80139F3C(void);
 extern void fn_8013C38C(void);
 extern void fn_8013C480(void);
 extern void fn_8013C504(void);
-extern void fn_80145334(void);
+extern void quest_updateFlow(void);
 extern void fn_8014C540(void);
 extern void fn_8015ECC4(void);
 extern void fn_8016E4C4(void);
@@ -775,12 +775,12 @@ lbl_fn_803388A4_00000730:
     addi r3, r31, 0x1698
     addi r4, r30, 0xe8
     bl res_MsgHandle_destructor
-    bl fn_80121F00
+    bl equip_getGlobalManager
     li r4, 0x65
     li r5, 0x1
     li r6, 0x0
     bl world_setGlobalFlag
-    bl fn_80121F00
+    bl equip_getGlobalManager
     li r4, 0x68
     li r5, 0x1
     li r6, 0x0
@@ -1113,7 +1113,7 @@ asm void fn_80338FD0(void)
     cmpwi r3, 0x0
     bne lbl_fn_80338FD0_000012E8
     mr r3, r31
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_80338FD0_000012E8
     mr r3, r31
@@ -1148,10 +1148,10 @@ asm void fn_80338FD0(void)
     stw r4, 0x7ec(r31)
     add r0, r0, r3
     stw r0, 0x16c4(r31)
-    bl fn_80121F00
+    bl equip_getGlobalManager
     cmpwi r3, 0x0
     beq lbl_fn_80338FD0_00000DA0
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_8013C504
     mr r29, r3
     b lbl_fn_80338FD0_00000DA4
@@ -1654,7 +1654,7 @@ lbl_fn_80339760_0000143C:
     lwz r0, 0x14b4(r31)
     cmpwi r0, 0x0
     bne lbl_fn_80339760_000014BC
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl magic_getOffset6C
     lfs f1, lbl_80885238
     li r4, 0x14
@@ -1689,7 +1689,7 @@ lbl_fn_80339760_000014BC:
     bl fn_80341EE4
 lbl_fn_80339760_00001500:
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     mr r3, r31
     bl fn_8033AB88
     b lbl_fn_80339760_00001AF8
@@ -1717,7 +1717,7 @@ lbl_fn_80339760_00001524:
     stw r3, 0x14b0(r31)
     stw r3, 0xd1c(r31)
 lbl_fn_80339760_00001568:
-    bl fn_80121F00
+    bl equip_getGlobalManager
     li r4, 0x8c
     bl world_getLocalFlag
     cmpwi r3, 0x0
@@ -1775,7 +1775,7 @@ lbl_fn_80339760_00001634:
     cmpwi r29, 0x0
     bne lbl_fn_80339760_00001600
 lbl_fn_80339760_0000163C:
-    bl fn_80121F00
+    bl equip_getGlobalManager
     li r4, 0x8c
     li r5, 0x0
     bl world_setLocalFlag
@@ -1813,7 +1813,7 @@ lbl_fn_80339760_0000163C:
     li r9, -0x1
     li r10, 0x1
     bl fn_80276AE4
-    bl fn_80121F00
+    bl equip_getGlobalManager
     li r4, 0x38c
     li r5, 0x1
     li r6, 0x0
@@ -2028,7 +2028,7 @@ lbl_fn_80339760_000019CC:
 lbl_fn_80339760_000019E4:
     mr r3, r31
     bl fn_80339F74
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl kpad_getClampData
     mr r28, r3
     bl fn_8000D9E8
@@ -2062,7 +2062,7 @@ lbl_fn_80339760_00001A5C:
     mr r3, r31
     bl fn_8014C540
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     mr r3, r31
     bl fn_8033AB88
     lfs f1, lbl_8088527C

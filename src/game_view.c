@@ -9,12 +9,12 @@ extern void mem_alloc(void);
 extern void fn_800897D8(void);
 extern void fn_8008A76C(void);
 extern void fn_8008AD4C(void);
-extern void fn_8008BBD8(void);
+extern void map_debugLog(void);
 extern void fn_80091CFC(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800E2A24(void);
@@ -1423,7 +1423,7 @@ asm void camera_isObjectVisible(void)
     stmw r17, 0x74(r1)
     mr r18, r3
     li r20, 0x1
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     bne lbl_camera_isObjectVisible_00001384
     li r20, 0x0
@@ -1537,7 +1537,7 @@ lbl_camera_isObjectVisible_000014FC:
     stw r4, 0x20(r1)
     stw r0, 0x24(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_camera_isObjectVisible_00001570
     lwz r5, 0x18(r1)

@@ -7,7 +7,7 @@ extern void dtor_80084684(void);
 extern void mem_free(void);
 extern void fn_80084A78(void);
 extern void mem_getAllocSize(void);
-extern void fn_8008BBD8(void);
+extern void map_debugLog(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800DCA6C(void);
@@ -339,7 +339,7 @@ lbl_fn_8019C234_00000374:
     stw r4, 0xfc(r1)
     stw r0, 0x100(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_8019C234_00000458
     lwz r7, 0xf0(r1)
@@ -458,7 +458,7 @@ lbl_fn_8019C234_0000051C:
     stw r4, 0xc0(r1)
     stw r0, 0xc4(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_8019C234_00000638
     lwz r10, 0xa8(r1)
@@ -653,7 +653,7 @@ lbl_fn_8019C234_00000804:
     stw r4, 0x80(r1)
     stw r0, 0x84(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_8019C234_000008D8
     lwz r7, 0x74(r1)
@@ -1224,7 +1224,7 @@ asm void fn_8019CF64(void)
     mr r29, r3
     mr r3, r31
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_8019CF64_00001118
     li r0, 0x0

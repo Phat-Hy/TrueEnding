@@ -14,8 +14,8 @@ extern void atn_Task_setActive(void);
 extern void system_getNextSequenceId(void);
 extern void fn_80133130(void);
 extern void fn_8013322C(void);
-extern void fn_80145334(void);
-extern void fn_80148990(void);
+extern void quest_updateFlow(void);
+extern void quest_ctorRewardItem(void);
 extern void dialog_renderWindow(void);
 extern void fn_8014C540(void);
 extern void fn_80151448(void);
@@ -176,7 +176,7 @@ lbl_fn_80288E38_000000AC:
     li r4, 0x1
     bl atn_Task_setActive
     lwz r3, 0x1630(r31)
-    bl fn_80145334
+    bl quest_updateFlow
     lwz r3, 0x1630(r31)
     lwz r0, 0x5c0(r3)
     clrrwi r0, r0, 1
@@ -895,7 +895,7 @@ lbl_fn_80288E38_00000B60:
     mr r3, r31
     bl fn_8014C540
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     lwz r0, 0x314(r1)
     psq_l f31, 0x308(r1), 0, 0
     lfd f31, 0x300(r1)
@@ -1383,7 +1383,7 @@ asm void fn_8028A024(void)
     stw r30, 0x78(r1)
     mr r30, r3
     addi r3, r1, 0x5c
-    bl fn_80148990
+    bl quest_ctorRewardItem
     lfs f0, lbl_80883B04
     lis r31, lbl_80745314@ha
     addi r31, r31, lbl_80745314@l
@@ -1524,9 +1524,9 @@ lbl_fn_8028A1F8_0000145C:
     la r6, lbl_8087D9E0
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     li r5, 0x0
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r6, 0x14
     li r7, 0x8
     bl runtime_registerStaticObject
@@ -1638,9 +1638,9 @@ lbl_fn_8028A1F8_000015FC:
     addi r3, r3, 0x10
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     mr r7, r29
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r5, 0x0
     li r6, 0x14
     bl runtime_registerStaticObject

@@ -25,7 +25,7 @@ extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void str_findChar(void);
 extern void fn_80154654(void);
 extern void actor_setState(void);
@@ -1015,7 +1015,7 @@ lbl_fn_801EBD80_00000C90:
 asm void fn_801EBE34(void)
 {
     nofralloc
-    b fn_800D3FA4
+    b bloom_processPasses
 }
 
 asm void fn_801EBE38(void)

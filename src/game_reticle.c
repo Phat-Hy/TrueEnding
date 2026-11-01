@@ -69,8 +69,8 @@ extern void GXLoadPosMtxImm(void);
 extern void GXLoadNrmMtxImm3x3(void);
 extern void GXSetCurrentMtx(void);
 extern void GXLoadTexMtxImm(void);
-extern void fn_8068A850(void);
-extern void fn_8068AD58(void);
+extern void std_sin(void);
+extern void std_cos(void);
 
 /* External data declarations */
 extern u8 lbl_80732638[];
@@ -427,10 +427,10 @@ lbl_atn_Model_loadTexMatrices_000003E0:
     fcmpu cr0, f30, f25
     beq lbl_atn_Model_loadTexMatrices_00000420
     fmr f1, f25
-    bl fn_8068A850
+    bl std_sin
     frsp f24, f1
     fmr f1, f25
-    bl fn_8068AD58
+    bl std_cos
     frsp f3, f1
     addi r3, r1, 0x98
     fmr f1, f29
@@ -1333,10 +1333,10 @@ lbl_fn_8009C84C_000010B0:
     fcmpu cr0, f31, f23
     beq lbl_fn_8009C84C_000010F0
     fmr f1, f23
-    bl fn_8068A850
+    bl std_sin
     frsp f22, f1
     fmr f1, f23
-    bl fn_8068AD58
+    bl std_cos
     frsp f3, f1
     addi r3, r1, 0x38
     fmr f1, f27
@@ -1703,10 +1703,10 @@ lbl_fn_8009CC28_000015EC:
     fcmpu cr0, f3, f27
     beq lbl_fn_8009CC28_00001630
     fmr f1, f27
-    bl fn_8068A850
+    bl std_sin
     frsp f26, f1
     fmr f1, f27
-    bl fn_8068AD58
+    bl std_cos
     frsp f3, f1
     addi r3, r1, 0x30
     fmr f1, f31

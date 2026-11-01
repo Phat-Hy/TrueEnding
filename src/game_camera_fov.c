@@ -32,10 +32,10 @@ extern void fn_800E0AB0(void);
 extern void fn_800EC204(void);
 extern void system_getNextSequenceId(void);
 extern void fn_8011FC10(void);
-extern void fn_80121F00(void);
+extern void equip_getGlobalManager(void);
 extern void boss_updatePhaseState(void);
 extern void fn_8013C504(void);
-extern void fn_80145334(void);
+extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void fn_8014C540(void);
 extern void actor_setState(void);
@@ -676,10 +676,10 @@ asm void fn_802DE27C(void)
     bl boss_getOffset54
     cmpwi r3, 0x0
     beq lbl_fn_802DE27C_00000B94
-    bl fn_80121F00
+    bl equip_getGlobalManager
     cmpwi r3, 0x0
     beq lbl_fn_802DE27C_00000B94
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_8013C504
     cmpwi r3, 0x0
     beq lbl_fn_802DE27C_00000B94
@@ -708,7 +708,7 @@ lbl_fn_802DE27C_000007FC:
     bl talk_parseQuotedString
     bl str_parseInt
     mr r28, r3
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_8013C504
     mr r4, r28
     bl fn_800EC204
@@ -816,7 +816,7 @@ lbl_fn_802DE27C_0000097C:
     bl talk_parseQuotedString
     bl str_parseInt
     mr r28, r3
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_8013C504
     mr r4, r28
     bl fn_800EC204
@@ -881,7 +881,7 @@ lbl_fn_802DE27C_00000A58:
     bl talk_parseQuotedString
     bl str_parseInt
     mr r28, r3
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_8013C504
     mr r4, r28
     bl fn_800EC204
@@ -1813,7 +1813,7 @@ lbl_fn_802DEE28_00001798:
     stw r0, 0x14fc(r31)
     bl fn_8014C540
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     addi r11, r1, 0xb0
     psq_l f31, 0xb8(r1), 0, 0
     lfd f31, 0xb0(r1)

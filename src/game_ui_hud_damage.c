@@ -13,7 +13,7 @@ extern void actor_dispatchMessage(void);
 extern void fn_8006AD24(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_8008BBD8(void);
+extern void map_debugLog(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void system_getNextSequenceId(void);
@@ -208,7 +208,7 @@ lbl_fn_801CAAF0_0000010C:
     stw r4, 0x9c(r1)
     stw r0, 0xa0(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_801CAAF0_000001E0
     lwz r7, 0x90(r1)
@@ -386,7 +386,7 @@ lbl_fn_801CAAF0_000003AC:
     stw r4, 0x74(r1)
     stw r0, 0x78(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_801CAAF0_00000480
     lwz r7, 0x68(r1)
@@ -1448,7 +1448,7 @@ lbl_fn_801CBB34_00001218:
     stfs f2, 0x150(r1)
     stb r0, 0x154(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_801CBB34_00001350
     lwz r7, 0x138(r1)

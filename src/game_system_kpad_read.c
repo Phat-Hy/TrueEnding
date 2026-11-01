@@ -12,7 +12,7 @@ extern void fn_800D0518(void);
 extern void fn_800D089C(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void fn_800F3490(void);
 extern void fn_801092C8(void);
 extern void fn_8011770C(void);
@@ -1563,19 +1563,19 @@ asm void fn_8036FD4C(void)
     li r31, 0x1
 lbl_fn_8036FD4C_00001454:
     lwz r3, lbl_8087F8A0
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     bne lbl_fn_8036FD4C_00001468
     li r31, 0x1
 lbl_fn_8036FD4C_00001468:
     lwz r3, lbl_8087F408
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     bne lbl_fn_8036FD4C_0000147C
     li r31, 0x1
 lbl_fn_8036FD4C_0000147C:
     lwz r3, lbl_8087F890
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     bne lbl_fn_8036FD4C_00001490
     li r31, 0x1
@@ -1593,13 +1593,13 @@ lbl_fn_8036FD4C_000014A4:
     li r31, 0x1
 lbl_fn_8036FD4C_000014B8:
     lwz r3, lbl_8087F8A8
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     bne lbl_fn_8036FD4C_000014CC
     li r31, 0x1
 lbl_fn_8036FD4C_000014CC:
     lwz r3, lbl_8087F040
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     bne lbl_fn_8036FD4C_000014E0
     li r31, 0x1

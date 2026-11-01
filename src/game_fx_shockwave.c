@@ -27,13 +27,13 @@ extern void str_skipWhitespace(void);
 extern void fn_800EC204(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
-extern void fn_80121F00(void);
+extern void equip_getGlobalManager(void);
 extern void fn_8012F034(void);
 extern void fn_8013322C(void);
 extern void fn_80133B30(void);
 extern void boss_updatePhaseState(void);
 extern void fn_8013C504(void);
-extern void fn_80145334(void);
+extern void quest_updateFlow(void);
 extern void fn_8014C540(void);
 extern void actor_setState(void);
 extern void fn_80179D44(void);
@@ -959,10 +959,10 @@ asm void fn_80293E30(void)
     ori r0, r0, 0xc219
     oris r0, r0, 0x380
     stw r0, 0x7ec(r27)
-    bl fn_80121F00
+    bl equip_getGlobalManager
     cmpwi r3, 0x0
     beq lbl_fn_80293E30_00000B84
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_8013C504
     mr r29, r3
     b lbl_fn_80293E30_00000B88
@@ -2074,7 +2074,7 @@ lbl_fn_802946BC_00001B60:
     mr r3, r31
     bl fn_8014C540
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     lwz r12, 0x0(r31)
     mr r3, r31
     lwz r12, 0xf8(r12)

@@ -9,7 +9,7 @@ extern void _savegpr_26(void);
 extern void fn_8000D114(void);
 extern void vec3_copy(void);
 extern void fn_800109E0(void);
-extern void fn_80011034(void);
+extern void vec3_toEulerAngles(void);
 extern void fn_80011410(void);
 extern void vec3_sub(void);
 extern void fn_800133B0(void);
@@ -34,11 +34,11 @@ extern void fn_800F8348(void);
 extern void fn_800F8524(void);
 extern void fn_801162A0(void);
 extern void fn_8011FC10(void);
-extern void fn_80121F00(void);
+extern void equip_getGlobalManager(void);
 extern void fn_8013322C(void);
 extern void boss_updatePhaseState(void);
 extern void fn_8013C504(void);
-extern void fn_80145334(void);
+extern void quest_updateFlow(void);
 extern void fn_80149624(void);
 extern void dialog_renderWindow(void);
 extern void fn_801513D0(void);
@@ -344,7 +344,7 @@ lbl_fn_8030A848_00000314:
     bl fn_8030CF84
 lbl_fn_8030A848_00000320:
     mr r3, r30
-    bl fn_80145334
+    bl quest_updateFlow
     lwz r3, lbl_8087F430
     lwz r4, 0x1518(r30)
     bl world_getLocalFlag
@@ -428,7 +428,7 @@ lbl_fn_8030A848_0000040C:
     ori r0, r0, 0x8
     stw r0, 0x12a4(r3)
     lwz r3, 0x1500(r29)
-    bl fn_80145334
+    bl quest_updateFlow
     addi r28, r28, 0x1
     addi r29, r29, 0x4
     cmpwi r28, 0x2
@@ -484,7 +484,7 @@ lbl_fn_8030A848_000004DC:
     lwz r3, 0x1500(r30)
     stfs f0, 0x2fc(r3)
     lwz r3, 0x1500(r30)
-    bl fn_80145334
+    bl quest_updateFlow
 lbl_fn_8030A848_00000538:
     lwz r0, 0x1604(r30)
     cmpwi r0, 0x0
@@ -728,14 +728,14 @@ asm void fn_8030AF10(void)
     stw r0, 0x1f0(r1)
     mr r31, r3
     stw r0, 0x1f8(r1)
-    bl fn_80121F00
+    bl equip_getGlobalManager
     lwz r4, 0x1514(r31)
     bl world_getLocalFlag
     cmpwi r3, 0x0
     beq lbl_fn_8030AF10_00000D38
     mr r3, r31
     bl dialog_renderWindow
-    bl fn_80121F00
+    bl equip_getGlobalManager
     lwz r4, 0x1518(r31)
     bl world_getLocalFlag
     cmpwi r3, 0x1
@@ -775,7 +775,7 @@ lbl_fn_8030AF10_00000934:
     li r26, 0x0
     li r25, 0x0
 lbl_fn_8030AF10_0000095C:
-    bl fn_80121F00
+    bl equip_getGlobalManager
     addi r4, r26, 0xc9
     bl world_getLocalFlag
     mr r5, r3
@@ -916,7 +916,7 @@ lbl_fn_8030AF10_0000095C:
     li r24, 0x0
     li r25, 0x64
 lbl_fn_8030AF10_00000B8C:
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_8013C504
     lfs f1, lbl_80884BAC
     mr r30, r3
@@ -943,7 +943,7 @@ lbl_fn_8030AF10_00000B8C:
     bl fn_8030B408
     mr r4, r27
     addi r3, r1, 0x40
-    bl fn_80011034
+    bl vec3_toEulerAngles
     addi r3, r1, 0xcc
     addi r4, r1, 0x40
     bl fn_800F7FD8
@@ -983,7 +983,7 @@ lbl_fn_8030AF10_00000B8C:
     bl fn_80063764
     mr r4, r27
     addi r3, r1, 0x10
-    bl fn_80011034
+    bl vec3_toEulerAngles
     addi r3, r1, 0x1c
     addi r4, r1, 0x10
     addi r5, r31, 0x534
@@ -1311,7 +1311,7 @@ lbl_fn_8030B74C_00001108:
     bl fn_800F7FF0
     addi r3, r1, 0x58
     addi r4, r1, 0x64
-    bl fn_80011034
+    bl vec3_toEulerAngles
     addi r3, r30, 0x528
     addi r4, r1, 0x70
     bl vec3_copy
@@ -1353,15 +1353,15 @@ lbl_fn_8030B74C_000011AC:
     bl fn_800F7FF0
     addi r3, r1, 0x28
     addi r4, r1, 0x4c
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lfs f31, 0x2c(r1)
     addi r3, r1, 0x1c
     addi r4, r1, 0x40
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lfs f30, 0x20(r1)
     addi r3, r1, 0x10
     addi r4, r1, 0x34
-    bl fn_80011034
+    bl vec3_toEulerAngles
     fsubs f1, f30, f31
     lfs f31, 0x14(r1)
     bl fn_800133B0

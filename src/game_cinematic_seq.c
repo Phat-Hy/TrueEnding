@@ -13,7 +13,7 @@ extern void fn_800897D8(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void fn_800E854C(void);
@@ -29,7 +29,7 @@ extern void fn_8013322C(void);
 extern void fn_80134674(void);
 extern void boss_updatePhaseState(void);
 extern void fn_801437D0(void);
-extern void fn_80145334(void);
+extern void quest_updateFlow(void);
 extern void dialog_setScriptSlot(void);
 extern void fn_8014C540(void);
 extern void fn_80151448(void);
@@ -348,7 +348,7 @@ asm void fn_80334C5C(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_80334C5C_000002E8
     lwz r0, 0x54(r31)
@@ -1016,7 +1016,7 @@ lbl_fn_80335374_00000BE4:
     extrwi. r0, r0, 1, 6
     bne lbl_fn_80335374_00000C10
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
 lbl_fn_80335374_00000C10:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)

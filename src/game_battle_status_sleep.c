@@ -28,7 +28,7 @@ extern void fn_800A04A0(void);
 extern void atn_Anim_getDuration(void);
 extern void fn_800B2180(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void str_skipWhitespace(void);
 extern void fn_800EF73C(void);
 extern void fn_802180A8(void);
@@ -691,7 +691,7 @@ asm void fn_8042B134(void)
     cmpwi r3, 0x0
     bne lbl_fn_8042B134_0000081C
     mr r3, r30
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_8042B134_0000081C
     li r31, 0x0

@@ -36,8 +36,8 @@ extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
-extern void fn_8068A850(void);
-extern void fn_8068AD58(void);
+extern void std_sin(void);
+extern void std_cos(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
 extern void vec3_isNonZero(void);
@@ -913,7 +913,7 @@ lbl_fn_802BD480_00000A94:
     fmr f31, f1
     lis r3, lbl_80746B08@ha
     lfd f1, lbl_80746B08@l(r3)
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     fcmpo cr0, f31, f0
     cror eq, gt, eq
@@ -1040,7 +1040,7 @@ asm void fn_802BDA04(void)
     fsubs f2, f2, f3
     fmuls f1, f1, f2
     fmuls f1, f0, f1
-    bl fn_8068AD58
+    bl std_cos
     frsp f1, f1
     lfs f0, lbl_80884194
     lfs f2, lbl_8088417C
@@ -1059,7 +1059,7 @@ lbl_fn_802BDA04_00000D38:
     fsubs f2, f2, f3
     fmuls f1, f1, f2
     fmuls f1, f0, f1
-    bl fn_8068AD58
+    bl std_cos
     frsp f1, f1
     lfs f0, lbl_80884194
     fmadds f2, f0, f1, f0
@@ -1291,7 +1291,7 @@ lbl_fn_802BDA04_0000104C:
     fsubs f2, f2, f3
     fmuls f1, f1, f2
     fmuls f1, f0, f1
-    bl fn_8068AD58
+    bl std_cos
     frsp f1, f1
     lfs f0, lbl_80884194
     lfs f2, lbl_8088417C
@@ -1310,7 +1310,7 @@ lbl_fn_802BDA04_00001098:
     fsubs f2, f2, f3
     fmuls f1, f1, f2
     fmuls f1, f0, f1
-    bl fn_8068AD58
+    bl std_cos
     frsp f1, f1
     lfs f0, lbl_80884194
     fmadds f2, f0, f1, f0
@@ -2664,7 +2664,7 @@ lbl_fn_802BEE44_000023F4:
     lfs f1, 0xb8(r1)
     fnmsubs f0, f0, f5, f0
     stfs f0, 0x57c(r31)
-    bl fn_8068AD58
+    bl std_cos
     frsp f4, f1
     lfs f3, 0x570(r31)
     lfs f0, lbl_80884190
@@ -2672,7 +2672,7 @@ lbl_fn_802BEE44_000023F4:
     fmuls f3, f3, f4
     stfs f0, 0xac(r1)
     stfs f3, 0xa8(r1)
-    bl fn_8068A850
+    bl std_sin
     frsp f3, f1
     lfs f0, 0x570(r31)
     lfs f4, lbl_8088417C
@@ -3257,7 +3257,7 @@ lbl_fn_802BF5C0_00002C90:
     lfs f1, 0xf4(r1)
     fnmsubs f0, f0, f5, f0
     stfs f0, 0x57c(r31)
-    bl fn_8068AD58
+    bl std_cos
     frsp f4, f1
     lfs f3, 0x570(r31)
     lfs f0, lbl_80884190
@@ -3265,7 +3265,7 @@ lbl_fn_802BF5C0_00002C90:
     fmuls f3, f3, f4
     stfs f0, 0xe8(r1)
     stfs f3, 0xe4(r1)
-    bl fn_8068A850
+    bl std_sin
     frsp f3, f1
     lfs f0, 0x570(r31)
     lfs f4, lbl_8088417C

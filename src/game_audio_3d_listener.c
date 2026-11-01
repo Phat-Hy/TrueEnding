@@ -8,13 +8,13 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void vec3_copy(void);
 extern void fn_8000D3A4(void);
-extern void fn_80011034(void);
+extern void vec3_toEulerAngles(void);
 extern void vec3_sub(void);
 extern void fn_80063484(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void fn_800897D8(void);
-extern void fn_8008BBD8(void);
+extern void map_debugLog(void);
 extern void atn_Matrix_copy(void);
 extern void fn_80091CFC(void);
 extern void atn_Model_findBoneIndex(void);
@@ -32,7 +32,7 @@ extern void fn_800F8290(void);
 extern void fn_80127D8C(void);
 extern void fn_80129978(void);
 extern void boss_updatePhaseState(void);
-extern void fn_80145334(void);
+extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void fn_8014C540(void);
 extern void fn_801A03E8(void);
@@ -55,7 +55,7 @@ extern void PSVECMag(void);
 extern void printf(void);
 extern void strcmp(void);
 extern void abort(void);
-extern void fn_8068AD58(void);
+extern void std_cos(void);
 extern void std_atan2(void);
 extern void __ptmf_scall(void);
 
@@ -828,7 +828,7 @@ lbl_fn_8031E8BC_00000A10:
     lwz r4, 0x34(r29)
     addi r3, r1, 0x18
     addi r4, r4, 0x3c
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lwz r3, 0x34(r29)
     addi r4, r1, 0x18
     bl fn_800F80B8
@@ -1163,7 +1163,7 @@ lbl_fn_8031ECDC_00000ED0:
     stw r4, 0x198(r1)
     stw r0, 0x19c(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_8031ECDC_00000F54
     addic. r0, r1, 0x26c
@@ -1312,7 +1312,7 @@ lbl_fn_8031ECDC_00001104:
     stw r4, 0xf0(r1)
     stw r0, 0xf4(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_8031ECDC_00001188
     addic. r0, r1, 0x258
@@ -1776,7 +1776,7 @@ lbl_fn_8031F654_00001764:
     stw r0, 0x12a4(r31)
 lbl_fn_8031F654_00001770:
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     lwz r3, lbl_8087F430
     lwz r0, 0x868(r3)
     cmpwi r0, 0x6
@@ -1868,7 +1868,7 @@ asm void fn_8031F810(void)
     stfs f2, 0x40(r1)
     fdivs f0, f0, f5
     stfs f0, 0x44(r1)
-    bl fn_8068AD58
+    bl std_cos
     frsp f2, f1
     lfs f1, lbl_80884E70
     lfs f0, lbl_80884E90

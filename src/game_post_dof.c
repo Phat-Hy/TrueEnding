@@ -24,7 +24,7 @@ extern void fn_80108F38(void);
 extern void fn_8011FC10(void);
 extern void fn_8013322C(void);
 extern void boss_updatePhaseState(void);
-extern void fn_80145334(void);
+extern void quest_updateFlow(void);
 extern void fn_8014C540(void);
 extern void actor_setState(void);
 extern void fn_80170A20(void);
@@ -2169,7 +2169,7 @@ lbl_fn_802C1208_00001D38:
     mr r3, r30
     bl fn_8014C540
     mr r3, r30
-    bl fn_80145334
+    bl quest_updateFlow
     mr r3, r30
     bl fn_802C1FEC
     lis r4, lbl_80746C90@ha

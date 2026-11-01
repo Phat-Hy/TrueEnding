@@ -11,7 +11,7 @@ extern void fn_800F8C6C(void);
 extern void fn_80126214(void);
 extern void fn_8013A258(void);
 extern void fn_8013CB68(void);
-extern void fn_80148990(void);
+extern void quest_ctorRewardItem(void);
 extern void fn_80151448(void);
 extern void fn_8015495C(void);
 extern void fn_8016DA4C(void);
@@ -880,9 +880,9 @@ lbl_fn_802E7298_00000B64:
     la r6, lbl_8087D9E0
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     li r5, 0x0
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r6, 0x14
     li r7, 0x8
     bl runtime_registerStaticObject
@@ -994,9 +994,9 @@ lbl_fn_802E7298_00000D04:
     addi r3, r3, 0x10
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     mr r7, r30
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r5, 0x0
     li r6, 0x14
     bl runtime_registerStaticObject

@@ -47,7 +47,7 @@ extern void printf(void);
 extern void wmemcpy(void);
 extern void wcslen(void);
 extern void abort(void);
-extern void fn_8068AD58(void);
+extern void std_cos(void);
 extern void runtime_registerStaticObject(void);
 extern void __construct_new_array(void);
 extern void __destroy_new_array(void);
@@ -2044,7 +2044,7 @@ lbl_fn_80478A70_00001A04:
     fdivs f0, f1, f0
     fmuls f0, f15, f0
     fmuls f1, f31, f0
-    bl fn_8068AD58
+    bl std_cos
     frsp f2, f1
     lfs f1, 0x94c(r22)
     lfs f0, 0x130(r1)

@@ -19,7 +19,7 @@ extern void clip_calculateFrustum(void);
 extern void fn_800FBA9C(void);
 extern void fn_8013322C(void);
 extern void boss_updatePhaseState(void);
-extern void fn_80145334(void);
+extern void quest_updateFlow(void);
 extern void fn_8014C540(void);
 extern void fn_80151448(void);
 extern void fn_80158CA4(void);
@@ -1417,7 +1417,7 @@ lbl_fn_803563E4_0000123C:
     extrwi. r0, r0, 1, 6
     bne lbl_fn_803563E4_0000127C
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
 lbl_fn_803563E4_0000127C:
     mr r3, r31
     bl fn_8035AB78

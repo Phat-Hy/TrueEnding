@@ -17,7 +17,7 @@ extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
 extern void node_createNamedChild(void);
-extern void fn_8008BBD8(void);
+extern void map_debugLog(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
@@ -1265,7 +1265,7 @@ lbl_fn_80352F88_00001028:
     stw r4, 0x50(r1)
     stw r0, 0x54(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_80352F88_000010FC
     lwz r7, 0x44(r1)
@@ -1763,7 +1763,7 @@ lbl_fn_8035359C_00001738:
     stw r4, 0x88(r1)
     stw r0, 0x8c(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_8035359C_0000180C
     lwz r7, 0x7c(r1)

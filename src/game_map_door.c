@@ -8,7 +8,7 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void collision_testLineSegment(void);
 extern void mem_free(void);
-extern void fn_8008BBD8(void);
+extern void map_debugLog(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_8010A308(void);
@@ -835,7 +835,7 @@ lbl_fn_801883E8_000009C4:
     psq_st f1, 0x0(r7), 0, 0
     stfs f2, 0x1b0(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_801883E8_00000AE0
     lwz r6, 0x198(r1)
@@ -954,7 +954,7 @@ lbl_fn_801883E8_00000BAC:
     stw r4, 0xe8(r1)
     stw r0, 0xec(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_801883E8_00000C98
     lwz r8, 0xd8(r1)
@@ -1397,7 +1397,7 @@ lbl_fn_80188D3C_000011A4:
     stw r4, 0x48(r1)
     stw r0, 0x4c(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_80188D3C_00001288
     lwz r7, 0x3c(r1)
@@ -1756,7 +1756,7 @@ lbl_fn_801891FC_00001690:
     stw r4, 0x48(r1)
     stw r0, 0x4c(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_801891FC_00001774
     lwz r7, 0x3c(r1)

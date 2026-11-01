@@ -6,7 +6,7 @@ extern void __files(void);
 extern void dtor_80084684(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_8008BBD8(void);
+extern void map_debugLog(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_playAnimationByName(void);
@@ -1168,7 +1168,7 @@ lbl_fn_8018F254_00000DE0:
     stw r4, 0x9c(r1)
     stw r0, 0xa0(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_8018F254_00000EB4
     lwz r7, 0x90(r1)
@@ -1312,7 +1312,7 @@ lbl_fn_8018F254_00001000:
     stw r4, 0x74(r1)
     stw r0, 0x78(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_8018F254_000010D4
     lwz r7, 0x68(r1)
@@ -1807,7 +1807,7 @@ lbl_fn_8018FB0C_0000169C:
     stw r4, 0x50(r1)
     stw r0, 0x54(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_8018FB0C_00001770
     lwz r7, 0x44(r1)

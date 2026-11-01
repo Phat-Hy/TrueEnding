@@ -5,9 +5,9 @@
 extern void fn_8000D0F8(void);
 extern void fn_8000D114(void);
 extern void vec3_copy(void);
-extern void fn_8001047C(void);
+extern void vec3_assign(void);
 extern void fn_800109E0(void);
-extern void fn_80011034(void);
+extern void vec3_toEulerAngles(void);
 extern void fn_80011410(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void vec3_sub(void);
@@ -29,7 +29,7 @@ extern void clip_calculateFrustum(void);
 extern void fn_80108C10(void);
 extern void fn_80109828(void);
 extern void fn_801125F8(void);
-extern void fn_80121F00(void);
+extern void equip_getGlobalManager(void);
 extern void magic_getOffset6C(void);
 extern void fn_8012AFE8(void);
 extern void fn_80139550(void);
@@ -400,12 +400,12 @@ asm void fn_8028CB38(void)
     bl fn_8013A194
     bl system_getNextSequenceId
     stw r3, 0x1554(r31)
-    bl fn_80121F00
+    bl equip_getGlobalManager
     li r4, 0x96
     bl world_getLocalFlag
     cmpwi r3, 0x0
     bne lbl_fn_8028CB38_00000418
-    bl fn_80121F00
+    bl equip_getGlobalManager
     li r4, 0x96
     li r5, 0x1
     bl world_setLocalFlag
@@ -533,7 +533,7 @@ lbl_fn_8028CB38_00000574:
     bl fn_80011410
     addi r3, r1, 0x3c
     addi r4, r1, 0x84
-    bl fn_80011034
+    bl vec3_toEulerAngles
     addi r3, r1, 0x90
     addi r4, r1, 0x3c
     bl fn_800109E0
@@ -556,7 +556,7 @@ lbl_fn_8028CB38_00000640:
     addi r4, r31, 0x528
 lbl_fn_8028CB38_00000644:
     addi r3, r1, 0x78
-    bl fn_8001047C
+    bl vec3_assign
     addi r3, r31, 0x1580
     addi r4, r1, 0x78
     bl fn_801479E4
@@ -603,7 +603,7 @@ lbl_fn_8028CB38_00000644:
     beq lbl_fn_8028CB38_00000740
     addi r3, r1, 0x54
     addi r4, r1, 0x124
-    bl fn_8001047C
+    bl vec3_assign
     bl fn_8013A194
     li r0, -0x1
     stw r0, 0x8(r1)
@@ -619,7 +619,7 @@ lbl_fn_8028CB38_00000644:
     li r10, 0x1e
     bl clip_calculateFrustum
 lbl_fn_8028CB38_00000740:
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl magic_getOffset6C
     lfs f1, lbl_80883AA0
     li r4, 0x1

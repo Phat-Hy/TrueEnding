@@ -9,7 +9,7 @@ extern void vec3_copy(void);
 extern void fn_8000D3A8(void);
 extern void fn_8000D430(void);
 extern void fn_8000DD0C(void);
-extern void fn_8001047C(void);
+extern void vec3_assign(void);
 extern void fn_800109E0(void);
 extern void fn_80011410(void);
 extern void fn_800133B0(void);
@@ -554,7 +554,7 @@ lbl_fn_803729B4_00000504:
 lbl_fn_803729B4_0000050C:
     mr r4, r3
     addi r3, r1, 0x80
-    bl fn_8001047C
+    bl vec3_assign
     addi r3, r1, 0x74
     bl fn_80057A64
     cmpwi r28, 0x0
@@ -578,7 +578,7 @@ lbl_fn_803729B4_00000540:
 lbl_fn_803729B4_00000564:
     addi r3, r1, 0x68
     addi r4, r1, 0x80
-    bl fn_8001047C
+    bl vec3_assign
     lfs f0, 0x6c(r1)
     addi r3, r1, 0x5c
     lfs f1, lbl_8088570C

@@ -40,8 +40,8 @@ extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void rand(void);
 extern void strcmp(void);
-extern void fn_8068A850(void);
-extern void fn_8068AD58(void);
+extern void std_sin(void);
+extern void std_cos(void);
 extern void runtime_registerStaticObject(void);
 extern int sprintf(char* str, const char* format, ...);
 
@@ -1358,7 +1358,7 @@ lbl_fn_803FFF40_0000122C:
     lfs f7, 0x118(r31)
     lfs f0, 0x14(r30)
     fadds f1, f7, f0
-    bl fn_8068AD58
+    bl std_cos
     lfs f7, lbl_808860C8
     frsp f9, f1
     lfs f0, 0x10(r30)
@@ -1371,7 +1371,7 @@ lbl_fn_803FFF40_0000122C:
     fmuls f0, f0, f7
     fmuls f0, f0, f9
     stfs f0, 0x10c(r31)
-    bl fn_8068AD58
+    bl std_cos
     lfs f0, 0x8(r30)
     frsp f10, f1
     lfs f7, 0x118(r31)
@@ -1382,7 +1382,7 @@ lbl_fn_803FFF40_0000122C:
     fmuls f0, f9, f10
     fmuls f0, f8, f0
     stfs f0, 0x110(r31)
-    bl fn_8068AD58
+    bl std_cos
     lfs f7, 0xc(r30)
     frsp f13, f1
     lfs f0, lbl_808860D0
@@ -1419,7 +1419,7 @@ lbl_fn_803FFF40_00001304:
     lfs f0, 0x118(r31)
     fnmsubs f7, f8, f9, f7
     fdivs f1, f0, f7
-    bl fn_8068A850
+    bl std_sin
     frsp f9, f1
     lfs f0, lbl_808860C4
     lfs f8, 0x20(r30)

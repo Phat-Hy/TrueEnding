@@ -21,7 +21,7 @@ extern void fn_8009FFCC(void);
 extern void fn_800C1FB4(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void str_findChar(void);
 extern void fn_800DCA6C(void);
 extern void kpad_getClampData(void);
@@ -925,7 +925,7 @@ lbl_fn_80491324_00000B74:
 asm void fn_80491414(void)
 {
     nofralloc
-    b fn_800D3FA4
+    b bloom_processPasses
 }
 
 asm void fn_80491418(void)

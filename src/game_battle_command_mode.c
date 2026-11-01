@@ -57,8 +57,8 @@ extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void rand(void);
 extern void strcmp(void);
-extern void fn_8068A850(void);
-extern void fn_8068AD58(void);
+extern void std_sin(void);
+extern void std_cos(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
 extern void runtime_registerStaticObject(void);
@@ -228,12 +228,12 @@ lbl_fn_804052EC_00000110:
     stfs f0, 0x3e4(r31)
 lbl_fn_804052EC_00000160:
     lfs f1, 0x3e4(r31)
-    bl fn_8068AD58
+    bl std_cos
     lfs f0, 0x3e4(r31)
     frsp f3, f1
     fneg f1, f0
     stfs f3, 0x3ec(r31)
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     stfs f0, 0x3f4(r31)
     b lbl_fn_804052EC_00000198
@@ -345,7 +345,7 @@ lbl_fn_804052EC_0000028C:
     lfs f0, 0x50(r1)
     lfd f1, lbl_80752888@l(r3)
     fmadds f30, f3, f0, f4
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     fcmpo cr0, f30, f0
     ble lbl_fn_804052EC_000003F4
@@ -498,12 +498,12 @@ lbl_fn_804052EC_0000050C:
     stfs f0, 0x3e4(r31)
 lbl_fn_804052EC_00000560:
     lfs f1, 0x3e4(r31)
-    bl fn_8068AD58
+    bl std_cos
     lfs f0, 0x3e4(r31)
     frsp f3, f1
     fneg f1, f0
     stfs f3, 0x3ec(r31)
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     stfs f0, 0x3f4(r31)
 lbl_fn_804052EC_00000584:

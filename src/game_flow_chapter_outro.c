@@ -11,7 +11,7 @@ extern void vec3_copy(void);
 extern void fn_8000D9E8(void);
 extern void fn_8000DCF4(void);
 extern void fn_8000DD0C(void);
-extern void fn_8001047C(void);
+extern void vec3_assign(void);
 extern void vec3_sub(void);
 extern void fn_800133B0(void);
 extern void msg_getMessageById(void);
@@ -1724,7 +1724,7 @@ lbl_fn_804E7AC4_00001698:
     add r4, r3, r28
     addi r3, r1, 0x44
     addi r4, r4, 0x4
-    bl fn_8001047C
+    bl vec3_assign
     mr r3, r29
     bl fn_804E80C4
     lfs f0, 0x4c(r1)
@@ -1851,7 +1851,7 @@ lbl_fn_804E7AC4_00001888:
     add r4, r3, r30
     addi r3, r1, 0x38
     addi r4, r4, 0x4
-    bl fn_8001047C
+    bl vec3_assign
     lwz r3, 0x0(r28)
     bl fn_804E80C4
     lfs f0, 0x40(r1)
@@ -1982,7 +1982,7 @@ lbl_fn_804E7AC4_00001A80:
     add r4, r3, r29
     addi r3, r1, 0x2c
     addi r4, r4, 0x4
-    bl fn_8001047C
+    bl vec3_assign
     lwz r3, 0x10c(r1)
     bl fn_804E80C4
     lfs f0, 0x34(r1)

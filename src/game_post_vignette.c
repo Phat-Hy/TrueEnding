@@ -16,14 +16,14 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800BFAC8(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void str_findChar(void);
 extern void system_getNextSequenceId(void);
 extern void fn_801031D0(void);
 extern void boss_updatePhaseState(void);
 extern void fn_80144710(void);
-extern void fn_80145334(void);
-extern void fn_80148990(void);
+extern void quest_updateFlow(void);
+extern void quest_ctorRewardItem(void);
 extern void quest_checkCondition(void);
 extern void dialog_renderWindow(void);
 extern void fn_8014C540(void);
@@ -359,7 +359,7 @@ asm void fn_802C7D3C(void)
     bne lbl_fn_802C7D3C_00000334
 lbl_fn_802C7D3C_00000324:
     mr r3, r31
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     bne lbl_fn_802C7D3C_00000338
 lbl_fn_802C7D3C_00000334:
@@ -773,7 +773,7 @@ lbl_fn_802C7F10_00000920:
     mr r3, r31
     bl fn_8014C540
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     lwz r0, 0x58c(r31)
     cmpwi r0, 0xd
     bne lbl_fn_802C7F10_00000A30
@@ -1321,9 +1321,9 @@ lbl_fn_802C8A68_000010C4:
     la r6, lbl_8087D9E0
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     li r5, 0x0
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r6, 0x14
     li r7, 0x8
     bl runtime_registerStaticObject
@@ -1435,9 +1435,9 @@ lbl_fn_802C8A68_00001264:
     addi r3, r3, 0x10
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     mr r7, r30
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r5, 0x0
     li r6, 0x14
     bl runtime_registerStaticObject
@@ -1595,9 +1595,9 @@ lbl_fn_802C8A68_000014C8:
     la r6, lbl_8087D9E0
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     li r5, 0x0
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r6, 0x14
     li r7, 0x8
     bl runtime_registerStaticObject
@@ -1709,9 +1709,9 @@ lbl_fn_802C8A68_00001668:
     addi r3, r3, 0x10
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     mr r7, r30
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r5, 0x0
     li r6, 0x14
     bl runtime_registerStaticObject

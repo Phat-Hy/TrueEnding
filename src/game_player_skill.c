@@ -21,7 +21,7 @@ extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void str_findChar(void);
@@ -776,7 +776,7 @@ lbl_fn_8011FE64_00000724:
 asm void fn_8011FEBC(void)
 {
     nofralloc
-    b fn_800D3FA4
+    b bloom_processPasses
 }
 
 asm void fn_8011FEC0(void)
@@ -810,7 +810,7 @@ lbl_fn_8011FEC0_00000780:
 asm void fn_8011FF18(void)
 {
     nofralloc
-    b fn_800D3FA4
+    b bloom_processPasses
 }
 
 asm void fn_8011FF1C(void)
@@ -844,7 +844,7 @@ lbl_fn_8011FF1C_000007DC:
 asm void fn_8011FF74(void)
 {
     nofralloc
-    b fn_800D3FA4
+    b bloom_processPasses
 }
 
 asm void fn_8011FF78(void)

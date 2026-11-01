@@ -29,7 +29,7 @@ extern void fn_800CE368(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void fn_800D8814(void);
 extern void fn_800EC1F4(void);
 extern void fn_800F52F0(void);
@@ -1661,7 +1661,7 @@ asm void fn_804D250C(void)
     cmpwi r3, 0x0
     bne lbl_fn_804D250C_000011B8
     mr r3, r30
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_804D250C_000011B8
     mr r3, r30
@@ -2392,7 +2392,7 @@ lbl_fn_804D25D4_00001BD4:
     li r21, 0x0
 lbl_fn_804D25D4_00001BD8:
     mr r3, r24
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     bne lbl_fn_804D25D4_00001BEC
     li r21, 0x0

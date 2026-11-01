@@ -20,7 +20,7 @@ extern void mem_getAllocSize(void);
 extern void route_createSegment(void);
 extern void node_createNamedChild(void);
 extern void fn_800897D8(void);
-extern void fn_8008BBD8(void);
+extern void map_debugLog(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void fn_800EC254(void);
@@ -37,8 +37,8 @@ extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void fn_80108F38(void);
 extern void boss_updatePhaseState(void);
-extern void fn_80145334(void);
-extern void fn_80148990(void);
+extern void quest_updateFlow(void);
+extern void quest_ctorRewardItem(void);
 extern void fn_8014C540(void);
 extern void fn_80151448(void);
 extern void actor_setState(void);
@@ -559,9 +559,9 @@ lbl_fn_802B9DB4_000005F4:
     la r6, lbl_8087D9E0
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     li r5, 0x0
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r6, 0x14
     li r7, 0x8
     bl runtime_registerStaticObject
@@ -673,9 +673,9 @@ lbl_fn_802B9DB4_00000794:
     addi r3, r3, 0x10
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     mr r7, r30
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r5, 0x0
     li r6, 0x14
     bl runtime_registerStaticObject
@@ -805,9 +805,9 @@ lbl_fn_802B9DB4_00000990:
     la r6, lbl_8087D9E0
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     li r5, 0x0
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r6, 0x14
     li r7, 0x8
     bl runtime_registerStaticObject
@@ -918,9 +918,9 @@ lbl_fn_802B9DB4_00000B30:
     addi r3, r3, 0x10
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     mr r7, r30
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r5, 0x0
     li r6, 0x14
     bl runtime_registerStaticObject
@@ -1178,7 +1178,7 @@ lbl_fn_802BA67C_00000EDC:
     stw r4, 0x60(r1)
     stw r0, 0x64(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_802BA67C_00000FB0
     lwz r7, 0x54(r1)
@@ -1734,7 +1734,7 @@ lbl_fn_802BADB0_000016D8:
     mr r3, r31
     bl fn_8014C540
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     mr r3, r31
     bl fn_802BDA04
     lwz r0, 0x14(r1)

@@ -25,7 +25,7 @@ extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void morph_updateMesh(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void fn_800DD8A8(void);
@@ -34,7 +34,7 @@ extern void fn_8011D424(void);
 extern void fn_801354B4(void);
 extern void fn_80136544(void);
 extern void boss_updatePhaseState(void);
-extern void fn_80145334(void);
+extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void fn_801765D8(void);
 extern void fn_80176ACC(void);
@@ -236,7 +236,7 @@ asm void fn_80431458(void)
     cmpwi r3, 0x0
     bne lbl_fn_80431458_00000428
     mr r3, r25
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_80431458_00000428
     lwz r0, 0x4ec(r25)
@@ -1918,7 +1918,7 @@ asm void fn_80432C60(void)
 asm void fn_80432C64(void)
 {
     nofralloc
-    b fn_80145334
+    b quest_updateFlow
 }
 
 asm void fn_80432C68(void)

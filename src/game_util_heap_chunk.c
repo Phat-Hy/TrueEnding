@@ -17,7 +17,7 @@ extern void mem_free(void);
 extern void msg_getMessageById(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void fn_800DBF68(void);
 extern void str_parseInt(void);
 extern void str_findChar(void);
@@ -1558,7 +1558,7 @@ asm void fn_80587070(void)
     stw r30, 0x18(r1)
     stw r29, 0x14(r1)
     stw r28, 0x10(r1)
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_80587070_000015BC
     mr r3, r31

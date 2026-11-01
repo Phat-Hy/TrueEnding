@@ -23,7 +23,7 @@ extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
 extern void PSVECDotProduct(void);
 extern void rand(void);
-extern void fn_8068A850(void);
+extern void std_sin(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
 
@@ -724,10 +724,10 @@ lbl_fn_80189CB4_0000080C:
     bl PSVECDotProduct
     fmr f31, f1
     lfd f1, 0xc8(r31)
-    bl fn_8068A850
+    bl std_sin
     frsp f30, f1
     lfd f1, 0xd0(r31)
-    bl fn_8068A850
+    bl std_sin
     frsp f29, f1
     mr r3, r30
     li r4, 0x158
@@ -1553,10 +1553,10 @@ lbl_fn_8018A8CC_000013DC:
     bl PSVECDotProduct
     fmr f31, f1
     lfd f1, 0xc8(r31)
-    bl fn_8068A850
+    bl std_sin
     frsp f30, f1
     lfd f1, 0xd0(r31)
-    bl fn_8068A850
+    bl std_sin
     lwz r4, 0x4(r26)
     frsp f29, f1
     li r28, 0x0

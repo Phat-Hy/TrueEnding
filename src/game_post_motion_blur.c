@@ -27,7 +27,7 @@ extern void PSVECNormalize(void);
 extern void PSVECMag(void);
 extern void rand(void);
 extern void wcscpy(void);
-extern void fn_8068AD58(void);
+extern void std_cos(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
 extern void math_u64DivMod(void);
@@ -113,7 +113,7 @@ asm void fn_802C1FEC(void)
     fsubs f2, f2, f3
     fmuls f1, f1, f2
     fmuls f1, f0, f1
-    bl fn_8068AD58
+    bl std_cos
     frsp f2, f1
     lfs f1, lbl_8088433C
     lfs f0, lbl_80884338
@@ -133,7 +133,7 @@ lbl_fn_802C1FEC_00000080:
     fsubs f2, f2, f3
     fmuls f1, f1, f2
     fmuls f1, f0, f1
-    bl fn_8068AD58
+    bl std_cos
     frsp f2, f1
     lfs f1, lbl_8088433C
     lfs f0, lbl_80884338
@@ -160,7 +160,7 @@ lbl_fn_802C1FEC_000000D4:
     fsubs f2, f2, f3
     fmuls f1, f1, f2
     fmuls f1, f0, f1
-    bl fn_8068AD58
+    bl std_cos
     frsp f1, f1
     lfs f0, lbl_80884344
     lfs f2, lbl_808842AC
@@ -179,7 +179,7 @@ lbl_fn_802C1FEC_0000012C:
     fsubs f2, f2, f3
     fmuls f1, f1, f2
     fmuls f1, f0, f1
-    bl fn_8068AD58
+    bl std_cos
     frsp f1, f1
     lfs f0, lbl_80884344
     fmadds f2, f0, f1, f0
@@ -202,7 +202,7 @@ lbl_fn_802C1FEC_0000017C:
     fsubs f2, f2, f3
     fmuls f1, f1, f2
     fmuls f1, f0, f1
-    bl fn_8068AD58
+    bl std_cos
     frsp f1, f1
     lfs f0, lbl_80884344
     lfs f2, lbl_808842AC
@@ -221,7 +221,7 @@ lbl_fn_802C1FEC_000001C8:
     fsubs f2, f2, f3
     fmuls f1, f1, f2
     fmuls f1, f0, f1
-    bl fn_8068AD58
+    bl std_cos
     frsp f1, f1
     lfs f0, lbl_80884344
     fmadds f2, f0, f1, f0

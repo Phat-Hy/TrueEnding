@@ -30,7 +30,7 @@ extern void fn_8070F180(void);
 extern void fn_8070F1B0(void);
 extern void fn_8070F1D0(void);
 extern void fn_8070F270(void);
-extern void fn_807187D0(void);
+extern void net_getGlobalContext(void);
 extern void fn_8071E680(void);
 extern void fn_8071E750(void);
 extern void fn_8071E950(void);
@@ -1283,7 +1283,7 @@ asm void fn_8070C780(void)
     bl _savegpr_22
     mr r31, r4
     add r30, r4, r5
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSLockMutex
     bl OSDisableInterrupts
@@ -1346,7 +1346,7 @@ lbl_fn_8070C780_000010C4:
     bl OSRestoreInterrupts
     cmplw r29, r27
     bne lbl_fn_8070C780_0000106C
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
     addi r11, r1, 0x30
@@ -1367,7 +1367,7 @@ asm void fn_8070C8B0(void)
     bl _savegpr_22
     mr r31, r4
     add r30, r4, r5
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSLockMutex
     bl OSDisableInterrupts
@@ -1430,7 +1430,7 @@ lbl_fn_8070C8B0_000011F4:
     bl OSRestoreInterrupts
     cmplw r29, r27
     bne lbl_fn_8070C8B0_0000119C
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
     addi r11, r1, 0x30
@@ -1935,7 +1935,7 @@ asm void fn_8070CFD0(void)
     stw r29, 0x14(r1)
     mr r29, r3
     stw r28, 0x10(r1)
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSLockMutex
     lbz r3, 0x98(r30)
@@ -1952,7 +1952,7 @@ lbl_fn_8070CFD0_00001870:
     lwz r0, 0xc(r29)
     cmpwi r0, 0x0
     bne lbl_fn_8070CFD0_00001890
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
     li r3, 0x0
@@ -1990,7 +1990,7 @@ lbl_fn_8070CFD0_000018E8:
     bne lbl_fn_8070CFD0_000018AC
     cmpwi r3, 0x0
     bne lbl_fn_8070CFD0_0000190C
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
     li r3, 0x0
@@ -2009,7 +2009,7 @@ lbl_fn_8070CFD0_00001928:
 lbl_fn_8070CFD0_00001930:
     cmpw r31, r0
     bge lbl_fn_8070CFD0_0000194C
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
     li r3, 0x0
@@ -2033,7 +2033,7 @@ lbl_fn_8070CFD0_0000195C:
     mr r3, r30
     mr r4, r29
     bl fn_8070ABC0
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
     li r3, 0x1

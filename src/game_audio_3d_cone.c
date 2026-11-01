@@ -9,7 +9,7 @@ extern void fn_8004D388(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_800897D8(void);
-extern void fn_8008BBD8(void);
+extern void map_debugLog(void);
 extern void fn_80091CFC(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -19,7 +19,7 @@ extern void system_getNextSequenceId(void);
 extern void fn_800F8C6C(void);
 extern void fn_8012A288(void);
 extern void boss_updatePhaseState(void);
-extern void fn_80148990(void);
+extern void quest_ctorRewardItem(void);
 extern void actor_setState(void);
 extern void fn_80176548(void);
 extern void task_findEntryById(void);
@@ -637,9 +637,9 @@ lbl_fn_80321E20_000007B8:
     la r6, lbl_8087D9E0
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     li r5, 0x0
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r6, 0x14
     li r7, 0x8
     bl runtime_registerStaticObject
@@ -751,9 +751,9 @@ lbl_fn_80321E20_00000958:
     addi r3, r3, 0x10
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     mr r7, r30
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r5, 0x0
     li r6, 0x14
     bl runtime_registerStaticObject
@@ -911,9 +911,9 @@ lbl_fn_80321E20_00000BBC:
     la r6, lbl_8087D9E0
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     li r5, 0x0
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r6, 0x14
     li r7, 0x8
     bl runtime_registerStaticObject
@@ -1025,9 +1025,9 @@ lbl_fn_80321E20_00000D5C:
     addi r3, r3, 0x10
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     mr r7, r30
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r5, 0x0
     li r6, 0x14
     bl runtime_registerStaticObject
@@ -1904,7 +1904,7 @@ lbl_fn_80322F74_00001A0C:
     stw r4, 0x198(r1)
     stw r0, 0x19c(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_80322F74_00001A90
     addic. r0, r1, 0x254
@@ -2053,7 +2053,7 @@ lbl_fn_80322F74_00001C40:
     stw r4, 0xf0(r1)
     stw r0, 0xf4(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_80322F74_00001CC4
     addic. r0, r1, 0x240

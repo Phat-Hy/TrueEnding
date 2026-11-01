@@ -28,7 +28,7 @@ extern void fn_8011FC10(void);
 extern void fn_80129A48(void);
 extern void fn_80129A6C(void);
 extern void boss_updatePhaseState(void);
-extern void fn_80145334(void);
+extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void fn_8014C540(void);
 extern void fn_80151448(void);
@@ -426,7 +426,7 @@ lbl_fn_802ED3F0_00000418:
     mr r3, r31
     bl fn_8014C540
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     mtlr r0
@@ -1943,7 +1943,7 @@ lbl_fn_802EEBA8_00001918:
     extrwi. r0, r0, 1, 6
     bne lbl_fn_802EEBA8_00001944
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
 lbl_fn_802EEBA8_00001944:
     lfs f5, 0x52c(r31)
     lis r4, lbl_80748488@ha
@@ -2030,7 +2030,7 @@ lbl_fn_802EEBA8_00001A54:
     stfs f2, 0x608(r31)
     stfs f0, 0x60c(r31)
     beq lbl_fn_802EEBA8_00001BC4
-    bl fn_80145334
+    bl quest_updateFlow
     lwz r3, 0x14e8(r31)
     addi r3, r3, 0x10d8
     bl fn_80129A6C

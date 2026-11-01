@@ -7,7 +7,7 @@ extern void dtor_80013D60(void);
 extern void dtor_80084684(void);
 extern void fn_8000D114(void);
 extern void vec3_copy(void);
-extern void fn_80011034(void);
+extern void vec3_toEulerAngles(void);
 extern void fn_8003E4A4(void);
 extern void fn_8004212C(void);
 extern void collision_testLineSegment(void);
@@ -43,7 +43,7 @@ extern void fn_800EDFE8(void);
 extern void fn_800F52F0(void);
 extern void system_getNextSequenceId(void);
 extern void boss_updatePhaseState(void);
-extern void fn_80145334(void);
+extern void quest_updateFlow(void);
 extern void fn_8014C540(void);
 extern void fn_80158E1C(void);
 extern void actor_setState(void);
@@ -422,7 +422,7 @@ lbl_fn_8031A670_0000031C:
     bl fn_80158E1C
     addi r3, r1, 0x5c
     addi r4, r1, 0x2c
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lis r3, lbl_80749580@ha
     lfs f1, 0x60(r1)
     lfd f2, lbl_80749580@l(r3)
@@ -442,7 +442,7 @@ lbl_fn_8031A670_0000042C:
 lbl_fn_8031A670_00000440:
     addi r3, r1, 0x68
     addi r4, r1, 0x20
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lis r3, lbl_80749580@ha
     lfs f1, 0x6c(r1)
     lfd f2, lbl_80749580@l(r3)
@@ -512,7 +512,7 @@ lbl_fn_8031A670_000004E0:
     bl PSVECNormalize
     mr r4, r29
     addi r3, r1, 0x8c
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lis r3, lbl_80749580@ha
     lfs f1, 0x90(r1)
     lfd f2, lbl_80749580@l(r3)
@@ -552,7 +552,7 @@ lbl_fn_8031A670_00000588:
     bl PSVECNormalize
     mr r4, r29
     addi r3, r1, 0xa4
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lis r3, lbl_80749580@ha
     lfs f1, 0xa8(r1)
     lfd f2, lbl_80749580@l(r3)
@@ -2142,7 +2142,7 @@ lbl_fn_8031B9B4_00001CA8:
     mr r3, r31
     bl fn_8014C540
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     lfs f9, 0x52c(r31)
     addi r5, r1, 0x20
     lfs f8, 0x5a8(r31)

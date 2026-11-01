@@ -9,7 +9,7 @@ extern void dtor_80084684(void);
 extern void collision_testLineSegment(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_8008BBD8(void);
+extern void map_debugLog(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_applyWeights(void);
@@ -661,7 +661,7 @@ lbl_fn_8019AC60_00000808:
     stw r4, 0x48(r1)
     stw r0, 0x4c(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_8019AC60_000008DC
     lwz r7, 0x3c(r1)
@@ -959,7 +959,7 @@ lbl_fn_8019B0F0_00000C0C:
     stw r4, 0x48(r1)
     stw r0, 0x4c(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_8019B0F0_00000CE0
     lwz r7, 0x3c(r1)
@@ -1617,7 +1617,7 @@ lbl_fn_8019BA1C_0000156C:
     stw r4, 0x48(r1)
     stw r0, 0x4c(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_8019BA1C_00001640
     lwz r7, 0x3c(r1)

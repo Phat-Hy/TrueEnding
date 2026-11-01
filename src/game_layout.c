@@ -40,8 +40,8 @@ extern void fn_80617880(void);
 extern void GXSetNumTevStages(void);
 extern void fn_80617D50(void);
 extern void GXLoadTexMtxImm(void);
-extern void fn_8068A850(void);
-extern void fn_8068AD58(void);
+extern void std_sin(void);
+extern void std_cos(void);
 
 /* External data declarations */
 extern u8 lbl_80732B08[];
@@ -857,12 +857,12 @@ lbl_fn_800A9E64_00000A28:
     lwz r3, lbl_8087EFA8
     lfs f1, 0x74(r3)
     addi r23, r3, 0x78
-    bl fn_8068AD58
+    bl std_cos
     lwz r3, lbl_8087EFA8
     frsp f28, f1
     lfs f1, 0x74(r3)
     lfs f29, 0x6c(r3)
-    bl fn_8068A850
+    bl std_sin
     lwz r3, lbl_8087EFA8
     fneg f0, f28
     frsp f1, f1
@@ -880,12 +880,12 @@ lbl_fn_800A9E64_00000A28:
     lwz r3, lbl_8087EFA8
     lfs f1, 0x74(r3)
     addi r23, r3, 0x78
-    bl fn_8068A850
+    bl std_sin
     lwz r3, lbl_8087EFA8
     frsp f28, f1
     lfs f1, 0x74(r3)
     lfs f29, 0x70(r3)
-    bl fn_8068AD58
+    bl std_cos
     frsp f0, f1
     lwz r3, lbl_8087EFA8
     fmuls f2, f28, f29

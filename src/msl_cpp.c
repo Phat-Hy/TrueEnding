@@ -343,12 +343,12 @@ void fn_8068A258(void);
 void fn_8068A4A8(void);
 void fn_8068A6D8(void);
 void fn_8068A824(void);
-void fn_8068A850(void);
+void std_sin(void);
 void fn_8068A918(void);
 void fn_8068AA68(void);
 void fn_8068AAF0(void);
 void fn_8068AC5C(void);
-void fn_8068AD58(void);
+void std_cos(void);
 void fn_8068AE24(void);
 void fn_8068AE9C(void);
 void fn_8068AEA0(void);
@@ -4622,7 +4622,7 @@ asm void fn_8068A824(void)
     blr
 }
 
-asm void fn_8068A850(void)
+asm void std_sin(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -4635,49 +4635,49 @@ asm void fn_8068A850(void)
     lwz r3, 0x8(r1)
     clrlwi r3, r3, 1
     cmpw r3, r0
-    bgt lbl_fn_8068A850_00003990
+    bgt lbl_std_sin_00003990
     bl fn_806889D0
-    b lbl_fn_8068A850_00003A14
-lbl_fn_8068A850_00003990:
+    b lbl_std_sin_00003A14
+lbl_std_sin_00003990:
     lis r0, 0x7ff0
     cmpw r3, r0
-    blt lbl_fn_8068A850_000039A4
+    blt lbl_std_sin_000039A4
     fsub f1, f1, f1
-    b lbl_fn_8068A850_00003A14
-lbl_fn_8068A850_000039A4:
+    b lbl_std_sin_00003A14
+lbl_std_sin_000039A4:
     addi r3, r1, 0x10
     bl fn_8068864C
     clrlwi. r0, r3, 30
-    beq lbl_fn_8068A850_000039C8
+    beq lbl_std_sin_000039C8
     cmpwi r0, 0x1
-    beq lbl_fn_8068A850_000039D8
+    beq lbl_std_sin_000039D8
     cmpwi r0, 0x2
-    beq lbl_fn_8068A850_000039F0
-    b lbl_fn_8068A850_00003A04
-lbl_fn_8068A850_000039C8:
+    beq lbl_std_sin_000039F0
+    b lbl_std_sin_00003A04
+lbl_std_sin_000039C8:
     lfd f1, 0x10(r1)
     lfd f2, 0x18(r1)
     bl fn_806889D0
-    b lbl_fn_8068A850_00003A14
-lbl_fn_8068A850_000039D8:
+    b lbl_std_sin_00003A14
+lbl_std_sin_000039D8:
     lfd f1, 0x10(r1)
     li r3, 0x1
     lfd f2, 0x18(r1)
     bl fn_8068A198
     fneg f1, f1
-    b lbl_fn_8068A850_00003A14
-lbl_fn_8068A850_000039F0:
+    b lbl_std_sin_00003A14
+lbl_std_sin_000039F0:
     lfd f1, 0x10(r1)
     lfd f2, 0x18(r1)
     bl fn_806889D0
     fneg f1, f1
-    b lbl_fn_8068A850_00003A14
-lbl_fn_8068A850_00003A04:
+    b lbl_std_sin_00003A14
+lbl_std_sin_00003A04:
     lfd f1, 0x10(r1)
     li r3, 0x1
     lfd f2, 0x18(r1)
     bl fn_8068A198
-lbl_fn_8068A850_00003A14:
+lbl_std_sin_00003A14:
     lwz r0, 0x24(r1)
     mtlr r0
     addi r1, r1, 0x20
@@ -5009,7 +5009,7 @@ lbl_fn_8068AC5C_00003E5C:
     blr
 }
 
-asm void fn_8068AD58(void)
+asm void std_cos(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -5022,50 +5022,50 @@ asm void fn_8068AD58(void)
     lwz r3, 0x8(r1)
     clrlwi r3, r3, 1
     cmpw r3, r0
-    bgt lbl_fn_8068AD58_00003E9C
+    bgt lbl_std_cos_00003E9C
     li r3, 0x0
     bl fn_8068A198
-    b lbl_fn_8068AD58_00003F20
-lbl_fn_8068AD58_00003E9C:
+    b lbl_std_cos_00003F20
+lbl_std_cos_00003E9C:
     lis r0, 0x7ff0
     cmpw r3, r0
-    blt lbl_fn_8068AD58_00003EB0
+    blt lbl_std_cos_00003EB0
     fsub f1, f1, f1
-    b lbl_fn_8068AD58_00003F20
-lbl_fn_8068AD58_00003EB0:
+    b lbl_std_cos_00003F20
+lbl_std_cos_00003EB0:
     addi r3, r1, 0x10
     bl fn_8068864C
     clrlwi. r0, r3, 30
-    beq lbl_fn_8068AD58_00003ED4
+    beq lbl_std_cos_00003ED4
     cmpwi r0, 0x1
-    beq lbl_fn_8068AD58_00003EE8
+    beq lbl_std_cos_00003EE8
     cmpwi r0, 0x2
-    beq lbl_fn_8068AD58_00003EF8
-    b lbl_fn_8068AD58_00003F10
-lbl_fn_8068AD58_00003ED4:
+    beq lbl_std_cos_00003EF8
+    b lbl_std_cos_00003F10
+lbl_std_cos_00003ED4:
     lfd f1, 0x10(r1)
     li r3, 0x1
     lfd f2, 0x18(r1)
     bl fn_8068A198
-    b lbl_fn_8068AD58_00003F20
-lbl_fn_8068AD58_00003EE8:
+    b lbl_std_cos_00003F20
+lbl_std_cos_00003EE8:
     lfd f1, 0x10(r1)
     lfd f2, 0x18(r1)
     bl fn_806889D0
-    b lbl_fn_8068AD58_00003F20
-lbl_fn_8068AD58_00003EF8:
+    b lbl_std_cos_00003F20
+lbl_std_cos_00003EF8:
     lfd f1, 0x10(r1)
     li r3, 0x1
     lfd f2, 0x18(r1)
     bl fn_8068A198
     fneg f1, f1
-    b lbl_fn_8068AD58_00003F20
-lbl_fn_8068AD58_00003F10:
+    b lbl_std_cos_00003F20
+lbl_std_cos_00003F10:
     lfd f1, 0x10(r1)
     lfd f2, 0x18(r1)
     bl fn_806889D0
     fneg f1, f1
-lbl_fn_8068AD58_00003F20:
+lbl_std_cos_00003F20:
     lwz r0, 0x24(r1)
     mtlr r0
     addi r1, r1, 0x20

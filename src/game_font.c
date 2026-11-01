@@ -17,7 +17,7 @@ extern void mem_alloc(void);
 extern void msg_formatTextWithAlignment(void* res, void* font, u32 mode);
 extern void atn_Task_constructor(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void str_findChar(void);
 extern void fn_801F0758(void);
 extern void save_validateHeader(void);
@@ -357,7 +357,7 @@ asm void fn_800A2D60(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_800A2D60_000004AC
     addis r3, r31, 0x1

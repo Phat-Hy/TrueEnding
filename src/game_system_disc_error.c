@@ -27,7 +27,7 @@ extern void system_getNextSequenceId(void);
 extern void fn_800F8574(void);
 extern void clip_calculateFrustum(void);
 extern void fn_8010A308(void);
-extern void fn_80145334(void);
+extern void quest_updateFlow(void);
 extern void fn_8014C540(void);
 extern void fn_8015495C(void);
 extern void fn_8015ECC4(void);
@@ -1275,14 +1275,14 @@ lbl_fn_80354AA4_00000E5C:
     bl clip_calculateFrustum
 lbl_fn_80354AA4_00000F64:
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     mr r3, r31
     bl fn_8014C540
     b lbl_fn_80354AA4_000010E0
 lbl_fn_80354AA4_00000F78:
     bl fn_80354EE4
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     mr r3, r31
     bl fn_8014C540
     b lbl_fn_80354AA4_000010E0
@@ -1379,7 +1379,7 @@ lbl_fn_80354AA4_000010CC:
     b lbl_fn_80354AA4_000010E0
 lbl_fn_80354AA4_000010D8:
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
 lbl_fn_80354AA4_000010E0:
     lwz r0, 0x44(r1)
     psq_l f31, 0x38(r1), 0, 0

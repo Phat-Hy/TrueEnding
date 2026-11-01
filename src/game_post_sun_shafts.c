@@ -24,13 +24,13 @@ extern void clip_calculateFrustum(void);
 extern void fn_80103F60(void);
 extern void fn_80108378(void);
 extern void fn_8011FC10(void);
-extern void fn_80121F00(void);
+extern void equip_getGlobalManager(void);
 extern void boss_updatePhaseState(void);
 extern void fn_8013A258(void);
 extern void fn_8013C504(void);
 extern void fn_8013CB68(void);
 extern void fn_80144710(void);
-extern void fn_80145334(void);
+extern void quest_updateFlow(void);
 extern void fn_8014C540(void);
 extern void fn_8016E484(void);
 extern void actor_setState(void);
@@ -699,10 +699,10 @@ asm void fn_802D0594(void)
     bl boss_getOffset54
     cmpwi r3, 0x0
     beq lbl_fn_802D0594_00000C6C
-    bl fn_80121F00
+    bl equip_getGlobalManager
     cmpwi r3, 0x0
     beq lbl_fn_802D0594_00000C6C
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_8013C504
     cmpwi r3, 0x0
     beq lbl_fn_802D0594_00000C6C
@@ -730,7 +730,7 @@ lbl_fn_802D0594_000008A8:
     bl talk_parseQuotedString
     bl str_parseInt
     mr r30, r3
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_8013C504
     mr r4, r30
     bl fn_800EC204
@@ -766,7 +766,7 @@ lbl_fn_802D0594_00000928:
     bl talk_parseQuotedString
     bl str_parseInt
     mr r30, r3
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_8013C504
     mr r4, r30
     bl fn_800EC204
@@ -2548,7 +2548,7 @@ lbl_fn_802D0B84_00002330:
     mr r3, r31
     bl fn_8014C540
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     lwz r3, lbl_8087F048
     mr r4, r31
     bl fn_80103F60

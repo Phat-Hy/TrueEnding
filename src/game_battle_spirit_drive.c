@@ -40,8 +40,8 @@ extern void PSVECSquareMag(void);
 extern void rand(void);
 extern void strcmp(void);
 extern void atoi(void);
-extern void fn_8068A850(void);
-extern void fn_8068AD58(void);
+extern void std_sin(void);
+extern void std_cos(void);
 extern void runtime_registerStaticObject(void);
 extern void __ptmf_scall(void);
 extern u32 strlen(const char* str);
@@ -159,7 +159,7 @@ lbl_fn_804003E0_000000A0:
     lfs f7, 0x118(r25)
     lfs f0, 0x14(r31)
     fadds f1, f7, f0
-    bl fn_8068AD58
+    bl std_cos
     lfs f7, lbl_808860C8
     frsp f9, f1
     lfs f0, 0x10(r31)
@@ -172,7 +172,7 @@ lbl_fn_804003E0_000000A0:
     fmuls f0, f0, f7
     fmuls f0, f0, f9
     stfs f0, 0x10c(r25)
-    bl fn_8068AD58
+    bl std_cos
     lfs f0, 0x8(r31)
     frsp f10, f1
     lfs f7, 0x118(r25)
@@ -183,7 +183,7 @@ lbl_fn_804003E0_000000A0:
     fmuls f0, f9, f10
     fmuls f0, f8, f0
     stfs f0, 0x110(r25)
-    bl fn_8068AD58
+    bl std_cos
     lfs f0, 0x8(r31)
     frsp f10, f1
     lfs f11, lbl_808860CC
@@ -220,7 +220,7 @@ lbl_fn_804003E0_00000178:
     lfs f0, 0x118(r25)
     fnmsubs f7, f8, f9, f7
     fdivs f1, f0, f7
-    bl fn_8068A850
+    bl std_sin
     frsp f9, f1
     lfs f0, lbl_808860C4
     lfs f8, 0x20(r31)
@@ -961,7 +961,7 @@ lbl_fn_80400D08_00000BA8:
     fsubs f0, f0, f28
     fmuls f26, f31, f0
     fmr f1, f26
-    bl fn_8068AD58
+    bl std_cos
     frsp f24, f1
     bl rand
     mulhw r0, r30, r3
@@ -992,7 +992,7 @@ lbl_fn_80400D08_00000BA8:
     lfd f0, 0x1d0(r1)
     fsubs f0, f0, f28
     fnmsubs f24, f7, f29, f0
-    bl fn_8068A850
+    bl std_sin
     frsp f26, f1
     bl rand
     mulhw r0, r30, r3
@@ -1070,7 +1070,7 @@ lbl_fn_80400D08_00000D54:
     fsubs f0, f0, f29
     fmuls f26, f30, f0
     fmr f1, f26
-    bl fn_8068A850
+    bl std_sin
     lwz r0, 0x130(r26)
     frsp f24, f1
     add r28, r0, r27
@@ -1126,7 +1126,7 @@ lbl_fn_80400D08_00000D54:
     fmuls f7, f7, f8
     fmuls f0, f0, f7
     stfs f0, 0x8(r25)
-    bl fn_8068AD58
+    bl std_cos
     lwz r0, 0x130(r26)
     frsp f24, f1
     add r28, r0, r27
@@ -1536,7 +1536,7 @@ lbl_fn_8040161C_00001320:
     fsubs f0, f0, f22
     fmuls f20, f27, f0
     fmr f1, f20
-    bl fn_8068A850
+    bl std_sin
     lwz r0, 0x130(r25)
     frsp f19, f1
     add r23, r0, r24
@@ -1576,7 +1576,7 @@ lbl_fn_8040161C_00001320:
     fdivs f2, f2, f23
     fmuls f0, f0, f2
     stfs f0, 0x8(r23)
-    bl fn_8068AD58
+    bl std_cos
     lwz r0, 0x130(r25)
     frsp f19, f1
     add r23, r0, r24

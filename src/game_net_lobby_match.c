@@ -44,7 +44,7 @@ extern void PSMTXScale(void);
 extern void PSVECMag(void);
 extern void strcmp(void);
 extern void strstr(void);
-extern void fn_8068AD58(void);
+extern void std_cos(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
 
@@ -1647,7 +1647,7 @@ lbl_fn_8049CC5C_00001508:
     lfs f7, 0x458(r28)
     lfs f0, 0x45c(r28)
     fmadds f1, f8, f7, f0
-    bl fn_8068AD58
+    bl std_cos
     frsp f7, f1
     lfs f0, 0x454(r28)
     addi r30, r30, 0x1

@@ -13,7 +13,7 @@ extern void dtor_80084684(void);
 extern void fn_8000D9E8(void);
 extern void fn_8000D9F8(void);
 extern void fn_8000DCF4(void);
-extern void fn_8001047C(void);
+extern void vec3_assign(void);
 extern void vec3_sub(void);
 extern void fn_8006EF48(void);
 extern void str_assignBuffer(void);
@@ -923,7 +923,7 @@ lbl_fn_805AB82C_00000AC8:
 lbl_fn_805AB82C_00000B30:
     addi r3, r1, 0x10
     addi r4, r1, 0x34
-    bl fn_8001047C
+    bl vec3_assign
     bl fn_805A6D24
     cmpwi r3, 0x8
     beq lbl_fn_805AB82C_00000B64

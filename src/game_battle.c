@@ -80,7 +80,7 @@ extern void PSVECDotProduct(void);
 extern void PSVECCrossProduct(void);
 extern void rand(void);
 extern void strcmp(void);
-extern void fn_8068A850(void);
+extern void std_sin(void);
 extern void fn_806952C4(void);
 
 /* External data declarations */
@@ -2234,7 +2234,7 @@ asm void fn_80018D5C(void)
     lfs f0, lbl_80880700
     fmuls f3, f3, f28
     fmuls f1, f0, f3
-    bl fn_8068A850
+    bl std_sin
     lwz r0, 0x74(r28)
     frsp f28, f1
     li r4, 0x0
@@ -2585,7 +2585,7 @@ lbl_fn_80019254_000021D0:
     lfs f0, lbl_80880700
     fmuls f3, f3, f28
     fmuls f1, f0, f3
-    bl fn_8068A850
+    bl std_sin
     lwz r0, 0x74(r29)
     frsp f28, f1
     li r4, 0x0
@@ -2961,7 +2961,7 @@ lbl_fn_800197A4_00002794:
     lwz r24, 0xd10(r6)
     lwz r29, 0x10d8(r3)
     lfs f18, lbl_80880738
-    bl fn_8068A850
+    bl std_sin
     lfs f3, 0x78(r1)
     frsp f19, f1
     lfs f0, 0x84(r1)

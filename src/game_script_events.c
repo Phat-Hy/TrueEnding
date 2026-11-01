@@ -14,7 +14,7 @@ extern void fn_80108378(void);
 extern void fn_80133130(void);
 extern void fn_80133EE8(void);
 extern void fn_80139560(void);
-extern void fn_80145334(void);
+extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void fn_8014C540(void);
 extern void fn_80151448(void);
@@ -43,8 +43,8 @@ extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
-extern void fn_8068A850(void);
-extern void fn_8068AD58(void);
+extern void std_sin(void);
+extern void std_cos(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
 
@@ -751,7 +751,7 @@ lbl_fn_8024B4F0_0000095C:
     mr r3, r31
     bl fn_8014C540
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     mr r3, r31
     bl fn_8024BE94
 lbl_fn_8024B4F0_00000974:
@@ -915,7 +915,7 @@ lbl_fn_8024BE94_00000A80:
     lfs f1, 0x1644(r31)
     lfs f0, lbl_808832D0
     fmuls f1, f0, f1
-    bl fn_8068AD58
+    bl std_cos
     lfs f3, 0x2e4(r31)
     frsp f2, f1
     lfs f0, lbl_808832A4
@@ -952,7 +952,7 @@ lbl_fn_8024BE94_00000C28:
     lfs f1, 0x1644(r31)
     lfs f0, lbl_808832D0
     fmuls f1, f0, f1
-    bl fn_8068AD58
+    bl std_cos
     frsp f1, f1
     lfs f0, lbl_808832D4
     fmadds f29, f0, f1, f0
@@ -974,7 +974,7 @@ lbl_fn_8024BE94_00000C78:
     lfs f1, 0x1644(r31)
     lfs f0, lbl_808832D0
     fmuls f1, f0, f1
-    bl fn_8068AD58
+    bl std_cos
     frsp f1, f1
     lfs f0, lbl_808832D4
     fmadds f29, f0, f1, f0
@@ -1861,7 +1861,7 @@ lbl_fn_8024CD24_000018E0:
     bl PSVECDotProduct
     fmr f31, f1
     lfd f1, 0xa0(r31)
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     fcmpo cr0, f31, f0
     ble lbl_fn_8024CD24_00001980
@@ -1877,7 +1877,7 @@ lbl_fn_8024CD24_000018E0:
     b lbl_fn_8024CD24_00001BF8
 lbl_fn_8024CD24_00001980:
     lfd f1, 0xa8(r31)
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     fcmpo cr0, f31, f0
     ble lbl_fn_8024CD24_00001BD4

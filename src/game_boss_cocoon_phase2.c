@@ -12,8 +12,8 @@ extern void fn_8000D0F8(void);
 extern void fn_8000D114(void);
 extern void vec3_copy(void);
 extern void fn_8000DD0C(void);
-extern void fn_8001047C(void);
-extern void fn_80011034(void);
+extern void vec3_assign(void);
+extern void vec3_toEulerAngles(void);
 extern void fn_80011220(void);
 extern void fn_80012C88(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
@@ -34,7 +34,7 @@ extern void fn_8006CA80(void);
 extern void route_createSegment(void);
 extern void node_createNamedChild(void);
 extern void fn_800897D8(void);
-extern void fn_8008BBD8(void);
+extern void map_debugLog(void);
 extern void atn_Matrix_copy(void);
 extern void fn_80091CFC(void);
 extern void atn_Model_findBoneIndex(void);
@@ -53,7 +53,7 @@ extern void fn_800EDFE8(void);
 extern void fn_800F29D0(void);
 extern void system_getNextSequenceId(void);
 extern void fn_8010F668(void);
-extern void fn_80121F00(void);
+extern void equip_getGlobalManager(void);
 extern void magic_getOffset6C(void);
 extern void fn_801240B4(void);
 extern void fn_80129978(void);
@@ -61,7 +61,7 @@ extern void fn_80129A48(void);
 extern void boss_updatePhaseState(void);
 extern void fn_80139F2C(void);
 extern void fn_8013A13C(void);
-extern void fn_80145334(void);
+extern void quest_updateFlow(void);
 extern void fn_801479E4(void);
 extern void fn_801495E8(void);
 extern void fn_8014C540(void);
@@ -1677,7 +1677,7 @@ lbl_fn_8045FE70_00001540:
     stw r4, 0xb0(r1)
     stw r0, 0xb4(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_8045FE70_000015C4
     addic. r0, r1, 0x128
@@ -1852,10 +1852,10 @@ asm void fn_80460458(void)
     bl fn_804617A4
     addi r3, r1, 0x88
     addi r4, r31, 0x528
-    bl fn_8001047C
+    bl vec3_assign
     addi r3, r1, 0x7c
     addi r4, r31, 0x534
-    bl fn_8001047C
+    bl vec3_assign
     lwz r0, 0xd18(r31)
     lwz r3, 0x14c0(r31)
     cmpwi r0, 0x0
@@ -1915,7 +1915,7 @@ lbl_fn_80460458_00001808:
     bl vec3_sub
     addi r3, r1, 0x34
     addi r4, r1, 0x28
-    bl fn_80011034
+    bl vec3_toEulerAngles
     addi r3, r31, 0x14e0
     addi r4, r1, 0x34
     bl vec3_copy
@@ -2041,10 +2041,10 @@ lbl_fn_80460458_00001A64:
     addi r6, r6, lbl_807C7030@l
     bl fn_80129978
 lbl_fn_80460458_00001A90:
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl kpad_getClampData
     mr r30, r3
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl magic_getOffset6C
     lwz r4, 0x58c(r31)
     mr r29, r3
@@ -2208,7 +2208,7 @@ lbl_fn_80460458_00001CF4:
     mr r3, r31
     bl fn_8014C540
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     lfs f1, lbl_80886D60
     addi r3, r1, 0x4c
     fmr f2, f1

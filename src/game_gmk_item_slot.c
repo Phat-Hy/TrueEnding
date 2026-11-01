@@ -64,7 +64,7 @@ extern void GXSetZCompLoc(void);
 extern void fn_80658240(void);
 extern void fn_80660CF0(void);
 extern void strcat(void);
-extern void fn_8068A850(void);
+extern void std_sin(void);
 extern void runtime_clampDouble(void);
 extern char* strcpy(char* dest, const char* src);
 
@@ -2061,7 +2061,7 @@ lbl_fn_80441918_00001A10:
     lfs f0, 0xc4(r31)
     fmr f28, f1
     fmr f1, f0
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     fcmpo cr0, f28, f0
     cror eq, gt, eq

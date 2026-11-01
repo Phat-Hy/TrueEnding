@@ -19,7 +19,7 @@ extern void fn_80093E90(void);
 extern void fn_80097E80(void);
 extern void atn_Task_constructor(void);
 extern void str_findChar(void);
-extern void fn_80145334(void);
+extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void fn_8036554C(void);
 extern void fn_803CC5E4(void);
@@ -423,7 +423,7 @@ lbl_fn_8000CBD8_0000049C:
     stw r4, 0xf1c(r3)
 lbl_fn_8000CBD8_000004EC:
     lwz r3, 0x48(r31)
-    bl fn_80145334
+    bl quest_updateFlow
     lwz r0, 0x54(r31)
     cmpwi r0, 0x0
     beq lbl_fn_8000CBD8_0000050C

@@ -14,7 +14,7 @@ extern void fn_800BFAC8(void);
 extern void fn_801255C8(void);
 extern void fn_80128A30(void);
 extern void fn_80139560(void);
-extern void fn_80145334(void);
+extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void fn_8015E7A0(void);
 extern void fn_8016EB48(void);
@@ -145,14 +145,14 @@ asm void fn_8017D0B0(void)
     bne lbl_fn_8017D0B0_00000110
     bl fn_80139560
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     b lbl_fn_8017D0B0_00000124
 lbl_fn_8017D0B0_00000110:
     cmpwi r5, 0x3
     beq lbl_fn_8017D0B0_00000124
     bl fn_8017D13C
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
 lbl_fn_8017D0B0_00000124:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)

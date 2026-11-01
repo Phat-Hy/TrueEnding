@@ -9,8 +9,8 @@ extern void _savegpr_24(void);
 extern void fn_8000D0F8(void);
 extern void fn_8000D3A4(void);
 extern void fn_8000DD0C(void);
-extern void fn_8001047C(void);
-extern void fn_80011034(void);
+extern void vec3_assign(void);
+extern void vec3_toEulerAngles(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void vec3_sub(void);
 extern void fn_80013410(void);
@@ -34,7 +34,7 @@ extern void fn_801162A0(void);
 extern void fn_8012D8B8(void);
 extern void fn_801404F8(void);
 extern void fn_80140500(void);
-extern void fn_80145334(void);
+extern void quest_updateFlow(void);
 extern void fn_801479E4(void);
 extern void fn_8015495C(void);
 extern void fn_8015C0C0(void);
@@ -317,7 +317,7 @@ lbl_fn_80277DC4_000002D4:
     lfs f2, 0x64(r1)
     psq_st f1, 0x534(r23), 0, 0
     stfs f2, 0x53c(r23)
-    bl fn_80145334
+    bl quest_updateFlow
     stw r20, 0xd18(r23)
     mr r3, r23
     mr r4, r27
@@ -1635,17 +1635,17 @@ lbl_fn_80279280_0000160C:
     bne lbl_fn_80279280_00001740
     addi r3, r1, 0xb4
     addi r4, r1, 0xcc
-    bl fn_8001047C
+    bl vec3_assign
     stfs f28, 0xb8(r1)
     addi r3, r1, 0xa8
     addi r4, r1, 0xc0
-    bl fn_8001047C
+    bl vec3_assign
     stfs f28, 0xac(r1)
     mr r3, r29
     bl fn_802797A0
     mr r4, r3
     addi r3, r1, 0x9c
-    bl fn_8001047C
+    bl vec3_assign
     stfs f28, 0xa0(r1)
     addi r3, r1, 0x90
     addi r4, r1, 0xa8
@@ -1768,7 +1768,7 @@ lbl_fn_80279280_0000174C:
     bl fn_800F7FA8
     addi r3, r1, 0x18
     addi r4, r25, 0x10
-    bl fn_80011034
+    bl vec3_toEulerAngles
     addi r3, r1, 0x24
     addi r4, r25, 0x28
     bl fn_8000D0F8
@@ -1838,7 +1838,7 @@ lbl_fn_80279280_000018FC:
     bl vec3_sub
     addi r3, r1, 0x60
     addi r4, r1, 0x6c
-    bl fn_80011034
+    bl vec3_toEulerAngles
     addi r3, r1, 0x6c
     bl fn_8000D3A4
     fdivs f30, f1, f31

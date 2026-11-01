@@ -23,7 +23,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void fn_800EF73C(void);
 extern void fn_80161570(void);
 extern void fn_801F64D0(void);
@@ -1091,7 +1091,7 @@ asm void fn_804095F0(void)
     cmpwi r3, 0x0
     bne lbl_fn_804095F0_00000DF8
     mr r3, r30
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_804095F0_00000DF8
     addi r31, r30, 0x294

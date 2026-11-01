@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void fn_8000D9E8(void);
 extern void fn_8000DCF4(void);
-extern void fn_8001047C(void);
+extern void vec3_assign(void);
 extern void vec3_sub(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
@@ -17,7 +17,7 @@ extern void fn_800E0AA8(void);
 extern void system_getNextSequenceId(void);
 extern void fn_8013322C(void);
 extern void fn_8013C38C(void);
-extern void fn_80148990(void);
+extern void quest_ctorRewardItem(void);
 extern void fn_80151448(void);
 extern void actor_setState(void);
 extern void fn_801C3910(void);
@@ -727,7 +727,7 @@ asm void fn_8033A7A0(void)
     bl fn_8013C38C
     mr r4, r3
     addi r3, r1, 0x14
-    bl fn_8001047C
+    bl vec3_assign
     addi r3, r1, 0x8
     addi r4, r30, 0x528
     addi r5, r1, 0x14
@@ -1141,9 +1141,9 @@ lbl_fn_8033ACB0_00000EB8:
     la r6, lbl_8087D9E0
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     li r5, 0x0
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r6, 0x14
     li r7, 0x8
     bl runtime_registerStaticObject
@@ -1255,9 +1255,9 @@ lbl_fn_8033ACB0_00001058:
     addi r3, r3, 0x10
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     mr r7, r30
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r5, 0x0
     li r6, 0x14
     bl runtime_registerStaticObject
@@ -1415,9 +1415,9 @@ lbl_fn_8033ACB0_000012BC:
     la r6, lbl_8087D9E0
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     li r5, 0x0
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r6, 0x14
     li r7, 0x8
     bl runtime_registerStaticObject
@@ -1529,9 +1529,9 @@ lbl_fn_8033ACB0_0000145C:
     addi r3, r3, 0x10
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     mr r7, r30
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r5, 0x0
     li r6, 0x14
     bl runtime_registerStaticObject
@@ -1689,9 +1689,9 @@ lbl_fn_8033ACB0_000016C0:
     la r6, lbl_8087D9E0
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     li r5, 0x0
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r6, 0x14
     li r7, 0x8
     bl runtime_registerStaticObject
@@ -1803,9 +1803,9 @@ lbl_fn_8033ACB0_00001860:
     addi r3, r3, 0x10
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     mr r7, r30
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r5, 0x0
     li r6, 0x14
     bl runtime_registerStaticObject
@@ -1963,9 +1963,9 @@ lbl_fn_8033ACB0_00001AC4:
     la r6, lbl_8087D9E0
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     li r5, 0x0
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r6, 0x14
     li r7, 0x8
     bl runtime_registerStaticObject
@@ -2077,9 +2077,9 @@ lbl_fn_8033ACB0_00001C64:
     addi r3, r3, 0x10
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     mr r7, r30
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r5, 0x0
     li r6, 0x14
     bl runtime_registerStaticObject

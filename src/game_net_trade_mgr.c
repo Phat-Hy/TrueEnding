@@ -8,7 +8,7 @@ extern void _savegpr_20(void);
 extern void _savegpr_25(void);
 extern void dtor_80084684(void);
 extern void fn_8000D114(void);
-extern void fn_8001047C(void);
+extern void vec3_assign(void);
 extern void fn_80013410(void);
 extern void fn_8004B290(void);
 extern void fn_8004B338(void);
@@ -34,7 +34,7 @@ extern void fn_800CFBA0(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void fn_801125F8(void);
 extern void fn_80112960(void);
 extern void fn_80114AA0(void);
@@ -388,16 +388,16 @@ asm void fn_8052A8F0(void)
     stfs f0, 0x12d0(r29)
     addi r3, r29, 0x12d4
     addi r4, r30, lbl_807C7030@l
-    bl fn_8001047C
+    bl vec3_assign
     addi r3, r29, 0x12e0
     addi r4, r30, lbl_807C7030@l
-    bl fn_8001047C
+    bl vec3_assign
     addi r3, r29, 0x12ec
     addi r4, r30, lbl_807C7030@l
-    bl fn_8001047C
+    bl vec3_assign
     addi r3, r29, 0x12f8
     addi r4, r30, lbl_807C7030@l
-    bl fn_8001047C
+    bl vec3_assign
     li r30, 0x1
     stw r30, 0x1304(r29)
     addi r3, r29, 0x1310
@@ -471,7 +471,7 @@ lbl_fn_8052A8F0_000004B0:
 lbl_fn_8052A8F0_000004C4:
     mr r4, r3
     addi r3, r1, 0x2c
-    bl fn_8001047C
+    bl vec3_assign
     addi r3, r1, 0x14
     addi r4, r29, 0x11fc
     addi r5, r1, 0x2c
@@ -957,7 +957,7 @@ lbl_fn_8052B190_00000B74:
     cmpwi r0, 0x2
     bne lbl_fn_8052B190_0000116C
     mr r3, r25
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_8052B190_0000116C
     addi r3, r25, 0x1334

@@ -7,8 +7,8 @@ extern void vec3_copy(void);
 extern void fn_8000D3A4(void);
 extern void fn_8000D9E8(void);
 extern void fn_8000DCF4(void);
-extern void fn_8001047C(void);
-extern void fn_80011034(void);
+extern void vec3_assign(void);
+extern void vec3_toEulerAngles(void);
 extern void vec3_sub(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
@@ -24,7 +24,7 @@ extern void fn_800F7FA8(void);
 extern void fn_800F84D0(void);
 extern void system_getNextSequenceId(void);
 extern void fn_801162A0(void);
-extern void fn_80121F00(void);
+extern void equip_getGlobalManager(void);
 extern void magic_getOffset6C(void);
 extern void fn_80126214(void);
 extern void fn_8012F034(void);
@@ -35,7 +35,7 @@ extern void fn_8013C38C(void);
 extern void fn_8013C3B4(void);
 extern void fn_8013CB68(void);
 extern void fn_8014052C(void);
-extern void fn_80145334(void);
+extern void quest_updateFlow(void);
 extern void dialog_setScriptSlot(void);
 extern void fn_8014C540(void);
 extern void fn_80151448(void);
@@ -437,7 +437,7 @@ lbl_fn_80265B00_000003E4:
     lwz r0, 0x14c0(r31)
     cmpwi r0, 0x1
     bne lbl_fn_80265B00_000004A4
-    bl fn_80121F00
+    bl equip_getGlobalManager
     li r4, 0xe9
     bl world_getLocalFlag
     cmpwi r3, 0x2
@@ -470,7 +470,7 @@ lbl_fn_80265B00_00000444:
     blt lbl_fn_80265B00_00000444
     mr r3, r31
     bl fn_8026AF78
-    bl fn_80121F00
+    bl equip_getGlobalManager
     li r4, 0xe9
     li r5, 0x3
     bl world_setLocalFlag
@@ -487,7 +487,7 @@ lbl_fn_80265B00_00000498:
     addi r3, r31, 0x7d4
     bl fn_80265804
 lbl_fn_80265B00_000004A4:
-    bl fn_80121F00
+    bl equip_getGlobalManager
     li r4, 0x396
     li r5, 0x0
     li r6, 0x0
@@ -676,8 +676,8 @@ lbl_fn_80265B00_00000760:
     mr r3, r31
     bl fn_8014C540
     mr r3, r31
-    bl fn_80145334
-    bl fn_80121F00
+    bl quest_updateFlow
+    bl equip_getGlobalManager
     bl magic_getOffset6C
     mr r29, r3
     bl fn_8000D9E8
@@ -1493,7 +1493,7 @@ lbl_fn_80266A24_000012B0:
     lwz r0, 0x1658(r30)
     cmpwi r0, 0x0
     bgt lbl_fn_80266A24_00001338
-    bl fn_80121F00
+    bl equip_getGlobalManager
     li r4, 0xe9
     li r5, 0x1
     bl world_setLocalFlag
@@ -1534,12 +1534,12 @@ lbl_fn_80266A24_00001338:
     srawi r0, r0, 1
     cmpw r4, r0
     bge lbl_fn_80266A24_0000139C
-    bl fn_80121F00
+    bl equip_getGlobalManager
     li r4, 0xef
     bl world_getLocalFlag
     cmpwi r3, 0x0
     bne lbl_fn_80266A24_0000139C
-    bl fn_80121F00
+    bl equip_getGlobalManager
     li r4, 0xef
     li r5, 0x1
     bl world_setLocalFlag
@@ -1575,7 +1575,7 @@ lbl_fn_80266A24_0000139C:
     ble lbl_fn_80266A24_000014A0
     addi r3, r1, 0x50
     addi r4, r31, 0x10
-    bl fn_8001047C
+    bl vec3_assign
     lwz r0, 0x1658(r30)
     lwz r3, 0x1504(r30)
     cmpwi r0, 0x0
@@ -1660,7 +1660,7 @@ lbl_fn_80266A24_00001514:
     bl fn_8013C3B4
     addi r3, r1, 0x14
     addi r4, r1, 0x8
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lfs f0, 0x18(r1)
     stfs f0, 0x538(r30)
     bl fn_800F7FA0
@@ -1761,7 +1761,7 @@ lbl_fn_80266A24_00001664:
     bne lbl_fn_80266A24_000016C4
     li r0, 0x1
     stw r0, 0x1544(r30)
-    bl fn_80121F00
+    bl equip_getGlobalManager
     li r4, 0x395
     li r5, 0x1
     li r6, 0x0
@@ -1772,22 +1772,22 @@ lbl_fn_80266A24_000016C4:
     mr r4, r30
     li r5, 0x65
     bl fn_800F7FA8
-    bl fn_80121F00
+    bl equip_getGlobalManager
     li r4, 0x395
     li r5, 0x0
     li r6, 0x0
     bl world_setGlobalFlag
-    bl fn_80121F00
+    bl equip_getGlobalManager
     li r4, 0x396
     li r5, 0x0
     li r6, 0x0
     bl world_setGlobalFlag
-    bl fn_80121F00
+    bl equip_getGlobalManager
     li r4, 0xea
     bl world_getLocalFlag
     cmpwi r3, 0x0
     bne lbl_fn_80266A24_00001788
-    bl fn_80121F00
+    bl equip_getGlobalManager
     li r4, 0xea
     li r5, 0x1
     bl world_setLocalFlag

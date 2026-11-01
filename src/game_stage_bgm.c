@@ -10,9 +10,9 @@ extern void dtor_80084684(void);
 extern void fn_8000D114(void);
 extern void fn_8000D3A4(void);
 extern void fn_8000DD0C(void);
-extern void fn_8001047C(void);
+extern void vec3_assign(void);
 extern void fn_800109E0(void);
-extern void fn_80011034(void);
+extern void vec3_toEulerAngles(void);
 extern void fn_80011410(void);
 extern void fn_80012C88(void);
 extern void vec3_sub(void);
@@ -23,7 +23,7 @@ extern void collision_testLineSegment(void);
 extern void fn_80057A68(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_8008BBD8(void);
+extern void map_debugLog(void);
 extern void atn_Matrix_copy(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -396,7 +396,7 @@ lbl_fn_8019F5BC_000002F4:
     stw r4, 0x48(r1)
     stw r0, 0x4c(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_8019F5BC_000003C8
     lwz r7, 0x3c(r1)
@@ -876,7 +876,7 @@ lbl_fn_8019FC6C_000009A4:
     stw r4, 0x48(r1)
     stw r0, 0x4c(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_8019FC6C_00000A78
     lwz r7, 0x3c(r1)
@@ -1045,7 +1045,7 @@ lbl_fn_8019FEC4_00000BC4:
     bl fn_8013C38C
     mr r4, r3
     addi r3, r1, 0xb8
-    bl fn_8001047C
+    bl vec3_assign
     lfs f1, 0xbc(r1)
     addi r3, r1, 0x28
     lfs f0, lbl_8088210C
@@ -1062,7 +1062,7 @@ lbl_fn_8019FEC4_00000BC4:
     bl fn_80012C88
     addi r3, r1, 0xac
     addi r4, r28, 0x8
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lwz r3, 0x4(r28)
     bl fn_800F7F80
     cmpwi r3, 0x0
@@ -1139,7 +1139,7 @@ lbl_fn_8019FEC4_00000D5C:
     bl fn_800F7FF0
     addi r3, r1, 0x1c
     addi r4, r1, 0x7c
-    bl fn_80011034
+    bl vec3_toEulerAngles
     addi r3, r1, 0x70
     addi r4, r1, 0x1c
     addi r5, r1, 0xac
@@ -1209,7 +1209,7 @@ lbl_fn_8019FEC4_00000E78:
     bl fn_80140500
     addi r3, r1, 0x64
     addi r4, r1, 0xb8
-    bl fn_8001047C
+    bl vec3_assign
     lfs f1, lbl_80882128
     addi r3, r1, 0x10
     addi r4, r28, 0x8

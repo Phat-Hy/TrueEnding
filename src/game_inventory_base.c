@@ -28,7 +28,7 @@ extern void fn_803E2110(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSVECDotProduct(void);
-extern void fn_8068A850(void);
+extern void std_sin(void);
 extern void vec3_isNonZero(void);
 
 /* External data declarations */
@@ -462,7 +462,7 @@ lbl_fn_80151448_000004DC:
     lfs f1, lbl_808819A8
     lfs f0, 0x334(r3)
     fmuls f1, f1, f0
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     fcmpo cr0, f31, f0
     bgt lbl_fn_80151448_00000534
@@ -900,7 +900,7 @@ lbl_fn_80151448_00000AEC:
     fmr f31, f1
     lfs f0, 0x334(r31)
     fmuls f1, f2, f0
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     fcmpo cr0, f31, f0
     bgt lbl_fn_80151448_00000B60

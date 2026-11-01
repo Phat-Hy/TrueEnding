@@ -36,7 +36,7 @@ extern void fn_800B1598(void);
 extern void fn_800BDB58(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void atn_LH_Texture_destructAndFree(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
@@ -1183,7 +1183,7 @@ lbl_fn_800A8FF0_00000EE0:
 asm void fn_800A90FC(void)
 {
     nofralloc
-    b fn_800D3FA4
+    b bloom_processPasses
 }
 
 void fn_800A9100(void)

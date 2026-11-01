@@ -13,7 +13,7 @@ extern void collision_testLineSegment(void);
 extern void mem_alloc(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void fn_800EFC64(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800FB1BC(void);
@@ -61,7 +61,7 @@ extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
 extern void PSVECSquareMag(void);
 extern void PSVECDotProduct(void);
-extern void fn_8068A850(void);
+extern void std_sin(void);
 extern void std_atan2(void);
 extern void __construct_new_array(void);
 extern void __destroy_new_array(void);
@@ -554,7 +554,7 @@ lbl_fn_8059A29C_000005DC:
     bne lbl_fn_8059A29C_00000654
     lis r3, lbl_80762118@ha
     lfd f1, lbl_80762118@l(r3)
-    bl fn_8068A850
+    bl std_sin
     lfs f7, lbl_80888178
     frsp f26, f1
     lfs f0, lbl_8088817C
@@ -720,7 +720,7 @@ lbl_fn_8059A29C_0000081C:
     stfs f8, 0x4c(r1)
     stfs f2, 0x8(r28)
     stfs f0, 0x0(r28)
-    bl fn_8068A850
+    bl std_sin
     lfs f7, lbl_80888178
     frsp f26, f1
     lfs f0, lbl_8088817C
@@ -841,7 +841,7 @@ lbl_fn_8059A29C_000009BC:
     cmpwi r3, 0x0
     beq lbl_fn_8059A29C_00000AA0
     lfd f1, lbl_80762120@l(r26)
-    bl fn_8068A850
+    bl std_sin
     frsp f26, f1
     stfs f29, 0x50(r1)
     addi r3, r1, 0x388
@@ -1258,7 +1258,7 @@ asm void fn_8059AF70(void)
     li r31, 0x0
 lbl_fn_8059AF70_00000FE4:
     mr r3, r30
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     bne lbl_fn_8059AF70_00000FF8
     li r31, 0x0

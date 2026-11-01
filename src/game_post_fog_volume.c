@@ -25,7 +25,7 @@ extern void fn_800E0AB0(void);
 extern void fn_800EC204(void);
 extern void fn_800EF73C(void);
 extern void fn_8011FC10(void);
-extern void fn_80121F00(void);
+extern void equip_getGlobalManager(void);
 extern void boss_updatePhaseState(void);
 extern void fn_8013C504(void);
 extern void fn_801A03E0(void);
@@ -1207,10 +1207,10 @@ asm void fn_802D7E80(void)
     bl boss_getOffset54
     cmpwi r3, 0x0
     beq lbl_fn_802D7E80_00001420
-    bl fn_80121F00
+    bl equip_getGlobalManager
     cmpwi r3, 0x0
     beq lbl_fn_802D7E80_00001420
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_8013C504
     cmpwi r3, 0x0
     beq lbl_fn_802D7E80_00001420
@@ -1239,7 +1239,7 @@ lbl_fn_802D7E80_00000FF8:
     bl talk_parseQuotedString
     bl str_parseInt
     mr r28, r3
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_8013C504
     mr r4, r28
     bl fn_800EC204
@@ -1273,7 +1273,7 @@ lbl_fn_802D7E80_00001074:
     bl talk_parseQuotedString
     bl str_parseInt
     mr r28, r3
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_8013C504
     mr r4, r28
     bl fn_800EC204
@@ -1417,7 +1417,7 @@ lbl_fn_802D7E80_00001264:
     bl talk_parseQuotedString
     bl str_parseInt
     mr r28, r3
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_8013C504
     mr r4, r28
     bl fn_800EC204

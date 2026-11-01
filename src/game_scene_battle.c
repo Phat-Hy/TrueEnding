@@ -13,7 +13,7 @@ extern void actor_dispatchMessage(void);
 extern void collision_testLineSegment(void);
 extern void fn_8006B174(void);
 extern void mem_free(void);
-extern void fn_8008BBD8(void);
+extern void map_debugLog(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void fn_80097D40(void);
@@ -1488,7 +1488,7 @@ lbl_fn_801AE4E8_00001370:
     stw r4, 0x20(r1)
     stw r0, 0x24(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_801AE4E8_000013E4
     lwz r5, 0x18(r1)
@@ -1842,7 +1842,7 @@ lbl_fn_801AEA04_00001828:
     stw r4, 0xd8(r1)
     stw r0, 0xdc(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_801AEA04_0000190C
     lwz r7, 0xcc(r1)
@@ -1943,7 +1943,7 @@ lbl_fn_801AEA04_000019A8:
     stw r4, 0x60(r1)
     stw r0, 0x64(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_801AEA04_00001A1C
     addic. r0, r1, 0xe4
@@ -2096,7 +2096,7 @@ lbl_fn_801AEA04_00001BD4:
     stw r4, 0x28(r1)
     stw r0, 0x2c(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_801AEA04_00001C48
     lwz r5, 0x20(r1)

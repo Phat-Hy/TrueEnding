@@ -38,8 +38,8 @@ extern void fn_805ADD84(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSVECCrossProduct(void);
-extern void fn_8068A850(void);
-extern void fn_8068AD58(void);
+extern void std_sin(void);
+extern void std_cos(void);
 extern void vec3_isNonZero(void);
 
 /* External data declarations */
@@ -1284,14 +1284,14 @@ asm void fn_8015F568(void)
     stfs f2, 0xac(r1)
     bne lbl_fn_8015F568_00001158
     lfs f1, 0x538(r27)
-    bl fn_8068A850
+    bl std_sin
     frsp f4, f1
     lfs f3, lbl_80881AB0
     lfs f0, 0xa4(r1)
     lfs f1, 0x538(r27)
     fmadds f0, f3, f4, f0
     stfs f0, 0xa4(r1)
-    bl fn_8068AD58
+    bl std_cos
     frsp f4, f1
     lfs f3, lbl_808819F8
     lfs f0, 0xac(r1)
@@ -1302,14 +1302,14 @@ lbl_fn_8015F568_00001158:
     cmpwi r3, 0x2
     bne lbl_fn_8015F568_0000119C
     lfs f1, 0x538(r27)
-    bl fn_8068A850
+    bl std_sin
     frsp f4, f1
     lfs f3, lbl_808819F8
     lfs f0, 0xa4(r1)
     lfs f1, 0x538(r27)
     fmadds f0, f3, f4, f0
     stfs f0, 0xa4(r1)
-    bl fn_8068AD58
+    bl std_cos
     frsp f4, f1
     lfs f3, lbl_80881AB0
     lfs f0, 0xac(r1)

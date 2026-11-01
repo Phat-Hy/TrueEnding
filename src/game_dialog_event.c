@@ -7,8 +7,8 @@ extern void _restgpr_23(void);
 extern void _savegpr_23(void);
 extern void fn_8000D114(void);
 extern void vec3_copy(void);
-extern void fn_8001047C(void);
-extern void fn_80011034(void);
+extern void vec3_assign(void);
+extern void vec3_toEulerAngles(void);
 extern void fn_80013410(void);
 extern void fn_80013484(void);
 extern void fn_8003EFB0(void);
@@ -22,7 +22,7 @@ extern void fn_800F72CC(void);
 extern void fn_800F7F80(void);
 extern void fn_800F7FB4(void);
 extern void fn_801162A0(void);
-extern void fn_80121F00(void);
+extern void equip_getGlobalManager(void);
 extern void fn_80133EE8(void);
 extern void fn_80133F18(void);
 extern void fn_80134270(void);
@@ -1410,7 +1410,7 @@ lbl_fn_8015076C_00001138:
     li r6, 0x0
     bl fn_8014DEE4
 lbl_fn_8015076C_00001158:
-    bl fn_80121F00
+    bl equip_getGlobalManager
     li r4, 0x67
     bl world_getGlobalFlag
     cmpwi r3, 0x0
@@ -1483,15 +1483,15 @@ lbl_fn_8015076C_00001158:
 lbl_fn_8015076C_00001270:
     addi r3, r1, 0x5c
     addi r4, r1, 0x1c0
-    bl fn_8001047C
+    bl vec3_assign
     mr r27, r3
     addi r3, r1, 0x68
     addi r4, r1, 0x19c
-    bl fn_8001047C
+    bl vec3_assign
     mr r25, r3
     addi r3, r1, 0x74
     addi r4, r23, 0x528
-    bl fn_8001047C
+    bl vec3_assign
     mr r4, r3
     mr r3, r23
     mr r5, r25
@@ -1530,7 +1530,7 @@ lbl_fn_8015076C_00001310:
     bne lbl_fn_8015076C_00001400
     addi r3, r1, 0xe0
     addi r4, r23, 0x534
-    bl fn_8001047C
+    bl vec3_assign
     addi r3, r1, 0x148
     bl fn_80140500
     mr r4, r23
@@ -1574,7 +1574,7 @@ lbl_fn_8015076C_00001310:
     beq lbl_fn_8015076C_000013E8
     addi r3, r1, 0x20
     addi r4, r1, 0x170
-    bl fn_80011034
+    bl vec3_toEulerAngles
     addi r3, r1, 0xe0
     addi r4, r1, 0x20
     bl vec3_copy

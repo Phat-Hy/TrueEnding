@@ -30,7 +30,7 @@ extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
 extern void printf(void);
 extern void abort(void);
-extern void fn_8068A850(void);
+extern void std_sin(void);
 extern void std_atan2(void);
 extern void math_u64DivMod(void);
 
@@ -1378,7 +1378,7 @@ lbl_fn_800F8C6C_000012F4:
     bne lbl_fn_800F8C6C_00001630
     lfs f0, 0x50(r17)
     fmuls f1, f31, f0
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     fcmpo cr0, f25, f0
     cror eq, gt, eq

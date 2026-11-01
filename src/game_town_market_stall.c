@@ -11,7 +11,7 @@ extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_80237518(void);
@@ -375,7 +375,7 @@ asm void fn_803CE5B0(void)
     stwu r1, -0x10(r1)
     mflr r0
     stw r0, 0x14(r1)
-    bl fn_800D3FA4
+    bl bloom_processPasses
     neg r0, r3
     or r0, r0, r3
     srwi r3, r0, 31
@@ -1743,7 +1743,7 @@ asm void fn_803CF8F0(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_803CF8F0_000016A8
     mr r3, r31

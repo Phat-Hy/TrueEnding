@@ -26,8 +26,8 @@ extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
 extern void fn_8068A4A8(void);
-extern void fn_8068A850(void);
-extern void fn_8068AD58(void);
+extern void std_sin(void);
+extern void std_cos(void);
 extern void fn_8068AE24(void);
 
 /* External data declarations */
@@ -506,7 +506,7 @@ lbl_fn_8038CD94_0000066C:
     stfs f5, 0x428(r30)
     fsubs f3, f4, f3
     fmuls f1, f0, f3
-    bl fn_8068A850
+    bl std_sin
     frsp f5, f1
     lfs f0, lbl_808858F8
     lfs f4, lbl_808859E4
@@ -1614,7 +1614,7 @@ lbl_fn_8038DF5C_000016D0:
     stw r31, 0x8f0(r30)
     fdivs f4, f5, f4
     fmsubs f1, f3, f4, f0
-    bl fn_8068AD58
+    bl std_cos
     frsp f5, f1
     lfs f0, lbl_808858F8
     lfs f4, lbl_808859E4

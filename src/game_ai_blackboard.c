@@ -18,7 +18,7 @@ extern void system_getNextSequenceId(void);
 extern void fn_800F8C6C(void);
 extern void fn_80139560(void);
 extern void fn_80144710(void);
-extern void fn_80145334(void);
+extern void quest_updateFlow(void);
 extern void fn_8014C540(void);
 extern void fn_8015495C(void);
 extern void fn_801561E4(void);
@@ -576,7 +576,7 @@ lbl_fn_8025D648_000006B0:
     stw r0, 0x14f0(r31)
     bl fn_8014C540
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0

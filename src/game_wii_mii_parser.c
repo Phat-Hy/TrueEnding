@@ -7,15 +7,15 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void vec3_copy(void);
 extern void fn_8000D3A4(void);
-extern void fn_8001047C(void);
-extern void fn_80011034(void);
+extern void vec3_assign(void);
+extern void vec3_toEulerAngles(void);
 extern void fn_80011220(void);
 extern void fn_800133B0(void);
 extern void fn_80063484(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_800897D8(void);
-extern void fn_8008BBD8(void);
+extern void map_debugLog(void);
 extern void fn_8008CD60(void);
 extern void fn_80091CFC(void);
 extern void atn_Model_findBoneIndex(void);
@@ -39,7 +39,7 @@ extern void fn_80139F4C(void);
 extern void fn_80139F58(void);
 extern void fn_8013A258(void);
 extern void fn_80144710(void);
-extern void fn_80145334(void);
+extern void quest_updateFlow(void);
 extern void quest_checkCondition(void);
 extern void dialog_renderWindow(void);
 extern void fn_8014C540(void);
@@ -789,7 +789,7 @@ lbl_fn_80566560_0000086C:
     stw r4, 0x198(r1)
     stw r0, 0x19c(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_80566560_000008F0
     addic. r0, r1, 0x26c
@@ -938,7 +938,7 @@ lbl_fn_80566560_00000AA0:
     stw r4, 0xf0(r1)
     stw r0, 0xf4(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_80566560_00000B24
     addic. r0, r1, 0x258
@@ -1250,7 +1250,7 @@ lbl_fn_80566CF8_00000EDC:
     extrwi. r0, r0, 1, 6
     bne lbl_fn_80566CF8_00000F04
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     b lbl_fn_80566CF8_00000F48
 lbl_fn_80566CF8_00000F04:
     lwz r4, lbl_8087EFB4
@@ -1822,7 +1822,7 @@ asm void fn_80567600(void)
     mr r31, r3
     addi r3, r1, 0x30
     addi r4, r31, 0x534
-    bl fn_8001047C
+    bl vec3_assign
     lfs f0, lbl_80887F40
     stfs f0, 0x8(r1)
     lfs f30, lbl_80887F60
@@ -1992,7 +1992,7 @@ lbl_fn_80567600_00001944:
     bl fn_80139F58
     mr r4, r3
     addi r3, r1, 0x24
-    bl fn_8001047C
+    bl vec3_assign
     addi r3, r1, 0x24
     bl fn_8000D3A4
     frsp f2, f1
@@ -2005,7 +2005,7 @@ lbl_fn_80567600_00001944:
     bl fn_800F7FD8
     addi r3, r1, 0x18
     addi r4, r1, 0xc
-    bl fn_80011034
+    bl vec3_toEulerAngles
     addi r3, r1, 0x30
     addi r4, r1, 0x18
     bl vec3_copy

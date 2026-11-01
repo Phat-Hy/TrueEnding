@@ -36,7 +36,7 @@ extern void atn_Anim_applyLayerTransform(void);
 extern void fn_800BFAC8(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void str_findChar(void);
@@ -185,7 +185,7 @@ lbl_fn_80361CA4_00000090:
 asm void fn_80361D50(void)
 {
     nofralloc
-    b fn_800D3FA4
+    b bloom_processPasses
 }
 
 asm void fn_80361D54(void)
@@ -680,7 +680,7 @@ asm void fn_803623C8(void)
 asm void fn_8036243C(void)
 {
     nofralloc
-    b fn_800D3FA4
+    b bloom_processPasses
 }
 
 asm void fn_80362440(void)
@@ -1036,7 +1036,7 @@ asm void fn_803627F8(void)
 asm void fn_80362924(void)
 {
     nofralloc
-    b fn_800D3FA4
+    b bloom_processPasses
 }
 
 asm void fn_80362928(void)
@@ -1424,7 +1424,7 @@ asm void fn_80362E14(void)
 asm void fn_80362E84(void)
 {
     nofralloc
-    b fn_800D3FA4
+    b bloom_processPasses
 }
 
 asm void fn_80362E88(void)

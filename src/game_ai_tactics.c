@@ -5,7 +5,7 @@
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void fn_8000D3A4(void);
-extern void fn_8001047C(void);
+extern void vec3_assign(void);
 extern void vec3_sub(void);
 extern void fn_8004D388(void);
 extern void atn_Model_findBoneIndex(void);
@@ -120,7 +120,7 @@ asm void fn_802676BC(void)
     bl fn_8013C38C
     mr r4, r3
     addi r3, r1, 0x20
-    bl fn_8001047C
+    bl vec3_assign
     addi r3, r1, 0x14
     addi r4, r1, 0x20
     addi r5, r31, 0x528

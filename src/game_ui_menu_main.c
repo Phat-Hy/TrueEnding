@@ -8,10 +8,10 @@ extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_8008BBD8(void);
+extern void map_debugLog(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_80145334(void);
+extern void quest_updateFlow(void);
 extern void fn_801539E0(void);
 extern void fn_80154344(void);
 extern void fn_8015495C(void);
@@ -558,7 +558,7 @@ lbl_fn_801B4394_000005F8:
     psq_st f1, 0x534(r3), 0, 0
     stfs f2, 0x53c(r3)
     lwz r3, 0x4(r28)
-    bl fn_80145334
+    bl quest_updateFlow
     lwz r3, lbl_8087F498
     cmpwi r3, 0x0
     beq lbl_fn_801B4394_00000654
@@ -682,7 +682,7 @@ lbl_fn_801B44E8_000006E8:
     stfs f2, 0x530(r4)
     stfs f2, 0x1c(r1)
     lwz r3, 0x4(r30)
-    bl fn_80145334
+    bl quest_updateFlow
     li r3, 0x1
     b lbl_fn_801B44E8_00000858
 lbl_fn_801B44E8_00000804:
@@ -975,7 +975,7 @@ lbl_fn_801B47EC_00000BC0:
     stw r4, 0x19c(r1)
     stb r0, 0x1a0(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_801B47EC_00000D14
     lwz r8, 0x180(r1)
@@ -1826,7 +1826,7 @@ lbl_fn_801B54E8_000017C0:
     stw r4, 0x48(r1)
     stw r0, 0x4c(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_801B54E8_00001894
     lwz r7, 0x3c(r1)

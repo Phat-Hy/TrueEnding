@@ -16,8 +16,8 @@ extern void fn_8000D3A4(void);
 extern void fn_8000D3A8(void);
 extern void fn_8000D430(void);
 extern void fn_8000D9E8(void);
-extern void fn_8001047C(void);
-extern void fn_80011034(void);
+extern void vec3_assign(void);
+extern void vec3_toEulerAngles(void);
 extern void fn_80011410(void);
 extern void fn_80012C88(void);
 extern void vec3_sub(void);
@@ -56,7 +56,7 @@ extern void fn_800F7FF0(void);
 extern void fn_800F80A8(void);
 extern void fn_800F80B8(void);
 extern void fn_80116E64(void);
-extern void fn_80121F00(void);
+extern void equip_getGlobalManager(void);
 extern void fn_8012A190(void);
 extern void fn_80139550(void);
 extern void fn_80139F3C(void);
@@ -1982,7 +1982,7 @@ lbl_fn_8041766C_000018C4:
     addi r3, r1, 0xd0
     fadds f0, f0, f1
     stfs f0, 0x8b0(r29)
-    bl fn_8001047C
+    bl vec3_assign
     mr r4, r28
     mr r5, r27
     addi r3, r1, 0xc4
@@ -2018,10 +2018,10 @@ lbl_fn_8041766C_000018C4:
     bl fn_80139F3C
     addi r3, r1, 0xb8
     addi r4, r1, 0x1f4
-    bl fn_8001047C
+    bl vec3_assign
     addi r3, r1, 0x50
     addi r4, r1, 0x218
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lfs f1, lbl_80886498
     addi r3, r1, 0xac
     lfs f2, 0x54(r1)
@@ -2115,7 +2115,7 @@ lbl_fn_8041766C_00001AD8:
 lbl_fn_8041766C_00001AE4:
     mr r4, r27
     addi r3, r1, 0xa0
-    bl fn_80011034
+    bl vec3_toEulerAngles
     mr r4, r28
     addi r3, r1, 0x178
     bl fn_800F80A8
@@ -2230,7 +2230,7 @@ lbl_fn_8041766C_00001C3C:
     lwz r3, 0x20(r3)
     bl task_findEntryById
     mr r31, r3
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_8013C504
     lwz r4, 0xf4(r24)
     lwz r4, 0x24(r4)
@@ -2417,7 +2417,7 @@ lbl_fn_8041766C_00001EF8:
     bl fn_80097E80
     addi r3, r1, 0x5c
     addi r4, r25, 0x3e0
-    bl fn_80011034
+    bl vec3_toEulerAngles
     addi r3, r1, 0x148
     addi r4, r25, 0x3d4
     bl fn_800F80A8

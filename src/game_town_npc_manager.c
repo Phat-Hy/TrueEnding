@@ -44,7 +44,7 @@ extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECDotProduct(void);
 extern void PSVECCrossProduct(void);
-extern void fn_8068A850(void);
+extern void std_sin(void);
 extern void std_atan2(void);
 
 /* External data declarations */
@@ -1551,7 +1551,7 @@ asm void fn_803CC3BC(void)
     mr r24, r4
     mr r25, r5
     mr r22, r6
-    bl fn_8068A850
+    bl std_sin
     frsp f31, f1
     lfs f30, 0x620(r22)
     lfs f28, lbl_80885CBC

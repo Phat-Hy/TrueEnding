@@ -4,8 +4,8 @@
 /* External function declarations */
 extern void vec3_copy(void);
 extern void fn_8000D3A4(void);
-extern void fn_8001047C(void);
-extern void fn_80011034(void);
+extern void vec3_assign(void);
+extern void vec3_toEulerAngles(void);
 extern void fn_80012C88(void);
 extern void vec3_sub(void);
 extern void fn_80013410(void);
@@ -1009,7 +1009,7 @@ lbl_fn_8031958C_00000BE8:
     bl fn_800F7FF0
     addi r3, r1, 0xd8
     addi r4, r31, 0x155c
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lfs f1, 0x5b0(r31)
     addi r3, r1, 0x60
     addi r4, r31, 0x155c
@@ -1069,7 +1069,7 @@ lbl_fn_8031958C_00000D8C:
     bl fn_80140500
     addi r3, r1, 0xcc
     addi r4, r31, 0x528
-    bl fn_8001047C
+    bl vec3_assign
     lfs f1, lbl_80884DD4
     addi r3, r1, 0x54
     addi r4, r31, 0x155c
@@ -1121,7 +1121,7 @@ lbl_fn_8031958C_00000E08:
     bl fn_800F7FF0
     addi r3, r1, 0xb4
     addi r4, r31, 0x155c
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lfs f1, 0x5b0(r31)
     addi r3, r1, 0x18
     addi r4, r31, 0x155c

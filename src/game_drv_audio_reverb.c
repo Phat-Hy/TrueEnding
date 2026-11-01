@@ -13,8 +13,8 @@ extern void fn_8000D3A4(void);
 extern void fn_8000D3A8(void);
 extern void fn_8000D430(void);
 extern void fn_8000DD0C(void);
-extern void fn_8001047C(void);
-extern void fn_80011034(void);
+extern void vec3_assign(void);
+extern void vec3_toEulerAngles(void);
 extern void fn_80011410(void);
 extern void vec3_sub(void);
 extern void fn_80013410(void);
@@ -60,7 +60,7 @@ extern void fn_801156C4(void);
 extern void fn_80116BA4(void);
 extern void fn_80116BAC(void);
 extern void fn_80116BD4(void);
-extern void fn_80121F00(void);
+extern void equip_getGlobalManager(void);
 extern void fn_80122280(void);
 extern void magic_isField28Zero(void);
 extern void magic_dispatchActionCommand(void);
@@ -421,10 +421,10 @@ lbl_fn_805BAC18_00000398:
 lbl_fn_805BAC18_0000039C:
     addi r3, r1, 0x108
     addi r4, r31, 0x18
-    bl fn_8001047C
+    bl vec3_assign
     addi r3, r1, 0xfc
     addi r4, r31, 0x24
-    bl fn_8001047C
+    bl vec3_assign
     lfs f0, lbl_80888470
     addi r3, r1, 0xf0
     lfs f1, lbl_80888458
@@ -484,13 +484,13 @@ lbl_fn_805BAC18_00000420:
     bl vec3_sub
     addi r3, r1, 0x5c
     addi r4, r1, 0xb4
-    bl fn_80011034
+    bl vec3_toEulerAngles
     addi r3, r1, 0x98
     addi r4, r1, 0x5c
     bl fn_801498F0
     addi r3, r1, 0x50
     addi r4, r1, 0xa8
-    bl fn_80011034
+    bl vec3_toEulerAngles
     addi r3, r1, 0x88
     addi r4, r1, 0x50
     bl fn_801498F0
@@ -877,7 +877,7 @@ lbl_fn_805BAC18_00000A30:
     lis r4, lbl_807C7030@ha
     addi r3, r1, 0x20
     addi r4, r4, lbl_807C7030@l
-    bl fn_8001047C
+    bl vec3_assign
     mr r28, r3
     bl fn_805BB590
     mr r5, r28
@@ -889,7 +889,7 @@ lbl_fn_805BAC18_00000A80:
     lis r4, lbl_807C7030@ha
     addi r3, r1, 0x14
     addi r4, r4, lbl_807C7030@l
-    bl fn_8001047C
+    bl vec3_assign
     mr r28, r3
     bl fn_805BB590
     mr r5, r28
@@ -912,7 +912,7 @@ lbl_fn_805BAC18_00000AA8:
     bctrl
     b lbl_fn_805BAC18_00000AEC
 lbl_fn_805BAC18_00000AE0:
-    bl fn_80121F00
+    bl equip_getGlobalManager
     li r4, 0x12
     bl fn_805BB598
 lbl_fn_805BAC18_00000AEC:
@@ -943,7 +943,7 @@ lbl_fn_805BAC18_00000B14:
     bctrl
     b lbl_fn_805BAC18_00000B6C
 lbl_fn_805BAC18_00000B4C:
-    bl fn_80121F00
+    bl equip_getGlobalManager
     lis r5, 0x100
     li r4, -0x1
     subi r5, r5, 0x1
