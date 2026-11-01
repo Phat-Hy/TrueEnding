@@ -33,7 +33,7 @@ extern void fn_80133EE8(void);
 extern void fn_80133F18(void);
 extern void fn_80133F6C(void);
 extern void fn_80134168(void);
-extern void fn_80148B0C(void);
+extern void quest_getRewardItemSlot(void);
 extern void fn_801533C8(void);
 extern void battle_canTargetActor(void);
 extern void fn_801789D8(void);
@@ -209,7 +209,7 @@ lbl_fn_800FD658_00000064:
 lbl_fn_800FD658_00000180:
     mr r3, r29
     li r4, 0x0
-    bl fn_80148B0C
+    bl quest_getRewardItemSlot
     psq_l f1, 0x4(r3), 0, 0
     lfs f2, 0xc(r3)
     psq_st f1, 0x0(r27), 0, 0
@@ -362,7 +362,7 @@ lbl_fn_800FD658_00000350:
 lbl_fn_800FD658_000003CC:
     mr r3, r29
     li r4, 0x0
-    bl fn_80148B0C
+    bl quest_getRewardItemSlot
     psq_l f1, 0x4(r3), 0, 0
     lfs f2, 0xc(r3)
     psq_st f1, 0x0(r27), 0, 0
@@ -1518,12 +1518,12 @@ lbl_fn_800FDF14_000013A4:
     beq lbl_fn_800FDF14_000014E0
     lwz r4, 0x40(r26)
     mr r3, r29
-    bl fn_80148B0C
+    bl quest_getRewardItemSlot
     cmpwi r3, 0x0
     beq lbl_fn_800FDF14_00001474
     lwz r4, 0x40(r26)
     mr r3, r29
-    bl fn_80148B0C
+    bl quest_getRewardItemSlot
     psq_l f1, 0x4(r3), 0, 0
     addi r4, r1, 0xa0
     lfs f2, 0xc(r3)
@@ -1727,12 +1727,12 @@ lbl_fn_800FDF14_00001720:
     bl fn_8012DF7C
     lwz r4, 0x40(r26)
     mr r3, r28
-    bl fn_80148B0C
+    bl quest_getRewardItemSlot
     cmpwi r3, 0x0
     beq lbl_fn_800FDF14_0000179C
     lwz r4, 0x40(r26)
     mr r3, r28
-    bl fn_80148B0C
+    bl quest_getRewardItemSlot
     psq_l f1, 0x4(r3), 0, 0
     addi r4, r1, 0x80
     lfs f2, 0xc(r3)
@@ -1991,12 +1991,12 @@ lbl_fn_800FDF14_00001B14:
     beq lbl_fn_800FDF14_00001BCC
     lwz r4, 0x40(r26)
     mr r3, r21
-    bl fn_80148B0C
+    bl quest_getRewardItemSlot
     cmpwi r3, 0x0
     beq lbl_fn_800FDF14_00001B6C
     lwz r4, 0x40(r26)
     mr r3, r21
-    bl fn_80148B0C
+    bl quest_getRewardItemSlot
     psq_l f1, 0x4(r3), 0, 0
     lfs f2, 0xc(r3)
     stfs f2, 0x7c(r1)
@@ -2068,12 +2068,12 @@ lbl_fn_800FDF14_00001C34:
     beq lbl_fn_800FDF14_00001CF0
     lwz r4, 0x40(r26)
     mr r3, r28
-    bl fn_80148B0C
+    bl quest_getRewardItemSlot
     cmpwi r3, 0x0
     beq lbl_fn_800FDF14_00001C84
     lwz r4, 0x40(r26)
     mr r3, r28
-    bl fn_80148B0C
+    bl quest_getRewardItemSlot
     psq_l f1, 0x4(r3), 0, 0
     addi r4, r1, 0x68
     lfs f2, 0xc(r3)

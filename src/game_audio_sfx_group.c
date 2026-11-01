@@ -18,7 +18,7 @@ extern void system_getNextSequenceId(void);
 extern void fn_800FD658(void);
 extern void fn_80107168(void);
 extern void hurtbox_processHitDamage(void);
-extern void fn_8012DB04(void);
+extern void enemy_evalAnimTrack(void);
 extern void fn_8012DD70(void);
 extern void npc_updateTalkInteraction(void);
 extern void fn_80140588(void);
@@ -676,12 +676,12 @@ asm void fn_803123D0(void)
     addi r3, r3, 0x7d4
     stfs f2, 0x98(r1)
     psq_st f1, 0x0(r4), 0, 0
-    bl fn_8012DB04
+    bl enemy_evalAnimTrack
     lfs f0, lbl_80884CC4
     fcmpo cr0, f1, f0
     ble lbl_fn_803123D0_00000894
     addi r3, r29, 0x7d4
-    bl fn_8012DB04
+    bl enemy_evalAnimTrack
     b lbl_fn_803123D0_00000898
 lbl_fn_803123D0_00000894:
     fmr f1, f0
@@ -1086,7 +1086,7 @@ lbl_fn_803123D0_00000E30:
     stw r0, 0x55b8(r3)
 lbl_fn_803123D0_00000E6C:
     addi r3, r29, 0x7d4
-    bl fn_8012DB04
+    bl enemy_evalAnimTrack
     lwz r4, 0x14f8(r29)
     lis r0, 0x4330
     stw r0, 0x110(r1)

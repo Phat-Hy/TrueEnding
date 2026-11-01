@@ -12,7 +12,7 @@ extern void boss_decodePhaseBitfield(void);
 extern void script_executeOpcode(void);
 extern void dungeon_initGlobalContext(void);
 extern void town_synchronizedDispatch(void);
-extern void fn_80083AD4(void);
+extern void town_updateInteractionPoints(void);
 extern void mem_alloc(void);
 extern void msg_formatTextWithAlignment(void* res, void* font, u32 mode);
 extern void atn_Task_constructor(void);
@@ -959,7 +959,7 @@ lbl_fn_800A2DE0_00000C84:
     beq lbl_fn_800A2DE0_000018B0
     bl dungeon_initGlobalContext
     lwz r4, 0x14c(r31)
-    bl fn_80083AD4
+    bl town_updateInteractionPoints
     lwz r5, 0x15c(r31)
     li r0, 0x12
     lwz r3, 0x48(r31)
@@ -1359,7 +1359,7 @@ lbl_fn_800A2DE0_00001298:
 lbl_fn_800A2DE0_00001318:
     bl dungeon_initGlobalContext
     lwz r4, 0x14c(r31)
-    bl fn_80083AD4
+    bl town_updateInteractionPoints
     li r0, 0x12
     stw r0, 0x15c(r31)
     mr r4, r31
@@ -1455,7 +1455,7 @@ lbl_fn_800A2DE0_00001468:
     bne lbl_fn_800A2DE0_00001498
     bl dungeon_initGlobalContext
     lwz r4, 0x14c(r31)
-    bl fn_80083AD4
+    bl town_updateInteractionPoints
 lbl_fn_800A2DE0_00001498:
     li r0, 0x14
     stw r0, 0x15c(r31)

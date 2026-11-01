@@ -15,7 +15,7 @@ extern void msg_getMessageById(void);
 extern void hurtbox_testCollisionLayer(void);
 extern void fn_8012476C(void);
 extern void fn_8012DF7C(void);
-extern void fn_80148B0C(void);
+extern void quest_getRewardItemSlot(void);
 extern void inventory_unequipItem(void);
 extern void inventory_calcTotalStats(void);
 extern void debuff_clearStatus(void);
@@ -363,7 +363,7 @@ lbl_fn_8019DBA4_0000036C:
     bl ui_drawColoredQuad
     lwz r3, 0x4(r31)
     li r4, 0x0
-    bl fn_80148B0C
+    bl quest_getRewardItemSlot
     lfs f2, 0xc(r3)
     addi r28, r1, 0x5c
     psq_l f1, 0x4(r3), 0, 0
@@ -398,7 +398,7 @@ lbl_fn_8019DBA4_0000036C:
     bl fn_8012DF7C
     lwz r3, 0x1c(r31)
     li r4, 0x0
-    bl fn_80148B0C
+    bl quest_getRewardItemSlot
     lfs f2, 0xc(r3)
     lis r5, lbl_8077EFA8@ha
     psq_l f1, 0x4(r3), 0, 0

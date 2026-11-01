@@ -22,7 +22,7 @@ extern void fn_801162A0(void);
 extern void fn_8012DF7C(void);
 extern void npc_getPosition(void);
 extern void quest_evaluateConditions(void);
-extern void fn_80148B0C(void);
+extern void quest_getRewardItemSlot(void);
 extern void dialog_renderWindow(void);
 extern void dialog_updateScriptState(void);
 extern void actor_setState(void);
@@ -1115,7 +1115,7 @@ lbl_fn_804549F8_00000CD0:
     stw r0, 0x970(r7)
     stfs f0, 0x974(r7)
     stfs f0, 0x978(r7)
-    bl fn_80148B0C
+    bl quest_getRewardItemSlot
     lfs f2, 0xc(r3)
     lis r5, lbl_8078F77C@ha
     addi r6, r1, 0x7c
@@ -2266,7 +2266,7 @@ lbl_fn_80455638_00001DFC:
     stfd f0, 0xe8(r1)
     lwz r0, 0xec(r1)
     stw r0, 0xac(r1)
-    bl fn_80148B0C
+    bl quest_getRewardItemSlot
     lfs f2, 0xc(r3)
     li r5, 0x0
     psq_l f1, 0x4(r3), 0, 0

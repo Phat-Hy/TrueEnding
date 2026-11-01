@@ -15,7 +15,7 @@ extern void talk_setSpeakerName(void);
 extern void mem_free(void);
 extern void node_destroy(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_80092954(void);
+extern void compass_findMarkerByName(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void str_parseInt(void);
@@ -1571,7 +1571,7 @@ lbl_fn_80273FE8_00001418:
     stfs f7, 0x194c(r3)
     addi r3, r3, 0xb0
     stw r0, 0x14(r1)
-    bl fn_80092954
+    bl compass_findMarkerByName
     lbz r0, 0x14(r1)
     addi r4, r30, 0x1df
     stb r0, 0x18(r3)
@@ -1609,7 +1609,7 @@ lbl_fn_80273FE8_00001418:
     stb r0, 0xb(r1)
     lwz r0, 0x8(r1)
     stw r0, 0x10(r1)
-    bl fn_80092954
+    bl compass_findMarkerByName
     lbz r0, 0x10(r1)
     stb r0, 0x18(r3)
     lbz r0, 0x11(r1)

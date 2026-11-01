@@ -19,7 +19,7 @@ extern void fn_8010F4BC(void);
 extern void fn_80119ECC(void);
 extern void fn_8012B0B0(void);
 extern void fn_8012B3A8(void);
-extern void fn_80148B0C(void);
+extern void quest_getRewardItemSlot(void);
 extern void fn_8015D8C0(void);
 extern void battle_generateLootDrops(void);
 extern void fn_8018D4AC(void);
@@ -273,12 +273,12 @@ lbl_fn_80441F24_000001FC:
     beq lbl_fn_80441F24_00000BCC
     mr r3, r20
     li r4, 0x0
-    bl fn_80148B0C
+    bl quest_getRewardItemSlot
     cmpwi r3, 0x0
     beq lbl_fn_80441F24_0000028C
     mr r3, r20
     li r4, 0x0
-    bl fn_80148B0C
+    bl quest_getRewardItemSlot
     psq_l f1, 0x4(r3), 0, 0
     addi r4, r1, 0xf4
     lfs f2, 0xc(r3)

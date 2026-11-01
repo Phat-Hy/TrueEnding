@@ -9,7 +9,7 @@ extern void _savegpr_14(void);
 extern void dtor_80084684(void);
 extern void ui_destroyWidget(void);
 extern void dungeon_initGlobalContext(void);
-extern void fn_80083AD4(void);
+extern void town_updateInteractionPoints(void);
 extern void atn_Task_setActive(void);
 extern void fn_800E2FE0(void);
 extern void fn_800EE5AC(void);
@@ -162,7 +162,7 @@ lbl_fn_804FC2F4_00000130:
     beq lbl_fn_804FC2F4_0000014C
     bl dungeon_initGlobalContext
     mr r4, r27
-    bl fn_80083AD4
+    bl town_updateInteractionPoints
     stw r29, 0x28(r26)
 lbl_fn_804FC2F4_0000014C:
     lwz r27, 0x2c(r26)
@@ -170,7 +170,7 @@ lbl_fn_804FC2F4_0000014C:
     beq lbl_fn_804FC2F4_00000168
     bl dungeon_initGlobalContext
     mr r4, r27
-    bl fn_80083AD4
+    bl town_updateInteractionPoints
     stw r29, 0x2c(r26)
 lbl_fn_804FC2F4_00000168:
     lwz r26, 0x4(r26)
@@ -197,7 +197,7 @@ lbl_fn_804FC2F4_000001A4:
     beq lbl_fn_804FC2F4_000001C8
     bl dungeon_initGlobalContext
     mr r4, r26
-    bl fn_80083AD4
+    bl town_updateInteractionPoints
     stw r29, 0x8(r27)
 lbl_fn_804FC2F4_000001C8:
     lwz r26, 0xc(r27)
@@ -205,7 +205,7 @@ lbl_fn_804FC2F4_000001C8:
     beq lbl_fn_804FC2F4_000001E4
     bl dungeon_initGlobalContext
     mr r4, r26
-    bl fn_80083AD4
+    bl town_updateInteractionPoints
     stw r29, 0xc(r27)
 lbl_fn_804FC2F4_000001E4:
     mr r3, r25
@@ -243,7 +243,7 @@ lbl_fn_804FC2F4_00000248:
     beq lbl_fn_804FC2F4_0000026C
     bl dungeon_initGlobalContext
     mr r4, r26
-    bl fn_80083AD4
+    bl town_updateInteractionPoints
     stw r29, 0x8(r27)
 lbl_fn_804FC2F4_0000026C:
     lwz r26, 0xc(r27)
@@ -251,7 +251,7 @@ lbl_fn_804FC2F4_0000026C:
     beq lbl_fn_804FC2F4_00000288
     bl dungeon_initGlobalContext
     mr r4, r26
-    bl fn_80083AD4
+    bl town_updateInteractionPoints
     stw r29, 0xc(r27)
 lbl_fn_804FC2F4_00000288:
     mr r3, r24

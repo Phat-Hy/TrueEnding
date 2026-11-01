@@ -18,7 +18,7 @@ extern void fn_8012B3E8(void);
 extern void fn_8012B988(void);
 extern void enemy_updateAnimTimer(void);
 extern void fn_802085E0(void);
-extern void fn_8020924C(void);
+extern void mem_findBlockById(void);
 extern void fn_8020A81C(void);
 extern void fn_8020FCE8(void);
 extern void fn_80214394(void);
@@ -266,7 +266,7 @@ lbl_world_Manager_update_000001F0:
 lbl_world_Manager_update_000001F4:
     mr r3, r28
     bl fn_80219544
-    bl fn_8020924C
+    bl mem_findBlockById
     cmpwi r3, 0x0
     beq lbl_world_Manager_update_00000218
     lwz r3, 0x14(r3)
@@ -1083,7 +1083,7 @@ asm void fn_80367A40(void)
 lbl_fn_80367A40_00000D7C:
     mr r3, r27
     bl fn_80219544
-    bl fn_8020924C
+    bl mem_findBlockById
     lwz r3, 0x14(r3)
     bl fn_8020A81C
     lwz r3, 0x10d4(r25)
@@ -1112,7 +1112,7 @@ lbl_fn_80367A40_00000D7C:
 lbl_fn_80367A40_00000DEC:
     mr r3, r28
     bl fn_80219544
-    bl fn_8020924C
+    bl mem_findBlockById
     lwz r3, 0x14(r3)
     bl fn_8020A81C
     lwz r0, 0x28(r24)
@@ -1186,7 +1186,7 @@ lbl_fn_80367A40_00000ED4:
 lbl_fn_80367A40_00000EF8:
     mr r3, r28
     bl fn_80219544
-    bl fn_8020924C
+    bl mem_findBlockById
     lwz r3, 0x14(r3)
     bl fn_8020A81C
     lwz r4, lbl_8087F4F0

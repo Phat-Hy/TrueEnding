@@ -21,7 +21,7 @@ extern void fn_800EFE3C(void);
 extern void fn_800FBE70(void);
 extern void fn_800FCD24(void);
 extern void fn_800FD658(void);
-extern void fn_80148B0C(void);
+extern void quest_getRewardItemSlot(void);
 extern void fn_801533C8(void);
 extern void fn_80154E38(void);
 extern void battle_canTargetActor(void);
@@ -1716,7 +1716,7 @@ lbl_fn_800FBA9C_000016E0:
 lbl_fn_800FBA9C_00001710:
     mr r3, r30
     mr r4, r26
-    bl fn_80148B0C
+    bl quest_getRewardItemSlot
     cmpwi r3, 0x0
     mr r28, r3
     beq lbl_fn_800FBA9C_00001908

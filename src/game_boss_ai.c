@@ -9,7 +9,7 @@ extern void _savegpr_22(void);
 extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
-extern void fn_80056DB8(void);
+extern void path_Object_constructor(void);
 extern void boss_recordDamage(void);
 extern void fn_8006AD24(void);
 extern void fn_8007A75C(void);
@@ -32,7 +32,7 @@ extern void fn_8013459C(void);
 extern void fn_80204E04(void);
 extern void fn_80206B14(void);
 extern void fn_8020787C(void);
-extern void fn_8020924C(void);
+extern void mem_findBlockById(void);
 extern void fn_802092C0(void);
 extern void fn_8020A81C(void);
 extern void fn_8020A888(void);
@@ -1263,7 +1263,7 @@ lbl_fn_801354B4_00000F14:
     stb r26, 0x59e(r29)
     stb r26, 0x59f(r29)
     stfs f3, 0x5a0(r29)
-    bl fn_80056DB8
+    bl path_Object_constructor
     lfs f0, lbl_8088196C
     lis r3, lbl_80777630@ha
     addi r3, r3, lbl_80777630@l
@@ -1514,7 +1514,7 @@ lbl_fn_801354B4_000013AC:
     cmpwi r31, -0x1
     beq lbl_fn_801354B4_000014A0
     lwz r3, 0x50(r29)
-    bl fn_8020924C
+    bl mem_findBlockById
     cmpwi r3, 0x0
     stw r3, 0x60(r29)
     bne lbl_fn_801354B4_00001454
@@ -1550,7 +1550,7 @@ lbl_fn_801354B4_000013AC:
     bl boss_recordDamage
 lbl_fn_801354B4_00001448:
     li r3, 0x0
-    bl fn_8020924C
+    bl mem_findBlockById
     stw r3, 0x60(r29)
 lbl_fn_801354B4_00001454:
     lwz r4, 0x60(r29)

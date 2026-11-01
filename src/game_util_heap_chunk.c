@@ -41,7 +41,7 @@ extern void fn_80206B14(void);
 extern void game_initGlobalDatabases(void);
 extern void assert_formatLocation(void);
 extern void fn_80206D18(void);
-extern void fn_8020924C(void);
+extern void mem_findBlockById(void);
 extern void time_wrapMilliseconds(void);
 extern void fn_8020EF04(void);
 extern void fn_8020EF4C(void);
@@ -919,7 +919,7 @@ asm void fn_805866F8(void)
     stfs f0, 0x7c(r1)
     stfs f0, 0x80(r1)
     bl fn_80219544
-    bl fn_8020924C
+    bl mem_findBlockById
     addis r5, r20, 0x2
     slwi r0, r22, 2
     add r4, r5, r0

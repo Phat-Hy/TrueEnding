@@ -36,7 +36,7 @@ extern void save_findEntryByName(void);
 extern void fn_801F8598(void);
 extern void thread_dispatchToQueue(void);
 extern void fn_801FEF40(void);
-extern void fn_8020924C(void);
+extern void mem_findBlockById(void);
 extern void fn_80216544(void);
 extern void fn_8021771C(void);
 extern void fn_80217D9C(void);
@@ -1936,7 +1936,7 @@ lbl_fn_80572454_000018A0:
     add r31, r27, r26
     lwz r3, 0x70(r31)
     bl fn_80219544
-    bl fn_8020924C
+    bl mem_findBlockById
     lwz r5, 0x4c(r29)
     mr r6, r3
     addi r4, r30, 0xde

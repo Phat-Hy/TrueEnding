@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void _restgpr_14(void);
 extern void _savegpr_14(void);
-extern void fn_80056DB8(void);
+extern void path_Object_constructor(void);
 extern void atn_Task_setActive(void);
 extern void enemy_updateAnimTimer(void);
 extern void quest_updateFlow(void);
@@ -64,7 +64,7 @@ asm void fn_803957B0(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_80056DB8
+    bl path_Object_constructor
     lis r4, lbl_807775F8@ha
     mr r3, r31
     addi r4, r4, lbl_807775F8@l

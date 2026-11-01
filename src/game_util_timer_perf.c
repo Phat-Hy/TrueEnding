@@ -25,7 +25,7 @@ extern void depth_resetRenderTarget(void);
 extern void fn_8017CB9C(void);
 extern void fn_801805A4(void);
 extern void fn_801CC0AC(void);
-extern void fn_8020924C(void);
+extern void mem_findBlockById(void);
 extern void fn_80244228(void);
 extern void fn_802476D0(void);
 extern void fn_80248E88(void);
@@ -856,7 +856,7 @@ asm void fn_805A5378(void)
     mr r28, r3
     lwz r31, 0x20(r4)
     mr r3, r31
-    bl fn_8020924C
+    bl mem_findBlockById
     cmpwi r3, 0x0
     beq lbl_fn_805A5378_00001800
     lwz r30, 0x24(r3)

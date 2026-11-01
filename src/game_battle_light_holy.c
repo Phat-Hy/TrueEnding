@@ -5,7 +5,7 @@
 extern void _restgpr_18(void);
 extern void _savegpr_18(void);
 extern void dtor_80084684(void);
-extern void fn_80056DB8(void);
+extern void path_Object_constructor(void);
 extern void atn_ColliBase_destructor(void);
 extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
@@ -631,7 +631,7 @@ asm void fn_80420ADC(void)
     stw r31, 0x4e8(r30)
     stw r31, 0x4ec(r30)
     stfs f0, 0x4f0(r30)
-    bl fn_80056DB8
+    bl path_Object_constructor
     lis r4, lbl_80777668@ha
     lis r3, 0x8
     addi r4, r4, lbl_80777668@l

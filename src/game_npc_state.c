@@ -6,7 +6,7 @@ extern void menu_renderLayout(void);
 extern void collision_testLineSegment(void);
 extern void fn_8010CA3C(void);
 extern void fn_801279E8(void);
-extern void fn_8012DB04(void);
+extern void enemy_evalAnimTrack(void);
 extern void npc_updateTalkInteraction(void);
 extern void fn_80140588(void);
 extern void fn_80141674(void);
@@ -405,7 +405,7 @@ lbl_fn_8013C564_00000308:
     fmuls f31, f31, f0
 lbl_fn_8013C564_00000320:
     addi r3, r29, 0x7d4
-    bl fn_8012DB04
+    bl enemy_evalAnimTrack
     lwz r0, 0x55c(r29)
     fmuls f31, f31, f1
     cmpwi r0, 0x7

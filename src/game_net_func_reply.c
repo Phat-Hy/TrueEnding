@@ -7,7 +7,7 @@ extern void OSResumeThread(void);
 extern void OSWakeupThread(void);
 extern void dtor_80084684(void);
 extern void dungeon_initGlobalContext(void);
-extern void fn_80083AD4(void);
+extern void town_updateInteractionPoints(void);
 extern void fn_804DBC84(void);
 extern void fn_8050AA90(void);
 extern void fn_8050AAD4(void);
@@ -140,7 +140,7 @@ asm void fn_80508CF0(void)
     beq lbl_fn_80508CF0_00000090
     bl dungeon_initGlobalContext
     mr r4, r31
-    bl fn_80083AD4
+    bl town_updateInteractionPoints
     addis r3, r29, 0x1
     li r0, 0x0
     stw r0, -0x4130(r3)

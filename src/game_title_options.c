@@ -5,8 +5,8 @@
 extern void __register_global_object(void);
 extern void dtor_80084684(void);
 extern void talk_parseDialogue(void);
-extern void fn_8005B8F8(void);
-extern void fn_8005B9AC(void);
+extern void talk_parseDialogueTokens(void);
+extern void talk_copyUtf16String(void);
 extern void skill_calculateDamage(void);
 extern void fn_8006BA8C(void);
 extern void fn_8006BB6C(void);
@@ -1304,13 +1304,13 @@ lbl_fn_803B35FC_00000F10:
     stw r3, 0x18(r1)
     mr r3, r27
     addi r4, r4, lbl_8077A0A8@l
-    bl fn_8005B9AC
+    bl talk_copyUtf16String
     li r27, 0x0
     li r30, 0x0
     li r31, 0x0
 lbl_fn_803B35FC_00000F48:
     addi r3, r1, 0x18
-    bl fn_8005B8F8
+    bl talk_parseDialogueTokens
     addi r31, r31, 0x1
     cmplwi r31, 0x4
     blt lbl_fn_803B35FC_00000F48
@@ -1334,7 +1334,7 @@ lbl_fn_803B35FC_00000F5C:
     addi r30, r3, 0x1
 lbl_fn_803B35FC_00000FA0:
     addi r3, r1, 0x18
-    bl fn_8005B8F8
+    bl talk_parseDialogueTokens
     cmpwi r3, 0x0
     bne lbl_fn_803B35FC_00000F5C
     lwz r3, 0x4(r28)
@@ -1403,7 +1403,7 @@ lbl_fn_803B35FC_0000107C:
     stw r31, 0x24(r1)
 lbl_fn_803B35FC_00001090:
     addi r3, r1, 0x18
-    bl fn_8005B8F8
+    bl talk_parseDialogueTokens
     addi r26, r26, 0x1
     cmplwi r26, 0x4
     blt lbl_fn_803B35FC_00001090
@@ -1569,7 +1569,7 @@ lbl_fn_803B35FC_000012C8:
     addi r29, r3, 0x1
 lbl_fn_803B35FC_000012FC:
     addi r3, r1, 0x18
-    bl fn_8005B8F8
+    bl talk_parseDialogueTokens
     cmpwi r3, 0x0
     bne lbl_fn_803B35FC_000010A8
 lbl_fn_803B35FC_0000130C:

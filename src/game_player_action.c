@@ -6,8 +6,8 @@ extern void fn_80018240(void);
 extern void fn_80018BAC(void);
 extern void item_testLineOfSight(void);
 extern void talk_parseDialogue(void);
-extern void fn_8005B8F8(void);
-extern void fn_8005B9AC(void);
+extern void talk_parseDialogueTokens(void);
+extern void talk_copyUtf16String(void);
 extern void str_assignBuffer(void);
 extern void mem_realloc(void);
 extern void msg_getMessageString(void);
@@ -398,7 +398,7 @@ lbl_fn_8011B8D4_000003EC:
     stw r3, 0x10(r1)
     mr r3, r27
     addi r4, r4, lbl_8077A0A8@l
-    bl fn_8005B9AC
+    bl talk_copyUtf16String
     lis r28, lbl_8077A0B0@ha
     li r26, 0x0
     addi r28, r28, lbl_8077A0B0@l
@@ -424,7 +424,7 @@ lbl_fn_8011B8D4_00000428:
     addi r26, r26, 0x1
 lbl_fn_8011B8D4_00000470:
     addi r3, r1, 0x10
-    bl fn_8005B8F8
+    bl talk_parseDialogueTokens
     cmpwi r3, 0x0
     bne lbl_fn_8011B8D4_00000428
     lwz r3, 0x4c4(r31)
@@ -527,7 +527,7 @@ lbl_fn_8011B8D4_000005B4:
     addi r30, r30, 0x18
 lbl_fn_8011B8D4_000005E8:
     addi r3, r1, 0x10
-    bl fn_8005B8F8
+    bl talk_parseDialogueTokens
     cmpwi r3, 0x0
     bne lbl_fn_8011B8D4_00000524
     lmw r25, 0xc74(r1)

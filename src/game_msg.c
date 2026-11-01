@@ -5,7 +5,7 @@
 extern void dtor_80084684(void);
 extern void dungeon_initGlobalContext(void);
 extern void fn_800839EC(void);
-extern void fn_80083AD4(void);
+extern void town_updateInteractionPoints(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
@@ -408,7 +408,7 @@ lbl_fn_800A5218_000003F4:
     bl fn_8061E850
     bl dungeon_initGlobalContext
     mr r4, r30
-    bl fn_80083AD4
+    bl town_updateInteractionPoints
     addi r3, r1, 0x148
     bl fn_8061FB70
     li r3, 0x1

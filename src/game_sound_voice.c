@@ -39,7 +39,7 @@ extern void profile_getMetricValue(void);
 extern void perf_getMetricValue(void);
 extern void assert_generateId(void);
 extern void fn_802091E8(void);
-extern void fn_8020924C(void);
+extern void mem_findBlockById(void);
 extern void fn_8020BCEC(void);
 extern void fn_8020BD14(void);
 extern void time_wrapMilliseconds(void);
@@ -1504,7 +1504,7 @@ lbl_fn_801D8560_000013A0:
     li r4, -0x1
     bl ref_releaseHandle
     lwz r3, 0xc(r29)
-    bl fn_8020924C
+    bl mem_findBlockById
     lwz r4, lbl_8087F1E4
     mr r26, r3
     lwz r27, 0x894(r4)

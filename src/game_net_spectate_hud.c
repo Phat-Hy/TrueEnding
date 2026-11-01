@@ -13,7 +13,7 @@ extern void fn_80010374(void);
 extern void fn_80011964(void);
 extern void fn_80012A1C(void);
 extern void mem_free(void);
-extern void fn_800928B0(void);
+extern void compass_findWaypointIndex(void);
 extern void fn_80539CF0(void);
 extern void fn_8053A16C(void);
 extern void fn_80541BDC(void);
@@ -481,7 +481,7 @@ lbl_fn_805384D0_00000514:
     beq lbl_fn_805384D0_0000077C
     mr r3, r27
     li r5, 0x0
-    bl fn_800928B0
+    bl compass_findWaypointIndex
     cmpwi r3, 0x0
     bge lbl_fn_805384D0_00000544
     li r30, 0x0
@@ -766,7 +766,7 @@ lbl_fn_805389BC_00000928:
 lbl_fn_805389BC_0000092C:
     lwz r4, 0x4(r4)
     li r5, 0x0
-    bl fn_800928B0
+    bl compass_findWaypointIndex
     cmpwi r3, 0x0
     bge lbl_fn_805389BC_00000948
     li r29, 0x0

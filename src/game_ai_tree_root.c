@@ -12,7 +12,7 @@ extern void ui_drawColoredQuad(void);
 extern void fn_80057F28(void);
 extern void fn_80058078(void);
 extern void fn_800580BC(void);
-extern void fn_800588FC(void);
+extern void mission_updateObjectiveTarget(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
@@ -897,7 +897,7 @@ lbl_fn_80256384_00000A4C:
     psq_st f5, 0x68(r3), 0, 0
     psq_l f6, 0x28(r26), 0, 0
     psq_st f6, 0x70(r3), 0, 0
-    bl fn_800588FC
+    bl mission_updateObjectiveTarget
 lbl_fn_80256384_00000AFC:
     addi r29, r29, 0x1
     addi r18, r18, 0xc
@@ -1499,7 +1499,7 @@ lbl_fn_80256C04_0000137C:
     psq_st f4, 0x60(r3), 0, 0
     psq_st f5, 0x68(r3), 0, 0
     psq_st f6, 0x70(r3), 0, 0
-    bl fn_800588FC
+    bl mission_updateObjectiveTarget
     lwz r6, 0x38(r15)
     li r4, 0x0
     li r3, 0x0

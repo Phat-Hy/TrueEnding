@@ -9,7 +9,7 @@ extern void _savegpr_20(void);
 extern void _savegpr_25(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_800588FC(void);
+extern void mission_updateObjectiveTarget(void);
 extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
@@ -1762,7 +1762,7 @@ lbl_fn_80419354_00001578:
     psq_st f4, 0x60(r3), 0, 0
     psq_st f5, 0x68(r3), 0, 0
     psq_st f6, 0x70(r3), 0, 0
-    bl fn_800588FC
+    bl mission_updateObjectiveTarget
 lbl_fn_80419354_000015D8:
     lwz r0, 0x4c4(r31)
     cmpwi r0, 0x0
@@ -2131,7 +2131,7 @@ lbl_fn_8041953C_00001AD8:
     psq_st f4, 0x60(r3), 0, 0
     psq_st f5, 0x68(r3), 0, 0
     psq_st f6, 0x70(r3), 0, 0
-    bl fn_800588FC
+    bl mission_updateObjectiveTarget
 lbl_fn_8041953C_00001B38:
     lwz r4, 0x7f8(r31)
     mr r3, r31

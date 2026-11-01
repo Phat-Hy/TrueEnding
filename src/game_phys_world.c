@@ -19,7 +19,7 @@ extern void sound_initChannelParams(void);
 extern void collision_testLineSegment(void);
 extern void fn_80076FF8(void);
 extern void mem_free(void);
-extern void fn_800928B0(void);
+extern void compass_findWaypointIndex(void);
 extern void fn_800FB4B0(void);
 extern void fn_801162A4(void);
 extern void fn_8048B048(void);
@@ -811,7 +811,7 @@ lbl_fn_80112A00_00000988:
     beq lbl_fn_80112A00_000009C8
     lwz r4, 0x4(r30)
     li r5, 0x0
-    bl fn_800928B0
+    bl compass_findWaypointIndex
     cmpwi r3, 0x0
     bge lbl_fn_80112A00_000009B8
     li r5, 0x0

@@ -9,7 +9,7 @@ extern void ui_destroyWidget(void);
 extern void fn_800577D8(void);
 extern void fn_80058078(void);
 extern void fn_800580BC(void);
-extern void fn_800588FC(void);
+extern void mission_updateObjectiveTarget(void);
 extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
@@ -330,7 +330,7 @@ lbl_fn_803F8324_00000314:
     psq_st f4, 0x60(r3), 0, 0
     psq_st f5, 0x68(r3), 0, 0
     psq_st f6, 0x70(r3), 0, 0
-    bl fn_800588FC
+    bl mission_updateObjectiveTarget
     b lbl_fn_803F8324_000003A4
 lbl_fn_803F8324_00000368:
     addi r4, r31, 0x938
@@ -347,7 +347,7 @@ lbl_fn_803F8324_00000368:
     psq_st f4, 0x60(r3), 0, 0
     psq_st f5, 0x68(r3), 0, 0
     psq_st f6, 0x70(r3), 0, 0
-    bl fn_800588FC
+    bl mission_updateObjectiveTarget
 lbl_fn_803F8324_000003A4:
     lwz r0, 0x204(r1)
     lwz r31, 0x1fc(r1)

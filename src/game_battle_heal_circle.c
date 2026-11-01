@@ -11,7 +11,7 @@ extern void sound_initChannelParams(void);
 extern void sound_releaseChannel(void);
 extern void atn_ColliBase_destructor(void);
 extern void fn_80057F28(void);
-extern void fn_800588FC(void);
+extern void mission_updateObjectiveTarget(void);
 extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
@@ -24,7 +24,7 @@ extern void route_createWaypoint(void);
 extern void fn_80088724(void);
 extern void node_createNamedChild(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_80092954(void);
+extern void compass_findMarkerByName(void);
 extern void fn_80095D44(void);
 extern void lockon_updateTarget(void);
 extern void cursor_Object_constructor(void);
@@ -288,7 +288,7 @@ lbl_fn_803F33A4_0000023C:
     bl talk_formatQuotedString
     mr r4, r3
     addi r3, r25, 0x65c
-    bl fn_80092954
+    bl compass_findMarkerByName
     cmpwi r3, 0x0
     stw r3, 0x0(r23)
     beq lbl_fn_803F33A4_000002F0
@@ -1879,7 +1879,7 @@ lbl_fn_803F4B80_00001840:
     psq_st f4, 0x60(r3), 0, 0
     psq_st f5, 0x68(r3), 0, 0
     psq_st f6, 0x70(r3), 0, 0
-    bl fn_800588FC
+    bl mission_updateObjectiveTarget
     addi r3, r31, 0x54c
     psq_l f1, 0xfc(r31), 0, 0
     psq_l f2, 0x104(r31), 0, 0
@@ -1893,7 +1893,7 @@ lbl_fn_803F4B80_00001840:
     psq_st f4, 0x60(r3), 0, 0
     psq_st f5, 0x68(r3), 0, 0
     psq_st f6, 0x70(r3), 0, 0
-    bl fn_800588FC
+    bl mission_updateObjectiveTarget
     lwz r0, 0x5dc(r31)
     cmpwi r0, 0x0
     beq lbl_fn_803F4B80_000018CC

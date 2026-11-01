@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void fn_8004D124(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_80092954(void);
+extern void compass_findMarkerByName(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -1268,7 +1268,7 @@ asm void fn_802A6B90(void)
     stw r31, 0x8c(r1)
     mr r31, r3
     addi r3, r3, 0xb0
-    bl fn_80092954
+    bl compass_findMarkerByName
     cmpwi r3, 0x0
     beq lbl_fn_802A6B90_00001320
     lwz r0, 0x58c(r31)
@@ -1358,7 +1358,7 @@ lbl_fn_802A6B90_000011FC:
     stfs f6, 0x160c(r31)
     stfs f7, 0x1610(r31)
     stw r0, 0xc(r1)
-    bl fn_80092954
+    bl compass_findMarkerByName
     lbz r0, 0xc(r1)
     stb r0, 0x18(r3)
     lbz r0, 0xd(r1)

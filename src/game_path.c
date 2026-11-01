@@ -49,7 +49,7 @@ extern u32 lbl_80880970;
 /* Function declarations */
 void fn_8005691C(void);
 void fn_80056AE8(void);
-void fn_80056DB8(void);
+void path_Object_constructor(void);
 void atn_ColliBase_destructor(void);
 void fn_80056EB0(void);
 void atn_ColliSphere_testRay(void);
@@ -380,7 +380,7 @@ lbl_fn_80056AE8_00000474:
     blr
 }
 
-asm void fn_80056DB8(void)
+asm void path_Object_constructor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -408,10 +408,10 @@ asm void fn_80056DB8(void)
     bl memset
     lwz r3, lbl_8087EE98
     cmpwi r3, 0x0
-    beq lbl_fn_80056DB8_0000050C
+    beq lbl_path_Object_constructor_0000050C
     mr r4, r31
     bl fn_8004CB70
-lbl_fn_80056DB8_0000050C:
+lbl_path_Object_constructor_0000050C:
     mr r3, r31
     lwz r31, 0xc(r1)
     lwz r0, 0x14(r1)

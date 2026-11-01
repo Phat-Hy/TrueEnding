@@ -13,7 +13,7 @@ extern void atn_ColliBase_destructor(void);
 extern void fn_80057F28(void);
 extern void fn_80058078(void);
 extern void fn_800580BC(void);
-extern void fn_800588FC(void);
+extern void mission_updateObjectiveTarget(void);
 extern void fn_80058A1C(void);
 extern void fn_80058B78(void);
 extern void fn_80058BBC(void);
@@ -1369,7 +1369,7 @@ lbl_fn_804264A0_000010B0:
     psq_st f3, 0x58(r3), 0, 0
     psq_st f4, 0x60(r3), 0, 0
     psq_st f5, 0x68(r3), 0, 0
-    bl fn_800588FC
+    bl mission_updateObjectiveTarget
     lwz r5, 0x8a0(r31)
     li r0, 0x0
     lwz r4, 0x58(r31)
@@ -1535,7 +1535,7 @@ lbl_fn_804265E8_000012FC:
     psq_st f3, 0x58(r3), 0, 0
     psq_st f4, 0x60(r3), 0, 0
     psq_st f5, 0x68(r3), 0, 0
-    bl fn_800588FC
+    bl mission_updateObjectiveTarget
     lwz r0, 0x54(r31)
     cmpwi r0, 0x3
     blt lbl_fn_804265E8_000013B4

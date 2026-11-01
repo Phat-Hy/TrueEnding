@@ -14,8 +14,8 @@ extern void str_initFromCStr(void);
 extern void str_getData(void);
 extern void fn_80042218(void);
 extern void talk_parseDialogue(void);
-extern void fn_8005B8F8(void);
-extern void fn_8005B9AC(void);
+extern void talk_parseDialogueTokens(void);
+extern void talk_copyUtf16String(void);
 extern void fn_8006A9A4(void);
 extern void fn_8006AC08(void);
 extern void fn_8006AF38(void);
@@ -161,7 +161,7 @@ lbl_fn_8046B798_000000AC:
     stw r3, 0x130(r1)
     mr r3, r26
     addi r4, r4, lbl_8077A0A8@l
-    bl fn_8005B9AC
+    bl talk_copyUtf16String
     li r24, 0x0
 lbl_fn_8046B798_000000DC:
     addi r3, r1, 0x130
@@ -174,7 +174,7 @@ lbl_fn_8046B798_000000DC:
     addi r24, r24, 0x1
 lbl_fn_8046B798_000000FC:
     addi r3, r1, 0x130
-    bl fn_8005B8F8
+    bl talk_parseDialogueTokens
     cmpwi r3, 0x0
     bne lbl_fn_8046B798_000000DC
     lwz r3, 0x9c(r25)
@@ -360,7 +360,7 @@ lbl_fn_8046B798_0000038C:
     bl dtor_80084684
 lbl_fn_8046B798_000003A4:
     addi r3, r1, 0x130
-    bl fn_8005B8F8
+    bl talk_parseDialogueTokens
     cmpwi r3, 0x0
     bne lbl_fn_8046B798_000001B4
     lmw r23, 0xd8c(r1)

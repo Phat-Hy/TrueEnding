@@ -8,8 +8,8 @@ extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
 extern void talk_parseDialogue(void);
-extern void fn_8005B8F8(void);
-extern void fn_8005B9AC(void);
+extern void talk_parseDialogueTokens(void);
+extern void talk_copyUtf16String(void);
 extern void fn_80060D58(void);
 extern void fn_800610A4(void);
 extern void skill_calcTrajectory(void);
@@ -933,7 +933,7 @@ lbl_fn_80505FC8_00000AE4:
     stw r3, 0x8(r1)
     addi r3, r1, 0x8
     addi r4, r4, lbl_807830B8@l
-    bl fn_8005B9AC
+    bl talk_copyUtf16String
     srwi. r30, r26, 1
     li r26, 0x0
     beq lbl_fn_80505FC8_00000B54
@@ -969,7 +969,7 @@ lbl_fn_80505FC8_00000B7C:
     addi r26, r3, 0x1
 lbl_fn_80505FC8_00000BB4:
     addi r3, r1, 0x8
-    bl fn_8005B8F8
+    bl talk_parseDialogueTokens
     cmpwi r3, 0x0
     bne lbl_fn_80505FC8_00000B7C
     lis r5, lbl_8075B034@ha
@@ -1029,7 +1029,7 @@ lbl_fn_80505FC8_00000C1C:
     bge lbl_fn_80505FC8_00000CA4
 lbl_fn_80505FC8_00000C94:
     addi r3, r1, 0x8
-    bl fn_8005B8F8
+    bl talk_parseDialogueTokens
     cmpwi r3, 0x0
     bne lbl_fn_80505FC8_00000C1C
 lbl_fn_80505FC8_00000CA4:
@@ -1983,7 +1983,7 @@ lbl_fn_80506D98_0000190C:
     stw r3, 0x128(r1)
     mr r3, r20
     addi r4, r4, lbl_8077A0A8@l
-    bl fn_8005B9AC
+    bl talk_copyUtf16String
     li r20, 0x0
     b lbl_fn_80506D98_0000198C
 lbl_fn_80506D98_00001940:
@@ -2008,7 +2008,7 @@ lbl_fn_80506D98_00001940:
     addi r20, r3, 0x1
 lbl_fn_80506D98_0000198C:
     addi r3, r1, 0x128
-    bl fn_8005B8F8
+    bl talk_parseDialogueTokens
     cmpwi r3, 0x0
     bne lbl_fn_80506D98_00001940
     lis r5, lbl_8075B038@ha
@@ -2288,7 +2288,7 @@ lbl_fn_80506D98_00001D80:
     stwx r0, r19, r21
 lbl_fn_80506D98_00001D90:
     addi r3, r1, 0x128
-    bl fn_8005B8F8
+    bl talk_parseDialogueTokens
     cmpwi r3, 0x0
     bne lbl_fn_80506D98_00001A0C
     lmw r19, 0xd8c(r1)

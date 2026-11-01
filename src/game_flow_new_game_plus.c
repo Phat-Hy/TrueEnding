@@ -26,7 +26,7 @@ extern void fn_80109864(void);
 extern void fn_8012DF7C(void);
 extern void fn_80133EE8(void);
 extern void fn_80133F18(void);
-extern void fn_80148B0C(void);
+extern void quest_getRewardItemSlot(void);
 extern void fn_80150460(void);
 extern void fn_8015076C(void);
 extern void party_configureMemberSlot(void);
@@ -1069,7 +1069,7 @@ lbl_fn_804EFF78_00000D00:
 lbl_fn_804EFF78_00000DBC:
     mr r3, r26
     li r4, 0x0
-    bl fn_80148B0C
+    bl quest_getRewardItemSlot
     psq_l f1, 0x4(r3), 0, 0
     lfs f2, 0xc(r3)
     psq_st f1, 0x0(r25), 0, 0
@@ -1237,7 +1237,7 @@ lbl_fn_804EFF78_00000FD4:
 lbl_fn_804EFF78_00001040:
     mr r3, r26
     li r4, 0x0
-    bl fn_80148B0C
+    bl quest_getRewardItemSlot
     psq_l f1, 0x4(r3), 0, 0
     lfs f2, 0xc(r3)
     psq_st f1, 0x0(r25), 0, 0

@@ -13,7 +13,7 @@ extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void collision_testLineSegment(void);
-extern void fn_80056DB8(void);
+extern void path_Object_constructor(void);
 extern void atn_ColliBase_destructor(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
@@ -1031,7 +1031,7 @@ asm void fn_8025A060(void)
     addi r28, r30, 0x1580
     li r4, 0x0
     mr r3, r28
-    bl fn_80056DB8
+    bl path_Object_constructor
     lwz r4, 0x12a4(r30)
     li r5, 0x1
     lwz r0, 0x14c4(r30)

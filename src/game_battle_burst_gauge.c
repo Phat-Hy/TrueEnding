@@ -17,7 +17,7 @@ extern void route_createSegment(void);
 extern void route_createWaypoint(void);
 extern void node_createNamedChild(void);
 extern void area_updateZoneState(void);
-extern void fn_800928B0(void);
+extern void compass_findWaypointIndex(void);
 extern void fn_8009E5A0(void);
 extern void fn_8009EB20(void);
 extern void fn_8009EE30(void);
@@ -1283,7 +1283,7 @@ lbl_fn_803FFF40_00001104:
     lwz r28, 0x98(r31)
     lwz r4, 0xf4(r31)
     addi r3, r3, 0x10
-    bl fn_800928B0
+    bl compass_findWaypointIndex
     mulli r0, r3, 0x30
     lwz r3, 0x4(r31)
     lwz r29, 0x98(r31)
@@ -1292,7 +1292,7 @@ lbl_fn_803FFF40_00001104:
     addi r3, r3, 0x10
     add r0, r28, r0
     stw r0, 0x9c(r31)
-    bl fn_800928B0
+    bl compass_findWaypointIndex
     mulli r0, r3, 0x30
     lwz r3, 0x4(r31)
     lwz r28, 0x98(r31)
@@ -1301,7 +1301,7 @@ lbl_fn_803FFF40_00001104:
     addi r3, r3, 0x10
     add r0, r29, r0
     stw r0, 0xa0(r31)
-    bl fn_800928B0
+    bl compass_findWaypointIndex
     mulli r0, r3, 0x30
     lwz r3, 0x98(r31)
     stw r3, 0x80(r31)

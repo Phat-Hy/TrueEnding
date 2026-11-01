@@ -9,12 +9,12 @@ extern void _savegpr_23(void);
 extern void dtor_80084684(void);
 extern void scene_traverseNode(void);
 extern void collision_testLineSegment(void);
-extern void fn_80056DB8(void);
+extern void path_Object_constructor(void);
 extern void atn_ColliBase_destructor(void);
 extern void fn_80057F28(void);
 extern void fn_80058078(void);
 extern void fn_800580BC(void);
-extern void fn_800588FC(void);
+extern void mission_updateObjectiveTarget(void);
 extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
@@ -1296,7 +1296,7 @@ asm void fn_804137F4(void)
     psq_st f4, 0x60(r3), 0, 0
     psq_st f5, 0x68(r3), 0, 0
     psq_st f6, 0x70(r3), 0, 0
-    bl fn_800588FC
+    bl mission_updateObjectiveTarget
     b lbl_fn_804137F4_00001014
 lbl_fn_804137F4_00000FE0:
     psq_l f2, 0x10(r30), 0, 0
@@ -1311,7 +1311,7 @@ lbl_fn_804137F4_00000FE0:
     psq_st f4, 0x60(r3), 0, 0
     psq_st f5, 0x68(r3), 0, 0
     psq_st f6, 0x70(r3), 0, 0
-    bl fn_800588FC
+    bl mission_updateObjectiveTarget
 lbl_fn_804137F4_00001014:
     lwz r31, 0x2044(r31)
     cmpwi r31, 0x0
@@ -1811,7 +1811,7 @@ lbl_fn_80413BD4_000016DC:
     mr r18, r3
     beq lbl_fn_80413BD4_00001724
     li r4, 0x0
-    bl fn_80056DB8
+    bl path_Object_constructor
     stw r22, 0x0(r18)
 lbl_fn_80413BD4_00001724:
     stw r18, 0x2044(r21)

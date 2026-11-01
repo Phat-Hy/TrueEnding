@@ -40,7 +40,7 @@ extern void fn_801FEC74(void);
 extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
 extern void thread_dispatchToQueue(void);
-extern void fn_8020924C(void);
+extern void mem_findBlockById(void);
 extern void fn_80219544(void);
 extern void fn_80365390(void);
 extern void fn_80371320(void);
@@ -653,7 +653,7 @@ asm void fn_8054A3E0(void)
     mr r28, r3
     beq lbl_fn_8054A3E0_0000077C
     mr r3, r30
-    bl fn_8020924C
+    bl mem_findBlockById
     cmpwi r3, 0x0
     beq lbl_fn_8054A3E0_000006D4
     lwz r0, 0x24(r3)

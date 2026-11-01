@@ -21,7 +21,7 @@ extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void route_createWaypoint(void);
 extern void node_createNamedChild(void);
-extern void fn_800928B0(void);
+extern void compass_findWaypointIndex(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_playAnimationByName(void);
 extern void skin_applyWeights(void);
@@ -1142,7 +1142,7 @@ lbl_fn_803F0764_00000D08:
     lwz r4, 0x20(r23)
     mr r3, r20
     li r5, 0x0
-    bl fn_800928B0
+    bl compass_findWaypointIndex
     cmpwi r3, 0x0
     bge lbl_fn_803F0764_00000D28
     li r17, 0x0
@@ -1289,7 +1289,7 @@ lbl_fn_803F0764_00000EFC:
     lwz r4, 0x20(r23)
     mr r3, r20
     li r5, 0x0
-    bl fn_800928B0
+    bl compass_findWaypointIndex
     cmpwi r3, 0x0
     bge lbl_fn_803F0764_00000F4C
     li r3, 0x0
@@ -1394,7 +1394,7 @@ lbl_fn_803F0764_0000106C:
     lwz r4, 0x20(r23)
     mr r3, r20
     li r5, 0x0
-    bl fn_800928B0
+    bl compass_findWaypointIndex
     cmpwi r3, 0x0
     bge lbl_fn_803F0764_000010D4
     li r3, 0x0
@@ -1523,7 +1523,7 @@ lbl_fn_803F0764_00001254:
     lwz r4, 0x20(r23)
     mr r3, r20
     li r5, 0x0
-    bl fn_800928B0
+    bl compass_findWaypointIndex
     cmpwi r3, 0x0
     bge lbl_fn_803F0764_000012A4
     li r3, 0x0
@@ -2178,7 +2178,7 @@ lbl_fn_803F1508_00001AE4:
     mr r23, r3
     mr r4, r22
     li r5, 0x0
-    bl fn_800928B0
+    bl compass_findWaypointIndex
     cmpwi r3, 0x0
     bge lbl_fn_803F1508_00001BA0
     li r22, 0x0

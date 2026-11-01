@@ -23,7 +23,7 @@ extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
 extern void thread_findTaskById(void);
 extern void thread_dispatchToQueue(void);
-extern void fn_8020924C(void);
+extern void mem_findBlockById(void);
 extern void fn_804A3C24(void);
 extern void fn_804A53D4(void);
 extern void fn_804A5D34(void);
@@ -1180,7 +1180,7 @@ lbl_fn_804C18A8_00000F1C:
     bl thread_dispatchToQueue
     addis r3, r19, 0xb
     subi r3, r3, 0x51a0
-    bl fn_8020924C
+    bl mem_findBlockById
     cmpwi r19, -0x1
     mr r28, r3
     bne lbl_fn_804C18A8_00000F7C

@@ -14,7 +14,7 @@ extern void _savegpr_24(void);
 extern void _savegpr_26(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_800928B0(void);
+extern void compass_findWaypointIndex(void);
 extern void model_updateBoneTransforms(void);
 extern void fn_8022BEAC(void);
 extern void fn_8022C3F0(void);
@@ -1680,7 +1680,7 @@ lbl_fn_8023AE34_0000155C:
     li r5, 0x0
     lwz r4, 0x3c(r22)
     addi r3, r3, 0x10
-    bl fn_800928B0
+    bl compass_findWaypointIndex
     cmpwi r3, 0x0
     blt lbl_fn_8023AE34_000015A0
     lwz r4, 0x4(r20)
@@ -1700,7 +1700,7 @@ lbl_fn_8023AE34_000015A8:
     lwz r4, 0x3c(r22)
     mr r3, r16
     li r5, 0x0
-    bl fn_800928B0
+    bl compass_findWaypointIndex
     cmpwi r3, 0x0
     bge lbl_fn_8023AE34_000015D0
     li r0, 0x0

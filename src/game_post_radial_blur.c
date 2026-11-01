@@ -22,7 +22,7 @@ extern void hurtbox_testCollisionLayer(void);
 extern void hurtbox_dispatchHitEvent(void);
 extern void fn_8012DF7C(void);
 extern void npc_updateTalkInteraction(void);
-extern void fn_80148B0C(void);
+extern void quest_getRewardItemSlot(void);
 extern void equip_applyToCharacter(void);
 extern void fn_8015BAF0(void);
 extern void fn_8015BDD8(void);
@@ -394,7 +394,7 @@ lbl_fn_802CB43C_0000042C:
     bl fn_8012DF7C
     lwz r3, 0x14d0(r31)
     li r4, 0x0
-    bl fn_80148B0C
+    bl quest_getRewardItemSlot
     psq_l f1, 0x4(r3), 0, 0
     addi r30, r1, 0x20
     lfs f2, 0xc(r3)

@@ -9,7 +9,7 @@ extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_8004203C(void);
-extern void fn_80056DB8(void);
+extern void path_Object_constructor(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void mem_free(void);
@@ -89,7 +89,7 @@ asm void fn_802AC550(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_80056DB8
+    bl path_Object_constructor
     lis r4, lbl_80777630@ha
     mr r3, r31
     addi r4, r4, lbl_80777630@l

@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void fn_8004D314(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_80092954(void);
+extern void compass_findMarkerByName(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -19,7 +19,7 @@ extern void enemy_updateCombatBehavior(void);
 extern void npc_initScriptContext(void);
 extern void npc_updateTalkInteraction(void);
 extern void fn_801426A4(void);
-extern void fn_80148B0C(void);
+extern void quest_getRewardItemSlot(void);
 extern void dialog_renderWindow(void);
 extern void inventory_applyItemStats(void);
 extern void shop_canPurchaseItem(void);
@@ -193,7 +193,7 @@ lbl_fn_80283D60_00000090:
     stfs f7, 0x15d0(r3)
     addi r3, r3, 0xb0
     stw r0, 0x14(r1)
-    bl fn_80092954
+    bl compass_findMarkerByName
     lbz r0, 0x14(r1)
     addi r4, r30, 0x182
     stb r0, 0x18(r3)
@@ -231,7 +231,7 @@ lbl_fn_80283D60_00000090:
     stb r0, 0xb(r1)
     lwz r0, 0x8(r1)
     stw r0, 0x10(r1)
-    bl fn_80092954
+    bl compass_findMarkerByName
     lbz r0, 0x10(r1)
     stb r0, 0x18(r3)
     lbz r0, 0x11(r1)
@@ -1594,7 +1594,7 @@ lbl_fn_80285064_000015C0:
     bge lbl_fn_80285064_00001A0C
     lwz r3, 0x1580(r31)
     li r4, 0x0
-    bl fn_80148B0C
+    bl quest_getRewardItemSlot
     lfs f7, 0xc(r3)
     addi r4, r1, 0x88
     lfs f0, 0x530(r31)

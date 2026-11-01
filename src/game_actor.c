@@ -41,7 +41,7 @@ extern void fn_801083D8(void);
 extern void fn_8011F8BC(void);
 extern void fn_8011FBD8(void);
 extern void fn_8011FE04(void);
-extern void fn_8012DB04(void);
+extern void enemy_evalAnimTrack(void);
 extern void battle_canTargetActor(void);
 extern void fn_8017C904(void);
 extern void fn_8035B854(void);
@@ -586,17 +586,17 @@ asm void fn_800142D4(void)
     lwz r31, 0xa4(r4)
 lbl_fn_800142D4_000005A8:
     addi r3, r3, 0x7d4
-    bl fn_8012DB04
+    bl enemy_evalAnimTrack
     lfs f0, lbl_808806A0
     fcmpo cr0, f0, f1
     bge lbl_fn_800142D4_0000066C
     addi r3, r30, 0x7d4
-    bl fn_8012DB04
+    bl enemy_evalAnimTrack
     lfs f0, lbl_808806A4
     fcmpo cr0, f1, f0
     bge lbl_fn_800142D4_0000066C
     addi r3, r30, 0x7d4
-    bl fn_8012DB04
+    bl enemy_evalAnimTrack
     lfs f0, lbl_808806A8
     lfs f2, lbl_808806A4
     fadds f1, f0, f1
@@ -605,7 +605,7 @@ lbl_fn_800142D4_000005A8:
     fcmpo cr0, f1, f0
     ble lbl_fn_800142D4_0000060C
     addi r3, r30, 0x7d4
-    bl fn_8012DB04
+    bl enemy_evalAnimTrack
     lfs f2, lbl_808806A8
     lfs f0, lbl_808806A4
     fadds f1, f2, f1
@@ -615,7 +615,7 @@ lbl_fn_800142D4_0000060C:
     fcmpo cr0, f0, f2
     bge lbl_fn_800142D4_00000654
     addi r3, r30, 0x7d4
-    bl fn_8012DB04
+    bl enemy_evalAnimTrack
     lfs f2, lbl_808806A8
     lfs f0, lbl_808806A4
     fadds f1, f2, f1
@@ -624,7 +624,7 @@ lbl_fn_800142D4_0000060C:
     fcmpo cr0, f0, f2
     ble lbl_fn_800142D4_00000654
     addi r3, r30, 0x7d4
-    bl fn_8012DB04
+    bl enemy_evalAnimTrack
     lfs f2, lbl_808806A8
     lfs f0, lbl_808806A4
     fadds f1, f2, f1
@@ -664,17 +664,17 @@ asm void fn_800143E8(void)
     lwz r31, 0xa4(r4)
 lbl_fn_800143E8_000006BC:
     addi r3, r3, 0x7d4
-    bl fn_8012DB04
+    bl enemy_evalAnimTrack
     lfs f0, lbl_808806A0
     fcmpo cr0, f0, f1
     bge lbl_fn_800143E8_00000780
     addi r3, r30, 0x7d4
-    bl fn_8012DB04
+    bl enemy_evalAnimTrack
     lfs f0, lbl_808806A4
     fcmpo cr0, f1, f0
     bge lbl_fn_800143E8_00000780
     addi r3, r30, 0x7d4
-    bl fn_8012DB04
+    bl enemy_evalAnimTrack
     lfs f0, lbl_808806A8
     lfs f2, lbl_808806A4
     fadds f1, f0, f1
@@ -683,7 +683,7 @@ lbl_fn_800143E8_000006BC:
     fcmpo cr0, f1, f0
     ble lbl_fn_800143E8_00000720
     addi r3, r30, 0x7d4
-    bl fn_8012DB04
+    bl enemy_evalAnimTrack
     lfs f2, lbl_808806A8
     lfs f0, lbl_808806A4
     fadds f1, f2, f1
@@ -693,7 +693,7 @@ lbl_fn_800143E8_00000720:
     fcmpo cr0, f0, f2
     bge lbl_fn_800143E8_00000768
     addi r3, r30, 0x7d4
-    bl fn_8012DB04
+    bl enemy_evalAnimTrack
     lfs f2, lbl_808806A8
     lfs f0, lbl_808806A4
     fadds f1, f2, f1
@@ -702,7 +702,7 @@ lbl_fn_800143E8_00000720:
     fcmpo cr0, f0, f2
     ble lbl_fn_800143E8_00000768
     addi r3, r30, 0x7d4
-    bl fn_8012DB04
+    bl enemy_evalAnimTrack
     lfs f2, lbl_808806A8
     lfs f0, lbl_808806A4
     fadds f1, f2, f1

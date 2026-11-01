@@ -14,7 +14,7 @@ extern void fn_80107A68(void);
 extern void hurtbox_testCollisionLayer(void);
 extern void fn_8012DF7C(void);
 extern void quest_evaluateConditions(void);
-extern void fn_80148B0C(void);
+extern void quest_getRewardItemSlot(void);
 extern void fn_8015B238(void);
 extern void actor_setState(void);
 extern void battle_calcExpPosition(void);
@@ -1059,7 +1059,7 @@ lbl_fn_80465294_00000D68:
     li r4, 0x0
     divw r0, r0, r30
     stw r0, 0x3c(r1)
-    bl fn_80148B0C
+    bl quest_getRewardItemSlot
     lfs f2, 0xc(r3)
     addi r30, r1, 0x2c
     psq_l f1, 0x4(r3), 0, 0

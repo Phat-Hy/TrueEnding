@@ -22,9 +22,9 @@ extern void gx_drawScreenQuad(void);
 extern void gx_setRenderStateParam(void);
 extern void dungeon_initGlobalContext(void);
 extern void fn_800839EC(void);
-extern void fn_80083AD4(void);
+extern void town_updateInteractionPoints(void);
 extern void mem_alloc(void);
-extern void fn_800928B0(void);
+extern void compass_findWaypointIndex(void);
 extern void fn_800A4228(void);
 extern void msg_getMessageById(void);
 extern void model_updateBoneTransforms(void);
@@ -1280,14 +1280,14 @@ asm void fn_804410C0(void)
     beq lbl_fn_804410C0_00000F84
     bl dungeon_initGlobalContext
     mr r4, r31
-    bl fn_80083AD4
+    bl town_updateInteractionPoints
 lbl_fn_804410C0_00000F84:
     bl dungeon_initGlobalContext
     lwz r4, 0x0(r28)
-    bl fn_80083AD4
+    bl town_updateInteractionPoints
     bl dungeon_initGlobalContext
     lwz r4, 0x4(r28)
-    bl fn_80083AD4
+    bl town_updateInteractionPoints
     lwz r3, 0x8(r28)
     li r4, 0x0
     bl fn_8006BB6C
@@ -1296,10 +1296,10 @@ lbl_fn_804410C0_00000F84:
     bl fn_8006BB6C
     bl dungeon_initGlobalContext
     lwz r4, 0x0(r29)
-    bl fn_80083AD4
+    bl town_updateInteractionPoints
     bl dungeon_initGlobalContext
     lwz r4, 0x0(r30)
-    bl fn_80083AD4
+    bl town_updateInteractionPoints
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)
@@ -2002,7 +2002,7 @@ lbl_fn_80441918_00001958:
     addi r30, r5, 0xb0
     li r5, 0x0
     mr r3, r30
-    bl fn_800928B0
+    bl compass_findWaypointIndex
     cmpwi r3, 0x0
     bge lbl_fn_80441918_000019D0
     li r5, 0x0

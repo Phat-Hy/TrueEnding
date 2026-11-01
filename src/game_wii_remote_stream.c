@@ -19,7 +19,7 @@ extern void fn_80069BF4(void);
 extern void boss_decodePhaseBitfield(void);
 extern void mem_getAllocSize(void);
 extern void fn_8008B130(void);
-extern void fn_800928B0(void);
+extern void compass_findWaypointIndex(void);
 extern void fn_8009290C(void);
 extern void fn_800937E8(void);
 extern void fn_80093C20(void);
@@ -281,7 +281,7 @@ lbl_fn_80557ABC_000002BC:
 lbl_fn_80557ABC_000002C0:
     lwz r4, 0x4(r4)
     li r5, 0x0
-    bl fn_800928B0
+    bl compass_findWaypointIndex
     lwz r4, 0x48(r31)
     slwi r30, r3, 2
     mr r3, r28

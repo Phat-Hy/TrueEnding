@@ -22,7 +22,7 @@ extern void fn_801255C8(void);
 extern void enemy_updateCombatBehavior(void);
 extern void fn_80128930(void);
 extern void fn_80128A30(void);
-extern void fn_8012DB04(void);
+extern void enemy_evalAnimTrack(void);
 extern void boss_updatePhaseState(void);
 extern void npc_updateTalkInteraction(void);
 extern void quest_updateFlow(void);
@@ -1508,12 +1508,12 @@ asm void fn_802B8AA4(void)
     addi r3, r3, 0x7d4
     stfs f2, 0x1bc(r1)
     psq_st f1, 0x0(r4), 0, 0
-    bl fn_8012DB04
+    bl enemy_evalAnimTrack
     lfs f31, lbl_80884128
     fcmpo cr0, f1, f31
     ble lbl_fn_802B8AA4_00001378
     addi r3, r31, 0x7d4
-    bl fn_8012DB04
+    bl enemy_evalAnimTrack
     fmr f31, f1
 lbl_fn_802B8AA4_00001378:
     lwz r0, 0x55c(r31)
@@ -1704,7 +1704,7 @@ lbl_fn_802B8AA4_00001618:
     lfs f29, lbl_80884138
 lbl_fn_802B8AA4_00001628:
     addi r3, r31, 0x7d4
-    bl fn_8012DB04
+    bl enemy_evalAnimTrack
     fmuls f29, f29, f1
     b lbl_fn_802B8AA4_0000209C
 lbl_fn_802B8AA4_00001638:

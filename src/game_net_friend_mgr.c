@@ -24,7 +24,7 @@ extern void saveSlot_readSummary(void);
 extern void fn_801FEC74(void);
 extern void thread_findAndNotifySlot(void);
 extern void thread_dispatchToQueue(void);
-extern void fn_8020924C(void);
+extern void mem_findBlockById(void);
 extern void fn_804A3C24(void);
 extern void fn_804A53D4(void);
 extern void fn_804A5CD8(void);
@@ -323,7 +323,7 @@ lbl_fn_804CD2F8_000002FC:
     li r0, 0x0
     b lbl_fn_804CD2F8_0000031C
 lbl_fn_804CD2F8_00000304:
-    bl fn_8020924C
+    bl mem_findBlockById
     cmpwi r3, 0x0
     beq lbl_fn_804CD2F8_00000318
     lwz r0, 0x4(r3)
@@ -347,7 +347,7 @@ lbl_fn_804CD2F8_00000338:
     lwzx r3, r23, r0
     cmpwi r3, 0x0
     ble lbl_fn_804CD2F8_00000360
-    bl fn_8020924C
+    bl mem_findBlockById
     b lbl_fn_804CD2F8_00000388
 lbl_fn_804CD2F8_00000360:
     lwz r0, lbl_8087F86C
@@ -360,7 +360,7 @@ lbl_fn_804CD2F8_00000370:
     lwz r3, 0x10(r21)
     cmpwi r3, 0x0
     beq lbl_fn_804CD2F8_00000388
-    bl fn_8020924C
+    bl mem_findBlockById
 lbl_fn_804CD2F8_00000388:
     stw r26, 0x10c(r24)
     mr r28, r26
@@ -524,7 +524,7 @@ lbl_fn_804CD2F8_0000058C:
     li r0, 0x0
     b lbl_fn_804CD2F8_000005AC
 lbl_fn_804CD2F8_00000594:
-    bl fn_8020924C
+    bl mem_findBlockById
     cmpwi r3, 0x0
     beq lbl_fn_804CD2F8_000005A8
     lwz r0, 0x4(r3)
@@ -548,7 +548,7 @@ lbl_fn_804CD2F8_000005C8:
     lwzx r3, r25, r0
     cmpwi r3, 0x0
     ble lbl_fn_804CD2F8_000005F0
-    bl fn_8020924C
+    bl mem_findBlockById
     b lbl_fn_804CD2F8_00000618
 lbl_fn_804CD2F8_000005F0:
     lwz r0, lbl_8087F86C
@@ -561,7 +561,7 @@ lbl_fn_804CD2F8_00000600:
     lwz r3, 0x10(r21)
     cmpwi r3, 0x0
     beq lbl_fn_804CD2F8_00000618
-    bl fn_8020924C
+    bl mem_findBlockById
 lbl_fn_804CD2F8_00000618:
     stw r27, 0xf0(r24)
     mr r28, r27

@@ -15,7 +15,7 @@ extern void fn_80060D58(void);
 extern void skill_calculateDamage(void);
 extern void dungeon_initGlobalContext(void);
 extern void fn_800839EC(void);
-extern void fn_80083AD4(void);
+extern void town_updateInteractionPoints(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void fn_800C1660(void);
@@ -3568,7 +3568,7 @@ lbl_fn_8006BB6C_00002DF4:
     beq lbl_fn_8006BB6C_00002E08
     bl dungeon_initGlobalContext
     mr r4, r31
-    bl fn_80083AD4
+    bl town_updateInteractionPoints
 lbl_fn_8006BB6C_00002E08:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)

@@ -17,7 +17,7 @@ extern void fn_80075F58(void);
 extern void fn_800763FC(void);
 extern void dungeon_initGlobalContext(void);
 extern void fn_800839EC(void);
-extern void fn_80083AD4(void);
+extern void town_updateInteractionPoints(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_800A96AC(void);
@@ -1206,7 +1206,7 @@ lbl_fn_800AFEBC_00000FA0:
     beq lbl_fn_800AFEBC_00000FB8
     bl dungeon_initGlobalContext
     mr r4, r28
-    bl fn_80083AD4
+    bl town_updateInteractionPoints
 lbl_fn_800AFEBC_00000FB8:
     clrlwi r3, r27, 16
     clrlwi r4, r26, 16

@@ -10,7 +10,7 @@ extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
 extern void mem_free(void);
-extern void fn_80092954(void);
+extern void compass_findMarkerByName(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void ref_releaseHandle(void);
@@ -1604,7 +1604,7 @@ lbl_fn_8027E19C_00001490:
     stfs f7, 0x15a4(r3)
     addi r3, r3, 0xb0
     stw r0, 0x14(r1)
-    bl fn_80092954
+    bl compass_findMarkerByName
     lbz r0, 0x14(r1)
     addi r4, r30, 0x17a
     stb r0, 0x18(r3)
@@ -1642,7 +1642,7 @@ lbl_fn_8027E19C_00001490:
     stb r0, 0xb(r1)
     lwz r0, 0x8(r1)
     stw r0, 0x10(r1)
-    bl fn_80092954
+    bl compass_findMarkerByName
     lbz r0, 0x10(r1)
     stb r0, 0x18(r3)
     lbz r0, 0x11(r1)

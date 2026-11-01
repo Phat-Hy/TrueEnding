@@ -30,7 +30,7 @@ extern void fn_801F72D4(void);
 extern void fn_801F7590(void);
 extern void save_findEntryByName(void);
 extern void fn_801F8830(void);
-extern void fn_8020924C(void);
+extern void mem_findBlockById(void);
 extern void fn_803B3D2C(void);
 extern void fn_803CC6B4(void);
 extern void printf(void);
@@ -2143,7 +2143,7 @@ lbl_fn_803B5974_00001C28:
 lbl_fn_803B5974_00001C3C:
     lwz r3, 0x4c(r29)
     lwz r3, 0xc(r3)
-    bl fn_8020924C
+    bl mem_findBlockById
     lis r30, lbl_8074FD38@ha
     mr r31, r3
     addi r30, r30, lbl_8074FD38@l

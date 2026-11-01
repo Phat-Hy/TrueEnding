@@ -8,7 +8,7 @@ extern void OSGetMEM2ArenaHi(void);
 extern void OSGetMEM2ArenaLo(void);
 extern void __register_global_object(void);
 extern void fn_800832AC(void);
-extern void fn_80083AD4(void);
+extern void town_updateInteractionPoints(void);
 extern void fn_80084E50(void);
 extern void fn_80084E78(void);
 extern void fn_80084EE8(void);
@@ -364,7 +364,7 @@ lbl_fn_800820BC_00000470:
     lis r3, lbl_807C709C@ha
     mr r4, r30
     addi r3, r3, lbl_807C709C@l
-    bl fn_80083AD4
+    bl town_updateInteractionPoints
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -751,7 +751,7 @@ lbl_fn_8008263C_000009F0:
     lis r3, lbl_807C709C@ha
     mr r4, r30
     addi r3, r3, lbl_807C709C@l
-    bl fn_80083AD4
+    bl town_updateInteractionPoints
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -996,7 +996,7 @@ lbl_fn_80082AC8_00000D60:
     lis r3, lbl_807C709C@ha
     mr r4, r30
     addi r3, r3, lbl_807C709C@l
-    bl fn_80083AD4
+    bl town_updateInteractionPoints
 lbl_fn_80082AC8_00000D70:
     mr r3, r30
     lwz r31, 0xc(r1)
@@ -1038,7 +1038,7 @@ lbl_fn_80082B54_00000DEC:
     lis r3, lbl_807C709C@ha
     mr r4, r30
     addi r3, r3, lbl_807C709C@l
-    bl fn_80083AD4
+    bl town_updateInteractionPoints
 lbl_fn_80082B54_00000DFC:
     mr r3, r30
     lwz r31, 0xc(r1)
@@ -1096,7 +1096,7 @@ lbl_fn_80082BE0_00000EB8:
     lis r3, lbl_807C709C@ha
     mr r4, r30
     addi r3, r3, lbl_807C709C@l
-    bl fn_80083AD4
+    bl town_updateInteractionPoints
 lbl_fn_80082BE0_00000EC8:
     mr r3, r30
     lwz r31, 0xc(r1)

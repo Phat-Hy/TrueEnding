@@ -13,7 +13,7 @@ extern void system_getNextSequenceId(void);
 extern void scissor_clipFrustum(void);
 extern void fn_80108F38(void);
 extern void enemy_updateCombatBehavior(void);
-extern void fn_8012DB04(void);
+extern void enemy_evalAnimTrack(void);
 extern void npc_initScriptContext(void);
 extern void npc_updateTalkInteraction(void);
 extern void quest_evaluateConditions(void);
@@ -910,7 +910,7 @@ lbl_fn_802EA490_00000BDC:
     cmpwi r0, 0x0
     beq lbl_fn_802EA490_00000C04
     addi r3, r31, 0x7d4
-    bl fn_8012DB04
+    bl enemy_evalAnimTrack
     fmuls f30, f30, f1
     b lbl_fn_802EA490_00000C04
 lbl_fn_802EA490_00000BF4:

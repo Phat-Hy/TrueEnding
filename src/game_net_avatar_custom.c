@@ -39,7 +39,7 @@ extern void fn_80201E78(void);
 extern void profile_getMetricValue(void);
 extern void fn_80202A6C(void);
 extern void perf_getMetricValue(void);
-extern void fn_8020924C(void);
+extern void mem_findBlockById(void);
 extern void fn_8020A81C(void);
 extern void fn_80219544(void);
 extern void fn_8021AF50(void);
@@ -1844,7 +1844,7 @@ lbl_fn_8052793C_000017B4:
 lbl_fn_8052793C_000017C4:
     lwz r3, 0x4(r23)
     bl fn_80219544
-    bl fn_8020924C
+    bl mem_findBlockById
     mr r19, r3
     bl fn_801D80B4
     lwz r4, 0x4(r23)

@@ -9,7 +9,7 @@ extern void atn_ColliBase_destructor(void);
 extern void fn_80057F28(void);
 extern void fn_80058078(void);
 extern void fn_800580BC(void);
-extern void fn_800588FC(void);
+extern void mission_updateObjectiveTarget(void);
 extern void atn_ColliObject_destructor(void);
 extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
@@ -1232,7 +1232,7 @@ lbl_fn_80411BC4_00000EEC:
     psq_st f4, 0x60(r3), 0, 0
     psq_st f5, 0x68(r3), 0, 0
     psq_st f6, 0x70(r3), 0, 0
-    bl fn_800588FC
+    bl mission_updateObjectiveTarget
     b lbl_fn_80411BC4_00000FC0
 lbl_fn_80411BC4_00000F80:
     addi r3, r31, 0x4c4
@@ -1250,7 +1250,7 @@ lbl_fn_80411BC4_00000F80:
     psq_st f4, 0x60(r3), 0, 0
     psq_st f5, 0x68(r3), 0, 0
     psq_st f6, 0x70(r3), 0, 0
-    bl fn_800588FC
+    bl mission_updateObjectiveTarget
 lbl_fn_80411BC4_00000FC0:
     lwz r0, 0x54(r31)
     cmpwi r0, 0x3

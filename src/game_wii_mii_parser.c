@@ -19,7 +19,7 @@ extern void map_debugLog(void);
 extern void minimap_renderOverlay(void);
 extern void fn_80091CFC(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_800928B0(void);
+extern void compass_findWaypointIndex(void);
 extern void fn_80094F98(void);
 extern void fn_800C258C(void);
 extern void atn_Task_setActive(void);
@@ -33,7 +33,7 @@ extern void fn_801125F8(void);
 extern void fn_8011C044(void);
 extern void enemy_updateCombatBehavior(void);
 extern void fn_80129978(void);
-extern void fn_8012DB04(void);
+extern void enemy_evalAnimTrack(void);
 extern void boss_updatePhaseState(void);
 extern void fn_80139F4C(void);
 extern void fn_80139F58(void);
@@ -258,7 +258,7 @@ lbl_fn_80566014_0000015C:
     lwz r4, 0x48(r4)
     lwzx r4, r4, r30
     lwz r4, 0x14(r4)
-    bl fn_800928B0
+    bl compass_findWaypointIndex
     lwz r4, 0x3fc(r26)
     addi r30, r30, 0x4
     addi r27, r27, 0x1
@@ -2023,7 +2023,7 @@ lbl_fn_80567600_000019B4:
     b lbl_fn_80567600_000019F8
 lbl_fn_80567600_000019C8:
     addi r3, r31, 0x7d4
-    bl fn_8012DB04
+    bl enemy_evalAnimTrack
     fmuls f30, f30, f1
     lwz r12, 0x0(r31)
     mr r3, r31

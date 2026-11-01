@@ -10,8 +10,8 @@ extern void _savegpr_25(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void talk_parseDialogue(void);
-extern void fn_8005B8F8(void);
-extern void fn_8005B9AC(void);
+extern void talk_parseDialogueTokens(void);
+extern void talk_copyUtf16String(void);
 extern void fn_8006F5E8(void);
 extern void mem_getAllocSize(void);
 extern void atn_Model_findBoneIndex(void);
@@ -336,7 +336,7 @@ asm void fn_8052293C(void)
     stw r3, 0x128(r1)
     addi r3, r1, 0x128
     addi r4, r4, lbl_807830B8@l
-    bl fn_8005B9AC
+    bl talk_copyUtf16String
     lis r4, fn_8044D878@ha
     lis r5, fn_8010A828@ha
     stb r24, 0x18(r1)
@@ -606,7 +606,7 @@ lbl_fn_8052293C_000006E8:
     bl dtor_80084684
 lbl_fn_8052293C_00000708:
     addi r3, r1, 0x128
-    bl fn_8005B8F8
+    bl talk_parseDialogueTokens
     cmpwi r3, 0x0
     bne lbl_fn_8052293C_00000384
     mr r3, r23

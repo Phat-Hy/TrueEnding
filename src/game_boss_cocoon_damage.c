@@ -6,7 +6,7 @@ extern void dtor_80013D60(void);
 extern void vec3_copy(void);
 extern void str_initFromCStr(void);
 extern void str_getData(void);
-extern void fn_80056DB8(void);
+extern void path_Object_constructor(void);
 extern void mission_updateStub(void);
 extern void atn_ColliCapsule_destructor(void);
 extern void magic_castSpellCircle(void);
@@ -31,7 +31,7 @@ extern void cam_evalLookAtMatrix(void);
 extern void system_getNextSequenceId(void);
 extern void viewport_updateCulling(void);
 extern void scissor_clipFrustum(void);
-extern void fn_8012DB04(void);
+extern void enemy_evalAnimTrack(void);
 extern void boss_updatePhaseState(void);
 extern void quest_evaluateConditions(void);
 extern void quest_updateFlow(void);
@@ -779,7 +779,7 @@ asm void fn_80458550(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_80056DB8
+    bl path_Object_constructor
     lis r4, lbl_80777668@ha
     mr r3, r31
     addi r4, r4, lbl_80777668@l
@@ -1207,7 +1207,7 @@ lbl_fn_8045883C_00000F28:
     bl fn_8045ABB4
     b lbl_fn_8045883C_000014E4
     addi r3, r3, 0x7d4
-    bl fn_8012DB04
+    bl enemy_evalAnimTrack
     stfs f1, 0x2e8(r31)
     addi r3, r31, 0xb0
     lfs f31, 0x2e4(r31)

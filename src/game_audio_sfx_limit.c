@@ -28,7 +28,7 @@ extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
 extern void fn_800902C0(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_80092954(void);
+extern void compass_findMarkerByName(void);
 extern void fn_80094D88(void);
 extern void str_parseInt(void);
 extern void fn_800EC254(void);
@@ -1673,7 +1673,7 @@ lbl_fn_80316A68_00001610:
     addi r3, r30, 0xb0
     addi r4, r4, lbl_8074959C@l
     addi r4, r4, 0xf9
-    bl fn_80092954
+    bl compass_findMarkerByName
     mr r28, r3
     bl fn_8000DD98
     stw r3, 0x18(r1)
@@ -1725,7 +1725,7 @@ lbl_fn_80316A68_000016C4:
     addi r3, r30, 0xb0
     addi r4, r4, lbl_8074959C@l
     addi r4, r4, 0xf9
-    bl fn_80092954
+    bl compass_findMarkerByName
     mr r28, r3
     bl fn_8000DD98
     stw r3, 0x10(r1)
@@ -1778,11 +1778,11 @@ lbl_fn_80316A68_00001774:
 lbl_fn_80316A68_00001780:
     mr r3, r31
     addi r4, r29, 0xf9
-    bl fn_80092954
+    bl compass_findMarkerByName
     mr r27, r3
     addi r3, r30, 0xb0
     addi r4, r29, 0xf9
-    bl fn_80092954
+    bl compass_findMarkerByName
     bl fn_8000DD98
     stw r3, 0x8(r1)
     mr r3, r27

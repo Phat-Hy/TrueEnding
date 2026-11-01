@@ -6,7 +6,7 @@ extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_80051CD8(void);
-extern void fn_80056DB8(void);
+extern void path_Object_constructor(void);
 extern void atn_ColliBase_destructor(void);
 extern void fn_800575BC(void);
 extern void talk_formatQuotedString(void);
@@ -22,7 +22,7 @@ extern void fn_80088724(void);
 extern void node_createNamedChild(void);
 extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
-extern void fn_80092954(void);
+extern void compass_findMarkerByName(void);
 extern void target_pushPointToHistory(void);
 extern void lockon_updateTarget(void);
 extern void cursor_Object_constructor(void);
@@ -1618,7 +1618,7 @@ asm void fn_8042D628(void)
     addi r30, r31, 0x4c4
     li r4, 0x2
     mr r3, r30
-    bl fn_80056DB8
+    bl path_Object_constructor
     lis r3, lbl_807775F8@ha
     addi r5, r31, 0x86c
     addi r3, r3, lbl_807775F8@l
@@ -2052,7 +2052,7 @@ lbl_fn_8042D93C_0000197C:
 lbl_fn_8042D93C_00001990:
     mr r4, r30
     addi r3, r31, 0xf4
-    bl fn_80092954
+    bl compass_findMarkerByName
     cmpwi r3, 0x0
     beq lbl_fn_8042D93C_00001A7C
     lwz r0, 0x18(r3)

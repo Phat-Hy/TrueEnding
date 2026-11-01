@@ -20,7 +20,7 @@ extern void actor_testBitFlag(void);
 extern void npc_initScriptContext(void);
 extern void npc_updateTalkInteraction(void);
 extern void fn_801426A4(void);
-extern void fn_80148B0C(void);
+extern void quest_getRewardItemSlot(void);
 extern void dialog_renderWindow(void);
 extern void inventory_applyItemStats(void);
 extern void shop_canPurchaseItem(void);
@@ -1477,7 +1477,7 @@ lbl_fn_802F3BE8_0000139C:
     stfs f7, 0xb0(r1)
     stfs f0, 0xb4(r1)
     lwz r3, 0x1580(r31)
-    bl fn_80148B0C
+    bl quest_getRewardItemSlot
     lfs f7, 0xc(r3)
     addi r4, r1, 0x88
     lfs f0, 0xb4(r1)

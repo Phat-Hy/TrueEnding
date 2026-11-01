@@ -16,7 +16,7 @@ extern void sound_releaseChannel(void);
 extern void item_useConsumable(void);
 extern void* dungeon_initGlobalContext(void);
 extern void fn_800839EC(void);
-extern void fn_80083AD4(void*, void*);
+extern void town_updateInteractionPoints(void*, void*);
 extern void fn_800C2418(void);
 extern void fn_800C2448(void);
 extern void fn_800C2520(void);
@@ -161,7 +161,7 @@ static inline void atn_LH_Texture_release_inline(atn_LH_Texture* this)
     this->field_2c = 0;
     if (buffer != NULL) {
         void* heap = dungeon_initGlobalContext();
-        fn_80083AD4(heap, buffer);
+        town_updateInteractionPoints(heap, buffer);
         this->field_28 = NULL;
     }
 }
@@ -305,7 +305,7 @@ asm void fn_800D5A3C(void)
     beq lbl_fn_800D5A3C_000003D4
     bl dungeon_initGlobalContext
     mr r4, r28
-    bl fn_80083AD4
+    bl town_updateInteractionPoints
     stw r31, 0x28(r27)
 lbl_fn_800D5A3C_000003D4:
     li r0, 0x0
@@ -383,7 +383,7 @@ asm void fn_800D5B58(void)
     beq lbl_fn_800D5B58_000004F4
     bl dungeon_initGlobalContext
     mr r4, r30
-    bl fn_80083AD4
+    bl town_updateInteractionPoints
     stw r31, 0x28(r25)
 lbl_fn_800D5B58_000004F4:
     xori r0, r29, 0x1

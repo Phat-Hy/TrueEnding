@@ -30,7 +30,7 @@ extern void fn_801E7098(void);
 extern void fn_801E7D78(void);
 extern void assert_generateId(void);
 extern void assert_formatLocation(void);
-extern void fn_8020924C(void);
+extern void mem_findBlockById(void);
 extern void time_wrapMilliseconds(void);
 extern void fn_8020EF04(void);
 extern void fn_8020EF4C(void);
@@ -196,7 +196,7 @@ lbl_fn_801D8CC4_000001B4:
     b lbl_fn_801D8CC4_0000055C
 lbl_fn_801D8CC4_000001BC:
     lwz r3, 0xc(r28)
-    bl fn_8020924C
+    bl mem_findBlockById
     lwz r4, lbl_8087F1E4
     mr r31, r3
     lwz r28, 0x894(r4)

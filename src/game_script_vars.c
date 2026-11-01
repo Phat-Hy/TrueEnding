@@ -6,7 +6,7 @@ extern void __files(void);
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_80056DB8(void);
+extern void path_Object_constructor(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void atn_Model_findBoneIndex(void);
@@ -1423,7 +1423,7 @@ asm void fn_80248E88(void)
     stw r3, 0x0(r30)
     mr r3, r31
     li r4, 0x0
-    bl fn_80056DB8
+    bl path_Object_constructor
     lwz r0, 0x54c(r30)
     li r4, 0x0
     lis r3, lbl_80777668@ha

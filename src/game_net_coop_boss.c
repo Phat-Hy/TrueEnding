@@ -25,7 +25,7 @@ extern void node_createNamedChild(void);
 extern void node_destroy(void);
 extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
-extern void fn_80092954(void);
+extern void compass_findMarkerByName(void);
 extern void lockon_updateTarget(void);
 extern void cursor_Object_constructor(void);
 extern void model_updateBoneTransforms(void);
@@ -1951,7 +1951,7 @@ lbl_fn_804A894C_000018E4:
     addi r4, r4, 0x14c
     stw r0, 0x20c(r3)
     addi r3, r3, 0x208
-    bl fn_80092954
+    bl compass_findMarkerByName
     cmpwi r3, 0x0
     beq lbl_fn_804A894C_00001A18
     lwz r0, 0x18(r3)
@@ -2026,7 +2026,7 @@ lbl_fn_804A894C_00001A18:
     addi r4, r4, lbl_8075765C@l
     addi r3, r24, 0x208
     addi r4, r4, 0x15a
-    bl fn_80092954
+    bl compass_findMarkerByName
     cmpwi r3, 0x0
     beq lbl_fn_804A894C_00001B3C
     lwz r0, 0x18(r3)
@@ -2101,7 +2101,7 @@ lbl_fn_804A894C_00001B3C:
     addi r4, r4, lbl_8075765C@l
     addi r3, r24, 0x208
     addi r4, r4, 0x167
-    bl fn_80092954
+    bl compass_findMarkerByName
     cmpwi r3, 0x0
     beq lbl_fn_804A894C_00001C60
     lwz r0, 0x18(r3)

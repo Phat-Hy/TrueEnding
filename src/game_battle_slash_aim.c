@@ -9,7 +9,7 @@ extern void sound_releaseChannel(void);
 extern void item_useConsumable(void);
 extern void fn_80058078(void);
 extern void fn_800580BC(void);
-extern void fn_800588FC(void);
+extern void mission_updateObjectiveTarget(void);
 extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
@@ -201,7 +201,7 @@ lbl_fn_803F4D98_0000017C:
     psq_st f4, 0x60(r3), 0, 0
     psq_st f5, 0x68(r3), 0, 0
     psq_st f6, 0x70(r3), 0, 0
-    bl fn_800588FC
+    bl mission_updateObjectiveTarget
     addi r3, r31, 0x54c
     psq_l f1, 0xfc(r31), 0, 0
     psq_l f2, 0x104(r31), 0, 0
@@ -215,7 +215,7 @@ lbl_fn_803F4D98_0000017C:
     psq_st f4, 0x60(r3), 0, 0
     psq_st f5, 0x68(r3), 0, 0
     psq_st f6, 0x70(r3), 0, 0
-    bl fn_800588FC
+    bl mission_updateObjectiveTarget
     lwz r0, 0x5e4(r31)
     cmpwi r0, 0x0
     beq lbl_fn_803F4D98_00000234

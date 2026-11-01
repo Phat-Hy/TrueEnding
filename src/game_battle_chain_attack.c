@@ -17,7 +17,7 @@ extern void map_processTrigger(void);
 extern void map_debugLog(void);
 extern void fn_800902C0(void);
 extern void fn_800920B8(void);
-extern void fn_800928B0(void);
+extern void compass_findWaypointIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void str_skipWhitespace(void);
 extern void str_findChar(void);
@@ -1592,7 +1592,7 @@ asm void fn_803FE828(void)
     lwz r4, 0x360(r31)
     addi r3, r31, 0xf4
     li r5, 0x0
-    bl fn_800928B0
+    bl compass_findWaypointIndex
     cmpwi r3, 0x0
     bge lbl_fn_803FE828_00001560
     li r0, 0x0
@@ -1606,7 +1606,7 @@ lbl_fn_803FE828_0000156C:
     addi r3, r31, 0xf4
     lwz r4, 0x364(r31)
     li r5, 0x0
-    bl fn_800928B0
+    bl compass_findWaypointIndex
     cmpwi r3, 0x0
     bge lbl_fn_803FE828_00001590
     li r0, 0x0
@@ -1620,7 +1620,7 @@ lbl_fn_803FE828_0000159C:
     addi r3, r31, 0xf4
     lwz r4, 0x368(r31)
     li r5, 0x0
-    bl fn_800928B0
+    bl compass_findWaypointIndex
     cmpwi r3, 0x0
     bge lbl_fn_803FE828_000015C0
     li r3, 0x0

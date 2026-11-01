@@ -7,7 +7,7 @@ extern void fn_80082970(void);
 extern void fn_80082BE0(void);
 extern void fn_80082CAC(void);
 extern void fn_800832AC(void);
-extern void fn_80083AD4(void);
+extern void town_updateInteractionPoints(void);
 extern void fn_8008510C(void);
 extern void str_parseInt(void);
 extern void fn_8022AB18(void);
@@ -191,7 +191,7 @@ lbl_fn_80084110_000001E0:
     lis r3, lbl_807C709C@ha
     mr r4, r29
     addi r3, r3, lbl_807C709C@l
-    bl fn_80083AD4
+    bl town_updateInteractionPoints
 lbl_fn_80084110_000001F0:
     lwz r31, 0x1c(r1)
     mr r3, r29
@@ -467,7 +467,7 @@ lbl_dtor_80084684_000005C4:
     lis r3, lbl_807C709C@ha
     mr r4, r30
     addi r3, r3, lbl_807C709C@l
-    bl fn_80083AD4
+    bl town_updateInteractionPoints
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -942,7 +942,7 @@ lbl_mem_getAllocSize_00000C90:
     lis r3, lbl_807C709C@ha
     mr r4, r30
     addi r3, r3, lbl_807C709C@l
-    bl fn_80083AD4
+    bl town_updateInteractionPoints
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)

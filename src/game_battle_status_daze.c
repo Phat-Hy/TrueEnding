@@ -3,7 +3,7 @@
 
 /* External function declarations */
 extern void dtor_80084684(void);
-extern void fn_80056DB8(void);
+extern void path_Object_constructor(void);
 extern void atn_ColliBase_destructor(void);
 extern void fn_800575BC(void);
 extern void talk_parseQuotedString(void);
@@ -466,7 +466,7 @@ asm void fn_8042E36C(void)
     addi r30, r31, 0x4d0
     li r4, 0x2
     mr r3, r30
-    bl fn_80056DB8
+    bl path_Object_constructor
     lis r3, lbl_807775F8@ha
     lfs f0, lbl_808867D8
     addi r3, r3, lbl_807775F8@l

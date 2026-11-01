@@ -8,7 +8,7 @@ extern void mtx_getTranslation(void);
 extern void vec3_copy(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_80092954(void);
+extern void compass_findMarkerByName(void);
 extern void fn_8009373C(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void system_getNextSequenceId(void);
@@ -120,7 +120,7 @@ asm void fn_80294F88(void)
     stb r0, 0x1f(r1)
     lwz r0, 0x1c(r1)
     stw r0, 0x34(r1)
-    bl fn_80092954
+    bl compass_findMarkerByName
     lbz r0, 0x34(r1)
     addi r4, r30, 0x285
     stb r0, 0x18(r3)
@@ -158,7 +158,7 @@ asm void fn_80294F88(void)
     stb r0, 0x1b(r1)
     lwz r0, 0x18(r1)
     stw r0, 0x30(r1)
-    bl fn_80092954
+    bl compass_findMarkerByName
     lbz r0, 0x30(r1)
     addi r4, r30, 0x296
     stb r0, 0x18(r3)
@@ -196,7 +196,7 @@ asm void fn_80294F88(void)
     stb r0, 0x17(r1)
     lwz r0, 0x14(r1)
     stw r0, 0x2c(r1)
-    bl fn_80092954
+    bl compass_findMarkerByName
     lbz r0, 0x2c(r1)
     stb r0, 0x18(r3)
     lbz r0, 0x2d(r1)
@@ -236,7 +236,7 @@ lbl_fn_80294F88_000001FC:
     lwz r0, 0x10(r1)
     stfs f2, 0x44(r1)
     stw r0, 0x28(r1)
-    bl fn_80092954
+    bl compass_findMarkerByName
     lfs f4, lbl_80883C14
     addi r4, r30, 0x285
     lfs f0, 0x38(r1)
@@ -274,7 +274,7 @@ lbl_fn_80294F88_000001FC:
     stb r0, 0xf(r1)
     lwz r0, 0xc(r1)
     stw r0, 0x24(r1)
-    bl fn_80092954
+    bl compass_findMarkerByName
     lfs f4, lbl_80883C14
     addi r4, r30, 0x296
     lfs f0, 0x38(r1)
@@ -312,7 +312,7 @@ lbl_fn_80294F88_000001FC:
     stb r0, 0xb(r1)
     lwz r0, 0x8(r1)
     stw r0, 0x20(r1)
-    bl fn_80092954
+    bl compass_findMarkerByName
     lbz r0, 0x20(r1)
     stb r0, 0x18(r3)
     lbz r0, 0x21(r1)

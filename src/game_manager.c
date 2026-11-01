@@ -20,7 +20,7 @@ extern void scene_traverseNode(void);
 extern void fn_8000DD0C(void);
 extern void mem_free(void);
 extern s32 atn_Model_findBoneIndex(void*, u32, int);
-extern void fn_800928B0(void);
+extern void compass_findWaypointIndex(void);
 extern void fn_800929C0(void);
 extern void fn_80094958(void);
 extern void fn_80097A9C(void);
@@ -3260,7 +3260,7 @@ lbl_fn_80012AC4_000029F0:
     lwz r3, 0x48(r3)
     addi r31, r3, 0xb0
     mr r3, r31
-    bl fn_800928B0
+    bl compass_findWaypointIndex
     cmpwi r3, 0x0
     bge lbl_fn_80012AC4_00002A24
     li r3, 0x0
@@ -3286,7 +3286,7 @@ lbl_fn_80012AC4_00002A44:
     mr r31, r3
     mr r4, r30
     li r5, 0x0
-    bl fn_800928B0
+    bl compass_findWaypointIndex
     cmpwi r3, 0x0
     bge lbl_fn_80012AC4_00002A80
     li r3, 0x0
@@ -3311,7 +3311,7 @@ lbl_fn_80012AC4_00002AAC:
     li r5, 0x0
     lwz r31, 0x48(r3)
     mr r3, r31
-    bl fn_800928B0
+    bl compass_findWaypointIndex
     cmpwi r3, 0x0
     bge lbl_fn_80012AC4_00002AD8
     li r3, 0x0
@@ -3350,7 +3350,7 @@ asm void fn_80012C3C(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_800928B0
+    bl compass_findWaypointIndex
     cmpwi r3, 0x0
     bge lbl_fn_80012C3C_00002B4C
     li r3, 0x0

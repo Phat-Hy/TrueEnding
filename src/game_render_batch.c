@@ -23,7 +23,7 @@ extern void hurtbox_testCollisionLayer(void);
 extern void fn_8010EE78(void);
 extern void fn_8012DF7C(void);
 extern void quest_evaluateConditions(void);
-extern void fn_80148B0C(void);
+extern void quest_getRewardItemSlot(void);
 extern void shop_canPurchaseItem(void);
 extern void fn_8015A46C(void);
 extern void fn_8015AC48(void);
@@ -190,7 +190,7 @@ lbl_fn_802A91D0_0000014C:
     bl fn_8012DF7C
     lwz r3, 0x1644(r31)
     li r4, 0x0
-    bl fn_80148B0C
+    bl quest_getRewardItemSlot
     lfs f2, 0xc(r3)
     addi r5, r1, 0x14
     psq_l f1, 0x4(r3), 0, 0
@@ -389,7 +389,7 @@ lbl_fn_802A94C8_000003BC:
     bl ui_drawColoredQuad
     lwz r3, 0x14b0(r31)
     li r4, 0x0
-    bl fn_80148B0C
+    bl quest_getRewardItemSlot
     lfs f2, 0xc(r3)
     addi r5, r1, 0x38
     psq_l f1, 0x4(r3), 0, 0

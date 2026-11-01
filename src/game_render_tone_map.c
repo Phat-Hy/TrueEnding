@@ -15,7 +15,7 @@ extern void system_getNextSequenceId(void);
 extern void viewport_updateCulling(void);
 extern void scissor_clipFrustum(void);
 extern void clip_calculateFrustum(void);
-extern void fn_8012DB04(void);
+extern void enemy_evalAnimTrack(void);
 extern void npc_initScriptContext(void);
 extern void quest_evaluateConditions(void);
 extern void actor_setState(void);
@@ -1580,7 +1580,7 @@ asm void fn_802BE180(void)
     stw r30, 0x8(r1)
     mr r30, r3
     addi r3, r3, 0x7d4
-    bl fn_8012DB04
+    bl enemy_evalAnimTrack
     stfs f1, 0x2e8(r30)
     addi r3, r30, 0xb0
     lfs f31, 0x2e4(r30)
@@ -1663,7 +1663,7 @@ asm void fn_802BE2A0(void)
     stw r30, 0x1d8(r1)
     mr r30, r3
     addi r3, r3, 0x7d4
-    bl fn_8012DB04
+    bl enemy_evalAnimTrack
     stfs f1, 0x2e8(r30)
     addi r3, r30, 0xb0
     lfs f29, 0x2e4(r30)

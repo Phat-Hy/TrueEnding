@@ -15,8 +15,8 @@ extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
 extern void talk_parseDialogue(void);
-extern void fn_8005B8F8(void);
-extern void fn_8005B9AC(void);
+extern void talk_parseDialogueTokens(void);
+extern void talk_copyUtf16String(void);
 extern void boss_decodePhaseBitfield(void);
 extern void fn_8006BA30(void);
 extern void fn_8006BA8C(void);
@@ -116,7 +116,7 @@ void fn_80209048(void);
 void fn_80209120(void);
 void fn_80209184(void);
 void fn_802091E8(void);
-void fn_8020924C(void);
+void mem_findBlockById(void);
 void fn_80209294(void);
 void fn_802092C0(void);
 void fn_802092F8(void);
@@ -751,7 +751,7 @@ lbl_fn_80208BE8_00000688:
     addi r27, r3, 0x2
 lbl_fn_80208BE8_00000828:
     addi r3, r1, 0x130
-    bl fn_8005B8F8
+    bl talk_parseDialogueTokens
     cmpwi r3, 0x0
     bne lbl_fn_80208BE8_00000688
     lis r30, lbl_8073EAB8@ha
@@ -897,7 +897,7 @@ lbl_fn_80208BE8_0000094C:
     addi r30, r30, 0x30
 lbl_fn_80208BE8_00000A64:
     addi r3, r1, 0x130
-    bl fn_8005B8F8
+    bl talk_parseDialogueTokens
     cmpwi r3, 0x0
     bne lbl_fn_80208BE8_000008BC
     mr r3, r31
@@ -961,7 +961,7 @@ lbl_fn_80209048_00000B20:
     stw r3, 0x0(r29)
     mr r3, r29
     addi r4, r4, lbl_8077A0A8@l
-    bl fn_8005B9AC
+    bl talk_copyUtf16String
     lwz r31, 0x1c(r1)
     mr r3, r29
     lwz r30, 0x18(r1)
@@ -1068,7 +1068,7 @@ lbl_fn_802091E8_00000C88:
     blr
 }
 
-asm void fn_8020924C(void)
+asm void mem_findBlockById(void)
 {
     nofralloc
     lwz r5, lbl_8087F198
@@ -1077,19 +1077,19 @@ asm void fn_8020924C(void)
     mr r4, r5
     mtctr r0
     cmplwi r0, 0x0
-    ble lbl_fn_8020924C_00000CD8
-lbl_fn_8020924C_00000CB4:
+    ble lbl_mem_findBlockById_00000CD8
+lbl_mem_findBlockById_00000CB4:
     lwz r0, 0x0(r4)
     cmpw r3, r0
-    bne lbl_fn_8020924C_00000CCC
+    bne lbl_mem_findBlockById_00000CCC
     mulli r0, r6, 0x30
     add r3, r5, r0
     blr
-lbl_fn_8020924C_00000CCC:
+lbl_mem_findBlockById_00000CCC:
     addi r4, r4, 0x30
     addi r6, r6, 0x1
-    bdnz lbl_fn_8020924C_00000CB4
-lbl_fn_8020924C_00000CD8:
+    bdnz lbl_mem_findBlockById_00000CB4
+lbl_mem_findBlockById_00000CD8:
     li r3, 0x0
     blr
 }

@@ -20,7 +20,7 @@ extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void fn_80105BD8(void);
 extern void enemy_updateAnimTimer(void);
-extern void fn_8012DB04(void);
+extern void enemy_evalAnimTrack(void);
 extern void npc_calcTargetDistance(void);
 extern void quest_evaluateConditions(void);
 extern void quest_updateFlow(void);
@@ -1533,7 +1533,7 @@ lbl_fn_80546B88_0000143C:
     lfs f30, lbl_80887CD8
 lbl_fn_80546B88_00001440:
     addi r3, r18, 0x7d4
-    bl fn_8012DB04
+    bl enemy_evalAnimTrack
     fmuls f5, f30, f1
     lfs f3, 0x98(r1)
     lfs f0, 0x94(r1)

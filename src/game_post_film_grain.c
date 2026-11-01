@@ -18,7 +18,7 @@ extern void fn_8012DF7C(void);
 extern void npc_initScriptContext(void);
 extern void npc_updateTalkInteraction(void);
 extern void quest_evaluateConditions(void);
-extern void fn_80148B0C(void);
+extern void quest_getRewardItemSlot(void);
 extern void fn_80155D70(void);
 extern void fn_8015B808(void);
 extern void actor_setState(void);
@@ -1854,7 +1854,7 @@ lbl_fn_802CAFB8_000018D4:
     stfd f0, 0x40(r1)
     lwz r0, 0x44(r1)
     stw r0, 0x24(r1)
-    bl fn_80148B0C
+    bl quest_getRewardItemSlot
     lfs f2, 0xc(r3)
     addi r31, r1, 0x14
     psq_l f1, 0x4(r3), 0, 0

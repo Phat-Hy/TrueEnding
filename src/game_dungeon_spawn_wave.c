@@ -18,7 +18,7 @@ extern void talk_formatQuotedString(void);
 extern void boss_recordDamage(void);
 extern void boss_triggerEventSequence(void);
 extern void fn_8007FAF0(void);
-extern void fn_80092954(void);
+extern void compass_findMarkerByName(void);
 extern void fn_8009385C(void);
 extern void fn_800C93D4(void);
 extern void fn_800CA7D4(void);
@@ -1508,7 +1508,7 @@ asm void fn_803EBC44(void)
     bl talk_formatQuotedString
     mr r4, r3
     mr r3, r31
-    bl fn_80092954
+    bl compass_findMarkerByName
     cmpwi r3, 0x0
     stw r3, 0x0(r29)
     beq lbl_fn_803EBC44_000012D4
@@ -1589,7 +1589,7 @@ asm void fn_803EBD6C(void)
     mr r4, r5
     stw r0, 0x20(r1)
     stw r0, 0x28(r1)
-    bl fn_80092954
+    bl compass_findMarkerByName
     cmpwi r3, 0x0
     stw r3, 0x0(r29)
     beq lbl_fn_803EBD6C_000013D4

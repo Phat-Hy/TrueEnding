@@ -24,7 +24,7 @@ extern void fn_801F4C14(void);
 extern void save_formatSlotTitle(void);
 extern void saveSlot_readSummary(void);
 extern void thread_dispatchToQueue(void);
-extern void fn_8020924C(void);
+extern void mem_findBlockById(void);
 extern void event_findEntryById(void);
 extern void fn_80444BE8(void);
 extern void fn_80444C50(void);
@@ -1871,7 +1871,7 @@ lbl_fn_804C972C_000018EC:
     lwzx r3, r3, r0
     cmpwi r3, 0x0
     ble lbl_fn_804C972C_00001914
-    bl fn_8020924C
+    bl mem_findBlockById
     cmpwi r3, 0x0
     beq lbl_fn_804C972C_00001944
     lwz r29, 0x4(r3)

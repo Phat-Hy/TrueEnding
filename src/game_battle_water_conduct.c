@@ -8,7 +8,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_22(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
-extern void fn_80056DB8(void);
+extern void path_Object_constructor(void);
 extern void fn_80057F28(void);
 extern void fn_80058078(void);
 extern void fn_800580BC(void);
@@ -525,7 +525,7 @@ lbl_fn_80419C00_00000500:
     mr r22, r3
     beq lbl_fn_80419C00_00000600
     li r4, 0x0
-    bl fn_80056DB8
+    bl path_Object_constructor
     stw r31, 0x0(r22)
 lbl_fn_80419C00_00000600:
     stw r22, 0xfc(r1)

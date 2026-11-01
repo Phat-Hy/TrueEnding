@@ -7,7 +7,7 @@ extern void _restgpr_14(void);
 extern void _savegpr_14(void);
 extern void dungeon_initGlobalContext(void);
 extern void fn_800839EC(void);
-extern void fn_80083AD4(void);
+extern void town_updateInteractionPoints(void);
 extern void mem_alloc(void);
 extern void fn_806540A0(void);
 extern void fn_806572D0(void);
@@ -259,7 +259,7 @@ asm void fn_800DDB14(void)
     mr r31, r3
     bl dungeon_initGlobalContext
     mr r4, r31
-    bl fn_80083AD4
+    bl town_updateInteractionPoints
     lwz r31, 0xc(r1)
     li r3, 0x1
     lwz r0, 0x14(r1)

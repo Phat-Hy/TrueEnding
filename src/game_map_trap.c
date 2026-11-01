@@ -9,7 +9,7 @@ extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void fn_80106878(void);
 extern void fn_8010CA34(void);
-extern void fn_8012DB04(void);
+extern void enemy_evalAnimTrack(void);
 extern void fn_802097C4(void);
 extern void chest_spawnLoot(void);
 extern void atn_LoadHandle_getName(void);
@@ -430,7 +430,7 @@ lbl_fn_8018B48C_000004E8:
     lfs f0, lbl_80881ECC
     fmuls f31, f31, f0
 lbl_fn_8018B48C_000004FC:
-    bl fn_8012DB04
+    bl enemy_evalAnimTrack
     lwz r3, 0x4(r30)
     fmuls f31, f31, f1
     lwz r0, 0x7e8(r3)

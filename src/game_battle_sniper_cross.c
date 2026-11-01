@@ -6,7 +6,7 @@ extern void _restgpr_14(void);
 extern void _savegpr_14(void);
 extern void dtor_80084684(void);
 extern void scene_traverseNode(void);
-extern void fn_80056DB8(void);
+extern void path_Object_constructor(void);
 extern void atn_ColliBase_destructor(void);
 extern void fn_80057F28(void);
 extern void talk_formatQuotedString(void);
@@ -1117,7 +1117,7 @@ asm void fn_803F75B8(void)
     stw r31, 0x550(r28)
     li r4, 0x2
     mr r3, r30
-    bl fn_80056DB8
+    bl path_Object_constructor
     lis r3, lbl_807775F8@ha
     addi r29, r28, 0x8d0
     addi r3, r3, lbl_807775F8@l
@@ -1125,7 +1125,7 @@ asm void fn_803F75B8(void)
     mr r3, r29
     li r4, 0x0
     stw r31, 0x8cc(r28)
-    bl fn_80056DB8
+    bl path_Object_constructor
     lis r3, lbl_80777668@ha
     stw r31, 0x91c(r28)
     addi r3, r3, lbl_80777668@l

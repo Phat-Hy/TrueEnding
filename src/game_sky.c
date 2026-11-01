@@ -14,7 +14,7 @@ extern void boss_decodePhaseBitfield(void);
 extern void fn_8006BA30(void);
 extern void dungeon_initGlobalContext(void);
 extern void fn_800839EC(void);
-extern void fn_80083AD4(void);
+extern void town_updateInteractionPoints(void);
 extern void fn_80087BB4(void);
 extern void node_createNamedChild(void);
 extern void node_destroy(void);
@@ -1065,7 +1065,7 @@ lbl_fn_800DCDA0_00000CAC:
     bl fn_805B56C4
     bl dungeon_initGlobalContext
     lwz r4, 0x3c(r31)
-    bl fn_80083AD4
+    bl town_updateInteractionPoints
     li r0, 0x0
     stw r0, 0x8(r31)
     stw r0, lbl_8087F010

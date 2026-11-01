@@ -18,7 +18,7 @@ extern void fn_80088FAC(void);
 extern void node_createNamedChild(void);
 extern void node_destroy(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_80092954(void);
+extern void compass_findMarkerByName(void);
 extern void fn_80094958(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -1572,7 +1572,7 @@ lbl_fn_802CD73C_00001478:
     addi r3, r31, 0xb0
     addi r30, r30, lbl_80746EE0@l
     addi r4, r30, 0x120
-    bl fn_80092954
+    bl compass_findMarkerByName
     cmpwi r3, 0x0
     beq lbl_fn_802CD73C_00001598
     lwz r0, 0x1c(r3)
@@ -1641,7 +1641,7 @@ lbl_fn_802CD73C_00001598:
     addi r3, r31, 0xb0
     addi r30, r30, lbl_80746EE0@l
     addi r4, r30, 0x12b
-    bl fn_80092954
+    bl compass_findMarkerByName
     cmpwi r3, 0x0
     beq lbl_fn_802CD73C_000016A8
     lwz r0, 0x1c(r3)

@@ -87,7 +87,7 @@ void fn_80148334(void);
 void fn_80148340(void);
 void quest_ctorRewardItem(void);
 void fn_801489CC(void);
-void fn_80148B0C(void);
+void quest_getRewardItemSlot(void);
 void quest_checkCondition(void);
 void fn_80148CC4(void);
 
@@ -1328,19 +1328,19 @@ lbl_fn_801489CC_00001120:
     blr
 }
 
-asm void fn_80148B0C(void)
+asm void quest_getRewardItemSlot(void)
 {
     nofralloc
     cmpwi r4, 0x0
-    blt lbl_fn_80148B0C_00001158
+    blt lbl_quest_getRewardItemSlot_00001158
     lwz r0, 0x624(r3)
     cmpw r4, r0
-    bge lbl_fn_80148B0C_00001158
+    bge lbl_quest_getRewardItemSlot_00001158
     mulli r0, r4, 0x14
     lwz r3, 0x62c(r3)
     add r3, r3, r0
     blr
-lbl_fn_80148B0C_00001158:
+lbl_quest_getRewardItemSlot_00001158:
     li r3, 0x0
     blr
 }

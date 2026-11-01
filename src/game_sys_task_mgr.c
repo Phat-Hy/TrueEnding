@@ -8,8 +8,8 @@ extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
 extern void talk_parseDialogue(void);
-extern void fn_8005B8F8(void);
-extern void fn_8005B9AC(void);
+extern void talk_parseDialogueTokens(void);
+extern void talk_copyUtf16String(void);
 extern void fn_8006F420(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
@@ -847,7 +847,7 @@ lbl_fn_80216CD0_0000093C:
     stw r3, 0xce0(r1)
     mr r3, r28
     addi r4, r4, lbl_8077A0A8@l
-    bl fn_8005B9AC
+    bl talk_copyUtf16String
     lis r29, lbl_8073FBF0@ha
     addi r29, r29, lbl_8073FBF0@l
     b lbl_fn_80216CD0_00000AFC
@@ -952,7 +952,7 @@ lbl_fn_80216CD0_00000974:
     stw r0, lbl_8087F274
 lbl_fn_80216CD0_00000AFC:
     addi r3, r1, 0xce0
-    bl fn_8005B8F8
+    bl talk_parseDialogueTokens
     cmpwi r3, 0x0
     bne lbl_fn_80216CD0_00000974
     lwz r28, lbl_8087F274
@@ -1115,7 +1115,7 @@ lbl_fn_80216CD0_00000D44:
     stw r30, 0xbc(r25)
 lbl_fn_80216CD0_00000D70:
     addi r3, r1, 0xce0
-    bl fn_8005B8F8
+    bl talk_parseDialogueTokens
     cmpwi r3, 0x0
     bne lbl_fn_80216CD0_00000BBC
     lwz r3, lbl_8087F518

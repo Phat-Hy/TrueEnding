@@ -15,7 +15,7 @@ extern void wcs_vformat(void);
 extern void fn_800EFBC4(void);
 extern void fn_800EFE3C(void);
 extern void hurtbox_processHitDamage(void);
-extern void fn_8012DB04(void);
+extern void enemy_evalAnimTrack(void);
 extern void fn_80133FBC(void);
 extern void fn_80134134(void);
 extern void fn_80134168(void);
@@ -977,7 +977,7 @@ lbl_fn_8010CB2C_00000BB0:
     fmuls f31, f31, f0
 lbl_fn_8010CB2C_00000BB4:
     addi r3, r30, 0x7d4
-    bl fn_8012DB04
+    bl enemy_evalAnimTrack
     fmuls f31, f31, f1
     addi r3, r30, 0x7d4
     li r4, 0x2b

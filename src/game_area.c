@@ -20,7 +20,7 @@ extern void fn_8006AD24(void);
 extern void boss_decodePhaseBitfield(void);
 extern void fn_8007C3F8(void);
 extern void dungeon_initGlobalContext(void);
-extern void fn_80083AD4(void);
+extern void town_updateInteractionPoints(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
@@ -2037,7 +2037,7 @@ lbl_fn_8008AA90_0000199C:
     beq lbl_fn_8008AA90_000019BC
     bl dungeon_initGlobalContext
     mr r4, r28
-    bl fn_80083AD4
+    bl town_updateInteractionPoints
     li r0, 0x0
     stw r0, 0x58(r31)
 lbl_fn_8008AA90_000019BC:

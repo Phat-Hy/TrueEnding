@@ -16,7 +16,7 @@ extern void scissor_clipFrustum(void);
 extern void clip_calculateFrustum(void);
 extern void hurtbox_testCollisionLayer(void);
 extern void quest_evaluateConditions(void);
-extern void fn_80148B0C(void);
+extern void quest_getRewardItemSlot(void);
 extern void fn_80155D70(void);
 extern void fn_8015CF98(void);
 extern void fn_8015D2A0(void);
@@ -852,7 +852,7 @@ lbl_fn_802696F8_00000A20:
 lbl_fn_802696F8_00000AA4:
     lwz r3, 0x150c(r31)
     li r4, 0x0
-    bl fn_80148B0C
+    bl quest_getRewardItemSlot
     lfs f2, 0xc(r3)
     addi r5, r1, 0x5c
     psq_l f1, 0x4(r3), 0, 0

@@ -8,8 +8,8 @@ extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
 extern void talk_parseDialogue(void);
-extern void fn_8005B8F8(void);
-extern void fn_8005B9AC(void);
+extern void talk_parseDialogueTokens(void);
+extern void talk_copyUtf16String(void);
 extern void fn_8006BA8C(void);
 extern void fn_8006BB6C(void);
 extern void dungeon_initGlobalContext(void);
@@ -677,9 +677,9 @@ lbl_fn_80211244_0000084C:
     stw r3, 0x14(r1)
     mr r3, r30
     addi r4, r4, lbl_8077A0A8@l
-    bl fn_8005B9AC
+    bl talk_copyUtf16String
     addi r3, r1, 0x14
-    bl fn_8005B8F8
+    bl talk_parseDialogueTokens
     li r0, 0x0
     stw r0, 0xc(r1)
     stw r0, 0x8(r1)
@@ -697,7 +697,7 @@ lbl_fn_80211244_00000890:
     bl fn_80219F1C
 lbl_fn_80211244_000008B8:
     addi r3, r1, 0x14
-    bl fn_8005B8F8
+    bl talk_parseDialogueTokens
     cmpwi r3, 0x0
     bne lbl_fn_80211244_00000890
     lis r3, lbl_8073FA60@ha
@@ -727,7 +727,7 @@ lbl_fn_80211244_00000918:
     stw r3, 0x1c(r1)
     addi r3, r1, 0x14
     stw r31, 0x20(r1)
-    bl fn_8005B8F8
+    bl talk_parseDialogueTokens
     stw r31, 0xc(r1)
     li r29, 0x0
     stw r31, 0x8(r1)
@@ -752,7 +752,7 @@ lbl_fn_80211244_0000093C:
     addi r29, r29, 0x138
 lbl_fn_80211244_00000980:
     addi r3, r1, 0x14
-    bl fn_8005B8F8
+    bl talk_parseDialogueTokens
     cmpwi r3, 0x0
     bne lbl_fn_80211244_0000093C
     mr r3, r28

@@ -12,8 +12,8 @@ extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void talk_parseDialogue(void);
-extern void fn_8005B8F8(void);
-extern void fn_8005B9AC(void);
+extern void talk_parseDialogueTokens(void);
+extern void talk_copyUtf16String(void);
 extern void skill_calcTrajectory(void);
 extern void fn_8006AD24(void);
 extern void script_executeOpcode(void);
@@ -1318,11 +1318,11 @@ lbl_fn_801F36C8_00001038:
     stw r3, 0x60(r1)
     mr r3, r16
     addi r4, r4, lbl_8077A0A8@l
-    bl fn_8005B9AC
+    bl talk_copyUtf16String
     addi r3, r1, 0x60
-    bl fn_8005B8F8
+    bl talk_parseDialogueTokens
     addi r3, r1, 0x60
-    bl fn_8005B8F8
+    bl talk_parseDialogueTokens
     lis r3, __files@ha
     addi r21, r1, 0x48
     addi r31, r1, 0x4c
@@ -1649,7 +1649,7 @@ lbl_fn_801F36C8_00001504:
     bl dtor_80084684
 lbl_fn_801F36C8_00001520:
     addi r3, r1, 0x60
-    bl fn_8005B8F8
+    bl talk_parseDialogueTokens
     cmpwi r3, 0x0
     bne lbl_fn_801F36C8_000010A4
     lwz r3, 0x4(r29)

@@ -30,7 +30,7 @@ extern void vec3_initValues(void);
 extern void mem_free(void);
 extern void atn_Matrix_copy_2(void);
 extern void atn_Matrix_copy(void);
-extern void fn_800928B0(void);
+extern void compass_findWaypointIndex(void);
 extern void viewport_getNextSequenceId(void);
 extern void fn_8010F668(void);
 extern void fn_801479E4(void);
@@ -1019,7 +1019,7 @@ asm void fn_80551D94(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_800928B0
+    bl compass_findWaypointIndex
     cmpwi r3, 0x0
     bge lbl_fn_80551D94_00000CC4
     li r3, 0x0

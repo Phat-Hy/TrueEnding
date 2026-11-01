@@ -85,7 +85,7 @@ void atn_ColliObject_testBox(void);
 void fn_800584B4(void);
 void fn_800584D8(void);
 void atn_ColliObject_getAABB(void);
-void fn_800588FC(void);
+void mission_updateObjectiveTarget(void);
 void fn_80058A1C(void);
 void atn_LH_ColliTree_destructor(void);
 void fn_80058B78(void);
@@ -1174,7 +1174,7 @@ asm void atn_ColliObject_getAABB(void)
     blr
 }
 
-asm void fn_800588FC(void)
+asm void mission_updateObjectiveTarget(void)
 {
     nofralloc
     stwu r1, -0x60(r1)
@@ -1189,7 +1189,7 @@ asm void fn_800588FC(void)
     addi r3, r3, 0x3c
     bl fn_80472C90
     cmpwi r3, 0x0
-    beq lbl_fn_800588FC_00000F80
+    beq lbl_mission_updateObjectiveTarget_00000F80
     psq_l f1, 0x0(r3), 0, 0
     addi r4, r31, 0x78
     lfs f2, 0x8(r3)
@@ -1234,14 +1234,14 @@ asm void fn_800588FC(void)
     lfs f0, 0x84(r31)
     fmuls f0, f0, f1
     stfs f0, 0x84(r31)
-    b lbl_fn_800588FC_00000F94
-lbl_fn_800588FC_00000F80:
+    b lbl_mission_updateObjectiveTarget_00000F94
+lbl_mission_updateObjectiveTarget_00000F80:
     lfs f0, lbl_80880960
     stfs f0, 0x78(r31)
     stfs f0, 0x7c(r31)
     stfs f0, 0x80(r31)
     stfs f0, 0x84(r31)
-lbl_fn_800588FC_00000F94:
+lbl_mission_updateObjectiveTarget_00000F94:
     lwz r0, 0x64(r1)
     psq_l f31, 0x58(r1), 0, 0
     lfd f31, 0x50(r1)

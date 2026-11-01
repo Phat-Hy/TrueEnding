@@ -14,7 +14,7 @@ extern void actor_dispatchMessage(void);
 extern void fn_80057F28(void);
 extern void fn_80058078(void);
 extern void fn_800580BC(void);
-extern void fn_800588FC(void);
+extern void mission_updateObjectiveTarget(void);
 extern void atn_ColliObject_destructor(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
@@ -1466,7 +1466,7 @@ lbl_fn_8032CF10_00001264:
     psq_st f4, 0x60(r3), 0, 0
     psq_st f5, 0x68(r3), 0, 0
     psq_st f6, 0x70(r3), 0, 0
-    bl fn_800588FC
+    bl mission_updateObjectiveTarget
 lbl_fn_8032CF10_0000132C:
     addi r27, r27, 0x1
     addi r30, r30, 0x88

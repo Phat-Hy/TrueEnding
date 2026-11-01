@@ -11,7 +11,7 @@ extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
 extern void node_destroy(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_80092954(void);
+extern void compass_findMarkerByName(void);
 extern void fn_8009373C(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void skin_applyWeights(void);
@@ -731,7 +731,7 @@ lbl_fn_802EDB34_000007A4:
     stfs f0, 0x2c(r1)
     stfs f0, 0x30(r1)
     stfs f1, 0x34(r1)
-    bl fn_80092954
+    bl compass_findMarkerByName
     cmpwi r3, 0x0
     beq lbl_fn_802EDB34_000008DC
     lfs f4, lbl_80884830
@@ -763,7 +763,7 @@ lbl_fn_802EDB34_000007A4:
     stb r0, 0xf(r1)
     lwz r0, 0xc(r1)
     stw r0, 0x14(r1)
-    bl fn_80092954
+    bl compass_findMarkerByName
     lbz r0, 0x14(r1)
     stb r0, 0x18(r3)
     lbz r0, 0x15(r1)
@@ -777,7 +777,7 @@ lbl_fn_802EDB34_000008DC:
     addi r3, r31, 0xb0
     addi r30, r30, lbl_80748250@l
     addi r4, r30, 0x1aa
-    bl fn_80092954
+    bl compass_findMarkerByName
     cmpwi r3, 0x0
     beq lbl_fn_802EDB34_00000990
     lfs f4, lbl_80884830
@@ -809,7 +809,7 @@ lbl_fn_802EDB34_000008DC:
     stb r0, 0xb(r1)
     lwz r0, 0x8(r1)
     stw r0, 0x10(r1)
-    bl fn_80092954
+    bl compass_findMarkerByName
     lbz r0, 0x10(r1)
     stb r0, 0x18(r3)
     lbz r0, 0x11(r1)

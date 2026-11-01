@@ -14,7 +14,7 @@ extern void fn_8011BF3C(void);
 extern void fn_8012A288(void);
 extern void fn_8012B0B0(void);
 extern void fn_8012B3A8(void);
-extern void fn_8012DB04(void);
+extern void enemy_evalAnimTrack(void);
 extern void battle_calcExpPosition(void);
 extern void battle_generateLootDrops(void);
 extern void fn_801B3E70(void);
@@ -393,7 +393,7 @@ lbl_fn_8056796C_000003F4:
     mr r5, r4
     bl PSMTXMultVec
     addi r3, r29, 0x7d4
-    bl fn_8012DB04
+    bl enemy_evalAnimTrack
     lfs f4, 0xb4(r1)
     lfs f3, 0xb0(r1)
     fmuls f5, f4, f1

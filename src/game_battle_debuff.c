@@ -15,7 +15,7 @@ extern void fn_80105B3C(void);
 extern void fn_80107CA8(void);
 extern void fn_8010CA34(void);
 extern void fn_8011BEB8(void);
-extern void fn_8012DB04(void);
+extern void enemy_evalAnimTrack(void);
 extern void fn_8013A21C(void);
 extern void fn_8014C228(void);
 extern void dialog_selectChoice(void);
@@ -1634,7 +1634,7 @@ lbl_fn_8016E864_0000151C:
     fmuls f31, f31, f0
 lbl_fn_8016E864_00001530:
     addi r3, r3, 0x7d4
-    bl fn_8012DB04
+    bl enemy_evalAnimTrack
     lwz r0, 0x7e8(r31)
     fmuls f31, f31, f1
     rlwinm r0, r0, 0, 18, 18

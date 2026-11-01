@@ -18,7 +18,7 @@ extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
 extern void node_destroy(void);
-extern void fn_80092954(void);
+extern void compass_findMarkerByName(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_80099E9C(void);
@@ -41,7 +41,7 @@ extern void fn_801162A0(void);
 extern void fn_801255C8(void);
 extern void enemy_updateCombatBehavior(void);
 extern void fn_80128930(void);
-extern void fn_8012DB04(void);
+extern void enemy_evalAnimTrack(void);
 extern void boss_updatePhaseState(void);
 extern void npc_updateDialogueTarget(void);
 extern void fn_80139F2C(void);
@@ -714,7 +714,7 @@ lbl_fn_80313AAC_000007AC:
     beq lbl_fn_80313AAC_000008BC
     addi r3, r31, 0xb0
     addi r4, r30, 0x148
-    bl fn_80092954
+    bl compass_findMarkerByName
     cmpwi r3, 0x0
     stw r3, 0x1658(r31)
     beq lbl_fn_80313AAC_000008BC
@@ -2001,7 +2001,7 @@ lbl_fn_80314BD8_000019E8:
     b lbl_fn_80314BD8_0000207C
     mr r3, r30
     bl fn_800F52F0
-    bl fn_8012DB04
+    bl enemy_evalAnimTrack
     addi r3, r30, 0xb0
     li r4, 0x0
     bl fn_80139F3C
@@ -2093,7 +2093,7 @@ lbl_fn_80314BD8_00001B38:
     fsubs f0, f1, f0
     stfs f0, 0x1604(r30)
     bl fn_800F52F0
-    bl fn_8012DB04
+    bl enemy_evalAnimTrack
     fmr f30, f1
     bl fn_802F0990
     bl fn_802F0988

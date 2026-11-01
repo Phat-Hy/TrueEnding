@@ -12,9 +12,9 @@ extern void morph_updateWeights(void);
 extern void morph_updateMesh(void);
 extern void system_getNextSequenceId(void);
 extern void viewport_updateCulling(void);
-extern void fn_8012DB04(void);
+extern void enemy_evalAnimTrack(void);
 extern void fn_801426A4(void);
-extern void fn_80148B0C(void);
+extern void quest_getRewardItemSlot(void);
 extern void shop_canPurchaseItem(void);
 extern void actor_setState(void);
 extern void battle_resolveAggroHierarchy(void);
@@ -278,7 +278,7 @@ lbl_fn_802F97B8_000002D8:
     bge lbl_fn_802F97B8_00000724
     lwz r3, 0x15bc(r31)
     li r4, 0x0
-    bl fn_80148B0C
+    bl quest_getRewardItemSlot
     lfs f7, 0xc(r3)
     addi r4, r1, 0x88
     lfs f0, 0x530(r31)
@@ -1776,7 +1776,7 @@ lbl_fn_802FA764_00001898:
     fmuls f30, f30, f0
 lbl_fn_802FA764_000018A0:
     addi r3, r31, 0x7d4
-    bl fn_8012DB04
+    bl enemy_evalAnimTrack
     fmuls f30, f30, f1
     lfs f0, 0x568(r31)
     fmr f1, f31

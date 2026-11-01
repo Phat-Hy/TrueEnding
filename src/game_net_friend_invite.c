@@ -15,7 +15,7 @@ extern void fn_8004895C(void);
 extern void fn_80049654(void);
 extern void sound_releaseChannel(void);
 extern void dungeon_initGlobalContext(void);
-extern void fn_80083AD4(void);
+extern void town_updateInteractionPoints(void);
 extern void mem_getAllocSize(void);
 extern void node_destroy(void);
 extern void fn_80089ACC(void);
@@ -478,7 +478,7 @@ lbl_fn_804D14BC_000000F8:
     beq lbl_fn_804D14BC_00000114
     bl dungeon_initGlobalContext
     mr r4, r27
-    bl fn_80083AD4
+    bl town_updateInteractionPoints
     stw r29, 0x28(r26)
 lbl_fn_804D14BC_00000114:
     lwz r27, 0x2c(r26)
@@ -486,7 +486,7 @@ lbl_fn_804D14BC_00000114:
     beq lbl_fn_804D14BC_00000130
     bl dungeon_initGlobalContext
     mr r4, r27
-    bl fn_80083AD4
+    bl town_updateInteractionPoints
     stw r29, 0x2c(r26)
 lbl_fn_804D14BC_00000130:
     lwz r26, 0x4(r26)
@@ -513,7 +513,7 @@ lbl_fn_804D14BC_0000016C:
     beq lbl_fn_804D14BC_00000190
     bl dungeon_initGlobalContext
     mr r4, r26
-    bl fn_80083AD4
+    bl town_updateInteractionPoints
     stw r29, 0x8(r27)
 lbl_fn_804D14BC_00000190:
     lwz r26, 0xc(r27)
@@ -521,7 +521,7 @@ lbl_fn_804D14BC_00000190:
     beq lbl_fn_804D14BC_000001AC
     bl dungeon_initGlobalContext
     mr r4, r26
-    bl fn_80083AD4
+    bl town_updateInteractionPoints
     stw r29, 0xc(r27)
 lbl_fn_804D14BC_000001AC:
     mr r3, r25
@@ -559,7 +559,7 @@ lbl_fn_804D14BC_00000210:
     beq lbl_fn_804D14BC_00000234
     bl dungeon_initGlobalContext
     mr r4, r26
-    bl fn_80083AD4
+    bl town_updateInteractionPoints
     stw r29, 0x8(r27)
 lbl_fn_804D14BC_00000234:
     lwz r26, 0xc(r27)
@@ -567,7 +567,7 @@ lbl_fn_804D14BC_00000234:
     beq lbl_fn_804D14BC_00000250
     bl dungeon_initGlobalContext
     mr r4, r26
-    bl fn_80083AD4
+    bl town_updateInteractionPoints
     stw r29, 0xc(r27)
 lbl_fn_804D14BC_00000250:
     mr r3, r24

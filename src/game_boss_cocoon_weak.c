@@ -16,7 +16,7 @@ extern void fn_8006C3F0(void);
 extern void fn_8006D008(void);
 extern void dungeon_initGlobalContext(void);
 extern void fn_800838AC(void);
-extern void fn_80083AD4(void);
+extern void town_updateInteractionPoints(void);
 extern void mem_alloc(void);
 extern void node_destroy(void);
 extern void fn_800A4460(void);
@@ -951,7 +951,7 @@ asm void fn_8046DD20(void)
     beq lbl_fn_8046DD20_00000BAC
     bl dungeon_initGlobalContext
     mr r4, r31
-    bl fn_80083AD4
+    bl town_updateInteractionPoints
 lbl_fn_8046DD20_00000BAC:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
