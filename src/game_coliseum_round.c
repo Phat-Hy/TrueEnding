@@ -87,7 +87,7 @@ void fn_8048F1DC(void);
 void fn_8048F844(void);
 void fn_8048F9B0(void);
 void fn_8048FC0C(void);
-void fn_8048FC30(void);
+void *fn_8048FC30(void *obj);
 void fn_8048FC38(void);
 void fn_8048FC4C(void);
 void fn_8048FC7C(void);
@@ -96,11 +96,11 @@ void fn_8048FEF0(void);
 void fn_8048FF34(void);
 void fn_8048FF60(void);
 void fn_8048FFC0(void);
-void fn_8048FFC4(void);
+u32 fn_8048FFC4(void);
 void fn_8048FFCC(void);
 void fn_8049002C(void);
 void fn_80490030(void);
-void fn_80490034(void);
+u32 fn_80490034(void);
 void fn_8049003C(void);
 void fn_80490098(void);
 void fn_80490850(void);
@@ -1046,11 +1046,9 @@ asm void fn_8048FC0C(void)
     blr
 }
 
-asm void fn_8048FC30(void)
+void *fn_8048FC30(void *obj)
 {
-    nofralloc
-    addi r3, r3, 0x48
-    blr
+    return (char *)obj + 0x48;
 }
 
 asm void fn_8048FC38(void)
@@ -1335,11 +1333,9 @@ void fn_8048FFC0(void)
 {
 }
 
-asm void fn_8048FFC4(void)
+u32 fn_8048FFC4(void)
 {
-    nofralloc
-    li r3, 0x1
-    blr
+    return 1;
 }
 
 asm void fn_8048FFCC(void)
@@ -1380,11 +1376,9 @@ void fn_80490030(void)
 {
 }
 
-asm void fn_80490034(void)
+u32 fn_80490034(void)
 {
-    nofralloc
-    li r3, 0x1
-    blr
+    return 1;
 }
 
 asm void fn_8049003C(void)

@@ -123,10 +123,10 @@ void fn_8006B404(void);
 void fn_8006B46C(void);
 void fn_8006B53C(void);
 void fn_8006B594(void);
-void fn_8006BA30(void);
+u32 fn_8006BA30(void);
 void fn_8006BA38(void);
 void fn_8006BA54(void);
-void fn_8006BA6C(void);
+u32 fn_8006BA6C(void);
 void fn_8006BA74(void);
 void fn_8006BA8C(void);
 void fn_8006BB6C(void);
@@ -3429,11 +3429,9 @@ lbl_fn_8006B594_00002C60:
     blr
 }
 
-asm void fn_8006BA30(void)
+u32 fn_8006BA30(void)
 {
-    nofralloc
-    lwz r3, lbl_8087EEC0
-    blr
+    return lbl_8087EEC0;
 }
 
 asm void fn_8006BA38(void)
@@ -3459,11 +3457,9 @@ asm void fn_8006BA54(void)
     blr
 }
 
-asm void fn_8006BA6C(void)
+u32 fn_8006BA6C(void)
 {
-    nofralloc
-    lwz r3, lbl_8087EEC4
-    blr
+    return lbl_8087EEC4;
 }
 
 asm void fn_8006BA74(void)

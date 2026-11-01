@@ -91,10 +91,9 @@ void fn_802E3E38(void);
 void fn_802E3EE8(void);
 void fn_802E470C(void);
 
-asm void fn_802E2E84(void)
+void fn_802E2E84(void)
 {
-    nofralloc
-    b dialog_renderWindow
+    dialog_renderWindow();
 }
 
 asm void fn_802E2E88(void)

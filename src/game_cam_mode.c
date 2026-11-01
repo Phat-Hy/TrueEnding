@@ -90,7 +90,7 @@ void fn_800EE180(void);
 void camera_updateTargetMode(void);
 void fn_800EE494(void);
 void fn_800EE4D8(void);
-void fn_800EE5A4(void);
+u32 fn_800EE5A4(void);
 void fn_800EE5AC(void);
 void fn_800EE640(void);
 void fn_800EE794(void);
@@ -101,9 +101,9 @@ void fn_800EF2AC(void);
 void fn_800EF2B4(void);
 void fn_800EF2F0(void);
 void fn_800EF304(void);
-void fn_800EF308(void);
+u32 fn_800EF308(void);
 void fn_800EF310(void);
-void fn_800EF31C(void);
+u32 fn_800EF31C(void);
 void fn_800EF324(void);
 void fn_800EF368(void);
 void fn_800EF370(void);
@@ -111,7 +111,7 @@ void fn_800EF38C(void);
 void fn_800EF394(void);
 void fn_800EF3D8(void);
 void fn_800EF3DC(void);
-void fn_800EF3E0(void);
+u32 fn_800EF3E0(void);
 void fn_800EF3E8(void);
 void cam_initStickBindings(void);
 void camera_setMode(void);
@@ -545,11 +545,9 @@ lbl_fn_800EE4D8_000005A8:
     blr
 }
 
-asm void fn_800EE5A4(void)
+u32 fn_800EE5A4(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_800EE5AC(void)
@@ -1516,11 +1514,9 @@ void fn_800EF304(void)
 {
 }
 
-asm void fn_800EF308(void)
+u32 fn_800EF308(void)
 {
-    nofralloc
-    li r3, 0x1
-    blr
+    return 1;
 }
 
 asm void fn_800EF310(void)
@@ -1531,11 +1527,9 @@ asm void fn_800EF310(void)
     blr
 }
 
-asm void fn_800EF31C(void)
+u32 fn_800EF31C(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_800EF324(void)
@@ -1616,11 +1610,9 @@ void fn_800EF3DC(void)
 {
 }
 
-asm void fn_800EF3E0(void)
+u32 fn_800EF3E0(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_800EF3E8(void)

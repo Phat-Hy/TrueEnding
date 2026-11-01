@@ -66,15 +66,13 @@ extern u32 lbl_808870A0;
 extern u32 lbl_808870A4;
 
 /* Function declarations */
-void fn_804923AC(void);
+void *fn_804923AC(void *obj);
 void fn_804923B4(void);
 void fn_8049248C(void);
 
-asm void fn_804923AC(void)
+void *fn_804923AC(void *obj)
 {
-    nofralloc
-    lwz r3, 0x2fc(r3)
-    blr
+    return *(void **)((char *)obj + 0x2fc);
 }
 
 asm void fn_804923B4(void)

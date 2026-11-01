@@ -61,7 +61,7 @@ extern u32 lbl_80881568;
 void fn_801002DC(void);
 void fn_801004FC(void);
 void fn_8010089C(void);
-void fn_80100BB8(void);
+u32 fn_80100BB8(void);
 void fn_80100BC0(void);
 void fn_80100BF0(void);
 void fn_801010A0(void);
@@ -687,11 +687,9 @@ lbl_fn_8010089C_00000864:
     blr
 }
 
-asm void fn_80100BB8(void)
+u32 fn_80100BB8(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_80100BC0(void)

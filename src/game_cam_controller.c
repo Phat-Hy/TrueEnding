@@ -15,7 +15,7 @@ extern u8 lbl_807BB380[];
 /* Function declarations */
 void fn_800EC1F4(void);
 void fn_800EC204(void);
-void fn_800EC24C(void);
+void fn_800EC24C(void *obj, void *val);
 void fn_800EC254(void);
 void fn_800EC2C4(void);
 void fn_800EC440(void);
@@ -24,7 +24,7 @@ void fn_800EC5BC(void);
 void cam_evalControllerSpline(void);
 void fn_800EC7F0(void);
 void fn_800ED42C(void);
-void fn_800ED4D8(void);
+void *fn_800ED4D8(void *obj);
 void fn_800ED4E0(void);
 
 asm void fn_800EC1F4(void)
@@ -62,11 +62,9 @@ lbl_fn_800EC204_00000050:
     blr
 }
 
-asm void fn_800EC24C(void)
+void fn_800EC24C(void *obj, void *val)
 {
-    nofralloc
-    stw r4, 0xa0(r3)
-    blr
+    *(void **)((char *)obj + 0xa0) = val;
 }
 
 asm void fn_800EC254(void)
@@ -1478,11 +1476,9 @@ lbl_fn_800ED42C_000012C8:
     blr
 }
 
-asm void fn_800ED4D8(void)
+void *fn_800ED4D8(void *obj)
 {
-    nofralloc
-    addi r3, r3, 0x30
-    blr
+    return (char *)obj + 0x30;
 }
 
 asm void fn_800ED4E0(void)

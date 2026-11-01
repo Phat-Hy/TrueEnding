@@ -103,7 +103,7 @@ void fn_800D8894(void);
 void fn_800D8B80(void);
 void fn_800D8BB4(void);
 void fn_800D8BD8(void);
-void fn_800D8C0C(void);
+void fn_800D8C0C(void *obj, void *val);
 void fn_800D8C14(void);
 void fn_800D8E84(void);
 void fn_800D8F5C(void);
@@ -118,7 +118,7 @@ void fn_800D9560(void);
 void fn_800D9880(void);
 void fn_800D9890(void);
 void fn_800D98B0(void);
-void fn_800D98C0(void);
+void *fn_800D98C0(void *obj);
 void fn_800D98C8(void);
 void fn_800D98DC(void);
 void fn_800D98F4(void);
@@ -595,11 +595,9 @@ asm void fn_800D8BD8(void)
     blr
 }
 
-asm void fn_800D8C0C(void)
+void fn_800D8C0C(void *obj, void *val)
 {
-    nofralloc
-    stw r4, 0x10(r3)
-    blr
+    *(void **)((char *)obj + 0x10) = val;
 }
 
 asm void fn_800D8C14(void)
@@ -1534,11 +1532,9 @@ asm void fn_800D98B0(void)
     blr
 }
 
-asm void fn_800D98C0(void)
+void *fn_800D98C0(void *obj)
 {
-    nofralloc
-    lwz r3, 0x4(r3)
-    blr
+    return *(void **)((char *)obj + 4);
 }
 
 asm void fn_800D98C8(void)

@@ -161,14 +161,14 @@ extern u32 lbl_808850B4;
 
 /* Function declarations */
 void fn_8032DAA0(void);
-void fn_8032DDC8(void);
+u32 fn_8032DDC8(void);
 void fn_8032DDD0(void);
 void fn_8032DEA0(void);
 void fn_8032E2D4(void);
 void fn_8032E3DC(void);
 void fn_8032E938(void);
 void fn_8032EC94(void);
-void fn_8032ECA0(void);
+void *fn_8032ECA0(void *obj);
 void fn_8032ECA8(void);
 void fn_8032ECB8(void);
 void fn_8032ECBC(void);
@@ -394,11 +394,9 @@ lbl_fn_8032DAA0_00000304:
     blr
 }
 
-asm void fn_8032DDC8(void)
+u32 fn_8032DDC8(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_8032DDD0(void)
@@ -1418,11 +1416,9 @@ asm void fn_8032EC94(void)
     blr
 }
 
-asm void fn_8032ECA0(void)
+void *fn_8032ECA0(void *obj)
 {
-    nofralloc
-    addi r3, r3, 0x46c
-    blr
+    return (char *)obj + 0x46c;
 }
 
 asm void fn_8032ECA8(void)

@@ -128,10 +128,10 @@ void fn_804962B0(void);
 u32 fn_8049638C(void);
 void fn_80496394(void);
 void fn_80496398(void);
-void fn_8049639C(void);
+u32 fn_8049639C(void);
 void fn_804963A4(void);
 void fn_804963F8(void);
-void fn_80496414(void);
+void fn_80496414(void *obj, void *val);
 void fn_8049641C(void);
 void fn_80496420(void);
 void fn_80496500(void);
@@ -552,11 +552,9 @@ void fn_80496398(void)
 {
 }
 
-asm void fn_8049639C(void)
+u32 fn_8049639C(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_804963A4(void)
@@ -599,11 +597,9 @@ lbl_fn_804963F8_00000558:
     blr
 }
 
-asm void fn_80496414(void)
+void fn_80496414(void *obj, void *val)
 {
-    nofralloc
-    stw r4, 0x4c(r3)
-    blr
+    *(void **)((char *)obj + 0x4c) = val;
 }
 
 void fn_8049641C(void)

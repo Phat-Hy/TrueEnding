@@ -162,7 +162,7 @@ u32 fn_805BB568(const void *p);
 u32 fn_805BB570(const void *p);
 void fn_805BB578(void);
 void fn_805BB584(void);
-void fn_805BB590(void);
+u32 fn_805BB590(void);
 void fn_805BB598(void *p, u32 val);
 void fn_805BB5A0(void);
 void fn_805BB658(void);
@@ -1051,11 +1051,9 @@ asm void fn_805BB584(void)
     blr
 }
 
-asm void fn_805BB590(void)
+u32 fn_805BB590(void)
 {
-    nofralloc
-    lwz r3, lbl_8087F580
-    blr
+    return lbl_8087F580;
 }
 
 void fn_805BB598(void *p, u32 val)

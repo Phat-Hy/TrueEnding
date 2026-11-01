@@ -96,8 +96,8 @@ void fn_800A8C48(void);
 void fn_800A8CB8(void);
 void fn_800A8FA4(void);
 void fn_800A8FC4(void);
-void fn_800A8FE0(void);
-void fn_800A8FE8(void);
+void *fn_800A8FE0(void *obj);
+void fn_800A8FE8(void *obj, void *val);
 void fn_800A8FF0(void);
 void fn_800A90FC(void);
 void fn_800A9100(void);
@@ -119,7 +119,7 @@ void fn_800A9788(void);
 void fn_800A9794(void);
 void fn_800A97C4(void);
 void fn_800A97FC(void);
-void fn_800A9800(void);
+void *fn_800A9800(void *obj);
 void fn_800A9808(void);
 void fn_800A9818(void);
 
@@ -1093,18 +1093,14 @@ lbl_fn_800A8FC4_00000DE0:
     blr
 }
 
-asm void fn_800A8FE0(void)
+void *fn_800A8FE0(void *obj)
 {
-    nofralloc
-    lwz r3, 0x4(r3)
-    blr
+    return *(void **)((char *)obj + 4);
 }
 
-asm void fn_800A8FE8(void)
+void fn_800A8FE8(void *obj, void *val)
 {
-    nofralloc
-    stw r4, 0x4(r3)
-    blr
+    *(void **)((char *)obj + 4) = val;
 }
 
 asm void fn_800A8FF0(void)
@@ -1180,10 +1176,9 @@ lbl_fn_800A8FF0_00000EE0:
     blr
 }
 
-asm void fn_800A90FC(void)
+void fn_800A90FC(void)
 {
-    nofralloc
-    b bloom_processPasses
+    bloom_processPasses();
 }
 
 void fn_800A9100(void)
@@ -1750,11 +1745,9 @@ void fn_800A97FC(void)
 {
 }
 
-asm void fn_800A9800(void)
+void *fn_800A9800(void *obj)
 {
-    nofralloc
-    lwz r3, 0x4(r3)
-    blr
+    return *(void **)((char *)obj + 4);
 }
 
 asm void fn_800A9808(void)

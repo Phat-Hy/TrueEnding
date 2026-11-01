@@ -116,8 +116,8 @@ extern u32 lbl_80881374;
 
 /* Function declarations */
 void fn_800E589C(void);
-void fn_800E60FC(void);
-void fn_800E6104(void);
+u32 fn_800E60FC(void);
+void *fn_800E6104(void *obj);
 void fn_800E610C(void);
 void fn_800E62AC(void);
 
@@ -717,18 +717,14 @@ lbl_fn_800E589C_00000838:
     blr
 }
 
-asm void fn_800E60FC(void)
+u32 fn_800E60FC(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
-asm void fn_800E6104(void)
+void *fn_800E6104(void *obj)
 {
-    nofralloc
-    lwz r3, 0x0(r3)
-    blr
+    return *(void **)(obj);
 }
 
 asm void fn_800E610C(void)
