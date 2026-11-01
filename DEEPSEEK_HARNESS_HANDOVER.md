@@ -2,18 +2,45 @@
 
 ## NEXT SESSION — START HERE
 
-> **WORKING IN PARALLEL WITH TRACK A? READ `CONTRIBUTING_TRACKS.md` FIRST.** Track A (byte-matching
-> decompilation, `src/`) and Track B (this port) are code-disjoint but machine-, repo- and document-shared.
-> That file holds the ownership table, the `track-a` / `track-b` branches, and the rules that protect
-> measurements (one runner, idle host, handover frame 1680). The measured asymmetry, so nobody plans on the
-> wrong thing: **Track A progress does not change this port's behaviour** — the runner links no `src/`
-> object and executes the same retail instructions, so Track A's value here is **names** (config/symbols.txt
-> has extents for 18 103 functions but only 411 human names, and the probes print raw hex) plus readable C
-> for a handful of stuck functions (`docs/TRACK_A_HANDOFF.md`). This dossier stays Track B's; Track A writes
-> `docs/TRACK_A_LOG.md`.
+> **FIRST ACTION, BEFORE ANY MEASUREMENT: re-verify the gate on an IDLE host** —
+> `pwsh tools/invariant.ps1 -Log logs_ap\gate.log`. **PASS on attempt 1 means handover frame 1680,
+> content `B4646917…`, popup `22B1CE31…`, save 1 348 992 / 29 344.** If the handover frame is not 1680 the
+> host is loaded and the run is not evidence. Last state written at `a828a29` on `main`: 21 commits this
+> session, build green (472 objects), gate green (`logs_ap/gate_apbc2.log`), `src/` untouched by Track B.
 >
-> **READ §5c.46 AP-AZ (the last section of this file) FIRST. TWO THINGS IT SETTLES, ONE OF WHICH
-> OVERTURNS THE PREVIOUS SESSION'S NAMED SUSPECT.**
+> **READ §5c.46 AP-BH (near the end of this file) FIRST — it is the fix the whole "aurora content gap"
+> saga was looking for.** The live aurora path was mapping a **SNAPSHOT** of guest memory: `map_guest_region()`
+> memcpys the planes into a section once, when the path arms, so every texture the guest writes afterwards was
+> invisible. Measured with the new `TLS_AURORA_TEX_BYTES=<n>` probe: ten of ten texobjs printed `nz=0/64` at
+> addresses that the layer rendered as a bright cave. `resync_guest_planes()` now re-copies MEM1/MEM2 before
+> each fed frame (`TLS_AURORA_NO_RESYNC=1` restores the old behaviour), and the bytes read `nz=64/64` with real
+> CMPR data. The title control is unchanged (205.62 -> 205.69), so the fix does not disturb what worked. The
+> harness is unaffected by design — a recorded capture *is* a snapshot — so AP-AY's 1.5 % equality pair stands.
+>
+> **THEN §5c.46 AP-BD, because it decides whether any field comparison is readable.** The layer's guest-2800
+> shot is the **geometry half** of the frame (the cave, luma 35.64) while aurora's 2801 readback is the
+> **composite half** (the dialogue subtitle), and the layer's own neighbouring frames differ by 33-48 mean |d|
+> while the validated same-capture pair agrees to 1.79. **The next run must therefore capture the layer's shots
+> and the resynced aurora readback in ONE launch and build the alignment matrix** — reading a live-vs-layer
+> number before that is reading the half-frame, not the renderer.
+>
+> **PRIORITY ORDER for the next session.** (1) gate on an idle host; (2) the same-launch alignment run above,
+> then judge the field's 3D shading (with content now real, the 3D still comes out near-black — that is the
+> question AP-BH leaves open); (3) P1's equality on a **single capture replayed by both implementations**
+> (`tools/aurora_spike` `--probe-copy`), which is the only valid form of that test; (4) P4 when it passes.
+> `TLS_AURORA_FROM/TO` are **guest-keyed** (guest 2800 = present 2864, the documented 64 offset) and the feed
+> closes at the guest's own display boundary (an XFB copy), so a feed is now one whole guest frame.
+>
+> **WORKING IN PARALLEL WITH TRACK A? READ `CONTRIBUTING_TRACKS.md`.** Track A works in its **own clone**
+> (`G:\Program\TrueEnding-TrackA`, branch `track-a`); read it only through `git grep … origin/track-a`, never
+> from this working tree. Reviews of its batches live in `docs/TRACK_A_REVIEW.md` (five rounds so far), its work
+> order in `docs/TRACK_A_HANDOFF.md`, and its log in `docs/TRACK_A_LOG.md`. The measured asymmetry stands:
+> Track A cannot change this port's behaviour (the runner links no `src/` object), so its value is **names** —
+> which `recomp/tls_sym.c` now consumes, every probe prints `name+0xOFFSET` — plus readable C for a few functions.
+>
+> **READ §5c.46 AP-AZ for priority B's split** (the title plate is the layer's `frame = 255 x mask.a`, and
+> aurora measures 205.62 / 220 / 131.1 against Dolphin's 203.98 / 193.7 / 127.7 where the layer is
+> 90.43 / 255 / 0 — so the plate is retired by the migration, not fixed in the layer).
 > (1) **Priority B is split, and the answer is neither "copy content" nor "sampling".** The 80x56
 > EFB-copy buffer `0x9038D1C0` that b18 upscales is **flat opaque white** when b18 samples it
 > (`TLS_EFB_CHAIN_GUEST=900`: copies #15/#16 `dstavg=(255,255,255) dstalpha=255`; `TLS_TEX_CACHE_LOG`
@@ -26,14 +53,26 @@
 > measured **90.43**, centre 255 vs 254.5, corner 9 vs 0. **The title plate IS the guest's mask at
 > full strength**; Dolphin's is 203.98 with a weak vignette, so the remaining defect is the
 > composite's TEV arithmetic (Aurora's class), with an exact model and a per-ring target.
-> (2) **The "black cave" of P1 is the live feed's HALF-FRAME, not depth.** `TLS_AURORA_FROM/TO`
-> gate on the *present* counter and the two-half present gate alternates draw-bearing and
-> **copy-only** presents: 2794 **0 draws**/3 copies, 2795 220, 2796 **0**, 2797 219, 2798 **0**,
-> 2799 207, 2800 **0 draws**/3 copies. Aurora clears per fed frame, so a range ending on a copy-only
-> half reads back black **by construction** — that is the `mean 1.92` the last session recorded.
-> Ending on a draw half gives a real 640x448 picture (`mean (10.37,12.72,7.09)`, 207 draws). The
-> depth hypothesis has no evidence behind it and is withdrawn; the change P1 needs is to feed **one
-> guest frame, both halves, as one aurora frame**. See AP-AZ C for the two runs.
+> **Detail, if a section must be read out of order:**
+> (1) **Priority B is split, and the answer is neither "copy content" nor "sampling".** The 80x56
+> EFB-copy buffer `0x9038D1C0` that b18 upscales is **flat opaque white** when b18 samples it
+> (`TLS_EFB_CHAIN_GUEST=900`: copies #15/#16 `dstavg=(255,255,255) dstalpha=255`; `TLS_TEX_CACHE_LOG`
+> bind mean `(255,255,255,255)`, a cache hit from frame 410) — and the *other* texture in that
+> two-stage draw, the guest's 64x64 **IA8 mask `0x9051E1A0`**, decodes **bit-exactly** against
+> Dolphin's own dump `tex1_64x64_e6053facb03e8a53_3.png` (layer 90/90/90/a=90 vs Dolphin mean
+> 90.67, same row-32 ramp, radial 255->9). The arithmetic then closes: `st0` multiplies the white
+> copy by `K0.rgb = (0,0,0)` -> black, `st1` alpha = `K0.a*(1-mask.a)` = `1-mask.a`, blend
+> SRCALPHA/INVSRCALPHA over the white plate -> **frame = 255 x mask.a**, predicted 90.68 against a
+> measured **90.43**, centre 255 vs 254.5, corner 9 vs 0. **The title plate IS the guest's mask at
+> full strength**; Dolphin's is 203.98 with a weak vignette, so the remaining defect is the
+> composite's TEV arithmetic (Aurora's class), with an exact model and a per-ring target.
+> (2) **The "black cave" of P1 was the live feed ending on a copy-only PRESENT, not depth — and the
+> counter question was later corrected: the counters agree** (guest 2800 = present 2864), the two-half
+> gate simply renders one guest frame across two presents, and the feed now closes only at the guest's
+> own display boundary (an XFB copy), so a feed is one whole guest frame. `TLS_AURORA_TEST_NO_DEPTH=1`
+> changed nothing; the depth hypothesis is withdrawn. **What replaced it is AP-BD**: the layer's
+> guest-2800 shot is the geometry half (cave, 35.64) and aurora's readback is the composite half
+> (subtitle), so a live-vs-layer number is reading the half-frame until the alignment matrix is built.
 > **Also fixed, and it invalidates earlier reasoning: the `[tev]` probe's ALPHA decode was wrong by
 > one nibble** (it read bits 9/6/3/0; Dolphin's `TevStageCombiner::AlphaCombiner` puts rswap/tswap
 > at 0-3 so the arguments are at 13/10/7/4, which is what the pixel shader always used). AP-AV
