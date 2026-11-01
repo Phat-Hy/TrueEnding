@@ -8,7 +8,7 @@ extern void dtor_80084684(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
-extern void fn_80060D58(void);
+extern void equip_calcTotalStatBonuses(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void atn_Task_destructor(void);
@@ -274,7 +274,7 @@ lbl_fn_804B2C20_00000270:
     lwz r3, lbl_8087EEB0
     fsubs f5, f0, f5
     lfs f3, lbl_80887324
-    bl fn_80060D58
+    bl equip_calcTotalStatBonuses
     b lbl_fn_804B2C20_0000078C
     lwz r4, lbl_8087F588
     lwz r0, 0x38(r4)
@@ -305,7 +305,7 @@ lbl_fn_804B2C20_00000270:
     lwz r3, lbl_8087EEB0
     fsubs f5, f0, f5
     lfs f3, lbl_80887324
-    bl fn_80060D58
+    bl equip_calcTotalStatBonuses
     b lbl_fn_804B2C20_0000078C
 lbl_fn_804B2C20_0000033C:
     lwz r4, 0x48(r3)
@@ -385,7 +385,7 @@ lbl_fn_804B2C20_0000033C:
     lwz r3, lbl_8087EEB0
     fsubs f5, f0, f5
     lfs f3, lbl_80887324
-    bl fn_80060D58
+    bl equip_calcTotalStatBonuses
 lbl_fn_804B2C20_00000474:
     lwz r3, lbl_8087F588
     lwz r0, 0x4c(r3)
@@ -511,7 +511,7 @@ lbl_fn_804B2C20_000005CC:
     lwz r3, lbl_8087EEB0
     fsubs f5, f0, f5
     lfs f3, lbl_80887324
-    bl fn_80060D58
+    bl equip_calcTotalStatBonuses
     b lbl_fn_804B2C20_0000078C
     lwz r3, 0xb8(r3)
     lwz r0, 0x38(r3)
@@ -545,7 +545,7 @@ lbl_fn_804B2C20_00000694:
     lwz r3, lbl_8087EEB0
     fsubs f5, f0, f5
     lfs f3, lbl_80887324
-    bl fn_80060D58
+    bl equip_calcTotalStatBonuses
     b lbl_fn_804B2C20_0000078C
     lwz r4, 0x48(r3)
     lwz r0, 0x38(r4)
@@ -588,7 +588,7 @@ lbl_fn_804B2C20_00000694:
     lwz r3, lbl_8087EEB0
     fsubs f5, f0, f5
     lfs f3, lbl_80887324
-    bl fn_80060D58
+    bl equip_calcTotalStatBonuses
 lbl_fn_804B2C20_0000078C:
     lwz r6, 0x299c(r31)
     cmpwi r6, 0x0
@@ -647,7 +647,7 @@ lbl_fn_804B2C20_000007F4:
     fsubs f5, f0, f5
     lfs f3, lbl_8088732C
     add r4, r4, r0
-    bl fn_80060D58
+    bl equip_calcTotalStatBonuses
 lbl_fn_804B2C20_0000085C:
     lwz r0, 0x124(r1)
     lwz r31, 0x11c(r1)
@@ -696,7 +696,7 @@ asm void fn_804B3494(void)
     stw r5, 0xa0(r1)
     lfd f0, 0xa0(r1)
     fsubs f5, f0, f5
-    bl fn_80060D58
+    bl equip_calcTotalStatBonuses
     b lbl_fn_804B3494_00000BF8
 lbl_fn_804B3494_0000090C:
     lwz r4, 0x50(r3)

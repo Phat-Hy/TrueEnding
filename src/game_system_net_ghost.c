@@ -15,7 +15,7 @@ extern void actor_dispatchMessage(void);
 extern void collision_testLineSegment(void);
 extern void fn_80051A88(void);
 extern void fn_80051CD8(void);
-extern void fn_80060D58(void);
+extern void equip_calcTotalStatBonuses(void);
 extern void skill_calculateDamage(void);
 extern void mem_free(void);
 extern void world_getGlobalFlag(void);
@@ -1333,7 +1333,7 @@ asm void fn_8039BC6C(void)
     lfs f3, lbl_80885B10
     lfs f4, lbl_80885B60
     lfs f5, lbl_80885B64
-    bl fn_80060D58
+    bl equip_calcTotalStatBonuses
     lwz r0, 0x8c(r30)
     cmpwi r0, 0x0
     beq lbl_fn_8039BC6C_0000128C

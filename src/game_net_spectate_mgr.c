@@ -14,7 +14,7 @@ extern void fn_8004B0E4(void);
 extern void sound_initChannelParams(void);
 extern void sound_releaseChannel(void);
 extern void fn_8005E7F4(void);
-extern void fn_80060D58(void);
+extern void equip_calcTotalStatBonuses(void);
 extern void skill_calcTrajectory(void);
 extern void boss_recordDamage(void);
 extern void fn_8006A250(void);
@@ -597,7 +597,7 @@ lbl_fn_805319C8_00000588:
     lfd f0, 0x18(r1)
     fsubs f4, f4, f5
     fsubs f5, f0, f5
-    bl fn_80060D58
+    bl equip_calcTotalStatBonuses
     lwz r3, lbl_8087EEB0
     li r0, 0x12
     stw r0, 0xa0(r3)

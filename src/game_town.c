@@ -28,7 +28,7 @@ void atn_SmallAllocator_allocate(void);
 void fn_80083760(void);
 void fn_800838AC(void);
 void town_synchronizedDispatch(void);
-void fn_800839EC(void);
+void town_registerInteractionPoint(void);
 void town_updateInteractionPoints(void);
 void fn_80083E10(void);
 void fn_80083EB0(void);
@@ -570,7 +570,7 @@ lbl_town_synchronizedDispatch_00000728:
     blr
 }
 
-asm void fn_800839EC(void)
+asm void town_registerInteractionPoint(void)
 {
     nofralloc
     stwu r1, -0x30(r1)
@@ -585,17 +585,17 @@ asm void fn_800839EC(void)
     mr r29, r10
     lwz r0, 0x1b0(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_800839EC_0000077C
+    beq lbl_town_registerInteractionPoint_0000077C
     addi r31, r3, 0x1b4
-    b lbl_fn_800839EC_00000780
-lbl_fn_800839EC_0000077C:
+    b lbl_town_registerInteractionPoint_00000780
+lbl_town_registerInteractionPoint_0000077C:
     li r31, 0x0
-lbl_fn_800839EC_00000780:
+lbl_town_registerInteractionPoint_00000780:
     cmpwi r31, 0x0
-    beq lbl_fn_800839EC_00000790
+    beq lbl_town_registerInteractionPoint_00000790
     mr r3, r31
     bl OSLockMutex
-lbl_fn_800839EC_00000790:
+lbl_town_registerInteractionPoint_00000790:
     lwz r12, 0x150(r24)
     addi r3, r24, 0x150
     mr r4, r25
@@ -607,7 +607,7 @@ lbl_fn_800839EC_00000790:
     bctrl
     cmpwi r3, 0x0
     mr r30, r3
-    bne lbl_fn_800839EC_000007E8
+    bne lbl_town_registerInteractionPoint_000007E8
     lwz r12, 0x168(r24)
     addi r3, r24, 0x168
     mr r4, r25
@@ -618,21 +618,21 @@ lbl_fn_800839EC_00000790:
     mtctr r12
     bctrl
     mr r30, r3
-lbl_fn_800839EC_000007E8:
+lbl_town_registerInteractionPoint_000007E8:
     cmpwi r31, 0x0
-    beq lbl_fn_800839EC_000007F8
+    beq lbl_town_registerInteractionPoint_000007F8
     mr r3, r31
     bl OSUnlockMutex
-lbl_fn_800839EC_000007F8:
+lbl_town_registerInteractionPoint_000007F8:
     cmpwi r29, 0x0
-    beq lbl_fn_800839EC_00000810
+    beq lbl_town_registerInteractionPoint_00000810
     cmpwi r30, 0x0
-    bne lbl_fn_800839EC_00000810
+    bne lbl_town_registerInteractionPoint_00000810
     li r3, 0x0
-    b lbl_fn_800839EC_00000814
-lbl_fn_800839EC_00000810:
+    b lbl_town_registerInteractionPoint_00000814
+lbl_town_registerInteractionPoint_00000810:
     mr r3, r30
-lbl_fn_800839EC_00000814:
+lbl_town_registerInteractionPoint_00000814:
     lmw r24, 0x10(r1)
     lwz r0, 0x34(r1)
     mtlr r0

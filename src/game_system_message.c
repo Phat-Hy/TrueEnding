@@ -24,7 +24,7 @@ extern void fn_8020EFEC(void);
 extern void event_findEntryById(void);
 extern void fn_80216AFC(void);
 extern void fn_8046DC5C(void);
-extern void fn_8046DD20(void);
+extern void boss_bindArenaInteractions(void);
 extern void strncmp(void);
 extern void atoi(void);
 extern void runtime_registerStaticObject(void);
@@ -1398,7 +1398,7 @@ lbl_fn_802130BC_000012F8:
     bne lbl_fn_802130BC_00000D50
     lwz r3, lbl_8087F518
     mr r4, r31
-    bl fn_8046DD20
+    bl boss_bindArenaInteractions
     lmw r23, 0x66c(r1)
     lwz r0, 0x694(r1)
     mtlr r0

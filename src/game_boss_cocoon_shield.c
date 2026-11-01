@@ -28,7 +28,7 @@ extern void fn_8006D008(void);
 extern void fn_8006F420(void);
 extern void str_assignBuffer(void);
 extern void dungeon_initGlobalContext(void);
-extern void fn_800839EC(void);
+extern void town_registerInteractionPoint(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
@@ -958,7 +958,7 @@ asm void atn_Arc_loadEntry(void)
     li r6, 0x2
     li r9, 0x0
     li r10, 0x0
-    bl fn_800839EC
+    bl town_registerInteractionPoint
     mr r28, r3
 lbl_atn_Arc_loadEntry_00000BC8:
     mr r3, r25
@@ -1328,7 +1328,7 @@ lbl_atn_Arc_decompressChunk_000010B0:
     li r6, 0x2
     li r9, 0x0
     li r10, 0x1
-    bl fn_800839EC
+    bl town_registerInteractionPoint
     cmpwi r3, 0x0
     stw r3, 0x8(r30)
     bne lbl_atn_Arc_decompressChunk_00001124

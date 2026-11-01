@@ -14,7 +14,7 @@ extern void game_initGlobalDatabases(void);
 extern void rand_scaleRangeInt(void);
 extern void event_findEntryById(void);
 extern void fn_8046DC5C(void);
-extern void fn_8046DD20(void);
+extern void boss_bindArenaInteractions(void);
 extern void rand(void);
 extern void strcmp(void);
 extern void atoi(void);
@@ -243,7 +243,7 @@ lbl_fn_8021CCC4_00000214:
     bne lbl_fn_8021CCC4_00000150
     lwz r3, lbl_8087F518
     mr r4, r31
-    bl fn_8046DD20
+    bl boss_bindArenaInteractions
 lbl_fn_8021CCC4_00000230:
     lmw r25, 0x644(r1)
     lwz r0, 0x664(r1)
@@ -652,7 +652,7 @@ lbl_fn_8021CF8C_000007D0:
     bne lbl_fn_8021CF8C_000004C8
     lwz r3, lbl_8087F518
     mr r4, r21
-    bl fn_8046DD20
+    bl boss_bindArenaInteractions
 lbl_fn_8021CF8C_000007EC:
     lmw r18, 0x678(r1)
     lwz r0, 0x6b4(r1)
@@ -1366,7 +1366,7 @@ lbl_fn_8021DBEC_0000115C:
     bne lbl_fn_8021DBEC_00001080
     lwz r3, lbl_8087F518
     mr r4, r28
-    bl fn_8046DD20
+    bl boss_bindArenaInteractions
 lbl_fn_8021DBEC_00001178:
     lmw r26, 0x648(r1)
     lwz r0, 0x664(r1)
@@ -1777,7 +1777,7 @@ lbl_fn_8021E0B0_00001728:
     bne lbl_fn_8021E0B0_00001618
     lwz r3, lbl_8087F518
     mr r4, r31
-    bl fn_8046DD20
+    bl boss_bindArenaInteractions
 lbl_fn_8021E0B0_00001744:
     lmw r22, 0x648(r1)
     lwz r0, 0x674(r1)

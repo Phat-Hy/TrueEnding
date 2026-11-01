@@ -21,7 +21,7 @@ extern void fn_801360D8(void);
 extern void fn_80208A3C(void);
 extern void fn_80208B70(void);
 extern void fn_8046DC5C(void);
-extern void fn_8046DD20(void);
+extern void boss_bindArenaInteractions(void);
 extern void strncpy(void);
 extern void strcmp(void);
 extern void strncmp(void);
@@ -1120,7 +1120,7 @@ lbl_fn_80216CD0_00000D70:
     bne lbl_fn_80216CD0_00000BBC
     lwz r3, lbl_8087F518
     mr r4, r31
-    bl fn_8046DD20
+    bl boss_bindArenaInteractions
     lwz r3, lbl_8087F518
     addi r5, r1, 0x14
     lwz r4, lbl_80882F24
@@ -1219,7 +1219,7 @@ lbl_fn_80216CD0_00000EE4:
     bne lbl_fn_80216CD0_00000E28
     lwz r3, lbl_8087F518
     mr r4, r31
-    bl fn_8046DD20
+    bl boss_bindArenaInteractions
     lwz r3, lbl_8087F518
     addi r5, r1, 0x14
     lwz r4, lbl_80882F1C
@@ -1328,7 +1328,7 @@ lbl_fn_80216CD0_00001074:
     bne lbl_fn_80216CD0_00000FA0
     lwz r3, lbl_8087F518
     mr r4, r31
-    bl fn_8046DD20
+    bl boss_bindArenaInteractions
     bl fn_802174F4
     lmw r24, 0x1940(r1)
     lwz r0, 0x1964(r1)
@@ -1492,7 +1492,7 @@ lbl_fn_802174F4_000012AC:
     bne lbl_fn_802174F4_000011EC
     lwz r3, lbl_8087F518
     mr r4, r31
-    bl fn_8046DD20
+    bl boss_bindArenaInteractions
 lbl_fn_802174F4_000012C8:
     lmw r25, 0x644(r1)
     lwz r0, 0x664(r1)
@@ -1616,7 +1616,7 @@ lbl_fn_80217778_00001424:
 lbl_fn_80217778_00001464:
     lwz r3, lbl_8087F518
     mr r4, r29
-    bl fn_8046DD20
+    bl boss_bindArenaInteractions
     lmw r26, 0x648(r1)
     lwz r0, 0x664(r1)
     mtlr r0
@@ -1851,7 +1851,7 @@ lbl_fn_802179FC_00001794:
     bne lbl_fn_802179FC_00001700
     lwz r3, lbl_8087F518
     mr r4, r30
-    bl fn_8046DD20
+    bl boss_bindArenaInteractions
     lwz r3, lbl_8087F518
     addi r5, r1, 0x8
     lwz r4, lbl_80882F3C
@@ -1948,7 +1948,7 @@ lbl_fn_802179FC_000018F4:
     bne lbl_fn_802179FC_000017EC
     lwz r3, lbl_8087F518
     mr r4, r30
-    bl fn_8046DD20
+    bl boss_bindArenaInteractions
 lbl_fn_802179FC_00001910:
     lmw r27, 0x64c(r1)
     lwz r0, 0x664(r1)

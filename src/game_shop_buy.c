@@ -9,7 +9,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void fn_801059F8(void);
 extern void fn_80105B3C(void);
 extern void fn_8011BEB8(void);
-extern void fn_8014C228(void);
+extern void dialog_initScriptSlot(void);
 extern void dialog_selectChoice(void);
 extern void actor_setState(void);
 extern void fn_8018B48C(void);
@@ -658,7 +658,7 @@ lbl_fn_8015802C_00000860:
     mr r3, r29
     stw r0, 0x648(r29)
     stw r0, 0x64c(r29)
-    bl fn_8014C228
+    bl dialog_initScriptSlot
     b lbl_fn_8015802C_000008A0
 lbl_fn_8015802C_00000880:
     lwz r0, 0x674(r29)

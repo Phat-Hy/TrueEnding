@@ -2,7 +2,7 @@
 #pragma function_align 4
 
 /* External function declarations */
-extern void fn_80060D58(void);
+extern void equip_calcTotalStatBonuses(void);
 extern void skill_calculateDamage(void);
 extern void chapter_updateProgression(void);
 extern void fn_806820D4(void);
@@ -646,7 +646,7 @@ asm void fn_800858FC(void)
     addi r0, r5, -0x8000
 lbl_fn_800858FC_000008AC:
     mr r4, r0
-    bl fn_80060D58
+    bl equip_calcTotalStatBonuses
 lbl_fn_800858FC_000008B4:
     xoris r0, r28, 0x8000
     stw r0, 0x34(r1)

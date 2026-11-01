@@ -6,7 +6,7 @@ extern void __va_arg(void);
 extern void _restgpr_14(void);
 extern void _savegpr_14(void);
 extern void dungeon_initGlobalContext(void);
-extern void fn_800839EC(void);
+extern void town_registerInteractionPoint(void);
 extern void town_updateInteractionPoints(void);
 extern void mem_alloc(void);
 extern void fn_806540A0(void);
@@ -241,7 +241,7 @@ asm void fn_800DDAC4(void)
     li r6, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800839EC
+    bl town_registerInteractionPoint
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0

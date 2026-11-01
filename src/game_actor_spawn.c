@@ -10,7 +10,7 @@ extern void _savegpr_25(void);
 extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
-extern void fn_80060D58(void);
+extern void equip_calcTotalStatBonuses(void);
 extern void str_assignBuffer(void);
 extern void fn_8006FA4C(void);
 extern void mem_alloc(void);
@@ -2078,7 +2078,7 @@ lbl_fn_80117FE4_000019B8:
     stw r5, 0x38(r1)
     lfd f0, 0x38(r1)
     fsubs f5, f0, f5
-    bl fn_80060D58
+    bl equip_calcTotalStatBonuses
 lbl_fn_80117FE4_00001A2C:
     li r3, 0x0
 lbl_fn_80117FE4_00001A30:

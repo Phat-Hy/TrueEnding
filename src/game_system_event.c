@@ -13,7 +13,7 @@ extern void talk_copyUtf16String(void);
 extern void fn_8006BA8C(void);
 extern void fn_8006BB6C(void);
 extern void dungeon_initGlobalContext(void);
-extern void fn_800839EC(void);
+extern void town_registerInteractionPoint(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void str_skipWhitespace(void);
@@ -183,7 +183,7 @@ lbl_event_processScriptAction_00000124:
     li r9, 0x0
     mr r8, r7
     li r10, 0x0
-    bl fn_800839EC
+    bl town_registerInteractionPoint
     stw r3, lbl_8087F220
     addi r5, r26, 0x1d
     lwz r3, 0xc(r1)

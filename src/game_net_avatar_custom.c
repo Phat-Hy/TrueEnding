@@ -20,7 +20,7 @@ extern void hud_drawTargetMarker(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
 extern void str_findChar(void);
-extern void fn_800F52F0(void);
+extern void proj_getMatrix(void);
 extern void fn_80116EB8(void);
 extern void fn_8012CE4C(void);
 extern void fn_801346C8(void);
@@ -1795,7 +1795,7 @@ asm void fn_8052793C(void)
     bl dlc_findItemInCatalog
     cmpwi r3, 0x0
     beq lbl_fn_8052793C_00001724
-    bl fn_800F52F0
+    bl proj_getMatrix
     b lbl_fn_8052793C_00001730
 lbl_fn_8052793C_00001724:
     bl fn_801D80B4
@@ -1833,7 +1833,7 @@ lbl_fn_8052793C_00001750:
     cmpwi r3, 0x0
     mr r20, r3
     beq lbl_fn_8052793C_000017B4
-    bl fn_800F52F0
+    bl proj_getMatrix
     mr r29, r3
     b lbl_fn_8052793C_000017C4
 lbl_fn_8052793C_000017B4:

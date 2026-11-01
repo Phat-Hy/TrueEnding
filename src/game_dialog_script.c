@@ -101,7 +101,7 @@ extern u32 lbl_80881B08;
 /* Function declarations */
 void fn_8014BDB0(void);
 void dialog_setScriptSlot(void);
-void fn_8014C228(void);
+void dialog_initScriptSlot(void);
 void fn_8014C468(void);
 void dialog_updateScriptState(void);
 
@@ -427,7 +427,7 @@ lbl_dialog_setScriptSlot_00000464:
     blr
 }
 
-asm void fn_8014C228(void)
+asm void dialog_initScriptSlot(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -449,18 +449,18 @@ asm void fn_8014C228(void)
     lwz r3, 0x50(r31)
     bl task_mapIdToQueue
     cmpwi r3, 0x0
-    bne lbl_fn_8014C228_000004DC
+    bne lbl_dialog_initScriptSlot_000004DC
     mr r3, r31
     li r4, 0x3
     li r5, 0x23
     bl dialog_setScriptSlot
-    b lbl_fn_8014C228_000004EC
-lbl_fn_8014C228_000004DC:
+    b lbl_dialog_initScriptSlot_000004EC
+lbl_dialog_initScriptSlot_000004DC:
     mr r3, r31
     li r4, 0x3
     li r5, 0x20
     bl dialog_setScriptSlot
-lbl_fn_8014C228_000004EC:
+lbl_dialog_initScriptSlot_000004EC:
     mr r3, r31
     li r4, 0x4
     li r5, 0x28
@@ -1136,7 +1136,7 @@ lbl_dialog_updateScriptState_00000E94:
     mr r3, r28
     stw r0, 0x648(r28)
     stw r0, 0x64c(r28)
-    bl fn_8014C228
+    bl dialog_initScriptSlot
     b lbl_dialog_updateScriptState_00000ED4
 lbl_dialog_updateScriptState_00000EB4:
     lwz r0, 0x674(r28)
@@ -1351,7 +1351,7 @@ lbl_dialog_updateScriptState_00001198:
     mr r3, r28
     stw r0, 0x648(r28)
     stw r0, 0x64c(r28)
-    bl fn_8014C228
+    bl dialog_initScriptSlot
     b lbl_dialog_updateScriptState_000011D8
 lbl_dialog_updateScriptState_000011B8:
     lwz r0, 0x674(r28)

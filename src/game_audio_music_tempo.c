@@ -43,7 +43,7 @@ extern void fn_8013C3F4(void);
 extern void fn_8013C478(void);
 extern void fn_8013C480(void);
 extern void npc_updateTalkInteraction(void);
-extern void fn_8014052C(void);
+extern void quest_initMarkerCoords(void);
 extern void fn_80140588(void);
 extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
@@ -2307,7 +2307,7 @@ lbl_fn_8030F564_00001DFC:
 lbl_fn_8030F564_00001E78:
     mr r4, r30
     addi r3, r1, 0x38
-    bl fn_8014052C
+    bl quest_initMarkerCoords
     addi r3, r1, 0xe0
     addi r4, r1, 0x38
     bl vec3_copy

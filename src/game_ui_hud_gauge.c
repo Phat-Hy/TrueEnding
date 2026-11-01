@@ -14,7 +14,7 @@ extern void vec3_toEulerAngles(void);
 extern void mtx_multVec(void);
 extern void fn_80012C88(void);
 extern void vec3_sub(void);
-extern void fn_800133B0(void);
+extern void math_wrapAngle(void);
 extern void fn_80013404(void);
 extern void vec3_add(void);
 extern void fn_80013484(void);
@@ -37,7 +37,7 @@ extern void fn_8012A1B8(void);
 extern void fn_8013A13C(void);
 extern void fn_8013C3B4(void);
 extern void npc_updateTalkInteraction(void);
-extern void fn_8014052C(void);
+extern void quest_initMarkerCoords(void);
 extern void quest_resetObjectiveBounds(void);
 extern void actor_getMovementFlags(void);
 extern void fn_80188A70(void);
@@ -2144,7 +2144,7 @@ lbl_fn_801C346C_00001BE4:
     bl viewport_getNextSequenceId
     lwz r4, 0x4(r30)
     addi r3, r1, 0xc8
-    bl fn_8014052C
+    bl quest_initMarkerCoords
     lfs f0, lbl_80882748
     fcmpo cr0, f31, f0
     bge lbl_fn_801C346C_00001C50
@@ -2174,7 +2174,7 @@ lbl_fn_801C346C_00001C50:
     bl vec3_toEulerAngles
     lfs f28, 0x24(r1)
     fsubs f1, f27, f28
-    bl fn_800133B0
+    bl math_wrapAngle
     lfs f0, lbl_80882748
     fmr f29, f1
     fcmpo cr0, f1, f0

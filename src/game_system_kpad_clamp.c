@@ -12,7 +12,7 @@ extern void fn_8000DD0C(void);
 extern void vec3_assign(void);
 extern void fn_800109E0(void);
 extern void mtx_multVec(void);
-extern void fn_800133B0(void);
+extern void math_wrapAngle(void);
 extern void vec3_add(void);
 extern void fn_80043D58(void);
 extern void collision_testLineSegment(void);
@@ -31,7 +31,7 @@ extern void str_findChar(void);
 extern void fn_800E0AA8(void);
 extern void fn_800EC204(void);
 extern void fn_800EFE3C(void);
-extern void fn_800F52F0(void);
+extern void proj_getMatrix(void);
 extern void vec3_scale(void);
 extern void fn_800F7F90(void);
 extern void viewport_getGlobalContext(void);
@@ -613,7 +613,7 @@ lbl_fn_803729B4_00000564:
     beq lbl_fn_803729B4_0000060C
     lfs f0, 0x78(r1)
     fadds f1, f28, f0
-    bl fn_800133B0
+    bl math_wrapAngle
     addi r29, r29, 0x1
     stfs f1, 0x78(r1)
     cmpwi r29, 0x4
@@ -662,7 +662,7 @@ lbl_fn_803729B4_00000694:
     bl fn_802A4184
     lwz r26, 0x0(r3)
     mr r3, r26
-    bl fn_800F52F0
+    bl proj_getMatrix
     bl enemy_updateAnimTimer
     mr r3, r26
     bl battle_updateActorStatus

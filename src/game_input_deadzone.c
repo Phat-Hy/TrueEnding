@@ -8,7 +8,7 @@ extern void vec3_toEulerAngles(void);
 extern void fn_80011220(void);
 extern void mtx_multVec(void);
 extern void vec3_sub(void);
-extern void fn_800133B0(void);
+extern void math_wrapAngle(void);
 extern void fn_80013484(void);
 extern void collision_queryGeometry(void);
 extern void atn_Model_findBoneIndex(void);
@@ -1620,7 +1620,7 @@ lbl_fn_802F0328_0000158C:
     addi r5, r1, 0x14
     bl vec3_sub
     lfs f1, 0x54(r1)
-    bl fn_800133B0
+    bl math_wrapAngle
     frsp f2, f1
     lfs f0, lbl_80884850
     stfs f1, 0x54(r1)

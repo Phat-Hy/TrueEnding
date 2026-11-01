@@ -9,7 +9,7 @@ extern void talk_formatQuotedString(void);
 extern void fn_800638B0(void);
 extern void magic_castSpellCircle(void);
 extern void dungeon_initGlobalContext(void);
-extern void fn_800839EC(void);
+extern void town_registerInteractionPoint(void);
 extern void mem_alloc(void);
 extern void mem_getAllocSize(void);
 extern void route_interpolatePath(void);
@@ -1137,7 +1137,7 @@ asm void fn_800A8FF0(void)
     li r6, 0x6
     li r9, 0x0
     li r10, 0x0
-    bl fn_800839EC
+    bl town_registerInteractionPoint
     lis r5, lbl_80778CA8@ha
     subi r4, r31, 0x3600
     addi r5, r5, lbl_80778CA8@l

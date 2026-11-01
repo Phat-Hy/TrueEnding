@@ -44,7 +44,7 @@ extern void fn_800ED42C(void);
 extern void fn_800ED4D8(void);
 extern void fn_800ED4E0(void);
 extern void cam_evalLookAtMatrix(void);
-extern void fn_800F52F0(void);
+extern void proj_getMatrix(void);
 extern void viewport_getGlobalContext(void);
 extern void fn_800F7FA8(void);
 extern void skill_findNodeById(void);
@@ -1819,11 +1819,11 @@ lbl_fn_80339760_0000163C:
     li r6, 0x0
     bl world_setGlobalFlag
     lwz r3, 0x14c4(r31)
-    bl fn_800F52F0
+    bl proj_getMatrix
     bl fn_8012D180
     lfs f31, lbl_80885260
     lwz r3, 0x14c4(r31)
-    bl fn_800F52F0
+    bl proj_getMatrix
     stfs f31, 0x228(r3)
     lwz r3, 0x14c4(r31)
     bl fn_8000DD0C
@@ -1877,7 +1877,7 @@ lbl_fn_80339760_000017A8:
     cmpwi r0, 0x1
     bne lbl_fn_80339760_00001860
     lwz r3, 0x14c4(r31)
-    bl fn_800F52F0
+    bl proj_getMatrix
     lfs f1, 0x228(r3)
     lfs f0, lbl_80885260
     fcmpo cr0, f1, f0

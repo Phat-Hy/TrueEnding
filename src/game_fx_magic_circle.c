@@ -24,7 +24,7 @@ extern void scissor_clipFrustum(void);
 extern void clip_calculateFrustum(void);
 extern void npc_getPosition(void);
 extern void fn_8013C480(void);
-extern void fn_8014052C(void);
+extern void quest_initMarkerCoords(void);
 extern void actor_setState(void);
 extern void fn_801A03E8(void);
 extern void res_findResourceSlot(void);
@@ -190,7 +190,7 @@ lbl_fn_8029F148_00000140:
 lbl_fn_8029F148_00000144:
     mr r4, r31
     addi r3, r1, 0x8
-    bl fn_8014052C
+    bl quest_initMarkerCoords
     addi r3, r1, 0x14
     addi r4, r1, 0x8
     bl fn_801A03E8

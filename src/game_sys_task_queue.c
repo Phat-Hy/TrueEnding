@@ -26,7 +26,7 @@ extern void cam_evalControllerSpline(void);
 extern void fn_800ED42C(void);
 extern void fn_800ED4D8(void);
 extern void cam_evalLookAtMatrix(void);
-extern void fn_801125F8(void);
+extern void phys_scaleGravity(void);
 extern void fn_80205BE8(void);
 extern void fn_802089C4(void);
 extern void fn_8020A5D4(void);
@@ -34,7 +34,7 @@ extern void fn_8020A780(void);
 extern void fn_8020C07C(void);
 extern void fn_8020C4B0(void);
 extern void fn_8046DC5C(void);
-extern void fn_8046DD20(void);
+extern void boss_bindArenaInteractions(void);
 extern void strcmp(void);
 extern void atoi(void);
 extern void wcslen(void);
@@ -653,7 +653,7 @@ asm void fn_80219F84(void)
     mr r3, r28
     bl talk_parseQuotedString
     bl str_skipWhitespace
-    bl fn_801125F8
+    bl phys_scaleGravity
     stfs f1, 0x50(r27)
     mr r3, r28
     bl talk_parseQuotedString
@@ -1561,7 +1561,7 @@ lbl_fn_8021AAB8_0000136C:
     bne lbl_fn_8021AAB8_00001308
     lwz r3, lbl_8087F518
     mr r4, r26
-    bl fn_8046DD20
+    bl boss_bindArenaInteractions
     lwz r3, lbl_8087F518
     addi r5, r1, 0x8
     lwz r4, lbl_80882F7C
@@ -1693,7 +1693,7 @@ lbl_fn_8021AAB8_00001554:
     bne lbl_fn_8021AAB8_000014A4
     lwz r3, lbl_8087F518
     mr r4, r31
-    bl fn_8046DD20
+    bl boss_bindArenaInteractions
 lbl_fn_8021AAB8_00001570:
     lmw r25, 0x12a4(r1)
     lwz r0, 0x12c4(r1)
@@ -2009,7 +2009,7 @@ lbl_fn_8021B060_0000195C:
     bne lbl_fn_8021B060_000018E4
     lwz r3, lbl_8087F518
     mr r4, r30
-    bl fn_8046DD20
+    bl boss_bindArenaInteractions
 lbl_fn_8021B060_00001978:
     lmw r25, 0xc64(r1)
     lwz r0, 0xc84(r1)

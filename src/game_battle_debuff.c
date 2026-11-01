@@ -17,7 +17,7 @@ extern void fn_8010CA34(void);
 extern void fn_8011BEB8(void);
 extern void enemy_evalAnimTrack(void);
 extern void fn_8013A21C(void);
-extern void fn_8014C228(void);
+extern void dialog_initScriptSlot(void);
 extern void dialog_selectChoice(void);
 extern void fn_801A2CEC(void);
 extern void fn_801C8F10(void);
@@ -1002,7 +1002,7 @@ lbl_fn_8016DF3C_00000CB0:
     mr r3, r30
     stw r0, 0x648(r30)
     stw r0, 0x64c(r30)
-    bl fn_8014C228
+    bl dialog_initScriptSlot
     b lbl_fn_8016DF3C_00000CF0
 lbl_fn_8016DF3C_00000CD0:
     lwz r0, 0x674(r30)
@@ -1183,7 +1183,7 @@ lbl_fn_8016DF3C_00000F30:
     mr r3, r30
     stw r0, 0x648(r30)
     stw r0, 0x64c(r30)
-    bl fn_8014C228
+    bl dialog_initScriptSlot
     b lbl_fn_8016DF3C_00000F70
 lbl_fn_8016DF3C_00000F50:
     lwz r0, 0x674(r30)
@@ -2312,7 +2312,7 @@ lbl_battle_applyStatusEffect_00001EB8:
     mr r3, r27
     stw r0, 0x648(r27)
     stw r0, 0x64c(r27)
-    bl fn_8014C228
+    bl dialog_initScriptSlot
     b lbl_battle_applyStatusEffect_00001EF8
 lbl_battle_applyStatusEffect_00001ED8:
     lwz r0, 0x674(r27)

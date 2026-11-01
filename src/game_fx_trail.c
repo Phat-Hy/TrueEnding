@@ -28,7 +28,7 @@ extern void viewport_updateCulling(void);
 extern void clip_calculateFrustum(void);
 extern void hurtbox_testCollisionLayer(void);
 extern void hurtbox_dispatchHitEvent(void);
-extern void fn_801125F8(void);
+extern void phys_scaleGravity(void);
 extern void equip_getGlobalManager(void);
 extern void magic_getOffset6C(void);
 extern void fn_8012AFE8(void);
@@ -519,7 +519,7 @@ lbl_fn_8028CB38_00000574:
     la r3, lbl_8087DC38
     la r4, lbl_8087DC3C
     bl fn_800F8524
-    bl fn_801125F8
+    bl phys_scaleGravity
     addi r3, r1, 0xf0
     bl fn_8028CFB0
     addi r3, r1, 0x84

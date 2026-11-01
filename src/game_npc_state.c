@@ -11,7 +11,7 @@ extern void npc_updateTalkInteraction(void);
 extern void fn_80140588(void);
 extern void fn_80141674(void);
 extern void fn_801426A4(void);
-extern void fn_8014C228(void);
+extern void dialog_initScriptSlot(void);
 extern void dialog_selectChoice(void);
 extern void fn_80171F3C(void);
 extern void actor_getMovementFlags(void);
@@ -566,7 +566,7 @@ lbl_fn_8013C564_00000564:
     mr r3, r29
     stw r0, 0x648(r29)
     stw r0, 0x64c(r29)
-    bl fn_8014C228
+    bl dialog_initScriptSlot
     b lbl_fn_8013C564_0000072C
 lbl_fn_8013C564_00000584:
     lwz r0, 0x674(r29)

@@ -21,7 +21,7 @@ extern void fn_80103F60(void);
 extern void fn_801079C0(void);
 extern void fn_80107A68(void);
 extern void fn_80108378(void);
-extern void fn_801125F8(void);
+extern void phys_scaleGravity(void);
 extern void fn_8011BF3C(void);
 extern void enemy_updateCombatBehavior(void);
 extern void fn_80129978(void);
@@ -631,7 +631,7 @@ lbl_fn_80323690_0000064C:
     lfs f2, 0x50(r1)
     fadds f2, f2, f3
     fsubs f30, f2, f0
-    bl fn_801125F8
+    bl phys_scaleGravity
     fmr f31, f1
     fmr f1, f30
     bl fn_80011220

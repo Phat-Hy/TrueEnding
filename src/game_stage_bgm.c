@@ -16,7 +16,7 @@ extern void vec3_toEulerAngles(void);
 extern void mtx_multVec(void);
 extern void fn_80012C88(void);
 extern void vec3_sub(void);
-extern void fn_800133B0(void);
+extern void math_wrapAngle(void);
 extern void vec3_add(void);
 extern void ui_destroyWidget(void);
 extern void collision_testLineSegment(void);
@@ -49,7 +49,7 @@ extern void npc_getPosition(void);
 extern void fn_8013C480(void);
 extern void fn_801404F8(void);
 extern void fn_80140500(void);
-extern void fn_8014052C(void);
+extern void quest_initMarkerCoords(void);
 extern void quest_resetObjectiveBounds(void);
 extern void fn_80178018(void);
 extern void fn_80178078(void);
@@ -1022,7 +1022,7 @@ lbl_fn_8019FEC4_00000B80:
 lbl_fn_8019FEC4_00000BC4:
     lwz r4, 0x4(r28)
     addi r3, r1, 0x40
-    bl fn_8014052C
+    bl quest_initMarkerCoords
     lfs f1, lbl_80882118
     addi r3, r1, 0x4c
     addi r4, r1, 0x40
@@ -1052,7 +1052,7 @@ lbl_fn_8019FEC4_00000BC4:
     fadds f0, f1, f0
     stfs f0, 0xbc(r1)
     lwz r4, 0x4(r28)
-    bl fn_8014052C
+    bl quest_initMarkerCoords
     lfs f1, lbl_80882110
     addi r3, r1, 0x34
     addi r4, r1, 0x28
@@ -1144,9 +1144,9 @@ lbl_fn_8019FEC4_00000D5C:
     addi r4, r1, 0x1c
     addi r5, r1, 0xac
     bl vec3_sub
-    lis r4, fn_800133B0@ha
+    lis r4, math_wrapAngle@ha
     addi r3, r1, 0x70
-    addi r4, r4, fn_800133B0@l
+    addi r4, r4, math_wrapAngle@l
     bl fn_8012A218
     lfs f1, 0x74(r1)
     lfs f0, lbl_80881FCC

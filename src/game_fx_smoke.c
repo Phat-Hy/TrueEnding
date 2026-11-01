@@ -29,7 +29,7 @@ extern void viewport_updateCulling(void);
 extern void clip_calculateFrustum(void);
 extern void hurtbox_dispatchHitEvent(void);
 extern void npc_getPosition(void);
-extern void fn_8014052C(void);
+extern void quest_initMarkerCoords(void);
 extern void actor_setState(void);
 extern void fn_801A03E8(void);
 extern void sound_initGlobalInstances(void);
@@ -182,7 +182,7 @@ lbl_fn_80296B8C_00000128:
 lbl_fn_80296B8C_0000012C:
     mr r4, r31
     addi r3, r1, 0x8
-    bl fn_8014052C
+    bl quest_initMarkerCoords
     addi r3, r1, 0x14
     addi r4, r1, 0x8
     bl fn_801A03E8

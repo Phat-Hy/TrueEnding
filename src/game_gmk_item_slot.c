@@ -21,7 +21,7 @@ extern void fn_80071D74(void);
 extern void gx_drawScreenQuad(void);
 extern void gx_setRenderStateParam(void);
 extern void dungeon_initGlobalContext(void);
-extern void fn_800839EC(void);
+extern void town_registerInteractionPoint(void);
 extern void town_updateInteractionPoints(void);
 extern void mem_alloc(void);
 extern void compass_findWaypointIndex(void);
@@ -966,7 +966,7 @@ lbl_fn_80440B2C_00000AEC:
     mr r8, r7
     li r9, 0x0
     li r10, 0x0
-    bl fn_800839EC
+    bl town_registerInteractionPoint
     stw r3, 0x0(r31)
     mr r4, r28
     lwz r5, 0x8(r1)
@@ -1229,7 +1229,7 @@ lbl_fn_80440F64_00000E64:
     li r6, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800839EC
+    bl town_registerInteractionPoint
     stw r3, 0x0(r28)
     mr r4, r30
     lwz r5, 0x8(r1)
@@ -1246,7 +1246,7 @@ lbl_fn_80440F64_00000E64:
     li r6, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800839EC
+    bl town_registerInteractionPoint
     stw r3, 0x0(r29)
     mr r4, r3
     subi r5, r31, 0x7900

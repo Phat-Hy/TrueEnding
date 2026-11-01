@@ -13,7 +13,7 @@ extern void fn_800499D0(void);
 extern void boss_decodePhaseBitfield(void);
 extern void fn_8006BA30(void);
 extern void dungeon_initGlobalContext(void);
-extern void fn_800839EC(void);
+extern void town_registerInteractionPoint(void);
 extern void town_updateInteractionPoints(void);
 extern void fn_80087BB4(void);
 extern void node_createNamedChild(void);
@@ -1018,7 +1018,7 @@ asm void fn_800DCCE0(void)
     mr r8, r7
     li r9, 0x0
     li r10, 0x0
-    bl fn_800839EC
+    bl town_registerInteractionPoint
     cmpwi r3, 0x0
     stw r3, 0x3c(r29)
     bne lbl_fn_800DCCE0_00000C44

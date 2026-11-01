@@ -51,7 +51,7 @@ extern void fn_8020A808(void);
 extern void task_lookupTagIndex(void);
 extern void fn_80219544(void);
 extern void fn_8046DC5C(void);
-extern void fn_8046DD20(void);
+extern void boss_bindArenaInteractions(void);
 extern void fn_805A52F8(void);
 extern void strcmp(void);
 extern void strncmp(void);
@@ -2257,7 +2257,7 @@ lbl_fn_80209960_00001D60:
     bne lbl_fn_80209960_000014E8
     bl fn_8020A3E4
     mr r4, r21
-    bl fn_8046DD20
+    bl boss_bindArenaInteractions
 lbl_fn_80209960_00001D7C:
     li r0, 0x968
     addi r11, r1, 0x950

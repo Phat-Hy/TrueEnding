@@ -79,7 +79,7 @@ void fn_8046D84C(void);
 void atn_Loader_constructor(void);
 void fn_8046DBF8(void);
 void fn_8046DC5C(void);
-void fn_8046DD20(void);
+void boss_bindArenaInteractions(void);
 void atn_Loader_destructor(void);
 void atn_Loader_execute(void);
 void atn_Loader_finish(void);
@@ -937,7 +937,7 @@ asm void fn_8046DC5C(void)
     blr
 }
 
-asm void fn_8046DD20(void)
+asm void boss_bindArenaInteractions(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -946,11 +946,11 @@ asm void fn_8046DD20(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r4
-    beq lbl_fn_8046DD20_00000BAC
+    beq lbl_boss_bindArenaInteractions_00000BAC
     bl dungeon_initGlobalContext
     mr r4, r31
     bl town_updateInteractionPoints
-lbl_fn_8046DD20_00000BAC:
+lbl_boss_bindArenaInteractions_00000BAC:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0

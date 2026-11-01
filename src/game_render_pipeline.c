@@ -24,7 +24,7 @@ extern void fn_800E0AA8(void);
 extern void system_getNextSequenceId(void);
 extern void viewport_updateCulling(void);
 extern void clip_calculateFrustum(void);
-extern void fn_801125F8(void);
+extern void phys_scaleGravity(void);
 extern void fn_8013A13C(void);
 extern void npc_getGlobalManager(void);
 extern void fn_8013C480(void);
@@ -1972,14 +1972,14 @@ lbl_fn_802A3D80_00001A34:
     fmr f2, f1
     bl vec3_set
     lfs f1, lbl_80883E18
-    bl fn_801125F8
+    bl phys_scaleGravity
     addi r3, r1, 0xa8
     bl fn_8013A13C
     addi r3, r1, 0x14
     addi r4, r1, 0xa8
     bl mtx_multVec
     fmr f1, f28
-    bl fn_801125F8
+    bl phys_scaleGravity
     addi r3, r1, 0x78
     bl fn_802A3D64
     addi r3, r1, 0x14
@@ -2007,7 +2007,7 @@ lbl_fn_802A3D80_00001A34:
     fsubs f0, f0, f31
     stfs f0, 0x14c(r1)
     lfs f1, 0x1694(r27)
-    bl fn_801125F8
+    bl phys_scaleGravity
     stfs f1, 0x148(r1)
     bl npc_getGlobalManager
     lwz r5, 0x14e8(r27)

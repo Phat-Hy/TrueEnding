@@ -32,12 +32,12 @@ extern void atn_Task_setActive(void);
 extern void bloom_processPasses(void);
 extern void fn_800D8814(void);
 extern void fn_800EC1F4(void);
-extern void fn_800F52F0(void);
+extern void proj_getMatrix(void);
 extern void fn_800F530C(void);
 extern void fn_800F7F90(void);
 extern void viewport_getGlobalContext(void);
 extern void fn_800F7FA8(void);
-extern void fn_801125F8(void);
+extern void phys_scaleGravity(void);
 extern void fn_80112960(void);
 extern void fn_80114AA0(void);
 extern void fn_801156BC(void);
@@ -1775,7 +1775,7 @@ lbl_fn_804D25D4_000012BC:
     lwz r3, 0x0(r3)
     cmpwi r3, 0x0
     beq lbl_fn_804D25D4_00001334
-    bl fn_800F52F0
+    bl proj_getMatrix
     bl fn_80139F4C
     cmpwi r3, 0x1
     beq lbl_fn_804D25D4_00001310
@@ -3577,7 +3577,7 @@ lbl_fn_804D25D4_00002D1C:
     blt lbl_fn_804D25D4_00002CC0
 lbl_fn_804D25D4_00002D2C:
     lwz r3, 0x0(r23)
-    bl fn_800F52F0
+    bl proj_getMatrix
     lhz r0, 0xec(r23)
     extrwi r4, r0, 8, 18
     bl fn_804D6404
@@ -3947,13 +3947,13 @@ lbl_fn_804D25D4_00003278:
     bl fn_804D6424
     mr r23, r3
     lwz r3, 0x0(r28)
-    bl fn_800F52F0
+    bl proj_getMatrix
     stw r23, 0x224(r3)
     lwz r0, 0x604(r24)
     cmpwi r0, 0x0
     beq lbl_fn_804D25D4_0000346C
     lwz r3, 0x0(r28)
-    bl fn_800F52F0
+    bl proj_getMatrix
     lwz r0, 0x540(r24)
     lwz r3, 0x160(r3)
     cmplwi r0, 0x1
@@ -3971,7 +3971,7 @@ lbl_fn_804D25D4_000032F4:
     stw r29, 0x168(r1)
     lfd f0, 0x168(r1)
     fsubs f30, f0, f31
-    bl fn_800F52F0
+    bl proj_getMatrix
     stfs f30, 0x1b0(r3)
 lbl_fn_804D25D4_00003314:
     bl net_getFriendManager
@@ -4048,7 +4048,7 @@ lbl_fn_804D25D4_00003418:
     bl fn_804D63DC
     add r23, r3, r21
     lwz r3, 0x0(r28)
-    bl fn_800F52F0
+    bl proj_getMatrix
     mr r4, r20
     addi r5, r23, 0xe8
     bl fn_803396FC
@@ -4057,13 +4057,13 @@ lbl_fn_804D25D4_00003418:
     cmpwi r20, 0x4
     blt lbl_fn_804D25D4_00003418
     lwz r3, 0x0(r28)
-    bl fn_800F52F0
+    bl proj_getMatrix
     bl fn_8012B3E8
     lwz r3, 0x0(r28)
-    bl fn_800F52F0
+    bl proj_getMatrix
     bl fn_8012B988
     lwz r3, 0x0(r28)
-    bl fn_800F52F0
+    bl proj_getMatrix
     bl enemy_updateAnimTimer
 lbl_fn_804D25D4_0000346C:
     lwz r3, 0x0(r28)
@@ -4209,17 +4209,17 @@ lbl_fn_804D25D4_0000362C:
     stw r28, 0x168(r1)
     lfd f0, 0x168(r1)
     fsubs f31, f0, f30
-    bl fn_800F52F0
+    bl proj_getMatrix
     stfs f31, 0x1b0(r3)
 lbl_fn_804D25D4_0000367C:
     lwz r3, 0x0(r30)
-    bl fn_800F52F0
+    bl proj_getMatrix
     bl fn_8012B3E8
     lwz r3, 0x0(r30)
-    bl fn_800F52F0
+    bl proj_getMatrix
     bl fn_8012B988
     lwz r3, 0x0(r30)
-    bl fn_800F52F0
+    bl proj_getMatrix
     bl enemy_updateAnimTimer
     lwz r3, 0x0(r30)
     bl fn_800F530C
@@ -5254,7 +5254,7 @@ lbl_fn_804D25D4_000045A8:
     subi r3, r3, 0x688c
     bl fn_80112960
     lfs f1, lbl_808875D8
-    bl fn_801125F8
+    bl phys_scaleGravity
     addis r3, r24, 0x1
     subi r3, r3, 0x688c
     bl fn_8037F688

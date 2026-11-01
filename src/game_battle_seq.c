@@ -16,7 +16,7 @@ extern void fn_80107E68(void);
 extern void fn_80107F10(void);
 extern void fn_8011BEB8(void);
 extern void actor_testBitFlag(void);
-extern void fn_8014C228(void);
+extern void dialog_initScriptSlot(void);
 extern void dialog_selectChoice(void);
 extern void actor_setState(void);
 extern void fn_8018FEBC(void);
@@ -580,7 +580,7 @@ lbl_fn_80167038_00000754:
     mr r3, r31
     stw r0, 0x648(r31)
     stw r0, 0x64c(r31)
-    bl fn_8014C228
+    bl dialog_initScriptSlot
     b lbl_fn_80167038_00000794
 lbl_fn_80167038_00000774:
     lwz r0, 0x674(r31)
@@ -1012,7 +1012,7 @@ lbl_fn_80167640_00000D5C:
     mr r3, r31
     stw r0, 0x648(r31)
     stw r0, 0x64c(r31)
-    bl fn_8014C228
+    bl dialog_initScriptSlot
     b lbl_fn_80167640_00000D9C
 lbl_fn_80167640_00000D7C:
     lwz r0, 0x674(r31)

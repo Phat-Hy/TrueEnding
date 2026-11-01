@@ -27,7 +27,7 @@ extern void ref_releaseHandle(void);
 extern void viewport_getGlobalContext(void);
 extern void vec3_normalize(void);
 extern void clip_calculateFrustum(void);
-extern void fn_801125F8(void);
+extern void phys_scaleGravity(void);
 extern void equip_getGlobalManager(void);
 extern void magic_getOffset6C(void);
 extern void npc_updateDialogueTarget(void);
@@ -274,7 +274,7 @@ lbl_fn_803041C8_00000284:
     lfs f0, lbl_80884AC4
     fmr f1, f31
     stfs f0, 0x52c(r31)
-    bl fn_801125F8
+    bl phys_scaleGravity
     lfs f0, 0x534(r31)
     lwz r0, 0x1624(r31)
     fadds f0, f0, f1

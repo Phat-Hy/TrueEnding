@@ -17,7 +17,7 @@ extern void fn_8001C1B4(void);
 extern void fn_8001C1B8(void);
 extern void fn_8001C1BC(void);
 extern void fn_8003E918(void);
-extern void fn_80060D58(void);
+extern void equip_calcTotalStatBonuses(void);
 extern void skill_calculateDamage(void);
 extern void fn_80062C8C(void);
 extern void fn_80063200(void);
@@ -1517,7 +1517,7 @@ lbl_fn_80014A5C_00001214:
     fmr f4, f29
     fmr f5, f28
     lfs f26, lbl_808806D4
-    bl fn_80060D58
+    bl equip_calcTotalStatBonuses
     lfs f0, lbl_808806DC
     lis r3, 0xd100
     lfs f4, lbl_808806D8
@@ -2881,7 +2881,7 @@ lbl_fn_80014A5C_000026F4:
     fmr f5, f28
     lis r4, 0x9000
     fadds f1, f30, f29
-    bl fn_80060D58
+    bl equip_calcTotalStatBonuses
     fadds f25, f25, f29
     lis r3, lbl_8072FD8C@ha
     addi r31, r3, lbl_8072FD8C@l
@@ -3029,7 +3029,7 @@ lbl_fn_80014A5C_000028F8:
     lfs f26, lbl_8088070C
     lfs f4, lbl_80880714
     lfs f5, lbl_80880718
-    bl fn_80060D58
+    bl equip_calcTotalStatBonuses
     lfs f0, lbl_808806D8
     lis r23, lbl_8072FD8C@ha
     lfs f24, lbl_808806BC

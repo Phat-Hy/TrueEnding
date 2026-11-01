@@ -10,7 +10,7 @@ extern void talk_setSpeakerName(void);
 extern void talk_parseDialogue(void);
 extern void talk_parseDialogueTokens(void);
 extern void talk_copyUtf16String(void);
-extern void fn_80060D58(void);
+extern void equip_calcTotalStatBonuses(void);
 extern void fn_800610A4(void);
 extern void skill_calcTrajectory(void);
 extern void fn_8006F420(void);
@@ -700,7 +700,7 @@ lbl_fn_80505C20_000007E0:
     fmr f4, f27
     sth r0, 0xa(r1)
     fmr f5, f26
-    bl fn_80060D58
+    bl equip_calcTotalStatBonuses
     fmr f1, f29
     lwz r3, lbl_8087EEB0
     fmr f2, f28

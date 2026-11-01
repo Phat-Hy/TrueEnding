@@ -38,7 +38,7 @@ extern void fn_806D7CF0(void);
 extern void fn_806D7DA0(void);
 extern void fn_806D8650(void);
 extern void fn_806D8F10(void);
-extern void fn_806D8F30(void);
+extern void net_getTimestampMs(void);
 extern void fn_806F1D80(void);
 extern void fn_806FBE00(void);
 extern void fn_806FC170(void);
@@ -320,7 +320,7 @@ lbl_fn_806FD090_00000298:
     li r6, 0x0
     li r8, 0x8
     bl fn_806D7DA0
-    bl fn_806D8F30
+    bl net_getTimestampMs
     addi r3, r3, 0x2bc
     li r0, 0x7
     stw r3, 0x38(r31)
@@ -385,7 +385,7 @@ lbl_fn_806FD2D0_00000340:
 lbl_fn_806FD2D0_000003A4:
     li r0, 0x3
     stw r0, 0x1c(r3)
-    bl fn_806D8F30
+    bl net_getTimestampMs
     lwz r12, 0xc(r31)
     addis r3, r3, 0x1
     subi r0, r3, 0x15a0
@@ -590,7 +590,7 @@ lbl_fn_806FD420_00000668:
     li r6, 0x0
     li r8, 0x8
     bl fn_806D7DA0
-    bl fn_806D8F30
+    bl net_getTimestampMs
     addi r0, r3, 0x2bc
     stw r0, 0x38(r31)
     li r0, 0x7
@@ -664,7 +664,7 @@ lbl_fn_806FD420_00000770:
     lwz r4, 0x14(r28)
     mtctr r12
     bctrl
-    bl fn_806D8F30
+    bl net_getTimestampMs
     addi r0, r3, 0x2710
     stw r0, 0x38(r28)
     li r3, 0x0
@@ -1085,7 +1085,7 @@ asm void fn_806FDD20(void)
     stw r29, 0x124(r1)
     li r29, 0x0
     stb r0, 0x11(r1)
-    bl fn_806D8F30
+    bl net_getTimestampMs
     lbz r4, 0x14(r31)
     stw r3, 0x1c(r31)
     rlwinm. r0, r4, 0, 26, 26
@@ -1537,7 +1537,7 @@ lbl_fn_806FE1F0_000013B0:
     lbz r0, 0x14(r29)
     andi. r0, r0, 0xf3
     stb r0, 0x14(r29)
-    bl fn_806D8F30
+    bl net_getTimestampMs
     lwz r0, 0x1c(r29)
     mr r4, r29
     subf r0, r0, r3
@@ -1664,7 +1664,7 @@ lbl_fn_806FE3E0_00001570:
     lbz r0, 0x14(r29)
     andi. r0, r0, 0xf3
     stb r0, 0x14(r29)
-    bl fn_806D8F30
+    bl net_getTimestampMs
     lwz r0, 0x1c(r29)
     mr r4, r29
     subf r0, r0, r3
@@ -1714,7 +1714,7 @@ asm void fn_806FE5C0(void)
     beq lbl_fn_806FE5C0_00001748
     li r4, 0x0
     bl fn_806FE3E0
-    bl fn_806D8F30
+    bl net_getTimestampMs
     mr r28, r3
     li r29, 0x9c4
     li r30, 0x0

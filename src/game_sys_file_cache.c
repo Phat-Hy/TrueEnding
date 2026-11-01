@@ -23,7 +23,7 @@ extern void mem_getAllocSize(void);
 extern void wcs_parseInt(void);
 extern void str_findChar(void);
 extern void fn_8046DC5C(void);
-extern void fn_8046DD20(void);
+extern void boss_bindArenaInteractions(void);
 extern void printf(void);
 extern void rand(void);
 extern void strcmp(void);
@@ -214,7 +214,7 @@ lbl_fn_8021EB04_00000194:
     bne lbl_fn_8021EB04_0000012C
     lwz r3, lbl_8087F518
     mr r4, r30
-    bl fn_8046DD20
+    bl boss_bindArenaInteractions
 lbl_fn_8021EB04_000001B0:
     lwz r0, 0x654(r1)
     lwz r31, 0x64c(r1)
@@ -461,7 +461,7 @@ lbl_fn_8021ED08_000004F8:
     bne lbl_fn_8021ED08_000003C8
     lwz r3, lbl_8087F518
     mr r4, r29
-    bl fn_8046DD20
+    bl boss_bindArenaInteractions
     lwz r0, 0xc(r1)
     srwi. r0, r0, 31
     beq lbl_fn_8021ED08_00000528
@@ -742,7 +742,7 @@ lbl_fn_8021F100_00000898:
     bne lbl_fn_8021F100_00000840
     lwz r3, lbl_8087F518
     mr r4, r29
-    bl fn_8046DD20
+    bl boss_bindArenaInteractions
     lwz r0, 0x28(r1)
     srwi. r0, r0, 31
     beq lbl_fn_8021F100_000008C8
@@ -1164,7 +1164,7 @@ lbl_fn_8021F47C_00000E70:
     bne lbl_fn_8021F47C_00000BC0
     lwz r3, lbl_8087F518
     mr r4, r20
-    bl fn_8046DD20
+    bl boss_bindArenaInteractions
     addic. r18, r1, 0x44
     beq lbl_fn_8021F47C_00000FCC
     beq lbl_fn_8021F47C_00000FCC

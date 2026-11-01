@@ -13,7 +13,7 @@ extern void fn_8000DCF4(void);
 extern void fn_8000DD0C(void);
 extern void vec3_assign(void);
 extern void vec3_sub(void);
-extern void fn_800133B0(void);
+extern void math_wrapAngle(void);
 extern void msg_getMessageById(void);
 extern void fn_8012A190(void);
 extern void fn_8012A1B8(void);
@@ -1713,7 +1713,7 @@ lbl_fn_804E7AC4_00001698:
     li r4, 0x0
     bl fn_804E80AC
     fsubs f1, f1, f31
-    bl fn_800133B0
+    bl math_wrapAngle
     stfs f1, 0x28(r27)
     mr r3, r29
     bl fn_804E80BC
@@ -1840,7 +1840,7 @@ lbl_fn_804E7AC4_00001888:
     li r4, 0x0
     bl fn_804E80AC
     fsubs f1, f1, f31
-    bl fn_800133B0
+    bl math_wrapAngle
     stfs f1, 0x28(r25)
     lwz r3, 0x0(r28)
     bl fn_804E80BC
@@ -1971,7 +1971,7 @@ lbl_fn_804E7AC4_00001A80:
     li r4, 0x0
     bl fn_804E80AC
     fsubs f1, f1, f31
-    bl fn_800133B0
+    bl math_wrapAngle
     stfs f1, 0x28(r27)
     lwz r3, 0x10c(r1)
     bl fn_804E80BC

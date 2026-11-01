@@ -42,7 +42,7 @@ extern void boss_updatePhaseState(void);
 extern void npc_calcTargetDistance(void);
 extern void npc_getGlobalManager(void);
 extern void npc_getPosition(void);
-extern void fn_8014052C(void);
+extern void quest_initMarkerCoords(void);
 extern void quest_updateFlow(void);
 extern void dialog_updateScriptState(void);
 extern void fn_801513D0(void);
@@ -1280,7 +1280,7 @@ lbl_fn_8032E938_00000FC0:
     lwz r4, 0xd1c(r31)
     mr r29, r3
     addi r3, r1, 0x10
-    bl fn_8014052C
+    bl quest_initMarkerCoords
     lwz r3, 0xd1c(r31)
     bl npc_getPosition
     mr r4, r3

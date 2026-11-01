@@ -13,7 +13,7 @@ extern void vec3_toEulerAngles(void);
 extern void mtx_multVec(void);
 extern void fn_80012C88(void);
 extern void vec3_sub(void);
-extern void fn_800133B0(void);
+extern void math_wrapAngle(void);
 extern void vec3_add(void);
 extern void fn_80013484(void);
 extern void item_useConsumable(void);
@@ -306,10 +306,10 @@ lbl_fn_80382A1C_000001E4:
     addi r4, r1, 0xd4
     bl vec3_copy
     lfs f1, 0x144(r1)
-    bl fn_800133B0
+    bl math_wrapAngle
     lfs f0, 0x12c(r1)
     fsubs f1, f0, f1
-    bl fn_800133B0
+    bl math_wrapAngle
     fneg f29, f1
     addi r3, r1, 0x104
     addi r4, r1, 0x110

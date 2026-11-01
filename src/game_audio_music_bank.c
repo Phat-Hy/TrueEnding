@@ -12,7 +12,7 @@ extern void fn_800109E0(void);
 extern void vec3_toEulerAngles(void);
 extern void mtx_multVec(void);
 extern void vec3_sub(void);
-extern void fn_800133B0(void);
+extern void math_wrapAngle(void);
 extern void vec3_add(void);
 extern void skill_calculateDamage(void);
 extern void fn_80063764(void);
@@ -1364,10 +1364,10 @@ lbl_fn_8030B74C_000011AC:
     bl vec3_toEulerAngles
     fsubs f1, f30, f31
     lfs f31, 0x14(r1)
-    bl fn_800133B0
+    bl math_wrapAngle
     stfs f1, 0xc(r1)
     fsubs f1, f31, f30
-    bl fn_800133B0
+    bl math_wrapAngle
     stfs f1, 0x8(r1)
     fmr f1, f29
     addi r3, r1, 0xc

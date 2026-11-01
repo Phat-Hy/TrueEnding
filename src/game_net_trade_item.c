@@ -20,7 +20,7 @@ extern void skeleton_getGlobalManager(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB58C(void);
 extern void morph_updateMesh(void);
-extern void fn_800F52F0(void);
+extern void proj_getMatrix(void);
 extern void fn_800F7260(void);
 extern void viewport_getNextSequenceId(void);
 extern void fn_800F8524(void);
@@ -296,7 +296,7 @@ lbl_fn_8052C10C_0000024C:
     bne lbl_fn_8052C10C_00000208
     b lbl_fn_8052C10C_00000298
 lbl_fn_8052C10C_00000258:
-    bl fn_800F52F0
+    bl proj_getMatrix
     mr r30, r3
     bl fn_801D80B4
     lwz r4, 0x10(r1)

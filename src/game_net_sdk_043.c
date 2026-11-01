@@ -17,7 +17,7 @@ extern void strncmp(void);
 extern void strstr(void);
 extern void atoi(void);
 extern void fn_806D57A0(void);
-extern void fn_806D5850(void);
+extern void net_pollActiveSockets(void);
 extern void net_bufferGetCount(void);
 extern void net_bufferGetElement(void);
 extern void fn_806D5930(void);
@@ -326,7 +326,7 @@ lbl_fn_806F8B00_000003B4:
     cmpwi r23, 0x0
     bge lbl_fn_806F8B00_000001D0
     lwz r3, 0x228(r28)
-    bl fn_806D5850
+    bl net_pollActiveSockets
     li r0, 0x0
     stw r0, 0x228(r28)
 lbl_fn_806F8B00_000003CC:
@@ -888,7 +888,7 @@ lbl_fn_806F9160_00000BA0:
     cmpwi r18, 0x0
     bge lbl_fn_806F9160_000009BC
     lwz r3, 0x228(r30)
-    bl fn_806D5850
+    bl net_pollActiveSockets
     li r0, 0x0
     stw r0, 0x228(r30)
 lbl_fn_806F9160_00000BB8:

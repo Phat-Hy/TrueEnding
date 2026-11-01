@@ -11,7 +11,7 @@ extern void vec3_set(void);
 extern void vec3_copy(void);
 extern void fn_8000DD0C(void);
 extern void vec3_toEulerAngles(void);
-extern void fn_800133B0(void);
+extern void math_wrapAngle(void);
 extern void collision_queryGeometry(void);
 extern void collision_testLineSegment(void);
 extern void mission_updateStub(void);
@@ -29,7 +29,7 @@ extern void fn_8013C3B4(void);
 extern void fn_8013C460(void);
 extern void fn_8013C554(void);
 extern void npc_updateTalkInteraction(void);
-extern void fn_8014052C(void);
+extern void quest_initMarkerCoords(void);
 extern void quest_resetObjectiveBounds(void);
 extern void inventory_unequipItem(void);
 extern void equip_applyToCharacter(void);
@@ -1094,7 +1094,7 @@ asm void fn_801C0D80(void)
     bl vec3_copy
     lwz r4, 0x4(r29)
     addi r3, r1, 0x80
-    bl fn_8014052C
+    bl quest_initMarkerCoords
     mr r4, r30
     addi r3, r1, 0x80
     bl fn_801A03E8
@@ -1132,7 +1132,7 @@ lbl_fn_801C0D80_00000D34:
     bl fn_8012A1B8
     lfs f0, 0x4(r3)
     fsubs f1, f31, f0
-    bl fn_800133B0
+    bl math_wrapAngle
     lfs f0, lbl_808826A4
     fcmpo cr0, f1, f0
     ble lbl_fn_801C0D80_00000DD8

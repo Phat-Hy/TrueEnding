@@ -61,7 +61,7 @@ extern void fn_801352F8(void);
 extern void fn_80137E68(void);
 extern void fn_80137FC0(void);
 extern void fn_80138528(void);
-extern void fn_8014C228(void);
+extern void dialog_initScriptSlot(void);
 extern void dialog_selectChoice(void);
 extern void fn_8014FD30(void);
 extern void fn_8014FF9C(void);
@@ -804,7 +804,7 @@ lbl_boss_updatePhaseState_000008B4:
     mr r3, r30
     bl fn_80137FC0
     mr r3, r30
-    bl fn_8014C228
+    bl dialog_initScriptSlot
     lbz r0, lbl_8087F088
     lis r4, lbl_8077A72C@ha
     lwzu r9, lbl_8077A72C@l(r4)

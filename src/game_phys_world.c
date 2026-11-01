@@ -66,7 +66,7 @@ void fn_80112174(void);
 void fn_80112218(void);
 void fn_80112220(void);
 void fn_80112254(void);
-void fn_801125F8(void);
+void phys_scaleGravity(void);
 void fn_80112604(void);
 void fn_80112784(void);
 void fn_80112840(void);
@@ -456,7 +456,7 @@ lbl_fn_80112254_000004F4:
     blr
 }
 
-asm void fn_801125F8(void)
+asm void phys_scaleGravity(void)
 {
     nofralloc
     lfs f0, lbl_808816C4

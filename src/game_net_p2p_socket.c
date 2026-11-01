@@ -14,7 +14,7 @@ extern void __files(void);
 extern void dtor_80084684(void);
 extern void dungeon_initGlobalContext(void);
 extern void town_synchronizedDispatch(void);
-extern void fn_800839EC(void);
+extern void town_registerInteractionPoint(void);
 extern void town_updateInteractionPoints(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
@@ -1491,7 +1491,7 @@ lbl_fn_8050D3EC_000012C4:
     li r6, 0x5
     li r9, 0x0
     li r10, 0x0
-    bl fn_800839EC
+    bl town_registerInteractionPoint
     mr r4, r3
     addi r5, r31, lbl_8075B180@l
     addi r6, r5, 0x1
@@ -1580,7 +1580,7 @@ asm void fn_8050D504(void)
     li r6, 0x5
     li r9, 0x0
     li r10, 0x0
-    bl fn_800839EC
+    bl town_registerInteractionPoint
     mr r30, r3
 lbl_fn_8050D504_0000142C:
     mr r3, r30
@@ -1687,7 +1687,7 @@ asm void fn_8050D680(void)
     li r6, 0x5
     li r9, 0x0
     li r10, 0x0
-    bl fn_800839EC
+    bl town_registerInteractionPoint
     mr r30, r3
 lbl_fn_8050D680_000015A0:
     mr r3, r30

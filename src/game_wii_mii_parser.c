@@ -10,7 +10,7 @@ extern void vec3_mag(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
 extern void fn_80011220(void);
-extern void fn_800133B0(void);
+extern void math_wrapAngle(void);
 extern void fn_80063484(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
@@ -29,7 +29,7 @@ extern void fn_800EB49C(void);
 extern void fn_800F29D0(void);
 extern void vec3_normalize(void);
 extern void scissor_clipFrustum(void);
-extern void fn_801125F8(void);
+extern void phys_scaleGravity(void);
 extern void fn_8011C044(void);
 extern void enemy_updateCombatBehavior(void);
 extern void fn_80129978(void);
@@ -1910,7 +1910,7 @@ lbl_fn_80567600_00001828:
     lfs f1, 0x34(r1)
     lfs f0, 0x538(r31)
     fsubs f1, f1, f0
-    bl fn_800133B0
+    bl math_wrapAngle
     lha r3, 0xd3a(r31)
     fmr f29, f1
     subi r0, r3, 0x3
@@ -1918,7 +1918,7 @@ lbl_fn_80567600_00001828:
     cmplwi r0, 0x1
     bgt lbl_fn_80567600_00001880
     lfs f1, lbl_80887F88
-    bl fn_801125F8
+    bl phys_scaleGravity
     fmr f31, f1
     fmr f1, f29
     bl fn_80011220
@@ -1933,7 +1933,7 @@ lbl_fn_80567600_00001880:
     cmpwi r3, 0x1
     bne lbl_fn_80567600_000019C8
     lfs f1, lbl_80887F8C
-    bl fn_801125F8
+    bl phys_scaleGravity
     fmr f31, f1
     fmr f1, f29
     bl fn_80011220
@@ -1941,30 +1941,30 @@ lbl_fn_80567600_00001880:
     cror eq, gt, eq
     bne lbl_fn_80567600_000019C8
     lfs f1, lbl_80887F90
-    bl fn_801125F8
+    bl phys_scaleGravity
     fcmpo cr0, f1, f29
     bge lbl_fn_80567600_000018C8
     lfs f1, lbl_80887F90
-    bl fn_801125F8
+    bl phys_scaleGravity
     fmr f31, f1
     b lbl_fn_80567600_000018CC
 lbl_fn_80567600_000018C8:
     fmr f31, f29
 lbl_fn_80567600_000018CC:
     lfs f1, lbl_80887F94
-    bl fn_801125F8
+    bl phys_scaleGravity
     fcmpo cr0, f1, f31
     ble lbl_fn_80567600_000018E8
     lfs f1, lbl_80887F94
-    bl fn_801125F8
+    bl phys_scaleGravity
     b lbl_fn_80567600_00001908
 lbl_fn_80567600_000018E8:
     lfs f1, lbl_80887F90
-    bl fn_801125F8
+    bl phys_scaleGravity
     fcmpo cr0, f1, f29
     bge lbl_fn_80567600_00001904
     lfs f1, lbl_80887F90
-    bl fn_801125F8
+    bl phys_scaleGravity
     b lbl_fn_80567600_00001908
 lbl_fn_80567600_00001904:
     fmr f1, f29

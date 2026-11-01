@@ -30,7 +30,7 @@ extern void npc_getGlobalManager(void);
 extern void npc_getPosition(void);
 extern void fn_801404F8(void);
 extern void fn_80140500(void);
-extern void fn_8014052C(void);
+extern void quest_initMarkerCoords(void);
 extern void fn_80158CA4(void);
 extern void fn_80158E1C(void);
 extern void actor_setState(void);
@@ -976,7 +976,7 @@ lbl_fn_8031958C_00000BE8:
     fadds f0, f1, f0
     stfs f0, 0xe8(r1)
     lwz r4, 0x15b4(r31)
-    bl fn_8014052C
+    bl quest_initMarkerCoords
     lfs f1, lbl_80884DCC
     addi r3, r1, 0xa8
     addi r4, r1, 0x9c

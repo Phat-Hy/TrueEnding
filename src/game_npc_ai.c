@@ -22,7 +22,7 @@ extern void mission_updateStub(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800EC204(void);
-extern void fn_800F52F0(void);
+extern void proj_getMatrix(void);
 extern void fn_800F52F8(void);
 extern void vec3_scale(void);
 extern void fn_800F7F60(void);
@@ -30,7 +30,7 @@ extern void vec3_normalize(void);
 extern void viewport_getNextSequenceId(void);
 extern void fn_80109950(void);
 extern void fn_8010C948(void);
-extern void fn_801125F8(void);
+extern void phys_scaleGravity(void);
 extern void fn_801162A0(void);
 extern void fn_8011BF3C(void);
 extern void equip_getGlobalManager(void);
@@ -778,7 +778,7 @@ lbl_fn_8013A4E8_00000940:
     mr r3, r27
     fsubs f0, f0, f1
     stfs f0, 0x0(r28)
-    bl fn_800F52F0
+    bl proj_getMatrix
     lfs f1, 0x110(r3)
     lfs f0, 0x0(r28)
     fcmpo cr0, f0, f1
@@ -1328,7 +1328,7 @@ lbl_fn_8013A4E8_000010F8:
     fsubs f3, f1, f3
     lfs f1, lbl_808819F0
     fmsubs f31, f2, f3, f0
-    bl fn_801125F8
+    bl phys_scaleGravity
     fmuls f1, f1, f31
     addi r3, r1, 0x390
     bl fn_8013A13C

@@ -40,7 +40,7 @@ extern void fn_800ED42C(void);
 extern void fn_800ED4D8(void);
 extern void fn_800ED4E0(void);
 extern void cam_evalLookAtMatrix(void);
-extern void fn_800F52F0(void);
+extern void proj_getMatrix(void);
 extern void system_getNextSequenceId(void);
 extern void boss_updatePhaseState(void);
 extern void quest_updateFlow(void);
@@ -1087,7 +1087,7 @@ asm void fn_8031B0A8(void)
     stw r30, 0x15c4(r29)
     stw r4, 0x15c8(r29)
     stw r0, 0x15cc(r29)
-    bl fn_800F52F0
+    bl proj_getMatrix
     li r4, 0x10
     addi r3, r3, 0xe8
     bl fn_802660FC

@@ -29,7 +29,7 @@ extern void fn_8010B250(void);
 extern void fn_8010EE78(void);
 extern void npc_updateDialogueTarget(void);
 extern void npc_getGlobalManager(void);
-extern void fn_8014052C(void);
+extern void quest_initMarkerCoords(void);
 extern void actor_setState(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
@@ -343,7 +343,7 @@ lbl_fn_80348FF4_00000340:
     fmr f31, f1
     mr r4, r31
     addi r3, r1, 0x1c
-    bl fn_8014052C
+    bl quest_initMarkerCoords
     fmr f1, f31
     addi r3, r1, 0x28
     addi r4, r1, 0x1c

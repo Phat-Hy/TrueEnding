@@ -32,7 +32,7 @@ extern void enemy_updateAnimTimer(void);
 extern void npc_getGlobalManager(void);
 extern void fn_8013C480(void);
 extern void npc_getDialogController(void);
-extern void fn_8014052C(void);
+extern void quest_initMarkerCoords(void);
 extern void quest_updateFlow(void);
 extern void quest_ctorRewardItem(void);
 extern void fn_80149624(void);
@@ -367,7 +367,7 @@ lbl_fn_8030C490_0000037C:
     mr r27, r3
     mr r4, r30
     addi r3, r1, 0x14
-    bl fn_8014052C
+    bl quest_initMarkerCoords
     lfs f1, lbl_80884BCC
     addi r3, r1, 0x20
     addi r4, r1, 0x14

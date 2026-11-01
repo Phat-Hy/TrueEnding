@@ -11,7 +11,7 @@ extern void menu_renderLayout(void);
 extern void collision_testLineSegment(void);
 extern void mem_alloc(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_8014C228(void);
+extern void dialog_initScriptSlot(void);
 extern void dialog_selectChoice(void);
 extern void fn_80153B44(void);
 extern void fn_80164DCC(void);
@@ -1489,7 +1489,7 @@ lbl_fn_8015F568_00001414:
     mr r3, r27
     stw r0, 0x648(r27)
     stw r0, 0x64c(r27)
-    bl fn_8014C228
+    bl dialog_initScriptSlot
     b lbl_fn_8015F568_00001454
 lbl_fn_8015F568_00001434:
     lwz r0, 0x674(r27)

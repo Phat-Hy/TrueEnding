@@ -12,7 +12,7 @@ extern void memcmp(void);
 extern void strncmp(void);
 extern void fn_80683B54(void);
 extern void atoi(void);
-extern void fn_806D5850(void);
+extern void net_pollActiveSockets(void);
 extern void fn_806D7350(void);
 extern void net_socketConnect(void);
 extern void net_socketClose(void);
@@ -791,7 +791,7 @@ lbl_fn_806E05E0_000009BC:
     lwz r3, 0x38(r3)
     cmpwi r3, 0x0
     beq lbl_fn_806E05E0_00000A3C
-    bl fn_806D5850
+    bl net_pollActiveSockets
     lwz r3, 0xc(r30)
     stw r28, 0x38(r3)
 lbl_fn_806E05E0_00000A3C:

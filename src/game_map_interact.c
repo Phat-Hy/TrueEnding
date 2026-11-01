@@ -32,7 +32,7 @@ extern void fn_800D8814(void);
 extern void vec3_normalize(void);
 extern void fn_800F833C(void);
 extern void fn_800F84BC(void);
-extern void fn_801125F8(void);
+extern void phys_scaleGravity(void);
 extern void actor_getMovementFlags(void);
 extern void fn_80185628(void);
 extern void fn_801856A4(void);
@@ -1516,7 +1516,7 @@ asm void fn_80184C30(void)
     addi r3, r30, 0x28
     bl vec3_copy
     lfs f1, lbl_80881D6C
-    bl fn_801125F8
+    bl phys_scaleGravity
     stfs f1, 0x34(r30)
     addi r3, r1, 0x20
     lfs f1, lbl_80881D4C
@@ -1557,7 +1557,7 @@ asm void fn_80184C30(void)
     addi r3, r30, 0x60
     bl vec3_copy
     lfs f1, lbl_80881D6C
-    bl fn_801125F8
+    bl phys_scaleGravity
     stfs f1, 0x6c(r30)
     addi r3, r1, 0x10
     lfs f1, lbl_80881D4C
@@ -1598,7 +1598,7 @@ asm void fn_80184C30(void)
     addi r3, r30, 0x98
     bl vec3_copy
     lfs f1, lbl_80881D6C
-    bl fn_801125F8
+    bl phys_scaleGravity
     stfs f1, 0xa4(r30)
     addi r3, r1, 0x2d4
     bl fn_80079044

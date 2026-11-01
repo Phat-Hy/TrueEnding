@@ -33,7 +33,7 @@ extern void __construct_new_array(void);
 extern void __destroy_new_array(void);
 extern void fn_806A426C(void);
 extern void fn_806A4270(void);
-extern void fn_806D5850(void);
+extern void net_pollActiveSockets(void);
 extern void net_bufferGetCount(void);
 extern void net_bufferGetElement(void);
 extern void fn_806D5930(void);
@@ -45,7 +45,7 @@ extern void fn_806D7CB0(void);
 extern void fn_806D7CF0(void);
 extern void fn_806D7D60(void);
 extern void fn_806D8650(void);
-extern void fn_806D8F30(void);
+extern void net_getTimestampMs(void);
 extern void fn_806FDBC0(void);
 extern void fn_806FE840(void);
 extern void fn_806FE900(void);
@@ -251,7 +251,7 @@ lbl_fn_80703610_000001A0:
     cmpw r30, r3
     blt lbl_fn_80703610_00000150
     lwz r3, 0x8(r31)
-    bl fn_806D5850
+    bl net_pollActiveSockets
     li r0, 0x0
     stw r0, 0x8(r31)
 lbl_fn_80703610_000001C0:
@@ -545,7 +545,7 @@ lbl_fn_80703AC0_000005C8:
     bl fn_806D8650
     cmpwi r3, 0x0
     bne lbl_fn_80703AC0_000004D8
-    bl fn_806D8F30
+    bl net_getTimestampMs
     lwz r0, 0x6b8(r26)
     subf r0, r0, r3
     cmplwi r0, 0x7d0

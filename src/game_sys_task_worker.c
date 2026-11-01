@@ -23,7 +23,7 @@ extern void fn_8021771C(void);
 extern void fn_8021AF98(void);
 extern void fn_8021AFF4(void);
 extern void fn_8046DC5C(void);
-extern void fn_8046DD20(void);
+extern void boss_bindArenaInteractions(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
@@ -1065,7 +1065,7 @@ lbl_fn_802189EC_00000CF4:
     bne lbl_fn_802189EC_00000CD8
     lwz r3, lbl_8087F518
     mr r4, r30
-    bl fn_8046DD20
+    bl boss_bindArenaInteractions
     lwz r3, lbl_8087F518
     addi r5, r1, 0x8
     lwz r4, lbl_80882F48
@@ -1096,7 +1096,7 @@ lbl_fn_802189EC_00000D68:
     bne lbl_fn_802189EC_00000D4C
     lwz r3, lbl_8087F518
     mr r4, r30
-    bl fn_8046DD20
+    bl boss_bindArenaInteractions
     lwz r0, 0x654(r1)
     lwz r31, 0x64c(r1)
     lwz r30, 0x648(r1)
@@ -1407,7 +1407,7 @@ lbl_fn_80218BD4_000011D0:
     bne lbl_fn_80218BD4_00000EB8
     lwz r3, lbl_8087F518
     mr r4, r27
-    bl fn_8046DD20
+    bl boss_bindArenaInteractions
     lmw r21, 0x644(r1)
     lwz r0, 0x674(r1)
     mtlr r0
@@ -2113,7 +2113,7 @@ lbl_fn_802196D0_00001B24:
     bne lbl_fn_802196D0_00001A0C
     lwz r3, lbl_8087F518
     mr r4, r25
-    bl fn_8046DD20
+    bl boss_bindArenaInteractions
 lbl_fn_802196D0_00001B40:
     lmw r24, 0x640(r1)
     lwz r0, 0x664(r1)

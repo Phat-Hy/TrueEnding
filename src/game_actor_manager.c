@@ -11,7 +11,7 @@ extern void fn_800109E0(void);
 extern void vec3_toEulerAngles(void);
 extern void fn_80011220(void);
 extern void vec3_sub(void);
-extern void fn_800133B0(void);
+extern void math_wrapAngle(void);
 extern void vec3_add(void);
 extern void item_useConsumable(void);
 extern void fn_8008B964(void);
@@ -22,7 +22,7 @@ extern void fn_800F7260(void);
 extern void fn_800F8524(void);
 extern void fn_8010F6FC(void);
 extern void fn_80112220(void);
-extern void fn_801125F8(void);
+extern void phys_scaleGravity(void);
 extern void fn_80112958(void);
 extern void fn_80112960(void);
 extern void fn_80112A00(void);
@@ -1651,10 +1651,10 @@ lbl_fn_801162A4_00001598:
     addi r3, r1, 0x20
     bl fn_80116BB4
     lfs f1, lbl_80881704
-    bl fn_801125F8
+    bl phys_scaleGravity
     fmr f30, f1
     lfs f1, lbl_80881700
-    bl fn_801125F8
+    bl phys_scaleGravity
     fmr f29, f1
     mr r3, r29
     bl fn_80116BA4
@@ -1666,10 +1666,10 @@ lbl_fn_801162A4_00001598:
     b lbl_fn_801162A4_00001644
 lbl_fn_801162A4_0000161C:
     lfs f1, lbl_80881704
-    bl fn_801125F8
+    bl phys_scaleGravity
     fmr f30, f1
     lfs f1, lbl_80881700
-    bl fn_801125F8
+    bl phys_scaleGravity
     fmr f29, f1
     mr r3, r29
     bl fn_80116BA4
@@ -1682,10 +1682,10 @@ lbl_fn_801162A4_00001644:
     b lbl_fn_801162A4_000016B4
 lbl_fn_801162A4_00001654:
     lfs f1, lbl_80881704
-    bl fn_801125F8
+    bl phys_scaleGravity
     fmr f30, f1
     lfs f1, lbl_80881700
-    bl fn_801125F8
+    bl phys_scaleGravity
     fmr f29, f1
     mr r3, r29
     bl fn_80116BA4
@@ -1697,10 +1697,10 @@ lbl_fn_801162A4_00001654:
     b lbl_fn_801162A4_000016B4
 lbl_fn_801162A4_0000168C:
     lfs f1, lbl_80881704
-    bl fn_801125F8
+    bl phys_scaleGravity
     fmr f29, f1
     lfs f1, lbl_80881700
-    bl fn_801125F8
+    bl phys_scaleGravity
     fmr f30, f1
     mr r3, r29
     bl fn_80116BA4
@@ -1712,13 +1712,13 @@ lbl_fn_801162A4_000016B4:
     bl fn_800F8524
     fmr f30, f1
     lfs f1, lbl_80881708
-    bl fn_801125F8
+    bl phys_scaleGravity
     lfs f0, 0x648(r29)
     fmuls f0, f0, f1
     lfs f1, lbl_80881708
     fmuls f0, f30, f0
     stfs f0, 0x20(r1)
-    bl fn_801125F8
+    bl phys_scaleGravity
     lfs f0, 0x644(r29)
     mr r3, r29
     fmuls f0, f0, f1
@@ -1746,7 +1746,7 @@ lbl_fn_801162A4_000016B4:
     lfs f1, 0xc4(r1)
     lfs f0, 0x20(r1)
     fadds f1, f1, f0
-    bl fn_800133B0
+    bl math_wrapAngle
     lfs f0, lbl_8088170C
     fcmpo cr0, f0, f1
     bge lbl_fn_801162A4_00001764
@@ -1755,7 +1755,7 @@ lbl_fn_801162A4_00001764:
     lfs f1, 0xc4(r1)
     lfs f0, 0x20(r1)
     fadds f1, f1, f0
-    bl fn_800133B0
+    bl math_wrapAngle
     fmr f0, f1
 lbl_fn_801162A4_00001778:
     lfs f2, lbl_80881710
@@ -1766,7 +1766,7 @@ lbl_fn_801162A4_00001788:
     lfs f1, 0xc4(r1)
     lfs f0, 0x20(r1)
     fadds f1, f1, f0
-    bl fn_800133B0
+    bl math_wrapAngle
     lfs f2, lbl_8088170C
     fcmpo cr0, f2, f1
     bge lbl_fn_801162A4_000017A8
@@ -1775,14 +1775,14 @@ lbl_fn_801162A4_000017A8:
     lfs f1, 0xc4(r1)
     lfs f0, 0x20(r1)
     fadds f1, f1, f0
-    bl fn_800133B0
+    bl math_wrapAngle
     fmr f2, f1
 lbl_fn_801162A4_000017BC:
     lfs f1, 0xc8(r1)
     lfs f0, 0x24(r1)
     stfs f2, 0xc4(r1)
     fadds f1, f1, f0
-    bl fn_800133B0
+    bl math_wrapAngle
     stfs f1, 0xc8(r1)
     addi r3, r1, 0x100
     addi r4, r1, 0xc4
@@ -1894,7 +1894,7 @@ lbl_fn_801162A4_00001924:
     lfs f1, lbl_808816E0
     lfs f0, 0xbc(r1)
     fadds f1, f1, f0
-    bl fn_800133B0
+    bl math_wrapAngle
     stfs f1, 0xbc(r1)
     mr r3, r29
     bl fn_80113CCC

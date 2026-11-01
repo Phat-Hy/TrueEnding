@@ -26,7 +26,7 @@ extern void fn_806D6560(void);
 extern void net_socketConnect(void);
 extern void net_socketClose(void);
 extern void fn_806D7F30(void);
-extern void fn_806D8F30(void);
+extern void net_getTimestampMs(void);
 extern void fn_806D8FC0(void);
 extern void fn_806D8FE0(void);
 extern void fn_806D9380(void);
@@ -1034,7 +1034,7 @@ asm void fn_806E92D0(void)
     addi r11, r1, 0x20
     bl _savegpr_27
     mr r27, r3
-    bl fn_806D8F30
+    bl net_getTimestampMs
     bl srand
     bl rand
     lis r4, 0x2c0b
@@ -2316,7 +2316,7 @@ asm void fn_806EA3E0(void)
     li r3, 0x0
     b lbl_fn_806EA3E0_00001DE0
 lbl_fn_806EA3E0_00001DD4:
-    bl fn_806D8F30
+    bl net_getTimestampMs
     stw r3, 0x88(r31)
     li r3, 0x1
 lbl_fn_806EA3E0_00001DE0:

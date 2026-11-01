@@ -15,7 +15,7 @@ extern void mem_free(void);
 extern void map_debugLog(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800F52F0(void);
+extern void proj_getMatrix(void);
 extern void fn_8012476C(void);
 extern void fn_8012A1B8(void);
 extern void fn_80139F4C(void);
@@ -933,7 +933,7 @@ asm void fn_801B6494(void)
     stw r29, 0x134(r1)
     mr r29, r3
     lwz r3, 0x4(r4)
-    bl fn_800F52F0
+    bl proj_getMatrix
     bl fn_80139F4C
     cmpwi r3, 0x0
     beq lbl_fn_801B6494_00000CC8

@@ -2,7 +2,7 @@
 #pragma function_align 4
 
 /* External function declarations */
-extern void fn_800133B0(void);
+extern void math_wrapAngle(void);
 extern void fn_80013404(void);
 extern void fn_8008B964(void);
 extern void msg_getMessageById(void);
@@ -224,7 +224,7 @@ lbl_fn_80122330_00000204:
     ble lbl_fn_80122330_00000244
     lfs f0, 0xc(r31)
     fsubs f1, f31, f0
-    bl fn_800133B0
+    bl math_wrapAngle
     bl f32_abs
     lfs f0, lbl_8088182C
     fcmpo cr0, f1, f0

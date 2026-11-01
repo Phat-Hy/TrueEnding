@@ -6,7 +6,7 @@ extern void _restgpr_21(void);
 extern void _savegpr_21(void);
 extern void dtor_80084684(void);
 extern void atn_LH_Binary_destructor(void);
-extern void fn_80060D58(void);
+extern void equip_calcTotalStatBonuses(void);
 extern void skill_calculateDamage(void);
 extern void fn_800638B0(void);
 extern void fn_8006CA80(void);
@@ -1268,7 +1268,7 @@ lbl_fn_805B41A8_00000EC0:
     lfs f28, lbl_808883A0
     fmr f4, f31
     lfs f27, lbl_808883A4
-    bl fn_80060D58
+    bl equip_calcTotalStatBonuses
     lfs f8, lbl_808883A8
     lis r27, lbl_80763D00@ha
     lfs f0, lbl_808883AC

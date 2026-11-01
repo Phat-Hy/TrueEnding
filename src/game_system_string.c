@@ -23,7 +23,7 @@ extern void str_skipWhitespace(void);
 extern void str_findChar(void);
 extern void fn_802091E8(void);
 extern void fn_8046DC5C(void);
-extern void fn_8046DD20(void);
+extern void boss_bindArenaInteractions(void);
 extern void strncpy(void);
 extern void strcmp(void);
 extern void wmemcpy(void);
@@ -1133,7 +1133,7 @@ lbl_fn_8020AFF4_00000E50:
     bne lbl_fn_8020AFF4_00000DBC
     lwz r3, lbl_8087F518
     mr r4, r30
-    bl fn_8046DD20
+    bl boss_bindArenaInteractions
 lbl_fn_8020AFF4_00000E6C:
     lmw r27, 0x64c(r1)
     lwz r0, 0x664(r1)
@@ -1386,7 +1386,7 @@ lbl_fn_8020B2BC_000011B4:
     bne lbl_fn_8020B2BC_000010B0
     lwz r3, lbl_8087F518
     mr r4, r26
-    bl fn_8046DD20
+    bl boss_bindArenaInteractions
     lis r4, lbl_8073F4A0@ha
     addi r3, r1, 0x248
     addi r4, r4, lbl_8073F4A0@l
@@ -1505,7 +1505,7 @@ lbl_fn_8020B2BC_00001370:
     bne lbl_fn_8020B2BC_000012B0
     lwz r3, lbl_8087F518
     mr r4, r24
-    bl fn_8046DD20
+    bl boss_bindArenaInteractions
     lwz r0, lbl_8087F1D8
     cmpwi r0, 0x0
     bne lbl_fn_8020B2BC_000013B8
@@ -1638,7 +1638,7 @@ lbl_fn_8020B2BC_00001564:
     bne lbl_fn_8020B2BC_000014BC
     lwz r3, lbl_8087F518
     mr r4, r24
-    bl fn_8046DD20
+    bl boss_bindArenaInteractions
     lis r4, lbl_8073F4A0@ha
     addi r3, r1, 0x48
     addi r4, r4, lbl_8073F4A0@l
@@ -1757,7 +1757,7 @@ lbl_fn_8020B2BC_00001720:
     bne lbl_fn_8020B2BC_00001660
     lwz r3, lbl_8087F518
     mr r4, r24
-    bl fn_8046DD20
+    bl boss_bindArenaInteractions
     li r0, 0x2988
     addi r11, r1, 0x2980
     psq_lx f31, r1, r0, 0, 0
@@ -1922,7 +1922,7 @@ lbl_fn_8020BB0C_00001958:
     bne lbl_fn_8020BB0C_000018B8
     lwz r3, lbl_8087F518
     mr r4, r24
-    bl fn_8046DD20
+    bl boss_bindArenaInteractions
     addi r11, r1, 0x7b0
     bl _restgpr_22
     lwz r0, 0x7b4(r1)

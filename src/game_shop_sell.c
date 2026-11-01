@@ -7,7 +7,7 @@ extern void mem_alloc(void);
 extern void fn_801059F8(void);
 extern void fn_80105B3C(void);
 extern void fn_8011BEB8(void);
-extern void fn_8014C228(void);
+extern void dialog_initScriptSlot(void);
 extern void dialog_selectChoice(void);
 extern void fn_80164DCC(void);
 extern void actor_setState(void);
@@ -1177,7 +1177,7 @@ lbl_fn_8015A46C_00000FF0:
     mr r3, r28
     stw r0, 0x648(r28)
     stw r0, 0x64c(r28)
-    bl fn_8014C228
+    bl dialog_initScriptSlot
     b lbl_fn_8015A46C_00001030
 lbl_fn_8015A46C_00001010:
     lwz r0, 0x674(r28)

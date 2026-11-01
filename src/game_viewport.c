@@ -29,7 +29,7 @@ extern void fn_800EE180(void);
 extern void fn_800EFD04(void);
 extern void fn_800EFDA0(void);
 extern void fn_800EFF04(void);
-extern void fn_800F52F0(void);
+extern void proj_getMatrix(void);
 extern void fn_800F52F8(void);
 extern void fn_800F5300(void);
 extern void fn_800F530C(void);
@@ -452,7 +452,7 @@ lbl_fn_800F72F4_000003A4:
     b lbl_fn_800F72F4_000005A0
 lbl_fn_800F72F4_000004A0:
     mr r3, r27
-    bl fn_800F52F0
+    bl proj_getMatrix
     bl fn_80134270
     cmpwi r3, 0x0
     beq lbl_fn_800F72F4_000004DC
@@ -468,7 +468,7 @@ lbl_fn_800F72F4_000004A0:
     b lbl_fn_800F72F4_0000053C
 lbl_fn_800F72F4_000004DC:
     mr r3, r27
-    bl fn_800F52F0
+    bl proj_getMatrix
     bl fn_80134250
     cmpwi r3, 0x0
     beq lbl_fn_800F72F4_00000518

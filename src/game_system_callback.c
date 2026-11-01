@@ -25,7 +25,7 @@ extern void fn_802164E8(void);
 extern void fn_80216500(void);
 extern void fn_80216AFC(void);
 extern void fn_8046DC5C(void);
-extern void fn_8046DD20(void);
+extern void boss_bindArenaInteractions(void);
 extern void strstr(void);
 extern void atoi(void);
 extern void wcscpy(void);
@@ -464,7 +464,7 @@ lbl_fn_8021414C_00000504:
     bne lbl_fn_8021414C_00000414
     lwz r3, lbl_8087F518
     mr r4, r26
-    bl fn_8046DD20
+    bl boss_bindArenaInteractions
 lbl_fn_8021414C_00000520:
     lmw r23, 0x64c(r1)
     lwz r0, 0x674(r1)
@@ -951,7 +951,7 @@ lbl_fn_802144A8_00000BD8:
     bne lbl_fn_802144A8_000007A0
     lwz r3, lbl_8087F518
     mr r4, r31
-    bl fn_8046DD20
+    bl boss_bindArenaInteractions
     lwz r3, lbl_8087F518
     addi r5, r1, 0x8
     lwz r4, lbl_80882F04
@@ -1055,7 +1055,7 @@ lbl_fn_802144A8_00000D64:
     bne lbl_fn_802144A8_00000CE0
     lwz r3, lbl_8087F518
     mr r4, r25
-    bl fn_8046DD20
+    bl boss_bindArenaInteractions
 lbl_fn_802144A8_00000D80:
     lmw r23, 0x64c(r1)
     lwz r0, 0x674(r1)
@@ -2211,7 +2211,7 @@ lbl_fn_802150F0_00001D70:
     bne lbl_fn_802150F0_0000173C
     lwz r3, lbl_8087F518
     mr r4, r25
-    bl fn_8046DD20
+    bl boss_bindArenaInteractions
 lbl_fn_802150F0_00001D8C:
     lwz r0, lbl_8087F260
     cmpwi r0, 0x0
@@ -2638,7 +2638,7 @@ lbl_fn_802150F0_000023AC:
     bne lbl_fn_802150F0_00001EB8
     lwz r3, lbl_8087F518
     mr r4, r26
-    bl fn_8046DD20
+    bl boss_bindArenaInteractions
 lbl_fn_802150F0_000023C8:
     lwz r0, lbl_8087F268
     cmpwi r0, 0x0
@@ -2778,7 +2778,7 @@ lbl_fn_802150F0_000025B0:
     bne lbl_fn_802150F0_0000254C
     lwz r3, lbl_8087F518
     mr r4, r18
-    bl fn_8046DD20
+    bl boss_bindArenaInteractions
 lbl_fn_802150F0_000025CC:
     lmw r18, 0x12a8(r1)
     lwz r0, 0x12e4(r1)

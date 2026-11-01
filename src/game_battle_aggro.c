@@ -17,7 +17,7 @@ extern void fn_80128508(void);
 extern void fn_801286F0(void);
 extern void fn_80128818(void);
 extern void fn_80128930(void);
-extern void fn_8014C228(void);
+extern void dialog_initScriptSlot(void);
 extern void dialog_selectChoice(void);
 extern void actor_setState(void);
 extern void fn_801718F8(void);
@@ -553,7 +553,7 @@ lbl_fn_8016F824_0000064C:
     mr r3, r30
     stw r0, 0x648(r30)
     stw r0, 0x64c(r30)
-    bl fn_8014C228
+    bl dialog_initScriptSlot
     b lbl_fn_8016F824_0000068C
 lbl_fn_8016F824_0000066C:
     lwz r0, 0x674(r30)
@@ -963,7 +963,7 @@ lbl_fn_8016FDCC_00000C1C:
     mr r3, r30
     stw r0, 0x648(r30)
     stw r0, 0x64c(r30)
-    bl fn_8014C228
+    bl dialog_initScriptSlot
     b lbl_fn_8016FDCC_00000C5C
 lbl_fn_8016FDCC_00000C3C:
     lwz r0, 0x674(r30)
@@ -1424,7 +1424,7 @@ lbl_battle_resolveAggroHierarchy_000012A8:
     mr r3, r30
     stw r0, 0x648(r30)
     stw r0, 0x64c(r30)
-    bl fn_8014C228
+    bl dialog_initScriptSlot
     b lbl_battle_resolveAggroHierarchy_000012E8
 lbl_battle_resolveAggroHierarchy_000012C8:
     lwz r0, 0x674(r30)
@@ -1811,7 +1811,7 @@ lbl_battle_updateTargetAggro_00001824:
     mr r3, r31
     stw r0, 0x648(r31)
     stw r0, 0x64c(r31)
-    bl fn_8014C228
+    bl dialog_initScriptSlot
     b lbl_battle_updateTargetAggro_00001864
 lbl_battle_updateTargetAggro_00001844:
     lwz r0, 0x674(r31)

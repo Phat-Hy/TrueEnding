@@ -9,7 +9,7 @@ extern void vec3_mag(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
 extern void vec3_sub(void);
-extern void fn_800133B0(void);
+extern void math_wrapAngle(void);
 extern void magic_castSpellCircle(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -258,10 +258,10 @@ lbl_fn_8028AA38_000001EC:
     bl vec3_toEulerAngles
     fsubs f1, f30, f31
     lfs f31, 0x44(r1)
-    bl fn_800133B0
+    bl math_wrapAngle
     stfs f1, 0xc(r1)
     fsubs f1, f31, f30
-    bl fn_800133B0
+    bl math_wrapAngle
     stfs f1, 0x8(r1)
     fmr f1, f29
     addi r3, r1, 0xc
@@ -278,7 +278,7 @@ lbl_fn_8028AA38_000001EC:
     addi r4, r1, 0x28
     bl vec3_toEulerAngles
     lfs f1, 0x38(r1)
-    bl fn_800133B0
+    bl math_wrapAngle
     lfs f0, lbl_80883AB4
     fsubs f0, f1, f0
     stfs f0, 0x538(r30)
@@ -292,7 +292,7 @@ lbl_fn_8028AA38_0000029C:
     addi r4, r1, 0x10
     bl vec3_toEulerAngles
     lfs f1, 0x20(r1)
-    bl fn_800133B0
+    bl math_wrapAngle
     stfs f1, 0x538(r30)
 lbl_fn_8028AA38_000002C4:
     lwz r0, 0xf4(r1)

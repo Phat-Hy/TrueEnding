@@ -22,7 +22,7 @@ extern void fn_806A420C(void);
 extern void fn_806A4264(void);
 extern void fn_806A426C(void);
 extern void fn_806A4270(void);
-extern void fn_806D5850(void);
+extern void net_pollActiveSockets(void);
 extern void net_bufferGetCount(void);
 extern void net_bufferGetElement(void);
 extern void fn_806D5C90(void);
@@ -46,7 +46,7 @@ extern void fn_806D86A0(void);
 extern void fn_806D86F0(void);
 extern void fn_806D8F10(void);
 extern void fn_806D8F20(void);
-extern void fn_806D8F30(void);
+extern void net_getTimestampMs(void);
 extern void fn_806D9590(void);
 extern void fn_806E9860(void);
 extern void fn_806E9F50(void);
@@ -291,7 +291,7 @@ lbl_fn_806EE8B0_00000240:
     lwz r3, 0xc(r29)
     bl fn_806D63A0
     lwz r3, 0x10(r29)
-    bl fn_806D5850
+    bl net_pollActiveSockets
     mr r3, r29
     bl net_socketClose
     bl fn_806D8F20
@@ -431,7 +431,7 @@ asm void fn_806EEBF0(void)
     stw r0, 0x24(r1)
     stw r31, 0x1c(r1)
     mr r31, r3
-    bl fn_806D8F30
+    bl net_getTimestampMs
     stw r3, 0x8(r1)
     lis r4, fn_806EEAD0@ha
     addi r4, r4, fn_806EEAD0@l
@@ -549,7 +549,7 @@ lbl_fn_806EED30_000005B0:
     lwz r3, 0xc(r30)
     bl fn_806D63A0
     lwz r3, 0x10(r30)
-    bl fn_806D5850
+    bl net_pollActiveSockets
     mr r3, r30
     bl net_socketClose
     bl fn_806D8F20
@@ -826,7 +826,7 @@ lbl_fn_806EF0C0_00000954:
     mr r28, r3
     stw r3, 0x0(r16)
 lbl_fn_806EF0C0_00000964:
-    bl fn_806D8F30
+    bl net_getTimestampMs
     bl srand
     mr r4, r18
     addi r3, r28, 0x4
@@ -1175,7 +1175,7 @@ lbl_fn_806EF5B0_00000E18:
     mr r3, r30
     bl fn_806EF6D0
     li r31, 0x0
-    bl fn_806D8F30
+    bl net_getTimestampMs
     li r0, 0x28
     li r4, 0x0
     mtctr r0
@@ -1303,7 +1303,7 @@ asm void fn_806EF790(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_806D8F30
+    bl net_getTimestampMs
     lwz r0, 0x0(r31)
     cmpwi r0, -0x1
     beq lbl_fn_806EF790_000010BC
@@ -1360,7 +1360,7 @@ lbl_fn_806EF790_00001094:
     li r4, 0x0
     bl fn_806F1630
 lbl_fn_806EF790_000010A0:
-    bl fn_806D8F30
+    bl net_getTimestampMs
     lwz r0, 0xb8(r31)
     subf r0, r0, r3
     cmplwi r0, 0x4e20
@@ -1391,7 +1391,7 @@ lbl_fn_806EF8B0_00001100:
     lwz r0, 0xc4(r31)
     cmpwi r0, 0x0
     beq lbl_fn_806EF8B0_00001140
-    bl fn_806D8F30
+    bl net_getTimestampMs
     lwz r0, 0xb4(r31)
     subf r0, r0, r3
     cmplwi r0, 0x2710

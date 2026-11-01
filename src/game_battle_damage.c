@@ -11,7 +11,7 @@ extern void atn_Anim_getLayerTrack(void);
 extern void fn_801059F8(void);
 extern void fn_80105B3C(void);
 extern void fn_8011BEB8(void);
-extern void fn_8014C228(void);
+extern void dialog_initScriptSlot(void);
 extern void dialog_selectChoice(void);
 extern void actor_setState(void);
 extern void fn_801B19E4(void);
@@ -1608,7 +1608,7 @@ lbl_fn_8016AFE8_000015C4:
     mr r3, r30
     stw r0, 0x648(r30)
     stw r0, 0x64c(r30)
-    bl fn_8014C228
+    bl dialog_initScriptSlot
     b lbl_fn_8016AFE8_00001604
 lbl_fn_8016AFE8_000015E4:
     lwz r0, 0x674(r30)

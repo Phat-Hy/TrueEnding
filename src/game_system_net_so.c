@@ -11,7 +11,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void fn_800F52F8(void);
 extern void fn_800F84C8(void);
 extern void fn_800F8524(void);
-extern void fn_801125F8(void);
+extern void phys_scaleGravity(void);
 extern void fn_801156C4(void);
 extern void fn_801156D8(void);
 extern void fn_80116BAC(void);
@@ -1267,7 +1267,7 @@ lbl_fn_8038F52C_0000109C:
     fmuls f0, f2, f0
     stfs f3, 0x1cc(r1)
     stfs f0, 0x1d0(r1)
-    bl fn_801125F8
+    bl phys_scaleGravity
     stfs f1, 0x1d4(r1)
     addi r3, r29, 0x46c
     lfs f1, lbl_808858F8
@@ -1451,11 +1451,11 @@ lbl_fn_8038F52C_00001268:
     cmpwi r3, 0x16e
     bne lbl_fn_8038F52C_000014CC
     lfs f1, lbl_80885974
-    bl fn_801125F8
+    bl phys_scaleGravity
     fneg f0, f1
     lfs f1, lbl_80885914
     stfs f0, 0x24(r1)
-    bl fn_801125F8
+    bl phys_scaleGravity
     lfs f0, lbl_80885AA8
     stfs f1, 0x20(r1)
     fcmpo cr0, f30, f0
@@ -1512,11 +1512,11 @@ lbl_fn_8038F52C_000014CC:
     cmpwi r3, 0x170
     bne lbl_fn_8038F52C_000016D8
     lfs f1, lbl_80885914
-    bl fn_801125F8
+    bl phys_scaleGravity
     fneg f0, f1
     lfs f1, lbl_80885930
     stfs f0, 0x1c(r1)
-    bl fn_801125F8
+    bl phys_scaleGravity
     lfs f0, lbl_80885AA8
     stfs f1, 0x18(r1)
     fcmpo cr0, f30, f0
@@ -1597,7 +1597,7 @@ lbl_fn_8038F52C_000015F8:
     bl fn_800F8524
     stfs f1, 0x124(r1)
     lfs f1, lbl_80885970
-    bl fn_801125F8
+    bl phys_scaleGravity
     fneg f0, f1
     addi r3, r1, 0xc
     fmr f1, f29
@@ -1640,7 +1640,7 @@ lbl_fn_8038F52C_0000168C:
     bl fn_800F8524
     stfs f1, 0x124(r1)
     lfs f1, lbl_80885970
-    bl fn_801125F8
+    bl phys_scaleGravity
     fneg f0, f1
     addi r3, r1, 0x14c
     fmr f1, f29
@@ -1656,11 +1656,11 @@ lbl_fn_8038F52C_000016C4:
     b lbl_fn_8038F52C_0000193C
 lbl_fn_8038F52C_000016D8:
     lfs f1, lbl_8088594C
-    bl fn_801125F8
+    bl phys_scaleGravity
     fneg f0, f1
     lfs f1, lbl_808858E8
     stfs f0, 0x14(r1)
-    bl fn_801125F8
+    bl phys_scaleGravity
     lfs f0, lbl_80885914
     stfs f1, 0x10(r1)
     fsubs f0, f31, f0
@@ -1841,13 +1841,13 @@ lbl_fn_8038F52C_0000193C:
     li r4, 0x3
     bl fn_8037E89C
     lfs f1, lbl_80885AA4
-    bl fn_801125F8
+    bl phys_scaleGravity
     fneg f1, f1
     lfs f0, 0x120(r1)
     fcmpo cr0, f1, f0
     ble lbl_fn_8038F52C_00001974
     lfs f1, lbl_80885AA4
-    bl fn_801125F8
+    bl phys_scaleGravity
     fneg f0, f1
 lbl_fn_8038F52C_00001974:
     stfs f0, 0x480(r29)

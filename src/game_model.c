@@ -15,7 +15,7 @@ extern void fn_80075DEC(void);
 extern void fn_8007A100(void);
 extern void fn_8007A4CC(void);
 extern void dungeon_initGlobalContext(void);
-extern void fn_800839EC(void);
+extern void town_registerInteractionPoint(void);
 extern void fn_80083F50(void);
 extern void fn_80084110(void);
 extern void mem_free(void);
@@ -159,7 +159,7 @@ asm void fn_800BD9C0(void)
     li r6, 0x6
     li r9, 0x0
     li r10, 0x0
-    bl fn_800839EC
+    bl town_registerInteractionPoint
     stw r3, 0x79c(r27)
     addi r6, r31, lbl_807336B0@l
     addi r8, r6, 0xe8

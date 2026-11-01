@@ -15,7 +15,7 @@ extern void sound_initChannelParams(void);
 extern void sound_releaseChannel(void);
 extern void item_useConsumable(void);
 extern void* dungeon_initGlobalContext(void);
-extern void fn_800839EC(void);
+extern void town_registerInteractionPoint(void);
 extern void town_updateInteractionPoints(void*, void*);
 extern void fn_800C2418(void);
 extern void fn_800C2448(void);
@@ -326,7 +326,7 @@ lbl_fn_800D5A3C_000003D4:
     li r6, 0x6
     li r9, 0x0
     li r10, 0x0
-    bl fn_800839EC
+    bl town_registerInteractionPoint
     stw r3, 0x28(r27)
     mr r4, r3
     mr r3, r27
@@ -407,7 +407,7 @@ lbl_fn_800D5B58_000004F4:
     li r6, 0x6
     li r9, 0x0
     li r10, 0x0
-    bl fn_800839EC
+    bl town_registerInteractionPoint
     stw r3, 0x28(r25)
     mr r4, r3
     mr r3, r25

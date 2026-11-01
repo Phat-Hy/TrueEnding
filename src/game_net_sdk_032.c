@@ -18,7 +18,7 @@ extern void strncmp(void);
 extern void strstr(void);
 extern void atoi(void);
 extern void fn_806D57A0(void);
-extern void fn_806D5850(void);
+extern void net_pollActiveSockets(void);
 extern void net_bufferGetCount(void);
 extern void net_bufferGetElement(void);
 extern void fn_806D5A60(void);
@@ -1223,7 +1223,7 @@ asm void fn_806E2FB0(void)
     lwz r3, 0x3b4(r31)
     cmpwi r3, 0x0
     beq lbl_fn_806E2FB0_00000FD0
-    bl fn_806D5850
+    bl net_pollActiveSockets
     li r0, 0x0
     stw r0, 0x3b4(r31)
 lbl_fn_806E2FB0_00000FD0:

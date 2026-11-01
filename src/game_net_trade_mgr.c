@@ -35,7 +35,7 @@ extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
 extern void bloom_processPasses(void);
-extern void fn_801125F8(void);
+extern void phys_scaleGravity(void);
 extern void fn_80112960(void);
 extern void fn_80114AA0(void);
 extern void actor_spawnActorWithId(void);
@@ -370,7 +370,7 @@ asm void fn_8052A8F0(void)
     lfs f3, lbl_80887AC0
     bl vec3_set
     lfs f1, lbl_80887AC4
-    bl fn_801125F8
+    bl phys_scaleGravity
     stfs f1, 0x1214(r29)
     addi r3, r29, 0x1218
     bl fn_802BABC0

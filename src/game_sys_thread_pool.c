@@ -15,7 +15,7 @@ extern void fn_80206B14(void);
 extern void fn_80209294(void);
 extern void fn_802092F8(void);
 extern void fn_8046DC5C(void);
-extern void fn_8046DD20(void);
+extern void boss_bindArenaInteractions(void);
 extern void atoi(void);
 extern void wcslen(void);
 extern void runtime_registerStaticObject(void);
@@ -845,7 +845,7 @@ lbl_fn_8021B2F8_00000B18:
 lbl_fn_8021B2F8_00000B28:
     lwz r3, lbl_8087F518
     mr r4, r27
-    bl fn_8046DD20
+    bl boss_bindArenaInteractions
 lbl_fn_8021B2F8_00000B34:
     lmw r18, 0xc68(r1)
     lwz r0, 0xca4(r1)
@@ -1467,7 +1467,7 @@ lbl_fn_8021C3F4_0000137C:
     bne lbl_fn_8021C3F4_000012B0
     lwz r3, lbl_8087F518
     mr r4, r30
-    bl fn_8046DD20
+    bl boss_bindArenaInteractions
     lmw r23, 0xc6c(r1)
     lwz r0, 0xc94(r1)
     mtlr r0

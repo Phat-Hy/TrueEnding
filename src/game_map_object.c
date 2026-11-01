@@ -12,7 +12,7 @@ extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void skill_findNodeBySlotId(void);
 extern void dialog_setScriptSlot(void);
-extern void fn_8014C228(void);
+extern void dialog_initScriptSlot(void);
 extern void fn_801598B4(void);
 extern void fn_80159E9C(void);
 extern void fn_8015A184(void);
@@ -458,7 +458,7 @@ asm void fn_801825F0(void)
     lwz r3, 0x48(r3)
     cmpwi r3, 0x0
     beq lbl_fn_801825F0_00000514
-    bl fn_8014C228
+    bl dialog_initScriptSlot
 lbl_fn_801825F0_00000514:
     lwz r3, lbl_8087F418
     cmpwi r3, 0x0
@@ -661,7 +661,7 @@ lbl_fn_80182890_0000077C:
     lwz r3, 0x48(r3)
     cmpwi r3, 0x0
     beq lbl_fn_80182890_000007B8
-    bl fn_8014C228
+    bl dialog_initScriptSlot
 lbl_fn_80182890_000007B8:
     lwz r3, lbl_8087F418
     cmpwi r3, 0x0

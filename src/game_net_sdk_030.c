@@ -22,7 +22,7 @@ extern void strcmp(void);
 extern void strncmp(void);
 extern void atoi(void);
 extern void fn_806A4270(void);
-extern void fn_806D5850(void);
+extern void net_pollActiveSockets(void);
 extern void net_bufferGetCount(void);
 extern void fn_806D7350(void);
 extern void net_socketConnect(void);
@@ -685,7 +685,7 @@ lbl_fn_806DE020_00000768:
     lwz r3, 0x38(r3)
     cmpwi r3, 0x0
     beq lbl_fn_806DE020_00000820
-    bl fn_806D5850
+    bl net_pollActiveSockets
     lwz r3, 0xc(r1)
     lwz r3, 0xc(r3)
     stw r31, 0x38(r3)

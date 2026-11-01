@@ -17,7 +17,7 @@ extern void collision_testLineSegment(void);
 extern void mem_alloc(void);
 extern void fn_80093F1C(void);
 extern void fn_80094778(void);
-extern void fn_800F52F0(void);
+extern void proj_getMatrix(void);
 extern void vec3_scale(void);
 extern void fn_800F7F80(void);
 extern void fn_800F7FB4(void);
@@ -39,7 +39,7 @@ extern void fn_801404E0(void);
 extern void fn_801404F8(void);
 extern void fn_80140500(void);
 extern void fn_80140518(void);
-extern void fn_8014052C(void);
+extern void quest_initMarkerCoords(void);
 extern void fn_80148334(void);
 extern void dialog_setScriptSlot(void);
 extern void dialog_selectChoice(void);
@@ -1535,7 +1535,7 @@ lbl_fn_8015076C_00001310:
     bl fn_80140500
     mr r4, r23
     addi r3, r1, 0x44
-    bl fn_8014052C
+    bl quest_initMarkerCoords
     lfs f1, lbl_808819DC
     addi r3, r1, 0x50
     addi r4, r1, 0x44
@@ -1546,7 +1546,7 @@ lbl_fn_8015076C_00001310:
     bl vec3_add
     mr r4, r23
     addi r3, r1, 0x2c
-    bl fn_8014052C
+    bl quest_initMarkerCoords
     lfs f1, lbl_80881A80
     addi r3, r1, 0x38
     addi r4, r1, 0x2c
@@ -1613,7 +1613,7 @@ lbl_fn_8015076C_00001454:
     lwz r3, 0x0(r28)
     cmpwi r3, 0x0
     beq lbl_fn_8015076C_000014BC
-    bl fn_800F52F0
+    bl proj_getMatrix
     li r4, 0x18
     bl fn_80133EE8
     cmpwi r3, 0x0
@@ -1624,7 +1624,7 @@ lbl_fn_8015076C_00001454:
     cmpwi r3, 0x0
     beq lbl_fn_8015076C_000014BC
     lwz r3, 0x0(r28)
-    bl fn_800F52F0
+    bl proj_getMatrix
     li r4, 0x18
     li r5, -0x1
     bl fn_80133F18
@@ -1648,7 +1648,7 @@ lbl_fn_8015076C_000014BC:
     srwi. r0, r0, 31
     bne lbl_fn_8015076C_000017C0
     mr r3, r23
-    bl fn_800F52F0
+    bl proj_getMatrix
     li r4, 0x10
     addi r3, r3, 0xe8
     bl fn_801404E0
@@ -1672,7 +1672,7 @@ lbl_fn_8015076C_00001530:
     srwi. r0, r0, 31
     bne lbl_fn_8015076C_000017C0
     mr r3, r23
-    bl fn_800F52F0
+    bl proj_getMatrix
     li r4, 0x10
     addi r3, r3, 0xe8
     bl fn_801404E0

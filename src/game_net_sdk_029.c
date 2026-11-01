@@ -25,7 +25,7 @@ extern void fn_806D7AA0(void);
 extern void net_socketClose(void);
 extern void fn_806D8B20(void);
 extern void fn_806D8E30(void);
-extern void fn_806D8F30(void);
+extern void net_getTimestampMs(void);
 extern void fn_806D8F80(void);
 extern void fn_806D9590(void);
 extern void net_sendString(void);
@@ -313,7 +313,7 @@ asm void fn_806DBCC0(void)
     mr r27, r3
     lwz r28, 0x0(r3)
     addi r29, r29, lbl_807C2D00@l
-    bl fn_806D8F30
+    bl net_getTimestampMs
     mr r31, r3
 lbl_fn_806DBCC0_00000318:
     mr r3, r27

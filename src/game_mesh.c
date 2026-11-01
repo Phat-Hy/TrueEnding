@@ -13,7 +13,7 @@ extern void fn_80079044(void);
 extern void fn_800790D0(void);
 extern void fn_80079BC8(void);
 extern void dungeon_initGlobalContext(void);
-extern void fn_800839EC(void);
+extern void town_registerInteractionPoint(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void route_findNextWaypoint(void);
@@ -1231,7 +1231,7 @@ asm void fn_800BC468(void)
     li r6, 0x6
     li r9, 0x0
     li r10, 0x0
-    bl fn_800839EC
+    bl town_registerInteractionPoint
     b lbl_fn_800BC468_00000FE4
 lbl_fn_800BC468_00000FE0:
     mr r3, r0
@@ -1353,7 +1353,7 @@ asm void fn_800BC618(void)
     li r6, 0x6
     li r9, 0x0
     li r10, 0x0
-    bl fn_800839EC
+    bl town_registerInteractionPoint
     mr r28, r3
 lbl_fn_800BC618_00001190:
     lis r6, 0x1

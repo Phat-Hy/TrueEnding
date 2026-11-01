@@ -26,7 +26,7 @@ extern void npc_calcTargetDistance(void);
 extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void dialog_setScriptSlot(void);
-extern void fn_8014C228(void);
+extern void dialog_initScriptSlot(void);
 extern void fn_801598B4(void);
 extern void fn_80159BA4(void);
 extern void actor_getMovementFlags(void);
@@ -1417,9 +1417,9 @@ lbl_fn_8018161C_000011AC:
 lbl_fn_8018161C_000011EC:
     lwz r3, lbl_8087F8A0
     lwz r3, 0x48(r3)
-    bl fn_8014C228
+    bl dialog_initScriptSlot
     mr r3, r30
-    bl fn_8014C228
+    bl dialog_initScriptSlot
     lwz r5, lbl_8087F8A0
     addi r3, r1, 0x1c8
     lfs f7, lbl_80881C04

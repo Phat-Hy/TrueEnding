@@ -24,7 +24,7 @@ extern void fn_8006B53C(void);
 extern void fn_8006B594(void);
 extern void fn_8006BA6C(void);
 extern void dungeon_initGlobalContext(void);
-extern void fn_800839EC(void);
+extern void town_registerInteractionPoint(void);
 extern void town_updateInteractionPoints(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
@@ -53,7 +53,7 @@ extern void str_parseInt(void);
 extern void str_findChar(void);
 extern void sky_renderStub(void);
 extern void fn_8046DC5C(void);
-extern void fn_8046DD20(void);
+extern void boss_bindArenaInteractions(void);
 extern void fn_8059D7DC(void);
 extern void fn_8059D828(void);
 extern void fn_8059D8B4(void);
@@ -1571,7 +1571,7 @@ lbl_fn_80046EE0_00001180:
     li r6, 0xa
     li r9, 0x0
     li r10, 0x0
-    bl fn_800839EC
+    bl town_registerInteractionPoint
     stw r3, 0x194(r30)
     mr r4, r3
     mr r5, r26
@@ -1619,7 +1619,7 @@ lbl_fn_80046EE0_00001180:
     li r6, 0xa
     li r9, 0x0
     li r10, 0x0
-    bl fn_800839EC
+    bl town_registerInteractionPoint
     stw r3, 0x198(r30)
     mr r4, r3
     mr r5, r26
@@ -1643,7 +1643,7 @@ lbl_fn_80046EE0_00001284:
     li r6, 0xa
     li r9, 0x0
     li r10, 0x0
-    bl fn_800839EC
+    bl town_registerInteractionPoint
     stw r3, 0x2c4(r30)
     bl dungeon_initGlobalContext
     addi r7, r31, lbl_80730F54@l
@@ -1653,7 +1653,7 @@ lbl_fn_80046EE0_00001284:
     li r6, 0xa
     li r9, 0x0
     li r10, 0x0
-    bl fn_800839EC
+    bl town_registerInteractionPoint
     stw r3, 0x2c8(r30)
     mr r5, r26
     lwz r3, 0x2c4(r30)
@@ -1682,7 +1682,7 @@ lbl_fn_80046EE0_00001284:
     li r6, 0xa
     li r9, 0x0
     li r10, 0x0
-    bl fn_800839EC
+    bl town_registerInteractionPoint
     stw r3, 0x390(r30)
     mr r5, r3
     mr r6, r26
@@ -2190,7 +2190,7 @@ lbl_fn_80047B54_00001A08:
     li r6, 0xa
     li r9, 0x0
     li r10, 0x0
-    bl fn_800839EC
+    bl town_registerInteractionPoint
     stw r3, 0x32c(r28)
     mr r5, r29
     li r4, 0x0
@@ -2233,7 +2233,7 @@ asm void fn_80047C74(void)
     li r6, 0xa
     li r9, 0x0
     li r10, 0x0
-    bl fn_800839EC
+    bl town_registerInteractionPoint
     stw r3, 0x8c4(r31)
     li r4, 0x0
     lwz r5, 0x8c8(r31)
@@ -2764,7 +2764,7 @@ lbl_fn_8004829C_000021D4:
     li r6, 0xa
     li r9, 0x0
     li r10, 0x0
-    bl fn_800839EC
+    bl town_registerInteractionPoint
     stw r3, 0x2f8(r28)
     li r4, 0x0
     lwz r5, 0x2fc(r28)
@@ -4210,7 +4210,7 @@ lbl_fn_800496C0_000035B4:
     li r6, 0xa
     li r9, 0x0
     li r10, 0x0
-    bl fn_800839EC
+    bl town_registerInteractionPoint
     stw r3, 0x35c(r31)
     li r4, 0x0
     lwz r5, 0x360(r31)
@@ -5298,7 +5298,7 @@ lbl_fn_8004A3FC_000043C4:
     bne lbl_fn_8004A3FC_000042B8
     lwz r3, lbl_8087F518
     mr r4, r28
-    bl fn_8046DD20
+    bl boss_bindArenaInteractions
     li r0, 0x1
     stw r0, 0x8e0(r27)
 lbl_fn_8004A3FC_000043F0:

@@ -33,7 +33,7 @@ extern void fn_8043FA08(void);
 extern void fn_8043FE90(void);
 extern void atn_Arc_decompressChunk(void);
 extern void fn_8046D1EC(void);
-extern void fn_8046DD20(void);
+extern void boss_bindArenaInteractions(void);
 extern void fn_8046F5CC(void);
 extern void fn_8046F834(void);
 extern void atn_Curve_evalHermite(void);
@@ -1293,7 +1293,7 @@ asm void fn_8047304C(void)
     cmpwi r0, 0x0
     bne lbl_fn_8047304C_00001070
     lwz r3, lbl_8087F518
-    bl fn_8046DD20
+    bl boss_bindArenaInteractions
 lbl_fn_8047304C_00001070:
     cmpwi r31, 0x0
     li r0, 0x0
@@ -1365,7 +1365,7 @@ asm void fn_80473130(void)
     cmpwi r0, 0x0
     bne lbl_fn_80473130_00001138
     lwz r3, lbl_8087F518
-    bl fn_8046DD20
+    bl boss_bindArenaInteractions
 lbl_fn_80473130_00001138:
     li r0, 0x0
     stw r0, 0x54(r31)

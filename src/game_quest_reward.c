@@ -9,7 +9,7 @@ extern void vec3_set(void);
 extern void fn_8000DD04(void);
 extern void vec3_toEulerAngles(void);
 extern void mtx_multVec(void);
-extern void fn_800133B0(void);
+extern void math_wrapAngle(void);
 extern void fn_80013404(void);
 extern void vec3_initValues(void);
 extern void mem_realloc(void);
@@ -23,7 +23,7 @@ extern void fn_80139F60(void);
 extern void fn_8013A13C(void);
 extern void fn_8013C394(void);
 extern void fn_8013C43C(void);
-extern void fn_8014052C(void);
+extern void quest_initMarkerCoords(void);
 extern void fn_80144ED4(void);
 extern void fn_801495E8(void);
 extern void fn_80149624(void);
@@ -1547,7 +1547,7 @@ lbl_fn_80148CC4_000013F8:
     mr r28, r3
     mr r4, r30
     addi r3, r1, 0x74
-    bl fn_8014052C
+    bl quest_initMarkerCoords
     mr r5, r28
     addi r3, r1, 0x160
     addi r4, r1, 0x74
@@ -1594,7 +1594,7 @@ lbl_fn_80148CC4_0000149C:
     lfs f1, 0x158(r1)
     lfs f0, 0x538(r30)
     fsubs f1, f1, f0
-    bl fn_800133B0
+    bl math_wrapAngle
     fmr f31, f1
     bl fn_80013404
     lfs f2, lbl_80881ABC
@@ -1666,7 +1666,7 @@ lbl_fn_80148CC4_000015A8:
     lfs f1, 0x134(r1)
     lfs f0, 0x538(r30)
     fsubs f1, f1, f0
-    bl fn_800133B0
+    bl math_wrapAngle
     fmr f31, f1
     bl fn_80013404
     lfs f2, lbl_80881ABC

@@ -25,7 +25,7 @@ extern void cam_evalLookAtMatrix(void);
 extern void fn_8020685C(void);
 extern void fn_8020689C(void);
 extern void fn_8046DC5C(void);
-extern void fn_8046DD20(void);
+extern void boss_bindArenaInteractions(void);
 extern void strncpy(void);
 extern void strcmp(void);
 extern void strncmp(void);
@@ -710,7 +710,7 @@ lbl_fn_80204958_00000890:
     bne lbl_fn_80204958_00000564
     lwz r3, lbl_8087F518
     mr r4, r28
-    bl fn_8046DD20
+    bl boss_bindArenaInteractions
     lmw r23, 0x66c(r1)
     lwz r0, 0x694(r1)
     mtlr r0
@@ -1584,7 +1584,7 @@ lbl_fn_80204E54_00001504:
     blt lbl_fn_80204E54_000014F0
     lwz r3, lbl_8087F518
     lwz r4, 0x770(r1)
-    bl fn_8046DD20
+    bl boss_bindArenaInteractions
     bl fn_8020689C
     lmw r14, 0x778(r1)
     lwz r0, 0x7c4(r1)

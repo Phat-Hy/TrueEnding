@@ -30,7 +30,7 @@ extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void wcs_vformat(void);
 extern void fn_800E0000(void);
-extern void fn_800F52F0(void);
+extern void proj_getMatrix(void);
 extern void fn_800F52F8(void);
 extern void fn_800F530C(void);
 extern void fn_800F7260(void);
@@ -43,7 +43,7 @@ extern void fn_800F84BC(void);
 extern void fn_800F8524(void);
 extern void fn_8010D320(void);
 extern void fn_8010F6FC(void);
-extern void fn_801125F8(void);
+extern void phys_scaleGravity(void);
 extern void fn_80113CCC(void);
 extern void fn_801156BC(void);
 extern void fn_801156C4(void);
@@ -69,7 +69,7 @@ extern void fn_8013C458(void);
 extern void fn_8013C480(void);
 extern void npc_getDialogController(void);
 extern void fn_80140518(void);
-extern void fn_8014052C(void);
+extern void quest_initMarkerCoords(void);
 extern void fn_801479D8(void);
 extern void fn_80151210(void);
 extern void fn_801799BC(void);
@@ -775,7 +775,7 @@ lbl_fn_803D2A6C_00000704:
     cmpwi r3, 0x0
     bne lbl_fn_803D2A6C_00000930
     mr r3, r31
-    bl fn_800F52F0
+    bl proj_getMatrix
     lwz r0, 0x16c(r3)
     lis r3, lbl_80750650@ha
     lfd f1, lbl_80750650@l(r3)
@@ -784,7 +784,7 @@ lbl_fn_803D2A6C_00000704:
     stw r0, 0xa64(r1)
     lfd f0, 0xa60(r1)
     fsubs f26, f0, f1
-    bl fn_800F52F0
+    bl proj_getMatrix
     lfs f0, 0x4(r3)
     mr r3, r31
     fdivs f26, f0, f26
@@ -901,7 +901,7 @@ lbl_fn_803D2A6C_000008B4:
     fmr f26, f1
     lfs f0, lbl_80885E14
     fmadds f1, f2, f1, f0
-    bl fn_801125F8
+    bl phys_scaleGravity
     lfs f2, lbl_80885E18
     addi r3, r1, 0x5c8
     stfs f1, 0x5d8(r1)
@@ -944,7 +944,7 @@ lbl_fn_803D2A6C_0000096C:
     cmpwi r3, 0x0
     bne lbl_fn_803D2A6C_00000B60
     lwz r3, 0x18(r1)
-    bl fn_800F52F0
+    bl proj_getMatrix
     bl fn_80139F4C
     cmpwi r3, 0x0
     bne lbl_fn_803D2A6C_00000B4C
@@ -1026,7 +1026,7 @@ lbl_fn_803D2A6C_00000A5C:
     bl viewport_getNextSequenceId
     mr r4, r31
     addi r3, r1, 0x2a8
-    bl fn_8014052C
+    bl quest_initMarkerCoords
     addi r3, r1, 0x470
     addi r4, r1, 0x2a8
     bl fn_801A03E8
@@ -1858,7 +1858,7 @@ lbl_fn_803D2A6C_00001698:
     addi r4, r1, 0x1fc
     bl vec3_copy
     mr r3, r19
-    bl fn_800F52F0
+    bl proj_getMatrix
     bl fn_80139F4C
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_000016F4
@@ -1890,7 +1890,7 @@ lbl_fn_803D2A6C_000016F4:
     li r5, 0x1
     bl fn_803D6F78
     mr r3, r19
-    bl fn_800F52F0
+    bl proj_getMatrix
     lwz r0, 0x16c(r3)
     lis r3, lbl_80750650@ha
     lfd f1, lbl_80750650@l(r3)
@@ -1899,7 +1899,7 @@ lbl_fn_803D2A6C_000016F4:
     stw r0, 0xa6c(r1)
     lfd f0, 0xa68(r1)
     fsubs f26, f0, f1
-    bl fn_800F52F0
+    bl proj_getMatrix
     lfs f0, 0x4(r3)
     addi r4, r21, 0x10d6
     lwz r3, 0x5b8(r24)
@@ -2014,7 +2014,7 @@ lbl_fn_803D2A6C_000018F4:
     b lbl_fn_803D2A6C_00001BCC
 lbl_fn_803D2A6C_0000191C:
     mr r3, r25
-    bl fn_800F52F0
+    bl proj_getMatrix
     bl fn_80139F4C
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00001978
@@ -2228,7 +2228,7 @@ lbl_fn_803D2A6C_00001BEC:
     b lbl_fn_803D2A6C_00001E24
 lbl_fn_803D2A6C_00001C2C:
     mr r3, r19
-    bl fn_800F52F0
+    bl proj_getMatrix
     lwz r0, 0x16c(r3)
     mr r25, r3
     lwz r4, 0x170(r3)
@@ -2249,7 +2249,7 @@ lbl_fn_803D2A6C_00001C2C:
     cmpwi r3, 0x0
     bne lbl_fn_803D2A6C_00001CB8
     mr r3, r19
-    bl fn_800F52F0
+    bl proj_getMatrix
     bl fn_80139F4C
     cmpwi r3, 0x0
     bne lbl_fn_803D2A6C_00001CB8
@@ -3675,7 +3675,7 @@ lbl_fn_803D2A6C_000030EC:
     b lbl_fn_803D2A6C_00003374
 lbl_fn_803D2A6C_00003150:
     mr r3, r19
-    bl fn_800F52F0
+    bl proj_getMatrix
     bl fn_80139F4C
     cmpwi r3, 0x0
     bne lbl_fn_803D2A6C_00003368
@@ -3836,7 +3836,7 @@ lbl_fn_803D2A6C_00003374:
     b lbl_fn_803D2A6C_0000358C
 lbl_fn_803D2A6C_00003398:
     mr r3, r19
-    bl fn_800F52F0
+    bl proj_getMatrix
     bl fn_80139F4C
     cmpwi r3, 0x0
     bne lbl_fn_803D2A6C_00003580
@@ -4044,14 +4044,14 @@ lbl_fn_803D2A6C_00003610:
     lfs f1, lbl_80885D58
     bl save_computeCrc32
     lwz r3, 0x0(r21)
-    bl fn_800F52F0
+    bl proj_getMatrix
     lwz r0, 0x16c(r3)
     lwz r3, 0x0(r21)
     xoris r0, r0, 0x8000
     stw r0, 0xa64(r1)
     lfd f0, 0xa60(r1)
     fsubs f29, f0, f30
-    bl fn_800F52F0
+    bl proj_getMatrix
     lfs f0, 0x244(r3)
     addi r4, r23, 0x10d6
     lwz r3, 0x574(r22)
@@ -4216,7 +4216,7 @@ lbl_fn_803D2A6C_00003864:
     li r5, 0x1
     bl save_verifyBlockCrc
     mr r3, r19
-    bl fn_800F52F0
+    bl proj_getMatrix
     bl fn_80139F4C
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00003A28
@@ -4234,7 +4234,7 @@ lbl_fn_803D2A6C_00003864:
     bl fn_803D7384
 lbl_fn_803D2A6C_00003968:
     mr r3, r19
-    bl fn_800F52F0
+    bl proj_getMatrix
     lwz r0, 0x224(r3)
     cmpwi r0, 0x0
     ble lbl_fn_803D2A6C_000039D4
@@ -4369,7 +4369,7 @@ lbl_fn_803D2A6C_00003A84:
     li r5, 0x1
     bl save_verifyBlockCrc
     mr r3, r19
-    bl fn_800F52F0
+    bl proj_getMatrix
     bl fn_80139F4C
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00003C70
@@ -4387,7 +4387,7 @@ lbl_fn_803D2A6C_00003A84:
     bl fn_803D7384
 lbl_fn_803D2A6C_00003BB0:
     mr r3, r19
-    bl fn_800F52F0
+    bl proj_getMatrix
     lwz r0, 0x224(r3)
     cmpwi r0, 0x0
     ble lbl_fn_803D2A6C_00003C1C

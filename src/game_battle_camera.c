@@ -19,7 +19,7 @@ extern void fn_801255C8(void);
 extern void fn_80127EF4(void);
 extern void fn_80128A30(void);
 extern void fn_80128B20(void);
-extern void fn_8014C228(void);
+extern void dialog_initScriptSlot(void);
 extern void dialog_selectChoice(void);
 extern void actor_setState(void);
 extern void fn_801B192C(void);
@@ -183,7 +183,7 @@ lbl_fn_80170F20_0000016C:
     mr r3, r31
     stw r0, 0x648(r31)
     stw r0, 0x64c(r31)
-    bl fn_8014C228
+    bl dialog_initScriptSlot
     b lbl_fn_80170F20_000001AC
 lbl_fn_80170F20_0000018C:
     lwz r0, 0x674(r31)
@@ -529,7 +529,7 @@ lbl_fn_80171420_0000064C:
     mr r3, r31
     stw r0, 0x648(r31)
     stw r0, 0x64c(r31)
-    bl fn_8014C228
+    bl dialog_initScriptSlot
     b lbl_fn_80171420_0000068C
 lbl_fn_80171420_0000066C:
     lwz r0, 0x674(r31)
@@ -865,7 +865,7 @@ lbl_fn_801718F8_00000B04:
     mr r3, r31
     stw r0, 0x648(r31)
     stw r0, 0x64c(r31)
-    bl fn_8014C228
+    bl dialog_initScriptSlot
     b lbl_fn_801718F8_00000B44
 lbl_fn_801718F8_00000B24:
     lwz r0, 0x674(r31)

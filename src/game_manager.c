@@ -122,7 +122,7 @@ void fn_80012D34(void);
 void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 void vec3_sub(void);
 void fn_8001336C(void);
-void fn_800133B0(void);
+void math_wrapAngle(void);
 void fn_80013404(void);
 void vec3_add(void);
 void fn_80013444(void);
@@ -3512,7 +3512,7 @@ lbl_fn_80012D34_00002C80:
     lfs f1, 0xa4(r1)
     lfs f0, 0x158(r1)
     fsubs f1, f0, f1
-    bl fn_800133B0
+    bl math_wrapAngle
     fmr f31, f1
     addi r3, r1, 0x98
     addi r4, r1, 0x164
@@ -3520,7 +3520,7 @@ lbl_fn_80012D34_00002C80:
     lfs f1, 0x9c(r1)
     lfs f0, 0x15c(r1)
     fsubs f1, f0, f1
-    bl fn_800133B0
+    bl math_wrapAngle
     fmr f30, f1
     fmr f1, f31
     bl fn_80013404
@@ -3872,7 +3872,7 @@ asm void fn_8001336C(void)
     blr
 }
 
-asm void fn_800133B0(void)
+asm void math_wrapAngle(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -3884,16 +3884,16 @@ asm void fn_800133B0(void)
     frsp f1, f1
     lfs f0, lbl_80880690
     fcmpo cr0, f1, f0
-    ble lbl_fn_800133B0_000032C4
+    ble lbl_math_wrapAngle_000032C4
     lfs f0, lbl_80880694
     fsubs f1, f1, f0
-lbl_fn_800133B0_000032C4:
+lbl_math_wrapAngle_000032C4:
     lfs f0, lbl_80880698
     fcmpo cr0, f1, f0
-    bge lbl_fn_800133B0_000032D8
+    bge lbl_math_wrapAngle_000032D8
     lfs f0, lbl_80880694
     fadds f1, f1, f0
-lbl_fn_800133B0_000032D8:
+lbl_math_wrapAngle_000032D8:
     lwz r0, 0x14(r1)
     mtlr r0
     addi r1, r1, 0x10

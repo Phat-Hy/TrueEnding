@@ -11,10 +11,10 @@ extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_8005ED6C(void);
-extern void fn_80060D58(void);
+extern void equip_calcTotalStatBonuses(void);
 extern void skill_calculateDamage(void);
 extern void dungeon_initGlobalContext(void);
-extern void fn_800839EC(void);
+extern void town_registerInteractionPoint(void);
 extern void town_updateInteractionPoints(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
@@ -29,7 +29,7 @@ extern void fn_800D5A3C(void);
 extern void fn_800D5B58(void);
 extern void fn_8046CC90(void);
 extern void fn_8046DC5C(void);
-extern void fn_8046DD20(void);
+extern void boss_bindArenaInteractions(void);
 extern void fn_8046F4D4(void);
 extern void fn_805F9EF0(void);
 extern void fn_805FA270(void);
@@ -1866,7 +1866,7 @@ lbl_atn_FadeColor_draw_00001778:
     lwz r3, lbl_8087EEB0
     fsubs f5, f0, f5
     lfs f3, 0x74(r31)
-    bl fn_80060D58
+    bl equip_calcTotalStatBonuses
     lwz r0, 0x78(r31)
     cmpwi r0, 0x0
     beq lbl_atn_FadeColor_draw_000017D8
@@ -3514,7 +3514,7 @@ lbl_fn_8006BA8C_00002D24:
     li r9, 0x0
     clrrwi r4, r0, 5
     li r10, 0x0
-    bl fn_800839EC
+    bl town_registerInteractionPoint
     lwz r5, 0x0(r30)
     mr r31, r3
     mr r4, r31
@@ -3552,7 +3552,7 @@ asm void fn_8006BB6C(void)
     bne lbl_fn_8006BB6C_00002DF4
     mr r3, r0
     mr r4, r31
-    bl fn_8046DD20
+    bl boss_bindArenaInteractions
     b lbl_fn_8006BB6C_00002E08
 lbl_fn_8006BB6C_00002DF4:
     cmpwi r3, 0x0

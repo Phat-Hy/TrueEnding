@@ -34,7 +34,7 @@ extern void npc_initScriptContext(void);
 extern void npc_getPosition(void);
 extern void fn_8013C3B4(void);
 extern void npc_updateTalkInteraction(void);
-extern void fn_8014052C(void);
+extern void quest_initMarkerCoords(void);
 extern void quest_updateFlow(void);
 extern void dialog_setScriptSlot(void);
 extern void dialog_updateScriptState(void);
@@ -1498,7 +1498,7 @@ lbl_fn_80266A24_000012B0:
 lbl_fn_80266A24_000012F4:
     mr r4, r30
     addi r3, r1, 0x2c
-    bl fn_8014052C
+    bl quest_initMarkerCoords
     addi r3, r1, 0x38
     addi r4, r1, 0x2c
     bl fn_8013C3B4

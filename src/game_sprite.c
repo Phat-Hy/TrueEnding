@@ -19,7 +19,7 @@ extern void fn_800704DC(void);
 extern void fn_80075DEC(void);
 extern void fn_80075F58(void);
 extern void dungeon_initGlobalContext(void);
-extern void fn_800839EC(void);
+extern void town_registerInteractionPoint(void);
 extern void fn_800B3978(void);
 extern void fn_800B64DC(void);
 extern void motion_updateFogAdj(void);
@@ -199,7 +199,7 @@ lbl_fn_800B4134_0000010C:
     li r6, 0x6
     li r10, 0x0
     mr r8, r7
-    bl fn_800839EC
+    bl town_registerInteractionPoint
     stw r3, lbl_8087EFA4
     lis r31, lbl_807C7580@ha
     mr r4, r3

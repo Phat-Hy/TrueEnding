@@ -24,7 +24,7 @@ extern void motion_updateFogAdj(void);
 extern void env_updateAtmosphere(void);
 extern void str_findChar(void);
 extern void wcs_vformat(void);
-extern void fn_800F52F0(void);
+extern void proj_getMatrix(void);
 extern void fn_800F530C(void);
 extern void fn_800F7FB4(void);
 extern void viewport_getNextSequenceId(void);
@@ -752,30 +752,30 @@ lbl_fn_805AB82C_0000087C:
     cmpwi r3, 0x0
     beq lbl_fn_805AB82C_000009B4
     mr r3, r28
-    bl fn_800F52F0
+    bl proj_getMatrix
     bl fn_80139F4C
     cmpwi r3, 0x0
     beq lbl_fn_805AB82C_000008EC
     mr r3, r28
-    bl fn_800F52F0
+    bl proj_getMatrix
     lwz r0, 0x224(r3)
     cmpwi r0, 0x0
     ble lbl_fn_805AB82C_000009B4
 lbl_fn_805AB82C_000008EC:
     mr r3, r28
-    bl fn_800F52F0
+    bl proj_getMatrix
     li r4, 0x100
     bl fn_8013A16C
     cmpwi r3, 0x0
     bne lbl_fn_805AB82C_000009B4
     mr r3, r28
-    bl fn_800F52F0
+    bl proj_getMatrix
     lis r4, 0x1
     bl fn_8013A16C
     cmpwi r3, 0x0
     bne lbl_fn_805AB82C_000009B4
     mr r3, r28
-    bl fn_800F52F0
+    bl proj_getMatrix
     li r4, 0x40
     bl fn_8013A16C
     cmpwi r3, 0x0

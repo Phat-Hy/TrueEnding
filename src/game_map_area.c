@@ -29,7 +29,7 @@ extern void fn_8011D21C(void);
 extern void fn_801255C8(void);
 extern void fn_80128818(void);
 extern void boss_updatePhaseState(void);
-extern void fn_8014C228(void);
+extern void dialog_initScriptSlot(void);
 extern void dialog_selectChoice(void);
 extern void actor_setState(void);
 extern void battle_resolveAggroHierarchy(void);
@@ -445,7 +445,7 @@ lbl_fn_8017B434_00000474:
     mr r3, r29
     stw r0, 0x648(r29)
     stw r0, 0x64c(r29)
-    bl fn_8014C228
+    bl dialog_initScriptSlot
     b lbl_fn_8017B434_000004B4
 lbl_fn_8017B434_00000494:
     lwz r0, 0x674(r29)

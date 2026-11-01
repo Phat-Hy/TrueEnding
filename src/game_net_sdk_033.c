@@ -17,7 +17,7 @@ extern void atoi(void);
 extern void fn_806A420C(void);
 extern void fn_806A4270(void);
 extern void fn_806D57A0(void);
-extern void fn_806D5850(void);
+extern void net_pollActiveSockets(void);
 extern void net_bufferGetCount(void);
 extern void net_bufferGetElement(void);
 extern void fn_806D5930(void);
@@ -37,7 +37,7 @@ extern void fn_806D8060(void);
 extern void fn_806D8560(void);
 extern void fn_806D8B20(void);
 extern void fn_806D8E30(void);
-extern void fn_806D8F30(void);
+extern void net_getTimestampMs(void);
 extern void fn_806DA070(void);
 extern void fn_806DA120(void);
 extern void fn_806DA480(void);
@@ -434,7 +434,7 @@ lbl_fn_806E4600_00000408:
     lwz r0, 0x0(r30)
     cmpwi r0, 0x2
     beq lbl_fn_806E4600_00000494
-    bl fn_806D8F30
+    bl net_getTimestampMs
     lwz r0, 0x14(r30)
     cmplw r3, r0
     ble lbl_fn_806E4600_00000494
@@ -505,7 +505,7 @@ asm void fn_806E4700(void)
     stw r31, 0x2c(r30)
     cmpwi r3, 0x0
     beq lbl_fn_806E4700_00000514
-    bl fn_806D5850
+    bl net_pollActiveSockets
     stw r31, 0x3c(r30)
 lbl_fn_806E4700_00000514:
     mr r3, r30
@@ -585,7 +585,7 @@ lbl_fn_806E4770_000005F0:
     stw r31, 0x2c(r30)
     cmpwi r3, 0x0
     beq lbl_fn_806E4770_00000630
-    bl fn_806D5850
+    bl net_pollActiveSockets
     stw r31, 0x3c(r30)
 lbl_fn_806E4770_00000630:
     mr r3, r30
@@ -1496,7 +1496,7 @@ lbl_fn_806E53E0_00001204:
     lwz r3, 0x38(r3)
     cmpwi r3, 0x0
     beq lbl_fn_806E53E0_0000127C
-    bl fn_806D5850
+    bl net_pollActiveSockets
     lwz r3, 0xc(r31)
     stw r30, 0x38(r3)
 lbl_fn_806E53E0_0000127C:
@@ -2096,7 +2096,7 @@ asm void fn_806E5C80(void)
     bl net_socketClose
     stw r31, 0x14(r30)
     lwz r3, 0x38(r30)
-    bl fn_806D5850
+    bl net_pollActiveSockets
     stw r31, 0x38(r30)
     mr r3, r30
     bl net_socketClose
@@ -2406,7 +2406,7 @@ lbl_fn_806E5F90_00001E6C:
 lbl_fn_806E5F90_00001F00:
     li r0, 0x1
     stw r0, 0x14(r28)
-    bl fn_806D8F30
+    bl net_getTimestampMs
     stw r3, 0x18c(r29)
     li r3, 0x0
 lbl_fn_806E5F90_00001F14:

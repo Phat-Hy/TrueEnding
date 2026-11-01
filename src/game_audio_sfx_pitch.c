@@ -12,7 +12,7 @@ extern void vec3_toEulerAngles(void);
 extern void fn_80011220(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void vec3_sub(void);
-extern void fn_800133B0(void);
+extern void math_wrapAngle(void);
 extern void collision_testLineSegment(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
@@ -26,7 +26,7 @@ extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void str_skipWhitespace(void);
-extern void fn_800F52F0(void);
+extern void proj_getMatrix(void);
 extern void fn_800F52F8(void);
 extern void fn_800F7260(void);
 extern void vec3_scale(void);
@@ -57,7 +57,7 @@ extern void fn_8013C478(void);
 extern void npc_updateTalkInteraction(void);
 extern void fn_801404F8(void);
 extern void fn_80140500(void);
-extern void fn_8014052C(void);
+extern void quest_initMarkerCoords(void);
 extern void fn_80140588(void);
 extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
@@ -1999,7 +1999,7 @@ lbl_fn_80314BD8_000019E8:
     bl vec3_copy
     b lbl_fn_80314BD8_0000207C
     mr r3, r30
-    bl fn_800F52F0
+    bl proj_getMatrix
     bl enemy_evalAnimTrack
     addi r3, r30, 0xb0
     li r4, 0x0
@@ -2021,7 +2021,7 @@ lbl_fn_80314BD8_000019E8:
     bl mtx_getTranslation
     mr r4, r30
     addi r3, r1, 0x50
-    bl fn_8014052C
+    bl quest_initMarkerCoords
     lfs f1, lbl_80884D24
     addi r3, r1, 0x5c
     addi r4, r1, 0x50
@@ -2091,7 +2091,7 @@ lbl_fn_80314BD8_00001B38:
     lfs f0, lbl_80884D2C
     fsubs f0, f1, f0
     stfs f0, 0x1604(r30)
-    bl fn_800F52F0
+    bl proj_getMatrix
     bl enemy_evalAnimTrack
     fmr f30, f1
     bl fn_802F0990
@@ -2105,7 +2105,7 @@ lbl_fn_80314BD8_00001B38:
     stfs f2, 0x538(r30)
     fsubs f1, f1, f0
     stfs f3, 0x52c(r30)
-    bl fn_800133B0
+    bl math_wrapAngle
     lfs f2, lbl_80884D30
     lfs f0, lbl_80884D34
     fmuls f2, f2, f1

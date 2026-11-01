@@ -48,7 +48,7 @@ extern void fn_800ED42C(void);
 extern void fn_800ED4D8(void);
 extern void fn_800ED4E0(void);
 extern void cam_evalLookAtMatrix(void);
-extern void fn_800F52F0(void);
+extern void proj_getMatrix(void);
 extern void fn_800F8014(void);
 extern void fn_8010EDFC(void);
 extern void skill_findNodeBySlotId(void);
@@ -1129,22 +1129,22 @@ lbl_fn_80452F14_00000D28:
     stfs f0, 0x2a48(r31)
     stw r4, 0x2a4c(r31)
     stw r0, 0x12a4(r31)
-    bl fn_800F52F0
+    bl proj_getMatrix
     li r4, 0x10
     addi r3, r3, 0xe8
     bl fn_802660FC
     mr r3, r31
-    bl fn_800F52F0
+    bl proj_getMatrix
     li r4, 0x2
     addi r3, r3, 0xe8
     bl fn_802660FC
     mr r3, r31
-    bl fn_800F52F0
+    bl proj_getMatrix
     li r4, 0x8
     addi r3, r3, 0xe8
     bl fn_802660FC
     mr r3, r31
-    bl fn_800F52F0
+    bl proj_getMatrix
     li r4, 0x20
     addi r3, r3, 0xe8
     bl fn_802660FC
