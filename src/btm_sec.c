@@ -20,7 +20,7 @@ extern void fn_806275A0(void);
 extern void fn_80629650(void);
 extern void bta_sys_logEvent(void);
 extern void bta_sys_log(void);
-extern void fn_80629850(void);
+extern void bta_sys_traceDebug(void);
 extern void fn_80629870(void);
 extern void fn_806298B0(void);
 extern void fn_806298D0(void);
@@ -564,7 +564,7 @@ lbl_fn_806376B4_000004BC:
 lbl_fn_806376B4_000004F0:
     li r6, 0x0
 lbl_fn_806376B4_000004F4:
-    bl fn_80629850
+    bl bta_sys_traceDebug
 lbl_fn_806376B4_000004F8:
     cmpwi r28, 0x0
     bne lbl_fn_806376B4_0000051C
@@ -1673,7 +1673,7 @@ lbl_fn_80638598_00001400:
 lbl_fn_80638598_00001438:
     li r6, 0x0
 lbl_fn_80638598_0000143C:
-    bl fn_80629850
+    bl bta_sys_traceDebug
 lbl_fn_80638598_00001440:
     cmpwi r31, 0x0
     beq lbl_fn_80638598_000015F4
@@ -1832,7 +1832,7 @@ asm void fn_80638880(void)
 lbl_fn_80638880_00001668:
     li r6, 0x0
 lbl_fn_80638880_0000166C:
-    bl fn_80629850
+    bl bta_sys_traceDebug
 lbl_fn_80638880_00001670:
     lis r4, lbl_80820018@ha
     addi r4, r4, lbl_80820018@l
@@ -2076,7 +2076,7 @@ asm void fn_80638BC4(void)
 lbl_fn_80638BC4_000019E0:
     li r6, 0x0
 lbl_fn_80638BC4_000019E4:
-    bl fn_80629850
+    bl bta_sys_traceDebug
 lbl_fn_80638BC4_000019E8:
     lis r3, lbl_80820018@ha
     addi r3, r3, lbl_80820018@l
@@ -2135,7 +2135,7 @@ asm void fn_80638CC0(void)
 lbl_fn_80638CC0_00001AA4:
     li r6, 0x0
 lbl_fn_80638CC0_00001AA8:
-    bl fn_80629850
+    bl bta_sys_traceDebug
 lbl_fn_80638CC0_00001AAC:
     cmpwi r30, 0x0
     beq lbl_fn_80638CC0_00001B70
@@ -3452,7 +3452,7 @@ lbl_fn_80639BB0_00002CA0:
     lwz r6, 0x10(r30)
     addi r3, r3, 0x3
     addi r4, r31, 0x9a8
-    bl fn_80629850
+    bl bta_sys_traceDebug
 lbl_fn_80639BB0_00002CD8:
     lis r3, lbl_80820018@ha
     addi r3, r3, lbl_80820018@l
@@ -4790,7 +4790,7 @@ asm void fn_8063B0BC(void)
     li r27, 0x0
     addi r3, r3, 0x1
     addi r4, r4, lbl_807B55A8@l
-    bl fn_80629850
+    bl bta_sys_traceDebug
 lbl_fn_8063B0BC_00003EFC:
     lis r30, lbl_8081FAF0@ha
     addi r30, r30, lbl_8081FAF0@l

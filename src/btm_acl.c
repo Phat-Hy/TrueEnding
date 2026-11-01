@@ -9,7 +9,7 @@ extern void _savegpr_25(void);
 extern void _savegpr_27(void);
 extern void bta_sys_logEvent(void);
 extern void bta_sys_log(void);
-extern void fn_80629850(void);
+extern void bta_sys_traceDebug(void);
 extern void fn_806298D0(void);
 extern void fn_80629E20(void);
 extern void fn_80629E90(void);
@@ -1437,7 +1437,7 @@ lbl_fn_80630E20_000011BC:
     addi r3, r3, 0x3
     lbz r6, 0x0(r31)
     addi r4, r4, lbl_807B41CC@l
-    bl fn_80629850
+    bl bta_sys_traceDebug
 lbl_fn_80630E20_000011EC:
     addi r11, r1, 0x30
     bl _restgpr_25
@@ -1915,7 +1915,7 @@ asm void fn_806315A4(void)
     addi r3, r3, 0x3
     extsb r5, r5
     addi r4, r4, lbl_807B42CC@l
-    bl fn_80629850
+    bl bta_sys_traceDebug
 lbl_fn_806315A4_00001830:
     li r0, 0x4
     li r3, 0x0
@@ -1996,7 +1996,7 @@ asm void fn_806316C0(void)
     lis r4, lbl_807B42FC@ha
     addi r3, r3, 0x3
     addi r4, r4, lbl_807B42FC@l
-    bl fn_80629850
+    bl bta_sys_traceDebug
 lbl_fn_806316C0_00001948:
     li r0, 0x4
     li r3, 0x0
@@ -2208,7 +2208,7 @@ lbl_fn_80631894_00001BF4:
     addi r3, r24, 0x4
     lhz r6, 0x2(r28)
     addi r4, r30, 0x3ec
-    bl fn_80629850
+    bl bta_sys_traceDebug
 lbl_fn_80631894_00001C14:
     lhz r4, 0x4(r28)
     lhz r5, 0x654(r31)

@@ -57,7 +57,7 @@ extern void fn_80139560(void);
 extern void fn_801446F0(void);
 extern void dialog_selectChoice(void);
 extern void fn_8014EEC4(void);
-extern void fn_801539E0(void);
+extern void inventory_unequipItem(void);
 extern void equip_applyToCharacter(void);
 extern void fn_80155DAC(void);
 extern void fn_801561E4(void);
@@ -1332,7 +1332,7 @@ asm void fn_800EBA5C(void)
     srwi. r0, r0, 31
     beq lbl_fn_800EBA5C_000010C0
     mr r3, r31
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_800EBA5C_000010C0:
     lwz r0, 0x12a4(r31)
     extrwi. r0, r0, 1, 25

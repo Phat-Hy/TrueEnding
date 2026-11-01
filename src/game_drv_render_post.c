@@ -30,14 +30,14 @@ extern void GXClearVtxDesc(void);
 extern void fn_80614790(void);
 extern void fn_806149C0(void);
 extern void fn_80615C40(void);
-extern void fn_80615D20(void);
+extern void GXInitLightDistAttn(void);
 extern void fn_80615D50(void);
 extern void fn_80615FF0(void);
 extern void fn_80616200(void);
 extern void fn_80616250(void);
 extern void fn_80616390(void);
 extern void fn_80617200(void);
-extern void fn_80617220(void);
+extern void GXInitTexObjDefault(void);
 extern void fn_80617340(void);
 extern void GXSetTevSwapMode(void);
 extern void GXSetTevSwapModeTable(void);
@@ -819,7 +819,7 @@ asm void fn_805CE550(void)
     li r7, 0x0
     bl GXSetVtxAttrFmt
     li r3, 0x1
-    bl fn_80615D20
+    bl GXInitLightDistAttn
     li r3, 0x4
     li r4, 0x0
     li r5, 0x0
@@ -848,7 +848,7 @@ asm void fn_805CE550(void)
     li r4, 0x4
     bl fn_80617340
     li r3, 0x0
-    bl fn_80617220
+    bl GXInitTexObjDefault
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0

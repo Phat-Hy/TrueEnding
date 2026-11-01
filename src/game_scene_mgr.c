@@ -21,7 +21,7 @@ extern void fn_8010CA24(void);
 extern void fn_801240B4(void);
 extern void fn_80134168(void);
 extern void npc_updateTalkInteraction(void);
-extern void fn_801539E0(void);
+extern void inventory_unequipItem(void);
 extern void debuff_clearStatus(void);
 extern void fn_80192758(void);
 extern void fn_801A471C(void);
@@ -345,7 +345,7 @@ asm void fn_801A2CEC(void)
     addi r31, r3, 0xb0
     srwi. r0, r0, 31
     beq lbl_fn_801A2CEC_0000032C
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_801A2CEC_0000032C:
     lwz r3, lbl_8087F048
     cmpwi r3, 0x0

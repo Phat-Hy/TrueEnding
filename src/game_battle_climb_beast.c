@@ -82,8 +82,8 @@ extern void kpad_getClampData(void);
 extern void fn_803750E4(void);
 extern void fn_803D6E24(void);
 extern void task_createWorker(void);
-extern void fn_803EC69C(void);
-extern void fn_803EC91C(void);
+extern void task_destroyWorker(void);
+extern void task_updateWorker(void);
 extern void fn_803ED774(void);
 extern void fn_803EFDA4(void);
 extern void fn_803EFDAC(void);
@@ -240,7 +240,7 @@ asm void fn_803F9EDC(void)
     mr r30, r3
     beq lbl_fn_803F9EDC_00000104
     li r4, 0x0
-    bl fn_803EC69C
+    bl task_destroyWorker
     cmpwi r31, 0x0
     ble lbl_fn_803F9EDC_00000104
     mr r3, r30
@@ -411,7 +411,7 @@ asm void fn_803FA148(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_803EC91C
+    bl task_updateWorker
     cmpwi r3, 0x0
     bne lbl_fn_803FA148_000003B8
     addi r3, r31, 0x500

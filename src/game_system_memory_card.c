@@ -34,7 +34,7 @@ extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_update(void);
 extern void res_findResourceSlot(void);
 extern void fn_8035AB78(void);
-extern void fn_8035B78C(void);
+extern void entity_Instance_destructor(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_destructor(void);
@@ -297,7 +297,7 @@ asm void fn_8035598C(void)
 lbl_fn_8035598C_00000260:
     mr r3, r30
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r31, 0x0
     ble lbl_fn_8035598C_0000027C
     mr r3, r30

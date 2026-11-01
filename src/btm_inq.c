@@ -17,7 +17,7 @@ extern void scapi_cleanupContext(void);
 extern void fn_80627B30(void);
 extern void bta_sys_logEvent(void);
 extern void bta_sys_log(void);
-extern void fn_80629850(void);
+extern void bta_sys_traceDebug(void);
 extern void fn_80629870(void);
 extern void fn_80629890(void);
 extern void fn_806298D0(void);
@@ -1893,7 +1893,7 @@ lbl_fn_806352E8_00001740:
     addi r3, r3, 0x4
     lbz r6, 0x183f(r29)
     addi r4, r4, lbl_807B4804@l
-    bl fn_80629850
+    bl bta_sys_traceDebug
 lbl_fn_806352E8_0000177C:
     cmpwi r28, 0x0
     beq lbl_fn_806352E8_00001794
@@ -2984,7 +2984,7 @@ asm void fn_8063619C(void)
     mr r5, r26
     addi r3, r3, 0x4
     addi r4, r4, lbl_807B4840@l
-    bl fn_80629850
+    bl bta_sys_traceDebug
 lbl_fn_8063619C_000025FC:
     lhz r3, 0x34(r31)
     lhz r4, 0x36(r31)

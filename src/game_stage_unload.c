@@ -12,7 +12,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_8012476C(void);
 extern void fn_801426A4(void);
-extern void fn_801539E0(void);
+extern void inventory_unequipItem(void);
 extern void fn_80155DAC(void);
 extern void debuff_clearStatus(void);
 extern void fn_801750FC(void);
@@ -129,7 +129,7 @@ lbl_fn_80198C08_00000094:
     lwz r0, 0x12a4(r3)
     srwi. r0, r0, 31
     beq lbl_fn_80198C08_000000A8
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_80198C08_000000A8:
     lwz r3, 0x4(r31)
     lwz r0, 0x12a4(r3)
@@ -1786,7 +1786,7 @@ asm void fn_8019A3F4(void)
     srwi. r0, r0, 31
     beq lbl_fn_8019A3F4_0000184C
     mr r3, r31
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_8019A3F4_0000184C:
     lwz r3, 0x4(r30)
     lwz r0, 0x12a4(r3)

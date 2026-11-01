@@ -10,7 +10,7 @@ extern void fn_80628150(void);
 extern void fn_80628160(void);
 extern void bta_sys_logEvent(void);
 extern void bta_sys_log(void);
-extern void fn_80629850(void);
+extern void bta_sys_traceDebug(void);
 extern void fn_80629870(void);
 extern void fn_80629890(void);
 extern void bd_addr_copy(void);
@@ -658,7 +658,7 @@ lbl_fn_8062E344_00000764:
     lwz r6, 0x8(r29)
     addi r4, r30, 0x210
     li r3, 0x504
-    bl fn_80629850
+    bl bta_sys_traceDebug
 lbl_fn_8062E344_00000774:
     lhz r0, 0x10(r31)
     cmplwi r0, 0x9
@@ -2207,7 +2207,7 @@ lbl_fn_8062F7C4_00001C4C:
     addi r4, r4, lbl_807B3AEC@l
     clrlwi r6, r6, 24
     li r3, 0x504
-    bl fn_80629850
+    bl bta_sys_traceDebug
 lbl_fn_8062F7C4_00001C70:
     lhz r4, 0x0(r30)
     mr r3, r31
@@ -2309,7 +2309,7 @@ lbl_fn_8062F9C4_00001D7C:
     lbz r6, 0x26(r3)
     clrlwi r5, r28, 24
     li r3, 0x504
-    bl fn_80629850
+    bl bta_sys_traceDebug
 lbl_fn_8062F9C4_00001DD0:
     mr r3, r28
     b lbl_fn_8062F9C4_00001E74
@@ -2355,7 +2355,7 @@ lbl_fn_8062F9C4_00001E50:
     clrlwi r5, r29, 24
     li r3, 0x504
     li r6, 0x10
-    bl fn_80629850
+    bl bta_sys_traceDebug
 lbl_fn_8062F9C4_00001E70:
     mr r3, r29
 lbl_fn_8062F9C4_00001E74:

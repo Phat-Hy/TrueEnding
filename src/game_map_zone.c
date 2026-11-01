@@ -26,7 +26,7 @@ extern void fn_8017FBEC(void);
 extern void fn_8017FED0(void);
 extern void fn_80182788(void);
 extern void fn_80183860(void);
-extern void fn_8035B78C(void);
+extern void entity_Instance_destructor(void);
 extern void fn_804AAFCC(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
@@ -105,7 +105,7 @@ lbl_fn_8017D000_00000048:
 lbl_fn_8017D000_00000078:
     mr r3, r30
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r31, 0x0
     ble lbl_fn_8017D000_00000094
     mr r3, r30

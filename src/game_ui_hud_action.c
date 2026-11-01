@@ -15,7 +15,7 @@ extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void viewport_updateCulling(void);
 extern void fn_80134168(void);
-extern void fn_801539E0(void);
+extern void inventory_unequipItem(void);
 extern void fn_80154344(void);
 extern void fn_80155DAC(void);
 extern void debuff_clearStatus(void);
@@ -1266,7 +1266,7 @@ asm void fn_801C82F8(void)
     lwz r0, 0x12a4(r3)
     srwi. r0, r0, 31
     beq lbl_fn_801C82F8_00001044
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_801C82F8_00001044:
     lwz r3, 0x4(r28)
     li r4, 0x0
@@ -1676,7 +1676,7 @@ asm void fn_801C8938(void)
     addi r30, r3, 0xb0
     srwi. r0, r0, 31
     beq lbl_fn_801C8938_00001634
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_801C8938_00001634:
     lwz r3, 0x4(r31)
     lwz r0, 0x12a4(r3)

@@ -65,7 +65,7 @@ extern void fn_80615AD0(void);
 extern void fn_80615AE0(void);
 extern void fn_80615B60(void);
 extern void fn_80615C40(void);
-extern void fn_80615D20(void);
+extern void GXInitLightDistAttn(void);
 extern void fn_80615D50(void);
 extern void fn_806165B0(void);
 extern void GXDrawDone(void);
@@ -76,7 +76,7 @@ extern void fn_80616E80(void);
 extern void fn_80617030(void);
 extern void fn_80617130(void);
 extern void fn_80617200(void);
-extern void fn_80617220(void);
+extern void GXInitTexObjDefault(void);
 extern void fn_80617340(void);
 extern void GXSetTevColorIn(void);
 extern void fn_80617420(void);
@@ -603,7 +603,7 @@ asm void gx_drawScreenQuad(void)
     li r4, 0x0
     bl fn_80618630
     li r3, 0x0
-    bl fn_80615D20
+    bl GXInitLightDistAttn
     li r3, 0x4
     li r4, 0x0
     li r5, 0x0
@@ -837,7 +837,7 @@ lbl_gx_drawScreenQuad_0000092C:
     li r26, 0x0
 lbl_gx_drawScreenQuad_000009C4:
     mr r3, r26
-    bl fn_80617220
+    bl GXInitTexObjDefault
     addi r26, r26, 0x1
     cmpwi r26, 0x10
     blt lbl_gx_drawScreenQuad_000009C4
@@ -2087,7 +2087,7 @@ lbl_fn_80073194_00001BB0:
     bl GXSetTevIndirect
 lbl_fn_80073194_00001BF4:
     mr r3, r31
-    bl fn_80617220
+    bl GXInitTexObjDefault
     mr r3, r31
     li r4, 0x7
     li r5, 0x7
@@ -2415,7 +2415,7 @@ lbl_fn_80073A6C_00002034:
     li r4, 0x0
     bl GXSetTevSwapMode
     mr r3, r28
-    bl fn_80617220
+    bl GXInitTexObjDefault
     mr r3, r28
     li r4, 0x7
     li r5, 0x7
@@ -2452,7 +2452,7 @@ lbl_fn_80073A6C_00002034:
     li r4, 0x0
     bl GXSetTevSwapMode
     mr r3, r27
-    bl fn_80617220
+    bl GXInitTexObjDefault
     mr r3, r27
     li r4, 0x7
     li r5, 0x7
@@ -2496,7 +2496,7 @@ lbl_fn_80073A6C_00002034:
     li r5, 0x0
     bl GXSetTevSwapMode
     mr r3, r26
-    bl fn_80617220
+    bl GXInitTexObjDefault
     mr r3, r26
     li r4, 0x7
     li r5, 0x7
@@ -2540,7 +2540,7 @@ lbl_fn_80073A6C_00002238:
     li r5, 0x0
     bl GXSetTevSwapMode
     mr r3, r26
-    bl fn_80617220
+    bl GXInitTexObjDefault
     mr r3, r26
     li r4, 0x7
     li r5, 0x7
@@ -2577,7 +2577,7 @@ lbl_fn_80073A6C_00002238:
     li r5, 0x0
     bl GXSetTevSwapMode
     mr r3, r24
-    bl fn_80617220
+    bl GXInitTexObjDefault
     mr r3, r24
     li r4, 0x7
     li r5, 0x7
@@ -2619,7 +2619,7 @@ lbl_fn_80073A6C_00002378:
     li r5, 0x0
     bl GXSetTevSwapMode
     mr r3, r26
-    bl fn_80617220
+    bl GXInitTexObjDefault
     mr r3, r26
     li r4, 0x7
     li r5, 0x7
@@ -2656,7 +2656,7 @@ lbl_fn_80073A6C_00002378:
     li r5, 0x0
     bl GXSetTevSwapMode
     mr r3, r24
-    bl fn_80617220
+    bl GXInitTexObjDefault
     mr r3, r24
     li r4, 0x7
     li r5, 0x7
@@ -2976,7 +2976,7 @@ lbl_fn_800742C8_00002808:
     li r5, 0x0
     bl GXSetTevSwapMode
     mr r3, r31
-    bl fn_80617220
+    bl GXInitTexObjDefault
     mr r3, r31
     li r4, 0x7
     li r5, 0x7
@@ -3013,7 +3013,7 @@ lbl_fn_800742C8_00002808:
     li r5, 0x0
     bl GXSetTevSwapMode
     mr r3, r30
-    bl fn_80617220
+    bl GXInitTexObjDefault
     mr r3, r30
     li r4, 0x7
     li r5, 0x7
@@ -3061,7 +3061,7 @@ lbl_fn_800742C8_00002A54:
     li r5, 0x0
     bl GXSetTevSwapMode
     mr r3, r29
-    bl fn_80617220
+    bl GXInitTexObjDefault
     mr r3, r29
     li r4, 0x7
     li r5, 0x7
@@ -3219,7 +3219,7 @@ lbl_fn_800748D8_00002CA0:
     li r5, 0x0
     bl GXSetTevSwapMode
     mr r3, r31
-    bl fn_80617220
+    bl GXInitTexObjDefault
     mr r3, r31
     li r4, 0x7
     li r5, 0x7
@@ -3413,7 +3413,7 @@ lbl_fn_80074B24_00002EB0:
     li r5, 0x0
     bl GXSetTevSwapMode
     mr r3, r31
-    bl fn_80617220
+    bl GXInitTexObjDefault
     mr r3, r31
     li r4, 0x7
     li r5, 0x7
@@ -3450,7 +3450,7 @@ lbl_fn_80074B24_00002EB0:
     li r5, 0x0
     bl GXSetTevSwapMode
     mr r3, r30
-    bl fn_80617220
+    bl GXInitTexObjDefault
     lwz r0, 0x0(r26)
     clrlwi. r0, r0, 31
     beq lbl_fn_80074B24_00003078
@@ -3792,7 +3792,7 @@ lbl_gx_beginQuadBatch_000034FC:
     srwi r0, r3, 31
     add r0, r0, r3
     extrwi r3, r0, 8, 23
-    bl fn_80615D20
+    bl GXInitLightDistAttn
     lwz r0, 0x13c(r25)
     clrlwi r3, r0, 24
     bl fn_80617200

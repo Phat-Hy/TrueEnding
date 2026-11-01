@@ -31,7 +31,7 @@ extern void fn_8017B3C0(void);
 extern void fn_8017B434(void);
 extern void fn_8017BC4C(void);
 extern void entity_Instance_constructor(void);
-extern void fn_8035B78C(void);
+extern void entity_Instance_destructor(void);
 extern void fn_803605EC(void);
 extern void kpad_getClampData(void);
 extern void fn_8037D4C0(void);
@@ -1109,7 +1109,7 @@ asm void fn_805A3D00(void)
 lbl_fn_805A3D00_00000D60:
     mr r3, r30
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r31, 0x0
     ble lbl_fn_805A3D00_00000D7C
     mr r3, r30

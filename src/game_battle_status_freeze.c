@@ -37,9 +37,9 @@ extern void str_skipWhitespace(void);
 extern void fn_802180A8(void);
 extern void fn_803C1560(void);
 extern void task_createWorker(void);
-extern void fn_803EC69C(void);
+extern void task_destroyWorker(void);
 extern void fn_803EC758(void);
-extern void fn_803EC91C(void);
+extern void task_updateWorker(void);
 extern void fn_803F11F8(void);
 extern void fn_8042952C(void);
 extern void fn_804491F4(void);
@@ -1108,7 +1108,7 @@ lbl_fn_804280B4_00000D54:
 lbl_fn_804280B4_00000D60:
     mr r3, r30
     li r4, 0x0
-    bl fn_803EC69C
+    bl task_destroyWorker
     cmpwi r31, 0x0
     ble lbl_fn_804280B4_00000D7C
     mr r3, r30
@@ -1135,7 +1135,7 @@ asm void fn_8042813C(void)
     mr r31, r3
     cmpwi r0, 0x0
     bne lbl_fn_8042813C_00000E54
-    bl fn_803EC91C
+    bl task_updateWorker
     cmpwi r3, 0x0
     bne lbl_fn_8042813C_00000EF8
     li r26, 0x0
@@ -1888,7 +1888,7 @@ asm void fn_80428BC8(void)
     mr r30, r3
     beq lbl_fn_80428BC8_00001860
     li r4, 0x0
-    bl fn_803EC69C
+    bl task_destroyWorker
     cmpwi r31, 0x0
     ble lbl_fn_80428BC8_00001860
     mr r3, r30
@@ -1911,7 +1911,7 @@ asm void fn_80428C20(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_803EC91C
+    bl task_updateWorker
     cmpwi r3, 0x0
     bne lbl_fn_80428C20_000018AC
     li r0, 0x2

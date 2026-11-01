@@ -11,7 +11,7 @@ extern void _savegpr_22(void);
 extern void dtor_80084684(void);
 extern void mem_free(void);
 extern void atn_Task_setActive(void);
-extern void fn_801539E0(void);
+extern void inventory_unequipItem(void);
 extern void equip_applyToCharacter(void);
 extern void fn_80155DAC(void);
 extern void actor_setState(void);
@@ -638,7 +638,7 @@ lbl_fn_804E9C68_000007CC:
     srwi. r0, r0, 31
     beq lbl_fn_804E9C68_0000080C
     mr r3, r16
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_804E9C68_0000080C:
     lwz r0, 0x12a4(r16)
     extrwi. r0, r0, 1, 26

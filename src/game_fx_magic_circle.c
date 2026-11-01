@@ -17,7 +17,7 @@ extern void mem_free(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800F7FF0(void);
+extern void viewport_getNextSequenceId(void);
 extern void system_getNextSequenceId(void);
 extern void viewport_updateCulling(void);
 extern void scissor_clipFrustum(void);
@@ -178,7 +178,7 @@ lbl_fn_8029F148_000000A4:
     b lbl_fn_8029F148_0000012C
 lbl_fn_8029F148_00000124:
     addi r3, r1, 0x14
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
 lbl_fn_8029F148_0000012C:
     lwz r0, 0x58c(r31)
     cmpwi r0, 0x10

@@ -48,7 +48,7 @@ extern void __GXSetVtxDesc(void);
 extern void GXClearVtxDesc(void);
 extern void fn_80615B60(void);
 extern void fn_80615C40(void);
-extern void fn_80615D20(void);
+extern void GXInitLightDistAttn(void);
 extern void fn_80615D50(void);
 extern void fn_80616250(void);
 extern void fn_806163C0(void);
@@ -1615,7 +1615,7 @@ lbl_fn_8009CC28_000014AC:
     li r3, 0x4
     bl fn_80615C40
     li r3, 0x1
-    bl fn_80615D20
+    bl GXInitLightDistAttn
     li r3, 0x4
     li r4, 0x0
     li r5, 0x0
@@ -1888,7 +1888,7 @@ asm void fn_8009D1A4(void)
     li r3, 0x5
     bl fn_80615C40
     li r3, 0x1
-    bl fn_80615D20
+    bl GXInitLightDistAttn
     li r3, 0x4
     li r4, 0x0
     li r5, 0x0

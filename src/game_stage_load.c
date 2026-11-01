@@ -11,7 +11,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void fn_80108C10(void);
 extern void magic_dispatchActionCommand(void);
 extern void quest_evaluateConditions(void);
-extern void fn_801539E0(void);
+extern void inventory_unequipItem(void);
 extern void fn_80155DAC(void);
 extern void debuff_clearStatus(void);
 extern void fn_80176548(void);
@@ -347,7 +347,7 @@ lbl_fn_80197528_000003CC:
     lwz r0, 0x12a4(r3)
     srwi. r0, r0, 31
     beq lbl_fn_80197528_000003E0
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_80197528_000003E0:
     lwz r3, 0x4(r31)
     li r0, 0x1
@@ -603,7 +603,7 @@ lbl_fn_801978C0_0000076C:
     lwz r0, 0x12a4(r3)
     srwi. r0, r0, 31
     beq lbl_fn_801978C0_00000780
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_801978C0_00000780:
     lwz r5, 0x4(r31)
     li r0, 0x1

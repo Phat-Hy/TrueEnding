@@ -92,16 +92,16 @@ extern u32 lbl_80885F84;
 
 /* Function declarations */
 void task_createWorker(void);
-void fn_803EC69C(void);
+void task_destroyWorker(void);
 void fn_803EC758(void);
 void fn_803EC7A0(void);
-void fn_803EC91C(void);
+void task_updateWorker(void);
 void fn_803ECB7C(void);
 void fn_803ECB84(void);
 void fn_803ECBCC(void);
 void fn_803ECBD0(void);
 void fn_803ECBD4(void);
-void fn_803ED0D4(void);
+void task_initWorkerContext(void);
 void fn_803ED5D0(void);
 void fn_803ED610(void);
 void fn_803ED774(void);
@@ -198,7 +198,7 @@ lbl_task_createWorker_00000118:
     blr
 }
 
-asm void fn_803EC69C(void)
+asm void task_destroyWorker(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -209,42 +209,42 @@ asm void fn_803EC69C(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    beq lbl_fn_803EC69C_000001D4
+    beq lbl_task_destroyWorker_000001D4
     lis r4, lbl_8078C9D0@ha
     addi r4, r4, lbl_8078C9D0@l
     stw r4, 0x0(r3)
     lwz r3, lbl_8087F4A0
     cmpwi r3, 0x0
-    beq lbl_fn_803EC69C_00000178
+    beq lbl_task_destroyWorker_00000178
     mr r4, r30
     bl fn_803EE41C
-lbl_fn_803EC69C_00000178:
+lbl_task_destroyWorker_00000178:
     addic. r0, r30, 0xf0
-    beq lbl_fn_803EC69C_0000019C
+    beq lbl_task_destroyWorker_0000019C
     lwz r4, 0xf0(r30)
     cmpwi r4, 0x0
-    beq lbl_fn_803EC69C_0000019C
+    beq lbl_task_destroyWorker_0000019C
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
-    beq lbl_fn_803EC69C_0000019C
+    beq lbl_task_destroyWorker_0000019C
     bl node_destroy
-lbl_fn_803EC69C_0000019C:
+lbl_task_destroyWorker_0000019C:
     addi r3, r30, 0xb0
     li r4, -0x1
     bl fn_803EF64C
     addic. r3, r30, 0x60
-    beq lbl_fn_803EC69C_000001B8
+    beq lbl_task_destroyWorker_000001B8
     li r4, 0x0
     bl atn_LoadHandle_destructor
-lbl_fn_803EC69C_000001B8:
+lbl_task_destroyWorker_000001B8:
     mr r3, r30
     li r4, 0x0
     bl atn_Task_destructor
     cmpwi r31, 0x0
-    ble lbl_fn_803EC69C_000001D4
+    ble lbl_task_destroyWorker_000001D4
     mr r3, r30
     bl dtor_80084684
-lbl_fn_803EC69C_000001D4:
+lbl_task_destroyWorker_000001D4:
     mr r3, r30
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -388,7 +388,7 @@ lbl_fn_803EC7A0_000003A0:
     blr
 }
 
-asm void fn_803EC91C(void)
+asm void task_updateWorker(void)
 {
     nofralloc
     stwu r1, -0x120(r1)
@@ -401,13 +401,13 @@ asm void fn_803EC91C(void)
     li r29, 0x0
     lwz r0, 0x68(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_803EC91C_000003F4
+    beq lbl_task_updateWorker_000003F4
     cmpwi r0, 0x1
-    beq lbl_fn_803EC91C_00000464
+    beq lbl_task_updateWorker_00000464
     cmpwi r0, 0x2
-    beq lbl_fn_803EC91C_00000520
-    b lbl_fn_803EC91C_000005F4
-lbl_fn_803EC91C_000003F4:
+    beq lbl_task_updateWorker_00000520
+    b lbl_task_updateWorker_000005F4
+lbl_task_updateWorker_000003F4:
     lwz r8, 0x48(r3)
     lis r3, 0x1062
     addi r0, r3, 0x4dd3
@@ -435,20 +435,20 @@ lbl_fn_803EC91C_000003F4:
     mtctr r12
     bctrl
     li r29, 0x1
-    b lbl_fn_803EC91C_000005F4
-lbl_fn_803EC91C_00000464:
+    b lbl_task_updateWorker_000005F4
+lbl_task_updateWorker_00000464:
     addi r3, r3, 0x60
     bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
-    beq lbl_fn_803EC91C_00000478
+    beq lbl_task_updateWorker_00000478
     li r29, 0x1
-lbl_fn_803EC91C_00000478:
+lbl_task_updateWorker_00000478:
     cmpwi r29, 0x0
-    bne lbl_fn_803EC91C_00000520
+    bne lbl_task_updateWorker_00000520
     addi r3, r31, 0x60
     bl atn_LoadHandle_getStatus
     cmpwi r3, 0x3
-    bne lbl_fn_803EC91C_00000518
+    bne lbl_task_updateWorker_00000518
     lwz r12, 0x0(r31)
     mr r3, r31
     lwz r12, 0x20(r12)
@@ -465,7 +465,7 @@ lbl_fn_803EC91C_00000478:
     bl fn_803EF780
     lwz r0, 0x50(r31)
     cmplwi r0, 0x3f
-    bgt lbl_fn_803EC91C_000004F8
+    bgt lbl_task_updateWorker_000004F8
     lis r3, jumptable_8078C8D0@ha
     slwi r0, r0, 2
     addi r3, r3, jumptable_8078C8D0@l
@@ -475,46 +475,46 @@ lbl_fn_803EC91C_00000478:
     mr r3, r31
     bl fn_803F1310
     stw r3, 0xe4(r31)
-lbl_fn_803EC91C_000004F8:
+lbl_task_updateWorker_000004F8:
     lwz r3, 0xe4(r31)
     cmpwi r3, 0x0
-    beq lbl_fn_803EC91C_0000050C
+    beq lbl_task_updateWorker_0000050C
     li r4, 0x1
     bl atn_Task_setActive
-lbl_fn_803EC91C_0000050C:
+lbl_task_updateWorker_0000050C:
     li r0, 0x2
     stw r0, 0x68(r31)
-    b lbl_fn_803EC91C_00000520
-lbl_fn_803EC91C_00000518:
+    b lbl_task_updateWorker_00000520
+lbl_task_updateWorker_00000518:
     li r0, 0x3
     stw r0, 0x68(r31)
-lbl_fn_803EC91C_00000520:
+lbl_task_updateWorker_00000520:
     lwz r12, 0x0(r31)
     mr r3, r31
     lwz r12, 0x1c(r12)
     mtctr r12
     bctrl
     cmpwi r3, 0x0
-    beq lbl_fn_803EC91C_00000540
+    beq lbl_task_updateWorker_00000540
     li r29, 0x1
-lbl_fn_803EC91C_00000540:
+lbl_task_updateWorker_00000540:
     addi r3, r31, 0xb0
     bl fn_803F06B0
     cmpwi r3, 0x0
-    beq lbl_fn_803EC91C_00000554
+    beq lbl_task_updateWorker_00000554
     li r29, 0x1
-lbl_fn_803EC91C_00000554:
+lbl_task_updateWorker_00000554:
     lwz r3, 0xe4(r31)
     cmpwi r3, 0x0
-    beq lbl_fn_803EC91C_00000574
+    beq lbl_task_updateWorker_00000574
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 30, 30
     cmplwi r0, 0x2
-    beq lbl_fn_803EC91C_00000574
+    beq lbl_task_updateWorker_00000574
     li r29, 0x1
-lbl_fn_803EC91C_00000574:
+lbl_task_updateWorker_00000574:
     cmpwi r29, 0x0
-    bne lbl_fn_803EC91C_000005F4
+    bne lbl_task_updateWorker_000005F4
     lwz r12, 0x0(r31)
     mr r3, r31
     lwz r12, 0x24(r12)
@@ -524,14 +524,14 @@ lbl_fn_803EC91C_00000574:
     stw r0, 0x68(r31)
     lwz r3, lbl_8087F4A0
     cmpwi r3, 0x0
-    beq lbl_fn_803EC91C_000005E0
+    beq lbl_task_updateWorker_000005E0
     lwz r4, lbl_8087F0A8
     lwz r0, 0x7c(r4)
     cmpwi r0, 0x0
-    beq lbl_fn_803EC91C_000005E0
+    beq lbl_task_updateWorker_000005E0
     lwz r0, lbl_8087FA20
     cmpwi r0, 0x0
-    bne lbl_fn_803EC91C_000005E0
+    bne lbl_task_updateWorker_000005E0
     lwz r4, 0x50(r31)
     bl fn_803EEE44
     lwz r12, 0x0(r31)
@@ -540,13 +540,13 @@ lbl_fn_803EC91C_00000574:
     lwz r12, 0x6c(r12)
     mtctr r12
     bctrl
-lbl_fn_803EC91C_000005E0:
+lbl_task_updateWorker_000005E0:
     lwz r3, 0xe4(r31)
     cmpwi r3, 0x0
-    beq lbl_fn_803EC91C_000005F4
+    beq lbl_task_updateWorker_000005F4
     li r4, 0x0
     bl atn_Task_setActive
-lbl_fn_803EC91C_000005F4:
+lbl_task_updateWorker_000005F4:
     lwz r31, 0x11c(r1)
     mr r3, r29
     lwz r30, 0x118(r1)
@@ -934,7 +934,7 @@ lbl_fn_803ECBD4_00000B3C:
     blr
 }
 
-asm void fn_803ED0D4(void)
+asm void task_initWorkerContext(void)
 {
     nofralloc
     stwu r1, -0x380(r1)
@@ -985,7 +985,7 @@ asm void fn_803ED0D4(void)
     stfs f0, 0x2f0(r1)
     lfs f1, 0x80(r28)
     fcmpu cr0, f7, f1
-    beq lbl_fn_803ED0D4_00000C80
+    beq lbl_task_initWorkerContext_00000C80
     addi r3, r1, 0x1a0
     li r4, 0x7a
     bl PSMTXRotRad
@@ -1006,11 +1006,11 @@ asm void fn_803ED0D4(void)
     psq_st f4, 0x18(r31), 0, 0
     psq_st f5, 0x20(r31), 0, 0
     psq_st f6, 0x28(r31), 0, 0
-lbl_fn_803ED0D4_00000C80:
+lbl_task_initWorkerContext_00000C80:
     lfs f0, lbl_80885F54
     lfs f1, 0x7c(r28)
     fcmpu cr0, f0, f1
-    beq lbl_fn_803ED0D4_00000CE0
+    beq lbl_task_initWorkerContext_00000CE0
     addi r3, r1, 0x200
     li r4, 0x79
     bl PSMTXRotRad
@@ -1031,11 +1031,11 @@ lbl_fn_803ED0D4_00000C80:
     psq_st f4, 0x18(r31), 0, 0
     psq_st f5, 0x20(r31), 0, 0
     psq_st f6, 0x28(r31), 0, 0
-lbl_fn_803ED0D4_00000CE0:
+lbl_task_initWorkerContext_00000CE0:
     lfs f0, lbl_80885F54
     lfs f1, 0x78(r28)
     fcmpu cr0, f0, f1
-    beq lbl_fn_803ED0D4_00000D40
+    beq lbl_task_initWorkerContext_00000D40
     addi r3, r1, 0x260
     li r4, 0x78
     bl PSMTXRotRad
@@ -1056,7 +1056,7 @@ lbl_fn_803ED0D4_00000CE0:
     psq_st f4, 0x18(r31), 0, 0
     psq_st f5, 0x20(r31), 0, 0
     psq_st f6, 0x28(r31), 0, 0
-lbl_fn_803ED0D4_00000D40:
+lbl_task_initWorkerContext_00000D40:
     lfs f1, 0x90(r28)
     addi r3, r1, 0x2c0
     lfs f2, 0x94(r28)
@@ -1087,7 +1087,7 @@ lbl_fn_803ED0D4_00000D40:
     stfs f0, 0x290(r1)
     lfs f1, 0x8c(r28)
     fcmpu cr0, f7, f1
-    beq lbl_fn_803ED0D4_00000E0C
+    beq lbl_task_initWorkerContext_00000E0C
     addi r3, r1, 0x80
     li r4, 0x7a
     bl PSMTXRotRad
@@ -1108,11 +1108,11 @@ lbl_fn_803ED0D4_00000D40:
     psq_st f4, 0x18(r31), 0, 0
     psq_st f5, 0x20(r31), 0, 0
     psq_st f6, 0x28(r31), 0, 0
-lbl_fn_803ED0D4_00000E0C:
+lbl_task_initWorkerContext_00000E0C:
     lfs f0, lbl_80885F54
     lfs f1, 0x88(r28)
     fcmpu cr0, f0, f1
-    beq lbl_fn_803ED0D4_00000E6C
+    beq lbl_task_initWorkerContext_00000E6C
     addi r3, r1, 0xe0
     li r4, 0x79
     bl PSMTXRotRad
@@ -1133,11 +1133,11 @@ lbl_fn_803ED0D4_00000E0C:
     psq_st f4, 0x18(r31), 0, 0
     psq_st f5, 0x20(r31), 0, 0
     psq_st f6, 0x28(r31), 0, 0
-lbl_fn_803ED0D4_00000E6C:
+lbl_task_initWorkerContext_00000E6C:
     lfs f0, lbl_80885F54
     lfs f1, 0x84(r28)
     fcmpu cr0, f0, f1
-    beq lbl_fn_803ED0D4_00000ECC
+    beq lbl_task_initWorkerContext_00000ECC
     addi r3, r1, 0x140
     li r4, 0x78
     bl PSMTXRotRad
@@ -1158,7 +1158,7 @@ lbl_fn_803ED0D4_00000E6C:
     psq_st f4, 0x18(r31), 0, 0
     psq_st f5, 0x20(r31), 0, 0
     psq_st f6, 0x28(r31), 0, 0
-lbl_fn_803ED0D4_00000ECC:
+lbl_task_initWorkerContext_00000ECC:
     addi r4, r1, 0x320
     addi r3, r1, 0x290
     mr r5, r4
@@ -1214,49 +1214,49 @@ lbl_fn_803ED0D4_00000ECC:
     stfs f31, 0xc(r1)
     fcmpo cr0, f7, f0
     stfs f30, 0x10(r1)
-    ble lbl_fn_803ED0D4_00000FB0
-    b lbl_fn_803ED0D4_00000FB4
-lbl_fn_803ED0D4_00000FB0:
+    ble lbl_task_initWorkerContext_00000FB0
+    b lbl_task_initWorkerContext_00000FB4
+lbl_task_initWorkerContext_00000FB0:
     fmr f7, f0
-lbl_fn_803ED0D4_00000FB4:
+lbl_task_initWorkerContext_00000FB4:
     lfs f8, 0x8(r1)
     fcmpo cr0, f8, f7
-    ble lbl_fn_803ED0D4_00000FC4
-    b lbl_fn_803ED0D4_00000FDC
-lbl_fn_803ED0D4_00000FC4:
+    ble lbl_task_initWorkerContext_00000FC4
+    b lbl_task_initWorkerContext_00000FDC
+lbl_task_initWorkerContext_00000FC4:
     lfs f8, 0xc(r1)
     lfs f0, 0x10(r1)
     fcmpo cr0, f8, f0
-    ble lbl_fn_803ED0D4_00000FD8
-    b lbl_fn_803ED0D4_00000FDC
-lbl_fn_803ED0D4_00000FD8:
+    ble lbl_task_initWorkerContext_00000FD8
+    b lbl_task_initWorkerContext_00000FDC
+lbl_task_initWorkerContext_00000FD8:
     fmr f8, f0
-lbl_fn_803ED0D4_00000FDC:
+lbl_task_initWorkerContext_00000FDC:
     cmpwi r30, 0x0
     stfs f8, 0x54(r29)
-    beq lbl_fn_803ED0D4_00001038
+    beq lbl_task_initWorkerContext_00001038
     li r0, 0x0
     stw r0, 0x38(r1)
     mr r3, r29
     addi r4, r1, 0x38
     bl fn_8000D430
     addic. r3, r1, 0x38
-    beq lbl_fn_803ED0D4_00001038
+    beq lbl_task_initWorkerContext_00001038
     lwz r4, 0x38(r1)
     cmpwi r4, 0x0
-    beq lbl_fn_803ED0D4_00001038
+    beq lbl_task_initWorkerContext_00001038
     lwz r12, 0x0(r4)
     cmpwi r12, 0x0
-    beq lbl_fn_803ED0D4_00001030
+    beq lbl_task_initWorkerContext_00001030
     addi r3, r3, 0x4
     li r5, 0x1
     mr r4, r3
     mtctr r12
     bctrl
-lbl_fn_803ED0D4_00001030:
+lbl_task_initWorkerContext_00001030:
     li r0, 0x0
     stw r0, 0x38(r1)
-lbl_fn_803ED0D4_00001038:
+lbl_task_initWorkerContext_00001038:
     lwz r0, 0x384(r1)
     psq_l f31, 0x378(r1), 0, 0
     lfd f31, 0x370(r1)

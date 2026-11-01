@@ -25,9 +25,9 @@ extern void GXClearVtxDesc(void);
 extern void fn_80614790(void);
 extern void fn_80615B60(void);
 extern void fn_80615C40(void);
-extern void fn_80615D20(void);
+extern void GXInitLightDistAttn(void);
 extern void fn_80615D50(void);
-extern void fn_80617220(void);
+extern void GXInitTexObjDefault(void);
 extern void fn_80617340(void);
 extern void GXSetTevColorIn(void);
 extern void fn_80617420(void);
@@ -94,7 +94,7 @@ asm void atn_ComDrawLine_execute(void)
     stw r29, 0x44(r1)
     stw r28, 0x40(r1)
     mr r28, r4
-    bl fn_80615D20
+    bl GXInitLightDistAttn
     li r3, 0x0
     bl GXClearVtxDesc
     li r3, 0x1
@@ -288,7 +288,7 @@ asm void atn_ComDrawTexture_execute(void)
     stw r29, 0x44(r1)
     stw r28, 0x40(r1)
     mr r28, r4
-    bl fn_80615D20
+    bl GXInitLightDistAttn
     li r3, 0x1
     bl GXClearVtxDesc
     li r3, 0x1
@@ -531,7 +531,7 @@ asm void atn_ComDrawTextureAdd_execute(void)
     lwz r3, lbl_8087EEE0
     bl gx_applyRenderState
     li r3, 0x1
-    bl fn_80615D20
+    bl GXInitLightDistAttn
     li r3, 0x1
     bl GXClearVtxDesc
     li r3, 0x1
@@ -834,7 +834,7 @@ asm void atn_ComDrawTextureMask_execute(void)
     lwz r3, lbl_8087EEE0
     bl gx_applyRenderState
     li r3, 0x1
-    bl fn_80615D20
+    bl GXInitLightDistAttn
     li r3, 0x2
     bl GXClearVtxDesc
     li r3, 0x2
@@ -1304,7 +1304,7 @@ lbl_atn_ComDrawTextureMono_execute_00001108:
     stfs f0, 0x54(r1)
     bdnz lbl_atn_ComDrawTextureMono_execute_00001108
     li r3, 0x1
-    bl fn_80615D20
+    bl GXInitLightDistAttn
     li r3, 0x1
     bl GXClearVtxDesc
     li r3, 0x4
@@ -1471,7 +1471,7 @@ lbl_atn_ComDrawTextureMono_execute_00001108:
     li r6, 0xff
     bl GXSetTevOrder
     li r3, 0x0
-    bl fn_80617220
+    bl GXInitTexObjDefault
     li r3, 0x1
     li r4, 0x1
     li r5, 0x1
@@ -1511,7 +1511,7 @@ lbl_atn_ComDrawTextureMono_execute_00001108:
     li r6, 0xff
     bl GXSetTevOrder
     li r3, 0x1
-    bl fn_80617220
+    bl GXInitTexObjDefault
     li r3, 0x2
     li r4, 0x2
     li r5, 0x2
@@ -1551,7 +1551,7 @@ lbl_atn_ComDrawTextureMono_execute_00001108:
     li r6, 0xff
     bl GXSetTevOrder
     li r3, 0x2
-    bl fn_80617220
+    bl GXInitTexObjDefault
     li r3, 0x3
     li r4, 0x3
     li r5, 0x3
@@ -1588,7 +1588,7 @@ lbl_atn_ComDrawTextureMono_execute_00001108:
     li r6, 0x4
     bl GXSetTevOrder
     li r3, 0x3
-    bl fn_80617220
+    bl GXInitTexObjDefault
     li r3, 0x4
     li r4, 0x0
     li r5, 0x1
@@ -1952,7 +1952,7 @@ lbl_atn_ComDrawTextureMaskMono_execute_00001AEC:
     stfs f0, 0x54(r1)
     bdnz lbl_atn_ComDrawTextureMaskMono_execute_00001AEC
     li r3, 0x1
-    bl fn_80615D20
+    bl GXInitLightDistAttn
     li r3, 0x2
     bl GXClearVtxDesc
     li r3, 0x4
@@ -2110,7 +2110,7 @@ lbl_atn_ComDrawTextureMaskMono_execute_00001AEC:
     li r6, 0xff
     bl GXSetTevOrder
     li r3, 0x0
-    bl fn_80617220
+    bl GXInitTexObjDefault
     li r3, 0x1
     li r4, 0x1
     li r5, 0x1
@@ -2150,7 +2150,7 @@ lbl_atn_ComDrawTextureMaskMono_execute_00001AEC:
     li r6, 0xff
     bl GXSetTevOrder
     li r3, 0x1
-    bl fn_80617220
+    bl GXInitTexObjDefault
     li r3, 0x2
     li r4, 0x2
     li r5, 0x2
@@ -2190,7 +2190,7 @@ lbl_atn_ComDrawTextureMaskMono_execute_00001AEC:
     li r6, 0xff
     bl GXSetTevOrder
     li r3, 0x2
-    bl fn_80617220
+    bl GXInitTexObjDefault
     li r3, 0x3
     li r4, 0x3
     li r5, 0x0
@@ -2227,7 +2227,7 @@ lbl_atn_ComDrawTextureMaskMono_execute_00001AEC:
     li r6, 0x4
     bl GXSetTevOrder
     li r3, 0x3
-    bl fn_80617220
+    bl GXInitTexObjDefault
     li r3, 0x4
     li r4, 0x0
     li r5, 0x1
@@ -2504,7 +2504,7 @@ asm void atn_ComDrawFont_execute(void)
     mr r30, r3
     mr r27, r4
     li r3, 0x1
-    bl fn_80615D20
+    bl GXInitLightDistAttn
     li r3, 0x1
     bl GXClearVtxDesc
     li r3, 0x1
@@ -2883,7 +2883,7 @@ lbl_atn_ComDrawFontSideFade_execute_000029CC:
     blt lbl_atn_ComDrawFontSideFade_execute_0000290C
     lwz r29, lbl_8087EEE0
     li r3, 0x1
-    bl fn_80615D20
+    bl GXInitLightDistAttn
     li r3, 0x1
     bl GXClearVtxDesc
     li r3, 0x1
@@ -3200,7 +3200,7 @@ asm void atn_ComDrawColliObject_execute(void)
     lwz r3, lbl_8087EEE0
     bl gx_setRenderStateParam
     li r3, 0x1
-    bl fn_80615D20
+    bl GXInitLightDistAttn
     li r3, 0x0
     bl GXClearVtxDesc
     li r3, 0x1
@@ -3286,7 +3286,7 @@ asm void atn_ComDrawColliTree_execute(void)
     lwz r3, lbl_8087EEE0
     bl gx_setRenderStateParam
     li r3, 0x1
-    bl fn_80615D20
+    bl GXInitLightDistAttn
     li r3, 0x0
     bl GXClearVtxDesc
     li r3, 0x1
@@ -3402,7 +3402,7 @@ asm void atn_ComDrawD3TextureMask_execute(void)
     li r3, 0x0
     bl GXSetCurrentMtx
     li r3, 0x1
-    bl fn_80615D20
+    bl GXInitLightDistAttn
     li r3, 0x1
     bl GXClearVtxDesc
     li r3, 0x1
@@ -3676,7 +3676,7 @@ asm void atn_ComDrawWindow_execute(void)
     mr r29, r4
     bl gx_applyRenderState
     li r3, 0x1
-    bl fn_80615D20
+    bl GXInitLightDistAttn
     li r3, 0x2
     bl GXClearVtxDesc
     li r3, 0x2

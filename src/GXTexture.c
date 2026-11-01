@@ -45,7 +45,7 @@ void fn_80616EF0(void);
 void fn_80617030(void);
 void fn_80617130(void);
 void fn_80617200(void);
-void fn_80617220(void);
+void GXInitTexObjDefault(void);
 void fn_80617270(void);
 void fn_806172D0(void);
 void __GXSetIndirectMask(void);
@@ -1124,7 +1124,7 @@ asm void fn_80617200(void)
     blr
 }
 
-asm void fn_80617220(void)
+asm void GXInitTexObjDefault(void)
 {
     nofralloc
     stwu r1, -0x10(r1)

@@ -33,7 +33,7 @@ extern void fn_803234F4(void);
 extern void fn_803235AC(void);
 extern void fn_803235D8(void);
 extern void entity_Instance_constructor(void);
-extern void fn_8035B78C(void);
+extern void entity_Instance_destructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
@@ -1756,7 +1756,7 @@ lbl_fn_80322E10_000017E8:
 lbl_fn_80322E10_00001814:
     mr r3, r29
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r30, 0x0
     ble lbl_fn_80322E10_00001830
     mr r3, r29

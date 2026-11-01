@@ -49,8 +49,8 @@ extern void fn_803CC6B4(void);
 extern void fn_803E3BE8(void);
 extern void fn_803E5E64(void);
 extern void fn_803EC16C(void);
-extern void fn_803EC69C(void);
-extern void fn_803EC91C(void);
+extern void task_destroyWorker(void);
+extern void task_updateWorker(void);
 extern void fn_804439FC(void);
 extern void fn_8044D6AC(void);
 extern void boss_getOffset54(void);
@@ -205,7 +205,7 @@ lbl_fn_80431388_000000FC:
     bl fn_800971D4
     mr r3, r29
     li r4, 0x0
-    bl fn_803EC69C
+    bl task_destroyWorker
     cmpwi r30, 0x0
     ble lbl_fn_80431388_00000124
     mr r3, r29
@@ -232,7 +232,7 @@ asm void fn_80431458(void)
     psq_st f31, 0x68(r1), 0, 0
     bl _savegpr_21
     mr r25, r3
-    bl fn_803EC91C
+    bl task_updateWorker
     cmpwi r3, 0x0
     bne lbl_fn_80431458_00000428
     mr r3, r25

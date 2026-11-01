@@ -53,7 +53,7 @@ extern void fn_8014EEC4(void);
 extern void fn_8014F4FC(void);
 extern void fn_8014FAD0(void);
 extern void fn_80150178(void);
-extern void fn_801539E0(void);
+extern void inventory_unequipItem(void);
 extern void fn_80155DAC(void);
 extern void fn_80164DCC(void);
 extern void fn_8016E4C4(void);
@@ -1874,7 +1874,7 @@ lbl_fn_8000F1EC_0000180C:
     lwz r0, 0x12a4(r3)
     srwi. r0, r0, 31
     beq lbl_fn_8000F1EC_00001850
-    bl fn_801539E0
+    bl inventory_unequipItem
     lwz r3, 0x1c(r29)
     lwz r3, 0x48(r3)
     lwz r0, 0x48(r3)

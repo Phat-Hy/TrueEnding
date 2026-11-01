@@ -26,7 +26,7 @@ extern void fn_8013310C(void);
 extern void fn_80133130(void);
 extern void fn_8013322C(void);
 extern void fn_801446F0(void);
-extern void fn_801539E0(void);
+extern void inventory_unequipItem(void);
 extern void fn_80154344(void);
 extern void fn_80154654(void);
 extern void equip_applyToCharacter(void);
@@ -854,7 +854,7 @@ asm void fn_801908F0(void)
     lwz r0, 0x12a4(r3)
     srwi. r0, r0, 31
     beq lbl_fn_801908F0_00000A08
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_801908F0_00000A08:
     lwz r3, 0x4(r31)
     li r4, 0x0
@@ -1493,7 +1493,7 @@ asm void fn_80191170(void)
     lwz r0, 0x12a4(r3)
     srwi. r0, r0, 31
     beq lbl_fn_80191170_000012D4
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_80191170_000012D4:
     lwz r3, 0x4(r30)
     lwz r0, 0x12a4(r3)

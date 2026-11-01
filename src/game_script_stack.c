@@ -48,7 +48,7 @@ extern void fn_80247DA4(void);
 extern void fn_80247FB0(void);
 extern void fn_8024845C(void);
 extern void entity_Instance_constructor(void);
-extern void fn_8035B78C(void);
+extern void entity_Instance_destructor(void);
 extern void world_setLocalFlag(void);
 extern void atn_LoadHandle_destructor(void);
 extern void PSMTXRotRad(void);
@@ -1623,7 +1623,7 @@ lbl_fn_80247748_0000154C:
 lbl_fn_80247748_0000157C:
     mr r3, r29
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r30, 0x0
     ble lbl_fn_80247748_00001598
     mr r3, r29

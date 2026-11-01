@@ -57,7 +57,7 @@ extern void fn_801479D8(void);
 extern void quest_checkCondition(void);
 extern void dialog_selectChoice(void);
 extern void fn_80151210(void);
-extern void fn_801539E0(void);
+extern void inventory_unequipItem(void);
 extern void fn_80155DAC(void);
 extern void fn_801750FC(void);
 extern void fn_80178A6C(void);
@@ -671,7 +671,7 @@ lbl_fn_803729B4_00000694:
     cmpwi r3, 0x0
     beq lbl_fn_803729B4_000006D0
     mr r3, r26
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_803729B4_000006D0:
     mr r3, r26
     bl fn_801479D8

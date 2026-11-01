@@ -22,7 +22,7 @@ extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void fn_8012476C(void);
 extern void npc_updateTalkInteraction(void);
-extern void fn_801539E0(void);
+extern void inventory_unequipItem(void);
 extern void fn_80155DAC(void);
 extern void fn_80164DCC(void);
 extern void debuff_clearStatus(void);
@@ -132,7 +132,7 @@ asm void fn_8019A580(void)
     srwi. r0, r0, 31
     beq lbl_fn_8019A580_00000078
     mr r3, r30
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_8019A580_00000078:
     lwz r3, 0x4(r31)
     lwz r0, 0x12a4(r3)
@@ -1074,7 +1074,7 @@ lbl_fn_8019B29C_00000D94:
     srwi. r0, r0, 31
     beq lbl_fn_8019B29C_00000DDC
     mr r3, r27
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_8019B29C_00000DDC:
     lwz r3, 0x4(r30)
     lwz r0, 0x12a4(r3)

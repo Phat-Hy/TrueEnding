@@ -47,7 +47,7 @@ extern void fn_802805C8(void);
 extern void fn_80281924(void);
 extern void fn_802826A0(void);
 extern void fn_802829DC(void);
-extern void fn_8035B78C(void);
+extern void entity_Instance_destructor(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_destructor(void);
@@ -204,7 +204,7 @@ lbl_fn_8027CD9C_00000140:
 lbl_fn_8027CD9C_00000150:
     mr r3, r29
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r30, 0x0
     ble lbl_fn_8027CD9C_0000016C
     mr r3, r29

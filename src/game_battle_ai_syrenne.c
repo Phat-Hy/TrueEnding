@@ -36,7 +36,7 @@ extern void fn_803E3BE8(void);
 extern void fn_803E5E64(void);
 extern void fn_803E6ADC(void);
 extern void task_createWorker(void);
-extern void fn_803EC69C(void);
+extern void task_destroyWorker(void);
 extern void fn_80445130(void);
 extern void fn_80448F9C(void);
 extern void fn_8044E418(void);
@@ -1876,7 +1876,7 @@ lbl_fn_80435F58_000019A0:
     bl fn_8008A76C
     mr r3, r30
     li r4, 0x0
-    bl fn_803EC69C
+    bl task_destroyWorker
     cmpwi r31, 0x0
     ble lbl_fn_80435F58_000019E0
     mr r3, r30

@@ -51,7 +51,7 @@ extern void fn_80304718(void);
 extern void fn_80304B40(void);
 extern void fn_80304FC0(void);
 extern void fn_803057A8(void);
-extern void fn_8035B78C(void);
+extern void entity_Instance_destructor(void);
 extern void world_setGlobalFlag(void);
 extern void world_setLocalFlag(void);
 extern void fn_80376254(void);
@@ -261,7 +261,7 @@ lbl_fn_802FCF50_000001C4:
 lbl_fn_802FCF50_000001E4:
     mr r3, r29
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r30, 0x0
     ble lbl_fn_802FCF50_00000200
     mr r3, r29

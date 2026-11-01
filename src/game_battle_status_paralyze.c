@@ -33,8 +33,8 @@ extern void fn_802180A8(void);
 extern void kpad_getClampData(void);
 extern void fn_803CD958(void);
 extern void task_createWorker(void);
-extern void fn_803EC69C(void);
-extern void fn_803EC91C(void);
+extern void task_destroyWorker(void);
+extern void task_updateWorker(void);
 extern void fn_8042AB58(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
@@ -907,7 +907,7 @@ lbl_fn_80429868_00000B30:
     bl __destroy_new_array
     mr r3, r27
     li r4, 0x0
-    bl fn_803EC69C
+    bl task_destroyWorker
     cmpwi r28, 0x0
     ble lbl_fn_80429868_00000B64
     mr r3, r27
@@ -939,7 +939,7 @@ asm void fn_80429964(void)
     mr r21, r3
 lbl_fn_80429964_00000BB0:
     mr r3, r31
-    bl fn_803EC91C
+    bl task_updateWorker
     cmpwi r3, 0x0
     bne lbl_fn_80429964_000010CC
     cmpwi r21, 0x0

@@ -26,8 +26,8 @@ extern void fn_8009FFCC(void);
 extern void str_skipWhitespace(void);
 extern void fn_8036554C(void);
 extern void task_createWorker(void);
-extern void fn_803EC69C(void);
-extern void fn_803EC91C(void);
+extern void task_destroyWorker(void);
+extern void task_updateWorker(void);
 extern void fn_80401E50(void);
 extern void fn_804023E0(void);
 extern void boss_getOffset54(void);
@@ -472,7 +472,7 @@ lbl_fn_80400818_000004D8:
 lbl_fn_80400818_000004E4:
     mr r3, r28
     li r4, 0x0
-    bl fn_803EC69C
+    bl task_destroyWorker
     cmpwi r29, 0x0
     ble lbl_fn_80400818_00000500
     mr r3, r28
@@ -499,7 +499,7 @@ asm void fn_80400904(void)
     stw r30, 0x18(r1)
     stw r29, 0x14(r1)
     mr r29, r3
-    bl fn_803EC91C
+    bl task_updateWorker
     cmpwi r3, 0x0
     bne lbl_fn_80400904_0000059C
     li r30, 0x0

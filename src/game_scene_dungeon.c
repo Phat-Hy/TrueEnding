@@ -14,7 +14,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void fn_800A55D4(void);
 extern void npc_updateTalkInteraction(void);
 extern void fn_801446F0(void);
-extern void fn_801539E0(void);
+extern void inventory_unequipItem(void);
 extern void fn_80155DAC(void);
 extern void fn_803C18DC(void);
 extern void chest_spawnLoot(void);
@@ -1361,7 +1361,7 @@ lbl_fn_801AC434_0000121C:
     lwz r0, 0x12a4(r3)
     srwi. r0, r0, 31
     beq lbl_fn_801AC434_00001230
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_801AC434_00001230:
     lwz r3, 0x4(r27)
     lwz r0, 0x12a4(r3)

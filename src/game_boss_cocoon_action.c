@@ -84,7 +84,7 @@ extern void fn_802F0990(void);
 extern void fn_803165E0(void);
 extern void fn_80339F74(void);
 extern void entity_Instance_constructor(void);
-extern void fn_8035B78C(void);
+extern void entity_Instance_destructor(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
 extern void fn_80373100(void);
@@ -607,7 +607,7 @@ lbl_fn_80452908_000005E0:
 lbl_fn_80452908_000005F0:
     mr r3, r30
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r31, 0x0
     ble lbl_fn_80452908_0000060C
     mr r3, r30
@@ -1572,7 +1572,7 @@ lbl_fn_80453570_00001384:
 lbl_fn_80453570_000013A0:
     mr r3, r29
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r30, 0x0
     ble lbl_fn_80453570_000013BC
     mr r3, r29

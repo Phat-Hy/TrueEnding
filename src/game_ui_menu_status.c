@@ -17,7 +17,7 @@ extern void ref_releaseHandle(void);
 extern void morph_updateWeights(void);
 extern void fn_80105AB0(void);
 extern void fn_801446F0(void);
-extern void fn_801539E0(void);
+extern void inventory_unequipItem(void);
 extern void fn_80155DAC(void);
 extern void debuff_clearStatus(void);
 extern void fn_80178018(void);
@@ -1724,7 +1724,7 @@ asm void fn_801BC288(void)
     lwz r0, 0x12a4(r3)
     srwi. r0, r0, 31
     beq lbl_fn_801BC288_000016F4
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_801BC288_000016F4:
     lwz r3, 0x4(r31)
     lwz r0, 0x12a4(r3)

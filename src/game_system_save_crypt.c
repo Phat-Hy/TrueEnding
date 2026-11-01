@@ -65,7 +65,7 @@ extern void fn_803458D0(void);
 extern void fn_803458E0(void);
 extern void fn_80354110(void);
 extern void entity_Instance_constructor(void);
-extern void fn_8035B78C(void);
+extern void entity_Instance_destructor(void);
 extern void world_setGlobalFlag(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
@@ -1871,7 +1871,7 @@ lbl_fn_8034515C_00001824:
     bl __destroy_new_array
     mr r3, r29
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r30, 0x0
     ble lbl_fn_8034515C_00001858
     mr r3, r29

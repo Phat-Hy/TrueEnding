@@ -45,11 +45,11 @@ extern void fn_80176548(void);
 extern void fn_802180A8(void);
 extern void kpad_getClampData(void);
 extern void task_createWorker(void);
-extern void fn_803EC69C(void);
+extern void task_destroyWorker(void);
 extern void fn_803EC758(void);
 extern void fn_803EC7A0(void);
-extern void fn_803EC91C(void);
-extern void fn_803ED0D4(void);
+extern void task_updateWorker(void);
+extern void task_initWorkerContext(void);
 extern void fn_803ED5D0(void);
 extern void fn_803ED774(void);
 extern void fn_803EDB18(void);
@@ -177,7 +177,7 @@ lbl_fn_8042C30C_00000034:
     bl fn_800971D4
     mr r3, r30
     li r4, 0x0
-    bl fn_803EC69C
+    bl task_destroyWorker
     cmpwi r31, 0x0
     ble lbl_fn_8042C30C_0000005C
     mr r3, r30
@@ -200,7 +200,7 @@ asm void fn_8042C384(void)
     stw r0, 0x54(r1)
     stw r31, 0x4c(r1)
     mr r31, r3
-    bl fn_803EC91C
+    bl task_updateWorker
     cmpwi r3, 0x0
     bne lbl_fn_8042C384_00000180
     lwz r7, 0x260(r31)
@@ -301,7 +301,7 @@ asm void fn_8042C4A4(void)
     mr r4, r3
     mr r3, r31
     li r5, 0x1
-    bl fn_803ED0D4
+    bl task_initWorkerContext
 lbl_fn_8042C4A4_000001FC:
     lwz r0, 0x4cc(r31)
     addi r3, r31, 0xf4
@@ -602,7 +602,7 @@ lbl_fn_8042C5AC_0000060C:
     mr r4, r3
     mr r3, r31
     li r5, 0x1
-    bl fn_803ED0D4
+    bl task_initWorkerContext
 lbl_fn_8042C5AC_0000064C:
     lfs f3, 0x878(r31)
     lfs f0, lbl_8088675C
@@ -1036,7 +1036,7 @@ asm void fn_8042CEE8(void)
     mr r30, r3
     beq lbl_fn_8042CEE8_00000C18
     li r4, 0x0
-    bl fn_803EC69C
+    bl task_destroyWorker
     cmpwi r31, 0x0
     ble lbl_fn_8042CEE8_00000C18
     mr r3, r30
@@ -1059,7 +1059,7 @@ asm void fn_8042CF40(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_803EC91C
+    bl task_updateWorker
     cmpwi r3, 0x0
     bne lbl_fn_8042CF40_00000C90
     lwz r3, 0xf4(r31)
@@ -1687,7 +1687,7 @@ lbl_fn_8042D748_00001470:
     bl fn_800971D4
     mr r3, r30
     li r4, 0x0
-    bl fn_803EC69C
+    bl task_destroyWorker
     cmpwi r31, 0x0
     ble lbl_fn_8042D748_00001498
     mr r3, r30
@@ -1710,7 +1710,7 @@ asm void fn_8042D7C0(void)
     stw r0, 0x44(r1)
     stmw r21, 0x14(r1)
     mr r31, r3
-    bl fn_803EC91C
+    bl task_updateWorker
     cmpwi r3, 0x0
     bne lbl_fn_8042D7C0_0000159C
     lwz r3, lbl_8087F430
@@ -2252,7 +2252,7 @@ lbl_fn_8042D93C_00001C54:
     mr r4, r3
     mr r3, r31
     li r5, 0x1
-    bl fn_803ED0D4
+    bl task_initWorkerContext
 lbl_fn_8042D93C_00001C94:
     lwz r0, 0x364(r1)
     psq_l f31, 0x358(r1), 0, 0

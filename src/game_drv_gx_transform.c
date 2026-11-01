@@ -14,13 +14,13 @@ extern void GXSetVtxAttrFmt(void);
 extern void __GXSetVtxDesc(void);
 extern void GXClearVtxDesc(void);
 extern void fn_80614790(void);
-extern void fn_80615D20(void);
+extern void GXInitLightDistAttn(void);
 extern void fn_80615D50(void);
 extern void fn_80615FF0(void);
 extern void fn_80616250(void);
 extern void fn_806165B0(void);
 extern void fn_80617200(void);
-extern void fn_80617220(void);
+extern void GXInitTexObjDefault(void);
 extern void GXSetTevColorIn(void);
 extern void fn_80617420(void);
 extern void GXSetTevIndirect(void);
@@ -866,7 +866,7 @@ lbl_fn_805D9830_00000A00:
     li r5, 0x0
     bl fn_806177F0
     li r3, 0x1
-    bl fn_80615D20
+    bl GXInitLightDistAttn
     li r3, 0x4
     li r4, 0x0
     li r5, 0x0
@@ -902,9 +902,9 @@ lbl_fn_805D9830_00000A00:
     li r3, 0x2
     bl GXSetNumTevStages
     li r3, 0x0
-    bl fn_80617220
+    bl GXInitTexObjDefault
     li r3, 0x1
-    bl fn_80617220
+    bl GXInitTexObjDefault
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0

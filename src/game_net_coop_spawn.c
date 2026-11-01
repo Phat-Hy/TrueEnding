@@ -17,7 +17,7 @@ extern void str_findChar(void);
 extern void actor_findSpawnTemplate(void);
 extern void fn_80124C6C(void);
 extern void fn_801EFA78(void);
-extern void fn_801F48C8(void);
+extern void save_parseSlotStats(void);
 extern void saveSlot_readSummary(void);
 extern void fn_801F6C2C(void);
 extern void save_computeCrc32(void);
@@ -763,7 +763,7 @@ lbl_fn_804A5E40_000008DC:
     slwi r0, r0, 2
     add r3, r27, r0
     lwz r3, 0x1d8(r3)
-    bl fn_801F48C8
+    bl save_parseSlotStats
     lwz r4, lbl_8087F0A8
     addi r3, r1, 0x28
     lwz r5, 0x20(r30)
@@ -775,7 +775,7 @@ lbl_fn_804A5E40_000008DC:
     slwi r0, r0, 2
     add r3, r27, r0
     lwz r3, 0x1d8(r3)
-    bl fn_801F48C8
+    bl save_parseSlotStats
     lwz r0, 0x1cc(r27)
     addi r3, r31, 0x1f0
     slwi r0, r0, 2
@@ -866,7 +866,7 @@ lbl_fn_804A5E40_000008DC:
     slwi r0, r0, 2
     add r3, r27, r0
     lwz r3, 0x1e0(r3)
-    bl fn_801F48C8
+    bl save_parseSlotStats
     lwz r4, lbl_8087F0A8
     addi r3, r1, 0x8
     lwz r5, 0x20(r30)
@@ -878,7 +878,7 @@ lbl_fn_804A5E40_000008DC:
     slwi r0, r0, 2
     add r3, r27, r0
     lwz r3, 0x1e0(r3)
-    bl fn_801F48C8
+    bl save_parseSlotStats
     lwz r0, 0x1cc(r27)
     addi r3, r31, 0x1f0
     slwi r0, r0, 2

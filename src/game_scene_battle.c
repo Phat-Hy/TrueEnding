@@ -23,7 +23,7 @@ extern void ref_releaseHandle(void);
 extern void fn_801070C8(void);
 extern void fn_80107208(void);
 extern void npc_updateTalkInteraction(void);
-extern void fn_801539E0(void);
+extern void inventory_unequipItem(void);
 extern void equip_applyToCharacter(void);
 extern void fn_80155DAC(void);
 extern void fn_80176DFC(void);
@@ -343,7 +343,7 @@ lbl_fn_801AD34C_00000328:
     psq_st f1, 0x0(r25), 0, 0
     srwi. r0, r0, 31
     beq lbl_fn_801AD34C_00000364
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_801AD34C_00000364:
     lwz r3, 0x4(r27)
     lwz r0, 0x12a4(r3)

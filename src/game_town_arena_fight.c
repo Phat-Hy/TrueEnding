@@ -38,7 +38,7 @@ extern void fn_800F72CC(void);
 extern void fn_800F7F80(void);
 extern void fn_800F7F90(void);
 extern void fn_800F7FB4(void);
-extern void fn_800F7FF0(void);
+extern void viewport_getNextSequenceId(void);
 extern void fn_800F84BC(void);
 extern void fn_800F8524(void);
 extern void fn_8010D320(void);
@@ -83,7 +83,7 @@ extern void fn_801F19B4(void);
 extern void fn_801F33D4(void);
 extern void fn_801F4484(void);
 extern void fn_801F465C(void);
-extern void fn_801F48C8(void);
+extern void save_parseSlotStats(void);
 extern void save_formatSlotTitle(void);
 extern void fn_801F6C2C(void);
 extern void save_computeCrc32(void);
@@ -1023,7 +1023,7 @@ lbl_fn_803D2A6C_00000A5C:
     lfs f3, 0x484(r1)
     bl vec3_set
     addi r3, r1, 0x470
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
     mr r4, r31
     addi r3, r1, 0x2a8
     bl fn_8014052C
@@ -1106,7 +1106,7 @@ lbl_fn_803D2A6C_00000B90:
     addi r3, r1, 0x464
     bl vec3_sub
     addi r3, r1, 0x464
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
     addi r3, r1, 0x464
     bl fn_80139F60
     bl equip_getGlobalManager
@@ -1757,28 +1757,28 @@ lbl_fn_803D2A6C_000014EC:
     addi r21, r21, lbl_807506A0@l
     lwz r3, 0x72c(r24)
     addi r4, r21, 0x10c6
-    bl fn_801F48C8
+    bl save_parseSlotStats
     addi r3, r1, 0x238
     addi r4, r1, 0x3e8
     bl fn_803D7014
     mr r5, r3
     lwz r3, 0x72c(r24)
     addi r4, r21, 0x10cc
-    bl fn_801F48C8
+    bl save_parseSlotStats
     addi r3, r1, 0x228
     addi r4, r1, 0x3e8
     bl fn_803D7014
     mr r5, r3
     lwz r3, 0x730(r24)
     addi r4, r21, 0x10c6
-    bl fn_801F48C8
+    bl save_parseSlotStats
     addi r3, r1, 0x218
     addi r4, r1, 0x3e8
     bl fn_803D7014
     mr r5, r3
     lwz r3, 0x730(r24)
     addi r4, r21, 0x10cc
-    bl fn_801F48C8
+    bl save_parseSlotStats
     lwz r0, 0x734(r24)
     cmpwi r0, 0x0
     bne lbl_fn_803D2A6C_000015F8
@@ -2674,28 +2674,28 @@ lbl_fn_803D2A6C_00002268:
     mr r5, r3
     lwz r3, 0xd70(r24)
     addi r4, r23, 0x10c6
-    bl fn_801F48C8
+    bl save_parseSlotStats
     addi r3, r1, 0x198
     addi r4, r1, 0x3a8
     bl fn_803D7014
     mr r5, r3
     lwz r3, 0xd70(r24)
     addi r4, r23, 0x10cc
-    bl fn_801F48C8
+    bl save_parseSlotStats
     addi r3, r1, 0x188
     addi r4, r1, 0x3a8
     bl fn_803D7014
     mr r5, r3
     lwz r3, 0xd74(r24)
     addi r4, r23, 0x10c6
-    bl fn_801F48C8
+    bl save_parseSlotStats
     addi r3, r1, 0x178
     addi r4, r1, 0x3a8
     bl fn_803D7014
     mr r5, r3
     lwz r3, 0xd74(r24)
     addi r4, r23, 0x10cc
-    bl fn_801F48C8
+    bl save_parseSlotStats
     lwz r3, 0xd74(r24)
     bl fn_803CFC6C
     lfs f0, lbl_80885D60
@@ -2809,7 +2809,7 @@ lbl_fn_803D2A6C_00002464:
     bl vec3_mag
     fmr f25, f1
     addi r3, r1, 0x398
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
     fcmpo cr0, f25, f30
     blt lbl_fn_803D2A6C_00002ACC
     lwz r0, 0x0(r31)
@@ -3026,7 +3026,7 @@ lbl_fn_803D2A6C_000027AC:
     bl vec3_add
     stfs f28, 0x39c(r1)
     addi r3, r1, 0x398
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
     cmpwi r27, 0x0
     beq lbl_fn_803D2A6C_00002858
     mr r3, r27
@@ -3049,7 +3049,7 @@ lbl_fn_803D2A6C_000027AC:
     addi r4, r1, 0x150
     bl vec3_copy
     addi r3, r1, 0x398
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
     addi r3, r1, 0x144
     addi r4, r1, 0x380
     addi r5, r1, 0x398
@@ -3058,7 +3058,7 @@ lbl_fn_803D2A6C_000027AC:
     addi r4, r1, 0x144
     bl vec3_copy
     addi r3, r1, 0x398
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
 lbl_fn_803D2A6C_00002858:
     addi r3, r1, 0x374
     addi r4, r1, 0x398

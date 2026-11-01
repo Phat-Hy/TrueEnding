@@ -38,7 +38,7 @@ extern void fn_801F362C(void);
 extern void save_validateHeader(void);
 extern void fn_801F4484(void);
 extern void fn_801F465C(void);
-extern void fn_801F48C8(void);
+extern void save_parseSlotStats(void);
 extern void fn_801FEA9C(void);
 extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
@@ -511,7 +511,7 @@ lbl_fn_801F10E0_000003C8:
     psq_st f1, 0x0(r5), 0, 0
     psq_st f2, 0x8(r5), 0, 0
     lwz r3, 0x180(r3)
-    bl fn_801F48C8
+    bl save_parseSlotStats
     mulli r4, r26, 0x34
     slwi r0, r28, 2
     addi r5, r1, 0x28
@@ -527,7 +527,7 @@ lbl_fn_801F10E0_000003C8:
     psq_st f1, 0x0(r5), 0, 0
     psq_st f2, 0x8(r5), 0, 0
     lwz r3, 0x0(r23)
-    bl fn_801F48C8
+    bl save_parseSlotStats
     b lbl_fn_801F10E0_00000664
 lbl_fn_801F10E0_000005E0:
     mulli r3, r26, 0x34
@@ -546,7 +546,7 @@ lbl_fn_801F10E0_000005E0:
     psq_st f1, 0x0(r5), 0, 0
     psq_st f2, 0x8(r5), 0, 0
     lwz r3, 0x180(r3)
-    bl fn_801F48C8
+    bl save_parseSlotStats
     mulli r4, r26, 0x34
     slwi r0, r28, 2
     addi r5, r1, 0x8
@@ -562,7 +562,7 @@ lbl_fn_801F10E0_000005E0:
     psq_st f1, 0x0(r5), 0, 0
     psq_st f2, 0x8(r5), 0, 0
     lwz r3, 0x0(r23)
-    bl fn_801F48C8
+    bl save_parseSlotStats
 lbl_fn_801F10E0_00000664:
     lwz r3, 0x0(r23)
     li r4, 0x0

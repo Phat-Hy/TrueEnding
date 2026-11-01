@@ -40,13 +40,13 @@ extern void fn_80614790(void);
 extern void fn_80615AE0(void);
 extern void fn_80615B60(void);
 extern void fn_80615C40(void);
-extern void fn_80615D20(void);
+extern void GXInitLightDistAttn(void);
 extern void fn_80615D50(void);
 extern void fn_80616EF0(void);
 extern void fn_80617030(void);
 extern void fn_80617130(void);
 extern void fn_80617200(void);
-extern void fn_80617220(void);
+extern void GXInitTexObjDefault(void);
 extern void fn_80617270(void);
 extern void GXSetTevColorIn(void);
 extern void fn_80617420(void);
@@ -693,7 +693,7 @@ lbl_font_renderString_00000730:
     li r5, 0x5
     bl gx_setRenderStateParam
     li r3, 0x1
-    bl fn_80615D20
+    bl GXInitLightDistAttn
     li r3, 0x1
     bl GXClearVtxDesc
     li r3, 0x1
@@ -736,7 +736,7 @@ lbl_font_renderString_00000730:
     li r4, 0x1c
     bl GXSetTevKAlphaSel
     li r3, 0x0
-    bl fn_80617220
+    bl GXInitTexObjDefault
     li r3, 0x1
     li r4, 0x1
     li r5, 0x1
@@ -775,7 +775,7 @@ lbl_font_renderString_00000730:
     li r4, 0x1c
     bl GXSetTevKAlphaSel
     li r3, 0x1
-    bl fn_80617220
+    bl GXInitTexObjDefault
     li r3, 0x1
     li r4, 0x0
     li r5, 0x0
@@ -1519,7 +1519,7 @@ asm void fn_80235BF8(void)
     li r4, 0x0
     bl fn_800C0508
     li r3, 0x1
-    bl fn_80615D20
+    bl GXInitLightDistAttn
     li r3, 0x2
     bl GXClearVtxDesc
     li r3, 0x1
@@ -1615,7 +1615,7 @@ asm void fn_80235BF8(void)
     li r4, 0x1c
     bl GXSetTevKAlphaSel
     li r3, 0x1
-    bl fn_80617220
+    bl GXInitTexObjDefault
     li r3, 0x1
     li r4, 0x0
     li r5, 0x0
@@ -1868,7 +1868,7 @@ lbl_fn_80235BF8_000018D4:
     li r5, 0x0
     bl GXSetTevSwapMode
     li r3, 0x1
-    bl fn_80615D20
+    bl GXInitLightDistAttn
     li r3, 0x8
     bl GXClearVtxDesc
     li r3, 0x8
@@ -1910,7 +1910,7 @@ lbl_fn_80235BF8_000018D4:
     li r4, 0x10
     bl GXSetTevKColorSel
     li r3, 0x0
-    bl fn_80617220
+    bl GXInitTexObjDefault
     li r3, 0x0
     li r4, 0x1
     li r5, 0x4
@@ -1965,7 +1965,7 @@ lbl_fn_80235BF8_000019E8:
     li r4, 0x10
     bl GXSetTevKColorSel
     addi r3, r14, 0x1
-    bl fn_80617220
+    bl GXInitTexObjDefault
     addi r3, r14, 0x1
     addi r5, r14, 0x5
     li r4, 0x1

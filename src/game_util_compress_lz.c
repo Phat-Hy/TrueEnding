@@ -23,7 +23,7 @@ extern void actor_findSpawnTemplate(void);
 extern void fn_801170C8(void);
 extern void actor_spawnActorWithId(void);
 extern void save_validateHeader(void);
-extern void fn_801F48C8(void);
+extern void save_parseSlotStats(void);
 extern void save_formatSlotTitle(void);
 extern void saveSlot_readSummary(void);
 extern void save_createWorkerTask(void);
@@ -1021,7 +1021,7 @@ lbl_fn_8058A0F4_00000C54:
     psq_st f1, 0x0(r5), 0, 0
     psq_st f2, 0x8(r5), 0, 0
     lwz r3, 0x5b9c(r3)
-    bl fn_801F48C8
+    bl save_parseSlotStats
     addis r3, r30, 0x2
     addi r4, r29, 0x185
     lwz r3, 0x5b9c(r3)

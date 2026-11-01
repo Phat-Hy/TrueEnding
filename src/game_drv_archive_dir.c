@@ -27,7 +27,7 @@ extern void wcs_vformat(void);
 extern void fn_800F52F0(void);
 extern void fn_800F530C(void);
 extern void fn_800F7FB4(void);
-extern void fn_800F7FF0(void);
+extern void viewport_getNextSequenceId(void);
 extern void fn_80139EFC(void);
 extern void fn_80139F4C(void);
 extern void fn_8013A16C(void);
@@ -919,7 +919,7 @@ lbl_fn_805AB82C_00000AC8:
     fcmpo cr0, f1, f31
     ble lbl_fn_805AB82C_00000B30
     addi r3, r1, 0x34
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
 lbl_fn_805AB82C_00000B30:
     addi r3, r1, 0x10
     addi r4, r1, 0x34

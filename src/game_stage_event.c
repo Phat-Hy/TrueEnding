@@ -16,7 +16,7 @@ extern void fn_80108C10(void);
 extern void fn_8012476C(void);
 extern void fn_8012DF7C(void);
 extern void fn_80148B0C(void);
-extern void fn_801539E0(void);
+extern void inventory_unequipItem(void);
 extern void fn_80155DAC(void);
 extern void debuff_clearStatus(void);
 extern void fn_8018F81C(void);
@@ -936,7 +936,7 @@ lbl_fn_8019E4F4_00000BF4:
     lwz r0, 0x12a4(r3)
     srwi. r0, r0, 31
     beq lbl_fn_8019E4F4_00000C08
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_8019E4F4_00000C08:
     lwz r3, 0x4(r30)
     lwz r0, 0x12a4(r3)
@@ -1741,7 +1741,7 @@ lbl_fn_8019F0A8_0000179C:
     lwz r0, 0x12a4(r3)
     srwi. r0, r0, 31
     beq lbl_fn_8019F0A8_000017B0
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_8019F0A8_000017B0:
     lwz r3, 0x4(r31)
     lwz r0, 0x12a4(r3)

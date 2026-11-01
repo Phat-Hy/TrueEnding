@@ -19,7 +19,7 @@ extern void fn_800FB4B0(void);
 extern void fn_8010653C(void);
 extern void fn_80133130(void);
 extern void fn_801446F0(void);
-extern void fn_801539E0(void);
+extern void inventory_unequipItem(void);
 extern void debuff_clearStatus(void);
 extern void fn_80178864(void);
 extern void fn_801789D8(void);
@@ -440,7 +440,7 @@ asm void fn_801A4B00(void)
     srwi. r0, r0, 31
     beq lbl_fn_801A4B00_0000044C
     mr r3, r4
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_801A4B00_0000044C:
     lwz r3, 0x4(r29)
     addi r4, r29, 0x14

@@ -8,7 +8,7 @@ extern void scapi_initContext(void);
 extern void scapi_getConfigItem(void);
 extern void bta_sys_logEvent(void);
 extern void bta_sys_log(void);
-extern void fn_80629850(void);
+extern void bta_sys_traceDebug(void);
 extern void fn_80629890(void);
 extern void fn_80629E20(void);
 extern void fn_80629E90(void);
@@ -1211,7 +1211,7 @@ asm void fn_806332CC(void)
     mr r6, r28
     addi r3, r3, 0x3
     addi r4, r4, lbl_807B446C@l
-    bl fn_80629850
+    bl bta_sys_traceDebug
 lbl_fn_806332CC_00000F0C:
     lis r31, lbl_80820018@ha
     addi r31, r31, lbl_80820018@l

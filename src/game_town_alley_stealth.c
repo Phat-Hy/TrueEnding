@@ -13,7 +13,7 @@ extern void str_findChar(void);
 extern void fn_800E0000(void);
 extern void magic_dispatchActionCommand(void);
 extern void fn_80124C6C(void);
-extern void fn_801F48C8(void);
+extern void save_parseSlotStats(void);
 extern void thread_findAndNotifySlot(void);
 extern void thread_dispatchToQueue(void);
 extern void fn_803DCA84(void);
@@ -2100,7 +2100,7 @@ lbl_fn_803DBD44_00001C78:
     addi r4, r19, 0x10c6
     psq_st f2, 0x8(r5), 0, 0
     lwz r3, 0x1140(r31)
-    bl fn_801F48C8
+    bl save_parseSlotStats
     addi r5, r1, 0x28
     psq_l f1, 0x0(r20), 0, 0
     psq_l f2, 0x8(r20), 0, 0
@@ -2108,7 +2108,7 @@ lbl_fn_803DBD44_00001C78:
     psq_st f1, 0x0(r5), 0, 0
     psq_st f2, 0x8(r5), 0, 0
     lwz r3, 0x1140(r31)
-    bl fn_801F48C8
+    bl save_parseSlotStats
     addi r5, r1, 0x18
     psq_l f1, 0x0(r20), 0, 0
     psq_l f2, 0x8(r20), 0, 0
@@ -2116,7 +2116,7 @@ lbl_fn_803DBD44_00001C78:
     psq_st f1, 0x0(r5), 0, 0
     psq_st f2, 0x8(r5), 0, 0
     lwz r3, 0x1144(r31)
-    bl fn_801F48C8
+    bl save_parseSlotStats
     addi r5, r1, 0x8
     psq_l f1, 0x0(r20), 0, 0
     psq_l f2, 0x8(r20), 0, 0
@@ -2124,7 +2124,7 @@ lbl_fn_803DBD44_00001C78:
     psq_st f1, 0x0(r5), 0, 0
     psq_st f2, 0x8(r5), 0, 0
     lwz r3, 0x1144(r31)
-    bl fn_801F48C8
+    bl save_parseSlotStats
     lwz r3, 0x1140(r31)
     lfs f3, 0xa0(r3)
     lfs f0, 0x100(r3)

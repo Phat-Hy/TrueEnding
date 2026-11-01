@@ -32,7 +32,7 @@ extern void fn_80159BA4(void);
 extern void actor_getMovementFlags(void);
 extern void fn_80182134(void);
 extern void entity_Instance_constructor(void);
-extern void fn_8035B78C(void);
+extern void entity_Instance_destructor(void);
 extern void fn_803C1560(void);
 extern void fn_803CD958(void);
 extern void PSMTXConcat(void);
@@ -406,7 +406,7 @@ asm void fn_80180960(void)
 lbl_fn_80180960_00000428:
     mr r3, r30
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r31, 0x0
     ble lbl_fn_80180960_00000444
     mr r3, r30

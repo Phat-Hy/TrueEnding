@@ -11,7 +11,7 @@ extern void mem_free(void);
 extern void map_debugLog(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_801539E0(void);
+extern void inventory_unequipItem(void);
 extern void fn_80155DAC(void);
 extern void debuff_clearStatus(void);
 extern void fn_80188A70(void);
@@ -1361,7 +1361,7 @@ lbl_fn_801AAB64_0000114C:
     lwz r0, 0x12a4(r3)
     srwi. r0, r0, 31
     beq lbl_fn_801AAB64_00001160
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_801AAB64_00001160:
     lwz r0, 0x80(r30)
     rlwinm r0, r0, 0, 30, 30

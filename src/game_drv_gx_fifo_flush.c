@@ -26,7 +26,7 @@ extern void GXClearVtxDesc(void);
 extern void fn_80614790(void);
 extern void fn_806149C0(void);
 extern void fn_80614A80(void);
-extern void fn_80615D20(void);
+extern void GXInitLightDistAttn(void);
 extern void fn_80615D50(void);
 extern void fn_80617340(void);
 extern void GXSetTevOrder(void);
@@ -595,7 +595,7 @@ asm void fn_805C03A0(void)
     li r3, 0x0
     bl fn_80614A80
     li r3, 0x1
-    bl fn_80615D20
+    bl GXInitLightDistAttn
     li r3, 0x4
     li r4, 0x0
     li r5, 0x1

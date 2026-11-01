@@ -21,7 +21,7 @@ extern void fn_8012476C(void);
 extern void fn_8013310C(void);
 extern void fn_8013322C(void);
 extern void npc_updateTalkInteraction(void);
-extern void fn_801539E0(void);
+extern void inventory_unequipItem(void);
 extern void fn_80154344(void);
 extern void fn_80155DAC(void);
 extern void fn_80164DCC(void);
@@ -858,7 +858,7 @@ asm void fn_8018EEC4(void)
     lwz r0, 0x12a4(r3)
     srwi. r0, r0, 31
     beq lbl_fn_8018EEC4_000009AC
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_8018EEC4_000009AC:
     lwz r3, 0x4(r30)
     li r4, 0x0
@@ -1617,7 +1617,7 @@ asm void fn_8018F970(void)
     lwz r0, 0x12a4(r3)
     srwi. r0, r0, 31
     beq lbl_fn_8018F970_00001430
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_8018F970_00001430:
     lwz r3, 0x4(r31)
     li r4, 0x0

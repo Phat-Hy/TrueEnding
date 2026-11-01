@@ -52,7 +52,7 @@ extern void fn_800F52F8(void);
 extern void fn_800F72CC(void);
 extern void viewport_getGlobalContext(void);
 extern void fn_800F7FA8(void);
-extern void fn_800F7FF0(void);
+extern void viewport_getNextSequenceId(void);
 extern void fn_800F80A8(void);
 extern void fn_800F80B8(void);
 extern void fn_80116E64(void);
@@ -82,9 +82,9 @@ extern void fn_80317034(void);
 extern void fn_80372574(void);
 extern void fn_803D6EDC(void);
 extern void task_createWorker(void);
-extern void fn_803EC69C(void);
-extern void fn_803EC91C(void);
-extern void fn_803ED0D4(void);
+extern void task_destroyWorker(void);
+extern void task_updateWorker(void);
+extern void task_initWorkerContext(void);
 extern void fn_80417E88(void);
 extern void fn_80417F14(void);
 extern void fn_80417F1C(void);
@@ -830,7 +830,7 @@ asm void fn_80416764(void)
     bl fn_800971D4
     mr r3, r30
     li r4, 0x0
-    bl fn_803EC69C
+    bl task_destroyWorker
     cmpwi r31, 0x0
     ble lbl_fn_80416764_00000970
     mr r3, r30
@@ -1026,7 +1026,7 @@ asm void fn_80416A34(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_803EC91C
+    bl task_updateWorker
     cmpwi r3, 0x0
     bne lbl_fn_80416A34_00000C24
     li r0, 0x2
@@ -1180,7 +1180,7 @@ lbl_fn_80416AA8_00000E20:
     mr r3, r31
     addi r4, r31, 0xf4
     li r5, 0x1
-    bl fn_803ED0D4
+    bl task_initWorkerContext
 lbl_fn_80416AA8_00000E30:
     lwz r0, 0x34(r1)
     lwz r31, 0x2c(r1)
@@ -1591,7 +1591,7 @@ lbl_fn_80417130_00001384:
     bl fn_800971D4
     mr r3, r29
     li r4, 0x0
-    bl fn_803EC69C
+    bl task_destroyWorker
     cmpwi r30, 0x0
     ble lbl_fn_80417130_000013C4
     mr r3, r29
@@ -1615,7 +1615,7 @@ asm void fn_80417224(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_803EC91C
+    bl task_updateWorker
     cmpwi r3, 0x0
     bne lbl_fn_80417224_00001414
     li r0, 0x2
@@ -2363,7 +2363,7 @@ lbl_fn_8041766C_00001D5C:
     addi r3, r1, 0x68
     fmuls f1, f2, f1
     fmsubs f28, f28, f1, f0
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
     fmr f1, f27
     addi r3, r1, 0x68
     bl fn_8012A190
@@ -2372,7 +2372,7 @@ lbl_fn_8041766C_00001D5C:
     bl vec3_mag
     fmr f27, f1
     addi r3, r1, 0x68
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
     b lbl_fn_8041766C_00001EF8
 lbl_fn_8041766C_00001ED0:
     lwz r5, 0xf4(r24)
@@ -2384,7 +2384,7 @@ lbl_fn_8041766C_00001ED0:
     addi r4, r1, 0x2c
     bl vec3_copy
     addi r3, r1, 0x68
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
 lbl_fn_8041766C_00001EF8:
     li r0, 0x1
     stw r0, 0x3d0(r25)

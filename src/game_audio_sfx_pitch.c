@@ -33,7 +33,7 @@ extern void fn_800F72CC(void);
 extern void viewport_getGlobalContext(void);
 extern void fn_800F7FA8(void);
 extern void fn_800F7FD8(void);
-extern void fn_800F7FF0(void);
+extern void viewport_getNextSequenceId(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void fn_80109950(void);
@@ -1852,7 +1852,7 @@ lbl_fn_80314BD8_00001778:
     b lbl_fn_80314BD8_0000207C
 lbl_fn_80314BD8_000017E8:
     addi r3, r1, 0x188
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
     lwz r3, 0x64(r30)
     lfs f0, lbl_80884D04
     lfs f1, 0x30(r3)
@@ -1912,7 +1912,7 @@ lbl_fn_80314BD8_00001878:
     fcmpo cr0, f1, f0
     ble lbl_fn_80314BD8_000018D0
     addi r3, r1, 0x170
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
 lbl_fn_80314BD8_000018D0:
     lfs f0, lbl_80884D20
     fcmpo cr0, f30, f0
@@ -2238,7 +2238,7 @@ lbl_fn_80314BD8_00001D4C:
     fcmpo cr0, f1, f0
     blt lbl_fn_80314BD8_00001D9C
     addi r3, r1, 0x134
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
 lbl_fn_80314BD8_00001D9C:
     addi r3, r1, 0x2c
     addi r4, r1, 0x134

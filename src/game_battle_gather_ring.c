@@ -42,10 +42,10 @@ extern void res_MsgHandle_update(void);
 extern void fn_803EBE74(void);
 extern void fn_803EC0F8(void);
 extern void task_createWorker(void);
-extern void fn_803EC69C(void);
+extern void task_destroyWorker(void);
 extern void fn_803EC7A0(void);
-extern void fn_803EC91C(void);
-extern void fn_803ED0D4(void);
+extern void task_updateWorker(void);
+extern void task_initWorkerContext(void);
 extern void fn_803ED5D0(void);
 extern void fn_803ED774(void);
 extern void fn_803EDB18(void);
@@ -542,7 +542,7 @@ lbl_fn_803F1E8C_000005C4:
 lbl_fn_803F1E8C_000005D0:
     mr r3, r29
     li r4, 0x0
-    bl fn_803EC69C
+    bl task_destroyWorker
     cmpwi r30, 0x0
     ble lbl_fn_803F1E8C_000005EC
     mr r3, r29
@@ -566,7 +566,7 @@ asm void fn_803F2044(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_803EC91C
+    bl task_updateWorker
     cmpwi r3, 0x0
     bne lbl_fn_803F2044_000006C0
     lwz r0, 0x284(r31)
@@ -646,7 +646,7 @@ asm void fn_803F2110(void)
     mr r4, r3
     mr r3, r30
     li r5, 0x1
-    bl fn_803ED0D4
+    bl task_initWorkerContext
 lbl_fn_803F2110_00000740:
     addi r3, r30, 0xf4
     psq_l f1, 0x664(r30), 0, 0
@@ -859,7 +859,7 @@ lbl_fn_803F2344_00000A28:
     mr r4, r3
     mr r3, r31
     li r5, 0x1
-    bl fn_803ED0D4
+    bl task_initWorkerContext
 lbl_fn_803F2344_00000A68:
     addi r3, r31, 0xf4
     psq_l f1, 0x664(r31), 0, 0

@@ -43,7 +43,7 @@ extern void res_Shader_bindParams(void);
 extern void fn_8031FAA4(void);
 extern void fn_8031FE4C(void);
 extern void entity_Instance_constructor(void);
-extern void fn_8035B78C(void);
+extern void entity_Instance_destructor(void);
 extern void world_setLocalFlag(void);
 extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
@@ -973,7 +973,7 @@ asm void fn_8031EC5C(void)
 lbl_fn_8031EC5C_00000C44:
     mr r3, r30
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r31, 0x0
     ble lbl_fn_8031EC5C_00000C60
     mr r3, r30

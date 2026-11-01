@@ -35,7 +35,7 @@ extern void atn_Task_setActive(void);
 extern void bloom_processPasses(void);
 extern void fn_80117914(void);
 extern void fn_80124C6C(void);
-extern void fn_801F48C8(void);
+extern void save_parseSlotStats(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
@@ -2508,7 +2508,7 @@ lbl_spectateCamera_update_00002308:
     addi r30, r30, lbl_8075D5B0@l
     addi r5, r1, 0xb8
     addi r4, r30, 0x22b
-    bl fn_801F48C8
+    bl save_parseSlotStats
     lwz r4, lbl_8087F0A8
     addi r3, r1, 0xc8
     li r5, 0x0
@@ -2517,7 +2517,7 @@ lbl_spectateCamera_update_00002308:
     lwz r3, 0x54(r28)
     addi r4, r30, 0x231
     addi r5, r1, 0xc8
-    bl fn_801F48C8
+    bl save_parseSlotStats
     lwz r4, lbl_8087F0A8
     addi r3, r1, 0xd8
     li r5, 0x0
@@ -2526,7 +2526,7 @@ lbl_spectateCamera_update_00002308:
     lwz r3, 0x58(r28)
     addi r4, r30, 0x22b
     addi r5, r1, 0xd8
-    bl fn_801F48C8
+    bl save_parseSlotStats
     lwz r4, lbl_8087F0A8
     addi r3, r1, 0xe8
     li r5, 0x0
@@ -2535,7 +2535,7 @@ lbl_spectateCamera_update_00002308:
     lwz r3, 0x58(r28)
     addi r4, r30, 0x231
     addi r5, r1, 0xe8
-    bl fn_801F48C8
+    bl save_parseSlotStats
     cmpwi r29, 0x0
     beq lbl_spectateCamera_update_0000240C
     lwz r3, 0x54(r28)

@@ -58,7 +58,7 @@ extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
 extern void fn_8031F2A4(void);
 extern void entity_Instance_constructor(void);
-extern void fn_8035B78C(void);
+extern void entity_Instance_destructor(void);
 extern void fn_803754C4(void);
 extern void fn_803C1560(void);
 extern void fn_80568EE4(void);
@@ -603,7 +603,7 @@ asm void fn_805664E0(void)
 lbl_fn_805664E0_000005F0:
     mr r3, r30
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r31, 0x0
     ble lbl_fn_805664E0_0000060C
     mr r3, r30

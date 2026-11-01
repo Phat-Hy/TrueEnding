@@ -23,7 +23,7 @@ extern void ref_releaseHandle(void);
 extern void wcs_vformat(void);
 extern void fn_800E0AA8(void);
 extern void fn_800E0AB0(void);
-extern void fn_800F7FF0(void);
+extern void viewport_getNextSequenceId(void);
 extern void system_getNextSequenceId(void);
 extern void viewport_updateCulling(void);
 extern void clip_calculateFrustum(void);
@@ -145,7 +145,7 @@ asm void fn_80296B8C(void)
     b lbl_fn_80296B8C_000000B8
 lbl_fn_80296B8C_000000B0:
     addi r3, r1, 0x14
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
 lbl_fn_80296B8C_000000B8:
     addi r3, r31, 0x1510
     li r30, 0x0

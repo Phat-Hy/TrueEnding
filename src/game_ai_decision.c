@@ -43,7 +43,7 @@ extern void fn_8026474C(void);
 extern void fn_802648CC(void);
 extern void fn_80264C88(void);
 extern void entity_Instance_constructor(void);
-extern void fn_8035B78C(void);
+extern void entity_Instance_destructor(void);
 extern void fn_803C1560(void);
 extern void chest_spawnLoot(void);
 extern void boss_getOffset54(void);
@@ -710,7 +710,7 @@ lbl_fn_80262840_00000844:
 lbl_fn_80262840_00000854:
     mr r3, r29
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r30, 0x0
     ble lbl_fn_80262840_00000870
     mr r3, r29
@@ -974,7 +974,7 @@ lbl_fn_80262C40_00000C04:
 lbl_fn_80262C40_00000C14:
     mr r3, r29
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r30, 0x0
     ble lbl_fn_80262C40_00000C30
     mr r3, r29

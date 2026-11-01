@@ -66,7 +66,7 @@ extern void fn_8029A0A8(void);
 extern void fn_8029B704(void);
 extern void fn_8029C564(void);
 extern void entity_Instance_constructor(void);
-extern void fn_8035B78C(void);
+extern void entity_Instance_destructor(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
 extern void kpad_getClampData(void);
@@ -900,7 +900,7 @@ lbl_fn_80293BC8_00000A74:
     bl __destroy_new_array
     mr r3, r30
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r31, 0x0
     ble lbl_fn_80293BC8_00000AA8
     mr r3, r30

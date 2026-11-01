@@ -32,7 +32,7 @@ extern void __GXSetVtxDesc(void);
 extern void GXClearVtxDesc(void);
 extern void fn_80614790(void);
 extern void fn_80615400(void);
-extern void fn_80615D20(void);
+extern void GXInitLightDistAttn(void);
 extern void fn_80615FF0(void);
 extern void fn_80616250(void);
 extern void GXDrawDone(void);
@@ -123,7 +123,7 @@ asm void fn_805B4DF4(void)
     li r3, 0x1
     bl GXClearVtxDesc
     li r3, 0x0
-    bl fn_80615D20
+    bl GXInitLightDistAttn
     li r3, 0x1
     bl GXSetNumTevStages
     li r3, 0x0
@@ -258,7 +258,7 @@ asm void fn_805B4F0C(void)
     li r3, 0x0
     bl fn_80615400
     li r3, 0x0
-    bl fn_80615D20
+    bl GXInitLightDistAttn
     li r3, 0x2
     bl GXClearVtxDesc
     li r3, 0x0

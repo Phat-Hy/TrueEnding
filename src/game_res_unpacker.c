@@ -26,7 +26,7 @@ extern void fn_80124C6C(void);
 extern void fn_80155DAC(void);
 extern void fn_8016EB48(void);
 extern void fn_801750FC(void);
-extern void fn_801F48C8(void);
+extern void save_parseSlotStats(void);
 extern void fn_80227F78(void);
 extern void fn_8022ADD4(void);
 extern void texCache_freeBlock(void);
@@ -714,7 +714,7 @@ lbl_fn_802297AC_00000834:
     addi r4, r30, 0x53
     psq_st f2, 0x8(r5), 0, 0
     lwz r3, 0x10c(r31)
-    bl fn_801F48C8
+    bl save_parseSlotStats
     addi r5, r1, 0x8
     psq_l f1, 0x0(r29), 0, 0
     psq_l f2, 0x8(r29), 0, 0
@@ -722,7 +722,7 @@ lbl_fn_802297AC_00000834:
     psq_st f1, 0x0(r5), 0, 0
     psq_st f2, 0x8(r5), 0, 0
     lwz r3, 0x10c(r31)
-    bl fn_801F48C8
+    bl save_parseSlotStats
 lbl_fn_802297AC_0000089C:
     mr r3, r31
     bl fn_80229414

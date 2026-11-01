@@ -27,7 +27,7 @@ extern void fn_800A58D0(void);
 extern void fn_800F7260(void);
 extern void fn_800F72CC(void);
 extern void fn_800F7FD8(void);
-extern void fn_800F7FF0(void);
+extern void viewport_getNextSequenceId(void);
 extern void fn_801002DC(void);
 extern void fn_80112960(void);
 extern void fn_80113CCC(void);
@@ -210,7 +210,7 @@ asm void fn_80382A1C(void)
     bl fn_80116BA4
     fmr f30, f1
     addi r3, r1, 0x170
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
     addi r3, r1, 0xec
     addi r4, r1, 0x170
     bl fn_8013C3B4
@@ -348,7 +348,7 @@ lbl_fn_80382A1C_000001E4:
     addi r3, r1, 0x11c
     bl vec3_mag
     addi r3, r1, 0x11c
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
     addi r3, r1, 0x258
     bl fn_80140500
     addi r3, r1, 0xb0

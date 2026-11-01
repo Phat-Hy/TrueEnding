@@ -104,7 +104,7 @@ void fn_800F7FA8(void);
 void fn_800F7FB4(void);
 void fn_800F7FBC(void);
 void fn_800F7FD8(void);
-void fn_800F7FF0(void);
+void viewport_getNextSequenceId(void);
 void fn_800F7FF8(void);
 void fn_800F8014(void);
 void fn_800F8098(void);
@@ -446,7 +446,7 @@ lbl_fn_800F72F4_000003A4:
     fsubs f1, f1, f2
     fdivs f0, f1, f0
     stfs f0, 0x24(r1)
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
     addi r3, r1, 0x198
     addi r4, r1, 0x1a4
     bl vec3_toEulerAngles
@@ -611,7 +611,7 @@ lbl_fn_800F72F4_00000668:
     bl fn_800F8524
     stfs f1, 0x24(r1)
     addi r3, r1, 0x1a4
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
     addi r3, r1, 0xc0
     addi r4, r1, 0x1a4
     bl vec3_toEulerAngles
@@ -1112,7 +1112,7 @@ asm void fn_800F7FD8(void)
     b PSVECNormalize
 }
 
-asm void fn_800F7FF0(void)
+asm void viewport_getNextSequenceId(void)
 {
     nofralloc
     mr r4, r3

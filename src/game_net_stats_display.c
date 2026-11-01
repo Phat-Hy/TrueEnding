@@ -48,7 +48,7 @@ extern void res_findResourceSlot(void);
 extern void fn_8023A184(void);
 extern void res_Shader_bindParams(void);
 extern void entity_Instance_constructor(void);
-extern void fn_8035B78C(void);
+extern void entity_Instance_destructor(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
 extern void fn_803E2A30(void);
@@ -426,7 +426,7 @@ lbl_fn_805460D0_0000042C:
     bl res_Resource_destructor
     mr r3, r29
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r30, 0x0
     ble lbl_fn_805460D0_00000460
     mr r3, r29

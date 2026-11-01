@@ -48,7 +48,7 @@ void fn_80615AD0(void);
 void fn_80615AE0(void);
 void fn_80615B60(void);
 void fn_80615C40(void);
-void fn_80615D20(void);
+void GXInitLightDistAttn(void);
 void fn_80615D50(void);
 void fn_80615E00(void);
 void fn_80615F30(void);
@@ -520,7 +520,7 @@ lbl_fn_80615C40_000005F0:
     blr
 }
 
-asm void fn_80615D20(void)
+asm void GXInitLightDistAttn(void)
 {
     nofralloc
     lwz r4, __GXData

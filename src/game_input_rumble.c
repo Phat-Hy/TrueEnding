@@ -38,7 +38,7 @@ extern void fn_801446F0(void);
 extern void quest_evaluateConditions(void);
 extern void quest_updateFlow(void);
 extern void dialog_updateScriptState(void);
-extern void fn_801539E0(void);
+extern void inventory_unequipItem(void);
 extern void fn_80155DAC(void);
 extern void fn_80158BB4(void);
 extern void fn_80164DCC(void);
@@ -72,7 +72,7 @@ extern void fn_802F566C(void);
 extern void fn_802F58A0(void);
 extern void fn_802F66CC(void);
 extern void entity_Instance_constructor(void);
-extern void fn_8035B78C(void);
+extern void entity_Instance_destructor(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
@@ -857,7 +857,7 @@ asm void fn_802F1240(void)
     srwi. r0, r0, 31
     beq lbl_fn_802F1240_00000950
     mr r3, r31
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_802F1240_00000950:
     lwz r0, 0x12a4(r31)
     extrwi. r0, r0, 1, 25
@@ -1368,7 +1368,7 @@ lbl_fn_802F18E0_00001080:
     bl ref_releaseHandle
     mr r3, r29
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r30, 0x0
     ble lbl_fn_802F18E0_000010A8
     mr r3, r29

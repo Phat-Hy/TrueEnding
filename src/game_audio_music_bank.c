@@ -29,7 +29,7 @@ extern void fn_800EB7A0(void);
 extern void fn_800EC204(void);
 extern void fn_800F7250(void);
 extern void fn_800F7FD8(void);
-extern void fn_800F7FF0(void);
+extern void viewport_getNextSequenceId(void);
 extern void fn_800F8348(void);
 extern void fn_800F8524(void);
 extern void fn_801162A0(void);
@@ -1308,7 +1308,7 @@ lbl_fn_8030B74C_00001108:
     addi r5, r30, 0x528
     bl vec3_sub
     addi r3, r1, 0x64
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
     addi r3, r1, 0x58
     addi r4, r1, 0x64
     bl vec3_toEulerAngles
@@ -1346,11 +1346,11 @@ lbl_fn_8030B74C_0000118C:
     bl vec3_copy
 lbl_fn_8030B74C_000011AC:
     addi r3, r1, 0x4c
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
     addi r3, r1, 0x40
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
     addi r3, r1, 0x34
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
     addi r3, r1, 0x28
     addi r4, r1, 0x4c
     bl vec3_toEulerAngles

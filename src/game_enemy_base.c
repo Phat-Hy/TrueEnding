@@ -9,7 +9,7 @@ extern void fn_80128CF8(void);
 extern void fn_80129144(void);
 extern void fn_80129670(void);
 extern void fn_80153698(void);
-extern void fn_801539E0(void);
+extern void inventory_unequipItem(void);
 extern void fn_80155DAC(void);
 extern void fn_8016EB48(void);
 extern void actor_getMovementFlags(void);
@@ -285,7 +285,7 @@ lbl_fn_801255C8_000002E0:
     lwz r0, 0x12a4(r3)
     srwi. r0, r0, 31
     beq lbl_fn_801255C8_00000304
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_801255C8_00000304:
     lwz r3, 0xa4(r31)
     lwz r0, 0x12a4(r3)

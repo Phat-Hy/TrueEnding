@@ -13,7 +13,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void fn_800A56A8(void);
 extern void fn_8010A308(void);
 extern void fn_801446F0(void);
-extern void fn_801539E0(void);
+extern void inventory_unequipItem(void);
 extern void fn_80155DAC(void);
 extern void fn_80176DFC(void);
 extern void chest_spawnLoot(void);
@@ -1026,7 +1026,7 @@ asm void fn_801B9A54(void)
     addi r30, r3, 0xb0
     srwi. r0, r0, 31
     beq lbl_fn_801B9A54_00000CDC
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_801B9A54_00000CDC:
     lwz r3, 0x4(r29)
     lwz r0, 0x12a4(r3)

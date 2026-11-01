@@ -19,7 +19,7 @@ extern void mission_updateStub(void);
 extern void boss_recordDamage(void);
 extern void atn_Task_unlink(void);
 extern void fn_800EC204(void);
-extern void fn_800F7FF0(void);
+extern void viewport_getNextSequenceId(void);
 extern void fn_801162A0(void);
 extern void fn_8011F8F4(void);
 extern void fn_8011F91C(void);
@@ -1243,7 +1243,7 @@ lbl_fn_803A26F4_00000F54:
     fcmpo cr0, f1, f0
     blt lbl_fn_803A26F4_00000F98
     addi r3, r1, 0xe0
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
 lbl_fn_803A26F4_00000F98:
     fmr f1, f31
     addi r3, r1, 0xe0
@@ -1281,7 +1281,7 @@ lbl_fn_803A26F4_00000F98:
     fcmpo cr0, f1, f0
     blt lbl_fn_803A26F4_0000102C
     addi r3, r1, 0xd4
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
 lbl_fn_803A26F4_0000102C:
     cmpwi r28, 0x0
     bne lbl_fn_803A26F4_00001064
@@ -1437,7 +1437,7 @@ lbl_fn_803A26F4_0000121C:
     fcmpo cr0, f1, f0
     blt lbl_fn_803A26F4_0000125C
     addi r3, r1, 0xa4
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
 lbl_fn_803A26F4_0000125C:
     cmpwi r28, 0x0
     bne lbl_fn_803A26F4_00001294
@@ -1501,7 +1501,7 @@ lbl_fn_803A26F4_00001304:
     fcmpo cr0, f1, f0
     blt lbl_fn_803A26F4_00001344
     addi r3, r1, 0x8c
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
 lbl_fn_803A26F4_00001344:
     cmpwi r28, 0x0
     bne lbl_fn_803A26F4_0000137C

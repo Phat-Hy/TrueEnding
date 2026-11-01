@@ -35,7 +35,7 @@ extern void res_MsgHandle_update(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
 extern void fn_803EC7A0(void);
-extern void fn_803ED0D4(void);
+extern void task_initWorkerContext(void);
 extern void fn_803ED5D0(void);
 extern void fn_803ED774(void);
 extern void boss_getOffset54(void);
@@ -186,7 +186,7 @@ lbl_fn_803F4D98_0000013C:
     mr r4, r3
     mr r3, r31
     li r5, 0x1
-    bl fn_803ED0D4
+    bl task_initWorkerContext
 lbl_fn_803F4D98_0000017C:
     addi r3, r31, 0x4c4
     psq_l f1, 0xfc(r31), 0, 0

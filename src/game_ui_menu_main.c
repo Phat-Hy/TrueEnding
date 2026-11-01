@@ -12,7 +12,7 @@ extern void map_debugLog(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void quest_updateFlow(void);
-extern void fn_801539E0(void);
+extern void inventory_unequipItem(void);
 extern void fn_80154344(void);
 extern void equip_applyToCharacter(void);
 extern void fn_80155DAC(void);
@@ -1339,7 +1339,7 @@ lbl_fn_801B4D34_00001140:
     lwz r0, 0x12a4(r3)
     srwi. r0, r0, 31
     beq lbl_fn_801B4D34_00001154
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_801B4D34_00001154:
     lwz r3, 0x4(r31)
     li r4, 0x0

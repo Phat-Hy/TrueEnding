@@ -91,7 +91,7 @@ extern void fn_80332F78(void);
 extern void fn_80333024(void);
 extern void fn_803333BC(void);
 extern void entity_Instance_constructor(void);
-extern void fn_8035B78C(void);
+extern void entity_Instance_destructor(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
 extern void boss_getOffset54(void);
@@ -445,7 +445,7 @@ lbl_fn_8032DDD0_00000394:
     bl __destroy_new_array
     mr r3, r29
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r30, 0x0
     ble lbl_fn_8032DDD0_000003E0
     mr r3, r29

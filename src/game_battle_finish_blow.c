@@ -28,9 +28,9 @@ extern void fn_80097E80(void);
 extern void fn_80158CA4(void);
 extern void world_getLocalFlag(void);
 extern void task_createWorker(void);
-extern void fn_803EC69C(void);
+extern void task_destroyWorker(void);
 extern void fn_803EC758(void);
-extern void fn_803EC91C(void);
+extern void task_updateWorker(void);
 extern void fn_803ED774(void);
 extern void fn_8040161C(void);
 extern void PSMTXConcat(void);
@@ -971,7 +971,7 @@ lbl_fn_80402A9C_00000C90:
 lbl_fn_80402A9C_00000C9C:
     mr r3, r30
     li r4, 0x0
-    bl fn_803EC69C
+    bl task_destroyWorker
     cmpwi r31, 0x0
     ble lbl_fn_80402A9C_00000CB8
     mr r3, r30
@@ -996,7 +996,7 @@ asm void fn_80402B24(void)
     stw r30, 0x18(r1)
     stw r29, 0x14(r1)
     mr r29, r3
-    bl fn_803EC91C
+    bl task_updateWorker
     cmpwi r3, 0x0
     beq lbl_fn_80402B24_00000D04
     li r0, 0x1

@@ -47,7 +47,7 @@ extern void res_registerResource(void);
 extern void fn_803E598C(void);
 extern void task_createWorker(void);
 extern void fn_803EC7A0(void);
-extern void fn_803EC91C(void);
+extern void task_updateWorker(void);
 extern void fn_803ED774(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
@@ -1392,7 +1392,7 @@ asm void fn_803F94E0(void)
     stw r0, 0x34(r1)
     stw r31, 0x2c(r1)
     mr r31, r3
-    bl fn_803EC91C
+    bl task_updateWorker
     cmpwi r3, 0x0
     bne lbl_fn_803F94E0_00001240
     lwz r3, 0xf4(r31)

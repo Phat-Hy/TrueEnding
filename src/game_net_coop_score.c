@@ -75,7 +75,7 @@ extern void fn_80614190(void);
 extern void GXSetTexCopySrc(void);
 extern void GXSetTexCopyDst(void);
 extern void GXCopyTex(void);
-extern void fn_80615D20(void);
+extern void GXInitLightDistAttn(void);
 extern void fn_80615FF0(void);
 extern void fn_80616250(void);
 extern void fn_80617340(void);
@@ -305,7 +305,7 @@ lbl_fn_804ABA2C_00000144:
     li r3, 0x1
     bl GXClearVtxDesc
     li r3, 0x0
-    bl fn_80615D20
+    bl GXInitLightDistAttn
     li r3, 0x1
     bl GXSetNumTevStages
     li r3, 0x0

@@ -23,7 +23,7 @@ extern void fn_800F72CC(void);
 extern void viewport_getGlobalContext(void);
 extern void fn_800F7FA8(void);
 extern void fn_800F7FD8(void);
-extern void fn_800F7FF0(void);
+extern void viewport_getNextSequenceId(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800FDB20(void);
 extern void fn_80101434(void);
@@ -1099,14 +1099,14 @@ asm void fn_8031D350(void)
     addi r5, r31, 0x528
     bl vec3_sub
     addi r3, r1, 0x74
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
     addi r3, r31, 0x1524
     addi r4, r1, 0x74
     bl vec3_copy
     lfs f0, lbl_80884DF0
     addi r3, r31, 0x1524
     stfs f0, 0x1528(r31)
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
     lfs f1, lbl_80884E34
     addi r3, r1, 0x50
     addi r4, r31, 0x1524

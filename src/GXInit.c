@@ -55,7 +55,7 @@ extern void fn_80615400(void);
 extern void fn_806156C0(void);
 extern void fn_80615B60(void);
 extern void fn_80615C40(void);
-extern void fn_80615D20(void);
+extern void GXInitLightDistAttn(void);
 extern void fn_80615D50(void);
 extern void fn_80615FF0(void);
 extern void fn_806165B0(void);
@@ -64,7 +64,7 @@ extern void fn_80616800(void);
 extern void fn_80616820(void);
 extern void fn_80617030(void);
 extern void fn_80617200(void);
-extern void fn_80617220(void);
+extern void GXInitTexObjDefault(void);
 extern void fn_80617340(void);
 extern void GXSetTevKColorSel(void);
 extern void GXSetTevKAlphaSel(void);
@@ -780,7 +780,7 @@ lbl___GXInitGX_00000800:
     li r4, 0x0
     bl fn_80618630
     li r3, 0x0
-    bl fn_80615D20
+    bl GXInitLightDistAttn
     li r3, 0x4
     li r4, 0x0
     li r5, 0x0
@@ -990,7 +990,7 @@ lbl___GXInitGX_00000C4C:
     li r31, 0x0
 lbl___GXInitGX_00000CE4:
     mr r3, r31
-    bl fn_80617220
+    bl GXInitTexObjDefault
     addi r31, r31, 0x1
     cmplwi r31, 0x10
     blt lbl___GXInitGX_00000CE4

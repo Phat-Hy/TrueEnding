@@ -36,10 +36,10 @@ extern void res_MsgHandle_update(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
 extern void task_createWorker(void);
-extern void fn_803EC69C(void);
+extern void task_destroyWorker(void);
 extern void fn_803EC7A0(void);
-extern void fn_803EC91C(void);
-extern void fn_803ED0D4(void);
+extern void task_updateWorker(void);
+extern void task_initWorkerContext(void);
 extern void fn_803ED5D0(void);
 extern void fn_803ED774(void);
 extern void fn_803EDB18(void);
@@ -784,7 +784,7 @@ lbl_fn_8040FC30_000008D0:
     bl fn_800971D4
     mr r3, r29
     li r4, 0x0
-    bl fn_803EC69C
+    bl task_destroyWorker
     cmpwi r30, 0x0
     ble lbl_fn_8040FC30_000008F8
     mr r3, r29
@@ -808,7 +808,7 @@ asm void fn_8040FCE4(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_803EC91C
+    bl task_updateWorker
     cmpwi r3, 0x0
     bne lbl_fn_8040FCE4_0000094C
     mr r3, r31
@@ -877,7 +877,7 @@ lbl_fn_8040FD30_000009E0:
     mr r4, r3
     mr r3, r31
     li r5, 0x1
-    bl fn_803ED0D4
+    bl task_initWorkerContext
 lbl_fn_8040FD30_00000A20:
     lwz r0, 0x54(r31)
     cmpwi r0, 0x3
@@ -1290,7 +1290,7 @@ asm void fn_80410358(void)
     mr r4, r3
     mr r3, r31
     li r5, 0x1
-    bl fn_803ED0D4
+    bl task_initWorkerContext
 lbl_fn_80410358_00000FF0:
     addi r3, r31, 0x4c4
     psq_l f1, 0xfc(r31), 0, 0
@@ -1552,7 +1552,7 @@ lbl_fn_80410698_00001320:
     mr r4, r3
     mr r3, r30
     li r5, 0x1
-    bl fn_803ED0D4
+    bl task_initWorkerContext
 lbl_fn_80410698_000013AC:
     addi r3, r30, 0x4c4
     psq_l f1, 0xfc(r30), 0, 0
@@ -1672,7 +1672,7 @@ lbl_fn_80410698_00001500:
     mr r4, r3
     mr r3, r30
     li r5, 0x1
-    bl fn_803ED0D4
+    bl task_initWorkerContext
 lbl_fn_80410698_00001578:
     lwz r12, 0x0(r30)
     mr r3, r30
@@ -1842,7 +1842,7 @@ asm void fn_80410B38(void)
     bl fn_800971D4
     mr r3, r30
     li r4, 0x0
-    bl fn_803EC69C
+    bl task_destroyWorker
     cmpwi r31, 0x0
     ble lbl_fn_80410B38_000017B8
     mr r3, r30
@@ -1863,7 +1863,7 @@ asm void fn_80410BA0(void)
     stwu r1, -0x10(r1)
     mflr r0
     stw r0, 0x14(r1)
-    bl fn_803EC91C
+    bl task_updateWorker
     cntlzw r0, r3
     srwi r3, r0, 5
     lwz r0, 0x14(r1)

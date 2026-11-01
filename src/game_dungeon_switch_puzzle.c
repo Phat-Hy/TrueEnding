@@ -18,7 +18,7 @@ extern void fn_801333A4(void);
 extern void fn_80160324(void);
 extern void fn_8016DAB0(void);
 extern void fn_801789D8(void);
-extern void fn_801F48C8(void);
+extern void save_parseSlotStats(void);
 extern void fn_801F4C14(void);
 extern void save_computeCrc32(void);
 extern void fn_801F6D7C(void);
@@ -1692,7 +1692,7 @@ lbl_fn_803E3468_0000170C:
     addi r4, r24, 0x10c6
     psq_st f1, 0x0(r5), 0, 0
     psq_st f2, 0x8(r5), 0, 0
-    bl fn_801F48C8
+    bl save_parseSlotStats
     mulli r0, r28, 0x18
     addi r5, r1, 0x48
     mr r3, r25
@@ -1702,7 +1702,7 @@ lbl_fn_803E3468_0000170C:
     psq_l f2, 0x10(r6), 0, 0
     psq_st f1, 0x0(r5), 0, 0
     psq_st f2, 0x8(r5), 0, 0
-    bl fn_801F48C8
+    bl save_parseSlotStats
     addi r3, r24, 0x14fe
     addi r23, r25, 0x58
     bl str_findChar
@@ -1849,7 +1849,7 @@ lbl_fn_803E3468_00001940:
     psq_l f2, 0x14(r6), 0, 0
     psq_st f1, 0x0(r5), 0, 0
     psq_st f2, 0x8(r5), 0, 0
-    bl fn_801F48C8
+    bl save_parseSlotStats
     mulli r0, r29, 0x1c
     addi r5, r1, 0x28
     mr r3, r25
@@ -1859,7 +1859,7 @@ lbl_fn_803E3468_00001940:
     psq_l f2, 0x14(r6), 0, 0
     psq_st f1, 0x0(r5), 0, 0
     psq_st f2, 0x8(r5), 0, 0
-    bl fn_801F48C8
+    bl save_parseSlotStats
     b lbl_fn_803E3468_00001AB8
 lbl_fn_803E3468_000019BC:
     mulli r3, r30, 0x1c
@@ -1918,7 +1918,7 @@ lbl_fn_803E3468_00001A40:
     psq_l f2, 0x14(r6), 0, 0
     psq_st f1, 0x0(r5), 0, 0
     psq_st f2, 0x8(r5), 0, 0
-    bl fn_801F48C8
+    bl save_parseSlotStats
     mulli r0, r30, 0x1c
     addi r5, r1, 0x8
     mr r3, r25
@@ -1928,7 +1928,7 @@ lbl_fn_803E3468_00001A40:
     psq_l f2, 0x14(r6), 0, 0
     psq_st f1, 0x0(r5), 0, 0
     psq_st f2, 0x8(r5), 0, 0
-    bl fn_801F48C8
+    bl save_parseSlotStats
 lbl_fn_803E3468_00001AB8:
     addi r11, r1, 0xd0
     psq_l f31, 0xd8(r1), 0, 0

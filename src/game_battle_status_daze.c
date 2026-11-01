@@ -43,11 +43,11 @@ extern void res_MsgHandle_update(void);
 extern void res_registerResource(void);
 extern void world_setLocalFlag(void);
 extern void task_createWorker(void);
-extern void fn_803EC69C(void);
+extern void task_destroyWorker(void);
 extern void fn_803EC758(void);
 extern void fn_803EC7A0(void);
-extern void fn_803EC91C(void);
-extern void fn_803ED0D4(void);
+extern void task_updateWorker(void);
+extern void task_initWorkerContext(void);
 extern void fn_803ED5D0(void);
 extern void fn_803ED774(void);
 extern void fn_803EDB18(void);
@@ -537,7 +537,7 @@ lbl_fn_8042E47C_00000500:
     bl fn_800971D4
     mr r3, r29
     li r4, 0x0
-    bl fn_803EC69C
+    bl task_destroyWorker
     cmpwi r30, 0x0
     ble lbl_fn_8042E47C_00000528
     mr r3, r29
@@ -561,7 +561,7 @@ asm void fn_8042E51C(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_803EC91C
+    bl task_updateWorker
     cmpwi r3, 0x0
     bne lbl_fn_8042E51C_00000588
     mr r3, r31
@@ -609,7 +609,7 @@ asm void fn_8042E574(void)
     mr r4, r3
     mr r3, r31
     li r5, 0x1
-    bl fn_803ED0D4
+    bl task_initWorkerContext
 lbl_fn_8042E574_00000604:
     psq_l f1, 0x6c(r31), 0, 0
     li r5, 0x1
@@ -688,7 +688,7 @@ lbl_fn_8042E640_000006E0:
     mr r4, r3
     mr r3, r31
     li r5, 0x1
-    bl fn_803ED0D4
+    bl task_initWorkerContext
 lbl_fn_8042E640_00000720:
     lwz r0, 0x87c(r31)
     cmpwi r0, 0x0
@@ -1516,7 +1516,7 @@ asm void fn_8042F240(void)
 lbl_fn_8042F240_000012A0:
     mr r3, r30
     li r4, 0x0
-    bl fn_803EC69C
+    bl task_destroyWorker
     cmpwi r31, 0x0
     ble lbl_fn_8042F240_000012BC
     mr r3, r30
@@ -1673,7 +1673,7 @@ asm void fn_8042F48C(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_803EC91C
+    bl task_updateWorker
     cmpwi r3, 0x0
     bne lbl_fn_8042F48C_000014E8
     li r0, 0x0

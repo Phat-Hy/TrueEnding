@@ -25,7 +25,7 @@ extern void actor_findSpawnTemplate(void);
 extern void actor_spawnActorWithId(void);
 extern void save_validateHeader(void);
 extern void fn_801F4728(void);
-extern void fn_801F48C8(void);
+extern void save_parseSlotStats(void);
 extern void save_formatSlotTitle(void);
 extern void saveSlot_readSummary(void);
 extern void save_createWorkerTask(void);
@@ -1017,7 +1017,7 @@ asm void fn_805866F8(void)
     psq_l f2, 0x8(r29), 0, 0
     psq_st f1, 0x0(r5), 0, 0
     psq_st f2, 0x8(r5), 0, 0
-    bl fn_801F48C8
+    bl save_parseSlotStats
     addi r5, r1, 0x8
     psq_l f1, 0x0(r29), 0, 0
     psq_l f2, 0x8(r29), 0, 0
@@ -1025,7 +1025,7 @@ asm void fn_805866F8(void)
     psq_st f1, 0x0(r5), 0, 0
     addi r4, r31, 0x199
     psq_st f2, 0x8(r5), 0, 0
-    bl fn_801F48C8
+    bl save_parseSlotStats
 lbl_fn_805866F8_00000C9C:
     addi r3, r1, 0x28
     li r29, 0x0

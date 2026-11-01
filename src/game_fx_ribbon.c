@@ -16,7 +16,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800E0AA8(void);
 extern void fn_800E0AB0(void);
-extern void fn_800F7FF0(void);
+extern void viewport_getNextSequenceId(void);
 extern void fn_800F8524(void);
 extern void system_getNextSequenceId(void);
 extern void fn_801162A0(void);
@@ -189,7 +189,7 @@ lbl_fn_8028AA38_00000118:
     addi r5, r30, 0x528
     bl vec3_sub
     addi r3, r1, 0xa0
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
     addi r3, r1, 0x94
     addi r4, r1, 0xa0
     bl vec3_toEulerAngles
@@ -240,11 +240,11 @@ lbl_fn_8028AA38_000001CC:
     bl vec3_copy
 lbl_fn_8028AA38_000001EC:
     addi r3, r1, 0x88
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
     addi r3, r1, 0x7c
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
     addi r3, r1, 0x70
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
     addi r3, r1, 0x58
     addi r4, r1, 0x88
     bl vec3_toEulerAngles

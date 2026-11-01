@@ -33,11 +33,11 @@ extern void cam_destroyMsgHandle(void);
 extern void res_MsgHandle_constructor(void);
 extern void kpad_getClampData(void);
 extern void task_createWorker(void);
-extern void fn_803EC69C(void);
+extern void task_destroyWorker(void);
 extern void fn_803EC758(void);
 extern void fn_803EC7A0(void);
-extern void fn_803EC91C(void);
-extern void fn_803ED0D4(void);
+extern void task_updateWorker(void);
+extern void task_initWorkerContext(void);
 extern void fn_803ED5D0(void);
 extern void fn_803ED774(void);
 extern void fn_803EDB18(void);
@@ -504,7 +504,7 @@ asm void fn_804182A8(void)
     bl fn_800971D4
     mr r3, r30
     li r4, 0x0
-    bl fn_803EC69C
+    bl task_destroyWorker
     cmpwi r31, 0x0
     ble lbl_fn_804182A8_00000474
     mr r3, r30
@@ -534,7 +534,7 @@ asm void fn_80418320(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_803EC91C
+    bl task_updateWorker
     cmpwi r3, 0x0
     bne lbl_fn_80418320_00000510
     mr r3, r31
@@ -555,7 +555,7 @@ asm void fn_80418320(void)
     mr r4, r3
     mr r3, r31
     li r5, 0x1
-    bl fn_803ED0D4
+    bl task_initWorkerContext
 lbl_fn_80418320_00000504:
     stw r31, lbl_8087F4B8
     li r3, 0x1
@@ -592,7 +592,7 @@ asm void fn_804183B0(void)
     mr r4, r3
     mr r3, r31
     li r5, 0x1
-    bl fn_803ED0D4
+    bl task_initWorkerContext
 lbl_fn_804183B0_00000578:
     mr r3, r31
     bl fn_804186D8
@@ -1619,7 +1619,7 @@ lbl_fn_8041919C_000013CC:
     bl fn_800971D4
     mr r3, r28
     li r4, 0x0
-    bl fn_803EC69C
+    bl task_destroyWorker
     cmpwi r29, 0x0
     ble lbl_fn_8041919C_000013F4
     mr r3, r28
@@ -1644,7 +1644,7 @@ asm void fn_804192A0(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_803EC91C
+    bl task_updateWorker
     cmpwi r3, 0x0
     bne lbl_fn_804192A0_000014B4
     mr r3, r31
@@ -1717,7 +1717,7 @@ asm void fn_80419354(void)
     mr r4, r3
     mr r3, r31
     li r5, 0x1
-    bl fn_803ED0D4
+    bl task_initWorkerContext
 lbl_fn_80419354_00001530:
     lwz r0, 0x4c4(r31)
     cmpwi r0, 0x0
@@ -2086,7 +2086,7 @@ lbl_fn_8041953C_00001A50:
     mr r4, r3
     mr r3, r31
     li r5, 0x1
-    bl fn_803ED0D4
+    bl task_initWorkerContext
 lbl_fn_8041953C_00001A90:
     lwz r0, 0x4c4(r31)
     cmpwi r0, 0x0

@@ -39,8 +39,8 @@ extern void res_registerResource(void);
 extern void kpad_getClampData(void);
 extern void task_createWorker(void);
 extern void fn_803EC758(void);
-extern void fn_803EC91C(void);
-extern void fn_803ED0D4(void);
+extern void task_updateWorker(void);
+extern void task_initWorkerContext(void);
 extern void fn_803ED5D0(void);
 extern void fn_803ED774(void);
 extern void fn_8040B200(void);
@@ -425,11 +425,11 @@ asm void fn_80408C94(void)
     mr r3, r31
     addi r4, r31, 0xf4
     li r5, 0x1
-    bl fn_803ED0D4
+    bl task_initWorkerContext
     mr r3, r31
     addi r4, r31, 0x4c4
     li r5, 0x1
-    bl fn_803ED0D4
+    bl task_initWorkerContext
     lfs f0, lbl_80886294
     li r0, 0x0
     li r3, 0x1
@@ -1083,7 +1083,7 @@ asm void fn_804095F0(void)
     stw r31, 0xc(r1)
     stw r30, 0x8(r1)
     mr r30, r3
-    bl fn_803EC91C
+    bl task_updateWorker
     cmpwi r3, 0x0
     bne lbl_fn_804095F0_00000DF8
     addi r3, r30, 0x19c
@@ -1177,7 +1177,7 @@ asm void fn_804096D4(void)
     mr r4, r3
     mr r3, r17
     li r5, 0x1
-    bl fn_803ED0D4
+    bl task_initWorkerContext
 lbl_fn_804096D4_00000E90:
     lwz r0, 0x54(r17)
     cmpwi r0, 0x3

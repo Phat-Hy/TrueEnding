@@ -135,7 +135,7 @@ void fn_80629720(void);
 void fn_80629750(void);
 void bta_sys_logEvent(void);
 void bta_sys_log(void);
-void fn_80629850(void);
+void bta_sys_traceDebug(void);
 void fn_80629870(void);
 void fn_80629890(void);
 void fn_806298B0(void);
@@ -1429,7 +1429,7 @@ asm void bta_sys_log(void)
     blr
 }
 
-asm void fn_80629850(void)
+asm void bta_sys_traceDebug(void)
 {
     nofralloc
     lbz r0, lbl_80880178

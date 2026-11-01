@@ -30,7 +30,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void fn_800A56A8(void);
 extern void fn_800F7258(void);
 extern void fn_800F72CC(void);
-extern void fn_800F7FF0(void);
+extern void viewport_getNextSequenceId(void);
 extern void fn_801156BC(void);
 extern void fn_80116E6C(void);
 extern void fn_8012A1B8(void);
@@ -2070,7 +2070,7 @@ lbl_fn_801C346C_00001AD4:
     lfs f0, lbl_80882748
     addi r3, r1, 0xe0
     stfs f0, 0xe4(r1)
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
     lfs f0, lbl_8088275C
     addi r3, r1, 0x80
     addi r4, r1, 0xe0
@@ -2114,7 +2114,7 @@ lbl_fn_801C346C_00001B84:
     fcmpo cr0, f30, f1
     bge lbl_fn_801C346C_00001BE4
     addi r3, r1, 0xe0
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
     fmr f1, f30
     addi r3, r1, 0x50
     addi r4, r1, 0xe0
@@ -2141,7 +2141,7 @@ lbl_fn_801C346C_00001BE4:
     fcmpo cr0, f1, f0
     ble lbl_fn_801C346C_00001D40
     addi r3, r1, 0xe0
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
     lwz r4, 0x4(r30)
     addi r3, r1, 0xc8
     bl fn_8014052C

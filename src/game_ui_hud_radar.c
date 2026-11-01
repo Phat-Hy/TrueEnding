@@ -31,7 +31,7 @@ extern void fn_8013C554(void);
 extern void npc_updateTalkInteraction(void);
 extern void fn_8014052C(void);
 extern void fn_801446F0(void);
-extern void fn_801539E0(void);
+extern void inventory_unequipItem(void);
 extern void equip_applyToCharacter(void);
 extern void fn_80176548(void);
 extern void actor_getMovementFlags(void);
@@ -532,7 +532,7 @@ lbl_fn_801C041C_000004C4:
     lwz r0, 0x12a4(r3)
     srwi. r0, r0, 31
     beq lbl_fn_801C041C_00000514
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_801C041C_00000514:
     li r0, 0x1
     stw r0, 0x34c(r30)

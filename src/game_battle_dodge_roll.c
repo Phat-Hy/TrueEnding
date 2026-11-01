@@ -41,9 +41,9 @@ extern void res_registerResource(void);
 extern void fn_803EBC44(void);
 extern void fn_803EC0A4(void);
 extern void task_createWorker(void);
-extern void fn_803EC69C(void);
-extern void fn_803EC91C(void);
-extern void fn_803ED0D4(void);
+extern void task_destroyWorker(void);
+extern void task_updateWorker(void);
+extern void task_initWorkerContext(void);
 extern void fn_803ED5D0(void);
 extern void fn_80415F6C(void);
 extern void boss_getOffset54(void);
@@ -467,7 +467,7 @@ lbl_fn_804146E4_00000490:
     mr r4, r3
     mr r3, r30
     li r5, 0x1
-    bl fn_803ED0D4
+    bl task_initWorkerContext
 lbl_fn_804146E4_000004D0:
     lwz r3, 0xe4(r30)
     cmpwi r3, 0x0
@@ -785,7 +785,7 @@ lbl_fn_80414B84_000008C8:
     bl fn_800971D4
     mr r3, r29
     li r4, 0x0
-    bl fn_803EC69C
+    bl task_destroyWorker
     cmpwi r30, 0x0
     ble lbl_fn_80414B84_000008F0
     mr r3, r29
@@ -1020,7 +1020,7 @@ asm void fn_80414F2C(void)
     stwu r1, -0x10(r1)
     mflr r0
     stw r0, 0x14(r1)
-    bl fn_803EC91C
+    bl task_updateWorker
     cntlzw r0, r3
     srwi r3, r0, 5
     lwz r0, 0x14(r1)
@@ -1061,7 +1061,7 @@ asm void fn_80414F54(void)
     mr r4, r3
     mr r3, r31
     li r5, 0x1
-    bl fn_803ED0D4
+    bl task_initWorkerContext
 lbl_fn_80414F54_00000CA4:
     addi r3, r31, 0x4c4
     psq_l f1, 0xfc(r31), 0, 0
@@ -1123,7 +1123,7 @@ lbl_fn_8041502C_00000D34:
     mr r4, r3
     mr r3, r31
     li r5, 0x1
-    bl fn_803ED0D4
+    bl task_initWorkerContext
 lbl_fn_8041502C_00000D80:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
@@ -1445,7 +1445,7 @@ asm void fn_804154AC(void)
     bl fn_8009E690
     mr r3, r30
     li r4, 0x0
-    bl fn_803EC69C
+    bl task_destroyWorker
     cmpwi r31, 0x0
     ble lbl_fn_804154AC_000011D0
     mr r3, r30
@@ -1466,7 +1466,7 @@ asm void fn_80415514(void)
     stwu r1, -0x10(r1)
     mflr r0
     stw r0, 0x14(r1)
-    bl fn_803EC91C
+    bl task_updateWorker
     cntlzw r0, r3
     srwi r3, r0, 5
     lwz r0, 0x14(r1)

@@ -52,10 +52,10 @@ extern void world_setLocalFlag(void);
 extern void fn_803EBE74(void);
 extern void fn_803EC0F8(void);
 extern void task_createWorker(void);
-extern void fn_803EC69C(void);
+extern void task_destroyWorker(void);
 extern void fn_803EC7A0(void);
-extern void fn_803EC91C(void);
-extern void fn_803ED0D4(void);
+extern void task_updateWorker(void);
+extern void task_initWorkerContext(void);
 extern void fn_803ED5D0(void);
 extern void fn_803ED774(void);
 extern void fn_803EDB18(void);
@@ -682,7 +682,7 @@ asm void fn_80412F28(void)
     bl __destroy_new_array
     mr r3, r30
     li r4, 0x0
-    bl fn_803EC69C
+    bl task_destroyWorker
     cmpwi r31, 0x0
     ble lbl_fn_80412F28_00000738
     mr r3, r30
@@ -705,7 +705,7 @@ asm void fn_80412FFC(void)
     stw r0, 0x24(r1)
     stmw r27, 0xc(r1)
     mr r27, r3
-    bl fn_803EC91C
+    bl task_updateWorker
     cmpwi r3, 0x0
     bne lbl_fn_80412FFC_000007F8
     mr r31, r27
@@ -810,7 +810,7 @@ lbl_fn_804130B8_00000874:
     mr r4, r3
     mr r3, r31
     li r5, 0x1
-    bl fn_803ED0D4
+    bl task_initWorkerContext
 lbl_fn_804130B8_000008E0:
     mr r3, r31
     bl fn_804137F4
@@ -1064,7 +1064,7 @@ lbl_fn_804131A4_00000C48:
     mr r4, r3
     mr r3, r25
     li r5, 0x1
-    bl fn_803ED0D4
+    bl task_initWorkerContext
 lbl_fn_804131A4_00000C88:
     mr r3, r25
     bl fn_804137F4

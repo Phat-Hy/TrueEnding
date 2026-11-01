@@ -42,7 +42,7 @@ extern void res_MsgHandle_update(void);
 extern void fn_80239D58(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
-extern void fn_803EC69C(void);
+extern void task_destroyWorker(void);
 extern void fn_803ED774(void);
 extern void fn_8040BE88(void);
 extern void fn_8040C058(void);
@@ -1439,7 +1439,7 @@ lbl_fn_8040B4B8_000011E0:
     bl __destroy_new_array
     mr r3, r29
     li r4, 0x0
-    bl fn_803EC69C
+    bl task_destroyWorker
     cmpwi r30, 0x0
     ble lbl_fn_8040B4B8_00001214
     mr r3, r29

@@ -55,7 +55,7 @@ extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
 extern void fn_8025CFF4(void);
 extern void entity_Instance_constructor(void);
-extern void fn_8035B78C(void);
+extern void entity_Instance_destructor(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
 extern void atn_LoadHandle_constructor(void);
@@ -1859,7 +1859,7 @@ lbl_fn_8025CDE0_000018D8:
 lbl_fn_8025CDE0_000018E8:
     mr r3, r29
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r30, 0x0
     ble lbl_fn_8025CDE0_00001904
     mr r3, r29

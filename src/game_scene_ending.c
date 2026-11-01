@@ -11,7 +11,7 @@ extern void fn_8010CA3C(void);
 extern void fn_801240B4(void);
 extern void npc_updateTalkInteraction(void);
 extern void fn_80153698(void);
-extern void fn_801539E0(void);
+extern void inventory_unequipItem(void);
 extern void fn_80153B44(void);
 extern void actor_getMovementFlags(void);
 extern void fn_801A4E08(void);
@@ -434,7 +434,7 @@ asm void fn_801B0D88(void)
     srwi. r0, r0, 31
     beq lbl_fn_801B0D88_000004D4
     mr r3, r4
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_801B0D88_000004D4:
     lwz r7, 0x4(r31)
     li r0, 0x1
@@ -727,7 +727,7 @@ asm void fn_801B11BC(void)
     srwi. r0, r0, 31
     beq lbl_fn_801B11BC_000008F8
     mr r3, r4
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_801B11BC_000008F8:
     mr r3, r31
     lwz r31, 0xc(r1)
@@ -988,7 +988,7 @@ lbl_fn_801B151C_00000C90:
     lwz r0, 0x12a4(r3)
     srwi. r0, r0, 31
     beq lbl_fn_801B151C_00000CAC
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_801B151C_00000CAC:
     li r0, 0x1
     stw r0, 0x34c(r31)
@@ -1689,7 +1689,7 @@ asm void fn_801B1F4C(void)
     addi r30, r3, 0xb0
     srwi. r0, r0, 31
     beq lbl_fn_801B1F4C_000016A4
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_801B1F4C_000016A4:
     li r0, 0x1
     stw r0, 0x34c(r30)

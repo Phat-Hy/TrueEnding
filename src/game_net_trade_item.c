@@ -22,7 +22,7 @@ extern void fn_800CB58C(void);
 extern void morph_updateMesh(void);
 extern void fn_800F52F0(void);
 extern void fn_800F7260(void);
-extern void fn_800F7FF0(void);
+extern void viewport_getNextSequenceId(void);
 extern void fn_800F8524(void);
 extern void fn_80112958(void);
 extern void fn_80112960(void);
@@ -1536,7 +1536,7 @@ asm void fn_8052D46C(void)
     addi r4, r1, 0x140
     bl vec3_copy
     addi r3, r1, 0x188
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
     addi r3, r1, 0x134
     addi r4, r1, 0x188
     addi r5, r1, 0x194
@@ -1545,7 +1545,7 @@ asm void fn_8052D46C(void)
     addi r4, r1, 0x134
     bl vec3_copy
     addi r3, r1, 0x188
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
     addi r3, r1, 0x1e8
     bl fn_80113CCC
     mr r4, r3

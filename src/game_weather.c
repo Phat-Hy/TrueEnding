@@ -34,7 +34,7 @@ extern void fn_8012F3D8(void);
 extern void fn_80134134(void);
 extern void fn_801346C8(void);
 extern void fn_80152D10(void);
-extern void fn_801539E0(void);
+extern void inventory_unequipItem(void);
 extern void fn_80155790(void);
 extern void fn_80155DAC(void);
 extern void fn_801562A0(void);
@@ -2011,7 +2011,7 @@ lbl_fn_800E8688_000019D4:
     psq_l f1, 0x0(r5), 0, 0
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x88(r1)
-    bl fn_801539E0
+    bl inventory_unequipItem
     b lbl_fn_800E8688_00001BF8
 lbl_fn_800E8688_00001AC8:
     lwz r6, lbl_8087F430
@@ -2062,7 +2062,7 @@ lbl_fn_800E8688_00001AC8:
     psq_l f1, 0x0(r5), 0, 0
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x88(r1)
-    bl fn_801539E0
+    bl inventory_unequipItem
     b lbl_fn_800E8688_00001BF8
 lbl_fn_800E8688_00001B90:
     lfs f3, lbl_808812DC

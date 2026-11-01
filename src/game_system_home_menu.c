@@ -53,7 +53,7 @@ extern void bloom_processPasses(void);
 extern void fn_800F52F8(void);
 extern void fn_8020A780(void);
 extern void res_MsgHandle_unload(void);
-extern void fn_8035B78C(void);
+extern void entity_Instance_destructor(void);
 extern void fn_8035FBF8(void);
 extern void fn_8035FC00(void);
 extern void fn_8035FC08(void);
@@ -190,7 +190,7 @@ lbl_fn_8035DE10_000000AC:
 lbl_fn_8035DE10_000000BC:
     mr r3, r29
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r30, 0x0
     ble lbl_fn_8035DE10_000000D8
     mr r3, r29

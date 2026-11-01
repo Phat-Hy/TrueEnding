@@ -20,7 +20,7 @@ extern void fn_80129978(void);
 extern void fn_80129A48(void);
 extern void npc_updateTalkInteraction(void);
 extern void fn_801446F0(void);
-extern void fn_801539E0(void);
+extern void inventory_unequipItem(void);
 extern void equip_applyToCharacter(void);
 extern void fn_80155DAC(void);
 extern void fn_80164DCC(void);
@@ -1142,7 +1142,7 @@ lbl_fn_801AFAC0_00000E30:
     lwz r0, 0x12a4(r3)
     srwi. r0, r0, 31
     beq lbl_fn_801AFAC0_00000E50
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_801AFAC0_00000E50:
     lwz r3, 0x4(r30)
     lwz r0, 0x12a4(r3)

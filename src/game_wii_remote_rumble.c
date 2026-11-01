@@ -31,7 +31,7 @@ extern void mem_free(void);
 extern void atn_Matrix_copy_2(void);
 extern void atn_Matrix_copy(void);
 extern void fn_800928B0(void);
-extern void fn_800F7FF0(void);
+extern void viewport_getNextSequenceId(void);
 extern void fn_8010F668(void);
 extern void fn_801479E4(void);
 extern void fn_80223EB8(void);
@@ -369,7 +369,7 @@ lbl_fn_80551198_00000304:
     fcmpo cr0, f1, f0
     ble lbl_fn_80551198_000003A4
     addi r3, r1, 0x20c
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
     fmuls f29, f29, f30
 lbl_fn_80551198_000003A4:
     cmpwi r24, 0x0
@@ -408,7 +408,7 @@ lbl_fn_80551198_000003DC:
     fcmpo cr0, f1, f0
     ble lbl_fn_80551198_00000438
     addi r3, r1, 0x200
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
     fmuls f29, f29, f30
 lbl_fn_80551198_00000438:
     fmr f1, f29
@@ -783,7 +783,7 @@ lbl_fn_80551198_00000920:
     fcmpo cr0, f1, f0
     ble lbl_fn_80551198_000009CC
     addi r3, r1, 0x17c
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
     fmuls f29, f29, f31
 lbl_fn_80551198_000009CC:
     fmr f1, f29

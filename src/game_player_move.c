@@ -22,7 +22,7 @@ extern void actor_spawnActorWithId(void);
 extern void fn_8011BBD0(void);
 extern void fn_80124C6C(void);
 extern void fn_801F4728(void);
-extern void fn_801F48C8(void);
+extern void save_parseSlotStats(void);
 extern void fn_801F4C14(void);
 extern void save_formatSlotTitle(void);
 extern void fn_801F4D80(void);
@@ -548,7 +548,7 @@ lbl_fn_8011A4D0_00000640:
     lwz r3, 0x58(r29)
     addi r4, r31, 0x306
     addi r5, r1, 0x30
-    bl fn_801F48C8
+    bl save_parseSlotStats
     lwz r4, lbl_8087F0A8
     addi r3, r1, 0x20
     li r5, 0x0
@@ -557,7 +557,7 @@ lbl_fn_8011A4D0_00000640:
     lwz r3, 0x58(r29)
     addi r4, r31, 0x30c
     addi r5, r1, 0x20
-    bl fn_801F48C8
+    bl save_parseSlotStats
     lwz r4, 0x58(r29)
     addi r3, r31, 0x316
     addi r26, r4, 0x58

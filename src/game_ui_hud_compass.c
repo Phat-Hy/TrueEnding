@@ -12,7 +12,7 @@ extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_801539E0(void);
+extern void inventory_unequipItem(void);
 extern void fn_80155DAC(void);
 extern void fn_80178018(void);
 extern void fn_80178078(void);
@@ -141,7 +141,7 @@ asm void fn_801C5A04(void)
     lwz r0, 0x12a4(r3)
     srwi. r0, r0, 31
     beq lbl_fn_801C5A04_0000009C
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_801C5A04_0000009C:
     lwz r3, 0x4(r31)
     lwz r0, 0x12a4(r3)
@@ -693,7 +693,7 @@ asm void fn_801C61EC(void)
     lwz r0, 0x12a4(r3)
     srwi. r0, r0, 31
     beq lbl_fn_801C61EC_00000898
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_801C61EC_00000898:
     lwz r29, 0x4(r30)
     li r4, 0x3

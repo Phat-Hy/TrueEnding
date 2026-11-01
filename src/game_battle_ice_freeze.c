@@ -36,10 +36,10 @@ extern void fn_802180A8(void);
 extern void task_findEntryById(void);
 extern void res_MsgHandle_constructor(void);
 extern void task_createWorker(void);
-extern void fn_803EC69C(void);
+extern void task_destroyWorker(void);
 extern void fn_803EC7A0(void);
-extern void fn_803EC91C(void);
-extern void fn_803ED0D4(void);
+extern void task_updateWorker(void);
+extern void task_initWorkerContext(void);
 extern void fn_803ED5D0(void);
 extern void fn_803ED774(void);
 extern void fn_803EDB18(void);
@@ -514,7 +514,7 @@ asm void fn_8041BA1C(void)
     mr r30, r3
     beq lbl_fn_8041BA1C_00000580
     li r4, 0x0
-    bl fn_803EC69C
+    bl task_destroyWorker
     cmpwi r31, 0x0
     ble lbl_fn_8041BA1C_00000580
     mr r3, r30
@@ -537,7 +537,7 @@ asm void fn_8041BA74(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_803EC91C
+    bl task_updateWorker
     cmpwi r3, 0x0
     bne lbl_fn_8041BA74_000005CC
     li r0, 0x2
@@ -1078,7 +1078,7 @@ lbl_fn_8041C164_00000CFC:
     bl fn_800971D4
     mr r3, r29
     li r4, 0x0
-    bl fn_803EC69C
+    bl task_destroyWorker
     cmpwi r30, 0x0
     ble lbl_fn_8041C164_00000D24
     mr r3, r29
@@ -1102,7 +1102,7 @@ asm void fn_8041C21C(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_803EC91C
+    bl task_updateWorker
     cmpwi r3, 0x0
     bne lbl_fn_8041C21C_00000D80
     li r0, 0x1
@@ -1149,7 +1149,7 @@ asm void fn_8041C270(void)
     mr r4, r3
     mr r3, r31
     li r5, 0x1
-    bl fn_803ED0D4
+    bl task_initWorkerContext
 lbl_fn_8041C270_00000DFC:
     addi r3, r31, 0x4c4
     psq_l f1, 0xfc(r31), 0, 0
@@ -1263,7 +1263,7 @@ lbl_fn_8041C3B0_00000F60:
     mr r4, r3
     mr r3, r31
     li r5, 0x1
-    bl fn_803ED0D4
+    bl task_initWorkerContext
 lbl_fn_8041C3B0_00000FA0:
     addi r3, r31, 0x4c4
     psq_l f1, 0xfc(r31), 0, 0
@@ -1705,7 +1705,7 @@ lbl_fn_8041C99C_00001588:
     mr r4, r3
     mr r3, r31
     li r5, 0x1
-    bl fn_803ED0D4
+    bl task_initWorkerContext
 lbl_fn_8041C99C_000015E0:
     lwz r12, 0x0(r31)
     mr r3, r31
@@ -1777,7 +1777,7 @@ lbl_fn_8041C99C_00001668:
     mr r4, r3
     mr r3, r31
     li r5, 0x1
-    bl fn_803ED0D4
+    bl task_initWorkerContext
 lbl_fn_8041C99C_000016F4:
     lwz r12, 0x0(r31)
     mr r3, r31

@@ -32,7 +32,7 @@ extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_unload(void);
 extern void entity_Instance_constructor(void);
-extern void fn_8035B78C(void);
+extern void entity_Instance_destructor(void);
 extern void chest_spawnLoot(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
@@ -1953,7 +1953,7 @@ lbl_fn_801CC3AC_00001914:
 lbl_fn_801CC3AC_00001934:
     mr r3, r29
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r30, 0x0
     ble lbl_fn_801CC3AC_00001950
     mr r3, r29

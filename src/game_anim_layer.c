@@ -50,7 +50,7 @@ extern void fn_802721A0(void);
 extern void fn_8027232C(void);
 extern void fn_80272660(void);
 extern void entity_Instance_constructor(void);
-extern void fn_8035B78C(void);
+extern void entity_Instance_destructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
@@ -891,7 +891,7 @@ lbl_fn_8026FDD0_00000AF8:
     bl res_Resource_destructor
     mr r3, r29
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r30, 0x0
     ble lbl_fn_8026FDD0_00000B20
     mr r3, r29

@@ -24,7 +24,7 @@ extern void mission_updateStub(void);
 extern void fn_80057A68(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_800F7260(void);
-extern void fn_800F7FF0(void);
+extern void viewport_getNextSequenceId(void);
 extern void fn_801125F8(void);
 extern void fn_8016EB48(void);
 extern void PSMTXConcat(void);
@@ -905,7 +905,7 @@ lbl_fn_80129A6C_00000AEC:
     b lbl_fn_80129A6C_00000B6C
 lbl_fn_80129A6C_00000B4C:
     addi r3, r1, 0xd0
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
     addi r3, r1, 0x58
     addi r4, r1, 0xd0
     bl vec3_toEulerAngles
@@ -1105,7 +1105,7 @@ lbl_fn_80129A6C_00000DCC:
     b lbl_fn_80129A6C_00000E4C
 lbl_fn_80129A6C_00000E2C:
     addi r3, r1, 0xa0
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
     addi r3, r1, 0x1c
     addi r4, r1, 0xa0
     bl vec3_toEulerAngles

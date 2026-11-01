@@ -25,7 +25,7 @@ extern void str_skipWhitespace(void);
 extern void fn_800EAECC(void);
 extern void fn_800F72CC(void);
 extern void fn_800F7FD8(void);
-extern void fn_800F7FF0(void);
+extern void viewport_getNextSequenceId(void);
 extern void system_getNextSequenceId(void);
 extern void fn_801162A0(void);
 extern void skill_findNodeById(void);
@@ -2000,7 +2000,7 @@ lbl_fn_8030F564_000019F4:
     fcmpo cr0, f1, f0
     ble lbl_fn_8030F564_00001A14
     addi r3, r1, 0x128
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
 lbl_fn_8030F564_00001A14:
     lfs f0, lbl_80884C70
     fmuls f1, f29, f0
@@ -2030,7 +2030,7 @@ lbl_fn_8030F564_00001A28:
     fcmpo cr0, f1, f0
     ble lbl_fn_8030F564_00001A84
     addi r3, r1, 0x110
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
 lbl_fn_8030F564_00001A84:
     lfs f0, lbl_80884C80
     fcmpo cr0, f31, f0
@@ -2105,7 +2105,7 @@ lbl_fn_8030F564_00001B4C:
     bl vec3_mag
     fmr f31, f1
     addi r3, r1, 0x104
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
     addi r3, r1, 0x8c
     addi r4, r1, 0x104
     bl vec3_toEulerAngles
@@ -2200,7 +2200,7 @@ lbl_fn_8030F564_00001C78:
     fcmpo cr0, f1, f0
     blt lbl_fn_8030F564_00001CFC
     addi r3, r1, 0xec
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
 lbl_fn_8030F564_00001CFC:
     lwz r0, 0x1538(r29)
     cmpwi r0, 0x0
@@ -2302,7 +2302,7 @@ lbl_fn_8030F564_00001DFC:
     fcmpo cr0, f1, f0
     blt lbl_fn_8030F564_00001E90
     addi r3, r1, 0xe0
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
     b lbl_fn_8030F564_00001E90
 lbl_fn_8030F564_00001E78:
     mr r4, r30

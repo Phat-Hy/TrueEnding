@@ -52,10 +52,10 @@ extern void fn_803750E4(void);
 extern void fn_80375184(void);
 extern void fn_803E3050(void);
 extern void task_createWorker(void);
-extern void fn_803EC69C(void);
+extern void task_destroyWorker(void);
 extern void fn_803EC758(void);
 extern void fn_803EC7A0(void);
-extern void fn_803EC91C(void);
+extern void task_updateWorker(void);
 extern void fn_803ECBD4(void);
 extern void fn_804392C0(void);
 extern void fn_8043A08C(void);
@@ -162,7 +162,7 @@ asm void fn_80436000(void)
     stwu r1, -0x10(r1)
     mflr r0
     stw r0, 0x14(r1)
-    bl fn_803EC91C
+    bl task_updateWorker
     cntlzw r0, r3
     srwi r3, r0, 5
     lwz r0, 0x14(r1)
@@ -1501,7 +1501,7 @@ lbl_fn_8043723C_00001290:
     bl __destroy_new_array
     mr r3, r29
     li r4, 0x0
-    bl fn_803EC69C
+    bl task_destroyWorker
     cmpwi r30, 0x0
     ble lbl_fn_8043723C_000012C4
     mr r3, r29
@@ -1523,7 +1523,7 @@ asm void fn_804372E4(void)
     stwu r1, -0x10(r1)
     mflr r0
     stw r0, 0x14(r1)
-    bl fn_803EC91C
+    bl task_updateWorker
     cntlzw r0, r3
     srwi r3, r0, 5
     lwz r0, 0x14(r1)

@@ -43,9 +43,9 @@ extern void res_registerResource(void);
 extern void fn_803750E4(void);
 extern void fn_803CCA84(void);
 extern void task_createWorker(void);
-extern void fn_803EC69C(void);
+extern void task_destroyWorker(void);
 extern void fn_803EC758(void);
-extern void fn_803EC91C(void);
+extern void task_updateWorker(void);
 extern void fn_8043C334(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
@@ -467,7 +467,7 @@ lbl_fn_8043A98C_000004A8:
     bl __destroy_new_array
     mr r3, r30
     li r4, 0x0
-    bl fn_803EC69C
+    bl task_destroyWorker
     cmpwi r31, 0x0
     ble lbl_fn_8043A98C_000004DC
     mr r3, r30
@@ -488,7 +488,7 @@ asm void fn_8043AA28(void)
     stwu r1, -0x10(r1)
     mflr r0
     stw r0, 0x14(r1)
-    bl fn_803EC91C
+    bl task_updateWorker
     cntlzw r0, r3
     srwi r3, r0, 5
     lwz r0, 0x14(r1)
@@ -1572,7 +1572,7 @@ lbl_fn_8043B8E8_00001414:
     bl fn_8008A76C
     mr r3, r30
     li r4, 0x0
-    bl fn_803EC69C
+    bl task_destroyWorker
     cmpwi r31, 0x0
     ble lbl_fn_8043B8E8_0000143C
     mr r3, r30
@@ -1595,7 +1595,7 @@ asm void fn_8043B988(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_803EC91C
+    bl task_updateWorker
     cmpwi r3, 0x0
     bne lbl_fn_8043B988_00001498
     addi r3, r31, 0xf8

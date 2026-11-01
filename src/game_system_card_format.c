@@ -112,7 +112,7 @@ void fn_8035B368(void);
 void fn_8035B42C(void);
 void fn_8035B534(void);
 void entity_Instance_constructor(void);
-void fn_8035B78C(void);
+void entity_Instance_destructor(void);
 void fn_8035B808(void);
 void fn_8035B824(void);
 void fn_8035B854(void);
@@ -1087,7 +1087,7 @@ lbl_entity_Instance_constructor_00000D80:
     blr
 }
 
-asm void fn_8035B78C(void)
+asm void entity_Instance_destructor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1098,24 +1098,24 @@ asm void fn_8035B78C(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    beq lbl_fn_8035B78C_00000DF8
+    beq lbl_entity_Instance_destructor_00000DF8
     lis r4, lbl_80789A08@ha
     addi r4, r4, lbl_80789A08@l
     stw r4, 0x0(r3)
     lwz r3, lbl_8087F408
     cmpwi r3, 0x0
-    beq lbl_fn_8035B78C_00000DDC
+    beq lbl_entity_Instance_destructor_00000DDC
     mr r4, r30
     bl fn_8011FB18
-lbl_fn_8035B78C_00000DDC:
+lbl_entity_Instance_destructor_00000DDC:
     mr r3, r30
     li r4, 0x0
     bl fn_800E2D4C
     cmpwi r31, 0x0
-    ble lbl_fn_8035B78C_00000DF8
+    ble lbl_entity_Instance_destructor_00000DF8
     mr r3, r30
     bl dtor_80084684
-lbl_fn_8035B78C_00000DF8:
+lbl_entity_Instance_destructor_00000DF8:
     mr r3, r30
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)

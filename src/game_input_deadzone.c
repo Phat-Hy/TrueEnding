@@ -19,7 +19,7 @@ extern void fn_800A55D4(void);
 extern void fn_800A56A8(void);
 extern void fn_800F52F8(void);
 extern void fn_800F72CC(void);
-extern void fn_800F7FF0(void);
+extern void viewport_getNextSequenceId(void);
 extern void system_getNextSequenceId(void);
 extern void fn_80102824(void);
 extern void fn_801028E4(void);
@@ -1520,7 +1520,7 @@ lbl_fn_802F0328_0000140C:
     fcmpo cr0, f1, f0
     blt lbl_fn_802F0328_00001448
     addi r3, r1, 0x74
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
 lbl_fn_802F0328_00001448:
     addi r3, r31, 0x14d8
     addi r4, r1, 0x74
@@ -1606,7 +1606,7 @@ lbl_fn_802F0328_00001548:
     fcmpo cr0, f1, f0
     blt lbl_fn_802F0328_0000158C
     addi r3, r1, 0x5c
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
 lbl_fn_802F0328_0000158C:
     lfs f29, lbl_80884890
     addi r3, r1, 0x14

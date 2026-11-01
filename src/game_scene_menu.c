@@ -23,7 +23,7 @@ extern void fn_801065E4(void);
 extern void fn_801240B4(void);
 extern void fn_80133130(void);
 extern void fn_801446F0(void);
-extern void fn_801539E0(void);
+extern void inventory_unequipItem(void);
 extern void equip_applyToCharacter(void);
 extern void fn_80155DAC(void);
 extern void debuff_clearStatus(void);
@@ -1236,7 +1236,7 @@ asm void fn_801A72EC(void)
     addi r31, r3, 0xb0
     srwi. r0, r0, 31
     beq lbl_fn_801A72EC_00000FD0
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_801A72EC_00000FD0:
     li r0, 0x1
     stw r0, 0x34c(r31)

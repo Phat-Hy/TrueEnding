@@ -20,7 +20,7 @@ extern void str_findChar(void);
 extern void fn_800E0000(void);
 extern void actor_spawnActorWithId(void);
 extern void fn_801F0544(void);
-extern void fn_801F48C8(void);
+extern void save_parseSlotStats(void);
 extern void fn_801F6C2C(void);
 extern void fn_801F6C38(void);
 extern void save_computeCrc32(void);
@@ -1351,7 +1351,7 @@ lbl_fn_804A4AEC_0000114C:
     mr r3, r31
     addi r4, r30, 0x1a4
     psq_st f2, 0x8(r5), 0, 0
-    bl fn_801F48C8
+    bl save_parseSlotStats
     addi r5, r1, 0x38
     psq_l f1, 0x0(r29), 0, 0
     psq_l f2, 0x8(r29), 0, 0
@@ -1359,7 +1359,7 @@ lbl_fn_804A4AEC_0000114C:
     psq_st f1, 0x0(r5), 0, 0
     addi r4, r30, 0x1ab
     psq_st f2, 0x8(r5), 0, 0
-    bl fn_801F48C8
+    bl save_parseSlotStats
     addi r5, r1, 0x48
     psq_l f1, 0x0(r29), 0, 0
     psq_l f2, 0x8(r29), 0, 0
@@ -1367,7 +1367,7 @@ lbl_fn_804A4AEC_0000114C:
     psq_st f1, 0x0(r5), 0, 0
     addi r4, r30, 0x1b3
     psq_st f2, 0x8(r5), 0, 0
-    bl fn_801F48C8
+    bl save_parseSlotStats
     addi r5, r1, 0x58
     psq_l f1, 0x0(r29), 0, 0
     psq_l f2, 0x8(r29), 0, 0
@@ -1375,7 +1375,7 @@ lbl_fn_804A4AEC_0000114C:
     psq_st f1, 0x0(r5), 0, 0
     addi r4, r30, 0x1bd
     psq_st f2, 0x8(r5), 0, 0
-    bl fn_801F48C8
+    bl save_parseSlotStats
     lwz r0, 0x94(r1)
     lwz r31, 0x8c(r1)
     lwz r30, 0x88(r1)

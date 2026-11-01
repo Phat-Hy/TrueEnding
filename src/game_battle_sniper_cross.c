@@ -37,10 +37,10 @@ extern void fn_8023A02C(void);
 extern void res_Shader_bindParams(void);
 extern void res_registerResource(void);
 extern void task_createWorker(void);
-extern void fn_803EC69C(void);
+extern void task_destroyWorker(void);
 extern void fn_803EC7A0(void);
-extern void fn_803EC91C(void);
-extern void fn_803ED0D4(void);
+extern void task_updateWorker(void);
+extern void task_initWorkerContext(void);
 extern void fn_803ED5D0(void);
 extern void fn_803EDB18(void);
 extern void fn_803EDCF4(void);
@@ -375,7 +375,7 @@ lbl_fn_803F6B88_00000338:
     bl __destroy_new_array
     mr r3, r30
     li r4, 0x0
-    bl fn_803EC69C
+    bl task_destroyWorker
     cmpwi r31, 0x0
     ble lbl_fn_803F6B88_00000378
     mr r3, r30
@@ -396,7 +396,7 @@ asm void fn_803F6C48(void)
     stwu r1, -0x10(r1)
     mflr r0
     stw r0, 0x14(r1)
-    bl fn_803EC91C
+    bl task_updateWorker
     cntlzw r0, r3
     srwi r3, r0, 5
     lwz r0, 0x14(r1)
@@ -438,7 +438,7 @@ lbl_fn_803F6C70_0000041C:
     beq lbl_fn_803F6C70_00000434
     mr r3, r31
     li r5, 0x1
-    bl fn_803ED0D4
+    bl task_initWorkerContext
 lbl_fn_803F6C70_00000434:
     lwz r3, 0x54(r31)
     subi r0, r3, 0x2
@@ -1220,7 +1220,7 @@ lbl_fn_803F76D8_00000EBC:
     bl fn_800971D4
     mr r3, r29
     li r4, 0x0
-    bl fn_803EC69C
+    bl task_destroyWorker
     cmpwi r30, 0x0
     ble lbl_fn_803F76D8_00000EE4
     mr r3, r29
@@ -1253,7 +1253,7 @@ asm void fn_803F77B8(void)
     psq_st f28, 0x3e8(r1), 0, 0
     bl _savegpr_14
     mr r15, r3
-    bl fn_803EC91C
+    bl task_updateWorker
     cmpwi r3, 0x0
     bne lbl_fn_803F77B8_0000158C
     lwz r0, 0x4c4(r15)
@@ -1719,7 +1719,7 @@ asm void fn_803F7E7C(void)
     mr r3, r31
     addi r4, r31, 0xf4
     li r5, 0x1
-    bl fn_803ED0D4
+    bl task_initWorkerContext
 lbl_fn_803F7E7C_00001608:
     mr r3, r31
     bl fn_803F8324
@@ -1856,7 +1856,7 @@ lbl_fn_803F7F30_000017AC:
     mr r4, r3
     mr r3, r31
     li r5, 0x1
-    bl fn_803ED0D4
+    bl task_initWorkerContext
 lbl_fn_803F7F30_000017F8:
     mr r3, r31
     bl fn_803F8324

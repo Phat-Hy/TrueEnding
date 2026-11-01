@@ -19,7 +19,7 @@ extern void fn_801092C8(void);
 extern void fn_8011BF3C(void);
 extern void magic_dispatchActionCommand(void);
 extern void fn_801240B4(void);
-extern void fn_801539E0(void);
+extern void inventory_unequipItem(void);
 extern void fn_80176548(void);
 extern void fn_80178018(void);
 extern void fn_80178078(void);
@@ -577,7 +577,7 @@ lbl_fn_801C93C4_00000654:
     lwz r0, 0x12a4(r3)
     srwi. r0, r0, 31
     beq lbl_fn_801C93C4_00000668
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_801C93C4_00000668:
     mr r3, r31
     lwz r31, 0x1c(r1)

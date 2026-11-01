@@ -54,11 +54,11 @@ extern void res_registerResource(void);
 extern void fn_803EBD6C(void);
 extern void fn_803EBE74(void);
 extern void task_createWorker(void);
-extern void fn_803EC69C(void);
+extern void task_destroyWorker(void);
 extern void fn_803EC758(void);
 extern void fn_803EC7A0(void);
-extern void fn_803EC91C(void);
-extern void fn_803ED0D4(void);
+extern void task_updateWorker(void);
+extern void task_initWorkerContext(void);
 extern void fn_803ED5D0(void);
 extern void fn_803ED774(void);
 extern void fn_803EDB18(void);
@@ -1189,7 +1189,7 @@ lbl_fn_80426260_00000E58:
     bl fn_800971D4
     mr r3, r29
     li r4, 0x0
-    bl fn_803EC69C
+    bl task_destroyWorker
     cmpwi r30, 0x0
     ble lbl_fn_80426260_00000E8C
     mr r3, r29
@@ -1216,7 +1216,7 @@ asm void fn_80426344(void)
     stw r30, 0x18(r1)
     stw r29, 0x14(r1)
     stw r28, 0x10(r1)
-    bl fn_803EC91C
+    bl task_updateWorker
     cmpwi r3, 0x0
     bne lbl_fn_80426344_00000FE4
     mr r3, r31
@@ -1333,7 +1333,7 @@ asm void fn_804264A0(void)
     mr r4, r3
     mr r3, r31
     li r5, 0x1
-    bl fn_803ED0D4
+    bl task_initWorkerContext
 lbl_fn_804264A0_0000106C:
     lis r4, lbl_80753688@ha
     addi r3, r31, 0xf4
@@ -1499,7 +1499,7 @@ lbl_fn_804265E8_00001278:
     mr r4, r3
     mr r3, r31
     li r5, 0x1
-    bl fn_803ED0D4
+    bl task_initWorkerContext
 lbl_fn_804265E8_000012B8:
     lis r4, lbl_80753688@ha
     addi r3, r31, 0xf4

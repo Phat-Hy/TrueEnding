@@ -61,9 +61,9 @@ extern void fn_80223EE0(void);
 extern void fn_8032AC1C(void);
 extern void fn_8032AF90(void);
 extern void task_createWorker(void);
-extern void fn_803EC69C(void);
+extern void task_destroyWorker(void);
 extern void fn_803EC758(void);
-extern void fn_803EC91C(void);
+extern void task_updateWorker(void);
 extern void fn_803ED610(void);
 extern void fn_803EDCF4(void);
 extern void fn_803EFCA8(void);
@@ -1740,7 +1740,7 @@ lbl_fn_8043D6F4_000015AC:
 lbl_fn_8043D6F4_000015C8:
     mr r3, r30
     li r4, 0x0
-    bl fn_803EC69C
+    bl task_destroyWorker
     cmpwi r31, 0x0
     ble lbl_fn_8043D6F4_000015E4
     mr r3, r30
@@ -1773,7 +1773,7 @@ asm void fn_8043D940(void)
     stw r30, 0x18(r1)
     stw r29, 0x14(r1)
     mr r29, r3
-    bl fn_803EC91C
+    bl task_updateWorker
     cmpwi r3, 0x0
     bne lbl_fn_8043D940_000016A4
     li r30, 0x0

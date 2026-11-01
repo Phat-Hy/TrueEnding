@@ -24,7 +24,7 @@ extern void fn_801333E4(void);
 extern void fn_80133B30(void);
 extern void dialog_selectChoice(void);
 extern void fn_8014EEC4(void);
-extern void fn_801539E0(void);
+extern void inventory_unequipItem(void);
 extern void fn_80183930(void);
 extern void task_mapIdToQueue(void);
 extern void fn_8036554C(void);
@@ -455,7 +455,7 @@ lbl_fn_803A0040_000004AC:
     srwi. r0, r0, 31
     beq lbl_fn_803A0040_000004C0
     mr r3, r31
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_803A0040_000004C0:
     mr r3, r31
     li r4, 0x0
@@ -512,7 +512,7 @@ lbl_fn_803A0040_0000057C:
     srwi. r0, r0, 31
     beq lbl_fn_803A0040_00000590
     mr r3, r27
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_803A0040_00000590:
     mr r3, r27
     li r4, 0x0
@@ -574,7 +574,7 @@ lbl_fn_803A0040_0000065C:
     srwi. r0, r0, 31
     beq lbl_fn_803A0040_00000670
     mr r3, r28
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_803A0040_00000670:
     mr r3, r28
     li r4, 0x0

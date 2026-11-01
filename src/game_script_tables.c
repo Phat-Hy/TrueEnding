@@ -53,7 +53,7 @@ extern void res_MsgHandle_unload(void);
 extern void res_MsgHandle_update(void);
 extern void res_registerResource(void);
 extern void entity_Instance_constructor(void);
-extern void fn_8035B78C(void);
+extern void entity_Instance_destructor(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
 extern void boss_getOffset54(void);
@@ -840,7 +840,7 @@ asm void fn_80249F98(void)
 lbl_fn_80249F98_00000A44:
     mr r3, r30
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r31, 0x0
     ble lbl_fn_80249F98_00000A60
     mr r3, r30
@@ -928,7 +928,7 @@ lbl_fn_8024A090_00000B50:
 lbl_fn_8024A090_00000B70:
     mr r3, r29
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r30, 0x0
     ble lbl_fn_8024A090_00000B8C
     mr r3, r29
@@ -1772,7 +1772,7 @@ lbl_fn_8024AB20_0000174C:
 lbl_fn_8024AB20_0000176C:
     mr r3, r29
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r30, 0x0
     ble lbl_fn_8024AB20_00001788
     mr r3, r29

@@ -28,7 +28,7 @@ extern void fn_80124B60(void);
 extern void fn_8013310C(void);
 extern void dialog_renderWindow(void);
 extern void fn_80153698(void);
-extern void fn_801539E0(void);
+extern void inventory_unequipItem(void);
 extern void fn_80153B44(void);
 extern void fn_80153FA0(void);
 extern void fn_80154344(void);
@@ -905,7 +905,7 @@ lbl_fn_800E4278_00000A64:
     stfs f0, 0x530(r22)
 lbl_fn_800E4278_00000B04:
     mr r3, r22
-    bl fn_801539E0
+    bl inventory_unequipItem
     lwz r6, 0x180(r1)
     mr r3, r22
     mr r8, r24
@@ -1073,7 +1073,7 @@ lbl_fn_800E4278_00000D3C:
     cmpwi r3, 0x0
     beq lbl_fn_800E4278_00000D78
     mr r3, r22
-    bl fn_801539E0
+    bl inventory_unequipItem
     li r0, 0x2
     stw r0, 0x14a0(r22)
     li r27, 0x1

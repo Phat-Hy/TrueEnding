@@ -41,10 +41,10 @@ extern void fn_80239D58(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
 extern void task_createWorker(void);
-extern void fn_803EC69C(void);
+extern void task_destroyWorker(void);
 extern void fn_803EC7A0(void);
-extern void fn_803EC91C(void);
-extern void fn_803ED0D4(void);
+extern void task_updateWorker(void);
+extern void task_initWorkerContext(void);
 extern void fn_803ED5D0(void);
 extern void fn_803ED774(void);
 extern void fn_803EDB18(void);
@@ -663,7 +663,7 @@ asm void fn_8042B0C0(void)
     bl __destroy_new_array
     mr r3, r30
     li r4, 0x0
-    bl fn_803EC69C
+    bl task_destroyWorker
     cmpwi r31, 0x0
     ble lbl_fn_8042B0C0_0000078C
     mr r3, r30
@@ -687,7 +687,7 @@ asm void fn_8042B134(void)
     stw r31, 0xc(r1)
     stw r30, 0x8(r1)
     mr r30, r3
-    bl fn_803EC91C
+    bl task_updateWorker
     cmpwi r3, 0x0
     bne lbl_fn_8042B134_0000081C
     mr r3, r30
@@ -1111,7 +1111,7 @@ lbl_fn_8042B678_00000D58:
     bl fn_800971D4
     mr r3, r29
     li r4, 0x0
-    bl fn_803EC69C
+    bl task_destroyWorker
     cmpwi r30, 0x0
     ble lbl_fn_8042B678_00000D80
     mr r3, r29
@@ -1135,7 +1135,7 @@ asm void fn_8042B72C(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_803EC91C
+    bl task_updateWorker
     cmpwi r3, 0x0
     bne lbl_fn_8042B72C_00000DD8
     mr r3, r31
@@ -1181,7 +1181,7 @@ asm void fn_8042B77C(void)
     mr r4, r3
     mr r3, r31
     li r5, 0x1
-    bl fn_803ED0D4
+    bl task_initWorkerContext
 lbl_fn_8042B77C_00000E54:
     lfs f1, 0x7c(r31)
     addi r3, r1, 0x28
@@ -1587,7 +1587,7 @@ lbl_fn_8042B90C_000013F8:
     mr r4, r3
     mr r3, r31
     li r5, 0x1
-    bl fn_803ED0D4
+    bl task_initWorkerContext
 lbl_fn_8042B90C_00001438:
     lfs f1, 0x7c(r31)
     addi r3, r1, 0x80

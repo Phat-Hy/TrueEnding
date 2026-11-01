@@ -73,7 +73,7 @@ extern void fn_802CF3AC(void);
 extern void fn_802CF728(void);
 extern void fn_802CFAE4(void);
 extern void entity_Instance_constructor(void);
-extern void fn_8035B78C(void);
+extern void entity_Instance_destructor(void);
 extern void world_getLocalFlag(void);
 extern void fn_803E3384(void);
 extern void boss_getOffset54(void);
@@ -713,7 +713,7 @@ lbl_fn_802CD2E4_000007F4:
 lbl_fn_802CD2E4_00000804:
     mr r3, r29
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r30, 0x0
     ble lbl_fn_802CD2E4_00000820
     mr r3, r29

@@ -49,7 +49,7 @@ extern void fn_802CB8A0(void);
 extern void fn_802CC39C(void);
 extern void fn_802CC708(void);
 extern void entity_Instance_constructor(void);
-extern void fn_8035B78C(void);
+extern void entity_Instance_destructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void fn_8059B670(void);
 extern void PSMTXConcat(void);
@@ -210,7 +210,7 @@ lbl_fn_802C7AA8_00000120:
     bl res_Resource_destructor
     mr r3, r29
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r30, 0x0
     ble lbl_fn_802C7AA8_00000148
     mr r3, r29
@@ -321,7 +321,7 @@ asm void fn_802C7CBC(void)
 lbl_fn_802C7CBC_000002A4:
     mr r3, r30
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r31, 0x0
     ble lbl_fn_802C7CBC_000002C0
     mr r3, r30

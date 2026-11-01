@@ -20,7 +20,7 @@ extern void fn_805D9CC0(void);
 extern void __GXSetVtxDesc(void);
 extern void GXClearVtxDesc(void);
 extern void fn_80615C40(void);
-extern void fn_80615D20(void);
+extern void GXInitLightDistAttn(void);
 extern void fn_80615D50(void);
 extern void fn_80616360(void);
 extern void fn_80616380(void);
@@ -38,7 +38,7 @@ extern void fn_80616E80(void);
 extern void fn_80617030(void);
 extern void fn_80617130(void);
 extern void fn_80617200(void);
-extern void fn_80617220(void);
+extern void GXInitTexObjDefault(void);
 extern void GXSetTevColorIn(void);
 extern void fn_80617420(void);
 extern void GXSetTevIndirect(void);
@@ -494,7 +494,7 @@ asm void fn_805D1A40(void)
     li r30, 0x1
     li r23, 0x0
     li r3, 0x1
-    bl fn_80615D20
+    bl GXInitLightDistAttn
     lwz r3, 0x4c(r26)
     extrwi. r0, r3, 1, 23
     beq lbl_fn_805D1A40_0000062C
@@ -1229,7 +1229,7 @@ lbl_fn_805D1A40_00001014:
     li r8, 0x0
     bl fn_806174C0
     mr r3, r24
-    bl fn_80617220
+    bl GXInitTexObjDefault
     mr r3, r24
     li r4, 0x0
     li r5, 0x0

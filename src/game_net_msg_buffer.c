@@ -20,7 +20,7 @@ extern void dialog_renderWindow(void);
 extern void dialog_updateScriptState(void);
 extern void fn_8015EB2C(void);
 extern void fn_80176ACC(void);
-extern void fn_8035B78C(void);
+extern void entity_Instance_destructor(void);
 extern void fn_8050128C(void);
 extern void fn_80508F0C(void);
 extern void printf(void);
@@ -311,7 +311,7 @@ asm void fn_804FC52C(void)
     mr r30, r3
     beq lbl_fn_804FC52C_00000324
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r31, 0x0
     ble lbl_fn_804FC52C_00000324
     mr r3, r30

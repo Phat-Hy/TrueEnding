@@ -25,8 +25,8 @@ extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_unload(void);
 extern void res_MsgHandle_update(void);
 extern void task_createWorker(void);
-extern void fn_803EC69C(void);
-extern void fn_803EC91C(void);
+extern void task_destroyWorker(void);
+extern void task_updateWorker(void);
 extern void fn_8043465C(void);
 extern void fn_804348C4(void);
 extern void fn_80435684(void);
@@ -318,7 +318,7 @@ lbl_fn_80432EC0_000002E4:
 lbl_fn_80432EC0_00000304:
     mr r3, r29
     li r4, 0x0
-    bl fn_803EC69C
+    bl task_destroyWorker
     cmpwi r30, 0x0
     ble lbl_fn_80432EC0_00000320
     mr r3, r29
@@ -340,7 +340,7 @@ asm void fn_80432FD0(void)
     stwu r1, -0x10(r1)
     mflr r0
     stw r0, 0x14(r1)
-    bl fn_803EC91C
+    bl task_updateWorker
     cntlzw r0, r3
     srwi r3, r0, 5
     lwz r0, 0x14(r1)

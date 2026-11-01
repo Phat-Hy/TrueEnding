@@ -24,7 +24,7 @@ extern void fn_80128930(void);
 extern void fn_80128A30(void);
 extern void fn_80128C08(void);
 extern void fn_8014FCC4(void);
-extern void fn_801539E0(void);
+extern void inventory_unequipItem(void);
 extern void fn_80153B44(void);
 extern void fn_80153FA0(void);
 extern void fn_80154344(void);
@@ -1018,7 +1018,7 @@ lbl_fn_8011C074_00000C5C:
     bl fn_80155790
 lbl_fn_8011C074_00000C64:
     mr r3, r31
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_8011C074_00000C6C:
     lwz r0, 0x12a4(r31)
     li r3, 0x0

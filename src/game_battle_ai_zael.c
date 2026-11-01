@@ -40,11 +40,11 @@ extern void fn_803EBE74(void);
 extern void fn_803EC0A4(void);
 extern void fn_803EC0F8(void);
 extern void task_createWorker(void);
-extern void fn_803EC69C(void);
+extern void task_destroyWorker(void);
 extern void fn_803EC758(void);
 extern void fn_803EC7A0(void);
-extern void fn_803EC91C(void);
-extern void fn_803ED0D4(void);
+extern void task_updateWorker(void);
+extern void task_initWorkerContext(void);
 extern void fn_803ED5D0(void);
 extern void fn_803ED774(void);
 extern void fn_803F3334(void);
@@ -140,7 +140,7 @@ asm void fn_8042F97C(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_803EC91C
+    bl task_updateWorker
     cmpwi r3, 0x0
     bne lbl_fn_8042F97C_00000074
     mr r3, r31
@@ -203,7 +203,7 @@ asm void fn_8042FA08(void)
     mr r4, r3
     mr r3, r31
     li r5, 0x1
-    bl fn_803ED0D4
+    bl task_initWorkerContext
 lbl_fn_8042FA08_000000F0:
     lfs f0, lbl_80886818
     li r0, 0x0
@@ -425,7 +425,7 @@ lbl_fn_8042FAC4_000003DC:
     mr r4, r3
     mr r3, r31
     li r5, 0x1
-    bl fn_803ED0D4
+    bl task_initWorkerContext
 lbl_fn_8042FAC4_0000041C:
     lwz r0, 0x84(r1)
     psq_l f31, 0x78(r1), 0, 0
@@ -1256,11 +1256,11 @@ lbl_fn_804308F8_00000FC8:
     stfs f0, 0x708(r31)
     addi r4, r31, 0x104
     li r5, 0x1
-    bl fn_803ED0D4
+    bl task_initWorkerContext
     mr r3, r31
     addi r4, r31, 0x4d4
     li r5, 0x1
-    bl fn_803ED0D4
+    bl task_initWorkerContext
     lwz r0, 0x8cc(r31)
     cmpwi r0, 0x0
     beq lbl_fn_804308F8_000011C0
@@ -1369,7 +1369,7 @@ lbl_fn_804308F8_00001178:
     mr r4, r3
     mr r3, r31
     li r5, 0x1
-    bl fn_803ED0D4
+    bl task_initWorkerContext
 lbl_fn_804308F8_000011B8:
     mr r3, r31
     bl fn_8042FDBC
@@ -1764,7 +1764,7 @@ lbl_fn_80430FC0_000016E4:
     bl fn_800971D4
     mr r3, r30
     li r4, 0x0
-    bl fn_803EC69C
+    bl task_destroyWorker
     cmpwi r31, 0x0
     ble lbl_fn_80430FC0_00001718
     mr r3, r30

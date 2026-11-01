@@ -32,7 +32,7 @@ extern void fn_80614190(void);
 extern void GXSetTexCopySrc(void);
 extern void GXSetTexCopyDst(void);
 extern void GXCopyTex(void);
-extern void fn_80615D20(void);
+extern void GXInitLightDistAttn(void);
 extern void fn_80615D50(void);
 extern void fn_80615E00(void);
 extern void fn_80615FF0(void);
@@ -42,7 +42,7 @@ extern void fn_80616EF0(void);
 extern void fn_80617030(void);
 extern void fn_80617130(void);
 extern void fn_80617200(void);
-extern void fn_80617220(void);
+extern void GXInitTexObjDefault(void);
 extern void fn_80617270(void);
 extern void fn_80617340(void);
 extern void GXSetTevColorIn(void);
@@ -242,7 +242,7 @@ lbl_fn_800AB774_000000A8:
     li r3, 0x5
     bl GXSetNumTevStages
     li r3, 0x1
-    bl fn_80615D20
+    bl GXInitLightDistAttn
     li r3, 0x0
     bl fn_80617200
     li r3, 0x4
@@ -468,7 +468,7 @@ lbl_fn_800AB774_00000514:
     li r6, 0xff
     bl GXSetTevOrder
     mr r3, r27
-    bl fn_80617220
+    bl GXInitTexObjDefault
     addi r27, r27, 0x1
     addi r26, r26, 0x4
     cmpwi r27, 0x5
@@ -670,7 +670,7 @@ lbl_fn_800ABD94_000006A0:
     li r3, 0x1
     bl GXClearVtxDesc
     li r3, 0x0
-    bl fn_80615D20
+    bl GXInitLightDistAttn
     li r3, 0x1
     bl GXSetNumTevStages
     li r3, 0x0
@@ -737,7 +737,7 @@ lbl_fn_800ABD94_000006A0:
     li r3, 0x1
     bl GXClearVtxDesc
     li r3, 0x1
-    bl fn_80615D20
+    bl GXInitLightDistAttn
     li r3, 0x1
     bl GXSetNumTevStages
     lwz r3, lbl_8087EEE0
@@ -768,7 +768,7 @@ lbl_fn_800ABD94_000006A0:
     li r9, 0x2
     bl fn_80615D50
     li r3, 0x0
-    bl fn_80617220
+    bl GXInitTexObjDefault
     lwz r3, lbl_8087EEE0
     mr r6, r28
     mr r7, r27
@@ -780,7 +780,7 @@ lbl_fn_800ABD94_000006A0:
     li r3, 0x2
     bl GXClearVtxDesc
     li r3, 0x0
-    bl fn_80615D20
+    bl GXInitLightDistAttn
     li r3, 0x2
     bl GXSetNumTevStages
     li r3, 0x0
@@ -961,7 +961,7 @@ lbl_fn_800ABD94_00000BC0:
     li r6, 0xff
     bl GXSetTevOrder
     li r3, 0x0
-    bl fn_80617220
+    bl GXInitTexObjDefault
     li r3, 0x1
     li r4, 0xf
     li r5, 0xf
@@ -997,7 +997,7 @@ lbl_fn_800ABD94_00000BC0:
     li r6, 0xff
     bl GXSetTevOrder
     li r3, 0x1
-    bl fn_80617220
+    bl GXInitTexObjDefault
     li r3, 0x1
     li r4, 0x4
     li r5, 0x5
@@ -1248,7 +1248,7 @@ asm void fn_800AC6DC(void)
     li r3, 0x3
     bl GXSetNumTevStages
     li r3, 0x0
-    bl fn_80615D20
+    bl GXInitLightDistAttn
     li r3, 0x4
     bl GXClearVtxDesc
     li r3, 0x0

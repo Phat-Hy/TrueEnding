@@ -44,7 +44,7 @@ extern void fn_802D8B6C(void);
 extern void fn_802DDBB0(void);
 extern void fn_802E2468(void);
 extern void entity_Instance_constructor(void);
-extern void fn_8035B78C(void);
+extern void entity_Instance_destructor(void);
 extern void fn_8036554C(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
@@ -1086,7 +1086,7 @@ lbl_fn_802D7A3C_00000DCC:
 lbl_fn_802D7A3C_00000DEC:
     mr r3, r30
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r31, 0x0
     ble lbl_fn_802D7A3C_00000E08
     mr r3, r30

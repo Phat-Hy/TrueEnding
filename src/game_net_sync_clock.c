@@ -19,7 +19,7 @@ extern void str_findChar(void);
 extern void wcs_vformat(void);
 extern void save_validateHeader(void);
 extern void fn_801F4728(void);
-extern void fn_801F48C8(void);
+extern void save_parseSlotStats(void);
 extern void fn_801F4C14(void);
 extern void save_formatSlotTitle(void);
 extern void saveSlot_readSummary(void);
@@ -354,7 +354,7 @@ lbl_fn_804C822C_000002C8:
     lwz r3, 0xc4(r17)
     addi r4, r28, 0x424
     addi r5, r1, 0x18
-    bl fn_801F48C8
+    bl save_parseSlotStats
     lwz r4, lbl_8087F4F0
     mr r5, r18
     addi r3, r1, 0x8
@@ -362,7 +362,7 @@ lbl_fn_804C822C_000002C8:
     lwz r3, 0xc4(r17)
     addi r4, r28, 0x434
     addi r5, r1, 0x8
-    bl fn_801F48C8
+    bl save_parseSlotStats
 lbl_fn_804C822C_000003DC:
     lwz r18, 0xa0(r22)
     cmpwi r18, 0x0

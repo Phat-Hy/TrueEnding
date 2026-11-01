@@ -41,7 +41,7 @@ extern void res_MsgHandle_update(void);
 extern void res_findResourceSlot(void);
 extern void fn_8026580C(void);
 extern void entity_Instance_constructor(void);
-extern void fn_8035B78C(void);
+extern void entity_Instance_destructor(void);
 extern void world_setLocalFlag(void);
 extern void chest_spawnLoot(void);
 extern void atn_LoadHandle_constructor(void);
@@ -1824,7 +1824,7 @@ lbl_fn_802652F4_0000186C:
 lbl_fn_802652F4_0000187C:
     mr r3, r30
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r31, 0x0
     ble lbl_fn_802652F4_00001898
     mr r3, r30

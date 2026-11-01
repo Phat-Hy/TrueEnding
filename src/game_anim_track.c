@@ -40,7 +40,7 @@ extern void res_MsgHandle_update(void);
 extern void fn_80277BC0(void);
 extern void fn_802790A0(void);
 extern void fn_80279280(void);
-extern void fn_8035B78C(void);
+extern void entity_Instance_destructor(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_destructor(void);
@@ -327,7 +327,7 @@ lbl_fn_80272E0C_000002E0:
 lbl_fn_80272E0C_00000310:
     mr r3, r29
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r30, 0x0
     ble lbl_fn_80272E0C_0000032C
     mr r3, r29

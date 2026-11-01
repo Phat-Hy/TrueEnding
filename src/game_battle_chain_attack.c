@@ -33,8 +33,8 @@ extern void res_MsgHandle_unload(void);
 extern void res_MsgHandle_update(void);
 extern void res_registerResource(void);
 extern void task_createWorker(void);
-extern void fn_803EC69C(void);
-extern void fn_803EC91C(void);
+extern void task_destroyWorker(void);
+extern void task_updateWorker(void);
 extern void fn_803ECBD4(void);
 extern void fn_803EDB18(void);
 extern void fn_803FFC50(void);
@@ -971,7 +971,7 @@ asm void fn_803FDF68(void)
     mr r30, r3
     beq lbl_fn_803FDF68_00000C7C
     li r4, 0x0
-    bl fn_803EC69C
+    bl task_destroyWorker
     cmpwi r31, 0x0
     ble lbl_fn_803FDF68_00000C7C
     mr r3, r30
@@ -1554,7 +1554,7 @@ lbl_fn_803FE798_000014B8:
     bl fn_8008A76C
     mr r3, r29
     li r4, 0x0
-    bl fn_803EC69C
+    bl task_destroyWorker
     cmpwi r30, 0x0
     ble lbl_fn_803FE798_000014E0
     mr r3, r29
@@ -1578,7 +1578,7 @@ asm void fn_803FE828(void)
     stw r0, 0xa4(r1)
     stw r31, 0x9c(r1)
     mr r31, r3
-    bl fn_803EC91C
+    bl task_updateWorker
     cmpwi r3, 0x0
     bne lbl_fn_803FE828_00001830
     addi r3, r31, 0xf4

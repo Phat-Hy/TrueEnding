@@ -21,8 +21,8 @@ extern void fn_800CB518(void);
 extern void morph_updateMesh(void);
 extern void fn_800CB6B0(void);
 extern void task_createWorker(void);
-extern void fn_803EC69C(void);
-extern void fn_803EC91C(void);
+extern void task_destroyWorker(void);
+extern void task_updateWorker(void);
 extern void fn_8040B560(void);
 extern void fn_8040B60C(void);
 extern void fn_8040B668(void);
@@ -1565,7 +1565,7 @@ lbl_fn_8040D3A0_00001568:
 lbl_fn_8040D3A0_00001574:
     mr r3, r30
     li r4, 0x0
-    bl fn_803EC69C
+    bl task_destroyWorker
     cmpwi r31, 0x0
     ble lbl_fn_8040D3A0_00001590
     mr r3, r30
@@ -1593,7 +1593,7 @@ asm void fn_8040D434(void)
     psq_st f30, 0x78(r1), 0, 0
     bl _savegpr_21
     mr r26, r3
-    bl fn_803EC91C
+    bl task_updateWorker
     cmpwi r3, 0x0
     bne lbl_fn_8040D434_00001844
     lbz r0, 0xf4(r26)
