@@ -1918,10 +1918,8 @@ lbl_fn_8041E7E4_000018C4:
     blr
 }
 
-asm void fn_8041E86C(void)
+void fn_8041E86C(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_8041E870(void)

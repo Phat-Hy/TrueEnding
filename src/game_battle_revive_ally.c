@@ -333,16 +333,12 @@ lbl_fn_80403B94_000002F4:
     blr
 }
 
-asm void fn_80403BF4(void)
+void fn_80403BF4(void)
 {
-    nofralloc
-    blr
 }
 
-asm void fn_80403BF8(void)
+void fn_80403BF8(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_80403BFC(void)

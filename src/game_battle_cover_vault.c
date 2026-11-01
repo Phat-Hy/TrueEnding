@@ -1314,10 +1314,8 @@ asm void fn_803F9400(void)
     blr
 }
 
-asm void fn_803F9408(void)
+void fn_803F9408(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_803F940C(void)

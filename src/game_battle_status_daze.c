@@ -418,10 +418,8 @@ asm void fn_8042E34C(void)
     blr
 }
 
-asm void fn_8042E360(void)
+void fn_8042E360(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_8042E364(void)
@@ -1792,10 +1790,8 @@ lbl_fn_8042F5E0_0000163C:
     blr
 }
 
-asm void fn_8042F624(void)
+void fn_8042F624(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_8042F628(void)
