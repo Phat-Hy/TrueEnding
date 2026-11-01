@@ -184,9 +184,9 @@ void fn_80686858(void);
 void swprintf(void);
 void vswprintf(void);
 u32 wcslen(const u16* str);
-void wcscpy(void);
-void wcsncpy(void);
-void wcscat(void);
+u16* wcscpy(u16* dst, const u16* src);
+u16* wcsncpy(u16* dst, const u16* src, u32 n);
+u16* wcscat(u16* dst, const u16* src);
 void wcscmp(void);
 void wcsncmp(void);
 void wcschr(void);
@@ -13815,61 +13815,41 @@ u32 wcslen(const u16* str)
     return len;
 }
 
-asm void wcscpy(void)
+u16* wcscpy(u16* dst, const u16* src)
 {
-    nofralloc
-    subi r4, r4, 0x2
-    subi r5, r3, 0x2
-lbl_wcscpy_0000B600:
-    lhzu r0, 0x2(r4)
-    sthu r0, 0x2(r5)
-    cmpwi r0, 0x0
-    bne lbl_wcscpy_0000B600
-    blr
+    const u16* s = src - 1;
+    u16* d = dst - 1;
+    do {
+    } while ((*++d = *++s) != 0);
+    return dst;
 }
 
-asm void wcsncpy(void)
+u16* wcsncpy(u16* dst, const u16* src, u32 n)
 {
-    nofralloc
-    subi r4, r4, 0x2
-    subi r6, r3, 0x2
-    addi r5, r5, 0x1
-    b lbl_wcsncpy_0000B64C
-lbl_wcsncpy_0000B624:
-    lhzu r0, 0x2(r4)
-    sthu r0, 0x2(r6)
-    cmpwi r0, 0x0
-    bne lbl_wcsncpy_0000B64C
-    li r0, 0x0
-    b lbl_wcsncpy_0000B640
-lbl_wcsncpy_0000B63C:
-    sthu r0, 0x2(r6)
-lbl_wcsncpy_0000B640:
-    subic. r5, r5, 0x1
-    bne lbl_wcsncpy_0000B63C
-    blr
-lbl_wcsncpy_0000B64C:
-    subic. r5, r5, 0x1
-    bne lbl_wcsncpy_0000B624
-    blr
+    const u16* s = src - 1;
+    u16* d = dst - 1;
+    n++;
+    while (--n != 0) {
+        if ((*++d = *++s) == 0) {
+            while (--n != 0) {
+                *++d = 0;
+            }
+            break;
+        }
+    }
+    return dst;
 }
 
-asm void wcscat(void)
+u16* wcscat(u16* dst, const u16* src)
 {
-    nofralloc
-    subi r4, r4, 0x2
-    subi r5, r3, 0x2
-lbl_wcscat_0000B660:
-    lhzu r0, 0x2(r5)
-    cmpwi r0, 0x0
-    bne lbl_wcscat_0000B660
-    subi r5, r5, 0x2
-lbl_wcscat_0000B670:
-    lhzu r0, 0x2(r4)
-    sthu r0, 0x2(r5)
-    cmpwi r0, 0x0
-    bne lbl_wcscat_0000B670
-    blr
+    const u16* s = src - 1;
+    u16* d = dst - 1;
+    do {
+    } while (*++d != 0);
+    d--;
+    do {
+    } while ((*++d = *++s) != 0);
+    return dst;
 }
 
 asm void wcscmp(void)
