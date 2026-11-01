@@ -9,7 +9,7 @@ extern s32 ESP_GetTitleId(void* titleId);
 extern s32 ESP_DiGetTicketView(u32 viewType, void* ticketView);
 extern s32 fn_805BFC10(u32 titleIdHi, u32 titleIdLo, void* ticketViews, u32* numViews);
 extern s32 fn_805BFB70(u32 titleIdHi, u32 titleIdLo, void* ticketView);
-extern void fn_805F3C90(void);
+extern void __OSReturnToMenuForError(void);
 extern u8 fn_805EC060(void);
 extern BOOL OSPlayTimeIsLimited(void);
 extern s32 __OSGetPlayTime(void* ticketView, s32* remainSec, s32* remainPlayCount);
@@ -41,13 +41,13 @@ asm void fn_805F86B0(u32 resetCode) {
     bl ESP_InitLib
     cmpwi r3, 0x0
     beq lbl_0050
-    bl fn_805F3C90
+    bl __OSReturnToMenuForError
 lbl_0050:
     addi r3, r1, 0x40
     bl ESP_GetTitleId
     cmpwi r3, 0x0
     beq lbl_0064
-    bl fn_805F3C90
+    bl __OSReturnToMenuForError
 lbl_0064:
     li r3, 0xe0
     li r4, 0x20
@@ -56,7 +56,7 @@ lbl_0064:
     mr r31, r3
     cmplw r3, r0
     bne lbl_0084
-    bl fn_805F3C90
+    bl __OSReturnToMenuForError
 lbl_0084:
     mr r3, r31
     li r4, 0x0
@@ -74,7 +74,7 @@ lbl_0084:
     bl fn_805BFC10
     cmpwi r3, 0x0
     beq lbl_00c8
-    bl fn_805F3C90
+    bl __OSReturnToMenuForError
 lbl_00c8:
     lwz r0, 0x28(r1)
     li r4, 0x20
@@ -86,7 +86,7 @@ lbl_00c8:
     mr r30, r3
     cmplw r3, r0
     bne lbl_00f4
-    bl fn_805F3C90
+    bl __OSReturnToMenuForError
 lbl_00f4:
     lwz r3, 0x40(r1)
     mr r5, r30
@@ -95,7 +95,7 @@ lbl_00f4:
     bl fn_805BFC10
     cmpwi r3, 0x0
     beq lbl_0114
-    bl fn_805F3C90
+    bl __OSReturnToMenuForError
 lbl_0114:
     mr r3, r31
     mr r4, r30
@@ -105,7 +105,7 @@ lbl_0114:
 lbl_0128:
     cmpwi r3, 0x0
     beq lbl_0138
-    bl fn_805F3C90
+    bl __OSReturnToMenuForError
     b lbl_0178
 lbl_0138:
     bl OSPlayTimeIsLimited
@@ -123,7 +123,7 @@ lbl_0138:
     cmpwi r0, 0x0
     bne lbl_0178
     bl fn_805F7E30
-    bl fn_805F3C90
+    bl __OSReturnToMenuForError
 lbl_0178:
     li r3, 0x2000
     li r4, 0x40
@@ -157,7 +157,7 @@ lbl_0178:
     bl fn_805BFB70
     cmpwi r3, 0x0
     beq lbl_0200
-    bl fn_805F3C90
+    bl __OSReturnToMenuForError
     nop
 lbl_0200:
     b lbl_0200

@@ -25,7 +25,7 @@ extern void fn_80629870(void);
 extern void fn_806298B0(void);
 extern void fn_806298D0(void);
 extern void bta_sys_sendmsg(void);
-extern void fn_80629E90(void);
+extern void bta_sys_sendMsgToApp(void);
 extern void fn_80630468(void);
 extern void fn_806307D8(void);
 extern void fn_806308DC(void);
@@ -476,7 +476,7 @@ asm void fn_806375F0(void)
     cmpwi r0, 0x0
     beq lbl_fn_806375F0_00000428
     addi r3, r30, 0x193c
-    bl fn_80629E90
+    bl bta_sys_sendMsgToApp
     li r31, 0x0
     addi r3, r30, 0x1954
     stw r31, 0x194c(r30)
@@ -2347,7 +2347,7 @@ lbl_fn_80638E3C_00001D68:
     cmpwi r0, 0x0
     beq lbl_fn_80638E3C_00001DAC
     addi r3, r28, 0x193c
-    bl fn_80629E90
+    bl bta_sys_sendMsgToApp
     li r0, 0x0
     li r29, 0xe
     stw r0, 0x194c(r28)
@@ -2644,7 +2644,7 @@ lbl_fn_80639378_00002188:
     cmpwi r3, 0x0
     bne lbl_fn_80639378_000021F8
     addi r3, r31, 0x193c
-    bl fn_80629E90
+    bl bta_sys_sendMsgToApp
     li r0, 0x0
     addi r3, r31, 0x1954
     stw r0, 0x194c(r31)
@@ -4576,7 +4576,7 @@ lbl_fn_8063ADA4_00003BD8:
     b lbl_fn_8063ADA4_00003C0C
 lbl_fn_8063ADA4_00003C04:
     addi r3, r31, 0x4c
-    bl fn_80629E90
+    bl bta_sys_sendMsgToApp
 lbl_fn_8063ADA4_00003C0C:
     subi r0, r29, 0x3
     mr r3, r30
@@ -4805,7 +4805,7 @@ lbl_fn_8063B0BC_00003EFC:
     b lbl_fn_8063B0BC_00003F30
 lbl_fn_8063B0BC_00003F28:
     addi r3, r30, 0x4c
-    bl fn_80629E90
+    bl bta_sys_sendMsgToApp
 lbl_fn_8063B0BC_00003F30:
     mr r3, r28
     mr r4, r29

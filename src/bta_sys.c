@@ -147,7 +147,7 @@ void fn_80629A30(void);
 void fn_80629A60(void);
 void fn_80629AA0(void);
 void bta_sys_sendmsg(void);
-void fn_80629E90(void);
+void bta_sys_sendMsgToApp(void);
 void bd_addr_copy(void);
 void fn_80629ED8(void);
 void fn_80629F78(void);
@@ -1921,7 +1921,7 @@ asm void bta_sys_sendmsg(void)
     blr
 }
 
-asm void fn_80629E90(void)
+asm void bta_sys_sendMsgToApp(void)
 {
     nofralloc
     lis r5, lbl_8081FAF0@ha

@@ -92,7 +92,7 @@ void fn_80472FAC(void);
 void fn_8047304C(void);
 void fn_804730D4(void);
 void fn_804730E4(void);
-void fn_80473104(void);
+void boss_cocoon_setRushState(void);
 void fn_80473130(void);
 void fn_80473184(void);
 void atn_LoadEffect_constructor(void);
@@ -385,7 +385,7 @@ asm void atn_LoadColliObject_destructor(void)
     bl fn_80472424
     mr r3, r31
     li r4, 0x3
-    bl fn_80473104
+    bl boss_cocoon_setRushState
     addi r3, r1, 0x14
     li r4, -0x1
     bl fn_8043F63C
@@ -961,7 +961,7 @@ lbl_fn_80472A9C_00000BE0:
 lbl_fn_80472A9C_00000C1C:
     mr r3, r30
     li r4, 0x4
-    bl fn_80473104
+    bl boss_cocoon_setRushState
     mr r3, r31
     mr r4, r30
     bl fn_8046F5CC
@@ -1040,7 +1040,7 @@ asm void atn_LoadColliTree_destructor(void)
     mr r3, r31
     stw r0, 0x5c(r31)
     li r4, 0x3
-    bl fn_80473104
+    bl boss_cocoon_setRushState
     addi r3, r1, 0x8
     li r4, -0x1
     bl fn_8043FE90
@@ -1205,7 +1205,7 @@ lbl_fn_80472DCC_00000EFC:
 lbl_fn_80472DCC_00000F38:
     mr r3, r30
     li r4, 0x4
-    bl fn_80473104
+    bl boss_cocoon_setRushState
     mr r3, r31
     mr r4, r30
     bl fn_8046F5CC
@@ -1334,7 +1334,7 @@ asm void fn_804730E4(void)
     blr
 }
 
-asm void fn_80473104(void)
+asm void boss_cocoon_setRushState(void)
 {
     nofralloc
     stb r4, 0x4(r3)
@@ -1498,7 +1498,7 @@ asm void atn_LoadEffect_destructor(void)
     cmpwi r0, 0x0
     bne lbl_atn_LoadEffect_destructor_000012F4
     li r4, 0x5
-    bl fn_80473104
+    bl boss_cocoon_setRushState
     b lbl_atn_LoadEffect_destructor_00001884
 lbl_atn_LoadEffect_destructor_000012F4:
     li r22, 0x0
@@ -1559,7 +1559,7 @@ lbl_atn_LoadEffect_destructor_000013A4:
     bne lbl_atn_LoadEffect_destructor_00001884
     mr r3, r17
     li r4, 0x3
-    bl fn_80473104
+    bl boss_cocoon_setRushState
     b lbl_atn_LoadEffect_destructor_00001884
 lbl_atn_LoadEffect_destructor_000013C8:
     lwz r3, 0x54(r3)
@@ -1571,7 +1571,7 @@ lbl_atn_LoadEffect_destructor_000013C8:
     bl fn_80473130
     mr r3, r17
     li r4, 0x4
-    bl fn_80473104
+    bl boss_cocoon_setRushState
 lbl_atn_LoadEffect_destructor_000013F0:
     addi r19, r17, 0x6
     stw r19, 0x9c(r17)
@@ -2069,7 +2069,7 @@ lbl_fn_8047392C_00001A70:
 lbl_fn_8047392C_00001AAC:
     mr r3, r30
     li r4, 0x4
-    bl fn_80473104
+    bl boss_cocoon_setRushState
     mr r3, r31
     mr r4, r30
     bl fn_8046F5CC

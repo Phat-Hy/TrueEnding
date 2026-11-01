@@ -29,7 +29,7 @@ extern void fn_8060B080(void);
 extern void fn_80624AB0(void);
 extern void __construct_new_array(void);
 extern void __destroy_new_array(void);
-extern void fn_80703F90(void);
+extern void net_getGlobalObject(void);
 extern void fn_80704080(void);
 extern void fn_807041B0(void);
 extern void fn_807042D0(void);
@@ -675,7 +675,7 @@ asm void fn_80718540(void)
     stb r0, lbl_808804E8
     lwz r3, lbl_8087EE28
     bl OSRegisterVersion
-    bl fn_80703F90
+    bl net_getGlobalObject
     bl fn_80704080
     bl SCInit
 lbl_fn_80718540_000006F0:
@@ -691,22 +691,22 @@ lbl_fn_80718540_000006F0:
     beq lbl_fn_80718540_0000073C
     b lbl_fn_80718540_0000074C
 lbl_fn_80718540_0000071C:
-    bl fn_80703F90
+    bl net_getGlobalObject
     li r4, 0x3
     bl fn_80704780
     b lbl_fn_80718540_00000758
 lbl_fn_80718540_0000072C:
-    bl fn_80703F90
+    bl net_getGlobalObject
     li r4, 0x0
     bl fn_80704780
     b lbl_fn_80718540_00000758
 lbl_fn_80718540_0000073C:
-    bl fn_80703F90
+    bl net_getGlobalObject
     li r4, 0x2
     bl fn_80704780
     b lbl_fn_80718540_00000758
 lbl_fn_80718540_0000074C:
-    bl fn_80703F90
+    bl net_getGlobalObject
     li r4, 0x0
     bl fn_80704780
 lbl_fn_80718540_00000758:
@@ -801,7 +801,7 @@ asm void fn_807186F0(void)
     bl fn_80720680
     bl fn_807080C0
     bl fn_807082B0
-    bl fn_80703F90
+    bl net_getGlobalObject
     bl fn_807041B0
     li r0, 0x0
     stb r0, lbl_808804E8
@@ -1168,7 +1168,7 @@ asm void net_workerThreadMain(void)
     stw r30, 0x18(r1)
     stw r29, 0x14(r1)
     mr r29, r3
-    bl fn_80703F90
+    bl net_getGlobalObject
     lis r5, fn_80718B30@ha
     addi r4, r29, 0x36c
     addi r5, r5, fn_80718B30@l
@@ -1200,7 +1200,7 @@ lbl_net_workerThreadMain_00000E18:
 lbl_net_workerThreadMain_00000E30:
     cmplw r31, r30
     bne lbl_net_workerThreadMain_00000E18
-    bl fn_80703F90
+    bl net_getGlobalObject
     addi r4, r29, 0x36c
     bl fn_80704720
     lwz r31, 0x1c(r1)
@@ -1301,7 +1301,7 @@ lbl_fn_80718DD0_00000F84:
     mr r29, r3
     bl fn_807080C0
     bl fn_80708980
-    bl fn_80703F90
+    bl net_getGlobalObject
     bl fn_807042D0
     lwz r30, 0x388(r27)
     addi r31, r27, 0x388

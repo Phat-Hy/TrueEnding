@@ -36,7 +36,7 @@ extern void net_invokeChannelCallback(void);
 extern void net_socketConnect(void);
 extern void net_socketClose(void);
 extern void fn_806D7AE0(void);
-extern void fn_806D7B30(void);
+extern void net_checkSocketStatus(void);
 extern void fn_806D7C40(void);
 extern void fn_806D7D60(void);
 extern void fn_806D7EE0(void);
@@ -2093,7 +2093,7 @@ lbl_fn_80700A00_00001A28:
     cmpwi r3, 0x0
     beq lbl_fn_80700A00_00001A54
     lwz r3, 0x6b4(r31)
-    bl fn_806D7B30
+    bl net_checkSocketStatus
     li r0, -0x1
     stw r0, 0x6b4(r31)
     li r3, 0x3
@@ -2148,7 +2148,7 @@ lbl_fn_80700BA0_00001AF0:
     cmpwi r3, -0x1
     stw r23, 0x80(r26)
     beq lbl_fn_80700BA0_00001B08
-    bl fn_806D7B30
+    bl net_checkSocketStatus
 lbl_fn_80700BA0_00001B08:
     lwz r0, 0x8(r26)
     stw r24, 0x6b4(r26)
@@ -2277,7 +2277,7 @@ lbl_fn_80700BA0_00001CC8:
     cmpwi r3, -0x1
     stw r0, 0x80(r26)
     beq lbl_fn_80700BA0_00001CE4
-    bl fn_806D7B30
+    bl net_checkSocketStatus
 lbl_fn_80700BA0_00001CE4:
     lwz r0, 0x8(r26)
     li r4, -0x1
@@ -2625,7 +2625,7 @@ lbl_fn_80700F50_000021C0:
     cmpwi r3, -0x1
     stw r0, 0x80(r23)
     beq lbl_fn_80700F50_000021DC
-    bl fn_806D7B30
+    bl net_checkSocketStatus
 lbl_fn_80700F50_000021DC:
     lwz r0, 0x8(r23)
     li r4, -0x1

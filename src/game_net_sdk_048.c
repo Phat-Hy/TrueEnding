@@ -40,7 +40,7 @@ extern void fn_806D5930(void);
 extern void fn_806D6560(void);
 extern void net_invokeChannelCallback(void);
 extern void net_socketClose(void);
-extern void fn_806D7B30(void);
+extern void net_checkSocketStatus(void);
 extern void fn_806D7CB0(void);
 extern void fn_806D7CF0(void);
 extern void fn_806D7D60(void);
@@ -103,7 +103,7 @@ void fn_80703C50(void);
 void fn_80703D00(void);
 void fn_80703F10(void);
 void fn_80703F30(void);
-void fn_80703F90(void);
+void net_getGlobalObject(void);
 void fn_80704000(void);
 void fn_80704080(void);
 void fn_807041B0(void);
@@ -212,7 +212,7 @@ lbl_fn_80703610_00000110:
     cmpwi r3, -0x1
     stw r0, 0x80(r31)
     beq lbl_fn_80703610_0000012C
-    bl fn_806D7B30
+    bl net_checkSocketStatus
 lbl_fn_80703610_0000012C:
     lwz r0, 0x8(r31)
     li r4, -0x1
@@ -551,7 +551,7 @@ lbl_fn_80703AC0_000005C8:
     cmplwi r0, 0x7d0
     ble lbl_fn_80703AC0_00000624
     lwz r3, 0x6b4(r26)
-    bl fn_806D7B30
+    bl net_checkSocketStatus
     li r3, -0x1
     li r0, 0x1
     stw r3, 0x6b4(r26)
@@ -808,7 +808,7 @@ lbl_fn_80703F30_00000960:
     blr
 }
 
-asm void fn_80703F90(void)
+asm void net_getGlobalObject(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -817,7 +817,7 @@ asm void fn_80703F90(void)
     stw r31, 0xc(r1)
     lbz r0, lbl_8088049C
     extsb. r0, r0
-    bne lbl_fn_80703F90_000009CC
+    bne lbl_net_getGlobalObject_000009CC
     lis r31, lbl_80862E30@ha
     addi r3, r31, lbl_80862E30@l
     bl fn_80703D00
@@ -829,7 +829,7 @@ asm void fn_80703F90(void)
     bl __register_global_object
     li r0, 0x1
     stb r0, lbl_8088049C
-lbl_fn_80703F90_000009CC:
+lbl_net_getGlobalObject_000009CC:
     lwz r31, 0xc(r1)
     lis r3, lbl_80862E30@ha
     lwz r0, 0x14(r1)
@@ -2346,7 +2346,7 @@ lbl_fn_80705450_00001E80:
 lbl_fn_80705450_00001EA0:
     li r30, 0x0
 lbl_fn_80705450_00001EA4:
-    bl fn_80703F90
+    bl net_getGlobalObject
     bl fn_807046A0
     cmpwi r3, 0x0
     lwz r0, 0x14(r29)

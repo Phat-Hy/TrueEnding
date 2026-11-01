@@ -48,7 +48,7 @@ extern void atn_Arc_getFileEntry(void);
 extern void fn_8046FD2C(void);
 extern void fn_80470264(void);
 extern void boss_getOffset54(void);
-extern void fn_80473104(void);
+extern void boss_cocoon_setRushState(void);
 extern void atn_LoadHandle_getStatus(void);
 extern void fn_805F9EF0(void);
 extern void fn_805FA200(void);
@@ -521,19 +521,19 @@ lbl_atn_Arc_decompressEntry_00000584:
     bne lbl_atn_Arc_decompressEntry_000005C0
     lwz r3, 0x0(r30)
     li r4, 0x3
-    bl fn_80473104
+    bl boss_cocoon_setRushState
     b lbl_atn_Arc_decompressEntry_000005E4
 lbl_atn_Arc_decompressEntry_000005C0:
     cmpwi r4, 0x0
     bge lbl_atn_Arc_decompressEntry_000005D8
     lwz r3, 0x0(r30)
     li r4, 0x4
-    bl fn_80473104
+    bl boss_cocoon_setRushState
     b lbl_atn_Arc_decompressEntry_000005E4
 lbl_atn_Arc_decompressEntry_000005D8:
     lwz r3, 0x0(r30)
     li r4, 0x2
-    bl fn_80473104
+    bl boss_cocoon_setRushState
 lbl_atn_Arc_decompressEntry_000005E4:
     mr r3, r30
     bl dtor_80084684
@@ -617,7 +617,7 @@ lbl_atn_Arc_decompressEntry_000006A0:
     bne lbl_atn_Arc_decompressEntry_00000738
     lwz r3, 0x0(r27)
     li r4, 0x4
-    bl fn_80473104
+    bl boss_cocoon_setRushState
     mr r3, r27
     bl dtor_80084684
     stw r30, 0x0(r29)
@@ -730,7 +730,7 @@ lbl_fn_8046BF88_00000818:
     lwz r0, 0x4(r30)
     stbx r28, r3, r0
     lwz r3, 0x0(r30)
-    bl fn_80473104
+    bl boss_cocoon_setRushState
     mr r3, r30
     bl dtor_80084684
     b lbl_fn_8046BF88_00000A10
@@ -823,7 +823,7 @@ lbl_fn_8046BF88_00000974:
     bne lbl_fn_8046BF88_00000A1C
     lwz r3, 0x0(r30)
     li r4, 0x4
-    bl fn_80473104
+    bl boss_cocoon_setRushState
     mr r3, r30
     bl dtor_80084684
     stw r28, 0x0(r31)
@@ -994,7 +994,7 @@ lbl_atn_Arc_loadEntry_00000C2C:
     mr r3, r26
     li r4, 0x2
     stw r31, 0x50(r26)
-    bl fn_80473104
+    bl boss_cocoon_setRushState
     lwz r0, 0x70(r25)
     cmpwi r0, 0x0
     beq lbl_atn_Arc_loadEntry_00000C50
@@ -1486,7 +1486,7 @@ lbl_atn_Arc_decompressChunk_000012DC:
     bne lbl_atn_Arc_decompressChunk_00001400
     lwz r3, 0x0(r30)
     li r4, 0x4
-    bl fn_80473104
+    bl boss_cocoon_setRushState
     mr r3, r30
     bl dtor_80084684
     stw r21, 0x0(r31)

@@ -18,7 +18,7 @@ extern void fn_8046F5CC(void);
 extern void fn_8046F834(void);
 extern void fn_80472FAC(void);
 extern void fn_804730D4(void);
-extern void fn_80473104(void);
+extern void boss_cocoon_setRushState(void);
 extern void printf(void);
 extern void abort(void);
 extern void msl_releaseRefCount(void);
@@ -166,7 +166,7 @@ lbl_fn_80470604_0000014C:
 lbl_fn_80470604_00000188:
     mr r3, r29
     li r4, 0x4
-    bl fn_80473104
+    bl boss_cocoon_setRushState
     mr r3, r31
     mr r4, r29
     bl fn_8046F5CC

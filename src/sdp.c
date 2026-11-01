@@ -23,7 +23,7 @@ extern void bta_sys_log(void);
 extern void bta_sys_traceDebug(void);
 extern void fn_80629890(void);
 extern void bta_sys_sendmsg(void);
-extern void fn_80629E90(void);
+extern void bta_sys_sendMsgToApp(void);
 extern void fn_806373C8(void);
 extern void fn_80642174(void);
 extern void fn_806423A0(void);
@@ -2323,7 +2323,7 @@ asm void fn_806504B0(void)
     stw r28, 0x10(r1)
     mr r28, r3
     addi r3, r3, 0x8
-    bl fn_80629E90
+    bl bta_sys_sendMsgToApp
     lhz r0, 0x4(r29)
     lhz r3, 0x2(r29)
     add r4, r29, r0
@@ -5335,7 +5335,7 @@ asm void fn_80652E58(void)
     stw r31, 0xc(r1)
     mr r31, r3
     addi r3, r3, 0x8
-    bl fn_80629E90
+    bl bta_sys_sendMsgToApp
     li r0, 0x0
     stb r0, 0x0(r31)
     lwz r31, 0xc(r1)

@@ -84,7 +84,7 @@ extern void printf(void);
 extern void abort(void);
 extern void msl_releaseRefCount(void);
 extern void runtime_registerStaticObject(void);
-extern void fn_80703F90(void);
+extern void net_getGlobalObject(void);
 extern void fn_80704780(void);
 extern void fn_80704890(void);
 extern void fn_807048A0(void);
@@ -1701,19 +1701,19 @@ lbl_fn_80046EE0_00001284:
     bl fn_80624AB0
     clrlwi. r0, r3, 24
     bne lbl_fn_80046EE0_000013C0
-    bl fn_80703F90
+    bl net_getGlobalObject
     li r4, 0x3
     bl fn_80704780
     b lbl_fn_80046EE0_000013E4
 lbl_fn_80046EE0_000013C0:
     cmplwi r0, 0x2
     bne lbl_fn_80046EE0_000013D8
-    bl fn_80703F90
+    bl net_getGlobalObject
     li r4, 0x2
     bl fn_80704780
     b lbl_fn_80046EE0_000013E4
 lbl_fn_80046EE0_000013D8:
-    bl fn_80703F90
+    bl net_getGlobalObject
     li r4, 0x0
     bl fn_80704780
 lbl_fn_80046EE0_000013E4:
@@ -4359,7 +4359,7 @@ asm void fn_800499D0(void)
     stwu r1, -0x10(r1)
     mflr r0
     stw r0, 0x14(r1)
-    bl fn_80703F90
+    bl net_getGlobalObject
     bl fn_80704890
     lwz r0, 0x14(r1)
     mtlr r0
@@ -4375,7 +4375,7 @@ asm void fn_800499F4(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r4
-    bl fn_80703F90
+    bl net_getGlobalObject
     mr r4, r31
     bl fn_80704780
     lwz r0, 0x14(r1)
@@ -4391,7 +4391,7 @@ asm void fn_80049A28(void)
     stwu r1, -0x20(r1)
     mflr r0
     stw r0, 0x24(r1)
-    bl fn_80703F90
+    bl net_getGlobalObject
     lwz r6, 0x24(r3)
     lwz r0, 0x28(r3)
     cmpw r0, r6
@@ -4433,7 +4433,7 @@ asm void fn_80049AAC(void)
     stw r0, 0x14(r1)
     stfd f31, 0x8(r1)
     fmr f31, f1
-    bl fn_80703F90
+    bl net_getGlobalObject
     fmr f1, f31
     li r4, 0x0
     bl fn_807048A0
@@ -5023,7 +5023,7 @@ asm void fn_8004A1D4(void)
     cmpwi r4, 0x0
     stw r0, 0x8c0(r3)
     bgt lbl_fn_8004A1D4_00004034
-    bl fn_80703F90
+    bl net_getGlobalObject
     li r4, 0x0
     li r5, 0x0
     bl fn_80704CC0
@@ -5064,7 +5064,7 @@ lbl_fn_8004A1D4_00004080:
     lwz r0, 0x8bc(r30)
     cmpwi r0, 0x0
     bgt lbl_fn_8004A1D4_000040B4
-    bl fn_80703F90
+    bl net_getGlobalObject
     addi r5, r30, 0x410
     li r4, 0x0
     bl fn_80704AD0
@@ -5096,7 +5096,7 @@ asm void fn_8004A2CC(void)
     lwz r0, 0x40c(r3)
     cmpwi r0, 0x0
     bne lbl_fn_8004A2CC_00004134
-    bl fn_80703F90
+    bl net_getGlobalObject
     mulli r0, r31, 0x3e8
     lis r5, 0x8889
     li r4, 0x0
@@ -5120,7 +5120,7 @@ lbl_fn_8004A2CC_00004144:
     lwz r0, 0x8bc(r3)
     cmpwi r0, 0x0
     ble lbl_fn_8004A2CC_00004170
-    bl fn_80703F90
+    bl net_getGlobalObject
     addi r5, r29, 0x410
     li r4, 0x0
     bl fn_80704AD0

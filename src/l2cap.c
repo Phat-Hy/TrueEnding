@@ -30,7 +30,7 @@ extern void fn_80629870(void);
 extern void fn_806298B0(void);
 extern void fn_806298D0(void);
 extern void bta_sys_sendmsg(void);
-extern void fn_80629E90(void);
+extern void bta_sys_sendMsgToApp(void);
 extern void fn_8062FE10(void);
 extern void fn_80630124(void);
 extern void fn_8063024C(void);
@@ -1866,7 +1866,7 @@ lbl_fn_80643714_000016B4:
     li r0, 0x6
     addi r3, r29, 0x18
     stw r0, 0x4(r29)
-    bl fn_80629E90
+    bl bta_sys_sendMsgToApp
     mr r3, r29
     li r4, 0x0
     bl fn_80644078
@@ -1889,7 +1889,7 @@ lbl_fn_80643714_00001724:
     bctrl
     b lbl_fn_80643714_00001950
     addi r3, r29, 0x18
-    bl fn_80629E90
+    bl bta_sys_sendMsgToApp
     lis r3, lbl_808230E0@ha
     lbz r0, lbl_808230E0@l(r3)
     cmplwi r0, 0x3
@@ -1953,7 +1953,7 @@ lbl_fn_80643714_000017C8:
     li r0, 0x6
     addi r3, r29, 0x18
     stw r0, 0x4(r29)
-    bl fn_80629E90
+    bl bta_sys_sendMsgToApp
     mr r3, r29
     li r4, 0x0
     bl fn_80644078
@@ -2121,7 +2121,7 @@ lbl_fn_80643ADC_00001A08:
     b lbl_fn_80643ADC_00001BAC
 lbl_fn_80643ADC_00001AA4:
     addi r3, r31, 0x18
-    bl fn_80629E90
+    bl bta_sys_sendMsgToApp
     stw r28, 0x4(r31)
     mr r3, r31
     mr r4, r27
@@ -2730,7 +2730,7 @@ lbl_fn_80644370_00002334:
     li r3, 0x0
     bl fn_806462AC
     addi r3, r31, 0x10
-    bl fn_80629E90
+    bl bta_sys_sendMsgToApp
     lwz r30, 0x8(r31)
     b lbl_fn_80644370_00002360
 lbl_fn_80644370_0000234C:
@@ -4922,7 +4922,7 @@ asm void fn_806462AC(void)
     cmpwi r3, 0x0
     bne lbl_fn_806462AC_0000419C
     addi r3, r4, 0x7cc
-    bl fn_80629E90
+    bl bta_sys_sendMsgToApp
     lbz r0, lbl_808230E0@l(r31)
     cmplwi r0, 0x2
     blt lbl_fn_806462AC_000041BC
@@ -5064,7 +5064,7 @@ asm void fn_806464AC(void)
     mr r30, r3
     stb r31, 0x0(r3)
     addi r3, r3, 0x10
-    bl fn_80629E90
+    bl bta_sys_sendMsgToApp
     lwz r3, 0x50(r30)
     cmpwi r3, 0x0
     beq lbl_fn_806464AC_00004374
@@ -6534,7 +6534,7 @@ asm void fn_806478E4(void)
     li r0, 0x0
     stb r0, 0x0(r3)
     addi r3, r3, 0x18
-    bl fn_80629E90
+    bl bta_sys_sendMsgToApp
     b lbl_fn_806478E4_000057B8
 lbl_fn_806478E4_000057AC:
     addi r3, r30, 0x70

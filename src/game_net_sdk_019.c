@@ -16,7 +16,7 @@ extern void _savegpr_25(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void snprintf(void);
-extern void fn_806A420C(void);
+extern void net_formatIpAddress(void);
 extern void net_checkConnectionSession(void);
 extern void net_formatLog(void);
 extern void fn_806A9CA0(void);
@@ -3674,7 +3674,7 @@ lbl_fn_806C6750_00003404:
     lwz r0, 0x664(r24)
     addi r3, r1, 0x10
     stw r0, 0x10(r1)
-    bl fn_806A420C
+    bl net_formatIpAddress
     lhz r6, 0x66c(r24)
     mr r5, r3
     addi r4, r30, 0x2258

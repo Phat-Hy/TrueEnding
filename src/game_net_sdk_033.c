@@ -14,7 +14,7 @@ extern void strcmp(void);
 extern void strncmp(void);
 extern void strstr(void);
 extern void atoi(void);
-extern void fn_806A420C(void);
+extern void net_formatIpAddress(void);
 extern void net_truncateU16(void);
 extern void fn_806D57A0(void);
 extern void net_pollActiveSockets(void);
@@ -1160,7 +1160,7 @@ lbl_fn_806E4FB0_00000DE0:
     beq lbl_fn_806E4FB0_00000DFC
     stw r3, 0x8(r1)
     addi r3, r1, 0x8
-    bl fn_806A420C
+    bl net_formatIpAddress
     li r0, 0x6a
     stw r0, 0x0(r31)
 lbl_fn_806E4FB0_00000DFC:
@@ -1227,7 +1227,7 @@ lbl_fn_806E5050_00000E98:
 lbl_fn_806E5050_00000ED0:
     stw r24, 0xc(r1)
     addi r3, r1, 0xc
-    bl fn_806A420C
+    bl net_formatIpAddress
     b lbl_fn_806E5050_00000F88
 lbl_fn_806E5050_00000EE0:
     lwz r28, 0x24(r30)
@@ -1249,7 +1249,7 @@ lbl_fn_806E5050_00000F08:
     bne lbl_fn_806E5050_00000F58
     stw r24, 0x8(r1)
     addi r3, r1, 0x8
-    bl fn_806A420C
+    bl net_formatIpAddress
     mr r3, r29
     bl net_socketClose
     lis r4, lbl_807C39EC@ha
@@ -1321,7 +1321,7 @@ lbl_fn_806E51E0_00001010:
     bne lbl_fn_806E51E0_00001028
     stw r31, 0x10(r1)
     addi r3, r1, 0x10
-    bl fn_806A420C
+    bl net_formatIpAddress
     b lbl_fn_806E51E0_00001048
 lbl_fn_806E51E0_00001028:
     cmpwi r6, 0x0
@@ -1330,12 +1330,12 @@ lbl_fn_806E51E0_00001028:
     stw r0, 0x0(r5)
     addi r3, r1, 0xc
     stw r31, 0xc(r1)
-    bl fn_806A420C
+    bl net_formatIpAddress
     b lbl_fn_806E51E0_00001054
 lbl_fn_806E51E0_00001048:
     stw r31, 0x8(r1)
     addi r3, r1, 0x8
-    bl fn_806A420C
+    bl net_formatIpAddress
 lbl_fn_806E51E0_00001054:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)

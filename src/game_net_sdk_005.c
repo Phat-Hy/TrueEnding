@@ -100,7 +100,7 @@ void fn_806A3DC0(void);
 void fn_806A3EF0(void);
 void fn_806A3FA4(void);
 void fn_806A4100(void);
-void fn_806A420C(void);
+void net_formatIpAddress(void);
 void fn_806A4260(void);
 u32 fn_806A4264(u32 val);
 void fn_806A426C(void);
@@ -2440,7 +2440,7 @@ lbl_fn_806A4100_00001E88:
     blr
 }
 
-asm void fn_806A420C(void)
+asm void net_formatIpAddress(void)
 {
     nofralloc
     stwu r1, -0x10(r1)

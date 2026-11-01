@@ -45,7 +45,7 @@ extern void fn_805F1650(void);
 extern void fn_805F2FD0(void);
 extern void fn_805F34A0(void);
 extern void fn_805F3550(void);
-extern void fn_805F3C90(void);
+extern void __OSReturnToMenuForError(void);
 extern void fn_805FE860(void);
 extern void fn_805FEA30(void);
 extern void fn_805FEBA0(void);
@@ -229,7 +229,7 @@ lbl_fn_805EF630_000001F0:
     cmpwi r3, 0x0
     bge lbl_fn_805EF630_00000214
 lbl_fn_805EF630_00000210:
-    bl fn_805F3C90
+    bl __OSReturnToMenuForError
 lbl_fn_805EF630_00000214:
     addi r3, r1, 0x120
     bl fn_805FEA30
@@ -263,7 +263,7 @@ lbl_fn_805EF630_00000264:
     cmpwi r3, 0x0
     bge lbl_fn_805EF630_00000288
 lbl_fn_805EF630_00000284:
-    bl fn_805F3C90
+    bl __OSReturnToMenuForError
 lbl_fn_805EF630_00000288:
     addi r3, r1, 0x150
     bl fn_805FEA30
@@ -301,7 +301,7 @@ lbl_fn_805EF630_000002EC:
     cmpwi r3, 0x0
     bge lbl_fn_805EF630_00000310
 lbl_fn_805EF630_0000030C:
-    bl fn_805F3C90
+    bl __OSReturnToMenuForError
 lbl_fn_805EF630_00000310:
     addi r3, r1, 0x180
     bl fn_805FEA30
@@ -338,7 +338,7 @@ lbl_fn_805EF630_0000036C:
     cmpwi r3, 0x0
     bge lbl_fn_805EF630_00000390
 lbl_fn_805EF630_0000038C:
-    bl fn_805F3C90
+    bl __OSReturnToMenuForError
 lbl_fn_805EF630_00000390:
     addi r3, r1, 0x1b0
     bl fn_805FEA30
@@ -398,7 +398,7 @@ lbl_fn_805EF630_00000444:
     cmpwi r3, 0x0
     bge lbl_fn_805EF630_00000468
 lbl_fn_805EF630_00000464:
-    bl fn_805F3C90
+    bl __OSReturnToMenuForError
 lbl_fn_805EF630_00000468:
     addi r3, r1, 0xf0
     bl fn_805FEA30
@@ -465,7 +465,7 @@ lbl_fn_805EF630_00000534:
     cmpwi r3, 0x0
     bge lbl_fn_805EF630_00000558
 lbl_fn_805EF630_00000554:
-    bl fn_805F3C90
+    bl __OSReturnToMenuForError
 lbl_fn_805EF630_00000558:
     addi r3, r1, 0xc0
     bl fn_805FEA30
@@ -543,7 +543,7 @@ lbl_fn_805EF630_00000654:
     cmpwi r3, 0x0
     bge lbl_fn_805EF630_00000678
 lbl_fn_805EF630_00000674:
-    bl fn_805F3C90
+    bl __OSReturnToMenuForError
 lbl_fn_805EF630_00000678:
     addi r3, r1, 0x90
     bl fn_805FEA30
@@ -583,7 +583,7 @@ lbl_fn_805EF630_000006E0:
     cmpwi r3, 0x0
     bge lbl_fn_805EF630_00000704
 lbl_fn_805EF630_00000700:
-    bl fn_805F3C90
+    bl __OSReturnToMenuForError
 lbl_fn_805EF630_00000704:
     addi r3, r1, 0x60
     bl fn_805FEA30

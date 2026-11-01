@@ -18,7 +18,7 @@ extern void rand(void);
 extern void srand(void);
 extern void strcmp(void);
 extern void atoi(void);
-extern void fn_806A420C(void);
+extern void net_formatIpAddress(void);
 extern void fn_806A4264(void);
 extern void fn_806A426C(void);
 extern void net_truncateU16(void);
@@ -33,7 +33,7 @@ extern void fn_806D6720(void);
 extern void net_socketConnect(void);
 extern void net_socketClose(void);
 extern void fn_806D7AE0(void);
-extern void fn_806D7B30(void);
+extern void net_checkSocketStatus(void);
 extern void fn_806D7BB0(void);
 extern void fn_806D7CF0(void);
 extern void fn_806D7DA0(void);
@@ -287,7 +287,7 @@ lbl_fn_806EE8B0_000001F8:
     b lbl_fn_806EE8B0_00000264
 lbl_fn_806EE8B0_00000240:
     lwz r3, 0x0(r29)
-    bl fn_806D7B30
+    bl net_checkSocketStatus
     lwz r3, 0xc(r29)
     bl fn_806D63A0
     lwz r3, 0x10(r29)
@@ -545,7 +545,7 @@ asm void fn_806EED30(void)
     b lbl_fn_806EED30_000005D4
 lbl_fn_806EED30_000005B0:
     lwz r3, 0x0(r30)
-    bl fn_806D7B30
+    bl net_checkSocketStatus
     lwz r3, 0xc(r30)
     bl fn_806D63A0
     lwz r3, 0x10(r30)
@@ -594,7 +594,7 @@ lbl_fn_806EEDC0_00000640:
     beq lbl_fn_806EEDC0_00000678
     stw r3, 0xc(r1)
     addi r3, r1, 0xc
-    bl fn_806A420C
+    bl net_formatIpAddress
     mr r5, r3
     mr r3, r30
     mr r6, r29
@@ -605,7 +605,7 @@ lbl_fn_806EEDC0_00000640:
 lbl_fn_806EEDC0_00000678:
     stw r3, 0x8(r1)
     addi r3, r1, 0x8
-    bl fn_806A420C
+    bl net_formatIpAddress
     mr r5, r3
     mr r3, r30
     addi r4, r31, 0x8
@@ -948,7 +948,7 @@ lbl_fn_806EF0C0_00000B0C:
     lwz r0, 0xd8(r28)
     addi r3, r1, 0x8
     stw r0, 0x8(r1)
-    bl fn_806A420C
+    bl net_formatIpAddress
     b lbl_fn_806EF0C0_00000B40
 lbl_fn_806EF0C0_00000B3C:
     li r17, 0x1
@@ -1439,7 +1439,7 @@ lbl_fn_806EF930_00001198:
     lwz r0, 0xcc(r31)
     cmpwi r0, 0x0
     beq lbl_fn_806EF930_000011B4
-    bl fn_806D7B30
+    bl net_checkSocketStatus
 lbl_fn_806EF930_000011B4:
     li r0, -0x1
     stw r0, 0x0(r31)

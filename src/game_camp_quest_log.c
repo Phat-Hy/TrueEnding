@@ -9,7 +9,7 @@ extern void vec3_copy(void);
 extern void fn_8000D760(void);
 extern void fn_8000E18C(void);
 extern void sys_copyString(void);
-extern void fn_8000ECA8(void);
+extern void sys_calcBufferOffset(void);
 extern void vec3_add(void);
 extern void str_initFromCStr(void);
 extern void menu_initWindowBuffer(void);
@@ -470,7 +470,7 @@ lbl_fn_803C3894_00000458:
     bl str_appendString
     addi r3, r1, 0xe0
     li r4, 0x0
-    bl fn_8000ECA8
+    bl sys_calcBufferOffset
     lbz r0, 0x0(r3)
     cmpwi r0, 0x3b
     bne lbl_fn_803C3894_0000049C
@@ -587,7 +587,7 @@ lbl_fn_803C3894_00000614:
     bl str_appendString
     addi r3, r1, 0xe0
     li r4, 0x0
-    bl fn_8000ECA8
+    bl sys_calcBufferOffset
     lbz r0, 0x0(r3)
     cmpwi r0, 0x3b
     bne lbl_fn_803C3894_00000658
@@ -697,7 +697,7 @@ lbl_fn_803C3894_000007A4:
     bne lbl_fn_803C3894_00002830
     addi r3, r1, 0xe0
     li r4, 0x0
-    bl fn_8000ECA8
+    bl sys_calcBufferOffset
     lbz r0, 0x0(r3)
     cmpwi r0, 0x3b
     beq lbl_fn_803C3894_00000874
@@ -816,7 +816,7 @@ lbl_fn_803C3894_00000968:
     bne lbl_fn_803C3894_00002830
     addi r3, r1, 0xe0
     li r4, 0x0
-    bl fn_8000ECA8
+    bl sys_calcBufferOffset
     lbz r0, 0x0(r3)
     cmpwi r0, 0x3b
     beq lbl_fn_803C3894_00000AC8
@@ -935,7 +935,7 @@ lbl_fn_803C3894_00000B38:
     bne lbl_fn_803C3894_00002830
     addi r3, r1, 0xe0
     li r4, 0x0
-    bl fn_8000ECA8
+    bl sys_calcBufferOffset
     lbz r0, 0x0(r3)
     cmpwi r0, 0x3b
     beq lbl_fn_803C3894_00000C98
@@ -1048,7 +1048,7 @@ lbl_fn_803C3894_00000CF0:
     bne lbl_fn_803C3894_00002830
     addi r3, r1, 0xe0
     li r4, 0x0
-    bl fn_8000ECA8
+    bl sys_calcBufferOffset
     lbz r0, 0x0(r3)
     cmpwi r0, 0x3b
     beq lbl_fn_803C3894_00000DE0
@@ -1151,7 +1151,7 @@ lbl_fn_803C3894_00000E78:
     bne lbl_fn_803C3894_00002830
     addi r3, r1, 0xe0
     li r4, 0x0
-    bl fn_8000ECA8
+    bl sys_calcBufferOffset
     lbz r0, 0x0(r3)
     cmpwi r0, 0x3b
     beq lbl_fn_803C3894_00000FA8
@@ -1270,7 +1270,7 @@ lbl_fn_803C3894_00001040:
     bne lbl_fn_803C3894_00002830
     addi r3, r1, 0xe0
     li r4, 0x0
-    bl fn_8000ECA8
+    bl sys_calcBufferOffset
     lbz r0, 0x0(r3)
     cmpwi r0, 0x3b
     beq lbl_fn_803C3894_000012D8
@@ -1484,7 +1484,7 @@ lbl_fn_803C3894_00001370:
     bne lbl_fn_803C3894_00002830
     addi r3, r1, 0xe0
     li r4, 0x0
-    bl fn_8000ECA8
+    bl sys_calcBufferOffset
     lbz r0, 0x0(r3)
     cmpwi r0, 0x3b
     beq lbl_fn_803C3894_0000158C
@@ -1649,7 +1649,7 @@ lbl_fn_803C3894_000015E4:
     bne lbl_fn_803C3894_00002830
     addi r3, r1, 0xe0
     li r4, 0x0
-    bl fn_8000ECA8
+    bl sys_calcBufferOffset
     lbz r0, 0x0(r3)
     cmpwi r0, 0x3b
     beq lbl_fn_803C3894_00001754
@@ -1854,7 +1854,7 @@ lbl_fn_803C3894_000018F0:
     bne lbl_fn_803C3894_00002830
     addi r3, r1, 0xe0
     li r4, 0x0
-    bl fn_8000ECA8
+    bl sys_calcBufferOffset
     lbz r0, 0x0(r3)
     cmpwi r0, 0x3b
     beq lbl_fn_803C3894_00001AA0
@@ -2012,7 +2012,7 @@ lbl_fn_803C3894_00001B4C:
     bne lbl_fn_803C3894_00002830
     addi r3, r1, 0xe0
     li r4, 0x0
-    bl fn_8000ECA8
+    bl sys_calcBufferOffset
     lbz r0, 0x0(r3)
     cmpwi r0, 0x3b
     beq lbl_fn_803C3894_00001D44
@@ -2186,7 +2186,7 @@ lbl_fn_803C3894_00001DF0:
     bne lbl_fn_803C3894_00002830
     addi r3, r1, 0xe0
     li r4, 0x0
-    bl fn_8000ECA8
+    bl sys_calcBufferOffset
     lbz r0, 0x0(r3)
     cmpwi r0, 0x3b
     beq lbl_fn_803C3894_00001FA8
@@ -2319,7 +2319,7 @@ lbl_fn_803C3894_00001FF8:
     bne lbl_fn_803C3894_0000208C
     addi r3, r1, 0xe0
     li r4, 0x0
-    bl fn_8000ECA8
+    bl sys_calcBufferOffset
     lbz r0, 0x0(r3)
     cmpwi r0, 0x3b
     beq lbl_fn_803C3894_0000207C
@@ -2413,7 +2413,7 @@ lbl_fn_803C3894_00002150:
     bne lbl_fn_803C3894_00002830
     addi r3, r1, 0xe0
     li r4, 0x0
-    bl fn_8000ECA8
+    bl sys_calcBufferOffset
     lbz r0, 0x0(r3)
     cmpwi r0, 0x3b
     beq lbl_fn_803C3894_000021AC
@@ -2458,7 +2458,7 @@ lbl_fn_803C3894_000021F8:
     bne lbl_fn_803C3894_00002320
     addi r3, r1, 0xe0
     li r4, 0x0
-    bl fn_8000ECA8
+    bl sys_calcBufferOffset
     lbz r0, 0x0(r3)
     cmpwi r0, 0x3b
     beq lbl_fn_803C3894_00002310
@@ -2607,7 +2607,7 @@ lbl_fn_803C3894_00002428:
     bne lbl_fn_803C3894_000024B4
     addi r3, r1, 0xe0
     li r4, 0x0
-    bl fn_8000ECA8
+    bl sys_calcBufferOffset
     lbz r0, 0x0(r3)
     cmpwi r0, 0x3b
     beq lbl_fn_803C3894_000024A4
@@ -2796,7 +2796,7 @@ lbl_fn_803C3894_000026DC:
     bne lbl_fn_803C3894_00002830
     addi r3, r1, 0xe0
     li r4, 0x0
-    bl fn_8000ECA8
+    bl sys_calcBufferOffset
     lbz r0, 0x0(r3)
     cmpwi r0, 0x3b
     beq lbl_fn_803C3894_00002760

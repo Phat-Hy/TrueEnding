@@ -91,7 +91,7 @@ extern void craft_forgeUpgradeWeapon(void);
 extern void fn_803CFC58(void);
 extern void fn_803CFC64(void);
 extern void fn_803D2134(void);
-extern void fn_803D6E2C(void);
+extern void gate_clearActiveFlag(void);
 extern void fn_803D6F44(void);
 extern void fn_803D6F68(void);
 extern void boss_getOffset54(void);
@@ -633,13 +633,13 @@ lbl_fn_805BAC18_000006B4:
     cmpwi r3, 0x0
     beq lbl_fn_805BAC18_000006F8
     lwz r3, 0x4(r31)
-    bl fn_803D6E2C
+    bl gate_clearActiveFlag
     lwz r3, 0x3c(r31)
     cmpwi r3, 0x0
     beq lbl_fn_805BAC18_000006F8
     bl fn_805BB55C
     lwz r3, 0x40(r31)
-    bl fn_803D6E2C
+    bl gate_clearActiveFlag
 lbl_fn_805BAC18_000006F8:
     lwz r3, 0x3c(r31)
     cmpwi r3, 0x0

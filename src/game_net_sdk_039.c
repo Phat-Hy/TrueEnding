@@ -16,7 +16,7 @@ extern void memcmp(void);
 extern void rand(void);
 extern void fn_806820D4(void);
 extern void strcmp(void);
-extern void fn_806A420C(void);
+extern void net_formatIpAddress(void);
 extern void fn_806A4260(void);
 extern void fn_806A426C(void);
 extern void net_bufferGetCount(void);
@@ -1092,7 +1092,7 @@ lbl_fn_806F1630_00000E50:
     lwz r0, 0x0(r29)
     addi r3, r1, 0x8
     stw r0, 0x8(r1)
-    bl fn_806A420C
+    bl net_formatIpAddress
     mr r23, r3
     bl strlen
     lwz r0, 0xb64(r1)

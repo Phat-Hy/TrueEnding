@@ -74,7 +74,7 @@ void fn_805F38A0(void);
 void __OSReturnToMenu(void);
 void OSReturnToMenu(void);
 void fn_805F3C50(void);
-void fn_805F3C90(void);
+void __OSReturnToMenuForError(void);
 void fn_805F3D40(void);
 void OSGetResetCode(void);
 void OSResetSystem(void);
@@ -665,7 +665,7 @@ asm void fn_805F3C50(void)
     blr
 }
 
-asm void fn_805F3C90(void)
+asm void __OSReturnToMenuForError(void)
 {
     nofralloc
     stwu r1, -0x30(r1)
@@ -688,13 +688,13 @@ asm void fn_805F3C90(void)
     bl __VISetRGBModeImm
     lwz r0, __OSInNandBoot
     cmpwi r0, 0x0
-    bne lbl_fn_805F3C90_00000830
+    bne lbl___OSReturnToMenuForError_00000830
     lwz r0, __OSInReboot
     cmpwi r0, 0x0
-    beq lbl_fn_805F3C90_00000834
-lbl_fn_805F3C90_00000830:
+    beq lbl___OSReturnToMenuForError_00000834
+lbl___OSReturnToMenuForError_00000830:
     bl __OSInitSTM
-lbl_fn_805F3C90_00000834:
+lbl___OSReturnToMenuForError_00000834:
     bl __OSHotReset
     addi r3, r31, 0x0
     addi r5, r31, 0xc

@@ -25,7 +25,7 @@ extern void fn_806D5C90(void);
 extern void net_socketConnect(void);
 extern void fn_806D7AA0(void);
 extern void net_socketClose(void);
-extern void fn_806D7B30(void);
+extern void net_checkSocketStatus(void);
 extern void fn_806D7B70(void);
 extern void fn_806D7CB0(void);
 extern void fn_806D7D60(void);
@@ -167,7 +167,7 @@ lbl_fn_806F8B00_00000140:
     li r4, 0x2
     bl fn_806D7B70
     lwz r3, 0x0(r29)
-    bl fn_806D7B30
+    bl net_checkSocketStatus
 lbl_fn_806F8B00_00000184:
     lwz r3, 0x228(r28)
     li r0, -0x1
@@ -729,7 +729,7 @@ lbl_fn_806F9160_0000094C:
     li r4, 0x2
     bl fn_806D7B70
     lwz r3, 0x0(r31)
-    bl fn_806D7B30
+    bl net_checkSocketStatus
 lbl_fn_806F9160_00000970:
     lwz r3, 0x228(r30)
     li r0, -0x1

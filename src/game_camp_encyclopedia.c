@@ -6,7 +6,7 @@ extern void dtor_80013D60(void);
 extern void fn_8000D760(void);
 extern void fn_8000E18C(void);
 extern void sys_copyString(void);
-extern void fn_8000ECA8(void);
+extern void sys_calcBufferOffset(void);
 extern void str_initFromCStr(void);
 extern void str_getData(void);
 extern void talk_parseQuotedString(void);
@@ -227,7 +227,7 @@ lbl_fn_803C606C_0000014C:
 lbl_fn_803C606C_00000184:
     addi r3, r1, 0x14
     li r4, 0x0
-    bl fn_8000ECA8
+    bl sys_calcBufferOffset
     lbz r0, 0x0(r3)
     cmpwi r0, 0x3b
     bne lbl_fn_803C606C_000001AC
@@ -634,7 +634,7 @@ lbl_fn_803C65EC_000006CC:
 lbl_fn_803C65EC_00000704:
     addi r3, r1, 0x14
     li r4, 0x0
-    bl fn_8000ECA8
+    bl sys_calcBufferOffset
     lbz r0, 0x0(r3)
     cmpwi r0, 0x3b
     bne lbl_fn_803C65EC_0000072C
@@ -1008,7 +1008,7 @@ lbl_fn_803C6AE8_00000BC8:
 lbl_fn_803C6AE8_00000C00:
     addi r3, r1, 0x14
     li r4, 0x0
-    bl fn_8000ECA8
+    bl sys_calcBufferOffset
     lbz r0, 0x0(r3)
     cmpwi r0, 0x3b
     bne lbl_fn_803C6AE8_00000C28
@@ -1382,7 +1382,7 @@ lbl_fn_803C6FE4_000010C4:
 lbl_fn_803C6FE4_000010FC:
     addi r3, r1, 0x14
     li r4, 0x0
-    bl fn_8000ECA8
+    bl sys_calcBufferOffset
     lbz r0, 0x0(r3)
     cmpwi r0, 0x3b
     bne lbl_fn_803C6FE4_00001124
@@ -1760,7 +1760,7 @@ lbl_fn_803C74E0_000015D0:
 lbl_fn_803C74E0_00001608:
     addi r3, r1, 0x24
     li r4, 0x0
-    bl fn_8000ECA8
+    bl sys_calcBufferOffset
     lbz r0, 0x0(r3)
     cmpwi r0, 0x3b
     bne lbl_fn_803C74E0_00001630

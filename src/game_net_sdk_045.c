@@ -19,7 +19,7 @@ extern void strstr(void);
 extern void fn_80683B54(void);
 extern void atoi(void);
 extern void fn_8068B1FC(void);
-extern void fn_806A420C(void);
+extern void net_formatIpAddress(void);
 extern void fn_806A4260(void);
 extern void fn_806A4264(void);
 extern void fn_806A426C(void);
@@ -33,7 +33,7 @@ extern void fn_806D64B0(void);
 extern void net_invokeChannelCallback(void);
 extern void net_socketClose(void);
 extern void fn_806D7AE0(void);
-extern void fn_806D7B30(void);
+extern void net_checkSocketStatus(void);
 extern void fn_806D7CF0(void);
 extern void fn_806D7DA0(void);
 extern void fn_806D8650(void);
@@ -195,7 +195,7 @@ asm void fn_806FD090(void)
     mr r28, r4
     lwz r0, 0xc(r4)
     stw r0, 0xc(r1)
-    bl fn_806A420C
+    bl net_formatIpAddress
     lhz r3, 0x10(r28)
     bl fn_806A4264
     lbz r0, 0x13(r28)
@@ -298,7 +298,7 @@ lbl_fn_806FD090_00000268:
     addi r3, r1, 0x8
     lwz r0, 0x3c(r31)
     stw r0, 0x8(r1)
-    bl fn_806A420C
+    bl net_formatIpAddress
     lwz r30, 0x0(r31)
     lhz r3, 0x40(r31)
     cmpwi r30, -0x1
@@ -451,7 +451,7 @@ asm void fn_806FD420(void)
     addi r3, r1, 0x14
     lwz r0, 0x4(r30)
     stw r0, 0x14(r1)
-    bl fn_806A420C
+    bl net_formatIpAddress
     lhz r3, 0x2(r30)
     bl fn_806A4264
     cmplwi r27, 0x5
@@ -512,7 +512,7 @@ lbl_fn_806FD420_00000560:
     lwz r0, 0x4(r30)
     addi r3, r1, 0x8
     stw r0, 0x8(r1)
-    bl fn_806A420C
+    bl net_formatIpAddress
     lhz r3, 0x2(r30)
     bl fn_806A4264
     lwz r0, 0x1c(r31)
@@ -521,7 +521,7 @@ lbl_fn_806FD420_00000560:
     lwz r0, 0x4(r30)
     addi r3, r1, 0xc
     stw r0, 0xc(r1)
-    bl fn_806A420C
+    bl net_formatIpAddress
     lhz r3, 0x2(r30)
     bl fn_806A4264
     lwz r0, 0x4(r30)
@@ -568,7 +568,7 @@ lbl_fn_806FD420_00000638:
     addi r3, r1, 0x10
     lwz r0, 0x3c(r31)
     stw r0, 0x10(r1)
-    bl fn_806A420C
+    bl net_formatIpAddress
     lwz r29, 0x0(r31)
     lhz r3, 0x40(r31)
     cmpwi r29, -0x1
@@ -1327,7 +1327,7 @@ asm void fn_806FE090(void)
     stw r31, 0xc(r1)
     mr r31, r3
     lwz r3, 0x20(r3)
-    bl fn_806D7B30
+    bl net_checkSocketStatus
     li r0, 0x0
     li r3, -0x1
     stw r3, 0x20(r31)
@@ -2226,7 +2226,7 @@ asm void fn_806FEC60(void)
     lwz r0, 0x0(r3)
     addi r3, r1, 0x8
     stw r0, 0x8(r1)
-    bl fn_806A420C
+    bl net_formatIpAddress
     lwz r0, 0x14(r1)
     mtlr r0
     addi r1, r1, 0x10
@@ -2267,7 +2267,7 @@ asm void fn_806FECD0(void)
     lwz r0, 0x8(r3)
     addi r3, r1, 0x8
     stw r0, 0x8(r1)
-    bl fn_806A420C
+    bl net_formatIpAddress
     lwz r0, 0x14(r1)
     mtlr r0
     addi r1, r1, 0x10

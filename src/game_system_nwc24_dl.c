@@ -18,8 +18,8 @@ extern void player_evaluateStatusCondition(void);
 extern void world_getGlobalFlag(void);
 extern void fn_80383F7C(void);
 extern void fn_803918EC(void);
-extern void fn_803920C8(void);
-extern void fn_803928C0(void);
+extern void http_calcTransform(void);
+extern void http_accumulateVectors(void);
 extern void mtx_copyPairedSingle(void);
 extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
@@ -183,9 +183,9 @@ lbl_fn_80385B48_000000BC:
     mr r3, r28
     bl fn_803918EC
     mr r3, r28
-    bl fn_803920C8
+    bl http_calcTransform
     mr r3, r28
-    bl fn_803928C0
+    bl http_accumulateVectors
     addi r3, r28, 0x1f4
     bl item_useConsumable
     lwz r3, lbl_8087EFB4
@@ -1787,9 +1787,9 @@ lbl_fn_80385B48_0000195C:
     mr r3, r28
     bl fn_803918EC
     mr r3, r28
-    bl fn_803920C8
+    bl http_calcTransform
     mr r3, r28
-    bl fn_803928C0
+    bl http_accumulateVectors
     addi r3, r28, 0x1f4
     bl item_useConsumable
     lwz r3, lbl_8087EFB4

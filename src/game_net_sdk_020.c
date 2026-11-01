@@ -10,7 +10,7 @@ extern void _savegpr_24(void);
 extern void _savegpr_25(void);
 extern void snprintf(void);
 extern void strncmp(void);
-extern void fn_806A420C(void);
+extern void net_formatIpAddress(void);
 extern void fn_806A4264(void);
 extern void net_checkConnectionSession(void);
 extern void net_formatLog(void);
@@ -1402,7 +1402,7 @@ asm void fn_806C9810(void)
     mr r30, r4
     stw r3, 0x8(r1)
     addi r3, r1, 0x8
-    bl fn_806A420C
+    bl net_formatIpAddress
     lis r4, lbl_807C0FD0@ha
     mr r5, r3
     mr r6, r30

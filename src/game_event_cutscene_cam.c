@@ -38,7 +38,7 @@ extern void atn_Curve_evaluate(void);
 extern void fn_80472FAC(void);
 extern void fn_8047304C(void);
 extern void fn_804730D4(void);
-extern void fn_80473104(void);
+extern void boss_cocoon_setRushState(void);
 extern void shockwave_freeEmitter(void);
 extern void fn_805BDD20(void);
 extern void fn_805BDD78(void);
@@ -144,7 +144,7 @@ asm void atn_LoadScene_destructor(void)
     cmplwi r0, 0x2
     bne lbl_atn_LoadScene_destructor_0000009C
     li r4, 0x3
-    bl fn_80473104
+    bl boss_cocoon_setRushState
     addi r3, r1, 0x8
     bl fn_804714A4
     li r0, 0x0
@@ -643,7 +643,7 @@ lbl_fn_80477DB8_000006F4:
 lbl_fn_80477DB8_00000730:
     mr r3, r30
     li r4, 0x4
-    bl fn_80473104
+    bl boss_cocoon_setRushState
     mr r3, r31
     mr r4, r30
     bl fn_8046F5CC
@@ -783,7 +783,7 @@ asm void atn_LoadTexture_destructor(void)
     cmplwi r0, 0x2
     bne lbl_atn_LoadTexture_destructor_00000918
     li r4, 0x3
-    bl fn_80473104
+    bl boss_cocoon_setRushState
     addi r3, r1, 0x8
     bl fn_804714A4
     li r0, 0x0
@@ -995,7 +995,7 @@ lbl_fn_80478204_00000B2C:
 lbl_fn_80478204_00000B68:
     mr r3, r30
     li r4, 0x4
-    bl fn_80473104
+    bl boss_cocoon_setRushState
     mr r3, r31
     mr r4, r30
     bl fn_8046F5CC
@@ -1080,7 +1080,7 @@ lbl_atn_LoadXsca_destructor_00000C7C:
     stw r3, 0x5c(r31)
     mr r3, r31
     li r4, 0x3
-    bl fn_80473104
+    bl boss_cocoon_setRushState
 lbl_atn_LoadXsca_destructor_00000C8C:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
@@ -1229,7 +1229,7 @@ lbl_fn_80478518_00000E48:
 lbl_fn_80478518_00000E84:
     mr r3, r30
     li r4, 0x4
-    bl fn_80473104
+    bl boss_cocoon_setRushState
     mr r3, r31
     mr r4, r30
     bl fn_8046F5CC

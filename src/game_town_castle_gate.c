@@ -58,7 +58,7 @@ u32 fn_803D6DE4(void *p);
 void fn_803D6DF4(void);
 u32 fn_803D6E1C(void *p);
 u32 fn_803D6E24(void *p);
-void fn_803D6E2C(void *p);
+void gate_clearActiveFlag(void *p);
 void fn_803D6E3C(void);
 u32 fn_803D6E70(void *p);
 void fn_803D6E7C(void);
@@ -167,7 +167,7 @@ u32 fn_803D6E24(void *p)
     return *(u32 *)((u8 *)p + 0x54e4);
 }
 
-void fn_803D6E2C(void *p)
+void gate_clearActiveFlag(void *p)
 {
     *(u32 *)((u8 *)p + 0x38) &= ~4;
 }

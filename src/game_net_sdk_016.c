@@ -7,7 +7,7 @@ extern void __div2i(void);
 extern void _restgpr_16(void);
 extern void _savegpr_16(void);
 extern void snprintf(void);
-extern void fn_806A420C(void);
+extern void net_formatIpAddress(void);
 extern void net_truncateU16(void);
 extern void net_checkConnectionSession(void);
 extern void net_formatLog(void);
@@ -2277,7 +2277,7 @@ lbl_fn_806BCD40_00001FBC:
     lwz r0, 0x4(r25)
     addi r3, r1, 0x8
     stw r0, 0x8(r1)
-    bl fn_806A420C
+    bl net_formatIpAddress
     lhz r6, 0xc(r25)
     mr r5, r3
     addi r4, r27, 0x1684

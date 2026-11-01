@@ -11,7 +11,7 @@ extern void _savegpr_24(void);
 extern void dtor_80013D60(void);
 extern void dtor_80084684(void);
 extern void sys_copyString(void);
-extern void fn_8000ECA8(void);
+extern void sys_calcBufferOffset(void);
 extern void str_initFromCStr(void);
 extern void menu_initWindowBuffer(void);
 extern void fn_800422CC(void);
@@ -1899,7 +1899,7 @@ lbl_fn_8035F3D4_00001870:
     bne lbl_fn_8035F3D4_00001D44
     addi r3, r1, 0x8
     li r4, 0x0
-    bl fn_8000ECA8
+    bl sys_calcBufferOffset
     lbz r0, 0x0(r3)
     cmpwi r0, 0x3b
     beq lbl_fn_8035F3D4_000018F0
@@ -1946,7 +1946,7 @@ lbl_fn_8035F3D4_0000191C:
     bne lbl_fn_8035F3D4_00001D44
     addi r3, r1, 0x8
     li r4, 0x0
-    bl fn_8000ECA8
+    bl sys_calcBufferOffset
     lbz r0, 0x0(r3)
     cmpwi r0, 0x3b
     beq lbl_fn_8035F3D4_0000199C
@@ -1993,7 +1993,7 @@ lbl_fn_8035F3D4_000019C8:
     bne lbl_fn_8035F3D4_00001D44
     addi r3, r1, 0x8
     li r4, 0x0
-    bl fn_8000ECA8
+    bl sys_calcBufferOffset
     lbz r0, 0x0(r3)
     cmpwi r0, 0x3b
     beq lbl_fn_8035F3D4_00001A48
@@ -2040,7 +2040,7 @@ lbl_fn_8035F3D4_00001A74:
     bne lbl_fn_8035F3D4_00001D44
     addi r3, r1, 0x8
     li r4, 0x0
-    bl fn_8000ECA8
+    bl sys_calcBufferOffset
     lbz r0, 0x0(r3)
     cmpwi r0, 0x3b
     beq lbl_fn_8035F3D4_00001AF4
@@ -2087,7 +2087,7 @@ lbl_fn_8035F3D4_00001B20:
     bne lbl_fn_8035F3D4_00001D44
     addi r3, r1, 0x8
     li r4, 0x0
-    bl fn_8000ECA8
+    bl sys_calcBufferOffset
     lbz r0, 0x0(r3)
     cmpwi r0, 0x3b
     beq lbl_fn_8035F3D4_00001BA0
@@ -2134,7 +2134,7 @@ lbl_fn_8035F3D4_00001BCC:
     bne lbl_fn_8035F3D4_00001D44
     addi r3, r1, 0x8
     li r4, 0x0
-    bl fn_8000ECA8
+    bl sys_calcBufferOffset
     lbz r0, 0x0(r3)
     cmpwi r0, 0x3b
     beq lbl_fn_8035F3D4_00001C68
@@ -2196,7 +2196,7 @@ lbl_fn_8035F3D4_00001CB0:
     bne lbl_fn_8035F3D4_00001D44
     addi r3, r1, 0x8
     li r4, 0x0
-    bl fn_8000ECA8
+    bl sys_calcBufferOffset
     lbz r0, 0x0(r3)
     cmpwi r0, 0x3b
     beq lbl_fn_8035F3D4_00001D34

@@ -8,7 +8,7 @@ extern void _savegpr_18(void);
 extern void _savegpr_23(void);
 extern void memcmp(void);
 extern void snprintf(void);
-extern void fn_806A420C(void);
+extern void net_formatIpAddress(void);
 extern void fn_806A4260(void);
 extern void fn_806A4264(void);
 extern void fn_806A426C(void);
@@ -20,7 +20,7 @@ extern void net_bufferGetElement(void);
 extern void fn_806D5930(void);
 extern void fn_806D5BE0(void);
 extern void fn_806D7AE0(void);
-extern void fn_806D7B30(void);
+extern void net_checkSocketStatus(void);
 extern void fn_806D7CF0(void);
 extern void fn_806D7DA0(void);
 extern void fn_806D7E70(void);
@@ -665,7 +665,7 @@ lbl_fn_806FB650_000007B4:
     beq lbl_fn_806FB650_000007EC
     stw r3, 0xc(r1)
     addi r3, r1, 0xc
-    bl fn_806A420C
+    bl net_formatIpAddress
     mr r5, r3
     mr r3, r30
     mr r6, r29
@@ -676,7 +676,7 @@ lbl_fn_806FB650_000007B4:
 lbl_fn_806FB650_000007EC:
     stw r3, 0x8(r1)
     addi r3, r1, 0x8
-    bl fn_806A420C
+    bl net_formatIpAddress
     mr r5, r3
     mr r3, r30
     addi r4, r31, 0x8
@@ -1258,7 +1258,7 @@ lbl_fn_806FBE00_00000FE4:
     lwz r3, 0x18(r29)
     cmpwi r3, -0x1
     beq lbl_fn_806FBE00_00001004
-    bl fn_806D7B30
+    bl net_checkSocketStatus
     li r0, -0x1
     stw r0, 0x18(r29)
 lbl_fn_806FBE00_00001004:
@@ -1302,7 +1302,7 @@ lbl_fn_806FBE00_00001090:
     lwz r0, 0x4(r31)
     addi r3, r1, 0x8
     stw r0, 0x8(r1)
-    bl fn_806A420C
+    bl net_formatIpAddress
     lwz r28, 0x18(r30)
     li r0, 0x2
     lwz r29, 0x4(r31)
@@ -1388,7 +1388,7 @@ lbl_fn_806FC030_000011C0:
     lwz r0, lbl_808627E4@l(r30)
     stw r4, 0x26(r1)
     stw r0, 0x8(r1)
-    bl fn_806A420C
+    bl net_formatIpAddress
     lwz r29, 0x18(r31)
     li r0, 0x2
     lwz r30, lbl_808627E4@l(r30)
@@ -1524,7 +1524,7 @@ lbl_fn_806FC170_00001360:
     addi r3, r1, 0x18
     stb r26, 0x54(r1)
     stw r0, 0x18(r1)
-    bl fn_806A420C
+    bl net_formatIpAddress
     lwz r26, 0x0(r28)
     li r0, 0x2
     lwz r27, 0x4(r31)
@@ -1549,7 +1549,7 @@ lbl_fn_806FC170_00001414:
     stb r3, 0x54(r1)
     addi r3, r1, 0x14
     stw r0, 0x14(r1)
-    bl fn_806A420C
+    bl net_formatIpAddress
     lwz r26, 0x18(r28)
     li r0, 0x2
     lwz r27, 0x4(r31)
@@ -1598,7 +1598,7 @@ lbl_fn_806FC170_000014B4:
     stb r27, 0x54(r1)
     addi r3, r1, 0x10
     stw r0, 0x10(r1)
-    bl fn_806A420C
+    bl net_formatIpAddress
     lwz r26, 0x18(r28)
     li r3, 0x6cfd
     lwz r25, 0x8(r31)
@@ -1622,7 +1622,7 @@ lbl_fn_806FC170_00001520:
     stb r3, 0x54(r1)
     addi r3, r1, 0xc
     stw r0, 0xc(r1)
-    bl fn_806A420C
+    bl net_formatIpAddress
     lwz r25, 0x18(r28)
     li r0, 0x2
     lwz r26, 0xc(r31)
@@ -1713,14 +1713,14 @@ lbl_fn_806FC4B0_00001650:
     stw r4, 0x10(r30)
     stw r0, 0x14(r31)
     beq lbl_fn_806FC4B0_000016A0
-    bl fn_806D7B30
+    bl net_checkSocketStatus
     li r0, -0x1
     stw r0, 0x8(r30)
 lbl_fn_806FC4B0_000016A0:
     lwz r3, 0xc(r30)
     cmpwi r3, -0x1
     beq lbl_fn_806FC4B0_000016B8
-    bl fn_806D7B30
+    bl net_checkSocketStatus
     li r0, -0x1
     stw r0, 0xc(r30)
 lbl_fn_806FC4B0_000016B8:
@@ -2009,7 +2009,7 @@ lbl_fn_806FC900_00001A84:
     lwz r3, 0x18(r31)
     cmpwi r3, -0x1
     beq lbl_fn_806FC900_00001AA4
-    bl fn_806D7B30
+    bl net_checkSocketStatus
     li r0, -0x1
     stw r0, 0x18(r31)
 lbl_fn_806FC900_00001AA4:
@@ -2172,7 +2172,7 @@ lbl_fn_806FC9C0_00001CCC:
     addi r3, r1, 0x10
     lwz r0, 0x3c(r30)
     stw r0, 0x10(r1)
-    bl fn_806A420C
+    bl net_formatIpAddress
     lwz r28, 0x0(r30)
     lhz r3, 0x40(r30)
     cmpwi r28, -0x1
@@ -2264,7 +2264,7 @@ lbl_fn_806FC9C0_00001E24:
     addi r3, r1, 0xc
     lwz r0, 0x3c(r30)
     stw r0, 0xc(r1)
-    bl fn_806A420C
+    bl net_formatIpAddress
     lwz r28, 0x0(r30)
     lhz r3, 0x40(r30)
     cmpwi r28, -0x1
@@ -2346,7 +2346,7 @@ lbl_fn_806FC9C0_00001F5C:
     lwz r0, 0x4(r31)
     addi r3, r1, 0x8
     stw r0, 0x8(r1)
-    bl fn_806A420C
+    bl net_formatIpAddress
     lwz r28, 0x18(r30)
     li r0, 0x2
     lwz r29, 0x4(r31)
@@ -2418,7 +2418,7 @@ lbl_fn_806FC9C0_00002050:
     lwz r3, 0x18(r28)
     cmpwi r3, -0x1
     beq lbl_fn_806FC9C0_00002070
-    bl fn_806D7B30
+    bl net_checkSocketStatus
     li r0, -0x1
     stw r0, 0x18(r28)
 lbl_fn_806FC9C0_00002070:

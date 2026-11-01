@@ -25,7 +25,7 @@ extern void _savegpr_25(void);
 extern void fn_805BFB70(void);
 extern void fn_805BFC10(void);
 extern void fn_805ED1C0(void);
-extern void fn_805F3C90(void);
+extern void __OSReturnToMenuForError(void);
 extern void fn_805F3D40(void);
 extern void fn_805F7E30(void);
 extern void fn_80600800(void);
@@ -531,7 +531,7 @@ lbl_fn_805EED60_00000620:
     cmpwi r0, 0x0
     bne lbl_fn_805EED60_00000664
     bl fn_805F7E30
-    bl fn_805F3C90
+    bl __OSReturnToMenuForError
 lbl_fn_805EED60_00000664:
     cmpwi r31, 0x0
     bne lbl_fn_805EED60_00000688
@@ -568,19 +568,19 @@ lbl_fn_805EED60_000006D4:
     addi r3, r30, 0x0
     crclr 6
     bl OSReport
-    bl fn_805F3C90
+    bl __OSReturnToMenuForError
     b lbl_fn_805EED60_0000070C
 lbl_fn_805EED60_000006E8:
     addi r3, r30, 0x18
     crclr 6
     bl OSReport
-    bl fn_805F3C90
+    bl __OSReturnToMenuForError
     b lbl_fn_805EED60_0000070C
 lbl_fn_805EED60_000006FC:
     addi r3, r30, 0x34
     crclr 6
     bl OSReport
-    bl fn_805F3C90
+    bl __OSReturnToMenuForError
 lbl_fn_805EED60_0000070C:
     li r0, 0x0
     lis r6, fn_805EED50@ha
@@ -610,19 +610,19 @@ lbl_fn_805EED60_00000764:
     addi r3, r30, 0x0
     crclr 6
     bl OSReport
-    bl fn_805F3C90
+    bl __OSReturnToMenuForError
     b lbl_fn_805EED60_0000079C
 lbl_fn_805EED60_00000778:
     addi r3, r30, 0x18
     crclr 6
     bl OSReport
-    bl fn_805F3C90
+    bl __OSReturnToMenuForError
     b lbl_fn_805EED60_0000079C
 lbl_fn_805EED60_0000078C:
     addi r3, r30, 0x34
     crclr 6
     bl OSReport
-    bl fn_805F3C90
+    bl __OSReturnToMenuForError
 lbl_fn_805EED60_0000079C:
     li r0, 0x0
     stw r0, lbl_8087FC00
@@ -652,19 +652,19 @@ lbl_fn_805EED60_000007F4:
     addi r3, r30, 0x0
     crclr 6
     bl OSReport
-    bl fn_805F3C90
+    bl __OSReturnToMenuForError
     b lbl_fn_805EED60_0000082C
 lbl_fn_805EED60_00000808:
     addi r3, r30, 0x18
     crclr 6
     bl OSReport
-    bl fn_805F3C90
+    bl __OSReturnToMenuForError
     b lbl_fn_805EED60_0000082C
 lbl_fn_805EED60_0000081C:
     addi r3, r30, 0x34
     crclr 6
     bl OSReport
-    bl fn_805F3C90
+    bl __OSReturnToMenuForError
 lbl_fn_805EED60_0000082C:
     lwz r4, lbl_8087FBF8
     mr r6, r28
@@ -709,7 +709,7 @@ lbl_fn_805EED60_000008A8:
     addi r3, r30, 0x54
     crclr 6
     bl OSReport
-    bl fn_805F3C90
+    bl __OSReturnToMenuForError
 lbl_fn_805EED60_000008C0:
     lis r4, 0x8000
     lwz r0, 0x4(r26)
@@ -759,19 +759,19 @@ lbl_fn_805EED60_00000964:
     addi r3, r30, 0x0
     crclr 6
     bl OSReport
-    bl fn_805F3C90
+    bl __OSReturnToMenuForError
     b lbl_fn_805EED60_0000099C
 lbl_fn_805EED60_00000978:
     addi r3, r30, 0x18
     crclr 6
     bl OSReport
-    bl fn_805F3C90
+    bl __OSReturnToMenuForError
     b lbl_fn_805EED60_0000099C
 lbl_fn_805EED60_0000098C:
     addi r3, r30, 0x34
     crclr 6
     bl OSReport
-    bl fn_805F3C90
+    bl __OSReturnToMenuForError
 lbl_fn_805EED60_0000099C:
     li r0, 0x0
     lis r3, fn_805EED50@ha
@@ -797,19 +797,19 @@ lbl_fn_805EED60_000009E4:
     addi r3, r30, 0x0
     crclr 6
     bl OSReport
-    bl fn_805F3C90
+    bl __OSReturnToMenuForError
     b lbl_fn_805EED60_00000A1C
 lbl_fn_805EED60_000009F8:
     addi r3, r30, 0x18
     crclr 6
     bl OSReport
-    bl fn_805F3C90
+    bl __OSReturnToMenuForError
     b lbl_fn_805EED60_00000A1C
 lbl_fn_805EED60_00000A0C:
     addi r3, r30, 0x34
     crclr 6
     bl OSReport
-    bl fn_805F3C90
+    bl __OSReturnToMenuForError
 lbl_fn_805EED60_00000A1C:
     lwz r23, 0x184(r25)
     lwz r22, 0x188(r25)
@@ -952,19 +952,19 @@ lbl_fn_805EED60_00000C1C:
     addi r3, r30, 0x0
     crclr 6
     bl OSReport
-    bl fn_805F3C90
+    bl __OSReturnToMenuForError
     b lbl_fn_805EED60_00000C54
 lbl_fn_805EED60_00000C30:
     addi r3, r30, 0x18
     crclr 6
     bl OSReport
-    bl fn_805F3C90
+    bl __OSReturnToMenuForError
     b lbl_fn_805EED60_00000C54
 lbl_fn_805EED60_00000C44:
     addi r3, r30, 0x34
     crclr 6
     bl OSReport
-    bl fn_805F3C90
+    bl __OSReturnToMenuForError
 lbl_fn_805EED60_00000C54:
     li r0, 0x0
     stw r0, lbl_8087FC00
@@ -1011,19 +1011,19 @@ lbl_fn_805EED60_00000CEC:
     addi r3, r30, 0x0
     crclr 6
     bl OSReport
-    bl fn_805F3C90
+    bl __OSReturnToMenuForError
     b lbl_fn_805EED60_00000D24
 lbl_fn_805EED60_00000D00:
     addi r3, r30, 0x18
     crclr 6
     bl OSReport
-    bl fn_805F3C90
+    bl __OSReturnToMenuForError
     b lbl_fn_805EED60_00000D24
 lbl_fn_805EED60_00000D14:
     addi r3, r30, 0x34
     crclr 6
     bl OSReport
-    bl fn_805F3C90
+    bl __OSReturnToMenuForError
 lbl_fn_805EED60_00000D24:
     addi r11, r1, 0x40
     bl _restgpr_22

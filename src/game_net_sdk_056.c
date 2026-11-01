@@ -21,7 +21,7 @@ extern void PSVECMag(void);
 extern void std_sin(void);
 extern void std_atan2(void);
 extern void std_pow(void);
-extern void fn_80703F90(void);
+extern void net_getGlobalObject(void);
 extern void fn_80704890(void);
 extern void fn_807097E0(void);
 extern void fn_80709820(void);
@@ -1463,7 +1463,7 @@ asm void fn_80714E40(void)
     lfs f29, 0x8(r29)
     lfs f30, 0x4(r29)
     lfs f31, 0x0(r29)
-    bl fn_80703F90
+    bl net_getGlobalObject
     bl fn_80704890
     subi r0, r3, 0x1
     cmplwi r0, 0x1

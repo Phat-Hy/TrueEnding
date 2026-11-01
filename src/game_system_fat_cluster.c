@@ -16,9 +16,9 @@ extern void fn_80178088(void);
 extern void fn_8037F830(void);
 extern void fn_80387DE4(void);
 extern void fn_803918EC(void);
-extern void fn_803920C8(void);
+extern void http_calcTransform(void);
 extern void fn_80392510(void);
-extern void fn_803928C0(void);
+extern void http_accumulateVectors(void);
 extern void mtx_copyPairedSingle(void);
 extern void fn_80392FE8(void);
 extern void PSMTXConcat(void);
@@ -3343,9 +3343,9 @@ lbl_fn_8037F9AC_00002EE0:
     mr r3, r29
     bl fn_803918EC
     mr r3, r29
-    bl fn_803920C8
+    bl http_calcTransform
     mr r3, r29
-    bl fn_803928C0
+    bl http_accumulateVectors
     addi r3, r29, 0x1f4
     bl item_useConsumable
     lwz r3, lbl_8087EFB4

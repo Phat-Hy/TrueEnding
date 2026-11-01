@@ -12,8 +12,8 @@ extern void world_getGlobalFlag(void);
 extern void fn_8038E540(void);
 extern void fn_8038E9B0(void);
 extern void fn_803918EC(void);
-extern void fn_803920C8(void);
-extern void fn_803928C0(void);
+extern void http_calcTransform(void);
+extern void http_accumulateVectors(void);
 extern void mtx_copyPairedSingle(void);
 extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
@@ -493,9 +493,9 @@ lbl_fn_8038B148_000005CC:
     mr r3, r30
     bl fn_803918EC
     mr r3, r30
-    bl fn_803920C8
+    bl http_calcTransform
     mr r3, r30
-    bl fn_803928C0
+    bl http_accumulateVectors
     addi r3, r30, 0x1f4
     bl item_useConsumable
     lwz r3, lbl_8087EFB4
@@ -1023,9 +1023,9 @@ lbl_fn_8038B650_00000D68:
     mr r3, r30
     bl fn_803918EC
     mr r3, r30
-    bl fn_803920C8
+    bl http_calcTransform
     mr r3, r30
-    bl fn_803928C0
+    bl http_accumulateVectors
     addi r3, r30, 0x1f4
     bl item_useConsumable
     lwz r3, lbl_8087EFB4
@@ -1226,9 +1226,9 @@ lbl_fn_8038BD78_00000F78:
     addi r3, r31, 0x1f4
     bl mtx_copyPairedSingle
     mr r3, r31
-    bl fn_803920C8
+    bl http_calcTransform
     mr r3, r31
-    bl fn_803928C0
+    bl http_accumulateVectors
     addi r3, r31, 0x1f4
     bl item_useConsumable
     lwz r3, lbl_8087EFB4
@@ -1564,9 +1564,9 @@ lbl_fn_8038C070_000015A0:
     addi r3, r29, 0x1f4
     bl mtx_copyPairedSingle
     mr r3, r29
-    bl fn_803920C8
+    bl http_calcTransform
     mr r3, r29
-    bl fn_803928C0
+    bl http_accumulateVectors
     addi r3, r29, 0x1f4
     bl item_useConsumable
     lwz r3, lbl_8087EFB4
@@ -1822,9 +1822,9 @@ lbl_fn_8038C5B0_00001994:
     addi r3, r31, 0x1f4
     bl mtx_copyPairedSingle
     mr r3, r31
-    bl fn_803920C8
+    bl http_calcTransform
     mr r3, r31
-    bl fn_803928C0
+    bl http_accumulateVectors
     addi r3, r31, 0x1f4
     bl item_useConsumable
     lwz r3, lbl_8087EFB4

@@ -13,9 +13,9 @@ extern void fn_8037F9AC(void);
 extern void fn_80382A1C(void);
 extern void fn_8038E23C(void);
 extern void fn_803918EC(void);
-extern void fn_803920C8(void);
+extern void http_calcTransform(void);
 extern void fn_80392510(void);
-extern void fn_803928C0(void);
+extern void http_accumulateVectors(void);
 extern void mtx_copyPairedSingle(void);
 extern void fn_80392FE8(void);
 extern void PSMTXConcat(void);
@@ -174,9 +174,9 @@ asm void fn_80389060(void)
     mr r3, r28
     bl fn_803918EC
     mr r3, r28
-    bl fn_803920C8
+    bl http_calcTransform
     mr r3, r28
-    bl fn_803928C0
+    bl http_accumulateVectors
     addi r3, r28, 0x1f4
     bl item_useConsumable
     lwz r3, lbl_8087EFB4
@@ -281,9 +281,9 @@ asm void fn_80389210(void)
     mr r3, r30
     bl fn_803918EC
     mr r3, r30
-    bl fn_803920C8
+    bl http_calcTransform
     mr r3, r30
-    bl fn_803928C0
+    bl http_accumulateVectors
     addi r3, r30, 0x1f4
     bl item_useConsumable
     lwz r3, lbl_8087EFB4
@@ -383,9 +383,9 @@ asm void fn_803893A0(void)
     mr r3, r28
     bl fn_803918EC
     mr r3, r28
-    bl fn_803920C8
+    bl http_calcTransform
     mr r3, r28
-    bl fn_803928C0
+    bl http_accumulateVectors
     addi r3, r28, 0x1f4
     bl item_useConsumable
     lwz r3, lbl_8087EFB4
@@ -474,9 +474,9 @@ lbl_fn_8038952C_00000524:
     mr r3, r29
     bl fn_803918EC
     mr r3, r29
-    bl fn_803920C8
+    bl http_calcTransform
     mr r3, r29
-    bl fn_803928C0
+    bl http_accumulateVectors
     addi r3, r29, 0x1f4
     bl item_useConsumable
     lwz r3, lbl_8087EFB4
@@ -572,9 +572,9 @@ lbl_fn_80389678_000006F4:
     mr r3, r28
     bl fn_803918EC
     mr r3, r28
-    bl fn_803920C8
+    bl http_calcTransform
     mr r3, r28
-    bl fn_803928C0
+    bl http_accumulateVectors
     addi r3, r28, 0x1f4
     bl item_useConsumable
     lwz r3, lbl_8087EFB4
@@ -970,9 +970,9 @@ lbl_fn_80389A00_00000C9C:
     mr r3, r30
     bl fn_803918EC
     mr r3, r30
-    bl fn_803920C8
+    bl http_calcTransform
     mr r3, r30
-    bl fn_803928C0
+    bl http_accumulateVectors
     addi r3, r30, 0x1f4
     bl item_useConsumable
     lwz r3, lbl_8087EFB4
@@ -1179,9 +1179,9 @@ lbl_fn_80389A00_00000F10:
     mr r3, r30
     bl fn_803918EC
     mr r3, r30
-    bl fn_803920C8
+    bl http_calcTransform
     mr r3, r30
-    bl fn_803928C0
+    bl http_accumulateVectors
     addi r3, r30, 0x1f4
     bl item_useConsumable
     lwz r3, lbl_8087EFB4
@@ -1484,9 +1484,9 @@ lbl_fn_8038A200_00001268:
     mr r3, r31
     bl fn_803918EC
     mr r3, r31
-    bl fn_803920C8
+    bl http_calcTransform
     mr r3, r31
-    bl fn_803928C0
+    bl http_accumulateVectors
     addi r3, r31, 0x1f4
     bl item_useConsumable
     lwz r3, lbl_8087EFB4
@@ -2088,9 +2088,9 @@ lbl_fn_8038A5F0_00001BA0:
     mr r3, r29
     bl fn_803918EC
     mr r3, r29
-    bl fn_803920C8
+    bl http_calcTransform
     mr r3, r29
-    bl fn_803928C0
+    bl http_accumulateVectors
     addi r3, r29, 0x1f4
     bl item_useConsumable
     lwz r3, lbl_8087EFB4

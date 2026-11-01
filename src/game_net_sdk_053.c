@@ -46,7 +46,7 @@ extern void fn_80619D70(void);
 extern void fn_80619E90(void);
 extern void fn_80619F30(void);
 extern void fn_8061A010(void);
-extern void fn_80703F90(void);
+extern void net_getGlobalObject(void);
 extern void fn_80704890(void);
 extern void fn_80708AF0(void);
 extern void fn_80708B60(void);
@@ -529,7 +529,7 @@ lbl_fn_8070DCD0_000004E4:
     li r3, 0x0
     b lbl_fn_8070DCD0_00000594
 lbl_fn_8070DCD0_000004F4:
-    bl fn_80703F90
+    bl net_getGlobalObject
     bl fn_80704890
     cmpwi r3, 0x2
     bne lbl_fn_8070DCD0_00000544
@@ -829,7 +829,7 @@ asm void fn_8070E120(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_80703F90
+    bl net_getGlobalObject
     bl fn_80704890
     subi r3, r3, 0x2
     lwz r0, 0x10(r31)
@@ -944,7 +944,7 @@ lbl_fn_8070E240_00000A54:
     li r3, 0x0
     b lbl_fn_8070E240_00000B04
 lbl_fn_8070E240_00000A64:
-    bl fn_80703F90
+    bl net_getGlobalObject
     bl fn_80704890
     cmpwi r3, 0x2
     bne lbl_fn_8070E240_00000AB4
@@ -1271,7 +1271,7 @@ asm void fn_8070E6F0(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_80703F90
+    bl net_getGlobalObject
     bl fn_80704890
     subi r3, r3, 0x2
     lwz r0, 0x10(r31)
@@ -1427,7 +1427,7 @@ lbl_fn_8070E8B0_000010C4:
     li r3, 0x0
     b lbl_fn_8070E8B0_00001174
 lbl_fn_8070E8B0_000010D4:
-    bl fn_80703F90
+    bl net_getGlobalObject
     bl fn_80704890
     cmpwi r3, 0x2
     bne lbl_fn_8070E8B0_00001124
@@ -1810,7 +1810,7 @@ asm void fn_8070EE20(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_80703F90
+    bl net_getGlobalObject
     bl fn_80704890
     subi r3, r3, 0x2
     lwz r0, 0x10(r31)

@@ -37,7 +37,7 @@ extern void fn_80472FAC(void);
 extern void fn_8047304C(void);
 extern void fn_804730D4(void);
 extern void fn_804730E4(void);
-extern void fn_80473104(void);
+extern void boss_cocoon_setRushState(void);
 extern void fn_80473130(void);
 extern void PSMTXInverse(void);
 extern void printf(void);
@@ -177,7 +177,7 @@ asm void atn_LoadEfp_destructor(void)
     bne lbl_atn_LoadEfp_destructor_000000EC
     mr r3, r31
     li r4, 0x3
-    bl fn_80473104
+    bl boss_cocoon_setRushState
     mr r3, r31
     bl fn_80473130
 lbl_atn_LoadEfp_destructor_000000EC:
@@ -344,7 +344,7 @@ lbl_fn_80473C88_000002D0:
 lbl_fn_80473C88_0000030C:
     mr r3, r30
     li r4, 0x4
-    bl fn_80473104
+    bl boss_cocoon_setRushState
     mr r3, r31
     mr r4, r30
     bl fn_8046F5CC
@@ -943,7 +943,7 @@ lbl_atn_LoadMaterial_destructor_00000AE4:
     bl fn_80473130
     mr r3, r30
     li r4, 0x3
-    bl fn_80473104
+    bl boss_cocoon_setRushState
 lbl_atn_LoadMaterial_destructor_00000AF8:
     lmw r16, 0x30(r1)
     lwz r0, 0x74(r1)
@@ -1094,7 +1094,7 @@ lbl_fn_80474678_00000CBC:
 lbl_fn_80474678_00000CF8:
     mr r3, r30
     li r4, 0x4
-    bl fn_80473104
+    bl boss_cocoon_setRushState
     mr r3, r31
     mr r4, r30
     bl fn_8046F5CC
@@ -1246,7 +1246,7 @@ asm void atn_LoadModel_destructor(void)
     cmplwi r0, 0x2
     bne lbl_atn_LoadModel_destructor_000012CC
     li r4, 0x3
-    bl fn_80473104
+    bl boss_cocoon_setRushState
     lwz r29, 0x54(r30)
     addi r3, r1, 0x8
     bl fn_804714A4

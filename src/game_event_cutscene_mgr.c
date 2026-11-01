@@ -38,7 +38,7 @@ extern void fn_804714B0(void);
 extern void fn_80472FAC(void);
 extern void fn_8047304C(void);
 extern void fn_804730D4(void);
-extern void fn_80473104(void);
+extern void boss_cocoon_setRushState(void);
 extern void fn_80473130(void);
 extern void atn_LoadHandle_destructor(void);
 extern void shockwave_freeEmitter(void);
@@ -324,7 +324,7 @@ lbl_fn_80475F20_000002B4:
 lbl_fn_80475F20_000002F0:
     mr r3, r30
     li r4, 0x4
-    bl fn_80473104
+    bl boss_cocoon_setRushState
     mr r3, r31
     mr r4, r30
     bl fn_8046F5CC
@@ -739,7 +739,7 @@ asm void atn_LoadMotion_destructor(void)
     cmplwi r0, 0x2
     bne lbl_atn_LoadMotion_destructor_00000858
     li r4, 0x3
-    bl fn_80473104
+    bl boss_cocoon_setRushState
     addi r3, r1, 0x8
     bl fn_804714A4
     li r0, 0x0
@@ -911,7 +911,7 @@ lbl_fn_804766B0_00000A08:
 lbl_fn_804766B0_00000A44:
     mr r3, r29
     li r4, 0x4
-    bl fn_80473104
+    bl boss_cocoon_setRushState
     mr r3, r31
     mr r4, r29
     bl fn_8046F5CC
@@ -1084,7 +1084,7 @@ lbl_atn_LoadMotionCommandData_slot1_00000C4C:
     bne lbl_atn_LoadMotionCommandData_slot1_00000C68
     mr r3, r31
     li r4, 0x3
-    bl fn_80473104
+    bl boss_cocoon_setRushState
 lbl_atn_LoadMotionCommandData_slot1_00000C68:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
@@ -1250,7 +1250,7 @@ lbl_fn_80476AC8_00000E68:
 lbl_fn_80476AC8_00000EA4:
     mr r3, r30
     li r4, 0x4
-    bl fn_80473104
+    bl boss_cocoon_setRushState
     mr r3, r31
     mr r4, r30
     bl fn_8046F5CC
@@ -1382,7 +1382,7 @@ asm void atn_LoadMotionCommandData_destructor(void)
     cmpwi r0, 0x0
     bne lbl_atn_LoadMotionCommandData_destructor_00001050
     li r4, 0x5
-    bl fn_80473104
+    bl boss_cocoon_setRushState
     b lbl_atn_LoadMotionCommandData_destructor_000010BC
 lbl_atn_LoadMotionCommandData_destructor_00001050:
     li r30, 0x1
@@ -1410,7 +1410,7 @@ lbl_atn_LoadMotionCommandData_destructor_00001084:
     bl boss_releaseLaserTarget
     mr r3, r28
     li r4, 0x3
-    bl fn_80473104
+    bl boss_cocoon_setRushState
     b lbl_atn_LoadMotionCommandData_destructor_000010BC
 lbl_atn_LoadMotionCommandData_destructor_000010B0:
     bl fn_80476ED4
@@ -1962,7 +1962,7 @@ lbl_fn_8047749C_00001818:
 lbl_fn_8047749C_00001854:
     mr r3, r30
     li r4, 0x4
-    bl fn_80473104
+    bl boss_cocoon_setRushState
     mr r3, r31
     mr r4, r30
     bl fn_8046F5CC

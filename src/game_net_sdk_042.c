@@ -21,7 +21,7 @@ extern void fn_806D64B0(void);
 extern void net_invokeChannelCallback(void);
 extern void net_socketConnect(void);
 extern void net_socketClose(void);
-extern void fn_806D7B30(void);
+extern void net_checkSocketStatus(void);
 extern void fn_806D7B70(void);
 extern void fn_806D7F20(void);
 extern void net_strdup(void);
@@ -2327,7 +2327,7 @@ asm void fn_806F87A0(void)
     li r4, 0x2
     bl fn_806D7B70
     lwz r3, 0x0(r31)
-    bl fn_806D7B30
+    bl net_checkSocketStatus
 lbl_fn_806F87A0_00001DBC:
     lwz r3, 0x228(r30)
     li r0, -0x1

@@ -16,7 +16,7 @@ extern void net_pollActiveSockets(void);
 extern void fn_806D7350(void);
 extern void net_socketConnect(void);
 extern void net_socketClose(void);
-extern void fn_806D7B30(void);
+extern void net_checkSocketStatus(void);
 extern void fn_806D7B70(void);
 extern void net_strdup(void);
 extern void fn_806D8FC0(void);
@@ -889,7 +889,7 @@ lbl_fn_806E0770_00000B54:
     li r4, 0x2
     bl fn_806D7B70
     lwz r3, 0x1f0(r30)
-    bl fn_806D7B30
+    bl net_checkSocketStatus
     li r0, -0x1
     stw r0, 0x1f0(r30)
 lbl_fn_806E0770_00000B94:

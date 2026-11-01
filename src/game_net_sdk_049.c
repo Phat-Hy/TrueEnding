@@ -16,7 +16,7 @@ extern void fn_80608230(void);
 extern void fn_8060AED0(void);
 extern void fn_8060AFC0(void);
 extern void runtime_clampDouble(void);
-extern void fn_80703F90(void);
+extern void net_getGlobalObject(void);
 extern void fn_807046A0(void);
 extern void fn_80705450(void);
 extern void fn_807079E0(void);
@@ -228,7 +228,7 @@ asm void fn_80705880(void)
     bl OSRestoreInterrupts
     b lbl_fn_80705880_000003B0
 lbl_fn_80705880_00000210:
-    bl fn_80703F90
+    bl net_getGlobalObject
     bl fn_807046A0
     cmpwi r3, 0x0
     lwz r0, 0x14(r30)
@@ -788,7 +788,7 @@ asm void fn_80705FD0(void)
 lbl_fn_80705FD0_0000096C:
     cmplw r29, r31
     ble lbl_fn_80705FD0_00000A60
-    bl fn_80703F90
+    bl net_getGlobalObject
     bl fn_807046A0
     cmpwi r3, 0x0
     lwz r6, 0x14(r26)
@@ -902,7 +902,7 @@ lbl_fn_80705FD0_00000AE0:
     add r5, r3, r30
     b lbl_fn_80705FD0_00000B3C
 lbl_fn_80705FD0_00000AEC:
-    bl fn_80703F90
+    bl net_getGlobalObject
     bl fn_807046A0
     cmpwi r3, 0x0
     lwz r0, 0x14(r26)
@@ -2215,7 +2215,7 @@ asm void fn_80707300(void)
     bl OSRestoreInterrupts
     b lbl_fn_80707300_00001E5C
 lbl_fn_80707300_00001C94:
-    bl fn_80703F90
+    bl net_getGlobalObject
     lis r3, lbl_80862C20@ha
     cmpwi r25, 0x0
     clrlslwi r0, r25, 24, 2

@@ -14,7 +14,7 @@ extern void _savegpr_27(void);
 extern void dtor_80013D60(void);
 extern void dtor_80084684(void);
 extern void sys_copyString(void);
-extern void fn_8000ECA8(void);
+extern void sys_calcBufferOffset(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void str_initFromCStr(void);
@@ -504,7 +504,7 @@ lbl_fn_80041D44_00000348:
     bne lbl_fn_80041D44_00000384
     addi r3, r1, 0x28
     li r4, 0x0
-    bl fn_8000ECA8
+    bl sys_calcBufferOffset
     lbz r0, 0x0(r3)
     cmpwi r0, 0x3b
     bne lbl_fn_80041D44_00000394

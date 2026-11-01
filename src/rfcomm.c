@@ -19,7 +19,7 @@ extern void bta_sys_traceDebug(void);
 extern void fn_80629870(void);
 extern void fn_80629890(void);
 extern void bta_sys_sendmsg(void);
-extern void fn_80629E90(void);
+extern void bta_sys_sendMsgToApp(void);
 extern void fn_80631070(void);
 extern void fn_806380C0(void);
 extern void fn_806384E4(void);
@@ -7099,7 +7099,7 @@ lbl_fn_8064DFD0_00005D50:
     add r3, r3, r0
     addi r31, r3, 0x39c
     mr r3, r31
-    bl fn_80629E90
+    bl bta_sys_sendMsgToApp
     mr r3, r31
     b lbl_fn_8064DFD0_00005E24
 lbl_fn_8064DFD0_00005D74:
@@ -7179,7 +7179,7 @@ asm void fn_8064E128(void)
     bl bta_sys_logEvent
 lbl_fn_8064E128_00005E78:
     mr r3, r31
-    bl fn_80629E90
+    bl bta_sys_sendMsgToApp
     b lbl_fn_8064E128_00005E88
 lbl_fn_8064E128_00005E84:
     bl scapi_cleanupContext
@@ -7256,7 +7256,7 @@ asm void fn_8064E224(void)
     bl bta_sys_logEvent
 lbl_fn_8064E224_00005F74:
     mr r3, r31
-    bl fn_80629E90
+    bl bta_sys_sendMsgToApp
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0
@@ -7322,7 +7322,7 @@ asm void fn_8064E2FC(void)
     bl bta_sys_logEvent
 lbl_fn_8064E2FC_0000604C:
     addi r3, r31, 0x70
-    bl fn_80629E90
+    bl bta_sys_sendMsgToApp
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0
@@ -7472,7 +7472,7 @@ lbl_fn_8064E4A8_00006208:
     bl bta_sys_logEvent
 lbl_fn_8064E4A8_0000622C:
     addi r3, r29, 0x70
-    bl fn_80629E90
+    bl bta_sys_sendMsgToApp
     li r4, 0x0
     cmpwi r30, 0x0
     stb r4, 0x68(r29)

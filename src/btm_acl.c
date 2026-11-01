@@ -12,7 +12,7 @@ extern void bta_sys_log(void);
 extern void bta_sys_traceDebug(void);
 extern void fn_806298D0(void);
 extern void bta_sys_sendmsg(void);
-extern void fn_80629E90(void);
+extern void bta_sys_sendMsgToApp(void);
 extern void fn_806332A4(void);
 extern void fn_8063374C(void);
 extern void fn_80633B80(void);
@@ -834,7 +834,7 @@ asm void fn_806307D8(void)
     mr r28, r3
     addi r3, r31, 0x5ac
     lwz r30, 0x5c4(r31)
-    bl fn_80629E90
+    bl bta_sys_sendMsgToApp
     li r3, 0x0
     cmpwi r30, 0x0
     stw r3, 0x5c4(r31)
@@ -1643,7 +1643,7 @@ asm void fn_80631254(void)
     lwz r30, 0x618(r31)
     mr r29, r5
     addi r3, r31, 0x600
-    bl fn_80629E90
+    bl bta_sys_sendMsgToApp
     li r0, 0x0
     cmpwi r30, 0x0
     stw r0, 0x618(r31)
@@ -1763,7 +1763,7 @@ lbl_fn_8063132C_000015E0:
     li r0, 0x0
     addi r3, r31, 0x5c8
     stw r0, 0x5e0(r31)
-    bl fn_80629E90
+    bl bta_sys_sendMsgToApp
     li r3, 0x3
     b lbl_fn_8063132C_00001638
 lbl_fn_8063132C_0000162C:
@@ -1853,7 +1853,7 @@ lbl_fn_80631468_0000171C:
     clrlwi. r0, r3, 24
     bne lbl_fn_80631468_00001768
     addi r3, r31, 0x5e4
-    bl fn_80629E90
+    bl bta_sys_sendMsgToApp
     li r0, 0x0
     li r3, 0x3
     stw r0, 0x5fc(r31)
@@ -1890,7 +1890,7 @@ asm void fn_806315A4(void)
     mr r28, r3
     addi r3, r31, 0x5c8
     lwz r30, 0x5e0(r31)
-    bl fn_80629E90
+    bl bta_sys_sendMsgToApp
     li r0, 0x0
     cmpwi r30, 0x0
     stw r0, 0x5e0(r31)
@@ -1972,7 +1972,7 @@ asm void fn_806316C0(void)
     mr r28, r3
     addi r3, r31, 0x5c8
     lwz r30, 0x5fc(r31)
-    bl fn_80629E90
+    bl bta_sys_sendMsgToApp
     li r0, 0x0
     cmpwi r30, 0x0
     stw r0, 0x5fc(r31)

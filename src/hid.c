@@ -16,7 +16,7 @@ extern void bta_sys_logEvent(void);
 extern void bta_sys_log(void);
 extern void bta_sys_traceDebug(void);
 extern void bta_sys_sendmsg(void);
-extern void fn_80629E90(void);
+extern void bta_sys_sendMsgToApp(void);
 extern void fn_80630CD8(void);
 extern void fn_806357EC(void);
 extern void fn_806373C8(void);
@@ -962,7 +962,7 @@ lbl_fn_8063F98C_00000B80:
     beq lbl_fn_8063F98C_00000BDC
     stb r30, 0xc(r28)
     addi r3, r28, 0x1c
-    bl fn_80629E90
+    bl bta_sys_sendMsgToApp
     lbz r0, 0xa(r28)
     cmplwi r0, 0x1
     bne lbl_fn_8063F98C_00000BDC
@@ -1140,7 +1140,7 @@ lbl_fn_8063FC00_00000E10:
     li r31, 0x1
     addi r3, r29, 0x1c
     stb r31, 0xc(r29)
-    bl fn_80629E90
+    bl bta_sys_sendMsgToApp
     lbz r0, 0xa(r29)
     cmplwi r0, 0x1
     bne lbl_fn_8063FC00_00000E44
@@ -1325,7 +1325,7 @@ lbl_fn_8063FE6C_0000107C:
     li r31, 0x1
     addi r3, r29, 0x1c
     stb r31, 0xc(r29)
-    bl fn_80629E90
+    bl bta_sys_sendMsgToApp
     lbz r0, 0xa(r29)
     cmplwi r0, 0x1
     beq lbl_fn_8063FE6C_000010A0

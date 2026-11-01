@@ -38,7 +38,7 @@ extern void fn_806A3DC0(void);
 extern void fn_806A3EF0(void);
 extern void fn_806A3FA4(void);
 extern void fn_806A4100(void);
-extern void fn_806A420C(void);
+extern void net_formatIpAddress(void);
 extern void fn_806A4260(void);
 extern void fn_806A47D4(void);
 extern void fn_806A4C5C(void);
@@ -88,7 +88,7 @@ void net_socketConnect(void);
 void fn_806D7AA0(void);
 void net_socketClose(void);
 void fn_806D7AE0(void);
-void fn_806D7B30(void);
+void net_checkSocketStatus(void);
 void fn_806D7B70(void);
 void fn_806D7BB0(void);
 void fn_806D7C40(void);
@@ -215,7 +215,7 @@ lbl_fn_806D7860_000000FC:
     bne lbl_fn_806D7860_00000144
     lis r3, lbl_80860E58@ha
     lwz r3, lbl_80860E58@l(r3)
-    bl fn_806D7B30
+    bl net_checkSocketStatus
     clrlwi. r0, r31, 31
     beq lbl_fn_806D7860_00000128
     lis r4, lbl_80860DD0@ha
@@ -243,7 +243,7 @@ lbl_fn_806D7860_00000144:
     cmpwi r0, 0x1
     bne lbl_fn_806D7860_00000188
     lwz r3, lbl_80860E58@l(r5)
-    bl fn_806D7B30
+    bl net_checkSocketStatus
     lis r4, lbl_80860DD0@ha
     li r3, 0x1
     stw r3, lbl_80860DD0@l(r4)
@@ -367,7 +367,7 @@ lbl_fn_806D7AE0_000002B0:
     blr
 }
 
-asm void fn_806D7B30(void)
+asm void net_checkSocketStatus(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -375,14 +375,14 @@ asm void fn_806D7B30(void)
     stw r0, 0x14(r1)
     bl fn_806A39B8
     cmpwi r3, 0x0
-    blt lbl_fn_806D7B30_000002F0
+    blt lbl_net_checkSocketStatus_000002F0
     mr r0, r3
-    b lbl_fn_806D7B30_000002FC
-lbl_fn_806D7B30_000002F0:
+    b lbl_net_checkSocketStatus_000002FC
+lbl_net_checkSocketStatus_000002F0:
     lis r4, lbl_80860EB0@ha
     li r0, -0x1
     stw r3, lbl_80860EB0@l(r4)
-lbl_fn_806D7B30_000002FC:
+lbl_net_checkSocketStatus_000002FC:
     mr r3, r0
     lwz r0, 0x14(r1)
     mtlr r0
@@ -1618,7 +1618,7 @@ lbl_fn_806D8B70_0000134C:
     lwz r4, 0x0(r4)
     lwz r0, 0x0(r4)
     stw r0, 0x8(r1)
-    bl fn_806A420C
+    bl net_formatIpAddress
     bl fn_806D7EE0
     stw r3, 0x4(r30)
     b lbl_fn_806D8B70_00001394

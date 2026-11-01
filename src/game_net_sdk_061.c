@@ -20,7 +20,7 @@ extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void fn_8060AE60(void);
 extern void runtime_clampDouble(void);
-extern void fn_80703F90(void);
+extern void net_getGlobalObject(void);
 extern void fn_80704260(void);
 extern void fn_80704890(void);
 extern void fn_807053D0(void);
@@ -1485,7 +1485,7 @@ asm void fn_8071F270(void)
     mr r26, r3
     lfs f0, 0xe8(r3)
     fmuls f31, f31, f0
-    bl fn_80703F90
+    bl net_getGlobalObject
     bl fn_80704260
     fmuls f31, f31, f1
     mr r31, r26
@@ -2134,7 +2134,7 @@ lbl_fn_8071F7C0_000019EC:
     bne lbl_fn_8071F7C0_000019F8
     lfs f16, lbl_808892A0
 lbl_fn_8071F7C0_000019F8:
-    bl fn_80703F90
+    bl net_getGlobalObject
     bl fn_80704890
     cmpwi r3, 0x2
     bne lbl_fn_8071F7C0_00001A40
@@ -2191,7 +2191,7 @@ lbl_fn_8071F7C0_00001AB8:
     lfs f0, lbl_808892B0
     fmr f17, f1
     fmuls f25, f0, f2
-    bl fn_80703F90
+    bl net_getGlobalObject
     bl fn_80704890
     cmpwi r3, 0x0
     beq lbl_fn_8071F7C0_00001AFC

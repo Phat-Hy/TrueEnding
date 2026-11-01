@@ -58,9 +58,9 @@ extern u32 lbl_80885A44;
 extern u32 lbl_80885ACC;
 
 /* Function declarations */
-void fn_803920C8(void);
+void http_calcTransform(void);
 void fn_80392510(void);
-void fn_803928C0(void);
+void http_accumulateVectors(void);
 void fn_80392964(void);
 void mtx_copyPairedSingle(void);
 void fn_80392C94(void);
@@ -75,7 +75,7 @@ void fn_803935FC(void);
 void fn_80393610(void);
 void fn_803936A4(void);
 
-asm void fn_803920C8(void)
+asm void http_calcTransform(void)
 {
     nofralloc
     stwu r1, -0x180(r1)
@@ -96,7 +96,7 @@ asm void fn_803920C8(void)
     stw r0, 0x138(r1)
     cmpw r5, r4
     stw r0, 0x140(r1)
-    bge lbl_fn_803920C8_00000418
+    bge lbl_http_calcTransform_00000418
     lfs f5, 0x210(r3)
     addi r5, r1, 0x8c
     lfs f4, 0x204(r3)
@@ -174,7 +174,7 @@ asm void fn_803920C8(void)
     clrlwi r0, r0, 31
     xor r0, r0, r3
     subf. r0, r3, r0
-    bne lbl_fn_803920C8_000001B0
+    bne lbl_http_calcTransform_000001B0
     fneg f4, f0
     addi r3, r1, 0x50
     fneg f3, f31
@@ -186,7 +186,7 @@ asm void fn_803920C8(void)
     psq_l f1, 0x0(r3), 0, 0
     psq_st f1, 0x0(r31), 0, 0
     stfs f2, 0x7c(r1)
-lbl_fn_803920C8_000001B0:
+lbl_http_calcTransform_000001B0:
     lfs f2, 0x88(r1)
     lis r3, lbl_8074E008@ha
     lwz r6, 0x904(r30)
@@ -220,25 +220,25 @@ lbl_fn_803920C8_000001B0:
     stfs f4, 0x74(r1)
     stfs f3, 0x78(r1)
     stfs f0, 0x7c(r1)
-    bge lbl_fn_803920C8_0000025C
+    bge lbl_http_calcTransform_0000025C
     lfs f3, 0x68(r1)
     lfs f0, lbl_808858E8
     fcmpo cr0, f3, f0
-    ble lbl_fn_803920C8_00000250
+    ble lbl_http_calcTransform_00000250
     lfs f0, lbl_808859CC
-    b lbl_fn_803920C8_00000254
-lbl_fn_803920C8_00000250:
+    b lbl_http_calcTransform_00000254
+lbl_http_calcTransform_00000250:
     lfs f0, lbl_808859D0
-lbl_fn_803920C8_00000254:
+lbl_http_calcTransform_00000254:
     stfs f0, 0x48(r1)
-    b lbl_fn_803920C8_00000270
-lbl_fn_803920C8_0000025C:
+    b lbl_http_calcTransform_00000270
+lbl_http_calcTransform_0000025C:
     frsp f2, f2
     lfs f1, 0x68(r1)
     bl std_atan2
     frsp f0, f1
     stfs f0, 0x48(r1)
-lbl_fn_803920C8_00000270:
+lbl_http_calcTransform_00000270:
     lfs f0, 0x48(r1)
     addi r3, r1, 0x98
     li r4, 0x79
@@ -299,26 +299,26 @@ lbl_fn_803920C8_00000270:
     fabs f3, f2
     frsp f3, f3
     fcmpo cr0, f3, f0
-    bge lbl_fn_803920C8_0000038C
+    bge lbl_http_calcTransform_0000038C
     lfs f3, 0x3c(r1)
     lfs f0, lbl_808858E8
     fcmpo cr0, f3, f0
-    ble lbl_fn_803920C8_0000037C
+    ble lbl_http_calcTransform_0000037C
     lfs f0, lbl_808859CC
-    b lbl_fn_803920C8_00000380
-lbl_fn_803920C8_0000037C:
+    b lbl_http_calcTransform_00000380
+lbl_http_calcTransform_0000037C:
     lfs f0, lbl_808859D0
-lbl_fn_803920C8_00000380:
+lbl_http_calcTransform_00000380:
     fneg f0, f0
     stfs f0, 0x44(r1)
-    b lbl_fn_803920C8_000003A0
-lbl_fn_803920C8_0000038C:
+    b lbl_http_calcTransform_000003A0
+lbl_http_calcTransform_0000038C:
     lfs f1, 0x3c(r1)
     bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x44(r1)
-lbl_fn_803920C8_000003A0:
+lbl_http_calcTransform_000003A0:
     addi r3, r1, 0x44
     lfs f2, lbl_808858E8
     psq_l f1, 0x0(r3), 0, 0
@@ -349,7 +349,7 @@ lbl_fn_803920C8_000003A0:
     stfs f2, 0x94(r1)
     psq_st f1, 0x208(r30), 0, 0
     stfs f2, 0x210(r30)
-lbl_fn_803920C8_00000418:
+lbl_http_calcTransform_00000418:
     lwz r0, 0x184(r1)
     psq_l f31, 0x178(r1), 0, 0
     lfd f31, 0x170(r1)
@@ -615,7 +615,7 @@ lbl_fn_80392510_000007D0:
     blr
 }
 
-asm void fn_803928C0(void)
+asm void http_accumulateVectors(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -694,10 +694,10 @@ lbl_fn_80392964_000008FC:
     cmpwi r29, 0x0
     beq lbl_fn_80392964_0000090C
     mr r3, r27
-    bl fn_803920C8
+    bl http_calcTransform
 lbl_fn_80392964_0000090C:
     mr r3, r27
-    bl fn_803928C0
+    bl http_accumulateVectors
     addi r3, r27, 0x1f4
     bl item_useConsumable
     bl sys_getMainManager

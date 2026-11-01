@@ -54,7 +54,7 @@ extern void fn_8037D3E8(void);
 extern void fn_80383728(void);
 extern void fn_803D2134(void);
 extern void fn_803D2A54(void);
-extern void fn_803D6E2C(void);
+extern void gate_clearActiveFlag(void);
 extern void fn_803D6EDC(void);
 extern void fn_803D6EF8(void);
 extern void fn_803D6F78(void);
@@ -247,9 +247,9 @@ lbl_fn_80487490_00000170:
     cmpwi r0, 0x0
     beq lbl_fn_80487490_00000588
     lwz r3, 0x241c(r31)
-    bl fn_803D6E2C
+    bl gate_clearActiveFlag
     lwz r3, 0x2438(r31)
-    bl fn_803D6E2C
+    bl gate_clearActiveFlag
     lwz r5, 0x1eac(r31)
     lis r4, lbl_807C7028@ha
     addi r3, r1, 0x28

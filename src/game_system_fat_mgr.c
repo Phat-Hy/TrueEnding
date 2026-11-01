@@ -22,9 +22,9 @@ extern void actor_calcSpawnTransform(void);
 extern void fn_80124BE4(void);
 extern void fn_8038EF94(void);
 extern void fn_803918EC(void);
-extern void fn_803920C8(void);
+extern void http_calcTransform(void);
 extern void fn_80392510(void);
-extern void fn_803928C0(void);
+extern void http_accumulateVectors(void);
 extern void mtx_copyPairedSingle(void);
 extern void fn_80392FE8(void);
 extern void PSMTXConcat(void);
@@ -1498,9 +1498,9 @@ lbl_fn_8037EF48_00001438:
     mr r3, r30
     bl fn_803918EC
     mr r3, r30
-    bl fn_803920C8
+    bl http_calcTransform
     mr r3, r30
-    bl fn_803928C0
+    bl http_accumulateVectors
     addi r3, r30, 0x1f4
     bl item_useConsumable
     lwz r3, lbl_8087EFB4

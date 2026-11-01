@@ -137,7 +137,7 @@ extern void fn_803D6DE4(void);
 extern void fn_803D6DF4(void);
 extern void fn_803D6E1C(void);
 extern void fn_803D6E24(void);
-extern void fn_803D6E2C(void);
+extern void gate_clearActiveFlag(void);
 extern void fn_803D6E3C(void);
 extern void fn_803D6E70(void);
 extern void fn_803D6E7C(void);
@@ -686,7 +686,7 @@ lbl_fn_803D2A6C_00000580:
     b lbl_fn_803D2A6C_00000660
 lbl_fn_803D2A6C_000005C0:
     lwz r3, 0x8a0(r22)
-    bl fn_803D6E2C
+    bl gate_clearActiveFlag
     mr r4, r19
     addi r3, r24, 0x8d0
     bl fn_803D71F4
@@ -1092,7 +1092,7 @@ lbl_fn_803D2A6C_00000B90:
     lwz r3, 0x870(r24)
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00000C54
-    bl fn_803D6E2C
+    bl gate_clearActiveFlag
     mr r3, r31
     bl npc_getPosition
     mr r21, r3
@@ -1243,7 +1243,7 @@ lbl_fn_803D2A6C_00000D80:
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00000DE8
     lwz r3, 0x840(r24)
-    bl fn_803D6E2C
+    bl gate_clearActiveFlag
     b lbl_fn_803D2A6C_00000E6C
 lbl_fn_803D2A6C_00000DE8:
     lwz r3, 0x83c(r24)
@@ -1279,7 +1279,7 @@ lbl_fn_803D2A6C_00000DE8:
     stw r0, 0x2660(r24)
 lbl_fn_803D2A6C_00000E64:
     lwz r3, 0x83c(r24)
-    bl fn_803D6E2C
+    bl gate_clearActiveFlag
 lbl_fn_803D2A6C_00000E6C:
     cmpwi r19, 0x0
     bne lbl_fn_803D2A6C_00000E98
@@ -1330,7 +1330,7 @@ lbl_fn_803D2A6C_00000EDC:
     lwz r0, 0x770(r24)
     cmpwi r0, 0x0
     beq lbl_fn_803D2A6C_0000100C
-    bl fn_803D6E2C
+    bl gate_clearActiveFlag
     lwz r3, 0x770(r24)
     bl scene_getRootNode
     lis r4, lbl_807506A0@ha
@@ -1371,7 +1371,7 @@ lbl_fn_803D2A6C_00000F68:
     cror eq, lt, eq
     bne lbl_fn_803D2A6C_0000100C
     lwz r3, 0x848(r24)
-    bl fn_803D6E2C
+    bl gate_clearActiveFlag
     lwz r3, 0x848(r24)
     bl fn_803D6F44
     cmpwi r3, 0x0
@@ -1475,7 +1475,7 @@ lbl_fn_803D2A6C_00001100:
     cror eq, lt, eq
     bne lbl_fn_803D2A6C_00001174
     lwz r3, 0x84c(r22)
-    bl fn_803D6E2C
+    bl gate_clearActiveFlag
     lwz r3, 0x84c(r22)
     addi r4, r21, 0x10a2
     lfs f1, 0x434(r1)
@@ -1598,7 +1598,7 @@ lbl_fn_803D2A6C_000012EC:
     cmpwi r20, 0x0
     blt lbl_fn_803D2A6C_0000137C
     lwz r3, 0x874(r24)
-    bl fn_803D6E2C
+    bl gate_clearActiveFlag
     mr r4, r20
     addi r3, r1, 0x608
     bl fn_803D731C
@@ -1638,7 +1638,7 @@ lbl_fn_803D2A6C_00001394:
     cmplw r20, r25
     beq lbl_fn_803D2A6C_000013F8
     lwz r3, 0x878(r23)
-    bl fn_803D6E2C
+    bl gate_clearActiveFlag
     mr r4, r25
     addi r3, r1, 0x608
     bl fn_803D731C
@@ -1715,11 +1715,11 @@ lbl_fn_803D2A6C_000014A8:
     cmpwi r3, 0x0
     bne lbl_fn_803D2A6C_000014CC
     lwz r3, 0x714(r21)
-    bl fn_803D6E2C
+    bl gate_clearActiveFlag
     b lbl_fn_803D2A6C_000014D4
 lbl_fn_803D2A6C_000014CC:
     lwz r3, 0x71c(r21)
-    bl fn_803D6E2C
+    bl gate_clearActiveFlag
 lbl_fn_803D2A6C_000014D4:
     lwz r3, 0x724(r24)
     addi r0, r3, 0x1
@@ -1803,11 +1803,11 @@ lbl_fn_803D2A6C_000015F8:
     fcmpo cr0, f1, f0
     bge lbl_fn_803D2A6C_00001618
     lwz r3, 0x72c(r24)
-    bl fn_803D6E2C
+    bl gate_clearActiveFlag
     b lbl_fn_803D2A6C_00001620
 lbl_fn_803D2A6C_00001618:
     lwz r3, 0x730(r24)
-    bl fn_803D6E2C
+    bl gate_clearActiveFlag
 lbl_fn_803D2A6C_00001620:
     lwz r3, 0x734(r24)
     addi r0, r3, 0x1
@@ -1876,7 +1876,7 @@ lbl_fn_803D2A6C_000016F4:
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_0000181C
     lwz r3, 0x5b8(r24)
-    bl fn_803D6E2C
+    bl gate_clearActiveFlag
     lis r21, lbl_807506A0@ha
     lwz r3, 0x5b8(r24)
     addi r21, r21, lbl_807506A0@l
@@ -2051,7 +2051,7 @@ lbl_fn_803D2A6C_00001978:
     add r3, r20, r0
     lwz r18, 0x318(r3)
     mr r3, r18
-    bl fn_803D6E2C
+    bl gate_clearActiveFlag
     xoris r0, r27, 0x8000
     stw r0, 0xa64(r1)
     mr r3, r18
@@ -2317,7 +2317,7 @@ lbl_fn_803D2A6C_00001D64:
     cmpwi r18, 0x0
     bne lbl_fn_803D2A6C_00001DA8
     lwz r3, 0x3d8(r24)
-    bl fn_803D6E2C
+    bl gate_clearActiveFlag
     mr r3, r19
     bl fn_803D7100
     mr r4, r3
@@ -2338,7 +2338,7 @@ lbl_fn_803D2A6C_00001DA8:
     bl fn_803D6EF8
 lbl_fn_803D2A6C_00001DC0:
     lwz r3, 0x3dc(r21)
-    bl fn_803D6E2C
+    bl gate_clearActiveFlag
     fmr f1, f24
     lwz r3, 0x3dc(r21)
     addi r4, r23, 0x10d6
@@ -2435,7 +2435,7 @@ lbl_fn_803D2A6C_00001E98:
     fcmpo cr0, f28, f0
     blt lbl_fn_803D2A6C_00001FC0
     lwz r3, 0x8a0(r21)
-    bl fn_803D6E2C
+    bl gate_clearActiveFlag
     mr r4, r18
     addi r3, r24, 0x8d0
     bl fn_803D71F4
@@ -2487,7 +2487,7 @@ lbl_fn_803D2A6C_00001FC8:
     cmpwi r3, 0x0
     bne lbl_fn_803D2A6C_00001FF8
     lwz r3, 0xa84(r24)
-    bl fn_803D6E2C
+    bl gate_clearActiveFlag
 lbl_fn_803D2A6C_00001FF8:
     lwz r3, 0xa88(r24)
     bl fn_803D6F44
@@ -2549,7 +2549,7 @@ lbl_fn_803D2A6C_00001FF8:
     stfs f1, 0x20(r1)
     stfs f0, 0x24(r1)
     lwz r3, 0xa88(r24)
-    bl fn_803D6E2C
+    bl gate_clearActiveFlag
     lis r23, lbl_807506A0@ha
     lwz r3, 0xa88(r24)
     addi r23, r23, lbl_807506A0@l
@@ -2726,7 +2726,7 @@ lbl_fn_803D2A6C_00002374:
     cror eq, lt, eq
     bne lbl_fn_803D2A6C_00002394
     lwz r3, 0xd70(r24)
-    bl fn_803D6E2C
+    bl gate_clearActiveFlag
 lbl_fn_803D2A6C_00002394:
     lwz r3, 0xd70(r24)
     bl fn_803CFC64
@@ -2735,7 +2735,7 @@ lbl_fn_803D2A6C_00002394:
     cror eq, gt, eq
     bne lbl_fn_803D2A6C_00002428
     lwz r3, 0xd74(r24)
-    bl fn_803D6E2C
+    bl gate_clearActiveFlag
     b lbl_fn_803D2A6C_00002428
 lbl_fn_803D2A6C_000023B8:
     lwz r3, 0xd70(r24)
@@ -2756,7 +2756,7 @@ lbl_fn_803D2A6C_000023DC:
     fcmpo cr0, f1, f27
     bge lbl_fn_803D2A6C_00002404
     lwz r3, 0xd70(r24)
-    bl fn_803D6E2C
+    bl gate_clearActiveFlag
     b lbl_fn_803D2A6C_00002420
 lbl_fn_803D2A6C_00002404:
     li r0, 0x0
@@ -2871,7 +2871,7 @@ lbl_fn_803D2A6C_00002544:
     fcmpo cr0, f1, f29
     bge lbl_fn_803D2A6C_000025A8
     mr r3, r27
-    bl fn_803D6E2C
+    bl gate_clearActiveFlag
 lbl_fn_803D2A6C_000025A8:
     mr r3, r26
     bl perf_getMetricValue
@@ -2889,7 +2889,7 @@ lbl_fn_803D2A6C_000025B8:
     bl fn_803D7384
 lbl_fn_803D2A6C_000025DC:
     mr r3, r26
-    bl fn_803D6E2C
+    bl gate_clearActiveFlag
     mr r3, r27
     bl perf_getMetricValue
     bl fn_803D2A60
@@ -2915,7 +2915,7 @@ lbl_fn_803D2A6C_000025F4:
     fcmpo cr0, f1, f29
     bge lbl_fn_803D2A6C_000027AC
     mr r3, r27
-    bl fn_803D6E2C
+    bl gate_clearActiveFlag
     b lbl_fn_803D2A6C_000027AC
 lbl_fn_803D2A6C_0000264C:
     mr r3, r26
@@ -2928,7 +2928,7 @@ lbl_fn_803D2A6C_0000264C:
     fcmpo cr0, f1, f29
     bge lbl_fn_803D2A6C_00002678
     mr r3, r26
-    bl fn_803D6E2C
+    bl gate_clearActiveFlag
 lbl_fn_803D2A6C_00002678:
     mr r3, r27
     bl perf_getMetricValue
@@ -3000,7 +3000,7 @@ lbl_fn_803D2A6C_0000273C:
     beq lbl_fn_803D2A6C_000027AC
 lbl_fn_803D2A6C_00002770:
     mr r3, r26
-    bl fn_803D6E2C
+    bl gate_clearActiveFlag
     b lbl_fn_803D2A6C_000027AC
 lbl_fn_803D2A6C_0000277C:
     mr r3, r26
@@ -3014,7 +3014,7 @@ lbl_fn_803D2A6C_0000277C:
     li r4, 0x1
     bl fn_803D2148
     mr r3, r27
-    bl fn_803D6E2C
+    bl gate_clearActiveFlag
 lbl_fn_803D2A6C_000027AC:
     lfs f1, lbl_80885E58
     addi r3, r1, 0x168
@@ -3256,7 +3256,7 @@ lbl_fn_803D2A6C_00002B18:
     cmpwi r0, 0x0
     beq lbl_fn_803D2A6C_00002C30
     lwz r3, 0x2654(r24)
-    bl fn_803D6E2C
+    bl gate_clearActiveFlag
     lwz r3, 0x2650(r24)
     lwz r0, 0x264c(r24)
     cmpw r3, r0
@@ -3351,10 +3351,10 @@ lbl_fn_803D2A6C_00002C88:
     cmpwi r3, 0x0
     bne lbl_fn_803D2A6C_00002CA8
     lwz r3, 0xdc0(r24)
-    bl fn_803D6E2C
+    bl gate_clearActiveFlag
 lbl_fn_803D2A6C_00002CA8:
     lwz r3, 0xdb4(r24)
-    bl fn_803D6E2C
+    bl gate_clearActiveFlag
     lwz r0, 0xd90(r24)
     cmpwi r0, 0x0
     beq lbl_fn_803D2A6C_00002EBC
@@ -4028,7 +4028,7 @@ lbl_fn_803D2A6C_00003610:
     fcmpo cr0, f0, f31
     bge lbl_fn_803D2A6C_00003800
     lwz r3, 0x574(r22)
-    bl fn_803D6E2C
+    bl gate_clearActiveFlag
     lwz r3, 0x574(r22)
     addi r4, r23, 0x10a2
     lfs f1, 0x308(r1)
@@ -4128,7 +4128,7 @@ lbl_fn_803D2A6C_000037C0:
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00003800
     lwz r3, 0x594(r22)
-    bl fn_803D6E2C
+    bl gate_clearActiveFlag
     lwz r3, 0x594(r22)
     addi r4, r23, 0x10a2
     lfs f1, 0x308(r1)
@@ -4221,7 +4221,7 @@ lbl_fn_803D2A6C_00003864:
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00003A28
     lwz r3, 0x6fc(r21)
-    bl fn_803D6E2C
+    bl gate_clearActiveFlag
     lwz r3, 0x6fc(r21)
     lfs f1, lbl_80885D60
     bl fn_803D218C
@@ -4374,7 +4374,7 @@ lbl_fn_803D2A6C_00003A84:
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00003C70
     lwz r3, 0x6fc(r21)
-    bl fn_803D6E2C
+    bl gate_clearActiveFlag
     lwz r3, 0x6fc(r21)
     lfs f1, lbl_80885D60
     bl fn_803D218C
@@ -4742,7 +4742,7 @@ lbl_fn_803D2A6C_000040DC:
     cmpwi r3, 0x0
     bne lbl_fn_803D2A6C_00004218
     lwz r3, 0xdb8(r24)
-    bl fn_803D6E2C
+    bl gate_clearActiveFlag
     bl scene_transformPoint
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00004118
@@ -4825,7 +4825,7 @@ lbl_fn_803D2A6C_00004218:
     cmpwi r3, 0x0
     bne lbl_fn_803D2A6C_000042F8
     lwz r3, 0xdbc(r24)
-    bl fn_803D6E2C
+    bl gate_clearActiveFlag
     bl scene_transformPoint
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00004254
