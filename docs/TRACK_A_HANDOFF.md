@@ -5,6 +5,14 @@ decompilation (Track A) of *The Last Story* (Wii, `SLSEXJ`) and a native PC port
 is a different agent on a different branch, in a different checkout. Read `CONTRIBUTING_TRACKS.md` first — it owns
 the rules. This file is the work order.
 
+
+> [!NOTE]
+> **Track A Status as of Batch 50 / Commit b89b55**:
+> - Completed all 222 pure lr stubs to 100.0% matching C.
+> - Decompiled **131 accessors, getters, setters, math helpers (ec3_scale, mtx_multVec, ec3_initValues), and SDK hooks** to 100.0% matching C.
+> - Batches 1 through 50 completed and pushed (500+ high-yield symbols named across all major engine systems).
+> - Byte-for-byte bit-identical match maintained on all commits (orig/main.dol: OK).
+
 ## 0. Where things stand (measured, do not re-derive)
 
 ```
