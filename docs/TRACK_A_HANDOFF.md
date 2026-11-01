@@ -201,3 +201,16 @@ Six batches have produced ~120 names and 3 conversions (`fn_80207F80`, `atn_Task
 `atn_Task_initCookie`). Track B's queue is now **`fn_8047A4C8` first** (see A2 - it is the task manager's real
 constructor, and the Chapter-1 task-creation question hangs on it), then `fn_8036F268`, then `fn_800D7278`. One
 conversion per session beats ten names for the port; both are welcome, and the log should say which it did.
+
+### 7.5 Where the next naming batch should come from: `docs/TRACK_A_QUEUE.md`
+
+Not from a subsystem sweep. Track B's probe logs contain **137 distinct routines**; 36 now carry human names and
+**101 are still `fn_`/`lbl_`**. `docs/TRACK_A_QUEUE.md` ranks the unnamed ones by how often Track B's instruments
+actually hit them (resolved against your `config/symbols.txt`, so it is regenerable and always current).
+
+Evidence that this is the highest-yield target: batch 1 was aimed at the 12 routines behind one 64-PC audit and took
+them from **0/12 named to 12/12**, which is why every probe now prints `name+0xOFFSET`. Batches 5-8 named ~186
+functions and moved that number by **zero on the routines Track B touches** — good for Track A's own coverage, no
+leverage on the port. The queue's top five alone cover 2 785 logged hits.
+
+Take the top 10-15 of that list first, then alternate one A2-style conversion per batch.
