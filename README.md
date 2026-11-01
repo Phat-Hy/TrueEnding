@@ -5,7 +5,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Decomp Progress](https://img.shields.io/badge/Track%20A%20Code-99.30%25%20(7%2C425%2C512%20bytes)-brightgreen)](#current-progress-tracker)
 [![Functions Matched](https://img.shields.io/badge/Functions%20Matched-18%2C054%20%2F%2018%2C155-blue)](#current-progress-tracker)
-[![PC Runner](https://img.shields.io/badge/Track%20B%20PC%20Port-Chapter%201%20Interactive%20%2F%20Aurora%20P2%20Closed-green)](recomp/)
+[![PC Runner](https://img.shields.io/badge/Track%20B%20PC%20Port-Chapter%201%20Interactive%20%2F%20Aurora%20P4%20(renderer)-green)](recomp/)
 [![Target](https://img.shields.io/badge/Target-Wii%20USA%20(SLSEXJ)-red)](config/SLSEXJ/)
 
 **A dual-track byte-matching decompilation and native 60 FPS PC port of *The Last Story* (Nintendo Wii, 2011).**
@@ -68,9 +68,17 @@ was written for and has not been regenerated since: **the table above is current
 | :--- | :--- | :--- |
 | Sequence | `Boot → Stra → Titl → Game` | reached, deterministic |
 | Chapter 1 | playable | interactive field; the game creates its own save (1 348 992 B + 29 344 B banner) |
-| Gate | `pwsh tools/invariant.ps1` | **PASS attempt 1** (handover 1680; guest 2800 `B4646917…`; guest 3500 `22B1CE31…`) |
-| Renderer | Aurora | migration **P2 closed**, **P1** boundary built; P3/P4 next — the layer stays the default until P4 |
-| Build | 471 objects | green |
+| Gate | `pwsh tools/invariant.ps1` | **PASS attempt 1** (handover 1680; guest 2800 `54CB46BD…` 38.20 / 0.00 %; guest 3500 `A81F3E35…` 89.89 / 1.85 %) — on aurora, see `DEEPSEEK_HARNESS_HANDOVER.md` §5c.46 AP-BR |
+| Renderer | Aurora | migration **P1-P4 closed**: aurora publishes every presented frame (3 086 / 3 086 blitted, 0 failures) and the gate's references are recorded on its picture; the hand-rolled layer stays as the per-frame fallback and `TLS_LAYER=1` |
+| Recompiled DOL | 459 / 459 chunks | 100 % of the retail DOL's chunks run natively (472 objects linked); Track A's *decompilation* is 99.30 % of code bytes (data 0.06 %), which the port does not consume |
+| Build | 472 objects | green |
+
+*What is **not** measured:* how much of the game's content runs. The gate covers Boot → Title → Chapter 1
+(the 3 520-frame scripted run), so a whole-game percentage would be invented, not measured — the honest
+state is "Chapter 1 interactive, renderer migrated", plus the open items in §AP-BR §8 of the dossier.
+Two known gaps at this commit: the shipped DLL's own idle-host gate run is still owed (the last gate PASS
+is on the same runner and the DLL before its exception guards), and a rare `std::terminate` inside the
+DLL (~3 runs in 13) is instrumented but not yet fixed.
 
 ---
 
