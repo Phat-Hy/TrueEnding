@@ -41,28 +41,28 @@ extern u32 lbl_80881A08;
 /* Function declarations */
 void *npc_getPosition(void *npc);
 void fn_8013C394(void);
-void fn_8013C3A8(void);
+u32 fn_8013C3A8(void *p);
 void fn_8013C3B4(void);
-void fn_8013C3DC(void);
+u32 fn_8013C3DC(void *p);
 void fn_8013C3E4(void);
-void fn_8013C3F4(void);
-void fn_8013C3FC(void);
+u32 fn_8013C3F4(void *p);
+void *fn_8013C3FC(void *p);
 void fn_8013C404(void);
-void fn_8013C41C(void);
-void fn_8013C424(void);
-void fn_8013C42C(void);
-void fn_8013C434(void);
-void fn_8013C43C(void);
+u32 fn_8013C41C(void *p);
+u32 fn_8013C424(void *p);
+f32 fn_8013C42C(void *p);
+void *fn_8013C434(void *p);
+u32 fn_8013C43C(void *p);
 void fn_8013C444(void);
-void fn_8013C458(void);
+u32 fn_8013C458(void *p);
 void fn_8013C460(void);
-void fn_8013C470(void);
-void fn_8013C478(void);
+void fn_8013C470(void *p, u32 val);
+u32 fn_8013C478(void *p);
 void npc_isInteractionReady(void);
 void *npc_getDialogController(const void *p);
 f32 fn_8013C50C(const void *p);
 void fn_8013C514(void);
-void fn_8013C53C(void);
+void *fn_8013C53C(void *p);
 void fn_8013C544(void);
 void fn_8013C554(void);
 void fn_8013C564(void);
@@ -82,12 +82,9 @@ asm void fn_8013C394(void)
     b PSVECCrossProduct
 }
 
-asm void fn_8013C3A8(void)
+u32 fn_8013C3A8(void *p)
 {
-    nofralloc
-    lwz r0, 0x12a4(r3)
-    srwi r3, r0, 31
-    blr
+    return *(u32 *)((u8 *)p + 0x12a4) >> 31;
 }
 
 asm void fn_8013C3B4(void)
@@ -105,11 +102,9 @@ asm void fn_8013C3B4(void)
     blr
 }
 
-asm void fn_8013C3DC(void)
+u32 fn_8013C3DC(void *p)
 {
-    nofralloc
-    lwz r3, 0x34c(r3)
-    blr
+    return *(u32 *)((u8 *)p + 0x34c);
 }
 
 asm void fn_8013C3E4(void)
@@ -121,18 +116,14 @@ asm void fn_8013C3E4(void)
     blr
 }
 
-asm void fn_8013C3F4(void)
+u32 fn_8013C3F4(void *p)
 {
-    nofralloc
-    lwz r3, 0x2c(r3)
-    blr
+    return *(u32 *)((u8 *)p + 0x2c);
 }
 
-asm void fn_8013C3FC(void)
+void *fn_8013C3FC(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x70
-    blr
+    return (u8 *)p + 0x70;
 }
 
 asm void fn_8013C404(void)
@@ -146,39 +137,29 @@ asm void fn_8013C404(void)
     blr
 }
 
-asm void fn_8013C41C(void)
+u32 fn_8013C41C(void *p)
 {
-    nofralloc
-    lwz r3, 0x418(r3)
-    blr
+    return *(u32 *)((u8 *)p + 0x418);
 }
 
-asm void fn_8013C424(void)
+u32 fn_8013C424(void *p)
 {
-    nofralloc
-    lwz r3, 0x94(r3)
-    blr
+    return *(u32 *)((u8 *)p + 0x94);
 }
 
-asm void fn_8013C42C(void)
+f32 fn_8013C42C(void *p)
 {
-    nofralloc
-    lfs f1, 0x5b0(r3)
-    blr
+    return *(f32 *)((u8 *)p + 0x5b0);
 }
 
-asm void fn_8013C434(void)
+void *fn_8013C434(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x454
-    blr
+    return (u8 *)p + 0x454;
 }
 
-asm void fn_8013C43C(void)
+u32 fn_8013C43C(void *p)
 {
-    nofralloc
-    lwz r3, 0x4(r3)
-    blr
+    return *(u32 *)((u8 *)p + 0x4);
 }
 
 asm void fn_8013C444(void)
@@ -191,11 +172,9 @@ asm void fn_8013C444(void)
     blr
 }
 
-asm void fn_8013C458(void)
+u32 fn_8013C458(void *p)
 {
-    nofralloc
-    lwz r3, 0x648(r3)
-    blr
+    return *(u32 *)((u8 *)p + 0x648);
 }
 
 asm void fn_8013C460(void)
@@ -207,18 +186,14 @@ asm void fn_8013C460(void)
     blr
 }
 
-asm void fn_8013C470(void)
+void fn_8013C470(void *p, u32 val)
 {
-    nofralloc
-    stw r4, 0xfc0(r3)
-    blr
+    *(u32 *)((u8 *)p + 0xfc0) = val;
 }
 
-asm void fn_8013C478(void)
+u32 fn_8013C478(void *p)
 {
-    nofralloc
-    lwz r3, 0xfc0(r3)
-    blr
+    return *(u32 *)((u8 *)p + 0xfc0);
 }
 
 asm void npc_isInteractionReady(void)
@@ -289,11 +264,9 @@ lbl_fn_8013C514_000001A8:
     blr
 }
 
-asm void fn_8013C53C(void)
+void *fn_8013C53C(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x10
-    blr
+    return (u8 *)p + 0x10;
 }
 
 asm void fn_8013C544(void)
