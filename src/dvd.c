@@ -195,14 +195,14 @@ void fn_805FEBB0(void);
 void fn_805FEC00(void* a, void* b);
 void fn_805FEF70(void);
 void fn_805FF030(void);
-void fn_805FF040(void);
+void fn_805FF040(u32 val);
 void __DVDGetCoverStatus(void);
 void fn_805FF120(void);
 void fn_805FF240(void);
 void fn_805FF360(void);
 void __DVDPrepareReset(void);
 void fn_805FF4B0(void);
-void fn_805FF4D0(void);
+u32 fn_805FF4D0(void);
 void fn_805FF4E0(void);
 
 asm void DVDInit(void) {
@@ -5276,10 +5276,8 @@ asm void fn_805FF030(void) {
 }
 
 
-asm void fn_805FF040(void) {
-    nofralloc
-    stw r3, lbl_8087FD40
-    blr 
+void fn_805FF040(u32 val) {
+    lbl_8087FD40 = val;
 }
 
 
@@ -5595,10 +5593,8 @@ lbl_4bf8:
 }
 
 
-asm void fn_805FF4D0(void) {
-    nofralloc
-    li r3, 0x1
-    blr 
+u32 fn_805FF4D0(void) {
+    return 1;
 }
 
 

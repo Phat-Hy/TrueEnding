@@ -75,15 +75,15 @@ void node_createNamedChild(void);
 void fn_80089488(void);
 void fn_80089528(void);
 void fn_8008954C(void);
-void fn_800895B8(void);
+u32 fn_800895B8(void);
 void fn_800895C0(void);
 void fn_80089620(void);
-void fn_800897C8(void);
+u32 fn_800897C8(void);
 void fn_800897D0(void);
 void fn_800897D4(void);
 void node_destroy(void);
-void fn_8008984C(void);
-void fn_80089854(void);
+u32 fn_8008984C(void);
+u32 fn_80089854(void);
 void fn_8008985C(void);
 void fn_8008989C(void);
 void fn_800898DC(void);
@@ -91,7 +91,7 @@ void fn_8008991C(void);
 void fn_8008995C(void);
 void fn_8008999C(void);
 void fn_800899DC(void);
-void fn_80089ACC(void);
+u32 fn_80089ACC(const u32 *p);
 void fn_80089AD4(void);
 void fn_80089B5C(void);
 void fn_80089C28(void);
@@ -288,11 +288,9 @@ lbl_fn_8008954C_00000220:
     blr
 }
 
-asm void fn_800895B8(void)
+u32 fn_800895B8(void)
 {
-    nofralloc
-    li r3, 0x1
-    blr
+    return 1;
 }
 
 asm void fn_800895C0(void)
@@ -445,11 +443,9 @@ lbl_fn_80089620_00000430:
     blr
 }
 
-asm void fn_800897C8(void)
+u32 fn_800897C8(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 void fn_800897D0(void)
@@ -495,18 +491,14 @@ lbl_node_destroy_000004BC:
     blr
 }
 
-asm void fn_8008984C(void)
+u32 fn_8008984C(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
-asm void fn_80089854(void)
+u32 fn_80089854(void)
 {
-    nofralloc
-    li r3, 0x1
-    blr
+    return 1;
 }
 
 asm void fn_8008985C(void)
@@ -713,11 +705,9 @@ lbl_fn_800899DC_0000072C:
     blr
 }
 
-asm void fn_80089ACC(void)
+u32 fn_80089ACC(const u32 *p)
 {
-    nofralloc
-    lwz r3, 0x0(r3)
-    blr
+    return *p;
 }
 
 asm void fn_80089AD4(void)

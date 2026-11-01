@@ -45,7 +45,7 @@ extern u32 lbl_8087FF70;
 void fn_80608B10(void);
 void fn_80608B30(void);
 void fn_80608B50(void);
-void fn_80608B70(void);
+u32 fn_80608B70(void);
 void fn_80608B80(void);
 void fn_80608BB0(void);
 
@@ -79,11 +79,9 @@ asm void fn_80608B50(void)
     blr
 }
 
-asm void fn_80608B70(void)
+u32 fn_80608B70(void)
 {
-    nofralloc
-    lwz r3, lbl_8087FF64
-    blr
+    return lbl_8087FF64;
 }
 
 asm void fn_80608B80(void)

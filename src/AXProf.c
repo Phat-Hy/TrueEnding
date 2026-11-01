@@ -8,14 +8,12 @@ extern u32 lbl_80880030;
 extern u32 lbl_80880034;
 
 /* Function declarations */
-void fn_8060B080(void);
+u32 fn_8060B080(void);
 void fn_8060B090(void);
 
-asm void fn_8060B080(void)
+u32 fn_8060B080(void)
 {
-    nofralloc
-    lwz r3, lbl_80880014
-    blr
+    return lbl_80880014;
 }
 
 asm void fn_8060B090(void)

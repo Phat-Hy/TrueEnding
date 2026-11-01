@@ -99,10 +99,10 @@ void fn_80602730(void);
 void fn_806028A0(void);
 void fn_80602A10(void);
 void DVDLowGetImmBufferReg(void);
-void DVDLowUnmaskStatusInterrupts(void);
-void DVDLowMaskCoverInterrupt(void);
+u32 DVDLowUnmaskStatusInterrupts(void);
+u32 DVDLowMaskCoverInterrupt(void);
 void fn_80602BB0(void);
-void fn_80602D20(void);
+u32 fn_80602D20(void);
 void fn_80602D30(void);
 
 asm void __DVDCheckDevice(void)
@@ -2968,18 +2968,14 @@ asm void DVDLowGetImmBufferReg(void)
     blr
 }
 
-asm void DVDLowUnmaskStatusInterrupts(void)
+u32 DVDLowUnmaskStatusInterrupts(void)
 {
-    nofralloc
-    li r3, 0x1
-    blr
+    return 1;
 }
 
-asm void DVDLowMaskCoverInterrupt(void)
+u32 DVDLowMaskCoverInterrupt(void)
 {
-    nofralloc
-    li r3, 0x1
-    blr
+    return 1;
 }
 
 asm void fn_80602BB0(void)
@@ -3085,11 +3081,9 @@ lbl_fn_80602BB0_2900:
     blr
 }
 
-asm void fn_80602D20(void)
+u32 fn_80602D20(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_80602D30(void)

@@ -89,8 +89,8 @@ extern u32 lbl_808836F0;
 
 /* Function declarations */
 void fn_802676BC(void);
-void fn_80267B20(void);
-void fn_80267B28(void);
+u32 fn_80267B20(const void *p);
+u32 fn_80267B28(const void *p);
 void fn_80267B30(void);
 void fn_80267B60(void);
 void fn_80267B88(void);
@@ -420,18 +420,14 @@ lbl_fn_802676BC_00000448:
     blr
 }
 
-asm void fn_80267B20(void)
+u32 fn_80267B20(const void *p)
 {
-    nofralloc
-    lwz r3, 0x55c(r3)
-    blr
+    return *(const u32 *)((const char *)p + 0x55c);
 }
 
-asm void fn_80267B28(void)
+u32 fn_80267B28(const void *p)
 {
-    nofralloc
-    lwz r3, 0x560(r3)
-    blr
+    return *(const u32 *)((const char *)p + 0x560);
 }
 
 asm void fn_80267B30(void)

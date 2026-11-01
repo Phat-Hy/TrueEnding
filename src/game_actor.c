@@ -132,8 +132,8 @@ void dtor_80013D60(void);
 void actor_validateIndex(void);
 void actor_dispatchMessage(void);
 void dtor_80014250(void);
-void fn_800142C4(void);
-void fn_800142CC(void);
+void fn_800142C4(u32 val);
+void fn_800142CC(u32 val);
 void fn_800142D4(void);
 void fn_800143E8(void);
 void fn_800144FC(void);
@@ -558,18 +558,14 @@ lbl_dtor_80014250_00000548:
     blr
 }
 
-asm void fn_800142C4(void)
+void fn_800142C4(u32 val)
 {
-    nofralloc
-    stw r3, lbl_8087EE60
-    blr
+    lbl_8087EE60 = val;
 }
 
-asm void fn_800142CC(void)
+void fn_800142CC(u32 val)
 {
-    nofralloc
-    stw r3, lbl_8087EE64
-    blr
+    lbl_8087EE64 = val;
 }
 
 asm void fn_800142D4(void)

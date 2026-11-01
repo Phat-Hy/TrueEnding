@@ -101,17 +101,17 @@ extern u32 lbl_80881754;
 
 /* Function declarations */
 void fn_80116B98(void);
-void fn_80116BA4(void);
-void fn_80116BAC(void);
+f32 fn_80116BA4(const void *p);
+void *fn_80116BAC(void *p);
 void fn_80116BB4(void);
 void fn_80116BB8(void);
 void fn_80116BC8(void);
 void fn_80116BD4(void);
-void fn_80116E64(void);
-void fn_80116E6C(void);
+u32 fn_80116E64(void);
+void *fn_80116E6C(void *p);
 void fn_80116E74(void);
 void fn_80116E7C(void);
-void fn_80116EA8(void);
+u32 fn_80116EA8(void);
 void fn_80116EB0(void);
 void fn_80116EB4(void);
 void fn_80116EB8(void);
@@ -143,18 +143,14 @@ asm void fn_80116B98(void)
     blr
 }
 
-asm void fn_80116BA4(void)
+f32 fn_80116BA4(const void *p)
 {
-    nofralloc
-    lfs f1, 0x50(r3)
-    blr
+    return *(const f32 *)((const char *)p + 0x50);
 }
 
-asm void fn_80116BAC(void)
+void *fn_80116BAC(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x48c
-    blr
+    return (char *)p + 0x48c;
 }
 
 void fn_80116BB4(void)
@@ -348,18 +344,14 @@ lbl_fn_80116BD4_0000027C:
     blr
 }
 
-asm void fn_80116E64(void)
+u32 fn_80116E64(void)
 {
-    nofralloc
-    lwz r3, lbl_8087EFE8
-    blr
+    return lbl_8087EFE8;
 }
 
-asm void fn_80116E6C(void)
+void *fn_80116E6C(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x2c
-    blr
+    return (char *)p + 0x2c;
 }
 
 asm void fn_80116E74(void)
@@ -386,11 +378,9 @@ lbl_fn_80116E7C_00000308:
     blr
 }
 
-asm void fn_80116EA8(void)
+u32 fn_80116EA8(void)
 {
-    nofralloc
-    li r3, 0x1
-    blr
+    return 1;
 }
 
 void fn_80116EB0(void)
