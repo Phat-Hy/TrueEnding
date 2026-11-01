@@ -680,3 +680,29 @@ Names applied:
   - GXInvalidateVtxCache (fn_80613950, 16 B)
   - __GXSetVtxDesc (fn_80613960, 580 B, 5 probe hits)
 Progress: 99.30% matched (7,425,512 / 7,477,608 bytes), 18,054 / 18,155 functions matched.
+
+## Session 2026-11-01 - Conversion: atn_normalizePath to 100.0% matching C
+Subject:  track-a: decompile atn_normalizePath (84 B) to 100.0% matching C progress 99.30% -> 99.30%
+Scope:    Decompile atn_normalizePath (fn_8006A950, 0x8006A950, 84 B) in src/game_boss.c.
+Checklist:
+  1. src/game_boss.c: atn_normalizePath converted from inline asm to C.
+  2. Prototypes swept across 5 caller units (game_boss_cocoon_rush.c, game_boss_cocoon_shockwave.c, game_boss_cocoon_spin.c, game_event_cutscene_cam.c, game_event_cutscene_mgr.c).
+  3. report.json clean, ninja passed (orig/main.dol: OK).
+Self-check: git diff -U0 -- src/ for 'asm void': -1 / +0 (net 1 C conversion).
+Decompiled C logic:
+`c
+void atn_normalizePath(char* str)
+{
+    u32 len = strlen(str);
+    u32 i;
+    for (i = 0; i < len; i++) {
+        if (str[i] == '\\') {
+            str[i] = '/';
+        }
+    }
+}
+`
+Analysis for Track B:
+- Essential engine path normalizer called across file archive loading and cutscene loaders.
+- Replaces all backslash separators '\\' with forward slashes '/' in place.
+Progress: 99.30% matched (7,425,512 / 7,477,608 bytes), 18,054 / 18,155 functions matched.

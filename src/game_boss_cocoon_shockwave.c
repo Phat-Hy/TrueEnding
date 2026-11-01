@@ -5,7 +5,7 @@
 extern void OSSleepTicks(void);
 extern void __files(void);
 extern void dtor_80084684(void);
-extern void atn_normalizePath(void);
+extern void atn_normalizePath(char* str);
 extern void fn_8006B404(void);
 extern void fn_80070E14(void);
 extern void fn_80076C44(void);

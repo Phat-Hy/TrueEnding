@@ -9,7 +9,7 @@ extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
 extern void fn_80013F78(void);
 extern void fn_800698DC(void);
-extern void atn_normalizePath(void);
+extern void atn_normalizePath(char* str);
 extern void fn_8006AD24(void);
 extern void fn_8006B0C8(void);
 extern void fn_8006B404(void);

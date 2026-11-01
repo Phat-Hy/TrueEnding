@@ -12,7 +12,7 @@ extern void fn_8005B9CC(void);
 extern void fn_8005BBF8(void);
 extern void fn_8005BCE8(void);
 extern void fn_80069BF4(void);
-extern void atn_normalizePath(void);
+extern void atn_normalizePath(char* str);
 extern void fn_8006B404(void);
 extern void fn_80084320(void);
 extern void fn_800844D8(void);

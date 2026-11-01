@@ -108,7 +108,7 @@ void fn_8006A900(void);
 void atn_Fade_slot2(void);
 void atn_Fade_slot1(void);
 void atn_FadeCommon_draw(void);
-void atn_normalizePath(void);
+void atn_normalizePath(char* str);
 void fn_8006A9A4(void);
 void fn_8006AA20(void);
 void fn_8006AB54(void);
@@ -2166,33 +2166,15 @@ asm void atn_FadeCommon_draw(void)
     blr
 }
 
-asm void atn_normalizePath(void)
+void atn_normalizePath(char* str)
 {
-    nofralloc
-    stwu r1, -0x10(r1)
-    mflr r0
-    stw r0, 0x14(r1)
-    stw r31, 0xc(r1)
-    mr r31, r3
-    bl strlen
-    li r0, 0x2f
-    mtctr r3
-    cmplwi r3, 0x0
-    ble lbl_atn_normalizePath_00001BE0
-lbl_atn_normalizePath_00001BC8:
-    lbz r3, 0x0(r31)
-    cmpwi r3, 0x5c
-    bne lbl_atn_normalizePath_00001BD8
-    stb r0, 0x0(r31)
-lbl_atn_normalizePath_00001BD8:
-    addi r31, r31, 0x1
-    bdnz lbl_atn_normalizePath_00001BC8
-lbl_atn_normalizePath_00001BE0:
-    lwz r0, 0x14(r1)
-    lwz r31, 0xc(r1)
-    mtlr r0
-    addi r1, r1, 0x10
-    blr
+    u32 len = strlen(str);
+    u32 i;
+    for (i = 0; i < len; i++) {
+        if (str[i] == '\\') {
+            str[i] = '/';
+        }
+    }
 }
 
 asm void fn_8006A9A4(void)
