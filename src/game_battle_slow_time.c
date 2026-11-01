@@ -10,7 +10,7 @@ extern void ui_destroyWidget(void);
 extern void collision_queryGeometry(void);
 extern void fn_8004FF58(void);
 extern void fn_80058078(void);
-extern void fn_800580BC(void);
+extern void mission_isObjectiveActive(void);
 extern void mission_updateObjectiveTarget(void);
 extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
@@ -228,7 +228,7 @@ lbl_fn_80407010_00000188:
     li r31, 0x1
 lbl_fn_80407010_0000018C:
     addi r3, r30, 0x894
-    bl fn_800580BC
+    bl mission_isObjectiveActive
     cmpwi r3, 0x0
     beq lbl_fn_80407010_000001A0
     li r31, 0x1

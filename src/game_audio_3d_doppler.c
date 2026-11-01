@@ -3,7 +3,7 @@
 
 /* External function declarations */
 extern void vec3_copy(void);
-extern void fn_8000DD0C(void);
+extern void scene_getRootNode(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
 extern void fn_80011220(void);
@@ -567,7 +567,7 @@ lbl_fn_80323690_0000057C:
     b lbl_fn_80323690_000005B8
 lbl_fn_80323690_0000058C:
     lwz r3, 0x14bc(r30)
-    bl fn_8000DD0C
+    bl scene_getRootNode
     lis r5, lbl_80749D10@ha
     lis r6, lbl_807C7030@ha
     addi r5, r5, lbl_80749D10@l

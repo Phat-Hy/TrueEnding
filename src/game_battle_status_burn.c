@@ -12,7 +12,7 @@ extern void ui_destroyWidget(void);
 extern void atn_ColliBase_destructor(void);
 extern void fn_80057F28(void);
 extern void fn_80058078(void);
-extern void fn_800580BC(void);
+extern void mission_isObjectiveActive(void);
 extern void mission_updateObjectiveTarget(void);
 extern void fn_80058A1C(void);
 extern void fn_80058B78(void);
@@ -1664,7 +1664,7 @@ lbl_fn_8042693C_000014DC:
     b lbl_fn_8042693C_00001530
 lbl_fn_8042693C_000014E4:
     addi r3, r30, 0x898
-    bl fn_800580BC
+    bl mission_isObjectiveActive
     cmpwi r3, 0x0
     beq lbl_fn_8042693C_000014FC
     li r3, 0x1

@@ -17,7 +17,7 @@ extern void fn_8000D9F0(void);
 extern void fn_8000DB1C(void);
 extern void fn_8000DB24(void);
 extern void fn_8000DD04(void);
-extern void fn_8000DD0C(void);
+extern void scene_getRootNode(void);
 extern void fn_8000DD14(void);
 extern void fn_8000DD98(void);
 extern void fn_8000DDA0(void);
@@ -363,7 +363,7 @@ lbl_fn_8000E474_0000036C:
     bl fn_8000DDA0
     stw r3, 0x1c(r27)
     bl fn_8000DE3C
-    bl fn_8000DD0C
+    bl scene_getRootNode
     bl fn_8000DD04
     cmpwi r3, 0x0
     mr r30, r3
@@ -377,7 +377,7 @@ lbl_fn_8000E474_0000039C:
     mr r28, r3
     lwz r3, 0x1c(r27)
     bl fn_8000DE3C
-    bl fn_8000DD0C
+    bl scene_getRootNode
     mr r4, r28
     bl fn_800929C0
     bl fn_8000DD98
@@ -393,7 +393,7 @@ lbl_fn_8000E474_0000039C:
     bl fn_8000DE44
     lwz r3, 0x1c(r27)
     bl fn_8000DE3C
-    bl fn_8000DD0C
+    bl scene_getRootNode
     mr r4, r28
     bl fn_80093E90
     stw r3, 0xc(r1)
@@ -640,7 +640,7 @@ lbl_fn_8000E820_000006E8:
     bl fn_8000DDA0
     stw r3, 0x1c(r30)
     bl fn_8000DE3C
-    bl fn_8000DD0C
+    bl scene_getRootNode
     bl fn_8000DD04
     cmpwi r3, 0x0
     mr r31, r3
@@ -654,7 +654,7 @@ lbl_fn_8000E820_00000740:
     mr r27, r3
     lwz r3, 0x1c(r30)
     bl fn_8000DE3C
-    bl fn_8000DD0C
+    bl scene_getRootNode
     mr r4, r27
     bl fn_800929C0
     bl fn_8000DD98
@@ -670,7 +670,7 @@ lbl_fn_8000E820_00000740:
     bl fn_8000DE44
     lwz r3, 0x1c(r30)
     bl fn_8000DE3C
-    bl fn_8000DD0C
+    bl scene_getRootNode
     mr r4, r27
     bl fn_80093E90
     stw r3, 0xc(r1)

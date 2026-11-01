@@ -27,15 +27,15 @@ extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void str_skipWhitespace(void);
 extern void fn_800EC1F4(void);
-extern void fn_800EC204(void);
+extern void cam_findTargetIndex(void);
 extern void fn_800EC24C(void);
 extern void fn_800EC254(void);
-extern void fn_800EC2C4(void);
-extern void fn_800EC440(void);
-extern void fn_800EC534(void);
-extern void fn_800EC5BC(void);
+extern void cam_registerTarget(void);
+extern void cam_initTrajectoryParams(void);
+extern void cam_bindPathTarget(void);
+extern void cam_bindRotationTarget(void);
 extern void cam_evalControllerSpline(void);
-extern void fn_800ED42C(void);
+extern void cam_setLookAtTarget(void);
 extern void fn_800ED4D8(void);
 extern void fn_800ED4E0(void);
 extern void cam_evalLookAtMatrix(void);
@@ -1686,14 +1686,14 @@ asm void fn_800EBF1C(void)
     li r5, 0x0
     addi r4, r29, 0x83
     li r6, 0x0
-    bl fn_800EC440
+    bl cam_initTrajectoryParams
     addi r3, r1, 0xd4
     addi r4, r1, 0x2c
     addi r5, r1, 0x74
-    bl fn_800EC2C4
+    bl cam_registerTarget
     addi r3, r1, 0x74
     li r4, -0x1
-    bl fn_800EC534
+    bl cam_bindPathTarget
     addi r3, r1, 0x98
     addi r4, r1, 0xd4
     bl cam_evalControllerSpline
@@ -1786,7 +1786,7 @@ lbl_fn_800EBF1C_000016A0:
     bl atoi
     mr r4, r3
     mr r3, r28
-    bl fn_800EC204
+    bl cam_findTargetIndex
     stw r3, 0x1464(r27)
     addi r3, r1, 0x14
     li r4, -0x1
@@ -1839,15 +1839,15 @@ lbl_fn_800EBF1C_000017B8:
     mr r31, r3
     addi r3, r1, 0x38
     li r4, -0x1
-    bl fn_800ED42C
+    bl cam_setLookAtTarget
     cmpwi r31, 0x0
     bne lbl_fn_800EBF1C_000015C0
     addi r3, r1, 0x98
     li r4, -0x1
-    bl fn_800ED42C
+    bl cam_setLookAtTarget
     addi r3, r1, 0xd4
     li r4, -0x1
-    bl fn_800EC5BC
+    bl cam_bindRotationTarget
     addi r3, r1, 0x2c
     li r4, -0x1
     bl dtor_80013D60

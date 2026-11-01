@@ -8,7 +8,7 @@ extern void _savegpr_19(void);
 extern void _savegpr_24(void);
 extern void mtx_getTranslation(void);
 extern void vec3_mag(void);
-extern void fn_8000DD0C(void);
+extern void scene_getRootNode(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
@@ -1573,7 +1573,7 @@ lbl_fn_80279280_0000151C:
     lwz r3, 0x88(r25)
     cmpwi r3, 0x0
     beq lbl_fn_80279280_000018FC
-    bl fn_8000DD0C
+    bl scene_getRootNode
     addi r4, r26, 0x1c9
     bl atn_Model_getBoneMatrix
     mr r4, r3
@@ -1787,7 +1787,7 @@ lbl_fn_80279280_0000174C:
     li r5, 0x66
     bl fn_800F7FA8
     lwz r3, 0x88(r25)
-    bl fn_8000DD0C
+    bl scene_getRootNode
     mr r29, r3
     bl viewport_getGlobalContext
     mr r5, r29
@@ -1799,7 +1799,7 @@ lbl_fn_80279280_0000174C:
     li r5, 0x67
     bl fn_800F7FA8
     lwz r3, 0x88(r25)
-    bl fn_8000DD0C
+    bl scene_getRootNode
     mr r29, r3
     bl viewport_getGlobalContext
     mr r5, r29

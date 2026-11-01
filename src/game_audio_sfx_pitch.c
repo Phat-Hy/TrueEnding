@@ -38,7 +38,7 @@ extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void fn_80109950(void);
 extern void fn_801162A0(void);
-extern void fn_801255C8(void);
+extern void enemy_stepBehavior(void);
 extern void enemy_updateCombatBehavior(void);
 extern void fn_80128930(void);
 extern void enemy_evalAnimTrack(void);
@@ -1068,7 +1068,7 @@ asm void fn_80314130(void)
     addi r3, r31, 0xc64
     lfs f0, 0x30(r4)
     stfs f0, 0xc8c(r31)
-    bl fn_801255C8
+    bl enemy_stepBehavior
     lwz r0, 0x14cc(r31)
     oris r0, r0, 0x4000
     stw r0, 0x14cc(r31)

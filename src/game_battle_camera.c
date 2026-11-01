@@ -15,7 +15,7 @@ extern void fn_801059F8(void);
 extern void fn_80105B3C(void);
 extern void fn_8011BEB8(void);
 extern void fn_8011C044(void);
-extern void fn_801255C8(void);
+extern void enemy_stepBehavior(void);
 extern void fn_80127EF4(void);
 extern void fn_80128A30(void);
 extern void fn_80128B20(void);
@@ -99,7 +99,7 @@ asm void fn_80170F20(void)
     stfs f31, 0x1058(r31)
 lbl_fn_80170F20_00000048:
     addi r3, r31, 0x1030
-    bl fn_801255C8
+    bl enemy_stepBehavior
     cmpwi r3, 0x0
     beq lbl_fn_80170F20_000004E0
     addi r3, r31, 0xc58
@@ -445,7 +445,7 @@ asm void fn_80171420(void)
     addi r5, r31, 0x528
     bl fn_80128B20
     addi r3, r31, 0x1030
-    bl fn_801255C8
+    bl enemy_stepBehavior
     cmpwi r3, 0x0
     beq lbl_fn_80171420_000009C0
     addi r3, r31, 0xc58

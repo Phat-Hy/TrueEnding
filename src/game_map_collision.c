@@ -19,7 +19,7 @@ extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void str_parseInt(void);
 extern void fn_80125474(void);
-extern void fn_801255C8(void);
+extern void enemy_stepBehavior(void);
 extern void enemy_updateCombatBehavior(void);
 extern void fn_80128818(void);
 extern void npc_calcTargetDistance(void);
@@ -1810,7 +1810,7 @@ lbl_fn_80181A64_000017A0:
     lwzx r4, r4, r0
     bl fn_80128818
     addi r3, r20, 0xc64
-    bl fn_801255C8
+    bl enemy_stepBehavior
     addi r11, r1, 0x70
     psq_l f31, 0x98(r1), 0, 0
     lfd f31, 0x90(r1)
@@ -1907,7 +1907,7 @@ lbl_fn_80181D94_00001900:
     lwzx r4, r4, r0
     bl fn_80128818
     addi r3, r30, 0xc64
-    bl fn_801255C8
+    bl enemy_stepBehavior
 lbl_fn_80181D94_00001928:
     mr r3, r31
     bl enemy_updateCombatBehavior

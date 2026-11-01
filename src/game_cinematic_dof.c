@@ -11,7 +11,7 @@ extern void vec3_set(void);
 extern void fn_8000D760(void);
 extern void scene_transformPoint(void);
 extern void fn_8000DCF4(void);
-extern void fn_8000DD0C(void);
+extern void scene_getRootNode(void);
 extern void str_initFromCStr(void);
 extern void menu_initWindowBuffer(void);
 extern void str_getData(void);
@@ -35,12 +35,12 @@ extern void bloom_processPasses(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void fn_800EC254(void);
-extern void fn_800EC2C4(void);
-extern void fn_800EC440(void);
-extern void fn_800EC534(void);
-extern void fn_800EC5BC(void);
+extern void cam_registerTarget(void);
+extern void cam_initTrajectoryParams(void);
+extern void cam_bindPathTarget(void);
+extern void cam_bindRotationTarget(void);
 extern void cam_evalControllerSpline(void);
-extern void fn_800ED42C(void);
+extern void cam_setLookAtTarget(void);
 extern void fn_800ED4D8(void);
 extern void fn_800ED4E0(void);
 extern void cam_evalLookAtMatrix(void);
@@ -65,7 +65,7 @@ extern void fn_8015ECC4(void);
 extern void debuff_removeStatusEffect(void);
 extern void actor_setState(void);
 extern void fn_801A03E0(void);
-extern void fn_8020A780(void);
+extern void str_appendString(void);
 extern void task_findEntryById(void);
 extern void res_MsgHandle_ctor(void);
 extern void res_Resource_unload(void);
@@ -675,14 +675,14 @@ asm void fn_803388A4(void)
     addi r4, r29, 0x32
     li r5, 0x0
     li r6, 0x0
-    bl fn_800EC440
+    bl cam_initTrajectoryParams
     addi r3, r1, 0xd4
     addi r4, r1, 0x14
     addi r5, r1, 0x74
-    bl fn_800EC2C4
+    bl cam_registerTarget
     addi r3, r1, 0x74
     li r4, -0x1
-    bl fn_800EC534
+    bl cam_bindPathTarget
     addi r3, r1, 0x98
     addi r4, r1, 0xd4
     bl cam_evalControllerSpline
@@ -702,7 +702,7 @@ lbl_fn_803388A4_000006EC:
     mr r4, r3
     addi r3, r1, 0x20
     addi r4, r4, 0x8
-    bl fn_8020A780
+    bl str_appendString
 lbl_fn_803388A4_00000728:
     addi r3, r1, 0x98
     bl fn_800ED4E0
@@ -716,12 +716,12 @@ lbl_fn_803388A4_00000730:
     mr r30, r3
     addi r3, r1, 0x38
     li r4, -0x1
-    bl fn_800ED42C
+    bl cam_setLookAtTarget
     cmpwi r30, 0x0
     bne lbl_fn_803388A4_000006EC
     addi r3, r1, 0x98
     li r4, -0x1
-    bl fn_800ED42C
+    bl cam_setLookAtTarget
     addi r3, r1, 0x8
     addi r4, r1, 0x2c
     addi r5, r1, 0x20
@@ -804,7 +804,7 @@ lbl_fn_803388A4_00000730:
     bl dtor_80013D60
     addi r3, r1, 0xd4
     li r4, -0x1
-    bl fn_800EC5BC
+    bl cam_bindRotationTarget
     addi r3, r1, 0x14
     li r4, -0x1
     bl dtor_80013D60
@@ -1826,7 +1826,7 @@ lbl_fn_80339760_0000163C:
     bl proj_getMatrix
     stfs f31, 0x228(r3)
     lwz r3, 0x14c4(r31)
-    bl fn_8000DD0C
+    bl scene_getRootNode
     lis r4, lbl_8074A4C0@ha
     li r5, 0x0
     addi r4, r4, lbl_8074A4C0@l
@@ -2003,7 +2003,7 @@ lbl_fn_80339760_0000197C:
     lwz r3, 0x14b0(r31)
     cmpwi r3, 0x0
     beq lbl_fn_80339760_000019CC
-    bl fn_8000DD0C
+    bl scene_getRootNode
     lis r5, lbl_8074A4C0@ha
     lis r6, lbl_807C7030@ha
     addi r5, r5, lbl_8074A4C0@l

@@ -22,7 +22,7 @@ extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void str_findChar(void);
 extern void sound_playSpatialEffect(void);
-extern void fn_800EC204(void);
+extern void cam_findTargetIndex(void);
 extern void camera_updateTargetMode(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
@@ -361,7 +361,7 @@ lbl_fn_80244898_00000330:
     bl equip_getGlobalManager
     bl npc_getDialogController
     mr r4, r31
-    bl fn_800EC204
+    bl cam_findTargetIndex
     cmpwi r3, 0x0
     stw r3, 0x14(r1)
     beq lbl_fn_80244898_00000368
@@ -386,7 +386,7 @@ lbl_fn_80244898_00000388:
     bl equip_getGlobalManager
     bl npc_getDialogController
     mr r4, r31
-    bl fn_800EC204
+    bl cam_findTargetIndex
     cmpwi r3, 0x0
     stw r3, 0x10(r1)
     beq lbl_fn_80244898_000003C0

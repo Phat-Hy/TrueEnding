@@ -13,7 +13,7 @@ extern void dtor_80084684(void);
 extern void actor_dispatchMessage(void);
 extern void fn_80057F28(void);
 extern void fn_80058078(void);
-extern void fn_800580BC(void);
+extern void mission_isObjectiveActive(void);
 extern void mission_updateObjectiveTarget(void);
 extern void atn_ColliObject_destructor(void);
 extern void talk_parseQuotedString(void);
@@ -833,7 +833,7 @@ lbl_fn_8032C850_00000A04:
     li r30, 0x0
 lbl_fn_8032C850_00000A1C:
     mr r3, r31
-    bl fn_800580BC
+    bl mission_isObjectiveActive
     cmpwi r3, 0x0
     beq lbl_fn_8032C850_00000A34
     li r3, 0x0

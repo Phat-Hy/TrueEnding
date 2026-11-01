@@ -29,7 +29,7 @@ extern void viewport_getNextSequenceId(void);
 extern void system_getNextSequenceId(void);
 extern void fn_801162A0(void);
 extern void skill_findNodeById(void);
-extern void fn_801255C8(void);
+extern void enemy_stepBehavior(void);
 extern void enemy_updateCombatBehavior(void);
 extern void fn_80128930(void);
 extern void fn_8012F440(void);
@@ -957,7 +957,7 @@ lbl_fn_8030E710_00000B18:
     addi r3, r3, 0xc64
     bl fn_80128930
     addi r3, r29, 0xc64
-    bl fn_801255C8
+    bl enemy_stepBehavior
     lwz r0, 0x14cc(r29)
     oris r0, r0, 0x4000
     stw r0, 0x14cc(r29)
@@ -2084,7 +2084,7 @@ lbl_fn_8030F564_00001B24:
     li r6, 0x0
     bl fn_80128930
     addi r3, r30, 0xc64
-    bl fn_801255C8
+    bl enemy_stepBehavior
     b lbl_fn_8030F564_00001BF0
 lbl_fn_8030F564_00001B4C:
     cmpwi r0, 0x1

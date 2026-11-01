@@ -8,7 +8,7 @@ extern void fn_8000D3A8(void);
 extern void scene_traverseNode(void);
 extern void scene_transformPoint(void);
 extern void fn_8000DCF4(void);
-extern void fn_8000DD0C(void);
+extern void scene_getRootNode(void);
 extern void menu_initWindowBuffer(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
@@ -1320,7 +1320,7 @@ lbl_fn_80346384_00000FE0:
     li r4, 0x0
     bl fn_80317034
     lwz r3, 0x17e4(r31)
-    bl fn_8000DD0C
+    bl scene_getRootNode
     addi r4, r1, 0x8
     bl scene_traverseNode
     addi r3, r1, 0x8

@@ -36,12 +36,12 @@ extern void bloom_processPasses(void);
 extern void str_skipWhitespace(void);
 extern void str_findChar(void);
 extern void sky_renderStub(void);
-extern void fn_800EC2C4(void);
-extern void fn_800EC440(void);
-extern void fn_800EC534(void);
-extern void fn_800EC5BC(void);
+extern void cam_registerTarget(void);
+extern void cam_initTrajectoryParams(void);
+extern void cam_bindPathTarget(void);
+extern void cam_bindRotationTarget(void);
 extern void cam_evalControllerSpline(void);
-extern void fn_800ED42C(void);
+extern void cam_setLookAtTarget(void);
 extern void cam_evalLookAtMatrix(void);
 extern void cam_destroyMsgHandle(void);
 extern void fn_8012044C(void);
@@ -1588,14 +1588,14 @@ lbl_fn_803EEEDC_000011BC:
     la r4, lbl_8087DF0C
     li r5, 0x0
     li r6, 0x0
-    bl fn_800EC440
+    bl cam_initTrajectoryParams
     mr r4, r21
     addi r3, r1, 0x30
     addi r5, r1, 0x98
-    bl fn_800EC2C4
+    bl cam_registerTarget
     addi r3, r1, 0x98
     li r4, -0x1
-    bl fn_800EC534
+    bl cam_bindPathTarget
     addi r3, r1, 0x5c
     addi r4, r1, 0x30
     bl cam_evalControllerSpline
@@ -1666,7 +1666,7 @@ lbl_fn_803EEEDC_00001370:
     bl fn_80205BE8
     addi r3, r1, 0xbc
     li r4, -0x1
-    bl fn_800ED42C
+    bl cam_setLookAtTarget
 lbl_fn_803EEEDC_0000138C:
     addi r3, r1, 0xf8
     addi r4, r1, 0x30
@@ -1701,12 +1701,12 @@ lbl_fn_803EEEDC_000013EC:
 lbl_fn_803EEEDC_000013FC:
     addi r3, r1, 0xf8
     li r4, -0x1
-    bl fn_800ED42C
+    bl cam_setLookAtTarget
     cmpwi r20, 0x0
     beq lbl_fn_803EEEDC_0000129C
     addi r3, r1, 0x5c
     li r4, -0x1
-    bl fn_800ED42C
+    bl cam_setLookAtTarget
     addi r3, r1, 0x280
     bl talk_parseQuotedString
     bl atoi
@@ -1716,7 +1716,7 @@ lbl_fn_803EEEDC_000013FC:
     bl fn_803EF3B0
     addi r3, r1, 0x30
     li r4, -0x1
-    bl fn_800EC5BC
+    bl cam_bindRotationTarget
     lwz r0, 0x10(r1)
     srwi. r0, r0, 31
     beq lbl_fn_803EEEDC_00001458

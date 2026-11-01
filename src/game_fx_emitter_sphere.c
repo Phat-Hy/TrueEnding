@@ -30,7 +30,7 @@ extern void atn_LH_Texture_destructAndFree(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void sound_playSpatialEffect(void);
-extern void fn_800EC204(void);
+extern void cam_findTargetIndex(void);
 extern void fn_800EC24C(void);
 extern void vec3_normalize(void);
 extern void system_getNextSequenceId(void);
@@ -1650,7 +1650,7 @@ lbl_fn_802885EC_000015E0:
     bl equip_getGlobalManager
     bl npc_getDialogController
     mr r4, r29
-    bl fn_800EC204
+    bl cam_findTargetIndex
     cmpwi r3, 0x0
     stw r3, 0xc(r1)
     beq lbl_fn_802885EC_00001618
@@ -1675,7 +1675,7 @@ lbl_fn_802885EC_00001638:
     bl equip_getGlobalManager
     bl npc_getDialogController
     mr r4, r29
-    bl fn_800EC204
+    bl cam_findTargetIndex
     cmpwi r3, 0x0
     stw r3, 0x8(r1)
     beq lbl_fn_802885EC_00001670
@@ -1699,7 +1699,7 @@ lbl_fn_802885EC_0000167C:
     bl equip_getGlobalManager
     bl npc_getDialogController
     mr r4, r29
-    bl fn_800EC204
+    bl cam_findTargetIndex
     stw r3, 0x1500(r31)
     b lbl_fn_802885EC_00001928
 lbl_fn_802885EC_000016B8:
@@ -1886,7 +1886,7 @@ lbl_fn_802885EC_00001938:
     bl equip_getGlobalManager
     bl npc_getDialogController
     li r4, 0x3e9
-    bl fn_800EC204
+    bl cam_findTargetIndex
     cmpwi r3, 0x0
     mr r4, r3
     beq lbl_fn_802885EC_0000196C

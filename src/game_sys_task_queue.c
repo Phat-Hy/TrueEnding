@@ -18,19 +18,19 @@ extern void mem_getAllocSize(void);
 extern void str_skipWhitespace(void);
 extern void wcs_vformat(void);
 extern void fn_800EC254(void);
-extern void fn_800EC2C4(void);
-extern void fn_800EC440(void);
-extern void fn_800EC534(void);
-extern void fn_800EC5BC(void);
+extern void cam_registerTarget(void);
+extern void cam_initTrajectoryParams(void);
+extern void cam_bindPathTarget(void);
+extern void cam_bindRotationTarget(void);
 extern void cam_evalControllerSpline(void);
-extern void fn_800ED42C(void);
+extern void cam_setLookAtTarget(void);
 extern void fn_800ED4D8(void);
 extern void cam_evalLookAtMatrix(void);
 extern void phys_scaleGravity(void);
 extern void fn_80205BE8(void);
 extern void fn_802089C4(void);
 extern void fn_8020A5D4(void);
-extern void fn_8020A780(void);
+extern void str_appendString(void);
 extern void fn_8020C07C(void);
 extern void fn_8020C4B0(void);
 extern void fn_8046DC5C(void);
@@ -685,20 +685,20 @@ asm void fn_80219F84(void)
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0x8
-    bl fn_8020A780
+    bl str_appendString
     lis r4, lbl_80742560@ha
     addi r3, r1, 0x1c4
     addi r4, r4, lbl_80742560@l
     li r5, 0x0
     li r6, 0x0
-    bl fn_800EC440
+    bl cam_initTrajectoryParams
     addi r3, r1, 0x29c
     addi r4, r1, 0x8
     addi r5, r1, 0x1c4
-    bl fn_800EC2C4
+    bl cam_registerTarget
     addi r3, r1, 0x1c4
     li r4, -0x1
-    bl fn_800EC534
+    bl cam_bindPathTarget
     addi r3, r27, 0x74
     li r29, 0x0
     li r4, 0x0
@@ -723,7 +723,7 @@ lbl_fn_80219F84_00000864:
     bl fn_80205BE8
     addi r3, r1, 0x188
     li r4, -0x1
-    bl fn_800ED42C
+    bl cam_setLookAtTarget
 lbl_fn_80219F84_0000089C:
     addi r3, r1, 0x14c
     addi r4, r1, 0x29c
@@ -740,17 +740,17 @@ lbl_fn_80219F84_0000089C:
 lbl_fn_80219F84_000008CC:
     addi r3, r1, 0x14c
     li r4, -0x1
-    bl fn_800ED42C
+    bl cam_setLookAtTarget
     cmpwi r31, 0x0
     bne lbl_fn_80219F84_00000864
     addi r3, r1, 0x260
     li r4, -0x1
-    bl fn_800ED42C
+    bl cam_setLookAtTarget
     mr r3, r28
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0x8
-    bl fn_8020A780
+    bl str_appendString
     addi r3, r1, 0x8
     bl str_getData
     bl atoi
@@ -773,20 +773,20 @@ lbl_fn_80219F84_00000934:
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0x8
-    bl fn_8020A780
+    bl str_appendString
     lis r4, lbl_80742560@ha
     addi r3, r1, 0x128
     addi r4, r4, lbl_80742560@l
     li r5, 0x0
     li r6, 0x0
-    bl fn_800EC440
+    bl cam_initTrajectoryParams
     addi r3, r1, 0x29c
     addi r4, r1, 0x8
     addi r5, r1, 0x128
     bl fn_8020A5D4
     addi r3, r1, 0x128
     li r4, -0x1
-    bl fn_800EC534
+    bl cam_bindPathTarget
     addi r3, r1, 0x224
     addi r4, r1, 0x29c
     li r29, 0x0
@@ -807,7 +807,7 @@ lbl_fn_80219F84_000009A4:
     bl fn_80205BE8
     addi r3, r1, 0xec
     li r4, -0x1
-    bl fn_800ED42C
+    bl cam_setLookAtTarget
 lbl_fn_80219F84_000009DC:
     addi r3, r1, 0xb0
     addi r4, r1, 0x29c
@@ -824,30 +824,30 @@ lbl_fn_80219F84_000009DC:
 lbl_fn_80219F84_00000A0C:
     addi r3, r1, 0xb0
     li r4, -0x1
-    bl fn_800ED42C
+    bl cam_setLookAtTarget
     cmpwi r31, 0x0
     bne lbl_fn_80219F84_000009A4
     addi r3, r1, 0x224
     li r4, -0x1
-    bl fn_800ED42C
+    bl cam_setLookAtTarget
     mr r3, r28
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0x8
-    bl fn_8020A780
+    bl str_appendString
     lis r4, lbl_80742560@ha
     addi r3, r1, 0x8c
     addi r4, r4, lbl_80742560@l
     li r5, 0x0
     li r6, 0x0
-    bl fn_800EC440
+    bl cam_initTrajectoryParams
     addi r3, r1, 0x29c
     addi r4, r1, 0x8
     addi r5, r1, 0x8c
     bl fn_8020A5D4
     addi r3, r1, 0x8c
     li r4, -0x1
-    bl fn_800EC534
+    bl cam_bindPathTarget
     addi r3, r1, 0x1e8
     addi r4, r1, 0x29c
     bl cam_evalControllerSpline
@@ -859,7 +859,7 @@ lbl_fn_80219F84_00000A84:
     bl fn_80205BE8
     addi r3, r1, 0x50
     li r4, -0x1
-    bl fn_800ED42C
+    bl cam_setLookAtTarget
 lbl_fn_80219F84_00000AA0:
     addi r3, r1, 0x14
     addi r4, r1, 0x29c
@@ -870,12 +870,12 @@ lbl_fn_80219F84_00000AA0:
     mr r31, r3
     addi r3, r1, 0x14
     li r4, -0x1
-    bl fn_800ED42C
+    bl cam_setLookAtTarget
     cmpwi r31, 0x0
     bne lbl_fn_80219F84_00000A84
     addi r3, r1, 0x1e8
     li r4, -0x1
-    bl fn_800ED42C
+    bl cam_setLookAtTarget
     mr r3, r28
     bl talk_parseQuotedString
     bl atoi
@@ -900,7 +900,7 @@ lbl_fn_80219F84_00000AA0:
     stw r3, 0x24(r27)
     addi r3, r1, 0x29c
     li r4, -0x1
-    bl fn_800EC5BC
+    bl cam_bindRotationTarget
     addi r3, r1, 0x8
     li r4, -0x1
     bl dtor_80013D60

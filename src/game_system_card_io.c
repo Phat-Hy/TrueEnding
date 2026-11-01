@@ -10,7 +10,7 @@ extern void ui_drawColoredQuad(void);
 extern void collision_testLineSegment(void);
 extern void cursor_updateSlotState(void);
 extern void system_getNextSequenceId(void);
-extern void fn_801255C8(void);
+extern void enemy_stepBehavior(void);
 extern void fn_80127D8C(void);
 extern void fn_80128930(void);
 extern void npc_getGlobalManager(void);
@@ -610,7 +610,7 @@ asm void fn_803579FC(void)
     lfs f0, lbl_80885588
     addi r3, r31, 0xc64
     stfs f0, 0xc8c(r31)
-    bl fn_801255C8
+    bl enemy_stepBehavior
     lwz r0, 0x14cc(r31)
     oris r0, r0, 0x4000
     stw r0, 0x14cc(r31)

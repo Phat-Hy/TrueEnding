@@ -29,7 +29,7 @@ extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void fn_800E0AA8(void);
 extern void fn_800E0AB0(void);
-extern void fn_800EC204(void);
+extern void cam_findTargetIndex(void);
 extern void system_getNextSequenceId(void);
 extern void skill_findNodeById(void);
 extern void equip_getGlobalManager(void);
@@ -711,7 +711,7 @@ lbl_fn_802DE27C_000007FC:
     bl equip_getGlobalManager
     bl npc_getDialogController
     mr r4, r28
-    bl fn_800EC204
+    bl cam_findTargetIndex
     cmpwi r3, 0x0
     stw r3, 0x18(r1)
     beq lbl_fn_802DE27C_00000834
@@ -819,7 +819,7 @@ lbl_fn_802DE27C_0000097C:
     bl equip_getGlobalManager
     bl npc_getDialogController
     mr r4, r28
-    bl fn_800EC204
+    bl cam_findTargetIndex
     cmpwi r28, 0x0
     stw r3, 0x8(r1)
     beq lbl_fn_802DE27C_000009BC
@@ -884,7 +884,7 @@ lbl_fn_802DE27C_00000A58:
     bl equip_getGlobalManager
     bl npc_getDialogController
     mr r4, r28
-    bl fn_800EC204
+    bl cam_findTargetIndex
     cmpwi r3, 0x0
     beq lbl_fn_802DE27C_00000B84
     stw r3, 0x15ac(r31)

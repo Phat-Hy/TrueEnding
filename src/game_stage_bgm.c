@@ -9,7 +9,7 @@ extern void _savegpr_24(void);
 extern void dtor_80084684(void);
 extern void vec3_set(void);
 extern void vec3_mag(void);
-extern void fn_8000DD0C(void);
+extern void scene_getRootNode(void);
 extern void vec3_assign(void);
 extern void fn_800109E0(void);
 extern void vec3_toEulerAngles(void);
@@ -1004,7 +1004,7 @@ asm void fn_8019FEC4(void)
 lbl_fn_8019FEC4_00000B80:
     lwz r3, 0x4(r3)
     li r29, 0x0
-    bl fn_8000DD0C
+    bl scene_getRootNode
     mr r30, r3
     li r4, 0x0
     bl atn_Anim_getLayerDuration

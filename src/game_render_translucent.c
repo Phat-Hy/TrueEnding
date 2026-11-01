@@ -18,7 +18,7 @@ extern void str_skipWhitespace(void);
 extern void system_getNextSequenceId(void);
 extern void viewport_updateCulling(void);
 extern void scissor_clipFrustum(void);
-extern void fn_801255C8(void);
+extern void enemy_stepBehavior(void);
 extern void enemy_updateCombatBehavior(void);
 extern void fn_80128930(void);
 extern void fn_80128A30(void);
@@ -775,7 +775,7 @@ lbl_fn_802B7F94_000008CC:
     addi r3, r31, 0xc64
     fmuls f0, f0, f3
     stfs f0, 0xc8c(r31)
-    bl fn_801255C8
+    bl enemy_stepBehavior
     lwz r0, 0x14cc(r31)
     mr r3, r31
     li r4, 0x2
@@ -933,7 +933,7 @@ lbl_fn_802B7F94_00000AF4:
     fmuls f3, f4, f3
     fmuls f0, f0, f3
     stfs f0, 0xc8c(r31)
-    bl fn_801255C8
+    bl enemy_stepBehavior
     li r0, 0x1
     stw r0, 0x14fc(r31)
     b lbl_fn_802B7F94_00000B60

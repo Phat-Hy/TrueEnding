@@ -11,7 +11,7 @@ extern void fn_80063484(void);
 extern void fn_80063764(void);
 extern void fn_8006F2F0(void);
 extern void motion_updateFogAdj(void);
-extern void fn_801255C8(void);
+extern void enemy_stepBehavior(void);
 extern void fn_80128A30(void);
 extern void npc_calcTargetDistance(void);
 extern void quest_updateFlow(void);
@@ -1944,7 +1944,7 @@ lbl_fn_8017E650_0000198C:
     li r6, 0x8
     bl fn_80128A30
     addi r3, r31, 0xc64
-    bl fn_801255C8
+    bl enemy_stepBehavior
     mr r3, r31
     bl fn_8017FED0
 lbl_fn_8017E650_000019B4:

@@ -17,7 +17,7 @@ extern void msg_getMessageById(void);
 extern void fn_800C37FC(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_unlink(void);
-extern void fn_801255C8(void);
+extern void enemy_stepBehavior(void);
 extern void enemy_updateCombatBehavior(void);
 extern void fn_80128A30(void);
 extern void npc_updateTalkInteraction(void);
@@ -508,7 +508,7 @@ lbl_fn_8010DB94_000004E4:
     bl fn_80128A30
     stfs f31, 0x28(r31)
     mr r3, r31
-    bl fn_801255C8
+    bl enemy_stepBehavior
     lwz r0, 0x18(r30)
     rlwinm r0, r0, 0, 3, 1
     stw r0, 0x18(r30)
@@ -666,7 +666,7 @@ lbl_fn_8010DD34_000006C4:
     bl fn_80128A30
     stfs f29, 0x28(r28)
     mr r3, r28
-    bl fn_801255C8
+    bl enemy_stepBehavior
     lwz r0, 0x18(r29)
     rlwinm r0, r0, 0, 3, 1
     stw r0, 0x18(r29)
@@ -1272,7 +1272,7 @@ lbl_fn_8010E60C_00000F5C:
     bl fn_80128A30
     stfs f31, 0x28(r31)
     mr r3, r31
-    bl fn_801255C8
+    bl enemy_stepBehavior
     lwz r0, 0x18(r30)
     rlwinm r0, r0, 0, 3, 1
     stw r0, 0x18(r30)

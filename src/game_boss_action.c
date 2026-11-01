@@ -35,12 +35,12 @@ extern void atn_Anim_getLayerDuration(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void fn_800EC254(void);
-extern void fn_800EC2C4(void);
-extern void fn_800EC440(void);
-extern void fn_800EC534(void);
-extern void fn_800EC5BC(void);
+extern void cam_registerTarget(void);
+extern void cam_initTrajectoryParams(void);
+extern void cam_bindPathTarget(void);
+extern void cam_bindRotationTarget(void);
 extern void cam_evalControllerSpline(void);
-extern void fn_800ED42C(void);
+extern void cam_setLookAtTarget(void);
 extern void fn_800ED4D8(void);
 extern void fn_800ED4E0(void);
 extern void cam_evalLookAtMatrix(void);
@@ -1033,14 +1033,14 @@ asm void fn_801388B8(void)
     li r5, 0x0
     addi r4, r30, 0x291
     li r6, 0x0
-    bl fn_800EC440
+    bl cam_initTrajectoryParams
     addi r3, r1, 0xcc
     addi r4, r1, 0x24
     addi r5, r1, 0x6c
-    bl fn_800EC2C4
+    bl cam_registerTarget
     addi r3, r1, 0x6c
     li r4, -0x1
-    bl fn_800EC534
+    bl cam_bindPathTarget
     addi r3, r1, 0x90
     addi r4, r1, 0xcc
     bl cam_evalControllerSpline
@@ -1106,15 +1106,15 @@ lbl_fn_801388B8_00000E68:
     mr r31, r3
     addi r3, r1, 0x30
     li r4, -0x1
-    bl fn_800ED42C
+    bl cam_setLookAtTarget
     cmpwi r31, 0x0
     bne lbl_fn_801388B8_00000DAC
     addi r3, r1, 0x90
     li r4, -0x1
-    bl fn_800ED42C
+    bl cam_setLookAtTarget
     addi r3, r1, 0xcc
     li r4, -0x1
-    bl fn_800EC5BC
+    bl cam_bindRotationTarget
     addi r3, r1, 0x24
     li r4, -0x1
     bl dtor_80013D60

@@ -27,7 +27,7 @@ extern void clip_calculateFrustum(void);
 extern void fn_80103F60(void);
 extern void fn_80108378(void);
 extern void skill_findNodeById(void);
-extern void fn_801255C8(void);
+extern void enemy_stepBehavior(void);
 extern void enemy_updateCombatBehavior(void);
 extern void fn_80128930(void);
 extern void enemy_updateAnimTimer(void);
@@ -1302,7 +1302,7 @@ asm void fn_80306B40(void)
     lfs f0, 0x14e4(r31)
     fmuls f0, f3, f0
     stfs f0, 0xc8c(r31)
-    bl fn_801255C8
+    bl enemy_stepBehavior
     lwz r0, 0x14cc(r31)
     oris r0, r0, 0x4000
     stw r0, 0x14cc(r31)

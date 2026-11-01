@@ -77,7 +77,7 @@ void atn_ColliBox_getAABB(void);
 void fn_80057F28(void);
 void atn_LH_ColliObject_destructor(void);
 void fn_80058078(void);
-void fn_800580BC(void);
+void mission_isObjectiveActive(void);
 void atn_ColliObject_testRay(void);
 void atn_ColliObject_testSphere(void);
 void atn_ColliObject_testCapsule(void);
@@ -580,7 +580,7 @@ asm void fn_80058078(void)
     blr
 }
 
-asm void fn_800580BC(void)
+asm void mission_isObjectiveActive(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -590,22 +590,22 @@ asm void fn_800580BC(void)
     mr r31, r3
     lwz r0, 0x44(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_800580BC_00000680
+    beq lbl_mission_isObjectiveActive_00000680
     li r3, 0x0
-    b lbl_fn_800580BC_000006A8
-lbl_fn_800580BC_00000680:
+    b lbl_mission_isObjectiveActive_000006A8
+lbl_mission_isObjectiveActive_00000680:
     addi r3, r3, 0x3c
     bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
-    beq lbl_fn_800580BC_00000698
+    beq lbl_mission_isObjectiveActive_00000698
     li r3, 0x1
-    b lbl_fn_800580BC_000006A8
-lbl_fn_800580BC_00000698:
+    b lbl_mission_isObjectiveActive_000006A8
+lbl_mission_isObjectiveActive_00000698:
     addi r3, r31, 0x3c
     bl fn_80472A34
     stw r3, 0x44(r31)
     li r3, 0x0
-lbl_fn_800580BC_000006A8:
+lbl_mission_isObjectiveActive_000006A8:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0

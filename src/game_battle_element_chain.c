@@ -11,7 +11,7 @@ extern void _savegpr_25(void);
 extern void dtor_80084684(void);
 extern void scene_traverseNode(void);
 extern void fn_80058078(void);
-extern void fn_800580BC(void);
+extern void mission_isObjectiveActive(void);
 extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
@@ -148,7 +148,7 @@ lbl_fn_80423958_000000A4:
     b lbl_fn_80423958_000000D8
 lbl_fn_80423958_000000AC:
     addi r3, r31, 0x894
-    bl fn_800580BC
+    bl mission_isObjectiveActive
     cmpwi r3, 0x0
     beq lbl_fn_80423958_000000C4
     li r3, 0x1

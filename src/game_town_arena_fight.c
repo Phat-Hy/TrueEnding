@@ -12,7 +12,7 @@ extern void scene_transformPoint(void);
 extern void fn_8000D9F8(void);
 extern void fn_8000DB1C(void);
 extern void fn_8000DCF4(void);
-extern void fn_8000DD0C(void);
+extern void scene_getRootNode(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
@@ -1332,7 +1332,7 @@ lbl_fn_803D2A6C_00000EDC:
     beq lbl_fn_803D2A6C_0000100C
     bl fn_803D6E2C
     lwz r3, 0x770(r24)
-    bl fn_8000DD0C
+    bl scene_getRootNode
     lis r4, lbl_807506A0@ha
     addi r4, r4, lbl_807506A0@l
     addi r4, r4, 0x10c1
@@ -1438,7 +1438,7 @@ lbl_fn_803D2A6C_00001090:
     addi r3, r24, 0x85c
     bl fn_803D7260
     lwz r3, 0x0(r3)
-    bl fn_8000DD0C
+    bl scene_getRootNode
     addi r4, r21, 0x10c1
     bl atn_Model_getBoneMatrix
     cmpwi r3, 0x0
@@ -1825,7 +1825,7 @@ lbl_fn_803D2A6C_00001634:
     bl scene_transformPoint
     bl fn_8000DCF4
     mr r19, r3
-    bl fn_8000DD0C
+    bl scene_getRootNode
     lis r4, lbl_807506A0@ha
     addi r4, r4, lbl_807506A0@l
     addi r4, r4, 0x10c1
@@ -3555,7 +3555,7 @@ lbl_fn_803D2A6C_00002F80:
     bl fn_803D7840
     mr r25, r3
     lwz r3, 0x8(r3)
-    bl fn_8000DD0C
+    bl scene_getRootNode
     addi r4, r23, 0x10c1
     bl atn_Model_getBoneMatrix
     cmpwi r3, 0x0
@@ -3993,7 +3993,7 @@ lbl_fn_803D2A6C_000035CC:
     lwz r3, 0x0(r21)
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00003800
-    bl fn_8000DD0C
+    bl scene_getRootNode
     addi r4, r23, 0x10c1
     bl atn_Model_getBoneMatrix
     cmpwi r3, 0x0
@@ -4180,7 +4180,7 @@ lbl_fn_803D2A6C_00003864:
     cmpwi r3, 0x0
     bne lbl_fn_803D2A6C_00003A38
     mr r3, r19
-    bl fn_8000DD0C
+    bl scene_getRootNode
     addi r4, r23, 0x119b
     bl atn_Model_getBoneMatrix
     mr r4, r3
@@ -4333,7 +4333,7 @@ lbl_fn_803D2A6C_00003A84:
     cmpwi r3, 0x0
     bne lbl_fn_803D2A6C_00003C80
     mr r3, r19
-    bl fn_8000DD0C
+    bl scene_getRootNode
     addi r4, r23, 0x119b
     bl atn_Model_getBoneMatrix
     mr r4, r3
@@ -4582,7 +4582,7 @@ lbl_fn_803D2A6C_00003E5C:
     lwz r3, 0xd50(r24)
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00003F2C
-    bl fn_8000DD0C
+    bl scene_getRootNode
     lis r4, lbl_807506A0@ha
     addi r4, r4, lbl_807506A0@l
     addi r4, r4, 0x10c1

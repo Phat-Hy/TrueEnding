@@ -21,7 +21,7 @@ extern void system_getNextSequenceId(void);
 extern void skill_findNodeBySlotId(void);
 extern void fn_8011F9CC(void);
 extern void skill_findNodeById(void);
-extern void fn_801255C8(void);
+extern void enemy_stepBehavior(void);
 extern void fn_80128930(void);
 extern void fn_80129978(void);
 extern void fn_80129A48(void);
@@ -1354,7 +1354,7 @@ asm void fn_80335988(void)
     lfs f0, lbl_808851E0
     addi r3, r31, 0xc64
     stfs f0, 0xc8c(r31)
-    bl fn_801255C8
+    bl enemy_stepBehavior
     lwz r0, 0x14cc(r31)
     oris r0, r0, 0x4000
     stw r0, 0x14cc(r31)
@@ -1757,7 +1757,7 @@ lbl_fn_80335988_00001650:
     lfs f0, lbl_808851E0
     addi r3, r31, 0xc64
     stfs f0, 0xc8c(r31)
-    bl fn_801255C8
+    bl enemy_stepBehavior
     lwz r0, 0x58c(r31)
     lwz r3, 0x14cc(r31)
     cmpwi r0, 0xa

@@ -8,7 +8,7 @@ extern void dtor_80084684(void);
 extern void atn_ColliBase_destructor(void);
 extern void fn_80057F28(void);
 extern void fn_80058078(void);
-extern void fn_800580BC(void);
+extern void mission_isObjectiveActive(void);
 extern void mission_updateObjectiveTarget(void);
 extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
@@ -167,7 +167,7 @@ asm void fn_8040F42C(void)
     b lbl_fn_8040F42C_000000B8
 lbl_fn_8040F42C_0000008C:
     addi r3, r31, 0x4c4
-    bl fn_800580BC
+    bl mission_isObjectiveActive
     cmpwi r3, 0x0
     beq lbl_fn_8040F42C_000000A4
     li r3, 0x1
@@ -1023,7 +1023,7 @@ asm void fn_8040FFBC(void)
     cmpwi r3, 0x0
     bne lbl_fn_8040FFBC_00000C3C
     addi r3, r30, 0x4c4
-    bl fn_800580BC
+    bl mission_isObjectiveActive
     cmpwi r3, 0x0
     bne lbl_fn_8040FFBC_00000C3C
     addi r3, r30, 0x54c

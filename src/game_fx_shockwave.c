@@ -24,7 +24,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void fn_800DB3EC(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
-extern void fn_800EC204(void);
+extern void cam_findTargetIndex(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void equip_getGlobalManager(void);
@@ -1299,7 +1299,7 @@ lbl_fn_80293E30_00001020:
     mr r28, r3
     mr r3, r29
     mr r4, r28
-    bl fn_800EC204
+    bl cam_findTargetIndex
     cmpwi r3, 0x0
     stw r3, 0xc(r1)
     beq lbl_fn_80293E30_00001054
@@ -1340,7 +1340,7 @@ lbl_fn_80293E30_000010A4:
     bl str_parseInt
     mr r4, r3
     mr r3, r29
-    bl fn_800EC204
+    bl cam_findTargetIndex
     cmpwi r3, 0x0
     mr r4, r3
     beq lbl_fn_80293E30_000012B8
@@ -1481,7 +1481,7 @@ lbl_fn_80293E30_000012C8:
     beq lbl_fn_80293E30_000012E4
     mr r3, r29
     li r4, 0x258
-    bl fn_800EC204
+    bl cam_findTargetIndex
     mr r4, r3
     b lbl_fn_80293E30_000012E8
 lbl_fn_80293E30_000012E4:

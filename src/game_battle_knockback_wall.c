@@ -46,7 +46,7 @@ extern void fn_800CB688(void);
 extern void fn_800D8814(void);
 extern void fn_800D8BB4(void);
 extern void str_skipWhitespace(void);
-extern void fn_800EC204(void);
+extern void cam_findTargetIndex(void);
 extern void cam_destroyMsgHandle(void);
 extern void fn_800F52F8(void);
 extern void vec3_scale(void);
@@ -2232,7 +2232,7 @@ lbl_fn_8041766C_00001C3C:
     bl npc_getDialogController
     lwz r4, 0xf4(r24)
     lwz r4, 0x24(r4)
-    bl fn_800EC204
+    bl cam_findTargetIndex
     mr r26, r3
     addi r3, r1, 0x80
     bl mission_updateStub

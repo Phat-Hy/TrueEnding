@@ -17,7 +17,7 @@ extern void compass_findMarkerByName(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
-extern void fn_800EC204(void);
+extern void cam_findTargetIndex(void);
 extern void cam_destroyMsgHandle(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
@@ -733,7 +733,7 @@ lbl_fn_802D0594_000008A8:
     bl equip_getGlobalManager
     bl npc_getDialogController
     mr r4, r30
-    bl fn_800EC204
+    bl cam_findTargetIndex
     cmpwi r3, 0x0
     stw r3, 0x10(r1)
     beq lbl_fn_802D0594_000008E0
@@ -769,7 +769,7 @@ lbl_fn_802D0594_00000928:
     bl equip_getGlobalManager
     bl npc_getDialogController
     mr r4, r30
-    bl fn_800EC204
+    bl cam_findTargetIndex
     cmpwi r3, 0x0
     stw r3, 0xc(r1)
     beq lbl_fn_802D0594_00000960

@@ -18,7 +18,7 @@ extern void vec3_add(void);
 extern void mission_updateStub(void);
 extern void boss_recordDamage(void);
 extern void atn_Task_unlink(void);
-extern void fn_800EC204(void);
+extern void cam_findTargetIndex(void);
 extern void viewport_getNextSequenceId(void);
 extern void fn_801162A0(void);
 extern void fn_8011F8F4(void);
@@ -1384,7 +1384,7 @@ lbl_fn_803A26F4_00001190:
     cmpwi r3, 0x0
     beq lbl_fn_803A26F4_000011A8
     lwz r4, 0x28(r26)
-    bl fn_800EC204
+    bl cam_findTargetIndex
     mr r23, r3
     b lbl_fn_803A26F4_000011AC
 lbl_fn_803A26F4_000011A8:
@@ -1416,7 +1416,7 @@ lbl_fn_803A26F4_00001200:
     cmpwi r3, 0x0
     beq lbl_fn_803A26F4_00001218
     lwz r4, 0x28(r26)
-    bl fn_800EC204
+    bl cam_findTargetIndex
     mr r23, r3
     b lbl_fn_803A26F4_0000121C
 lbl_fn_803A26F4_00001218:

@@ -11,7 +11,7 @@ extern void fn_800185B4(void);
 extern void ui_drawColoredQuad(void);
 extern void fn_80057F28(void);
 extern void fn_80058078(void);
-extern void fn_800580BC(void);
+extern void mission_isObjectiveActive(void);
 extern void mission_updateObjectiveTarget(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
@@ -402,7 +402,7 @@ lbl_fn_802561C4_000003E0:
     lwz r3, 0x1528(r28)
     cmpwi r3, 0x0
     beq lbl_fn_802561C4_00000400
-    bl fn_800580BC
+    bl mission_isObjectiveActive
     cmpwi r3, 0x0
     beq lbl_fn_802561C4_00000400
     li r3, 0x0

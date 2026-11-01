@@ -76,7 +76,7 @@ void fn_8020A3E4(void);
 void fn_8020A3EC(void);
 void fn_8020A59C(void);
 void fn_8020A5D4(void);
-void fn_8020A780(void);
+void str_appendString(void);
 void fn_8020A808(void);
 void fn_8020A81C(void);
 void fn_8020A888(void);
@@ -397,7 +397,7 @@ lbl_fn_8020A5D4_000003E8:
     blr
 }
 
-asm void fn_8020A780(void)
+asm void str_appendString(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -410,13 +410,13 @@ asm void fn_8020A780(void)
     mr r29, r3
     lwz r0, 0x0(r3)
     srwi. r0, r0, 31
-    bne lbl_fn_8020A780_00000458
+    bne lbl_str_appendString_00000458
     lbz r0, 0x0(r3)
     clrlwi r31, r0, 25
-    b lbl_fn_8020A780_0000045C
-lbl_fn_8020A780_00000458:
+    b lbl_str_appendString_0000045C
+lbl_str_appendString_00000458:
     lwz r31, 0x4(r3)
-lbl_fn_8020A780_0000045C:
+lbl_str_appendString_0000045C:
     lbz r0, 0x8(r1)
     mr r3, r30
     stb r0, 0xc(r1)

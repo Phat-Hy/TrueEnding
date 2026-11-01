@@ -81,7 +81,7 @@ void fn_8000DB24(void);
 void fn_8000DCF4(void);
 void fn_8000DCFC(void);
 void fn_8000DD04(void);
-void fn_8000DD0C(void);
+void scene_getRootNode(void);
 void fn_8000DD14(void);
 void fn_8000DD98(void);
 void fn_8000DDA0(void);
@@ -1326,7 +1326,7 @@ lbl_fn_8000DB24_00001048:
     bl fn_8000DDA0
     stw r3, 0x1c(r26)
     bl fn_8000DE3C
-    bl fn_8000DD0C
+    bl scene_getRootNode
     bl fn_8000DD04
     cmpwi r3, 0x0
     mr r30, r3
@@ -1340,7 +1340,7 @@ lbl_fn_8000DB24_0000107C:
     mr r28, r3
     lwz r3, 0x1c(r26)
     bl fn_8000DE3C
-    bl fn_8000DD0C
+    bl scene_getRootNode
     mr r4, r28
     bl fn_800929C0
     bl fn_8000DD98
@@ -1356,7 +1356,7 @@ lbl_fn_8000DB24_0000107C:
     bl fn_8000DE44
     lwz r3, 0x1c(r26)
     bl fn_8000DE3C
-    bl fn_8000DD0C
+    bl scene_getRootNode
     mr r4, r28
     bl fn_80093E90
     stw r3, 0xc(r1)
@@ -1402,7 +1402,7 @@ asm void fn_8000DD04(void)
     blr
 }
 
-asm void fn_8000DD0C(void)
+asm void scene_getRootNode(void)
 {
     nofralloc
     addi r3, r3, 0xb0

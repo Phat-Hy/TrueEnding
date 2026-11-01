@@ -54,7 +54,7 @@ extern u32 lbl_80881894;
 void fn_80125320(void);
 void fn_8012539C(void);
 void fn_80125474(void);
-void fn_801255C8(void);
+void enemy_stepBehavior(void);
 void enemy_updateCombatBehavior(void);
 
 asm void fn_80125320(void)
@@ -259,7 +259,7 @@ lbl_fn_80125474_000002A0:
     blr
 }
 
-asm void fn_801255C8(void)
+asm void enemy_stepBehavior(void)
 {
     nofralloc
     stwu r1, -0x220(r1)
@@ -272,93 +272,93 @@ asm void fn_801255C8(void)
     lwz r0, 0x54c(r4)
     rlwinm r0, r0, 0, 26, 26
     cmplwi r0, 0x20
-    bne lbl_fn_801255C8_000002E0
+    bne lbl_enemy_stepBehavior_000002E0
     lwz r0, 0x48(r3)
     ori r0, r0, 0x10
     stw r0, 0x48(r3)
-lbl_fn_801255C8_000002E0:
+lbl_enemy_stepBehavior_000002E0:
     mr r3, r31
     bl fn_80125474
     cmpwi r3, 0x0
-    beq lbl_fn_801255C8_00000ED0
+    beq lbl_enemy_stepBehavior_00000ED0
     lwz r3, 0xa4(r31)
     lwz r0, 0x12a4(r3)
     srwi. r0, r0, 31
-    beq lbl_fn_801255C8_00000304
+    beq lbl_enemy_stepBehavior_00000304
     bl inventory_unequipItem
-lbl_fn_801255C8_00000304:
+lbl_enemy_stepBehavior_00000304:
     lwz r3, 0xa4(r31)
     lwz r0, 0x12a4(r3)
     extrwi. r0, r0, 1, 25
-    beq lbl_fn_801255C8_0000031C
+    beq lbl_enemy_stepBehavior_0000031C
     li r4, 0x0
     bl inventory_calcTotalStats
-lbl_fn_801255C8_0000031C:
+lbl_enemy_stepBehavior_0000031C:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
-    beq lbl_fn_801255C8_00000330
+    beq lbl_enemy_stepBehavior_00000330
     lwz r30, 0x10d8(r3)
-    b lbl_fn_801255C8_00000348
-lbl_fn_801255C8_00000330:
+    b lbl_enemy_stepBehavior_00000348
+lbl_enemy_stepBehavior_00000330:
     lwz r3, lbl_8087F540
     cmpwi r3, 0x0
-    beq lbl_fn_801255C8_00000344
+    beq lbl_enemy_stepBehavior_00000344
     lwz r30, 0x1a6c(r3)
-    b lbl_fn_801255C8_00000348
-lbl_fn_801255C8_00000344:
+    b lbl_enemy_stepBehavior_00000348
+lbl_enemy_stepBehavior_00000344:
     li r30, 0x0
-lbl_fn_801255C8_00000348:
+lbl_enemy_stepBehavior_00000348:
     lwz r3, 0x48(r31)
     lwz r0, 0x40(r31)
     rlwinm r3, r3, 0, 25, 25
     stw r0, 0x44(r31)
     cmplwi r3, 0x40
-    beq lbl_fn_801255C8_0000037C
+    beq lbl_enemy_stepBehavior_0000037C
     mr r3, r31
     bl fn_80128CF8
     cmpwi r3, 0x0
-    beq lbl_fn_801255C8_0000037C
+    beq lbl_enemy_stepBehavior_0000037C
     mr r3, r31
     bl fn_80129144
-    b lbl_fn_801255C8_00000E80
-lbl_fn_801255C8_0000037C:
+    b lbl_enemy_stepBehavior_00000E80
+lbl_enemy_stepBehavior_0000037C:
     lwz r0, 0x40(r31)
     cmpwi r0, 0x0
-    beq lbl_fn_801255C8_000003BC
+    beq lbl_enemy_stepBehavior_000003BC
     cmpwi r0, 0x1
-    beq lbl_fn_801255C8_000004F4
+    beq lbl_enemy_stepBehavior_000004F4
     cmpwi r0, 0x3
-    beq lbl_fn_801255C8_00000658
+    beq lbl_enemy_stepBehavior_00000658
     cmpwi r0, 0x4
-    beq lbl_fn_801255C8_00000804
+    beq lbl_enemy_stepBehavior_00000804
     cmpwi r0, 0x6
-    beq lbl_fn_801255C8_0000096C
+    beq lbl_enemy_stepBehavior_0000096C
     cmpwi r0, 0x5
-    beq lbl_fn_801255C8_00000AD4
+    beq lbl_enemy_stepBehavior_00000AD4
     cmpwi r0, 0x7
-    beq lbl_fn_801255C8_00000C38
-    b lbl_fn_801255C8_00000E3C
-lbl_fn_801255C8_000003BC:
+    beq lbl_enemy_stepBehavior_00000C38
+    b lbl_enemy_stepBehavior_00000E3C
+lbl_enemy_stepBehavior_000003BC:
     lwz r3, lbl_8087F430
     addi r30, r1, 0x164
     lwz r29, 0x4(r31)
     cmpwi r3, 0x0
-    beq lbl_fn_801255C8_000003D8
+    beq lbl_enemy_stepBehavior_000003D8
     lwz r26, 0x10d8(r3)
-    b lbl_fn_801255C8_000003F0
-lbl_fn_801255C8_000003D8:
+    b lbl_enemy_stepBehavior_000003F0
+lbl_enemy_stepBehavior_000003D8:
     lwz r3, lbl_8087F540
     cmpwi r3, 0x0
-    beq lbl_fn_801255C8_000003EC
+    beq lbl_enemy_stepBehavior_000003EC
     lwz r26, 0x1a6c(r3)
-    b lbl_fn_801255C8_000003F0
-lbl_fn_801255C8_000003EC:
+    b lbl_enemy_stepBehavior_000003F0
+lbl_enemy_stepBehavior_000003EC:
     li r26, 0x0
-lbl_fn_801255C8_000003F0:
+lbl_enemy_stepBehavior_000003F0:
     lwz r3, 0x48(r31)
     rlwinm r0, r3, 0, 30, 30
     cmplwi r0, 0x2
-    bne lbl_fn_801255C8_00000424
+    bne lbl_enemy_stepBehavior_00000424
     subi r0, r29, 0x1
     lwz r3, 0x9c(r26)
     mulli r0, r0, 0x30
@@ -367,11 +367,11 @@ lbl_fn_801255C8_000003F0:
     lfs f2, 0xc(r3)
     stfs f2, 0x16c(r1)
     psq_st f1, 0x0(r30), 0, 0
-    b lbl_fn_801255C8_000004E0
-lbl_fn_801255C8_00000424:
+    b lbl_enemy_stepBehavior_000004E0
+lbl_enemy_stepBehavior_00000424:
     rlwinm r0, r3, 0, 27, 27
     cmplwi r0, 0x10
-    bne lbl_fn_801255C8_000004D0
+    bne lbl_enemy_stepBehavior_000004D0
     lfs f3, lbl_80881858
     addi r3, r31, 0x58
     lfs f0, lbl_8088185C
@@ -385,15 +385,15 @@ lbl_fn_801255C8_00000424:
     bl PSVECSquareMag
     lfs f0, lbl_80881858
     fcmpu cr0, f0, f1
-    bne lbl_fn_801255C8_00000484
+    bne lbl_enemy_stepBehavior_00000484
     addi r3, r1, 0xe0
     lfs f2, 0xe8(r1)
     addi r4, r1, 0xec
     psq_l f1, 0x0(r3), 0, 0
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0xf4(r1)
-    b lbl_fn_801255C8_000004B8
-lbl_fn_801255C8_00000484:
+    b lbl_enemy_stepBehavior_000004B8
+lbl_enemy_stepBehavior_00000484:
     addi r28, r1, 0xec
     addi r27, r1, 0xf8
     psq_l f1, 0x0(r28), 0, 0
@@ -407,49 +407,49 @@ lbl_fn_801255C8_00000484:
     lfs f2, 0x100(r1)
     psq_st f1, 0x0(r28), 0, 0
     stfs f2, 0xf4(r1)
-lbl_fn_801255C8_000004B8:
+lbl_enemy_stepBehavior_000004B8:
     mr r3, r30
     mr r4, r26
     mr r5, r29
     addi r6, r1, 0xec
     bl fn_803C1338
-    b lbl_fn_801255C8_000004E0
-lbl_fn_801255C8_000004D0:
+    b lbl_enemy_stepBehavior_000004E0
+lbl_enemy_stepBehavior_000004D0:
     mr r3, r30
     mr r4, r26
     mr r5, r29
     bl fn_803C11A4
-lbl_fn_801255C8_000004E0:
+lbl_enemy_stepBehavior_000004E0:
     psq_l f1, 0x0(r30), 0, 0
     lfs f2, 0x8(r30)
     stfs f2, 0x54(r31)
     psq_st f1, 0x4c(r31), 0, 0
-    b lbl_fn_801255C8_00000E3C
-lbl_fn_801255C8_000004F4:
+    b lbl_enemy_stepBehavior_00000E3C
+lbl_enemy_stepBehavior_000004F4:
     lwz r27, 0x4(r31)
     cmpwi r27, 0x0
-    ble lbl_fn_801255C8_0000063C
+    ble lbl_enemy_stepBehavior_0000063C
     li r0, 0x0
     stw r0, 0x40(r31)
     addi r26, r1, 0x158
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
-    beq lbl_fn_801255C8_00000520
+    beq lbl_enemy_stepBehavior_00000520
     lwz r30, 0x10d8(r3)
-    b lbl_fn_801255C8_00000538
-lbl_fn_801255C8_00000520:
+    b lbl_enemy_stepBehavior_00000538
+lbl_enemy_stepBehavior_00000520:
     lwz r3, lbl_8087F540
     cmpwi r3, 0x0
-    beq lbl_fn_801255C8_00000534
+    beq lbl_enemy_stepBehavior_00000534
     lwz r30, 0x1a6c(r3)
-    b lbl_fn_801255C8_00000538
-lbl_fn_801255C8_00000534:
+    b lbl_enemy_stepBehavior_00000538
+lbl_enemy_stepBehavior_00000534:
     li r30, 0x0
-lbl_fn_801255C8_00000538:
+lbl_enemy_stepBehavior_00000538:
     lwz r3, 0x48(r31)
     rlwinm r0, r3, 0, 30, 30
     cmplwi r0, 0x2
-    bne lbl_fn_801255C8_0000056C
+    bne lbl_enemy_stepBehavior_0000056C
     subi r0, r27, 0x1
     lwz r3, 0x9c(r30)
     mulli r0, r0, 0x30
@@ -458,11 +458,11 @@ lbl_fn_801255C8_00000538:
     lfs f2, 0xc(r3)
     stfs f2, 0x160(r1)
     psq_st f1, 0x0(r26), 0, 0
-    b lbl_fn_801255C8_00000628
-lbl_fn_801255C8_0000056C:
+    b lbl_enemy_stepBehavior_00000628
+lbl_enemy_stepBehavior_0000056C:
     rlwinm r0, r3, 0, 27, 27
     cmplwi r0, 0x10
-    bne lbl_fn_801255C8_00000618
+    bne lbl_enemy_stepBehavior_00000618
     lfs f3, lbl_80881858
     addi r3, r31, 0x58
     lfs f0, lbl_8088185C
@@ -476,15 +476,15 @@ lbl_fn_801255C8_0000056C:
     bl PSVECSquareMag
     lfs f0, lbl_80881858
     fcmpu cr0, f0, f1
-    bne lbl_fn_801255C8_000005CC
+    bne lbl_enemy_stepBehavior_000005CC
     addi r3, r1, 0xbc
     lfs f2, 0xc4(r1)
     addi r4, r1, 0xc8
     psq_l f1, 0x0(r3), 0, 0
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0xd0(r1)
-    b lbl_fn_801255C8_00000600
-lbl_fn_801255C8_000005CC:
+    b lbl_enemy_stepBehavior_00000600
+lbl_enemy_stepBehavior_000005CC:
     addi r28, r1, 0xc8
     addi r29, r1, 0xd4
     psq_l f1, 0x0(r28), 0, 0
@@ -498,57 +498,57 @@ lbl_fn_801255C8_000005CC:
     lfs f2, 0xdc(r1)
     psq_st f1, 0x0(r28), 0, 0
     stfs f2, 0xd0(r1)
-lbl_fn_801255C8_00000600:
+lbl_enemy_stepBehavior_00000600:
     mr r3, r26
     mr r4, r30
     mr r5, r27
     addi r6, r1, 0xc8
     bl fn_803C1338
-    b lbl_fn_801255C8_00000628
-lbl_fn_801255C8_00000618:
+    b lbl_enemy_stepBehavior_00000628
+lbl_enemy_stepBehavior_00000618:
     mr r3, r26
     mr r4, r30
     mr r5, r27
     bl fn_803C11A4
-lbl_fn_801255C8_00000628:
+lbl_enemy_stepBehavior_00000628:
     psq_l f1, 0x0(r26), 0, 0
     lfs f2, 0x8(r26)
     stfs f2, 0x54(r31)
     psq_st f1, 0x4c(r31), 0, 0
-    b lbl_fn_801255C8_00000E3C
-lbl_fn_801255C8_0000063C:
+    b lbl_enemy_stepBehavior_00000E3C
+lbl_enemy_stepBehavior_0000063C:
     psq_l f1, 0x10(r31), 0, 0
     li r0, 0x0
     lfs f2, 0x18(r31)
     psq_st f1, 0x4c(r31), 0, 0
     stfs f2, 0x54(r31)
     stw r0, 0x94(r31)
-    b lbl_fn_801255C8_00000E3C
-lbl_fn_801255C8_00000658:
+    b lbl_enemy_stepBehavior_00000E3C
+lbl_enemy_stepBehavior_00000658:
     lwz r27, 0x4(r31)
     cmpwi r27, 0x0
-    ble lbl_fn_801255C8_000007A0
+    ble lbl_enemy_stepBehavior_000007A0
     li r0, 0x0
     stw r0, 0x40(r31)
     addi r26, r1, 0x14c
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
-    beq lbl_fn_801255C8_00000684
+    beq lbl_enemy_stepBehavior_00000684
     lwz r30, 0x10d8(r3)
-    b lbl_fn_801255C8_0000069C
-lbl_fn_801255C8_00000684:
+    b lbl_enemy_stepBehavior_0000069C
+lbl_enemy_stepBehavior_00000684:
     lwz r3, lbl_8087F540
     cmpwi r3, 0x0
-    beq lbl_fn_801255C8_00000698
+    beq lbl_enemy_stepBehavior_00000698
     lwz r30, 0x1a6c(r3)
-    b lbl_fn_801255C8_0000069C
-lbl_fn_801255C8_00000698:
+    b lbl_enemy_stepBehavior_0000069C
+lbl_enemy_stepBehavior_00000698:
     li r30, 0x0
-lbl_fn_801255C8_0000069C:
+lbl_enemy_stepBehavior_0000069C:
     lwz r3, 0x48(r31)
     rlwinm r0, r3, 0, 30, 30
     cmplwi r0, 0x2
-    bne lbl_fn_801255C8_000006D0
+    bne lbl_enemy_stepBehavior_000006D0
     subi r0, r27, 0x1
     lwz r3, 0x9c(r30)
     mulli r0, r0, 0x30
@@ -557,11 +557,11 @@ lbl_fn_801255C8_0000069C:
     lfs f2, 0xc(r3)
     stfs f2, 0x154(r1)
     psq_st f1, 0x0(r26), 0, 0
-    b lbl_fn_801255C8_0000078C
-lbl_fn_801255C8_000006D0:
+    b lbl_enemy_stepBehavior_0000078C
+lbl_enemy_stepBehavior_000006D0:
     rlwinm r0, r3, 0, 27, 27
     cmplwi r0, 0x10
-    bne lbl_fn_801255C8_0000077C
+    bne lbl_enemy_stepBehavior_0000077C
     lfs f3, lbl_80881858
     addi r3, r31, 0x58
     lfs f0, lbl_8088185C
@@ -575,15 +575,15 @@ lbl_fn_801255C8_000006D0:
     bl PSVECSquareMag
     lfs f0, lbl_80881858
     fcmpu cr0, f0, f1
-    bne lbl_fn_801255C8_00000730
+    bne lbl_enemy_stepBehavior_00000730
     addi r3, r1, 0x98
     lfs f2, 0xa0(r1)
     addi r4, r1, 0xa4
     psq_l f1, 0x0(r3), 0, 0
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0xac(r1)
-    b lbl_fn_801255C8_00000764
-lbl_fn_801255C8_00000730:
+    b lbl_enemy_stepBehavior_00000764
+lbl_enemy_stepBehavior_00000730:
     addi r28, r1, 0xa4
     addi r29, r1, 0xb0
     psq_l f1, 0x0(r28), 0, 0
@@ -597,79 +597,79 @@ lbl_fn_801255C8_00000730:
     lfs f2, 0xb8(r1)
     psq_st f1, 0x0(r28), 0, 0
     stfs f2, 0xac(r1)
-lbl_fn_801255C8_00000764:
+lbl_enemy_stepBehavior_00000764:
     mr r3, r26
     mr r4, r30
     mr r5, r27
     addi r6, r1, 0xa4
     bl fn_803C1338
-    b lbl_fn_801255C8_0000078C
-lbl_fn_801255C8_0000077C:
+    b lbl_enemy_stepBehavior_0000078C
+lbl_enemy_stepBehavior_0000077C:
     mr r3, r26
     mr r4, r30
     mr r5, r27
     bl fn_803C11A4
-lbl_fn_801255C8_0000078C:
+lbl_enemy_stepBehavior_0000078C:
     psq_l f1, 0x0(r26), 0, 0
     lfs f2, 0x8(r26)
     stfs f2, 0x54(r31)
     psq_st f1, 0x4c(r31), 0, 0
-    b lbl_fn_801255C8_00000E3C
-lbl_fn_801255C8_000007A0:
+    b lbl_enemy_stepBehavior_00000E3C
+lbl_enemy_stepBehavior_000007A0:
     lwz r0, 0x78(r30)
     li r5, 0x0
     lwz r4, 0x20(r31)
     li r6, 0x0
     mtctr r0
     cmplwi r0, 0x0
-    ble lbl_fn_801255C8_000007E4
-lbl_fn_801255C8_000007BC:
+    ble lbl_enemy_stepBehavior_000007E4
+lbl_enemy_stepBehavior_000007BC:
     lwz r3, 0x7c(r30)
     lwzx r0, r3, r6
     cmpw r4, r0
-    bne lbl_fn_801255C8_000007D8
+    bne lbl_enemy_stepBehavior_000007D8
     mulli r0, r5, 0x28
     add r3, r3, r0
-    b lbl_fn_801255C8_000007E8
-lbl_fn_801255C8_000007D8:
+    b lbl_enemy_stepBehavior_000007E8
+lbl_enemy_stepBehavior_000007D8:
     addi r6, r6, 0x28
     addi r5, r5, 0x1
-    bdnz lbl_fn_801255C8_000007BC
-lbl_fn_801255C8_000007E4:
+    bdnz lbl_enemy_stepBehavior_000007BC
+lbl_enemy_stepBehavior_000007E4:
     li r3, 0x0
-lbl_fn_801255C8_000007E8:
+lbl_enemy_stepBehavior_000007E8:
     psq_l f1, 0x4(r3), 0, 0
     li r0, 0x0
     lfs f2, 0xc(r3)
     stfs f2, 0x54(r31)
     psq_st f1, 0x4c(r31), 0, 0
     stw r0, 0x94(r31)
-    b lbl_fn_801255C8_00000E3C
-lbl_fn_801255C8_00000804:
+    b lbl_enemy_stepBehavior_00000E3C
+lbl_enemy_stepBehavior_00000804:
     lwz r27, 0x4(r31)
     cmpwi r27, 0x0
-    ble lbl_fn_801255C8_0000094C
+    ble lbl_enemy_stepBehavior_0000094C
     li r0, 0x0
     stw r0, 0x40(r31)
     addi r26, r1, 0x140
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
-    beq lbl_fn_801255C8_00000830
+    beq lbl_enemy_stepBehavior_00000830
     lwz r30, 0x10d8(r3)
-    b lbl_fn_801255C8_00000848
-lbl_fn_801255C8_00000830:
+    b lbl_enemy_stepBehavior_00000848
+lbl_enemy_stepBehavior_00000830:
     lwz r3, lbl_8087F540
     cmpwi r3, 0x0
-    beq lbl_fn_801255C8_00000844
+    beq lbl_enemy_stepBehavior_00000844
     lwz r30, 0x1a6c(r3)
-    b lbl_fn_801255C8_00000848
-lbl_fn_801255C8_00000844:
+    b lbl_enemy_stepBehavior_00000848
+lbl_enemy_stepBehavior_00000844:
     li r30, 0x0
-lbl_fn_801255C8_00000848:
+lbl_enemy_stepBehavior_00000848:
     lwz r3, 0x48(r31)
     rlwinm r0, r3, 0, 30, 30
     cmplwi r0, 0x2
-    bne lbl_fn_801255C8_0000087C
+    bne lbl_enemy_stepBehavior_0000087C
     subi r0, r27, 0x1
     lwz r3, 0x9c(r30)
     mulli r0, r0, 0x30
@@ -678,11 +678,11 @@ lbl_fn_801255C8_00000848:
     lfs f2, 0xc(r3)
     stfs f2, 0x148(r1)
     psq_st f1, 0x0(r26), 0, 0
-    b lbl_fn_801255C8_00000938
-lbl_fn_801255C8_0000087C:
+    b lbl_enemy_stepBehavior_00000938
+lbl_enemy_stepBehavior_0000087C:
     rlwinm r0, r3, 0, 27, 27
     cmplwi r0, 0x10
-    bne lbl_fn_801255C8_00000928
+    bne lbl_enemy_stepBehavior_00000928
     lfs f3, lbl_80881858
     addi r3, r31, 0x58
     lfs f0, lbl_8088185C
@@ -696,15 +696,15 @@ lbl_fn_801255C8_0000087C:
     bl PSVECSquareMag
     lfs f0, lbl_80881858
     fcmpu cr0, f0, f1
-    bne lbl_fn_801255C8_000008DC
+    bne lbl_enemy_stepBehavior_000008DC
     addi r3, r1, 0x74
     lfs f2, 0x7c(r1)
     addi r4, r1, 0x80
     psq_l f1, 0x0(r3), 0, 0
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x88(r1)
-    b lbl_fn_801255C8_00000910
-lbl_fn_801255C8_000008DC:
+    b lbl_enemy_stepBehavior_00000910
+lbl_enemy_stepBehavior_000008DC:
     addi r28, r1, 0x80
     addi r29, r1, 0x8c
     psq_l f1, 0x0(r28), 0, 0
@@ -718,25 +718,25 @@ lbl_fn_801255C8_000008DC:
     lfs f2, 0x94(r1)
     psq_st f1, 0x0(r28), 0, 0
     stfs f2, 0x88(r1)
-lbl_fn_801255C8_00000910:
+lbl_enemy_stepBehavior_00000910:
     mr r3, r26
     mr r4, r30
     mr r5, r27
     addi r6, r1, 0x80
     bl fn_803C1338
-    b lbl_fn_801255C8_00000938
-lbl_fn_801255C8_00000928:
+    b lbl_enemy_stepBehavior_00000938
+lbl_enemy_stepBehavior_00000928:
     mr r3, r26
     mr r4, r30
     mr r5, r27
     bl fn_803C11A4
-lbl_fn_801255C8_00000938:
+lbl_enemy_stepBehavior_00000938:
     psq_l f1, 0x0(r26), 0, 0
     lfs f2, 0x8(r26)
     stfs f2, 0x54(r31)
     psq_st f1, 0x4c(r31), 0, 0
-    b lbl_fn_801255C8_00000E3C
-lbl_fn_801255C8_0000094C:
+    b lbl_enemy_stepBehavior_00000E3C
+lbl_enemy_stepBehavior_0000094C:
     lwz r3, 0x24(r31)
     li r0, 0x0
     psq_l f1, 0x528(r3), 0, 0
@@ -744,32 +744,32 @@ lbl_fn_801255C8_0000094C:
     stfs f2, 0x54(r31)
     psq_st f1, 0x4c(r31), 0, 0
     stw r0, 0x94(r31)
-    b lbl_fn_801255C8_00000E3C
-lbl_fn_801255C8_0000096C:
+    b lbl_enemy_stepBehavior_00000E3C
+lbl_enemy_stepBehavior_0000096C:
     lwz r27, 0x4(r31)
     cmpwi r27, 0x0
-    ble lbl_fn_801255C8_00000AB4
+    ble lbl_enemy_stepBehavior_00000AB4
     li r0, 0x0
     stw r0, 0x40(r31)
     addi r26, r1, 0x134
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
-    beq lbl_fn_801255C8_00000998
+    beq lbl_enemy_stepBehavior_00000998
     lwz r30, 0x10d8(r3)
-    b lbl_fn_801255C8_000009B0
-lbl_fn_801255C8_00000998:
+    b lbl_enemy_stepBehavior_000009B0
+lbl_enemy_stepBehavior_00000998:
     lwz r3, lbl_8087F540
     cmpwi r3, 0x0
-    beq lbl_fn_801255C8_000009AC
+    beq lbl_enemy_stepBehavior_000009AC
     lwz r30, 0x1a6c(r3)
-    b lbl_fn_801255C8_000009B0
-lbl_fn_801255C8_000009AC:
+    b lbl_enemy_stepBehavior_000009B0
+lbl_enemy_stepBehavior_000009AC:
     li r30, 0x0
-lbl_fn_801255C8_000009B0:
+lbl_enemy_stepBehavior_000009B0:
     lwz r3, 0x48(r31)
     rlwinm r0, r3, 0, 30, 30
     cmplwi r0, 0x2
-    bne lbl_fn_801255C8_000009E4
+    bne lbl_enemy_stepBehavior_000009E4
     subi r0, r27, 0x1
     lwz r3, 0x9c(r30)
     mulli r0, r0, 0x30
@@ -778,11 +778,11 @@ lbl_fn_801255C8_000009B0:
     lfs f2, 0xc(r3)
     stfs f2, 0x13c(r1)
     psq_st f1, 0x0(r26), 0, 0
-    b lbl_fn_801255C8_00000AA0
-lbl_fn_801255C8_000009E4:
+    b lbl_enemy_stepBehavior_00000AA0
+lbl_enemy_stepBehavior_000009E4:
     rlwinm r0, r3, 0, 27, 27
     cmplwi r0, 0x10
-    bne lbl_fn_801255C8_00000A90
+    bne lbl_enemy_stepBehavior_00000A90
     lfs f3, lbl_80881858
     addi r3, r31, 0x58
     lfs f0, lbl_8088185C
@@ -796,15 +796,15 @@ lbl_fn_801255C8_000009E4:
     bl PSVECSquareMag
     lfs f0, lbl_80881858
     fcmpu cr0, f0, f1
-    bne lbl_fn_801255C8_00000A44
+    bne lbl_enemy_stepBehavior_00000A44
     addi r3, r1, 0x50
     lfs f2, 0x58(r1)
     addi r4, r1, 0x5c
     psq_l f1, 0x0(r3), 0, 0
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x64(r1)
-    b lbl_fn_801255C8_00000A78
-lbl_fn_801255C8_00000A44:
+    b lbl_enemy_stepBehavior_00000A78
+lbl_enemy_stepBehavior_00000A44:
     addi r28, r1, 0x5c
     addi r29, r1, 0x68
     psq_l f1, 0x0(r28), 0, 0
@@ -818,25 +818,25 @@ lbl_fn_801255C8_00000A44:
     lfs f2, 0x70(r1)
     psq_st f1, 0x0(r28), 0, 0
     stfs f2, 0x64(r1)
-lbl_fn_801255C8_00000A78:
+lbl_enemy_stepBehavior_00000A78:
     mr r3, r26
     mr r4, r30
     mr r5, r27
     addi r6, r1, 0x5c
     bl fn_803C1338
-    b lbl_fn_801255C8_00000AA0
-lbl_fn_801255C8_00000A90:
+    b lbl_enemy_stepBehavior_00000AA0
+lbl_enemy_stepBehavior_00000A90:
     mr r3, r26
     mr r4, r30
     mr r5, r27
     bl fn_803C11A4
-lbl_fn_801255C8_00000AA0:
+lbl_enemy_stepBehavior_00000AA0:
     psq_l f1, 0x0(r26), 0, 0
     lfs f2, 0x8(r26)
     stfs f2, 0x54(r31)
     psq_st f1, 0x4c(r31), 0, 0
-    b lbl_fn_801255C8_00000E3C
-lbl_fn_801255C8_00000AB4:
+    b lbl_enemy_stepBehavior_00000E3C
+lbl_enemy_stepBehavior_00000AB4:
     lwz r3, 0xa4(r31)
     li r0, 0x0
     psq_l f1, 0x528(r3), 0, 0
@@ -844,32 +844,32 @@ lbl_fn_801255C8_00000AB4:
     stfs f2, 0x54(r31)
     psq_st f1, 0x4c(r31), 0, 0
     stw r0, 0x94(r31)
-    b lbl_fn_801255C8_00000E3C
-lbl_fn_801255C8_00000AD4:
+    b lbl_enemy_stepBehavior_00000E3C
+lbl_enemy_stepBehavior_00000AD4:
     lwz r27, 0x4(r31)
     cmpwi r27, 0x0
-    ble lbl_fn_801255C8_00000C1C
+    ble lbl_enemy_stepBehavior_00000C1C
     li r0, 0x0
     stw r0, 0x40(r31)
     addi r26, r1, 0x128
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
-    beq lbl_fn_801255C8_00000B00
+    beq lbl_enemy_stepBehavior_00000B00
     lwz r30, 0x10d8(r3)
-    b lbl_fn_801255C8_00000B18
-lbl_fn_801255C8_00000B00:
+    b lbl_enemy_stepBehavior_00000B18
+lbl_enemy_stepBehavior_00000B00:
     lwz r3, lbl_8087F540
     cmpwi r3, 0x0
-    beq lbl_fn_801255C8_00000B14
+    beq lbl_enemy_stepBehavior_00000B14
     lwz r30, 0x1a6c(r3)
-    b lbl_fn_801255C8_00000B18
-lbl_fn_801255C8_00000B14:
+    b lbl_enemy_stepBehavior_00000B18
+lbl_enemy_stepBehavior_00000B14:
     li r30, 0x0
-lbl_fn_801255C8_00000B18:
+lbl_enemy_stepBehavior_00000B18:
     lwz r3, 0x48(r31)
     rlwinm r0, r3, 0, 30, 30
     cmplwi r0, 0x2
-    bne lbl_fn_801255C8_00000B4C
+    bne lbl_enemy_stepBehavior_00000B4C
     subi r0, r27, 0x1
     lwz r3, 0x9c(r30)
     mulli r0, r0, 0x30
@@ -878,11 +878,11 @@ lbl_fn_801255C8_00000B18:
     lfs f2, 0xc(r3)
     stfs f2, 0x130(r1)
     psq_st f1, 0x0(r26), 0, 0
-    b lbl_fn_801255C8_00000C08
-lbl_fn_801255C8_00000B4C:
+    b lbl_enemy_stepBehavior_00000C08
+lbl_enemy_stepBehavior_00000B4C:
     rlwinm r0, r3, 0, 27, 27
     cmplwi r0, 0x10
-    bne lbl_fn_801255C8_00000BF8
+    bne lbl_enemy_stepBehavior_00000BF8
     lfs f3, lbl_80881858
     addi r3, r31, 0x58
     lfs f0, lbl_8088185C
@@ -896,15 +896,15 @@ lbl_fn_801255C8_00000B4C:
     bl PSVECSquareMag
     lfs f0, lbl_80881858
     fcmpu cr0, f0, f1
-    bne lbl_fn_801255C8_00000BAC
+    bne lbl_enemy_stepBehavior_00000BAC
     addi r3, r1, 0x2c
     lfs f2, 0x34(r1)
     addi r4, r1, 0x38
     psq_l f1, 0x0(r3), 0, 0
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x40(r1)
-    b lbl_fn_801255C8_00000BE0
-lbl_fn_801255C8_00000BAC:
+    b lbl_enemy_stepBehavior_00000BE0
+lbl_enemy_stepBehavior_00000BAC:
     addi r28, r1, 0x38
     addi r29, r1, 0x44
     psq_l f1, 0x0(r28), 0, 0
@@ -918,57 +918,57 @@ lbl_fn_801255C8_00000BAC:
     lfs f2, 0x4c(r1)
     psq_st f1, 0x0(r28), 0, 0
     stfs f2, 0x40(r1)
-lbl_fn_801255C8_00000BE0:
+lbl_enemy_stepBehavior_00000BE0:
     mr r3, r26
     mr r4, r30
     mr r5, r27
     addi r6, r1, 0x38
     bl fn_803C1338
-    b lbl_fn_801255C8_00000C08
-lbl_fn_801255C8_00000BF8:
+    b lbl_enemy_stepBehavior_00000C08
+lbl_enemy_stepBehavior_00000BF8:
     mr r3, r26
     mr r4, r30
     mr r5, r27
     bl fn_803C11A4
-lbl_fn_801255C8_00000C08:
+lbl_enemy_stepBehavior_00000C08:
     psq_l f1, 0x0(r26), 0, 0
     lfs f2, 0x8(r26)
     stfs f2, 0x54(r31)
     psq_st f1, 0x4c(r31), 0, 0
-    b lbl_fn_801255C8_00000E3C
-lbl_fn_801255C8_00000C1C:
+    b lbl_enemy_stepBehavior_00000E3C
+lbl_enemy_stepBehavior_00000C1C:
     psq_l f1, 0x30(r31), 0, 0
     li r0, 0x0
     lfs f2, 0x38(r31)
     psq_st f1, 0x4c(r31), 0, 0
     stfs f2, 0x54(r31)
     stw r0, 0x94(r31)
-    b lbl_fn_801255C8_00000E3C
-lbl_fn_801255C8_00000C38:
+    b lbl_enemy_stepBehavior_00000E3C
+lbl_enemy_stepBehavior_00000C38:
     lwz r27, 0x4(r31)
     cmpwi r27, 0x0
-    ble lbl_fn_801255C8_00000D80
+    ble lbl_enemy_stepBehavior_00000D80
     li r0, 0x0
     stw r0, 0x40(r31)
     addi r26, r1, 0x11c
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
-    beq lbl_fn_801255C8_00000C64
+    beq lbl_enemy_stepBehavior_00000C64
     lwz r30, 0x10d8(r3)
-    b lbl_fn_801255C8_00000C7C
-lbl_fn_801255C8_00000C64:
+    b lbl_enemy_stepBehavior_00000C7C
+lbl_enemy_stepBehavior_00000C64:
     lwz r3, lbl_8087F540
     cmpwi r3, 0x0
-    beq lbl_fn_801255C8_00000C78
+    beq lbl_enemy_stepBehavior_00000C78
     lwz r30, 0x1a6c(r3)
-    b lbl_fn_801255C8_00000C7C
-lbl_fn_801255C8_00000C78:
+    b lbl_enemy_stepBehavior_00000C7C
+lbl_enemy_stepBehavior_00000C78:
     li r30, 0x0
-lbl_fn_801255C8_00000C7C:
+lbl_enemy_stepBehavior_00000C7C:
     lwz r3, 0x48(r31)
     rlwinm r0, r3, 0, 30, 30
     cmplwi r0, 0x2
-    bne lbl_fn_801255C8_00000CB0
+    bne lbl_enemy_stepBehavior_00000CB0
     subi r0, r27, 0x1
     lwz r3, 0x9c(r30)
     mulli r0, r0, 0x30
@@ -977,11 +977,11 @@ lbl_fn_801255C8_00000C7C:
     lfs f2, 0xc(r3)
     stfs f2, 0x124(r1)
     psq_st f1, 0x0(r26), 0, 0
-    b lbl_fn_801255C8_00000D6C
-lbl_fn_801255C8_00000CB0:
+    b lbl_enemy_stepBehavior_00000D6C
+lbl_enemy_stepBehavior_00000CB0:
     rlwinm r0, r3, 0, 27, 27
     cmplwi r0, 0x10
-    bne lbl_fn_801255C8_00000D5C
+    bne lbl_enemy_stepBehavior_00000D5C
     lfs f3, lbl_80881858
     addi r3, r31, 0x58
     lfs f0, lbl_8088185C
@@ -995,15 +995,15 @@ lbl_fn_801255C8_00000CB0:
     bl PSVECSquareMag
     lfs f0, lbl_80881858
     fcmpu cr0, f0, f1
-    bne lbl_fn_801255C8_00000D10
+    bne lbl_enemy_stepBehavior_00000D10
     addi r3, r1, 0x8
     lfs f2, 0x10(r1)
     addi r4, r1, 0x14
     psq_l f1, 0x0(r3), 0, 0
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x1c(r1)
-    b lbl_fn_801255C8_00000D44
-lbl_fn_801255C8_00000D10:
+    b lbl_enemy_stepBehavior_00000D44
+lbl_enemy_stepBehavior_00000D10:
     addi r28, r1, 0x14
     addi r29, r1, 0x20
     psq_l f1, 0x0(r28), 0, 0
@@ -1017,25 +1017,25 @@ lbl_fn_801255C8_00000D10:
     lfs f2, 0x28(r1)
     psq_st f1, 0x0(r28), 0, 0
     stfs f2, 0x1c(r1)
-lbl_fn_801255C8_00000D44:
+lbl_enemy_stepBehavior_00000D44:
     mr r3, r26
     mr r4, r30
     mr r5, r27
     addi r6, r1, 0x14
     bl fn_803C1338
-    b lbl_fn_801255C8_00000D6C
-lbl_fn_801255C8_00000D5C:
+    b lbl_enemy_stepBehavior_00000D6C
+lbl_enemy_stepBehavior_00000D5C:
     mr r3, r26
     mr r4, r30
     mr r5, r27
     bl fn_803C11A4
-lbl_fn_801255C8_00000D6C:
+lbl_enemy_stepBehavior_00000D6C:
     psq_l f1, 0x0(r26), 0, 0
     lfs f2, 0x8(r26)
     stfs f2, 0x54(r31)
     psq_st f1, 0x4c(r31), 0, 0
-    b lbl_fn_801255C8_00000E3C
-lbl_fn_801255C8_00000D80:
+    b lbl_enemy_stepBehavior_00000E3C
+lbl_enemy_stepBehavior_00000D80:
     lwz r5, 0x24(r31)
     addi r3, r1, 0x1a0
     lfs f3, lbl_80881858
@@ -1083,7 +1083,7 @@ lbl_fn_801255C8_00000D80:
     stfs f3, 0x50(r31)
     stfs f0, 0x54(r31)
     stw r0, 0x94(r31)
-lbl_fn_801255C8_00000E3C:
+lbl_enemy_stepBehavior_00000E3C:
     lwz r4, 0xa4(r31)
     addi r3, r1, 0x104
     lfs f3, 0x54(r31)
@@ -1101,7 +1101,7 @@ lbl_fn_801255C8_00000E3C:
     psq_l f1, 0x0(r3), 0, 0
     psq_st f1, 0x58(r31), 0, 0
     stfs f2, 0x60(r31)
-lbl_fn_801255C8_00000E80:
+lbl_enemy_stepBehavior_00000E80:
     lwz r5, 0x0(r31)
     mr r4, r31
     lwz r6, 0x4(r31)
@@ -1121,12 +1121,12 @@ lbl_fn_801255C8_00000E80:
     stfs f0, 0x88(r31)
     lfs f0, 0x19c(r1)
     stfs f0, 0x8c(r31)
-    b lbl_fn_801255C8_00000EDC
-lbl_fn_801255C8_00000ED0:
+    b lbl_enemy_stepBehavior_00000EDC
+lbl_enemy_stepBehavior_00000ED0:
     li r0, 0x1
     stw r0, 0x2c(r31)
     li r3, 0x0
-lbl_fn_801255C8_00000EDC:
+lbl_enemy_stepBehavior_00000EDC:
     addi r11, r1, 0x220
     bl _restgpr_26
     lwz r0, 0x224(r1)

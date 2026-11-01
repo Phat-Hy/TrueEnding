@@ -21,7 +21,7 @@ extern void fn_8003F440(void);
 extern void mission_updateStub(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800EC204(void);
+extern void cam_findTargetIndex(void);
 extern void proj_getMatrix(void);
 extern void fn_800F52F8(void);
 extern void vec3_scale(void);
@@ -35,7 +35,7 @@ extern void fn_801162A0(void);
 extern void fn_8011BF3C(void);
 extern void equip_getGlobalManager(void);
 extern void f32_abs(void);
-extern void fn_801255C8(void);
+extern void enemy_stepBehavior(void);
 extern void enemy_updateCombatBehavior(void);
 extern void fn_80127D8C(void);
 extern void fn_80128818(void);
@@ -811,7 +811,7 @@ lbl_fn_8013A4E8_000009B0:
     li r6, 0x0
     bl fn_80128930
     mr r3, r31
-    bl fn_801255C8
+    bl enemy_stepBehavior
     b lbl_fn_8013A4E8_00001E78
 lbl_fn_8013A4E8_000009E8:
     cmpwi r0, 0x2
@@ -1203,7 +1203,7 @@ lbl_fn_8013A4E8_00000F48:
     stfs f0, 0x28(r31)
 lbl_fn_8013A4E8_00000F68:
     mr r3, r31
-    bl fn_801255C8
+    bl enemy_stepBehavior
     b lbl_fn_8013A4E8_0000103C
 lbl_fn_8013A4E8_00000F74:
     cmpwi r0, 0x1
@@ -1361,7 +1361,7 @@ lbl_fn_8013A4E8_000011A8:
     cmpwi r3, 0x0
     beq lbl_fn_8013A4E8_000011C0
     lwz r4, 0xd5c(r27)
-    bl fn_800EC204
+    bl cam_findTargetIndex
     mr r28, r3
     b lbl_fn_8013A4E8_000011C4
 lbl_fn_8013A4E8_000011C0:
@@ -1396,7 +1396,7 @@ lbl_fn_8013A4E8_00001220:
     cmpwi r3, 0x0
     beq lbl_fn_8013A4E8_00001234
     lwz r4, 0xd5c(r27)
-    bl fn_800EC204
+    bl cam_findTargetIndex
     b lbl_fn_8013A4E8_00001238
 lbl_fn_8013A4E8_00001234:
     li r3, 0x0
@@ -1411,7 +1411,7 @@ lbl_fn_8013A4E8_00001238:
     lfs f0, 0xd60(r27)
     mr r3, r31
     stfs f0, 0x28(r31)
-    bl fn_801255C8
+    bl enemy_stepBehavior
     li r0, 0x1
     sth r0, 0xd3e(r27)
     b lbl_fn_8013A4E8_00001E78
@@ -1569,7 +1569,7 @@ lbl_fn_8013A4E8_00001474:
     lfs f0, 0xd60(r27)
     mr r3, r31
     stfs f0, 0x28(r31)
-    bl fn_801255C8
+    bl enemy_stepBehavior
     li r0, 0x1
     sth r0, 0xd3e(r27)
     b lbl_fn_8013A4E8_00001E78
@@ -1678,7 +1678,7 @@ lbl_fn_8013A4E8_00001604:
     lfs f0, 0xd60(r27)
     fmuls f0, f1, f0
     stfs f0, 0x28(r31)
-    bl fn_801255C8
+    bl enemy_stepBehavior
     b lbl_fn_8013A4E8_00001E78
     lha r0, 0xd3e(r27)
     cmpwi r0, 0x0
@@ -1705,7 +1705,7 @@ lbl_fn_8013A4E8_00001604:
     lfs f0, 0x8(r1)
     fmuls f0, f1, f0
     stfs f0, 0x28(r31)
-    bl fn_801255C8
+    bl enemy_stepBehavior
     b lbl_fn_8013A4E8_00001E78
 lbl_fn_8013A4E8_000016B4:
     lhz r0, 0xd38(r27)
@@ -1778,7 +1778,7 @@ lbl_fn_8013A4E8_00001744:
     lfs f0, lbl_80881974
     mr r3, r31
     stfs f0, 0x28(r31)
-    bl fn_801255C8
+    bl enemy_stepBehavior
     b lbl_fn_8013A4E8_00001E78
 lbl_fn_8013A4E8_000017CC:
     lhz r0, 0xd38(r27)
@@ -2020,7 +2020,7 @@ lbl_fn_8013A4E8_00001B38:
     lfs f0, 0xd60(r27)
     fmuls f0, f1, f0
     stfs f0, 0x28(r31)
-    bl fn_801255C8
+    bl enemy_stepBehavior
     b lbl_fn_8013A4E8_00001E78
 lbl_fn_8013A4E8_00001B54:
     cmpwi r0, 0x2
@@ -2090,7 +2090,7 @@ lbl_fn_8013A4E8_00001BC4:
     lfs f0, 0xd60(r27)
     fmuls f0, f1, f0
     stfs f0, 0x28(r31)
-    bl fn_801255C8
+    bl enemy_stepBehavior
     b lbl_fn_8013A4E8_00001E78
 lbl_fn_8013A4E8_00001C60:
     lhz r0, 0xd38(r27)
@@ -2115,7 +2115,7 @@ lbl_fn_8013A4E8_00001C78:
     lfs f0, 0xd60(r27)
     fmuls f0, f1, f0
     stfs f0, 0x28(r31)
-    bl fn_801255C8
+    bl enemy_stepBehavior
     b lbl_fn_8013A4E8_00001E78
 lbl_fn_8013A4E8_00001CBC:
     lhz r0, 0xd38(r27)

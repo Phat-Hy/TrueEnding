@@ -12,7 +12,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
-extern void fn_801255C8(void);
+extern void enemy_stepBehavior(void);
 extern void enemy_updateCombatBehavior(void);
 extern void fn_80128508(void);
 extern void fn_80128A30(void);
@@ -785,7 +785,7 @@ lbl_fn_8017F348_000009D4:
     lwzx r4, r4, r0
     bl fn_80128508
     addi r3, r31, 0xc64
-    bl fn_801255C8
+    bl enemy_stepBehavior
 lbl_fn_8017F348_00000A30:
     lwz r5, lbl_8087F0A8
     addi r3, r31, 0x10d8
@@ -881,7 +881,7 @@ lbl_fn_8017F4A0_00000B6C:
     li r6, 0x8
     bl fn_80128A30
     addi r3, r30, 0xc64
-    bl fn_801255C8
+    bl enemy_stepBehavior
     stw r28, 0xd18(r30)
     addi r4, r30, 0x528
     lwz r3, lbl_8087F098
@@ -930,7 +930,7 @@ lbl_fn_8017F4A0_00000C20:
     bl fn_80128A30
 lbl_fn_8017F4A0_00000C38:
     addi r3, r30, 0xc64
-    bl fn_801255C8
+    bl enemy_stepBehavior
     lwz r25, lbl_8087F490
     cmpwi r25, 0x0
     beq lbl_fn_8017F4A0_000011B8
@@ -1267,7 +1267,7 @@ lbl_fn_8017F4A0_00001134:
     li r6, 0x8
     bl fn_80128A30
     addi r3, r30, 0xc64
-    bl fn_801255C8
+    bl enemy_stepBehavior
     lwz r25, lbl_8087F490
     cmpwi r25, 0x0
     beq lbl_fn_8017F4A0_000011B8

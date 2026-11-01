@@ -27,7 +27,7 @@ extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void dialog_updateScriptState(void);
 extern void fn_801588A0(void);
-extern void fn_8020A780(void);
+extern void str_appendString(void);
 extern void task_findEntryById(void);
 extern void res_MsgHandle_isLoading(void);
 extern void res_MsgHandle_update(void);
@@ -542,12 +542,12 @@ lbl_fn_802AC8E8_00000640:
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0x28
-    bl fn_8020A780
+    bl str_appendString
     addi r3, r1, 0x44
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0x34
-    bl fn_8020A780
+    bl str_appendString
     addi r3, r1, 0x44
     bl talk_parseQuotedString
     bl str_skipWhitespace
@@ -571,7 +571,7 @@ lbl_fn_802AC8E8_000006B0:
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0x8
-    bl fn_8020A780
+    bl str_appendString
     addi r3, r1, 0x44
     bl talk_parseQuotedString
     bl str_skipWhitespace

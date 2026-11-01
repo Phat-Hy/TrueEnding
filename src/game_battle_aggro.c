@@ -12,7 +12,7 @@ extern void fn_801059F8(void);
 extern void fn_80105B3C(void);
 extern void fn_8011BEB8(void);
 extern void fn_8011C044(void);
-extern void fn_801255C8(void);
+extern void enemy_stepBehavior(void);
 extern void fn_80128508(void);
 extern void fn_801286F0(void);
 extern void fn_80128818(void);
@@ -469,7 +469,7 @@ lbl_fn_8016F824_000004FC:
     addi r5, r30, 0x528
     bl fn_80128508
     addi r3, r30, 0x1030
-    bl fn_801255C8
+    bl enemy_stepBehavior
     cmpwi r3, 0x0
     beq lbl_fn_8016F824_000009C4
     addi r3, r30, 0xc58
@@ -879,7 +879,7 @@ lbl_fn_8016FDCC_00000AE4:
     addi r5, r30, 0x528
     bl fn_801286F0
     addi r3, r30, 0x1030
-    bl fn_801255C8
+    bl enemy_stepBehavior
     cmpwi r3, 0x0
     beq lbl_fn_8016FDCC_00000F94
     addi r3, r30, 0xc58
@@ -1282,7 +1282,7 @@ lbl_battle_resolveAggroHierarchy_0000108C:
     addi r5, r27, 0x528
     bl fn_80128818
     addi r3, r27, 0x1030
-    bl fn_801255C8
+    bl enemy_stepBehavior
     cmpwi r3, 0x0
     beq lbl_battle_resolveAggroHierarchy_000010C8
     mr r3, r27
@@ -1340,7 +1340,7 @@ lbl_battle_resolveAggroHierarchy_00001164:
     addi r3, r3, 0x1030
     bl fn_80128818
     addi r3, r30, 0x1030
-    bl fn_801255C8
+    bl enemy_stepBehavior
     cmpwi r3, 0x0
     beq lbl_battle_resolveAggroHierarchy_00001620
     addi r3, r30, 0xc58
@@ -1727,7 +1727,7 @@ asm void battle_updateTargetAggro(void)
     stfs f31, 0x1058(r31)
 lbl_battle_updateTargetAggro_00001700:
     addi r3, r31, 0x1030
-    bl fn_801255C8
+    bl enemy_stepBehavior
     cmpwi r3, 0x0
     beq lbl_battle_updateTargetAggro_00001B98
     addi r3, r31, 0xc58

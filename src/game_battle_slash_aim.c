@@ -8,7 +8,7 @@ extern void sound_initChannelParams(void);
 extern void sound_releaseChannel(void);
 extern void item_useConsumable(void);
 extern void fn_80058078(void);
-extern void fn_800580BC(void);
+extern void mission_isObjectiveActive(void);
 extern void mission_updateObjectiveTarget(void);
 extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
@@ -1039,11 +1039,11 @@ asm void fn_803F5B48(void)
     b lbl_fn_803F5B48_00000E74
 lbl_fn_803F5B48_00000DE8:
     addi r3, r28, 0x4c4
-    bl fn_800580BC
+    bl mission_isObjectiveActive
     cmpwi r3, 0x0
     bne lbl_fn_803F5B48_00000E08
     addi r3, r28, 0x54c
-    bl fn_800580BC
+    bl mission_isObjectiveActive
     cmpwi r3, 0x0
     beq lbl_fn_803F5B48_00000E10
 lbl_fn_803F5B48_00000E08:

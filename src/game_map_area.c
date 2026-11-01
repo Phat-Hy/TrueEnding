@@ -26,7 +26,7 @@ extern void fn_8011BEB8(void);
 extern void fn_8011C044(void);
 extern void fn_8011D1FC(void);
 extern void fn_8011D21C(void);
-extern void fn_801255C8(void);
+extern void enemy_stepBehavior(void);
 extern void fn_80128818(void);
 extern void boss_updatePhaseState(void);
 extern void dialog_initScriptSlot(void);
@@ -302,7 +302,7 @@ lbl_fn_8017B434_00000250:
     li r6, 0x8
     bl fn_80128818
     addi r3, r30, 0x1030
-    bl fn_801255C8
+    bl enemy_stepBehavior
     cmpwi r3, 0x0
     beq lbl_fn_8017B434_00000290
     mr r3, r30
@@ -361,7 +361,7 @@ lbl_fn_8017B434_0000032C:
     li r6, 0x8
     bl fn_80128818
     addi r3, r29, 0x1030
-    bl fn_801255C8
+    bl enemy_stepBehavior
     cmpwi r3, 0x0
     beq lbl_fn_8017B434_000007EC
     addi r3, r29, 0xc58

@@ -8,7 +8,7 @@ extern void _savegpr_27(void);
 extern void ui_destroyWidget(void);
 extern void fn_800577D8(void);
 extern void fn_80058078(void);
-extern void fn_800580BC(void);
+extern void mission_isObjectiveActive(void);
 extern void mission_updateObjectiveTarget(void);
 extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
@@ -446,7 +446,7 @@ asm void fn_803F87E0(void)
     b lbl_fn_803F87E0_00000558
 lbl_fn_803F87E0_000004E8:
     addi r3, r31, 0x4c8
-    bl fn_800580BC
+    bl mission_isObjectiveActive
     cmpwi r3, 0x0
     beq lbl_fn_803F87E0_00000500
     li r3, 0x1

@@ -17,7 +17,7 @@ extern void fn_8000D844(void);
 extern void vec3_assign(void);
 extern void collision_queryGeometry(void);
 extern void mem_free(void);
-extern void fn_800EC204(void);
+extern void cam_findTargetIndex(void);
 extern void equip_getGlobalManager(void);
 extern void npc_getDialogController(void);
 extern void fn_8032BE88(void);
@@ -563,7 +563,7 @@ lbl_fn_8032A9F4_000006DC:
     bl equip_getGlobalManager
     bl npc_getDialogController
     mr r4, r26
-    bl fn_800EC204
+    bl cam_findTargetIndex
     cmpwi r3, 0x0
     mr r4, r3
     beq lbl_fn_8032A9F4_00000704
@@ -574,7 +574,7 @@ lbl_fn_8032A9F4_00000704:
     bl equip_getGlobalManager
     bl npc_getDialogController
     mr r4, r27
-    bl fn_800EC204
+    bl cam_findTargetIndex
     cmpwi r3, 0x0
     mr r4, r3
     beq lbl_fn_8032A9F4_0000072C
@@ -585,7 +585,7 @@ lbl_fn_8032A9F4_0000072C:
     bl equip_getGlobalManager
     bl npc_getDialogController
     mr r4, r28
-    bl fn_800EC204
+    bl cam_findTargetIndex
     cmpwi r3, 0x0
     mr r4, r3
     beq lbl_fn_8032A9F4_00000754

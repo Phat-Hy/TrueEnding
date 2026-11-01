@@ -11,7 +11,7 @@ extern void _savegpr_27(void);
 extern void fn_80019E88(void);
 extern void item_testLineOfSight(void);
 extern void fn_8012539C(void);
-extern void fn_801255C8(void);
+extern void enemy_stepBehavior(void);
 extern void battle_applyStatusEffect(void);
 extern void actor_getMovementFlags(void);
 extern void fn_803C11A4(void);
@@ -839,7 +839,7 @@ lbl_fn_80128090_00000A88:
     stfs f31, 0x9c(r31)
 lbl_fn_80128090_00000AF8:
     mr r3, r31
-    bl fn_801255C8
+    bl enemy_stepBehavior
 lbl_fn_80128090_00000B00:
     addi r11, r1, 0x20
     psq_l f31, 0x28(r1), 0, 0

@@ -55,7 +55,7 @@ extern void skill_findNodeByTag(void);
 extern void fn_801207D4(void);
 extern void fn_801354B4(void);
 extern void fn_80136544(void);
-extern void fn_8020A780(void);
+extern void str_appendString(void);
 extern void task_findEntryById(void);
 extern void fn_80223EE0(void);
 extern void fn_8032AC1C(void);
@@ -2166,7 +2166,7 @@ lbl_fn_8043DD78_00001B70:
     bl talk_formatQuotedString
     mr r4, r3
     addi r3, r29, 0x108
-    bl fn_8020A780
+    bl str_appendString
     b lbl_fn_8043DD78_00001CC8
 lbl_fn_8043DD78_00001B9C:
     mr r3, r30

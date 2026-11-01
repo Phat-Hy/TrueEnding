@@ -32,7 +32,7 @@ extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
 extern void bloom_processPasses(void);
 extern void str_findChar(void);
-extern void fn_800EC204(void);
+extern void cam_findTargetIndex(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800FBA9C(void);
 extern void fn_800FBE70(void);
@@ -1059,7 +1059,7 @@ lbl_fn_80468B68_00000CE8:
     bl equip_getGlobalManager
     bl npc_getDialogController
     mr r4, r25
-    bl fn_800EC204
+    bl cam_findTargetIndex
     cmpwi r3, 0x0
     mr r4, r3
     beq lbl_fn_80468B68_00000D10
@@ -1070,7 +1070,7 @@ lbl_fn_80468B68_00000D10:
     bl equip_getGlobalManager
     bl npc_getDialogController
     mr r4, r27
-    bl fn_800EC204
+    bl cam_findTargetIndex
     cmpwi r3, 0x0
     mr r4, r3
     beq lbl_fn_80468B68_00000D38
@@ -1081,7 +1081,7 @@ lbl_fn_80468B68_00000D38:
     bl equip_getGlobalManager
     bl npc_getDialogController
     mr r4, r28
-    bl fn_800EC204
+    bl cam_findTargetIndex
     cmpwi r3, 0x0
     mr r4, r3
     beq lbl_fn_80468B68_00000D60

@@ -17,7 +17,7 @@ extern void actor_spawnActorWithId(void);
 extern void fn_80117E88(void);
 extern void fn_80125320(void);
 extern void fn_8012539C(void);
-extern void fn_801255C8(void);
+extern void enemy_stepBehavior(void);
 extern void fn_80128508(void);
 extern void fn_801286F0(void);
 extern void fn_80128930(void);
@@ -1131,7 +1131,7 @@ asm void fn_8011C314(void)
     li r6, 0x0
     bl fn_80128508
     addi r3, r29, 0xc
-    bl fn_801255C8
+    bl enemy_stepBehavior
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)
@@ -1168,7 +1168,7 @@ lbl_fn_8011C378_00000E4C:
     li r6, 0x0
     bl fn_801286F0
     addi r3, r29, 0xc
-    bl fn_801255C8
+    bl enemy_stepBehavior
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)
@@ -1202,7 +1202,7 @@ asm void fn_8011C3F4(void)
     bl fn_80128930
     stfs f31, 0x34(r29)
     addi r3, r29, 0xc
-    bl fn_801255C8
+    bl enemy_stepBehavior
     lwz r0, 0x24(r1)
     lfd f31, 0x18(r1)
     lwz r31, 0x14(r1)
@@ -1317,7 +1317,7 @@ lbl_fn_8011C4AC_00000FF0:
     li r6, 0x0
     bl fn_80128930
     addi r3, r29, 0xc
-    bl fn_801255C8
+    bl enemy_stepBehavior
     b lbl_fn_8011C4AC_00001084
 lbl_fn_8011C4AC_0000107C:
     li r0, 0x1
@@ -1630,7 +1630,7 @@ asm void fn_8011C97C(void)
     bl fn_80128930
     stfs f31, 0xc8c(r30)
     addi r3, r30, 0xc64
-    bl fn_801255C8
+    bl enemy_stepBehavior
     lwz r0, 0x24(r1)
     lfd f31, 0x18(r1)
     lwz r31, 0x14(r1)
@@ -1708,7 +1708,7 @@ asm void fn_8011CA5C(void)
     bl fn_80128C08
     stfs f30, 0x34(r29)
     addi r3, r29, 0xc
-    bl fn_801255C8
+    bl enemy_stepBehavior
     lwz r0, 0x34(r1)
     lfd f31, 0x28(r1)
     lfd f30, 0x20(r1)
@@ -1805,7 +1805,7 @@ lbl_fn_8011CAE4_0000165C:
     bl fn_80128A30
     stfs f31, 0x34(r29)
     addi r3, r29, 0xc
-    bl fn_801255C8
+    bl enemy_stepBehavior
 lbl_fn_8011CAE4_0000169C:
     lwz r0, 0x34(r1)
     psq_l f31, 0x28(r1), 0, 0

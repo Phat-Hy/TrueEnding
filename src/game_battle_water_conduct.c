@@ -11,7 +11,7 @@ extern void _savegpr_27(void);
 extern void path_Object_constructor(void);
 extern void fn_80057F28(void);
 extern void fn_80058078(void);
-extern void fn_800580BC(void);
+extern void mission_isObjectiveActive(void);
 extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
@@ -211,7 +211,7 @@ lbl_fn_80419AFC_0000012C:
     cmpwi r3, 0x0
     beq lbl_fn_80419AFC_0000016C
     lwz r3, 0x4c4(r30)
-    bl fn_800580BC
+    bl mission_isObjectiveActive
     cmpwi r3, 0x0
     beq lbl_fn_80419AFC_0000016C
     li r3, 0x1

@@ -10,7 +10,7 @@ extern void mtx_getTranslation(void);
 extern void vec3_set(void);
 extern void scene_transformPoint(void);
 extern void fn_8000DCF4(void);
-extern void fn_8000DD0C(void);
+extern void scene_getRootNode(void);
 extern void fn_800109E0(void);
 extern void mtx_multVec(void);
 extern void fn_80012C88(void);
@@ -1932,7 +1932,7 @@ lbl_fn_802A3D80_00001A34:
     bl fn_802A4184
     lwz r28, 0x0(r3)
     mr r3, r27
-    bl fn_8000DD0C
+    bl scene_getRootNode
     addi r4, r30, 0x277
     bl atn_Model_getBoneMatrix
     mr r4, r3
@@ -1950,7 +1950,7 @@ lbl_fn_802A3D80_00001A34:
     addi r4, r1, 0x108
     bl mtx_multVec
     mr r3, r27
-    bl fn_8000DD0C
+    bl scene_getRootNode
     addi r4, r30, 0x277
     bl atn_Model_getBoneMatrix
     mr r4, r3

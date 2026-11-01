@@ -17,7 +17,7 @@ extern void vec3_set(void);
 extern void vec3_copy(void);
 extern void vec3_mag(void);
 extern void scene_traverseNode(void);
-extern void fn_8000DD0C(void);
+extern void scene_getRootNode(void);
 extern void mem_free(void);
 extern s32 atn_Model_findBoneIndex(void*, u32, int);
 extern void compass_findWaypointIndex(void);
@@ -3464,7 +3464,7 @@ lbl_fn_80012D34_00002C80:
     bl vec3_assign
     mr r3, r26
     bl fn_800128FC
-    bl fn_8000DD0C
+    bl scene_getRootNode
     lis r4, lbl_8072F924@ha
     addi r4, r4, lbl_8072F924@l
     addi r4, r4, 0x7c

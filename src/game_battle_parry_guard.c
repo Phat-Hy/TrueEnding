@@ -13,7 +13,7 @@ extern void path_Object_constructor(void);
 extern void atn_ColliBase_destructor(void);
 extern void fn_80057F28(void);
 extern void fn_80058078(void);
-extern void fn_800580BC(void);
+extern void mission_isObjectiveActive(void);
 extern void mission_updateObjectiveTarget(void);
 extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
@@ -1511,7 +1511,7 @@ lbl_fn_80413B1C_000012B8:
     lwz r3, 0x203c(r30)
     cmpwi r3, 0x0
     beq lbl_fn_80413B1C_000012D8
-    bl fn_800580BC
+    bl mission_isObjectiveActive
     cmpwi r3, 0x0
     beq lbl_fn_80413B1C_000012D8
     li r3, 0x1

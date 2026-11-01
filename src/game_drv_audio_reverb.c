@@ -12,7 +12,7 @@ extern void vec3_copy(void);
 extern void vec3_mag(void);
 extern void fn_8000D3A8(void);
 extern void scene_traverseNode(void);
-extern void fn_8000DD0C(void);
+extern void scene_getRootNode(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
 extern void mtx_multVec(void);
@@ -579,11 +579,11 @@ lbl_fn_805BAC18_00000420:
     addi r3, r1, 0x188
     bl fn_80372754
     lwz r3, 0x50(r29)
-    bl fn_8000DD0C
+    bl scene_getRootNode
     addi r4, r1, 0x188
     bl fn_80316E38
     lwz r3, 0x50(r29)
-    bl fn_8000DD0C
+    bl scene_getRootNode
     lwz r5, 0x5b0(r29)
     li r4, 0x0
     lfs f1, lbl_80888454
@@ -594,19 +594,19 @@ lbl_fn_805BAC18_00000420:
     li r8, 0x1
     bl atn_Anim_setLayerAnimation
     lwz r3, 0x50(r29)
-    bl fn_8000DD0C
+    bl scene_getRootNode
     lfs f1, 0x14(r31)
     li r4, 0x0
     bl fn_80357F38
     lwz r3, 0x50(r29)
-    bl fn_8000DD0C
+    bl scene_getRootNode
     li r4, 0x1
     bl cursor_applyAnimationTrack
     addi r3, r1, 0x114
     li r4, 0x0
     bl fn_80317034
     lwz r3, 0x50(r29)
-    bl fn_8000DD0C
+    bl scene_getRootNode
     addi r4, r1, 0x114
     bl scene_traverseNode
     addi r3, r1, 0x114

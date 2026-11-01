@@ -10,7 +10,7 @@ extern void dtor_80084684(void);
 extern void mtx_getTranslation(void);
 extern void vec3_set(void);
 extern void vec3_copy(void);
-extern void fn_8000DD0C(void);
+extern void scene_getRootNode(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
 extern void mtx_multVec(void);
@@ -880,7 +880,7 @@ lbl_fn_80129A6C_00000AC0:
     b lbl_fn_80129A6C_00000B6C
 lbl_fn_80129A6C_00000AEC:
     lwz r3, 0x0(r31)
-    bl fn_8000DD0C
+    bl scene_getRootNode
     mr r4, r27
     bl fn_8012A1C0
     mr r4, r3
@@ -1049,7 +1049,7 @@ lbl_fn_80129A6C_00000D18:
     bl fn_80012C88
 lbl_fn_80129A6C_00000D58:
     lwz r3, 0x0(r31)
-    bl fn_8000DD0C
+    bl scene_getRootNode
     lis r4, lbl_80737200@ha
     li r5, 0x0
     addi r29, r4, lbl_80737200@l
@@ -1057,7 +1057,7 @@ lbl_fn_80129A6C_00000D58:
     bl atn_Model_findBoneIndex
     stw r3, 0x8(r1)
     lwz r3, 0x0(r31)
-    bl fn_8000DD0C
+    bl scene_getRootNode
     addi r4, r29, 0xb
     li r5, 0x0
     bl atn_Model_findBoneIndex
@@ -1080,7 +1080,7 @@ lbl_fn_80129A6C_00000DA0:
     b lbl_fn_80129A6C_00000E4C
 lbl_fn_80129A6C_00000DCC:
     lwz r3, 0x0(r31)
-    bl fn_8000DD0C
+    bl scene_getRootNode
     mr r4, r26
     bl fn_8012A1C0
     mr r4, r3
@@ -1122,7 +1122,7 @@ lbl_fn_80129A6C_00000E4C:
     fmr f2, f1
     bl vec3_set
     lwz r3, 0x0(r31)
-    bl fn_8000DD0C
+    bl scene_getRootNode
     addi r4, r29, 0x11
     bl atn_Model_getBoneMatrix
     mr r4, r3

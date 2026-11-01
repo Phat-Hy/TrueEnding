@@ -9,7 +9,7 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void vec3_set(void);
 extern void vec3_copy(void);
-extern void fn_8000DD0C(void);
+extern void scene_getRootNode(void);
 extern void vec3_toEulerAngles(void);
 extern void math_wrapAngle(void);
 extern void collision_queryGeometry(void);
@@ -1079,7 +1079,7 @@ asm void fn_801C0D80(void)
     li r4, 0x2d
     bl fn_801C0730
     lwz r3, 0x4(r29)
-    bl fn_8000DD0C
+    bl scene_getRootNode
     mr r31, r3
     lwz r3, 0x4(r29)
     li r4, 0x0

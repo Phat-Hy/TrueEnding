@@ -21,7 +21,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void atn_Task_setActive(void);
 extern void sound_playSpatialEffect(void);
-extern void fn_800EC204(void);
+extern void cam_findTargetIndex(void);
 extern void fn_800F530C(void);
 extern void vec3_scale(void);
 extern void viewport_updateCulling(void);
@@ -378,7 +378,7 @@ lbl_fn_8030C490_0000037C:
     bl vec3_add
     lwz r4, 0x1538(r31)
     mr r3, r27
-    bl fn_800EC204
+    bl cam_findTargetIndex
     mr r4, r3
     addi r3, r1, 0xbc
     addi r4, r4, 0x4
@@ -417,7 +417,7 @@ lbl_fn_8030C490_00000420:
 lbl_fn_8030C490_00000448:
     lwz r4, 0x1534(r30)
     mr r3, r31
-    bl fn_800EC204
+    bl cam_findTargetIndex
     mr r4, r3
     addi r3, r1, 0xb0
     addi r4, r4, 0x4
@@ -528,7 +528,7 @@ lbl_fn_8030C490_000005E0:
     bne lbl_fn_8030C490_0000080C
     lwz r4, 0x1530(r30)
     mr r3, r31
-    bl fn_800EC204
+    bl cam_findTargetIndex
     mr r4, r3
     addi r3, r1, 0x80
     addi r4, r4, 0x4

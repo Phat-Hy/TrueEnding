@@ -22,7 +22,7 @@ extern void atn_Model_findBoneIndex(void);
 extern void fn_800DB3EC(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
-extern void fn_800EC204(void);
+extern void cam_findTargetIndex(void);
 extern void viewport_updateCulling(void);
 extern void skill_findNodeById(void);
 extern void equip_getGlobalManager(void);
@@ -1723,7 +1723,7 @@ lbl_fn_8029CF00_0000168C:
     bl str_parseInt
     mr r4, r3
     mr r3, r26
-    bl fn_800EC204
+    bl cam_findTargetIndex
     mr r25, r3
     b lbl_fn_8029CF00_00001968
 lbl_fn_8029CF00_000016C0:
@@ -1739,7 +1739,7 @@ lbl_fn_8029CF00_000016D4:
     mr r30, r3
     mr r3, r26
     mr r4, r30
-    bl fn_800EC204
+    bl cam_findTargetIndex
     cmpwi r3, 0x0
     stw r3, 0xc(r1)
     beq lbl_fn_8029CF00_00001708

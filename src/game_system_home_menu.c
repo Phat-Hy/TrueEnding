@@ -51,7 +51,7 @@ extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
 extern void bloom_processPasses(void);
 extern void fn_800F52F8(void);
-extern void fn_8020A780(void);
+extern void str_appendString(void);
 extern void res_MsgHandle_unload(void);
 extern void entity_Instance_destructor(void);
 extern void fn_8035FBF8(void);
@@ -1737,7 +1737,7 @@ lbl_fn_8035F3D4_0000160C:
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0x14
-    bl fn_8020A780
+    bl str_appendString
     addi r3, r1, 0x14
     addi r4, r26, 0x32
     bl sys_copyString
@@ -1848,7 +1848,7 @@ lbl_fn_8035F3D4_000017AC:
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0x8
-    bl fn_8020A780
+    bl str_appendString
     addi r3, r1, 0x8
     addi r4, r31, 0x72
     bl sys_copyString
@@ -1860,7 +1860,7 @@ lbl_fn_8035F3D4_00001800:
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0x8
-    bl fn_8020A780
+    bl str_appendString
     addi r3, r1, 0x8
     addi r4, r31, 0x79
     bl sys_copyString
@@ -1891,7 +1891,7 @@ lbl_fn_8035F3D4_00001870:
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0x8
-    bl fn_8020A780
+    bl str_appendString
     addi r3, r1, 0x8
     addi r4, r31, 0x79
     bl sys_copyString
@@ -1938,7 +1938,7 @@ lbl_fn_8035F3D4_0000191C:
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0x8
-    bl fn_8020A780
+    bl str_appendString
     addi r3, r1, 0x8
     addi r4, r31, 0x79
     bl sys_copyString
@@ -1985,7 +1985,7 @@ lbl_fn_8035F3D4_000019C8:
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0x8
-    bl fn_8020A780
+    bl str_appendString
     addi r3, r1, 0x8
     addi r4, r31, 0x79
     bl sys_copyString
@@ -2032,7 +2032,7 @@ lbl_fn_8035F3D4_00001A74:
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0x8
-    bl fn_8020A780
+    bl str_appendString
     addi r3, r1, 0x8
     addi r4, r31, 0x79
     bl sys_copyString
@@ -2079,7 +2079,7 @@ lbl_fn_8035F3D4_00001B20:
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0x8
-    bl fn_8020A780
+    bl str_appendString
     addi r3, r1, 0x8
     addi r4, r31, 0x79
     bl sys_copyString
@@ -2126,7 +2126,7 @@ lbl_fn_8035F3D4_00001BCC:
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0x8
-    bl fn_8020A780
+    bl str_appendString
     addi r3, r1, 0x8
     addi r4, r31, 0x79
     bl sys_copyString
@@ -2188,7 +2188,7 @@ lbl_fn_8035F3D4_00001CB0:
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0x8
-    bl fn_8020A780
+    bl str_appendString
     addi r3, r1, 0x8
     addi r4, r31, 0x79
     bl sys_copyString
