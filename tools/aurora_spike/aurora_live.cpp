@@ -120,8 +120,43 @@ TLS_LIVE_EXPORT int tls_aurora_live_init(uint32_t fb_w, uint32_t fb_h) {
  * (measured: 0xC0000005). Mapping a copy at the absolute addresses is the harness's own model
  * (`map_guest_region`), reused verbatim, aliases included. One copy of ~90 MB per map, so the live
  * path maps once per run, not per frame. */
+/* THE SNAPSHOT PROBLEM, and why the live path re-syncs (5c.46 AP-BH).
+ *
+ * `map_guest_region()` creates a page-file section and `memcpy`s the guest plane into it, so the
+ * addresses aurora dereferences hold a COPY taken when the live path armed. That is correct for a
+ * recorded capture - the capture IS a snapshot - and wrong for a live feed: every texture the guest
+ * writes after arming is invisible to aurora. Measured with TLS_AURORA_TEX_BYTES=10 on the field
+ * window: the first ten texobjs all printed `nz=0/64` at addresses such as 0x91884100, 0x9194F5A0,
+ * 0x91FA00E0 - the memory aurora sampled was zeros. That is the whole "content gap" AP-AN/AP-BF
+ * chased through culling, depth, the raster channel, texture-cache identity and colour-update enables.
+ * The boot and title frames looked right because their textures are written before the window.
+ *
+ * So the live path re-copies the runner's planes over the mapped region before each fed frame: 2 x
+ * 64 MB per fed frame, and only the frames in the requested window pay it (7 in a measurement run).
+ * TLS_AURORA_NO_RESYNC=1 restores the old snapshot behaviour for an A/B. */
+static const uint8_t* g_src1 = nullptr;
+static uint32_t g_src1_size = 0;
+static const uint8_t* g_src2 = nullptr;
+static uint32_t g_src2_size = 0;
+static int g_resync = -1;
+
+static void resync_guest_planes(void) {
+  if (g_resync < 0) g_resync = (std::getenv("TLS_AURORA_NO_RESYNC") != nullptr) ? 0 : 1;
+  if (!g_resync) return;
+  if (g_src1 && g_src1_size) {
+    std::memcpy(reinterpret_cast<void*>(static_cast<uintptr_t>(0x80000000u)), g_src1, g_src1_size);
+  }
+  if (g_src2 && g_src2_size) {
+    std::memcpy(reinterpret_cast<void*>(static_cast<uintptr_t>(0x90000000u)), g_src2, g_src2_size);
+  }
+}
+
 TLS_LIVE_EXPORT int tls_aurora_live_map(const void* mem1, uint32_t mem1_size, const void* mem2,
                                         uint32_t mem2_size) {
+  g_src1 = static_cast<const uint8_t*>(mem1);
+  g_src1_size = mem1_size;
+  g_src2 = static_cast<const uint8_t*>(mem2);
+  g_src2_size = mem2_size;
   std::string err;
   if (mem1 && mem1_size) {
     const MemPlane p1{0x80000000u, static_cast<const uint8_t*>(mem1), mem1_size};
@@ -149,6 +184,9 @@ TLS_LIVE_EXPORT int tls_aurora_live_map(const void* mem1, uint32_t mem1_size, co
 TLS_LIVE_EXPORT void tls_aurora_live_frame(const void* fifo, uint32_t len, int last,
                                            int* draws_out, int* rewritten_out) {
   if (!g_liveInit) return;
+  /* The planes are a snapshot taken at tls_aurora_live_map(); make them live before this frame is
+   * decoded, or every texture the guest wrote since is invisible (see THE SNAPSHOT PROBLEM). */
+  resync_guest_planes();
   if (draws_out) *draws_out = 0;
   if (rewritten_out) *rewritten_out = 0;
   if (!aurora_begin_frame()) {

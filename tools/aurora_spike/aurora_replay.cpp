@@ -390,6 +390,41 @@ void emit_texobj(std::vector<uint8_t>& out, uint32_t mapId, const TexState& t) {
     std::printf("[replay] texobj map %u -> 0x%08X %ux%u fmt %u\n", mapId, guest_addr_for_image3(t.image3), width,
                 height, format);
   }
+  /* TLS_AURORA_TEX_BYTES=<n>: print the first bytes of the guest memory the texobj points at, for the
+   * first <n> texobjs. THE QUESTION IT ANSWERS (5c.46 AP-BG): after culling, depth, the raster channel,
+   * the texture-cache identity and the colour-update enable are all excluded, the remaining fork is
+   * "the texels are not there" vs "aurora does not read them". If these bytes are non-zero and look
+   * like the texture (CMPR blocks for fmt 14), then the guest content is present at the address the
+   * adapter emitted and aurora's upload/sampling is at fault; if they are all zero, the image3 decode
+   * is pointing at the wrong memory and the bug is the address, not the renderer.
+   *
+   * Dereferences through the guest plane the adapter has already mapped, so the range is checked
+   * first - a bad decode must not crash a run. Inert unless set. */
+  {
+    static int sBytesN = -2, sBytesDone = 0;
+    if (sBytesN == -2) {
+      const char* e = std::getenv("TLS_AURORA_TEX_BYTES");
+      sBytesN = (e != nullptr && std::atoi(e) > 0) ? std::atoi(e) : 0;
+    }
+    if (sBytesN > 0 && sBytesDone < sBytesN) {
+      const uint32_t addr = guest_addr_for_image3(t.image3);
+      const bool mapped = (addr >= 0x80000000u && addr < 0x81800000u) || (addr >= 0x90000000u && addr < 0x94000000u);
+      if (mapped) {
+        const auto* p = reinterpret_cast<const uint8_t*>(static_cast<uintptr_t>(addr));
+        unsigned nz = 0;
+        for (int k = 0; k < 64; ++k) nz += (p[k] != 0) ? 1u : 0u;
+        std::printf("[texbytes] map %u 0x%08X %ux%u fmt %u nz=%u/64 first16=", mapId, addr, width, height, format,
+                    nz);
+        for (int k = 0; k < 16; ++k) std::printf("%02X", p[k]);
+        std::printf("\n");
+        std::fflush(stdout);
+      } else {
+        std::printf("[texbytes] map %u 0x%08X fmt %u NOT MAPPED in this process\n", mapId, addr, format);
+        std::fflush(stdout);
+      }
+      ++sBytesDone;
+    }
+  }
 }
 
 struct CopyRegs {

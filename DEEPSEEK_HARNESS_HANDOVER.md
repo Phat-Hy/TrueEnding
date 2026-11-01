@@ -16181,3 +16181,44 @@ and the field frame came back **`mean=(10.37, 12.72, 7.09)` — identical to the
 | colour/alpha update enable | `TLS_AURORA_FORCE_UPDATE=1` | **excluded** - identical `10.37` |
 
 which leaves three, in the order they are worth testing: **(a)** the texels aurora actually reads at the emitted address (`image3` decode → cached alias) are not the texture the layer decodes - check by printing the first bytes at an emitted address (`0x91884100`, `0x904E6D00`) from inside the adapter and comparing them with the layer's decode of the same address; **(b)** the copy-resolution path not binding a shadow copy for these draws; **(c)** the TEV stage's texcoord selecting outside the image. (a) is one adapter printf plus one run and is the same "content vs sampling" split that closed priority B - do that first.
+
+---
+
+### AP-BH. ROOT CAUSE OF THE AURORA "CONTENT GAP": the live path mapped a **SNAPSHOT** of guest memory, so every texture written after the live path armed read as zeros — measured (`nz=0/64` at ten consecutive texobj addresses), fixed by re-syncing the planes per fed frame, verified by the bytes going to `nz=64/64` and by the title control staying at 205.69
+
+AP-BF narrowed the dark field frame to the texture input; AP-BG excluded the cache identity. The instrument that ended it is three lines of adapter: print the first 64 bytes of the guest memory each texobj points at.
+
+**1. The measurement that names the cause.** `TLS_AURORA_TEX_BYTES=<n>` on the field window, before any change:
+
+```
+[texbytes] map 0 0x91884100 128x128 fmt 14 nz=0/64 first16=00000000000000000000000000000000
+[texbytes] map 1 0x9194F5A0 128x128 fmt 14 nz=0/64 first16=00000000000000000000000000000000
+[texbytes] map 2 0x904E6D00 128x128 fmt  1 nz=0/64 first16=00000000000000000000000000000000
+[texbytes] map 3 0x91FA00E0 512x512 fmt 14 nz=0/64 first16=00000000000000000000000000000000
+```
+
+Ten of ten. The addresses were right, the sizes and formats were right, and the memory they pointed at was **all zeros** - while the layer, reading the same guest addresses in the same run, rendered the cave at luma 35.64.
+
+**2. Why.** `map_guest_region()` (the harness helper the live path reuses) creates a page-file section and `memcpy`s the guest plane into it **once**, when the live path arms. That is exactly right for a *recorded capture* - the capture is a snapshot - and exactly wrong for a *live feed*: aurora dereferences the copy, so every texture the guest writes after arming is invisible. The boot and title frames looked correct because their textures are written before the window; the field's are not. **This is the bug that AP-AN's "68 % zero texels" measured from the other side and that AP-BF/AP-BG chased through culling, depth, the raster channel, cache identity and update enables - none of which was the cause.**
+
+**3. The fix.** `tls_aurora_live_frame()` now re-copies the runner's MEM1/MEM2 over the mapped region **before each fed frame** (`resync_guest_planes()`), 2 x 64 MB per fed frame, and only the frames in the requested window pay it. `TLS_AURORA_NO_RESYNC=1` restores the snapshot for an A/B. Measured, same window, same launch shape:
+
+| | before (snapshot) | **after (resynced)** |
+|---|---|---|
+| texobj bytes, ten consecutive | **`nz=0/64`** at every address | **`nz=64/64`**, real CMPR: `92C38AC4AAAAAAAA92C38AC4AAAAAAAA`, `CE57C636FFFFFFFFCE57C636FFFFFFFF` |
+| field readback (guest 2801) | `mean=(10.37,12.72,7.09)`, luma 11.38, with garbage bands from stale memory | `mean=(2.53,4.10,0.92)`, luma 3.27 — **the bands are gone**, the frame is a clean black field with the dialogue subtitle and five small glints |
+| **title control** (`FROM=TO` 440..452) | `mean=205.62` | **`mean=205.69`** — unchanged within 0.07, i.e. the fix does not disturb what already worked |
+
+Both runs exit code 0 (260 s, 30 s). The **harness is untouched by design**: `tls_gx_replay` maps a recorded capture, for which a snapshot is correct, so the equality instrument's numbers (AP-AY's 1.5 % pair) remain valid.
+
+**4. What this changes, and what it does not.** The "texture content never reaching the GPU" class is **closed**: the content reaches it, verified at the byte level. The field frame is now *darker*, not brighter, and shows only the 2D overlay — so with real texels the 3D draws still produce near-black. That is a different question from the one this section answers, and it must be asked only after AP-BD's alignment problem is settled: the layer's guest-2800 shot is the **geometry half** (cave, luma 35.64) while aurora's 2801 is the **composite half** (subtitle), so the two pictures are different halves of one guest frame and their difference cannot yet be attributed to shading. The next experiment is therefore the half-frame one, now with correct content: feed only the draw-bearing half (or both, and read back at the geometry boundary) and compare with the layer's same-instant geometry frame.
+
+**5. Changes.** `tools/aurora_spike/aurora_replay.cpp` (`TLS_AURORA_TEX_BYTES` probe), `tools/aurora_spike/aurora_live.cpp` (`resync_guest_planes()` + the source-plane capture + `TLS_AURORA_NO_RESYNC`), this file. The DLL rebuilds incrementally in **4 s** with `cmake --build G:/Program/aurora-spike/build2 --target tls_aurora_live -j 14` (`build.ps1` builds only `tls_gx_replay`). **0 changes to `src/`**, runner untouched, gate unaffected (last gate `gate_apbc2.log`, PASS attempt 1).
+
+**6. Run log.**
+
+| # | what | result |
+|---|---|---|
+| 1 | `TLS_AURORA_TEX_BYTES=10`, 2 810 frames, snapshot behaviour | `nz=0/64` at every texobj — the cause, in ten lines |
+| 2 | `TLS_AURORA_TEX_BYTES=6`, same window, resync on | `nz=64/64` with real CMPR data; field `mean=(2.53,4.10,0.92)`; exit 0 in 260 s |
+| 3 | title control 440..452 with resync on, 460 frames | `mean=205.69` vs 205.62 - unchanged; exit 0 in 30 s |
