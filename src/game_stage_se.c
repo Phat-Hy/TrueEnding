@@ -104,7 +104,7 @@ void fn_801A1BE4(void);
 void fn_801A1D5C(void);
 void fn_801A1D9C(void);
 void fn_801A2058(void);
-void fn_801A21A4(void);
+u8 fn_801A21A4(void *p);
 void fn_801A21AC(void);
 void fn_801A21EC(void);
 void fn_801A222C(void);
@@ -1290,11 +1290,9 @@ lbl_fn_801A2058_000010C4:
     blr
 }
 
-asm void fn_801A21A4(void)
+u8 fn_801A21A4(void *p)
 {
-    nofralloc
-    lbz r3, 0x24(r3)
-    blr
+    return *(u8 *)((u8 *)p + 0x24);
 }
 
 asm void fn_801A21AC(void)

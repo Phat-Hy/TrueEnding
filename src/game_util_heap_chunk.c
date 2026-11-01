@@ -134,7 +134,7 @@ void fn_805860F4(void);
 void fn_80586220(void);
 void fn_80586624(void);
 void fn_805866F8(void);
-void fn_80586DAC(void);
+u32 fn_80586DAC(void);
 void fn_80586DB4(void);
 void fn_80586E40(void);
 void fn_80586FD0(void);
@@ -1343,11 +1343,9 @@ lbl_fn_805866F8_00001114:
     blr
 }
 
-asm void fn_80586DAC(void)
+u32 fn_80586DAC(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_80586DB4(void)

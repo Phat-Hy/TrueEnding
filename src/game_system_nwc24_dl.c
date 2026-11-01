@@ -69,14 +69,12 @@ extern u32 lbl_80885A60;
 extern u32 lbl_80885A64;
 
 /* Function declarations */
-void fn_80385B40(void);
+f32 fn_80385B40(void *p);
 void fn_80385B48(void);
 
-asm void fn_80385B40(void)
+f32 fn_80385B40(void *p)
 {
-    nofralloc
-    lfs f1, 0x4c(r3)
-    blr
+    return *(f32 *)((u8 *)p + 0x4c);
 }
 
 asm void fn_80385B48(void)

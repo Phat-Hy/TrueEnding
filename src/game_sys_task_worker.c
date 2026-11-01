@@ -84,7 +84,7 @@ void fn_80217E18(void);
 void task_lookupTagIndex(void);
 void fn_80218218(void);
 void fn_8021823C(void);
-void fn_80218260(void);
+void *fn_80218260(void *p);
 void fn_80218268(void);
 void fn_802185F4(void);
 void fn_802185FC(void);
@@ -422,11 +422,9 @@ lbl_fn_8021823C_00000440:
     blr
 }
 
-asm void fn_80218260(void)
+void *fn_80218260(void *p)
 {
-    nofralloc
-    addi r3, r3, 0xd0
-    blr
+    return (u8 *)p + 0xd0;
 }
 
 asm void fn_80218268(void)

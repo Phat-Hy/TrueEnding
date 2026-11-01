@@ -111,7 +111,7 @@ void fn_8036DBC0(void);
 void fn_8036DDD4(void);
 void fn_8036E098(void);
 void wpad_accel_updateOrientation(void);
-void fn_8036E428(void);
+u32 fn_8036E428(void *p);
 void fn_8036E430(void);
 void fn_8036E494(void);
 void fn_8036E624(void);
@@ -1588,11 +1588,9 @@ lbl_wpad_accel_updateOrientation_0000146C:
     blr
 }
 
-asm void fn_8036E428(void)
+u32 fn_8036E428(void *p)
 {
-    nofralloc
-    lwz r3, 0x263c(r3)
-    blr
+    return *(u32 *)((u8 *)p + 0x263c);
 }
 
 asm void fn_8036E430(void)

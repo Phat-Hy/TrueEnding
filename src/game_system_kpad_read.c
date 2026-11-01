@@ -98,7 +98,7 @@ void fn_8036E994(void);
 void fn_8036EA04(void);
 void fn_8036EA3C(void);
 void fn_8036EA6C(void);
-void fn_8036EE04(void);
+u32 fn_8036EE04(void *p);
 void fn_8036EE0C(void);
 void world_updateMapTransition(void);
 void fn_8036FB4C(void);
@@ -467,11 +467,9 @@ lbl_fn_8036EA6C_000004C4:
     blr
 }
 
-asm void fn_8036EE04(void)
+u32 fn_8036EE04(void *p)
 {
-    nofralloc
-    lwz r3, 0x2640(r3)
-    blr
+    return *(u32 *)((u8 *)p + 0x2640);
 }
 
 asm void fn_8036EE0C(void)

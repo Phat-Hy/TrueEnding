@@ -102,7 +102,7 @@ void fn_801B7370(void);
 void fn_801B73B0(void);
 void fn_801B73F0(void);
 void fn_801B74FC(void);
-void fn_801B7794(void);
+u32 fn_801B7794(void);
 void fn_801B779C(void);
 void fn_801B77DC(void);
 void fn_801B79D8(void);
@@ -526,11 +526,9 @@ lbl_fn_801B74FC_00000558:
     blr
 }
 
-asm void fn_801B7794(void)
+u32 fn_801B7794(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_801B779C(void)

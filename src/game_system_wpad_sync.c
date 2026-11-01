@@ -166,7 +166,7 @@ void fn_80365320(void);
 void fn_80365390(void);
 void fn_803653CC(void);
 void fn_80365424(void);
-void fn_8036545C(void);
+u32 fn_8036545C(void);
 void fn_80365464(void);
 void fn_803654EC(void);
 void wpad_getActiveDevice(void);
@@ -282,11 +282,9 @@ asm void fn_80365424(void)
     blr
 }
 
-asm void fn_8036545C(void)
+u32 fn_8036545C(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_80365464(void)

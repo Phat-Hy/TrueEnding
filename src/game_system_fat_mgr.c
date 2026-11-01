@@ -94,7 +94,7 @@ void fat_dispatchFsRequest(void);
 void fn_8037EF48(void);
 void fn_8037F640(void);
 void fn_8037F664(void);
-void fn_8037F688(void);
+void fn_8037F688(void *p, f32 val);
 void fn_8037F690(void);
 void fn_8037F6D8(void);
 void fn_8037F724(void);
@@ -1561,11 +1561,9 @@ asm void fn_8037F664(void)
     blr
 }
 
-asm void fn_8037F688(void)
+void fn_8037F688(void *p, f32 val)
 {
-    nofralloc
-    stfs f1, 0x50(r3)
-    blr
+    *(f32 *)((u8 *)p + 0x50) = val;
 }
 
 asm void fn_8037F690(void)

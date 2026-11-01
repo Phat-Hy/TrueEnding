@@ -51,7 +51,7 @@ u32 fn_800A72F0(void);
 void fn_800A72F8(void);
 void fn_800A7314(void);
 u32 fn_800A7354(void);
-void fn_800A735C(void);
+f32 fn_800A735C(void *p);
 void fn_800A7364(void);
 void fn_800A73A4(void);
 void fn_800A787C(void);
@@ -644,11 +644,9 @@ u32 fn_800A7354(void)
     return 1;
 }
 
-asm void fn_800A735C(void)
+f32 fn_800A735C(void *p)
 {
-    nofralloc
-    lfs f1, 0x4(r3)
-    blr
+    return *(f32 *)((u8 *)p + 4);
 }
 
 asm void fn_800A7364(void)

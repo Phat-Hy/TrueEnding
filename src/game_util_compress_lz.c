@@ -109,7 +109,7 @@ void fn_80589AF8(void);
 void fn_80589DE4(void);
 void fn_8058A0F4(void);
 void fn_8058A394(void);
-void fn_8058A3A8(void);
+u32 fn_8058A3A8(void);
 void fn_8058A3B0(void);
 void fn_8058AAC0(void);
 void fn_8058ABF8(void);
@@ -1094,11 +1094,9 @@ asm void fn_8058A394(void)
     blr
 }
 
-asm void fn_8058A3A8(void)
+u32 fn_8058A3A8(void)
 {
-    nofralloc
-    li r3, 0x3
-    blr
+    return 3;
 }
 
 asm void fn_8058A3B0(void)

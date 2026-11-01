@@ -215,7 +215,7 @@ void snd_findSoundNodeByName(void);
 void fn_80049C3C(void);
 void fn_80049CDC(void);
 void fn_80049D74(void);
-void fn_80049E3C(void);
+u32 fn_80049E3C(void);
 void fn_80049E44(void);
 void fn_80049E54(void);
 void fn_8004A03C(void);
@@ -4730,11 +4730,9 @@ lbl_fn_80049D74_00003C2C:
     blr
 }
 
-asm void fn_80049E3C(void)
+u32 fn_80049E3C(void)
 {
-    nofralloc
-    li r3, 0x1
-    blr
+    return 1;
 }
 
 asm void fn_80049E44(void)

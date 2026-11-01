@@ -69,7 +69,7 @@ void fn_8048A264(void);
 void fn_8048A290(void);
 void fn_8048A2BC(void);
 void fn_8048A350(void);
-void fn_8048A3A0(void);
+u32 fn_8048A3A0(void *p);
 void fn_8048A3A8(void);
 void fn_8048A584(void);
 void fn_8048A968(void);
@@ -1343,11 +1343,9 @@ lbl_fn_8048A350_00001104:
     blr
 }
 
-asm void fn_8048A3A0(void)
+u32 fn_8048A3A0(void *p)
 {
-    nofralloc
-    lwz r3, 0x4(r3)
-    blr
+    return *(u32 *)((u8 *)p + 4);
 }
 
 asm void fn_8048A3A8(void)

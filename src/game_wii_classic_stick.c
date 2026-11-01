@@ -91,7 +91,7 @@ void fn_8055F040(void);
 void fn_8055F154(void);
 void fn_8055F234(void);
 void fn_8055F328(void);
-void fn_8055F46C(void);
+u32 fn_8055F46C(void);
 void fn_8055F474(void);
 void fn_8055F690(void);
 void fn_8055FD3C(void);
@@ -427,11 +427,9 @@ lbl_fn_8055F328_00000410:
     blr
 }
 
-asm void fn_8055F46C(void)
+u32 fn_8055F46C(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_8055F474(void)

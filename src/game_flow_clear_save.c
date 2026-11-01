@@ -143,7 +143,7 @@ void fn_804ED76C(void);
 void fn_804EDB10(void);
 void fn_804EDCD0(void);
 u32 fn_804EE034(void *p);
-void fn_804EE03C(void);
+void fn_804EE03C(void *p, u16 val);
 void fn_804EE044(void);
 void fn_804EE4E4(void);
 void fn_804EE4E8(void);
@@ -802,11 +802,9 @@ u32 fn_804EE034(void *p)
     return *(u32 *)((u8 *)p + 0x4fc);
 }
 
-asm void fn_804EE03C(void)
+void fn_804EE03C(void *p, u16 val)
 {
-    nofralloc
-    sth r4, 0x50a(r3)
-    blr
+    *(u16 *)((u8 *)p + 0x50a) = val;
 }
 
 asm void fn_804EE044(void)

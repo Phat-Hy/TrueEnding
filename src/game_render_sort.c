@@ -78,7 +78,7 @@ void fn_802A7964(void);
 void fn_802A7970(void);
 void fn_802A7F9C(void);
 void fn_802A807C(void);
-void fn_802A8140(void);
+u32 fn_802A8140(void);
 void fn_802A8148(void);
 void fn_802A820C(void);
 void fn_802A8718(void);
@@ -972,11 +972,9 @@ lbl_fn_802A807C_00000C84:
     blr
 }
 
-asm void fn_802A8140(void)
+u32 fn_802A8140(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_802A8148(void)

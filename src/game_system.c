@@ -108,7 +108,7 @@ void fn_8000E5D0(void);
 void fn_8000E6B0(void);
 void fn_8000E7B8(void);
 void fn_8000E820(void);
-void fn_8000EB84(void);
+u32 fn_8000EB84(void *p);
 void sys_copyString(void);
 void fn_8000EC88(void);
 void sys_calcBufferOffset(void);
@@ -841,11 +841,9 @@ lbl_fn_8000E820_000009E4:
     blr
 }
 
-asm void fn_8000EB84(void)
+u32 fn_8000EB84(void *p)
 {
-    nofralloc
-    lwz r3, 0x4(r3)
-    blr
+    return *(u32 *)((u8 *)p + 4);
 }
 
 asm void sys_copyString(void)

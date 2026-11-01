@@ -122,7 +122,7 @@ extern u32 lbl_80885A64;
 /* Function declarations */
 void fn_803829C0(void);
 void fn_803829D4(void);
-void fn_80382A00(void);
+u32 fn_80382A00(void *p);
 void fn_80382A08(void);
 void fn_80382A1C(void);
 void fn_803830A0(void);
@@ -160,11 +160,9 @@ lbl_fn_803829D4_00000038:
     blr
 }
 
-asm void fn_80382A00(void)
+u32 fn_80382A00(void *p)
 {
-    nofralloc
-    lwz r3, 0x58c(r3)
-    blr
+    return *(u32 *)((u8 *)p + 0x58c);
 }
 
 asm void fn_80382A08(void)

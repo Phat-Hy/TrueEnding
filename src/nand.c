@@ -70,7 +70,7 @@ void fn_8061F270(void);
 void fn_8061F2F0(void);
 void fn_8061F360(void);
 void fn_8061F3D0(void);
-void msg_setStringPointer(void);
+void msg_setStringPointer(void *p, void *val);
 const char* msg_getStringPointer(const void* wrapper);
 
 asm void fn_8061E130(void)
@@ -1476,11 +1476,9 @@ lbl_fn_8061F3D0_00001304:
     blr
 }
 
-asm void msg_setStringPointer(void)
+void msg_setStringPointer(void *p, void *val)
 {
-    nofralloc
-    stw r4, 0x0(r3)
-    blr
+    *(void **)p = val;
 }
 
 const char* msg_getStringPointer(const void* wrapper)

@@ -104,7 +104,7 @@ void fn_80227D2C(void);
 void fn_80227F78(void);
 void fn_80227F98(void);
 void fn_80227FA8(void);
-void fn_80227FB8(void);
+u32 fn_80227FB8(void *p);
 void fn_80227FC0(void);
 void fn_8022808C(void);
 void fn_80228094(void);
@@ -959,11 +959,9 @@ asm void fn_80227FA8(void)
     bctr
 }
 
-asm void fn_80227FB8(void)
+u32 fn_80227FB8(void *p)
 {
-    nofralloc
-    lwz r3, 0x0(r3)
-    blr
+    return *(u32 *)p;
 }
 
 asm void fn_80227FC0(void)

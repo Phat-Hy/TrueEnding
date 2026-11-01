@@ -40,7 +40,7 @@ extern u32 lbl_80882FFC;
 /* Function declarations */
 void fn_8022051C(void);
 void fn_80220620(void);
-void fn_80220640(void);
+u32 fn_80220640(void *p);
 void fn_80220648(void);
 void fn_80220660(void);
 void fn_80220AE4(void);
@@ -52,7 +52,7 @@ void fn_802219CC(void);
 void fn_80221CAC(void);
 void fn_80221CBC(void);
 void fn_80221CF8(void);
-void fn_80221E00(void);
+u32 fn_80221E00(void *p);
 void fn_80221E08(void);
 
 asm void fn_8022051C(void)
@@ -144,11 +144,9 @@ asm void fn_80220620(void)
     blr
 }
 
-asm void fn_80220640(void)
+u32 fn_80220640(void *p)
 {
-    nofralloc
-    lwz r3, 0x4(r3)
-    blr
+    return *(u32 *)((u8 *)p + 4);
 }
 
 asm void fn_80220648(void)
@@ -1892,11 +1890,9 @@ lbl_fn_80221CF8_000018C8:
     blr
 }
 
-asm void fn_80221E00(void)
+u32 fn_80221E00(void *p)
 {
-    nofralloc
-    lwz r3, 0xc(r3)
-    blr
+    return *(u32 *)((u8 *)p + 0xc);
 }
 
 asm void fn_80221E08(void)

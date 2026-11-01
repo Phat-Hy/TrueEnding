@@ -116,7 +116,7 @@ void fn_801CBAEC(void);
 void fn_801CBB34(void);
 void fn_801CBE84(void);
 void fn_801CBEB8(void);
-void fn_801CBFE4(void);
+u32 fn_801CBFE4(void *p);
 void fn_801CBFEC(void);
 void fn_801CC02C(void);
 void fn_801CC06C(void);
@@ -1630,11 +1630,9 @@ lbl_fn_801CBEB8_000014D8:
     blr
 }
 
-asm void fn_801CBFE4(void)
+u32 fn_801CBFE4(void *p)
 {
-    nofralloc
-    lwz r3, 0x30(r3)
-    blr
+    return *(u32 *)((u8 *)p + 0x30);
 }
 
 asm void fn_801CBFEC(void)

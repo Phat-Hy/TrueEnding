@@ -52,7 +52,7 @@ void fn_80575F70(void);
 void fn_80575FD0(void);
 void fn_80576034(void);
 void fn_8057625C(void);
-void fn_805763FC(void);
+u32 fn_805763FC(void);
 void fn_80576404(void);
 void fn_8057666C(void);
 void fn_805767D8(void);
@@ -417,11 +417,9 @@ lbl_fn_8057625C_00000468:
     blr
 }
 
-asm void fn_805763FC(void)
+u32 fn_805763FC(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_80576404(void)

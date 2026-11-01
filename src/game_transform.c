@@ -47,7 +47,7 @@ extern u32 lbl_8088153C;
 void fn_800FBE70(void);
 void fn_800FC1D0(void);
 void fn_800FC410(void);
-void fn_800FCD1C(void);
+u32 fn_800FCD1C(void);
 void fn_800FCD24(void);
 
 asm void fn_800FBE70(void)
@@ -1060,11 +1060,9 @@ lbl_fn_800FC410_00000E7C:
     blr
 }
 
-asm void fn_800FCD1C(void)
+u32 fn_800FCD1C(void)
 {
-    nofralloc
-    li r3, 0x1
-    blr
+    return 1;
 }
 
 asm void fn_800FCD24(void)

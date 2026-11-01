@@ -84,7 +84,7 @@ extern u32 lbl_8088139C;
 
 /* Function declarations */
 void fn_800E8FA4(void);
-void fn_800E8FAC(void);
+u32 fn_800E8FAC(void);
 void fn_800E8FB4(void);
 void fn_800E8FB8(void);
 void fn_800E9110(void);
@@ -98,11 +98,9 @@ asm void fn_800E8FA4(void)
     blr
 }
 
-asm void fn_800E8FAC(void)
+u32 fn_800E8FAC(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 void fn_800E8FB4(void) {

@@ -136,7 +136,7 @@ void fn_80363D38(void);
 void dvd_renderFatalErrorScreen(void);
 void dvd_initFatalErrorScreen(void);
 void fn_80364BE8(void);
-void fn_80364DAC(void);
+u32 fn_80364DAC(void *p);
 void fn_80364DB4(void);
 void fn_80364E7C(void);
 void fn_8036503C(void);
@@ -1687,11 +1687,9 @@ lbl_fn_80364BE8_0000149C:
     blr
 }
 
-asm void fn_80364DAC(void)
+u32 fn_80364DAC(void *p)
 {
-    nofralloc
-    lwz r3, 0x0(r3)
-    blr
+    return *(u32 *)p;
 }
 
 asm void fn_80364DB4(void)

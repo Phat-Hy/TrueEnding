@@ -96,7 +96,7 @@ void fn_801D80B4(void);
 void fn_801D80BC(void);
 void fn_801D8560(void);
 void fn_801D8C90(void);
-void fn_801D8CAC(void);
+u32 fn_801D8CAC(void *p);
 void fn_801D8CB4(void);
 
 asm void fn_801D7354(void)
@@ -1883,11 +1883,9 @@ asm void fn_801D8C90(void)
     blr
 }
 
-asm void fn_801D8CAC(void)
+u32 fn_801D8CAC(void *p)
 {
-    nofralloc
-    lwz r3, 0x4(r3)
-    blr
+    return *(u32 *)((u8 *)p + 4);
 }
 
 asm void fn_801D8CB4(void)

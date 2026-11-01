@@ -70,7 +70,7 @@ void nandGenerateAbsPath(void);
 void fn_80621610(void);
 void NANDInit(void);
 void fn_80621800(void);
-void fn_806218D0(void);
+void fn_806218D0(void *p1, u32 *p2);
 void fn_806218E0(void);
 void fn_80621B80(void);
 void fn_80621BD0(void);
@@ -644,12 +644,9 @@ lbl_fn_80621800_00000764:
     blr
 }
 
-asm void fn_806218D0(void)
+void fn_806218D0(void *p1, u32 *p2)
 {
-    nofralloc
-    li r0, 0x1
-    stw r0, 0x0(r4)
-    blr
+    *p2 = 1;
 }
 
 asm void fn_806218E0(void)
