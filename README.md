@@ -183,10 +183,10 @@ renderer is mid-migration and that is the project's active axis.
 | | state |
 | :--- | :--- |
 | Sequence | `Boot → Stra → Titl → Game`, deterministic |
-| Default renderer | the hand-rolled D3D11 GX layer (frozen; replaced at P4) |
-| Renderer target | **Aurora**, already running *inside* the runner, offscreen |
-| Gate | `pwsh tools/invariant.ps1` — **PASS on attempt 1**: handover frame **1680**, guest 2800 `B4646917…`, guest 3500 `22B1CE31…`, save 1 348 992 / 29 344 |
-| Build | green — 459 chunks / 471 objects, `python tools/recomp_harness.py build-runner` |
+| Default renderer | **Aurora** (P4 landed) — the hand-rolled D3D11 GX layer still draws every frame as the per-frame fallback, and `TLS_LAYER=1` forces it |
+| Renderer target | **Aurora**, promoted: every presented frame is its 640×448 EFB readback (3 086 / 3 086 blitted, 0 failures) |
+| Gate | `pwsh tools/invariant.ps1` — **PASS on attempt 1**: handover frame **1680**, guest 2800 `54CB46BD…` (38.20 / 0.00 %), guest 3500 `A81F3E35…` (89.89 / 1.85 %), save 1 348 992 / 29 344 |
+| Build | green — 459 chunks / 472 objects, `python tools/recomp_harness.py build-runner` |
 
 ### What the layer work established, with numbers
 Every item below is a measurement recorded in the dossier, not a plan.
