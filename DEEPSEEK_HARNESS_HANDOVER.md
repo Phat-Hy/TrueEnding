@@ -2,7 +2,48 @@
 
 ## NEXT SESSION — START HERE
 
-> **§5c.46 AP-BM + its two addenda (the last section): AP-BL IS FALSIFIED AS THE CAUSE OF THE COMPOSITE
+> **§5c.46 AP-BN (THE LAST SECTION) IS THE DECISION, AND IT IS MADE: AURORA'S COMPOSITE IS THE FAITHFUL
+> ONE. THE COMPOSITE EXIT CRITERION IS RETIRED — DO NOT CHASE `43.16 / 1.123`.** The last named measurement
+> was spent, exactly as ordered: `TLS_BATCH_CUTOFF=76` against `=77`, two runs, same present (guest 2801 =
+> present 2865). With batch **b76** (draw 5 809) absent the layer's frame is **42.59 / 3.211**; with it present
+> **58.89 / 0.383**, and the difference covers **100 % of the rows and columns** (mean |d| 33.29, 96.32 % > 8) —
+> so b76 is a full-screen replace in the layer too, not a scissor artifact. The layer's *own* 640x448 copy chain
+> says what it does: its snapshot at batch 74 is **42.15 / 8.290** (bit-identical to the uncut run's copy 8 at
+> cmd 21 669), the input to b76 is **43.96 / 5.354**, and the output is **56.02 / 0.675** — the same two decimals
+> as the *uncut* reference's post-b76 copy at cmd 21 986, which is the control that the cut reproduces the
+> reference. **Aurora, fed the same guest bytes, leaves 56.68 / 13.190 unchanged across that draw** (cmd 21 669
+> = cmd 21 979): it restores the snapshot, which is what a 1:1 full-screen replace of a 640x448 copy into a
+> 640x448 EFB must do. The layer's output is **7.9x smoother than its own input** and smoother than both copy
+> textures the pass binds at the size it binds them (640x448 `0x905C3000`, 320x224 `0x9038D1C0`), so the layer's
+> number is the defect, not the target. **What that retires, in
+> writing: the "move the probe from 86.98 / 20.889 towards 43.16 / 1.123" criterion, the AP-BJ addendum's "the
+> layer applies the guest's blur, aurora does not" reading, and any reference re-recorded against the layer's
+> composite.** Not re-opened: the copy chain (four hypotheses excluded; AP-BM's keying patch stays in as `0007`
+> and is inert). Not claimed: byte equality with Dolphin (the field composite has no Dolphin frame — the
+> tiebreak is the pass-identity argument plus the title plate's Dolphin pair, 203.98 vs aurora 205.62 vs layer
+> 90.43).
+>
+> **THE BOARD IS NOW THE MIGRATION'S OWN CRITERIA: P1 equality → P3 → P4.** P1: aurora-in-runner equals
+> aurora-in-harness on one capture (the live path already reproduces the harness probe to the last digit; the open
+> items are the readback lifetime and the exit-time join). P3: the five register classes moved without a
+> re-derivation. P4: re-record **both** gate references against the aurora renderer, deliberately twice each, with
+> the layer reachable behind `TLS_LAYER=1` and reproducing today's `B4646917…` / `22B1CE31…` exactly. The only
+> field-level question left inside the geometry half is AP-BJ's water/foreground difference, and it is retired by
+> P4 rather than fixed in the layer.
+>
+> **State after this session.** Track A was merged again as ordered and had moved far: `origin/track-a` is at
+> **`ccadf1e` (Batch 44 + 25 `blr` stubs)**, 19 commits past `4f2e3cf`; the merge is `01f3c6a`, **761 files**,
+> clean, and the rebuilt runner is **byte-identical** (`D7C3D48…`, 472 objects, **0 chunks recompiled**) — so the
+> gate references transfer. **Gate: PASS attempt 1 on an idle host with nothing else running** (`logs_ap/gate.log`,
+> handover **1 680**, content `B4646917…` luma 36.51, popup `22B1CE31…` luma 46.18, save **1 348 992 / 29 344**).
+> `git diff --stat origin/track-a..HEAD -- src/` is empty: **0 changes to `src/` by Track B.** New instrument:
+> `tools/aurora_spike/shotdiff.py`. Re-fetch Track A before the next session — it commits several times an hour.
+>
+> **The AP-BM paragraphs below are the measurement history AP-BN closes** (they are kept because they carry the
+> per-draw and per-copy numbers, and because AP-BM's retraction is what stopped a wrong direction twice). Read them
+> only if a number in AP-BN needs its provenance.
+>
+> **§5c.46 AP-BM + its two addenda (previous session's measurement, now closed by AP-BN): AP-BL IS FALSIFIED AS THE CAUSE OF THE COMPOSITE
 > DIFFERENCE, AND SO IS EVERY STATE-LEVEL HYPOTHESIS AFTER IT.** The keying was implemented exactly as AP-BL
 > prescribed (patch `0007-copy-texture-key.patch`) and the exit-criterion replay is **byte-identical** to the pre-fix
 > binary (`7E79ACE9…`, luma 86.98 / gradient 20.889 both ways); the new `TLS_AURORA_COPYLOG` counts 15
@@ -16703,3 +16744,55 @@ The intermediate moves by 0.07 luma and the composite is unchanged, so XF texgen
 **4. What is left, stated exactly.** Every input the two renderers compare — the copies and their content, the sampled sizes, the texture identities, the upload freshness, the copy-map key, the bound maps, the TEV stage programming, the konst selection, the blend, the scissor, the NDC geometry, the generated coordinates — has been measured and agrees (AP-BK, AP-BM, this addendum). The two implementations therefore disagree in the **fragment evaluation itself**: the same three-stage combiner over the same four textures produces the sharp composite in aurora and a full-screen blur in the layer. That is exactly the class AGENTS.md §1 names (multi-stage TEV / konst / indirect / raster channel - "none of it is game-specific, every one is solved in Aurora"), and it is the class the migration retires. There is no aurora-side change to make here: aurora's chain does what the guest asked, which is why the exit criterion's direction (move aurora towards the layer's 43.16 / 1.123) is the wrong direction, and why this session does not chase it.
 
 **5. The instruments that got here, for the next session.** `--probe-at-cmd N` (aurora's EFB at any command, one run), `TLS_TEV_UNIFORM=<batch>[,<frame>]` (the layer's uniform packet per batch), `TLS_TEV_PROBE=<guest frame>` (the layer's per-batch state), `TLS_AURORA_DUMP_DRAW=<global draw index>` (aurora's per-draw state; global = sum of the earlier frames' draws + the frame-relative index), `TLS_EFB_CHAIN_GUEST`/`_DUMP` (the layer's copy content as PPMs) and `tools/aurora_spike/probe_metrics.py` (luma + gradient of any of them). The one measurement not yet made that could still separate "wrong input" from "wrong arithmetic" inside the layer is TLS_BATCH_CUTOFF=76|77 - draw only the first N batches of the frame and screenshot; the difference between the two screenshots is exactly what b76 paints.
+
+---
+
+### 5c.46 AP-BN. THE DECISION, AND THE LAST MEASUREMENT IS SPENT: **b76 ISOLATED IN THE LAYER PAINTS THE WHOLE SCREEN AND TURNS ITS OWN SHARP 640x448 SNAPSHOT (43.96 / 5.354) INTO A NEAR-UNIFORM FIELD (56.02 / 0.675)**, WHERE AURORA'S SAME DRAW — fed the same guest bytes — **RESTORES ITS SNAPSHOT EXACTLY (56.68 / 13.190 before and after)**. So aurora's composite is accepted as the faithful one, AP-BL/AP-BM's exit criterion is **RETIRED IN WRITING** (§5 below), and the board moves to the migration's own criteria (P1 equality → P3 → P4). §1-4 are the measurement that was named; §5 is the decision and what it retires; §6 states exactly what is left unexplained and where it dies.
+
+**1. The gate, on an idle host with nothing else running.** `logs_ap/gate.log` (+ `.a1`, `.summary.tsv`): **PASS attempt 1**, handover **1 680**, content `B4646917A98EC7CE3036B583E7A8479D416F47B08FB484BE2AA316C911FE56B1` luma 36.51, popup `22B1CE31D81A75BA6E0E18A2A68DB2F748F4BDCA83A05D0418525D85FCD7BBEE` luma 46.18, save **1 348 992 / 29 344**. Attempt 1 of 3, printed by the loop that would have retried, so this is not a retry that happened to pass. Run before any other command in this session and with no other process on the machine.
+
+**2. Track A first, as ordered, and it had moved a long way.** `git fetch origin` moved `origin/track-a` from `4f2e3cf` (Batch 35) to **`ccadf1e` (Batch 44 + 25 `blr` stubs)**, 19 commits past the merge base; merged clean as `01f3c6a`, **761 files changed, 16 001 insertions / 16 628 deletions** (all of it `src/`, `config/symbols.txt` and Track A's own docs; `tools/patch_ldscript.py` came with it). The rebuilt runner is **byte-identical to the pre-merge binary** — `D7C3D48254EAF7A751B3A6267C31953D124C7130A664EC2F240F95DB10300ABA`, 472 objects, **0 chunks recompiled** (459 cached) — so every gate reference transfers unchanged and this session's own gate is the merged runner's. `git diff --stat origin/track-a..HEAD -- src/` is **empty**: Track B added nothing to `src/`.
+
+**3. The named measurement: `TLS_BATCH_CUTOFF=76` against `=77`, two runs** (`logs_ap/run_cutoff.ps1`, one cut per run, identical flags otherwise: 2 812 frames, the gate's `TLS_INPUT_SCRIPT`, `TLS_SHOT_FRAMES=2865` = present of guest 2801, `TLS_EFB_CHAIN_GUEST=2801`). The cutoff draws batches `0..75` or `0..76` of **every** frame, so the two screenshots of the *same* present differ by exactly what batch **b76** (capture draw **5 809**, the first full-screen replace pass) paints.
+
+| guest 2801 = present 2865 | luma | gradient | what it is |
+|---|---|---|---|
+| **cut 76** (b76 absent) | **42.59** | **3.211** | sharp cave: rock texture on the right, a blurred 320x224 panel upper-left (b74/b75's own paint), black water below |
+| **cut 77** (b76 present) | **58.89** | **0.383** | one smooth field over the whole frame — the composite blur (`logs_ap/bn_cut77.png`) |
+| the uncut reference (`logs_ap/bk_layer_2801.ppm`) | 43.16 | 1.123 | the frame the retired criterion wanted aurora to reach |
+
+`tools/aurora_spike/shotdiff.py` (new, this session's only code) differences them: **mean \|d\| on luma 33.29**, **96.32 %** of pixels above 8, **60.64 %** above 32, and the difference covers **every one of the 720 rows and 1 280 columns** (its 4x4 grid runs 20.60..49.78, largest bottom-right). So b76 is a **full-screen replace pass in the layer too** — not a quadrant, not a scissor artifact, which is the thing the cutoff was worth spending to check.
+
+**4. What the layer's own copy chain says across that one batch, and the two controls that make it evidence.** From the per-copy dumps of the same frame, destination `0x905C3000` (the 640x448 snapshot b76 binds as map0):
+
+| run | layer copy | luma | gradient | reading |
+|---|---|---|---|---|
+| cut 76 | #10 at batch 74 (`0x905C3000` 640x448) | 42.15 | 8.290 | **identical** to AP-BM's uncut copy 8 at cmd 21 669 (42.15 / 8.290) |
+| cut 76 | #14, end of frame (nothing drew b76/b77) | 43.96 | 5.354 | the sharp input b76 receives |
+| cut 77 | #14 at batch 77 (`0x905C3000` 640x448) | **56.02** | **0.675** | **identical** to AP-BM's uncut copy 12 at cmd 21 986 (56.02 / 0.675) |
+
+*Control 1 — the cut does not disturb the scene.* Copies #0..#13 are **bit-identical between the two runs** down to the integer destination averages (`27,32,32` / `28,33,33` / `25,30,30` / `52,58,59` / `30,34,34` / `60,60,54` / `12,15,17` / `11,10,7` / `6,9,9` / `39,43,40` / `39,43,40` / `59,63,61` / `70,68,60`), and the copy that straddles the cut (#13 at batch 76, serviced before the break) measures **68.19 / 3.673 in both runs**. So the difference begins at b76 and nowhere earlier.
+*Control 2 — the cut reproduces the reference.* Cut 77's post-b76 copy is `56.02 / 0.675`, the same two decimals as the uncut run's AP-BM copy 12; both runs reached handover **1 680** and created the same save (**1 348 992 / 29 344**), i.e. they ran the gate's scene, not a drifted one.
+
+**5. THE DECISION — (A): aurora's composite is the faithful one, and the criterion "move the probe from 86.98 / 20.889 towards the layer's 43.16 / 1.123" is RETIRED IN WRITING.** The argument is not "aurora is the newer renderer"; it is that draw 5 809 is a **1:1 full-screen replace of a 640x448 snapshot into a 640x448 EFB** — the state table has it at full-screen scissor, blend off (s=4 d=1 = ONE/ZERO), three TEV stages over maps `0x905C3000` / `0x90536FE0` / `0x9038D1C0` / `0x90419BE0`, texcoords 0/2/3, and the vertex data carries TEX0 — and **both renderers were fed the same guest bytes for it**:
+
+* aurora's output is the identity: EFB at cmd 21 669 = 56.68 / 13.190 and at cmd 21 979 (after 5 809) = **56.68 / 13.190**, the same picture restored (AP-BM §4).
+* the layer's output is **7.9x smoother than its own input and 12 luma brighter** (43.96 / 5.354 → 56.02 / 0.675), and it is smoother than **both copy textures the pass binds, at the sizes it binds them** — 640x448 `0x905C3000` (8.290 at that copy, 5.354 entering the pass) and 320x224 `0x9038D1C0` (3.673). No sample of a bound map at a bound size explains 0.675: the snapshot it binds is **7.9x** above it, the 320x224 copy **5.4x** above it, and even a bilinear upscale of that copy, which roughly halves its per-pixel gradient to ≈1.84, is still **2.7x** above. (The pass's other two maps, 640x448 `0x90536FE0` fmt 3 and the 256x256 I8 mask `0x90419BE0`, are not dumped here and are not part of the claim.)
+
+A pass that restores a same-size snapshot cannot blur it. Aurora does not; the layer does. **Therefore the layer's number is not a reference, and the criterion's direction was inverted: it asked for the correct renderer to be taught the layer's defect, two passes upstream of the number it named.** The AP-AZ tiebreak that settled the same question for the title plate (the one composite whose *third-party* reference we have) points the same way: Dolphin's own frame is **203.98 / 193.7 / 127.7**, aurora **205.62 / 220 / 131.1**, the layer **90.43 / 255 / 0** — the layer is the outlier by 2.2x, aurora is within 0.8 % of Dolphin.
+
+**6. What the layer does differently — the honest residue, and where it dies.** Everything a state dump can compare agrees (AP-BK, AP-BM, its two addenda, and §3-4 above): copy content, sampled sizes, texture identity, upload freshness, copy-map key (patch `0007`, measured inert), bound maps, the three stages with konst 16/20/24, blend, scissor, NDC geometry, XF texgen for coords 2..3. The measurement added here is that with **one batch toggled and nothing else changing**, the layer's own pass invents a field smoother than any input it has. That is the fragment-evaluation class AGENTS.md §1 names — **not** the copy chain (four hypotheses already excluded, and none of them is re-opened here). **Not localised, and deliberately not chased:** whether the layer's shader fetches map0 at the wrong effective resolution or the three-stage selection drops st0's contribution to a later map's upscale. Both are layer-only, both are retired by the migration, and no aurora-side change is implied either way. **What is retired with the criterion:** the "composite half is a defect to be fixed" line, the AP-BJ addendum's "the layer applies the guest's full-screen blur composite and aurora does not" reading (the blur is the layer's pass, and the guest's own 1:1 restore proves it), and any future re-recording of a reference against the layer's `43.16 / 1.123`.
+
+**7. Where the board goes.** Not to another composite measurement — to the migration's own criteria, in order: **P1**'s equality (aurora-in-runner equals aurora-in-harness on one capture; the live path already reproduces the harness probe to the last digit, AP-BM run log #8, and AP-BY's open items are the readback lifetime and the exit-time join), then **P3** (the five register classes moved without a re-derivation), then **P4** (re-record both gate references against the aurora renderer deliberately, twice each, with the layer reachable behind `TLS_LAYER=1` and reproducing today's `B4646917…` / `22B1CE31…` exactly). The AP-BJ addendum's *water/foreground* difference inside the geometry half is now the only named field-level question left in the layer, and it is also retired rather than fixed by P4.
+
+**8. What this does not claim.** Not byte equality with Dolphin — the field composite has no Dolphin frame, so the field-level tiebreak is the pass-identity argument above plus the title plate's Dolphin pair; the strongest claim available is that aurora is faithful *on this pass* and the layer is not, which is what the decision needs. Not that the layer's whole composite chain is one bug: b77 (`5 810`) moves the frame again (aurora 111.87 / 24.491 at cmd 22 059) and nothing here measures it. And not that the cut harness is free of the documented trap — cutting the loop leaves the guest's end-of-frame EFB copies unserviced (`gfx_d3d11.c`, handover 5c.43 F); it does not matter here because **both** runs carry it, the pre-b76 chain is bit-identical between them, and the post-b76 state equals the uncut reference's to the second decimal.
+
+**9. Changes and run log.** `tools/aurora_spike/shotdiff.py` (new: mean RGB/luma/gradient of two shots, the difference's coverage and 4x4 map, and each against a third image), this file. **No change to the port's behaviour**: no `recomp/` edit, no aurora change, no new patch, `src/` untouched by Track B, runner byte-identical (`D7C3D48…`) after the Track A merge, build green (472 objects, 0 chunks recompiled).
+
+| # | what | result |
+|---|---|---|
+| 1 | `git fetch origin`; merge `origin/track-a` (`4f2e3cf` → `ccadf1e`, Batch 44 + 25 `blr` stubs) | clean, 761 files; rebuilt runner **byte-identical** `D7C3D48…`, 472 objects, 0 chunks recompiled |
+| 2 | gate, idle host, nothing else running | **PASS attempt 1**: handover 1 680, content `B4646917…` (luma 36.51), popup `22B1CE31…` (luma 46.18), save 1 348 992 / 29 344 (`logs_ap/gate.log.a1`) |
+| 3 | 2 812 frames, `TLS_BATCH_CUTOFF=76`, cave window + `TLS_INPUT_SCRIPT`, shot at present 2 865, chain dump | shot **42.59 / 3.211**; copies #0..#13 identical to the uncut run; #10 `0x905C3000` = 42.15 / 8.290; handover 1 680, save created (`logs_ap/bn_cut76.log`) |
+| 4 | same, `TLS_BATCH_CUTOFF=77` | shot **58.89 / 0.383**; #14 = **56.02 / 0.675** = the uncut reference exactly; #13 bit-identical to run 3 (`logs_ap/bn_cut77.log`) |
+| 5 | `tools/aurora_spike/shotdiff.py` on (3) vs (4) vs the uncut reference | mean \|d\| 33.29, 96.32 % > 8, 60.64 % > 32, **100 % of rows and columns** (`logs_ap/bn_cut77_guest2801.ppm.diff.ppm`, `logs_ap/bn_b76_diff.png`) |
