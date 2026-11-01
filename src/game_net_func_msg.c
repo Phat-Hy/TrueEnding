@@ -461,19 +461,19 @@ u32 fn_80500FE0(void);
 u32 fn_80500FE8(void);
 u32 fn_80500FF0(void);
 u32 fn_80500FF8(void);
-void fn_80501000(void);
-void fn_80501008(void);
-void fn_80501010(void);
-void fn_80501018(void);
-void fn_80501020(void);
-void fn_80501028(void);
-void fn_80501030(void);
-void fn_80501038(void);
-void fn_80501040(void);
-void fn_80501048(void);
-void fn_80501050(void);
-void fn_80501058(void);
-void fn_80501060(void);
+u32 fn_80501000(void);
+u32 fn_80501008(void);
+u32 fn_80501010(void);
+u32 fn_80501018(void);
+u32 fn_80501020(void);
+u32 fn_80501028(void);
+u32 fn_80501030(void);
+u32 fn_80501038(void);
+u32 fn_80501040(void);
+u32 fn_80501048(void);
+u32 fn_80501050(void);
+u32 fn_80501058(void);
+u32 fn_80501060(void);
 void fn_80501068(void);
 void fn_805010C4(void);
 void fn_805011D0(void);
@@ -2297,95 +2297,69 @@ u32 fn_80500FF8(void)
     return 0x35;
 }
 
-asm void fn_80501000(void)
+u32 fn_80501000(void)
 {
-    nofralloc
-    li r3, 0x4
-    blr
+    return 0x4;
 }
 
-asm void fn_80501008(void)
+u32 fn_80501008(void)
 {
-    nofralloc
-    li r3, 0x1
-    blr
+    return 0x1;
 }
 
-asm void fn_80501010(void)
+u32 fn_80501010(void)
 {
-    nofralloc
-    li r3, 0xa
-    blr
+    return 0xa;
 }
 
-asm void fn_80501018(void)
+u32 fn_80501018(void)
 {
-    nofralloc
-    li r3, 0x3
-    blr
+    return 0x3;
 }
 
-asm void fn_80501020(void)
+u32 fn_80501020(void)
 {
-    nofralloc
-    li r3, 0x1
-    blr
+    return 0x1;
 }
 
-asm void fn_80501028(void)
+u32 fn_80501028(void)
 {
-    nofralloc
-    li r3, 0x15
-    blr
+    return 0x15;
 }
 
-asm void fn_80501030(void)
+u32 fn_80501030(void)
 {
-    nofralloc
-    li r3, 0x2
-    blr
+    return 0x2;
 }
 
-asm void fn_80501038(void)
+u32 fn_80501038(void)
 {
-    nofralloc
-    li r3, 0x1
-    blr
+    return 0x1;
 }
 
-asm void fn_80501040(void)
+u32 fn_80501040(void)
 {
-    nofralloc
-    li r3, 0x2c
-    blr
+    return 0x2c;
 }
 
-asm void fn_80501048(void)
+u32 fn_80501048(void)
 {
-    nofralloc
-    li r3, 0x1
-    blr
+    return 0x1;
 }
 
-asm void fn_80501050(void)
+u32 fn_80501050(void)
 {
-    nofralloc
-    li r3, 0x1
-    blr
+    return 0x1;
 }
 
-asm void fn_80501058(void)
+u32 fn_80501058(void)
 {
-    nofralloc
-    li r3, 0x41
-    blr
+    return 0x41;
 }
 
-asm void fn_80501060(void)
+u32 fn_80501060(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0x0;
 }
 
 asm void fn_80501068(void)

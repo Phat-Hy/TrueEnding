@@ -50,17 +50,17 @@ extern u32 lbl_808872B8;
 extern u32 lbl_808872BC;
 
 /* Function declarations */
-void fn_804A9E44(void);
-void fn_804A9E4C(void);
+u32 fn_804A9E44(void *p);
+void fn_804A9E4C(void *p, u32 val);
 void fn_804A9E54(void);
 void fn_804A9E64(void);
 void fn_804A9E74(void);
-void fn_804A9E84(void);
-void fn_804A9E8C(void);
-void fn_804A9E94(void);
-void fn_804A9E9C(void);
-void fn_804A9EA4(void);
-void fn_804A9EAC(void);
+u32 fn_804A9E84(void *p);
+u32 fn_804A9E8C(void *p);
+void fn_804A9E94(void *p, f32 val);
+void fn_804A9E9C(void *p, f32 val);
+void fn_804A9EA4(void *p, f32 val);
+void fn_804A9EAC(void *p, f32 val);
 void fn_804A9EB4(void);
 void fn_804AA490(void);
 void fn_804AABA8(void);
@@ -70,18 +70,14 @@ void fn_804AAFCC(void);
 void fn_804AB060(void);
 void fn_804AB79C(void);
 
-asm void fn_804A9E44(void)
+u32 fn_804A9E44(void *p)
 {
-    nofralloc
-    lwz r3, 0x160c(r3)
-    blr
+    return *(u32 *)((u8 *)p + 0x160c);
 }
 
-asm void fn_804A9E4C(void)
+void fn_804A9E4C(void *p, u32 val)
 {
-    nofralloc
-    stw r4, 0x4(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x4) = val;
 }
 
 asm void fn_804A9E54(void)
@@ -111,46 +107,34 @@ asm void fn_804A9E74(void)
     blr
 }
 
-asm void fn_804A9E84(void)
+u32 fn_804A9E84(void *p)
 {
-    nofralloc
-    lwz r3, 0x3c(r3)
-    blr
+    return *(u32 *)((u8 *)p + 0x3c);
 }
 
-asm void fn_804A9E8C(void)
+u32 fn_804A9E8C(void *p)
 {
-    nofralloc
-    lwz r3, 0x40(r3)
-    blr
+    return *(u32 *)((u8 *)p + 0x40);
 }
 
-asm void fn_804A9E94(void)
+void fn_804A9E94(void *p, f32 val)
 {
-    nofralloc
-    stfs f1, 0x3c(r3)
-    blr
+    *(f32 *)((u8 *)p + 0x3c) = val;
 }
 
-asm void fn_804A9E9C(void)
+void fn_804A9E9C(void *p, f32 val)
 {
-    nofralloc
-    stfs f1, 0x40(r3)
-    blr
+    *(f32 *)((u8 *)p + 0x40) = val;
 }
 
-asm void fn_804A9EA4(void)
+void fn_804A9EA4(void *p, f32 val)
 {
-    nofralloc
-    stfs f1, 0x44(r3)
-    blr
+    *(f32 *)((u8 *)p + 0x44) = val;
 }
 
-asm void fn_804A9EAC(void)
+void fn_804A9EAC(void *p, f32 val)
 {
-    nofralloc
-    stfs f1, 0x48(r3)
-    blr
+    *(f32 *)((u8 *)p + 0x48) = val;
 }
 
 asm void fn_804A9EB4(void)

@@ -95,36 +95,34 @@ extern u32 lbl_80887B14;
 extern u32 lbl_80887B18;
 
 /* Function declarations */
-void fn_8052C0EC(void);
+u32 fn_8052C0EC(void);
 void fn_8052C0F4(void);
 void fn_8052C10C(void);
-void fn_8052C650(void);
-void fn_8052C658(void);
-void fn_8052C660(void);
+u32 fn_8052C650(void *p);
+u32 fn_8052C658(void);
+u32 fn_8052C660(void *p);
 void fn_8052C668(void);
-void fn_8052C670(void);
-void fn_8052C678(void);
+void fn_8052C670(void *p, u32 val);
+void fn_8052C678(void *p);
 void fn_8052C684(void);
 void fn_8052C68C(void);
 void fn_8052C6A8(void);
-void fn_8052C6C4(void);
+void fn_8052C6C4(void *p);
 void fn_8052C6D0(void);
 void fn_8052C960(void);
-void fn_8052C994(void);
+u32 fn_8052C994(void *p);
 void fn_8052C99C(void);
 void fn_8052C9C8(void);
 void fn_8052CA70(void);
-void fn_8052D3CC(void);
+void *fn_8052D3CC(void *p);
 void fn_8052D3D4(void);
 void fn_8052D420(void);
 void fn_8052D46C(void);
 void fn_8052DADC(void);
 
-asm void fn_8052C0EC(void)
+u32 fn_8052C0EC(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_8052C0F4(void)
@@ -503,25 +501,19 @@ lbl_fn_8052C10C_00000520:
     blr
 }
 
-asm void fn_8052C650(void)
+u32 fn_8052C650(void *p)
 {
-    nofralloc
-    lwz r3, 0x10d0(r3)
-    blr
+    return *(u32 *)((u8 *)p + 0x10d0);
 }
 
-asm void fn_8052C658(void)
+u32 fn_8052C658(void)
 {
-    nofralloc
-    lwz r3, lbl_8087F890
-    blr
+    return lbl_8087F890;
 }
 
-asm void fn_8052C660(void)
+u32 fn_8052C660(void *p)
 {
-    nofralloc
-    lwz r3, 0x1424(r3)
-    blr
+    return *(u32 *)((u8 *)p + 0x1424);
 }
 
 asm void fn_8052C668(void)
@@ -531,19 +523,14 @@ asm void fn_8052C668(void)
     b memcpy
 }
 
-asm void fn_8052C670(void)
+void fn_8052C670(void *p, u32 val)
 {
-    nofralloc
-    stw r4, 0x2f0(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x2f0) = val;
 }
 
-asm void fn_8052C678(void)
+void fn_8052C678(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, 0x380(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x380) = 0;
 }
 
 asm void fn_8052C684(void)
@@ -577,12 +564,9 @@ asm void fn_8052C6A8(void)
     b fn_805BF414
 }
 
-asm void fn_8052C6C4(void)
+void fn_8052C6C4(void *p)
 {
-    nofralloc
-    li r0, 0x1
-    stw r0, 0x554(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x554) = 1;
 }
 
 asm void fn_8052C6D0(void)
@@ -774,11 +758,9 @@ lbl_fn_8052C960_00000898:
     blr
 }
 
-asm void fn_8052C994(void)
+u32 fn_8052C994(void *p)
 {
-    nofralloc
-    lwz r3, 0x48(r3)
-    blr
+    return *(u32 *)((u8 *)p + 0x48);
 }
 
 asm void fn_8052C99C(void)
@@ -1454,11 +1436,9 @@ lbl_fn_8052CA70_000012B8:
     blr
 }
 
-asm void fn_8052D3CC(void)
+void *fn_8052D3CC(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x240
-    blr
+    return (u8 *)p + 0x240;
 }
 
 asm void fn_8052D3D4(void)
