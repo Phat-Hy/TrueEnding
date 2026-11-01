@@ -588,16 +588,12 @@ lbl_fn_803ECB84_00000650:
     blr
 }
 
-asm void fn_803ECBCC(void)
+void fn_803ECBCC(void)
 {
-    nofralloc
-    blr
 }
 
-asm void fn_803ECBD0(void)
+void fn_803ECBD0(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_803ECBD4(void)

@@ -590,10 +590,8 @@ lbl_fn_805C38B0_000005F4:
     blr
 }
 
-asm void fn_805C3940(void)
+void fn_805C3940(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_805C3950(void)

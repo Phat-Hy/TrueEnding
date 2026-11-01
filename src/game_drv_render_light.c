@@ -138,10 +138,8 @@ asm void fn_805D2F60(void)
     blr
 }
 
-asm void fn_805D2F70(void)
+void fn_805D2F70(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_805D2F80(void)
@@ -158,10 +156,8 @@ lbl_fn_805D2F80_00000030:
     bctr
 }
 
-asm void fn_805D2FA0(void)
+void fn_805D2FA0(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_805D2FB0(void)
@@ -178,10 +174,8 @@ lbl_fn_805D2FB0_00000060:
     bctr
 }
 
-asm void fn_805D2FD0(void)
+void fn_805D2FD0(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_805D2FE0(void)
@@ -191,10 +185,8 @@ asm void fn_805D2FE0(void)
     blr
 }
 
-asm void fn_805D2FF0(void)
+void fn_805D2FF0(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_805D3000(void)

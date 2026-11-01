@@ -182,16 +182,12 @@ void fn_803EF608(void);
 void fn_803EF64C(void);
 void fn_803EF780(void);
 
-asm void fn_803EDF1C(void)
+void fn_803EDF1C(void)
 {
-    nofralloc
-    blr
 }
 
-asm void fn_803EDF20(void)
+void fn_803EDF20(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_803EDF24(void)
@@ -227,16 +223,12 @@ asm void fn_803EDF5C(void)
     bctr
 }
 
-asm void fn_803EDF6C(void)
+void fn_803EDF6C(void)
 {
-    nofralloc
-    blr
 }
 
-asm void fn_803EDF70(void)
+void fn_803EDF70(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_803EDF74(void)
@@ -550,10 +542,8 @@ lbl_fn_803EE318_00000440:
     blr
 }
 
-asm void fn_803EE370(void)
+void fn_803EE370(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_803EE374(void)
