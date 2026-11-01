@@ -170,11 +170,11 @@ extern u32 lbl_808808AC;
 
 /* Function declarations */
 void fn_800461FC(void);
-void fn_80046200(void);
+u32 fn_80046200(void);
 void fn_80046208(void);
-void fn_8004620C(void);
+u32 fn_8004620C(void);
 void fn_80046214(void);
-void fn_80046218(void);
+u32 fn_80046218(void);
 void fn_80046220(void);
 void fn_80046224(void);
 void sound_updateActiveTasks(void);
@@ -242,55 +242,39 @@ void fn_8004B20C(void);
 void fn_8004B290(void);
 void fn_8004B338(void);
 
-asm void fn_800461FC(void)
+void fn_800461FC(void)
 {
-    nofralloc
-    blr
 }
 
-asm void fn_80046200(void)
+u32 fn_80046200(void)
 {
-    nofralloc
-    li r3, 0x1
-    blr
+    return 1;
 }
 
-asm void fn_80046208(void)
+void fn_80046208(void)
 {
-    nofralloc
-    blr
 }
 
-asm void fn_8004620C(void)
+u32 fn_8004620C(void)
 {
-    nofralloc
-    li r3, 0x2
-    blr
+    return 2;
 }
 
-asm void fn_80046214(void)
+void fn_80046214(void)
 {
-    nofralloc
-    blr
 }
 
-asm void fn_80046218(void)
+u32 fn_80046218(void)
 {
-    nofralloc
-    li r3, 0x2
-    blr
+    return 2;
 }
 
-asm void fn_80046220(void)
+void fn_80046220(void)
 {
-    nofralloc
-    blr
 }
 
-asm void fn_80046224(void)
+void fn_80046224(void)
 {
-    nofralloc
-    blr
 }
 
 asm void sound_updateActiveTasks(void)
@@ -5357,10 +5341,8 @@ lbl_fn_8004A600_00004454:
     blr
 }
 
-asm void fn_8004A660(void)
+void fn_8004A660(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_8004A664(void)

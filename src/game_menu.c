@@ -325,10 +325,8 @@ lbl_fn_80041A80_00000120:
     blr
 }
 
-asm void fn_80041B8C(void)
+void fn_80041B8C(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_80041B90(void)
@@ -1985,10 +1983,8 @@ void menu_dummyCallback(void)
 {
 }
 
-asm void fn_8004312C(void)
+void fn_8004312C(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_80043130(void)
