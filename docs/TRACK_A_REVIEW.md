@@ -77,3 +77,23 @@ Checked against the revision (`git grep … origin/track-a`), not the working tr
 **One hygiene ask, not a blocker.** The new prototype is `BOOL atn_TaskBase_isValid(atn_TaskBase* task);` in `src/game_depth.c`, but a caller still declares `extern void atn_TaskBase_isValid(void);` (`src/game_bloom.c:6`). C does not diagnose that across translation units, and the caller is an asm block that sets `r3` itself, so it links and matches — but the next person who converts that caller to C will call it with no argument. Worth a sweep: every remaining `extern` for a renamed/decompiled function should carry the real prototype.
 
 **What the log's structure gets right, and one thing to keep.** Each entry carries `Numbers:` (before → after), `Named:` (with evidence) and `Decompiled:` (bytes, instructions, match). Keep quoting the instruction count (`9/9`, `20/20`) — that is the number Track B can check without rebuilding, and it is what made this round verifiable in minutes.
+
+## Round 3 review — `f5cdb32..acd195c` (Batches 5-6, 22 files, 40 renames)
+
+Isolation confirmed first: this checkout is `main`, clean except the untracked `logs_ap/`, and the Track A work lives in its own clone at `G:\Program\TrueEnding-TrackA`. So `git grep … origin/track-a` is now the only way to read it, which is the right way.
+
+| claim | verdict |
+|---|---|
+| Batch 5 and Batch 6: **40 names** | **verified**: 40 rename pairs in `symbols.txt`; across `src/` there are **0 remaining old-name lines** (ignoring block-local `lbl_*`) and **0 new names without a definition or call site**. Same consistency bar as round 2, met twice in a row. |
+| "name 20 atn::Load and atn::LH_ resource functions" / "name 20 atn::Loader, model/motion, and book/library functions" | **accurate as stated** - these are *naming* commits. |
+
+**One correction to make before the log is read as progress: these are renames of asm functions, not asm-to-C conversions.** The diff removes 40 `asm void fn_…` bodies and adds 40 `asm void <newName>` bodies - same instruction streams, new labels (`task_Library_constructor` is still `asm void` at `src/game_boss_cocoon_death.c:1433`, and its internal labels were renamed with it). A first pass at this review read the 40 removed `asm void` lines as conversions; counting both sides (`-asm void` 40, `+asm void` 40, plain C definitions unchanged) settles it.
+
+That distinction is the whole value question for Track B:
+
+* a **rename** improves grep, the symbol map in probe output, and the mental model - real, and it is what `TLS_READ_WATCH`/`StoreWatch`/the frame line now consume;
+* an **asm-to-C conversion** is what gives Track B a readable *specification* (unit A2's two functions are the model: `atn_TaskBase_isValid` and `atn_Task_initCookie` are now semantic C).
+
+So Batches 5-6 buy naming (40 more named routines, which is 40 fewer `fn_XXXX` in a log) and buy Track B **no** new readable behaviour. Both are worth having; they are not the same thing, and the `progress 99.30 % -> 99.30 %` figure is the honest signal of that - a rename cannot move a byte.
+
+**Ask for the next batch:** alternate one A2-style conversion in with each naming batch. Forty names is ~40 minutes of a session's value to Track B; one converted function is a permanent reference. If a naming batch is what the queue needs, say so - just do not let the log's vocabulary ("decompile", "name", "convert") blur the difference, because the next session will read it as a promise.
