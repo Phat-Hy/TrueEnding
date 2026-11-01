@@ -40,7 +40,7 @@ void fn_806966F4(void);
 void fn_806968A4(void);
 void fn_80696A54(void);
 void fn_80696FA8(void);
-void fn_806974B4(void);
+void gecko_walkStackFrames(void);
 void fn_8069766C(void);
 void fn_806976AC(void);
 void fn_806977B0(void);
@@ -1124,7 +1124,7 @@ lbl_fn_80696FA8_00000EB8:
     blr
 }
 
-asm void fn_806974B4(void)
+asm void gecko_walkStackFrames(void)
 {
     nofralloc
     stwu r1, -0x50(r1)
@@ -1135,61 +1135,61 @@ asm void fn_806974B4(void)
     lwz r30, 0x14(r3)
     stw r1, 0x34(r1)
     bl fn_806954E0
-    b lbl_fn_806974B4_00001064
+    b lbl_gecko_walkStackFrames_00001064
     lwz r29, 0x24(r31)
     mr r27, r30
     li r28, 0x0
-    b lbl_fn_806974B4_00000F28
-lbl_fn_806974B4_00000F00:
+    b lbl_gecko_walkStackFrames_00000F28
+lbl_gecko_walkStackFrames_00000F00:
     lwz r4, 0xc(r27)
     mr r3, r29
     addi r5, r31, 0x10
     bl fn_806954EC
     extsb. r0, r3
-    beq lbl_fn_806974B4_00000F20
+    beq lbl_gecko_walkStackFrames_00000F20
     li r0, 0x1
-    b lbl_fn_806974B4_00000F38
-lbl_fn_806974B4_00000F20:
+    b lbl_gecko_walkStackFrames_00000F38
+lbl_gecko_walkStackFrames_00000F20:
     addi r27, r27, 0x4
     addi r28, r28, 0x1
-lbl_fn_806974B4_00000F28:
+lbl_gecko_walkStackFrames_00000F28:
     lhz r0, 0x2(r30)
     cmpw r28, r0
-    blt lbl_fn_806974B4_00000F00
+    blt lbl_gecko_walkStackFrames_00000F00
     li r0, 0x0
-lbl_fn_806974B4_00000F38:
+lbl_gecko_walkStackFrames_00000F38:
     cmpwi r0, 0x0
-    beq lbl_fn_806974B4_00000F50
+    beq lbl_gecko_walkStackFrames_00000F50
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
     bl fn_80697BB8
-lbl_fn_806974B4_00000F50:
+lbl_gecko_walkStackFrames_00000F50:
     lis r28, lbl_807667EC@ha
     mr r27, r30
     addi r28, r28, lbl_807667EC@l
     li r29, 0x0
-    b lbl_fn_806974B4_00000F8C
-lbl_fn_806974B4_00000F64:
+    b lbl_gecko_walkStackFrames_00000F8C
+lbl_gecko_walkStackFrames_00000F64:
     lwz r4, 0xc(r27)
     mr r3, r28
     addi r5, r31, 0xc
     bl fn_806954EC
     extsb. r0, r3
-    beq lbl_fn_806974B4_00000F84
+    beq lbl_gecko_walkStackFrames_00000F84
     li r0, 0x1
-    b lbl_fn_806974B4_00000F9C
-lbl_fn_806974B4_00000F84:
+    b lbl_gecko_walkStackFrames_00000F9C
+lbl_gecko_walkStackFrames_00000F84:
     addi r27, r27, 0x4
     addi r29, r29, 0x1
-lbl_fn_806974B4_00000F8C:
+lbl_gecko_walkStackFrames_00000F8C:
     lhz r0, 0x2(r30)
     cmpw r29, r0
-    blt lbl_fn_806974B4_00000F64
+    blt lbl_gecko_walkStackFrames_00000F64
     li r0, 0x0
-lbl_fn_806974B4_00000F9C:
+lbl_gecko_walkStackFrames_00000F9C:
     cmpwi r0, 0x0
-    beq lbl_fn_806974B4_00000FCC
+    beq lbl_gecko_walkStackFrames_00000FCC
     lis r4, lbl_807BBFE0@ha
     lis r3, lbl_807667EC@ha
     addi r4, r4, lbl_807BBFE0@l
@@ -1200,33 +1200,33 @@ lbl_fn_806974B4_00000F9C:
     addi r4, r31, 0x18
     addi r5, r5, fn_8069766C@l
     bl fn_80697BB8
-lbl_fn_806974B4_00000FCC:
+lbl_gecko_walkStackFrames_00000FCC:
     lis r3, lbl_807667EC@ha
     mr r27, r30
     addi r3, r3, lbl_807667EC@l
     li r29, 0x0
     addi r28, r3, 0x37
-    b lbl_fn_806974B4_0000100C
-lbl_fn_806974B4_00000FE4:
+    b lbl_gecko_walkStackFrames_0000100C
+lbl_gecko_walkStackFrames_00000FE4:
     lwz r4, 0xc(r27)
     mr r3, r28
     addi r5, r31, 0x8
     bl fn_806954EC
     extsb. r0, r3
-    beq lbl_fn_806974B4_00001004
+    beq lbl_gecko_walkStackFrames_00001004
     li r0, 0x1
-    b lbl_fn_806974B4_0000101C
-lbl_fn_806974B4_00001004:
+    b lbl_gecko_walkStackFrames_0000101C
+lbl_gecko_walkStackFrames_00001004:
     addi r27, r27, 0x4
     addi r29, r29, 0x1
-lbl_fn_806974B4_0000100C:
+lbl_gecko_walkStackFrames_0000100C:
     lhz r0, 0x2(r30)
     cmpw r29, r0
-    blt lbl_fn_806974B4_00000FE4
+    blt lbl_gecko_walkStackFrames_00000FE4
     li r0, 0x0
-lbl_fn_806974B4_0000101C:
+lbl_gecko_walkStackFrames_0000101C:
     cmpwi r0, 0x0
-    beq lbl_fn_806974B4_0000104C
+    beq lbl_gecko_walkStackFrames_0000104C
     lis r4, lbl_807BBFE0@ha
     lis r3, lbl_807667EC@ha
     addi r4, r4, lbl_807BBFE0@l
@@ -1237,14 +1237,14 @@ lbl_fn_806974B4_0000101C:
     addi r4, r31, 0x14
     addi r5, r5, fn_8069766C@l
     bl fn_80697BB8
-lbl_fn_806974B4_0000104C:
+lbl_gecko_walkStackFrames_0000104C:
     addi r3, r31, 0x20
     bl fn_80697CFC
     nop
     lwz r0, 0x0(r1)
     lwz r1, 0x34(r31)
     stw r0, 0x0(r1)
-lbl_fn_806974B4_00001064:
+lbl_gecko_walkStackFrames_00001064:
     bl fn_806954D4
     mr r10, r31
     lmw r27, 0x3c(r10)

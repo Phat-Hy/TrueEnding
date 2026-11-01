@@ -29,7 +29,7 @@ extern void strcmp(void);
 extern void wmemcpy(void);
 extern void wcslen(void);
 extern void atexit(void);
-extern void fn_806974B4(void);
+extern void gecko_walkStackFrames(void);
 extern void fn_80697BB8(void);
 extern void fn_80697CFC(void);
 extern void memmove(void);
@@ -5641,7 +5641,7 @@ asm void fn_8068B47C(void)
     bl msl_releaseRefCount
     b lbl_fn_8068B47C_000045E0
     addi r3, r31, 0x8
-    bl fn_806974B4
+    bl gecko_walkStackFrames
 lbl_fn_8068B47C_000045DC:
     b lbl_fn_8068B47C_000045DC
 lbl_fn_8068B47C_000045E0:
@@ -5706,7 +5706,7 @@ lbl_fn_8068B50C_00004684:
     bl msl_releaseRefCount
     b lbl_fn_8068B50C_000046BC
     addi r3, r31, 0x8
-    bl fn_806974B4
+    bl gecko_walkStackFrames
 lbl_fn_8068B50C_000046B8:
     b lbl_fn_8068B50C_000046B8
 lbl_fn_8068B50C_000046BC:
@@ -5788,7 +5788,7 @@ asm void fn_8068B610(void)
     stw r0, 0x4(r4)
     b lbl_fn_8068B610_000047D8
     addi r3, r31, 0x8
-    bl fn_806974B4
+    bl gecko_walkStackFrames
 lbl_fn_8068B610_000047D4:
     b lbl_fn_8068B610_000047D4
 lbl_fn_8068B610_000047D8:
@@ -6113,7 +6113,7 @@ asm void fn_8068BAC0(void)
     bl msl_releaseRefCount
     b lbl_fn_8068BAC0_00004C28
     addi r3, r31, 0x8
-    bl fn_806974B4
+    bl gecko_walkStackFrames
 lbl_fn_8068BAC0_00004C24:
     b lbl_fn_8068BAC0_00004C24
 lbl_fn_8068BAC0_00004C28:
@@ -6169,7 +6169,7 @@ lbl_fn_8068BB54_00004CB0:
     bl msl_releaseRefCount
     b lbl_fn_8068BB54_00004CE4
     addi r3, r31, 0x8
-    bl fn_806974B4
+    bl gecko_walkStackFrames
 lbl_fn_8068BB54_00004CE0:
     b lbl_fn_8068BB54_00004CE0
 lbl_fn_8068BB54_00004CE4:
@@ -6512,7 +6512,7 @@ asm void fn_8068C040(void)
     bl msl_releaseRefCount
     b lbl_fn_8068C040_000051A8
     addi r3, r31, 0x8
-    bl fn_806974B4
+    bl gecko_walkStackFrames
 lbl_fn_8068C040_000051A4:
     b lbl_fn_8068C040_000051A4
 lbl_fn_8068C040_000051A8:
@@ -6556,7 +6556,7 @@ asm void dtor_8068C0D4(void)
     bl msl_releaseRefCount
     b lbl_dtor_8068C0D4_00005238
     addi r3, r31, 0x8
-    bl fn_806974B4
+    bl gecko_walkStackFrames
 lbl_dtor_8068C0D4_00005234:
     b lbl_dtor_8068C0D4_00005234
 lbl_dtor_8068C0D4_00005238:
@@ -6612,7 +6612,7 @@ lbl_fn_8068C164_000052C0:
     bl msl_releaseRefCount
     b lbl_fn_8068C164_000052F4
     addi r3, r31, 0x8
-    bl fn_806974B4
+    bl gecko_walkStackFrames
 lbl_fn_8068C164_000052F0:
     b lbl_fn_8068C164_000052F0
 lbl_fn_8068C164_000052F4:
@@ -6868,7 +6868,7 @@ asm void fn_8068C4B8(void)
     stw r0, 0x4(r4)
     b lbl_fn_8068C4B8_00005640
     addi r3, r31, 0x18
-    bl fn_806974B4
+    bl gecko_walkStackFrames
 lbl_fn_8068C4B8_0000563C:
     b lbl_fn_8068C4B8_0000563C
 lbl_fn_8068C4B8_00005640:
@@ -6947,7 +6947,7 @@ lbl_fn_8068C4B8_0000573C:
     bctrl
     b lbl_fn_8068C4B8_00005760
     addi r3, r31, 0x60
-    bl fn_806974B4
+    bl gecko_walkStackFrames
 lbl_fn_8068C4B8_0000575C:
     b lbl_fn_8068C4B8_0000575C
 lbl_fn_8068C4B8_00005760:
@@ -6959,7 +6959,7 @@ lbl_fn_8068C4B8_00005760:
     bctrl
     b lbl_fn_8068C4B8_00005788
     addi r3, r31, 0x48
-    bl fn_806974B4
+    bl gecko_walkStackFrames
 lbl_fn_8068C4B8_00005784:
     b lbl_fn_8068C4B8_00005784
 lbl_fn_8068C4B8_00005788:
@@ -6971,7 +6971,7 @@ lbl_fn_8068C4B8_00005788:
     bctrl
     b lbl_fn_8068C4B8_000057B0
     addi r3, r31, 0x30
-    bl fn_806974B4
+    bl gecko_walkStackFrames
 lbl_fn_8068C4B8_000057AC:
     b lbl_fn_8068C4B8_000057AC
 lbl_fn_8068C4B8_000057B0:
@@ -6984,7 +6984,7 @@ lbl_fn_8068C4B8_000057B0:
     bl msl_releaseRefCount
     b lbl_fn_8068C4B8_000057DC
     addi r3, r31, 0x78
-    bl fn_806974B4
+    bl gecko_walkStackFrames
 lbl_fn_8068C4B8_000057D8:
     b lbl_fn_8068C4B8_000057D8
 lbl_fn_8068C4B8_000057DC:
@@ -7045,7 +7045,7 @@ asm void fn_8068C72C(void)
     stw r0, 0x4(r4)
     b lbl_fn_8068C72C_000058B4
     addi r3, r31, 0x18
-    bl fn_806974B4
+    bl gecko_walkStackFrames
 lbl_fn_8068C72C_000058B0:
     b lbl_fn_8068C72C_000058B0
 lbl_fn_8068C72C_000058B4:
@@ -7124,7 +7124,7 @@ lbl_fn_8068C72C_000059B0:
     bctrl
     b lbl_fn_8068C72C_000059D4
     addi r3, r31, 0x60
-    bl fn_806974B4
+    bl gecko_walkStackFrames
 lbl_fn_8068C72C_000059D0:
     b lbl_fn_8068C72C_000059D0
 lbl_fn_8068C72C_000059D4:
@@ -7136,7 +7136,7 @@ lbl_fn_8068C72C_000059D4:
     bctrl
     b lbl_fn_8068C72C_000059FC
     addi r3, r31, 0x48
-    bl fn_806974B4
+    bl gecko_walkStackFrames
 lbl_fn_8068C72C_000059F8:
     b lbl_fn_8068C72C_000059F8
 lbl_fn_8068C72C_000059FC:
@@ -7148,7 +7148,7 @@ lbl_fn_8068C72C_000059FC:
     bctrl
     b lbl_fn_8068C72C_00005A24
     addi r3, r31, 0x30
-    bl fn_806974B4
+    bl gecko_walkStackFrames
 lbl_fn_8068C72C_00005A20:
     b lbl_fn_8068C72C_00005A20
 lbl_fn_8068C72C_00005A24:
@@ -7161,7 +7161,7 @@ lbl_fn_8068C72C_00005A24:
     bl msl_releaseRefCount
     b lbl_fn_8068C72C_00005A50
     addi r3, r31, 0x78
-    bl fn_806974B4
+    bl gecko_walkStackFrames
 lbl_fn_8068C72C_00005A4C:
     b lbl_fn_8068C72C_00005A4C
 lbl_fn_8068C72C_00005A50:
@@ -7222,7 +7222,7 @@ asm void fn_8068C9A0(void)
     stw r0, 0x4(r4)
     b lbl_fn_8068C9A0_00005B28
     addi r3, r31, 0x98
-    bl fn_806974B4
+    bl gecko_walkStackFrames
 lbl_fn_8068C9A0_00005B24:
     b lbl_fn_8068C9A0_00005B24
 lbl_fn_8068C9A0_00005B28:
@@ -7341,7 +7341,7 @@ lbl_fn_8068C9A0_00005CB8:
     bctrl
     b lbl_fn_8068C9A0_00005CDC
     addi r3, r31, 0x68
-    bl fn_806974B4
+    bl gecko_walkStackFrames
 lbl_fn_8068C9A0_00005CD8:
     b lbl_fn_8068C9A0_00005CD8
 lbl_fn_8068C9A0_00005CDC:
@@ -7353,7 +7353,7 @@ lbl_fn_8068C9A0_00005CDC:
     bctrl
     b lbl_fn_8068C9A0_00005D04
     addi r3, r31, 0x80
-    bl fn_806974B4
+    bl gecko_walkStackFrames
 lbl_fn_8068C9A0_00005D00:
     b lbl_fn_8068C9A0_00005D00
 lbl_fn_8068C9A0_00005D04:
@@ -7424,7 +7424,7 @@ lbl_fn_8068C9A0_00005DE0:
     bl msl_releaseRefCount
     b lbl_fn_8068C9A0_00005E08
     addi r3, r31, 0x50
-    bl fn_806974B4
+    bl gecko_walkStackFrames
 lbl_fn_8068C9A0_00005E04:
     b lbl_fn_8068C9A0_00005E04
 lbl_fn_8068C9A0_00005E08:
@@ -7480,7 +7480,7 @@ asm void fn_8068CD2C(void)
     stw r0, 0x4(r4)
     b lbl_fn_8068CD2C_00005EB4
     addi r3, r31, 0x98
-    bl fn_806974B4
+    bl gecko_walkStackFrames
 lbl_fn_8068CD2C_00005EB0:
     b lbl_fn_8068CD2C_00005EB0
 lbl_fn_8068CD2C_00005EB4:
@@ -7599,7 +7599,7 @@ lbl_fn_8068CD2C_00006044:
     bctrl
     b lbl_fn_8068CD2C_00006068
     addi r3, r31, 0x68
-    bl fn_806974B4
+    bl gecko_walkStackFrames
 lbl_fn_8068CD2C_00006064:
     b lbl_fn_8068CD2C_00006064
 lbl_fn_8068CD2C_00006068:
@@ -7611,7 +7611,7 @@ lbl_fn_8068CD2C_00006068:
     bctrl
     b lbl_fn_8068CD2C_00006090
     addi r3, r31, 0x80
-    bl fn_806974B4
+    bl gecko_walkStackFrames
 lbl_fn_8068CD2C_0000608C:
     b lbl_fn_8068CD2C_0000608C
 lbl_fn_8068CD2C_00006090:
@@ -7682,7 +7682,7 @@ lbl_fn_8068CD2C_0000616C:
     bl msl_releaseRefCount
     b lbl_fn_8068CD2C_00006194
     addi r3, r31, 0x50
-    bl fn_806974B4
+    bl gecko_walkStackFrames
 lbl_fn_8068CD2C_00006190:
     b lbl_fn_8068CD2C_00006190
 lbl_fn_8068CD2C_00006194:
@@ -7740,7 +7740,7 @@ lbl_fn_8068D0B8_00006210:
     bl msl_releaseRefCount
     b lbl_fn_8068D0B8_00006244
     addi r3, r31, 0x8
-    bl fn_806974B4
+    bl gecko_walkStackFrames
 lbl_fn_8068D0B8_00006240:
     b lbl_fn_8068D0B8_00006240
 lbl_fn_8068D0B8_00006244:
@@ -8417,7 +8417,7 @@ lbl_fn_8068D9BC_00006B14:
     bl msl_releaseRefCount
     b lbl_fn_8068D9BC_00006B48
     addi r3, r31, 0x8
-    bl fn_806974B4
+    bl gecko_walkStackFrames
 lbl_fn_8068D9BC_00006B44:
     b lbl_fn_8068D9BC_00006B44
 lbl_fn_8068D9BC_00006B48:
@@ -9142,7 +9142,7 @@ lbl_fn_8068E270_000074A0:
     bl msl_releaseRefCount
     b lbl_fn_8068E270_000074E4
     addi r3, r31, 0x18
-    bl fn_806974B4
+    bl gecko_walkStackFrames
 lbl_fn_8068E270_000074E0:
     b lbl_fn_8068E270_000074E0
 lbl_fn_8068E270_000074E4:
@@ -9352,7 +9352,7 @@ lbl_fn_8068E554_0000778C:
     bl msl_releaseRefCount
     b lbl_fn_8068E554_000077D0
     addi r3, r31, 0x18
-    bl fn_806974B4
+    bl gecko_walkStackFrames
 lbl_fn_8068E554_000077CC:
     b lbl_fn_8068E554_000077CC
 lbl_fn_8068E554_000077D0:
@@ -9465,7 +9465,7 @@ lbl_fn_8068E6E8_0000791C:
     bl msl_releaseRefCount
     b lbl_fn_8068E6E8_00007960
     addi r3, r31, 0x18
-    bl fn_806974B4
+    bl gecko_walkStackFrames
 lbl_fn_8068E6E8_0000795C:
     b lbl_fn_8068E6E8_0000795C
 lbl_fn_8068E6E8_00007960:
@@ -9580,7 +9580,7 @@ lbl_fn_8068E878_00007AB4:
     bl msl_releaseRefCount
     b lbl_fn_8068E878_00007AF8
     addi r3, r31, 0x18
-    bl fn_806974B4
+    bl gecko_walkStackFrames
 lbl_fn_8068E878_00007AF4:
     b lbl_fn_8068E878_00007AF4
 lbl_fn_8068E878_00007AF8:
@@ -10311,7 +10311,7 @@ lbl_fn_8068F138_000083D8:
     bctrl
     b lbl_fn_8068F138_000083FC
     addi r3, r31, 0x48
-    bl fn_806974B4
+    bl gecko_walkStackFrames
 lbl_fn_8068F138_000083F8:
     b lbl_fn_8068F138_000083F8
 lbl_fn_8068F138_000083FC:
@@ -10323,7 +10323,7 @@ lbl_fn_8068F138_000083FC:
     bctrl
     b lbl_fn_8068F138_00008424
     addi r3, r31, 0x60
-    bl fn_806974B4
+    bl gecko_walkStackFrames
 lbl_fn_8068F138_00008420:
     b lbl_fn_8068F138_00008420
 lbl_fn_8068F138_00008424:
@@ -11096,7 +11096,7 @@ lbl_fn_8068FB84_00008E24:
     bctrl
     b lbl_fn_8068FB84_00008E48
     addi r3, r31, 0x48
-    bl fn_806974B4
+    bl gecko_walkStackFrames
 lbl_fn_8068FB84_00008E44:
     b lbl_fn_8068FB84_00008E44
 lbl_fn_8068FB84_00008E48:
@@ -11108,7 +11108,7 @@ lbl_fn_8068FB84_00008E48:
     bctrl
     b lbl_fn_8068FB84_00008E70
     addi r3, r31, 0x60
-    bl fn_806974B4
+    bl gecko_walkStackFrames
 lbl_fn_8068FB84_00008E6C:
     b lbl_fn_8068FB84_00008E6C
 lbl_fn_8068FB84_00008E70:
@@ -11900,7 +11900,7 @@ lbl_fn_80690630_000098D0:
     bctrl
     b lbl_fn_80690630_000098F4
     addi r3, r31, 0x48
-    bl fn_806974B4
+    bl gecko_walkStackFrames
 lbl_fn_80690630_000098F0:
     b lbl_fn_80690630_000098F0
 lbl_fn_80690630_000098F4:
@@ -11912,7 +11912,7 @@ lbl_fn_80690630_000098F4:
     bctrl
     b lbl_fn_80690630_0000991C
     addi r3, r31, 0x60
-    bl fn_806974B4
+    bl gecko_walkStackFrames
 lbl_fn_80690630_00009918:
     b lbl_fn_80690630_00009918
 lbl_fn_80690630_0000991C:
@@ -11924,7 +11924,7 @@ lbl_fn_80690630_0000991C:
     bctrl
     b lbl_fn_80690630_00009944
     addi r3, r31, 0x78
-    bl fn_806974B4
+    bl gecko_walkStackFrames
 lbl_fn_80690630_00009940:
     b lbl_fn_80690630_00009940
 lbl_fn_80690630_00009944:
@@ -12822,7 +12822,7 @@ lbl_fn_806912D8_0000A578:
     bctrl
     b lbl_fn_806912D8_0000A59C
     addi r3, r31, 0x48
-    bl fn_806974B4
+    bl gecko_walkStackFrames
 lbl_fn_806912D8_0000A598:
     b lbl_fn_806912D8_0000A598
 lbl_fn_806912D8_0000A59C:
@@ -12834,7 +12834,7 @@ lbl_fn_806912D8_0000A59C:
     bctrl
     b lbl_fn_806912D8_0000A5C4
     addi r3, r31, 0x60
-    bl fn_806974B4
+    bl gecko_walkStackFrames
 lbl_fn_806912D8_0000A5C0:
     b lbl_fn_806912D8_0000A5C0
 lbl_fn_806912D8_0000A5C4:
@@ -12846,7 +12846,7 @@ lbl_fn_806912D8_0000A5C4:
     bctrl
     b lbl_fn_806912D8_0000A5EC
     addi r3, r31, 0x78
-    bl fn_806974B4
+    bl gecko_walkStackFrames
 lbl_fn_806912D8_0000A5E8:
     b lbl_fn_806912D8_0000A5E8
 lbl_fn_806912D8_0000A5EC:
@@ -13745,7 +13745,7 @@ lbl_fn_80691F24_0000B19C:
     mr r3, r29
     b lbl_fn_80691F24_0000B1B0
     addi r3, r31, 0x48
-    bl fn_806974B4
+    bl gecko_walkStackFrames
 lbl_fn_80691F24_0000B1AC:
     b lbl_fn_80691F24_0000B1AC
 lbl_fn_80691F24_0000B1B0:
@@ -14295,7 +14295,7 @@ lbl_fn_806926D4_0000B974:
     bl msl_releaseRefCount
     b lbl_fn_806926D4_0000B990
     addi r3, r31, 0x68
-    bl fn_806974B4
+    bl gecko_walkStackFrames
 lbl_fn_806926D4_0000B98C:
     b lbl_fn_806926D4_0000B98C
 lbl_fn_806926D4_0000B990:
@@ -14311,7 +14311,7 @@ lbl_fn_806926D4_0000B9B0:
     la r5, lbl_808803B8
     b lbl_fn_806926D4_0000B9C4
     addi r3, r31, 0x20
-    bl fn_806974B4
+    bl gecko_walkStackFrames
 lbl_fn_806926D4_0000B9C0:
     b lbl_fn_806926D4_0000B9C0
 lbl_fn_806926D4_0000B9C4:
@@ -14338,7 +14338,7 @@ lbl_fn_806926D4_0000BA0C:
     la r3, lbl_808803A8
     b lbl_fn_806926D4_0000BA20
     addi r3, r31, 0x80
-    bl fn_806974B4
+    bl gecko_walkStackFrames
 lbl_fn_806926D4_0000BA1C:
     b lbl_fn_806926D4_0000BA1C
 lbl_fn_806926D4_0000BA20:
@@ -16392,7 +16392,7 @@ asm void fn_80694328(void)
     bl msl_releaseRefCount
     b lbl_fn_80694328_0000D48C
     addi r3, r31, 0x8
-    bl fn_806974B4
+    bl gecko_walkStackFrames
 lbl_fn_80694328_0000D488:
     b lbl_fn_80694328_0000D488
 lbl_fn_80694328_0000D48C:
@@ -17425,7 +17425,7 @@ asm void fn_8069519C(void)
     bl msl_releaseRefCount
     b lbl_fn_8069519C_0000E304
     addi r3, r31, 0x8
-    bl fn_806974B4
+    bl gecko_walkStackFrames
 lbl_fn_8069519C_0000E300:
     b lbl_fn_8069519C_0000E300
 lbl_fn_8069519C_0000E304:

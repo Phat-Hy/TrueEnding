@@ -127,7 +127,7 @@ extern u8 lbl_807CA210[];
 
 /* Function declarations */
 void fn_805C3330(void);
-void fn_805C3570(void);
+void gx_bindCachedTexture(void);
 void fn_805C36B0(void);
 void fn_805C38B0(void);
 void fn_805C3940(void);
@@ -327,7 +327,7 @@ lbl_fn_805C3330_0000021C:
     blr
 }
 
-asm void fn_805C3570(void)
+asm void gx_bindCachedTexture(void)
 {
     nofralloc
     stwu r1, -0x30(r1)
@@ -349,16 +349,16 @@ asm void fn_805C3570(void)
     addi r3, r3, 0x434c
     bl fn_80625C90
     cmpwi r3, 0x0
-    beq lbl_fn_805C3570_000002A0
+    beq lbl_gx_bindCachedTexture_000002A0
     addi r3, r1, 0x8
     bl fn_806263E0
     mr r30, r3
-    b lbl_fn_805C3570_000002A4
-lbl_fn_805C3570_000002A0:
+    b lbl_gx_bindCachedTexture_000002A4
+lbl_gx_bindCachedTexture_000002A0:
     li r30, 0x0
-lbl_fn_805C3570_000002A4:
+lbl_gx_bindCachedTexture_000002A4:
     cmpwi r30, 0x0
-    beq lbl_fn_805C3570_0000035C
+    beq lbl_gx_bindCachedTexture_0000035C
     mr r3, r28
     bl fn_805C3120
     lis r31, lbl_807CA130@ha
@@ -375,39 +375,39 @@ lbl_fn_805C3570_000002A4:
     bl fn_805E3F20
     cmpwi r28, 0x4
     stw r28, 0x2e28(r29)
-    beq lbl_fn_805C3570_00000300
+    beq lbl_gx_bindCachedTexture_00000300
     cmpwi r28, 0x17
-    beq lbl_fn_805C3570_00000300
+    beq lbl_gx_bindCachedTexture_00000300
     cmpwi r28, 0x19
-    bne lbl_fn_805C3570_00000314
-lbl_fn_805C3570_00000300:
+    bne lbl_gx_bindCachedTexture_00000314
+lbl_gx_bindCachedTexture_00000300:
     lis r3, lbl_807CA130@ha
     lwz r3, lbl_807CA130@l(r3)
     addis r4, r3, 0x1
     addi r4, r4, 0x433c
-    b lbl_fn_805C3570_00000320
-lbl_fn_805C3570_00000314:
+    b lbl_gx_bindCachedTexture_00000320
+lbl_gx_bindCachedTexture_00000314:
     lwz r3, lbl_807CA130@l(r31)
     addis r4, r3, 0x1
     addi r4, r4, 0x4334
-lbl_fn_805C3570_00000320:
+lbl_gx_bindCachedTexture_00000320:
     lwz r3, 0x4(r4)
     cmpwi r3, 0x0
-    bne lbl_fn_805C3570_00000344
+    bne lbl_gx_bindCachedTexture_00000344
     stw r29, 0x0(r4)
     li r0, 0x0
     stw r29, 0x4(r4)
     stw r0, 0x2e20(r29)
     stw r0, 0x2e24(r29)
-    b lbl_fn_805C3570_0000035C
-lbl_fn_805C3570_00000344:
+    b lbl_gx_bindCachedTexture_0000035C
+lbl_gx_bindCachedTexture_00000344:
     stw r29, 0x2e20(r3)
     li r0, 0x0
     lwz r3, 0x4(r4)
     stw r3, 0x2e24(r29)
     stw r0, 0x2e20(r29)
     stw r29, 0x4(r4)
-lbl_fn_805C3570_0000035C:
+lbl_gx_bindCachedTexture_0000035C:
     lwz r0, 0x34(r1)
     lwz r31, 0x2c(r1)
     lwz r30, 0x28(r1)

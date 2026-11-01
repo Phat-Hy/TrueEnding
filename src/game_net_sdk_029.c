@@ -33,7 +33,7 @@ extern void net_sendFormattedCommand(void);
 extern void fn_806DE7F0(void);
 extern void fn_806DE940(void);
 extern void net_sendPacket(void);
-extern void fn_806DEE40(void);
+extern void net_initSocketConnection(void);
 extern void fn_806DF1C0(void);
 extern void fn_806E0540(void);
 extern void fn_806E0770(void);
@@ -855,7 +855,7 @@ lbl_fn_806DC260_00000A90:
     stw r7, 0x68(r1)
     li r7, 0x2
     stw r0, 0x6c(r1)
-    bl fn_806DEE40
+    bl net_initSocketConnection
     cmpwi r3, 0x0
     beq lbl_fn_806DC260_0000137C
     b lbl_fn_806DC260_00001380
@@ -921,7 +921,7 @@ lbl_fn_806DC260_00000B88:
     stw r7, 0x60(r1)
     li r7, 0xb
     stw r0, 0x64(r1)
-    bl fn_806DEE40
+    bl net_initSocketConnection
     cmpwi r3, 0x0
     beq lbl_fn_806DC260_0000137C
     b lbl_fn_806DC260_00001380
@@ -1031,7 +1031,7 @@ lbl_fn_806DC260_00000D20:
     stw r7, 0x58(r1)
     li r7, 0x6
     stw r0, 0x5c(r1)
-    bl fn_806DEE40
+    bl net_initSocketConnection
     cmpwi r3, 0x0
     beq lbl_fn_806DC260_0000137C
     b lbl_fn_806DC260_00001380
@@ -1063,7 +1063,7 @@ lbl_fn_806DC260_00000DA8:
     stw r7, 0x50(r1)
     li r7, 0xa
     stw r0, 0x54(r1)
-    bl fn_806DEE40
+    bl net_initSocketConnection
     cmpwi r3, 0x0
     beq lbl_fn_806DC260_0000137C
     b lbl_fn_806DC260_00001380
@@ -1095,7 +1095,7 @@ lbl_fn_806DC260_00000E20:
     stw r7, 0x48(r1)
     li r7, 0xc
     stw r0, 0x4c(r1)
-    bl fn_806DEE40
+    bl net_initSocketConnection
     cmpwi r3, 0x0
     beq lbl_fn_806DC260_0000137C
     b lbl_fn_806DC260_00001380
@@ -1322,7 +1322,7 @@ lbl_fn_806DC260_00001158:
     mr r3, r26
     stw r8, 0x40(r1)
     stw r0, 0x44(r1)
-    bl fn_806DEE40
+    bl net_initSocketConnection
     cmpwi r3, 0x0
     beq lbl_fn_806DC260_0000137C
     b lbl_fn_806DC260_00001380
@@ -1425,7 +1425,7 @@ lbl_fn_806DC260_000012D0:
     li r6, 0x0
     li r7, 0x0
     stw r0, 0x3c(r1)
-    bl fn_806DEE40
+    bl net_initSocketConnection
     cmpwi r3, 0x0
     beq lbl_fn_806DC260_0000137C
     b lbl_fn_806DC260_00001380
@@ -1912,7 +1912,7 @@ lbl_fn_806DCD80_00001A08:
     mr r3, r26
     stw r8, 0x8(r1)
     stw r0, 0xc(r1)
-    bl fn_806DEE40
+    bl net_initSocketConnection
     cmpwi r3, 0x0
     beq lbl_fn_806DCD80_00001A4C
     b lbl_fn_806DCD80_00001A50

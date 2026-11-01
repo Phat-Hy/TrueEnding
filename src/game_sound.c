@@ -225,7 +225,7 @@ void fn_8004A388(void);
 void fn_8004A3FC(void);
 void fn_8004A600(void);
 void fn_8004A660(void);
-void fn_8004A664(void);
+void sound_traverseNodeTree(void);
 void fn_8004A7C4(void);
 void fn_8004A8FC(void);
 void fn_8004AA5C(void);
@@ -756,13 +756,13 @@ lbl_fn_800467E4_00000658:
     cmpwi r4, 0x0
     beq lbl_fn_800467E4_000006B4
     mr r3, r29
-    bl fn_8004A664
+    bl sound_traverseNodeTree
 lbl_fn_800467E4_000006B4:
     lwz r4, 0x4(r26)
     cmpwi r4, 0x0
     beq lbl_fn_800467E4_000006C8
     mr r3, r29
-    bl fn_8004A664
+    bl sound_traverseNodeTree
 lbl_fn_800467E4_000006C8:
     mr r3, r26
     bl dtor_80084684
@@ -774,13 +774,13 @@ lbl_fn_800467E4_000006D0:
     cmpwi r4, 0x0
     beq lbl_fn_800467E4_000006F0
     mr r3, r29
-    bl fn_8004A664
+    bl sound_traverseNodeTree
 lbl_fn_800467E4_000006F0:
     lwz r4, 0x4(r26)
     cmpwi r4, 0x0
     beq lbl_fn_800467E4_00000704
     mr r3, r29
-    bl fn_8004A664
+    bl sound_traverseNodeTree
 lbl_fn_800467E4_00000704:
     mr r3, r26
     bl dtor_80084684
@@ -798,13 +798,13 @@ lbl_fn_800467E4_00000714:
     cmpwi r4, 0x0
     beq lbl_fn_800467E4_00000740
     mr r3, r29
-    bl fn_8004A664
+    bl sound_traverseNodeTree
 lbl_fn_800467E4_00000740:
     lwz r4, 0x4(r27)
     cmpwi r4, 0x0
     beq lbl_fn_800467E4_00000754
     mr r3, r29
-    bl fn_8004A664
+    bl sound_traverseNodeTree
 lbl_fn_800467E4_00000754:
     mr r3, r27
     bl dtor_80084684
@@ -816,13 +816,13 @@ lbl_fn_800467E4_0000075C:
     cmpwi r4, 0x0
     beq lbl_fn_800467E4_0000077C
     mr r3, r29
-    bl fn_8004A664
+    bl sound_traverseNodeTree
 lbl_fn_800467E4_0000077C:
     lwz r4, 0x4(r27)
     cmpwi r4, 0x0
     beq lbl_fn_800467E4_00000790
     mr r3, r29
-    bl fn_8004A664
+    bl sound_traverseNodeTree
 lbl_fn_800467E4_00000790:
     mr r3, r27
     bl dtor_80084684
@@ -852,13 +852,13 @@ lbl_fn_800467E4_000007A8:
     cmpwi r4, 0x0
     beq lbl_fn_800467E4_000007F8
     mr r3, r29
-    bl fn_8004A664
+    bl sound_traverseNodeTree
 lbl_fn_800467E4_000007F8:
     lwz r4, 0x4(r28)
     cmpwi r4, 0x0
     beq lbl_fn_800467E4_0000080C
     mr r3, r29
-    bl fn_8004A664
+    bl sound_traverseNodeTree
 lbl_fn_800467E4_0000080C:
     mr r3, r28
     bl dtor_80084684
@@ -870,13 +870,13 @@ lbl_fn_800467E4_00000814:
     cmpwi r4, 0x0
     beq lbl_fn_800467E4_00000834
     mr r3, r29
-    bl fn_8004A664
+    bl sound_traverseNodeTree
 lbl_fn_800467E4_00000834:
     lwz r4, 0x4(r28)
     cmpwi r4, 0x0
     beq lbl_fn_800467E4_00000848
     mr r3, r29
-    bl fn_8004A664
+    bl sound_traverseNodeTree
 lbl_fn_800467E4_00000848:
     mr r3, r28
     bl dtor_80084684
@@ -894,13 +894,13 @@ lbl_fn_800467E4_00000858:
     cmpwi r4, 0x0
     beq lbl_fn_800467E4_00000884
     mr r3, r29
-    bl fn_8004A664
+    bl sound_traverseNodeTree
 lbl_fn_800467E4_00000884:
     lwz r4, 0x4(r28)
     cmpwi r4, 0x0
     beq lbl_fn_800467E4_00000898
     mr r3, r29
-    bl fn_8004A664
+    bl sound_traverseNodeTree
 lbl_fn_800467E4_00000898:
     mr r3, r28
     bl dtor_80084684
@@ -912,13 +912,13 @@ lbl_fn_800467E4_000008A0:
     cmpwi r4, 0x0
     beq lbl_fn_800467E4_000008C0
     mr r3, r29
-    bl fn_8004A664
+    bl sound_traverseNodeTree
 lbl_fn_800467E4_000008C0:
     lwz r4, 0x4(r28)
     cmpwi r4, 0x0
     beq lbl_fn_800467E4_000008D4
     mr r3, r29
-    bl fn_8004A664
+    bl sound_traverseNodeTree
 lbl_fn_800467E4_000008D4:
     mr r3, r28
     bl dtor_80084684
@@ -1933,13 +1933,13 @@ lbl_fn_80047628_0000168C:
     cmpwi r4, 0x0
     beq lbl_fn_80047628_000016CC
     addi r3, r31, 0x8e8
-    bl fn_8004A664
+    bl sound_traverseNodeTree
 lbl_fn_80047628_000016CC:
     lwz r4, 0x4(r30)
     cmpwi r4, 0x0
     beq lbl_fn_80047628_000016E0
     addi r3, r31, 0x8e8
-    bl fn_8004A664
+    bl sound_traverseNodeTree
 lbl_fn_80047628_000016E0:
     mr r3, r30
     bl dtor_80084684
@@ -1951,13 +1951,13 @@ lbl_fn_80047628_000016E8:
     cmpwi r4, 0x0
     beq lbl_fn_80047628_00001708
     addi r3, r31, 0x8e8
-    bl fn_8004A664
+    bl sound_traverseNodeTree
 lbl_fn_80047628_00001708:
     lwz r4, 0x4(r30)
     cmpwi r4, 0x0
     beq lbl_fn_80047628_0000171C
     addi r3, r31, 0x8e8
-    bl fn_8004A664
+    bl sound_traverseNodeTree
 lbl_fn_80047628_0000171C:
     mr r3, r30
     bl dtor_80084684
@@ -1975,13 +1975,13 @@ lbl_fn_80047628_0000172C:
     cmpwi r4, 0x0
     beq lbl_fn_80047628_00001758
     addi r3, r31, 0x8e8
-    bl fn_8004A664
+    bl sound_traverseNodeTree
 lbl_fn_80047628_00001758:
     lwz r4, 0x4(r30)
     cmpwi r4, 0x0
     beq lbl_fn_80047628_0000176C
     addi r3, r31, 0x8e8
-    bl fn_8004A664
+    bl sound_traverseNodeTree
 lbl_fn_80047628_0000176C:
     mr r3, r30
     bl dtor_80084684
@@ -1993,13 +1993,13 @@ lbl_fn_80047628_00001774:
     cmpwi r4, 0x0
     beq lbl_fn_80047628_00001794
     addi r3, r31, 0x8e8
-    bl fn_8004A664
+    bl sound_traverseNodeTree
 lbl_fn_80047628_00001794:
     lwz r4, 0x4(r30)
     cmpwi r4, 0x0
     beq lbl_fn_80047628_000017A8
     addi r3, r31, 0x8e8
-    bl fn_8004A664
+    bl sound_traverseNodeTree
 lbl_fn_80047628_000017A8:
     mr r3, r30
     bl dtor_80084684
@@ -2028,13 +2028,13 @@ lbl_fn_80047628_000017D4:
     cmpwi r4, 0x0
     beq lbl_fn_80047628_0000180C
     addi r3, r31, 0x8f4
-    bl fn_8004A664
+    bl sound_traverseNodeTree
 lbl_fn_80047628_0000180C:
     lwz r4, 0x4(r30)
     cmpwi r4, 0x0
     beq lbl_fn_80047628_00001820
     addi r3, r31, 0x8f4
-    bl fn_8004A664
+    bl sound_traverseNodeTree
 lbl_fn_80047628_00001820:
     mr r3, r30
     bl dtor_80084684
@@ -2046,13 +2046,13 @@ lbl_fn_80047628_00001828:
     cmpwi r4, 0x0
     beq lbl_fn_80047628_00001848
     addi r3, r31, 0x8f4
-    bl fn_8004A664
+    bl sound_traverseNodeTree
 lbl_fn_80047628_00001848:
     lwz r4, 0x4(r30)
     cmpwi r4, 0x0
     beq lbl_fn_80047628_0000185C
     addi r3, r31, 0x8f4
-    bl fn_8004A664
+    bl sound_traverseNodeTree
 lbl_fn_80047628_0000185C:
     mr r3, r30
     bl dtor_80084684
@@ -2070,13 +2070,13 @@ lbl_fn_80047628_0000186C:
     cmpwi r4, 0x0
     beq lbl_fn_80047628_00001898
     addi r3, r31, 0x8f4
-    bl fn_8004A664
+    bl sound_traverseNodeTree
 lbl_fn_80047628_00001898:
     lwz r4, 0x4(r30)
     cmpwi r4, 0x0
     beq lbl_fn_80047628_000018AC
     addi r3, r31, 0x8f4
-    bl fn_8004A664
+    bl sound_traverseNodeTree
 lbl_fn_80047628_000018AC:
     mr r3, r30
     bl dtor_80084684
@@ -2088,13 +2088,13 @@ lbl_fn_80047628_000018B4:
     cmpwi r4, 0x0
     beq lbl_fn_80047628_000018D4
     addi r3, r31, 0x8f4
-    bl fn_8004A664
+    bl sound_traverseNodeTree
 lbl_fn_80047628_000018D4:
     lwz r4, 0x4(r30)
     cmpwi r4, 0x0
     beq lbl_fn_80047628_000018E8
     addi r3, r31, 0x8f4
-    bl fn_8004A664
+    bl sound_traverseNodeTree
 lbl_fn_80047628_000018E8:
     mr r3, r30
     bl dtor_80084684
@@ -5345,7 +5345,7 @@ void fn_8004A660(void)
 {
 }
 
-asm void fn_8004A664(void)
+asm void sound_traverseNodeTree(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -5359,87 +5359,87 @@ asm void fn_8004A664(void)
     mr r28, r3
     lwz r31, 0x0(r4)
     cmpwi r31, 0x0
-    beq lbl_fn_8004A664_00004514
+    beq lbl_sound_traverseNodeTree_00004514
     lwz r30, 0x0(r31)
     cmpwi r30, 0x0
-    beq lbl_fn_8004A664_000044D0
+    beq lbl_sound_traverseNodeTree_000044D0
     lwz r4, 0x0(r30)
     cmpwi r4, 0x0
-    beq lbl_fn_8004A664_000044B4
-    bl fn_8004A664
-lbl_fn_8004A664_000044B4:
+    beq lbl_sound_traverseNodeTree_000044B4
+    bl sound_traverseNodeTree
+lbl_sound_traverseNodeTree_000044B4:
     lwz r4, 0x4(r30)
     cmpwi r4, 0x0
-    beq lbl_fn_8004A664_000044C8
+    beq lbl_sound_traverseNodeTree_000044C8
     mr r3, r28
-    bl fn_8004A664
-lbl_fn_8004A664_000044C8:
+    bl sound_traverseNodeTree
+lbl_sound_traverseNodeTree_000044C8:
     mr r3, r30
     bl dtor_80084684
-lbl_fn_8004A664_000044D0:
+lbl_sound_traverseNodeTree_000044D0:
     lwz r30, 0x4(r31)
     cmpwi r30, 0x0
-    beq lbl_fn_8004A664_0000450C
+    beq lbl_sound_traverseNodeTree_0000450C
     lwz r4, 0x0(r30)
     cmpwi r4, 0x0
-    beq lbl_fn_8004A664_000044F0
+    beq lbl_sound_traverseNodeTree_000044F0
     mr r3, r28
-    bl fn_8004A664
-lbl_fn_8004A664_000044F0:
+    bl sound_traverseNodeTree
+lbl_sound_traverseNodeTree_000044F0:
     lwz r4, 0x4(r30)
     cmpwi r4, 0x0
-    beq lbl_fn_8004A664_00004504
+    beq lbl_sound_traverseNodeTree_00004504
     mr r3, r28
-    bl fn_8004A664
-lbl_fn_8004A664_00004504:
+    bl sound_traverseNodeTree
+lbl_sound_traverseNodeTree_00004504:
     mr r3, r30
     bl dtor_80084684
-lbl_fn_8004A664_0000450C:
+lbl_sound_traverseNodeTree_0000450C:
     mr r3, r31
     bl dtor_80084684
-lbl_fn_8004A664_00004514:
+lbl_sound_traverseNodeTree_00004514:
     lwz r30, 0x4(r29)
     cmpwi r30, 0x0
-    beq lbl_fn_8004A664_000045A0
+    beq lbl_sound_traverseNodeTree_000045A0
     lwz r31, 0x0(r30)
     cmpwi r31, 0x0
-    beq lbl_fn_8004A664_0000455C
+    beq lbl_sound_traverseNodeTree_0000455C
     lwz r4, 0x0(r31)
     cmpwi r4, 0x0
-    beq lbl_fn_8004A664_00004540
+    beq lbl_sound_traverseNodeTree_00004540
     mr r3, r28
-    bl fn_8004A664
-lbl_fn_8004A664_00004540:
+    bl sound_traverseNodeTree
+lbl_sound_traverseNodeTree_00004540:
     lwz r4, 0x4(r31)
     cmpwi r4, 0x0
-    beq lbl_fn_8004A664_00004554
+    beq lbl_sound_traverseNodeTree_00004554
     mr r3, r28
-    bl fn_8004A664
-lbl_fn_8004A664_00004554:
+    bl sound_traverseNodeTree
+lbl_sound_traverseNodeTree_00004554:
     mr r3, r31
     bl dtor_80084684
-lbl_fn_8004A664_0000455C:
+lbl_sound_traverseNodeTree_0000455C:
     lwz r31, 0x4(r30)
     cmpwi r31, 0x0
-    beq lbl_fn_8004A664_00004598
+    beq lbl_sound_traverseNodeTree_00004598
     lwz r4, 0x0(r31)
     cmpwi r4, 0x0
-    beq lbl_fn_8004A664_0000457C
+    beq lbl_sound_traverseNodeTree_0000457C
     mr r3, r28
-    bl fn_8004A664
-lbl_fn_8004A664_0000457C:
+    bl sound_traverseNodeTree
+lbl_sound_traverseNodeTree_0000457C:
     lwz r4, 0x4(r31)
     cmpwi r4, 0x0
-    beq lbl_fn_8004A664_00004590
+    beq lbl_sound_traverseNodeTree_00004590
     mr r3, r28
-    bl fn_8004A664
-lbl_fn_8004A664_00004590:
+    bl sound_traverseNodeTree
+lbl_sound_traverseNodeTree_00004590:
     mr r3, r31
     bl dtor_80084684
-lbl_fn_8004A664_00004598:
+lbl_sound_traverseNodeTree_00004598:
     mr r3, r30
     bl dtor_80084684
-lbl_fn_8004A664_000045A0:
+lbl_sound_traverseNodeTree_000045A0:
     mr r3, r29
     bl dtor_80084684
     lwz r0, 0x24(r1)

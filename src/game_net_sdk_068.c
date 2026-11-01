@@ -9,7 +9,7 @@ extern void fn_80725300(void);
 extern void fn_80725310(void);
 extern void fn_807257B0(void);
 extern void fn_807257C0(void);
-extern void fn_80726B50(void);
+extern void net_releaseBuffer(void);
 extern void fn_80727600(void);
 extern void fn_8072BD60(void);
 extern void fn_8072C330(void);
@@ -128,7 +128,7 @@ asm void fn_8072CC80(void)
     bl fn_8072C330
     addi r3, r1, 0x108
     li r4, 0x0
-    bl fn_80726B50
+    bl net_releaseBuffer
     lfs f3, 0x30(r1)
     lfs f2, 0x38(r1)
     lfs f1, 0x34(r1)
@@ -245,7 +245,7 @@ lbl_fn_8072CC80_000001F4:
     lfs f0, 0x20(r1)
     li r4, 0x0
     fsubs f30, f1, f0
-    bl fn_80726B50
+    bl net_releaseBuffer
     fsubs f2, f31, f30
     lfs f1, lbl_80889388
     lfs f0, 0x0(r28)
@@ -327,7 +327,7 @@ lbl_fn_8072CC80_00000340:
     lfs f0, 0x10(r1)
     li r4, 0x0
     fsubs f30, f1, f0
-    bl fn_80726B50
+    bl net_releaseBuffer
     fsubs f1, f31, f30
     lfs f0, 0x0(r28)
     fadds f0, f0, f1

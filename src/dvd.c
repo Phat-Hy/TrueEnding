@@ -64,7 +64,7 @@ extern void* fn_805FF5A0(void);
 extern void fn_805FF640(void);
 extern void fn_805FF6A0(void);
 extern void fn_805FF710(void);
-extern void fn_80600120(void);
+extern void dvd_recordErrorInfo(void);
 extern void fn_80600190(void);
 extern void fn_806003B0(void);
 extern void fn_806003D0(void);
@@ -433,7 +433,7 @@ lbl_0330:
     lis r4, dvd_resetAlarmHandler@ha
     addi r3, r3, 0x4568
     addi r4, r4, dvd_resetAlarmHandler@l
-    bl fn_80600120
+    bl dvd_recordErrorInfo
     b lbl_044c
 lbl_0354:
     cmplwi r30, 0x20
@@ -442,7 +442,7 @@ lbl_0354:
     lis r4, dvd_resetAlarmHandler@ha
     addi r3, r3, 0x4569
     addi r4, r4, dvd_resetAlarmHandler@l
-    bl fn_80600120
+    bl dvd_recordErrorInfo
     b lbl_044c
 lbl_0374:
     clrlwi. r0, r30, 31
@@ -548,7 +548,7 @@ lbl_04c8:
     lis r4, dvd_resetAlarmHandler@ha
     addi r3, r3, 0x4568
     addi r4, r4, dvd_resetAlarmHandler@l
-    bl fn_80600120
+    bl dvd_recordErrorInfo
     b lbl_057c
 lbl_04f4:
     cmplwi r31, 0x20
@@ -557,7 +557,7 @@ lbl_04f4:
     lis r4, dvd_resetAlarmHandler@ha
     addi r3, r3, 0x4569
     addi r4, r4, dvd_resetAlarmHandler@l
-    bl fn_80600120
+    bl dvd_recordErrorInfo
     b lbl_057c
 lbl_0514:
     lwz r31, lbl_8087FD90
@@ -790,7 +790,7 @@ lbl_0818:
     lis r4, dvd_resetAlarmHandler@ha
     addi r3, r3, 0x4568
     addi r4, r4, dvd_resetAlarmHandler@l
-    bl fn_80600120
+    bl dvd_recordErrorInfo
     b lbl_0ca4
 lbl_083c:
     cmplwi r28, 0x20
@@ -799,7 +799,7 @@ lbl_083c:
     lis r4, dvd_resetAlarmHandler@ha
     addi r3, r3, 0x4569
     addi r4, r4, dvd_resetAlarmHandler@l
-    bl fn_80600120
+    bl dvd_recordErrorInfo
     b lbl_0ca4
 lbl_085c:
     rlwinm. r0, r28, 0, 30, 30
@@ -808,7 +808,7 @@ lbl_085c:
     lis r4, fn_805FAE60@ha
     addi r3, r3, 0x4567
     addi r4, r4, fn_805FAE60@l
-    bl fn_80600120
+    bl dvd_recordErrorInfo
     b lbl_0ca4
 lbl_087c:
     bl DVDLowGetImmBufferReg
@@ -821,7 +821,7 @@ lbl_087c:
     lis r4, fn_805FAE60@ha
     mr r3, r29
     addi r4, r4, fn_805FAE60@l
-    bl fn_80600120
+    bl dvd_recordErrorInfo
     b lbl_0ca4
 lbl_08ac:
     subi r0, r3, 0x2
@@ -902,7 +902,7 @@ lbl_099c:
     lis r4, fn_805FAFC0@ha
     mr r3, r29
     addi r4, r4, fn_805FAFC0@l
-    bl fn_80600120
+    bl dvd_recordErrorInfo
     b lbl_0ca4
 lbl_09c0:
     cmplwi r30, 0x3
@@ -1091,14 +1091,14 @@ lbl_0c78:
     lis r4, fn_805FAE60@ha
     addi r3, r3, 0x4567
     addi r4, r4, fn_805FAE60@l
-    bl fn_80600120
+    bl dvd_recordErrorInfo
     b lbl_0ca4
 lbl_0c90:
     lis r3, 0x123
     lis r4, fn_805FAE60@ha
     addi r3, r3, 0x4567
     addi r4, r4, fn_805FAE60@l
-    bl fn_80600120
+    bl dvd_recordErrorInfo
 lbl_0ca4:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
@@ -1142,7 +1142,7 @@ lbl_0d20:
     lis r4, dvd_resetAlarmHandler@ha
     addi r3, r3, 0x4568
     addi r4, r4, dvd_resetAlarmHandler@l
-    bl fn_80600120
+    bl dvd_recordErrorInfo
     b lbl_0e98
 lbl_0d44:
     cmplwi r30, 0x20
@@ -1151,7 +1151,7 @@ lbl_0d44:
     lis r4, dvd_resetAlarmHandler@ha
     addi r3, r3, 0x4569
     addi r4, r4, dvd_resetAlarmHandler@l
-    bl fn_80600120
+    bl dvd_recordErrorInfo
     b lbl_0e98
 lbl_0d64:
     clrlwi. r0, r30, 31
@@ -1274,7 +1274,7 @@ lbl_0efc:
     lis r4, dvd_resetAlarmHandler@ha
     addi r3, r3, 0x4568
     addi r4, r4, dvd_resetAlarmHandler@l
-    bl fn_80600120
+    bl dvd_recordErrorInfo
     b lbl_0f70
 lbl_0f20:
     cmplwi r31, 0x20
@@ -1283,7 +1283,7 @@ lbl_0f20:
     lis r4, dvd_resetAlarmHandler@ha
     addi r3, r3, 0x4569
     addi r4, r4, dvd_resetAlarmHandler@l
-    bl fn_80600120
+    bl dvd_recordErrorInfo
     b lbl_0f70
 lbl_0f40:
     rlwinm. r0, r31, 0, 30, 30
@@ -1292,13 +1292,13 @@ lbl_0f40:
     lis r4, fn_805FAE60@ha
     addi r3, r3, 0x4567
     addi r4, r4, fn_805FAE60@l
-    bl fn_80600120
+    bl dvd_recordErrorInfo
     b lbl_0f70
 lbl_0f60:
     bl DVDLowGetImmBufferReg
     lis r4, fn_805FAE60@ha
     addi r4, r4, fn_805FAE60@l
-    bl fn_80600120
+    bl dvd_recordErrorInfo
 lbl_0f70:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
@@ -1338,7 +1338,7 @@ lbl_0fdc:
     lis r4, dvd_resetAlarmHandler@ha
     addi r3, r3, 0x4568
     addi r4, r4, dvd_resetAlarmHandler@l
-    bl fn_80600120
+    bl dvd_recordErrorInfo
     b lbl_11bc
 lbl_1000:
     cmplwi r31, 0x20
@@ -1347,7 +1347,7 @@ lbl_1000:
     lis r4, dvd_resetAlarmHandler@ha
     addi r3, r3, 0x4569
     addi r4, r4, dvd_resetAlarmHandler@l
-    bl fn_80600120
+    bl dvd_recordErrorInfo
     b lbl_11bc
 lbl_1020:
     rlwinm. r0, r31, 0, 30, 30
@@ -1356,7 +1356,7 @@ lbl_1020:
     lis r4, fn_805FAE60@ha
     addi r3, r3, 0x4567
     addi r4, r4, fn_805FAE60@l
-    bl fn_80600120
+    bl dvd_recordErrorInfo
     b lbl_11bc
 lbl_1040:
     li r0, 0x0
@@ -1722,7 +1722,7 @@ lbl_1568:
     lis r4, dvd_resetAlarmHandler@ha
     addi r3, r3, 0x4568
     addi r4, r4, dvd_resetAlarmHandler@l
-    bl fn_80600120
+    bl dvd_recordErrorInfo
     b lbl_1694
 lbl_158c:
     cmplwi r29, 0x20
@@ -1731,7 +1731,7 @@ lbl_158c:
     lis r4, dvd_resetAlarmHandler@ha
     addi r3, r3, 0x4569
     addi r4, r4, dvd_resetAlarmHandler@l
-    bl fn_80600120
+    bl dvd_recordErrorInfo
     b lbl_1694
 lbl_15ac:
     clrlwi. r0, r29, 31
@@ -1841,7 +1841,7 @@ lbl_1714:
     lis r4, dvd_resetAlarmHandler@ha
     addi r3, r3, 0x4568
     addi r4, r4, dvd_resetAlarmHandler@l
-    bl fn_80600120
+    bl dvd_recordErrorInfo
     b lbl_1b0c
 lbl_1738:
     cmplwi r28, 0x20
@@ -1850,7 +1850,7 @@ lbl_1738:
     lis r4, dvd_resetAlarmHandler@ha
     addi r3, r3, 0x4569
     addi r4, r4, dvd_resetAlarmHandler@l
-    bl fn_80600120
+    bl dvd_recordErrorInfo
     b lbl_1b0c
 lbl_1758:
     clrlwi. r0, r28, 31
@@ -2151,7 +2151,7 @@ lbl_1b84:
     lis r4, dvd_resetAlarmHandler@ha
     addi r3, r3, 0x4568
     addi r4, r4, dvd_resetAlarmHandler@l
-    bl fn_80600120
+    bl dvd_recordErrorInfo
     b lbl_1ca0
 lbl_1ba8:
     cmplwi r30, 0x20
@@ -2160,7 +2160,7 @@ lbl_1ba8:
     lis r4, dvd_resetAlarmHandler@ha
     addi r3, r3, 0x4569
     addi r4, r4, dvd_resetAlarmHandler@l
-    bl fn_80600120
+    bl dvd_recordErrorInfo
     b lbl_1ca0
 lbl_1bc8:
     clrlwi. r0, r30, 31
@@ -2259,7 +2259,7 @@ lbl_1d0c:
     lis r4, dvd_resetAlarmHandler@ha
     addi r3, r3, 0x4568
     addi r4, r4, dvd_resetAlarmHandler@l
-    bl fn_80600120
+    bl dvd_recordErrorInfo
     b lbl_1e10
 lbl_1d30:
     cmplwi r31, 0x20
@@ -2268,7 +2268,7 @@ lbl_1d30:
     lis r4, dvd_resetAlarmHandler@ha
     addi r3, r3, 0x4569
     addi r4, r4, dvd_resetAlarmHandler@l
-    bl fn_80600120
+    bl dvd_recordErrorInfo
     b lbl_1e10
 lbl_1d50:
     clrlwi. r0, r31, 31
@@ -2363,7 +2363,7 @@ lbl_1e7c:
     lis r4, dvd_resetAlarmHandler@ha
     addi r3, r3, 0x4568
     addi r4, r4, dvd_resetAlarmHandler@l
-    bl fn_80600120
+    bl dvd_recordErrorInfo
     b lbl_1fe4
 lbl_1ea0:
     cmplwi r31, 0x20
@@ -2372,7 +2372,7 @@ lbl_1ea0:
     lis r4, dvd_resetAlarmHandler@ha
     addi r3, r3, 0x4569
     addi r4, r4, dvd_resetAlarmHandler@l
-    bl fn_80600120
+    bl dvd_recordErrorInfo
     b lbl_1fe4
 lbl_1ec0:
     rlwinm. r0, r31, 0, 30, 30
@@ -2381,7 +2381,7 @@ lbl_1ec0:
     lis r4, fn_805FAE60@ha
     addi r3, r3, 0x4567
     addi r4, r4, fn_805FAE60@l
-    bl fn_80600120
+    bl dvd_recordErrorInfo
     b lbl_1fe4
 lbl_1ee0:
     li r4, 0x0
@@ -2493,7 +2493,7 @@ lbl_2050:
     lis r4, dvd_resetAlarmHandler@ha
     addi r3, r3, 0x4568
     addi r4, r4, dvd_resetAlarmHandler@l
-    bl fn_80600120
+    bl dvd_recordErrorInfo
     b lbl_2180
 lbl_2074:
     cmplwi r31, 0x20
@@ -2502,7 +2502,7 @@ lbl_2074:
     lis r4, dvd_resetAlarmHandler@ha
     addi r3, r3, 0x4569
     addi r4, r4, dvd_resetAlarmHandler@l
-    bl fn_80600120
+    bl dvd_recordErrorInfo
     b lbl_2180
 lbl_2094:
     clrlwi. r0, r31, 31
@@ -2806,7 +2806,7 @@ asm void fn_805FCD90(void) {
     lis r4, dvd_resetAlarmHandler@ha
     addi r3, r3, 0x4568
     addi r4, r4, dvd_resetAlarmHandler@l
-    bl fn_80600120
+    bl dvd_recordErrorInfo
     b lbl_2590
 lbl_24f0:
     cmplwi r3, 0x20
@@ -2815,7 +2815,7 @@ lbl_24f0:
     lis r4, dvd_resetAlarmHandler@ha
     addi r3, r3, 0x4569
     addi r4, r4, dvd_resetAlarmHandler@l
-    bl fn_80600120
+    bl dvd_recordErrorInfo
     b lbl_2590
 lbl_2510:
     clrlwi. r0, r3, 31
@@ -2948,7 +2948,7 @@ lbl_26d4:
     lis r4, dvd_resetAlarmHandler@ha
     addi r3, r3, 0x4568
     addi r4, r4, dvd_resetAlarmHandler@l
-    bl fn_80600120
+    bl dvd_recordErrorInfo
     b lbl_28a8
 lbl_26f8:
     cmplwi r30, 0x20
@@ -2957,7 +2957,7 @@ lbl_26f8:
     lis r4, dvd_resetAlarmHandler@ha
     addi r3, r3, 0x4569
     addi r4, r4, dvd_resetAlarmHandler@l
-    bl fn_80600120
+    bl dvd_recordErrorInfo
     b lbl_28a8
 lbl_2718:
     clrlwi. r0, r30, 31
@@ -3213,7 +3213,7 @@ lbl_2a8c:
     lis r4, dvd_resetAlarmHandler@ha
     addi r3, r3, 0x4568
     addi r4, r4, dvd_resetAlarmHandler@l
-    bl fn_80600120
+    bl dvd_recordErrorInfo
     b lbl_2b04
 lbl_2ab0:
     cmplwi r31, 0x20
@@ -3222,7 +3222,7 @@ lbl_2ab0:
     lis r4, dvd_resetAlarmHandler@ha
     addi r3, r3, 0x4569
     addi r4, r4, dvd_resetAlarmHandler@l
-    bl fn_80600120
+    bl dvd_recordErrorInfo
     b lbl_2b04
 lbl_2ad0:
     clrlwi. r0, r31, 31
@@ -3556,7 +3556,7 @@ lbl_2f74:
     lis r4, fn_805FAE60@ha
     lwz r3, lbl_8087FD7C
     addi r4, r4, fn_805FAE60@l
-    bl fn_80600120
+    bl dvd_recordErrorInfo
 lbl_2f84:
     li r0, 0x0
     stw r0, lbl_8087FD14
@@ -4014,7 +4014,7 @@ lbl_3610:
     lis r4, dvd_resetAlarmHandler@ha
     addi r3, r3, 0x4568
     addi r4, r4, dvd_resetAlarmHandler@l
-    bl fn_80600120
+    bl dvd_recordErrorInfo
     b lbl_3f74
 lbl_3634:
     cmplwi r31, 0x20
@@ -4023,7 +4023,7 @@ lbl_3634:
     lis r4, dvd_resetAlarmHandler@ha
     addi r3, r3, 0x4569
     addi r4, r4, dvd_resetAlarmHandler@l
-    bl fn_80600120
+    bl dvd_recordErrorInfo
     b lbl_3f74
 lbl_3654:
     lwz r0, lbl_8087FD84
@@ -4039,7 +4039,7 @@ lbl_366c:
     lis r4, fn_805FAE60@ha
     addi r3, r3, 0x4567
     addi r4, r4, fn_805FAE60@l
-    bl fn_80600120
+    bl dvd_recordErrorInfo
     b lbl_3f74
 lbl_368c:
     li r0, 0x0
@@ -4603,7 +4603,7 @@ lbl_3e34:
     lis r4, fn_805FAE60@ha
     addi r3, r3, 0x4567
     addi r4, r4, fn_805FAE60@l
-    bl fn_80600120
+    bl dvd_recordErrorInfo
     b lbl_3f74
 lbl_3e58:
     lwz r0, lbl_8087FD84

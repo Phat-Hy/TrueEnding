@@ -109,7 +109,7 @@ void fn_806DEA40(void);
 void fn_806DEBA0(void);
 void fn_806DED00(void);
 void net_sendPacket(void);
-void fn_806DEE40(void);
+void net_initSocketConnection(void);
 void fn_806DEF10(void);
 void fn_806DF1C0(void);
 void fn_806DF2E0(void);
@@ -193,7 +193,7 @@ lbl_fn_806DDA30_0000009C:
     stw r8, 0x44(r1)
     stw r9, 0x28(r1)
     stw r8, 0x2c(r1)
-    bl fn_806DEE40
+    bl net_initSocketConnection
     mr r3, r21
     mr r4, r22
     bl fn_806E5310
@@ -271,7 +271,7 @@ lbl_fn_806DDA30_000001BC:
     stw r8, 0x3c(r1)
     stw r9, 0x20(r1)
     stw r8, 0x24(r1)
-    bl fn_806DEE40
+    bl net_initSocketConnection
     mr r3, r21
     mr r4, r22
     bl fn_806E5310
@@ -399,7 +399,7 @@ lbl_fn_806DDA30_0000039C:
     stw r8, 0x34(r1)
     stw r9, 0x18(r1)
     stw r8, 0x1c(r1)
-    bl fn_806DEE40
+    bl net_initSocketConnection
     mr r3, r21
     mr r4, r22
     bl fn_806E5310
@@ -1557,7 +1557,7 @@ lbl_net_sendPacket_000013D0:
     addi r4, r1, 0x8
     li r7, 0x1
     stw r0, 0xc(r1)
-    bl fn_806DEE40
+    bl net_initSocketConnection
 lbl_net_sendPacket_000013F4:
     lwz r0, 0x34(r1)
     lwz r31, 0x2c(r1)
@@ -1569,7 +1569,7 @@ lbl_net_sendPacket_000013F4:
     blr
 }
 
-asm void fn_806DEE40(void)
+asm void net_initSocketConnection(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -1586,44 +1586,44 @@ asm void fn_806DEE40(void)
     li r3, 0x18
     bl net_socketConnect
     cmpwi r3, 0x0
-    bne lbl_fn_806DEE40_00001468
+    bne lbl_net_initSocketConnection_00001468
     lis r4, lbl_807C3048@ha
     mr r3, r26
     addi r4, r4, lbl_807C3048@l
     bl net_copyStringSafe
     li r3, 0x1
-    b lbl_fn_806DEE40_000014CC
-lbl_fn_806DEE40_00001468:
+    b lbl_net_initSocketConnection_000014CC
+lbl_net_initSocketConnection_00001468:
     lwz r0, 0x4(r27)
     cmpwi r29, 0x0
     lwz r4, 0x0(r27)
     stw r4, 0x0(r3)
     stw r0, 0x4(r3)
     stw r28, 0x8(r3)
-    beq lbl_fn_806DEE40_00001490
+    beq lbl_net_initSocketConnection_00001490
     lwz r0, 0x18(r29)
     stw r0, 0x10(r3)
-    b lbl_fn_806DEE40_00001498
-lbl_fn_806DEE40_00001490:
+    b lbl_net_initSocketConnection_00001498
+lbl_net_initSocketConnection_00001490:
     li r0, 0x0
     stw r0, 0x10(r3)
-lbl_fn_806DEE40_00001498:
+lbl_net_initSocketConnection_00001498:
     stw r30, 0xc(r3)
     li r0, 0x0
     stw r0, 0x14(r3)
     lwz r0, 0x5dc(r31)
     cmpwi r0, 0x0
-    bne lbl_fn_806DEE40_000014B4
+    bne lbl_net_initSocketConnection_000014B4
     stw r3, 0x5dc(r31)
-lbl_fn_806DEE40_000014B4:
+lbl_net_initSocketConnection_000014B4:
     lwz r4, 0x5e0(r31)
     cmpwi r4, 0x0
-    beq lbl_fn_806DEE40_000014C4
+    beq lbl_net_initSocketConnection_000014C4
     stw r3, 0x14(r4)
-lbl_fn_806DEE40_000014C4:
+lbl_net_initSocketConnection_000014C4:
     stw r3, 0x5e0(r31)
     li r3, 0x0
-lbl_fn_806DEE40_000014CC:
+lbl_net_initSocketConnection_000014CC:
     addi r11, r1, 0x20
     bl _restgpr_26
     lwz r0, 0x24(r1)

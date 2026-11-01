@@ -24,7 +24,7 @@ extern void fn_805C26A0(void);
 extern void fn_805C26D0(void);
 extern void fn_805C27B0(void);
 extern void fn_805C27E0(void);
-extern void fn_805C3570(void);
+extern void gx_bindCachedTexture(void);
 extern void fn_805C3FE0(void);
 extern void fn_805CF4C0(void);
 extern void fn_805D7DD0(void);
@@ -834,7 +834,7 @@ lbl_fn_805C80F0_00000AE0:
     cmpwi r3, 0x0
     bne lbl_fn_805C80F0_00000AF0
     addi r3, r17, 0x11
-    bl fn_805C3570
+    bl gx_bindCachedTexture
 lbl_fn_805C80F0_00000AF0:
     lwz r3, 0x24c(r26)
     bl fn_805C2290
@@ -1319,7 +1319,7 @@ lbl_fn_805C8A30_000011F0:
     cmpwi r3, 0x0
     bne lbl_fn_805C8A30_000018C4
     li r3, 0x8
-    bl fn_805C3570
+    bl gx_bindCachedTexture
     b lbl_fn_805C8A30_000018C4
 lbl_fn_805C8A30_00001204:
     cmpwi r0, 0x0
@@ -1362,7 +1362,7 @@ lbl_fn_805C8A30_0000128C:
     cmpwi r3, 0x0
     bne lbl_fn_805C8A30_000018C4
     li r3, 0x1
-    bl fn_805C3570
+    bl gx_bindCachedTexture
     b lbl_fn_805C8A30_000018C4
 lbl_fn_805C8A30_000012A0:
     lwz r0, 0x0(r30)
@@ -1497,7 +1497,7 @@ lbl_fn_805C8A30_00001470:
     cmpwi r3, 0x0
     bne lbl_fn_805C8A30_00001480
     li r3, 0xc
-    bl fn_805C3570
+    bl gx_bindCachedTexture
 lbl_fn_805C8A30_00001480:
     lfd f31, 0x310(r31)
     mr r29, r30
@@ -1534,7 +1534,7 @@ lbl_fn_805C8A30_000014F4:
     cmpwi r3, 0x0
     bne lbl_fn_805C8A30_00001504
     li r3, 0xa
-    bl fn_805C3570
+    bl gx_bindCachedTexture
 lbl_fn_805C8A30_00001504:
     lfd f31, 0x310(r31)
     mr r29, r30
@@ -1571,7 +1571,7 @@ lbl_fn_805C8A30_00001578:
     cmpwi r3, 0x0
     bne lbl_fn_805C8A30_000018C4
     li r3, 0xd
-    bl fn_805C3570
+    bl gx_bindCachedTexture
     b lbl_fn_805C8A30_000018C4
 lbl_fn_805C8A30_0000158C:
     rlwinm. r0, r3, 0, 27, 27
@@ -1703,7 +1703,7 @@ lbl_fn_805C8A30_00001750:
     cmpwi r3, 0x0
     bne lbl_fn_805C8A30_00001760
     li r3, 0xb
-    bl fn_805C3570
+    bl gx_bindCachedTexture
 lbl_fn_805C8A30_00001760:
     lfd f31, 0x310(r31)
     mr r29, r30
@@ -1740,7 +1740,7 @@ lbl_fn_805C8A30_000017D4:
     cmpwi r3, 0x0
     bne lbl_fn_805C8A30_000017E4
     li r3, 0x9
-    bl fn_805C3570
+    bl gx_bindCachedTexture
 lbl_fn_805C8A30_000017E4:
     lfd f30, 0x310(r31)
     mr r29, r30
@@ -1777,7 +1777,7 @@ lbl_fn_805C8A30_00001858:
     cmpwi r3, 0x0
     bne lbl_fn_805C8A30_000018C4
     li r3, 0xd
-    bl fn_805C3570
+    bl gx_bindCachedTexture
     b lbl_fn_805C8A30_000018C4
 lbl_fn_805C8A30_0000186C:
     lwz r0, 0x0(r3)

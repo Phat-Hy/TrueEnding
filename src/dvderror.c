@@ -40,7 +40,7 @@ void fn_805FFED0(void);
 void fn_805FFF70(void);
 void fn_80600010(void);
 void fn_806000A0(void);
-void fn_80600120(void);
+void dvd_recordErrorInfo(void);
 void fn_80600190(void);
 
 asm void fn_805FF800(void)
@@ -699,7 +699,7 @@ lbl_fn_806000A0_908:
     blr
 }
 
-asm void fn_80600120(void)
+asm void dvd_recordErrorInfo(void)
 {
     nofralloc
     stwu r1, -0x10(r1)

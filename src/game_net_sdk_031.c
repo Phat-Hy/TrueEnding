@@ -31,7 +31,7 @@ extern void net_sendString(void);
 extern void net_sendFormattedCommand(void);
 extern void fn_806DE940(void);
 extern void net_sendPacket(void);
-extern void fn_806DEE40(void);
+extern void net_initSocketConnection(void);
 extern void fn_806DF860(void);
 extern void fn_806E2E10(void);
 extern void fn_806E3A60(void);
@@ -662,7 +662,7 @@ lbl_fn_806DFEC0_00000824:
     addi r4, r1, 0x8
     li r7, 0x0
     stw r0, 0xc(r1)
-    bl fn_806DEE40
+    bl net_initSocketConnection
     cmpwi r3, 0x0
     beq lbl_fn_806DFEC0_00000884
     b lbl_fn_806DFEC0_00000894
@@ -1919,7 +1919,7 @@ lbl_fn_806E0DE0_000019A0:
     addi r4, r1, 0x10
     li r7, 0x0
     stw r0, 0x14(r1)
-    bl fn_806DEE40
+    bl net_initSocketConnection
     cmpwi r3, 0x0
     beq lbl_fn_806E0DE0_000019EC
     b lbl_fn_806E0DE0_000019FC

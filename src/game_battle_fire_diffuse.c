@@ -84,7 +84,7 @@ extern u32 lbl_80886574;
 /* Function declarations */
 void fn_8041CF94(void);
 void battle_invokeVtableMethod(void);
-void fn_8041D198(void);
+void battle_assignFieldProperty(void);
 void fn_8041D23C(void);
 void fn_8041D2C4(void);
 void fn_8041D320(void);
@@ -141,9 +141,9 @@ lbl_fn_8041CF94_00000054:
     bne lbl_fn_8041CF94_000000A0
     lis r6, lbl_807C88F0@ha
     lis r4, battle_invokeVtableMethod@ha
-    lis r3, fn_8041D198@ha
+    lis r3, battle_assignFieldProperty@ha
     li r0, 0x1
-    addi r3, r3, fn_8041D198@l
+    addi r3, r3, battle_assignFieldProperty@l
     addi r5, r6, lbl_807C88F0@l
     addi r4, r4, battle_invokeVtableMethod@l
     stw r4, 0x4(r5)
@@ -256,7 +256,7 @@ asm void battle_invokeVtableMethod(void)
     bctr
 }
 
-asm void fn_8041D198(void)
+asm void battle_assignFieldProperty(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -267,24 +267,24 @@ asm void fn_8041D198(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    bne lbl_fn_8041D198_00000238
+    bne lbl_battle_assignFieldProperty_00000238
     lis r3, lbl_8078DE50@ha
     addi r3, r3, lbl_8078DE50@l
     stw r3, 0x0(r4)
-    b lbl_fn_8041D198_00000290
-lbl_fn_8041D198_00000238:
+    b lbl_battle_assignFieldProperty_00000290
+lbl_battle_assignFieldProperty_00000238:
     cmpwi r5, 0x0
-    bne lbl_fn_8041D198_0000024C
+    bne lbl_battle_assignFieldProperty_0000024C
     lwz r0, 0x0(r3)
     stw r0, 0x0(r4)
-    b lbl_fn_8041D198_00000290
-lbl_fn_8041D198_0000024C:
+    b lbl_battle_assignFieldProperty_00000290
+lbl_battle_assignFieldProperty_0000024C:
     cmpwi r5, 0x1
-    bne lbl_fn_8041D198_00000260
+    bne lbl_battle_assignFieldProperty_00000260
     li r0, 0x0
     stw r0, 0x0(r4)
-    b lbl_fn_8041D198_00000290
-lbl_fn_8041D198_00000260:
+    b lbl_battle_assignFieldProperty_00000290
+lbl_battle_assignFieldProperty_00000260:
     lwz r5, 0x0(r4)
     lis r3, lbl_8078DE50@ha
     lwz r4, lbl_8078DE50@l(r3)
@@ -292,13 +292,13 @@ lbl_fn_8041D198_00000260:
     bl strcmp
     cntlzw r0, r3
     srwi. r0, r0, 5
-    beq lbl_fn_8041D198_00000288
+    beq lbl_battle_assignFieldProperty_00000288
     stw r30, 0x0(r31)
-    b lbl_fn_8041D198_00000290
-lbl_fn_8041D198_00000288:
+    b lbl_battle_assignFieldProperty_00000290
+lbl_battle_assignFieldProperty_00000288:
     li r0, 0x0
     stw r0, 0x0(r31)
-lbl_fn_8041D198_00000290:
+lbl_battle_assignFieldProperty_00000290:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -412,9 +412,9 @@ lbl_fn_8041D320_000003C8:
     bne lbl_fn_8041D320_00000418
     lis r6, lbl_807C88F0@ha
     lis r4, battle_invokeVtableMethod@ha
-    lis r3, fn_8041D198@ha
+    lis r3, battle_assignFieldProperty@ha
     li r0, 0x1
-    addi r3, r3, fn_8041D198@l
+    addi r3, r3, battle_assignFieldProperty@l
     addi r5, r6, lbl_807C88F0@l
     addi r4, r4, battle_invokeVtableMethod@l
     stw r4, 0x4(r5)
@@ -520,9 +520,9 @@ lbl_fn_8041D4B4_00000554:
     bne lbl_fn_8041D4B4_00000590
     lis r6, lbl_807C88F0@ha
     lis r4, battle_invokeVtableMethod@ha
-    lis r3, fn_8041D198@ha
+    lis r3, battle_assignFieldProperty@ha
     li r0, 0x1
-    addi r3, r3, fn_8041D198@l
+    addi r3, r3, battle_assignFieldProperty@l
     addi r5, r6, lbl_807C88F0@l
     addi r4, r4, battle_invokeVtableMethod@l
     stw r4, 0x4(r5)

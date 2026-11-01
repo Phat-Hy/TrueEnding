@@ -9,7 +9,7 @@ extern void fn_805C22B0(void);
 extern void fn_805C22C0(void);
 extern void fn_805C2630(void);
 extern void fn_805C26A0(void);
-extern void fn_805C3570(void);
+extern void gx_bindCachedTexture(void);
 extern void fn_805CC3E0(void);
 extern void fn_806613D0(void);
 
@@ -109,7 +109,7 @@ lbl_fn_805C95D0_0000010C:
     cmpwi r3, 0x0
     bne lbl_fn_805C95D0_0000011C
     li r3, 0x4
-    bl fn_805C3570
+    bl gx_bindCachedTexture
 lbl_fn_805C95D0_0000011C:
     li r0, 0x0
     stw r0, 0x68(r26)
@@ -170,7 +170,7 @@ lbl_fn_805C95D0_000001E8:
     cmpwi r3, 0x0
     bne lbl_fn_805C95D0_000001F8
     li r3, 0x4
-    bl fn_805C3570
+    bl gx_bindCachedTexture
 lbl_fn_805C95D0_000001F8:
     li r0, 0x0
     stw r0, 0x68(r26)
@@ -380,7 +380,7 @@ lbl_fn_805C95D0_000004C8:
     cmpwi r3, 0x0
     bne lbl_fn_805C95D0_000004D8
     li r3, 0x4
-    bl fn_805C3570
+    bl gx_bindCachedTexture
 lbl_fn_805C95D0_000004D8:
     li r0, 0x0
     stw r0, 0x68(r26)
@@ -589,7 +589,7 @@ lbl_fn_805C95D0_000007A0:
     cmpwi r3, 0x0
     bne lbl_fn_805C95D0_000007B0
     li r3, 0x4
-    bl fn_805C3570
+    bl gx_bindCachedTexture
 lbl_fn_805C95D0_000007B0:
     li r0, 0x0
     stw r0, 0x68(r26)
@@ -651,7 +651,7 @@ lbl_fn_805C95D0_00000878:
     cmpwi r3, 0x0
     bne lbl_fn_805C95D0_00000888
     li r3, 0x4
-    bl fn_805C3570
+    bl gx_bindCachedTexture
 lbl_fn_805C95D0_00000888:
     li r0, 0x0
     stw r0, 0x68(r26)
@@ -710,7 +710,7 @@ lbl_fn_805C95D0_00000948:
     cmpwi r3, 0x0
     bne lbl_fn_805C95D0_00000958
     li r3, 0x4
-    bl fn_805C3570
+    bl gx_bindCachedTexture
 lbl_fn_805C95D0_00000958:
     li r0, 0x0
     stw r0, 0x68(r26)
@@ -769,7 +769,7 @@ lbl_fn_805C95D0_00000A18:
     cmpwi r3, 0x0
     bne lbl_fn_805C95D0_00000A28
     li r3, 0x4
-    bl fn_805C3570
+    bl gx_bindCachedTexture
 lbl_fn_805C95D0_00000A28:
     li r0, 0x0
     stw r0, 0x68(r26)
@@ -828,7 +828,7 @@ lbl_fn_805C95D0_00000AE8:
     cmpwi r3, 0x0
     bne lbl_fn_805C95D0_00000AF8
     li r3, 0x4
-    bl fn_805C3570
+    bl gx_bindCachedTexture
 lbl_fn_805C95D0_00000AF8:
     li r0, 0x0
     stw r0, 0x68(r26)
@@ -887,7 +887,7 @@ lbl_fn_805C95D0_00000BB8:
     cmpwi r3, 0x0
     bne lbl_fn_805C95D0_00000BC8
     li r3, 0x4
-    bl fn_805C3570
+    bl gx_bindCachedTexture
 lbl_fn_805C95D0_00000BC8:
     li r0, 0x0
     stw r0, 0x68(r26)
@@ -946,7 +946,7 @@ lbl_fn_805C95D0_00000C88:
     cmpwi r3, 0x0
     bne lbl_fn_805C95D0_00000C98
     li r3, 0x4
-    bl fn_805C3570
+    bl gx_bindCachedTexture
 lbl_fn_805C95D0_00000C98:
     li r0, 0x0
     stw r0, 0x68(r26)
@@ -1005,7 +1005,7 @@ lbl_fn_805C95D0_00000D58:
     cmpwi r3, 0x0
     bne lbl_fn_805C95D0_00000D68
     li r3, 0x4
-    bl fn_805C3570
+    bl gx_bindCachedTexture
 lbl_fn_805C95D0_00000D68:
     li r0, 0x0
     stw r0, 0x68(r26)
@@ -1934,7 +1934,7 @@ lbl_fn_805CAEF0_00001A30:
     cmpwi r3, 0x0
     bne lbl_fn_805CAEF0_00001A40
     li r3, 0x5
-    bl fn_805C3570
+    bl gx_bindCachedTexture
 lbl_fn_805CAEF0_00001A40:
     slwi r0, r31, 2
     add r3, r28, r0
@@ -2102,7 +2102,7 @@ lbl_fn_805CAEF0_00001C90:
     cmpwi r3, 0x0
     bne lbl_fn_805CAEF0_00002B78
     li r3, 0x1
-    bl fn_805C3570
+    bl gx_bindCachedTexture
     b lbl_fn_805CAEF0_00002B78
     cmpwi r4, 0x1
     bne lbl_fn_805CAEF0_00001D60
@@ -2150,7 +2150,7 @@ lbl_fn_805CAEF0_00001D4C:
     cmpwi r3, 0x0
     bne lbl_fn_805CAEF0_00002B78
     li r3, 0x8
-    bl fn_805C3570
+    bl gx_bindCachedTexture
     b lbl_fn_805CAEF0_00002B78
 lbl_fn_805CAEF0_00001D60:
     cmpwi r4, 0x0
@@ -2203,7 +2203,7 @@ lbl_fn_805CAEF0_00001E14:
     cmpwi r3, 0x0
     bne lbl_fn_805CAEF0_00002B78
     li r3, 0x5
-    bl fn_805C3570
+    bl gx_bindCachedTexture
     b lbl_fn_805CAEF0_00002B78
     lwz r3, 0x84(r28)
     cmpwi r3, 0x0
@@ -2295,7 +2295,7 @@ lbl_fn_805CAEF0_00001F60:
     cmpwi r3, 0x0
     bne lbl_fn_805CAEF0_00001F70
     li r3, 0xc
-    bl fn_805C3570
+    bl gx_bindCachedTexture
 lbl_fn_805CAEF0_00001F70:
     lfd f31, 0x310(r29)
     mr r27, r28
@@ -2332,7 +2332,7 @@ lbl_fn_805CAEF0_00001FE4:
     cmpwi r3, 0x0
     bne lbl_fn_805CAEF0_00001FF4
     li r3, 0xa
-    bl fn_805C3570
+    bl gx_bindCachedTexture
 lbl_fn_805CAEF0_00001FF4:
     lfd f31, 0x310(r29)
     mr r27, r28
@@ -2404,7 +2404,7 @@ lbl_fn_805CAEF0_000020E0:
     cmpwi r3, 0x0
     bne lbl_fn_805CAEF0_00002B78
     li r3, 0xd
-    bl fn_805C3570
+    bl gx_bindCachedTexture
     b lbl_fn_805CAEF0_00002B78
     lwz r3, 0x84(r28)
     cmpwi r3, 0xa
@@ -2497,7 +2497,7 @@ lbl_fn_805CAEF0_00002230:
     cmpwi r3, 0x0
     bne lbl_fn_805CAEF0_00002240
     li r3, 0xb
-    bl fn_805C3570
+    bl gx_bindCachedTexture
 lbl_fn_805CAEF0_00002240:
     lfd f31, 0x310(r29)
     mr r27, r28
@@ -2534,7 +2534,7 @@ lbl_fn_805CAEF0_000022B4:
     cmpwi r3, 0x0
     bne lbl_fn_805CAEF0_000022C4
     li r3, 0x9
-    bl fn_805C3570
+    bl gx_bindCachedTexture
 lbl_fn_805CAEF0_000022C4:
     lfd f30, 0x310(r29)
     mr r27, r28
@@ -2606,7 +2606,7 @@ lbl_fn_805CAEF0_000023B0:
     cmpwi r3, 0x0
     bne lbl_fn_805CAEF0_00002B78
     li r3, 0xd
-    bl fn_805C3570
+    bl gx_bindCachedTexture
     b lbl_fn_805CAEF0_00002B78
     lbz r0, 0x8c(r28)
     cmpwi r0, 0x0
@@ -2697,7 +2697,7 @@ lbl_fn_805CAEF0_000024F8:
     cmpwi r3, 0x0
     bne lbl_fn_805CAEF0_000025C0
     li r3, 0xe
-    bl fn_805C3570
+    bl gx_bindCachedTexture
     b lbl_fn_805CAEF0_000025C0
 lbl_fn_805CAEF0_0000250C:
     li r0, 0x25
@@ -2749,7 +2749,7 @@ lbl_fn_805CAEF0_000025B0:
     cmpwi r3, 0x0
     bne lbl_fn_805CAEF0_000025C0
     li r3, 0xd
-    bl fn_805C3570
+    bl gx_bindCachedTexture
 lbl_fn_805CAEF0_000025C0:
     lfs f31, 0x2e4(r29)
     mr r27, r28
@@ -2856,7 +2856,7 @@ lbl_fn_805CAEF0_00002730:
     cmpwi r3, 0x0
     bne lbl_fn_805CAEF0_00002778
     li r3, 0xf
-    bl fn_805C3570
+    bl gx_bindCachedTexture
     b lbl_fn_805CAEF0_00002778
 lbl_fn_805CAEF0_00002744:
     lwz r4, 0x4(r28)
@@ -2872,7 +2872,7 @@ lbl_fn_805CAEF0_00002768:
     cmpwi r3, 0x0
     bne lbl_fn_805CAEF0_00002778
     li r3, 0xd
-    bl fn_805C3570
+    bl gx_bindCachedTexture
 lbl_fn_805CAEF0_00002778:
     li r0, 0x9
     stw r0, 0x14(r28)
@@ -2980,7 +2980,7 @@ lbl_fn_805CAEF0_000028FC:
     cmpwi r4, 0x0
     bne lbl_fn_805CAEF0_0000290C
     li r3, 0x5
-    bl fn_805C3570
+    bl gx_bindCachedTexture
 lbl_fn_805CAEF0_0000290C:
     lwz r4, 0x4(r28)
     li r3, 0x0
@@ -2995,7 +2995,7 @@ lbl_fn_805CAEF0_00002930:
     cmpwi r3, 0x0
     bne lbl_fn_805CAEF0_00002B78
     li r3, 0x10
-    bl fn_805C3570
+    bl gx_bindCachedTexture
     b lbl_fn_805CAEF0_00002B78
     li r0, 0x25
     addi r4, r29, 0x68
@@ -3053,7 +3053,7 @@ lbl_fn_805CAEF0_00002A04:
     cmpwi r3, 0x0
     bne lbl_fn_805CAEF0_00002A14
     li r3, 0x2
-    bl fn_805C3570
+    bl gx_bindCachedTexture
 lbl_fn_805CAEF0_00002A14:
     li r0, 0x0
     stb r0, 0x400(r28)
@@ -3074,7 +3074,7 @@ lbl_fn_805CAEF0_00002A4C:
     cmpwi r3, 0x0
     bne lbl_fn_805CAEF0_00002A5C
     li r3, 0x3
-    bl fn_805C3570
+    bl gx_bindCachedTexture
 lbl_fn_805CAEF0_00002A5C:
     li r0, 0x1
     stb r0, 0x400(r28)
@@ -3095,7 +3095,7 @@ lbl_fn_805CAEF0_00002A94:
     cmpwi r3, 0x0
     bne lbl_fn_805CAEF0_00002AA4
     li r3, 0x3
-    bl fn_805C3570
+    bl gx_bindCachedTexture
 lbl_fn_805CAEF0_00002AA4:
     li r0, 0x0
     stb r0, 0x400(r28)
@@ -3154,7 +3154,7 @@ lbl_fn_805CAEF0_00002B68:
     cmpwi r3, 0x0
     bne lbl_fn_805CAEF0_00002B78
     li r3, 0x6
-    bl fn_805C3570
+    bl gx_bindCachedTexture
 lbl_fn_805CAEF0_00002B78:
     addi r11, r1, 0x40
     psq_l f31, 0x58(r1), 0, 0

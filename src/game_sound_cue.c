@@ -31,7 +31,7 @@ void fn_801E2D24(void *dst, void *src);
 void fn_801E2D30(void);
 void fn_801E2D44(void *dst, void *src);
 void fn_801E2D50(void *p);
-u32 fn_801E2D60(void *p);
+u32 sound_cue_getCursor(void *p);
 void fn_801E2D68(void *p);
 void fn_801E2D78(void);
 void fn_801E3B4C(void);
@@ -532,7 +532,7 @@ void fn_801E2D50(void *p)
     *(u32 *)p += 0x18;
 }
 
-u32 fn_801E2D60(void *p)
+u32 sound_cue_getCursor(void *p)
 {
     return *(u32 *)p;
 }

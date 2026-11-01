@@ -57,7 +57,7 @@ extern void fn_806DEA40(void);
 extern void fn_806DEBA0(void);
 extern void fn_806DED00(void);
 extern void net_sendPacket(void);
-extern void fn_806DEE40(void);
+extern void net_initSocketConnection(void);
 extern void fn_806E2B10(void);
 extern void fn_806E2E10(void);
 extern void fn_806E3980(void);
@@ -309,7 +309,7 @@ lbl_fn_806E4240_00000220:
     li r6, 0x0
     li r7, 0x2
     stw r0, 0x34(r1)
-    bl fn_806DEE40
+    bl net_initSocketConnection
     cmpwi r3, 0x0
     beq lbl_fn_806E4240_00000374
     b lbl_fn_806E4240_000003B4
@@ -349,7 +349,7 @@ lbl_fn_806E4240_000002B8:
     li r6, 0x0
     li r7, 0x2
     stw r0, 0x2c(r1)
-    bl fn_806DEE40
+    bl net_initSocketConnection
     cmpwi r3, 0x0
     beq lbl_fn_806E4240_00000374
     b lbl_fn_806E4240_000003B4
@@ -462,7 +462,7 @@ lbl_fn_806E4600_00000408:
     stw r8, 0x14(r1)
     stw r9, 0x8(r1)
     stw r8, 0xc(r1)
-    bl fn_806DEE40
+    bl net_initSocketConnection
 lbl_fn_806E4600_00000488:
     mr r3, r29
     mr r4, r30
@@ -1643,7 +1643,7 @@ lbl_fn_806E5570_00001454:
     addi r4, r1, 0x8
     li r7, 0x0
     stw r0, 0xc(r1)
-    bl fn_806DEE40
+    bl net_initSocketConnection
     cmpwi r3, 0x0
     beq lbl_fn_806E5570_00001494
     b lbl_fn_806E5570_000014A4
@@ -1821,7 +1821,7 @@ lbl_fn_806E5840_000016D0:
     stw r7, 0x8(r1)
     li r7, 0x0
     stw r0, 0xc(r1)
-    bl fn_806DEE40
+    bl net_initSocketConnection
     cmpwi r3, 0x0
     beq lbl_fn_806E5840_00001714
     b lbl_fn_806E5840_00001724

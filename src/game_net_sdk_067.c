@@ -14,7 +14,7 @@ extern void dtor_80084684(void);
 extern void vswprintf(void);
 extern void __ptmf_scall(void);
 extern void fn_807267D0(void);
-extern void fn_80726B50(void);
+extern void net_releaseBuffer(void);
 extern void fn_80727600(void);
 extern void fn_80727660(void);
 extern void fn_80729980(void);
@@ -117,7 +117,7 @@ asm void fn_8072A850(void)
     mr r30, r3
     beq lbl_fn_8072A850_000000C4
     li r4, 0x0
-    bl fn_80726B50
+    bl net_releaseBuffer
     cmpwi r31, 0x0
     ble lbl_fn_8072A850_000000C4
     mr r3, r30
@@ -337,7 +337,7 @@ lbl_fn_8072A9C0_000002D8:
     bl fn_8072C330
     addi r3, r31, 0x88
     li r4, 0x0
-    bl fn_80726B50
+    bl net_releaseBuffer
     mr r10, r31
     lfs f1, 0x80(r31)
     lfs f0, 0x78(r31)
@@ -475,7 +475,7 @@ lbl_fn_8072ABD0_000004E8:
     bl fn_8072C330
     addi r3, r31, 0x88
     li r4, 0x0
-    bl fn_80726B50
+    bl net_releaseBuffer
     mr r10, r31
     lfs f1, 0x84(r31)
     lfs f0, 0x7c(r31)
@@ -607,7 +607,7 @@ lbl_fn_8072ADE0_000006E0:
     bl fn_8072C330
     addi r3, r31, 0x74
     li r4, 0x0
-    bl fn_80726B50
+    bl net_releaseBuffer
     mr r10, r31
     addi r11, r10, 0x120
     bl _restgpr_15
@@ -711,7 +711,7 @@ lbl_fn_8072AFC0_00000860:
     bl fn_8072C330
     addi r3, r31, 0x8
     li r4, 0x0
-    bl fn_80726B50
+    bl net_releaseBuffer
     mr r10, r31
     addi r11, r10, 0xc0
     bl _restgpr_15
@@ -796,7 +796,7 @@ asm void fn_8072B140(void)
     bl fn_8072C330
     addi r3, r1, 0x18
     li r4, 0x0
-    bl fn_80726B50
+    bl net_releaseBuffer
     lfs f1, 0x10(r1)
     addi r11, r1, 0xc0
     lfs f0, 0x8(r1)
@@ -882,7 +882,7 @@ asm void fn_8072B290(void)
     bl fn_8072C330
     addi r3, r1, 0x18
     li r4, 0x0
-    bl fn_80726B50
+    bl net_releaseBuffer
     lfs f1, 0x14(r1)
     addi r11, r1, 0xc0
     lfs f0, 0xc(r1)
@@ -960,7 +960,7 @@ asm void fn_8072B3E0(void)
     bl fn_8072C330
     addi r3, r1, 0x8
     li r4, 0x0
-    bl fn_80726B50
+    bl net_releaseBuffer
     addi r11, r1, 0xb0
     bl _restgpr_16
     lwz r0, 0xb4(r1)
@@ -1097,7 +1097,7 @@ lbl_fn_8072B500_00000E14:
     stfs f2, 0x2c(r30)
     li r4, 0x0
     stfs f0, 0x30(r30)
-    bl fn_80726B50
+    bl net_releaseBuffer
     mr r10, r31
     fmr f1, f31
     psq_l f31, 0xf8(r10), 0, 0
@@ -1216,7 +1216,7 @@ lbl_fn_8072B720_00000FD4:
     stfs f2, 0x2c(r30)
     li r4, 0x0
     stfs f0, 0x30(r30)
-    bl fn_80726B50
+    bl net_releaseBuffer
     mr r10, r31
     fmr f1, f31
     psq_l f31, 0x88(r10), 0, 0
@@ -1305,7 +1305,7 @@ asm void fn_8072B8E0(void)
     stfs f2, 0x2c(r31)
     li r4, 0x0
     stfs f0, 0x30(r31)
-    bl fn_80726B50
+    bl net_releaseBuffer
     fmr f1, f31
     psq_l f31, 0x88(r1), 0, 0
     lfd f31, 0x80(r1)
@@ -1537,7 +1537,7 @@ asm void fn_8072BC00(void)
     lfs f0, 0x10(r1)
     li r4, 0x0
     fsubs f31, f1, f0
-    bl fn_80726B50
+    bl net_releaseBuffer
     fmr f1, f31
     psq_l f31, 0x98(r1), 0, 0
     lfd f31, 0x90(r1)
@@ -1785,12 +1785,12 @@ lbl_fn_8072BD60_0000176C:
     li r27, 0x1
     li r25, 0xa
     li r4, 0x0
-    bl fn_80726B50
+    bl net_releaseBuffer
     b lbl_fn_8072BD60_00001AFC
 lbl_fn_8072BD60_00001928:
     addi r3, r1, 0xe0
     li r4, 0x0
-    bl fn_80726B50
+    bl net_releaseBuffer
 lbl_fn_8072BD60_00001934:
     lwz r3, 0x60(r22)
     addi r4, r1, 0x88
@@ -2225,12 +2225,12 @@ lbl_fn_8072C450_00001DB0:
     mr r3, r30
     li r25, 0xa
     li r4, 0x0
-    bl fn_80726B50
+    bl net_releaseBuffer
     b lbl_fn_8072C450_000023B8
 lbl_fn_8072C450_00001F4C:
     addi r3, r1, 0x148
     li r4, 0x0
-    bl fn_80726B50
+    bl net_releaseBuffer
 lbl_fn_8072C450_00001F58:
     lwz r3, 0x60(r21)
     clrlwi r4, r25, 16
@@ -2320,7 +2320,7 @@ lbl_fn_8072C450_00001F58:
     lfs f0, 0x28(r1)
     li r4, 0x0
     fsubs f27, f1, f0
-    bl fn_80726B50
+    bl net_releaseBuffer
     fsubs f1, f25, f27
     lfs f0, 0x74(r1)
     fmuls f1, f1, f30
@@ -2405,7 +2405,7 @@ lbl_fn_8072C450_000020D4:
     lfs f0, 0x18(r1)
     li r4, 0x0
     fsubs f27, f1, f0
-    bl fn_80726B50
+    bl net_releaseBuffer
     fsubs f1, f25, f27
     lfs f0, 0x74(r1)
     fadds f0, f0, f1

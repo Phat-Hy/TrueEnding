@@ -7,7 +7,7 @@ extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_8003E120(void);
-extern void fn_8004A664(void);
+extern void sound_traverseNodeTree(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
@@ -1183,13 +1183,13 @@ lbl_fn_8021F47C_00000E70:
     cmpwi r4, 0x0
     beq lbl_fn_8021F47C_00000ED8
     mr r3, r18
-    bl fn_8004A664
+    bl sound_traverseNodeTree
 lbl_fn_8021F47C_00000ED8:
     lwz r4, 0x4(r21)
     cmpwi r4, 0x0
     beq lbl_fn_8021F47C_00000EEC
     mr r3, r18
-    bl fn_8004A664
+    bl sound_traverseNodeTree
 lbl_fn_8021F47C_00000EEC:
     mr r3, r21
     bl dtor_80084684
@@ -1201,13 +1201,13 @@ lbl_fn_8021F47C_00000EF4:
     cmpwi r4, 0x0
     beq lbl_fn_8021F47C_00000F14
     mr r3, r18
-    bl fn_8004A664
+    bl sound_traverseNodeTree
 lbl_fn_8021F47C_00000F14:
     lwz r4, 0x4(r21)
     cmpwi r4, 0x0
     beq lbl_fn_8021F47C_00000F28
     mr r3, r18
-    bl fn_8004A664
+    bl sound_traverseNodeTree
 lbl_fn_8021F47C_00000F28:
     mr r3, r21
     bl dtor_80084684
@@ -1225,13 +1225,13 @@ lbl_fn_8021F47C_00000F38:
     cmpwi r4, 0x0
     beq lbl_fn_8021F47C_00000F64
     mr r3, r18
-    bl fn_8004A664
+    bl sound_traverseNodeTree
 lbl_fn_8021F47C_00000F64:
     lwz r4, 0x4(r21)
     cmpwi r4, 0x0
     beq lbl_fn_8021F47C_00000F78
     mr r3, r18
-    bl fn_8004A664
+    bl sound_traverseNodeTree
 lbl_fn_8021F47C_00000F78:
     mr r3, r21
     bl dtor_80084684
@@ -1243,13 +1243,13 @@ lbl_fn_8021F47C_00000F80:
     cmpwi r4, 0x0
     beq lbl_fn_8021F47C_00000FA0
     mr r3, r18
-    bl fn_8004A664
+    bl sound_traverseNodeTree
 lbl_fn_8021F47C_00000FA0:
     lwz r4, 0x4(r21)
     cmpwi r4, 0x0
     beq lbl_fn_8021F47C_00000FB4
     mr r3, r18
-    bl fn_8004A664
+    bl sound_traverseNodeTree
 lbl_fn_8021F47C_00000FB4:
     mr r3, r21
     bl dtor_80084684

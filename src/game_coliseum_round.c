@@ -25,7 +25,7 @@ extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
 extern void fn_80383728(void);
 extern void battle_invokeVtableMethod(void);
-extern void fn_8041D198(void);
+extern void battle_assignFieldProperty(void);
 extern void fn_8041D23C(void);
 extern void fn_8047C1D8(void);
 extern void fn_8047CDE8(void);
@@ -1123,9 +1123,9 @@ lbl_fn_8048FC7C_00000E38:
     bne lbl_fn_8048FC7C_00000EC8
     lis r6, lbl_807C88F0@ha
     lis r4, battle_invokeVtableMethod@ha
-    lis r3, fn_8041D198@ha
+    lis r3, battle_assignFieldProperty@ha
     li r0, 0x1
-    addi r3, r3, fn_8041D198@l
+    addi r3, r3, battle_assignFieldProperty@l
     addi r5, r6, lbl_807C88F0@l
     addi r4, r4, battle_invokeVtableMethod@l
     stw r4, 0x4(r5)

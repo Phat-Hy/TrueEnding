@@ -37,7 +37,7 @@ extern void fn_806DC0B0(void);
 extern void net_sendString(void);
 extern void net_sendFormattedCommand(void);
 extern void fn_806DEA40(void);
-extern void fn_806DEE40(void);
+extern void net_initSocketConnection(void);
 extern void fn_806DFEC0(void);
 extern void fn_806E0BA0(void);
 extern void fn_806E0DE0(void);
@@ -1019,7 +1019,7 @@ lbl_fn_806E2BD0_00000CCC:
     stw r7, 0x10(r1)
     li r7, 0x0
     stw r0, 0x14(r1)
-    bl fn_806DEE40
+    bl net_initSocketConnection
     cmpwi r3, 0x0
     beq lbl_fn_806E2BD0_00000D04
     b lbl_fn_806E2BD0_00000DE8
@@ -1700,7 +1700,7 @@ lbl_fn_806E3580_00001650:
     addi r4, r1, 0x38
     li r7, 0x0
     stw r0, 0x3c(r1)
-    bl fn_806DEE40
+    bl net_initSocketConnection
     cmpwi r3, 0x0
     beq lbl_fn_806E3580_00001944
     b lbl_fn_806E3580_00001948
@@ -1731,7 +1731,7 @@ lbl_fn_806E3580_000016B0:
     stw r7, 0x30(r1)
     li r7, 0x0
     stw r0, 0x34(r1)
-    bl fn_806DEE40
+    bl net_initSocketConnection
     cmpwi r3, 0x0
     beq lbl_fn_806E3580_00001944
     b lbl_fn_806E3580_00001948
@@ -1762,7 +1762,7 @@ lbl_fn_806E3580_00001724:
     stw r7, 0x28(r1)
     li r7, 0x0
     stw r0, 0x2c(r1)
-    bl fn_806DEE40
+    bl net_initSocketConnection
     cmpwi r3, 0x0
     beq lbl_fn_806E3580_00001944
     b lbl_fn_806E3580_00001948
@@ -1793,7 +1793,7 @@ lbl_fn_806E3580_00001798:
     stw r7, 0x20(r1)
     li r7, 0x0
     stw r0, 0x24(r1)
-    bl fn_806DEE40
+    bl net_initSocketConnection
     cmpwi r3, 0x0
     beq lbl_fn_806E3580_00001944
     b lbl_fn_806E3580_00001948
@@ -1826,7 +1826,7 @@ lbl_fn_806E3580_0000180C:
     stw r7, 0x18(r1)
     li r7, 0x0
     stw r0, 0x1c(r1)
-    bl fn_806DEE40
+    bl net_initSocketConnection
     cmpwi r3, 0x0
     beq lbl_fn_806E3580_00001944
     b lbl_fn_806E3580_00001948
@@ -1857,7 +1857,7 @@ lbl_fn_806E3580_00001888:
     stw r7, 0x10(r1)
     li r7, 0x0
     stw r0, 0x14(r1)
-    bl fn_806DEE40
+    bl net_initSocketConnection
     cmpwi r3, 0x0
     beq lbl_fn_806E3580_00001944
     b lbl_fn_806E3580_00001948
@@ -1888,7 +1888,7 @@ lbl_fn_806E3580_000018FC:
     stw r7, 0x8(r1)
     li r7, 0x0
     stw r0, 0xc(r1)
-    bl fn_806DEE40
+    bl net_initSocketConnection
     cmpwi r3, 0x0
     beq lbl_fn_806E3580_00001944
     b lbl_fn_806E3580_00001948

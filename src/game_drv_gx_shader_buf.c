@@ -28,7 +28,7 @@ extern void fn_805C27E0(void);
 extern void fn_805C2A70(void);
 extern void fn_805C2C10(void);
 extern void fn_805C2CF0(void);
-extern void fn_805C3570(void);
+extern void gx_bindCachedTexture(void);
 extern void fn_805C3950(void);
 extern void fn_805C3B20(void);
 extern void fn_805C3C40(void);
@@ -1405,7 +1405,7 @@ lbl_fn_805C5C50_000012A4:
     cmpwi r3, 0x0
     bne lbl_fn_805C5C50_000012B4
     li r3, 0x0
-    bl fn_805C3570
+    bl gx_bindCachedTexture
 lbl_fn_805C5C50_000012B4:
     li r0, 0x2
     stw r0, 0x14(r28)
@@ -1793,7 +1793,7 @@ lbl_fn_805C5C50_00001850:
     cmpwi r3, 0x0
     bne lbl_fn_805C5C50_00002674
     li r3, 0x15
-    bl fn_805C3570
+    bl gx_bindCachedTexture
     b lbl_fn_805C5C50_00002674
     lwz r4, 0x18(r28)
     slwi r0, r4, 2
@@ -2008,7 +2008,7 @@ lbl_fn_805C5C50_00001B70:
     cmpwi r3, 0x0
     bne lbl_fn_805C5C50_00001B80
     li r3, 0x7
-    bl fn_805C3570
+    bl gx_bindCachedTexture
 lbl_fn_805C5C50_00001B80:
     li r0, 0x8
     stw r0, 0x14(r28)

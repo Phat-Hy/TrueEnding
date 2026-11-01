@@ -81,7 +81,7 @@ void fn_80726680(void);
 void fn_80726760(void);
 void fn_807267C0(void);
 void fn_807267D0(void);
-void fn_80726B50(void);
+void net_releaseBuffer(void);
 void fn_80726B90(void);
 void fn_807274C0(void);
 void fn_80727540(void);
@@ -553,7 +553,7 @@ lbl_fn_807267D0_00000578:
     blr
 }
 
-asm void fn_80726B50(void)
+asm void net_releaseBuffer(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -562,11 +562,11 @@ asm void fn_80726B50(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    beq lbl_fn_80726B50_00000684
+    beq lbl_net_releaseBuffer_00000684
     cmpwi r4, 0x0
-    ble lbl_fn_80726B50_00000684
+    ble lbl_net_releaseBuffer_00000684
     bl dtor_80084684
-lbl_fn_80726B50_00000684:
+lbl_net_releaseBuffer_00000684:
     mr r3, r31
     lwz r31, 0xc(r1)
     lwz r0, 0x14(r1)
@@ -1882,7 +1882,7 @@ asm void fn_80727EB0(void)
     mr r30, r3
     beq lbl_fn_80727EB0_000019F8
     li r4, 0x0
-    bl fn_80726B50
+    bl net_releaseBuffer
     cmpwi r31, 0x0
     ble lbl_fn_80727EB0_000019F8
     mr r3, r30
@@ -2102,7 +2102,7 @@ lbl_fn_80728020_00001C0C:
     bl fn_807299D0
     addi r3, r31, 0x88
     li r4, 0x0
-    bl fn_80726B50
+    bl net_releaseBuffer
     mr r10, r31
     lfs f1, 0x80(r31)
     lfs f0, 0x78(r31)
@@ -2240,7 +2240,7 @@ lbl_fn_80728230_00001E1C:
     bl fn_807299D0
     addi r3, r31, 0x88
     li r4, 0x0
-    bl fn_80726B50
+    bl net_releaseBuffer
     mr r10, r31
     lfs f1, 0x84(r31)
     lfs f0, 0x7c(r31)
@@ -2372,7 +2372,7 @@ lbl_fn_80728440_00002014:
     bl fn_807299D0
     addi r3, r31, 0x74
     li r4, 0x0
-    bl fn_80726B50
+    bl net_releaseBuffer
     mr r10, r31
     addi r11, r10, 0x120
     bl _restgpr_15

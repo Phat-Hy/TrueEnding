@@ -11,7 +11,7 @@ extern void str_findChar(void);
 extern void thread_findAndNotifySlot(void);
 extern void kpad_getClampData(void);
 extern void battle_invokeVtableMethod(void);
-extern void fn_8041D198(void);
+extern void battle_assignFieldProperty(void);
 extern void fn_8047CB74(void);
 extern void fn_8049003C(void);
 extern void fn_80490098(void);
@@ -2262,9 +2262,9 @@ lbl_fn_80482ED8_00001E34:
     bne lbl_fn_80482ED8_00001FD8
     lis r6, lbl_807C88F0@ha
     lis r4, battle_invokeVtableMethod@ha
-    lis r3, fn_8041D198@ha
+    lis r3, battle_assignFieldProperty@ha
     li r0, 0x1
-    addi r3, r3, fn_8041D198@l
+    addi r3, r3, battle_assignFieldProperty@l
     addi r5, r6, lbl_807C88F0@l
     addi r4, r4, battle_invokeVtableMethod@l
     stw r4, 0x4(r5)

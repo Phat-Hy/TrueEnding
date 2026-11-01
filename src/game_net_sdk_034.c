@@ -25,7 +25,7 @@ extern void net_sendFormattedCommand(void);
 extern void fn_806DE7F0(void);
 extern void fn_806DE940(void);
 extern void net_sendPacket(void);
-extern void fn_806DEE40(void);
+extern void net_initSocketConnection(void);
 extern void fn_806E3980(void);
 extern void fn_806E5F90(void);
 extern void fn_806E6160(void);
@@ -1346,7 +1346,7 @@ lbl_fn_806E65E0_00001288:
     addi r4, r1, 0xb0
     li r7, 0x0
     stw r0, 0xb4(r1)
-    bl fn_806DEE40
+    bl net_initSocketConnection
     cmpwi r3, 0x0
     beq lbl_fn_806E65E0_000023C0
     b lbl_fn_806E65E0_000023E4
@@ -1533,7 +1533,7 @@ lbl_fn_806E65E0_00001538:
     addi r4, r1, 0xa8
     li r7, 0x3
     stw r0, 0xac(r1)
-    bl fn_806DEE40
+    bl net_initSocketConnection
     cmpwi r3, 0x0
     beq lbl_fn_806E65E0_000023C0
     b lbl_fn_806E65E0_000023E4
@@ -1695,7 +1695,7 @@ lbl_fn_806E65E0_00001788:
     addi r4, r1, 0xa0
     li r7, 0x4
     stw r0, 0xa4(r1)
-    bl fn_806DEE40
+    bl net_initSocketConnection
     cmpwi r3, 0x0
     beq lbl_fn_806E65E0_000023C0
     b lbl_fn_806E65E0_000023E4
@@ -1783,7 +1783,7 @@ lbl_fn_806E65E0_000018D0:
     stw r7, 0x98(r1)
     li r7, 0x0
     stw r0, 0x9c(r1)
-    bl fn_806DEE40
+    bl net_initSocketConnection
     cmpwi r3, 0x0
     beq lbl_fn_806E65E0_000023C0
     b lbl_fn_806E65E0_000023E4
@@ -1874,7 +1874,7 @@ lbl_fn_806E65E0_00001A20:
     stw r7, 0x90(r1)
     li r7, 0x0
     stw r0, 0x94(r1)
-    bl fn_806DEE40
+    bl net_initSocketConnection
     cmpwi r3, 0x0
     beq lbl_fn_806E65E0_000023C0
     b lbl_fn_806E65E0_000023E4
@@ -2084,7 +2084,7 @@ lbl_fn_806E65E0_00001D20:
     addi r4, r1, 0x88
     li r7, 0x8
     stw r0, 0x8c(r1)
-    bl fn_806DEE40
+    bl net_initSocketConnection
     cmpwi r3, 0x0
     beq lbl_fn_806E65E0_000023C0
     b lbl_fn_806E65E0_000023E4
@@ -2250,7 +2250,7 @@ lbl_fn_806E65E0_00001F80:
     addi r4, r1, 0x80
     li r7, 0xd
     stw r0, 0x84(r1)
-    bl fn_806DEE40
+    bl net_initSocketConnection
     cmpwi r3, 0x0
     beq lbl_fn_806E65E0_000023C0
     b lbl_fn_806E65E0_000023E4
@@ -2385,7 +2385,7 @@ lbl_fn_806E65E0_00002174:
     addi r4, r1, 0x78
     li r7, 0x9
     stw r0, 0x7c(r1)
-    bl fn_806DEE40
+    bl net_initSocketConnection
     cmpwi r3, 0x0
     beq lbl_fn_806E65E0_000023C0
     b lbl_fn_806E65E0_000023E4
@@ -2528,7 +2528,7 @@ lbl_fn_806E65E0_00002384:
     addi r4, r1, 0x70
     li r7, 0xf
     stw r0, 0x74(r1)
-    bl fn_806DEE40
+    bl net_initSocketConnection
     cmpwi r3, 0x0
     beq lbl_fn_806E65E0_000023C0
     b lbl_fn_806E65E0_000023E4

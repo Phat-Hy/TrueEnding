@@ -49,7 +49,7 @@ void fn_801DC038(void *dst, void *src);
 void fn_801DC044(void);
 void fn_801DC058(void *dst, void *src);
 void fn_801DC064(void *p);
-u32 fn_801DC074(void *p);
+u32 sound_bus_getCursor(void *p);
 void fn_801DC07C(void *p);
 void fn_801DC08C(void *p);
 void fn_801DC09C(void);
@@ -1327,7 +1327,7 @@ void fn_801DC064(void *p)
     *(u32 *)p += 0x18;
 }
 
-u32 fn_801DC074(void *p)
+u32 sound_bus_getCursor(void *p)
 {
     return *(u32 *)p;
 }

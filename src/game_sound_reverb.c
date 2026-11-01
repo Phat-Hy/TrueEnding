@@ -18,7 +18,7 @@ extern void fn_801DC038(void);
 extern void fn_801DC044(void);
 extern void fn_801DC058(void);
 extern void fn_801DC064(void);
-extern void fn_801DC074(void);
+extern void sound_bus_getCursor(void);
 extern void fn_801DC07C(void);
 extern void fn_801DFFA4(void);
 extern void fn_801E057C(void);
@@ -1301,10 +1301,10 @@ lbl_fn_801DF3D4_000011D0:
     bl fn_801DC064
 lbl_fn_801DF3D4_000011D8:
     addi r3, r1, 0x38
-    bl fn_801DC074
+    bl sound_bus_getCursor
     mr r30, r3
     addi r3, r1, 0x40
-    bl fn_801DC074
+    bl sound_bus_getCursor
     mr r4, r3
     mr r3, r29
     mr r5, r30
@@ -1320,10 +1320,10 @@ lbl_fn_801DF3D4_00001204:
     cmpwi r3, 0x0
     beq lbl_fn_801DF3D4_0000124C
     addi r3, r1, 0x38
-    bl fn_801DC074
+    bl sound_bus_getCursor
     mr r30, r3
     addi r3, r1, 0x3c
-    bl fn_801DC074
+    bl sound_bus_getCursor
     mr r4, r3
     mr r3, r29
     mr r5, r30
@@ -1337,10 +1337,10 @@ lbl_fn_801DF3D4_0000124C:
     cmpwi r3, 0x0
     beq lbl_fn_801DF3D4_00001328
     addi r3, r1, 0x3c
-    bl fn_801DC074
+    bl sound_bus_getCursor
     mr r30, r3
     addi r3, r1, 0x40
-    bl fn_801DC074
+    bl sound_bus_getCursor
     mr r4, r30
     bl fn_801DBB14
     addi r3, r1, 0x40
@@ -1351,10 +1351,10 @@ lbl_fn_801DF3D4_00001288:
     bl fn_801DC064
 lbl_fn_801DF3D4_00001290:
     addi r3, r1, 0x38
-    bl fn_801DC074
+    bl sound_bus_getCursor
     mr r30, r3
     addi r3, r1, 0x40
-    bl fn_801DC074
+    bl sound_bus_getCursor
     mr r4, r3
     mr r3, r29
     mr r5, r30
@@ -1363,11 +1363,11 @@ lbl_fn_801DF3D4_00001290:
     bne lbl_fn_801DF3D4_00001288
 lbl_fn_801DF3D4_000012BC:
     addi r3, r1, 0x38
-    bl fn_801DC074
+    bl sound_bus_getCursor
     mr r30, r3
     addi r3, r1, 0x3c
     bl fn_801DC07C
-    bl fn_801DC074
+    bl sound_bus_getCursor
     mr r4, r3
     mr r3, r29
     mr r5, r30
@@ -1380,10 +1380,10 @@ lbl_fn_801DF3D4_000012BC:
     cmpwi r3, 0x0
     bne lbl_fn_801DF3D4_00001328
     addi r3, r1, 0x3c
-    bl fn_801DC074
+    bl sound_bus_getCursor
     mr r30, r3
     addi r3, r1, 0x40
-    bl fn_801DC074
+    bl sound_bus_getCursor
     mr r4, r30
     bl fn_801DBB14
     addi r3, r1, 0x40
@@ -1396,10 +1396,10 @@ lbl_fn_801DF3D4_00001328:
     cmpwi r3, 0x0
     beq lbl_fn_801DF3D4_000014E0
     addi r3, r1, 0x38
-    bl fn_801DC074
+    bl sound_bus_getCursor
     mr r30, r3
     addi r3, r1, 0x40
-    bl fn_801DC074
+    bl sound_bus_getCursor
     mr r4, r30
     bl fn_801DBB14
     addi r3, r1, 0x40
@@ -1409,10 +1409,10 @@ lbl_fn_801DF3D4_00001328:
     bl fn_801DC058
     addi r3, r1, 0x3c
     bl fn_801DC07C
-    bl fn_801DC074
+    bl sound_bus_getCursor
     mr r30, r3
     mr r3, r27
-    bl fn_801DC074
+    bl sound_bus_getCursor
     mr r4, r3
     mr r3, r29
     mr r5, r30
@@ -1430,10 +1430,10 @@ lbl_fn_801DF3D4_000013A8:
     cmpwi r3, 0x0
     beq lbl_fn_801DF3D4_000013E8
     addi r3, r1, 0x40
-    bl fn_801DC074
+    bl sound_bus_getCursor
     mr r30, r3
     mr r3, r27
-    bl fn_801DC074
+    bl sound_bus_getCursor
     mr r4, r3
     mr r3, r29
     mr r5, r30
@@ -1447,10 +1447,10 @@ lbl_fn_801DF3D4_000013E8:
     cmpwi r3, 0x0
     beq lbl_fn_801DF3D4_00001418
     addi r3, r1, 0x3c
-    bl fn_801DC074
+    bl sound_bus_getCursor
     mr r30, r3
     addi r3, r1, 0x40
-    bl fn_801DC074
+    bl sound_bus_getCursor
     mr r4, r30
     bl fn_801DBB14
 lbl_fn_801DF3D4_00001418:
@@ -1465,10 +1465,10 @@ lbl_fn_801DF3D4_00001430:
     bl fn_801DC064
 lbl_fn_801DF3D4_00001438:
     addi r3, r1, 0x40
-    bl fn_801DC074
+    bl sound_bus_getCursor
     mr r30, r3
     mr r3, r27
-    bl fn_801DC074
+    bl sound_bus_getCursor
     mr r4, r3
     mr r3, r29
     mr r5, r30
@@ -1478,10 +1478,10 @@ lbl_fn_801DF3D4_00001438:
 lbl_fn_801DF3D4_00001464:
     addi r3, r1, 0x3c
     bl fn_801DC07C
-    bl fn_801DC074
+    bl sound_bus_getCursor
     mr r30, r3
     mr r3, r27
-    bl fn_801DC074
+    bl sound_bus_getCursor
     mr r4, r3
     mr r3, r29
     mr r5, r30
@@ -1494,10 +1494,10 @@ lbl_fn_801DF3D4_00001464:
     cmpwi r3, 0x0
     bne lbl_fn_801DF3D4_000014D0
     addi r3, r1, 0x3c
-    bl fn_801DC074
+    bl sound_bus_getCursor
     mr r30, r3
     addi r3, r1, 0x40
-    bl fn_801DC074
+    bl sound_bus_getCursor
     mr r4, r30
     bl fn_801DBB14
     addi r3, r1, 0x40
@@ -1765,10 +1765,10 @@ lbl_fn_801DFA74_00001870:
     bl fn_801DC064
 lbl_fn_801DFA74_00001878:
     addi r3, r1, 0x38
-    bl fn_801DC074
+    bl sound_bus_getCursor
     mr r30, r3
     addi r3, r1, 0x40
-    bl fn_801DC074
+    bl sound_bus_getCursor
     mr r4, r3
     mr r3, r29
     mr r5, r30
@@ -1784,10 +1784,10 @@ lbl_fn_801DFA74_000018A4:
     cmpwi r3, 0x0
     beq lbl_fn_801DFA74_000018EC
     addi r3, r1, 0x38
-    bl fn_801DC074
+    bl sound_bus_getCursor
     mr r30, r3
     addi r3, r1, 0x3c
-    bl fn_801DC074
+    bl sound_bus_getCursor
     mr r4, r3
     mr r3, r29
     mr r5, r30
@@ -1801,10 +1801,10 @@ lbl_fn_801DFA74_000018EC:
     cmpwi r3, 0x0
     beq lbl_fn_801DFA74_000019C8
     addi r3, r1, 0x3c
-    bl fn_801DC074
+    bl sound_bus_getCursor
     mr r30, r3
     addi r3, r1, 0x40
-    bl fn_801DC074
+    bl sound_bus_getCursor
     mr r4, r30
     bl fn_801DBB14
     addi r3, r1, 0x40
@@ -1815,10 +1815,10 @@ lbl_fn_801DFA74_00001928:
     bl fn_801DC064
 lbl_fn_801DFA74_00001930:
     addi r3, r1, 0x38
-    bl fn_801DC074
+    bl sound_bus_getCursor
     mr r30, r3
     addi r3, r1, 0x40
-    bl fn_801DC074
+    bl sound_bus_getCursor
     mr r4, r3
     mr r3, r29
     mr r5, r30
@@ -1827,11 +1827,11 @@ lbl_fn_801DFA74_00001930:
     bne lbl_fn_801DFA74_00001928
 lbl_fn_801DFA74_0000195C:
     addi r3, r1, 0x38
-    bl fn_801DC074
+    bl sound_bus_getCursor
     mr r30, r3
     addi r3, r1, 0x3c
     bl fn_801DC07C
-    bl fn_801DC074
+    bl sound_bus_getCursor
     mr r4, r3
     mr r3, r29
     mr r5, r30
@@ -1844,10 +1844,10 @@ lbl_fn_801DFA74_0000195C:
     cmpwi r3, 0x0
     bne lbl_fn_801DFA74_000019C8
     addi r3, r1, 0x3c
-    bl fn_801DC074
+    bl sound_bus_getCursor
     mr r30, r3
     addi r3, r1, 0x40
-    bl fn_801DC074
+    bl sound_bus_getCursor
     mr r4, r30
     bl fn_801DBB14
     addi r3, r1, 0x40
@@ -1860,10 +1860,10 @@ lbl_fn_801DFA74_000019C8:
     cmpwi r3, 0x0
     beq lbl_fn_801DFA74_00001B80
     addi r3, r1, 0x38
-    bl fn_801DC074
+    bl sound_bus_getCursor
     mr r30, r3
     addi r3, r1, 0x40
-    bl fn_801DC074
+    bl sound_bus_getCursor
     mr r4, r30
     bl fn_801DBB14
     addi r3, r1, 0x40
@@ -1873,10 +1873,10 @@ lbl_fn_801DFA74_000019C8:
     bl fn_801DC058
     addi r3, r1, 0x3c
     bl fn_801DC07C
-    bl fn_801DC074
+    bl sound_bus_getCursor
     mr r30, r3
     mr r3, r27
-    bl fn_801DC074
+    bl sound_bus_getCursor
     mr r4, r3
     mr r3, r29
     mr r5, r30
@@ -1894,10 +1894,10 @@ lbl_fn_801DFA74_00001A48:
     cmpwi r3, 0x0
     beq lbl_fn_801DFA74_00001A88
     addi r3, r1, 0x40
-    bl fn_801DC074
+    bl sound_bus_getCursor
     mr r30, r3
     mr r3, r27
-    bl fn_801DC074
+    bl sound_bus_getCursor
     mr r4, r3
     mr r3, r29
     mr r5, r30
@@ -1911,10 +1911,10 @@ lbl_fn_801DFA74_00001A88:
     cmpwi r3, 0x0
     beq lbl_fn_801DFA74_00001AB8
     addi r3, r1, 0x3c
-    bl fn_801DC074
+    bl sound_bus_getCursor
     mr r30, r3
     addi r3, r1, 0x40
-    bl fn_801DC074
+    bl sound_bus_getCursor
     mr r4, r30
     bl fn_801DBB14
 lbl_fn_801DFA74_00001AB8:
@@ -1929,10 +1929,10 @@ lbl_fn_801DFA74_00001AD0:
     bl fn_801DC064
 lbl_fn_801DFA74_00001AD8:
     addi r3, r1, 0x40
-    bl fn_801DC074
+    bl sound_bus_getCursor
     mr r30, r3
     mr r3, r27
-    bl fn_801DC074
+    bl sound_bus_getCursor
     mr r4, r3
     mr r3, r29
     mr r5, r30
@@ -1942,10 +1942,10 @@ lbl_fn_801DFA74_00001AD8:
 lbl_fn_801DFA74_00001B04:
     addi r3, r1, 0x3c
     bl fn_801DC07C
-    bl fn_801DC074
+    bl sound_bus_getCursor
     mr r30, r3
     mr r3, r27
-    bl fn_801DC074
+    bl sound_bus_getCursor
     mr r4, r3
     mr r3, r29
     mr r5, r30
@@ -1958,10 +1958,10 @@ lbl_fn_801DFA74_00001B04:
     cmpwi r3, 0x0
     bne lbl_fn_801DFA74_00001B70
     addi r3, r1, 0x3c
-    bl fn_801DC074
+    bl sound_bus_getCursor
     mr r30, r3
     addi r3, r1, 0x40
-    bl fn_801DC074
+    bl sound_bus_getCursor
     mr r4, r30
     bl fn_801DBB14
     addi r3, r1, 0x40

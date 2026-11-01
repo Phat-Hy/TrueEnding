@@ -16,7 +16,7 @@ extern void fn_801E2D24(void);
 extern void fn_801E2D30(void);
 extern void fn_801E2D44(void);
 extern void fn_801E2D50(void);
-extern void fn_801E2D60(void);
+extern void sound_cue_getCursor(void);
 extern void fn_801E2D68(void);
 extern void assert_generateId(void);
 extern void event_findEntryById(void);
@@ -515,10 +515,10 @@ lbl_fn_801E4E64_000006CC:
     bl fn_801E2D50
 lbl_fn_801E4E64_000006D4:
     addi r3, r1, 0x38
-    bl fn_801E2D60
+    bl sound_cue_getCursor
     mr r30, r3
     addi r3, r1, 0x40
-    bl fn_801E2D60
+    bl sound_cue_getCursor
     mr r4, r3
     mr r3, r29
     mr r5, r30
@@ -534,10 +534,10 @@ lbl_fn_801E4E64_00000700:
     cmpwi r3, 0x0
     beq lbl_fn_801E4E64_00000748
     addi r3, r1, 0x38
-    bl fn_801E2D60
+    bl sound_cue_getCursor
     mr r30, r3
     addi r3, r1, 0x3c
-    bl fn_801E2D60
+    bl sound_cue_getCursor
     mr r4, r3
     mr r3, r29
     mr r5, r30
@@ -551,10 +551,10 @@ lbl_fn_801E4E64_00000748:
     cmpwi r3, 0x0
     beq lbl_fn_801E4E64_00000824
     addi r3, r1, 0x3c
-    bl fn_801E2D60
+    bl sound_cue_getCursor
     mr r30, r3
     addi r3, r1, 0x40
-    bl fn_801E2D60
+    bl sound_cue_getCursor
     mr r4, r30
     bl fn_801E2708
     addi r3, r1, 0x40
@@ -565,10 +565,10 @@ lbl_fn_801E4E64_00000784:
     bl fn_801E2D50
 lbl_fn_801E4E64_0000078C:
     addi r3, r1, 0x38
-    bl fn_801E2D60
+    bl sound_cue_getCursor
     mr r30, r3
     addi r3, r1, 0x40
-    bl fn_801E2D60
+    bl sound_cue_getCursor
     mr r4, r3
     mr r3, r29
     mr r5, r30
@@ -577,11 +577,11 @@ lbl_fn_801E4E64_0000078C:
     bne lbl_fn_801E4E64_00000784
 lbl_fn_801E4E64_000007B8:
     addi r3, r1, 0x38
-    bl fn_801E2D60
+    bl sound_cue_getCursor
     mr r30, r3
     addi r3, r1, 0x3c
     bl fn_801E2D68
-    bl fn_801E2D60
+    bl sound_cue_getCursor
     mr r4, r3
     mr r3, r29
     mr r5, r30
@@ -594,10 +594,10 @@ lbl_fn_801E4E64_000007B8:
     cmpwi r3, 0x0
     bne lbl_fn_801E4E64_00000824
     addi r3, r1, 0x3c
-    bl fn_801E2D60
+    bl sound_cue_getCursor
     mr r30, r3
     addi r3, r1, 0x40
-    bl fn_801E2D60
+    bl sound_cue_getCursor
     mr r4, r30
     bl fn_801E2708
     addi r3, r1, 0x40
@@ -610,10 +610,10 @@ lbl_fn_801E4E64_00000824:
     cmpwi r3, 0x0
     beq lbl_fn_801E4E64_000009DC
     addi r3, r1, 0x38
-    bl fn_801E2D60
+    bl sound_cue_getCursor
     mr r30, r3
     addi r3, r1, 0x40
-    bl fn_801E2D60
+    bl sound_cue_getCursor
     mr r4, r30
     bl fn_801E2708
     addi r3, r1, 0x40
@@ -623,10 +623,10 @@ lbl_fn_801E4E64_00000824:
     bl fn_801E2D44
     addi r3, r1, 0x3c
     bl fn_801E2D68
-    bl fn_801E2D60
+    bl sound_cue_getCursor
     mr r30, r3
     mr r3, r27
-    bl fn_801E2D60
+    bl sound_cue_getCursor
     mr r4, r3
     mr r3, r29
     mr r5, r30
@@ -644,10 +644,10 @@ lbl_fn_801E4E64_000008A4:
     cmpwi r3, 0x0
     beq lbl_fn_801E4E64_000008E4
     addi r3, r1, 0x40
-    bl fn_801E2D60
+    bl sound_cue_getCursor
     mr r30, r3
     mr r3, r27
-    bl fn_801E2D60
+    bl sound_cue_getCursor
     mr r4, r3
     mr r3, r29
     mr r5, r30
@@ -661,10 +661,10 @@ lbl_fn_801E4E64_000008E4:
     cmpwi r3, 0x0
     beq lbl_fn_801E4E64_00000914
     addi r3, r1, 0x3c
-    bl fn_801E2D60
+    bl sound_cue_getCursor
     mr r30, r3
     addi r3, r1, 0x40
-    bl fn_801E2D60
+    bl sound_cue_getCursor
     mr r4, r30
     bl fn_801E2708
 lbl_fn_801E4E64_00000914:
@@ -679,10 +679,10 @@ lbl_fn_801E4E64_0000092C:
     bl fn_801E2D50
 lbl_fn_801E4E64_00000934:
     addi r3, r1, 0x40
-    bl fn_801E2D60
+    bl sound_cue_getCursor
     mr r30, r3
     mr r3, r27
-    bl fn_801E2D60
+    bl sound_cue_getCursor
     mr r4, r3
     mr r3, r29
     mr r5, r30
@@ -692,10 +692,10 @@ lbl_fn_801E4E64_00000934:
 lbl_fn_801E4E64_00000960:
     addi r3, r1, 0x3c
     bl fn_801E2D68
-    bl fn_801E2D60
+    bl sound_cue_getCursor
     mr r30, r3
     mr r3, r27
-    bl fn_801E2D60
+    bl sound_cue_getCursor
     mr r4, r3
     mr r3, r29
     mr r5, r30
@@ -708,10 +708,10 @@ lbl_fn_801E4E64_00000960:
     cmpwi r3, 0x0
     bne lbl_fn_801E4E64_000009CC
     addi r3, r1, 0x3c
-    bl fn_801E2D60
+    bl sound_cue_getCursor
     mr r30, r3
     addi r3, r1, 0x40
-    bl fn_801E2D60
+    bl sound_cue_getCursor
     mr r4, r30
     bl fn_801E2708
     addi r3, r1, 0x40
@@ -990,10 +990,10 @@ lbl_fn_801E552C_00000D94:
     bl fn_801E2D50
 lbl_fn_801E552C_00000D9C:
     addi r3, r1, 0x38
-    bl fn_801E2D60
+    bl sound_cue_getCursor
     mr r30, r3
     addi r3, r1, 0x40
-    bl fn_801E2D60
+    bl sound_cue_getCursor
     mr r4, r3
     mr r3, r29
     mr r5, r30
@@ -1009,10 +1009,10 @@ lbl_fn_801E552C_00000DC8:
     cmpwi r3, 0x0
     beq lbl_fn_801E552C_00000E10
     addi r3, r1, 0x38
-    bl fn_801E2D60
+    bl sound_cue_getCursor
     mr r30, r3
     addi r3, r1, 0x3c
-    bl fn_801E2D60
+    bl sound_cue_getCursor
     mr r4, r3
     mr r3, r29
     mr r5, r30
@@ -1026,10 +1026,10 @@ lbl_fn_801E552C_00000E10:
     cmpwi r3, 0x0
     beq lbl_fn_801E552C_00000EEC
     addi r3, r1, 0x3c
-    bl fn_801E2D60
+    bl sound_cue_getCursor
     mr r30, r3
     addi r3, r1, 0x40
-    bl fn_801E2D60
+    bl sound_cue_getCursor
     mr r4, r30
     bl fn_801E2708
     addi r3, r1, 0x40
@@ -1040,10 +1040,10 @@ lbl_fn_801E552C_00000E4C:
     bl fn_801E2D50
 lbl_fn_801E552C_00000E54:
     addi r3, r1, 0x38
-    bl fn_801E2D60
+    bl sound_cue_getCursor
     mr r30, r3
     addi r3, r1, 0x40
-    bl fn_801E2D60
+    bl sound_cue_getCursor
     mr r4, r3
     mr r3, r29
     mr r5, r30
@@ -1052,11 +1052,11 @@ lbl_fn_801E552C_00000E54:
     bne lbl_fn_801E552C_00000E4C
 lbl_fn_801E552C_00000E80:
     addi r3, r1, 0x38
-    bl fn_801E2D60
+    bl sound_cue_getCursor
     mr r30, r3
     addi r3, r1, 0x3c
     bl fn_801E2D68
-    bl fn_801E2D60
+    bl sound_cue_getCursor
     mr r4, r3
     mr r3, r29
     mr r5, r30
@@ -1069,10 +1069,10 @@ lbl_fn_801E552C_00000E80:
     cmpwi r3, 0x0
     bne lbl_fn_801E552C_00000EEC
     addi r3, r1, 0x3c
-    bl fn_801E2D60
+    bl sound_cue_getCursor
     mr r30, r3
     addi r3, r1, 0x40
-    bl fn_801E2D60
+    bl sound_cue_getCursor
     mr r4, r30
     bl fn_801E2708
     addi r3, r1, 0x40
@@ -1085,10 +1085,10 @@ lbl_fn_801E552C_00000EEC:
     cmpwi r3, 0x0
     beq lbl_fn_801E552C_000010A4
     addi r3, r1, 0x38
-    bl fn_801E2D60
+    bl sound_cue_getCursor
     mr r30, r3
     addi r3, r1, 0x40
-    bl fn_801E2D60
+    bl sound_cue_getCursor
     mr r4, r30
     bl fn_801E2708
     addi r3, r1, 0x40
@@ -1098,10 +1098,10 @@ lbl_fn_801E552C_00000EEC:
     bl fn_801E2D44
     addi r3, r1, 0x3c
     bl fn_801E2D68
-    bl fn_801E2D60
+    bl sound_cue_getCursor
     mr r30, r3
     mr r3, r27
-    bl fn_801E2D60
+    bl sound_cue_getCursor
     mr r4, r3
     mr r3, r29
     mr r5, r30
@@ -1119,10 +1119,10 @@ lbl_fn_801E552C_00000F6C:
     cmpwi r3, 0x0
     beq lbl_fn_801E552C_00000FAC
     addi r3, r1, 0x40
-    bl fn_801E2D60
+    bl sound_cue_getCursor
     mr r30, r3
     mr r3, r27
-    bl fn_801E2D60
+    bl sound_cue_getCursor
     mr r4, r3
     mr r3, r29
     mr r5, r30
@@ -1136,10 +1136,10 @@ lbl_fn_801E552C_00000FAC:
     cmpwi r3, 0x0
     beq lbl_fn_801E552C_00000FDC
     addi r3, r1, 0x3c
-    bl fn_801E2D60
+    bl sound_cue_getCursor
     mr r30, r3
     addi r3, r1, 0x40
-    bl fn_801E2D60
+    bl sound_cue_getCursor
     mr r4, r30
     bl fn_801E2708
 lbl_fn_801E552C_00000FDC:
@@ -1154,10 +1154,10 @@ lbl_fn_801E552C_00000FF4:
     bl fn_801E2D50
 lbl_fn_801E552C_00000FFC:
     addi r3, r1, 0x40
-    bl fn_801E2D60
+    bl sound_cue_getCursor
     mr r30, r3
     mr r3, r27
-    bl fn_801E2D60
+    bl sound_cue_getCursor
     mr r4, r3
     mr r3, r29
     mr r5, r30
@@ -1167,10 +1167,10 @@ lbl_fn_801E552C_00000FFC:
 lbl_fn_801E552C_00001028:
     addi r3, r1, 0x3c
     bl fn_801E2D68
-    bl fn_801E2D60
+    bl sound_cue_getCursor
     mr r30, r3
     mr r3, r27
-    bl fn_801E2D60
+    bl sound_cue_getCursor
     mr r4, r3
     mr r3, r29
     mr r5, r30
@@ -1183,10 +1183,10 @@ lbl_fn_801E552C_00001028:
     cmpwi r3, 0x0
     bne lbl_fn_801E552C_00001094
     addi r3, r1, 0x3c
-    bl fn_801E2D60
+    bl sound_cue_getCursor
     mr r30, r3
     addi r3, r1, 0x40
-    bl fn_801E2D60
+    bl sound_cue_getCursor
     mr r4, r30
     bl fn_801E2708
     addi r3, r1, 0x40

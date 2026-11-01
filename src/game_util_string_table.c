@@ -18,7 +18,7 @@ extern void fn_8058FEB8(void);
 extern void fn_8058FEC8(void);
 extern void fn_8058FED4(void);
 extern void fn_8058FEE8(void);
-extern void fn_8058FEF4(void);
+extern void hash_advanceIterator(void);
 extern void hash_getHashValue(void);
 extern void fn_8058FF0C(void);
 extern void fn_80593030(void);
@@ -1076,7 +1076,7 @@ lbl_fn_8059185C_00000ED4:
     b lbl_fn_8059185C_00000F40
 lbl_fn_8059185C_00000F38:
     addi r3, r1, 0x40
-    bl fn_8058FEF4
+    bl hash_advanceIterator
 lbl_fn_8059185C_00000F40:
     addi r3, r1, 0x38
     bl hash_getHashValue
@@ -1122,11 +1122,11 @@ lbl_fn_8059185C_00000FB4:
     mr r4, r30
     bl fn_8058ED2C
     addi r3, r1, 0x40
-    bl fn_8058FEF4
+    bl hash_advanceIterator
     b lbl_fn_8059185C_00000FF8
 lbl_fn_8059185C_00000FF0:
     addi r3, r1, 0x40
-    bl fn_8058FEF4
+    bl hash_advanceIterator
 lbl_fn_8059185C_00000FF8:
     addi r3, r1, 0x38
     bl hash_getHashValue
@@ -1165,7 +1165,7 @@ lbl_fn_8059185C_00001024:
     mr r4, r30
     bl fn_8058ED2C
     addi r3, r1, 0x40
-    bl fn_8058FEF4
+    bl hash_advanceIterator
     b lbl_fn_8059185C_00000FF8
 lbl_fn_8059185C_00001090:
     mr r4, r27
@@ -1181,7 +1181,7 @@ lbl_fn_8059185C_00001090:
     mr r4, r30
     bl fn_8058ED2C
     addi r3, r1, 0x40
-    bl fn_8058FEF4
+    bl hash_advanceIterator
     mr r4, r28
     addi r3, r1, 0x3c
     bl fn_8058FEE8
@@ -1200,7 +1200,7 @@ lbl_fn_8059185C_00001090:
     b lbl_fn_8059185C_00001110
 lbl_fn_8059185C_00001108:
     addi r3, r1, 0x40
-    bl fn_8058FEF4
+    bl hash_advanceIterator
 lbl_fn_8059185C_00001110:
     mr r4, r28
     addi r3, r1, 0x40
@@ -1240,7 +1240,7 @@ lbl_fn_8059185C_00001180:
     b lbl_fn_8059185C_000011A0
 lbl_fn_8059185C_00001198:
     addi r3, r1, 0x40
-    bl fn_8058FEF4
+    bl hash_advanceIterator
 lbl_fn_8059185C_000011A0:
     addi r3, r1, 0x40
     bl hash_getHashValue
@@ -1279,7 +1279,7 @@ lbl_fn_8059185C_000011CC:
     mr r4, r30
     bl fn_8058ED2C
     addi r3, r1, 0x40
-    bl fn_8058FEF4
+    bl hash_advanceIterator
     b lbl_fn_8059185C_000011A0
 lbl_fn_8059185C_00001238:
     mr r3, r27
@@ -1557,7 +1557,7 @@ lbl_fn_80591F38_000015B0:
     b lbl_fn_80591F38_0000161C
 lbl_fn_80591F38_00001614:
     addi r3, r1, 0x40
-    bl fn_8058FEF4
+    bl hash_advanceIterator
 lbl_fn_80591F38_0000161C:
     addi r3, r1, 0x38
     bl hash_getHashValue
@@ -1603,11 +1603,11 @@ lbl_fn_80591F38_00001690:
     mr r4, r30
     bl fn_8058ED2C
     addi r3, r1, 0x40
-    bl fn_8058FEF4
+    bl hash_advanceIterator
     b lbl_fn_80591F38_000016D4
 lbl_fn_80591F38_000016CC:
     addi r3, r1, 0x40
-    bl fn_8058FEF4
+    bl hash_advanceIterator
 lbl_fn_80591F38_000016D4:
     addi r3, r1, 0x38
     bl hash_getHashValue
@@ -1646,7 +1646,7 @@ lbl_fn_80591F38_00001700:
     mr r4, r30
     bl fn_8058ED2C
     addi r3, r1, 0x40
-    bl fn_8058FEF4
+    bl hash_advanceIterator
     b lbl_fn_80591F38_000016D4
 lbl_fn_80591F38_0000176C:
     mr r4, r27
@@ -1662,7 +1662,7 @@ lbl_fn_80591F38_0000176C:
     mr r4, r30
     bl fn_8058ED2C
     addi r3, r1, 0x40
-    bl fn_8058FEF4
+    bl hash_advanceIterator
     mr r4, r28
     addi r3, r1, 0x3c
     bl fn_8058FEE8
@@ -1681,7 +1681,7 @@ lbl_fn_80591F38_0000176C:
     b lbl_fn_80591F38_000017EC
 lbl_fn_80591F38_000017E4:
     addi r3, r1, 0x40
-    bl fn_8058FEF4
+    bl hash_advanceIterator
 lbl_fn_80591F38_000017EC:
     mr r4, r28
     addi r3, r1, 0x40
@@ -1721,7 +1721,7 @@ lbl_fn_80591F38_0000185C:
     b lbl_fn_80591F38_0000187C
 lbl_fn_80591F38_00001874:
     addi r3, r1, 0x40
-    bl fn_8058FEF4
+    bl hash_advanceIterator
 lbl_fn_80591F38_0000187C:
     addi r3, r1, 0x40
     bl hash_getHashValue
@@ -1760,7 +1760,7 @@ lbl_fn_80591F38_000018A8:
     mr r4, r30
     bl fn_8058ED2C
     addi r3, r1, 0x40
-    bl fn_8058FEF4
+    bl hash_advanceIterator
     b lbl_fn_80591F38_0000187C
 lbl_fn_80591F38_00001914:
     mr r3, r27
