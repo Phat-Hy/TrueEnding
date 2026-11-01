@@ -8,7 +8,7 @@ extern void fn_8000D760(void);
 extern void fn_8000F1EC(void);
 extern void fn_8001282C(void);
 extern void atn_LH_Binary_destructor(void);
-extern void fn_80041C0C(void);
+extern void menu_destroyObject(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
@@ -1648,7 +1648,7 @@ asm void fn_8053E6E4(void)
     bl fn_805406C0
     addi r3, r30, 0x2a0
     li r4, -0x1
-    bl fn_80041C0C
+    bl menu_destroyObject
     addi r3, r30, 0x29c
     li r4, -0x1
     bl fn_80117E34

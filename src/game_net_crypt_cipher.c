@@ -22,7 +22,7 @@ extern void wcs_vformat(void);
 extern void save_validateHeader(void);
 extern void save_parseSlotHeader(void);
 extern void fn_801F4998(void);
-extern void fn_801F4AA0(void);
+extern void save_findSlotTask(void);
 extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
 extern void thread_dispatchToQueue(void);
@@ -2033,7 +2033,7 @@ lbl_fn_804B5B10_00001AB0:
     lwz r3, 0x70(r25)
     fmr f3, f2
     lfs f1, lbl_80887388
-    bl fn_801F4AA0
+    bl save_findSlotTask
     b lbl_fn_804B5B10_00001B0C
 lbl_fn_804B5B10_00001AF4:
     lwz r3, 0x70(r25)
@@ -2041,7 +2041,7 @@ lbl_fn_804B5B10_00001AF4:
     lfs f1, lbl_8088738C
     lfs f2, lbl_80887390
     lfs f3, lbl_80887388
-    bl fn_801F4AA0
+    bl save_findSlotTask
 lbl_fn_804B5B10_00001B0C:
     addi r20, r20, 0x1
     addi r22, r22, 0xd5c

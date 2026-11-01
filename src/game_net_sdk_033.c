@@ -49,7 +49,7 @@ extern void fn_806DE290(void);
 extern void fn_806DE2F0(void);
 extern void fn_806DE3A0(void);
 extern void net_sendString(void);
-extern void fn_806DE4E0(void);
+extern void net_sendFormattedCommand(void);
 extern void fn_806DE660(void);
 extern void fn_806DE670(void);
 extern void fn_806DE790(void);
@@ -944,7 +944,7 @@ lbl_fn_806E4CA0_00000AF4:
     mr r3, r26
     mr r5, r28
     addi r4, r1, 0x8
-    bl fn_806DE4E0
+    bl net_sendFormattedCommand
     cmpwi r3, 0x0
     beq lbl_fn_806E4CA0_00000B10
     b lbl_fn_806E4CA0_00000BC8
@@ -960,7 +960,7 @@ lbl_fn_806E4CA0_00000B2C:
     mr r3, r26
     mr r5, r30
     addi r4, r1, 0x8
-    bl fn_806DE4E0
+    bl net_sendFormattedCommand
     cmpwi r3, 0x0
     beq lbl_fn_806E4CA0_00000B48
     b lbl_fn_806E4CA0_00000BC8

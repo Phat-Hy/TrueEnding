@@ -13,10 +13,10 @@ extern void _savegpr_27(void);
 extern void snprintf(void);
 extern void fn_806A7110(void);
 extern void net_formatLog(void);
-extern void fn_806AB920(void);
+extern void net_formatString(void);
 extern void http_formatParam(void);
 extern void fn_806ABB70(void);
-extern void fn_806ACE00(void);
+extern void net_sendSessionCommand(void);
 extern void net_getMyAid(void);
 extern void fn_806B0F80(void);
 extern void fn_806B1230(void);
@@ -367,7 +367,7 @@ lbl_fn_806CB550_000003D0:
     addi r4, r1, 0x8
     addi r5, r1, 0x14
     li r6, 0x2f
-    bl fn_806AB920
+    bl net_formatString
     lwz r3, lbl_80860898@l(r29)
     lbz r0, 0x15(r3)
     lwz r6, 0x58(r3)
@@ -444,7 +444,7 @@ lbl_fn_806CB550_000004E4:
     mr r3, r30
     addi r4, r1, 0x14
     li r5, 0x0
-    bl fn_806ACE00
+    bl net_sendSessionCommand
     bl fn_806C5C10
     lis r3, lbl_80860898@ha
     li r0, 0x0
@@ -681,7 +681,7 @@ lbl_fn_806CBB20_0000083C:
     addi r4, r1, 0x8
     addi r5, r1, 0x28
     li r6, 0x2f
-    bl fn_806AB920
+    bl net_formatString
     lwz r3, lbl_80860898@l(r29)
     lbz r0, 0x15(r3)
     lwz r6, 0x58(r3)
@@ -758,7 +758,7 @@ lbl_fn_806CBB20_00000950:
     addi r4, r1, 0x28
     li r3, -0x1
     li r5, 0x0
-    bl fn_806ACE00
+    bl net_sendSessionCommand
 lbl_fn_806CBB20_00000994:
     lis r31, lbl_80860898@ha
     lwz r3, lbl_80860898@l(r31)

@@ -98,7 +98,7 @@ void fn_806DE290(void);
 void fn_806DE2F0(void);
 void fn_806DE3A0(void);
 void net_sendString(void);
-void fn_806DE4E0(void);
+void net_sendFormattedCommand(void);
 void fn_806DE550(void);
 u32 fn_806DE660(void);
 void fn_806DE670(void);
@@ -458,7 +458,7 @@ lbl_fn_806DDE60_000004A0:
     lwz r5, 0x198(r30)
     mr r3, r27
     addi r4, r30, 0x210
-    bl fn_806DE4E0
+    bl net_sendFormattedCommand
     mr r3, r27
     addi r4, r30, 0x210
     addi r5, r31, 0x1c0
@@ -466,7 +466,7 @@ lbl_fn_806DDE60_000004A0:
     lwz r5, 0x0(r29)
     mr r3, r27
     addi r4, r30, 0x210
-    bl fn_806DE4E0
+    bl net_sendFormattedCommand
     mr r3, r27
     addi r4, r30, 0x210
     addi r5, r31, 0x1d0
@@ -579,7 +579,7 @@ lbl_fn_806DE020_00000644:
     lwz r5, 0x198(r29)
     mr r3, r28
     addi r4, r29, 0x210
-    bl fn_806DE4E0
+    bl net_sendFormattedCommand
     mr r3, r28
     addi r4, r29, 0x210
     addi r5, r30, 0x1e4
@@ -588,7 +588,7 @@ lbl_fn_806DE020_00000644:
     mr r3, r28
     addi r4, r29, 0x210
     lwz r5, 0x0(r5)
-    bl fn_806DE4E0
+    bl net_sendFormattedCommand
     mr r3, r28
     addi r4, r29, 0x210
     addi r5, r30, 0x178
@@ -882,7 +882,7 @@ asm void net_sendString(void)
     blr
 }
 
-asm void fn_806DE4E0(void)
+asm void net_sendFormattedCommand(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -2479,7 +2479,7 @@ lbl_fn_806DF860_000020B4:
     lwz r5, 0x19c(r30)
     mr r3, r28
     addi r4, r30, 0x210
-    bl fn_806DE4E0
+    bl net_sendFormattedCommand
 lbl_fn_806DF860_000020E0:
     lwz r0, 0x1a0(r30)
     cmpwi r0, 0x0
@@ -2491,7 +2491,7 @@ lbl_fn_806DF860_000020E0:
     lwz r5, 0x1a0(r30)
     mr r3, r28
     addi r4, r30, 0x210
-    bl fn_806DE4E0
+    bl net_sendFormattedCommand
 lbl_fn_806DF860_0000210C:
     mr r3, r28
     addi r4, r30, 0x210
@@ -2500,7 +2500,7 @@ lbl_fn_806DF860_0000210C:
     lwz r5, 0x1a4(r30)
     mr r3, r28
     addi r4, r30, 0x210
-    bl fn_806DE4E0
+    bl net_sendFormattedCommand
     mr r3, r28
     addi r4, r30, 0x210
     addi r5, r31, 0x298
@@ -2524,7 +2524,7 @@ lbl_fn_806DF860_00002168:
     lhz r5, 0x230(r30)
     mr r3, r28
     addi r4, r30, 0x210
-    bl fn_806DE4E0
+    bl net_sendFormattedCommand
     mr r3, r28
     addi r4, r30, 0x210
     addi r5, r31, 0x2b8
@@ -2532,7 +2532,7 @@ lbl_fn_806DF860_00002168:
     lwz r5, 0x60c(r30)
     mr r3, r28
     addi r4, r30, 0x210
-    bl fn_806DE4E0
+    bl net_sendFormattedCommand
     mr r3, r28
     addi r4, r30, 0x210
     addi r5, r31, 0x2c4
@@ -2549,7 +2549,7 @@ lbl_fn_806DF860_00002168:
     lwz r5, 0x610(r30)
     mr r3, r28
     addi r4, r30, 0x210
-    bl fn_806DE4E0
+    bl net_sendFormattedCommand
     mr r3, r28
     addi r4, r30, 0x210
     addi r5, r31, 0x2e0
@@ -2557,7 +2557,7 @@ lbl_fn_806DF860_00002168:
     mr r3, r28
     addi r4, r30, 0x210
     li r5, 0x3b
-    bl fn_806DE4E0
+    bl net_sendFormattedCommand
     mr r3, r28
     addi r4, r30, 0x210
     addi r5, r31, 0x2f0
@@ -2565,7 +2565,7 @@ lbl_fn_806DF860_00002168:
     lwz r5, 0x630(r30)
     mr r3, r28
     addi r4, r30, 0x210
-    bl fn_806DE4E0
+    bl net_sendFormattedCommand
     mr r3, r28
     addi r4, r30, 0x210
     addi r5, r31, 0x2f8

@@ -20,7 +20,7 @@ extern void sky_renderStub(void);
 extern void proj_getGlobalManager(void);
 extern void fn_800F7F60(void);
 extern void fn_800F7F80(void);
-extern void fn_800F7F90(void);
+extern void viewport_getFlag(void);
 extern void vec3_normalize(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
@@ -574,7 +574,7 @@ lbl_npc_calcTargetDistance_00000624:
     bl fn_80139F4C
     cmpwi r3, 0x0
     bne lbl_npc_calcTargetDistance_0000069C
-    bl fn_800F7F90
+    bl viewport_getFlag
     cmpwi r3, 0x0
     bne lbl_npc_calcTargetDistance_0000069C
     addi r3, r1, 0x18

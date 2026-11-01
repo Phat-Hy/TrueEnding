@@ -97,7 +97,7 @@ void vec3_scale(f32 *dest, const f32 *src, f32 scale);
 void fn_800F72F4(void);
 void fn_800F7F60(void);
 void fn_800F7F80(void);
-u32 fn_800F7F90(void);
+u32 viewport_getFlag(void);
 void fn_800F7F98(void *p, u32 val);
 void viewport_getGlobalContext(void);
 void fn_800F7FA8(void);
@@ -247,7 +247,7 @@ asm void fn_800F72F4(void)
     cmpwi r3, 0x0
     bne lbl_fn_800F72F4_000001B0
 lbl_fn_800F72F4_000001A4:
-    bl fn_800F7F90
+    bl viewport_getFlag
     cmpwi r3, 0x0
     beq lbl_fn_800F72F4_000001B8
 lbl_fn_800F72F4_000001B0:
@@ -839,7 +839,7 @@ lbl_fn_800F72F4_00000A38:
     li r4, -0x1
     bl ref_releaseHandle
 lbl_fn_800F72F4_00000A64:
-    bl fn_800F7F90
+    bl viewport_getFlag
     cmpwi r3, 0x0
     beq lbl_fn_800F72F4_00000BD0
     lwz r0, 0x70(r29)
@@ -1045,7 +1045,7 @@ asm void fn_800F7F80(void)
     blr
 }
 
-u32 fn_800F7F90(void)
+u32 viewport_getFlag(void)
 {
     return lbl_8087F610;
 }

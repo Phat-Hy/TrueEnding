@@ -21,7 +21,7 @@ extern void quest_resetObjectiveBounds(void);
 extern void debuff_removeStatusEffect(void);
 extern void battle_activateExpReward(void);
 extern void save_validateHeader(void);
-extern void fn_801F4AA0(void);
+extern void save_findSlotTask(void);
 extern void save_formatSlotTitle(void);
 extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
@@ -3103,31 +3103,31 @@ lbl_fn_8050158C_00001BC8:
     fadds f2, f28, f30
     addi r4, r20, 0x32
     fadds f3, f29, f30
-    bl fn_801F4AA0
+    bl save_findSlotTask
     fadds f1, f27, f30
     mr r3, r26
     fadds f2, f28, f30
     addi r4, r20, 0x3a
     fadds f3, f29, f30
-    bl fn_801F4AA0
+    bl save_findSlotTask
     fadds f1, f27, f30
     mr r3, r26
     fadds f2, f28, f30
     addi r4, r20, 0x42
     fadds f3, f29, f30
-    bl fn_801F4AA0
+    bl save_findSlotTask
     fadds f1, f27, f30
     mr r3, r26
     fadds f2, f28, f30
     addi r4, r20, 0x4b
     fadds f3, f29, f30
-    bl fn_801F4AA0
+    bl save_findSlotTask
     fadds f1, f27, f30
     mr r3, r26
     fadds f2, f28, f30
     addi r4, r20, 0x58
     fadds f3, f29, f30
-    bl fn_801F4AA0
+    bl save_findSlotTask
     addi r3, r20, 0x65
     bl str_findChar
     lfs f1, lbl_80887690
@@ -3170,31 +3170,31 @@ lbl_fn_8050158C_00001D24:
     lfs f1, lbl_808876AC
     addi r4, r20, 0x32
     fmr f3, f2
-    bl fn_801F4AA0
+    bl save_findSlotTask
     lfs f2, lbl_808876B0
     mr r3, r26
     lfs f1, lbl_808876AC
     addi r4, r20, 0x3a
     fmr f3, f2
-    bl fn_801F4AA0
+    bl save_findSlotTask
     lfs f2, lbl_808876B0
     mr r3, r26
     lfs f1, lbl_808876AC
     addi r4, r20, 0x42
     fmr f3, f2
-    bl fn_801F4AA0
+    bl save_findSlotTask
     lfs f2, lbl_808876B0
     mr r3, r26
     lfs f1, lbl_808876AC
     addi r4, r20, 0x4b
     fmr f3, f2
-    bl fn_801F4AA0
+    bl save_findSlotTask
     lfs f2, lbl_808876B0
     mr r3, r26
     lfs f1, lbl_808876AC
     addi r4, r20, 0x58
     fmr f3, f2
-    bl fn_801F4AA0
+    bl save_findSlotTask
     addi r3, r20, 0x65
     bl str_findChar
     lfs f1, lbl_80887690
@@ -3233,31 +3233,31 @@ lbl_fn_8050158C_00001E2C:
     addi r4, r20, 0x32
     fmr f2, f1
     fmr f3, f1
-    bl fn_801F4AA0
+    bl save_findSlotTask
     lfs f1, lbl_808876B4
     mr r3, r26
     addi r4, r20, 0x3a
     fmr f2, f1
     fmr f3, f1
-    bl fn_801F4AA0
+    bl save_findSlotTask
     lfs f1, lbl_808876B4
     mr r3, r26
     addi r4, r20, 0x42
     fmr f2, f1
     fmr f3, f1
-    bl fn_801F4AA0
+    bl save_findSlotTask
     lfs f1, lbl_808876B4
     mr r3, r26
     addi r4, r20, 0x4b
     fmr f2, f1
     fmr f3, f1
-    bl fn_801F4AA0
+    bl save_findSlotTask
     lfs f1, lbl_808876B4
     mr r3, r26
     addi r4, r20, 0x58
     fmr f2, f1
     fmr f3, f1
-    bl fn_801F4AA0
+    bl save_findSlotTask
     addi r3, r20, 0x65
     bl str_findChar
     lfs f1, lbl_80887688
@@ -3299,31 +3299,31 @@ lbl_fn_8050158C_00001F20:
     fadds f2, f28, f30
     addi r4, r20, 0x97
     fadds f3, f29, f30
-    bl fn_801F4AA0
+    bl save_findSlotTask
     fadds f1, f27, f30
     mr r3, r26
     fadds f2, f28, f30
     addi r4, r20, 0x9f
     fadds f3, f29, f30
-    bl fn_801F4AA0
+    bl save_findSlotTask
     fadds f1, f27, f30
     mr r3, r26
     fadds f2, f28, f30
     addi r4, r20, 0xa7
     fadds f3, f29, f30
-    bl fn_801F4AA0
+    bl save_findSlotTask
     fadds f1, f27, f30
     mr r3, r26
     fadds f2, f28, f30
     addi r4, r20, 0xb0
     fadds f3, f29, f30
-    bl fn_801F4AA0
+    bl save_findSlotTask
     fadds f1, f27, f30
     mr r3, r26
     fadds f2, f28, f30
     addi r4, r20, 0xbd
     fadds f3, f29, f30
-    bl fn_801F4AA0
+    bl save_findSlotTask
     addi r3, r20, 0xca
     bl str_findChar
     lfs f1, lbl_80887690
@@ -3366,31 +3366,31 @@ lbl_fn_8050158C_00002028:
     lfs f1, lbl_808876AC
     addi r4, r20, 0x97
     fmr f3, f2
-    bl fn_801F4AA0
+    bl save_findSlotTask
     lfs f2, lbl_808876B0
     mr r3, r26
     lfs f1, lbl_808876AC
     addi r4, r20, 0x9f
     fmr f3, f2
-    bl fn_801F4AA0
+    bl save_findSlotTask
     lfs f2, lbl_808876B0
     mr r3, r26
     lfs f1, lbl_808876AC
     addi r4, r20, 0xa7
     fmr f3, f2
-    bl fn_801F4AA0
+    bl save_findSlotTask
     lfs f2, lbl_808876B0
     mr r3, r26
     lfs f1, lbl_808876AC
     addi r4, r20, 0xb0
     fmr f3, f2
-    bl fn_801F4AA0
+    bl save_findSlotTask
     lfs f2, lbl_808876B0
     mr r3, r26
     lfs f1, lbl_808876AC
     addi r4, r20, 0xbd
     fmr f3, f2
-    bl fn_801F4AA0
+    bl save_findSlotTask
     addi r3, r20, 0xca
     bl str_findChar
     lfs f1, lbl_80887690
@@ -3429,31 +3429,31 @@ lbl_fn_8050158C_00002130:
     addi r4, r20, 0x97
     fmr f2, f1
     fmr f3, f1
-    bl fn_801F4AA0
+    bl save_findSlotTask
     lfs f1, lbl_808876B4
     mr r3, r26
     addi r4, r20, 0x9f
     fmr f2, f1
     fmr f3, f1
-    bl fn_801F4AA0
+    bl save_findSlotTask
     lfs f1, lbl_808876B4
     mr r3, r26
     addi r4, r20, 0xa7
     fmr f2, f1
     fmr f3, f1
-    bl fn_801F4AA0
+    bl save_findSlotTask
     lfs f1, lbl_808876B4
     mr r3, r26
     addi r4, r20, 0xb0
     fmr f2, f1
     fmr f3, f1
-    bl fn_801F4AA0
+    bl save_findSlotTask
     lfs f1, lbl_808876B4
     mr r3, r26
     addi r4, r20, 0xbd
     fmr f2, f1
     fmr f3, f1
-    bl fn_801F4AA0
+    bl save_findSlotTask
     addi r3, r20, 0xca
     bl str_findChar
     lfs f1, lbl_80887688

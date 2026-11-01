@@ -19,7 +19,7 @@ extern void fn_801CFA5C(void);
 extern void fn_801D4E74(void);
 extern void fn_801DCE88(void);
 extern void save_parseSlotStats(void);
-extern void fn_801F4AA0(void);
+extern void save_findSlotTask(void);
 extern void save_formatSlotTitle(void);
 extern void saveSlot_readSummary(void);
 extern void save_writeBackupSlot(void);
@@ -1722,13 +1722,13 @@ lbl_fn_801E75F8_000016D4:
     lfs f2, 0x4(r31)
     addi r4, r1, 0x128
     lfs f3, 0x8(r31)
-    bl fn_801F4AA0
+    bl save_findSlotTask
     lfs f1, lbl_807C7898@l(r23)
     mr r3, r29
     lfs f2, 0x4(r31)
     addi r4, r1, 0xa8
     lfs f3, 0x8(r31)
-    bl fn_801F4AA0
+    bl save_findSlotTask
     b lbl_fn_801E75F8_00001848
 lbl_fn_801E75F8_000017B0:
     bne lbl_fn_801E75F8_00001800
@@ -1743,13 +1743,13 @@ lbl_fn_801E75F8_000017B0:
     lfs f2, 0x4(r28)
     addi r4, r1, 0x128
     lfs f3, 0x8(r28)
-    bl fn_801F4AA0
+    bl save_findSlotTask
     lfs f1, lbl_807C78B8@l(r30)
     mr r3, r29
     lfs f2, 0x4(r28)
     addi r4, r1, 0xa8
     lfs f3, 0x8(r28)
-    bl fn_801F4AA0
+    bl save_findSlotTask
     b lbl_fn_801E75F8_00001848
 lbl_fn_801E75F8_00001800:
     addi r3, r1, 0xe8
@@ -1763,13 +1763,13 @@ lbl_fn_801E75F8_00001800:
     lfs f2, 0x4(r24)
     addi r4, r1, 0x128
     lfs f3, 0x8(r24)
-    bl fn_801F4AA0
+    bl save_findSlotTask
     lfs f1, lbl_807C78A8@l(r25)
     mr r3, r29
     lfs f2, 0x4(r24)
     addi r4, r1, 0xa8
     lfs f3, 0x8(r24)
-    bl fn_801F4AA0
+    bl save_findSlotTask
 lbl_fn_801E75F8_00001848:
     addi r19, r19, 0x1
     addi r20, r20, 0x4

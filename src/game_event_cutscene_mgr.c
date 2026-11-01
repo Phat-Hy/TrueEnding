@@ -6,7 +6,7 @@ extern void __files(void);
 extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
-extern void fn_80041C0C(void);
+extern void menu_destroyObject(void);
 extern void sound_releaseChannel(void);
 extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
@@ -996,8 +996,8 @@ asm void atn_LoadMotionCommandData_slot0(void)
     lwz r3, 0x2c(r31)
     cmpwi r3, 0x0
     beq lbl_atn_LoadMotionCommandData_slot0_00000B44
-    lis r4, fn_80041C0C@ha
-    addi r4, r4, fn_80041C0C@l
+    lis r4, menu_destroyObject@ha
+    addi r4, r4, menu_destroyObject@l
     bl __destroy_arr
 lbl_atn_LoadMotionCommandData_slot0_00000B44:
     addic. r0, r31, 0x18

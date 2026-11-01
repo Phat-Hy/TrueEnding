@@ -82,7 +82,7 @@ void fn_806EABE0(void);
 void fn_806EABF0(void);
 void fn_806EAC00(void);
 void fn_806EAC20(void);
-void fn_806EAC30(void);
+void net_bindSessionCallback(void);
 void fn_806EAC50(void);
 void *fn_806EAC90(void *obj);
 u16 fn_806EACA0(void *obj);
@@ -547,7 +547,7 @@ asm void fn_806EAC20(void)
     b fn_806EA690
 }
 
-asm void fn_806EAC30(void)
+asm void net_bindSessionCallback(void)
 {
     nofralloc
     lis r4, fn_806EAC20@ha

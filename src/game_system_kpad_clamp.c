@@ -33,7 +33,7 @@ extern void cam_findTargetIndex(void);
 extern void fn_800EFE3C(void);
 extern void proj_getMatrix(void);
 extern void vec3_scale(void);
-extern void fn_800F7F90(void);
+extern void viewport_getFlag(void);
 extern void viewport_getGlobalContext(void);
 extern void fn_800F80A8(void);
 extern void fn_801011B8(void);
@@ -621,7 +621,7 @@ lbl_fn_803729B4_00000564:
 lbl_fn_803729B4_0000060C:
     addi r3, r1, 0x44
     bl fn_802A4170
-    bl fn_800F7F90
+    bl viewport_getFlag
     bl fn_8037308C
     addi r28, r3, 0x8
     li r29, 0x0
@@ -938,7 +938,7 @@ lbl_fn_803729B4_000009B4:
     bl fn_802F0990
     mr r4, r30
     bl fn_80366DAC
-    bl fn_800F7F90
+    bl viewport_getFlag
     bl fn_804DA3F8
     addi r3, r1, 0x44
     li r4, -0x1

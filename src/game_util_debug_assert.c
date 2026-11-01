@@ -11,7 +11,7 @@ extern void dtor_80084684(void);
 extern void mem_free(void);
 extern void str_findChar(void);
 extern void actor_findSpawnTemplate(void);
-extern void fn_801F4AA0(void);
+extern void save_findSlotTask(void);
 extern void save_formatSlotTitle(void);
 extern void saveSlot_readSummary(void);
 extern void save_computeCrc32(void);
@@ -2481,7 +2481,7 @@ lbl_fn_80597558_000022C8:
     addi r4, r1, 0xe8
     lfs f2, 0x4(r5)
     lfs f3, 0x8(r5)
-    bl fn_801F4AA0
+    bl save_findSlotTask
     b lbl_fn_80597558_000023CC
 lbl_fn_80597558_00002378:
     bne lbl_fn_80597558_000023A0
@@ -2492,7 +2492,7 @@ lbl_fn_80597558_00002378:
     addi r4, r1, 0xe8
     lfs f2, 0x4(r27)
     lfs f3, 0x8(r27)
-    bl fn_801F4AA0
+    bl save_findSlotTask
     b lbl_fn_80597558_000023CC
 lbl_fn_80597558_000023A0:
     lis r5, lbl_807C78A8@ha
@@ -2505,7 +2505,7 @@ lbl_fn_80597558_000023A0:
     addi r4, r1, 0xe8
     lfs f2, 0x4(r5)
     lfs f3, 0x8(r5)
-    bl fn_801F4AA0
+    bl save_findSlotTask
 lbl_fn_80597558_000023CC:
     mr r5, r18
     addi r3, r1, 0xe8
@@ -2559,7 +2559,7 @@ lbl_fn_80597558_00002464:
     addi r4, r1, 0xe8
     lfs f2, 0x4(r27)
     lfs f3, 0x8(r27)
-    bl fn_801F4AA0
+    bl save_findSlotTask
     mr r5, r18
     addi r3, r1, 0xe8
     addi r4, r28, 0x34c

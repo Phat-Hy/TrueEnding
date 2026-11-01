@@ -5,7 +5,7 @@
 extern void _restgpr_26(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
-extern void fn_80041C0C(void);
+extern void menu_destroyObject(void);
 extern void fn_80042740(void);
 extern void atn_ColliBase_destructor(void);
 extern void mission_initPathTracker(void);
@@ -1962,11 +1962,11 @@ asm void fn_8041CDD8(void)
     li r7, 0x6
     bl __construct_new_array
     lis r4, fn_80042740@ha
-    lis r5, fn_80041C0C@ha
+    lis r5, menu_destroyObject@ha
     addi r3, r31, 0x13c
     li r6, 0x20
     addi r4, r4, fn_80042740@l
-    addi r5, r5, fn_80041C0C@l
+    addi r5, r5, menu_destroyObject@l
     li r7, 0x6
     bl __construct_new_array
     addi r8, r31, 0x23c

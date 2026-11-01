@@ -34,7 +34,7 @@ extern void fn_800D8814(void);
 extern void fn_800EC1F4(void);
 extern void proj_getMatrix(void);
 extern void fn_800F530C(void);
-extern void fn_800F7F90(void);
+extern void viewport_getFlag(void);
 extern void viewport_getGlobalContext(void);
 extern void fn_800F7FA8(void);
 extern void phys_scaleGravity(void);
@@ -96,7 +96,7 @@ extern void fn_804814F0(void);
 extern void fn_8049D68C(void);
 extern void fn_804AC734(void);
 extern void net_getPacketManager(void);
-extern void fn_804AF520(void);
+extern void net_queue_transitionState(void);
 extern void fn_804B50C0(void);
 extern void fn_804B6204(void);
 extern void fn_804B691C(void);
@@ -1807,7 +1807,7 @@ lbl_fn_804D25D4_00001338:
     lbz r0, -0x6688(r3)
     cmpwi r0, 0x0
     bne lbl_fn_804D25D4_000013A4
-    bl fn_800F7F90
+    bl viewport_getFlag
     bl fn_804DC688
     cmplwi r3, 0x1
     bne lbl_fn_804D25D4_000013A4
@@ -1903,7 +1903,7 @@ lbl_fn_804D25D4_000014D0:
     stw r0, -0x68ac(r3)
     bl fn_804D16D0
     li r4, 0x16
-    bl fn_804AF520
+    bl net_queue_transitionState
     li r27, 0x0
     bl net_getFriendManager
     bl fn_8050C0B8
@@ -2071,7 +2071,7 @@ lbl_fn_804D25D4_00001718:
     bl fn_804D16D0
     addis r4, r24, 0x1
     lwz r4, -0x68a8(r4)
-    bl fn_804AF520
+    bl net_queue_transitionState
     addis r3, r24, 0x1
     li r0, -0x1
     stw r0, -0x68a8(r3)
@@ -2094,12 +2094,12 @@ lbl_fn_804D25D4_00001718:
     bne lbl_fn_804D25D4_000017A4
     bl fn_804D16D0
     li r4, 0x5
-    bl fn_804AF520
+    bl net_queue_transitionState
     b lbl_fn_804D25D4_000017B8
 lbl_fn_804D25D4_000017A4:
     bl fn_804D16D0
     li r4, 0x2
-    bl fn_804AF520
+    bl net_queue_transitionState
     mr r3, r24
     bl fn_804FB678
 lbl_fn_804D25D4_000017B8:
@@ -2435,12 +2435,12 @@ lbl_fn_804D25D4_00001BEC:
     beq lbl_fn_804D25D4_00001CB4
     bl fn_804D16D0
     li r4, 0x2
-    bl fn_804AF520
+    bl net_queue_transitionState
     b lbl_fn_804D25D4_00001CC0
 lbl_fn_804D25D4_00001CB4:
     bl fn_804D16D0
     li r4, 0x5
-    bl fn_804AF520
+    bl net_queue_transitionState
 lbl_fn_804D25D4_00001CC0:
     bl fn_804D16D0
     li r4, 0xf
@@ -2563,7 +2563,7 @@ lbl_fn_804D25D4_00001DD0:
     bl fn_804D6164
     bl fn_804D16D0
     li r4, 0x9
-    bl fn_804AF520
+    bl net_queue_transitionState
     b lbl_fn_804D25D4_00004898
     li r0, 0x0
     stw r0, 0x53c(r24)
@@ -2741,7 +2741,7 @@ lbl_fn_804D25D4_000020E8:
     li r4, 0xc
     bl fn_804D16A0
     li r22, 0xff
-    bl fn_800F7F90
+    bl viewport_getFlag
     addis r3, r3, 0x1
     stb r22, -0x6687(r3)
     stw r23, 0x544(r24)
@@ -2760,7 +2760,7 @@ lbl_fn_804D25D4_000020E8:
 lbl_fn_804D25D4_0000218C:
     bl fn_804D16D0
     li r4, 0xd
-    bl fn_804AF520
+    bl net_queue_transitionState
     b lbl_fn_804D25D4_000021B8
 lbl_fn_804D25D4_0000219C:
     bl fn_804D16D0
@@ -2769,7 +2769,7 @@ lbl_fn_804D25D4_0000219C:
     bne lbl_fn_804D25D4_000021B8
     bl fn_804D16D0
     li r4, 0xd
-    bl fn_804AF520
+    bl net_queue_transitionState
 lbl_fn_804D25D4_000021B8:
     li r0, 0x0
     stw r0, 0x5cc(r24)
@@ -2805,14 +2805,14 @@ lbl_fn_804D25D4_00002200:
     bl fn_804D6214
     cmpwi r3, 0x1
     bne lbl_fn_804D25D4_00002244
-    bl fn_800F7F90
+    bl viewport_getFlag
     li r4, 0x0
     bl fn_804DC454
 lbl_fn_804D25D4_00002244:
     bl net_getFriendManager
     bl fn_804D16E8
     bl fn_8050CF94
-    bl fn_800F7F90
+    bl viewport_getFlag
     bl fn_804EAA54
     cmpwi r3, 0x1
     bne lbl_fn_804D25D4_00002268
@@ -2821,7 +2821,7 @@ lbl_fn_804D25D4_00002244:
 lbl_fn_804D25D4_00002268:
     bl fn_804D16D0
     li r4, 0xa
-    bl fn_804AF520
+    bl net_queue_transitionState
 lbl_fn_804D25D4_00002274:
     bl fn_804D16D0
     bl fn_804D6018
@@ -2880,7 +2880,7 @@ lbl_fn_804D25D4_00002330:
     bl net_getFriendManager
     bl fn_804D622C
     mr r22, r3
-    bl fn_800F7F90
+    bl viewport_getFlag
     addis r3, r3, 0x1
     lbz r0, -0x6687(r3)
     cmplwi r0, 0xff
@@ -3142,7 +3142,7 @@ lbl_fn_804D25D4_000026E0:
     ble lbl_fn_804D25D4_00002778
     li r0, 0x1
     stb r0, lbl_8087F614
-    bl fn_800F7F90
+    bl viewport_getFlag
     bl fn_804EB1B0
     cmpwi r3, 0x1
     bne lbl_fn_804D25D4_00002744
@@ -3179,7 +3179,7 @@ lbl_fn_804D25D4_00002744:
     b lbl_fn_804D25D4_000027E0
 lbl_fn_804D25D4_00002778:
     bne lbl_fn_804D25D4_000027E0
-    bl fn_800F7F90
+    bl viewport_getFlag
     bl fn_804EB1B0
     cmpwi r3, 0x0
     beq lbl_fn_804D25D4_000027BC
@@ -3437,7 +3437,7 @@ lbl_fn_804D25D4_00002B24:
     bl fn_804D16A0
     bl fn_804D16D0
     li r4, 0x15
-    bl fn_804AF520
+    bl net_queue_transitionState
     mr r3, r24
     li r4, 0x708
     bl fn_804D6388
@@ -3668,7 +3668,7 @@ lbl_fn_804D25D4_00002E68:
     bl boss_updateLaserAimMatrix
     bl fn_804D16D0
     li r4, 0xf
-    bl fn_804AF520
+    bl net_queue_transitionState
     mr r3, r24
     bl fn_804E9364
     mr r3, r24
@@ -3794,7 +3794,7 @@ lbl_fn_804D25D4_00003054:
     bl fn_804D16A0
     bl fn_804D16D0
     li r4, 0x10
-    bl fn_804AF520
+    bl net_queue_transitionState
     bl fn_804D16D8
     li r4, 0x0
     bl atn_Task_setActive
@@ -4267,7 +4267,7 @@ lbl_fn_804D25D4_000036EC:
     li r5, 0x1046
     li r7, 0x1
     bl net_p2p_readPayload
-    bl fn_800F7F90
+    bl viewport_getFlag
     lbz r4, 0xcc(r26)
     li r5, 0x96
     lbz r6, 0x0(r20)
@@ -4295,14 +4295,14 @@ lbl_fn_804D25D4_000036EC:
     bl fn_804D627C
     cmpwi r3, 0x1
     beq lbl_fn_804D25D4_000038A4
-    bl fn_800F7F90
+    bl viewport_getFlag
     addis r4, r24, 0x1
     lbz r4, -0x6580(r4)
     bl fn_804F5E3C
     addi r0, r3, 0x2
     cmplwi r0, 0x1
     bgt lbl_fn_804D25D4_00003818
-    bl fn_800F7F90
+    bl viewport_getFlag
     addis r4, r24, 0x1
     lbz r4, -0x6580(r4)
     bl fn_804F5CA0
@@ -4336,7 +4336,7 @@ lbl_fn_804D25D4_00003818:
     stw r0, 0x5bc(r24)
     subfe r0, r3, r27
     stw r0, 0x5b8(r24)
-    bl fn_800F7F90
+    bl viewport_getFlag
     addis r4, r24, 0x1
     lbz r4, -0x6580(r4)
     bl fn_804F5CA0
@@ -4762,7 +4762,7 @@ lbl_fn_804D25D4_00003EAC:
     bl fn_804D6010
     b lbl_fn_804D25D4_0000414C
     li r25, 0x0
-    bl fn_800F7F90
+    bl viewport_getFlag
     addis r3, r3, 0x1
     stb r25, -0x6664(r3)
     bl fn_804D5FD4
@@ -5029,7 +5029,7 @@ lbl_fn_804D25D4_00004220:
     bl fn_804DC454
     bl fn_804D16D0
     li r4, 0x9
-    bl fn_804AF520
+    bl net_queue_transitionState
     bl fn_804D16D0
     bl fn_804D6018
     bl fn_804D16D0
@@ -5223,7 +5223,7 @@ lbl_fn_804D25D4_00004568:
     bl fn_8050A3D4
     bl fn_804D16D0
     li r4, 0xd
-    bl fn_804AF520
+    bl net_queue_transitionState
 lbl_fn_804D25D4_000045A8:
     lfs f1, lbl_80887570
     addi r3, r1, 0x30
@@ -5424,7 +5424,7 @@ lbl_fn_804D25D4_00004860:
     bl fn_804D16A0
     bl fn_804D16D0
     li r4, 0x12
-    bl fn_804AF520
+    bl net_queue_transitionState
 lbl_fn_804D25D4_00004898:
     addis r3, r24, 0x1
     lwz r0, -0x6894(r3)

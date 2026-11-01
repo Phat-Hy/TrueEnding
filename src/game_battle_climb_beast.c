@@ -44,7 +44,7 @@ extern void bloom_processPasses(void);
 extern void str_skipWhitespace(void);
 extern void proj_getGlobalManager(void);
 extern void vec3_scale(void);
-extern void fn_800F7F90(void);
+extern void viewport_getFlag(void);
 extern void vec3_normalize(void);
 extern void fn_800F80A8(void);
 extern void fn_800F80B8(void);
@@ -786,10 +786,10 @@ lbl_fn_803FA5C8_0000084C:
     lwz r3, 0x4d0(r31)
     subi r0, r3, 0x1
     stw r0, 0x4d0(r31)
-    bl fn_800F7F90
+    bl viewport_getFlag
     cmpwi r3, 0x0
     beq lbl_fn_803FA5C8_000008B0
-    bl fn_800F7F90
+    bl viewport_getFlag
     bl fn_804EB1B0
     cmpwi r3, 0x0
     bne lbl_fn_803FA5C8_000008B0
@@ -1179,7 +1179,7 @@ lbl_fn_803FA5C8_00000DC8:
 lbl_fn_803FA5C8_00000E38:
     cmpwi r0, 0x7
     bne lbl_fn_803FA5C8_00000F70
-    bl fn_800F7F90
+    bl viewport_getFlag
     cmpwi r3, 0x0
     beq lbl_fn_803FA5C8_00000E58
     bl fn_803FAEB4

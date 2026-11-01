@@ -26,7 +26,7 @@ extern void fn_8011770C(void);
 extern void fn_8012B028(void);
 extern void fn_80134800(void);
 extern void save_validateHeader(void);
-extern void fn_801F4AA0(void);
+extern void save_findSlotTask(void);
 extern void save_formatSlotTitle(void);
 extern void saveSlot_readSummary(void);
 extern void save_createWorkerTask(void);
@@ -1869,7 +1869,7 @@ lbl_fn_80572454_000017D0:
     lfs f1, lbl_80888064
     lfs f2, lbl_80888068
     lfs f3, lbl_8088806C
-    bl fn_801F4AA0
+    bl save_findSlotTask
     lwz r3, 0x48(r27)
     lfs f0, lbl_80888070
     stfs f0, 0x100(r3)
@@ -1880,7 +1880,7 @@ lbl_fn_80572454_00001834:
     lwz r3, 0x48(r27)
     fmr f2, f1
     fmr f3, f1
-    bl fn_801F4AA0
+    bl save_findSlotTask
     lwz r3, 0x48(r27)
     lfs f0, lbl_80888078
     stfs f0, 0x100(r3)

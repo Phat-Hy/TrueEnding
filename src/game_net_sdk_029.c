@@ -29,7 +29,7 @@ extern void net_getTimestampMs(void);
 extern void fn_806D8F80(void);
 extern void fn_806D9590(void);
 extern void net_sendString(void);
-extern void fn_806DE4E0(void);
+extern void net_sendFormattedCommand(void);
 extern void fn_806DE7F0(void);
 extern void fn_806DE940(void);
 extern void net_sendPacket(void);
@@ -2130,7 +2130,7 @@ asm void fn_806DD6D0(void)
     mr r3, r27
     mr r5, r29
     addi r4, r30, 0x210
-    bl fn_806DE4E0
+    bl net_sendFormattedCommand
     mr r3, r27
     addi r4, r30, 0x210
     addi r5, r31, 0x168
@@ -2138,7 +2138,7 @@ asm void fn_806DD6D0(void)
     lwz r5, 0x198(r30)
     mr r3, r27
     addi r4, r30, 0x210
-    bl fn_806DE4E0
+    bl net_sendFormattedCommand
     mr r3, r27
     addi r4, r30, 0x210
     addi r5, r31, 0x174
@@ -2146,7 +2146,7 @@ asm void fn_806DD6D0(void)
     mr r3, r27
     mr r5, r28
     addi r4, r30, 0x210
-    bl fn_806DE4E0
+    bl net_sendFormattedCommand
     mr r3, r27
     addi r4, r30, 0x210
     addi r5, r31, 0x54

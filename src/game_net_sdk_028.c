@@ -41,7 +41,7 @@ extern void fn_806DDE60(void);
 extern void fn_806DE020(void);
 extern void fn_806DE290(void);
 extern void net_sendString(void);
-extern void fn_806DE4E0(void);
+extern void net_sendFormattedCommand(void);
 extern void fn_806DF610(void);
 extern void fn_806E0770(void);
 extern void fn_806E2010(void);
@@ -1752,7 +1752,7 @@ lbl_fn_806DAD50_00001584:
     lwz r5, 0x198(r30)
     mr r3, r28
     addi r4, r30, 0x210
-    bl fn_806DE4E0
+    bl net_sendFormattedCommand
     mr r3, r28
     addi r4, r30, 0x210
     addi r5, r31, 0x108
@@ -1760,7 +1760,7 @@ lbl_fn_806DAD50_00001584:
     mr r3, r28
     mr r5, r29
     addi r4, r30, 0x210
-    bl fn_806DE4E0
+    bl net_sendFormattedCommand
     mr r3, r28
     addi r4, r30, 0x210
     addi r5, r31, 0x118
@@ -2326,7 +2326,7 @@ lbl_fn_806DB460_00001D2C:
     mr r3, r30
     mr r5, r31
     addi r4, r28, 0x210
-    bl fn_806DE4E0
+    bl net_sendFormattedCommand
     mr r3, r30
     addi r4, r28, 0x210
     addi r5, r29, 0xfc
@@ -2334,7 +2334,7 @@ lbl_fn_806DB460_00001D2C:
     lwz r5, 0x198(r28)
     mr r3, r30
     addi r4, r28, 0x210
-    bl fn_806DE4E0
+    bl net_sendFormattedCommand
     mr r3, r30
     addi r4, r28, 0x210
     addi r5, r29, 0x1ac

@@ -21,7 +21,7 @@ extern void magic_dispatchActionCommand(void);
 extern void fn_801F0544(void);
 extern void save_parseSlotHeader(void);
 extern void fn_801F4998(void);
-extern void fn_801F4AA0(void);
+extern void save_findSlotTask(void);
 extern void saveSlot_readSummary(void);
 extern void fn_801FEC08(void);
 extern void thread_findQueueTaskByName(void);
@@ -36,7 +36,7 @@ extern void fn_804ACAF8(void);
 extern void fn_804ACD10(void);
 extern void fn_804ACDBC(void);
 extern void fn_804AD000(void);
-extern void fn_804AF520(void);
+extern void net_queue_transitionState(void);
 extern void fn_804B3C78(void);
 extern void fn_804B3EFC(void);
 extern void fn_804BA350(void);
@@ -132,7 +132,7 @@ lbl_fn_804B0F58_00000030:
     beq lbl_fn_804B0F58_00000088
     mr r3, r31
     li r4, 0x13
-    bl fn_804AF520
+    bl net_queue_transitionState
     b lbl_fn_804B0F58_0000034C
 lbl_fn_804B0F58_00000088:
     lwz r3, lbl_8087F588
@@ -141,14 +141,14 @@ lbl_fn_804B0F58_00000088:
     beq lbl_fn_804B0F58_0000034C
     mr r3, r31
     li r4, 0x2
-    bl fn_804AF520
+    bl net_queue_transitionState
     b lbl_fn_804B0F58_0000034C
     lwz r4, lbl_8087F5EC
     lwz r0, 0xd8(r4)
     cmpwi r0, 0x8
     bne lbl_fn_804B0F58_000000C4
     li r4, 0x2
-    bl fn_804AF520
+    bl net_queue_transitionState
     b lbl_fn_804B0F58_0000034C
 lbl_fn_804B0F58_000000C4:
     cmpwi r0, 0x1
@@ -187,7 +187,7 @@ lbl_fn_804B0F58_000000FC:
     cmpwi r0, 0x6
     bne lbl_fn_804B0F58_0000034C
     lwz r4, 0xc0(r3)
-    bl fn_804AF520
+    bl net_queue_transitionState
     b lbl_fn_804B0F58_0000034C
     lwz r3, lbl_8087F588
     lwz r0, 0x4c(r3)
@@ -222,7 +222,7 @@ lbl_fn_804B0F58_000000FC:
     stw r0, 0x144(r31)
     stw r0, 0x148(r31)
     stw r0, 0x14c(r31)
-    bl fn_804AF520
+    bl net_queue_transitionState
     b lbl_fn_804B0F58_0000034C
 lbl_fn_804B0F58_000001E4:
     lwz r3, lbl_8087F588
@@ -231,7 +231,7 @@ lbl_fn_804B0F58_000001E4:
     beq lbl_fn_804B0F58_0000034C
     mr r3, r31
     li r4, 0x9
-    bl fn_804AF520
+    bl net_queue_transitionState
     b lbl_fn_804B0F58_0000034C
     bl fn_804B1528
     b lbl_fn_804B0F58_0000034C
@@ -286,7 +286,7 @@ lbl_fn_804B0F58_00000268:
     bl fn_804BA350
     mr r3, r31
     li r4, 0xa
-    bl fn_804AF520
+    bl net_queue_transitionState
     b lbl_fn_804B0F58_0000034C
     lwz r3, lbl_8087F5C4
     lwz r0, 0xd88(r3)
@@ -305,19 +305,19 @@ lbl_fn_804B0F58_00000304:
     bne lbl_fn_804B0F58_00000324
     mr r3, r31
     li r4, 0xb
-    bl fn_804AF520
+    bl net_queue_transitionState
     b lbl_fn_804B0F58_0000034C
 lbl_fn_804B0F58_00000324:
     mr r3, r31
     li r4, 0xa
-    bl fn_804AF520
+    bl net_queue_transitionState
     b lbl_fn_804B0F58_0000034C
     lwz r4, 0x29a0(r3)
     lwz r0, 0x29a4(r3)
     cmpw r4, r0
     bne lbl_fn_804B0F58_0000034C
     li r4, 0x14
-    bl fn_804AF520
+    bl net_queue_transitionState
 lbl_fn_804B0F58_0000034C:
     lwz r0, 0x299c(r31)
     cmpwi r0, 0x0
@@ -453,42 +453,42 @@ lbl_fn_804B12F8_0000051C:
     bne lbl_fn_804B12F8_00000540
     mr r3, r29
     li r4, 0x7
-    bl fn_804AF520
+    bl net_queue_transitionState
     b lbl_fn_804B12F8_000005B4
 lbl_fn_804B12F8_00000540:
     cmpwi r0, 0x1
     bne lbl_fn_804B12F8_00000558
     mr r3, r29
     li r4, 0x4
-    bl fn_804AF520
+    bl net_queue_transitionState
     b lbl_fn_804B12F8_000005B4
 lbl_fn_804B12F8_00000558:
     cmpwi r0, 0x2
     bne lbl_fn_804B12F8_00000570
     mr r3, r29
     li r4, 0x5
-    bl fn_804AF520
+    bl net_queue_transitionState
     b lbl_fn_804B12F8_000005B4
 lbl_fn_804B12F8_00000570:
     cmpwi r0, 0x3
     bne lbl_fn_804B12F8_00000588
     mr r3, r29
     li r4, 0x6
-    bl fn_804AF520
+    bl net_queue_transitionState
     b lbl_fn_804B12F8_000005B4
 lbl_fn_804B12F8_00000588:
     cmpwi r0, 0x4
     bne lbl_fn_804B12F8_000005B4
     mr r3, r29
     li r4, 0x3
-    bl fn_804AF520
+    bl net_queue_transitionState
     b lbl_fn_804B12F8_000005B4
 lbl_fn_804B12F8_000005A0:
     cmpwi r31, 0x2
     bne lbl_fn_804B12F8_000005B4
     mr r3, r29
     li r4, 0x3
-    bl fn_804AF520
+    bl net_queue_transitionState
 lbl_fn_804B12F8_000005B4:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
@@ -893,7 +893,7 @@ lbl_fn_804B1528_00000B40:
     fmr f2, f1
     addi r4, r4, 0x368
     fmr f3, f1
-    bl fn_801F4AA0
+    bl save_findSlotTask
     b lbl_fn_804B1528_00000BB4
 lbl_fn_804B1528_00000B8C:
     lfs f1, lbl_80887324
@@ -903,7 +903,7 @@ lbl_fn_804B1528_00000B8C:
     fmr f2, f1
     addi r4, r4, 0x368
     fmr f3, f1
-    bl fn_801F4AA0
+    bl save_findSlotTask
     b lbl_fn_804B1528_00000BB4
     b lbl_fn_804B1528_00000D08
 lbl_fn_804B1528_00000BB4:
@@ -951,7 +951,7 @@ lbl_fn_804B1528_00000C08:
     bl fn_804EAA60
     mr r3, r31
     li r4, 0xa
-    bl fn_804AF520
+    bl net_queue_transitionState
     b lbl_fn_804B1528_00000D08
 lbl_fn_804B1528_00000C60:
     cmpwi r0, 0x1
@@ -961,28 +961,28 @@ lbl_fn_804B1528_00000C60:
     bl fn_804EAA60
     mr r3, r31
     li r4, 0xa
-    bl fn_804AF520
+    bl net_queue_transitionState
     b lbl_fn_804B1528_00000D08
 lbl_fn_804B1528_00000C84:
     cmpwi r0, 0x2
     bne lbl_fn_804B1528_00000C9C
     mr r3, r31
     li r4, 0x11
-    bl fn_804AF520
+    bl net_queue_transitionState
     b lbl_fn_804B1528_00000D08
 lbl_fn_804B1528_00000C9C:
     cmpwi r0, 0x3
     bne lbl_fn_804B1528_00000CB4
     mr r3, r31
     li r4, 0x6
-    bl fn_804AF520
+    bl net_queue_transitionState
     b lbl_fn_804B1528_00000D08
 lbl_fn_804B1528_00000CB4:
     cmpwi r0, 0x4
     bne lbl_fn_804B1528_00000D08
     mr r3, r31
     li r4, 0x8
-    bl fn_804AF520
+    bl net_queue_transitionState
     b lbl_fn_804B1528_00000D08
 lbl_fn_804B1528_00000CCC:
     mr r3, r29
@@ -999,7 +999,7 @@ lbl_fn_804B1528_00000CCC:
     bl ref_releaseHandle
     mr r3, r31
     li r4, 0x8
-    bl fn_804AF520
+    bl net_queue_transitionState
 lbl_fn_804B1528_00000D08:
     lwz r0, 0x84(r1)
     psq_l f31, 0x78(r1), 0, 0
@@ -1102,7 +1102,7 @@ lbl_fn_804B1C88_00000E14:
     bne lbl_fn_804B1C88_00000E7C
     mr r3, r31
     li r4, 0x12
-    bl fn_804AF520
+    bl net_queue_transitionState
     lwz r3, lbl_8087F610
     li r4, 0x2a
     addi r3, r3, 0x4fc
@@ -1249,14 +1249,14 @@ lbl_fn_804B1E48_0000107C:
     bne lbl_fn_804B1E48_00001094
     mr r3, r29
     li r4, 0x9
-    bl fn_804AF520
+    bl net_queue_transitionState
     b lbl_fn_804B1E48_000010A8
 lbl_fn_804B1E48_00001094:
     cmpwi r25, 0x2
     bne lbl_fn_804B1E48_000010A8
     mr r3, r29
     li r4, 0x9
-    bl fn_804AF520
+    bl net_queue_transitionState
 lbl_fn_804B1E48_000010A8:
     lis r3, lbl_80757B7C@ha
     mr r22, r29
@@ -1387,7 +1387,7 @@ lbl_fn_804B1E48_00001238:
     beq lbl_fn_804B1E48_0000127C
     mr r3, r29
     li r4, 0x11
-    bl fn_804AF520
+    bl net_queue_transitionState
     b lbl_fn_804B1E48_000014DC
 lbl_fn_804B1E48_0000127C:
     li r26, 0x0
@@ -1847,7 +1847,7 @@ lbl_fn_804B274C_000018BC:
 lbl_fn_804B274C_0000191C:
     mr r3, r30
     mr r4, r31
-    bl fn_804AF520
+    bl net_queue_transitionState
     b lbl_fn_804B274C_000019C0
 lbl_fn_804B274C_0000192C:
     cmpwi r0, 0x1
@@ -1875,21 +1875,21 @@ lbl_fn_804B274C_0000192C:
 lbl_fn_804B274C_00001984:
     mr r3, r30
     mr r4, r31
-    bl fn_804AF520
+    bl net_queue_transitionState
     b lbl_fn_804B274C_000019C0
 lbl_fn_804B274C_00001994:
     cmpwi r0, 0x2
     bne lbl_fn_804B274C_000019C0
     mr r3, r30
     li r4, 0x9
-    bl fn_804AF520
+    bl net_queue_transitionState
     b lbl_fn_804B274C_000019C0
 lbl_fn_804B274C_000019AC:
     cmpwi r31, 0x2
     bne lbl_fn_804B274C_000019C0
     mr r3, r30
     li r4, 0x9
-    bl fn_804AF520
+    bl net_queue_transitionState
 lbl_fn_804B274C_000019C0:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
@@ -2016,7 +2016,7 @@ lbl_fn_804B2934_00001B6C:
     beq lbl_fn_804B2934_00001CAC
     mr r3, r31
     li r4, 0x2
-    bl fn_804AF520
+    bl net_queue_transitionState
     b lbl_fn_804B2934_00001CAC
 lbl_fn_804B2934_00001B8C:
     lwz r3, lbl_8087F588
@@ -2084,7 +2084,7 @@ lbl_fn_804B2934_00001C6C:
     beq lbl_fn_804B2934_00001CAC
     mr r3, r31
     li r4, 0x2
-    bl fn_804AF520
+    bl net_queue_transitionState
     b lbl_fn_804B2934_00001CAC
 lbl_fn_804B2934_00001C8C:
     lwz r4, lbl_8087F860
@@ -2094,7 +2094,7 @@ lbl_fn_804B2934_00001C8C:
     li r0, 0x1
     stw r0, 0x154(r3)
     li r4, 0x2
-    bl fn_804AF520
+    bl net_queue_transitionState
 lbl_fn_804B2934_00001CAC:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)

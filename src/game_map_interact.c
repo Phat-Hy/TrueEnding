@@ -10,7 +10,7 @@ extern void _savegpr_25(void);
 extern void dtor_80084684(void);
 extern void vec3_set(void);
 extern void vec3_copy(void);
-extern void fn_80041C0C(void);
+extern void menu_destroyObject(void);
 extern void fn_80042108(void);
 extern void fn_80042740(void);
 extern void collision_testLineSegment(void);
@@ -177,9 +177,9 @@ asm void fn_80183AAC(void)
     stw r30, 0x8(r1)
     mr r30, r3
     beq lbl_fn_80183AAC_00000064
-    lis r4, fn_80041C0C@ha
+    lis r4, menu_destroyObject@ha
     li r5, 0x20
-    addi r4, r4, fn_80041C0C@l
+    addi r4, r4, menu_destroyObject@l
     li r6, 0x3
     addi r3, r3, 0x10
     bl __destroy_new_array
@@ -553,11 +553,11 @@ asm void fn_80183F88(void)
     addi r3, r3, 0x4
     bl __construct_new_array
     lis r4, fn_80042740@ha
-    lis r5, fn_80041C0C@ha
+    lis r5, menu_destroyObject@ha
     addi r3, r31, 0x10
     li r6, 0x20
     addi r4, r4, fn_80042740@l
-    addi r5, r5, fn_80041C0C@l
+    addi r5, r5, menu_destroyObject@l
     li r7, 0x3
     bl __construct_new_array
     mr r3, r31

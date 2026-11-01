@@ -66,7 +66,7 @@ void save_parseSlotHeader(void);
 void fn_801F4818(void);
 void save_parseSlotStats(void);
 void fn_801F4998(void);
-void fn_801F4AA0(void);
+void save_findSlotTask(void);
 void fn_801F4B4C(void);
 void fn_801F4C14(void);
 void save_formatSlotTitle(void);
@@ -705,7 +705,7 @@ asm void fn_801F4998(void)
     blr
 }
 
-asm void fn_801F4AA0(void)
+asm void save_findSlotTask(void)
 {
     nofralloc
     stwu r1, -0x30(r1)

@@ -35,7 +35,7 @@ extern void fn_806D9590(void);
 extern void fn_806DA070(void);
 extern void fn_806DC0B0(void);
 extern void net_sendString(void);
-extern void fn_806DE4E0(void);
+extern void net_sendFormattedCommand(void);
 extern void fn_806DEA40(void);
 extern void fn_806DEE40(void);
 extern void fn_806DFEC0(void);
@@ -907,7 +907,7 @@ asm void fn_806E2B10(void)
     lwz r5, 0x198(r30)
     mr r3, r27
     addi r4, r30, 0x210
-    bl fn_806DE4E0
+    bl net_sendFormattedCommand
     mr r3, r27
     addi r4, r30, 0x210
     addi r5, r31, 0x6c
@@ -915,7 +915,7 @@ asm void fn_806E2B10(void)
     mr r3, r27
     mr r5, r28
     addi r4, r30, 0x210
-    bl fn_806DE4E0
+    bl net_sendFormattedCommand
     mr r3, r27
     addi r4, r30, 0x210
     addi r5, r31, 0x408
@@ -923,7 +923,7 @@ asm void fn_806E2B10(void)
     mr r3, r27
     mr r5, r29
     addi r4, r30, 0x210
-    bl fn_806DE4E0
+    bl net_sendFormattedCommand
     mr r3, r27
     addi r4, r30, 0x210
     addi r5, r31, 0x1b8
@@ -1051,7 +1051,7 @@ lbl_fn_806E2BD0_00000D40:
     lwz r5, 0x198(r27)
     mr r3, r29
     addi r4, r27, 0x210
-    bl fn_806DE4E0
+    bl net_sendFormattedCommand
     mr r3, r29
     addi r4, r27, 0x210
     addi r5, r28, 0x6c
@@ -1059,7 +1059,7 @@ lbl_fn_806E2BD0_00000D40:
     mr r3, r29
     mr r5, r30
     addi r4, r27, 0x210
-    bl fn_806DE4E0
+    bl net_sendFormattedCommand
     mr r3, r29
     addi r4, r27, 0x210
     addi r5, r28, 0x408
@@ -1067,7 +1067,7 @@ lbl_fn_806E2BD0_00000D40:
     mr r3, r29
     mr r5, r26
     addi r4, r27, 0x210
-    bl fn_806DE4E0
+    bl net_sendFormattedCommand
     mr r3, r29
     addi r4, r27, 0x210
     addi r5, r28, 0x1b8
@@ -2228,7 +2228,7 @@ lbl_fn_806E3CC0_00001D84:
     lwz r5, 0x1a0(r28)
     mr r3, r30
     addi r4, r31, 0x2c
-    bl fn_806DE4E0
+    bl net_sendFormattedCommand
     mr r3, r30
     addi r4, r31, 0x2c
     addi r5, r29, 0x2c

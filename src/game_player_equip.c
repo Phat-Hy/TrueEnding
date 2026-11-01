@@ -5,7 +5,7 @@
 extern void _restgpr_14(void);
 extern void _savegpr_14(void);
 extern void dtor_80084684(void);
-extern void fn_80041C0C(void);
+extern void menu_destroyObject(void);
 extern void fn_80042740(void);
 extern void mem_realloc(void);
 extern void compass_findWaypointIndex(void);
@@ -217,11 +217,11 @@ asm void fn_80120E48(void)
     li r7, 0x0
     bl mem_realloc
     lis r4, fn_80042740@ha
-    lis r5, fn_80041C0C@ha
+    lis r5, menu_destroyObject@ha
     mr r7, r25
     li r6, 0x20
     addi r4, r4, fn_80042740@l
-    addi r5, r5, fn_80041C0C@l
+    addi r5, r5, menu_destroyObject@l
     bl runtime_registerStaticObject
     mr r29, r3
     b lbl_fn_80120E48_00000188
@@ -260,9 +260,9 @@ lbl_fn_80120E48_000001E4:
 lbl_fn_80120E48_000001F0:
     cmplw r26, r31
     blt lbl_fn_80120E48_000001B8
-    lis r4, fn_80041C0C@ha
+    lis r4, menu_destroyObject@ha
     lwz r3, 0x8(r24)
-    addi r4, r4, fn_80041C0C@l
+    addi r4, r4, menu_destroyObject@l
     bl __destroy_arr
 lbl_fn_80120E48_00000208:
     stw r29, 0x8(r24)

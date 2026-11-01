@@ -10,7 +10,7 @@ extern void sys_copyString(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void str_initFromCStr(void);
-extern void fn_80041C0C(void);
+extern void menu_destroyObject(void);
 extern void menu_initWindowBuffer(void);
 extern void str_getData(void);
 extern void fn_8004274C(void);
@@ -1959,8 +1959,8 @@ asm void fn_803EF64C(void)
     lwz r3, 0x24(r30)
     cmpwi r3, 0x0
     beq lbl_fn_803EF64C_0000177C
-    lis r4, fn_80041C0C@ha
-    addi r4, r4, fn_80041C0C@l
+    lis r4, menu_destroyObject@ha
+    addi r4, r4, menu_destroyObject@l
     bl __destroy_arr
 lbl_fn_803EF64C_0000177C:
     li r0, 0x0

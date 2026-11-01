@@ -11,7 +11,7 @@ extern void ui_destroyWidget(void);
 extern void dungeon_initGlobalContext(void);
 extern void town_synchronizedDispatch(void);
 extern void fn_800EFD04(void);
-extern void fn_800F7F90(void);
+extern void viewport_getFlag(void);
 extern void fn_801010A0(void);
 extern void fn_801010E8(void);
 extern void fn_8010EE78(void);
@@ -826,22 +826,22 @@ asm void fn_804EE044(void)
     mr r4, r31
     clrlwi r5, r26, 16
     bl fn_804EE4E4
-    bl fn_800F7F90
+    bl viewport_getFlag
     mr r4, r31
     bl fn_804DD15C
     cmpwi r3, 0x0
     mr r27, r3
     bne lbl_fn_804EE044_00000998
-    bl fn_800F7F90
+    bl viewport_getFlag
     bl fn_804EE034
     cmpwi r3, 0xc
     bgt lbl_fn_804EE044_00000998
-    bl fn_800F7F90
+    bl viewport_getFlag
     addi r3, r3, 0x5e4
     bl fn_804D5F44
     cmplw r31, r3
     bge lbl_fn_804EE044_00000998
-    bl fn_800F7F90
+    bl viewport_getFlag
     mr r4, r31
     addi r3, r3, 0x5e4
     bl fn_804D5F4C
@@ -852,14 +852,14 @@ asm void fn_804EE044(void)
     rlwinm r0, r0, 0, 2, 0
     rlwinm r0, r0, 0, 4, 2
     stw r0, 0xd0(r3)
-    bl fn_800F7F90
+    bl viewport_getFlag
     bl fn_804EB1B0
     cmpwi r3, 0x1
     bne lbl_fn_804EE044_00000998
-    bl fn_800F7F90
+    bl viewport_getFlag
     li r4, 0x5a
     bl fn_804EE03C
-    bl fn_800F7F90
+    bl viewport_getFlag
     li r4, 0x1
     bl fn_804FC0D8
 lbl_fn_804EE044_00000998:
@@ -888,7 +888,7 @@ lbl_fn_804EE044_000009E0:
     clrlwi r5, r26, 16
     bl fn_804EE4F0
     li r28, 0x0
-    bl fn_800F7F90
+    bl viewport_getFlag
     addis r3, r3, 0x1
     lis r30, lbl_80759E48@ha
     stb r28, -0x6650(r3)
@@ -1094,15 +1094,15 @@ lbl_fn_804EE044_00000A84:
     bl fn_804F50C8
     b lbl_fn_804EE044_00000A10
 lbl_fn_804EE044_00000D24:
-    bl fn_800F7F90
+    bl viewport_getFlag
     addis r3, r3, 0x1
     lbz r0, -0x6650(r3)
     cmplwi r0, 0x1
     bne lbl_fn_804EE044_00000D60
     bl net_getFriendManager
-    bl fn_800F7F90
+    bl viewport_getFlag
     addis r30, r3, 0x1
-    bl fn_800F7F90
+    bl viewport_getFlag
     addis r3, r3, 0x1
     lbz r31, -0x664f(r3)
     bl net_getPacketManager

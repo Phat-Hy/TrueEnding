@@ -74,7 +74,7 @@ extern void fn_806DB310(void);
 extern void fn_806EA840(void);
 extern void fn_806EA850(void);
 extern void fn_806EA8F0(void);
-extern void fn_806EAC30(void);
+extern void net_bindSessionCallback(void);
 extern void fn_806EAD10(void);
 extern void fn_806EAD30(void);
 extern void fn_806EEDC0(void);
@@ -1429,7 +1429,7 @@ lbl_fn_806B0980_00001290:
     lis r29, lbl_8085FF98@ha
     lwz r3, lbl_8085FF98@l(r29)
     lwz r3, 0x0(r3)
-    bl fn_806EAC30
+    bl net_bindSessionCallback
     b lbl_fn_806B0980_000012F4
 lbl_fn_806B0980_000012AC:
     li r30, 0x0

@@ -36,7 +36,7 @@ extern void fn_800F530C(void);
 extern void fn_800F7260(void);
 extern void vec3_scale(void);
 extern void fn_800F7F80(void);
-extern void fn_800F7F90(void);
+extern void viewport_getFlag(void);
 extern void fn_800F7FB4(void);
 extern void viewport_getNextSequenceId(void);
 extern void fn_800F84BC(void);
@@ -631,10 +631,10 @@ lbl_fn_803D2A6C_00000464:
     bl fn_803D6DE4
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00004300
-    bl fn_800F7F90
+    bl viewport_getFlag
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00000518
-    bl fn_800F7F90
+    bl viewport_getFlag
     bl fn_803D6DF4
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00004300
@@ -1948,7 +1948,7 @@ lbl_fn_803D2A6C_0000181C:
     bl fn_803D6F70
     cmpwi r3, 0x6
     bne lbl_fn_803D2A6C_00001838
-    bl fn_800F7F90
+    bl viewport_getFlag
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00001BEC
 lbl_fn_803D2A6C_00001838:
@@ -1990,14 +1990,14 @@ lbl_fn_803D2A6C_00001894:
     lwz r4, 0x0(r4)
     mr r5, r27
     bl fn_803E0E10
-    bl fn_800F7F90
+    bl viewport_getFlag
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_0000191C
-    bl fn_800F7F90
+    bl viewport_getFlag
     bl fn_803D6E1C
     cmpwi r3, 0x0
     bne lbl_fn_803D2A6C_000018F4
-    bl fn_800F7F90
+    bl viewport_getFlag
     bl fn_803D7060
     cmpwi r3, 0x0
     bne lbl_fn_803D2A6C_0000191C
@@ -3700,10 +3700,10 @@ lbl_fn_803D2A6C_00003150:
     bl fn_803D70A8
     cmpwi r3, 0x0
     bne lbl_fn_803D2A6C_00003368
-    bl fn_800F7F90
+    bl viewport_getFlag
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_000031D8
-    bl fn_800F7F90
+    bl viewport_getFlag
     mr r4, r19
     bl fn_804EB014
     cmpwi r3, 0x0
@@ -3748,7 +3748,7 @@ lbl_fn_803D2A6C_0000325C:
     bl fn_803D6F70
     cmpwi r3, 0x6
     bne lbl_fn_803D2A6C_00003278
-    bl fn_800F7F90
+    bl viewport_getFlag
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_000032A4
 lbl_fn_803D2A6C_00003278:
@@ -3852,10 +3852,10 @@ lbl_fn_803D2A6C_00003398:
     bl fn_803D6EAC
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00003580
-    bl fn_800F7F90
+    bl viewport_getFlag
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_000033FC
-    bl fn_800F7F90
+    bl viewport_getFlag
     mr r4, r19
     bl fn_804EB014
     cmpwi r3, 0x0
@@ -3893,11 +3893,11 @@ lbl_fn_803D2A6C_00003468:
     bl fn_803D6F70
     cmpwi r3, 0x6
     bne lbl_fn_803D2A6C_00003484
-    bl fn_800F7F90
+    bl viewport_getFlag
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_000034BC
 lbl_fn_803D2A6C_00003484:
-    bl fn_800F7F90
+    bl viewport_getFlag
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_000034BC
     fcmpo cr0, f28, f27
@@ -4295,7 +4295,7 @@ lbl_fn_803D2A6C_00003A44:
     cmpwi r19, 0x0
     bne lbl_fn_803D2A6C_00003864
 lbl_fn_803D2A6C_00003A4C:
-    bl fn_800F7F90
+    bl viewport_getFlag
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00003C94
     bl bgm_getGlobalManager
@@ -4310,12 +4310,12 @@ lbl_fn_803D2A6C_00003A4C:
     addi r23, r4, lbl_807506A0@l
     b lbl_fn_803D2A6C_00003C8C
 lbl_fn_803D2A6C_00003A84:
-    bl fn_800F7F90
+    bl viewport_getFlag
     mr r4, r19
     bl fn_804EB7C8
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00003C80
-    bl fn_800F7F90
+    bl viewport_getFlag
     mr r4, r19
     bl fn_804EB014
     cmpwi r3, 0x0

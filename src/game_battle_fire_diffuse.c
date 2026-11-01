@@ -10,7 +10,7 @@ extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void scene_traverseNode(void);
-extern void fn_80041C0C(void);
+extern void menu_destroyObject(void);
 extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
@@ -215,9 +215,9 @@ lbl_fn_8041CF94_00000174:
     stw r0, 0x40(r29)
     stw r0, 0x3c(r29)
 lbl_fn_8041CF94_00000180:
-    lis r4, fn_80041C0C@ha
+    lis r4, menu_destroyObject@ha
     addi r3, r30, 0x13c
-    addi r4, r4, fn_80041C0C@l
+    addi r4, r4, menu_destroyObject@l
     li r5, 0x20
     li r6, 0x6
     bl __destroy_new_array

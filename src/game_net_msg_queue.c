@@ -10,7 +10,7 @@ extern void atn_Task_setActive(void);
 extern void wcs_vformat(void);
 extern void fn_8047961C(void);
 extern void net_getPacketManager(void);
-extern void fn_804AF520(void);
+extern void net_queue_transitionState(void);
 extern void fn_804B50C0(void);
 extern void fn_804B6204(void);
 extern void fn_804C2D5C(void);
@@ -281,7 +281,7 @@ asm void fn_804F4F68(void)
     bl fn_804FB224
     lwz r3, lbl_8087F59C
     li r4, 0x10
-    bl fn_804AF520
+    bl net_queue_transitionState
     lwz r3, lbl_8087F5A8
     li r4, 0x0
     bl atn_Task_setActive
