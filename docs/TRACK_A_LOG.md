@@ -1081,3 +1081,29 @@ Names applied:
   - font_loadGlyphMetrics (fn_80234A8C, 408 B, 388 hits)
   - font_calcTextExtents (fn_800A2C48, 216 B, 388 hits)
 Progress: 99.30% matched (7,425,512 / 7,477,608 bytes), 18,054 / 18,155 functions matched.
+
+## Session 2026-11-01 - Conversion: 2 routines (field_getTextureSlot, graphic_dummyCallback) to 100.0% matching C
+Subject:  track-a: decompile 2 routines (44 B) to 100.0% matching C progress 99.30% -> 99.30%
+Functions:
+  - field_getTextureSlot (fn_80084F30, 40 B, src/game_field.c)
+  - graphic_dummyCallback (fn_800B0A44, 4 B, src/game_graphic.c)
+Checklist:
+  1. Converted 2 asm void functions to 100.0% matching C implementations.
+  2. Verified CodeWarrior tail-call dispatch to fn_8022B848 in field_getTextureSlot.
+  3. report.json clean, ninja passed (orig/main.dol: OK).
+Self-check: git diff -U0 -- src/ for 'asm void': -2 / +0 (conversion).
+Sources:
+`c
+// game_field.c
+void* field_getTextureSlot(void* field, u32 arg2, u32 arg3)
+{
+    if (*(void**)((char*)field + 0x4) != NULL) {
+        return fn_8022B848(*(void**)((char*)field + 0x14), arg3, arg2);
+    }
+    return NULL;
+}
+
+// game_graphic.c
+void graphic_dummyCallback(void) {}
+`
+Progress: 99.30% matched (7,425,512 / 7,477,608 bytes), 18,054 / 18,155 functions matched.

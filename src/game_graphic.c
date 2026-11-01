@@ -1977,10 +1977,8 @@ lbl_graphic_initViewportTransform_00001A78:
     blr
 }
 
-asm void graphic_dummyCallback(void)
+void graphic_dummyCallback(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_800B0A48(void)

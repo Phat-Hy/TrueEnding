@@ -13,7 +13,7 @@ extern void fn_800DC12C(void);
 extern void fn_8022AB18(void);
 extern void fn_8022ADB8(void);
 extern void texCache_freeBlock(void);
-extern void fn_8022B848(void);
+extern void* fn_8022B848(void*, u32, u32);
 extern void fn_8022B84C(void);
 extern u32 strlen(const char* str);
 
@@ -47,7 +47,7 @@ void fn_80084E4C(void);
 void fn_80084E50(void);
 void fn_80084E78(void);
 void fn_80084EE8(void);
-void field_getTextureSlot(void);
+void* field_getTextureSlot(void* field, u32 arg2, u32 arg3);
 void fn_80084F58(void);
 void fn_80084F6C(void);
 void fn_80084F7C(void);
@@ -1088,20 +1088,12 @@ asm void fn_80084EE8(void)
     blr
 }
 
-asm void field_getTextureSlot(void)
+void* field_getTextureSlot(void* field, u32 arg2, u32 arg3)
 {
-    nofralloc
-    lwz r0, 0x4(r3)
-    mr r6, r4
-    cmpwi r0, 0x0
-    beq lbl_field_getTextureSlot_00000E40
-    lwz r3, 0x14(r3)
-    mr r4, r5
-    mr r5, r6
-    b fn_8022B848
-lbl_field_getTextureSlot_00000E40:
-    li r3, 0x0
-    blr
+    if (*(void**)((char*)field + 0x4) != NULL) {
+        return fn_8022B848(*(void**)((char*)field + 0x14), arg3, arg2);
+    }
+    return NULL;
 }
 
 asm void fn_80084F58(void)
