@@ -939,3 +939,43 @@ Names applied:
   - player_getClockFieldA0 (fn_801FF770, 8 B)
   - clock_dummyCallback (fn_801FF8EC, 4 B)
 Progress: 99.30% matched (7,425,512 / 7,477,608 bytes), 18,054 / 18,155 functions matched.
+
+## Session 2026-11-01 - Conversion: 4 clock routines (vec4_zero, timer_initField, player_getClockFieldA0, clock_dummyCallback) to 100.0% matching C
+Subject:  track-a: decompile 4 routines (60 B) to 100.0% matching C progress 99.30% -> 99.30%
+Functions:
+  - vec4_zero (fn_801FF740, 28 B, src/game_system_clock.c)
+  - timer_initField (fn_801FF75C, 20 B, src/game_system_clock.c)
+  - player_getClockFieldA0 (fn_801FF770, 8 B, src/game_system_clock.c)
+  - clock_dummyCallback (fn_801FF8EC, 4 B, src/game_system_clock.c)
+Checklist:
+  1. Converted 4 asm void functions to 100.0% matching C implementations.
+  2. Used pooled SDA2 float constant lbl_80882CBC to ensure bit-identical code generation.
+  3. report.json clean, ninja passed (orig/main.dol: OK).
+Self-check: git diff -U0 -- src/ for 'asm void': -4 / +0 (conversion).
+Sources:
+`c
+void vec4_zero(f32* v)
+{
+    v[0] = lbl_80882CBC;
+    v[1] = lbl_80882CBC;
+    v[2] = lbl_80882CBC;
+    v[3] = lbl_80882CBC;
+    v[4] = lbl_80882CBC;
+}
+
+void timer_initField(void* ptr)
+{
+    *(f32*)ptr = lbl_80882CBC;
+    *((u32*)ptr + 1) = 0;
+}
+
+u32 player_getClockFieldA0(void* ptr)
+{
+    return *(u32*)((char*)ptr + 0xa0);
+}
+
+void clock_dummyCallback(void)
+{
+}
+`
+Progress: 99.30% matched (7,425,512 / 7,477,608 bytes), 18,054 / 18,155 functions matched.

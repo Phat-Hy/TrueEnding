@@ -69,7 +69,7 @@ extern u32 lbl_8087DB1C;
 extern u32 lbl_8087EEB0;
 extern u32 lbl_8087F138;
 extern u32 lbl_80882CB8;
-extern u32 lbl_80882CBC;
+extern const float lbl_80882CBC;
 extern u32 lbl_80882CC0;
 extern u32 lbl_80882CC4;
 extern u32 lbl_80882CC8;
@@ -81,9 +81,9 @@ void fn_801FEF40(void);
 void fn_801FF1B8(void);
 void fn_801FF234(void);
 void player_syncTimersAndClock(void);
-void vec4_zero(void);
-void timer_initField(void);
-void player_getClockFieldA0(void);
+void vec4_zero(f32* v);
+void timer_initField(void* ptr);
+u32 player_getClockFieldA0(void* ptr);
 void fn_801FF778(void);
 void clock_dummyCallback(void);
 void fn_801FF8F0(void);
@@ -674,33 +674,24 @@ lbl_player_syncTimersAndClock_00000830:
     blr
 }
 
-asm void vec4_zero(void)
+void vec4_zero(f32* v)
 {
-    nofralloc
-    lfs f0, lbl_80882CBC
-    stfs f0, 0x0(r3)
-    stfs f0, 0x4(r3)
-    stfs f0, 0x8(r3)
-    stfs f0, 0xc(r3)
-    stfs f0, 0x10(r3)
-    blr
+    v[0] = lbl_80882CBC;
+    v[1] = lbl_80882CBC;
+    v[2] = lbl_80882CBC;
+    v[3] = lbl_80882CBC;
+    v[4] = lbl_80882CBC;
 }
 
-asm void timer_initField(void)
+void timer_initField(void* ptr)
 {
-    nofralloc
-    lfs f0, lbl_80882CBC
-    li r0, 0x0
-    stfs f0, 0x0(r3)
-    stw r0, 0x4(r3)
-    blr
+    *(f32*)ptr = lbl_80882CBC;
+    *((u32*)ptr + 1) = 0;
 }
 
-asm void player_getClockFieldA0(void)
+u32 player_getClockFieldA0(void* ptr)
 {
-    nofralloc
-    lwz r3, 0xa0(r3)
-    blr
+    return *(u32*)((char*)ptr + 0xa0);
 }
 
 asm void fn_801FF778(void)
@@ -816,10 +807,8 @@ lbl_fn_801FF778_000009B8:
     blr
 }
 
-asm void clock_dummyCallback(void)
+void clock_dummyCallback(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_801FF8F0(void)
