@@ -13,7 +13,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void atn_Task_setActive(void);
 extern void system_getNextSequenceId(void);
 extern void fn_80133130(void);
-extern void fn_8013322C(void);
+extern void actor_testBitFlag(void);
 extern void quest_updateFlow(void);
 extern void quest_ctorRewardItem(void);
 extern void dialog_renderWindow(void);
@@ -1166,7 +1166,7 @@ asm void fn_80289C98(void)
     bne lbl_fn_80289C98_00000F50
     li r4, 0x4
     addi r3, r3, 0x7d4
-    bl fn_8013322C
+    bl actor_testBitFlag
     mr r3, r29
     bl fn_80168E60
 lbl_fn_80289C98_00000F50:

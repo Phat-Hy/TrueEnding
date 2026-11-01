@@ -8,7 +8,7 @@ extern void _restgpr_25(void);
 extern void _savegpr_14(void);
 extern void _savegpr_25(void);
 extern void vec3_copy(void);
-extern void fn_8000D9E8(void);
+extern void scene_transformPoint(void);
 extern void fn_8000DCF4(void);
 extern void fn_8000DD0C(void);
 extern void vec3_assign(void);
@@ -1652,7 +1652,7 @@ asm void fn_804E7AC4(void)
     bl _savegpr_25
     mr r31, r3
     bl fn_804EB874
-    bl fn_8000D9E8
+    bl scene_transformPoint
     bl fn_8000DCF4
     mr r29, r3
     bl fn_8000DD0C

@@ -46,7 +46,7 @@ extern void fn_80107F20(void);
 extern void fn_80107FC8(void);
 extern void fn_8013310C(void);
 extern void fn_80133130(void);
-extern void fn_8013322C(void);
+extern void actor_testBitFlag(void);
 extern void dialog_selectChoice(void);
 extern void fn_8014EEC4(void);
 extern void inventory_calcTotalStats(void);
@@ -857,7 +857,7 @@ lbl_fn_804CF640_00000904:
     bne lbl_fn_804CF640_00000940
     addi r3, r31, 0x7d4
     lis r4, 0x8
-    bl fn_8013322C
+    bl actor_testBitFlag
     lwz r3, lbl_8087F048
     cmpwi r3, 0x0
     beq lbl_fn_804CF640_00000940
@@ -902,7 +902,7 @@ lbl_fn_804CF640_000009B4:
     bne lbl_fn_804CF640_000009EC
     addi r3, r31, 0x7d4
     li r4, 0x4
-    bl fn_8013322C
+    bl actor_testBitFlag
     lwz r3, lbl_8087F048
     cmpwi r3, 0x0
     beq lbl_fn_804CF640_000009EC
@@ -949,7 +949,7 @@ lbl_fn_804CF640_00000A64:
     bne lbl_fn_804CF640_00000AA0
     addi r3, r31, 0x7d4
     lis r4, 0x200
-    bl fn_8013322C
+    bl actor_testBitFlag
     lwz r3, lbl_8087F048
     cmpwi r3, 0x0
     beq lbl_fn_804CF640_00000AA0
@@ -990,7 +990,7 @@ lbl_fn_804CF640_00000B00:
     bne lbl_fn_804CF640_00000B3C
     addi r3, r31, 0x7d4
     lis r4, 0x40
-    bl fn_8013322C
+    bl actor_testBitFlag
     lwz r3, lbl_8087F048
     cmpwi r3, 0x0
     beq lbl_fn_804CF640_00000B3C
@@ -1029,7 +1029,7 @@ lbl_fn_804CF640_00000B98:
     bne lbl_fn_804CF640_00000BD0
     addi r3, r31, 0x7d4
     li r4, 0x1
-    bl fn_8013322C
+    bl actor_testBitFlag
     lwz r3, lbl_8087F048
     cmpwi r3, 0x0
     beq lbl_fn_804CF640_00000BD0
@@ -1076,7 +1076,7 @@ lbl_fn_804CF640_00000C48:
     lis r4, 0x1
     addi r3, r31, 0x7d4
     addi r4, r4, -0x8000
-    bl fn_8013322C
+    bl actor_testBitFlag
     lwz r3, lbl_8087F048
     cmpwi r3, 0x0
     beq lbl_fn_804CF640_00000C90
@@ -1119,7 +1119,7 @@ lbl_fn_804CF640_00000CF0:
     bne lbl_fn_804CF640_00000D3C
     addi r3, r31, 0x7d4
     li r4, 0x80
-    bl fn_8013322C
+    bl actor_testBitFlag
     lwz r3, lbl_8087F048
     cmpwi r3, 0x0
     beq lbl_fn_804CF640_00000D3C

@@ -24,7 +24,7 @@ extern void save_parseSlotStats(void);
 extern void fn_801F6C2C(void);
 extern void fn_801F6C38(void);
 extern void save_computeCrc32(void);
-extern void fn_801F6D7C(void);
+extern void save_verifyBlockCrc(void);
 extern void fn_801F7590(void);
 extern void fn_801F791C(void);
 extern void fn_801FEB9C(void);
@@ -1570,19 +1570,19 @@ asm void fn_804A4EEC(void)
     addi r30, r30, lbl_807573D0@l
     li r5, 0x0
     addi r4, r30, 0x128
-    bl fn_801F6D7C
+    bl save_verifyBlockCrc
     lwz r3, 0x78(r29)
     bl perf_getMetricValue
     fmr f1, f28
     addi r4, r30, 0x128
     li r5, 0x1
-    bl fn_801F6D7C
+    bl save_verifyBlockCrc
     lwz r3, 0x78(r29)
     bl perf_getMetricValue
     fmr f1, f31
     addi r4, r30, 0x128
     li r5, 0x4
-    bl fn_801F6D7C
+    bl save_verifyBlockCrc
     lwz r3, 0x78(r29)
     bl perf_getMetricValue
     fmr f1, f29
@@ -1736,19 +1736,19 @@ asm void fn_804A5160(void)
     addi r30, r30, lbl_807573D0@l
     li r5, 0x0
     addi r4, r30, 0x128
-    bl fn_801F6D7C
+    bl save_verifyBlockCrc
     lwz r3, 0x78(r29)
     bl perf_getMetricValue
     fmr f1, f28
     addi r4, r30, 0x128
     li r5, 0x1
-    bl fn_801F6D7C
+    bl save_verifyBlockCrc
     lwz r3, 0x78(r29)
     bl perf_getMetricValue
     fmr f1, f31
     addi r4, r30, 0x128
     li r5, 0x4
-    bl fn_801F6D7C
+    bl save_verifyBlockCrc
     lwz r3, 0x78(r29)
     bl perf_getMetricValue
     fmr f1, f29
@@ -1881,7 +1881,7 @@ asm void fn_804A53D4(void)
     addi r26, r26, lbl_807573D0@l
     li r5, 0x0
     addi r4, r26, 0x128
-    bl fn_801F6D7C
+    bl save_verifyBlockCrc
     lwz r0, 0x88(r27)
     addi r4, r26, 0x128
     lfs f1, 0x4(r30)
@@ -1889,7 +1889,7 @@ asm void fn_804A53D4(void)
     slwi r0, r0, 2
     add r3, r27, r0
     lwz r3, 0x8c(r3)
-    bl fn_801F6D7C
+    bl save_verifyBlockCrc
     lwz r0, 0x88(r27)
     addi r4, r26, 0x128
     lfs f1, 0x10(r30)
@@ -1897,7 +1897,7 @@ asm void fn_804A53D4(void)
     slwi r0, r0, 2
     add r3, r27, r0
     lwz r3, 0x8c(r3)
-    bl fn_801F6D7C
+    bl save_verifyBlockCrc
     lwz r0, 0x88(r27)
     addi r4, r26, 0x133
     lfs f1, 0x8(r30)

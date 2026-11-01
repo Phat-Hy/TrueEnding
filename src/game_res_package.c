@@ -25,7 +25,7 @@ extern void fn_80094BD8(void);
 extern void fn_80095F10(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void fn_80097E80(void);
-extern void fn_800BDB58(void);
+extern void model_updateBoneTransforms(void);
 extern void fn_8011D320(void);
 extern void fn_8011EE58(void);
 extern void fn_8011EF14(void);
@@ -1276,7 +1276,7 @@ lbl_fn_802262B8_00001070:
     lwz r3, lbl_8087EFB4
     li r5, 0x2
     lfs f1, lbl_80883038
-    bl fn_800BDB58
+    bl model_updateBoneTransforms
     cmpwi r31, 0x0
     beq lbl_fn_802262B8_0000108C
     addi r31, r31, 0x1424
@@ -1285,7 +1285,7 @@ lbl_fn_802262B8_0000108C:
     mr r4, r31
     lfs f1, lbl_80883038
     li r5, 0x10
-    bl fn_800BDB58
+    bl model_updateBoneTransforms
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0

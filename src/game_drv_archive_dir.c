@@ -10,7 +10,7 @@ extern void _savegpr_14(void);
 extern void _savegpr_24(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
-extern void fn_8000D9E8(void);
+extern void scene_transformPoint(void);
 extern void fn_8000D9F8(void);
 extern void fn_8000DCF4(void);
 extern void vec3_assign(void);
@@ -612,10 +612,10 @@ asm void fn_805AB82C(void)
     bne lbl_fn_805AB82C_000006C0
     li r26, 0x0
 lbl_fn_805AB82C_000006C0:
-    bl fn_8000D9E8
+    bl scene_transformPoint
     cmpwi r3, 0x0
     beq lbl_fn_805AB82C_000006D8
-    bl fn_8000D9E8
+    bl scene_transformPoint
     bl fn_8000DCF4
     b lbl_fn_805AB82C_000006DC
 lbl_fn_805AB82C_000006D8:
@@ -626,80 +626,80 @@ lbl_fn_805AB82C_000006DC:
     bne lbl_fn_805AB82C_000009D8
     addi r3, r1, 0x40
     bl fn_805ABD78
-    bl fn_8000D9E8
+    bl scene_transformPoint
     cmpwi r3, 0x0
     beq lbl_fn_805AB82C_00000810
     addi r3, r1, 0x40
     addi r4, r1, 0xc
     bl fn_805AB50C
-    bl fn_8000D9E8
+    bl scene_transformPoint
     li r4, 0x0
     bl fn_8054A340
     mr r4, r3
     addi r3, r1, 0x40
     bl fn_805AB1DC
-    bl fn_8000D9E8
+    bl scene_transformPoint
     li r4, 0x2
     bl fn_8054A340
     mr r4, r3
     addi r3, r1, 0x40
     bl fn_805AB1DC
-    bl fn_8000D9E8
+    bl scene_transformPoint
     li r4, 0x3
     bl fn_8054A340
     mr r4, r3
     addi r3, r1, 0x40
     bl fn_805AB1DC
-    bl fn_8000D9E8
+    bl scene_transformPoint
     li r4, 0x6
     bl fn_8054A340
     mr r4, r3
     addi r3, r1, 0x40
     bl fn_805AB1DC
-    bl fn_8000D9E8
+    bl scene_transformPoint
     li r4, 0x1
     bl fn_8054A340
     mr r4, r3
     addi r3, r1, 0x40
     bl fn_805AB1DC
-    bl fn_8000D9E8
+    bl scene_transformPoint
     li r4, 0x9
     bl fn_8054A340
     mr r4, r3
     addi r3, r1, 0x40
     bl fn_805AB1DC
-    bl fn_8000D9E8
+    bl scene_transformPoint
     li r4, 0xa
     bl fn_8054A340
     mr r4, r3
     addi r3, r1, 0x40
     bl fn_805AB1DC
-    bl fn_8000D9E8
+    bl scene_transformPoint
     li r4, 0x4
     bl fn_8054A340
     mr r4, r3
     addi r3, r1, 0x40
     bl fn_805AB1DC
-    bl fn_8000D9E8
+    bl scene_transformPoint
     li r4, 0x5
     bl fn_8054A340
     mr r4, r3
     addi r3, r1, 0x40
     bl fn_805AB1DC
-    bl fn_8000D9E8
+    bl scene_transformPoint
     li r4, 0xb
     bl fn_8054A340
     mr r4, r3
     addi r3, r1, 0x40
     bl fn_805AB1DC
-    bl fn_8000D9E8
+    bl scene_transformPoint
     li r4, 0xe
     bl fn_8054A340
     mr r4, r3
     addi r3, r1, 0x40
     bl fn_805AB1DC
 lbl_fn_805AB82C_00000810:
-    bl fn_8000D9E8
+    bl scene_transformPoint
     bl fn_802A36B0
     stw r3, 0x8(r1)
     lis r30, lbl_80763990@ha

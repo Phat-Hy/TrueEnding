@@ -5,7 +5,7 @@
 extern void mtx_getTranslation(void);
 extern void vec3_copy(void);
 extern void vec3_mag(void);
-extern void fn_8000D9E8(void);
+extern void scene_transformPoint(void);
 extern void fn_8000DCF4(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
@@ -28,7 +28,7 @@ extern void equip_getGlobalManager(void);
 extern void magic_getOffset6C(void);
 extern void enemy_updateCombatBehavior(void);
 extern void fn_8012F034(void);
-extern void fn_8013322C(void);
+extern void actor_testBitFlag(void);
 extern void fn_80139F4C(void);
 extern void fn_8013A258(void);
 extern void npc_getPosition(void);
@@ -680,7 +680,7 @@ lbl_fn_80265B00_00000760:
     bl equip_getGlobalManager
     bl magic_getOffset6C
     mr r29, r3
-    bl fn_8000D9E8
+    bl scene_transformPoint
     bl fn_8000DCF4
     lwz r0, 0x163c(r31)
     cmpwi r0, 0x0
@@ -1488,7 +1488,7 @@ asm void fn_80266A24(void)
     beq lbl_fn_80266A24_000012B0
     addi r3, r30, 0x7d4
     li r4, 0x20
-    bl fn_8013322C
+    bl actor_testBitFlag
 lbl_fn_80266A24_000012B0:
     lwz r0, 0x1658(r30)
     cmpwi r0, 0x0
@@ -1753,7 +1753,7 @@ lbl_fn_80266A24_00001664:
     bl fn_800F7FA8
     addi r3, r30, 0x7d4
     li r4, 0x20
-    bl fn_8013322C
+    bl actor_testBitFlag
     lwz r0, 0x14c0(r30)
     lfs f0, lbl_80883670
     cmpwi r0, 0x0
@@ -1791,7 +1791,7 @@ lbl_fn_80266A24_000016C4:
     li r4, 0xea
     li r5, 0x1
     bl world_setLocalFlag
-    bl fn_8000D9E8
+    bl scene_transformPoint
     bl fn_8000DCF4
     cmpwi r3, 0x0
     beq lbl_fn_80266A24_00001788

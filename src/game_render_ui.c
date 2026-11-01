@@ -19,7 +19,7 @@ extern void fn_800A96AC(void);
 extern void fn_800B0A70(void);
 extern void fn_800B23C4(void);
 extern void fn_800B257C(void);
-extern void fn_800BDB58(void);
+extern void model_updateBoneTransforms(void);
 extern void fn_800BFB70(void);
 extern void fn_800BFCB4(void);
 extern void fn_800C0508(void);
@@ -56,7 +56,7 @@ extern void GXInitTexObjDefault(void);
 extern void fn_80617270(void);
 extern void fn_80617340(void);
 extern void GXSetTevColorIn(void);
-extern void fn_80617420(void);
+extern void GXSetTevColorOp(void);
 extern void GXSetTevIndirect(void);
 extern void fn_806174C0(void);
 extern void fn_806175F0(void);
@@ -238,7 +238,7 @@ lbl_fn_800B0CD4_000000F0:
     li r5, 0x5
     li r6, 0x4
     li r7, 0x7
-    bl fn_80617420
+    bl GXSetTevColorOp
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -1201,7 +1201,7 @@ asm void fn_800B1C1C(void)
     lwz r3, lbl_8087EFB4
     lfs f1, lbl_80880ECC
     li r5, 0x8
-    b fn_800BDB58
+    b model_updateBoneTransforms
 }
 
 asm void fn_800B1C30(void)
@@ -1425,7 +1425,7 @@ asm void fn_800B1C44(void)
     li r5, 0x7
     li r6, 0x7
     li r7, 0x5
-    bl fn_80617420
+    bl GXSetTevColorOp
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0

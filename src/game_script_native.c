@@ -15,7 +15,7 @@ extern void fn_800EB7A0(void);
 extern void system_getNextSequenceId(void);
 extern void scissor_clipFrustum(void);
 extern void enemy_updateCombatBehavior(void);
-extern void fn_8013322C(void);
+extern void actor_testBitFlag(void);
 extern void fn_8013A258(void);
 extern void npc_updateTalkInteraction(void);
 extern void quest_evaluateConditions(void);
@@ -317,7 +317,7 @@ lbl_fn_80252C40_000002D0:
     addi r3, r31, 0x7d4
     stfs f0, 0x7d8(r31)
     li r4, 0x20
-    bl fn_8013322C
+    bl actor_testBitFlag
     b lbl_fn_80252C40_00000468
 lbl_fn_80252C40_00000304:
     lwz r12, 0x0(r31)
@@ -428,7 +428,7 @@ asm void fn_80252E48(void)
     li r4, 0x20
     stfs f0, 0x7d8(r3)
     addi r3, r3, 0x7d4
-    b fn_8013322C
+    b actor_testBitFlag
 lbl_fn_80252E48_0000049C:
     b fn_800E8630
 }

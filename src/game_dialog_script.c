@@ -32,7 +32,7 @@ extern void fn_8012AD20(void);
 extern void fn_8012B988(void);
 extern void fn_8012E540(void);
 extern void fn_8012F188(void);
-extern void fn_8013322C(void);
+extern void actor_testBitFlag(void);
 extern void fn_801333A4(void);
 extern void fn_80134168(void);
 extern void dialog_selectChoice(void);
@@ -1034,10 +1034,10 @@ lbl_dialog_updateScriptState_00000D10:
     bne lbl_dialog_updateScriptState_0000101C
     addi r3, r28, 0x7d4
     li r4, 0x100
-    bl fn_8013322C
+    bl actor_testBitFlag
     addi r3, r28, 0x7d4
     li r4, 0x100
-    bl fn_8013322C
+    bl actor_testBitFlag
     lwz r3, lbl_8087F048
     addi r4, r28, 0xb0
     bl fn_80107850
@@ -1249,10 +1249,10 @@ lbl_dialog_updateScriptState_0000101C:
     bne lbl_dialog_updateScriptState_00001320
     addi r3, r28, 0x7d4
     lis r4, 0x1
-    bl fn_8013322C
+    bl actor_testBitFlag
     addi r3, r28, 0x7d4
     lis r4, 0x1
-    bl fn_8013322C
+    bl actor_testBitFlag
     lwz r3, lbl_8087F048
     addi r4, r28, 0xb0
     bl fn_80107B20

@@ -10,7 +10,7 @@ extern void _savegpr_21(void);
 extern void _savegpr_25(void);
 extern void fn_8068446C(void);
 extern void fn_806A7110(void);
-extern void fn_806A7130(void);
+extern void net_checkConnectionSession(void);
 extern void fn_806A7400(void);
 extern void net_formatLog(void);
 extern void fn_806A9CA0(void);
@@ -1197,7 +1197,7 @@ lbl_fn_806B05B0_00000F18:
 lbl_fn_806B05B0_00000F64:
     mr r3, r23
     li r4, 0x0
-    bl fn_806A7130
+    bl net_checkConnectionSession
     lwz r7, 0x0(r31)
     mr r3, r23
     li r4, 0x0

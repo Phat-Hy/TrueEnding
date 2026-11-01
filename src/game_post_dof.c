@@ -22,7 +22,7 @@ extern void clip_calculateFrustum(void);
 extern void fn_80107A68(void);
 extern void fn_80108F38(void);
 extern void skill_findNodeById(void);
-extern void fn_8013322C(void);
+extern void actor_testBitFlag(void);
 extern void boss_updatePhaseState(void);
 extern void quest_updateFlow(void);
 extern void dialog_updateScriptState(void);
@@ -178,7 +178,7 @@ asm void fn_802C0058(void)
     bne lbl_fn_802C0058_000003D8
     addi r3, r31, 0x7d4
     li r4, 0x4000
-    bl fn_8013322C
+    bl actor_testBitFlag
     lwz r3, lbl_8087F048
     addi r4, r31, 0xb0
     bl fn_80107A68

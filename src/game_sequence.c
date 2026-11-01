@@ -79,7 +79,7 @@ extern void fn_80617200(void);
 extern void GXInitTexObjDefault(void);
 extern void fn_80617340(void);
 extern void GXSetTevColorIn(void);
-extern void fn_80617420(void);
+extern void GXSetTevColorOp(void);
 extern void GXSetTevIndirect(void);
 extern void fn_806174C0(void);
 extern void fn_806175F0(void);
@@ -2093,7 +2093,7 @@ lbl_fn_80073194_00001BF4:
     li r5, 0x7
     li r6, 0x7
     li r7, 0x0
-    bl fn_80617420
+    bl GXSetTevColorOp
     mr r3, r31
     li r4, 0x0
     li r5, 0x0
@@ -2421,7 +2421,7 @@ lbl_fn_80073A6C_00002034:
     li r5, 0x7
     li r6, 0x7
     li r7, 0x0
-    bl fn_80617420
+    bl GXSetTevColorOp
     mr r3, r28
     li r4, 0x0
     li r5, 0x0
@@ -2458,7 +2458,7 @@ lbl_fn_80073A6C_00002034:
     li r5, 0x7
     li r6, 0x7
     li r7, 0x0
-    bl fn_80617420
+    bl GXSetTevColorOp
     mr r3, r27
     li r4, 0x0
     li r5, 0x0
@@ -2502,7 +2502,7 @@ lbl_fn_80073A6C_00002034:
     li r5, 0x7
     li r6, 0x7
     li r7, 0x0
-    bl fn_80617420
+    bl GXSetTevColorOp
     mr r3, r26
     li r4, 0x0
     li r5, 0x0
@@ -2546,7 +2546,7 @@ lbl_fn_80073A6C_00002238:
     li r5, 0x7
     li r6, 0x7
     li r7, 0x0
-    bl fn_80617420
+    bl GXSetTevColorOp
     mr r3, r26
     li r4, 0x0
     li r5, 0x0
@@ -2583,7 +2583,7 @@ lbl_fn_80073A6C_00002238:
     li r5, 0x7
     li r6, 0x7
     li r7, 0x0
-    bl fn_80617420
+    bl GXSetTevColorOp
     mr r3, r24
     li r4, 0x0
     li r5, 0x0
@@ -2625,7 +2625,7 @@ lbl_fn_80073A6C_00002378:
     li r5, 0x7
     li r6, 0x7
     li r7, 0x0
-    bl fn_80617420
+    bl GXSetTevColorOp
     mr r3, r26
     li r4, 0x0
     li r5, 0x0
@@ -2662,7 +2662,7 @@ lbl_fn_80073A6C_00002378:
     li r5, 0x7
     li r6, 0x7
     li r7, 0x0
-    bl fn_80617420
+    bl GXSetTevColorOp
     mr r3, r24
     li r4, 0x0
     li r5, 0x0
@@ -2982,7 +2982,7 @@ lbl_fn_800742C8_00002808:
     li r5, 0x7
     li r6, 0x7
     li r7, 0x0
-    bl fn_80617420
+    bl GXSetTevColorOp
     mr r3, r31
     li r4, 0x0
     li r5, 0x0
@@ -3019,7 +3019,7 @@ lbl_fn_800742C8_00002808:
     li r5, 0x7
     li r6, 0x7
     li r7, 0x0
-    bl fn_80617420
+    bl GXSetTevColorOp
     mr r3, r30
     li r4, 0x0
     li r5, 0x0
@@ -3067,7 +3067,7 @@ lbl_fn_800742C8_00002A54:
     li r5, 0x7
     li r6, 0x7
     li r7, 0x0
-    bl fn_80617420
+    bl GXSetTevColorOp
     mr r3, r29
     li r4, 0x0
     li r5, 0x0
@@ -3225,7 +3225,7 @@ lbl_fn_800748D8_00002CA0:
     li r5, 0x7
     li r6, 0x7
     li r7, 0x0
-    bl fn_80617420
+    bl GXSetTevColorOp
     mr r3, r31
     li r4, 0x0
     li r5, 0x0
@@ -3419,7 +3419,7 @@ lbl_fn_80074B24_00002EB0:
     li r5, 0x7
     li r6, 0x7
     li r7, 0x4
-    bl fn_80617420
+    bl GXSetTevColorOp
     mr r3, r31
     li r4, 0x0
     li r5, 0x0
@@ -3465,7 +3465,7 @@ lbl_fn_80074B24_00002EB0:
     li r5, 0x0
     li r6, 0x3
     li r7, 0x7
-    bl fn_80617420
+    bl GXSetTevColorOp
     b lbl_fn_80074B24_00003090
 lbl_fn_80074B24_00003078:
     mr r3, r30
@@ -3473,7 +3473,7 @@ lbl_fn_80074B24_00003078:
     li r5, 0x7
     li r6, 0x7
     li r7, 0x0
-    bl fn_80617420
+    bl GXSetTevColorOp
 lbl_fn_80074B24_00003090:
     mr r3, r30
     li r4, 0x0
@@ -3922,7 +3922,7 @@ lbl_gx_beginQuadBatch_00003680:
     lwz r5, 0x108(r1)
     lwz r6, 0x10c(r1)
     lwz r7, 0x110(r1)
-    bl fn_80617420
+    bl GXSetTevColorOp
     lwz r4, 0x114(r1)
     mr r3, r18
     bl GXSetTevKAlphaSel

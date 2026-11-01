@@ -13,7 +13,7 @@ extern void ref_releaseHandle(void);
 extern void system_getNextSequenceId(void);
 extern void scissor_clipFrustum(void);
 extern void fn_800FB4B0(void);
-extern void fn_8013322C(void);
+extern void actor_testBitFlag(void);
 extern void fn_80139560(void);
 extern void quest_evaluateConditions(void);
 extern void quest_updateFlow(void);
@@ -1636,7 +1636,7 @@ asm void fn_8035DA0C(void)
 lbl_fn_8035DA0C_000015FC:
     li r4, 0x20
     addi r3, r3, 0x7d4
-    bl fn_8013322C
+    bl actor_testBitFlag
     lwz r0, 0x14(r1)
     mtlr r0
     addi r1, r1, 0x10

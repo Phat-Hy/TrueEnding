@@ -9,7 +9,7 @@ extern void fn_80119ECC(void);
 extern void fn_8012AE50(void);
 extern void fn_8012AFE8(void);
 extern void fn_80206B14(void);
-extern void fn_80206B9C(void);
+extern void game_initGlobalDatabases(void);
 extern void assert_generateId(void);
 extern void fn_8020ED84(void);
 extern void fn_8020EF04(void);
@@ -226,7 +226,7 @@ asm void fn_803BD2B0(void)
     b lbl_fn_803BD2B0_00000380
 lbl_fn_803BD2B0_000001F8:
     mr r3, r28
-    bl fn_80206B9C
+    bl game_initGlobalDatabases
     cmpwi r3, 0x0
     bne lbl_fn_803BD2B0_00000218
     mr r3, r28
@@ -413,7 +413,7 @@ lbl_fn_803BD49C_0000048C:
     addi r9, r9, 0x3
     bdnz lbl_fn_803BD49C_000003DC
     mr r3, r30
-    bl fn_80206B9C
+    bl game_initGlobalDatabases
     cmpwi r3, 0x0
     beq lbl_fn_803BD49C_00000544
     addis r26, r29, 0x1

@@ -19,7 +19,7 @@ extern void wcs_vformat(void);
 extern void actor_spawnActorWithId(void);
 extern void magic_dispatchActionCommand(void);
 extern void fn_801F0544(void);
-extern void fn_801F4728(void);
+extern void save_parseSlotHeader(void);
 extern void fn_801F4998(void);
 extern void fn_801F4AA0(void);
 extern void saveSlot_readSummary(void);
@@ -1122,7 +1122,7 @@ lbl_fn_804B1C88_00000E7C:
     stfs f0, 0x14(r1)
     addi r5, r1, 0x8
     lwz r3, 0xb4(r31)
-    bl fn_801F4728
+    bl save_parseSlotHeader
     lwz r4, 0xb4(r31)
     addi r3, r30, 0x44c
     addi r29, r4, 0x58
@@ -1203,7 +1203,7 @@ lbl_fn_804B1E48_00000F78:
     stfs f1, 0xb0(r1)
     stfs f0, 0xb4(r1)
     lwz r3, 0x8c(r22)
-    bl fn_801F4728
+    bl save_parseSlotHeader
     addi r23, r23, 0x1
     addi r22, r22, 0x4
     cmpwi r23, 0xa
@@ -1747,7 +1747,7 @@ lbl_fn_804B1E48_00001754:
     stfs f1, 0xb4(r1)
     stfs f0, 0xb0(r1)
     lwz r3, 0xb4(r29)
-    bl fn_801F4728
+    bl save_parseSlotHeader
     lwz r4, 0xb4(r29)
     addi r3, r30, 0x44c
     addi r22, r4, 0x58

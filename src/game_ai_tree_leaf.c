@@ -31,7 +31,7 @@ extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void fn_80109828(void);
 extern void enemy_updateCombatBehavior(void);
-extern void fn_8013322C(void);
+extern void actor_testBitFlag(void);
 extern void boss_updatePhaseState(void);
 extern void fn_8013A258(void);
 extern void npc_updateTalkInteraction(void);
@@ -391,7 +391,7 @@ lbl_fn_8025B7DC_000002F0:
 lbl_fn_8025B7DC_000003B4:
     addi r3, r30, 0x7d4
     li r4, 0x20
-    bl fn_8013322C
+    bl actor_testBitFlag
     lfs f0, lbl_808834B0
     mr r3, r30
     stfs f0, 0x7d8(r30)

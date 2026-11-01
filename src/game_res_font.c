@@ -49,7 +49,7 @@ extern void fn_80617200(void);
 extern void GXInitTexObjDefault(void);
 extern void fn_80617270(void);
 extern void GXSetTevColorIn(void);
-extern void fn_80617420(void);
+extern void GXSetTevColorOp(void);
 extern void GXSetTevIndirect(void);
 extern void fn_806174C0(void);
 extern void fn_806175F0(void);
@@ -714,7 +714,7 @@ lbl_font_renderString_00000730:
     li r5, 0x4
     li r6, 0x5
     li r7, 0x7
-    bl fn_80617420
+    bl GXSetTevColorOp
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -753,7 +753,7 @@ lbl_font_renderString_00000730:
     li r5, 0x0
     li r6, 0x4
     li r7, 0x7
-    bl fn_80617420
+    bl GXSetTevColorOp
     li r3, 0x1
     li r4, 0x0
     li r5, 0x0
@@ -1542,7 +1542,7 @@ asm void fn_80235BF8(void)
     li r5, 0x4
     li r6, 0x5
     li r7, 0x7
-    bl fn_80617420
+    bl GXSetTevColorOp
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -1593,7 +1593,7 @@ asm void fn_80235BF8(void)
     li r5, 0x0
     li r6, 0x4
     li r7, 0x7
-    bl fn_80617420
+    bl GXSetTevColorOp
     li r3, 0x1
     li r4, 0x0
     li r5, 0x0
@@ -1891,7 +1891,7 @@ lbl_fn_80235BF8_000018D4:
     li r5, 0x4
     li r6, 0x5
     li r7, 0x7
-    bl fn_80617420
+    bl GXSetTevColorOp
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -1946,7 +1946,7 @@ lbl_fn_80235BF8_000019E8:
     li r5, 0x7
     li r6, 0x7
     li r7, 0x0
-    bl fn_80617420
+    bl GXSetTevColorOp
     addi r3, r14, 0x1
     li r4, 0x0
     li r5, 0x0

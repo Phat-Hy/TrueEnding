@@ -22,7 +22,7 @@ extern void item_useConsumable(void);
 extern void fn_8005E3E0(void);
 extern void fn_800610A0(void);
 extern void fn_800760E8(void);
-extern void fn_800BDB58(void);
+extern void model_updateBoneTransforms(void);
 extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXRotAxis(void);
@@ -219,7 +219,7 @@ lbl_fn_80063200_000001EC:
     stw r25, 0x8(r31)
     stb r0, 0x18(r31)
     lwz r3, lbl_8087EFB4
-    bl fn_800BDB58
+    bl model_updateBoneTransforms
 lbl_fn_80063200_0000022C:
     addi r11, r1, 0x80
     psq_l f31, 0xf8(r1), 0, 0
@@ -418,7 +418,7 @@ lbl_fn_80063484_000004B0:
     stw r24, 0x8(r31)
     stb r0, 0x18(r31)
     lwz r3, lbl_8087EFB4
-    bl fn_800BDB58
+    bl model_updateBoneTransforms
 lbl_fn_80063484_00000514:
     addi r11, r1, 0xc0
     psq_l f31, 0x128(r1), 0, 0
@@ -524,7 +524,7 @@ lbl_fn_80063764_00000624:
     stw r3, 0x8(r31)
     stb r6, 0x18(r31)
     lwz r3, lbl_8087EFB4
-    bl fn_800BDB58
+    bl model_updateBoneTransforms
 lbl_fn_80063764_00000690:
     addi r11, r1, 0x20
     psq_l f31, 0x28(r1), 0, 0
@@ -630,7 +630,7 @@ lbl_fn_800638B0_000007A4:
     stw r0, 0x14(r30)
     stw r3, 0x8(r30)
     lwz r3, lbl_8087EFB4
-    bl fn_800BDB58
+    bl model_updateBoneTransforms
     lwz r4, 0xc(r26)
     lwz r0, 0x8(r26)
     addi r3, r4, 0x20
@@ -822,7 +822,7 @@ lbl_fn_800638B0_000009F8:
     stw r31, 0x8(r30)
     stb r0, 0x18(r30)
     lwz r3, lbl_8087EFB4
-    bl fn_800BDB58
+    bl model_updateBoneTransforms
 lbl_fn_800638B0_00000AEC:
     addi r11, r1, 0xc0
     psq_l f31, 0x128(r1), 0, 0
@@ -1132,7 +1132,7 @@ lbl_fn_80063D3C_00000E80:
     stw r31, 0x8(r30)
     stb r0, 0x18(r30)
     lwz r3, lbl_8087EFB4
-    bl fn_800BDB58
+    bl model_updateBoneTransforms
 lbl_fn_80063D3C_00000F84:
     addi r11, r1, 0x160
     psq_l f31, 0x1b8(r1), 0, 0
@@ -1476,7 +1476,7 @@ lbl_fn_800641CC_0000130C:
     stw r31, 0x8(r26)
     stb r0, 0x18(r26)
     lwz r3, lbl_8087EFB4
-    bl fn_800BDB58
+    bl model_updateBoneTransforms
     addi r3, r1, 0x138
     li r4, -0x1
     bl sound_releaseChannel
@@ -1740,7 +1740,7 @@ lbl_fn_8006471C_00001770:
     stw r31, 0x8(r29)
     stb r0, 0x18(r29)
     lwz r3, lbl_8087EFB4
-    bl fn_800BDB58
+    bl model_updateBoneTransforms
 lbl_fn_8006471C_00001894:
     addi r11, r1, 0xd0
     psq_l f31, 0xf8(r1), 0, 0
@@ -2036,7 +2036,7 @@ lbl_fn_80064AC4_00001C58:
     stw r31, 0x8(r28)
     stw r26, 0x20(r28)
     lwz r3, lbl_8087EFB4
-    bl fn_800BDB58
+    bl model_updateBoneTransforms
 lbl_fn_80064AC4_00001CD8:
     addi r11, r1, 0x290
     psq_l f31, 0x2a8(r1), 0, 0
@@ -2139,7 +2139,7 @@ lbl_fn_80064F00_00001DE8:
     stw r22, 0x8(r31)
     stw r0, 0x20(r31)
     lwz r3, lbl_8087EFB4
-    bl fn_800BDB58
+    bl model_updateBoneTransforms
 lbl_fn_80064F00_00001E48:
     lfd f31, 0x38(r1)
     lmw r22, 0x10(r1)

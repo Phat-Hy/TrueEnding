@@ -13,7 +13,7 @@ extern void fn_8009373C(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void system_getNextSequenceId(void);
 extern void fn_80133130(void);
-extern void fn_8013322C(void);
+extern void actor_testBitFlag(void);
 extern void quest_ctorRewardItem(void);
 extern void dialog_renderWindow(void);
 extern void inventory_applyItemStats(void);
@@ -781,7 +781,7 @@ asm void fn_80295988(void)
 lbl_fn_80295988_00000A3C:
     addi r3, r31, 0x7d4
     li r4, 0x20
-    bl fn_8013322C
+    bl actor_testBitFlag
     lfs f0, lbl_80883BF0
     stfs f0, 0x7d8(r31)
 lbl_fn_80295988_00000A50:

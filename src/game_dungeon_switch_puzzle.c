@@ -21,7 +21,7 @@ extern void fn_801789D8(void);
 extern void save_parseSlotStats(void);
 extern void fn_801F4C14(void);
 extern void save_computeCrc32(void);
-extern void fn_801F6D7C(void);
+extern void save_verifyBlockCrc(void);
 extern void fn_801F791C(void);
 extern void fn_801F80A8(void);
 extern void save_findEntryByName(void);
@@ -794,12 +794,12 @@ lbl_fn_803E2A30_00000A08:
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0x38(r29)
     lfs f1, 0x0(r6)
-    bl fn_801F6D7C
+    bl save_verifyBlockCrc
     lfs f1, 0x4(r24)
     mr r3, r29
     addi r4, r20, 0x1215
     li r5, 0x1
-    bl fn_801F6D7C
+    bl save_verifyBlockCrc
     lfs f1, 0x0(r24)
     mr r3, r28
     addi r4, r20, 0x1215

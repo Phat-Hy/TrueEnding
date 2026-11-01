@@ -29,7 +29,7 @@ extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void equip_getGlobalManager(void);
 extern void fn_8012F034(void);
-extern void fn_8013322C(void);
+extern void actor_testBitFlag(void);
 extern void fn_80133B30(void);
 extern void boss_updatePhaseState(void);
 extern void fn_8013C504(void);
@@ -1605,7 +1605,7 @@ asm void fn_802946BC(void)
     bl atn_Anim_setLayerAnimation
     addi r3, r31, 0x7d4
     li r4, 0x20
-    bl fn_8013322C
+    bl actor_testBitFlag
     lfs f0, lbl_80883BF0
     stfs f0, 0x7d8(r31)
     b lbl_fn_802946BC_000015C8

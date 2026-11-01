@@ -134,7 +134,7 @@ void fn_806A6E40(void);
 void fn_806A7020(void);
 void fn_806A70E0(void);
 void fn_806A7110(void);
-void fn_806A7130(void);
+void net_checkConnectionSession(void);
 void fn_806A7150(void);
 void fn_806A7250(void);
 void fn_806A72B0(void);
@@ -1054,7 +1054,7 @@ asm void fn_806A7110(void)
     blr
 }
 
-asm void fn_806A7130(void)
+asm void net_checkConnectionSession(void)
 {
     nofralloc
     lis r6, lbl_8085FF18@ha
@@ -2250,7 +2250,7 @@ lbl_fn_806A8030_00001B00:
 lbl_fn_806A8030_00001BC4:
     mr r3, r30
     mr r4, r31
-    bl fn_806A7130
+    bl net_checkConnectionSession
     mr r3, r29
 lbl_fn_806A8030_00001BD4:
     lwz r0, 0x24(r1)

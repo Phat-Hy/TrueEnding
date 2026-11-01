@@ -13,7 +13,7 @@ extern void fn_8005B9AC(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void wcs_parseInt(void);
-extern void fn_80206B9C(void);
+extern void game_initGlobalDatabases(void);
 extern void assert_formatLocation(void);
 extern void fn_8020EF04(void);
 extern void fn_8020EFEC(void);
@@ -117,7 +117,7 @@ asm void fn_80213E60(void)
     b lbl_fn_80213E60_000002CC
 lbl_fn_80213E60_0000003C:
     lwz r3, 0x4(r3)
-    bl fn_80206B9C
+    bl game_initGlobalDatabases
     cmpwi r3, 0x0
     beq lbl_fn_80213E60_00000128
     lwz r3, 0x4(r31)

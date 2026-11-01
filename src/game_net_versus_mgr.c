@@ -23,7 +23,7 @@ extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void str_findChar(void);
 extern void actor_spawnActorWithId(void);
-extern void fn_801F4728(void);
+extern void save_parseSlotHeader(void);
 extern void save_formatSlotTitle(void);
 extern void saveSlot_readSummary(void);
 extern void thread_findAndNotify(void);
@@ -1327,7 +1327,7 @@ asm void fn_804B9014(void)
     stfs f1, 0x3c(r1)
     stfs f0, 0x40(r1)
     lwz r3, 0x254(r17)
-    bl fn_801F4728
+    bl save_parseSlotHeader
     lwz r4, 0x254(r17)
     addi r3, r18, 0x1b5
     addi r16, r4, 0x58
@@ -1466,7 +1466,7 @@ lbl_fn_804B9014_00001360:
     stfs f1, 0x3c(r1)
     stfs f0, 0x40(r1)
     lwz r3, 0x258(r23)
-    bl fn_801F4728
+    bl save_parseSlotHeader
     lwz r0, 0x3ac(r17)
     cmplw r15, r0
     bge lbl_fn_804B9014_00001608
@@ -1988,7 +1988,7 @@ lbl_fn_804B9960_00001AE0:
     stfs f1, 0x28(r1)
     stfs f0, 0x2c(r1)
     lwz r3, 0x288(r29)
-    bl fn_801F4728
+    bl save_parseSlotHeader
     lwz r3, 0x2e8(r29)
     addi r4, r1, 0xa0
     li r5, 0xa
@@ -2007,7 +2007,7 @@ lbl_fn_804B9960_00001AE0:
     lwz r3, 0x284(r27)
     addi r4, r26, 0x219
     addi r5, r1, 0x1c
-    bl fn_801F4728
+    bl save_parseSlotHeader
     lwz r4, 0x284(r27)
     addi r3, r26, 0x215
     addi r24, r4, 0x58

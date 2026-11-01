@@ -23,7 +23,7 @@ extern void fn_80075DEC(void);
 extern void gx_setRenderStateParam(void);
 extern void fn_800A96AC(void);
 extern void fn_800B6C70(void);
-extern void fn_800BDB58(void);
+extern void model_updateBoneTransforms(void);
 extern void fn_800C1424(void);
 extern void fn_800D5E18(void);
 extern void PSMTXConcat(void);
@@ -703,7 +703,7 @@ asm void fn_800B79E4(void)
     li r4, 0x0
     lfs f1, lbl_80880F7C
     li r5, 0x3
-    bl fn_800BDB58
+    bl model_updateBoneTransforms
 lbl_fn_800B79E4_000009AC:
     lwz r4, lbl_8087EFB4
     lwz r0, 0x104(r4)

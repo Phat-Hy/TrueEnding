@@ -25,7 +25,7 @@ extern void save_validateHeader(void);
 extern void save_createWorkerTask(void);
 extern void fn_801F6C2C(void);
 extern void save_computeCrc32(void);
-extern void fn_801F6D7C(void);
+extern void save_verifyBlockCrc(void);
 extern void save_findEntryByName(void);
 extern void fn_801F8598(void);
 extern void thread_findAndNotifySlot(void);
@@ -1763,17 +1763,17 @@ lbl_fn_800F0D14_0000169C:
     lwz r3, 0x54(r21)
     addi r4, r22, 0x128
     li r5, 0x4
-    bl fn_801F6D7C
+    bl save_verifyBlockCrc
     fmr f1, f30
     lwz r3, 0x70(r21)
     addi r4, r22, 0x128
     li r5, 0x4
-    bl fn_801F6D7C
+    bl save_verifyBlockCrc
     fmr f1, f30
     lwz r3, 0x8c(r21)
     addi r4, r22, 0x128
     li r5, 0x4
-    bl fn_801F6D7C
+    bl save_verifyBlockCrc
     addi r24, r24, 0x1
     addi r21, r21, 0x4
     cmplwi r24, 0x7

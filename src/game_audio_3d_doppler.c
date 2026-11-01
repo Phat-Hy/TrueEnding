@@ -27,7 +27,7 @@ extern void enemy_updateCombatBehavior(void);
 extern void fn_80129978(void);
 extern void fn_80129A48(void);
 extern void fn_80133130(void);
-extern void fn_8013322C(void);
+extern void actor_testBitFlag(void);
 extern void fn_80133EE8(void);
 extern void fn_8013A194(void);
 extern void fn_8013A258(void);
@@ -962,7 +962,7 @@ lbl_fn_80323E50_00000AB4:
     bl fn_80133130
     addi r3, r30, 0x7d4
     lis r4, 0x100
-    bl fn_8013322C
+    bl actor_testBitFlag
 lbl_fn_80323E50_00000AEC:
     lwz r0, 0x7e0(r30)
     rlwinm r0, r0, 0, 17, 17
@@ -999,7 +999,7 @@ lbl_fn_80323E50_00000B40:
     bl actor_setState
     addi r3, r30, 0x7d4
     li r4, 0x4000
-    bl fn_8013322C
+    bl actor_testBitFlag
     lfs f2, lbl_80884F1C
     li r0, 0x1
     lfs f0, lbl_80884F4C

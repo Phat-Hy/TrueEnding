@@ -7,7 +7,7 @@ extern u8 lbl_807B0DC0[];
 /* Function declarations */
 void fn_80617340(void);
 void GXSetTevColorIn(void);
-void fn_80617420(void);
+void GXSetTevColorOp(void);
 void GXSetTevIndirect(void);
 void fn_806174C0(void);
 void fn_80617520(void);
@@ -79,7 +79,7 @@ asm void GXSetTevColorIn(void)
     blr
 }
 
-asm void fn_80617420(void)
+asm void GXSetTevColorOp(void)
 {
     nofralloc
     lwz r11, __GXData

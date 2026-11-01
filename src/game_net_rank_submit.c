@@ -22,10 +22,10 @@ extern void str_findChar(void);
 extern void fn_8010A828(void);
 extern void fn_80116EB8(void);
 extern void actor_findSpawnTemplate(void);
-extern void fn_801F4728(void);
+extern void save_parseSlotHeader(void);
 extern void saveSlot_readSummary(void);
 extern void fn_801F6C2C(void);
-extern void fn_801F6D7C(void);
+extern void save_verifyBlockCrc(void);
 extern void save_findEntryByName(void);
 extern void fn_801F8830(void);
 extern void thread_findAndNotify(void);
@@ -1610,7 +1610,7 @@ lbl_fn_805233FC_000014D8:
     bl profile_getMetricValue
     addi r4, r29, 0x2a5
     addi r5, r1, 0x168
-    bl fn_801F4728
+    bl save_parseSlotHeader
 lbl_fn_805233FC_00001554:
     cmpw r31, r19
     bne lbl_fn_805233FC_0000157C
@@ -2040,7 +2040,7 @@ lbl_fn_805233FC_00001B60:
     addi r5, r1, 0x12c
     addi r4, r4, lbl_8075C6C4@l
     addi r4, r4, 0x307
-    bl fn_801F4728
+    bl save_parseSlotHeader
     b lbl_fn_805233FC_00001E2C
 lbl_fn_805233FC_00001B98:
     cmpwi r0, 0x0
@@ -2091,25 +2091,25 @@ lbl_fn_805233FC_00001C34:
     lfs f1, lbl_80887A1C
     addi r4, r31, 0x320
     li r5, 0x0
-    bl fn_801F6D7C
+    bl save_verifyBlockCrc
     lwz r3, 0x18(r21)
     bl perf_getMetricValue
     lfs f1, lbl_80887A20
     addi r4, r31, 0x32b
     li r5, 0x0
-    bl fn_801F6D7C
+    bl save_verifyBlockCrc
     lwz r3, 0x18(r21)
     bl perf_getMetricValue
     lfs f1, lbl_80887A24
     addi r4, r31, 0x336
     li r5, 0x0
-    bl fn_801F6D7C
+    bl save_verifyBlockCrc
     lwz r3, 0x18(r21)
     bl perf_getMetricValue
     lfs f1, lbl_80887A28
     addi r4, r31, 0x336
     li r5, 0x2
-    bl fn_801F6D7C
+    bl save_verifyBlockCrc
 lbl_fn_805233FC_00001CA0:
     lis r4, lbl_8075C6C4@ha
     addi r3, r1, 0x1b0
@@ -2340,7 +2340,7 @@ lbl_fn_805233FC_00001F68:
     stfs f7, 0x110(r1)
     stfs f0, 0x114(r1)
     lwz r3, 0x178(r25)
-    bl fn_801F4728
+    bl save_parseSlotHeader
     lwz r3, 0x178(r25)
     lis r4, lbl_8075C6A8@ha
     lfs f0, lbl_808879F0

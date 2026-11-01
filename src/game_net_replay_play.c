@@ -11,7 +11,7 @@ extern void script_executeOpcode(void);
 extern void atn_Task_setActive(void);
 extern void str_findChar(void);
 extern void wcs_vformat(void);
-extern void fn_801F4728(void);
+extern void save_parseSlotHeader(void);
 extern void save_formatSlotTitle(void);
 extern void saveSlot_readSummary(void);
 extern void thread_findAndNotifySlot(void);
@@ -394,7 +394,7 @@ lbl_fn_804C68E0_0000040C:
     stfs f1, 0x8c(r1)
     stfs f0, 0x90(r1)
     lwz r3, 0x80(r27)
-    bl fn_801F4728
+    bl save_parseSlotHeader
     addi r29, r29, 0x1
     addi r27, r27, 0x4
     cmpwi r29, 0x8
@@ -455,7 +455,7 @@ lbl_fn_804C68E0_000004FC:
     stfs f1, 0x50(r1)
     stfs f0, 0x54(r1)
     lwz r3, 0x80(r27)
-    bl fn_801F4728
+    bl save_parseSlotHeader
     addi r29, r29, 0x1
     addi r27, r27, 0x4
     cmpwi r29, 0x8
@@ -516,7 +516,7 @@ lbl_fn_804C68E0_000005EC:
     stfs f1, 0x14(r1)
     stfs f0, 0x18(r1)
     lwz r3, 0xa0(r27)
-    bl fn_801F4728
+    bl save_parseSlotHeader
     addi r29, r29, 0x1
     addi r27, r27, 0x4
     cmpwi r29, 0x8
@@ -543,7 +543,7 @@ lbl_fn_804C68E0_000005EC:
     stfs f1, 0x14(r1)
     stfs f0, 0x18(r1)
     lwz r3, 0xc4(r31)
-    bl fn_801F4728
+    bl save_parseSlotHeader
     b lbl_fn_804C68E0_00000740
     lwz r4, 0x1a4(r31)
     mr r3, r31
@@ -1096,7 +1096,7 @@ lbl_fn_804C7408_00000ED4:
     addi r30, r30, lbl_80758E44@l
     addi r5, r1, 0x94
     addi r4, r30, 0x344
-    bl fn_801F4728
+    bl save_parseSlotHeader
     lwz r29, 0x5c(r31)
     addi r3, r30, 0x318
     bl str_findChar
@@ -1901,7 +1901,7 @@ lbl_fn_804C7D7C_00001A08:
     stfs f1, 0x28(r1)
     stfs f0, 0x2c(r1)
     lwz r3, 0x80(r31)
-    bl fn_801F4728
+    bl save_parseSlotHeader
     b lbl_fn_804C7D7C_00001AF4
 lbl_fn_804C7D7C_00001A74:
     lwz r4, 0x80(r31)

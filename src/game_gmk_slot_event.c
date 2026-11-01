@@ -7,7 +7,7 @@ extern void _savegpr_27(void);
 extern void fn_8012B988(void);
 extern void fn_8012D8B8(void);
 extern void fn_801342D0(void);
-extern void fn_80206B9C(void);
+extern void game_initGlobalDatabases(void);
 extern void assert_formatLocation(void);
 extern void fn_802085E0(void);
 extern void fn_80208714(void);
@@ -1655,7 +1655,7 @@ asm void fn_80448F9C(void)
     stw r29, 0x14(r1)
     mr r29, r3
     mr r3, r30
-    bl fn_80206B9C
+    bl game_initGlobalDatabases
     cmpwi r3, 0x0
     beq lbl_fn_80448F9C_000016C4
     mr r3, r30

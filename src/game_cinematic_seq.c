@@ -25,7 +25,7 @@ extern void fn_801255C8(void);
 extern void fn_80128930(void);
 extern void fn_80129978(void);
 extern void fn_80129A48(void);
-extern void fn_8013322C(void);
+extern void actor_testBitFlag(void);
 extern void fn_80134674(void);
 extern void boss_updatePhaseState(void);
 extern void fn_801437D0(void);
@@ -1717,7 +1717,7 @@ lbl_fn_80335988_00001610:
     bne lbl_fn_80335988_00001650
     addi r3, r31, 0x7d4
     lis r4, 0x8
-    bl fn_8013322C
+    bl actor_testBitFlag
     mr r3, r31
     bl fn_80168F3C
     mr r3, r31

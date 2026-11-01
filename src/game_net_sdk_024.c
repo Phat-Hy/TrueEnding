@@ -44,7 +44,7 @@ extern void fn_806A0AD8(void);
 extern void fn_806A6CA0(void);
 extern void fn_806A6E40(void);
 extern void fn_806A7110(void);
-extern void fn_806A7130(void);
+extern void net_checkConnectionSession(void);
 extern void fn_806A72E0(void);
 extern void fn_806A7400(void);
 extern void fn_806A75C0(void);
@@ -2221,7 +2221,7 @@ lbl_fn_806D3210_00001EA8:
     lis r4, 0xffff
     li r3, 0x6
     subi r4, r4, 0x5fb8
-    bl fn_806A7130
+    bl net_checkConnectionSession
 lbl_fn_806D3210_00001ED8:
     li r0, 0x1
     stw r0, 0x0(r30)
@@ -2251,7 +2251,7 @@ lbl_fn_806D3210_00001EEC:
     lis r4, 0xffff
     li r3, 0x6
     subi r4, r4, 0x5fb8
-    bl fn_806A7130
+    bl net_checkConnectionSession
 lbl_fn_806D3210_00001F44:
     li r0, 0x1
     stw r0, 0x0(r30)
@@ -2277,7 +2277,7 @@ lbl_fn_806D3210_00001F68:
     lis r4, 0xffff
     li r3, 0x6
     subi r4, r4, 0x5fb8
-    bl fn_806A7130
+    bl net_checkConnectionSession
 lbl_fn_806D3210_00001FA0:
     li r0, 0x1
     stw r0, 0x0(r30)
@@ -2301,7 +2301,7 @@ lbl_fn_806D3210_00001FAC:
     lis r4, 0xffff
     li r3, 0x6
     subi r4, r4, 0x5fb8
-    bl fn_806A7130
+    bl net_checkConnectionSession
 lbl_fn_806D3210_00001FF8:
     li r0, 0x1
     stw r0, 0x0(r30)
@@ -2320,7 +2320,7 @@ lbl_fn_806D3210_0000201C:
     lis r4, 0xffff
     li r3, 0x6
     subi r4, r4, 0x5fb8
-    bl fn_806A7130
+    bl net_checkConnectionSession
 lbl_fn_806D3210_00002038:
     li r0, 0x1
     stw r0, 0x0(r30)

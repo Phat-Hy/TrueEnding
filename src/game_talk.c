@@ -6,7 +6,7 @@ extern void _restgpr_21(void);
 extern void _savegpr_21(void);
 extern void dtor_80084684(void);
 extern void fn_8005691C(void);
-extern void fn_8005C594(void);
+extern void party_updateFormation(void);
 extern void mem_alloc(void);
 
 /* External data declarations */
@@ -1486,13 +1486,13 @@ lbl_atn_SinusCurve_destructor_00001268:
     beq lbl_atn_SinusCurve_destructor_000012B4
     lwz r3, 0x4(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_SinusCurve_destructor_000012B4:
     cmpwi r31, 0x0
     beq lbl_atn_SinusCurve_destructor_000012C8
     lwz r3, 0x0(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_SinusCurve_destructor_000012C8:
     mr r3, r31
     bl dtor_80084684
@@ -1506,13 +1506,13 @@ lbl_atn_SinusCurve_destructor_000012D0:
     beq lbl_atn_SinusCurve_destructor_000012F8
     lwz r3, 0x4(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_SinusCurve_destructor_000012F8:
     cmpwi r31, 0x0
     beq lbl_atn_SinusCurve_destructor_0000130C
     lwz r3, 0x0(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_SinusCurve_destructor_0000130C:
     mr r3, r31
     bl dtor_80084684
@@ -1534,13 +1534,13 @@ lbl_atn_SinusCurve_destructor_0000131C:
     beq lbl_atn_SinusCurve_destructor_00001358
     lwz r3, 0x4(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_SinusCurve_destructor_00001358:
     cmpwi r31, 0x0
     beq lbl_atn_SinusCurve_destructor_0000136C
     lwz r3, 0x0(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_SinusCurve_destructor_0000136C:
     mr r3, r31
     bl dtor_80084684
@@ -1554,13 +1554,13 @@ lbl_atn_SinusCurve_destructor_00001374:
     beq lbl_atn_SinusCurve_destructor_0000139C
     lwz r3, 0x4(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_SinusCurve_destructor_0000139C:
     cmpwi r31, 0x0
     beq lbl_atn_SinusCurve_destructor_000013B0
     lwz r3, 0x0(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_SinusCurve_destructor_000013B0:
     mr r3, r31
     bl dtor_80084684
@@ -1668,13 +1668,13 @@ asm void fn_8005C534(void)
     beq lbl_fn_8005C534_00001508
     lwz r3, 0x4(r3)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_fn_8005C534_00001508:
     cmpwi r31, 0x0
     beq lbl_fn_8005C534_0000151C
     lwz r3, 0x0(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_fn_8005C534_0000151C:
     mr r3, r31
     bl dtor_80084684

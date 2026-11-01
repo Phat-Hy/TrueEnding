@@ -67,7 +67,7 @@ extern void fn_806E4010(void);
 extern void fn_806E87A0(void);
 extern void fn_806E8B60(void);
 extern void fn_806E8D30(void);
-extern void fn_806E8E10(void);
+extern void net_formatPlayerInfo(void);
 extern void net_setTaggedString(void);
 extern void net_copyStringSafe(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -1598,7 +1598,7 @@ lbl_fn_806E5570_000013C8:
     addi r4, r30, 0x13c
     addi r5, r1, 0x18
     li r6, 0x10
-    bl fn_806E8E10
+    bl net_formatPlayerInfo
     cmpwi r3, 0x0
     bne lbl_fn_806E5570_0000140C
     mr r3, r28

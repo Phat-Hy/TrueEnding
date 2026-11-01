@@ -20,7 +20,7 @@ extern void fn_8011F91C(void);
 extern void skill_findNodeById(void);
 extern void fn_8011FE3C(void);
 extern void fn_8013310C(void);
-extern void fn_8013322C(void);
+extern void actor_testBitFlag(void);
 extern void fn_80161570(void);
 extern void actor_setState(void);
 extern void fn_8017039C(void);
@@ -1008,7 +1008,7 @@ lbl_fn_803A9C40_00000C3C:
     lwz r0, 0x7e0(r28)
     extrwi r0, r0, 1, 19
     stw r0, 0xc4(r29)
-    bl fn_8013322C
+    bl actor_testBitFlag
     lwz r12, 0x0(r28)
     mr r3, r28
     lwz r12, 0x48(r12)
@@ -1601,7 +1601,7 @@ lbl_fn_803A9DBC_00001490:
 lbl_fn_803A9DBC_000014B0:
     addi r3, r30, 0x7d4
     li r4, 0x1000
-    bl fn_8013322C
+    bl actor_testBitFlag
 lbl_fn_803A9DBC_000014BC:
     lwz r0, 0x0(r27)
     lis r3, lbl_8074ED24@ha

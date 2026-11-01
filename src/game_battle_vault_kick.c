@@ -27,7 +27,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void bloom_processPasses(void);
-extern void fn_80206B9C(void);
+extern void game_initGlobalDatabases(void);
 extern void event_findEntryById(void);
 extern void fn_802180A8(void);
 extern void fn_8021E444(void);
@@ -1181,7 +1181,7 @@ lbl_fn_8040E620_00000EA8:
     ble lbl_fn_8040E620_000010C4
     lwz r3, 0x18(r1)
     li r27, 0x1
-    bl fn_80206B9C
+    bl game_initGlobalDatabases
     cmpwi r3, 0x0
     beq lbl_fn_8040E620_00000F14
     lwz r3, lbl_8087F4F0

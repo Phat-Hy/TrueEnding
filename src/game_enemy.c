@@ -30,7 +30,7 @@ extern void GXInitLightSpot(void);
 extern void GXInitTexObjDefault(void);
 extern void fn_80617340(void);
 extern void GXSetTevColorIn(void);
-extern void fn_80617420(void);
+extern void GXSetTevColorOp(void);
 extern void GXSetTevIndirect(void);
 extern void fn_806174C0(void);
 extern void fn_806175F0(void);
@@ -870,7 +870,7 @@ asm void atn_ComDrawTextureMask_execute(void)
     li r5, 0x4
     li r6, 0x5
     li r7, 0x7
-    bl fn_80617420
+    bl GXSetTevColorOp
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -896,7 +896,7 @@ asm void atn_ComDrawTextureMask_execute(void)
     li r5, 0x0
     li r6, 0x4
     li r7, 0x7
-    bl fn_80617420
+    bl GXSetTevColorOp
     li r3, 0x1
     li r4, 0x0
     li r5, 0x0
@@ -1450,7 +1450,7 @@ lbl_atn_ComDrawTextureMono_execute_00001108:
     li r5, 0x7
     li r6, 0x7
     li r7, 0x7
-    bl fn_80617420
+    bl GXSetTevColorOp
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -1490,7 +1490,7 @@ lbl_atn_ComDrawTextureMono_execute_00001108:
     li r5, 0x7
     li r6, 0x7
     li r7, 0x7
-    bl fn_80617420
+    bl GXSetTevColorOp
     li r3, 0x1
     li r4, 0x0
     li r5, 0x0
@@ -1530,7 +1530,7 @@ lbl_atn_ComDrawTextureMono_execute_00001108:
     li r5, 0x7
     li r6, 0x7
     li r7, 0x7
-    bl fn_80617420
+    bl GXSetTevColorOp
     li r3, 0x2
     li r4, 0x0
     li r5, 0x0
@@ -1567,7 +1567,7 @@ lbl_atn_ComDrawTextureMono_execute_00001108:
     li r5, 0x4
     li r6, 0x5
     li r7, 0x7
-    bl fn_80617420
+    bl GXSetTevColorOp
     li r3, 0x3
     li r4, 0x0
     li r5, 0x0
@@ -2089,7 +2089,7 @@ lbl_atn_ComDrawTextureMaskMono_execute_00001AEC:
     li r5, 0x7
     li r6, 0x7
     li r7, 0x1
-    bl fn_80617420
+    bl GXSetTevColorOp
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -2129,7 +2129,7 @@ lbl_atn_ComDrawTextureMaskMono_execute_00001AEC:
     li r5, 0x7
     li r6, 0x7
     li r7, 0x1
-    bl fn_80617420
+    bl GXSetTevColorOp
     li r3, 0x1
     li r4, 0x0
     li r5, 0x0
@@ -2169,7 +2169,7 @@ lbl_atn_ComDrawTextureMaskMono_execute_00001AEC:
     li r5, 0x7
     li r6, 0x7
     li r7, 0x1
-    bl fn_80617420
+    bl GXSetTevColorOp
     li r3, 0x2
     li r4, 0x0
     li r5, 0x0
@@ -2206,7 +2206,7 @@ lbl_atn_ComDrawTextureMaskMono_execute_00001AEC:
     li r5, 0x4
     li r6, 0x5
     li r7, 0x7
-    bl fn_80617420
+    bl GXSetTevColorOp
     li r3, 0x3
     li r4, 0x0
     li r5, 0x0
@@ -2535,7 +2535,7 @@ asm void atn_ComDrawFont_execute(void)
     li r5, 0x4
     li r6, 0x5
     li r7, 0x7
-    bl fn_80617420
+    bl GXSetTevColorOp
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -2914,7 +2914,7 @@ lbl_atn_ComDrawFontSideFade_execute_000029CC:
     li r5, 0x4
     li r6, 0x5
     li r7, 0x7
-    bl fn_80617420
+    bl GXSetTevColorOp
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -3448,7 +3448,7 @@ lbl_atn_ComDrawD3TextureMask_execute_000031C8:
     li r5, 0x4
     li r6, 0x5
     li r7, 0x7
-    bl fn_80617420
+    bl GXSetTevColorOp
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -3474,7 +3474,7 @@ lbl_atn_ComDrawD3TextureMask_execute_000031C8:
     li r5, 0x0
     li r6, 0x4
     li r7, 0x7
-    bl fn_80617420
+    bl GXSetTevColorOp
     li r3, 0x1
     li r4, 0x0
     li r5, 0x0
@@ -3536,7 +3536,7 @@ lbl_atn_ComDrawD3TextureMask_execute_00003344:
     li r5, 0x4
     li r6, 0x5
     li r7, 0x7
-    bl fn_80617420
+    bl GXSetTevColorOp
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -3712,7 +3712,7 @@ asm void atn_ComDrawWindow_execute(void)
     li r5, 0x4
     li r6, 0x5
     li r7, 0x7
-    bl fn_80617420
+    bl GXSetTevColorOp
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -3738,7 +3738,7 @@ asm void atn_ComDrawWindow_execute(void)
     li r5, 0x0
     li r6, 0x4
     li r7, 0x7
-    bl fn_80617420
+    bl GXSetTevColorOp
     li r3, 0x1
     li r4, 0x0
     li r5, 0x0

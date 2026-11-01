@@ -8,7 +8,7 @@ extern void _restgpr_20(void);
 extern void _savegpr_20(void);
 extern void dtor_80084684(void);
 extern void vec3_set(void);
-extern void fn_8000D9E8(void);
+extern void scene_transformPoint(void);
 extern void fn_8000DCF4(void);
 extern void ui_destroyWidget(void);
 extern void fn_8004895C(void);
@@ -3474,7 +3474,7 @@ lbl_fn_804D25D4_00002B58:
     cmpwi r3, 0x0
     mr r22, r3
     beq lbl_fn_804D25D4_00002BD0
-    bl fn_8000D9E8
+    bl scene_transformPoint
     bl fn_8000DCF4
     stw r3, 0x0(r22)
     li r4, 0x1
@@ -4403,10 +4403,10 @@ lbl_fn_804D25D4_000038F0:
     li r0, 0x1
     stw r0, -0x6898(r3)
 lbl_fn_804D25D4_00003960:
-    bl fn_8000D9E8
+    bl scene_transformPoint
     cmpwi r3, 0x0
     beq lbl_fn_804D25D4_0000414C
-    bl fn_8000D9E8
+    bl scene_transformPoint
     bl fn_8000DCF4
     mr r4, r3
     mr r3, r24

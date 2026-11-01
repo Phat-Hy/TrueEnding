@@ -14,7 +14,7 @@ extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
 extern void bloom_processPasses(void);
 extern void str_findChar(void);
-extern void fn_801F4728(void);
+extern void save_parseSlotHeader(void);
 extern void saveSlot_readSummary(void);
 extern void thread_findAndNotifySlot(void);
 extern void thread_dispatchToQueue(void);
@@ -1651,7 +1651,7 @@ lbl_fn_80505084_000015C8:
     lwz r3, 0x50(r25)
     addi r4, r29, 0xc9
     addi r5, r1, 0x30
-    bl fn_801F4728
+    bl save_parseSlotHeader
     bl fn_8006BA30
     cmpwi r3, 0x3
     bne lbl_fn_80505084_0000161C
@@ -1703,7 +1703,7 @@ lbl_fn_80505084_00001688:
     lwz r3, 0xe8(r26)
     addi r4, r29, 0xed
     addi r5, r1, 0x1c
-    bl fn_801F4728
+    bl save_parseSlotHeader
     lwz r0, 0x0(r25)
     lwz r3, lbl_8087F1E4
     slwi r0, r0, 3

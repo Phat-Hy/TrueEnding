@@ -71,7 +71,7 @@ void fn_8000D760(void);
 void fn_8000D7DC(void);
 void fn_8000D844(void);
 void fn_8000D8C0(void);
-void fn_8000D9E8(void);
+void scene_transformPoint(void);
 void fn_8000D9F0(void);
 void fn_8000D9F8(void);
 void fn_8000DA00(void);
@@ -1128,7 +1128,7 @@ lbl_fn_8000D8C0_00000E00:
     blr
 }
 
-asm void fn_8000D9E8(void)
+asm void scene_transformPoint(void)
 {
     nofralloc
     lwz r3, lbl_8087F8A0
@@ -1285,10 +1285,10 @@ lbl_fn_8000DB24_00000F9C:
     cmpwi r3, 0x0
     mr r30, r3
     bne lbl_fn_8000DB24_00001034
-    bl fn_8000D9E8
+    bl scene_transformPoint
     cmpwi r3, 0x0
     beq lbl_fn_8000DB24_00000FE4
-    bl fn_8000D9E8
+    bl scene_transformPoint
     bl fn_8000DCF4
     mr r30, r3
     b lbl_fn_8000DB24_00000FE8

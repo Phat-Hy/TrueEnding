@@ -12,7 +12,7 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_8000D430(void);
 extern void fn_8000D8C0(void);
-extern void fn_8000D9E8(void);
+extern void scene_transformPoint(void);
 extern void fn_8000D9F0(void);
 extern void fn_8000DB1C(void);
 extern void fn_8000DB24(void);
@@ -633,7 +633,7 @@ lbl_fn_8000E820_000006E8:
     beq lbl_fn_8000E820_000007D4
     li r0, 0x7
     stw r0, 0x20(r30)
-    bl fn_8000D9E8
+    bl scene_transformPoint
     bl fn_8000D9F0
     mr r4, r3
     mr r3, r31

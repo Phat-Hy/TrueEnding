@@ -73,7 +73,7 @@ extern u32 lbl_808810C8;
 void fn_800BD94C(void);
 void fn_800BD9C0(void);
 void fn_800BDB40(void);
-void fn_800BDB58(void);
+void model_updateBoneTransforms(void);
 void atn_Model_updateAnimation(void);
 void fn_800BECF0(void);
 void fn_800BEDA8(void);
@@ -225,7 +225,7 @@ asm void fn_800BDB40(void)
     blr
 }
 
-asm void fn_800BDB58(void)
+asm void model_updateBoneTransforms(void)
 {
     nofralloc
     slwi r7, r5, 2
@@ -236,14 +236,14 @@ asm void fn_800BDB58(void)
     lwz r0, 0xf4(r3)
     addi r5, r6, 0x10
     cmpw r5, r0
-    ble lbl_fn_800BDB58_00000238
+    ble lbl_model_updateBoneTransforms_00000238
     li r5, 0x0
-    b lbl_fn_800BDB58_00000244
-lbl_fn_800BDB58_00000238:
+    b lbl_model_updateBoneTransforms_00000244
+lbl_model_updateBoneTransforms_00000238:
     lwz r0, 0xf0(r3)
     stw r5, 0xf8(r3)
     add r5, r0, r6
-lbl_fn_800BDB58_00000244:
+lbl_model_updateBoneTransforms_00000244:
     cmpwi r5, 0x0
     beqlr
     stw r4, 0x0(r5)

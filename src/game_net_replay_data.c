@@ -21,7 +21,7 @@ extern void str_findChar(void);
 extern void actor_spawnActorWithId(void);
 extern void magic_dispatchActionCommand(void);
 extern void save_validateHeader(void);
-extern void fn_801F4728(void);
+extern void save_parseSlotHeader(void);
 extern void save_formatSlotTitle(void);
 extern void saveSlot_readSummary(void);
 extern void thread_dispatchToQueue(void);
@@ -981,7 +981,7 @@ asm void fn_804C50C0(void)
     stfs f1, 0x38(r1)
     stfs f0, 0x3c(r1)
     lwz r3, 0x4c(r28)
-    bl fn_801F4728
+    bl save_parseSlotHeader
     lwz r3, 0x4c(r28)
     lfs f1, lbl_80887474
     lwz r0, 0x38(r3)

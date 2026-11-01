@@ -16,7 +16,7 @@ extern void strncpy(void);
 extern void strcmp(void);
 extern void fn_8068446C(void);
 extern void fn_806A7110(void);
-extern void fn_806A7130(void);
+extern void net_checkConnectionSession(void);
 extern void fn_806A72E0(void);
 extern void fn_806A7400(void);
 extern void net_formatLog(void);
@@ -1489,7 +1489,7 @@ lbl_fn_806B2600_000012B8:
     subis r4, r30, 0x1
     mr r3, r26
     subi r4, r4, 0x3880
-    bl fn_806A7130
+    bl net_checkConnectionSession
     b lbl_fn_806B2600_000015AC
 lbl_fn_806B2600_000012D4:
     lis r3, lbl_8085FF98@ha
@@ -1751,7 +1751,7 @@ asm void fn_806B3030(void)
     lis r4, 0xffff
     li r3, 0x9
     subi r4, r4, 0x7aeb
-    bl fn_806A7130
+    bl net_checkConnectionSession
     lis r3, lbl_8085FF98@ha
     li r0, 0x0
     lwz r3, lbl_8085FF98@l(r3)
@@ -2049,7 +2049,7 @@ lbl_fn_806B3220_00001A18:
     li r3, 0x9
     stb r0, 0x751(r5)
     subi r4, r4, 0x3881
-    bl fn_806A7130
+    bl net_checkConnectionSession
     lwz r6, lbl_80860898@l(r28)
     addi r3, r1, 0x8
     addi r5, r31, 0x5c
@@ -2356,7 +2356,7 @@ lbl_fn_806B3680_00001E7C:
     li r3, 0x9
     stb r0, 0x751(r5)
     subi r4, r4, 0x3881
-    bl fn_806A7130
+    bl net_checkConnectionSession
     lwz r6, lbl_80860898@l(r28)
     addi r3, r1, 0x8
     addi r5, r31, 0x5c

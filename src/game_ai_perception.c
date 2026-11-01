@@ -24,7 +24,7 @@ extern void atn_Task_setActive(void);
 extern void wcs_vformat(void);
 extern void viewport_updateCulling(void);
 extern void fn_80109828(void);
-extern void fn_8013322C(void);
+extern void actor_testBitFlag(void);
 extern void fn_80134674(void);
 extern void boss_updatePhaseState(void);
 extern void fn_80139560(void);
@@ -1499,7 +1499,7 @@ lbl_fn_8025F8C8_000013C8:
     bne lbl_fn_8025F8C8_0000141C
     addi r3, r30, 0x7d4
     li r4, 0x20
-    bl fn_8013322C
+    bl actor_testBitFlag
     lfs f5, 0x30(r31)
     mr r3, r30
     lfs f4, lbl_80883570

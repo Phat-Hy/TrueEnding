@@ -30,7 +30,7 @@ extern void fn_80617200(void);
 extern void GXInitTexObjDefault(void);
 extern void fn_80617340(void);
 extern void GXSetTevColorIn(void);
-extern void fn_80617420(void);
+extern void GXSetTevColorOp(void);
 extern void GXSetTevIndirect(void);
 extern void fn_806174C0(void);
 extern void fn_80617520(void);
@@ -706,7 +706,7 @@ lbl_fn_80726B90_00000758:
     li r5, 0x4
     li r6, 0x5
     li r7, 0x7
-    bl fn_80617420
+    bl GXSetTevColorOp
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -1759,7 +1759,7 @@ lbl_fn_80727B60_000016A4:
     li r5, 0x2
     li r6, 0x4
     li r7, 0x7
-    bl fn_80617420
+    bl GXSetTevColorOp
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -1790,7 +1790,7 @@ lbl_fn_80727B60_000016A4:
     li r5, 0x0
     li r6, 0x5
     li r7, 0x7
-    bl fn_80617420
+    bl GXSetTevColorOp
     li r3, 0x1
     li r4, 0x0
     li r5, 0x0

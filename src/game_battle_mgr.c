@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void mem_alloc(void);
 extern void atn_Anim_getLayerTrack(void);
-extern void fn_8013322C(void);
+extern void actor_testBitFlag(void);
 extern void actor_setState(void);
 extern void fn_8018EEC4(void);
 extern void fn_8018F970(void);
@@ -1728,7 +1728,7 @@ lbl_fn_80166544_000017DC:
 lbl_fn_80166544_000017E0:
     addi r3, r30, 0x7d4
     li r4, 0x40
-    bl fn_8013322C
+    bl actor_testBitFlag
     li r0, -0x1
     stw r0, 0xf94(r30)
     lwz r31, 0x3c(r1)

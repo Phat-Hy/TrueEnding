@@ -25,7 +25,7 @@ extern void fn_801D8040(void);
 extern void fn_801D8060(void);
 extern void fn_801E714C(void);
 extern void fn_801E75F8(void);
-extern void fn_801F4728(void);
+extern void save_parseSlotHeader(void);
 extern void saveSlot_readSummary(void);
 extern void save_computeCrc32(void);
 extern void fn_801F6E78(void);
@@ -1661,7 +1661,7 @@ lbl_fn_801D19F0_00001660:
     bl profile_getMetricValue
     addi r4, r17, 0x324
     addi r5, r1, 0x1cc
-    bl fn_801F4728
+    bl save_parseSlotHeader
 lbl_fn_801D19F0_000016DC:
     lwz r0, 0x484(r15)
     cmpwi r0, 0x0
@@ -2120,7 +2120,7 @@ lbl_fn_801D19F0_00001BF4:
     bl profile_getMetricValue
     addi r4, r14, 0x324
     addi r5, r1, 0x180
-    bl fn_801F4728
+    bl save_parseSlotHeader
     lwz r3, 0xb18(r15)
     addi r16, r14, 0x3b6
     bl profile_getMetricValue
@@ -2576,7 +2576,7 @@ lbl_fn_801D19F0_0000241C:
     stfs f0, 0x178(r1)
     stfs f0, 0x174(r1)
     lwz r3, 0xb84(r15)
-    bl fn_801F4728
+    bl save_parseSlotHeader
     lwz r0, 0x7c(r15)
     cmpwi r0, 0x3
     bne lbl_fn_801D19F0_00002640

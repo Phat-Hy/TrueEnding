@@ -29,7 +29,7 @@ extern void atn_Lockon_updateTargetTextures(void);
 extern void fn_80095CD0(void);
 extern void atn_Model_drawMeshNode(void);
 extern void fn_800A005C(void);
-extern void fn_800BDB58(void);
+extern void model_updateBoneTransforms(void);
 extern void fn_800C0A50(void);
 extern void fn_800C122C(void);
 extern void str_findChar(void);
@@ -597,7 +597,7 @@ lbl_hud_updateTargetReticle_00000704:
     mr r4, r30
     lfs f1, lbl_80880C78
     li r5, 0x2
-    bl fn_800BDB58
+    bl model_updateBoneTransforms
     lwz r5, 0x4(r30)
     lwz r0, 0x14(r5)
     rlwinm r0, r0, 0, 29, 29
@@ -610,7 +610,7 @@ lbl_hud_updateTargetReticle_00000704:
     mr r4, r30
     lwz r3, lbl_8087EFB4
     li r5, 0x3
-    bl fn_800BDB58
+    bl model_updateBoneTransforms
 lbl_hud_updateTargetReticle_0000074C:
     lwz r5, 0x4(r30)
     li r4, 0x0
@@ -673,7 +673,7 @@ lbl_hud_updateTargetReticle_000007F4:
     lwz r3, lbl_8087EFB4
     li r5, 0x4
     lfs f1, 0xa8(r6)
-    bl fn_800BDB58
+    bl model_updateBoneTransforms
     b lbl_hud_updateTargetReticle_00000854
 lbl_hud_updateTargetReticle_00000834:
     lbz r0, 0x84(r30)
@@ -683,7 +683,7 @@ lbl_hud_updateTargetReticle_00000834:
     mr r4, r30
     lwz r3, lbl_8087EFB4
     li r5, 0x4
-    bl fn_800BDB58
+    bl model_updateBoneTransforms
 lbl_hud_updateTargetReticle_00000854:
     lbz r0, 0x84(r30)
     extrwi. r0, r0, 1, 24
@@ -697,7 +697,7 @@ lbl_hud_updateTargetReticle_00000854:
     mr r4, r30
     lwz r3, lbl_8087EFB4
     li r5, 0x8
-    bl fn_800BDB58
+    bl model_updateBoneTransforms
 lbl_hud_updateTargetReticle_00000888:
     lwz r5, 0x4(r30)
     lwz r0, 0x14(r5)
@@ -708,7 +708,7 @@ lbl_hud_updateTargetReticle_00000888:
     mr r4, r30
     lwz r3, lbl_8087EFB4
     li r5, 0x6
-    bl fn_800BDB58
+    bl model_updateBoneTransforms
 lbl_hud_updateTargetReticle_000008B0:
     lwz r5, 0x4(r30)
     lwz r0, 0x14(r5)
@@ -719,7 +719,7 @@ lbl_hud_updateTargetReticle_000008B0:
     mr r4, r30
     lwz r3, lbl_8087EFB4
     li r5, 0x9
-    bl fn_800BDB58
+    bl model_updateBoneTransforms
 lbl_hud_updateTargetReticle_000008D8:
     lwz r3, 0x4(r30)
     lwz r0, 0x14(r3)
@@ -739,7 +739,7 @@ lbl_hud_updateTargetReticle_00000900:
     mr r4, r30
     lfs f1, lbl_80880C78
     li r5, 0x0
-    bl fn_800BDB58
+    bl model_updateBoneTransforms
 lbl_hud_updateTargetReticle_00000920:
     lwz r0, 0x54(r1)
     lwz r31, 0x4c(r1)

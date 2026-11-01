@@ -24,7 +24,7 @@ extern void fn_80109828(void);
 extern void fn_8012476C(void);
 extern void fn_8013310C(void);
 extern void fn_80133130(void);
-extern void fn_8013322C(void);
+extern void actor_testBitFlag(void);
 extern void fn_801446F0(void);
 extern void inventory_unequipItem(void);
 extern void fn_80154344(void);
@@ -928,7 +928,7 @@ asm void fn_80190A2C(void)
     stw r5, 0x0(r3)
     addi r3, r4, 0x7d4
     li r4, 0x10
-    bl fn_8013322C
+    bl actor_testBitFlag
     lwz r3, lbl_8087F048
     cmpwi r3, 0x0
     beq lbl_fn_80190A2C_00000B20
@@ -993,7 +993,7 @@ asm void fn_80190AB8(void)
     stw r0, 0x560(r5)
     lwz r3, 0x4(r3)
     addi r3, r3, 0x7d4
-    bl fn_8013322C
+    bl actor_testBitFlag
     lwz r3, 0x4(r30)
     li r0, 0x1
     lfs f0, lbl_80881F7C
@@ -1250,7 +1250,7 @@ asm void fn_80190E80(void)
     stw r0, 0x560(r5)
     lwz r3, 0x4(r3)
     addi r3, r3, 0x7d4
-    bl fn_8013322C
+    bl actor_testBitFlag
     lwz r3, 0x4(r30)
     li r0, 0x1
     lfs f0, lbl_80881F7C
@@ -1755,7 +1755,7 @@ asm void fn_801915B8(void)
     stw r5, 0x0(r3)
     addi r3, r4, 0x7d4
     li r4, 0x4000
-    bl fn_8013322C
+    bl actor_testBitFlag
     lwz r3, lbl_8087F048
     lwz r4, 0x4(r30)
     cmpwi r3, 0x0

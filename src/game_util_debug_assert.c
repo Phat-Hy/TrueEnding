@@ -20,7 +20,7 @@ extern void fn_801F7DF0(void);
 extern void save_findEntryByName(void);
 extern void thread_findAndNotify(void);
 extern void thread_dispatchToQueue(void);
-extern void fn_80206B9C(void);
+extern void game_initGlobalDatabases(void);
 extern void assert_formatLocation(void);
 extern void fn_8020ED84(void);
 extern void fn_8020EF04(void);
@@ -808,7 +808,7 @@ asm void fn_805969D8(void)
     li r25, 0x1
 lbl_fn_805969D8_00000AE4:
     lwz r3, 0x4(r26)
-    bl fn_80206B9C
+    bl game_initGlobalDatabases
     cmpwi r3, 0x0
     beq lbl_fn_805969D8_00000B1C
     lwz r3, 0x4(r26)
@@ -1920,7 +1920,7 @@ lbl_fn_80597558_00001AC8:
     mr r18, r3
 lbl_fn_80597558_00001B24:
     lwz r3, 0x4(r14)
-    bl fn_80206B9C
+    bl game_initGlobalDatabases
     cmpwi r3, 0x0
     beq lbl_fn_80597558_00001B40
     lwz r3, 0x4(r14)
@@ -2165,7 +2165,7 @@ lbl_fn_80597558_00001E80:
     li r19, 0x0
     li r22, 0x0
     li r23, 0x0
-    bl fn_80206B9C
+    bl game_initGlobalDatabases
     cmpwi r3, 0x0
     beq lbl_fn_80597558_00001F1C
     lwz r3, 0x4(r17)

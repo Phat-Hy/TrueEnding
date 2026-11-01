@@ -17,7 +17,7 @@ extern void fn_8005ED68(void);
 extern void fn_8006F2F0(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_800BDB58(void);
+extern void model_updateBoneTransforms(void);
 extern void atn_LH_Texture_update(void);
 extern void atn_LoadHandle_getStatus(void);
 extern void PSMTXRotRad(void);
@@ -301,7 +301,7 @@ lbl_fn_800610A4_00000358:
     lwz r3, lbl_8087EFB4
     lwz r5, 0xa0(r29)
     mr r4, r31
-    bl fn_800BDB58
+    bl model_updateBoneTransforms
 lbl_fn_800610A4_0000036C:
     addi r11, r1, 0xf0
     psq_l f31, 0x138(r1), 0, 0
@@ -474,7 +474,7 @@ lbl_fn_8006144C_000005CC:
     lwz r3, lbl_8087EFB4
     lwz r5, 0xa0(r29)
     mr r4, r31
-    bl fn_800BDB58
+    bl model_updateBoneTransforms
 lbl_fn_8006144C_000005E0:
     addi r11, r1, 0x70
     psq_l f31, 0xb8(r1), 0, 0
@@ -758,7 +758,7 @@ lbl_skill_calcTrajectory_00000988:
     stw r30, 0x6c(r31)
     lwz r3, lbl_8087EFB4
     lwz r5, 0xa0(r23)
-    bl fn_800BDB58
+    bl model_updateBoneTransforms
 lbl_skill_calcTrajectory_000009EC:
     addi r11, r1, 0x40
     psq_l f31, 0xb8(r1), 0, 0
@@ -965,7 +965,7 @@ lbl_fn_80061AE4_00000C6C:
     stfs f31, 0x78(r31)
     lwz r3, lbl_8087EFB4
     lwz r5, 0xa0(r23)
-    bl fn_800BDB58
+    bl model_updateBoneTransforms
 lbl_fn_80061AE4_00000CDC:
     addi r11, r1, 0x40
     psq_l f31, 0xe8(r1), 0, 0
@@ -1734,7 +1734,7 @@ lbl_fn_80061E2C_000017DC:
     mr r4, r19
     lwz r3, lbl_8087EFB4
     lwz r5, 0xa0(r15)
-    bl fn_800BDB58
+    bl model_updateBoneTransforms
 lbl_fn_80061E2C_000017F8:
     addi r11, r1, 0x2c0
     psq_l f31, 0x368(r1), 0, 0
@@ -1799,7 +1799,7 @@ lbl_fn_80062908_000018A8:
     stw r6, 0xc(r9)
     stw r7, 0x10(r9)
     lwz r3, lbl_8087EFB4
-    b fn_800BDB58
+    b model_updateBoneTransforms
     blr
 }
 
@@ -1836,7 +1836,7 @@ lbl_fn_8006297C_0000191C:
     stw r6, 0xc(r9)
     stw r7, 0x10(r9)
     lwz r3, lbl_8087EFB4
-    b fn_800BDB58
+    b model_updateBoneTransforms
     blr
 }
 
@@ -2008,7 +2008,7 @@ lbl_fn_800629F0_00001B48:
     stw r25, 0x8(r31)
     stb r0, 0x18(r31)
     lwz r3, lbl_8087EFB4
-    bl fn_800BDB58
+    bl model_updateBoneTransforms
 lbl_fn_800629F0_00001BCC:
     addi r11, r1, 0x30
     psq_l f31, 0x38(r1), 0, 0
@@ -2191,7 +2191,7 @@ lbl_fn_80062C8C_00001E2C:
     stw r31, 0x8(r30)
     stb r0, 0x18(r30)
     lwz r3, lbl_8087EFB4
-    bl fn_800BDB58
+    bl model_updateBoneTransforms
 lbl_fn_80062C8C_00001E74:
     addi r11, r1, 0x80
     psq_l f31, 0x118(r1), 0, 0
@@ -2368,7 +2368,7 @@ lbl_fn_80062F7C_00002084:
     stw r30, 0x8(r31)
     stb r0, 0x18(r31)
     lwz r3, lbl_8087EFB4
-    bl fn_800BDB58
+    bl model_updateBoneTransforms
 lbl_fn_80062F7C_00002108:
     lwz r0, 0xd4(r1)
     psq_l f31, 0xc8(r1), 0, 0

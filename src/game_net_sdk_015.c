@@ -16,7 +16,7 @@ extern void snprintf(void);
 extern void fn_806A4260(void);
 extern void fn_806A475C(void);
 extern void fn_806A6CA0(void);
-extern void fn_806A7130(void);
+extern void net_checkConnectionSession(void);
 extern void fn_806A7400(void);
 extern void net_formatLog(void);
 extern void fn_806A9CA0(void);
@@ -248,7 +248,7 @@ lbl_fn_806BAE10_000001FC:
     mr r3, r30
     stb r0, 0x751(r5)
     subi r4, r4, 0x3880
-    bl fn_806A7130
+    bl net_checkConnectionSession
     lwz r6, lbl_80860898@l(r28)
     addi r3, r1, 0x14
     addi r5, r31, 0x5c
@@ -413,7 +413,7 @@ lbl_fn_806BAE10_00000464:
     li r3, 0x19
     stb r0, 0x751(r5)
     subi r4, r4, 0x3a2e
-    bl fn_806A7130
+    bl net_checkConnectionSession
     lwz r6, lbl_80860898@l(r28)
     addi r3, r1, 0x8
     addi r5, r31, 0x5c

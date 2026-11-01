@@ -3,7 +3,7 @@
 
 /* External function declarations */
 extern void vec3_mag(void);
-extern void fn_8000D9E8(void);
+extern void scene_transformPoint(void);
 extern void vec3_toEulerAngles(void);
 extern void vec3_sub(void);
 extern void fn_800133B0(void);
@@ -1035,7 +1035,7 @@ asm void fn_802FFFF8(void)
 lbl_fn_802FFFF8_00000D84:
     bl equip_getGlobalManager
     bl fn_8013C504
-    bl fn_8000D9E8
+    bl scene_transformPoint
     bl fn_802A36B0
     lfs f28, lbl_80884AB0
     addic. r0, r29, 0x150c

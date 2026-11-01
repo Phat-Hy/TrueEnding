@@ -27,7 +27,7 @@ extern void quest_checkCondition(void);
 extern void fn_8016E800(void);
 extern void save_validateHeader(void);
 extern void save_createWorkerTask(void);
-extern void fn_801F6D7C(void);
+extern void save_verifyBlockCrc(void);
 extern void thread_dispatchToQueue(void);
 extern void profile_getMetricValue(void);
 extern void fn_8020787C(void);
@@ -1198,24 +1198,24 @@ lbl_fn_801E8534_00000F7C:
     psq_st f1, 0x0(r6), 0, 0
     fadds f1, f7, f0
     lwz r3, 0x474(r31)
-    bl fn_801F6D7C
+    bl save_verifyBlockCrc
     lfs f7, 0x130(r1)
     addi r4, r30, 0x3b
     lfs f0, 0x14(r1)
     li r5, 0x1
     lwz r3, 0x474(r31)
     fadds f1, f7, f0
-    bl fn_801F6D7C
+    bl save_verifyBlockCrc
     lwz r3, 0x474(r31)
     addi r4, r30, 0x3b
     lfs f1, 0x8(r1)
     li r5, 0x2
-    bl fn_801F6D7C
+    bl save_verifyBlockCrc
     lwz r3, 0x474(r31)
     addi r4, r30, 0x3b
     lfs f1, 0xc(r1)
     li r5, 0x3
-    bl fn_801F6D7C
+    bl save_verifyBlockCrc
     lwz r3, 0x474(r31)
     li r5, 0x4
     lwz r4, 0x4c(r31)

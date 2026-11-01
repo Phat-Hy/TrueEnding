@@ -35,7 +35,7 @@ extern void fn_801696E0(void);
 extern void fn_8016CDB8(void);
 extern void fn_8016D3F8(void);
 extern void fn_801781B0(void);
-extern void fn_80206B9C(void);
+extern void game_initGlobalDatabases(void);
 extern void event_findEntryById(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
@@ -1086,7 +1086,7 @@ lbl_fn_803A3FFC_00000D00:
     li r10, 0x1
     bl fn_804439FC
     lwz r3, 0x8(r30)
-    bl fn_80206B9C
+    bl game_initGlobalDatabases
     cmpwi r3, 0x0
     beq lbl_fn_803A3FFC_00000E40
     lwz r0, 0xc(r1)

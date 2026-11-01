@@ -33,7 +33,7 @@ extern void str_findChar(void);
 extern void fn_800DFB40(void);
 extern void fn_800E0908(void);
 extern void save_validateHeader(void);
-extern void fn_801F4728(void);
+extern void save_parseSlotHeader(void);
 extern void save_formatSlotTitle(void);
 extern void fn_801F4DDC(void);
 extern void fn_801F4E30(void);
@@ -1756,7 +1756,7 @@ lbl_fn_8046AE7C_000016E0:
     lwz r3, 0x54(r27)
     addi r4, r23, 0x134
     addi r5, r1, 0x78
-    bl fn_801F4728
+    bl save_parseSlotHeader
     lwz r4, 0x60(r27)
     mr r3, r25
     lfs f31, 0x7c(r24)
@@ -1769,7 +1769,7 @@ lbl_fn_8046AE7C_000016E0:
     lwz r3, 0x60(r27)
     addi r4, r23, 0x134
     addi r5, r1, 0x64
-    bl fn_801F4728
+    bl save_parseSlotHeader
     addi r28, r28, 0x1
     addi r27, r27, 0x4
     cmpwi r28, 0x3

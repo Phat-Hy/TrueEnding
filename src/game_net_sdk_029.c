@@ -65,7 +65,7 @@ extern void fn_806E8650(void);
 extern void fn_806E8B10(void);
 extern void fn_806E8B60(void);
 extern void fn_806E8D30(void);
-extern void fn_806E8E10(void);
+extern void net_formatPlayerInfo(void);
 extern void net_setTaggedString(void);
 extern void net_copyStringSafe(void);
 extern void memmove(void);
@@ -463,7 +463,7 @@ lbl_fn_806DBCC0_00000500:
     addi r4, r29, 0x58
     addi r5, r28, 0x614
     li r6, 0x19
-    bl fn_806E8E10
+    bl net_formatPlayerInfo
     b lbl_fn_806DBCC0_00000608
 lbl_fn_806DBCC0_00000548:
     mr r3, r26
@@ -714,7 +714,7 @@ asm void fn_806DC260(void)
     addi r4, r30, 0x0
     addi r5, r1, 0x188
     li r6, 0x1000
-    bl fn_806E8E10
+    bl net_formatPlayerInfo
     cmpwi r3, 0x0
     bne lbl_fn_806DC260_000008F0
     mr r3, r26
@@ -735,7 +735,7 @@ lbl_fn_806DC260_000008F0:
     addi r4, r30, 0x38
     addi r5, r1, 0x188
     li r6, 0x1000
-    bl fn_806E8E10
+    bl net_formatPlayerInfo
     cmpwi r3, 0x0
     bne lbl_fn_806DC260_00000940
     mr r3, r26
@@ -756,7 +756,7 @@ lbl_fn_806DC260_00000940:
     addi r4, r30, 0x3c
     addi r5, r1, 0x188
     li r6, 0x1000
-    bl fn_806E8E10
+    bl net_formatPlayerInfo
     cmpwi r3, 0x0
     beq lbl_fn_806DC260_00000978
     addi r3, r1, 0x188
@@ -815,7 +815,7 @@ lbl_fn_806DC260_00000A1C:
     addi r4, r30, 0x54
     addi r5, r1, 0x188
     li r6, 0x1000
-    bl fn_806E8E10
+    bl net_formatPlayerInfo
     cmpwi r3, 0x0
     bne lbl_fn_806DC260_00000A60
     mr r3, r26
@@ -881,7 +881,7 @@ lbl_fn_806DC260_00000B14:
     addi r4, r30, 0x54
     addi r5, r1, 0x188
     li r6, 0x1000
-    bl fn_806E8E10
+    bl net_formatPlayerInfo
     cmpwi r3, 0x0
     bne lbl_fn_806DC260_00000B58
     mr r3, r26
@@ -942,7 +942,7 @@ lbl_fn_806DC260_00000BF8:
     addi r4, r30, 0x54
     addi r5, r1, 0x188
     li r6, 0x1000
-    bl fn_806E8E10
+    bl net_formatPlayerInfo
     cmpwi r3, 0x0
     bne lbl_fn_806DC260_00000C3C
     mr r3, r26
@@ -1162,7 +1162,7 @@ lbl_fn_806DC260_00000F2C:
     addi r4, r30, 0x54
     addi r5, r1, 0x188
     li r6, 0x1000
-    bl fn_806E8E10
+    bl net_formatPlayerInfo
     cmpwi r3, 0x0
     bne lbl_fn_806DC260_00000F74
     mr r3, r26
@@ -1180,7 +1180,7 @@ lbl_fn_806DC260_00000F74:
     addi r4, r30, 0x68
     addi r5, r1, 0x78
     li r6, 0x10
-    bl fn_806E8E10
+    bl net_formatPlayerInfo
     cmpwi r3, 0x0
     bne lbl_fn_806DC260_00000FB8
     mr r3, r26
@@ -1205,7 +1205,7 @@ lbl_fn_806DC260_00000FB8:
     addi r4, r30, 0x6c
     addi r5, r1, 0x88
     li r6, 0x100
-    bl fn_806E8E10
+    bl net_formatPlayerInfo
     cmpwi r3, 0x0
     bne lbl_fn_806DC260_00000FF4
     stb r27, 0x88(r1)
@@ -1229,7 +1229,7 @@ lbl_fn_806DC260_0000101C:
     addi r4, r30, 0x74
     addi r5, r1, 0x88
     li r6, 0x100
-    bl fn_806E8E10
+    bl net_formatPlayerInfo
     cmpwi r3, 0x0
     bne lbl_fn_806DC260_0000104C
     stb r27, 0x88(r1)
@@ -1249,7 +1249,7 @@ lbl_fn_806DC260_00001074:
     addi r4, r30, 0x7c
     addi r5, r1, 0x78
     li r6, 0x10
-    bl fn_806E8E10
+    bl net_formatPlayerInfo
     cmpwi r3, 0x0
     bne lbl_fn_806DC260_0000109C
     li r0, 0x0
@@ -1265,7 +1265,7 @@ lbl_fn_806DC260_000010AC:
     addi r4, r30, 0x84
     addi r5, r1, 0x78
     li r6, 0x10
-    bl fn_806E8E10
+    bl net_formatPlayerInfo
     cmpwi r3, 0x0
     bne lbl_fn_806DC260_000010D4
     li r0, 0x0
@@ -1282,7 +1282,7 @@ lbl_fn_806DC260_000010E8:
     addi r4, r30, 0x88
     addi r5, r1, 0x78
     li r6, 0x10
-    bl fn_806E8E10
+    bl net_formatPlayerInfo
     cmpwi r3, 0x0
     bne lbl_fn_806DC260_00001110
     li r0, 0x0
@@ -1331,7 +1331,7 @@ lbl_fn_806DC260_0000119C:
     addi r4, r30, 0x54
     addi r5, r1, 0x188
     li r6, 0x1000
-    bl fn_806E8E10
+    bl net_formatPlayerInfo
     cmpwi r3, 0x0
     bne lbl_fn_806DC260_000011E0
     mr r3, r26
@@ -1434,7 +1434,7 @@ lbl_fn_806DC260_0000131C:
     addi r4, r30, 0x54
     addi r5, r1, 0x188
     li r6, 0x1000
-    bl fn_806E8E10
+    bl net_formatPlayerInfo
     cmpwi r3, 0x0
     bne lbl_fn_806DC260_00001360
     mr r3, r26
@@ -1486,7 +1486,7 @@ asm void fn_806DCD80(void)
     addi r4, r30, 0x98
     addi r5, r1, 0x18
     li r6, 0x400
-    bl fn_806E8E10
+    bl net_formatPlayerInfo
     cmpwi r3, 0x0
     bne lbl_fn_806DCD80_0000141C
     mr r3, r26
@@ -1577,7 +1577,7 @@ lbl_fn_806DCD80_0000152C:
     addi r4, r30, 0xa8
     addi r5, r1, 0x18
     li r6, 0x400
-    bl fn_806E8E10
+    bl net_formatPlayerInfo
     cmpwi r3, 0x0
     bne lbl_fn_806DCD80_00001570
     mr r3, r26
@@ -1598,7 +1598,7 @@ lbl_fn_806DCD80_00001570:
     addi r4, r30, 0xb0
     addi r5, r1, 0x18
     li r6, 0x400
-    bl fn_806E8E10
+    bl net_formatPlayerInfo
     cmpwi r3, 0x0
     bne lbl_fn_806DCD80_000015C0
     mr r3, r26
@@ -1620,7 +1620,7 @@ lbl_fn_806DCD80_000015C0:
     addi r4, r30, 0xb8
     addi r5, r1, 0x18
     li r6, 0x400
-    bl fn_806E8E10
+    bl net_formatPlayerInfo
     cmpwi r3, 0x0
     bne lbl_fn_806DCD80_00001614
     mr r3, r26
@@ -1641,7 +1641,7 @@ lbl_fn_806DCD80_00001614:
     addi r4, r30, 0xc0
     addi r5, r1, 0x18
     li r6, 0x400
-    bl fn_806E8E10
+    bl net_formatPlayerInfo
     cmpwi r3, 0x0
     bne lbl_fn_806DCD80_00001664
     mr r3, r26
@@ -1663,7 +1663,7 @@ lbl_fn_806DCD80_00001664:
     addi r4, r30, 0xcc
     addi r5, r1, 0x18
     li r6, 0x400
-    bl fn_806E8E10
+    bl net_formatPlayerInfo
     cmpwi r3, 0x0
     bne lbl_fn_806DCD80_000016B8
     mr r3, r26
@@ -1685,7 +1685,7 @@ lbl_fn_806DCD80_000016B8:
     addi r4, r30, 0xd8
     addi r5, r1, 0x18
     li r6, 0x400
-    bl fn_806E8E10
+    bl net_formatPlayerInfo
     cmpwi r3, 0x0
     bne lbl_fn_806DCD80_0000170C
     mr r3, r26
@@ -1706,7 +1706,7 @@ lbl_fn_806DCD80_0000170C:
     addi r4, r30, 0xe0
     addi r5, r1, 0x18
     li r6, 0x400
-    bl fn_806E8E10
+    bl net_formatPlayerInfo
     cmpwi r3, 0x0
     bne lbl_fn_806DCD80_0000175C
     mr r3, r26
@@ -1727,7 +1727,7 @@ lbl_fn_806DCD80_0000175C:
     addi r4, r30, 0xe8
     addi r5, r1, 0x18
     li r6, 0x400
-    bl fn_806E8E10
+    bl net_formatPlayerInfo
     cmpwi r3, 0x0
     bne lbl_fn_806DCD80_000017AC
     mr r3, r26
@@ -1752,7 +1752,7 @@ lbl_fn_806DCD80_000017AC:
     addi r4, r30, 0xf4
     addi r5, r1, 0x18
     li r6, 0x400
-    bl fn_806E8E10
+    bl net_formatPlayerInfo
     cmpwi r3, 0x0
     bne lbl_fn_806DCD80_0000180C
     mr r3, r26
@@ -1776,7 +1776,7 @@ lbl_fn_806DCD80_0000180C:
     addi r4, r30, 0x100
     addi r5, r1, 0x18
     li r6, 0x400
-    bl fn_806E8E10
+    bl net_formatPlayerInfo
     cmpwi r3, 0x0
     bne lbl_fn_806DCD80_00001868
     mr r3, r26
@@ -1800,7 +1800,7 @@ lbl_fn_806DCD80_00001868:
     addi r4, r30, 0x10c
     addi r5, r1, 0x18
     li r6, 0x400
-    bl fn_806E8E10
+    bl net_formatPlayerInfo
     cmpwi r3, 0x0
     bne lbl_fn_806DCD80_000018C4
     mr r3, r26
@@ -1824,7 +1824,7 @@ lbl_fn_806DCD80_000018C4:
     addi r4, r30, 0x118
     addi r5, r1, 0x18
     li r6, 0x400
-    bl fn_806E8E10
+    bl net_formatPlayerInfo
     cmpwi r3, 0x0
     bne lbl_fn_806DCD80_00001920
     mr r3, r26
@@ -1845,7 +1845,7 @@ lbl_fn_806DCD80_00001920:
     addi r4, r30, 0x124
     addi r5, r1, 0x18
     li r6, 0x400
-    bl fn_806E8E10
+    bl net_formatPlayerInfo
     cmpwi r3, 0x0
     bne lbl_fn_806DCD80_00001970
     mr r3, r26
@@ -1866,7 +1866,7 @@ lbl_fn_806DCD80_00001970:
     addi r4, r30, 0x130
     addi r5, r1, 0x18
     li r6, 0x400
-    bl fn_806E8E10
+    bl net_formatPlayerInfo
     cmpwi r3, 0x0
     bne lbl_fn_806DCD80_000019C0
     mr r3, r26

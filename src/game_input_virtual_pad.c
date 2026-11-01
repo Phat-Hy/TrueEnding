@@ -11,7 +11,7 @@ extern void ref_releaseHandle(void);
 extern void fn_800EB7A0(void);
 extern void fn_800EE360(void);
 extern void system_getNextSequenceId(void);
-extern void fn_8013322C(void);
+extern void actor_testBitFlag(void);
 extern void fn_801426A4(void);
 extern void actor_setState(void);
 extern void fn_8017039C(void);
@@ -1478,7 +1478,7 @@ lbl_fn_802F59D8_00001458:
     bne lbl_fn_802F59D8_0000150C
     addi r3, r31, 0x7d4
     li r4, 0x20
-    bl fn_8013322C
+    bl actor_testBitFlag
     lwz r3, 0x14ec(r31)
     li r0, 0x0
     lfs f0, lbl_808848FC

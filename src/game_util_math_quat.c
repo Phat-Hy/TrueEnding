@@ -34,7 +34,7 @@ extern void fn_801F8598(void);
 extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
 extern void thread_dispatchToQueue(void);
-extern void fn_80206B9C(void);
+extern void game_initGlobalDatabases(void);
 extern void assert_formatLocation(void);
 extern void fn_8020ED84(void);
 extern void fn_8020EF04(void);
@@ -1271,7 +1271,7 @@ asm void fn_80581574(void)
     mr r31, r3
     beq lbl_fn_80581574_000010D0
     lwz r3, 0x4(r3)
-    bl fn_80206B9C
+    bl game_initGlobalDatabases
     cmpwi r3, 0x0
     beq lbl_fn_80581574_00001088
     cmpwi r30, 0x0

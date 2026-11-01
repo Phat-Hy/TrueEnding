@@ -28,7 +28,7 @@ extern void map_processTrigger(void);
 extern void fn_80092954(void);
 extern void lockon_updateTarget(void);
 extern void fn_800971D4(void);
-extern void fn_800BDB58(void);
+extern void model_updateBoneTransforms(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
@@ -3256,7 +3256,7 @@ lbl_fn_804A894C_00002B9C:
     lwz r3, lbl_8087EFB4
     li r5, 0x2
     lfs f1, lbl_80887250
-    bl fn_800BDB58
+    bl model_updateBoneTransforms
     cmpwi r24, 0x0
     beq lbl_fn_804A894C_00002BB8
     addi r24, r24, 0x48
@@ -3265,7 +3265,7 @@ lbl_fn_804A894C_00002BB8:
     mr r4, r24
     lfs f1, lbl_80887250
     li r5, 0x10
-    bl fn_800BDB58
+    bl model_updateBoneTransforms
 lbl_fn_804A894C_00002BCC:
     addi r11, r1, 0x3e0
     psq_l f31, 0x4b8(r1), 0, 0

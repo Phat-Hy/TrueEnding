@@ -13,7 +13,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_8012476C(void);
 extern void fn_8013310C(void);
-extern void fn_8013322C(void);
+extern void actor_testBitFlag(void);
 extern void fn_801446F0(void);
 extern void inventory_unequipItem(void);
 extern void inventory_calcTotalStats(void);
@@ -206,7 +206,7 @@ asm void fn_80191A44(void)
     stw r0, 0x560(r5)
     lwz r3, 0x4(r3)
     addi r3, r3, 0x7d4
-    bl fn_8013322C
+    bl actor_testBitFlag
     lwz r3, 0x4(r30)
     li r0, 0x1
     lfs f0, lbl_80881F7C
@@ -487,7 +487,7 @@ asm void fn_80191E38(void)
     stw r5, 0x0(r3)
     addi r3, r4, 0x7d4
     lis r4, 0x2
-    bl fn_8013322C
+    bl actor_testBitFlag
     cmpwi r31, 0x0
     ble lbl_fn_80191E38_00000528
     mr r3, r30
@@ -705,7 +705,7 @@ asm void fn_80192130(void)
     stw r0, 0x560(r5)
     lwz r3, 0x4(r3)
     addi r3, r3, 0x7d4
-    bl fn_8013322C
+    bl actor_testBitFlag
     mr r3, r31
     lwz r31, 0xc(r1)
     lwz r0, 0x14(r1)

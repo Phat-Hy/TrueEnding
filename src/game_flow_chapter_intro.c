@@ -22,7 +22,7 @@ extern void battle_canTargetActor(void);
 extern void fn_80178668(void);
 extern void fn_80178864(void);
 extern void fn_8017C7F8(void);
-extern void fn_80206B9C(void);
+extern void game_initGlobalDatabases(void);
 extern void fn_8020EF04(void);
 extern void event_findEntryById(void);
 extern void task_findEntryById(void);
@@ -323,7 +323,7 @@ lbl_fn_804E4490_000002E4:
     li r0, 0x1
     stw r3, -0x698c(r4)
     stw r0, -0x6988(r4)
-    bl fn_80206B9C
+    bl game_initGlobalDatabases
     cmpwi r3, 0x0
     bne lbl_fn_804E4490_00000328
     addis r3, r28, 0x1

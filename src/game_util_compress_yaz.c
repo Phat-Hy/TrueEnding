@@ -15,7 +15,7 @@ extern void fn_801347C8(void);
 extern void dialog_selectChoice(void);
 extern void fn_8014EEC4(void);
 extern void fn_8014F5D4(void);
-extern void fn_80206B9C(void);
+extern void game_initGlobalDatabases(void);
 extern void assert_formatLocation(void);
 extern void fn_8020ED84(void);
 extern void fn_8020EF04(void);
@@ -1202,7 +1202,7 @@ lbl_fn_8058BE7C_00000FE4:
     b lbl_fn_8058BE7C_000010F0
 lbl_fn_8058BE7C_00000FF8:
     mr r3, r29
-    bl fn_80206B9C
+    bl game_initGlobalDatabases
     cmpwi r3, 0x0
     beq lbl_fn_8058BE7C_000010F0
     mr r3, r29

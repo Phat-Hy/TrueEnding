@@ -9,7 +9,7 @@ extern void dtor_80013D60(void);
 extern void dtor_80084684(void);
 extern void vec3_set(void);
 extern void fn_8000D760(void);
-extern void fn_8000D9E8(void);
+extern void scene_transformPoint(void);
 extern void fn_8000DCF4(void);
 extern void fn_8000DD0C(void);
 extern void str_initFromCStr(void);
@@ -1511,7 +1511,7 @@ lbl_fn_80338FD0_00001290:
 lbl_fn_80338FD0_000012A0:
     lwz r0, 0x16c4(r31)
     stw r0, 0x16c0(r31)
-    bl fn_8000D9E8
+    bl scene_transformPoint
     li r4, 0x4
     bl fn_8054A340
     lwz r4, 0x14d8(r31)
@@ -1712,7 +1712,7 @@ lbl_fn_80339760_00001524:
     lwz r0, 0x14b0(r31)
     cmpwi r0, 0x0
     bne lbl_fn_80339760_00001568
-    bl fn_8000D9E8
+    bl scene_transformPoint
     bl fn_8000DCF4
     stw r3, 0x14b0(r31)
     stw r3, 0xd1c(r31)
@@ -1752,7 +1752,7 @@ lbl_fn_80339760_000015CC:
     bl fn_80341E14
     mr r3, r31
     bl fn_80344BB4
-    bl fn_8000D9E8
+    bl scene_transformPoint
     bl fn_802A36B0
     mr r29, r3
     b lbl_fn_80339760_00001634
@@ -1922,7 +1922,7 @@ lbl_fn_80339760_00001834:
     li r0, 0x1
     stb r0, 0x14c8(r31)
 lbl_fn_80339760_00001860:
-    bl fn_8000D9E8
+    bl scene_transformPoint
     bl fn_8000DCF4
     lwz r0, 0xd18(r31)
     li r30, 0x0
@@ -2031,7 +2031,7 @@ lbl_fn_80339760_000019E4:
     bl equip_getGlobalManager
     bl kpad_getClampData
     mr r28, r3
-    bl fn_8000D9E8
+    bl scene_transformPoint
     bl fn_8000DCF4
     bl npc_getPosition
     lfs f2, 0x4(r3)

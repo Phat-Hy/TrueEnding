@@ -24,7 +24,7 @@ extern void str_findChar(void);
 extern void wcs_vformat(void);
 extern void actor_spawnActorWithId(void);
 extern void save_validateHeader(void);
-extern void fn_801F4728(void);
+extern void save_parseSlotHeader(void);
 extern void fn_801F4C14(void);
 extern void saveSlot_readSummary(void);
 extern void fn_801FEC74(void);
@@ -1097,7 +1097,7 @@ lbl_fn_804BA82C_00000D2C:
     stfs f1, 0x18(r1)
     stfs f0, 0x14(r1)
     lwz r3, 0x80(r29)
-    bl fn_801F4728
+    bl save_parseSlotHeader
     lwz r4, 0x80(r29)
     addi r3, r31, 0x16d
     addi r30, r4, 0x58
@@ -1551,7 +1551,7 @@ lbl_fn_804BA970_00001398:
     stfs f1, 0x44(r1)
     stfs f0, 0x40(r1)
     lwz r3, 0x80(r27)
-    bl fn_801F4728
+    bl save_parseSlotHeader
     lwz r4, 0x80(r27)
     addi r3, r28, 0x16d
     addi r27, r4, 0x58
@@ -2143,7 +2143,7 @@ lbl_fn_804BB2CC_00001C24:
     stfs f1, 0x6c(r1)
     stfs f0, 0x70(r1)
     lwz r3, 0x50(r30)
-    bl fn_801F4728
+    bl save_parseSlotHeader
     lwz r0, 0x100(r27)
     cmplw r15, r0
     bge lbl_fn_804BB2CC_00001F1C

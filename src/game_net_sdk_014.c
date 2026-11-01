@@ -18,7 +18,7 @@ extern void fn_8068446C(void);
 extern void fn_806A4264(void);
 extern void fn_806A4270(void);
 extern void fn_806A6E40(void);
-extern void fn_806A7130(void);
+extern void net_checkConnectionSession(void);
 extern void net_formatLog(void);
 extern void fn_806AB920(void);
 extern void http_formatParam(void);
@@ -352,7 +352,7 @@ lbl_fn_806B85B0_000003AC:
     li r3, 0x6
     stb r0, 0x751(r5)
     subi r4, r4, 0x543c
-    bl fn_806A7130
+    bl net_checkConnectionSession
     lwz r6, lbl_80860898@l(r24)
     addi r3, r1, 0x14
     addi r5, r30, 0x5c
@@ -536,7 +536,7 @@ lbl_fn_806B85B0_00000638:
     li r3, 0x6
     stb r24, 0x751(r5)
     subi r4, r4, 0x3a1a
-    bl fn_806A7130
+    bl net_checkConnectionSession
     lwz r6, lbl_80860898@l(r31)
     addi r3, r1, 0x8
     addi r5, r30, 0x5c
@@ -1007,7 +1007,7 @@ lbl_fn_806B8D60_00000D08:
     li r3, 0x6
     stb r0, 0x751(r5)
     subi r4, r4, 0x543c
-    bl fn_806A7130
+    bl net_checkConnectionSession
     lwz r6, lbl_80860898@l(r30)
     addi r3, r1, 0x8
     addi r5, r31, 0x5c
@@ -1276,7 +1276,7 @@ lbl_fn_806B9500_0000111C:
     mr r3, r30
     mr r4, r28
     stb r0, 0x751(r5)
-    bl fn_806A7130
+    bl net_checkConnectionSession
     lwz r6, lbl_80860898@l(r29)
     addi r3, r1, 0x8
     addi r5, r31, 0x5c

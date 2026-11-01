@@ -9,7 +9,7 @@ extern void wcs_vformat(void);
 extern void fn_80108C10(void);
 extern void fn_801092C8(void);
 extern void fn_80206B14(void);
-extern void fn_80206B9C(void);
+extern void game_initGlobalDatabases(void);
 extern void assert_generateId(void);
 extern void assert_formatLocation(void);
 extern void fn_802085E0(void);
@@ -243,7 +243,7 @@ lbl_fn_804439FC_000001F4:
 lbl_fn_804439FC_00000210:
     lwz r3, 0x8(r1)
     li r29, 0x1
-    bl fn_80206B9C
+    bl game_initGlobalDatabases
     cmpwi r3, 0x0
     beq lbl_fn_804439FC_00000344
     cmpwi r23, 0x0
@@ -256,7 +256,7 @@ lbl_fn_804439FC_0000023C:
     lwz r23, 0x8(r1)
     li r24, 0x64
     mr r3, r23
-    bl fn_80206B9C
+    bl game_initGlobalDatabases
     cmpwi r3, 0x0
     beq lbl_fn_804439FC_00000314
     mr r3, r23
@@ -329,7 +329,7 @@ lbl_fn_804439FC_00000314:
     li r29, 0x0
 lbl_fn_804439FC_00000344:
     lwz r3, 0x8(r1)
-    bl fn_80206B9C
+    bl game_initGlobalDatabases
     cmpwi r3, 0x0
     bne lbl_fn_804439FC_00000364
     lwz r3, 0x8(r1)
@@ -526,7 +526,7 @@ lbl_fn_804439FC_000005FC:
     bl fn_803750E4
 lbl_fn_804439FC_00000614:
     lwz r3, 0x8(r1)
-    bl fn_80206B9C
+    bl game_initGlobalDatabases
     cmpwi r3, 0x0
     bne lbl_fn_804439FC_00000634
     lwz r3, 0x8(r1)
@@ -554,7 +554,7 @@ lbl_fn_804439FC_00000654:
     bl fn_803750E4
 lbl_fn_804439FC_00000678:
     lwz r3, 0x8(r1)
-    bl fn_80206B9C
+    bl game_initGlobalDatabases
     cmpwi r3, 0x0
     beq lbl_fn_804439FC_000006BC
     lwz r3, 0x8(r1)
@@ -602,7 +602,7 @@ lbl_fn_804439FC_0000071C:
     bl fn_803750E4
 lbl_fn_804439FC_00000728:
     lwz r3, 0x8(r1)
-    bl fn_80206B9C
+    bl game_initGlobalDatabases
     cmpwi r3, 0x0
     beq lbl_fn_804439FC_0000079C
     lwz r3, 0x8(r1)
@@ -839,7 +839,7 @@ lbl_fn_80444020_00000A20:
     cmpwi r25, 0x0
     beq lbl_fn_80444020_00000AD0
     lwz r3, 0x10(r1)
-    bl fn_80206B9C
+    bl game_initGlobalDatabases
     cmpwi r3, 0x0
     beq lbl_fn_80444020_00000AAC
     lwz r0, 0x8(r1)
@@ -1065,7 +1065,7 @@ lbl_fn_80444564_00000D30:
     lwz r28, 0x4(r3)
 lbl_fn_80444564_00000D3C:
     mr r3, r31
-    bl fn_80206B9C
+    bl game_initGlobalDatabases
     cmpwi r3, 0x0
     beq lbl_fn_80444564_00000DC8
     li r27, 0x0
@@ -1661,7 +1661,7 @@ lbl_fn_80444CF8_000014E8:
     b lbl_fn_80444CF8_00001670
 lbl_fn_80444CF8_000014F0:
     lwz r3, 0x4(r3)
-    bl fn_80206B9C
+    bl game_initGlobalDatabases
     cmpwi r3, 0x0
     beq lbl_fn_80444CF8_00001590
     cmpwi r30, 0x0

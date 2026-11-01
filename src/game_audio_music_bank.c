@@ -35,7 +35,7 @@ extern void fn_800F8524(void);
 extern void fn_801162A0(void);
 extern void skill_findNodeById(void);
 extern void equip_getGlobalManager(void);
-extern void fn_8013322C(void);
+extern void actor_testBitFlag(void);
 extern void boss_updatePhaseState(void);
 extern void fn_8013C504(void);
 extern void quest_updateFlow(void);
@@ -290,7 +290,7 @@ lbl_fn_8030A848_00000248:
     stfs f0, 0x504(r30)
     stfs f0, 0x508(r30)
     stw r0, 0x14b4(r30)
-    bl fn_8013322C
+    bl actor_testBitFlag
     lbz r0, 0x150d(r30)
     cmpwi r0, 0x0
     beq lbl_fn_8030A848_000002D0

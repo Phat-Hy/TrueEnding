@@ -21,7 +21,7 @@ extern void fn_80088AF4(void);
 extern void node_createNamedChild(void);
 extern void node_destroy(void);
 extern void fn_800BDB40(void);
-extern void fn_800BDB58(void);
+extern void model_updateBoneTransforms(void);
 extern void motion_updateFogAdj(void);
 extern void fn_800C169C(void);
 extern void fn_800C2448(void);
@@ -458,7 +458,7 @@ asm void fn_80077534(void)
     lwz r3, lbl_8087EFB4
     lfs f1, lbl_80880AD0
     li r5, 0xc
-    b fn_800BDB58
+    b model_updateBoneTransforms
 }
 
 asm void atn_LensFlare_draw(void)

@@ -9,7 +9,7 @@ extern void _savegpr_25(void);
 extern void dtor_80084684(void);
 extern void vec3_copy(void);
 extern void fn_8000D760(void);
-extern void fn_8000D9E8(void);
+extern void scene_transformPoint(void);
 extern void fn_8000E18C(void);
 extern void vec3_toEulerAngles(void);
 extern void vec3_sub(void);
@@ -1631,7 +1631,7 @@ lbl_fn_802885EC_00001594:
     bl talk_parseQuotedString
     bl str_parseInt
     mr r29, r3
-    bl fn_8000D9E8
+    bl scene_transformPoint
     mr r4, r29
     bl fn_8011F91C
     stw r3, 0x1630(r31)

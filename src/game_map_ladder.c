@@ -19,7 +19,7 @@ extern void fn_80107798(void);
 extern void fn_80107860(void);
 extern void fn_8012476C(void);
 extern void fn_8013310C(void);
-extern void fn_8013322C(void);
+extern void actor_testBitFlag(void);
 extern void npc_updateTalkInteraction(void);
 extern void inventory_unequipItem(void);
 extern void fn_80154344(void);
@@ -1249,7 +1249,7 @@ lbl_fn_8018F254_00000EDC:
     stw r0, 0x560(r5)
     lwz r3, 0x4(r3)
     addi r3, r3, 0x7d4
-    bl fn_8013322C
+    bl actor_testBitFlag
     lwz r3, 0x4(r31)
     li r0, -0x1
     lfs f0, lbl_80881F70
@@ -1693,7 +1693,7 @@ asm void fn_8018FAAC(void)
     beq lbl_fn_8018FAAC_0000153C
     addi r3, r4, 0x7d4
     li r4, 0x80
-    bl fn_8013322C
+    bl actor_testBitFlag
     lwz r4, 0x4(r31)
     li r5, 0x1
     lwz r3, lbl_8087F048
@@ -1743,7 +1743,7 @@ asm void fn_8018FB0C(void)
     stw r0, 0x560(r5)
     lwz r3, 0x4(r3)
     addi r3, r3, 0x7d4
-    bl fn_8013322C
+    bl actor_testBitFlag
     lwz r4, 0x4(r31)
     li r5, 0x1
     lwz r3, lbl_8087F048
@@ -1993,7 +1993,7 @@ asm void fn_8018FEBC(void)
     stw r0, 0x560(r5)
     lwz r3, 0x4(r3)
     addi r3, r3, 0x7d4
-    bl fn_8013322C
+    bl actor_testBitFlag
     lwz r4, 0x4(r31)
     li r5, 0x1
     lwz r3, lbl_8087F048

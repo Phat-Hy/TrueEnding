@@ -24,7 +24,7 @@ extern void str_findChar(void);
 extern void actor_findSpawnTemplate(void);
 extern void actor_spawnActorWithId(void);
 extern void save_validateHeader(void);
-extern void fn_801F4728(void);
+extern void save_parseSlotHeader(void);
 extern void save_parseSlotStats(void);
 extern void save_formatSlotTitle(void);
 extern void saveSlot_readSummary(void);
@@ -38,7 +38,7 @@ extern void fn_801F8598(void);
 extern void thread_findAndNotify(void);
 extern void thread_dispatchToQueue(void);
 extern void fn_80206B14(void);
-extern void fn_80206B9C(void);
+extern void game_initGlobalDatabases(void);
 extern void assert_formatLocation(void);
 extern void fn_80206D18(void);
 extern void fn_8020924C(void);
@@ -960,7 +960,7 @@ asm void fn_805866F8(void)
     stfs f4, 0x78(r1)
     stfs f3, 0x7c(r1)
     stfs f0, 0x80(r1)
-    bl fn_801F4728
+    bl save_parseSlotHeader
     lwz r29, 0x8(r24)
     addi r3, r31, 0x18d
     addi r25, r26, 0x58
@@ -1035,7 +1035,7 @@ lbl_fn_805866F8_00000C9C:
     li r5, 0xc
     bl memset
     mr r3, r21
-    bl fn_80206B9C
+    bl game_initGlobalDatabases
     cmpwi r3, 0x0
     beq lbl_fn_805866F8_00000E40
     mr r3, r21

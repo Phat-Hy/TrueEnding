@@ -10,7 +10,7 @@ extern void dtor_80013D60(void);
 extern void dtor_80084684(void);
 extern void vec3_set(void);
 extern void vec3_copy(void);
-extern void fn_8000D9E8(void);
+extern void scene_transformPoint(void);
 extern void fn_8000D9F8(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void str_initFromCStr(void);
@@ -1698,7 +1698,7 @@ lbl_fn_8045374C_00001540:
     stfs f0, 0x10c(r1)
     stw r25, 0x110(r1)
     stw r25, 0x114(r1)
-    bl fn_8000D9E8
+    bl scene_transformPoint
     bl fn_802A36B0
     mr r24, r3
     li r30, 0xb4

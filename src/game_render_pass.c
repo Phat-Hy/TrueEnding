@@ -8,7 +8,7 @@ extern void _savegpr_25(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_8000D760(void);
-extern void fn_8000D9E8(void);
+extern void scene_transformPoint(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_80056DB8(void);
@@ -642,7 +642,7 @@ asm void fn_802A46E4(void)
     stw r31, 0xc(r1)
     mr r31, r3
     stw r30, 0x8(r1)
-    bl fn_8000D9E8
+    bl scene_transformPoint
     bl fn_802A36B0
     lwz r0, 0x15c8(r31)
     mr r30, r3

@@ -15,7 +15,7 @@ extern void vec3_copy(void);
 extern void vec3_mag(void);
 extern void fn_8000D3A8(void);
 extern void fn_8000D430(void);
-extern void fn_8000D9E8(void);
+extern void scene_transformPoint(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
 extern void fn_80011410(void);
@@ -2257,7 +2257,7 @@ lbl_fn_8041766C_00001CD8:
     bl fn_80417FF8
     b lbl_fn_8041766C_00001D14
 lbl_fn_8041766C_00001D04:
-    bl fn_8000D9E8
+    bl scene_transformPoint
     mr r4, r3
     addi r3, r1, 0x1a8
     bl fn_80417F40

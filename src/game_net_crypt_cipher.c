@@ -20,7 +20,7 @@ extern void bloom_processPasses(void);
 extern void str_findChar(void);
 extern void wcs_vformat(void);
 extern void save_validateHeader(void);
-extern void fn_801F4728(void);
+extern void save_parseSlotHeader(void);
 extern void fn_801F4998(void);
 extern void fn_801F4AA0(void);
 extern void thread_findAndNotify(void);
@@ -357,7 +357,7 @@ asm void fn_804B49C0(void)
     addi r6, r6, lbl_80757B7C@l
     lwz r3, 0xb8(r3)
     addi r4, r6, 0x4b1
-    b fn_801F4728
+    b save_parseSlotHeader
 }
 
 asm void fn_804B49E0(void)

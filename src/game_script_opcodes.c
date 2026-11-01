@@ -30,7 +30,7 @@ extern void fn_80105BD8(void);
 extern void skill_findNodeById(void);
 extern void equip_getGlobalManager(void);
 extern void enemy_updateCombatBehavior(void);
-extern void fn_8013322C(void);
+extern void actor_testBitFlag(void);
 extern void boss_updatePhaseState(void);
 extern void fn_8013A258(void);
 extern void fn_8013C504(void);
@@ -1853,7 +1853,7 @@ lbl_fn_80245BBC_00001848:
     addi r3, r31, 0x7d4
     stfs f0, 0x7d8(r31)
     li r4, 0x20
-    bl fn_8013322C
+    bl actor_testBitFlag
     li r0, 0x1
     stw r0, 0x15ac(r31)
 lbl_fn_80245BBC_00001880:

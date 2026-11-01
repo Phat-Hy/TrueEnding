@@ -8,7 +8,7 @@ extern void mtx_getTranslation(void);
 extern void vec3_set(void);
 extern void vec3_copy(void);
 extern void vec3_mag(void);
-extern void fn_8000D9E8(void);
+extern void scene_transformPoint(void);
 extern void fn_8000D9F8(void);
 extern void fn_8000DB1C(void);
 extern void fn_8000DCF4(void);
@@ -87,7 +87,7 @@ extern void save_parseSlotStats(void);
 extern void save_formatSlotTitle(void);
 extern void fn_801F6C2C(void);
 extern void save_computeCrc32(void);
-extern void fn_801F6D7C(void);
+extern void save_verifyBlockCrc(void);
 extern void save_findEntryByName(void);
 extern void fn_801F8598(void);
 extern void perf_getMetricValue(void);
@@ -668,7 +668,7 @@ lbl_fn_803D2A6C_0000054C:
 lbl_fn_803D2A6C_0000057C:
     li r29, 0x1
 lbl_fn_803D2A6C_00000580:
-    bl fn_8000D9E8
+    bl scene_transformPoint
     bl fn_8000DCF4
     mr r31, r3
     bl equip_getGlobalManager
@@ -695,7 +695,7 @@ lbl_fn_803D2A6C_000005C0:
     lfs f1, 0xc(r4)
     addi r4, r21, 0x10a2
     li r5, 0x0
-    bl fn_801F6D7C
+    bl save_verifyBlockCrc
     mr r4, r19
     addi r3, r24, 0x8d0
     bl fn_803D71F4
@@ -704,7 +704,7 @@ lbl_fn_803D2A6C_000005C0:
     lfs f1, 0x10(r4)
     addi r4, r21, 0x10a2
     li r5, 0x1
-    bl fn_801F6D7C
+    bl save_verifyBlockCrc
     mr r4, r19
     addi r3, r24, 0x8d0
     bl fn_803D71F4
@@ -713,7 +713,7 @@ lbl_fn_803D2A6C_000005C0:
     lwz r3, 0x8a0(r22)
     li r5, 0x2
     fmuls f1, f26, f0
-    bl fn_801F6D7C
+    bl save_verifyBlockCrc
     mr r4, r19
     addi r3, r24, 0x8d0
     bl fn_803D71F4
@@ -722,7 +722,7 @@ lbl_fn_803D2A6C_000005C0:
     lwz r3, 0x8a0(r22)
     li r5, 0x3
     fmuls f1, f26, f0
-    bl fn_801F6D7C
+    bl save_verifyBlockCrc
     addi r22, r22, 0x4
     addi r19, r19, 0x1
 lbl_fn_803D2A6C_00000660:
@@ -1480,12 +1480,12 @@ lbl_fn_803D2A6C_00001100:
     addi r4, r21, 0x10a2
     lfs f1, 0x434(r1)
     li r5, 0x0
-    bl fn_801F6D7C
+    bl save_verifyBlockCrc
     lwz r3, 0x84c(r22)
     addi r4, r21, 0x10a2
     lfs f1, 0x438(r1)
     li r5, 0x1
-    bl fn_801F6D7C
+    bl save_verifyBlockCrc
 lbl_fn_803D2A6C_00001174:
     addi r22, r22, 0x4
     addi r19, r19, 0x1
@@ -1652,12 +1652,12 @@ lbl_fn_803D2A6C_00001394:
     addi r4, r21, 0x10a2
     lfs f1, 0x3f8(r1)
     li r5, 0x0
-    bl fn_801F6D7C
+    bl save_verifyBlockCrc
     lwz r3, 0x878(r23)
     addi r4, r21, 0x10a2
     lfs f1, 0x3fc(r1)
     li r5, 0x1
-    bl fn_801F6D7C
+    bl save_verifyBlockCrc
     addi r23, r23, 0x4
     addi r19, r19, 0x1
 lbl_fn_803D2A6C_000013F8:
@@ -1822,7 +1822,7 @@ lbl_fn_803D2A6C_00001634:
     bl mission_updateStub
     addi r3, r1, 0x3d0
     bl mission_updateStub
-    bl fn_8000D9E8
+    bl scene_transformPoint
     bl fn_8000DCF4
     mr r19, r3
     bl fn_8000DD0C
@@ -2444,7 +2444,7 @@ lbl_fn_803D2A6C_00001E98:
     lfs f1, 0xc(r4)
     addi r4, r23, 0x10a2
     li r5, 0x0
-    bl fn_801F6D7C
+    bl save_verifyBlockCrc
     mr r4, r18
     addi r3, r24, 0x8d0
     bl fn_803D71F4
@@ -2453,7 +2453,7 @@ lbl_fn_803D2A6C_00001E98:
     lfs f1, 0x10(r4)
     addi r4, r23, 0x10a2
     li r5, 0x1
-    bl fn_801F6D7C
+    bl save_verifyBlockCrc
     mr r4, r18
     addi r3, r24, 0x8d0
     bl fn_803D71F4
@@ -2462,7 +2462,7 @@ lbl_fn_803D2A6C_00001E98:
     lwz r3, 0x8a0(r21)
     li r5, 0x2
     fmuls f1, f27, f0
-    bl fn_801F6D7C
+    bl save_verifyBlockCrc
     mr r4, r18
     addi r3, r24, 0x8d0
     bl fn_803D71F4
@@ -2471,7 +2471,7 @@ lbl_fn_803D2A6C_00001E98:
     lwz r3, 0x8a0(r21)
     li r5, 0x3
     fmuls f1, f27, f0
-    bl fn_801F6D7C
+    bl save_verifyBlockCrc
 lbl_fn_803D2A6C_00001FC0:
     addi r21, r21, 0x4
     addi r18, r18, 0x1
@@ -3128,19 +3128,19 @@ lbl_fn_803D2A6C_000028C4:
     lfs f1, lbl_80885D58
     addi r4, r23, 0x113e
     li r5, 0x0
-    bl fn_801F6D7C
+    bl save_verifyBlockCrc
     mr r3, r26
     bl perf_getMetricValue
     lfs f1, lbl_80885D58
     addi r4, r23, 0x113e
     li r5, 0x1
-    bl fn_801F6D7C
+    bl save_verifyBlockCrc
     mr r3, r26
     bl perf_getMetricValue
     fmr f1, f26
     addi r4, r23, 0x113e
     li r5, 0x4
-    bl fn_801F6D7C
+    bl save_verifyBlockCrc
     mr r3, r26
     bl perf_getMetricValue
     lfs f0, 0x378(r1)
@@ -3173,19 +3173,19 @@ lbl_fn_803D2A6C_000029B8:
     lfs f1, lbl_80885D58
     addi r4, r23, 0x113e
     li r5, 0x0
-    bl fn_801F6D7C
+    bl save_verifyBlockCrc
     mr r3, r27
     bl perf_getMetricValue
     lfs f1, lbl_80885D58
     addi r4, r23, 0x113e
     li r5, 0x1
-    bl fn_801F6D7C
+    bl save_verifyBlockCrc
     mr r3, r27
     bl perf_getMetricValue
     fmr f1, f26
     addi r4, r23, 0x113e
     li r5, 0x4
-    bl fn_801F6D7C
+    bl save_verifyBlockCrc
     mr r3, r27
     bl perf_getMetricValue
     lfs f0, 0x378(r1)
@@ -3637,11 +3637,11 @@ lbl_fn_803D2A6C_0000309C:
 lbl_fn_803D2A6C_000030BC:
     addi r3, r1, 0x320
     bl mission_updateStub
-    bl fn_8000D9E8
+    bl scene_transformPoint
     bl fn_8000DCF4
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_000030EC
-    bl fn_8000D9E8
+    bl scene_transformPoint
     bl fn_8000DCF4
     bl npc_getPosition
     mr r4, r3
@@ -3827,7 +3827,7 @@ lbl_fn_803D2A6C_00003368:
 lbl_fn_803D2A6C_00003374:
     cmpwi r19, 0x0
     bne lbl_fn_803D2A6C_00003150
-    bl fn_8000D9E8
+    bl scene_transformPoint
     bl fn_802A36B0
     lfs f27, lbl_80885E2C
     mr r19, r3
@@ -4033,12 +4033,12 @@ lbl_fn_803D2A6C_00003610:
     addi r4, r23, 0x10a2
     lfs f1, 0x308(r1)
     li r5, 0x0
-    bl fn_801F6D7C
+    bl save_verifyBlockCrc
     lwz r3, 0x574(r22)
     addi r4, r23, 0x10a2
     lfs f1, 0x30c(r1)
     li r5, 0x1
-    bl fn_801F6D7C
+    bl save_verifyBlockCrc
     lwz r3, 0x574(r22)
     addi r4, r23, 0x1192
     lfs f1, lbl_80885D58
@@ -4133,12 +4133,12 @@ lbl_fn_803D2A6C_000037C0:
     addi r4, r23, 0x10a2
     lfs f1, 0x308(r1)
     li r5, 0x0
-    bl fn_801F6D7C
+    bl save_verifyBlockCrc
     lwz r3, 0x594(r22)
     addi r4, r23, 0x10a2
     lfs f1, 0x30c(r1)
     li r5, 0x1
-    bl fn_801F6D7C
+    bl save_verifyBlockCrc
 lbl_fn_803D2A6C_00003800:
     addi r18, r18, 0x1
     addi r22, r22, 0x4
@@ -4209,12 +4209,12 @@ lbl_fn_803D2A6C_00003864:
     addi r4, r23, 0x10a2
     lfs f1, 0x2f0(r1)
     li r5, 0x0
-    bl fn_801F6D7C
+    bl save_verifyBlockCrc
     lwz r3, 0x6fc(r21)
     addi r4, r23, 0x10a2
     lfs f1, 0x2f4(r1)
     li r5, 0x1
-    bl fn_801F6D7C
+    bl save_verifyBlockCrc
     mr r3, r19
     bl fn_800F52F0
     bl fn_80139F4C
@@ -4362,12 +4362,12 @@ lbl_fn_803D2A6C_00003A84:
     addi r4, r23, 0x10a2
     lfs f1, 0x2f0(r1)
     li r5, 0x0
-    bl fn_801F6D7C
+    bl save_verifyBlockCrc
     lwz r3, 0x6fc(r21)
     addi r4, r23, 0x10a2
     lfs f1, 0x2f4(r1)
     li r5, 0x1
-    bl fn_801F6D7C
+    bl save_verifyBlockCrc
     mr r3, r19
     bl fn_800F52F0
     bl fn_80139F4C
@@ -4743,10 +4743,10 @@ lbl_fn_803D2A6C_000040DC:
     bne lbl_fn_803D2A6C_00004218
     lwz r3, 0xdb8(r24)
     bl fn_803D6E2C
-    bl fn_8000D9E8
+    bl scene_transformPoint
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00004118
-    bl fn_8000D9E8
+    bl scene_transformPoint
     bl fn_8000DCF4
     mr r25, r3
     b lbl_fn_803D2A6C_0000411C
@@ -4826,10 +4826,10 @@ lbl_fn_803D2A6C_00004218:
     bne lbl_fn_803D2A6C_000042F8
     lwz r3, 0xdbc(r24)
     bl fn_803D6E2C
-    bl fn_8000D9E8
+    bl scene_transformPoint
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00004254
-    bl fn_8000D9E8
+    bl scene_transformPoint
     bl fn_8000DCF4
     mr r25, r3
     b lbl_fn_803D2A6C_00004258

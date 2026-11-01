@@ -26,7 +26,7 @@ extern void fn_80107FC8(void);
 extern void fn_80108080(void);
 extern void fn_8011BEB8(void);
 extern void fn_8012DD70(void);
-extern void fn_8013322C(void);
+extern void actor_testBitFlag(void);
 extern void fn_8013539C(void);
 extern void fn_8014C228(void);
 extern void dialog_selectChoice(void);
@@ -542,7 +542,7 @@ lbl_fn_80153004_00000654:
 lbl_fn_80153004_00000658:
     addi r3, r30, 0x7d4
     li r4, 0x40
-    bl fn_8013322C
+    bl actor_testBitFlag
     li r0, -0x1
     stw r0, 0xf94(r30)
     lwz r3, lbl_8087F048

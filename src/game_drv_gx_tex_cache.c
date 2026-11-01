@@ -78,7 +78,7 @@ extern void GXInitLightDistAttn(void);
 extern void GXInitLightSpot(void);
 extern void fn_80617200(void);
 extern void GXSetTevColorIn(void);
-extern void fn_80617420(void);
+extern void GXSetTevColorOp(void);
 extern void GXSetTevIndirect(void);
 extern void fn_806174C0(void);
 extern void GXSetTevSwapMode(void);
@@ -1176,7 +1176,7 @@ asm void fn_805C3FE0(void)
     li r5, 0x7
     li r6, 0x7
     li r7, 0x1
-    bl fn_80617420
+    bl GXSetTevColorOp
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
