@@ -1023,16 +1023,12 @@ asm void fn_80135338(void)
     blr
 }
 
-asm void fn_8013537C(void)
+void fn_8013537C(void)
 {
-    nofralloc
-    blr
 }
 
-asm void fn_80135380(void)
+void fn_80135380(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_80135384(void)

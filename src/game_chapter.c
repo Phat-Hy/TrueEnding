@@ -362,10 +362,8 @@ lbl_fn_80077160_00000388:
     blr
 }
 
-asm void fn_80077418(void)
+void fn_80077418(void)
 {
-    nofralloc
-    blr
 }
 
 asm void atn_LensFlare_destructor(void)

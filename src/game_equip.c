@@ -325,10 +325,8 @@ lbl_fn_8005E000_00000380:
     blr
 }
 
-asm void fn_8005E3E0(void)
+void fn_8005E3E0(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_8005E3E4(void)
@@ -992,10 +990,8 @@ lbl_fn_8005E838_00000CE8:
     blr
 }
 
-asm void fn_8005ED68(void)
+void fn_8005ED68(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_8005ED6C(void)

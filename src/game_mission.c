@@ -106,10 +106,8 @@ void fn_80059660(void);
 void fn_80059784(void);
 void fn_80059A40(void);
 
-asm void fn_80057A64(void)
+void fn_80057A64(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_80057A68(void)
