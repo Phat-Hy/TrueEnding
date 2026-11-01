@@ -34,17 +34,17 @@ extern u8 lbl_807CA25C[];
 /* Small data declarations */
 
 /* Function declarations */
-void fn_805DDE20(void);
-void fn_805DDE30(void);
-void fn_805DDE40(void);
-void fn_805DDE50(void);
-void fn_805DDE60(void);
-void fn_805DDE70(void);
-void fn_805DDE80(void);
-void fn_805DDE90(void);
-void fn_805DDEA0(void);
+void fn_805DDE20(void *p, f32 val);
+void fn_805DDE30(void *p, f32 val);
+f32 fn_805DDE40(const void *p);
+f32 fn_805DDE50(const void *p);
+void fn_805DDE60(void *p, u32 val);
+u32 fn_805DDE70(const void *p);
+void fn_805DDE80(void *p, u32 val);
+u32 fn_805DDE90(const void *p);
+void fn_805DDEA0(void *p, u32 val);
 void fn_805DDEB0(void);
-void fn_805DDEC0(void);
+u32 fn_805DDEC0(const void *p);
 void fn_805DDED0(void);
 void fn_805DE0D0(void);
 void fn_805DE2D0(void);
@@ -68,67 +68,49 @@ void fn_805DF4B0(void);
 void fn_805DF4C0(void);
 void fn_805DF630(void);
 
-asm void fn_805DDE20(void)
+void fn_805DDE20(void *p, f32 val)
 {
-    nofralloc
-    stfs f1, 0x50(r3)
-    blr
+    *(f32 *)((char *)p + 0x50) = val;
 }
 
-asm void fn_805DDE30(void)
+void fn_805DDE30(void *p, f32 val)
 {
-    nofralloc
-    stfs f1, 0x4c(r3)
-    blr
+    *(f32 *)((char *)p + 0x4c) = val;
 }
 
-asm void fn_805DDE40(void)
+f32 fn_805DDE40(const void *p)
 {
-    nofralloc
-    lfs f1, 0x50(r3)
-    blr
+    return *(const f32 *)((const char *)p + 0x50);
 }
 
-asm void fn_805DDE50(void)
+f32 fn_805DDE50(const void *p)
 {
-    nofralloc
-    lfs f1, 0x4c(r3)
-    blr
+    return *(const f32 *)((const char *)p + 0x4c);
 }
 
-asm void fn_805DDE60(void)
+void fn_805DDE60(void *p, u32 val)
 {
-    nofralloc
-    stw r4, 0x54(r3)
-    blr
+    *(u32 *)((char *)p + 0x54) = val;
 }
 
-asm void fn_805DDE70(void)
+u32 fn_805DDE70(const void *p)
 {
-    nofralloc
-    lwz r3, 0x54(r3)
-    blr
+    return *(const u32 *)((const char *)p + 0x54);
 }
 
-asm void fn_805DDE80(void)
+void fn_805DDE80(void *p, u32 val)
 {
-    nofralloc
-    stw r4, 0x58(r3)
-    blr
+    *(u32 *)((char *)p + 0x58) = val;
 }
 
-asm void fn_805DDE90(void)
+u32 fn_805DDE90(const void *p)
 {
-    nofralloc
-    lwz r3, 0x58(r3)
-    blr
+    return *(const u32 *)((const char *)p + 0x58);
 }
 
-asm void fn_805DDEA0(void)
+void fn_805DDEA0(void *p, u32 val)
 {
-    nofralloc
-    stw r4, 0x5c(r3)
-    blr
+    *(u32 *)((char *)p + 0x5c) = val;
 }
 
 asm void fn_805DDEB0(void)
@@ -140,11 +122,9 @@ asm void fn_805DDEB0(void)
     blr
 }
 
-asm void fn_805DDEC0(void)
+u32 fn_805DDEC0(const void *p)
 {
-    nofralloc
-    lwz r3, 0x5c(r3)
-    blr
+    return *(const u32 *)((const char *)p + 0x5c);
 }
 
 asm void fn_805DDED0(void)

@@ -77,7 +77,7 @@ void fn_805AA394(void);
 void fn_805AA4CC(void);
 void fn_805AA4E8(void);
 void fn_805AA738(void);
-void fn_805AA828(void);
+u32 fn_805AA828(void);
 void fn_805AA830(void);
 void fn_805AA950(void);
 
@@ -1309,11 +1309,9 @@ lbl_fn_805AA738_0000114C:
     blr
 }
 
-asm void fn_805AA828(void)
+u32 fn_805AA828(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_805AA830(void)

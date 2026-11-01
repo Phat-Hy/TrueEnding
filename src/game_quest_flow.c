@@ -129,7 +129,7 @@ extern u32 lbl_80881AA8;
 
 /* Function declarations */
 void fn_801446E8(void);
-void quest_resetObjectiveBounds(void);
+void quest_resetObjectiveBounds(void *p);
 void quest_evaluateConditions(void);
 void fn_80144ED4(void);
 void fn_80144F4C(void);
@@ -142,17 +142,15 @@ asm void fn_801446E8(void)
     blr
 }
 
-asm void quest_resetObjectiveBounds(void)
+void quest_resetObjectiveBounds(void *p)
 {
-    nofralloc
-    lfs f0, lbl_8088196C
-    stfs f0, 0x574(r3)
-    stfs f0, 0x578(r3)
-    stfs f0, 0x57c(r3)
-    stfs f0, 0x570(r3)
-    stfs f0, 0x580(r3)
-    stfs f0, 0x584(r3)
-    blr
+    f32 f = lbl_8088196C;
+    *(f32 *)((char *)p + 0x574) = f;
+    *(f32 *)((char *)p + 0x578) = f;
+    *(f32 *)((char *)p + 0x57c) = f;
+    *(f32 *)((char *)p + 0x570) = f;
+    *(f32 *)((char *)p + 0x580) = f;
+    *(f32 *)((char *)p + 0x584) = f;
 }
 
 asm void quest_evaluateConditions(void)

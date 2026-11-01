@@ -72,7 +72,7 @@ extern u32 lbl_808883BC;
 
 /* Function declarations */
 void fn_805B33BC(void);
-void fn_805B3424(void);
+u32 fn_805B3424(void);
 void fn_805B342C(void);
 void fn_805B3518(void);
 void fn_805B3658(void);
@@ -124,11 +124,9 @@ lbl_fn_805B33BC_00000058:
     blr
 }
 
-asm void fn_805B3424(void)
+u32 fn_805B3424(void)
 {
-    nofralloc
-    li r3, 0x1
-    blr
+    return 1;
 }
 
 asm void fn_805B342C(void)
