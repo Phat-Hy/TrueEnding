@@ -79,7 +79,7 @@ extern void fn_806249F0(void);
 extern void printf(void);
 extern void wmemcpy(void);
 extern void wmemmove(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 extern void abort(void);
 extern void runtime_clampDouble(void);
 extern void memmove(void);
@@ -192,7 +192,7 @@ asm void fn_8006EF48(void)
     mr r25, r5
     mr r29, r6
     mr r3, r28
-    bl fn_80686A48
+    bl wcslen
     cmpwi r25, 0x0
     mr r31, r3
     beq lbl_fn_8006EF48_000001A4
@@ -530,7 +530,7 @@ lbl_fn_8006F420_00000508:
 lbl_fn_8006F420_00000510:
     mr r3, r29
     li r31, 0x0
-    bl fn_80686A48
+    bl wcslen
     mr r4, r28
     subi r0, r30, 0x1
     li r8, 0x0
@@ -622,7 +622,7 @@ lbl_fn_8006F548_00000648:
     lbz r0, 0xc(r1)
     addi r3, r1, 0x10
     stb r0, 0x8(r1)
-    bl fn_80686A48
+    bl wcslen
     mr r0, r3
     addi r6, r1, 0x10
     mr r7, r6

@@ -47,7 +47,7 @@ extern void atn_LoadHandle_isLoading(void);
 extern void fn_80473F88(void);
 extern void taskManager_updateTasks(void);
 extern void printf(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 extern void fn_80686A64(void);
 extern void abort(void);
 extern void runtime_clampDouble(void);
@@ -1366,7 +1366,7 @@ lbl_fn_801F36C8_00001108:
     lbz r0, 0x1c(r1)
     mr r3, r22
     stb r0, 0x18(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r5, r16
     mr r6, r22
@@ -1804,7 +1804,7 @@ lbl_fn_801F3E20_00001730:
     lbz r0, 0xc(r1)
     mr r3, r31
     stb r0, 0x8(r1)
-    bl fn_80686A48
+    bl wcslen
     mr r0, r3
     mr r3, r29
     slwi r0, r0, 1

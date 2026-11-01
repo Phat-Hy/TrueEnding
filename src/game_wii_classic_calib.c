@@ -49,7 +49,7 @@ extern void fn_80564344(void);
 extern void fn_80565068(void);
 extern void rand(void);
 extern void strcmp(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 extern void fn_80686A64(void);
 extern void fn_806959D8(void);
 extern void fn_80695B00(void);
@@ -613,7 +613,7 @@ lbl_fn_80562D50_000005A4:
     addi r3, r1, 0x218
     bl fn_80686A64
     addi r3, r1, 0x218
-    bl fn_80686A48
+    bl wcslen
     subic. r0, r3, 0x1
     addi r4, r1, 0x218
     li r3, 0xa

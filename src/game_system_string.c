@@ -24,10 +24,10 @@ extern void str_findChar(void);
 extern void fn_802091E8(void);
 extern void fn_8046DC5C(void);
 extern void fn_8046DD20(void);
-extern void fn_8068236C(void);
+extern void strncpy(void);
 extern void strcmp(void);
 extern void wmemcpy(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 extern void fn_80686AF0(void);
 extern void fn_806958E0(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -1107,25 +1107,25 @@ lbl_fn_8020AFF4_00000DBC:
     mr r4, r3
     addi r3, r27, 0x60
     li r5, 0x20
-    bl fn_8068236C
+    bl strncpy
     addi r3, r1, 0xc
     bl talk_parseQuotedString
     mr r4, r3
     mr r3, r27
     li r5, 0x20
-    bl fn_8068236C
+    bl strncpy
     addi r3, r1, 0xc
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r27, 0x20
     li r5, 0x20
-    bl fn_8068236C
+    bl strncpy
     addi r3, r1, 0xc
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r27, 0x40
     li r5, 0x20
-    bl fn_8068236C
+    bl strncpy
 lbl_fn_8020AFF4_00000E50:
     addi r3, r1, 0xc
     bl fn_8005B5F8
@@ -1492,7 +1492,7 @@ lbl_fn_8020B2BC_0000132C:
     addi r28, r28, 0x14
     cmplw r3, r28
     beq lbl_fn_8020B2BC_00001370
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r3, r28
     mr r4, r30
@@ -1744,7 +1744,7 @@ lbl_fn_8020B2BC_000016DC:
     addi r28, r28, 0x14
     cmplw r3, r28
     beq lbl_fn_8020B2BC_00001720
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r3, r28
     mr r4, r29

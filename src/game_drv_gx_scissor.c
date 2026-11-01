@@ -42,7 +42,7 @@ extern void fn_805DDE50(void);
 extern void fn_805DDEC0(void);
 extern void fn_8061A0F0(void);
 extern void fn_8061A100(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
 extern void fn_80695B00(void);
@@ -469,7 +469,7 @@ asm void fn_805D5390(void)
     stw r29, 0x14(r1)
     mr r29, r3
     mr r3, r30
-    bl fn_80686A48
+    bl wcslen
     lwz r12, 0x0(r29)
     clrlwi r6, r3, 16
     mr r3, r29

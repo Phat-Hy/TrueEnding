@@ -26,7 +26,7 @@ extern void ISFS_GetUsageAsync(void);
 extern void fn_8061BC10(void);
 extern void fn_80620EF0(void);
 extern void fn_80620FD0(void);
-extern void fn_8068236C(void);
+extern void strncpy(void);
 extern void strcmp(void);
 extern void strncmp(void);
 extern void fn_80686A80(void);
@@ -480,7 +480,7 @@ lbl_fn_80621610_00000530:
     mr r3, r29
     mr r4, r30
     mr r5, r31
-    bl fn_8068236C
+    bl strncpy
     li r0, 0x0
     stbx r0, r29, r31
 lbl_fn_80621610_00000548:

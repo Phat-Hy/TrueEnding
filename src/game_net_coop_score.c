@@ -83,7 +83,7 @@ extern void fn_80617880(void);
 extern void GXSetNumTevStages(void);
 extern void fn_80617D50(void);
 extern void printf(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 extern void abort(void);
 extern int sprintf(char* str, const char* format, ...);
 
@@ -1975,7 +1975,7 @@ lbl_fn_804AD1EC_0000184C:
     mr r3, r21
     stw r22, 0x30(r1)
     stw r22, 0x34(r1)
-    bl fn_80686A48
+    bl wcslen
     mr r16, r3
     mr r3, r20
     mr r4, r16

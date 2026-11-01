@@ -26,7 +26,7 @@ extern void fn_8020685C(void);
 extern void fn_8020689C(void);
 extern void fn_8046DC5C(void);
 extern void fn_8046DD20(void);
-extern void fn_8068236C(void);
+extern void strncpy(void);
 extern void strcmp(void);
 extern void strncmp(void);
 extern void atoi(void);
@@ -616,7 +616,7 @@ lbl_fn_80204958_0000071C:
     mr r4, r3
     addi r3, r27, 0x8
     li r5, 0x20
-    bl fn_8068236C
+    bl strncpy
     addi r3, r1, 0x28
     bl talk_parseQuotedString
     addi r3, r1, 0x28
@@ -703,7 +703,7 @@ lbl_fn_80204958_0000087C:
     mr r4, r26
     addi r3, r27, 0x8
     li r5, 0x20
-    bl fn_8068236C
+    bl strncpy
 lbl_fn_80204958_0000088C:
     addi r30, r30, 0x90
 lbl_fn_80204958_00000890:

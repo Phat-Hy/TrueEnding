@@ -66,7 +66,7 @@ extern void fn_80661410(void);
 extern void fn_80661640(void);
 extern void fn_80663160(void);
 extern void fn_806631A0(void);
-extern void fn_8068236C(void);
+extern void strncpy(void);
 
 /* External data declarations */
 extern u8 jumptable_80798C5C[];
@@ -124,7 +124,7 @@ lbl_fn_805C4FA0_00000060:
     stw r3, 0xb0(r29)
     mr r4, r31
     mr r5, r28
-    bl fn_8068236C
+    bl strncpy
     lwz r4, 0xb0(r29)
     add r3, r28, r31
     addi r31, r3, 0x1
@@ -149,7 +149,7 @@ lbl_fn_805C4FA0_000000B8:
     stw r3, 0xb4(r29)
     mr r4, r31
     mr r5, r28
-    bl fn_8068236C
+    bl strncpy
     lwz r3, 0xb4(r29)
     li r4, 0x0
     mr r5, r29

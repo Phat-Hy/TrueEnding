@@ -51,7 +51,7 @@ extern void fn_804923AC(void);
 extern void fn_8049248C(void);
 extern void fn_8049CDBC(void);
 extern void printf(void);
-extern void fn_8068236C(void);
+extern void strncpy(void);
 extern void strcmp(void);
 extern void abort(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -203,7 +203,7 @@ lbl_fn_80494354_00000194:
     mr r4, r3
     addi r3, r28, 0x4
     li r5, 0x20
-    bl fn_8068236C
+    bl strncpy
     stb r30, 0x23(r28)
     addi r3, r28, 0x4
     bl str_findChar

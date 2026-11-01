@@ -50,7 +50,7 @@ extern void fn_8050EFD0(void);
 extern void fn_8050F5AC(void);
 extern void fn_80624D40(void);
 extern void wmemcpy(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 extern void fn_80686B24(void);
 extern void fn_806959D8(void);
 
@@ -737,7 +737,7 @@ lbl_fn_804AF520_000008A4:
     stw r31, 0xe4(r30)
     lwz r23, lbl_8087F628
     addi r3, r23, 0x5f0
-    bl fn_80686A48
+    bl wcslen
     cmpwi r3, 0x0
     beq lbl_fn_804AF520_000009A8
     lwz r0, 0xc28(r23)
@@ -781,7 +781,7 @@ lbl_fn_804AF520_00000968:
     cmplw r24, r0
     beq lbl_fn_804AF520_0000099C
     mr r3, r24
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r4, r24
     addi r3, r23, 0xfc

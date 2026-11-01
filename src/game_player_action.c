@@ -35,7 +35,7 @@ extern void fn_8016F4D8(void);
 extern void fn_8016F5EC(void);
 extern void fn_803BEB54(void);
 extern void rand(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 extern void fn_80686AF0(void);
 extern void runtime_registerStaticObject(void);
 extern void fn_80695A50(void);
@@ -515,7 +515,7 @@ lbl_fn_8011B8D4_000005B4:
     lbz r0, 0xc(r1)
     mr r3, r28
     stb r0, 0x8(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r5, r29
     mr r6, r28

@@ -58,7 +58,7 @@ extern void fn_804A39EC(void);
 extern void fn_804A4930(void);
 extern void fn_804A55FC(void);
 extern void printf(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 extern void fn_80686A64(void);
 extern void abort(void);
 extern void fn_80695A50(void);
@@ -886,7 +886,7 @@ lbl_fn_8046A370_00000AF0:
     lbz r0, 0xc(r1)
     mr r3, r31
     stb r0, 0x8(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r5, r28
     mr r6, r31

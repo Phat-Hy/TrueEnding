@@ -12,19 +12,19 @@ extern void _savegpr_23(void);
 extern void _savegpr_24(void);
 extern void _savegpr_25(void);
 extern void _savegpr_26(void);
-extern void fn_806823B0(void);
+extern void strcat(void);
 extern void strncmp(void);
 extern void strstr(void);
 extern void atoi(void);
 extern void fn_806D57A0(void);
 extern void fn_806D5850(void);
 extern void fn_806D58F0(void);
-extern void fn_806D5900(void);
+extern void net_bufferGetElement(void);
 extern void fn_806D5930(void);
 extern void fn_806D5C90(void);
 extern void fn_806D7A90(void);
 extern void fn_806D7AA0(void);
-extern void fn_806D7AC0(void);
+extern void net_socketClose(void);
 extern void fn_806D7B30(void);
 extern void fn_806D7B70(void);
 extern void fn_806D7CB0(void);
@@ -260,7 +260,7 @@ lbl_fn_806F8B00_000002A8:
     bge lbl_fn_806F8B00_000003B0
     lwz r3, 0x228(r28)
     mr r4, r23
-    bl fn_806D5900
+    bl net_bufferGetElement
     lwz r12, 0x18(r3)
     mr r11, r3
     cmpwi r12, 0x0
@@ -333,7 +333,7 @@ lbl_fn_806F8B00_000003CC:
     lwz r3, 0x210(r28)
     cmpwi r3, 0x0
     beq lbl_fn_806F8B00_000003EC
-    bl fn_806D7AC0
+    bl net_socketClose
     li r0, 0x0
     stw r0, 0x210(r28)
     stw r0, 0x214(r28)
@@ -822,7 +822,7 @@ lbl_fn_806F9160_00000A94:
     bge lbl_fn_806F9160_00000B9C
     lwz r3, 0x228(r30)
     mr r4, r18
-    bl fn_806D5900
+    bl net_bufferGetElement
     lwz r12, 0x18(r3)
     mr r11, r3
     cmpwi r12, 0x0
@@ -895,7 +895,7 @@ lbl_fn_806F9160_00000BB8:
     lwz r3, 0x210(r30)
     cmpwi r3, 0x0
     beq lbl_fn_806F9160_00000BD8
-    bl fn_806D7AC0
+    bl net_socketClose
     li r0, 0x0
     stw r0, 0x210(r30)
     stw r0, 0x214(r30)
@@ -940,7 +940,7 @@ lbl_fn_806F9160_00000C58:
     cmplw r20, r0
     beq lbl_fn_806F9160_00000C6C
     mr r3, r20
-    bl fn_806D7AC0
+    bl net_socketClose
 lbl_fn_806F9160_00000C6C:
     addi r11, r1, 0x2f0
     bl _restgpr_14
@@ -994,10 +994,10 @@ lbl_fn_806F96F0_00000D08:
     addi r3, r1, 0x510
     xori r0, r0, 0x1
     stw r0, 0x22c(r28)
-    bl fn_806823B0
+    bl strcat
     addi r3, r1, 0x510
     addi r4, r29, 0xec
-    bl fn_806823B0
+    bl strcat
     mr r3, r24
     addi r4, r1, 0x510
     bl strstr
@@ -1058,10 +1058,10 @@ lbl_fn_806F96F0_00000DE8:
     addi r3, r1, 0x410
     xori r0, r0, 0x1
     stw r0, 0x22c(r28)
-    bl fn_806823B0
+    bl strcat
     addi r3, r1, 0x410
     addi r4, r29, 0xec
-    bl fn_806823B0
+    bl strcat
     mr r3, r24
     addi r4, r1, 0x410
     bl strstr
@@ -1122,10 +1122,10 @@ lbl_fn_806F96F0_00000EC8:
     addi r3, r1, 0x310
     xori r0, r0, 0x1
     stw r0, 0x22c(r28)
-    bl fn_806823B0
+    bl strcat
     addi r3, r1, 0x310
     addi r4, r29, 0xec
-    bl fn_806823B0
+    bl strcat
     mr r3, r24
     addi r4, r1, 0x310
     bl strstr
@@ -1186,10 +1186,10 @@ lbl_fn_806F96F0_00000FA8:
     addi r3, r1, 0x210
     xori r0, r0, 0x1
     stw r0, 0x22c(r28)
-    bl fn_806823B0
+    bl strcat
     addi r3, r1, 0x210
     addi r4, r29, 0xec
-    bl fn_806823B0
+    bl strcat
     mr r3, r24
     addi r4, r1, 0x210
     bl strstr
@@ -1246,7 +1246,7 @@ lbl_fn_806F96F0_00001088:
 lbl_fn_806F96F0_00001090:
     lwz r3, 0x228(r28)
     mr r4, r27
-    bl fn_806D5900
+    bl net_bufferGetElement
     lwz r0, 0x0(r3)
     cmpwi r0, 0x1
     bne lbl_fn_806F96F0_000010C4
@@ -1283,10 +1283,10 @@ lbl_fn_806F96F0_000010F8:
     addi r3, r1, 0x110
     xori r0, r0, 0x1
     stw r0, 0x22c(r28)
-    bl fn_806823B0
+    bl strcat
     addi r3, r1, 0x110
     addi r4, r29, 0xec
-    bl fn_806823B0
+    bl strcat
     mr r3, r24
     addi r4, r1, 0x110
     bl strstr
@@ -1351,7 +1351,7 @@ lbl_fn_806F96F0_000011E8:
     bge lbl_fn_806F96F0_000012E4
     lwz r3, 0x228(r28)
     mr r4, r27
-    bl fn_806D5900
+    bl net_bufferGetElement
     lwz r12, 0x18(r3)
     mr r11, r3
     cmpwi r12, 0x0
@@ -1472,10 +1472,10 @@ lbl_fn_806F9D60_00001398:
     addi r3, r1, 0xc10
     xori r0, r0, 0x1
     stw r0, 0x22c(r28)
-    bl fn_806823B0
+    bl strcat
     addi r3, r1, 0xc10
     addi r4, r29, 0xec
-    bl fn_806823B0
+    bl strcat
     mr r3, r26
     addi r4, r1, 0xc10
     bl strstr
@@ -1536,10 +1536,10 @@ lbl_fn_806F9D60_00001478:
     addi r3, r1, 0xd10
     xori r0, r0, 0x1
     stw r0, 0x22c(r28)
-    bl fn_806823B0
+    bl strcat
     addi r3, r1, 0xd10
     addi r4, r29, 0xec
-    bl fn_806823B0
+    bl strcat
     mr r3, r26
     addi r4, r1, 0xd10
     bl strstr
@@ -1600,10 +1600,10 @@ lbl_fn_806F9D60_00001558:
     addi r3, r1, 0xe10
     xori r0, r0, 0x1
     stw r0, 0x22c(r28)
-    bl fn_806823B0
+    bl strcat
     addi r3, r1, 0xe10
     addi r4, r29, 0xec
-    bl fn_806823B0
+    bl strcat
     mr r3, r26
     addi r4, r1, 0xe10
     bl strstr
@@ -1658,7 +1658,7 @@ lbl_fn_806F9D60_00001630:
 lbl_fn_806F9D60_00001638:
     lwz r3, 0x228(r28)
     mr r4, r26
-    bl fn_806D5900
+    bl net_bufferGetElement
     lwz r0, 0x0(r3)
     cmpwi r0, 0x0
     bne lbl_fn_806F9D60_0000166C
@@ -1682,7 +1682,7 @@ lbl_fn_806F9D60_00001684:
     beq lbl_fn_806F9D60_00002478
     lwz r3, 0x228(r28)
     mr r4, r26
-    bl fn_806D5900
+    bl net_bufferGetElement
     cmpwi r26, 0x0
     stw r31, 0x8(r3)
     blt lbl_fn_806F9D60_00002478
@@ -1692,7 +1692,7 @@ lbl_fn_806F9D60_00001684:
     bge lbl_fn_806F9D60_00002478
     lwz r3, 0x228(r28)
     mr r4, r26
-    bl fn_806D5900
+    bl net_bufferGetElement
     lwz r12, 0x18(r3)
     mr r11, r3
     cmpwi r12, 0x0
@@ -1798,10 +1798,10 @@ lbl_fn_806F9D60_00001820:
     addi r3, r1, 0xa10
     xori r0, r0, 0x1
     stw r0, 0x22c(r28)
-    bl fn_806823B0
+    bl strcat
     addi r3, r1, 0xa10
     addi r4, r29, 0xec
-    bl fn_806823B0
+    bl strcat
     mr r3, r26
     addi r4, r1, 0xa10
     bl strstr
@@ -1862,10 +1862,10 @@ lbl_fn_806F9D60_00001900:
     addi r3, r1, 0xb10
     xori r0, r0, 0x1
     stw r0, 0x22c(r28)
-    bl fn_806823B0
+    bl strcat
     addi r3, r1, 0xb10
     addi r4, r29, 0xec
-    bl fn_806823B0
+    bl strcat
     mr r3, r26
     addi r4, r1, 0xb10
     bl strstr
@@ -1922,7 +1922,7 @@ lbl_fn_806F9D60_000019E0:
 lbl_fn_806F9D60_000019E8:
     lwz r3, 0x228(r28)
     mr r4, r27
-    bl fn_806D5900
+    bl net_bufferGetElement
     lwz r0, 0x0(r3)
     cmpwi r0, 0x3
     bne lbl_fn_806F9D60_00001A1C
@@ -1946,7 +1946,7 @@ lbl_fn_806F9D60_00001A34:
     beq lbl_fn_806F9D60_00002478
     lwz r3, 0x228(r28)
     mr r4, r27
-    bl fn_806D5900
+    bl net_bufferGetElement
     cmpwi r27, 0x0
     stw r30, 0x8(r3)
     blt lbl_fn_806F9D60_00002478
@@ -1956,7 +1956,7 @@ lbl_fn_806F9D60_00001A34:
     bge lbl_fn_806F9D60_00002478
     lwz r3, 0x228(r28)
     mr r4, r27
-    bl fn_806D5900
+    bl net_bufferGetElement
     lwz r12, 0x18(r3)
     mr r11, r3
     cmpwi r12, 0x0
@@ -2062,10 +2062,10 @@ lbl_fn_806F9D60_00001BD0:
     addi r3, r1, 0x810
     xori r0, r0, 0x1
     stw r0, 0x22c(r28)
-    bl fn_806823B0
+    bl strcat
     addi r3, r1, 0x810
     addi r4, r29, 0xec
-    bl fn_806823B0
+    bl strcat
     mr r3, r26
     addi r4, r1, 0x810
     bl strstr
@@ -2126,10 +2126,10 @@ lbl_fn_806F9D60_00001CB0:
     addi r3, r1, 0x910
     xori r0, r0, 0x1
     stw r0, 0x22c(r28)
-    bl fn_806823B0
+    bl strcat
     addi r3, r1, 0x910
     addi r4, r29, 0xec
-    bl fn_806823B0
+    bl strcat
     mr r3, r26
     addi r4, r1, 0x910
     bl strstr
@@ -2186,7 +2186,7 @@ lbl_fn_806F9D60_00001D90:
 lbl_fn_806F9D60_00001D98:
     lwz r3, 0x228(r28)
     mr r4, r27
-    bl fn_806D5900
+    bl net_bufferGetElement
     lwz r0, 0x0(r3)
     cmpwi r0, 0x3
     bne lbl_fn_806F9D60_00001DCC
@@ -2210,7 +2210,7 @@ lbl_fn_806F9D60_00001DE4:
     beq lbl_fn_806F9D60_00002478
     lwz r3, 0x228(r28)
     mr r4, r27
-    bl fn_806D5900
+    bl net_bufferGetElement
     cmpwi r27, 0x0
     stw r30, 0x8(r3)
     blt lbl_fn_806F9D60_00002478
@@ -2220,7 +2220,7 @@ lbl_fn_806F9D60_00001DE4:
     bge lbl_fn_806F9D60_00002478
     lwz r3, 0x228(r28)
     mr r4, r27
-    bl fn_806D5900
+    bl net_bufferGetElement
     lwz r12, 0x18(r3)
     mr r11, r3
     cmpwi r12, 0x0
@@ -2337,10 +2337,10 @@ lbl_fn_806F9D60_00001FA8:
     addi r3, r1, 0x410
     xori r0, r0, 0x1
     stw r0, 0x22c(r28)
-    bl fn_806823B0
+    bl strcat
     addi r3, r1, 0x410
     addi r4, r29, 0xec
-    bl fn_806823B0
+    bl strcat
     mr r3, r26
     addi r4, r1, 0x410
     bl strstr
@@ -2401,10 +2401,10 @@ lbl_fn_806F9D60_00002088:
     addi r3, r1, 0x510
     xori r0, r0, 0x1
     stw r0, 0x22c(r28)
-    bl fn_806823B0
+    bl strcat
     addi r3, r1, 0x510
     addi r4, r29, 0xec
-    bl fn_806823B0
+    bl strcat
     mr r3, r26
     addi r4, r1, 0x510
     bl strstr
@@ -2465,10 +2465,10 @@ lbl_fn_806F9D60_00002168:
     addi r3, r1, 0x610
     xori r0, r0, 0x1
     stw r0, 0x22c(r28)
-    bl fn_806823B0
+    bl strcat
     addi r3, r1, 0x610
     addi r4, r29, 0xec
-    bl fn_806823B0
+    bl strcat
     mr r3, r26
     addi r4, r1, 0x610
     bl strstr
@@ -2529,10 +2529,10 @@ lbl_fn_806F9D60_00002248:
     addi r3, r1, 0x710
     xori r0, r0, 0x1
     stw r0, 0x22c(r28)
-    bl fn_806823B0
+    bl strcat
     addi r3, r1, 0x710
     addi r4, r29, 0xec
-    bl fn_806823B0
+    bl strcat
     mr r3, r26
     addi r4, r1, 0x710
     bl strstr
@@ -2589,7 +2589,7 @@ lbl_fn_806F9D60_00002328:
 lbl_fn_806F9D60_00002330:
     lwz r3, 0x228(r28)
     mr r4, r26
-    bl fn_806D5900
+    bl net_bufferGetElement
     lwz r0, 0x0(r3)
     cmpwi r0, 0x2
     bne lbl_fn_806F9D60_00002364
@@ -2617,7 +2617,7 @@ lbl_fn_806F9D60_0000237C:
     bge lbl_fn_806F9D60_00002478
     lwz r3, 0x228(r28)
     mr r4, r26
-    bl fn_806D5900
+    bl net_bufferGetElement
     lwz r12, 0x18(r3)
     mr r11, r3
     cmpwi r12, 0x0

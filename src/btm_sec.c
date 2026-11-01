@@ -110,7 +110,7 @@ extern void fn_8064FA38(void);
 extern void fn_8064FDD0(void);
 extern void fn_806514D8(void);
 extern void fn_8067E23C(void);
-extern void fn_8068236C(void);
+extern void strncpy(void);
 extern void strncmp(void);
 
 /* External data declarations */
@@ -391,7 +391,7 @@ lbl_fn_806373C8_00000260:
     lbz r0, 0xe(r30)
     rlwinm r0, r0, 0, 29, 25
     stb r0, 0xe(r30)
-    bl fn_8068236C
+    bl strncpy
     b lbl_fn_806373C8_000002B8
 lbl_fn_806373C8_00000298:
     stw r26, 0x8(r30)
@@ -401,7 +401,7 @@ lbl_fn_806373C8_00000298:
     lbz r0, 0xe(r30)
     rlwinm r0, r0, 0, 24, 28
     stb r0, 0xe(r30)
-    bl fn_8068236C
+    bl strncpy
 lbl_fn_806373C8_000002B8:
     lbz r4, 0xe(r30)
     ori r0, r23, 0x80

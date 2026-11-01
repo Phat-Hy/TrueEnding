@@ -19,7 +19,7 @@ extern void fn_800DCA6C(void);
 extern void PSMTXRotRad(void);
 extern void C_MTXLookAt(void);
 extern void PSMTXMultVec(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 extern void fn_806952C4(void);
 extern void vec3_isNonZero(void);
 extern void fn_80709AD0(void);
@@ -233,17 +233,17 @@ asm void fn_800C6E60(void)
     stw r30, 0x8(r1)
     mr r30, r3
     addi r3, r3, 0x4
-    bl fn_80686A48
+    bl wcslen
     lwz r4, 0x2420(r30)
     subi r0, r4, 0x1
     cmplw r3, r0
     bge lbl_fn_800C6E60_000001EC
     addi r3, r30, 0x4
-    bl fn_80686A48
+    bl wcslen
     cmplwi r3, 0x3fe
     bge lbl_fn_800C6E60_000001EC
     addi r3, r30, 0x4
-    bl fn_80686A48
+    bl wcslen
     slwi r3, r3, 1
     li r0, 0x0
     add r3, r30, r3
@@ -267,11 +267,11 @@ asm void fn_800C6ED8(void)
     stw r31, 0xc(r1)
     mr r31, r3
     addi r3, r3, 0x4
-    bl fn_80686A48
+    bl wcslen
     cmpwi r3, 0x0
     beq lbl_fn_800C6ED8_00000240
     addi r3, r31, 0x4
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     li r4, 0x0
     add r3, r31, r0

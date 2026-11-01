@@ -14,7 +14,7 @@ extern void qsort(void);
 extern void fn_806A4270(void);
 extern void fn_806D7A90(void);
 extern void fn_806D7AA0(void);
-extern void fn_806D7AC0(void);
+extern void net_socketClose(void);
 extern void fn_806D7AE0(void);
 extern void fn_806D7DA0(void);
 extern void fn_806D7EE0(void);
@@ -39,7 +39,7 @@ void pad_03_806D5798_text(void);
 void fn_806D57A0(void);
 void fn_806D5850(void);
 void fn_806D58F0(void);
-void fn_806D5900(void);
+void net_bufferGetElement(void);
 void fn_806D5930(void);
 void fn_806D5A60(void);
 void fn_806D5BE0(void);
@@ -162,10 +162,10 @@ lbl_fn_806D5850_00000118:
     lwz r3, 0x14(r30)
     cmpwi r3, 0x0
     beq lbl_fn_806D5850_00000134
-    bl fn_806D7AC0
+    bl net_socketClose
 lbl_fn_806D5850_00000134:
     mr r3, r30
-    bl fn_806D7AC0
+    bl net_socketClose
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -181,18 +181,18 @@ asm void fn_806D58F0(void)
     blr
 }
 
-asm void fn_806D5900(void)
+asm void net_bufferGetElement(void)
 {
     nofralloc
     cmpwi r4, 0x0
-    blt lbl_fn_806D5900_0000017C
+    blt lbl_net_bufferGetElement_0000017C
     lwz r0, 0x0(r3)
     cmpw r4, r0
-    blt lbl_fn_806D5900_00000184
-lbl_fn_806D5900_0000017C:
+    blt lbl_net_bufferGetElement_00000184
+lbl_net_bufferGetElement_0000017C:
     li r3, 0x0
     blr
-lbl_fn_806D5900_00000184:
+lbl_net_bufferGetElement_00000184:
     lwz r0, 0x8(r3)
     lwz r3, 0x14(r3)
     mullw r0, r0, r4
@@ -1031,9 +1031,9 @@ lbl_fn_806D63A0_00000C4C:
     cmpw r30, r0
     blt lbl_fn_806D63A0_00000C38
     lwz r3, 0x0(r29)
-    bl fn_806D7AC0
+    bl net_socketClose
     mr r3, r29
-    bl fn_806D7AC0
+    bl net_socketClose
 lbl_fn_806D63A0_00000C68:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
@@ -1222,7 +1222,7 @@ lbl_fn_806D6610_00000EEC:
     lwz r5, 0x0(r29)
     mr r4, r3
     lwzx r3, r5, r31
-    bl fn_806D5900
+    bl net_bufferGetElement
 lbl_fn_806D6610_00000EFC:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)

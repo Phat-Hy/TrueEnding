@@ -44,7 +44,7 @@ extern void fn_803EB394(void);
 extern void fn_803EB4A8(void);
 extern void fn_803EBC04(void);
 extern void fn_8046ECDC(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -1272,7 +1272,7 @@ lbl_fn_803B710C_00001070:
     mr r3, r30
     stw r0, 0x88(r1)
     stw r0, 0x8c(r1)
-    bl fn_80686A48
+    bl wcslen
     mr r28, r3
     mr r3, r31
     mr r4, r28

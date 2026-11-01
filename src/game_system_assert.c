@@ -66,11 +66,11 @@ extern void world_getGlobalFlag(void);
 extern void fn_8046DC5C(void);
 extern void fn_8046DD20(void);
 extern void printf(void);
-extern void fn_8068236C(void);
+extern void strncpy(void);
 extern void strcmp(void);
 extern void strncmp(void);
 extern void atoi(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 extern void fn_80686A64(void);
 extern void abort(void);
 extern void runtime_registerStaticObject(void);
@@ -245,14 +245,14 @@ lbl_fn_8020689C_0000011C:
     beq lbl_fn_8020689C_00000168
     addi r3, r1, 0xc
     bl talk_parseDialogue
-    bl fn_80686A48
+    bl wcslen
     add r4, r3, r28
     addi r3, r1, 0xc
     addi r28, r4, 0x1
     bl talk_parseDialogue
     addi r3, r1, 0xc
     bl talk_parseDialogue
-    bl fn_80686A48
+    bl wcslen
     add r3, r3, r28
     addi r28, r3, 0x1
 lbl_fn_8020689C_00000168:
@@ -308,7 +308,7 @@ lbl_fn_8020689C_000001E0:
     stw r0, 0x84(r27)
     lwz r0, lbl_8087F164
     add r3, r0, r29
-    bl fn_80686A48
+    bl wcslen
     add r4, r3, r30
     addi r3, r1, 0xc
     addi r30, r4, 0x1
@@ -325,7 +325,7 @@ lbl_fn_8020689C_000001E0:
     stw r0, 0x88(r27)
     lwz r0, lbl_8087F164
     add r3, r0, r29
-    bl fn_80686A48
+    bl wcslen
     add r3, r3, r30
     addi r28, r28, 0x130
     addi r30, r3, 0x1
@@ -1463,55 +1463,55 @@ lbl_fn_802078C4_000011A0:
     mr r4, r3
     addi r3, r24, 0x4
     li r5, 0x20
-    bl fn_8068236C
+    bl strncpy
     addi r3, r1, 0x640
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r24, 0x24
     li r5, 0x20
-    bl fn_8068236C
+    bl strncpy
     addi r3, r1, 0x640
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r24, 0x44
     li r5, 0x20
-    bl fn_8068236C
+    bl strncpy
     addi r3, r1, 0x640
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r24, 0x64
     li r5, 0x20
-    bl fn_8068236C
+    bl strncpy
     addi r3, r1, 0x640
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r24, 0x84
     li r5, 0x20
-    bl fn_8068236C
+    bl strncpy
     addi r3, r1, 0x640
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r24, 0xa4
     li r5, 0x20
-    bl fn_8068236C
+    bl strncpy
     addi r3, r1, 0x640
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r24, 0xc4
     li r5, 0x20
-    bl fn_8068236C
+    bl strncpy
     addi r3, r1, 0x640
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r24, 0xe4
     li r5, 0x20
-    bl fn_8068236C
+    bl strncpy
     addi r3, r1, 0x640
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r24, 0x104
     li r5, 0x20
-    bl fn_8068236C
+    bl strncpy
     addi r3, r1, 0x640
     bl talk_parseQuotedString
     bl atoi
@@ -2169,7 +2169,7 @@ lbl_fn_80208144_00001B14:
     mr r4, r3
     addi r3, r1, 0x20
     li r5, 0x40
-    bl fn_8068236C
+    bl strncpy
     addi r3, r1, 0x70
     bl talk_parseQuotedString
     bl atoi

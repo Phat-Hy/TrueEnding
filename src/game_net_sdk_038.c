@@ -24,14 +24,14 @@ extern void fn_806A426C(void);
 extern void fn_806A4270(void);
 extern void fn_806D5850(void);
 extern void fn_806D58F0(void);
-extern void fn_806D5900(void);
+extern void net_bufferGetElement(void);
 extern void fn_806D5C90(void);
 extern void fn_806D63A0(void);
 extern void fn_806D6560(void);
 extern void fn_806D6610(void);
 extern void fn_806D6720(void);
 extern void fn_806D7A90(void);
-extern void fn_806D7AC0(void);
+extern void net_socketClose(void);
 extern void fn_806D7AE0(void);
 extern void fn_806D7B30(void);
 extern void fn_806D7BB0(void);
@@ -158,7 +158,7 @@ lbl_fn_806EE7E0_00000068:
     mr r4, r29
     lwz r3, 0x8(r30)
     lwz r3, 0x10(r3)
-    bl fn_806D5900
+    bl net_bufferGetElement
     lwz r0, 0x0(r3)
     cmplw r30, r0
     bne lbl_fn_806EE7E0_0000009C
@@ -293,7 +293,7 @@ lbl_fn_806EE8B0_00000240:
     lwz r3, 0x10(r29)
     bl fn_806D5850
     mr r3, r29
-    bl fn_806D7AC0
+    bl net_socketClose
     bl fn_806D8F20
 lbl_fn_806EE8B0_00000264:
     li r3, 0x0
@@ -391,7 +391,7 @@ lbl_fn_806EEAD0_000003A4:
     mr r4, r30
     lwz r3, 0x8(r29)
     lwz r3, 0x10(r3)
-    bl fn_806D5900
+    bl net_bufferGetElement
     lwz r0, 0x0(r3)
     cmplw r29, r0
     bne lbl_fn_806EEAD0_000003D8
@@ -463,7 +463,7 @@ asm void fn_806EEC40(void)
 lbl_fn_806EEC40_00000494:
     lwz r3, 0x10(r27)
     mr r4, r28
-    bl fn_806D5900
+    bl net_bufferGetElement
     lwz r3, 0x0(r3)
     stw r3, 0x8(r1)
     lwz r0, 0x14(r3)
@@ -486,7 +486,7 @@ lbl_fn_806EEC40_000004E4:
     mr r4, r30
     lwz r3, 0x8(r29)
     lwz r3, 0x10(r3)
-    bl fn_806D5900
+    bl net_bufferGetElement
     lwz r0, 0x0(r3)
     cmplw r29, r0
     bne lbl_fn_806EEC40_00000518
@@ -551,7 +551,7 @@ lbl_fn_806EED30_000005B0:
     lwz r3, 0x10(r30)
     bl fn_806D5850
     mr r3, r30
-    bl fn_806D7AC0
+    bl net_socketClose
     bl fn_806D8F20
 lbl_fn_806EED30_000005D4:
     lwz r0, 0x14(r1)
@@ -1460,7 +1460,7 @@ lbl_fn_806EF930_000011E4:
     cmplw r31, r3
     beq lbl_fn_806EF930_000011FC
     mr r3, r31
-    bl fn_806D7AC0
+    bl net_socketClose
 lbl_fn_806EF930_000011FC:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)

@@ -15,7 +15,7 @@ extern void atoi(void);
 extern void fn_806D5850(void);
 extern void fn_806D7350(void);
 extern void fn_806D7A90(void);
-extern void fn_806D7AC0(void);
+extern void net_socketClose(void);
 extern void fn_806D7B30(void);
 extern void fn_806D7B70(void);
 extern void fn_806D8E30(void);
@@ -27,10 +27,10 @@ extern void fn_806DA4D0(void);
 extern void fn_806DA660(void);
 extern void fn_806DA700(void);
 extern void fn_806DA750(void);
-extern void fn_806DE480(void);
+extern void net_sendString(void);
 extern void fn_806DE4E0(void);
 extern void fn_806DE940(void);
-extern void fn_806DED80(void);
+extern void net_sendPacket(void);
 extern void fn_806DEE40(void);
 extern void fn_806DF860(void);
 extern void fn_806E2E10(void);
@@ -102,35 +102,35 @@ asm void fn_806DFCA0(void)
     mr r3, r25
     addi r4, r29, 0x210
     addi r5, r31, 0x308
-    bl fn_806DE480
+    bl net_sendString
     mr r3, r25
     addi r4, r29, 0x210
     addi r5, r31, 0x318
-    bl fn_806DE480
+    bl net_sendString
     mr r3, r25
     addi r4, r29, 0x210
     addi r5, r29, 0x144
-    bl fn_806DE480
+    bl net_sendString
     mr r3, r25
     addi r4, r29, 0x210
     addi r5, r31, 0x320
-    bl fn_806DE480
+    bl net_sendString
     mr r3, r25
     addi r4, r29, 0x210
     addi r5, r29, 0x110
-    bl fn_806DE480
+    bl net_sendString
     mr r3, r25
     addi r4, r29, 0x210
     addi r5, r31, 0x328
-    bl fn_806DE480
+    bl net_sendString
     mr r3, r25
     addi r4, r29, 0x210
     addi r5, r1, 0x8
-    bl fn_806DE480
+    bl net_sendString
     mr r3, r25
     addi r4, r29, 0x210
     addi r5, r31, 0x2b8
-    bl fn_806DE480
+    bl net_sendString
     lwz r5, 0x60c(r29)
     mr r3, r25
     addi r4, r29, 0x210
@@ -138,16 +138,16 @@ asm void fn_806DFCA0(void)
     mr r3, r25
     addi r4, r29, 0x210
     addi r5, r31, 0x2c4
-    bl fn_806DE480
+    bl net_sendString
     lis r5, lbl_80860DD8@ha
     mr r3, r25
     addi r4, r29, 0x210
     addi r5, r5, lbl_80860DD8@l
-    bl fn_806DE480
+    bl net_sendString
     mr r3, r25
     addi r4, r29, 0x210
     addi r5, r31, 0x2d0
-    bl fn_806DE480
+    bl net_sendString
     lwz r5, 0x610(r29)
     mr r3, r25
     addi r4, r29, 0x210
@@ -155,11 +155,11 @@ asm void fn_806DFCA0(void)
     mr r3, r25
     addi r4, r29, 0x210
     addi r5, r31, 0x258
-    bl fn_806DE480
+    bl net_sendString
     mr r3, r25
     addi r4, r29, 0x210
     addi r5, r29, 0x12f
-    bl fn_806DE480
+    bl net_sendString
     lbz r0, 0x2c2(r26)
     extsb. r0, r0
     beq lbl_fn_806DFCA0_000001D0
@@ -196,16 +196,16 @@ lbl_fn_806DFCA0_0000018C:
     mr r3, r25
     addi r4, r29, 0x210
     addi r5, r31, 0x338
-    bl fn_806DE480
+    bl net_sendString
     mr r3, r25
     addi r4, r29, 0x210
     addi r5, r1, 0x38
-    bl fn_806DE480
+    bl net_sendString
 lbl_fn_806DFCA0_000001D0:
     mr r3, r25
     addi r4, r29, 0x210
     addi r5, r31, 0x28c
-    bl fn_806DE480
+    bl net_sendString
     lwz r5, 0x1a4(r29)
     mr r3, r25
     addi r4, r29, 0x210
@@ -213,11 +213,11 @@ lbl_fn_806DFCA0_000001D0:
     mr r3, r25
     addi r4, r29, 0x210
     addi r5, r31, 0x2f8
-    bl fn_806DE480
+    bl net_sendString
     mr r3, r25
     addi r4, r29, 0x210
     addi r5, r31, 0x300
-    bl fn_806DE480
+    bl net_sendString
     addi r11, r1, 0x100
     li r3, 0x0
     bl _restgpr_25
@@ -279,7 +279,7 @@ lbl_fn_806DFEC0_000002CC:
     mr r3, r29
     li r4, 0x4
     li r5, 0x1
-    bl fn_806DED80
+    bl net_sendPacket
     li r3, 0x4
     b lbl_fn_806DFEC0_00000894
 lbl_fn_806DFEC0_000002F4:
@@ -306,7 +306,7 @@ lbl_fn_806DFEC0_00000318:
     mr r3, r29
     li r4, 0x3
     li r5, 0x1
-    bl fn_806DED80
+    bl net_sendPacket
     li r3, 0x3
     b lbl_fn_806DFEC0_00000894
 lbl_fn_806DFEC0_00000358:
@@ -324,7 +324,7 @@ lbl_fn_806DFEC0_00000358:
     mr r3, r29
     li r4, 0x3
     li r5, 0x1
-    bl fn_806DED80
+    bl net_sendPacket
     li r3, 0x3
     b lbl_fn_806DFEC0_00000894
 lbl_fn_806DFEC0_0000039C:
@@ -366,7 +366,7 @@ lbl_fn_806DFEC0_000003F0:
     mr r3, r29
     li r4, 0x3
     li r5, 0x1
-    bl fn_806DED80
+    bl net_sendPacket
     li r3, 0x3
     b lbl_fn_806DFEC0_00000894
 lbl_fn_806DFEC0_00000430:
@@ -384,7 +384,7 @@ lbl_fn_806DFEC0_00000430:
     mr r3, r29
     li r4, 0x3
     li r5, 0x1
-    bl fn_806DED80
+    bl net_sendPacket
     li r3, 0x3
     b lbl_fn_806DFEC0_00000894
 lbl_fn_806DFEC0_00000474:
@@ -405,7 +405,7 @@ lbl_fn_806DFEC0_00000474:
     mr r3, r29
     li r4, 0x3
     li r5, 0x1
-    bl fn_806DED80
+    bl net_sendPacket
     li r3, 0x3
     b lbl_fn_806DFEC0_00000894
 lbl_fn_806DFEC0_000004C4:
@@ -436,7 +436,7 @@ lbl_fn_806DFEC0_000004F4:
     mr r3, r29
     li r4, 0x3
     li r5, 0x1
-    bl fn_806DED80
+    bl net_sendPacket
     li r3, 0x3
     b lbl_fn_806DFEC0_00000894
 lbl_fn_806DFEC0_00000534:
@@ -454,7 +454,7 @@ lbl_fn_806DFEC0_00000534:
     mr r3, r29
     li r4, 0x3
     li r5, 0x1
-    bl fn_806DED80
+    bl net_sendPacket
     li r3, 0x3
     b lbl_fn_806DFEC0_00000894
 lbl_fn_806DFEC0_00000578:
@@ -475,7 +475,7 @@ lbl_fn_806DFEC0_00000578:
     mr r3, r29
     li r4, 0x3
     li r5, 0x1
-    bl fn_806DED80
+    bl net_sendPacket
     li r3, 0x3
     b lbl_fn_806DFEC0_00000894
 lbl_fn_806DFEC0_000005C8:
@@ -496,7 +496,7 @@ lbl_fn_806DFEC0_000005C8:
     mr r3, r29
     li r4, 0x3
     li r5, 0x1
-    bl fn_806DED80
+    bl net_sendPacket
     li r3, 0x3
     b lbl_fn_806DFEC0_00000894
 lbl_fn_806DFEC0_00000618:
@@ -591,7 +591,7 @@ lbl_fn_806DFEC0_000006F4:
     mr r3, r29
     li r4, 0x3
     li r5, 0x1
-    bl fn_806DED80
+    bl net_sendPacket
     li r3, 0x3
     b lbl_fn_806DFEC0_00000894
 lbl_fn_806DFEC0_00000774:
@@ -608,7 +608,7 @@ lbl_fn_806DFEC0_00000774:
     mr r3, r29
     li r4, 0x3
     li r5, 0x1
-    bl fn_806DED80
+    bl net_sendPacket
     li r3, 0x3
     b lbl_fn_806DFEC0_00000894
 lbl_fn_806DFEC0_000007B4:
@@ -709,7 +709,7 @@ lbl_fn_806E0540_000008E0:
     mr r3, r30
     li r4, 0x4
     li r5, 0x1
-    bl fn_806DED80
+    bl net_sendPacket
     li r3, 0x4
     b lbl_fn_806E0540_00000934
 lbl_fn_806E0540_00000918:
@@ -749,17 +749,17 @@ asm void fn_806E05E0(void)
     li r0, 0x1
     stw r0, 0x28(r4)
     lwz r3, 0x8(r5)
-    bl fn_806D7AC0
+    bl net_socketClose
     lwz r3, 0x8(r30)
     li r28, 0x0
     stw r28, 0x8(r3)
     lwz r3, 0x8(r30)
     lwz r3, 0xc(r3)
-    bl fn_806D7AC0
+    bl net_socketClose
     lwz r3, 0x8(r30)
     stw r28, 0xc(r3)
     lwz r3, 0x8(r30)
-    bl fn_806D7AC0
+    bl net_socketClose
     stw r28, 0x8(r30)
 lbl_fn_806E05E0_000009BC:
     lwz r3, 0xc(r30)
@@ -768,23 +768,23 @@ lbl_fn_806E05E0_000009BC:
     li r0, 0x1
     stw r0, 0x28(r30)
     lwz r3, 0x8(r3)
-    bl fn_806D7AC0
+    bl net_socketClose
     lwz r3, 0xc(r30)
     li r28, 0x0
     stw r28, 0x8(r3)
     lwz r3, 0xc(r30)
     lwz r3, 0xc(r3)
-    bl fn_806D7AC0
+    bl net_socketClose
     lwz r3, 0xc(r30)
     stw r28, 0xc(r3)
     lwz r3, 0xc(r30)
     lwz r3, 0x10(r3)
-    bl fn_806D7AC0
+    bl net_socketClose
     lwz r3, 0xc(r30)
     stw r28, 0x10(r3)
     lwz r3, 0xc(r30)
     lwz r3, 0x14(r3)
-    bl fn_806D7AC0
+    bl net_socketClose
     lwz r3, 0xc(r30)
     stw r28, 0x14(r3)
     lwz r3, 0xc(r30)
@@ -796,7 +796,7 @@ lbl_fn_806E05E0_000009BC:
     stw r28, 0x38(r3)
 lbl_fn_806E05E0_00000A3C:
     lwz r3, 0xc(r30)
-    bl fn_806D7AC0
+    bl net_socketClose
     li r0, 0x0
     stw r0, 0xc(r30)
 lbl_fn_806E05E0_00000A4C:
@@ -807,11 +807,11 @@ lbl_fn_806E05E0_00000A4C:
     stw r0, 0x28(r30)
 lbl_fn_806E05E0_00000A60:
     lwz r3, 0x14(r30)
-    bl fn_806D7AC0
+    bl net_socketClose
     li r28, 0x0
     stw r28, 0x14(r30)
     lwz r3, 0x1c(r30)
-    bl fn_806D7AC0
+    bl net_socketClose
     lwz r0, 0x10(r30)
     stw r28, 0x1c(r30)
     cmpwi r0, 0x0
@@ -866,7 +866,7 @@ asm void fn_806E0770(void)
     bne lbl_fn_806E0770_00000B54
     addi r4, r30, 0x210
     addi r5, r31, 0x428
-    bl fn_806DE480
+    bl net_sendString
     lwz r5, 0x198(r30)
     mr r3, r29
     addi r4, r30, 0x210
@@ -874,7 +874,7 @@ asm void fn_806E0770(void)
     mr r3, r29
     addi r4, r30, 0x210
     addi r5, r31, 0x300
-    bl fn_806DE480
+    bl net_sendString
 lbl_fn_806E0770_00000B54:
     lwz r4, 0x1f0(r30)
     mr r3, r29
@@ -913,20 +913,20 @@ lbl_fn_806E0770_00000BA8:
     bl fn_806DA4D0
 lbl_fn_806E0770_00000BD8:
     lwz r3, 0x1f8(r30)
-    bl fn_806D7AC0
+    bl net_socketClose
     li r31, 0x0
     stw r31, 0x1f8(r30)
     lwz r3, 0x208(r30)
-    bl fn_806D7AC0
+    bl net_socketClose
     stw r31, 0x208(r30)
     lwz r3, 0x210(r30)
-    bl fn_806D7AC0
+    bl net_socketClose
     stw r31, 0x210(r30)
     lwz r3, 0x5e4(r30)
-    bl fn_806D7AC0
+    bl net_socketClose
     stw r31, 0x5e4(r30)
     lwz r3, 0x5f4(r30)
-    bl fn_806D7AC0
+    bl net_socketClose
     stw r31, 0x5f4(r30)
     b lbl_fn_806E0770_00000C24
 lbl_fn_806E0770_00000C1C:
@@ -1002,7 +1002,7 @@ lbl_fn_806E0930_00000CDC:
     mr r3, r29
     li r4, 0x3
     li r5, 0x1
-    bl fn_806DED80
+    bl net_sendPacket
     li r3, 0x3
     b lbl_fn_806E0930_00000D80
 lbl_fn_806E0930_00000D20:
@@ -1023,7 +1023,7 @@ lbl_fn_806E0930_00000D20:
     mr r3, r29
     li r4, 0x3
     li r5, 0x1
-    bl fn_806DED80
+    bl net_sendPacket
     li r3, 0x3
     b lbl_fn_806E0930_00000D80
 lbl_fn_806E0930_00000D70:
@@ -1346,7 +1346,7 @@ lbl_fn_806E0DE0_00001194:
     mr r3, r26
     li r4, 0x3
     li r5, 0x1
-    bl fn_806DED80
+    bl net_sendPacket
     li r3, 0x3
     b lbl_fn_806E0DE0_000019FC
 lbl_fn_806E0DE0_000011D4:
@@ -1364,7 +1364,7 @@ lbl_fn_806E0DE0_000011D4:
     mr r3, r26
     li r4, 0x3
     li r5, 0x1
-    bl fn_806DED80
+    bl net_sendPacket
     li r3, 0x3
     b lbl_fn_806E0DE0_000019FC
 lbl_fn_806E0DE0_00001218:
@@ -1779,7 +1779,7 @@ lbl_fn_806E0DE0_0000179C:
     mr r3, r26
     li r4, 0x3
     li r5, 0x1
-    bl fn_806DED80
+    bl net_sendPacket
     li r3, 0x3
     b lbl_fn_806E0DE0_000019FC
 lbl_fn_806E0DE0_000017E0:
@@ -1824,7 +1824,7 @@ lbl_fn_806E0DE0_00001860:
     beq lbl_fn_806E0DE0_00001890
     lwz r3, 0x8(r1)
     lwz r3, 0x1c(r3)
-    bl fn_806D7AC0
+    bl net_socketClose
     lwz r4, 0x8(r1)
     li r0, 0x0
     addi r3, r1, 0x100
@@ -1956,7 +1956,7 @@ asm void fn_806E16B0(void)
     cmpwi r0, 0x0
     ble lbl_fn_806E16B0_00001AB8
     addi r5, r31, 0x190
-    bl fn_806DE480
+    bl net_sendString
     lwz r5, 0x198(r30)
     mr r3, r28
     mr r4, r29
@@ -1964,11 +1964,11 @@ asm void fn_806E16B0(void)
     lwz r5, 0x5e4(r30)
     mr r3, r28
     mr r4, r29
-    bl fn_806DE480
+    bl net_sendString
     mr r3, r28
     mr r4, r29
     addi r5, r31, 0x1a8
-    bl fn_806DE480
+    bl net_sendString
     lwz r5, 0x1a4(r30)
     mr r3, r28
     mr r4, r29
@@ -1976,7 +1976,7 @@ asm void fn_806E16B0(void)
     mr r3, r28
     mr r4, r29
     addi r5, r31, 0x1b8
-    bl fn_806DE480
+    bl net_sendString
     li r0, 0x0
     stw r0, 0x5ec(r30)
 lbl_fn_806E16B0_00001AB8:
@@ -1986,7 +1986,7 @@ lbl_fn_806E16B0_00001AB8:
     mr r3, r28
     mr r4, r29
     addi r5, r31, 0x1c0
-    bl fn_806DE480
+    bl net_sendString
     lwz r5, 0x198(r30)
     mr r3, r28
     mr r4, r29
@@ -1994,11 +1994,11 @@ lbl_fn_806E16B0_00001AB8:
     lwz r5, 0x5f4(r30)
     mr r3, r28
     mr r4, r29
-    bl fn_806DE480
+    bl net_sendString
     mr r3, r28
     mr r4, r29
     addi r5, r31, 0x1b8
-    bl fn_806DE480
+    bl net_sendString
     li r0, 0x0
     stw r0, 0x5fc(r30)
 lbl_fn_806E16B0_00001B0C:
@@ -2050,7 +2050,7 @@ lbl_fn_806E17D0_00001BA0:
     mr r3, r31
     addi r5, r30, 0xc8
     addi r4, r29, 0x5e4
-    bl fn_806DE480
+    bl net_sendString
     cmpwi r3, 0x0
     beq lbl_fn_806E17D0_00001BD0
     b lbl_fn_806E17D0_00001BF4
@@ -2058,7 +2058,7 @@ lbl_fn_806E17D0_00001BD0:
     mr r3, r31
     addi r4, r29, 0x5e4
     addi r5, r1, 0x8
-    bl fn_806DE480
+    bl net_sendString
     cmpwi r3, 0x0
     li r0, 0x0
     beq lbl_fn_806E17D0_00001BF0
@@ -2081,7 +2081,7 @@ lbl_fn_806E17D0_00001C1C:
     addi r29, r30, 0x1ec
     addi r5, r30, 0x118
     addi r4, r28, 0x5e4
-    bl fn_806DE480
+    bl net_sendString
     cmpwi r3, 0x0
     beq lbl_fn_806E17D0_00001C3C
     b lbl_fn_806E17D0_00001C60
@@ -2089,7 +2089,7 @@ lbl_fn_806E17D0_00001C3C:
     mr r3, r31
     mr r5, r29
     addi r4, r28, 0x5e4
-    bl fn_806DE480
+    bl net_sendString
     cmpwi r3, 0x0
     li r0, 0x0
     beq lbl_fn_806E17D0_00001C5C
@@ -2105,7 +2105,7 @@ lbl_fn_806E17D0_00001C6C:
     addi r28, r30, 0x1f0
     addi r5, r30, 0x118
     addi r4, r29, 0x5e4
-    bl fn_806DE480
+    bl net_sendString
     cmpwi r3, 0x0
     beq lbl_fn_806E17D0_00001C8C
     b lbl_fn_806E17D0_00001CB0
@@ -2113,7 +2113,7 @@ lbl_fn_806E17D0_00001C8C:
     mr r3, r31
     mr r5, r28
     addi r4, r29, 0x5e4
-    bl fn_806DE480
+    bl net_sendString
     cmpwi r3, 0x0
     li r0, 0x0
     beq lbl_fn_806E17D0_00001CAC
@@ -2129,7 +2129,7 @@ lbl_fn_806E17D0_00001CBC:
     addi r28, r30, 0x1f4
     addi r5, r30, 0x118
     addi r4, r29, 0x5e4
-    bl fn_806DE480
+    bl net_sendString
     cmpwi r3, 0x0
     beq lbl_fn_806E17D0_00001CDC
     b lbl_fn_806E17D0_00001D00
@@ -2137,7 +2137,7 @@ lbl_fn_806E17D0_00001CDC:
     mr r3, r31
     mr r5, r28
     addi r4, r29, 0x5e4
-    bl fn_806DE480
+    bl net_sendString
     cmpwi r3, 0x0
     li r0, 0x0
     beq lbl_fn_806E17D0_00001CFC
@@ -2161,7 +2161,7 @@ lbl_fn_806E17D0_00001D0C:
     mr r3, r31
     addi r5, r30, 0xb0
     addi r4, r28, 0x5e4
-    bl fn_806DE480
+    bl net_sendString
     cmpwi r3, 0x0
     beq lbl_fn_806E17D0_00001D4C
     b lbl_fn_806E17D0_00001D70
@@ -2169,7 +2169,7 @@ lbl_fn_806E17D0_00001D4C:
     mr r3, r31
     addi r4, r28, 0x5e4
     addi r5, r1, 0x8
-    bl fn_806DE480
+    bl net_sendString
     cmpwi r3, 0x0
     li r0, 0x0
     beq lbl_fn_806E17D0_00001D6C
@@ -2188,7 +2188,7 @@ lbl_fn_806E17D0_00001D70:
     mr r3, r31
     addi r5, r30, 0x208
     addi r4, r28, 0x5f4
-    bl fn_806DE480
+    bl net_sendString
     cmpwi r3, 0x0
     beq lbl_fn_806E17D0_00001DAC
     b lbl_fn_806E17D0_00001DD0
@@ -2196,7 +2196,7 @@ lbl_fn_806E17D0_00001DAC:
     mr r3, r31
     addi r4, r28, 0x5f4
     addi r5, r1, 0x8
-    bl fn_806DE480
+    bl net_sendString
     cmpwi r3, 0x0
     li r0, 0x0
     beq lbl_fn_806E17D0_00001DCC
@@ -2215,7 +2215,7 @@ lbl_fn_806E17D0_00001DD0:
     mr r3, r31
     addi r5, r30, 0x218
     addi r4, r28, 0x5f4
-    bl fn_806DE480
+    bl net_sendString
     cmpwi r3, 0x0
     beq lbl_fn_806E17D0_00001E0C
     b lbl_fn_806E17D0_00001E30
@@ -2223,7 +2223,7 @@ lbl_fn_806E17D0_00001E0C:
     mr r3, r31
     addi r4, r28, 0x5f4
     addi r5, r1, 0x8
-    bl fn_806DE480
+    bl net_sendString
     cmpwi r3, 0x0
     li r0, 0x0
     beq lbl_fn_806E17D0_00001E2C
@@ -2244,7 +2244,7 @@ lbl_fn_806E17D0_00001E30:
     mr r3, r31
     addi r5, r30, 0x224
     addi r4, r28, 0x5f4
-    bl fn_806DE480
+    bl net_sendString
     cmpwi r3, 0x0
     beq lbl_fn_806E17D0_00001E74
     b lbl_fn_806E17D0_00001E98
@@ -2252,7 +2252,7 @@ lbl_fn_806E17D0_00001E74:
     mr r3, r31
     addi r4, r28, 0x5f4
     addi r5, r1, 0x8
-    bl fn_806DE480
+    bl net_sendString
     cmpwi r3, 0x0
     li r0, 0x0
     beq lbl_fn_806E17D0_00001E94
@@ -2273,7 +2273,7 @@ lbl_fn_806E17D0_00001E98:
     mr r3, r31
     addi r5, r30, 0x230
     addi r4, r28, 0x5f4
-    bl fn_806DE480
+    bl net_sendString
     cmpwi r3, 0x0
     beq lbl_fn_806E17D0_00001EDC
     b lbl_fn_806E17D0_00001F00
@@ -2281,7 +2281,7 @@ lbl_fn_806E17D0_00001EDC:
     mr r3, r31
     addi r4, r28, 0x5f4
     addi r5, r1, 0x8
-    bl fn_806DE480
+    bl net_sendString
     cmpwi r3, 0x0
     li r0, 0x0
     beq lbl_fn_806E17D0_00001EFC
@@ -2302,7 +2302,7 @@ lbl_fn_806E17D0_00001F00:
     mr r3, r31
     addi r5, r30, 0x240
     addi r4, r28, 0x5f4
-    bl fn_806DE480
+    bl net_sendString
     cmpwi r3, 0x0
     beq lbl_fn_806E17D0_00001F44
     b lbl_fn_806E17D0_00001F68
@@ -2310,7 +2310,7 @@ lbl_fn_806E17D0_00001F44:
     mr r3, r31
     addi r4, r28, 0x5f4
     addi r5, r1, 0x8
-    bl fn_806DE480
+    bl net_sendString
     cmpwi r3, 0x0
     li r0, 0x0
     beq lbl_fn_806E17D0_00001F64
@@ -2329,7 +2329,7 @@ lbl_fn_806E17D0_00001F68:
     mr r3, r31
     addi r5, r30, 0x250
     addi r4, r28, 0x5f4
-    bl fn_806DE480
+    bl net_sendString
     cmpwi r3, 0x0
     beq lbl_fn_806E17D0_00001FA4
     b lbl_fn_806E17D0_00001FC8
@@ -2337,7 +2337,7 @@ lbl_fn_806E17D0_00001FA4:
     mr r3, r31
     addi r4, r28, 0x5f4
     addi r5, r1, 0x8
-    bl fn_806DE480
+    bl net_sendString
     cmpwi r3, 0x0
     li r0, 0x0
     beq lbl_fn_806E17D0_00001FC4
@@ -2356,7 +2356,7 @@ lbl_fn_806E17D0_00001FC8:
     mr r3, r31
     addi r5, r30, 0x260
     addi r4, r28, 0x5f4
-    bl fn_806DE480
+    bl net_sendString
     cmpwi r3, 0x0
     beq lbl_fn_806E17D0_00002004
     b lbl_fn_806E17D0_00002028
@@ -2364,7 +2364,7 @@ lbl_fn_806E17D0_00002004:
     mr r3, r31
     addi r4, r28, 0x5f4
     addi r5, r1, 0x8
-    bl fn_806DE480
+    bl net_sendString
     cmpwi r3, 0x0
     li r0, 0x0
     beq lbl_fn_806E17D0_00002024
@@ -2387,7 +2387,7 @@ lbl_fn_806E17D0_00002040:
     mr r3, r31
     addi r5, r30, 0x274
     addi r4, r28, 0x5f4
-    bl fn_806DE480
+    bl net_sendString
     cmpwi r3, 0x0
     beq lbl_fn_806E17D0_00002070
     b lbl_fn_806E17D0_00002094
@@ -2395,7 +2395,7 @@ lbl_fn_806E17D0_00002070:
     mr r3, r31
     addi r4, r28, 0x5f4
     addi r5, r1, 0x8
-    bl fn_806DE480
+    bl net_sendString
     cmpwi r3, 0x0
     li r0, 0x0
     beq lbl_fn_806E17D0_00002090
@@ -2414,7 +2414,7 @@ lbl_fn_806E17D0_00002094:
     mr r3, r31
     addi r5, r30, 0x130
     addi r4, r28, 0x5e4
-    bl fn_806DE480
+    bl net_sendString
     cmpwi r3, 0x0
     beq lbl_fn_806E17D0_000020D0
     b lbl_fn_806E17D0_000020F4
@@ -2422,7 +2422,7 @@ lbl_fn_806E17D0_000020D0:
     mr r3, r31
     addi r4, r28, 0x5e4
     addi r5, r1, 0x8
-    bl fn_806DE480
+    bl net_sendString
     cmpwi r3, 0x0
     li r0, 0x0
     beq lbl_fn_806E17D0_000020F0
@@ -2441,7 +2441,7 @@ lbl_fn_806E17D0_000020F4:
     mr r3, r31
     addi r5, r30, 0x138
     addi r4, r28, 0x5e4
-    bl fn_806DE480
+    bl net_sendString
     cmpwi r3, 0x0
     beq lbl_fn_806E17D0_00002130
     b lbl_fn_806E17D0_00002154
@@ -2449,7 +2449,7 @@ lbl_fn_806E17D0_00002130:
     mr r3, r31
     addi r4, r28, 0x5e4
     addi r5, r1, 0x8
-    bl fn_806DE480
+    bl net_sendString
     cmpwi r3, 0x0
     li r0, 0x0
     beq lbl_fn_806E17D0_00002150
@@ -2468,7 +2468,7 @@ lbl_fn_806E17D0_00002154:
     mr r3, r31
     addi r5, r30, 0x140
     addi r4, r28, 0x5e4
-    bl fn_806DE480
+    bl net_sendString
     cmpwi r3, 0x0
     beq lbl_fn_806E17D0_00002190
     b lbl_fn_806E17D0_000021B4
@@ -2476,7 +2476,7 @@ lbl_fn_806E17D0_00002190:
     mr r3, r31
     addi r4, r28, 0x5e4
     addi r5, r1, 0x8
-    bl fn_806DE480
+    bl net_sendString
     cmpwi r3, 0x0
     li r0, 0x0
     beq lbl_fn_806E17D0_000021B0
@@ -2495,7 +2495,7 @@ lbl_fn_806E17D0_000021B4:
     mr r3, r31
     addi r5, r30, 0x148
     addi r4, r28, 0x5e4
-    bl fn_806DE480
+    bl net_sendString
     cmpwi r3, 0x0
     beq lbl_fn_806E17D0_000021F0
     b lbl_fn_806E17D0_00002214
@@ -2503,7 +2503,7 @@ lbl_fn_806E17D0_000021F0:
     mr r3, r31
     addi r4, r28, 0x5e4
     addi r5, r1, 0x8
-    bl fn_806DE480
+    bl net_sendString
     cmpwi r3, 0x0
     li r0, 0x0
     beq lbl_fn_806E17D0_00002210
@@ -2522,7 +2522,7 @@ lbl_fn_806E17D0_00002214:
     mr r3, r31
     addi r5, r30, 0x150
     addi r4, r28, 0x5e4
-    bl fn_806DE480
+    bl net_sendString
     cmpwi r3, 0x0
     beq lbl_fn_806E17D0_00002250
     b lbl_fn_806E17D0_00002274
@@ -2530,7 +2530,7 @@ lbl_fn_806E17D0_00002250:
     mr r3, r31
     addi r4, r28, 0x5e4
     addi r5, r1, 0x8
-    bl fn_806DE480
+    bl net_sendString
     cmpwi r3, 0x0
     li r0, 0x0
     beq lbl_fn_806E17D0_00002270
@@ -2549,7 +2549,7 @@ lbl_fn_806E17D0_00002274:
     mr r3, r31
     addi r5, r30, 0x158
     addi r4, r28, 0x5e4
-    bl fn_806DE480
+    bl net_sendString
     cmpwi r3, 0x0
     beq lbl_fn_806E17D0_000022B0
     b lbl_fn_806E17D0_000022D4
@@ -2557,7 +2557,7 @@ lbl_fn_806E17D0_000022B0:
     mr r3, r31
     addi r4, r28, 0x5e4
     addi r5, r1, 0x8
-    bl fn_806DE480
+    bl net_sendString
     cmpwi r3, 0x0
     li r0, 0x0
     beq lbl_fn_806E17D0_000022D0
@@ -2576,7 +2576,7 @@ lbl_fn_806E17D0_000022D4:
     mr r3, r31
     addi r5, r30, 0x160
     addi r4, r28, 0x5e4
-    bl fn_806DE480
+    bl net_sendString
     cmpwi r3, 0x0
     beq lbl_fn_806E17D0_00002310
     b lbl_fn_806E17D0_00002334
@@ -2584,7 +2584,7 @@ lbl_fn_806E17D0_00002310:
     mr r3, r31
     addi r4, r28, 0x5e4
     addi r5, r1, 0x8
-    bl fn_806DE480
+    bl net_sendString
     cmpwi r3, 0x0
     li r0, 0x0
     beq lbl_fn_806E17D0_00002330

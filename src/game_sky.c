@@ -40,7 +40,7 @@ extern void fn_805B6C10(void);
 extern void fn_805B6C48(void);
 extern void fn_806140C0(void);
 extern void vsprintf(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 extern void fn_80686AC4(void);
 extern void fn_80686B64(void);
 extern void fn_80686B90(void);
@@ -1400,7 +1400,7 @@ asm void fn_800DD1EC(void)
     stw r29, 0x14(r1)
     mr r29, r3
     mr r3, r30
-    bl fn_80686A48
+    bl wcslen
     mr r31, r3
     mr r3, r29
     bl fn_800DC1DC
@@ -1462,7 +1462,7 @@ asm void fn_800DD2A8(void)
     li r27, 0x2c
 lbl_fn_800DD2A8_000011AC:
     mr r3, r31
-    bl fn_80686A48
+    bl wcslen
     mr r29, r3
     mr r3, r31
     mr r4, r27
@@ -1470,13 +1470,13 @@ lbl_fn_800DD2A8_000011AC:
     cmpwi r3, 0x0
     mr r27, r3
     beq lbl_fn_800DD2A8_000011D8
-    bl fn_80686A48
+    bl wcslen
     subf r29, r3, r29
 lbl_fn_800DD2A8_000011D8:
     cmpwi r27, 0x0
     beq lbl_fn_800DD2A8_000011F0
     addi r3, r27, 0x2
-    bl fn_80686A48
+    bl wcslen
     mr r27, r3
     b lbl_fn_800DD2A8_000011F4
 lbl_fn_800DD2A8_000011F0:
@@ -1533,7 +1533,7 @@ lbl_fn_800DD2A8_00001284:
     mr r4, r31
     bl fn_80686AC4
     mr r3, r31
-    bl fn_80686A48
+    bl wcslen
     subf r0, r28, r27
     mr r31, r30
     subf r0, r0, r3
@@ -1797,7 +1797,7 @@ lbl_fn_800DD3FC_00001644:
     li r5, 0xa
     bl fn_8068B2A0
     mr r24, r3
-    bl fn_80686A48
+    bl wcslen
     mr r29, r3
     bl fn_8006BA30
     subi r0, r3, 0x2

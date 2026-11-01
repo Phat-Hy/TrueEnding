@@ -22,7 +22,7 @@ extern void fn_80208A3C(void);
 extern void fn_80208B70(void);
 extern void fn_8046DC5C(void);
 extern void fn_8046DD20(void);
-extern void fn_8068236C(void);
+extern void strncpy(void);
 extern void strcmp(void);
 extern void strncmp(void);
 extern void atoi(void);
@@ -688,11 +688,11 @@ lbl_fn_80216AFC_000006EC:
     addi r3, r1, 0xc
     addi r4, r26, 0x2
     li r5, 0x3
-    bl fn_8068236C
+    bl strncpy
     addi r3, r1, 0x8
     addi r4, r26, 0x6
     li r5, 0x2
-    bl fn_8068236C
+    bl strncpy
     addi r3, r1, 0xc
     bl fn_800DC12C
     stw r3, 0x0(r28)
@@ -713,11 +713,11 @@ lbl_fn_80216AFC_00000750:
     addi r3, r1, 0xc
     addi r4, r26, 0x2
     li r5, 0x2
-    bl fn_8068236C
+    bl strncpy
     addi r3, r1, 0x8
     addi r4, r26, 0x5
     li r5, 0x2
-    bl fn_8068236C
+    bl strncpy
     addi r3, r1, 0xc
     bl fn_800DC12C
     stw r3, 0x0(r28)
@@ -737,11 +737,11 @@ lbl_fn_80216AFC_000007B0:
     addi r3, r1, 0xc
     addi r4, r26, 0x2
     li r5, 0x3
-    bl fn_8068236C
+    bl strncpy
     addi r3, r1, 0x8
     addi r4, r26, 0x6
     li r5, 0x2
-    bl fn_8068236C
+    bl strncpy
     addi r3, r1, 0xc
     bl fn_800DC12C
     stw r3, 0x0(r28)
@@ -761,11 +761,11 @@ lbl_fn_80216AFC_0000080C:
     addi r3, r1, 0xc
     addi r4, r26, 0x2
     li r5, 0x3
-    bl fn_8068236C
+    bl strncpy
     addi r3, r1, 0x8
     addi r4, r26, 0x6
     li r5, 0x2
-    bl fn_8068236C
+    bl strncpy
     addi r3, r1, 0xc
     bl fn_800DC12C
     stw r3, 0x0(r28)
@@ -1172,7 +1172,7 @@ lbl_fn_80216CD0_00000E28:
     mr r4, r3
     addi r3, r1, 0x18
     li r5, 0x20
-    bl fn_8068236C
+    bl strncpy
     addi r3, r1, 0x6ac
     bl talk_parseQuotedString
     lwz r28, lbl_8087F270

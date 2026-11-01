@@ -41,7 +41,7 @@ extern void atn_LoadHandle_getStatus(void);
 extern void fn_80473F88(void);
 extern void taskManager_updateTasks(void);
 extern void fn_805F9EF0(void);
-extern void fn_8068236C(void);
+extern void strncpy(void);
 extern void strcmp(void);
 extern void strrchr(void);
 extern void strstr(void);
@@ -278,7 +278,7 @@ lbl_fn_8046D1EC_0000023C:
     beq lbl_fn_8046D1EC_00000278
     addi r4, r28, 0x149
     li r5, 0x4
-    bl fn_8068236C
+    bl strncpy
 lbl_fn_8046D1EC_00000278:
     lwz r4, lbl_8087F518
     lis r5, lbl_8075561C@ha
@@ -875,7 +875,7 @@ asm void fn_8046DBF8(void)
     beq lbl_fn_8046DBF8_00000AA8
     addi r4, r31, 0x149
     li r5, 0x4
-    bl fn_8068236C
+    bl strncpy
 lbl_fn_8046DBF8_00000AA8:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)

@@ -20,7 +20,7 @@ extern void fn_805089E4(void);
 extern void fn_8050B7F0(void);
 extern void fn_8050BA6C(void);
 extern void fn_8050D7F0(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 extern void fn_80686A64(void);
 extern void fn_80686A80(void);
 extern void fn_80686AF0(void);
@@ -1230,7 +1230,7 @@ lbl_fn_8050E998_00000E64:
     mr r29, r3
     stw r31, 0x14(r1)
     stw r31, 0x18(r1)
-    bl fn_80686A48
+    bl wcslen
     mr r27, r3
     mr r3, r28
     mr r4, r27
@@ -1716,7 +1716,7 @@ lbl_fn_8050EFD0_000014EC:
     stw r0, 0x1c(r1)
     mr r3, r30
     stw r0, 0x20(r1)
-    bl fn_80686A48
+    bl wcslen
     mr r29, r3
     mr r3, r31
     mr r4, r29
@@ -1743,7 +1743,7 @@ lbl_fn_8050EFD0_00001568:
     lbz r0, 0x10(r1)
     addi r3, r28, 0x1c0
     stb r0, 0x14(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r4, r29
     add r5, r28, r0
@@ -1814,7 +1814,7 @@ asm void fn_8050F19C(void)
     stw r0, 0x18(r1)
     stw r0, 0x1c(r1)
     stw r0, 0x20(r1)
-    bl fn_80686A48
+    bl wcslen
     mr r29, r3
     mr r3, r30
     mr r4, r29
@@ -1841,7 +1841,7 @@ lbl_fn_8050F19C_000016C0:
     lbz r0, 0xc(r1)
     addi r3, r28, 0x1c0
     stb r0, 0x8(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r4, r29
     add r5, r28, r0
@@ -2080,7 +2080,7 @@ lbl_fn_8050F474_000019CC:
     addi r3, r1, 0x10
     stw r0, 0x4(r27)
     stw r0, 0x8(r27)
-    bl fn_80686A48
+    bl wcslen
     mr r30, r3
     mr r3, r27
     mr r4, r30

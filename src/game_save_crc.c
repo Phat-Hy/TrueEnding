@@ -23,7 +23,7 @@ extern void fn_801FED70(void);
 extern void fn_801FEDBC(void);
 extern void thread_dispatchToQueue(void);
 extern void fn_801FEEFC(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
 
@@ -293,7 +293,7 @@ lbl_fn_801F5E9C_0000032C:
     lbz r0, 0x1c(r1)
     mr r3, r29
     stb r0, 0x18(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r5, r30
     mr r6, r29
@@ -480,7 +480,7 @@ lbl_fn_801F60B8_000005C0:
     lbz r0, 0x8(r1)
     addi r3, r1, 0x70
     stb r0, 0xc(r1)
-    bl fn_80686A48
+    bl wcslen
     addi r6, r1, 0x70
     slwi r0, r3, 1
     mr r7, r6

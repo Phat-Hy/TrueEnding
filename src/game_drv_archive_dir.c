@@ -71,7 +71,7 @@ extern void fn_805ADB2C(void);
 extern void fn_805AE13C(void);
 extern void fn_805AE18C(void);
 extern void printf(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 extern void abort(void);
 
 /* External data declarations */
@@ -2388,7 +2388,7 @@ lbl_fn_805AC75C_00001FC8:
     addi r3, r1, 0x158
     stw r23, 0x6c(r1)
     stw r23, 0x70(r1)
-    bl fn_80686A48
+    bl wcslen
     mr r17, r3
     mr r3, r22
     mr r4, r17
@@ -2690,7 +2690,7 @@ lbl_fn_805AC75C_0000244C:
     mr r3, r25
     stw r16, 0x60(r1)
     stw r16, 0x64(r1)
-    bl fn_80686A48
+    bl wcslen
     mr r27, r3
     mr r3, r26
     mr r4, r27

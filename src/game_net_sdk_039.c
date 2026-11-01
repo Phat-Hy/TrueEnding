@@ -21,7 +21,7 @@ extern void fn_806A4260(void);
 extern void fn_806A426C(void);
 extern void fn_806D58F0(void);
 extern void fn_806D7AA0(void);
-extern void fn_806D7AC0(void);
+extern void net_socketClose(void);
 extern void fn_806D7DA0(void);
 extern void fn_806D7F20(void);
 extern void fn_806D7F30(void);
@@ -1760,7 +1760,7 @@ asm void fn_806F2010(void)
     cmpwi r0, 0x0
     bne lbl_fn_806F2010_000017A4
     mr r3, r4
-    bl fn_806D7AC0
+    bl net_socketClose
 lbl_fn_806F2010_000017A4:
     mr r3, r31
     li r4, 0x0

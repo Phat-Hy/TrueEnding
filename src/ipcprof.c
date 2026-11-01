@@ -4,7 +4,7 @@
 extern void OSDisableInterrupts(void);
 extern void OSGetTime(void);
 extern void OSRestoreInterrupts(void);
-extern void fn_8068236C(void);
+extern void strncpy(void);
 extern void _savegpr_25(void);
 extern void _restgpr_25(void);
 
@@ -200,7 +200,7 @@ lbl_AddReqInfo_000001C0:
     add r28, r25, r29
     mr r3, r28
     addis r4, r4, 0x8000
-    bl fn_8068236C
+    bl strncpy
     li r0, 0x0
     stb r0, 0x2f(r28)
     stw r28, 0xc(r27)
@@ -262,7 +262,7 @@ lbl_fn_8061DFD0_000002E8:
     lwz r4, 0xc(r29)
     li r5, 0x2f
     add r3, r26, r0
-    bl fn_8068236C
+    bl strncpy
     lwz r4, 0x4(r25)
     mulli r3, r28, 0x30
     addi r0, r31, 0x2880

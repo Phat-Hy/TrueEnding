@@ -33,7 +33,7 @@ extern void fn_8059E740(void);
 extern void fn_805F9EF0(void);
 extern void fn_805FA200(void);
 extern void fn_805FA390(void);
-extern void fn_8068236C(void);
+extern void strncpy(void);
 extern void fn_80716280(void);
 extern void fn_80724DF0(void);
 extern void fn_80724E90(void);
@@ -2015,7 +2015,7 @@ lbl_fn_8059D8B4_00001968:
     mr r4, r30
     mr r5, r31
     addi r3, r1, 0x8
-    bl fn_8068236C
+    bl strncpy
     addi r4, r1, 0x8
     li r0, 0x0
     stbx r0, r4, r31

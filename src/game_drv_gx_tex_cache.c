@@ -100,7 +100,7 @@ extern void fn_80625BF0(void);
 extern void fn_80625C90(void);
 extern void fn_806263E0(void);
 extern void fn_8065F520(void);
-extern void fn_806823B0(void);
+extern void strcat(void);
 extern void strcmp(void);
 extern void std_sqrt(void);
 extern char* strcpy(char* dest, const char* src);
@@ -1757,7 +1757,7 @@ lbl_fn_805C4690_000015D4:
     addi r3, r1, 0x58
     slwi r0, r0, 2
     lwzx r4, r30, r0
-    bl fn_806823B0
+    bl strcat
     lwz r3, 0x1ec(r31)
     addi r5, r1, 0x58
     li r4, 0x0
@@ -1847,7 +1847,7 @@ lbl_fn_805C4690_00001724:
     addi r3, r1, 0x58
     slwi r0, r0, 2
     lwzx r4, r29, r0
-    bl fn_806823B0
+    bl strcat
     lwz r3, 0x1ec(r31)
     addi r5, r1, 0x58
     li r4, 0x0
@@ -1932,7 +1932,7 @@ lbl_fn_805C4690_0000186C:
     bl strcpy
     lwz r4, 0x0(r29)
     addi r3, r1, 0x58
-    bl fn_806823B0
+    bl strcat
     lwz r3, 0x1ec(r31)
     addi r5, r1, 0x58
     li r4, 0x0

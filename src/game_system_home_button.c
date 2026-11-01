@@ -67,7 +67,7 @@ extern void fn_805A38F4(void);
 extern void PSVECSquareMag(void);
 extern void printf(void);
 extern void rand(void);
-extern void fn_8068236C(void);
+extern void strncpy(void);
 extern void atoi(void);
 extern void abort(void);
 extern void runtime_registerStaticObject(void);
@@ -1353,7 +1353,7 @@ asm void fn_80360B40(void)
     mr r4, r3
     addi r3, r30, 0x4
     li r5, 0x20
-    bl fn_8068236C
+    bl strncpy
     lwz r3, lbl_8087EE90
     cmpwi r3, 0x0
     beq lbl_fn_80360B40_00000F94

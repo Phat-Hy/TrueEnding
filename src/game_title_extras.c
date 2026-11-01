@@ -34,7 +34,7 @@ extern void fn_8020924C(void);
 extern void fn_803B3D2C(void);
 extern void fn_803CC6B4(void);
 extern void printf(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 extern void abort(void);
 
 /* External data declarations */
@@ -765,7 +765,7 @@ asm void fn_803B4C38(void)
     mr r3, r16
     stw r14, 0x50(r1)
     stw r14, 0x54(r1)
-    bl fn_80686A48
+    bl wcslen
     mr r18, r3
     mr r3, r17
     mr r4, r18
@@ -825,7 +825,7 @@ lbl_fn_803B4C38_00000A6C:
     mr r3, r21
     stw r30, 0x38(r1)
     stw r30, 0x3c(r1)
-    bl fn_80686A48
+    bl wcslen
     mr r16, r3
     mr r3, r20
     mr r4, r16
@@ -1773,7 +1773,7 @@ lbl_fn_803B5974_0000171C:
     mr r3, r30
     stw r0, 0x88(r1)
     stw r0, 0x8c(r1)
-    bl fn_80686A48
+    bl wcslen
     mr r28, r3
     mr r3, r31
     mr r4, r28

@@ -20,7 +20,7 @@ extern void fn_801E2D60(void);
 extern void fn_801E2D68(void);
 extern void fn_80206BE4(void);
 extern void fn_80211480(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 extern void fn_80686AF0(void);
 extern void fn_80686B64(void);
 
@@ -853,10 +853,10 @@ lbl_fn_801E5394_00000B98:
     cmpwi r3, 0x0
     bne lbl_fn_801E5394_00000BE0
     lwz r3, 0x8(r29)
-    bl fn_80686A48
+    bl wcslen
     mr r31, r3
     lwz r3, 0x8(r30)
-    bl fn_80686A48
+    bl wcslen
     cmpw r31, r3
     beq lbl_fn_801E5394_00000BE0
     xor r0, r3, r31
@@ -1330,10 +1330,10 @@ lbl_fn_801E5A5C_00001268:
     cmpwi r3, 0x0
     bne lbl_fn_801E5A5C_000012B0
     lwz r3, 0x8(r27)
-    bl fn_80686A48
+    bl wcslen
     mr r25, r3
     lwz r3, 0x8(r26)
-    bl fn_80686A48
+    bl wcslen
     cmpw r25, r3
     beq lbl_fn_801E5A5C_000012B0
     xor r0, r3, r25
@@ -1430,10 +1430,10 @@ lbl_fn_801E5A5C_000013D8:
     cmpwi r3, 0x0
     bne lbl_fn_801E5A5C_00001420
     lwz r3, 0x8(r27)
-    bl fn_80686A48
+    bl wcslen
     mr r25, r3
     lwz r3, 0x8(r26)
-    bl fn_80686A48
+    bl wcslen
     cmpw r25, r3
     beq lbl_fn_801E5A5C_00001420
     xor r0, r3, r25
@@ -1573,10 +1573,10 @@ lbl_fn_801E5A5C_000015EC:
     cmpwi r3, 0x0
     bne lbl_fn_801E5A5C_00001634
     lwz r3, 0x8(r25)
-    bl fn_80686A48
+    bl wcslen
     mr r27, r3
     lwz r3, 0x8(r26)
-    bl fn_80686A48
+    bl wcslen
     cmpw r27, r3
     beq lbl_fn_801E5A5C_00001634
     xor r0, r3, r27
@@ -1801,10 +1801,10 @@ lbl_fn_801E610C_00001934:
     cmpwi r3, 0x0
     bne lbl_fn_801E610C_0000197C
     lwz r3, 0x8(r21)
-    bl fn_80686A48
+    bl wcslen
     mr r23, r3
     lwz r3, 0x8(r22)
-    bl fn_80686A48
+    bl wcslen
     cmpw r23, r3
     beq lbl_fn_801E610C_0000197C
     xor r0, r3, r23

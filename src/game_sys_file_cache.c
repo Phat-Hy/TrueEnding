@@ -29,7 +29,7 @@ extern void rand(void);
 extern void strcmp(void);
 extern void atoi(void);
 extern void wmemcpy(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 extern void abort(void);
 extern void runtime_registerStaticObject(void);
 extern void fn_806958E0(void);
@@ -416,7 +416,7 @@ lbl_fn_8021ED08_00000458:
     mr r27, r3
     cmplw r3, r0
     beq lbl_fn_8021ED08_00000488
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r4, r27
     addi r3, r28, 0x28

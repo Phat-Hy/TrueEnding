@@ -8,7 +8,7 @@ extern void fn_800DD3FC(void);
 extern void fn_80206C50(void);
 extern void fn_80211480(void);
 extern void fn_80595F7C(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 extern void fn_80686AF0(void);
 extern void fn_80686B64(void);
 
@@ -131,10 +131,10 @@ lbl_fn_80593030_00000160:
     cmpwi r3, 0x0
     bne lbl_fn_80593030_000001A8
     lwz r3, 0x8(r18)
-    bl fn_80686A48
+    bl wcslen
     mr r16, r3
     lwz r3, 0x8(r17)
-    bl fn_80686A48
+    bl wcslen
     cmpw r16, r3
     beq lbl_fn_80593030_000001A8
     xor r0, r3, r16

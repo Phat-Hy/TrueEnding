@@ -37,7 +37,7 @@ extern void fn_805FA390(void);
 extern void fn_805FA5D0(void);
 extern void printf(void);
 extern void vsprintf(void);
-extern void fn_8068236C(void);
+extern void strncpy(void);
 extern void strstr(void);
 extern void abort(void);
 extern void fn_806958E0(void);
@@ -892,7 +892,7 @@ asm void fn_800697D8(void)
     mr r4, r29
     addi r3, r1, 0x8
     li r5, 0x7e
-    bl fn_8068236C
+    bl strncpy
     stb r30, 0x86(r1)
     b lbl_fn_800697D8_00000ABC
 lbl_fn_800697D8_00000A94:
@@ -1105,7 +1105,7 @@ lbl_fn_800698DC_00000D40:
     mr r4, r26
     addi r3, r1, 0x50
     li r5, 0x7e
-    bl fn_8068236C
+    bl strncpy
     stb r30, 0xce(r1)
     b lbl_fn_800698DC_00000DB4
 lbl_fn_800698DC_00000D8C:
@@ -1290,7 +1290,7 @@ asm void fn_80069D48(void)
     mr r4, r29
     addi r3, r1, 0x8
     li r5, 0x7e
-    bl fn_8068236C
+    bl strncpy
     stb r30, 0x86(r1)
     b lbl_fn_80069D48_00001030
 lbl_fn_80069D48_00001008:
@@ -3003,7 +3003,7 @@ asm void fn_8006B404(void)
     li r5, 0x3
     slwi r0, r0, 2
     lwzx r4, r31, r0
-    bl fn_8068236C
+    bl strncpy
     mr r3, r30
     b lbl_fn_8006B404_000026A4
 lbl_fn_8006B404_000026A0:
@@ -3047,7 +3047,7 @@ lbl_fn_8006B46C_000026F0:
     li r5, 0x3
     slwi r0, r0, 2
     lwzx r4, r31, r0
-    bl fn_8068236C
+    bl strncpy
 lbl_fn_8006B46C_00002724:
     li r0, 0x0
     stw r0, 0x0(r30)

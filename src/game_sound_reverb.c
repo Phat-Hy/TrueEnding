@@ -24,7 +24,7 @@ extern void fn_801DFFA4(void);
 extern void fn_801E057C(void);
 extern void fn_8020EF80(void);
 extern void fn_80211480(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 extern void fn_80686AF0(void);
 extern void fn_80686B64(void);
 
@@ -1628,10 +1628,10 @@ lbl_fn_801DF904_00001674:
     cmpwi r3, 0x0
     bne lbl_fn_801DF904_000016BC
     lwz r3, 0x8(r29)
-    bl fn_80686A48
+    bl wcslen
     mr r31, r3
     lwz r3, 0x8(r30)
-    bl fn_80686A48
+    bl wcslen
     cmpw r31, r3
     beq lbl_fn_801DF904_000016BC
     xor r0, r3, r31

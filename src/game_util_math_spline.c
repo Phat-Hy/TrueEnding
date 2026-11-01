@@ -17,7 +17,7 @@ extern void fn_8044D500(void);
 extern void fn_8044D560(void);
 extern void fn_804A251C(void);
 extern void fn_80584178(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 extern void fn_80686AF0(void);
 extern void fn_80686B64(void);
 
@@ -869,10 +869,10 @@ lbl_fn_805828B4_00000BA0:
     b lbl_fn_805828B4_00000BF8
 lbl_fn_805828B4_00000BB4:
     mr r3, r29
-    bl fn_80686A48
+    bl wcslen
     mr r27, r3
     mr r3, r26
-    bl fn_80686A48
+    bl wcslen
     cmpw r27, r3
     beq lbl_fn_805828B4_00000BE8
     xor r0, r3, r27
@@ -1447,10 +1447,10 @@ lbl_fn_805830D8_000013C8:
     b lbl_fn_805830D8_00001420
 lbl_fn_805830D8_000013DC:
     mr r3, r14
-    bl fn_80686A48
+    bl wcslen
     mr r15, r3
     mr r3, r17
-    bl fn_80686A48
+    bl wcslen
     cmpw r15, r3
     beq lbl_fn_805830D8_00001410
     xor r0, r3, r15
@@ -1661,10 +1661,10 @@ lbl_fn_805830D8_000016D8:
     b lbl_fn_805830D8_00001730
 lbl_fn_805830D8_000016EC:
     mr r3, r14
-    bl fn_80686A48
+    bl wcslen
     mr r15, r3
     mr r3, r17
-    bl fn_80686A48
+    bl wcslen
     cmpw r15, r3
     beq lbl_fn_805830D8_00001720
     xor r0, r3, r15
@@ -1999,10 +1999,10 @@ lbl_fn_805830D8_00001BD0:
     b lbl_fn_805830D8_00001C28
 lbl_fn_805830D8_00001BE4:
     mr r3, r14
-    bl fn_80686A48
+    bl wcslen
     mr r15, r3
     mr r3, r17
-    bl fn_80686A48
+    bl wcslen
     cmpw r15, r3
     beq lbl_fn_805830D8_00001C18
     xor r0, r3, r15

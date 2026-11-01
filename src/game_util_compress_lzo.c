@@ -77,7 +77,7 @@ extern void fn_805969D8(void);
 extern void fn_8059709C(void);
 extern void fn_8059726C(void);
 extern void fn_80597558(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 extern void fn_80686AF0(void);
 extern void fn_80686B64(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -1800,10 +1800,10 @@ lbl_fn_8058E5FC_000017D0:
     cmpwi r3, 0x0
     bne lbl_fn_8058E5FC_00001818
     lwz r3, 0x8(r29)
-    bl fn_80686A48
+    bl wcslen
     mr r31, r3
     lwz r3, 0x8(r30)
-    bl fn_80686A48
+    bl wcslen
     cmpw r31, r3
     beq lbl_fn_8058E5FC_00001818
     xor r0, r3, r31

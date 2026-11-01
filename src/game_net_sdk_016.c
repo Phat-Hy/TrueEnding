@@ -6,11 +6,11 @@ extern void OSGetTime(void);
 extern void __div2i(void);
 extern void _restgpr_16(void);
 extern void _savegpr_16(void);
-extern void fn_806809C0(void);
+extern void snprintf(void);
 extern void fn_806A420C(void);
 extern void fn_806A4270(void);
 extern void fn_806A7130(void);
-extern void fn_806A76B0(void);
+extern void net_formatLog(void);
 extern void fn_806AB920(void);
 extern void fn_806AB980(void);
 extern void fn_806ACCF0(void);
@@ -537,30 +537,30 @@ lbl_fn_806BCD40_000004E8:
     stw r0, 0x114(r1)
     crclr 6
     li r25, 0xe
-    bl fn_806A76B0
+    bl net_formatLog
     lbz r5, 0x16(r29)
     addi r4, r27, 0x1070
     li r3, 0x1
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     lwz r5, lbl_80860898@l(r28)
     addi r4, r27, 0x1088
     li r3, 0x1
     lwz r5, 0x8c0(r5)
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     lwz r5, lbl_80860898@l(r28)
     addi r4, r27, 0x109c
     li r3, 0x1
     lbz r5, 0x17(r5)
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     lwz r5, lbl_80860898@l(r28)
     addi r4, r27, 0x10b0
     li r3, 0x1
     lbz r5, 0x676(r5)
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     lwz r3, lbl_80860898@l(r28)
     lwz r22, 0x744(r3)
     cmpwi r22, 0xe
@@ -604,7 +604,7 @@ lbl_fn_806BCD40_000004E8:
     srwi r7, r0, 31
     add r7, r0, r7
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
 lbl_fn_806BCD40_000007FC:
     lis r3, lbl_80860898@ha
     li r0, 0xe
@@ -650,7 +650,7 @@ lbl_fn_806BCD40_00000894:
     addi r4, r27, 0x1240
     li r3, 0x1
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     lis r3, lbl_80860898@ha
     li r25, 0x1
     lwz r3, lbl_80860898@l(r3)
@@ -707,13 +707,13 @@ lbl_fn_806BCD40_00000934:
     addi r4, r27, 0x1254
     li r3, 0x40
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     b lbl_fn_806BCD40_00002E44
 lbl_fn_806BCD40_0000097C:
     addi r4, r27, 0x127c
     li r3, 0x40
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     lwz r3, lbl_80860898@l(r28)
     lwz r0, 0x7ac(r3)
     cmpw r29, r0
@@ -721,7 +721,7 @@ lbl_fn_806BCD40_0000097C:
     addi r4, r27, 0x1298
     li r3, 0x40
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     b lbl_fn_806BCD40_00002E44
 lbl_fn_806BCD40_000009B0:
     lwz r5, 0x8(r30)
@@ -736,7 +736,7 @@ lbl_fn_806BCD40_000009B0:
     addi r4, r27, 0x12d0
     li r3, 0x40
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     b lbl_fn_806BCD40_00002E44
 lbl_fn_806BCD40_000009E8:
     lwz r6, 0x2c(r30)
@@ -752,7 +752,7 @@ lbl_fn_806BCD40_000009E8:
     addi r4, r27, 0x1304
     li r3, 0x40
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     lwz r7, 0x2c(r30)
     addi r4, r27, 0x133c
     lwz r5, lbl_80860898@l(r28)
@@ -765,7 +765,7 @@ lbl_fn_806BCD40_000009E8:
     or r0, r6, r0
     rotlwi r6, r0, 16
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     b lbl_fn_806BCD40_00002E44
 lbl_fn_806BCD40_00000A58:
     cmpwi r31, 0xe
@@ -786,7 +786,7 @@ lbl_fn_806BCD40_00000A58:
     addi r4, r27, 0x1368
     li r3, 0x40
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     cmpwi r16, 0x0
     addi r8, r27, 0x100
     beq lbl_fn_806BCD40_00000AB4
@@ -811,7 +811,7 @@ lbl_fn_806BCD40_00000AEC:
     addi r4, r27, 0x139c
     li r3, 0x40
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     b lbl_fn_806BCD40_00002E44
 lbl_fn_806BCD40_00000B04:
     li r0, 0x0
@@ -947,7 +947,7 @@ lbl_fn_806BCD40_00000C88:
     lwz r5, 0x84(r1)
     lhz r6, 0x8e(r1)
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     lwz r3, lbl_80860898@l(r30)
     lbz r0, 0x14(r3)
     cmplwi r0, 0x3
@@ -959,19 +959,19 @@ lbl_fn_806BCD40_00000C88:
     stb r25, 0x17(r5)
     lbz r5, 0x96(r1)
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     lwz r5, lbl_80860898@l(r30)
     addi r4, r27, 0x1404
     lis r3, 0x1
     lwz r5, 0x8c0(r5)
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     lwz r5, lbl_80860898@l(r30)
     addi r4, r27, 0x1418
     lis r3, 0x1
     lbz r5, 0x17(r5)
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     lwz r8, lbl_80860898@l(r30)
     addi r4, r27, 0x142c
     lis r3, 0x1
@@ -980,14 +980,14 @@ lbl_fn_806BCD40_00000C88:
     lbz r7, 0x68a(r8)
     lbz r8, 0x68b(r8)
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     cmpwi r24, 0x0
     beq lbl_fn_806BCD40_00000DA8
     lbz r5, 0x16(r24)
     addi r4, r27, 0x1458
     lis r3, 0x1
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
 lbl_fn_806BCD40_00000DA8:
     lis r3, lbl_80860898@ha
     lwz r3, lbl_80860898@l(r3)
@@ -1045,7 +1045,7 @@ lbl_fn_806BCD40_00000DA8:
     srwi r7, r0, 31
     add r7, r0, r7
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
 lbl_fn_806BCD40_00000E8C:
     lis r3, lbl_80860898@ha
     li r0, 0x4
@@ -1101,7 +1101,7 @@ lbl_fn_806BCD40_00000EB8:
     srwi r7, r0, 31
     add r7, r0, r7
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
 lbl_fn_806BCD40_00000F64:
     lis r6, lbl_80860898@ha
     li r0, 0x5
@@ -1122,7 +1122,7 @@ lbl_fn_806BCD40_00000F9C:
     addi r4, r27, 0x1464
     li r3, 0x2
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     cmpwi r25, 0x1
     beq lbl_fn_806BCD40_00000FCC
     cmpwi r25, 0x2
@@ -1168,7 +1168,7 @@ lbl_fn_806BCD40_00000FEC:
     lbz r6, 0x17(r6)
     addi r6, r6, 0x1
     crclr 6
-    bl fn_806809C0
+    bl snprintf
     addi r3, r27, 0x60
     addi r4, r1, 0x24
     addi r5, r1, 0x58
@@ -1187,7 +1187,7 @@ lbl_fn_806BCD40_0000108C:
     addi r5, r27, 0x5c
     li r4, 0xc
     crclr 6
-    bl fn_806809C0
+    bl snprintf
     addi r3, r27, 0x64
     addi r4, r1, 0x24
     addi r5, r1, 0x58
@@ -1198,7 +1198,7 @@ lbl_fn_806BCD40_0000108C:
     li r4, 0xc
     li r6, 0x5a
     crclr 6
-    bl fn_806809C0
+    bl snprintf
     addi r3, r27, 0x68
     addi r4, r1, 0x24
     addi r5, r1, 0x58
@@ -1241,7 +1241,7 @@ lbl_fn_806BCD40_00001148:
     srwi r6, r0, 31
     li r4, 0xc
     crclr 6
-    bl fn_806809C0
+    bl snprintf
     addi r3, r27, 0x6c
     addi r4, r1, 0x24
     addi r5, r1, 0x58
@@ -1288,7 +1288,7 @@ lbl_fn_806BCD40_000011E8:
     addi r4, r27, 0x1478
     li r3, 0x40
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     lwz r4, 0x0(r30)
     rlwinm r3, r4, 24, 8, 15
     extlwi r0, r4, 8, 8
@@ -1330,7 +1330,7 @@ lbl_fn_806BCD40_000012AC:
     addi r4, r27, 0x1498
     li r3, 0x40
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     bl fn_806CD150
     cmpwi r3, 0x1
     bne lbl_fn_806BCD40_00001390
@@ -1378,7 +1378,7 @@ lbl_fn_806BCD40_000012AC:
     srwi r7, r0, 31
     add r7, r0, r7
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
 lbl_fn_806BCD40_0000137C:
     lis r3, lbl_80860898@ha
     li r0, 0x1
@@ -1424,7 +1424,7 @@ lbl_fn_806BCD40_000013C0:
     lbz r6, 0x17(r6)
     addi r6, r6, 0x1
     crclr 6
-    bl fn_806809C0
+    bl snprintf
     addi r3, r27, 0x60
     addi r4, r1, 0x18
     addi r5, r1, 0x30
@@ -1443,7 +1443,7 @@ lbl_fn_806BCD40_00001458:
     addi r5, r27, 0x5c
     li r4, 0xc
     crclr 6
-    bl fn_806809C0
+    bl snprintf
     addi r3, r27, 0x64
     addi r4, r1, 0x18
     addi r5, r1, 0x30
@@ -1454,7 +1454,7 @@ lbl_fn_806BCD40_00001458:
     li r4, 0xc
     li r6, 0x5a
     crclr 6
-    bl fn_806809C0
+    bl snprintf
     addi r3, r27, 0x68
     addi r4, r1, 0x18
     addi r5, r1, 0x30
@@ -1497,7 +1497,7 @@ lbl_fn_806BCD40_00001514:
     srwi r6, r0, 31
     li r4, 0xc
     crclr 6
-    bl fn_806809C0
+    bl snprintf
     addi r3, r27, 0x6c
     addi r4, r1, 0x18
     addi r5, r1, 0x30
@@ -1585,7 +1585,7 @@ lbl_fn_806BCD40_000015B8:
     srwi r7, r0, 31
     add r7, r0, r7
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
 lbl_fn_806BCD40_00001688:
     lis r3, lbl_80860898@ha
     li r0, 0x1
@@ -1636,7 +1636,7 @@ lbl_fn_806BCD40_00001704:
     addi r4, r27, 0x149c
     li r3, 0x4
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     lwz r3, lbl_80860898@l(r30)
     li r4, 0x0
     li r5, 0x30
@@ -1685,7 +1685,7 @@ lbl_fn_806BCD40_00001704:
     srwi r7, r0, 31
     add r7, r0, r7
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
 lbl_fn_806BCD40_0000180C:
     lis r22, lbl_80860898@ha
     li r4, 0x2
@@ -1706,7 +1706,7 @@ lbl_fn_806BCD40_0000183C:
     addi r4, r27, 0x149c
     li r3, 0x4
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     lwz r3, lbl_80860898@l(r30)
     li r4, 0x0
     li r5, 0x30
@@ -1788,7 +1788,7 @@ lbl_fn_806BCD40_000018BC:
     srwi r7, r0, 31
     add r7, r0, r7
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
 lbl_fn_806BCD40_00001998:
     lis r3, lbl_80860898@ha
     li r0, 0x1
@@ -1853,7 +1853,7 @@ lbl_fn_806BCD40_00001A40:
     addi r4, r27, 0x14bc
     li r3, 0x40
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     b lbl_fn_806BCD40_00002E44
 lbl_fn_806BCD40_00001A88:
     mr r5, r28
@@ -1861,7 +1861,7 @@ lbl_fn_806BCD40_00001A88:
     addi r4, r27, 0x14e0
     li r3, 0x40
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     lwz r3, lbl_80860898@l(r22)
     lwz r0, 0x8e0(r3)
     cmpwi r0, 0x2
@@ -1875,7 +1875,7 @@ lbl_fn_806BCD40_00001A88:
     addi r4, r27, 0x1520
     li r3, 0x40
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     b lbl_fn_806BCD40_00002E44
 lbl_fn_806BCD40_00001ADC:
     lwz r25, 0x744(r3)
@@ -1926,7 +1926,7 @@ lbl_fn_806BCD40_00001AFC:
     srwi r7, r0, 31
     add r7, r0, r7
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     lis r3, lbl_80860898@ha
     li r0, 0x5
     lwz r3, lbl_80860898@l(r3)
@@ -1940,7 +1940,7 @@ lbl_fn_806BCD40_00001BBC:
     addi r4, r27, 0x154c
     li r3, 0x40
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     b lbl_fn_806BCD40_00002E44
 lbl_fn_806BCD40_00001BD0:
     lis r22, lbl_80860898@ha
@@ -2016,7 +2016,7 @@ lbl_fn_806BCD40_00001C34:
     srwi r7, r0, 31
     add r7, r0, r7
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
 lbl_fn_806BCD40_00001CF4:
     lis r3, lbl_80860898@ha
     li r0, 0x1
@@ -2043,7 +2043,7 @@ lbl_fn_806BCD40_00001D3C:
     addi r4, r27, 0x1570
     li r3, 0x4
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     b lbl_fn_806BCD40_00002E44
 lbl_fn_806BCD40_00001D50:
     lwz r7, 0x0(r30)
@@ -2066,7 +2066,7 @@ lbl_fn_806BCD40_00001D50:
     addi r4, r27, 0x1598
     li r3, 0x4
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     b lbl_fn_806BCD40_00002E44
 lbl_fn_806BCD40_00001DA8:
     li r0, 0x0
@@ -2100,7 +2100,7 @@ lbl_fn_806BCD40_00001E04:
     addi r4, r27, 0x15d0
     li r3, 0x40
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     b lbl_fn_806BCD40_00002E44
 lbl_fn_806BCD40_00001E20:
     lis r3, lbl_80860898@ha
@@ -2144,7 +2144,7 @@ lbl_fn_806BCD40_00001EA8:
     li r3, 0x40
     li r5, 0x9
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     b lbl_fn_806BCD40_00002E44
 lbl_fn_806BCD40_00001EC0:
     lis r31, lbl_80860898@ha
@@ -2160,7 +2160,7 @@ lbl_fn_806BCD40_00001EE4:
     addi r4, r27, 0x1630
     li r3, 0x4
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     b lbl_fn_806BCD40_00002E44
 lbl_fn_806BCD40_00001EF8:
     lwz r7, 0x8(r30)
@@ -2193,7 +2193,7 @@ lbl_fn_806BCD40_00001EF8:
     stw r0, 0xc(r1)
     li r6, 0x8
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     lwz r5, 0x4(r25)
     mr r4, r29
     lhz r6, 0xc(r25)
@@ -2283,7 +2283,7 @@ lbl_fn_806BCD40_00001FBC:
     addi r4, r27, 0x1684
     li r3, 0x4
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     lwz r3, lbl_80860898@l(r31)
     lwz r24, 0x744(r3)
     cmpwi r24, 0x5
@@ -2327,7 +2327,7 @@ lbl_fn_806BCD40_00001FBC:
     srwi r7, r0, 31
     add r7, r0, r7
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
 lbl_fn_806BCD40_00002180:
     lis r7, lbl_80860898@ha
     li r6, 0x5
@@ -2364,7 +2364,7 @@ lbl_fn_806BCD40_000021F0:
     addi r4, r27, 0x169c
     li r3, 0x4
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     b lbl_fn_806BCD40_00002E44
 lbl_fn_806BCD40_00002204:
     lwz r3, 0x0(r30)
@@ -2394,7 +2394,7 @@ lbl_fn_806BCD40_00002254:
     addi r4, r27, 0x16c4
     li r3, 0x1
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     lis r4, lbl_80860898@ha
     lwz r3, lbl_80860898@l(r4)
     stb r17, 0x676(r3)
@@ -2405,7 +2405,7 @@ lbl_fn_806BCD40_00002288:
     addi r4, r27, 0x1700
     li r3, 0x1
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     b lbl_fn_806BCD40_00002E44
 lbl_fn_806BCD40_0000229C:
     lis r22, lbl_80860898@ha
@@ -2416,7 +2416,7 @@ lbl_fn_806BCD40_0000229C:
     addi r4, r27, 0x1728
     li r3, 0x4
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     b lbl_fn_806BCD40_00002E44
 lbl_fn_806BCD40_000022C4:
     lwz r7, 0x0(r30)
@@ -2430,7 +2430,7 @@ lbl_fn_806BCD40_000022C4:
     or r0, r6, r0
     rotlwi r6, r0, 16
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     lwz r3, lbl_80860898@l(r22)
     lbz r0, 0x15(r3)
     cmpwi r0, 0x0
@@ -2494,7 +2494,7 @@ lbl_fn_806BCD40_000023C4:
     addi r4, r27, 0x1778
     li r3, 0x4
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     li r3, 0x1
     b lbl_fn_806BCD40_00002E48
 lbl_fn_806BCD40_000023E4:
@@ -2507,7 +2507,7 @@ lbl_fn_806BCD40_000023F8:
     addi r4, r27, 0x1790
     li r3, 0x4
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     lis r29, lbl_80860898@ha
     li r0, 0x1
     lwz r3, lbl_80860898@l(r29)
@@ -2632,7 +2632,7 @@ lbl_fn_806BCD40_000025B0:
     li r5, 0x0
 lbl_fn_806BCD40_000025B4:
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     li r0, 0x0
     b lbl_fn_806BCD40_000025D8
 lbl_fn_806BCD40_000025C4:
@@ -2647,7 +2647,7 @@ lbl_fn_806BCD40_000025D8:
     addi r4, r27, 0x17a8
     lis r3, 0x1
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     li r3, 0x0
     b lbl_fn_806BCD40_00002E48
 lbl_fn_806BCD40_000025F8:
@@ -2721,7 +2721,7 @@ lbl_fn_806BCD40_000026C4:
     addi r4, r27, 0x17d0
     lis r3, 0x1
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     li r3, 0x0
     b lbl_fn_806BCD40_00002E48
 lbl_fn_806BCD40_000026E8:
@@ -2782,7 +2782,7 @@ lbl_fn_806BCD40_0000278C:
 lbl_fn_806BCD40_000027A4:
     mr r6, r29
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     bl OSGetTime
     lis r29, lbl_80860898@ha
     cmpwi r16, 0x0
@@ -2832,7 +2832,7 @@ lbl_fn_806BCD40_000027A4:
     srwi r7, r0, 31
     add r7, r0, r7
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     lwz r3, lbl_80860898@l(r29)
     li r0, 0x1
     li r16, 0x0
@@ -2884,7 +2884,7 @@ lbl_fn_806BCD40_00002918:
     li r5, 0x0
 lbl_fn_806BCD40_0000291C:
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     li r0, 0x0
     b lbl_fn_806BCD40_00002940
 lbl_fn_806BCD40_0000292C:
@@ -2933,7 +2933,7 @@ lbl_fn_806BCD40_000029AC:
     addi r4, r27, 0x1820
     lis r3, 0x1
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     li r3, 0x0
     b lbl_fn_806BCD40_00002E48
 lbl_fn_806BCD40_000029D0:
@@ -2946,7 +2946,7 @@ lbl_fn_806BCD40_000029D0:
     addi r4, r27, 0x1840
     lis r3, 0x1
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     mr r4, r29
     mr r5, r22
     mr r6, r23
@@ -2961,7 +2961,7 @@ lbl_fn_806BCD40_000029D0:
     addi r4, r27, 0x1860
     lis r3, 0x1
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     lis r3, lbl_80860898@ha
     lwz r3, lbl_80860898@l(r3)
     lbz r0, 0x15(r3)
@@ -2979,14 +2979,14 @@ lbl_fn_806BCD40_00002A5C:
     addi r4, r27, 0x1884
     lis r3, 0x1
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     li r3, 0x0
     b lbl_fn_806BCD40_00002E48
 lbl_fn_806BCD40_00002A7C:
     addi r4, r27, 0x1894
     lis r3, 0x1
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     b lbl_fn_806BCD40_00002E44
 lbl_fn_806BCD40_00002A90:
     lis r22, lbl_80860898@ha
@@ -3010,7 +3010,7 @@ lbl_fn_806BCD40_00002AD0:
     addi r4, r27, 0x18b0
     lis r3, 0x1
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     bl OSGetTime
     lwz r5, lbl_80860898@l(r22)
     stw r4, 0x7a4(r5)
@@ -3025,7 +3025,7 @@ lbl_fn_806BCD40_00002AF8:
     addi r4, r27, 0x18d0
     lis r3, 0x1
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     b lbl_fn_806BCD40_00002E44
 lbl_fn_806BCD40_00002B20:
     li r3, 0x0
@@ -3080,7 +3080,7 @@ lbl_fn_806BCD40_00002B20:
     srwi r7, r0, 31
     add r7, r0, r7
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
 lbl_fn_806BCD40_00002BF4:
     lis r3, lbl_80860898@ha
     li r0, 0xc
@@ -3089,7 +3089,7 @@ lbl_fn_806BCD40_00002BF4:
     lis r3, 0x1
     stw r0, 0x744(r5)
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     b lbl_fn_806BCD40_00002E44
 lbl_fn_806BCD40_00002C18:
     lis r3, lbl_80860898@ha
@@ -3141,7 +3141,7 @@ lbl_fn_806BCD40_00002CB8:
     addi r4, r27, 0x18f8
     li r3, 0x4
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     b lbl_fn_806BCD40_00002E44
 lbl_fn_806BCD40_00002CD4:
     lbz r0, 0x16(r3)
@@ -3159,7 +3159,7 @@ lbl_fn_806BCD40_00002CD4:
     addi r4, r27, 0x192c
     li r3, 0x4
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     b lbl_fn_806BCD40_00002E44
 lbl_fn_806BCD40_00002D18:
     mr r5, r16
@@ -3167,7 +3167,7 @@ lbl_fn_806BCD40_00002D18:
     addi r4, r27, 0x1958
     lis r3, 0x1
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     mr r3, r16
     mr r4, r24
     li r5, 0x1
@@ -3182,7 +3182,7 @@ lbl_fn_806BCD40_00002D44:
     addi r4, r27, 0x1978
     li r3, 0x4
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     b lbl_fn_806BCD40_00002E44
 lbl_fn_806BCD40_00002D6C:
     cmpwi r31, 0x2
@@ -3205,13 +3205,13 @@ lbl_fn_806BCD40_00002D6C:
     stw r3, 0x20(r5)
     li r3, 0x4
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     b lbl_fn_806BCD40_00002E44
 lbl_fn_806BCD40_00002DC4:
     addi r4, r27, 0x19e0
     li r3, 0x4
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     b lbl_fn_806BCD40_00002E44
 lbl_fn_806BCD40_00002DD8:
     lwz r7, 0xc(r30)
@@ -3228,7 +3228,7 @@ lbl_fn_806BCD40_00002DD8:
     rotlwi r16, r0, 16
     mr r6, r16
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
     lis r3, lbl_80860898@ha
     lwz r3, lbl_80860898@l(r3)
     stw r16, 0x1c(r3)
@@ -3242,7 +3242,7 @@ lbl_fn_806BCD40_00002E30:
     addi r4, r27, 0x1a48
     li r3, 0x2
     crclr 6
-    bl fn_806A76B0
+    bl net_formatLog
 lbl_fn_806BCD40_00002E44:
     li r3, 0x1
 lbl_fn_806BCD40_00002E48:

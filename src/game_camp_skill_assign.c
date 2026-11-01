@@ -24,7 +24,7 @@ extern void fn_8044D4F0(void);
 extern void fn_8044D530(void);
 extern void fn_8044D6E0(void);
 extern void wmemcpy(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 
 /* External data declarations */
 extern u8 jumptable_8078BB0C[];
@@ -927,7 +927,7 @@ lbl_fn_803BB584_00000CF0:
     stw r3, 0x1454(r30)
     beq lbl_fn_803BB584_00000D38
     mr r3, r24
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r4, r24
     addi r3, r29, 0x294
@@ -1905,7 +1905,7 @@ lbl_fn_803BC2D4_00001BE4:
     stw r3, 0x290(r26)
     beq lbl_fn_803BC2D4_00001C2C
     mr r3, r22
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r4, r22
     addi r3, r26, 0x294
@@ -1946,7 +1946,7 @@ lbl_fn_803BC2D4_00001C7C:
     stw r3, 0x290(r29)
     beq lbl_fn_803BC2D4_00001CC4
     mr r3, r22
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r4, r22
     addi r3, r29, 0x294

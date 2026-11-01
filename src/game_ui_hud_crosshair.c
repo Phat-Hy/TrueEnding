@@ -78,7 +78,7 @@ extern void fn_8051125C(void);
 extern void fn_805118B8(void);
 extern void fn_805119CC(void);
 extern void fn_8052DEF0(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -1286,7 +1286,7 @@ lbl_fn_801D4E74_00001148:
     lbz r0, 0x2c(r1)
     mr r3, r30
     stb r0, 0x28(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r5, r29
     mr r6, r30
@@ -1328,7 +1328,7 @@ lbl_fn_801D4E74_000011E4:
     lbz r0, 0x24(r1)
     mr r3, r30
     stb r0, 0x20(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r5, r29
     mr r6, r30
@@ -1397,7 +1397,7 @@ lbl_fn_801D4E74_000012E8:
     lbz r0, 0x1c(r1)
     mr r3, r30
     stb r0, 0x18(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r5, r29
     mr r6, r30
@@ -1438,7 +1438,7 @@ lbl_fn_801D4E74_00001380:
     lbz r0, 0x14(r1)
     mr r3, r30
     stb r0, 0x10(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r5, r29
     mr r6, r30
@@ -1487,7 +1487,7 @@ lbl_fn_801D4E74_00001438:
     lbz r0, 0xc(r1)
     mr r3, r30
     stb r0, 0x8(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r5, r29
     mr r6, r30

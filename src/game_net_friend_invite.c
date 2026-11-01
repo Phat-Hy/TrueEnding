@@ -321,7 +321,7 @@ extern void fn_8050E61C(void);
 extern void fn_8050EAEC(void);
 extern void fn_8050EB30(void);
 extern void fn_8050F8C8(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 extern void fn_806959D8(void);
 extern void fn_80695A50(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -2440,7 +2440,7 @@ lbl_fn_804D25D4_00001BEC:
     bl net_getFriendManager
     bl fn_804D6028
     bl fn_804D60E8
-    bl fn_80686A48
+    bl wcslen
     cmpwi r3, 0x0
     beq lbl_fn_804D25D4_00001CB4
     bl fn_804D16D0

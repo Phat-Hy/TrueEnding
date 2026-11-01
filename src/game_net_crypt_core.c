@@ -51,7 +51,7 @@ extern void fn_805053FC(void);
 extern void fn_8050C844(void);
 extern void fn_8050F5AC(void);
 extern void wmemcpy(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -1965,7 +1965,7 @@ lbl_fn_804B2934_00001AB0:
     cmplw r30, r0
     beq lbl_fn_804B2934_00001AE4
     mr r3, r30
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r4, r30
     addi r3, r29, 0xfc
@@ -2063,7 +2063,7 @@ lbl_fn_804B2934_00001C1C:
     cmplw r30, r0
     beq lbl_fn_804B2934_00001C50
     mr r3, r30
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r4, r30
     addi r3, r29, 0xfc

@@ -56,7 +56,7 @@ extern void fn_805A52F8(void);
 extern void strcmp(void);
 extern void strncmp(void);
 extern void atoi(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 extern void fn_80686A80(void);
 extern void fn_80686AF0(void);
 extern void runtime_registerStaticObject(void);
@@ -400,7 +400,7 @@ lbl_fn_802088A4_00000338:
     addi r31, r1, 0x10
     stw r0, 0x14(r1)
     stw r0, 0x18(r1)
-    bl fn_80686A48
+    bl wcslen
     mr r30, r3
     mr r3, r31
     mr r4, r30
@@ -472,7 +472,7 @@ asm void fn_802089C4(void)
     mr r3, r0
     bl fn_80686A80
     lwz r3, 0x0(r30)
-    bl fn_80686A48
+    bl wcslen
     addi r4, r3, 0x1
     srwi r3, r4, 31
     clrlwi r0, r4, 31
@@ -518,7 +518,7 @@ lbl_fn_80208A3C_000004CC:
     addi r29, r1, 0x1c
     stw r0, 0x20(r1)
     stw r0, 0x24(r1)
-    bl fn_80686A48
+    bl wcslen
     mr r28, r3
     mr r3, r29
     mr r4, r28
@@ -665,12 +665,12 @@ lbl_fn_80208BE8_00000688:
     addi r28, r28, 0x1
     addi r3, r1, 0x130
     bl talk_parseDialogue
-    bl fn_80686A48
+    bl wcslen
     add r4, r3, r29
     addi r3, r1, 0x130
     addi r29, r4, 0x2
     bl talk_parseDialogue
-    bl fn_80686A48
+    bl wcslen
     add r4, r3, r29
     addi r3, r1, 0x130
     addi r29, r4, 0x2
@@ -1015,7 +1015,7 @@ asm void fn_80209184(void)
     stw r30, 0x8(r1)
     mr r30, r3
     beq lbl_fn_80209184_00000C18
-    bl fn_80686A48
+    bl wcslen
     cmplwi r3, 0x7
     ble lbl_fn_80209184_00000C18
     addi r3, r30, 0x4

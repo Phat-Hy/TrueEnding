@@ -26,7 +26,7 @@ extern void fn_8061F480(void);
 extern void fn_806210B0(void);
 extern void fn_806212F0(void);
 extern void fn_80621D30(void);
-extern void fn_806823B0(void);
+extern void strcat(void);
 extern void strcmp(void);
 extern void nandConvertErrorCode(void);
 extern void nandGenerateAbsPath(void);
@@ -1042,10 +1042,10 @@ asm void fn_8061ED60(void)
 lbl_fn_8061ED60_00000D40:
     addi r3, r1, 0x18
     la r4, lbl_8087E8D8
-    bl fn_806823B0
+    bl strcat
     addi r3, r1, 0x18
     addi r4, r1, 0x8
-    bl fn_806823B0
+    bl strcat
 lbl_fn_8061ED60_00000D58:
     cmpwi r31, 0x0
     bne lbl_fn_8061ED60_00000D88

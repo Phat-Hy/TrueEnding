@@ -49,7 +49,7 @@ extern void fn_805119CC(void);
 extern void fn_8052635C(void);
 extern void PSMTXConcat(void);
 extern void wmemcpy(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 extern void fn_80686B24(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
@@ -411,7 +411,7 @@ lbl_fn_8052293C_00000404:
     cmplw r3, r28
     mr r22, r3
     beq lbl_fn_8052293C_00000430
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r3, r28
     mr r4, r22
@@ -423,7 +423,7 @@ lbl_fn_8052293C_00000430:
     cmplw r3, r29
     mr r22, r3
     beq lbl_fn_8052293C_0000045C
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r3, r29
     mr r4, r22
@@ -435,7 +435,7 @@ lbl_fn_8052293C_0000045C:
     cmplw r3, r30
     mr r22, r3
     beq lbl_fn_8052293C_00000488
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r3, r30
     mr r4, r22
@@ -447,7 +447,7 @@ lbl_fn_8052293C_00000488:
     cmplw r3, r31
     mr r22, r3
     beq lbl_fn_8052293C_000004B4
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r3, r31
     mr r4, r22
@@ -661,7 +661,7 @@ lbl_fn_80522DDC_00000794:
     cmplw r29, r30
     beq lbl_fn_80522DDC_000007E4
     mr r3, r29
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r3, r30
     mr r4, r29
@@ -673,7 +673,7 @@ lbl_fn_80522DDC_000007E4:
     cmplw r29, r0
     beq lbl_fn_80522DDC_00000810
     mr r3, r29
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r4, r29
     addi r3, r31, 0x800
@@ -685,7 +685,7 @@ lbl_fn_80522DDC_00000810:
     cmplw r29, r0
     beq lbl_fn_80522DDC_0000083C
     mr r3, r29
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r4, r29
     addi r3, r31, 0x910
@@ -697,7 +697,7 @@ lbl_fn_80522DDC_0000083C:
     cmplw r29, r30
     beq lbl_fn_80522DDC_00000868
     mr r3, r29
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r3, r30
     mr r4, r29
@@ -709,7 +709,7 @@ lbl_fn_80522DDC_00000868:
     cmplw r29, r0
     beq lbl_fn_80522DDC_00000894
     mr r3, r29
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r4, r29
     addi r3, r31, 0x840
@@ -721,7 +721,7 @@ lbl_fn_80522DDC_00000894:
     cmplw r29, r0
     beq lbl_fn_80522DDC_000008C0
     mr r3, r29
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r4, r29
     addi r3, r31, 0x950
@@ -733,7 +733,7 @@ lbl_fn_80522DDC_000008C0:
     cmplw r29, r30
     beq lbl_fn_80522DDC_000008EC
     mr r3, r29
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r3, r30
     mr r4, r29
@@ -745,7 +745,7 @@ lbl_fn_80522DDC_000008EC:
     cmplw r29, r0
     beq lbl_fn_80522DDC_00000918
     mr r3, r29
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r4, r29
     addi r3, r31, 0xee0
@@ -757,7 +757,7 @@ lbl_fn_80522DDC_00000918:
     cmplw r29, r0
     beq lbl_fn_80522DDC_00000944
     mr r3, r29
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r4, r29
     addi r3, r31, 0xff0
@@ -769,7 +769,7 @@ lbl_fn_80522DDC_00000944:
     cmplw r29, r30
     beq lbl_fn_80522DDC_00000970
     mr r3, r29
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r3, r30
     mr r4, r29
@@ -781,7 +781,7 @@ lbl_fn_80522DDC_00000970:
     cmplw r29, r0
     beq lbl_fn_80522DDC_0000099C
     mr r3, r29
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r4, r29
     addi r3, r31, 0xf20
@@ -793,7 +793,7 @@ lbl_fn_80522DDC_0000099C:
     cmplw r29, r0
     beq lbl_fn_80522DDC_000009C8
     mr r3, r29
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r4, r29
     addi r3, r31, 0x1030
@@ -833,7 +833,7 @@ lbl_fn_80522DDC_00000A20:
     cmplw r29, r30
     beq lbl_fn_80522DDC_00000A58
     mr r3, r29
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r3, r30
     mr r4, r29
@@ -845,7 +845,7 @@ lbl_fn_80522DDC_00000A58:
     cmplw r29, r0
     beq lbl_fn_80522DDC_00000A84
     mr r3, r29
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r4, r29
     addi r3, r31, 0xa20
@@ -857,7 +857,7 @@ lbl_fn_80522DDC_00000A84:
     cmplw r29, r0
     beq lbl_fn_80522DDC_00000AB0
     mr r3, r29
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r4, r29
     addi r3, r31, 0xb30
@@ -869,7 +869,7 @@ lbl_fn_80522DDC_00000AB0:
     cmplw r29, r30
     beq lbl_fn_80522DDC_00000ADC
     mr r3, r29
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r3, r30
     mr r4, r29
@@ -881,7 +881,7 @@ lbl_fn_80522DDC_00000ADC:
     cmplw r29, r0
     beq lbl_fn_80522DDC_00000B08
     mr r3, r29
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r4, r29
     addi r3, r31, 0xa60
@@ -893,7 +893,7 @@ lbl_fn_80522DDC_00000B08:
     cmplw r29, r0
     beq lbl_fn_80522DDC_00000B34
     mr r3, r29
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r4, r29
     addi r3, r31, 0xb70

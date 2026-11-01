@@ -35,11 +35,11 @@ extern void fn_806A426C(void);
 extern void fn_806A4270(void);
 extern void fn_806D5850(void);
 extern void fn_806D58F0(void);
-extern void fn_806D5900(void);
+extern void net_bufferGetElement(void);
 extern void fn_806D5930(void);
 extern void fn_806D6560(void);
 extern void fn_806D6610(void);
-extern void fn_806D7AC0(void);
+extern void net_socketClose(void);
 extern void fn_806D7B30(void);
 extern void fn_806D7CB0(void);
 extern void fn_806D7CF0(void);
@@ -204,7 +204,7 @@ lbl_fn_80703610_000000E0:
     lwz r3, 0x7c(r31)
     cmpwi r3, 0x0
     beq lbl_fn_80703610_00000110
-    bl fn_806D7AC0
+    bl net_socketClose
 lbl_fn_80703610_00000110:
     lwz r3, 0x6b4(r31)
     li r0, 0x0
@@ -226,7 +226,7 @@ lbl_fn_80703610_0000012C:
 lbl_fn_80703610_00000150:
     lwz r3, 0x8(r31)
     mr r4, r30
-    bl fn_806D5900
+    bl net_bufferGetElement
     lwz r0, 0x0(r3)
     mr r3, r31
     stw r0, 0x10(r1)
@@ -494,7 +494,7 @@ lbl_fn_80703AC0_000004D8:
 lbl_fn_80703AC0_00000518:
     lwz r3, 0x4(r26)
     mr r4, r28
-    bl fn_806D5900
+    bl net_bufferGetElement
     lwz r27, 0x0(r3)
     mr r3, r27
     bl fn_806FEC90

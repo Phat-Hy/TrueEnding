@@ -51,7 +51,7 @@ extern void fn_80626500(void);
 extern void fn_806265C0(void);
 extern void fn_8065F510(void);
 extern void fn_8065F520(void);
-extern void fn_8068236C(void);
+extern void strncpy(void);
 extern void strcmp(void);
 extern void strncmp(void);
 extern void fn_8068B104(void);
@@ -1731,7 +1731,7 @@ lbl_fn_805CD720_000015F0:
     mr r4, r31
     addi r3, r29, 0x30
     li r5, 0x7f
-    bl fn_8068236C
+    bl strncpy
     li r0, 0x0
     stb r0, 0xaf(r29)
     li r3, 0x1

@@ -28,7 +28,7 @@ extern void strcmp(void);
 extern void strncmp(void);
 extern void atoi(void);
 extern void wmemcpy(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 extern void fn_80686A64(void);
 extern void runtime_registerStaticObject(void);
 extern void fn_806958E0(void);
@@ -290,7 +290,7 @@ lbl_fn_8020D688_000002C4:
     mr r24, r3
     cmplw r3, r0
     beq lbl_fn_8020D688_00000318
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r4, r24
     addi r3, r23, 0x10
@@ -1616,14 +1616,14 @@ lbl_fn_8020EB0C_00001560:
     beq lbl_fn_8020EB0C_000015AC
     addi r3, r1, 0xc
     bl talk_parseDialogue
-    bl fn_80686A48
+    bl wcslen
     add r4, r3, r28
     addi r3, r1, 0xc
     addi r28, r4, 0x1
     bl talk_parseDialogue
     addi r3, r1, 0xc
     bl talk_parseDialogue
-    bl fn_80686A48
+    bl wcslen
     add r3, r3, r28
     addi r28, r3, 0x1
 lbl_fn_8020EB0C_000015AC:
@@ -1679,7 +1679,7 @@ lbl_fn_8020EB0C_00001624:
     stw r0, 0x80(r27)
     lwz r0, lbl_8087F1F4
     add r3, r0, r29
-    bl fn_80686A48
+    bl wcslen
     add r4, r3, r30
     addi r3, r1, 0xc
     addi r30, r4, 0x1
@@ -1696,7 +1696,7 @@ lbl_fn_8020EB0C_00001624:
     stw r0, 0x84(r27)
     lwz r0, lbl_8087F1F4
     add r3, r0, r29
-    bl fn_80686A48
+    bl wcslen
     add r3, r3, r30
     addi r28, r28, 0x10c
     addi r30, r3, 0x1

@@ -26,11 +26,11 @@ extern void fn_806A5BC0(void);
 extern void fn_806D57A0(void);
 extern void fn_806D5850(void);
 extern void fn_806D58F0(void);
-extern void fn_806D5900(void);
+extern void net_bufferGetElement(void);
 extern void fn_806D5930(void);
 extern void fn_806D7A90(void);
 extern void fn_806D7AA0(void);
-extern void fn_806D7AC0(void);
+extern void net_socketClose(void);
 extern void fn_806D7B30(void);
 extern void fn_806D7B70(void);
 extern void fn_806D7CB0(void);
@@ -604,7 +604,7 @@ lbl_fn_806F2E70_00000654:
 lbl_fn_806F2E70_00000684:
     lwz r3, lbl_80862128@l(r31)
     lwzx r3, r3, r29
-    bl fn_806D7AC0
+    bl net_socketClose
     subi r29, r29, 0x4
     subi r27, r27, 0x1
 lbl_fn_806F2E70_00000698:
@@ -872,26 +872,26 @@ lbl_fn_806F3280_00000A1C:
 lbl_fn_806F3280_00000A34:
     bl fn_806F28A0
     lwz r3, 0x14(r30)
-    bl fn_806D7AC0
+    bl net_socketClose
     li r31, 0x0
     stw r31, 0x14(r30)
     lwz r3, 0x34(r30)
-    bl fn_806D7AC0
+    bl net_socketClose
     stw r31, 0x34(r30)
     lwz r3, 0x18(r30)
-    bl fn_806D7AC0
+    bl net_socketClose
     stw r31, 0x18(r30)
     lwz r3, 0x24(r30)
-    bl fn_806D7AC0
+    bl net_socketClose
     stw r31, 0x24(r30)
     lwz r3, 0x2c(r30)
-    bl fn_806D7AC0
+    bl net_socketClose
     stw r31, 0x2c(r30)
     lwz r3, 0x130(r30)
-    bl fn_806D7AC0
+    bl net_socketClose
     stw r31, 0x2c(r30)
     lwz r3, 0x18c(r30)
-    bl fn_806D7AC0
+    bl net_socketClose
     stw r31, 0x18c(r30)
     addi r3, r30, 0x58
     bl fn_806F2010
@@ -1099,18 +1099,18 @@ lbl_fn_806F35B0_00000D30:
     lwz r3, 0x50(r30)
     bl fn_806D7B30
     lwz r3, 0x14(r30)
-    bl fn_806D7AC0
+    bl net_socketClose
     lwz r0, 0x130(r30)
     li r31, 0x0
     stw r0, 0x14(r30)
     lwz r3, 0x18(r30)
     stw r31, 0x130(r30)
-    bl fn_806D7AC0
+    bl net_socketClose
     stw r31, 0x18(r30)
     lwz r3, 0x24(r30)
     stw r31, 0x1c(r30)
     sth r31, 0x20(r30)
-    bl fn_806D7AC0
+    bl net_socketClose
     li r0, -0x1
     stw r31, 0x24(r30)
     addi r3, r30, 0x58
@@ -1220,7 +1220,7 @@ lbl_fn_806F36F0_00000EEC:
 lbl_fn_806F36F0_00000EF8:
     lwz r3, 0x0(r31)
     lwzx r3, r3, r30
-    bl fn_806D7AC0
+    bl net_socketClose
     addi r30, r30, 0x4
     addi r28, r28, 0x1
 lbl_fn_806F36F0_00000F0C:
@@ -1228,7 +1228,7 @@ lbl_fn_806F36F0_00000F0C:
     cmpw r28, r0
     blt lbl_fn_806F36F0_00000EF8
     lwz r3, 0x0(r31)
-    bl fn_806D7AC0
+    bl net_socketClose
     li r0, 0x0
     stw r0, 0x0(r31)
     stw r0, 0x4(r31)
@@ -1413,7 +1413,7 @@ asm void fn_806F3A20(void)
     lwz r3, 0x0(r31)
     bl fn_806A5798
     mr r3, r31
-    bl fn_806D7AC0
+    bl net_socketClose
     li r0, 0x0
     stw r0, 0x0(r30)
 lbl_fn_806F3A20_000011B0:
@@ -1817,7 +1817,7 @@ asm void fn_806F3F40(void)
     lwz r3, lbl_80862120@l(r31)
     cmpwi r3, 0x0
     beq lbl_fn_806F3F40_000016D4
-    bl fn_806D7AC0
+    bl net_socketClose
     li r0, 0x0
     stw r0, lbl_80862120@l(r31)
 lbl_fn_806F3F40_000016D4:
@@ -2098,7 +2098,7 @@ lbl_fn_806F42E0_00001A64:
 lbl_fn_806F42E0_00001A6C:
     lwz r3, 0x0(r29)
     mr r4, r28
-    bl fn_806D5900
+    bl net_bufferGetElement
     lwz r0, 0x0(r3)
     mr r31, r3
     cmpwi r0, 0x0
@@ -2172,7 +2172,7 @@ lbl_fn_806F43B0_00001B5C:
 lbl_fn_806F43B0_00001B70:
     lwz r3, 0x0(r26)
     mr r4, r25
-    bl fn_806D5900
+    bl net_bufferGetElement
     lwz r0, 0x0(r3)
     mr r31, r3
     cmpwi r0, 0x0
@@ -2196,7 +2196,7 @@ lbl_fn_806F43B0_00001BA8:
     add r24, r24, r3
     lwz r3, 0x168(r19)
     mr r4, r25
-    bl fn_806D5900
+    bl net_bufferGetElement
     lwz r27, 0x14(r26)
     lwz r28, 0xc(r3)
     cmpwi r27, 0x0
@@ -2469,7 +2469,7 @@ lbl_fn_806F47B0_00001F8C:
     lwz r3, 0x164(r31)
     mr r4, r28
     lwz r3, 0x0(r3)
-    bl fn_806D5900
+    bl net_bufferGetElement
     mr r29, r3
     addi r3, r1, 0x8
     li r4, 0x0
@@ -2486,7 +2486,7 @@ lbl_fn_806F47B0_00001F8C:
 lbl_fn_806F47B0_00001FD0:
     lwz r3, 0x168(r31)
     mr r4, r28
-    bl fn_806D5900
+    bl net_bufferGetElement
     lwz r4, 0x0(r3)
     mr r29, r3
     lwz r0, 0x0(r4)

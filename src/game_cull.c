@@ -40,7 +40,7 @@ extern void fn_80478198(void);
 extern void fn_806163C0(void);
 extern void fn_806163E0(void);
 extern void printf(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 extern void fn_80686A64(void);
 extern void abort(void);
 extern void runtime_registerStaticObject(void);
@@ -1862,7 +1862,7 @@ lbl_fn_800D9960_000016CC:
     mr r3, r23
     stw r28, 0x78(r1)
     stw r28, 0x7c(r1)
-    bl fn_80686A48
+    bl wcslen
     mr r15, r3
     addi r3, r1, 0x74
     mr r4, r15
@@ -1914,7 +1914,7 @@ lbl_fn_800D9960_00001774:
     stw r28, 0x6c(r1)
     fmuls f23, f29, f0
     stw r28, 0x70(r1)
-    bl fn_80686A48
+    bl wcslen
     mr r15, r3
     addi r3, r1, 0x68
     mr r4, r15
@@ -1964,7 +1964,7 @@ lbl_fn_800D9960_00001810:
     stw r28, 0x4c(r1)
     stw r28, 0x50(r1)
     stw r28, 0x54(r1)
-    bl fn_80686A48
+    bl wcslen
     mr r16, r3
     addi r3, r1, 0x4c
     mr r4, r16

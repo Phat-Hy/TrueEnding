@@ -21,7 +21,7 @@ extern void thread_dispatchToQueue(void);
 extern void fn_804A53D4(void);
 extern void fn_804AC734(void);
 extern void fn_804F7F1C(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -1347,7 +1347,7 @@ lbl_fn_80504C04_00001194:
     crclr 6
     bl sprintf
     addi r3, r1, 0x58
-    bl fn_80686A48
+    bl wcslen
     cmplw r24, r3
     bge lbl_fn_80504C04_00001204
     stw r28, 0x8(r1)
@@ -1801,7 +1801,7 @@ lbl_fn_80505084_000017E0:
     bl fn_804A53D4
     lwz r3, lbl_8087F628
     addi r3, r3, 0x5f0
-    bl fn_80686A48
+    bl wcslen
     cmpwi r3, 0x0
     bne lbl_fn_80505084_00001894
     lwz r4, 0x4c(r31)

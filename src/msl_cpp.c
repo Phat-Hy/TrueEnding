@@ -27,7 +27,7 @@ extern void fn_8067DB74(void);
 extern void fn_8067E570(void);
 extern void strcmp(void);
 extern void wmemcpy(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 extern void atexit(void);
 extern void fn_806974B4(void);
 extern void fn_80697BB8(void);
@@ -5531,7 +5531,7 @@ lbl_fn_8068B2A0_00004438:
     sthx r3, r4, r0
     mr r3, r31
     li r30, 0x0
-    bl fn_80686A48
+    bl wcslen
     subi r4, r3, 0x1
     mr r5, r31
     slwi r0, r4, 1

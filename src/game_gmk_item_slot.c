@@ -63,7 +63,7 @@ extern void PSVECCrossProduct(void);
 extern void GXSetZCompLoc(void);
 extern void fn_80658240(void);
 extern void fn_80660CF0(void);
-extern void fn_806823B0(void);
+extern void strcat(void);
 extern void fn_8068A850(void);
 extern void runtime_clampDouble(void);
 extern char* strcpy(char* dest, const char* src);
@@ -891,55 +891,55 @@ asm void fn_80440B2C(void)
     lis r4, lbl_80754520@ha
     addi r3, r1, 0x10
     addi r4, r4, lbl_80754520@l
-    bl fn_806823B0
+    bl strcat
     b lbl_fn_80440B2C_00000AEC
     lis r4, lbl_80754520@ha
     addi r3, r1, 0x10
     addi r4, r4, lbl_80754520@l
     addi r4, r4, 0xd
-    bl fn_806823B0
+    bl strcat
     b lbl_fn_80440B2C_00000AEC
     lis r4, lbl_80754520@ha
     addi r3, r1, 0x10
     addi r4, r4, lbl_80754520@l
     addi r4, r4, 0x1e
-    bl fn_806823B0
+    bl strcat
     b lbl_fn_80440B2C_00000AEC
     lis r4, lbl_80754520@ha
     addi r3, r1, 0x10
     addi r4, r4, lbl_80754520@l
     addi r4, r4, 0x2f
-    bl fn_806823B0
+    bl strcat
     b lbl_fn_80440B2C_00000AEC
     lis r4, lbl_80754520@ha
     addi r3, r1, 0x10
     addi r4, r4, lbl_80754520@l
     addi r4, r4, 0x40
-    bl fn_806823B0
+    bl strcat
     b lbl_fn_80440B2C_00000AEC
     lis r4, lbl_80754520@ha
     addi r3, r1, 0x10
     addi r4, r4, lbl_80754520@l
     addi r4, r4, 0x51
-    bl fn_806823B0
+    bl strcat
     b lbl_fn_80440B2C_00000AEC
     lis r4, lbl_80754520@ha
     addi r3, r1, 0x10
     addi r4, r4, lbl_80754520@l
     addi r4, r4, 0x62
-    bl fn_806823B0
+    bl strcat
     b lbl_fn_80440B2C_00000AEC
     lis r4, lbl_80754520@ha
     addi r3, r1, 0x10
     addi r4, r4, lbl_80754520@l
     addi r4, r4, 0x73
-    bl fn_806823B0
+    bl strcat
     b lbl_fn_80440B2C_00000AEC
     lis r4, lbl_80754520@ha
     addi r3, r1, 0x10
     addi r4, r4, lbl_80754520@l
     addi r4, r4, 0x84
-    bl fn_806823B0
+    bl strcat
     b lbl_fn_80440B2C_00000AEC
 lbl_fn_80440B2C_00000AD4:
     li r0, 0x0
@@ -947,7 +947,7 @@ lbl_fn_80440B2C_00000AD4:
     stw r0, 0x1c(r31)
     addi r3, r1, 0x10
     addi r4, r4, lbl_80754520@l
-    bl fn_806823B0
+    bl strcat
 lbl_fn_80440B2C_00000AEC:
     li r29, 0x0
     stw r29, 0x8(r1)
@@ -980,7 +980,7 @@ lbl_fn_80440B2C_00000AEC:
     bl strcpy
     addi r3, r1, 0x10
     addi r4, r30, 0x96
-    bl fn_806823B0
+    bl strcat
     addi r3, r1, 0x10
     addi r4, r1, 0x8
     li r5, 0x0
@@ -991,7 +991,7 @@ lbl_fn_80440B2C_00000AEC:
     bl strcpy
     addi r3, r1, 0x10
     addi r4, r30, 0xa5
-    bl fn_806823B0
+    bl strcat
     addi r3, r1, 0x10
     addi r4, r1, 0x8
     li r5, 0x0
@@ -1002,7 +1002,7 @@ lbl_fn_80440B2C_00000AEC:
     bl strcpy
     addi r3, r1, 0x10
     addi r4, r30, 0xaf
-    bl fn_806823B0
+    bl strcat
     addi r3, r1, 0x10
     addi r4, r1, 0x8
     li r5, 0x0
@@ -1215,7 +1215,7 @@ lbl_fn_80440F64_00000E64:
     addi r3, r1, 0x10
     addi r31, r31, lbl_80754520@l
     addi r4, r31, 0xbb
-    bl fn_806823B0
+    bl strcat
     addi r3, r1, 0x10
     addi r4, r1, 0x8
     li r5, 0x0

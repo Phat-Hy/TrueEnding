@@ -43,7 +43,7 @@ extern void GXSetNumTevStages(void);
 extern void fn_80617D50(void);
 extern void GXLoadPosMtxImm(void);
 extern void GXSetCurrentMtx(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 extern void runtime_clampDouble(void);
 
 /* External data declarations */
@@ -2801,7 +2801,7 @@ asm void atn_ComDrawFontSideFade_execute(void)
     mr r27, r3
     lwz r3, 0x10(r3)
     mr r28, r4
-    bl fn_80686A48
+    bl wcslen
     lfs f7, 0x74(r27)
     li r30, 0x0
     lfs f0, 0x78(r27)

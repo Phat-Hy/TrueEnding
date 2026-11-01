@@ -49,7 +49,7 @@ extern void fn_80226B28(void);
 extern void fn_80226B48(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 extern void runtime_registerStaticObject(void);
 extern void fn_806959D8(void);
 extern void fn_80695A50(void);
@@ -2045,7 +2045,7 @@ lbl_fn_80228CA0_00001A14:
     lbz r0, 0xc(r1)
     mr r3, r27
     stb r0, 0x8(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r5, r25
     mr r6, r27

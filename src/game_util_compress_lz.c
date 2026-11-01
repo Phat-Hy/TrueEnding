@@ -69,7 +69,7 @@ extern void fn_80584754(void);
 extern void fn_8058480C(void);
 extern void fn_80584DDC(void);
 extern void printf(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 extern void abort(void);
 extern int sprintf(char* str, const char* format, ...);
 
@@ -958,7 +958,7 @@ lbl_fn_8058A0F4_00000BFC:
     lbz r0, 0xc(r1)
     mr r3, r28
     stb r0, 0x8(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r5, r29
     mr r6, r28

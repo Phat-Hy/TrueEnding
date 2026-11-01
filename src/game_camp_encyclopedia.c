@@ -35,7 +35,7 @@ extern void fn_803C795C(void);
 extern void fn_803C7964(void);
 extern void fn_803C7A24(void);
 extern void fn_803C8810(void);
-extern void fn_8068236C(void);
+extern void strncpy(void);
 extern void atoi(void);
 extern void runtime_registerStaticObject(void);
 
@@ -1949,7 +1949,7 @@ lbl_fn_803C74E0_00001830:
     mr r4, r23
     li r5, 0xff
     addi r3, r3, 0x2c
-    bl fn_8068236C
+    bl strncpy
     mr r3, r25
     mr r4, r28
     bl fn_803C0928

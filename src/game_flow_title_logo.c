@@ -10,7 +10,7 @@ extern void fn_804E2844(void);
 extern void fn_804E2920(void);
 extern void fn_804E4C60(void);
 extern void wmemcpy(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 
 /* External data declarations */
 
@@ -2948,7 +2948,7 @@ lbl_fn_804E0CE8_00002B40:
     stw r4, 0x3b8(r3)
     beq lbl_fn_804E0CE8_00002B88
     mr r3, r29
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r4, r29
     addi r3, r30, 0x3bc
@@ -3013,7 +3013,7 @@ lbl_fn_804E0CE8_00002C3C:
     stw r3, 0x6cc(r30)
     beq lbl_fn_804E0CE8_00002C84
     mr r3, r29
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r4, r29
     addi r3, r30, 0x6d0
@@ -3078,7 +3078,7 @@ lbl_fn_804E0CE8_00002D38:
     stw r3, 0x9e0(r30)
     beq lbl_fn_804E0CE8_00002D80
     mr r3, r29
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r4, r29
     addi r3, r30, 0x9e4
@@ -3143,7 +3143,7 @@ lbl_fn_804E0CE8_00002E34:
     stw r3, 0xcf4(r30)
     beq lbl_fn_804E0CE8_00002E7C
     mr r3, r29
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r4, r29
     addi r3, r30, 0xcf8
@@ -3296,7 +3296,7 @@ lbl_fn_804E0CE8_0000308C:
     stw r3, 0x3b8(r31)
     beq lbl_fn_804E0CE8_000030D4
     mr r3, r29
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r4, r29
     addi r3, r31, 0x3bc
@@ -3361,7 +3361,7 @@ lbl_fn_804E0CE8_00003188:
     stw r3, 0x6cc(r31)
     beq lbl_fn_804E0CE8_000031D0
     mr r3, r29
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r4, r29
     addi r3, r31, 0x6d0
@@ -3426,7 +3426,7 @@ lbl_fn_804E0CE8_00003284:
     stw r3, 0x9e0(r31)
     beq lbl_fn_804E0CE8_000032CC
     mr r3, r29
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r4, r29
     addi r3, r31, 0x9e4
@@ -3491,7 +3491,7 @@ lbl_fn_804E0CE8_00003380:
     stw r3, 0xcf4(r31)
     beq lbl_fn_804E0CE8_000033C8
     mr r3, r29
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r4, r29
     addi r3, r31, 0xcf8

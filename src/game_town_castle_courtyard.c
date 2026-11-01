@@ -41,7 +41,7 @@ extern void PSMTXScale(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECMag(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 extern void std_atan2(void);
 
 /* External data declarations */
@@ -2638,7 +2638,7 @@ lbl_fn_803D83A8_0000253C:
     lbz r0, 0x18(r1)
     mr r3, r16
     stb r0, 0x1c(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r5, r14
     mr r6, r16

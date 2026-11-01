@@ -38,7 +38,7 @@ extern void fn_802091E8(void);
 extern void fn_804A660C(void);
 extern void fn_804A71F0(void);
 extern void printf(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 extern void abort(void);
 extern char* strcpy(char* dest, const char* src);
 
@@ -222,7 +222,7 @@ lbl_fn_804A3C24_000001C4:
     mr r3, r22
     stw r23, 0x30(r1)
     stw r23, 0x34(r1)
-    bl fn_80686A48
+    bl wcslen
     mr r17, r3
     mr r3, r21
     mr r4, r17

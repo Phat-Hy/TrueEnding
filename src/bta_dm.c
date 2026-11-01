@@ -89,7 +89,7 @@ extern void fn_8064EB00(void);
 extern void fn_8064EB64(void);
 extern void fn_8064EB8C(void);
 extern void fn_80674430(void);
-extern void fn_8068236C(void);
+extern void strncpy(void);
 
 /* External data declarations */
 extern u8 lbl_80764C58[];
@@ -1608,7 +1608,7 @@ lbl_fn_8062B0CC_000011D0:
     mr r4, r31
     addi r3, r29, 0xe
     li r5, 0x20
-    bl fn_8068236C
+    bl strncpy
     mr r3, r29
     bl fn_8062A350
     b lbl_fn_8062B0CC_000012AC
@@ -1661,7 +1661,7 @@ lbl_fn_8062B0CC_00001294:
     mr r4, r30
     addi r3, r29, 0xe
     li r5, 0x20
-    bl fn_8068236C
+    bl strncpy
     mr r3, r29
     bl fn_8062A350
 lbl_fn_8062B0CC_000012AC:
@@ -2037,7 +2037,7 @@ lbl_fn_8062B640_00001744:
     mr r4, r23
     addi r3, r24, 0xe
     li r5, 0x20
-    bl fn_8068236C
+    bl strncpy
     mr r3, r24
     bl fn_8062A350
 lbl_fn_8062B640_0000175C:
@@ -2217,7 +2217,7 @@ asm void fn_8062B9E4(void)
     stw r0, 0x14(r1)
     li r5, 0x1f
     addi r3, r3, 0x20
-    bl fn_8068236C
+    bl strncpy
     lis r3, fn_8062B9E4@ha
     addi r3, r3, fn_8062B9E4@l
     bl fn_806372C4
@@ -2253,7 +2253,7 @@ asm void fn_8062BA24(void)
     addi r3, r30, 0xe
     addi r4, r29, 0x4
     li r5, 0x20
-    bl fn_8068236C
+    bl strncpy
     li r0, 0x204
     mr r3, r30
     sth r0, 0x0(r30)
@@ -2293,7 +2293,7 @@ asm void fn_8062BAB0(void)
     addi r3, r30, 0xe
     addi r4, r29, 0x4
     li r5, 0x20
-    bl fn_8068236C
+    bl strncpy
     li r0, 0x204
     mr r3, r30
     sth r0, 0x0(r30)
@@ -2332,7 +2332,7 @@ asm void fn_8062BB3C(void)
     mr r4, r29
     addi r3, r1, 0xe
     li r5, 0x20
-    bl fn_8068236C
+    bl strncpy
     lis r3, lbl_80764D28@ha
     li r0, 0x17
     addi r3, r3, lbl_80764D28@l
@@ -2493,7 +2493,7 @@ lbl_fn_8062BCC4_00001D0C:
     stb r0, 0x107(r1)
     lbz r0, 0x2(r29)
     stb r0, 0x108(r1)
-    bl fn_8068236C
+    bl strncpy
     lis r3, lbl_8081FCB4@ha
     li r0, 0x0
     addi r3, r3, lbl_8081FCB4@l
@@ -3496,7 +3496,7 @@ asm void fn_8062CA68(void)
     sth r0, 0x0(r3)
     li r5, 0x20
     addi r3, r3, 0x8
-    bl fn_8068236C
+    bl strncpy
     mr r3, r31
     bl fn_8062A350
 lbl_fn_8062CA68_00002A48:

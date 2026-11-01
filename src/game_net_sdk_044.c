@@ -7,7 +7,7 @@ extern void _restgpr_23(void);
 extern void _savegpr_18(void);
 extern void _savegpr_23(void);
 extern void fn_8067E23C(void);
-extern void fn_806809C0(void);
+extern void snprintf(void);
 extern void fn_806A420C(void);
 extern void fn_806A4260(void);
 extern void fn_806A4264(void);
@@ -16,7 +16,7 @@ extern void fn_806A4270(void);
 extern void fn_806D57A0(void);
 extern void fn_806D5850(void);
 extern void fn_806D58F0(void);
-extern void fn_806D5900(void);
+extern void net_bufferGetElement(void);
 extern void fn_806D5930(void);
 extern void fn_806D5BE0(void);
 extern void fn_806D7AE0(void);
@@ -238,7 +238,7 @@ lbl_fn_806FB0B0_000001FC:
 lbl_fn_806FB0B0_00000208:
     lwz r3, 0x20(r3)
     mr r4, r7
-    bl fn_806D5900
+    bl net_bufferGetElement
     lwz r7, 0x0(r3)
 lbl_fn_806FB0B0_00000218:
     lis r4, lbl_807C5CE0@ha
@@ -309,7 +309,7 @@ lbl_fn_806FB1A0_000002EC:
 lbl_fn_806FB1A0_000002F8:
     lwz r3, 0x20(r3)
     mr r4, r6
-    bl fn_806D5900
+    bl net_bufferGetElement
     lwz r6, 0x0(r3)
 lbl_fn_806FB1A0_00000308:
     lis r4, lbl_807C5CE0@ha
@@ -379,7 +379,7 @@ lbl_fn_806FB290_000003DC:
 lbl_fn_806FB290_000003E8:
     lwz r3, 0x20(r3)
     mr r4, r7
-    bl fn_806D5900
+    bl net_bufferGetElement
     lwz r7, 0x0(r3)
 lbl_fn_806FB290_000003F8:
     lis r4, lbl_807C5CE0@ha
@@ -448,7 +448,7 @@ lbl_fn_806FB380_000004CC:
 lbl_fn_806FB380_000004D8:
     lwz r3, 0x1c(r3)
     mr r4, r7
-    bl fn_806D5900
+    bl net_bufferGetElement
     lwz r7, 0x0(r3)
 lbl_fn_806FB380_000004E8:
     lis r4, lbl_807C5CE8@ha
@@ -519,7 +519,7 @@ lbl_fn_806FB470_000005BC:
 lbl_fn_806FB470_000005C8:
     lwz r3, 0x1c(r3)
     mr r4, r6
-    bl fn_806D5900
+    bl net_bufferGetElement
     lwz r6, 0x0(r3)
 lbl_fn_806FB470_000005D8:
     lis r4, lbl_807C5CE8@ha
@@ -589,7 +589,7 @@ lbl_fn_806FB560_000006AC:
 lbl_fn_806FB560_000006B8:
     lwz r3, 0x1c(r3)
     mr r4, r7
-    bl fn_806D5900
+    bl net_bufferGetElement
     lwz r7, 0x0(r3)
 lbl_fn_806FB560_000006C8:
     lis r4, lbl_807C5CE8@ha
@@ -1238,7 +1238,7 @@ lbl_fn_806FBE00_00000FA4:
 lbl_fn_806FBE00_00000FAC:
     lwz r3, 0x0(r31)
     mr r4, r30
-    bl fn_806D5900
+    bl net_bufferGetElement
     lwz r0, 0x4(r3)
     cmpw r0, r29
     bne lbl_fn_806FBE00_00000FCC
@@ -1773,7 +1773,7 @@ lbl_fn_806FC5D0_00001734:
     li r4, 0x40
     addi r6, r6, lbl_80860DD8@l
     crclr 6
-    bl fn_806809C0
+    bl snprintf
     addi r23, r1, 0x8
 lbl_fn_806FC5D0_00001770:
     mr r3, r23
@@ -1807,7 +1807,7 @@ lbl_fn_806FC5D0_000017AC:
     li r4, 0x40
     addi r6, r6, lbl_80860DD8@l
     crclr 6
-    bl fn_806809C0
+    bl snprintf
     addi r23, r1, 0x48
 lbl_fn_806FC5D0_000017E8:
     mr r3, r23
@@ -1841,7 +1841,7 @@ lbl_fn_806FC5D0_00001824:
     li r4, 0x40
     addi r6, r6, lbl_80860DD8@l
     crclr 6
-    bl fn_806809C0
+    bl snprintf
     addi r23, r1, 0x88
 lbl_fn_806FC5D0_00001860:
     mr r3, r23
@@ -1903,7 +1903,7 @@ lbl_fn_806FC5D0_0000190C:
     mr r4, r3
     lwz r3, 0x0(r31)
     subi r4, r4, 0x1
-    bl fn_806D5900
+    bl net_bufferGetElement
     cmpwi r3, 0x0
     mr r23, r3
     bne lbl_fn_806FC5D0_00001944
@@ -1922,7 +1922,7 @@ lbl_fn_806FC5D0_00001944:
 lbl_fn_806FC5D0_00001968:
     lwz r3, 0x0(r31)
     mr r4, r24
-    bl fn_806D5900
+    bl net_bufferGetElement
     cmplw r23, r3
     bne lbl_fn_806FC5D0_0000198C
     lwz r3, 0x0(r31)
@@ -1989,7 +1989,7 @@ lbl_fn_806FC900_00001A44:
 lbl_fn_806FC900_00001A4C:
     lwz r3, lbl_808627E0@l(r31)
     mr r4, r30
-    bl fn_806D5900
+    bl net_bufferGetElement
     lwz r0, 0x4(r3)
     cmpw r0, r29
     bne lbl_fn_806FC900_00001A6C
@@ -2050,7 +2050,7 @@ asm void fn_806FC9C0(void)
 lbl_fn_806FC9C0_00001B1C:
     lwz r3, 0x0(r31)
     mr r4, r29
-    bl fn_806D5900
+    bl net_bufferGetElement
     cmplw r30, r3
     bne lbl_fn_806FC9C0_00001B40
     lwz r3, 0x0(r31)
@@ -2398,7 +2398,7 @@ lbl_fn_806FC9C0_00002010:
 lbl_fn_806FC9C0_00002018:
     lwz r3, 0x0(r31)
     mr r4, r28
-    bl fn_806D5900
+    bl net_bufferGetElement
     lwz r0, 0x4(r3)
     cmpw r0, r29
     bne lbl_fn_806FC9C0_00002038
@@ -2433,7 +2433,7 @@ lbl_fn_806FC9C0_00002078:
 lbl_fn_806FC9C0_0000208C:
     lwz r3, 0x0(r31)
     mr r4, r28
-    bl fn_806D5900
+    bl net_bufferGetElement
     cmplw r30, r3
     bne lbl_fn_806FC9C0_000020B0
     lwz r3, 0x0(r31)

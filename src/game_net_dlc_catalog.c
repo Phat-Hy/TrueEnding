@@ -50,7 +50,7 @@ extern void fn_805AE3C8(void);
 extern void PSVECNormalize(void);
 extern void PSVECMag(void);
 extern void wmemcpy(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 extern void fn_80686A64(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
@@ -1667,7 +1667,7 @@ lbl_fn_8054B0A0_00001428:
     stw r0, 0x20(r31)
     beq lbl_fn_8054B0A0_000014A4
     mr r3, r24
-    bl fn_80686A48
+    bl wcslen
     mr r5, r3
     mr r4, r24
     addi r3, r31, 0x24

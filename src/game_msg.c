@@ -32,7 +32,7 @@ extern void fn_8061FB70(void);
 extern void fn_80621B80(void);
 extern void fn_80621C50(void);
 extern void fn_80621CD0(void);
-extern void fn_806823B0(void);
+extern void strcat(void);
 extern void strcmp(void);
 extern void strncmp(void);
 extern void strrchr(void);
@@ -339,19 +339,19 @@ lbl_fn_800A5218_0000033C:
     addi r3, r1, 0x88
     addi r4, r4, lbl_807327B4@l
     addi r4, r4, 0x59
-    bl fn_806823B0
+    bl strcat
     addi r3, r1, 0x88
     addi r4, r1, 0x48
-    bl fn_806823B0
+    bl strcat
 lbl_fn_800A5218_0000037C:
     lis r4, lbl_807327B4@ha
     addi r3, r1, 0x88
     addi r4, r4, lbl_807327B4@l
     addi r4, r4, 0x59
-    bl fn_806823B0
+    bl strcat
     addi r3, r1, 0x88
     addi r4, r1, 0x8
-    bl fn_806823B0
+    bl strcat
     addi r3, r1, 0x88
     addi r4, r1, 0x148
     li r5, 0x2

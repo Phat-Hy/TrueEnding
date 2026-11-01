@@ -65,7 +65,7 @@ extern void fn_805860F4(void);
 extern void fn_80586220(void);
 extern void fn_80586624(void);
 extern void printf(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 extern void fn_80686AF0(void);
 extern void fn_80686B64(void);
 extern void abort(void);
@@ -326,10 +326,10 @@ lbl_fn_80584178_000002E4:
     b lbl_fn_80584178_0000033C
 lbl_fn_80584178_000002F8:
     mr r3, r17
-    bl fn_80686A48
+    bl wcslen
     mr r15, r3
     mr r3, r18
-    bl fn_80686A48
+    bl wcslen
     cmpw r15, r3
     beq lbl_fn_80584178_0000032C
     xor r0, r3, r15

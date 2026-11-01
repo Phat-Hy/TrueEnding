@@ -30,7 +30,7 @@ extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 extern void std_atan2(void);
 
 /* External data declarations */
@@ -1078,7 +1078,7 @@ lbl_fn_803E4978_00000DE4:
     lbz r0, 0xc(r1)
     mr r3, r30
     stb r0, 0x8(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r5, r31
     mr r6, r30

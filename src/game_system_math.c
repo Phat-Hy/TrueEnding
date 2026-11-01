@@ -33,7 +33,7 @@ extern void str_findChar(void);
 extern void fn_800DD3FC(void);
 extern void strcmp(void);
 extern void atoi(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
 extern u32 strlen(const char* str);
@@ -550,7 +550,7 @@ lbl_fn_8020C0BC_0000057C:
     beq lbl_fn_8020C0BC_000005AC
     addi r3, r1, 0xc64
     bl talk_parseDialogue
-    bl fn_80686A48
+    bl wcslen
     add r3, r3, r24
     addi r24, r3, 0x1
 lbl_fn_8020C0BC_000005AC:
@@ -568,7 +568,7 @@ lbl_fn_8020C0BC_000005BC:
     beq lbl_fn_8020C0BC_000005EC
     addi r3, r1, 0x10
     bl talk_parseDialogue
-    bl fn_80686A48
+    bl wcslen
     add r3, r3, r24
     addi r24, r3, 0x1
 lbl_fn_8020C0BC_000005EC:
@@ -643,7 +643,7 @@ lbl_fn_8020C0BC_00000694:
     mr r3, r24
     add r0, r0, r25
     stw r0, 0x4(r4)
-    bl fn_80686A48
+    bl wcslen
     add r3, r3, r31
     addi r26, r26, 0x8
     addi r31, r3, 0x1
@@ -679,7 +679,7 @@ lbl_fn_8020C0BC_0000071C:
     mr r3, r24
     add r0, r0, r25
     stw r0, 0x4(r4)
-    bl fn_80686A48
+    bl wcslen
     add r3, r3, r31
     addi r26, r26, 0x8
     addi r31, r3, 0x1

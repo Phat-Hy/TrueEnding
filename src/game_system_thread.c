@@ -21,7 +21,7 @@ extern void fn_801F04FC(void);
 extern void fn_801F25E0(void);
 extern void fn_8067E23C(void);
 extern void strrchr(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
 
@@ -1973,7 +1973,7 @@ lbl_thread_dispatchToQueue_0000190C:
     addi r31, r1, 0x10
     stw r0, 0x14(r1)
     stw r0, 0x18(r1)
-    bl fn_80686A48
+    bl wcslen
     mr r30, r3
     mr r3, r31
     mr r4, r30

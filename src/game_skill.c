@@ -24,7 +24,7 @@ extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void fn_806163C0(void);
 extern void fn_806163E0(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 extern void fn_80686A64(void);
 extern void runtime_registerStaticObject(void);
 extern u32 strlen(const char* str);
@@ -651,7 +651,7 @@ lbl_fn_80061824_00000858:
     cmpwi r31, 0x0
     beq lbl_fn_80061824_000009EC
     mr r3, r24
-    bl fn_80686A48
+    bl wcslen
     addi r0, r3, 0x1
     lwz r6, 0xc(r23)
     slwi r5, r0, 1
@@ -855,7 +855,7 @@ lbl_fn_80061AE4_00000B3C:
     cmpwi r31, 0x0
     beq lbl_fn_80061AE4_00000CDC
     mr r3, r24
-    bl fn_80686A48
+    bl wcslen
     addi r0, r3, 0x1
     lwz r6, 0xc(r23)
     slwi r5, r0, 1

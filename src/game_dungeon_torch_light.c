@@ -31,7 +31,7 @@ extern int world_isTransitionFinished(void* world);
 extern void fn_803E746C(void);
 extern void fn_80444CF8(void);
 extern void fn_804DA47C(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -1610,7 +1610,7 @@ asm void fn_803E6CBC(void)
     stw r0, 0x4(r3)
     stw r0, 0x8(r3)
     mr r3, r30
-    bl fn_80686A48
+    bl wcslen
     mr r31, r3
     mr r3, r29
     mr r4, r31

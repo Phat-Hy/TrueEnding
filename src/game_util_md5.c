@@ -12,8 +12,8 @@ extern void OSUnlockMutex(void);
 extern void fn_805F9EF0(void);
 extern void fn_805FA4E0(void);
 extern void fn_805FA5D0(void);
-extern void fn_8068236C(void);
-extern void fn_806823DC(void);
+extern void strncpy(void);
+extern void strncat(void);
 extern void strrchr(void);
 extern void fn_8070C650(void);
 extern void fn_8070C740(void);
@@ -1129,11 +1129,11 @@ lbl_fn_8059E3B8_00000A4C:
     addi r3, r1, 0x250
     addi r4, r28, 0x8
     addi r5, r5, 0x1
-    bl fn_8068236C
+    bl strncpy
     addi r3, r1, 0x250
     addi r4, r1, 0x350
     addi r5, r27, 0x1
-    bl fn_806823DC
+    bl strncat
     addi r6, r1, 0x250
 lbl_fn_8059E3B8_00000A70:
     lwz r12, 0x0(r28)
@@ -1176,11 +1176,11 @@ lbl_fn_8059E3B8_00000AF8:
     addi r3, r1, 0x150
     addi r4, r28, 0x8
     addi r5, r5, 0x1
-    bl fn_8068236C
+    bl strncpy
     mr r4, r31
     addi r3, r1, 0x150
     addi r5, r27, 0x1
-    bl fn_806823DC
+    bl strncat
     addi r31, r1, 0x150
 lbl_fn_8059E3B8_00000B1C:
     lwz r12, 0x0(r28)
@@ -1259,11 +1259,11 @@ lbl_fn_8059E3B8_00000C28:
     addi r3, r1, 0x50
     addi r4, r28, 0x8
     addi r5, r5, 0x1
-    bl fn_8068236C
+    bl strncpy
     mr r4, r26
     addi r3, r1, 0x50
     addi r5, r31, 0x1
-    bl fn_806823DC
+    bl strncat
     addi r26, r1, 0x50
 lbl_fn_8059E3B8_00000C4C:
     lwz r12, 0x0(r28)
@@ -1335,7 +1335,7 @@ lbl_fn_8059E740_00000D24:
     mr r4, r29
     mr r5, r31
     addi r3, r28, 0x8
-    bl fn_8068236C
+    bl strncpy
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)

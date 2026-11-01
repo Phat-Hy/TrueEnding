@@ -91,7 +91,7 @@ extern void printf(void);
 extern void strcmp(void);
 extern void strncmp(void);
 extern void atoi(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 extern void abort(void);
 extern int sprintf(char* str, const char* format, ...);
 
@@ -662,7 +662,7 @@ lbl_fn_80586220_000006A8:
     mr r3, r24
     stw r27, 0x3c(r1)
     stw r27, 0x40(r1)
-    bl fn_80686A48
+    bl wcslen
     mr r20, r3
     mr r3, r23
     mr r4, r20
@@ -692,7 +692,7 @@ lbl_fn_80586220_000007C0:
     lbz r0, 0xc(r1)
     addi r3, r21, 0x8
     stb r0, 0x8(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     mr r4, r20
     add r5, r21, r0

@@ -36,7 +36,7 @@ extern void fn_8063E7B0(void);
 extern void fn_8063E82C(void);
 extern void fn_8064465C(void);
 extern void fn_8067E23C(void);
-extern void fn_8068236C(void);
+extern void strncpy(void);
 
 /* External data declarations */
 extern u8 lbl_807B3FB0[];
@@ -2328,7 +2328,7 @@ lbl_fn_80631AB4_00001D70:
     li r5, 0x40
     ori r0, r0, 0x8
     stb r0, 0x76(r30)
-    bl fn_8068236C
+    bl strncpy
 lbl_fn_80631AB4_00001DB0:
     cmpwi r27, 0x0
     beq lbl_fn_80631AB4_00001DCC

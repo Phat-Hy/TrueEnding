@@ -50,7 +50,7 @@ extern void atn_LoadHandle_isLoading(void);
 extern void fn_804A3AF0(void);
 extern void fn_804A3B60(void);
 extern void strcmp(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
 extern void fn_80695A50(void);
@@ -425,7 +425,7 @@ lbl_fn_80116EB8_00000360:
     lbz r0, 0x8(r1)
     mr r3, r28
     stb r0, 0xc(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     lis r31, lbl_807C78E4@ha
     mr r5, r27
@@ -505,7 +505,7 @@ lbl_fn_80116FC0_00000468:
     lbz r0, 0xc(r1)
     mr r3, r30
     stb r0, 0x8(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     lis r31, lbl_807C78E4@ha
     mr r5, r29
@@ -591,7 +591,7 @@ lbl_fn_801170C8_00000588:
     lbz r0, 0x8(r1)
     mr r3, r29
     stb r0, 0xc(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     lis r30, lbl_807C78E4@ha
     mr r5, r28
@@ -877,7 +877,7 @@ lbl_fn_8011745C_00000918:
     lbz r0, 0x10(r1)
     mr r3, r30
     stb r0, 0x14(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     lis r31, lbl_807C78E4@ha
     mr r5, r29
@@ -925,7 +925,7 @@ lbl_fn_8011745C_000009C4:
     lbz r0, 0x8(r1)
     mr r3, r29
     stb r0, 0xc(r1)
-    bl fn_80686A48
+    bl wcslen
     slwi r0, r3, 1
     lis r31, lbl_807C78E4@ha
     mr r5, r28
@@ -1010,7 +1010,7 @@ asm void fn_801175EC(void)
     stw r0, 0x0(r29)
     stw r0, 0x4(r29)
     stw r0, 0x8(r29)
-    bl fn_80686A48
+    bl wcslen
     mr r28, r3
     mr r3, r29
     mr r4, r28

@@ -37,10 +37,10 @@ extern void fn_805F9EF0(void);
 extern void fn_805FA710(void);
 extern void fn_805FA770(void);
 extern void fn_80614790(void);
-extern void fn_806823B0(void);
+extern void strcat(void);
 extern void strcmp(void);
 extern void strstr(void);
-extern void fn_80686A48(void);
+extern void wcslen(void);
 extern void fn_8068A918(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
@@ -218,7 +218,7 @@ lbl_fn_8006C3F0_000001A0:
 lbl_fn_8006C3F0_000001AC:
     mr r4, r23
     addi r3, r1, 0x28
-    bl fn_806823B0
+    bl strcat
     mr r3, r23
     bl strlen
     add r3, r23, r3
@@ -227,11 +227,11 @@ lbl_fn_8006C3F0_000001AC:
     beq lbl_fn_8006C3F0_000001DC
     addi r3, r1, 0x28
     addi r4, r18, 0x32
-    bl fn_806823B0
+    bl strcat
 lbl_fn_8006C3F0_000001DC:
     lwz r4, 0xc(r17)
     addi r3, r1, 0x28
-    bl fn_806823B0
+    bl strcat
     mr r3, r22
     mr r5, r24
     mr r6, r25
@@ -1670,7 +1670,7 @@ asm void gimmick_updateAll(void)
     stw r6, 0x18(r1)
     stw r0, 0x2f0(r1)
     stw r8, 0x1c(r1)
-    bl fn_80686A48
+    bl wcslen
     rlwinm r0, r30, 0, 30, 30
     stw r3, 0x330(r1)
     cmplwi r0, 0x2
