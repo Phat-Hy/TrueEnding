@@ -16,7 +16,7 @@ extern void fn_80072914(void);
 extern void gx_applyRenderState(void);
 extern void fn_8022D078(void);
 extern void fn_8022D478(void);
-extern void fn_80234CD8(void);
+extern void font_renderString(void);
 extern void fn_80235BF8(void);
 extern void fn_80238218(void);
 extern void fn_802386FC(void);
@@ -77,7 +77,7 @@ extern u32 lbl_80883144;
 /* Function declarations */
 void fn_8023686C(void);
 void fn_802368B0(void);
-void fn_80236938(void);
+void msg_drawText(void);
 void fn_80236B84(void);
 void fn_80236FFC(void);
 void fn_802371AC(void);
@@ -153,7 +153,7 @@ asm void fn_802368B0(void)
     stfs f1, lbl_8087F390
     stfs f0, lbl_8087F394
     bl fn_8022D478
-    bl fn_80234CD8
+    bl font_renderString
     bl fn_80235BF8
     lwz r3, lbl_8087EEE0
     li r4, 0x0
@@ -166,7 +166,7 @@ asm void fn_802368B0(void)
     blr
 }
 
-asm void fn_80236938(void)
+asm void msg_drawText(void)
 {
     nofralloc
     stwu r1, -0xd0(r1)
@@ -179,14 +179,14 @@ asm void fn_80236938(void)
     mr r29, r4
     mr r30, r6
     mr r31, r7
-    beq lbl_fn_80236938_00000110
+    beq lbl_msg_drawText_00000110
     lwz r3, lbl_8087EFB4
     addi r4, r1, 0x64
     psq_l f1, 0x10c(r3), 0, 0
     lfs f2, 0x114(r3)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x6c(r1)
-lbl_fn_80236938_00000110:
+lbl_msg_drawText_00000110:
     lfs f6, lbl_80883130
     addi r4, r1, 0xc
     lfs f0, 0x0(r5)
@@ -232,8 +232,8 @@ lbl_fn_80236938_00000110:
     li r19, 0x0
     li r27, 0x0
     lis r26, 0xcc01
-    b lbl_fn_80236938_000002F8
-lbl_fn_80236938_000001C8:
+    b lbl_msg_drawText_000002F8
+lbl_msg_drawText_000001C8:
     lfsx f4, r29, r27
     add r3, r29, r27
     stfs f4, -0x8000(r26)
@@ -242,7 +242,7 @@ lbl_fn_80236938_000001C8:
     stfs f5, -0x8000(r26)
     lfs f6, 0x8(r3)
     stfs f6, -0x8000(r26)
-    beq lbl_fn_80236938_000002DC
+    beq lbl_msg_drawText_000002DC
     lfs f0, 0x8(r30)
     mr r3, r25
     lfs f3, 0x4(r30)
@@ -303,7 +303,7 @@ lbl_fn_80236938_000001C8:
     stfs f0, -0x8000(r26)
     stfs f3, -0x8000(r26)
     stfs f4, -0x8000(r26)
-lbl_fn_80236938_000002DC:
+lbl_msg_drawText_000002DC:
     add r3, r29, r27
     addi r19, r19, 0x1
     lfs f0, 0xc(r3)
@@ -311,9 +311,9 @@ lbl_fn_80236938_000002DC:
     stfs f0, -0x8000(r26)
     lfs f0, 0x10(r3)
     stfs f0, -0x8000(r26)
-lbl_fn_80236938_000002F8:
+lbl_msg_drawText_000002F8:
     cmpw r19, r28
-    blt lbl_fn_80236938_000001C8
+    blt lbl_msg_drawText_000001C8
     addi r11, r1, 0xd0
     bl _restgpr_19
     lwz r0, 0xd4(r1)

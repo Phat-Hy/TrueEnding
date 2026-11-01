@@ -18,9 +18,9 @@ extern void fn_8006FDD8(void);
 extern void fn_8006FE08(void);
 extern void fn_80070C98(void);
 extern void fn_80071D74(void);
-extern void fn_80071E04(void);
+extern void gx_drawScreenQuad(void);
 extern void fn_80075DEC(void);
-extern void fn_80076760(void);
+extern void gx_setRenderStateParam(void);
 extern void fn_800A96AC(void);
 extern void fn_800B6C70(void);
 extern void fn_800BDB58(void);
@@ -1920,26 +1920,26 @@ lbl_fn_800B8964_00001C18:
     blt lbl_fn_800B8964_00001C18
     lwz r28, lbl_8087EEE0
     mr r3, r28
-    bl fn_80071E04
+    bl gx_drawScreenQuad
     mr r3, r28
     li r4, 0x6
     li r5, 0x2
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r28
     addi r4, r29, 0x2f0
     bl fn_80071D74
     mr r3, r28
     li r4, 0x8
     li r5, 0x1
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r28
     li r4, 0x9
     li r5, 0x2
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r28
     li r4, 0xa
     li r5, 0x1
-    bl fn_80076760
+    bl gx_setRenderStateParam
     lwz r5, lbl_8087EFA8
     lis r4, lbl_80732ED0@ha
     lfs f1, lbl_80880F7C

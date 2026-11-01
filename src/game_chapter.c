@@ -12,7 +12,7 @@ extern void fn_8006FEBC(void);
 extern void fn_80072914(void);
 extern void gx_applyRenderState(void);
 extern void fn_800763C0(void);
-extern void fn_80076760(void);
+extern void gx_setRenderStateParam(void);
 extern void fn_800846FC(void);
 extern void fn_80084C24(void);
 extern void fn_800874C8(void);
@@ -34,7 +34,7 @@ extern void fn_800D6A84(void);
 extern void fn_80612E80(void);
 extern void fn_806134E0(void);
 extern void fn_80613520(void);
-extern void fn_80613960(void);
+extern void __GXSetVtxDesc(void);
 extern void fn_80613BB0(void);
 extern void fn_80614790(void);
 extern void fn_80615D20(void);
@@ -2148,7 +2148,7 @@ asm void fn_80078938(void)
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     bl fn_806134E0
     li r3, 0x9
     li r4, 0x1
@@ -2181,15 +2181,15 @@ asm void fn_80078938(void)
     li r4, 0x8
     li r5, 0x0
     mr r3, r29
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r29
     li r4, 0x9
     li r5, 0x7
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r29
     li r4, 0xa
     li r5, 0x0
-    bl fn_80076760
+    bl gx_setRenderStateParam
     lwz r3, lbl_8087EEE0
     li r4, 0x1
     bl fn_80072914

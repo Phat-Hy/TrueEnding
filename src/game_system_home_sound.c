@@ -18,7 +18,7 @@ extern void fn_8006A250(void);
 extern void fn_8006BA30(void);
 extern void fn_8006F2F0(void);
 extern void fn_8007192C(void);
-extern void fn_80071AFC(void);
+extern void gx_syncFrameFifo(void);
 extern void fn_80071D60(void);
 extern void fn_80075DEC(void);
 extern void fn_80084320(void);
@@ -59,7 +59,7 @@ extern void fn_805FF120(void);
 extern void fn_80612E80(void);
 extern void fn_806134E0(void);
 extern void fn_80613520(void);
-extern void fn_80613960(void);
+extern void __GXSetVtxDesc(void);
 extern void fn_80613BB0(void);
 extern void fn_80614790(void);
 extern void fn_80615D20(void);
@@ -1516,7 +1516,7 @@ lbl_fn_803646C4_00001278:
     li r6, 0x1e
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     lwz r6, 0xc(r1)
     mr r3, r26
     lwz r7, 0x10(r1)
@@ -1535,7 +1535,7 @@ lbl_fn_803646C4_00001384:
     addi r29, r29, 0x4
     blt lbl_fn_803646C4_00001240
     mr r3, r30
-    bl fn_80071AFC
+    bl gx_syncFrameFifo
     mr r3, r30
     li r4, 0x1
     bl fn_80071D60

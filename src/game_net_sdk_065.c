@@ -18,7 +18,7 @@ extern void fn_805F3350(void);
 extern void fn_80612E80(void);
 extern void fn_806134E0(void);
 extern void fn_80613520(void);
-extern void fn_80613960(void);
+extern void __GXSetVtxDesc(void);
 extern void fn_80613BB0(void);
 extern void fn_80614790(void);
 extern void fn_80615D20(void);
@@ -674,7 +674,7 @@ lbl_fn_80726B90_00000758:
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     li r3, 0x0
     bl fn_80617200
     li r3, 0x1
@@ -803,7 +803,7 @@ lbl_fn_80726B90_00000954:
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     li r3, 0x0
     bl fn_80617200
     li r3, 0x1
@@ -909,7 +909,7 @@ lbl_fn_80726B90_00000AF4:
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     li r3, 0x0
     bl fn_80617200
     li r3, 0x1
@@ -1015,7 +1015,7 @@ lbl_fn_80726B90_00000C94:
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     li r3, 0x0
     bl fn_80617200
     li r3, 0x1
@@ -1121,7 +1121,7 @@ lbl_fn_80726B90_00000E34:
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     li r3, 0x0
     bl fn_80617200
     li r3, 0x1
@@ -1711,7 +1711,7 @@ lbl_fn_80727B60_000016A4:
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     li r3, 0x0
     bl fn_80617200
     li r3, 0x1

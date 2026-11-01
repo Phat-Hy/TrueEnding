@@ -12,12 +12,12 @@ extern void fn_800500FC(void);
 extern void fn_800502A8(void);
 extern void fn_80071D68(void);
 extern void fn_80071D74(void);
-extern void fn_80071E04(void);
+extern void gx_drawScreenQuad(void);
 extern void fn_80075DEC(void);
 extern void fn_80075F58(void);
 extern void gx_applyRenderState(void);
 extern void fn_800763FC(void);
-extern void fn_80076760(void);
+extern void gx_setRenderStateParam(void);
 extern void fn_800848B4(void);
 extern void fn_80084C24(void);
 extern void fn_800874C8(void);
@@ -27,7 +27,7 @@ extern void fn_80087E9C(void);
 extern void fn_80088AF4(void);
 extern void fn_8008937C(void);
 extern void fn_800A96AC(void);
-extern void fn_800A981C(void);
+extern void layout_drawPane(void);
 extern void fn_800B448C(void);
 extern void fn_800B4694(void);
 extern void fn_800B47AC(void);
@@ -36,7 +36,7 @@ extern void fn_800C0508(void);
 extern void fn_80476194(void);
 extern void fn_804761B0(void);
 extern void fn_805F95A0(void);
-extern void fn_80613960(void);
+extern void __GXSetVtxDesc(void);
 extern void fn_80613BB0(void);
 extern void fn_80614190(void);
 extern void GXSetTexCopySrc(void);
@@ -991,7 +991,7 @@ asm void fn_800B2EA0(void)
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     li r3, 0x0
     bl fn_80617220
     lwz r4, lbl_8087EFB4
@@ -1042,7 +1042,7 @@ asm void fn_800B2EA0(void)
     li r7, 0x6
     li r8, 0x0
     li r9, 0x0
-    bl fn_800A981C
+    bl layout_drawPane
     lwz r3, lbl_8087EFA8
     lfs f1, 0x420(r3)
     bl fn_8068A850
@@ -1064,7 +1064,7 @@ asm void fn_800B2EA0(void)
     li r8, 0x0
     li r9, 0x0
     fmuls f1, f0, f1
-    bl fn_800A981C
+    bl layout_drawPane
     li r3, 0x1
     bl fn_80613BB0
     li r3, 0x0
@@ -1271,7 +1271,7 @@ asm void fn_800B33A8(void)
     mr r30, r3
     lwz r31, lbl_8087EEE0
     mr r3, r31
-    bl fn_80071E04
+    bl gx_drawScreenQuad
     lwz r4, lbl_8087EFB4
     mr r3, r31
     addi r4, r4, 0x18c
@@ -1279,19 +1279,19 @@ asm void fn_800B33A8(void)
     mr r3, r31
     li r4, 0x6
     li r5, 0x0
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r31
     li r4, 0x8
     li r5, 0x1
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r31
     li r4, 0x9
     li r5, 0x2
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r31
     li r4, 0xa
     li r5, 0x1
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r31
     bl gx_applyRenderState
     lwz r4, 0x14(r30)
@@ -1356,7 +1356,7 @@ asm void fn_800B34C0(void)
     stw r31, 0x9c(r1)
     lwz r31, lbl_8087EEE0
     mr r3, r31
-    bl fn_80071E04
+    bl gx_drawScreenQuad
     lwz r0, 0x40(r31)
     lis r4, 0x4330
     lfs f1, lbl_80880F38
@@ -1401,27 +1401,27 @@ asm void fn_800B34C0(void)
     mr r3, r31
     li r4, 0x6
     li r5, 0x0
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r31
     li r4, 0x8
     li r5, 0x0
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r31
     li r4, 0x9
     li r5, 0x7
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r31
     li r4, 0xa
     li r5, 0x0
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r31
     li r4, 0x4
     li r5, 0x4
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r31
     li r4, 0x5
     li r5, 0x5
-    bl fn_80076760
+    bl gx_setRenderStateParam
     lwz r0, 0xa4(r1)
     lwz r31, 0x9c(r1)
     mtlr r0
@@ -1488,7 +1488,7 @@ asm void fn_800B365C(void)
     mr r30, r3
     lwz r31, lbl_8087EEE0
     mr r3, r31
-    bl fn_80071E04
+    bl gx_drawScreenQuad
     lwz r4, lbl_8087EFB4
     mr r3, r31
     addi r4, r4, 0x18c
@@ -1496,19 +1496,19 @@ asm void fn_800B365C(void)
     mr r3, r31
     li r4, 0x6
     li r5, 0x0
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r31
     li r4, 0x8
     li r5, 0x1
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r31
     li r4, 0x9
     li r5, 0x2
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r31
     li r4, 0xa
     li r5, 0x1
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r31
     bl gx_applyRenderState
     lwz r4, 0x14(r30)
@@ -1523,19 +1523,19 @@ asm void fn_800B365C(void)
     lwz r31, lbl_8087EEE0
     stb r0, lbl_8087EFB0
     mr r3, r31
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r31
     li r4, 0x8
     li r5, 0x1
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r31
     li r4, 0x9
     li r5, 0x2
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r31
     li r4, 0xa
     li r5, 0x1
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r31
     bl gx_applyRenderState
     lwz r0, 0x14(r1)
@@ -1567,7 +1567,7 @@ asm void fn_800B3770(void)
     stw r30, 0x8(r1)
     lwz r30, lbl_8087EEE0
     mr r3, r30
-    bl fn_80071E04
+    bl gx_drawScreenQuad
     lwz r4, lbl_8087EFB4
     mr r3, r30
     addi r4, r4, 0x18c
@@ -1575,19 +1575,19 @@ asm void fn_800B3770(void)
     mr r3, r30
     li r4, 0x6
     li r5, 0x0
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r30
     li r4, 0x8
     li r5, 0x1
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r30
     li r4, 0x9
     li r5, 0x2
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r30
     li r4, 0xa
     li r5, 0x1
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r30
     bl gx_applyRenderState
     lwz r5, 0x14(r31)

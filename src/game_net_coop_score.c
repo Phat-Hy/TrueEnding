@@ -20,12 +20,12 @@ extern void atn_ComDrawTextureMask_execute(void);
 extern void fn_8006F72C(void);
 extern void fn_80071D68(void);
 extern void fn_80071D74(void);
-extern void fn_80071E04(void);
+extern void gx_drawScreenQuad(void);
 extern void fn_80075DEC(void);
 extern void fn_800760BC(void);
 extern void fn_800760D0(void);
 extern void fn_800763FC(void);
-extern void fn_80076760(void);
+extern void gx_setRenderStateParam(void);
 extern void fn_80076FF8(void);
 extern void fn_8007FAF0(void);
 extern void fn_80084320(void);
@@ -69,7 +69,7 @@ extern void fn_804A9EA4(void);
 extern void fn_804A9EAC(void);
 extern void fn_804AB060(void);
 extern void fn_804AB79C(void);
-extern void fn_80613960(void);
+extern void __GXSetVtxDesc(void);
 extern void fn_80613BB0(void);
 extern void fn_80614190(void);
 extern void GXSetTexCopySrc(void);
@@ -298,7 +298,7 @@ lbl_fn_804ABA2C_00000144:
     bl GXCopyTex
     bl fn_80614190
     bl fn_803D71C4
-    bl fn_80071E04
+    bl gx_drawScreenQuad
     bl fn_803D71C4
     li r4, 0x0
     bl fn_804ABF28
@@ -445,7 +445,7 @@ lbl_fn_804ABA2C_00000144:
     bl fn_804ABF20
     bl fn_804ABF14
     bl fn_803D71C4
-    bl fn_80071E04
+    bl gx_drawScreenQuad
     mr r3, r31
     mr r4, r30
     bl fn_804ABF00
@@ -531,7 +531,7 @@ asm void fn_804ABF28(void)
     nofralloc
     mr r5, r4
     li r4, 0x3
-    b fn_80076760
+    b gx_setRenderStateParam
 }
 
 asm void fn_804ABF34(void)
@@ -539,7 +539,7 @@ asm void fn_804ABF34(void)
     nofralloc
     li r7, 0x0
     li r8, 0x7d
-    b fn_80613960
+    b __GXSetVtxDesc
 }
 
 asm void fn_804ABF40(void)
@@ -734,7 +734,7 @@ lbl_fn_804ABF84_00000758:
     bl fn_803D71C4
     li r4, 0xb
     li r5, 0x0
-    bl fn_80076760
+    bl gx_setRenderStateParam
     lwz r12, 0x208(r26)
     addi r3, r26, 0x208
     mr r4, r27
@@ -744,7 +744,7 @@ lbl_fn_804ABF84_00000758:
     bl fn_803D71C4
     li r4, 0xb
     li r5, 0x3
-    bl fn_80076760
+    bl gx_setRenderStateParam
     lwz r12, 0x208(r26)
     addi r3, r26, 0x208
     mr r4, r27

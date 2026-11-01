@@ -9,7 +9,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_8006945C(void);
-extern void fn_80071E04(void);
+extern void gx_drawScreenQuad(void);
 extern void fn_80075DEC(void);
 extern void fn_80075F58(void);
 extern void fn_800763FC(void);
@@ -20,7 +20,7 @@ extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800D6BE0(void);
 extern void fn_800DC6B4(void);
 extern void fn_80478198(void);
-extern void fn_80613960(void);
+extern void __GXSetVtxDesc(void);
 extern void fn_80613BB0(void);
 extern void GXFlush(void);
 extern void fn_806140C0(void);
@@ -391,7 +391,7 @@ asm void tex_bakeCharacterTexture(void)
     mr r15, r3
     mr r14, r4
     lwz r3, lbl_8087EEE0
-    bl fn_80071E04
+    bl gx_drawScreenQuad
     lwz r3, 0xc(r15)
     lwz r0, 0x28(r3)
     lwz r25, 0x28(r3)
@@ -751,7 +751,7 @@ asm void fn_800D775C(void)
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     lwz r3, lbl_8087EEE0
     li r5, 0x1
     lwz r4, 0x4(r31)
@@ -762,7 +762,7 @@ asm void fn_800D775C(void)
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     lwz r3, lbl_8087EEE0
     li r5, 0x2
     lwz r4, 0xc(r31)
@@ -773,7 +773,7 @@ asm void fn_800D775C(void)
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     lfs f1, 0x1c(r31)
     addi r4, r1, 0x14
     lfs f3, lbl_80881210
@@ -1141,7 +1141,7 @@ asm void fn_800D7D00(void)
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     lfs f4, lbl_8088120C
     addi r4, r1, 0xc
     lfs f0, 0x8(r31)
@@ -1262,7 +1262,7 @@ asm void fn_800D7F18(void)
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     lfs f4, lbl_8088120C
     addi r4, r1, 0xc
     lfs f0, 0x8(r31)

@@ -114,7 +114,7 @@ void fn_800EF3DC(void);
 void fn_800EF3E0(void);
 void fn_800EF3E8(void);
 void fn_800EF3EC(void);
-void fn_800EF588(void);
+void camera_setMode(void);
 void fn_800EF6BC(void);
 void fn_800EF73C(void);
 
@@ -1749,7 +1749,7 @@ lbl_fn_800EF3EC_00001584:
     blr
 }
 
-asm void fn_800EF588(void)
+asm void camera_setMode(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -1762,7 +1762,7 @@ asm void fn_800EF588(void)
     mr r29, r4
     lwz r0, lbl_8087F030
     cmpwi r0, 0x0
-    beq lbl_fn_800EF588_000015E8
+    beq lbl_camera_setMode_000015E8
     lis r4, fn_800EF7F8@ha
     mr r3, r0
     addi r4, r4, fn_800EF7F8@l
@@ -1770,7 +1770,7 @@ asm void fn_800EF588(void)
     li r0, 0x0
     stw r0, lbl_8087F030
     stw r0, lbl_8087F034
-lbl_fn_800EF588_000015E8:
+lbl_camera_setMode_000015E8:
     stw r30, lbl_8087D968
     stw r29, lbl_8087F038
     bl fn_80207C00
@@ -1794,8 +1794,8 @@ lbl_fn_800EF588_000015E8:
     stw r3, lbl_8087F030
     li r30, 0x0
     li r31, 0x0
-    b lbl_fn_800EF588_000016AC
-lbl_fn_800EF588_00001648:
+    b lbl_camera_setMode_000016AC
+lbl_camera_setMode_00001648:
     lwz r0, lbl_8087F030
     mr r3, r30
     add r29, r0, r31
@@ -1803,31 +1803,31 @@ lbl_fn_800EF588_00001648:
     stw r3, 0x0(r29)
     lwz r4, lbl_8087D968
     cmpwi r4, 0x1
-    bne lbl_fn_800EF588_00001678
+    bne lbl_camera_setMode_00001678
     lwz r3, 0x0(r29)
     lwz r0, 0x124(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_800EF588_000016A4
-lbl_fn_800EF588_00001678:
+    beq lbl_camera_setMode_000016A4
+lbl_camera_setMode_00001678:
     cmpwi r4, 0x2
-    bne lbl_fn_800EF588_0000169C
+    bne lbl_camera_setMode_0000169C
     lwz r4, lbl_8087F038
     cmpwi r4, 0xff
-    bge lbl_fn_800EF588_0000169C
+    bge lbl_camera_setMode_0000169C
     lwz r3, 0x0(r29)
     bl fn_80207C34
     cmpwi r3, 0x0
-    beq lbl_fn_800EF588_000016A4
-lbl_fn_800EF588_0000169C:
+    beq lbl_camera_setMode_000016A4
+lbl_camera_setMode_0000169C:
     mr r3, r29
     bl fn_800EF3EC
-lbl_fn_800EF588_000016A4:
+lbl_camera_setMode_000016A4:
     addi r31, r31, 0x48
     addi r30, r30, 0x1
-lbl_fn_800EF588_000016AC:
+lbl_camera_setMode_000016AC:
     lwz r0, lbl_8087F034
     cmplw r30, r0
-    blt lbl_fn_800EF588_00001648
+    blt lbl_camera_setMode_00001648
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)

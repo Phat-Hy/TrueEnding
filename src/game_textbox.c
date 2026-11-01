@@ -26,7 +26,7 @@ extern void atn_LH_Texture_update(void);
 extern void fn_800D5B58(void);
 extern void atn_LoadHandle_getStatus(void);
 extern void fn_805F9160(void);
-extern void fn_80613960(void);
+extern void __GXSetVtxDesc(void);
 extern void fn_80613BB0(void);
 extern void fn_80614190(void);
 extern void GXSetTexCopySrc(void);
@@ -504,7 +504,7 @@ asm void fn_800AD648(void)
     stw r30, 0x48(r1)
     mr r30, r3
     li r3, 0x0
-    bl fn_80613960
+    bl __GXSetVtxDesc
     li r3, 0x8
     bl fn_80613BB0
     li r3, 0x0
@@ -722,7 +722,7 @@ asm void fn_800AD834(void)
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     li r3, 0x0
     bl fn_80617220
     lwz r4, lbl_8087EFB4
@@ -1047,7 +1047,7 @@ lbl_fn_800AD834_00000D20:
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     li r3, 0x0
     bl fn_80617220
     lwz r3, lbl_8087EEE0
@@ -1178,14 +1178,14 @@ lbl_fn_800AD834_00000F00:
     li r6, 0x1e
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     li r3, 0x1
     li r4, 0x1
     li r5, 0x4
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     li r3, 0x0
     li r4, 0x3
     bl fn_80617340
@@ -1305,21 +1305,21 @@ lbl_fn_800AD834_00000F00:
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     li r3, 0x1
     li r4, 0x1
     li r5, 0x4
     li r6, 0x1e
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     li r3, 0x2
     li r4, 0x1
     li r5, 0x4
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     lfs f1, lbl_80880DD0
     addi r3, r1, 0x120
     lfs f0, lbl_80880DC8
@@ -1772,14 +1772,14 @@ lbl_fn_800AE568_000017F8:
     li r6, 0x1e
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     li r3, 0x1
     li r4, 0x1
     li r5, 0x4
     li r6, 0x21
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     frsp f1, f27
     lfs f0, lbl_80880E10
     lfs f3, lbl_80880E0C

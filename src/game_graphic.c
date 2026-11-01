@@ -21,7 +21,7 @@ extern void fn_80083AD4(void);
 extern void fn_800846FC(void);
 extern void fn_80084C24(void);
 extern void fn_800A96AC(void);
-extern void fn_800A981C(void);
+extern void layout_drawPane(void);
 extern void fn_800AE568(void);
 extern void fn_800BFAC8(void);
 extern void fn_800BFB70(void);
@@ -35,7 +35,7 @@ extern void fn_805F8CA0(void);
 extern void fn_805F93C0(void);
 extern void fn_805F98D0(void);
 extern void fn_805F9990(void);
-extern void fn_80613960(void);
+extern void __GXSetVtxDesc(void);
 extern void fn_80613BB0(void);
 extern void fn_80614190(void);
 extern void GXSetTexCopySrc(void);
@@ -649,7 +649,7 @@ lbl_fn_800AF544_0000065C:
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     b lbl_fn_800AF544_000007B0
 lbl_fn_800AF544_00000790:
     li r3, 0x1
@@ -684,14 +684,14 @@ lbl_fn_800AF544_000007B0:
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     li r3, 0x1
     li r4, 0x1
     li r5, 0x4
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     li r3, 0x0
     li r4, 0x1
     li r5, 0x1
@@ -833,7 +833,7 @@ lbl_fn_800AF544_00000A10:
     addi r3, r24, 0x8
     li r8, 0x0
     li r9, 0x0
-    bl fn_800A981C
+    bl layout_drawPane
     lfs f1, lbl_80880E10
     mr r4, r28
     lfs f2, lbl_80880E0C
@@ -843,7 +843,7 @@ lbl_fn_800AF544_00000A10:
     addi r3, r1, 0x38
     li r8, 0x0
     li r9, 0x0
-    bl fn_800A981C
+    bl layout_drawPane
     lwz r0, 0x18(r29)
     cmpwi r0, 0x0
     beq lbl_fn_800AF544_00000A8C
@@ -889,7 +889,7 @@ lbl_fn_800AF544_00000AE4:
     fmuls f2, f2, f0
     li r8, 0x0
     li r9, 0x1
-    bl fn_800A981C
+    bl layout_drawPane
     addi r22, r22, 0x1
 lbl_fn_800AF544_00000B20:
     lwz r0, 0xc(r29)
@@ -1052,14 +1052,14 @@ lbl_fn_800AF544_00000C1C:
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     li r3, 0x1
     li r4, 0x1
     li r5, 0x4
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     lwz r4, lbl_8087EFB4
     li r5, 0x0
     lwz r3, lbl_8087EEE0
@@ -1610,7 +1610,7 @@ lbl_fn_800AFFEC_000014D0:
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     li r3, 0x0
     bl fn_80617220
     lwz r4, lbl_8087EFB4
@@ -1676,7 +1676,7 @@ lbl_fn_800AFFEC_000014D0:
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     li r3, 0x0
     bl fn_80617220
     lwz r4, lbl_8087EFB4
@@ -2036,7 +2036,7 @@ asm void fn_800B0A70(void)
     li r6, 0x1e
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     lfs f1, lbl_80880E6C
     addi r3, r1, 0x18
     lfs f0, lbl_80880E60

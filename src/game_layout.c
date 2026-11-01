@@ -16,7 +16,7 @@ extern void fn_800BFC18(void);
 extern void fn_800C0508(void);
 extern void fn_800C1424(void);
 extern void fn_805F90D0(void);
-extern void fn_80613960(void);
+extern void __GXSetVtxDesc(void);
 extern void fn_80613BB0(void);
 extern void fn_80614190(void);
 extern void GXSetTexCopySrc(void);
@@ -89,7 +89,7 @@ extern u32 lbl_80880D70;
 extern u32 lbl_80880D74;
 
 /* Function declarations */
-void fn_800A981C(void);
+void layout_drawPane(void);
 void fn_800A9E54(void);
 void fn_800A9E64(void);
 void fn_800AA6C4(void);
@@ -97,7 +97,7 @@ void fn_800AA8DC(void);
 void fn_800AAE20(void);
 void fn_800AAE2C(void);
 
-asm void fn_800A981C(void)
+asm void layout_drawPane(void)
 {
     nofralloc
     stwu r1, -0x300(r1)
@@ -137,9 +137,9 @@ asm void fn_800A981C(void)
     li r5, 0x0
     bl fn_80075F58
     cmpwi r25, 0x0
-    bne lbl_fn_800A981C_0000009C
+    bne lbl_layout_drawPane_0000009C
     addi r25, r1, 0x8c
-lbl_fn_800A981C_0000009C:
+lbl_layout_drawPane_0000009C:
     lfs f8, lbl_80880D28
     lis r5, lbl_80732B1C@ha
     lfs f2, 0x0(r25)
@@ -229,35 +229,35 @@ lbl_fn_800A981C_0000009C:
     li r6, 0x1e
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     li r3, 0x1
     li r4, 0x1
     li r5, 0x4
     li r6, 0x21
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     li r3, 0x2
     li r4, 0x1
     li r5, 0x4
     li r6, 0x24
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     li r3, 0x3
     li r4, 0x1
     li r5, 0x4
     li r6, 0x27
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     li r3, 0x4
     li r4, 0x1
     li r5, 0x4
     li r6, 0x2a
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     lis r3, 0x4330
     xoris r4, r28, 0x8000
     lis r5, lbl_80732B30@ha
@@ -274,7 +274,7 @@ lbl_fn_800A981C_0000009C:
     fdivs f30, f30, f1
     fsubs f0, f0, f2
     fdivs f31, f31, f0
-    beq lbl_fn_800A981C_000003CC
+    beq lbl_layout_drawPane_000003CC
     lfs f3, lbl_80880D28
     fmr f1, f30
     lfs f0, lbl_80880D2C
@@ -343,8 +343,8 @@ lbl_fn_800A981C_0000009C:
     li r4, 0x2a
     li r5, 0x1
     bl GXLoadTexMtxImm
-    b lbl_fn_800A981C_000004E0
-lbl_fn_800A981C_000003CC:
+    b lbl_layout_drawPane_000004E0
+lbl_layout_drawPane_000003CC:
     fneg f4, f30
     lfs f3, lbl_80880D28
     fneg f0, f31
@@ -414,7 +414,7 @@ lbl_fn_800A981C_000003CC:
     li r4, 0x2a
     li r5, 0x1
     bl GXLoadTexMtxImm
-lbl_fn_800A981C_000004E0:
+lbl_layout_drawPane_000004E0:
     lwz r3, lbl_8087EEE0
     mr r4, r26
     li r5, 0x0
@@ -427,24 +427,24 @@ lbl_fn_800A981C_000004E0:
     bl fn_80617730
     addi r25, r1, 0x78
     li r26, 0x0
-lbl_fn_800A981C_00000510:
+lbl_layout_drawPane_00000510:
     cmpwi r26, 0x0
-    ble lbl_fn_800A981C_00000534
+    ble lbl_layout_drawPane_00000534
     mr r3, r26
     li r4, 0xf
     li r5, 0x8
     li r6, 0xe
     li r7, 0x0
     bl fn_806173E0
-    b lbl_fn_800A981C_0000054C
-lbl_fn_800A981C_00000534:
+    b lbl_layout_drawPane_0000054C
+lbl_layout_drawPane_00000534:
     mr r3, r26
     li r4, 0xf
     li r5, 0x8
     li r6, 0xe
     li r7, 0xf
     bl fn_806173E0
-lbl_fn_800A981C_0000054C:
+lbl_layout_drawPane_0000054C:
     lwz r4, 0x0(r25)
     mr r3, r26
     bl GXSetTevKColorSel
@@ -471,7 +471,7 @@ lbl_fn_800A981C_0000054C:
     addi r26, r26, 0x1
     addi r25, r25, 0x4
     cmpwi r26, 0x5
-    blt lbl_fn_800A981C_00000510
+    blt lbl_layout_drawPane_00000510
     li r3, 0x0
     li r4, 0x4
     li r5, 0x1
@@ -692,7 +692,7 @@ asm void fn_800A9E64(void)
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     li r3, 0x0
     li r4, 0x3
     bl fn_80617340
@@ -744,7 +744,7 @@ asm void fn_800A9E64(void)
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     li r3, 0x0
     li r4, 0x3
     bl fn_80617340
@@ -876,7 +876,7 @@ lbl_fn_800A9E64_00000A28:
     addi r3, r22, 0x24
     li r7, 0x6
     li r9, 0x0
-    bl fn_800A981C
+    bl layout_drawPane
     lwz r3, lbl_8087EFA8
     lfs f1, 0x74(r3)
     addi r23, r3, 0x78
@@ -899,7 +899,7 @@ lbl_fn_800A9E64_00000A28:
     li r7, 0x6
     li r9, 0x0
     fmuls f1, f0, f1
-    bl fn_800A981C
+    bl layout_drawPane
     li r3, 0x0
     li r4, 0x1
     li r5, 0x0
@@ -921,7 +921,7 @@ lbl_fn_800A9E64_00000A28:
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     li r3, 0x0
     li r4, 0x0
     bl fn_80617340
@@ -1613,7 +1613,7 @@ asm void fn_800AAE2C(void)
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     lfs f12, lbl_80880D54
     li r0, 0x3
     lfs f2, 0x8(r30)

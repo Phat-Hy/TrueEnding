@@ -648,3 +648,35 @@ Analysis for Track B:
 - If field_48 != 0, evaluates whether elapsed frames (field_58 + field_54) < total duration (field_4c).
 - Returns 0 when still transitioning, 1 when finished.
 Progress: 99.30% matched (7,425,512 / 7,477,608 bytes), 18,054 / 18,155 functions matched.
+
+## Session 2026-11-01 - Batch 13: High-yield queue naming (265k+ probe hits)
+Subject:  track-a: Batch 13 - name 19 high-yield queue routines (covers 265k+ probe hits) progress 99.30% -> 99.30%
+Scope:    Rename 19 top-ranking routines hit by Track B instruments across 49 files in src/.
+Checklist:
+  1. symbols.txt: Renamed 19 functions in place.
+  2. All src/ references updated across 49 files.
+  3. Local labels lbl_fn_* -> lbl_<newName>_* normalized.
+  4. External prototypes swept across all translation units.
+  5. report.json clean, ninja passed (orig/main.dol: OK).
+Self-check: git diff -U0 -- src/ for 'asm void': -19 / +19 (balanced).
+Names applied:
+  - gx_syncFrameFifo (fn_80071AFC, 612 B, 101,909 probe hits)
+  - saveSlot_updateLoadState (fn_801F42A8, 320 B, 88,678 probe hits)
+  - camera_setMode (fn_800EF588, 308 B, 44,322 probe hits)
+  - taskManager_updateTasks (fn_80473FCC, 500 B, 13,018 probe hits)
+  - gx_beginQuadBatch (fn_80074EC8, 3876 B, 8,702 probe hits)
+  - ISFS_GetUsageAsync (fn_8061B3A0, 292 B, 3,399 probe hits)
+  - atn_Reticle_updateDraw (fn_8009DE60, 900 B, 3,282 probe hits)
+  - gx_drawScreenQuad (fn_80071E04, 2832 B, 1,891 probe hits)
+  - layout_drawPane (fn_800A981C, 1592 B, 10 probe hits)
+  - gx_setRenderStateParam (fn_80076760, 712 B, 7 probe hits)
+  - msg_drawText (fn_80236938, 588 B, 13 probe hits)
+  - font_renderString (fn_80234CD8, 3216 B, 12 probe hits)
+  - atn_normalizePath (fn_8006A950, 84 B, 5 probe hits)
+  - ISFS_Rename (fn_8061B180, 144 B)
+  - ISFS_RenameAsync (fn_8061B290, 148 B)
+  - ISFS_CreateFile (fn_8061B4D0, 256 B)
+  - ISFS_CreateFileAsync (fn_8061B5D0, 260 B)
+  - GXInvalidateVtxCache (fn_80613950, 16 B)
+  - __GXSetVtxDesc (fn_80613960, 580 B, 5 probe hits)
+Progress: 99.30% matched (7,425,512 / 7,477,608 bytes), 18,054 / 18,155 functions matched.

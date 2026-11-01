@@ -22,7 +22,7 @@ extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void fn_8061AA80(void);
 extern void fn_8061ABE0(void);
-extern void fn_8061B3A0(void);
+extern void ISFS_GetUsageAsync(void);
 extern void fn_8061BC10(void);
 extern void fn_80620EF0(void);
 extern void fn_80620FD0(void);
@@ -1397,7 +1397,7 @@ lbl_fn_80622260_0000114C:
     addi r4, r31, 0x9c
     addi r5, r31, 0xa0
     addi r6, r6, fn_80622310@l
-    bl fn_8061B3A0
+    bl ISFS_GetUsageAsync
     bl nandConvertErrorCode
 lbl_fn_80622260_000011A4:
     addi r11, r1, 0x20
@@ -1444,7 +1444,7 @@ lbl_fn_80622310_00001214:
     addi r4, r4, 0xac
     addi r5, r31, 0xb0
     addi r6, r6, fn_80622310@l
-    bl fn_8061B3A0
+    bl ISFS_GetUsageAsync
     cmpwi r3, 0x0
     beq lbl_fn_80622310_000013E0
     bl nandConvertErrorCode

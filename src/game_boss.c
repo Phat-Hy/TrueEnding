@@ -108,7 +108,7 @@ void fn_8006A900(void);
 void atn_Fade_slot2(void);
 void atn_Fade_slot1(void);
 void atn_FadeCommon_draw(void);
-void fn_8006A950(void);
+void atn_normalizePath(void);
 void fn_8006A9A4(void);
 void fn_8006AA20(void);
 void fn_8006AB54(void);
@@ -2166,7 +2166,7 @@ asm void atn_FadeCommon_draw(void)
     blr
 }
 
-asm void fn_8006A950(void)
+asm void atn_normalizePath(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -2178,16 +2178,16 @@ asm void fn_8006A950(void)
     li r0, 0x2f
     mtctr r3
     cmplwi r3, 0x0
-    ble lbl_fn_8006A950_00001BE0
-lbl_fn_8006A950_00001BC8:
+    ble lbl_atn_normalizePath_00001BE0
+lbl_atn_normalizePath_00001BC8:
     lbz r3, 0x0(r31)
     cmpwi r3, 0x5c
-    bne lbl_fn_8006A950_00001BD8
+    bne lbl_atn_normalizePath_00001BD8
     stb r0, 0x0(r31)
-lbl_fn_8006A950_00001BD8:
+lbl_atn_normalizePath_00001BD8:
     addi r31, r31, 0x1
-    bdnz lbl_fn_8006A950_00001BC8
-lbl_fn_8006A950_00001BE0:
+    bdnz lbl_atn_normalizePath_00001BC8
+lbl_atn_normalizePath_00001BE0:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0

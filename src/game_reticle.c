@@ -11,11 +11,11 @@ extern void _savegpr_22(void);
 extern void _savegpr_24(void);
 extern void _savegpr_25(void);
 extern void _savegpr_26(void);
-extern void fn_80074EC8(void);
+extern void gx_beginQuadBatch(void);
 extern void gx_applyRenderState(void);
 extern void fn_800763C0(void);
 extern void fn_8007642C(void);
-extern void fn_80076760(void);
+extern void gx_setRenderStateParam(void);
 extern void fn_80076A28(void);
 extern void fn_80076BE4(void);
 extern void fn_8007A41C(void);
@@ -44,7 +44,7 @@ extern void fn_805F89F0(void);
 extern void fn_805F8DA0(void);
 extern void fn_805F9940(void);
 extern void GXSetArray(void);
-extern void fn_80613960(void);
+extern void __GXSetVtxDesc(void);
 extern void fn_80613BB0(void);
 extern void fn_80615B60(void);
 extern void fn_80615C40(void);
@@ -130,7 +130,7 @@ void fn_8009CC28(void);
 void fn_8009D1A4(void);
 void atn_Model_drawMeshNode(void);
 void fn_8009DCE0(void);
-void fn_8009DE60(void);
+void atn_Reticle_updateDraw(void);
 
 asm void fn_8009B938(void)
 {
@@ -943,7 +943,7 @@ lbl_atn_Model_setupMeshMaterial_00000B24:
     mr r3, r28
     li r4, 0x6
     li r5, 0x2
-    bl fn_80076760
+    bl gx_setRenderStateParam
 lbl_atn_Model_setupMeshMaterial_00000BA8:
     lwz r3, lbl_8087EEE0
     bl gx_applyRenderState
@@ -1633,19 +1633,19 @@ lbl_fn_8009CC28_000014AC:
     mr r3, r29
     li r4, 0x3
     li r5, 0x1
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r29
     li r4, 0x0
     li r5, 0x1
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r29
     li r4, 0x1
     li r5, 0x4
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r29
     li r4, 0x2
     li r5, 0x40
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r29
     bl gx_applyRenderState
     mr r3, r31
@@ -1801,7 +1801,7 @@ lbl_fn_8009CC28_00001674:
     li r6, 0x1e
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     b lbl_fn_8009CC28_0000181C
 lbl_fn_8009CC28_00001784:
     addi r3, r1, 0x30
@@ -1814,17 +1814,17 @@ lbl_fn_8009CC28_00001784:
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x40
-    bl fn_80613960
+    bl __GXSetVtxDesc
     b lbl_fn_8009CC28_0000181C
 lbl_fn_8009CC28_000017B4:
     mr r3, r29
     li r4, 0x3
     li r5, 0x0
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r29
     li r4, 0x0
     li r5, 0x0
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r29
     bl gx_applyRenderState
     li r3, 0x1
@@ -1923,7 +1923,7 @@ asm void fn_8009D1A4(void)
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     lbz r0, lbl_8087EF34
     extsb. r0, r0
     bne lbl_fn_8009D1A4_0000197C
@@ -2647,7 +2647,7 @@ lbl_atn_Model_drawMeshNode_00002368:
 lbl_atn_Model_drawMeshNode_0000237C:
     fmr f1, f31
     addi r3, r1, 0x48
-    bl fn_8009DE60
+    bl atn_Reticle_updateDraw
 lbl_atn_Model_drawMeshNode_00002388:
     addi r11, r1, 0xc0
     psq_l f31, 0xc8(r1), 0, 0
@@ -2774,7 +2774,7 @@ lbl_fn_8009DCE0_00002508:
     blr
 }
 
-asm void fn_8009DE60(void)
+asm void atn_Reticle_updateDraw(void)
 {
     nofralloc
     stwu r1, -0x60(r1)
@@ -2797,31 +2797,31 @@ asm void fn_8009DE60(void)
     bl fn_800BDB40
     lwz r12, 0x3c(r23)
     cmpwi r12, 0x0
-    beq lbl_fn_8009DE60_0000258C
+    beq lbl_atn_Reticle_updateDraw_0000258C
     lwz r3, 0x44(r23)
     lwz r4, 0x48(r23)
     mtctr r12
     bctrl
-lbl_fn_8009DE60_0000258C:
+lbl_atn_Reticle_updateDraw_0000258C:
     lbz r0, lbl_8087EFB0
     cmpwi r0, 0x0
-    beq lbl_fn_8009DE60_000025B4
+    beq lbl_atn_Reticle_updateDraw_000025B4
     fmr f1, f31
     mr r3, r28
     mr r4, r29
     mr r5, r31
     extrwi r6, r30, 1, 25
     bl fn_8009CC28
-    b lbl_fn_8009DE60_000026D4
-lbl_fn_8009DE60_000025B4:
+    b lbl_atn_Reticle_updateDraw_000026D4
+lbl_atn_Reticle_updateDraw_000025B4:
     lwz r3, lbl_8087EFA8
     lwz r0, 0x234(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_8009DE60_000025D0
+    beq lbl_atn_Reticle_updateDraw_000025D0
     mr r3, r29
     bl fn_8009D1A4
-    b lbl_fn_8009DE60_000026D4
-lbl_fn_8009DE60_000025D0:
+    b lbl_atn_Reticle_updateDraw_000026D4
+lbl_atn_Reticle_updateDraw_000025D0:
     mr r3, r28
     mr r4, r29
     mr r5, r25
@@ -2829,58 +2829,58 @@ lbl_fn_8009DE60_000025D0:
     bl atn_Model_setupMeshMaterial
     rlwinm r0, r30, 0, 26, 26
     cmpwi r0, 0x20
-    bne lbl_fn_8009DE60_0000263C
+    bne lbl_atn_Reticle_updateDraw_0000263C
     lwz r3, 0x34(r23)
     lwz r0, 0x0(r3)
     rlwinm. r0, r0, 0, 30, 30
-    beq lbl_fn_8009DE60_0000263C
+    beq lbl_atn_Reticle_updateDraw_0000263C
     lwz r22, lbl_8087EEE0
     li r4, 0x0
     li r5, 0x1
     mr r3, r22
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r22
     li r4, 0x1
     li r5, 0x4
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r22
     li r4, 0x2
     li r5, 0xc0
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r22
     bl gx_applyRenderState
-lbl_fn_8009DE60_0000263C:
+lbl_atn_Reticle_updateDraw_0000263C:
     lwz r0, 0x20(r28)
     lwz r6, 0x20(r23)
     cmpwi r0, -0x1
-    beq lbl_fn_8009DE60_0000265C
+    beq lbl_atn_Reticle_updateDraw_0000265C
     lwz r3, lbl_8087EFA8
     li r0, 0x0
     stw r0, 0x18c(r3)
-    b lbl_fn_8009DE60_00002668
-lbl_fn_8009DE60_0000265C:
+    b lbl_atn_Reticle_updateDraw_00002668
+lbl_atn_Reticle_updateDraw_0000265C:
     lwz r3, lbl_8087EFA8
     li r0, 0x1
     stw r0, 0x18c(r3)
-lbl_fn_8009DE60_00002668:
+lbl_atn_Reticle_updateDraw_00002668:
     lwz r0, 0x70(r25)
     cmpwi r0, 0x0
-    beq lbl_fn_8009DE60_0000268C
+    beq lbl_atn_Reticle_updateDraw_0000268C
     lwz r7, 0x74(r25)
     cmpwi r7, 0x0
-    beq lbl_fn_8009DE60_00002684
-    b lbl_fn_8009DE60_00002690
-lbl_fn_8009DE60_00002684:
+    beq lbl_atn_Reticle_updateDraw_00002684
+    b lbl_atn_Reticle_updateDraw_00002690
+lbl_atn_Reticle_updateDraw_00002684:
     addi r7, r25, 0x78
-    b lbl_fn_8009DE60_00002690
-lbl_fn_8009DE60_0000268C:
+    b lbl_atn_Reticle_updateDraw_00002690
+lbl_atn_Reticle_updateDraw_0000268C:
     li r7, 0x0
-lbl_fn_8009DE60_00002690:
+lbl_atn_Reticle_updateDraw_00002690:
     lwz r3, lbl_8087EEE0
     mr r5, r30
     lwz r4, 0x10(r31)
     lwz r8, 0x34(r23)
-    bl fn_80074EC8
+    bl gx_beginQuadBatch
     lwz r4, 0x10(r31)
     lwz r6, 0x34(r29)
     lwz r3, 0x190(r4)
@@ -2893,34 +2893,34 @@ lbl_fn_8009DE60_00002690:
     clrlwi r7, r0, 24
     lwz r8, 0x1cc(r8)
     bl fn_80617460
-lbl_fn_8009DE60_000026D4:
+lbl_atn_Reticle_updateDraw_000026D4:
     lwz r3, lbl_8087EEE0
     mr r4, r27
     bl fn_80076BE4
-    b lbl_fn_8009DE60_000026FC
-lbl_fn_8009DE60_000026E4:
+    b lbl_atn_Reticle_updateDraw_000026FC
+lbl_atn_Reticle_updateDraw_000026E4:
     lwz r0, 0x8(r26)
     lwz r3, 0x0(r26)
     lwz r4, 0x4(r26)
     clrlwi r5, r0, 24
     bl GXSetArray
     addi r26, r26, 0xc
-lbl_fn_8009DE60_000026FC:
+lbl_atn_Reticle_updateDraw_000026FC:
     lwz r0, 0x0(r26)
     cmpwi r0, 0xff
-    bne lbl_fn_8009DE60_000026E4
+    bne lbl_atn_Reticle_updateDraw_000026E4
     lbz r0, lbl_8087EFB0
     cmpwi r0, 0x0
-    bne lbl_fn_8009DE60_00002734
+    bne lbl_atn_Reticle_updateDraw_00002734
     lwz r3, lbl_8087EFA8
     lwz r0, 0x234(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_8009DE60_00002734
+    bne lbl_atn_Reticle_updateDraw_00002734
     mr r3, r29
     mr r4, r28
     mr r5, r24
     bl atn_Model_loadTexMatrices
-lbl_fn_8009DE60_00002734:
+lbl_atn_Reticle_updateDraw_00002734:
     lbz r0, lbl_8087EF29
     li r3, -0x1
     stw r3, 0x8(r1)
@@ -2934,30 +2934,30 @@ lbl_fn_8009DE60_00002734:
     stw r3, 0x24(r1)
     stw r3, 0x28(r1)
     stw r3, 0x2c(r1)
-    beq lbl_fn_8009DE60_00002820
+    beq lbl_atn_Reticle_updateDraw_00002820
     lwz r22, lbl_8087EEE0
     li r4, 0xb
     li r5, 0x0
     mr r3, r22
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r22
     li r4, 0x8
     li r5, 0x1
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r22
     li r4, 0x9
     li r5, 0x2
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r22
     li r4, 0xa
     li r5, 0x1
-    bl fn_80076760
+    bl gx_setRenderStateParam
     mr r3, r22
     bl gx_applyRenderState
     li r26, 0x0
     li r25, 0x0
-    b lbl_fn_8009DE60_000027FC
-lbl_fn_8009DE60_000027C4:
+    b lbl_atn_Reticle_updateDraw_000027FC
+lbl_atn_Reticle_updateDraw_000027C4:
     lwz r5, 0x50(r28)
     mr r3, r29
     mr r4, r28
@@ -2972,21 +2972,21 @@ lbl_fn_8009DE60_000027C4:
     bl fn_80618030
     addi r25, r25, 0x4
     addi r26, r26, 0x1
-lbl_fn_8009DE60_000027FC:
+lbl_atn_Reticle_updateDraw_000027FC:
     lwz r0, 0x4c(r28)
     cmpw r26, r0
-    blt lbl_fn_8009DE60_000027C4
+    blt lbl_atn_Reticle_updateDraw_000027C4
     mr r3, r22
     addi r4, r29, 0x14
     bl fn_80076A28
     mr r3, r22
     bl gx_applyRenderState
-    b lbl_fn_8009DE60_00002870
-lbl_fn_8009DE60_00002820:
+    b lbl_atn_Reticle_updateDraw_00002870
+lbl_atn_Reticle_updateDraw_00002820:
     li r22, 0x0
     li r25, 0x0
-    b lbl_fn_8009DE60_00002864
-lbl_fn_8009DE60_0000282C:
+    b lbl_atn_Reticle_updateDraw_00002864
+lbl_atn_Reticle_updateDraw_0000282C:
     lwz r5, 0x50(r28)
     mr r3, r29
     mr r4, r28
@@ -3001,19 +3001,19 @@ lbl_fn_8009DE60_0000282C:
     bl fn_80618030
     addi r25, r25, 0x4
     addi r22, r22, 0x1
-lbl_fn_8009DE60_00002864:
+lbl_atn_Reticle_updateDraw_00002864:
     lwz r0, 0x4c(r28)
     cmpw r22, r0
-    blt lbl_fn_8009DE60_0000282C
-lbl_fn_8009DE60_00002870:
+    blt lbl_atn_Reticle_updateDraw_0000282C
+lbl_atn_Reticle_updateDraw_00002870:
     lwz r12, 0x40(r23)
     cmpwi r12, 0x0
-    beq lbl_fn_8009DE60_0000288C
+    beq lbl_atn_Reticle_updateDraw_0000288C
     lwz r3, 0x44(r23)
     lwz r4, 0x48(r23)
     mtctr r12
     bctrl
-lbl_fn_8009DE60_0000288C:
+lbl_atn_Reticle_updateDraw_0000288C:
     li r0, 0x0
     stb r0, lbl_8087EF28
     lfd f31, 0x58(r1)

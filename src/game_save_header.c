@@ -45,7 +45,7 @@ extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_80473F88(void);
-extern void fn_80473FCC(void);
+extern void taskManager_updateTasks(void);
 extern void fn_80680770(void);
 extern void fn_80686A48(void);
 extern void fn_80686A64(void);
@@ -1176,7 +1176,7 @@ asm void fn_801F35B4(void)
     mr r31, r3
     beq lbl_fn_801F35B4_00000EA4
     addi r3, r3, 0xc
-    bl fn_80473FCC
+    bl taskManager_updateTasks
     addi r3, r31, 0xc
     bl fn_80470580
     cmpwi r3, 0x0

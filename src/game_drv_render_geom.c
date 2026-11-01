@@ -17,7 +17,7 @@ extern void fn_805D7D60(void);
 extern void fn_805D9BE0(void);
 extern void fn_805D9C70(void);
 extern void fn_805D9CC0(void);
-extern void fn_80613960(void);
+extern void __GXSetVtxDesc(void);
 extern void fn_80613BB0(void);
 extern void fn_80615C40(void);
 extern void fn_80615D20(void);
@@ -661,7 +661,7 @@ lbl_fn_805D1A40_000007DC:
     lbz r5, 0x1(r23)
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     addi r23, r23, 0x4
     addi r28, r28, 0x1
 lbl_fn_805D1A40_000007FC:

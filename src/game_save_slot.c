@@ -56,7 +56,7 @@ extern u32 lbl_80882C94;
 
 /* Function declarations */
 void fn_801F4230(void);
-void fn_801F42A8(void);
+void saveSlot_updateLoadState(void);
 void fn_801F43E8(void);
 void fn_801F4484(void);
 void fn_801F4514(void);
@@ -123,7 +123,7 @@ lbl_fn_801F4230_0000005C:
     blr
 }
 
-asm void fn_801F42A8(void)
+asm void saveSlot_updateLoadState(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -134,32 +134,32 @@ asm void fn_801F42A8(void)
     mr r30, r3
     lwz r0, 0xf8(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_801F42A8_000000B8
+    beq lbl_saveSlot_updateLoadState_000000B8
     cmpwi r0, 0x1
-    beq lbl_fn_801F42A8_000000C4
+    beq lbl_saveSlot_updateLoadState_000000C4
     cmpwi r0, 0x2
-    beq lbl_fn_801F42A8_00000174
+    beq lbl_saveSlot_updateLoadState_00000174
     cmpwi r0, 0x3
-    beq lbl_fn_801F42A8_00000194
-    b lbl_fn_801F42A8_0000019C
-lbl_fn_801F42A8_000000B8:
+    beq lbl_saveSlot_updateLoadState_00000194
+    b lbl_saveSlot_updateLoadState_0000019C
+lbl_saveSlot_updateLoadState_000000B8:
     li r0, 0x1
     stw r0, 0xf8(r3)
-    b lbl_fn_801F42A8_0000019C
-lbl_fn_801F42A8_000000C4:
+    b lbl_saveSlot_updateLoadState_0000019C
+lbl_saveSlot_updateLoadState_000000C4:
     addi r3, r3, 0xf0
     bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
-    bne lbl_fn_801F42A8_0000019C
+    bne lbl_saveSlot_updateLoadState_0000019C
     lwz r3, lbl_8087F138
     addi r3, r3, 0x168
     bl fn_801F362C
     cmpwi r3, 0x0
-    bne lbl_fn_801F42A8_0000019C
+    bne lbl_saveSlot_updateLoadState_0000019C
     addi r3, r30, 0xf0
     bl fn_80470580
     cmpwi r3, 0x0
-    beq lbl_fn_801F42A8_00000164
+    beq lbl_saveSlot_updateLoadState_00000164
     lwz r0, 0xfc(r30)
     addi r3, r30, 0xf0
     oris r0, r0, 0x800
@@ -180,34 +180,34 @@ lbl_fn_801F42A8_000000C4:
     bl fn_80473F88
     lwz r0, 0xfc(r30)
     srawi. r0, r0, 31
-    beq lbl_fn_801F42A8_00000158
+    beq lbl_saveSlot_updateLoadState_00000158
     li r0, 0x3
     stw r0, 0xf8(r30)
-    b lbl_fn_801F42A8_0000019C
-lbl_fn_801F42A8_00000158:
+    b lbl_saveSlot_updateLoadState_0000019C
+lbl_saveSlot_updateLoadState_00000158:
     li r0, 0x2
     stw r0, 0xf8(r30)
-    b lbl_fn_801F42A8_0000019C
-lbl_fn_801F42A8_00000164:
+    b lbl_saveSlot_updateLoadState_0000019C
+lbl_saveSlot_updateLoadState_00000164:
     li r0, 0x4
     stw r0, 0xf8(r30)
     li r3, 0x1
-    b lbl_fn_801F42A8_000001A0
-lbl_fn_801F42A8_00000174:
+    b lbl_saveSlot_updateLoadState_000001A0
+lbl_saveSlot_updateLoadState_00000174:
     addi r3, r3, 0x48
     bl fn_801EF9B4
     cmpwi r3, 0x0
-    bne lbl_fn_801F42A8_0000019C
+    bne lbl_saveSlot_updateLoadState_0000019C
     li r0, 0x3
     stw r0, 0xf8(r30)
     li r3, 0x1
-    b lbl_fn_801F42A8_000001A0
-lbl_fn_801F42A8_00000194:
+    b lbl_saveSlot_updateLoadState_000001A0
+lbl_saveSlot_updateLoadState_00000194:
     li r3, 0x1
-    b lbl_fn_801F42A8_000001A0
-lbl_fn_801F42A8_0000019C:
+    b lbl_saveSlot_updateLoadState_000001A0
+lbl_saveSlot_updateLoadState_0000019C:
     li r3, 0x0
-lbl_fn_801F42A8_000001A0:
+lbl_saveSlot_updateLoadState_000001A0:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)

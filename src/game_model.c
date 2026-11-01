@@ -9,7 +9,7 @@ extern void _savegpr_23(void);
 extern void _savegpr_27(void);
 extern void fn_8006144C(void);
 extern void fn_8007192C(void);
-extern void fn_80071AFC(void);
+extern void gx_syncFrameFifo(void);
 extern void fn_80071D80(void);
 extern void fn_80075DEC(void);
 extern void fn_8007A100(void);
@@ -22,7 +22,7 @@ extern void fn_800844D8(void);
 extern void fn_800846FC(void);
 extern void fn_80084A78(void);
 extern void fn_80084C24(void);
-extern void fn_8009DE60(void);
+extern void atn_Reticle_updateDraw(void);
 extern void fn_800BC468(void);
 extern void fn_800BC618(void);
 extern void fn_800BF0EC(void);
@@ -1172,7 +1172,7 @@ lbl_fn_800BDBC8_00000FA0:
     mulli r0, r0, 0x4c
     add r3, r25, r0
     subi r3, r3, 0x76a0
-    bl fn_8009DE60
+    bl atn_Reticle_updateDraw
     addi r27, r27, 0x8
     addi r29, r29, 0x1
 lbl_fn_800BDBC8_00000FC0:
@@ -1361,7 +1361,7 @@ lbl_fn_800BDBC8_00001254:
     bctrl
 lbl_fn_800BDBC8_0000126C:
     mr r3, r26
-    bl fn_80071AFC
+    bl gx_syncFrameFifo
     lwz r0, 0x8f8(r23)
     cmpwi r0, 0x0
     beq lbl_fn_800BDBC8_0000136C

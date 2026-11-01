@@ -9,7 +9,7 @@ extern void fn_8004B290(void);
 extern void fn_80057A64(void);
 extern void fn_8005DFC8(void);
 extern void fn_8006FEBC(void);
-extern void fn_80071E04(void);
+extern void gx_drawScreenQuad(void);
 extern void fn_80075DEC(void);
 extern void fn_80075F58(void);
 extern void fn_80076174(void);
@@ -574,7 +574,7 @@ asm void fn_800B67F8(void)
     psq_l f1, 0x0(r5), 0, 0
     psq_st f1, 0x58(r3), 0, 0
     lwz r3, lbl_8087EEE0
-    bl fn_80071E04
+    bl gx_drawScreenQuad
     lwz r3, lbl_8087EEE0
     li r4, 0x0
     bl fn_80076174

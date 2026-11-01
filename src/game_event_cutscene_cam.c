@@ -15,7 +15,7 @@ extern void fn_8004B290(void);
 extern void fn_8004B338(void);
 extern void fn_8004B378(void);
 extern void fn_80061824(void);
-extern void fn_8006A950(void);
+extern void atn_normalizePath(void);
 extern void fn_8006B404(void);
 extern void fn_80079044(void);
 extern void fn_80079090(void);
@@ -539,7 +539,7 @@ asm void fn_80477DB8(void)
     mr r28, r5
     bl fn_8046D1EC
     addi r3, r1, 0x10
-    bl fn_8006A950
+    bl atn_normalizePath
     addi r3, r1, 0x10
     bl fn_8006B404
     addi r3, r1, 0x10
@@ -896,7 +896,7 @@ asm void fn_80478204(void)
     mr r28, r5
     bl fn_8046D1EC
     addi r3, r1, 0x10
-    bl fn_8006A950
+    bl atn_normalizePath
     addi r3, r1, 0x10
     bl fn_8006B404
     addi r3, r1, 0x10
@@ -1128,7 +1128,7 @@ asm void fn_80478518(void)
     mr r28, r5
     bl fn_8046D1EC
     addi r3, r1, 0x10
-    bl fn_8006A950
+    bl atn_normalizePath
     addi r3, r1, 0x10
     bl fn_8006B404
     addi r3, r1, 0x10

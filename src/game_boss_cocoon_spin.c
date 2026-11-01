@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void __files(void);
 extern void dtor_80084684(void);
-extern void fn_8006A950(void);
+extern void atn_normalizePath(void);
 extern void fn_8006B404(void);
 extern void fn_80084320(void);
 extern void fn_800844D8(void);
@@ -69,7 +69,7 @@ asm void fn_80470604(void)
     mr r28, r5
     bl fn_8046D1EC
     addi r3, r1, 0x10
-    bl fn_8006A950
+    bl atn_normalizePath
     addi r3, r1, 0x10
     bl fn_8006B404
     addi r3, r1, 0x10

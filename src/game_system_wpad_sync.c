@@ -30,7 +30,7 @@ extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
-extern void fn_800EF588(void);
+extern void camera_setMode(void);
 extern void fn_800EF8DC(void);
 extern void fn_800EFF68(void);
 extern void fn_800F13BC(void);
@@ -1141,7 +1141,7 @@ lbl_world_Manager_constructor_00000D5C:
     bl fn_800AFEBC
     lwz r3, 0x0(r31)
     lwz r4, 0x4(r31)
-    bl fn_800EF588
+    bl camera_setMode
     lwz r3, lbl_8087EE90
     cmpwi r3, 0x0
     beq lbl_world_Manager_constructor_00000DA4

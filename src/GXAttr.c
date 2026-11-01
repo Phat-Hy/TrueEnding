@@ -23,8 +23,8 @@ void fn_80613520(void);
 void fn_806136C0(void);
 void fn_80613890(void);
 void GXSetArray(void);
-void fn_80613950(void);
-void fn_80613960(void);
+void GXInvalidateVtxCache(void);
+void __GXSetVtxDesc(void);
 void fn_80613BB0(void);
 
 asm void fn_80612E80(void)
@@ -782,7 +782,7 @@ lbl_GXSetArray_00000A9C:
     blr
 }
 
-asm void fn_80613950(void)
+asm void GXInvalidateVtxCache(void)
 {
     nofralloc
     lis r3, 0xcc01
@@ -791,14 +791,14 @@ asm void fn_80613950(void)
     blr
 }
 
-asm void fn_80613960(void)
+asm void __GXSetVtxDesc(void)
 {
     nofralloc
     cmplwi r5, 0x14
     li r10, 0x0
     li r12, 0x0
     li r11, 0x5
-    bgt lbl_fn_80613960_00000B88
+    bgt lbl___GXSetVtxDesc_00000B88
     lis r9, jumptable_807B08A8@ha
     slwi r0, r5, 2
     addi r9, r9, jumptable_807B08A8@l
@@ -807,58 +807,58 @@ asm void fn_80613960(void)
     bctr
     li r11, 0x0
     li r12, 0x1
-    b lbl_fn_80613960_00000B88
+    b lbl___GXSetVtxDesc_00000B88
     li r11, 0x1
     li r12, 0x1
-    b lbl_fn_80613960_00000B88
+    b lbl___GXSetVtxDesc_00000B88
     li r11, 0x3
     li r12, 0x1
-    b lbl_fn_80613960_00000B88
+    b lbl___GXSetVtxDesc_00000B88
     li r11, 0x4
     li r12, 0x1
-    b lbl_fn_80613960_00000B88
+    b lbl___GXSetVtxDesc_00000B88
     li r11, 0x2
-    b lbl_fn_80613960_00000B88
+    b lbl___GXSetVtxDesc_00000B88
     li r11, 0x2
-    b lbl_fn_80613960_00000B88
+    b lbl___GXSetVtxDesc_00000B88
     li r11, 0x5
-    b lbl_fn_80613960_00000B88
+    b lbl___GXSetVtxDesc_00000B88
     li r11, 0x6
-    b lbl_fn_80613960_00000B88
+    b lbl___GXSetVtxDesc_00000B88
     li r11, 0x7
-    b lbl_fn_80613960_00000B88
+    b lbl___GXSetVtxDesc_00000B88
     li r11, 0x8
-    b lbl_fn_80613960_00000B88
+    b lbl___GXSetVtxDesc_00000B88
     li r11, 0x9
-    b lbl_fn_80613960_00000B88
+    b lbl___GXSetVtxDesc_00000B88
     li r11, 0xa
-    b lbl_fn_80613960_00000B88
+    b lbl___GXSetVtxDesc_00000B88
     li r11, 0xb
-    b lbl_fn_80613960_00000B88
+    b lbl___GXSetVtxDesc_00000B88
     li r11, 0xc
-lbl_fn_80613960_00000B88:
+lbl___GXSetVtxDesc_00000B88:
     subi r9, r4, 0x2
     cmplwi r9, 0x7
-    ble lbl_fn_80613960_00000BD4
+    ble lbl___GXSetVtxDesc_00000BD4
     cmpwi r4, 0x1
-    beq lbl_fn_80613960_00000BB0
+    beq lbl___GXSetVtxDesc_00000BB0
     cmpwi r4, 0x0
-    beq lbl_fn_80613960_00000BC0
+    beq lbl___GXSetVtxDesc_00000BC0
     cmpwi r4, 0xa
-    beq lbl_fn_80613960_00000BF8
-    b lbl_fn_80613960_00000C24
-lbl_fn_80613960_00000BB0:
+    beq lbl___GXSetVtxDesc_00000BF8
+    b lbl___GXSetVtxDesc_00000C24
+lbl___GXSetVtxDesc_00000BB0:
     li r10, 0x0
     rlwimi r10, r12, 2, 29, 29
     rlwimi r10, r11, 7, 20, 24
-    b lbl_fn_80613960_00000C24
-lbl_fn_80613960_00000BC0:
+    b lbl___GXSetVtxDesc_00000C24
+lbl___GXSetVtxDesc_00000BC0:
     li r0, 0x0
     ori r10, r0, 0x2
     rlwimi r10, r12, 2, 29, 29
     rlwimi r10, r11, 7, 20, 24
-    b lbl_fn_80613960_00000C24
-lbl_fn_80613960_00000BD4:
+    b lbl___GXSetVtxDesc_00000C24
+lbl___GXSetVtxDesc_00000BD4:
     li r4, 0x1
     subi r0, r5, 0xc
     li r10, 0x0
@@ -867,22 +867,22 @@ lbl_fn_80613960_00000BD4:
     rlwimi r10, r11, 7, 20, 24
     rlwimi r10, r0, 12, 17, 19
     rlwimi r10, r9, 15, 14, 16
-    b lbl_fn_80613960_00000C24
-lbl_fn_80613960_00000BF8:
+    b lbl___GXSetVtxDesc_00000C24
+lbl___GXSetVtxDesc_00000BF8:
     cmpwi r5, 0x13
     li r10, 0x0
     rlwimi r10, r12, 2, 29, 29
-    bne lbl_fn_80613960_00000C14
+    bne lbl___GXSetVtxDesc_00000C14
     li r0, 0x2
     rlwimi r10, r0, 4, 25, 27
-    b lbl_fn_80613960_00000C1C
-lbl_fn_80613960_00000C14:
+    b lbl___GXSetVtxDesc_00000C1C
+lbl___GXSetVtxDesc_00000C14:
     li r0, 0x3
     rlwimi r10, r0, 4, 25, 27
-lbl_fn_80613960_00000C1C:
+lbl___GXSetVtxDesc_00000C1C:
     li r0, 0x2
     rlwimi r10, r0, 7, 20, 24
-lbl_fn_80613960_00000C24:
+lbl___GXSetVtxDesc_00000C24:
     lwz r9, __GXData
     slwi r4, r3, 2
     subi r0, r8, 0x40
@@ -898,60 +898,60 @@ lbl_fn_80613960_00000C24:
     or r0, r5, r0
     stw r0, 0x5fc(r9)
     stw r4, 0xe8(r8)
-    beq lbl_fn_80613960_00000C98
+    beq lbl___GXSetVtxDesc_00000C98
     cmpwi r3, 0x1
-    beq lbl_fn_80613960_00000CA8
+    beq lbl___GXSetVtxDesc_00000CA8
     cmpwi r3, 0x2
-    beq lbl_fn_80613960_00000CB8
+    beq lbl___GXSetVtxDesc_00000CB8
     cmpwi r3, 0x3
-    beq lbl_fn_80613960_00000CC8
+    beq lbl___GXSetVtxDesc_00000CC8
     cmpwi r3, 0x4
-    beq lbl_fn_80613960_00000CD8
+    beq lbl___GXSetVtxDesc_00000CD8
     cmpwi r3, 0x5
-    beq lbl_fn_80613960_00000CE8
+    beq lbl___GXSetVtxDesc_00000CE8
     cmpwi r3, 0x6
-    beq lbl_fn_80613960_00000CF8
-    b lbl_fn_80613960_00000D08
-lbl_fn_80613960_00000C98:
+    beq lbl___GXSetVtxDesc_00000CF8
+    b lbl___GXSetVtxDesc_00000D08
+lbl___GXSetVtxDesc_00000C98:
     lwz r0, 0x80(r9)
     rlwimi r0, r6, 6, 20, 25
     stw r0, 0x80(r9)
-    b lbl_fn_80613960_00000D14
-lbl_fn_80613960_00000CA8:
+    b lbl___GXSetVtxDesc_00000D14
+lbl___GXSetVtxDesc_00000CA8:
     lwz r0, 0x80(r9)
     rlwimi r0, r6, 12, 14, 19
     stw r0, 0x80(r9)
-    b lbl_fn_80613960_00000D14
-lbl_fn_80613960_00000CB8:
+    b lbl___GXSetVtxDesc_00000D14
+lbl___GXSetVtxDesc_00000CB8:
     lwz r0, 0x80(r9)
     rlwimi r0, r6, 18, 8, 13
     stw r0, 0x80(r9)
-    b lbl_fn_80613960_00000D14
-lbl_fn_80613960_00000CC8:
+    b lbl___GXSetVtxDesc_00000D14
+lbl___GXSetVtxDesc_00000CC8:
     lwz r0, 0x80(r9)
     rlwimi r0, r6, 24, 2, 7
     stw r0, 0x80(r9)
-    b lbl_fn_80613960_00000D14
-lbl_fn_80613960_00000CD8:
+    b lbl___GXSetVtxDesc_00000D14
+lbl___GXSetVtxDesc_00000CD8:
     lwz r0, 0x84(r9)
     rlwimi r0, r6, 0, 26, 31
     stw r0, 0x84(r9)
-    b lbl_fn_80613960_00000D14
-lbl_fn_80613960_00000CE8:
+    b lbl___GXSetVtxDesc_00000D14
+lbl___GXSetVtxDesc_00000CE8:
     lwz r0, 0x84(r9)
     rlwimi r0, r6, 6, 20, 25
     stw r0, 0x84(r9)
-    b lbl_fn_80613960_00000D14
-lbl_fn_80613960_00000CF8:
+    b lbl___GXSetVtxDesc_00000D14
+lbl___GXSetVtxDesc_00000CF8:
     lwz r0, 0x84(r9)
     rlwimi r0, r6, 12, 14, 19
     stw r0, 0x84(r9)
-    b lbl_fn_80613960_00000D14
-lbl_fn_80613960_00000D08:
+    b lbl___GXSetVtxDesc_00000D14
+lbl___GXSetVtxDesc_00000D08:
     lwz r0, 0x84(r9)
     rlwimi r0, r6, 18, 8, 13
     stw r0, 0x84(r9)
-lbl_fn_80613960_00000D14:
+lbl___GXSetVtxDesc_00000D14:
     lwz r0, 0x5fc(r9)
     oris r0, r0, 0x400
     stw r0, 0x5fc(r9)

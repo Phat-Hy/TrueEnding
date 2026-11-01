@@ -47,8 +47,8 @@ extern void fn_80612C00(void);
 extern void fn_806130F0(void);
 extern void fn_806134E0(void);
 extern void fn_806136C0(void);
-extern void fn_80613950(void);
-extern void fn_80613960(void);
+extern void GXInvalidateVtxCache(void);
+extern void __GXSetVtxDesc(void);
 extern void fn_80613BB0(void);
 extern void fn_806140B0(void);
 extern void fn_806149C0(void);
@@ -168,7 +168,7 @@ extern u32 lbl_80880AC4;
 extern u32 lbl_80880AC8;
 
 /* Function declarations */
-void fn_80071E04(void);
+void gx_drawScreenQuad(void);
 void fn_80072914(void);
 void fn_80072BDC(void);
 void fn_80072D74(void);
@@ -179,7 +179,7 @@ void fn_80073A6C(void);
 void fn_800742C8(void);
 void fn_800748D8(void);
 void fn_80074B24(void);
-void fn_80074EC8(void);
+void gx_beginQuadBatch(void);
 void fn_80075DEC(void);
 void fn_80075F58(void);
 void fn_800760BC(void);
@@ -190,7 +190,7 @@ void gx_applyRenderState(void);
 void fn_800763C0(void);
 void fn_800763FC(void);
 void fn_8007642C(void);
-void fn_80076760(void);
+void gx_setRenderStateParam(void);
 void fn_80076A28(void);
 void fn_80076BE4(void);
 void fn_80076C44(void);
@@ -198,7 +198,7 @@ void fn_80076F88(void);
 void fn_80076FD4(void);
 void fn_80076FF8(void);
 
-asm void fn_80071E04(void)
+asm void gx_drawScreenQuad(void)
 {
     nofralloc
     stwu r1, -0x90(r1)
@@ -215,7 +215,7 @@ asm void fn_80071E04(void)
     li r6, 0x0
     li r7, 0x0
     li r8, 0x0
-    bl fn_80074EC8
+    bl gx_beginQuadBatch
     li r30, 0x0
     lwz r5, 0x3c(r29)
     xoris r0, r30, 0x8000
@@ -325,60 +325,60 @@ asm void fn_80071E04(void)
     stw r30, 0xb4(r29)
     stw r30, 0xb8(r29)
     stw r30, 0xbc(r29)
-    bl fn_80613960
+    bl __GXSetVtxDesc
     li r3, 0x1
     li r4, 0x1
     li r5, 0x5
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     li r3, 0x2
     li r4, 0x1
     li r5, 0x6
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     li r3, 0x3
     li r4, 0x1
     li r5, 0x7
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     li r3, 0x4
     li r4, 0x1
     li r5, 0x8
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     li r3, 0x5
     li r4, 0x1
     li r5, 0x9
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     li r3, 0x6
     li r4, 0x1
     li r5, 0xa
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     li r3, 0x7
     li r4, 0x1
     li r5, 0xb
     li r6, 0x3c
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
+    bl __GXSetVtxDesc
     li r3, 0x1
     bl fn_80613BB0
     bl fn_806134E0
-    bl fn_80613950
+    bl GXInvalidateVtxCache
     li r3, 0x6
     li r4, 0x0
     bl fn_806149C0
@@ -642,64 +642,64 @@ asm void fn_80071E04(void)
     lwz r3, lbl_8087EFA8
     lwz r0, 0x3a8(r3)
     cmpwi r0, 0x1
-    beq lbl_fn_80071E04_00000710
+    beq lbl_gx_drawScreenQuad_00000710
     cmpwi r0, 0x2
-    beq lbl_fn_80071E04_00000760
+    beq lbl_gx_drawScreenQuad_00000760
     lwz r3, 0x8e4(r29)
     cmpwi r3, 0x0
-    beq lbl_fn_80071E04_00000704
+    beq lbl_gx_drawScreenQuad_00000704
     bl fn_80616800
     stw r30, 0x8e4(r29)
-lbl_fn_80071E04_00000704:
+lbl_gx_drawScreenQuad_00000704:
     li r0, 0x0
     stw r0, 0x8e0(r29)
-    b lbl_fn_80071E04_000007AC
-lbl_fn_80071E04_00000710:
+    b lbl_gx_drawScreenQuad_000007AC
+lbl_gx_drawScreenQuad_00000710:
     lis r0, lbl_807C6C08@ha
     addic. r0, r0, 27656
-    beq lbl_fn_80071E04_0000073C
+    beq lbl_gx_drawScreenQuad_0000073C
     lis r3, fn_80076FD4@ha
     addi r3, r3, fn_80076FD4@l
     bl fn_80616800
     lwz r0, 0x8e0(r29)
     cmpwi r0, 0x0
-    bne lbl_fn_80071E04_00000750
+    bne lbl_gx_drawScreenQuad_00000750
     stw r3, 0x8e4(r29)
-    b lbl_fn_80071E04_00000750
-lbl_fn_80071E04_0000073C:
+    b lbl_gx_drawScreenQuad_00000750
+lbl_gx_drawScreenQuad_0000073C:
     lwz r3, 0x8e4(r29)
     cmpwi r3, 0x0
-    beq lbl_fn_80071E04_00000750
+    beq lbl_gx_drawScreenQuad_00000750
     bl fn_80616800
     stw r30, 0x8e4(r29)
-lbl_fn_80071E04_00000750:
+lbl_gx_drawScreenQuad_00000750:
     lis r3, lbl_807C6C08@ha
     addi r3, r3, lbl_807C6C08@l
     stw r3, 0x8e0(r29)
-    b lbl_fn_80071E04_000007AC
-lbl_fn_80071E04_00000760:
+    b lbl_gx_drawScreenQuad_000007AC
+lbl_gx_drawScreenQuad_00000760:
     lis r0, lbl_807C6DB4@ha
     addic. r0, r0, 28084
-    beq lbl_fn_80071E04_0000078C
+    beq lbl_gx_drawScreenQuad_0000078C
     lis r3, fn_80076FD4@ha
     addi r3, r3, fn_80076FD4@l
     bl fn_80616800
     lwz r0, 0x8e0(r29)
     cmpwi r0, 0x0
-    bne lbl_fn_80071E04_000007A0
+    bne lbl_gx_drawScreenQuad_000007A0
     stw r3, 0x8e4(r29)
-    b lbl_fn_80071E04_000007A0
-lbl_fn_80071E04_0000078C:
+    b lbl_gx_drawScreenQuad_000007A0
+lbl_gx_drawScreenQuad_0000078C:
     lwz r3, 0x8e4(r29)
     cmpwi r3, 0x0
-    beq lbl_fn_80071E04_000007A0
+    beq lbl_gx_drawScreenQuad_000007A0
     bl fn_80616800
     stw r30, 0x8e4(r29)
-lbl_fn_80071E04_000007A0:
+lbl_gx_drawScreenQuad_000007A0:
     lis r3, lbl_807C6DB4@ha
     addi r3, r3, lbl_807C6DB4@l
     stw r3, 0x8e0(r29)
-lbl_fn_80071E04_000007AC:
+lbl_gx_drawScreenQuad_000007AC:
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -796,7 +796,7 @@ lbl_fn_80071E04_000007AC:
     li r5, 0x0
     bl fn_806177F0
     li r26, 0x0
-lbl_fn_80071E04_0000092C:
+lbl_gx_drawScreenQuad_0000092C:
     mr r3, r26
     li r4, 0x6
     bl GXSetTevKColorSel
@@ -809,7 +809,7 @@ lbl_fn_80071E04_0000092C:
     bl GXSetTevSwapMode
     addi r26, r26, 0x1
     cmpwi r26, 0x10
-    blt lbl_fn_80071E04_0000092C
+    blt lbl_gx_drawScreenQuad_0000092C
     li r3, 0x0
     li r4, 0x0
     li r5, 0x1
@@ -835,12 +835,12 @@ lbl_fn_80071E04_0000092C:
     li r7, 0x3
     bl fn_80617730
     li r26, 0x0
-lbl_fn_80071E04_000009C4:
+lbl_gx_drawScreenQuad_000009C4:
     mr r3, r26
     bl fn_80617220
     addi r26, r26, 0x1
     cmpwi r26, 0x10
-    blt lbl_fn_80071E04_000009C4
+    blt lbl_gx_drawScreenQuad_000009C4
     li r3, 0x0
     bl fn_80617200
     li r3, 0x0
@@ -1586,7 +1586,7 @@ lbl_fn_80073194_00001440:
     li r5, 0x0
     mr r8, r28
     li r6, 0x0
-    bl fn_80613960
+    bl __GXSetVtxDesc
     lfs f29, lbl_80880A70
     cmpwi r27, 0x0
     lfs f0, lbl_80880A74
@@ -2345,14 +2345,14 @@ lbl_fn_80073A6C_00001F7C:
     li r5, 0x0
     li r6, 0x0
     li r7, 0x0
-    bl fn_80613960
+    bl __GXSetVtxDesc
     mr r3, r20
     mr r8, r18
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
     li r7, 0x0
-    bl fn_80613960
+    bl __GXSetVtxDesc
     lwz r0, lbl_8087EEE0
     slwi r4, r23, 2
     lwz r3, lbl_8087EFB4
@@ -2827,14 +2827,14 @@ lbl_fn_800742C8_000026D8:
     li r5, 0x0
     li r6, 0x0
     li r7, 0x0
-    bl fn_80613960
+    bl __GXSetVtxDesc
     mr r3, r25
     mr r8, r23
     li r4, 0x0
     li r5, 0x1
     li r6, 0x3
     li r7, 0x0
-    bl fn_80613960
+    bl __GXSetVtxDesc
     lwz r3, lbl_8087EFB4
     slwi r4, r28, 2
     lwz r0, lbl_8087EEE0
@@ -3123,7 +3123,7 @@ lbl_fn_800748D8_00002B3C:
     li r4, 0x0
     li r7, 0x0
     mr r8, r27
-    bl fn_80613960
+    bl __GXSetVtxDesc
     lwz r3, lbl_8087EFB4
     slwi r4, r30, 2
     lwz r0, lbl_8087EEE0
@@ -3283,7 +3283,7 @@ lbl_fn_80074B24_00002D90:
     li r4, 0x0
     li r7, 0x0
     mr r8, r27
-    bl fn_80613960
+    bl __GXSetVtxDesc
     lwz r4, 0x4(r26)
     cmpwi r4, 0x0
     bne lbl_fn_80074B24_00002E74
@@ -3490,7 +3490,7 @@ lbl_fn_80074B24_00003090:
     blr
 }
 
-asm void fn_80074EC8(void)
+asm void gx_beginQuadBatch(void)
 {
     nofralloc
     stwu r1, -0x1a0(r1)
@@ -3504,48 +3504,48 @@ asm void fn_80074EC8(void)
     lwz r9, lbl_8087EFA8
     lwz r0, 0x204(r9)
     cmpwi r0, 0x0
-    beq lbl_fn_80074EC8_0000315C
+    beq lbl_gx_beginQuadBatch_0000315C
     lwz r0, 0xc0(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_80074EC8_0000315C
+    beq lbl_gx_beginQuadBatch_0000315C
     cmplw r0, r4
-    bne lbl_fn_80074EC8_0000315C
+    bne lbl_gx_beginQuadBatch_0000315C
     lwz r0, 0xc4(r3)
     cmpw r0, r5
-    bne lbl_fn_80074EC8_0000315C
+    bne lbl_gx_beginQuadBatch_0000315C
     rlwinm. r0, r5, 0, 28, 28
-    beq lbl_fn_80074EC8_00003128
+    beq lbl_gx_beginQuadBatch_00003128
     lwz r0, lbl_8087EEEC
     cmplw r0, r7
-    bne lbl_fn_80074EC8_0000315C
-lbl_fn_80074EC8_00003128:
+    bne lbl_gx_beginQuadBatch_0000315C
+lbl_gx_beginQuadBatch_00003128:
     rlwinm. r0, r5, 0, 29, 29
-    beq lbl_fn_80074EC8_0000313C
+    beq lbl_gx_beginQuadBatch_0000313C
     lwz r0, lbl_8087EEE8
     cmplw r0, r6
-    bne lbl_fn_80074EC8_0000315C
-lbl_fn_80074EC8_0000313C:
+    bne lbl_gx_beginQuadBatch_0000315C
+lbl_gx_beginQuadBatch_0000313C:
     cmpwi r8, 0x0
-    beq lbl_fn_80074EC8_00003FD4
+    beq lbl_gx_beginQuadBatch_00003FD4
     rlwinm. r0, r5, 0, 26, 26
-    beq lbl_fn_80074EC8_00003FD4
+    beq lbl_gx_beginQuadBatch_00003FD4
     lwz r0, 0xc8(r3)
     cmplw r0, r8
-    bne lbl_fn_80074EC8_0000315C
-    b lbl_fn_80074EC8_00003FD4
-lbl_fn_80074EC8_0000315C:
+    bne lbl_gx_beginQuadBatch_0000315C
+    b lbl_gx_beginQuadBatch_00003FD4
+lbl_gx_beginQuadBatch_0000315C:
     cmpwi r4, 0x0
     stw r4, 0xc0(r3)
     stw r5, 0xc4(r3)
     stw r6, lbl_8087EEE8
     stw r7, lbl_8087EEEC
     stw r8, 0xc8(r3)
-    bne lbl_fn_80074EC8_00003188
+    bne lbl_gx_beginQuadBatch_00003188
     li r0, 0x0
     stw r0, lbl_8087EEE8
     stw r0, lbl_8087EEEC
-    b lbl_fn_80074EC8_00003FD4
-lbl_fn_80074EC8_00003188:
+    b lbl_gx_beginQuadBatch_00003FD4
+lbl_gx_beginQuadBatch_00003188:
     lwz r0, 0x60(r4)
     clrlwi r29, r5, 31
     stw r0, 0x10(r1)
@@ -3571,7 +3571,7 @@ lbl_fn_80074EC8_00003188:
     stw r0, 0x68(r1)
     stb r3, 0x1f(r1)
     stw r0, 0x6c(r1)
-    beq lbl_fn_80074EC8_000032FC
+    beq lbl_gx_beginQuadBatch_000032FC
     addi r5, r1, 0x18
     addi r6, r1, 0x50
     addi r7, r1, 0x1c
@@ -3582,95 +3582,95 @@ lbl_fn_80074EC8_00003188:
     li r16, 0x0
     li r4, 0x0
     li r3, 0x1
-    b lbl_fn_80074EC8_0000328C
-lbl_fn_80074EC8_0000321C:
+    b lbl_gx_beginQuadBatch_0000328C
+lbl_gx_beginQuadBatch_0000321C:
     lwz r9, 0xf8(r25)
     lwzx r9, r9, r4
     lwz r9, 0x10(r9)
     subi r0, r9, 0x1
     cmplwi r0, 0x2
-    ble lbl_fn_80074EC8_0000325C
+    ble lbl_gx_beginQuadBatch_0000325C
     cmpwi r9, 0x0
-    beq lbl_fn_80074EC8_00003248
+    beq lbl_gx_beginQuadBatch_00003248
     cmpwi r9, 0x4
-    beq lbl_fn_80074EC8_00003270
-    b lbl_fn_80074EC8_00003280
-lbl_fn_80074EC8_00003248:
+    beq lbl_gx_beginQuadBatch_00003270
+    b lbl_gx_beginQuadBatch_00003280
+lbl_gx_beginQuadBatch_00003248:
     stb r3, 0x0(r5)
     addi r5, r5, 0x1
     stw r10, 0x0(r6)
     addi r10, r10, 0x1
-    b lbl_fn_80074EC8_00003280
-lbl_fn_80074EC8_0000325C:
+    b lbl_gx_beginQuadBatch_00003280
+lbl_gx_beginQuadBatch_0000325C:
     stb r3, 0x0(r7)
     addi r7, r7, 0x1
     stw r11, 0x0(r6)
     addi r11, r11, 0x1
-    b lbl_fn_80074EC8_00003280
-lbl_fn_80074EC8_00003270:
+    b lbl_gx_beginQuadBatch_00003280
+lbl_gx_beginQuadBatch_00003270:
     stb r3, 0x0(r8)
     addi r8, r8, 0x1
     stw r12, 0x0(r6)
     addi r12, r12, 0x1
-lbl_fn_80074EC8_00003280:
+lbl_gx_beginQuadBatch_00003280:
     addi r4, r4, 0x4
     addi r6, r6, 0x4
     addi r16, r16, 0x1
-lbl_fn_80074EC8_0000328C:
+lbl_gx_beginQuadBatch_0000328C:
     lwz r0, 0xec(r25)
     cmpw r16, r0
-    blt lbl_fn_80074EC8_0000321C
+    blt lbl_gx_beginQuadBatch_0000321C
     lbz r0, 0x1f(r1)
     cmpwi r0, 0x0
-    bne lbl_fn_80074EC8_000033C8
+    bne lbl_gx_beginQuadBatch_000033C8
     lbz r0, 0x1e(r1)
     cmpwi r0, 0x0
-    bne lbl_fn_80074EC8_000033C8
+    bne lbl_gx_beginQuadBatch_000033C8
     lbz r0, 0x1d(r1)
     cmpwi r0, 0x0
-    bne lbl_fn_80074EC8_000033C8
+    bne lbl_gx_beginQuadBatch_000033C8
     lbz r0, 0x1c(r1)
     cmpwi r0, 0x0
-    bne lbl_fn_80074EC8_000033C8
+    bne lbl_gx_beginQuadBatch_000033C8
     lbz r0, 0x1b(r1)
     cmpwi r0, 0x0
-    bne lbl_fn_80074EC8_000033C8
+    bne lbl_gx_beginQuadBatch_000033C8
     lbz r0, 0x1a(r1)
     cmpwi r0, 0x0
-    bne lbl_fn_80074EC8_000033C8
+    bne lbl_gx_beginQuadBatch_000033C8
     lbz r0, 0x19(r1)
     cmpwi r0, 0x0
-    bne lbl_fn_80074EC8_000033C8
+    bne lbl_gx_beginQuadBatch_000033C8
     lbz r0, 0x18(r1)
     cmpwi r0, 0x0
-    bne lbl_fn_80074EC8_000033C8
-    b lbl_fn_80074EC8_000033C8
-lbl_fn_80074EC8_000032FC:
+    bne lbl_gx_beginQuadBatch_000033C8
+    b lbl_gx_beginQuadBatch_000033C8
+lbl_gx_beginQuadBatch_000032FC:
     lwz r6, 0xec(r25)
     li r8, 0x0
     cmpwi cr1, r6, 0x0
-    ble cr1, lbl_fn_80074EC8_000033C8
+    ble cr1, lbl_gx_beginQuadBatch_000033C8
     lwz r0, 0xec(r25)
     subi r4, r6, 0x8
     cmpwi r0, 0x8
-    ble lbl_fn_80074EC8_000033A0
+    ble lbl_gx_beginQuadBatch_000033A0
     li r5, 0x0
-    blt cr1, lbl_fn_80074EC8_00003338
+    blt cr1, lbl_gx_beginQuadBatch_00003338
     lis r3, 0x8000
     subi r0, r3, 0x2
     cmpw r6, r0
-    bgt lbl_fn_80074EC8_00003338
+    bgt lbl_gx_beginQuadBatch_00003338
     li r5, 0x1
-lbl_fn_80074EC8_00003338:
+lbl_gx_beginQuadBatch_00003338:
     cmpwi r5, 0x0
-    beq lbl_fn_80074EC8_000033A0
+    beq lbl_gx_beginQuadBatch_000033A0
     addi r0, r4, 0x7
     addi r7, r1, 0x50
     srwi r0, r0, 3
     mtctr r0
     cmpwi r4, 0x0
-    ble lbl_fn_80074EC8_000033A0
-lbl_fn_80074EC8_00003358:
+    ble lbl_gx_beginQuadBatch_000033A0
+lbl_gx_beginQuadBatch_00003358:
     stw r8, 0x0(r7)
     addi r3, r8, 0x1
     addi r0, r8, 0x2
@@ -3688,27 +3688,27 @@ lbl_fn_80074EC8_00003358:
     stw r3, 0x18(r7)
     stw r0, 0x1c(r7)
     addi r7, r7, 0x20
-    bdnz lbl_fn_80074EC8_00003358
-lbl_fn_80074EC8_000033A0:
+    bdnz lbl_gx_beginQuadBatch_00003358
+lbl_gx_beginQuadBatch_000033A0:
     slwi r0, r8, 2
     addi r3, r1, 0x50
     add r3, r3, r0
-    b lbl_fn_80074EC8_000033BC
-lbl_fn_80074EC8_000033B0:
+    b lbl_gx_beginQuadBatch_000033BC
+lbl_gx_beginQuadBatch_000033B0:
     stw r8, 0x0(r3)
     addi r3, r3, 0x4
     addi r8, r8, 0x1
-lbl_fn_80074EC8_000033BC:
+lbl_gx_beginQuadBatch_000033BC:
     lwz r0, 0xec(r25)
     cmpw r8, r0
-    blt lbl_fn_80074EC8_000033B0
-lbl_fn_80074EC8_000033C8:
+    blt lbl_gx_beginQuadBatch_000033B0
+lbl_gx_beginQuadBatch_000033C8:
     addi r30, r1, 0x50
     li r28, 0x40
     li r27, 0x0
     li r31, 0x0
-    b lbl_fn_80074EC8_000034FC
-lbl_fn_80074EC8_000033DC:
+    b lbl_gx_beginQuadBatch_000034FC
+lbl_gx_beginQuadBatch_000033DC:
     lwz r4, 0xf8(r25)
     lwz r3, 0xf0(r25)
     lwzx r4, r4, r31
@@ -3753,41 +3753,41 @@ lbl_fn_80074EC8_000033DC:
     stw r4, 0x40(r1)
     stw r5, 0x44(r1)
     stw r6, 0x48(r1)
-    ble lbl_fn_80074EC8_000034D0
+    ble lbl_gx_beginQuadBatch_000034D0
     cmpwi r20, 0x0
-    bne lbl_fn_80074EC8_000034F0
+    bne lbl_gx_beginQuadBatch_000034F0
     cmpwi r29, 0x0
-    bne lbl_fn_80074EC8_000034B4
+    bne lbl_gx_beginQuadBatch_000034B4
     lwz r3, 0x0(r30)
     li r7, 0x0
     li r8, 0x7d
-    bl fn_80613960
-    b lbl_fn_80074EC8_000034F0
-lbl_fn_80074EC8_000034B4:
+    bl __GXSetVtxDesc
+    b lbl_gx_beginQuadBatch_000034F0
+lbl_gx_beginQuadBatch_000034B4:
     lwz r3, 0x0(r30)
     mr r8, r28
     li r6, 0x3c
     li r7, 0x0
-    bl fn_80613960
+    bl __GXSetVtxDesc
     addi r28, r28, 0x3
-    b lbl_fn_80074EC8_000034F0
-lbl_fn_80074EC8_000034D0:
+    b lbl_gx_beginQuadBatch_000034F0
+lbl_gx_beginQuadBatch_000034D0:
     subfic r3, r20, 0x4
     subi r0, r20, 0x4
     or r0, r3, r0
     lwz r3, 0x0(r30)
     mr r8, r28
     srwi r7, r0, 31
-    bl fn_80613960
+    bl __GXSetVtxDesc
     addi r28, r28, 0x3
-lbl_fn_80074EC8_000034F0:
+lbl_gx_beginQuadBatch_000034F0:
     addi r31, r31, 0x4
     addi r30, r30, 0x4
     addi r27, r27, 0x1
-lbl_fn_80074EC8_000034FC:
+lbl_gx_beginQuadBatch_000034FC:
     lwz r0, 0xec(r25)
     cmpw r27, r0
-    blt lbl_fn_80074EC8_000033DC
+    blt lbl_gx_beginQuadBatch_000033DC
     lwz r3, 0x80(r25)
     srwi r0, r3, 31
     add r0, r0, r3
@@ -3798,12 +3798,12 @@ lbl_fn_80074EC8_000034FC:
     bl fn_80617200
     lwz r0, 0x13c(r25)
     cmpwi r0, 0x0
-    ble lbl_fn_80074EC8_00003598
+    ble lbl_gx_beginQuadBatch_00003598
     mr r17, r25
     addi r16, r1, 0x50
     li r18, 0x0
-    b lbl_fn_80074EC8_0000358C
-lbl_fn_80074EC8_00003544:
+    b lbl_gx_beginQuadBatch_0000358C
+lbl_gx_beginQuadBatch_00003544:
     lwz r8, 0x144(r17)
     mr r3, r18
     lwz r5, 0x140(r17)
@@ -3822,14 +3822,14 @@ lbl_fn_80074EC8_00003544:
     bl fn_80617030
     addi r17, r17, 0x10
     addi r18, r18, 0x1
-lbl_fn_80074EC8_0000358C:
+lbl_gx_beginQuadBatch_0000358C:
     lwz r0, 0x13c(r25)
     cmpw r18, r0
-    blt lbl_fn_80074EC8_00003544
-lbl_fn_80074EC8_00003598:
+    blt lbl_gx_beginQuadBatch_00003544
+lbl_gx_beginQuadBatch_00003598:
     mr r16, r25
     li r17, 0x0
-lbl_fn_80074EC8_000035A0:
+lbl_gx_beginQuadBatch_000035A0:
     lbz r4, 0x180(r16)
     mr r3, r17
     lbz r5, 0x181(r16)
@@ -3839,63 +3839,63 @@ lbl_fn_80074EC8_000035A0:
     addi r17, r17, 0x1
     addi r16, r16, 0x4
     cmpwi r17, 0x3
-    blt lbl_fn_80074EC8_000035A0
+    blt lbl_gx_beginQuadBatch_000035A0
     mr r17, r25
     addi r19, r1, 0x50
     li r18, 0x0
     li r16, 0x11
-    b lbl_fn_80074EC8_0000375C
-lbl_fn_80074EC8_000035DC:
+    b lbl_gx_beginQuadBatch_0000375C
+lbl_gx_beginQuadBatch_000035DC:
     addi r5, r1, 0xc4
     addi r4, r17, 0x190
     mtctr r16
-lbl_fn_80074EC8_000035E8:
+lbl_gx_beginQuadBatch_000035E8:
     lwz r3, 0x4(r4)
     lwzu r0, 0x8(r4)
     stw r3, 0x4(r5)
     stwu r0, 0x8(r5)
-    bdnz lbl_fn_80074EC8_000035E8
+    bdnz lbl_gx_beginQuadBatch_000035E8
     lwz r0, 0xc8(r1)
     li r6, 0xff
     cmpwi r0, 0x0
-    beq lbl_fn_80074EC8_00003628
+    beq lbl_gx_beginQuadBatch_00003628
     cmpwi r0, 0x1
-    beq lbl_fn_80074EC8_00003630
+    beq lbl_gx_beginQuadBatch_00003630
     cmpwi r0, 0x2
-    beq lbl_fn_80074EC8_00003638
+    beq lbl_gx_beginQuadBatch_00003638
     cmpwi r0, 0x3
-    beq lbl_fn_80074EC8_00003640
-    b lbl_fn_80074EC8_00003644
-lbl_fn_80074EC8_00003628:
+    beq lbl_gx_beginQuadBatch_00003640
+    b lbl_gx_beginQuadBatch_00003644
+lbl_gx_beginQuadBatch_00003628:
     li r6, 0xff
-    b lbl_fn_80074EC8_00003644
-lbl_fn_80074EC8_00003630:
+    b lbl_gx_beginQuadBatch_00003644
+lbl_gx_beginQuadBatch_00003630:
     li r6, 0x4
-    b lbl_fn_80074EC8_00003644
-lbl_fn_80074EC8_00003638:
+    b lbl_gx_beginQuadBatch_00003644
+lbl_gx_beginQuadBatch_00003638:
     li r6, 0x5
-    b lbl_fn_80074EC8_00003644
-lbl_fn_80074EC8_00003640:
+    b lbl_gx_beginQuadBatch_00003644
+lbl_gx_beginQuadBatch_00003640:
     li r6, 0x6
-lbl_fn_80074EC8_00003644:
+lbl_gx_beginQuadBatch_00003644:
     lwz r5, 0xcc(r1)
     cmpwi r5, 0xff
-    beq lbl_fn_80074EC8_0000365C
+    beq lbl_gx_beginQuadBatch_0000365C
     lwz r0, 0xd0(r1)
     cmpwi r0, 0xff
-    bne lbl_fn_80074EC8_00003670
-lbl_fn_80074EC8_0000365C:
+    bne lbl_gx_beginQuadBatch_00003670
+lbl_gx_beginQuadBatch_0000365C:
     mr r3, r18
     li r4, 0xff
     li r5, 0xff
     bl fn_80617880
-    b lbl_fn_80074EC8_00003680
-lbl_fn_80074EC8_00003670:
+    b lbl_gx_beginQuadBatch_00003680
+lbl_gx_beginQuadBatch_00003670:
     slwi r0, r0, 2
     mr r3, r18
     lwzx r4, r19, r0
     bl fn_80617880
-lbl_fn_80074EC8_00003680:
+lbl_gx_beginQuadBatch_00003680:
     lwz r4, 0xd4(r1)
     mr r3, r18
     lwz r5, 0xd8(r1)
@@ -3951,100 +3951,100 @@ lbl_fn_80074EC8_00003680:
     bl fn_80616E80
     addi r17, r17, 0x88
     addi r18, r18, 0x1
-lbl_fn_80074EC8_0000375C:
+lbl_gx_beginQuadBatch_0000375C:
     lwz r0, 0x190(r25)
     cmpw r18, r0
-    blt lbl_fn_80074EC8_000035DC
+    blt lbl_gx_beginQuadBatch_000035DC
     mr r4, r25
     mr r5, r29
     addi r3, r1, 0x70
     bl fn_80072F64
     clrrwi. r0, r26, 1
-    beq lbl_fn_80074EC8_00003F70
+    beq lbl_gx_beginQuadBatch_00003F70
     cmpwi r15, 0x0
-    beq lbl_fn_80074EC8_000038F8
+    beq lbl_gx_beginQuadBatch_000038F8
     rlwinm. r0, r26, 0, 26, 26
-    beq lbl_fn_80074EC8_000038F8
+    beq lbl_gx_beginQuadBatch_000038F8
     lwz r3, 0x84(r1)
     addi r0, r3, 0x2
     cmpwi r0, 0x10
-    bgt lbl_fn_80074EC8_000038CC
+    bgt lbl_gx_beginQuadBatch_000038CC
     lwz r0, 0x88(r1)
     cmpwi r0, 0x4
-    bgt lbl_fn_80074EC8_000038CC
+    bgt lbl_gx_beginQuadBatch_000038CC
     lwz r5, 0x8c(r1)
     li r4, 0x0
     li r3, 0x1
     slw r0, r3, r4
     and. r0, r5, r0
-    beq lbl_fn_80074EC8_000037C8
+    beq lbl_gx_beginQuadBatch_000037C8
     li r4, 0x1
-lbl_fn_80074EC8_000037C8:
+lbl_gx_beginQuadBatch_000037C8:
     li r0, 0x1
     slw r0, r3, r0
     and. r0, r5, r0
-    beq lbl_fn_80074EC8_000037DC
+    beq lbl_gx_beginQuadBatch_000037DC
     addi r4, r4, 0x1
-lbl_fn_80074EC8_000037DC:
+lbl_gx_beginQuadBatch_000037DC:
     li r0, 0x2
     slw r0, r3, r0
     and. r0, r5, r0
-    beq lbl_fn_80074EC8_000037F0
+    beq lbl_gx_beginQuadBatch_000037F0
     addi r4, r4, 0x1
-lbl_fn_80074EC8_000037F0:
+lbl_gx_beginQuadBatch_000037F0:
     li r0, 0x3
     slw r0, r3, r0
     and. r0, r5, r0
-    beq lbl_fn_80074EC8_00003804
+    beq lbl_gx_beginQuadBatch_00003804
     addi r4, r4, 0x1
-lbl_fn_80074EC8_00003804:
+lbl_gx_beginQuadBatch_00003804:
     cmpwi r4, 0x4
-    bgt lbl_fn_80074EC8_000038CC
+    bgt lbl_gx_beginQuadBatch_000038CC
     lwz r5, 0x90(r1)
     li r4, 0x0
     li r3, 0x1
     slw r0, r3, r4
     and. r0, r5, r0
-    beq lbl_fn_80074EC8_00003828
+    beq lbl_gx_beginQuadBatch_00003828
     li r4, 0x1
-lbl_fn_80074EC8_00003828:
+lbl_gx_beginQuadBatch_00003828:
     li r0, 0x1
     slw r0, r3, r0
     and. r0, r5, r0
-    beq lbl_fn_80074EC8_0000383C
+    beq lbl_gx_beginQuadBatch_0000383C
     addi r4, r4, 0x1
-lbl_fn_80074EC8_0000383C:
+lbl_gx_beginQuadBatch_0000383C:
     li r0, 0x2
     slw r0, r3, r0
     and. r0, r5, r0
-    beq lbl_fn_80074EC8_00003850
+    beq lbl_gx_beginQuadBatch_00003850
     addi r4, r4, 0x1
-lbl_fn_80074EC8_00003850:
+lbl_gx_beginQuadBatch_00003850:
     li r0, 0x3
     slw r0, r3, r0
     and. r0, r5, r0
-    beq lbl_fn_80074EC8_00003864
+    beq lbl_gx_beginQuadBatch_00003864
     addi r4, r4, 0x1
-lbl_fn_80074EC8_00003864:
+lbl_gx_beginQuadBatch_00003864:
     cmpwi r4, 0x4
-    bgt lbl_fn_80074EC8_000038CC
+    bgt lbl_gx_beginQuadBatch_000038CC
     lwz r0, 0x70(r1)
     cmpwi r0, 0x0
-    beq lbl_fn_80074EC8_000038AC
+    beq lbl_gx_beginQuadBatch_000038AC
     lwz r0, 0x78(r1)
     li r4, 0x0
     cmpwi r0, 0x4
-    bgt lbl_fn_80074EC8_000038D0
+    bgt lbl_gx_beginQuadBatch_000038D0
     lwz r0, 0x7c(r1)
     cmpwi r0, 0x2
-    bgt lbl_fn_80074EC8_000038D0
+    bgt lbl_gx_beginQuadBatch_000038D0
     lwz r3, 0x80(r1)
     addi r0, r3, 0x1
     cmpwi r0, 0x2
-    bgt lbl_fn_80074EC8_000038D0
+    bgt lbl_gx_beginQuadBatch_000038D0
     li r4, 0x1
-    b lbl_fn_80074EC8_000038D0
-lbl_fn_80074EC8_000038AC:
+    b lbl_gx_beginQuadBatch_000038D0
+lbl_gx_beginQuadBatch_000038AC:
     lwz r3, 0x74(r1)
     li r0, 0x8
     srawi r4, r0, 31
@@ -4052,106 +4052,106 @@ lbl_fn_80074EC8_000038AC:
     srwi r3, r5, 31
     subfc r0, r5, r0
     adde r4, r4, r3
-    b lbl_fn_80074EC8_000038D0
-lbl_fn_80074EC8_000038CC:
+    b lbl_gx_beginQuadBatch_000038D0
+lbl_gx_beginQuadBatch_000038CC:
     li r4, 0x0
-lbl_fn_80074EC8_000038D0:
+lbl_gx_beginQuadBatch_000038D0:
     cmpwi r4, 0x0
-    beq lbl_fn_80074EC8_000038EC
+    beq lbl_gx_beginQuadBatch_000038EC
     lwz r5, 0xc4(r24)
     mr r4, r15
     addi r3, r1, 0x70
     bl fn_80074B24
-    b lbl_fn_80074EC8_000038F8
-lbl_fn_80074EC8_000038EC:
+    b lbl_gx_beginQuadBatch_000038F8
+lbl_gx_beginQuadBatch_000038EC:
     lwz r0, 0xc4(r24)
     rlwinm r0, r0, 0, 27, 25
     stw r0, 0xc4(r24)
-lbl_fn_80074EC8_000038F8:
+lbl_gx_beginQuadBatch_000038F8:
     rlwinm. r0, r26, 0, 30, 30
-    beq lbl_fn_80074EC8_00003A70
+    beq lbl_gx_beginQuadBatch_00003A70
     lwz r3, 0x84(r1)
     addi r0, r3, 0x4
     cmpwi r0, 0x10
-    bgt lbl_fn_80074EC8_00003A44
+    bgt lbl_gx_beginQuadBatch_00003A44
     lwz r0, 0x88(r1)
     cmpwi r0, 0x4
-    bgt lbl_fn_80074EC8_00003A44
+    bgt lbl_gx_beginQuadBatch_00003A44
     lwz r5, 0x8c(r1)
     li r4, 0x0
     li r3, 0x1
     slw r0, r3, r4
     and. r0, r5, r0
-    beq lbl_fn_80074EC8_00003938
+    beq lbl_gx_beginQuadBatch_00003938
     li r4, 0x1
-lbl_fn_80074EC8_00003938:
+lbl_gx_beginQuadBatch_00003938:
     li r0, 0x1
     slw r0, r3, r0
     and. r0, r5, r0
-    beq lbl_fn_80074EC8_0000394C
+    beq lbl_gx_beginQuadBatch_0000394C
     addi r4, r4, 0x1
-lbl_fn_80074EC8_0000394C:
+lbl_gx_beginQuadBatch_0000394C:
     li r0, 0x2
     slw r0, r3, r0
     and. r0, r5, r0
-    beq lbl_fn_80074EC8_00003960
+    beq lbl_gx_beginQuadBatch_00003960
     addi r4, r4, 0x1
-lbl_fn_80074EC8_00003960:
+lbl_gx_beginQuadBatch_00003960:
     li r0, 0x3
     slw r0, r3, r0
     and. r0, r5, r0
-    beq lbl_fn_80074EC8_00003974
+    beq lbl_gx_beginQuadBatch_00003974
     addi r4, r4, 0x1
-lbl_fn_80074EC8_00003974:
+lbl_gx_beginQuadBatch_00003974:
     addi r0, r4, 0x2
     cmpwi r0, 0x4
-    bgt lbl_fn_80074EC8_00003A44
+    bgt lbl_gx_beginQuadBatch_00003A44
     lwz r5, 0x90(r1)
     li r4, 0x0
     li r3, 0x1
     slw r0, r3, r4
     and. r0, r5, r0
-    beq lbl_fn_80074EC8_0000399C
+    beq lbl_gx_beginQuadBatch_0000399C
     li r4, 0x1
-lbl_fn_80074EC8_0000399C:
+lbl_gx_beginQuadBatch_0000399C:
     li r0, 0x1
     slw r0, r3, r0
     and. r0, r5, r0
-    beq lbl_fn_80074EC8_000039B0
+    beq lbl_gx_beginQuadBatch_000039B0
     addi r4, r4, 0x1
-lbl_fn_80074EC8_000039B0:
+lbl_gx_beginQuadBatch_000039B0:
     li r0, 0x2
     slw r0, r3, r0
     and. r0, r5, r0
-    beq lbl_fn_80074EC8_000039C4
+    beq lbl_gx_beginQuadBatch_000039C4
     addi r4, r4, 0x1
-lbl_fn_80074EC8_000039C4:
+lbl_gx_beginQuadBatch_000039C4:
     li r0, 0x3
     slw r0, r3, r0
     and. r0, r5, r0
-    beq lbl_fn_80074EC8_000039D8
+    beq lbl_gx_beginQuadBatch_000039D8
     addi r4, r4, 0x1
-lbl_fn_80074EC8_000039D8:
+lbl_gx_beginQuadBatch_000039D8:
     addi r0, r4, 0x1
     cmpwi r0, 0x4
-    bgt lbl_fn_80074EC8_00003A44
+    bgt lbl_gx_beginQuadBatch_00003A44
     lwz r0, 0x70(r1)
     cmpwi r0, 0x0
-    beq lbl_fn_80074EC8_00003A24
+    beq lbl_gx_beginQuadBatch_00003A24
     lwz r0, 0x78(r1)
     li r4, 0x0
     cmpwi r0, 0x4
-    bgt lbl_fn_80074EC8_00003A48
+    bgt lbl_gx_beginQuadBatch_00003A48
     lwz r0, 0x7c(r1)
     cmpwi r0, 0x2
-    bgt lbl_fn_80074EC8_00003A48
+    bgt lbl_gx_beginQuadBatch_00003A48
     lwz r3, 0x80(r1)
     addi r0, r3, 0x2
     cmpwi r0, 0x2
-    bgt lbl_fn_80074EC8_00003A48
+    bgt lbl_gx_beginQuadBatch_00003A48
     li r4, 0x1
-    b lbl_fn_80074EC8_00003A48
-lbl_fn_80074EC8_00003A24:
+    b lbl_gx_beginQuadBatch_00003A48
+lbl_gx_beginQuadBatch_00003A24:
     lwz r3, 0x74(r1)
     li r0, 0x8
     srawi r4, r0, 31
@@ -4159,31 +4159,31 @@ lbl_fn_80074EC8_00003A24:
     srwi r3, r5, 31
     subfc r0, r5, r0
     adde r4, r4, r3
-    b lbl_fn_80074EC8_00003A48
-lbl_fn_80074EC8_00003A44:
+    b lbl_gx_beginQuadBatch_00003A48
+lbl_gx_beginQuadBatch_00003A44:
     li r4, 0x0
-lbl_fn_80074EC8_00003A48:
+lbl_gx_beginQuadBatch_00003A48:
     cmpwi r4, 0x0
-    beq lbl_fn_80074EC8_00003A60
+    beq lbl_gx_beginQuadBatch_00003A60
     lwz r4, 0xc4(r24)
     addi r3, r1, 0x70
     bl fn_80073A6C
-    b lbl_fn_80074EC8_00003C80
-lbl_fn_80074EC8_00003A60:
+    b lbl_gx_beginQuadBatch_00003C80
+lbl_gx_beginQuadBatch_00003A60:
     lwz r0, 0xc4(r24)
     rlwinm r0, r0, 0, 31, 29
     stw r0, 0xc4(r24)
-    b lbl_fn_80074EC8_00003C80
-lbl_fn_80074EC8_00003A70:
+    b lbl_gx_beginQuadBatch_00003C80
+lbl_gx_beginQuadBatch_00003A70:
     rlwinm. r0, r26, 0, 27, 27
-    beq lbl_fn_80074EC8_00003C80
+    beq lbl_gx_beginQuadBatch_00003C80
     lwz r3, lbl_8087EFA8
     li r0, 0x1
     lwz r3, 0x18c(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_80074EC8_00003A90
+    beq lbl_gx_beginQuadBatch_00003A90
     li r0, 0x2
-lbl_fn_80074EC8_00003A90:
+lbl_gx_beginQuadBatch_00003A90:
     mulli r3, r0, 0x1c
     lis r4, lbl_807316D0@ha
     lwz r5, 0x84(r1)
@@ -4192,100 +4192,100 @@ lbl_fn_80074EC8_00003A90:
     lwz r4, 0xc(r6)
     add r4, r5, r4
     cmpwi r4, 0x10
-    bgt lbl_fn_80074EC8_00003C40
+    bgt lbl_gx_beginQuadBatch_00003C40
     lwz r5, 0x88(r1)
     lwz r4, 0x10(r6)
     add r4, r5, r4
     cmpwi r4, 0x4
-    bgt lbl_fn_80074EC8_00003C40
+    bgt lbl_gx_beginQuadBatch_00003C40
     lwz r7, 0x8c(r1)
     li r6, 0x0
     li r5, 0x1
     slw r4, r5, r6
     and. r4, r7, r4
-    beq lbl_fn_80074EC8_00003AE4
+    beq lbl_gx_beginQuadBatch_00003AE4
     li r6, 0x1
-lbl_fn_80074EC8_00003AE4:
+lbl_gx_beginQuadBatch_00003AE4:
     li r4, 0x1
     slw r4, r5, r4
     and. r4, r7, r4
-    beq lbl_fn_80074EC8_00003AF8
+    beq lbl_gx_beginQuadBatch_00003AF8
     addi r6, r6, 0x1
-lbl_fn_80074EC8_00003AF8:
+lbl_gx_beginQuadBatch_00003AF8:
     li r4, 0x2
     slw r4, r5, r4
     and. r4, r7, r4
-    beq lbl_fn_80074EC8_00003B0C
+    beq lbl_gx_beginQuadBatch_00003B0C
     addi r6, r6, 0x1
-lbl_fn_80074EC8_00003B0C:
+lbl_gx_beginQuadBatch_00003B0C:
     li r4, 0x3
     slw r4, r5, r4
     and. r4, r7, r4
-    beq lbl_fn_80074EC8_00003B20
+    beq lbl_gx_beginQuadBatch_00003B20
     addi r6, r6, 0x1
-lbl_fn_80074EC8_00003B20:
+lbl_gx_beginQuadBatch_00003B20:
     lis r4, lbl_807316D0@ha
     addi r4, r4, lbl_807316D0@l
     add r4, r4, r3
     lwz r4, 0x14(r4)
     add r4, r4, r6
     cmpwi r4, 0x4
-    bgt lbl_fn_80074EC8_00003C40
+    bgt lbl_gx_beginQuadBatch_00003C40
     lwz r7, 0x90(r1)
     li r6, 0x0
     li r5, 0x1
     slw r4, r5, r6
     and. r4, r7, r4
-    beq lbl_fn_80074EC8_00003B58
+    beq lbl_gx_beginQuadBatch_00003B58
     li r6, 0x1
-lbl_fn_80074EC8_00003B58:
+lbl_gx_beginQuadBatch_00003B58:
     li r4, 0x1
     slw r4, r5, r4
     and. r4, r7, r4
-    beq lbl_fn_80074EC8_00003B6C
+    beq lbl_gx_beginQuadBatch_00003B6C
     addi r6, r6, 0x1
-lbl_fn_80074EC8_00003B6C:
+lbl_gx_beginQuadBatch_00003B6C:
     li r4, 0x2
     slw r4, r5, r4
     and. r4, r7, r4
-    beq lbl_fn_80074EC8_00003B80
+    beq lbl_gx_beginQuadBatch_00003B80
     addi r6, r6, 0x1
-lbl_fn_80074EC8_00003B80:
+lbl_gx_beginQuadBatch_00003B80:
     li r4, 0x3
     slw r4, r5, r4
     and. r4, r7, r4
-    beq lbl_fn_80074EC8_00003B94
+    beq lbl_gx_beginQuadBatch_00003B94
     addi r6, r6, 0x1
-lbl_fn_80074EC8_00003B94:
+lbl_gx_beginQuadBatch_00003B94:
     lis r8, lbl_807316D0@ha
     addi r8, r8, lbl_807316D0@l
     add r5, r8, r3
     lwz r4, 0x18(r5)
     add r4, r4, r6
     cmpwi r4, 0x4
-    bgt lbl_fn_80074EC8_00003C40
+    bgt lbl_gx_beginQuadBatch_00003C40
     lwz r4, 0x70(r1)
     cmpwi r4, 0x0
-    beq lbl_fn_80074EC8_00003C04
+    beq lbl_gx_beginQuadBatch_00003C04
     lwz r4, 0x78(r1)
     li r6, 0x0
     lwzx r3, r8, r3
     add r3, r4, r3
     cmpwi r3, 0x4
-    bgt lbl_fn_80074EC8_00003C44
+    bgt lbl_gx_beginQuadBatch_00003C44
     lwz r4, 0x7c(r1)
     lwz r3, 0x4(r5)
     add r3, r4, r3
     cmpwi r3, 0x2
-    bgt lbl_fn_80074EC8_00003C44
+    bgt lbl_gx_beginQuadBatch_00003C44
     lwz r4, 0x80(r1)
     lwz r3, 0x8(r5)
     add r3, r4, r3
     cmpwi r3, 0x2
-    bgt lbl_fn_80074EC8_00003C44
+    bgt lbl_gx_beginQuadBatch_00003C44
     li r6, 0x1
-    b lbl_fn_80074EC8_00003C44
-lbl_fn_80074EC8_00003C04:
+    b lbl_gx_beginQuadBatch_00003C44
+lbl_gx_beginQuadBatch_00003C04:
     mulli r4, r0, 0x1c
     li r3, 0x8
     lwz r6, 0x74(r1)
@@ -4300,113 +4300,113 @@ lbl_fn_80074EC8_00003C04:
     srwi r4, r6, 31
     subfc r3, r6, r3
     adde r6, r5, r4
-    b lbl_fn_80074EC8_00003C44
-lbl_fn_80074EC8_00003C40:
+    b lbl_gx_beginQuadBatch_00003C44
+lbl_gx_beginQuadBatch_00003C40:
     li r6, 0x0
-lbl_fn_80074EC8_00003C44:
+lbl_gx_beginQuadBatch_00003C44:
     cmpwi r6, 0x0
-    beq lbl_fn_80074EC8_00003C74
+    beq lbl_gx_beginQuadBatch_00003C74
     cmpwi r0, 0x2
-    bne lbl_fn_80074EC8_00003C64
+    bne lbl_gx_beginQuadBatch_00003C64
     lwz r4, 0xc4(r24)
     addi r3, r1, 0x70
     bl fn_800748D8
-    b lbl_fn_80074EC8_00003C80
-lbl_fn_80074EC8_00003C64:
+    b lbl_gx_beginQuadBatch_00003C80
+lbl_gx_beginQuadBatch_00003C64:
     lwz r4, 0xc4(r24)
     addi r3, r1, 0x70
     bl fn_800742C8
-    b lbl_fn_80074EC8_00003C80
-lbl_fn_80074EC8_00003C74:
+    b lbl_gx_beginQuadBatch_00003C80
+lbl_gx_beginQuadBatch_00003C74:
     lwz r0, 0xc4(r24)
     rlwinm r0, r0, 0, 28, 26
     stw r0, 0xc4(r24)
-lbl_fn_80074EC8_00003C80:
+lbl_gx_beginQuadBatch_00003C80:
     rlwinm. r0, r26, 0, 29, 29
-    beq lbl_fn_80074EC8_00003DF8
+    beq lbl_gx_beginQuadBatch_00003DF8
     lwz r5, lbl_8087EEE8
     cmpwi r5, 0x0
-    beq lbl_fn_80074EC8_00003DEC
+    beq lbl_gx_beginQuadBatch_00003DEC
     lwz r3, 0x84(r1)
     addi r0, r3, 0x1
     cmpwi r0, 0x10
-    bgt lbl_fn_80074EC8_00003DD0
+    bgt lbl_gx_beginQuadBatch_00003DD0
     lwz r0, 0x88(r1)
     cmpwi r0, 0x4
-    bgt lbl_fn_80074EC8_00003DD0
+    bgt lbl_gx_beginQuadBatch_00003DD0
     lwz r6, 0x8c(r1)
     li r4, 0x0
     li r3, 0x1
     slw r0, r3, r4
     and. r0, r6, r0
-    beq lbl_fn_80074EC8_00003CCC
+    beq lbl_gx_beginQuadBatch_00003CCC
     li r4, 0x1
-lbl_fn_80074EC8_00003CCC:
+lbl_gx_beginQuadBatch_00003CCC:
     li r0, 0x1
     slw r0, r3, r0
     and. r0, r6, r0
-    beq lbl_fn_80074EC8_00003CE0
+    beq lbl_gx_beginQuadBatch_00003CE0
     addi r4, r4, 0x1
-lbl_fn_80074EC8_00003CE0:
+lbl_gx_beginQuadBatch_00003CE0:
     li r0, 0x2
     slw r0, r3, r0
     and. r0, r6, r0
-    beq lbl_fn_80074EC8_00003CF4
+    beq lbl_gx_beginQuadBatch_00003CF4
     addi r4, r4, 0x1
-lbl_fn_80074EC8_00003CF4:
+lbl_gx_beginQuadBatch_00003CF4:
     li r0, 0x3
     slw r0, r3, r0
     and. r0, r6, r0
-    beq lbl_fn_80074EC8_00003D08
+    beq lbl_gx_beginQuadBatch_00003D08
     addi r4, r4, 0x1
-lbl_fn_80074EC8_00003D08:
+lbl_gx_beginQuadBatch_00003D08:
     cmpwi r4, 0x4
-    bgt lbl_fn_80074EC8_00003DD0
+    bgt lbl_gx_beginQuadBatch_00003DD0
     lwz r6, 0x90(r1)
     li r4, 0x0
     li r3, 0x1
     slw r0, r3, r4
     and. r0, r6, r0
-    beq lbl_fn_80074EC8_00003D2C
+    beq lbl_gx_beginQuadBatch_00003D2C
     li r4, 0x1
-lbl_fn_80074EC8_00003D2C:
+lbl_gx_beginQuadBatch_00003D2C:
     li r0, 0x1
     slw r0, r3, r0
     and. r0, r6, r0
-    beq lbl_fn_80074EC8_00003D40
+    beq lbl_gx_beginQuadBatch_00003D40
     addi r4, r4, 0x1
-lbl_fn_80074EC8_00003D40:
+lbl_gx_beginQuadBatch_00003D40:
     li r0, 0x2
     slw r0, r3, r0
     and. r0, r6, r0
-    beq lbl_fn_80074EC8_00003D54
+    beq lbl_gx_beginQuadBatch_00003D54
     addi r4, r4, 0x1
-lbl_fn_80074EC8_00003D54:
+lbl_gx_beginQuadBatch_00003D54:
     li r0, 0x3
     slw r0, r3, r0
     and. r0, r6, r0
-    beq lbl_fn_80074EC8_00003D68
+    beq lbl_gx_beginQuadBatch_00003D68
     addi r4, r4, 0x1
-lbl_fn_80074EC8_00003D68:
+lbl_gx_beginQuadBatch_00003D68:
     cmpwi r4, 0x4
-    bgt lbl_fn_80074EC8_00003DD0
+    bgt lbl_gx_beginQuadBatch_00003DD0
     lwz r0, 0x70(r1)
     cmpwi r0, 0x0
-    beq lbl_fn_80074EC8_00003DB0
+    beq lbl_gx_beginQuadBatch_00003DB0
     lwz r0, 0x78(r1)
     li r4, 0x0
     cmpwi r0, 0x4
-    bgt lbl_fn_80074EC8_00003DD4
+    bgt lbl_gx_beginQuadBatch_00003DD4
     lwz r0, 0x7c(r1)
     cmpwi r0, 0x2
-    bgt lbl_fn_80074EC8_00003DD4
+    bgt lbl_gx_beginQuadBatch_00003DD4
     lwz r3, 0x80(r1)
     addi r0, r3, 0x1
     cmpwi r0, 0x2
-    bgt lbl_fn_80074EC8_00003DD4
+    bgt lbl_gx_beginQuadBatch_00003DD4
     li r4, 0x1
-    b lbl_fn_80074EC8_00003DD4
-lbl_fn_80074EC8_00003DB0:
+    b lbl_gx_beginQuadBatch_00003DD4
+lbl_gx_beginQuadBatch_00003DB0:
     lwz r3, 0x74(r1)
     li r0, 0x8
     srawi r4, r0, 31
@@ -4414,106 +4414,106 @@ lbl_fn_80074EC8_00003DB0:
     srwi r3, r6, 31
     subfc r0, r6, r0
     adde r4, r4, r3
-    b lbl_fn_80074EC8_00003DD4
-lbl_fn_80074EC8_00003DD0:
+    b lbl_gx_beginQuadBatch_00003DD4
+lbl_gx_beginQuadBatch_00003DD0:
     li r4, 0x0
-lbl_fn_80074EC8_00003DD4:
+lbl_gx_beginQuadBatch_00003DD4:
     cmpwi r4, 0x0
-    beq lbl_fn_80074EC8_00003DEC
+    beq lbl_gx_beginQuadBatch_00003DEC
     lwz r4, 0xc4(r24)
     addi r3, r1, 0x70
     bl fn_80073194
-    b lbl_fn_80074EC8_00003DF8
-lbl_fn_80074EC8_00003DEC:
+    b lbl_gx_beginQuadBatch_00003DF8
+lbl_gx_beginQuadBatch_00003DEC:
     lwz r0, 0xc4(r24)
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0xc4(r24)
-lbl_fn_80074EC8_00003DF8:
+lbl_gx_beginQuadBatch_00003DF8:
     rlwinm. r0, r26, 0, 28, 28
-    beq lbl_fn_80074EC8_00003F70
+    beq lbl_gx_beginQuadBatch_00003F70
     lwz r5, lbl_8087EEEC
     cmpwi r5, 0x0
-    beq lbl_fn_80074EC8_00003F64
+    beq lbl_gx_beginQuadBatch_00003F64
     lwz r3, 0x84(r1)
     addi r0, r3, 0x1
     cmpwi r0, 0x10
-    bgt lbl_fn_80074EC8_00003F48
+    bgt lbl_gx_beginQuadBatch_00003F48
     lwz r0, 0x88(r1)
     cmpwi r0, 0x4
-    bgt lbl_fn_80074EC8_00003F48
+    bgt lbl_gx_beginQuadBatch_00003F48
     lwz r6, 0x8c(r1)
     li r4, 0x0
     li r3, 0x1
     slw r0, r3, r4
     and. r0, r6, r0
-    beq lbl_fn_80074EC8_00003E44
+    beq lbl_gx_beginQuadBatch_00003E44
     li r4, 0x1
-lbl_fn_80074EC8_00003E44:
+lbl_gx_beginQuadBatch_00003E44:
     li r0, 0x1
     slw r0, r3, r0
     and. r0, r6, r0
-    beq lbl_fn_80074EC8_00003E58
+    beq lbl_gx_beginQuadBatch_00003E58
     addi r4, r4, 0x1
-lbl_fn_80074EC8_00003E58:
+lbl_gx_beginQuadBatch_00003E58:
     li r0, 0x2
     slw r0, r3, r0
     and. r0, r6, r0
-    beq lbl_fn_80074EC8_00003E6C
+    beq lbl_gx_beginQuadBatch_00003E6C
     addi r4, r4, 0x1
-lbl_fn_80074EC8_00003E6C:
+lbl_gx_beginQuadBatch_00003E6C:
     li r0, 0x3
     slw r0, r3, r0
     and. r0, r6, r0
-    beq lbl_fn_80074EC8_00003E80
+    beq lbl_gx_beginQuadBatch_00003E80
     addi r4, r4, 0x1
-lbl_fn_80074EC8_00003E80:
+lbl_gx_beginQuadBatch_00003E80:
     cmpwi r4, 0x4
-    bgt lbl_fn_80074EC8_00003F48
+    bgt lbl_gx_beginQuadBatch_00003F48
     lwz r6, 0x90(r1)
     li r4, 0x0
     li r3, 0x1
     slw r0, r3, r4
     and. r0, r6, r0
-    beq lbl_fn_80074EC8_00003EA4
+    beq lbl_gx_beginQuadBatch_00003EA4
     li r4, 0x1
-lbl_fn_80074EC8_00003EA4:
+lbl_gx_beginQuadBatch_00003EA4:
     li r0, 0x1
     slw r0, r3, r0
     and. r0, r6, r0
-    beq lbl_fn_80074EC8_00003EB8
+    beq lbl_gx_beginQuadBatch_00003EB8
     addi r4, r4, 0x1
-lbl_fn_80074EC8_00003EB8:
+lbl_gx_beginQuadBatch_00003EB8:
     li r0, 0x2
     slw r0, r3, r0
     and. r0, r6, r0
-    beq lbl_fn_80074EC8_00003ECC
+    beq lbl_gx_beginQuadBatch_00003ECC
     addi r4, r4, 0x1
-lbl_fn_80074EC8_00003ECC:
+lbl_gx_beginQuadBatch_00003ECC:
     li r0, 0x3
     slw r0, r3, r0
     and. r0, r6, r0
-    beq lbl_fn_80074EC8_00003EE0
+    beq lbl_gx_beginQuadBatch_00003EE0
     addi r4, r4, 0x1
-lbl_fn_80074EC8_00003EE0:
+lbl_gx_beginQuadBatch_00003EE0:
     cmpwi r4, 0x4
-    bgt lbl_fn_80074EC8_00003F48
+    bgt lbl_gx_beginQuadBatch_00003F48
     lwz r0, 0x70(r1)
     cmpwi r0, 0x0
-    beq lbl_fn_80074EC8_00003F28
+    beq lbl_gx_beginQuadBatch_00003F28
     lwz r0, 0x78(r1)
     li r4, 0x0
     cmpwi r0, 0x4
-    bgt lbl_fn_80074EC8_00003F4C
+    bgt lbl_gx_beginQuadBatch_00003F4C
     lwz r0, 0x7c(r1)
     cmpwi r0, 0x2
-    bgt lbl_fn_80074EC8_00003F4C
+    bgt lbl_gx_beginQuadBatch_00003F4C
     lwz r3, 0x80(r1)
     addi r0, r3, 0x1
     cmpwi r0, 0x2
-    bgt lbl_fn_80074EC8_00003F4C
+    bgt lbl_gx_beginQuadBatch_00003F4C
     li r4, 0x1
-    b lbl_fn_80074EC8_00003F4C
-lbl_fn_80074EC8_00003F28:
+    b lbl_gx_beginQuadBatch_00003F4C
+lbl_gx_beginQuadBatch_00003F28:
     lwz r3, 0x74(r1)
     li r0, 0x8
     srawi r4, r0, 31
@@ -4521,51 +4521,51 @@ lbl_fn_80074EC8_00003F28:
     srwi r3, r6, 31
     subfc r0, r6, r0
     adde r4, r4, r3
-    b lbl_fn_80074EC8_00003F4C
-lbl_fn_80074EC8_00003F48:
+    b lbl_gx_beginQuadBatch_00003F4C
+lbl_gx_beginQuadBatch_00003F48:
     li r4, 0x0
-lbl_fn_80074EC8_00003F4C:
+lbl_gx_beginQuadBatch_00003F4C:
     cmpwi r4, 0x0
-    beq lbl_fn_80074EC8_00003F64
+    beq lbl_gx_beginQuadBatch_00003F64
     lwz r4, 0xc4(r24)
     addi r3, r1, 0x70
     bl fn_80073194
-    b lbl_fn_80074EC8_00003F70
-lbl_fn_80074EC8_00003F64:
+    b lbl_gx_beginQuadBatch_00003F70
+lbl_gx_beginQuadBatch_00003F64:
     lwz r0, 0xc4(r24)
     rlwinm r0, r0, 0, 29, 27
     stw r0, 0xc4(r24)
-lbl_fn_80074EC8_00003F70:
+lbl_gx_beginQuadBatch_00003F70:
     lwz r0, 0x70(r1)
     cmpwi r0, 0x0
-    beq lbl_fn_80074EC8_00003FAC
+    beq lbl_gx_beginQuadBatch_00003FAC
     lwz r3, 0x80(r1)
     cmpwi r3, 0x0
-    ble lbl_fn_80074EC8_00003F90
+    ble lbl_gx_beginQuadBatch_00003F90
     addi r0, r3, 0x6
-    b lbl_fn_80074EC8_00003FC0
-lbl_fn_80074EC8_00003F90:
+    b lbl_gx_beginQuadBatch_00003FC0
+lbl_gx_beginQuadBatch_00003F90:
     lwz r3, 0x7c(r1)
     cmpwi r3, 0x0
-    ble lbl_fn_80074EC8_00003FA4
+    ble lbl_gx_beginQuadBatch_00003FA4
     addi r0, r3, 0x4
-    b lbl_fn_80074EC8_00003FC0
-lbl_fn_80074EC8_00003FA4:
+    b lbl_gx_beginQuadBatch_00003FC0
+lbl_gx_beginQuadBatch_00003FA4:
     lwz r0, 0x78(r1)
-    b lbl_fn_80074EC8_00003FC0
-lbl_fn_80074EC8_00003FAC:
+    b lbl_gx_beginQuadBatch_00003FC0
+lbl_gx_beginQuadBatch_00003FAC:
     lwz r4, 0x78(r1)
     lwz r0, 0x7c(r1)
     lwz r3, 0x80(r1)
     add r0, r4, r0
     add r0, r3, r0
-lbl_fn_80074EC8_00003FC0:
+lbl_gx_beginQuadBatch_00003FC0:
     clrlwi r3, r0, 24
     bl fn_80613BB0
     lwz r0, 0x84(r1)
     clrlwi r3, r0, 24
     bl GXSetNumTevStages
-lbl_fn_80074EC8_00003FD4:
+lbl_gx_beginQuadBatch_00003FD4:
     lmw r15, 0x15c(r1)
     lwz r0, 0x1a4(r1)
     mtlr r0
@@ -5251,11 +5251,11 @@ lbl_fn_8007642C_00004944:
     blr
 }
 
-asm void fn_80076760(void)
+asm void gx_setRenderStateParam(void)
 {
     nofralloc
     cmplwi r4, 0xb
-    bgt lbl_fn_80076760_00004A38
+    bgt lbl_gx_setRenderStateParam_00004A38
     lis r6, jumptable_80777CD8@ha
     slwi r0, r4, 2
     addi r6, r6, jumptable_80777CD8@l
@@ -5265,53 +5265,53 @@ asm void fn_80076760(void)
     lwz r0, 0xd0(r3)
     rlwimi r0, r5, 31, 0, 0
     stw r0, 0xd0(r3)
-    b lbl_fn_80076760_00004A38
+    b lbl_gx_setRenderStateParam_00004A38
     lwz r0, 0xd0(r3)
     rlwimi r0, r5, 28, 1, 3
     stw r0, 0xd0(r3)
-    b lbl_fn_80076760_00004A38
+    b lbl_gx_setRenderStateParam_00004A38
     lwz r0, 0xd0(r3)
     rlwimi r0, r5, 20, 4, 11
     stw r0, 0xd0(r3)
-    b lbl_fn_80076760_00004A38
+    b lbl_gx_setRenderStateParam_00004A38
     lwz r0, 0xd0(r3)
     rlwimi r0, r5, 19, 12, 12
     stw r0, 0xd0(r3)
-    b lbl_fn_80076760_00004A38
+    b lbl_gx_setRenderStateParam_00004A38
     lwz r0, 0xd0(r3)
     rlwimi r0, r5, 16, 13, 15
     stw r0, 0xd0(r3)
-    b lbl_fn_80076760_00004A38
+    b lbl_gx_setRenderStateParam_00004A38
     lwz r0, 0xd0(r3)
     rlwimi r0, r5, 13, 16, 18
     stw r0, 0xd0(r3)
-    b lbl_fn_80076760_00004A38
+    b lbl_gx_setRenderStateParam_00004A38
     lwz r0, 0xd0(r3)
     rlwimi r0, r5, 12, 19, 19
     stw r0, 0xd0(r3)
-    b lbl_fn_80076760_00004A38
+    b lbl_gx_setRenderStateParam_00004A38
     lwz r0, 0xd0(r3)
     rlwimi r0, r5, 11, 20, 20
     stw r0, 0xd0(r3)
-    b lbl_fn_80076760_00004A38
+    b lbl_gx_setRenderStateParam_00004A38
     lwz r0, 0xd0(r3)
     rlwimi r0, r5, 10, 21, 21
     stw r0, 0xd0(r3)
-    b lbl_fn_80076760_00004A38
+    b lbl_gx_setRenderStateParam_00004A38
     lwz r0, 0xd0(r3)
     rlwimi r0, r5, 7, 22, 24
     stw r0, 0xd0(r3)
-    b lbl_fn_80076760_00004A38
+    b lbl_gx_setRenderStateParam_00004A38
     lwz r0, 0xd0(r3)
     rlwimi r0, r5, 6, 25, 25
     stw r0, 0xd0(r3)
-    b lbl_fn_80076760_00004A38
+    b lbl_gx_setRenderStateParam_00004A38
     lwz r0, 0xd0(r3)
     rlwimi r0, r5, 4, 26, 27
     stw r0, 0xd0(r3)
-lbl_fn_80076760_00004A38:
+lbl_gx_setRenderStateParam_00004A38:
     cmplwi r4, 0xb
-    bgt lbl_fn_80076760_00004C08
+    bgt lbl_gx_setRenderStateParam_00004C08
     lis r5, jumptable_80777CA8@ha
     slwi r0, r4, 2
     addi r5, r5, jumptable_80777CA8@l
@@ -5326,7 +5326,7 @@ lbl_fn_80076760_00004A38:
     subf r0, r0, r5
     or r0, r4, r0
     srwi r5, r0, 31
-    b lbl_fn_80076760_00004C0C
+    b lbl_gx_setRenderStateParam_00004C0C
     lwz r4, 0xd4(r3)
     lwz r0, 0xd0(r3)
     extrwi r5, r4, 3, 1
@@ -5335,7 +5335,7 @@ lbl_fn_80076760_00004A38:
     subf r0, r0, r5
     or r0, r4, r0
     rlwinm r5, r0, 2, 30, 30
-    b lbl_fn_80076760_00004C0C
+    b lbl_gx_setRenderStateParam_00004C0C
     lwz r4, 0xd4(r3)
     lwz r0, 0xd0(r3)
     extrwi r5, r4, 8, 4
@@ -5344,7 +5344,7 @@ lbl_fn_80076760_00004A38:
     subf r0, r0, r5
     or r0, r4, r0
     rlwinm r5, r0, 3, 29, 29
-    b lbl_fn_80076760_00004C0C
+    b lbl_gx_setRenderStateParam_00004C0C
     lwz r4, 0xd4(r3)
     lwz r0, 0xd0(r3)
     extrwi r5, r4, 1, 12
@@ -5353,7 +5353,7 @@ lbl_fn_80076760_00004A38:
     subf r0, r0, r5
     or r0, r4, r0
     rlwinm r5, r0, 4, 28, 28
-    b lbl_fn_80076760_00004C0C
+    b lbl_gx_setRenderStateParam_00004C0C
     lwz r4, 0xd4(r3)
     lwz r0, 0xd0(r3)
     extrwi r5, r4, 3, 13
@@ -5362,7 +5362,7 @@ lbl_fn_80076760_00004A38:
     subf r0, r0, r5
     or r0, r4, r0
     rlwinm r5, r0, 5, 27, 27
-    b lbl_fn_80076760_00004C0C
+    b lbl_gx_setRenderStateParam_00004C0C
     lwz r4, 0xd4(r3)
     lwz r0, 0xd0(r3)
     extrwi r5, r4, 3, 16
@@ -5371,7 +5371,7 @@ lbl_fn_80076760_00004A38:
     subf r0, r0, r5
     or r0, r4, r0
     rlwinm r5, r0, 6, 26, 26
-    b lbl_fn_80076760_00004C0C
+    b lbl_gx_setRenderStateParam_00004C0C
     lwz r4, 0xd4(r3)
     lwz r0, 0xd0(r3)
     extrwi r5, r4, 1, 19
@@ -5380,7 +5380,7 @@ lbl_fn_80076760_00004A38:
     subf r0, r0, r5
     or r0, r4, r0
     rlwinm r5, r0, 7, 25, 25
-    b lbl_fn_80076760_00004C0C
+    b lbl_gx_setRenderStateParam_00004C0C
     lwz r4, 0xd4(r3)
     lwz r0, 0xd0(r3)
     extrwi r5, r4, 1, 20
@@ -5389,7 +5389,7 @@ lbl_fn_80076760_00004A38:
     subf r0, r0, r5
     or r0, r4, r0
     rlwinm r5, r0, 8, 24, 24
-    b lbl_fn_80076760_00004C0C
+    b lbl_gx_setRenderStateParam_00004C0C
     lwz r4, 0xd4(r3)
     lwz r0, 0xd0(r3)
     extrwi r5, r4, 1, 21
@@ -5398,7 +5398,7 @@ lbl_fn_80076760_00004A38:
     subf r0, r0, r5
     or r0, r4, r0
     rlwinm r5, r0, 9, 23, 23
-    b lbl_fn_80076760_00004C0C
+    b lbl_gx_setRenderStateParam_00004C0C
     lwz r4, 0xd4(r3)
     lwz r0, 0xd0(r3)
     extrwi r5, r4, 3, 22
@@ -5407,7 +5407,7 @@ lbl_fn_80076760_00004A38:
     subf r0, r0, r5
     or r0, r4, r0
     rlwinm r5, r0, 10, 22, 22
-    b lbl_fn_80076760_00004C0C
+    b lbl_gx_setRenderStateParam_00004C0C
     lwz r4, 0xd4(r3)
     lwz r0, 0xd0(r3)
     extrwi r5, r4, 1, 25
@@ -5416,7 +5416,7 @@ lbl_fn_80076760_00004A38:
     subf r0, r0, r5
     or r0, r4, r0
     rlwinm r5, r0, 11, 21, 21
-    b lbl_fn_80076760_00004C0C
+    b lbl_gx_setRenderStateParam_00004C0C
     lwz r4, 0xd4(r3)
     lwz r0, 0xd0(r3)
     extrwi r5, r4, 2, 26
@@ -5425,10 +5425,10 @@ lbl_fn_80076760_00004A38:
     subf r0, r0, r5
     or r0, r4, r0
     rlwinm r5, r0, 12, 20, 20
-    b lbl_fn_80076760_00004C0C
-lbl_fn_80076760_00004C08:
+    b lbl_gx_setRenderStateParam_00004C0C
+lbl_gx_setRenderStateParam_00004C08:
     li r5, 0x0
-lbl_fn_80076760_00004C0C:
+lbl_gx_setRenderStateParam_00004C0C:
     lwz r4, 0xd8(r3)
     srwi r0, r4, 20
     or r0, r0, r5

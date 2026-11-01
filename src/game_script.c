@@ -49,7 +49,7 @@ extern void GXGetFifoCount(void);
 extern void fn_80612B10(void);
 extern void fn_80612B60(void);
 extern void fn_80612E70(void);
-extern void fn_80613950(void);
+extern void GXInvalidateVtxCache(void);
 extern void GXFlush(void);
 extern void fn_80613FF0(void);
 extern void fn_80614190(void);
@@ -154,7 +154,7 @@ void fn_80071220(void);
 void fn_80071274(void);
 void fn_800713D4(void);
 void fn_8007192C(void);
-void fn_80071AFC(void);
+void gx_syncFrameFifo(void);
 void fn_80071D60(void);
 void fn_80071D68(void);
 void fn_80071D74(void);
@@ -3204,7 +3204,7 @@ lbl_fn_8007192C_00002A24:
     mr r5, r29
     mr r6, r28
     bl fn_806185C0
-    bl fn_80613950
+    bl GXInvalidateVtxCache
     bl GXDrawDone
     addi r11, r1, 0x40
     bl _restgpr_27
@@ -3214,7 +3214,7 @@ lbl_fn_8007192C_00002A24:
     blr
 }
 
-asm void fn_80071AFC(void)
+asm void gx_syncFrameFifo(void)
 {
     nofralloc
     stwu r1, -0x30(r1)
@@ -3244,12 +3244,12 @@ asm void fn_80071AFC(void)
     addi r6, r6, lbl_807C6F68@l
     lhz r4, 0x50(r6)
     cmplwi r4, 0x5
-    bne lbl_fn_80071AFC_00002C34
+    bne lbl_gx_syncFrameFifo_00002C34
     li r0, 0x0
     sth r0, 0x52(r6)
     sth r0, 0x50(r6)
-    b lbl_fn_80071AFC_00002C88
-lbl_fn_80071AFC_00002C34:
+    b lbl_gx_syncFrameFifo_00002C88
+lbl_gx_syncFrameFifo_00002C34:
     lis r3, 0x6666
     addi r5, r4, 0x1
     addi r3, r3, 0x6667
@@ -3263,7 +3263,7 @@ lbl_fn_80071AFC_00002C34:
     sth r3, 0x50(r6)
     clrlwi r3, r3, 16
     cmplw r3, r0
-    bne lbl_fn_80071AFC_00002C88
+    bne lbl_gx_syncFrameFifo_00002C88
     lis r5, lbl_807317C0@ha
     li r4, 0x3fb
     addi r5, r5, lbl_807317C0@l
@@ -3271,7 +3271,7 @@ lbl_fn_80071AFC_00002C34:
     addi r5, r5, 0x2c
     crclr 6
     bl OSPanic
-lbl_fn_80071AFC_00002C88:
+lbl_gx_syncFrameFifo_00002C88:
     lis r5, lbl_807C6F68@ha
     li r0, 0x0
     addi r5, r5, lbl_807C6F68@l
@@ -3285,12 +3285,12 @@ lbl_fn_80071AFC_00002C88:
     bl OSRestoreInterrupts
     lbz r0, lbl_8087EED8
     cmpwi r0, 0x0
-    bne lbl_fn_80071AFC_00002CD0
+    bne lbl_gx_syncFrameFifo_00002CD0
     li r0, 0x1
     stb r0, lbl_8087EED8
     lwz r3, 0x8(r1)
     bl fn_80612B60
-lbl_fn_80071AFC_00002CD0:
+lbl_gx_syncFrameFifo_00002CD0:
     lhz r3, lbl_8087D738
     bl fn_80613FF0
     lwz r8, lbl_8087EFA8
@@ -3339,39 +3339,39 @@ lbl_fn_80071AFC_00002CD0:
     lwz r3, 0x70(r27)
     lwz r0, 0x78(r27)
     cmplw r0, r3
-    bne lbl_fn_80071AFC_00002D98
+    bne lbl_gx_syncFrameFifo_00002D98
     lwz r3, 0x74(r27)
-lbl_fn_80071AFC_00002D98:
+lbl_gx_syncFrameFifo_00002D98:
     stw r3, 0x78(r27)
     bl fn_80612E70
     bl OSDisableInterrupts
     lis r27, lbl_807C6F68@ha
     lis r28, lbl_807C6F60@ha
     addi r27, r27, lbl_807C6F68@l
-    b lbl_fn_80071AFC_00002DC4
-lbl_fn_80071AFC_00002DB4:
+    b lbl_gx_syncFrameFifo_00002DC4
+lbl_gx_syncFrameFifo_00002DB4:
     bl OSRestoreInterrupts
     addi r3, r28, lbl_807C6F60@l
     bl OSSleepThread
     bl OSDisableInterrupts
-lbl_fn_80071AFC_00002DC4:
+lbl_gx_syncFrameFifo_00002DC4:
     lhz r5, 0x50(r27)
     cmplwi r5, 0x5
-    bne lbl_fn_80071AFC_00002DD8
+    bne lbl_gx_syncFrameFifo_00002DD8
     li r0, 0x0
-    b lbl_fn_80071AFC_00002DF8
-lbl_fn_80071AFC_00002DD8:
+    b lbl_gx_syncFrameFifo_00002DF8
+lbl_gx_syncFrameFifo_00002DD8:
     lhz r6, 0x52(r27)
     addi r0, r5, 0x5
     cmplw r5, r6
     subf r4, r6, r0
     addi r0, r4, 0x1
-    blt lbl_fn_80071AFC_00002DF8
+    blt lbl_gx_syncFrameFifo_00002DF8
     subf r4, r6, r5
     addi r0, r4, 0x1
-lbl_fn_80071AFC_00002DF8:
+lbl_gx_syncFrameFifo_00002DF8:
     cmplwi r0, 0x1
-    bgt lbl_fn_80071AFC_00002DB4
+    bgt lbl_gx_syncFrameFifo_00002DB4
     bl OSRestoreInterrupts
     lmw r27, 0x1c(r1)
     lwz r0, 0x34(r1)

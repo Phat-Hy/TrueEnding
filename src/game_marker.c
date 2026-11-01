@@ -13,7 +13,7 @@ extern void _savegpr_27(void);
 extern void fn_8004FF58(void);
 extern void fn_80070B60(void);
 extern void fn_80070C98(void);
-extern void fn_80076760(void);
+extern void gx_setRenderStateParam(void);
 extern void fn_800902C0(void);
 extern void atn_Model_updateMatrices(void);
 extern void fn_80091A90(void);
@@ -834,13 +834,13 @@ lbl_fn_8008E818_00000B24:
     lwz r3, lbl_8087EEE0
     li r4, 0x6
     li r5, 0x2
-    bl fn_80076760
+    bl gx_setRenderStateParam
     b lbl_fn_8008E818_00000B60
 lbl_fn_8008E818_00000B50:
     lwz r3, lbl_8087EEE0
     li r4, 0x6
     li r5, 0x1
-    bl fn_80076760
+    bl gx_setRenderStateParam
 lbl_fn_8008E818_00000B60:
     addi r3, r1, 0xe8
     bl atn_Model_drawSubNodes

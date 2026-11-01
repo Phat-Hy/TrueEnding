@@ -19,10 +19,10 @@ extern void fn_8061AD30(void);
 extern void fn_8061AE90(void);
 extern void fn_8061AFD0(void);
 extern void fn_8061B0B0(void);
-extern void fn_8061B180(void);
-extern void fn_8061B290(void);
-extern void fn_8061B4D0(void);
-extern void fn_8061B5D0(void);
+extern void ISFS_Rename(void);
+extern void ISFS_RenameAsync(void);
+extern void ISFS_CreateFile(void);
+extern void ISFS_CreateFileAsync(void);
 extern void fn_8061B930(void);
 extern void fn_8061B940(void);
 extern void fn_8061B9D0(void);
@@ -251,7 +251,7 @@ lbl_fn_8061FC80_00000264:
     lwz r5, 0x14(r1)
     lwz r6, 0x10(r1)
     lwz r7, 0xc(r1)
-    bl fn_8061B4D0
+    bl ISFS_CreateFile
     cmpwi r3, 0x0
     beq lbl_fn_8061FC80_0000028C
     bl nandConvertErrorCode
@@ -443,7 +443,7 @@ lbl_fn_80620040_000004F4:
     stb r0, 0x89(r29)
     addi r3, r29, 0x48
     addi r4, r29, 0x8
-    bl fn_8061B180
+    bl ISFS_Rename
     cmpwi r3, 0x0
     beq lbl_fn_80620040_00000518
     bl nandConvertErrorCode
@@ -742,7 +742,7 @@ lbl_fn_806203C0_00000918:
     addi r3, r31, 0x48
     lwz r7, 0x2c(r30)
     addi r8, r8, fn_806203C0@l
-    bl fn_8061B5D0
+    bl ISFS_CreateFileAsync
     mr r7, r3
     b lbl_fn_806203C0_00000ABC
     li r0, 0x4
@@ -1055,7 +1055,7 @@ lbl_fn_80620940_00000D58:
     addi r3, r7, 0x48
     addi r4, r7, 0x8
     addi r5, r5, fn_80620940@l
-    bl fn_8061B290
+    bl ISFS_RenameAsync
     mr r6, r3
     b lbl_fn_80620940_00000E38
 lbl_fn_80620940_00000D88:

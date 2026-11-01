@@ -58,11 +58,11 @@ void fn_8061AD30(void);
 void fn_8061AE90(void);
 void fn_8061AFD0(void);
 void fn_8061B0B0(void);
-void fn_8061B180(void);
-void fn_8061B290(void);
-void fn_8061B3A0(void);
-void fn_8061B4D0(void);
-void fn_8061B5D0(void);
+void ISFS_Rename(void);
+void ISFS_RenameAsync(void);
+void ISFS_GetUsageAsync(void);
+void ISFS_CreateFile(void);
+void ISFS_CreateFileAsync(void);
 void ISFS_Open(void);
 void ISFS_OpenAsync(void);
 void fn_8061B860(void);
@@ -908,7 +908,7 @@ lbl_fn_8061B0B0_00000B98:
     blr
 }
 
-asm void fn_8061B180(void)
+asm void ISFS_Rename(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -920,37 +920,37 @@ asm void fn_8061B180(void)
     mr r27, r3
     mr r28, r4
     li r29, 0x0
-    beq lbl_fn_8061B180_00000C18
+    beq lbl_ISFS_Rename_00000C18
     cmpwi r4, 0x0
-    beq lbl_fn_8061B180_00000C18
+    beq lbl_ISFS_Rename_00000C18
     lwz r0, __fsFd_8087E8C0
     cmpwi r0, 0x0
-    blt lbl_fn_8061B180_00000C18
+    blt lbl_ISFS_Rename_00000C18
     li r4, 0x40
     bl strnlen
     cmplwi r3, 0x40
     mr r30, r3
-    beq lbl_fn_8061B180_00000C18
+    beq lbl_ISFS_Rename_00000C18
     mr r3, r28
     li r4, 0x40
     bl strnlen
     cmplwi r3, 0x40
     mr r31, r3
-    bne lbl_fn_8061B180_00000C20
-lbl_fn_8061B180_00000C18:
+    bne lbl_ISFS_Rename_00000C20
+lbl_ISFS_Rename_00000C18:
     li r30, -0x65
-    b lbl_fn_8061B180_00000C80
-lbl_fn_8061B180_00000C20:
+    b lbl_ISFS_Rename_00000C80
+lbl_ISFS_Rename_00000C20:
     lwz r3, hId_808800E4
     li r4, 0x140
     li r5, 0x20
     bl iosAllocAligned
     cmpwi r3, 0x0
     mr r29, r3
-    bne lbl_fn_8061B180_00000C44
+    bne lbl_ISFS_Rename_00000C44
     li r30, -0x16
-    b lbl_fn_8061B180_00000C80
-lbl_fn_8061B180_00000C44:
+    b lbl_ISFS_Rename_00000C80
+lbl_ISFS_Rename_00000C44:
     mr r4, r27
     addi r5, r30, 0x1
     bl memcpy
@@ -966,14 +966,14 @@ lbl_fn_8061B180_00000C44:
     li r8, 0x0
     bl fn_8061D080
     mr r30, r3
-lbl_fn_8061B180_00000C80:
+lbl_ISFS_Rename_00000C80:
     cmpwi r29, 0x0
-    beq lbl_fn_8061B180_00000C98
-    beq lbl_fn_8061B180_00000C98
+    beq lbl_ISFS_Rename_00000C98
+    beq lbl_ISFS_Rename_00000C98
     lwz r3, hId_808800E4
     mr r4, r29
     bl iosFree
-lbl_fn_8061B180_00000C98:
+lbl_ISFS_Rename_00000C98:
     addi r11, r1, 0x20
     mr r3, r30
     bl _restgpr_27
@@ -983,7 +983,7 @@ lbl_fn_8061B180_00000C98:
     blr
 }
 
-asm void fn_8061B290(void)
+asm void ISFS_RenameAsync(void)
 {
     nofralloc
     stwu r1, -0x30(r1)
@@ -996,37 +996,37 @@ asm void fn_8061B290(void)
     mr r26, r4
     mr r27, r5
     mr r28, r6
-    beq lbl_fn_8061B290_00000D2C
+    beq lbl_ISFS_RenameAsync_00000D2C
     cmpwi r4, 0x0
-    beq lbl_fn_8061B290_00000D2C
+    beq lbl_ISFS_RenameAsync_00000D2C
     lwz r0, __fsFd_8087E8C0
     cmpwi r0, 0x0
-    blt lbl_fn_8061B290_00000D2C
+    blt lbl_ISFS_RenameAsync_00000D2C
     li r4, 0x40
     bl strnlen
     cmplwi r3, 0x40
     mr r30, r3
-    beq lbl_fn_8061B290_00000D2C
+    beq lbl_ISFS_RenameAsync_00000D2C
     mr r3, r26
     li r4, 0x40
     bl strnlen
     cmplwi r3, 0x40
     mr r31, r3
-    bne lbl_fn_8061B290_00000D34
-lbl_fn_8061B290_00000D2C:
+    bne lbl_ISFS_RenameAsync_00000D34
+lbl_ISFS_RenameAsync_00000D2C:
     li r3, -0x65
-    b lbl_fn_8061B290_00000DAC
-lbl_fn_8061B290_00000D34:
+    b lbl_ISFS_RenameAsync_00000DAC
+lbl_ISFS_RenameAsync_00000D34:
     lwz r3, hId_808800E4
     li r4, 0x140
     li r5, 0x20
     bl iosAllocAligned
     cmpwi r3, 0x0
     mr r29, r3
-    bne lbl_fn_8061B290_00000D58
+    bne lbl_ISFS_RenameAsync_00000D58
     li r3, -0x76
-    b lbl_fn_8061B290_00000DAC
-lbl_fn_8061B290_00000D58:
+    b lbl_ISFS_RenameAsync_00000DAC
+lbl_ISFS_RenameAsync_00000D58:
     stw r27, 0x100(r3)
     li r0, 0x0
     mr r4, r25
@@ -1048,7 +1048,7 @@ lbl_fn_8061B290_00000D58:
     li r7, 0x0
     li r8, 0x0
     bl IOS_IoctlAsync
-lbl_fn_8061B290_00000DAC:
+lbl_ISFS_RenameAsync_00000DAC:
     addi r11, r1, 0x30
     bl _restgpr_25
     lwz r0, 0x34(r1)
@@ -1057,7 +1057,7 @@ lbl_fn_8061B290_00000DAC:
     blr
 }
 
-asm void fn_8061B3A0(void)
+asm void ISFS_GetUsageAsync(void)
 {
     nofralloc
     stwu r1, -0x30(r1)
@@ -1071,33 +1071,33 @@ asm void fn_8061B3A0(void)
     mr r27, r5
     mr r31, r6
     mr r28, r7
-    beq lbl_fn_8061B3A0_00000E30
+    beq lbl_ISFS_GetUsageAsync_00000E30
     lwz r0, __fsFd_8087E8C0
     cmpwi r0, 0x0
-    blt lbl_fn_8061B3A0_00000E30
+    blt lbl_ISFS_GetUsageAsync_00000E30
     cmpwi r4, 0x0
-    beq lbl_fn_8061B3A0_00000E30
+    beq lbl_ISFS_GetUsageAsync_00000E30
     cmpwi r5, 0x0
-    beq lbl_fn_8061B3A0_00000E30
+    beq lbl_ISFS_GetUsageAsync_00000E30
     li r4, 0x40
     bl strnlen
     cmplwi r3, 0x40
     mr r30, r3
-    bne lbl_fn_8061B3A0_00000E38
-lbl_fn_8061B3A0_00000E30:
+    bne lbl_ISFS_GetUsageAsync_00000E38
+lbl_ISFS_GetUsageAsync_00000E30:
     li r3, -0x65
-    b lbl_fn_8061B3A0_00000EDC
-lbl_fn_8061B3A0_00000E38:
+    b lbl_ISFS_GetUsageAsync_00000EDC
+lbl_ISFS_GetUsageAsync_00000E38:
     lwz r3, hId_808800E4
     li r4, 0x140
     li r5, 0x20
     bl iosAllocAligned
     cmpwi r3, 0x0
     mr r29, r3
-    bne lbl_fn_8061B3A0_00000E5C
+    bne lbl_ISFS_GetUsageAsync_00000E5C
     li r3, -0x76
-    b lbl_fn_8061B3A0_00000EDC
-lbl_fn_8061B3A0_00000E5C:
+    b lbl_ISFS_GetUsageAsync_00000EDC
+lbl_ISFS_GetUsageAsync_00000E5C:
     stw r31, 0x100(r3)
     li r31, 0x4
     addi r0, r3, 0x37
@@ -1130,7 +1130,7 @@ lbl_fn_8061B3A0_00000E5C:
     stw r31, 0x14(r29)
     lwz r3, __fsFd_8087E8C0
     bl fn_8061D2F0
-lbl_fn_8061B3A0_00000EDC:
+lbl_ISFS_GetUsageAsync_00000EDC:
     addi r11, r1, 0x30
     bl _restgpr_25
     lwz r0, 0x34(r1)
@@ -1139,7 +1139,7 @@ lbl_fn_8061B3A0_00000EDC:
     blr
 }
 
-asm void fn_8061B4D0(void)
+asm void ISFS_CreateFile(void)
 {
     nofralloc
     stwu r1, -0x30(r1)
@@ -1154,29 +1154,29 @@ asm void fn_8061B4D0(void)
     mr r28, r6
     mr r29, r7
     li r30, 0x0
-    beq lbl_fn_8061B4D0_00000F54
+    beq lbl_ISFS_CreateFile_00000F54
     lwz r0, __fsFd_8087E8C0
     cmpwi r0, 0x0
-    blt lbl_fn_8061B4D0_00000F54
+    blt lbl_ISFS_CreateFile_00000F54
     li r4, 0x40
     bl strnlen
     cmplwi r3, 0x40
     mr r31, r3
-    bne lbl_fn_8061B4D0_00000F5C
-lbl_fn_8061B4D0_00000F54:
+    bne lbl_ISFS_CreateFile_00000F5C
+lbl_ISFS_CreateFile_00000F54:
     li r31, -0x65
-    b lbl_fn_8061B4D0_00000FC0
-lbl_fn_8061B4D0_00000F5C:
+    b lbl_ISFS_CreateFile_00000FC0
+lbl_ISFS_CreateFile_00000F5C:
     lwz r3, hId_808800E4
     li r4, 0x140
     li r5, 0x20
     bl iosAllocAligned
     cmpwi r3, 0x0
     mr r30, r3
-    bne lbl_fn_8061B4D0_00000F80
+    bne lbl_ISFS_CreateFile_00000F80
     li r31, -0x16
-    b lbl_fn_8061B4D0_00000FC0
-lbl_fn_8061B4D0_00000F80:
+    b lbl_ISFS_CreateFile_00000FC0
+lbl_ISFS_CreateFile_00000F80:
     mr r4, r25
     addi r5, r31, 0x1
     addi r3, r3, 0x6
@@ -1193,14 +1193,14 @@ lbl_fn_8061B4D0_00000F80:
     lwz r3, __fsFd_8087E8C0
     bl fn_8061D080
     mr r31, r3
-lbl_fn_8061B4D0_00000FC0:
+lbl_ISFS_CreateFile_00000FC0:
     cmpwi r30, 0x0
-    beq lbl_fn_8061B4D0_00000FD8
-    beq lbl_fn_8061B4D0_00000FD8
+    beq lbl_ISFS_CreateFile_00000FD8
+    beq lbl_ISFS_CreateFile_00000FD8
     lwz r3, hId_808800E4
     mr r4, r30
     bl iosFree
-lbl_fn_8061B4D0_00000FD8:
+lbl_ISFS_CreateFile_00000FD8:
     addi r11, r1, 0x30
     mr r3, r31
     bl _restgpr_25
@@ -1210,7 +1210,7 @@ lbl_fn_8061B4D0_00000FD8:
     blr
 }
 
-asm void fn_8061B5D0(void)
+asm void ISFS_CreateFileAsync(void)
 {
     nofralloc
     stwu r1, -0x30(r1)
@@ -1226,29 +1226,29 @@ asm void fn_8061B5D0(void)
     mr r27, r7
     mr r28, r8
     mr r29, r9
-    beq lbl_fn_8061B5D0_00001058
+    beq lbl_ISFS_CreateFileAsync_00001058
     lwz r0, __fsFd_8087E8C0
     cmpwi r0, 0x0
-    blt lbl_fn_8061B5D0_00001058
+    blt lbl_ISFS_CreateFileAsync_00001058
     li r4, 0x40
     bl strnlen
     cmplwi r3, 0x40
     mr r31, r3
-    bne lbl_fn_8061B5D0_00001060
-lbl_fn_8061B5D0_00001058:
+    bne lbl_ISFS_CreateFileAsync_00001060
+lbl_ISFS_CreateFileAsync_00001058:
     li r3, -0x65
-    b lbl_fn_8061B5D0_000010DC
-lbl_fn_8061B5D0_00001060:
+    b lbl_ISFS_CreateFileAsync_000010DC
+lbl_ISFS_CreateFileAsync_00001060:
     lwz r3, hId_808800E4
     li r4, 0x140
     li r5, 0x20
     bl iosAllocAligned
     cmpwi r3, 0x0
     mr r30, r3
-    bne lbl_fn_8061B5D0_00001084
+    bne lbl_ISFS_CreateFileAsync_00001084
     li r3, -0x76
-    b lbl_fn_8061B5D0_000010DC
-lbl_fn_8061B5D0_00001084:
+    b lbl_ISFS_CreateFileAsync_000010DC
+lbl_ISFS_CreateFileAsync_00001084:
     stw r28, 0x100(r3)
     li r0, 0x0
     mr r4, r23
@@ -1271,7 +1271,7 @@ lbl_fn_8061B5D0_00001084:
     stb r27, 0x48(r30)
     lwz r3, __fsFd_8087E8C0
     bl IOS_IoctlAsync
-lbl_fn_8061B5D0_000010DC:
+lbl_ISFS_CreateFileAsync_000010DC:
     addi r11, r1, 0x30
     bl _restgpr_23
     lwz r0, 0x34(r1)

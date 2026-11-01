@@ -37,7 +37,7 @@ extern void fn_800C7CA8(void);
 extern void fn_800DC6B4(void);
 extern void fn_800DF154(void);
 extern void atn_LoadHandle_constructor(void);
-extern void fn_80473FCC(void);
+extern void taskManager_updateTasks(void);
 extern void fn_80475DF8(void);
 extern void fn_80680770(void);
 extern void fn_80686EA4(void);
@@ -541,7 +541,7 @@ lbl_fn_800C5644_00000660:
 lbl_fn_800C5644_00000690:
     mr r3, r20
     mr r4, r15
-    bl fn_80473FCC
+    bl taskManager_updateTasks
     lwz r4, 0x10(r22)
     lwz r3, 0x14(r22)
     cmplw r4, r3

@@ -39,7 +39,7 @@ extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_getStatus(void);
 extern void fn_80473F88(void);
-extern void fn_80473FCC(void);
+extern void taskManager_updateTasks(void);
 extern void fn_805F9EF0(void);
 extern void fn_8068236C(void);
 extern void fn_80682428(void);
@@ -902,7 +902,7 @@ asm void fn_8046DC5C(void)
     addi r3, r3, lbl_8078FBB0@l
     stw r3, 0x8(r1)
     addi r3, r1, 0x8
-    bl fn_80473FCC
+    bl taskManager_updateTasks
     addi r3, r1, 0x8
     bl fn_8047059C
     stw r3, 0x0(r30)

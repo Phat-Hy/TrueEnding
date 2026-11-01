@@ -5,7 +5,7 @@
 extern void OSSleepTicks(void);
 extern void __files(void);
 extern void dtor_80084684(void);
-extern void fn_8006A950(void);
+extern void atn_normalizePath(void);
 extern void fn_8006B404(void);
 extern void fn_80070E14(void);
 extern void fn_80076C44(void);
@@ -95,7 +95,7 @@ void atn_LoadHandle_getName(void);
 void atn_LoadHandle_getData(void);
 void atn_LoadHandle_isLoading(void);
 void fn_80473F88(void);
-void fn_80473FCC(void);
+void taskManager_updateTasks(void);
 void fn_804741C0(void);
 void atn_LoadMaterial_constructor(void);
 void atn_LoadMaterial_destructor(void);
@@ -240,7 +240,7 @@ asm void fn_80473C88(void)
     mr r28, r5
     bl fn_8046D1EC
     addi r3, r1, 0x10
-    bl fn_8006A950
+    bl atn_normalizePath
     addi r3, r1, 0x10
     bl fn_8006B404
     addi r3, r1, 0x10
@@ -492,7 +492,7 @@ lbl_fn_80473F88_00000498:
     blr
 }
 
-asm void fn_80473FCC(void)
+asm void taskManager_updateTasks(void)
 {
     nofralloc
     stwu r1, -0x70(r1)
@@ -506,7 +506,7 @@ asm void fn_80473FCC(void)
     bctrl
     lwz r0, 0x4(r20)
     cmpwi r0, 0x0
-    beq lbl_fn_80473FCC_0000068C
+    beq lbl_taskManager_updateTasks_0000068C
     lis r25, lbl_80775B60@ha
     lis r30, lbl_80775B98@ha
     lis r31, lbl_80775B30@ha
@@ -521,7 +521,7 @@ asm void fn_80473FCC(void)
     lis r27, lbl_80775BC8@ha
     li r29, 0x1
     lis r18, 0x8000
-lbl_fn_80473FCC_00000514:
+lbl_taskManager_updateTasks_00000514:
     lwz r3, lbl_8087F518
     lwz r12, 0x0(r3)
     lwz r12, 0x10(r12)
@@ -529,16 +529,16 @@ lbl_fn_80473FCC_00000514:
     bctrl
     lwz r21, g_TaskManager
     cmpwi r21, 0x0
-    beq lbl_fn_80473FCC_00000620
+    beq lbl_taskManager_updateTasks_00000620
     li r23, 0x0
     li r19, 0x0
-    b lbl_fn_80473FCC_00000614
-lbl_fn_80473FCC_00000540:
+    b lbl_taskManager_updateTasks_00000614
+lbl_taskManager_updateTasks_00000540:
     lwz r0, 0x8(r21)
     add r22, r0, r19
     lwzx r0, r19, r0
     cmpwi r0, 0x0
-    bne lbl_fn_80473FCC_000005F8
+    bne lbl_taskManager_updateTasks_000005F8
     stw r25, 0x18(r1)
     addi r3, r27, lbl_80775BC8@l
     stb r26, 0x8(r1)
@@ -554,19 +554,19 @@ lbl_fn_80473FCC_00000540:
     stw r28, 0x14(r1)
     bl fn_800844D8
     cmpwi r3, 0x0
-    beq lbl_fn_80473FCC_000005A4
+    beq lbl_taskManager_updateTasks_000005A4
     stw r29, 0x4(r3)
     stw r29, 0x8(r3)
     stw r30, 0x0(r3)
     stw r16, 0xc(r3)
-lbl_fn_80473FCC_000005A4:
+lbl_taskManager_updateTasks_000005A4:
     cmpwi r26, 0x0
     stw r3, 0x20(r1)
     stw r26, 0x10(r1)
-    beq lbl_fn_80473FCC_000005BC
+    beq lbl_taskManager_updateTasks_000005BC
     li r3, 0x0
     bl fn_80084C24
-lbl_fn_80473FCC_000005BC:
+lbl_taskManager_updateTasks_000005BC:
     lwz r3, 0x1c(r1)
     addi r4, r27, lbl_80775BC8@l
     bl strcpy
@@ -574,15 +574,15 @@ lbl_fn_80473FCC_000005BC:
     addi r3, r1, 0x18
     bl fn_800DCA6C
     cmpwi r24, 0x0
-    beq lbl_fn_80473FCC_000005F8
+    beq lbl_taskManager_updateTasks_000005F8
     addic. r3, r24, 0x4
-    beq lbl_fn_80473FCC_000005F8
-    beq lbl_fn_80473FCC_000005F8
+    beq lbl_taskManager_updateTasks_000005F8
+    beq lbl_taskManager_updateTasks_000005F8
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_80473FCC_000005F8
+    beq lbl_taskManager_updateTasks_000005F8
     bl fn_806952C4
-lbl_fn_80473FCC_000005F8:
+lbl_taskManager_updateTasks_000005F8:
     lwz r4, 0x0(r22)
     addi r3, r22, 0x4
     lwz r12, 0x4(r4)
@@ -590,11 +590,11 @@ lbl_fn_80473FCC_000005F8:
     bctrl
     addi r23, r23, 0x1
     addi r19, r19, 0x14
-lbl_fn_80473FCC_00000614:
+lbl_taskManager_updateTasks_00000614:
     lwz r0, 0x0(r21)
     cmplw r23, r0
-    blt lbl_fn_80473FCC_00000540
-lbl_fn_80473FCC_00000620:
+    blt lbl_taskManager_updateTasks_00000540
+lbl_taskManager_updateTasks_00000620:
     lwz r3, 0x4(r20)
     lwz r12, 0x0(r3)
     lwz r12, 0xc(r12)
@@ -602,29 +602,29 @@ lbl_fn_80473FCC_00000620:
     bctrl
     lwz r4, 0x4(r20)
     cmpwi r4, 0x0
-    beq lbl_fn_80473FCC_00000664
+    beq lbl_taskManager_updateTasks_00000664
     lbz r3, 0x4(r4)
     li r0, 0x1
     cmpwi r3, 0x1
-    beq lbl_fn_80473FCC_00000668
+    beq lbl_taskManager_updateTasks_00000668
     lbz r3, 0x4(r4)
     cmpwi r3, 0x2
-    beq lbl_fn_80473FCC_00000668
+    beq lbl_taskManager_updateTasks_00000668
     li r0, 0x0
-    b lbl_fn_80473FCC_00000668
-lbl_fn_80473FCC_00000664:
+    b lbl_taskManager_updateTasks_00000668
+lbl_taskManager_updateTasks_00000664:
     li r0, 0x0
-lbl_fn_80473FCC_00000668:
+lbl_taskManager_updateTasks_00000668:
     cmpwi r0, 0x0
-    beq lbl_fn_80473FCC_0000068C
+    beq lbl_taskManager_updateTasks_0000068C
     lwz r0, 0xf8(r18)
     li r3, 0x0
     srwi r0, r0, 2
     mulhwu r0, r17, r0
     srwi r4, r0, 6
     bl OSSleepTicks
-    b lbl_fn_80473FCC_00000514
-lbl_fn_80473FCC_0000068C:
+    b lbl_taskManager_updateTasks_00000514
+lbl_taskManager_updateTasks_0000068C:
     lmw r16, 0x30(r1)
     lwz r0, 0x74(r1)
     mtlr r0
@@ -991,7 +991,7 @@ asm void fn_80474678(void)
     mr r28, r5
     bl fn_8046D1EC
     addi r3, r1, 0x10
-    bl fn_8006A950
+    bl atn_normalizePath
     addi r3, r1, 0x10
     bl fn_8006B404
     addi r3, r1, 0x10
