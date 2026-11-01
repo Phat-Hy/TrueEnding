@@ -85,7 +85,7 @@ void fn_8023A60C(void);
 void fn_8023A614(void);
 void fn_8023A664(void);
 void fn_8023A678(void);
-void fn_8023A680(void);
+void res_Shader_bindParams(void);
 void res_registerResource(void);
 void fn_8023AE34(void);
 
@@ -933,7 +933,7 @@ asm void fn_8023A678(void)
     b fn_8022BEAC
 }
 
-asm void fn_8023A680(void)
+asm void res_Shader_bindParams(void)
 {
     nofralloc
     stwu r1, -0xe0(r1)
@@ -956,10 +956,10 @@ asm void fn_8023A680(void)
     mr r24, r8
     mr r25, r9
     mr r26, r10
-    bne lbl_fn_8023A680_00000B0C
+    bne lbl_res_Shader_bindParams_00000B0C
     li r3, 0x0
-    b lbl_fn_8023A680_00000CC4
-lbl_fn_8023A680_00000B0C:
+    b lbl_res_Shader_bindParams_00000CC4
+lbl_res_Shader_bindParams_00000B0C:
     mr r3, r20
     bl fn_80232AC4
     lwz r4, 0x0(r20)
@@ -977,7 +977,7 @@ lbl_fn_8023A680_00000B0C:
     lwz r0, 0xf0(r31)
     mr r30, r3
     cmpwi r0, 0x0
-    beq lbl_fn_8023A680_00000B94
+    beq lbl_res_Shader_bindParams_00000B94
     addi r3, r20, 0x4
     li r29, 0x0
     bl atn_LoadHandle_getName
@@ -986,22 +986,22 @@ lbl_fn_8023A680_00000B0C:
     addi r4, r4, 0xd
     bl strstr
     cmpwi r3, 0x0
-    beq lbl_fn_8023A680_00000B7C
+    beq lbl_res_Shader_bindParams_00000B7C
     ori r29, r29, 0x18
-lbl_fn_8023A680_00000B7C:
+lbl_res_Shader_bindParams_00000B7C:
     cmpwi r29, 0x0
-    beq lbl_fn_8023A680_00000B94
+    beq lbl_res_Shader_bindParams_00000B94
     mr r4, r30
     mr r5, r29
     addi r3, r31, 0x4c
     bl fn_802348E4
-lbl_fn_8023A680_00000B94:
+lbl_res_Shader_bindParams_00000B94:
     lwz r0, 0xcc(r31)
     cmpwi r0, 0x0
-    beq lbl_fn_8023A680_00000CC0
+    beq lbl_res_Shader_bindParams_00000CC0
     lwz r0, 0xd0(r31)
     cmpwi r0, 0x0
-    bne lbl_fn_8023A680_00000CC0
+    bne lbl_res_Shader_bindParams_00000CC0
     li r0, 0x0
     stw r0, 0x38(r1)
     stw r20, 0x3c(r1)
@@ -1018,30 +1018,30 @@ lbl_fn_8023A680_00000B94:
     stw r21, 0x40(r1)
     stw r22, 0x44(r1)
     stw r23, 0x48(r1)
-    beq lbl_fn_8023A680_00000BF4
-    b lbl_fn_8023A680_00000C08
-lbl_fn_8023A680_00000BF4:
+    beq lbl_res_Shader_bindParams_00000BF4
+    b lbl_res_Shader_bindParams_00000C08
+lbl_res_Shader_bindParams_00000BF4:
     lfs f0, lbl_80883160
     addi r24, r1, 0x2c
     stfs f0, 0x2c(r1)
     stfs f0, 0x30(r1)
     stfs f0, 0x34(r1)
-lbl_fn_8023A680_00000C08:
+lbl_res_Shader_bindParams_00000C08:
     psq_l f1, 0x0(r24), 0, 0
     cmpwi r25, 0x0
     lfs f2, 0x8(r24)
     addi r3, r1, 0x4c
     stfs f2, 0x54(r1)
     psq_st f1, 0x0(r3), 0, 0
-    beq lbl_fn_8023A680_00000C28
-    b lbl_fn_8023A680_00000C3C
-lbl_fn_8023A680_00000C28:
+    beq lbl_res_Shader_bindParams_00000C28
+    b lbl_res_Shader_bindParams_00000C3C
+lbl_res_Shader_bindParams_00000C28:
     lfs f0, lbl_80883160
     addi r25, r1, 0x20
     stfs f0, 0x20(r1)
     stfs f0, 0x24(r1)
     stfs f0, 0x28(r1)
-lbl_fn_8023A680_00000C3C:
+lbl_res_Shader_bindParams_00000C3C:
     psq_l f1, 0x0(r25), 0, 0
     cmpwi r26, 0x0
     lfs f2, 0x8(r25)
@@ -1049,16 +1049,16 @@ lbl_fn_8023A680_00000C3C:
     stfs f2, 0x60(r1)
     psq_st f1, 0x0(r3), 0, 0
     stfs f31, 0x64(r1)
-    beq lbl_fn_8023A680_00000C60
-    b lbl_fn_8023A680_00000C78
-lbl_fn_8023A680_00000C60:
+    beq lbl_res_Shader_bindParams_00000C60
+    b lbl_res_Shader_bindParams_00000C78
+lbl_res_Shader_bindParams_00000C60:
     lfs f0, lbl_80883164
     addi r26, r1, 0x10
     stfs f0, 0x10(r1)
     stfs f0, 0x14(r1)
     stfs f0, 0x18(r1)
     stfs f0, 0x1c(r1)
-lbl_fn_8023A680_00000C78:
+lbl_res_Shader_bindParams_00000C78:
     lfs f0, 0x0(r26)
     addi r4, r1, 0x38
     stfs f0, 0x68(r1)
@@ -1077,9 +1077,9 @@ lbl_fn_8023A680_00000C78:
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-lbl_fn_8023A680_00000CC0:
+lbl_res_Shader_bindParams_00000CC0:
     mr r3, r30
-lbl_fn_8023A680_00000CC4:
+lbl_res_Shader_bindParams_00000CC4:
     addi r11, r1, 0xd0
     psq_l f31, 0xd8(r1), 0, 0
     lfd f31, 0xd0(r1)
@@ -1889,7 +1889,7 @@ lbl_fn_8023AE34_000017A0:
     stw r29, 0x10(r1)
     addi r10, r1, 0x20
     lha r5, 0x46(r20)
-    bl fn_8023A680
+    bl res_Shader_bindParams
     mr r4, r18
     addi r3, r15, 0x4c
     addi r5, r20, 0x34

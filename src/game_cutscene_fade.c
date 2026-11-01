@@ -8,7 +8,7 @@ extern void fn_80041A28(void);
 extern void collision_testLineSegment(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8C6C(void);
+extern void scissor_clipFrustum(void);
 extern void fn_801562A0(void);
 extern void fn_8015783C(void);
 extern void fn_8015802C(void);
@@ -17,7 +17,7 @@ extern void fn_80161570(void);
 extern void fn_8016ADF4(void);
 extern void fn_8016D74C(void);
 extern void fn_80170A20(void);
-extern void fn_80179D44(void);
+extern void actor_getMovementFlags(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
@@ -189,7 +189,7 @@ lbl_fn_80331094_000000F4:
     fadds f0, f0, f4
     stfs f3, 0x18(r1)
     stfs f0, 0x24(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     oris r7, r3, 0x8000
     mr r3, r27
     mr r5, r29
@@ -454,7 +454,7 @@ lbl_fn_8033135C_00000524:
     lfs f1, lbl_80885078
     li r9, 0xa
     lwz r10, 0x594(r31)
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     b lbl_fn_8033135C_00000650
 lbl_fn_8033135C_00000574:
     lfs f7, 0x2e4(r31)
@@ -475,7 +475,7 @@ lbl_fn_8033135C_00000574:
     lfs f1, lbl_80885078
     li r9, 0xa
     lwz r10, 0x594(r31)
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     b lbl_fn_8033135C_00000650
 lbl_fn_8033135C_000005C4:
     lfs f7, 0x2e4(r31)
@@ -496,7 +496,7 @@ lbl_fn_8033135C_000005C4:
     lfs f1, lbl_80885078
     li r9, 0xa
     lwz r10, 0x594(r31)
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     cmpwi r3, 0x0
     beq lbl_fn_8033135C_00000650
     lwz r3, lbl_8087F8A0

@@ -6,23 +6,23 @@ extern void __register_global_object(void);
 extern void _restgpr_18(void);
 extern void _savegpr_18(void);
 extern void dtor_80084684(void);
-extern void fn_8003EFB0(void);
+extern void ui_destroyWidget(void);
 extern void mem_alloc(void);
-extern void fn_800BFAC8(void);
+extern void motion_updateFogAdj(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void str_findChar(void);
 extern void fn_800FDE60(void);
-extern void fn_80116FC0(void);
+extern void actor_findSpawnTemplate(void);
 extern void fn_8012D8B8(void);
 extern void fn_801446F0(void);
 extern void fn_8016E4C4(void);
 extern void fn_80176ACC(void);
 extern void save_validateHeader(void);
 extern void fn_801F4AA0(void);
-extern void fn_801F4CB4(void);
+extern void save_formatSlotTitle(void);
 extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
 extern void thread_dispatchToQueue(void);
@@ -2798,11 +2798,11 @@ asm void fn_805010C4(void)
     lis r3, lbl_807C6BB8@ha
     li r0, 0x0
     stwu r0, lbl_807C6BB8@l(r3)
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     li r31, 0x1
     lis r5, lbl_807C8F98@ha
     stw r0, 0x4(r3)
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     addi r5, r5, lbl_807C8F98@l
     stw r0, 0x8(r3)
     stw r31, 0xc(r3)
@@ -2832,11 +2832,11 @@ lbl_fn_805010C4_00001360:
     lis r3, lbl_807C6BB8@ha
     li r0, 0x0
     stwu r0, lbl_807C6BB8@l(r3)
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     li r31, 0x1
     lis r5, lbl_807C8F98@ha
     stw r0, 0x4(r3)
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     addi r5, r5, lbl_807C8F98@l
     stw r0, 0x8(r3)
     stw r31, 0xc(r3)
@@ -3075,7 +3075,7 @@ asm void fn_80501494(void)
     stw r31, 0xc(r1)
     mr r31, r3
     stw r30, 0x8(r1)
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_80501494_00001768
     addi r30, r31, 0x4c
@@ -3399,7 +3399,7 @@ lbl_fn_8050158C_00001AE4:
     addi r3, r1, 0x14
     lwz r4, lbl_8087EFB4
     addi r5, r5, 0x1a4
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f0, 0x1c(r1)
     fcmpo cr0, f31, f0
     cror eq, lt, eq
@@ -3477,10 +3477,10 @@ lbl_fn_8050158C_00001BC8:
     mr r5, r18
     addi r4, r20, 0x1a
     li r6, 0x0
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     li r3, 0x0
     li r4, 0x79
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     mr r19, r3
     addi r3, r20, 0x28
     bl str_findChar
@@ -3544,10 +3544,10 @@ lbl_fn_8050158C_00001D24:
     addi r4, r20, 0x1a
     neg r5, r18
     li r6, 0x0
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     li r3, 0x0
     li r4, 0x72
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     mr r19, r3
     addi r3, r20, 0x28
     bl str_findChar
@@ -3610,7 +3610,7 @@ lbl_fn_8050158C_00001E2C:
     addi r4, r20, 0x1a
     li r5, 0x0
     li r6, 0x0
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     addi r19, r22, 0xa
     addi r3, r20, 0x28
     bl str_findChar
@@ -3673,10 +3673,10 @@ lbl_fn_8050158C_00001F20:
     mr r5, r25
     addi r4, r20, 0x7f
     li r6, 0x0
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     li r3, 0x0
     li r4, 0x79
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     mr r19, r3
     addi r3, r20, 0x8d
     bl str_findChar
@@ -3740,10 +3740,10 @@ lbl_fn_8050158C_00002028:
     addi r4, r20, 0x7f
     neg r5, r25
     li r6, 0x0
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     li r3, 0x0
     li r4, 0x72
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     mr r19, r3
     addi r3, r20, 0x8d
     bl str_findChar
@@ -3806,7 +3806,7 @@ lbl_fn_8050158C_00002130:
     addi r4, r20, 0x7f
     li r5, 0x0
     li r6, 0x0
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     addi r19, r22, 0xa
     addi r3, r20, 0x8d
     bl str_findChar

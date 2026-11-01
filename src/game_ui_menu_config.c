@@ -9,7 +9,7 @@ extern void dtor_80084684(void);
 extern void fn_8004ECC0(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_8008BBD8(void);
+extern void map_debugLog(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
@@ -20,8 +20,8 @@ extern void fn_801070C8(void);
 extern void fn_8010CB2C(void);
 extern void fn_8011BF3C(void);
 extern void fn_801240B4(void);
-extern void fn_8016DA4C(void);
-extern void fn_8016F3D0(void);
+extern void debuff_clearStatus(void);
+extern void battle_canTargetActor(void);
 extern void fn_801B2EDC(void);
 extern void fn_801C3458(void);
 extern void fn_801C3D1C(void);
@@ -30,7 +30,7 @@ extern void task_findEntryById(void);
 extern void fn_8021FD7C(void);
 extern void fn_8036DAA8(void);
 extern void fn_803E2110(void);
-extern void fn_803EA77C(void);
+extern void chest_spawnLoot(void);
 extern void fn_805ADCC4(void);
 extern void fn_805ADD84(void);
 extern void PSMTXRotRad(void);
@@ -448,7 +448,7 @@ lbl_fn_801BC97C_000004C0:
     stw r3, 0x63c(r4)
     stw r0, 0x638(r4)
     lwz r3, 0x4(r25)
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     li r28, 0x1
     b lbl_fn_801BC97C_00000B58
 lbl_fn_801BC97C_000004EC:
@@ -1244,7 +1244,7 @@ lbl_fn_801BC97C_00001080:
     cmpwi r0, 0x0
     beq lbl_fn_801BC97C_000010B0
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     bne lbl_fn_801BC97C_000010B0
     lwz r3, 0x4(r25)
@@ -1383,7 +1383,7 @@ lbl_fn_801BDA9C_00001268:
     stw r4, 0xa8(r1)
     stw r0, 0xac(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_801BDA9C_00001354
     lwz r8, 0x98(r1)
@@ -1511,7 +1511,7 @@ lbl_fn_801BDA9C_00001450:
     stw r4, 0x74(r1)
     stw r0, 0x78(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_801BDA9C_00001524
     lwz r7, 0x68(r1)
@@ -2112,7 +2112,7 @@ lbl_fn_801BE10C_00001CBC:
     lfs f1, lbl_808825E8
     li r6, 0x0
     lfs f2, lbl_80882608
-    bl fn_803EA77C
+    bl chest_spawnLoot
     b lbl_fn_801BE10C_00001D08
 lbl_fn_801BE10C_00001CE4:
     lwz r3, lbl_8087F498
@@ -2123,7 +2123,7 @@ lbl_fn_801BE10C_00001CE4:
     lfs f1, lbl_808825E8
     li r6, 0x0
     lfs f2, lbl_80882608
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_801BE10C_00001D08:
     lwz r31, 0x13c(r1)
     mr r3, r29

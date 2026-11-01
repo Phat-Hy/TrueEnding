@@ -7,13 +7,13 @@ extern void dtor_80084684(void);
 extern void fn_8000EC88(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
-extern void fn_8003E4A4(void);
+extern void str_initFromCStr(void);
 extern void fn_8004203C(void);
-extern void fn_8004212C(void);
+extern void str_getData(void);
 extern void talk_parseQuotedString(void);
 extern void talk_formatQuotedString(void);
-extern void fn_8005BBF8(void);
-extern void fn_8005BCE8(void);
+extern void talk_parseQuotes(void);
+extern void talk_copySpeakerName(void);
 extern void fn_8006AD24(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
@@ -145,7 +145,7 @@ asm void fn_80137B78(void)
     addi r4, r4, lbl_807774B8@l
     stw r4, 0x308(r1)
     la r4, lbl_8087D710
-    bl fn_8005BCE8
+    bl talk_copySpeakerName
     lis r3, lbl_80737A9C@ha
     addi r30, r3, lbl_80737A9C@l
 lbl_fn_80137B78_000000C4:
@@ -288,7 +288,7 @@ lbl_fn_80137B78_000002A8:
     bl fn_80092F1C
 lbl_fn_80137B78_000002C4:
     addi r3, r1, 0x308
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_80137B78_000000C4
     lwz r0, 0x954(r1)
@@ -454,7 +454,7 @@ asm void fn_80137FC0(void)
     addi r4, r4, lbl_807774B8@l
     stw r4, 0x2a0(r1)
     la r4, lbl_8087D710
-    bl fn_8005BCE8
+    bl talk_copySpeakerName
     lis r3, lbl_80737A9C@ha
     addi r30, r3, lbl_80737A9C@l
 lbl_fn_80137FC0_00000520:
@@ -723,7 +723,7 @@ lbl_fn_80137FC0_000008D8:
     stw r0, 0x12a8(r31)
 lbl_fn_80137FC0_00000904:
     addi r3, r1, 0x2a0
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_80137FC0_00000520
     lwz r3, 0x50(r31)
@@ -922,7 +922,7 @@ lbl_fn_80138528_00000B5C:
     addi r4, r4, lbl_807774B8@l
     stw r4, 0x38(r1)
     la r4, lbl_8087D710
-    bl fn_8005BCE8
+    bl talk_copySpeakerName
     lis r30, lbl_80737A9C@ha
     addi r30, r30, lbl_80737A9C@l
 lbl_fn_80138528_00000C00:
@@ -1001,7 +1001,7 @@ lbl_fn_80138528_00000CF8:
     bl res_MsgHandle_destructor
 lbl_fn_80138528_00000D10:
     addi r3, r1, 0x38
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_80138528_00000C00
 lbl_fn_80138528_00000D20:
@@ -1026,7 +1026,7 @@ asm void fn_801388B8(void)
     stw r29, 0x734(r1)
     mr r29, r3
     addi r3, r1, 0x24
-    bl fn_8003E4A4
+    bl str_initFromCStr
     lis r4, lbl_80737A9C@ha
     addi r3, r1, 0x6c
     addi r30, r4, lbl_80737A9C@l
@@ -1048,7 +1048,7 @@ asm void fn_801388B8(void)
 lbl_fn_801388B8_00000DAC:
     addi r3, r1, 0x90
     bl fn_800ED4D8
-    bl fn_8004212C
+    bl str_getData
     addi r4, r30, 0x293
     li r5, 0x5
     bl strncmp
@@ -1056,15 +1056,15 @@ lbl_fn_801388B8_00000DAC:
     bne lbl_fn_801388B8_00000E60
     addi r3, r1, 0x90
     bl fn_800ED4D8
-    bl fn_8004212C
+    bl str_getData
     mr r4, r3
     addi r3, r1, 0x18
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x18
     bl fn_8000EC88
     mr r31, r3
     addi r3, r1, 0x18
-    bl fn_8004212C
+    bl str_getData
     mr r4, r3
     addi r3, r1, 0xf8
     addi r4, r4, 0x5

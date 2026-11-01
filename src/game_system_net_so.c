@@ -15,7 +15,7 @@ extern void fn_801125F8(void);
 extern void fn_801156C4(void);
 extern void fn_801156D8(void);
 extern void fn_80116BAC(void);
-extern void fn_80121F00(void);
+extern void equip_getGlobalManager(void);
 extern void fn_801240B4(void);
 extern void fn_80139550(void);
 extern void fn_80139F2C(void);
@@ -2115,14 +2115,14 @@ lbl_fn_8038F52C_00001D30:
     bl fn_80389838
     b lbl_fn_8038F52C_00001DE4
 lbl_fn_8038F52C_00001D5C:
-    bl fn_80121F00
+    bl equip_getGlobalManager
     cmpwi r3, 0x0
     beq lbl_fn_8038F52C_00001DDC
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_8013C504
     cmpwi r3, 0x0
     beq lbl_fn_8038F52C_00001DDC
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_8013C504
     mr r4, r30
     bl fn_803C2048

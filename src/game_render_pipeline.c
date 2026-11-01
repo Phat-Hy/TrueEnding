@@ -6,8 +6,8 @@ extern void __files(void);
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8000D0F8(void);
-extern void fn_8000D114(void);
+extern void mtx_getTranslation(void);
+extern void vec3_set(void);
 extern void fn_8000D9E8(void);
 extern void fn_8000DCF4(void);
 extern void fn_8000DD0C(void);
@@ -22,14 +22,14 @@ extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void fn_800E0AA8(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8574(void);
+extern void viewport_updateCulling(void);
 extern void clip_calculateFrustum(void);
 extern void fn_801125F8(void);
 extern void fn_8013A13C(void);
 extern void fn_8013A194(void);
 extern void fn_8013C480(void);
 extern void actor_setState(void);
-extern void fn_8016F3D0(void);
+extern void battle_canTargetActor(void);
 extern void fn_801A03E0(void);
 extern void fn_801A03EC(void);
 extern void fn_801A0408(void);
@@ -1897,7 +1897,7 @@ lbl_fn_802A3D80_000019B4:
     lwz r3, 0xc(r1)
     mr r4, r27
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     bne lbl_fn_802A3D80_000019F4
     lwz r3, 0xc(r1)
@@ -1937,12 +1937,12 @@ lbl_fn_802A3D80_00001A34:
     bl atn_Model_getBoneMatrix
     mr r4, r3
     addi r3, r1, 0x2c
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     lfs f1, lbl_80883D28
     addi r3, r1, 0x20
     lfs f3, lbl_80883D84
     fmr f2, f1
-    bl fn_8000D114
+    bl vec3_set
     addi r3, r1, 0x108
     addi r4, r27, 0x534
     bl fn_800109E0
@@ -1970,7 +1970,7 @@ lbl_fn_802A3D80_00001A34:
     lfs f3, lbl_80883D6C
     addi r3, r1, 0x14
     fmr f2, f1
-    bl fn_8000D114
+    bl vec3_set
     lfs f1, lbl_80883E18
     bl fn_801125F8
     addi r3, r1, 0xa8
@@ -2019,7 +2019,7 @@ lbl_fn_802A3D80_00001A34:
     addi r8, r1, 0x138
     li r9, 0x104
     li r10, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
     addi r29, r29, 0x1
 lbl_fn_802A3D80_00001BAC:
     addi r3, r1, 0x38

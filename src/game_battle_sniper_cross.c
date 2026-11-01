@@ -10,37 +10,37 @@ extern void fn_80056DB8(void);
 extern void atn_ColliBase_destructor(void);
 extern void fn_80057F28(void);
 extern void talk_formatQuotedString(void);
-extern void fn_8005BBF8(void);
-extern void fn_8005BCE8(void);
+extern void talk_parseQuotes(void);
+extern void talk_copySpeakerName(void);
 extern void mem_alloc(void);
-extern void fn_8008AD4C(void);
-extern void fn_8008B140(void);
+extern void area_updateZoneState(void);
+extern void map_processTrigger(void);
 extern void lockon_updateTarget(void);
 extern void fn_800971D4(void);
 extern void fn_8009EE30(void);
 extern void skin_applyWeights(void);
-extern void fn_800CB360(void);
+extern void morph_reset(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB440(void);
+extern void morph_updateWeights(void);
 extern void morph_updateMesh(void);
 extern void sound_initGlobalInstances(void);
-extern void fn_80237518(void);
-extern void fn_802375C4(void);
-extern void fn_80237654(void);
-extern void fn_802376D0(void);
+extern void res_MsgHandle_ctor(void);
+extern void res_Resource_destructor(void);
+extern void res_Resource_unload(void);
+extern void res_MsgHandle_isLoading(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_unload(void);
 extern void res_MsgHandle_update(void);
 extern void res_findResourceSlot(void);
 extern void fn_8023A02C(void);
-extern void fn_8023A680(void);
+extern void res_Shader_bindParams(void);
 extern void res_registerResource(void);
-extern void fn_803EC568(void);
-extern void fn_803EC69C(void);
+extern void task_createWorker(void);
+extern void task_destroyWorker(void);
 extern void fn_803EC7A0(void);
-extern void fn_803EC91C(void);
-extern void fn_803ED0D4(void);
+extern void task_updateWorker(void);
+extern void task_initWorkerContext(void);
 extern void fn_803ED5D0(void);
 extern void fn_803EDB18(void);
 extern void fn_803EDCF4(void);
@@ -238,7 +238,7 @@ asm void fn_803F69E4(void)
     mr r4, r28
     mr r5, r29
     mr r6, r31
-    bl fn_803EC568
+    bl task_createWorker
     lis r3, lbl_8078CCC8@ha
     lis r4, fn_803F6AC4@ha
     addi r3, r3, lbl_8078CCC8@l
@@ -253,7 +253,7 @@ asm void fn_803F69E4(void)
     li r7, 0x2
     bl __construct_new_array
     addi r3, r30, 0x168
-    bl fn_800CB360
+    bl morph_reset
     li r0, 0x1
     stw r0, 0x170(r30)
     stw r31, 0x174(r30)
@@ -282,7 +282,7 @@ asm void fn_803F6AC4(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     addi r3, r31, 0xc
     bl res_MsgHandle_constructor
     li r0, 0x0
@@ -319,7 +319,7 @@ asm void fn_803F6B04(void)
 lbl_fn_803F6B04_00000298:
     mr r3, r29
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     cmpwi r30, 0x0
     ble lbl_fn_803F6B04_000002B4
     mr r3, r29
@@ -375,7 +375,7 @@ lbl_fn_803F6B88_00000338:
     bl __destroy_new_array
     mr r3, r30
     li r4, 0x0
-    bl fn_803EC69C
+    bl task_destroyWorker
     cmpwi r31, 0x0
     ble lbl_fn_803F6B88_00000378
     mr r3, r30
@@ -396,7 +396,7 @@ asm void fn_803F6C48(void)
     stwu r1, -0x10(r1)
     mflr r0
     stw r0, 0x14(r1)
-    bl fn_803EC91C
+    bl task_updateWorker
     cntlzw r0, r3
     srwi r3, r0, 5
     lwz r0, 0x14(r1)
@@ -438,7 +438,7 @@ lbl_fn_803F6C70_0000041C:
     beq lbl_fn_803F6C70_00000434
     mr r3, r31
     li r5, 0x1
-    bl fn_803ED0D4
+    bl task_initWorkerContext
 lbl_fn_803F6C70_00000434:
     lwz r3, 0x54(r31)
     subi r0, r3, 0x2
@@ -495,7 +495,7 @@ asm void fn_803F6D60(void)
     mr r28, r3
 lbl_fn_803F6D60_000004D8:
     mr r3, r31
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_803F6D60_000004F8
     mr r3, r30
@@ -514,7 +514,7 @@ lbl_fn_803F6D60_00000500:
     lwz r3, 0x174(r28)
     cmpwi r3, 0x0
     beq lbl_fn_803F6D60_00000534
-    bl fn_8008B140
+    bl map_processTrigger
     cmpwi r3, 0x0
     beq lbl_fn_803F6D60_00000534
     li r3, 0x1
@@ -574,7 +574,7 @@ asm void fn_803F6E0C(void)
     addi r4, r4, lbl_807774B8@l
     stw r4, 0x8(r1)
     la r4, lbl_8087D710
-    bl fn_8005BCE8
+    bl talk_copySpeakerName
     lis r30, lbl_807523B0@ha
     addi r30, r30, lbl_807523B0@l
 lbl_fn_803F6E0C_00000600:
@@ -606,7 +606,7 @@ lbl_fn_803F6E0C_00000654:
     mr r4, r3
     lwz r3, 0x174(r31)
     li r5, 0x0
-    bl fn_8008AD4C
+    bl area_updateZoneState
     lwz r4, 0x174(r31)
     mr r3, r31
     addi r5, r1, 0x8
@@ -628,7 +628,7 @@ lbl_fn_803F6E0C_000006A0:
     beq lbl_fn_803F6E0C_000006C0
     mr r3, r28
     addi r4, r1, 0x18
-    bl fn_80237654
+    bl res_Resource_unload
 lbl_fn_803F6E0C_000006C0:
     addi r29, r29, 0x1
     addi r28, r28, 0x38
@@ -727,7 +727,7 @@ lbl_fn_803F6E0C_00000808:
     stw r0, 0x170(r31)
 lbl_fn_803F6E0C_0000080C:
     addi r3, r1, 0x8
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_803F6E0C_00000600
     lmw r27, 0x64c(r1)
@@ -847,7 +847,7 @@ lbl_fn_803F7198_00000948:
     li r9, 0x0
     lwz r3, lbl_8087F3C0
     li r10, 0x0
-    bl fn_8023A680
+    bl res_Shader_bindParams
     b lbl_fn_803F7198_000009EC
 lbl_fn_803F7198_000009AC:
     li r0, 0x0
@@ -865,7 +865,7 @@ lbl_fn_803F7198_000009AC:
     lwz r3, lbl_8087F3C0
     li r7, 0x0
     li r10, 0x0
-    bl fn_8023A680
+    bl res_Shader_bindParams
 lbl_fn_803F7198_000009EC:
     lwz r5, 0x174(r29)
     cmpwi r5, 0x0
@@ -942,7 +942,7 @@ lbl_fn_803F7198_00000ADC:
     bne lbl_fn_803F7198_00000B0C
     addi r3, r29, 0x168
     addi r4, r1, 0x18
-    bl fn_800CB440
+    bl morph_updateWeights
 lbl_fn_803F7198_00000B0C:
     cntlzw r0, r30
     addi r3, r1, 0x18
@@ -1103,7 +1103,7 @@ asm void fn_803F75B8(void)
     stw r29, 0x14(r1)
     stw r28, 0x10(r1)
     mr r28, r3
-    bl fn_803EC568
+    bl task_createWorker
     lis r4, lbl_8078CD60@ha
     addi r3, r28, 0xf4
     addi r4, r4, lbl_8078CD60@l
@@ -1133,7 +1133,7 @@ asm void fn_803F75B8(void)
     addi r3, r3, lbl_80777668@l
     stw r3, 0x0(r29)
     addi r3, r28, 0x920
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     addi r3, r28, 0x92c
     bl res_MsgHandle_constructor
     lfs f0, lbl_80886018
@@ -1193,7 +1193,7 @@ asm void fn_803F76D8(void)
 lbl_fn_803F76D8_00000E6C:
     addi r3, r29, 0x920
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     addic. r3, r29, 0x8d0
     beq lbl_fn_803F76D8_00000E88
     li r4, 0x0
@@ -1220,7 +1220,7 @@ lbl_fn_803F76D8_00000EBC:
     bl fn_800971D4
     mr r3, r29
     li r4, 0x0
-    bl fn_803EC69C
+    bl task_destroyWorker
     cmpwi r30, 0x0
     ble lbl_fn_803F76D8_00000EE4
     mr r3, r29
@@ -1253,7 +1253,7 @@ asm void fn_803F77B8(void)
     psq_st f28, 0x3e8(r1), 0, 0
     bl _savegpr_14
     mr r15, r3
-    bl fn_803EC91C
+    bl task_updateWorker
     cmpwi r3, 0x0
     bne lbl_fn_803F77B8_0000158C
     lwz r0, 0x4c4(r15)
@@ -1719,7 +1719,7 @@ asm void fn_803F7E7C(void)
     mr r3, r31
     addi r4, r31, 0xf4
     li r5, 0x1
-    bl fn_803ED0D4
+    bl task_initWorkerContext
 lbl_fn_803F7E7C_00001608:
     mr r3, r31
     bl fn_803F8324
@@ -1856,7 +1856,7 @@ lbl_fn_803F7F30_000017AC:
     mr r4, r3
     mr r3, r31
     li r5, 0x1
-    bl fn_803ED0D4
+    bl task_initWorkerContext
 lbl_fn_803F7F30_000017F8:
     mr r3, r31
     bl fn_803F8324

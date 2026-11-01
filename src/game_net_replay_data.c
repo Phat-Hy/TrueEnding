@@ -8,7 +8,7 @@ extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_80061AE4(void);
-extern void fn_8006EF48(void);
+extern void script_executeOpcode(void);
 extern void mem_alloc(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
@@ -16,13 +16,13 @@ extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void str_findChar(void);
 extern void actor_spawnActorWithId(void);
 extern void magic_dispatchActionCommand(void);
 extern void save_validateHeader(void);
 extern void fn_801F4728(void);
-extern void fn_801F4CB4(void);
+extern void save_formatSlotTitle(void);
 extern void saveSlot_readSummary(void);
 extern void thread_dispatchToQueue(void);
 extern void fn_803729B4(void);
@@ -953,7 +953,7 @@ asm void fn_804C50C0(void)
     lfs f30, lbl_80887488
     lwz r3, 0x48(r3)
     addi r5, r5, 0x1
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r3, 0x48(r28)
     lfs f0, lbl_8088748C
     lfs f1, 0x100(r3)
@@ -1200,7 +1200,7 @@ lbl_fn_804C50C0_00000F5C:
     lfs f2, lbl_80887470
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     fcmpo cr0, f26, f1
     ble lbl_fn_804C50C0_00000F78
     stfs f29, 0xb0(r28)
@@ -1875,7 +1875,7 @@ asm void fn_804C5D74(void)
     stw r29, 0x14(r1)
     stw r28, 0x10(r1)
     mr r28, r3
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_804C5D74_000018C8
     lwz r4, 0xc0(r28)

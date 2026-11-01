@@ -12,7 +12,7 @@ extern void fn_800C73B0(void);
 extern void fn_800C755C(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void str_findChar(void);
 extern void fn_801F4728(void);
 extern void saveSlot_readSummary(void);
@@ -1216,7 +1216,7 @@ asm void fn_80504AB8(void)
     stw r30, 0x18(r1)
     stw r29, 0x14(r1)
     mr r29, r3
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_80504AB8_000010D4
     bl fn_804F7F1C

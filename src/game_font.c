@@ -9,15 +9,15 @@ extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_8006B0C8(void);
 extern void fn_8006B174(void);
-extern void fn_8006EF48(void);
+extern void script_executeOpcode(void);
 extern void dungeon_initGlobalContext(void);
-extern void fn_800838B8(void);
+extern void town_synchronizedDispatch(void);
 extern void fn_80083AD4(void);
 extern void mem_alloc(void);
 extern void msg_formatTextWithAlignment(void* res, void* font, u32 mode);
 extern void atn_Task_constructor(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void str_findChar(void);
 extern void fn_801F0758(void);
 extern void save_validateHeader(void);
@@ -357,7 +357,7 @@ asm void fn_800A2D60(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_800A2D60_000004AC
     addis r3, r31, 0x1
@@ -930,7 +930,7 @@ lbl_fn_800A2DE0_00000C84:
     mr r8, r7
     li r9, 0x0
     clrrwi r4, r0, 5
-    bl fn_800838B8
+    bl town_synchronizedDispatch
     lwz r5, 0x150(r31)
     li r4, 0x0
     stw r3, 0x14c(r31)
@@ -1887,7 +1887,7 @@ lbl_fn_800A4244_00001AB4:
     lfs f2, lbl_80880CA0
     li r5, 0x1
     li r6, 0x4
-    bl fn_8006EF48
+    bl script_executeOpcode
     lwz r0, 0x8(r1)
     fmr f31, f1
     srwi. r0, r0, 31

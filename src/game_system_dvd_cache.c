@@ -8,19 +8,19 @@ extern void dtor_80084684(void);
 extern void fn_8004B20C(void);
 extern void fn_8004B290(void);
 extern void fn_8004B338(void);
-extern void fn_800697D8(void);
+extern void boss_recordDamage(void);
 extern void fn_8007708C(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void fn_80084A78(void);
 extern void mem_getAllocSize(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void fn_800CFBA0(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void fn_800DCA6C(void);
 extern void save_validateHeader(void);
 extern void fn_802085E0(void);
@@ -51,7 +51,7 @@ extern void fn_805B9F54(void);
 extern void fn_805BC6CC(void);
 extern void strncmp(void);
 extern void atoi(void);
-extern void fn_806952C4(void);
+extern void msl_releaseRefCount(void);
 extern void vec3_isNonZero(void);
 extern int sprintf(char* str, const char* format, ...);
 extern char* strcpy(char* dest, const char* src);
@@ -215,7 +215,7 @@ lbl_fn_80375B78_000000E4:
     bl sprintf
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x8
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_fn_80375B78_00000124:
     li r31, 0x0
     b lbl_fn_80375B78_0000015C
@@ -440,7 +440,7 @@ lbl_fn_80375D0C_000003F4:
     bl sprintf
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x8
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_fn_80375D0C_00000430:
     li r5, 0x0
     b lbl_fn_80375D0C_00000444
@@ -825,7 +825,7 @@ lbl_fn_80376324_00000830:
     bl sprintf
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x8
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_fn_80376324_0000088C:
     li r0, 0x0
     b lbl_fn_80376324_000008A0
@@ -1230,7 +1230,7 @@ lbl_fn_80376804_00000DF0:
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_80376804_00000E38
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_80376804_00000E38:
     lwz r5, 0x5c(r31)
     mr r4, r29
@@ -1258,10 +1258,7 @@ lbl_fn_80376804_00000E74:
     blr
 }
 
-asm void fn_80376A08(void)
-{
-    nofralloc
-    blr
+void fn_80376A08(void) {
 }
 
 asm void fn_80376A0C(void)
@@ -1285,7 +1282,7 @@ asm void fn_80376A0C(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_80376A0C_00000EE0
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_80376A0C_00000EE0:
     addic. r31, r29, 0x5c
     beq lbl_fn_80376A0C_00000F20
@@ -1554,7 +1551,7 @@ asm void fn_80376DD8(void)
     stw r30, 0x1e8(r1)
     stw r29, 0x1e4(r1)
     stw r28, 0x1e0(r1)
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_80376DD8_000016FC
     addi r3, r31, 0x54

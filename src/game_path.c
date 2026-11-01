@@ -19,7 +19,7 @@ extern void fn_80053BD0(void);
 extern void fn_800551BC(void);
 extern void fn_80055810(void);
 extern void fn_80055C40(void);
-extern void fn_80057A64(void);
+extern void mission_updateStub(void);
 extern void fn_80057A68(void);
 extern void fn_80057A78(void);
 extern void fn_80063D3C(void);
@@ -1135,21 +1135,21 @@ asm void fn_800577D8(void)
     stw r29, 0x74(r1)
     mr r29, r3
     addi r3, r1, 0x8
-    bl fn_80057A64
+    bl mission_updateStub
     addi r3, r1, 0x14
-    bl fn_80057A64
+    bl mission_updateStub
     addi r3, r1, 0x20
-    bl fn_80057A64
+    bl mission_updateStub
     addi r3, r1, 0x2c
-    bl fn_80057A64
+    bl mission_updateStub
     addi r3, r1, 0x38
-    bl fn_80057A64
+    bl mission_updateStub
     addi r3, r1, 0x44
-    bl fn_80057A64
+    bl mission_updateStub
     addi r3, r1, 0x50
-    bl fn_80057A64
+    bl mission_updateStub
     addi r3, r1, 0x5c
-    bl fn_80057A64
+    bl mission_updateStub
     lfs f1, 0x3c(r29)
     addi r3, r1, 0x8
     lfs f2, 0x40(r29)

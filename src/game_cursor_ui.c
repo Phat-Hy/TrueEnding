@@ -36,7 +36,7 @@ extern void fn_800B1598(void);
 extern void fn_800BDB58(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void atn_LH_Texture_destructAndFree(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
@@ -486,10 +486,8 @@ lbl_fn_800A85CC_00000470:
     blr
 }
 
-asm void fn_800A873C(void)
+void fn_800A873C(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_800A8740(void)
@@ -1185,13 +1183,11 @@ lbl_fn_800A8FF0_00000EE0:
 asm void fn_800A90FC(void)
 {
     nofralloc
-    b fn_800D3FA4
+    b bloom_processPasses
 }
 
-asm void fn_800A9100(void)
+void fn_800A9100(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_800A9104(void)
@@ -1750,10 +1746,8 @@ asm void fn_800A97C4(void)
     blr
 }
 
-asm void fn_800A97FC(void)
+void fn_800A97FC(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_800A9800(void)
@@ -1772,8 +1766,6 @@ asm void fn_800A9808(void)
     blr
 }
 
-asm void fn_800A9818(void)
+void fn_800A9818(void)
 {
-    nofralloc
-    blr
 }

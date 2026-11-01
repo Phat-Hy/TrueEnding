@@ -19,7 +19,7 @@ extern void talk_setSpeakerName(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_playAnimationByName(void);
@@ -28,15 +28,15 @@ extern void atn_Task_setActive(void);
 extern void str_parseInt(void);
 extern void system_getNextSequenceId(void);
 extern void fn_801028E4(void);
-extern void fn_8011FC10(void);
+extern void skill_findNodeById(void);
 extern void boss_updatePhaseState(void);
 extern void fn_80139560(void);
-extern void fn_80145334(void);
-extern void fn_8014C540(void);
+extern void quest_updateFlow(void);
+extern void dialog_updateScriptState(void);
 extern void fn_8015E7A0(void);
 extern void fn_8015ECC4(void);
 extern void fn_80166A54(void);
-extern void fn_8016DA4C(void);
+extern void debuff_clearStatus(void);
 extern void actor_setState(void);
 extern void task_findEntryById(void);
 extern void res_MsgHandle_unload(void);
@@ -50,7 +50,7 @@ extern void fn_8025941C(void);
 extern void fn_80259AB4(void);
 extern void fn_8025D6D0(void);
 extern void fn_8025D704(void);
-extern void fn_8035B78C(void);
+extern void entity_Instance_destructor(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
 extern void boss_getOffset54(void);
@@ -205,7 +205,7 @@ asm void fn_80256014(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_80256014_00000134
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_80256014_00000134:
     addic. r31, r29, 0x1640
     beq lbl_fn_80256014_00000154
@@ -292,7 +292,7 @@ lbl_fn_80256014_0000024C:
 lbl_fn_80256014_0000025C:
     mr r3, r29
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r30, 0x0
     ble lbl_fn_80256014_00000278
     mr r3, r29
@@ -925,7 +925,7 @@ lbl_fn_80256384_00000B34:
     bl atoi
     mr r4, r3
     mr r3, r18
-    bl fn_8011FC10
+    bl skill_findNodeById
     stw r3, 0x16a0(r22)
     stw r22, 0x1530(r3)
     b lbl_fn_80256384_00000CA0
@@ -1073,7 +1073,7 @@ asm void fn_80256C04(void)
     stw r3, 0x58c(r15)
     mr r3, r15
     stw r0, 0x14c8(r15)
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lwz r3, 0x5c0(r15)
     li r0, 0x1
     stw r0, 0x14d4(r15)
@@ -1619,7 +1619,7 @@ lbl_fn_80256C04_00001564:
     li r14, 0x0
     stw r14, 0x14d4(r15)
     mr r3, r15
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lwz r0, 0x16b0(r15)
     li r3, 0x6
     li r4, 0x2
@@ -1906,9 +1906,9 @@ lbl_fn_80256C04_000019C8:
     bl fn_80139560
 lbl_fn_80256C04_000019DC:
     mr r3, r15
-    bl fn_8014C540
+    bl dialog_updateScriptState
     mr r3, r15
-    bl fn_80145334
+    bl quest_updateFlow
     lwz r0, 0x1650(r15)
     lwz r3, lbl_8087F430
     cmpwi r0, 0x0

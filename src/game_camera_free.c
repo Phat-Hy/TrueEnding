@@ -7,14 +7,14 @@ extern void mem_getAllocSize(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8C6C(void);
+extern void scissor_clipFrustum(void);
 extern void fn_80126214(void);
 extern void fn_8013A258(void);
-extern void fn_8013CB68(void);
-extern void fn_80148990(void);
-extern void fn_80151448(void);
-extern void fn_8015495C(void);
-extern void fn_8016DA4C(void);
+extern void npc_updateTalkInteraction(void);
+extern void quest_ctorRewardItem(void);
+extern void inventory_applyItemStats(void);
+extern void equip_applyToCharacter(void);
+extern void debuff_clearStatus(void);
 extern void actor_setState(void);
 extern void fn_8017039C(void);
 extern void fn_80170A20(void);
@@ -214,7 +214,7 @@ lbl_fn_802E683C_000001D8:
     lfs f1, lbl_80884768
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     b lbl_fn_802E683C_0000089C
 lbl_fn_802E683C_00000228:
     lfs f28, 0x2e4(r3)
@@ -254,7 +254,7 @@ lbl_fn_802E683C_00000270:
     lfs f1, lbl_80884768
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     b lbl_fn_802E683C_0000089C
 lbl_fn_802E683C_000002C0:
     lwz r0, 0x55c(r3)
@@ -428,7 +428,7 @@ lbl_fn_802E683C_00000528:
     addi r4, r1, 0xec
     fmuls f2, f30, f0
     li r5, 0x0
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
 lbl_fn_802E683C_00000544:
     lwz r3, 0x14e0(r31)
     lwz r0, 0x1500(r31)
@@ -658,7 +658,7 @@ lbl_fn_802E683C_00000878:
     addi r4, r1, 0x74
     fmuls f2, f29, f0
     li r5, 0x0
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
 lbl_fn_802E683C_00000894:
     mr r3, r31
     bl fn_802E7740
@@ -702,7 +702,7 @@ asm void fn_802E7120(void)
     lwz r0, 0x44(r4)
     cmpwi r0, 0x1
     beq lbl_fn_802E7120_0000095C
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r0, 0x12a4(r30)
     extrwi. r0, r0, 1, 29
     bne lbl_fn_802E7120_00000944
@@ -880,9 +880,9 @@ lbl_fn_802E7298_00000B64:
     la r6, lbl_8087D9E0
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     li r5, 0x0
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r6, 0x14
     li r7, 0x8
     bl runtime_registerStaticObject
@@ -994,9 +994,9 @@ lbl_fn_802E7298_00000D04:
     addi r3, r3, 0x10
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     mr r7, r30
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r5, 0x0
     li r6, 0x14
     bl runtime_registerStaticObject
@@ -1784,9 +1784,9 @@ asm void fn_802E8084(void)
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     mr r3, r29
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     li r0, 0x2
     stw r0, 0x58c(r29)
     mr r3, r29

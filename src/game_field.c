@@ -977,10 +977,7 @@ asm void fn_80084E00(void)
     blr
 }
 
-asm void fn_80084E08(void)
-{
-    nofralloc
-    blr
+void fn_80084E08(void) {
 }
 
 asm void fn_80084E0C(void)
@@ -1009,10 +1006,7 @@ asm void fn_80084E44(void)
     blr
 }
 
-asm void fn_80084E4C(void)
-{
-    nofralloc
-    blr
+void fn_80084E4C(void) {
 }
 
 asm void fn_80084E50(void)

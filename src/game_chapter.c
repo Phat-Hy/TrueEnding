@@ -19,10 +19,10 @@ extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void fn_80088AF4(void);
 extern void node_createNamedChild(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void fn_800BDB40(void);
 extern void fn_800BDB58(void);
-extern void fn_800BFAC8(void);
+extern void motion_updateFogAdj(void);
 extern void fn_800C169C(void);
 extern void fn_800C2448(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
@@ -37,10 +37,10 @@ extern void GXSetVtxAttrFmt(void);
 extern void __GXSetVtxDesc(void);
 extern void GXClearVtxDesc(void);
 extern void fn_80614790(void);
-extern void fn_80615D20(void);
+extern void GXInitLightDistAttn(void);
 extern void fn_80615D50(void);
 extern void fn_80617340(void);
-extern void fn_80617880(void);
+extern void GXSetTevOrder(void);
 extern void GXSetNumTevStages(void);
 extern void GXLoadPosMtxImm(void);
 extern void GXSetCurrentMtx(void);
@@ -386,7 +386,7 @@ asm void atn_LensFlare_destructor(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_atn_LensFlare_destructor_0000040C
-    bl fn_800897D8
+    bl node_destroy
 lbl_atn_LensFlare_destructor_0000040C:
     lis r4, atn_LH_Texture_destructAndFree@ha
     addi r3, r30, 0x20
@@ -2119,7 +2119,7 @@ asm void fn_80078938(void)
     stfs f2, 0x230(r1)
     stw r10, 0x234(r1)
     psq_st f1, 0x10(r5), 0, 0
-    bl fn_80615D20
+    bl GXInitLightDistAttn
     li r3, 0x1
     bl GXClearVtxDesc
     li r3, 0x1
@@ -2128,7 +2128,7 @@ asm void fn_80078938(void)
     li r4, 0x0
     li r5, 0x0
     li r6, 0x4
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x0
     li r4, 0x0
     bl fn_80617340
@@ -2213,7 +2213,7 @@ asm void fn_80078938(void)
     mr r4, r30
     addi r3, r1, 0x170
     addi r5, r1, 0x194
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f2, lbl_80880AD0
     lis r4, 0x4330
     lwz r3, lbl_8087EEE0

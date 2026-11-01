@@ -5,13 +5,13 @@
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80013D60(void);
-extern void fn_8000D114(void);
+extern void vec3_set(void);
 extern void fn_8000D3A8(void);
 extern void fn_8000DD14(void);
 extern void fn_8000DD98(void);
-extern void fn_8003E4A4(void);
-extern void fn_8004212C(void);
-extern void fn_80057A64(void);
+extern void str_initFromCStr(void);
+extern void str_getData(void);
+extern void mission_updateStub(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
@@ -20,12 +20,12 @@ extern void fn_8006CA80(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
-extern void fn_80087E9C(void);
+extern void route_createWaypoint(void);
 extern void node_createNamedChild(void);
 extern void fn_8008A4E0(void);
 extern void fn_8008A76C(void);
-extern void fn_8008AD4C(void);
-extern void fn_8008B140(void);
+extern void area_updateZoneState(void);
+extern void map_processTrigger(void);
 extern void fn_800902C0(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_80092954(void);
@@ -43,21 +43,21 @@ extern void fn_800ED4E0(void);
 extern void fn_800EDFE8(void);
 extern void fn_8011F91C(void);
 extern void boss_updatePhaseState(void);
-extern void fn_80145334(void);
-extern void fn_8014C540(void);
+extern void quest_updateFlow(void);
+extern void dialog_updateScriptState(void);
 extern void actor_setState(void);
 extern void fn_8020A780(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
-extern void fn_80237518(void);
-extern void fn_80237654(void);
-extern void fn_802376D0(void);
+extern void res_MsgHandle_ctor(void);
+extern void res_Resource_unload(void);
+extern void res_MsgHandle_isLoading(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_update(void);
 extern void fn_80239D58(void);
 extern void res_findResourceSlot(void);
-extern void fn_8023A680(void);
+extern void res_Shader_bindParams(void);
 extern void res_registerResource(void);
 extern void fn_80266154(void);
 extern void fn_802BABC0(void);
@@ -76,7 +76,7 @@ extern void fn_80319384(void);
 extern void fn_80319578(void);
 extern void fn_8031958C(void);
 extern void fn_803199A4(void);
-extern void fn_8035B694(void);
+extern void entity_Instance_constructor(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_isLoading(void);
@@ -778,7 +778,7 @@ lbl_fn_80315964_0000084C:
     stw r3, 0xc(r1)
     stw r0, 0x10(r1)
     lwz r3, lbl_8087F3C0
-    bl fn_8023A680
+    bl res_Shader_bindParams
     lwz r0, 0x3f4(r1)
     psq_l f31, 0x3e8(r1), 0, 0
     lfd f31, 0x3e0(r1)
@@ -968,7 +968,7 @@ asm void fn_803161F8(void)
     stw r28, 0x100(r1)
     mr r28, r5
     lwz r5, 0x20(r5)
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lis r4, lbl_80788760@ha
     addi r3, r31, 0x14b0
     addi r4, r4, lbl_80788760@l
@@ -989,58 +989,58 @@ asm void fn_803161F8(void)
     stw r4, 0x14cc(r31)
     stw r0, 0x14d0(r31)
     stw r30, 0x14d4(r31)
-    bl fn_8000D114
+    bl vec3_set
     lfs f1, lbl_80884D60
     addi r3, r31, 0x14e4
     fmr f2, f1
     fmr f3, f1
-    bl fn_8000D114
+    bl vec3_set
     lfs f1, lbl_80884D60
     addi r3, r31, 0x14f4
     lfs f0, lbl_80884D64
     fmr f2, f1
     stfs f0, 0x14f0(r31)
     fmr f3, f1
-    bl fn_8000D114
+    bl vec3_set
     lfs f0, lbl_80884D68
     addi r3, r31, 0x1504
     stfs f0, 0x1500(r31)
-    bl fn_80057A64
+    bl mission_updateStub
     addi r3, r31, 0x1510
-    bl fn_80057A64
+    bl mission_updateStub
     stw r30, 0x1520(r31)
     addi r3, r31, 0x1528
     stw r30, 0x1524(r31)
-    bl fn_80057A64
+    bl mission_updateStub
     lfs f1, lbl_80884D60
     addi r3, r31, 0x1540
     stw r30, 0x153c(r31)
     fmr f2, f1
     fmr f3, f1
-    bl fn_8000D114
+    bl vec3_set
     addi r3, r31, 0x1550
     bl res_MsgHandle_constructor
     lfs f1, lbl_80884D60
     addi r3, r31, 0x155c
     fmr f2, f1
     fmr f3, f1
-    bl fn_8000D114
+    bl vec3_set
     lfs f1, lbl_80884D60
     addi r3, r31, 0x1568
     fmr f2, f1
     fmr f3, f1
-    bl fn_8000D114
+    bl vec3_set
     li r29, 0x3c
     stw r29, 0x1574(r31)
     addi r3, r31, 0x1584
     stw r30, 0x1578(r31)
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     addi r3, r31, 0x1590
     bl res_MsgHandle_constructor
     addi r3, r31, 0x159c
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     addi r3, r31, 0x15a8
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     stw r30, 0x15b4(r31)
     addi r3, r31, 0x15b8
     bl fn_803165E0
@@ -1070,14 +1070,14 @@ asm void fn_803161F8(void)
     addi r4, r29, lbl_8074959C@l
     stw r5, 0x1c98(r31)
     stw r0, 0x1c9c(r31)
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r29, r29, lbl_8074959C@l
     addi r3, r1, 0x20
     addi r4, r29, 0x18
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x14
     addi r4, r28, 0x2c
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x74
     addi r4, r29, 0x2b
     li r5, 0x0
@@ -1097,7 +1097,7 @@ asm void fn_803161F8(void)
 lbl_fn_803161F8_00000DD4:
     addi r3, r1, 0x98
     bl fn_800ED4D8
-    bl fn_8004212C
+    bl str_getData
     addi r4, r29, 0x2d
     li r5, 0x8
     bl strncmp
@@ -1105,7 +1105,7 @@ lbl_fn_803161F8_00000DD4:
     bne lbl_fn_803161F8_00000E14
     addi r3, r1, 0x98
     bl fn_800ED4D8
-    bl fn_8004212C
+    bl str_getData
     mr r4, r3
     addi r3, r1, 0x20
     addi r4, r4, 0x8
@@ -1114,7 +1114,7 @@ lbl_fn_803161F8_00000DD4:
 lbl_fn_803161F8_00000E14:
     addi r3, r1, 0x98
     bl fn_800ED4D8
-    bl fn_8004212C
+    bl str_getData
     addi r4, r29, 0x36
     li r5, 0x7
     bl strncmp
@@ -1122,7 +1122,7 @@ lbl_fn_803161F8_00000E14:
     bne lbl_fn_803161F8_00000E4C
     addi r3, r1, 0x98
     bl fn_800ED4D8
-    bl fn_8004212C
+    bl str_getData
     addi r3, r3, 0x7
     bl str_parseInt
     stw r3, 0x14d0(r31)
@@ -1150,7 +1150,7 @@ lbl_fn_803161F8_00000E54:
     addi r5, r1, 0x20
     bl fn_8006AFF8
     addi r3, r1, 0x8
-    bl fn_8004212C
+    bl str_getData
     lwz r12, 0x14b0(r31)
     mr r4, r3
     addi r3, r31, 0x14b0
@@ -1164,16 +1164,16 @@ lbl_fn_803161F8_00000E54:
     bl res_MsgHandle_destructor
     addi r3, r31, 0x1584
     addi r4, r30, 0x4b
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r31, 0x1590
     addi r4, r30, 0x5c
     bl res_MsgHandle_destructor
     addi r3, r31, 0x159c
     addi r4, r30, 0x6a
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r31, 0x15a8
     addi r4, r30, 0x7b
-    bl fn_80237654
+    bl res_Resource_unload
     li r28, 0x0
     li r29, 0x0
 lbl_fn_803161F8_00000F0C:
@@ -1181,7 +1181,7 @@ lbl_fn_803161F8_00000F0C:
     addi r4, r30, 0x8c
     addi r3, r3, 0x1648
     li r5, 0x0
-    bl fn_8008AD4C
+    bl area_updateZoneState
     addi r28, r28, 0x1
     addi r29, r29, 0x214
     cmpwi r28, 0x3
@@ -1246,7 +1246,7 @@ asm void fn_803165EC(void)
     li r28, 0x0
 lbl_fn_803165EC_00000FE4:
     mr r3, r27
-    bl fn_8008B140
+    bl map_processTrigger
     cmpwi r3, 0x0
     beq lbl_fn_803165EC_00000FFC
     li r3, 0x0
@@ -1269,7 +1269,7 @@ lbl_fn_803165EC_00000FFC:
     cmpwi r3, 0x0
     bne lbl_fn_803165EC_000013F0
     addi r3, r30, 0x1584
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_803165EC_000013F0
     addi r3, r30, 0x1590
@@ -1277,11 +1277,11 @@ lbl_fn_803165EC_00000FFC:
     cmpwi r3, 0x0
     bne lbl_fn_803165EC_000013F0
     addi r3, r30, 0x159c
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_803165EC_000013F0
     addi r3, r30, 0x15a8
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_803165EC_000013F0
     lwz r0, 0x1c8c(r30)
@@ -1359,7 +1359,7 @@ lbl_fn_803165EC_000010B8:
     addi r5, r30, 0x528
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     addi r3, r30, 0x14b0
     bl boss_getOffset54
     cmpwi r3, 0x0
@@ -1795,9 +1795,9 @@ lbl_fn_80316A68_000017BC:
     mr r3, r30
     bl fn_80318720
     mr r3, r30
-    bl fn_8014C540
+    bl dialog_updateScriptState
     mr r3, r30
-    bl fn_80145334
+    bl quest_updateFlow
     mr r3, r30
     bl fn_80318594
     addi r11, r1, 0x70

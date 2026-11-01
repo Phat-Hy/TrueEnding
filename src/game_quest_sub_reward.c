@@ -10,9 +10,9 @@ extern void _savegpr_21(void);
 extern void _savegpr_23(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
-extern void fn_8000D114(void);
+extern void vec3_set(void);
 extern void vec3_copy(void);
-extern void fn_80011034(void);
+extern void vec3_toEulerAngles(void);
 extern void fn_80011410(void);
 extern void fn_80012774(void);
 extern void vec3_sub(void);
@@ -32,7 +32,7 @@ extern void fn_800CB6F8(void);
 extern void fn_800D089C(void);
 extern void fn_800F7258(void);
 extern void fn_800F7260(void);
-extern void fn_800F7FF0(void);
+extern void viewport_getNextSequenceId(void);
 extern void fn_800F833C(void);
 extern void fn_800F84D8(void);
 extern void fn_80112F54(void);
@@ -363,7 +363,7 @@ lbl_fn_80487490_000002AC:
     addi r3, r1, 0x84
     lfs f3, lbl_80886F90
     fmr f2, f1
-    bl fn_8000D114
+    bl vec3_set
     lwz r0, 0x1eac(r31)
     cmpwi r0, 0x96
     blt lbl_fn_80487490_000004B0
@@ -420,10 +420,10 @@ lbl_fn_80487490_000003A8:
     bl fn_80057A68
 lbl_fn_80487490_0000040C:
     addi r3, r1, 0x84
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
     addi r3, r1, 0x60
     addi r4, r1, 0x78
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lfs f1, 0x64(r1)
     addi r3, r1, 0x108
     bl fn_8013A13C
@@ -453,7 +453,7 @@ lbl_fn_80487490_0000040C:
     bl fn_80057A68
 lbl_fn_80487490_0000048C:
     addi r3, r1, 0x84
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
     lfs f0, 0x84(r1)
     addi r3, r1, 0x84
     lfs f2, lbl_80886F8C
@@ -495,7 +495,7 @@ lbl_fn_80487490_000004D4:
     bne lbl_fn_80487490_00000538
     addi r3, r1, 0x3c
     addi r4, r31, 0x243c
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lfs f1, 0x40(r1)
     bl fn_802A7964
     fmr f31, f1
@@ -541,7 +541,7 @@ lbl_fn_80487490_00000588:
     stfs f1, 0x2434(r31)
     fmr f2, f1
     lfs f3, lbl_80886F90
-    bl fn_8000D114
+    bl vec3_set
     mr r4, r3
     addi r3, r31, 0x243c
     bl vec3_copy

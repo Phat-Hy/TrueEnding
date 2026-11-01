@@ -10,7 +10,7 @@ extern void fn_80044CCC(void);
 extern void fn_80044E0C(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_8008BBD8(void);
+extern void map_debugLog(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
 extern void fn_800E0B18(void);
@@ -28,9 +28,9 @@ extern void fn_801354B4(void);
 extern void fn_80136138(void);
 extern void boss_updatePhaseState(void);
 extern void fn_80139560(void);
-extern void fn_80145334(void);
+extern void quest_updateFlow(void);
 extern void quest_checkCondition(void);
-extern void fn_8014C540(void);
+extern void dialog_updateScriptState(void);
 extern void fn_8014F2B4(void);
 extern void fn_8014FB60(void);
 extern void fn_80155A88(void);
@@ -50,7 +50,7 @@ extern void fn_80219344(void);
 extern void task_findEntryById(void);
 extern void fn_8036DAA8(void);
 extern void world_getGlobalFlag(void);
-extern void fn_803EA77C(void);
+extern void chest_spawnLoot(void);
 extern void fn_80481668(void);
 extern void fn_8059B670(void);
 extern void PSMTXRotRad(void);
@@ -276,16 +276,10 @@ lbl_fn_800E22E8_000001D4:
     blr
 }
 
-asm void fn_800E24CC(void)
-{
-    nofralloc
-    blr
+void fn_800E24CC(void) {
 }
 
-asm void fn_800E24D0(void)
-{
-    nofralloc
-    blr
+void fn_800E24D0(void) {
 }
 
 asm void fn_800E24D4(void)
@@ -1121,10 +1115,7 @@ lbl_fn_800E2DD4_00000CD8:
     blr
 }
 
-asm void fn_800E2FDC(void)
-{
-    nofralloc
-    blr
+void fn_800E2FDC(void) {
 }
 
 asm void fn_800E2FE0(void)
@@ -1462,7 +1453,7 @@ lbl_fn_800E2FE0_000011D0:
     stw r4, 0xf8(r1)
     stw r0, 0xfc(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_800E2FE0_00001254
     addic. r0, r1, 0x1d0
@@ -1530,7 +1521,7 @@ lbl_fn_800E2FE0_000012DC:
     lfs f2, lbl_808812E8
     li r5, 0x20
     li r6, 0x0
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_800E2FE0_00001300:
     lwz r0, 0x12a8(r30)
     oris r0, r0, 0x1
@@ -1797,7 +1788,7 @@ lbl_fn_800E2FE0_000016B0:
     sth r0, 0x1470(r30)
 lbl_fn_800E2FE0_000016E0:
     mr r3, r30
-    bl fn_8014C540
+    bl dialog_updateScriptState
     lwz r3, lbl_8087F540
     cmpwi r3, 0x0
     beq lbl_fn_800E2FE0_00001700
@@ -1973,7 +1964,7 @@ lbl_fn_800E2FE0_0000193C:
     cmplwi r0, 0x1
     beq lbl_fn_800E2FE0_000019D0
     mr r3, r30
-    bl fn_80145334
+    bl quest_updateFlow
     b lbl_fn_800E2FE0_000019D0
 lbl_fn_800E2FE0_00001964:
     lwz r0, 0x38(r30)
@@ -1984,7 +1975,7 @@ lbl_fn_800E2FE0_00001964:
     extrwi. r0, r0, 1, 6
     bne lbl_fn_800E2FE0_0000198C
     mr r3, r30
-    bl fn_80145334
+    bl quest_updateFlow
     b lbl_fn_800E2FE0_000019D0
 lbl_fn_800E2FE0_0000198C:
     lwz r4, lbl_8087EFB4

@@ -7,17 +7,17 @@ extern void _savegpr_26(void);
 extern void fn_80044BD4(void);
 extern void collision_testLineSegment(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_80097D40(void);
+extern void atn_Anim_getLayerTrack(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800E7BB0(void);
 extern void fn_800EB270(void);
 extern void fn_800EB4AC(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8C6C(void);
+extern void scissor_clipFrustum(void);
 extern void fn_8010CA34(void);
 extern void fn_80134134(void);
 extern void fn_80139560(void);
-extern void fn_80144710(void);
+extern void quest_evaluateConditions(void);
 extern void fn_80153B44(void);
 extern void fn_801562A0(void);
 extern void fn_80158BB4(void);
@@ -41,8 +41,8 @@ extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECDotProduct(void);
 extern void PSVECCrossProduct(void);
-extern void fn_8068A850(void);
-extern void fn_8068AD58(void);
+extern void std_sin(void);
+extern void std_cos(void);
 extern void vec3_isNonZero(void);
 
 /* External data declarations */
@@ -553,13 +553,13 @@ lbl_fn_800E932C_00000608:
     fadds f0, f3, f0
     stfs f0, 0x4(r28)
     lfs f1, 0x538(r27)
-    bl fn_8068A850
+    bl std_sin
     frsp f3, f1
     lfs f0, 0x0(r28)
     fmadds f0, f31, f3, f0
     stfs f0, 0x0(r28)
     lfs f1, 0x538(r27)
-    bl fn_8068AD58
+    bl std_cos
     frsp f4, f1
     lfs f0, 0x8(r28)
     fneg f3, f31
@@ -1395,7 +1395,7 @@ lbl_fn_800E9ED8_000012A8:
     bne lbl_fn_800E9ED8_0000131C
     li r4, 0x173
     addi r3, r3, 0xb0
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     beq lbl_fn_800E9ED8_0000131C
     lwz r3, lbl_8087F0A8
@@ -1784,7 +1784,7 @@ lbl_fn_800E9ED8_00001868:
     cmpwi r0, 0x0
     beq lbl_fn_800E9ED8_00001A08
     mr r3, r31
-    bl fn_80144710
+    bl quest_evaluateConditions
     lwz r3, lbl_8087F048
     mr r6, r31
     lwz r7, 0x638(r31)
@@ -1794,7 +1794,7 @@ lbl_fn_800E9ED8_00001868:
     lfs f1, lbl_808812DC
     li r9, 0x1e
     lwz r10, 0x594(r31)
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     cmpwi r3, 0x0
     ble lbl_fn_800E9ED8_00001A08
     lwz r0, 0x594(r31)

@@ -9,15 +9,15 @@ extern void dtor_80084684(void);
 extern void sys_copyString(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
-extern void fn_8003E4A4(void);
+extern void str_initFromCStr(void);
 extern void fn_80041C0C(void);
 extern void fn_8004203C(void);
-extern void fn_8004212C(void);
+extern void str_getData(void);
 extern void fn_8004274C(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_formatQuotedString(void);
-extern void fn_8005BBF8(void);
+extern void talk_parseQuotes(void);
 extern void fn_8006AA20(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
@@ -25,14 +25,14 @@ extern void mem_realloc(void);
 extern void fn_80084A78(void);
 extern void mem_getAllocSize(void);
 extern void node_createNamedChild(void);
-extern void fn_800897D8(void);
-extern void fn_8008BBD8(void);
+extern void node_destroy(void);
+extern void map_debugLog(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void str_skipWhitespace(void);
 extern void str_findChar(void);
 extern void fn_800DCA6C(void);
@@ -43,19 +43,19 @@ extern void fn_800EC5BC(void);
 extern void fn_800EC654(void);
 extern void fn_800ED42C(void);
 extern void fn_800EDFE8(void);
-extern void fn_800EF73C(void);
+extern void cam_destroyMsgHandle(void);
 extern void fn_8012044C(void);
 extern void fn_801206EC(void);
 extern void fn_80120700(void);
 extern void fn_801207D4(void);
-extern void fn_80120D34(void);
-extern void fn_80121F00(void);
+extern void equip_getElementPtr0(void);
+extern void equip_getGlobalManager(void);
 extern void fn_8017CB2C(void);
 extern void fn_80205BE8(void);
 extern void fn_80216AFC(void);
 extern void fn_802180A8(void);
-extern void fn_802375C4(void);
-extern void fn_80237654(void);
+extern void res_Resource_destructor(void);
+extern void res_Resource_unload(void);
 extern void res_MsgHandle_destructor(void);
 extern void kpad_getClampData(void);
 extern void fn_803ED8D8(void);
@@ -93,12 +93,12 @@ extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_80473F88(void);
+extern void shockwave_freeEmitter(void);
 extern void fn_8049D5DC(void);
 extern void strcmp(void);
 extern void strncmp(void);
 extern void atoi(void);
-extern void fn_806952C4(void);
+extern void msl_releaseRefCount(void);
 extern void runtime_registerStaticObject(void);
 extern void __destroy_arr(void);
 extern void __ptmf_scall(void);
@@ -182,16 +182,12 @@ void fn_803EF608(void);
 void fn_803EF64C(void);
 void fn_803EF780(void);
 
-asm void fn_803EDF1C(void)
+void fn_803EDF1C(void)
 {
-    nofralloc
-    blr
 }
 
-asm void fn_803EDF20(void)
+void fn_803EDF20(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_803EDF24(void)
@@ -227,16 +223,12 @@ asm void fn_803EDF5C(void)
     bctr
 }
 
-asm void fn_803EDF6C(void)
+void fn_803EDF6C(void)
 {
-    nofralloc
-    blr
 }
 
-asm void fn_803EDF70(void)
+void fn_803EDF70(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_803EDF74(void)
@@ -407,7 +399,7 @@ lbl_fn_803EE124_00000258:
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_803EE124_0000027C
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_803EE124_0000027C:
     addic. r0, r30, 0x5c
     beq lbl_fn_803EE124_0000029C
@@ -499,7 +491,7 @@ lbl_fn_803EE1F0_000003A8:
     bl fn_803ED8F4
     b lbl_fn_803EE1F0_000003E4
 lbl_fn_803EE1F0_000003B0:
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_803EE1F0_000003E4
     lwz r4, 0x80(r31)
@@ -550,10 +542,8 @@ lbl_fn_803EE318_00000440:
     blr
 }
 
-asm void fn_803EE370(void)
+void fn_803EE370(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_803EE374(void)
@@ -843,7 +833,7 @@ lbl_fn_803EE5AC_000007D0:
     stw r4, 0x20(r1)
     stw r0, 0x24(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_803EE5AC_00000844
     addic. r0, r1, 0x74
@@ -1740,12 +1730,12 @@ lbl_fn_803EEEDC_00001458:
     cmpwi r3, 0x0
     bne lbl_fn_803EEEDC_00001070
     addi r3, r18, 0x48
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     li r0, 0x1
     stw r0, 0x64(r18)
 lbl_fn_803EEEDC_00001478:
     mr r3, r18
-    bl fn_800D3FA4
+    bl bloom_processPasses
 lbl_fn_803EEEDC_00001480:
     lmw r17, 0x8c4(r1)
     lwz r0, 0x904(r1)
@@ -1820,7 +1810,7 @@ lbl_fn_803EF3B0_00001544:
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_803EF3B0_0000158C
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_803EF3B0_0000158C:
     lwz r5, 0x0(r29)
     mr r4, r30
@@ -1997,8 +1987,8 @@ lbl_fn_803EF64C_000017B4:
     lwz r3, 0x14(r30)
     cmpwi r3, 0x0
     beq lbl_fn_803EF64C_000017D4
-    lis r4, fn_800EF73C@ha
-    addi r4, r4, fn_800EF73C@l
+    lis r4, cam_destroyMsgHandle@ha
+    addi r4, r4, cam_destroyMsgHandle@l
     bl __destroy_arr
 lbl_fn_803EF64C_000017D4:
     li r0, 0x0
@@ -2010,8 +2000,8 @@ lbl_fn_803EF64C_000017E0:
     lwz r3, 0xc(r30)
     cmpwi r3, 0x0
     beq lbl_fn_803EF64C_00001800
-    lis r4, fn_802375C4@ha
-    addi r4, r4, fn_802375C4@l
+    lis r4, res_Resource_destructor@ha
+    addi r4, r4, res_Resource_destructor@l
     bl __destroy_arr
 lbl_fn_803EF64C_00001800:
     li r0, 0x0
@@ -2117,7 +2107,7 @@ lbl_fn_803EF780_00001948:
     bl talk_formatQuotedString
     mr r4, r3
     addi r3, r1, 0x20
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x38
     addi r4, r1, 0x20
     bl fn_801207D4
@@ -2162,14 +2152,14 @@ lbl_fn_803EF780_000019E0:
     bl fn_80216AFC
     cmpwi r3, 0x0
     beq lbl_fn_803EF780_00001B14
-    bl fn_80121F00
+    bl equip_getGlobalManager
     cmpwi r3, 0x0
     beq lbl_fn_803EF780_00001B14
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl kpad_getClampData
     cmpwi r3, 0x0
     beq lbl_fn_803EF780_00001B14
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl kpad_getClampData
     mr r25, r3
     bl fn_803EFD9C
@@ -2205,7 +2195,7 @@ lbl_fn_803EF780_00001A78:
     beq lbl_fn_803EF780_00001B14
 lbl_fn_803EF780_00001AB4:
     addi r3, r1, 0x70
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_803EF780_00001A78
     b lbl_fn_803EF780_00001B14
@@ -2228,12 +2218,12 @@ lbl_fn_803EF780_00001AE0:
     beq lbl_fn_803EF780_00001B14
 lbl_fn_803EF780_00001B04:
     addi r3, r1, 0x70
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_803EF780_00001AE0
 lbl_fn_803EF780_00001B14:
     addi r3, r1, 0x70
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_803EF780_000018A4
     addi r3, r1, 0x2c
@@ -2287,14 +2277,14 @@ lbl_fn_803EF780_00001BC4:
     mr r4, r3
     addi r3, r1, 0x38
     lwz r4, 0xc(r4)
-    bl fn_80120D34
-    bl fn_8004212C
+    bl equip_getElementPtr0
+    bl str_getData
     mr r26, r3
     mr r4, r31
     addi r3, r27, 0x8
     bl fn_803F0604
     mr r4, r26
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r1, 0x10
     bl fn_803F05FC
     stw r31, 0xc(r3)
@@ -2317,8 +2307,8 @@ lbl_fn_803EF780_00001C48:
     mr r4, r3
     addi r3, r1, 0x38
     lwz r4, 0xc(r4)
-    bl fn_80120D34
-    bl fn_8004212C
+    bl equip_getElementPtr0
+    bl str_getData
     mr r26, r3
     mr r4, r30
     addi r3, r27, 0x10
@@ -2352,8 +2342,8 @@ lbl_fn_803EF780_00001CCC:
     mr r4, r3
     addi r3, r1, 0x38
     lwz r4, 0xc(r4)
-    bl fn_80120D34
-    bl fn_8004212C
+    bl equip_getElementPtr0
+    bl str_getData
     mr r26, r3
     mr r4, r29
     addi r3, r27, 0x20

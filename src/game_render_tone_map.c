@@ -5,24 +5,24 @@
 extern void _restgpr_22(void);
 extern void _savegpr_22(void);
 extern void fn_8003EA3C(void);
-extern void fn_8004D388(void);
+extern void collision_queryGeometry(void);
 extern void fn_80063D3C(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_80094958(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8574(void);
-extern void fn_800F8C6C(void);
+extern void viewport_updateCulling(void);
+extern void scissor_clipFrustum(void);
 extern void clip_calculateFrustum(void);
 extern void fn_8012DB04(void);
 extern void fn_8013A258(void);
-extern void fn_80144710(void);
+extern void quest_evaluateConditions(void);
 extern void actor_setState(void);
 extern void fn_80170A20(void);
 extern void fn_80176548(void);
-extern void fn_801765D8(void);
-extern void fn_80179D44(void);
+extern void battle_awardExp(void);
+extern void actor_getMovementFlags(void);
 extern void task_findEntryById(void);
 extern void fn_802BC4EC(void);
 extern void world_getLocalFlag(void);
@@ -36,8 +36,8 @@ extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
-extern void fn_8068A850(void);
-extern void fn_8068AD58(void);
+extern void std_sin(void);
+extern void std_cos(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
 extern void vec3_isNonZero(void);
@@ -913,7 +913,7 @@ lbl_fn_802BD480_00000A94:
     fmr f31, f1
     lis r3, lbl_80746B08@ha
     lfd f1, lbl_80746B08@l(r3)
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     fcmpo cr0, f31, f0
     cror eq, gt, eq
@@ -1040,7 +1040,7 @@ asm void fn_802BDA04(void)
     fsubs f2, f2, f3
     fmuls f1, f1, f2
     fmuls f1, f0, f1
-    bl fn_8068AD58
+    bl std_cos
     frsp f1, f1
     lfs f0, lbl_80884194
     lfs f2, lbl_8088417C
@@ -1059,7 +1059,7 @@ lbl_fn_802BDA04_00000D38:
     fsubs f2, f2, f3
     fmuls f1, f1, f2
     fmuls f1, f0, f1
-    bl fn_8068AD58
+    bl std_cos
     frsp f1, f1
     lfs f0, lbl_80884194
     fmadds f2, f0, f1, f0
@@ -1291,7 +1291,7 @@ lbl_fn_802BDA04_0000104C:
     fsubs f2, f2, f3
     fmuls f1, f1, f2
     fmuls f1, f0, f1
-    bl fn_8068AD58
+    bl std_cos
     frsp f1, f1
     lfs f0, lbl_80884194
     lfs f2, lbl_8088417C
@@ -1310,7 +1310,7 @@ lbl_fn_802BDA04_00001098:
     fsubs f2, f2, f3
     fmuls f1, f1, f2
     fmuls f1, f0, f1
-    bl fn_8068AD58
+    bl std_cos
     frsp f1, f1
     lfs f0, lbl_80884194
     fmadds f2, f0, f1, f0
@@ -1518,7 +1518,7 @@ asm void fn_802BDFF8(void)
     lwz r0, 0x12a4(r31)
     ori r0, r0, 0x8000
     stw r0, 0x12a4(r31)
-    bl fn_801765D8
+    bl battle_awardExp
 lbl_fn_802BDFF8_000013A4:
     lwz r0, 0x24(r1)
     psq_l f31, 0x18(r1), 0, 0
@@ -1614,7 +1614,7 @@ lbl_fn_802BE180_000014B8:
     bl task_findEntryById
     mr r31, r3
     mr r3, r30
-    bl fn_80144710
+    bl quest_evaluateConditions
     lwz r3, lbl_8087F048
     mr r6, r30
     lwz r8, 0x590(r30)
@@ -1624,7 +1624,7 @@ lbl_fn_802BE180_000014B8:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     lwz r0, 0x192c(r30)
     cmpwi r0, 0x0
     beq lbl_fn_802BE180_00001544
@@ -1861,7 +1861,7 @@ lbl_fn_802BE2A0_0000184C:
     bl task_findEntryById
     mr r31, r3
     mr r3, r30
-    bl fn_80144710
+    bl quest_evaluateConditions
     lwz r8, 0x590(r30)
     mr r6, r30
     lwz r3, lbl_8087F048
@@ -1871,7 +1871,7 @@ lbl_fn_802BE2A0_0000184C:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
 lbl_fn_802BE2A0_000018B0:
     lfs f2, 0xb8(r1)
     addi r3, r1, 0xb0
@@ -2110,7 +2110,7 @@ lbl_fn_802BE7EC_00001B8C:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
     b lbl_fn_802BE7EC_00001C68
 lbl_fn_802BE7EC_00001C24:
     lfs f31, 0x2e4(r3)
@@ -2664,7 +2664,7 @@ lbl_fn_802BEE44_000023F4:
     lfs f1, 0xb8(r1)
     fnmsubs f0, f0, f5, f0
     stfs f0, 0x57c(r31)
-    bl fn_8068AD58
+    bl std_cos
     frsp f4, f1
     lfs f3, 0x570(r31)
     lfs f0, lbl_80884190
@@ -2672,7 +2672,7 @@ lbl_fn_802BEE44_000023F4:
     fmuls f3, f3, f4
     stfs f0, 0xac(r1)
     stfs f3, 0xa8(r1)
-    bl fn_8068A850
+    bl std_sin
     frsp f3, f1
     lfs f0, 0x570(r31)
     lfs f4, lbl_8088417C
@@ -2769,7 +2769,7 @@ lbl_fn_802BEE44_00002554:
     bl fn_80176548
     mr r3, r31
     lis r29, 0x8000
-    bl fn_80179D44
+    bl actor_getMovementFlags
     or r7, r29, r3
     lwz r3, lbl_8087EE98
     lfs f1, 0xa4(r1)
@@ -2778,7 +2778,7 @@ lbl_fn_802BEE44_00002554:
     addi r6, r1, 0xa8
     addi r8, r31, 0x5b8
     li r9, 0x0
-    bl fn_8004D388
+    bl collision_queryGeometry
     addi r4, r1, 0x1b8
     lfs f2, 0x1c0(r1)
     addi r3, r1, 0xc0
@@ -2872,7 +2872,7 @@ lbl_fn_802BEE44_00002610:
     li r5, 0x0
     li r9, 0x3c
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     lwz r3, 0x1504(r31)
     psq_l f1, 0x0(r30), 0, 0
     addi r0, r3, 0x1
@@ -3257,7 +3257,7 @@ lbl_fn_802BF5C0_00002C90:
     lfs f1, 0xf4(r1)
     fnmsubs f0, f0, f5, f0
     stfs f0, 0x57c(r31)
-    bl fn_8068AD58
+    bl std_cos
     frsp f4, f1
     lfs f3, 0x570(r31)
     lfs f0, lbl_80884190
@@ -3265,7 +3265,7 @@ lbl_fn_802BF5C0_00002C90:
     fmuls f3, f3, f4
     stfs f0, 0xe8(r1)
     stfs f3, 0xe4(r1)
-    bl fn_8068A850
+    bl std_sin
     frsp f3, f1
     lfs f0, 0x570(r31)
     lfs f4, lbl_8088417C
@@ -3368,7 +3368,7 @@ lbl_fn_802BF5C0_00002DF0:
     bl fn_80176548
     mr r3, r31
     lis r29, 0x8000
-    bl fn_80179D44
+    bl actor_getMovementFlags
     or r7, r29, r3
     lwz r3, lbl_8087EE98
     lfs f1, 0xd4(r1)
@@ -3377,7 +3377,7 @@ lbl_fn_802BF5C0_00002DF0:
     addi r6, r1, 0xe4
     addi r8, r31, 0x5b8
     li r9, 0x0
-    bl fn_8004D388
+    bl collision_queryGeometry
     addi r3, r1, 0x240
     lfs f2, 0x248(r1)
     psq_l f1, 0x0(r3), 0, 0

@@ -11,17 +11,17 @@ extern void fn_80058078(void);
 extern void fn_800580BC(void);
 extern void fn_800588FC(void);
 extern void talk_formatQuotedString(void);
-extern void fn_8005BBF8(void);
-extern void fn_8005BCE8(void);
-extern void fn_8008AD4C(void);
-extern void fn_8008B140(void);
+extern void talk_parseQuotes(void);
+extern void talk_copySpeakerName(void);
+extern void area_updateZoneState(void);
+extern void map_processTrigger(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_80094F98(void);
 extern void fn_80095F10(void);
 extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800BFAC8(void);
+extern void motion_updateFogAdj(void);
 extern void fn_800C122C(void);
 extern void fn_800C2C20(void);
 extern void fn_800D5908(void);
@@ -35,7 +35,7 @@ extern void res_MsgHandle_update(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
 extern void fn_803EC7A0(void);
-extern void fn_803ED0D4(void);
+extern void task_initWorkerContext(void);
 extern void fn_803ED5D0(void);
 extern void fn_803ED774(void);
 extern void boss_getOffset54(void);
@@ -186,7 +186,7 @@ lbl_fn_803F4D98_0000013C:
     mr r4, r3
     mr r3, r31
     li r5, 0x1
-    bl fn_803ED0D4
+    bl task_initWorkerContext
 lbl_fn_803F4D98_0000017C:
     addi r3, r31, 0x4c4
     psq_l f1, 0xfc(r31), 0, 0
@@ -695,7 +695,7 @@ lbl_fn_803F53E0_00000824:
     stfs f2, 0x70(r1)
     psq_st f1, 0x0(r30), 0, 0
     stfs f2, 0x64(r1)
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f12, lbl_80885FF0
     addi r4, r1, 0x2c
     lfs f11, lbl_80885FFC
@@ -718,7 +718,7 @@ lbl_fn_803F53E0_00000824:
     stfs f0, 0x50(r1)
     stfs f9, 0x54(r1)
     stfs f10, 0x58(r1)
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f0, 0x64(r1)
     addi r3, r1, 0x14
     lfs f10, lbl_80885FF0
@@ -1032,7 +1032,7 @@ asm void fn_803F5B48(void)
     stw r28, 0x10(r1)
     mr r28, r3
     addi r3, r3, 0xf4
-    bl fn_8008B140
+    bl map_processTrigger
     cmpwi r3, 0x0
     beq lbl_fn_803F5B48_00000DE8
     li r3, 0x1
@@ -1132,7 +1132,7 @@ asm void fn_803F5C2C(void)
     addi r4, r4, lbl_807774B8@l
     stw r4, 0x108(r1)
     la r4, lbl_8087D710
-    bl fn_8005BCE8
+    bl talk_copySpeakerName
     lis r29, lbl_807522F4@ha
     li r30, 0x1
     addi r29, r29, lbl_807522F4@l
@@ -1152,7 +1152,7 @@ lbl_fn_803F5C2C_00000F40:
     mr r4, r3
     addi r3, r31, 0xf4
     li r5, 0x0
-    bl fn_8008AD4C
+    bl area_updateZoneState
     mr r3, r31
     addi r4, r31, 0xf4
     addi r5, r1, 0x108
@@ -1411,7 +1411,7 @@ lbl_fn_803F5C2C_000012E8:
     bl memcpy
 lbl_fn_803F5C2C_0000132C:
     addi r3, r1, 0x108
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_803F5C2C_00000F40
     lmw r27, 0x74c(r1)
@@ -1466,7 +1466,7 @@ asm void fn_803F60E8(void)
     addi r4, r4, lbl_807774B8@l
     stw r4, 0x8(r1)
     la r4, lbl_8087D710
-    bl fn_8005BCE8
+    bl talk_copySpeakerName
     lis r30, lbl_807522F4@ha
     li r31, 0x1
     addi r30, r30, lbl_807522F4@l
@@ -1518,7 +1518,7 @@ lbl_fn_803F60E8_00001494:
     stw r3, 0x5ec(r28)
 lbl_fn_803F60E8_000014B8:
     addi r3, r1, 0x8
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_803F60E8_00001408
     lwz r0, 0x654(r1)

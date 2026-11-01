@@ -8,12 +8,12 @@ extern void _savegpr_19(void);
 extern void _savegpr_22(void);
 extern void dtor_80084684(void);
 extern void fn_80064AC4(void);
-extern void fn_800BFAC8(void);
+extern void motion_updateFogAdj(void);
 extern void str_findChar(void);
 extern void fn_800E0000(void);
 extern void magic_dispatchActionCommand(void);
 extern void fn_80124C6C(void);
-extern void fn_801F48C8(void);
+extern void save_parseSlotStats(void);
 extern void thread_findAndNotifySlot(void);
 extern void thread_dispatchToQueue(void);
 extern void fn_803DCA84(void);
@@ -254,7 +254,7 @@ lbl_fn_803DAB4C_0000023C:
     stfs f4, 0x80(r1)
     stfs f3, 0x88(r1)
     stfs f0, 0x9c(r1)
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lwz r3, lbl_8087F9F8
     lwz r0, 0x48(r3)
     cmpwi r0, 0x0
@@ -1630,7 +1630,7 @@ lbl_fn_803DBD44_000015AC:
     stfs f4, 0x94(r1)
     stfs f3, 0x98(r1)
     stfs f0, 0x9c(r1)
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f6, 0x90(r1)
     lfs f0, lbl_80885D60
     fcmpo cr0, f6, f0
@@ -1675,7 +1675,7 @@ lbl_fn_803DBD44_00001658:
     stfs f2, 0x68(r1)
     psq_st f1, 0x0(r29), 0, 0
     stfs f2, 0xc0(r1)
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f2, 0x5c(r1)
     psq_l f1, 0x0(r27), 0, 0
     fcmpo cr0, f2, f30
@@ -2100,7 +2100,7 @@ lbl_fn_803DBD44_00001C78:
     addi r4, r19, 0x10c6
     psq_st f2, 0x8(r5), 0, 0
     lwz r3, 0x1140(r31)
-    bl fn_801F48C8
+    bl save_parseSlotStats
     addi r5, r1, 0x28
     psq_l f1, 0x0(r20), 0, 0
     psq_l f2, 0x8(r20), 0, 0
@@ -2108,7 +2108,7 @@ lbl_fn_803DBD44_00001C78:
     psq_st f1, 0x0(r5), 0, 0
     psq_st f2, 0x8(r5), 0, 0
     lwz r3, 0x1140(r31)
-    bl fn_801F48C8
+    bl save_parseSlotStats
     addi r5, r1, 0x18
     psq_l f1, 0x0(r20), 0, 0
     psq_l f2, 0x8(r20), 0, 0
@@ -2116,7 +2116,7 @@ lbl_fn_803DBD44_00001C78:
     psq_st f1, 0x0(r5), 0, 0
     psq_st f2, 0x8(r5), 0, 0
     lwz r3, 0x1144(r31)
-    bl fn_801F48C8
+    bl save_parseSlotStats
     addi r5, r1, 0x8
     psq_l f1, 0x0(r20), 0, 0
     psq_l f2, 0x8(r20), 0, 0
@@ -2124,7 +2124,7 @@ lbl_fn_803DBD44_00001C78:
     psq_st f1, 0x0(r5), 0, 0
     psq_st f2, 0x8(r5), 0, 0
     lwz r3, 0x1144(r31)
-    bl fn_801F48C8
+    bl save_parseSlotStats
     lwz r3, 0x1140(r31)
     lfs f3, 0xa0(r3)
     lfs f0, 0x100(r3)

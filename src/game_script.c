@@ -22,13 +22,13 @@ extern void dtor_80084684(void);
 extern void actor_dispatchMessage(void);
 extern void fn_80050A1C(void);
 extern void fn_800629F0(void);
-extern void fn_800697D8(void);
+extern void boss_recordDamage(void);
 extern void fn_8006D680(void);
 extern void fn_80072BDC(void);
 extern void fn_80072D74(void);
 extern void fn_80072E08(void);
 extern void dungeon_initGlobalContext(void);
-extern void fn_800838B8(void);
+extern void town_synchronizedDispatch(void);
 extern void fn_800839EC(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
@@ -129,7 +129,7 @@ extern u32 lbl_80880A70;
 extern u32 lbl_80880A74;
 
 /* Function declarations */
-void fn_8006EF48(void);
+void script_executeOpcode(void);
 void fn_8006F17C(void);
 void fn_8006F2F0(void);
 void fn_8006F420(void);
@@ -160,7 +160,7 @@ void fn_80071D68(void);
 void fn_80071D74(void);
 void fn_80071D80(void);
 
-asm void fn_8006EF48(void)
+asm void script_executeOpcode(void)
 {
     nofralloc
     stwu r1, -0xd0(r1)
@@ -195,7 +195,7 @@ asm void fn_8006EF48(void)
     bl wcslen
     cmpwi r25, 0x0
     mr r31, r3
-    beq lbl_fn_8006EF48_000001A4
+    beq lbl_script_executeOpcode_000001A4
     lfs f0, lbl_80880A38
     lis r3, lbl_80731530@ha
     lfs f27, lbl_80880A50
@@ -205,8 +205,8 @@ asm void fn_8006EF48(void)
     lfs f25, lbl_80880A40
     lis r26, 0x4330
     lfs f26, lbl_80880A48
-    b lbl_fn_8006EF48_00000198
-lbl_fn_8006EF48_000000AC:
+    b lbl_script_executeOpcode_00000198
+lbl_script_executeOpcode_000000AC:
     lhz r25, 0x0(r28)
     fmr f1, f29
     mr r3, r27
@@ -215,7 +215,7 @@ lbl_fn_8006EF48_000000AC:
     addi r6, r1, 0x8
     bl fn_8006D680
     cmpwi r3, 0x0
-    beq lbl_fn_8006EF48_00000174
+    beq lbl_script_executeOpcode_00000174
     lwz r0, 0x14(r1)
     lwz r4, 0x10(r1)
     mulli r5, r0, 0xe0
@@ -256,41 +256,41 @@ lbl_fn_8006EF48_000000AC:
     fmuls f0, f26, f0
     fmadds f31, f29, f1, f31
     fmadds f31, f29, f0, f31
-    b lbl_fn_8006EF48_00000188
-lbl_fn_8006EF48_00000174:
+    b lbl_script_executeOpcode_00000188
+lbl_script_executeOpcode_00000174:
     cmplwi r25, 0xff
-    bgt lbl_fn_8006EF48_00000184
+    bgt lbl_script_executeOpcode_00000184
     fmadds f31, f27, f29, f31
-    b lbl_fn_8006EF48_00000188
-lbl_fn_8006EF48_00000184:
+    b lbl_script_executeOpcode_00000188
+lbl_script_executeOpcode_00000184:
     fadds f31, f31, f29
-lbl_fn_8006EF48_00000188:
+lbl_script_executeOpcode_00000188:
     fnmsubs f31, f26, f28, f31
     addi r28, r28, 0x2
     addi r30, r30, 0x1
     fadds f31, f31, f30
-lbl_fn_8006EF48_00000198:
+lbl_script_executeOpcode_00000198:
     cmplw r30, r31
-    blt lbl_fn_8006EF48_000000AC
-    b lbl_fn_8006EF48_000001D8
-lbl_fn_8006EF48_000001A4:
+    blt lbl_script_executeOpcode_000000AC
+    b lbl_script_executeOpcode_000001D8
+lbl_script_executeOpcode_000001A4:
     lfs f0, lbl_80880A50
     mtctr r3
     cmplwi r3, 0x0
-    ble lbl_fn_8006EF48_000001D8
-lbl_fn_8006EF48_000001B4:
+    ble lbl_script_executeOpcode_000001D8
+lbl_script_executeOpcode_000001B4:
     lhz r0, 0x0(r28)
     cmplwi r0, 0xff
-    bgt lbl_fn_8006EF48_000001C8
+    bgt lbl_script_executeOpcode_000001C8
     fmadds f31, f0, f29, f31
-    b lbl_fn_8006EF48_000001CC
-lbl_fn_8006EF48_000001C8:
+    b lbl_script_executeOpcode_000001CC
+lbl_script_executeOpcode_000001C8:
     fadds f31, f31, f29
-lbl_fn_8006EF48_000001CC:
+lbl_script_executeOpcode_000001CC:
     fadds f31, f31, f30
     addi r28, r28, 0x2
-    bdnz lbl_fn_8006EF48_000001B4
-lbl_fn_8006EF48_000001D8:
+    bdnz lbl_script_executeOpcode_000001B4
+lbl_script_executeOpcode_000001D8:
     fmr f1, f31
     psq_l f31, 0xc8(r1), 0, 0
     lfd f31, 0xc0(r1)
@@ -488,7 +488,7 @@ lbl_fn_8006F2F0_00000464:
     bl sprintf
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x8
-    bl fn_800697D8
+    bl boss_recordDamage
     b lbl_fn_8006F2F0_000004B4
 lbl_fn_8006F2F0_000004A4:
     addi r7, r7, 0x1
@@ -578,7 +578,7 @@ lbl_fn_8006F420_0000058C:
     bl sprintf
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x8
-    bl fn_800697D8
+    bl boss_recordDamage
     b lbl_fn_8006F420_000005E0
 lbl_fn_8006F420_000005D4:
     addi r29, r29, 0x2
@@ -2901,7 +2901,7 @@ lbl_fn_800713D4_000026B4:
     mr r8, r7
     li r6, 0x1
     li r9, 0x0
-    bl fn_800838B8
+    bl town_synchronizedDispatch
     stw r3, 0x54(r30)
     bl dungeon_initGlobalContext
     addi r7, r27, lbl_807317C0@l

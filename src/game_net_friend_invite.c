@@ -7,17 +7,17 @@ extern void __register_global_object(void);
 extern void _restgpr_20(void);
 extern void _savegpr_20(void);
 extern void dtor_80084684(void);
-extern void fn_8000D114(void);
+extern void vec3_set(void);
 extern void fn_8000D9E8(void);
 extern void fn_8000DCF4(void);
-extern void fn_8003EFB0(void);
+extern void ui_destroyWidget(void);
 extern void fn_8004895C(void);
 extern void fn_80049654(void);
 extern void fn_8004B338(void);
 extern void dungeon_initGlobalContext(void);
 extern void fn_80083AD4(void);
 extern void mem_getAllocSize(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void fn_80089ACC(void);
 extern void msg_getMessageById(void);
 extern void fn_800C310C(void);
@@ -29,13 +29,13 @@ extern void fn_800CE368(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void fn_800D8814(void);
 extern void fn_800EC1F4(void);
 extern void fn_800F52F0(void);
 extern void fn_800F530C(void);
 extern void fn_800F7F90(void);
-extern void fn_800F7FA0(void);
+extern void viewport_getGlobalContext(void);
 extern void fn_800F7FA8(void);
 extern void fn_801125F8(void);
 extern void fn_80112960(void);
@@ -47,7 +47,7 @@ extern void fn_8012B988(void);
 extern void fn_8012D8B8(void);
 extern void fn_80139F4C(void);
 extern void fn_8013C504(void);
-extern void fn_8014DEE4(void);
+extern void dialog_selectChoice(void);
 extern void fn_8016E4C4(void);
 extern void fn_80176ACC(void);
 extern void fn_8017A300(void);
@@ -57,7 +57,7 @@ extern void fn_8020A3E4(void);
 extern void fn_8020A81C(void);
 extern void fn_8020ED84(void);
 extern void sound_initGlobalInstances(void);
-extern void fn_802375C4(void);
+extern void res_Resource_destructor(void);
 extern void res_MsgHandle_unload(void);
 extern void res_MsgHandle_update(void);
 extern void fn_80239798(void);
@@ -91,7 +91,7 @@ extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_80473F88(void);
+extern void shockwave_freeEmitter(void);
 extern void fn_804814F0(void);
 extern void fn_8049D68C(void);
 extern void fn_804AC734(void);
@@ -1380,11 +1380,11 @@ lbl_fn_804D201C_00000D74:
     bne lbl_fn_804D201C_00000DBC
     lis r3, lbl_807C6BB8@ha
     stwu r6, lbl_807C6BB8@l(r3)
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     li r29, 0x1
     lis r5, lbl_807C8F48@ha
     stw r6, 0x4(r3)
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     stw r6, 0x8(r3)
     addi r5, r5, lbl_807C8F48@l
     stw r29, 0xc(r3)
@@ -1473,7 +1473,7 @@ lbl_fn_804D201C_00000EC8:
     addis r3, r30, 0x1
     li r4, -0x1
     subi r3, r3, 0x6940
-    bl fn_802375C4
+    bl res_Resource_destructor
     addis r26, r30, 0x1
     subic. r26, r26, 0x694c
     beq lbl_fn_804D201C_00000F0C
@@ -1585,7 +1585,7 @@ lbl_fn_804D201C_00001054:
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_804D201C_00001078
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_804D201C_00001078:
     mr r3, r30
     li r4, 0x0
@@ -1661,7 +1661,7 @@ asm void fn_804D250C(void)
     cmpwi r3, 0x0
     bne lbl_fn_804D250C_000011B8
     mr r3, r30
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_804D250C_000011B8
     mr r3, r30
@@ -2392,7 +2392,7 @@ lbl_fn_804D25D4_00001BD4:
     li r21, 0x0
 lbl_fn_804D25D4_00001BD8:
     mr r3, r24
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     bne lbl_fn_804D25D4_00001BEC
     li r21, 0x0
@@ -2427,13 +2427,13 @@ lbl_fn_804D25D4_00001BEC:
     addi r3, r24, 0x610
     bl fn_80507314
     addi r3, r24, 0x2b58
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     addi r3, r24, 0x2b60
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     addi r3, r24, 0x2b68
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     addi r3, r24, 0x2b50
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     addi r3, r24, 0x4fc
     li r4, 0x7
     bl fn_804D16A0
@@ -2459,7 +2459,7 @@ lbl_fn_804D25D4_00001CC0:
     li r4, 0x0
     lwz r3, -0x6890(r3)
     bl atn_Task_setActive
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     addis r4, r24, 0x1
     li r5, 0x0
     li r6, 0x1
@@ -3394,15 +3394,15 @@ lbl_fn_804D25D4_00002A5C:
     addi r3, r24, 0x4fc
     li r4, 0x12
     bl fn_804D16A0
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     cmpwi r3, 0x0
     beq lbl_fn_804D25D4_00004898
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r4, r24
     li r5, 0x0
     li r6, 0x0
     bl res_findResourceSlot
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     bl atn_Task_unlink
     b lbl_fn_804D25D4_00004898
 lbl_fn_804D25D4_00002AA8:
@@ -3425,7 +3425,7 @@ lbl_fn_804D25D4_00002AA8:
     bl fn_804DA2D4
     cmplwi r3, 0x1
     bne lbl_fn_804D25D4_00002B58
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     cmpwi r3, 0x0
     bne lbl_fn_804D25D4_00002B58
     mr r3, r24
@@ -4231,7 +4231,7 @@ lbl_fn_804D25D4_0000367C:
     li r5, 0x0
     li r6, 0x0
     lwz r3, 0x0(r30)
-    bl fn_8014DEE4
+    bl dialog_selectChoice
     lwz r3, 0x0(r30)
     bl fn_803CFC58
     cmpwi r3, 0x0
@@ -5006,7 +5006,7 @@ lbl_fn_804D25D4_00004220:
     li r4, 0x22
     bl fn_804D16A0
     b lbl_fn_804D25D4_00004898
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     cmpwi r3, 0x0
     bne lbl_fn_804D25D4_000046D8
     addis r3, r24, 0x1
@@ -5020,11 +5020,11 @@ lbl_fn_804D25D4_00004220:
     li r6, 0x8
     li r7, 0x180
     bl fn_80239798
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r4, r24
     li r5, 0x0
     bl fn_800F7FA8
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     addis r4, r24, 0x1
     li r5, 0x0
     li r6, 0x1
@@ -5239,7 +5239,7 @@ lbl_fn_804D25D4_000045A8:
     addi r3, r1, 0x30
     lfs f2, lbl_808875C0
     fmr f3, f1
-    bl fn_8000D114
+    bl vec3_set
     mr r4, r3
     addis r3, r24, 0x1
     subi r3, r3, 0x688c
@@ -5248,7 +5248,7 @@ lbl_fn_804D25D4_000045A8:
     addi r3, r1, 0x24
     lfs f2, lbl_808875C0
     lfs f3, lbl_808875C4
-    bl fn_8000D114
+    bl vec3_set
     mr r4, r3
     addis r3, r24, 0x1
     subi r3, r3, 0x688c

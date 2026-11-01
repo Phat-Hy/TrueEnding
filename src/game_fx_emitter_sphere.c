@@ -11,7 +11,7 @@ extern void vec3_copy(void);
 extern void fn_8000D760(void);
 extern void fn_8000D9E8(void);
 extern void fn_8000E18C(void);
-extern void fn_80011034(void);
+extern void vec3_toEulerAngles(void);
 extern void vec3_sub(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
@@ -21,7 +21,7 @@ extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
 extern void fn_8006AFF8(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
 extern void morph_updateMesh(void);
@@ -35,19 +35,19 @@ extern void fn_800EC24C(void);
 extern void fn_800F7FD8(void);
 extern void system_getNextSequenceId(void);
 extern void fn_8011F91C(void);
-extern void fn_80121F00(void);
+extern void equip_getGlobalManager(void);
 extern void boss_updatePhaseState(void);
 extern void fn_8013C504(void);
-extern void fn_8015495C(void);
-extern void fn_8016DA4C(void);
+extern void equip_applyToCharacter(void);
+extern void debuff_clearStatus(void);
 extern void actor_setState(void);
 extern void fn_8017039C(void);
 extern void fn_80178A6C(void);
 extern void task_findEntryById(void);
-extern void fn_80237518(void);
-extern void fn_802375C4(void);
-extern void fn_80237654(void);
-extern void fn_802376D0(void);
+extern void res_MsgHandle_ctor(void);
+extern void res_Resource_destructor(void);
+extern void res_Resource_unload(void);
+extern void res_MsgHandle_isLoading(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_unload(void);
@@ -57,8 +57,8 @@ extern void fn_80244CCC(void);
 extern void fn_80288DD8(void);
 extern void fn_80288E30(void);
 extern void fn_802914F8(void);
-extern void fn_8035B694(void);
-extern void fn_8035B78C(void);
+extern void entity_Instance_constructor(void);
+extern void entity_Instance_destructor(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
@@ -427,9 +427,9 @@ lbl_fn_80287788_000003F8:
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     mr r3, r31
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     li r0, 0x2
     stw r0, 0x58c(r31)
     lfs f1, lbl_808839F8
@@ -863,7 +863,7 @@ asm void fn_80287E7C(void)
     mr r30, r5
     lwz r5, 0x20(r5)
     mr r29, r3
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lfs f1, lbl_80883A98
     lis r3, lbl_807857E0@ha
     li r28, 0x0
@@ -895,7 +895,7 @@ asm void fn_80287E7C(void)
     stfs f1, 0x1558(r29)
     bl res_MsgHandle_constructor
     addi r3, r29, 0x1568
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     addi r3, r29, 0x1574
     bl res_MsgHandle_constructor
     addi r3, r29, 0x15b8
@@ -942,19 +942,19 @@ lbl_fn_80287E7C_00000BB8:
 lbl_fn_80287E7C_00000BC8:
     addi r28, r29, 0x192c
     mr r3, r28
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     addi r3, r28, 0xc
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     addi r28, r29, 0x1944
     mr r3, r28
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     addi r3, r28, 0xc
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     addi r28, r29, 0x195c
     mr r3, r28
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     addi r3, r28, 0xc
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     addi r31, r29, 0x1984
     li r28, 0x0
     stw r28, 0x1974(r29)
@@ -1133,22 +1133,22 @@ lbl_fn_80287E7C_00000E64:
     stfs f0, 0x151c(r29)
     stfs f0, 0x1520(r29)
     stfs f0, 0x1524(r29)
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r29, 0x1950
     addi r4, r30, 0x58
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r29, 0x192c
     addi r4, r30, 0x35
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r29, 0x1938
     addi r4, r30, 0x79
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r29, 0x195c
     addi r4, r30, 0x9c
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r29, 0x1968
     addi r4, r30, 0xbf
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r29, 0x15b8
     addi r4, r30, 0xe2
     bl res_MsgHandle_destructor
@@ -1157,7 +1157,7 @@ lbl_fn_80287E7C_00000E64:
     bl res_MsgHandle_destructor
     addi r3, r29, 0x1568
     addi r4, r30, 0x120
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r29, 0x1574
     addi r4, r30, 0x142
     bl res_MsgHandle_destructor
@@ -1225,7 +1225,7 @@ asm void fn_802883A4(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_802883A4_00000FF0
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_802883A4_00000FF0:
     addic. r3, r30, 0x1984
     beq lbl_fn_802883A4_00001000
@@ -1236,28 +1236,28 @@ lbl_fn_802883A4_00001000:
     beq lbl_fn_802883A4_00001020
     addi r3, r29, 0xc
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     mr r3, r29
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
 lbl_fn_802883A4_00001020:
     addic. r29, r30, 0x1944
     beq lbl_fn_802883A4_00001040
     addi r3, r29, 0xc
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     mr r3, r29
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
 lbl_fn_802883A4_00001040:
     addic. r29, r30, 0x192c
     beq lbl_fn_802883A4_00001060
     addi r3, r29, 0xc
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     mr r3, r29
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
 lbl_fn_802883A4_00001060:
     addi r3, r30, 0x1644
     li r4, -0x1
@@ -1315,7 +1315,7 @@ lbl_fn_802883A4_00001104:
 lbl_fn_802883A4_00001124:
     addi r3, r30, 0x1568
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     addic. r29, r30, 0x155c
     beq lbl_fn_802883A4_00001150
     mr r3, r29
@@ -1353,7 +1353,7 @@ lbl_fn_802883A4_00001180:
 lbl_fn_802883A4_000011B0:
     mr r3, r30
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r31, 0x0
     ble lbl_fn_802883A4_000011CC
     mr r3, r30
@@ -1395,7 +1395,7 @@ asm void fn_802885EC(void)
     cmpwi r3, 0x0
     bne lbl_fn_802885EC_000019B8
     addi r3, r31, 0x1568
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_802885EC_000019B8
     addi r3, r31, 0x1574
@@ -1434,7 +1434,7 @@ asm void fn_802885EC(void)
     ori r0, r0, 0xc219
     oris r0, r0, 0x380
     stw r0, 0x7ec(r31)
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_8013C504
     mr r30, r3
     addi r3, r31, 0x1984
@@ -1647,7 +1647,7 @@ lbl_fn_802885EC_000015E0:
     bl talk_parseQuotedString
     bl str_parseInt
     mr r29, r3
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_8013C504
     mr r4, r29
     bl fn_800EC204
@@ -1672,7 +1672,7 @@ lbl_fn_802885EC_00001638:
     bl talk_parseQuotedString
     bl str_parseInt
     mr r29, r3
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_8013C504
     mr r4, r29
     bl fn_800EC204
@@ -1696,7 +1696,7 @@ lbl_fn_802885EC_0000167C:
     bl talk_parseQuotedString
     bl str_parseInt
     mr r29, r3
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_8013C504
     mr r4, r29
     bl fn_800EC204
@@ -1883,7 +1883,7 @@ lbl_fn_802885EC_00001928:
 lbl_fn_802885EC_00001938:
     mr r3, r31
     bl fn_802914F8
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_8013C504
     li r4, 0x3e9
     bl fn_800EC204
@@ -1910,7 +1910,7 @@ lbl_fn_802885EC_00001980:
     bl fn_800F7FD8
     addi r3, r1, 0x2c
     addi r4, r1, 0x20
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lfs f0, 0x30(r1)
     li r3, 0x1
     stfs f0, 0x538(r31)

@@ -16,7 +16,7 @@ extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
 extern void fn_8006AFF8(void);
 extern void mem_alloc(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -26,16 +26,16 @@ extern void fn_800EAECC(void);
 extern void fn_800EB49C(void);
 extern void fn_800EE360(void);
 extern void fn_8011CD84(void);
-extern void fn_8011FC10(void);
+extern void skill_findNodeById(void);
 extern void boss_updatePhaseState(void);
 extern void fn_80139560(void);
-extern void fn_80151448(void);
+extern void inventory_applyItemStats(void);
 extern void fn_80152D10(void);
-extern void fn_8015495C(void);
+extern void equip_applyToCharacter(void);
 extern void fn_8015E7A0(void);
 extern void fn_8015EB2C(void);
 extern void fn_8016EB48(void);
-extern void fn_801765D8(void);
+extern void battle_awardExp(void);
 extern void fn_80178208(void);
 extern void fn_8017C904(void);
 extern void fn_8019A3F4(void);
@@ -43,17 +43,17 @@ extern void fn_8019A580(void);
 extern void fn_8019AFE8(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
-extern void fn_80237518(void);
-extern void fn_802375C4(void);
-extern void fn_80237654(void);
-extern void fn_802376D0(void);
+extern void res_MsgHandle_ctor(void);
+extern void res_Resource_destructor(void);
+extern void res_Resource_unload(void);
+extern void res_MsgHandle_isLoading(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_unload(void);
 extern void res_MsgHandle_update(void);
 extern void res_registerResource(void);
-extern void fn_8035B694(void);
-extern void fn_8035B78C(void);
+extern void entity_Instance_constructor(void);
+extern void entity_Instance_destructor(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
 extern void boss_getOffset54(void);
@@ -599,7 +599,7 @@ asm void fn_80249C14(void)
     fmuls f0, f3, f5
     stfs f4, 0x10(r4)
     stfs f0, 0x14(r4)
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r12, 0x0(r30)
     mr r3, r30
     mr r4, r31
@@ -840,7 +840,7 @@ asm void fn_80249F98(void)
 lbl_fn_80249F98_00000A44:
     mr r3, r30
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r31, 0x0
     ble lbl_fn_80249F98_00000A60
     mr r3, r30
@@ -865,7 +865,7 @@ asm void fn_8024A004(void)
     stw r30, 0x18(r1)
     stw r29, 0x14(r1)
     mr r29, r3
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lis r3, lbl_807840A8@ha
     li r30, 0x0
     addi r3, r3, lbl_807840A8@l
@@ -928,7 +928,7 @@ lbl_fn_8024A090_00000B50:
 lbl_fn_8024A090_00000B70:
     mr r3, r29
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r30, 0x0
     ble lbl_fn_8024A090_00000B8C
     mr r3, r29
@@ -1061,7 +1061,7 @@ asm void fn_8024A1E0(void)
     stw r0, 0x12a4(r30)
     lwz r0, 0x98(r4)
     stw r0, 0x14b0(r30)
-    bl fn_801765D8
+    bl battle_awardExp
     b lbl_fn_8024A1E0_00000F00
 lbl_fn_8024A1E0_00000D58:
     lwz r0, 0x55c(r30)
@@ -1072,7 +1072,7 @@ lbl_fn_8024A1E0_00000D58:
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
 lbl_fn_8024A1E0_00000D7C:
     lwz r0, 0x7e0(r30)
     rlwinm r0, r0, 0, 26, 26
@@ -1275,7 +1275,7 @@ lbl_fn_8024A4A0_0000103C:
     mr r3, r31
     lwz r0, 0x98(r4)
     stw r0, 0x14b0(r31)
-    bl fn_801765D8
+    bl battle_awardExp
     mr r3, r31
     bl fn_800EE360
 lbl_fn_8024A4A0_00001060:
@@ -1325,7 +1325,7 @@ asm void fn_8024A650(void)
     mr r30, r5
     lwz r5, 0x20(r5)
     mr r29, r3
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lis r3, lbl_80784210@ha
     li r28, 0x0
     addi r3, r3, lbl_80784210@l
@@ -1351,9 +1351,9 @@ asm void fn_8024A650(void)
     addi r3, r29, 0x151c
     bl res_MsgHandle_constructor
     addi r3, r29, 0x1528
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     addi r3, r29, 0x1534
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     addi r3, r29, 0x1540
     bl res_MsgHandle_constructor
     addi r3, r29, 0x154c
@@ -1603,10 +1603,10 @@ lbl_fn_8024A650_0000148C:
     bl res_MsgHandle_destructor
     addi r3, r29, 0x1534
     addi r4, r30, 0x13c
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r29, 0x1528
     addi r4, r30, 0x155
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r29, 0x157c
     addi r4, r30, 0x16e
     bl res_MsgHandle_destructor
@@ -1658,7 +1658,7 @@ asm void fn_8024AB20(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_8024AB20_000015E4
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_8024AB20_000015E4:
     addic. r3, r29, 0x1588
     beq lbl_fn_8024AB20_000015F4
@@ -1721,10 +1721,10 @@ lbl_fn_8024AB20_00001694:
 lbl_fn_8024AB20_000016B4:
     addi r3, r29, 0x1534
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     addi r3, r29, 0x1528
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     addic. r31, r29, 0x151c
     beq lbl_fn_8024AB20_000016EC
     mr r3, r31
@@ -1772,7 +1772,7 @@ lbl_fn_8024AB20_0000174C:
 lbl_fn_8024AB20_0000176C:
     mr r3, r29
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r30, 0x0
     ble lbl_fn_8024AB20_00001788
     mr r3, r29
@@ -1857,11 +1857,11 @@ lbl_fn_8024AD30_000017F8:
     cmpwi r3, 0x0
     bne lbl_fn_8024AD30_00001F3C
     addi r3, r29, 0x1534
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_8024AD30_00001F3C
     addi r3, r29, 0x1528
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_8024AD30_00001F3C
     addi r3, r29, 0x157c
@@ -2278,7 +2278,7 @@ lbl_fn_8024AD30_00001EAC:
     bl atoi
     mr r4, r3
     lwz r3, lbl_8087F408
-    bl fn_8011FC10
+    bl skill_findNodeById
     cmpwi r3, 0x0
     beq lbl_fn_8024AD30_00001EF4
     stw r28, 0x16e4(r3)

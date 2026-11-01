@@ -23,7 +23,7 @@ extern void fn_80392CE0(void);
 extern void fn_803933F4(void);
 extern void fn_803E41AC(void);
 extern void fn_803E43A4(void);
-extern void fn_803EA77C(void);
+extern void chest_spawnLoot(void);
 extern void fn_804A5E40(void);
 extern void fn_805BDCC0(void);
 extern void fn_805BF1EC(void);
@@ -39,7 +39,7 @@ extern void PSVECMag(void);
 extern void PSVECCrossProduct(void);
 extern void rand(void);
 extern void fn_8068A4A8(void);
-extern void fn_8068AD58(void);
+extern void std_cos(void);
 extern void fn_8068AE24(void);
 extern void std_atan2(void);
 
@@ -588,7 +588,7 @@ lbl_fn_803792F0_000006AC:
     fmsubs f10, f11, f12, f10
     fmuls f9, f9, f10
     fmuls f1, f0, f9
-    bl fn_8068AD58
+    bl std_cos
     lfs f0, 0x334(r28)
     frsp f11, f1
     lfs f25, 0x328(r28)
@@ -1490,7 +1490,7 @@ lbl_fn_803792F0_00001458:
     lfs f0, lbl_8088583C
     fmr f30, f1
     fmuls f1, f0, f1
-    bl fn_8068AD58
+    bl std_cos
     lwz r3, 0x210(r28)
     frsp f9, f1
     lfs f0, lbl_808858B4
@@ -2735,7 +2735,7 @@ lbl_fn_803792F0_0000271C:
     lfs f1, lbl_80885848
     li r6, 0xf
     lfs f2, lbl_808858C8
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_803792F0_00002760:
     lwz r3, 0x358(r28)
     cmpw r3, r30
@@ -3098,7 +3098,7 @@ lbl_fn_803792F0_00002CC8:
     lfs f9, lbl_80885868
     lfs f0, lbl_8088587C
     fmsubs f1, f9, f11, f0
-    bl fn_8068AD58
+    bl std_cos
     lfs f9, 0x52c(r1)
     addi r3, r1, 0x434
     lfs f0, 0x520(r1)
@@ -3293,7 +3293,7 @@ lbl_fn_803792F0_00002F80:
     lfs f2, lbl_808858C8
     li r5, 0x28
     li r6, 0xf
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_803792F0_00002FCC:
     addi r26, r26, 0x20
     addi r27, r27, 0x1

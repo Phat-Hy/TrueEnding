@@ -26,12 +26,12 @@ extern void GXClearVtxDesc(void);
 extern void fn_80614790(void);
 extern void fn_806149C0(void);
 extern void fn_80614A80(void);
-extern void fn_80615D20(void);
+extern void GXInitLightDistAttn(void);
 extern void fn_80615D50(void);
 extern void fn_80617340(void);
-extern void fn_80617880(void);
+extern void GXSetTevOrder(void);
 extern void GXSetNumTevStages(void);
-extern void fn_80617D50(void);
+extern void GXSetTevAlphaIn(void);
 extern void GXLoadPosMtxImm(void);
 extern void fn_8061A0F0(void);
 extern void fn_8061A100(void);
@@ -595,7 +595,7 @@ asm void fn_805C03A0(void)
     li r3, 0x0
     bl fn_80614A80
     li r3, 0x1
-    bl fn_80615D20
+    bl GXInitLightDistAttn
     li r3, 0x4
     li r4, 0x0
     li r5, 0x1
@@ -615,12 +615,12 @@ asm void fn_805C03A0(void)
     li r4, 0xff
     li r5, 0xff
     li r6, 0x4
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
     li r6, 0x5
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
     lis r4, lbl_80764140@ha
     addi r3, r1, 0x8
     lfs f1, lbl_80764140@l(r4)
@@ -860,10 +860,8 @@ void fn_805C0800(void)
 {
 }
 
-asm void fn_805C0810(void)
+void fn_805C0810(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_805C0820(void)
@@ -1276,10 +1274,8 @@ lbl_fn_805C0D20_00000F84:
     blr
 }
 
-asm void fn_805C0D90(void)
+void fn_805C0D90(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_805C0DA0(void)
@@ -1315,10 +1311,8 @@ lbl_fn_805C0DA0_00001004:
     blr
 }
 
-asm void fn_805C0E10(void)
+void fn_805C0E10(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_805C0E20(void)

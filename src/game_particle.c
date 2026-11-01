@@ -13,7 +13,7 @@ extern void printf(void);
 extern void abort(void);
 extern void fn_8068B39C(void);
 extern void fn_8068B50C(void);
-extern void fn_806952C4(void);
+extern void msl_releaseRefCount(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -283,7 +283,7 @@ lbl_fn_800E0B90_000002C8:
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_800E0B90_000002EC
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_800E0B90_000002EC:
     cmpwi r31, 0x0
     ble lbl_fn_800E0B90_000002FC
@@ -317,7 +317,7 @@ asm void dtor_800E0C20(void)
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_dtor_800E0C20_00000358
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_dtor_800E0C20_00000358:
     cmpwi r31, 0x0
     ble lbl_dtor_800E0C20_00000368
@@ -349,7 +349,7 @@ asm void dtor_800E0C8C(void)
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_dtor_800E0C8C_000003BC
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_dtor_800E0C8C_000003BC:
     cmpwi r31, 0x0
     ble lbl_dtor_800E0C8C_000003CC

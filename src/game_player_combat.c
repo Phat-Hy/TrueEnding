@@ -12,14 +12,14 @@ extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void fn_8000FAE4(void);
 extern void talk_formatQuotedString(void);
-extern void fn_8005BBF8(void);
-extern void fn_8005BCE8(void);
+extern void talk_parseQuotes(void);
+extern void talk_copySpeakerName(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_80089EE4(void);
-extern void fn_8008B140(void);
-extern void fn_80097D40(void);
+extern void map_processTrigger(void);
+extern void atn_Anim_getLayerTrack(void);
 extern void fn_80098948(void);
 extern void fn_80099010(void);
 extern void fn_800A0548(void);
@@ -32,7 +32,7 @@ extern void fn_802180A8(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_80473F88(void);
+extern void shockwave_freeEmitter(void);
 extern void printf(void);
 extern void strcmp(void);
 extern void abort(void);
@@ -225,7 +225,7 @@ lbl_fn_8011E200_00000214:
     lwzx r4, r4, r0
     lbz r0, 0x38(r1)
     add r4, r4, r0
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_8011E200_0000056C
@@ -1063,7 +1063,7 @@ lbl_fn_8011EF14_00000D4C:
     addi r4, r4, lbl_807774B8@l
     stw r4, 0x34(r1)
     la r4, lbl_8087D710
-    bl fn_8005BCE8
+    bl talk_copySpeakerName
     lis r16, lbl_80736FA8@ha
     li r17, 0x0
     addi r16, r16, lbl_80736FA8@l
@@ -1092,7 +1092,7 @@ lbl_fn_8011EF14_00000E20:
     addi r14, r14, 0x1
 lbl_fn_8011EF14_00000E38:
     addi r3, r1, 0x34
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_8011EF14_00000DE8
     cmpwi r17, 0x0
@@ -1526,11 +1526,11 @@ lbl_fn_8011EF14_00001454:
     bl fn_80089EE4
 lbl_fn_8011EF14_0000147C:
     addi r3, r1, 0x34
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_8011EF14_000010D0
     mr r3, r15
-    bl fn_80473F88
+    bl shockwave_freeEmitter
 lbl_fn_8011EF14_00001494:
     li r3, 0x0
 lbl_fn_8011EF14_00001498:
@@ -1583,7 +1583,7 @@ lbl_fn_8011F6FC_0000151C:
     srawi. r0, r0, 31
     beq lbl_fn_8011F6FC_00001534
     addi r3, r30, 0xb0
-    bl fn_8008B140
+    bl map_processTrigger
 lbl_fn_8011F6FC_00001534:
     lwz r0, 0x38(r30)
     rlwinm r0, r0, 0, 29, 29

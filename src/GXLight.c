@@ -2,7 +2,7 @@
 
 /* External functions referenced */
 extern void fn_80615FF0(void);
-extern void fn_8068A850(void);
+extern void std_sin(void);
 extern void math_u64DivMod(void);
 extern void _savegpr_24(void);
 extern void _restgpr_24(void);
@@ -48,7 +48,7 @@ void fn_80615AD0(void);
 void fn_80615AE0(void);
 void fn_80615B60(void);
 void fn_80615C40(void);
-void fn_80615D20(void);
+void GXInitLightDistAttn(void);
 void fn_80615D50(void);
 void fn_80615E00(void);
 void fn_80615F30(void);
@@ -93,7 +93,7 @@ lbl_fn_80615720_0000005C:
     lfs f0, lbl_8088875C
     fmuls f1, f2, f1
     fdivs f1, f1, f0
-    bl fn_8068A850
+    bl std_sin
     cmpwi r31, 0x1
     frsp f5, f1
     beq lbl_fn_80615720_000000A8
@@ -520,7 +520,7 @@ lbl_fn_80615C40_000005F0:
     blr
 }
 
-asm void fn_80615D20(void)
+asm void GXInitLightDistAttn(void)
 {
     nofralloc
     lwz r4, __GXData

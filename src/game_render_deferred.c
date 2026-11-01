@@ -3,13 +3,13 @@
 
 /* External function declarations */
 extern void dtor_80084684(void);
-extern void fn_8000D3A4(void);
-extern void fn_8001047C(void);
-extern void fn_80011034(void);
+extern void vec3_mag(void);
+extern void vec3_assign(void);
+extern void vec3_toEulerAngles(void);
 extern void vec3_sub(void);
 extern void fn_8004D124(void);
 extern void atn_ColliBase_destructor(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -17,17 +17,17 @@ extern void ref_releaseHandle(void);
 extern void fn_800EE360(void);
 extern void fn_800F7FD8(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8574(void);
+extern void viewport_updateCulling(void);
 extern void clip_calculateFrustum(void);
 extern void fn_8012A1B8(void);
-extern void fn_8013C38C(void);
-extern void fn_8015495C(void);
-extern void fn_8016DA4C(void);
+extern void npc_getPosition(void);
+extern void equip_applyToCharacter(void);
+extern void debuff_clearStatus(void);
 extern void actor_setState(void);
-extern void fn_801765D8(void);
+extern void battle_awardExp(void);
 extern void fn_80178A6C(void);
 extern void sound_initGlobalInstances(void);
-extern void fn_802375C4(void);
+extern void res_Resource_destructor(void);
 extern void res_MsgHandle_unload(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
@@ -637,7 +637,7 @@ lbl_fn_802B6104_0000078C:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
     b lbl_fn_802B6104_00000998
 lbl_fn_802B6104_000007B0:
     xoris r0, r0, 0x8000
@@ -702,7 +702,7 @@ lbl_fn_802B6104_00000884:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
     b lbl_fn_802B6104_00000998
 lbl_fn_802B6104_000008A8:
     addi r4, r1, 0x7c
@@ -848,7 +848,7 @@ lbl_fn_802B6758_00000AB4:
     ori r0, r5, 0x8000
     stw r0, 0x12a4(r31)
     mr r3, r31
-    bl fn_801765D8
+    bl battle_awardExp
     mr r3, r31
     bl fn_800EE360
     b lbl_fn_802B6758_00000B68
@@ -1357,16 +1357,16 @@ asm void fn_802B6F80(void)
     stw r31, 0x4c(r1)
     mr r31, r3
     lwz r3, 0x14d4(r3)
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r1, 0x2c
-    bl fn_8001047C
+    bl vec3_assign
     addi r3, r1, 0x20
     addi r4, r1, 0x2c
     addi r5, r31, 0x528
     bl vec3_sub
     addi r3, r1, 0x20
-    bl fn_8000D3A4
+    bl vec3_mag
     fmr f30, f1
     mr r3, r31
     bl fn_8012A1B8
@@ -1376,7 +1376,7 @@ asm void fn_802B6F80(void)
     bl fn_800F7FD8
     addi r3, r1, 0x14
     addi r4, r1, 0x8
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lfs f0, 0x18(r1)
     fsubs f1, f0, f31
     bl fn_802A7964
@@ -1585,9 +1585,9 @@ asm void fn_802B725C(void)
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     mr r3, r28
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lfs f0, lbl_80884034
     li r0, 0x11
     li r31, 0x1
@@ -1686,7 +1686,7 @@ asm void fn_802B73FC(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_802B73FC_000016A4
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_802B73FC_000016A4:
     addic. r3, r29, 0x1850
     beq lbl_fn_802B73FC_000016B4
@@ -1741,7 +1741,7 @@ lbl_fn_802B73FC_00001730:
 lbl_fn_802B73FC_00001750:
     addi r3, r29, 0x1524
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     mr r3, r29
     li r4, 0x0
     bl fn_805A3D00

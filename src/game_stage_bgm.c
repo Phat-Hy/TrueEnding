@@ -7,23 +7,23 @@ extern void __register_global_object(void);
 extern void _restgpr_24(void);
 extern void _savegpr_24(void);
 extern void dtor_80084684(void);
-extern void fn_8000D114(void);
-extern void fn_8000D3A4(void);
+extern void vec3_set(void);
+extern void vec3_mag(void);
 extern void fn_8000DD0C(void);
-extern void fn_8001047C(void);
+extern void vec3_assign(void);
 extern void fn_800109E0(void);
-extern void fn_80011034(void);
+extern void vec3_toEulerAngles(void);
 extern void fn_80011410(void);
 extern void fn_80012C88(void);
 extern void vec3_sub(void);
 extern void fn_800133B0(void);
-extern void fn_80013410(void);
-extern void fn_8003EFB0(void);
+extern void vec3_add(void);
+extern void ui_destroyWidget(void);
 extern void collision_testLineSegment(void);
 extern void fn_80057A68(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_8008BBD8(void);
+extern void map_debugLog(void);
 extern void atn_Matrix_copy(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -31,7 +31,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void fn_800F52F8(void);
 extern void fn_800F72CC(void);
 extern void fn_800F7F80(void);
-extern void fn_800F7FF0(void);
+extern void viewport_getNextSequenceId(void);
 extern void fn_800F80A8(void);
 extern void fn_800F80B8(void);
 extern void fn_800F8290(void);
@@ -45,7 +45,7 @@ extern void fn_80139550(void);
 extern void fn_80139F3C(void);
 extern void fn_8013A158(void);
 extern void fn_8013A194(void);
-extern void fn_8013C38C(void);
+extern void npc_getPosition(void);
 extern void fn_8013C480(void);
 extern void fn_801404F8(void);
 extern void fn_80140500(void);
@@ -66,8 +66,8 @@ extern void printf(void);
 extern void strcmp(void);
 extern void abort(void);
 extern void __ptmf_scall(void);
-extern void fn_806A8E40(void);
-extern void fn_806B0E30(void);
+extern void net_getSocket(void);
+extern void net_getMyAid(void);
 
 /* External data declarations */
 extern u8 lbl_80739F34[];
@@ -396,7 +396,7 @@ lbl_fn_8019F5BC_000002F4:
     stw r4, 0x48(r1)
     stw r0, 0x4c(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_8019F5BC_000003C8
     lwz r7, 0x3c(r1)
@@ -876,7 +876,7 @@ lbl_fn_8019FC6C_000009A4:
     stw r4, 0x48(r1)
     stw r0, 0x4c(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_8019FC6C_00000A78
     lwz r7, 0x3c(r1)
@@ -1042,10 +1042,10 @@ lbl_fn_8019FEC4_00000BC4:
     mtctr r12
     bctrl
     lwz r3, 0x4(r28)
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r1, 0xb8
-    bl fn_8001047C
+    bl vec3_assign
     lfs f1, 0xbc(r1)
     addi r3, r1, 0x28
     lfs f0, lbl_8088210C
@@ -1062,7 +1062,7 @@ lbl_fn_8019FEC4_00000BC4:
     bl fn_80012C88
     addi r3, r1, 0xac
     addi r4, r28, 0x8
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lwz r3, 0x4(r28)
     bl fn_800F7F80
     cmpwi r3, 0x0
@@ -1079,7 +1079,7 @@ lbl_fn_8019FEC4_00000BC4:
     addi r3, r1, 0x94
     lfs f3, lbl_80881FBC
     fmr f2, f1
-    bl fn_8000D114
+    bl vec3_set
     addi r3, r1, 0x128
     addi r4, r1, 0xa0
     bl fn_800109E0
@@ -1100,17 +1100,17 @@ lbl_fn_8019FEC4_00000CEC:
     cmpwi r3, 0x0
     beq lbl_fn_8019FEC4_00000D50
     mr r3, r31
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r1, 0x88
     addi r5, r1, 0xb8
     bl vec3_sub
     addi r3, r1, 0x88
-    bl fn_8000D3A4
+    bl vec3_mag
     fmr f28, f1
     stfs f30, 0x8c(r1)
     addi r3, r1, 0x88
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
     addi r3, r1, 0x94
     addi r4, r1, 0x88
     bl fn_801A03E8
@@ -1130,16 +1130,16 @@ lbl_fn_8019FEC4_00000D5C:
     cmpwi r30, 0x0
     beq lbl_fn_8019FEC4_00000E78
     mr r3, r30
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r1, 0x7c
     addi r5, r1, 0xb8
     bl vec3_sub
     addi r3, r1, 0x7c
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
     addi r3, r1, 0x1c
     addi r4, r1, 0x7c
-    bl fn_80011034
+    bl vec3_toEulerAngles
     addi r3, r1, 0x70
     addi r4, r1, 0x1c
     addi r5, r1, 0xac
@@ -1209,7 +1209,7 @@ lbl_fn_8019FEC4_00000E78:
     bl fn_80140500
     addi r3, r1, 0x64
     addi r4, r1, 0xb8
-    bl fn_8001047C
+    bl vec3_assign
     lfs f1, lbl_80882128
     addi r3, r1, 0x10
     addi r4, r28, 0x8
@@ -1217,7 +1217,7 @@ lbl_fn_8019FEC4_00000E78:
     addi r3, r1, 0x58
     addi r4, r1, 0xb8
     addi r5, r1, 0x10
-    bl fn_80013410
+    bl vec3_add
     lwz r3, 0x4(r28)
     bl fn_80198C00
     mr r30, r3
@@ -2146,10 +2146,10 @@ asm void fn_801A0C54(void)
     bne lbl_fn_801A0C54_00001990
     lis r3, lbl_807C6BB8@ha
     stwu r6, lbl_807C6BB8@l(r3)
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     lis r5, lbl_807C7BDC@ha
     stw r6, 0x4(r3)
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     addi r5, r5, lbl_807C7BDC@l
     stw r6, 0x8(r3)
     stw r28, 0xc(r3)
@@ -2199,7 +2199,7 @@ lbl_fn_801A0C54_000019FC:
     li r0, 0x0
     b lbl_fn_801A0C54_00001A4C
 lbl_fn_801A0C54_00001A24:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_801A0C54_00001A4C
 lbl_fn_801A0C54_00001A30:
@@ -2209,7 +2209,7 @@ lbl_fn_801A0C54_00001A30:
     li r3, 0x0
     b lbl_fn_801A0C54_00001A48
 lbl_fn_801A0C54_00001A44:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_801A0C54_00001A48:
     clrlwi r0, r3, 24
 lbl_fn_801A0C54_00001A4C:
@@ -2239,7 +2239,7 @@ lbl_fn_801A0C54_00001A68:
     li r0, 0x0
     b lbl_fn_801A0C54_00001ACC
 lbl_fn_801A0C54_00001AA4:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_801A0C54_00001ACC
 lbl_fn_801A0C54_00001AB0:
@@ -2249,7 +2249,7 @@ lbl_fn_801A0C54_00001AB0:
     li r3, 0x0
     b lbl_fn_801A0C54_00001AC8
 lbl_fn_801A0C54_00001AC4:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_801A0C54_00001AC8:
     clrlwi r0, r3, 24
 lbl_fn_801A0C54_00001ACC:

@@ -12,7 +12,7 @@ extern void dtor_80013D60(void);
 extern void dtor_80084684(void);
 extern void sys_copyString(void);
 extern void fn_8000ECA8(void);
-extern void fn_8003E4A4(void);
+extern void str_initFromCStr(void);
 extern void fn_8004203C(void);
 extern void fn_800422CC(void);
 extern void fn_80049B74(void);
@@ -33,11 +33,11 @@ extern void mem_getAllocSize(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void node_createNamedChild(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void fn_80089ACC(void);
-extern void fn_800BFAC8(void);
+extern void motion_updateFogAdj(void);
 extern void fn_800C31EC(void);
-extern void fn_800CB360(void);
+extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB480(void);
 extern void fn_800CB538(void);
@@ -49,11 +49,11 @@ extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void fn_800F52F8(void);
 extern void fn_8020A780(void);
 extern void res_MsgHandle_unload(void);
-extern void fn_8035B78C(void);
+extern void entity_Instance_destructor(void);
 extern void fn_8035FBF8(void);
 extern void fn_8035FC00(void);
 extern void fn_8035FC08(void);
@@ -79,7 +79,7 @@ extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_80473F88(void);
+extern void shockwave_freeEmitter(void);
 extern void fn_805A38F4(void);
 extern void PSVECSquareMag(void);
 extern void atoi(void);
@@ -154,7 +154,7 @@ asm void fn_8035DE10(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_8035DE10_0000004C
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_8035DE10_0000004C:
     addic. r31, r29, 0x1510
     beq lbl_fn_8035DE10_0000006C
@@ -190,7 +190,7 @@ lbl_fn_8035DE10_000000AC:
 lbl_fn_8035DE10_000000BC:
     mr r3, r29
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r30, 0x0
     ble lbl_fn_8035DE10_000000D8
     mr r3, r29
@@ -361,7 +361,7 @@ asm void fn_8035DFB8(void)
     stfs f1, 0x188(r31)
     stw r29, 0x18c(r31)
     stfs f0, 0x190(r31)
-    bl fn_800CB360
+    bl morph_reset
     lis r3, lbl_8074B538@ha
     cmpwi r29, 0x0
     addi r3, r3, lbl_8074B538@l
@@ -483,7 +483,7 @@ asm void fn_8035E2A0(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_8035E2A0_000004D8
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_8035E2A0_000004D8:
     cmpwi r31, 0x0
     ble lbl_fn_8035E2A0_000004E8
@@ -572,7 +572,7 @@ lbl_fn_8035E314_000005D8:
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_8035E314_0000060C
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_8035E314_0000060C:
     addi r3, r30, 0x194
     li r4, -0x1
@@ -661,7 +661,7 @@ asm void fn_8035E524(void)
     stwu r1, -0x10(r1)
     mflr r0
     stw r0, 0x14(r1)
-    bl fn_800D3FA4
+    bl bloom_processPasses
     neg r0, r3
     or r0, r0, r3
     srwi r3, r0, 31
@@ -755,7 +755,7 @@ lbl_fn_8035E5B8_00000838:
     lwz r4, lbl_8087EFB4
     stfs f1, 0xc(r1)
     stfs f0, 0x10(r1)
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f0, 0x1c(r1)
     fcmpo cr0, f30, f0
     bge lbl_fn_8035E5B8_000008D4
@@ -834,7 +834,7 @@ lbl_fn_8035E730_00000958:
     mr r3, r31
     bl fn_8035F3D4
     addi r3, r31, 0x48
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     li r0, 0x3
     stw r0, 0x50(r31)
     li r3, 0x1
@@ -842,7 +842,7 @@ lbl_fn_8035E730_00000958:
 lbl_fn_8035E730_00000978:
     cmpwi r0, 0x3
     bne lbl_fn_8035E730_000009A4
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     bne lbl_fn_8035E730_00000994
     li r3, 0x1
@@ -1727,7 +1727,7 @@ lbl_fn_8035F3D4_0000160C:
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0x14
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x14
     addi r4, r26, 0x2c
     bl sys_copyString
@@ -1838,7 +1838,7 @@ lbl_fn_8035F3D4_000017AC:
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0x8
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x8
     addi r4, r31, 0x2c
     bl sys_copyString

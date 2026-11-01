@@ -5,24 +5,24 @@
 extern void _restgpr_19(void);
 extern void _savegpr_19(void);
 extern void fn_8003EA3C(void);
-extern void fn_8004D388(void);
+extern void collision_queryGeometry(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8574(void);
-extern void fn_800F8C6C(void);
+extern void viewport_updateCulling(void);
+extern void scissor_clipFrustum(void);
 extern void clip_calculateFrustum(void);
 extern void fn_80108C10(void);
-extern void fn_80144710(void);
+extern void quest_evaluateConditions(void);
 extern void fn_80148B0C(void);
 extern void fn_80155D70(void);
 extern void fn_8015CF98(void);
 extern void fn_8015D2A0(void);
 extern void fn_8015D5B0(void);
 extern void actor_setState(void);
-extern void fn_8016F3D0(void);
+extern void battle_canTargetActor(void);
 extern void fn_80176548(void);
 extern void fn_801781B0(void);
 extern void fn_8017A450(void);
@@ -53,7 +53,7 @@ extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
 extern void PSVECSquareMag(void);
 extern void PSVECDotProduct(void);
-extern void fn_8068A850(void);
+extern void std_sin(void);
 extern void std_atan2(void);
 
 /* External data declarations */
@@ -192,7 +192,7 @@ lbl_fn_80269168_000000F0:
     bl task_findEntryById
     mr r31, r3
     mr r3, r30
-    bl fn_80144710
+    bl quest_evaluateConditions
     lwz r3, lbl_8087F048
     mr r6, r30
     lwz r8, 0x590(r30)
@@ -202,7 +202,7 @@ lbl_fn_80269168_000000F0:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
 lbl_fn_80269168_0000012C:
     lwz r0, 0x24(r1)
     psq_l f31, 0x18(r1), 0, 0
@@ -353,7 +353,7 @@ lbl_fn_802692B4_00000334:
     beq lbl_fn_802692B4_00000390
     mr r3, r20
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     bne lbl_fn_802692B4_00000390
     lwz r0, 0xd18(r21)
@@ -473,7 +473,7 @@ lbl_fn_802692B4_00000408:
     addi r8, r1, 0x98
     li r9, 0x2006
     li r10, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
 lbl_fn_802692B4_00000524:
     addi r21, r21, 0x1
 lbl_fn_802692B4_00000528:
@@ -647,7 +647,7 @@ lbl_fn_802696F8_00000718:
     bl PSVECDotProduct
     fmr f30, f1
     lfd f1, lbl_807445E0@l(r30)
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     fcmpo cr0, f30, f0
     cror eq, gt, eq
@@ -1193,7 +1193,7 @@ lbl_fn_8026A010_00000FA4:
     bl task_findEntryById
     mr r30, r3
     mr r3, r31
-    bl fn_80144710
+    bl quest_evaluateConditions
     lwz r8, 0x590(r31)
     mr r6, r31
     lwz r3, lbl_8087F048
@@ -1203,7 +1203,7 @@ lbl_fn_8026A010_00000FA4:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     b lbl_fn_8026A010_000010C0
 lbl_fn_8026A010_00000FE4:
     cmpwi r0, 0x2
@@ -1251,7 +1251,7 @@ lbl_fn_8026A010_00001070:
     bl task_findEntryById
     mr r30, r3
     mr r3, r31
-    bl fn_80144710
+    bl quest_evaluateConditions
     lwz r8, 0x590(r31)
     mr r6, r31
     lwz r3, lbl_8087F048
@@ -1261,7 +1261,7 @@ lbl_fn_8026A010_00001070:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
 lbl_fn_8026A010_000010C0:
     lfs f4, 0x1538(r31)
     lis r6, 0x4330
@@ -1304,7 +1304,7 @@ lbl_fn_8026A010_000010C0:
     addi r8, r31, 0x5b8
     lis r7, 0x8000
     li r9, 0x0
-    bl fn_8004D388
+    bl collision_queryGeometry
     addi r4, r1, 0x48
     addi r3, r1, 0x8
     psq_l f1, 0x0(r4), 0, 0
@@ -1610,7 +1610,7 @@ lbl_fn_8026A628_000015B0:
     bl task_findEntryById
     mr r31, r3
     mr r3, r30
-    bl fn_80144710
+    bl quest_evaluateConditions
     lwz r3, lbl_8087F048
     mr r6, r30
     lwz r8, 0x590(r30)
@@ -1620,7 +1620,7 @@ lbl_fn_8026A628_000015B0:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
 lbl_fn_8026A628_000015EC:
     lwz r0, 0x24(r1)
     psq_l f31, 0x18(r1), 0, 0

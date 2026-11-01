@@ -56,7 +56,7 @@ void fn_800BF0EC(void);
 void fn_800BF558(void);
 void fn_800BF9C4(void);
 void fn_800BFAC4(void);
-void fn_800BFAC8(void);
+void motion_updateFogAdj(void);
 void fn_800BFB70(void);
 void fn_800BFC18(void);
 void fn_800BFCB4(void);
@@ -824,13 +824,10 @@ lbl_fn_800BF9C4_000009C4:
     blr
 }
 
-asm void fn_800BFAC4(void)
-{
-    nofralloc
-    blr
+void fn_800BFAC4(void) {
 }
 
-asm void fn_800BFAC8(void)
+asm void motion_updateFogAdj(void)
 {
     nofralloc
     stwu r1, -0x50(r1)

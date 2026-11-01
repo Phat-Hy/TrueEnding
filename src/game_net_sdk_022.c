@@ -26,7 +26,7 @@ extern void net_formatLog(void);
 extern void fn_806A9CA0(void);
 extern void fn_806AB8B0(void);
 extern void fn_806ABA10(void);
-extern void fn_806B0E30(void);
+extern void net_getMyAid(void);
 extern void fn_806B0EB0(void);
 extern void fn_806B1170(void);
 extern void fn_806B12F0(void);
@@ -555,7 +555,7 @@ lbl_fn_806CD880_0000055C:
     lbz r0, 0x1c(r3)
     cmpwi r0, 0x1
     bne lbl_fn_806CD880_000005A0
-    bl fn_806B0E30
+    bl net_getMyAid
     lis r7, 0x1
     clrlwi r6, r3, 24
     mr r5, r31
@@ -628,7 +628,7 @@ lbl_fn_806CD880_00000658:
 lbl_fn_806CD880_00000664:
     li r29, 0x8
 lbl_fn_806CD880_00000668:
-    bl fn_806B0E30
+    bl net_getMyAid
     lis r4, 0x1
     clrlwi r6, r3, 24
     addi r3, r4, -0x8000
@@ -874,7 +874,7 @@ lbl_fn_806CDD00_000009AC:
     li r3, 0x0
     b lbl_fn_806CDD00_00000A24
 lbl_fn_806CDD00_000009DC:
-    bl fn_806B0E30
+    bl net_getMyAid
     mr r4, r29
     mr r5, r30
     mr r6, r31
@@ -957,7 +957,7 @@ lbl_fn_806CDE80_00000AF0:
     mr r3, r30
     bl fn_806B14D0
     mr r31, r3
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     cmplw r30, r0
     beq lbl_fn_806CDE80_00000B24
@@ -1173,7 +1173,7 @@ lbl_fn_806CE0F0_00000D98:
     mr r31, r3
     cmplwi r0, 0x20
     bge lbl_fn_806CE0F0_00000DD8
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r3, r3, 24
     clrlwi r0, r31, 24
     cmplw r0, r3
@@ -1284,7 +1284,7 @@ lbl_fn_806CE250_00000F14:
 lbl_fn_806CE250_00000F28:
     lwz r3, 0x8(r1)
     lbzx r21, r3, r20
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     cmplw r21, r0
     beq lbl_fn_806CE250_00000FB0
@@ -1328,7 +1328,7 @@ lbl_fn_806CE250_00000FC0:
     mr r25, r3
     cmplwi r0, 0xff
     beq lbl_fn_806CE250_0000105C
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r3, r3, 24
     clrlwi r0, r25, 24
     cmplw r0, r3
@@ -1420,7 +1420,7 @@ lbl_fn_806CE250_0000107C:
     stw r25, 0x2c(r22)
     stw r26, 0x28(r22)
 lbl_fn_806CE250_00001138:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     cmplw r19, r0
     beq lbl_fn_806CE250_00001280
@@ -1628,7 +1628,7 @@ asm void fn_806CE750(void)
     addi r3, r31, -0x8000
     crclr 6
     bl net_formatLog
-    bl fn_806B0E30
+    bl net_getMyAid
     lbz r5, 0x16(r30)
     clrlwi r6, r3, 24
     addi r3, r31, -0x8000
@@ -1913,7 +1913,7 @@ lbl_fn_806CEB00_000017FC:
     bl fn_806B12F0
     cmpwi r3, 0x0
     bne lbl_fn_806CEB00_00001854
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r3, r3, 24
     li r0, 0x1
     slw r0, r0, r3
@@ -1936,7 +1936,7 @@ lbl_fn_806CEB00_00001874:
     slw r0, r26, r0
     and. r0, r25, r0
     beq lbl_fn_806CEB00_000018B4
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     clrlwi r4, r23, 24
     cmplw r4, r0

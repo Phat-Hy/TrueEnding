@@ -20,7 +20,7 @@ extern void fn_805D9CC0(void);
 extern void __GXSetVtxDesc(void);
 extern void GXClearVtxDesc(void);
 extern void fn_80615C40(void);
-extern void fn_80615D20(void);
+extern void GXInitLightDistAttn(void);
 extern void fn_80615D50(void);
 extern void fn_80616360(void);
 extern void fn_80616380(void);
@@ -38,8 +38,8 @@ extern void fn_80616E80(void);
 extern void fn_80617030(void);
 extern void fn_80617130(void);
 extern void fn_80617200(void);
-extern void fn_80617220(void);
-extern void fn_806173E0(void);
+extern void GXInitTexObjDefault(void);
+extern void GXSetTevColorIn(void);
 extern void fn_80617420(void);
 extern void GXSetTevIndirect(void);
 extern void fn_806174C0(void);
@@ -48,11 +48,11 @@ extern void fn_806175F0(void);
 extern void GXSetTevKColorSel(void);
 extern void GXSetTevKAlphaSel(void);
 extern void GXSetTevSwapMode(void);
-extern void fn_80617730(void);
+extern void GXSetTevSwapModeTable(void);
 extern void fn_806177B0(void);
-extern void fn_80617880(void);
+extern void GXSetTevOrder(void);
 extern void GXSetNumTevStages(void);
-extern void fn_80617D50(void);
+extern void GXSetTevAlphaIn(void);
 extern void GXLoadTexMtxImm(void);
 extern void fn_8061A100(void);
 extern void strncpy(void);
@@ -494,7 +494,7 @@ asm void fn_805D1A40(void)
     li r30, 0x1
     li r23, 0x0
     li r3, 0x1
-    bl fn_80615D20
+    bl GXInitLightDistAttn
     lwz r3, 0x4c(r26)
     extrwi. r0, r3, 1, 23
     beq lbl_fn_805D1A40_0000062C
@@ -826,7 +826,7 @@ lbl_fn_805D1A40_00000A40:
     extrwi r5, r0, 2, 28
     extrwi r6, r0, 2, 26
     extrwi r7, r0, 2, 24
-    bl fn_80617730
+    bl GXSetTevSwapModeTable
     addi r23, r23, 0x1
     addi r27, r27, 0x1
     cmpwi r23, 0x4
@@ -838,25 +838,25 @@ lbl_fn_805D1A40_00000A70:
     li r5, 0x1
     li r6, 0x2
     li r7, 0x3
-    bl fn_80617730
+    bl GXSetTevSwapModeTable
     li r3, 0x1
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
     li r7, 0x3
-    bl fn_80617730
+    bl GXSetTevSwapModeTable
     li r3, 0x2
     li r4, 0x1
     li r5, 0x1
     li r6, 0x1
     li r7, 0x3
-    bl fn_80617730
+    bl GXSetTevSwapModeTable
     li r3, 0x3
     li r4, 0x2
     li r5, 0x2
     li r6, 0x2
     li r7, 0x3
-    bl fn_80617730
+    bl GXSetTevSwapModeTable
 lbl_fn_805D1A40_00000AD0:
     lwz r0, 0x50(r26)
     li r27, 0x0
@@ -900,7 +900,7 @@ lbl_fn_805D1A40_00000B5C:
     lbz r4, 0x0(r25)
     rlwimi r5, r0, 8, 23, 23
     lbz r6, 0x1(r25)
-    bl fn_80617880
+    bl GXSetTevOrder
     lbz r0, 0x3(r25)
     mr r3, r28
     extrwi r4, r0, 2, 29
@@ -913,7 +913,7 @@ lbl_fn_805D1A40_00000B5C:
     extrwi r7, r0, 4, 24
     clrlwi r4, r5, 28
     extrwi r5, r5, 4, 24
-    bl fn_806173E0
+    bl GXSetTevColorIn
     lbz r6, 0x6(r25)
     mr r3, r28
     lbz r0, 0x7(r25)
@@ -990,13 +990,13 @@ lbl_fn_805D1A40_00000CB4:
     li r4, 0xff
     li r5, 0xff
     li r6, 0x4
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x0
     li r4, 0xf
     li r5, 0x4
     li r6, 0xa
     li r7, 0xf
-    bl fn_806173E0
+    bl GXSetTevColorIn
     li r3, 0x0
     li r4, 0x7
     li r5, 0x2
@@ -1013,13 +1013,13 @@ lbl_fn_805D1A40_00000D10:
     li r4, 0x0
     li r5, 0x0
     li r6, 0xff
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x0
     li r4, 0x2
     li r5, 0x4
     li r6, 0x8
     li r7, 0xf
-    bl fn_806173E0
+    bl GXSetTevColorIn
     li r3, 0x0
     li r4, 0x1
     li r5, 0x2
@@ -1035,13 +1035,13 @@ lbl_fn_805D1A40_00000D64:
     li r4, 0x0
     li r5, 0x0
     li r6, 0xff
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x0
     li r4, 0xf
     li r5, 0xf
     li r6, 0xf
     li r7, 0x8
-    bl fn_806173E0
+    bl GXSetTevColorIn
     li r3, 0x0
     li r4, 0x7
     li r5, 0x7
@@ -1052,13 +1052,13 @@ lbl_fn_805D1A40_00000D64:
     li r4, 0x1
     li r5, 0x1
     li r6, 0xff
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x1
     li r4, 0x8
     li r5, 0x0
     li r6, 0xe
     li r7, 0xf
-    bl fn_806173E0
+    bl GXSetTevColorIn
     li r3, 0x1
     li r4, 0x4
     li r5, 0x0
@@ -1088,7 +1088,7 @@ lbl_fn_805D1A40_00000E34:
     mr r3, r22
     mr r5, r23
     li r6, 0xff
-    bl fn_80617880
+    bl GXSetTevOrder
     cmpwi r23, 0x0
     li r7, 0x0
     bne lbl_fn_805D1A40_00000E5C
@@ -1103,7 +1103,7 @@ lbl_fn_805D1A40_00000E6C:
     li r4, 0xf
     li r5, 0x8
     li r6, 0xe
-    bl fn_806173E0
+    bl GXSetTevColorIn
     mr r3, r22
     mr r7, r31
     li r4, 0x7
@@ -1172,13 +1172,13 @@ lbl_fn_805D1A40_00000F68:
     mr r3, r22
     li r5, 0xff
     li r6, 0xff
-    bl fn_80617880
+    bl GXSetTevOrder
     mr r3, r22
     li r4, 0x2
     li r5, 0x4
     li r6, 0x0
     li r7, 0xf
-    bl fn_806173E0
+    bl GXSetTevColorIn
     mr r3, r22
     li r4, 0x1
     li r5, 0x2
@@ -1194,13 +1194,13 @@ lbl_fn_805D1A40_00000FB4:
     mr r3, r22
     li r5, 0xff
     li r6, 0x4
-    bl fn_80617880
+    bl GXSetTevOrder
     mr r3, r22
     li r4, 0xf
     li r5, 0x0
     li r6, 0xa
     li r7, 0xf
-    bl fn_806173E0
+    bl GXSetTevColorIn
     mr r3, r22
     li r4, 0x7
     li r5, 0x0
@@ -1229,7 +1229,7 @@ lbl_fn_805D1A40_00001014:
     li r8, 0x0
     bl fn_806174C0
     mr r3, r24
-    bl fn_80617220
+    bl GXInitTexObjDefault
     mr r3, r24
     li r4, 0x0
     li r5, 0x0
@@ -1411,14 +1411,14 @@ lbl_fn_805D1A40_000012A4:
     lbz r4, 0x1(r6)
     lbz r5, 0x2(r6)
     lbz r6, 0x3(r6)
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
     b lbl_fn_805D1A40_0000131C
 lbl_fn_805D1A40_00001308:
     li r3, 0x1
     li r4, 0x4
     li r5, 0x5
     li r6, 0xf
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
 lbl_fn_805D1A40_0000131C:
     cmpwi r29, 0x0
     li r3, 0x0

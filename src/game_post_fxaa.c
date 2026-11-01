@@ -8,10 +8,10 @@ extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
 extern void system_getNextSequenceId(void);
-extern void fn_80148990(void);
+extern void quest_ctorRewardItem(void);
 extern void dialog_renderWindow(void);
 extern void fn_8014FCC4(void);
-extern void fn_80151448(void);
+extern void inventory_applyItemStats(void);
 extern void actor_setState(void);
 extern void fn_801799BC(void);
 extern void sound_initGlobalInstances(void);
@@ -82,7 +82,7 @@ asm void fn_802D22A0(void)
     lwz r0, 0x4(r5)
     cmpwi r0, 0x2710
     bne lbl_fn_802D22A0_00000064
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r12, 0x0(r30)
     mr r3, r30
     mr r4, r31
@@ -422,7 +422,7 @@ lbl_fn_802D22A0_00000478:
     stfs f4, 0x10(r31)
     stfs f3, 0x14(r31)
     stfs f0, 0x18(r31)
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r12, 0x0(r30)
     mr r3, r30
     mr r4, r31
@@ -518,9 +518,9 @@ lbl_fn_802D2844_00000674:
     la r6, lbl_8087D9E0
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     li r5, 0x0
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r6, 0x14
     li r7, 0x8
     bl runtime_registerStaticObject
@@ -632,9 +632,9 @@ lbl_fn_802D2844_00000814:
     addi r3, r3, 0x10
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     mr r7, r30
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r5, 0x0
     li r6, 0x14
     bl runtime_registerStaticObject
@@ -803,9 +803,9 @@ lbl_fn_802D2844_00000AA4:
     la r6, lbl_8087D9E0
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     li r5, 0x0
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r6, 0x14
     li r7, 0x8
     bl runtime_registerStaticObject
@@ -917,9 +917,9 @@ lbl_fn_802D2844_00000C44:
     addi r3, r3, 0x10
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     mr r7, r30
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r5, 0x0
     li r6, 0x14
     bl runtime_registerStaticObject

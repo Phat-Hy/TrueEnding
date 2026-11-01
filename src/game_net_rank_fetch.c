@@ -30,7 +30,7 @@ extern void fn_80216954(void);
 extern void fn_80216988(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
-extern void fn_8023A680(void);
+extern void res_Shader_bindParams(void);
 extern void res_registerResource(void);
 extern void world_getGlobalFlag(void);
 extern void kpad_getClampData(void);
@@ -1312,7 +1312,7 @@ lbl_fn_80521A04_00001054:
     li r7, 0x0
     li r10, 0x0
     lwz r3, lbl_8087F3C0
-    bl fn_8023A680
+    bl res_Shader_bindParams
     b lbl_fn_80521A04_00001148
 lbl_fn_80521A04_000010AC:
     stfs f29, 0x28(r1)

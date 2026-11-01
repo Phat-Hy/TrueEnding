@@ -8,14 +8,14 @@ extern void __register_global_object(void);
 extern void _restgpr_26(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
-extern void fn_8003EFB0(void);
+extern void ui_destroyWidget(void);
 extern void fn_8004829C(void);
 extern void fn_8004B290(void);
 extern void fn_8005C220(void);
 extern void fn_8006A250(void);
 extern void fn_8007708C(void);
 extern void dungeon_initGlobalContext(void);
-extern void fn_800838B8(void);
+extern void town_synchronizedDispatch(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void route_findNextWaypoint(void);
@@ -23,7 +23,7 @@ extern void route_interpolatePath(void);
 extern void route_createSegment(void);
 extern void node_createNamedChild(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_800CB360(void);
+extern void morph_reset(void);
 extern void fn_800CDF84(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_unlink(void);
@@ -47,14 +47,14 @@ extern void fn_80107FC8(void);
 extern void fn_8013310C(void);
 extern void fn_80133130(void);
 extern void fn_8013322C(void);
-extern void fn_8014DEE4(void);
+extern void dialog_selectChoice(void);
 extern void fn_8014EEC4(void);
 extern void fn_80155DAC(void);
 extern void fn_80160324(void);
 extern void actor_setState(void);
 extern void fn_8017C7F8(void);
 extern void task_findEntryById(void);
-extern void fn_80237518(void);
+extern void res_MsgHandle_ctor(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void fn_80239798(void);
@@ -723,7 +723,7 @@ lbl_fn_804CF640_0000071C:
     mr r3, r31
     li r5, 0x0
     li r6, 0x0
-    bl fn_8014DEE4
+    bl dialog_selectChoice
 lbl_fn_804CF640_00000730:
     lhz r4, 0x4(r30)
     mr r3, r31
@@ -1824,11 +1824,11 @@ lbl_fn_804D0328_00001618:
     bl atn_LoadHandle_constructor
     stw r30, 0x0(r27)
     addi r3, r29, 0x2b70
-    bl fn_800CB360
+    bl morph_reset
     addi r3, r29, 0x2b74
-    bl fn_800CB360
+    bl morph_reset
     addi r3, r29, 0x2b78
-    bl fn_800CB360
+    bl morph_reset
     lis r4, fn_804D16FC@ha
     lis r5, fn_804D1FDC@ha
     stw r31, 0x2b88(r29)
@@ -1843,7 +1843,7 @@ lbl_fn_804D0328_00001618:
     bl res_MsgHandle_constructor
     addis r3, r29, 0x1
     subi r3, r3, 0x6940
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     addis r3, r29, 0x1
     li r4, 0x0
     li r5, 0x0
@@ -1942,7 +1942,7 @@ lbl_fn_804D0328_000017A0:
     la r7, lbl_8087E1C0
     la r8, lbl_8087E1BC
     li r9, 0x0
-    bl fn_800838B8
+    bl town_synchronizedDispatch
     stw r3, 0x8(r28)
     bl dungeon_initGlobalContext
     li r4, 0x1000
@@ -1951,7 +1951,7 @@ lbl_fn_804D0328_000017A0:
     la r7, lbl_8087E1B8
     la r8, lbl_8087E1B4
     li r9, 0x0
-    bl fn_800838B8
+    bl town_synchronizedDispatch
     stw r3, 0xc(r28)
     lis r4, lbl_807908D0@ha
     addi r4, r4, lbl_807908D0@l
@@ -1972,7 +1972,7 @@ lbl_fn_804D0328_000017A0:
     la r7, lbl_8087E1A8
     la r8, lbl_8087E1A4
     li r9, 0x0
-    bl fn_800838B8
+    bl town_synchronizedDispatch
     stw r3, 0x14(r28)
     mr r3, r28
     lwz r12, 0x0(r28)
@@ -1987,7 +1987,7 @@ lbl_fn_804D0328_000017A0:
     la r7, lbl_8087E1A0
     la r8, lbl_8087E19C
     li r9, 0x0
-    bl fn_800838B8
+    bl town_synchronizedDispatch
     stw r3, 0x18(r28)
 lbl_fn_804D0328_00001918:
     stw r28, 0x14(r27)
@@ -2133,10 +2133,10 @@ lbl_fn_804D0328_000019C0:
     bne lbl_fn_804D0328_00001B64
     lis r3, lbl_807C6BB8@ha
     stwu r31, lbl_807C6BB8@l(r3)
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     lis r5, lbl_807C8F48@ha
     stw r31, 0x4(r3)
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     addi r5, r5, lbl_807C8F48@l
     stw r31, 0x8(r3)
     stw r30, 0xc(r3)
@@ -2153,10 +2153,10 @@ lbl_fn_804D0328_00001B64:
     bne lbl_fn_804D0328_00001BB4
     li r0, 0x0
     li r30, 0x1
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     lis r5, lbl_807C8F48@ha
     stw r0, 0x0(r3)
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     addi r5, r5, lbl_807C8F48@l
     stw r0, 0x4(r3)
     stw r0, 0x8(r3)

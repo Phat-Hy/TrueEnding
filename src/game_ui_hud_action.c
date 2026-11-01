@@ -9,16 +9,16 @@ extern void dtor_80084684(void);
 extern void collision_testLineSegment(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_8008BBD8(void);
+extern void map_debugLog(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800F8574(void);
+extern void viewport_updateCulling(void);
 extern void fn_80134168(void);
-extern void fn_801539E0(void);
+extern void inventory_unequipItem(void);
 extern void fn_80154344(void);
 extern void fn_80155DAC(void);
-extern void fn_8016DA4C(void);
+extern void debuff_clearStatus(void);
 extern void fn_8017AC3C(void);
 extern void fn_80188F08(void);
 extern void fn_80188F40(void);
@@ -27,7 +27,7 @@ extern void task_mapIdToQueue(void);
 extern void task_findEntryById(void);
 extern void world_getGlobalFlag(void);
 extern void world_setGlobalFlag(void);
-extern void fn_803EA77C(void);
+extern void chest_spawnLoot(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
@@ -197,7 +197,7 @@ lbl_fn_801C7390_00000108:
     stw r4, 0x90(r1)
     stw r0, 0x94(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_801C7390_000001EC
     lwz r7, 0x84(r1)
@@ -326,7 +326,7 @@ lbl_fn_801C7390_000002EC:
     stw r4, 0x68(r1)
     stw r0, 0x6c(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_801C7390_000003C0
     lwz r7, 0x5c(r1)
@@ -777,7 +777,7 @@ lbl_fn_801C7918_0000090C:
     lfs f2, lbl_80882848
     lis r9, 0xa0
     li r10, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
     lwz r27, lbl_8087F430
     li r4, 0xcf7
     mr r3, r27
@@ -801,7 +801,7 @@ lbl_fn_801C7918_00000974:
     lfs f2, lbl_80882848
     li r9, 0x40
     li r10, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
     b lbl_fn_801C7918_00000AC8
 lbl_fn_801C7918_000009A8:
     lwz r4, 0x4(r28)
@@ -817,7 +817,7 @@ lbl_fn_801C7918_000009A8:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
     lfs f1, lbl_80882860
     addi r3, r1, 0x60
     li r4, 0x79
@@ -841,7 +841,7 @@ lbl_fn_801C7918_000009A8:
     li r9, 0x0
     lfs f2, lbl_80882848
     li r10, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
     lfs f1, lbl_80882864
     addi r3, r1, 0x30
     li r4, 0x79
@@ -865,7 +865,7 @@ lbl_fn_801C7918_000009A8:
     li r9, 0x0
     lfs f2, lbl_80882848
     li r10, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
     b lbl_fn_801C7918_00000AC8
 lbl_fn_801C7918_00000AA4:
     lwz r3, lbl_8087F048
@@ -876,7 +876,7 @@ lbl_fn_801C7918_00000AA4:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
 lbl_fn_801C7918_00000AC8:
     lwz r5, lbl_8087F610
     lwz r3, 0x4(r28)
@@ -1261,12 +1261,12 @@ asm void fn_801C82F8(void)
     rlwinm r0, r0, 0, 27, 25
     stw r0, 0x12a4(r4)
     lwz r3, 0x4(r3)
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lwz r3, 0x4(r28)
     lwz r0, 0x12a4(r3)
     srwi. r0, r0, 31
     beq lbl_fn_801C82F8_00001044
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_801C82F8_00001044:
     lwz r3, 0x4(r28)
     li r4, 0x0
@@ -1532,7 +1532,7 @@ lbl_fn_801C82F8_000013C8:
     li r5, 0x11
     lfs f2, lbl_80882894
     li r6, 0x0
-    bl fn_803EA77C
+    bl chest_spawnLoot
     b lbl_fn_801C82F8_00001454
 lbl_fn_801C82F8_00001438:
     cmpwi r29, 0x3
@@ -1541,7 +1541,7 @@ lbl_fn_801C82F8_00001438:
     li r5, 0x10
     lfs f2, lbl_80882894
     li r6, 0x0
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_801C82F8_00001454:
     psq_l f31, 0x1d8(r1), 0, 0
     mr r3, r28
@@ -1676,7 +1676,7 @@ asm void fn_801C8938(void)
     addi r30, r3, 0xb0
     srwi. r0, r0, 31
     beq lbl_fn_801C8938_00001634
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_801C8938_00001634:
     lwz r3, 0x4(r31)
     lwz r0, 0x12a4(r3)
@@ -1686,7 +1686,7 @@ lbl_fn_801C8938_00001634:
     bl fn_80155DAC
 lbl_fn_801C8938_0000164C:
     lwz r3, 0x4(r31)
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lwz r7, 0x4(r31)
     li r0, 0x1
     lfs f0, lbl_80882888
@@ -1739,7 +1739,7 @@ lbl_fn_801C8938_0000164C:
     li r6, 0x0
     lfs f1, lbl_80882888
     lfs f2, lbl_80882894
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_801C8938_00001728:
     lwz r0, lbl_8087F498
     cmpwi r0, 0x0
@@ -1756,7 +1756,7 @@ lbl_fn_801C8938_00001728:
     li r6, 0x2d
     lfs f1, lbl_80882888
     lfs f2, lbl_80882894
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_801C8938_00001768:
     lwz r3, 0x4(r31)
     lwz r0, 0x48(r3)

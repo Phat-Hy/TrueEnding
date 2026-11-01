@@ -8,10 +8,10 @@ extern void _savegpr_14(void);
 extern void _savegpr_26(void);
 extern void fn_8009EE30(void);
 extern void atn_Anim_getDuration(void);
-extern void fn_800BFAC8(void);
+extern void motion_updateFogAdj(void);
 extern void atn_Task_unlink(void);
 extern void str_findChar(void);
-extern void fn_80116FC0(void);
+extern void actor_findSpawnTemplate(void);
 extern void fn_801CE148(void);
 extern void fn_801CE4CC(void);
 extern void fn_801CE518(void);
@@ -31,7 +31,7 @@ extern void save_computeCrc32(void);
 extern void fn_801F6E78(void);
 extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
-extern void fn_801FEDBC(void);
+extern void thread_findTaskById(void);
 extern void thread_dispatchToQueue(void);
 extern void profile_getMetricValue(void);
 extern void perf_getMetricValue(void);
@@ -1210,7 +1210,7 @@ lbl_fn_801D19F0_00000FD4:
     bne lbl_fn_801D19F0_00001100
     li r3, 0x0
     li r4, 0x2740
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lis r16, lbl_8073C56C@ha
     mr r18, r3
     addi r16, r16, lbl_8073C56C@l
@@ -1226,7 +1226,7 @@ lbl_fn_801D19F0_00000FD4:
     bl thread_dispatchToQueue
     li r3, 0x0
     li r4, 0x2740
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     mr r18, r3
     lwz r3, 0xae0(r15)
     addi r17, r16, 0x348
@@ -1983,7 +1983,7 @@ lbl_fn_801D19F0_00001B7C:
     mr r4, r3
     addi r3, r14, 0x58
     li r5, 0x0
-    bl fn_801FEDBC
+    bl thread_findTaskById
     b lbl_fn_801D19F0_00001BE8
 lbl_fn_801D19F0_00001BB4:
     lis r4, lbl_8073C56C@ha
@@ -1998,7 +1998,7 @@ lbl_fn_801D19F0_00001BB4:
     mr r4, r3
     addi r3, r14, 0x58
     li r5, 0x0
-    bl fn_801FEDBC
+    bl thread_findTaskById
 lbl_fn_801D19F0_00001BE8:
     li r0, 0x5
     mr r4, r15
@@ -2385,7 +2385,7 @@ lbl_fn_801D19F0_0000213C:
     stfs f8, 0x30(r1)
     stfs f0, 0x2c(r1)
     stfs f10, 0x34(r1)
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f7, 0x134(r1)
     lfs f0, lbl_80882A7C
     fsubs f0, f7, f0
@@ -2613,7 +2613,7 @@ lbl_fn_801D19F0_000024C4:
 lbl_fn_801D19F0_000024F8:
     li r3, 0x0
     li r4, 0x191
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r4, 0xb84(r15)
     lis r5, lbl_8073C56C@ha
     addi r5, r5, lbl_8073C56C@l
@@ -2629,7 +2629,7 @@ lbl_fn_801D19F0_000024F8:
 lbl_fn_801D19F0_00002534:
     li r3, 0x0
     li r4, 0x193
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r4, 0xb84(r15)
     lis r5, lbl_8073C56C@ha
     addi r5, r5, lbl_8073C56C@l
@@ -2644,7 +2644,7 @@ lbl_fn_801D19F0_00002534:
 lbl_fn_801D19F0_0000256C:
     li r3, 0x0
     li r4, 0x196
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r4, 0xb84(r15)
     lis r14, lbl_8073C56C@ha
     addi r14, r14, lbl_8073C56C@l
@@ -2735,7 +2735,7 @@ lbl_fn_801D19F0_00002694:
 lbl_fn_801D19F0_000026C8:
     li r3, 0x0
     li r4, 0x192
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r4, 0xb84(r15)
     lis r5, lbl_8073C56C@ha
     addi r5, r5, lbl_8073C56C@l
@@ -2751,7 +2751,7 @@ lbl_fn_801D19F0_000026C8:
 lbl_fn_801D19F0_00002704:
     li r3, 0x0
     li r4, 0x194
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r4, 0xb84(r15)
     lis r5, lbl_8073C56C@ha
     addi r5, r5, lbl_8073C56C@l
@@ -2766,7 +2766,7 @@ lbl_fn_801D19F0_00002704:
 lbl_fn_801D19F0_0000273C:
     li r3, 0x0
     li r4, 0x196
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r4, 0xb84(r15)
     lis r14, lbl_8073C56C@ha
     addi r14, r14, lbl_8073C56C@l

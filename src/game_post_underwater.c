@@ -27,11 +27,11 @@ extern void fn_8012DF7C(void);
 extern void fn_80148B0C(void);
 extern void fn_8015E7A0(void);
 extern void actor_setState(void);
-extern void fn_801765D8(void);
+extern void battle_awardExp(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
-extern void fn_8023A680(void);
+extern void res_Shader_bindParams(void);
 extern void res_registerResource(void);
 extern void fn_802DCA34(void);
 extern void fn_802DD1B4(void);
@@ -409,7 +409,7 @@ lbl_fn_802DAA38_00000448:
     lwz r3, lbl_8087F3C0
     add r7, r0, r28
     addi r7, r7, 0x4
-    bl fn_8023A680
+    bl res_Shader_bindParams
     lwz r3, 0x1554(r29)
     fmr f1, f26
     addi r4, r29, 0x1530
@@ -1673,7 +1673,7 @@ asm void fn_802DBE04(void)
     mr r3, r31
     ori r0, r0, 0x8000
     stw r0, 0x12a4(r31)
-    bl fn_801765D8
+    bl battle_awardExp
 lbl_fn_802DBE04_00001744:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)

@@ -20,7 +20,7 @@ extern void str_findChar(void);
 extern void fn_800E0000(void);
 extern void actor_spawnActorWithId(void);
 extern void fn_801F0544(void);
-extern void fn_801F48C8(void);
+extern void save_parseSlotStats(void);
 extern void fn_801F6C2C(void);
 extern void fn_801F6C38(void);
 extern void save_computeCrc32(void);
@@ -29,7 +29,7 @@ extern void fn_801F7590(void);
 extern void fn_801F791C(void);
 extern void fn_801FEB9C(void);
 extern void thread_findAndNotify(void);
-extern void fn_801FEDBC(void);
+extern void thread_findTaskById(void);
 extern void thread_dispatchToQueue(void);
 extern void perf_getMetricValue(void);
 extern void fn_8020303C(void);
@@ -1019,7 +1019,7 @@ asm void fn_804A473C(void)
     mr r4, r3
     addi r3, r27, 0x58
     li r5, 0x0
-    bl fn_801FEDBC
+    bl thread_findTaskById
     cmpw r29, r30
     ble lbl_fn_804A473C_00000E18
     addi r3, r31, 0x17b
@@ -1028,7 +1028,7 @@ asm void fn_804A473C(void)
     mr r4, r3
     addi r3, r27, 0x58
     li r5, 0x0
-    bl fn_801FEDBC
+    bl thread_findTaskById
     addi r4, r31, 0x183
     addi r3, r27, 0x58
     bl fn_801FEB9C
@@ -1351,7 +1351,7 @@ lbl_fn_804A4AEC_0000114C:
     mr r3, r31
     addi r4, r30, 0x1a4
     psq_st f2, 0x8(r5), 0, 0
-    bl fn_801F48C8
+    bl save_parseSlotStats
     addi r5, r1, 0x38
     psq_l f1, 0x0(r29), 0, 0
     psq_l f2, 0x8(r29), 0, 0
@@ -1359,7 +1359,7 @@ lbl_fn_804A4AEC_0000114C:
     psq_st f1, 0x0(r5), 0, 0
     addi r4, r30, 0x1ab
     psq_st f2, 0x8(r5), 0, 0
-    bl fn_801F48C8
+    bl save_parseSlotStats
     addi r5, r1, 0x48
     psq_l f1, 0x0(r29), 0, 0
     psq_l f2, 0x8(r29), 0, 0
@@ -1367,7 +1367,7 @@ lbl_fn_804A4AEC_0000114C:
     psq_st f1, 0x0(r5), 0, 0
     addi r4, r30, 0x1b3
     psq_st f2, 0x8(r5), 0, 0
-    bl fn_801F48C8
+    bl save_parseSlotStats
     addi r5, r1, 0x58
     psq_l f1, 0x0(r29), 0, 0
     psq_l f2, 0x8(r29), 0, 0
@@ -1375,7 +1375,7 @@ lbl_fn_804A4AEC_0000114C:
     psq_st f1, 0x0(r5), 0, 0
     addi r4, r30, 0x1bd
     psq_st f2, 0x8(r5), 0, 0
-    bl fn_801F48C8
+    bl save_parseSlotStats
     lwz r0, 0x94(r1)
     lwz r31, 0x8c(r1)
     lwz r30, 0x88(r1)

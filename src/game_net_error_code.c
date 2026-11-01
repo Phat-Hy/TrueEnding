@@ -18,7 +18,7 @@ extern void mem_getAllocSize(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
 extern void fn_80087BB4(void);
-extern void fn_80087E9C(void);
+extern void route_createWaypoint(void);
 extern void fn_80088724(void);
 extern void fn_80088AF4(void);
 extern void node_createNamedChild(void);
@@ -26,15 +26,15 @@ extern void msg_getMessageById(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void str_findChar(void);
-extern void fn_80116FC0(void);
+extern void actor_findSpawnTemplate(void);
 extern void actor_spawnActorWithId(void);
 extern void fn_801D082C(void);
 extern void save_validateHeader(void);
 extern void save_computeCrc32(void);
 extern void fn_801F7590(void);
-extern void fn_801F837C(void);
+extern void save_findEntryByName(void);
 extern void fn_801F8598(void);
 extern void thread_findAndNotify(void);
 extern void fn_80201E78(void);
@@ -44,10 +44,10 @@ extern void perf_getMetricValue(void);
 extern void assert_formatLocation(void);
 extern void event_findEntryById(void);
 extern void fn_8021175C(void);
-extern void fn_80237518(void);
-extern void fn_802375C4(void);
-extern void fn_80237654(void);
-extern void fn_802376D0(void);
+extern void res_MsgHandle_ctor(void);
+extern void res_Resource_destructor(void);
+extern void res_Resource_unload(void);
+extern void res_MsgHandle_isLoading(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_unload(void);
@@ -196,7 +196,7 @@ lbl_fn_8051B168_00000034:
     mr r3, r29
     addi r4, r24, 0x157
     addi r5, r25, 0x8
-    bl fn_801F837C
+    bl save_findEntryByName
     b lbl_fn_8051B168_000000D0
 lbl_fn_8051B168_000000B0:
     lwz r3, lbl_8087F4F0
@@ -211,7 +211,7 @@ lbl_fn_8051B168_000000D0:
     lwz r5, 0x8(r22)
     mr r3, r29
     addi r4, r24, 0x15b
-    bl fn_801F837C
+    bl save_findEntryByName
     lwz r3, lbl_8087F4F0
     mr r4, r22
     bl fn_80444BE8
@@ -228,7 +228,7 @@ lbl_fn_8051B168_00000104:
     mr r3, r29
     addi r4, r24, 0x157
     addi r5, r25, 0xe
-    bl fn_801F837C
+    bl save_findEntryByName
     lwz r5, 0xb8(r26)
     mr r3, r29
     lwz r6, lbl_8087F1E4
@@ -243,7 +243,7 @@ lbl_fn_8051B168_00000104:
 lbl_fn_8051B168_0000014C:
     la r5, lbl_808813D0
 lbl_fn_8051B168_00000150:
-    bl fn_801F837C
+    bl save_findEntryByName
     lwz r3, lbl_8087F4F0
     bl fn_80444C48
     mr r22, r3
@@ -582,7 +582,7 @@ lbl_fn_8051B548_0000060C:
     lwz r31, lbl_8087F580
     li r3, 0x1
     li r4, 0x15b
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     mr r4, r3
     mr r3, r31
     li r5, 0x0
@@ -957,7 +957,7 @@ lbl_fn_8051B988_00000B20:
     addi r3, r31, 0x47e8
     bl res_MsgHandle_constructor
     addi r3, r31, 0x47f4
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     lis r4, lbl_807C9100@ha
     lwz r5, 0x1910(r31)
     addi r4, r4, lbl_807C9100@l
@@ -1305,7 +1305,7 @@ lbl_fn_8051B988_00000F38:
     bl res_MsgHandle_destructor
     addi r3, r31, 0x47f4
     addi r4, r30, 0xc9
-    bl fn_80237654
+    bl res_Resource_unload
     lfs f4, lbl_80887924
     li r0, 0x0
     lfs f5, lbl_80887904
@@ -1385,7 +1385,7 @@ lbl_fn_8051C2AC_000011B8:
     addi r3, r29, 0x47f4
     li r4, -0x1
     stw r0, 0x46d8(r29)
-    bl fn_802375C4
+    bl res_Resource_destructor
     addic. r31, r29, 0x47e8
     beq lbl_fn_8051C2AC_000011F0
     mr r3, r31
@@ -1466,7 +1466,7 @@ lbl_fn_8051C3E0_000012B4:
     addi r5, r28, 0x4864
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_80887970
     mr r3, r30
     lfs f2, lbl_80887974
@@ -1475,7 +1475,7 @@ lbl_fn_8051C3E0_000012B4:
     addi r5, r28, 0x4870
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     mr r3, r30
     addi r4, r31, 0xee
     addi r5, r28, 0x48a8
@@ -1508,7 +1508,7 @@ lbl_fn_8051C3E0_000012B4:
     addi r5, r28, 0x487c
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     mr r3, r30
     addi r4, r31, 0x119
     bl node_createNamedChild
@@ -1625,7 +1625,7 @@ lbl_fn_8051C3E0_000012B4:
     addi r5, r28, 0xa4
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_80887970
     mr r3, r30
     lfs f2, lbl_80887974
@@ -1634,7 +1634,7 @@ lbl_fn_8051C3E0_000012B4:
     addi r5, r28, 0xb0
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_80887970
     mr r3, r30
     lfs f2, lbl_80887974
@@ -1643,7 +1643,7 @@ lbl_fn_8051C3E0_000012B4:
     addi r5, r28, 0xbc
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_80887970
     mr r3, r30
     lfs f2, lbl_80887974
@@ -1652,7 +1652,7 @@ lbl_fn_8051C3E0_000012B4:
     addi r5, r28, 0xc8
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)
@@ -1851,7 +1851,7 @@ lbl_fn_8051C754_00001870:
     b lbl_fn_8051C754_000018F8
 lbl_fn_8051C754_0000189C:
     mr r3, r24
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     bne lbl_fn_8051C754_000018B4
     li r3, 0x1
@@ -1872,7 +1872,7 @@ lbl_fn_8051C754_000018CC:
     b lbl_fn_8051C754_000018F8
 lbl_fn_8051C754_000018E4:
     addi r3, r24, 0x47f4
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     neg r0, r3
     or r0, r0, r3
     srwi r3, r0, 31

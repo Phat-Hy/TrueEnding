@@ -13,7 +13,7 @@ extern void fn_8004B338(void);
 extern void fn_80063484(void);
 extern void fn_80076FF8(void);
 extern void mem_getAllocSize(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void msg_getMessageById(void);
 extern void ref_releaseHandle(void);
@@ -25,11 +25,11 @@ extern void fn_8012B988(void);
 extern void fn_8012D8B8(void);
 extern void fn_8013407C(void);
 extern void boss_updatePhaseState(void);
-extern void fn_80145334(void);
+extern void quest_updateFlow(void);
 extern void quest_checkCondition(void);
 extern void dialog_renderWindow(void);
-extern void fn_8014C540(void);
-extern void fn_8014DEE4(void);
+extern void dialog_updateScriptState(void);
+extern void dialog_selectChoice(void);
 extern void fn_8014FAD0(void);
 extern void fn_80150178(void);
 extern void fn_801CE148(void);
@@ -224,11 +224,11 @@ lbl_fn_801CC4F4_00000114:
     cmpwi r0, 0x0
     bne lbl_fn_801CC4F4_0000012C
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     b lbl_fn_801CC4F4_000007E4
 lbl_fn_801CC4F4_0000012C:
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
     lwz r3, 0x14b0(r31)
     subi r0, r3, 0x2
     cmplwi r0, 0x1
@@ -249,7 +249,7 @@ lbl_fn_801CC4F4_00000158:
     mr r3, r31
     li r5, 0x0
     li r6, 0x0
-    bl fn_8014DEE4
+    bl dialog_selectChoice
 lbl_fn_801CC4F4_00000184:
     lwz r0, 0x54c(r31)
     addi r3, r1, 0x5c
@@ -407,7 +407,7 @@ lbl_fn_801CC4F4_000003AC:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8014DEE4
+    bl dialog_selectChoice
 lbl_fn_801CC4F4_000003D8:
     lwz r0, 0x54c(r31)
     mr r29, r31
@@ -619,7 +619,7 @@ lbl_fn_801CC4F4_000006CC:
     psq_st f1, 0x0(r30), 0, 0
     psq_st f1, 0x534(r31), 0, 0
     stfs f2, 0x53c(r31)
-    bl fn_80145334
+    bl quest_updateFlow
     lwz r0, 0x5c0(r31)
     clrrwi r0, r0, 1
     stw r0, 0x5c0(r31)
@@ -635,7 +635,7 @@ lbl_fn_801CC4F4_00000708:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8014DEE4
+    bl dialog_selectChoice
 lbl_fn_801CC4F4_00000734:
     lwz r0, 0x54c(r31)
     mr r28, r31
@@ -679,7 +679,7 @@ lbl_fn_801CC4F4_000007A4:
     lfs f2, 0x53c(r4)
     stfs f2, 0x53c(r31)
     psq_st f1, 0x534(r31), 0, 0
-    bl fn_80145334
+    bl quest_updateFlow
     lwz r0, 0x5c0(r31)
     clrrwi r0, r0, 1
     stw r0, 0x5c0(r31)
@@ -738,10 +738,7 @@ lbl_fn_801CCC8C_00000888:
     blr
 }
 
-asm void fn_801CCCFC(void)
-{
-    nofralloc
-    blr
+void fn_801CCCFC(void) {
 }
 
 asm void fn_801CCD00(void)
@@ -1074,7 +1071,7 @@ asm void fn_801CD184(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_801CD184_00000D6C
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_801CD184_00000D6C:
     addi r3, r30, 0x220
     li r4, -0x1
@@ -1403,10 +1400,7 @@ lbl_fn_801CD5A4_000011D0:
     blr
 }
 
-asm void fn_801CD644(void)
-{
-    nofralloc
-    blr
+void fn_801CD644(void) {
 }
 
 asm void fn_801CD648(void)
@@ -1921,10 +1915,7 @@ lbl_fn_801CDD2C_00001900:
     blr
 }
 
-asm void fn_801CDD98(void)
-{
-    nofralloc
-    blr
+void fn_801CDD98(void) {
 }
 
 asm void fn_801CDD9C(void)

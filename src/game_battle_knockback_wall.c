@@ -10,28 +10,28 @@ extern void _savegpr_17(void);
 extern void _savegpr_19(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8000D114(void);
+extern void vec3_set(void);
 extern void vec3_copy(void);
-extern void fn_8000D3A4(void);
+extern void vec3_mag(void);
 extern void fn_8000D3A8(void);
 extern void fn_8000D430(void);
 extern void fn_8000D9E8(void);
-extern void fn_8001047C(void);
-extern void fn_80011034(void);
+extern void vec3_assign(void);
+extern void vec3_toEulerAngles(void);
 extern void fn_80011410(void);
 extern void fn_80012C88(void);
 extern void vec3_sub(void);
-extern void fn_80013410(void);
-extern void fn_8003EFB0(void);
+extern void vec3_add(void);
+extern void ui_destroyWidget(void);
 extern void fn_8004CCA0(void);
 extern void collision_testLineSegment(void);
-extern void fn_80057A64(void);
+extern void mission_updateStub(void);
 extern void talk_formatQuotedString(void);
-extern void fn_8005BBF8(void);
-extern void fn_8005BCE8(void);
+extern void talk_parseQuotes(void);
+extern void talk_copySpeakerName(void);
 extern void mem_alloc(void);
-extern void fn_8008AD4C(void);
-extern void fn_8008B140(void);
+extern void area_updateZoneState(void);
+extern void map_processTrigger(void);
 extern void fn_8008CD60(void);
 extern void fn_80092F1C(void);
 extern void lockon_updateTarget(void);
@@ -47,21 +47,21 @@ extern void fn_800D8814(void);
 extern void fn_800D8BB4(void);
 extern void str_skipWhitespace(void);
 extern void fn_800EC204(void);
-extern void fn_800EF73C(void);
+extern void cam_destroyMsgHandle(void);
 extern void fn_800F52F8(void);
 extern void fn_800F72CC(void);
-extern void fn_800F7FA0(void);
+extern void viewport_getGlobalContext(void);
 extern void fn_800F7FA8(void);
-extern void fn_800F7FF0(void);
+extern void viewport_getNextSequenceId(void);
 extern void fn_800F80A8(void);
 extern void fn_800F80B8(void);
 extern void fn_80116E64(void);
-extern void fn_80121F00(void);
+extern void equip_getGlobalManager(void);
 extern void fn_8012A190(void);
 extern void fn_80139550(void);
 extern void fn_80139F3C(void);
 extern void fn_8013A13C(void);
-extern void fn_8013C38C(void);
+extern void npc_getPosition(void);
 extern void fn_8013C504(void);
 extern void fn_801404F8(void);
 extern void fn_80140500(void);
@@ -81,10 +81,10 @@ extern void fn_80316E38(void);
 extern void fn_80317034(void);
 extern void fn_80372574(void);
 extern void fn_803D6EDC(void);
-extern void fn_803EC568(void);
-extern void fn_803EC69C(void);
-extern void fn_803EC91C(void);
-extern void fn_803ED0D4(void);
+extern void task_createWorker(void);
+extern void task_destroyWorker(void);
+extern void task_updateWorker(void);
+extern void task_initWorkerContext(void);
 extern void fn_80417E88(void);
 extern void fn_80417F14(void);
 extern void fn_80417F1C(void);
@@ -786,7 +786,7 @@ asm void fn_804166B0(void)
     lwz r5, 0x18(r30)
     mr r4, r29
     lwz r6, 0x1c(r30)
-    bl fn_803EC568
+    bl task_createWorker
     lis r4, lbl_8078DA78@ha
     addi r3, r31, 0xf4
     addi r4, r4, lbl_8078DA78@l
@@ -830,7 +830,7 @@ asm void fn_80416764(void)
     bl fn_800971D4
     mr r3, r30
     li r4, 0x0
-    bl fn_803EC69C
+    bl task_destroyWorker
     cmpwi r31, 0x0
     ble lbl_fn_80416764_00000970
     mr r3, r30
@@ -852,7 +852,7 @@ asm void fn_804167CC(void)
     mflr r0
     addi r3, r3, 0xf4
     stw r0, 0x14(r1)
-    bl fn_8008B140
+    bl map_processTrigger
     neg r0, r3
     or r0, r0, r3
     srwi r3, r0, 31
@@ -906,7 +906,7 @@ asm void fn_804167FC(void)
     addi r4, r4, lbl_807774B8@l
     stw r4, 0x108(r1)
     la r4, lbl_8087D710
-    bl fn_8005BCE8
+    bl talk_copySpeakerName
     lis r31, lbl_80752ED4@ha
     addi r31, r31, lbl_80752ED4@l
 lbl_fn_804167FC_00000A6C:
@@ -925,7 +925,7 @@ lbl_fn_804167FC_00000A6C:
     mr r4, r3
     addi r3, r29, 0xf4
     li r5, 0x0
-    bl fn_8008AD4C
+    bl area_updateZoneState
     b lbl_fn_804167FC_00000AF4
 lbl_fn_804167FC_00000AB0:
     mr r3, r30
@@ -947,7 +947,7 @@ lbl_fn_804167FC_00000AB0:
     bl fn_80092F1C
 lbl_fn_804167FC_00000AF4:
     addi r3, r1, 0x108
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_804167FC_00000A6C
     lwz r0, 0x754(r1)
@@ -1002,12 +1002,12 @@ asm void fn_80416960(void)
     addi r4, r4, lbl_807774B8@l
     stw r4, 0x8(r1)
     la r4, lbl_8087D710
-    bl fn_8005BCE8
+    bl talk_copySpeakerName
 lbl_fn_80416960_00000BC4:
     addi r3, r1, 0x8
     bl talk_formatQuotedString
     addi r3, r1, 0x8
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_80416960_00000BC4
     lwz r0, 0x654(r1)
@@ -1026,7 +1026,7 @@ asm void fn_80416A34(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_803EC91C
+    bl task_updateWorker
     cmpwi r3, 0x0
     bne lbl_fn_80416A34_00000C24
     li r0, 0x2
@@ -1180,7 +1180,7 @@ lbl_fn_80416AA8_00000E20:
     mr r3, r31
     addi r4, r31, 0xf4
     li r5, 0x1
-    bl fn_803ED0D4
+    bl task_initWorkerContext
 lbl_fn_80416AA8_00000E30:
     lwz r0, 0x34(r1)
     lwz r31, 0x2c(r1)
@@ -1332,11 +1332,11 @@ lbl_fn_80416CB8_0000103C:
     lis r3, lbl_807C6BB8@ha
     li r0, 0x0
     stwu r0, lbl_807C6BB8@l(r3)
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     li r30, 0x1
     lis r5, lbl_807C88E0@ha
     stw r0, 0x4(r3)
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     addi r5, r5, lbl_807C88E0@l
     stw r0, 0x8(r3)
     stw r30, 0xc(r3)
@@ -1435,7 +1435,7 @@ asm void fn_80416F74(void)
     lwz r5, 0x18(r30)
     mr r4, r29
     lwz r6, 0x1c(r30)
-    bl fn_803EC568
+    bl task_createWorker
     lis r3, lbl_8078DB10@ha
     li r29, 0x0
     addi r3, r3, lbl_8078DB10@l
@@ -1459,16 +1459,16 @@ asm void fn_80416F74(void)
     addi r3, r28, 0x2438
     bl res_MsgHandle_constructor
     lis r30, res_MsgHandle_constructor@ha
-    lis r31, fn_800EF73C@ha
+    lis r31, cam_destroyMsgHandle@ha
     addi r3, r28, 0x2444
     li r6, 0xc
     addi r4, r30, res_MsgHandle_constructor@l
-    addi r5, r31, fn_800EF73C@l
+    addi r5, r31, cam_destroyMsgHandle@l
     li r7, 0x3
     bl __construct_new_array
     addi r3, r28, 0x2468
     addi r4, r30, res_MsgHandle_constructor@l
-    addi r5, r31, fn_800EF73C@l
+    addi r5, r31, cam_destroyMsgHandle@l
     li r6, 0xc
     li r7, 0x3
     bl __construct_new_array
@@ -1551,14 +1551,14 @@ asm void fn_80417130(void)
     stw r29, 0x14(r1)
     mr r29, r3
     beq lbl_fn_80417130_000013C4
-    lis r31, fn_800EF73C@ha
+    lis r31, cam_destroyMsgHandle@ha
     li r5, 0xc
-    addi r4, r31, fn_800EF73C@l
+    addi r4, r31, cam_destroyMsgHandle@l
     li r6, 0x3
     addi r3, r3, 0x2468
     bl __destroy_new_array
     addi r3, r29, 0x2444
-    addi r4, r31, fn_800EF73C@l
+    addi r4, r31, cam_destroyMsgHandle@l
     li r5, 0xc
     li r6, 0x3
     bl __destroy_new_array
@@ -1591,7 +1591,7 @@ lbl_fn_80417130_00001384:
     bl fn_800971D4
     mr r3, r29
     li r4, 0x0
-    bl fn_803EC69C
+    bl task_destroyWorker
     cmpwi r30, 0x0
     ble lbl_fn_80417130_000013C4
     mr r3, r29
@@ -1615,7 +1615,7 @@ asm void fn_80417224(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_803EC91C
+    bl task_updateWorker
     cmpwi r3, 0x0
     bne lbl_fn_80417224_00001414
     li r0, 0x2
@@ -1674,7 +1674,7 @@ asm void fn_8041726C(void)
     addi r4, r4, lbl_807774B8@l
     stw r4, 0x8(r1)
     la r4, lbl_8087D710
-    bl fn_8005BCE8
+    bl talk_copySpeakerName
     lis r30, lbl_80752F44@ha
     addi r30, r30, lbl_80752F44@l
 lbl_fn_8041726C_000014D4:
@@ -1693,7 +1693,7 @@ lbl_fn_8041726C_000014D4:
     mr r4, r3
     addi r3, r31, 0xfc
     li r5, 0x0
-    bl fn_8008AD4C
+    bl area_updateZoneState
     b lbl_fn_8041726C_000016CC
 lbl_fn_8041726C_00001518:
     mr r3, r29
@@ -1710,7 +1710,7 @@ lbl_fn_8041726C_00001540:
     mr r3, r29
     mr r4, r28
     li r5, 0x0
-    bl fn_8008AD4C
+    bl area_updateZoneState
     addi r27, r27, 0x1
     addi r29, r29, 0x3ec
     cmplwi r27, 0x8
@@ -1818,7 +1818,7 @@ lbl_fn_8041726C_000016C0:
     bl strcmp
 lbl_fn_8041726C_000016CC:
     addi r3, r1, 0x8
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_8041726C_000014D4
     lmw r27, 0x64c(r1)
@@ -1841,7 +1841,7 @@ asm void fn_80417530(void)
     stw r28, 0x10(r1)
     mr r28, r3
     addi r3, r3, 0xfc
-    bl fn_8008B140
+    bl map_processTrigger
     cmpwi r3, 0x0
     beq lbl_fn_80417530_00001728
     li r29, 0x1
@@ -1850,7 +1850,7 @@ lbl_fn_80417530_00001728:
     li r31, 0x0
 lbl_fn_80417530_00001730:
     mr r3, r30
-    bl fn_8008B140
+    bl map_processTrigger
     cmpwi r3, 0x0
     beq lbl_fn_80417530_00001744
     li r29, 0x1
@@ -1982,11 +1982,11 @@ lbl_fn_8041766C_000018C4:
     addi r3, r1, 0xd0
     fadds f0, f0, f1
     stfs f0, 0x8b0(r29)
-    bl fn_8001047C
+    bl vec3_assign
     mr r4, r28
     mr r5, r27
     addi r3, r1, 0xc4
-    bl fn_80013410
+    bl vec3_add
     addi r3, r1, 0x1f0
     bl fn_80140500
     bl fn_801404F8
@@ -2018,15 +2018,15 @@ lbl_fn_8041766C_000018C4:
     bl fn_80139F3C
     addi r3, r1, 0xb8
     addi r4, r1, 0x1f4
-    bl fn_8001047C
+    bl vec3_assign
     addi r3, r1, 0x50
     addi r4, r1, 0x218
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lfs f1, lbl_80886498
     addi r3, r1, 0xac
     lfs f2, 0x54(r1)
     fmr f3, f1
-    bl fn_8000D114
+    bl vec3_set
     lwz r3, 0x228(r1)
     li r19, 0x1
     cmpwi r3, 0x0
@@ -2041,7 +2041,7 @@ lbl_fn_8041766C_000019C4:
     addi r3, r1, 0x44
     lfs f2, lbl_80886490
     fmr f3, f1
-    bl fn_8000D114
+    bl vec3_set
     mr r4, r3
     addi r3, r1, 0x218
     bl fn_801A03E8
@@ -2049,27 +2049,27 @@ lbl_fn_8041766C_000019C4:
     ble lbl_fn_8041766C_000019F0
     li r19, 0x0
 lbl_fn_8041766C_000019F0:
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r4, r26
     li r5, 0x0
     li r6, 0x1
     bl res_findResourceSlot
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r4, r26
     li r5, 0x1
     bl fn_800F7FA8
     mulli r19, r19, 0xc
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     add r4, r24, r19
     mr r5, r26
     addi r4, r4, 0x2444
     li r6, 0x1
     bl fn_8026607C
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r4, r26
     li r5, 0x2
     bl fn_800F7FA8
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     add r4, r24, r19
     lfs f1, lbl_80886490
     addi r4, r4, 0x2468
@@ -2115,7 +2115,7 @@ lbl_fn_8041766C_00001AD8:
 lbl_fn_8041766C_00001AE4:
     mr r4, r27
     addi r3, r1, 0xa0
-    bl fn_80011034
+    bl vec3_toEulerAngles
     mr r4, r28
     addi r3, r1, 0x178
     bl fn_800F80A8
@@ -2160,7 +2160,7 @@ lbl_fn_8041766C_00001B3C:
     fcmpo cr0, f1, f28
     cror eq, gt, eq
     bne lbl_fn_8041766C_00001C3C
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r4, r26
     li r5, 0x1
     li r6, 0x1
@@ -2230,14 +2230,14 @@ lbl_fn_8041766C_00001C3C:
     lwz r3, 0x20(r3)
     bl task_findEntryById
     mr r31, r3
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_8013C504
     lwz r4, 0xf4(r24)
     lwz r4, 0x24(r4)
     bl fn_800EC204
     mr r26, r3
     addi r3, r1, 0x80
-    bl fn_80057A64
+    bl mission_updateStub
     cmpwi r26, 0x0
     beq lbl_fn_8041766C_00001CD8
     addi r3, r1, 0x80
@@ -2276,7 +2276,7 @@ lbl_fn_8041766C_00001D14:
     addi r3, r1, 0x1a8
     bl fn_804180BC
     lwz r3, 0x0(r3)
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r1, 0x80
     bl vec3_copy
@@ -2306,7 +2306,7 @@ lbl_fn_8041766C_00001D5C:
     fsubs f4, f4, f5
     fdivs f3, f4, f3
     fmuls f3, f0, f3
-    bl fn_8000D114
+    bl vec3_set
     bl rand
     addi r0, r28, 0x749f
     stw r26, 0x248(r1)
@@ -2334,7 +2334,7 @@ lbl_fn_8041766C_00001D5C:
     addi r4, r1, 0x74
     bl fn_80012C88
     addi r3, r1, 0x68
-    bl fn_80057A64
+    bl mission_updateStub
     lbz r0, 0x2(r31)
     lfs f27, 0x4c(r31)
     cmpwi r0, 0x1
@@ -2350,7 +2350,7 @@ lbl_fn_8041766C_00001D5C:
     lfs f0, lbl_80886498
     addi r3, r1, 0x68
     stfs f0, 0x6c(r1)
-    bl fn_8000D3A4
+    bl vec3_mag
     fdivs f28, f1, f27
     lwz r3, 0xf4(r24)
     lfs f0, 0x84(r1)
@@ -2363,16 +2363,16 @@ lbl_fn_8041766C_00001D5C:
     addi r3, r1, 0x68
     fmuls f1, f2, f1
     fmsubs f28, f28, f1, f0
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
     fmr f1, f27
     addi r3, r1, 0x68
     bl fn_8012A190
     stfs f28, 0x6c(r1)
     addi r3, r1, 0x68
-    bl fn_8000D3A4
+    bl vec3_mag
     fmr f27, f1
     addi r3, r1, 0x68
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
     b lbl_fn_8041766C_00001EF8
 lbl_fn_8041766C_00001ED0:
     lwz r5, 0xf4(r24)
@@ -2384,7 +2384,7 @@ lbl_fn_8041766C_00001ED0:
     addi r4, r1, 0x2c
     bl vec3_copy
     addi r3, r1, 0x68
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
 lbl_fn_8041766C_00001EF8:
     li r0, 0x1
     stw r0, 0x3d0(r25)
@@ -2417,7 +2417,7 @@ lbl_fn_8041766C_00001EF8:
     bl fn_80097E80
     addi r3, r1, 0x5c
     addi r4, r25, 0x3e0
-    bl fn_80011034
+    bl vec3_toEulerAngles
     addi r3, r1, 0x148
     addi r4, r25, 0x3d4
     bl fn_800F80A8
@@ -2445,11 +2445,11 @@ lbl_fn_8041766C_00001EF8:
     mr r4, r3
     mr r3, r25
     bl fn_80417F1C
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r4, r25
     li r5, 0x0
     bl fn_800F7FA8
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r5, r25
     addi r4, r24, 0x2438
     li r6, 0x1

@@ -17,7 +17,7 @@ extern void fn_80107F10(void);
 extern void fn_8011BEB8(void);
 extern void fn_8013322C(void);
 extern void fn_8014C228(void);
-extern void fn_8014DEE4(void);
+extern void dialog_selectChoice(void);
 extern void actor_setState(void);
 extern void fn_8018FEBC(void);
 extern void fn_8018FF6C(void);
@@ -590,7 +590,7 @@ lbl_fn_80167038_00000774:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8014DEE4
+    bl dialog_selectChoice
 lbl_fn_80167038_00000794:
     lwz r0, 0x12a4(r31)
     extrwi. r0, r0, 1, 26
@@ -1022,7 +1022,7 @@ lbl_fn_80167640_00000D7C:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8014DEE4
+    bl dialog_selectChoice
 lbl_fn_80167640_00000D9C:
     lwz r0, 0x12a4(r31)
     extrwi. r0, r0, 1, 26

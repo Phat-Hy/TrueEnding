@@ -9,19 +9,19 @@ extern void _restgpr_23(void);
 extern void _savegpr_23(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB440(void);
+extern void morph_updateWeights(void);
 extern void fn_800CB518(void);
 extern void fn_800CB58C(void);
 extern void morph_updateMesh(void);
 extern void fn_80102EAC(void);
 extern void fn_801031D0(void);
-extern void fn_8016F3D0(void);
+extern void battle_canTargetActor(void);
 extern void task_findEntryById(void);
 extern void fn_8021A684(void);
 extern void fn_803E9608(void);
 extern void fn_803EBA54(void);
 extern void net_getPacketManager(void);
-extern void fn_804D818C(void);
+extern void net_voiceCodec_destroy(void);
 extern void fn_804E82C8(void);
 extern void fn_804E8BF8(void);
 extern void fn_804EAEE4(void);
@@ -30,8 +30,8 @@ extern void fn_8050DDE0(void);
 extern void fn_8050E098(void);
 extern void fn_8054D798(void);
 extern void rand(void);
-extern void fn_806A8E40(void);
-extern void fn_806B0E30(void);
+extern void net_getSocket(void);
+extern void net_getMyAid(void);
 extern void fn_806B1250(void);
 
 /* External data declarations */
@@ -177,7 +177,7 @@ asm void fn_804EB874(void)
     li r0, 0x0
     b lbl_fn_804EB874_00000184
 lbl_fn_804EB874_0000015C:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804EB874_00000184
 lbl_fn_804EB874_00000168:
@@ -187,7 +187,7 @@ lbl_fn_804EB874_00000168:
     li r3, 0x0
     b lbl_fn_804EB874_00000180
 lbl_fn_804EB874_0000017C:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_804EB874_00000180:
     clrlwi r0, r3, 24
 lbl_fn_804EB874_00000184:
@@ -280,7 +280,7 @@ lbl_fn_804EB938_00000280:
     li r0, 0x0
     b lbl_fn_804EB938_000002D8
 lbl_fn_804EB938_000002B0:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804EB938_000002D8
 lbl_fn_804EB938_000002BC:
@@ -290,7 +290,7 @@ lbl_fn_804EB938_000002BC:
     li r3, 0x0
     b lbl_fn_804EB938_000002D4
 lbl_fn_804EB938_000002D0:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_804EB938_000002D4:
     clrlwi r0, r3, 24
 lbl_fn_804EB938_000002D8:
@@ -331,7 +331,7 @@ lbl_fn_804EB938_00000324:
     li r0, 0x0
     b lbl_fn_804EB938_00000380
 lbl_fn_804EB938_00000358:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804EB938_00000380
 lbl_fn_804EB938_00000364:
@@ -341,7 +341,7 @@ lbl_fn_804EB938_00000364:
     li r3, 0x0
     b lbl_fn_804EB938_0000037C
 lbl_fn_804EB938_00000378:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_804EB938_0000037C:
     clrlwi r0, r3, 24
 lbl_fn_804EB938_00000380:
@@ -426,7 +426,7 @@ lbl_fn_804EB938_00000460:
     li r0, 0x0
     b lbl_fn_804EB938_000004B8
 lbl_fn_804EB938_00000490:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804EB938_000004B8
 lbl_fn_804EB938_0000049C:
@@ -436,7 +436,7 @@ lbl_fn_804EB938_0000049C:
     li r3, 0x0
     b lbl_fn_804EB938_000004B4
 lbl_fn_804EB938_000004B0:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_804EB938_000004B4:
     clrlwi r0, r3, 24
 lbl_fn_804EB938_000004B8:
@@ -507,7 +507,7 @@ lbl_fn_804EB938_00000520:
     lwz r3, lbl_8087F610
     addi r4, r1, 0x4c
     addi r3, r3, 0x2b74
-    bl fn_800CB440
+    bl morph_updateWeights
     addi r3, r1, 0x4c
     li r4, -0x1
     bl ref_releaseHandle
@@ -530,7 +530,7 @@ lbl_fn_804EB938_000005C0:
     lwz r3, lbl_8087F610
     addi r4, r1, 0x48
     addi r3, r3, 0x2b78
-    bl fn_800CB440
+    bl morph_updateWeights
     addi r3, r1, 0x48
     li r4, -0x1
     bl ref_releaseHandle
@@ -553,7 +553,7 @@ lbl_fn_804EB938_000005C0:
     li r0, 0x0
     b lbl_fn_804EB938_00000688
 lbl_fn_804EB938_00000660:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804EB938_00000688
 lbl_fn_804EB938_0000066C:
@@ -563,7 +563,7 @@ lbl_fn_804EB938_0000066C:
     li r3, 0x0
     b lbl_fn_804EB938_00000684
 lbl_fn_804EB938_00000680:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_804EB938_00000684:
     clrlwi r0, r3, 24
 lbl_fn_804EB938_00000688:
@@ -625,7 +625,7 @@ lbl_fn_804EB938_00000704:
     li r0, 0x0
     b lbl_fn_804EB938_00000778
 lbl_fn_804EB938_00000750:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804EB938_00000778
 lbl_fn_804EB938_0000075C:
@@ -635,7 +635,7 @@ lbl_fn_804EB938_0000075C:
     li r3, 0x0
     b lbl_fn_804EB938_00000774
 lbl_fn_804EB938_00000770:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_804EB938_00000774:
     clrlwi r0, r3, 24
 lbl_fn_804EB938_00000778:
@@ -701,7 +701,7 @@ lbl_fn_804EB938_00000828:
     beq lbl_fn_804EB938_00000EC0
     lwz r4, 0x4(r30)
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     bne lbl_fn_804EB938_00000EC0
     lwz r27, lbl_8087F610
@@ -1098,7 +1098,7 @@ lbl_fn_804EB938_00000D2C:
     li r0, 0x0
     b lbl_fn_804EB938_00000DC0
 lbl_fn_804EB938_00000D98:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804EB938_00000DC0
 lbl_fn_804EB938_00000DA4:
@@ -1108,7 +1108,7 @@ lbl_fn_804EB938_00000DA4:
     li r3, 0x0
     b lbl_fn_804EB938_00000DBC
 lbl_fn_804EB938_00000DB8:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_804EB938_00000DBC:
     clrlwi r0, r3, 24
 lbl_fn_804EB938_00000DC0:
@@ -1228,7 +1228,7 @@ lbl_fn_804EB938_00000F08:
     li r0, 0x0
     b lbl_fn_804EB938_00000F84
 lbl_fn_804EB938_00000F5C:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804EB938_00000F84
 lbl_fn_804EB938_00000F68:
@@ -1238,7 +1238,7 @@ lbl_fn_804EB938_00000F68:
     li r3, 0x0
     b lbl_fn_804EB938_00000F80
 lbl_fn_804EB938_00000F7C:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_804EB938_00000F80:
     clrlwi r0, r3, 24
 lbl_fn_804EB938_00000F84:
@@ -1308,7 +1308,7 @@ lbl_fn_804EB938_00001050:
     beq lbl_fn_804EB938_00001080
     lwz r4, 0x4(r30)
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     bne lbl_fn_804EB938_00001080
     lwz r3, lbl_8087F610
@@ -1357,7 +1357,7 @@ lbl_fn_804EB938_000010E4:
     li r0, 0x0
     b lbl_fn_804EB938_00001138
 lbl_fn_804EB938_00001110:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804EB938_00001138
 lbl_fn_804EB938_0000111C:
@@ -1367,7 +1367,7 @@ lbl_fn_804EB938_0000111C:
     li r3, 0x0
     b lbl_fn_804EB938_00001134
 lbl_fn_804EB938_00001130:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_804EB938_00001134:
     clrlwi r0, r3, 24
 lbl_fn_804EB938_00001138:
@@ -1422,9 +1422,9 @@ lbl_fn_804EB938_000011E4:
     lbz r0, lbl_8087F5F8
     extsb. r0, r0
     bne lbl_fn_804EB938_00001210
-    lis r4, fn_804D818C@ha
+    lis r4, net_voiceCodec_destroy@ha
     lis r5, lbl_807C8AE8@ha
-    addi r4, r4, fn_804D818C@l
+    addi r4, r4, net_voiceCodec_destroy@l
     la r3, lbl_8087F5FC
     addi r5, r5, lbl_807C8AE8@l
     bl __register_global_object
@@ -1531,9 +1531,9 @@ lbl_fn_804EB938_000012E0:
     sth r4, 0x70(r1)
     sth r3, 0x72(r1)
     bne lbl_fn_804EB938_000013A4
-    lis r4, fn_804D818C@ha
+    lis r4, net_voiceCodec_destroy@ha
     lis r5, lbl_807C8AE8@ha
-    addi r4, r4, fn_804D818C@l
+    addi r4, r4, net_voiceCodec_destroy@l
     la r3, lbl_8087F5FC
     addi r5, r5, lbl_807C8AE8@l
     bl __register_global_object
@@ -1586,9 +1586,9 @@ lbl_fn_804EB938_000013A4:
     extsb. r0, r0
     sth r3, 0x66(r1)
     bne lbl_fn_804EB938_0000147C
-    lis r4, fn_804D818C@ha
+    lis r4, net_voiceCodec_destroy@ha
     lis r5, lbl_807C8AE8@ha
-    addi r4, r4, fn_804D818C@l
+    addi r4, r4, net_voiceCodec_destroy@l
     la r3, lbl_8087F5FC
     addi r5, r5, lbl_807C8AE8@l
     bl __register_global_object
@@ -1624,9 +1624,9 @@ lbl_fn_804EB938_0000149C:
     extsb. r0, r0
     sth r3, 0x52(r1)
     bne lbl_fn_804EB938_0000150C
-    lis r4, fn_804D818C@ha
+    lis r4, net_voiceCodec_destroy@ha
     lis r5, lbl_807C8AE8@ha
-    addi r4, r4, fn_804D818C@l
+    addi r4, r4, net_voiceCodec_destroy@l
     la r3, lbl_8087F5FC
     addi r5, r5, lbl_807C8AE8@l
     bl __register_global_object
@@ -1679,9 +1679,9 @@ lbl_fn_804EB938_00001568:
     extsb. r0, r0
     sth r3, 0xfa(r1)
     bne lbl_fn_804EB938_000015D8
-    lis r4, fn_804D818C@ha
+    lis r4, net_voiceCodec_destroy@ha
     lis r5, lbl_807C8AE8@ha
-    addi r4, r4, fn_804D818C@l
+    addi r4, r4, net_voiceCodec_destroy@l
     la r3, lbl_8087F5FC
     addi r5, r5, lbl_807C8AE8@l
     bl __register_global_object
@@ -1729,9 +1729,9 @@ lbl_fn_804EB938_0000165C:
     extsb. r0, r0
     sth r3, 0x12a(r1)
     bne lbl_fn_804EB938_00001698
-    lis r4, fn_804D818C@ha
+    lis r4, net_voiceCodec_destroy@ha
     lis r5, lbl_807C8AE8@ha
-    addi r4, r4, fn_804D818C@l
+    addi r4, r4, net_voiceCodec_destroy@l
     la r3, lbl_8087F5FC
     addi r5, r5, lbl_807C8AE8@l
     bl __register_global_object
@@ -1803,9 +1803,9 @@ lbl_fn_804EB938_00001698:
     extsb. r0, r0
     sth r3, 0xce(r1)
     bne lbl_fn_804EB938_000017BC
-    lis r4, fn_804D818C@ha
+    lis r4, net_voiceCodec_destroy@ha
     lis r5, lbl_807C8AE8@ha
-    addi r4, r4, fn_804D818C@l
+    addi r4, r4, net_voiceCodec_destroy@l
     la r3, lbl_8087F5FC
     addi r5, r5, lbl_807C8AE8@l
     bl __register_global_object
@@ -1880,9 +1880,9 @@ lbl_fn_804EB938_000018A4:
     extsb. r0, r0
     sth r25, 0xaa(r1)
     bne lbl_fn_804EB938_000018DC
-    lis r4, fn_804D818C@ha
+    lis r4, net_voiceCodec_destroy@ha
     lis r5, lbl_807C8AE8@ha
-    addi r4, r4, fn_804D818C@l
+    addi r4, r4, net_voiceCodec_destroy@l
     la r3, lbl_8087F5FC
     addi r5, r5, lbl_807C8AE8@l
     bl __register_global_object
@@ -1931,9 +1931,9 @@ lbl_fn_804EB938_000018DC:
     extsb. r0, r0
     sth r3, 0x86(r1)
     bne lbl_fn_804EB938_000019A4
-    lis r4, fn_804D818C@ha
+    lis r4, net_voiceCodec_destroy@ha
     lis r5, lbl_807C8AE8@ha
-    addi r4, r4, fn_804D818C@l
+    addi r4, r4, net_voiceCodec_destroy@l
     la r3, lbl_8087F5FC
     addi r5, r5, lbl_807C8AE8@l
     bl __register_global_object
@@ -1984,7 +1984,7 @@ lbl_fn_804EB938_000019A4:
     beq lbl_fn_804EB938_00001A50
     b lbl_fn_804EB938_00001A78
 lbl_fn_804EB938_00001A50:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r29, r3, 24
     b lbl_fn_804EB938_00001A78
 lbl_fn_804EB938_00001A5C:
@@ -1993,7 +1993,7 @@ lbl_fn_804EB938_00001A5C:
     beq lbl_fn_804EB938_00001A6C
     b lbl_fn_804EB938_00001A74
 lbl_fn_804EB938_00001A6C:
-    bl fn_806A8E40
+    bl net_getSocket
     mr r29, r3
 lbl_fn_804EB938_00001A74:
     clrlwi r29, r29, 24
@@ -2044,7 +2044,7 @@ lbl_fn_804EB938_00001AF0:
     li r0, 0x0
     b lbl_fn_804EB938_00001B44
 lbl_fn_804EB938_00001B1C:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804EB938_00001B44
 lbl_fn_804EB938_00001B28:
@@ -2054,7 +2054,7 @@ lbl_fn_804EB938_00001B28:
     li r3, 0x0
     b lbl_fn_804EB938_00001B40
 lbl_fn_804EB938_00001B3C:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_804EB938_00001B40:
     clrlwi r0, r3, 24
 lbl_fn_804EB938_00001B44:
@@ -2183,7 +2183,7 @@ lbl_fn_804EB938_00001CC4:
     li r25, 0x0
     b lbl_fn_804EB938_00001D1C
 lbl_fn_804EB938_00001CF4:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r25, r3, 24
     b lbl_fn_804EB938_00001D1C
 lbl_fn_804EB938_00001D00:
@@ -2193,7 +2193,7 @@ lbl_fn_804EB938_00001D00:
     li r3, 0x0
     b lbl_fn_804EB938_00001D18
 lbl_fn_804EB938_00001D14:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_804EB938_00001D18:
     clrlwi r25, r3, 24
 lbl_fn_804EB938_00001D1C:
@@ -2240,7 +2240,7 @@ lbl_fn_804EB938_00001D54:
     li r0, 0x0
     b lbl_fn_804EB938_00001DE0
 lbl_fn_804EB938_00001DB8:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804EB938_00001DE0
 lbl_fn_804EB938_00001DC4:
@@ -2250,7 +2250,7 @@ lbl_fn_804EB938_00001DC4:
     li r3, 0x0
     b lbl_fn_804EB938_00001DDC
 lbl_fn_804EB938_00001DD8:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_804EB938_00001DDC:
     clrlwi r0, r3, 24
 lbl_fn_804EB938_00001DE0:
@@ -2281,7 +2281,7 @@ lbl_fn_804EB938_00001E14:
     li r0, 0x0
     b lbl_fn_804EB938_00001E68
 lbl_fn_804EB938_00001E40:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804EB938_00001E68
 lbl_fn_804EB938_00001E4C:
@@ -2291,7 +2291,7 @@ lbl_fn_804EB938_00001E4C:
     li r3, 0x0
     b lbl_fn_804EB938_00001E64
 lbl_fn_804EB938_00001E60:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_804EB938_00001E64:
     clrlwi r0, r3, 24
 lbl_fn_804EB938_00001E68:

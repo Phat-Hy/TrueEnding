@@ -7,16 +7,16 @@ extern void _restgpr_26(void);
 extern void _savegpr_25(void);
 extern void _savegpr_26(void);
 extern void talk_formatQuotedString(void);
-extern void fn_8005BBF8(void);
-extern void fn_8005BCE8(void);
+extern void talk_parseQuotes(void);
+extern void talk_copySpeakerName(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
-extern void fn_80087E9C(void);
+extern void route_createWaypoint(void);
 extern void node_createNamedChild(void);
-extern void fn_8008AD4C(void);
+extern void area_updateZoneState(void);
 extern void fn_800928B0(void);
 extern void fn_8009E5A0(void);
 extern void fn_8009EB20(void);
@@ -35,13 +35,13 @@ extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_80473F88(void);
+extern void shockwave_freeEmitter(void);
 extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void rand(void);
 extern void strcmp(void);
-extern void fn_8068A850(void);
-extern void fn_8068AD58(void);
+extern void std_sin(void);
+extern void std_cos(void);
 extern void runtime_registerStaticObject(void);
 extern int sprintf(char* str, const char* format, ...);
 
@@ -745,7 +745,7 @@ asm void fn_803FF834(void)
     addi r4, r4, lbl_807774B8@l
     stw r4, 0x8(r1)
     la r4, lbl_8087D710
-    bl fn_8005BCE8
+    bl talk_copySpeakerName
     lis r31, lbl_807526BC@ha
     addi r31, r31, lbl_807526BC@l
 lbl_fn_803FF834_0000096C:
@@ -763,10 +763,10 @@ lbl_fn_803FF834_0000096C:
     mr r4, r3
     addi r3, r29, 0xf4
     li r5, 0x0
-    bl fn_8008AD4C
+    bl area_updateZoneState
 lbl_fn_803FF834_000009A8:
     addi r3, r1, 0x8
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_803FF834_0000096C
     lwz r0, 0x654(r1)
@@ -853,7 +853,7 @@ lbl_fn_803FF9A4_00000A8C:
     addi r5, r26, 0x6c
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     mr r3, r29
     addi r4, r31, 0x48
     addi r5, r26, 0x9c
@@ -1230,7 +1230,7 @@ lbl_fn_803FFF40_00001028:
     addi r7, r31, 0x128
     bl fn_803FDFC0
     addi r3, r31, 0x88
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     li r0, 0x1
     stw r0, 0x90(r31)
 lbl_fn_803FFF40_00001060:
@@ -1358,7 +1358,7 @@ lbl_fn_803FFF40_0000122C:
     lfs f7, 0x118(r31)
     lfs f0, 0x14(r30)
     fadds f1, f7, f0
-    bl fn_8068AD58
+    bl std_cos
     lfs f7, lbl_808860C8
     frsp f9, f1
     lfs f0, 0x10(r30)
@@ -1371,7 +1371,7 @@ lbl_fn_803FFF40_0000122C:
     fmuls f0, f0, f7
     fmuls f0, f0, f9
     stfs f0, 0x10c(r31)
-    bl fn_8068AD58
+    bl std_cos
     lfs f0, 0x8(r30)
     frsp f10, f1
     lfs f7, 0x118(r31)
@@ -1382,7 +1382,7 @@ lbl_fn_803FFF40_0000122C:
     fmuls f0, f9, f10
     fmuls f0, f8, f0
     stfs f0, 0x110(r31)
-    bl fn_8068AD58
+    bl std_cos
     lfs f7, 0xc(r30)
     frsp f13, f1
     lfs f0, lbl_808860D0
@@ -1419,7 +1419,7 @@ lbl_fn_803FFF40_00001304:
     lfs f0, 0x118(r31)
     fnmsubs f7, f8, f9, f7
     fdivs f1, f0, f7
-    bl fn_8068A850
+    bl std_sin
     frsp f9, f1
     lfs f0, lbl_808860C4
     lfs f8, 0x20(r30)

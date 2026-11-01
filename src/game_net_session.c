@@ -6,19 +6,19 @@ extern void dtor_80084684(void);
 extern void fn_8000D430(void);
 extern void fn_800119B8(void);
 extern void mem_alloc(void);
-extern void fn_8008AD4C(void);
-extern void fn_8008B140(void);
+extern void area_updateZoneState(void);
+extern void map_processTrigger(void);
 extern void fn_8008CD60(void);
 extern void lockon_updateTarget(void);
 extern void fn_800971D4(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
 extern void fn_80097E80(void);
-extern void fn_800BFAC8(void);
+extern void motion_updateFogAdj(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void str_findChar(void);
 extern void fn_80129A48(void);
 extern void fn_80129A6C(void);
@@ -26,7 +26,7 @@ extern void fn_80147A18(void);
 extern void quest_checkCondition(void);
 extern void fn_8016E800(void);
 extern void save_validateHeader(void);
-extern void fn_801F64D0(void);
+extern void save_createWorkerTask(void);
 extern void fn_801F6D7C(void);
 extern void thread_dispatchToQueue(void);
 extern void profile_getMetricValue(void);
@@ -400,7 +400,7 @@ asm void fn_801E807C(void)
     mr r3, r29
     addi r4, r4, lbl_8073CB8C@l
     addi r4, r4, 0x1
-    bl fn_801F64D0
+    bl save_createWorkerTask
     stw r3, 0x474(r29)
     li r4, 0x1
     bl atn_Task_setActive
@@ -410,7 +410,7 @@ lbl_fn_801E807C_0000042C:
     addi r4, r4, lbl_8073CB8C@l
     li r5, 0x0
     addi r4, r4, 0x1d
-    bl fn_8008AD4C
+    bl area_updateZoneState
     lwz r31, 0x1c(r1)
     mr r3, r29
     lwz r30, 0x18(r1)
@@ -466,7 +466,7 @@ asm void fn_801E8244(void)
     stw r31, 0x6c(r1)
     mr r31, r3
     stw r30, 0x68(r1)
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_801E8244_00000790
     lwz r3, 0x48(r31)
@@ -1028,7 +1028,7 @@ lbl_fn_801E8534_00000D00:
     lwz r3, 0x48(r31)
     bl quest_checkCondition
     addi r3, r31, 0xa4
-    bl fn_8008B140
+    bl map_processTrigger
     cmpwi r3, 0x0
     bne lbl_fn_801E8534_00000E98
     psq_l f1, 0x50(r31), 0, 0
@@ -1180,7 +1180,7 @@ lbl_fn_801E8534_00000F7C:
     lwz r4, lbl_8087EFB4
     addi r3, r1, 0x12c
     addi r5, r31, 0x80
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f0, lbl_80882B2C
     lis r30, lbl_8073CB8C@ha
     stfs f0, 0x130(r1)
@@ -1222,7 +1222,7 @@ lbl_fn_801E8534_00000F7C:
     li r6, 0x2
     bl fn_804A4CE4
     addi r3, r31, 0xa4
-    bl fn_8008B140
+    bl map_processTrigger
     cmpwi r3, 0x0
     bne lbl_fn_801E8534_000011B0
     lfs f10, lbl_80882B10
@@ -1457,7 +1457,7 @@ lbl_fn_801E8F9C_00001370:
     blt lbl_fn_801E8F9C_0000132C
 lbl_fn_801E8F9C_00001380:
     addi r3, r31, 0xa4
-    bl fn_8008B140
+    bl map_processTrigger
     cmpwi r3, 0x0
     bne lbl_fn_801E8F9C_00001398
     addi r3, r31, 0xa4
@@ -1488,10 +1488,7 @@ lbl_fn_801E8F9C_000013CC:
     blr
 }
 
-asm void fn_801E9164(void)
-{
-    nofralloc
-    blr
+void fn_801E9164(void) {
 }
 
 asm void fn_801E9168(void)
@@ -1767,7 +1764,7 @@ asm void fn_801E94D4(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     bne lbl_fn_801E94D4_00001784
     li r3, 0x0

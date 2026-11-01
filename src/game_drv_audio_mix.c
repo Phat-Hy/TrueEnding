@@ -16,11 +16,11 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void actor_dispatchMessage(void);
 extern void talk_formatQuotedString(void);
-extern void fn_8005BBF8(void);
-extern void fn_8005BCE8(void);
+extern void talk_parseQuotes(void);
+extern void talk_copySpeakerName(void);
 extern void route_findNextWaypoint(void);
 extern void node_createNamedChild(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void fn_800C16B4(void);
 extern void fn_800C18BC(void);
 extern void fn_800C2448(void);
@@ -826,7 +826,7 @@ lbl_fn_805B6EB0_00000924:
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_805B6EB0_00000948
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_805B6EB0_00000948:
     mr r3, r30
     li r4, 0x0
@@ -1529,7 +1529,7 @@ asm void fn_805B7B28(void)
     addi r4, r4, lbl_807774B8@l
     stw r4, 0x118(r1)
     la r4, lbl_8087D710
-    bl fn_8005BCE8
+    bl talk_copySpeakerName
     lis r29, lbl_80763DFC@ha
     li r28, -0x1
     addi r29, r29, lbl_80763DFC@l
@@ -1852,7 +1852,7 @@ lbl_fn_805B7B28_000017A0:
     stw r0, 0x24(r5)
 lbl_fn_805B7B28_000017E8:
     addi r3, r1, 0x118
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_805B7B28_0000133C
     addi r11, r1, 0x770

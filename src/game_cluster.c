@@ -8,7 +8,7 @@ extern void fn_80049B2C(void);
 extern void fn_80049B74(void);
 extern void fn_80049CDC(void);
 extern void fn_80049E3C(void);
-extern void fn_800697D8(void);
+extern void boss_recordDamage(void);
 extern void fn_80709AB0(void);
 extern void fn_80709CC0(void);
 extern void fn_8070A030(void);
@@ -125,7 +125,7 @@ lbl_fn_800C8BA4_00000100:
     bl sprintf
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x128
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_fn_800C8BA4_00000124:
     lwz r3, 0xa8(r30)
     li r0, 0x0
@@ -354,7 +354,7 @@ lbl_fn_800C8BA4_00000410:
     bl sprintf
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x28
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_fn_800C8BA4_0000044C:
     lwz r0, 0x244(r1)
     lwz r31, 0x23c(r1)
@@ -422,7 +422,7 @@ lbl_fn_800C9010_00000518:
     bl sprintf
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x28
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_fn_800C9010_0000053C:
     lwz r3, 0xa8(r30)
     li r0, 0x0
@@ -704,7 +704,7 @@ lbl_fn_800C93D4_000008F8:
     bl sprintf
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x128
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_fn_800C93D4_0000091C:
     lwz r3, 0xa8(r30)
     li r0, 0x0
@@ -930,7 +930,7 @@ lbl_fn_800C93D4_00000BFC:
     bl sprintf
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x28
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_fn_800C93D4_00000C38:
     lwz r0, 0x244(r1)
     lwz r31, 0x23c(r1)
@@ -1019,7 +1019,7 @@ lbl_fn_800C97F8_00000D54:
     bl sprintf
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x128
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_fn_800C97F8_00000D78:
     lwz r3, 0xa8(r30)
     li r0, 0x0
@@ -1248,7 +1248,7 @@ lbl_fn_800C97F8_00001064:
     bl sprintf
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x28
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_fn_800C97F8_000010A0:
     lwz r0, 0x244(r1)
     lwz r31, 0x23c(r1)
@@ -1316,7 +1316,7 @@ lbl_fn_800C9C64_0000116C:
     bl sprintf
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x28
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_fn_800C9C64_00001190:
     lwz r3, 0xa8(r30)
     li r0, 0x0

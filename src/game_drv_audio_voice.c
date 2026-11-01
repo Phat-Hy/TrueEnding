@@ -22,9 +22,9 @@ extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void str_findChar(void);
-extern void fn_80116FC0(void);
+extern void actor_findSpawnTemplate(void);
 extern void actor_setState(void);
 extern void fn_801F4C14(void);
 extern void thread_dispatchToQueue(void);
@@ -38,7 +38,7 @@ extern void fn_803EAC3C(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_80473F88(void);
+extern void shockwave_freeEmitter(void);
 extern void fn_8049D68C(void);
 extern void fn_805B8114(void);
 extern void fn_805B8280(void);
@@ -1570,7 +1570,7 @@ asm void fn_805BA16C(void)
     mr r3, r29
     bl fn_805BB658
     addi r3, r29, 0x5a4
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     b lbl_fn_805BA16C_00001570
 lbl_fn_805BA16C_0000140C:
     addi r26, r3, 0x474
@@ -1593,7 +1593,7 @@ lbl_fn_805BA16C_00001438:
     cmpwi r27, 0x0
     bne lbl_fn_805BA16C_00001570
     mr r3, r29
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_805BA16C_00001570
     lis r28, lbl_80763F38@ha
@@ -1622,7 +1622,7 @@ lbl_fn_805BA16C_00001474:
     beq lbl_fn_805BA16C_0000151C
     lwz r4, 0x44(r31)
     li r3, 0x0
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r4, 0x4(r31)
     mr r27, r3
     addi r3, r28, 0x1e
@@ -1634,7 +1634,7 @@ lbl_fn_805BA16C_00001474:
     bl thread_dispatchToQueue
     lwz r4, 0x48(r31)
     li r3, 0x0
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r4, 0x4(r31)
     mr r27, r3
     addi r3, r28, 0x2f

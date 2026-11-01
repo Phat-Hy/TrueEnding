@@ -8,15 +8,15 @@ extern void _savegpr_23(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void talk_formatQuotedString(void);
-extern void fn_8005BBF8(void);
-extern void fn_8005BCE8(void);
+extern void talk_parseQuotes(void);
+extern void talk_copySpeakerName(void);
 extern void fn_80063D3C(void);
 extern void fn_800641CC(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void route_interpolatePath(void);
-extern void fn_80087E9C(void);
+extern void route_createWaypoint(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
 extern void atn_LH_Texture_destructAndFree(void);
@@ -988,7 +988,7 @@ lbl_fn_80079BC8_00000BD0:
     addi r5, r29, 0x8
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     addi r31, r31, lbl_807318A0@l
     lfs f1, lbl_80880B00
     lfs f2, lbl_80880B34
@@ -1046,7 +1046,7 @@ lbl_fn_80079BC8_00000CB4:
     addi r5, r29, 0x8
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     addi r31, r31, lbl_807318A0@l
     lfs f1, lbl_80880B24
     lfs f2, lbl_80880B04
@@ -1056,7 +1056,7 @@ lbl_fn_80079BC8_00000CB4:
     addi r5, r29, 0x14
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_80880B00
     mr r3, r30
     lfs f2, lbl_80880B34
@@ -1123,7 +1123,7 @@ lbl_fn_80079BC8_00000DE0:
     addi r5, r29, 0x14
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_80880B00
     mr r3, r30
     lfs f2, lbl_80880B04
@@ -1671,7 +1671,7 @@ asm void fn_8007A530(void)
     addi r4, r4, lbl_807774B8@l
     stw r4, 0x8(r1)
     la r4, lbl_8087D710
-    bl fn_8005BCE8
+    bl talk_copySpeakerName
     addi r3, r1, 0x8
     bl talk_formatQuotedString
     bl str_parseInt
@@ -1772,7 +1772,7 @@ lbl_fn_8007A530_000016D4:
     addi r30, r30, 0x8
 lbl_fn_8007A530_000016EC:
     addi r3, r1, 0x8
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_8007A530_00001620
 lbl_fn_8007A530_000016FC:

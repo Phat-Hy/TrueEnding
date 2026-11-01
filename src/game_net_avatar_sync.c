@@ -13,11 +13,11 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void actor_dispatchMessage(void);
 extern void fn_8006A250(void);
-extern void fn_8006EF48(void);
+extern void script_executeOpcode(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_80087E9C(void);
+extern void route_createWaypoint(void);
 extern void node_createNamedChild(void);
 extern void fn_8009EE30(void);
 extern void fn_800A4450(void);
@@ -30,7 +30,7 @@ extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
 extern void str_findChar(void);
 extern void wcs_vformat(void);
-extern void fn_80116FC0(void);
+extern void actor_findSpawnTemplate(void);
 extern void actor_spawnActorWithId(void);
 extern void fn_80117914(void);
 extern void fn_80119ECC(void);
@@ -38,11 +38,11 @@ extern void fn_8012AFE8(void);
 extern void fn_801346C8(void);
 extern void fn_801D082C(void);
 extern void save_validateHeader(void);
-extern void fn_801F4CB4(void);
+extern void save_formatSlotTitle(void);
 extern void saveSlot_readSummary(void);
 extern void save_computeCrc32(void);
 extern void fn_801F6E78(void);
-extern void fn_801F837C(void);
+extern void save_findEntryByName(void);
 extern void fn_801FEC74(void);
 extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
@@ -344,7 +344,7 @@ asm void fn_80528458(void)
     bl sprintf
     li r3, 0x1
     li r4, 0x135
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     mr r31, r3
     addi r3, r1, 0x18
     bl str_findChar
@@ -356,7 +356,7 @@ asm void fn_80528458(void)
     li r3, 0x1
     stw r0, 0x8(r1)
     li r4, 0x13d
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r0, 0x8(r30)
     li r5, 0x0
     li r4, -0x1
@@ -422,7 +422,7 @@ asm void fn_80528578(void)
     bl sprintf
     li r3, 0x1
     li r4, 0x136
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     mr r31, r3
     addi r3, r1, 0x18
     bl str_findChar
@@ -434,7 +434,7 @@ asm void fn_80528578(void)
     li r3, 0x1
     stw r0, 0x8(r1)
     li r4, 0x13e
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r0, 0x8(r30)
     li r5, 0x0
     li r4, -0x1
@@ -1093,7 +1093,7 @@ lbl_fn_80528ED8_00000C64:
     addi r5, r29, 0x5f0
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_80887A7C
     mr r3, r30
     lfs f2, lbl_80887A80
@@ -1102,7 +1102,7 @@ lbl_fn_80528ED8_00000C64:
     addi r5, r29, 0xa4
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_80887A7C
     mr r3, r30
     lfs f2, lbl_80887A80
@@ -1111,7 +1111,7 @@ lbl_fn_80528ED8_00000C64:
     addi r5, r29, 0xb0
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_80887A7C
     mr r3, r30
     lfs f2, lbl_80887A80
@@ -1120,7 +1120,7 @@ lbl_fn_80528ED8_00000C64:
     addi r5, r29, 0xbc
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_80887A7C
     mr r3, r30
     lfs f2, lbl_80887A80
@@ -1129,7 +1129,7 @@ lbl_fn_80528ED8_00000C64:
     addi r5, r29, 0xc8
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)
@@ -1675,31 +1675,31 @@ lbl_fn_80529528_00001428:
     bl save_computeCrc32
     lwz r4, 0x8(r27)
     li r3, 0x0
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     mr r25, r3
     lwz r3, 0x10(r27)
     bl perf_getMetricValue
     mr r5, r25
     addi r4, r30, 0xa4
-    bl fn_801F837C
+    bl save_findEntryByName
     lwz r4, 0x8(r27)
     li r3, 0x0
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     mr r25, r3
     lwz r3, 0x10(r27)
     bl perf_getMetricValue
     mr r5, r25
     addi r4, r30, 0xaa
-    bl fn_801F837C
+    bl save_findEntryByName
     lwz r4, 0xc(r27)
     li r3, 0x0
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     mr r25, r3
     lwz r3, 0x10(r27)
     bl perf_getMetricValue
     mr r5, r25
     addi r4, r30, 0xb3
-    bl fn_801F837C
+    bl save_findEntryByName
     lwz r3, 0x14(r27)
     bl perf_getMetricValue
     addi r4, r30, 0x94
@@ -1707,13 +1707,13 @@ lbl_fn_80529528_00001428:
     bl fn_801F6E78
     lwz r4, 0x8(r27)
     li r3, 0x0
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     mr r25, r3
     lwz r3, 0x14(r27)
     bl perf_getMetricValue
     mr r5, r25
     addi r4, r30, 0xa4
-    bl fn_801F837C
+    bl save_findEntryByName
     lwz r3, 0x14(r27)
     bl perf_getMetricValue
     lwz r0, 0x4(r27)
@@ -1793,7 +1793,7 @@ lbl_fn_80529528_000015A8:
     addi r4, r27, 0xc9
     li r6, 0x0
     lwz r5, 0x6000(r5)
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
 lbl_fn_80529528_00001664:
     lwz r3, lbl_8087F430
     bl fn_803754F0
@@ -1801,7 +1801,7 @@ lbl_fn_80529528_00001664:
     beq lbl_fn_80529528_00001710
     li r3, 0x0
     li r4, 0x2767
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r4, 0x1b8(r26)
     lis r5, lbl_8075D1A0@ha
     addi r5, r5, lbl_8075D1A0@l
@@ -1843,7 +1843,7 @@ lbl_fn_80529528_000016C4:
 lbl_fn_80529528_00001710:
     li r3, 0x0
     li r4, 0x2764
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r4, 0x1b8(r26)
     lis r27, lbl_8075D1A0@ha
     addi r27, r27, lbl_8075D1A0@l
@@ -1948,10 +1948,7 @@ lbl_fn_80529528_0000186C:
     blr
 }
 
-asm void fn_80529B48(void)
-{
-    nofralloc
-    blr
+void fn_80529B48(void) {
 }
 
 asm void fn_80529B4C(void)
@@ -2599,7 +2596,7 @@ lbl_fn_80529C74_000021B8:
     lfs f2, lbl_80887A8C
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lwz r0, 0x3c(r1)
     fmr f31, f1
     srwi. r0, r0, 31

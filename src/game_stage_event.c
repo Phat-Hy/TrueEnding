@@ -7,7 +7,7 @@ extern void dtor_80084684(void);
 extern void fn_8003EA3C(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_8008BBD8(void);
+extern void map_debugLog(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -16,9 +16,9 @@ extern void fn_80108C10(void);
 extern void fn_8012476C(void);
 extern void fn_8012DF7C(void);
 extern void fn_80148B0C(void);
-extern void fn_801539E0(void);
+extern void inventory_unequipItem(void);
 extern void fn_80155DAC(void);
-extern void fn_8016DA4C(void);
+extern void debuff_clearStatus(void);
 extern void fn_8018F81C(void);
 extern void fn_8018F84C(void);
 extern void fn_801AD34C(void);
@@ -563,7 +563,7 @@ lbl_fn_8019DF0C_000006A8:
     stw r4, 0x9c(r1)
     stw r0, 0xa0(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_8019DF0C_0000077C
     lwz r7, 0x90(r1)
@@ -702,7 +702,7 @@ lbl_fn_8019DF0C_000008B4:
     stw r4, 0x74(r1)
     stw r0, 0x78(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_8019DF0C_00000988
     lwz r7, 0x68(r1)
@@ -924,7 +924,7 @@ asm void fn_8019E4F4(void)
     stfs f2, 0x3c(r3)
     stw r0, 0x560(r4)
     lwz r3, 0x4(r3)
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lwz r3, 0x4(r30)
     lwz r0, 0x12a4(r3)
     extrwi. r0, r0, 1, 25
@@ -936,7 +936,7 @@ lbl_fn_8019E4F4_00000BF4:
     lwz r0, 0x12a4(r3)
     srwi. r0, r0, 31
     beq lbl_fn_8019E4F4_00000C08
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_8019E4F4_00000C08:
     lwz r3, 0x4(r30)
     lwz r0, 0x12a4(r3)
@@ -1363,7 +1363,7 @@ asm void fn_8019EB7C(void)
     stfs f2, 0x10(r3)
     stw r0, 0x560(r4)
     lwz r3, 0x4(r3)
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lwz r4, 0x4(r30)
     addi r6, r1, 0x8
     lfs f0, 0x10(r30)
@@ -1729,7 +1729,7 @@ asm void fn_8019F0A8(void)
     stfs f2, 0x1c(r3)
     stw r0, 0x560(r4)
     lwz r3, 0x4(r3)
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lwz r3, 0x4(r31)
     lwz r0, 0x12a4(r3)
     extrwi. r0, r0, 1, 25
@@ -1741,7 +1741,7 @@ lbl_fn_8019F0A8_0000179C:
     lwz r0, 0x12a4(r3)
     srwi. r0, r0, 31
     beq lbl_fn_8019F0A8_000017B0
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_8019F0A8_000017B0:
     lwz r3, 0x4(r31)
     lwz r0, 0x12a4(r3)

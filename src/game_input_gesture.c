@@ -9,14 +9,14 @@ extern void collision_testLineSegment(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_80092954(void);
 extern void fn_8009373C(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB440(void);
+extern void morph_updateWeights(void);
 extern void fn_800CB58C(void);
 extern void morph_updateMesh(void);
 extern void fn_800CB6E4(void);
@@ -24,18 +24,18 @@ extern void atn_Task_setActive(void);
 extern void str_parseInt(void);
 extern void fn_801028E4(void);
 extern void fn_80108F38(void);
-extern void fn_8011FC10(void);
+extern void skill_findNodeById(void);
 extern void fn_80129A48(void);
 extern void fn_80129A6C(void);
 extern void boss_updatePhaseState(void);
-extern void fn_80145334(void);
+extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
-extern void fn_8014C540(void);
-extern void fn_80151448(void);
-extern void fn_8015495C(void);
+extern void dialog_updateScriptState(void);
+extern void inventory_applyItemStats(void);
+extern void equip_applyToCharacter(void);
 extern void actor_setState(void);
 extern void fn_8017039C(void);
-extern void fn_801765D8(void);
+extern void battle_awardExp(void);
 extern void fn_80176ACC(void);
 extern void fn_801781B0(void);
 extern void sound_initGlobalInstances(void);
@@ -386,7 +386,7 @@ lbl_fn_802ED3F0_0000032C:
     bl skin_applyWeights
     addi r3, r31, 0x15a4
     addi r4, r1, 0xc
-    bl fn_800CB440
+    bl morph_updateWeights
     addi r3, r1, 0xc
     li r4, -0x1
     bl ref_releaseHandle
@@ -411,7 +411,7 @@ lbl_fn_802ED3F0_000003A4:
     bl skin_applyWeights
     addi r3, r31, 0x15a0
     addi r4, r1, 0x8
-    bl fn_800CB440
+    bl morph_updateWeights
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -424,9 +424,9 @@ lbl_fn_802ED3F0_00000400:
     bl fn_800CB6E4
 lbl_fn_802ED3F0_00000418:
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     mtlr r0
@@ -888,7 +888,7 @@ lbl_fn_802EDDA0_00000A38:
 lbl_fn_802EDDA0_00000A7C:
     mr r3, r30
     mr r4, r31
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r0, 0x12a4(r30)
     extrwi. r0, r0, 1, 29
     bne lbl_fn_802EDDA0_00000AB0
@@ -1416,10 +1416,7 @@ lbl_fn_802EE20C_000011E8:
     blr
 }
 
-asm void fn_802EE600(void)
-{
-    nofralloc
-    blr
+void fn_802EE600(void) {
 }
 
 asm void fn_802EE604(void)
@@ -1561,7 +1558,7 @@ asm void fn_802EE7B8(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_802EE7B8_00001410
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_802EE7B8_00001410:
     mr r3, r30
     li r4, 0x0
@@ -1630,7 +1627,7 @@ lbl_fn_802EE838_000014AC:
     oris r0, r0, 0x380
     stw r0, 0x7ec(r30)
     lwz r3, lbl_8087F408
-    bl fn_8011FC10
+    bl skill_findNodeById
     cmpwi r3, 0x0
     stw r3, 0x14e8(r30)
     beq lbl_fn_802EE838_00001560
@@ -1892,7 +1889,7 @@ lbl_fn_802EEBA8_00001874:
     lwz r3, 0x14e8(r31)
     cmpwi r3, 0x0
     beq lbl_fn_802EEBA8_00001918
-    bl fn_801765D8
+    bl battle_awardExp
     lwz r3, 0x14e8(r31)
     mr r29, r31
     lwz r30, 0x3fc(r31)
@@ -1934,7 +1931,7 @@ lbl_fn_802EEBA8_00001910:
     blt lbl_fn_802EEBA8_000018A0
 lbl_fn_802EEBA8_00001918:
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
     lwz r0, 0x38(r31)
     clrlwi r0, r0, 31
     cmplwi r0, 0x1
@@ -1943,7 +1940,7 @@ lbl_fn_802EEBA8_00001918:
     extrwi. r0, r0, 1, 6
     bne lbl_fn_802EEBA8_00001944
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
 lbl_fn_802EEBA8_00001944:
     lfs f5, 0x52c(r31)
     lis r4, lbl_80748488@ha
@@ -2030,7 +2027,7 @@ lbl_fn_802EEBA8_00001A54:
     stfs f2, 0x608(r31)
     stfs f0, 0x60c(r31)
     beq lbl_fn_802EEBA8_00001BC4
-    bl fn_80145334
+    bl quest_updateFlow
     lwz r3, 0x14e8(r31)
     addi r3, r3, 0x10d8
     bl fn_80129A6C
@@ -2095,7 +2092,7 @@ lbl_fn_802EEBA8_00001AEC:
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     lwz r0, 0xf14(r31)
     mr r3, r31
     stw r30, 0xd1c(r31)

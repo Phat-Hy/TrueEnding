@@ -7,7 +7,7 @@ extern void _savegpr_25(void);
 extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
-extern void fn_80057A64(void);
+extern void mission_updateStub(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
@@ -17,30 +17,30 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_applyWeights(void);
-extern void fn_800CB360(void);
+extern void morph_reset(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB440(void);
+extern void morph_updateWeights(void);
 extern void morph_updateMesh(void);
 extern void fn_800EB7A0(void);
 extern void fn_800EE360(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8574(void);
-extern void fn_8015495C(void);
-extern void fn_8016DA4C(void);
+extern void viewport_updateCulling(void);
+extern void equip_applyToCharacter(void);
+extern void debuff_clearStatus(void);
 extern void actor_setState(void);
 extern void fn_8016F824(void);
-extern void fn_801765D8(void);
+extern void battle_awardExp(void);
 extern void fn_80178A6C(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
-extern void fn_80237654(void);
+extern void res_Resource_unload(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
 extern void fn_80272C6C(void);
 extern void fn_80272CF0(void);
-extern void fn_8035B694(void);
+extern void entity_Instance_constructor(void);
 extern void fn_8036554C(void);
 extern void atn_LoadHandle_constructor(void);
 extern void PSMTXRotRad(void);
@@ -224,7 +224,7 @@ lbl_fn_80271104_000000D0:
     bl skin_applyWeights
     addi r3, r31, 0x153c
     addi r4, r1, 0x14
-    bl fn_800CB440
+    bl morph_updateWeights
     addi r3, r1, 0x14
     li r4, -0x1
     bl ref_releaseHandle
@@ -394,7 +394,7 @@ lbl_fn_80271104_00000398:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
 lbl_fn_80271104_0000041C:
     lwz r0, 0xa4(r1)
     psq_l f31, 0x98(r1), 0, 0
@@ -600,7 +600,7 @@ lbl_fn_80271654_000006E8:
     ori r0, r4, 0x8000
     stw r0, 0x12a4(r31)
     mr r3, r31
-    bl fn_801765D8
+    bl battle_awardExp
     mr r3, r31
     bl fn_800EE360
     b lbl_fn_80271654_0000070C
@@ -1679,9 +1679,9 @@ lbl_fn_80272660_0000162C:
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     mr r3, r31
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     li r0, 0x2
     stw r0, 0x58c(r31)
     lfs f1, lbl_80883798
@@ -1715,10 +1715,10 @@ asm void fn_8027276C(void)
 {
     nofralloc
     lis r3, lbl_807C8350@ha
-    lis r4, fn_80057A64@ha
+    lis r4, mission_updateStub@ha
     addi r3, r3, lbl_807C8350@l
     li r5, 0x0
-    addi r4, r4, fn_80057A64@l
+    addi r4, r4, mission_updateStub@l
     li r6, 0xc
     li r7, 0x6
     b __construct_new_array
@@ -1735,7 +1735,7 @@ asm void fn_8027278C(void)
     mr r29, r5
     lwz r5, 0x20(r5)
     mr r28, r3
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lfs f3, lbl_80883820
     lis r3, lbl_807850E0@ha
     li r31, 0x0
@@ -1794,7 +1794,7 @@ asm void fn_8027278C(void)
     addi r3, r28, 0x18f4
     stw r31, 0x18ec(r28)
     stw r31, 0x18f0(r28)
-    bl fn_800CB360
+    bl morph_reset
     lfs f0, lbl_80883820
     addi r3, r28, 0x1914
     stfs f0, 0x18f8(r28)
@@ -1996,7 +1996,7 @@ lbl_fn_8027278C_00001B10:
     add r3, r28, r25
     addi r4, r29, 0x8e
     addi r3, r3, 0x15d0
-    bl fn_80237654
+    bl res_Resource_unload
     add r3, r28, r25
     addi r4, r29, 0xa7
     addi r3, r3, 0x15dc
@@ -2004,11 +2004,11 @@ lbl_fn_8027278C_00001B10:
     add r3, r28, r25
     addi r4, r29, 0xbd
     addi r3, r3, 0x15e8
-    bl fn_80237654
+    bl res_Resource_unload
     add r3, r28, r25
     addi r4, r29, 0xd5
     addi r3, r3, 0x15f4
-    bl fn_80237654
+    bl res_Resource_unload
     add r3, r28, r25
     addi r4, r29, 0xed
     addi r3, r3, 0x1600

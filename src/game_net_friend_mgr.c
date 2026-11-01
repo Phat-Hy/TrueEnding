@@ -5,7 +5,7 @@
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8006EF48(void);
+extern void script_executeOpcode(void);
 extern void mem_alloc(void);
 extern void fn_800A4450(void);
 extern void msg_getMessageById(void);
@@ -14,7 +14,7 @@ extern void ref_releaseHandle(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void str_findChar(void);
 extern void wcs_vformat(void);
 extern void actor_spawnActorWithId(void);
@@ -802,7 +802,7 @@ asm void fn_804CDBFC(void)
     psq_st f31, 0xa8(r1), 0, 0
     bl _savegpr_27
     mr r31, r3
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_804CDBFC_00000B00
     lfs f0, lbl_80887548
@@ -905,7 +905,7 @@ lbl_fn_804CDBFC_00000A94:
     lfs f2, lbl_80887548
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lwz r0, 0x8(r1)
     fmr f31, f1
     srwi. r0, r0, 31
@@ -1153,16 +1153,10 @@ lbl_fn_804CDE1C_00000E00:
     blr
 }
 
-asm void fn_804CE118(void)
-{
-    nofralloc
-    blr
+void fn_804CE118(void) {
 }
 
-asm void fn_804CE11C(void)
-{
-    nofralloc
-    blr
+void fn_804CE11C(void) {
 }
 
 asm void fn_804CE120(void)

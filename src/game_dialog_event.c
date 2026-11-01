@@ -5,13 +5,13 @@
 extern void __register_global_object(void);
 extern void _restgpr_23(void);
 extern void _savegpr_23(void);
-extern void fn_8000D114(void);
+extern void vec3_set(void);
 extern void vec3_copy(void);
-extern void fn_8001047C(void);
-extern void fn_80011034(void);
-extern void fn_80013410(void);
+extern void vec3_assign(void);
+extern void vec3_toEulerAngles(void);
+extern void vec3_add(void);
 extern void fn_80013484(void);
-extern void fn_8003EFB0(void);
+extern void ui_destroyWidget(void);
 extern void fn_80045694(void);
 extern void collision_testLineSegment(void);
 extern void mem_alloc(void);
@@ -22,7 +22,7 @@ extern void fn_800F72CC(void);
 extern void fn_800F7F80(void);
 extern void fn_800F7FB4(void);
 extern void fn_801162A0(void);
-extern void fn_80121F00(void);
+extern void equip_getGlobalManager(void);
 extern void fn_80133EE8(void);
 extern void fn_80133F18(void);
 extern void fn_80134270(void);
@@ -42,7 +42,7 @@ extern void fn_80140518(void);
 extern void fn_8014052C(void);
 extern void fn_80148334(void);
 extern void dialog_setScriptSlot(void);
-extern void fn_8014DEE4(void);
+extern void dialog_selectChoice(void);
 extern void fn_801511C4(void);
 extern void fn_80151204(void);
 extern void fn_80151210(void);
@@ -59,7 +59,7 @@ extern void fn_80160324(void);
 extern void fn_801681B0(void);
 extern void fn_80168824(void);
 extern void fn_801698E4(void);
-extern void fn_8016DA4C(void);
+extern void debuff_clearStatus(void);
 extern void fn_8016F5EC(void);
 extern void fn_801750FC(void);
 extern void fn_80175A38(void);
@@ -188,11 +188,11 @@ asm void fn_8014F8F4(void)
     lis r3, lbl_807C6BB8@ha
     li r0, 0x0
     stwu r0, lbl_807C6BB8@l(r3)
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     li r31, 0x1
     lis r5, lbl_807C7B10@ha
     stw r0, 0x4(r3)
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     addi r5, r5, lbl_807C7B10@l
     stw r0, 0x8(r3)
     stw r31, 0xc(r3)
@@ -253,7 +253,7 @@ lbl_fn_8014F960_00000180:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8014DEE4
+    bl dialog_selectChoice
 lbl_fn_8014F960_000001A0:
     cmpwi r28, 0x0
     beq lbl_fn_8014F960_00000250
@@ -263,11 +263,11 @@ lbl_fn_8014F960_000001A0:
     lis r3, lbl_807C6BB8@ha
     li r0, 0x0
     stwu r0, lbl_807C6BB8@l(r3)
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     li r30, 0x1
     lis r5, lbl_807C7B10@ha
     stw r0, 0x4(r3)
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     addi r5, r5, lbl_807C7B10@l
     stw r0, 0x8(r3)
     stw r30, 0xc(r3)
@@ -1408,9 +1408,9 @@ lbl_fn_8015076C_00001138:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8014DEE4
+    bl dialog_selectChoice
 lbl_fn_8015076C_00001158:
-    bl fn_80121F00
+    bl equip_getGlobalManager
     li r4, 0x67
     bl world_getGlobalFlag
     cmpwi r3, 0x0
@@ -1429,11 +1429,11 @@ lbl_fn_8015076C_00001158:
     addi r3, r1, 0xb0
     lfs f2, lbl_808819F8
     fmr f3, f1
-    bl fn_8000D114
+    bl vec3_set
     mr r5, r3
     addi r3, r1, 0xf8
     addi r4, r23, 0x528
-    bl fn_80013410
+    bl vec3_add
     lfs f1, lbl_80881B0C
     mr r4, r25
     addi r3, r1, 0x8c
@@ -1442,15 +1442,15 @@ lbl_fn_8015076C_00001158:
     addi r3, r1, 0x98
     lfs f2, lbl_808819F8
     fmr f3, f1
-    bl fn_8000D114
+    bl vec3_set
     mr r5, r3
     addi r3, r1, 0xa4
     addi r4, r23, 0x528
-    bl fn_80013410
+    bl vec3_add
     addi r3, r1, 0xec
     addi r4, r1, 0xa4
     addi r5, r1, 0x8c
-    bl fn_80013410
+    bl vec3_add
     bl fn_801404F8
     addi r4, r1, 0x198
     addi r5, r1, 0xf8
@@ -1469,12 +1469,12 @@ lbl_fn_8015076C_00001158:
     addi r3, r1, 0x80
     lfs f2, lbl_808819F8
     fmr f3, f1
-    bl fn_8000D114
+    bl vec3_set
     mr r4, r3
     addi r3, r1, 0x19c
     bl fn_80013484
     mr r3, r23
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lwz r0, 0x1208(r23)
     cmpwi r0, 0x0
     beq lbl_fn_8015076C_00001270
@@ -1483,15 +1483,15 @@ lbl_fn_8015076C_00001158:
 lbl_fn_8015076C_00001270:
     addi r3, r1, 0x5c
     addi r4, r1, 0x1c0
-    bl fn_8001047C
+    bl vec3_assign
     mr r27, r3
     addi r3, r1, 0x68
     addi r4, r1, 0x19c
-    bl fn_8001047C
+    bl vec3_assign
     mr r25, r3
     addi r3, r1, 0x74
     addi r4, r23, 0x528
-    bl fn_8001047C
+    bl vec3_assign
     mr r4, r3
     mr r3, r23
     mr r5, r25
@@ -1530,7 +1530,7 @@ lbl_fn_8015076C_00001310:
     bne lbl_fn_8015076C_00001400
     addi r3, r1, 0xe0
     addi r4, r23, 0x534
-    bl fn_8001047C
+    bl vec3_assign
     addi r3, r1, 0x148
     bl fn_80140500
     mr r4, r23
@@ -1543,7 +1543,7 @@ lbl_fn_8015076C_00001310:
     addi r3, r1, 0xd4
     addi r4, r23, 0x528
     addi r5, r1, 0x50
-    bl fn_80013410
+    bl vec3_add
     mr r4, r23
     addi r3, r1, 0x2c
     bl fn_8014052C
@@ -1554,7 +1554,7 @@ lbl_fn_8015076C_00001310:
     addi r3, r1, 0xc8
     addi r4, r23, 0x528
     addi r5, r1, 0x38
-    bl fn_80013410
+    bl vec3_add
     lfs f1, 0xd8(r1)
     lfs f2, lbl_808819DC
     lfs f0, 0xcc(r1)
@@ -1574,13 +1574,13 @@ lbl_fn_8015076C_00001310:
     beq lbl_fn_8015076C_000013E8
     addi r3, r1, 0x20
     addi r4, r1, 0x170
-    bl fn_80011034
+    bl vec3_toEulerAngles
     addi r3, r1, 0xe0
     addi r4, r1, 0x20
     bl vec3_copy
 lbl_fn_8015076C_000013E8:
     mr r3, r23
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     mr r3, r23
     addi r4, r1, 0xe0
     bl fn_801698E4
@@ -1745,7 +1745,7 @@ lbl_fn_8015076C_0000162C:
     bne lbl_fn_8015076C_000016A4
 lbl_fn_8015076C_00001648:
     mr r3, r23
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lwz r0, 0x55c(r23)
     cmpwi r0, 0x6
     bne lbl_fn_8015076C_00001668
@@ -1828,7 +1828,7 @@ lbl_fn_8015076C_0000176C:
     cmpwi r27, 0x0
     beq lbl_fn_8015076C_000017B4
     mr r3, r23
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     cmpwi r28, 0x0
     mr r3, r23
     mr r4, r25

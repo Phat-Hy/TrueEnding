@@ -16,7 +16,7 @@ extern void clip_calculateFrustum(void);
 extern void task_findEntryById(void);
 extern void res_registerResource(void);
 extern void fn_803E3384(void);
-extern void fn_803EA77C(void);
+extern void chest_spawnLoot(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
@@ -241,7 +241,7 @@ asm void fn_8019356C(void)
     li r6, 0x0
     lfs f1, lbl_80881FBC
     lfs f2, lbl_80881FF4
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_8019356C_00000248:
     psq_l f31, 0x98(r1), 0, 0
     mr r3, r31
@@ -1008,7 +1008,7 @@ lbl_fn_80193EF8_00000CEC:
     li r6, 0x0
     lfs f1, lbl_80881FBC
     lfs f2, lbl_80881FF4
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_80193EF8_00000DAC:
     psq_l f31, 0x168(r1), 0, 0
     mr r3, r31
@@ -1306,7 +1306,7 @@ lbl_fn_80194550_000010B8:
     li r5, 0x20
     lfs f2, lbl_80881FF4
     li r6, 0x0
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_80194550_00001214:
     lwz r31, 0x6c(r1)
     mr r3, r29

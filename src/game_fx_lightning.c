@@ -2,18 +2,18 @@
 #pragma function_align 4
 
 /* External function declarations */
-extern void fn_8000D0F8(void);
+extern void mtx_getTranslation(void);
 extern void vec3_copy(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void system_getNextSequenceId(void);
-extern void fn_80145334(void);
-extern void fn_80148990(void);
-extern void fn_8014C540(void);
-extern void fn_8015495C(void);
-extern void fn_8016DA4C(void);
+extern void quest_updateFlow(void);
+extern void quest_ctorRewardItem(void);
+extern void dialog_updateScriptState(void);
+extern void equip_applyToCharacter(void);
+extern void debuff_clearStatus(void);
 extern void actor_setState(void);
 extern void fn_80178A6C(void);
 extern void fn_8028A1F8(void);
@@ -285,9 +285,9 @@ lbl_fn_8029D7AC_000002BC:
     stw r0, 0x1554(r31)
 lbl_fn_8029D7AC_000002E0:
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     lwz r12, 0x0(r31)
     mr r3, r31
     lwz r12, 0x11c(r12)
@@ -341,10 +341,7 @@ lbl_fn_8029D7AC_0000038C:
     blr
 }
 
-asm void fn_8029DB54(void)
-{
-    nofralloc
-    blr
+void fn_8029DB54(void) {
 }
 
 asm void fn_8029DB58(void)
@@ -647,9 +644,9 @@ asm void fn_8029DEF8(void)
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     mr r3, r29
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     li r31, 0x0
     li r0, 0x2
     stw r0, 0x58c(r29)
@@ -880,7 +877,7 @@ asm void fn_8029E2AC(void)
     stw r30, 0x78(r1)
     mr r30, r3
     addi r3, r1, 0x5c
-    bl fn_80148990
+    bl quest_ctorRewardItem
     lfs f0, lbl_80883D68
     lis r31, lbl_80745C70@ha
     addi r31, r31, lbl_80745C70@l
@@ -890,7 +887,7 @@ asm void fn_8029E2AC(void)
     bl atn_Model_getBoneMatrix
     mr r4, r3
     addi r3, r1, 0x50
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     addi r3, r1, 0x60
     addi r4, r1, 0x50
     bl vec3_copy
@@ -904,7 +901,7 @@ asm void fn_8029E2AC(void)
     bl atn_Model_getBoneMatrix
     mr r4, r3
     addi r3, r1, 0x44
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     addi r3, r1, 0x60
     addi r4, r1, 0x44
     bl vec3_copy
@@ -918,7 +915,7 @@ asm void fn_8029E2AC(void)
     bl atn_Model_getBoneMatrix
     mr r4, r3
     addi r3, r1, 0x38
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     addi r3, r1, 0x60
     addi r4, r1, 0x38
     bl vec3_copy
@@ -932,7 +929,7 @@ asm void fn_8029E2AC(void)
     bl atn_Model_getBoneMatrix
     mr r4, r3
     addi r3, r1, 0x2c
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     addi r3, r1, 0x60
     addi r4, r1, 0x2c
     bl vec3_copy
@@ -946,7 +943,7 @@ asm void fn_8029E2AC(void)
     bl atn_Model_getBoneMatrix
     mr r4, r3
     addi r3, r1, 0x20
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     addi r3, r1, 0x60
     addi r4, r1, 0x20
     bl vec3_copy
@@ -960,7 +957,7 @@ asm void fn_8029E2AC(void)
     bl atn_Model_getBoneMatrix
     mr r4, r3
     addi r3, r1, 0x14
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     addi r3, r1, 0x60
     addi r4, r1, 0x14
     bl vec3_copy
@@ -974,7 +971,7 @@ asm void fn_8029E2AC(void)
     bl atn_Model_getBoneMatrix
     mr r4, r3
     addi r3, r1, 0x8
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     addi r3, r1, 0x60
     addi r4, r1, 0x8
     bl vec3_copy

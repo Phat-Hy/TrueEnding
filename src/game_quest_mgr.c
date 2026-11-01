@@ -6,19 +6,19 @@ extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void fn_80044E0C(void);
 extern void fn_8004D314(void);
-extern void fn_8004D388(void);
+extern void collision_queryGeometry(void);
 extern void collision_testLineSegment(void);
 extern void fn_80050A1C(void);
 extern void mem_alloc(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void fn_80125474(void);
 extern void fn_8014C228(void);
-extern void fn_8014DEE4(void);
+extern void dialog_selectChoice(void);
 extern void fn_80153698(void);
 extern void actor_setState(void);
 extern void fn_801720AC(void);
 extern void fn_801749EC(void);
-extern void fn_80179D44(void);
+extern void actor_getMovementFlags(void);
 extern void fn_801C8938(void);
 extern void fn_8036DB24(void);
 extern void world_getGlobalFlag(void);
@@ -30,8 +30,8 @@ extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
 extern void PSVECCrossProduct(void);
-extern void fn_8068A850(void);
-extern void fn_8068AD58(void);
+extern void std_sin(void);
+extern void std_cos(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
 extern void math_u64DivMod(void);
@@ -237,14 +237,14 @@ lbl_fn_80140588_000001B8:
     lfs f29, lbl_8088196C
 lbl_fn_80140588_000001BC:
     lfs f1, 0x4(r28)
-    bl fn_8068AD58
+    bl std_cos
     frsp f3, f1
     lfs f0, lbl_8088196C
     stfs f0, 0xf8(r1)
     lfs f1, 0x4(r28)
     fmuls f0, f29, f3
     stfs f0, 0xf4(r1)
-    bl fn_8068A850
+    bl std_sin
     frsp f5, f1
     lfs f3, 0xf4(r1)
     lfs f0, 0xf8(r1)
@@ -468,7 +468,7 @@ lbl_fn_80140588_00000510:
     stfs f0, 0xdc(r1)
 lbl_fn_80140588_0000051C:
     mr r3, r27
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lwz r0, 0x48(r27)
     mr r7, r3
     cmpwi r0, 0x0
@@ -504,7 +504,7 @@ lbl_fn_80140588_00000584:
     addi r6, r1, 0xf4
     addi r8, r27, 0x5b8
     li r9, 0x0
-    bl fn_8004D388
+    bl collision_queryGeometry
     lwz r0, 0x54c(r27)
     mr r31, r3
     rlwinm r0, r0, 0, 22, 22
@@ -1588,7 +1588,7 @@ lbl_fn_80141674_00001544:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8014DEE4
+    bl dialog_selectChoice
 lbl_fn_80141674_00001564:
     mr r3, r31
     addi r4, r1, 0x290
@@ -2010,7 +2010,7 @@ lbl_fn_80141674_00001B18:
     stfs f4, 0x13c(r1)
     stfs f3, 0x140(r1)
     stfs f0, 0x144(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     oris r7, r3, 0x8000
     lwz r3, lbl_8087EE98
     lfs f1, 0x144(r1)
@@ -2019,7 +2019,7 @@ lbl_fn_80141674_00001B18:
     addi r6, r1, 0x160
     addi r8, r31, 0x5b8
     li r9, 0x0
-    bl fn_8004D388
+    bl collision_queryGeometry
     addi r5, r1, 0x330
     li r0, 0x0
     addi r4, r1, 0x184
@@ -2053,7 +2053,7 @@ lbl_fn_80141674_00001B18:
     stw r0, 0x308(r1)
     stw r0, 0x30c(r1)
     stw r0, 0x310(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lfs f5, 0x18c(r1)
     addi r4, r1, 0xb0
     lfs f4, 0x5ac(r31)
@@ -2128,7 +2128,7 @@ lbl_fn_80141674_00001CB0:
     stfs f0, 0x98(r1)
     stfs f0, 0x9c(r1)
     stfs f0, 0xa0(r1)
-    bl fn_8004D388
+    bl collision_queryGeometry
     cmpwi r3, 0x0
     beq lbl_fn_80141674_00001DB4
     lfs f4, lbl_808819B0
@@ -2292,7 +2292,7 @@ lbl_fn_80141674_00001E58:
     stfs f3, 0x124(r1)
     stfs f2, 0x11c(r1)
     stfs f0, 0x118(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     oris r7, r3, 0x8000
     mr r3, r28
     mr r5, r29
@@ -2413,7 +2413,7 @@ lbl_fn_80141674_00002164:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8014DEE4
+    bl dialog_selectChoice
 lbl_fn_80141674_00002184:
     lwz r0, 0x3d4(r1)
     psq_l f31, 0x3c8(r1), 0, 0

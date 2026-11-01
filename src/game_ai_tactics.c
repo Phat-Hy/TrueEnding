@@ -4,21 +4,21 @@
 /* External function declarations */
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
-extern void fn_8000D3A4(void);
-extern void fn_8001047C(void);
+extern void vec3_mag(void);
+extern void vec3_assign(void);
 extern void vec3_sub(void);
-extern void fn_8004D388(void);
+extern void collision_queryGeometry(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void str_findChar(void);
 extern void fn_800F52F0(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8574(void);
-extern void fn_800F8C6C(void);
-extern void fn_8013C38C(void);
+extern void viewport_updateCulling(void);
+extern void scissor_clipFrustum(void);
+extern void npc_getPosition(void);
 extern void fn_8014052C(void);
-extern void fn_80144710(void);
+extern void quest_evaluateConditions(void);
 extern void actor_setState(void);
 extern void fn_80170A20(void);
 extern void fn_80176548(void);
@@ -117,16 +117,16 @@ asm void fn_802676BC(void)
     cmpwi r0, 0x0
     beq lbl_fn_802676BC_00000448
     mr r3, r0
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r1, 0x20
-    bl fn_8001047C
+    bl vec3_assign
     addi r3, r1, 0x14
     addi r4, r1, 0x20
     addi r5, r31, 0x528
     bl vec3_sub
     addi r3, r1, 0x14
-    bl fn_8000D3A4
+    bl vec3_mag
     lwz r0, 0x14c0(r31)
     fmr f31, f1
     cmpwi r0, 0x0
@@ -1183,7 +1183,7 @@ lbl_fn_802684C0_00000EF4:
     bl task_findEntryById
     mr r31, r3
     mr r3, r30
-    bl fn_80144710
+    bl quest_evaluateConditions
     lwz r3, lbl_8087F048
     mr r6, r30
     lwz r8, 0x590(r30)
@@ -1193,7 +1193,7 @@ lbl_fn_802684C0_00000EF4:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
 lbl_fn_802684C0_00000F30:
     lwz r0, 0x24(r1)
     psq_l f31, 0x18(r1), 0, 0
@@ -1539,7 +1539,7 @@ lbl_fn_8026860C_00001374:
     addi r8, r1, 0x118
     li r9, 0x0
     li r10, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
     lwz r3, lbl_8087F8A0
     li r7, 0x0
     lwz r8, 0x48(r3)
@@ -1622,7 +1622,7 @@ lbl_fn_8026860C_00001504:
     addi r8, r1, 0x118
     li r9, 0x0
     li r10, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
     b lbl_fn_8026860C_000015D0
 lbl_fn_8026860C_00001560:
     lwz r30, lbl_8087F048
@@ -1638,7 +1638,7 @@ lbl_fn_8026860C_00001560:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
     lwz r30, lbl_8087F048
     li r3, 0x60f
     bl task_findEntryById
@@ -1652,7 +1652,7 @@ lbl_fn_8026860C_00001560:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
 lbl_fn_8026860C_000015D0:
     lwz r0, 0x174(r1)
     psq_l f31, 0x168(r1), 0, 0
@@ -1735,7 +1735,7 @@ lbl_fn_80268CB4_000016E8:
     bl task_findEntryById
     mr r30, r3
     mr r3, r31
-    bl fn_80144710
+    bl quest_evaluateConditions
     lwz r8, 0x590(r31)
     mr r6, r31
     lwz r3, lbl_8087F048
@@ -1745,7 +1745,7 @@ lbl_fn_80268CB4_000016E8:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     b lbl_fn_80268CB4_00001844
 lbl_fn_80268CB4_00001728:
     lfs f7, 0x2e4(r31)
@@ -1773,7 +1773,7 @@ lbl_fn_80268CB4_00001778:
     bl task_findEntryById
     mr r30, r3
     mr r3, r31
-    bl fn_80144710
+    bl quest_evaluateConditions
     lwz r8, 0x590(r31)
     mr r6, r31
     lwz r3, lbl_8087F048
@@ -1783,7 +1783,7 @@ lbl_fn_80268CB4_00001778:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     b lbl_fn_80268CB4_00001844
 lbl_fn_80268CB4_000017B8:
     lfs f7, 0x2e4(r31)
@@ -1811,7 +1811,7 @@ lbl_fn_80268CB4_00001808:
     bl task_findEntryById
     mr r30, r3
     mr r3, r31
-    bl fn_80144710
+    bl quest_evaluateConditions
     lwz r8, 0x590(r31)
     mr r6, r31
     lwz r3, lbl_8087F048
@@ -1821,7 +1821,7 @@ lbl_fn_80268CB4_00001808:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
 lbl_fn_80268CB4_00001844:
     lwz r4, lbl_8087F0A8
     lis r0, 0x4330
@@ -1950,7 +1950,7 @@ lbl_fn_80268CB4_000019E0:
     addi r8, r31, 0x5b8
     lis r7, 0x8000
     li r9, 0x0
-    bl fn_8004D388
+    bl collision_queryGeometry
     addi r4, r1, 0x198
     addi r3, r1, 0x8
     psq_l f1, 0x0(r4), 0, 0

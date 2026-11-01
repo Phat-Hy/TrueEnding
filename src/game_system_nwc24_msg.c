@@ -2,26 +2,26 @@
 #pragma function_align 4
 
 /* External function declarations */
-extern void fn_8000D114(void);
+extern void vec3_set(void);
 extern void vec3_copy(void);
-extern void fn_8000D3A4(void);
-extern void fn_8001047C(void);
+extern void vec3_mag(void);
+extern void vec3_assign(void);
 extern void fn_800109E0(void);
-extern void fn_80011034(void);
+extern void vec3_toEulerAngles(void);
 extern void fn_80011220(void);
 extern void fn_80011410(void);
 extern void fn_80012C88(void);
 extern void vec3_sub(void);
-extern void fn_80013410(void);
+extern void vec3_add(void);
 extern void item_useConsumable(void);
-extern void fn_8004D388(void);
+extern void collision_queryGeometry(void);
 extern void collision_testLineSegment(void);
 extern void fn_80057A68(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800A56A8(void);
 extern void fn_800A58D0(void);
 extern void fn_800F72CC(void);
-extern void fn_800F7FF0(void);
+extern void viewport_getNextSequenceId(void);
 extern void fn_800F8524(void);
 extern void fn_8010F6FC(void);
 extern void fn_80112958(void);
@@ -418,19 +418,19 @@ lbl_fn_80387910_00000454:
     bl fn_80113CCC
     mr r4, r3
     addi r3, r1, 0x128
-    bl fn_8001047C
+    bl vec3_assign
     mr r3, r29
     bl fn_80112958
     mr r4, r3
     addi r3, r1, 0x11c
-    bl fn_8001047C
+    bl vec3_assign
     addi r3, r1, 0x110
     addi r4, r1, 0x11c
     addi r5, r1, 0x128
     bl vec3_sub
     addi r3, r1, 0x104
     addi r4, r1, 0x110
-    bl fn_8001047C
+    bl vec3_assign
     lfs f0, lbl_808858E8
     addi r3, r1, 0x104
     stfs f0, 0x108(r1)
@@ -447,22 +447,22 @@ lbl_fn_80387910_00000454:
     b lbl_fn_80387910_000004D8
 lbl_fn_80387910_000004D0:
     addi r3, r1, 0x104
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
 lbl_fn_80387910_000004D8:
     addi r3, r1, 0x110
-    bl fn_8000D3A4
+    bl vec3_mag
     stfs f1, 0x10(r1)
     mr r3, r29
     bl fn_80116BA4
     fmr f31, f1
     addi r3, r1, 0x110
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
     addi r3, r1, 0xb0
     addi r4, r1, 0x110
     bl fn_8013C3B4
     addi r3, r1, 0xf8
     addi r4, r1, 0xb0
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lfs f0, 0x1d0(r1)
     addi r31, r29, 0x8a4
     lfs f2, 0x8a0(r29)
@@ -482,7 +482,7 @@ lbl_fn_80387910_000004D8:
     stfs f0, 0x12c(r1)
     bl vec3_sub
     addi r3, r1, 0xec
-    bl fn_8000D3A4
+    bl vec3_mag
     lfs f2, 0x1c8(r1)
     mr r4, r31
     lfs f0, 0x1e4(r1)
@@ -511,7 +511,7 @@ lbl_fn_80387910_000004D8:
     addi r3, r1, 0x98
     addi r4, r1, 0x11c
     addi r5, r1, 0x110
-    bl fn_80013410
+    bl vec3_add
     addi r3, r1, 0x128
     addi r4, r1, 0x98
     bl vec3_copy
@@ -530,7 +530,7 @@ lbl_fn_80387910_000004D8:
     addi r3, r1, 0xe0
     lfs f3, lbl_808858F8
     fmr f2, f1
-    bl fn_8000D114
+    bl vec3_set
     lfs f0, 0x8a0(r29)
     addi r3, r1, 0x168
     fneg f1, f0
@@ -559,7 +559,7 @@ lbl_fn_80387910_00000680:
     lfs f0, lbl_808858E8
     addi r3, r1, 0xd4
     stfs f0, 0xd8(r1)
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
     addi r3, r1, 0xd4
     addi r4, r1, 0xe0
     bl fn_801A03E8
@@ -568,7 +568,7 @@ lbl_fn_80387910_00000680:
     bge lbl_fn_80387910_000006E4
     addi r3, r1, 0xc8
     addi r4, r1, 0x128
-    bl fn_8001047C
+    bl vec3_assign
     lfs f0, 0x120(r1)
     addi r3, r1, 0x80
     stfs f0, 0xcc(r1)
@@ -607,7 +607,7 @@ lbl_fn_80387910_00000730:
     addi r5, r1, 0x128
     bl vec3_sub
     addi r3, r1, 0x68
-    bl fn_8000D3A4
+    bl vec3_mag
     frsp f2, f1
     lfs f0, lbl_8088593C
     stfs f1, 0x10(r1)
@@ -626,7 +626,7 @@ lbl_fn_80387910_00000730:
     bl fn_80383728
     addi r3, r1, 0x5c
     addi r4, r1, 0x50
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lfs f0, 0x5c(r1)
     addi r3, r1, 0x44
     stfs f0, 0xc(r1)
@@ -635,7 +635,7 @@ lbl_fn_80387910_00000730:
     bl vec3_sub
     addi r3, r1, 0xbc
     addi r4, r1, 0x44
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lfs f1, lbl_80885934
     addi r3, r1, 0xc
     addi r4, r1, 0xbc
@@ -648,7 +648,7 @@ lbl_fn_80387910_00000730:
     addi r3, r1, 0x2c
     lfs f3, lbl_808858F8
     fmr f2, f1
-    bl fn_8000D114
+    bl vec3_set
     mr r4, r3
     addi r3, r1, 0x38
     addi r5, r1, 0x138
@@ -1024,7 +1024,7 @@ lbl_fn_80387DE4_00000D0C:
     li r8, 0x0
     stfs f0, 0x28(r1)
     li r9, 0x0
-    bl fn_8004D388
+    bl collision_queryGeometry
     cmpwi r3, 0x0
     beq lbl_fn_80387DE4_00000D58
     lwz r3, 0x9c(r1)
@@ -1072,7 +1072,7 @@ lbl_fn_80387DE4_00000DC4:
     addi r6, r1, 0x50
     stfs f0, 0x54(r1)
     li r8, 0x0
-    bl fn_8004D388
+    bl collision_queryGeometry
     cmpwi r3, 0x0
     beq lbl_fn_80387DE4_00000E7C
     lfs f3, 0xd0(r1)

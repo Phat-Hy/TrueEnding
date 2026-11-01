@@ -5,16 +5,16 @@
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_80061824(void);
+extern void skill_calcTrajectory(void);
 extern void fn_80062C8C(void);
 extern void fn_80063484(void);
 extern void fn_80063764(void);
 extern void fn_8006F2F0(void);
-extern void fn_800BFAC8(void);
+extern void motion_updateFogAdj(void);
 extern void fn_801255C8(void);
 extern void fn_80128A30(void);
 extern void fn_80139560(void);
-extern void fn_80145334(void);
+extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void fn_8015E7A0(void);
 extern void fn_8016EB48(void);
@@ -26,7 +26,7 @@ extern void fn_8017FBEC(void);
 extern void fn_8017FED0(void);
 extern void fn_80182788(void);
 extern void fn_80183860(void);
-extern void fn_8035B78C(void);
+extern void entity_Instance_destructor(void);
 extern void fn_804AAFCC(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
@@ -105,7 +105,7 @@ lbl_fn_8017D000_00000048:
 lbl_fn_8017D000_00000078:
     mr r3, r30
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r31, 0x0
     ble lbl_fn_8017D000_00000094
     mr r3, r30
@@ -145,14 +145,14 @@ asm void fn_8017D0B0(void)
     bne lbl_fn_8017D0B0_00000110
     bl fn_80139560
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     b lbl_fn_8017D0B0_00000124
 lbl_fn_8017D0B0_00000110:
     cmpwi r5, 0x3
     beq lbl_fn_8017D0B0_00000124
     bl fn_8017D13C
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
 lbl_fn_8017D0B0_00000124:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
@@ -1574,7 +1574,7 @@ lbl_fn_8017D13C_000013E0:
     stfs f0, 0x2c(r1)
     stfs f1, 0x30(r1)
     stfs f2, 0x34(r1)
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f1, 0x1a0(r1)
     lfs f0, lbl_80881B78
     fcmpo cr0, f1, f0
@@ -1698,7 +1698,7 @@ lbl_fn_8017D13C_000015D0:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
 lbl_fn_8017D13C_00001628:
     addi r11, r1, 0x3d0
     psq_l f31, 0x3e8(r1), 0, 0

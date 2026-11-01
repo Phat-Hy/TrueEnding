@@ -28,7 +28,7 @@ extern void fn_80124B60(void);
 extern void fn_8013310C(void);
 extern void dialog_renderWindow(void);
 extern void fn_80153698(void);
-extern void fn_801539E0(void);
+extern void inventory_unequipItem(void);
 extern void fn_80153B44(void);
 extern void fn_80153FA0(void);
 extern void fn_80154344(void);
@@ -40,7 +40,7 @@ extern void fn_80166544(void);
 extern void fn_80166A54(void);
 extern void fn_8016DC14(void);
 extern void actor_setState(void);
-extern void fn_8016F3D0(void);
+extern void battle_canTargetActor(void);
 extern void fn_80178018(void);
 extern void fn_80178668(void);
 extern void fn_80179FA8(void);
@@ -317,7 +317,7 @@ lbl_fn_800E3F5C_0000024C:
     li r31, 0x0
     li r5, 0x1
     mr r3, r26
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     bne lbl_fn_800E3F5C_000002D8
     lwz r3, 0x48(r26)
@@ -905,7 +905,7 @@ lbl_fn_800E4278_00000A64:
     stfs f0, 0x530(r22)
 lbl_fn_800E4278_00000B04:
     mr r3, r22
-    bl fn_801539E0
+    bl inventory_unequipItem
     lwz r6, 0x180(r1)
     mr r3, r22
     mr r8, r24
@@ -1073,7 +1073,7 @@ lbl_fn_800E4278_00000D3C:
     cmpwi r3, 0x0
     beq lbl_fn_800E4278_00000D78
     mr r3, r22
-    bl fn_801539E0
+    bl inventory_unequipItem
     li r0, 0x2
     stw r0, 0x14a0(r22)
     li r27, 0x1

@@ -23,13 +23,13 @@ extern void atn_Task_setActive(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void boss_updatePhaseState(void);
-extern void fn_80145334(void);
+extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
-extern void fn_8014C540(void);
+extern void dialog_updateScriptState(void);
 extern void fn_801588A0(void);
 extern void fn_8020A780(void);
 extern void task_findEntryById(void);
-extern void fn_802376D0(void);
+extern void res_MsgHandle_isLoading(void);
 extern void res_MsgHandle_update(void);
 extern void fn_802AE954(void);
 extern void world_setGlobalFlag(void);
@@ -134,7 +134,7 @@ lbl_fn_802AC590_00000090:
     b lbl_fn_802AC590_00000380
 lbl_fn_802AC590_000000A8:
     addi r3, r31, 0x1a6c
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_802AC590_000000D8
     addi r3, r31, 0x1a60
@@ -1721,7 +1721,7 @@ lbl_fn_802AD930_000016C4:
     blt lbl_fn_802AD930_00001648
 lbl_fn_802AD930_000016D0:
     mr r3, r30
-    bl fn_8014C540
+    bl dialog_updateScriptState
     lwz r0, 0x38(r30)
     clrlwi r0, r0, 31
     cmplwi r0, 0x1
@@ -1730,7 +1730,7 @@ lbl_fn_802AD930_000016D0:
     extrwi. r0, r0, 1, 6
     bne lbl_fn_802AD930_000016FC
     mr r3, r30
-    bl fn_80145334
+    bl quest_updateFlow
 lbl_fn_802AD930_000016FC:
     lwz r0, 0x58c(r30)
     cmpwi r0, 0xe

@@ -18,7 +18,7 @@ extern void fn_800FFE68(void);
 extern void fn_801055A8(void);
 extern void sound_initGlobalInstances(void);
 extern void fn_8023A614(void);
-extern void fn_8023A680(void);
+extern void res_Shader_bindParams(void);
 extern void res_registerResource(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
@@ -26,7 +26,7 @@ extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
-extern void fn_8068A850(void);
+extern void std_sin(void);
 
 /* External data declarations */
 extern u8 lbl_80736040[];
@@ -110,7 +110,7 @@ asm void fn_801002DC(void)
 lbl_fn_801002DC_00000078:
     lfs f0, lbl_80881500
     fmuls f1, f0, f2
-    bl fn_8068A850
+    bl std_sin
     frsp f31, f1
     lfs f30, lbl_808814B8
     lfs f25, lbl_80881500
@@ -406,7 +406,7 @@ lbl_fn_801004FC_000004B4:
     extrwi. r0, r0, 1, 22
     bne lbl_fn_801004FC_000004EC
     fmr f1, f30
-    bl fn_8068A850
+    bl std_sin
     frsp f25, f1
     addi r3, r1, 0x20
     addi r4, r1, 0x2c
@@ -517,7 +517,7 @@ asm void fn_8010089C(void)
     mr r22, r6
     addi r26, r3, 0x85c
     li r25, -0x1
-    bl fn_8068A850
+    bl std_sin
     lfs f4, 0x4(r22)
     frsp f27, f1
     lfs f3, lbl_80881478
@@ -1353,7 +1353,7 @@ lbl_fn_80101434_000011C8:
     li r6, 0x0
     li r7, 0x0
     li r10, 0x0
-    bl fn_8023A680
+    bl res_Shader_bindParams
     cmpwi r28, 0x0
     beq lbl_fn_80101434_00001230
     lwz r3, lbl_8087F3C0
@@ -1413,7 +1413,7 @@ lbl_fn_80101524_0000129C:
     li r7, 0x0
     li r10, 0x0
     addi r4, r4, 0x6594
-    bl fn_8023A680
+    bl res_Shader_bindParams
 lbl_fn_80101524_000012F4:
     rlwinm. r0, r31, 0, 9, 9
     beq lbl_fn_80101524_0000134C
@@ -1436,7 +1436,7 @@ lbl_fn_80101524_000012F4:
     li r7, 0x0
     li r10, 0x0
     addi r4, r4, 0x65a0
-    bl fn_8023A680
+    bl res_Shader_bindParams
 lbl_fn_80101524_0000134C:
     rlwinm. r0, r31, 0, 25, 25
     beq lbl_fn_80101524_000013A4
@@ -1459,7 +1459,7 @@ lbl_fn_80101524_0000134C:
     li r7, 0x0
     li r10, 0x0
     addi r4, r4, 0x65ac
-    bl fn_8023A680
+    bl res_Shader_bindParams
 lbl_fn_80101524_000013A4:
     rlwinm. r0, r31, 0, 7, 8
     beq lbl_fn_80101524_00001440

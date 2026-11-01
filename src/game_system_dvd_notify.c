@@ -18,7 +18,7 @@ extern void fn_8004B290(void);
 extern void fn_8004B338(void);
 extern void fn_80076FF8(void);
 extern void mem_alloc(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void fn_800CA910(void);
 extern void fn_800CAA88(void);
 extern void fn_800CB480(void);
@@ -30,7 +30,7 @@ extern void fn_800CB640(void);
 extern void fn_800CB6F8(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void dialog_renderWindow(void);
 extern void fn_80207EE8(void);
 extern void fn_80207F34(void);
@@ -473,7 +473,7 @@ asm void fn_8037CAF0(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_8037CAF0_00000490
     li r0, 0x7
@@ -1724,7 +1724,7 @@ asm void fn_8037DC68(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_8037DC68_0000162C
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_8037DC68_0000162C:
     addi r3, r30, 0x1f4
     li r4, -0x1

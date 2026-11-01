@@ -8,7 +8,7 @@ extern void _savegpr_14(void);
 extern void _savegpr_26(void);
 extern void fn_8000D430(void);
 extern void collision_testLineSegment(void);
-extern void fn_800697D8(void);
+extern void boss_recordDamage(void);
 extern void fn_8006A250(void);
 extern void fn_8006A900(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -19,12 +19,12 @@ extern void atn_Task_setActive(void);
 extern void fn_800F1378(void);
 extern void fn_801346C8(void);
 extern void quest_checkCondition(void);
-extern void fn_8014DEE4(void);
+extern void dialog_selectChoice(void);
 extern void fn_80154344(void);
 extern void fn_80155DAC(void);
-extern void fn_8016DA4C(void);
+extern void debuff_clearStatus(void);
 extern void fn_8016EB48(void);
-extern void fn_80179D44(void);
+extern void actor_getMovementFlags(void);
 extern void fn_801E97DC(void);
 extern void fn_80216544(void);
 extern void fn_80219160(void);
@@ -51,7 +51,7 @@ extern void fn_803B6C88(void);
 extern void fn_803C1560(void);
 extern void fn_803E43B8(void);
 extern void fn_803E4434(void);
-extern void fn_803EA77C(void);
+extern void chest_spawnLoot(void);
 extern void fn_803EAC3C(void);
 extern void fn_803EB4A8(void);
 extern void fn_8044D028(void);
@@ -170,7 +170,7 @@ asm void world_setGlobalFlag(void)
     bl sprintf
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x8
-    bl fn_800697D8
+    bl boss_recordDamage
     b lbl_world_setGlobalFlag_00000740
 lbl_world_setGlobalFlag_00000064:
     cmpwi r4, 0x0
@@ -661,7 +661,7 @@ asm void world_getLocalFlag(void)
     bl sprintf
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x8
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_world_getLocalFlag_000007A0:
     li r3, 0x0
     b lbl_world_getLocalFlag_000007B4
@@ -697,7 +697,7 @@ asm void world_setLocalFlag(void)
     bl sprintf
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x8
-    bl fn_800697D8
+    bl boss_recordDamage
     b lbl_world_setLocalFlag_00000848
 lbl_world_setLocalFlag_00000814:
     slwi r0, r4, 2
@@ -872,7 +872,7 @@ lbl_world_startTransitionFade_00000A14:
     li r5, 0x26
     lfs f2, lbl_8088572C
     li r6, 0x0
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_world_startTransitionFade_00000A80:
     lwz r3, lbl_8087F8A0
     li r0, 0x0
@@ -1467,7 +1467,7 @@ lbl_fn_80371334_000012A8:
     cmpwi r0, 0xd
     bne lbl_fn_80371334_00001300
     mr r3, r30
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     mr r3, r30
     li r4, 0x0
     li r5, 0x0
@@ -1919,7 +1919,7 @@ lbl_fn_80371790_00001928:
     b lbl_fn_80371790_00001FF0
 lbl_fn_80371790_00001954:
     mr r3, r20
-    bl fn_80179D44
+    bl actor_getMovementFlags
     mr r5, r3
     lwz r3, 0x10d8(r15)
     lfs f1, lbl_808857CC
@@ -2093,7 +2093,7 @@ lbl_fn_80371790_00001BC8:
     li r4, 0x0
     li r5, 0x1
     li r6, 0x0
-    bl fn_8014DEE4
+    bl dialog_selectChoice
     cmpwi r19, 0x0
     beq lbl_fn_80371790_00001C0C
     lfs f1, lbl_80885708

@@ -2,9 +2,9 @@
 #pragma function_align 4
 
 /* External function declarations */
-extern void fn_8000D3A4(void);
+extern void vec3_mag(void);
 extern void fn_8000D9E8(void);
-extern void fn_80011034(void);
+extern void vec3_toEulerAngles(void);
 extern void vec3_sub(void);
 extern void fn_800133B0(void);
 extern void fn_80013404(void);
@@ -14,16 +14,16 @@ extern void fn_80103F60(void);
 extern void fn_80108378(void);
 extern void fn_801092C8(void);
 extern void fn_801125F8(void);
-extern void fn_80121F00(void);
+extern void equip_getGlobalManager(void);
 extern void fn_80126214(void);
 extern void fn_80127D8C(void);
 extern void fn_8012DD70(void);
 extern void fn_8013A258(void);
-extern void fn_8013C38C(void);
+extern void npc_getPosition(void);
 extern void fn_8013C504(void);
-extern void fn_8013CB68(void);
-extern void fn_8015495C(void);
-extern void fn_8016DA4C(void);
+extern void npc_updateTalkInteraction(void);
+extern void equip_applyToCharacter(void);
+extern void debuff_clearStatus(void);
 extern void actor_setState(void);
 extern void fn_8017039C(void);
 extern void fn_80170A20(void);
@@ -276,9 +276,9 @@ asm void fn_802FF550(void)
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     mr r3, r31
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     li r4, 0x0
     li r3, 0x50
     li r0, 0x1e
@@ -974,7 +974,7 @@ lbl_fn_802FF800_00000CA0:
     fmr f2, f30
     addi r4, r1, 0x158
     li r5, 0x1
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
     cmpwi r31, 0x0
     beq lbl_fn_802FF800_00000CD4
     addi r3, r1, 0x14c
@@ -1033,7 +1033,7 @@ asm void fn_802FFFF8(void)
     cmpwi r0, 0x16
     beq lbl_fn_802FFFF8_00001318
 lbl_fn_802FFFF8_00000D84:
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_8013C504
     bl fn_8000D9E8
     bl fn_802A36B0
@@ -1052,7 +1052,7 @@ lbl_fn_802FFFF8_00000D84:
     lwz r30, 0x1518(r29)
     cmpwi r30, 0x0
     beq lbl_fn_802FFFF8_00000E18
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r1, 0x5c
     addi r5, r30, 0x4
@@ -1060,7 +1060,7 @@ lbl_fn_802FFFF8_00000D84:
     lfs f0, lbl_80884A20
     addi r3, r1, 0x5c
     stfs f0, 0x60(r1)
-    bl fn_8000D3A4
+    bl vec3_mag
     lwz r5, 0x1518(r29)
     fmr f28, f1
     addi r3, r1, 0x50
@@ -1074,7 +1074,7 @@ lbl_fn_802FFFF8_00000E18:
     lwz r3, 0x14ec(r29)
     cmpwi r3, 0x0
     beq lbl_fn_802FFFF8_00000E64
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r1, 0x44
     addi r5, r29, 0x528
@@ -1084,7 +1084,7 @@ lbl_fn_802FFFF8_00000E18:
     fmr f31, f1
     addi r3, r1, 0x2c
     addi r4, r1, 0x44
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lfs f1, 0x30(r1)
     lfs f0, 0x538(r29)
     fsubs f1, f1, f0
@@ -1094,7 +1094,7 @@ lbl_fn_802FFFF8_00000E64:
     cmpwi r31, 0x0
     beq lbl_fn_802FFFF8_00000EB0
     mr r3, r31
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r1, 0x38
     addi r5, r29, 0x528
@@ -1104,7 +1104,7 @@ lbl_fn_802FFFF8_00000E64:
     fmr f26, f1
     addi r3, r1, 0x20
     addi r4, r1, 0x38
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lfs f1, 0x24(r1)
     lfs f0, 0x538(r29)
     fsubs f1, f1, f0
@@ -1158,24 +1158,24 @@ lbl_fn_802FFFF8_00000F44:
     bne lbl_fn_802FFFF8_00001058
     lwz r3, 0x14ec(r29)
     li r30, 0x0
-    bl fn_8013C38C
+    bl npc_getPosition
     lwz r4, 0x1510(r29)
     mr r5, r3
     addi r3, r1, 0x14
     addi r4, r4, 0x4
     bl vec3_sub
     addi r3, r1, 0x14
-    bl fn_8000D3A4
+    bl vec3_mag
     fmr f29, f1
     lwz r3, 0x14ec(r29)
-    bl fn_8013C38C
+    bl npc_getPosition
     lwz r4, 0x1514(r29)
     mr r5, r3
     addi r3, r1, 0x8
     addi r4, r4, 0x4
     bl vec3_sub
     addi r3, r1, 0x8
-    bl fn_8000D3A4
+    bl vec3_mag
     fcmpo cr0, f29, f1
     bge lbl_fn_802FFFF8_00000FF4
     lwz r3, 0x1518(r29)

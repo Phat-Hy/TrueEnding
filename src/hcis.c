@@ -7,7 +7,7 @@ extern void OSRestoreInterrupts(void);
 extern void _restgpr_14(void);
 extern void _savegpr_14(void);
 extern void fn_806267F0(void);
-extern void fn_80626C60(void);
+extern void scapi_getConfigItem(void);
 extern void scapi_cleanupContext(void);
 extern void fn_80626EC0(void);
 extern void fn_80626F10(void);
@@ -348,7 +348,7 @@ lbl_fn_80628330_000003F0:
     cmplwi r16, 0x1
     bne lbl_fn_80628330_0000040C
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     stwx r3, r15, r23
     stb r30, 0x14(r22)
     b lbl_fn_80628330_00000440
@@ -356,7 +356,7 @@ lbl_fn_80628330_0000040C:
     cmplwi r16, 0x2
     bne lbl_fn_80628330_00000428
     li r3, 0x3
-    bl fn_80626C60
+    bl scapi_getConfigItem
     stwx r3, r15, r23
     stb r24, 0x14(r22)
     b lbl_fn_80628330_00000440
@@ -364,7 +364,7 @@ lbl_fn_80628330_00000428:
     cmplwi r16, 0x3
     bne lbl_fn_80628330_0000068C
     li r3, 0x1
-    bl fn_80626C60
+    bl scapi_getConfigItem
     stwx r3, r15, r23
     stb r25, 0x14(r22)
 lbl_fn_80628330_00000440:

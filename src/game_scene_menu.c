@@ -11,7 +11,7 @@ extern void fn_80018608(void);
 extern void collision_testLineSegment(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_8008BBD8(void);
+extern void map_debugLog(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800A56A8(void);
@@ -23,11 +23,11 @@ extern void fn_801065E4(void);
 extern void fn_801240B4(void);
 extern void fn_80133130(void);
 extern void fn_801446F0(void);
-extern void fn_801539E0(void);
-extern void fn_8015495C(void);
+extern void inventory_unequipItem(void);
+extern void equip_applyToCharacter(void);
 extern void fn_80155DAC(void);
-extern void fn_8016DA4C(void);
-extern void fn_80179D44(void);
+extern void debuff_clearStatus(void);
+extern void actor_getMovementFlags(void);
 extern void fn_80192758(void);
 extern void fn_801A4B00(void);
 extern void fn_801A4E08(void);
@@ -35,7 +35,7 @@ extern void fn_801A7DC8(void);
 extern void fn_801B1F4C(void);
 extern void task_findEntryById(void);
 extern void fn_8021FD7C(void);
-extern void fn_803EA77C(void);
+extern void chest_spawnLoot(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
@@ -227,7 +227,7 @@ lbl_fn_801A6364_00000130:
     li r0, 0x1
     stw r0, 0x28(r3)
     lwz r3, 0x4(r3)
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lwz r27, 0x4(r29)
     addi r3, r1, 0x58
     lfs f3, lbl_80882178
@@ -383,7 +383,7 @@ lbl_fn_801A6364_0000036C:
     stw r0, 0x638(r7)
     li r7, 0x1
     lwz r3, 0x4(r29)
-    bl fn_8015495C
+    bl equip_applyToCharacter
 lbl_fn_801A6364_000003A8:
     li r31, 0x1
 lbl_fn_801A6364_000003AC:
@@ -490,7 +490,7 @@ lbl_fn_801A6750_000004C4:
     stw r0, 0x1c8(r1)
     stw r0, 0x1cc(r1)
     stw r0, 0x1d0(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     oris r7, r3, 0x8000
     lwz r3, lbl_8087EE98
     mr r5, r30
@@ -777,7 +777,7 @@ lbl_fn_801A6750_00000944:
     lfs f1, lbl_80882188
     li r6, 0x0
     lfs f2, lbl_8088218C
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_801A6750_00000968:
     psq_l f31, 0x308(r1), 0, 0
     mr r3, r31
@@ -843,7 +843,7 @@ lbl_fn_801A6CFC_00000A0C:
     psq_st f1, 0x528(r4), 0, 0
     stfs f2, 0x530(r4)
     lwz r3, 0x4(r3)
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lwz r29, 0x4(r31)
     addi r3, r1, 0x38
     lfs f3, lbl_80882178
@@ -938,7 +938,7 @@ lbl_fn_801A6CFC_00000B70:
     stw r0, 0x638(r7)
     li r7, 0x1
     lwz r3, 0x4(r31)
-    bl fn_8015495C
+    bl equip_applyToCharacter
 lbl_fn_801A6CFC_00000BC8:
     li r27, 0x1
 lbl_fn_801A6CFC_00000BCC:
@@ -953,10 +953,7 @@ lbl_fn_801A6CFC_00000BCC:
     blr
 }
 
-asm void fn_801A6F54(void)
-{
-    nofralloc
-    blr
+void fn_801A6F54(void) {
 }
 
 asm void fn_801A6F58(void)
@@ -1050,7 +1047,7 @@ lbl_fn_801A6F58_00000D1C:
     stw r4, 0x54(r1)
     stw r0, 0x58(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_801A6F58_00000DF0
     lwz r7, 0x48(r1)
@@ -1239,7 +1236,7 @@ asm void fn_801A72EC(void)
     addi r31, r3, 0xb0
     srwi. r0, r0, 31
     beq lbl_fn_801A72EC_00000FD0
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_801A72EC_00000FD0:
     li r0, 0x1
     stw r0, 0x34c(r31)
@@ -1450,10 +1447,7 @@ lbl_fn_801A73A4_0000126C:
     blr
 }
 
-asm void fn_801A7644(void)
-{
-    nofralloc
-    blr
+void fn_801A7644(void) {
 }
 
 asm void fn_801A7648(void)
@@ -1866,7 +1860,7 @@ lbl_fn_801A7A94_00001808:
     stw r4, 0x48(r1)
     stw r0, 0x4c(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_801A7A94_000018DC
     lwz r7, 0x3c(r1)

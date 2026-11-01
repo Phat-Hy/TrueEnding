@@ -7,7 +7,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void fn_8000D430(void);
-extern void fn_8008BBD8(void);
+extern void map_debugLog(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_80097E80(void);
 extern void fn_800F29D0(void);
@@ -1714,7 +1714,7 @@ lbl_fn_8056A9E8_00001798:
     stw r4, 0x80(r1)
     stw r0, 0x84(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_8056A9E8_000017F0
     addic. r0, r1, 0x144

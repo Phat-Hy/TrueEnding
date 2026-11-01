@@ -10,7 +10,7 @@ extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
 extern void fn_8006AFF8(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void fn_80094958(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -20,14 +20,14 @@ extern void fn_800EE360(void);
 extern void system_getNextSequenceId(void);
 extern void fn_80129978(void);
 extern void boss_updatePhaseState(void);
-extern void fn_80145334(void);
+extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
-extern void fn_8014C540(void);
-extern void fn_80151448(void);
-extern void fn_8015495C(void);
-extern void fn_8016DA4C(void);
+extern void dialog_updateScriptState(void);
+extern void inventory_applyItemStats(void);
+extern void equip_applyToCharacter(void);
+extern void debuff_clearStatus(void);
 extern void actor_setState(void);
-extern void fn_801765D8(void);
+extern void battle_awardExp(void);
 extern void fn_80178A6C(void);
 extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_constructor(void);
@@ -42,10 +42,10 @@ extern void fn_8026442C(void);
 extern void fn_8026474C(void);
 extern void fn_802648CC(void);
 extern void fn_80264C88(void);
-extern void fn_8035B694(void);
-extern void fn_8035B78C(void);
+extern void entity_Instance_constructor(void);
+extern void entity_Instance_destructor(void);
 extern void fn_803C1560(void);
-extern void fn_803EA77C(void);
+extern void chest_spawnLoot(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
@@ -166,9 +166,9 @@ lbl_fn_802620A8_00000054:
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     mr r3, r30
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     li r31, 0x0
     stw r31, 0x14bc(r30)
     lwz r3, lbl_8087F048
@@ -674,7 +674,7 @@ asm void fn_80262840(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_80262840_000007E4
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_80262840_000007E4:
     addic. r31, r29, 0x1538
     beq lbl_fn_80262840_00000804
@@ -710,7 +710,7 @@ lbl_fn_80262840_00000844:
 lbl_fn_80262840_00000854:
     mr r3, r29
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r30, 0x0
     ble lbl_fn_80262840_00000870
     mr r3, r29
@@ -736,7 +736,7 @@ asm void fn_80262938(void)
     mr r31, r5
     mr r30, r3
     lwz r5, 0x20(r5)
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lis r3, lbl_80784BF8@ha
     addi r28, r30, 0x14b0
     addi r3, r3, lbl_80784BF8@l
@@ -956,7 +956,7 @@ asm void fn_80262C40(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_80262C40_00000BE4
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_80262C40_00000BE4:
     addic. r31, r29, 0x16f8
     beq lbl_fn_80262C40_00000C04
@@ -974,7 +974,7 @@ lbl_fn_80262C40_00000C04:
 lbl_fn_80262C40_00000C14:
     mr r3, r29
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r30, 0x0
     ble lbl_fn_80262C40_00000C30
     mr r3, r29
@@ -1273,7 +1273,7 @@ lbl_fn_80262FB4_00001010:
     stw r4, 0x5c0(r31)
     ori r0, r0, 0x8000
     stw r0, 0x12a4(r31)
-    bl fn_801765D8
+    bl battle_awardExp
     mr r3, r31
     bl fn_800EE360
     b lbl_fn_80262FB4_00001488
@@ -1564,9 +1564,9 @@ lbl_fn_80262FB4_00001488:
     lfs f0, lbl_8088362C
     mr r3, r31
     stfs f0, 0x5b0(r31)
-    bl fn_8014C540
+    bl dialog_updateScriptState
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     lwz r0, 0x164(r1)
     psq_l f31, 0x158(r1), 0, 0
     lfd f31, 0x150(r1)
@@ -1814,7 +1814,7 @@ lbl_fn_80263580_000017B4:
     lfs f2, lbl_80883630
     li r5, 0x0
     li r6, 0x0
-    bl fn_803EA77C
+    bl chest_spawnLoot
     b lbl_fn_80263580_00001840
 lbl_fn_80263580_00001838:
     li r0, 0x1
@@ -1851,7 +1851,7 @@ lbl_fn_80263580_0000189C:
 lbl_fn_80263580_000018AC:
     mr r3, r30
     mr r4, r31
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r12, 0x0(r30)
     mr r3, r30
     mr r4, r31
@@ -2046,7 +2046,7 @@ lbl_fn_802639C8_00001B28:
     stfs f0, 0x2e8(r30)
     bl atn_Anim_setLayerAnimation
     mr r3, r30
-    bl fn_8016DA4C
+    bl debuff_clearStatus
 lbl_fn_802639C8_00001B8C:
     lwz r0, 0x7e0(r30)
     rlwinm r0, r0, 0, 26, 26
@@ -2064,9 +2064,9 @@ lbl_fn_802639C8_00001B8C:
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     mr r3, r30
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lfs f0, lbl_808835FC
     li r3, 0x2
     li r0, 0x1

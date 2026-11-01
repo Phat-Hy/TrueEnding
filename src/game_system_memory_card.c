@@ -19,9 +19,9 @@ extern void clip_calculateFrustum(void);
 extern void fn_800FBA9C(void);
 extern void fn_8013322C(void);
 extern void boss_updatePhaseState(void);
-extern void fn_80145334(void);
-extern void fn_8014C540(void);
-extern void fn_80151448(void);
+extern void quest_updateFlow(void);
+extern void dialog_updateScriptState(void);
+extern void inventory_applyItemStats(void);
 extern void fn_80158CA4(void);
 extern void fn_8015E4B0(void);
 extern void fn_8015E7A0(void);
@@ -34,7 +34,7 @@ extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_update(void);
 extern void res_findResourceSlot(void);
 extern void fn_8035AB78(void);
-extern void fn_8035B78C(void);
+extern void entity_Instance_destructor(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_destructor(void);
@@ -194,7 +194,7 @@ asm void fn_8035586C(void)
     lwz r0, 0x58c(r3)
     cmpwi r0, 0x6
     beq lbl_fn_8035586C_00000150
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r12, 0x0(r30)
     mr r3, r30
     mr r4, r31
@@ -297,7 +297,7 @@ asm void fn_8035598C(void)
 lbl_fn_8035598C_00000260:
     mr r3, r30
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r31, 0x0
     ble lbl_fn_8035598C_0000027C
     mr r3, r30
@@ -1408,7 +1408,7 @@ lbl_fn_803563E4_0000123C:
     mtctr r12
     bctrl
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
     lwz r0, 0x38(r31)
     clrlwi r0, r0, 31
     cmplwi r0, 0x1
@@ -1417,7 +1417,7 @@ lbl_fn_803563E4_0000123C:
     extrwi. r0, r0, 1, 6
     bne lbl_fn_803563E4_0000127C
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
 lbl_fn_803563E4_0000127C:
     mr r3, r31
     bl fn_8035AB78

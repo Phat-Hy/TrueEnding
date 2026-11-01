@@ -18,7 +18,7 @@ extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
 extern void node_createNamedChild(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_playAnimationByName(void);
@@ -34,13 +34,13 @@ extern void fn_80126214(void);
 extern void fn_8013322C(void);
 extern void boss_updatePhaseState(void);
 extern void fn_8013A258(void);
-extern void fn_8013CB68(void);
+extern void npc_updateTalkInteraction(void);
 extern void dialog_renderWindow(void);
-extern void fn_80151448(void);
-extern void fn_8015495C(void);
+extern void inventory_applyItemStats(void);
+extern void equip_applyToCharacter(void);
 extern void fn_8015E4B0(void);
 extern void fn_801603CC(void);
-extern void fn_8016DA4C(void);
+extern void debuff_clearStatus(void);
 extern void actor_setState(void);
 extern void fn_80178208(void);
 extern void fn_80178A6C(void);
@@ -54,8 +54,8 @@ extern void res_MsgHandle_update(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
 extern void fn_8025CFF4(void);
-extern void fn_8035B694(void);
-extern void fn_8035B78C(void);
+extern void entity_Instance_constructor(void);
+extern void entity_Instance_destructor(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
 extern void atn_LoadHandle_constructor(void);
@@ -259,7 +259,7 @@ lbl_fn_8025B5D8_0000018C:
 lbl_fn_8025B5D8_000001CC:
     mr r3, r30
     mr r4, r31
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r12, 0x0(r30)
     mr r3, r30
     mr r4, r31
@@ -366,9 +366,9 @@ lbl_fn_8025B7DC_000002F0:
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     mr r3, r30
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lfs f0, lbl_808834B0
     li r3, 0x2
     li r0, 0x1
@@ -618,7 +618,7 @@ lbl_fn_8025B9EC_000006F0:
     addi r4, r1, 0x8c
     fmuls f2, f0, f30
     li r5, 0x1
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
 lbl_fn_8025B9EC_0000070C:
     lwz r0, 0x164(r1)
     psq_l f31, 0x158(r1), 0, 0
@@ -1513,7 +1513,7 @@ asm void fn_8025C998(void)
     mr r31, r5
     lwz r5, 0x20(r5)
     mr r30, r3
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lis r3, lbl_80784958@ha
     addi r28, r30, 0x14b0
     addi r3, r3, lbl_80784958@l
@@ -1814,7 +1814,7 @@ asm void fn_8025CDE0(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_8025CDE0_00001858
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_8025CDE0_00001858:
     addic. r31, r29, 0x1584
     beq lbl_fn_8025CDE0_00001878
@@ -1859,7 +1859,7 @@ lbl_fn_8025CDE0_000018D8:
 lbl_fn_8025CDE0_000018E8:
     mr r3, r29
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r30, 0x0
     ble lbl_fn_8025CDE0_00001904
     mr r3, r29

@@ -6,11 +6,11 @@ extern void __register_global_object(void);
 extern void _restgpr_26(void);
 extern void _savegpr_26(void);
 extern void fn_8000D430(void);
-extern void fn_8003EFB0(void);
+extern void ui_destroyWidget(void);
 extern void fn_8004B290(void);
 extern void fn_8004B338(void);
 extern void item_useConsumable(void);
-extern void fn_8004D388(void);
+extern void collision_queryGeometry(void);
 extern void fn_8007A7BC(void);
 extern void fn_8009076C(void);
 extern void fn_80092A4C(void);
@@ -33,12 +33,12 @@ extern void fn_80129A48(void);
 extern void fn_80129A6C(void);
 extern void fn_80147A18(void);
 extern void quest_checkCondition(void);
-extern void fn_8014DEE4(void);
+extern void dialog_selectChoice(void);
 extern void fn_80154C08(void);
 extern void fn_80164D24(void);
 extern void fn_80175B18(void);
 extern void fn_80176E30(void);
-extern void fn_80179D44(void);
+extern void actor_getMovementFlags(void);
 extern void fn_802185FC(void);
 extern void task_mapIdToQueue(void);
 extern void kpad_getClampData(void);
@@ -130,10 +130,10 @@ extern u32 lbl_80881AA8;
 /* Function declarations */
 void fn_801446E8(void);
 void fn_801446F0(void);
-void fn_80144710(void);
+void quest_evaluateConditions(void);
 void fn_80144ED4(void);
 void fn_80144F4C(void);
-void fn_80145334(void);
+void quest_updateFlow(void);
 
 asm void fn_801446E8(void)
 {
@@ -155,7 +155,7 @@ asm void fn_801446F0(void)
     blr
 }
 
-asm void fn_80144710(void)
+asm void quest_evaluateConditions(void)
 {
     nofralloc
     stwu r1, -0x450(r1)
@@ -179,7 +179,7 @@ asm void fn_80144710(void)
     stw r29, 0x3e4(r1)
     lwz r5, 0xf1c(r3)
     cmpwi r5, 0x0
-    beq lbl_fn_80144710_00000320
+    beq lbl_quest_evaluateConditions_00000320
     psq_l f1, 0x0(r5), 0, 0
     addi r30, r1, 0xbc
     psq_l f2, 0x8(r5), 0, 0
@@ -233,24 +233,24 @@ asm void fn_80144710(void)
     psq_st f1, 0x0(r29), 0, 0
     stfs f2, 0xa0(r1)
     fcmpo cr0, f8, f0
-    bge lbl_fn_80144710_00000178
+    bge lbl_quest_evaluateConditions_00000178
     lfs f0, 0x98(r1)
     fcmpo cr0, f0, f7
-    ble lbl_fn_80144710_0000016C
+    ble lbl_quest_evaluateConditions_0000016C
     lfs f0, lbl_808819C8
-    b lbl_fn_80144710_00000170
-lbl_fn_80144710_0000016C:
+    b lbl_quest_evaluateConditions_00000170
+lbl_quest_evaluateConditions_0000016C:
     lfs f0, lbl_808819CC
-lbl_fn_80144710_00000170:
+lbl_quest_evaluateConditions_00000170:
     stfs f0, 0x90(r1)
-    b lbl_fn_80144710_0000018C
-lbl_fn_80144710_00000178:
+    b lbl_quest_evaluateConditions_0000018C
+lbl_quest_evaluateConditions_00000178:
     frsp f2, f2
     lfs f1, 0x98(r1)
     bl std_atan2
     frsp f0, f1
     stfs f0, 0x90(r1)
-lbl_fn_80144710_0000018C:
+lbl_quest_evaluateConditions_0000018C:
     lfs f0, 0x90(r1)
     addi r3, r1, 0x308
     li r4, 0x79
@@ -311,26 +311,26 @@ lbl_fn_80144710_0000018C:
     fabs f7, f2
     frsp f7, f7
     fcmpo cr0, f7, f0
-    bge lbl_fn_80144710_000002A8
+    bge lbl_quest_evaluateConditions_000002A8
     lfs f7, 0x84(r1)
     lfs f0, lbl_8088196C
     fcmpo cr0, f7, f0
-    ble lbl_fn_80144710_00000298
+    ble lbl_quest_evaluateConditions_00000298
     lfs f0, lbl_808819C8
-    b lbl_fn_80144710_0000029C
-lbl_fn_80144710_00000298:
+    b lbl_quest_evaluateConditions_0000029C
+lbl_quest_evaluateConditions_00000298:
     lfs f0, lbl_808819CC
-lbl_fn_80144710_0000029C:
+lbl_quest_evaluateConditions_0000029C:
     fneg f0, f0
     stfs f0, 0x8c(r1)
-    b lbl_fn_80144710_000002BC
-lbl_fn_80144710_000002A8:
+    b lbl_quest_evaluateConditions_000002BC
+lbl_quest_evaluateConditions_000002A8:
     lfs f1, 0x84(r1)
     bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x8c(r1)
-lbl_fn_80144710_000002BC:
+lbl_quest_evaluateConditions_000002BC:
     lfs f0, lbl_8088196C
     addi r3, r1, 0x8c
     psq_l f1, 0x0(r3), 0, 0
@@ -355,40 +355,40 @@ lbl_fn_80144710_000002BC:
     psq_st f4, 0x18(r3), 0, 0
     psq_st f5, 0x20(r3), 0, 0
     psq_st f6, 0x28(r3), 0, 0
-    b lbl_fn_80144710_000006B4
-lbl_fn_80144710_00000320:
+    b lbl_quest_evaluateConditions_000006B4
+lbl_quest_evaluateConditions_00000320:
     lfs f0, 0x52c(r3)
     stfs f0, 0x1c(r1)
     lwz r0, 0x1c(r1)
     rlwinm r4, r0, 0, 1, 8
     subis r0, r4, 0x7f80
     cmplwi r0, 0x0
-    beq lbl_fn_80144710_00000374
+    beq lbl_quest_evaluateConditions_00000374
     lfs f0, 0x528(r3)
     stfs f0, 0x18(r1)
     lwz r0, 0x18(r1)
     rlwinm r4, r0, 0, 1, 8
     subis r0, r4, 0x7f80
     cmplwi r0, 0x0
-    beq lbl_fn_80144710_00000374
+    beq lbl_quest_evaluateConditions_00000374
     lfs f2, 0x530(r3)
     stfs f2, 0x14(r1)
     lwz r0, 0x14(r1)
     rlwinm r4, r0, 0, 1, 8
     subis r0, r4, 0x7f80
     cmplwi r0, 0x0
-    bne lbl_fn_80144710_00000388
-lbl_fn_80144710_00000374:
+    bne lbl_quest_evaluateConditions_00000388
+lbl_quest_evaluateConditions_00000374:
     psq_l f1, 0x550(r3), 0, 0
     lfs f2, 0x558(r3)
     psq_st f1, 0x528(r3), 0, 0
     stfs f2, 0x530(r3)
-    b lbl_fn_80144710_00000394
-lbl_fn_80144710_00000388:
+    b lbl_quest_evaluateConditions_00000394
+lbl_quest_evaluateConditions_00000388:
     psq_l f1, 0x528(r3), 0, 0
     psq_st f1, 0x550(r3), 0, 0
     stfs f2, 0x558(r3)
-lbl_fn_80144710_00000394:
+lbl_quest_evaluateConditions_00000394:
     lfs f1, 0x528(r31)
     addi r3, r1, 0x378
     lfs f2, 0x52c(r31)
@@ -414,27 +414,27 @@ lbl_fn_80144710_00000394:
     rlwinm r3, r0, 0, 1, 8
     subis r0, r3, 0x7f80
     cmplwi r0, 0x0
-    beq lbl_fn_80144710_00000434
+    beq lbl_quest_evaluateConditions_00000434
     lfs f0, 0x534(r31)
     stfs f0, 0xc(r1)
     lwz r0, 0xc(r1)
     rlwinm r3, r0, 0, 1, 8
     subis r0, r3, 0x7f80
     cmplwi r0, 0x0
-    beq lbl_fn_80144710_00000434
+    beq lbl_quest_evaluateConditions_00000434
     lfs f0, 0x53c(r31)
     stfs f0, 0x8(r1)
     lwz r0, 0x8(r1)
     rlwinm r3, r0, 0, 1, 8
     subis r0, r3, 0x7f80
     cmplwi r0, 0x0
-    bne lbl_fn_80144710_00000444
-lbl_fn_80144710_00000434:
+    bne lbl_quest_evaluateConditions_00000444
+lbl_quest_evaluateConditions_00000434:
     lfs f0, lbl_8088196C
     stfs f0, 0x534(r31)
     stfs f0, 0x538(r31)
     stfs f0, 0x53c(r31)
-lbl_fn_80144710_00000444:
+lbl_quest_evaluateConditions_00000444:
     lfs f7, lbl_8088196C
     addi r29, r1, 0x3a8
     lfs f0, lbl_80881964
@@ -453,7 +453,7 @@ lbl_fn_80144710_00000444:
     stfs f0, 0x1b8(r1)
     lfs f1, 0x538(r31)
     fcmpu cr0, f7, f1
-    beq lbl_fn_80144710_000004E0
+    beq lbl_quest_evaluateConditions_000004E0
     addi r3, r1, 0x2a8
     li r4, 0x79
     bl PSMTXRotRad
@@ -474,11 +474,11 @@ lbl_fn_80144710_00000444:
     psq_st f4, 0x18(r30), 0, 0
     psq_st f5, 0x20(r30), 0, 0
     psq_st f6, 0x28(r30), 0, 0
-lbl_fn_80144710_000004E0:
+lbl_quest_evaluateConditions_000004E0:
     lfs f0, lbl_8088196C
     lfs f1, 0x534(r31)
     fcmpu cr0, f0, f1
-    beq lbl_fn_80144710_00000540
+    beq lbl_quest_evaluateConditions_00000540
     addi r3, r1, 0x248
     li r4, 0x78
     bl PSMTXRotRad
@@ -499,11 +499,11 @@ lbl_fn_80144710_000004E0:
     psq_st f4, 0x18(r30), 0, 0
     psq_st f5, 0x20(r30), 0, 0
     psq_st f6, 0x28(r30), 0, 0
-lbl_fn_80144710_00000540:
+lbl_quest_evaluateConditions_00000540:
     lfs f0, lbl_8088196C
     lfs f1, 0x53c(r31)
     fcmpu cr0, f0, f1
-    beq lbl_fn_80144710_000005A0
+    beq lbl_quest_evaluateConditions_000005A0
     addi r3, r1, 0x1e8
     li r4, 0x7a
     bl PSMTXRotRad
@@ -524,7 +524,7 @@ lbl_fn_80144710_00000540:
     psq_st f4, 0x18(r30), 0, 0
     psq_st f5, 0x20(r30), 0, 0
     psq_st f6, 0x28(r30), 0, 0
-lbl_fn_80144710_000005A0:
+lbl_quest_evaluateConditions_000005A0:
     mr r3, r29
     mr r4, r30
     addi r5, r1, 0x188
@@ -545,10 +545,10 @@ lbl_fn_80144710_000005A0:
     lwz r0, 0x958(r31)
     rlwinm r0, r0, 0, 25, 25
     cmplwi r0, 0x40
-    bne lbl_fn_80144710_00000658
+    bne lbl_quest_evaluateConditions_00000658
     lwz r0, 0x55c(r31)
     cmpwi r0, 0x8
-    beq lbl_fn_80144710_00000658
+    beq lbl_quest_evaluateConditions_00000658
     lfs f1, lbl_80881A0C
     addi r3, r1, 0x158
     li r4, 0x7a
@@ -571,7 +571,7 @@ lbl_fn_80144710_000005A0:
     psq_st f4, 0x18(r4), 0, 0
     psq_st f5, 0x20(r4), 0, 0
     psq_st f6, 0x28(r4), 0, 0
-lbl_fn_80144710_00000658:
+lbl_quest_evaluateConditions_00000658:
     lfs f1, 0x540(r31)
     addi r3, r1, 0xf8
     lfs f2, 0x544(r31)
@@ -595,7 +595,7 @@ lbl_fn_80144710_00000658:
     psq_st f4, 0x18(r4), 0, 0
     psq_st f5, 0x20(r4), 0, 0
     psq_st f6, 0x28(r4), 0, 0
-lbl_fn_80144710_000006B4:
+lbl_quest_evaluateConditions_000006B4:
     addi r4, r1, 0x3a8
     addi r3, r1, 0x2c
     psq_l f1, 0x0(r4), 0, 0
@@ -641,24 +641,24 @@ lbl_fn_80144710_000006B4:
     stfs f31, 0x24(r1)
     fcmpo cr0, f7, f0
     stfs f30, 0x28(r1)
-    ble lbl_fn_80144710_00000770
-    b lbl_fn_80144710_00000774
-lbl_fn_80144710_00000770:
+    ble lbl_quest_evaluateConditions_00000770
+    b lbl_quest_evaluateConditions_00000774
+lbl_quest_evaluateConditions_00000770:
     fmr f7, f0
-lbl_fn_80144710_00000774:
+lbl_quest_evaluateConditions_00000774:
     lfs f8, 0x20(r1)
     fcmpo cr0, f8, f7
-    ble lbl_fn_80144710_00000784
-    b lbl_fn_80144710_0000079C
-lbl_fn_80144710_00000784:
+    ble lbl_quest_evaluateConditions_00000784
+    b lbl_quest_evaluateConditions_0000079C
+lbl_quest_evaluateConditions_00000784:
     lfs f8, 0x24(r1)
     lfs f0, 0x28(r1)
     fcmpo cr0, f8, f0
-    ble lbl_fn_80144710_00000798
-    b lbl_fn_80144710_0000079C
-lbl_fn_80144710_00000798:
+    ble lbl_quest_evaluateConditions_00000798
+    b lbl_quest_evaluateConditions_0000079C
+lbl_quest_evaluateConditions_00000798:
     fmr f8, f0
-lbl_fn_80144710_0000079C:
+lbl_quest_evaluateConditions_0000079C:
     stfs f8, 0x104(r31)
     psq_l f31, 0x448(r1), 0, 0
     lfd f31, 0x440(r1)
@@ -974,7 +974,7 @@ lbl_fn_80144F4C_00000BE8:
     blr
 }
 
-asm void fn_80145334(void)
+asm void quest_updateFlow(void)
 {
     nofralloc
     stwu r1, -0x740(r1)
@@ -1007,75 +1007,75 @@ asm void fn_80145334(void)
     stw r0, 0x698(r1)
     li r5, 0x0
     li r6, 0x0
-    bne lbl_fn_80145334_00000D9C
+    bne lbl_quest_updateFlow_00000D9C
     lwz r0, 0x55c(r3)
     cmpwi r0, 0x6
-    bne lbl_fn_80145334_00000D4C
+    bne lbl_quest_updateFlow_00000D4C
     lwz r4, 0x560(r3)
     subi r0, r4, 0x4
     cmplwi r0, 0x1
-    ble lbl_fn_80145334_00000D00
+    ble lbl_quest_updateFlow_00000D00
     cmpwi r4, 0x2
-    beq lbl_fn_80145334_00000D00
+    beq lbl_quest_updateFlow_00000D00
     cmpwi r4, 0xe
-    beq lbl_fn_80145334_00000D08
+    beq lbl_quest_updateFlow_00000D08
     cmpwi r4, 0x62
-    beq lbl_fn_80145334_00000D30
-    b lbl_fn_80145334_00000D9C
-lbl_fn_80145334_00000D00:
+    beq lbl_quest_updateFlow_00000D30
+    b lbl_quest_updateFlow_00000D9C
+lbl_quest_updateFlow_00000D00:
     li r5, 0x1
-    b lbl_fn_80145334_00000D9C
-lbl_fn_80145334_00000D08:
+    b lbl_quest_updateFlow_00000D9C
+lbl_quest_updateFlow_00000D08:
     lwz r4, 0x50(r3)
     subis r0, r4, 0xa
     cmplwi r0, 0xae76
-    beq lbl_fn_80145334_00000D20
+    beq lbl_quest_updateFlow_00000D20
     cmplwi r0, 0xae77
-    bne lbl_fn_80145334_00000D9C
-lbl_fn_80145334_00000D20:
+    bne lbl_quest_updateFlow_00000D9C
+lbl_quest_updateFlow_00000D20:
     lfs f30, lbl_808819B0
     li r5, 0x1
     lfs f31, lbl_80881974
-    b lbl_fn_80145334_00000D9C
-lbl_fn_80145334_00000D30:
+    b lbl_quest_updateFlow_00000D9C
+lbl_quest_updateFlow_00000D30:
     lwz r0, 0x12a4(r3)
     extrwi. r0, r0, 1, 25
-    beq lbl_fn_80145334_00000D9C
+    beq lbl_quest_updateFlow_00000D9C
     lfs f25, lbl_80881A50
     li r5, 0x1
     li r6, 0x1
-    b lbl_fn_80145334_00000D9C
-lbl_fn_80145334_00000D4C:
+    b lbl_quest_updateFlow_00000D9C
+lbl_quest_updateFlow_00000D4C:
     cmpwi r0, 0x1
-    bne lbl_fn_80145334_00000D9C
+    bne lbl_quest_updateFlow_00000D9C
     lwz r0, 0x12a4(r3)
     extrwi. r4, r0, 1, 25
-    beq lbl_fn_80145334_00000D7C
+    beq lbl_quest_updateFlow_00000D7C
     lwz r0, 0x674(r3)
     cmpwi r0, 0x0
-    blt lbl_fn_80145334_00000D9C
+    blt lbl_quest_updateFlow_00000D9C
     lfs f25, lbl_80881A50
     li r5, 0x1
     li r6, 0x1
-    b lbl_fn_80145334_00000D9C
-lbl_fn_80145334_00000D7C:
+    b lbl_quest_updateFlow_00000D9C
+lbl_quest_updateFlow_00000D7C:
     srwi. r0, r0, 31
-    bne lbl_fn_80145334_00000D9C
+    bne lbl_quest_updateFlow_00000D9C
     lfs f7, 0x570(r3)
     lfs f0, lbl_80881A1C
     fcmpo cr0, f7, f0
     mfcr r5
     lfs f31, lbl_80881978
     extrwi r5, r5, 1, 1
-lbl_fn_80145334_00000D9C:
+lbl_quest_updateFlow_00000D9C:
     cmpwi r5, 0x0
-    beq lbl_fn_80145334_0000124C
+    beq lbl_quest_updateFlow_0000124C
     lwz r0, 0x520(r3)
     cmpwi r0, 0x0
-    blt lbl_fn_80145334_0000124C
+    blt lbl_quest_updateFlow_0000124C
     cmpwi r6, 0x0
     li r31, 0x1
-    beq lbl_fn_80145334_00000E2C
+    beq lbl_quest_updateFlow_00000E2C
     lfs f7, lbl_8088196C
     li r4, 0x79
     lfs f0, lbl_80881964
@@ -1103,18 +1103,18 @@ lbl_fn_80145334_00000D9C:
     psq_l f1, 0x0(r4), 0, 0
     psq_st f1, 0x0(r3), 0, 0
     stfs f2, 0x278(r1)
-    b lbl_fn_80145334_00000ED4
-lbl_fn_80145334_00000E2C:
+    b lbl_quest_updateFlow_00000ED4
+lbl_quest_updateFlow_00000E2C:
     lwz r0, 0x524(r3)
     cmpwi r0, 0x0
-    bge lbl_fn_80145334_00000E40
+    bge lbl_quest_updateFlow_00000E40
     li r4, 0x0
-    b lbl_fn_80145334_00000E4C
-lbl_fn_80145334_00000E40:
+    b lbl_quest_updateFlow_00000E4C
+lbl_quest_updateFlow_00000E40:
     mulli r0, r0, 0x30
     lwz r4, 0xec(r3)
     add r4, r4, r0
-lbl_fn_80145334_00000E4C:
+lbl_quest_updateFlow_00000E4C:
     lwz r0, 0x520(r3)
     lfs f0, 0x2c(r4)
     lfs f7, 0x1c(r4)
@@ -1123,14 +1123,14 @@ lbl_fn_80145334_00000E4C:
     stfs f8, 0x264(r1)
     stfs f7, 0x268(r1)
     stfs f0, 0x26c(r1)
-    bge lbl_fn_80145334_00000E78
+    bge lbl_quest_updateFlow_00000E78
     li r5, 0x0
-    b lbl_fn_80145334_00000E84
-lbl_fn_80145334_00000E78:
+    b lbl_quest_updateFlow_00000E84
+lbl_quest_updateFlow_00000E78:
     mulli r0, r0, 0x30
     lwz r3, 0xec(r3)
     add r5, r3, r0
-lbl_fn_80145334_00000E84:
+lbl_quest_updateFlow_00000E84:
     lfs f8, 0x2c(r5)
     addi r4, r1, 0x1cc
     lfs f0, 0x26c(r1)
@@ -1151,14 +1151,14 @@ lbl_fn_80145334_00000E84:
     stfs f2, 0x1d4(r1)
     psq_st f1, 0x0(r3), 0, 0
     stfs f2, 0x278(r1)
-lbl_fn_80145334_00000ED4:
+lbl_quest_updateFlow_00000ED4:
     lfs f0, lbl_8088196C
     addi r3, r1, 0x270
     stfs f0, 0x274(r1)
     bl PSVECSquareMag
     lfs f0, lbl_808819F4
     fcmpo cr0, f1, f0
-    ble lbl_fn_80145334_0000114C
+    ble lbl_quest_updateFlow_0000114C
     addi r3, r1, 0x270
     addi r27, r1, 0x1c0
     psq_l f1, 0x0(r3), 0, 0
@@ -1186,14 +1186,14 @@ lbl_fn_80145334_00000ED4:
     bl PSVECDotProduct
     lfs f0, lbl_808819A8
     fcmpo cr0, f1, f0
-    ble lbl_fn_80145334_0000114C
+    ble lbl_quest_updateFlow_0000114C
     li r0, 0x0
     stw r0, 0x674(r1)
     mr r3, r26
     stw r0, 0x678(r1)
     stw r0, 0x67c(r1)
     stw r0, 0x680(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     psq_l f1, 0x614(r26), 0, 0
     addi r4, r1, 0x248
     lfs f2, 0x61c(r26)
@@ -1221,24 +1221,24 @@ lbl_fn_80145334_00000ED4:
     lwz r0, 0x958(r26)
     rlwinm r0, r0, 0, 25, 25
     cmplwi r0, 0x40
-    bne lbl_fn_80145334_00000FFC
+    bne lbl_quest_updateFlow_00000FFC
     lfs f0, 0x24c(r1)
     fsubs f0, f0, f10
     stfs f0, 0x24c(r1)
-    b lbl_fn_80145334_00001008
-lbl_fn_80145334_00000FFC:
+    b lbl_quest_updateFlow_00001008
+lbl_quest_updateFlow_00000FFC:
     lfs f0, 0x24c(r1)
     fadds f0, f0, f10
     stfs f0, 0x24c(r1)
-lbl_fn_80145334_00001008:
+lbl_quest_updateFlow_00001008:
     lwz r0, 0x12a4(r26)
     extrwi. r0, r0, 1, 25
-    beq lbl_fn_80145334_0000101C
+    beq lbl_quest_updateFlow_0000101C
     lfs f0, lbl_80881A84
-    b lbl_fn_80145334_00001020
-lbl_fn_80145334_0000101C:
+    b lbl_quest_updateFlow_00001020
+lbl_quest_updateFlow_0000101C:
     lfs f0, lbl_80881978
-lbl_fn_80145334_00001020:
+lbl_quest_updateFlow_00001020:
     frsp f0, f0
     lwz r3, lbl_8087EE98
     addi r4, r1, 0x640
@@ -1248,9 +1248,9 @@ lbl_fn_80145334_00001020:
     fadds f1, f0, f30
     li r9, 0x0
     stfs f1, 0x254(r1)
-    bl fn_8004D388
+    bl collision_queryGeometry
     cmpwi r3, 0x0
-    beq lbl_fn_80145334_0000114C
+    beq lbl_quest_updateFlow_0000114C
     lfs f9, 0x250(r1)
     addi r3, r1, 0x238
     lfs f0, 0x278(r1)
@@ -1275,7 +1275,7 @@ lbl_fn_80145334_00001020:
     bl PSVECSquareMag
     lfs f0, lbl_808819F4
     fcmpo cr0, f1, f0
-    ble lbl_fn_80145334_0000114C
+    ble lbl_quest_updateFlow_0000114C
     addi r3, r1, 0x270
     addi r27, r1, 0x19c
     psq_l f1, 0x0(r3), 0, 0
@@ -1299,66 +1299,66 @@ lbl_fn_80145334_00001020:
     bl PSVECDotProduct
     lfs f0, lbl_80881A5C
     fcmpo cr0, f1, f0
-    bge lbl_fn_80145334_0000114C
+    bge lbl_quest_updateFlow_0000114C
     lwz r0, 0x67c(r1)
     rlwinm r0, r0, 0, 29, 29
     cmplwi r0, 0x4
-    beq lbl_fn_80145334_0000114C
+    beq lbl_quest_updateFlow_0000114C
     mr r3, r29
     bl PSVECMag
     fcmpo cr0, f31, f1
-    bge lbl_fn_80145334_00001138
-    b lbl_fn_80145334_00001144
-lbl_fn_80145334_00001138:
+    bge lbl_quest_updateFlow_00001138
+    b lbl_quest_updateFlow_00001144
+lbl_quest_updateFlow_00001138:
     mr r3, r29
     bl PSVECMag
     fmr f31, f1
-lbl_fn_80145334_00001144:
+lbl_quest_updateFlow_00001144:
     stfs f31, 0x588(r26)
     li r31, 0x0
-lbl_fn_80145334_0000114C:
+lbl_quest_updateFlow_0000114C:
     cmpwi r31, 0x0
-    beq lbl_fn_80145334_00001200
+    beq lbl_quest_updateFlow_00001200
     lfs f7, 0x588(r26)
     lfs f0, lbl_808819F4
     fcmpo cr0, f7, f0
-    ble lbl_fn_80145334_000011AC
+    ble lbl_quest_updateFlow_000011AC
     lwz r0, 0x12a4(r26)
     extrwi. r0, r0, 1, 25
-    beq lbl_fn_80145334_00001178
+    beq lbl_quest_updateFlow_00001178
     lfs f0, lbl_808819A0
-    b lbl_fn_80145334_0000117C
-lbl_fn_80145334_00001178:
+    b lbl_quest_updateFlow_0000117C
+lbl_quest_updateFlow_00001178:
     lfs f0, lbl_80881980
-lbl_fn_80145334_0000117C:
+lbl_quest_updateFlow_0000117C:
     lfs f7, 0x588(r26)
     fcmpo cr0, f7, f0
-    bge lbl_fn_80145334_0000118C
-    b lbl_fn_80145334_000011A0
-lbl_fn_80145334_0000118C:
+    bge lbl_quest_updateFlow_0000118C
+    b lbl_quest_updateFlow_000011A0
+lbl_quest_updateFlow_0000118C:
     cmpwi r0, 0x0
-    beq lbl_fn_80145334_0000119C
+    beq lbl_quest_updateFlow_0000119C
     lfs f7, lbl_808819A0
-    b lbl_fn_80145334_000011A0
-lbl_fn_80145334_0000119C:
+    b lbl_quest_updateFlow_000011A0
+lbl_quest_updateFlow_0000119C:
     lfs f7, lbl_80881980
-lbl_fn_80145334_000011A0:
+lbl_quest_updateFlow_000011A0:
     lfs f0, 0x588(r26)
     fsubs f0, f0, f7
     stfs f0, 0x588(r26)
-lbl_fn_80145334_000011AC:
+lbl_quest_updateFlow_000011AC:
     lwz r0, 0x12a4(r26)
     extrwi. r0, r0, 1, 25
-    beq lbl_fn_80145334_00001290
+    beq lbl_quest_updateFlow_00001290
     lwz r0, 0x55c(r26)
     cmpwi r0, 0x1
-    bne lbl_fn_80145334_00001290
+    bne lbl_quest_updateFlow_00001290
     lwz r0, 0x2dc(r26)
     cmpwi r0, 0x25
-    bne lbl_fn_80145334_00001290
+    bne lbl_quest_updateFlow_00001290
     lwz r5, 0x494(r26)
     cmpw r0, r5
-    beq lbl_fn_80145334_00001290
+    beq lbl_quest_updateFlow_00001290
     lfs f1, lbl_8088196C
     addi r3, r26, 0xb0
     lfs f2, lbl_80881994
@@ -1367,17 +1367,17 @@ lbl_fn_80145334_000011AC:
     li r7, 0x0
     li r8, 0x1
     bl atn_Anim_setLayerAnimation
-    b lbl_fn_80145334_00001290
-lbl_fn_80145334_00001200:
+    b lbl_quest_updateFlow_00001290
+lbl_quest_updateFlow_00001200:
     lwz r0, 0x12a4(r26)
     extrwi. r0, r0, 1, 25
-    beq lbl_fn_80145334_00001290
+    beq lbl_quest_updateFlow_00001290
     lwz r0, 0x55c(r26)
     cmpwi r0, 0x1
-    bne lbl_fn_80145334_00001290
+    bne lbl_quest_updateFlow_00001290
     lwz r0, 0x2dc(r26)
     cmpwi r0, 0x26
-    bne lbl_fn_80145334_00001290
+    bne lbl_quest_updateFlow_00001290
     lfs f1, lbl_8088196C
     addi r3, r26, 0xb0
     lfs f2, lbl_80881994
@@ -1387,29 +1387,29 @@ lbl_fn_80145334_00001200:
     li r7, 0x0
     li r8, 0x1
     bl atn_Anim_setLayerAnimation
-    b lbl_fn_80145334_00001290
-lbl_fn_80145334_0000124C:
+    b lbl_quest_updateFlow_00001290
+lbl_quest_updateFlow_0000124C:
     lwz r0, 0x55c(r3)
     cmpwi r0, 0x8
-    bne lbl_fn_80145334_00001260
+    bne lbl_quest_updateFlow_00001260
     lfs f0, lbl_8088196C
     stfs f0, 0x588(r3)
-lbl_fn_80145334_00001260:
+lbl_quest_updateFlow_00001260:
     lfs f7, 0x588(r3)
     lfs f0, lbl_808819F4
     fcmpo cr0, f7, f0
-    ble lbl_fn_80145334_00001290
+    ble lbl_quest_updateFlow_00001290
     lfs f0, lbl_808819A8
     fcmpo cr0, f7, f0
-    bge lbl_fn_80145334_00001280
-    b lbl_fn_80145334_00001284
-lbl_fn_80145334_00001280:
+    bge lbl_quest_updateFlow_00001280
+    b lbl_quest_updateFlow_00001284
+lbl_quest_updateFlow_00001280:
     fmr f7, f0
-lbl_fn_80145334_00001284:
+lbl_quest_updateFlow_00001284:
     lfs f0, 0x588(r3)
     fsubs f0, f0, f7
     stfs f0, 0x588(r3)
-lbl_fn_80145334_00001290:
+lbl_quest_updateFlow_00001290:
     lis r3, lbl_80737810@ha
     lfs f1, 0x534(r26)
     lfd f2, lbl_80737810@l(r3)
@@ -1417,16 +1417,16 @@ lbl_fn_80145334_00001290:
     frsp f7, f1
     lfs f0, lbl_80881A0C
     fcmpo cr0, f7, f0
-    ble lbl_fn_80145334_000012B8
+    ble lbl_quest_updateFlow_000012B8
     lfs f0, lbl_80881A10
     fsubs f7, f7, f0
-lbl_fn_80145334_000012B8:
+lbl_quest_updateFlow_000012B8:
     lfs f0, lbl_80881A14
     fcmpo cr0, f7, f0
-    bge lbl_fn_80145334_000012CC
+    bge lbl_quest_updateFlow_000012CC
     lfs f0, lbl_80881A10
     fadds f7, f7, f0
-lbl_fn_80145334_000012CC:
+lbl_quest_updateFlow_000012CC:
     lis r3, lbl_80737810@ha
     lfs f1, 0x538(r26)
     stfs f7, 0x534(r26)
@@ -1435,16 +1435,16 @@ lbl_fn_80145334_000012CC:
     frsp f7, f1
     lfs f0, lbl_80881A0C
     fcmpo cr0, f7, f0
-    ble lbl_fn_80145334_000012F8
+    ble lbl_quest_updateFlow_000012F8
     lfs f0, lbl_80881A10
     fsubs f7, f7, f0
-lbl_fn_80145334_000012F8:
+lbl_quest_updateFlow_000012F8:
     lfs f0, lbl_80881A14
     fcmpo cr0, f7, f0
-    bge lbl_fn_80145334_0000130C
+    bge lbl_quest_updateFlow_0000130C
     lfs f0, lbl_80881A10
     fadds f7, f7, f0
-lbl_fn_80145334_0000130C:
+lbl_quest_updateFlow_0000130C:
     lis r3, lbl_80737810@ha
     lfs f1, 0x53c(r26)
     stfs f7, 0x538(r26)
@@ -1453,134 +1453,134 @@ lbl_fn_80145334_0000130C:
     frsp f7, f1
     lfs f0, lbl_80881A0C
     fcmpo cr0, f7, f0
-    ble lbl_fn_80145334_00001338
+    ble lbl_quest_updateFlow_00001338
     lfs f0, lbl_80881A10
     fsubs f7, f7, f0
-lbl_fn_80145334_00001338:
+lbl_quest_updateFlow_00001338:
     lfs f0, lbl_80881A14
     fcmpo cr0, f7, f0
-    bge lbl_fn_80145334_0000134C
+    bge lbl_quest_updateFlow_0000134C
     lfs f0, lbl_80881A10
     fadds f7, f7, f0
-lbl_fn_80145334_0000134C:
+lbl_quest_updateFlow_0000134C:
     lwz r3, 0x13f8(r26)
     stfs f7, 0x53c(r26)
     subic. r0, r3, 0x1
     stw r0, 0x13f8(r26)
-    bge lbl_fn_80145334_00001368
+    bge lbl_quest_updateFlow_00001368
     li r0, 0x0
     stw r0, 0x13f8(r26)
-lbl_fn_80145334_00001368:
+lbl_quest_updateFlow_00001368:
     lwz r3, lbl_8087EFA8
     lwz r0, 0x410(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_80145334_000013C0
+    beq lbl_quest_updateFlow_000013C0
     lwz r0, 0x2bc(r26)
     extlwi r0, r0, 2, 26
     srawi. r0, r0, 31
-    beq lbl_fn_80145334_00001404
+    beq lbl_quest_updateFlow_00001404
     lwz r0, 0x2bc(r26)
     addi r28, r26, 0x680
     li r27, 0x0
     ori r0, r0, 0x10
     stw r0, 0x2bc(r26)
-lbl_fn_80145334_0000139C:
+lbl_quest_updateFlow_0000139C:
     lwz r3, 0x0(r28)
     cmpwi r3, 0x0
-    beq lbl_fn_80145334_000013AC
+    beq lbl_quest_updateFlow_000013AC
     bl fn_805663FC
-lbl_fn_80145334_000013AC:
+lbl_quest_updateFlow_000013AC:
     addi r27, r27, 0x1
     addi r28, r28, 0x4
     cmplwi r27, 0x8
-    blt lbl_fn_80145334_0000139C
-    b lbl_fn_80145334_00001404
-lbl_fn_80145334_000013C0:
+    blt lbl_quest_updateFlow_0000139C
+    b lbl_quest_updateFlow_00001404
+lbl_quest_updateFlow_000013C0:
     lwz r0, 0x2bc(r26)
     extlwi r0, r0, 2, 26
     srawi. r0, r0, 31
-    beq lbl_fn_80145334_00001404
+    beq lbl_quest_updateFlow_00001404
     lwz r0, 0x2bc(r26)
     addi r28, r26, 0x680
     li r27, 0x0
     rlwinm r0, r0, 0, 28, 26
     stw r0, 0x2bc(r26)
-lbl_fn_80145334_000013E4:
+lbl_quest_updateFlow_000013E4:
     lwz r3, 0x0(r28)
     cmpwi r3, 0x0
-    beq lbl_fn_80145334_000013F4
+    beq lbl_quest_updateFlow_000013F4
     bl fn_8056640C
-lbl_fn_80145334_000013F4:
+lbl_quest_updateFlow_000013F4:
     addi r27, r27, 0x1
     addi r28, r28, 0x4
     cmplwi r27, 0x8
-    blt lbl_fn_80145334_000013E4
-lbl_fn_80145334_00001404:
+    blt lbl_quest_updateFlow_000013E4
+lbl_quest_updateFlow_00001404:
     addi r4, r26, 0x6d4
-    b lbl_fn_80145334_0000146C
-lbl_fn_80145334_0000140C:
+    b lbl_quest_updateFlow_0000146C
+lbl_quest_updateFlow_0000140C:
     lwz r3, 0x4(r4)
     subic. r0, r3, 0x1
     stw r0, 0x4(r4)
-    bgt lbl_fn_80145334_00001468
+    bgt lbl_quest_updateFlow_00001468
     addi r0, r26, 0x6d4
     subf r0, r0, r4
     srawi r0, r0, 3
     addze r6, r0
     slwi r0, r6, 3
     add r5, r26, r0
-    b lbl_fn_80145334_00001450
-lbl_fn_80145334_00001438:
+    b lbl_quest_updateFlow_00001450
+lbl_quest_updateFlow_00001438:
     lwz r0, 0x6dc(r5)
     addi r6, r6, 0x1
     stw r0, 0x6d4(r5)
     lwz r0, 0x6e0(r5)
     stw r0, 0x6d8(r5)
     addi r5, r5, 0x8
-lbl_fn_80145334_00001450:
+lbl_quest_updateFlow_00001450:
     lwz r3, 0x6d0(r26)
     subi r0, r3, 0x1
     cmplw r6, r0
-    blt lbl_fn_80145334_00001438
+    blt lbl_quest_updateFlow_00001438
     stw r0, 0x6d0(r26)
-    b lbl_fn_80145334_0000146C
-lbl_fn_80145334_00001468:
+    b lbl_quest_updateFlow_0000146C
+lbl_quest_updateFlow_00001468:
     addi r4, r4, 0x8
-lbl_fn_80145334_0000146C:
+lbl_quest_updateFlow_0000146C:
     lwz r0, 0x6d0(r26)
     slwi r0, r0, 3
     add r3, r26, r0
     addi r0, r3, 0x6d4
     cmplw r4, r0
-    bne lbl_fn_80145334_0000140C
+    bne lbl_quest_updateFlow_0000140C
     lwz r0, 0x12a4(r26)
     extrwi. r0, r0, 1, 26
-    beq lbl_fn_80145334_000014A8
+    beq lbl_quest_updateFlow_000014A8
     lwz r3, 0xf58(r26)
     li r0, 0x0
     stw r0, 0xf5c(r26)
     addi r0, r3, 0x1
     stw r0, 0xf58(r26)
-    b lbl_fn_80145334_000014BC
-lbl_fn_80145334_000014A8:
+    b lbl_quest_updateFlow_000014BC
+lbl_quest_updateFlow_000014A8:
     lwz r3, 0xf5c(r26)
     li r0, 0x0
     stw r0, 0xf58(r26)
     addi r0, r3, 0x1
     stw r0, 0xf5c(r26)
-lbl_fn_80145334_000014BC:
+lbl_quest_updateFlow_000014BC:
     lwz r0, 0x7e0(r26)
     rlwinm r0, r0, 0, 25, 25
     cmplwi r0, 0x40
-    beq lbl_fn_80145334_000014D8
+    beq lbl_quest_updateFlow_000014D8
     lwz r3, 0x12a4(r26)
     extrwi. r0, r3, 1, 8
-    beq lbl_fn_80145334_000015E0
-lbl_fn_80145334_000014D8:
+    beq lbl_quest_updateFlow_000015E0
+lbl_quest_updateFlow_000014D8:
     lwz r0, 0xf94(r26)
     lfs f10, 0x1420(r26)
     cmpwi r0, 0x0
-    ble lbl_fn_80145334_000015C4
+    ble lbl_quest_updateFlow_000015C4
     lwz r5, 0xf98(r26)
     lis r4, lbl_80737808@ha
     lwz r6, 0xf94(r26)
@@ -1598,7 +1598,7 @@ lbl_fn_80145334_000014D8:
     fdivs f0, f7, f0
     fsubs f0, f8, f0
     fcmpo cr0, f0, f11
-    ble lbl_fn_80145334_00001550
+    ble lbl_quest_updateFlow_00001550
     stw r3, 0x694(r1)
     stw r0, 0x69c(r1)
     lfd f7, 0x690(r1)
@@ -1607,12 +1607,12 @@ lbl_fn_80145334_000014D8:
     fsubs f0, f0, f9
     fdivs f0, f7, f0
     fsubs f11, f8, f0
-lbl_fn_80145334_00001550:
+lbl_quest_updateFlow_00001550:
     lfs f12, lbl_808819B4
     fcmpo cr0, f12, f11
-    bge lbl_fn_80145334_00001560
-    b lbl_fn_80145334_000015C0
-lbl_fn_80145334_00001560:
+    bge lbl_quest_updateFlow_00001560
+    b lbl_quest_updateFlow_000015C0
+lbl_quest_updateFlow_00001560:
     xoris r3, r6, 0x8000
     stw r3, 0x694(r1)
     xoris r0, r5, 0x8000
@@ -1628,7 +1628,7 @@ lbl_fn_80145334_00001560:
     fdivs f0, f7, f0
     fsubs f0, f8, f0
     fcmpo cr0, f0, f12
-    ble lbl_fn_80145334_000015C0
+    ble lbl_quest_updateFlow_000015C0
     stw r3, 0x694(r1)
     stw r0, 0x69c(r1)
     lfd f7, 0x690(r1)
@@ -1637,19 +1637,19 @@ lbl_fn_80145334_00001560:
     fsubs f0, f0, f9
     fdivs f0, f7, f0
     fsubs f12, f8, f0
-lbl_fn_80145334_000015C0:
+lbl_quest_updateFlow_000015C0:
     fmuls f10, f10, f12
-lbl_fn_80145334_000015C4:
+lbl_quest_updateFlow_000015C4:
     lfs f2, 0x52c(r26)
     mr r3, r26
     li r4, 0x0
     li r5, 0x0
     fadds f1, f2, f10
     bl fn_80144F4C
-    b lbl_fn_80145334_00001778
-lbl_fn_80145334_000015E0:
+    b lbl_quest_updateFlow_00001778
+lbl_quest_updateFlow_000015E0:
     extrwi. r0, r3, 1, 23
-    beq lbl_fn_80145334_00001674
+    beq lbl_quest_updateFlow_00001674
     lwz r0, 0xfa0(r26)
     lis r4, lbl_80737808@ha
     lwz r3, 0xf9c(r26)
@@ -1668,7 +1668,7 @@ lbl_fn_80145334_000015E0:
     fdivs f0, f7, f0
     fsubs f0, f8, f0
     fcmpo cr0, f0, f11
-    ble lbl_fn_80145334_00001654
+    ble lbl_quest_updateFlow_00001654
     stw r3, 0x694(r1)
     stw r0, 0x69c(r1)
     lfd f7, 0x690(r1)
@@ -1677,7 +1677,7 @@ lbl_fn_80145334_000015E0:
     fsubs f0, f0, f9
     fdivs f0, f7, f0
     fsubs f11, f8, f0
-lbl_fn_80145334_00001654:
+lbl_quest_updateFlow_00001654:
     fmuls f10, f10, f11
     lfs f1, 0x52c(r26)
     mr r3, r26
@@ -1685,11 +1685,11 @@ lbl_fn_80145334_00001654:
     li r5, 0x0
     fadds f2, f1, f10
     bl fn_80144F4C
-    b lbl_fn_80145334_00001778
-lbl_fn_80145334_00001674:
+    b lbl_quest_updateFlow_00001778
+lbl_quest_updateFlow_00001674:
     lwz r0, 0x12a8(r26)
     extrwi. r0, r0, 1, 30
-    beq lbl_fn_80145334_000016AC
+    beq lbl_quest_updateFlow_000016AC
     lfs f7, lbl_80881974
     mr r3, r26
     lfs f0, 0x52c(r26)
@@ -1700,79 +1700,79 @@ lbl_fn_80145334_00001674:
     addi r5, r5, 0x70
     fadds f2, f1, f0
     bl fn_80144F4C
-    b lbl_fn_80145334_00001778
-lbl_fn_80145334_000016AC:
+    b lbl_quest_updateFlow_00001778
+lbl_quest_updateFlow_000016AC:
     lwz r0, 0xb4(r26)
     rlwinm r0, r0, 0, 13, 11
     stw r0, 0xb4(r26)
     lwz r3, 0x680(r26)
     cmpwi r3, 0x0
-    beq lbl_fn_80145334_000016D0
+    beq lbl_quest_updateFlow_000016D0
     lwz r0, 0x28(r3)
     rlwinm r0, r0, 0, 13, 11
     stw r0, 0x28(r3)
-lbl_fn_80145334_000016D0:
+lbl_quest_updateFlow_000016D0:
     lwz r3, 0x684(r26)
     cmpwi r3, 0x0
-    beq lbl_fn_80145334_000016E8
+    beq lbl_quest_updateFlow_000016E8
     lwz r0, 0x28(r3)
     rlwinm r0, r0, 0, 13, 11
     stw r0, 0x28(r3)
-lbl_fn_80145334_000016E8:
+lbl_quest_updateFlow_000016E8:
     lwz r3, 0x688(r26)
     cmpwi r3, 0x0
-    beq lbl_fn_80145334_00001700
+    beq lbl_quest_updateFlow_00001700
     lwz r0, 0x28(r3)
     rlwinm r0, r0, 0, 13, 11
     stw r0, 0x28(r3)
-lbl_fn_80145334_00001700:
+lbl_quest_updateFlow_00001700:
     lwz r3, 0x68c(r26)
     cmpwi r3, 0x0
-    beq lbl_fn_80145334_00001718
+    beq lbl_quest_updateFlow_00001718
     lwz r0, 0x28(r3)
     rlwinm r0, r0, 0, 13, 11
     stw r0, 0x28(r3)
-lbl_fn_80145334_00001718:
+lbl_quest_updateFlow_00001718:
     lwz r3, 0x690(r26)
     cmpwi r3, 0x0
-    beq lbl_fn_80145334_00001730
+    beq lbl_quest_updateFlow_00001730
     lwz r0, 0x28(r3)
     rlwinm r0, r0, 0, 13, 11
     stw r0, 0x28(r3)
-lbl_fn_80145334_00001730:
+lbl_quest_updateFlow_00001730:
     lwz r3, 0x694(r26)
     cmpwi r3, 0x0
-    beq lbl_fn_80145334_00001748
+    beq lbl_quest_updateFlow_00001748
     lwz r0, 0x28(r3)
     rlwinm r0, r0, 0, 13, 11
     stw r0, 0x28(r3)
-lbl_fn_80145334_00001748:
+lbl_quest_updateFlow_00001748:
     lwz r3, 0x698(r26)
     cmpwi r3, 0x0
-    beq lbl_fn_80145334_00001760
+    beq lbl_quest_updateFlow_00001760
     lwz r0, 0x28(r3)
     rlwinm r0, r0, 0, 13, 11
     stw r0, 0x28(r3)
-lbl_fn_80145334_00001760:
+lbl_quest_updateFlow_00001760:
     lwz r3, 0x69c(r26)
     cmpwi r3, 0x0
-    beq lbl_fn_80145334_00001778
+    beq lbl_quest_updateFlow_00001778
     lwz r0, 0x28(r3)
     rlwinm r0, r0, 0, 13, 11
     stw r0, 0x28(r3)
-lbl_fn_80145334_00001778:
+lbl_quest_updateFlow_00001778:
     lwz r3, 0x12a4(r26)
     extrwi. r0, r3, 1, 24
-    beq lbl_fn_80145334_00001794
+    beq lbl_quest_updateFlow_00001794
     lfs f0, lbl_80881964
     rlwinm r0, r3, 0, 25, 23
     stw r0, 0x12a4(r26)
     stfs f0, 0x2ec(r26)
-lbl_fn_80145334_00001794:
+lbl_quest_updateFlow_00001794:
     lwz r0, 0x7e0(r26)
     rlwinm r0, r0, 0, 23, 23
     cmplwi r0, 0x100
-    bne lbl_fn_80145334_000017D0
+    bne lbl_quest_updateFlow_000017D0
     lfs f7, lbl_80881994
     lfs f0, lbl_80881964
     stfs f7, 0x180(r1)
@@ -1783,8 +1783,8 @@ lbl_fn_80145334_00001794:
     stfs f7, 0xf4(r26)
     stfs f7, 0xf8(r26)
     stfs f0, 0xfc(r26)
-    b lbl_fn_80145334_000017F4
-lbl_fn_80145334_000017D0:
+    b lbl_quest_updateFlow_000017F4
+lbl_quest_updateFlow_000017D0:
     lfs f0, lbl_80881964
     stfs f0, 0x170(r1)
     stfs f0, 0x174(r1)
@@ -1794,13 +1794,13 @@ lbl_fn_80145334_000017D0:
     stfs f0, 0xf4(r26)
     stfs f0, 0xf8(r26)
     stfs f0, 0xfc(r26)
-lbl_fn_80145334_000017F4:
+lbl_quest_updateFlow_000017F4:
     addi r3, r26, 0x1154
     addi r4, r26, 0xb0
     bl fn_8007A7BC
     lwz r0, 0xf50(r26)
     cmpwi r0, 0x0
-    beq lbl_fn_80145334_000019E8
+    beq lbl_quest_updateFlow_000019E8
     lwz r3, 0xf50(r26)
     addi r27, r1, 0x580
     lfs f8, lbl_8088196C
@@ -1830,7 +1830,7 @@ lbl_fn_80145334_000017F4:
     stfs f0, 0x5a8(r1)
     stfs f0, 0x594(r1)
     stfs f0, 0x580(r1)
-    beq lbl_fn_80145334_000018D8
+    beq lbl_quest_updateFlow_000018D8
     frsp f1, f2
     addi r3, r1, 0x3a0
     li r4, 0x7a
@@ -1852,11 +1852,11 @@ lbl_fn_80145334_000017F4:
     psq_st f4, 0x18(r27), 0, 0
     psq_st f5, 0x20(r27), 0, 0
     psq_st f6, 0x28(r27), 0, 0
-lbl_fn_80145334_000018D8:
+lbl_quest_updateFlow_000018D8:
     lfs f0, lbl_8088196C
     lfs f1, 0x538(r26)
     fcmpu cr0, f0, f1
-    beq lbl_fn_80145334_00001938
+    beq lbl_quest_updateFlow_00001938
     addi r3, r1, 0x400
     li r4, 0x79
     bl PSMTXRotRad
@@ -1877,11 +1877,11 @@ lbl_fn_80145334_000018D8:
     psq_st f4, 0x18(r27), 0, 0
     psq_st f5, 0x20(r27), 0, 0
     psq_st f6, 0x28(r27), 0, 0
-lbl_fn_80145334_00001938:
+lbl_quest_updateFlow_00001938:
     lfs f0, lbl_8088196C
     lfs f1, 0x534(r26)
     fcmpu cr0, f0, f1
-    beq lbl_fn_80145334_00001998
+    beq lbl_quest_updateFlow_00001998
     addi r3, r1, 0x460
     li r4, 0x78
     bl PSMTXRotRad
@@ -1902,7 +1902,7 @@ lbl_fn_80145334_00001938:
     psq_st f4, 0x18(r27), 0, 0
     psq_st f5, 0x20(r27), 0, 0
     psq_st f6, 0x28(r27), 0, 0
-lbl_fn_80145334_00001998:
+lbl_quest_updateFlow_00001998:
     addi r4, r1, 0x22c
     addi r3, r1, 0x580
     mr r5, r4
@@ -1923,27 +1923,27 @@ lbl_fn_80145334_00001998:
     fadds f7, f8, f7
     stfs f0, 0x538(r26)
     stfs f7, 0x530(r26)
-lbl_fn_80145334_000019E8:
+lbl_quest_updateFlow_000019E8:
     lwz r0, 0x54c(r26)
     rlwinm r3, r0, 0, 10, 10
     subis r0, r3, 0x20
     cmplwi r0, 0x0
-    bne lbl_fn_80145334_00001B04
+    bne lbl_quest_updateFlow_00001B04
     bl fn_80418318
     cmpwi r3, 0x0
-    beq lbl_fn_80145334_00001B04
+    beq lbl_quest_updateFlow_00001B04
     lwz r0, 0x520(r26)
     cmpwi r0, 0x0
-    bge lbl_fn_80145334_00001A1C
+    bge lbl_quest_updateFlow_00001A1C
     li r28, 0x0
-    b lbl_fn_80145334_00001A28
-lbl_fn_80145334_00001A1C:
+    b lbl_quest_updateFlow_00001A28
+lbl_quest_updateFlow_00001A1C:
     mulli r0, r0, 0x30
     lwz r3, 0xec(r26)
     add r28, r3, r0
-lbl_fn_80145334_00001A28:
+lbl_quest_updateFlow_00001A28:
     cmpwi r28, 0x0
-    beq lbl_fn_80145334_00001B04
+    beq lbl_quest_updateFlow_00001B04
     psq_l f1, 0xb8(r26), 0, 0
     addi r27, r1, 0x610
     psq_l f2, 0xc0(r26), 0, 0
@@ -1961,7 +1961,7 @@ lbl_fn_80145334_00001A28:
     psq_st f5, 0x20(r27), 0, 0
     bl PSMTXInverse
     mr r3, r26
-    bl fn_80144710
+    bl quest_evaluateConditions
     mr r4, r27
     addi r3, r26, 0xb0
     bl fn_8009076C
@@ -1997,15 +1997,15 @@ lbl_fn_80145334_00001A28:
     psq_l f1, 0x0(r3), 0, 0
     psq_st f1, 0x528(r26), 0, 0
     stfs f2, 0x530(r26)
-lbl_fn_80145334_00001B04:
+lbl_quest_updateFlow_00001B04:
     lwz r3, 0x12a4(r26)
     extrwi. r0, r3, 1, 29
-    beq lbl_fn_80145334_00001C60
+    beq lbl_quest_updateFlow_00001C60
     lwz r0, lbl_8087F610
     cmpwi r0, 0x0
-    beq lbl_fn_80145334_00001C60
+    beq lbl_quest_updateFlow_00001C60
     extrwi. r0, r3, 1, 30
-    bne lbl_fn_80145334_00001C58
+    bne lbl_quest_updateFlow_00001C58
     lfs f7, 0x528(r26)
     lfs f0, 0x13d8(r26)
     lfs f9, 0x52c(r26)
@@ -2032,22 +2032,22 @@ lbl_fn_80145334_00001B04:
     fcmpo cr0, f11, f0
     stfs f8, 0x13dc(r26)
     stfs f7, 0x13e0(r26)
-    ble lbl_fn_80145334_00001B94
-    b lbl_fn_80145334_00001B98
-lbl_fn_80145334_00001B94:
+    ble lbl_quest_updateFlow_00001B94
+    b lbl_quest_updateFlow_00001B98
+lbl_quest_updateFlow_00001B94:
     fmr f11, f0
-lbl_fn_80145334_00001B98:
+lbl_quest_updateFlow_00001B98:
     lfs f7, lbl_80881A90
     fcmpo cr0, f11, f7
-    bge lbl_fn_80145334_00001BBC
+    bge lbl_quest_updateFlow_00001BBC
     lfs f7, 0x13e4(r26)
     lfs f0, lbl_80881A8C
     fcmpo cr0, f7, f0
-    ble lbl_fn_80145334_00001BB8
-    b lbl_fn_80145334_00001BBC
-lbl_fn_80145334_00001BB8:
+    ble lbl_quest_updateFlow_00001BB8
+    b lbl_quest_updateFlow_00001BBC
+lbl_quest_updateFlow_00001BB8:
     fmr f7, f0
-lbl_fn_80145334_00001BBC:
+lbl_quest_updateFlow_00001BBC:
     lfs f0, 0x538(r26)
     lis r3, lbl_80737810@ha
     lfd f2, lbl_80737810@l(r3)
@@ -2057,16 +2057,16 @@ lbl_fn_80145334_00001BBC:
     frsp f7, f1
     lfs f0, lbl_80881A0C
     fcmpo cr0, f7, f0
-    ble lbl_fn_80145334_00001BEC
+    ble lbl_quest_updateFlow_00001BEC
     lfs f0, lbl_80881A10
     fsubs f7, f7, f0
-lbl_fn_80145334_00001BEC:
+lbl_quest_updateFlow_00001BEC:
     lfs f0, lbl_80881A14
     fcmpo cr0, f7, f0
-    bge lbl_fn_80145334_00001C00
+    bge lbl_quest_updateFlow_00001C00
     lfs f0, lbl_80881A10
     fadds f7, f7, f0
-lbl_fn_80145334_00001C00:
+lbl_quest_updateFlow_00001C00:
     stfs f7, 0x538(r26)
     lis r3, lbl_80737810@ha
     lfs f0, 0x13e4(r26)
@@ -2079,22 +2079,22 @@ lbl_fn_80145334_00001C00:
     frsp f7, f1
     lfs f0, lbl_80881A0C
     fcmpo cr0, f7, f0
-    ble lbl_fn_80145334_00001C3C
+    ble lbl_quest_updateFlow_00001C3C
     lfs f0, lbl_80881A10
     fsubs f7, f7, f0
-lbl_fn_80145334_00001C3C:
+lbl_quest_updateFlow_00001C3C:
     lfs f0, lbl_80881A14
     fcmpo cr0, f7, f0
-    bge lbl_fn_80145334_00001C50
+    bge lbl_quest_updateFlow_00001C50
     lfs f0, lbl_80881A10
     fadds f7, f7, f0
-lbl_fn_80145334_00001C50:
+lbl_quest_updateFlow_00001C50:
     stfs f7, 0x13e4(r26)
-    b lbl_fn_80145334_00001C60
-lbl_fn_80145334_00001C58:
+    b lbl_quest_updateFlow_00001C60
+lbl_quest_updateFlow_00001C58:
     rlwinm r0, r3, 0, 31, 29
     stw r0, 0x12a4(r26)
-lbl_fn_80145334_00001C60:
+lbl_quest_updateFlow_00001C60:
     addi r6, r26, 0x13b8
     lfs f7, 0x13d0(r26)
     lfs f2, 0x13c0(r26)
@@ -2132,29 +2132,29 @@ lbl_fn_80145334_00001C60:
     psq_st f6, 0x28(r3), 0, 0
     bl PSMTXInverse
     mr r3, r26
-    bl fn_80144710
+    bl quest_evaluateConditions
     lwz r0, 0x55c(r26)
     lwz r27, 0x100(r26)
     cmpwi r0, 0x8
-    bne lbl_fn_80145334_00001D24
+    bne lbl_quest_updateFlow_00001D24
     lwz r4, 0x100(r26)
     li r0, 0x0
     lwz r3, 0x2bc(r26)
     rlwimi r3, r4, 8, 16, 23
     stw r3, 0x2bc(r26)
     stw r0, 0x100(r26)
-    b lbl_fn_80145334_00001D2C
-lbl_fn_80145334_00001D24:
+    b lbl_quest_updateFlow_00001D2C
+lbl_quest_updateFlow_00001D24:
     addi r3, r26, 0xb0
     bl fn_80092A4C
-lbl_fn_80145334_00001D2C:
+lbl_quest_updateFlow_00001D2C:
     lwz r0, 0x100(r26)
     cmpw r27, r0
     subf r3, r27, r0
     subf r0, r0, r27
     or r0, r3, r0
     srwi r31, r0, 31
-    bne lbl_fn_80145334_00001D9C
+    bne lbl_quest_updateFlow_00001D9C
     lfs f9, 0x60c(r1)
     addi r3, r1, 0x14c
     lfs f10, 0x5fc(r1)
@@ -2174,16 +2174,16 @@ lbl_fn_80145334_00001D2C:
     bl PSVECSquareMag
     lfs f0, lbl_80881A94
     fcmpo cr0, f1, f0
-    ble lbl_fn_80145334_00001D9C
+    ble lbl_quest_updateFlow_00001D9C
     li r31, 0x1
-lbl_fn_80145334_00001D9C:
+lbl_quest_updateFlow_00001D9C:
     lwz r0, 0x7e0(r26)
     rlwinm r0, r0, 0, 25, 25
     cmplwi r0, 0x40
-    bne lbl_fn_80145334_00001E14
+    bne lbl_quest_updateFlow_00001E14
     lwz r0, 0xf94(r26)
     cmpwi r0, 0x0
-    bne lbl_fn_80145334_00001E14
+    bne lbl_quest_updateFlow_00001E14
     addi r4, r26, 0xf88
     lfs f11, 0xe4(r26)
     addi r3, r1, 0x134
@@ -2207,7 +2207,7 @@ lbl_fn_80145334_00001D9C:
     stfs f0, 0xc4(r26)
     stfs f7, 0xd4(r26)
     stfs f8, 0xe4(r26)
-lbl_fn_80145334_00001E14:
+lbl_quest_updateFlow_00001E14:
     lwz r3, 0x524(r26)
     li r30, 0x0
     lwz r0, 0x1254(r26)
@@ -2215,20 +2215,20 @@ lbl_fn_80145334_00001E14:
     lwz r4, 0x2d0(r26)
     cmpwi r0, 0x0
     add r29, r4, r3
-    beq lbl_fn_80145334_00002094
+    beq lbl_quest_updateFlow_00002094
     lwz r3, 0x2e0(r26)
     lwz r0, 0x518(r26)
     cmplw r3, r0
-    beq lbl_fn_80145334_00001E48
+    beq lbl_quest_updateFlow_00001E48
     li r30, 0x1
-lbl_fn_80145334_00001E48:
+lbl_quest_updateFlow_00001E48:
     lfs f7, 0x2e4(r26)
     lfs f0, 0x51c(r26)
     stw r3, 0x518(r26)
     fcmpo cr0, f7, f0
-    bge lbl_fn_80145334_00001E60
+    bge lbl_quest_updateFlow_00001E60
     li r30, 0x1
-lbl_fn_80145334_00001E60:
+lbl_quest_updateFlow_00001E60:
     stfs f7, 0x51c(r26)
     addi r3, r1, 0x214
     lfs f8, lbl_8088196C
@@ -2245,23 +2245,23 @@ lbl_fn_80145334_00001E60:
     stfs f2, 0x21c(r1)
     frsp f7, f7
     fcmpo cr0, f7, f0
-    bge lbl_fn_80145334_00001EE0
+    bge lbl_quest_updateFlow_00001EE0
     lfs f7, 0x14(r29)
     fabs f7, f7
     frsp f7, f7
     fcmpo cr0, f7, f0
-    bge lbl_fn_80145334_00001EE0
+    bge lbl_quest_updateFlow_00001EE0
     lfs f7, 0x18(r29)
     fabs f7, f7
     frsp f7, f7
     fcmpo cr0, f7, f0
-    bge lbl_fn_80145334_00001EE0
+    bge lbl_quest_updateFlow_00001EE0
     lfs f7, 0x1c(r29)
     fabs f7, f7
     frsp f7, f7
     fcmpo cr0, f7, f0
-    blt lbl_fn_80145334_00001EFC
-lbl_fn_80145334_00001EE0:
+    blt lbl_quest_updateFlow_00001EFC
+lbl_quest_updateFlow_00001EE0:
     addi r3, r1, 0x550
     addi r4, r29, 0x10
     bl PSMTXQuat
@@ -2269,31 +2269,31 @@ lbl_fn_80145334_00001EE0:
     addi r3, r1, 0x550
     mr r5, r4
     bl PSMTXMultVec
-lbl_fn_80145334_00001EFC:
+lbl_quest_updateFlow_00001EFC:
     lfs f2, 0x210(r1)
     addi r27, r1, 0x208
     lfs f0, lbl_808819C4
     fabs f7, f2
     frsp f7, f7
     fcmpo cr0, f7, f0
-    bge lbl_fn_80145334_00001F3C
+    bge lbl_quest_updateFlow_00001F3C
     lfs f7, 0x208(r1)
     lfs f0, lbl_8088196C
     fcmpo cr0, f7, f0
-    ble lbl_fn_80145334_00001F30
+    ble lbl_quest_updateFlow_00001F30
     lfs f0, lbl_808819C8
-    b lbl_fn_80145334_00001F34
-lbl_fn_80145334_00001F30:
+    b lbl_quest_updateFlow_00001F34
+lbl_quest_updateFlow_00001F30:
     lfs f0, lbl_808819CC
-lbl_fn_80145334_00001F34:
+lbl_quest_updateFlow_00001F34:
     stfs f0, 0x58(r1)
-    b lbl_fn_80145334_00001F4C
-lbl_fn_80145334_00001F3C:
+    b lbl_quest_updateFlow_00001F4C
+lbl_quest_updateFlow_00001F3C:
     lfs f1, 0x208(r1)
     bl std_atan2
     frsp f0, f1
     stfs f0, 0x58(r1)
-lbl_fn_80145334_00001F4C:
+lbl_quest_updateFlow_00001F4C:
     lfs f0, 0x58(r1)
     addi r3, r1, 0x340
     li r4, 0x79
@@ -2354,33 +2354,33 @@ lbl_fn_80145334_00001F4C:
     fabs f7, f2
     frsp f7, f7
     fcmpo cr0, f7, f0
-    bge lbl_fn_80145334_00002068
+    bge lbl_quest_updateFlow_00002068
     lfs f7, 0x64(r1)
     lfs f0, lbl_8088196C
     fcmpo cr0, f7, f0
-    ble lbl_fn_80145334_00002058
+    ble lbl_quest_updateFlow_00002058
     lfs f0, lbl_808819C8
-    b lbl_fn_80145334_0000205C
-lbl_fn_80145334_00002058:
+    b lbl_quest_updateFlow_0000205C
+lbl_quest_updateFlow_00002058:
     lfs f0, lbl_808819CC
-lbl_fn_80145334_0000205C:
+lbl_quest_updateFlow_0000205C:
     fneg f0, f0
     stfs f0, 0x54(r1)
-    b lbl_fn_80145334_0000207C
-lbl_fn_80145334_00002068:
+    b lbl_quest_updateFlow_0000207C
+lbl_quest_updateFlow_00002068:
     lfs f1, 0x64(r1)
     bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x54(r1)
-lbl_fn_80145334_0000207C:
+lbl_quest_updateFlow_0000207C:
     addi r3, r1, 0x54
     lfs f2, lbl_8088196C
     psq_l f1, 0x0(r3), 0, 0
     stfs f2, 0x5c(r1)
     psq_st f1, 0x0(r27), 0, 0
     stfs f2, 0x210(r1)
-lbl_fn_80145334_00002094:
+lbl_quest_updateFlow_00002094:
     lwz r4, lbl_8087EFB4
     addi r3, r1, 0x128
     lfs f0, 0x530(r26)
@@ -2402,151 +2402,151 @@ lbl_fn_80145334_00002094:
     extrwi r0, r0, 1, 28
     cntlzw r0, r0
     srwi. r4, r0, 5
-    beq lbl_fn_80145334_00002188
+    beq lbl_quest_updateFlow_00002188
     lwz r3, 0x48(r26)
     subi r0, r3, 0x1
     cntlzw r0, r0
     srwi. r4, r0, 5
-    bne lbl_fn_80145334_0000210C
+    bne lbl_quest_updateFlow_0000210C
     subi r0, r3, 0x4
     cntlzw r0, r0
     srwi r4, r0, 5
-lbl_fn_80145334_0000210C:
+lbl_quest_updateFlow_0000210C:
     cmpwi r4, 0x0
-    bne lbl_fn_80145334_00002130
+    bne lbl_quest_updateFlow_00002130
     neg r0, r3
     or r0, r0, r3
     srwi. r4, r0, 31
-    beq lbl_fn_80145334_00002130
+    beq lbl_quest_updateFlow_00002130
     lwz r0, 0x648(r26)
     cntlzw r0, r0
     srwi r4, r0, 5
-lbl_fn_80145334_00002130:
+lbl_quest_updateFlow_00002130:
     cmpwi r4, 0x0
-    bne lbl_fn_80145334_00002188
+    bne lbl_quest_updateFlow_00002188
     lwz r0, lbl_8087FA20
     cmpwi r0, 0x0
-    beq lbl_fn_80145334_0000214C
+    beq lbl_quest_updateFlow_0000214C
     li r4, 0x1
-    b lbl_fn_80145334_00002188
-lbl_fn_80145334_0000214C:
+    b lbl_quest_updateFlow_00002188
+lbl_quest_updateFlow_0000214C:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
-    beq lbl_fn_80145334_00002184
+    beq lbl_quest_updateFlow_00002184
     lwz r0, 0x48(r3)
     cmpwi r0, 0x2
-    bne lbl_fn_80145334_00002184
+    bne lbl_quest_updateFlow_00002184
     lwz r0, 0x4c(r3)
     cmpwi r0, 0x2a
-    bne lbl_fn_80145334_00002184
+    bne lbl_quest_updateFlow_00002184
     lwz r0, 0x50(r3)
     cmpwi r0, 0x2
-    bne lbl_fn_80145334_00002184
+    bne lbl_quest_updateFlow_00002184
     li r4, 0x1
-    b lbl_fn_80145334_00002188
-lbl_fn_80145334_00002184:
+    b lbl_quest_updateFlow_00002188
+lbl_quest_updateFlow_00002184:
     li r4, 0x0
-lbl_fn_80145334_00002188:
+lbl_quest_updateFlow_00002188:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
-    beq lbl_fn_80145334_000021A4
+    beq lbl_quest_updateFlow_000021A4
     lwz r0, 0x56d4(r3)
     cmplw r0, r26
-    bne lbl_fn_80145334_000021A4
+    bne lbl_quest_updateFlow_000021A4
     li r4, 0x0
-lbl_fn_80145334_000021A4:
+lbl_quest_updateFlow_000021A4:
     cmpwi r4, 0x0
-    beq lbl_fn_80145334_000021E8
+    beq lbl_quest_updateFlow_000021E8
     lwz r0, 0xc54(r26)
     cmpwi r0, 0x0
-    beq lbl_fn_80145334_000021C4
+    beq lbl_quest_updateFlow_000021C4
     lfs f0, lbl_80881A98
     fcmpo cr0, f1, f0
-    ble lbl_fn_80145334_000021E8
-lbl_fn_80145334_000021C4:
+    ble lbl_quest_updateFlow_000021E8
+lbl_quest_updateFlow_000021C4:
     cmpwi r31, 0x0
-    bne lbl_fn_80145334_000021E8
+    bne lbl_quest_updateFlow_000021E8
     lwz r0, 0x55c(r26)
     cmpwi r0, 0x8
-    beq lbl_fn_80145334_000021E8
+    beq lbl_quest_updateFlow_000021E8
     lwz r0, 0xb4(r26)
     ori r0, r0, 0x40
     stw r0, 0xb4(r26)
-    b lbl_fn_80145334_000021F4
-lbl_fn_80145334_000021E8:
+    b lbl_quest_updateFlow_000021F4
+lbl_quest_updateFlow_000021E8:
     lwz r0, 0xb4(r26)
     rlwinm r0, r0, 0, 26, 24
     stw r0, 0xb4(r26)
-lbl_fn_80145334_000021F4:
+lbl_quest_updateFlow_000021F4:
     lwz r3, 0x1390(r26)
     cmpwi r4, 0x0
     addi r0, r3, 0x1
     stw r0, 0x1390(r26)
-    beq lbl_fn_80145334_00002308
+    beq lbl_quest_updateFlow_00002308
     cmpwi r31, 0x0
-    bne lbl_fn_80145334_00002308
+    bne lbl_quest_updateFlow_00002308
     lwz r4, 0x48(r26)
     li r0, 0x1
     lwz r3, lbl_8087EFA8
     cmpwi r4, 0x1
     lfs f7, 0x218(r3)
-    beq lbl_fn_80145334_00002234
+    beq lbl_quest_updateFlow_00002234
     cmpwi r4, 0x4
-    beq lbl_fn_80145334_00002234
+    beq lbl_quest_updateFlow_00002234
     li r0, 0x0
-lbl_fn_80145334_00002234:
+lbl_quest_updateFlow_00002234:
     cmpwi r0, 0x0
-    beq lbl_fn_80145334_00002268
+    beq lbl_quest_updateFlow_00002268
     lwz r0, 0xc54(r26)
     cmpwi r0, 0x0
-    bne lbl_fn_80145334_00002268
+    bne lbl_quest_updateFlow_00002268
     lwz r0, 0x1400(r26)
     cmpwi r0, 0x0
-    beq lbl_fn_80145334_00002260
+    beq lbl_quest_updateFlow_00002260
     lwz r0, 0x140c(r26)
     cmpwi r0, -0x1
-    bne lbl_fn_80145334_00002268
-lbl_fn_80145334_00002260:
+    bne lbl_quest_updateFlow_00002268
+lbl_quest_updateFlow_00002260:
     lfs f0, lbl_808819B4
     fmuls f7, f7, f0
-lbl_fn_80145334_00002268:
+lbl_quest_updateFlow_00002268:
     lwz r5, 0x55c(r26)
     cmpwi r5, 0x8
-    bne lbl_fn_80145334_0000227C
+    bne lbl_quest_updateFlow_0000227C
     lfs f0, lbl_80881A4C
     fmuls f7, f7, f0
-lbl_fn_80145334_0000227C:
+lbl_quest_updateFlow_0000227C:
     fmuls f0, f7, f7
     fcmpo cr0, f1, f0
-    ble lbl_fn_80145334_00002290
+    ble lbl_quest_updateFlow_00002290
     li r28, 0x0
-    b lbl_fn_80145334_00002308
-lbl_fn_80145334_00002290:
+    b lbl_quest_updateFlow_00002308
+lbl_quest_updateFlow_00002290:
     cmpwi r4, 0x1
     lfs f7, 0x21c(r3)
     li r0, 0x0
-    beq lbl_fn_80145334_000022A8
+    beq lbl_quest_updateFlow_000022A8
     cmpwi r4, 0x4
-    bne lbl_fn_80145334_000022AC
-lbl_fn_80145334_000022A8:
+    bne lbl_quest_updateFlow_000022AC
+lbl_quest_updateFlow_000022A8:
     li r0, 0x1
-lbl_fn_80145334_000022AC:
+lbl_quest_updateFlow_000022AC:
     cmpwi r0, 0x0
-    beq lbl_fn_80145334_000022C8
+    beq lbl_quest_updateFlow_000022C8
     lwz r0, 0xc54(r26)
     cmpwi r0, 0x0
-    bne lbl_fn_80145334_000022C8
+    bne lbl_quest_updateFlow_000022C8
     lfs f0, lbl_808819B4
     fmuls f7, f7, f0
-lbl_fn_80145334_000022C8:
+lbl_quest_updateFlow_000022C8:
     cmpwi r5, 0x8
-    bne lbl_fn_80145334_000022D8
+    bne lbl_quest_updateFlow_000022D8
     lfs f0, lbl_80881A4C
     fmuls f7, f7, f0
-lbl_fn_80145334_000022D8:
+lbl_quest_updateFlow_000022D8:
     fmuls f0, f7, f7
     fcmpo cr0, f1, f0
-    ble lbl_fn_80145334_00002308
+    ble lbl_quest_updateFlow_00002308
     lwz r0, 0x80(r26)
     lwz r4, 0x1390(r26)
     lwz r3, 0x220(r3)
@@ -2554,79 +2554,79 @@ lbl_fn_80145334_000022D8:
     divw r0, r4, r3
     mullw r0, r0, r3
     subf. r0, r0, r4
-    beq lbl_fn_80145334_00002308
+    beq lbl_quest_updateFlow_00002308
     li r28, 0x0
-lbl_fn_80145334_00002308:
+lbl_quest_updateFlow_00002308:
     lwz r0, 0x55c(r26)
     li r27, 0x1
     cmpwi r0, 0x8
-    bne lbl_fn_80145334_00002324
+    bne lbl_quest_updateFlow_00002324
     lwz r0, 0x12a4(r26)
     extrwi. r0, r0, 1, 8
-    bne lbl_fn_80145334_00002350
-lbl_fn_80145334_00002324:
+    bne lbl_quest_updateFlow_00002350
+lbl_quest_updateFlow_00002324:
     lwz r0, 0x7e0(r26)
     rlwinm r0, r0, 0, 25, 25
     cmplwi r0, 0x40
-    bne lbl_fn_80145334_00002350
+    bne lbl_quest_updateFlow_00002350
     lwz r0, 0xf94(r26)
     cmpwi r0, 0x0
-    bne lbl_fn_80145334_00002350
+    bne lbl_quest_updateFlow_00002350
     cmpwi r31, 0x0
     li r27, 0x0
-    bne lbl_fn_80145334_00002350
+    bne lbl_quest_updateFlow_00002350
     li r28, 0x0
-lbl_fn_80145334_00002350:
+lbl_quest_updateFlow_00002350:
     lwz r0, 0x12a8(r26)
     extrwi. r0, r0, 1, 4
-    beq lbl_fn_80145334_00002380
+    beq lbl_quest_updateFlow_00002380
     lwz r3, 0x2e0(r26)
     cmpwi r3, 0x0
-    beq lbl_fn_80145334_00002380
+    beq lbl_quest_updateFlow_00002380
     bl atn_LoadHandle_getName
     bl fn_802185FC
     cntlzw r3, r3
     lwz r0, 0x12a8(r26)
     rlwimi r0, r3, 21, 5, 5
     stw r0, 0x12a8(r26)
-lbl_fn_80145334_00002380:
+lbl_quest_updateFlow_00002380:
     lwz r3, 0x48(r26)
     mr r4, r28
     li r0, 0x1
     cmpwi r3, 0x1
-    beq lbl_fn_80145334_000023A0
+    beq lbl_quest_updateFlow_000023A0
     cmpwi r3, 0x4
-    beq lbl_fn_80145334_000023A0
+    beq lbl_quest_updateFlow_000023A0
     li r0, 0x0
-lbl_fn_80145334_000023A0:
+lbl_quest_updateFlow_000023A0:
     cmpwi r0, 0x0
-    beq lbl_fn_80145334_000023BC
+    beq lbl_quest_updateFlow_000023BC
     lfs f0, lbl_80881A9C
     fcmpo cr0, f30, f0
-    ble lbl_fn_80145334_000023EC
+    ble lbl_quest_updateFlow_000023EC
     li r4, 0x0
-    b lbl_fn_80145334_000023EC
-lbl_fn_80145334_000023BC:
+    b lbl_quest_updateFlow_000023EC
+lbl_quest_updateFlow_000023BC:
     cmpwi r3, 0x3
-    beq lbl_fn_80145334_000023EC
+    beq lbl_quest_updateFlow_000023EC
     cmpwi r3, 0x2
-    bne lbl_fn_80145334_000023EC
+    bne lbl_quest_updateFlow_000023EC
     lwz r0, 0x12a4(r26)
     extrwi r0, r0, 1, 9
     cmplwi r0, 0x1
-    beq lbl_fn_80145334_000023EC
+    beq lbl_quest_updateFlow_000023EC
     lfs f0, lbl_80881AA0
     fcmpo cr0, f30, f0
-    ble lbl_fn_80145334_000023EC
+    ble lbl_quest_updateFlow_000023EC
     li r4, 0x0
-lbl_fn_80145334_000023EC:
+lbl_quest_updateFlow_000023EC:
     cmpwi r4, 0x0
-    beq lbl_fn_80145334_000023FC
+    beq lbl_quest_updateFlow_000023FC
     addi r3, r26, 0x1220
     bl fn_8012111C
-lbl_fn_80145334_000023FC:
+lbl_quest_updateFlow_000023FC:
     cmpwi r28, 0x0
-    beq lbl_fn_80145334_00002B34
+    beq lbl_quest_updateFlow_00002B34
     fmr f1, f30
     mr r3, r26
     bl fn_80175B18
@@ -2634,7 +2634,7 @@ lbl_fn_80145334_000023FC:
     bl fn_80129A6C
     lwz r4, 0x680(r26)
     cmpwi r4, 0x0
-    beq lbl_fn_80145334_00002578
+    beq lbl_quest_updateFlow_00002578
     lis r3, 0x1062
     lwz r5, 0x4(r4)
     addi r0, r3, 0x4dd3
@@ -2651,14 +2651,14 @@ lbl_fn_80145334_000023FC:
     srwi r3, r0, 31
     add r0, r0, r3
     cmpwi r0, 0x2e
-    bne lbl_fn_80145334_00002578
+    bne lbl_quest_updateFlow_00002578
     lwz r0, 0x648(r26)
     cmpwi r0, 0x0
-    bne lbl_fn_80145334_00002480
+    bne lbl_quest_updateFlow_00002480
     lwz r0, 0x55c(r26)
     cmpwi r0, 0x8
-    bne lbl_fn_80145334_00002540
-lbl_fn_80145334_00002480:
+    bne lbl_quest_updateFlow_00002540
+lbl_quest_updateFlow_00002480:
     lfs f0, lbl_80881964
     lis r31, lbl_80737A9C@ha
     lis r28, lbl_807C7030@ha
@@ -2706,8 +2706,8 @@ lbl_fn_80145334_00002480:
     li r8, 0x8
     stfs f0, 0x100(r1)
     bl fn_80093F1C
-    b lbl_fn_80145334_00002578
-lbl_fn_80145334_00002540:
+    b lbl_quest_updateFlow_00002578
+lbl_quest_updateFlow_00002540:
     lis r28, lbl_80737A9C@ha
     addi r3, r26, 0xb0
     addi r28, r28, lbl_80737A9C@l
@@ -2722,17 +2722,17 @@ lbl_fn_80145334_00002540:
     addi r3, r26, 0xb0
     addi r4, r28, 0x322
     bl fn_80094778
-lbl_fn_80145334_00002578:
+lbl_quest_updateFlow_00002578:
     mr r4, r27
     addi r3, r26, 0xb0
     bl fn_80097E80
     lwz r0, 0x55c(r26)
     mr r31, r3
     cmpwi r0, 0x6
-    bne lbl_fn_80145334_00002618
+    bne lbl_quest_updateFlow_00002618
     lwz r0, 0xf80(r26)
     cmpwi r0, 0x0
-    bne lbl_fn_80145334_000025C0
+    bne lbl_quest_updateFlow_000025C0
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x6a0(r1)
@@ -2740,8 +2740,8 @@ lbl_fn_80145334_00002578:
     lwz r0, 0x8(r5)
     stw r3, 0x6a4(r1)
     stw r0, 0x6a8(r1)
-    b lbl_fn_80145334_000025DC
-lbl_fn_80145334_000025C0:
+    b lbl_quest_updateFlow_000025DC
+lbl_quest_updateFlow_000025C0:
     lis r5, lbl_8077A980@ha
     lwzu r4, lbl_8077A980@l(r5)
     stw r4, 0x6a0(r1)
@@ -2749,7 +2749,7 @@ lbl_fn_80145334_000025C0:
     lwz r0, 0x8(r5)
     stw r3, 0x6a4(r1)
     stw r0, 0x6a8(r1)
-lbl_fn_80145334_000025DC:
+lbl_quest_updateFlow_000025DC:
     lwz r5, 0x6a0(r1)
     addi r3, r1, 0xec
     lwz r4, 0x6a4(r1)
@@ -2759,25 +2759,25 @@ lbl_fn_80145334_000025DC:
     stw r0, 0xf4(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_80145334_00002618
+    beq lbl_quest_updateFlow_00002618
     lwz r3, 0xf80(r26)
     lwz r12, 0x0(r3)
     lwz r12, 0x40(r12)
     mtctr r12
     bctrl
-lbl_fn_80145334_00002618:
+lbl_quest_updateFlow_00002618:
     lwz r0, 0x12a8(r26)
     extrwi. r0, r0, 1, 19
-    beq lbl_fn_80145334_00002638
+    beq lbl_quest_updateFlow_00002638
     lwz r12, 0x0(r26)
     mr r3, r26
     lwz r12, 0x28(r12)
     mtctr r12
     bctrl
-lbl_fn_80145334_00002638:
+lbl_quest_updateFlow_00002638:
     lwz r0, 0x12a4(r26)
     extrwi. r0, r0, 1, 29
-    beq lbl_fn_80145334_00002668
+    beq lbl_quest_updateFlow_00002668
     lwz r0, 0x524(r26)
     addi r3, r26, 0x13e8
     lwz r4, 0x2d0(r26)
@@ -2787,19 +2787,19 @@ lbl_fn_80145334_00002638:
     add r3, r4, r0
     psq_st f1, 0x4(r3), 0, 0
     stfs f2, 0xc(r3)
-lbl_fn_80145334_00002668:
+lbl_quest_updateFlow_00002668:
     cmpwi r30, 0x0
-    bne lbl_fn_80145334_000029EC
+    bne lbl_quest_updateFlow_000029EC
     lwz r0, 0x1254(r26)
     cmpwi r0, 0x0
-    beq lbl_fn_80145334_000029EC
+    beq lbl_quest_updateFlow_000029EC
     clrlwi r0, r0, 31
     cmplwi r0, 0x1
-    bne lbl_fn_80145334_00002754
+    bne lbl_quest_updateFlow_00002754
     lwz r0, 0x0(r29)
     clrlwi r0, r0, 31
     cmplwi r0, 0x1
-    bne lbl_fn_80145334_00002754
+    bne lbl_quest_updateFlow_00002754
     lfs f7, 0xc(r29)
     addi r4, r1, 0x1fc
     lfs f0, 0x21c(r1)
@@ -2847,15 +2847,15 @@ lbl_fn_80145334_00002668:
     lwz r0, 0x0(r29)
     clrrwi r0, r0, 1
     stw r0, 0x0(r29)
-lbl_fn_80145334_00002754:
+lbl_quest_updateFlow_00002754:
     lwz r0, 0x1254(r26)
     rlwinm r0, r0, 0, 30, 30
     cmplwi r0, 0x2
-    bne lbl_fn_80145334_000029A8
+    bne lbl_quest_updateFlow_000029A8
     lwz r0, 0x0(r29)
     rlwinm r0, r0, 0, 30, 30
     cmplwi r0, 0x2
-    bne lbl_fn_80145334_000029A8
+    bne lbl_quest_updateFlow_000029A8
     lfs f7, 0x534(r26)
     addi r3, r1, 0x4f0
     lfs f0, 0x208(r1)
@@ -2886,24 +2886,24 @@ lbl_fn_80145334_00002754:
     fabs f7, f2
     frsp f7, f7
     fcmpo cr0, f7, f0
-    bge lbl_fn_80145334_00002814
+    bge lbl_quest_updateFlow_00002814
     lfs f7, 0x1f0(r1)
     lfs f0, lbl_8088196C
     fcmpo cr0, f7, f0
-    ble lbl_fn_80145334_00002808
+    ble lbl_quest_updateFlow_00002808
     lfs f0, lbl_808819C8
-    b lbl_fn_80145334_0000280C
-lbl_fn_80145334_00002808:
+    b lbl_quest_updateFlow_0000280C
+lbl_quest_updateFlow_00002808:
     lfs f0, lbl_808819CC
-lbl_fn_80145334_0000280C:
+lbl_quest_updateFlow_0000280C:
     stfs f0, 0x10(r1)
-    b lbl_fn_80145334_00002824
-lbl_fn_80145334_00002814:
+    b lbl_quest_updateFlow_00002824
+lbl_quest_updateFlow_00002814:
     lfs f1, 0x1f0(r1)
     bl std_atan2
     frsp f0, f1
     stfs f0, 0x10(r1)
-lbl_fn_80145334_00002824:
+lbl_quest_updateFlow_00002824:
     lfs f0, 0x10(r1)
     addi r3, r1, 0x2d0
     li r4, 0x79
@@ -2964,26 +2964,26 @@ lbl_fn_80145334_00002824:
     fabs f7, f2
     frsp f7, f7
     fcmpo cr0, f7, f0
-    bge lbl_fn_80145334_00002940
+    bge lbl_quest_updateFlow_00002940
     lfs f7, 0x1c(r1)
     lfs f0, lbl_8088196C
     fcmpo cr0, f7, f0
-    ble lbl_fn_80145334_00002930
+    ble lbl_quest_updateFlow_00002930
     lfs f0, lbl_808819C8
-    b lbl_fn_80145334_00002934
-lbl_fn_80145334_00002930:
+    b lbl_quest_updateFlow_00002934
+lbl_quest_updateFlow_00002930:
     lfs f0, lbl_808819CC
-lbl_fn_80145334_00002934:
+lbl_quest_updateFlow_00002934:
     fneg f0, f0
     stfs f0, 0xc(r1)
-    b lbl_fn_80145334_00002954
-lbl_fn_80145334_00002940:
+    b lbl_quest_updateFlow_00002954
+lbl_quest_updateFlow_00002940:
     lfs f1, 0x1c(r1)
     bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0xc(r1)
-lbl_fn_80145334_00002954:
+lbl_quest_updateFlow_00002954:
     addi r3, r1, 0xc
     lfs f2, lbl_8088196C
     psq_l f1, 0x0(r3), 0, 0
@@ -3005,15 +3005,15 @@ lbl_fn_80145334_00002954:
     lwz r0, 0x0(r29)
     rlwinm r0, r0, 0, 31, 29
     stw r0, 0x0(r29)
-lbl_fn_80145334_000029A8:
+lbl_quest_updateFlow_000029A8:
     lwz r0, 0x1254(r26)
     rlwinm r0, r0, 0, 29, 29
     cmplwi r0, 0x4
-    bne lbl_fn_80145334_000029E4
+    bne lbl_quest_updateFlow_000029E4
     lwz r0, 0x0(r29)
     rlwinm r0, r0, 0, 29, 29
     cmplwi r0, 0x4
-    bne lbl_fn_80145334_000029E4
+    bne lbl_quest_updateFlow_000029E4
     psq_l f1, 0x20(r29), 0, 0
     lfs f2, 0x28(r29)
     stfs f2, 0x548(r26)
@@ -3021,16 +3021,16 @@ lbl_fn_80145334_000029A8:
     lwz r0, 0x0(r29)
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0x0(r29)
-lbl_fn_80145334_000029E4:
+lbl_quest_updateFlow_000029E4:
     mr r3, r26
-    bl fn_80144710
-lbl_fn_80145334_000029EC:
+    bl quest_evaluateConditions
+lbl_quest_updateFlow_000029EC:
     cmpwi r31, 0x0
-    beq lbl_fn_80145334_00002AA0
+    beq lbl_quest_updateFlow_00002AA0
     lfs f7, 0x588(r26)
     lfs f0, lbl_808819F4
     fcmpo cr0, f7, f0
-    ble lbl_fn_80145334_00002A20
+    ble lbl_quest_updateFlow_00002A20
     lwz r0, 0x524(r26)
     lwz r3, 0x2d0(r26)
     mulli r0, r0, 0x2c
@@ -3038,33 +3038,33 @@ lbl_fn_80145334_000029EC:
     lfs f0, 0xc(r3)
     fsubs f0, f0, f7
     stfs f0, 0xc(r3)
-lbl_fn_80145334_00002A20:
+lbl_quest_updateFlow_00002A20:
     li r0, 0x0
     stw r0, 0x27c(r1)
     addi r3, r26, 0xb0
     addi r4, r1, 0x27c
     bl fn_8000D430
     addic. r3, r1, 0x27c
-    beq lbl_fn_80145334_00002A70
+    beq lbl_quest_updateFlow_00002A70
     lwz r4, 0x27c(r1)
     cmpwi r4, 0x0
-    beq lbl_fn_80145334_00002A70
+    beq lbl_quest_updateFlow_00002A70
     lwz r12, 0x0(r4)
     cmpwi r12, 0x0
-    beq lbl_fn_80145334_00002A68
+    beq lbl_quest_updateFlow_00002A68
     addi r3, r3, 0x4
     li r5, 0x1
     mr r4, r3
     mtctr r12
     bctrl
-lbl_fn_80145334_00002A68:
+lbl_quest_updateFlow_00002A68:
     li r0, 0x0
     stw r0, 0x27c(r1)
-lbl_fn_80145334_00002A70:
+lbl_quest_updateFlow_00002A70:
     lfs f7, 0x588(r26)
     lfs f0, lbl_808819F4
     fcmpo cr0, f7, f0
-    ble lbl_fn_80145334_00002AE8
+    ble lbl_quest_updateFlow_00002AE8
     lwz r0, 0x524(r26)
     lwz r3, 0x2d0(r26)
     mulli r0, r0, 0x2c
@@ -3072,110 +3072,110 @@ lbl_fn_80145334_00002A70:
     lfs f0, 0xc(r3)
     fadds f0, f0, f7
     stfs f0, 0xc(r3)
-    b lbl_fn_80145334_00002AE8
-lbl_fn_80145334_00002AA0:
+    b lbl_quest_updateFlow_00002AE8
+lbl_quest_updateFlow_00002AA0:
     lwz r3, 0x48(r26)
     li r0, 0x1
     cmpwi r3, 0x1
-    beq lbl_fn_80145334_00002ABC
+    beq lbl_quest_updateFlow_00002ABC
     cmpwi r3, 0x4
-    beq lbl_fn_80145334_00002ABC
+    beq lbl_quest_updateFlow_00002ABC
     li r0, 0x0
-lbl_fn_80145334_00002ABC:
+lbl_quest_updateFlow_00002ABC:
     cmpwi r0, 0x0
-    beq lbl_fn_80145334_00002ADC
+    beq lbl_quest_updateFlow_00002ADC
     lwz r0, 0xc54(r26)
     cmpwi r0, 0x0
-    bne lbl_fn_80145334_00002ADC
+    bne lbl_quest_updateFlow_00002ADC
     lwz r0, 0x55c(r26)
     cmpwi r0, 0x2
-    beq lbl_fn_80145334_00002AE8
-lbl_fn_80145334_00002ADC:
+    beq lbl_quest_updateFlow_00002AE8
+lbl_quest_updateFlow_00002ADC:
     addi r3, r26, 0xb0
     addi r4, r1, 0x5b0
     bl fn_8009076C
-lbl_fn_80145334_00002AE8:
+lbl_quest_updateFlow_00002AE8:
     addi r3, r26, 0xb0
     bl fn_8009757C
     lwz r0, 0x12bc(r26)
     cmpwi r0, 0x0
-    blt lbl_fn_80145334_00002BA0
+    blt lbl_quest_updateFlow_00002BA0
     lfs f25, 0x374(r26)
     addi r3, r26, 0xb0
     li r4, 0x3
     bl atn_Anim_getLayerDuration
     fcmpo cr0, f25, f1
     cror eq, gt, eq
-    bne lbl_fn_80145334_00002BA0
+    bne lbl_quest_updateFlow_00002BA0
     li r0, -0x1
     stw r0, 0x12bc(r26)
     lfs f1, lbl_80881964
     addi r3, r26, 0xb0
     li r4, 0x3
     bl cursor_updateSlotState
-    b lbl_fn_80145334_00002BA0
-lbl_fn_80145334_00002B34:
+    b lbl_quest_updateFlow_00002BA0
+lbl_quest_updateFlow_00002B34:
     lfs f1, lbl_80881A00
     addi r3, r26, 0x10d8
     bl fn_80129A48
     addi r3, r26, 0x10d8
     bl fn_80129A6C
     cmpwi r27, 0x0
-    beq lbl_fn_80145334_00002B58
+    beq lbl_quest_updateFlow_00002B58
     addi r3, r26, 0xb0
     bl fn_80098698
-lbl_fn_80145334_00002B58:
+lbl_quest_updateFlow_00002B58:
     lwz r3, 0x48(r26)
     li r0, 0x1
     cmpwi r3, 0x1
-    beq lbl_fn_80145334_00002B74
+    beq lbl_quest_updateFlow_00002B74
     cmpwi r3, 0x4
-    beq lbl_fn_80145334_00002B74
+    beq lbl_quest_updateFlow_00002B74
     li r0, 0x0
-lbl_fn_80145334_00002B74:
+lbl_quest_updateFlow_00002B74:
     cmpwi r0, 0x0
-    beq lbl_fn_80145334_00002B94
+    beq lbl_quest_updateFlow_00002B94
     lwz r0, 0xc54(r26)
     cmpwi r0, 0x0
-    bne lbl_fn_80145334_00002B94
+    bne lbl_quest_updateFlow_00002B94
     lwz r0, 0x55c(r26)
     cmpwi r0, 0x2
-    beq lbl_fn_80145334_00002BA0
-lbl_fn_80145334_00002B94:
+    beq lbl_quest_updateFlow_00002BA0
+lbl_quest_updateFlow_00002B94:
     addi r3, r26, 0xb0
     addi r4, r1, 0x5b0
     bl fn_8009076C
-lbl_fn_80145334_00002BA0:
+lbl_quest_updateFlow_00002BA0:
     lwz r3, lbl_8087F430
     li r27, 0x0
     cmpwi r3, 0x0
-    beq lbl_fn_80145334_00002BC8
+    beq lbl_quest_updateFlow_00002BC8
     bl kpad_getClampData
     cmpwi r3, 0x0
-    beq lbl_fn_80145334_00002BC8
+    beq lbl_quest_updateFlow_00002BC8
     lwz r3, lbl_8087F430
     bl kpad_getClampData
     mr r27, r3
-lbl_fn_80145334_00002BC8:
+lbl_quest_updateFlow_00002BC8:
     cmpwi r27, 0x0
-    bne lbl_fn_80145334_00002BEC
+    bne lbl_quest_updateFlow_00002BEC
     lwz r3, lbl_8087F558
     cmpwi r3, 0x0
-    beq lbl_fn_80145334_00002BEC
+    beq lbl_quest_updateFlow_00002BEC
     lwz r0, 0x48(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_80145334_00002BEC
+    beq lbl_quest_updateFlow_00002BEC
     lwz r27, 0x4c(r3)
-lbl_fn_80145334_00002BEC:
+lbl_quest_updateFlow_00002BEC:
     lwz r0, 0x12a8(r26)
     extrwi. r0, r0, 1, 6
-    beq lbl_fn_80145334_00002C0C
+    beq lbl_quest_updateFlow_00002C0C
     cmpwi r27, 0x0
-    beq lbl_fn_80145334_00002C0C
+    beq lbl_quest_updateFlow_00002C0C
     lwz r4, 0x104(r27)
     mr r3, r26
     bl fn_80147A18
-lbl_fn_80145334_00002C0C:
+lbl_quest_updateFlow_00002C0C:
     fmr f1, f30
     mr r3, r26
     bl quest_checkCondition
@@ -3192,81 +3192,81 @@ lbl_fn_80145334_00002C0C:
     lwz r3, 0x48(r26)
     li r0, 0x1
     cmpwi r3, 0x1
-    beq lbl_fn_80145334_00002C5C
+    beq lbl_quest_updateFlow_00002C5C
     cmpwi r3, 0x4
-    beq lbl_fn_80145334_00002C5C
+    beq lbl_quest_updateFlow_00002C5C
     li r0, 0x0
-lbl_fn_80145334_00002C5C:
+lbl_quest_updateFlow_00002C5C:
     cmpwi r0, 0x0
-    bne lbl_fn_80145334_00002C70
+    bne lbl_quest_updateFlow_00002C70
     lwz r0, lbl_8087FA20
     cmpwi r0, 0x0
-    beq lbl_fn_80145334_00002D08
-lbl_fn_80145334_00002C70:
+    beq lbl_quest_updateFlow_00002D08
+lbl_quest_updateFlow_00002C70:
     lwz r0, 0x55c(r26)
     cmpwi r0, 0x6
-    bne lbl_fn_80145334_00002C88
+    bne lbl_quest_updateFlow_00002C88
     lwz r0, 0x560(r26)
     cmpwi r0, 0x45
-    beq lbl_fn_80145334_00002CD4
-lbl_fn_80145334_00002C88:
+    beq lbl_quest_updateFlow_00002CD4
+lbl_quest_updateFlow_00002C88:
     lwz r3, 0x60(r26)
     cmpwi r3, 0x0
-    beq lbl_fn_80145334_00002CD4
+    beq lbl_quest_updateFlow_00002CD4
     lwz r0, 0x24(r3)
     cmpwi r0, 0x35
-    beq lbl_fn_80145334_00002CD4
+    beq lbl_quest_updateFlow_00002CD4
     lfs f0, lbl_80881AA4
     fcmpo cr0, f30, f0
-    bge lbl_fn_80145334_00002CC8
+    bge lbl_quest_updateFlow_00002CC8
     lwz r0, 0x12a4(r26)
     extrwi. r0, r0, 1, 19
-    bne lbl_fn_80145334_00002CC8
+    bne lbl_quest_updateFlow_00002CC8
     lwz r0, 0x5c0(r26)
     ori r0, r0, 0x1
     stw r0, 0x5c0(r26)
-    b lbl_fn_80145334_00002CD4
-lbl_fn_80145334_00002CC8:
+    b lbl_quest_updateFlow_00002CD4
+lbl_quest_updateFlow_00002CC8:
     lwz r0, 0x5c0(r26)
     clrrwi r0, r0, 1
     stw r0, 0x5c0(r26)
-lbl_fn_80145334_00002CD4:
+lbl_quest_updateFlow_00002CD4:
     lhz r0, 0xd38(r26)
     extrwi. r0, r0, 1, 16
-    bne lbl_fn_80145334_00002D08
+    bne lbl_quest_updateFlow_00002D08
     lfs f0, lbl_80881A40
     fcmpo cr0, f30, f0
-    bge lbl_fn_80145334_00002CFC
+    bge lbl_quest_updateFlow_00002CFC
     lwz r0, 0x54c(r26)
     ori r0, r0, 0x20
     stw r0, 0x54c(r26)
-    b lbl_fn_80145334_00002D08
-lbl_fn_80145334_00002CFC:
+    b lbl_quest_updateFlow_00002D08
+lbl_quest_updateFlow_00002CFC:
     lwz r0, 0x54c(r26)
     rlwinm r0, r0, 0, 27, 25
     stw r0, 0x54c(r26)
-lbl_fn_80145334_00002D08:
+lbl_quest_updateFlow_00002D08:
     lwz r0, 0x48(r26)
     cmpwi r0, 0x0
-    bne lbl_fn_80145334_00002F64
+    bne lbl_quest_updateFlow_00002F64
     lwz r0, 0x55c(r26)
     li r27, 0x0
     cmpwi r0, 0x6
-    bne lbl_fn_80145334_00002EB4
+    bne lbl_quest_updateFlow_00002EB4
     lwz r0, 0x560(r26)
     cmpwi r0, 0x1d
-    beq lbl_fn_80145334_00002D4C
+    beq lbl_quest_updateFlow_00002D4C
     cmpwi r0, 0xd
-    beq lbl_fn_80145334_00002E34
+    beq lbl_quest_updateFlow_00002E34
     cmpwi r0, 0x21
-    beq lbl_fn_80145334_00002E5C
+    beq lbl_quest_updateFlow_00002E5C
     cmpwi r0, 0xf
-    beq lbl_fn_80145334_00002E88
-    b lbl_fn_80145334_00002EB4
-lbl_fn_80145334_00002D4C:
+    beq lbl_quest_updateFlow_00002E88
+    b lbl_quest_updateFlow_00002EB4
+lbl_quest_updateFlow_00002D4C:
     lwz r0, 0xf80(r26)
     cmpwi r0, 0x0
-    bne lbl_fn_80145334_00002D78
+    bne lbl_quest_updateFlow_00002D78
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x6ac(r1)
@@ -3274,8 +3274,8 @@ lbl_fn_80145334_00002D4C:
     lwz r0, 0x8(r5)
     stw r3, 0x6b0(r1)
     stw r0, 0x6b4(r1)
-    b lbl_fn_80145334_00002D94
-lbl_fn_80145334_00002D78:
+    b lbl_quest_updateFlow_00002D94
+lbl_quest_updateFlow_00002D78:
     lis r5, lbl_8077A98C@ha
     lwzu r4, lbl_8077A98C@l(r5)
     stw r4, 0x6ac(r1)
@@ -3283,7 +3283,7 @@ lbl_fn_80145334_00002D78:
     lwz r0, 0x8(r5)
     stw r3, 0x6b0(r1)
     stw r0, 0x6b4(r1)
-lbl_fn_80145334_00002D94:
+lbl_quest_updateFlow_00002D94:
     lwz r5, 0x6ac(r1)
     addi r3, r1, 0xe0
     lwz r4, 0x6b0(r1)
@@ -3293,14 +3293,14 @@ lbl_fn_80145334_00002D94:
     stw r0, 0xe8(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_80145334_00002EB4
+    beq lbl_quest_updateFlow_00002EB4
     lwz r3, 0xf80(r26)
     lwz r12, 0x0(r3)
     lwz r12, 0x58(r12)
     mtctr r12
     bctrl
     cmpwi r3, 0x0
-    bne lbl_fn_80145334_00002EB4
+    bne lbl_quest_updateFlow_00002EB4
     lwz r3, lbl_8087F048
     addi r4, r26, 0xf6c
     lfs f0, lbl_80881964
@@ -3323,19 +3323,19 @@ lbl_fn_80145334_00002D94:
     lfs f1, 0xf78(r26)
     bl fn_8010743C
     li r27, 0x1
-    b lbl_fn_80145334_00002EB4
-lbl_fn_80145334_00002E34:
+    b lbl_quest_updateFlow_00002EB4
+lbl_quest_updateFlow_00002E34:
     lwz r0, lbl_8087F610
     cmpwi r0, 0x0
-    bne lbl_fn_80145334_00002E5C
+    bne lbl_quest_updateFlow_00002E5C
     lwz r3, lbl_8087F0A8
     lwz r0, 0x314(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_80145334_00002E5C
+    beq lbl_quest_updateFlow_00002E5C
     lwz r0, 0x50(r26)
     cmpwi r0, 0x1
-    beq lbl_fn_80145334_00002EB4
-lbl_fn_80145334_00002E5C:
+    beq lbl_quest_updateFlow_00002EB4
+lbl_quest_updateFlow_00002E5C:
     lwz r3, lbl_8087F048
     lfs f0, lbl_80881964
     addis r3, r3, 0x4
@@ -3347,7 +3347,7 @@ lbl_fn_80145334_00002E5C:
     stfs f0, 0xc8(r1)
     stfs f0, 0xcc(r1)
     stfs f0, -0x1cf0(r3)
-lbl_fn_80145334_00002E88:
+lbl_quest_updateFlow_00002E88:
     lwz r6, 0x638(r26)
     addi r4, r26, 0xf6c
     lwz r0, 0x63c(r26)
@@ -3359,31 +3359,31 @@ lbl_fn_80145334_00002E88:
     srwi r5, r0, 31
     bl fn_8010743C
     li r27, 0x1
-lbl_fn_80145334_00002EB4:
+lbl_quest_updateFlow_00002EB4:
     cmpwi r27, 0x0
-    bne lbl_fn_80145334_00002ECC
+    bne lbl_quest_updateFlow_00002ECC
     lwz r3, lbl_8087F048
     cmpwi r3, 0x0
-    beq lbl_fn_80145334_00002ECC
+    beq lbl_quest_updateFlow_00002ECC
     bl fn_80107574
-lbl_fn_80145334_00002ECC:
+lbl_quest_updateFlow_00002ECC:
     lwz r0, 0x12a8(r26)
     rlwimi r0, r27, 24, 7, 7
     stw r0, 0x12a8(r26)
     lwz r0, lbl_8087F430
     cmpwi r0, 0x0
-    beq lbl_fn_80145334_00002F64
+    beq lbl_quest_updateFlow_00002F64
     lwz r3, 0x50(r26)
     bl task_mapIdToQueue
     cmpwi r3, 0x0
-    bne lbl_fn_80145334_00002F64
+    bne lbl_quest_updateFlow_00002F64
     lwz r3, lbl_8087F430
     bl fn_80376150
     cmpwi r3, 0x0
-    beq lbl_fn_80145334_00002F34
+    beq lbl_quest_updateFlow_00002F34
     lwz r0, 0x12a4(r26)
     extrwi. r0, r0, 1, 14
-    bne lbl_fn_80145334_00002F64
+    bne lbl_quest_updateFlow_00002F64
     lwz r12, 0x0(r26)
     mr r3, r26
     lwz r12, 0x98(r12)
@@ -3392,11 +3392,11 @@ lbl_fn_80145334_00002ECC:
     lwz r0, 0x12a4(r26)
     oris r0, r0, 0x2
     stw r0, 0x12a4(r26)
-    b lbl_fn_80145334_00002F64
-lbl_fn_80145334_00002F34:
+    b lbl_quest_updateFlow_00002F64
+lbl_quest_updateFlow_00002F34:
     lwz r0, 0x12a4(r26)
     extrwi. r0, r0, 1, 14
-    beq lbl_fn_80145334_00002F64
+    beq lbl_quest_updateFlow_00002F64
     lwz r12, 0x0(r26)
     mr r3, r26
     li r4, 0x0
@@ -3406,227 +3406,227 @@ lbl_fn_80145334_00002F34:
     lwz r0, 0x12a4(r26)
     rlwinm r0, r0, 0, 15, 13
     stw r0, 0x12a4(r26)
-lbl_fn_80145334_00002F64:
+lbl_quest_updateFlow_00002F64:
     lwz r3, 0x50(r26)
     subis r0, r3, 0xa
     cmplwi r0, 0xae77
-    bne lbl_fn_80145334_00002FB0
+    bne lbl_quest_updateFlow_00002FB0
     lwz r0, 0x12a4(r26)
     extrwi. r0, r0, 1, 26
-    beq lbl_fn_80145334_00002F98
+    beq lbl_quest_updateFlow_00002F98
     lwz r12, 0x0(r26)
     mr r3, r26
     lwz r12, 0x98(r12)
     mtctr r12
     bctrl
-    b lbl_fn_80145334_00002FB0
-lbl_fn_80145334_00002F98:
+    b lbl_quest_updateFlow_00002FB0
+lbl_quest_updateFlow_00002F98:
     lwz r12, 0x0(r26)
     mr r3, r26
     li r4, 0x0
     lwz r12, 0x9c(r12)
     mtctr r12
     bctrl
-lbl_fn_80145334_00002FB0:
+lbl_quest_updateFlow_00002FB0:
     mr r3, r26
     bl fn_80154C08
     lwz r3, 0x48(r26)
     li r0, 0x1
     cmpwi r3, 0x1
-    beq lbl_fn_80145334_00002FD4
+    beq lbl_quest_updateFlow_00002FD4
     cmpwi r3, 0x4
-    beq lbl_fn_80145334_00002FD4
+    beq lbl_quest_updateFlow_00002FD4
     li r0, 0x0
-lbl_fn_80145334_00002FD4:
+lbl_quest_updateFlow_00002FD4:
     cmpwi r0, 0x0
-    bne lbl_fn_80145334_00003058
+    bne lbl_quest_updateFlow_00003058
     mr r3, r26
     bl fn_80164D24
     mr r3, r26
     bl fn_80176E30
     lwz r4, 0x12c4(r26)
     cmpwi r4, 0x0
-    ble lbl_fn_80145334_00003018
+    ble lbl_quest_updateFlow_00003018
     lwz r3, 0xd1c(r26)
     subi r4, r4, 0x1
     lwz r0, 0xd20(r26)
     stw r4, 0x12c4(r26)
     cmplw r3, r0
-    beq lbl_fn_80145334_00003018
+    beq lbl_quest_updateFlow_00003018
     li r0, 0x0
     stw r0, 0x12c4(r26)
-lbl_fn_80145334_00003018:
+lbl_quest_updateFlow_00003018:
     lwz r3, 0x12c8(r26)
     cmpwi r3, 0x0
-    ble lbl_fn_80145334_0000302C
+    ble lbl_quest_updateFlow_0000302C
     subi r0, r3, 0x1
     stw r0, 0x12c8(r26)
-lbl_fn_80145334_0000302C:
+lbl_quest_updateFlow_0000302C:
     lfs f8, 0x12cc(r26)
     lfs f7, lbl_8088196C
     fcmpo cr0, f8, f7
-    ble lbl_fn_80145334_00003058
+    ble lbl_quest_updateFlow_00003058
     lfs f0, lbl_80881AA8
     fsubs f0, f8, f0
     stfs f0, 0x12cc(r26)
     fcmpo cr0, f0, f7
     cror eq, lt, eq
-    bne lbl_fn_80145334_00003058
+    bne lbl_quest_updateFlow_00003058
     stfs f7, 0x12cc(r26)
-lbl_fn_80145334_00003058:
+lbl_quest_updateFlow_00003058:
     lwz r3, 0x1380(r26)
     cmpwi r3, 0x0
-    ble lbl_fn_80145334_0000306C
+    ble lbl_quest_updateFlow_0000306C
     subi r0, r3, 0x1
     stw r0, 0x1380(r26)
-lbl_fn_80145334_0000306C:
+lbl_quest_updateFlow_0000306C:
     lha r3, 0x1388(r26)
     cmpwi r3, 0x0
-    ble lbl_fn_80145334_00003080
+    ble lbl_quest_updateFlow_00003080
     subi r0, r3, 0x1
     sth r0, 0x1388(r26)
-lbl_fn_80145334_00003080:
+lbl_quest_updateFlow_00003080:
     lha r3, 0x138a(r26)
     cmpwi r3, 0x0
-    ble lbl_fn_80145334_00003094
+    ble lbl_quest_updateFlow_00003094
     subi r0, r3, 0x1
     sth r0, 0x138a(r26)
-lbl_fn_80145334_00003094:
+lbl_quest_updateFlow_00003094:
     lwz r3, 0x678(r26)
     cmpwi r3, 0x0
-    beq lbl_fn_80145334_000032A0
+    beq lbl_quest_updateFlow_000032A0
     lwz r0, 0x12a8(r26)
     extrwi. r0, r0, 1, 10
-    beq lbl_fn_80145334_00003114
+    beq lbl_quest_updateFlow_00003114
     lwz r12, 0x0(r3)
     lwz r12, 0xc(r12)
     mtctr r12
     bctrl
     cmpwi r3, 0x0
-    bne lbl_fn_80145334_00003114
+    bne lbl_quest_updateFlow_00003114
     lwz r3, 0x67c(r26)
     cmpwi r3, 0x0
-    beq lbl_fn_80145334_000030E8
+    beq lbl_quest_updateFlow_000030E8
     lwz r12, 0x0(r3)
     lwz r12, 0xc(r12)
     mtctr r12
     bctrl
     cmpwi r3, 0x0
-    bne lbl_fn_80145334_00003114
-lbl_fn_80145334_000030E8:
+    bne lbl_quest_updateFlow_00003114
+lbl_quest_updateFlow_000030E8:
     lwz r0, 0x674(r26)
     cmpwi r0, 0x0
-    bne lbl_fn_80145334_00003108
+    bne lbl_quest_updateFlow_00003108
     mr r3, r26
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8014DEE4
-lbl_fn_80145334_00003108:
+    bl dialog_selectChoice
+lbl_quest_updateFlow_00003108:
     lwz r0, 0x12a8(r26)
     rlwinm r0, r0, 0, 11, 9
     stw r0, 0x12a8(r26)
-lbl_fn_80145334_00003114:
+lbl_quest_updateFlow_00003114:
     lwz r3, 0x678(r26)
     li r4, 0x0
     lwz r0, 0x28c(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_80145334_00003138
+    beq lbl_quest_updateFlow_00003138
     lwz r0, 0x288(r3)
     cmpwi r0, 0x0
-    bgt lbl_fn_80145334_00003138
+    bgt lbl_quest_updateFlow_00003138
     li r4, 0x1
-lbl_fn_80145334_00003138:
+lbl_quest_updateFlow_00003138:
     cmpwi r4, 0x0
-    beq lbl_fn_80145334_000032A0
+    beq lbl_quest_updateFlow_000032A0
     cmpwi r3, 0x0
-    beq lbl_fn_80145334_0000325C
-    beq lbl_fn_80145334_00003160
+    beq lbl_quest_updateFlow_0000325C
+    beq lbl_quest_updateFlow_00003160
     lwz r12, 0x0(r3)
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-lbl_fn_80145334_00003160:
+lbl_quest_updateFlow_00003160:
     lwz r3, 0x67c(r26)
     li r0, 0x0
     stw r0, 0x678(r26)
     cmpwi r3, 0x0
-    beq lbl_fn_80145334_00003194
-    beq lbl_fn_80145334_0000318C
+    beq lbl_quest_updateFlow_00003194
+    beq lbl_quest_updateFlow_0000318C
     lwz r12, 0x0(r3)
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-lbl_fn_80145334_0000318C:
+lbl_quest_updateFlow_0000318C:
     li r0, 0x0
     stw r0, 0x67c(r26)
-lbl_fn_80145334_00003194:
+lbl_quest_updateFlow_00003194:
     lwz r0, 0x674(r26)
     cmpwi r0, 0x0
-    bne lbl_fn_80145334_000031B4
+    bne lbl_quest_updateFlow_000031B4
     mr r3, r26
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8014DEE4
-lbl_fn_80145334_000031B4:
+    bl dialog_selectChoice
+lbl_quest_updateFlow_000031B4:
     lbz r0, lbl_8087EE74
     extsb. r0, r0
-    bne lbl_fn_80145334_000031F4
+    bne lbl_quest_updateFlow_000031F4
     lis r3, lbl_807C6BB8@ha
     li r0, 0x0
     stwu r0, lbl_807C6BB8@l(r3)
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     li r27, 0x1
     lis r5, lbl_807C7B10@ha
     stw r0, 0x4(r3)
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     addi r5, r5, lbl_807C7B10@l
     stw r0, 0x8(r3)
     stw r27, 0xc(r3)
     bl __register_global_object
     stb r27, lbl_8087EE74
-lbl_fn_80145334_000031F4:
+lbl_quest_updateFlow_000031F4:
     lis r29, lbl_807C6BB8@ha
     addi r29, r29, lbl_807C6BB8@l
     lwz r0, 0xc(r29)
     cmpwi r0, 0x0
-    beq lbl_fn_80145334_0000325C
+    beq lbl_quest_updateFlow_0000325C
     li r28, 0x0
     li r27, 0x0
-    b lbl_fn_80145334_00003250
-lbl_fn_80145334_00003214:
+    b lbl_quest_updateFlow_00003250
+lbl_quest_updateFlow_00003214:
     lwz r0, 0x0(r29)
     add r3, r0, r27
     lwzx r0, r27, r0
     cmpwi r0, -0x1
-    beq lbl_fn_80145334_00003230
+    beq lbl_quest_updateFlow_00003230
     cmpwi r0, 0x9
-    bne lbl_fn_80145334_00003248
-lbl_fn_80145334_00003230:
+    bne lbl_quest_updateFlow_00003248
+lbl_quest_updateFlow_00003230:
     lwz r12, 0x4(r3)
     mr r4, r26
     li r3, 0x9
     li r5, 0x0
     mtctr r12
     bctrl
-lbl_fn_80145334_00003248:
+lbl_quest_updateFlow_00003248:
     addi r28, r28, 0x1
     addi r27, r27, 0x8
-lbl_fn_80145334_00003250:
+lbl_quest_updateFlow_00003250:
     lwz r0, 0x4(r29)
     cmpw r28, r0
-    blt lbl_fn_80145334_00003214
-lbl_fn_80145334_0000325C:
+    blt lbl_quest_updateFlow_00003214
+lbl_quest_updateFlow_0000325C:
     lwz r3, lbl_8087F048
     cmpwi r3, 0x0
-    beq lbl_fn_80145334_00003274
+    beq lbl_quest_updateFlow_00003274
     addi r5, r26, 0xb0
     li r4, 0x0
     bl fn_80106728
-lbl_fn_80145334_00003274:
+lbl_quest_updateFlow_00003274:
     lis r4, lbl_80737490@ha
     lfs f1, lbl_80881964
     addi r4, r4, lbl_80737490@l
@@ -3638,7 +3638,7 @@ lbl_fn_80145334_00003274:
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
-lbl_fn_80145334_000032A0:
+lbl_quest_updateFlow_000032A0:
     addi r11, r1, 0x6d0
     psq_l f31, 0x738(r1), 0, 0
     lfd f31, 0x730(r1)

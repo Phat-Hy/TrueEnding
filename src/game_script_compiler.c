@@ -27,13 +27,13 @@ extern void fn_8012DF7C(void);
 extern void fn_8012F440(void);
 extern void fn_80133EE8(void);
 extern void boss_updatePhaseState(void);
-extern void fn_8013CB68(void);
+extern void npc_updateTalkInteraction(void);
 extern void fn_801437D0(void);
-extern void fn_80145334(void);
+extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
-extern void fn_8014C540(void);
+extern void dialog_updateScriptState(void);
 extern void actor_setState(void);
-extern void fn_80179D44(void);
+extern void actor_getMovementFlags(void);
 extern void task_mapIdToQueue(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
@@ -43,7 +43,7 @@ extern void fn_80255F68(void);
 extern void fn_8030E490(void);
 extern void fn_8030E4AC(void);
 extern void fn_8030E530(void);
-extern void fn_8035B694(void);
+extern void entity_Instance_constructor(void);
 extern void fn_803C11A4(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
@@ -486,7 +486,7 @@ lbl_fn_802548C8_0000047C:
     bl fn_802549C8
 lbl_fn_802548C8_00000498:
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
     lwz r0, 0x38(r31)
     clrlwi r0, r0, 31
     cmplwi r0, 0x1
@@ -495,7 +495,7 @@ lbl_fn_802548C8_00000498:
     extrwi. r0, r0, 1, 6
     bne lbl_fn_802548C8_000004C4
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
 lbl_fn_802548C8_000004C4:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
@@ -1001,7 +1001,7 @@ lbl_fn_80254F6C_00000B78:
 lbl_fn_80254F6C_00000B7C:
     lwz r29, lbl_8087EE68
     mr r3, r31
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lfs f3, lbl_808833B8
     mr r9, r3
     lfs f0, 0x538(r31)
@@ -1021,7 +1021,7 @@ lbl_fn_80254F6C_00000B7C:
     bgt lbl_fn_80254F6C_00000C14
     lwz r29, lbl_8087EE68
     mr r3, r31
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lfs f3, lbl_808833B8
     mr r9, r3
     lfs f0, 0x538(r31)
@@ -1042,7 +1042,7 @@ lbl_fn_80254F6C_00000C14:
     bgt lbl_fn_80254F6C_00000C64
     lwz r29, lbl_8087EE68
     mr r3, r31
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lfs f3, lbl_808833B8
     mr r9, r3
     lfs f0, 0x538(r31)
@@ -1561,7 +1561,7 @@ lbl_fn_80255458_00001360:
     addi r4, r1, 0x6c
     fmuls f2, f0, f29
     li r5, 0x0
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
 lbl_fn_80255458_0000137C:
     lwz r0, 0x124(r1)
     psq_l f31, 0x118(r1), 0, 0
@@ -1598,7 +1598,7 @@ asm void fn_802558B0(void)
     mr r31, r5
     lwz r5, 0x20(r5)
     mr r30, r3
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lis r3, lbl_807846A0@ha
     li r28, 0x0
     addi r3, r3, lbl_807846A0@l

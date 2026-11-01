@@ -21,17 +21,17 @@ extern void mem_free(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void route_interpolatePath(void);
-extern void fn_80087E9C(void);
+extern void route_createWaypoint(void);
 extern void node_createNamedChild(void);
-extern void fn_800897D8(void);
-extern void fn_800BFAC8(void);
+extern void node_destroy(void);
+extern void motion_updateFogAdj(void);
 extern void fn_800C3184(void);
 extern void fn_800C31E4(void);
 extern void skin_playAnimationByName(void);
 extern void skin_applyWeights(void);
-extern void fn_800CB360(void);
+extern void morph_reset(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB440(void);
+extern void morph_updateWeights(void);
 extern void fn_800CB480(void);
 extern void fn_800CB518(void);
 extern void fn_800CB5B4(void);
@@ -44,7 +44,7 @@ extern void fn_800CFDC8(void);
 extern void fn_800D03AC(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void str_skipWhitespace(void);
 extern void fn_800EC654(void);
 extern void fn_800EDFE8(void);
@@ -259,7 +259,7 @@ asm void fn_8035FCB4(void)
     addi r3, r3, 0x8
     bl memset
     addi r3, r31, 0x58
-    bl fn_800CB360
+    bl morph_reset
     mr r3, r31
     lwz r31, 0xc(r1)
     lwz r0, 0x14(r1)
@@ -729,7 +729,7 @@ lbl_fn_80360230_00000710:
     bl skin_applyWeights
     mr r3, r29
     addi r4, r1, 0x14
-    bl fn_800CB440
+    bl morph_updateWeights
     addi r3, r1, 0x14
     li r4, -0x1
     bl ref_releaseHandle
@@ -743,7 +743,7 @@ lbl_fn_80360230_0000076C:
     bl skin_playAnimationByName
     mr r3, r29
     addi r4, r1, 0x10
-    bl fn_800CB440
+    bl morph_updateWeights
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle
@@ -785,7 +785,7 @@ lbl_fn_80360230_000007B8:
     bl fn_803E907C
     mr r3, r29
     addi r4, r1, 0xc
-    bl fn_800CB440
+    bl morph_updateWeights
     addi r3, r1, 0xc
     li r4, -0x1
     bl ref_releaseHandle
@@ -810,7 +810,7 @@ lbl_fn_80360230_00000840:
     bl fn_803E9608
     mr r3, r29
     addi r4, r1, 0x8
-    bl fn_800CB440
+    bl morph_updateWeights
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -1132,10 +1132,7 @@ lbl_fn_80360848_00000C8C:
     blr
 }
 
-asm void fn_803608A4(void)
-{
-    nofralloc
-    blr
+void fn_803608A4(void) {
 }
 
 asm void fn_803608A8(void)
@@ -1290,7 +1287,7 @@ lbl_fn_80360A2C_00000E5C:
     bl skin_playAnimationByName
     addi r3, r31, 0x194
     addi r4, r1, 0x8
-    bl fn_800CB440
+    bl morph_updateWeights
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -1435,7 +1432,7 @@ asm void fn_80360C5C(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_80360C5C_000010AC
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_80360C5C_000010AC:
     mr r3, r30
     li r4, 0x0
@@ -1533,7 +1530,7 @@ lbl_fn_80360CDC_000011DC:
     addi r4, r29, 0xb
     addi r5, r5, 0x2c
     addi r6, r30, fn_80361100@l
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_8088569C
     mr r3, r28
     lwz r5, 0x50(r31)
@@ -1575,10 +1572,7 @@ lbl_fn_80360CDC_00001288:
     blr
 }
 
-asm void fn_80360EA0(void)
-{
-    nofralloc
-    blr
+void fn_80360EA0(void) {
 }
 
 asm void fn_80360EA4(void)
@@ -1851,7 +1845,7 @@ asm void fn_803611E8(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_803611E8_0000163C
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_803611E8_0000163C:
     mr r3, r30
     li r4, 0x0
@@ -1907,7 +1901,7 @@ asm void fn_8036126C(void)
 asm void fn_803612DC(void)
 {
     nofralloc
-    b fn_800D3FA4
+    b bloom_processPasses
 }
 
 asm void fn_803612E0(void)
@@ -1952,7 +1946,7 @@ lbl_fn_803612F4_00001758:
     addi r3, r1, 0x8
     lwz r4, lbl_8087EFB4
     addi r5, r5, 0x2c
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f0, lbl_808856A0
     lfs f1, 0x10(r1)
     fcmpo cr0, f0, f1

@@ -2,7 +2,7 @@
 #pragma function_align 4
 
 /* External function declarations */
-extern void fn_8000D3A4(void);
+extern void vec3_mag(void);
 extern void vec3_sub(void);
 extern void collision_testLineSegment(void);
 extern void mem_realloc(void);
@@ -12,11 +12,11 @@ extern void atn_Anim_getLayerDuration(void);
 extern void system_getNextSequenceId(void);
 extern void fn_80126214(void);
 extern void fn_8013A258(void);
-extern void fn_8013C38C(void);
-extern void fn_8013CB68(void);
-extern void fn_80148990(void);
+extern void npc_getPosition(void);
+extern void npc_updateTalkInteraction(void);
+extern void quest_ctorRewardItem(void);
 extern void dialog_renderWindow(void);
-extern void fn_80151448(void);
+extern void inventory_applyItemStats(void);
 extern void fn_801595BC(void);
 extern void fn_8015AC48(void);
 extern void fn_8015E7A0(void);
@@ -32,7 +32,7 @@ extern void fn_802E554C(void);
 extern void fn_802E55B0(void);
 extern void world_setGlobalFlag(void);
 extern void world_setLocalFlag(void);
-extern void fn_803EA77C(void);
+extern void chest_spawnLoot(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
@@ -40,7 +40,7 @@ extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
-extern void fn_8068A850(void);
+extern void std_sin(void);
 extern void fn_8068AE9C(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
@@ -128,7 +128,7 @@ lbl_fn_802E2E88_00000038:
 lbl_fn_802E2E88_00000064:
     mr r3, r30
     mr r4, r31
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r12, 0x0(r30)
     mr r3, r30
     mr r4, r31
@@ -385,9 +385,9 @@ lbl_fn_802E315C_000003E0:
     la r6, lbl_8087D9E0
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     li r5, 0x0
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r6, 0x14
     li r7, 0x8
     bl runtime_registerStaticObject
@@ -499,9 +499,9 @@ lbl_fn_802E315C_00000580:
     addi r3, r3, 0x10
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     mr r7, r30
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r5, 0x0
     li r6, 0x14
     bl runtime_registerStaticObject
@@ -966,7 +966,7 @@ lbl_fn_802E37DC_00000C48:
     addi r4, r1, 0x80
     fmuls f2, f30, f0
     li r5, 0x0
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
 lbl_fn_802E37DC_00000C64:
     lwz r0, 0x154(r1)
     psq_l f31, 0x148(r1), 0, 0
@@ -1033,7 +1033,7 @@ lbl_fn_802E3B24_00000D30:
     cmpwi r0, 0x1e
     ble lbl_fn_802E3B24_00000EC4
     lwz r3, 0x14cc(r30)
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r1, 0x20
     addi r5, r30, 0x528
@@ -1041,7 +1041,7 @@ lbl_fn_802E3B24_00000D30:
     lfs f0, lbl_808846EC
     addi r3, r1, 0x20
     stfs f0, 0x24(r1)
-    bl fn_8000D3A4
+    bl vec3_mag
     lfs f0, lbl_80884744
     fcmpo cr0, f1, f0
     bge lbl_fn_802E3B24_00000EC4
@@ -1052,13 +1052,13 @@ lbl_fn_802E3B24_00000D84:
     lwz r3, 0x14cc(r3)
     cmpwi r3, 0x0
     beq lbl_fn_802E3B24_00000EC4
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r1, 0x8
     addi r5, r30, 0x528
     bl vec3_sub
     addi r3, r1, 0x8
-    bl fn_8000D3A4
+    bl vec3_mag
     lwz r0, 0x14c4(r30)
     cmpwi r0, 0xc
     beq lbl_fn_802E3B24_00000DD4
@@ -1121,7 +1121,7 @@ lbl_fn_802E3B24_00000E64:
     lfs f0, lbl_808846EC
     addi r3, r1, 0x14
     stfs f0, 0x18(r1)
-    bl fn_8000D3A4
+    bl vec3_mag
     lfs f0, lbl_80884728
     fcmpo cr0, f1, f0
     bge lbl_fn_802E3B24_00000EC4
@@ -1502,7 +1502,7 @@ lbl_fn_802E3EE8_000013CC:
     lfs f1, lbl_80884720
     li r6, 0x0
     lfs f2, lbl_808846F4
-    bl fn_803EA77C
+    bl chest_spawnLoot
     b lbl_fn_802E3EE8_000014D4
 lbl_fn_802E3EE8_000013F4:
     li r0, 0x0
@@ -2193,7 +2193,7 @@ lbl_fn_802E470C_00001D84:
     bl PSMTXMultVec
     lis r3, lbl_80747D70@ha
     lfd f1, lbl_80747D70@l(r3)
-    bl fn_8068A850
+    bl std_sin
     frsp f31, f1
     mr r4, r29
     addi r3, r1, 0x68

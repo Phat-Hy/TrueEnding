@@ -10,7 +10,7 @@ extern void _savegpr_21(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8006EF48(void);
+extern void script_executeOpcode(void);
 extern void str_assignBuffer(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
@@ -19,19 +19,19 @@ extern void msg_getMessageById(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void str_findChar(void);
-extern void fn_80116FC0(void);
+extern void actor_findSpawnTemplate(void);
 extern void fn_801170C8(void);
 extern void actor_spawnActorWithId(void);
 extern void save_validateHeader(void);
-extern void fn_801F48C8(void);
-extern void fn_801F4CB4(void);
+extern void save_parseSlotStats(void);
+extern void save_formatSlotTitle(void);
 extern void saveSlot_readSummary(void);
-extern void fn_801F64D0(void);
+extern void save_createWorkerTask(void);
 extern void save_computeCrc32(void);
 extern void fn_801F6E78(void);
 extern void fn_801F7590(void);
 extern void fn_801F7DF0(void);
-extern void fn_801F837C(void);
+extern void save_findEntryByName(void);
 extern void fn_801F8598(void);
 extern void fn_801FEC74(void);
 extern void thread_findAndNotify(void);
@@ -570,7 +570,7 @@ lbl_fn_80589AF8_000005B4:
     lwz r3, 0x5b74(r28)
     addi r4, r30, 0x104
     lwz r5, 0x8(r21)
-    bl fn_801F837C
+    bl save_findEntryByName
     lwz r3, 0x5b74(r28)
     addi r4, r30, 0x10d
     lfs f1, lbl_80888134
@@ -582,11 +582,11 @@ lbl_fn_80589AF8_000005B4:
     lwz r3, 0x5b74(r28)
     addi r4, r30, 0x121
     la r5, lbl_8087E690
-    bl fn_801F837C
+    bl save_findEntryByName
     lwz r3, 0x5b74(r28)
     addi r4, r30, 0x127
     addi r5, r24, 0x2
-    bl fn_801F837C
+    bl save_findEntryByName
     lwz r3, lbl_8087F4F0
     mr r4, r21
     bl fn_80444BE8
@@ -627,13 +627,13 @@ lbl_fn_80589AF8_00000714:
 lbl_fn_80589AF8_00000750:
     la r5, lbl_808813D0
 lbl_fn_80589AF8_00000754:
-    bl fn_801F837C
+    bl save_findEntryByName
     b lbl_fn_80589AF8_0000076C
 lbl_fn_80589AF8_0000075C:
     lwz r3, 0x5b74(r28)
     addi r4, r30, 0x104
     addi r5, r24, 0x6
-    bl fn_801F837C
+    bl save_findEntryByName
 lbl_fn_80589AF8_0000076C:
     lwz r3, 0x5b74(r28)
     addi r4, r30, 0x10d
@@ -651,7 +651,7 @@ lbl_fn_80589AF8_0000076C:
     lwz r3, 0x5b74(r28)
     addi r4, r30, 0x127
     addi r5, r24, 0x2
-    bl fn_801F837C
+    bl save_findEntryByName
     lwz r3, lbl_8087F4F0
     bl fn_80444C48
     mr r22, r3
@@ -712,7 +712,7 @@ asm void fn_80589DE4(void)
     lwz r5, lbl_8087F4F0
     lwz r3, 0x5b6c(r8)
     lwz r5, 0x6000(r5)
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r3, 0x4(r30)
     bl event_findEntryById
     lwz r0, 0xc(r30)
@@ -761,7 +761,7 @@ lbl_fn_80589DE4_000008E4:
     lwz r3, 0x5b6c(r4)
     addi r4, r28, 0x121
     li r6, 0x0
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
 lbl_fn_80589DE4_00000944:
     addis r3, r29, 0x2
     lis r4, lbl_80761AB0@ha
@@ -788,7 +788,7 @@ lbl_fn_80589DE4_00000994:
     lfs f2, lbl_80888134
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lwz r0, 0x14(r1)
     fmr f31, f1
     srwi. r0, r0, 31
@@ -834,7 +834,7 @@ lbl_fn_80589DE4_00000A40:
     lfs f2, lbl_80888134
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lwz r0, 0x8(r1)
     fmr f31, f1
     srwi. r0, r0, 31
@@ -876,7 +876,7 @@ lbl_fn_80589DE4_00000AE0:
     lwz r27, lbl_8087F580
     li r3, 0x1
     li r4, 0x15b
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     mr r4, r3
     mr r3, r27
     li r5, 0x0
@@ -1021,7 +1021,7 @@ lbl_fn_8058A0F4_00000C54:
     psq_st f1, 0x0(r5), 0, 0
     psq_st f2, 0x8(r5), 0, 0
     lwz r3, 0x5b9c(r3)
-    bl fn_801F48C8
+    bl save_parseSlotStats
     addis r3, r30, 0x2
     addi r4, r29, 0x185
     lwz r3, 0x5b9c(r3)
@@ -1045,7 +1045,7 @@ lbl_fn_8058A0F4_00000D44:
     lfs f2, lbl_80888134
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lwz r0, 0x10(r1)
     fmr f31, f1
     srwi. r0, r0, 31
@@ -2089,7 +2089,7 @@ lbl_fn_8058AC94_00001BD0:
 lbl_fn_8058AC94_00001C44:
     mr r3, r31
     mr r4, r28
-    bl fn_801F64D0
+    bl save_createWorkerTask
     addis r5, r29, 0x2
     li r4, 0x1
     addi r0, r5, 0x5b7c
@@ -2103,14 +2103,14 @@ lbl_fn_8058AC94_00001C44:
     mr r3, r31
     addi r30, r30, lbl_80761D5C@l
     addi r4, r30, 0xf5
-    bl fn_801F64D0
+    bl save_createWorkerTask
     addis r5, r31, 0x2
     li r4, 0x1
     stw r3, 0x5ba4(r5)
     bl atn_Task_setActive
     mr r3, r31
     addi r4, r30, 0x117
-    bl fn_801F64D0
+    bl save_createWorkerTask
     addis r5, r31, 0x2
     li r4, 0x1
     stw r3, 0x5bb8(r5)
@@ -2122,7 +2122,7 @@ lbl_fn_8058AC94_00001C44:
 lbl_fn_8058AC94_00001CC4:
     mr r3, r31
     mr r4, r28
-    bl fn_801F64D0
+    bl save_createWorkerTask
     addis r5, r30, 0x2
     li r4, 0x1
     addi r0, r5, 0x5ba8
@@ -2130,7 +2130,7 @@ lbl_fn_8058AC94_00001CC4:
     bl atn_Task_setActive
     mr r3, r31
     mr r4, r29
-    bl fn_801F64D0
+    bl save_createWorkerTask
     addis r5, r30, 0x2
     li r4, 0x1
     addi r0, r5, 0x5bb0
@@ -2148,7 +2148,7 @@ lbl_fn_8058AC94_00001CC4:
 lbl_fn_8058AC94_00001D28:
     mr r3, r31
     mr r4, r28
-    bl fn_801F64D0
+    bl save_createWorkerTask
     addis r5, r29, 0x2
     li r4, 0x1
     addi r0, r5, 0x5bbc
@@ -2167,7 +2167,7 @@ lbl_fn_8058AC94_00001D28:
 lbl_fn_8058AC94_00001D70:
     mr r3, r31
     mr r4, r28
-    bl fn_801F64D0
+    bl save_createWorkerTask
     addis r5, r30, 0x2
     li r4, 0x1
     addi r0, r5, 0x5bc8
@@ -2175,7 +2175,7 @@ lbl_fn_8058AC94_00001D70:
     bl atn_Task_setActive
     mr r3, r31
     mr r4, r29
-    bl fn_801F64D0
+    bl save_createWorkerTask
     addis r5, r30, 0x2
     li r4, 0x1
     addi r0, r5, 0x5bd4

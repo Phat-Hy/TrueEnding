@@ -4,28 +4,28 @@
 /* External function declarations */
 extern void _restgpr_18(void);
 extern void _savegpr_18(void);
-extern void fn_8000D0F8(void);
-extern void fn_8000D114(void);
+extern void mtx_getTranslation(void);
+extern void vec3_set(void);
 extern void vec3_copy(void);
-extern void fn_8000D3A4(void);
+extern void vec3_mag(void);
 extern void fn_8000D9E8(void);
 extern void fn_8000D9F8(void);
 extern void fn_8000DB1C(void);
 extern void fn_8000DCF4(void);
 extern void fn_8000DD0C(void);
-extern void fn_8001047C(void);
-extern void fn_80011034(void);
+extern void vec3_assign(void);
+extern void vec3_toEulerAngles(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void vec3_sub(void);
 extern void fn_80013404(void);
-extern void fn_80013410(void);
-extern void fn_80057A64(void);
+extern void vec3_add(void);
+extern void mission_updateStub(void);
 extern void fn_80057A68(void);
-extern void fn_8006EF48(void);
+extern void script_executeOpcode(void);
 extern void fn_8006FA4C(void);
 extern void fn_8008B964(void);
 extern void fn_800A58D0(void);
-extern void fn_800BFAC8(void);
+extern void motion_updateFogAdj(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void wcs_vformat(void);
@@ -38,7 +38,7 @@ extern void fn_800F72CC(void);
 extern void fn_800F7F80(void);
 extern void fn_800F7F90(void);
 extern void fn_800F7FB4(void);
-extern void fn_800F7FF0(void);
+extern void viewport_getNextSequenceId(void);
 extern void fn_800F84BC(void);
 extern void fn_800F8524(void);
 extern void fn_8010D320(void);
@@ -50,7 +50,7 @@ extern void fn_801156C4(void);
 extern void fn_801162A0(void);
 extern void fn_80116BAC(void);
 extern void fn_80116E6C(void);
-extern void fn_80121F00(void);
+extern void equip_getGlobalManager(void);
 extern void magic_getOffset6C(void);
 extern void magic_getOffset244(void);
 extern void fn_80124C6C(void);
@@ -61,7 +61,7 @@ extern void fn_80139F60(void);
 extern void fn_8013A13C(void);
 extern void fn_8013A158(void);
 extern void fn_8013A194(void);
-extern void fn_8013C38C(void);
+extern void npc_getPosition(void);
 extern void fn_8013C3A8(void);
 extern void fn_8013C42C(void);
 extern void fn_8013C43C(void);
@@ -83,12 +83,12 @@ extern void fn_801F19B4(void);
 extern void fn_801F33D4(void);
 extern void fn_801F4484(void);
 extern void fn_801F465C(void);
-extern void fn_801F48C8(void);
-extern void fn_801F4CB4(void);
+extern void save_parseSlotStats(void);
+extern void save_formatSlotTitle(void);
 extern void fn_801F6C2C(void);
 extern void save_computeCrc32(void);
 extern void fn_801F6D7C(void);
-extern void fn_801F837C(void);
+extern void save_findEntryByName(void);
 extern void fn_801F8598(void);
 extern void perf_getMetricValue(void);
 extern void fn_802168BC(void);
@@ -640,7 +640,7 @@ lbl_fn_803D2A6C_00000464:
     beq lbl_fn_803D2A6C_00004300
 lbl_fn_803D2A6C_00000518:
     li r21, 0x0
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_803D6E24
     cmpwi r3, 0x8
     bne lbl_fn_803D2A6C_0000054C
@@ -654,7 +654,7 @@ lbl_fn_803D2A6C_00000518:
     li r21, 0x1
 lbl_fn_803D2A6C_0000054C:
     li r29, 0x0
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_803D6E24
     cmpwi r3, 0x8
     bne lbl_fn_803D2A6C_00000580
@@ -671,7 +671,7 @@ lbl_fn_803D2A6C_00000580:
     bl fn_8000D9E8
     bl fn_8000DCF4
     mr r31, r3
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl magic_getOffset6C
     cmpwi r21, 0x0
     mr r28, r3
@@ -736,12 +736,12 @@ lbl_fn_803D2A6C_00000660:
 lbl_fn_803D2A6C_0000067C:
     cmpwi r29, 0x0
     bne lbl_fn_803D2A6C_00000694
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_803D6E24
     cmpwi r3, 0x0
     bne lbl_fn_803D2A6C_00002C30
 lbl_fn_803D2A6C_00000694:
-    bl fn_80121F00
+    bl equip_getGlobalManager
     li r4, 0x2b
     bl world_getGlobalFlag
     cmpwi r3, 0x1
@@ -770,7 +770,7 @@ lbl_fn_803D2A6C_00000694:
     bl fn_80366DAC
     b lbl_fn_803D2A6C_00000930
 lbl_fn_803D2A6C_00000704:
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_803D6E70
     cmpwi r3, 0x0
     bne lbl_fn_803D2A6C_00000930
@@ -965,10 +965,10 @@ lbl_fn_803D2A6C_0000096C:
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00000B4C
     mr r3, r31
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r1, 0x488
-    bl fn_8001047C
+    bl vec3_assign
     mr r3, r31
     bl fn_8013C42C
     lfs f0, 0x48c(r1)
@@ -1005,8 +1005,8 @@ lbl_fn_803D2A6C_00000A5C:
     lfs f1, 0x47c(r1)
     addi r3, r1, 0x2b4
     lfs f3, 0x484(r1)
-    bl fn_8000D114
-    bl fn_8000D3A4
+    bl vec3_set
+    bl vec3_mag
     fmr f29, f1
     mr r3, r20
     mr r4, r22
@@ -1021,9 +1021,9 @@ lbl_fn_803D2A6C_00000A5C:
     addi r3, r1, 0x470
     lfs f2, lbl_80885D58
     lfs f3, 0x484(r1)
-    bl fn_8000D114
+    bl vec3_set
     addi r3, r1, 0x470
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
     mr r4, r31
     addi r3, r1, 0x2a8
     bl fn_8014052C
@@ -1094,22 +1094,22 @@ lbl_fn_803D2A6C_00000B90:
     beq lbl_fn_803D2A6C_00000C54
     bl fn_803D6E2C
     mr r3, r31
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r21, r3
     mr r4, r19
     addi r3, r24, 0x85c
     bl fn_803D7260
     lwz r3, 0x0(r3)
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     mr r5, r21
     addi r3, r1, 0x464
     bl vec3_sub
     addi r3, r1, 0x464
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
     addi r3, r1, 0x464
     bl fn_80139F60
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl magic_getOffset6C
     bl fn_803D6EEC
     bl fn_80116E6C
@@ -1255,19 +1255,19 @@ lbl_fn_803D2A6C_00000DE8:
     lwz r3, 0x83c(r24)
     lfs f1, lbl_80885D60
     bl fn_803D6F68
-    bl fn_80121F00
+    bl equip_getGlobalManager
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00000E64
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_8013C504
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00000E64
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_8013C504
     bl fn_80244CA0
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00000E64
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_8013C504
     bl fn_803CC900
     cmpwi r3, 0x0
@@ -1341,7 +1341,7 @@ lbl_fn_803D2A6C_00000EDC:
     beq lbl_fn_803D2A6C_00000F58
     mr r4, r3
     addi r3, r1, 0x29c
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     addi r4, r1, 0x29c
     b lbl_fn_803D2A6C_00000F68
 lbl_fn_803D2A6C_00000F58:
@@ -1351,7 +1351,7 @@ lbl_fn_803D2A6C_00000F58:
     addi r4, r3, 0xc
 lbl_fn_803D2A6C_00000F68:
     addi r3, r1, 0x458
-    bl fn_8001047C
+    bl vec3_assign
     lfs f1, 0x45c(r1)
     lfs f0, lbl_80885DDC
     fadds f0, f1, f0
@@ -1360,7 +1360,7 @@ lbl_fn_803D2A6C_00000F68:
     mr r4, r3
     addi r3, r1, 0x44c
     addi r5, r1, 0x458
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f1, 0x454(r1)
     lfs f0, lbl_80885D58
     fcmpo cr0, f1, f0
@@ -1414,7 +1414,7 @@ lbl_fn_803D2A6C_0000100C:
     bl fn_8013C43C
     cmpwi r3, 0x0
     bne lbl_fn_803D2A6C_0000118C
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_803761A4
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_0000118C
@@ -1445,7 +1445,7 @@ lbl_fn_803D2A6C_00001090:
     beq lbl_fn_803D2A6C_000010E4
     mr r4, r3
     addi r3, r1, 0x290
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     addi r4, r1, 0x290
     b lbl_fn_803D2A6C_00001100
 lbl_fn_803D2A6C_000010E4:
@@ -1458,7 +1458,7 @@ lbl_fn_803D2A6C_000010E4:
     addi r4, r3, 0xc
 lbl_fn_803D2A6C_00001100:
     addi r3, r1, 0x440
-    bl fn_8001047C
+    bl vec3_assign
     lfs f0, 0x444(r1)
     fadds f0, f0, f28
     stfs f0, 0x444(r1)
@@ -1466,7 +1466,7 @@ lbl_fn_803D2A6C_00001100:
     mr r4, r3
     addi r3, r1, 0x434
     addi r5, r1, 0x440
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f0, 0x43c(r1)
     fcmpo cr0, f0, f27
     cror eq, gt, eq
@@ -1513,7 +1513,7 @@ lbl_fn_803D2A6C_0000118C:
     mr r4, r3
     addi r3, r1, 0x428
     addi r4, r4, 0xc
-    bl fn_8001047C
+    bl vec3_assign
     addi r3, r1, 0x608
     bl fn_803D7280
     bl fn_801A03E0
@@ -1526,7 +1526,7 @@ lbl_fn_803D2A6C_000011F0:
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00001260
     addi r3, r1, 0x41c
-    bl fn_80057A64
+    bl mission_updateStub
     lwz r12, 0x0(r20)
     mr r3, r20
     addi r4, r1, 0x41c
@@ -1537,7 +1537,7 @@ lbl_fn_803D2A6C_000011F0:
     beq lbl_fn_803D2A6C_00001250
     addi r3, r1, 0x274
     addi r4, r1, 0x41c
-    bl fn_8001047C
+    bl vec3_assign
     mr r4, r3
     mr r5, r20
     addi r3, r1, 0x280
@@ -1570,7 +1570,7 @@ lbl_fn_803D2A6C_0000128C:
     bl fn_803D731C
     mr r4, r3
     addi r3, r1, 0x410
-    bl fn_8001047C
+    bl vec3_assign
     addi r3, r1, 0x268
     addi r4, r1, 0x428
     addi r5, r1, 0x410
@@ -1607,7 +1607,7 @@ lbl_fn_803D2A6C_000012EC:
     mr r4, r3
     mr r5, r21
     addi r3, r1, 0x404
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lis r21, lbl_807506A0@ha
     lwz r3, 0x874(r24)
     addi r21, r21, lbl_807506A0@l
@@ -1647,7 +1647,7 @@ lbl_fn_803D2A6C_00001394:
     mr r4, r3
     mr r5, r22
     addi r3, r1, 0x3f8
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lwz r3, 0x878(r23)
     addi r4, r21, 0x10a2
     lfs f1, 0x3f8(r1)
@@ -1757,28 +1757,28 @@ lbl_fn_803D2A6C_000014EC:
     addi r21, r21, lbl_807506A0@l
     lwz r3, 0x72c(r24)
     addi r4, r21, 0x10c6
-    bl fn_801F48C8
+    bl save_parseSlotStats
     addi r3, r1, 0x238
     addi r4, r1, 0x3e8
     bl fn_803D7014
     mr r5, r3
     lwz r3, 0x72c(r24)
     addi r4, r21, 0x10cc
-    bl fn_801F48C8
+    bl save_parseSlotStats
     addi r3, r1, 0x228
     addi r4, r1, 0x3e8
     bl fn_803D7014
     mr r5, r3
     lwz r3, 0x730(r24)
     addi r4, r21, 0x10c6
-    bl fn_801F48C8
+    bl save_parseSlotStats
     addi r3, r1, 0x218
     addi r4, r1, 0x3e8
     bl fn_803D7014
     mr r5, r3
     lwz r3, 0x730(r24)
     addi r4, r21, 0x10cc
-    bl fn_801F48C8
+    bl save_parseSlotStats
     lwz r0, 0x734(r24)
     cmpwi r0, 0x0
     bne lbl_fn_803D2A6C_000015F8
@@ -1819,9 +1819,9 @@ lbl_fn_803D2A6C_00001634:
     li r0, 0x0
     stw r0, 0x738(r24)
     addi r3, r1, 0x3dc
-    bl fn_80057A64
+    bl mission_updateStub
     addi r3, r1, 0x3d0
-    bl fn_80057A64
+    bl mission_updateStub
     bl fn_8000D9E8
     bl fn_8000DCF4
     mr r19, r3
@@ -1834,7 +1834,7 @@ lbl_fn_803D2A6C_00001634:
     beq lbl_fn_803D2A6C_00001688
     mr r4, r3
     addi r3, r1, 0x208
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     addi r4, r1, 0x208
     b lbl_fn_803D2A6C_00001698
 lbl_fn_803D2A6C_00001688:
@@ -1853,7 +1853,7 @@ lbl_fn_803D2A6C_00001698:
     mr r4, r3
     addi r3, r1, 0x1fc
     addi r5, r1, 0x3dc
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     addi r3, r1, 0x3d0
     addi r4, r1, 0x1fc
     bl vec3_copy
@@ -1952,10 +1952,10 @@ lbl_fn_803D2A6C_0000181C:
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00001BEC
 lbl_fn_803D2A6C_00001838:
-    bl fn_80121F00
+    bl equip_getGlobalManager
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00001864
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_803D7058
     bl fn_803D7044
     cmpwi r3, 0x0
@@ -2153,7 +2153,7 @@ lbl_fn_803D2A6C_00001ADC:
     mr r5, r3
     lwz r3, 0x318(r21)
     addi r4, r31, 0x1107
-    bl fn_801F837C
+    bl save_findEntryByName
     cmpwi r19, 0x1
     bne lbl_fn_803D2A6C_00001B48
     lwz r0, 0x2660(r24)
@@ -2271,7 +2271,7 @@ lbl_fn_803D2A6C_00001CBC:
     bl fn_800F7FB4
     cmpwi r3, 0x5
     bne lbl_fn_803D2A6C_00001D4C
-    bl fn_80121F00
+    bl equip_getGlobalManager
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00001D4C
     mr r3, r19
@@ -2279,12 +2279,12 @@ lbl_fn_803D2A6C_00001CBC:
     subis r0, r3, 0x4
     cmplwi r0, 0x9a85
     bne lbl_fn_803D2A6C_00001D20
-    bl fn_80121F00
+    bl equip_getGlobalManager
     li r4, 0x4ba
     bl world_getGlobalFlag
     cmpwi r3, 0x1e
     beq lbl_fn_803D2A6C_00001D1C
-    bl fn_80121F00
+    bl equip_getGlobalManager
     li r4, 0x4c2
     bl world_getGlobalFlag
     cmpwi r3, 0xe
@@ -2292,12 +2292,12 @@ lbl_fn_803D2A6C_00001CBC:
 lbl_fn_803D2A6C_00001D1C:
     li r20, 0x1
 lbl_fn_803D2A6C_00001D20:
-    bl fn_80121F00
+    bl equip_getGlobalManager
     li r4, 0x4ba
     bl world_getGlobalFlag
     cmpwi r3, 0x1f
     beq lbl_fn_803D2A6C_00001D48
-    bl fn_80121F00
+    bl equip_getGlobalManager
     li r4, 0x4c2
     bl world_getGlobalFlag
     cmpwi r3, 0xf
@@ -2381,7 +2381,7 @@ lbl_fn_803D2A6C_00001E2C:
     bl fn_803D71F4
     mr r4, r3
     addi r3, r1, 0x1f0
-    bl fn_8001047C
+    bl vec3_assign
     mr r23, r3
     bl fn_8013A194
     mr r4, r23
@@ -2495,23 +2495,23 @@ lbl_fn_803D2A6C_00001FF8:
     bne lbl_fn_803D2A6C_00002154
     addi r3, r1, 0x3c4
     addi r4, r24, 0x888
-    bl fn_8001047C
+    bl vec3_assign
     bl fn_8008B964
     mr r4, r3
     addi r3, r1, 0x1e4
     addi r5, r1, 0x3c4
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     addi r3, r1, 0x3c4
     addi r4, r1, 0x1e4
     bl vec3_copy
     addi r3, r1, 0x3b8
     addi r4, r24, 0x894
-    bl fn_8001047C
+    bl vec3_assign
     bl fn_8008B964
     mr r4, r3
     addi r3, r1, 0x1d8
     addi r5, r1, 0x3b8
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     addi r3, r1, 0x3b8
     addi r4, r1, 0x1d8
     bl vec3_copy
@@ -2674,28 +2674,28 @@ lbl_fn_803D2A6C_00002268:
     mr r5, r3
     lwz r3, 0xd70(r24)
     addi r4, r23, 0x10c6
-    bl fn_801F48C8
+    bl save_parseSlotStats
     addi r3, r1, 0x198
     addi r4, r1, 0x3a8
     bl fn_803D7014
     mr r5, r3
     lwz r3, 0xd70(r24)
     addi r4, r23, 0x10cc
-    bl fn_801F48C8
+    bl save_parseSlotStats
     addi r3, r1, 0x188
     addi r4, r1, 0x3a8
     bl fn_803D7014
     mr r5, r3
     lwz r3, 0xd74(r24)
     addi r4, r23, 0x10c6
-    bl fn_801F48C8
+    bl save_parseSlotStats
     addi r3, r1, 0x178
     addi r4, r1, 0x3a8
     bl fn_803D7014
     mr r5, r3
     lwz r3, 0xd74(r24)
     addi r4, r23, 0x10cc
-    bl fn_801F48C8
+    bl save_parseSlotStats
     lwz r3, 0xd74(r24)
     bl fn_803CFC6C
     lfs f0, lbl_80885D60
@@ -2797,7 +2797,7 @@ lbl_fn_803D2A6C_00002464:
     bl fn_803D73A4
     lfs f24, lbl_80885D58
     mr r31, r3
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl magic_getOffset6C
     bl fn_803D6EEC
     bl fn_80113CCC
@@ -2806,10 +2806,10 @@ lbl_fn_803D2A6C_00002464:
     addi r5, r31, 0x4
     bl vec3_sub
     addi r3, r1, 0x398
-    bl fn_8000D3A4
+    bl vec3_mag
     fmr f25, f1
     addi r3, r1, 0x398
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
     fcmpo cr0, f25, f30
     blt lbl_fn_803D2A6C_00002ACC
     lwz r0, 0x0(r31)
@@ -3023,10 +3023,10 @@ lbl_fn_803D2A6C_000027AC:
     addi r3, r1, 0x38c
     addi r4, r31, 0x4
     addi r5, r1, 0x168
-    bl fn_80013410
+    bl vec3_add
     stfs f28, 0x39c(r1)
     addi r3, r1, 0x398
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
     cmpwi r27, 0x0
     beq lbl_fn_803D2A6C_00002858
     mr r3, r27
@@ -3036,7 +3036,7 @@ lbl_fn_803D2A6C_000027AC:
     lfs f3, lbl_80885D60
     addi r3, r1, 0x15c
     fmr f2, f1
-    bl fn_8000D114
+    bl vec3_set
     mr r4, r3
     mr r5, r31
     addi r3, r1, 0x380
@@ -3044,35 +3044,35 @@ lbl_fn_803D2A6C_000027AC:
     addi r3, r1, 0x150
     addi r4, r1, 0x380
     addi r5, r1, 0x398
-    bl fn_80013410
+    bl vec3_add
     addi r3, r1, 0x398
     addi r4, r1, 0x150
     bl vec3_copy
     addi r3, r1, 0x398
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
     addi r3, r1, 0x144
     addi r4, r1, 0x380
     addi r5, r1, 0x398
-    bl fn_80013410
+    bl vec3_add
     addi r3, r1, 0x398
     addi r4, r1, 0x144
     bl vec3_copy
     addi r3, r1, 0x398
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
 lbl_fn_803D2A6C_00002858:
     addi r3, r1, 0x374
     addi r4, r1, 0x398
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lfs f1, 0x2668(r24)
     addi r3, r1, 0x368
     fmr f2, f1
     fmr f3, f1
-    bl fn_8000D114
+    bl vec3_set
     lfs f1, 0x266c(r24)
     addi r3, r1, 0x35c
     fmr f2, f1
     fmr f3, f1
-    bl fn_8000D114
+    bl vec3_set
     lfs f0, 0x2674(r24)
     fcmpo cr0, f0, f25
     bge lbl_fn_803D2A6C_0000289C
@@ -3100,7 +3100,7 @@ lbl_fn_803D2A6C_000028C4:
     fmr f2, f1
     fmr f3, f1
     fdivs f24, f26, f0
-    bl fn_8000D114
+    bl vec3_set
     fmr f1, f24
     addi r3, r1, 0x138
     addi r4, r1, 0x35c
@@ -3299,7 +3299,7 @@ lbl_fn_803D2A6C_00002BA4:
     lfs f2, lbl_80885D58
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lis r23, lbl_807506A0@ha
     fmr f24, f1
     addi r23, r23, lbl_807506A0@l
@@ -3323,23 +3323,23 @@ lbl_fn_803D2A6C_00002BA4:
 lbl_fn_803D2A6C_00002C30:
     cmpwi r29, 0x0
     bne lbl_fn_803D2A6C_00002C88
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_803D6E24
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00002C88
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_803D6E24
     cmpwi r3, 0x7
     beq lbl_fn_803D2A6C_00002C88
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_803D6E24
     cmpwi r3, 0x9
     beq lbl_fn_803D2A6C_00002C88
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_803D6E24
     cmpwi r3, 0xa
     beq lbl_fn_803D2A6C_00002C88
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_803D6E24
     cmpwi r3, 0xe
     bne lbl_fn_803D2A6C_00002F18
@@ -3524,15 +3524,15 @@ lbl_fn_803D2A6C_00002F10:
 lbl_fn_803D2A6C_00002F18:
     cmpwi r29, 0x0
     bne lbl_fn_803D2A6C_00002F50
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_803D6E24
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00002F50
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_803D6E24
     cmpwi r3, 0x7
     beq lbl_fn_803D2A6C_00002F50
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_803D6E24
     cmpwi r3, 0xe
     bne lbl_fn_803D2A6C_000042F8
@@ -3562,7 +3562,7 @@ lbl_fn_803D2A6C_00002F80:
     beq lbl_fn_803D2A6C_00002FBC
     mr r4, r3
     addi r3, r1, 0x114
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     addi r4, r1, 0x114
     b lbl_fn_803D2A6C_00002FCC
 lbl_fn_803D2A6C_00002FBC:
@@ -3572,7 +3572,7 @@ lbl_fn_803D2A6C_00002FBC:
     addi r4, r3, 0xc
 lbl_fn_803D2A6C_00002FCC:
     addi r3, r1, 0x338
-    bl fn_8001047C
+    bl vec3_assign
     lfs f0, 0x33c(r1)
     fadds f0, f0, f30
     stfs f0, 0x33c(r1)
@@ -3580,7 +3580,7 @@ lbl_fn_803D2A6C_00002FCC:
     mr r4, r3
     addi r3, r1, 0x32c
     addi r5, r1, 0x338
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f0, 0x334(r1)
     fcmpo cr0, f29, f0
     bge lbl_fn_803D2A6C_00003088
@@ -3607,12 +3607,12 @@ lbl_fn_803D2A6C_00002FCC:
     addi r4, r23, 0x1181
     lwz r5, 0x0(r25)
     li r6, 0x0
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r3, 0x3ec(r24)
     addi r4, r23, 0x1188
     lwz r5, 0x0(r25)
     li r6, 0x0
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r3, 0x3ec(r24)
     bl fn_801F4484
     lwz r3, 0x3ec(r24)
@@ -3636,14 +3636,14 @@ lbl_fn_803D2A6C_0000309C:
     beq lbl_fn_803D2A6C_00003814
 lbl_fn_803D2A6C_000030BC:
     addi r3, r1, 0x320
-    bl fn_80057A64
+    bl mission_updateStub
     bl fn_8000D9E8
     bl fn_8000DCF4
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_000030EC
     bl fn_8000D9E8
     bl fn_8000DCF4
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r1, 0x320
     bl vec3_copy
@@ -3710,7 +3710,7 @@ lbl_fn_803D2A6C_00003150:
     bne lbl_fn_803D2A6C_00003368
 lbl_fn_803D2A6C_000031D8:
     mr r3, r19
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r5, r3
     addi r3, r1, 0x108
     addi r4, r1, 0x320
@@ -3862,7 +3862,7 @@ lbl_fn_803D2A6C_00003398:
     bne lbl_fn_803D2A6C_00003580
 lbl_fn_803D2A6C_000033FC:
     mr r3, r19
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r5, r3
     addi r3, r1, 0xfc
     addi r4, r1, 0x320
@@ -3976,9 +3976,9 @@ lbl_fn_803D2A6C_0000358C:
     cmpwi r19, 0x0
     bne lbl_fn_803D2A6C_00003398
     addi r3, r1, 0x314
-    bl fn_80057A64
+    bl mission_updateStub
     addi r3, r1, 0x308
-    bl fn_80057A64
+    bl mission_updateStub
     lis r3, lbl_80750650@ha
     lis r4, lbl_807506A0@ha
     lfs f27, lbl_80885D68
@@ -4000,7 +4000,7 @@ lbl_fn_803D2A6C_000035CC:
     beq lbl_fn_803D2A6C_00003600
     mr r4, r3
     addi r3, r1, 0xf0
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     addi r4, r1, 0xf0
     b lbl_fn_803D2A6C_00003610
 lbl_fn_803D2A6C_00003600:
@@ -4018,7 +4018,7 @@ lbl_fn_803D2A6C_00003610:
     mr r4, r3
     addi r3, r1, 0xe4
     addi r5, r1, 0x314
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     addi r3, r1, 0x308
     addi r4, r1, 0xe4
     bl vec3_copy
@@ -4153,9 +4153,9 @@ lbl_fn_803D2A6C_00003814:
     beq lbl_fn_803D2A6C_00003C94
     addi r3, r1, 0x2fc
     li r18, 0x0
-    bl fn_80057A64
+    bl mission_updateStub
     addi r3, r1, 0x2f0
-    bl fn_80057A64
+    bl mission_updateStub
     bl fn_80323C2C
     bl fn_8036554C
     lis r4, lbl_807506A0@ha
@@ -4185,7 +4185,7 @@ lbl_fn_803D2A6C_00003864:
     bl atn_Model_getBoneMatrix
     mr r4, r3
     addi r3, r1, 0xd8
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     addi r3, r1, 0x2fc
     addi r4, r1, 0xd8
     bl vec3_copy
@@ -4196,7 +4196,7 @@ lbl_fn_803D2A6C_00003864:
     mr r4, r3
     addi r3, r1, 0xcc
     addi r5, r1, 0x2fc
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     addi r3, r1, 0x2f0
     addi r4, r1, 0xcc
     bl vec3_copy
@@ -4244,21 +4244,21 @@ lbl_fn_803D2A6C_00003968:
     mr r5, r3
     lwz r3, 0x6fc(r21)
     addi r4, r23, 0x11a0
-    bl fn_801F837C
+    bl save_findEntryByName
     bl fn_803D70A0
     li r4, 0xe8
     bl fn_803D7084
     mr r5, r3
     lwz r3, 0x6fc(r21)
     addi r4, r23, 0x11ab
-    bl fn_801F837C
+    bl save_findEntryByName
     bl fn_803D70A0
     li r4, 0xe8
     bl fn_803D7084
     mr r5, r3
     lwz r3, 0x6fc(r21)
     addi r4, r23, 0x11b9
-    bl fn_801F837C
+    bl save_findEntryByName
     b lbl_fn_803D2A6C_00003A28
 lbl_fn_803D2A6C_000039D4:
     bl fn_803D70A0
@@ -4267,21 +4267,21 @@ lbl_fn_803D2A6C_000039D4:
     mr r5, r3
     lwz r3, 0x6fc(r21)
     addi r4, r23, 0x11a0
-    bl fn_801F837C
+    bl save_findEntryByName
     bl fn_803D70A0
     li r4, 0xe9
     bl fn_803D7084
     mr r5, r3
     lwz r3, 0x6fc(r21)
     addi r4, r23, 0x11ab
-    bl fn_801F837C
+    bl save_findEntryByName
     bl fn_803D70A0
     li r4, 0xe9
     bl fn_803D7084
     mr r5, r3
     lwz r3, 0x6fc(r21)
     addi r4, r23, 0x11b9
-    bl fn_801F837C
+    bl save_findEntryByName
 lbl_fn_803D2A6C_00003A28:
     addi r18, r18, 0x1
     addi r21, r21, 0x4
@@ -4338,7 +4338,7 @@ lbl_fn_803D2A6C_00003A84:
     bl atn_Model_getBoneMatrix
     mr r4, r3
     addi r3, r1, 0xc0
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     addi r3, r1, 0x2fc
     addi r4, r1, 0xc0
     bl vec3_copy
@@ -4349,7 +4349,7 @@ lbl_fn_803D2A6C_00003A84:
     mr r4, r3
     addi r3, r1, 0xb4
     addi r5, r1, 0x2fc
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     addi r3, r1, 0x2f0
     addi r4, r1, 0xb4
     bl vec3_copy
@@ -4397,21 +4397,21 @@ lbl_fn_803D2A6C_00003BB0:
     mr r5, r3
     lwz r3, 0x6fc(r21)
     addi r4, r23, 0x11a0
-    bl fn_801F837C
+    bl save_findEntryByName
     bl fn_803D70A0
     li r4, 0xe8
     bl fn_803D7084
     mr r5, r3
     lwz r3, 0x6fc(r21)
     addi r4, r23, 0x11ab
-    bl fn_801F837C
+    bl save_findEntryByName
     bl fn_803D70A0
     li r4, 0xe8
     bl fn_803D7084
     mr r5, r3
     lwz r3, 0x6fc(r21)
     addi r4, r23, 0x11b9
-    bl fn_801F837C
+    bl save_findEntryByName
     b lbl_fn_803D2A6C_00003C70
 lbl_fn_803D2A6C_00003C1C:
     bl fn_803D70A0
@@ -4420,21 +4420,21 @@ lbl_fn_803D2A6C_00003C1C:
     mr r5, r3
     lwz r3, 0x6fc(r21)
     addi r4, r23, 0x11a0
-    bl fn_801F837C
+    bl save_findEntryByName
     bl fn_803D70A0
     li r4, 0xe9
     bl fn_803D7084
     mr r5, r3
     lwz r3, 0x6fc(r21)
     addi r4, r23, 0x11ab
-    bl fn_801F837C
+    bl save_findEntryByName
     bl fn_803D70A0
     li r4, 0xe9
     bl fn_803D7084
     mr r5, r3
     lwz r3, 0x6fc(r21)
     addi r4, r23, 0x11b9
-    bl fn_801F837C
+    bl save_findEntryByName
 lbl_fn_803D2A6C_00003C70:
     addi r18, r18, 0x1
     addi r21, r21, 0x4
@@ -4578,7 +4578,7 @@ lbl_fn_803D2A6C_00003E5C:
     beq lbl_fn_803D2A6C_00003F50
     addi r3, r1, 0x2e4
     addi r4, r24, 0xd44
-    bl fn_8001047C
+    bl vec3_assign
     lwz r3, 0xd50(r24)
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00003F2C
@@ -4594,15 +4594,15 @@ lbl_fn_803D2A6C_00003E5C:
     addi r3, r1, 0xa8
     lfs f2, lbl_80885D68
     fmr f3, f1
-    bl fn_8000D114
+    bl vec3_set
     mr r23, r3
     mr r4, r18
     addi r3, r1, 0x9c
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     mr r5, r23
     addi r3, r1, 0x90
     addi r4, r1, 0x9c
-    bl fn_80013410
+    bl vec3_add
     addi r4, r1, 0x90
     b lbl_fn_803D2A6C_00003F24
 lbl_fn_803D2A6C_00003EF0:
@@ -4610,14 +4610,14 @@ lbl_fn_803D2A6C_00003EF0:
     addi r3, r1, 0x84
     lfs f2, lbl_80885E74
     fmr f3, f1
-    bl fn_8000D114
+    bl vec3_set
     mr r23, r3
     lwz r3, 0xd50(r24)
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     mr r5, r23
     addi r3, r1, 0x78
-    bl fn_80013410
+    bl vec3_add
     addi r4, r1, 0x78
 lbl_fn_803D2A6C_00003F24:
     addi r3, r1, 0x2e4
@@ -4627,7 +4627,7 @@ lbl_fn_803D2A6C_00003F2C:
     mr r4, r3
     addi r3, r1, 0x6c
     addi r5, r1, 0x2e4
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     addi r3, r24, 0xd60
     addi r4, r1, 0x6c
     bl vec3_copy
@@ -4759,14 +4759,14 @@ lbl_fn_803D2A6C_0000411C:
     addi r3, r1, 0x60
     lfs f2, lbl_80885E60
     fmr f3, f1
-    bl fn_8000D114
+    bl vec3_set
     mr r23, r3
     mr r3, r25
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     mr r5, r23
     addi r3, r1, 0x2d8
-    bl fn_80013410
+    bl vec3_add
     mr r3, r25
     bl fn_803D71D4
     cmpwi r3, 0x0
@@ -4779,14 +4779,14 @@ lbl_fn_803D2A6C_0000411C:
     addi r3, r1, 0x48
     lfs f2, lbl_80885E7C
     fmr f3, f1
-    bl fn_8000D114
+    bl vec3_set
     mr r23, r3
     mr r3, r25
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     mr r5, r23
     addi r3, r1, 0x54
-    bl fn_80013410
+    bl vec3_add
     addi r3, r1, 0x2d8
     addi r4, r1, 0x54
     bl vec3_copy
@@ -4795,7 +4795,7 @@ lbl_fn_803D2A6C_000041B0:
     mr r4, r3
     addi r3, r1, 0x2cc
     addi r5, r1, 0x2d8
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f0, lbl_80885D58
     lfs f1, 0x2d4(r1)
     fcmpo cr0, f0, f1
@@ -4842,19 +4842,19 @@ lbl_fn_803D2A6C_00004258:
     addi r3, r1, 0x30
     lfs f2, lbl_80885E60
     fmr f3, f1
-    bl fn_8000D114
+    bl vec3_set
     mr r23, r3
     mr r3, r25
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     mr r5, r23
     addi r3, r1, 0x3c
-    bl fn_80013410
+    bl vec3_add
     bl fn_8008B964
     mr r4, r3
     addi r3, r1, 0x2c0
     addi r5, r1, 0x3c
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f0, lbl_80885D58
     lfs f1, 0x2c8(r1)
     fcmpo cr0, f0, f1

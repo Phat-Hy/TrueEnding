@@ -13,16 +13,16 @@ extern void fn_800C16C0(void);
 extern void fn_800C18BC(void);
 extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_8011FE3C(void);
-extern void fn_80144710(void);
-extern void fn_8015495C(void);
+extern void quest_evaluateConditions(void);
+extern void equip_applyToCharacter(void);
 extern void actor_setState(void);
 extern void fn_8016EB48(void);
 extern void fn_80170F20(void);
 extern void fn_803C1560(void);
 extern void fn_803CD958(void);
-extern void fn_803EC568(void);
-extern void fn_803EC69C(void);
-extern void fn_803EC91C(void);
+extern void task_createWorker(void);
+extern void task_destroyWorker(void);
+extern void task_updateWorker(void);
 extern void fn_8041D180(void);
 extern void fn_8041D198(void);
 extern void fn_8041E480(void);
@@ -251,7 +251,7 @@ asm void fn_8041EBF4(void)
     mr r30, r3
     lwz r5, 0x18(r5)
     lwz r6, 0x1c(r31)
-    bl fn_803EC568
+    bl task_createWorker
     lis r3, lbl_8078DFB0@ha
     li r4, 0x0
     addi r3, r3, lbl_8078DFB0@l
@@ -283,7 +283,7 @@ asm void fn_8041EC70(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_803EC91C
+    bl task_updateWorker
     cmpwi r3, 0x0
     bne lbl_fn_8041EC70_00000288
     li r0, 0x2
@@ -456,7 +456,7 @@ lbl_fn_8041EE28_00000470:
     stfs f2, 0x53c(r5)
     bl fn_8041F6A4
     lwz r3, 0x11c(r31)
-    bl fn_80144710
+    bl quest_evaluateConditions
     lwz r3, 0x11c(r31)
     li r4, 0x1
     lfs f0, lbl_80886598
@@ -531,7 +531,7 @@ asm void fn_8041EF90(void)
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     lwz r3, 0x120(r31)
     li r4, 0x0
     li r5, 0x0
@@ -1027,7 +1027,7 @@ asm void fn_8041F6A4(void)
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     lwz r3, 0x120(r31)
     li r4, 0x0
     li r5, 0x0
@@ -1480,7 +1480,7 @@ lbl_fn_8041F6A4_0000101C:
     lwz r0, 0x50(r8)
     stw r0, 0x128(r3)
     mr r3, r8
-    bl fn_8015495C
+    bl equip_applyToCharacter
     lwz r3, 0x120(r31)
     li r4, 0x0
     li r5, 0x0
@@ -1536,7 +1536,7 @@ asm void fn_8041FE80(void)
     mr r30, r3
     beq lbl_fn_8041FE80_000014A0
     li r4, 0x0
-    bl fn_803EC69C
+    bl task_destroyWorker
     cmpwi r31, 0x0
     ble lbl_fn_8041FE80_000014A0
     mr r3, r30
@@ -1598,7 +1598,7 @@ asm void fn_8041FF08(void)
     mr r4, r28
     mr r5, r29
     mr r6, r31
-    bl fn_803EC568
+    bl task_createWorker
     lis r3, lbl_8078E048@ha
     lfs f0, lbl_808865B8
     addi r3, r3, lbl_8078E048@l
@@ -1687,7 +1687,7 @@ lbl_fn_8042000C_00001674:
 lbl_fn_8042000C_00001680:
     mr r3, r29
     li r4, 0x0
-    bl fn_803EC69C
+    bl task_destroyWorker
     cmpwi r30, 0x0
     ble lbl_fn_8042000C_0000169C
     mr r3, r29
@@ -1711,7 +1711,7 @@ asm void fn_804200D8(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_803EC91C
+    bl task_updateWorker
     cmpwi r3, 0x0
     beq lbl_fn_804200D8_000016EC
     li r0, 0x1

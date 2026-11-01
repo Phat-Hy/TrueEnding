@@ -5,7 +5,7 @@
 extern void _restgpr_21(void);
 extern void _savegpr_21(void);
 extern void item_useConsumable(void);
-extern void fn_8004D388(void);
+extern void collision_queryGeometry(void);
 extern void collision_testLineSegment(void);
 extern void fn_800A55D4(void);
 extern void fn_800A56A8(void);
@@ -28,8 +28,8 @@ extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
-extern void fn_8068A850(void);
-extern void fn_8068AD58(void);
+extern void std_sin(void);
+extern void std_cos(void);
 extern void fn_8068AEA0(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
@@ -2676,7 +2676,7 @@ lbl_fn_8037F9AC_0000250C:
     psq_st f1, 0x0(r25), 0, 0
     lfs f1, lbl_80885A38
     stfs f2, 0x390(r1)
-    bl fn_8004D388
+    bl collision_queryGeometry
     cmpwi r3, 0x0
     beq lbl_fn_8037F9AC_000025B0
     lfs f7, 0x398(r1)
@@ -3187,7 +3187,7 @@ lbl_fn_8037F9AC_00002CF4:
     addi r7, r7, 0x8
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004D388
+    bl collision_queryGeometry
     cmpwi r3, 0x0
     beq lbl_fn_8037F9AC_00002E4C
     addi r4, r1, 0xbd8
@@ -3290,7 +3290,7 @@ lbl_fn_8037F9AC_00002EA0:
     fmr f25, f0
 lbl_fn_8037F9AC_00002EA4:
     lfs f1, 0x464(r1)
-    bl fn_8068A850
+    bl std_sin
     lfs f0, 0xc(r31)
     frsp f9, f1
     lfs f7, 0x484(r1)
@@ -3307,7 +3307,7 @@ lbl_fn_8037F9AC_00002EDC:
     fmr f24, f0
 lbl_fn_8037F9AC_00002EE0:
     lfs f1, 0x464(r1)
-    bl fn_8068AD58
+    bl std_cos
     lfs f7, 0xc(r31)
     frsp f8, f1
     addi r3, r1, 0x490

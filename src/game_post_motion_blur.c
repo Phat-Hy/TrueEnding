@@ -8,13 +8,13 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void system_getNextSequenceId(void);
 extern void fn_80126214(void);
 extern void fn_8013A258(void);
-extern void fn_8013CB68(void);
-extern void fn_80151448(void);
+extern void npc_updateTalkInteraction(void);
+extern void inventory_applyItemStats(void);
 extern void actor_setState(void);
 extern void fn_80170A20(void);
 extern void fn_8017A300(void);
 extern void sound_initGlobalInstances(void);
-extern void fn_8023A680(void);
+extern void res_Shader_bindParams(void);
 extern void fn_802C4858(void);
 extern void fn_802C4B70(void);
 extern void world_getLocalFlag(void);
@@ -27,7 +27,7 @@ extern void PSVECNormalize(void);
 extern void PSVECMag(void);
 extern void rand(void);
 extern void wcscpy(void);
-extern void fn_8068AD58(void);
+extern void std_cos(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
 extern void math_u64DivMod(void);
@@ -113,7 +113,7 @@ asm void fn_802C1FEC(void)
     fsubs f2, f2, f3
     fmuls f1, f1, f2
     fmuls f1, f0, f1
-    bl fn_8068AD58
+    bl std_cos
     frsp f2, f1
     lfs f1, lbl_8088433C
     lfs f0, lbl_80884338
@@ -133,7 +133,7 @@ lbl_fn_802C1FEC_00000080:
     fsubs f2, f2, f3
     fmuls f1, f1, f2
     fmuls f1, f0, f1
-    bl fn_8068AD58
+    bl std_cos
     frsp f2, f1
     lfs f1, lbl_8088433C
     lfs f0, lbl_80884338
@@ -160,7 +160,7 @@ lbl_fn_802C1FEC_000000D4:
     fsubs f2, f2, f3
     fmuls f1, f1, f2
     fmuls f1, f0, f1
-    bl fn_8068AD58
+    bl std_cos
     frsp f1, f1
     lfs f0, lbl_80884344
     lfs f2, lbl_808842AC
@@ -179,7 +179,7 @@ lbl_fn_802C1FEC_0000012C:
     fsubs f2, f2, f3
     fmuls f1, f1, f2
     fmuls f1, f0, f1
-    bl fn_8068AD58
+    bl std_cos
     frsp f1, f1
     lfs f0, lbl_80884344
     fmadds f2, f0, f1, f0
@@ -202,7 +202,7 @@ lbl_fn_802C1FEC_0000017C:
     fsubs f2, f2, f3
     fmuls f1, f1, f2
     fmuls f1, f0, f1
-    bl fn_8068AD58
+    bl std_cos
     frsp f1, f1
     lfs f0, lbl_80884344
     lfs f2, lbl_808842AC
@@ -221,7 +221,7 @@ lbl_fn_802C1FEC_000001C8:
     fsubs f2, f2, f3
     fmuls f1, f1, f2
     fmuls f1, f0, f1
-    bl fn_8068AD58
+    bl std_cos
     frsp f1, f1
     lfs f0, lbl_80884344
     fmadds f2, f0, f1, f0
@@ -650,7 +650,7 @@ lbl_fn_802C25C4_00000794:
     li r9, 0x0
     stw r29, 0x10(r1)
     li r10, 0x0
-    bl fn_8023A680
+    bl res_Shader_bindParams
     b lbl_fn_802C25C4_00000844
 lbl_fn_802C25C4_000007EC:
     li r0, 0x0
@@ -732,7 +732,7 @@ lbl_fn_802C25C4_00000888:
     lfs f0, 0x10(r5)
     fadds f0, f3, f0
     stfs f0, 0x20(r31)
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r12, 0x0(r30)
     mr r3, r30
     mr r4, r31
@@ -846,7 +846,7 @@ lbl_fn_802C2944_00000A68:
     li r9, 0x0
     lwz r3, lbl_8087F3C0
     li r10, 0x0
-    bl fn_8023A680
+    bl res_Shader_bindParams
     stw r30, 0x15b8(r31)
     b lbl_fn_802C2944_00000AE4
 lbl_fn_802C2944_00000AC4:
@@ -1301,7 +1301,7 @@ lbl_fn_802C2BCC_0000111C:
     mr r3, r29
     addi r4, r1, 0xec
     li r5, 0x1
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
 lbl_fn_802C2BCC_00001134:
     lwz r0, 0x224(r1)
     psq_l f31, 0x218(r1), 0, 0

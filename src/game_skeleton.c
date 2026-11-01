@@ -13,7 +13,7 @@ extern void fn_80084A78(void);
 extern void mem_getAllocSize(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
-extern void fn_80087E9C(void);
+extern void route_createWaypoint(void);
 extern void fn_800B6218(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void atn_LH_Texture_destructAndFree(void);
@@ -33,7 +33,7 @@ extern void fn_80478014(void);
 extern void fn_80478034(void);
 extern void PSVECNormalize(void);
 extern void std_fmod(void);
-extern void fn_806952C4(void);
+extern void msl_releaseRefCount(void);
 extern void runtime_registerStaticObject(void);
 extern void __destroy_arr(void);
 extern void vec3_isNonZero(void);
@@ -223,7 +223,7 @@ lbl_fn_800C122C_0000014C:
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_800C122C_00000194
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_800C122C_00000194:
     lfs f2, 0x40(r1)
     addi r4, r1, 0x28
@@ -380,7 +380,7 @@ lbl_fn_800C1424_00000388:
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_800C1424_000003D0
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_800C1424_000003D0:
     lfs f2, 0x30(r1)
     addi r4, r1, 0x38
@@ -451,10 +451,7 @@ asm void fn_800C16B4(void)
     blr
 }
 
-asm void fn_800C16BC(void)
-{
-    nofralloc
-    blr
+void fn_800C16BC(void) {
 }
 
 asm void fn_800C16C0(void)
@@ -2167,7 +2164,7 @@ asm void fn_800C2E30(void)
     addi r4, r30, 0x27
     addi r5, r28, 0x154
     addi r6, r31, fn_800C2EE0@l
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_80881130
     mr r3, r29
     lfs f2, lbl_80881134

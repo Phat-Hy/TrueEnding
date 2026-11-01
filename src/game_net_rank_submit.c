@@ -21,15 +21,15 @@ extern void atn_Task_setActive(void);
 extern void str_findChar(void);
 extern void fn_8010A828(void);
 extern void fn_80116EB8(void);
-extern void fn_80116FC0(void);
+extern void actor_findSpawnTemplate(void);
 extern void fn_801F4728(void);
 extern void saveSlot_readSummary(void);
 extern void fn_801F6C2C(void);
 extern void fn_801F6D7C(void);
-extern void fn_801F837C(void);
+extern void save_findEntryByName(void);
 extern void fn_801F8830(void);
 extern void thread_findAndNotify(void);
-extern void fn_801FEDBC(void);
+extern void thread_findTaskById(void);
 extern void thread_dispatchToQueue(void);
 extern void profile_getMetricValue(void);
 extern void perf_getMetricValue(void);
@@ -1515,7 +1515,7 @@ lbl_fn_805233FC_000013A4:
     addi r4, r4, lbl_8075C6C4@l
     mr r3, r30
     addi r4, r4, 0x27d
-    bl fn_801F837C
+    bl save_findEntryByName
 lbl_fn_805233FC_000013EC:
     lwz r3, 0x1c(r29)
     slwi r0, r31, 3
@@ -1526,7 +1526,7 @@ lbl_fn_805233FC_000013EC:
     addi r4, r4, lbl_8075C6C4@l
     mr r3, r30
     addi r4, r4, 0x289
-    bl fn_801F837C
+    bl save_findEntryByName
     b lbl_fn_805233FC_00001470
 lbl_fn_805233FC_00001418:
     lwz r3, 0x1c(r29)
@@ -1538,7 +1538,7 @@ lbl_fn_805233FC_00001418:
     addi r26, r26, lbl_8075C6C4@l
     mr r3, r30
     addi r4, r26, 0x27d
-    bl fn_801F837C
+    bl save_findEntryByName
     lwz r0, 0xc(r29)
     addi r4, r31, 0x1
     cmpw r4, r0
@@ -1550,7 +1550,7 @@ lbl_fn_805233FC_00001418:
     mr r5, r3
     mr r3, r30
     addi r4, r26, 0x289
-    bl fn_801F837C
+    bl save_findEntryByName
 lbl_fn_805233FC_00001470:
     lwz r3, 0xfc(r25)
     bl profile_getMetricValue
@@ -1647,7 +1647,7 @@ lbl_fn_805233FC_00001598:
     mr r4, r3
     addi r3, r27, 0x58
     li r5, 0x0
-    bl fn_801FEDBC
+    bl thread_findTaskById
     lwz r0, 0x8(r21)
     cmpwi r0, 0x0
     bne lbl_fn_805233FC_000015E0
@@ -1751,7 +1751,7 @@ lbl_fn_805233FC_00001724:
     lis r27, 0xf
     li r3, 0x0
     addi r4, r27, 0x42a6
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lis r26, lbl_8075C6C4@ha
     mr r22, r3
     addi r26, r26, lbl_8075C6C4@l
@@ -1764,7 +1764,7 @@ lbl_fn_805233FC_00001724:
     bl thread_dispatchToQueue
     addi r4, r27, 0x42aa
     li r3, 0x0
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     mr r22, r3
     addi r3, r26, 0x2d1
     bl str_findChar
@@ -1780,7 +1780,7 @@ lbl_fn_805233FC_0000179C:
     lis r27, 0xf
     li r3, 0x0
     addi r4, r27, 0x42a4
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lis r26, lbl_8075C6C4@ha
     mr r22, r3
     addi r26, r26, lbl_8075C6C4@l
@@ -1793,7 +1793,7 @@ lbl_fn_805233FC_0000179C:
     bl thread_dispatchToQueue
     addi r4, r27, 0x42a8
     li r3, 0x0
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     mr r22, r3
     addi r3, r26, 0x2d1
     bl str_findChar
@@ -1806,7 +1806,7 @@ lbl_fn_805233FC_0000180C:
     lis r27, 0xf
     li r3, 0x0
     addi r4, r27, 0x42a5
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lis r26, lbl_8075C6C4@ha
     mr r22, r3
     addi r26, r26, lbl_8075C6C4@l
@@ -1819,7 +1819,7 @@ lbl_fn_805233FC_0000180C:
     bl thread_dispatchToQueue
     addi r4, r27, 0x42a9
     li r3, 0x0
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     mr r22, r3
     addi r3, r26, 0x2d1
     bl str_findChar

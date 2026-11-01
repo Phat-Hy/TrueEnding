@@ -29,10 +29,10 @@ extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void fn_80108F38(void);
 extern void boss_updatePhaseState(void);
-extern void fn_8015495C(void);
-extern void fn_8016DA4C(void);
+extern void equip_applyToCharacter(void);
+extern void debuff_clearStatus(void);
 extern void actor_setState(void);
-extern void fn_801765D8(void);
+extern void battle_awardExp(void);
 extern void fn_801781B0(void);
 extern void fn_80178A6C(void);
 extern void task_findEntryById(void);
@@ -289,7 +289,7 @@ lbl_fn_802EB9F8_00000264:
     mr r3, r31
     ori r0, r0, 0x8000
     stw r0, 0x12a4(r31)
-    bl fn_801765D8
+    bl battle_awardExp
     mr r3, r31
     bl fn_800EE360
     b lbl_fn_802EB9F8_0000028C
@@ -872,9 +872,9 @@ asm void fn_802EC280(void)
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     mr r3, r31
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lfs f0, lbl_808847AC
     li r3, 0x2
     li r0, 0x1
@@ -1106,28 +1106,16 @@ lbl_fn_802EC38C_00000BD0:
     blr
 }
 
-asm void fn_802EC660(void)
-{
-    nofralloc
-    blr
+void fn_802EC660(void) {
 }
 
-asm void fn_802EC664(void)
-{
-    nofralloc
-    blr
+void fn_802EC664(void) {
 }
 
-asm void fn_802EC668(void)
-{
-    nofralloc
-    blr
+void fn_802EC668(void) {
 }
 
-asm void fn_802EC66C(void)
-{
-    nofralloc
-    blr
+void fn_802EC66C(void) {
 }
 
 asm void fn_802EC670(void)

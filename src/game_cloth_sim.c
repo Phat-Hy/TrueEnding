@@ -16,24 +16,24 @@ extern void mem_free(void);
 extern void route_createSegment(void);
 extern void node_createNamedChild(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_800CB360(void);
+extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void morph_updateMesh(void);
 extern void atn_Task_setActive(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
-extern void fn_8011FC10(void);
+extern void skill_findNodeById(void);
 extern void fn_80133130(void);
 extern void boss_updatePhaseState(void);
-extern void fn_80145334(void);
-extern void fn_8014C540(void);
-extern void fn_80151448(void);
+extern void quest_updateFlow(void);
+extern void dialog_updateScriptState(void);
+extern void inventory_applyItemStats(void);
 extern void fn_8015C6A0(void);
 extern void fn_8015E4B0(void);
 extern void actor_setState(void);
 extern void fn_801789D8(void);
 extern void fn_8021A888(void);
-extern void fn_802376D0(void);
+extern void res_MsgHandle_isLoading(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_unload(void);
@@ -59,7 +59,7 @@ extern void printf(void);
 extern void strcmp(void);
 extern void atoi(void);
 extern void abort(void);
-extern void fn_8068A850(void);
+extern void std_sin(void);
 
 /* External data declarations */
 extern u8 jumptable_80785290[];
@@ -235,7 +235,7 @@ asm void fn_80279860(void)
     stw r0, 0x19b0(r30)
     bl res_MsgHandle_constructor
     addi r3, r30, 0x19c0
-    bl fn_800CB360
+    bl morph_reset
     lfs f3, lbl_808838D0
     li r0, 0x1c2
     lfs f2, lbl_808838D4
@@ -342,7 +342,7 @@ lbl_fn_802799C0_00000290:
     cmpwi r3, 0x0
     bne lbl_fn_802799C0_00000310
     mr r3, r17
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_802799C0_00000310
     mr r3, r18
@@ -350,11 +350,11 @@ lbl_fn_802799C0_00000290:
     cmpwi r3, 0x0
     bne lbl_fn_802799C0_00000310
     mr r3, r19
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_802799C0_00000310
     mr r3, r20
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_802799C0_00000310
     mr r3, r21
@@ -860,7 +860,7 @@ lbl_fn_802799C0_00000A00:
     mr r30, r3
     lwz r3, lbl_8087F408
     mr r4, r30
-    bl fn_8011FC10
+    bl skill_findNodeById
     cmpwi r3, 0x0
     mr r27, r3
     beq lbl_fn_802799C0_00000C4C
@@ -1450,9 +1450,9 @@ lbl_fn_8027A478_00001290:
     cmplw r20, r0
     blt lbl_fn_8027A478_00001238
     mr r3, r21
-    bl fn_8014C540
+    bl dialog_updateScriptState
     mr r3, r21
-    bl fn_80145334
+    bl quest_updateFlow
     mr r3, r21
     bl fn_80279280
     lwz r3, 0x14e0(r21)
@@ -1689,7 +1689,7 @@ lbl_fn_8027AC38_0000159C:
     fmr f31, f1
     lfs f0, lbl_80883904
     fmuls f1, f3, f0
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     fcmpo cr0, f31, f0
     ble lbl_fn_8027AC38_00001644
@@ -1780,7 +1780,7 @@ lbl_fn_8027AC38_00001744:
 lbl_fn_8027AC38_0000177C:
     mr r3, r30
     mr r4, r31
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r12, 0x0(r30)
     mr r3, r30
     mr r4, r31

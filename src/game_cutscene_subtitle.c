@@ -7,12 +7,12 @@ extern void _savegpr_27(void);
 extern void fn_80041A28(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB440(void);
+extern void morph_updateWeights(void);
 extern void fn_800CB58C(void);
 extern void morph_updateMesh(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8C6C(void);
-extern void fn_80144710(void);
+extern void scissor_clipFrustum(void);
+extern void quest_evaluateConditions(void);
 extern void fn_80155A88(void);
 extern void fn_801562A0(void);
 extern void fn_8015783C(void);
@@ -216,7 +216,7 @@ lbl_fn_8032F6A8_000001B0:
     bl fn_803EA09C
     addi r3, r31, 0x15b0
     addi r4, r1, 0x8
-    bl fn_800CB440
+    bl morph_updateWeights
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -1059,7 +1059,7 @@ lbl_fn_80330218_00000D88:
     cmpwi r0, 0x0
     beq lbl_fn_80330218_0000173C
     mr r3, r31
-    bl fn_80144710
+    bl quest_evaluateConditions
     lwz r3, lbl_8087F048
     mr r6, r31
     lwz r7, 0x638(r31)
@@ -1069,7 +1069,7 @@ lbl_fn_80330218_00000D88:
     lfs f1, lbl_80885078
     li r9, 0x1e
     lwz r10, 0x594(r31)
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     cmpwi r3, 0x0
     beq lbl_fn_80330218_00000E04
     lwz r4, lbl_8087F8A0

@@ -7,16 +7,16 @@ extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80013D60(void);
 extern void dtor_80084684(void);
-extern void fn_8000D114(void);
+extern void vec3_set(void);
 extern void fn_8000D760(void);
 extern void fn_8000D9E8(void);
 extern void fn_8000DCF4(void);
 extern void fn_8000DD0C(void);
-extern void fn_8003E4A4(void);
+extern void str_initFromCStr(void);
 extern void fn_8004203C(void);
-extern void fn_8004212C(void);
+extern void str_getData(void);
 extern void collision_testLineSegment(void);
-extern void fn_80057A64(void);
+extern void mission_updateStub(void);
 extern void fn_80057A68(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
@@ -27,11 +27,11 @@ extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
 extern void node_createNamedChild(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void fn_8009373C(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_80099E9C(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void fn_800EC254(void);
@@ -45,10 +45,10 @@ extern void fn_800ED4D8(void);
 extern void fn_800ED4E0(void);
 extern void fn_800EDFE8(void);
 extern void fn_800F52F0(void);
-extern void fn_800F7FA0(void);
+extern void viewport_getGlobalContext(void);
 extern void fn_800F7FA8(void);
-extern void fn_8011FC10(void);
-extern void fn_80121F00(void);
+extern void skill_findNodeById(void);
+extern void equip_getGlobalManager(void);
 extern void magic_getOffset6C(void);
 extern void fn_80129978(void);
 extern void fn_80129A48(void);
@@ -56,20 +56,20 @@ extern void fn_8012D180(void);
 extern void boss_updatePhaseState(void);
 extern void fn_80139550(void);
 extern void fn_80139F3C(void);
-extern void fn_8013C38C(void);
+extern void npc_getPosition(void);
 extern void fn_8013C480(void);
 extern void fn_8013C504(void);
-extern void fn_80145334(void);
-extern void fn_8014C540(void);
+extern void quest_updateFlow(void);
+extern void dialog_updateScriptState(void);
 extern void fn_8015ECC4(void);
 extern void fn_8016E4C4(void);
 extern void actor_setState(void);
 extern void fn_801A03E0(void);
 extern void fn_8020A780(void);
 extern void task_findEntryById(void);
-extern void fn_80237518(void);
-extern void fn_80237654(void);
-extern void fn_802376D0(void);
+extern void res_MsgHandle_ctor(void);
+extern void res_Resource_unload(void);
+extern void res_MsgHandle_isLoading(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_unload(void);
@@ -127,7 +127,7 @@ extern void fn_8034472C(void);
 extern void fn_80344780(void);
 extern void fn_803449AC(void);
 extern void fn_80344BB4(void);
-extern void fn_8035B694(void);
+extern void entity_Instance_constructor(void);
 extern void world_setGlobalFlag(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
@@ -507,7 +507,7 @@ asm void fn_803387DC(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_803387DC_00000444
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_803387DC_00000444:
     addic. r31, r29, 0x1534
     beq lbl_fn_803387DC_00000464
@@ -556,7 +556,7 @@ asm void fn_803388A4(void)
     mr r27, r5
     lwz r5, 0x20(r5)
     mr r31, r3
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lis r3, lbl_80789388@ha
     li r28, 0x0
     addi r3, r3, lbl_80789388@l
@@ -584,7 +584,7 @@ asm void fn_803388A4(void)
     stw r28, 0x1564(r31)
     bl fn_80338D04
     addi r3, r31, 0x1598
-    bl fn_80057A64
+    bl mission_updateStub
     addi r3, r31, 0x15a4
     bl res_MsgHandle_constructor
     addi r3, r31, 0x15b0
@@ -592,9 +592,9 @@ asm void fn_803388A4(void)
     addi r3, r31, 0x15bc
     bl res_MsgHandle_constructor
     addi r3, r31, 0x15c8
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     addi r3, r31, 0x15d4
-    bl fn_80057A64
+    bl mission_updateStub
     addi r3, r31, 0x15e0
     bl fn_803165E0
     addi r3, r31, 0x1610
@@ -610,12 +610,12 @@ asm void fn_803388A4(void)
     addi r3, r31, 0x164c
     stb r28, 0x1644(r31)
     stfs f0, 0x1648(r31)
-    bl fn_80057A64
+    bl mission_updateStub
     stw r28, 0x165c(r31)
     addi r3, r31, 0x1668
     stw r28, 0x1660(r31)
     stw r28, 0x1664(r31)
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     addi r3, r31, 0x1674
     bl res_MsgHandle_constructor
     addi r3, r31, 0x1680
@@ -663,14 +663,14 @@ asm void fn_803388A4(void)
     stfs f0, 0x1774(r31)
     stw r5, 0x1778(r31)
     stw r0, 0x12a4(r31)
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r29, r29, lbl_8074A4C0@l
     addi r3, r1, 0x20
     addi r4, r29, 0x18
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x14
     addi r4, r27, 0x2c
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x74
     addi r4, r29, 0x32
     li r5, 0x0
@@ -690,7 +690,7 @@ asm void fn_803388A4(void)
 lbl_fn_803388A4_000006EC:
     addi r3, r1, 0x98
     bl fn_800ED4D8
-    bl fn_8004212C
+    bl str_getData
     addi r4, r29, 0x34
     li r5, 0x8
     bl strncmp
@@ -698,7 +698,7 @@ lbl_fn_803388A4_000006EC:
     bne lbl_fn_803388A4_00000728
     addi r3, r1, 0x98
     bl fn_800ED4D8
-    bl fn_8004212C
+    bl str_getData
     mr r4, r3
     addi r3, r1, 0x20
     addi r4, r4, 0x8
@@ -727,7 +727,7 @@ lbl_fn_803388A4_00000730:
     addi r5, r1, 0x20
     bl fn_8006AFF8
     addi r3, r1, 0x8
-    bl fn_8004212C
+    bl str_getData
     lwz r12, 0x16b8(r31)
     mr r4, r3
     addi r3, r31, 0x16b8
@@ -747,7 +747,7 @@ lbl_fn_803388A4_00000730:
     bl res_MsgHandle_destructor
     addi r3, r31, 0x15c8
     addi r4, r30, 0x67
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r31, 0x162c
     addi r4, r30, 0x78
     bl res_MsgHandle_destructor
@@ -756,7 +756,7 @@ lbl_fn_803388A4_00000730:
     bl res_MsgHandle_destructor
     addi r3, r31, 0x1668
     addi r4, r30, 0x94
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r31, 0x1610
     addi r4, r30, 0xa2
     bl res_MsgHandle_destructor
@@ -775,12 +775,12 @@ lbl_fn_803388A4_00000730:
     addi r3, r31, 0x1698
     addi r4, r30, 0xe8
     bl res_MsgHandle_destructor
-    bl fn_80121F00
+    bl equip_getGlobalManager
     li r4, 0x65
     li r5, 0x1
     li r6, 0x0
     bl world_setGlobalFlag
-    bl fn_80121F00
+    bl equip_getGlobalManager
     li r4, 0x68
     li r5, 0x1
     li r6, 0x0
@@ -1069,7 +1069,7 @@ asm void fn_80338FD0(void)
     cmpwi r3, 0x0
     bne lbl_fn_80338FD0_000012E8
     addi r3, r31, 0x15c8
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_80338FD0_000012E8
     addi r3, r31, 0x1638
@@ -1081,7 +1081,7 @@ asm void fn_80338FD0(void)
     cmpwi r3, 0x0
     bne lbl_fn_80338FD0_000012E8
     addi r3, r31, 0x1668
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_80338FD0_000012E8
     addi r3, r31, 0x16b8
@@ -1113,7 +1113,7 @@ asm void fn_80338FD0(void)
     cmpwi r3, 0x0
     bne lbl_fn_80338FD0_000012E8
     mr r3, r31
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_80338FD0_000012E8
     mr r3, r31
@@ -1148,10 +1148,10 @@ asm void fn_80338FD0(void)
     stw r4, 0x7ec(r31)
     add r0, r0, r3
     stw r0, 0x16c4(r31)
-    bl fn_80121F00
+    bl equip_getGlobalManager
     cmpwi r3, 0x0
     beq lbl_fn_80338FD0_00000DA0
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_8013C504
     mr r29, r3
     b lbl_fn_80338FD0_00000DA4
@@ -1483,7 +1483,7 @@ lbl_fn_80338FD0_0000121C:
     mr r30, r3
     bl fn_801A03E0
     mr r4, r30
-    bl fn_8011FC10
+    bl skill_findNodeById
     stw r3, 0x1758(r31)
     b lbl_fn_80338FD0_00001290
 lbl_fn_80338FD0_00001254:
@@ -1617,21 +1617,21 @@ lbl_fn_80339760_000013E0:
     bl fn_80339F04
     cmpwi r3, 0x0
     bne lbl_fn_80339760_0000143C
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     addi r4, r31, 0x1680
     li r5, 0x0
     bl fn_800F7FA8
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     addi r4, r31, 0x1680
     addi r5, r31, 0xb0
     li r6, 0x1
     bl fn_8026607C
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     addi r4, r31, 0x1680
     li r5, 0x0
     li r6, 0x6
     bl fn_8023A108
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     lfs f1, lbl_80885254
     addi r4, r31, 0x1680
     li r5, 0x0
@@ -1654,7 +1654,7 @@ lbl_fn_80339760_0000143C:
     lwz r0, 0x14b4(r31)
     cmpwi r0, 0x0
     bne lbl_fn_80339760_000014BC
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl magic_getOffset6C
     lfs f1, lbl_80885238
     li r4, 0x14
@@ -1689,7 +1689,7 @@ lbl_fn_80339760_000014BC:
     bl fn_80341EE4
 lbl_fn_80339760_00001500:
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     mr r3, r31
     bl fn_8033AB88
     b lbl_fn_80339760_00001AF8
@@ -1717,7 +1717,7 @@ lbl_fn_80339760_00001524:
     stw r3, 0x14b0(r31)
     stw r3, 0xd1c(r31)
 lbl_fn_80339760_00001568:
-    bl fn_80121F00
+    bl equip_getGlobalManager
     li r4, 0x8c
     bl world_getLocalFlag
     cmpwi r3, 0x0
@@ -1775,19 +1775,19 @@ lbl_fn_80339760_00001634:
     cmpwi r29, 0x0
     bne lbl_fn_80339760_00001600
 lbl_fn_80339760_0000163C:
-    bl fn_80121F00
+    bl equip_getGlobalManager
     li r4, 0x8c
     li r5, 0x0
     bl world_setLocalFlag
     lwz r0, 0x14bc(r31)
     cmpwi r0, 0x1
     bne lbl_fn_80339760_00001720
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     addi r4, r31, 0x1610
     li r5, 0x0
     li r6, 0x0
     bl res_findResourceSlot
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     addi r4, r31, 0x1610
     li r5, 0x0
     bl fn_800F7FA8
@@ -1795,15 +1795,15 @@ lbl_fn_80339760_0000163C:
     addi r3, r1, 0x8
     fmr f2, f1
     fmr f3, f1
-    bl fn_8000D114
+    bl vec3_set
     lfs f1, lbl_80885238
     mr r29, r3
     addi r3, r1, 0x14
     fmr f2, f1
     fmr f3, f1
-    bl fn_8000D114
+    bl vec3_set
     mr r30, r3
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     lfs f1, lbl_80885264
     mr r6, r30
     mr r7, r29
@@ -1813,7 +1813,7 @@ lbl_fn_80339760_0000163C:
     li r9, -0x1
     li r10, 0x1
     bl fn_80276AE4
-    bl fn_80121F00
+    bl equip_getGlobalManager
     li r4, 0x38c
     li r5, 0x1
     li r6, 0x0
@@ -2028,12 +2028,12 @@ lbl_fn_80339760_000019CC:
 lbl_fn_80339760_000019E4:
     mr r3, r31
     bl fn_80339F74
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl kpad_getClampData
     mr r28, r3
     bl fn_8000D9E8
     bl fn_8000DCF4
-    bl fn_8013C38C
+    bl npc_getPosition
     lfs f2, 0x4(r3)
     lfs f1, 0x52c(r31)
     lfs f0, lbl_80885278
@@ -2060,9 +2060,9 @@ lbl_fn_80339760_00001A28:
     bl fn_80339F84
 lbl_fn_80339760_00001A5C:
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     mr r3, r31
     bl fn_8033AB88
     lfs f1, lbl_8088527C

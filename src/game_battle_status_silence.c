@@ -10,18 +10,18 @@ extern void fn_80056DB8(void);
 extern void atn_ColliBase_destructor(void);
 extern void fn_800575BC(void);
 extern void talk_formatQuotedString(void);
-extern void fn_8005BBF8(void);
-extern void fn_8005BCE8(void);
+extern void talk_parseQuotes(void);
+extern void talk_copySpeakerName(void);
 extern void fn_8006AA20(void);
 extern void fn_8007FAF0(void);
 extern void mem_alloc(void);
 extern void route_findNextWaypoint(void);
 extern void route_createSegment(void);
-extern void fn_80087E9C(void);
+extern void route_createWaypoint(void);
 extern void fn_80088724(void);
 extern void node_createNamedChild(void);
-extern void fn_8008AD4C(void);
-extern void fn_8008B140(void);
+extern void area_updateZoneState(void);
+extern void map_processTrigger(void);
 extern void fn_80092954(void);
 extern void fn_80092F1C(void);
 extern void lockon_updateTarget(void);
@@ -39,17 +39,17 @@ extern void fn_801354B4(void);
 extern void fn_80136138(void);
 extern void fn_80136544(void);
 extern void boss_updatePhaseState(void);
-extern void fn_80145334(void);
+extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void fn_80176548(void);
 extern void fn_802180A8(void);
 extern void kpad_getClampData(void);
-extern void fn_803EC568(void);
-extern void fn_803EC69C(void);
+extern void task_createWorker(void);
+extern void task_destroyWorker(void);
 extern void fn_803EC758(void);
 extern void fn_803EC7A0(void);
-extern void fn_803EC91C(void);
-extern void fn_803ED0D4(void);
+extern void task_updateWorker(void);
+extern void task_initWorkerContext(void);
 extern void fn_803ED5D0(void);
 extern void fn_803ED774(void);
 extern void fn_803EDB18(void);
@@ -62,7 +62,7 @@ extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSVECSquareMag(void);
 extern void strcmp(void);
-extern void fn_8068AD58(void);
+extern void std_cos(void);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
 
@@ -177,7 +177,7 @@ lbl_fn_8042C30C_00000034:
     bl fn_800971D4
     mr r3, r30
     li r4, 0x0
-    bl fn_803EC69C
+    bl task_destroyWorker
     cmpwi r31, 0x0
     ble lbl_fn_8042C30C_0000005C
     mr r3, r30
@@ -200,7 +200,7 @@ asm void fn_8042C384(void)
     stw r0, 0x54(r1)
     stw r31, 0x4c(r1)
     mr r31, r3
-    bl fn_803EC91C
+    bl task_updateWorker
     cmpwi r3, 0x0
     bne lbl_fn_8042C384_00000180
     lwz r7, 0x260(r31)
@@ -301,7 +301,7 @@ asm void fn_8042C4A4(void)
     mr r4, r3
     mr r3, r31
     li r5, 0x1
-    bl fn_803ED0D4
+    bl task_initWorkerContext
 lbl_fn_8042C4A4_000001FC:
     lwz r0, 0x4cc(r31)
     addi r3, r31, 0xf4
@@ -560,7 +560,7 @@ lbl_fn_8042C5AC_00000588:
     fmr f1, f0
     lfs f2, 0x844(r31)
     stfs f2, 0x74(r31)
-    bl fn_8068AD58
+    bl std_cos
     frsp f4, f1
     lfs f3, 0x84c(r31)
     lfs f0, 0x70(r31)
@@ -602,7 +602,7 @@ lbl_fn_8042C5AC_0000060C:
     mr r4, r3
     mr r3, r31
     li r5, 0x1
-    bl fn_803ED0D4
+    bl task_initWorkerContext
 lbl_fn_8042C5AC_0000064C:
     lfs f3, 0x878(r31)
     lfs f0, lbl_8088675C
@@ -673,7 +673,7 @@ asm void fn_8042CA24(void)
     mflr r0
     addi r3, r3, 0xf4
     stw r0, 0x14(r1)
-    bl fn_8008B140
+    bl map_processTrigger
     neg r0, r3
     or r0, r0, r3
     srwi r3, r0, 31
@@ -727,7 +727,7 @@ asm void fn_8042CA54(void)
     addi r4, r4, lbl_807774B8@l
     stw r4, 0x108(r1)
     la r4, lbl_8087D710
-    bl fn_8005BCE8
+    bl talk_copySpeakerName
     lis r31, lbl_8075387C@ha
     addi r31, r31, lbl_8075387C@l
 lbl_fn_8042CA54_000007F8:
@@ -746,7 +746,7 @@ lbl_fn_8042CA54_000007F8:
     mr r4, r3
     addi r3, r29, 0xf4
     li r5, 0x0
-    bl fn_8008AD4C
+    bl area_updateZoneState
     mr r3, r29
     addi r4, r29, 0xf4
     addi r5, r1, 0x108
@@ -791,7 +791,7 @@ lbl_fn_8042CA54_00000894:
     bl atn_Anim_applyLayerTransform
 lbl_fn_8042CA54_000008D8:
     addi r3, r1, 0x108
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_8042CA54_000007F8
     lwz r0, 0x754(r1)
@@ -911,7 +911,7 @@ lbl_fn_8042CCAC_00000A10:
     addi r5, r29, 0x6c
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_80886788
     mr r3, r30
     lfs f2, lbl_8088678C
@@ -929,7 +929,7 @@ lbl_fn_8042CCAC_00000A10:
     addi r5, r29, 0x90
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     mr r3, r30
     addi r4, r31, 0x2a
     addi r5, r29, 0x9c
@@ -997,7 +997,7 @@ asm void fn_8042CE30(void)
     mr r4, r28
     mr r5, r29
     mr r6, r30
-    bl fn_803EC568
+    bl task_createWorker
     lis r3, lbl_8078E9A8@ha
     li r0, 0x0
     addi r3, r3, lbl_8078E9A8@l
@@ -1036,7 +1036,7 @@ asm void fn_8042CEE8(void)
     mr r30, r3
     beq lbl_fn_8042CEE8_00000C18
     li r4, 0x0
-    bl fn_803EC69C
+    bl task_destroyWorker
     cmpwi r31, 0x0
     ble lbl_fn_8042CEE8_00000C18
     mr r3, r30
@@ -1059,7 +1059,7 @@ asm void fn_8042CF40(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_803EC91C
+    bl task_updateWorker
     cmpwi r3, 0x0
     bne lbl_fn_8042CF40_00000C90
     lwz r3, 0xf4(r31)
@@ -1252,7 +1252,7 @@ asm void fn_8042D140(void)
     addi r4, r4, lbl_807774B8@l
     stw r4, 0x120(r1)
     la r4, lbl_8087D710
-    bl fn_8005BCE8
+    bl talk_copySpeakerName
     lis r26, lbl_8078E8A0@ha
     lis r25, lbl_807538D8@ha
     addi r29, r1, 0x11
@@ -1385,7 +1385,7 @@ lbl_fn_8042D140_00001070:
     stw r27, 0xf8(r28)
 lbl_fn_8042D140_000010BC:
     addi r3, r1, 0x120
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_8042D140_00000EF0
     lmw r24, 0x760(r1)
@@ -1500,7 +1500,7 @@ lbl_fn_8042D488_000011E0:
     addi r5, r29, 0x6c
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_808867B0
     mr r3, r30
     lfs f2, lbl_808867B4
@@ -1518,7 +1518,7 @@ lbl_fn_8042D488_000011E0:
     addi r5, r29, 0x90
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lwz r0, 0x44(r1)
     lwz r31, 0x3c(r1)
     lwz r30, 0x38(r1)
@@ -1537,7 +1537,7 @@ asm void fn_8042D5A0(void)
 asm void fn_8042D5A4(void)
 {
     nofralloc
-    b fn_80145334
+    b quest_updateFlow
 }
 
 asm void fn_8042D5A8(void)
@@ -1611,7 +1611,7 @@ asm void fn_8042D628(void)
     mr r4, r28
     mr r5, r29
     mr r6, r30
-    bl fn_803EC568
+    bl task_createWorker
     lis r4, lbl_8078EA40@ha
     addi r3, r31, 0xf4
     addi r4, r4, lbl_8078EA40@l
@@ -1687,7 +1687,7 @@ lbl_fn_8042D748_00001470:
     bl fn_800971D4
     mr r3, r30
     li r4, 0x0
-    bl fn_803EC69C
+    bl task_destroyWorker
     cmpwi r31, 0x0
     ble lbl_fn_8042D748_00001498
     mr r3, r30
@@ -1710,7 +1710,7 @@ asm void fn_8042D7C0(void)
     stw r0, 0x44(r1)
     stmw r21, 0x14(r1)
     mr r31, r3
-    bl fn_803EC91C
+    bl task_updateWorker
     cmpwi r3, 0x0
     bne lbl_fn_8042D7C0_0000159C
     lwz r3, lbl_8087F430
@@ -2252,7 +2252,7 @@ lbl_fn_8042D93C_00001C54:
     mr r4, r3
     mr r3, r31
     li r5, 0x1
-    bl fn_803ED0D4
+    bl task_initWorkerContext
 lbl_fn_8042D93C_00001C94:
     lwz r0, 0x364(r1)
     psq_l f31, 0x358(r1), 0, 0

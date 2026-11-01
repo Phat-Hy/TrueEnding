@@ -14,7 +14,7 @@ extern u8 lbl_807C75D8[];
 
 /* Function declarations */
 void fn_800D3F28(void);
-void fn_800D3FA4(void);
+void bloom_processPasses(void);
 void bloom_renderExtractPass(void);
 void fn_800D4558(void);
 void fn_800D498C(void);
@@ -62,7 +62,7 @@ lbl_fn_800D3F28_00000064:
     blr
 }
 
-asm void fn_800D3FA4(void)
+asm void bloom_processPasses(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -74,202 +74,202 @@ asm void fn_800D3FA4(void)
     stw r28, 0x10(r1)
     lwz r28, 0x18(r3)
     cmpwi r28, 0x0
-    beq lbl_fn_800D3FA4_00000334
+    beq lbl_bloom_processPasses_00000334
     lwz r0, 0x38(r28)
     li r3, 0x1
     rlwinm r0, r0, 0, 30, 30
     cmplwi r0, 0x2
-    beq lbl_fn_800D3FA4_000000C0
+    beq lbl_bloom_processPasses_000000C0
     li r3, 0x0
-    b lbl_fn_800D3FA4_00000338
-lbl_fn_800D3FA4_000000C0:
+    b lbl_bloom_processPasses_00000338
+lbl_bloom_processPasses_000000C0:
     lwz r31, 0x18(r28)
     cmpwi r31, 0x0
-    beq lbl_fn_800D3FA4_000001F4
-    beq lbl_fn_800D3FA4_000000D8
+    beq lbl_bloom_processPasses_000001F4
+    beq lbl_bloom_processPasses_000000D8
     mr r3, r31
     bl atn_TaskBase_isValid
-lbl_fn_800D3FA4_000000D8:
+lbl_bloom_processPasses_000000D8:
     lwz r0, 0x38(r31)
     li r3, 0x1
     rlwinm r0, r0, 0, 30, 30
     cmplwi r0, 0x2
-    beq lbl_fn_800D3FA4_000000F4
+    beq lbl_bloom_processPasses_000000F4
     li r3, 0x0
-    b lbl_fn_800D3FA4_000001F4
-lbl_fn_800D3FA4_000000F4:
+    b lbl_bloom_processPasses_000001F4
+lbl_bloom_processPasses_000000F4:
     lwz r30, 0x18(r31)
     cmpwi r30, 0x0
-    beq lbl_fn_800D3FA4_00000170
-    beq lbl_fn_800D3FA4_0000010C
+    beq lbl_bloom_processPasses_00000170
+    beq lbl_bloom_processPasses_0000010C
     mr r3, r30
     bl atn_TaskBase_isValid
-lbl_fn_800D3FA4_0000010C:
+lbl_bloom_processPasses_0000010C:
     lwz r0, 0x38(r30)
     li r3, 0x1
     rlwinm r0, r0, 0, 30, 30
     cmplwi r0, 0x2
-    beq lbl_fn_800D3FA4_00000128
+    beq lbl_bloom_processPasses_00000128
     li r3, 0x0
-    b lbl_fn_800D3FA4_00000170
-lbl_fn_800D3FA4_00000128:
+    b lbl_bloom_processPasses_00000170
+lbl_bloom_processPasses_00000128:
     lwz r29, 0x18(r30)
     cmpwi r29, 0x0
-    beq lbl_fn_800D3FA4_00000148
-    beq lbl_fn_800D3FA4_00000140
+    beq lbl_bloom_processPasses_00000148
+    beq lbl_bloom_processPasses_00000140
     mr r3, r29
     bl atn_TaskBase_isValid
-lbl_fn_800D3FA4_00000140:
+lbl_bloom_processPasses_00000140:
     mr r3, r29
     bl bloom_renderExtractPass
-lbl_fn_800D3FA4_00000148:
+lbl_bloom_processPasses_00000148:
     cmpwi r3, 0x0
-    beq lbl_fn_800D3FA4_00000170
+    beq lbl_bloom_processPasses_00000170
     lwz r29, 0x1c(r30)
     cmpwi r29, 0x0
-    beq lbl_fn_800D3FA4_00000170
-    beq lbl_fn_800D3FA4_00000168
+    beq lbl_bloom_processPasses_00000170
+    beq lbl_bloom_processPasses_00000168
     mr r3, r29
     bl atn_TaskBase_isValid
-lbl_fn_800D3FA4_00000168:
+lbl_bloom_processPasses_00000168:
     mr r3, r29
     bl bloom_renderExtractPass
-lbl_fn_800D3FA4_00000170:
+lbl_bloom_processPasses_00000170:
     cmpwi r3, 0x0
-    beq lbl_fn_800D3FA4_000001F4
+    beq lbl_bloom_processPasses_000001F4
     lwz r29, 0x1c(r31)
     cmpwi r29, 0x0
-    beq lbl_fn_800D3FA4_000001F4
-    beq lbl_fn_800D3FA4_00000190
+    beq lbl_bloom_processPasses_000001F4
+    beq lbl_bloom_processPasses_00000190
     mr r3, r29
     bl atn_TaskBase_isValid
-lbl_fn_800D3FA4_00000190:
+lbl_bloom_processPasses_00000190:
     lwz r0, 0x38(r29)
     li r3, 0x1
     rlwinm r0, r0, 0, 30, 30
     cmplwi r0, 0x2
-    beq lbl_fn_800D3FA4_000001AC
+    beq lbl_bloom_processPasses_000001AC
     li r3, 0x0
-    b lbl_fn_800D3FA4_000001F4
-lbl_fn_800D3FA4_000001AC:
+    b lbl_bloom_processPasses_000001F4
+lbl_bloom_processPasses_000001AC:
     lwz r30, 0x18(r29)
     cmpwi r30, 0x0
-    beq lbl_fn_800D3FA4_000001CC
-    beq lbl_fn_800D3FA4_000001C4
+    beq lbl_bloom_processPasses_000001CC
+    beq lbl_bloom_processPasses_000001C4
     mr r3, r30
     bl atn_TaskBase_isValid
-lbl_fn_800D3FA4_000001C4:
+lbl_bloom_processPasses_000001C4:
     mr r3, r30
     bl bloom_renderExtractPass
-lbl_fn_800D3FA4_000001CC:
+lbl_bloom_processPasses_000001CC:
     cmpwi r3, 0x0
-    beq lbl_fn_800D3FA4_000001F4
+    beq lbl_bloom_processPasses_000001F4
     lwz r29, 0x1c(r29)
     cmpwi r29, 0x0
-    beq lbl_fn_800D3FA4_000001F4
-    beq lbl_fn_800D3FA4_000001EC
+    beq lbl_bloom_processPasses_000001F4
+    beq lbl_bloom_processPasses_000001EC
     mr r3, r29
     bl atn_TaskBase_isValid
-lbl_fn_800D3FA4_000001EC:
+lbl_bloom_processPasses_000001EC:
     mr r3, r29
     bl bloom_renderExtractPass
-lbl_fn_800D3FA4_000001F4:
+lbl_bloom_processPasses_000001F4:
     cmpwi r3, 0x0
-    beq lbl_fn_800D3FA4_00000338
+    beq lbl_bloom_processPasses_00000338
     lwz r29, 0x1c(r28)
     cmpwi r29, 0x0
-    beq lbl_fn_800D3FA4_00000338
-    beq lbl_fn_800D3FA4_00000214
+    beq lbl_bloom_processPasses_00000338
+    beq lbl_bloom_processPasses_00000214
     mr r3, r29
     bl atn_TaskBase_isValid
-lbl_fn_800D3FA4_00000214:
+lbl_bloom_processPasses_00000214:
     lwz r0, 0x38(r29)
     li r3, 0x1
     rlwinm r0, r0, 0, 30, 30
     cmplwi r0, 0x2
-    beq lbl_fn_800D3FA4_00000230
+    beq lbl_bloom_processPasses_00000230
     li r3, 0x0
-    b lbl_fn_800D3FA4_00000338
-lbl_fn_800D3FA4_00000230:
+    b lbl_bloom_processPasses_00000338
+lbl_bloom_processPasses_00000230:
     lwz r30, 0x18(r29)
     cmpwi r30, 0x0
-    beq lbl_fn_800D3FA4_000002AC
-    beq lbl_fn_800D3FA4_00000248
+    beq lbl_bloom_processPasses_000002AC
+    beq lbl_bloom_processPasses_00000248
     mr r3, r30
     bl atn_TaskBase_isValid
-lbl_fn_800D3FA4_00000248:
+lbl_bloom_processPasses_00000248:
     lwz r0, 0x38(r30)
     li r3, 0x1
     rlwinm r0, r0, 0, 30, 30
     cmplwi r0, 0x2
-    beq lbl_fn_800D3FA4_00000264
+    beq lbl_bloom_processPasses_00000264
     li r3, 0x0
-    b lbl_fn_800D3FA4_000002AC
-lbl_fn_800D3FA4_00000264:
+    b lbl_bloom_processPasses_000002AC
+lbl_bloom_processPasses_00000264:
     lwz r31, 0x18(r30)
     cmpwi r31, 0x0
-    beq lbl_fn_800D3FA4_00000284
-    beq lbl_fn_800D3FA4_0000027C
+    beq lbl_bloom_processPasses_00000284
+    beq lbl_bloom_processPasses_0000027C
     mr r3, r31
     bl atn_TaskBase_isValid
-lbl_fn_800D3FA4_0000027C:
+lbl_bloom_processPasses_0000027C:
     mr r3, r31
     bl bloom_renderExtractPass
-lbl_fn_800D3FA4_00000284:
+lbl_bloom_processPasses_00000284:
     cmpwi r3, 0x0
-    beq lbl_fn_800D3FA4_000002AC
+    beq lbl_bloom_processPasses_000002AC
     lwz r30, 0x1c(r30)
     cmpwi r30, 0x0
-    beq lbl_fn_800D3FA4_000002AC
-    beq lbl_fn_800D3FA4_000002A4
+    beq lbl_bloom_processPasses_000002AC
+    beq lbl_bloom_processPasses_000002A4
     mr r3, r30
     bl atn_TaskBase_isValid
-lbl_fn_800D3FA4_000002A4:
+lbl_bloom_processPasses_000002A4:
     mr r3, r30
     bl bloom_renderExtractPass
-lbl_fn_800D3FA4_000002AC:
+lbl_bloom_processPasses_000002AC:
     cmpwi r3, 0x0
-    beq lbl_fn_800D3FA4_00000338
+    beq lbl_bloom_processPasses_00000338
     lwz r29, 0x1c(r29)
     cmpwi r29, 0x0
-    beq lbl_fn_800D3FA4_00000338
-    beq lbl_fn_800D3FA4_000002CC
+    beq lbl_bloom_processPasses_00000338
+    beq lbl_bloom_processPasses_000002CC
     mr r3, r29
     bl atn_TaskBase_isValid
-lbl_fn_800D3FA4_000002CC:
+lbl_bloom_processPasses_000002CC:
     lwz r0, 0x38(r29)
     li r3, 0x1
     rlwinm r0, r0, 0, 30, 30
     cmplwi r0, 0x2
-    beq lbl_fn_800D3FA4_000002E8
+    beq lbl_bloom_processPasses_000002E8
     li r3, 0x0
-    b lbl_fn_800D3FA4_00000338
-lbl_fn_800D3FA4_000002E8:
+    b lbl_bloom_processPasses_00000338
+lbl_bloom_processPasses_000002E8:
     lwz r30, 0x18(r29)
     cmpwi r30, 0x0
-    beq lbl_fn_800D3FA4_00000308
-    beq lbl_fn_800D3FA4_00000300
+    beq lbl_bloom_processPasses_00000308
+    beq lbl_bloom_processPasses_00000300
     mr r3, r30
     bl atn_TaskBase_isValid
-lbl_fn_800D3FA4_00000300:
+lbl_bloom_processPasses_00000300:
     mr r3, r30
     bl bloom_renderExtractPass
-lbl_fn_800D3FA4_00000308:
+lbl_bloom_processPasses_00000308:
     cmpwi r3, 0x0
-    beq lbl_fn_800D3FA4_00000338
+    beq lbl_bloom_processPasses_00000338
     lwz r29, 0x1c(r29)
     cmpwi r29, 0x0
-    beq lbl_fn_800D3FA4_00000338
-    beq lbl_fn_800D3FA4_00000328
+    beq lbl_bloom_processPasses_00000338
+    beq lbl_bloom_processPasses_00000328
     mr r3, r29
     bl atn_TaskBase_isValid
-lbl_fn_800D3FA4_00000328:
+lbl_bloom_processPasses_00000328:
     mr r3, r29
     bl bloom_renderExtractPass
-    b lbl_fn_800D3FA4_00000338
-lbl_fn_800D3FA4_00000334:
+    b lbl_bloom_processPasses_00000338
+lbl_bloom_processPasses_00000334:
     li r3, 0x1
-lbl_fn_800D3FA4_00000338:
+lbl_bloom_processPasses_00000338:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)

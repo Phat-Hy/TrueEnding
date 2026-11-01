@@ -13,18 +13,18 @@ extern void mem_alloc(void);
 extern void msg_getMessageById(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void str_findChar(void);
 extern void wcs_vformat(void);
 extern void actor_spawnActorWithId(void);
 extern void save_validateHeader(void);
 extern void saveSlot_readSummary(void);
-extern void fn_801F64D0(void);
+extern void save_createWorkerTask(void);
 extern void save_computeCrc32(void);
 extern void fn_801F6E78(void);
 extern void fn_801F7590(void);
 extern void fn_801F7DF0(void);
-extern void fn_801F837C(void);
+extern void save_findEntryByName(void);
 extern void fn_801F8598(void);
 extern void thread_findAndNotify(void);
 extern void thread_dispatchToQueue(void);
@@ -608,7 +608,7 @@ lbl_fn_805880F4_0000062C:
     lwz r3, 0x5b78(r25)
     addi r4, r26, 0x12a
     lwz r5, 0x8(r23)
-    bl fn_801F837C
+    bl save_findEntryByName
     lwz r4, 0x4(r23)
     mr r3, r31
     bl fn_804444E8
@@ -814,7 +814,7 @@ lbl_fn_805883DC_000008D4:
     lwz r5, 0x8(r25)
     lwz r3, 0x5ba0(r3)
     addi r4, r30, 0x12a
-    bl fn_801F837C
+    bl save_findEntryByName
     lwz r4, 0x4(r25)
     mr r3, r29
     bl fn_804444E8
@@ -1000,7 +1000,7 @@ asm void fn_80588714(void)
 lbl_fn_80588714_00000C78:
     mr r3, r28
     mr r4, r31
-    bl fn_801F64D0
+    bl save_createWorkerTask
     addis r5, r30, 0x2
     li r4, 0x1
     addi r0, r5, 0x5b74
@@ -1088,7 +1088,7 @@ asm void fn_80588908(void)
     addi r11, r1, 0x40
     bl _savegpr_26
     mr r31, r3
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_80588908_00000F8C
     mr r3, r31

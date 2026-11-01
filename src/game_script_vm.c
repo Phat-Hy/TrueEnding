@@ -12,7 +12,7 @@ extern void dtor_80084684(void);
 extern void sys_copyString(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
-extern void fn_8004212C(void);
+extern void str_getData(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
@@ -34,17 +34,17 @@ extern void fn_800E1D5C(void);
 extern void fn_800E2778(void);
 extern void save_validateHeader(void);
 extern void task_findEntryById(void);
-extern void fn_80237518(void);
-extern void fn_802375C4(void);
-extern void fn_80237654(void);
-extern void fn_802376D0(void);
+extern void res_MsgHandle_ctor(void);
+extern void res_Resource_destructor(void);
+extern void res_Resource_unload(void);
+extern void res_MsgHandle_isLoading(void);
 extern void fn_80237784(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_unload(void);
 extern void fn_80239AB8(void);
 extern void fn_80239D1C(void);
-extern void fn_8035B694(void);
+extern void entity_Instance_constructor(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void strcmp(void);
@@ -54,7 +54,7 @@ extern void fn_8068BC30(void);
 extern void fn_8068BD60(void);
 extern void fn_8068C240(void);
 extern void fn_806920C0(void);
-extern void fn_806952C4(void);
+extern void msl_releaseRefCount(void);
 extern void runtime_registerStaticObject(void);
 extern void __destroy_arr(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -283,7 +283,7 @@ asm void fn_80242A8C(void)
     lwz r3, 0x1c(r1)
     cmpwi r3, 0x0
     beq lbl_fn_80242A8C_00000224
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_80242A8C_00000224:
     li r3, 0x1
     b lbl_fn_80242A8C_00000708
@@ -640,7 +640,7 @@ lbl_fn_80242A8C_000006EC:
     lwz r3, 0x1c(r1)
     cmpwi r3, 0x0
     beq lbl_fn_80242A8C_00000704
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_80242A8C_00000704:
     mr r3, r14
 lbl_fn_80242A8C_00000708:
@@ -680,7 +680,7 @@ asm void fn_80242FF4(void)
     lwz r3, 0x1c(r1)
     cmpwi r3, 0x0
     beq lbl_fn_80242FF4_00000788
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_80242FF4_00000788:
     li r3, 0x1
     b lbl_fn_80242FF4_00000C28
@@ -1020,7 +1020,7 @@ lbl_fn_80242FF4_00000C0C:
     lwz r3, 0x1c(r1)
     cmpwi r3, 0x0
     beq lbl_fn_80242FF4_00000C24
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_80242FF4_00000C24:
     mr r3, r18
 lbl_fn_80242FF4_00000C28:
@@ -1247,7 +1247,7 @@ asm void fn_80243758(void)
     beq lbl_fn_80243758_00000EC0
     li r4, -0x1
     addi r3, r3, 0x48
-    bl fn_802375C4
+    bl res_Resource_destructor
     cmpwi r31, 0x0
     ble lbl_fn_80243758_00000EC0
     mr r3, r30
@@ -1325,7 +1325,7 @@ lbl_fn_80243814_00000F88:
     lwz r0, 0x4(r29)
     add r3, r0, r31
     addi r3, r3, 0x48
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     beq lbl_fn_80243814_00000FA8
     li r3, 0x1
@@ -1405,7 +1405,7 @@ lbl_fn_802438D4_00001074:
     addi r3, r1, 0x130
     li r4, 0x0
     bl fn_800E114C
-    bl fn_8004212C
+    bl str_getData
     bl str_parseInt
     mr r25, r3
     b lbl_fn_802438D4_00001558
@@ -1418,7 +1418,7 @@ lbl_fn_802438D4_000010A4:
     addi r3, r1, 0x130
     li r4, 0x0
     bl fn_800E114C
-    bl fn_8004212C
+    bl str_getData
     bl str_parseInt
     mr r4, r3
     mr r3, r24
@@ -1435,7 +1435,7 @@ lbl_fn_802438D4_000010E4:
     addi r3, r1, 0x130
     li r4, 0x0
     bl fn_800E114C
-    bl fn_8004212C
+    bl str_getData
     mr r5, r3
     addi r3, r1, 0x30
     addi r4, r29, 0x22
@@ -1446,11 +1446,11 @@ lbl_fn_802438D4_000010E4:
     bl fn_802438C4
     addi r3, r3, 0x48
     addi r4, r1, 0x30
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r1, 0x130
     li r4, 0x1
     bl fn_800E114C
-    bl fn_8004212C
+    bl str_getData
     bl str_parseInt
     mr r30, r3
     mr r3, r24
@@ -1468,7 +1468,7 @@ lbl_fn_802438D4_00001164:
     addi r3, r1, 0x130
     li r4, 0x0
     bl fn_800E114C
-    bl fn_8004212C
+    bl str_getData
     bl str_parseInt
     mr r30, r3
     mr r3, r24
@@ -1478,7 +1478,7 @@ lbl_fn_802438D4_00001164:
     addi r3, r1, 0x130
     li r4, 0x1
     bl fn_800E114C
-    bl fn_8004212C
+    bl str_getData
     bl str_parseInt
     mr r30, r3
     mr r3, r24
@@ -1510,7 +1510,7 @@ lbl_fn_802438D4_00001200:
     addi r3, r1, 0x130
     li r4, 0x0
     bl fn_800E114C
-    bl fn_8004212C
+    bl str_getData
     bl str_skipWhitespace
     fmr f31, f1
     mr r3, r24
@@ -1520,7 +1520,7 @@ lbl_fn_802438D4_00001200:
     addi r3, r1, 0x130
     li r4, 0x1
     bl fn_800E114C
-    bl fn_8004212C
+    bl str_getData
     bl str_skipWhitespace
     fmr f31, f1
     mr r3, r24
@@ -1530,7 +1530,7 @@ lbl_fn_802438D4_00001200:
     addi r3, r1, 0x130
     li r4, 0x2
     bl fn_800E114C
-    bl fn_8004212C
+    bl str_getData
     bl str_skipWhitespace
     fmr f31, f1
     mr r3, r24
@@ -1547,7 +1547,7 @@ lbl_fn_802438D4_00001290:
     addi r3, r1, 0x130
     li r4, 0x0
     bl fn_800E114C
-    bl fn_8004212C
+    bl str_getData
     bl str_skipWhitespace
     fmr f31, f1
     mr r3, r24
@@ -1557,7 +1557,7 @@ lbl_fn_802438D4_00001290:
     addi r3, r1, 0x130
     li r4, 0x1
     bl fn_800E114C
-    bl fn_8004212C
+    bl str_getData
     bl str_skipWhitespace
     fmr f31, f1
     mr r3, r24
@@ -1567,7 +1567,7 @@ lbl_fn_802438D4_00001290:
     addi r3, r1, 0x130
     li r4, 0x2
     bl fn_800E114C
-    bl fn_8004212C
+    bl str_getData
     bl str_skipWhitespace
     fmr f31, f1
     mr r3, r24
@@ -1589,7 +1589,7 @@ lbl_fn_802438D4_00001334:
     addi r3, r1, 0x130
     li r4, 0x0
     bl fn_800E114C
-    bl fn_8004212C
+    bl str_getData
     bl str_skipWhitespace
     fmr f31, f1
     mr r3, r24
@@ -1606,7 +1606,7 @@ lbl_fn_802438D4_00001374:
     addi r3, r1, 0x130
     li r4, 0x0
     bl fn_800E114C
-    bl fn_8004212C
+    bl str_getData
     bl str_skipWhitespace
     fmr f31, f1
     mr r3, r24
@@ -1616,7 +1616,7 @@ lbl_fn_802438D4_00001374:
     addi r3, r1, 0x130
     li r4, 0x1
     bl fn_800E114C
-    bl fn_8004212C
+    bl str_getData
     bl str_skipWhitespace
     fmr f31, f1
     mr r3, r24
@@ -1626,7 +1626,7 @@ lbl_fn_802438D4_00001374:
     addi r3, r1, 0x130
     li r4, 0x2
     bl fn_800E114C
-    bl fn_8004212C
+    bl str_getData
     bl str_skipWhitespace
     fmr f31, f1
     mr r3, r24
@@ -1636,7 +1636,7 @@ lbl_fn_802438D4_00001374:
     addi r3, r1, 0x130
     li r4, 0x3
     bl fn_800E114C
-    bl fn_8004212C
+    bl str_getData
     bl str_skipWhitespace
     fmr f31, f1
     mr r3, r24
@@ -1653,7 +1653,7 @@ lbl_fn_802438D4_0000142C:
     addi r3, r1, 0x130
     li r4, 0x0
     bl fn_800E114C
-    bl fn_8004212C
+    bl str_getData
     bl str_parseInt
     mr r30, r3
     mr r3, r24
@@ -1667,7 +1667,7 @@ lbl_fn_802438D4_0000142C:
     addi r3, r1, 0x14
     bl fn_800E19AC
     addi r3, r1, 0x14
-    bl fn_8004212C
+    bl str_getData
     bl str_findChar
     mr r30, r3
     mr r3, r24
@@ -1677,7 +1677,7 @@ lbl_fn_802438D4_0000142C:
     addi r3, r1, 0x130
     li r4, 0x3
     bl fn_800E114C
-    bl fn_8004212C
+    bl str_getData
     bl str_parseInt
     mr r30, r3
     mr r3, r24
@@ -1687,7 +1687,7 @@ lbl_fn_802438D4_0000142C:
     addi r3, r1, 0x130
     li r4, 0x4
     bl fn_800E114C
-    bl fn_8004212C
+    bl str_getData
     bl str_parseInt
     mr r30, r3
     mr r3, r24
@@ -1930,7 +1930,7 @@ asm void fn_8024405C(void)
     stw r5, 0x40(r3)
     stw r0, 0x44(r3)
     addi r3, r3, 0x48
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     mr r3, r31
     lwz r31, 0xc(r1)
     lwz r0, 0x14(r1)
@@ -2045,7 +2045,7 @@ asm void fn_80244228(void)
     mr r29, r5
     lwz r5, 0x20(r5)
     mr r28, r3
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lis r3, lbl_80783D08@ha
     addi r30, r28, 0x14b0
     addi r3, r3, lbl_80783D08@l

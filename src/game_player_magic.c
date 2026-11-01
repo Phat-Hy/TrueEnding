@@ -15,7 +15,7 @@ extern void fn_800F7258(void);
 extern void fn_801156BC(void);
 extern void fn_801156C4(void);
 extern void fn_80116E6C(void);
-extern void fn_80121F00(void);
+extern void equip_getGlobalManager(void);
 extern void fn_80121F08(void);
 extern void fn_80121FD4(void);
 extern void fn_801220A0(void);
@@ -178,10 +178,10 @@ lbl_fn_80122330_00000170:
     stw r0, 0x4c(r31)
 lbl_fn_80122330_00000178:
     lfs f31, lbl_80881818
-    bl fn_80121F00
+    bl equip_getGlobalManager
     cmpwi r3, 0x0
     beq lbl_fn_80122330_000001C4
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl magic_getOffset6C
     mr r30, r3
     bl magic_getOffset51C

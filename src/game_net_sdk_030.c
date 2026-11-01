@@ -23,9 +23,9 @@ extern void strncmp(void);
 extern void atoi(void);
 extern void fn_806A4270(void);
 extern void fn_806D5850(void);
-extern void fn_806D58F0(void);
+extern void net_bufferGetCount(void);
 extern void fn_806D7350(void);
-extern void fn_806D7A90(void);
+extern void net_socketConnect(void);
 extern void fn_806D7AA0(void);
 extern void net_socketClose(void);
 extern void fn_806D7AE0(void);
@@ -67,8 +67,8 @@ extern void fn_806E5D00(void);
 extern void fn_806E8B10(void);
 extern void fn_806E8E10(void);
 extern void fn_806E8FB0(void);
-extern void fn_806E91A0(void);
-extern void fn_806E91F0(void);
+extern void net_setTaggedString(void);
+extern void net_copyStringSafe(void);
 extern void memmove(void);
 extern int sprintf(char* str, const char* format, ...);
 extern void strchr(void);
@@ -142,7 +142,7 @@ asm void fn_806DDA30(void)
     bne lbl_fn_806DDA30_00000054
     mr r3, r20
     addi r4, r23, 0x154
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x2
     b lbl_fn_806DDA30_00000410
 lbl_fn_806DDA30_00000054:
@@ -175,7 +175,7 @@ lbl_fn_806DDA30_0000009C:
     cmpwi r0, 0x0
     beq lbl_fn_806DDA30_0000040C
     li r3, 0x10
-    bl fn_806D7A90
+    bl net_socketConnect
     lwz r9, 0x8(r22)
     li r0, 0x0
     lwz r8, 0x4(r22)
@@ -217,7 +217,7 @@ lbl_fn_806DDA30_00000114:
     mr r3, r20
     addi r5, r23, 0x18c
     li r4, 0x1
-    bl fn_806E91A0
+    bl net_setTaggedString
     mr r3, r20
     li r4, 0x3
     li r5, 0x0
@@ -253,7 +253,7 @@ lbl_fn_806DDA30_000001BC:
     cmpwi r0, 0x0
     beq lbl_fn_806DDA30_0000040C
     li r3, 0x10
-    bl fn_806D7A90
+    bl net_socketConnect
     lwz r9, 0x8(r22)
     li r0, 0x0
     lwz r8, 0x4(r22)
@@ -279,10 +279,10 @@ lbl_fn_806DDA30_000001BC:
 lbl_fn_806DDA30_00000234:
     slwi r23, r3, 2
     mr r3, r23
-    bl fn_806D7A90
+    bl net_socketConnect
     mr r24, r3
     mr r3, r23
-    bl fn_806D7A90
+    bl net_socketConnect
     mr r23, r3
     mr r27, r24
     mr r26, r23
@@ -382,7 +382,7 @@ lbl_fn_806DDA30_0000039C:
     cmpwi r0, 0x0
     beq lbl_fn_806DDA30_0000040C
     li r3, 0x10
-    bl fn_806D7A90
+    bl net_socketConnect
     lwz r9, 0x8(r22)
     mr r5, r3
     lwz r8, 0x4(r22)
@@ -432,7 +432,7 @@ asm void fn_806DDE60(void)
     bne lbl_fn_806DDE60_0000047C
     mr r3, r27
     addi r4, r31, 0x154
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x2
     b lbl_fn_806DDE60_0000058C
 lbl_fn_806DDE60_0000047C:
@@ -442,7 +442,7 @@ lbl_fn_806DDE60_0000047C:
     bne lbl_fn_806DDE60_000004A0
     mr r3, r27
     addi r4, r31, 0x154
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x2
     b lbl_fn_806DDE60_0000058C
 lbl_fn_806DDE60_000004A0:
@@ -562,7 +562,7 @@ asm void fn_806DE020(void)
     bne lbl_fn_806DE020_00000644
     mr r3, r28
     addi r4, r30, 0x154
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x2
     b lbl_fn_806DE020_00000844
 lbl_fn_806DE020_00000644:
@@ -598,7 +598,7 @@ lbl_fn_806DE020_000006B0:
     bgt lbl_fn_806DE020_000006C8
     mr r3, r28
     addi r4, r30, 0x154
-    bl fn_806E91F0
+    bl net_copyStringSafe
     b lbl_fn_806DE020_000006EC
 lbl_fn_806DE020_000006C8:
     mr r3, r28
@@ -721,7 +721,7 @@ asm void fn_806DE290(void)
     bgt lbl_fn_806DE290_00000894
     lis r4, lbl_807C2F24@ha
     addi r4, r4, lbl_807C2F24@l
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x2
     b lbl_fn_806DE290_000008B0
 lbl_fn_806DE290_00000894:
@@ -767,7 +767,7 @@ asm void fn_806DE2F0(void)
     lis r4, lbl_807C2FC8@ha
     mr r3, r27
     addi r4, r4, lbl_807C2FC8@l
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x1
     b lbl_fn_806DE2F0_00000954
 lbl_fn_806DE2F0_0000092C:
@@ -828,7 +828,7 @@ lbl_fn_806DE3A0_000009D0:
     lis r4, lbl_807C2FC8@ha
     mr r3, r25
     addi r4, r4, lbl_807C2FC8@l
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x1
     b lbl_fn_806DE3A0_00000A38
 lbl_fn_806DE3A0_00000A04:
@@ -953,7 +953,7 @@ lbl_fn_806DE550_00000BA8:
     mr r3, r27
     addi r5, r5, lbl_807C2FE0@l
     li r4, 0x5
-    bl fn_806E91A0
+    bl net_setTaggedString
     mr r3, r27
     li r4, 0x3
     li r5, 0x0
@@ -1019,7 +1019,7 @@ lbl_fn_806DE670_00000C80:
     subf. r0, r3, r0
     bne lbl_fn_806DE670_00000D18
     lwz r3, 0x3c(r4)
-    bl fn_806D58F0
+    bl net_bufferGetCount
     cmpwi r3, 0x0
     bne lbl_fn_806DE670_00000D18
     lwz r3, 0x8(r27)
@@ -1137,7 +1137,7 @@ lbl_fn_806DE7F0_00000E08:
     lis r4, lbl_807C2FC8@ha
     mr r3, r19
     addi r4, r4, lbl_807C2FC8@l
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x1
     b lbl_fn_806DE7F0_00000EF4
 lbl_fn_806DE7F0_00000E48:
@@ -1163,7 +1163,7 @@ lbl_fn_806DE7F0_00000E50:
     lis r4, lbl_807C3008@ha
     mr r3, r19
     addi r4, r4, lbl_807C3008@l
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x3
     b lbl_fn_806DE7F0_00000EF4
 lbl_fn_806DE7F0_00000EA8:
@@ -1541,7 +1541,7 @@ lbl_net_sendPacket_00001390:
     stw r0, 0x14(r1)
     beq lbl_net_sendPacket_000013F4
     li r3, 0x10
-    bl fn_806D7A90
+    bl net_socketConnect
     cmpwi r3, 0x0
     mr r5, r3
     beq lbl_net_sendPacket_000013D0
@@ -1586,13 +1586,13 @@ asm void fn_806DEE40(void)
     mr r29, r6
     mr r30, r7
     li r3, 0x18
-    bl fn_806D7A90
+    bl net_socketConnect
     cmpwi r3, 0x0
     bne lbl_fn_806DEE40_00001468
     lis r4, lbl_807C3048@ha
     mr r3, r26
     addi r4, r4, lbl_807C3048@l
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x1
     b lbl_fn_806DEE40_000014CC
 lbl_fn_806DEE40_00001468:
@@ -1971,7 +1971,7 @@ lbl_fn_806DF2E0_00001984:
     mr r3, r26
     addi r5, r30, 0x50
     li r4, 0x8
-    bl fn_806E91A0
+    bl net_setTaggedString
     mr r3, r26
     li r4, 0x3
     li r5, 0x1
@@ -2006,7 +2006,7 @@ lbl_fn_806DF2E0_000019D0:
     mr r3, r26
     addi r5, r30, 0x78
     li r4, 0x8
-    bl fn_806E91A0
+    bl net_setTaggedString
     mr r3, r26
     li r4, 0x3
     li r5, 0x1
@@ -2030,7 +2030,7 @@ lbl_fn_806DF2E0_00001A48:
     mr r3, r26
     addi r5, r30, 0xa4
     li r4, 0x5
-    bl fn_806E91A0
+    bl net_setTaggedString
     mr r3, r26
     li r4, 0x3
     li r5, 0x1
@@ -2045,7 +2045,7 @@ lbl_fn_806DF2E0_00001A8C:
     mr r3, r26
     addi r5, r30, 0xcc
     li r4, 0x5
-    bl fn_806E91A0
+    bl net_setTaggedString
     mr r3, r26
     li r4, 0x3
     li r5, 0x1
@@ -2071,7 +2071,7 @@ lbl_fn_806DF2E0_00001AC4:
     mr r3, r26
     addi r5, r30, 0x100
     li r4, 0x5
-    bl fn_806E91A0
+    bl net_setTaggedString
     mr r3, r26
     li r4, 0x3
     li r5, 0x1
@@ -2109,7 +2109,7 @@ lbl_fn_806DF2E0_00001B48:
     mr r3, r26
     addi r5, r30, 0x138
     li r4, 0x5
-    bl fn_806E91A0
+    bl net_setTaggedString
     mr r3, r26
     li r4, 0x3
     li r5, 0x1
@@ -2167,7 +2167,7 @@ lbl_fn_806DF610_00001C54:
     beq lbl_fn_806DF610_00001C74
     mr r3, r18
     addi r4, r31, 0x160
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x2
     b lbl_fn_806DF610_00001E1C
 lbl_fn_806DF610_00001C74:
@@ -2187,7 +2187,7 @@ lbl_fn_806DF610_00001C94:
 lbl_fn_806DF610_00001CA0:
     mr r3, r18
     addi r4, r31, 0x174
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x2
     b lbl_fn_806DF610_00001E1C
 lbl_fn_806DF610_00001CB4:
@@ -2210,13 +2210,13 @@ lbl_fn_806DF610_00001CB4:
     addi r3, r30, 0x144
     bl fn_806D8EB0
     li r3, 0x308
-    bl fn_806D7A90
+    bl net_socketConnect
     cmpwi r3, 0x0
     mr r19, r3
     bne lbl_fn_806DF610_00001D24
     mr r3, r18
     addi r4, r31, 0x188
-    bl fn_806E91F0
+    bl net_copyStringSafe
     li r3, 0x1
     b lbl_fn_806DF610_00001E1C
 lbl_fn_806DF610_00001D24:

@@ -31,18 +31,18 @@ extern void mem_getAllocSize(void);
 extern void route_findNextWaypoint(void);
 extern void route_createSegment(void);
 extern void node_createNamedChild(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void fn_80102890(void);
 extern void fn_801083D8(void);
 extern void fn_8011F8BC(void);
 extern void fn_8011FBD8(void);
 extern void fn_8011FE04(void);
 extern void fn_8012DB04(void);
-extern void fn_8016F3D0(void);
+extern void battle_canTargetActor(void);
 extern void fn_8017C904(void);
 extern void fn_8035B854(void);
 extern void fn_8036554C(void);
@@ -1005,7 +1005,7 @@ asm void fn_8001486C(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_8001486C_00000B6C
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_8001486C_00000B6C:
     addic. r3, r30, 0x48c
     beq lbl_fn_8001486C_00000B90
@@ -1074,7 +1074,7 @@ asm void fn_80014998(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     bne lbl_fn_80014998_00000C60
     li r3, 0x0
@@ -2980,7 +2980,7 @@ lbl_fn_80014A5C_00002870:
     mr r4, r26
     li r20, -0x1
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     beq lbl_fn_80014A5C_00002890
     subi r20, r21, 0x1

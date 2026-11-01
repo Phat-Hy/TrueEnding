@@ -12,12 +12,12 @@ extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void talk_formatQuotedString(void);
-extern void fn_8005BBF8(void);
-extern void fn_8005BCE8(void);
+extern void talk_parseQuotes(void);
+extern void talk_copySpeakerName(void);
 extern void fn_80069758(void);
-extern void fn_800697D8(void);
+extern void boss_recordDamage(void);
 extern void mem_alloc(void);
-extern void fn_8008B140(void);
+extern void map_processTrigger(void);
 extern void fn_800971D4(void);
 extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -25,7 +25,7 @@ extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void morph_updateMesh(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void fn_800DD8A8(void);
@@ -34,9 +34,9 @@ extern void fn_8011D424(void);
 extern void fn_801354B4(void);
 extern void fn_80136544(void);
 extern void boss_updatePhaseState(void);
-extern void fn_80145334(void);
+extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
-extern void fn_801765D8(void);
+extern void battle_awardExp(void);
 extern void fn_80176ACC(void);
 extern void fn_8017C974(void);
 extern void event_findEntryById(void);
@@ -49,8 +49,8 @@ extern void fn_803CC6B4(void);
 extern void fn_803E3BE8(void);
 extern void fn_803E5E64(void);
 extern void fn_803EC16C(void);
-extern void fn_803EC69C(void);
-extern void fn_803EC91C(void);
+extern void task_destroyWorker(void);
+extern void task_updateWorker(void);
 extern void fn_804439FC(void);
 extern void fn_8044D6AC(void);
 extern void boss_getOffset54(void);
@@ -205,7 +205,7 @@ lbl_fn_80431388_000000FC:
     bl fn_800971D4
     mr r3, r29
     li r4, 0x0
-    bl fn_803EC69C
+    bl task_destroyWorker
     cmpwi r30, 0x0
     ble lbl_fn_80431388_00000124
     mr r3, r29
@@ -232,11 +232,11 @@ asm void fn_80431458(void)
     psq_st f31, 0x68(r1), 0, 0
     bl _savegpr_21
     mr r25, r3
-    bl fn_803EC91C
+    bl task_updateWorker
     cmpwi r3, 0x0
     bne lbl_fn_80431458_00000428
     mr r3, r25
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_80431458_00000428
     lwz r0, 0x4ec(r25)
@@ -363,7 +363,7 @@ lbl_fn_80431458_00000328:
 lbl_fn_80431458_00000338:
     lwz r3, 0x288(r22)
     addi r3, r3, 0xb0
-    bl fn_8008B140
+    bl map_processTrigger
     cmpwi r3, 0x0
     beq lbl_fn_80431458_00000354
     li r21, 0x0
@@ -409,7 +409,7 @@ lbl_fn_80431458_000003B0:
     lwz r3, 0x780(r27)
     bl atn_Task_setActive
     lwz r3, 0x780(r27)
-    bl fn_801765D8
+    bl battle_awardExp
     lwz r3, 0x784(r27)
     cmpwi r3, 0x0
     beq lbl_fn_80431458_0000040C
@@ -646,7 +646,7 @@ lbl_fn_80431774_00000720:
     rlwinm r0, r0, 0, 29, 29
     cmplwi r0, 0x4
     beq lbl_fn_80431774_00000740
-    bl fn_801765D8
+    bl battle_awardExp
 lbl_fn_80431774_00000740:
     lwz r3, 0x784(r28)
     cmpwi r3, 0x0
@@ -1027,7 +1027,7 @@ lbl_fn_80431774_00000CC8:
     bl sprintf
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x490
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_fn_80431774_00000CF0:
     lwz r0, 0x4f0(r30)
     lwz r3, lbl_8087F430
@@ -1330,7 +1330,7 @@ asm void fn_8043239C(void)
     addi r4, r4, lbl_807774B8@l
     stw r4, 0x8(r1)
     la r4, lbl_8087D710
-    bl fn_8005BCE8
+    bl talk_copySpeakerName
     lis r28, lbl_807540A0@ha
     lfs f31, lbl_80886880
     mr r25, r29
@@ -1496,7 +1496,7 @@ lbl_fn_8043239C_00001384:
     stw r0, 0x3050(r29)
 lbl_fn_8043239C_000013AC:
     addi r3, r1, 0x8
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_8043239C_00001160
     lwz r0, 0x304c(r29)
@@ -1918,7 +1918,7 @@ asm void fn_80432C60(void)
 asm void fn_80432C64(void)
 {
     nofralloc
-    b fn_80145334
+    b quest_updateFlow
 }
 
 asm void fn_80432C68(void)

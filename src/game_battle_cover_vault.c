@@ -5,18 +5,18 @@
 extern void __register_global_object(void);
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
-extern void fn_8003EFB0(void);
+extern void ui_destroyWidget(void);
 extern void fn_800577D8(void);
 extern void fn_80058078(void);
 extern void fn_800580BC(void);
 extern void fn_800588FC(void);
 extern void talk_formatQuotedString(void);
-extern void fn_8005BBF8(void);
-extern void fn_8005BCE8(void);
+extern void talk_parseQuotes(void);
+extern void talk_copySpeakerName(void);
 extern void fn_80063D3C(void);
 extern void mem_alloc(void);
-extern void fn_8008AD4C(void);
-extern void fn_8008B140(void);
+extern void area_updateZoneState(void);
+extern void map_processTrigger(void);
 extern void fn_80092F1C(void);
 extern void atn_Anim_applyLayerTransform(void);
 extern void fn_80097B34(void);
@@ -25,29 +25,29 @@ extern void atn_Task_setActive(void);
 extern void str_skipWhitespace(void);
 extern void fn_8011BE54(void);
 extern void fn_8011F91C(void);
-extern void fn_8011FC10(void);
+extern void skill_findNodeById(void);
 extern void fn_8012B3E8(void);
 extern void fn_8012B988(void);
 extern void fn_8012D8B8(void);
-extern void fn_80145334(void);
-extern void fn_8015495C(void);
+extern void quest_updateFlow(void);
+extern void equip_applyToCharacter(void);
 extern void fn_801644D4(void);
 extern void fn_80176ACC(void);
 extern void fn_8017CB2C(void);
 extern void fn_802180A8(void);
 extern void sound_initGlobalInstances(void);
-extern void fn_80237654(void);
-extern void fn_802376D0(void);
+extern void res_Resource_unload(void);
+extern void res_MsgHandle_isLoading(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_update(void);
 extern void res_findResourceSlot(void);
 extern void fn_8023A02C(void);
-extern void fn_8023A680(void);
+extern void res_Shader_bindParams(void);
 extern void res_registerResource(void);
 extern void fn_803E598C(void);
-extern void fn_803EC568(void);
+extern void task_createWorker(void);
 extern void fn_803EC7A0(void);
-extern void fn_803EC91C(void);
+extern void task_updateWorker(void);
 extern void fn_803ED774(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
@@ -439,7 +439,7 @@ asm void fn_803F87E0(void)
     stw r31, 0xc(r1)
     mr r31, r3
     addi r3, r3, 0xf4
-    bl fn_8008B140
+    bl map_processTrigger
     cmpwi r3, 0x0
     beq lbl_fn_803F87E0_000004E8
     li r3, 0x1
@@ -453,7 +453,7 @@ lbl_fn_803F87E0_000004E8:
     b lbl_fn_803F87E0_00000558
 lbl_fn_803F87E0_00000500:
     addi r3, r31, 0x920
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     beq lbl_fn_803F87E0_00000518
     li r3, 0x1
@@ -530,7 +530,7 @@ asm void fn_803F8890(void)
     addi r4, r4, lbl_807774B8@l
     stw r4, 0x108(r1)
     la r4, lbl_8087D710
-    bl fn_8005BCE8
+    bl talk_copySpeakerName
     lis r3, lbl_807523EC@ha
     li r31, 0x1
     addi r30, r3, lbl_807523EC@l
@@ -550,7 +550,7 @@ lbl_fn_803F8890_00000624:
     mr r4, r3
     addi r3, r28, 0xf4
     li r5, 0x0
-    bl fn_8008AD4C
+    bl area_updateZoneState
     mr r3, r28
     addi r4, r28, 0xf4
     addi r5, r1, 0x108
@@ -686,7 +686,7 @@ lbl_fn_803F8890_00000844:
     bl talk_formatQuotedString
     mr r4, r3
     addi r3, r28, 0x920
-    bl fn_80237654
+    bl res_Resource_unload
     b lbl_fn_803F8890_00000944
 lbl_fn_803F8890_00000870:
     mr r3, r29
@@ -748,7 +748,7 @@ lbl_fn_803F8890_00000924:
     bl fn_803F8C98
 lbl_fn_803F8890_00000944:
     addi r3, r1, 0x108
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_803F8890_00000624
     lwz r0, 0x754(r1)
@@ -945,7 +945,7 @@ lbl_fn_803F8E68_00000BA0:
     lwz r3, lbl_8087F3C0
     li r7, 0x0
     li r10, 0x0
-    bl fn_8023A680
+    bl res_Shader_bindParams
 lbl_fn_803F8E68_00000BF4:
     lwz r3, 0x54(r31)
 lbl_fn_803F8E68_00000BF8:
@@ -1149,7 +1149,7 @@ lbl_fn_803F8F30_00000E68:
     stw r0, 0x10(r1)
     li r9, 0x0
     li r10, 0x0
-    bl fn_8023A680
+    bl res_Shader_bindParams
     lwz r3, lbl_8087F8A0
     cmpwi r3, 0x0
     beq lbl_fn_803F8F30_00000EBC
@@ -1354,7 +1354,7 @@ asm void fn_803F9420(void)
     lwz r5, 0x18(r30)
     mr r4, r29
     lwz r6, 0x1c(r30)
-    bl fn_803EC568
+    bl task_createWorker
     lis r4, lbl_8078CDF8@ha
     li r3, 0x0
     addi r4, r4, lbl_8078CDF8@l
@@ -1392,7 +1392,7 @@ asm void fn_803F94E0(void)
     stw r0, 0x34(r1)
     stw r31, 0x2c(r1)
     mr r31, r3
-    bl fn_803EC91C
+    bl task_updateWorker
     cmpwi r3, 0x0
     bne lbl_fn_803F94E0_00001240
     lwz r3, 0xf4(r31)
@@ -1455,7 +1455,7 @@ asm void fn_803F957C(void)
 lbl_fn_803F957C_000012A0:
     lwz r3, lbl_8087F408
     lwz r4, 0x24(r4)
-    bl fn_8011FC10
+    bl skill_findNodeById
     stw r3, 0xf8(r31)
     b lbl_fn_803F957C_000012C4
 lbl_fn_803F957C_000012B4:
@@ -1778,7 +1778,7 @@ lbl_fn_803F9624_0000171C:
     lwz r3, 0xf8(r30)
     stw r0, 0x58c(r3)
     lwz r3, 0xf8(r30)
-    bl fn_8015495C
+    bl equip_applyToCharacter
     lwz r3, 0xf8(r30)
     addi r3, r3, 0xc58
     bl fn_8011BE54
@@ -1957,7 +1957,7 @@ lbl_fn_803F9624_000019D4:
     bctrl
 lbl_fn_803F9624_000019F0:
     lwz r3, 0xf8(r30)
-    bl fn_80145334
+    bl quest_updateFlow
     lwz r3, 0x10c(r30)
     addi r0, r3, 0x1
     stw r0, 0x10c(r30)
@@ -1978,11 +1978,11 @@ lbl_fn_803F9624_00001A2C:
     lis r3, lbl_807C6BB8@ha
     li r0, 0x0
     stwu r0, lbl_807C6BB8@l(r3)
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     li r31, 0x1
     lis r5, lbl_807C8740@ha
     stw r0, 0x4(r3)
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     addi r5, r5, lbl_807C8740@l
     stw r0, 0x8(r3)
     stw r31, 0xc(r3)

@@ -6,7 +6,7 @@ extern void __files(void);
 extern void dtor_80084684(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_8008BBD8(void);
+extern void map_debugLog(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_applyWeights(void);
@@ -26,12 +26,12 @@ extern void fn_8013310C(void);
 extern void fn_80133130(void);
 extern void fn_8013322C(void);
 extern void fn_801446F0(void);
-extern void fn_801539E0(void);
+extern void inventory_unequipItem(void);
 extern void fn_80154344(void);
 extern void fn_80154654(void);
-extern void fn_8015495C(void);
+extern void equip_applyToCharacter(void);
 extern void fn_80155DAC(void);
-extern void fn_8016DA4C(void);
+extern void debuff_clearStatus(void);
 extern void fn_80188F08(void);
 extern void fn_80188F40(void);
 extern void fn_80191960(void);
@@ -180,7 +180,7 @@ lbl_fn_8018FF6C_000000A0:
     bl fn_8013310C
 lbl_fn_8018FF6C_000000C0:
     lwz r3, 0x4(r31)
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lwz r4, lbl_8087F1E4
     addi r3, r1, 0x10
     lwz r5, 0x4(r31)
@@ -313,7 +313,7 @@ lbl_fn_80190150_00000290:
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     lwz r3, 0x4(r31)
     li r0, 0x0
     stw r0, 0xd1c(r3)
@@ -403,7 +403,7 @@ lbl_fn_80190270_000003B8:
     stw r4, 0x90(r1)
     stw r0, 0x94(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_80190270_0000048C
     lwz r7, 0x84(r1)
@@ -506,7 +506,7 @@ lbl_fn_80190270_00000538:
     stw r4, 0x68(r1)
     stw r0, 0x6c(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_80190270_0000060C
     lwz r7, 0x5c(r1)
@@ -786,7 +786,7 @@ asm void fn_80190844(void)
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     lwz r4, 0x4(r31)
     lwz r6, 0x7e0(r4)
     rlwinm r0, r6, 0, 26, 26
@@ -849,12 +849,12 @@ asm void fn_801908F0(void)
     rlwinm r0, r0, 0, 27, 25
     stw r0, 0x12a4(r3)
     lwz r3, 0x4(r31)
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lwz r3, 0x4(r31)
     lwz r0, 0x12a4(r3)
     srwi. r0, r0, 31
     beq lbl_fn_801908F0_00000A08
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_801908F0_00000A08:
     lwz r3, 0x4(r31)
     li r4, 0x0
@@ -1063,7 +1063,7 @@ lbl_fn_80190AB8_00000CB8:
     stw r4, 0x48(r1)
     stw r0, 0x4c(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_80190AB8_00000D8C
     lwz r7, 0x3c(r1)
@@ -1373,7 +1373,7 @@ lbl_fn_80190F90_000010EC:
     stw r4, 0x48(r1)
     stw r0, 0x4c(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_80190F90_000011D0
     lwz r7, 0x3c(r1)
@@ -1488,12 +1488,12 @@ asm void fn_80191170(void)
     rlwinm r0, r0, 0, 27, 25
     stw r0, 0x12a4(r3)
     lwz r3, 0x4(r30)
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lwz r3, 0x4(r30)
     lwz r0, 0x12a4(r3)
     srwi. r0, r0, 31
     beq lbl_fn_80191170_000012D4
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_80191170_000012D4:
     lwz r3, 0x4(r30)
     lwz r0, 0x12a4(r3)
@@ -1961,7 +1961,7 @@ lbl_fn_80191828_00001950:
     stw r4, 0x20(r1)
     stw r0, 0x24(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_80191828_000019C4
     lwz r5, 0x18(r1)

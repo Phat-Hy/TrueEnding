@@ -8,7 +8,7 @@ extern void _savegpr_22(void);
 extern void _savegpr_27(void);
 extern void wcs_vformat(void);
 extern void fn_800FFE68(void);
-extern void fn_8016F3D0(void);
+extern void battle_canTargetActor(void);
 extern void assert_formatLocation(void);
 extern void event_findEntryById(void);
 extern void task_findEntryById(void);
@@ -406,7 +406,7 @@ lbl_fn_80108C10_00000448:
     mr r3, r30
     mr r4, r26
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     beq lbl_fn_80108C10_000004A4
     lwz r3, lbl_8087F9C0
@@ -419,7 +419,7 @@ lbl_fn_80108C10_000004A4:
     mr r3, r30
     mr r4, r26
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     bne lbl_fn_80108C10_00000588
     lwz r3, lbl_8087F9C0
@@ -455,7 +455,7 @@ lbl_fn_80108C10_00000520:
     mr r3, r29
     mr r4, r26
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     bne lbl_fn_80108C10_00000558
     lwz r3, lbl_8087F9C0
@@ -468,7 +468,7 @@ lbl_fn_80108C10_00000558:
     mr r3, r29
     mr r4, r26
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     beq lbl_fn_80108C10_00000588
     lwz r3, lbl_8087F9C0

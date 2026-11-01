@@ -12,7 +12,7 @@ extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
 extern void fn_8012B988(void);
 extern void fn_80134774(void);
-extern void fn_8014DEE4(void);
+extern void dialog_selectChoice(void);
 extern void fn_8014EE48(void);
 extern void fn_8014EEC4(void);
 extern void fn_8014F5D4(void);
@@ -285,10 +285,7 @@ lbl_fn_801CDE14_00000314:
     blr
 }
 
-asm void fn_801CE144(void)
-{
-    nofralloc
-    blr
+void fn_801CE144(void) {
 }
 
 asm void fn_801CE148(void)
@@ -1736,7 +1733,7 @@ lbl_fn_801CF3C0_000016D0:
     mr r4, r24
     li r5, 0x0
     li r6, 0x1
-    bl fn_8014DEE4
+    bl dialog_selectChoice
     b lbl_fn_801CF3C0_00001724
 lbl_fn_801CF3C0_00001714:
     cmpwi r28, 0x1
@@ -2018,7 +2015,7 @@ lbl_fn_801CF3C0_00001AA0:
     mr r4, r23
     li r5, 0x0
     li r6, 0x1
-    bl fn_8014DEE4
+    bl dialog_selectChoice
 lbl_fn_801CF3C0_00001AF8:
     lwz r0, 0x484(r25)
     stw r26, 0x4c(r1)
@@ -2081,7 +2078,7 @@ lbl_fn_801CF3C0_00001B80:
     mr r4, r23
     li r5, 0x0
     li r6, 0x1
-    bl fn_8014DEE4
+    bl dialog_selectChoice
 lbl_fn_801CF3C0_00001BD8:
     lwz r0, 0x484(r25)
     stw r24, 0x40(r1)

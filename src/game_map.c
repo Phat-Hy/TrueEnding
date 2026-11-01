@@ -7,7 +7,7 @@ extern void _savegpr_20(void);
 extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
-extern void fn_800697D8(void);
+extern void boss_recordDamage(void);
 extern void fn_8006B0C8(void);
 extern void fn_8006B174(void);
 extern void fn_8007C144(void);
@@ -73,12 +73,12 @@ extern u32 lbl_80880BF8;
 /* Function declarations */
 void fn_8008B130(void);
 void fn_8008B138(void);
-void fn_8008B140(void);
+void map_processTrigger(void);
 void fn_8008B964(void);
 void fn_8008B96C(void);
 void fn_8008B974(void);
 void fn_8008B978(void);
-void fn_8008BBD8(void);
+void map_debugLog(void);
 void fn_8008BC2C(void);
 void fn_8008BC58(void);
 void fn_8008BD10(void);
@@ -98,7 +98,7 @@ asm void fn_8008B138(void)
     b atn_LoadHandle_getData
 }
 
-asm void fn_8008B140(void)
+asm void map_processTrigger(void)
 {
     nofralloc
     stwu r1, -0x1c0(r1)
@@ -109,116 +109,116 @@ asm void fn_8008B140(void)
     lwz r0, 0x20c(r3)
     srawi r0, r0, 24
     cmpwi r0, 0x1
-    beq lbl_fn_8008B140_00000068
+    beq lbl_map_processTrigger_00000068
     cmpwi r0, 0x5
-    beq lbl_fn_8008B140_000000B8
+    beq lbl_map_processTrigger_000000B8
     cmpwi r0, 0x2
-    beq lbl_fn_8008B140_00000280
+    beq lbl_map_processTrigger_00000280
     cmpwi r0, 0x3
-    beq lbl_fn_8008B140_000003C4
+    beq lbl_map_processTrigger_000003C4
     cmpwi r0, 0x7
-    beq lbl_fn_8008B140_000004A0
+    beq lbl_map_processTrigger_000004A0
     cmpwi r0, 0x4
-    beq lbl_fn_8008B140_000006F8
+    beq lbl_map_processTrigger_000006F8
     cmpwi r0, 0x6
-    beq lbl_fn_8008B140_000007D4
-    b lbl_fn_8008B140_0000081C
-lbl_fn_8008B140_00000068:
+    beq lbl_map_processTrigger_000007D4
+    b lbl_map_processTrigger_0000081C
+lbl_map_processTrigger_00000068:
     addi r3, r3, 0x164
     bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
-    beq lbl_fn_8008B140_00000080
+    beq lbl_map_processTrigger_00000080
     li r3, 0x1
-    b lbl_fn_8008B140_00000820
-lbl_fn_8008B140_00000080:
+    b lbl_map_processTrigger_00000820
+lbl_map_processTrigger_00000080:
     addi r3, r21, 0x164
     bl atn_LoadHandle_getStatus
     cmpwi r3, 0x3
-    bne lbl_fn_8008B140_000000A4
+    bne lbl_map_processTrigger_000000A4
     lwz r0, 0x20c(r21)
     li r3, 0x5
     rlwimi r0, r3, 24, 0, 7
     stw r0, 0x20c(r21)
-    b lbl_fn_8008B140_000000B8
-lbl_fn_8008B140_000000A4:
+    b lbl_map_processTrigger_000000B8
+lbl_map_processTrigger_000000A4:
     lwz r0, 0x20c(r21)
     li r3, 0x9
     rlwimi r0, r3, 24, 0, 7
     stw r0, 0x20c(r21)
-    b lbl_fn_8008B140_0000081C
-lbl_fn_8008B140_000000B8:
+    b lbl_map_processTrigger_0000081C
+lbl_map_processTrigger_000000B8:
     addi r24, r21, 0x17c
     li r23, 0x0
     li r22, 0x1
-    b lbl_fn_8008B140_000000E4
-lbl_fn_8008B140_000000C8:
+    b lbl_map_processTrigger_000000E4
+lbl_map_processTrigger_000000C8:
     mr r3, r24
     bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
-    beq lbl_fn_8008B140_000000DC
+    beq lbl_map_processTrigger_000000DC
     li r23, 0x1
-lbl_fn_8008B140_000000DC:
+lbl_map_processTrigger_000000DC:
     addi r24, r24, 0x18
     addi r22, r22, 0x1
-lbl_fn_8008B140_000000E4:
+lbl_map_processTrigger_000000E4:
     lwz r3, 0x20c(r21)
     extlwi r0, r3, 9, 8
     srawi r0, r0, 24
     cmpw r22, r0
-    blt lbl_fn_8008B140_000000C8
+    blt lbl_map_processTrigger_000000C8
     extlwi r0, r3, 2, 26
     srawi. r0, r0, 31
-    beq lbl_fn_8008B140_00000148
+    beq lbl_map_processTrigger_00000148
     addi r3, r21, 0x1c4
     bl atn_LoadHandle_isLoading
     cmpwi r23, 0x0
     li r23, 0x0
-    bne lbl_fn_8008B140_00000120
+    bne lbl_map_processTrigger_00000120
     cmpwi r3, 0x0
-    beq lbl_fn_8008B140_00000124
-lbl_fn_8008B140_00000120:
+    beq lbl_map_processTrigger_00000124
+lbl_map_processTrigger_00000120:
     li r23, 0x1
-lbl_fn_8008B140_00000124:
+lbl_map_processTrigger_00000124:
     cmpwi r3, 0x0
-    bne lbl_fn_8008B140_00000148
+    bne lbl_map_processTrigger_00000148
     addi r3, r21, 0x1c4
     bl atn_LoadHandle_getStatus
     cmpwi r3, 0x4
-    bne lbl_fn_8008B140_00000148
+    bne lbl_map_processTrigger_00000148
     lwz r0, 0x20c(r21)
     rlwinm r0, r0, 0, 27, 25
     stw r0, 0x20c(r21)
-lbl_fn_8008B140_00000148:
+lbl_map_processTrigger_00000148:
     cmpwi r23, 0x0
-    beq lbl_fn_8008B140_00000158
+    beq lbl_map_processTrigger_00000158
     li r3, 0x1
-    b lbl_fn_8008B140_00000820
-lbl_fn_8008B140_00000158:
+    b lbl_map_processTrigger_00000820
+lbl_map_processTrigger_00000158:
     mr r3, r21
     bl fn_8009303C
     lwz r0, 0x20c(r21)
     slwi r0, r0, 30
     srawi. r0, r0, 31
-    beq lbl_fn_8008B140_000001B0
+    beq lbl_map_processTrigger_000001B0
     li r22, 0x1
-    b lbl_fn_8008B140_00000188
-lbl_fn_8008B140_00000178:
+    b lbl_map_processTrigger_00000188
+lbl_map_processTrigger_00000178:
     mr r3, r21
     mr r4, r22
     bl fn_8008C62C
     addi r22, r22, 0x1
-lbl_fn_8008B140_00000188:
+lbl_map_processTrigger_00000188:
     lwz r3, 0x20c(r21)
     extlwi r0, r3, 9, 8
     srawi r0, r0, 24
     cmpw r22, r0
-    blt lbl_fn_8008B140_00000178
+    blt lbl_map_processTrigger_00000178
     li r0, 0x8
     rlwimi r3, r0, 24, 0, 7
     rlwinm r0, r3, 0, 31, 29
     stw r0, 0x20c(r21)
-    b lbl_fn_8008B140_0000081C
-lbl_fn_8008B140_000001B0:
+    b lbl_map_processTrigger_0000081C
+lbl_map_processTrigger_000001B0:
     mr r3, r21
     bl fn_8008C950
     lwz r0, 0x4(r21)
@@ -226,30 +226,30 @@ lbl_fn_8008B140_000001B0:
     li r23, 0x1
     rlwinm r0, r0, 0, 30, 30
     cmplwi r0, 0x2
-    beq lbl_fn_8008B140_000001E4
+    beq lbl_map_processTrigger_000001E4
     addi r3, r21, 0x164
     bl fn_80476194
     cmpwi r3, 0x0
-    bne lbl_fn_8008B140_000001E4
+    bne lbl_map_processTrigger_000001E4
     li r23, 0x0
-lbl_fn_8008B140_000001E4:
+lbl_map_processTrigger_000001E4:
     cmpwi r23, 0x0
-    bne lbl_fn_8008B140_00000200
+    bne lbl_map_processTrigger_00000200
     addi r3, r21, 0x164
     bl fn_804761B0
     cmpwi r3, 0x0
-    bne lbl_fn_8008B140_00000200
+    bne lbl_map_processTrigger_00000200
     li r22, 0x0
-lbl_fn_8008B140_00000200:
+lbl_map_processTrigger_00000200:
     cmpwi r22, 0x0
-    beq lbl_fn_8008B140_00000270
+    beq lbl_map_processTrigger_00000270
     lwz r3, 0x16c(r21)
     cmpwi r3, 0x0
-    beq lbl_fn_8008B140_0000025C
+    beq lbl_map_processTrigger_0000025C
     lwz r3, 0x38(r3)
     lwz r0, 0x10(r3)
     cmpwi r0, 0x1
-    beq lbl_fn_8008B140_0000025C
+    beq lbl_map_processTrigger_0000025C
     addi r3, r21, 0x164
     bl atn_LoadHandle_getName
     lis r4, lbl_80732368@ha
@@ -263,184 +263,184 @@ lbl_fn_8008B140_00000200:
     stb r0, 0x187(r1)
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x88
-    bl fn_800697D8
-lbl_fn_8008B140_0000025C:
+    bl boss_recordDamage
+lbl_map_processTrigger_0000025C:
     lwz r0, 0x20c(r21)
     li r3, 0x8
     rlwimi r0, r3, 24, 0, 7
     stw r0, 0x20c(r21)
-    b lbl_fn_8008B140_0000081C
-lbl_fn_8008B140_00000270:
+    b lbl_map_processTrigger_0000081C
+lbl_map_processTrigger_00000270:
     lwz r0, 0x20c(r21)
     li r3, 0x2
     rlwimi r0, r3, 24, 0, 7
     stw r0, 0x20c(r21)
-lbl_fn_8008B140_00000280:
+lbl_map_processTrigger_00000280:
     lwz r0, 0x1e4(r21)
     cmpwi r0, 0x0
-    beq lbl_fn_8008B140_000003B4
+    beq lbl_map_processTrigger_000003B4
     li r23, 0x0
     li r24, 0x0
     li r22, 0x0
-    b lbl_fn_8008B140_000002D4
-lbl_fn_8008B140_0000029C:
+    b lbl_map_processTrigger_000002D4
+lbl_map_processTrigger_0000029C:
     lwz r3, 0x1ec(r21)
     lwzx r3, r3, r22
     lwz r3, 0x10(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_8008B140_000002CC
+    beq lbl_map_processTrigger_000002CC
     lwz r12, 0x0(r3)
     lwz r12, 0xc(r12)
     mtctr r12
     bctrl
     cmpwi r3, 0x0
-    beq lbl_fn_8008B140_000002CC
+    beq lbl_map_processTrigger_000002CC
     li r23, 0x1
-lbl_fn_8008B140_000002CC:
+lbl_map_processTrigger_000002CC:
     addi r24, r24, 0x1
     addi r22, r22, 0x4
-lbl_fn_8008B140_000002D4:
+lbl_map_processTrigger_000002D4:
     lwz r0, 0x1e4(r21)
     cmplw r24, r0
-    blt lbl_fn_8008B140_0000029C
+    blt lbl_map_processTrigger_0000029C
     cmpwi r23, 0x0
-    bne lbl_fn_8008B140_000002F8
+    bne lbl_map_processTrigger_000002F8
     lwz r3, lbl_8087EFB4
     lwz r0, 0x54(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_8008B140_00000300
-lbl_fn_8008B140_000002F8:
+    beq lbl_map_processTrigger_00000300
+lbl_map_processTrigger_000002F8:
     li r3, 0x1
-    b lbl_fn_8008B140_00000820
-lbl_fn_8008B140_00000300:
+    b lbl_map_processTrigger_00000820
+lbl_map_processTrigger_00000300:
     li r24, 0x0
     li r22, 0x0
     li r23, 0x0
-    b lbl_fn_8008B140_000003A8
-lbl_fn_8008B140_00000310:
+    b lbl_map_processTrigger_000003A8
+lbl_map_processTrigger_00000310:
     lwz r3, 0x1ec(r21)
     lwzx r3, r3, r22
     lwz r3, 0x10(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_8008B140_000003A0
+    beq lbl_map_processTrigger_000003A0
     lwz r0, 0x8(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_8008B140_00000348
+    bne lbl_map_processTrigger_00000348
     lwz r12, 0x0(r3)
     lwz r12, 0x14(r12)
     mtctr r12
     bctrl
     li r3, 0x1
-    b lbl_fn_8008B140_00000820
-lbl_fn_8008B140_00000348:
+    b lbl_map_processTrigger_00000820
+lbl_map_processTrigger_00000348:
     lwz r12, 0x0(r3)
     lwz r12, 0x10(r12)
     mtctr r12
     bctrl
     cmpwi r3, 0x0
-    bne lbl_fn_8008B140_00000368
+    bne lbl_map_processTrigger_00000368
     li r3, 0x1
-    b lbl_fn_8008B140_00000820
-lbl_fn_8008B140_00000368:
+    b lbl_map_processTrigger_00000820
+lbl_map_processTrigger_00000368:
     lwz r3, 0x1ec(r21)
     lwzx r3, r3, r22
     lwz r3, 0x10(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_8008B140_000003A0
-    beq lbl_fn_8008B140_00000394
+    beq lbl_map_processTrigger_000003A0
+    beq lbl_map_processTrigger_00000394
     lwz r12, 0x0(r3)
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-lbl_fn_8008B140_00000394:
+lbl_map_processTrigger_00000394:
     lwz r3, 0x1ec(r21)
     lwzx r3, r3, r22
     stw r23, 0x10(r3)
-lbl_fn_8008B140_000003A0:
+lbl_map_processTrigger_000003A0:
     addi r24, r24, 0x1
     addi r22, r22, 0x4
-lbl_fn_8008B140_000003A8:
+lbl_map_processTrigger_000003A8:
     lwz r0, 0x1e4(r21)
     cmplw r24, r0
-    blt lbl_fn_8008B140_00000310
-lbl_fn_8008B140_000003B4:
+    blt lbl_map_processTrigger_00000310
+lbl_map_processTrigger_000003B4:
     lwz r0, 0x20c(r21)
     li r3, 0x3
     rlwimi r0, r3, 24, 0, 7
     stw r0, 0x20c(r21)
-lbl_fn_8008B140_000003C4:
+lbl_map_processTrigger_000003C4:
     lwz r0, 0x1e4(r21)
     cmpwi r0, 0x0
-    beq lbl_fn_8008B140_00000490
+    beq lbl_map_processTrigger_00000490
     li r23, 0x1
     li r24, 0x0
     li r22, 0x0
-    b lbl_fn_8008B140_00000418
-lbl_fn_8008B140_000003E0:
+    b lbl_map_processTrigger_00000418
+lbl_map_processTrigger_000003E0:
     lwz r3, 0x1ec(r21)
     lwzx r3, r3, r22
     lwz r3, 0x10(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_8008B140_00000410
+    beq lbl_map_processTrigger_00000410
     lwz r12, 0x0(r3)
     lwz r12, 0x10(r12)
     mtctr r12
     bctrl
     cmpwi r3, 0x0
-    bne lbl_fn_8008B140_00000410
+    bne lbl_map_processTrigger_00000410
     li r23, 0x0
-lbl_fn_8008B140_00000410:
+lbl_map_processTrigger_00000410:
     addi r24, r24, 0x1
     addi r22, r22, 0x4
-lbl_fn_8008B140_00000418:
+lbl_map_processTrigger_00000418:
     lwz r0, 0x1e4(r21)
     cmplw r24, r0
-    blt lbl_fn_8008B140_000003E0
+    blt lbl_map_processTrigger_000003E0
     cmpwi r23, 0x0
-    bne lbl_fn_8008B140_00000434
+    bne lbl_map_processTrigger_00000434
     li r3, 0x1
-    b lbl_fn_8008B140_00000820
-lbl_fn_8008B140_00000434:
+    b lbl_map_processTrigger_00000820
+lbl_map_processTrigger_00000434:
     li r24, 0x0
     li r22, 0x0
     li r23, 0x0
-    b lbl_fn_8008B140_00000484
-lbl_fn_8008B140_00000444:
+    b lbl_map_processTrigger_00000484
+lbl_map_processTrigger_00000444:
     lwz r3, 0x1ec(r21)
     lwzx r3, r3, r22
     lwz r3, 0x10(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_8008B140_00000470
-    beq lbl_fn_8008B140_00000470
+    beq lbl_map_processTrigger_00000470
+    beq lbl_map_processTrigger_00000470
     lwz r12, 0x0(r3)
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-lbl_fn_8008B140_00000470:
+lbl_map_processTrigger_00000470:
     lwz r3, 0x1ec(r21)
     addi r24, r24, 0x1
     lwzx r3, r3, r22
     addi r22, r22, 0x4
     stw r23, 0x10(r3)
-lbl_fn_8008B140_00000484:
+lbl_map_processTrigger_00000484:
     lwz r0, 0x1e4(r21)
     cmplw r24, r0
-    blt lbl_fn_8008B140_00000444
-lbl_fn_8008B140_00000490:
+    blt lbl_map_processTrigger_00000444
+lbl_map_processTrigger_00000490:
     lwz r0, 0x20c(r21)
     li r3, 0x7
     rlwimi r0, r3, 24, 0, 7
     stw r0, 0x20c(r21)
-lbl_fn_8008B140_000004A0:
+lbl_map_processTrigger_000004A0:
     addi r3, r21, 0xfc
     bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
-    beq lbl_fn_8008B140_000004B8
+    beq lbl_map_processTrigger_000004B8
     li r3, 0x1
-    b lbl_fn_8008B140_00000820
-lbl_fn_8008B140_000004B8:
+    b lbl_map_processTrigger_00000820
+lbl_map_processTrigger_000004B8:
     mr r3, r21
     bl fn_8008BD10
     mr r3, r21
@@ -449,7 +449,7 @@ lbl_fn_8008B140_000004B8:
     lwz r0, 0x20c(r21)
     extlwi r0, r0, 2, 28
     srawi. r0, r0, 31
-    bne lbl_fn_8008B140_000006E8
+    bne lbl_map_processTrigger_000006E8
     addi r3, r21, 0x164
     bl atn_LoadHandle_getName
     li r0, 0x0
@@ -477,14 +477,14 @@ lbl_fn_8008B140_000004B8:
     bl fn_8006B0C8
     lwz r0, 0x1c(r1)
     srwi. r0, r0, 31
-    beq lbl_fn_8008B140_00000554
+    beq lbl_map_processTrigger_00000554
     lwz r3, 0x24(r1)
     bl dtor_80084684
-lbl_fn_8008B140_00000554:
+lbl_map_processTrigger_00000554:
     lwz r0, 0x104(r21)
     li r23, 0x0
     cmpwi r0, 0x0
-    beq lbl_fn_8008B140_000006D4
+    beq lbl_map_processTrigger_000006D4
     lis r27, lbl_807C7268@ha
     lis r29, fn_8008BC2C@ha
     lis r30, fn_8008BC58@ha
@@ -497,8 +497,8 @@ lbl_fn_8008B140_00000554:
     li r22, 0x0
     li r31, 0x1
     li r26, 0x0
-    b lbl_fn_8008B140_000006C8
-lbl_fn_8008B140_00000598:
+    b lbl_map_processTrigger_000006C8
+lbl_map_processTrigger_00000598:
     lbz r0, lbl_8087EF1C
     lwz r4, 0x0(r25)
     extsb. r0, r0
@@ -515,11 +515,11 @@ lbl_fn_8008B140_00000598:
     stw r0, 0x30(r1)
     stw r21, 0x34(r1)
     stw r26, 0x70(r1)
-    bne lbl_fn_8008B140_000005E8
+    bne lbl_map_processTrigger_000005E8
     stw r29, 0x4(r28)
     stw r30, lbl_807C7268@l(r27)
     stb r31, lbl_8087EF1C
-lbl_fn_8008B140_000005E8:
+lbl_map_processTrigger_000005E8:
     lwz r6, 0x28(r1)
     addi r3, r1, 0x50
     lwz r5, 0x2c(r1)
@@ -530,9 +530,9 @@ lbl_fn_8008B140_000005E8:
     stw r4, 0x58(r1)
     stw r0, 0x5c(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
-    bne lbl_fn_8008B140_0000065C
+    bne lbl_map_processTrigger_0000065C
     lwz r5, 0x50(r1)
     addic. r6, r24, 0x4
     lwz r4, 0x54(r1)
@@ -542,138 +542,138 @@ lbl_fn_8008B140_000005E8:
     stw r4, 0x64(r1)
     stw r3, 0x68(r1)
     stw r0, 0x6c(r1)
-    beq lbl_fn_8008B140_00000654
+    beq lbl_map_processTrigger_00000654
     stw r5, 0x0(r6)
     stw r4, 0x4(r6)
     stw r3, 0x8(r6)
     stw r0, 0xc(r6)
-lbl_fn_8008B140_00000654:
+lbl_map_processTrigger_00000654:
     li r0, 0x1
-    b lbl_fn_8008B140_00000660
-lbl_fn_8008B140_0000065C:
+    b lbl_map_processTrigger_00000660
+lbl_map_processTrigger_0000065C:
     li r0, 0x0
-lbl_fn_8008B140_00000660:
+lbl_map_processTrigger_00000660:
     cmpwi r0, 0x0
-    beq lbl_fn_8008B140_00000670
+    beq lbl_map_processTrigger_00000670
     stw r28, 0x70(r1)
-    b lbl_fn_8008B140_00000674
-lbl_fn_8008B140_00000670:
+    b lbl_map_processTrigger_00000674
+lbl_map_processTrigger_00000670:
     stw r26, 0x70(r1)
-lbl_fn_8008B140_00000674:
+lbl_map_processTrigger_00000674:
     lwz r3, 0x108(r21)
     addi r4, r1, 0x10
     addi r5, r1, 0x70
     lwzx r3, r3, r22
     bl fn_80080C20
     cmpwi r24, 0x0
-    beq lbl_fn_8008B140_000006C0
+    beq lbl_map_processTrigger_000006C0
     lwz r3, 0x70(r1)
     cmpwi r3, 0x0
-    beq lbl_fn_8008B140_000006C0
+    beq lbl_map_processTrigger_000006C0
     lwz r12, 0x0(r3)
     cmpwi r12, 0x0
-    beq lbl_fn_8008B140_000006BC
+    beq lbl_map_processTrigger_000006BC
     addi r3, r24, 0x4
     li r5, 0x1
     mr r4, r3
     mtctr r12
     bctrl
-lbl_fn_8008B140_000006BC:
+lbl_map_processTrigger_000006BC:
     stw r26, 0x70(r1)
-lbl_fn_8008B140_000006C0:
+lbl_map_processTrigger_000006C0:
     addi r22, r22, 0x4
     addi r23, r23, 0x1
-lbl_fn_8008B140_000006C8:
+lbl_map_processTrigger_000006C8:
     lwz r0, 0x104(r21)
     cmplw r23, r0
-    blt lbl_fn_8008B140_00000598
-lbl_fn_8008B140_000006D4:
+    blt lbl_map_processTrigger_00000598
+lbl_map_processTrigger_000006D4:
     lwz r0, 0x10(r1)
     srwi. r0, r0, 31
-    beq lbl_fn_8008B140_000006E8
+    beq lbl_map_processTrigger_000006E8
     lwz r3, 0x18(r1)
     bl dtor_80084684
-lbl_fn_8008B140_000006E8:
+lbl_map_processTrigger_000006E8:
     lwz r0, 0x20c(r21)
     li r3, 0x4
     rlwimi r0, r3, 24, 0, 7
     stw r0, 0x20c(r21)
-lbl_fn_8008B140_000006F8:
+lbl_map_processTrigger_000006F8:
     li r24, 0x0
     li r23, 0x0
     li r25, 0x0
-    b lbl_fn_8008B140_0000075C
-lbl_fn_8008B140_00000708:
+    b lbl_map_processTrigger_0000075C
+lbl_map_processTrigger_00000708:
     li r22, 0x0
     li r26, 0x0
-    b lbl_fn_8008B140_00000740
-lbl_fn_8008B140_00000714:
+    b lbl_map_processTrigger_00000740
+lbl_map_processTrigger_00000714:
     lwz r0, 0xc(r3)
     add r3, r0, r26
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_8008B140_00000738
+    beq lbl_map_processTrigger_00000738
     bl atn_LH_Texture_update
     cmpwi r3, 0x0
-    beq lbl_fn_8008B140_00000738
+    beq lbl_map_processTrigger_00000738
     li r24, 0x1
-lbl_fn_8008B140_00000738:
+lbl_map_processTrigger_00000738:
     addi r26, r26, 0x18
     addi r22, r22, 0x1
-lbl_fn_8008B140_00000740:
+lbl_map_processTrigger_00000740:
     lwz r0, 0x108(r21)
     lwzx r3, r25, r0
     lbz r0, 0x4a(r3)
     cmpw r22, r0
-    blt lbl_fn_8008B140_00000714
+    blt lbl_map_processTrigger_00000714
     addi r25, r25, 0x4
     addi r23, r23, 0x1
-lbl_fn_8008B140_0000075C:
+lbl_map_processTrigger_0000075C:
     lwz r0, 0x104(r21)
     cmplw r23, r0
-    blt lbl_fn_8008B140_00000708
+    blt lbl_map_processTrigger_00000708
     cmpwi r24, 0x0
-    beq lbl_fn_8008B140_00000778
+    beq lbl_map_processTrigger_00000778
     li r3, 0x1
-    b lbl_fn_8008B140_00000820
-lbl_fn_8008B140_00000778:
+    b lbl_map_processTrigger_00000820
+lbl_map_processTrigger_00000778:
     li r22, 0x0
     li r23, 0x0
-    b lbl_fn_8008B140_00000798
-lbl_fn_8008B140_00000784:
+    b lbl_map_processTrigger_00000798
+lbl_map_processTrigger_00000784:
     lwz r3, 0x108(r21)
     lwzx r3, r3, r23
     bl fn_80081BD0
     addi r23, r23, 0x4
     addi r22, r22, 0x1
-lbl_fn_8008B140_00000798:
+lbl_map_processTrigger_00000798:
     lwz r0, 0x104(r21)
     cmplw r22, r0
-    blt lbl_fn_8008B140_00000784
+    blt lbl_map_processTrigger_00000784
     lwz r4, 0x20c(r21)
     extlwi r0, r4, 2, 29
     srawi. r0, r0, 31
-    beq lbl_fn_8008B140_000007C8
+    beq lbl_map_processTrigger_000007C8
     li r3, 0x8
     rlwinm r0, r4, 0, 30, 28
     rlwimi r0, r3, 24, 0, 7
     stw r0, 0x20c(r21)
-    b lbl_fn_8008B140_000007D4
-lbl_fn_8008B140_000007C8:
+    b lbl_map_processTrigger_000007D4
+lbl_map_processTrigger_000007C8:
     li r0, 0x6
     rlwimi r4, r0, 24, 0, 7
     stw r4, 0x20c(r21)
-lbl_fn_8008B140_000007D4:
+lbl_map_processTrigger_000007D4:
     lwz r12, 0x0(r21)
     mr r3, r21
     lwz r12, 0x20(r12)
     mtctr r12
     bctrl
     cmpwi r3, 0x0
-    beq lbl_fn_8008B140_000007F8
+    beq lbl_map_processTrigger_000007F8
     li r3, 0x1
-    b lbl_fn_8008B140_00000820
-lbl_fn_8008B140_000007F8:
+    b lbl_map_processTrigger_00000820
+lbl_map_processTrigger_000007F8:
     lwz r0, 0x20c(r21)
     li r3, 0x8
     rlwimi r0, r3, 24, 0, 7
@@ -683,9 +683,9 @@ lbl_fn_8008B140_000007F8:
     lwz r12, 0x24(r12)
     mtctr r12
     bctrl
-lbl_fn_8008B140_0000081C:
+lbl_map_processTrigger_0000081C:
     li r3, 0x0
-lbl_fn_8008B140_00000820:
+lbl_map_processTrigger_00000820:
     lmw r21, 0x194(r1)
     lwz r0, 0x1c4(r1)
     mtlr r0
@@ -707,10 +707,7 @@ asm void fn_8008B96C(void)
     blr
 }
 
-asm void fn_8008B974(void)
-{
-    nofralloc
-    blr
+void fn_8008B974(void) {
 }
 
 asm void fn_8008B978(void)
@@ -807,7 +804,7 @@ lbl_fn_8008B978_00000980:
     stw r4, 0x58(r1)
     stw r0, 0x5c(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_8008B978_000009F4
     lwz r5, 0x50(r1)
@@ -884,11 +881,11 @@ lbl_fn_8008B978_00000A94:
     blr
 }
 
-asm void fn_8008BBD8(void)
+asm void map_debugLog(void)
 {
     nofralloc
     stwu r1, -0x70(r1)
-    bne cr1, lbl_fn_8008BBD8_00000AD0
+    bne cr1, lbl_map_debugLog_00000AD0
     stfd f1, 0x28(r1)
     stfd f2, 0x30(r1)
     stfd f3, 0x38(r1)
@@ -897,7 +894,7 @@ asm void fn_8008BBD8(void)
     stfd f6, 0x50(r1)
     stfd f7, 0x58(r1)
     stfd f8, 0x60(r1)
-lbl_fn_8008BBD8_00000AD0:
+lbl_map_debugLog_00000AD0:
     stw r3, 0x8(r1)
     li r3, 0x0
     stw r4, 0xc(r1)
@@ -1009,7 +1006,7 @@ asm void fn_8008BD10(void)
     stb r0, 0x527(r1)
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x428
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_fn_8008BD10_00000C44:
     lwz r3, 0x148(r26)
     cmpwi r3, 0x0
@@ -1123,7 +1120,7 @@ lbl_fn_8008BD10_00000D70:
     stb r0, 0x427(r1)
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x328
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_fn_8008BD10_00000DD8:
     addi r3, r26, 0x164
     bl fn_80476204
@@ -1219,7 +1216,7 @@ lbl_fn_8008BD10_00000EEC:
     stb r31, 0x327(r1)
     addi r4, r1, 0x228
     lwz r3, lbl_8087EEB8
-    bl fn_800697D8
+    bl boss_recordDamage
     lwz r3, lbl_8087EFE0
     addi r4, r23, 0xa0
     bl fn_800C5F5C
@@ -1243,7 +1240,7 @@ lbl_fn_8008BD10_00000F48:
     stb r31, 0x227(r1)
     addi r4, r1, 0x128
     lwz r3, lbl_8087EEB8
-    bl fn_800697D8
+    bl boss_recordDamage
     lwz r3, lbl_8087EFE0
     addi r4, r23, 0xe6
     bl fn_800C5F5C
@@ -1318,7 +1315,7 @@ lbl_fn_8008BD10_00001054:
     stb r0, 0x127(r1)
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x28
-    bl fn_800697D8
+    bl boss_recordDamage
     lwz r3, 0x140(r26)
     addi r27, r26, 0x164
     lwz r4, 0x16c(r26)
@@ -1767,7 +1764,7 @@ lbl_fn_8008C62C_000016B4:
     stb r19, 0x127(r1)
     addi r4, r1, 0x28
     lwz r3, lbl_8087EEB8
-    bl fn_800697D8
+    bl boss_recordDamage
     li r6, -0x4
 lbl_fn_8008C62C_000016C8:
     lwz r3, 0x110(r29)

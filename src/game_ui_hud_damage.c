@@ -13,14 +13,14 @@ extern void actor_dispatchMessage(void);
 extern void fn_8006AD24(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_8008BBD8(void);
+extern void map_debugLog(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void fn_800FB4B0(void);
-extern void fn_8015495C(void);
-extern void fn_8016DA4C(void);
+extern void equip_applyToCharacter(void);
+extern void debuff_clearStatus(void);
 extern void fn_80178864(void);
 extern void fn_801789D8(void);
 extern void fn_80192758(void);
@@ -31,9 +31,9 @@ extern void task_findEntryById(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_unload(void);
-extern void fn_8035B694(void);
-extern void fn_8035B78C(void);
-extern void fn_803EA77C(void);
+extern void entity_Instance_constructor(void);
+extern void entity_Instance_destructor(void);
+extern void chest_spawnLoot(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void PSMTXRotRad(void);
@@ -208,7 +208,7 @@ lbl_fn_801CAAF0_0000010C:
     stw r4, 0x9c(r1)
     stw r0, 0xa0(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_801CAAF0_000001E0
     lwz r7, 0x90(r1)
@@ -386,7 +386,7 @@ lbl_fn_801CAAF0_000003AC:
     stw r4, 0x74(r1)
     stw r0, 0x78(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_801CAAF0_00000480
     lwz r7, 0x68(r1)
@@ -771,7 +771,7 @@ lbl_fn_801CB2D4_0000084C:
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
 lbl_fn_801CB2D4_00000900:
     li r30, 0x1
 lbl_fn_801CB2D4_00000904:
@@ -1004,7 +1004,7 @@ lbl_fn_801CB434_00000BD4:
     li r6, 0x0
     lfs f1, lbl_80882930
     lfs f2, lbl_80882968
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_801CB434_00000C50:
     psq_l f31, 0xf8(r1), 0, 0
     mr r3, r30
@@ -1138,7 +1138,7 @@ lbl_fn_801CB76C_00000DCC:
     li r29, 0x1
     stw r29, 0x30(r3)
     lwz r3, 0x4(r3)
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lwz r27, 0x4(r30)
     lwz r26, lbl_8087F048
     lwz r28, 0x638(r27)
@@ -1448,7 +1448,7 @@ lbl_fn_801CBB34_00001218:
     stfs f2, 0x150(r1)
     stb r0, 0x154(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_801CBB34_00001350
     lwz r7, 0x138(r1)
@@ -1779,7 +1779,7 @@ lbl_fn_801CC0AC_000016B0:
     mr r3, r29
     mr r4, r30
     mr r5, r6
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lis r3, lbl_807824D8@ha
     li r28, 0x0
     addi r3, r3, lbl_807824D8@l
@@ -1953,7 +1953,7 @@ lbl_fn_801CC3AC_00001914:
 lbl_fn_801CC3AC_00001934:
     mr r3, r29
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r30, 0x0
     ble lbl_fn_801CC3AC_00001950
     mr r3, r29

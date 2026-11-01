@@ -3,17 +3,17 @@
 
 /* External function declarations */
 extern void __files(void);
-extern void fn_8004D388(void);
+extern void collision_queryGeometry(void);
 extern void mem_free(void);
-extern void fn_8008BBD8(void);
+extern void map_debugLog(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_80108C10(void);
 extern void magic_dispatchActionCommand(void);
-extern void fn_80144710(void);
-extern void fn_801539E0(void);
+extern void quest_evaluateConditions(void);
+extern void inventory_unequipItem(void);
 extern void fn_80155DAC(void);
-extern void fn_8016DA4C(void);
+extern void debuff_clearStatus(void);
 extern void fn_80176548(void);
 extern void fn_80188A70(void);
 extern void fn_80188AA0(void);
@@ -234,7 +234,7 @@ lbl_fn_801971B8_00000200:
     psq_st f1, 0x0(r7), 0, 0
     stfs f2, 0x144(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_801971B8_0000031C
     lwz r6, 0x12c(r1)
@@ -335,7 +335,7 @@ asm void fn_80197528(void)
     lwz r4, 0x4(r3)
     stw r0, 0x560(r4)
     lwz r3, 0x4(r3)
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lwz r3, 0x4(r31)
     lwz r0, 0x12a4(r3)
     extrwi. r0, r0, 1, 25
@@ -347,7 +347,7 @@ lbl_fn_80197528_000003CC:
     lwz r0, 0x12a4(r3)
     srwi. r0, r0, 31
     beq lbl_fn_80197528_000003E0
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_80197528_000003E0:
     lwz r3, 0x4(r31)
     li r0, 0x1
@@ -591,7 +591,7 @@ asm void fn_801978C0(void)
     lwz r4, 0x4(r3)
     stw r0, 0x560(r4)
     lwz r3, 0x4(r3)
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lwz r3, 0x4(r31)
     lwz r0, 0x12a4(r3)
     extrwi. r0, r0, 1, 25
@@ -603,7 +603,7 @@ lbl_fn_801978C0_0000076C:
     lwz r0, 0x12a4(r3)
     srwi. r0, r0, 31
     beq lbl_fn_801978C0_00000780
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_801978C0_00000780:
     lwz r5, 0x4(r31)
     li r0, 0x1
@@ -848,7 +848,7 @@ lbl_fn_80197A68_00000AB0:
     psq_st f1, 0x0(r7), 0, 0
     stfs f2, 0x144(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_80197A68_00000BCC
     lwz r6, 0x12c(r1)
@@ -1096,7 +1096,7 @@ lbl_fn_80197DC8_00000E74:
     stfs f2, 0x53c(r3)
     psq_st f1, 0x0(r30), 0, 0
     lwz r3, 0x4(r29)
-    bl fn_80144710
+    bl quest_evaluateConditions
 lbl_fn_80197DC8_00000EA4:
     lwz r3, 0x4(r29)
     li r0, 0x0
@@ -1303,7 +1303,7 @@ lbl_fn_801980B4_00001178:
     stfs f2, 0x53c(r3)
     psq_st f1, 0x0(r30), 0, 0
     lwz r3, 0x4(r29)
-    bl fn_80144710
+    bl quest_evaluateConditions
 lbl_fn_801980B4_000011A8:
     lwz r3, 0x4(r29)
     li r4, 0x0
@@ -1615,7 +1615,7 @@ lbl_fn_80198528_000015EC:
     stfs f2, 0x53c(r3)
     psq_st f1, 0x0(r30), 0, 0
     lwz r3, 0x4(r29)
-    bl fn_80144710
+    bl quest_evaluateConditions
 lbl_fn_80198528_0000161C:
     lwz r3, 0x4(r29)
     li r4, 0x0
@@ -1806,7 +1806,7 @@ lbl_fn_80198874_00001898:
     addi r6, r1, 0x40
     lis r7, 0x8000
     li r9, 0x0
-    bl fn_8004D388
+    bl collision_queryGeometry
     addi r4, r1, 0x1d0
     lwz r5, 0x4(r30)
     addi r3, r1, 0x20

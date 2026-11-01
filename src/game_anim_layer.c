@@ -8,33 +8,33 @@ extern void fn_80092954(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_applyWeights(void);
-extern void fn_800CB360(void);
+extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void morph_updateMesh(void);
 extern void atn_Task_setActive(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8C6C(void);
+extern void scissor_clipFrustum(void);
 extern void clip_calculateFrustum(void);
 extern void fn_80108F38(void);
 extern void fn_80126214(void);
 extern void boss_updatePhaseState(void);
 extern void fn_8013A258(void);
-extern void fn_8013CB68(void);
+extern void npc_updateTalkInteraction(void);
 extern void fn_801426A4(void);
-extern void fn_80144710(void);
-extern void fn_80145334(void);
+extern void quest_evaluateConditions(void);
+extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
-extern void fn_8014C540(void);
-extern void fn_80151448(void);
+extern void dialog_updateScriptState(void);
+extern void inventory_applyItemStats(void);
 extern void actor_setState(void);
 extern void fn_80170A20(void);
 extern void fn_801781B0(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
-extern void fn_80237518(void);
-extern void fn_802375C4(void);
-extern void fn_80237654(void);
-extern void fn_802376D0(void);
+extern void res_MsgHandle_ctor(void);
+extern void res_Resource_destructor(void);
+extern void res_Resource_unload(void);
+extern void res_MsgHandle_isLoading(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_unload(void);
@@ -49,8 +49,8 @@ extern void fn_80271DAC(void);
 extern void fn_802721A0(void);
 extern void fn_8027232C(void);
 extern void fn_80272660(void);
-extern void fn_8035B694(void);
-extern void fn_8035B78C(void);
+extern void entity_Instance_constructor(void);
+extern void entity_Instance_destructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
@@ -60,7 +60,7 @@ extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
 extern void rand(void);
-extern void fn_8068A850(void);
+extern void std_sin(void);
 extern void std_atan2(void);
 
 /* External data declarations */
@@ -720,7 +720,7 @@ asm void fn_8026FC0C(void)
     stw r31, 0xc(r1)
     mr r31, r3
     stw r30, 0x8(r1)
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lfs f0, lbl_8088379C
     lis r3, lbl_80784F48@ha
     li r30, 0x0
@@ -743,7 +743,7 @@ asm void fn_8026FC0C(void)
     stfs f0, 0x14f4(r31)
     stfs f0, 0x14f8(r31)
     stfs f0, 0x14fc(r31)
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     addi r3, r31, 0x150c
     bl res_MsgHandle_constructor
     addi r3, r31, 0x1518
@@ -753,7 +753,7 @@ asm void fn_8026FC0C(void)
     addi r3, r31, 0x1530
     bl res_MsgHandle_constructor
     addi r3, r31, 0x153c
-    bl fn_800CB360
+    bl morph_reset
     lis r6, lbl_807448D8@ha
     lis r4, lbl_807C8350@ha
     lwz r5, lbl_8087F430
@@ -811,7 +811,7 @@ lbl_fn_8026FC0C_00000988:
     stw r0, 0xc(r5)
     stw r0, 0x10(r5)
     stw r0, 0x14(r5)
-    bl fn_80237654
+    bl res_Resource_unload
     addi r30, r30, lbl_8074495C@l
     addi r3, r31, 0x150c
     addi r4, r30, 0x16
@@ -888,10 +888,10 @@ lbl_fn_8026FDD0_00000AD8:
 lbl_fn_8026FDD0_00000AF8:
     addi r3, r29, 0x1500
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     mr r3, r29
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r30, 0x0
     ble lbl_fn_8026FDD0_00000B20
     mr r3, r29
@@ -927,7 +927,7 @@ asm void fn_8026FECC(void)
     bne lbl_fn_8026FECC_00000C40
 lbl_fn_8026FECC_00000B7C:
     addi r3, r31, 0x1500
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_8026FECC_00000C40
     addi r3, r31, 0x150c
@@ -1085,7 +1085,7 @@ lbl_fn_8026FFE4_00000D98:
     cror eq, lt, eq
     bne lbl_fn_8026FFE4_00001144
     mr r3, r31
-    bl fn_80144710
+    bl quest_evaluateConditions
     lwz r30, 0x590(r31)
     li r3, 0x3f3
     bl task_findEntryById
@@ -1098,7 +1098,7 @@ lbl_fn_8026FFE4_00000D98:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     b lbl_fn_8026FFE4_00001144
     lfs f31, 0x2e4(r3)
     li r4, 0x0
@@ -1148,7 +1148,7 @@ lbl_fn_8026FFE4_00000E64:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     b lbl_fn_8026FFE4_00001144
     mr r3, r31
     bl fn_80271104
@@ -1321,9 +1321,9 @@ lbl_fn_8026FFE4_0000113C:
     bl fn_80270B8C
 lbl_fn_8026FFE4_00001144:
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     lwz r0, 0x44(r1)
     psq_l f31, 0x38(r1), 0, 0
     lfd f31, 0x30(r1)
@@ -1579,7 +1579,7 @@ lbl_fn_80270774_00001464:
     bgt lbl_fn_80270774_00001534
     lis r3, lbl_80744930@ha
     lfd f1, lbl_80744930@l(r3)
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     fneg f0, f0
     fcmpo cr0, f31, f0
@@ -1589,7 +1589,7 @@ lbl_fn_80270774_00001464:
 lbl_fn_80270774_00001534:
     lis r3, lbl_80744930@ha
     lfd f1, lbl_80744930@l(r3)
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     fcmpo cr0, f31, f0
     ble lbl_fn_80270774_00001550
@@ -1647,7 +1647,7 @@ lbl_fn_80270774_000015AC:
 lbl_fn_80270774_0000160C:
     mr r3, r30
     mr r4, r31
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r12, 0x0(r30)
     mr r3, r30
     mr r4, r31
@@ -2100,7 +2100,7 @@ lbl_fn_80270B8C_00001C98:
     fmr f1, f3
     li r5, 0x0
     fmuls f2, f0, f30
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
 lbl_fn_80270B8C_00001CAC:
     lwz r0, 0x214(r1)
     psq_l f31, 0x208(r1), 0, 0

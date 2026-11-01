@@ -8,7 +8,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void atn_Task_setActive(void);
 extern void system_getNextSequenceId(void);
 extern void actor_setState(void);
-extern void fn_801765D8(void);
+extern void battle_awardExp(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
@@ -1762,7 +1762,7 @@ lbl_fn_802A2070_0000181C:
     stw r0, 0x12a4(r3)
     bl atn_Task_setActive
     mr r3, r31
-    bl fn_801765D8
+    bl battle_awardExp
     lwz r0, 0x1554(r31)
     lwz r3, lbl_8087F430
     cmpwi r0, 0x0

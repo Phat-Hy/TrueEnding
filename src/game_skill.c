@@ -57,7 +57,7 @@ void fn_800610A0(void);
 void fn_800610A4(void);
 void fn_8006144C(void);
 void skill_calculateDamage(void);
-void fn_80061824(void);
+void skill_calcTrajectory(void);
 void fn_80061AE4(void);
 void atn_ComDrawFont_destructor(void);
 void fn_80061E2C(void);
@@ -566,7 +566,7 @@ lbl_skill_calculateDamage_000006DC:
     mr r8, r28
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     mr r3, r31
     bl mem_getAllocSize
     addi r11, r1, 0x30
@@ -589,7 +589,7 @@ lbl_skill_calculateDamage_000006DC:
     blr
 }
 
-asm void fn_80061824(void)
+asm void skill_calcTrajectory(void)
 {
     nofralloc
     stwu r1, -0xc0(r1)
@@ -633,23 +633,23 @@ asm void fn_80061824(void)
     mr r28, r8
     mr r29, r9
     mr r30, r10
-    ble lbl_fn_80061824_00000834
+    ble lbl_skill_calcTrajectory_00000834
     li r31, 0x0
-    b lbl_fn_80061824_00000858
-lbl_fn_80061824_00000834:
+    b lbl_skill_calcTrajectory_00000858
+lbl_skill_calcTrajectory_00000834:
     lwz r0, 0x4(r3)
     add. r31, r0, r12
-    beq lbl_fn_80061824_0000084C
+    beq lbl_skill_calcTrajectory_0000084C
     lis r4, lbl_80777920@ha
     addi r4, r4, lbl_80777920@l
     stw r4, 0x0(r31)
-lbl_fn_80061824_0000084C:
+lbl_skill_calcTrajectory_0000084C:
     lwz r4, 0xc(r3)
     addi r0, r4, 0x74
     stw r0, 0xc(r3)
-lbl_fn_80061824_00000858:
+lbl_skill_calcTrajectory_00000858:
     cmpwi r31, 0x0
-    beq lbl_fn_80061824_000009EC
+    beq lbl_skill_calcTrajectory_000009EC
     mr r3, r24
     bl wcslen
     addi r0, r3, 0x1
@@ -666,53 +666,53 @@ lbl_fn_80061824_00000858:
     add r5, r5, r3
     add r3, r6, r5
     cmpw r3, r0
-    ble lbl_fn_80061824_000008AC
+    ble lbl_skill_calcTrajectory_000008AC
     li r22, 0x0
-    b lbl_fn_80061824_000008B8
-lbl_fn_80061824_000008AC:
+    b lbl_skill_calcTrajectory_000008B8
+lbl_skill_calcTrajectory_000008AC:
     lwz r0, 0x4(r23)
     stw r3, 0xc(r23)
     add r22, r0, r6
-lbl_fn_80061824_000008B8:
+lbl_skill_calcTrajectory_000008B8:
     cmpwi r22, 0x0
-    beq lbl_fn_80061824_000009EC
+    beq lbl_skill_calcTrajectory_000009EC
     mr r3, r22
     mr r4, r24
     bl wcscpy
     lwz r0, 0xa0(r23)
     li r3, 0x1
     cmpwi r0, 0x6
-    beq lbl_fn_80061824_000008EC
+    beq lbl_skill_calcTrajectory_000008EC
     cmpwi r0, 0x8
-    beq lbl_fn_80061824_000008EC
+    beq lbl_skill_calcTrajectory_000008EC
     cmpwi r0, 0xd
-    bne lbl_fn_80061824_000008F0
-lbl_fn_80061824_000008EC:
+    bne lbl_skill_calcTrajectory_000008F0
+lbl_skill_calcTrajectory_000008EC:
     li r3, 0x0
-lbl_fn_80061824_000008F0:
+lbl_skill_calcTrajectory_000008F0:
     stw r3, 0x4(r31)
     cmpwi r26, 0x0
     li r0, 0x0
     stw r22, 0x10(r31)
     stw r27, 0x8(r31)
     stw r0, 0xc(r31)
-    beq lbl_fn_80061824_00000918
+    beq lbl_skill_calcTrajectory_00000918
     lwz r0, 0xc(r31)
     ori r0, r0, 0x1
     stw r0, 0xc(r31)
-lbl_fn_80061824_00000918:
+lbl_skill_calcTrajectory_00000918:
     lwz r0, 0xa0(r23)
     cmpwi r0, 0x6
-    beq lbl_fn_80061824_00000934
+    beq lbl_skill_calcTrajectory_00000934
     cmpwi r0, 0x8
-    beq lbl_fn_80061824_00000934
+    beq lbl_skill_calcTrajectory_00000934
     cmpwi r0, 0xd
-    bne lbl_fn_80061824_00000940
-lbl_fn_80061824_00000934:
+    bne lbl_skill_calcTrajectory_00000940
+lbl_skill_calcTrajectory_00000934:
     lwz r0, 0xc(r31)
     ori r0, r0, 0x4
     stw r0, 0xc(r31)
-lbl_fn_80061824_00000940:
+lbl_skill_calcTrajectory_00000940:
     stfs f24, 0x14(r31)
     cmpwi r3, 0x1
     stfs f25, 0x18(r31)
@@ -720,20 +720,20 @@ lbl_fn_80061824_00000940:
     stfs f28, 0x20(r31)
     stw r25, 0x24(r31)
     stfs f29, 0x28(r31)
-    beq lbl_fn_80061824_00000974
+    beq lbl_skill_calcTrajectory_00000974
     lwz r0, 0xa0(r23)
     cmpwi r0, 0x8
-    beq lbl_fn_80061824_00000974
+    beq lbl_skill_calcTrajectory_00000974
     cmpwi r0, 0xd
-    bne lbl_fn_80061824_00000980
-lbl_fn_80061824_00000974:
+    bne lbl_skill_calcTrajectory_00000980
+lbl_skill_calcTrajectory_00000974:
     li r0, 0x0
     stb r0, 0x2c(r31)
-    b lbl_fn_80061824_00000988
-lbl_fn_80061824_00000980:
+    b lbl_skill_calcTrajectory_00000988
+lbl_skill_calcTrajectory_00000980:
     li r0, 0x1
     stb r0, 0x2c(r31)
-lbl_fn_80061824_00000988:
+lbl_skill_calcTrajectory_00000988:
     stb r28, 0x2d(r31)
     addi r3, r1, 0x8
     mr r4, r31
@@ -759,7 +759,7 @@ lbl_fn_80061824_00000988:
     lwz r3, lbl_8087EFB4
     lwz r5, 0xa0(r23)
     bl fn_800BDB58
-lbl_fn_80061824_000009EC:
+lbl_skill_calcTrajectory_000009EC:
     addi r11, r1, 0x40
     psq_l f31, 0xb8(r1), 0, 0
     lfd f31, 0xb0(r1)

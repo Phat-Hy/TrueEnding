@@ -2223,10 +2223,7 @@ asm void fn_80699E24(void)
     b fn_80699C74
 }
 
-asm void fn_80699E2C(void)
-{
-    nofralloc
-    blr
+void fn_80699E2C(void) {
 }
 
 asm void fn_80699E30(void)

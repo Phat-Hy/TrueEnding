@@ -8,7 +8,7 @@ extern void fn_80242A8C(void);
 extern void fn_80242FF4(void);
 extern void fn_806920C0(void);
 extern void fn_8069293C(void);
-extern void fn_806952C4(void);
+extern void msl_releaseRefCount(void);
 
 /* External data declarations */
 
@@ -92,7 +92,7 @@ lbl_fn_8023D308_000000E4:
     lwz r3, 0x24(r1)
     cmpwi r3, 0x0
     beq lbl_fn_8023D308_000000FC
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_8023D308_000000FC:
     cmpwi r29, 0x0
     addi r25, r1, 0x70
@@ -353,7 +353,7 @@ lbl_fn_8023D308_0000045C:
     lwz r3, 0x1c(r1)
     cmpwi r3, 0x0
     beq lbl_fn_8023D308_00000474
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_8023D308_00000474:
     lhz r0, 0x30(r26)
     rlwinm. r0, r0, 0, 22, 22
@@ -667,7 +667,7 @@ lbl_fn_8023D308_0000088C:
     lwz r3, 0x14(r1)
     cmpwi r3, 0x0
     beq lbl_fn_8023D308_000008A4
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_8023D308_000008A4:
     mr r3, r26
     mr r4, r29
@@ -931,7 +931,7 @@ lbl_fn_8023DE24_00000C04:
     lwz r3, 0x24(r1)
     cmpwi r3, 0x0
     beq lbl_fn_8023DE24_00000C1C
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_8023DE24_00000C1C:
     or. r0, r31, r29
     addi r25, r1, 0x70
@@ -1193,7 +1193,7 @@ lbl_fn_8023DE24_00000F80:
     lwz r3, 0x1c(r1)
     cmpwi r3, 0x0
     beq lbl_fn_8023DE24_00000F98
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_8023DE24_00000F98:
     lhz r0, 0x30(r26)
     rlwinm. r0, r0, 0, 22, 22
@@ -1508,7 +1508,7 @@ lbl_fn_8023DE24_000013B4:
     lwz r3, 0x14(r1)
     cmpwi r3, 0x0
     beq lbl_fn_8023DE24_000013CC
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_8023DE24_000013CC:
     li r30, 0x0
     xoris r0, r29, 0x8000
@@ -1856,7 +1856,7 @@ lbl_fn_8023EA78_00001858:
     lwz r3, 0x24(r1)
     cmpwi r3, 0x0
     beq lbl_fn_8023EA78_00001870
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_8023EA78_00001870:
     or. r0, r31, r29
     addi r25, r1, 0x70
@@ -2118,7 +2118,7 @@ lbl_fn_8023EA78_00001BD4:
     lwz r3, 0x1c(r1)
     cmpwi r3, 0x0
     beq lbl_fn_8023EA78_00001BEC
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_8023EA78_00001BEC:
     lhz r0, 0x30(r26)
     rlwinm. r0, r0, 0, 22, 22
@@ -2433,7 +2433,7 @@ lbl_fn_8023EA78_00002008:
     lwz r3, 0x14(r1)
     cmpwi r3, 0x0
     beq lbl_fn_8023EA78_00002020
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_8023EA78_00002020:
     mr r3, r26
     mr r6, r31

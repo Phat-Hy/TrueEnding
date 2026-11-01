@@ -18,11 +18,11 @@ extern void strstr(void);
 extern void atoi(void);
 extern void fn_806D57A0(void);
 extern void fn_806D5850(void);
-extern void fn_806D58F0(void);
+extern void net_bufferGetCount(void);
 extern void net_bufferGetElement(void);
 extern void fn_806D5930(void);
 extern void fn_806D5C90(void);
-extern void fn_806D7A90(void);
+extern void net_socketConnect(void);
 extern void fn_806D7AA0(void);
 extern void net_socketClose(void);
 extern void fn_806D7B30(void);
@@ -174,7 +174,7 @@ lbl_fn_806F8B00_00000184:
     stw r0, 0x0(r29)
     cmpwi r3, 0x0
     beq lbl_fn_806F8B00_000003CC
-    bl fn_806D58F0
+    bl net_bufferGetCount
     lis r4, lbl_8076B838@ha
     lwzu r24, lbl_8076B838@l(r4)
     stw r24, 0x10(r1)
@@ -255,7 +255,7 @@ lbl_fn_806F8B00_000002A8:
     cmpwi r23, 0x0
     blt lbl_fn_806F8B00_000003B0
     lwz r3, 0x228(r28)
-    bl fn_806D58F0
+    bl net_bufferGetCount
     cmpw r23, r3
     bge lbl_fn_806F8B00_000003B0
     lwz r3, 0x228(r28)
@@ -703,7 +703,7 @@ lbl_fn_806F9160_000008B8:
     b lbl_fn_806F9160_00000930
 lbl_fn_806F9160_00000908:
     addi r3, r14, 0x100
-    bl fn_806D7A90
+    bl net_socketConnect
     mr r20, r3
     mr r5, r15
     addi r4, r1, 0x90
@@ -736,7 +736,7 @@ lbl_fn_806F9160_00000970:
     stw r0, 0x0(r31)
     cmpwi r3, 0x0
     beq lbl_fn_806F9160_00000BB8
-    bl fn_806D58F0
+    bl net_bufferGetCount
     lis r4, lbl_8076B838@ha
     lwzu r17, lbl_8076B838@l(r4)
     stw r17, 0x10(r1)
@@ -817,7 +817,7 @@ lbl_fn_806F9160_00000A94:
     cmpwi r18, 0x0
     blt lbl_fn_806F9160_00000B9C
     lwz r3, 0x228(r30)
-    bl fn_806D58F0
+    bl net_bufferGetCount
     cmpw r18, r3
     bge lbl_fn_806F9160_00000B9C
     lwz r3, 0x228(r30)
@@ -1261,7 +1261,7 @@ lbl_fn_806F96F0_000010C4:
     addi r27, r27, 0x1
 lbl_fn_806F96F0_000010C8:
     lwz r3, 0x228(r28)
-    bl fn_806D58F0
+    bl net_bufferGetCount
     cmpw r27, r3
     blt lbl_fn_806F96F0_00001090
     li r27, -0x1
@@ -1346,7 +1346,7 @@ lbl_fn_806F96F0_000011E8:
     cmpwi r27, 0x0
     blt lbl_fn_806F96F0_000012E4
     lwz r3, 0x228(r28)
-    bl fn_806D58F0
+    bl net_bufferGetCount
     cmpw r27, r3
     bge lbl_fn_806F96F0_000012E4
     lwz r3, 0x228(r28)
@@ -1673,7 +1673,7 @@ lbl_fn_806F9D60_0000166C:
     addi r26, r26, 0x1
 lbl_fn_806F9D60_00001670:
     lwz r3, 0x228(r28)
-    bl fn_806D58F0
+    bl net_bufferGetCount
     cmpw r26, r3
     blt lbl_fn_806F9D60_00001638
     li r26, -0x1
@@ -1687,7 +1687,7 @@ lbl_fn_806F9D60_00001684:
     stw r31, 0x8(r3)
     blt lbl_fn_806F9D60_00002478
     lwz r3, 0x228(r28)
-    bl fn_806D58F0
+    bl net_bufferGetCount
     cmpw r26, r3
     bge lbl_fn_806F9D60_00002478
     lwz r3, 0x228(r28)
@@ -1937,7 +1937,7 @@ lbl_fn_806F9D60_00001A1C:
     addi r27, r27, 0x1
 lbl_fn_806F9D60_00001A20:
     lwz r3, 0x228(r28)
-    bl fn_806D58F0
+    bl net_bufferGetCount
     cmpw r27, r3
     blt lbl_fn_806F9D60_000019E8
     li r27, -0x1
@@ -1951,7 +1951,7 @@ lbl_fn_806F9D60_00001A34:
     stw r30, 0x8(r3)
     blt lbl_fn_806F9D60_00002478
     lwz r3, 0x228(r28)
-    bl fn_806D58F0
+    bl net_bufferGetCount
     cmpw r27, r3
     bge lbl_fn_806F9D60_00002478
     lwz r3, 0x228(r28)
@@ -2201,7 +2201,7 @@ lbl_fn_806F9D60_00001DCC:
     addi r27, r27, 0x1
 lbl_fn_806F9D60_00001DD0:
     lwz r3, 0x228(r28)
-    bl fn_806D58F0
+    bl net_bufferGetCount
     cmpw r27, r3
     blt lbl_fn_806F9D60_00001D98
     li r27, -0x1
@@ -2215,7 +2215,7 @@ lbl_fn_806F9D60_00001DE4:
     stw r30, 0x8(r3)
     blt lbl_fn_806F9D60_00002478
     lwz r3, 0x228(r28)
-    bl fn_806D58F0
+    bl net_bufferGetCount
     cmpw r27, r3
     bge lbl_fn_806F9D60_00002478
     lwz r3, 0x228(r28)
@@ -2604,7 +2604,7 @@ lbl_fn_806F9D60_00002364:
     addi r26, r26, 0x1
 lbl_fn_806F9D60_00002368:
     lwz r3, 0x228(r28)
-    bl fn_806D58F0
+    bl net_bufferGetCount
     cmpw r26, r3
     blt lbl_fn_806F9D60_00002330
     li r26, -0x1
@@ -2612,7 +2612,7 @@ lbl_fn_806F9D60_0000237C:
     cmpwi r26, -0x1
     ble lbl_fn_806F9D60_00002478
     lwz r3, 0x228(r28)
-    bl fn_806D58F0
+    bl net_bufferGetCount
     cmpw r26, r3
     bge lbl_fn_806F9D60_00002478
     lwz r3, 0x228(r28)

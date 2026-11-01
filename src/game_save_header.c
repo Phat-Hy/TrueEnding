@@ -14,9 +14,9 @@ extern void actor_dispatchMessage(void);
 extern void talk_parseDialogue(void);
 extern void fn_8005B8F8(void);
 extern void fn_8005B9AC(void);
-extern void fn_80061824(void);
+extern void skill_calcTrajectory(void);
 extern void fn_8006AD24(void);
-extern void fn_8006EF48(void);
+extern void script_executeOpcode(void);
 extern void str_assignBuffer(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
@@ -44,7 +44,7 @@ extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_80473F88(void);
+extern void shockwave_freeEmitter(void);
 extern void taskManager_updateTasks(void);
 extern void printf(void);
 extern void wcslen(void);
@@ -904,14 +904,14 @@ lbl_save_updateHeader_00000AA0:
     lhz r9, 0xe(r31)
     lfs f7, 0x78(r1)
     lfs f8, 0x7c(r1)
-    bl fn_80061824
+    bl skill_calcTrajectory
     lwz r3, lbl_8087EEC8
     mr r4, r26
     lfs f1, 0x98(r1)
     li r5, 0x1
     lhz r6, 0x12c(r31)
     lfs f2, lbl_80882C5C
-    bl fn_8006EF48
+    bl script_executeOpcode
     fadds f27, f27, f1
     b lbl_save_updateHeader_00000B68
 lbl_save_updateHeader_00000B1C:
@@ -1235,7 +1235,7 @@ lbl_fn_801F362C_00000F0C:
     bl fn_801F36C8
 lbl_fn_801F362C_00000F40:
     addi r3, r30, 0xc
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     li r0, 0x2
     stw r0, 0x8(r30)
 lbl_fn_801F362C_00000F50:

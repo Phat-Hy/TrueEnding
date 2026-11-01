@@ -18,21 +18,21 @@ extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void str_findChar(void);
-extern void fn_80116FC0(void);
+extern void actor_findSpawnTemplate(void);
 extern void actor_spawnActorWithId(void);
 extern void fn_8011770C(void);
 extern void fn_8012B028(void);
 extern void fn_80134800(void);
 extern void save_validateHeader(void);
 extern void fn_801F4AA0(void);
-extern void fn_801F4CB4(void);
+extern void save_formatSlotTitle(void);
 extern void saveSlot_readSummary(void);
-extern void fn_801F64D0(void);
+extern void save_createWorkerTask(void);
 extern void save_computeCrc32(void);
 extern void fn_801F6E78(void);
-extern void fn_801F837C(void);
+extern void save_findEntryByName(void);
 extern void fn_801F8598(void);
 extern void thread_dispatchToQueue(void);
 extern void fn_801FEF40(void);
@@ -884,7 +884,7 @@ lbl_fn_805716B4_00000A3C:
 lbl_fn_805716B4_00000A88:
     mr r3, r28
     mr r4, r31
-    bl fn_801F64D0
+    bl save_createWorkerTask
     add r5, r28, r30
     li r4, 0x1
     stw r3, 0x4c(r5)
@@ -955,7 +955,7 @@ asm void fn_8057185C(void)
     stw r29, 0x14(r1)
     stw r28, 0x10(r1)
     mr r28, r3
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_8057185C_00000C60
     lwz r3, 0x48(r28)
@@ -1262,7 +1262,7 @@ lbl_fn_80571C68_00000FAC:
     lis r4, 0x89
     li r3, 0x0
     addi r4, r4, 0x54d8
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r4, 0x68(r31)
     lis r5, lbl_8075FFD0@ha
     addi r5, r5, lbl_8075FFD0@l
@@ -1855,12 +1855,12 @@ lbl_fn_80572454_000017D0:
     mr r5, r22
     addi r4, r24, 0xa3
     li r6, 0x0
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r3, 0x48(r27)
     addi r4, r24, 0xb0
     lwz r5, 0xa8(r27)
     li r6, 0x0
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r0, 0xa8(r27)
     cmpw r22, r0
     blt lbl_fn_80572454_00001834
@@ -1945,7 +1945,7 @@ lbl_fn_80572454_000018A0:
     stw r0, 0x38(r5)
     lwz r3, 0x4c(r29)
     lwz r5, 0x8(r6)
-    bl fn_801F837C
+    bl save_findEntryByName
     lwz r3, lbl_8087F8A0
     lwz r4, 0x70(r31)
     bl fn_8054A340

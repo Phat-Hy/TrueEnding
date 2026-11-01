@@ -18,12 +18,12 @@ extern void fn_801CF334(void);
 extern void fn_801CFA5C(void);
 extern void fn_801D4E74(void);
 extern void fn_801DCE88(void);
-extern void fn_801F48C8(void);
+extern void save_parseSlotStats(void);
 extern void fn_801F4AA0(void);
-extern void fn_801F4CB4(void);
+extern void save_formatSlotTitle(void);
 extern void saveSlot_readSummary(void);
 extern void fn_801F7590(void);
-extern void fn_801F837C(void);
+extern void save_findEntryByName(void);
 extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
 extern void thread_dispatchToQueue(void);
@@ -484,7 +484,7 @@ lbl_fn_801E6714_00000554:
     lwz r5, 0x8(r20)
     mr r3, r24
     addi r4, r31, 0x14
-    bl fn_801F837C
+    bl save_findEntryByName
     b lbl_fn_801E6714_000005C8
 lbl_fn_801E6714_000005AC:
     lwz r3, 0x0(r26)
@@ -493,7 +493,7 @@ lbl_fn_801E6714_000005AC:
     lwz r5, 0x80(r3)
     mr r3, r24
     addi r4, r31, 0x14
-    bl fn_801F837C
+    bl save_findEntryByName
 lbl_fn_801E6714_000005C8:
     addi r5, r1, 0x38
     psq_l f1, 0x0(r30), 0, 0
@@ -739,7 +739,7 @@ lbl_fn_801E6B10_000008D0:
     mr r20, r3
     mr r3, r24
     addi r4, r31, 0x14
-    bl fn_801F837C
+    bl save_findEntryByName
     b lbl_fn_801E6B10_0000099C
 lbl_fn_801E6B10_0000095C:
     lwz r3, lbl_8087F4F0
@@ -759,7 +759,7 @@ lbl_fn_801E6B10_0000095C:
 lbl_fn_801E6B10_00000994:
     la r5, lbl_808813D0
 lbl_fn_801E6B10_00000998:
-    bl fn_801F837C
+    bl save_findEntryByName
 lbl_fn_801E6B10_0000099C:
     lwz r4, lbl_8087F4F0
     mr r5, r20
@@ -1136,7 +1136,7 @@ asm void fn_801E714C(void)
     psq_st f2, 0x8(r6), 0, 0
     psq_st f1, 0x0(r5), 0, 0
     psq_st f2, 0x8(r5), 0, 0
-    bl fn_801F48C8
+    bl save_parseSlotStats
     b lbl_fn_801E714C_00000F2C
 lbl_fn_801E714C_00000EC8:
     lis r3, lbl_80782898@ha
@@ -1163,7 +1163,7 @@ lbl_fn_801E714C_00000EC8:
     psq_st f2, 0x8(r6), 0, 0
     psq_st f1, 0x0(r5), 0, 0
     psq_st f2, 0x8(r5), 0, 0
-    bl fn_801F48C8
+    bl save_parseSlotStats
 lbl_fn_801E714C_00000F2C:
     mr r3, r29
     mr r4, r30
@@ -1206,7 +1206,7 @@ lbl_fn_801E714C_00000F2C:
     psq_st f2, 0x8(r6), 0, 0
     psq_st f1, 0x0(r5), 0, 0
     psq_st f2, 0x8(r5), 0, 0
-    bl fn_801F48C8
+    bl save_parseSlotStats
     b lbl_fn_801E714C_0000103C
 lbl_fn_801E714C_00000FD8:
     lis r3, lbl_80782898@ha
@@ -1233,7 +1233,7 @@ lbl_fn_801E714C_00000FD8:
     psq_st f2, 0x8(r6), 0, 0
     psq_st f1, 0x0(r5), 0, 0
     psq_st f2, 0x8(r5), 0, 0
-    bl fn_801F48C8
+    bl save_parseSlotStats
 lbl_fn_801E714C_0000103C:
     lwz r4, -0x7d70(r27)
     li r3, 0x0
@@ -1274,7 +1274,7 @@ lbl_fn_801E714C_0000103C:
     psq_st f2, 0x8(r6), 0, 0
     psq_st f1, 0x0(r5), 0, 0
     psq_st f2, 0x8(r5), 0, 0
-    bl fn_801F48C8
+    bl save_parseSlotStats
     b lbl_fn_801E714C_00001144
 lbl_fn_801E714C_000010E0:
     lis r3, lbl_80782898@ha
@@ -1301,7 +1301,7 @@ lbl_fn_801E714C_000010E0:
     psq_st f2, 0x8(r6), 0, 0
     psq_st f1, 0x0(r5), 0, 0
     psq_st f2, 0x8(r5), 0, 0
-    bl fn_801F48C8
+    bl save_parseSlotStats
 lbl_fn_801E714C_00001144:
     lwz r4, -0x7d68(r27)
     li r3, 0x1
@@ -1351,7 +1351,7 @@ lbl_fn_801E714C_00001170:
     psq_st f2, 0x8(r6), 0, 0
     psq_st f1, 0x0(r5), 0, 0
     psq_st f2, 0x8(r5), 0, 0
-    bl fn_801F48C8
+    bl save_parseSlotStats
     b lbl_fn_801E714C_0000126C
 lbl_fn_801E714C_00001208:
     lis r3, lbl_80782898@ha
@@ -1378,7 +1378,7 @@ lbl_fn_801E714C_00001208:
     psq_st f2, 0x8(r6), 0, 0
     psq_st f1, 0x0(r5), 0, 0
     psq_st f2, 0x8(r5), 0, 0
-    bl fn_801F48C8
+    bl save_parseSlotStats
 lbl_fn_801E714C_0000126C:
     addi r11, r1, 0x100
     bl _restgpr_24
@@ -1686,7 +1686,7 @@ lbl_fn_801E75F8_000016D4:
     mr r3, r29
     addi r4, r1, 0x128
     li r6, 0x0
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     mr r3, r19
     bl fn_80117200
     mr r5, r3

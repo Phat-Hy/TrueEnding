@@ -16,28 +16,28 @@ extern void fn_800CB6B0(void);
 extern void atn_Task_setActive(void);
 extern void str_skipWhitespace(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8574(void);
-extern void fn_800F8C6C(void);
+extern void viewport_updateCulling(void);
+extern void scissor_clipFrustum(void);
 extern void fn_801255C8(void);
 extern void fn_80126214(void);
 extern void fn_80128930(void);
 extern void fn_80128A30(void);
 extern void fn_8012DB04(void);
 extern void boss_updatePhaseState(void);
-extern void fn_8013CB68(void);
-extern void fn_80145334(void);
+extern void npc_updateTalkInteraction(void);
+extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
-extern void fn_8014C540(void);
+extern void dialog_updateScriptState(void);
 extern void fn_8015DBC8(void);
 extern void actor_setState(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
-extern void fn_80237518(void);
-extern void fn_802375C4(void);
-extern void fn_80237654(void);
-extern void fn_802376D0(void);
+extern void res_MsgHandle_ctor(void);
+extern void res_Resource_destructor(void);
+extern void res_Resource_unload(void);
+extern void res_MsgHandle_isLoading(void);
 extern void res_findResourceSlot(void);
-extern void fn_8023A680(void);
+extern void res_Shader_bindParams(void);
 extern void fn_802B98B0(void);
 extern void fn_802B9C5C(void);
 extern void kpad_getClampData(void);
@@ -217,18 +217,18 @@ lbl_fn_802B77AC_000000E0:
     cmpwi r3, 0x0
     mr r0, r3
     beq lbl_fn_802B77AC_00000170
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     mr r0, r3
 lbl_fn_802B77AC_00000170:
     lwz r3, 0x1514(r31)
     li r4, 0x1
     stw r0, 0x1514(r31)
-    bl fn_802375C4
+    bl res_Resource_destructor
     lis r4, lbl_8074681C@ha
     lwz r3, 0x1514(r31)
     addi r4, r4, lbl_8074681C@l
     addi r4, r4, 0x49
-    bl fn_80237654
+    bl res_Resource_unload
 lbl_fn_802B77AC_00000194:
     lwz r0, 0x12a8(r31)
     mr r3, r31
@@ -307,7 +307,7 @@ lbl_fn_802B7970_00000274:
     cmpwi r3, 0x0
     beq lbl_fn_802B7970_000002B4
     lwz r3, 0x1514(r31)
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     beq lbl_fn_802B7970_000002B4
     li r3, 0x0
@@ -548,7 +548,7 @@ lbl_fn_802B7CE0_000005D8:
     bl fn_802B9C5C
 lbl_fn_802B7CE0_000005F4:
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
     lwz r0, 0x38(r31)
     clrlwi r0, r0, 31
     cmplwi r0, 0x1
@@ -557,7 +557,7 @@ lbl_fn_802B7CE0_000005F4:
     extrwi. r0, r0, 1, 6
     bne lbl_fn_802B7CE0_00000620
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
 lbl_fn_802B7CE0_00000620:
     mr r3, r31
     bl fn_802B98B0
@@ -1904,7 +1904,7 @@ lbl_fn_802B8AA4_000018BC:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     lwz r0, 0x1514(r31)
     cmpwi r0, 0x0
     bne lbl_fn_802B8AA4_00001950
@@ -1979,7 +1979,7 @@ lbl_fn_802B8AA4_000019B8:
     lwz r3, lbl_8087F3C0
     li r10, 0x0
     lwz r4, 0x1514(r31)
-    bl fn_8023A680
+    bl res_Shader_bindParams
     lwz r12, 0x0(r30)
     mr r4, r30
     addi r3, r1, 0x130
@@ -2138,7 +2138,7 @@ lbl_fn_802B8AA4_00001C64:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     lfs f3, 0x2e4(r31)
     lfs f0, lbl_80884160
     fcmpo cr0, f3, f0
@@ -2392,7 +2392,7 @@ lbl_fn_802B8AA4_00002024:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
     b lbl_fn_802B8AA4_0000209C
 lbl_fn_802B8AA4_00002054:
     lfs f27, 0x2e4(r31)
@@ -2422,7 +2422,7 @@ lbl_fn_802B8AA4_0000209C:
     addi r4, r1, 0x1b4
     fmuls f2, f0, f29
     li r5, 0x0
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
 lbl_fn_802B8AA4_000020B8:
     lwz r0, 0x3e4(r1)
     psq_l f31, 0x3d8(r1), 0, 0

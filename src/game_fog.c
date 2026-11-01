@@ -25,7 +25,7 @@ extern void atn_TaskBase_constructor(void);
 extern void atn_TaskBase_destructor(void);
 extern void atn_TaskBase_isValid(void);
 extern void fn_800DCA6C(void);
-extern void fn_806952C4(void);
+extern void msl_releaseRefCount(void);
 extern int sprintf(char* str, const char* format, ...);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
@@ -159,7 +159,7 @@ lbl_fn_800D0DB0_0000010C:
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_800D0DB0_00000148
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_800D0DB0_00000148:
     lwz r5, 0x0(r27)
     mr r4, r29
@@ -271,7 +271,7 @@ lbl_fn_800D0F34_00000290:
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_800D0F34_000002CC
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_800D0F34_000002CC:
     lwz r5, 0x0(r27)
     mr r4, r29
@@ -383,7 +383,7 @@ lbl_fn_800D10B8_00000414:
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_800D10B8_00000450
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_800D10B8_00000450:
     lwz r5, 0x0(r27)
     mr r4, r29
@@ -531,7 +531,7 @@ lbl_fn_800D123C_00000608:
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_800D123C_00000644
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_800D123C_00000644:
     lwz r5, 0x0(r22)
     mr r4, r24

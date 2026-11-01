@@ -19,16 +19,16 @@ extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_applyWeights(void);
-extern void fn_800CB360(void);
+extern void morph_reset(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB440(void);
+extern void morph_updateWeights(void);
 extern void morph_updateMesh(void);
 extern void fn_80126214(void);
 extern void fn_8012F440(void);
 extern void fn_8013A258(void);
-extern void fn_8013CB68(void);
+extern void npc_updateTalkInteraction(void);
 extern void fn_801426A4(void);
-extern void fn_8015495C(void);
+extern void equip_applyToCharacter(void);
 extern void fn_8015C3A8(void);
 extern void fn_8015E7A0(void);
 extern void actor_setState(void);
@@ -36,8 +36,8 @@ extern void fn_8016EB48(void);
 extern void fn_8017039C(void);
 extern void fn_8021A888(void);
 extern void sound_initGlobalInstances(void);
-extern void fn_80237518(void);
-extern void fn_80237654(void);
+extern void res_MsgHandle_ctor(void);
+extern void res_Resource_unload(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_findResourceSlot(void);
@@ -47,7 +47,7 @@ extern void fn_80277B84(void);
 extern void fn_80278218(void);
 extern void fn_8027851C(void);
 extern void fn_80279054(void);
-extern void fn_8035B694(void);
+extern void entity_Instance_constructor(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
 extern void atn_LoadHandle_constructor(void);
@@ -534,7 +534,7 @@ lbl_fn_8027B21C_000005D8:
     fmr f1, f3
     li r5, 0x0
     fmuls f2, f0, f30
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
 lbl_fn_8027B21C_000005EC:
     lwz r0, 0x224(r1)
     psq_l f31, 0x218(r1), 0, 0
@@ -1257,7 +1257,7 @@ lbl_fn_8027BE3C_00001020:
     lwz r3, 0x18ec(r30)
     stw r0, 0xf1c(r3)
     lwz r3, 0x18ec(r30)
-    bl fn_8015495C
+    bl equip_applyToCharacter
     li r31, 0x0
     stw r31, 0x18ec(r30)
     mr r3, r30
@@ -1488,7 +1488,7 @@ lbl_fn_8027C38C_000012CC:
     bl skin_applyWeights
     addi r3, r30, 0x19c0
     addi r4, r1, 0x10
-    bl fn_800CB440
+    bl morph_updateWeights
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle
@@ -1843,7 +1843,7 @@ asm void fn_8027C990(void)
     mr r30, r5
     lwz r5, 0x20(r5)
     mr r29, r3
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lis r3, lbl_80785500@ha
     addi r31, r29, 0x14b0
     addi r3, r3, lbl_80785500@l
@@ -1892,7 +1892,7 @@ asm void fn_8027C990(void)
     stw r0, 0x154c(r29)
     bl res_MsgHandle_constructor
     addi r3, r29, 0x155c
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     addi r3, r29, 0x1568
     bl res_MsgHandle_constructor
     addi r3, r29, 0x1574
@@ -1907,7 +1907,7 @@ asm void fn_8027C990(void)
     stfs f0, 0x159c(r29)
     stfs f0, 0x15a0(r29)
     stfs f0, 0x15a4(r29)
-    bl fn_800CB360
+    bl morph_reset
     lwz r7, 0x12a4(r29)
     li r5, 0x3
     lwz r0, 0x958(r29)
@@ -2066,7 +2066,7 @@ lbl_fn_8027C990_00001BCC:
     bl res_MsgHandle_destructor
     addi r3, r29, 0x155c
     addi r4, r30, 0x4a
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r29, 0x1568
     addi r4, r30, 0x60
     bl res_MsgHandle_destructor

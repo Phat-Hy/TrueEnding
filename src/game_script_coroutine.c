@@ -2,17 +2,17 @@
 #pragma function_align 4
 
 /* External function declarations */
-extern void fn_8004D388(void);
+extern void collision_queryGeometry(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800EE360(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8C6C(void);
+extern void scissor_clipFrustum(void);
 extern void fn_8015F568(void);
 extern void actor_setState(void);
 extern void fn_80170A20(void);
 extern void fn_80176548(void);
-extern void fn_801765D8(void);
+extern void battle_awardExp(void);
 extern void sound_initGlobalInstances(void);
 extern void res_registerResource(void);
 extern void fn_8024F9B8(void);
@@ -1530,7 +1530,7 @@ asm void fn_8024E690(void)
     cror eq, gt, eq
     bne lbl_fn_8024E690_000016A8
     mr r3, r31
-    bl fn_801765D8
+    bl battle_awardExp
     b lbl_fn_8024E690_000016A8
 lbl_fn_8024E690_000015C0:
     lfs f31, 0x2e4(r3)
@@ -1586,7 +1586,7 @@ lbl_fn_8024E690_00001684:
     ori r0, r4, 0x8000
     stw r0, 0x12a4(r31)
     mr r3, r31
-    bl fn_801765D8
+    bl battle_awardExp
     mr r3, r31
     bl fn_800EE360
     b lbl_fn_8024E690_000016A8
@@ -1920,7 +1920,7 @@ lbl_fn_8024E7E4_00001B10:
     addi r8, r31, 0x5b8
     lis r7, 0x8000
     li r9, 0x0
-    bl fn_8004D388
+    bl collision_queryGeometry
     addi r4, r1, 0x158
     addi r3, r1, 0x8c
     psq_l f1, 0x0(r4), 0, 0
@@ -1951,7 +1951,7 @@ lbl_fn_8024E7E4_00001B10:
     lfs f1, lbl_80883268
     stfs f2, 0x94(r1)
     lwz r3, lbl_8087F048
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     b lbl_fn_8024E7E4_00001C20
 lbl_fn_8024E7E4_00001BE4:
     lfs f30, 0x2e4(r3)

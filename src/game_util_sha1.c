@@ -51,7 +51,7 @@ extern void fn_807181C0(void);
 extern void fn_807181D0(void);
 extern void fn_807182B0(void);
 extern void fn_80718320(void);
-extern void fn_807187D0(void);
+extern void net_getGlobalContext(void);
 extern void fn_8071C8E0(void);
 extern void fn_807214D0(void);
 extern void net_packetDebugLog(void);
@@ -1236,7 +1236,7 @@ lbl_fn_805A03A4_00000F04:
     li r3, 0xa
     b lbl_fn_805A03A4_00001C14
 lbl_fn_805A03A4_00000F34:
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSLockMutex
     lwz r8, 0x3c(r15)
@@ -1260,7 +1260,7 @@ lbl_fn_805A03A4_00000F6C:
     bl fn_807181D0
     cmpwi r3, 0x0
     bne lbl_fn_805A03A4_00000FA4
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
     li r3, 0x1
@@ -1273,7 +1273,7 @@ lbl_fn_805A03A4_00000FA4:
     bl fn_8070D290
     cmpwi r3, 0x0
     bne lbl_fn_805A03A4_00000FD4
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
     li r3, 0x1
@@ -1496,7 +1496,7 @@ lbl_fn_805A03A4_00001298:
     crclr 6
     bl fn_80724E90
 lbl_fn_805A03A4_000012CC:
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
     li r3, 0x9
@@ -1708,7 +1708,7 @@ lbl_fn_805A03A4_00001578:
     crclr 6
     bl fn_80724E90
 lbl_fn_805A03A4_000015AC:
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
     li r3, 0x9
@@ -1920,7 +1920,7 @@ lbl_fn_805A03A4_00001858:
     crclr 6
     bl fn_80724E90
 lbl_fn_805A03A4_0000188C:
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
     li r3, 0x9
@@ -1929,7 +1929,7 @@ lbl_fn_805A03A4_000018A0:
     mr r14, r18
     b lbl_fn_805A03A4_000018BC
 lbl_fn_805A03A4_000018A8:
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
     li r3, 0x3
@@ -1945,7 +1945,7 @@ lbl_fn_805A03A4_000018BC:
     lwz r12, 0x10(r12)
     mtctr r12
     bctrl
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
     li r3, 0xff
@@ -1985,7 +1985,7 @@ lbl_fn_805A03A4_00001940:
     lwz r12, 0x10(r12)
     mtctr r12
     bctrl
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
     li r3, 0x3
@@ -2008,7 +2008,7 @@ lbl_fn_805A03A4_0000198C:
     lwz r12, 0x10(r12)
     mtctr r12
     bctrl
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
     mr r3, r15
@@ -2034,7 +2034,7 @@ lbl_fn_805A03A4_00001A04:
     lwz r12, 0x10(r12)
     mtctr r12
     bctrl
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
     li r3, 0x3
@@ -2055,7 +2055,7 @@ lbl_fn_805A03A4_00001A44:
     lwz r12, 0x10(r12)
     mtctr r12
     bctrl
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
     mr r3, r15
@@ -2081,7 +2081,7 @@ lbl_fn_805A03A4_00001AB4:
     lwz r12, 0x10(r12)
     mtctr r12
     bctrl
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
     li r3, 0x3
@@ -2102,7 +2102,7 @@ lbl_fn_805A03A4_00001AF4:
     lwz r12, 0x10(r12)
     mtctr r12
     bctrl
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
     mr r3, r15
@@ -2119,7 +2119,7 @@ lbl_fn_805A03A4_00001B44:
     lwz r12, 0x10(r12)
     mtctr r12
     bctrl
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
     li r3, 0x3
@@ -2137,7 +2137,7 @@ lbl_fn_805A03A4_00001B84:
     lwz r12, 0x10(r12)
     mtctr r12
     bctrl
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
     li r3, 0xff
@@ -2160,7 +2160,7 @@ lbl_fn_805A03A4_00001BF8:
     lwz r3, 0x8(r1)
     mr r4, r14
     bl fn_807175E0
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
     li r3, 0x0

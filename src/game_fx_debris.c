@@ -23,12 +23,12 @@ extern void fn_800DB3EC(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void fn_800EC204(void);
-extern void fn_800F8574(void);
-extern void fn_8011FC10(void);
-extern void fn_80121F00(void);
+extern void viewport_updateCulling(void);
+extern void skill_findNodeById(void);
+extern void equip_getGlobalManager(void);
 extern void boss_updatePhaseState(void);
 extern void fn_8013C504(void);
-extern void fn_80179D44(void);
+extern void actor_getMovementFlags(void);
 extern void fn_801A03E0(void);
 extern void task_findEntryById(void);
 extern void res_MsgHandle_constructor(void);
@@ -588,7 +588,7 @@ lbl_fn_8029BE7C_0000069C:
     lfs f0, 0x1678(r29)
     fmuls f0, f27, f0
     stfs f0, 0x370(r1)
-    bl fn_800F8574
+    bl viewport_updateCulling
     addi r31, r31, 0x1
 lbl_fn_8029BE7C_00000710:
     lwz r30, 0x14ac(r30)
@@ -689,7 +689,7 @@ lbl_fn_8029C564_0000084C:
     lwz r30, 0x1564(r28)
     slwi r31, r31, 2
     lwz r29, 0x10d8(r4)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lwzx r4, r30, r31
     mr r5, r3
     lfs f1, lbl_80883C0C
@@ -1369,10 +1369,10 @@ asm void fn_8029CF00(void)
     oris r0, r0, 0x8
     ori r0, r0, 0x4
     stw r0, 0x7ec(r31)
-    bl fn_80121F00
+    bl equip_getGlobalManager
     cmpwi r3, 0x0
     beq lbl_fn_8029CF00_000011CC
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_8013C504
     mr r26, r3
     b lbl_fn_8029CF00_000011D0
@@ -1894,7 +1894,7 @@ lbl_fn_8029CF00_000018F8:
     mr r30, r3
     bl fn_801A03E0
     mr r4, r30
-    bl fn_8011FC10
+    bl skill_findNodeById
     stw r3, 0x1648(r31)
     b lbl_fn_8029CF00_00001968
 lbl_fn_8029CF00_00001934:
@@ -1909,7 +1909,7 @@ lbl_fn_8029CF00_00001934:
     mr r30, r3
     bl fn_801A03E0
     mr r4, r30
-    bl fn_8011FC10
+    bl skill_findNodeById
     stw r3, 0x164c(r31)
 lbl_fn_8029CF00_00001968:
     addi r3, r1, 0x2c

@@ -8,8 +8,8 @@ extern void _savegpr_22(void);
 extern void _savegpr_24(void);
 extern void fn_8000D844(void);
 extern void talk_formatQuotedString(void);
-extern void fn_8005BBF8(void);
-extern void fn_8005BCE8(void);
+extern void talk_parseQuotes(void);
+extern void talk_copySpeakerName(void);
 extern void fn_800629F0(void);
 extern void fn_80063764(void);
 extern void fn_80063D3C(void);
@@ -19,13 +19,13 @@ extern void fn_800CB518(void);
 extern void fn_800CB688(void);
 extern void str_skipWhitespace(void);
 extern void sound_initGlobalInstances(void);
-extern void fn_80237654(void);
-extern void fn_802376D0(void);
+extern void res_Resource_unload(void);
+extern void res_MsgHandle_isLoading(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_update(void);
 extern void fn_80239D58(void);
 extern void res_findResourceSlot(void);
-extern void fn_8023A680(void);
+extern void res_Shader_bindParams(void);
 extern void res_registerResource(void);
 extern void fn_8032B314(void);
 extern void fn_8032B6F8(void);
@@ -545,7 +545,7 @@ asm void fn_80438E6C(void)
     cmpwi r3, 0x0
     bne lbl_fn_80438E6C_00000690
     addi r3, r30, 0xf18
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     beq lbl_fn_80438E6C_00000698
 lbl_fn_80438E6C_00000690:
@@ -625,7 +625,7 @@ asm void fn_80438EF8(void)
     addi r4, r4, lbl_807774B8@l
     stw r4, 0x6c(r1)
     la r4, lbl_8087D710
-    bl fn_8005BCE8
+    bl talk_copySpeakerName
     lis r30, lbl_80754288@ha
     lfs f30, lbl_80886900
     lfs f31, lbl_80886930
@@ -779,10 +779,10 @@ lbl_fn_80438EF8_000009CC:
     bl talk_formatQuotedString
     mr r4, r3
     addi r3, r31, 0xf18
-    bl fn_80237654
+    bl res_Resource_unload
 lbl_fn_80438EF8_000009F4:
     addi r3, r1, 0x6c
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_80438EF8_000007B4
     lwz r0, 0x6d4(r1)
@@ -1835,7 +1835,7 @@ lbl_fn_8043A08C_000018D4:
     li r9, 0x0
     lwz r3, lbl_8087F3C0
     li r10, 0x0
-    bl fn_8023A680
+    bl res_Shader_bindParams
     b lbl_fn_8043A08C_00001D00
 lbl_fn_8043A08C_00001948:
     lwz r0, 0x184(r4)

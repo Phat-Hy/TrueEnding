@@ -16,10 +16,10 @@ extern void mem_alloc(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
-extern void fn_80087E9C(void);
+extern void route_createWaypoint(void);
 extern void fn_80088724(void);
 extern void node_createNamedChild(void);
-extern void fn_8008B140(void);
+extern void map_processTrigger(void);
 extern void fn_80092A4C(void);
 extern void fn_800971D4(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -27,10 +27,10 @@ extern void atn_Anim_getLayerDuration(void);
 extern void fn_80097E80(void);
 extern void fn_80158CA4(void);
 extern void world_getLocalFlag(void);
-extern void fn_803EC568(void);
-extern void fn_803EC69C(void);
+extern void task_createWorker(void);
+extern void task_destroyWorker(void);
 extern void fn_803EC758(void);
-extern void fn_803EC91C(void);
+extern void task_updateWorker(void);
 extern void fn_803ED774(void);
 extern void fn_8040161C(void);
 extern void PSMTXConcat(void);
@@ -762,7 +762,7 @@ lbl_fn_80402768_0000097C:
     addi r5, r29, 0x6c
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_80886188
     mr r3, r30
     lfs f2, lbl_8088618C
@@ -780,7 +780,7 @@ lbl_fn_80402768_0000097C:
     addi r5, r29, 0x90
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     mr r3, r30
     addi r4, r31, 0x28
     addi r5, r29, 0x9c
@@ -813,7 +813,7 @@ lbl_fn_80402768_0000097C:
     addi r5, r29, 0xfc
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_8088617C
     mr r3, r30
     lfs f2, lbl_80886180
@@ -883,7 +883,7 @@ asm void fn_80402978(void)
     lwz r5, 0x18(r30)
     mr r4, r29
     lwz r6, 0x1c(r30)
-    bl fn_803EC568
+    bl task_createWorker
     lis r4, lbl_8078D1F8@ha
     li r3, 0xa
     addi r4, r4, lbl_8078D1F8@l
@@ -971,7 +971,7 @@ lbl_fn_80402A9C_00000C90:
 lbl_fn_80402A9C_00000C9C:
     mr r3, r30
     li r4, 0x0
-    bl fn_803EC69C
+    bl task_destroyWorker
     cmpwi r31, 0x0
     ble lbl_fn_80402A9C_00000CB8
     mr r3, r30
@@ -996,7 +996,7 @@ asm void fn_80402B24(void)
     stw r30, 0x18(r1)
     stw r29, 0x14(r1)
     mr r29, r3
-    bl fn_803EC91C
+    bl task_updateWorker
     cmpwi r3, 0x0
     beq lbl_fn_80402B24_00000D04
     li r0, 0x1
@@ -1009,7 +1009,7 @@ lbl_fn_80402B24_00000D10:
     lwz r0, 0x10c(r29)
     add r3, r0, r31
     addi r3, r3, 0x10
-    bl fn_8008B140
+    bl map_processTrigger
     cmpwi r3, 0x0
     beq lbl_fn_80402B24_00000D30
     li r0, 0x1

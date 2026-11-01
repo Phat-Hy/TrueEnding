@@ -15,7 +15,7 @@ extern void fn_806A426C(void);
 extern void fn_806A4270(void);
 extern void fn_806D57A0(void);
 extern void fn_806D5850(void);
-extern void fn_806D58F0(void);
+extern void net_bufferGetCount(void);
 extern void net_bufferGetElement(void);
 extern void fn_806D5930(void);
 extern void fn_806D5BE0(void);
@@ -1178,7 +1178,7 @@ asm void fn_806FBDB0(void)
     lwz r3, lbl_808627E0@l(r31)
     cmpwi r3, 0x0
     beq lbl_fn_806FBDB0_00000EF4
-    bl fn_806D58F0
+    bl net_bufferGetCount
     lwz r3, lbl_808627E0@l(r31)
     bl fn_806D5850
     li r0, 0x0
@@ -1248,7 +1248,7 @@ lbl_fn_806FBE00_00000FCC:
     addi r30, r30, 0x1
 lbl_fn_806FBE00_00000FD0:
     lwz r3, 0x0(r31)
-    bl fn_806D58F0
+    bl net_bufferGetCount
     cmpw r30, r3
     blt lbl_fn_806FBE00_00000FAC
     li r29, 0x0
@@ -1899,7 +1899,7 @@ lbl_fn_806FC5D0_0000190C:
     addi r4, r1, 0xc8
     bl fn_806D5930
     lwz r3, 0x0(r31)
-    bl fn_806D58F0
+    bl net_bufferGetCount
     mr r4, r3
     lwz r3, 0x0(r31)
     subi r4, r4, 0x1
@@ -1933,7 +1933,7 @@ lbl_fn_806FC5D0_0000198C:
     addi r24, r24, 0x1
 lbl_fn_806FC5D0_00001990:
     lwz r3, 0x0(r31)
-    bl fn_806D58F0
+    bl net_bufferGetCount
     cmpw r24, r3
     blt lbl_fn_806FC5D0_00001968
 lbl_fn_806FC5D0_000019A0:
@@ -1999,7 +1999,7 @@ lbl_fn_806FC900_00001A6C:
     addi r30, r30, 0x1
 lbl_fn_806FC900_00001A70:
     lwz r3, lbl_808627E0@l(r31)
-    bl fn_806D58F0
+    bl net_bufferGetCount
     cmpw r30, r3
     blt lbl_fn_806FC900_00001A4C
     li r31, 0x0
@@ -2061,7 +2061,7 @@ lbl_fn_806FC9C0_00001B40:
     addi r29, r29, 0x1
 lbl_fn_806FC9C0_00001B44:
     lwz r3, 0x0(r31)
-    bl fn_806D58F0
+    bl net_bufferGetCount
     cmpw r29, r3
     blt lbl_fn_806FC9C0_00001B1C
     b lbl_fn_806FC9C0_000020C4
@@ -2408,7 +2408,7 @@ lbl_fn_806FC9C0_00002038:
     addi r28, r28, 0x1
 lbl_fn_806FC9C0_0000203C:
     lwz r3, 0x0(r31)
-    bl fn_806D58F0
+    bl net_bufferGetCount
     cmpw r28, r3
     blt lbl_fn_806FC9C0_00002018
     li r28, 0x0
@@ -2444,7 +2444,7 @@ lbl_fn_806FC9C0_000020B0:
     addi r28, r28, 0x1
 lbl_fn_806FC9C0_000020B4:
     lwz r3, 0x0(r31)
-    bl fn_806D58F0
+    bl net_bufferGetCount
     cmpw r28, r3
     blt lbl_fn_806FC9C0_0000208C
 lbl_fn_806FC9C0_000020C4:

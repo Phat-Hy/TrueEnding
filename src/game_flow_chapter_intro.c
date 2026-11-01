@@ -10,15 +10,15 @@ extern void _restgpr_18(void);
 extern void _savegpr_14(void);
 extern void _savegpr_18(void);
 extern void fn_8003EA3C(void);
-extern void fn_8003EFB0(void);
+extern void ui_destroyWidget(void);
 extern void fn_80051C78(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB440(void);
+extern void morph_updateWeights(void);
 extern void fn_800CB58C(void);
 extern void fn_8014EEC4(void);
 extern void fn_8015EB2C(void);
 extern void fn_8015EFAC(void);
-extern void fn_8016F3D0(void);
+extern void battle_canTargetActor(void);
 extern void fn_80178668(void);
 extern void fn_80178864(void);
 extern void fn_8017C7F8(void);
@@ -39,7 +39,7 @@ extern void fn_804439FC(void);
 extern void net_getPacketManager(void);
 extern void fn_804B6204(void);
 extern void fn_804B671C(void);
-extern void fn_804D818C(void);
+extern void net_voiceCodec_destroy(void);
 extern void fn_804DF4BC(void);
 extern void fn_804E651C(void);
 extern void fn_804EAA88(void);
@@ -60,8 +60,8 @@ extern void fn_8050E098(void);
 extern void fn_8050EAEC(void);
 extern void fn_8054D798(void);
 extern void rand(void);
-extern void fn_806A8E40(void);
-extern void fn_806B0E30(void);
+extern void net_getSocket(void);
+extern void net_getMyAid(void);
 
 /* External data declarations */
 extern u8 lbl_80791018[];
@@ -125,7 +125,7 @@ asm void fn_804E4490(void)
     li r0, 0x0
     b lbl_fn_804E4490_00000074
 lbl_fn_804E4490_0000004C:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804E4490_00000074
 lbl_fn_804E4490_00000058:
@@ -135,7 +135,7 @@ lbl_fn_804E4490_00000058:
     li r3, 0x0
     b lbl_fn_804E4490_00000070
 lbl_fn_804E4490_0000006C:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_804E4490_00000070:
     clrlwi r0, r3, 24
 lbl_fn_804E4490_00000074:
@@ -429,9 +429,9 @@ lbl_fn_804E4490_00000460:
     extsb. r0, r0
     sth r3, 0xa(r1)
     bne lbl_fn_804E4490_000004A8
-    lis r4, fn_804D818C@ha
+    lis r4, net_voiceCodec_destroy@ha
     lis r5, lbl_807C8AE8@ha
-    addi r4, r4, fn_804D818C@l
+    addi r4, r4, net_voiceCodec_destroy@l
     la r3, lbl_8087F5FC
     addi r5, r5, lbl_807C8AE8@l
     bl __register_global_object
@@ -883,7 +883,7 @@ asm void fn_804E4EB4(void)
     li r17, 0x0
     li r31, 0x0
     lis r29, 0x8000
-    lis r25, fn_804D818C@ha
+    lis r25, net_voiceCodec_destroy@ha
     lis r26, lbl_807C8AE8@ha
     li r27, 0x1
     li r24, 0x2
@@ -916,7 +916,7 @@ lbl_fn_804E4EB4_00000A90:
     li r0, 0x0
     b lbl_fn_804E4EB4_00000AEC
 lbl_fn_804E4EB4_00000AC4:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804E4EB4_00000AEC
 lbl_fn_804E4EB4_00000AD0:
@@ -926,7 +926,7 @@ lbl_fn_804E4EB4_00000AD0:
     li r3, 0x0
     b lbl_fn_804E4EB4_00000AE8
 lbl_fn_804E4EB4_00000AE4:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_804E4EB4_00000AE8:
     clrlwi r0, r3, 24
 lbl_fn_804E4EB4_00000AEC:
@@ -969,7 +969,7 @@ lbl_fn_804E4EB4_00000B38:
     li r0, 0x0
     b lbl_fn_804E4EB4_00000B9C
 lbl_fn_804E4EB4_00000B74:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804E4EB4_00000B9C
 lbl_fn_804E4EB4_00000B80:
@@ -979,7 +979,7 @@ lbl_fn_804E4EB4_00000B80:
     li r3, 0x0
     b lbl_fn_804E4EB4_00000B98
 lbl_fn_804E4EB4_00000B94:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_804E4EB4_00000B98:
     clrlwi r0, r3, 24
 lbl_fn_804E4EB4_00000B9C:
@@ -1078,7 +1078,7 @@ lbl_fn_804E4EB4_00000CD0:
     extsb. r0, r0
     sth r14, 0x3a(r1)
     bne lbl_fn_804E4EB4_00000CF8
-    addi r4, r25, fn_804D818C@l
+    addi r4, r25, net_voiceCodec_destroy@l
     addi r5, r26, lbl_807C8AE8@l
     la r3, lbl_8087F5FC
     bl __register_global_object
@@ -1214,7 +1214,7 @@ lbl_fn_804E4EB4_00000E60:
     li r0, 0x0
     b lbl_fn_804E4EB4_00000EF4
 lbl_fn_804E4EB4_00000ECC:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804E4EB4_00000EF4
 lbl_fn_804E4EB4_00000ED8:
@@ -1224,7 +1224,7 @@ lbl_fn_804E4EB4_00000ED8:
     li r3, 0x0
     b lbl_fn_804E4EB4_00000EF0
 lbl_fn_804E4EB4_00000EEC:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_804E4EB4_00000EF0:
     clrlwi r0, r3, 24
 lbl_fn_804E4EB4_00000EF4:
@@ -1297,7 +1297,7 @@ lbl_fn_804E4EB4_00000FB0:
     li r0, 0x0
     b lbl_fn_804E4EB4_00001018
 lbl_fn_804E4EB4_00000FF0:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804E4EB4_00001018
 lbl_fn_804E4EB4_00000FFC:
@@ -1307,7 +1307,7 @@ lbl_fn_804E4EB4_00000FFC:
     li r3, 0x0
     b lbl_fn_804E4EB4_00001014
 lbl_fn_804E4EB4_00001010:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_804E4EB4_00001014:
     clrlwi r0, r3, 24
 lbl_fn_804E4EB4_00001018:
@@ -1358,7 +1358,7 @@ lbl_fn_804E4EB4_00001064:
     li r0, 0x1002
     sth r0, 0x2a(r1)
     bne lbl_fn_804E4EB4_000010D8
-    addi r4, r25, fn_804D818C@l
+    addi r4, r25, net_voiceCodec_destroy@l
     addi r5, r26, lbl_807C8AE8@l
     la r3, lbl_8087F5FC
     bl __register_global_object
@@ -1447,7 +1447,7 @@ lbl_fn_804E4EB4_000011DC:
     beq lbl_fn_804E4EB4_00001238
     lwz r3, 0x0(r23)
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     beq lbl_fn_804E4EB4_00001238
     lwz r3, 0x0(r23)
@@ -1511,7 +1511,7 @@ lbl_fn_804E4EB4_000012D0:
     li r0, 0x103a
     sth r0, 0x22(r1)
     bne lbl_fn_804E4EB4_00001304
-    addi r4, r25, fn_804D818C@l
+    addi r4, r25, net_voiceCodec_destroy@l
     addi r5, r26, lbl_807C8AE8@l
     la r3, lbl_8087F5FC
     bl __register_global_object
@@ -1569,7 +1569,7 @@ lbl_fn_804E4EB4_00001344:
     extsb. r0, r0
     sth r14, 0x32(r1)
     bne lbl_fn_804E4EB4_000013E4
-    addi r4, r25, fn_804D818C@l
+    addi r4, r25, net_voiceCodec_destroy@l
     addi r5, r26, lbl_807C8AE8@l
     la r3, lbl_8087F5FC
     bl __register_global_object
@@ -1608,11 +1608,11 @@ lbl_fn_804E4EB4_00001418:
     stw r0, 0x6c(r1)
     stw r30, 0x68(r1)
     bne lbl_fn_804E4EB4_00001490
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     lis r5, lbl_807C8F48@ha
     stw r28, 0x0(r22)
     mr r3, r22
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     addi r5, r5, lbl_807C8F48@l
     stw r28, 0x4(r22)
     stw r28, 0x8(r22)
@@ -1634,11 +1634,11 @@ lbl_fn_804E4EB4_00001490:
     lbz r0, lbl_8087EE74
     extsb. r0, r0
     bne lbl_fn_804E4EB4_000014F4
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     lis r5, lbl_807C8F48@ha
     stw r28, 0x0(r22)
     mr r3, r22
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     addi r5, r5, lbl_807C8F48@l
     stw r28, 0x4(r22)
     stw r28, 0x8(r22)
@@ -1759,7 +1759,7 @@ lbl_fn_804E4EB4_00001678:
     li r0, 0x0
     b lbl_fn_804E4EB4_000016C8
 lbl_fn_804E4EB4_000016A0:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804E4EB4_000016C8
 lbl_fn_804E4EB4_000016AC:
@@ -1769,7 +1769,7 @@ lbl_fn_804E4EB4_000016AC:
     li r3, 0x0
     b lbl_fn_804E4EB4_000016C4
 lbl_fn_804E4EB4_000016C0:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_804E4EB4_000016C4:
     clrlwi r0, r3, 24
 lbl_fn_804E4EB4_000016C8:
@@ -1820,7 +1820,7 @@ asm void fn_804E5BC8(void)
     mr r24, r29
     addi r30, r1, 0x10
     li r26, 0x0
-    lis r21, fn_804D818C@ha
+    lis r21, net_voiceCodec_destroy@ha
     lis r22, lbl_807C8AE8@ha
     li r23, 0x1
     li r19, 0x2
@@ -1876,7 +1876,7 @@ lbl_fn_804E5BC8_00001804:
     extsb. r0, r0
     sth r20, 0xe(r1)
     bne lbl_fn_804E5BC8_00001844
-    addi r4, r21, fn_804D818C@l
+    addi r4, r21, net_voiceCodec_destroy@l
     addi r5, r22, lbl_807C8AE8@l
     la r3, lbl_8087F5FC
     bl __register_global_object
@@ -1917,7 +1917,7 @@ lbl_fn_804E5BC8_0000188C:
     li r0, 0x0
     b lbl_fn_804E5BC8_000018E8
 lbl_fn_804E5BC8_000018C0:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804E5BC8_000018E8
 lbl_fn_804E5BC8_000018CC:
@@ -1927,7 +1927,7 @@ lbl_fn_804E5BC8_000018CC:
     li r3, 0x0
     b lbl_fn_804E5BC8_000018E4
 lbl_fn_804E5BC8_000018E0:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_804E5BC8_000018E4:
     clrlwi r0, r3, 24
 lbl_fn_804E5BC8_000018E8:
@@ -2369,7 +2369,7 @@ lbl_fn_804E5BC8_00001E34:
     bl fn_803E9608
     addi r3, r27, 0x2b74
     addi r4, r1, 0x8
-    bl fn_800CB440
+    bl morph_updateWeights
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle

@@ -34,7 +34,7 @@ extern void mem_realloc(void);
 extern void fn_80084A78(void);
 extern void mem_getAllocSize(void);
 extern void fn_80089620(void);
-extern void fn_8008BBD8(void);
+extern void map_debugLog(void);
 extern void font_calcTextExtents(void);
 extern void fn_800A5508(void);
 extern void fn_800A5554(void);
@@ -93,7 +93,7 @@ extern void strcmp(void);
 extern void wmemcpy(void);
 extern void wmemcmp(void);
 extern void wcslen(void);
-extern void fn_806952C4(void);
+extern void msl_releaseRefCount(void);
 extern void runtime_registerStaticObject(void);
 extern void __destroy_arr(void);
 extern char* strcpy(char* dest, const char* src);
@@ -759,7 +759,7 @@ lbl_main_00000808:
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_main_00000844
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_main_00000844:
     lwz r4, 0x0(r15)
     addi r3, r15, 0x4
@@ -1362,7 +1362,7 @@ lbl_taskManager_initSystem_00001064:
     stw r4, 0xa8(r1)
     stw r0, 0xac(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_taskManager_initSystem_000010D8
     addic. r0, r1, 0x22c
@@ -1456,7 +1456,7 @@ lbl_taskManager_initSystem_000011BC:
     stw r4, 0x70(r1)
     stw r0, 0x74(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_taskManager_initSystem_00001230
     addic. r0, r1, 0x218
@@ -1550,7 +1550,7 @@ lbl_taskManager_initSystem_00001314:
     stw r4, 0x38(r1)
     stw r0, 0x3c(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_taskManager_initSystem_00001388
     addic. r0, r1, 0x204

@@ -7,7 +7,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void item_useConsumable(void);
-extern void fn_8004D388(void);
+extern void collision_queryGeometry(void);
 extern void collision_testLineSegment(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_80116BD4(void);
@@ -26,8 +26,8 @@ extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
 extern void fn_8068A4A8(void);
-extern void fn_8068A850(void);
-extern void fn_8068AD58(void);
+extern void std_sin(void);
+extern void std_cos(void);
 extern void fn_8068AE24(void);
 
 /* External data declarations */
@@ -506,7 +506,7 @@ lbl_fn_8038CD94_0000066C:
     stfs f5, 0x428(r30)
     fsubs f3, f4, f3
     fmuls f1, f0, f3
-    bl fn_8068A850
+    bl std_sin
     frsp f5, f1
     lfs f0, lbl_808858F8
     lfs f4, lbl_808859E4
@@ -1614,7 +1614,7 @@ lbl_fn_8038DF5C_000016D0:
     stw r31, 0x8f0(r30)
     fdivs f4, f5, f4
     fmsubs f1, f3, f4, f0
-    bl fn_8068AD58
+    bl std_cos
     frsp f5, f1
     lfs f0, lbl_808858F8
     lfs f4, lbl_808859E4
@@ -1825,7 +1825,7 @@ lbl_fn_8038E23C_00001998:
     stfs f0, 0x50(r1)
     stfs f0, 0x54(r1)
     stfs f0, 0x58(r1)
-    bl fn_8004D388
+    bl collision_queryGeometry
     psq_l f1, 0x0(r27), 0, 0
     lfs f2, 0x98(r1)
     psq_st f1, 0x0(r28), 0, 0

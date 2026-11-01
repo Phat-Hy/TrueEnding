@@ -11,12 +11,12 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void mem_alloc(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_800BFAC8(void);
+extern void motion_updateFogAdj(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void str_findChar(void);
 extern void wcs_vformat(void);
 extern void save_validateHeader(void);
@@ -840,7 +840,7 @@ asm void fn_804B4FE0(void)
     stw r31, 0xc(r1)
     stw r30, 0x8(r1)
     mr r30, r3
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_804B4FE0_00000A2C
     addi r31, r30, 0xac
@@ -1062,10 +1062,7 @@ lbl_fn_804B50C0_00000C84:
     blr
 }
 
-asm void fn_804B531C(void)
-{
-    nofralloc
-    blr
+void fn_804B531C(void) {
 }
 
 asm void fn_804B5320(void)
@@ -1750,7 +1747,7 @@ lbl_fn_804B5B10_0000168C:
     stfs f2, 0x94(r1)
     lwz r4, lbl_8087EFB4
     psq_st f1, 0x0(r26), 0, 0
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f0, 0x88(r1)
     fcmpo cr0, f27, f0
     cror eq, lt, eq
@@ -1929,7 +1926,7 @@ lbl_fn_804B5B10_00001924:
     stfs f2, 0x7c(r1)
     lwz r4, lbl_8087EFB4
     psq_st f1, 0x0(r26), 0, 0
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f0, 0x70(r1)
     fcmpo cr0, f26, f0
     cror eq, lt, eq

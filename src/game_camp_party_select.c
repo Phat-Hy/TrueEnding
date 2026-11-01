@@ -27,7 +27,7 @@ extern void msg_getMessageById(void);
 extern void msg_getMessageString(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void fn_803BDEE4(void);
 extern void fn_803BE8B4(void);
 extern void fn_803BE8C0(void);
@@ -1501,7 +1501,7 @@ asm void fn_803B8D10(void)
     stwu r1, -0x10(r1)
     mflr r0
     stw r0, 0x14(r1)
-    bl fn_800D3FA4
+    bl bloom_processPasses
     neg r0, r3
     or r0, r0, r3
     srwi r3, r0, 31

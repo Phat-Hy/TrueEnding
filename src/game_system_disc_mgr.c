@@ -26,7 +26,7 @@ extern void res_registerResource(void);
 extern void fn_80351AB8(void);
 extern void world_setLocalFlag(void);
 extern void fn_803E3384(void);
-extern void fn_803EA77C(void);
+extern void chest_spawnLoot(void);
 extern void fn_803EAF60(void);
 extern void fn_803EBAC8(void);
 extern void PSMTXRotRad(void);
@@ -1842,7 +1842,7 @@ lbl_fn_80350070_00001910:
     li r5, 0x0
     lfs f2, lbl_808853BC
     li r6, 0x0
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_80350070_000019EC:
     lwz r0, 0x134(r1)
     psq_l f31, 0x128(r1), 0, 0

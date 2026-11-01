@@ -3,7 +3,7 @@
 
 /* External function declarations */
 extern void mem_alloc(void);
-extern void fn_80097D40(void);
+extern void atn_Anim_getLayerTrack(void);
 extern void fn_8013322C(void);
 extern void actor_setState(void);
 extern void fn_8018EEC4(void);
@@ -346,7 +346,7 @@ lbl_fn_80165284_00000430:
     li r4, 0x1ed
     addi r3, r3, 0xb0
     extrwi r28, r0, 1, 3
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     bne lbl_fn_80165284_00000460
     li r28, 0x0

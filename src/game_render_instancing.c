@@ -2,16 +2,16 @@
 #pragma function_align 4
 
 /* External function declarations */
-extern void fn_8000D3A4(void);
-extern void fn_8001047C(void);
-extern void fn_80011034(void);
+extern void vec3_mag(void);
+extern void vec3_assign(void);
+extern void vec3_toEulerAngles(void);
 extern void vec3_sub(void);
 extern void fn_8004D124(void);
 extern void atn_ColliCapsule_destructor(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB440(void);
+extern void morph_updateWeights(void);
 extern void morph_updateMesh(void);
 extern void wcs_vformat(void);
 extern void fn_800EB7A0(void);
@@ -19,15 +19,15 @@ extern void fn_800F7FD8(void);
 extern void system_getNextSequenceId(void);
 extern void fn_80109828(void);
 extern void fn_8012A1B8(void);
-extern void fn_8013C38C(void);
-extern void fn_8015495C(void);
+extern void npc_getPosition(void);
+extern void equip_applyToCharacter(void);
 extern void fn_8015AC48(void);
-extern void fn_8016DA4C(void);
+extern void debuff_clearStatus(void);
 extern void actor_setState(void);
 extern void fn_80178A6C(void);
 extern void sound_initGlobalInstances(void);
-extern void fn_80237518(void);
-extern void fn_80237654(void);
+extern void res_MsgHandle_ctor(void);
+extern void res_Resource_unload(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_findResourceSlot(void);
@@ -795,7 +795,7 @@ asm void fn_802AB510(void)
     bl skin_applyWeights
     addi r3, r30, 0x1538
     addi r4, r1, 0x8
-    bl fn_800CB440
+    bl morph_updateWeights
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -1489,9 +1489,9 @@ lbl_fn_802ABF6C_000013C8:
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     mr r3, r30
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lfs f0, lbl_80883E44
     li r3, 0x1b
     li r0, 0x1
@@ -1573,16 +1573,16 @@ asm void fn_802AC0E0(void)
     stw r31, 0x4c(r1)
     mr r31, r3
     lwz r3, 0x14b0(r3)
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r1, 0x2c
-    bl fn_8001047C
+    bl vec3_assign
     addi r3, r1, 0x20
     addi r4, r1, 0x2c
     addi r5, r31, 0x528
     bl vec3_sub
     addi r3, r1, 0x20
-    bl fn_8000D3A4
+    bl vec3_mag
     fmr f30, f1
     mr r3, r31
     bl fn_8012A1B8
@@ -1592,7 +1592,7 @@ asm void fn_802AC0E0(void)
     bl fn_800F7FD8
     addi r3, r1, 0x14
     addi r4, r1, 0x8
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lfs f0, 0x18(r1)
     fsubs f1, f0, f31
     bl fn_802A7964
@@ -1804,7 +1804,7 @@ asm void fn_802AC364(void)
     addi r3, r29, 0x1a60
     bl res_MsgHandle_constructor
     addi r3, r29, 0x1a6c
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     addi r3, r29, 0x1a78
     bl res_MsgHandle_constructor
     lwz r0, 0x12a4(r29)
@@ -1852,7 +1852,7 @@ lbl_fn_802AC364_00001914:
     addi r3, r29, 0x1a6c
     addi r31, r31, lbl_807462A8@l
     addi r4, r31, 0x48
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r29, 0x1a60
     addi r4, r31, 0x5e
     bl res_MsgHandle_destructor

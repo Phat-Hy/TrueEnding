@@ -7,7 +7,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void mem_free(void);
-extern void fn_8008BBD8(void);
+extern void map_debugLog(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -15,9 +15,9 @@ extern void fn_8012476C(void);
 extern void fn_8013310C(void);
 extern void fn_8013322C(void);
 extern void fn_801446F0(void);
-extern void fn_801539E0(void);
+extern void inventory_unequipItem(void);
 extern void fn_80155DAC(void);
-extern void fn_8016DA4C(void);
+extern void debuff_clearStatus(void);
 extern void fn_80188A70(void);
 extern void fn_80188AA0(void);
 extern void fn_80188F08(void);
@@ -328,7 +328,7 @@ lbl_fn_80191B50_000002B0:
     stw r4, 0x48(r1)
     stw r0, 0x4c(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_80191B50_00000394
     lwz r7, 0x3c(r1)
@@ -426,12 +426,12 @@ asm void fn_80191D30(void)
     rlwinm r0, r0, 0, 27, 25
     stw r0, 0x12a4(r3)
     lwz r3, 0x4(r30)
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lwz r3, 0x4(r30)
     lwz r0, 0x12a4(r3)
     srwi. r0, r0, 31
     beq lbl_fn_80191D30_00000454
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_80191D30_00000454:
     lwz r3, 0x4(r30)
     lwz r0, 0x12a4(r3)
@@ -645,7 +645,7 @@ lbl_fn_80191FF8_00000724:
     stw r4, 0x20(r1)
     stw r0, 0x24(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_80191FF8_00000798
     lwz r5, 0x18(r1)
@@ -786,7 +786,7 @@ lbl_fn_80192198_000008F8:
     stw r4, 0x48(r1)
     stw r0, 0x4c(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_80192198_000009DC
     lwz r7, 0x3c(r1)
@@ -1219,7 +1219,7 @@ lbl_fn_80192758_00000E98:
     stw r4, 0x48(r1)
     stw r0, 0x4c(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_80192758_00000F6C
     lwz r7, 0x3c(r1)
@@ -1989,7 +1989,7 @@ lbl_fn_80193074_0000198C:
     psq_st f1, 0x0(r7), 0, 0
     stfs f2, 0x1c4(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_80193074_00001AA8
     lwz r6, 0x1ac(r1)
@@ -2093,7 +2093,7 @@ lbl_fn_80193074_00001B48:
     stw r4, 0x30(r1)
     stw r0, 0x34(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_80193074_00001BBC
     lwz r5, 0x28(r1)

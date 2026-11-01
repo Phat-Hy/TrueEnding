@@ -15,7 +15,7 @@ extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void fn_80087858(void);
 extern void route_createSegment(void);
-extern void fn_80087E9C(void);
+extern void route_createWaypoint(void);
 extern void node_createNamedChild(void);
 extern void str_skipWhitespace(void);
 extern void fn_80116BD4(void);
@@ -35,8 +35,8 @@ extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void strcmp(void);
 extern void atoi(void);
-extern void fn_8068A850(void);
-extern void fn_8068AD58(void);
+extern void std_sin(void);
+extern void std_cos(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
 extern void __ptmf_scall(void);
@@ -863,7 +863,7 @@ lbl_fn_8037E9E0_0000090C:
     addi r5, r29, 0x4fc
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_808859A8
     mr r3, r30
     lfs f2, lbl_808859AC
@@ -872,7 +872,7 @@ lbl_fn_8037E9E0_0000090C:
     addi r5, r29, 0x508
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_808859A8
     mr r3, r30
     lfs f2, lbl_808859AC
@@ -1315,7 +1315,7 @@ lbl_fn_8037EF48_00001160:
     stfs f2, 0x870(r30)
     lfs f0, 0x538(r31)
     fadds f1, f7, f0
-    bl fn_8068A850
+    bl std_sin
     frsp f9, f1
     lfs f8, 0x528(r30)
     lfs f0, 0x5c(r1)
@@ -1324,7 +1324,7 @@ lbl_fn_8037EF48_00001160:
     stfs f0, 0x5c(r1)
     lfs f0, 0x538(r31)
     fadds f1, f7, f0
-    bl fn_8068AD58
+    bl std_cos
     lfs f0, 0x528(r30)
     frsp f8, f1
     lfs f10, lbl_808858E8
@@ -1539,7 +1539,7 @@ asm void fn_8037F640(void)
     stwu r1, -0x10(r1)
     mflr r0
     stw r0, 0x14(r1)
-    bl fn_8068A850
+    bl std_sin
     lwz r0, 0x14(r1)
     frsp f1, f1
     mtlr r0
@@ -1553,7 +1553,7 @@ asm void fn_8037F664(void)
     stwu r1, -0x10(r1)
     mflr r0
     stw r0, 0x14(r1)
-    bl fn_8068AD58
+    bl std_cos
     lwz r0, 0x14(r1)
     frsp f1, f1
     mtlr r0

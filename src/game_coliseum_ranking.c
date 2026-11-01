@@ -36,15 +36,15 @@ extern void fn_800C18BC(void);
 extern void fn_800C2D88(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800D5908(void);
 extern void atn_LH_Texture_update(void);
 extern void str_skipWhitespace(void);
 extern void sound_initGlobalInstances(void);
-extern void fn_802375C4(void);
-extern void fn_802376D0(void);
+extern void res_Resource_destructor(void);
+extern void res_MsgHandle_isLoading(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_unload(void);
@@ -52,7 +52,7 @@ extern void res_MsgHandle_update(void);
 extern void fn_80239D58(void);
 extern void fn_8023A02C(void);
 extern void fn_8023A108(void);
-extern void fn_8023A680(void);
+extern void res_Shader_bindParams(void);
 extern void res_registerResource(void);
 extern void fn_803EE374(void);
 extern void fn_803FFF40(void);
@@ -608,10 +608,8 @@ asm void fn_80496414(void)
     blr
 }
 
-asm void fn_8049641C(void)
+void fn_8049641C(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_80496420(void)
@@ -1068,10 +1066,8 @@ lbl_fn_8049682C_00000B64:
     blr
 }
 
-asm void fn_80496A24(void)
+void fn_80496A24(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_80496A28(void)
@@ -1416,7 +1412,7 @@ asm void fn_80496E94(void)
     b lbl_fn_80496E94_00001020
 lbl_fn_80496E94_00001018:
     mr r3, r31
-    bl fn_800D3FA4
+    bl bloom_processPasses
 lbl_fn_80496E94_00001020:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
@@ -1432,10 +1428,8 @@ asm void fn_80496EDC(void)
     b fn_80077534
 }
 
-asm void fn_80496EE4(void)
+void fn_80496EE4(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_80496EE8(void)
@@ -1565,7 +1559,7 @@ asm void fn_8049707C(void)
     mr r30, r3
     beq lbl_fn_8049707C_00001210
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     cmpwi r31, 0x0
     ble lbl_fn_8049707C_00001210
     mr r3, r30
@@ -2045,7 +2039,7 @@ lbl_fn_80497374_00001864:
 lbl_fn_80497374_00001870:
     lwz r0, 0x64(r30)
     add r3, r0, r27
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     beq lbl_fn_80497374_0000188C
     li r3, 0x0
@@ -2076,7 +2070,7 @@ lbl_fn_80497374_000018D0:
     cmplw r28, r0
     blt lbl_fn_80497374_000018AC
     mr r3, r30
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     bne lbl_fn_80497374_000018F4
     li r3, 0x0
@@ -2399,7 +2393,7 @@ lbl_fn_80497874_00001CD8:
     fdivs f8, f8, f28
     fmadds f7, f7, f8, f27
     fadds f1, f0, f7
-    bl fn_8023A680
+    bl res_Shader_bindParams
     lwz r0, 0x64(r15)
     add r4, r0, r16
     lwz r0, 0x9c(r4)
@@ -2686,7 +2680,7 @@ lbl_fn_80497874_000020C0:
     fdivs f8, f8, f31
     fmadds f7, f7, f8, f26
     fadds f1, f0, f7
-    bl fn_8023A680
+    bl res_Shader_bindParams
     li r0, 0x0
     stw r0, 0xb8(r17)
     lwz r0, 0x64(r15)

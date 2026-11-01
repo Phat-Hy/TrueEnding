@@ -1694,10 +1694,7 @@ lbl_fn_8070AC20_0000155C:
     blr
 }
 
-asm void fn_8070AC80(void)
-{
-    nofralloc
-    blr
+void fn_8070AC80(void) {
 }
 
 asm void fn_8070AC90(void)
@@ -1939,10 +1936,7 @@ lbl_fn_8070AF30_00001854:
     bctr
 }
 
-asm void fn_8070AF64(void)
-{
-    nofralloc
-    blr
+void fn_8070AF64(void) {
 }
 
 asm void fn_8070AF70(void)

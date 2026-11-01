@@ -12,10 +12,10 @@ extern void _savegpr_24(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8000D0F8(void);
-extern void fn_8000D114(void);
+extern void mtx_getTranslation(void);
+extern void vec3_set(void);
 extern void vec3_copy(void);
-extern void fn_8000D3A4(void);
+extern void vec3_mag(void);
 extern void fn_8000D430(void);
 extern void fn_8000DD0C(void);
 extern void mem_free(void);
@@ -26,7 +26,7 @@ extern void fn_80094958(void);
 extern void fn_80097A9C(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
-extern void fn_80097D40(void);
+extern void atn_Anim_getLayerTrack(void);
 extern void atn_Task_destructor(void);
 extern void str_findChar(void);
 extern void fn_8011E81C(void);
@@ -37,7 +37,7 @@ extern void fn_8012ABD0(void);
 extern void fn_8012ABF4(void);
 extern void fn_8012AC18(void);
 extern void fn_8012AC40(void);
-extern void fn_8014DEE4(void);
+extern void dialog_selectChoice(void);
 extern void fn_8014EEC4(void);
 extern void fn_8016E5F0(void);
 extern void fn_80176DFC(void);
@@ -79,11 +79,11 @@ extern u32 lbl_80880698;
 /* Function declarations */
 void fn_8001011C(void);
 void fn_80010374(void);
-void fn_8001047C(void);
+void vec3_assign(void);
 void fn_80010490(void);
 void fn_800109E0(void);
 void fn_80010B68(void);
-void fn_80011034(void);
+void vec3_toEulerAngles(void);
 void fn_80011220(void);
 void fn_8001122C(void);
 void fn_800112E0(void);
@@ -124,7 +124,7 @@ void vec3_sub(void);
 void fn_8001336C(void);
 void fn_800133B0(void);
 void fn_80013404(void);
-void fn_80013410(void);
+void vec3_add(void);
 void fn_80013444(void);
 void fn_80013484(void);
 void fn_800134B8(void);
@@ -379,7 +379,7 @@ lbl_fn_80010374_00000344:
     blr
 }
 
-asm void fn_8001047C(void)
+asm void vec3_assign(void)
 {
     nofralloc
     psq_l f1, 0x0(r4), 0, 0
@@ -1192,7 +1192,7 @@ lbl_fn_80010B68_00000EF0:
     blr
 }
 
-asm void fn_80011034(void)
+asm void vec3_toEulerAngles(void)
 {
     nofralloc
     stwu r1, -0xf0(r1)
@@ -1212,25 +1212,25 @@ asm void fn_80011034(void)
     mr r31, r3
     psq_st f1, 0x0(r3), 0, 0
     stfs f2, 0x8(r3)
-    bge lbl_fn_80011034_00000F84
+    bge lbl_vec3_toEulerAngles_00000F84
     lfs f3, 0x0(r3)
     lfs f0, lbl_80880668
     fcmpo cr0, f3, f0
-    ble lbl_fn_80011034_00000F78
+    ble lbl_vec3_toEulerAngles_00000F78
     lfs f0, lbl_80880684
-    b lbl_fn_80011034_00000F7C
-lbl_fn_80011034_00000F78:
+    b lbl_vec3_toEulerAngles_00000F7C
+lbl_vec3_toEulerAngles_00000F78:
     lfs f0, lbl_80880688
-lbl_fn_80011034_00000F7C:
+lbl_vec3_toEulerAngles_00000F7C:
     stfs f0, 0xc(r1)
-    b lbl_fn_80011034_00000F98
-lbl_fn_80011034_00000F84:
+    b lbl_vec3_toEulerAngles_00000F98
+lbl_vec3_toEulerAngles_00000F84:
     frsp f2, f2
     lfs f1, 0x0(r3)
     bl std_atan2
     frsp f0, f1
     stfs f0, 0xc(r1)
-lbl_fn_80011034_00000F98:
+lbl_vec3_toEulerAngles_00000F98:
     lfs f0, 0xc(r1)
     addi r3, r1, 0x90
     li r4, 0x79
@@ -1291,26 +1291,26 @@ lbl_fn_80011034_00000F98:
     fabs f3, f2
     frsp f3, f3
     fcmpo cr0, f3, f0
-    bge lbl_fn_80011034_000010B4
+    bge lbl_vec3_toEulerAngles_000010B4
     lfs f3, 0x18(r1)
     lfs f0, lbl_80880668
     fcmpo cr0, f3, f0
-    ble lbl_fn_80011034_000010A4
+    ble lbl_vec3_toEulerAngles_000010A4
     lfs f0, lbl_80880684
-    b lbl_fn_80011034_000010A8
-lbl_fn_80011034_000010A4:
+    b lbl_vec3_toEulerAngles_000010A8
+lbl_vec3_toEulerAngles_000010A4:
     lfs f0, lbl_80880688
-lbl_fn_80011034_000010A8:
+lbl_vec3_toEulerAngles_000010A8:
     fneg f0, f0
     stfs f0, 0x8(r1)
-    b lbl_fn_80011034_000010C8
-lbl_fn_80011034_000010B4:
+    b lbl_vec3_toEulerAngles_000010C8
+lbl_vec3_toEulerAngles_000010B4:
     lfs f1, 0x18(r1)
     bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x8(r1)
-lbl_fn_80011034_000010C8:
+lbl_vec3_toEulerAngles_000010C8:
     addi r3, r1, 0x8
     lfs f2, lbl_80880668
     psq_l f1, 0x0(r3), 0, 0
@@ -1965,7 +1965,7 @@ lbl_fn_800119C0_00001998:
 lbl_fn_800119C0_000019BC:
     mr r3, r24
     mr r4, r26
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     beq lbl_fn_800119C0_000019F8
     bl fn_804768D0
@@ -2525,7 +2525,7 @@ lbl_fn_800121F0_0000211C:
     li r31, 0x0
 lbl_fn_800121F0_00002120:
     mr r3, r31
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     beq lbl_fn_800121F0_0000213C
     bl atn_LoadHandle_getName
@@ -2593,7 +2593,7 @@ lbl_fn_80012294_000021D0:
 lbl_fn_80012294_000021F4:
     mr r3, r30
     mr r4, r5
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     beq lbl_fn_80012294_0000223C
     bl fn_804768D0
@@ -3065,7 +3065,7 @@ lbl_fn_8001282C_000027AC:
     mr r4, r7
     li r5, 0x0
     li r6, 0x0
-    b fn_8014DEE4
+    b dialog_selectChoice
 lbl_fn_8001282C_000027D0:
     addi r7, r7, 0x1
     addi r5, r5, 0x4
@@ -3471,7 +3471,7 @@ lbl_fn_80012D34_00002C80:
     beq lbl_fn_80012D34_00002F00
     mr r4, r28
     addi r3, r1, 0x17c
-    bl fn_8001047C
+    bl vec3_assign
     mr r3, r26
     bl fn_800128FC
     bl fn_8000DD0C
@@ -3482,18 +3482,18 @@ lbl_fn_80012D34_00002C80:
     mr r31, r3
     addi r3, r1, 0xc8
     mr r4, r31
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     addi r3, r1, 0x170
     addi r4, r1, 0x17c
     addi r5, r1, 0xc8
     bl vec3_sub
     addi r3, r1, 0x170
-    bl fn_8000D3A4
+    bl vec3_mag
     fmr f3, f1
     lfs f1, lbl_80880668
     addi r3, r1, 0x164
     fmr f2, f1
-    bl fn_8000D114
+    bl vec3_set
     mr r4, r31
     addi r3, r1, 0x278
     bl fn_8001336C
@@ -3502,17 +3502,17 @@ lbl_fn_80012D34_00002C80:
     bl fn_80011410
     mr r4, r31
     addi r3, r1, 0xb0
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     mr r4, r28
     addi r3, r1, 0xbc
     addi r5, r1, 0xb0
     bl vec3_sub
     addi r3, r1, 0x158
     addi r4, r1, 0xbc
-    bl fn_80011034
+    bl vec3_toEulerAngles
     addi r3, r1, 0xa4
     addi r4, r1, 0x164
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lfs f1, 0xa4(r1)
     lfs f0, 0x158(r1)
     fsubs f1, f0, f1
@@ -3520,7 +3520,7 @@ lbl_fn_80012D34_00002C80:
     fmr f31, f1
     addi r3, r1, 0x98
     addi r4, r1, 0x164
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lfs f1, 0x9c(r1)
     lfs f0, 0x15c(r1)
     fsubs f1, f0, f1
@@ -3552,7 +3552,7 @@ lbl_fn_80012D34_00002DB8:
     lfs f3, lbl_80880668
     fmr f2, f29
     addi r3, r1, 0x14c
-    bl fn_8000D114
+    bl vec3_set
     fmr f1, f31
     bl fn_80013404
     fcmpo cr0, f1, f29
@@ -3595,11 +3595,11 @@ lbl_fn_80012D34_00002E44:
     bl fn_80011410
     mr r4, r31
     addi r3, r1, 0x80
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     addi r3, r1, 0x8c
     addi r4, r1, 0x80
     addi r5, r1, 0x164
-    bl fn_80013410
+    bl vec3_add
     addi r3, r1, 0x17c
     addi r4, r1, 0x8c
     bl vec3_copy
@@ -3626,7 +3626,7 @@ lbl_fn_80012D34_00002E84:
     addi r3, r1, 0x74
     addi r4, r1, 0x140
     addi r5, r1, 0x134
-    bl fn_80013410
+    bl vec3_add
     addi r3, r1, 0x17c
     addi r4, r1, 0x74
     bl vec3_copy
@@ -3652,14 +3652,14 @@ lbl_fn_80012D34_00002F00:
     addi r3, r1, 0x128
     fmr f2, f1
     fmr f3, f1
-    bl fn_8000D114
+    bl vec3_set
     cmpwi r29, 0x0
     beq lbl_fn_80012D34_00002FF4
     lfs f1, lbl_80880668
     addi r3, r1, 0x11c
     fmr f2, f1
     fmr f3, f1
-    bl fn_8000D114
+    bl vec3_set
     lis r4, lbl_807C7030@ha
     mr r3, r28
     addi r4, r4, lbl_807C7030@l
@@ -3671,7 +3671,7 @@ lbl_fn_80012D34_00002F00:
     bl fn_80010374
     mr r4, r31
     addi r3, r1, 0x5c
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     addi r3, r1, 0x68
     addi r4, r1, 0x5c
     addi r5, r1, 0x110
@@ -3690,7 +3690,7 @@ lbl_fn_80012D34_00002F00:
     bl fn_80012C88
     mr r4, r31
     addi r3, r1, 0x50
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     addi r3, r1, 0x11c
     addi r4, r1, 0x50
     bl fn_80013484
@@ -3713,17 +3713,17 @@ lbl_fn_80012D34_00003000:
     addi r3, r1, 0x104
     fmr f2, f1
     fmr f3, f1
-    bl fn_8000D114
+    bl vec3_set
     mr r4, r26
     addi r3, r1, 0xf8
     bl fn_80010374
     mr r4, r31
     addi r3, r1, 0x2c
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     addi r3, r1, 0x38
     addi r4, r1, 0x2c
     addi r5, r1, 0x128
-    bl fn_80013410
+    bl vec3_add
     addi r3, r1, 0x44
     addi r4, r1, 0x38
     addi r5, r1, 0xf8
@@ -3742,7 +3742,7 @@ lbl_fn_80012D34_00003000:
     bl fn_80012C88
     mr r4, r31
     addi r3, r1, 0x20
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     addi r3, r1, 0x104
     addi r4, r1, 0x20
     bl fn_80013484
@@ -3768,7 +3768,7 @@ lbl_fn_80012D34_000030D0:
     mr r4, r28
     mr r5, r30
     addi r3, r1, 0x14
-    bl fn_80013410
+    bl vec3_add
     addi r3, r1, 0xe0
     addi r4, r1, 0x14
     bl vec3_copy
@@ -3800,7 +3800,7 @@ lbl_fn_80012D34_00003120:
     addi r3, r1, 0x8
     addi r4, r1, 0xec
     addi r5, r1, 0xd4
-    bl fn_80013410
+    bl vec3_add
     addi r3, r1, 0xe0
     addi r4, r1, 0x8
     bl vec3_copy
@@ -3912,7 +3912,7 @@ asm void fn_80013404(void)
     blr
 }
 
-asm void fn_80013410(void)
+asm void vec3_add(void)
 {
     nofralloc
     lfs f1, 0x8(r4)

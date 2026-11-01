@@ -10,7 +10,7 @@ extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void str_assignBuffer(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_800BFAC8(void);
+extern void motion_updateFogAdj(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void str_findChar(void);
@@ -569,7 +569,7 @@ lbl_fn_803E41AC_000006C0:
     lwz r4, lbl_8087EFB4
     stfs f1, 0x20(r1)
     stfs f0, 0x1c(r1)
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lwz r4, 0x1104(r31)
     lis r30, lbl_807506A0@ha
     addi r30, r30, lbl_807506A0@l

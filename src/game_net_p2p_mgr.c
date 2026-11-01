@@ -6,7 +6,7 @@ extern void OSIsThreadSuspended(void);
 extern void OSResumeThread(void);
 extern void OSWakeupThread(void);
 extern void __register_global_object(void);
-extern void fn_804D818C(void);
+extern void net_voiceCodec_destroy(void);
 extern void fn_8050DDE0(void);
 extern void fn_8050E098(void);
 extern void fn_8050EAE8(void);
@@ -14,13 +14,13 @@ extern void fn_8050EAEC(void);
 extern void fn_8050EB8C(void);
 extern void fn_8050F19C(void);
 extern void wcscpy(void);
-extern void fn_806A8E40(void);
+extern void net_getSocket(void);
 extern void fn_806A8E80(void);
 extern void fn_806AC070(void);
 extern void fn_806B0180(void);
 extern void fn_806B0950(void);
 extern void fn_806B0CF0(void);
-extern void fn_806B0E30(void);
+extern void net_getMyAid(void);
 extern void fn_806B0EB0(void);
 extern void fn_806B1170(void);
 extern void fn_806B1250(void);
@@ -296,7 +296,7 @@ asm void fn_8050A994(void)
     li r30, 0x0
     b lbl_fn_8050A994_000002D8
 lbl_fn_8050A994_000002B0:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r30, r3, 24
     b lbl_fn_8050A994_000002D8
 lbl_fn_8050A994_000002BC:
@@ -306,7 +306,7 @@ lbl_fn_8050A994_000002BC:
     li r3, 0x0
     b lbl_fn_8050A994_000002D4
 lbl_fn_8050A994_000002D0:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_8050A994_000002D4:
     clrlwi r30, r3, 24
 lbl_fn_8050A994_000002D8:
@@ -390,10 +390,7 @@ asm void fn_8050AAD4(void)
     b fn_8050AA9C
 }
 
-asm void fn_8050AAE0(void)
-{
-    nofralloc
-    blr
+void fn_8050AAE0(void) {
 }
 
 asm void fn_8050AAE4(void)
@@ -803,7 +800,7 @@ asm void fn_8050B01C(void)
     li r30, 0x0
     b lbl_fn_8050B01C_00000954
 lbl_fn_8050B01C_0000092C:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r30, r3, 24
     b lbl_fn_8050B01C_00000954
 lbl_fn_8050B01C_00000938:
@@ -813,7 +810,7 @@ lbl_fn_8050B01C_00000938:
     li r3, 0x0
     b lbl_fn_8050B01C_00000950
 lbl_fn_8050B01C_0000094C:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_8050B01C_00000950:
     clrlwi r30, r3, 24
 lbl_fn_8050B01C_00000954:
@@ -865,9 +862,9 @@ lbl_fn_8050B01C_000009D4:
     extsb. r0, r0
     sth r3, 0xa(r1)
     bne lbl_fn_8050B01C_00000A1C
-    lis r4, fn_804D818C@ha
+    lis r4, net_voiceCodec_destroy@ha
     lis r5, lbl_807C8FC8@ha
-    addi r4, r4, fn_804D818C@l
+    addi r4, r4, net_voiceCodec_destroy@l
     la r3, lbl_8087F5FC
     addi r5, r5, lbl_807C8FC8@l
     bl __register_global_object
@@ -900,10 +897,7 @@ lbl_fn_8050B01C_00000A60:
     blr
 }
 
-asm void fn_8050B1A8(void)
-{
-    nofralloc
-    blr
+void fn_8050B1A8(void) {
 }
 
 asm void fn_8050B1AC(void)
@@ -990,7 +984,7 @@ lbl_fn_8050B228_00000B54:
     li r0, 0x0
     b lbl_fn_8050B228_00000BB0
 lbl_fn_8050B228_00000B88:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_8050B228_00000BB0
 lbl_fn_8050B228_00000B94:
@@ -1000,7 +994,7 @@ lbl_fn_8050B228_00000B94:
     li r3, 0x0
     b lbl_fn_8050B228_00000BAC
 lbl_fn_8050B228_00000BA8:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_8050B228_00000BAC:
     clrlwi r0, r3, 24
 lbl_fn_8050B228_00000BB0:
@@ -1074,7 +1068,7 @@ lbl_fn_8050B228_00000C8C:
     li r0, 0x0
     b lbl_fn_8050B228_00000CD4
 lbl_fn_8050B228_00000CAC:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_8050B228_00000CD4
 lbl_fn_8050B228_00000CB8:
@@ -1084,7 +1078,7 @@ lbl_fn_8050B228_00000CB8:
     li r3, 0x0
     b lbl_fn_8050B228_00000CD0
 lbl_fn_8050B228_00000CCC:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_8050B228_00000CD0:
     clrlwi r0, r3, 24
 lbl_fn_8050B228_00000CD4:
@@ -1298,7 +1292,7 @@ lbl_fn_8050B674_00000F84:
     li r0, 0x0
     b lbl_fn_8050B674_00000FCC
 lbl_fn_8050B674_00000FA4:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_8050B674_00000FCC
 lbl_fn_8050B674_00000FB0:
@@ -1308,7 +1302,7 @@ lbl_fn_8050B674_00000FB0:
     li r3, 0x0
     b lbl_fn_8050B674_00000FC8
 lbl_fn_8050B674_00000FC4:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_8050B674_00000FC8:
     clrlwi r0, r3, 24
 lbl_fn_8050B674_00000FCC:
@@ -1634,7 +1628,7 @@ lbl_fn_8050BAC8_000013D8:
     li r0, 0x0
     b lbl_fn_8050BAC8_00001420
 lbl_fn_8050BAC8_000013F8:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_8050BAC8_00001420
 lbl_fn_8050BAC8_00001404:
@@ -1644,7 +1638,7 @@ lbl_fn_8050BAC8_00001404:
     li r3, 0x0
     b lbl_fn_8050BAC8_0000141C
 lbl_fn_8050BAC8_00001418:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_8050BAC8_0000141C:
     clrlwi r0, r3, 24
 lbl_fn_8050BAC8_00001420:
@@ -1730,7 +1724,7 @@ lbl_fn_8050BAC8_00001514:
     li r3, 0x0
     b lbl_fn_8050BAC8_00001560
 lbl_fn_8050BAC8_00001538:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r3, r3, 24
     b lbl_fn_8050BAC8_00001560
 lbl_fn_8050BAC8_00001544:
@@ -1740,7 +1734,7 @@ lbl_fn_8050BAC8_00001544:
     li r3, 0x0
     b lbl_fn_8050BAC8_0000155C
 lbl_fn_8050BAC8_00001558:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_8050BAC8_0000155C:
     clrlwi r3, r3, 24
 lbl_fn_8050BAC8_00001560:
@@ -1798,7 +1792,7 @@ lbl_fn_8050BAC8_000015EC:
     li r0, 0x0
     b lbl_fn_8050BAC8_00001648
 lbl_fn_8050BAC8_00001620:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_8050BAC8_00001648
 lbl_fn_8050BAC8_0000162C:
@@ -1808,7 +1802,7 @@ lbl_fn_8050BAC8_0000162C:
     li r3, 0x0
     b lbl_fn_8050BAC8_00001644
 lbl_fn_8050BAC8_00001640:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_8050BAC8_00001644:
     clrlwi r0, r3, 24
 lbl_fn_8050BAC8_00001648:
@@ -1857,7 +1851,7 @@ asm void fn_8050BDC8(void)
     li r0, 0x0
     b lbl_fn_8050BDC8_00001700
 lbl_fn_8050BDC8_000016D8:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_8050BDC8_00001700
 lbl_fn_8050BDC8_000016E4:
@@ -1867,7 +1861,7 @@ lbl_fn_8050BDC8_000016E4:
     li r3, 0x0
     b lbl_fn_8050BDC8_000016FC
 lbl_fn_8050BDC8_000016F8:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_8050BDC8_000016FC:
     clrlwi r0, r3, 24
 lbl_fn_8050BDC8_00001700:
@@ -1893,7 +1887,7 @@ lbl_fn_8050BDC8_0000172C:
     li r0, 0x0
     b lbl_fn_8050BDC8_00001778
 lbl_fn_8050BDC8_00001750:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_8050BDC8_00001778
 lbl_fn_8050BDC8_0000175C:
@@ -1903,7 +1897,7 @@ lbl_fn_8050BDC8_0000175C:
     li r3, 0x0
     b lbl_fn_8050BDC8_00001774
 lbl_fn_8050BDC8_00001770:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_8050BDC8_00001774:
     clrlwi r0, r3, 24
 lbl_fn_8050BDC8_00001778:
@@ -1923,7 +1917,7 @@ lbl_fn_8050BDC8_00001778:
     li r29, 0x0
     b lbl_fn_8050BDC8_000017DC
 lbl_fn_8050BDC8_000017B4:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r29, r3, 24
     b lbl_fn_8050BDC8_000017DC
 lbl_fn_8050BDC8_000017C0:
@@ -1933,7 +1927,7 @@ lbl_fn_8050BDC8_000017C0:
     li r3, 0x0
     b lbl_fn_8050BDC8_000017D8
 lbl_fn_8050BDC8_000017D4:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_8050BDC8_000017D8:
     clrlwi r29, r3, 24
 lbl_fn_8050BDC8_000017DC:
@@ -1991,9 +1985,9 @@ lbl_fn_8050BDC8_00001810:
     lbz r0, lbl_8087F5F8
     extsb. r0, r0
     bne lbl_fn_8050BDC8_000018C8
-    lis r4, fn_804D818C@ha
+    lis r4, net_voiceCodec_destroy@ha
     lis r5, lbl_807C8FC8@ha
-    addi r4, r4, fn_804D818C@l
+    addi r4, r4, net_voiceCodec_destroy@l
     la r3, lbl_8087F5FC
     addi r5, r5, lbl_807C8FC8@l
     bl __register_global_object

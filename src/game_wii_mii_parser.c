@@ -6,16 +6,16 @@ extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void vec3_copy(void);
-extern void fn_8000D3A4(void);
-extern void fn_8001047C(void);
-extern void fn_80011034(void);
+extern void vec3_mag(void);
+extern void vec3_assign(void);
+extern void vec3_toEulerAngles(void);
 extern void fn_80011220(void);
 extern void fn_800133B0(void);
 extern void fn_80063484(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_800897D8(void);
-extern void fn_8008BBD8(void);
+extern void node_destroy(void);
+extern void map_debugLog(void);
 extern void fn_8008CD60(void);
 extern void fn_80091CFC(void);
 extern void atn_Model_findBoneIndex(void);
@@ -28,7 +28,7 @@ extern void fn_800EB270(void);
 extern void fn_800EB49C(void);
 extern void fn_800F29D0(void);
 extern void fn_800F7FD8(void);
-extern void fn_800F8C6C(void);
+extern void scissor_clipFrustum(void);
 extern void fn_801125F8(void);
 extern void fn_8011C044(void);
 extern void fn_80126214(void);
@@ -38,12 +38,12 @@ extern void boss_updatePhaseState(void);
 extern void fn_80139F4C(void);
 extern void fn_80139F58(void);
 extern void fn_8013A258(void);
-extern void fn_80144710(void);
-extern void fn_80145334(void);
+extern void quest_evaluateConditions(void);
+extern void quest_updateFlow(void);
 extern void quest_checkCondition(void);
 extern void dialog_renderWindow(void);
-extern void fn_8014C540(void);
-extern void fn_80151448(void);
+extern void dialog_updateScriptState(void);
+extern void inventory_applyItemStats(void);
 extern void fn_80158BB4(void);
 extern void fn_80158CA4(void);
 extern void fn_8015E7A0(void);
@@ -51,14 +51,14 @@ extern void fn_8015EB2C(void);
 extern void fn_8016D454(void);
 extern void fn_8016EB48(void);
 extern void fn_8016F67C(void);
-extern void fn_80179D44(void);
+extern void actor_getMovementFlags(void);
 extern void task_mapIdToQueue(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
 extern void fn_8031F2A4(void);
-extern void fn_8035B694(void);
-extern void fn_8035B78C(void);
+extern void entity_Instance_constructor(void);
+extern void entity_Instance_destructor(void);
 extern void fn_803754C4(void);
 extern void fn_803C1560(void);
 extern void fn_80568EE4(void);
@@ -535,7 +535,7 @@ asm void fn_80566424(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lwz r0, 0x14a8(r31)
     li r6, 0x0
     lfs f5, lbl_80887F40
@@ -599,11 +599,11 @@ asm void fn_805664E0(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_805664E0_000005F0
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_805664E0_000005F0:
     mr r3, r30
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r31, 0x0
     ble lbl_fn_805664E0_0000060C
     mr r3, r30
@@ -789,7 +789,7 @@ lbl_fn_80566560_0000086C:
     stw r4, 0x198(r1)
     stw r0, 0x19c(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_80566560_000008F0
     addic. r0, r1, 0x26c
@@ -938,7 +938,7 @@ lbl_fn_80566560_00000AA0:
     stw r4, 0xf0(r1)
     stw r0, 0xf4(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_80566560_00000B24
     addic. r0, r1, 0x258
@@ -1188,7 +1188,7 @@ lbl_fn_80566CF8_00000DE8:
     mr r3, r31
     psq_st f1, 0x0(r5), 0, 0
     stfs f2, 0x1c(r1)
-    bl fn_8014C540
+    bl dialog_updateScriptState
     lwz r0, 0x7e0(r31)
     rlwinm r0, r0, 0, 26, 26
     cmplwi r0, 0x20
@@ -1250,7 +1250,7 @@ lbl_fn_80566CF8_00000EDC:
     extrwi. r0, r0, 1, 6
     bne lbl_fn_80566CF8_00000F04
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     b lbl_fn_80566CF8_00000F48
 lbl_fn_80566CF8_00000F04:
     lwz r4, lbl_8087EFB4
@@ -1322,7 +1322,7 @@ asm void fn_80566F04(void)
     mr r31, r4
     stw r30, 0x18(r1)
     mr r30, r3
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r0, 0x7e0(r30)
     li r3, 0x0
     stw r3, 0x638(r30)
@@ -1627,7 +1627,7 @@ lbl_fn_80566FB8_00001420:
     cmpwi r0, 0x0
     beq lbl_fn_80566FB8_000014D8
     mr r3, r31
-    bl fn_80144710
+    bl quest_evaluateConditions
     lwz r3, lbl_8087F048
     mr r6, r31
     lwz r7, 0x638(r31)
@@ -1637,7 +1637,7 @@ lbl_fn_80566FB8_00001420:
     lfs f1, lbl_80887F40
     li r9, 0x1e
     lwz r10, 0x594(r31)
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     lwz r0, 0x594(r31)
     cmpwi r0, 0x0
     ble lbl_fn_80566FB8_000014D8
@@ -1713,7 +1713,7 @@ lbl_fn_80567428_00001570:
     cmpwi r0, 0x0
     bne lbl_fn_80567428_000015A8
     mr r3, r30
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lfs f1, lbl_80887F84
     mr r5, r3
     mr r3, r28
@@ -1822,7 +1822,7 @@ asm void fn_80567600(void)
     mr r31, r3
     addi r3, r1, 0x30
     addi r4, r31, 0x534
-    bl fn_8001047C
+    bl vec3_assign
     lfs f0, lbl_80887F40
     stfs f0, 0x8(r1)
     lfs f30, lbl_80887F60
@@ -1992,9 +1992,9 @@ lbl_fn_80567600_00001944:
     bl fn_80139F58
     mr r4, r3
     addi r3, r1, 0x24
-    bl fn_8001047C
+    bl vec3_assign
     addi r3, r1, 0x24
-    bl fn_8000D3A4
+    bl vec3_mag
     frsp f2, f1
     lfs f0, lbl_80887F98
     stfs f1, 0x8(r1)
@@ -2005,7 +2005,7 @@ lbl_fn_80567600_00001944:
     bl fn_800F7FD8
     addi r3, r1, 0x18
     addi r4, r1, 0xc
-    bl fn_80011034
+    bl vec3_toEulerAngles
     addi r3, r1, 0x30
     addi r4, r1, 0x18
     bl vec3_copy

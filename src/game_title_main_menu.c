@@ -24,7 +24,7 @@ extern void mem_free(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_8011F8F4(void);
 extern void fn_8011F91C(void);
-extern void fn_8011FC10(void);
+extern void skill_findNodeById(void);
 extern void fn_8011FE3C(void);
 extern void fn_801240B4(void);
 extern void world_getGlobalFlag(void);
@@ -1048,7 +1048,7 @@ lbl_fn_803AD05C_00000CE4:
 lbl_fn_803AD05C_00000D20:
     lwz r3, lbl_8087F408
     mr r4, r5
-    bl fn_8011FC10
+    bl skill_findNodeById
     mr r6, r3
     b lbl_fn_803AD05C_00000D44
 lbl_fn_803AD05C_00000D34:
@@ -1969,7 +1969,7 @@ lbl_fn_803ADC90_00001970:
     blt lbl_fn_803ADC90_00001D84
     lwz r4, 0x0(r27)
     mr r3, r21
-    bl fn_8011FC10
+    bl skill_findNodeById
     cmpwi r3, 0x0
     mr r28, r3
     beq lbl_fn_803ADC90_00001D84

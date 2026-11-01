@@ -19,7 +19,7 @@ extern void fn_80093E90(void);
 extern void fn_80097E80(void);
 extern void atn_Task_constructor(void);
 extern void str_findChar(void);
-extern void fn_80145334(void);
+extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void fn_8036554C(void);
 extern void fn_803CC5E4(void);
@@ -56,13 +56,13 @@ extern u32 lbl_80880670;
 /* Function declarations */
 void fn_8000CBD0(void);
 void fn_8000CBD8(void);
-void fn_8000D0F8(void);
-void fn_8000D114(void);
+void mtx_getTranslation(void);
+void vec3_set(f32* v, f32 x, f32 y, f32 z);
 void vec3_copy(void);
 void fn_8000D138(void);
 void fn_8000D1A0(void);
 void fn_8000D1A8(void);
-void fn_8000D3A4(void);
+void vec3_mag(void);
 void fn_8000D3A8(void);
 void fn_8000D430(void);
 void fn_8000D4D4(void);
@@ -423,7 +423,7 @@ lbl_fn_8000CBD8_0000049C:
     stw r4, 0xf1c(r3)
 lbl_fn_8000CBD8_000004EC:
     lwz r3, 0x48(r31)
-    bl fn_80145334
+    bl quest_updateFlow
     lwz r0, 0x54(r31)
     cmpwi r0, 0x0
     beq lbl_fn_8000CBD8_0000050C
@@ -440,7 +440,7 @@ lbl_fn_8000CBD8_0000050C:
     blr
 }
 
-asm void fn_8000D0F8(void)
+asm void mtx_getTranslation(void)
 {
     nofralloc
     lfs f2, 0x2c(r4)
@@ -452,13 +452,11 @@ asm void fn_8000D0F8(void)
     blr
 }
 
-asm void fn_8000D114(void)
+void vec3_set(f32* v, f32 x, f32 y, f32 z)
 {
-    nofralloc
-    stfs f1, 0x0(r3)
-    stfs f2, 0x4(r3)
-    stfs f3, 0x8(r3)
-    blr
+    v[0] = x;
+    v[1] = y;
+    v[2] = z;
 }
 
 asm void vec3_copy(void)
@@ -655,7 +653,7 @@ lbl_fn_8000D1A8_000007AC:
     blr
 }
 
-asm void fn_8000D3A4(void)
+asm void vec3_mag(void)
 {
     nofralloc
     b PSVECMag

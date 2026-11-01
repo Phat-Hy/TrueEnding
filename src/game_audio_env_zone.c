@@ -7,39 +7,39 @@ extern void _restgpr_26(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void vec3_copy(void);
-extern void fn_80011034(void);
+extern void vec3_toEulerAngles(void);
 extern void vec3_sub(void);
-extern void fn_80013410(void);
+extern void vec3_add(void);
 extern void collision_testLineSegment(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void skin_applyWeights(void);
-extern void fn_800CB360(void);
+extern void morph_reset(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB440(void);
+extern void morph_updateWeights(void);
 extern void morph_updateMesh(void);
 extern void fn_800EB7A0(void);
 extern void fn_800F72CC(void);
-extern void fn_800F7FA0(void);
+extern void viewport_getGlobalContext(void);
 extern void fn_800F7FA8(void);
 extern void fn_800F7FD8(void);
-extern void fn_800F7FF0(void);
+extern void viewport_getNextSequenceId(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800FDB20(void);
 extern void fn_80101434(void);
 extern void fn_8012D8B8(void);
-extern void fn_8013C38C(void);
+extern void npc_getPosition(void);
 extern void fn_801404F8(void);
 extern void fn_80140500(void);
 extern void dialog_renderWindow(void);
-extern void fn_80151448(void);
+extern void inventory_applyItemStats(void);
 extern void fn_801533C8(void);
 extern void actor_setState(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
 extern void fn_80239D58(void);
 extern void res_findResourceSlot(void);
-extern void fn_8023A680(void);
+extern void res_Shader_bindParams(void);
 extern void res_registerResource(void);
 extern void fn_802657FC(void);
 extern void fn_8026607C(void);
@@ -115,7 +115,7 @@ asm void fn_8031C534(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r12, 0x0(r30)
     mr r3, r30
     mr r4, r31
@@ -1083,36 +1083,36 @@ asm void fn_8031D350(void)
     mr r3, r31
     li r4, 0x3
     bl actor_setState
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r4, r31
     li r5, 0x65
     bl fn_800F7FA8
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     addi r4, r31, 0x1598
     addi r5, r31, 0xb0
     li r6, 0x1
     bl fn_8026607C
     lwz r3, 0x14b8(r31)
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r1, 0x74
     addi r5, r31, 0x528
     bl vec3_sub
     addi r3, r1, 0x74
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
     addi r3, r31, 0x1524
     addi r4, r1, 0x74
     bl vec3_copy
     lfs f0, lbl_80884DF0
     addi r3, r31, 0x1524
     stfs f0, 0x1528(r31)
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
     lfs f1, lbl_80884E34
     addi r3, r1, 0x50
     addi r4, r31, 0x1524
     bl fn_800F72CC
     lwz r3, 0x14b8(r31)
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r1, 0x5c
     addi r5, r1, 0x50
@@ -1137,7 +1137,7 @@ asm void fn_8031D350(void)
     addi r3, r1, 0x68
     addi r4, r31, 0x528
     addi r5, r1, 0x2c
-    bl fn_80013410
+    bl vec3_add
     addi r3, r1, 0x80
     bl fn_80140500
     bl fn_801404F8
@@ -1164,7 +1164,7 @@ asm void fn_8031D350(void)
     bl fn_800F7FD8
     addi r3, r1, 0x20
     addi r4, r1, 0x14
-    bl fn_80011034
+    bl vec3_toEulerAngles
     addi r3, r31, 0x534
     addi r4, r1, 0x20
     bl vec3_copy
@@ -1207,7 +1207,7 @@ asm void fn_8031D4F4(void)
     stw r0, 0x30(r3)
     stw r0, 0x34(r3)
     addi r3, r3, 0x38
-    bl fn_800CB360
+    bl morph_reset
     lwz r0, 0x2c(r31)
     mr r3, r31
     subf r0, r0, r0
@@ -1915,7 +1915,7 @@ lbl_fn_8031D6DC_00001A3C:
     lwz r3, lbl_8087F3C0
     li r10, 0x0
     lwz r4, 0x8(r28)
-    bl fn_8023A680
+    bl res_Shader_bindParams
 lbl_fn_8031D6DC_00001A94:
     lwz r3, 0x2c(r28)
     lis r4, lbl_8074973C@ha
@@ -1934,7 +1934,7 @@ lbl_fn_8031D6DC_00001A94:
     bl skin_applyWeights
     addi r3, r28, 0x38
     addi r4, r1, 0x24
-    bl fn_800CB440
+    bl morph_updateWeights
     addi r3, r1, 0x24
     li r4, -0x1
     bl ref_releaseHandle

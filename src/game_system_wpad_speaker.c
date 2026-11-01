@@ -4,9 +4,9 @@
 /* External function declarations */
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
-extern void fn_80061824(void);
+extern void skill_calcTrajectory(void);
 extern void fn_8006A900(void);
-extern void fn_8006EF48(void);
+extern void script_executeOpcode(void);
 extern void fn_8006F2F0(void);
 extern void dungeon_initGlobalContext(void);
 extern void mem_alloc(void);
@@ -14,14 +14,14 @@ extern void fn_80084F84(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void str_findChar(void);
 extern void wcs_vformat(void);
 extern void fn_800E426C(void);
 extern void fn_800E4278(void);
 extern void magic_dispatchActionCommand(void);
 extern void dialog_renderWindow(void);
-extern void fn_8014DEE4(void);
+extern void dialog_selectChoice(void);
 extern void fn_8016EB48(void);
 extern void fn_801E9EA4(void);
 extern void thread_findAndNotify(void);
@@ -467,7 +467,7 @@ lbl_world_Manager_postUpdate_00000484:
     li r5, 0x1
     lfs f2, lbl_8088570C
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lfs f3, lbl_8088570C
     fmr f2, f31
     lfs f0, lbl_80885778
@@ -485,7 +485,7 @@ lbl_world_Manager_postUpdate_00000484:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lfs f0, lbl_8088577C
     addi r28, r28, lbl_8078A408@l
     lwz r5, 0x10d0(r27)
@@ -500,7 +500,7 @@ lbl_world_Manager_postUpdate_00000484:
     li r5, 0x1
     lfs f2, lbl_8088570C
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lfs f3, lbl_8088570C
     fmr f2, f31
     lfs f0, lbl_80885778
@@ -518,7 +518,7 @@ lbl_world_Manager_postUpdate_00000484:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lwz r4, lbl_8087F8A0
     addi r5, r1, 0x40
     lfs f0, lbl_8088577C
@@ -541,7 +541,7 @@ lbl_world_Manager_postUpdate_00000484:
     li r5, 0x1
     lfs f2, lbl_8088570C
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lfs f3, lbl_8088570C
     fmr f2, f31
     lfs f0, lbl_80885778
@@ -559,7 +559,7 @@ lbl_world_Manager_postUpdate_00000484:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lfs f0, lbl_8088577C
     lwz r0, 0x54e4(r27)
     fadds f31, f31, f0
@@ -610,7 +610,7 @@ lbl_world_Manager_postUpdate_000006E4:
     li r5, 0x1
     lfs f2, lbl_8088570C
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lfs f3, lbl_8088570C
     fmr f2, f31
     lfs f0, lbl_80885778
@@ -628,7 +628,7 @@ lbl_world_Manager_postUpdate_000006E4:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lfs f0, lbl_8088577C
     fadds f31, f31, f0
 lbl_world_Manager_postUpdate_00000750:
@@ -657,7 +657,7 @@ lbl_world_Manager_postUpdate_00000750:
     li r5, 0x1
     lfs f2, lbl_8088570C
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lfs f3, lbl_8088570C
     fmr f2, f31
     lfs f0, lbl_80885778
@@ -675,7 +675,7 @@ lbl_world_Manager_postUpdate_00000750:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lfs f0, lbl_8088577C
     fadds f31, f31, f0
 lbl_world_Manager_postUpdate_00000808:
@@ -789,7 +789,7 @@ lbl_world_Manager_postUpdate_00000808:
     li r5, 0x1
     lfs f2, lbl_8088570C
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lfs f6, lbl_8088570C
     fmr f2, f31
     lfs f0, lbl_80885778
@@ -807,7 +807,7 @@ lbl_world_Manager_postUpdate_00000808:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lfs f0, lbl_8088578C
     fmr f1, f26
     fmr f2, f28
@@ -827,7 +827,7 @@ lbl_world_Manager_postUpdate_00000808:
     li r5, 0x1
     lfs f2, lbl_8088570C
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lfs f6, lbl_8088570C
     fmr f2, f31
     lfs f0, lbl_80885778
@@ -845,7 +845,7 @@ lbl_world_Manager_postUpdate_00000808:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lwz r3, lbl_8087EEB0
     li r0, 0x12
     stw r0, 0xa0(r3)
@@ -1590,7 +1590,7 @@ lbl_world_Manager_postUpdate_00001594:
     lwz r3, lbl_8087FA20
     cmpwi r3, 0x0
     beq lbl_world_Manager_postUpdate_000015B4
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_world_Manager_postUpdate_000015BC
 lbl_world_Manager_postUpdate_000015B4:
@@ -1680,7 +1680,7 @@ lbl_fn_8036CA60_000016C0:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8014DEE4
+    bl dialog_selectChoice
 lbl_fn_8036CA60_000016E4:
     lwz r28, 0x14ac(r28)
 lbl_fn_8036CA60_000016E8:
@@ -1698,7 +1698,7 @@ lbl_fn_8036CA60_000016FC:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8014DEE4
+    bl dialog_selectChoice
 lbl_fn_8036CA60_00001720:
     lwz r28, 0x14ac(r28)
 lbl_fn_8036CA60_00001724:

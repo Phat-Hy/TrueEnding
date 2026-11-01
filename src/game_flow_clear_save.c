@@ -7,9 +7,9 @@ extern void _restgpr_25(void);
 extern void _restgpr_27(void);
 extern void _savegpr_25(void);
 extern void _savegpr_27(void);
-extern void fn_8003EFB0(void);
+extern void ui_destroyWidget(void);
 extern void dungeon_initGlobalContext(void);
-extern void fn_800838B8(void);
+extern void town_synchronizedDispatch(void);
 extern void fn_800EFD04(void);
 extern void fn_800F7F90(void);
 extern void fn_801010A0(void);
@@ -24,7 +24,7 @@ extern void net_getFriendManager(void);
 extern void fn_804D5F44(void);
 extern void fn_804D5F4C(void);
 extern void fn_804D634C(void);
-extern void fn_804D818C(void);
+extern void net_voiceCodec_destroy(void);
 extern void fn_804DD15C(void);
 extern void fn_804EB1B0(void);
 extern void fn_804EF9B8(void);
@@ -92,8 +92,8 @@ extern void PSVECDotProduct(void);
 extern void fn_8067CE80(void);
 extern void strcmp(void);
 extern void __dynamic_cast(void);
-extern void fn_806A8E40(void);
-extern void fn_806B0E30(void);
+extern void net_getSocket(void);
+extern void net_getMyAid(void);
 extern void fn_806B1250(void);
 extern void fn_806B3AE0(void);
 extern void fn_806B3B80(void);
@@ -557,7 +557,7 @@ asm void fn_804EDCD0(void)
     li r30, 0x0
     b lbl_fn_804EDCD0_000005CC
 lbl_fn_804EDCD0_000005A4:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r30, r3, 24
     b lbl_fn_804EDCD0_000005CC
 lbl_fn_804EDCD0_000005B0:
@@ -567,7 +567,7 @@ lbl_fn_804EDCD0_000005B0:
     li r3, 0x0
     b lbl_fn_804EDCD0_000005C8
 lbl_fn_804EDCD0_000005C4:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_804EDCD0_000005C8:
     clrlwi r30, r3, 24
 lbl_fn_804EDCD0_000005CC:
@@ -653,7 +653,7 @@ lbl_fn_804EDCD0_000006B0:
     li r30, 0x0
     b lbl_fn_804EDCD0_00000718
 lbl_fn_804EDCD0_000006F0:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r30, r3, 24
     b lbl_fn_804EDCD0_00000718
 lbl_fn_804EDCD0_000006FC:
@@ -663,7 +663,7 @@ lbl_fn_804EDCD0_000006FC:
     li r3, 0x0
     b lbl_fn_804EDCD0_00000714
 lbl_fn_804EDCD0_00000710:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_804EDCD0_00000714:
     clrlwi r30, r3, 24
 lbl_fn_804EDCD0_00000718:
@@ -706,7 +706,7 @@ lbl_fn_804EDCD0_00000750:
     li r30, 0x0
     b lbl_fn_804EDCD0_000007CC
 lbl_fn_804EDCD0_000007A4:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r30, r3, 24
     b lbl_fn_804EDCD0_000007CC
 lbl_fn_804EDCD0_000007B0:
@@ -716,7 +716,7 @@ lbl_fn_804EDCD0_000007B0:
     li r3, 0x0
     b lbl_fn_804EDCD0_000007C8
 lbl_fn_804EDCD0_000007C4:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_804EDCD0_000007C8:
     clrlwi r30, r3, 24
 lbl_fn_804EDCD0_000007CC:
@@ -1119,28 +1119,16 @@ lbl_fn_804EE044_00000D64:
     blr
 }
 
-asm void fn_804EE4E4(void)
-{
-    nofralloc
-    blr
+void fn_804EE4E4(void) {
 }
 
-asm void fn_804EE4E8(void)
-{
-    nofralloc
-    blr
+void fn_804EE4E8(void) {
 }
 
-asm void fn_804EE4EC(void)
-{
-    nofralloc
-    blr
+void fn_804EE4EC(void) {
 }
 
-asm void fn_804EE4F0(void)
-{
-    nofralloc
-    blr
+void fn_804EE4F0(void) {
 }
 
 asm void fn_804EE4F4(void)
@@ -1397,7 +1385,7 @@ asm void fn_804EE838(void)
     la r7, lbl_8087E1B0
     la r8, lbl_8087E1AC
     li r9, 0x0
-    bl fn_800838B8
+    bl town_synchronizedDispatch
     stw r3, lbl_8087F600
 lbl_fn_804EE838_00001114:
     lwz r4, lbl_8087F600
@@ -1416,7 +1404,7 @@ lbl_fn_804EE838_00001114:
     la r7, lbl_8087E1B0
     la r8, lbl_8087E1AC
     li r9, 0x0
-    bl fn_800838B8
+    bl town_synchronizedDispatch
     stw r3, lbl_8087F600
 lbl_fn_804EE838_0000115C:
     lwz r4, 0x0(r31)
@@ -1462,7 +1450,7 @@ asm void fn_804EE908(void)
     la r7, lbl_8087E1B0
     la r8, lbl_8087E1AC
     li r9, 0x0
-    bl fn_800838B8
+    bl town_synchronizedDispatch
     stw r3, lbl_8087F600
 lbl_fn_804EE908_000011F8:
     lwz r4, lbl_8087F628
@@ -1477,7 +1465,7 @@ lbl_fn_804EE908_000011F8:
     li r0, 0x0
     b lbl_fn_804EE908_0000124C
 lbl_fn_804EE908_00001224:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804EE908_0000124C
 lbl_fn_804EE908_00001230:
@@ -1487,7 +1475,7 @@ lbl_fn_804EE908_00001230:
     li r3, 0x0
     b lbl_fn_804EE908_00001248
 lbl_fn_804EE908_00001244:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_804EE908_00001248:
     clrlwi r0, r3, 24
 lbl_fn_804EE908_0000124C:
@@ -1533,7 +1521,7 @@ asm void fn_804EE9F4(void)
     la r7, lbl_8087E1B0
     la r8, lbl_8087E1AC
     li r9, 0x0
-    bl fn_800838B8
+    bl town_synchronizedDispatch
     stw r3, lbl_8087F600
 lbl_fn_804EE9F4_000012E4:
     lwz r4, lbl_8087F628
@@ -1548,7 +1536,7 @@ lbl_fn_804EE9F4_000012E4:
     li r0, 0x0
     b lbl_fn_804EE9F4_00001338
 lbl_fn_804EE9F4_00001310:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804EE9F4_00001338
 lbl_fn_804EE9F4_0000131C:
@@ -1558,7 +1546,7 @@ lbl_fn_804EE9F4_0000131C:
     li r3, 0x0
     b lbl_fn_804EE9F4_00001334
 lbl_fn_804EE9F4_00001330:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_804EE9F4_00001334:
     clrlwi r0, r3, 24
 lbl_fn_804EE9F4_00001338:
@@ -1626,7 +1614,7 @@ asm void fn_804EEB38(void)
     la r7, lbl_8087E1B0
     la r8, lbl_8087E1AC
     li r9, 0x0
-    bl fn_800838B8
+    bl town_synchronizedDispatch
     stw r3, lbl_8087F600
 lbl_fn_804EEB38_00001424:
     lwz r31, lbl_8087F600
@@ -1713,11 +1701,11 @@ lbl_fn_804EEB38_000014D4:
     bne lbl_fn_804EEB38_00001578
     lis r3, lbl_807C6BB8@ha
     stwu r30, lbl_807C6BB8@l(r3)
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     li r29, 0x1
     lis r5, lbl_807C8F48@ha
     stw r30, 0x4(r3)
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     stw r30, 0x8(r3)
     addi r5, r5, lbl_807C8F48@l
     stw r29, 0xc(r3)
@@ -1742,11 +1730,11 @@ lbl_fn_804EEB38_00001578:
     extsb. r0, r0
     bne lbl_fn_804EEB38_000015EC
     li r31, 0x1
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     lis r5, lbl_807C8F48@ha
     stw r29, 0x0(r30)
     mr r3, r30
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     stw r29, 0x4(r30)
     addi r5, r5, lbl_807C8F48@l
     stw r29, 0x8(r30)
@@ -1792,7 +1780,7 @@ asm void fn_804EED80(void)
     la r7, lbl_8087E1B0
     la r8, lbl_8087E1AC
     li r9, 0x0
-    bl fn_800838B8
+    bl town_synchronizedDispatch
     stw r3, lbl_8087F600
 lbl_fn_804EED80_00001674:
     lwz r30, lbl_8087F600
@@ -1854,11 +1842,11 @@ lbl_fn_804EED80_00001724:
     lis r3, lbl_807C6BB8@ha
     li r0, 0x0
     stwu r0, lbl_807C6BB8@l(r3)
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     li r28, 0x1
     lis r5, lbl_807C8F48@ha
     stw r0, 0x4(r3)
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     addi r5, r5, lbl_807C8F48@l
     stw r0, 0x8(r3)
     stw r28, 0xc(r3)
@@ -1989,11 +1977,11 @@ lbl_fn_804EED80_000018A8:
     lis r3, lbl_807C6BB8@ha
     li r0, 0x0
     stwu r0, lbl_807C6BB8@l(r3)
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     li r30, 0x1
     lis r5, lbl_807C8F48@ha
     stw r0, 0x4(r3)
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     addi r5, r5, lbl_807C8F48@l
     stw r0, 0x8(r3)
     stw r30, 0xc(r3)
@@ -2039,7 +2027,7 @@ asm void fn_804EF0F4(void)
     la r7, lbl_8087E1B0
     la r8, lbl_8087E1AC
     li r9, 0x0
-    bl fn_800838B8
+    bl town_synchronizedDispatch
     stw r3, lbl_8087F600
 lbl_fn_804EF0F4_000019E4:
     lwz r3, lbl_8087F4A0
@@ -2064,11 +2052,11 @@ lbl_fn_804EF0F4_000019F4:
     lis r3, lbl_807C6BB8@ha
     li r0, 0x0
     stwu r0, lbl_807C6BB8@l(r3)
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     li r25, 0x1
     lis r5, lbl_807C8F48@ha
     stw r0, 0x4(r3)
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     addi r5, r5, lbl_807C8F48@l
     stw r0, 0x8(r3)
     stw r25, 0xc(r3)
@@ -2220,7 +2208,7 @@ lbl_fn_804EF0F4_00001C2C:
     li r25, 0x0
     b lbl_fn_804EF0F4_00001C94
 lbl_fn_804EF0F4_00001C6C:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r25, r3, 24
     b lbl_fn_804EF0F4_00001C94
 lbl_fn_804EF0F4_00001C78:
@@ -2230,7 +2218,7 @@ lbl_fn_804EF0F4_00001C78:
     li r3, 0x0
     b lbl_fn_804EF0F4_00001C90
 lbl_fn_804EF0F4_00001C8C:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_804EF0F4_00001C90:
     clrlwi r25, r3, 24
 lbl_fn_804EF0F4_00001C94:
@@ -2278,11 +2266,11 @@ lbl_fn_804EF0F4_00001CFC:
     bne lbl_fn_804EF0F4_00001D5C
     lis r3, lbl_807C6BB8@ha
     stwu r6, lbl_807C6BB8@l(r3)
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     li r25, 0x1
     lis r5, lbl_807C8F48@ha
     stw r6, 0x4(r3)
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     stw r6, 0x8(r3)
     addi r5, r5, lbl_807C8F48@l
     stw r25, 0xc(r3)
@@ -2303,11 +2291,11 @@ lbl_fn_804EF0F4_00001D5C:
     extsb. r0, r0
     bne lbl_fn_804EF0F4_00001DC0
     li r0, 0x0
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     lis r5, lbl_807C8F48@ha
     stw r0, 0x0(r31)
     mr r3, r31
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     stw r0, 0x4(r31)
     addi r5, r5, lbl_807C8F48@l
     stw r0, 0x8(r31)
@@ -2361,7 +2349,7 @@ lbl_fn_804EF0F4_00001E30:
     li r25, 0x0
     b lbl_fn_804EF0F4_00001E88
 lbl_fn_804EF0F4_00001E60:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r25, r3, 24
     b lbl_fn_804EF0F4_00001E88
 lbl_fn_804EF0F4_00001E6C:
@@ -2371,7 +2359,7 @@ lbl_fn_804EF0F4_00001E6C:
     li r3, 0x0
     b lbl_fn_804EF0F4_00001E84
 lbl_fn_804EF0F4_00001E80:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_804EF0F4_00001E84:
     clrlwi r25, r3, 24
 lbl_fn_804EF0F4_00001E88:
@@ -2425,7 +2413,7 @@ lbl_fn_804EF0F4_00001F0C:
     li r25, 0x0
     b lbl_fn_804EF0F4_00001F5C
 lbl_fn_804EF0F4_00001F34:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r25, r3, 24
     b lbl_fn_804EF0F4_00001F5C
 lbl_fn_804EF0F4_00001F40:
@@ -2435,7 +2423,7 @@ lbl_fn_804EF0F4_00001F40:
     li r3, 0x0
     b lbl_fn_804EF0F4_00001F58
 lbl_fn_804EF0F4_00001F54:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_804EF0F4_00001F58:
     clrlwi r25, r3, 24
 lbl_fn_804EF0F4_00001F5C:
@@ -2483,9 +2471,9 @@ lbl_fn_804EF0F4_00001F94:
     extsb. r0, r0
     sth r3, 0x1a(r1)
     bne lbl_fn_804EF0F4_00002020
-    lis r4, fn_804D818C@ha
+    lis r4, net_voiceCodec_destroy@ha
     lis r5, lbl_807C8AE8@ha
-    addi r4, r4, fn_804D818C@l
+    addi r4, r4, net_voiceCodec_destroy@l
     la r3, lbl_8087F5FC
     addi r5, r5, lbl_807C8AE8@l
     bl __register_global_object
@@ -2561,9 +2549,9 @@ lbl_fn_804EF0F4_000020C8:
     extsb. r0, r0
     sth r3, 0xa(r1)
     bne lbl_fn_804EF0F4_00002148
-    lis r4, fn_804D818C@ha
+    lis r4, net_voiceCodec_destroy@ha
     lis r5, lbl_807C8AE8@ha
-    addi r4, r4, fn_804D818C@l
+    addi r4, r4, net_voiceCodec_destroy@l
     la r3, lbl_8087F5FC
     addi r5, r5, lbl_807C8AE8@l
     bl __register_global_object
@@ -2614,11 +2602,11 @@ lbl_fn_804EF0F4_000021D4:
     lis r3, lbl_807C6BB8@ha
     li r0, 0x0
     stwu r0, lbl_807C6BB8@l(r3)
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     li r26, 0x1
     lis r5, lbl_807C8F48@ha
     stw r0, 0x4(r3)
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     addi r5, r5, lbl_807C8F48@l
     stw r0, 0x8(r3)
     stw r26, 0xc(r3)

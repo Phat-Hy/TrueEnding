@@ -20,18 +20,18 @@ extern void mem_alloc(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void str_findChar(void);
 extern void fn_80154654(void);
 extern void actor_setState(void);
-extern void fn_801765D8(void);
+extern void battle_awardExp(void);
 extern void fn_80176ACC(void);
-extern void fn_80179D44(void);
+extern void actor_getMovementFlags(void);
 extern void fn_801F0364(void);
 extern void fn_801F03AC(void);
 extern void fn_801F04FC(void);
@@ -463,7 +463,7 @@ lbl_fn_801EB188_00000398:
     psq_st f1, 0x0(r17), 0, 0
     stfs f2, 0x40(r1)
     stfs f0, 0x3c(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     oris r7, r3, 0x8000
     mr r3, r19
     mr r5, r18
@@ -484,7 +484,7 @@ lbl_fn_801EB188_00000554:
     lwz r19, lbl_8087EE98
     fadds f0, f3, f0
     stfs f0, 0x3c(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     oris r7, r3, 0x8000
     mr r3, r19
     mr r5, r18
@@ -566,7 +566,7 @@ asm void fn_801EB7C4(void)
     stwx r0, r6, r5
     lwz r4, lbl_8087F430
     lwz r31, 0x10d8(r4)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lfs f1, lbl_80882BB8
     mr r5, r3
     mr r3, r31
@@ -637,7 +637,7 @@ lbl_fn_801EB8C0_00000764:
     b lbl_fn_801EB8C0_0000078C
 lbl_fn_801EB8C0_00000784:
     mr r3, r31
-    bl fn_801765D8
+    bl battle_awardExp
 lbl_fn_801EB8C0_0000078C:
     lwz r31, 0x1424(r31)
 lbl_fn_801EB8C0_00000790:
@@ -952,10 +952,7 @@ lbl_fn_801EB9B0_00000BA0:
     blr
 }
 
-asm void fn_801EBD7C(void)
-{
-    nofralloc
-    blr
+void fn_801EBD7C(void) {
 }
 
 asm void fn_801EBD80(void)
@@ -980,7 +977,7 @@ asm void fn_801EBD80(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_801EBD80_00000C48
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_801EBD80_00000C48:
     addic. r0, r30, 0x162c
     beq lbl_fn_801EBD80_00000C74
@@ -1015,7 +1012,7 @@ lbl_fn_801EBD80_00000C90:
 asm void fn_801EBE34(void)
 {
     nofralloc
-    b fn_800D3FA4
+    b bloom_processPasses
 }
 
 asm void fn_801EBE38(void)
@@ -1230,10 +1227,7 @@ lbl_fn_801EBE38_00000FAC:
     blr
 }
 
-asm void fn_801EC154(void)
-{
-    nofralloc
-    blr
+void fn_801EC154(void) {
 }
 
 asm void fn_801EC158(void)

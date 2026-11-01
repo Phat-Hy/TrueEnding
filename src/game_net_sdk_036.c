@@ -13,7 +13,7 @@ extern void _savegpr_27(void);
 extern void memcmp(void);
 extern void fn_806A4260(void);
 extern void fn_806D5850(void);
-extern void fn_806D58F0(void);
+extern void net_bufferGetCount(void);
 extern void net_bufferGetElement(void);
 extern void fn_806D5930(void);
 extern void fn_806D5A60(void);
@@ -478,7 +478,7 @@ lbl_fn_806EAAD0_0000047C:
     b lbl_fn_806EAAD0_00000528
 lbl_fn_806EAAD0_000004D4:
     lwz r3, 0x98(r30)
-    bl fn_806D58F0
+    bl net_bufferGetCount
     cmpwi r3, 0x0
     beq lbl_fn_806EAAD0_00000504
     lwz r5, 0x8(r1)
@@ -671,7 +671,7 @@ asm void fn_806EAD40(void)
     stw r28, 0x10(r1)
     mr r28, r3
     lwz r3, 0x60(r3)
-    bl fn_806D58F0
+    bl net_bufferGetCount
     cmpwi r3, 0x0
     mr r31, r3
     bne lbl_fn_806EAD40_000006F4
@@ -707,7 +707,7 @@ lbl_fn_806EAD40_00000744:
     subi r30, r30, 0x1
     bne lbl_fn_806EAD40_00000738
     lwz r3, 0x60(r28)
-    bl fn_806D58F0
+    bl net_bufferGetCount
     cmpwi r3, 0x0
     mr r31, r3
     bne lbl_fn_806EAD40_00000774
@@ -935,7 +935,7 @@ lbl_fn_806EAE70_00000A4C:
     addi r3, r31, 0x50
     bl fn_806E9760
     lwz r3, 0x60(r31)
-    bl fn_806D58F0
+    bl net_bufferGetCount
     mr r4, r3
     lwz r3, 0x60(r31)
     subi r4, r4, 0x1
@@ -1271,7 +1271,7 @@ lbl_fn_806EB4C0_00000EFC:
     b lbl_fn_806EB4C0_00000F74
 lbl_fn_806EB4C0_00000F0C:
     lwz r3, 0x9c(r3)
-    bl fn_806D58F0
+    bl net_bufferGetCount
     cmpwi r3, 0x0
     beq lbl_fn_806EB4C0_00000F4C
     mr r3, r30
@@ -1439,7 +1439,7 @@ lbl_fn_806EB4C0_00001138:
     li r5, 0x20
     bl fn_806E9760
     lwz r3, 0x60(r30)
-    bl fn_806D58F0
+    bl net_bufferGetCount
     mr r4, r3
     lwz r3, 0x60(r30)
     subi r4, r4, 0x1
@@ -1800,7 +1800,7 @@ asm void fn_806EBCB0(void)
     mr r26, r6
     mr r27, r7
     mr r31, r8
-    bl fn_806D58F0
+    bl net_bufferGetCount
     mr r29, r3
     li r28, 0x0
     b lbl_fn_806EBCB0_0000169C
@@ -1844,7 +1844,7 @@ lbl_fn_806EBCB0_000016C4:
     lwz r3, 0x5c(r30)
     bl fn_806D5A60
     lwz r3, 0x5c(r30)
-    bl fn_806D58F0
+    bl net_bufferGetCount
     addi r0, r29, 0x1
     cmpw r0, r3
     beq lbl_fn_806EBCB0_00001710
@@ -2025,7 +2025,7 @@ lbl_fn_806EBE60_00001950:
     b lbl_fn_806EBE60_00001C10
 lbl_fn_806EBE60_00001974:
     lwz r3, 0x5c(r30)
-    bl fn_806D58F0
+    bl net_bufferGetCount
     subi r26, r3, 0x1
     b lbl_fn_806EBE60_00001A58
 lbl_fn_806EBE60_00001984:
@@ -2056,7 +2056,7 @@ lbl_fn_806EBE60_000019D0:
     lwz r3, 0x5c(r30)
     bl fn_806D5C90
     lwz r3, 0x5c(r30)
-    bl fn_806D58F0
+    bl net_bufferGetCount
     mr r31, r3
     li r26, 0x0
     b lbl_fn_806EBE60_00001A38
@@ -2291,7 +2291,7 @@ lbl_fn_806EC2C0_00001D08:
     b lbl_fn_806EC2C0_00001E04
 lbl_fn_806EC2C0_00001D18:
     lwz r3, 0x60(r3)
-    bl fn_806D58F0
+    bl net_bufferGetCount
     mr r30, r3
     li r27, 0x0
     b lbl_fn_806EC2C0_00001DF8

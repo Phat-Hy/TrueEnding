@@ -10,7 +10,7 @@ extern void _savegpr_22(void);
 extern void _savegpr_26(void);
 extern void fn_8000D9E8(void);
 extern void fn_8000DCF4(void);
-extern void fn_8004D388(void);
+extern void collision_queryGeometry(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void atn_Model_findBoneIndex(void);
@@ -23,9 +23,9 @@ extern void fn_80103F60(void);
 extern void fn_80108378(void);
 extern void fn_8013A158(void);
 extern void fn_8013A194(void);
-extern void fn_80148990(void);
+extern void quest_ctorRewardItem(void);
 extern void actor_setState(void);
-extern void fn_80179D44(void);
+extern void actor_getMovementFlags(void);
 extern void fn_801A03E0(void);
 extern void fn_801A03EC(void);
 extern void fn_801A0408(void);
@@ -773,10 +773,7 @@ lbl_fn_802BB92C_00000950:
     blr
 }
 
-asm void fn_802BBCD8(void)
-{
-    nofralloc
-    blr
+void fn_802BBCD8(void) {
 }
 
 asm void fn_802BBCDC(void)
@@ -807,7 +804,7 @@ asm void fn_802BBCDC(void)
     li r23, 0x0
     stfs f2, 0x28(r1)
     li r21, 0x0
-    lis r31, fn_80148990@ha
+    lis r31, quest_ctorRewardItem@ha
     li r25, 0x8
     psq_st f1, 0x0(r29), 0, 0
     stfs f2, 0x68(r1)
@@ -908,7 +905,7 @@ lbl_fn_802BBCDC_00000B28:
     la r6, lbl_8087D9E0
     li r7, 0x0
     bl mem_realloc
-    addi r4, r31, fn_80148990@l
+    addi r4, r31, quest_ctorRewardItem@l
     li r5, 0x0
     li r6, 0x14
     li r7, 0x8
@@ -1022,7 +1019,7 @@ lbl_fn_802BBCDC_00000CC0:
     li r7, 0x0
     bl mem_realloc
     mr r7, r26
-    addi r4, r31, fn_80148990@l
+    addi r4, r31, quest_ctorRewardItem@l
     li r5, 0x0
     li r6, 0x14
     bl runtime_registerStaticObject
@@ -1586,7 +1583,7 @@ lbl_fn_802BC4EC_000014C4:
     psq_st f1, 0x0(r29), 0, 0
     lfs f0, 0x620(r31)
     stfs f0, 0xa4(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     or r7, r28, r3
     lwz r3, lbl_8087EE98
     lfs f1, 0xa4(r1)
@@ -1595,7 +1592,7 @@ lbl_fn_802BC4EC_000014C4:
     addi r6, r1, 0xb4
     addi r8, r31, 0x5b8
     li r9, 0x0
-    bl fn_8004D388
+    bl collision_queryGeometry
     addi r3, r1, 0x188
     lwz r4, 0x1ac(r1)
     psq_l f1, 0x0(r3), 0, 0

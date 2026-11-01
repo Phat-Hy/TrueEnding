@@ -10,7 +10,7 @@ extern void mem_alloc(void);
 extern void mem_free(void);
 extern void fn_80084A78(void);
 extern void mem_getAllocSize(void);
-extern void fn_80097D40(void);
+extern void atn_Anim_getLayerTrack(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
@@ -23,7 +23,7 @@ extern void fn_800E8688(void);
 extern void fn_800E8FB8(void);
 extern void fn_800E9110(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8C6C(void);
+extern void scissor_clipFrustum(void);
 extern void fn_800FFE68(void);
 extern void fn_80108A54(void);
 extern void fn_8010CA34(void);
@@ -33,14 +33,14 @@ extern void fn_801237F0(void);
 extern void fn_801240B4(void);
 extern void fn_80134134(void);
 extern void fn_80139560(void);
-extern void fn_80144710(void);
+extern void quest_evaluateConditions(void);
 extern void fn_80155790(void);
 extern void fn_80155DAC(void);
 extern void fn_80158BB4(void);
 extern void fn_80158CA4(void);
 extern void fn_8016AFE8(void);
 extern void fn_8016D74C(void);
-extern void fn_8016DA4C(void);
+extern void debuff_clearStatus(void);
 extern void fn_8016DC14(void);
 extern void fn_8016DCD4(void);
 extern void fn_8016E484(void);
@@ -65,8 +65,8 @@ extern void fn_8037EF30(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSVECDotProduct(void);
-extern void fn_8068A850(void);
-extern void fn_806952C4(void);
+extern void std_sin(void);
+extern void msl_releaseRefCount(void);
 extern void vec3_isNonZero(void);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
@@ -160,7 +160,7 @@ lbl_fn_800E589C_00000078:
     bne lbl_fn_800E589C_000000B4
     li r4, 0xc8
     addi r3, r3, 0xb0
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     beq lbl_fn_800E589C_000000B4
     lfs f1, lbl_808812D8
@@ -215,7 +215,7 @@ lbl_fn_800E589C_0000010C:
     beq lbl_fn_800E589C_00000158
 lbl_fn_800E589C_00000150:
     mr r3, r30
-    bl fn_8016DA4C
+    bl debuff_clearStatus
 lbl_fn_800E589C_00000158:
     lwz r0, 0x55c(r30)
     li r4, 0x0
@@ -643,7 +643,7 @@ lbl_fn_800E589C_00000754:
     cmpwi r0, 0x0
     beq lbl_fn_800E589C_00000838
     mr r3, r30
-    bl fn_80144710
+    bl quest_evaluateConditions
     lwz r0, 0x12a4(r30)
     mr r6, r30
     lwz r3, lbl_8087F048
@@ -660,7 +660,7 @@ lbl_fn_800E589C_00000794:
 lbl_fn_800E589C_00000798:
     lwz r10, 0x594(r30)
     li r9, 0x1e
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     cmpwi r3, 0x0
     ble lbl_fn_800E589C_00000838
     lwz r0, 0x594(r30)
@@ -773,7 +773,7 @@ asm void fn_800E610C(void)
     bl PSMTXMultVec
     lis r3, lbl_80735260@ha
     lfd f1, lbl_80735260@l(r3)
-    bl fn_8068A850
+    bl std_sin
     frsp f31, f1
     addi r3, r1, 0x2c
     addi r4, r1, 0x38
@@ -1056,7 +1056,7 @@ lbl_fn_800E62AC_00000CE0:
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_800E62AC_00000D28
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_800E62AC_00000D28:
     lwz r4, 0x50(r1)
     addi r3, r1, 0x54
@@ -1808,7 +1808,7 @@ lbl_fn_800E62AC_000017CC:
     fcmpo cr0, f1, f0
     ble lbl_fn_800E62AC_000017EC
     mr r3, r25
-    bl fn_8016DA4C
+    bl debuff_clearStatus
 lbl_fn_800E62AC_000017EC:
     mr r3, r25
     bl fn_800E7BB0

@@ -5,21 +5,21 @@
 extern void _restgpr_22(void);
 extern void _savegpr_22(void);
 extern void dtor_80084684(void);
-extern void fn_8004D388(void);
+extern void collision_queryGeometry(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_800897D8(void);
-extern void fn_8008BBD8(void);
+extern void node_destroy(void);
+extern void map_debugLog(void);
 extern void fn_80091CFC(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Task_setActive(void);
 extern void fn_800F29D0(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8C6C(void);
+extern void scissor_clipFrustum(void);
 extern void fn_8012A288(void);
 extern void boss_updatePhaseState(void);
-extern void fn_80148990(void);
+extern void quest_ctorRewardItem(void);
 extern void actor_setState(void);
 extern void fn_80176548(void);
 extern void task_findEntryById(void);
@@ -32,8 +32,8 @@ extern void fn_803234C8(void);
 extern void fn_803234F4(void);
 extern void fn_803235AC(void);
 extern void fn_803235D8(void);
-extern void fn_8035B694(void);
-extern void fn_8035B78C(void);
+extern void entity_Instance_constructor(void);
+extern void entity_Instance_destructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
@@ -637,9 +637,9 @@ lbl_fn_80321E20_000007B8:
     la r6, lbl_8087D9E0
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     li r5, 0x0
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r6, 0x14
     li r7, 0x8
     bl runtime_registerStaticObject
@@ -751,9 +751,9 @@ lbl_fn_80321E20_00000958:
     addi r3, r3, 0x10
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     mr r7, r30
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r5, 0x0
     li r6, 0x14
     bl runtime_registerStaticObject
@@ -911,9 +911,9 @@ lbl_fn_80321E20_00000BBC:
     la r6, lbl_8087D9E0
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     li r5, 0x0
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r6, 0x14
     li r7, 0x8
     bl runtime_registerStaticObject
@@ -1025,9 +1025,9 @@ lbl_fn_80321E20_00000D5C:
     addi r3, r3, 0x10
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     mr r7, r30
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r5, 0x0
     li r6, 0x14
     bl runtime_registerStaticObject
@@ -1516,7 +1516,7 @@ lbl_fn_80322AD4_0000142C:
     addi r7, r7, 0x80
     addi r8, r31, 0x5b8
     li r9, 0x0
-    bl fn_8004D388
+    bl collision_queryGeometry
     addi r3, r1, 0x38
     lfs f2, 0x40(r1)
     psq_l f1, 0x0(r3), 0, 0
@@ -1551,7 +1551,7 @@ lbl_fn_80322AD4_0000142C:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
 lbl_fn_80322AD4_00001530:
     lwz r0, 0x84(r1)
     lwz r31, 0x7c(r1)
@@ -1569,7 +1569,7 @@ asm void fn_80322C68(void)
     stw r31, 0xc(r1)
     mr r31, r3
     stw r30, 0x8(r1)
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lfs f0, lbl_80884F10
     lis r3, lbl_80788BD0@ha
     li r30, 0x0
@@ -1692,7 +1692,7 @@ asm void fn_80322E10(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_80322E10_00001738
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_80322E10_00001738:
     addic. r31, r29, 0x15fc
     beq lbl_fn_80322E10_00001758
@@ -1756,7 +1756,7 @@ lbl_fn_80322E10_000017E8:
 lbl_fn_80322E10_00001814:
     mr r3, r29
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r30, 0x0
     ble lbl_fn_80322E10_00001830
     mr r3, r29
@@ -1904,7 +1904,7 @@ lbl_fn_80322F74_00001A0C:
     stw r4, 0x198(r1)
     stw r0, 0x19c(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_80322F74_00001A90
     addic. r0, r1, 0x254
@@ -2053,7 +2053,7 @@ lbl_fn_80322F74_00001C40:
     stw r4, 0xf0(r1)
     stw r0, 0xf4(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_80322F74_00001CC4
     addic. r0, r1, 0x240

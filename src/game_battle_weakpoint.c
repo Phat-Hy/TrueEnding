@@ -6,7 +6,7 @@ extern void __register_global_object(void);
 extern void _restgpr_25(void);
 extern void _savegpr_25(void);
 extern void dtor_80084684(void);
-extern void fn_8003EFB0(void);
+extern void ui_destroyWidget(void);
 extern void fn_8003F030(void);
 extern void mem_alloc(void);
 extern void fn_800971D4(void);
@@ -14,7 +14,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void ref_releaseHandle(void);
 extern void morph_updateMesh(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void fn_8016D3F8(void);
@@ -28,10 +28,10 @@ extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
 extern void fn_803C1560(void);
 extern void fn_803CD958(void);
-extern void fn_803EC568(void);
-extern void fn_803EC69C(void);
-extern void fn_803EC91C(void);
-extern void fn_803ED0D4(void);
+extern void task_createWorker(void);
+extern void task_destroyWorker(void);
+extern void task_updateWorker(void);
+extern void task_initWorkerContext(void);
 extern void fn_803ED774(void);
 extern void fn_803FD328(void);
 extern void fn_804093B4(void);
@@ -42,8 +42,8 @@ extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECDotProduct(void);
 extern void std_fmod(void);
-extern void fn_806A8E40(void);
-extern void fn_806B0E30(void);
+extern void net_getSocket(void);
+extern void net_getMyAid(void);
 extern void fn_806B1250(void);
 
 /* External data declarations */
@@ -395,11 +395,11 @@ lbl_fn_803FB870_00000310:
     lis r3, lbl_807C6BB8@ha
     li r0, 0x0
     stwu r0, lbl_807C6BB8@l(r3)
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     li r29, 0x1
     lis r5, lbl_807C8750@ha
     stw r0, 0x4(r3)
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     addi r5, r5, lbl_807C8750@l
     stw r0, 0x8(r3)
     stw r29, 0xc(r3)
@@ -430,11 +430,11 @@ lbl_fn_803FB870_000003F8:
     extsb. r0, r0
     bne lbl_fn_803FB870_00000484
     li r30, 0x1
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     lis r5, lbl_807C8750@ha
     stw r29, 0x0(r31)
     mr r3, r31
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     stw r29, 0x4(r31)
     addi r5, r5, lbl_807C8750@l
     stw r29, 0x8(r31)
@@ -694,7 +694,7 @@ lbl_fn_803FBEEC_000007D8:
     bl fn_800971D4
     mr r3, r29
     li r4, 0x0
-    bl fn_803EC69C
+    bl task_destroyWorker
     cmpwi r30, 0x0
     ble lbl_fn_803FBEEC_00000800
     mr r3, r29
@@ -736,7 +736,7 @@ asm void fn_803FBFA8(void)
     lwz r5, 0x18(r29)
     mr r4, r31
     lwz r6, 0x1c(r29)
-    bl fn_803EC568
+    bl task_createWorker
     lis r3, lbl_8078CF28@ha
     li r31, 0x0
     addi r3, r3, lbl_8078CF28@l
@@ -804,7 +804,7 @@ asm void fn_803FC0E0(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_803FC0E0_00000994
     li r0, 0x2
@@ -848,7 +848,7 @@ asm void fn_803FC134(void)
     mr r4, r3
     mr r3, r30
     li r5, 0x1
-    bl fn_803ED0D4
+    bl task_initWorkerContext
 lbl_fn_803FC134_00000A04:
     lwz r4, lbl_8087F628
     li r31, 0x1
@@ -864,7 +864,7 @@ lbl_fn_803FC134_00000A04:
     li r29, 0x0
     b lbl_fn_803FC134_00000A60
 lbl_fn_803FC134_00000A38:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r29, r3, 24
     b lbl_fn_803FC134_00000A60
 lbl_fn_803FC134_00000A44:
@@ -874,7 +874,7 @@ lbl_fn_803FC134_00000A44:
     li r3, 0x0
     b lbl_fn_803FC134_00000A5C
 lbl_fn_803FC134_00000A58:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_803FC134_00000A5C:
     clrlwi r29, r3, 24
 lbl_fn_803FC134_00000A60:
@@ -1150,11 +1150,11 @@ lbl_fn_803FC540_00000E14:
     lis r3, lbl_807C6BB8@ha
     li r0, 0x0
     stwu r0, lbl_807C6BB8@l(r3)
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     li r29, 0x1
     lis r5, lbl_807C8760@ha
     stw r0, 0x4(r3)
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     addi r5, r5, lbl_807C8760@l
     stw r0, 0x8(r3)
     stw r29, 0xc(r3)
@@ -1382,7 +1382,7 @@ asm void fn_803FC880(void)
     mr r30, r3
     beq lbl_fn_803FC880_00001134
     li r4, 0x0
-    bl fn_803EC69C
+    bl task_destroyWorker
     cmpwi r31, 0x0
     ble lbl_fn_803FC880_00001134
     mr r3, r30
@@ -1423,7 +1423,7 @@ asm void fn_803FC8D8(void)
     lwz r5, 0x18(r30)
     mr r4, r29
     lwz r6, 0x1c(r30)
-    bl fn_803EC568
+    bl task_createWorker
     lis r4, lbl_8078CFE8@ha
     li r3, 0x0
     addi r4, r4, lbl_8078CFE8@l
@@ -1460,7 +1460,7 @@ asm void fn_803FC994(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_803EC91C
+    bl task_updateWorker
     cmpwi r3, 0x0
     bne lbl_fn_803FC994_0000123C
     li r0, 0x2

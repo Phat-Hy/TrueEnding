@@ -43,7 +43,7 @@ extern void PSMTXInverse(void);
 extern void printf(void);
 extern void strcmp(void);
 extern void abort(void);
-extern void fn_806952C4(void);
+extern void msl_releaseRefCount(void);
 extern void runtime_registerStaticObject(void);
 extern void __destroy_arr(void);
 extern char* strcpy(char* dest, const char* src);
@@ -94,7 +94,7 @@ void atn_LoadHandle_getStatus(void);
 void atn_LoadHandle_getName(void);
 void atn_LoadHandle_getData(void);
 void atn_LoadHandle_isLoading(void);
-void fn_80473F88(void);
+void shockwave_freeEmitter(void);
 void taskManager_updateTasks(void);
 void fn_804741C0(void);
 void atn_LoadMaterial_constructor(void);
@@ -211,7 +211,7 @@ asm void atn_LH_Efp_onNotify(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     lwz r3, lbl_8087F518
     mr r4, r31
     li r5, 0x1
@@ -469,7 +469,7 @@ lbl_atn_LoadHandle_isLoading_00000460:
     blr
 }
 
-asm void fn_80473F88(void)
+asm void shockwave_freeEmitter(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -479,12 +479,12 @@ asm void fn_80473F88(void)
     mr r31, r3
     lwz r0, 0x4(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_80473F88_00000498
+    beq lbl_shockwave_freeEmitter_00000498
     mr r3, r0
     bl fn_804730E4
     li r0, 0x0
     stw r0, 0x4(r31)
-lbl_fn_80473F88_00000498:
+lbl_shockwave_freeEmitter_00000498:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0
@@ -581,7 +581,7 @@ lbl_taskManager_updateTasks_000005BC:
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_taskManager_updateTasks_000005F8
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_taskManager_updateTasks_000005F8:
     lwz r4, 0x0(r22)
     addi r3, r22, 0x4
@@ -962,7 +962,7 @@ asm void atn_LH_Material_onNotify(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     lwz r3, lbl_8087F518
     mr r4, r31
     li r5, 0x1

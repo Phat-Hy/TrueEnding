@@ -16,14 +16,14 @@ extern void msg_getMessageString(void);
 extern void fn_800A55D4(void);
 extern void fn_800A58D0(void);
 extern void skin_applyWeights(void);
-extern void fn_800CB360(void);
+extern void morph_reset(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB440(void);
+extern void morph_updateWeights(void);
 extern void morph_updateMesh(void);
 extern void fn_800CB6B0(void);
 extern void fn_800CB6E4(void);
 extern void str_findChar(void);
-extern void fn_800EF73C(void);
+extern void cam_destroyMsgHandle(void);
 extern void fn_8011FFF8(void);
 extern void fn_8017C974(void);
 extern void fn_8018412C(void);
@@ -32,7 +32,7 @@ extern void fn_80218218(void);
 extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_findResourceSlot(void);
-extern void fn_8023A680(void);
+extern void res_Shader_bindParams(void);
 extern void res_registerResource(void);
 extern void world_getGlobalFlag(void);
 extern void kpad_getClampData(void);
@@ -82,8 +82,8 @@ extern u32 lbl_8088180C;
 extern u32 lbl_80881810;
 
 /* Function declarations */
-void fn_80120D24(void);
-void fn_80120D34(void);
+void* equip_getElementPtr8(void*, int);
+void* equip_getElementPtr0(void*, int);
 void fn_80120D44(void);
 void fn_80120E38(void);
 void fn_80120E48(void);
@@ -98,7 +98,7 @@ void fn_8012111C(void);
 void fn_8012133C(void);
 void fn_80121E14(void);
 void fn_80121EB0(void);
-void fn_80121F00(void);
+u32 equip_getGlobalManager(void);
 void fn_80121F08(void);
 void fn_80121FD4(void);
 void fn_801220A0(void);
@@ -107,22 +107,14 @@ void fn_80122238(void);
 void fn_80122280(void);
 void fn_80122288(void);
 
-asm void fn_80120D24(void)
+void* equip_getElementPtr8(void* obj, int index)
 {
-    nofralloc
-    mulli r0, r4, 0xc
-    lwz r3, 0x8(r3)
-    add r3, r3, r0
-    blr
+    return (char*)(*(void**)((char*)obj + 8)) + index * 0xc;
 }
 
-asm void fn_80120D34(void)
+void* equip_getElementPtr0(void* obj, int index)
 {
-    nofralloc
-    mulli r0, r4, 0xc
-    lwz r3, 0x0(r3)
-    add r3, r3, r0
-    blr
+    return (char*)(*(void**)obj) + index * 0xc;
 }
 
 asm void fn_80120D44(void)
@@ -144,11 +136,11 @@ asm void fn_80120D44(void)
     li r7, 0x0
     bl mem_realloc
     lis r4, res_MsgHandle_constructor@ha
-    lis r5, fn_800EF73C@ha
+    lis r5, cam_destroyMsgHandle@ha
     mr r7, r26
     li r6, 0xc
     addi r4, r4, res_MsgHandle_constructor@l
-    addi r5, r5, fn_800EF73C@l
+    addi r5, r5, cam_destroyMsgHandle@l
     bl runtime_registerStaticObject
     mr r30, r3
     b lbl_fn_80120D44_00000084
@@ -182,9 +174,9 @@ lbl_fn_80120D44_000000B4:
 lbl_fn_80120D44_000000DC:
     cmplw r27, r31
     blt lbl_fn_80120D44_000000B4
-    lis r4, fn_800EF73C@ha
+    lis r4, cam_destroyMsgHandle@ha
     lwz r3, 0x8(r25)
-    addi r4, r4, fn_800EF73C@l
+    addi r4, r4, cam_destroyMsgHandle@l
     bl __destroy_arr
 lbl_fn_80120D44_000000F4:
     stw r30, 0x8(r25)
@@ -321,7 +313,7 @@ asm void fn_80120F5C(void)
     addi r3, r29, 0x28
     stw r31, 0x20(r29)
     stw r31, 0x24(r29)
-    bl fn_800CB360
+    bl morph_reset
     stw r31, 0x2c(r29)
     mr r3, r29
     stw r31, 0x30(r29)
@@ -877,7 +869,7 @@ lbl_fn_8012133C_000009EC:
     li r9, 0x0
     stw r28, 0x10(r1)
     lfs f1, 0x20(r24)
-    bl fn_8023A680
+    bl res_Shader_bindParams
     b lbl_fn_8012133C_00000AC4
 lbl_fn_8012133C_00000A38:
     lwz r4, 0x0(r15)
@@ -914,7 +906,7 @@ lbl_fn_8012133C_00000A38:
     add r4, r11, r4
     stw r28, 0x10(r1)
     lfs f1, 0x20(r24)
-    bl fn_8023A680
+    bl res_Shader_bindParams
 lbl_fn_8012133C_00000AC4:
     li r18, 0x1
     b lbl_fn_8012133C_00001070
@@ -1158,7 +1150,7 @@ lbl_fn_8012133C_00000E04:
 lbl_fn_8012133C_00000E24:
     addi r3, r1, 0x20
     li r19, 0x0
-    bl fn_800CB360
+    bl morph_reset
     fcmpo cr0, f23, f31
     cror eq, lt, eq
     bne lbl_fn_8012133C_00000FD0
@@ -1223,7 +1215,7 @@ lbl_fn_8012133C_00000EDC:
     bl skin_applyWeights
     addi r3, r1, 0x20
     addi r4, r1, 0x1c
-    bl fn_800CB440
+    bl morph_updateWeights
     addi r3, r1, 0x1c
     li r4, -0x1
     bl ref_releaseHandle
@@ -1264,7 +1256,7 @@ lbl_fn_8012133C_00000F34:
     bl skin_applyWeights
     addi r3, r1, 0x20
     addi r4, r1, 0x18
-    bl fn_800CB440
+    bl morph_updateWeights
     addi r3, r1, 0x18
     li r4, -0x1
     bl ref_releaseHandle
@@ -1284,7 +1276,7 @@ lbl_fn_8012133C_00000FF4:
     bne lbl_fn_8012133C_00001010
     addi r3, r15, 0x28
     addi r4, r1, 0x20
-    bl fn_800CB440
+    bl morph_updateWeights
     stw r19, 0x2c(r15)
 lbl_fn_8012133C_00001010:
     addi r3, r1, 0x20
@@ -1422,11 +1414,9 @@ asm void fn_80121EB0(void)
     blr
 }
 
-asm void fn_80121F00(void)
+u32 equip_getGlobalManager(void)
 {
-    nofralloc
-    lwz r3, lbl_8087F430
-    blr
+    return lbl_8087F430;
 }
 
 asm void fn_80121F08(void)

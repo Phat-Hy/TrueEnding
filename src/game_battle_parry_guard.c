@@ -16,13 +16,13 @@ extern void fn_80058078(void);
 extern void fn_800580BC(void);
 extern void fn_800588FC(void);
 extern void talk_formatQuotedString(void);
-extern void fn_8005BBF8(void);
-extern void fn_8005BCE8(void);
+extern void talk_parseQuotes(void);
+extern void talk_copySpeakerName(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_8008AD4C(void);
-extern void fn_8008B140(void);
+extern void area_updateZoneState(void);
+extern void map_processTrigger(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_80092F1C(void);
 extern void fn_80095D44(void);
@@ -33,8 +33,8 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void str_skipWhitespace(void);
 extern void fn_8011F8F4(void);
-extern void fn_8011FC10(void);
-extern void fn_80144710(void);
+extern void skill_findNodeById(void);
+extern void quest_evaluateConditions(void);
 extern void quest_checkCondition(void);
 extern void fn_802180A8(void);
 extern void task_mapIdToQueue(void);
@@ -51,11 +51,11 @@ extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
 extern void fn_803EBE74(void);
 extern void fn_803EC0F8(void);
-extern void fn_803EC568(void);
-extern void fn_803EC69C(void);
+extern void task_createWorker(void);
+extern void task_destroyWorker(void);
 extern void fn_803EC7A0(void);
-extern void fn_803EC91C(void);
-extern void fn_803ED0D4(void);
+extern void task_updateWorker(void);
+extern void task_initWorkerContext(void);
 extern void fn_803ED5D0(void);
 extern void fn_803ED774(void);
 extern void fn_803EDB18(void);
@@ -233,7 +233,7 @@ lbl_fn_80412968_00000130:
     bge lbl_fn_80412968_00000194
     lwz r3, lbl_8087F408
     mr r4, r30
-    bl fn_8011FC10
+    bl skill_findNodeById
     cmpwi r3, 0x0
     stw r3, 0x698(r29)
     bne lbl_fn_80412968_00000178
@@ -359,7 +359,7 @@ asm void fn_80412B80(void)
     stw r31, 0xc(r1)
     mr r31, r3
     stw r30, 0x8(r1)
-    bl fn_803EC568
+    bl task_createWorker
     lis r3, lbl_8078D8B0@ha
     li r30, 0x0
     addi r3, r3, lbl_8078D8B0@l
@@ -682,7 +682,7 @@ asm void fn_80412F28(void)
     bl __destroy_new_array
     mr r3, r30
     li r4, 0x0
-    bl fn_803EC69C
+    bl task_destroyWorker
     cmpwi r31, 0x0
     ble lbl_fn_80412F28_00000738
     mr r3, r30
@@ -705,7 +705,7 @@ asm void fn_80412FFC(void)
     stw r0, 0x24(r1)
     stmw r27, 0xc(r1)
     mr r27, r3
-    bl fn_803EC91C
+    bl task_updateWorker
     cmpwi r3, 0x0
     bne lbl_fn_80412FFC_000007F8
     mr r31, r27
@@ -810,7 +810,7 @@ lbl_fn_804130B8_00000874:
     mr r4, r3
     mr r3, r31
     li r5, 0x1
-    bl fn_803ED0D4
+    bl task_initWorkerContext
 lbl_fn_804130B8_000008E0:
     mr r3, r31
     bl fn_804137F4
@@ -1064,7 +1064,7 @@ lbl_fn_804131A4_00000C48:
     mr r4, r3
     mr r3, r25
     li r5, 0x1
-    bl fn_803ED0D4
+    bl task_initWorkerContext
 lbl_fn_804131A4_00000C88:
     mr r3, r25
     bl fn_804137F4
@@ -1199,7 +1199,7 @@ lbl_fn_804131A4_00000DF4:
     psq_l f1, 0x0(r30), 0, 0
     psq_st f1, 0x528(r23), 0, 0
     stfs f2, 0x530(r23)
-    bl fn_80144710
+    bl quest_evaluateConditions
     stw r26, 0x54(r1)
     addi r3, r23, 0xb0
     addi r4, r1, 0x54
@@ -1504,7 +1504,7 @@ asm void fn_80413B1C(void)
     li r28, 0x0
 lbl_fn_80413B1C_000012A0:
     mr r3, r31
-    bl fn_8008B140
+    bl map_processTrigger
     cmpwi r3, 0x0
     beq lbl_fn_80413B1C_000012B8
     li r3, 0x1
@@ -1589,7 +1589,7 @@ asm void fn_80413BD4(void)
     addi r4, r4, lbl_807774B8@l
     stw r4, 0x108(r1)
     la r4, lbl_8087D710
-    bl fn_8005BCE8
+    bl talk_copySpeakerName
     lis r20, lbl_80752DB8@ha
     lis r22, lbl_80777668@ha
     lfs f31, lbl_80886420
@@ -1700,7 +1700,7 @@ lbl_fn_80413BD4_00001530:
     mr r4, r3
     mr r3, r18
     li r5, 0x0
-    bl fn_8008AD4C
+    bl area_updateZoneState
     mr r3, r31
     mr r4, r18
     addi r5, r1, 0x108
@@ -1969,7 +1969,7 @@ lbl_fn_80413BD4_00001934:
     stw r3, 0x2280(r31)
 lbl_fn_80413BD4_00001958:
     addi r3, r1, 0x108
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_80413BD4_0000141C
     cmpwi r16, 0x0

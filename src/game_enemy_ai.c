@@ -13,7 +13,7 @@ extern void fn_8004ECC0(void);
 extern void fn_8012539C(void);
 extern void fn_801255C8(void);
 extern void fn_8016EB48(void);
-extern void fn_80179D44(void);
+extern void actor_getMovementFlags(void);
 extern void fn_803C11A4(void);
 extern void fn_803C1338(void);
 extern void fn_803C1560(void);
@@ -616,7 +616,7 @@ lbl_fn_80128090_000007A8:
     mr r3, r31
     bl fn_8012539C
     lwz r3, 0xa4(r31)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lwz r7, 0xa0(r31)
     mr r5, r3
     lfs f1, lbl_80881864
@@ -662,7 +662,7 @@ lbl_fn_80128090_0000084C:
     mr r3, r31
     bl fn_8012539C
     lwz r3, 0xa4(r31)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lwz r7, 0xa0(r31)
     mr r5, r3
     lfs f1, lbl_80881864
@@ -719,7 +719,7 @@ lbl_fn_80128090_00000924:
     mr r3, r31
     bl fn_8012539C
     lwz r3, 0xa4(r31)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lwz r7, 0xa0(r31)
     mr r5, r3
     lfs f1, lbl_80881864
@@ -770,7 +770,7 @@ lbl_fn_80128090_000009DC:
     mr r3, r31
     bl fn_8012539C
     lwz r3, 0xa4(r31)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lwz r7, 0xa0(r31)
     mr r5, r3
     lfs f1, lbl_80881864
@@ -816,7 +816,7 @@ lbl_fn_80128090_00000A88:
     mr r3, r31
     bl fn_8012539C
     lwz r3, 0xa4(r31)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lwz r7, 0xa0(r31)
     mr r5, r3
     lfs f1, lbl_80881864
@@ -884,7 +884,7 @@ lbl_fn_80128508_00000B70:
     mr r3, r30
     bl fn_8012539C
     lwz r3, 0xa4(r30)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lwz r7, 0xa0(r30)
     mr r5, r3
     lfs f1, lbl_80881864
@@ -1027,7 +1027,7 @@ lbl_fn_801286F0_00000D58:
     slwi r29, r3, 6
     lwz r3, 0xa4(r25)
     add r30, r0, r29
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lwz r7, 0xa0(r25)
     mr r5, r3
     lfs f1, lbl_80881864
@@ -1120,7 +1120,7 @@ lbl_fn_80128818_00000ECC:
     mr r3, r26
     bl fn_8012539C
     lwz r3, 0xa4(r26)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lwz r7, 0xa0(r26)
     mr r5, r3
     lfs f1, lbl_80881864
@@ -1184,7 +1184,7 @@ lbl_fn_80128930_00000FAC:
     mr r3, r27
     bl fn_8012539C
     lwz r3, 0xa4(r27)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lwz r7, 0xa0(r27)
     mr r5, r3
     lfs f1, lbl_80881864
@@ -1259,7 +1259,7 @@ lbl_fn_80128A30_000010A4:
     mr r3, r27
     bl fn_8012539C
     lwz r3, 0xa4(r27)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lwz r7, 0xa0(r27)
     mr r5, r3
     lfs f1, lbl_80881864
@@ -1332,7 +1332,7 @@ lbl_fn_80128B20_000011A8:
     mr r3, r27
     bl fn_8012539C
     lwz r3, 0xa4(r27)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lwz r7, 0xa0(r27)
     mr r5, r3
     lfs f1, lbl_80881864
@@ -1400,7 +1400,7 @@ lbl_fn_80128C08_00001290:
     mr r3, r27
     bl fn_8012539C
     lwz r3, 0xa4(r27)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lwz r7, 0xa0(r27)
     mr r5, r3
     lfs f1, lbl_80881864

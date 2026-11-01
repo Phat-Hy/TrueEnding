@@ -862,10 +862,7 @@ lbl_fn_8069A9C4_00000920:
     blr
 }
 
-asm void fn_8069AA04(void)
-{
-    nofralloc
-    blr
+void fn_8069AA04(void) {
 }
 
 asm void fn_8069AA08(void)

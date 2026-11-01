@@ -23,7 +23,7 @@ extern void mem_free(void);
 extern void mem_realloc(void);
 extern void fn_8008A4E0(void);
 extern void fn_8008A76C(void);
-extern void fn_8008B140(void);
+extern void map_processTrigger(void);
 extern void atn_Model_updateMatrices(void);
 extern void atn_Lockon_updateTargetTextures(void);
 extern void fn_80095CD0(void);
@@ -36,7 +36,7 @@ extern void str_findChar(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_80473F88(void);
+extern void shockwave_freeEmitter(void);
 extern void fn_80475DF8(void);
 extern void PSMTXConcat(void);
 extern void PSMTXMultVec(void);
@@ -1546,10 +1546,7 @@ asm void fn_8009F688(void)
     blr
 }
 
-asm void fn_8009F690(void)
-{
-    nofralloc
-    blr
+void fn_8009F690(void) {
 }
 
 asm void fn_8009F694(void)
@@ -2165,14 +2162,14 @@ lbl_fn_8009FE24_00001D2C:
     mr r3, r24
     bl fn_800A005C
     mr r3, r24
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     stw r29, 0x8(r24)
 lbl_fn_8009FE24_00001D40:
     lwz r0, 0xc(r24)
     cmpwi r0, 0x0
     bne lbl_fn_8009FE24_00001D68
     addi r3, r24, 0x10
-    bl fn_8008B140
+    bl map_processTrigger
     cmpwi r3, 0x0
     beq lbl_fn_8009FE24_00001D64
     li r0, 0x1
@@ -2238,7 +2235,7 @@ lbl_fn_8009FFCC_00001E1C:
     mr r3, r31
     bl fn_800A005C
     mr r3, r31
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     li r0, 0x1
     stw r0, 0x8(r31)
 lbl_fn_8009FFCC_00001E34:
@@ -2246,7 +2243,7 @@ lbl_fn_8009FFCC_00001E34:
     cmpwi r0, 0x0
     bne lbl_fn_8009FFCC_00001E60
     addi r3, r31, 0x10
-    bl fn_8008B140
+    bl map_processTrigger
     cmpwi r3, 0x0
     beq lbl_fn_8009FFCC_00001E58
     li r3, 0x1

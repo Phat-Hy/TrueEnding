@@ -22,13 +22,13 @@ extern void node_createNamedChild(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Task_setActive(void);
 extern void wcs_vformat(void);
-extern void fn_800F8574(void);
+extern void viewport_updateCulling(void);
 extern void fn_80109828(void);
 extern void fn_8013322C(void);
 extern void fn_80134674(void);
 extern void boss_updatePhaseState(void);
 extern void fn_80139560(void);
-extern void fn_80151448(void);
+extern void inventory_applyItemStats(void);
 extern void fn_8015E4B0(void);
 extern void fn_8016D74C(void);
 extern void actor_setState(void);
@@ -39,7 +39,7 @@ extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_update(void);
 extern void res_findResourceSlot(void);
-extern void fn_8035B694(void);
+extern void entity_Instance_constructor(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
 extern void fn_803C1560(void);
@@ -528,7 +528,7 @@ lbl_fn_8025EAE4_0000059C:
     stfs f16, 0x1f0(r1)
     fsubs f0, f0, f22
     stfs f0, 0x1f4(r1)
-    bl fn_800F8574
+    bl viewport_updateCulling
     addi r22, r22, 0x1
 lbl_fn_8025EAE4_000005F4:
     lwz r21, 0x14ac(r21)
@@ -1143,7 +1143,7 @@ lbl_fn_8025F7D0_00000E74:
 lbl_fn_8025F7D0_00000E9C:
     mr r3, r30
     mr r4, r31
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r12, 0x0(r30)
     mr r3, r30
     mr r4, r31
@@ -1557,7 +1557,7 @@ asm void fn_8025FE60(void)
     mr r31, r5
     lwz r5, 0x20(r5)
     mr r30, r3
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lis r3, lbl_80784AC8@ha
     addi r28, r30, 0x14b0
     addi r3, r3, lbl_80784AC8@l

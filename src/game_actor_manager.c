@@ -2,17 +2,17 @@
 #pragma function_align 4
 
 /* External function declarations */
-extern void fn_8000D114(void);
+extern void vec3_set(void);
 extern void vec3_copy(void);
-extern void fn_8000D3A4(void);
+extern void vec3_mag(void);
 extern void fn_8000DB1C(void);
-extern void fn_8001047C(void);
+extern void vec3_assign(void);
 extern void fn_800109E0(void);
-extern void fn_80011034(void);
+extern void vec3_toEulerAngles(void);
 extern void fn_80011220(void);
 extern void vec3_sub(void);
 extern void fn_800133B0(void);
-extern void fn_80013410(void);
+extern void vec3_add(void);
 extern void item_useConsumable(void);
 extern void fn_8008B964(void);
 extern void fn_800A56A8(void);
@@ -54,8 +54,8 @@ extern void PSVECMag(void);
 extern void PSVECCrossProduct(void);
 extern void fn_805F99F0(void);
 extern void fn_805F9AB0(void);
-extern void fn_8068A850(void);
-extern void fn_8068AD58(void);
+extern void std_sin(void);
+extern void std_cos(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
 extern void math_u64DivMod(void);
@@ -396,7 +396,7 @@ lbl_fn_801151A4_00000358:
     fsubs f4, f4, f5
     fmuls f3, f3, f4
     fmuls f1, f0, f3
-    bl fn_8068AD58
+    bl std_cos
     frsp f4, f1
     lfs f3, lbl_808816F0
     lfs f0, 0x25c(r31)
@@ -988,13 +988,13 @@ lbl_fn_801157DC_00000C2C:
     fadds f30, f3, f0
 lbl_fn_801157DC_00000C40:
     fmr f1, f28
-    bl fn_8068A850
+    bl std_sin
     frsp f3, f1
     lfs f0, lbl_808816B0
     fmr f1, f28
     stfs f0, 0x180(r1)
     stfs f3, 0x17c(r1)
-    bl fn_8068AD58
+    bl std_cos
     frsp f4, f1
     lfs f0, 0x17c(r1)
     lfs f3, 0x188(r1)
@@ -1451,7 +1451,7 @@ lbl_fn_801162A4_000012D0:
     bl fn_80112958
     mr r4, r3
     addi r3, r1, 0xf4
-    bl fn_8001047C
+    bl vec3_assign
     mr r3, r29
     bl fn_80116BA4
     fmr f31, f1
@@ -1734,22 +1734,22 @@ lbl_fn_801162A4_000016B4:
     bl fn_80113CCC
     mr r4, r3
     addi r3, r1, 0xe8
-    bl fn_8001047C
+    bl vec3_assign
     mr r3, r29
     bl fn_80112958
     mr r4, r3
     addi r3, r1, 0xdc
-    bl fn_8001047C
+    bl vec3_assign
     addi r3, r1, 0xd0
     addi r4, r1, 0xdc
     addi r5, r1, 0xe8
     bl vec3_sub
     addi r3, r1, 0xd0
-    bl fn_8000D3A4
+    bl vec3_mag
     fmr f29, f1
     addi r3, r1, 0xc4
     addi r4, r1, 0xd0
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lfs f1, 0xc4(r1)
     lfs f0, 0x20(r1)
     fadds f1, f1, f0
@@ -1798,7 +1798,7 @@ lbl_fn_801162A4_000017BC:
     fmr f3, f29
     addi r3, r1, 0x40
     fmr f2, f1
-    bl fn_8000D114
+    bl vec3_set
     mr r4, r3
     addi r3, r1, 0x4c
     addi r5, r1, 0x100
@@ -1806,7 +1806,7 @@ lbl_fn_801162A4_000017BC:
     addi r3, r1, 0x58
     addi r4, r1, 0xe8
     addi r5, r1, 0x4c
-    bl fn_80013410
+    bl vec3_add
     addi r3, r1, 0xdc
     addi r4, r1, 0x58
     bl vec3_copy
@@ -1897,7 +1897,7 @@ lbl_fn_801162A4_00001924:
     bl fn_80116E6C
     mr r4, r3
     addi r3, r1, 0xb8
-    bl fn_8001047C
+    bl vec3_assign
     lfs f1, lbl_808816E0
     lfs f0, 0xbc(r1)
     fadds f1, f1, f0
@@ -1907,7 +1907,7 @@ lbl_fn_801162A4_00001924:
     bl fn_80113CCC
     mr r4, r3
     addi r3, r1, 0xac
-    bl fn_8001047C
+    bl vec3_assign
     bl fn_80116E64
     addi r4, r1, 0xac
     addi r5, r1, 0xb8

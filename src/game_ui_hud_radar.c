@@ -7,44 +7,44 @@ extern void _restgpr_27(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8000D114(void);
+extern void vec3_set(void);
 extern void vec3_copy(void);
 extern void fn_8000DD0C(void);
-extern void fn_80011034(void);
+extern void vec3_toEulerAngles(void);
 extern void fn_800133B0(void);
-extern void fn_8004D388(void);
+extern void collision_queryGeometry(void);
 extern void collision_testLineSegment(void);
-extern void fn_80057A64(void);
+extern void mission_updateStub(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void morph_updateMesh(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8C6C(void);
+extern void scissor_clipFrustum(void);
 extern void fn_8012A1B8(void);
 extern void fn_80139F24(void);
 extern void fn_80139F3C(void);
-extern void fn_8013C38C(void);
+extern void npc_getPosition(void);
 extern void fn_8013C394(void);
 extern void fn_8013C3B4(void);
 extern void fn_8013C460(void);
 extern void fn_8013C554(void);
-extern void fn_8013CB68(void);
+extern void npc_updateTalkInteraction(void);
 extern void fn_8014052C(void);
 extern void fn_801446F0(void);
-extern void fn_801539E0(void);
-extern void fn_8015495C(void);
+extern void inventory_unequipItem(void);
+extern void equip_applyToCharacter(void);
 extern void fn_80176548(void);
-extern void fn_80179D44(void);
+extern void actor_getMovementFlags(void);
 extern void fn_801A03E8(void);
 extern void fn_801B2EDC(void);
-extern void fn_803EA77C(void);
+extern void chest_spawnLoot(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void rand(void);
-extern void fn_8068A850(void);
+extern void std_sin(void);
 extern void std_atan2(void);
 
 /* External data declarations */
@@ -532,7 +532,7 @@ lbl_fn_801C041C_000004C4:
     lwz r0, 0x12a4(r3)
     srwi. r0, r0, 31
     beq lbl_fn_801C041C_00000514
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_801C041C_00000514:
     li r0, 0x1
     stw r0, 0x34c(r30)
@@ -564,7 +564,7 @@ lbl_fn_801C041C_00000514:
     li r6, 0x0
     lfs f1, lbl_808826A8
     lfs f2, lbl_808826B0
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_801C041C_00000590:
     lfs f4, lbl_808826B4
     mr r3, r29
@@ -726,7 +726,7 @@ lbl_fn_801C074C_00000674:
     stfs f4, 0x98(r1)
     stfs f3, 0x9c(r1)
     stfs f0, 0xa0(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     oris r7, r3, 0x8000
     lwz r3, lbl_8087EE98
     mr r5, r31
@@ -787,7 +787,7 @@ lbl_fn_801C074C_00000868:
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
 lbl_fn_801C074C_000008AC:
     li r30, 0x1
 lbl_fn_801C074C_000008B0:
@@ -915,7 +915,7 @@ lbl_fn_801C074C_00000A54:
     stfs f2, 0x4c(r1)
     lwz r3, 0x4(r28)
     lfs f2, 0x20(r28)
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
     mr r3, r30
 lbl_fn_801C074C_00000A88:
     lwz r0, 0x1c4(r1)
@@ -934,10 +934,7 @@ lbl_fn_801C074C_00000A88:
     blr
 }
 
-asm void fn_801C0C04(void)
-{
-    nofralloc
-    blr
+void fn_801C0C04(void) {
 }
 
 asm void fn_801C0C08(void)
@@ -1048,7 +1045,7 @@ asm void fn_801C0D04(void)
     lfs f1, lbl_808826A4
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
 lbl_fn_801C0D04_00000C28:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
@@ -1075,9 +1072,9 @@ asm void fn_801C0D80(void)
     addi r3, r29, 0x8
     addi r4, r4, lbl_80781A00@l
     stw r4, 0x0(r29)
-    bl fn_80057A64
+    bl mission_updateStub
     addi r3, r29, 0x14
-    bl fn_80057A64
+    bl mission_updateStub
     lwz r3, 0x4(r29)
     li r4, 0x2d
     bl fn_801C0730
@@ -1117,7 +1114,7 @@ asm void fn_801C0D80(void)
     bl atn_Anim_setLayerAnimation
     addi r3, r1, 0x74
     addi r4, r29, 0x8
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lwz r3, 0x4(r29)
     addi r4, r1, 0x74
     bl fn_801C0738
@@ -1129,7 +1126,7 @@ lbl_fn_801C0D80_00000D34:
     ble lbl_fn_801C0D80_00000E3C
     mr r4, r30
     addi r3, r1, 0x68
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lfs f31, 0x6c(r1)
     lwz r3, 0x4(r29)
     bl fn_8012A1B8
@@ -1152,14 +1149,14 @@ lbl_fn_801C0D80_00000D34:
     addi r3, r1, 0x44
     lfs f2, lbl_808826A8
     fmr f3, f1
-    bl fn_8000D114
+    bl vec3_set
     mr r5, r3
     addi r3, r1, 0x50
     addi r4, r29, 0x8
     bl fn_8013C394
     addi r3, r1, 0x5c
     addi r4, r1, 0x50
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lwz r3, 0x4(r29)
     addi r4, r1, 0x5c
     bl fn_801C0738
@@ -1178,14 +1175,14 @@ lbl_fn_801C0D80_00000DD8:
     addi r3, r1, 0x20
     lfs f2, lbl_808826C8
     fmr f3, f1
-    bl fn_8000D114
+    bl vec3_set
     mr r5, r3
     addi r3, r1, 0x2c
     addi r4, r29, 0x8
     bl fn_8013C394
     addi r3, r1, 0x38
     addi r4, r1, 0x2c
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lwz r3, 0x4(r29)
     addi r4, r1, 0x38
     bl fn_801C0738
@@ -1205,7 +1202,7 @@ lbl_fn_801C0D80_00000E3C:
     bl fn_8013C3B4
     addi r3, r1, 0x14
     addi r4, r1, 0x8
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lwz r3, 0x4(r29)
     addi r4, r1, 0x14
     bl fn_801C0738
@@ -1217,7 +1214,7 @@ lbl_fn_801C0D80_00000E84:
     lwz r3, 0x4(r29)
     fdivs f0, f0, f1
     stfs f0, 0x20(r29)
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r29, 0x14
     bl vec3_copy
@@ -1261,7 +1258,7 @@ asm void fn_801C1060(void)
     stwu r1, -0x10(r1)
     mflr r0
     stw r0, 0x14(r1)
-    bl fn_8068A850
+    bl std_sin
     lwz r0, 0x14(r1)
     frsp f1, f1
     mtlr r0
@@ -1386,7 +1383,7 @@ lbl_fn_801C1084_00000F8C:
     stfs f4, 0xa0(r1)
     stfs f3, 0xa4(r1)
     stfs f0, 0xa8(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     oris r7, r3, 0x8000
     mr r3, r27
     mr r5, r30
@@ -1486,7 +1483,7 @@ lbl_fn_801C1084_000011B0:
     stfs f2, 0x90(r1)
     bl fn_80176548
     lwz r3, 0x4(r31)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lwz r5, 0x4(r31)
     mr r7, r3
     lwz r3, lbl_8087EE98
@@ -1496,7 +1493,7 @@ lbl_fn_801C1084_000011B0:
     addi r5, r1, 0x78
     addi r6, r1, 0x94
     li r9, 0x0
-    bl fn_8004D388
+    bl collision_queryGeometry
     addi r5, r1, 0xd8
     lwz r6, 0x4(r31)
     addi r4, r1, 0x68
@@ -1550,14 +1547,14 @@ lbl_fn_801C1084_00001364:
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
 lbl_fn_801C1084_00001388:
     lwz r3, 0x4(r31)
     li r5, 0x0
     lfs f1, lbl_808826A8
     lfs f2, 0x20(r31)
     addi r4, r3, 0x534
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
     li r3, 0x1
 lbl_fn_801C1084_000013A4:
     addi r11, r1, 0x140
@@ -1698,7 +1695,7 @@ lbl_fn_801C1578_000014F8:
     stfs f5, 0xa4(r1)
     stfs f8, 0xa8(r1)
     stfs f7, 0xac(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     oris r7, r3, 0x8000
     mr r3, r28
     mr r5, r29
@@ -1834,7 +1831,7 @@ lbl_fn_801C1578_00001714:
     lwz r3, 0x4(r30)
     stfs f5, 0x64(r1)
     stfs f7, 0x70(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     oris r7, r3, 0x8000
     mr r3, r27
     mr r5, r29

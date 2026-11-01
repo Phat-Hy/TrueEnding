@@ -33,7 +33,7 @@ extern void fn_80713C10(void);
 extern void fn_80713CB0(void);
 extern void fn_80714230(void);
 extern void fn_80714500(void);
-extern void fn_807187D0(void);
+extern void net_getGlobalContext(void);
 extern void fn_80718D00(void);
 extern void fn_80718D70(void);
 extern void fn_8071D220(void);
@@ -129,13 +129,13 @@ asm void fn_80711BC0(void)
     mr r31, r5
     mr r24, r6
     mr r25, r7
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSLockMutex
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSLockMutex
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSLockMutex
     lbz r0, 0xcd(r29)
@@ -146,7 +146,7 @@ asm void fn_80711BC0(void)
     beq lbl_fn_80711BC0_00000068
     addi r27, r29, 0xc0
 lbl_fn_80711BC0_00000068:
-    bl fn_807187D0
+    bl net_getGlobalContext
     mr r4, r27
     bl fn_80718D70
     li r0, 0x0
@@ -170,7 +170,7 @@ lbl_fn_80711BC0_000000AC:
     li r27, 0x0
     li r28, 0x0
 lbl_fn_80711BC0_000000B8:
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSLockMutex
     cmpwi r27, 0xf
@@ -182,7 +182,7 @@ lbl_fn_80711BC0_000000D4:
 lbl_fn_80711BC0_000000D8:
     cmpwi r3, 0x0
     bne lbl_fn_80711BC0_000000F0
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
     b lbl_fn_80711BC0_0000011C
@@ -195,7 +195,7 @@ lbl_fn_80711BC0_000000F0:
     mtctr r12
     bctrl
     stw r28, 0x100(r26)
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
 lbl_fn_80711BC0_0000011C:
@@ -203,10 +203,10 @@ lbl_fn_80711BC0_0000011C:
     addi r26, r26, 0x4
     cmpwi r27, 0x10
     blt lbl_fn_80711BC0_000000B8
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
     mr r3, r29
@@ -236,7 +236,7 @@ lbl_fn_80711BC0_00000178:
     ble lbl_fn_80711BC0_000001B8
     mr r3, r28
     bl OSRestoreInterrupts
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
     li r3, 0x1
@@ -255,12 +255,12 @@ lbl_fn_80711BC0_000001C4:
     mtctr r12
     bctrl
     mr r25, r3
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSLockMutex
     cmpwi r26, 0xf
     ble lbl_fn_80711BC0_0000020C
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
     b lbl_fn_80711BC0_00000228
@@ -269,7 +269,7 @@ lbl_fn_80711BC0_0000020C:
     mr r3, r25
     mr r4, r26
     bl fn_807134D0
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
 lbl_fn_80711BC0_00000228:
@@ -292,7 +292,7 @@ lbl_fn_80711BC0_00000254:
     li r0, 0x1
     stw r30, 0xf4(r29)
     stb r0, 0xcc(r29)
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
     li r3, 0x0
@@ -317,7 +317,7 @@ asm void fn_80711E60(void)
     mr r30, r5
     stw r29, 0x14(r1)
     mr r29, r4
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSLockMutex
     cmpwi r29, 0x0
@@ -330,7 +330,7 @@ asm void fn_80711E60(void)
     mr r3, r31
     bl fn_80713830
 lbl_fn_80711E60_000002F4:
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
     lwz r0, 0x24(r1)
@@ -351,7 +351,7 @@ asm void fn_80711EE0(void)
     stw r31, 0xc(r1)
     stw r30, 0x8(r1)
     mr r30, r3
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSLockMutex
     cmpwi r30, 0x0
@@ -359,12 +359,12 @@ asm void fn_80711EE0(void)
     beq lbl_fn_80711EE0_00000354
     addi r31, r30, 0xc0
 lbl_fn_80711EE0_00000354:
-    bl fn_807187D0
+    bl net_getGlobalContext
     mr r4, r31
     bl fn_80718D00
     li r0, 0x1
     stb r0, 0xcd(r30)
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
     lwz r31, 0xc(r1)
@@ -387,10 +387,10 @@ asm void fn_80711F50(void)
     stw r29, 0x14(r1)
     stw r28, 0x10(r1)
     mr r28, r3
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSLockMutex
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSLockMutex
     lbz r0, 0xcd(r28)
@@ -401,7 +401,7 @@ asm void fn_80711F50(void)
     beq lbl_fn_80711F50_000003E4
     addi r30, r28, 0xc0
 lbl_fn_80711F50_000003E4:
-    bl fn_807187D0
+    bl net_getGlobalContext
     mr r4, r30
     bl fn_80718D70
     li r0, 0x0
@@ -425,7 +425,7 @@ lbl_fn_80711F50_00000428:
     li r30, 0x0
     li r31, 0x0
 lbl_fn_80711F50_00000434:
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSLockMutex
     cmpwi r30, 0xf
@@ -437,7 +437,7 @@ lbl_fn_80711F50_00000450:
 lbl_fn_80711F50_00000454:
     cmpwi r3, 0x0
     bne lbl_fn_80711F50_0000046C
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
     b lbl_fn_80711F50_00000498
@@ -450,7 +450,7 @@ lbl_fn_80711F50_0000046C:
     mtctr r12
     bctrl
     stw r31, 0x100(r29)
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
 lbl_fn_80711F50_00000498:
@@ -458,10 +458,10 @@ lbl_fn_80711F50_00000498:
     addi r29, r29, 0x4
     cmpwi r30, 0x10
     blt lbl_fn_80711F50_00000434
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
     lwz r0, 0x24(r1)
@@ -486,7 +486,7 @@ asm void fn_807120A0(void)
     mr r29, r4
     stw r28, 0x10(r1)
     mr r28, r3
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSLockMutex
     stb r29, 0xce(r28)
@@ -504,7 +504,7 @@ lbl_fn_807120A0_00000534:
     addi r31, r31, 0x4
     cmpwi r30, 0x10
     blt lbl_fn_807120A0_0000051C
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
     lwz r0, 0x24(r1)
@@ -529,13 +529,13 @@ asm void fn_80712130(void)
     mr r30, r4
     stw r29, 0x14(r1)
     mr r29, r3
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSLockMutex
     lbz r0, 0xcc(r29)
     cmpwi r0, 0x0
     bne lbl_fn_80712130_000005BC
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
     b lbl_fn_80712130_00000614
@@ -562,7 +562,7 @@ lbl_fn_80712130_000005E0:
     fadds f0, f0, f1
     stfs f0, 0xe0(r29)
 lbl_fn_80712130_00000608:
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
 lbl_fn_80712130_00000614:
@@ -654,7 +654,7 @@ asm void fn_807122C0(void)
     mr r29, r4
     stw r28, 0x10(r1)
     mr r28, r5
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSLockMutex
     lbz r0, 0xcc(r31)
@@ -674,10 +674,10 @@ lbl_fn_807122C0_00000750:
     bgt lbl_fn_807122C0_00000888
     cmplw r0, r28
     bgt lbl_fn_807122C0_00000888
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSLockMutex
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSLockMutex
     lbz r0, 0xcd(r31)
@@ -688,7 +688,7 @@ lbl_fn_807122C0_00000750:
     beq lbl_fn_807122C0_000007A8
     addi r29, r31, 0xc0
 lbl_fn_807122C0_000007A8:
-    bl fn_807187D0
+    bl net_getGlobalContext
     mr r4, r29
     bl fn_80718D70
     li r0, 0x0
@@ -712,7 +712,7 @@ lbl_fn_807122C0_000007EC:
     li r29, 0x0
     li r30, 0x0
 lbl_fn_807122C0_000007F8:
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSLockMutex
     cmpwi r29, 0xf
@@ -724,7 +724,7 @@ lbl_fn_807122C0_00000814:
 lbl_fn_807122C0_00000818:
     cmpwi r3, 0x0
     bne lbl_fn_807122C0_00000830
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
     b lbl_fn_807122C0_0000085C
@@ -737,7 +737,7 @@ lbl_fn_807122C0_00000830:
     mtctr r12
     bctrl
     stw r30, 0x100(r28)
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
 lbl_fn_807122C0_0000085C:
@@ -745,10 +745,10 @@ lbl_fn_807122C0_0000085C:
     addi r28, r28, 0x4
     cmpwi r29, 0x10
     blt lbl_fn_807122C0_000007F8
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
     b lbl_fn_807122C0_00000890
@@ -756,7 +756,7 @@ lbl_fn_807122C0_00000888:
     addi r3, r3, 0x4
     bdnz lbl_fn_807122C0_00000750
 lbl_fn_807122C0_00000890:
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
     lwz r0, 0x24(r1)
@@ -793,7 +793,7 @@ asm void fn_807124A0(void)
     bl _savegpr_24
     mr r24, r3
     mr r25, r4
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSLockMutex
     li r27, 0x0
@@ -812,7 +812,7 @@ lbl_fn_807124A0_00000918:
     bl fn_807139F0
     cmpwi r3, 0x0
     bge lbl_fn_807124A0_000009A8
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSLockMutex
     cmpwi r26, 0xf
@@ -824,7 +824,7 @@ lbl_fn_807124A0_00000960:
 lbl_fn_807124A0_00000964:
     cmpwi r3, 0x0
     bne lbl_fn_807124A0_0000097C
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
     b lbl_fn_807124A0_000009A8
@@ -837,7 +837,7 @@ lbl_fn_807124A0_0000097C:
     mtctr r12
     bctrl
     stw r30, 0x100(r29)
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
 lbl_fn_807124A0_000009A8:
@@ -852,13 +852,13 @@ lbl_fn_807124A0_000009B8:
     blt lbl_fn_807124A0_00000918
     cmpwi r27, 0x0
     bne lbl_fn_807124A0_000009E4
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
     li r3, 0x1
     b lbl_fn_807124A0_000009F4
 lbl_fn_807124A0_000009E4:
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
     li r3, 0x0
@@ -901,13 +901,13 @@ asm void fn_80712610(void)
     stw r31, 0xc(r1)
     stw r30, 0x8(r1)
     mr r30, r3
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSLockMutex
     lbz r0, 0xcc(r30)
     cmpwi r0, 0x0
     bne lbl_fn_80712610_00000A90
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
     b lbl_fn_80712610_00000B44
@@ -915,7 +915,7 @@ lbl_fn_80712610_00000A90:
     lbz r0, 0xcd(r30)
     cmpwi r0, 0x0
     bne lbl_fn_80712610_00000AAC
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
     b lbl_fn_80712610_00000B44
@@ -939,7 +939,7 @@ lbl_fn_80712610_00000AD4:
     li r4, 0x3
     bl fn_80712720
 lbl_fn_80712610_00000AEC:
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSLockMutex
     li r31, 0x0
@@ -959,10 +959,10 @@ lbl_fn_80712610_00000B1C:
     addi r30, r30, 0x4
     cmpwi r31, 0x10
     blt lbl_fn_80712610_00000AFC
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
 lbl_fn_80712610_00000B44:
@@ -1028,7 +1028,7 @@ lbl_fn_80712720_00000C10:
     bl fn_807124A0
     cmpwi r3, 0x0
     beq lbl_fn_80712720_00000D24
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSLockMutex
     lbz r0, 0xcd(r31)
@@ -1039,7 +1039,7 @@ lbl_fn_80712720_00000C10:
     beq lbl_fn_80712720_00000C50
     addi r29, r31, 0xc0
 lbl_fn_80712720_00000C50:
-    bl fn_807187D0
+    bl net_getGlobalContext
     mr r4, r29
     bl fn_80718D70
     li r0, 0x0
@@ -1063,7 +1063,7 @@ lbl_fn_80712720_00000C94:
     li r29, 0x0
     li r30, 0x0
 lbl_fn_80712720_00000CA0:
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSLockMutex
     cmpwi r29, 0xf
@@ -1075,7 +1075,7 @@ lbl_fn_80712720_00000CBC:
 lbl_fn_80712720_00000CC0:
     cmpwi r3, 0x0
     bne lbl_fn_80712720_00000CD8
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
     b lbl_fn_80712720_00000D04
@@ -1088,7 +1088,7 @@ lbl_fn_80712720_00000CD8:
     mtctr r12
     bctrl
     stw r30, 0x100(r28)
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
 lbl_fn_80712720_00000D04:
@@ -1096,7 +1096,7 @@ lbl_fn_80712720_00000D04:
     addi r28, r28, 0x4
     cmpwi r29, 0x10
     blt lbl_fn_80712720_00000CA0
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
     b lbl_fn_80712720_00000D7C
@@ -1216,7 +1216,7 @@ lbl_fn_80712990_00000EB8:
     bl fn_807124A0
     cmpwi r3, 0x0
     beq lbl_fn_80712990_00000FC8
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSLockMutex
     lbz r0, 0xcd(r31)
@@ -1227,7 +1227,7 @@ lbl_fn_80712990_00000EB8:
     beq lbl_fn_80712990_00000EF4
     addi r29, r31, 0xc0
 lbl_fn_80712990_00000EF4:
-    bl fn_807187D0
+    bl net_getGlobalContext
     mr r4, r29
     bl fn_80718D70
     li r0, 0x0
@@ -1251,7 +1251,7 @@ lbl_fn_80712990_00000F38:
     li r29, 0x0
     li r30, 0x0
 lbl_fn_80712990_00000F44:
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSLockMutex
     cmpwi r29, 0xf
@@ -1263,7 +1263,7 @@ lbl_fn_80712990_00000F60:
 lbl_fn_80712990_00000F64:
     cmpwi r3, 0x0
     bne lbl_fn_80712990_00000F7C
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
     b lbl_fn_80712990_00000FA8
@@ -1276,7 +1276,7 @@ lbl_fn_80712990_00000F7C:
     mtctr r12
     bctrl
     stw r30, 0x100(r28)
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
 lbl_fn_80712990_00000FA8:
@@ -1284,7 +1284,7 @@ lbl_fn_80712990_00000FA8:
     addi r28, r28, 0x4
     cmpwi r29, 0x10
     blt lbl_fn_80712990_00000F44
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
     b lbl_fn_80712990_0000102C
@@ -1347,10 +1347,7 @@ asm void fn_80712C30(void)
     bctr
 }
 
-asm void fn_80712C60(void)
-{
-    nofralloc
-    blr
+void fn_80712C60(void) {
 }
 
 asm void fn_80712C70(void)
@@ -2061,10 +2058,10 @@ asm void fn_80713580(void)
     lis r4, lbl_807C6270@ha
     addi r4, r4, lbl_807C6270@l
     stw r4, 0x0(r3)
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSLockMutex
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSLockMutex
     mr r3, r29
@@ -2082,10 +2079,10 @@ lbl_fn_80713580_00001A30:
 lbl_fn_80713580_00001A34:
     cmpwi r31, 0x0
     bne lbl_fn_80713580_00001A1C
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSLockMutex
     lwz r31, 0xc8(r29)
@@ -2099,11 +2096,11 @@ lbl_fn_80713580_00001A68:
     bne lbl_fn_80713580_00001A5C
     li r31, 0x0
     stw r31, 0xc8(r29)
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
     stb r31, 0x5(r29)
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
     cmpwi r30, 0x0
@@ -2255,10 +2252,10 @@ asm void fn_80713850(void)
     stw r31, 0xc(r1)
     stw r30, 0x8(r1)
     mr r30, r3
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSLockMutex
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSLockMutex
     mr r3, r30
@@ -2276,10 +2273,10 @@ lbl_fn_80713850_00001CE4:
 lbl_fn_80713850_00001CE8:
     cmpwi r31, 0x0
     bne lbl_fn_80713850_00001CD0
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSLockMutex
     lwz r31, 0xc8(r30)
@@ -2293,11 +2290,11 @@ lbl_fn_80713850_00001D1C:
     bne lbl_fn_80713850_00001D10
     li r31, 0x0
     stw r31, 0xc8(r30)
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
     stb r31, 0x5(r30)
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
     lwz r0, 0x14(r1)
@@ -2317,13 +2314,13 @@ asm void fn_80713920(void)
     stw r31, 0xc(r1)
     stw r30, 0x8(r1)
     mr r30, r3
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSLockMutex
     lbz r0, 0x5(r30)
     cmpwi r0, 0x0
     bne lbl_fn_80713920_00001DA0
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
     b lbl_fn_80713920_00001E18
@@ -2360,7 +2357,7 @@ lbl_fn_80713920_00001E00:
 lbl_fn_80713920_00001E04:
     cmpwi r31, 0x0
     bne lbl_fn_80713920_00001DA8
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
 lbl_fn_80713920_00001E18:
@@ -2382,13 +2379,13 @@ asm void fn_807139F0(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSLockMutex
     lbz r0, 0x5(r30)
     cmpwi r0, 0x0
     bne lbl_fn_807139F0_00001E78
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
     li r3, 0x0
@@ -2428,7 +2425,7 @@ lbl_fn_807139F0_00001ED8:
     lwz r0, 0xc8(r30)
     cmpwi r0, 0x0
     beq lbl_fn_807139F0_00001F04
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
     li r3, 0x1
@@ -2443,7 +2440,7 @@ lbl_fn_807139F0_00001F0C:
     subic. r0, r3, 0x1
     stw r0, 0x44(r30)
     ble lbl_fn_807139F0_00001F38
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
     li r3, 0x1
@@ -2462,7 +2459,7 @@ lbl_fn_807139F0_00001F48:
     bctrl
     cmpwi r3, 0x1
     bne lbl_fn_807139F0_00001F7C
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
     li r3, -0x1
@@ -2475,7 +2472,7 @@ lbl_fn_807139F0_00001F7C:
     cmpwi r0, 0x0
     beq lbl_fn_807139F0_00001F48
 lbl_fn_807139F0_00001F94:
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
     li r3, 0x1
@@ -2498,7 +2495,7 @@ asm void fn_80713B80(void)
     mr r31, r3
     stw r30, 0x8(r1)
     mr r30, r4
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSLockMutex
     mr r3, r31
@@ -2522,7 +2519,7 @@ lbl_fn_80713B80_00002020:
 lbl_fn_80713B80_00002024:
     cmpwi r31, 0x0
     bne lbl_fn_80713B80_00001FF8
-    bl fn_807187D0
+    bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
     lwz r0, 0x14(r1)

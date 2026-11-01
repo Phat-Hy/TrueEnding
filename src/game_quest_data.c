@@ -3,18 +3,18 @@
 
 /* External function declarations */
 extern void fn_8004D314(void);
-extern void fn_8004D388(void);
+extern void collision_queryGeometry(void);
 extern void fn_8004ECC0(void);
 extern void collision_testLineSegment(void);
 extern void mem_alloc(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_80097D40(void);
+extern void atn_Anim_getLayerTrack(void);
 extern void atn_Anim_getDuration(void);
 extern void fn_80125474(void);
 extern void actor_setState(void);
 extern void fn_801720AC(void);
 extern void fn_801749EC(void);
-extern void fn_80179D44(void);
+extern void actor_getMovementFlags(void);
 extern void fn_801C8938(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
@@ -23,8 +23,8 @@ extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
-extern void fn_8068A850(void);
-extern void fn_8068AD58(void);
+extern void std_sin(void);
+extern void std_cos(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
 extern void math_u64DivMod(void);
@@ -343,7 +343,7 @@ lbl_fn_801426A4_000003A8:
     lfs f1, 0x130(r1)
     fnmsubs f0, f0, f5, f0
     stfs f0, 0x57c(r29)
-    bl fn_8068AD58
+    bl std_cos
     frsp f4, f1
     lfs f3, 0x570(r29)
     lfs f0, lbl_8088196C
@@ -351,7 +351,7 @@ lbl_fn_801426A4_000003A8:
     fmuls f3, f3, f4
     stfs f0, 0x124(r1)
     stfs f3, 0x120(r1)
-    bl fn_8068A850
+    bl std_sin
     frsp f5, f1
     lfs f4, 0x570(r29)
     lfs f3, 0x120(r1)
@@ -543,7 +543,7 @@ lbl_fn_801426A4_000005EC:
 lbl_fn_801426A4_000006A4:
     lwz r28, lbl_8087EE98
     mr r3, r29
-    bl fn_80179D44
+    bl actor_getMovementFlags
     oris r7, r3, 0x8000
     mr r3, r28
     addi r4, r1, 0xfc
@@ -605,7 +605,7 @@ lbl_fn_801426A4_00000788:
     stfs f0, 0xe4(r1)
 lbl_fn_801426A4_00000794:
     mr r3, r29
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lwz r0, 0x48(r29)
     mr r7, r3
     cmpwi r0, 0x0
@@ -641,7 +641,7 @@ lbl_fn_801426A4_000007FC:
     addi r6, r1, 0x120
     addi r8, r29, 0x5b8
     li r9, 0x0
-    bl fn_8004D388
+    bl collision_queryGeometry
     lwz r0, 0x54c(r29)
     mr r31, r3
     rlwinm r0, r0, 0, 22, 22
@@ -1421,7 +1421,7 @@ lbl_fn_801437D0_00001300:
     bl PSVECDotProduct
     fmr f26, f1
     lfd f1, 0x488(r31)
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     fcmpo cr0, f26, f0
     ble lbl_fn_801437D0_000013A0
@@ -1437,7 +1437,7 @@ lbl_fn_801437D0_00001300:
     b lbl_fn_801437D0_00001618
 lbl_fn_801437D0_000013A0:
     lfd f1, 0x490(r31)
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     fcmpo cr0, f26, f0
     ble lbl_fn_801437D0_000015F4
@@ -1872,7 +1872,7 @@ lbl_fn_801437D0_000019AC:
 lbl_fn_801437D0_000019D8:
     lwz r4, 0x488(r30)
     addi r3, r30, 0xb0
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     beq lbl_fn_801437D0_000019F4
     bl atn_Anim_getDuration
@@ -1888,7 +1888,7 @@ lbl_fn_801437D0_000019F8:
 lbl_fn_801437D0_00001A0C:
     lwz r4, 0x48c(r30)
     addi r3, r30, 0xb0
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     beq lbl_fn_801437D0_00001A28
     bl atn_Anim_getDuration
@@ -1904,7 +1904,7 @@ lbl_fn_801437D0_00001A2C:
 lbl_fn_801437D0_00001A40:
     lwz r4, 0x490(r30)
     addi r3, r30, 0xb0
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     beq lbl_fn_801437D0_00001A5C
     bl atn_Anim_getDuration

@@ -7,10 +7,10 @@ extern void _savegpr_27(void);
 extern void fn_80044C30(void);
 extern void fn_80064AC4(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_800BFAC8(void);
+extern void motion_updateFogAdj(void);
 extern void str_findChar(void);
 extern void fn_80133BD8(void);
-extern void fn_801F48C8(void);
+extern void save_parseSlotStats(void);
 extern void fn_801F4B4C(void);
 extern void fn_801F5644(void);
 extern void fn_801F5740(void);
@@ -371,7 +371,7 @@ lbl_fn_803DCD34_00000440:
     stfs f2, 0x28(r1)
     lwz r4, lbl_8087EFB4
     psq_st f1, 0x0(r5), 0, 0
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f6, 0x1c(r1)
     lfs f0, lbl_80885D60
     fcmpo cr0, f6, f0
@@ -602,7 +602,7 @@ lbl_fn_803DD160_0000071C:
     stfs f1, 0x1bc(r1)
     stfs f0, 0x1c0(r1)
     stfs f0, 0x1c4(r1)
-    bl fn_801F48C8
+    bl save_parseSlotStats
     lfs f1, lbl_80885E28
     mr r3, r31
     lfs f0, lbl_80885DFC
@@ -612,7 +612,7 @@ lbl_fn_803DD160_0000071C:
     stfs f1, 0x1ac(r1)
     stfs f0, 0x1b0(r1)
     stfs f0, 0x1b4(r1)
-    bl fn_801F48C8
+    bl save_parseSlotStats
     addi r5, r29, 0x70
     lfs f3, 0x70(r29)
     lfs f2, 0x4(r5)
@@ -665,7 +665,7 @@ lbl_fn_803DD160_00000860:
     stfs f1, 0x17c(r1)
     stfs f0, 0x180(r1)
     stfs f2, 0x184(r1)
-    bl fn_801F48C8
+    bl save_parseSlotStats
     lfs f2, lbl_80885DFC
     mr r3, r31
     lfs f1, lbl_80885E28
@@ -676,7 +676,7 @@ lbl_fn_803DD160_00000860:
     stfs f1, 0x16c(r1)
     stfs f0, 0x170(r1)
     stfs f2, 0x174(r1)
-    bl fn_801F48C8
+    bl save_parseSlotStats
     addi r5, r29, 0x80
     lfs f3, 0x80(r29)
     lfs f2, 0x4(r5)
@@ -730,7 +730,7 @@ lbl_fn_803DD160_0000095C:
     stfs f2, 0x13c(r1)
     stfs f1, 0x140(r1)
     stfs f0, 0x144(r1)
-    bl fn_801F48C8
+    bl save_parseSlotStats
     lfs f3, lbl_80885DE8
     mr r3, r31
     lfs f2, lbl_80885E28
@@ -742,7 +742,7 @@ lbl_fn_803DD160_0000095C:
     stfs f2, 0x12c(r1)
     stfs f1, 0x130(r1)
     stfs f0, 0x134(r1)
-    bl fn_801F48C8
+    bl save_parseSlotStats
     addi r5, r29, 0x90
     lfs f3, 0x90(r29)
     lfs f2, 0x4(r5)
@@ -796,7 +796,7 @@ lbl_fn_803DD160_00000A60:
     stfs f2, 0xfc(r1)
     stfs f1, 0x100(r1)
     stfs f0, 0x104(r1)
-    bl fn_801F48C8
+    bl save_parseSlotStats
     lfs f3, lbl_80885D58
     mr r3, r31
     lfs f2, lbl_80885DFC
@@ -808,7 +808,7 @@ lbl_fn_803DD160_00000A60:
     stfs f2, 0xec(r1)
     stfs f1, 0xf0(r1)
     stfs f0, 0xf4(r1)
-    bl fn_801F48C8
+    bl save_parseSlotStats
     addi r5, r29, 0xb0
     lfs f3, 0xb0(r29)
     lfs f2, 0x4(r5)
@@ -861,7 +861,7 @@ lbl_fn_803DD160_00000B64:
     stfs f1, 0xbc(r1)
     stfs f1, 0xc0(r1)
     stfs f0, 0xc4(r1)
-    bl fn_801F48C8
+    bl save_parseSlotStats
     lfs f1, lbl_80885E28
     mr r3, r31
     lfs f2, lbl_80885D58
@@ -872,7 +872,7 @@ lbl_fn_803DD160_00000B64:
     stfs f1, 0xac(r1)
     stfs f1, 0xb0(r1)
     stfs f0, 0xb4(r1)
-    bl fn_801F48C8
+    bl save_parseSlotStats
     addi r5, r29, 0xa0
     lfs f3, 0xa0(r29)
     lfs f2, 0x4(r5)
@@ -924,7 +924,7 @@ lbl_fn_803DD160_00000C60:
     stfs f1, 0x7c(r1)
     stfs f0, 0x80(r1)
     stfs f0, 0x84(r1)
-    bl fn_801F48C8
+    bl save_parseSlotStats
     lfs f1, lbl_80885DFC
     mr r3, r31
     lfs f0, lbl_80885DE8
@@ -934,7 +934,7 @@ lbl_fn_803DD160_00000C60:
     stfs f1, 0x6c(r1)
     stfs f0, 0x70(r1)
     stfs f0, 0x74(r1)
-    bl fn_801F48C8
+    bl save_parseSlotStats
     addi r5, r29, 0xc0
     lfs f3, 0xc0(r29)
     lfs f2, 0x4(r5)
@@ -987,7 +987,7 @@ lbl_fn_803DD160_00000D54:
     stfs f1, 0x3c(r1)
     stfs f0, 0x40(r1)
     stfs f2, 0x44(r1)
-    bl fn_801F48C8
+    bl save_parseSlotStats
     lfs f2, lbl_80885DE8
     mr r3, r31
     lfs f1, lbl_80885DFC
@@ -998,7 +998,7 @@ lbl_fn_803DD160_00000D54:
     stfs f1, 0x2c(r1)
     stfs f0, 0x30(r1)
     stfs f2, 0x34(r1)
-    bl fn_801F48C8
+    bl save_parseSlotStats
     addi r5, r29, 0xd0
     lfs f3, 0xd0(r29)
     lfs f2, 0x4(r5)
@@ -1077,7 +1077,7 @@ asm void fn_803DD90C(void)
     stfs f2, 0x13c(r1)
     stfs f1, 0x140(r1)
     stfs f0, 0x144(r1)
-    bl fn_801F48C8
+    bl save_parseSlotStats
     lfs f3, lbl_80885DFC
     mr r3, r28
     lfs f2, lbl_80885D58
@@ -1089,7 +1089,7 @@ asm void fn_803DD90C(void)
     stfs f2, 0x12c(r1)
     stfs f1, 0x130(r1)
     stfs f0, 0x134(r1)
-    bl fn_801F48C8
+    bl save_parseSlotStats
     addi r30, r29, 0x40
     lfs f3, 0x40(r29)
     lfs f2, 0x4(r30)
@@ -1129,7 +1129,7 @@ lbl_fn_803DD90C_00000F84:
     stfs f1, 0xfc(r1)
     stfs f0, 0x100(r1)
     stfs f0, 0x104(r1)
-    bl fn_801F48C8
+    bl save_parseSlotStats
     lfs f1, lbl_80885D58
     mr r3, r28
     lfs f0, lbl_80885E28
@@ -1139,7 +1139,7 @@ lbl_fn_803DD90C_00000F84:
     stfs f1, 0xec(r1)
     stfs f0, 0xf0(r1)
     stfs f0, 0xf4(r1)
-    bl fn_801F48C8
+    bl save_parseSlotStats
     addi r30, r29, 0x10
     lfs f3, 0x10(r29)
     lfs f2, 0x4(r30)
@@ -1180,7 +1180,7 @@ lbl_fn_803DD90C_00001048:
     stfs f1, 0xbc(r1)
     stfs f0, 0xc0(r1)
     stfs f2, 0xc4(r1)
-    bl fn_801F48C8
+    bl save_parseSlotStats
     lfs f2, lbl_80885E28
     mr r3, r28
     lfs f1, lbl_80885D58
@@ -1191,7 +1191,7 @@ lbl_fn_803DD90C_00001048:
     stfs f1, 0xac(r1)
     stfs f0, 0xb0(r1)
     stfs f2, 0xb4(r1)
-    bl fn_801F48C8
+    bl save_parseSlotStats
     addi r30, r29, 0x20
     lfs f3, 0x20(r29)
     lfs f2, 0x4(r30)
@@ -1233,7 +1233,7 @@ lbl_fn_803DD90C_00001114:
     stfs f2, 0x7c(r1)
     stfs f1, 0x80(r1)
     stfs f0, 0x84(r1)
-    bl fn_801F48C8
+    bl save_parseSlotStats
     lfs f3, lbl_80885DE8
     mr r3, r28
     lfs f2, lbl_80885D58
@@ -1245,7 +1245,7 @@ lbl_fn_803DD90C_00001114:
     stfs f2, 0x6c(r1)
     stfs f1, 0x70(r1)
     stfs f0, 0x74(r1)
-    bl fn_801F48C8
+    bl save_parseSlotStats
     addi r30, r29, 0x0
     lfs f3, 0x0(r29)
     lfs f2, 0x4(r30)
@@ -1285,7 +1285,7 @@ lbl_fn_803DD90C_000011E8:
     stfs f2, 0x3c(r1)
     stfs f1, 0x40(r1)
     stfs f0, 0x44(r1)
-    bl fn_801F48C8
+    bl save_parseSlotStats
     lfs f3, lbl_80885DE8
     mr r3, r28
     lfs f2, lbl_80885D58
@@ -1297,7 +1297,7 @@ lbl_fn_803DD90C_000011E8:
     stfs f2, 0x2c(r1)
     stfs f1, 0x30(r1)
     stfs f0, 0x34(r1)
-    bl fn_801F48C8
+    bl save_parseSlotStats
     addi r31, r29, 0x50
     lfs f3, 0x50(r29)
     lfs f2, 0x4(r31)

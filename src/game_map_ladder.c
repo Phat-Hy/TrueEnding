@@ -6,7 +6,7 @@ extern void __files(void);
 extern void dtor_80084684(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_8008BBD8(void);
+extern void map_debugLog(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_playAnimationByName(void);
@@ -20,15 +20,15 @@ extern void fn_80107860(void);
 extern void fn_8012476C(void);
 extern void fn_8013310C(void);
 extern void fn_8013322C(void);
-extern void fn_8013CB68(void);
-extern void fn_801539E0(void);
+extern void npc_updateTalkInteraction(void);
+extern void inventory_unequipItem(void);
 extern void fn_80154344(void);
 extern void fn_80155DAC(void);
 extern void fn_80164DCC(void);
-extern void fn_8016DA4C(void);
+extern void debuff_clearStatus(void);
 extern void fn_801AD34C(void);
 extern void fn_8037D49C(void);
-extern void fn_803EA77C(void);
+extern void chest_spawnLoot(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
@@ -333,7 +333,7 @@ lbl_fn_8018E5BC_000002A8:
     lfs f1, lbl_80881EC4
     li r6, 0x0
     lfs f2, lbl_80881EB0
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_8018E5BC_00000300:
     lwz r0, 0x2c(r29)
     cmpwi r0, 0xb
@@ -853,12 +853,12 @@ asm void fn_8018EEC4(void)
     rlwinm r0, r0, 0, 27, 25
     stw r0, 0x12a4(r3)
     lwz r3, 0x4(r30)
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lwz r3, 0x4(r30)
     lwz r0, 0x12a4(r3)
     srwi. r0, r0, 31
     beq lbl_fn_8018EEC4_000009AC
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_8018EEC4_000009AC:
     lwz r3, 0x4(r30)
     li r4, 0x0
@@ -1037,7 +1037,7 @@ lbl_fn_8018F090_00000C20:
     addi r4, r3, 0x534
     lfs f2, lbl_80881F7C
     li r5, 0x0
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
     lwz r3, 0x4(r31)
     lwz r0, 0x7e0(r3)
     rlwinm r0, r0, 0, 26, 26
@@ -1168,7 +1168,7 @@ lbl_fn_8018F254_00000DE0:
     stw r4, 0x9c(r1)
     stw r0, 0xa0(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_8018F254_00000EB4
     lwz r7, 0x90(r1)
@@ -1312,7 +1312,7 @@ lbl_fn_8018F254_00001000:
     stw r4, 0x74(r1)
     stw r0, 0x78(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_8018F254_000010D4
     lwz r7, 0x68(r1)
@@ -1612,12 +1612,12 @@ asm void fn_8018F970(void)
     rlwinm r0, r0, 0, 27, 25
     stw r0, 0x12a4(r3)
     lwz r3, 0x4(r31)
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lwz r3, 0x4(r31)
     lwz r0, 0x12a4(r3)
     srwi. r0, r0, 31
     beq lbl_fn_8018F970_00001430
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_8018F970_00001430:
     lwz r3, 0x4(r31)
     li r4, 0x0
@@ -1807,7 +1807,7 @@ lbl_fn_8018FB0C_0000169C:
     stw r4, 0x50(r1)
     stw r0, 0x54(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_8018FB0C_00001770
     lwz r7, 0x44(r1)

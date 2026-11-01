@@ -15,8 +15,8 @@ extern void fn_80043EAC(void);
 extern void Arms_destructor(void);
 extern void Arms_execute(void);
 extern void fn_8005DFC8(void);
-extern void fn_80061824(void);
-extern void fn_8006EF48(void);
+extern void skill_calcTrajectory(void);
+extern void script_executeOpcode(void);
 extern void dungeon_initGlobalContext(void);
 extern void mem_alloc(void);
 extern void fn_80084F84(void);
@@ -24,15 +24,15 @@ extern void msg_getMessageById(void);
 extern void fn_800A55FC(void);
 extern void fn_800A5920(void);
 extern void skin_playAnimationByName(void);
-extern void fn_800CB360(void);
+extern void morph_reset(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB440(void);
+extern void morph_updateWeights(void);
 extern void morph_updateMesh(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void atn_LH_Texture_update(void);
 extern void fn_800E0000(void);
 extern void fn_800EE794(void);
@@ -44,7 +44,7 @@ extern void fn_80160324(void);
 extern void fn_8016034C(void);
 extern void fn_8017ABD4(void);
 extern void save_validateHeader(void);
-extern void fn_801F64D0(void);
+extern void save_createWorkerTask(void);
 extern void task_mapIdToQueue(void);
 extern void task_findEntryById(void);
 extern void fn_8021A77C(void);
@@ -455,7 +455,7 @@ lbl_arms_calcWeaponHitbox_000003FC:
     lfs f2, lbl_808882B4
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     stw r31, 0x1c(r1)
     fsubs f2, f25, f1
     fmuls f1, f30, f31
@@ -490,7 +490,7 @@ lbl_arms_calcWeaponHitbox_0000046C:
     li r9, 0x0
     fmr f8, f6
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     addi r30, r30, 0xc
     addi r31, r31, 0x1
 lbl_arms_calcWeaponHitbox_00000498:
@@ -694,10 +694,8 @@ lbl_fn_805A6B18_00000738:
     blr
 }
 
-asm void fn_805A6B54(void)
+void fn_805A6B54(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_805A6B58(void)
@@ -737,10 +735,8 @@ asm void fn_805A6B58(void)
     blr
 }
 
-asm void fn_805A6BD8(void)
+void fn_805A6BD8(void)
 {
-    nofralloc
-    blr
 }
 
 asm void archive_mountCheckStatus(void)
@@ -1298,7 +1294,7 @@ lbl_fn_805A715C_00000F8C:
     bdnz lbl_fn_805A715C_00000F8C
 lbl_fn_805A715C_00000FA0:
     addi r3, r30, 0x16c0
-    bl fn_800CB360
+    bl morph_reset
     lis r29, lbl_807639F8@ha
     mr r3, r30
     addi r29, r29, lbl_807639F8@l
@@ -1324,25 +1320,25 @@ lbl_fn_805A715C_00000FA0:
     bl atn_Task_setActive
     mr r3, r30
     addi r4, r29, 0x6d
-    bl fn_801F64D0
+    bl save_createWorkerTask
     stw r3, 0x15bc(r30)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r30
     addi r4, r29, 0x8d
-    bl fn_801F64D0
+    bl save_createWorkerTask
     stw r3, 0x15c8(r30)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r30
     addi r4, r29, 0xad
-    bl fn_801F64D0
+    bl save_createWorkerTask
     stw r3, 0x15c0(r30)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r30
     addi r4, r29, 0xcd
-    bl fn_801F64D0
+    bl save_createWorkerTask
     stw r3, 0x15c4(r30)
     li r4, 0x1
     bl atn_Task_setActive
@@ -1555,7 +1551,7 @@ asm void fn_805A76E4(void)
     mr r31, r3
     stw r30, 0x18(r1)
     stw r29, 0x14(r1)
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_805A76E4_000013F4
     lwz r3, 0x15b0(r31)
@@ -2846,7 +2842,7 @@ lbl_fn_805A7820_000024D8:
     bl fn_805A70D8
     addi r3, r24, 0x16c0
     addi r4, r1, 0x1c
-    bl fn_800CB440
+    bl morph_updateWeights
     addi r3, r1, 0x1c
     li r4, -0x1
     bl ref_releaseHandle

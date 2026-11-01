@@ -17,15 +17,15 @@ extern void str_skipWhitespace(void);
 extern void fn_800EE360(void);
 extern void system_getNextSequenceId(void);
 extern void boss_updatePhaseState(void);
-extern void fn_80145334(void);
+extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
-extern void fn_8014C540(void);
-extern void fn_8015495C(void);
+extern void dialog_updateScriptState(void);
+extern void equip_applyToCharacter(void);
 extern void fn_8015AC48(void);
-extern void fn_8016DA4C(void);
+extern void debuff_clearStatus(void);
 extern void fn_8016E4C4(void);
 extern void actor_setState(void);
-extern void fn_801765D8(void);
+extern void battle_awardExp(void);
 extern void fn_80178A6C(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
@@ -701,9 +701,9 @@ asm void fn_802E55B0(void)
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     mr r3, r31
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     li r0, 0x2
     stw r0, 0x58c(r31)
     mr r3, r31
@@ -919,7 +919,7 @@ lbl_fn_802E58C8_00000BC4:
     ori r0, r4, 0x8000
     stw r0, 0x12a4(r31)
     mr r3, r31
-    bl fn_801765D8
+    bl battle_awardExp
     mr r3, r31
     bl fn_800EE360
     b lbl_fn_802E58C8_00000BE8
@@ -1445,9 +1445,9 @@ lbl_fn_802E5E94_000012E0:
     bctrl
 lbl_fn_802E5E94_00001300:
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     lfs f2, 0x530(r31)
     lis r3, lbl_80747EA0@ha
     addi r3, r3, lbl_80747EA0@l

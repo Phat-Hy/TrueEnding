@@ -11,7 +11,7 @@ extern void fn_8001B714(void);
 extern void fn_8001BAA4(void);
 extern void fn_8001BC38(void);
 extern void fn_8001BCB4(void);
-extern void fn_8001BE00(void);
+extern void entity_isActive(void);
 extern void fn_8001BEB0(void);
 extern void fn_800281A0(void);
 extern void fn_8003DBA4(void);
@@ -82,7 +82,7 @@ asm void fn_800251B4(void)
     lis r29, lbl_807C68C0@ha
     addi r31, r29, lbl_807C68C0@l
     lwz r3, 0x20(r31)
-    bl fn_8001BE00
+    bl entity_isActive
     cmpwi r3, 0x0
     beq lbl_fn_800251B4_000001DC
     lwz r0, 0x8(r31)
@@ -295,7 +295,7 @@ lbl_fn_80025478_00000308:
     lis r3, lbl_807C68C0@ha
     addi r3, r3, lbl_807C68C0@l
     lwz r3, 0x20(r3)
-    bl fn_8001BE00
+    bl entity_isActive
     cmpwi r3, 0x0
     beq lbl_fn_80025478_00000364
     bl fn_8003DBA4
@@ -726,7 +726,7 @@ asm void fn_80025A68(void)
     lis r29, lbl_807C68C0@ha
     addi r31, r29, lbl_807C68C0@l
     lwz r3, 0x20(r31)
-    bl fn_8001BE00
+    bl entity_isActive
     cmpwi r3, 0x0
     beq lbl_fn_80025A68_00000A90
     lwz r0, 0x8(r31)
@@ -939,7 +939,7 @@ lbl_fn_80025D2C_00000BBC:
     lis r3, lbl_807C68C0@ha
     addi r3, r3, lbl_807C68C0@l
     lwz r3, 0x20(r3)
-    bl fn_8001BE00
+    bl entity_isActive
     cmpwi r3, 0x0
     beq lbl_fn_80025D2C_00000C18
     bl fn_8003DBA4
@@ -1010,7 +1010,7 @@ asm void fn_80025E30(void)
     stw r0, 0x58(r1)
     lwz r3, 0x20(r29)
     stw r0, 0x60(r1)
-    bl fn_8001BE00
+    bl entity_isActive
     cmpwi r3, 0x0
     beq lbl_fn_80025E30_00000FD4
     lis r30, lbl_807C6A40@ha
@@ -1356,7 +1356,7 @@ asm void fn_80026310(void)
     addi r31, r31, lbl_807C68C0@l
     stw r30, 0x48(r1)
     lwz r3, 0x20(r31)
-    bl fn_8001BE00
+    bl entity_isActive
     cmpwi r3, 0x0
     beq lbl_fn_80026310_000011E0
     lwz r0, 0x8(r31)
@@ -1615,7 +1615,7 @@ lbl_fn_80026570_00001500:
     lis r31, lbl_807C68C0@ha
     addi r31, r31, lbl_807C68C0@l
     lwz r3, 0x20(r31)
-    bl fn_8001BE00
+    bl entity_isActive
     cmpwi r3, 0x0
     beq lbl_fn_80026570_00001690
     lwz r3, 0x8c(r30)
@@ -1727,7 +1727,7 @@ lbl_fn_80026570_00001698:
     lis r31, lbl_807C68C0@ha
     addi r31, r31, lbl_807C68C0@l
     lwz r3, 0x20(r31)
-    bl fn_8001BE00
+    bl entity_isActive
     cmpwi r3, 0x0
     beq lbl_fn_80026570_00001770
     lwz r0, 0x30(r31)
@@ -1789,7 +1789,7 @@ lbl_fn_80026570_00001788:
     lis r31, lbl_807C68C0@ha
     addi r31, r31, lbl_807C68C0@l
     lwz r3, 0x20(r31)
-    bl fn_8001BE00
+    bl entity_isActive
     cmpwi r3, 0x0
     beq lbl_fn_80026570_0000186C
     lwz r0, 0x8(r31)
@@ -3220,7 +3220,7 @@ lbl_fn_80027BB0_00002A88:
     lis r30, lbl_807C68C0@ha
     addi r30, r30, lbl_807C68C0@l
     lwz r3, 0x20(r30)
-    bl fn_8001BE00
+    bl entity_isActive
     cmpwi r3, 0x0
     beq lbl_fn_80027BB0_00002AF4
     lwz r0, 0x8(r30)

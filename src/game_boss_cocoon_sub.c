@@ -10,13 +10,13 @@ extern void atn_Anim_getLayerDuration(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8C6C(void);
+extern void scissor_clipFrustum(void);
 extern void clip_calculateFrustum(void);
 extern void magic_dispatchActionCommand(void);
 extern void fn_8012DB04(void);
-extern void fn_80144710(void);
-extern void fn_8015495C(void);
-extern void fn_8016DA4C(void);
+extern void quest_evaluateConditions(void);
+extern void equip_applyToCharacter(void);
+extern void debuff_clearStatus(void);
 extern void fn_8016DDB0(void);
 extern void actor_setState(void);
 extern void fn_80178208(void);
@@ -1796,7 +1796,7 @@ lbl_fn_8045E780_000018E0:
     bl task_findEntryById
     mr r31, r3
     mr r3, r30
-    bl fn_80144710
+    bl quest_evaluateConditions
     lwz r3, lbl_8087F048
     mr r6, r30
     lwz r8, 0x590(r30)
@@ -1806,7 +1806,7 @@ lbl_fn_8045E780_000018E0:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
 lbl_fn_8045E780_00001944:
     lwz r0, 0x164(r1)
     psq_l f31, 0x158(r1), 0, 0
@@ -1853,9 +1853,9 @@ asm void fn_8045EB60(void)
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     mr r3, r30
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     li r0, 0x2
     stw r0, 0x58c(r30)
     mr r3, r30

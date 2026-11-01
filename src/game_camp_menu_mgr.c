@@ -8,24 +8,24 @@ extern void dtor_80084684(void);
 extern void str_assignBuffer(void);
 extern void mem_alloc(void);
 extern void msg_getMessageById(void);
-extern void fn_800CB360(void);
+extern void morph_reset(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB440(void);
+extern void morph_updateWeights(void);
 extern void morph_updateMesh(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void fn_800DBF68(void);
 extern void fn_800DFB40(void);
 extern void fn_800E0908(void);
 extern void fn_80124B60(void);
 extern void fn_801F0544(void);
-extern void fn_801F64D0(void);
+extern void save_createWorkerTask(void);
 extern void fn_801F6C2C(void);
 extern void fn_801F6C38(void);
 extern void save_computeCrc32(void);
-extern void fn_801F837C(void);
+extern void save_findEntryByName(void);
 extern void fn_8020924C(void);
 extern void fn_8021F3E8(void);
 extern void world_setGlobalFlag(void);
@@ -146,7 +146,7 @@ asm void fn_803B6190(void)
     stfs f0, 0x60(r30)
     stw r0, 0x64(r30)
     stfs f0, 0x68(r30)
-    bl fn_800CB360
+    bl morph_reset
     stb r31, 0x70(r30)
     mr r3, r30
     lwz r4, lbl_80885C1C
@@ -162,7 +162,7 @@ asm void fn_803B6190(void)
     stw r31, 0xb0(r30)
     stw r31, 0xb4(r30)
     stw r31, 0x1b8(r30)
-    bl fn_801F64D0
+    bl save_createWorkerTask
     stw r3, 0x48(r30)
     li r4, 0x1
     stb r31, 0x4d(r3)
@@ -217,7 +217,7 @@ asm void fn_803B62C8(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_803B62C8_000001E0
     lwz r3, 0x48(r31)
@@ -546,7 +546,7 @@ lbl_fn_803B6324_00000630:
     bl fn_803E9608
     addi r3, r31, 0x6c
     addi r4, r1, 0x8
-    bl fn_800CB440
+    bl morph_updateWeights
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -1659,7 +1659,7 @@ lbl_fn_803B710C_00001590:
     lwz r3, 0x48(r29)
     addi r4, r30, 0x158
     lwz r5, 0x4(r31)
-    bl fn_801F837C
+    bl save_findEntryByName
     lwz r0, 0x78(r1)
     addi r4, r30, 0x161
     lwz r3, 0x48(r29)
@@ -1670,7 +1670,7 @@ lbl_fn_803B710C_00001590:
 lbl_fn_803B710C_000015FC:
     lwz r5, 0x80(r1)
 lbl_fn_803B710C_00001600:
-    bl fn_801F837C
+    bl save_findEntryByName
     lwz r0, 0x6c(r1)
     lis r4, lbl_8074FD38@ha
     addi r4, r4, lbl_8074FD38@l
@@ -1683,7 +1683,7 @@ lbl_fn_803B710C_00001600:
 lbl_fn_803B710C_00001628:
     lwz r5, 0x74(r1)
 lbl_fn_803B710C_0000162C:
-    bl fn_801F837C
+    bl save_findEntryByName
     lwz r0, 0x60(r1)
     lis r4, lbl_8074FD38@ha
     addi r4, r4, lbl_8074FD38@l
@@ -1696,7 +1696,7 @@ lbl_fn_803B710C_0000162C:
 lbl_fn_803B710C_00001654:
     lwz r5, 0x68(r1)
 lbl_fn_803B710C_00001658:
-    bl fn_801F837C
+    bl save_findEntryByName
     b lbl_fn_803B710C_00001708
 lbl_fn_803B710C_00001660:
     lis r30, lbl_8074FD38@ha
@@ -1709,7 +1709,7 @@ lbl_fn_803B710C_00001660:
     lwz r3, 0x48(r29)
     addi r4, r30, 0x158
     addi r5, r5, 0x4
-    bl fn_801F837C
+    bl save_findEntryByName
     lwz r0, 0x78(r1)
     addi r4, r30, 0x188
     lwz r3, 0x48(r29)
@@ -1720,7 +1720,7 @@ lbl_fn_803B710C_00001660:
 lbl_fn_803B710C_000016A8:
     lwz r5, 0x80(r1)
 lbl_fn_803B710C_000016AC:
-    bl fn_801F837C
+    bl save_findEntryByName
     lwz r0, 0x6c(r1)
     lis r4, lbl_8074FD38@ha
     addi r4, r4, lbl_8074FD38@l
@@ -1733,7 +1733,7 @@ lbl_fn_803B710C_000016AC:
 lbl_fn_803B710C_000016D4:
     lwz r5, 0x74(r1)
 lbl_fn_803B710C_000016D8:
-    bl fn_801F837C
+    bl save_findEntryByName
     lwz r0, 0x60(r1)
     lis r4, lbl_8074FD38@ha
     addi r4, r4, lbl_8074FD38@l
@@ -1746,7 +1746,7 @@ lbl_fn_803B710C_000016D8:
 lbl_fn_803B710C_00001700:
     lwz r5, 0x68(r1)
 lbl_fn_803B710C_00001704:
-    bl fn_801F837C
+    bl save_findEntryByName
 lbl_fn_803B710C_00001708:
     lwz r0, 0x60(r1)
     srwi. r0, r0, 31

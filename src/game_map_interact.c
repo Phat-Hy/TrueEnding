@@ -8,7 +8,7 @@ extern void _restgpr_25(void);
 extern void _savegpr_22(void);
 extern void _savegpr_25(void);
 extern void dtor_80084684(void);
-extern void fn_8000D114(void);
+extern void vec3_set(void);
 extern void vec3_copy(void);
 extern void fn_80041C0C(void);
 extern void fn_80042108(void);
@@ -27,13 +27,13 @@ extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB688(void);
 extern void atn_Task_destructor(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void fn_800D8814(void);
 extern void fn_800F7FD8(void);
 extern void fn_800F833C(void);
 extern void fn_800F84BC(void);
 extern void fn_801125F8(void);
-extern void fn_80179D44(void);
+extern void actor_getMovementFlags(void);
 extern void fn_80185628(void);
 extern void fn_801856A4(void);
 extern void fn_801856AC(void);
@@ -43,15 +43,15 @@ extern void fn_8020B208(void);
 extern void fn_8020B27C(void);
 extern void fn_8021771C(void);
 extern void sound_initGlobalInstances(void);
-extern void fn_80237518(void);
-extern void fn_802375C4(void);
-extern void fn_80237654(void);
-extern void fn_802376D0(void);
+extern void res_MsgHandle_ctor(void);
+extern void res_Resource_destructor(void);
+extern void res_Resource_unload(void);
+extern void res_MsgHandle_isLoading(void);
 extern void fn_8023772C(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_unload(void);
 extern void res_MsgHandle_update(void);
-extern void fn_8023A680(void);
+extern void res_Shader_bindParams(void);
 extern void res_registerResource(void);
 extern void atn_LoadHandle_destructor(void);
 extern void printf(void);
@@ -183,9 +183,9 @@ asm void fn_80183AAC(void)
     li r6, 0x3
     addi r3, r3, 0x10
     bl __destroy_new_array
-    lis r4, fn_802375C4@ha
+    lis r4, res_Resource_destructor@ha
     addi r3, r30, 0x4
-    addi r4, r4, fn_802375C4@l
+    addi r4, r4, res_Resource_destructor@l
     li r5, 0xc
     li r6, 0x1
     bl __destroy_new_array
@@ -292,7 +292,7 @@ lbl_fn_80183B2C_00000184:
 asm void fn_80183C54(void)
 {
     nofralloc
-    b fn_800D3FA4
+    b bloom_processPasses
 }
 
 asm void fn_80183C58(void)
@@ -317,7 +317,7 @@ lbl_fn_80183C58_000001E8:
     lwz r0, 0x54(r28)
     add r3, r0, r31
     addi r3, r3, 0x4
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     beq lbl_fn_80183C58_00000204
     li r30, 0x1
@@ -346,10 +346,7 @@ lbl_fn_80183C58_00000230:
     blr
 }
 
-asm void fn_80183CFC(void)
-{
-    nofralloc
-    blr
+void fn_80183CFC(void) {
 }
 
 asm void fn_80183D00(void)
@@ -543,12 +540,12 @@ asm void fn_80183F88(void)
     nofralloc
     stwu r1, -0x10(r1)
     mflr r0
-    lis r4, fn_80237518@ha
-    lis r5, fn_802375C4@ha
+    lis r4, res_MsgHandle_ctor@ha
+    lis r5, res_Resource_destructor@ha
     stw r0, 0x14(r1)
     li r0, 0x0
-    addi r4, r4, fn_80237518@l
-    addi r5, r5, fn_802375C4@l
+    addi r4, r4, res_MsgHandle_ctor@l
+    addi r5, r5, res_Resource_destructor@l
     stw r31, 0xc(r1)
     mr r31, r3
     li r6, 0xc
@@ -604,7 +601,7 @@ asm void fn_80183FFC(void)
     addi r4, r1, 0x8
     add r3, r0, r28
     addi r3, r3, 0x4
-    bl fn_80237654
+    bl res_Resource_unload
 lbl_fn_80183FFC_000005C8:
     li r26, 0x0
     li r29, 0x0
@@ -953,7 +950,7 @@ lbl_fn_80184188_000009C4:
     lwz r3, lbl_8087F3C0
     li r6, 0x0
     li r7, 0x0
-    bl fn_8023A680
+    bl res_Shader_bindParams
 lbl_fn_80184188_00000A84:
     addi r11, r1, 0xf0
     bl _restgpr_22
@@ -1293,7 +1290,7 @@ lbl_fn_80184864_00000ECC:
 lbl_fn_80184864_00000F44:
     lwz r30, lbl_8087EE98
     mr r3, r29
-    bl fn_80179D44
+    bl actor_getMovementFlags
     mr r7, r3
     mr r3, r30
     mr r4, r28
@@ -1498,7 +1495,7 @@ asm void fn_80184C30(void)
     addi r3, r1, 0x1b8
     fmr f2, f1
     fmr f3, f1
-    bl fn_8000D114
+    bl vec3_set
     mr r4, r3
     addi r3, r30, 0x10
     bl vec3_copy
@@ -1506,7 +1503,7 @@ asm void fn_80184C30(void)
     addi r3, r1, 0x1ac
     lfs f2, lbl_80881D58
     lfs f3, lbl_80881D5C
-    bl fn_8000D114
+    bl vec3_set
     mr r4, r3
     addi r3, r30, 0x1c
     bl vec3_copy
@@ -1514,7 +1511,7 @@ asm void fn_80184C30(void)
     addi r3, r1, 0x1a0
     lfs f2, lbl_80881D64
     lfs f3, lbl_80881D68
-    bl fn_8000D114
+    bl vec3_set
     mr r4, r3
     addi r3, r30, 0x28
     bl vec3_copy
@@ -1539,7 +1536,7 @@ asm void fn_80184C30(void)
     addi r3, r1, 0x194
     fmr f2, f1
     fmr f3, f1
-    bl fn_8000D114
+    bl vec3_set
     mr r4, r3
     addi r3, r30, 0x48
     bl vec3_copy
@@ -1547,7 +1544,7 @@ asm void fn_80184C30(void)
     addi r3, r1, 0x188
     lfs f2, lbl_80881D58
     lfs f3, lbl_80881D74
-    bl fn_8000D114
+    bl vec3_set
     mr r4, r3
     addi r3, r30, 0x54
     bl vec3_copy
@@ -1555,7 +1552,7 @@ asm void fn_80184C30(void)
     addi r3, r1, 0x17c
     lfs f2, lbl_80881D64
     lfs f3, lbl_80881D7C
-    bl fn_8000D114
+    bl vec3_set
     mr r4, r3
     addi r3, r30, 0x60
     bl vec3_copy
@@ -1580,7 +1577,7 @@ asm void fn_80184C30(void)
     addi r3, r1, 0x170
     fmr f2, f1
     fmr f3, f1
-    bl fn_8000D114
+    bl vec3_set
     mr r4, r3
     addi r3, r30, 0x80
     bl vec3_copy
@@ -1588,7 +1585,7 @@ asm void fn_80184C30(void)
     addi r3, r1, 0x164
     lfs f2, lbl_80881D58
     lfs f3, lbl_80881D84
-    bl fn_8000D114
+    bl vec3_set
     mr r4, r3
     addi r3, r30, 0x8c
     bl vec3_copy
@@ -1596,7 +1593,7 @@ asm void fn_80184C30(void)
     addi r3, r1, 0x158
     lfs f2, lbl_80881D64
     lfs f3, lbl_80881D8C
-    bl fn_8000D114
+    bl vec3_set
     mr r4, r3
     addi r3, r30, 0x98
     bl vec3_copy
@@ -1616,7 +1613,7 @@ asm void fn_80184C30(void)
     lfs f3, lbl_80881D94
     addi r3, r1, 0x140
     fmr f2, f1
-    bl fn_8000D114
+    bl vec3_set
     mr r4, r3
     addi r3, r1, 0x14c
     bl fn_800F7FD8
@@ -1663,7 +1660,7 @@ asm void fn_80184C30(void)
     lfs f2, lbl_80881DA0
     addi r3, r1, 0xf8
     lfs f3, lbl_80881DA4
-    bl fn_8000D114
+    bl vec3_set
     mr r4, r3
     addi r3, r1, 0x104
     bl fn_800F7FD8
@@ -1710,7 +1707,7 @@ asm void fn_80184C30(void)
     lfs f3, lbl_80881D94
     addi r3, r1, 0xb0
     fmr f2, f1
-    bl fn_8000D114
+    bl vec3_set
     mr r4, r3
     addi r3, r1, 0xbc
     bl fn_800F7FD8
@@ -1757,7 +1754,7 @@ asm void fn_80184C30(void)
     lfs f2, lbl_80881DA0
     addi r3, r1, 0x68
     lfs f3, lbl_80881DA4
-    bl fn_8000D114
+    bl vec3_set
     mr r4, r3
     addi r3, r1, 0x74
     bl fn_800F7FD8

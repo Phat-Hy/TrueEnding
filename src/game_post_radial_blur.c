@@ -21,15 +21,15 @@ extern void fn_80107A68(void);
 extern void fn_80108C10(void);
 extern void fn_80109828(void);
 extern void fn_8012DF7C(void);
-extern void fn_8013CB68(void);
+extern void npc_updateTalkInteraction(void);
 extern void fn_80148B0C(void);
-extern void fn_8015495C(void);
+extern void equip_applyToCharacter(void);
 extern void fn_8015BAF0(void);
 extern void fn_8015BDD8(void);
 extern void fn_8015E7A0(void);
-extern void fn_8016DA4C(void);
+extern void debuff_clearStatus(void);
 extern void actor_setState(void);
-extern void fn_801765D8(void);
+extern void battle_awardExp(void);
 extern void fn_80178A6C(void);
 extern void task_findEntryById(void);
 extern void fn_802CCFD8(void);
@@ -755,7 +755,7 @@ lbl_fn_802CB8A0_00000960:
     addi r4, r1, 0x124
     fmuls f2, f0, f30
     li r5, 0x0
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
     lfs f3, 0x570(r31)
     lfs f0, lbl_808844A0
     fcmpo cr0, f3, f0
@@ -1176,7 +1176,7 @@ lbl_fn_802CC0F4_00000F84:
     mr r3, r31
     clrrwi r0, r4, 1
     stw r0, 0x5c0(r31)
-    bl fn_801765D8
+    bl battle_awardExp
     mr r3, r31
     bl fn_800EE360
     b lbl_fn_802CC0F4_00000FB4
@@ -1394,7 +1394,7 @@ asm void fn_802CC39C(void)
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
 lbl_fn_802CC39C_000012D0:
     li r0, 0x0
     stw r0, 0x14d0(r31)
@@ -1593,9 +1593,9 @@ asm void fn_802CC708(void)
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     mr r3, r31
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lfs f0, lbl_808843F4
     li r3, 0x2
     li r0, 0x1
@@ -1642,7 +1642,7 @@ asm void fn_802CC708(void)
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     li r0, 0x0
     stw r0, 0x14d0(r31)
 lbl_fn_802CC708_0000164C:

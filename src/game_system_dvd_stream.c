@@ -9,11 +9,11 @@ extern void _savegpr_20(void);
 extern void dtor_80084684(void);
 extern void fn_8004B290(void);
 extern void item_useConsumable(void);
-extern void fn_8004D388(void);
+extern void collision_queryGeometry(void);
 extern void fn_8004ECC0(void);
 extern void collision_testLineSegment(void);
 extern void fn_8006A250(void);
-extern void fn_8006EF48(void);
+extern void script_executeOpcode(void);
 extern void fn_80076FF8(void);
 extern void route_interpolatePath(void);
 extern void fn_80087858(void);
@@ -23,7 +23,7 @@ extern void msg_getMessageString(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_unlink(void);
 extern void str_findChar(void);
-extern void fn_80116FC0(void);
+extern void actor_findSpawnTemplate(void);
 extern void actor_spawnActorWithId(void);
 extern void fn_80117914(void);
 extern void fn_80119ECC(void);
@@ -729,7 +729,7 @@ lbl_fn_803775DC_00000874:
     lwz r4, 0x0(r31)
 lbl_fn_803775DC_00000878:
     li r3, 0x0
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     mr r20, r3
     lwz r3, lbl_8087EEC8
     lfs f1, lbl_80885820
@@ -737,7 +737,7 @@ lbl_fn_803775DC_00000878:
     lfs f2, lbl_808857FC
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     fmr f31, f1
     mr r5, r21
     addi r3, r1, 0x38
@@ -1907,7 +1907,7 @@ lbl_fn_80378D34_000018C4:
     stfs f29, 0x38(r1)
     stfs f29, 0x3c(r1)
     stfs f29, 0x40(r1)
-    bl fn_8004D388
+    bl collision_queryGeometry
     cmpwi r3, 0x0
     beq lbl_fn_80378D34_00001A00
     lfs f3, 0xb4(r1)

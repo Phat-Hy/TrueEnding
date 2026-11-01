@@ -17,7 +17,7 @@ extern void ref_releaseHandle(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void str_findChar(void);
 extern void wcs_vformat(void);
 extern void actor_spawnActorWithId(void);
@@ -25,11 +25,11 @@ extern void magic_dispatchActionCommand(void);
 extern void save_validateHeader(void);
 extern void fn_801F4728(void);
 extern void fn_801F4998(void);
-extern void fn_801F4CB4(void);
+extern void save_formatSlotTitle(void);
 extern void saveSlot_readSummary(void);
 extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
-extern void fn_801FEDBC(void);
+extern void thread_findTaskById(void);
 extern void thread_dispatchToQueue(void);
 extern void fn_804A436C(void);
 extern void fn_804AC734(void);
@@ -134,7 +134,7 @@ asm void fn_804B6204(void)
     mr r4, r3
     mr r3, r31
     li r5, 0x0
-    bl fn_801FEDBC
+    bl thread_findTaskById
     lwz r4, 0x4c(r30)
     addi r3, r29, 0x191
     addi r31, r4, 0x58
@@ -143,7 +143,7 @@ asm void fn_804B6204(void)
     mr r4, r3
     mr r3, r31
     li r5, 0x0
-    bl fn_801FEDBC
+    bl thread_findTaskById
     lwz r4, 0x4c(r30)
     addi r3, r29, 0x199
     addi r31, r4, 0x58
@@ -152,7 +152,7 @@ asm void fn_804B6204(void)
     mr r4, r3
     mr r3, r31
     li r5, 0x0
-    bl fn_801FEDBC
+    bl thread_findTaskById
     lwz r4, 0x4c(r30)
     addi r3, r29, 0x1a1
     addi r29, r4, 0x58
@@ -161,7 +161,7 @@ asm void fn_804B6204(void)
     mr r4, r3
     mr r3, r29
     li r5, 0x0
-    bl fn_801FEDBC
+    bl thread_findTaskById
     lwz r29, 0x4c(r30)
     cmpwi r29, 0x0
     beq lbl_fn_804B6204_000004FC
@@ -184,7 +184,7 @@ lbl_fn_804B6204_000000FC:
     mr r4, r3
     mr r3, r29
     li r5, 0x0
-    bl fn_801FEDBC
+    bl thread_findTaskById
     lwz r29, 0x4c(r30)
     cmpwi r29, 0x0
     beq lbl_fn_804B6204_00000154
@@ -231,7 +231,7 @@ lbl_fn_804B6204_00000164:
     srawi r0, r0, 5
     srwi r5, r0, 31
     add r5, r0, r5
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r4, 0x4c(r30)
     addi r3, r29, 0x1b7
     addi r29, r4, 0x58
@@ -628,10 +628,7 @@ lbl_fn_804B6944_00000768:
     blr
 }
 
-asm void fn_804B6984(void)
-{
-    nofralloc
-    blr
+void fn_804B6984(void) {
 }
 
 asm void fn_804B6988(void)
@@ -971,7 +968,7 @@ asm void fn_804B6DFC(void)
     stw r29, 0x14(r1)
     stw r28, 0x10(r1)
     mr r28, r3
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_804B6DFC_00000CE0
     addi r31, r28, 0x328
@@ -1305,7 +1302,7 @@ lbl_fn_804B6F08_000010A8:
     mr r4, r3
     mr r3, r18
     li r5, 0x1
-    bl fn_801FEDBC
+    bl thread_findTaskById
     lwz r4, 0x250(r19)
     addi r3, r20, 0x14e
     addi r18, r4, 0x58
@@ -1314,7 +1311,7 @@ lbl_fn_804B6F08_000010A8:
     mr r4, r3
     mr r3, r18
     li r5, 0x2
-    bl fn_801FEDBC
+    bl thread_findTaskById
     lwz r4, 0x250(r19)
     addi r3, r20, 0x14e
     addi r18, r4, 0x58
@@ -1323,7 +1320,7 @@ lbl_fn_804B6F08_000010A8:
     mr r4, r3
     mr r3, r18
     li r5, 0x3
-    bl fn_801FEDBC
+    bl thread_findTaskById
 lbl_fn_804B6F08_0000112C:
     lwz r18, 0x24c(r19)
     cmpwi r18, 0x0
@@ -1488,7 +1485,7 @@ lbl_fn_804B6F08_0000133C:
     mr r4, r3
     mr r3, r18
     li r5, 0x0
-    bl fn_801FEDBC
+    bl thread_findTaskById
     lwz r4, 0x284(r19)
     addi r3, r20, 0x161
     addi r18, r4, 0x58
@@ -1497,7 +1494,7 @@ lbl_fn_804B6F08_0000133C:
     mr r4, r3
     mr r3, r18
     li r5, 0x0
-    bl fn_801FEDBC
+    bl thread_findTaskById
     lwz r18, 0x24c(r19)
     cmpwi r18, 0x0
     beq lbl_fn_804B6F08_000013CC
@@ -1590,16 +1587,10 @@ lbl_fn_804B6F08_000014C8:
     blr
 }
 
-asm void fn_804B76EC(void)
-{
-    nofralloc
-    blr
+void fn_804B76EC(void) {
 }
 
-asm void fn_804B76F0(void)
-{
-    nofralloc
-    blr
+void fn_804B76F0(void) {
 }
 
 asm void fn_804B76F4(void)

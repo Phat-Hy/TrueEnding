@@ -4,9 +4,9 @@
 /* External function declarations */
 extern void dtor_80013D60(void);
 extern void dtor_80084684(void);
-extern void fn_8003E4A4(void);
-extern void fn_8004212C(void);
-extern void fn_80057A64(void);
+extern void str_initFromCStr(void);
+extern void str_getData(void);
+extern void mission_updateStub(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
@@ -16,7 +16,7 @@ extern void fn_8006CA80(void);
 extern void route_createSegment(void);
 extern void fn_80088FAC(void);
 extern void node_createNamedChild(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_80092954(void);
 extern void fn_80094958(void);
@@ -42,21 +42,21 @@ extern void fn_800EDFE8(void);
 extern void fn_800EE360(void);
 extern void fn_800F52F0(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8574(void);
-extern void fn_800F8C6C(void);
+extern void viewport_updateCulling(void);
+extern void scissor_clipFrustum(void);
 extern void magic_dispatchActionCommand(void);
 extern void boss_updatePhaseState(void);
-extern void fn_80144710(void);
-extern void fn_80145334(void);
+extern void quest_evaluateConditions(void);
+extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
-extern void fn_8014C540(void);
-extern void fn_80151448(void);
-extern void fn_8015495C(void);
-extern void fn_8016DA4C(void);
+extern void dialog_updateScriptState(void);
+extern void inventory_applyItemStats(void);
+extern void equip_applyToCharacter(void);
+extern void debuff_clearStatus(void);
 extern void fn_8016DDB0(void);
 extern void actor_setState(void);
 extern void fn_80170A20(void);
-extern void fn_801765D8(void);
+extern void battle_awardExp(void);
 extern void fn_80178A6C(void);
 extern void fn_8020A780(void);
 extern void fn_8020A81C(void);
@@ -72,8 +72,8 @@ extern void fn_802CF054(void);
 extern void fn_802CF3AC(void);
 extern void fn_802CF728(void);
 extern void fn_802CFAE4(void);
-extern void fn_8035B694(void);
-extern void fn_8035B78C(void);
+extern void entity_Instance_constructor(void);
+extern void entity_Instance_destructor(void);
 extern void world_getLocalFlag(void);
 extern void fn_803E3384(void);
 extern void boss_getOffset54(void);
@@ -180,7 +180,7 @@ asm void fn_802CCBD4(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r12, 0x0(r30)
     mr r3, r30
     mr r4, r31
@@ -231,9 +231,9 @@ lbl_fn_802CCC24_000000E0:
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     mr r3, r31
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     li r0, 0x2
     stw r0, 0x58c(r31)
     mr r3, r31
@@ -437,7 +437,7 @@ lbl_fn_802CCE94_00000410:
     mr r3, r31
     ori r0, r0, 0x8000
     stw r0, 0x12a4(r31)
-    bl fn_801765D8
+    bl battle_awardExp
     mr r3, r31
     bl fn_800EE360
     b lbl_fn_802CCE94_00000438
@@ -474,7 +474,7 @@ asm void fn_802CCFD8(void)
     stw r28, 0x100(r1)
     mr r28, r3
     lwz r5, 0x20(r5)
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lis r4, lbl_80786B18@ha
     addi r3, r28, 0x14b0
     addi r4, r4, lbl_80786B18@l
@@ -487,13 +487,13 @@ asm void fn_802CCFD8(void)
     stw r29, 0x14c0(r28)
     stw r29, 0x14c4(r28)
     stw r29, 0x14c8(r28)
-    bl fn_80057A64
+    bl mission_updateStub
     addi r3, r28, 0x14d8
-    bl fn_80057A64
+    bl mission_updateStub
     addi r3, r28, 0x14e4
-    bl fn_80057A64
+    bl mission_updateStub
     addi r3, r28, 0x14f0
-    bl fn_80057A64
+    bl mission_updateStub
     lis r4, lbl_807C83C8@ha
     addi r3, r28, 0x14fc
     addi r4, r4, lbl_807C83C8@l
@@ -549,14 +549,14 @@ asm void fn_802CCFD8(void)
     ori r0, r0, 0x40
     stw r0, 0x7ec(r28)
     addi r4, r29, lbl_80746EE0@l
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r29, r29, lbl_80746EE0@l
     addi r3, r1, 0x20
     addi r4, r29, 0x18
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x14
     addi r4, r30, 0x2c
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x74
     addi r4, r29, 0x2b
     li r5, 0x0
@@ -577,7 +577,7 @@ asm void fn_802CCFD8(void)
 lbl_fn_802CCFD8_00000614:
     addi r3, r1, 0x98
     bl fn_800ED4D8
-    bl fn_8004212C
+    bl str_getData
     addi r4, r29, 0x2d
     li r5, 0x8
     bl strncmp
@@ -585,7 +585,7 @@ lbl_fn_802CCFD8_00000614:
     bne lbl_fn_802CCFD8_00000654
     addi r3, r1, 0x98
     bl fn_800ED4D8
-    bl fn_8004212C
+    bl str_getData
     mr r4, r3
     addi r3, r1, 0x20
     addi r4, r4, 0x8
@@ -594,7 +594,7 @@ lbl_fn_802CCFD8_00000614:
 lbl_fn_802CCFD8_00000654:
     addi r3, r1, 0x98
     bl fn_800ED4D8
-    bl fn_8004212C
+    bl str_getData
     addi r4, r29, 0x36
     bl strcmp
     cmpwi r3, 0x0
@@ -624,7 +624,7 @@ lbl_fn_802CCFD8_0000067C:
     addi r5, r1, 0x20
     bl fn_8006AFF8
     addi r3, r1, 0x8
-    bl fn_8004212C
+    bl str_getData
     lwz r12, 0x14b0(r28)
     mr r4, r3
     addi r3, r28, 0x14b0
@@ -686,7 +686,7 @@ asm void fn_802CD2E4(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_802CD2E4_000007B4
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_802CD2E4_000007B4:
     addic. r31, r29, 0x1534
     beq lbl_fn_802CD2E4_000007D4
@@ -713,7 +713,7 @@ lbl_fn_802CD2E4_000007F4:
 lbl_fn_802CD2E4_00000804:
     mr r3, r29
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r30, 0x0
     ble lbl_fn_802CD2E4_00000820
     mr r3, r29
@@ -1272,7 +1272,7 @@ lbl_fn_802CD73C_00000F94:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
     b lbl_fn_802CD73C_00001478
 lbl_fn_802CD73C_00001040:
     cmpwi r0, 0x2
@@ -1392,7 +1392,7 @@ lbl_fn_802CD73C_00001154:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
     b lbl_fn_802CD73C_00001478
 lbl_fn_802CD73C_00001200:
     mr r3, r31
@@ -1427,7 +1427,7 @@ lbl_fn_802CD73C_00001250:
     cror eq, lt, eq
     bne lbl_fn_802CD73C_000012AC
     mr r3, r31
-    bl fn_80144710
+    bl quest_evaluateConditions
     lwz r3, 0x1510(r31)
     bl task_findEntryById
     mr r7, r3
@@ -1439,7 +1439,7 @@ lbl_fn_802CD73C_00001250:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
 lbl_fn_802CD73C_000012AC:
     lwz r0, 0x1554(r31)
     cmpwi r0, 0x0
@@ -1565,9 +1565,9 @@ lbl_fn_802CD73C_0000145C:
     bl fn_802CF3AC
 lbl_fn_802CD73C_00001478:
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     lis r30, lbl_80746EE0@ha
     addi r3, r31, 0xb0
     addi r30, r30, lbl_80746EE0@l
@@ -1798,9 +1798,9 @@ lbl_fn_802CD73C_00001760:
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     mr r3, r31
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     li r0, 0x2
     stw r0, 0x58c(r31)
     mr r3, r31
@@ -1896,7 +1896,7 @@ lbl_fn_802CE430_00001918:
 lbl_fn_802CE430_0000194C:
     mr r3, r30
     mr r4, r31
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r12, 0x0(r30)
     mr r3, r30
     mr r4, r31

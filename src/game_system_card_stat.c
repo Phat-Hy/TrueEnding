@@ -11,13 +11,13 @@ extern void atn_Anim_getLayerDuration(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8C6C(void);
+extern void scissor_clipFrustum(void);
 extern void fn_800FB4B0(void);
 extern void fn_8013322C(void);
 extern void fn_80139560(void);
-extern void fn_80144710(void);
-extern void fn_80145334(void);
-extern void fn_8014C540(void);
+extern void quest_evaluateConditions(void);
+extern void quest_updateFlow(void);
+extern void dialog_updateScriptState(void);
 extern void fn_801513D0(void);
 extern void fn_80155790(void);
 extern void fn_80155A88(void);
@@ -30,7 +30,7 @@ extern void fn_8016D74C(void);
 extern void actor_setState(void);
 extern void fn_80170A20(void);
 extern void fn_80178208(void);
-extern void fn_80179D44(void);
+extern void actor_getMovementFlags(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
@@ -364,9 +364,9 @@ lbl_fn_8035C47C_000003C0:
     mr r3, r31
     bl fn_80139560
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     mr r3, r31
     bl fn_8035DA94
     cmpwi r3, 0x0
@@ -552,7 +552,7 @@ lbl_fn_8035C8CC_000005B8:
     stfs f0, 0x98(r1)
     stfs f5, 0x9c(r1)
     stfs f4, 0xa0(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     oris r7, r3, 0x8000
     mr r3, r28
     mr r5, r30
@@ -621,7 +621,7 @@ lbl_fn_8035C8CC_000006C0:
     stfs f4, 0x40(r1)
     psq_st f1, 0x0(r28), 0, 0
     stfs f2, 0xa0(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     oris r7, r3, 0x8000
     mr r3, r27
     mr r5, r30
@@ -726,7 +726,7 @@ lbl_fn_8035C8CC_0000088C:
     fadds f0, f0, f4
     stfs f3, 0x18(r1)
     stfs f0, 0x24(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     oris r7, r3, 0x8000
     mr r3, r27
     mr r5, r29
@@ -960,7 +960,7 @@ lbl_fn_8035CF78_00000C60:
     cmpwi r0, 0x0
     beq lbl_fn_8035CF78_00000DFC
     mr r3, r31
-    bl fn_80144710
+    bl quest_evaluateConditions
     lwz r3, lbl_8087F048
     mr r6, r31
     lwz r7, 0x638(r31)
@@ -970,7 +970,7 @@ lbl_fn_8035CF78_00000C60:
     lfs f1, lbl_80885610
     li r9, 0x1e
     lwz r10, 0x594(r31)
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     lwz r0, 0x594(r31)
     cmpwi r0, 0x0
     ble lbl_fn_8035CF78_00000DFC
@@ -1295,7 +1295,7 @@ lbl_fn_8035D4E0_00001094:
     stw r0, 0x80(r1)
     stw r0, 0x84(r1)
     stw r0, 0x88(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     oris r7, r3, 0x8000
     mr r3, r30
     mr r5, r31

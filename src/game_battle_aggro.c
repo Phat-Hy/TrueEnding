@@ -7,7 +7,7 @@ extern void _savegpr_27(void);
 extern void fn_80017064(void);
 extern void fn_80044E0C(void);
 extern void fn_8004ECC0(void);
-extern void fn_800697D8(void);
+extern void boss_recordDamage(void);
 extern void fn_801059F8(void);
 extern void fn_80105B3C(void);
 extern void fn_8011BEB8(void);
@@ -18,7 +18,7 @@ extern void fn_801286F0(void);
 extern void fn_80128818(void);
 extern void fn_80128930(void);
 extern void fn_8014C228(void);
-extern void fn_8014DEE4(void);
+extern void dialog_selectChoice(void);
 extern void actor_setState(void);
 extern void fn_801718F8(void);
 extern void world_getGlobalFlag(void);
@@ -58,7 +58,7 @@ extern u32 lbl_808819DC;
 
 /* Function declarations */
 void fn_8016F368(void);
-void fn_8016F3D0(void);
+void battle_canTargetActor(void);
 void fn_8016F4D8(void);
 void fn_8016F530(void);
 void fn_8016F5EC(void);
@@ -103,81 +103,81 @@ lbl_fn_8016F368_00000058:
     blr
 }
 
-asm void fn_8016F3D0(void)
+asm void battle_canTargetActor(void)
 {
     nofralloc
     cmpwi r5, 0x0
-    beq lbl_fn_8016F3D0_000000D0
+    beq lbl_battle_canTargetActor_000000D0
     cmplw r3, r4
-    beq lbl_fn_8016F3D0_000000D0
+    beq lbl_battle_canTargetActor_000000D0
     lwz r6, lbl_8087F610
     cmpwi r6, 0x0
-    beq lbl_fn_8016F3D0_00000098
+    beq lbl_battle_canTargetActor_00000098
     lwz r0, 0x540(r6)
     cmpwi r0, 0x0
-    bne lbl_fn_8016F3D0_00000098
+    bne lbl_battle_canTargetActor_00000098
     li r3, 0x0
     blr
-lbl_fn_8016F3D0_00000098:
+lbl_battle_canTargetActor_00000098:
     lwz r0, 0x7e0(r3)
     rlwinm r0, r0, 0, 30, 30
     cmplwi r0, 0x2
-    beq lbl_fn_8016F3D0_000000C8
+    beq lbl_battle_canTargetActor_000000C8
     lwz r0, 0x7e0(r4)
     rlwinm r0, r0, 0, 30, 30
     cmplwi r0, 0x2
-    beq lbl_fn_8016F3D0_000000C8
+    beq lbl_battle_canTargetActor_000000C8
     lwz r6, lbl_8087F0A8
     lwz r0, 0xcc(r6)
     cmpwi r0, 0x0
-    beq lbl_fn_8016F3D0_000000D0
-lbl_fn_8016F3D0_000000C8:
+    beq lbl_battle_canTargetActor_000000D0
+lbl_battle_canTargetActor_000000C8:
     li r3, 0x0
     blr
-lbl_fn_8016F3D0_000000D0:
+lbl_battle_canTargetActor_000000D0:
     cmpwi r5, 0x0
-    beq lbl_fn_8016F3D0_00000100
+    beq lbl_battle_canTargetActor_00000100
     lwz r5, 0xf14(r3)
     cmpwi r5, 0x0
-    blt lbl_fn_8016F3D0_00000100
+    blt lbl_battle_canTargetActor_00000100
     lwz r0, 0xf14(r4)
     cmpwi r0, 0x0
-    blt lbl_fn_8016F3D0_00000100
+    blt lbl_battle_canTargetActor_00000100
     subf r0, r5, r0
     cntlzw r0, r0
     srwi r3, r0, 5
     blr
-lbl_fn_8016F3D0_00000100:
+lbl_battle_canTargetActor_00000100:
     lwz r6, 0x48(r3)
     li r5, 0x1
     lwz r4, 0x48(r4)
     li r3, 0x1
     cmpw r6, r4
-    beq lbl_fn_8016F3D0_0000013C
+    beq lbl_battle_canTargetActor_0000013C
     cmpwi r6, 0x0
     li r0, 0x0
-    bne lbl_fn_8016F3D0_00000130
+    bne lbl_battle_canTargetActor_00000130
     cmpwi r4, 0x3
-    bne lbl_fn_8016F3D0_00000130
+    bne lbl_battle_canTargetActor_00000130
     li r0, 0x1
-lbl_fn_8016F3D0_00000130:
+lbl_battle_canTargetActor_00000130:
     cmpwi r0, 0x0
-    bne lbl_fn_8016F3D0_0000013C
+    bne lbl_battle_canTargetActor_0000013C
     li r3, 0x0
-lbl_fn_8016F3D0_0000013C:
+lbl_battle_canTargetActor_0000013C:
     cmpwi r3, 0x0
-    bne lbl_fn_8016F3D0_00000168
+    bne lbl_battle_canTargetActor_00000168
     cmpwi r6, 0x3
     li r0, 0x0
-    bne lbl_fn_8016F3D0_0000015C
+    bne lbl_battle_canTargetActor_0000015C
     cmpwi r4, 0x0
-    bne lbl_fn_8016F3D0_0000015C
+    bne lbl_battle_canTargetActor_0000015C
     li r0, 0x1
-lbl_fn_8016F3D0_0000015C:
+lbl_battle_canTargetActor_0000015C:
     cmpwi r0, 0x0
-    bne lbl_fn_8016F3D0_00000168
+    bne lbl_battle_canTargetActor_00000168
     li r5, 0x0
-lbl_fn_8016F3D0_00000168:
+lbl_battle_canTargetActor_00000168:
     mr r3, r5
     blr
 }
@@ -563,7 +563,7 @@ lbl_fn_8016F824_0000066C:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8014DEE4
+    bl dialog_selectChoice
 lbl_fn_8016F824_0000068C:
     lwz r0, 0x12a4(r30)
     extrwi. r0, r0, 1, 26
@@ -823,7 +823,7 @@ lbl_fn_8016F824_000009C4:
     bl sprintf
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x40
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_fn_8016F824_00000A44:
     lwz r0, 0x174(r1)
     lwz r31, 0x16c(r1)
@@ -973,7 +973,7 @@ lbl_fn_8016FDCC_00000C3C:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8014DEE4
+    bl dialog_selectChoice
 lbl_fn_8016FDCC_00000C5C:
     lwz r0, 0x12a4(r30)
     extrwi. r0, r0, 1, 26
@@ -1233,7 +1233,7 @@ lbl_fn_8016FDCC_00000F94:
     bl sprintf
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x40
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_fn_8016FDCC_00001014:
     lwz r0, 0x174(r1)
     lwz r31, 0x16c(r1)
@@ -1320,7 +1320,7 @@ lbl_fn_8017039C_000010C8:
     bl sprintf
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x40
-    bl fn_800697D8
+    bl boss_recordDamage
     b lbl_fn_8017039C_000016A0
 lbl_fn_8017039C_0000114C:
     lwz r5, lbl_8087F430
@@ -1434,7 +1434,7 @@ lbl_fn_8017039C_000012C8:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8014DEE4
+    bl dialog_selectChoice
 lbl_fn_8017039C_000012E8:
     lwz r0, 0x12a4(r30)
     extrwi. r0, r0, 1, 26
@@ -1694,7 +1694,7 @@ lbl_fn_8017039C_00001620:
     bl sprintf
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x140
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_fn_8017039C_000016A0:
     addi r11, r1, 0x270
     bl _restgpr_27
@@ -1821,7 +1821,7 @@ lbl_fn_80170A20_00001844:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8014DEE4
+    bl dialog_selectChoice
 lbl_fn_80170A20_00001864:
     lwz r0, 0x12a4(r31)
     extrwi. r0, r0, 1, 26

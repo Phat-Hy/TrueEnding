@@ -11,8 +11,8 @@ extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void talk_formatQuotedString(void);
-extern void fn_8005BBF8(void);
-extern void fn_8005BCE8(void);
+extern void talk_parseQuotes(void);
+extern void talk_copySpeakerName(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
@@ -26,15 +26,15 @@ extern void fn_800A04A0(void);
 extern void atn_Anim_getDuration(void);
 extern void fn_800A08E0(void);
 extern void str_skipWhitespace(void);
-extern void fn_8015495C(void);
+extern void equip_applyToCharacter(void);
 extern void fn_8016EB48(void);
 extern void fn_80170F20(void);
 extern void fn_802180A8(void);
 extern void kpad_getClampData(void);
 extern void fn_803CD958(void);
-extern void fn_803EC568(void);
-extern void fn_803EC69C(void);
-extern void fn_803EC91C(void);
+extern void task_createWorker(void);
+extern void task_destroyWorker(void);
+extern void task_updateWorker(void);
 extern void fn_8042AB58(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
@@ -622,7 +622,7 @@ lbl_fn_8042952C_0000077C:
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     lwz r3, 0xf8(r28)
     lwz r0, 0x55c(r3)
     cmpwi r0, 0x6
@@ -752,7 +752,7 @@ asm void fn_804296DC(void)
     mr r29, r3
     lwz r5, 0x18(r5)
     lwz r6, 0x1c(r30)
-    bl fn_803EC568
+    bl task_createWorker
     lis r3, lbl_8078E640@ha
     li r31, 0x0
     addi r3, r3, lbl_8078E640@l
@@ -907,7 +907,7 @@ lbl_fn_80429868_00000B30:
     bl __destroy_new_array
     mr r3, r27
     li r4, 0x0
-    bl fn_803EC69C
+    bl task_destroyWorker
     cmpwi r28, 0x0
     ble lbl_fn_80429868_00000B64
     mr r3, r27
@@ -939,7 +939,7 @@ asm void fn_80429964(void)
     mr r21, r3
 lbl_fn_80429964_00000BB0:
     mr r3, r31
-    bl fn_803EC91C
+    bl task_updateWorker
     cmpwi r3, 0x0
     bne lbl_fn_80429964_000010CC
     cmpwi r21, 0x0
@@ -1725,7 +1725,7 @@ asm void fn_8042A360(void)
     addi r4, r4, lbl_807774B8@l
     stw r4, 0x4c(r1)
     la r4, lbl_8087D710
-    bl fn_8005BCE8
+    bl talk_copySpeakerName
     lis r4, __files@ha
     lis r3, lbl_80753768@ha
     mr r19, r15
@@ -2098,7 +2098,7 @@ lbl_fn_8042A360_00001B5C:
     stw r3, 0xfc(r15)
 lbl_fn_8042A360_00001B80:
     addi r3, r1, 0x4c
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_8042A360_00001654
     lmw r14, 0x688(r1)

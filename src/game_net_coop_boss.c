@@ -15,16 +15,16 @@ extern void fn_8005E3E4(void);
 extern void fn_8005E7F4(void);
 extern void fn_8005EDF0(void);
 extern void fn_8005EE38(void);
-extern void fn_80061824(void);
-extern void fn_8006EF48(void);
+extern void skill_calcTrajectory(void);
+extern void script_executeOpcode(void);
 extern void fn_8007FAF0(void);
 extern void mem_alloc(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
 extern void node_createNamedChild(void);
-extern void fn_800897D8(void);
-extern void fn_8008AD4C(void);
-extern void fn_8008B140(void);
+extern void node_destroy(void);
+extern void area_updateZoneState(void);
+extern void map_processTrigger(void);
 extern void fn_80092954(void);
 extern void lockon_updateTarget(void);
 extern void fn_800971D4(void);
@@ -32,7 +32,7 @@ extern void fn_800BDB58(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800D5908(void);
@@ -1052,7 +1052,7 @@ lbl_fn_804A7DD4_00000C2C:
     li r5, 0x1
     lfs f2, lbl_808871D0
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lfs f3, lbl_808871D0
     fmr f2, f31
     lfs f0, lbl_8088724C
@@ -1070,7 +1070,7 @@ lbl_fn_804A7DD4_00000C2C:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
 lbl_fn_804A7DD4_00000C9C:
     lwz r0, 0x124(r1)
     psq_l f31, 0x118(r1), 0, 0
@@ -1385,7 +1385,7 @@ lbl_fn_804A7F18_00001074:
     addi r3, r30, 0x208
     addi r4, r31, 0x105
     li r5, 0x0
-    bl fn_8008AD4C
+    bl area_updateZoneState
     mr r3, r30
     addi r4, r31, 0x11c
     li r5, 0x0
@@ -1465,7 +1465,7 @@ asm void fn_804A83E4(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_804A83E4_00001248
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_804A83E4_00001248:
     addi r3, r30, 0x640
     li r4, -0x1
@@ -1573,11 +1573,11 @@ asm void fn_804A8504(void)
     cmpwi r3, 0x0
     bne lbl_fn_804A8504_000013F0
     mr r3, r30
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_804A8504_000013F0
     addi r3, r30, 0x208
-    bl fn_8008B140
+    bl map_processTrigger
     cmpwi r3, 0x0
     beq lbl_fn_804A8504_000013F4
 lbl_fn_804A8504_000013F0:

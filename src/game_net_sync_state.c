@@ -5,21 +5,21 @@
 extern void _restgpr_26(void);
 extern void _savegpr_26(void);
 extern void fn_80061AE4(void);
-extern void fn_8006EF48(void);
+extern void script_executeOpcode(void);
 extern void msg_getMessageById(void);
 extern void msg_getMessageString(void);
 extern void fn_800C32E0(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB440(void);
+extern void morph_updateWeights(void);
 extern void morph_updateMesh(void);
 extern void str_findChar(void);
 extern void actor_spawnActorWithId(void);
 extern void magic_dispatchActionCommand(void);
 extern void fn_801F4728(void);
-extern void fn_801F4CB4(void);
+extern void save_formatSlotTitle(void);
 extern void saveSlot_readSummary(void);
 extern void thread_findAndNotify(void);
-extern void fn_801FEDBC(void);
+extern void thread_findTaskById(void);
 extern void thread_dispatchToQueue(void);
 extern void fn_804A53D4(void);
 extern void fn_804C54FC(void);
@@ -489,7 +489,7 @@ lbl_fn_804C9EF8_00000558:
     bl fn_800C32E0
     addi r3, r31, 0x174
     addi r4, r1, 0x8
-    bl fn_800CB440
+    bl morph_updateWeights
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -685,7 +685,7 @@ lbl_fn_804CA250_000007F4:
     bl fn_800C32E0
     addi r3, r29, 0x174
     addi r4, r1, 0x8
-    bl fn_800CB440
+    bl morph_updateWeights
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -875,7 +875,7 @@ lbl_fn_804CA250_00000AAC:
     add r5, r5, r0
     li r6, 0x0
     addi r5, r5, 0x1
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r0, 0xec(r29)
     cmpw r30, r0
     beq lbl_fn_804CA250_00000B0C
@@ -1006,7 +1006,7 @@ lbl_fn_804CA250_00000C64:
     mr r4, r3
     mr r3, r28
     li r5, 0x1
-    bl fn_801FEDBC
+    bl thread_findTaskById
     lwz r4, 0x50(r29)
     addi r3, r30, 0x17e
     addi r28, r4, 0x58
@@ -1015,7 +1015,7 @@ lbl_fn_804CA250_00000C64:
     mr r4, r3
     mr r3, r28
     li r5, 0x2
-    bl fn_801FEDBC
+    bl thread_findTaskById
     lwz r4, 0x50(r29)
     addi r3, r30, 0x17e
     addi r28, r4, 0x58
@@ -1024,7 +1024,7 @@ lbl_fn_804CA250_00000C64:
     mr r4, r3
     mr r3, r28
     li r5, 0x3
-    bl fn_801FEDBC
+    bl thread_findTaskById
     lwz r4, 0x50(r29)
     addi r3, r30, 0x186
     addi r28, r4, 0x58
@@ -1033,7 +1033,7 @@ lbl_fn_804CA250_00000C64:
     mr r4, r3
     mr r3, r28
     li r5, 0x1
-    bl fn_801FEDBC
+    bl thread_findTaskById
     lwz r4, 0x50(r29)
     addi r3, r30, 0x186
     addi r28, r4, 0x58
@@ -1042,7 +1042,7 @@ lbl_fn_804CA250_00000C64:
     mr r4, r3
     mr r3, r28
     li r5, 0x2
-    bl fn_801FEDBC
+    bl thread_findTaskById
     lwz r4, 0x50(r29)
     addi r3, r30, 0x186
     addi r28, r4, 0x58
@@ -1051,7 +1051,7 @@ lbl_fn_804CA250_00000C64:
     mr r4, r3
     mr r3, r28
     li r5, 0x3
-    bl fn_801FEDBC
+    bl thread_findTaskById
     b lbl_fn_804CA250_00000E40
 lbl_fn_804CA250_00000D60:
     lwz r4, 0x50(r29)
@@ -1064,7 +1064,7 @@ lbl_fn_804CA250_00000D60:
     mr r4, r3
     mr r3, r28
     li r5, 0x1
-    bl fn_801FEDBC
+    bl thread_findTaskById
     lwz r4, 0x50(r29)
     addi r3, r30, 0x17e
     addi r28, r4, 0x58
@@ -1073,7 +1073,7 @@ lbl_fn_804CA250_00000D60:
     mr r4, r3
     mr r3, r28
     li r5, 0x2
-    bl fn_801FEDBC
+    bl thread_findTaskById
     lwz r4, 0x50(r29)
     addi r3, r30, 0x17e
     addi r28, r4, 0x58
@@ -1082,7 +1082,7 @@ lbl_fn_804CA250_00000D60:
     mr r4, r3
     mr r3, r28
     li r5, 0x3
-    bl fn_801FEDBC
+    bl thread_findTaskById
     lwz r4, 0x50(r29)
     addi r3, r30, 0x186
     addi r28, r4, 0x58
@@ -1091,7 +1091,7 @@ lbl_fn_804CA250_00000D60:
     mr r4, r3
     mr r3, r28
     li r5, 0x1
-    bl fn_801FEDBC
+    bl thread_findTaskById
     lwz r4, 0x50(r29)
     addi r3, r30, 0x186
     addi r28, r4, 0x58
@@ -1100,7 +1100,7 @@ lbl_fn_804CA250_00000D60:
     mr r4, r3
     mr r3, r28
     li r5, 0x2
-    bl fn_801FEDBC
+    bl thread_findTaskById
     lwz r4, 0x50(r29)
     addi r3, r30, 0x186
     addi r28, r4, 0x58
@@ -1109,7 +1109,7 @@ lbl_fn_804CA250_00000D60:
     mr r4, r3
     mr r3, r28
     li r5, 0x3
-    bl fn_801FEDBC
+    bl thread_findTaskById
 lbl_fn_804CA250_00000E40:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
@@ -1742,7 +1742,7 @@ lbl_fn_804CB2F0_00001750:
     addi r4, r28, 0x23f
     addi r5, r5, 0x1
     li r6, 0x0
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r3, lbl_8087F9C0
     lwz r0, 0x30(r3)
     cmpwi r0, 0x0
@@ -1962,7 +1962,7 @@ lbl_fn_804CB2F0_000019EC:
     li r5, 0x1
     lfs f2, lbl_808874E0
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     fcmpo cr0, f31, f1
     ble lbl_fn_804CB2F0_00001A78
     stfs f28, 0x170(r29)

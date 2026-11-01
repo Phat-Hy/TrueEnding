@@ -9,15 +9,15 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_8010CA3C(void);
 extern void fn_801240B4(void);
-extern void fn_8013CB68(void);
+extern void npc_updateTalkInteraction(void);
 extern void fn_80153698(void);
-extern void fn_801539E0(void);
+extern void inventory_unequipItem(void);
 extern void fn_80153B44(void);
-extern void fn_80179D44(void);
+extern void actor_getMovementFlags(void);
 extern void fn_801A4E08(void);
 extern void fn_8036DAF4(void);
 extern void fn_803C1560(void);
-extern void fn_803EA77C(void);
+extern void chest_spawnLoot(void);
 extern void PSMTXRotRad(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
@@ -434,7 +434,7 @@ asm void fn_801B0D88(void)
     srwi. r0, r0, 31
     beq lbl_fn_801B0D88_000004D4
     mr r3, r4
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_801B0D88_000004D4:
     lwz r7, 0x4(r31)
     li r0, 0x1
@@ -484,7 +484,7 @@ lbl_fn_801B0D88_00000554:
     li r6, 0x0
     lfs f1, lbl_808823B0
     lfs f2, lbl_808823C0
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_801B0D88_00000594:
     mr r3, r31
     lwz r31, 0xc(r1)
@@ -538,7 +538,7 @@ asm void fn_801B0ED0(void)
     lwz r28, 0xd0c(r3)
     lwz r31, 0x10d8(r4)
     lwz r30, 0xd04(r3)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lfs f1, lbl_808823CC
     mr r5, r3
     mr r3, r31
@@ -676,7 +676,7 @@ lbl_fn_801B0ED0_00000820:
     fmr f2, f31
     stfs f0, 0x4c(r1)
     lwz r3, 0x4(r27)
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
     psq_l f31, 0x118(r1), 0, 0
     mr r3, r28
     lfd f31, 0x110(r1)
@@ -727,7 +727,7 @@ asm void fn_801B11BC(void)
     srwi. r0, r0, 31
     beq lbl_fn_801B11BC_000008F8
     mr r3, r4
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_801B11BC_000008F8:
     mr r3, r31
     lwz r31, 0xc(r1)
@@ -926,7 +926,7 @@ lbl_fn_801B1230_00000BB4:
     lfs f1, lbl_808823B0
     addi r4, r1, 0x50
     li r5, 0x0
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
     psq_l f31, 0x148(r1), 0, 0
     mr r3, r30
     lfd f31, 0x140(r1)
@@ -988,7 +988,7 @@ lbl_fn_801B151C_00000C90:
     lwz r0, 0x12a4(r3)
     srwi. r0, r0, 31
     beq lbl_fn_801B151C_00000CAC
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_801B151C_00000CAC:
     li r0, 0x1
     stw r0, 0x34c(r31)
@@ -1164,7 +1164,7 @@ lbl_fn_801B1624_00000EF4:
     psq_st f1, 0x0(r31), 0, 0
     lfs f1, lbl_808823B0
     addi r4, r3, 0x534
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
     addi r3, r1, 0x5c
     lwz r4, 0x4(r29)
     psq_l f1, 0x0(r3), 0, 0
@@ -1190,7 +1190,7 @@ lbl_fn_801B1624_00000F54:
     lwz r4, lbl_8087F430
     mr r3, r30
     lwz r31, 0x10d8(r4)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lwz r6, 0xd0c(r30)
     mr r5, r3
     lwz r7, 0xd04(r30)
@@ -1209,7 +1209,7 @@ lbl_fn_801B1624_00000FC4:
     lfs f1, lbl_808823B0
     lfs f2, lbl_808823C4
     addi r4, r3, 0x534
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
     mr r3, r30
 lbl_fn_801B1624_00000FE0:
     lwz r0, 0x114(r1)
@@ -1326,7 +1326,7 @@ asm void fn_801B19E4(void)
     li r5, 0xc
     lfs f2, lbl_808823C0
     li r6, 0x0
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_801B19E4_00001170:
     mr r3, r30
     lwz r31, 0xc(r1)
@@ -1486,7 +1486,7 @@ lbl_fn_801B1AAC_0000135C:
     lwz r4, lbl_8087F430
     mr r3, r31
     lwz r29, 0x10d8(r4)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lwz r6, 0xd0c(r31)
     mr r5, r3
     lwz r7, 0xd04(r31)
@@ -1586,7 +1586,7 @@ lbl_fn_801B1AAC_000014CC:
     lwz r3, 0x4(r30)
     lfs f0, 0x568(r3)
     fmuls f2, f31, f0
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
     lwz r0, 0x14(r30)
     cmpwi r0, 0x1
     bne lbl_fn_801B1AAC_000015C8
@@ -1689,7 +1689,7 @@ asm void fn_801B1F4C(void)
     addi r30, r3, 0xb0
     srwi. r0, r0, 31
     beq lbl_fn_801B1F4C_000016A4
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_801B1F4C_000016A4:
     li r0, 0x1
     stw r0, 0x34c(r30)
@@ -1874,7 +1874,7 @@ lbl_fn_801B1F4C_00001938:
     lfs f1, lbl_808823B0
     li r6, 0x0
     lfs f2, lbl_808823C0
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_801B1F4C_0000195C:
     psq_l f31, 0x118(r1), 0, 0
     mr r3, r29

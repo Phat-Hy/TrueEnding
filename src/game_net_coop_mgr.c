@@ -13,24 +13,24 @@ extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void fn_80087BB4(void);
 extern void node_createNamedChild(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void msg_getMessageById(void);
 extern void msg_getMessageString(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB440(void);
+extern void morph_updateWeights(void);
 extern void fn_800CB518(void);
 extern void morph_updateMesh(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void str_findChar(void);
 extern void actor_spawnActorWithId(void);
 extern void fn_80124B60(void);
 extern void save_validateHeader(void);
 extern void saveSlot_readSummary(void);
-extern void fn_801F64D0(void);
+extern void save_createWorkerTask(void);
 extern void fn_801F6C10(void);
 extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
@@ -138,7 +138,7 @@ asm void fn_804A2078(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_804A2078_0000006C
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_804A2078_0000006C:
     addi r3, r30, 0x23c
     li r4, -0x1
@@ -310,10 +310,7 @@ lbl_fn_804A2294_000002AC:
     blr
 }
 
-asm void fn_804A2338(void)
-{
-    nofralloc
-    blr
+void fn_804A2338(void) {
 }
 
 asm void fn_804A233C(void)
@@ -408,7 +405,7 @@ lbl_fn_804A233C_000003CC:
     bl skin_playAnimationByName
     addi r3, r31, 0x23c
     addi r4, r1, 0x8
-    bl fn_800CB440
+    bl morph_updateWeights
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -961,7 +958,7 @@ lbl_fn_804A2A34_00000AFC:
 lbl_fn_804A2A34_00000B40:
     mr r3, r31
     mr r4, r29
-    bl fn_801F64D0
+    bl save_createWorkerTask
     add r5, r31, r28
     li r4, 0x1
     stw r3, 0x8c(r5)
@@ -1044,7 +1041,7 @@ lbl_fn_804A2C98_00000C58:
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_804A2C98_00000C7C
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_804A2C98_00000C7C:
     mr r3, r30
     li r4, 0x0
@@ -1074,7 +1071,7 @@ asm void fn_804A2D2C(void)
     stw r30, 0x18(r1)
     stw r29, 0x14(r1)
     stw r28, 0x10(r1)
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_804A2D2C_00000EFC
     lwz r3, 0x50(r31)

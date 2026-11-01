@@ -4,14 +4,14 @@
 /* External function declarations */
 extern void _restgpr_24(void);
 extern void _savegpr_24(void);
-extern void fn_800BFAC8(void);
+extern void motion_updateFogAdj(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CFD18(void);
 extern void fn_801F6C2C(void);
 extern void fn_801F6D7C(void);
 extern void fn_801F791C(void);
-extern void fn_801F837C(void);
+extern void save_findEntryByName(void);
 extern void fn_80213E60(void);
 extern void kpad_getClampData(void);
 extern void fn_8044E88C(void);
@@ -1272,7 +1272,7 @@ lbl_fn_8044F96C_00001044:
     lwz r4, lbl_8087EFB4
     addi r3, r1, 0x8
     addi r5, r29, 0x8
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f0, lbl_80886B3C
     lfs f1, 0x10(r1)
     fcmpo cr0, f0, f1
@@ -1608,7 +1608,7 @@ lbl_fn_8044F96C_000014E8:
     lwz r4, 0x0(r28)
     mr r3, r25
     mr r5, r27
-    bl fn_801F837C
+    bl save_findEntryByName
     addi r24, r24, 0x1
     addi r28, r28, 0x4
     cmpwi r24, 0x7
@@ -1662,12 +1662,12 @@ lbl_fn_8044F96C_00001584:
 lbl_fn_8044F96C_000015B0:
     mr r4, r28
     mr r5, r27
-    bl fn_801F837C
+    bl save_findEntryByName
     b lbl_fn_8044F96C_000015CC
 lbl_fn_8044F96C_000015C0:
     mr r4, r28
     la r5, lbl_8087E028
-    bl fn_801F837C
+    bl save_findEntryByName
 lbl_fn_8044F96C_000015CC:
     addi r24, r24, 0x1
     addi r30, r30, 0x4
@@ -1797,13 +1797,13 @@ lbl_fn_8044F96C_00001780:
     lwz r4, 0x0(r30)
     mr r3, r27
     addi r5, r29, 0x6c
-    bl fn_801F837C
+    bl save_findEntryByName
     b lbl_fn_8044F96C_000017A4
 lbl_fn_8044F96C_00001794:
     lwz r4, 0x0(r30)
     mr r3, r27
     la r5, lbl_8087E028
-    bl fn_801F837C
+    bl save_findEntryByName
 lbl_fn_8044F96C_000017A4:
     addi r24, r24, 0x1
     addi r30, r30, 0x4
@@ -1993,13 +1993,13 @@ lbl_fn_8044F96C_00001A20:
     lwz r4, 0x0(r30)
     mr r3, r27
     addi r5, r29, 0x6c
-    bl fn_801F837C
+    bl save_findEntryByName
     b lbl_fn_8044F96C_00001A44
 lbl_fn_8044F96C_00001A34:
     lwz r4, 0x0(r30)
     mr r3, r27
     la r5, lbl_8087E028
-    bl fn_801F837C
+    bl save_findEntryByName
 lbl_fn_8044F96C_00001A44:
     addi r24, r24, 0x1
     addi r30, r30, 0x4
@@ -2068,7 +2068,7 @@ lbl_fn_8044F96C_00001B1C:
     lwz r4, 0x0(r28)
     mr r3, r27
     addi r5, r29, 0x2c
-    bl fn_801F837C
+    bl save_findEntryByName
     addi r24, r24, 0x1
     addi r28, r28, 0x4
     cmpwi r24, 0x3

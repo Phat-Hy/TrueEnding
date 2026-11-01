@@ -13,14 +13,14 @@ extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void str_findChar(void);
 extern void wcs_vformat(void);
 extern void actor_spawnActorWithId(void);
 extern void fn_80124BFC(void);
 extern void save_validateHeader(void);
 extern void thread_findAndNotify(void);
-extern void fn_801FEDBC(void);
+extern void thread_findTaskById(void);
 extern void thread_dispatchToQueue(void);
 extern void fn_804C4530(void);
 extern void fn_804E4A24(void);
@@ -198,7 +198,7 @@ lbl_fn_804C2994_0000013C:
     li r5, 0x0
     lfd f0, 0x50(r1)
     fsubs f1, f0, f1
-    bl fn_801FEDBC
+    bl thread_findTaskById
     addi r0, r30, 0x35d8
     lwz r4, 0x70(r26)
     xoris r3, r0, 0x8000
@@ -218,7 +218,7 @@ lbl_fn_804C2994_0000013C:
     li r5, 0x0
     lfd f0, 0x58(r1)
     fsubs f1, f0, f1
-    bl fn_801FEDBC
+    bl thread_findTaskById
     addi r3, r30, 0x35d8
     lwz r5, 0x70(r26)
     xoris r4, r3, 0x8000
@@ -726,7 +726,7 @@ asm void fn_804C3220(void)
     stw r30, 0x18(r1)
     stw r29, 0x14(r1)
     stw r28, 0x10(r1)
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_804C3220_00000C38
     addi r29, r31, 0x54
@@ -1191,16 +1191,10 @@ lbl_fn_804C35F0_00000F04:
     blr
 }
 
-asm void fn_804C38B8(void)
-{
-    nofralloc
-    blr
+void fn_804C38B8(void) {
 }
 
-asm void fn_804C38BC(void)
-{
-    nofralloc
-    blr
+void fn_804C38BC(void) {
 }
 
 asm void fn_804C38C0(void)

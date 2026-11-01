@@ -5,18 +5,18 @@
 extern void _restgpr_26(void);
 extern void _savegpr_26(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_80097D40(void);
+extern void atn_Anim_getLayerTrack(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void fn_800EFF04(void);
 extern void system_getNextSequenceId(void);
 extern void fn_80106878(void);
-extern void fn_8013CB68(void);
+extern void npc_updateTalkInteraction(void);
 extern void fn_801446F0(void);
 extern void fn_802097C4(void);
 extern void task_findEntryById(void);
-extern void fn_803EA77C(void);
+extern void chest_spawnLoot(void);
 extern void fn_80441E8C(void);
 extern void atn_LoadHandle_getName(void);
 extern void PSMTXRotRad(void);
@@ -176,7 +176,7 @@ lbl_fn_8018CAEC_00000118:
     lwz r3, 0x4(r31)
     addi r3, r3, 0xb0
     lwz r4, 0x22c(r3)
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     bl atn_LoadHandle_getName
     bl fn_802097C4
     stw r3, 0x8(r31)
@@ -195,7 +195,7 @@ lbl_fn_8018CAEC_00000118:
     li r6, 0x0
     lfs f1, lbl_80881EC4
     lfs f2, lbl_80881EB0
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_8018CAEC_0000017C:
     mr r3, r31
     lwz r31, 0xc(r1)
@@ -501,7 +501,7 @@ lbl_fn_8018CEF8_000005D4:
     lwz r3, 0x4(r31)
     addi r3, r3, 0xb0
     lwz r4, 0x22c(r3)
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     bl atn_LoadHandle_getName
     bl fn_802097C4
     stw r3, 0x8(r31)
@@ -520,7 +520,7 @@ lbl_fn_8018CEF8_000005D4:
     li r6, 0x0
     lfs f1, lbl_80881EC4
     lfs f2, lbl_80881EB0
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_8018CEF8_00000630:
     lis r3, lbl_80738F68@ha
     lwz r5, 0x4(r31)
@@ -963,7 +963,7 @@ lbl_fn_8018D4AC_00000C34:
     stfs f2, 0x5c(r1)
     lwz r4, 0x22c(r3)
     stfs f2, 0x68(r1)
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     bl atn_LoadHandle_getName
     bl fn_802097C4
     lwz r0, 0x1c(r30)
@@ -996,7 +996,7 @@ lbl_fn_8018D4AC_00000CBC:
     li r6, 0x0
     lfs f1, lbl_80881EC4
     lfs f2, lbl_80881EB0
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_8018D4AC_00000CFC:
     lis r3, lbl_80738F68@ha
     lwz r5, 0x4(r30)
@@ -1269,7 +1269,7 @@ asm void fn_8018DAE4(void)
     lwz r3, 0x4(r31)
     addi r3, r3, 0xb0
     lwz r4, 0x22c(r3)
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     bl atn_LoadHandle_getName
     bl fn_802097C4
     stw r3, 0x8(r31)
@@ -1354,7 +1354,7 @@ asm void fn_8018DAE4(void)
     li r6, 0x0
     lfs f1, lbl_80881EC4
     lfs f2, lbl_80881EB0
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_8018DAE4_00001238:
     mr r3, r31
     lwz r31, 0x6c(r1)
@@ -1645,7 +1645,7 @@ lbl_fn_8018DD34_00001610:
     lwz r3, 0x4(r31)
     lfs f0, 0x568(r3)
     fmuls f2, f31, f0
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
 lbl_fn_8018DD34_00001674:
     lfs f3, 0x38(r31)
     lfs f0, lbl_80881EF4
@@ -1850,10 +1850,7 @@ lbl_fn_8018DD34_0000191C:
     blr
 }
 
-asm void fn_8018E434(void)
-{
-    nofralloc
-    blr
+void fn_8018E434(void) {
 }
 
 asm void fn_8018E438(void)
@@ -1939,7 +1936,7 @@ lbl_fn_8018E438_00001A74:
     lwz r3, 0x4(r31)
     addi r3, r3, 0xb0
     lwz r4, 0x22c(r3)
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     bl atn_LoadHandle_getName
     bl fn_802097C4
     stw r3, 0x8(r31)

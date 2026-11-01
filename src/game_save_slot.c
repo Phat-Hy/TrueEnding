@@ -25,7 +25,7 @@ extern void fn_801FDA20(void);
 extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
 extern void fn_801FED70(void);
-extern void fn_801FEDBC(void);
+extern void thread_findTaskById(void);
 extern void thread_dispatchToQueue(void);
 extern void fn_801FEEFC(void);
 extern void fn_801FEF40(void);
@@ -34,7 +34,7 @@ extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_80473F88(void);
+extern void shockwave_freeEmitter(void);
 extern void __construct_new_array(void);
 extern void __destroy_new_array(void);
 
@@ -64,12 +64,12 @@ void fn_801F45F4(void);
 void fn_801F465C(void);
 void fn_801F4728(void);
 void fn_801F4818(void);
-void fn_801F48C8(void);
+void save_parseSlotStats(void);
 void fn_801F4998(void);
 void fn_801F4AA0(void);
 void fn_801F4B4C(void);
 void fn_801F4C14(void);
-void fn_801F4CB4(void);
+void save_formatSlotTitle(void);
 void fn_801F4D80(void);
 void fn_801F4DDC(void);
 void fn_801F4E30(void);
@@ -177,7 +177,7 @@ lbl_saveSlot_updateLoadState_000000C4:
     addi r3, r30, 0x48
     bl fn_801EFB00
     addi r3, r30, 0xf0
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     lwz r0, 0xfc(r30)
     srawi. r0, r0, 31
     beq lbl_saveSlot_updateLoadState_00000158
@@ -577,7 +577,7 @@ asm void fn_801F4818(void)
     blr
 }
 
-asm void fn_801F48C8(void)
+asm void save_parseSlotStats(void)
 {
     nofralloc
     stwu r1, -0x30(r1)
@@ -661,7 +661,7 @@ asm void fn_801F4998(void)
     lfd f0, 0x8(r1)
     li r5, 0x0
     fsubs f1, f0, f1
-    bl fn_801FEDBC
+    bl thread_findTaskById
     mr r3, r29
     bl str_findChar
     extrwi r0, r30, 8, 8
@@ -672,7 +672,7 @@ asm void fn_801F4998(void)
     addi r3, r28, 0x58
     li r5, 0x1
     fsubs f1, f0, f1
-    bl fn_801FEDBC
+    bl thread_findTaskById
     mr r3, r29
     bl str_findChar
     extrwi r0, r30, 8, 16
@@ -683,7 +683,7 @@ asm void fn_801F4998(void)
     addi r3, r28, 0x58
     li r5, 0x2
     fsubs f1, f0, f1
-    bl fn_801FEDBC
+    bl thread_findTaskById
     mr r3, r29
     bl str_findChar
     clrlwi r0, r30, 24
@@ -694,7 +694,7 @@ asm void fn_801F4998(void)
     addi r3, r28, 0x58
     li r5, 0x3
     fsubs f1, f0, f1
-    bl fn_801FEDBC
+    bl thread_findTaskById
     lwz r0, 0x34(r1)
     lwz r31, 0x2c(r1)
     lwz r30, 0x28(r1)
@@ -727,21 +727,21 @@ asm void fn_801F4AA0(void)
     mr r4, r3
     addi r3, r30, 0x58
     li r5, 0x1
-    bl fn_801FEDBC
+    bl thread_findTaskById
     mr r3, r31
     bl str_findChar
     fmr f1, f30
     mr r4, r3
     addi r3, r30, 0x58
     li r5, 0x2
-    bl fn_801FEDBC
+    bl thread_findTaskById
     mr r3, r31
     bl str_findChar
     fmr f1, f31
     mr r4, r3
     addi r3, r30, 0x58
     li r5, 0x3
-    bl fn_801FEDBC
+    bl thread_findTaskById
     lwz r0, 0x34(r1)
     lfd f31, 0x28(r1)
     lfd f30, 0x20(r1)
@@ -776,7 +776,7 @@ asm void fn_801F4B4C(void)
     mr r4, r3
     addi r3, r29, 0x58
     li r5, 0x1
-    bl fn_801FEDBC
+    bl thread_findTaskById
     lfs f1, lbl_80882C88
     mr r3, r30
     lfs f0, 0x4(r31)
@@ -786,7 +786,7 @@ asm void fn_801F4B4C(void)
     mr r4, r3
     addi r3, r29, 0x58
     li r5, 0x2
-    bl fn_801FEDBC
+    bl thread_findTaskById
     lfs f1, lbl_80882C88
     mr r3, r30
     lfs f0, 0x8(r31)
@@ -796,7 +796,7 @@ asm void fn_801F4B4C(void)
     mr r4, r3
     addi r3, r29, 0x58
     li r5, 0x3
-    bl fn_801FEDBC
+    bl thread_findTaskById
     lwz r0, 0x34(r1)
     psq_l f31, 0x28(r1), 0, 0
     lfd f31, 0x20(r1)
@@ -856,7 +856,7 @@ lbl_fn_801F4C14_00000A68:
     blr
 }
 
-asm void fn_801F4CB4(void)
+asm void save_formatSlotTitle(void)
 {
     nofralloc
     stwu r1, -0x260(r1)
@@ -869,16 +869,16 @@ asm void fn_801F4CB4(void)
     mr r30, r4
     stw r29, 0x254(r1)
     mr r29, r3
-    ble lbl_fn_801F4CB4_00000ACC
+    ble lbl_save_formatSlotTitle_00000ACC
     lis r4, lbl_80782C40@ha
     mr r5, r6
     addi r3, r1, 0x8
     addi r4, r4, lbl_80782C40@l
     crclr 6
     bl wcs_vformat
-    b lbl_fn_801F4CB4_00000B08
-lbl_fn_801F4CB4_00000ACC:
-    bge lbl_fn_801F4CB4_00000AF0
+    b lbl_save_formatSlotTitle_00000B08
+lbl_save_formatSlotTitle_00000ACC:
+    bge lbl_save_formatSlotTitle_00000AF0
     lis r4, lbl_80782C40@ha
     addi r3, r1, 0x8
     addi r4, r4, lbl_80782C40@l
@@ -886,15 +886,15 @@ lbl_fn_801F4CB4_00000ACC:
     addi r4, r4, 0xe
     crclr 6
     bl wcs_vformat
-    b lbl_fn_801F4CB4_00000B08
-lbl_fn_801F4CB4_00000AF0:
+    b lbl_save_formatSlotTitle_00000B08
+lbl_save_formatSlotTitle_00000AF0:
     lis r4, lbl_80782C40@ha
     addi r3, r1, 0x8
     addi r4, r4, lbl_80782C40@l
     addi r4, r4, 0x1e
     crclr 6
     bl wcs_vformat
-lbl_fn_801F4CB4_00000B08:
+lbl_save_formatSlotTitle_00000B08:
     mr r5, r31
     addi r3, r1, 0x48
     addi r4, r1, 0x8
@@ -1532,7 +1532,7 @@ lbl_fn_801F54CC_0000135C:
     addi r3, r3, 0x58
     lwz r4, 0x4(r29)
     extsb r5, r5
-    bl fn_801FEDBC
+    bl thread_findTaskById
     b lbl_fn_801F54CC_00001390
 lbl_fn_801F54CC_0000137C:
     lwz r3, 0x48(r31)

@@ -7,11 +7,11 @@ extern void _savegpr_27(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8574(void);
+extern void viewport_updateCulling(void);
 extern void actor_setState(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
-extern void fn_8023A680(void);
+extern void res_Shader_bindParams(void);
 extern void fn_8033E8D4(void);
 extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
@@ -199,7 +199,7 @@ asm void fn_8033F7FC(void)
     lwz r3, lbl_8087F3C0
     li r9, 0x0
     li r10, 0x0
-    bl fn_8023A680
+    bl res_Shader_bindParams
     mr r3, r31
     li r4, 0x6
     bl actor_setState
@@ -381,7 +381,7 @@ lbl_fn_8033F7FC_00000334:
     lwz r3, lbl_8087F3C0
     li r9, 0x0
     li r10, 0x0
-    bl fn_8023A680
+    bl res_Shader_bindParams
     b lbl_fn_8033F7FC_00000A4C
 lbl_fn_8033F7FC_0000052C:
     cmpwi r6, 0x3
@@ -539,7 +539,7 @@ lbl_fn_8033F7FC_00000638:
     li r8, 0x0
     lis r9, 0x100
     li r10, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
     addi r27, r27, 0x1
     cmpwi r27, 0x3
     blt lbl_fn_8033F7FC_00000638

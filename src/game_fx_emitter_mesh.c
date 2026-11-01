@@ -2,7 +2,7 @@
 #pragma function_align 4
 
 /* External function declarations */
-extern void fn_8000D0F8(void);
+extern void mtx_getTranslation(void);
 extern void vec3_copy(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void mem_realloc(void);
@@ -14,16 +14,16 @@ extern void atn_Task_setActive(void);
 extern void system_getNextSequenceId(void);
 extern void fn_80133130(void);
 extern void fn_8013322C(void);
-extern void fn_80145334(void);
-extern void fn_80148990(void);
+extern void quest_updateFlow(void);
+extern void quest_ctorRewardItem(void);
 extern void dialog_renderWindow(void);
-extern void fn_8014C540(void);
-extern void fn_80151448(void);
+extern void dialog_updateScriptState(void);
+extern void inventory_applyItemStats(void);
 extern void fn_80168E60(void);
 extern void actor_setState(void);
-extern void fn_80179D44(void);
+extern void actor_getMovementFlags(void);
 extern void task_findEntryById(void);
-extern void fn_802376D0(void);
+extern void res_MsgHandle_isLoading(void);
 extern void res_findResourceSlot(void);
 extern void fn_8028ADF4(void);
 extern void fn_8028B47C(void);
@@ -121,11 +121,11 @@ asm void fn_80288DD8(void)
     li r31, 0x0
     stw r30, 0x8(r1)
     mr r30, r3
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_80288DD8_00000038
     addi r3, r30, 0xc
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     beq lbl_fn_80288DD8_0000003C
 lbl_fn_80288DD8_00000038:
@@ -176,7 +176,7 @@ lbl_fn_80288E38_000000AC:
     li r4, 0x1
     bl atn_Task_setActive
     lwz r3, 0x1630(r31)
-    bl fn_80145334
+    bl quest_updateFlow
     lwz r3, 0x1630(r31)
     lwz r0, 0x5c0(r3)
     clrrwi r0, r0, 1
@@ -307,7 +307,7 @@ lbl_fn_80288E38_00000244:
     mr r3, r31
     lwz r4, lbl_8087F430
     lwz r29, 0x10d8(r4)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lfs f1, lbl_80883AC0
     mr r5, r3
     mr r3, r29
@@ -893,9 +893,9 @@ lbl_fn_80288E38_00000B50:
     bl fn_8028B47C
 lbl_fn_80288E38_00000B60:
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     lwz r0, 0x314(r1)
     psq_l f31, 0x308(r1), 0, 0
     lfd f31, 0x300(r1)
@@ -960,7 +960,7 @@ lbl_fn_80289978_00000C1C:
 lbl_fn_80289978_00000C34:
     mr r3, r31
     mr r4, r29
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r12, 0x0(r31)
     mr r3, r31
     mr r4, r29
@@ -1383,7 +1383,7 @@ asm void fn_8028A024(void)
     stw r30, 0x78(r1)
     mr r30, r3
     addi r3, r1, 0x5c
-    bl fn_80148990
+    bl quest_ctorRewardItem
     lfs f0, lbl_80883B04
     lis r31, lbl_80745314@ha
     addi r31, r31, lbl_80745314@l
@@ -1393,7 +1393,7 @@ asm void fn_8028A024(void)
     bl atn_Model_getBoneMatrix
     mr r4, r3
     addi r3, r1, 0x50
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     addi r3, r1, 0x60
     addi r4, r1, 0x50
     bl vec3_copy
@@ -1407,7 +1407,7 @@ asm void fn_8028A024(void)
     bl atn_Model_getBoneMatrix
     mr r4, r3
     addi r3, r1, 0x44
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     addi r3, r1, 0x60
     addi r4, r1, 0x44
     bl vec3_copy
@@ -1421,7 +1421,7 @@ asm void fn_8028A024(void)
     bl atn_Model_getBoneMatrix
     mr r4, r3
     addi r3, r1, 0x38
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     addi r3, r1, 0x60
     addi r4, r1, 0x38
     bl vec3_copy
@@ -1435,7 +1435,7 @@ asm void fn_8028A024(void)
     bl atn_Model_getBoneMatrix
     mr r4, r3
     addi r3, r1, 0x2c
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     addi r3, r1, 0x60
     addi r4, r1, 0x2c
     bl vec3_copy
@@ -1449,7 +1449,7 @@ asm void fn_8028A024(void)
     bl atn_Model_getBoneMatrix
     mr r4, r3
     addi r3, r1, 0x20
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     addi r3, r1, 0x60
     addi r4, r1, 0x20
     bl vec3_copy
@@ -1463,7 +1463,7 @@ asm void fn_8028A024(void)
     bl atn_Model_getBoneMatrix
     mr r4, r3
     addi r3, r1, 0x14
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     addi r3, r1, 0x60
     addi r4, r1, 0x14
     bl vec3_copy
@@ -1477,7 +1477,7 @@ asm void fn_8028A024(void)
     bl atn_Model_getBoneMatrix
     mr r4, r3
     addi r3, r1, 0x8
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     addi r3, r1, 0x60
     addi r4, r1, 0x8
     bl vec3_copy
@@ -1524,9 +1524,9 @@ lbl_fn_8028A1F8_0000145C:
     la r6, lbl_8087D9E0
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     li r5, 0x0
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r6, 0x14
     li r7, 0x8
     bl runtime_registerStaticObject
@@ -1638,9 +1638,9 @@ lbl_fn_8028A1F8_000015FC:
     addi r3, r3, 0x10
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     mr r7, r29
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r5, 0x0
     li r6, 0x14
     bl runtime_registerStaticObject

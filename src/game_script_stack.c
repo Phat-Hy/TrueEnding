@@ -25,15 +25,15 @@ extern void fn_8010CB2C(void);
 extern void fn_8012D8B8(void);
 extern void fn_8013322C(void);
 extern void boss_updatePhaseState(void);
-extern void fn_80144710(void);
-extern void fn_80145334(void);
-extern void fn_8014C540(void);
-extern void fn_8015495C(void);
+extern void quest_evaluateConditions(void);
+extern void quest_updateFlow(void);
+extern void dialog_updateScriptState(void);
+extern void equip_applyToCharacter(void);
 extern void fn_801603CC(void);
-extern void fn_8016DA4C(void);
+extern void debuff_clearStatus(void);
 extern void actor_setState(void);
 extern void fn_8017547C(void);
-extern void fn_801765D8(void);
+extern void battle_awardExp(void);
 extern void fn_80176ACC(void);
 extern void fn_80178A6C(void);
 extern void task_mapIdToQueue(void);
@@ -47,8 +47,8 @@ extern void res_registerResource(void);
 extern void fn_80247DA4(void);
 extern void fn_80247FB0(void);
 extern void fn_8024845C(void);
-extern void fn_8035B694(void);
-extern void fn_8035B78C(void);
+extern void entity_Instance_constructor(void);
+extern void entity_Instance_destructor(void);
 extern void world_setLocalFlag(void);
 extern void atn_LoadHandle_destructor(void);
 extern void PSMTXRotRad(void);
@@ -341,7 +341,7 @@ asm void fn_80246508(void)
     stw r4, 0x5c0(r31)
     ori r0, r0, 0x8000
     stw r0, 0x12a4(r31)
-    bl fn_801765D8
+    bl battle_awardExp
     lwz r0, 0x14b8(r31)
     cmpwi r0, 0x2
     beq lbl_fn_80246508_00000334
@@ -623,9 +623,9 @@ asm void fn_80246914(void)
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     mr r3, r30
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     li r0, 0xe
     stw r0, 0x58c(r30)
     mr r3, r30
@@ -923,7 +923,7 @@ lbl_fn_80246C30_00000B74:
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     lfs f2, 0x530(r31)
     mr r3, r25
     psq_l f1, 0x528(r31), 0, 0
@@ -933,7 +933,7 @@ lbl_fn_80246C30_00000B74:
     psq_l f1, 0x534(r31), 0, 0
     psq_st f1, 0x534(r25), 0, 0
     stfs f2, 0x53c(r25)
-    bl fn_80145334
+    bl quest_updateFlow
     stw r28, 0xd18(r25)
     mr r3, r25
     li r4, 0x0
@@ -1424,7 +1424,7 @@ lbl_fn_80247258_000012A4:
     stw r15, 0x58c(r20)
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     lfs f2, 0x70(r1)
     mr r3, r20
     psq_l f1, 0x0(r26), 0, 0
@@ -1434,7 +1434,7 @@ lbl_fn_80247258_000012A4:
     psq_l f1, 0x0(r25), 0, 0
     psq_st f1, 0x534(r20), 0, 0
     stfs f2, 0x53c(r20)
-    bl fn_80145334
+    bl quest_updateFlow
     stw r16, 0xd18(r20)
     mr r3, r20
     mr r4, r26
@@ -1559,7 +1559,7 @@ asm void fn_802476D0(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lis r3, lbl_80783E48@ha
     li r0, 0x0
     addi r3, r3, lbl_80783E48@l
@@ -1623,7 +1623,7 @@ lbl_fn_80247748_0000154C:
 lbl_fn_80247748_0000157C:
     mr r3, r29
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r30, 0x0
     ble lbl_fn_80247748_00001598
     mr r3, r29
@@ -1707,7 +1707,7 @@ asm void fn_802478C4(void)
     stw r31, 0x1c(r1)
     mr r31, r3
     stw r30, 0x18(r1)
-    bl fn_8014C540
+    bl dialog_updateScriptState
     lwz r0, 0xd18(r31)
     li r30, 0x0
     cmpwi r0, 0x0
@@ -1722,7 +1722,7 @@ asm void fn_802478C4(void)
     stfs f2, 0x10(r1)
     psq_st f1, 0x528(r31), 0, 0
     stfs f2, 0x530(r31)
-    bl fn_80144710
+    bl quest_evaluateConditions
     li r0, 0x0
     stw r0, 0x58c(r31)
     mr r3, r31
@@ -1918,7 +1918,7 @@ lbl_fn_802478C4_00001984:
     cmplw r30, r0
     bne lbl_fn_802478C4_0000192C
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     lwz r0, 0x34(r1)
     psq_l f31, 0x28(r1), 0, 0
     lfd f31, 0x20(r1)

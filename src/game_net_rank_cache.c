@@ -6,18 +6,18 @@ extern void _restgpr_20(void);
 extern void _restgpr_26(void);
 extern void _savegpr_20(void);
 extern void _savegpr_26(void);
-extern void fn_80087E9C(void);
+extern void route_createWaypoint(void);
 extern void node_createNamedChild(void);
 extern void msg_getMessageById(void);
 extern void msg_getMessageString(void);
 extern void fn_800A58D0(void);
 extern void ref_releaseHandle(void);
 extern void fn_80116EB8(void);
-extern void fn_80116FC0(void);
+extern void actor_findSpawnTemplate(void);
 extern void actor_spawnActorWithId(void);
 extern void fn_801F6C2C(void);
 extern void save_computeCrc32(void);
-extern void fn_801F837C(void);
+extern void save_findEntryByName(void);
 extern void perf_getMetricValue(void);
 extern void fn_803750E4(void);
 extern void atn_LoadHandle_isLoading(void);
@@ -282,7 +282,7 @@ lbl_fn_80524824_00000268:
     bl perf_getMetricValue
     mr r5, r29
     addi r4, r31, 0x24b
-    bl fn_801F837C
+    bl save_findEntryByName
 lbl_fn_80524824_000002C0:
     addi r23, r23, 0x20
     addi r22, r22, 0x18
@@ -1662,7 +1662,7 @@ lbl_fn_80525A0C_00001610:
     lwz r28, lbl_8087F580
     addi r4, r3, 0x4258
     li r3, 0x0
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     mr r4, r3
     mr r3, r28
     li r5, 0x1
@@ -1875,7 +1875,7 @@ lbl_fn_80526138_0000194C:
     addi r5, r29, 0x14b0
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_80887A50
     mr r3, r30
     lfs f2, lbl_80887A54
@@ -1884,7 +1884,7 @@ lbl_fn_80526138_0000194C:
     addi r5, r29, 0xa4
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_80887A50
     mr r3, r30
     lfs f2, lbl_80887A54
@@ -1893,7 +1893,7 @@ lbl_fn_80526138_0000194C:
     addi r5, r29, 0xb0
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_80887A50
     mr r3, r30
     lfs f2, lbl_80887A54
@@ -1902,7 +1902,7 @@ lbl_fn_80526138_0000194C:
     addi r5, r29, 0xbc
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_80887A50
     mr r3, r30
     lfs f2, lbl_80887A54
@@ -1911,7 +1911,7 @@ lbl_fn_80526138_0000194C:
     addi r5, r29, 0xc8
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)

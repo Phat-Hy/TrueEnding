@@ -10,21 +10,21 @@ extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_8006BA30(void);
-extern void fn_8006EF48(void);
+extern void script_executeOpcode(void);
 extern void str_assignBuffer(void);
 extern void fn_800A4450(void);
 extern void msg_getMessageString(void);
 extern void ref_releaseHandle(void);
 extern void str_findChar(void);
 extern void wcs_vformat(void);
-extern void fn_80116FC0(void);
+extern void actor_findSpawnTemplate(void);
 extern void actor_spawnActorWithId(void);
 extern void fn_8011BBD0(void);
 extern void fn_80124C6C(void);
 extern void fn_801F4728(void);
-extern void fn_801F48C8(void);
+extern void save_parseSlotStats(void);
 extern void fn_801F4C14(void);
-extern void fn_801F4CB4(void);
+extern void save_formatSlotTitle(void);
 extern void fn_801F4D80(void);
 extern void saveSlot_readSummary(void);
 extern void fn_801F6D7C(void);
@@ -160,7 +160,7 @@ lbl_fn_80119F0C_00000088:
     srawi r0, r0, 13
     srwi r5, r0, 31
     add r5, r0, r5
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r3, 0x5c(r29)
     addi r4, r28, 0x29f
     addi r3, r3, 0x58
@@ -185,7 +185,7 @@ lbl_fn_80119F0C_0000017C:
     lfs f2, lbl_80881748
     li r5, 0x1
     li r6, 0x4
-    bl fn_8006EF48
+    bl script_executeOpcode
     lwz r0, 0x8(r1)
     fmr f31, f1
     srwi. r0, r0, 31
@@ -229,13 +229,13 @@ lbl_fn_80119F0C_00000210:
     addi r28, r28, lbl_80736B10@l
     li r6, 0x0
     addi r4, r28, 0x2b8
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r0, 0x48(r29)
     cmpwi r0, 0x1
     bne lbl_fn_80119F0C_00000268
     li r3, 0x0
     li r4, 0x2777
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r4, 0x5c(r29)
     mr r31, r3
     addi r3, r28, 0x2be
@@ -249,7 +249,7 @@ lbl_fn_80119F0C_00000210:
 lbl_fn_80119F0C_00000268:
     li r3, 0x0
     li r4, 0x2776
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r4, 0x5c(r29)
     mr r31, r3
     addi r3, r28, 0x2be
@@ -396,18 +396,18 @@ lbl_fn_80119F0C_00000454:
     addi r4, r30, 0x29b
     li r5, 0x0
     li r6, 0x0
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r3, 0x5c(r29)
     addi r4, r30, 0x2b8
     li r5, 0x0
     li r6, 0x0
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r0, 0x48(r29)
     cmpwi r0, 0x1
     bne lbl_fn_80119F0C_000004FC
     li r3, 0x0
     li r4, 0x2777
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r4, 0x5c(r29)
     mr r28, r3
     addi r3, r30, 0x2be
@@ -421,7 +421,7 @@ lbl_fn_80119F0C_00000454:
 lbl_fn_80119F0C_000004FC:
     li r3, 0x0
     li r4, 0x2776
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r4, 0x5c(r29)
     mr r28, r3
     addi r3, r30, 0x2be
@@ -548,7 +548,7 @@ lbl_fn_8011A4D0_00000640:
     lwz r3, 0x58(r29)
     addi r4, r31, 0x306
     addi r5, r1, 0x30
-    bl fn_801F48C8
+    bl save_parseSlotStats
     lwz r4, lbl_8087F0A8
     addi r3, r1, 0x20
     li r5, 0x0
@@ -557,7 +557,7 @@ lbl_fn_8011A4D0_00000640:
     lwz r3, 0x58(r29)
     addi r4, r31, 0x30c
     addi r5, r1, 0x20
-    bl fn_801F48C8
+    bl save_parseSlotStats
     lwz r4, 0x58(r29)
     addi r3, r31, 0x316
     addi r26, r4, 0x58
@@ -621,7 +621,7 @@ lbl_fn_8011A4D0_000007B4:
     bne lbl_fn_8011A4D0_00000924
     li r3, 0x1
     li r4, 0x11d
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r4, 0x64(r29)
     lis r5, lbl_80736B10@ha
     addi r5, r5, lbl_80736B10@l
@@ -640,7 +640,7 @@ lbl_fn_8011A4D0_00000824:
     beq lbl_fn_8011A4D0_0000086C
     li r3, 0x1
     li r4, 0x114
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r4, 0x64(r29)
     lis r5, lbl_80736B10@ha
     addi r5, r5, lbl_80736B10@l
@@ -656,7 +656,7 @@ lbl_fn_8011A4D0_00000824:
 lbl_fn_8011A4D0_0000086C:
     li r3, 0x1
     li r4, 0x115
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r4, 0x64(r29)
     lis r5, lbl_80736B10@ha
     addi r5, r5, lbl_80736B10@l
@@ -674,7 +674,7 @@ lbl_fn_8011A4D0_000008A8:
     bne lbl_fn_8011A4D0_000008EC
     li r3, 0x1
     li r4, 0x119
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r4, 0x64(r29)
     lis r5, lbl_80736B10@ha
     addi r5, r5, lbl_80736B10@l
@@ -690,7 +690,7 @@ lbl_fn_8011A4D0_000008A8:
 lbl_fn_8011A4D0_000008EC:
     li r3, 0x1
     li r4, 0x116
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r4, 0x64(r29)
     lis r5, lbl_80736B10@ha
     addi r5, r5, lbl_80736B10@l
@@ -831,7 +831,7 @@ lbl_fn_8011A4D0_00000ADC:
     bne lbl_fn_8011A4D0_00000B6C
     li r3, 0x0
     li r4, 0xc8
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r0, 0x40(r1)
     mr r27, r3
     srwi. r0, r0, 31
@@ -858,7 +858,7 @@ lbl_fn_8011A4D0_00000B38:
 lbl_fn_8011A4D0_00000B6C:
     li r3, 0x0
     li r4, 0xc9
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r0, 0x40(r1)
     mr r27, r3
     srwi. r0, r0, 31
@@ -885,7 +885,7 @@ lbl_fn_8011A4D0_00000B98:
 lbl_fn_8011A4D0_00000BCC:
     li r3, 0x0
     li r4, 0xca
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r0, 0x40(r1)
     mr r27, r3
     srwi. r0, r0, 31
@@ -956,7 +956,7 @@ lbl_fn_8011A4D0_00000CC8:
     bne lbl_fn_8011A4D0_00000D80
     li r3, 0x1
     li r4, 0x118
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r4, 0x64(r29)
     mr r27, r3
     addi r3, r31, 0x289
@@ -1003,7 +1003,7 @@ lbl_fn_8011A4D0_00000D80:
     bne lbl_fn_8011A4D0_00000E38
     li r3, 0x1
     li r4, 0x11f
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r4, 0x64(r29)
     mr r27, r3
     addi r3, r31, 0x289
@@ -1308,7 +1308,7 @@ lbl_fn_8011B018_000011BC:
     mr r5, r27
     addi r4, r31, 0x36a
     li r6, -0x2
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lis r3, 0x8889
     lwz r0, 0x70(r28)
     subi r7, r3, 0x7777
@@ -1487,7 +1487,7 @@ lbl_fn_8011B018_0000145C:
     lwz r3, 0xb4(r28)
     addi r4, r4, 0x36a
     li r6, -0x2
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r0, 0xb4(r28)
     mr r3, r28
     stwu r0, 0x74(r3)

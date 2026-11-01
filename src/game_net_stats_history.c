@@ -8,8 +8,8 @@ extern void _restgpr_23(void);
 extern void _savegpr_14(void);
 extern void _savegpr_23(void);
 extern void dtor_80084684(void);
-extern void fn_80061824(void);
-extern void fn_8006EF48(void);
+extern void skill_calcTrajectory(void);
+extern void script_executeOpcode(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void fn_800DC3C8(void);
@@ -1141,7 +1141,7 @@ lbl_fn_8054158C_00000E18:
     li r5, 0x1
     lfs f2, lbl_80887CA0
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     fmuls f0, f30, f1
     fmsubs f26, f28, f24, f0
     b lbl_fn_8054158C_00000E68
@@ -1155,7 +1155,7 @@ lbl_fn_8054158C_00000E48:
     li r5, 0x1
     lfs f2, lbl_80887CA0
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     fmsubs f26, f28, f24, f1
 lbl_fn_8054158C_00000E68:
     xoris r0, r31, 0x8000
@@ -1184,7 +1184,7 @@ lbl_fn_8054158C_00000E68:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lfs f6, lbl_80887CA0
     fsubs f1, f26, f17
     lfs f4, lbl_80887CB0
@@ -1201,7 +1201,7 @@ lbl_fn_8054158C_00000E68:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lfs f6, lbl_80887CA0
     fadds f1, f17, f26
     lfs f4, lbl_80887CB0
@@ -1218,7 +1218,7 @@ lbl_fn_8054158C_00000E68:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lfs f6, lbl_80887CA0
     fadds f1, f17, f26
     lfs f4, lbl_80887CB0
@@ -1235,7 +1235,7 @@ lbl_fn_8054158C_00000E68:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     b lbl_fn_8054158C_00000FF0
 lbl_fn_8054158C_00000FA4:
     cmpwi r23, 0x0
@@ -1256,7 +1256,7 @@ lbl_fn_8054158C_00000FA4:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
 lbl_fn_8054158C_00000FF0:
     fcmpo cr0, f18, f17
     cror eq, gt, eq
@@ -1345,7 +1345,7 @@ lbl_fn_8054158C_000010BC:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     addi r5, r1, 0x8
     li r3, 0x0
     la r4, lbl_8087E4D0

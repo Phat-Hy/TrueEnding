@@ -29,13 +29,13 @@ extern void fn_8012DD70(void);
 extern void fn_8013322C(void);
 extern void fn_8013539C(void);
 extern void fn_8014C228(void);
-extern void fn_8014DEE4(void);
+extern void dialog_selectChoice(void);
 extern void fn_8015487C(void);
 extern void fn_80154C08(void);
 extern void fn_80164DCC(void);
 extern void actor_setState(void);
 extern void fn_80178A6C(void);
-extern void fn_80179D44(void);
+extern void actor_getMovementFlags(void);
 extern void fn_80204E04(void);
 extern void fn_8021A888(void);
 extern void fn_8021A8D0(void);
@@ -50,7 +50,7 @@ extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECDotProduct(void);
 extern void PSVECCrossProduct(void);
-extern void fn_8068A850(void);
+extern void std_sin(void);
 extern void vec3_isNonZero(void);
 
 /* External data declarations */
@@ -84,7 +84,7 @@ void fn_80152D10(void);
 void fn_80153004(void);
 void fn_801533C8(void);
 void fn_80153698(void);
-void fn_801539E0(void);
+void inventory_unequipItem(void);
 void fn_80153B44(void);
 void fn_80153FA0(void);
 void fn_80153FD8(void);
@@ -201,7 +201,7 @@ lbl_fn_80152D10_00000170:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8014DEE4
+    bl dialog_selectChoice
 lbl_fn_80152D10_00000190:
     lwz r0, 0x12a4(r31)
     extrwi. r0, r0, 1, 26
@@ -1000,7 +1000,7 @@ lbl_fn_80153698_00000CB0:
     blr
 }
 
-asm void fn_801539E0(void)
+asm void inventory_unequipItem(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1014,13 +1014,13 @@ asm void fn_801539E0(void)
     lwz r4, lbl_8087F430
     lwz r5, 0x10d8(r4)
     cmpwi r5, 0x0
-    beq lbl_fn_801539E0_00000D48
+    beq lbl_inventory_unequipItem_00000D48
     lwz r4, 0xc38(r3)
     cmpwi r4, 0x0
-    ble lbl_fn_801539E0_00000D48
+    ble lbl_inventory_unequipItem_00000D48
     lwz r0, 0xc3c(r3)
     cmpwi r0, 0x0
-    ble lbl_fn_801539E0_00000D48
+    ble lbl_inventory_unequipItem_00000D48
     subi r0, r4, 0x1
     lwz r4, 0xb0(r5)
     slwi r0, r0, 6
@@ -1033,50 +1033,50 @@ asm void fn_801539E0(void)
     slwi r0, r0, 6
     add r4, r5, r0
     stw r6, 0x3c(r4)
-lbl_fn_801539E0_00000D48:
+lbl_inventory_unequipItem_00000D48:
     lwz r5, 0x48(r3)
     cmpwi r5, 0x0
-    bne lbl_fn_801539E0_00000D7C
+    bne lbl_inventory_unequipItem_00000D7C
     lwz r4, lbl_8087F0A8
     lwz r0, 0x278(r4)
     cmpwi r0, 0x0
-    beq lbl_fn_801539E0_00000D7C
+    beq lbl_inventory_unequipItem_00000D7C
     lwz r4, 0x5c(r3)
     lwz r0, 0x11c(r4)
     cmpwi r0, 0x1
-    bne lbl_fn_801539E0_00000D7C
+    bne lbl_inventory_unequipItem_00000D7C
     li r0, 0x1
-    b lbl_fn_801539E0_00000D9C
-lbl_fn_801539E0_00000D7C:
+    b lbl_inventory_unequipItem_00000D9C
+lbl_inventory_unequipItem_00000D7C:
     cmpwi r5, 0x0
-    bne lbl_fn_801539E0_00000D98
+    bne lbl_inventory_unequipItem_00000D98
     lwz r0, 0x12a8(r3)
     extrwi. r0, r0, 1, 14
-    beq lbl_fn_801539E0_00000D98
+    beq lbl_inventory_unequipItem_00000D98
     li r0, 0x1
-    b lbl_fn_801539E0_00000D9C
-lbl_fn_801539E0_00000D98:
+    b lbl_inventory_unequipItem_00000D9C
+lbl_inventory_unequipItem_00000D98:
     li r0, 0x0
-lbl_fn_801539E0_00000D9C:
+lbl_inventory_unequipItem_00000D9C:
     cmpwi r0, 0x0
-    beq lbl_fn_801539E0_00000E20
+    beq lbl_inventory_unequipItem_00000E20
     lwz r3, lbl_8087F430
     li r4, 0x25
     bl world_getGlobalFlag
     cmpwi r3, 0x1
-    blt lbl_fn_801539E0_00000E00
+    blt lbl_inventory_unequipItem_00000E00
     lwz r3, 0x648(r31)
     cmpwi r3, 0x0
-    beq lbl_fn_801539E0_00000DCC
+    beq lbl_inventory_unequipItem_00000DCC
     li r4, 0x1
     bl fn_80044E0C
-lbl_fn_801539E0_00000DCC:
+lbl_inventory_unequipItem_00000DCC:
     lwz r3, 0x64c(r31)
     cmpwi r3, 0x0
-    beq lbl_fn_801539E0_00000DE0
+    beq lbl_inventory_unequipItem_00000DE0
     li r4, 0x1
     bl fn_80044E0C
-lbl_fn_801539E0_00000DE0:
+lbl_inventory_unequipItem_00000DE0:
     li r0, 0x0
     li r3, -0x1
     stw r3, 0x674(r31)
@@ -1084,17 +1084,17 @@ lbl_fn_801539E0_00000DE0:
     stw r0, 0x648(r31)
     stw r0, 0x64c(r31)
     bl fn_8014C228
-    b lbl_fn_801539E0_00000E20
-lbl_fn_801539E0_00000E00:
+    b lbl_inventory_unequipItem_00000E20
+lbl_inventory_unequipItem_00000E00:
     lwz r0, 0x674(r31)
     cmpwi r0, 0x0
-    blt lbl_fn_801539E0_00000E20
+    blt lbl_inventory_unequipItem_00000E20
     mr r3, r31
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8014DEE4
-lbl_fn_801539E0_00000E20:
+    bl dialog_selectChoice
+lbl_inventory_unequipItem_00000E20:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0
@@ -1493,7 +1493,7 @@ lbl_fn_80153FD8_000013B8:
     li r4, 0x1
     li r5, 0x0
     li r6, 0x0
-    bl fn_8014DEE4
+    bl dialog_selectChoice
 lbl_fn_80153FD8_000013CC:
     lwz r0, 0xc48(r31)
     li r3, 0x1
@@ -1564,7 +1564,7 @@ lbl_fn_80153FD8_00001484:
 lbl_fn_80153FD8_000014D0:
     lwz r30, lbl_8087EE98
     mr r3, r31
-    bl fn_80179D44
+    bl actor_getMovementFlags
     oris r7, r3, 0x8000
     mr r3, r30
     addi r5, r1, 0x30
@@ -1745,7 +1745,7 @@ lbl_fn_80154344_00001730:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8014DEE4
+    bl dialog_selectChoice
 lbl_fn_80154344_00001750:
     lwz r3, lbl_8087F3C0
     mr r4, r31
@@ -1856,7 +1856,7 @@ lbl_fn_80154488_0000188C:
     lis r3, lbl_80737828@ha
     lfd f1, lbl_80737828@l(r3)
     frsp f31, f0
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     fcmpo cr0, f31, f0
     bge lbl_fn_80154488_00001928

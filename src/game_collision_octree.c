@@ -16,7 +16,7 @@ extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
 extern void fn_80210220(void);
 extern void sound_initGlobalInstances(void);
-extern void fn_8023A680(void);
+extern void res_Shader_bindParams(void);
 extern void PSMTXRotRad(void);
 extern void PSMTX44Identity(void);
 extern void PSVECMag(void);
@@ -257,7 +257,7 @@ lbl_fn_801018E4_0000025C:
     li r6, 0x0
     li r7, 0x0
     li r10, 0x0
-    bl fn_8023A680
+    bl res_Shader_bindParams
     b lbl_fn_801018E4_000003D0
 lbl_fn_801018E4_000002B8:
     lwz r0, 0x84(r31)
@@ -290,7 +290,7 @@ lbl_fn_801018E4_000002B8:
     li r6, 0x0
     li r7, 0x0
     li r10, 0x0
-    bl fn_8023A680
+    bl res_Shader_bindParams
     b lbl_fn_801018E4_000003D0
 lbl_fn_801018E4_00000338:
     lwz r0, 0xc(r31)
@@ -334,7 +334,7 @@ lbl_fn_801018E4_000003B0:
     li r6, 0x0
     li r7, 0x0
     li r10, 0x0
-    bl fn_8023A680
+    bl res_Shader_bindParams
 lbl_fn_801018E4_000003D0:
     addi r11, r1, 0x100
     psq_l f31, 0x118(r1), 0, 0

@@ -12,11 +12,11 @@ extern void collision_testLineSegment(void);
 extern void mem_alloc(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_8014C228(void);
-extern void fn_8014DEE4(void);
+extern void dialog_selectChoice(void);
 extern void fn_80153B44(void);
 extern void fn_80164DCC(void);
 extern void actor_setState(void);
-extern void fn_80179D44(void);
+extern void actor_getMovementFlags(void);
 extern void fn_80196C68(void);
 extern void fn_801AC434(void);
 extern void fn_801AD34C(void);
@@ -38,8 +38,8 @@ extern void fn_805ADD84(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSVECCrossProduct(void);
-extern void fn_8068A850(void);
-extern void fn_8068AD58(void);
+extern void std_sin(void);
+extern void std_cos(void);
 extern void vec3_isNonZero(void);
 
 /* External data declarations */
@@ -1284,14 +1284,14 @@ asm void fn_8015F568(void)
     stfs f2, 0xac(r1)
     bne lbl_fn_8015F568_00001158
     lfs f1, 0x538(r27)
-    bl fn_8068A850
+    bl std_sin
     frsp f4, f1
     lfs f3, lbl_80881AB0
     lfs f0, 0xa4(r1)
     lfs f1, 0x538(r27)
     fmadds f0, f3, f4, f0
     stfs f0, 0xa4(r1)
-    bl fn_8068AD58
+    bl std_cos
     frsp f4, f1
     lfs f3, lbl_808819F8
     lfs f0, 0xac(r1)
@@ -1302,14 +1302,14 @@ lbl_fn_8015F568_00001158:
     cmpwi r3, 0x2
     bne lbl_fn_8015F568_0000119C
     lfs f1, 0x538(r27)
-    bl fn_8068A850
+    bl std_sin
     frsp f4, f1
     lfs f3, lbl_808819F8
     lfs f0, 0xa4(r1)
     lfs f1, 0x538(r27)
     fmadds f0, f3, f4, f0
     stfs f0, 0xa4(r1)
-    bl fn_8068AD58
+    bl std_cos
     frsp f4, f1
     lfs f3, lbl_80881AB0
     lfs f0, 0xac(r1)
@@ -1398,7 +1398,7 @@ lbl_fn_8015F568_0000121C:
     stfs f2, 0x94(r1)
     stfs f3, 0x9c(r1)
     stfs f0, 0x90(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     oris r7, r3, 0x8000
     mr r3, r23
     mr r5, r26
@@ -1499,7 +1499,7 @@ lbl_fn_8015F568_00001434:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8014DEE4
+    bl dialog_selectChoice
 lbl_fn_8015F568_00001454:
     cmpwi r30, 0x0
     beq lbl_fn_8015F568_00001CA8

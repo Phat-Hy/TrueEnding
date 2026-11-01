@@ -8,20 +8,20 @@ extern void _savegpr_27(void);
 extern void dtor_80013D60(void);
 extern void fn_8000D430(void);
 extern void fn_8000EC88(void);
-extern void fn_8003E4A4(void);
+extern void str_initFromCStr(void);
 extern void fn_8003EA3C(void);
-extern void fn_8003EFB0(void);
+extern void ui_destroyWidget(void);
 extern void fn_80041A28(void);
 extern void fn_8004203C(void);
-extern void fn_8004212C(void);
+extern void str_getData(void);
 extern void fn_80044BD4(void);
 extern void fn_80044C30(void);
 extern void talk_parseQuotedString(void);
-extern void fn_8008B140(void);
+extern void map_processTrigger(void);
 extern void fn_80097510(void);
 extern void fn_80097A20(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_80097D40(void);
+extern void atn_Anim_getLayerTrack(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
@@ -55,10 +55,10 @@ extern void fn_80137B78(void);
 extern void fn_801388B8(void);
 extern void fn_80139560(void);
 extern void fn_801446F0(void);
-extern void fn_8014DEE4(void);
+extern void dialog_selectChoice(void);
 extern void fn_8014EEC4(void);
-extern void fn_801539E0(void);
-extern void fn_8015495C(void);
+extern void inventory_unequipItem(void);
+extern void equip_applyToCharacter(void);
 extern void fn_80155DAC(void);
 extern void fn_801561E4(void);
 extern void fn_801562A0(void);
@@ -70,7 +70,7 @@ extern void fn_80165C5C(void);
 extern void fn_8016DC14(void);
 extern void fn_8016F634(void);
 extern void fn_80175AEC(void);
-extern void fn_801765D8(void);
+extern void battle_awardExp(void);
 extern void fn_8017A33C(void);
 extern void fn_8017AC44(void);
 extern void fn_8017CB2C(void);
@@ -187,11 +187,11 @@ lbl_fn_800EA9D4_00000074:
     lis r3, lbl_807C6BB8@ha
     li r0, 0x0
     stwu r0, lbl_807C6BB8@l(r3)
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     li r30, 0x1
     lis r5, lbl_807C7828@ha
     stw r0, 0x4(r3)
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     addi r5, r5, lbl_807C7828@l
     stw r0, 0x8(r3)
     stw r30, 0xc(r3)
@@ -287,11 +287,11 @@ lbl_fn_800EA9D4_000001F8:
     lis r3, lbl_807C6BB8@ha
     li r0, 0x0
     stwu r0, lbl_807C6BB8@l(r3)
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     li r30, 0x1
     lis r5, lbl_807C7828@ha
     stw r0, 0x4(r3)
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     addi r5, r5, lbl_807C7828@l
     stw r0, 0x8(r3)
     stw r30, 0xc(r3)
@@ -568,7 +568,7 @@ lbl_fn_800EAECC_000005D8:
     mr r3, r31
     ori r0, r0, 0x8000
     stw r0, 0x12a4(r31)
-    bl fn_801765D8
+    bl battle_awardExp
 lbl_fn_800EAECC_000005EC:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
@@ -605,7 +605,7 @@ lbl_fn_800EAFD4_0000064C:
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
 lbl_fn_800EAFD4_00000664:
     lwz r0, 0x7e0(r30)
     rlwinm r0, r0, 0, 26, 26
@@ -866,7 +866,7 @@ lbl_fn_800EB270_000009E4:
     bne lbl_fn_800EB270_00000A50
     addi r3, r29, 0xb0
     li r4, 0x161
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     beq lbl_fn_800EB270_00000A50
     mr r3, r30
@@ -1325,14 +1325,14 @@ asm void fn_800EBA5C(void)
     stw r31, 0x2c(r1)
     mr r31, r3
     stw r30, 0x28(r1)
-    bl fn_801765D8
+    bl battle_awardExp
     mr r3, r31
     bl fn_801446F0
     lwz r0, 0x12a4(r31)
     srwi. r0, r0, 31
     beq lbl_fn_800EBA5C_000010C0
     mr r3, r31
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_800EBA5C_000010C0:
     lwz r0, 0x12a4(r31)
     extrwi. r0, r0, 1, 25
@@ -1560,7 +1560,7 @@ lbl_fn_800EBD00_000013D4:
     li r5, 0x0
     li r6, 0x0
     lwz r3, 0x48(r3)
-    bl fn_8014DEE4
+    bl dialog_selectChoice
     li r31, 0x0
 lbl_fn_800EBD00_000013F0:
     mr r4, r31
@@ -1630,7 +1630,7 @@ asm void fn_800EBE84(void)
     cmpwi r0, 0x2
     bne lbl_fn_800EBE84_00001530
     addi r3, r3, 0xb0
-    bl fn_8008B140
+    bl map_processTrigger
     cmpwi r3, 0x0
     beq lbl_fn_800EBE84_000014E8
     li r3, 0x1
@@ -1679,7 +1679,7 @@ asm void fn_800EBF1C(void)
     bl fn_801388B8
     mr r4, r29
     addi r3, r1, 0x2c
-    bl fn_8003E4A4
+    bl str_initFromCStr
     lis r4, lbl_80735324@ha
     addi r3, r1, 0x74
     addi r29, r4, lbl_80735324@l
@@ -1702,7 +1702,7 @@ asm void fn_800EBF1C(void)
 lbl_fn_800EBF1C_000015C0:
     addi r3, r1, 0x98
     bl fn_800ED4D8
-    bl fn_8004212C
+    bl str_getData
     addi r4, r29, 0x85
     li r5, 0x5
     bl strncmp
@@ -1710,15 +1710,15 @@ lbl_fn_800EBF1C_000015C0:
     bne lbl_fn_800EBF1C_000016A0
     addi r3, r1, 0x98
     bl fn_800ED4D8
-    bl fn_8004212C
+    bl str_getData
     mr r4, r3
     addi r3, r1, 0x20
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x20
     bl fn_8000EC88
     mr r31, r3
     addi r3, r1, 0x20
-    bl fn_8004212C
+    bl str_getData
     mr r4, r3
     mr r5, r31
     addi r3, r1, 0xd68
@@ -1759,7 +1759,7 @@ lbl_fn_800EBF1C_000015C0:
 lbl_fn_800EBF1C_000016A0:
     addi r3, r1, 0x98
     bl fn_800ED4D8
-    bl fn_8004212C
+    bl str_getData
     addi r4, r29, 0x8b
     li r5, 0xd
     bl strncmp
@@ -1767,15 +1767,15 @@ lbl_fn_800EBF1C_000016A0:
     bne lbl_fn_800EBF1C_0000172C
     addi r3, r1, 0x98
     bl fn_800ED4D8
-    bl fn_8004212C
+    bl str_getData
     mr r4, r3
     addi r3, r1, 0x14
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x14
     bl fn_8000EC88
     mr r31, r3
     addi r3, r1, 0x14
-    bl fn_8004212C
+    bl str_getData
     mr r4, r3
     mr r5, r31
     addi r3, r1, 0x734
@@ -1795,7 +1795,7 @@ lbl_fn_800EBF1C_000016A0:
 lbl_fn_800EBF1C_0000172C:
     addi r3, r1, 0x98
     bl fn_800ED4D8
-    bl fn_8004212C
+    bl str_getData
     addi r4, r29, 0x99
     li r5, 0xe
     bl strncmp
@@ -1803,15 +1803,15 @@ lbl_fn_800EBF1C_0000172C:
     bne lbl_fn_800EBF1C_000017B0
     addi r3, r1, 0x98
     bl fn_800ED4D8
-    bl fn_8004212C
+    bl str_getData
     mr r4, r3
     addi r3, r1, 0x8
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x8
     bl fn_8000EC88
     mr r31, r3
     addi r3, r1, 0x8
-    bl fn_8004212C
+    bl str_getData
     mr r4, r3
     mr r5, r31
     addi r3, r1, 0x100

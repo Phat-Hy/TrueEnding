@@ -2,7 +2,7 @@
 #pragma function_align 4
 
 /* External function declarations */
-extern void fn_8004D388(void);
+extern void collision_queryGeometry(void);
 extern void fn_80063D3C(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -16,14 +16,14 @@ extern void fn_80109828(void);
 extern void fn_80126214(void);
 extern void fn_8012DF7C(void);
 extern void fn_8013A258(void);
-extern void fn_8013CB68(void);
-extern void fn_80144710(void);
+extern void npc_updateTalkInteraction(void);
+extern void quest_evaluateConditions(void);
 extern void fn_80148B0C(void);
 extern void fn_80155D70(void);
 extern void fn_8015B808(void);
 extern void actor_setState(void);
 extern void fn_80176548(void);
-extern void fn_801765D8(void);
+extern void battle_awardExp(void);
 extern void task_findEntryById(void);
 extern void fn_802CC19C(void);
 extern void fn_802CC4C8(void);
@@ -407,7 +407,7 @@ lbl_fn_802C9880_00000450:
     addi r4, r1, 0x80
     fmuls f2, f0, f30
     li r5, 0x0
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
 lbl_fn_802C9880_0000046C:
     lwz r0, 0x154(r1)
     psq_l f31, 0x148(r1), 0, 0
@@ -1134,7 +1134,7 @@ lbl_fn_802CA490_00000E10:
     addi r8, r31, 0x5b8
     lis r7, 0x2000
     li r9, 0x0
-    bl fn_8004D388
+    bl collision_queryGeometry
     addi r3, r1, 0x70
     lfs f2, 0x78(r1)
     psq_l f1, 0x0(r3), 0, 0
@@ -1389,7 +1389,7 @@ lbl_fn_802CA8C0_00001280:
     cmpwi r0, 0x2f
     bne lbl_fn_802CA8C0_00001798
     mr r3, r30
-    bl fn_80144710
+    bl quest_evaluateConditions
     li r0, 0x0
     lfs f1, 0x538(r30)
     stw r0, 0x14d0(r30)
@@ -1905,7 +1905,7 @@ lbl_fn_802CAFB8_000018D4:
     ori r0, r0, 0x8000
     stw r0, 0x12a4(r3)
     lwz r3, 0x14d0(r30)
-    bl fn_801765D8
+    bl battle_awardExp
     lfs f3, 0x14cc(r30)
     lfs f0, lbl_808843F4
     fadds f0, f3, f0

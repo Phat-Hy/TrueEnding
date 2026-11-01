@@ -11,7 +11,7 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
-extern void fn_800697D8(void);
+extern void boss_recordDamage(void);
 extern void fn_8007AA64(void);
 extern void fn_8007B100(void);
 extern void fn_8007C0D4(void);
@@ -35,9 +35,9 @@ extern void str_findChar(void);
 extern void fn_800DCA6C(void);
 extern void memcmp(void);
 extern void strcat(void);
-extern void fn_8068AD58(void);
+extern void std_cos(void);
 extern void std_fmod(void);
-extern void fn_806952C4(void);
+extern void msl_releaseRefCount(void);
 extern void runtime_registerStaticObject(void);
 extern int sprintf(char* str, const char* format, ...);
 extern char* strcpy(char* dest, const char* src);
@@ -170,7 +170,7 @@ lbl_fn_80080048_000000E4:
     lfs f1, 0x34(r28)
     lfs f0, 0x38(r28)
     fmadds f1, f1, f2, f0
-    bl fn_8068AD58
+    bl std_cos
     frsp f1, f1
     lfs f0, 0x30(r28)
     fmuls f0, f0, f1
@@ -237,7 +237,7 @@ lbl_fn_80080048_000001CC:
     lfs f1, 0x40(r28)
     lfs f0, 0x44(r28)
     fmadds f1, f1, f2, f0
-    bl fn_8068AD58
+    bl std_cos
     frsp f1, f1
     lfs f0, 0x3c(r28)
     fmuls f0, f0, f1
@@ -1066,7 +1066,7 @@ lbl_fn_80080C20_00000D24:
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_80080C20_00000D60
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_80080C20_00000D60:
     lwz r5, 0x0(r27)
     addi r3, r27, 0x4
@@ -1581,7 +1581,7 @@ lbl_fn_80081080_000013D8:
     stb r0, 0x107(r1)
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x8
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_fn_80081080_0000141C:
     mr r3, r31
     bl str_findChar

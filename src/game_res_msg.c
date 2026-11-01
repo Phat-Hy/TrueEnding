@@ -27,7 +27,7 @@ extern void fn_80473C20(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_80473F88(void);
+extern void shockwave_freeEmitter(void);
 extern void PSMTXMultVec(void);
 extern void PSVECNormalize(void);
 extern void fn_80614790(void);
@@ -82,11 +82,11 @@ void fn_80236B84(void);
 void fn_80236FFC(void);
 void fn_802371AC(void);
 void fn_802371BC(void);
-void fn_80237518(void);
+void res_MsgHandle_ctor(void);
 void atn_LH_Effect_destructor(void);
-void fn_802375C4(void);
-void fn_80237654(void);
-void fn_802376D0(void);
+void res_Resource_destructor(void);
+void res_Resource_unload(void);
+void res_MsgHandle_isLoading(void);
 void fn_8023772C(void);
 void fn_80237784(void);
 void fn_8023779C(void);
@@ -1003,7 +1003,7 @@ lbl_fn_802371BC_00000C94:
     blr
 }
 
-asm void fn_80237518(void)
+asm void res_MsgHandle_ctor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1057,7 +1057,7 @@ lbl_atn_LH_Effect_destructor_00000D3C:
     blr
 }
 
-asm void fn_802375C4(void)
+asm void res_Resource_destructor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1068,31 +1068,31 @@ asm void fn_802375C4(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    beq lbl_fn_802375C4_00000DCC
+    beq lbl_res_Resource_destructor_00000DCC
     lwz r0, 0x0(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_802375C4_00000DAC
+    beq lbl_res_Resource_destructor_00000DAC
     lwz r3, lbl_8087F3C0
     cmpwi r3, 0x0
-    beq lbl_fn_802375C4_00000D9C
+    beq lbl_res_Resource_destructor_00000D9C
     mr r4, r30
     bl fn_8023A2A8
-lbl_fn_802375C4_00000D9C:
+lbl_res_Resource_destructor_00000D9C:
     addi r3, r30, 0x4
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     li r0, 0x0
     stw r0, 0x0(r30)
-lbl_fn_802375C4_00000DAC:
+lbl_res_Resource_destructor_00000DAC:
     addic. r3, r30, 0x4
-    beq lbl_fn_802375C4_00000DBC
+    beq lbl_res_Resource_destructor_00000DBC
     li r4, 0x0
     bl atn_LoadHandle_destructor
-lbl_fn_802375C4_00000DBC:
+lbl_res_Resource_destructor_00000DBC:
     cmpwi r31, 0x0
-    ble lbl_fn_802375C4_00000DCC
+    ble lbl_res_Resource_destructor_00000DCC
     mr r3, r30
     bl dtor_80084684
-lbl_fn_802375C4_00000DCC:
+lbl_res_Resource_destructor_00000DCC:
     mr r3, r30
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -1102,7 +1102,7 @@ lbl_fn_802375C4_00000DCC:
     blr
 }
 
-asm void fn_80237654(void)
+asm void res_Resource_unload(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1114,18 +1114,18 @@ asm void fn_80237654(void)
     mr r30, r3
     lwz r0, 0x0(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_80237654_00000E34
+    beq lbl_res_Resource_unload_00000E34
     lwz r3, lbl_8087F3C0
     cmpwi r3, 0x0
-    beq lbl_fn_80237654_00000E24
+    beq lbl_res_Resource_unload_00000E24
     mr r4, r30
     bl fn_8023A2A8
-lbl_fn_80237654_00000E24:
+lbl_res_Resource_unload_00000E24:
     addi r3, r30, 0x4
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     li r0, 0x0
     stw r0, 0x0(r30)
-lbl_fn_80237654_00000E34:
+lbl_res_Resource_unload_00000E34:
     lwz r12, 0x4(r30)
     addi r3, r30, 0x4
     mr r4, r31
@@ -1140,7 +1140,7 @@ lbl_fn_80237654_00000E34:
     blr
 }
 
-asm void fn_802376D0(void)
+asm void res_MsgHandle_isLoading(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1151,19 +1151,19 @@ asm void fn_802376D0(void)
     addi r3, r3, 0x4
     bl atn_LoadHandle_isLoading
     cmpwi r3, 0x0
-    beq lbl_fn_802376D0_00000E90
+    beq lbl_res_MsgHandle_isLoading_00000E90
     li r3, 0x1
-    b lbl_fn_802376D0_00000EAC
-lbl_fn_802376D0_00000E90:
+    b lbl_res_MsgHandle_isLoading_00000EAC
+lbl_res_MsgHandle_isLoading_00000E90:
     lwz r0, 0x0(r31)
     cmpwi r0, 0x0
-    bne lbl_fn_802376D0_00000EA8
+    bne lbl_res_MsgHandle_isLoading_00000EA8
     addi r3, r31, 0x4
     bl fn_804738C4
     stw r3, 0x0(r31)
-lbl_fn_802376D0_00000EA8:
+lbl_res_MsgHandle_isLoading_00000EA8:
     li r3, 0x0
-lbl_fn_802376D0_00000EAC:
+lbl_res_MsgHandle_isLoading_00000EAC:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0
@@ -1189,7 +1189,7 @@ asm void fn_8023772C(void)
     bl fn_8023A2A8
 lbl_fn_8023772C_00000EF4:
     addi r3, r31, 0x4
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     li r0, 0x0
     stw r0, 0x0(r31)
 lbl_fn_8023772C_00000F04:
@@ -1278,7 +1278,7 @@ asm void res_MsgHandle_unload(void)
     bl fn_8023A340
 lbl_res_MsgHandle_unload_00000FE4:
     addi r3, r31, 0x4
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     li r0, 0x0
     stw r0, 0x0(r31)
 lbl_res_MsgHandle_unload_00000FF4:

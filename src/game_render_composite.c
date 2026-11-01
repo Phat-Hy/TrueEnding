@@ -7,9 +7,9 @@ extern void _restgpr_26(void);
 extern void _savegpr_26(void);
 extern void dtor_80013D60(void);
 extern void dtor_80084684(void);
-extern void fn_8003E4A4(void);
-extern void fn_8004212C(void);
-extern void fn_80057A64(void);
+extern void str_initFromCStr(void);
+extern void str_getData(void);
+extern void mission_updateStub(void);
 extern void atn_ColliCapsule_destructor(void);
 extern void fn_8006AFF8(void);
 extern void fn_8006CA80(void);
@@ -19,8 +19,8 @@ extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void route_createSegment(void);
 extern void node_createNamedChild(void);
-extern void fn_800897D8(void);
-extern void fn_8008BBD8(void);
+extern void node_destroy(void);
+extern void map_debugLog(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void fn_800EC254(void);
@@ -37,10 +37,10 @@ extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void fn_80108F38(void);
 extern void boss_updatePhaseState(void);
-extern void fn_80145334(void);
-extern void fn_80148990(void);
-extern void fn_8014C540(void);
-extern void fn_80151448(void);
+extern void quest_updateFlow(void);
+extern void quest_ctorRewardItem(void);
+extern void dialog_updateScriptState(void);
+extern void inventory_applyItemStats(void);
 extern void actor_setState(void);
 extern void fn_801CB100(void);
 extern void fn_801CB130(void);
@@ -49,7 +49,7 @@ extern void fn_8020A780(void);
 extern void task_findEntryById(void);
 extern void fn_8021A984(void);
 extern void sound_initGlobalInstances(void);
-extern void fn_802375C4(void);
+extern void res_Resource_destructor(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_update(void);
@@ -559,9 +559,9 @@ lbl_fn_802B9DB4_000005F4:
     la r6, lbl_8087D9E0
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     li r5, 0x0
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r6, 0x14
     li r7, 0x8
     bl runtime_registerStaticObject
@@ -673,9 +673,9 @@ lbl_fn_802B9DB4_00000794:
     addi r3, r3, 0x10
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     mr r7, r30
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r5, 0x0
     li r6, 0x14
     bl runtime_registerStaticObject
@@ -805,9 +805,9 @@ lbl_fn_802B9DB4_00000990:
     la r6, lbl_8087D9E0
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     li r5, 0x0
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r6, 0x14
     li r7, 0x8
     bl runtime_registerStaticObject
@@ -918,9 +918,9 @@ lbl_fn_802B9DB4_00000B30:
     addi r3, r3, 0x10
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     mr r7, r30
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r5, 0x0
     li r6, 0x14
     bl runtime_registerStaticObject
@@ -1178,7 +1178,7 @@ lbl_fn_802BA67C_00000EDC:
     stw r4, 0x60(r1)
     stw r0, 0x64(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_802BA67C_00000FB0
     lwz r7, 0x54(r1)
@@ -1259,7 +1259,7 @@ asm void fn_802BA898(void)
     beq lbl_fn_802BA898_00001028
     lwz r3, 0x1514(r3)
     li r4, 0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
 lbl_fn_802BA898_00001028:
     addic. r0, r30, 0x1508
     beq lbl_fn_802BA898_0000104C
@@ -1269,7 +1269,7 @@ lbl_fn_802BA898_00001028:
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_802BA898_0000104C
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_802BA898_0000104C:
     mr r3, r30
     li r4, 0x0
@@ -1314,17 +1314,17 @@ asm void fn_802BA92C(void)
     stw r31, 0x14ec(r28)
     stw r31, 0x14f0(r28)
     stw r31, 0x14f4(r28)
-    bl fn_80057A64
+    bl mission_updateStub
     addi r3, r28, 0x1508
-    bl fn_80057A64
+    bl mission_updateStub
     addi r3, r28, 0x1514
-    bl fn_80057A64
+    bl mission_updateStub
     li r0, 0x5
     stw r31, 0x1520(r28)
     addi r3, r28, 0x152c
     stw r31, 0x1524(r28)
     stw r0, 0x1528(r28)
-    bl fn_80057A64
+    bl mission_updateStub
     lis r4, fn_802AC550@ha
     lis r5, atn_ColliCapsule_destructor@ha
     addi r3, r28, 0x1538
@@ -1356,14 +1356,14 @@ asm void fn_802BA92C(void)
     addi r4, r30, lbl_80746B20@l
     stfs f0, 0x1930(r28)
     stw r0, 0x12a4(r28)
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r30, r30, lbl_80746B20@l
     addi r3, r1, 0x20
     addi r4, r30, 0x18
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x14
     addi r4, r29, 0x2c
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x74
     addi r4, r30, 0x2b
     li r5, 0x0
@@ -1383,7 +1383,7 @@ asm void fn_802BA92C(void)
 lbl_fn_802BA92C_000011E8:
     addi r3, r1, 0x98
     bl fn_800ED4D8
-    bl fn_8004212C
+    bl str_getData
     addi r4, r30, 0x2d
     li r5, 0x8
     bl strncmp
@@ -1391,7 +1391,7 @@ lbl_fn_802BA92C_000011E8:
     bne lbl_fn_802BA92C_00001224
     addi r3, r1, 0x98
     bl fn_800ED4D8
-    bl fn_8004212C
+    bl str_getData
     mr r4, r3
     addi r3, r1, 0x20
     addi r4, r4, 0x8
@@ -1425,7 +1425,7 @@ lbl_fn_802BA92C_0000122C:
     addi r4, r4, 0x36
     bl res_MsgHandle_destructor
     addi r3, r1, 0x8
-    bl fn_8004212C
+    bl str_getData
     lwz r12, 0x14d4(r28)
     mr r4, r3
     addi r3, r28, 0x14d4
@@ -1732,9 +1732,9 @@ lbl_fn_802BADB0_000016AC:
     bctrl
 lbl_fn_802BADB0_000016D8:
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     mr r3, r31
     bl fn_802BDA04
     lwz r0, 0x14(r1)
@@ -1815,7 +1815,7 @@ lbl_fn_802BAFAC_000017D4:
 lbl_fn_802BAFAC_000017F8:
     mr r3, r30
     mr r4, r31
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r0, 0x12a4(r30)
     extrwi. r0, r0, 1, 29
     bne lbl_fn_802BAFAC_0000182C

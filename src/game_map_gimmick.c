@@ -16,7 +16,7 @@ extern void route_interpolatePath(void);
 extern void fn_80087858(void);
 extern void route_createSegment(void);
 extern void fn_80087BB4(void);
-extern void fn_80087E9C(void);
+extern void route_createWaypoint(void);
 extern void fn_80088FAC(void);
 extern void node_createNamedChild(void);
 extern void fn_800C2448(void);
@@ -153,10 +153,7 @@ asm void fn_801856AC(void)
     blr
 }
 
-asm void fn_801856B4(void)
-{
-    nofralloc
-    blr
+void fn_801856B4(void) {
 }
 
 asm void fn_801856B8(void)
@@ -214,7 +211,7 @@ asm void fn_801856B8(void)
     addi r5, r24, 0x10
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_80881DAC
     mr r3, r31
     lfs f2, lbl_80881DB0
@@ -223,7 +220,7 @@ asm void fn_801856B8(void)
     addi r5, r24, 0x1c
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_80881DAC
     mr r3, r31
     lfs f2, lbl_80881DB0
@@ -232,7 +229,7 @@ asm void fn_801856B8(void)
     addi r5, r24, 0x28
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_80881DB4
     mr r3, r31
     lfs f2, lbl_80881DB8
@@ -271,7 +268,7 @@ asm void fn_801856B8(void)
     addi r5, r24, 0x48
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_80881DAC
     mr r3, r31
     lfs f2, lbl_80881DB0
@@ -280,7 +277,7 @@ asm void fn_801856B8(void)
     addi r5, r24, 0x54
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_80881DAC
     mr r3, r31
     lfs f2, lbl_80881DB0
@@ -289,7 +286,7 @@ asm void fn_801856B8(void)
     addi r5, r24, 0x60
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_80881DB4
     mr r3, r31
     lfs f2, lbl_80881DB8

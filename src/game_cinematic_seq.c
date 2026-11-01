@@ -9,18 +9,18 @@ extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
 extern void mem_alloc(void);
 extern void node_createNamedChild(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void fn_800E854C(void);
 extern void system_getNextSequenceId(void);
 extern void fn_8011F91C(void);
 extern void fn_8011F9CC(void);
-extern void fn_8011FC10(void);
+extern void skill_findNodeById(void);
 extern void fn_801255C8(void);
 extern void fn_80128930(void);
 extern void fn_80129978(void);
@@ -29,10 +29,10 @@ extern void fn_8013322C(void);
 extern void fn_80134674(void);
 extern void boss_updatePhaseState(void);
 extern void fn_801437D0(void);
-extern void fn_80145334(void);
+extern void quest_updateFlow(void);
 extern void dialog_setScriptSlot(void);
-extern void fn_8014C540(void);
-extern void fn_80151448(void);
+extern void dialog_updateScriptState(void);
+extern void inventory_applyItemStats(void);
 extern void fn_8015783C(void);
 extern void fn_8015E4B0(void);
 extern void fn_80168F3C(void);
@@ -47,8 +47,8 @@ extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_update(void);
 extern void res_registerResource(void);
-extern void fn_8035B78C(void);
-extern void fn_803EA77C(void);
+extern void entity_Instance_destructor(void);
+extern void chest_spawnLoot(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_destructor(void);
@@ -165,7 +165,7 @@ asm void fn_803349EC(void)
     stfs f2, 0x10(r4)
     stfs f1, 0x14(r4)
     stfs f0, 0x18(r4)
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r12, 0x0(r30)
     mr r3, r30
     mr r4, r31
@@ -237,7 +237,7 @@ asm void fn_80334ACC(void)
 lbl_fn_80334ACC_00000128:
     mr r3, r30
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r31, 0x0
     ble lbl_fn_80334ACC_00000144
     mr r3, r30
@@ -318,7 +318,7 @@ asm void fn_80334BCC(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_80334BCC_00000244
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_80334BCC_00000244:
     cmpwi r30, 0x0
     beq lbl_fn_80334BCC_00000258
@@ -348,7 +348,7 @@ asm void fn_80334C5C(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_80334C5C_000002E8
     lwz r0, 0x54(r31)
@@ -729,7 +729,7 @@ lbl_fn_80334FDC_000007D4:
     bl atoi
     mr r4, r3
     mr r3, r30
-    bl fn_8011FC10
+    bl skill_findNodeById
     stw r3, 0x1540(r29)
     b lbl_fn_80334FDC_00000970
 lbl_fn_80334FDC_0000080C:
@@ -1007,7 +1007,7 @@ lbl_fn_80335374_00000BAC:
     stw r0, 0x157c(r31)
 lbl_fn_80335374_00000BE4:
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
     lwz r0, 0x38(r31)
     clrlwi r0, r0, 31
     cmplwi r0, 0x1
@@ -1016,7 +1016,7 @@ lbl_fn_80335374_00000BE4:
     extrwi. r0, r0, 1, 6
     bne lbl_fn_80335374_00000C10
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
 lbl_fn_80335374_00000C10:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
@@ -2046,7 +2046,7 @@ lbl_fn_80335988_00001A4C:
     mr r4, r31
     li r5, 0x2
     li r6, 0x0
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_80335988_00001B08:
     lwz r0, 0x264(r1)
     psq_l f31, 0x258(r1), 0, 0

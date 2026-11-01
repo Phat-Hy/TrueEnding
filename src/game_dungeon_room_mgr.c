@@ -7,11 +7,11 @@ extern void _restgpr_27(void);
 extern void _savegpr_25(void);
 extern void _savegpr_27(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_800BFAC8(void);
-extern void fn_8016F3D0(void);
+extern void motion_updateFogAdj(void);
+extern void battle_canTargetActor(void);
 extern void fn_801F6D7C(void);
 extern void fn_801F7DF0(void);
-extern void fn_801F837C(void);
+extern void save_findEntryByName(void);
 extern void task_mapIdToQueue(void);
 extern void task_findEntryById(void);
 extern void fn_8021A984(void);
@@ -453,7 +453,7 @@ lbl_fn_803DE89C_00000570:
     lwz r4, lbl_8087EFB4
     addi r3, r1, 0x30
     addi r5, r1, 0x3c
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f1, 0x30(r1)
     lfs f4, lbl_80885E48
     fcmpo cr0, f1, f4
@@ -549,7 +549,7 @@ lbl_fn_803DE89C_000006C4:
     addi r4, r4, lbl_807506A0@l
     lwz r5, 0x8(r30)
     addi r4, r4, 0x13a3
-    bl fn_801F837C
+    bl save_findEntryByName
 lbl_fn_803DE89C_000006DC:
     mr r3, r28
     mr r4, r29
@@ -604,7 +604,7 @@ lbl_fn_803DE89C_000006DC:
     lwz r3, 0x10b4(r31)
     mr r5, r30
     addi r4, r28, 0x13de
-    bl fn_801F837C
+    bl save_findEntryByName
 lbl_fn_803DE89C_000007B4:
     lwz r0, 0x94(r1)
     psq_l f31, 0x88(r1), 0, 0
@@ -1304,7 +1304,7 @@ lbl_fn_803DF648_000010FC:
     cmpwi r3, 0x0
     beq lbl_fn_803DF648_00001174
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     beq lbl_fn_803DF648_00001174
     lwz r0, 0xc(r1)

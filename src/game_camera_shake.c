@@ -15,7 +15,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void skin_playAnimationByName(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB440(void);
+extern void morph_updateWeights(void);
 extern void morph_updateMesh(void);
 extern void atn_Task_setActive(void);
 extern void wcs_vformat(void);
@@ -28,12 +28,12 @@ extern void fn_80109828(void);
 extern void fn_8012D8B8(void);
 extern void fn_8013310C(void);
 extern void fn_80133130(void);
-extern void fn_80145334(void);
-extern void fn_8015495C(void);
+extern void quest_updateFlow(void);
+extern void equip_applyToCharacter(void);
 extern void fn_80166760(void);
 extern void fn_80166D3C(void);
 extern void fn_80167F1C(void);
-extern void fn_8016DA4C(void);
+extern void debuff_clearStatus(void);
 extern void actor_setState(void);
 extern void fn_80178A6C(void);
 extern void sound_initGlobalInstances(void);
@@ -131,7 +131,7 @@ asm void fn_802DC1C0(void)
     bl skin_applyWeights
     addi r3, r29, 0x1588
     addi r4, r1, 0x10
-    bl fn_800CB440
+    bl morph_updateWeights
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle
@@ -412,9 +412,9 @@ asm void fn_802DC618(void)
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     mr r3, r28
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     li r0, 0x2
     stw r0, 0x58c(r28)
     mr r3, r28
@@ -1735,7 +1735,7 @@ lbl_fn_802DD1B4_00001794:
     stw r17, 0xd18(r22)
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     lfs f2, 0xc(r21)
     mr r3, r22
     psq_l f1, 0x4(r21), 0, 0
@@ -1749,7 +1749,7 @@ lbl_fn_802DD1B4_00001794:
     psq_st f1, 0x534(r22), 0, 0
     stfs f30, 0x58(r1)
     stfs f2, 0x53c(r22)
-    bl fn_80145334
+    bl quest_updateFlow
     addi r20, r20, 0x1
     addi r14, r14, 0x4
 lbl_fn_802DD1B4_000017FC:
@@ -1860,7 +1860,7 @@ lbl_fn_802DDA90_00001954:
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     mr r3, r28
     bl fn_802E3D60
 lbl_fn_802DDA90_00001980:

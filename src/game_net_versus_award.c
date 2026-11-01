@@ -8,20 +8,20 @@ extern void _restgpr_25(void);
 extern void _savegpr_14(void);
 extern void _savegpr_23(void);
 extern void _savegpr_25(void);
-extern void fn_80061824(void);
+extern void skill_calcTrajectory(void);
 extern void fn_80061AE4(void);
-extern void fn_8006EF48(void);
+extern void script_executeOpcode(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void str_findChar(void);
 extern void wcs_vformat(void);
 extern void actor_spawnActorWithId(void);
 extern void fn_801F4998(void);
-extern void fn_801F4CB4(void);
+extern void save_formatSlotTitle(void);
 extern void saveSlot_readSummary(void);
 extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
-extern void fn_801FEDBC(void);
+extern void thread_findTaskById(void);
 extern void thread_dispatchToQueue(void);
 extern void fn_8020924C(void);
 extern void fn_804A3C24(void);
@@ -457,7 +457,7 @@ lbl_fn_804C1370_000004AC:
     mr r4, r3
     mr r3, r27
     li r5, 0x0
-    bl fn_801FEDBC
+    bl thread_findTaskById
     lwz r0, lbl_8087F580
     cmpwi r0, 0x0
     beq lbl_fn_804C1370_00000684
@@ -555,7 +555,7 @@ lbl_fn_804C1370_0000060C:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     addi r31, r31, 0x1
 lbl_fn_804C1370_00000668:
     addi r23, r23, 0x1
@@ -714,7 +714,7 @@ lbl_fn_804C1634_00000834:
     li r5, 0x1
     lfs f2, lbl_808873F8
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     fcmpo cr0, f29, f1
     ble lbl_fn_804C1634_000008BC
     stw r31, 0xa4(r27)
@@ -1103,7 +1103,7 @@ lbl_fn_804C18A8_00000DB8:
     mr r4, r3
     mr r3, r21
     li r5, 0x0
-    bl fn_801FEDBC
+    bl thread_findTaskById
     lwz r4, 0x80(r18)
     addi r3, r30, 0x2db
     addi r21, r4, 0x58
@@ -1112,7 +1112,7 @@ lbl_fn_804C18A8_00000DB8:
     mr r4, r3
     mr r3, r21
     li r5, 0x0
-    bl fn_801FEDBC
+    bl thread_findTaskById
 lbl_fn_804C18A8_00000E48:
     addi r3, r25, 0x10
     addi r4, r27, 0x18
@@ -1286,7 +1286,7 @@ lbl_fn_804C18A8_00001058:
     li r5, 0x0
     lfd f0, 0x98(r1)
     fsubs f1, f0, f31
-    bl fn_801FEDBC
+    bl thread_findTaskById
 lbl_fn_804C18A8_000010CC:
     cmplw r25, r22
     bne lbl_fn_804C18A8_00001120
@@ -1298,7 +1298,7 @@ lbl_fn_804C18A8_000010CC:
     mr r4, r3
     mr r3, r16
     li r5, 0x3
-    bl fn_801FEDBC
+    bl thread_findTaskById
     lwz r4, 0x80(r18)
     addi r3, r30, 0x3f4
     addi r16, r4, 0x58
@@ -1307,7 +1307,7 @@ lbl_fn_804C18A8_000010CC:
     mr r4, r3
     mr r3, r16
     li r5, 0x3
-    bl fn_801FEDBC
+    bl thread_findTaskById
     b lbl_fn_804C18A8_00001168
 lbl_fn_804C18A8_00001120:
     lwz r4, 0x80(r18)
@@ -1318,7 +1318,7 @@ lbl_fn_804C18A8_00001120:
     mr r4, r3
     mr r3, r16
     li r5, 0x3
-    bl fn_801FEDBC
+    bl thread_findTaskById
     lwz r4, 0x80(r18)
     addi r3, r30, 0x3f4
     addi r16, r4, 0x58
@@ -1327,7 +1327,7 @@ lbl_fn_804C18A8_00001120:
     mr r4, r3
     mr r3, r16
     li r5, 0x3
-    bl fn_801FEDBC
+    bl thread_findTaskById
 lbl_fn_804C18A8_00001168:
     subi r0, r20, 0x1
     lwz r4, 0x84(r18)
@@ -1453,7 +1453,7 @@ asm void fn_804C2268(void)
     li r6, 0x0
     mr r5, r30
     addi r4, r31, 0x410
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r4, 0x50(r29)
     addi r3, r31, 0x41e
     addi r26, r4, 0x58
@@ -1462,7 +1462,7 @@ asm void fn_804C2268(void)
     mr r4, r3
     mr r3, r26
     li r5, 0x1
-    bl fn_801FEDBC
+    bl thread_findTaskById
     xoris r3, r30, 0x8000
     subfic r0, r30, 0x1e
     addc r0, r0, r3
@@ -1484,7 +1484,7 @@ asm void fn_804C2268(void)
     li r5, 0x2
     lfd f0, 0x8(r1)
     fsubs f1, f0, f1
-    bl fn_801FEDBC
+    bl thread_findTaskById
     xoris r3, r30, 0x8000
     subfic r0, r30, 0x1e
     addc r0, r0, r3
@@ -1503,7 +1503,7 @@ asm void fn_804C2268(void)
     li r5, 0x3
     lfd f0, 0x10(r1)
     fsubs f1, f0, f1
-    bl fn_801FEDBC
+    bl thread_findTaskById
     lwz r0, 0xd88(r29)
     cmpwi r0, 0x0
     beq lbl_fn_804C2268_00001444

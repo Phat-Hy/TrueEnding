@@ -17,12 +17,12 @@ extern void skin_playAnimationByName(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8574(void);
+extern void viewport_updateCulling(void);
 extern void clip_calculateFrustum(void);
 extern void fn_8013310C(void);
 extern void fn_8016E4C4(void);
 extern void actor_setState(void);
-extern void fn_801765D8(void);
+extern void battle_awardExp(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
@@ -768,7 +768,7 @@ lbl_fn_803405C0_000008A8:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
     addi r19, r19, 0x4
     addi r20, r20, 0x1
 lbl_fn_803405C0_000009CC:
@@ -1763,7 +1763,7 @@ lbl_fn_803412AC_00001834:
     mr r3, r30
     addi r0, r4, 0x1
     stw r0, 0x14b4(r30)
-    bl fn_801765D8
+    bl battle_awardExp
 lbl_fn_803412AC_00001860:
     lfs f3, 0x2e4(r30)
     lfs f0, lbl_80885340

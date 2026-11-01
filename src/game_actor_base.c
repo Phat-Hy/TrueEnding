@@ -19,7 +19,7 @@ extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSVECNormalize(void);
 extern void rand(void);
-extern void fn_8068AD58(void);
+extern void std_cos(void);
 
 /* External data declarations */
 extern u8 lbl_807366B0[];
@@ -1254,7 +1254,7 @@ lbl_fn_801146A4_000010CC:
     lfs f27, 0x0(r28)
     lfs f3, 0xb4(r3)
     fmuls f1, f0, f3
-    bl fn_8068AD58
+    bl std_cos
     frsp f0, f1
     addi r24, r24, 0x1
     cmpwi r24, 0x3

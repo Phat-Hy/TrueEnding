@@ -343,12 +343,12 @@ void fn_8068A258(void);
 void fn_8068A4A8(void);
 void fn_8068A6D8(void);
 void fn_8068A824(void);
-void fn_8068A850(void);
+void std_sin(void);
 void fn_8068A918(void);
 void fn_8068AA68(void);
 void fn_8068AAF0(void);
 void fn_8068AC5C(void);
-void fn_8068AD58(void);
+void std_cos(void);
 void fn_8068AE24(void);
 void fn_8068AE9C(void);
 void fn_8068AEA0(void);
@@ -534,7 +534,7 @@ void dtor_80695138(void);
 void fn_8069519C(void);
 void fn_80695230(void);
 void fn_80695270(void);
-void fn_806952C4(void);
+void msl_releaseRefCount(void);
 void strlen(void);
 void __va_arg(void);
 
@@ -4622,7 +4622,7 @@ asm void fn_8068A824(void)
     blr
 }
 
-asm void fn_8068A850(void)
+asm void std_sin(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -4635,49 +4635,49 @@ asm void fn_8068A850(void)
     lwz r3, 0x8(r1)
     clrlwi r3, r3, 1
     cmpw r3, r0
-    bgt lbl_fn_8068A850_00003990
+    bgt lbl_std_sin_00003990
     bl fn_806889D0
-    b lbl_fn_8068A850_00003A14
-lbl_fn_8068A850_00003990:
+    b lbl_std_sin_00003A14
+lbl_std_sin_00003990:
     lis r0, 0x7ff0
     cmpw r3, r0
-    blt lbl_fn_8068A850_000039A4
+    blt lbl_std_sin_000039A4
     fsub f1, f1, f1
-    b lbl_fn_8068A850_00003A14
-lbl_fn_8068A850_000039A4:
+    b lbl_std_sin_00003A14
+lbl_std_sin_000039A4:
     addi r3, r1, 0x10
     bl fn_8068864C
     clrlwi. r0, r3, 30
-    beq lbl_fn_8068A850_000039C8
+    beq lbl_std_sin_000039C8
     cmpwi r0, 0x1
-    beq lbl_fn_8068A850_000039D8
+    beq lbl_std_sin_000039D8
     cmpwi r0, 0x2
-    beq lbl_fn_8068A850_000039F0
-    b lbl_fn_8068A850_00003A04
-lbl_fn_8068A850_000039C8:
+    beq lbl_std_sin_000039F0
+    b lbl_std_sin_00003A04
+lbl_std_sin_000039C8:
     lfd f1, 0x10(r1)
     lfd f2, 0x18(r1)
     bl fn_806889D0
-    b lbl_fn_8068A850_00003A14
-lbl_fn_8068A850_000039D8:
+    b lbl_std_sin_00003A14
+lbl_std_sin_000039D8:
     lfd f1, 0x10(r1)
     li r3, 0x1
     lfd f2, 0x18(r1)
     bl fn_8068A198
     fneg f1, f1
-    b lbl_fn_8068A850_00003A14
-lbl_fn_8068A850_000039F0:
+    b lbl_std_sin_00003A14
+lbl_std_sin_000039F0:
     lfd f1, 0x10(r1)
     lfd f2, 0x18(r1)
     bl fn_806889D0
     fneg f1, f1
-    b lbl_fn_8068A850_00003A14
-lbl_fn_8068A850_00003A04:
+    b lbl_std_sin_00003A14
+lbl_std_sin_00003A04:
     lfd f1, 0x10(r1)
     li r3, 0x1
     lfd f2, 0x18(r1)
     bl fn_8068A198
-lbl_fn_8068A850_00003A14:
+lbl_std_sin_00003A14:
     lwz r0, 0x24(r1)
     mtlr r0
     addi r1, r1, 0x20
@@ -5009,7 +5009,7 @@ lbl_fn_8068AC5C_00003E5C:
     blr
 }
 
-asm void fn_8068AD58(void)
+asm void std_cos(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -5022,50 +5022,50 @@ asm void fn_8068AD58(void)
     lwz r3, 0x8(r1)
     clrlwi r3, r3, 1
     cmpw r3, r0
-    bgt lbl_fn_8068AD58_00003E9C
+    bgt lbl_std_cos_00003E9C
     li r3, 0x0
     bl fn_8068A198
-    b lbl_fn_8068AD58_00003F20
-lbl_fn_8068AD58_00003E9C:
+    b lbl_std_cos_00003F20
+lbl_std_cos_00003E9C:
     lis r0, 0x7ff0
     cmpw r3, r0
-    blt lbl_fn_8068AD58_00003EB0
+    blt lbl_std_cos_00003EB0
     fsub f1, f1, f1
-    b lbl_fn_8068AD58_00003F20
-lbl_fn_8068AD58_00003EB0:
+    b lbl_std_cos_00003F20
+lbl_std_cos_00003EB0:
     addi r3, r1, 0x10
     bl fn_8068864C
     clrlwi. r0, r3, 30
-    beq lbl_fn_8068AD58_00003ED4
+    beq lbl_std_cos_00003ED4
     cmpwi r0, 0x1
-    beq lbl_fn_8068AD58_00003EE8
+    beq lbl_std_cos_00003EE8
     cmpwi r0, 0x2
-    beq lbl_fn_8068AD58_00003EF8
-    b lbl_fn_8068AD58_00003F10
-lbl_fn_8068AD58_00003ED4:
+    beq lbl_std_cos_00003EF8
+    b lbl_std_cos_00003F10
+lbl_std_cos_00003ED4:
     lfd f1, 0x10(r1)
     li r3, 0x1
     lfd f2, 0x18(r1)
     bl fn_8068A198
-    b lbl_fn_8068AD58_00003F20
-lbl_fn_8068AD58_00003EE8:
+    b lbl_std_cos_00003F20
+lbl_std_cos_00003EE8:
     lfd f1, 0x10(r1)
     lfd f2, 0x18(r1)
     bl fn_806889D0
-    b lbl_fn_8068AD58_00003F20
-lbl_fn_8068AD58_00003EF8:
+    b lbl_std_cos_00003F20
+lbl_std_cos_00003EF8:
     lfd f1, 0x10(r1)
     li r3, 0x1
     lfd f2, 0x18(r1)
     bl fn_8068A198
     fneg f1, f1
-    b lbl_fn_8068AD58_00003F20
-lbl_fn_8068AD58_00003F10:
+    b lbl_std_cos_00003F20
+lbl_std_cos_00003F10:
     lfd f1, 0x10(r1)
     lfd f2, 0x18(r1)
     bl fn_806889D0
     fneg f1, f1
-lbl_fn_8068AD58_00003F20:
+lbl_std_cos_00003F20:
     lwz r0, 0x24(r1)
     mtlr r0
     addi r1, r1, 0x20
@@ -5641,7 +5641,7 @@ asm void fn_8068B47C(void)
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_8068B47C_000045E0
-    bl fn_806952C4
+    bl msl_releaseRefCount
     b lbl_fn_8068B47C_000045E0
     addi r3, r31, 0x8
     bl fn_806974B4
@@ -5706,7 +5706,7 @@ lbl_fn_8068B50C_00004684:
     lwz r3, 0x4(r30)
     cmpwi r3, 0x0
     beq lbl_fn_8068B50C_000046BC
-    bl fn_806952C4
+    bl msl_releaseRefCount
     b lbl_fn_8068B50C_000046BC
     addi r3, r31, 0x8
     bl fn_806974B4
@@ -6126,7 +6126,7 @@ asm void fn_8068BAC0(void)
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_8068BAC0_00004C28
-    bl fn_806952C4
+    bl msl_releaseRefCount
     b lbl_fn_8068BAC0_00004C28
     addi r3, r31, 0x8
     bl fn_806974B4
@@ -6182,7 +6182,7 @@ lbl_fn_8068BB54_00004CB0:
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_8068BB54_00004CE4
-    bl fn_806952C4
+    bl msl_releaseRefCount
     b lbl_fn_8068BB54_00004CE4
     addi r3, r31, 0x8
     bl fn_806974B4
@@ -6527,7 +6527,7 @@ asm void fn_8068C040(void)
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_8068C040_000051A8
-    bl fn_806952C4
+    bl msl_releaseRefCount
     b lbl_fn_8068C040_000051A8
     addi r3, r31, 0x8
     bl fn_806974B4
@@ -6571,7 +6571,7 @@ asm void dtor_8068C0D4(void)
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_dtor_8068C0D4_00005238
-    bl fn_806952C4
+    bl msl_releaseRefCount
     b lbl_dtor_8068C0D4_00005238
     addi r3, r31, 0x8
     bl fn_806974B4
@@ -6627,7 +6627,7 @@ lbl_fn_8068C164_000052C0:
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_8068C164_000052F4
-    bl fn_806952C4
+    bl msl_releaseRefCount
     b lbl_fn_8068C164_000052F4
     addi r3, r31, 0x8
     bl fn_806974B4
@@ -7001,7 +7001,7 @@ lbl_fn_8068C4B8_000057B0:
     lwz r3, 0x4(r4)
     cmpwi r3, 0x0
     beq lbl_fn_8068C4B8_000057DC
-    bl fn_806952C4
+    bl msl_releaseRefCount
     b lbl_fn_8068C4B8_000057DC
     addi r3, r31, 0x78
     bl fn_806974B4
@@ -7178,7 +7178,7 @@ lbl_fn_8068C72C_00005A24:
     lwz r3, 0x4(r4)
     cmpwi r3, 0x0
     beq lbl_fn_8068C72C_00005A50
-    bl fn_806952C4
+    bl msl_releaseRefCount
     b lbl_fn_8068C72C_00005A50
     addi r3, r31, 0x78
     bl fn_806974B4
@@ -7441,7 +7441,7 @@ lbl_fn_8068C9A0_00005DE0:
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_8068C9A0_00005E08
-    bl fn_806952C4
+    bl msl_releaseRefCount
     b lbl_fn_8068C9A0_00005E08
     addi r3, r31, 0x50
     bl fn_806974B4
@@ -7703,7 +7703,7 @@ lbl_fn_8068CD2C_0000616C:
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_8068CD2C_00006194
-    bl fn_806952C4
+    bl msl_releaseRefCount
     b lbl_fn_8068CD2C_00006194
     addi r3, r31, 0x50
     bl fn_806974B4
@@ -7765,7 +7765,7 @@ lbl_fn_8068D0B8_00006210:
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_8068D0B8_00006244
-    bl fn_806952C4
+    bl msl_releaseRefCount
     b lbl_fn_8068D0B8_00006244
     addi r3, r31, 0x8
     bl fn_806974B4
@@ -8444,7 +8444,7 @@ lbl_fn_8068D9BC_00006B14:
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_8068D9BC_00006B48
-    bl fn_806952C4
+    bl msl_releaseRefCount
     b lbl_fn_8068D9BC_00006B48
     addi r3, r31, 0x8
     bl fn_806974B4
@@ -9171,7 +9171,7 @@ lbl_fn_8068E270_000074A0:
     lwz r3, 0x4(r4)
     cmpwi r3, 0x0
     beq lbl_fn_8068E270_000074E4
-    bl fn_806952C4
+    bl msl_releaseRefCount
     b lbl_fn_8068E270_000074E4
     addi r3, r31, 0x18
     bl fn_806974B4
@@ -9381,7 +9381,7 @@ lbl_fn_8068E554_0000778C:
     lwz r3, 0x4(r4)
     cmpwi r3, 0x0
     beq lbl_fn_8068E554_000077D0
-    bl fn_806952C4
+    bl msl_releaseRefCount
     b lbl_fn_8068E554_000077D0
     addi r3, r31, 0x18
     bl fn_806974B4
@@ -9494,7 +9494,7 @@ lbl_fn_8068E6E8_0000791C:
     lwz r3, 0x4(r4)
     cmpwi r3, 0x0
     beq lbl_fn_8068E6E8_00007960
-    bl fn_806952C4
+    bl msl_releaseRefCount
     b lbl_fn_8068E6E8_00007960
     addi r3, r31, 0x18
     bl fn_806974B4
@@ -9609,7 +9609,7 @@ lbl_fn_8068E878_00007AB4:
     lwz r3, 0x4(r4)
     cmpwi r3, 0x0
     beq lbl_fn_8068E878_00007AF8
-    bl fn_806952C4
+    bl msl_releaseRefCount
     b lbl_fn_8068E878_00007AF8
     addi r3, r31, 0x18
     bl fn_806974B4
@@ -14350,7 +14350,7 @@ lbl_fn_806926D4_0000B954:
 lbl_fn_806926D4_0000B974:
     cmpwi r3, 0x0
     beq lbl_fn_806926D4_0000B990
-    bl fn_806952C4
+    bl msl_releaseRefCount
     b lbl_fn_806926D4_0000B990
     addi r3, r31, 0x68
     bl fn_806974B4
@@ -16453,7 +16453,7 @@ asm void fn_80694328(void)
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_80694328_0000D48C
-    bl fn_806952C4
+    bl msl_releaseRefCount
     b lbl_fn_80694328_0000D48C
     addi r3, r31, 0x8
     bl fn_806974B4
@@ -17486,7 +17486,7 @@ asm void fn_8069519C(void)
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_8069519C_0000E304
-    bl fn_806952C4
+    bl msl_releaseRefCount
     b lbl_fn_8069519C_0000E304
     addi r3, r31, 0x8
     bl fn_806974B4
@@ -17561,7 +17561,7 @@ lbl_fn_80695270_0000E3B8:
     blr
 }
 
-asm void fn_806952C4(void)
+asm void msl_releaseRefCount(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -17572,7 +17572,7 @@ asm void fn_806952C4(void)
     lwz r0, 0x4(r3)
     subic. r0, r0, 0x1
     stw r0, 0x4(r3)
-    bne lbl_fn_806952C4_0000E434
+    bne lbl_msl_releaseRefCount_0000E434
     lwz r12, 0x0(r3)
     lwz r12, 0x10(r12)
     mtctr r12
@@ -17580,16 +17580,16 @@ asm void fn_806952C4(void)
     lwz r0, 0x8(r31)
     subic. r0, r0, 0x1
     stw r0, 0x8(r31)
-    bne lbl_fn_806952C4_0000E434
+    bne lbl_msl_releaseRefCount_0000E434
     cmpwi r31, 0x0
-    beq lbl_fn_806952C4_0000E434
+    beq lbl_msl_releaseRefCount_0000E434
     lwz r12, 0x0(r31)
     mr r3, r31
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-lbl_fn_806952C4_0000E434:
+lbl_msl_releaseRefCount_0000E434:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0

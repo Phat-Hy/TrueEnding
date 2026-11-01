@@ -13,14 +13,14 @@ extern void fn_8000D430(void);
 extern void fn_80058078(void);
 extern void fn_800580BC(void);
 extern void talk_formatQuotedString(void);
-extern void fn_8005BBF8(void);
-extern void fn_8005BCE8(void);
+extern void talk_parseQuotes(void);
+extern void talk_copySpeakerName(void);
 extern void fn_80070C98(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_8008AD4C(void);
-extern void fn_8008B140(void);
+extern void area_updateZoneState(void);
+extern void map_processTrigger(void);
 extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -31,11 +31,11 @@ extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_update(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
-extern void fn_803EC568(void);
-extern void fn_803EC69C(void);
+extern void task_createWorker(void);
+extern void task_destroyWorker(void);
 extern void fn_803EC7A0(void);
-extern void fn_803EC91C(void);
-extern void fn_803ED0D4(void);
+extern void task_updateWorker(void);
+extern void task_initWorkerContext(void);
 extern void fn_803ED5D0(void);
 extern void fn_803ED774(void);
 extern void fn_80425498(void);
@@ -46,7 +46,7 @@ extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSVECMag(void);
 extern void strcmp(void);
-extern void fn_8068A850(void);
+extern void std_sin(void);
 extern void runtime_registerStaticObject(void);
 extern char* strcpy(char* dest, const char* src);
 
@@ -136,11 +136,11 @@ asm void fn_80423958(void)
     stw r31, 0xc(r1)
     mr r31, r3
     addi r3, r3, 0xf4
-    bl fn_8008B140
+    bl map_processTrigger
     cmpwi r3, 0x0
     bne lbl_fn_80423958_000000A4
     addi r3, r31, 0x4c4
-    bl fn_8008B140
+    bl map_processTrigger
     cmpwi r3, 0x0
     beq lbl_fn_80423958_000000AC
 lbl_fn_80423958_000000A4:
@@ -211,7 +211,7 @@ asm void fn_804239D4(void)
     addi r4, r4, lbl_807774B8@l
     stw r4, 0x108(r1)
     la r4, lbl_8087D710
-    bl fn_8005BCE8
+    bl talk_copySpeakerName
     lis r31, lbl_80753460@ha
     addi r31, r31, lbl_80753460@l
 lbl_fn_804239D4_0000019C:
@@ -230,7 +230,7 @@ lbl_fn_804239D4_0000019C:
     mr r4, r3
     addi r3, r29, 0xf4
     li r5, 0x0
-    bl fn_8008AD4C
+    bl area_updateZoneState
     mr r3, r29
     addi r4, r29, 0xf4
     addi r5, r1, 0x108
@@ -247,7 +247,7 @@ lbl_fn_804239D4_000001F0:
     mr r4, r3
     addi r3, r29, 0x4c4
     li r5, 0x0
-    bl fn_8008AD4C
+    bl area_updateZoneState
     mr r3, r29
     addi r4, r29, 0x4c4
     addi r5, r1, 0x108
@@ -297,7 +297,7 @@ lbl_fn_804239D4_000002A4:
     bl res_MsgHandle_destructor
 lbl_fn_804239D4_000002CC:
     addi r3, r1, 0x108
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_804239D4_0000019C
     lwz r0, 0x754(r1)
@@ -347,11 +347,11 @@ lbl_fn_80423BE0_0000034C:
     mr r3, r31
     addi r4, r31, 0xf4
     li r5, 0x1
-    bl fn_803ED0D4
+    bl task_initWorkerContext
     mr r3, r31
     addi r4, r31, 0x4c4
     li r5, 0x1
-    bl fn_803ED0D4
+    bl task_initWorkerContext
     lwz r0, 0x89c(r31)
     mr r4, r31
     li r5, 0x0
@@ -447,7 +447,7 @@ lbl_fn_80423BE0_00000474:
     mr r4, r3
     mr r3, r31
     li r5, 0x1
-    bl fn_803ED0D4
+    bl task_initWorkerContext
 lbl_fn_80423BE0_00000508:
     lwz r12, 0x0(r31)
     mr r3, r31
@@ -590,7 +590,7 @@ asm void fn_80423F64(void)
     mr r4, r28
     mr r5, r29
     mr r6, r30
-    bl fn_803EC568
+    bl task_createWorker
     lis r3, lbl_8078E3D8@ha
     li r4, 0x0
     addi r3, r3, lbl_8078E3D8@l
@@ -757,7 +757,7 @@ lbl_fn_80424170_00000920:
 lbl_fn_80424170_0000092C:
     mr r3, r28
     li r4, 0x0
-    bl fn_803EC69C
+    bl task_destroyWorker
     cmpwi r29, 0x0
     ble lbl_fn_80424170_00000948
     mr r3, r28
@@ -787,7 +787,7 @@ asm void fn_80424254(void)
     psq_st f30, 0xf8(r1), 0, 0
     bl _savegpr_25
     mr r31, r3
-    bl fn_803EC91C
+    bl task_updateWorker
     cmpwi r3, 0x0
     bne lbl_fn_80424254_00000F78
     lwz r3, 0xf4(r31)
@@ -1332,7 +1332,7 @@ asm void fn_8042499C(void)
     fsubs f1, f1, f3
     fdivs f1, f2, f1
     fmuls f1, f0, f1
-    bl fn_8068A850
+    bl std_sin
     frsp f2, f1
     lfs f1, lbl_80886674
     lfs f0, lbl_8088667C

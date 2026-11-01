@@ -8,7 +8,7 @@ extern void fn_80049B2C(void);
 extern void fn_80049B74(void);
 extern void fn_80049CDC(void);
 extern void fn_80049E3C(void);
-extern void fn_800697D8(void);
+extern void boss_recordDamage(void);
 extern void mem_free(void);
 extern void fn_80084A78(void);
 extern void mem_getAllocSize(void);
@@ -20,7 +20,7 @@ extern void PSMTXRotRad(void);
 extern void C_MTXLookAt(void);
 extern void PSMTXMultVec(void);
 extern void wcslen(void);
-extern void fn_806952C4(void);
+extern void msl_releaseRefCount(void);
 extern void vec3_isNonZero(void);
 extern void fn_80709AD0(void);
 extern void fn_8070AD40(void);
@@ -194,7 +194,7 @@ lbl_fn_800C6CD4_000000F8:
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_800C6CD4_00000134
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_800C6CD4_00000134:
     lwz r3, 0x24a0(r22)
     mr r4, r24
@@ -907,7 +907,7 @@ lbl_fn_800C7568_00000A00:
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_800C7568_00000A48
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_800C7568_00000A48:
     mulli r6, r28, 0x380
     lwz r3, 0x2428(r26)
@@ -1152,10 +1152,7 @@ lbl_fn_800C79DC_00000D50:
     blr
 }
 
-asm void fn_800C7A2C(void)
-{
-    nofralloc
-    blr
+void fn_800C7A2C(void) {
 }
 
 asm void fn_800C7A30(void)
@@ -1227,7 +1224,7 @@ lbl_fn_800C7A30_00000E18:
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_800C7A30_00000E60
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_800C7A30_00000E60:
     lwz r3, 0x0(r25)
     mr r4, r26
@@ -1247,10 +1244,7 @@ lbl_fn_800C7A30_00000E60:
     blr
 }
 
-asm void fn_800C7B74(void)
-{
-    nofralloc
-    blr
+void fn_800C7B74(void) {
 }
 
 asm void fn_800C7B78(void)
@@ -1319,7 +1313,7 @@ lbl_fn_800C7B78_00000F54:
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_800C7B78_00000F9C
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_800C7B78_00000F9C:
     lwz r3, 0x0(r29)
     mr r4, r30
@@ -1336,10 +1330,7 @@ lbl_fn_800C7B78_00000F9C:
     blr
 }
 
-asm void fn_800C7CA4(void)
-{
-    nofralloc
-    blr
+void fn_800C7CA4(void) {
 }
 
 asm void fn_800C7CA8(void)
@@ -1406,7 +1397,7 @@ lbl_fn_800C7CA8_0000107C:
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_800C7CA8_000010C4
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_800C7CA8_000010C4:
     lwz r4, 0x0(r30)
     addi r3, r30, 0x4
@@ -2198,7 +2189,7 @@ lbl_fn_800C8780_00001B74:
     bl sprintf
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x128
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_fn_800C8780_00001B98:
     lwz r3, 0xa8(r30)
     li r0, 0x0
@@ -2424,7 +2415,7 @@ lbl_fn_800C8780_00001E78:
     bl sprintf
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x28
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_fn_800C8780_00001EB4:
     lwz r0, 0x244(r1)
     lwz r31, 0x23c(r1)

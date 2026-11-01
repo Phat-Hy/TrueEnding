@@ -12,23 +12,23 @@ extern void _savegpr_24(void);
 extern void dtor_80084684(void);
 extern void fn_80041C0C(void);
 extern void fn_80042740(void);
-extern void fn_8005BCE8(void);
+extern void talk_copySpeakerName(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
-extern void fn_80087E9C(void);
+extern void route_createWaypoint(void);
 extern void node_createNamedChild(void);
 extern void fn_800928B0(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_playAnimationByName(void);
 extern void skin_applyWeights(void);
-extern void fn_800CB360(void);
+extern void morph_reset(void);
 extern void fn_800CB36C(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB440(void);
+extern void morph_updateWeights(void);
 extern void fn_800CB480(void);
 extern void fn_800CB518(void);
 extern void morph_updateMesh(void);
@@ -36,19 +36,19 @@ extern void fn_800CB688(void);
 extern void fn_800CB6B0(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
-extern void fn_800EF73C(void);
+extern void cam_destroyMsgHandle(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void fn_8021823C(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
-extern void fn_80237518(void);
-extern void fn_802375C4(void);
-extern void fn_802376D0(void);
+extern void res_MsgHandle_ctor(void);
+extern void res_Resource_destructor(void);
+extern void res_MsgHandle_isLoading(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_update(void);
 extern void res_findResourceSlot(void);
-extern void fn_8023A680(void);
+extern void res_Shader_bindParams(void);
 extern void res_registerResource(void);
 extern void fn_803F1A38(void);
 extern void fn_805A38F4(void);
@@ -177,7 +177,7 @@ asm void fn_803EFCA8(void)
     addi r4, r4, lbl_807774B8@l
     stw r4, 0x0(r29)
     la r4, lbl_8087D710
-    bl fn_8005BCE8
+    bl talk_copySpeakerName
     lwz r31, 0x1c(r1)
     mr r3, r29
     lwz r30, 0x18(r1)
@@ -646,9 +646,9 @@ asm void fn_803F0328(void)
     lwz r0, 0x4(r3)
     cmpwi r0, 0x0
     beq lbl_fn_803F0328_000006C0
-    lis r4, fn_802375C4@ha
+    lis r4, res_Resource_destructor@ha
     mr r3, r0
-    addi r4, r4, fn_802375C4@l
+    addi r4, r4, res_Resource_destructor@l
     bl __destroy_arr
 lbl_fn_803F0328_000006C0:
     cmpwi r30, 0x0
@@ -661,12 +661,12 @@ lbl_fn_803F0328_000006C0:
     addi r3, r3, 0x10
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80237518@ha
-    lis r5, fn_802375C4@ha
+    lis r4, res_MsgHandle_ctor@ha
+    lis r5, res_Resource_destructor@ha
     mr r7, r30
     li r6, 0xc
-    addi r4, r4, fn_80237518@l
-    addi r5, r5, fn_802375C4@l
+    addi r4, r4, res_MsgHandle_ctor@l
+    addi r5, r5, res_Resource_destructor@l
     bl runtime_registerStaticObject
     stw r3, 0x4(r29)
     b lbl_fn_803F0328_00000714
@@ -698,9 +698,9 @@ asm void fn_803F03D8(void)
     lwz r0, 0x4(r3)
     cmpwi r0, 0x0
     beq lbl_fn_803F03D8_00000770
-    lis r4, fn_800EF73C@ha
+    lis r4, cam_destroyMsgHandle@ha
     mr r3, r0
-    addi r4, r4, fn_800EF73C@l
+    addi r4, r4, cam_destroyMsgHandle@l
     bl __destroy_arr
 lbl_fn_803F03D8_00000770:
     cmpwi r30, 0x0
@@ -714,11 +714,11 @@ lbl_fn_803F03D8_00000770:
     li r7, 0x0
     bl mem_realloc
     lis r4, res_MsgHandle_constructor@ha
-    lis r5, fn_800EF73C@ha
+    lis r5, cam_destroyMsgHandle@ha
     mr r7, r30
     li r6, 0xc
     addi r4, r4, res_MsgHandle_constructor@l
-    addi r5, r5, fn_800EF73C@l
+    addi r5, r5, cam_destroyMsgHandle@l
     bl runtime_registerStaticObject
     stw r3, 0x4(r29)
     b lbl_fn_803F03D8_000007C4
@@ -765,11 +765,11 @@ lbl_fn_803F0488_00000820:
     la r6, lbl_8087DF18
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_800CB360@ha
+    lis r4, morph_reset@ha
     lis r5, ref_releaseHandle@ha
     mr r7, r30
     li r6, 0x4
-    addi r4, r4, fn_800CB360@l
+    addi r4, r4, morph_reset@l
     addi r5, r5, ref_releaseHandle@l
     bl runtime_registerStaticObject
     stw r3, 0x4(r29)
@@ -955,7 +955,7 @@ asm void fn_803F06B0(void)
 lbl_fn_803F06B0_00000A30:
     lwz r0, 0xc(r29)
     add r3, r0, r31
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     beq lbl_fn_803F06B0_00000A4C
     li r3, 0x1
@@ -1186,7 +1186,7 @@ lbl_fn_803F0764_00000D34:
     li r10, 0x0
     stw r29, 0x10(r1)
     lfs f1, 0x1c(r23)
-    bl fn_8023A680
+    bl res_Shader_bindParams
     b lbl_fn_803F0764_00000E1C
 lbl_fn_803F0764_00000D8C:
     lfs f3, 0x74(r16)
@@ -1224,7 +1224,7 @@ lbl_fn_803F0764_00000D8C:
     li r10, 0x0
     stw r29, 0x10(r1)
     lfs f1, 0x1c(r23)
-    bl fn_8023A680
+    bl res_Shader_bindParams
 lbl_fn_803F0764_00000E1C:
     stw r29, 0x24(r23)
     b lbl_fn_803F0764_000013A0
@@ -1378,7 +1378,7 @@ lbl_fn_803F0764_00000FD0:
     lwz r3, 0x1c(r15)
     slwi r0, r0, 2
     add r3, r3, r0
-    bl fn_800CB440
+    bl morph_updateWeights
 lbl_fn_803F0764_00001058:
     addi r3, r1, 0x18
     li r4, -0x1
@@ -1793,7 +1793,7 @@ lbl_fn_803F11F8_00001594:
     addi r5, r29, 0x10
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_80885F90
     mr r3, r25
     lfs f2, lbl_80885FA0
@@ -1887,7 +1887,7 @@ asm void fn_803F13D4(void)
     stw r0, 0x4(r3)
     stw r0, 0x8(r3)
     addi r3, r3, 0xc
-    bl fn_800CB360
+    bl morph_reset
     mr r3, r31
     lwz r31, 0xc(r1)
     lwz r0, 0x14(r1)
@@ -2026,7 +2026,7 @@ lbl_fn_803F1508_00001910:
     addi r3, r1, 0x3c
     stw r24, 0x34(r1)
     stw r24, 0x38(r1)
-    bl fn_800CB360
+    bl morph_reset
     stw r22, 0x30(r1)
     lwz r0, 0x5c(r26)
     slwi r0, r0, 4
@@ -2099,7 +2099,7 @@ lbl_fn_803F1508_00001A00:
     cmpw r3, r0
     bgt lbl_fn_803F1508_00001D48
     addi r3, r1, 0x10
-    bl fn_800CB360
+    bl morph_reset
     addi r3, r28, 0x10
     li r4, 0x7
     li r5, 0x0
@@ -2122,7 +2122,7 @@ lbl_fn_803F1508_00001A68:
     bne lbl_fn_803F1508_00001A9C
     addi r3, r1, 0x10
     addi r4, r22, 0xc
-    bl fn_800CB440
+    bl morph_updateWeights
     addi r3, r22, 0xc
     bl fn_800CB480
     b lbl_fn_803F1508_00001AA8
@@ -2244,7 +2244,7 @@ lbl_fn_803F1508_00001C28:
     bl skin_applyWeights
     addi r3, r1, 0x10
     addi r4, r1, 0xc
-    bl fn_800CB440
+    bl morph_updateWeights
     addi r3, r1, 0xc
     li r4, -0x1
     bl ref_releaseHandle
@@ -2268,7 +2268,7 @@ lbl_fn_803F1508_00001C88:
     bl skin_playAnimationByName
     addi r3, r1, 0x10
     addi r4, r1, 0x8
-    bl fn_800CB440
+    bl morph_updateWeights
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -2308,7 +2308,7 @@ lbl_fn_803F1508_00001D1C:
     bne lbl_fn_803F1508_00001D38
     addi r3, r27, 0xc
     addi r4, r1, 0x10
-    bl fn_800CB440
+    bl morph_updateWeights
 lbl_fn_803F1508_00001D38:
     stw r25, 0x8(r27)
     addi r3, r1, 0x10

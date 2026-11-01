@@ -13,21 +13,21 @@ extern void dtor_80084684(void);
 extern void fn_8000D9E8(void);
 extern void fn_8000D9F8(void);
 extern void fn_8000DCF4(void);
-extern void fn_8001047C(void);
+extern void vec3_assign(void);
 extern void vec3_sub(void);
-extern void fn_8006EF48(void);
+extern void script_executeOpcode(void);
 extern void str_assignBuffer(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_800BFAC8(void);
+extern void motion_updateFogAdj(void);
 extern void fn_800DBF68(void);
 extern void str_findChar(void);
 extern void wcs_vformat(void);
 extern void fn_800F52F0(void);
 extern void fn_800F530C(void);
 extern void fn_800F7FB4(void);
-extern void fn_800F7FF0(void);
+extern void viewport_getNextSequenceId(void);
 extern void fn_80139EFC(void);
 extern void fn_80139F4C(void);
 extern void fn_8013A16C(void);
@@ -38,11 +38,11 @@ extern void fn_801A03EC(void);
 extern void fn_801A0408(void);
 extern void fn_801F4818(void);
 extern void fn_801F4AA0(void);
-extern void fn_801F4CB4(void);
+extern void save_formatSlotTitle(void);
 extern void saveSlot_readSummary(void);
 extern void save_computeCrc32(void);
 extern void fn_801F72D4(void);
-extern void fn_801F837C(void);
+extern void save_findEntryByName(void);
 extern void fn_801F8830(void);
 extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
@@ -919,11 +919,11 @@ lbl_fn_805AB82C_00000AC8:
     fcmpo cr0, f1, f31
     ble lbl_fn_805AB82C_00000B30
     addi r3, r1, 0x34
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
 lbl_fn_805AB82C_00000B30:
     addi r3, r1, 0x10
     addi r4, r1, 0x34
-    bl fn_8001047C
+    bl vec3_assign
     bl fn_805A6D24
     cmpwi r3, 0x8
     beq lbl_fn_805AB82C_00000B64
@@ -1745,7 +1745,7 @@ lbl_fn_805AC75C_00001658:
     lwz r4, lbl_8087EFB4
     mr r5, r16
     addi r3, r1, 0x98
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lwz r4, 0x15b0(r15)
     lis r16, lbl_807639F8@ha
     addi r16, r16, lbl_807639F8@l
@@ -2026,7 +2026,7 @@ lbl_fn_805AC75C_00001A54:
     fdivs f30, f5, f0
     lwz r5, 0x36c(r1)
     lwz r3, 0x15b0(r15)
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r4, 0x15b0(r15)
     addi r3, r17, 0x154
     addi r18, r4, 0x58
@@ -2262,7 +2262,7 @@ lbl_fn_805AC75C_00001DDC:
     lfs f1, 0x138(r1)
     lwz r4, 0x8(r4)
     lfs f2, lbl_808882F4
-    bl fn_8006EF48
+    bl script_executeOpcode
     lwz r3, 0x15bc(r14)
     addi r4, r17, 0x18d
     bl save_computeCrc32
@@ -2270,12 +2270,12 @@ lbl_fn_805AC75C_00001DDC:
     addi r4, r17, 0x194
     lwz r3, 0x15bc(r14)
     lwz r5, 0x8(r5)
-    bl fn_801F837C
+    bl save_findEntryByName
     lwz r5, 0xa8(r14)
     addi r4, r17, 0x199
     lwz r3, 0x15bc(r14)
     lwz r5, 0x8(r5)
-    bl fn_801F837C
+    bl save_findEntryByName
     lwz r0, 0x5c(r15)
     cmpw r16, r0
     bne lbl_fn_805AC75C_00001E7C

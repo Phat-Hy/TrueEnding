@@ -14,36 +14,36 @@ extern void talk_setSpeakerName(void);
 extern void fn_8006AFF8(void);
 extern void route_createSegment(void);
 extern void node_createNamedChild(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void atn_Task_setActive(void);
-extern void fn_800F8574(void);
-extern void fn_800F8C6C(void);
+extern void viewport_updateCulling(void);
+extern void scissor_clipFrustum(void);
 extern void fn_80126214(void);
 extern void boss_updatePhaseState(void);
 extern void fn_8013A258(void);
-extern void fn_8013CB68(void);
-extern void fn_80144710(void);
+extern void npc_updateTalkInteraction(void);
+extern void quest_evaluateConditions(void);
 extern void fn_80158BB4(void);
 extern void actor_setState(void);
 extern void assert_formatLocation(void);
 extern void task_findEntryById(void);
-extern void fn_80237518(void);
-extern void fn_802375C4(void);
-extern void fn_80237654(void);
-extern void fn_802376D0(void);
+extern void res_MsgHandle_ctor(void);
+extern void res_Resource_destructor(void);
+extern void res_Resource_unload(void);
+extern void res_MsgHandle_isLoading(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_unload(void);
 extern void res_MsgHandle_update(void);
 extern void res_findResourceSlot(void);
 extern void fn_8026580C(void);
-extern void fn_8035B694(void);
-extern void fn_8035B78C(void);
+extern void entity_Instance_constructor(void);
+extern void entity_Instance_destructor(void);
 extern void world_setLocalFlag(void);
-extern void fn_803EA77C(void);
+extern void chest_spawnLoot(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
@@ -324,7 +324,7 @@ lbl_fn_80263CF0_000002E8:
     mr r3, r29
     addi r4, r1, 0x8c
     li r5, 0x1
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
 lbl_fn_80263CF0_00000300:
     lwz r0, 0x154(r1)
     psq_l f31, 0x148(r1), 0, 0
@@ -663,7 +663,7 @@ lbl_fn_8026442C_00000788:
     bl task_findEntryById
     mr r31, r3
     mr r3, r30
-    bl fn_80144710
+    bl quest_evaluateConditions
     lwz r8, 0x590(r30)
     mr r6, r30
     lwz r3, lbl_8087F048
@@ -673,7 +673,7 @@ lbl_fn_8026442C_00000788:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
 lbl_fn_8026442C_000007E8:
     lfs f3, 0x2e4(r30)
     lfs f0, lbl_808835FC
@@ -937,7 +937,7 @@ lbl_fn_8026474C_00000AF8:
     lfs f2, lbl_80883630
     li r5, 0x19
     li r6, 0x0
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_8026474C_00000BC0:
     lwz r0, 0x34(r1)
     psq_l f31, 0x28(r1), 0, 0
@@ -1175,7 +1175,7 @@ lbl_fn_802648CC_00000EB8:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
     lfs f0, lbl_80883600
     stfs f0, 0xfb8(r30)
 lbl_fn_802648CC_00000F34:
@@ -1245,7 +1245,7 @@ lbl_fn_80264C88_00000FEC:
     bl task_findEntryById
     mr r31, r3
     mr r3, r30
-    bl fn_80144710
+    bl quest_evaluateConditions
     li r0, 0x1
     stb r0, 0x59f(r30)
     lwz r8, 0x590(r30)
@@ -1257,7 +1257,7 @@ lbl_fn_80264C88_00000FEC:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     li r0, 0x0
     stb r0, 0x59f(r30)
     b lbl_fn_80264C88_000010A4
@@ -1301,7 +1301,7 @@ asm void fn_80264DB4(void)
     mr r31, r5
     lwz r5, 0x20(r5)
     mr r30, r3
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lis r3, lbl_80784DD8@ha
     addi r28, r30, 0x14b0
     addi r3, r3, lbl_80784DD8@l
@@ -1371,7 +1371,7 @@ asm void fn_80264DB4(void)
     addi r3, r30, 0x15f4
     bl res_MsgHandle_constructor
     addi r3, r30, 0x1600
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     addi r3, r30, 0x160c
     bl res_MsgHandle_constructor
     addi r3, r30, 0x1618
@@ -1594,7 +1594,7 @@ lbl_fn_80264DB4_00001494:
     bl res_MsgHandle_destructor
     addi r3, r30, 0x1600
     addi r4, r31, 0x171
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r30, 0x160c
     addi r4, r31, 0x18a
     bl res_MsgHandle_destructor
@@ -1677,7 +1677,7 @@ lbl_fn_802652F4_0000165C:
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_802652F4_00001680
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_802652F4_00001680:
     addic. r29, r30, 0x1618
     beq lbl_fn_802652F4_000016A0
@@ -1699,7 +1699,7 @@ lbl_fn_802652F4_000016A0:
 lbl_fn_802652F4_000016C0:
     addi r3, r30, 0x1600
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     addic. r29, r30, 0x15f4
     beq lbl_fn_802652F4_000016EC
     mr r3, r29
@@ -1824,7 +1824,7 @@ lbl_fn_802652F4_0000186C:
 lbl_fn_802652F4_0000187C:
     mr r3, r30
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r31, 0x0
     ble lbl_fn_802652F4_00001898
     mr r3, r30
@@ -1919,7 +1919,7 @@ lbl_fn_802655A8_000018F4:
     cmpwi r3, 0x0
     bne lbl_fn_802655A8_00001AF4
     addi r3, r31, 0x1600
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_802655A8_00001AF4
     addi r3, r31, 0x160c

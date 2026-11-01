@@ -19,11 +19,11 @@ extern void fn_8006AFF8(void);
 extern void mem_free(void);
 extern void route_createSegment(void);
 extern void node_createNamedChild(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
-extern void fn_800CB360(void);
+extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void morph_updateMesh(void);
 extern void atn_Task_setActive(void);
@@ -33,8 +33,8 @@ extern void system_getNextSequenceId(void);
 extern void fn_80103F60(void);
 extern void fn_80108378(void);
 extern void boss_updatePhaseState(void);
-extern void fn_8015495C(void);
-extern void fn_8016DA4C(void);
+extern void equip_applyToCharacter(void);
+extern void debuff_clearStatus(void);
 extern void actor_setState(void);
 extern void fn_8017039C(void);
 extern void fn_80178A6C(void);
@@ -45,9 +45,9 @@ extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_unload(void);
 extern void res_MsgHandle_update(void);
 extern void res_findResourceSlot(void);
-extern void fn_8023A680(void);
-extern void fn_8035B694(void);
-extern void fn_8035B78C(void);
+extern void res_Shader_bindParams(void);
+extern void entity_Instance_constructor(void);
+extern void entity_Instance_destructor(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
@@ -468,9 +468,9 @@ lbl_fn_802F66CC_0000048C:
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     mr r3, r31
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     li r0, 0x2
     stw r0, 0x58c(r31)
     lfs f1, lbl_808848DC
@@ -576,7 +576,7 @@ lbl_fn_802F66CC_0000061C:
     stw r0, 0x10(r1)
     li r7, 0x0
     li r10, 0x0
-    bl fn_8023A680
+    bl res_Shader_bindParams
     lis r3, lbl_807C7030@ha
     addi r3, r3, lbl_807C7030@l
     psq_l f1, 0x0(r3), 0, 0
@@ -969,7 +969,7 @@ asm void fn_802F6E64(void)
     mr r31, r5
     lwz r5, 0x20(r5)
     mr r30, r3
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lis r3, lbl_80787AA8@ha
     li r29, 0x0
     addi r3, r3, lbl_80787AA8@l
@@ -977,7 +977,7 @@ asm void fn_802F6E64(void)
     addi r3, r30, 0x14d8
     stw r29, 0x14b0(r30)
     stw r29, 0x14b4(r30)
-    bl fn_800CB360
+    bl morph_reset
     addi r3, r30, 0x14dc
     bl res_MsgHandle_constructor
     lfs f1, lbl_80884970
@@ -989,7 +989,7 @@ asm void fn_802F6E64(void)
     stw r0, 0x14ec(r30)
     stfs f1, 0x14f0(r30)
     stfs f0, 0x14f8(r30)
-    bl fn_800CB360
+    bl morph_reset
     addi r3, r30, 0x1520
     bl res_MsgHandle_constructor
     lfs f0, lbl_80884994
@@ -1252,7 +1252,7 @@ asm void fn_802F726C(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_802F726C_00001018
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_802F726C_00001018:
     addic. r3, r29, 0x160c
     beq lbl_fn_802F726C_00001028
@@ -1329,7 +1329,7 @@ lbl_fn_802F726C_00001114:
     bl ref_releaseHandle
     mr r3, r29
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r30, 0x0
     ble lbl_fn_802F726C_0000113C
     mr r3, r29

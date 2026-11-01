@@ -5,11 +5,11 @@
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800F8C6C(void);
+extern void scissor_clipFrustum(void);
 extern void clip_calculateFrustum(void);
 extern void fn_80126214(void);
-extern void fn_8013CB68(void);
-extern void fn_80144710(void);
+extern void npc_updateTalkInteraction(void);
+extern void quest_evaluateConditions(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
@@ -549,7 +549,7 @@ lbl_fn_80358A5C_000006C8:
     cror eq, lt, eq
     bne lbl_fn_80358A5C_00001EE8
     mr r3, r31
-    bl fn_80144710
+    bl quest_evaluateConditions
     lwz r3, lbl_8087F048
     mr r6, r31
     lwz r7, 0x155c(r31)
@@ -559,7 +559,7 @@ lbl_fn_80358A5C_000006C8:
     lfs f1, lbl_8088552C
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     cmpwi r3, 0x0
     ble lbl_fn_80358A5C_00001EE8
     lwz r0, 0x14e0(r31)
@@ -605,7 +605,7 @@ lbl_fn_80358A5C_00000784:
     lfs f1, lbl_8088552C
     li r9, 0x3
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     mr r29, r3
 lbl_fn_80358A5C_000007D4:
     lfs f7, 0x2e4(r31)
@@ -626,7 +626,7 @@ lbl_fn_80358A5C_000007D4:
     lfs f1, lbl_8088552C
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     add r29, r29, r3
 lbl_fn_80358A5C_00000824:
     cmpwi r29, 0x0
@@ -1064,7 +1064,7 @@ lbl_fn_80358A5C_00000E68:
     lfs f1, lbl_8088552C
     li r9, 0x5
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     lwz r0, 0x598(r31)
     add r0, r0, r3
     stw r0, 0x598(r31)
@@ -1119,7 +1119,7 @@ lbl_fn_80358A5C_00000F38:
     lfs f1, lbl_8088552C
     li r9, 0x5
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     lwz r0, 0x598(r31)
     add r0, r0, r3
     stw r0, 0x598(r31)
@@ -1172,7 +1172,7 @@ lbl_fn_80358A5C_00000FFC:
     lfs f1, lbl_8088552C
     li r9, 0x5
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     lwz r0, 0x598(r31)
     add r0, r0, r3
     stw r0, 0x598(r31)
@@ -1396,7 +1396,7 @@ lbl_fn_80358A5C_00001370:
     lfs f1, lbl_8088552C
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     lwz r0, 0x598(r31)
     add r0, r0, r3
     stw r0, 0x598(r31)
@@ -1522,7 +1522,7 @@ lbl_fn_80358A5C_00001548:
     lfs f1, lbl_8088552C
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
 lbl_fn_80358A5C_00001594:
     lfs f7, 0x2e4(r31)
     lfs f0, lbl_8088559C
@@ -2135,7 +2135,7 @@ lbl_fn_80358A5C_00001E64:
     lfs f1, lbl_8088552C
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     b lbl_fn_80358A5C_00001EE8
 lbl_fn_80358A5C_00001EB4:
     lfs f22, 0x2e4(r3)
@@ -2159,7 +2159,7 @@ lbl_fn_80358A5C_00001EE8:
     addi r4, r1, 0x208
     fmuls f2, f0, f28
     li r5, 0x0
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
 lbl_fn_80358A5C_00001F04:
     li r0, 0xab8
     psq_lx f31, r1, r0, 0, 0

@@ -22,9 +22,9 @@ extern void mem_alloc(void);
 extern void route_interpolatePath(void);
 extern void fn_80087858(void);
 extern void node_createNamedChild(void);
-extern void fn_8008AD4C(void);
+extern void area_updateZoneState(void);
 extern void fn_8008B130(void);
-extern void fn_8008B140(void);
+extern void map_processTrigger(void);
 extern void fn_8008CD60(void);
 extern void atn_Model_findBoneIndex(void);
 extern void lockon_updateTarget(void);
@@ -44,7 +44,7 @@ extern void PSMTXScale(void);
 extern void PSVECMag(void);
 extern void strcmp(void);
 extern void strstr(void);
-extern void fn_8068AD58(void);
+extern void std_cos(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
 
@@ -336,7 +336,7 @@ asm void fn_8049B9B8(void)
     mr r4, r3
     addi r3, r31, 0x50
     li r5, 0x0
-    bl fn_8008AD4C
+    bl area_updateZoneState
     lwz r12, 0x0(r31)
     mr r3, r31
     mr r4, r30
@@ -388,7 +388,7 @@ asm void fn_8049BAAC(void)
     mr r4, r3
     addi r3, r30, 0x50
     li r5, 0x0
-    bl fn_8008AD4C
+    bl area_updateZoneState
     lwz r12, 0x0(r30)
     mr r3, r30
     mr r4, r31
@@ -999,7 +999,7 @@ asm void fn_8049C3C0(void)
     stw r31, 0x2c(r1)
     mr r31, r3
     addi r3, r3, 0x50
-    bl fn_8008B140
+    bl map_processTrigger
     cmpwi r3, 0x0
     bne lbl_fn_8049C3C0_00000CBC
     li r0, 0x0
@@ -1036,10 +1036,7 @@ lbl_fn_8049C3C0_00000CC0:
     blr
 }
 
-asm void fn_8049C454(void)
-{
-    nofralloc
-    blr
+void fn_8049C454(void) {
 }
 
 asm void fn_8049C458(void)
@@ -1600,7 +1597,7 @@ asm void fn_8049CBE0(void)
     stw r30, 0x8(r1)
     mr r30, r3
     addi r3, r3, 0x50
-    bl fn_8008B140
+    bl map_processTrigger
     cmpwi r3, 0x0
     bne lbl_fn_8049CBE0_000014C0
     lis r31, lbl_80756E38@ha
@@ -1647,7 +1644,7 @@ lbl_fn_8049CC5C_00001508:
     lfs f7, 0x458(r28)
     lfs f0, 0x45c(r28)
     fmadds f1, f8, f7, f0
-    bl fn_8068AD58
+    bl std_cos
     frsp f7, f1
     lfs f0, 0x454(r28)
     addi r30, r30, 0x1

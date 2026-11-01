@@ -118,7 +118,7 @@ void fn_806B0950(void);
 void fn_806B0980(void);
 void fn_806B0CF0(void);
 void fn_806B0DE0(void);
-void fn_806B0E30(void);
+void net_getMyAid(void);
 void fn_806B0EB0(void);
 void fn_806B0F80(void);
 void fn_806B1170(void);
@@ -1616,7 +1616,7 @@ lbl_fn_806B0DE0_00001510:
     blr
 }
 
-asm void fn_806B0E30(void)
+asm void net_getMyAid(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1625,32 +1625,32 @@ asm void fn_806B0E30(void)
     stw r0, 0x14(r1)
     lwz r4, lbl_8085FF98@l(r3)
     cmpwi r4, 0x0
-    beq lbl_fn_806B0E30_00001564
+    beq lbl_net_getMyAid_00001564
     lbz r0, 0x375(r4)
     li r3, 0x0
     cmplwi r0, 0x2
-    beq lbl_fn_806B0E30_00001558
+    beq lbl_net_getMyAid_00001558
     lbz r0, 0x36d(r4)
     cmpwi r0, 0x0
-    beq lbl_fn_806B0E30_0000155C
-lbl_fn_806B0E30_00001558:
+    beq lbl_net_getMyAid_0000155C
+lbl_net_getMyAid_00001558:
     li r3, 0x1
-lbl_fn_806B0E30_0000155C:
+lbl_net_getMyAid_0000155C:
     cmpwi r3, 0x0
-    bne lbl_fn_806B0E30_0000156C
-lbl_fn_806B0E30_00001564:
+    bne lbl_net_getMyAid_0000156C
+lbl_net_getMyAid_00001564:
     li r3, 0xff
-    b lbl_fn_806B0E30_00001588
-lbl_fn_806B0E30_0000156C:
+    b lbl_net_getMyAid_00001588
+lbl_net_getMyAid_0000156C:
     lwz r3, 0x64(r4)
     bl fn_806CCF00
     cmpwi r3, 0x0
-    bne lbl_fn_806B0E30_00001584
+    bne lbl_net_getMyAid_00001584
     li r3, 0xff
-    b lbl_fn_806B0E30_00001588
-lbl_fn_806B0E30_00001584:
+    b lbl_net_getMyAid_00001588
+lbl_net_getMyAid_00001584:
     lbz r3, 0x16(r3)
-lbl_fn_806B0E30_00001588:
+lbl_net_getMyAid_00001588:
     lwz r0, 0x14(r1)
     mtlr r0
     addi r1, r1, 0x10

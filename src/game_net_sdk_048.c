@@ -34,7 +34,7 @@ extern void __destroy_new_array(void);
 extern void fn_806A426C(void);
 extern void fn_806A4270(void);
 extern void fn_806D5850(void);
-extern void fn_806D58F0(void);
+extern void net_bufferGetCount(void);
 extern void net_bufferGetElement(void);
 extern void fn_806D5930(void);
 extern void fn_806D6560(void);
@@ -247,7 +247,7 @@ lbl_fn_80703610_0000019C:
     addi r30, r30, 0x1
 lbl_fn_80703610_000001A0:
     lwz r3, 0x8(r31)
-    bl fn_806D58F0
+    bl net_bufferGetCount
     cmpw r30, r3
     blt lbl_fn_80703610_00000150
     lwz r3, 0x8(r31)
@@ -487,7 +487,7 @@ lbl_fn_80703AC0_000004D8:
     lhz r29, 0x12(r1)
     lwz r30, 0x14(r1)
     lwz r3, 0x4(r26)
-    bl fn_806D58F0
+    bl net_bufferGetCount
     mr r31, r3
     li r28, 0x0
     b lbl_fn_80703AC0_00000554

@@ -7,9 +7,9 @@ extern void _restgpr_25(void);
 extern void _savegpr_20(void);
 extern void _savegpr_25(void);
 extern void dtor_80084684(void);
-extern void fn_8000D114(void);
-extern void fn_8001047C(void);
-extern void fn_80013410(void);
+extern void vec3_set(void);
+extern void vec3_assign(void);
+extern void vec3_add(void);
 extern void fn_8004B290(void);
 extern void fn_8004B338(void);
 extern void fn_8006A250(void);
@@ -21,20 +21,20 @@ extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void fn_80087858(void);
 extern void route_createSegment(void);
-extern void fn_80087E9C(void);
+extern void route_createWaypoint(void);
 extern void node_createNamedChild(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void fn_800A56A8(void);
 extern void fn_800BC2E0(void);
 extern void fn_800C1A1C(void);
 extern void fn_800C1FB4(void);
-extern void fn_800CB360(void);
+extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CFBA0(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void fn_801125F8(void);
 extern void fn_80112960(void);
 extern void fn_80114AA0(void);
@@ -363,12 +363,12 @@ asm void fn_8052A8F0(void)
     lfs f2, lbl_80887AB0
     stw r31, 0x11f8(r29)
     lfs f3, lbl_80887ABC
-    bl fn_8000D114
+    bl vec3_set
     lfs f1, lbl_80887AB8
     addi r3, r29, 0x1208
     lfs f2, lbl_80887AB0
     lfs f3, lbl_80887AC0
-    bl fn_8000D114
+    bl vec3_set
     lfs f1, lbl_80887AC4
     bl fn_801125F8
     stfs f1, 0x1214(r29)
@@ -388,16 +388,16 @@ asm void fn_8052A8F0(void)
     stfs f0, 0x12d0(r29)
     addi r3, r29, 0x12d4
     addi r4, r30, lbl_807C7030@l
-    bl fn_8001047C
+    bl vec3_assign
     addi r3, r29, 0x12e0
     addi r4, r30, lbl_807C7030@l
-    bl fn_8001047C
+    bl vec3_assign
     addi r3, r29, 0x12ec
     addi r4, r30, lbl_807C7030@l
-    bl fn_8001047C
+    bl vec3_assign
     addi r3, r29, 0x12f8
     addi r4, r30, lbl_807C7030@l
-    bl fn_8001047C
+    bl vec3_assign
     li r30, 0x1
     stw r30, 0x1304(r29)
     addi r3, r29, 0x1310
@@ -407,7 +407,7 @@ asm void fn_8052A8F0(void)
     bl fn_8006CA80
     stw r31, 0x133c(r29)
     addi r3, r29, 0x1340
-    bl fn_800CB360
+    bl morph_reset
     addi r3, r29, 0x1344
     bl fn_8006CA80
     addi r3, r29, 0x134c
@@ -425,7 +425,7 @@ asm void fn_8052A8F0(void)
     stw r31, 0x1364(r29)
     stfs f0, 0x1368(r29)
     stw r31, 0x136c(r29)
-    bl fn_8000D114
+    bl vec3_set
     lis r31, lbl_8075D31C@ha
     addi r3, r29, 0x134c
     addi r31, r31, lbl_8075D31C@l
@@ -467,22 +467,22 @@ lbl_fn_8052A8F0_000004B0:
     addi r3, r1, 0x20
     fmr f2, f1
     fmr f3, f1
-    bl fn_8000D114
+    bl vec3_set
 lbl_fn_8052A8F0_000004C4:
     mr r4, r3
     addi r3, r1, 0x2c
-    bl fn_8001047C
+    bl vec3_assign
     addi r3, r1, 0x14
     addi r4, r29, 0x11fc
     addi r5, r1, 0x2c
-    bl fn_80013410
+    bl vec3_add
     addi r3, r29, 0x6c
     addi r4, r1, 0x14
     bl fn_80114AA0
     addi r3, r1, 0x8
     addi r4, r29, 0x1208
     addi r5, r1, 0x2c
-    bl fn_80013410
+    bl vec3_add
     addi r3, r29, 0x6c
     addi r4, r1, 0x8
     bl fn_80112960
@@ -885,7 +885,7 @@ lbl_fn_8052B014_00000A6C:
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_8052B014_00000A90
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_8052B014_00000A90:
     addic. r31, r29, 0xb1c
     beq lbl_fn_8052B014_00000AB0
@@ -957,7 +957,7 @@ lbl_fn_8052B190_00000B74:
     cmpwi r0, 0x2
     bne lbl_fn_8052B190_0000116C
     mr r3, r25
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_8052B190_0000116C
     addi r3, r25, 0x1334
@@ -1077,7 +1077,7 @@ lbl_fn_8052B190_00000B74:
     addi r5, r25, 0x1370
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_80887AB0
     mr r3, r28
     lfs f2, lbl_80887AFC

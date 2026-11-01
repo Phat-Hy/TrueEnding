@@ -15,7 +15,7 @@ extern void mem_alloc(void);
 extern void fn_8008B130(void);
 extern void fn_800C2448(void);
 extern void fn_800C24B4(void);
-extern void fn_800CB360(void);
+extern void morph_reset(void);
 extern void atn_Task_constructor(void);
 extern void str_findChar(void);
 extern void fn_802114D8(void);
@@ -1873,7 +1873,7 @@ lbl_fn_804A1E44_0000198C:
     bdnz lbl_fn_804A1E44_0000198C
 lbl_fn_804A1E44_000019A4:
     addi r3, r31, 0x23c
-    bl fn_800CB360
+    bl morph_reset
     li r0, 0x0
     stw r0, 0x240(r31)
     li r30, 0xfb

@@ -22,16 +22,16 @@ extern void fn_8011CD84(void);
 extern void fn_8011D21C(void);
 extern void fn_80126214(void);
 extern void fn_8013A258(void);
-extern void fn_8013CB68(void);
-extern void fn_80151448(void);
+extern void npc_updateTalkInteraction(void);
+extern void inventory_applyItemStats(void);
 extern void fn_8015EB2C(void);
-extern void fn_8016F3D0(void);
+extern void battle_canTargetActor(void);
 extern void fn_80171DB0(void);
 extern void fn_8017B3C0(void);
 extern void fn_8017B434(void);
 extern void fn_8017BC4C(void);
-extern void fn_8035B694(void);
-extern void fn_8035B78C(void);
+extern void entity_Instance_constructor(void);
+extern void entity_Instance_destructor(void);
 extern void fn_803605EC(void);
 extern void kpad_getClampData(void);
 extern void fn_8037D4C0(void);
@@ -47,7 +47,7 @@ extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
 extern void strstr(void);
 extern void atoi(void);
-extern void fn_8068A850(void);
+extern void std_sin(void);
 extern void std_atan2(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
@@ -1055,7 +1055,7 @@ asm void fn_805A3C58(void)
     stw r29, 0x14(r1)
     mr r29, r3
     lwz r5, 0x20(r5)
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lis r3, lbl_80797368@ha
     addi r31, r29, 0x14b4
     addi r3, r3, lbl_80797368@l
@@ -1109,7 +1109,7 @@ asm void fn_805A3D00(void)
 lbl_fn_805A3D00_00000D60:
     mr r3, r30
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r31, 0x0
     ble lbl_fn_805A3D00_00000D7C
     mr r3, r30
@@ -1349,7 +1349,7 @@ asm void fn_805A4018(void)
     beq lbl_fn_805A4018_000010D0
     mr r3, r30
     mr r4, r31
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r0, 0x12a4(r30)
     extrwi. r0, r0, 1, 29
     bne lbl_fn_805A4018_000010B8
@@ -1732,7 +1732,7 @@ lbl_fn_805A4258_000015D0:
     addi r4, r1, 0x74
     fmuls f2, f0, f30
     li r5, 0x0
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
 lbl_fn_805A4258_000015EC:
     lwz r0, 0x144(r1)
     psq_l f31, 0x138(r1), 0, 0
@@ -1796,7 +1796,7 @@ asm void fn_805A45FC(void)
     bl PSMTXMultVec
     lfs f0, lbl_80888268
     fmuls f1, f0, f29
-    bl fn_8068A850
+    bl std_sin
     lwz r3, lbl_8087F8A0
     frsp f31, f1
     cmpwi r3, 0x0
@@ -1849,7 +1849,7 @@ lbl_fn_805A45FC_0000176C:
     mr r3, r29
     mr r4, r30
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     bne lbl_fn_805A45FC_00001818
     lfs f1, 0x530(r29)
@@ -1941,7 +1941,7 @@ lbl_fn_805A45FC_000018B8:
     mr r3, r29
     mr r4, r30
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     bne lbl_fn_805A45FC_00001964
     lfs f1, 0x530(r29)

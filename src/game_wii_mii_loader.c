@@ -9,14 +9,14 @@ extern void fn_8000D430(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void talk_formatQuotedString(void);
-extern void fn_8005BBF8(void);
-extern void fn_8005BCE8(void);
+extern void talk_parseQuotes(void);
+extern void talk_copySpeakerName(void);
 extern void fn_80069BF4(void);
 extern void fn_8006B174(void);
 extern void fn_8006B2D8(void);
 extern void fn_8006D008(void);
 extern void mem_alloc(void);
-extern void fn_8008AD4C(void);
+extern void area_updateZoneState(void);
 extern void fn_8008B130(void);
 extern void fn_80091C10(void);
 extern void atn_Model_findBoneIndex(void);
@@ -126,7 +126,7 @@ asm void fn_80564344(void)
     addi r4, r4, lbl_807774B8@l
     stw r4, 0xd4(r1)
     la r4, lbl_8087D710
-    bl fn_8005BCE8
+    bl talk_copySpeakerName
     lis r30, lbl_8075FB78@ha
     stw r27, 0xc8(r1)
     addi r23, r1, 0xc9
@@ -639,7 +639,7 @@ lbl_fn_80564344_00000784:
     lwz r4, 0xd0(r1)
 lbl_fn_80564344_00000788:
     li r5, 0x0
-    bl fn_8008AD4C
+    bl area_updateZoneState
     b lbl_fn_80564344_00000940
 lbl_fn_80564344_00000794:
     cmpwi r27, 0x0
@@ -658,7 +658,7 @@ lbl_fn_80564344_000007A8:
 lbl_fn_80564344_000007C0:
     lwz r4, 0xd0(r1)
 lbl_fn_80564344_000007C4:
-    bl fn_8008AD4C
+    bl area_updateZoneState
     b lbl_fn_80564344_00000940
 lbl_fn_80564344_000007CC:
     mr r3, r20
@@ -768,7 +768,7 @@ lbl_fn_80564344_000008FC:
     stfs f1, 0x408(r22)
 lbl_fn_80564344_00000940:
     addi r3, r1, 0xd4
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_80564344_000000D8
     lwz r0, 0x0(r22)
@@ -1096,7 +1096,7 @@ asm void fn_80565068(void)
     addi r4, r4, lbl_807774B8@l
     stw r4, 0x120(r1)
     la r4, lbl_8087D710
-    bl fn_8005BCE8
+    bl talk_copySpeakerName
     lis r30, lbl_8075FB78@ha
     lfs f31, lbl_80887F38
     addi r29, r30, lbl_8075FB78@l
@@ -1181,7 +1181,7 @@ lbl_fn_80565068_00000ED0:
     bl fn_80093D98
 lbl_fn_80565068_00000EFC:
     addi r3, r1, 0x120
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_80565068_00000DDC
     lwz r0, 0x0(r31)

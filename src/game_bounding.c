@@ -35,7 +35,7 @@ extern void fn_80133F6C(void);
 extern void fn_80134168(void);
 extern void fn_80148B0C(void);
 extern void fn_801533C8(void);
-extern void fn_8016F3D0(void);
+extern void battle_canTargetActor(void);
 extern void fn_801789D8(void);
 extern void fn_801799BC(void);
 extern void fn_8017A5D8(void);
@@ -51,7 +51,7 @@ extern void fn_803750E4(void);
 extern void fn_80376238(void);
 extern void fn_803E2110(void);
 extern void fn_803E5E64(void);
-extern void fn_803EA77C(void);
+extern void chest_spawnLoot(void);
 extern void fn_80444020(void);
 extern void fn_8047961C(void);
 extern void PSMTXConcat(void);
@@ -62,7 +62,7 @@ extern void PSVECSquareMag(void);
 extern void PSVECDotProduct(void);
 extern void rand(void);
 extern void strcmp(void);
-extern void fn_8068A850(void);
+extern void std_sin(void);
 
 /* External data declarations */
 extern u8 jumptable_80779CEC[];
@@ -786,7 +786,7 @@ lbl_fn_800FDF14_00000998:
     bl PSVECDotProduct
     fmr f30, f1
     lfd f1, 0x8f8(r31)
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     fcmpo cr0, f30, f0
     bge lbl_fn_800FDF14_000009F8
@@ -925,7 +925,7 @@ lbl_fn_800FDF14_00000BC4:
     mr r3, r29
     mr r4, r28
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     bne lbl_fn_800FDF14_00000E98
     cmpwi r29, 0x0
@@ -2446,7 +2446,7 @@ lbl_fn_800FDF14_00002164:
     mr r3, r29
     mr r4, r28
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     bne lbl_fn_800FDF14_000025D8
     lwz r0, 0x80(r26)
@@ -2466,7 +2466,7 @@ lbl_fn_800FDF14_00002164:
     li r5, 0x1c
     lfs f2, lbl_8088148C
     li r6, 0xf
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_800FDF14_000021CC:
     lwz r3, lbl_8087F4A0
     li r30, 0x3
@@ -2580,7 +2580,7 @@ lbl_fn_800FDF14_0000234C:
     beq lbl_fn_800FDF14_0000237C
     mr r4, r29
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     bne lbl_fn_800FDF14_0000237C
     lwz r3, 0x0(r30)

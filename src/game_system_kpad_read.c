@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void _restgpr_18(void);
 extern void _savegpr_18(void);
-extern void fn_800697D8(void);
+extern void boss_recordDamage(void);
 extern void fn_8006D3F8(void);
 extern void fn_800CFBA0(void);
 extern void fn_800CFD18(void);
@@ -12,7 +12,7 @@ extern void fn_800D0518(void);
 extern void fn_800D089C(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void fn_800F3490(void);
 extern void fn_801092C8(void);
 extern void fn_8011770C(void);
@@ -1263,7 +1263,7 @@ lbl_world_updateMapTransition_00001004:
     bl sprintf
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x8
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_world_updateMapTransition_00001040:
     li r5, 0x0
     b lbl_world_updateMapTransition_00001054
@@ -1563,19 +1563,19 @@ asm void fn_8036FD4C(void)
     li r31, 0x1
 lbl_fn_8036FD4C_00001454:
     lwz r3, lbl_8087F8A0
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     bne lbl_fn_8036FD4C_00001468
     li r31, 0x1
 lbl_fn_8036FD4C_00001468:
     lwz r3, lbl_8087F408
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     bne lbl_fn_8036FD4C_0000147C
     li r31, 0x1
 lbl_fn_8036FD4C_0000147C:
     lwz r3, lbl_8087F890
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     bne lbl_fn_8036FD4C_00001490
     li r31, 0x1
@@ -1593,13 +1593,13 @@ lbl_fn_8036FD4C_000014A4:
     li r31, 0x1
 lbl_fn_8036FD4C_000014B8:
     lwz r3, lbl_8087F8A8
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     bne lbl_fn_8036FD4C_000014CC
     li r31, 0x1
 lbl_fn_8036FD4C_000014CC:
     lwz r3, lbl_8087F040
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     bne lbl_fn_8036FD4C_000014E0
     li r31, 0x1
@@ -1825,7 +1825,7 @@ asm void fn_80370094(void)
     bl sprintf
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x8
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_fn_80370094_000017D8:
     lwz r4, 0x10d0(r30)
     cmpwi r4, 0x0
@@ -1848,7 +1848,7 @@ lbl_fn_80370094_000017F4:
     bl sprintf
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x8
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_fn_80370094_0000182C:
     stw r31, 0x10d0(r30)
     lwz r31, 0x10c(r1)
@@ -1879,7 +1879,7 @@ asm void world_getGlobalFlag(void)
     bl sprintf
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x8
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_world_getGlobalFlag_00001890:
     li r3, 0x0
     b lbl_world_getGlobalFlag_000018A4

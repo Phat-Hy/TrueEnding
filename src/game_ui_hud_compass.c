@@ -7,12 +7,12 @@ extern void dtor_80084684(void);
 extern void fn_80053BD0(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_8008BBD8(void);
+extern void map_debugLog(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_801539E0(void);
+extern void inventory_unequipItem(void);
 extern void fn_80155DAC(void);
 extern void fn_80178018(void);
 extern void fn_80178078(void);
@@ -21,7 +21,7 @@ extern void fn_80192758(void);
 extern void fn_801A86C0(void);
 extern void fn_801A86F0(void);
 extern void fn_801A90BC(void);
-extern void fn_803EA77C(void);
+extern void chest_spawnLoot(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
@@ -141,7 +141,7 @@ asm void fn_801C5A04(void)
     lwz r0, 0x12a4(r3)
     srwi. r0, r0, 31
     beq lbl_fn_801C5A04_0000009C
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_801C5A04_0000009C:
     lwz r3, 0x4(r31)
     lwz r0, 0x12a4(r3)
@@ -258,7 +258,7 @@ lbl_fn_801C5A04_000001F0:
     li r6, 0x0
     lfs f1, lbl_808827B0
     lfs f2, lbl_808827F8
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_801C5A04_0000025C:
     mr r3, r31
     lwz r31, 0x6c(r1)
@@ -693,7 +693,7 @@ asm void fn_801C61EC(void)
     lwz r0, 0x12a4(r3)
     srwi. r0, r0, 31
     beq lbl_fn_801C61EC_00000898
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_801C61EC_00000898:
     lwz r29, 0x4(r30)
     li r4, 0x3
@@ -1483,7 +1483,7 @@ lbl_fn_801C6CDC_000013E4:
     stw r4, 0x48(r1)
     stw r0, 0x4c(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_801C6CDC_000014B8
     lwz r7, 0x3c(r1)

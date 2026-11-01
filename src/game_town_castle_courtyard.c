@@ -7,7 +7,7 @@ extern void _savegpr_14(void);
 extern void fn_8003E950(void);
 extern void str_assignBuffer(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_800BFAC8(void);
+extern void motion_updateFogAdj(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void str_findChar(void);
@@ -15,7 +15,7 @@ extern void fn_801346C8(void);
 extern void fn_8016E484(void);
 extern void fn_801F465C(void);
 extern void fn_801F4B4C(void);
-extern void fn_801F4CB4(void);
+extern void save_formatSlotTitle(void);
 extern void fn_801F8FE4(void);
 extern void fn_801F90E0(void);
 extern void thread_findAndNotifySlot(void);
@@ -25,7 +25,7 @@ extern void task_mapIdToQueue(void);
 extern void fn_8021AF50(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
-extern void fn_8023A680(void);
+extern void res_Shader_bindParams(void);
 extern void world_getGlobalFlag(void);
 extern void world_setGlobalFlag(void);
 extern void fn_803D7850(void);
@@ -1352,7 +1352,7 @@ lbl_fn_803D83A8_000011EC:
     li r9, 0x0
     lwz r3, lbl_8087F3C0
     li r10, 0x0
-    bl fn_8023A680
+    bl res_Shader_bindParams
     lwz r0, 0x6f8(r1)
     add r3, r15, r31
     stw r0, 0x8(r1)
@@ -1369,7 +1369,7 @@ lbl_fn_803D83A8_000011EC:
     li r9, 0x0
     lwz r3, lbl_8087F3C0
     li r10, 0x0
-    bl fn_8023A680
+    bl res_Shader_bindParams
 lbl_fn_803D83A8_000012C0:
     addi r31, r31, 0x7c
 lbl_fn_803D83A8_000012C4:
@@ -1877,7 +1877,7 @@ lbl_fn_803D83A8_000019F8:
     stfs f2, 0x1c8(r1)
     fadds f0, f0, f28
     stfs f0, 0x1c4(r1)
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f0, 0x1bc(r1)
     fcmpo cr0, f29, f0
     bge lbl_fn_803D83A8_00001A74
@@ -2062,7 +2062,7 @@ lbl_fn_803D83A8_00001CA8:
     lwz r4, lbl_8087EFB4
     addi r3, r1, 0x19c
     addi r5, r1, 0x1a8
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lwz r4, 0x2628(r15)
     lis r14, lbl_807506A0@ha
     addi r14, r14, lbl_807506A0@l
@@ -2162,13 +2162,13 @@ lbl_fn_803D83A8_00001DF0:
     li r6, 0x0
     lwz r5, 0x64c(r1)
     subf r5, r5, r0
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r5, 0x110c(r15)
     addi r4, r14, 0x1228
     lwz r3, 0x1110(r15)
     li r6, 0x0
     lwz r5, 0x934(r5)
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lfs f0, 0x10(r16)
     addi r4, r14, 0x1232
     lwz r5, 0x110c(r15)
@@ -2179,13 +2179,13 @@ lbl_fn_803D83A8_00001DF0:
     stfd f0, 0x650(r1)
     lwz r5, 0x654(r1)
     subf r5, r5, r0
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r5, 0x110c(r15)
     addi r4, r14, 0x1238
     lwz r3, 0x1110(r15)
     li r6, 0x0
     lwz r5, 0x940(r5)
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r3, 0x110c(r15)
     addi r4, r14, 0x123f
     lfs f0, 0x14(r16)
@@ -2196,7 +2196,7 @@ lbl_fn_803D83A8_00001DF0:
     fctiwz f0, f0
     stfd f0, 0x658(r1)
     lwz r5, 0x65c(r1)
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r5, 0x110c(r15)
     addi r4, r14, 0x1246
     lwz r3, 0x1110(r15)
@@ -2205,7 +2205,7 @@ lbl_fn_803D83A8_00001DF0:
     fctiwz f0, f0
     stfd f0, 0x660(r1)
     lwz r5, 0x664(r1)
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r3, 0x110c(r15)
     addi r4, r14, 0x124e
     lfs f0, 0x18(r16)
@@ -2216,7 +2216,7 @@ lbl_fn_803D83A8_00001DF0:
     fctiwz f0, f0
     stfd f0, 0x668(r1)
     lwz r5, 0x66c(r1)
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r5, 0x110c(r15)
     addi r4, r14, 0x1256
     lwz r3, 0x1110(r15)
@@ -2225,7 +2225,7 @@ lbl_fn_803D83A8_00001DF0:
     fctiwz f0, f0
     stfd f0, 0x670(r1)
     lwz r5, 0x674(r1)
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r3, 0x110c(r15)
     addi r4, r14, 0x125f
     lfs f0, 0x1c(r16)
@@ -2236,7 +2236,7 @@ lbl_fn_803D83A8_00001DF0:
     fctiwz f0, f0
     stfd f0, 0x678(r1)
     lwz r5, 0x67c(r1)
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r5, 0x110c(r15)
     addi r4, r14, 0x1266
     lwz r3, 0x1110(r15)
@@ -2245,7 +2245,7 @@ lbl_fn_803D83A8_00001DF0:
     fctiwz f0, f0
     stfd f0, 0x680(r1)
     lwz r5, 0x684(r1)
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r3, 0x110c(r15)
     addi r4, r14, 0x126e
     lfs f0, 0x20(r16)
@@ -2256,7 +2256,7 @@ lbl_fn_803D83A8_00001DF0:
     fctiwz f0, f0
     stfd f0, 0x688(r1)
     lwz r5, 0x68c(r1)
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r5, 0x110c(r15)
     addi r4, r14, 0x1276
     lwz r3, 0x1110(r15)
@@ -2265,7 +2265,7 @@ lbl_fn_803D83A8_00001DF0:
     fctiwz f0, f0
     stfd f0, 0x690(r1)
     lwz r5, 0x694(r1)
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r3, 0x110c(r15)
     addi r4, r14, 0x127f
     lwz r5, 0x24(r16)
@@ -2273,13 +2273,13 @@ lbl_fn_803D83A8_00001DF0:
     lwz r0, 0x950(r3)
     lwz r3, 0x1110(r15)
     subf r5, r5, r0
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r5, 0x110c(r15)
     addi r4, r14, 0x1286
     lwz r3, 0x1110(r15)
     li r6, 0x0
     lwz r5, 0x950(r5)
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lfs f0, 0xc(r16)
     addi r4, r14, 0x121f
     lwz r5, 0x110c(r15)
@@ -2290,13 +2290,13 @@ lbl_fn_803D83A8_00001DF0:
     stfd f0, 0x698(r1)
     lwz r5, 0x69c(r1)
     subf r5, r5, r0
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r5, 0x110c(r15)
     addi r4, r14, 0x1228
     lwz r3, 0x1114(r15)
     li r6, 0x0
     lwz r5, 0x934(r5)
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lfs f0, 0x10(r16)
     addi r4, r14, 0x1232
     lwz r5, 0x110c(r15)
@@ -2307,13 +2307,13 @@ lbl_fn_803D83A8_00001DF0:
     stfd f0, 0x6a0(r1)
     lwz r5, 0x6a4(r1)
     subf r5, r5, r0
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r5, 0x110c(r15)
     addi r4, r14, 0x1238
     lwz r3, 0x1114(r15)
     li r6, 0x0
     lwz r5, 0x940(r5)
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r3, 0x110c(r15)
     addi r4, r14, 0x123f
     lfs f0, 0x14(r16)
@@ -2324,7 +2324,7 @@ lbl_fn_803D83A8_00001DF0:
     fctiwz f0, f0
     stfd f0, 0x6a8(r1)
     lwz r5, 0x6ac(r1)
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r5, 0x110c(r15)
     addi r4, r14, 0x1246
     lwz r3, 0x1114(r15)
@@ -2333,7 +2333,7 @@ lbl_fn_803D83A8_00001DF0:
     fctiwz f0, f0
     stfd f0, 0x6b0(r1)
     lwz r5, 0x6b4(r1)
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r3, 0x110c(r15)
     addi r4, r14, 0x124e
     lfs f0, 0x18(r16)
@@ -2344,7 +2344,7 @@ lbl_fn_803D83A8_00001DF0:
     fctiwz f0, f0
     stfd f0, 0x6b8(r1)
     lwz r5, 0x6bc(r1)
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r5, 0x110c(r15)
     addi r4, r14, 0x1256
     lwz r3, 0x1114(r15)
@@ -2353,7 +2353,7 @@ lbl_fn_803D83A8_00001DF0:
     fctiwz f0, f0
     stfd f0, 0x6c0(r1)
     lwz r5, 0x6c4(r1)
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r3, 0x110c(r15)
     addi r4, r14, 0x125f
     lfs f0, 0x1c(r16)
@@ -2364,7 +2364,7 @@ lbl_fn_803D83A8_00001DF0:
     fctiwz f0, f0
     stfd f0, 0x6c8(r1)
     lwz r5, 0x6cc(r1)
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r5, 0x110c(r15)
     addi r4, r14, 0x1266
     lwz r3, 0x1114(r15)
@@ -2373,7 +2373,7 @@ lbl_fn_803D83A8_00001DF0:
     fctiwz f0, f0
     stfd f0, 0x6d0(r1)
     lwz r5, 0x6d4(r1)
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r3, 0x110c(r15)
     addi r4, r14, 0x126e
     lfs f0, 0x20(r16)
@@ -2384,7 +2384,7 @@ lbl_fn_803D83A8_00001DF0:
     fctiwz f0, f0
     stfd f0, 0x6d8(r1)
     lwz r5, 0x6dc(r1)
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r5, 0x110c(r15)
     addi r4, r14, 0x1276
     lwz r3, 0x1114(r15)
@@ -2393,7 +2393,7 @@ lbl_fn_803D83A8_00001DF0:
     fctiwz f0, f0
     stfd f0, 0x6e0(r1)
     lwz r5, 0x6e4(r1)
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r3, 0x110c(r15)
     addi r4, r14, 0x127f
     lwz r5, 0x24(r16)
@@ -2401,13 +2401,13 @@ lbl_fn_803D83A8_00001DF0:
     lwz r0, 0x950(r3)
     lwz r3, 0x1114(r15)
     subf r5, r5, r0
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r5, 0x110c(r15)
     addi r4, r14, 0x1286
     lwz r3, 0x1114(r15)
     li r6, 0x0
     lwz r5, 0x950(r5)
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r0, 0x1120(r15)
     cmpwi r0, 0x0
     bne lbl_fn_803D83A8_00002328

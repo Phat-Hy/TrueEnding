@@ -95,7 +95,7 @@ void fn_806265D0(void);
 void fn_806267F0(void);
 void fn_80626AA0(void);
 void scapi_initContext(void);
-void fn_80626C60(void);
+void scapi_getConfigItem(void);
 void scapi_cleanupContext(void);
 void fn_80626EC0(void);
 void fn_80626F10(void);
@@ -2736,7 +2736,7 @@ lbl_scapi_initContext_000022C8:
     blr
 }
 
-asm void fn_80626C60(void)
+asm void scapi_getConfigItem(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -2749,10 +2749,10 @@ asm void fn_80626C60(void)
     mr r31, r3
     stw r30, 0x8(r1)
     addi r30, r4, 0x54
-    blt lbl_fn_80626C60_00002314
+    blt lbl_scapi_getConfigItem_00002314
     li r3, 0x0
-    b lbl_fn_80626C60_000023B0
-lbl_fn_80626C60_00002314:
+    b lbl_scapi_getConfigItem_000023B0
+lbl_scapi_getConfigItem_00002314:
     bl fn_80628270
     clrlslwi r31, r31, 24, 4
     addis r0, r30, 0x3
@@ -2760,25 +2760,25 @@ lbl_fn_80626C60_00002314:
     lhz r3, -0x7668(r4)
     lhz r0, -0x766a(r4)
     cmplw r3, r0
-    bge lbl_fn_80626C60_0000239C
+    bge lbl_scapi_getConfigItem_0000239C
     lwz r31, -0x7674(r4)
     lwz r0, 0x0(r31)
     stw r0, -0x7674(r4)
     cmpwi r0, 0x0
-    bne lbl_fn_80626C60_00002350
+    bne lbl_scapi_getConfigItem_00002350
     li r0, 0x0
     stw r0, -0x7670(r4)
-lbl_fn_80626C60_00002350:
+lbl_scapi_getConfigItem_00002350:
     lhz r3, -0x7668(r4)
     addi r0, r3, 0x1
     sth r0, -0x7668(r4)
     clrlwi r3, r0, 16
     lhz r0, -0x7666(r4)
     cmplw r3, r0
-    ble lbl_fn_80626C60_00002374
+    ble lbl_scapi_getConfigItem_00002374
     lhz r0, -0x7668(r4)
     sth r0, -0x7666(r4)
-lbl_fn_80626C60_00002374:
+lbl_scapi_getConfigItem_00002374:
     bl fn_80628240
     bl fn_80628230
     stb r3, 0x5(r31)
@@ -2788,14 +2788,14 @@ lbl_fn_80626C60_00002374:
     stb r4, 0x6(r31)
     stw r0, 0x0(r31)
     stb r0, 0x7(r31)
-    b lbl_fn_80626C60_000023B0
-lbl_fn_80626C60_0000239C:
+    b lbl_scapi_getConfigItem_000023B0
+lbl_scapi_getConfigItem_0000239C:
     bl fn_80628240
     addis r0, r30, 0x3
     add r3, r0, r31
     lhz r3, -0x766c(r3)
     bl scapi_initContext
-lbl_fn_80626C60_000023B0:
+lbl_scapi_getConfigItem_000023B0:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)

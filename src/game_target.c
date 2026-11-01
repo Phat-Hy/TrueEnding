@@ -8,7 +8,7 @@ extern void dtor_80084684(void);
 extern void fn_8000FAE4(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
-extern void fn_800697D8(void);
+extern void boss_recordDamage(void);
 extern void fn_80069BF4(void);
 extern void fn_8006B174(void);
 extern void fn_8007FAF0(void);
@@ -19,7 +19,7 @@ extern void fn_80089D70(void);
 extern void fn_8008C850(void);
 extern void str_findChar(void);
 extern void atn_LoadHandle_getName(void);
-extern void fn_80473F88(void);
+extern void shockwave_freeEmitter(void);
 extern void fn_80475DF8(void);
 extern void memcmp(void);
 extern void runtime_registerStaticObject(void);
@@ -148,7 +148,7 @@ asm void fn_80092F90(void)
     b lbl_fn_80092F90_0000010C
 lbl_fn_80092F90_000000F8:
     mr r3, r30
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     stw r31, 0x8(r30)
     addi r30, r30, 0x18
     addi r29, r29, 0x1
@@ -677,7 +677,7 @@ lbl_fn_80093158_000007E0:
     bl sprintf
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x80
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_fn_80093158_0000081C:
     addi r27, r27, 0x4
     addi r24, r24, 0x1

@@ -3,7 +3,7 @@
 
 /* External function declarations */
 extern void fn_80049B2C(void);
-extern void fn_8008BBD8(void);
+extern void map_debugLog(void);
 extern void fn_800C8278(void);
 extern void fn_800C82A0(void);
 extern void fn_800CA1D4(void);
@@ -169,7 +169,7 @@ lbl_fn_800CF680_00000140:
     stw r4, 0x20(r1)
     stw r0, 0x24(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_800CF680_000001A0
     addic. r0, r1, 0x38
@@ -271,7 +271,7 @@ lbl_fn_800CF7DC_0000029C:
     stw r4, 0x20(r1)
     stw r0, 0x24(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_800CF7DC_00000310
     addic. r0, r1, 0x4c
@@ -447,7 +447,7 @@ lbl_fn_800CFA28_000004F0:
     stw r4, 0x20(r1)
     stw r0, 0x24(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_800CFA28_00000564
     addic. r0, r1, 0x4c
@@ -554,7 +554,7 @@ lbl_fn_800CFBA0_00000668:
     stw r4, 0x20(r1)
     stw r0, 0x24(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_800CFBA0_000006DC
     addic. r0, r1, 0x4c
@@ -770,7 +770,7 @@ lbl_fn_800CFDF0_00000930:
     stw r4, 0x10(r1)
     stw r0, 0x14(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_800CFDF0_0000097C
     addic. r0, r1, 0x24
@@ -903,7 +903,7 @@ lbl_fn_800CFFB8_00000AF8:
     stw r4, 0x10(r1)
     stw r0, 0x14(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_800CFFB8_00000B44
     addic. r0, r1, 0x24
@@ -1072,7 +1072,7 @@ lbl_fn_800D0240_00000D24:
     stw r4, 0x10(r1)
     stw r0, 0x14(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_800D0240_00000D70
     addic. r0, r1, 0x24
@@ -1179,7 +1179,7 @@ lbl_fn_800D03AC_00000E90:
     stw r4, 0x10(r1)
     stw r0, 0x14(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_800D03AC_00000EDC
     addic. r0, r1, 0x24
@@ -1286,7 +1286,7 @@ lbl_fn_800D0518_00000FFC:
     stw r4, 0x10(r1)
     stw r0, 0x14(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_800D0518_00001048
     addic. r0, r1, 0x24
@@ -1392,7 +1392,7 @@ lbl_fn_800D0684_00001164:
     stw r4, 0x10(r1)
     stw r0, 0x14(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_800D0684_000011AC
     addic. r0, r1, 0x24
@@ -1611,7 +1611,7 @@ lbl_fn_800D0974_00001428:
     stw r4, 0x10(r1)
     stw r0, 0x14(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_800D0974_00001474
     addic. r0, r1, 0x24

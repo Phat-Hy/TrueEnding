@@ -13,20 +13,20 @@ extern void atn_Anim_getLayerDuration(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8C6C(void);
+extern void scissor_clipFrustum(void);
 extern void clip_calculateFrustum(void);
 extern void fn_800FBA9C(void);
 extern void fn_80126214(void);
 extern void fn_80127D8C(void);
 extern void fn_8013A258(void);
-extern void fn_8013CB68(void);
-extern void fn_80144710(void);
+extern void npc_updateTalkInteraction(void);
+extern void quest_evaluateConditions(void);
 extern void fn_80158CA4(void);
 extern void fn_8016E4C4(void);
 extern void actor_setState(void);
-extern void fn_801765D8(void);
+extern void battle_awardExp(void);
 extern void fn_80178208(void);
-extern void fn_80179D44(void);
+extern void actor_getMovementFlags(void);
 extern void fn_801AFAC0(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
@@ -424,7 +424,7 @@ lbl_fn_80336518_000003F8:
     stfs f2, 0x34(r1)
     fadds f0, f0, f27
     stfs f0, 0x30(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     oris r7, r3, 0x8000
     mr r3, r23
     mr r5, r28
@@ -570,7 +570,7 @@ lbl_fn_80336518_000006A8:
     li r5, 0x1
     bl world_setLocalFlag
     mr r3, r31
-    bl fn_801765D8
+    bl battle_awardExp
 lbl_fn_80336518_000006E4:
     lwz r12, 0x0(r31)
     mr r3, r31
@@ -1341,7 +1341,7 @@ lbl_fn_80336C8C_000011D8:
     lfs f1, lbl_808851B0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     b lbl_fn_80336C8C_00001E70
 lbl_fn_80336C8C_00001228:
     cmpwi r0, 0x1
@@ -1929,7 +1929,7 @@ lbl_fn_80336C8C_00001A58:
     stw r3, 0x590(r30)
 lbl_fn_80336C8C_00001ACC:
     mr r3, r30
-    bl fn_80144710
+    bl quest_evaluateConditions
     lwz r0, 0x560(r30)
     cmpwi r0, 0x8d
     bne lbl_fn_80336C8C_00001C30
@@ -2032,7 +2032,7 @@ lbl_fn_80336C8C_00001C30:
     lfs f1, lbl_808851B0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     cmpwi r3, 0x0
     ble lbl_fn_80336C8C_00001C90
     lwz r0, 0x14d8(r30)
@@ -2184,7 +2184,7 @@ lbl_fn_80336C8C_00001E70:
     addi r4, r1, 0x238
     fmuls f2, f0, f29
     li r5, 0x0
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
 lbl_fn_80336C8C_00001E8C:
     addi r11, r1, 0x4e0
     psq_l f31, 0x528(r1), 0, 0

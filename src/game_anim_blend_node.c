@@ -19,12 +19,12 @@ extern void fn_800FDB20(void);
 extern void fn_80101434(void);
 extern void fn_8010B250(void);
 extern void magic_dispatchActionCommand(void);
-extern void fn_8014DEE4(void);
+extern void dialog_selectChoice(void);
 extern void fn_8014EF48(void);
-extern void fn_8015495C(void);
+extern void equip_applyToCharacter(void);
 extern void fn_8015D8C0(void);
 extern void fn_80161570(void);
-extern void fn_8016DA4C(void);
+extern void debuff_clearStatus(void);
 extern void fn_8016DDB0(void);
 extern void actor_setState(void);
 extern void fn_80178A6C(void);
@@ -183,9 +183,9 @@ asm void fn_8026C844(void)
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     mr r3, r30
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     li r0, 0x15
     stw r0, 0x58c(r30)
     mr r3, r30
@@ -2931,7 +2931,7 @@ lbl_fn_8026DB8C_000028E4:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8014DEE4
+    bl dialog_selectChoice
 lbl_fn_8026DB8C_00002954:
     lwz r3, 0x1624(r28)
     lwz r0, 0x1628(r28)
@@ -3036,7 +3036,7 @@ lbl_fn_8026DB8C_00002A78:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8014DEE4
+    bl dialog_selectChoice
 lbl_fn_8026DB8C_00002AD8:
     lwz r3, 0x1624(r28)
     lwz r0, 0x1628(r28)

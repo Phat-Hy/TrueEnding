@@ -21,8 +21,8 @@ extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_8008A4E0(void);
 extern void fn_8008A76C(void);
-extern void fn_8008AD4C(void);
-extern void fn_8008B140(void);
+extern void area_updateZoneState(void);
+extern void map_processTrigger(void);
 extern void fn_8008CD60(void);
 extern void fn_800902C0(void);
 extern void fn_80092A4C(void);
@@ -30,7 +30,7 @@ extern void fn_80095300(void);
 extern void fn_8009E690(void);
 extern void fn_800C16B4(void);
 extern void atn_Task_destructor(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void fn_800D4558(void);
 extern void fn_800D4DB8(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
@@ -49,7 +49,7 @@ extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_getStatus(void);
 extern void atn_LoadHandle_getName(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_80473F88(void);
+extern void shockwave_freeEmitter(void);
 extern void fn_80490884(void);
 extern void fn_80490B0C(void);
 extern void fn_80490DE8(void);
@@ -493,7 +493,7 @@ lbl_fn_8049A09C_00000540:
     li r5, 0x0
     oris r0, r0, 0x800
     stw r0, 0x340(r29)
-    bl fn_8008AD4C
+    bl area_updateZoneState
 lbl_fn_8049A09C_0000056C:
     lwz r3, lbl_8087F0A8
     lwz r0, 0x5b4(r3)
@@ -590,7 +590,7 @@ lbl_fn_8049A09C_000006C0:
     lwz r3, 0x324(r29)
     addi r4, r1, 0x60
     li r5, 0x0
-    bl fn_8008AD4C
+    bl area_updateZoneState
 lbl_fn_8049A09C_000006D0:
     mr r3, r30
     bl talk_formatQuotedString
@@ -883,7 +883,7 @@ lbl_fn_8049A7D8_00000AB0:
     mr r3, r31
     bl fn_8049B1F0
     addi r3, r31, 0x50
-    bl fn_80473F88
+    bl shockwave_freeEmitter
 lbl_fn_8049A7D8_00000AD4:
     addi r3, r31, 0xdc
     bl atn_LH_Texture_update
@@ -939,7 +939,7 @@ lbl_fn_8049A7D8_00000B7C:
     srawi. r0, r0, 31
     beq lbl_fn_8049A7D8_00000BC4
     lwz r3, 0x324(r31)
-    bl fn_8008B140
+    bl map_processTrigger
     lwz r0, 0x340(r31)
     cntlzw r3, r3
     srwi r3, r3, 5
@@ -981,7 +981,7 @@ lbl_fn_8049A7D8_00000C08:
     li r29, 0x0
     beq lbl_fn_8049A7D8_00000C38
     addi r3, r31, 0x110
-    bl fn_8008B140
+    bl map_processTrigger
     cmpwi r3, 0x0
     bne lbl_fn_8049A7D8_00000C38
     li r29, 0x1
@@ -989,7 +989,7 @@ lbl_fn_8049A7D8_00000C38:
     cmpwi r29, 0x0
     beq lbl_fn_8049A7D8_00000C98
     mr r3, r31
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_8049A7D8_00000C98
     lwz r12, 0x0(r31)

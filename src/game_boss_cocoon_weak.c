@@ -18,12 +18,12 @@ extern void dungeon_initGlobalContext(void);
 extern void fn_800838AC(void);
 extern void fn_80083AD4(void);
 extern void mem_alloc(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void fn_800A4460(void);
 extern void fn_800A55D4(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void str_findChar(void);
 extern void thread_findAndNotify(void);
 extern void fn_8046C1C8(void);
@@ -38,7 +38,7 @@ extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_getStatus(void);
-extern void fn_80473F88(void);
+extern void shockwave_freeEmitter(void);
 extern void taskManager_updateTasks(void);
 extern void fn_805F9EF0(void);
 extern void strncpy(void);
@@ -793,7 +793,7 @@ lbl_atn_Loader_constructor_0000096C:
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_atn_Loader_constructor_00000990
-    bl fn_800897D8
+    bl node_destroy
 lbl_atn_Loader_constructor_00000990:
     addic. r0, r30, 0x4010
     beq lbl_atn_Loader_constructor_000009AC
@@ -926,7 +926,7 @@ asm void fn_8046DC5C(void)
     mr r5, r31
     bl memcpy
     addi r3, r1, 0x8
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     addi r3, r1, 0x8
     li r4, 0x0
     bl atn_LoadHandle_destructor
@@ -963,7 +963,7 @@ lbl_fn_8046DD20_00000BAC:
 asm void atn_Loader_destructor(void)
 {
     nofralloc
-    b fn_800D3FA4
+    b bloom_processPasses
 }
 
 asm void atn_Loader_execute(void)
@@ -1427,7 +1427,7 @@ lbl_atn_Loader_finish_0000121C:
     cmpwi r29, 0x0
     beq lbl_atn_Loader_finish_0000122C
     addi r3, r27, 0x10
-    bl fn_80473F88
+    bl shockwave_freeEmitter
 lbl_atn_Loader_finish_0000122C:
     lwz r30, 0x4(r30)
     b lbl_atn_Loader_finish_00001250

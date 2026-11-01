@@ -17,23 +17,23 @@ extern void mem_free(void);
 extern void msg_getMessageById(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void fn_800DBF68(void);
 extern void str_parseInt(void);
 extern void str_findChar(void);
-extern void fn_80116FC0(void);
+extern void actor_findSpawnTemplate(void);
 extern void actor_spawnActorWithId(void);
 extern void save_validateHeader(void);
 extern void fn_801F4728(void);
-extern void fn_801F48C8(void);
-extern void fn_801F4CB4(void);
+extern void save_parseSlotStats(void);
+extern void save_formatSlotTitle(void);
 extern void saveSlot_readSummary(void);
-extern void fn_801F64D0(void);
+extern void save_createWorkerTask(void);
 extern void save_computeCrc32(void);
 extern void fn_801F6E78(void);
 extern void fn_801F7590(void);
 extern void fn_801F7DF0(void);
-extern void fn_801F837C(void);
+extern void save_findEntryByName(void);
 extern void fn_801F8598(void);
 extern void thread_findAndNotify(void);
 extern void thread_dispatchToQueue(void);
@@ -575,7 +575,7 @@ asm void fn_80586220(void)
     lwz r5, lbl_8087F4F0
     lwz r3, 0xd4(r3)
     lwz r5, 0x6000(r5)
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     addis r3, r31, 0x2
     lwz r0, 0xf8(r31)
     lwz r3, 0x5c90(r3)
@@ -590,7 +590,7 @@ asm void fn_80586220(void)
     lwz r3, 0xd4(r31)
     addi r4, r15, 0x13a
     li r6, 0x0
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
 lbl_fn_80586220_00000648:
     addis r5, r31, 0x2
     lwz r6, 0xf8(r31)
@@ -713,7 +713,7 @@ lbl_fn_80586220_000007F4:
 lbl_fn_80586220_00000810:
     lwz r5, 0x40(r1)
 lbl_fn_80586220_00000814:
-    bl fn_801F837C
+    bl save_findEntryByName
     lwz r4, 0x0(r21)
     mr r3, r17
     bl fn_80444564
@@ -751,18 +751,18 @@ lbl_fn_80586220_00000860:
 lbl_fn_80586220_0000089C:
     la r5, lbl_808813D0
 lbl_fn_80586220_000008A0:
-    bl fn_801F837C
+    bl save_findEntryByName
     b lbl_fn_80586220_000008B8
 lbl_fn_80586220_000008A8:
     lwz r3, 0xac(r18)
     addi r4, r25, 0x157
     addi r5, r28, lbl_807968D0@l
-    bl fn_801F837C
+    bl save_findEntryByName
 lbl_fn_80586220_000008B8:
     lwz r3, 0xac(r18)
     addi r4, r25, 0x160
     addi r5, r29, 0xe
-    bl fn_801F837C
+    bl save_findEntryByName
     lwz r3, lbl_8087F4F0
     bl fn_80444C48
     mr r20, r3
@@ -1017,7 +1017,7 @@ asm void fn_805866F8(void)
     psq_l f2, 0x8(r29), 0, 0
     psq_st f1, 0x0(r5), 0, 0
     psq_st f2, 0x8(r5), 0, 0
-    bl fn_801F48C8
+    bl save_parseSlotStats
     addi r5, r1, 0x8
     psq_l f1, 0x0(r29), 0, 0
     psq_l f2, 0x8(r29), 0, 0
@@ -1025,7 +1025,7 @@ asm void fn_805866F8(void)
     psq_st f1, 0x0(r5), 0, 0
     addi r4, r31, 0x199
     psq_st f2, 0x8(r5), 0, 0
-    bl fn_801F48C8
+    bl save_parseSlotStats
 lbl_fn_805866F8_00000C9C:
     addi r3, r1, 0x28
     li r29, 0x0
@@ -1123,7 +1123,7 @@ lbl_fn_805866F8_00000DE8:
     li r3, 0x0
     slwi r0, r0, 2
     lwzx r4, r21, r0
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     mr r25, r3
     addi r3, r1, 0x88
     bl str_findChar
@@ -1250,7 +1250,7 @@ lbl_fn_805866F8_00000FCC:
     li r3, 0x0
     slwi r0, r0, 2
     lwzx r4, r21, r0
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     mr r25, r3
     addi r3, r1, 0x88
     bl str_findChar
@@ -1460,7 +1460,7 @@ asm void fn_80586E40(void)
 lbl_fn_80586E40_000012C8:
     mr r3, r31
     mr r4, r30
-    bl fn_801F64D0
+    bl save_createWorkerTask
     addis r5, r29, 0x2
     li r4, 0x1
     addi r0, r5, 0x5b78
@@ -1478,7 +1478,7 @@ lbl_fn_80586E40_000012C8:
 lbl_fn_80586E40_0000130C:
     mr r3, r31
     mr r4, r30
-    bl fn_801F64D0
+    bl save_createWorkerTask
     addis r5, r29, 0x2
     li r4, 0x1
     addi r0, r5, 0x5ba0
@@ -1558,7 +1558,7 @@ asm void fn_80587070(void)
     stw r30, 0x18(r1)
     stw r29, 0x14(r1)
     stw r28, 0x10(r1)
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_80587070_000015BC
     mr r3, r31

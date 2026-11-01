@@ -15,14 +15,14 @@ extern void _savegpr_25(void);
 extern void fn_80049B74(void);
 extern void fn_80049CDC(void);
 extern void talk_formatQuotedString(void);
-extern void fn_800697D8(void);
+extern void boss_recordDamage(void);
 extern void fn_8006AA20(void);
 extern void fn_8007FAF0(void);
 extern void fn_80092954(void);
 extern void fn_8009385C(void);
 extern void fn_800C93D4(void);
 extern void fn_800CA7D4(void);
-extern void fn_800CB360(void);
+extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB404(void);
 extern void fn_800CB4EC(void);
@@ -104,7 +104,7 @@ extern void fn_8043A850(void);
 extern void fn_8043B778(void);
 extern void fn_8043D594(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_80473F88(void);
+extern void shockwave_freeEmitter(void);
 extern void atoi(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
@@ -169,7 +169,7 @@ asm void fn_803EAA7C(void)
     mr r29, r5
     stw r28, 0x10(r1)
     mr r28, r4
-    bl fn_800CB360
+    bl morph_reset
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
     beq lbl_fn_803EAA7C_00000060
@@ -345,7 +345,7 @@ lbl_fn_803EAC3C_00000230:
     stfs f31, 0x1158(r3)
 lbl_fn_803EAC3C_00000280:
     addi r3, r30, 0x10
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     addi r0, r20, 0x398
     stw r28, 0x18(r30)
     subf r0, r0, r22
@@ -633,7 +633,7 @@ lbl_fn_803EB038_00000638:
     stfs f0, 0x1158(r4)
 lbl_fn_803EB038_0000067C:
     addi r3, r31, 0x10
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     li r29, 0x0
     lis r3, lbl_807C7030@ha
     stw r29, 0x18(r31)
@@ -889,7 +889,7 @@ lbl_fn_803EB394_00000970:
     stfs f31, 0x1158(r3)
 lbl_fn_803EB394_000009D4:
     addi r3, r25, 0x10
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     stw r30, 0x18(r25)
     lfs f2, 0x8(r28)
     psq_l f1, 0x0(r28), 0, 0
@@ -961,7 +961,7 @@ lbl_fn_803EB4A8_00000A90:
     stfs f31, 0x1158(r3)
 lbl_fn_803EB4A8_00000AD0:
     addi r3, r24, 0x10
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     stw r28, 0x18(r24)
     lfs f2, 0x8(r26)
     psq_l f1, 0x0(r26), 0, 0
@@ -1010,7 +1010,7 @@ lbl_fn_803EB4A8_00000B30:
     stfs f31, 0x1158(r3)
 lbl_fn_803EB4A8_00000B88:
     addi r3, r27, 0x10
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     stw r28, 0x18(r27)
 lbl_fn_803EB4A8_00000B94:
     lfs f2, 0x8(r26)
@@ -1115,7 +1115,7 @@ lbl_fn_803EB668_00000C94:
     stfs f0, 0x1158(r4)
 lbl_fn_803EB668_00000CE8:
     addi r3, r27, 0x10
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     li r0, 0x0
     lis r3, lbl_807C7030@ha
     stw r0, 0x18(r27)
@@ -1203,7 +1203,7 @@ lbl_fn_803EB7E4_00000DB4:
     bl sprintf
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x8
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_fn_803EB7E4_00000E28:
     mr r3, r30
     li r4, 0x0
@@ -1223,7 +1223,7 @@ lbl_fn_803EB7E4_00000E28:
     stfs f31, 0x1158(r3)
 lbl_fn_803EB7E4_00000E68:
     addi r3, r30, 0x10
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     stw r25, 0x18(r30)
     lfs f2, 0x8(r22)
     psq_l f1, 0x0(r22), 0, 0
@@ -1417,7 +1417,7 @@ lbl_fn_803EBAC8_000010AC:
     stfs f31, 0x1158(r3)
 lbl_fn_803EBAC8_000010EC:
     addi r3, r26, 0x10
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     stw r30, 0x18(r26)
     lfs f2, 0x8(r28)
     psq_l f1, 0x0(r28), 0, 0

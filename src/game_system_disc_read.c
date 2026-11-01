@@ -15,7 +15,7 @@ extern void res_findResourceSlot(void);
 extern void fn_8023A108(void);
 extern void fn_8023A254(void);
 extern void res_registerResource(void);
-extern void fn_803EA77C(void);
+extern void chest_spawnLoot(void);
 extern void fn_804439FC(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
@@ -304,7 +304,7 @@ lbl_fn_80350464_000002F0:
     lfs f2, lbl_808853BC
     li r5, 0x0
     li r6, 0x0
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_80350464_000003B0:
     lwz r0, 0x134(r1)
     psq_l f31, 0x128(r1), 0, 0

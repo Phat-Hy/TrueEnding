@@ -5,9 +5,9 @@
 extern void _restgpr_24(void);
 extern void _savegpr_24(void);
 extern void vec3_copy(void);
-extern void fn_8000D3A4(void);
-extern void fn_8001047C(void);
-extern void fn_80011034(void);
+extern void vec3_mag(void);
+extern void vec3_assign(void);
+extern void vec3_toEulerAngles(void);
 extern void vec3_sub(void);
 extern void fn_800133B0(void);
 extern void fn_80063D3C(void);
@@ -16,14 +16,14 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800E0AA8(void);
 extern void fn_800E0AB0(void);
-extern void fn_800F7FF0(void);
+extern void viewport_getNextSequenceId(void);
 extern void fn_800F8524(void);
 extern void system_getNextSequenceId(void);
 extern void fn_801162A0(void);
-extern void fn_80121F00(void);
-extern void fn_8013C38C(void);
+extern void equip_getGlobalManager(void);
+extern void npc_getPosition(void);
 extern void actor_setState(void);
-extern void fn_80179D44(void);
+extern void actor_getMovementFlags(void);
 extern void res_findResourceSlot(void);
 extern void fn_8028F560(void);
 extern void fn_8028F8E4(void);
@@ -189,10 +189,10 @@ lbl_fn_8028AA38_00000118:
     addi r5, r30, 0x528
     bl vec3_sub
     addi r3, r1, 0xa0
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
     addi r3, r1, 0x94
     addi r4, r1, 0xa0
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lwz r0, 0x58c(r30)
     cmpwi r0, 0x7
     bne lbl_fn_8028AA38_00000170
@@ -201,7 +201,7 @@ lbl_fn_8028AA38_00000118:
     addi r5, r30, 0x528
     bl vec3_sub
     addi r3, r1, 0x64
-    bl fn_8000D3A4
+    bl vec3_mag
     lfs f0, 0x1514(r30)
     fadds f0, f0, f1
     stfs f0, 0x1514(r30)
@@ -240,22 +240,22 @@ lbl_fn_8028AA38_000001CC:
     bl vec3_copy
 lbl_fn_8028AA38_000001EC:
     addi r3, r1, 0x88
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
     addi r3, r1, 0x7c
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
     addi r3, r1, 0x70
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
     addi r3, r1, 0x58
     addi r4, r1, 0x88
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lfs f31, 0x5c(r1)
     addi r3, r1, 0x4c
     addi r4, r1, 0x7c
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lfs f30, 0x50(r1)
     addi r3, r1, 0x40
     addi r4, r1, 0x70
-    bl fn_80011034
+    bl vec3_toEulerAngles
     fsubs f1, f30, f31
     lfs f31, 0x44(r1)
     bl fn_800133B0
@@ -276,7 +276,7 @@ lbl_fn_8028AA38_000001EC:
     bl vec3_sub
     addi r3, r1, 0x34
     addi r4, r1, 0x28
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lfs f1, 0x38(r1)
     bl fn_800133B0
     lfs f0, lbl_80883AB4
@@ -290,7 +290,7 @@ lbl_fn_8028AA38_0000029C:
     bl vec3_sub
     addi r3, r1, 0x1c
     addi r4, r1, 0x10
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lfs f1, 0x20(r1)
     bl fn_800133B0
     stfs f1, 0x538(r30)
@@ -577,7 +577,7 @@ lbl_fn_8028AFD8_000006AC:
     lwz r4, lbl_8087F430
     mr r3, r28
     lwz r24, 0x10d8(r4)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lwz r4, 0x152c(r28)
     mr r5, r3
     lfs f1, lbl_80883AC0
@@ -591,7 +591,7 @@ lbl_fn_8028AFD8_000006AC:
     mr r25, r3
     mr r3, r28
     lwz r24, 0x10d8(r4)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lwz r4, 0x1530(r28)
     mr r5, r3
     lfs f1, lbl_80883AC0
@@ -651,7 +651,7 @@ lbl_fn_8028AFD8_000007CC:
     lwz r4, lbl_8087F430
     mr r3, r28
     lwz r24, 0x10d8(r4)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lwz r4, 0x152c(r28)
     mr r5, r3
     lfs f1, lbl_80883AC0
@@ -665,7 +665,7 @@ lbl_fn_8028AFD8_000007CC:
     mr r24, r3
     mr r3, r28
     lwz r25, 0x10d8(r4)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lwz r4, 0x1530(r28)
     mr r5, r3
     lfs f1, lbl_80883AC0
@@ -826,7 +826,7 @@ lbl_fn_8028AFD8_00000A68:
     lwz r5, 0x14b0(r28)
     lwz r25, 0x10d8(r4)
     addi r24, r5, 0x528
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lfs f1, lbl_80883AC0
     mr r5, r3
     mr r3, r25
@@ -873,16 +873,16 @@ asm void fn_8028B47C(void)
     cmpwi r0, 0x0
     beq lbl_fn_8028B47C_00000DB4
     mr r3, r0
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r1, 0x14
-    bl fn_8001047C
+    bl vec3_assign
     addi r3, r1, 0x8
     addi r4, r1, 0x14
     addi r5, r30, 0x528
     bl vec3_sub
     addi r3, r1, 0x8
-    bl fn_8000D3A4
+    bl vec3_mag
     lwz r0, 0x14c8(r30)
     cmpwi r0, 0x0
     beq lbl_fn_8028B47C_00000B74
@@ -1043,7 +1043,7 @@ lbl_fn_8028B47C_00000D88:
     lwz r0, 0x1628(r30)
     cmpwi r0, 0x0
     bne lbl_fn_8028B47C_00000DB0
-    bl fn_80121F00
+    bl equip_getGlobalManager
     li r4, 0x9b
     bl world_getLocalFlag
     cmpwi r3, 0x0
@@ -1121,7 +1121,7 @@ asm void fn_8028B75C(void)
     mr r3, r31
     lwz r4, lbl_8087F430
     lwz r30, 0x10d8(r4)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lfs f1, lbl_80883AC0
     mr r5, r3
     mr r3, r30
@@ -1451,7 +1451,7 @@ lbl_fn_8028B75C_000012F8:
     mr r3, r31
     lwz r4, lbl_8087F430
     lwz r30, 0x10d8(r4)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lfs f1, lbl_80883AC0
     mr r5, r3
     mr r3, r30
@@ -1734,7 +1734,7 @@ lbl_fn_8028BFE0_00001784:
     bne lbl_fn_8028BFE0_00001B20
     lwz r4, lbl_8087F430
     lwz r29, 0x10d8(r4)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lwz r4, 0x1530(r31)
     mr r5, r3
     lfs f1, lbl_80883AC0
@@ -1786,7 +1786,7 @@ lbl_fn_8028BFE0_0000180C:
     stfs f0, 0x1514(r31)
     lwz r4, lbl_8087F430
     lwz r29, 0x10d8(r4)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lwz r4, 0x1530(r31)
     mr r5, r3
     lfs f1, lbl_80883AC0
@@ -2157,7 +2157,7 @@ lbl_fn_8028BFE0_00001DB0:
     stfs f2, 0x4c(r1)
     lwz r29, 0x10d8(r4)
     stfs f2, 0xc4(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lwz r4, 0x1530(r31)
     mr r5, r3
     lfs f1, lbl_80883AC0

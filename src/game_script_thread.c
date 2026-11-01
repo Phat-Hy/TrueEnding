@@ -10,7 +10,7 @@ extern void _savegpr_21(void);
 extern void _savegpr_24(void);
 extern void _savegpr_25(void);
 extern void _savegpr_27(void);
-extern void fn_8004D388(void);
+extern void collision_queryGeometry(void);
 extern void collision_testLineSegment(void);
 extern void mem_alloc(void);
 extern void atn_Model_findBoneIndex(void);
@@ -20,18 +20,18 @@ extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void fn_800EB7A0(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8574(void);
+extern void viewport_updateCulling(void);
 extern void clip_calculateFrustum(void);
 extern void fn_8012D8B8(void);
 extern void fn_8012DD70(void);
 extern void fn_80139560(void);
-extern void fn_8015495C(void);
-extern void fn_8016DA4C(void);
+extern void equip_applyToCharacter(void);
+extern void debuff_clearStatus(void);
 extern void actor_setState(void);
 extern void fn_80176ACC(void);
 extern void fn_80178208(void);
 extern void fn_80178A6C(void);
-extern void fn_80179D44(void);
+extern void actor_getMovementFlags(void);
 extern void fn_801C02F4(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
@@ -168,7 +168,7 @@ lbl_fn_8024ED68_00000108:
     cmpwi r4, 0x0
     beq lbl_fn_8024ED68_00000348
     mr r3, r22
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     li r0, 0x1
     stb r0, 0x1d(r26)
     addi r5, r1, 0x30
@@ -293,7 +293,7 @@ lbl_fn_8024ED68_000001EC:
     lfd f0, 0x100(r1)
     fsubs f0, f0, f30
     stfs f0, 0xe8(r1)
-    bl fn_800F8574
+    bl viewport_updateCulling
     addi r23, r23, 0x1
     cmpw r23, r24
     blt lbl_fn_8024ED68_000001EC
@@ -749,7 +749,7 @@ lbl_fn_8024F1DC_00000904:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
     addi r24, r24, 0x1
 lbl_fn_8024F1DC_000009A4:
     cmpw r24, r28
@@ -1012,7 +1012,7 @@ lbl_fn_8024F9B8_00000CE8:
     stw r0, 0x88(r1)
     stw r0, 0x8c(r1)
     stw r0, 0x90(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     oris r7, r3, 0x8000
     mr r3, r29
     mr r5, r31
@@ -1037,7 +1037,7 @@ lbl_fn_8024F9B8_00000CE8:
     lwz r29, lbl_8087EE98
     stfs f4, 0x48(r1)
     stfs f0, 0x3c(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     oris r7, r3, 0x8000
     mr r3, r29
     mr r5, r31
@@ -1073,7 +1073,7 @@ lbl_fn_8024F9B8_00000CE8:
     fadds f3, f3, f4
     stfs f0, 0x10(r1)
     stfs f3, 0x48(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lfs f1, 0x620(r27)
     oris r7, r3, 0x8000
     mr r3, r29
@@ -1082,7 +1082,7 @@ lbl_fn_8024F9B8_00000CE8:
     addi r6, r1, 0x8
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004D388
+    bl collision_queryGeometry
     addi r4, r1, 0x60
     lfs f2, 0x68(r1)
     addi r29, r1, 0x20
@@ -1122,7 +1122,7 @@ lbl_fn_8024F9B8_00000ECC:
     lwz r28, lbl_8087EE98
     stfs f3, 0x48(r1)
     stfs f0, 0x3c(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     oris r7, r3, 0x8000
     mr r3, r28
     mr r5, r31
@@ -1200,9 +1200,9 @@ lbl_fn_8024FCDC_00000FA8:
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     mr r3, r29
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lwz r3, lbl_8087F3C0
     addi r4, r29, 0x1504
     li r5, 0x0
@@ -1286,9 +1286,9 @@ asm void fn_8024FE18(void)
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     mr r3, r29
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lwz r3, lbl_8087F3C0
     addi r4, r29, 0x1504
     li r5, 0x0

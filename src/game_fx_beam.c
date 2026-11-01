@@ -6,9 +6,9 @@ extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8C6C(void);
+extern void scissor_clipFrustum(void);
 extern void actor_setState(void);
-extern void fn_80179D44(void);
+extern void actor_getMovementFlags(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
@@ -260,7 +260,7 @@ lbl_fn_8028E1A0_000001F8:
     lfs f1, lbl_80883A98
     stfs f3, 0x24(r1)
     stfs f0, 0x28(r1)
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     b lbl_fn_8028E1A0_000002C8
 lbl_fn_8028E1A0_000002BC:
     lwz r3, lbl_8087F048
@@ -717,7 +717,7 @@ lbl_fn_8028E800_000008A8:
     mr r3, r31
     lwz r4, lbl_8087F430
     lwz r30, 0x10d8(r4)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lfs f1, lbl_80883AC0
     mr r5, r3
     mr r3, r30
@@ -1488,7 +1488,7 @@ asm void fn_8028F560(void)
     lwz r4, lbl_8087F430
     mr r3, r29
     lwz r30, 0x10d8(r4)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lwz r4, 0x152c(r29)
     mr r5, r3
     lfs f1, lbl_80883AC0
@@ -1502,7 +1502,7 @@ asm void fn_8028F560(void)
     mr r3, r29
     lwz r4, lbl_8087F430
     lwz r30, 0x10d8(r4)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lwz r4, 0x152c(r29)
     mr r5, r3
     lfs f1, lbl_80883AC0

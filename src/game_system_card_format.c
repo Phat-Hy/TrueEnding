@@ -13,7 +13,7 @@ extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
 extern void node_createNamedChild(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_applyWeights(void);
@@ -26,7 +26,7 @@ extern void fn_8011FAF0(void);
 extern void fn_8011FB18(void);
 extern void boss_updatePhaseState(void);
 extern void fn_801446F0(void);
-extern void fn_8015495C(void);
+extern void equip_applyToCharacter(void);
 extern void fn_80178208(void);
 extern void fn_801AFAC0(void);
 extern void task_findEntryById(void);
@@ -111,8 +111,8 @@ void fn_8035B234(void);
 void fn_8035B368(void);
 void fn_8035B42C(void);
 void fn_8035B534(void);
-void fn_8035B694(void);
-void fn_8035B78C(void);
+void entity_Instance_constructor(void);
+void entity_Instance_destructor(void);
 void fn_8035B808(void);
 void fn_8035B824(void);
 void fn_8035B854(void);
@@ -864,7 +864,7 @@ asm void fn_8035B42C(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_8035B42C_00000A84
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_8035B42C_00000A84:
     addic. r31, r29, 0x1658
     beq lbl_fn_8035B42C_00000AA4
@@ -1018,7 +1018,7 @@ lbl_fn_8035B534_00000C84:
     blr
 }
 
-asm void fn_8035B694(void)
+asm void entity_Instance_constructor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1041,12 +1041,12 @@ asm void fn_8035B694(void)
     addi r3, r3, 0x1
     stw r3, 0x50(r4)
     cmpw r3, r0
-    ble lbl_fn_8035B694_00000D04
+    ble lbl_entity_Instance_constructor_00000D04
     lwz r3, 0x50(r4)
     subis r3, r3, 0x2
     addi r0, r3, 0x7960
     stw r0, 0x50(r4)
-lbl_fn_8035B694_00000D04:
+lbl_entity_Instance_constructor_00000D04:
     lwz r0, 0x50(r4)
     mr r4, r31
     stw r0, 0x80(r31)
@@ -1062,7 +1062,7 @@ lbl_fn_8035B694_00000D04:
     stw r0, 0xf14(r31)
     lwz r0, 0xd0(r3)
     cmpwi r0, 0x0
-    ble lbl_fn_8035B694_00000D80
+    ble lbl_entity_Instance_constructor_00000D80
     lwz r3, lbl_8087F4A0
     li r4, 0x4650
     lwz r5, 0x80(r31)
@@ -1078,7 +1078,7 @@ lbl_fn_8035B694_00000D04:
     lwz r3, 0x1438(r31)
     li r4, 0x1
     bl atn_Task_setActive
-lbl_fn_8035B694_00000D80:
+lbl_entity_Instance_constructor_00000D80:
     mr r3, r31
     lwz r31, 0xc(r1)
     lwz r0, 0x14(r1)
@@ -1087,7 +1087,7 @@ lbl_fn_8035B694_00000D80:
     blr
 }
 
-asm void fn_8035B78C(void)
+asm void entity_Instance_destructor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1098,24 +1098,24 @@ asm void fn_8035B78C(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    beq lbl_fn_8035B78C_00000DF8
+    beq lbl_entity_Instance_destructor_00000DF8
     lis r4, lbl_80789A08@ha
     addi r4, r4, lbl_80789A08@l
     stw r4, 0x0(r3)
     lwz r3, lbl_8087F408
     cmpwi r3, 0x0
-    beq lbl_fn_8035B78C_00000DDC
+    beq lbl_entity_Instance_destructor_00000DDC
     mr r4, r30
     bl fn_8011FB18
-lbl_fn_8035B78C_00000DDC:
+lbl_entity_Instance_destructor_00000DDC:
     mr r3, r30
     li r4, 0x0
     bl fn_800E2D4C
     cmpwi r31, 0x0
-    ble lbl_fn_8035B78C_00000DF8
+    ble lbl_entity_Instance_destructor_00000DF8
     mr r3, r30
     bl dtor_80084684
-lbl_fn_8035B78C_00000DF8:
+lbl_entity_Instance_destructor_00000DF8:
     mr r3, r30
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -1496,7 +1496,7 @@ asm void fn_8035BC84(void)
     li r4, 0x0
     lwz r3, 0x4(r3)
     addi r30, r3, 0xb0
-    bl fn_8015495C
+    bl equip_applyToCharacter
     li r31, 0x1
     stw r31, 0x34c(r30)
     lfs f0, lbl_8088560C
@@ -1632,7 +1632,7 @@ asm void fn_8035BEA4(void)
     stw r30, 0x18(r1)
     stw r29, 0x14(r1)
     stw r28, 0x10(r1)
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lis r3, lbl_80789B88@ha
     addi r29, r31, 0x14b0
     addi r3, r3, lbl_80789B88@l

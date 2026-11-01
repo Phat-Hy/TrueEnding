@@ -18,7 +18,7 @@ extern void fn_8020F130(void);
 extern void fn_8020F75C(void);
 extern void boss_getOffset54(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_80473F88(void);
+extern void shockwave_freeEmitter(void);
 extern void fn_80480468(void);
 extern void fn_80539334(void);
 extern void fn_8057D5F8(void);
@@ -119,7 +119,7 @@ lbl_fn_80575FD0_000000A0:
     addi r3, r3, 0x1c4
     bl atn_LoadHandle_isLoading
     addi r3, r31, 0x1c4
-    bl fn_80473F88
+    bl shockwave_freeEmitter
 lbl_fn_80575FD0_000000B0:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)

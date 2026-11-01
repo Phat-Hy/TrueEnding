@@ -9,26 +9,26 @@ extern void _savegpr_25(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_8000D430(void);
-extern void fn_8003EFB0(void);
+extern void ui_destroyWidget(void);
 extern void fn_8004ECC0(void);
 extern void talk_formatQuotedString(void);
-extern void fn_8005BBF8(void);
-extern void fn_8005BCE8(void);
+extern void talk_parseQuotes(void);
+extern void talk_copySpeakerName(void);
 extern void fn_8009076C(void);
 extern void fn_80092A4C(void);
 extern void lockon_updateTarget(void);
 extern void fn_800971D4(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void fn_80097E80(void);
-extern void fn_800BFAC8(void);
+extern void motion_updateFogAdj(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void wcs_vformat(void);
-extern void fn_800EF73C(void);
+extern void cam_destroyMsgHandle(void);
 extern void fn_8014F698(void);
 extern void fn_801F6D7C(void);
 extern void fn_801F791C(void);
-extern void fn_801F837C(void);
+extern void save_findEntryByName(void);
 extern void fn_80206B9C(void);
 extern void assert_formatLocation(void);
 extern void fn_8020EF04(void);
@@ -42,7 +42,7 @@ extern void res_MsgHandle_update(void);
 extern void fn_80239D58(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
-extern void fn_803EC69C(void);
+extern void task_destroyWorker(void);
 extern void fn_803ED774(void);
 extern void fn_8040BE88(void);
 extern void fn_8040C058(void);
@@ -73,8 +73,8 @@ extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void rand(void);
 extern void strcmp(void);
-extern void fn_8068A850(void);
-extern void fn_8068AD58(void);
+extern void std_sin(void);
+extern void std_cos(void);
 extern void math_u64DivMod(void);
 extern void __destroy_new_array(void);
 
@@ -382,7 +382,7 @@ lbl_fn_8040A32C_00000360:
     lwz r4, lbl_8087EFB4
     addi r3, r1, 0x2c
     addi r5, r1, 0x44
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f0, lbl_808862C0
     lfs f1, 0x34(r1)
     fcmpo cr0, f0, f1
@@ -525,7 +525,7 @@ lbl_fn_8040A32C_00000548:
     beq lbl_fn_8040A32C_00000560
     mr r4, r29
     addi r5, r1, 0x50
-    bl fn_801F837C
+    bl save_findEntryByName
 lbl_fn_8040A32C_00000560:
     addi r28, r28, 0x4
 lbl_fn_8040A32C_00000564:
@@ -547,7 +547,7 @@ lbl_fn_8040A32C_00000590:
     beq lbl_fn_8040A32C_000005A8
     mr r4, r28
     mr r5, r29
-    bl fn_801F837C
+    bl save_findEntryByName
 lbl_fn_8040A32C_000005A8:
     addi r27, r27, 0x4
 lbl_fn_8040A32C_000005AC:
@@ -690,7 +690,7 @@ asm void fn_8040AA10(void)
     addi r4, r4, lbl_807774B8@l
     stw r4, 0x8(r1)
     la r4, lbl_8087D710
-    bl fn_8005BCE8
+    bl talk_copySpeakerName
     lis r31, lbl_80752A5C@ha
     addi r30, r28, 0xf4
     addi r31, r31, lbl_80752A5C@l
@@ -725,7 +725,7 @@ lbl_fn_8040AA10_000007E0:
     bl res_MsgHandle_destructor
 lbl_fn_8040AA10_00000808:
     addi r3, r1, 0x8
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_8040AA10_0000079C
     lwz r0, 0x654(r1)
@@ -1141,11 +1141,11 @@ lbl_fn_8040AB64_00000DE8:
     lis r3, lbl_807C6BB8@ha
     li r0, 0x0
     stwu r0, lbl_807C6BB8@l(r3)
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     li r30, 0x1
     lis r5, lbl_807C8888@ha
     stw r0, 0x4(r3)
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     addi r5, r5, lbl_807C8888@l
     stw r0, 0x8(r3)
     stw r30, 0xc(r3)
@@ -1431,15 +1431,15 @@ asm void fn_8040B4B8(void)
     li r4, 0x0
     bl atn_LoadHandle_destructor
 lbl_fn_8040B4B8_000011E0:
-    lis r4, fn_800EF73C@ha
+    lis r4, cam_destroyMsgHandle@ha
     addi r3, r29, 0xf4
-    addi r4, r4, fn_800EF73C@l
+    addi r4, r4, cam_destroyMsgHandle@l
     li r5, 0xc
     li r6, 0x7
     bl __destroy_new_array
     mr r3, r29
     li r4, 0x0
-    bl fn_803EC69C
+    bl task_destroyWorker
     cmpwi r30, 0x0
     ble lbl_fn_8040B4B8_00001214
     mr r3, r29
@@ -2020,12 +2020,12 @@ asm void fn_8040BC38(void)
     fsubs f1, f1, f2
     fmuls f1, f0, f1
     stfs f1, 0x3e4(r30)
-    bl fn_8068AD58
+    bl std_cos
     lfs f0, 0x3e4(r30)
     frsp f2, f1
     fneg f1, f0
     stfs f2, 0x3ec(r30)
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     addi r3, r30, 0x3ec
     mr r4, r3

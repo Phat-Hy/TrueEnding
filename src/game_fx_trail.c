@@ -2,41 +2,41 @@
 #pragma function_align 4
 
 /* External function declarations */
-extern void fn_8000D0F8(void);
-extern void fn_8000D114(void);
+extern void mtx_getTranslation(void);
+extern void vec3_set(void);
 extern void vec3_copy(void);
-extern void fn_8001047C(void);
+extern void vec3_assign(void);
 extern void fn_800109E0(void);
-extern void fn_80011034(void);
+extern void vec3_toEulerAngles(void);
 extern void fn_80011410(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void vec3_sub(void);
-extern void fn_80013410(void);
+extern void vec3_add(void);
 extern void collision_testLineSegment(void);
-extern void fn_80057A64(void);
+extern void mission_updateStub(void);
 extern void atn_Matrix_copy(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void wcs_vformat(void);
 extern void fn_800F72CC(void);
-extern void fn_800F7FA0(void);
+extern void viewport_getGlobalContext(void);
 extern void fn_800F7FA8(void);
 extern void fn_800F8524(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8574(void);
+extern void viewport_updateCulling(void);
 extern void clip_calculateFrustum(void);
 extern void fn_80108C10(void);
 extern void fn_80109828(void);
 extern void fn_801125F8(void);
-extern void fn_80121F00(void);
+extern void equip_getGlobalManager(void);
 extern void magic_getOffset6C(void);
 extern void fn_8012AFE8(void);
 extern void fn_80139550(void);
 extern void fn_80139F24(void);
 extern void fn_80139F3C(void);
 extern void fn_8013A194(void);
-extern void fn_8013C38C(void);
+extern void npc_getPosition(void);
 extern void fn_8013C554(void);
 extern void fn_801404F8(void);
 extern void fn_80140500(void);
@@ -46,7 +46,7 @@ extern void fn_801C0730(void);
 extern void fn_801C3910(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
-extern void fn_8023A680(void);
+extern void res_Shader_bindParams(void);
 extern void res_registerResource(void);
 extern void fn_8026607C(void);
 extern void fn_8028F4AC(void);
@@ -279,7 +279,7 @@ lbl_fn_8028C834_000001A8:
     li r8, 0x0
     li r9, 0x100
     li r10, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
     li r0, 0x2
     stw r0, 0x14b4(r31)
     b lbl_fn_8028C834_000002E4
@@ -400,18 +400,18 @@ asm void fn_8028CB38(void)
     bl fn_8013A194
     bl system_getNextSequenceId
     stw r3, 0x1554(r31)
-    bl fn_80121F00
+    bl equip_getGlobalManager
     li r4, 0x96
     bl world_getLocalFlag
     cmpwi r3, 0x0
     bne lbl_fn_8028CB38_00000418
-    bl fn_80121F00
+    bl equip_getGlobalManager
     li r4, 0x96
     li r5, 0x1
     bl world_setLocalFlag
 lbl_fn_8028CB38_00000418:
     lwz r3, 0x14b0(r31)
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r1, 0x48
     addi r5, r31, 0x528
@@ -419,11 +419,11 @@ lbl_fn_8028CB38_00000418:
     addi r3, r1, 0x48
     bl fn_801C3910
     stfs f1, 0x1558(r31)
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r4, r31
     li r5, 0x3e8
     bl fn_800F7FA8
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     addi r4, r31, 0x155c
     addi r5, r31, 0xb0
     li r6, 0x1
@@ -464,16 +464,16 @@ lbl_fn_8028CB38_00000498:
     li r30, 0x0
     stw r29, 0x154c(r31)
     stw r30, 0x1548(r31)
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r4, r31
     li r5, 0x3e8
     li r6, 0x1
     bl res_findResourceSlot
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r4, r31
     li r5, 0x3e8
     bl fn_800F7FA8
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     stw r30, 0x8(r1)
     li r0, -0x1
     lfs f1, lbl_80883AA8
@@ -486,7 +486,7 @@ lbl_fn_8028CB38_00000498:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_8023A680
+    bl res_Shader_bindParams
     b lbl_fn_8028CB38_00000574
 lbl_fn_8028CB38_00000548:
     lwz r0, 0x154c(r31)
@@ -495,7 +495,7 @@ lbl_fn_8028CB38_00000548:
     li r0, 0x0
     stw r0, 0x154c(r31)
     stw r0, 0x1548(r31)
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r4, r31
     li r5, 0x3e8
     li r6, 0x1
@@ -514,7 +514,7 @@ lbl_fn_8028CB38_00000574:
     lfs f1, lbl_80883A98
     fmr f3, f1
     fdivs f31, f0, f4
-    bl fn_8000D114
+    bl vec3_set
     fmr f1, f31
     la r3, lbl_8087DC38
     la r4, lbl_8087DC3C
@@ -533,7 +533,7 @@ lbl_fn_8028CB38_00000574:
     bl fn_80011410
     addi r3, r1, 0x3c
     addi r4, r1, 0x84
-    bl fn_80011034
+    bl vec3_toEulerAngles
     addi r3, r1, 0x90
     addi r4, r1, 0x3c
     bl fn_800109E0
@@ -549,14 +549,14 @@ lbl_fn_8028CB38_00000574:
     beq lbl_fn_8028CB38_00000640
     mr r4, r3
     addi r3, r1, 0x30
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     addi r4, r1, 0x30
     b lbl_fn_8028CB38_00000644
 lbl_fn_8028CB38_00000640:
     addi r4, r31, 0x528
 lbl_fn_8028CB38_00000644:
     addi r3, r1, 0x78
-    bl fn_8001047C
+    bl vec3_assign
     addi r3, r31, 0x1580
     addi r4, r1, 0x78
     bl fn_801479E4
@@ -572,9 +572,9 @@ lbl_fn_8028CB38_00000644:
     subf. r0, r0, r4
     bne lbl_fn_8028CB38_00000740
     addi r3, r1, 0x6c
-    bl fn_80057A64
+    bl mission_updateStub
     addi r3, r1, 0x60
-    bl fn_80057A64
+    bl mission_updateStub
     addi r3, r1, 0x6c
     addi r4, r1, 0x78
     bl vec3_copy
@@ -585,7 +585,7 @@ lbl_fn_8028CB38_00000644:
     addi r3, r1, 0x24
     addi r4, r1, 0x6c
     addi r5, r1, 0x18
-    bl fn_80013410
+    bl vec3_add
     addi r3, r1, 0x60
     addi r4, r1, 0x24
     bl vec3_copy
@@ -603,7 +603,7 @@ lbl_fn_8028CB38_00000644:
     beq lbl_fn_8028CB38_00000740
     addi r3, r1, 0x54
     addi r4, r1, 0x124
-    bl fn_8001047C
+    bl vec3_assign
     bl fn_8013A194
     li r0, -0x1
     stw r0, 0x8(r1)
@@ -619,7 +619,7 @@ lbl_fn_8028CB38_00000644:
     li r10, 0x1e
     bl clip_calculateFrustum
 lbl_fn_8028CB38_00000740:
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl magic_getOffset6C
     lfs f1, lbl_80883AA0
     li r4, 0x1
@@ -1536,7 +1536,7 @@ lbl_fn_8028D5C8_000013DC:
     stfs f0, 0xd8(r1)
     lwz r4, 0x1630(r30)
     lwz r5, 0x14d8(r30)
-    bl fn_800F8574
+    bl viewport_updateCulling
     li r3, 0x0
     li r4, 0x0
     bl sound_initGlobalInstances

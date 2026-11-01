@@ -5,28 +5,28 @@
 extern void __register_global_object(void);
 extern void _restgpr_16(void);
 extern void _savegpr_16(void);
-extern void fn_8003EFB0(void);
+extern void ui_destroyWidget(void);
 extern void fn_80051BC4(void);
 extern void talk_formatQuotedString(void);
-extern void fn_8005BBF8(void);
-extern void fn_8005BCE8(void);
+extern void talk_parseQuotes(void);
+extern void talk_copySpeakerName(void);
 extern void mem_alloc(void);
 extern void route_findNextWaypoint(void);
 extern void route_createSegment(void);
-extern void fn_80087E9C(void);
+extern void route_createWaypoint(void);
 extern void fn_80088724(void);
 extern void node_createNamedChild(void);
-extern void fn_8008AD4C(void);
-extern void fn_8008B140(void);
+extern void area_updateZoneState(void);
+extern void map_processTrigger(void);
 extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
-extern void fn_800EF73C(void);
+extern void bloom_processPasses(void);
+extern void cam_destroyMsgHandle(void);
 extern void fn_80161570(void);
-extern void fn_801F64D0(void);
+extern void save_createWorkerTask(void);
 extern void fn_802180A8(void);
 extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_constructor(void);
@@ -37,10 +37,10 @@ extern void res_findResourceSlot(void);
 extern void fn_8023A1F4(void);
 extern void res_registerResource(void);
 extern void kpad_getClampData(void);
-extern void fn_803EC568(void);
+extern void task_createWorker(void);
 extern void fn_803EC758(void);
-extern void fn_803EC91C(void);
-extern void fn_803ED0D4(void);
+extern void task_updateWorker(void);
+extern void task_initWorkerContext(void);
 extern void fn_803ED5D0(void);
 extern void fn_803ED774(void);
 extern void fn_8040B200(void);
@@ -63,8 +63,8 @@ extern void rand(void);
 extern void strcmp(void);
 extern void atoi(void);
 extern void __construct_new_array(void);
-extern void fn_806A8E40(void);
-extern void fn_806B0E30(void);
+extern void net_getSocket(void);
+extern void net_getMyAid(void);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
 
@@ -174,11 +174,11 @@ asm void fn_80408920(void)
     stw r30, 0x8(r1)
     mr r30, r3
     addi r3, r3, 0xf4
-    bl fn_8008B140
+    bl map_processTrigger
     cmpwi r3, 0x0
     bne lbl_fn_80408920_0000009C
     addi r3, r30, 0x4c4
-    bl fn_8008B140
+    bl map_processTrigger
     cmpwi r3, 0x0
     beq lbl_fn_80408920_000000A0
 lbl_fn_80408920_0000009C:
@@ -248,7 +248,7 @@ asm void fn_804089A0(void)
     addi r4, r4, lbl_807774B8@l
     stw r4, 0x108(r1)
     la r4, lbl_8087D710
-    bl fn_8005BCE8
+    bl talk_copySpeakerName
     lis r30, lbl_80752954@ha
     addi r30, r30, lbl_80752954@l
 lbl_fn_804089A0_00000190:
@@ -273,7 +273,7 @@ lbl_fn_804089A0_000001CC:
     mr r4, r3
     addi r3, r31, 0xf4
     li r5, 0x0
-    bl fn_8008AD4C
+    bl area_updateZoneState
     b lbl_fn_804089A0_000003A8
 lbl_fn_804089A0_000001E8:
     mr r3, r29
@@ -286,7 +286,7 @@ lbl_fn_804089A0_000001E8:
     mr r4, r3
     addi r3, r31, 0x4c4
     li r5, 0x0
-    bl fn_8008AD4C
+    bl area_updateZoneState
     b lbl_fn_804089A0_000003A8
 lbl_fn_804089A0_00000218:
     mr r3, r29
@@ -398,7 +398,7 @@ lbl_fn_804089A0_00000378:
     bl memcpy
 lbl_fn_804089A0_000003A8:
     addi r3, r1, 0x108
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_804089A0_00000190
     lwz r0, 0x754(r1)
@@ -425,11 +425,11 @@ asm void fn_80408C94(void)
     mr r3, r31
     addi r4, r31, 0xf4
     li r5, 0x1
-    bl fn_803ED0D4
+    bl task_initWorkerContext
     mr r3, r31
     addi r4, r31, 0x4c4
     li r5, 0x1
-    bl fn_803ED0D4
+    bl task_initWorkerContext
     lfs f0, lbl_80886294
     li r0, 0x0
     li r3, 0x1
@@ -838,7 +838,7 @@ lbl_fn_804091FC_000009A0:
     addi r5, r29, 0x6c
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_808862AC
     mr r3, r30
     lfs f2, lbl_808862B0
@@ -856,7 +856,7 @@ lbl_fn_804091FC_000009A0:
     addi r5, r29, 0x90
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     mr r3, r30
     addi r4, r31, 0x4f
     addi r5, r29, 0x9c
@@ -889,7 +889,7 @@ lbl_fn_804091FC_000009A0:
     addi r5, r29, 0x924
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lwz r0, 0x44(r1)
     lwz r31, 0x3c(r1)
     lwz r30, 0x38(r1)
@@ -962,15 +962,15 @@ asm void fn_80409438(void)
     mr r31, r3
     stw r30, 0x18(r1)
     stw r29, 0x14(r1)
-    bl fn_803EC568
+    bl task_createWorker
     lis r3, lbl_8078D458@ha
     lis r4, res_MsgHandle_constructor@ha
     addi r3, r3, lbl_8078D458@l
-    lis r5, fn_800EF73C@ha
+    lis r5, cam_destroyMsgHandle@ha
     stw r3, 0x0(r31)
     addi r3, r31, 0xf4
     addi r4, r4, res_MsgHandle_constructor@l
-    addi r5, r5, fn_800EF73C@l
+    addi r5, r5, cam_destroyMsgHandle@l
     li r6, 0xc
     li r7, 0x7
     bl __construct_new_array
@@ -1013,7 +1013,7 @@ asm void fn_80409438(void)
     oris r0, r0, 0x100
     stw r0, 0x288(r31)
     addi r4, r4, 0x1
-    bl fn_801F64D0
+    bl save_createWorkerTask
     lwz r0, 0x290(r31)
     cmplwi r0, 0x2
     bge lbl_fn_80409438_00000C94
@@ -1032,7 +1032,7 @@ lbl_fn_80409438_00000C94:
     mr r3, r31
     addi r4, r4, lbl_80752A5C@l
     addi r4, r4, 0x1e
-    bl fn_801F64D0
+    bl save_createWorkerTask
     lwz r0, 0x290(r31)
     cmplwi r0, 0x2
     bge lbl_fn_80409438_00000CD8
@@ -1083,7 +1083,7 @@ asm void fn_804095F0(void)
     stw r31, 0xc(r1)
     stw r30, 0x8(r1)
     mr r30, r3
-    bl fn_803EC91C
+    bl task_updateWorker
     cmpwi r3, 0x0
     bne lbl_fn_804095F0_00000DF8
     addi r3, r30, 0x19c
@@ -1091,7 +1091,7 @@ asm void fn_804095F0(void)
     cmpwi r3, 0x0
     bne lbl_fn_804095F0_00000DF8
     mr r3, r30
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_804095F0_00000DF8
     addi r31, r30, 0x294
@@ -1177,7 +1177,7 @@ asm void fn_804096D4(void)
     mr r4, r3
     mr r3, r17
     li r5, 0x1
-    bl fn_803ED0D4
+    bl task_initWorkerContext
 lbl_fn_804096D4_00000E90:
     lwz r0, 0x54(r17)
     cmpwi r0, 0x3
@@ -1558,7 +1558,7 @@ lbl_fn_804096D4_000013F0:
     li r0, 0x0
     b lbl_fn_804096D4_0000144C
 lbl_fn_804096D4_00001424:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804096D4_0000144C
 lbl_fn_804096D4_00001430:
@@ -1568,7 +1568,7 @@ lbl_fn_804096D4_00001430:
     li r3, 0x0
     b lbl_fn_804096D4_00001448
 lbl_fn_804096D4_00001444:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_804096D4_00001448:
     clrlwi r0, r3, 24
 lbl_fn_804096D4_0000144C:
@@ -1807,11 +1807,11 @@ lbl_fn_804096D4_00001778:
     lis r3, lbl_807C6BB8@ha
     li r0, 0x0
     stwu r0, lbl_807C6BB8@l(r3)
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     li r16, 0x1
     lis r5, lbl_807C8888@ha
     stw r0, 0x4(r3)
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     addi r5, r5, lbl_807C8888@l
     stw r0, 0x8(r3)
     stw r16, 0xc(r3)
@@ -1842,11 +1842,11 @@ lbl_fn_804096D4_000017B8:
     extsb. r0, r0
     bne lbl_fn_804096D4_00001844
     li r16, 0x1
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     lis r5, lbl_807C8888@ha
     stw r19, 0x0(r18)
     mr r3, r18
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     stw r19, 0x4(r18)
     addi r5, r5, lbl_807C8888@l
     stw r19, 0x8(r18)
@@ -1902,7 +1902,7 @@ lbl_fn_804096D4_000018B8:
     li r0, 0x0
     b lbl_fn_804096D4_00001918
 lbl_fn_804096D4_000018F0:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804096D4_00001918
 lbl_fn_804096D4_000018FC:
@@ -1912,7 +1912,7 @@ lbl_fn_804096D4_000018FC:
     li r3, 0x0
     b lbl_fn_804096D4_00001914
 lbl_fn_804096D4_00001910:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_804096D4_00001914:
     clrlwi r0, r3, 24
 lbl_fn_804096D4_00001918:

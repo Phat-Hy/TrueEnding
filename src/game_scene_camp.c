@@ -6,14 +6,14 @@ extern void __files(void);
 extern void dtor_80084684(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_8008BBD8(void);
+extern void map_debugLog(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_8012476C(void);
 extern void fn_8012DF7C(void);
-extern void fn_8013CB68(void);
+extern void npc_updateTalkInteraction(void);
 extern void fn_80155DAC(void);
-extern void fn_8016DA4C(void);
+extern void debuff_clearStatus(void);
 extern void fn_80192758(void);
 extern void world_getGlobalFlag(void);
 extern void PSMTXRotRad(void);
@@ -112,7 +112,7 @@ asm void fn_801A7DC8(void)
     lwz r4, 0x4(r3)
     stw r0, 0x560(r4)
     lwz r3, 0x4(r3)
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lwz r3, 0x4(r30)
     li r0, 0x1
     lfs f0, lbl_80882230
@@ -376,7 +376,7 @@ lbl_fn_801A8080_000003F4:
     stw r4, 0x48(r1)
     stw r0, 0x4c(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_801A8080_000004C8
     lwz r7, 0x3c(r1)
@@ -571,7 +571,7 @@ lbl_fn_801A8420_000006A8:
     lfs f1, lbl_80882234
     lfs f2, lbl_80882230
     addi r4, r3, 0x534
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
     psq_l f31, 0x18(r1), 0, 0
     mr r3, r31
     lfd f31, 0x10(r1)
@@ -663,7 +663,7 @@ lbl_fn_801A84AC_000007E0:
     stw r4, 0x48(r1)
     stw r0, 0x4c(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_801A84AC_000008B4
     lwz r7, 0x3c(r1)
@@ -1366,7 +1366,7 @@ lbl_fn_801A8E68_000011DC:
     stw r4, 0x48(r1)
     stw r0, 0x4c(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_801A8E68_000012B0
     lwz r7, 0x3c(r1)

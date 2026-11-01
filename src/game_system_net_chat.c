@@ -9,7 +9,7 @@ extern void _savegpr_20(void);
 extern void _savegpr_22(void);
 extern void _savegpr_27(void);
 extern void fn_8003EA3C(void);
-extern void fn_800697D8(void);
+extern void boss_recordDamage(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_8009373C(void);
 extern void fn_80093B88(void);
@@ -25,7 +25,7 @@ extern void clip_calculateFrustum(void);
 extern void fn_801092C8(void);
 extern void fn_8011F8F4(void);
 extern void fn_8011F91C(void);
-extern void fn_8011FC10(void);
+extern void skill_findNodeById(void);
 extern void fn_8011FE3C(void);
 extern void fn_80161570(void);
 extern void fn_80162A08(void);
@@ -841,7 +841,7 @@ lbl_fn_803A3D20_00000960:
 lbl_fn_803A3D20_0000099C:
     lwz r3, lbl_8087F408
     mr r4, r0
-    bl fn_8011FC10
+    bl skill_findNodeById
     mr r4, r3
     b lbl_fn_803A3D20_000009C0
 lbl_fn_803A3D20_000009B0:
@@ -1434,7 +1434,7 @@ lbl_fn_803A4568_000011A4:
     b lbl_fn_803A4568_000011F8
 lbl_fn_803A4568_000011DC:
     lwz r3, lbl_8087F408
-    bl fn_8011FC10
+    bl skill_findNodeById
     mr r29, r3
     b lbl_fn_803A4568_000011F8
 lbl_fn_803A4568_000011EC:
@@ -1490,7 +1490,7 @@ lbl_fn_803A4568_00001288:
     bl sprintf
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x128
-    bl fn_800697D8
+    bl boss_recordDamage
     b lbl_fn_803A4568_0000131C
 lbl_fn_803A4568_000012B4:
     mr r3, r28
@@ -1519,7 +1519,7 @@ lbl_fn_803A4568_000012F4:
     bl sprintf
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x28
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_fn_803A4568_0000131C:
     lwz r4, 0x0(r31)
     lis r3, lbl_8074ED24@ha
@@ -2137,7 +2137,7 @@ lbl_fn_803A4A7C_00001B90:
     b lbl_fn_803A4A7C_00001BE4
 lbl_fn_803A4A7C_00001BC8:
     lwz r3, lbl_8087F408
-    bl fn_8011FC10
+    bl skill_findNodeById
     mr r21, r3
     b lbl_fn_803A4A7C_00001BE4
 lbl_fn_803A4A7C_00001BD8:

@@ -2219,16 +2219,10 @@ asm void fn_8070F3A0(void)
     bctr
 }
 
-asm void fn_8070F3B0(void)
-{
-    nofralloc
-    blr
+void fn_8070F3B0(void) {
 }
 
-asm void fn_8070F3C0(void)
-{
-    nofralloc
-    blr
+void fn_8070F3C0(void) {
 }
 
 asm void fn_8070F3D0(void)

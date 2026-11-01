@@ -1615,10 +1615,7 @@ asm void fn_800DBF5C(void)
     blr
 }
 
-asm void fn_800DBF64(void)
-{
-    nofralloc
-    blr
+void fn_800DBF64(void) {
 }
 
 asm void fn_800DBF68(void)

@@ -22,13 +22,13 @@ extern void fn_801010A0(void);
 extern void fn_80108C10(void);
 extern void fn_8010EE78(void);
 extern void fn_8012DF7C(void);
-extern void fn_80144710(void);
+extern void quest_evaluateConditions(void);
 extern void fn_80148B0C(void);
 extern void fn_80158BB4(void);
 extern void fn_8015A46C(void);
 extern void fn_8015AC48(void);
 extern void actor_setState(void);
-extern void fn_801765D8(void);
+extern void battle_awardExp(void);
 extern void fn_801789D8(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
@@ -376,7 +376,7 @@ lbl_fn_802A94C8_000003BC:
     bl task_findEntryById
     mr r29, r3
     mr r3, r31
-    bl fn_80144710
+    bl quest_evaluateConditions
     lis r8, lbl_807C6B90@ha
     lwz r6, 0x14b0(r31)
     mr r4, r29
@@ -1745,7 +1745,7 @@ lbl_fn_802AA89C_00001844:
     ori r0, r9, 0x8000
     stw r0, 0x12a4(r31)
     mr r3, r31
-    bl fn_801765D8
+    bl battle_awardExp
     mr r3, r31
     bl fn_800EE360
     b lbl_fn_802AA89C_000019E8

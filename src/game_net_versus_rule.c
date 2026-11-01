@@ -8,7 +8,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_14(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8006EF48(void);
+extern void script_executeOpcode(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void fn_800A4450(void);
@@ -19,7 +19,7 @@ extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void str_findChar(void);
 extern void wcs_vformat(void);
 extern void actor_spawnActorWithId(void);
@@ -30,7 +30,7 @@ extern void saveSlot_readSummary(void);
 extern void fn_801FEC74(void);
 extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
-extern void fn_801FEDBC(void);
+extern void thread_findTaskById(void);
 extern void thread_dispatchToQueue(void);
 extern void fn_804A436C(void);
 extern void fn_804A4738(void);
@@ -557,7 +557,7 @@ asm void fn_804BA138(void)
     stw r30, 0x28(r1)
     stw r29, 0x24(r1)
     stw r28, 0x20(r1)
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_804BA138_000007BC
     li r0, 0x0
@@ -634,7 +634,7 @@ lbl_fn_804BA138_0000070C:
     lfs f2, lbl_808873D8
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lwz r0, 0x8(r1)
     fmr f31, f1
     srwi. r0, r0, 31
@@ -1032,16 +1032,10 @@ lbl_fn_804BA350_00000C94:
     blr
 }
 
-asm void fn_804BA824(void)
-{
-    nofralloc
-    blr
+void fn_804BA824(void) {
 }
 
-asm void fn_804BA828(void)
-{
-    nofralloc
-    blr
+void fn_804BA828(void) {
 }
 
 asm void fn_804BA82C(void)
@@ -1643,7 +1637,7 @@ lbl_fn_804BAFAC_000014C8:
     mr r4, r3
     mr r3, r31
     li r5, 0x0
-    bl fn_801FEDBC
+    bl thread_findTaskById
     b lbl_fn_804BAFAC_00001590
 lbl_fn_804BAFAC_0000153C:
     lwz r4, 0x84(r3)
@@ -1780,7 +1774,7 @@ lbl_fn_804BB10C_0000162C:
     mr r4, r3
     mr r3, r30
     li r5, 0x0
-    bl fn_801FEDBC
+    bl thread_findTaskById
     lwz r3, 0x80(r31)
     li r6, 0xa
     lwz r4, 0x94(r31)

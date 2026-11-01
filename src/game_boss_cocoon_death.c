@@ -8,8 +8,8 @@ extern void _savegpr_22(void);
 extern void _savegpr_23(void);
 extern void dtor_80084684(void);
 extern void vec3_copy(void);
-extern void fn_8001047C(void);
-extern void fn_8004D388(void);
+extern void vec3_assign(void);
+extern void collision_queryGeometry(void);
 extern void collision_testLineSegment(void);
 extern void atn_ColliBase_destructor(void);
 extern void atn_ColliCapsule_destructor(void);
@@ -18,7 +18,7 @@ extern void mem_alloc(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void node_createNamedChild(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void msg_getMessageById(void);
 extern void fn_800C3094(void);
@@ -30,28 +30,28 @@ extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void str_findChar(void);
 extern void fn_800EC204(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800FBA9C(void);
 extern void fn_800FBE70(void);
 extern void actor_spawnActorWithId(void);
-extern void fn_80121F00(void);
+extern void equip_getGlobalManager(void);
 extern void fn_8013C504(void);
 extern void fn_80158E1C(void);
 extern void actor_setState(void);
 extern void save_validateHeader(void);
-extern void fn_801F64D0(void);
+extern void save_createWorkerTask(void);
 extern void thread_findAndNotify(void);
-extern void fn_802375C4(void);
+extern void res_Resource_destructor(void);
 extern void res_MsgHandle_unload(void);
 extern void res_findResourceSlot(void);
 extern void fn_8032AB90(void);
 extern void fn_8032ABA4(void);
 extern void fn_8032AC1C(void);
 extern void fn_8032AF90(void);
-extern void fn_8035B78C(void);
+extern void entity_Instance_destructor(void);
 extern void world_setLocalFlag(void);
 extern void fn_80469AB8(void);
 extern void fn_80469C64(void);
@@ -643,7 +643,7 @@ lbl_fn_80468534_000006D8:
     addi r8, r22, 0x5b8
     lis r7, 0x8000
     li r9, 0x0
-    bl fn_8004D388
+    bl collision_queryGeometry
     psq_l f1, 0x0(r27), 0, 0
     addi r3, r1, 0x8
     psq_st f1, 0x0(r29), 0, 0
@@ -1011,13 +1011,13 @@ asm void fn_80468B68(void)
     addi r4, r29, lbl_807C7030@l
     li r28, 0x0
     li r27, 0x0
-    bl fn_8001047C
+    bl vec3_assign
     addi r3, r1, 0x20
     addi r4, r29, lbl_807C7030@l
-    bl fn_8001047C
+    bl vec3_assign
     addi r3, r1, 0x14
     addi r4, r29, lbl_807C7030@l
-    bl fn_8001047C
+    bl vec3_assign
     lis r3, lbl_80755018@ha
     li r0, 0xa
     addi r3, r3, lbl_80755018@l
@@ -1056,7 +1056,7 @@ lbl_fn_80468B68_00000CDC:
     addi r4, r4, 0x1
     bdnz lbl_fn_80468B68_00000C7C
 lbl_fn_80468B68_00000CE8:
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_8013C504
     mr r4, r25
     bl fn_800EC204
@@ -1067,7 +1067,7 @@ lbl_fn_80468B68_00000CE8:
     addi r4, r4, 0x4
     bl vec3_copy
 lbl_fn_80468B68_00000D10:
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_8013C504
     mr r4, r27
     bl fn_800EC204
@@ -1078,7 +1078,7 @@ lbl_fn_80468B68_00000D10:
     addi r4, r4, 0x4
     bl vec3_copy
 lbl_fn_80468B68_00000D38:
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_8013C504
     mr r4, r28
     bl fn_800EC204
@@ -1162,14 +1162,14 @@ asm void fn_80468D48(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_80468D48_00000E44
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_80468D48_00000E44:
     addi r3, r30, 0x1848
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     addi r3, r30, 0x183c
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     addic. r29, r30, 0x1830
     beq lbl_fn_80468D48_00000E7C
     mr r3, r29
@@ -1181,7 +1181,7 @@ lbl_fn_80468D48_00000E44:
 lbl_fn_80468D48_00000E7C:
     addi r3, r30, 0x1824
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     addic. r3, r30, 0x17a8
     beq lbl_fn_80468D48_00000E98
     li r4, 0x0
@@ -1269,7 +1269,7 @@ lbl_fn_80468D48_00000FAC:
 lbl_fn_80468D48_00000FBC:
     mr r3, r30
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r31, 0x0
     ble lbl_fn_80468D48_00000FD8
     mr r3, r30
@@ -1380,7 +1380,7 @@ asm void fn_80468FBC(void)
 lbl_fn_80468FBC_0000112C:
     mr r3, r28
     mr r4, r30
-    bl fn_801F64D0
+    bl save_createWorkerTask
     add r5, r28, r31
     li r4, 0x1
     stw r3, 0x58(r5)
@@ -1407,7 +1407,7 @@ lbl_fn_80468FBC_0000112C:
     bl atn_Task_setActive
     mr r3, r28
     addi r4, r31, 0xa7
-    bl fn_801F64D0
+    bl save_createWorkerTask
     stw r3, 0x80(r28)
     li r4, 0x1
     bl atn_Task_setActive
@@ -1463,7 +1463,7 @@ lbl_task_Library_constructor_00001238:
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_task_Library_constructor_0000126C
-    bl fn_800897D8
+    bl node_destroy
 lbl_task_Library_constructor_0000126C:
     addic. r4, r30, 0x9c
     beq lbl_task_Library_constructor_00001298
@@ -1517,7 +1517,7 @@ asm void task_Library_destructor(void)
     b lbl_task_Library_destructor_00001528
 lbl_task_Library_destructor_00001314:
     mr r3, r29
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     bne lbl_task_Library_destructor_0000132C
     li r3, 0x0

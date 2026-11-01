@@ -14,7 +14,7 @@ extern void talk_setSpeakerName(void);
 extern void skill_calculateDamage(void);
 extern void mem_free(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_800BFAC8(void);
+extern void motion_updateFogAdj(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void str_parseInt(void);
@@ -23,16 +23,16 @@ extern void fn_801255C8(void);
 extern void fn_80126214(void);
 extern void fn_80128818(void);
 extern void fn_80139560(void);
-extern void fn_80145334(void);
+extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void dialog_setScriptSlot(void);
 extern void fn_8014C228(void);
 extern void fn_801598B4(void);
 extern void fn_80159BA4(void);
-extern void fn_80179D44(void);
+extern void actor_getMovementFlags(void);
 extern void fn_80182134(void);
-extern void fn_8035B694(void);
-extern void fn_8035B78C(void);
+extern void entity_Instance_constructor(void);
+extern void entity_Instance_destructor(void);
 extern void fn_803C1560(void);
 extern void fn_803CD958(void);
 extern void PSMTXConcat(void);
@@ -130,7 +130,7 @@ asm void fn_801805A4(void)
     mr r18, r5
     lwz r5, 0x20(r5)
     mr r21, r3
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lfs f0, lbl_80881BF8
     lis r3, lbl_8077CAE0@ha
     li r23, 0x0
@@ -406,7 +406,7 @@ asm void fn_80180960(void)
 lbl_fn_80180960_00000428:
     mr r3, r30
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r31, 0x0
     ble lbl_fn_80180960_00000444
     mr r3, r30
@@ -473,12 +473,12 @@ lbl_fn_801809F4_00000514:
     mr r3, r31
     bl fn_80139560
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     b lbl_fn_801809F4_00000534
 lbl_fn_801809F4_00000528:
     bl fn_80180AE0
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
 lbl_fn_801809F4_00000534:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
@@ -610,7 +610,7 @@ lbl_fn_80180AE0_000006A0:
     stfs f0, 0x64(r1)
     stfs f1, 0x68(r1)
     stfs f2, 0x6c(r1)
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f1, 0x78(r1)
     lfs f0, lbl_80881C04
     fcmpo cr0, f1, f0
@@ -1627,7 +1627,7 @@ asm void fn_80181A64(void)
     lwz r22, 0x48(r3)
     lwz r26, 0x10d8(r4)
     mr r3, r22
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lfs f1, lbl_80881C2C
     mr r5, r3
     mr r3, r26
@@ -1638,7 +1638,7 @@ asm void fn_80181A64(void)
     bl fn_803C1560
     mr r29, r3
     mr r3, r20
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lfs f1, lbl_80881C2C
     mr r5, r3
     mr r3, r26
@@ -1707,7 +1707,7 @@ lbl_fn_80181A64_0000163C:
     li r21, 0x0
 lbl_fn_80181A64_00001640:
     mr r3, r20
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lfs f1, lbl_80881C2C
     mr r5, r3
     mr r3, r26

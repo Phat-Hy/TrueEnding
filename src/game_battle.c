@@ -58,10 +58,10 @@ extern void fn_80134134(void);
 extern void fn_80134270(void);
 extern void fn_80134290(void);
 extern void fn_801342B0(void);
-extern void fn_8014DEE4(void);
+extern void dialog_selectChoice(void);
 extern void fn_8014EEC4(void);
-extern void fn_8016F3D0(void);
-extern void fn_80179D44(void);
+extern void battle_canTargetActor(void);
+extern void actor_getMovementFlags(void);
 extern void fn_802180A8(void);
 extern void task_findEntryById(void);
 extern void fn_8021A984(void);
@@ -80,8 +80,8 @@ extern void PSVECDotProduct(void);
 extern void PSVECCrossProduct(void);
 extern void rand(void);
 extern void strcmp(void);
-extern void fn_8068A850(void);
-extern void fn_806952C4(void);
+extern void std_sin(void);
+extern void msl_releaseRefCount(void);
 
 /* External data declarations */
 extern u8 jumptable_80775BE8[];
@@ -284,7 +284,7 @@ lbl_fn_80017128_00000194:
     bne lbl_fn_80017128_000001D0
     lwz r25, 0xac(r30)
     mr r3, r27
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lwz r6, 0xb4(r30)
     mr r5, r3
     lfs f1, lbl_80880734
@@ -571,7 +571,7 @@ lbl_fn_80017128_000004D4:
     mr r3, r27
     li r5, 0x0
     li r6, 0x0
-    bl fn_8014DEE4
+    bl dialog_selectChoice
     b lbl_fn_80017128_00000628
 lbl_fn_80017128_0000061C:
     mr r3, r27
@@ -761,7 +761,7 @@ lbl_fn_8001794C_000008A0:
     bne lbl_fn_8001794C_000008DC
     lwz r25, 0xac(r29)
     mr r3, r28
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lwz r6, 0xb4(r29)
     mr r5, r3
     lfs f1, lbl_80880734
@@ -2135,7 +2135,7 @@ asm void fn_80018C80(void)
     lwz r31, 0xd10(r4)
 lbl_fn_80018C80_00001BC0:
     mr r3, r28
-    bl fn_80179D44
+    bl actor_getMovementFlags
     fmr f2, f29
     mr r9, r3
     fmr f3, f30
@@ -2234,7 +2234,7 @@ asm void fn_80018D5C(void)
     lfs f0, lbl_80880700
     fmuls f3, f3, f28
     fmuls f1, f0, f3
-    bl fn_8068A850
+    bl std_sin
     lwz r0, 0x74(r28)
     frsp f28, f1
     li r4, 0x0
@@ -2585,7 +2585,7 @@ lbl_fn_80019254_000021D0:
     lfs f0, lbl_80880700
     fmuls f3, f3, f28
     fmuls f1, f0, f3
-    bl fn_8068A850
+    bl std_sin
     lwz r0, 0x74(r29)
     frsp f28, f1
     li r4, 0x0
@@ -2961,7 +2961,7 @@ lbl_fn_800197A4_00002794:
     lwz r24, 0xd10(r6)
     lwz r29, 0x10d8(r3)
     lfs f18, lbl_80880738
-    bl fn_8068A850
+    bl std_sin
     lfs f3, 0x78(r1)
     frsp f19, f1
     lfs f0, 0x84(r1)
@@ -3656,7 +3656,7 @@ asm void fn_8001A270(void)
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_8001A270_00003188
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_8001A270_00003188:
     cmpwi r31, 0x0
     ble lbl_fn_8001A270_00003198
@@ -3691,7 +3691,7 @@ asm void fn_8001A2DC(void)
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_8001A2DC_000031F8
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_8001A2DC_000031F8:
     cmpwi r31, 0x0
     ble lbl_fn_8001A2DC_00003208
@@ -3897,7 +3897,7 @@ lbl_fn_8001A510_0000344C:
     mr r3, r28
     mr r4, r25
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     beq lbl_fn_8001A510_000034A0
     lwz r3, 0xd0c(r28)

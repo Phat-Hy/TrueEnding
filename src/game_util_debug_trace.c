@@ -12,22 +12,22 @@ extern void mem_free(void);
 extern void fn_80084A78(void);
 extern void mem_getAllocSize(void);
 extern void skin_applyWeights(void);
-extern void fn_800CB360(void);
+extern void morph_reset(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB440(void);
+extern void morph_updateWeights(void);
 extern void morph_updateMesh(void);
 extern void fn_800CB6E4(void);
 extern void fn_800DCA6C(void);
 extern void fn_800EFC64(void);
 extern void fn_800EFE3C(void);
 extern void fn_800EFEA0(void);
-extern void fn_8016F3D0(void);
+extern void battle_canTargetActor(void);
 extern void fn_8017639C(void);
 extern void fn_801763E0(void);
 extern void fn_80178864(void);
 extern void save_computeCrc32(void);
 extern void fn_801F7590(void);
-extern void fn_801F837C(void);
+extern void save_findEntryByName(void);
 extern void fn_801F8598(void);
 extern void assert_formatLocation(void);
 extern void task_findEntryById(void);
@@ -49,7 +49,7 @@ extern void fn_8059D3B4(void);
 extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSVECSquareMag(void);
-extern void fn_806952C4(void);
+extern void msl_releaseRefCount(void);
 extern void vec3_isNonZero(void);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
@@ -139,7 +139,7 @@ lbl_fn_80598534_00000088:
     mr r3, r30
     addi r4, r4, lbl_80761D5C@l
     addi r4, r4, 0x380
-    bl fn_801F837C
+    bl save_findEntryByName
     b lbl_fn_80598534_000000C0
 lbl_fn_80598534_000000A0:
     lis r4, lbl_80761D5C@ha
@@ -149,7 +149,7 @@ lbl_fn_80598534_000000A0:
     addi r5, r5, lbl_80796ACC@l
     addi r4, r4, 0x380
     addi r5, r5, 0x1a
-    bl fn_801F837C
+    bl save_findEntryByName
 lbl_fn_80598534_000000C0:
     lis r28, lbl_80761D5C@ha
     lis r29, lbl_80796ACC@ha
@@ -158,7 +158,7 @@ lbl_fn_80598534_000000C0:
     addi r29, r29, lbl_80796ACC@l
     addi r4, r28, 0x389
     addi r5, r29, 0x20
-    bl fn_801F837C
+    bl save_findEntryByName
     lfs f1, lbl_80888150
     mr r3, r30
     addi r4, r28, 0x391
@@ -166,7 +166,7 @@ lbl_fn_80598534_000000C0:
     mr r3, r30
     addi r4, r28, 0x39a
     addi r5, r29, 0x10
-    bl fn_801F837C
+    bl save_findEntryByName
     lwz r3, lbl_8087F4F0
     bl fn_80444C48
     mr r28, r3
@@ -177,7 +177,7 @@ lbl_fn_80598534_00000110:
     addi r29, r29, lbl_80761D5C@l
     mr r3, r30
     addi r4, r29, 0x380
-    bl fn_801F837C
+    bl save_findEntryByName
     cmpwi r26, 0x0
     bge lbl_fn_80598534_0000014C
     lis r5, lbl_80796ACC@ha
@@ -185,7 +185,7 @@ lbl_fn_80598534_00000110:
     addi r5, r5, lbl_80796ACC@l
     addi r4, r29, 0x389
     addi r5, r5, 0x20
-    bl fn_801F837C
+    bl save_findEntryByName
     b lbl_fn_80598534_00000160
 lbl_fn_80598534_0000014C:
     mr r3, r30
@@ -207,7 +207,7 @@ lbl_fn_80598534_00000160:
     addi r5, r5, lbl_80796ACC@l
     addi r4, r29, 0x39a
     addi r5, r5, 0x10
-    bl fn_801F837C
+    bl save_findEntryByName
     b lbl_fn_80598534_000001C8
 lbl_fn_80598534_0000019C:
     lis r29, lbl_80761D5C@ha
@@ -240,7 +240,7 @@ lbl_fn_80598534_000001D8:
     addi r5, r5, lbl_80796ACC@l
     addi r4, r29, 0x3a8
     addi r5, r5, 0x10
-    bl fn_801F837C
+    bl save_findEntryByName
     b lbl_fn_80598534_00000240
 lbl_fn_80598534_00000214:
     lis r29, lbl_80761D5C@ha
@@ -360,7 +360,7 @@ asm void fn_80598878(void)
     stfs f0, 0x28(r3)
     stw r31, 0x60(r3)
     addi r3, r3, 0x64
-    bl fn_800CB360
+    bl morph_reset
     stw r31, 0x68(r30)
     addi r3, r30, 0x80
     stw r31, 0x7c(r30)
@@ -1086,7 +1086,7 @@ lbl_fn_805991E4_00000DC8:
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_805991E4_00000E10
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_805991E4_00000E10:
     lwz r5, 0x68(r31)
     mr r4, r31
@@ -1349,7 +1349,7 @@ lbl_fn_80599458_00001184:
     bl skin_applyWeights
     addi r3, r30, 0x64
     addi r4, r1, 0x10
-    bl fn_800CB440
+    bl morph_updateWeights
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle
@@ -1768,7 +1768,7 @@ lbl_fn_80599C94_000017C4:
     mr r3, r4
     mr r4, r5
     li r5, 0x0
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     bne lbl_fn_80599C94_0000181C
     li r3, 0x0
@@ -1780,7 +1780,7 @@ lbl_fn_80599C94_000017F0:
     mr r3, r4
     mr r4, r5
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     beq lbl_fn_80599C94_0000181C
     li r3, 0x0
@@ -1846,7 +1846,7 @@ lbl_fn_80599D64_000018C8:
     mr r3, r31
     mr r4, r6
     li r5, 0x0
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     bne lbl_fn_80599D64_00001920
     li r0, 0x0
@@ -1858,7 +1858,7 @@ lbl_fn_80599D64_000018F4:
     mr r3, r31
     mr r4, r6
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     beq lbl_fn_80599D64_00001920
     li r0, 0x0

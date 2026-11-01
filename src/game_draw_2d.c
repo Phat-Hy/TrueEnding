@@ -23,7 +23,7 @@ extern void mem_getAllocSize(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
-extern void fn_80087E9C(void);
+extern void route_createWaypoint(void);
 extern void fn_80088AF4(void);
 extern void node_createNamedChild(void);
 extern void fn_800A96AC(void);
@@ -42,20 +42,20 @@ extern void fn_80614190(void);
 extern void GXSetTexCopySrc(void);
 extern void GXSetTexCopyDst(void);
 extern void GXCopyTex(void);
-extern void fn_80615D20(void);
+extern void GXInitLightDistAttn(void);
 extern void fn_80615D50(void);
 extern void fn_80615FF0(void);
 extern void fn_80616250(void);
 extern void fn_80617200(void);
-extern void fn_80617220(void);
+extern void GXInitTexObjDefault(void);
 extern void fn_80617340(void);
-extern void fn_80617880(void);
+extern void GXSetTevOrder(void);
 extern void GXSetNumTevStages(void);
-extern void fn_80617D50(void);
+extern void GXSetTevAlphaIn(void);
 extern void GXSetZCompLoc(void);
 extern void rand(void);
-extern void fn_8068A850(void);
-extern void fn_8068AD58(void);
+extern void std_sin(void);
+extern void std_cos(void);
 
 /* External data declarations */
 extern u8 lbl_80732D28[];
@@ -135,10 +135,8 @@ void fn_800B3C3C(void);
 void fn_800B3CC8(void);
 void fn_800B3F40(void);
 
-asm void fn_800B23C4(void)
+void fn_800B23C4(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_800B23C8(void)
@@ -182,7 +180,7 @@ asm void fn_800B23C8(void)
     addi r5, r29, 0x14
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_80880ED0
     mr r3, r30
     lfs f2, lbl_80880F04
@@ -236,7 +234,7 @@ asm void fn_800B23C8(void)
     addi r5, r29, 0x30
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_80880F14
     mr r3, r30
     lfs f2, lbl_80880F18
@@ -245,7 +243,7 @@ asm void fn_800B23C8(void)
     addi r5, r29, 0x3c
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)
@@ -844,10 +842,8 @@ asm void fn_800B2E18(void)
     b fn_800502A8
 }
 
-asm void fn_800B2E28(void)
+void fn_800B2E28(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_800B2E2C(void)
@@ -972,7 +968,7 @@ asm void fn_800B2EA0(void)
     li r3, 0x1
     bl GXClearVtxDesc
     li r3, 0x0
-    bl fn_80615D20
+    bl GXInitLightDistAttn
     li r3, 0x1
     bl GXSetNumTevStages
     li r3, 0x0
@@ -984,7 +980,7 @@ asm void fn_800B2EA0(void)
     li r4, 0x0
     li r5, 0x0
     li r6, 0xff
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x0
     li r4, 0x1
     li r5, 0x4
@@ -993,7 +989,7 @@ asm void fn_800B2EA0(void)
     li r8, 0x7d
     bl __GXSetVtxDesc
     li r3, 0x0
-    bl fn_80617220
+    bl GXInitTexObjDefault
     lwz r4, lbl_8087EFB4
     li r5, 0x0
     lwz r3, lbl_8087EEE0
@@ -1023,12 +1019,12 @@ asm void fn_800B2EA0(void)
     bl fn_80614190
     lwz r3, lbl_8087EFA8
     lfs f1, 0x420(r3)
-    bl fn_8068AD58
+    bl std_cos
     lwz r3, lbl_8087EFA8
     frsp f31, f1
     lfs f1, 0x420(r3)
     lfs f30, 0x418(r3)
-    bl fn_8068A850
+    bl std_sin
     lwz r3, lbl_8087EFA8
     fneg f0, f31
     frsp f1, f1
@@ -1045,12 +1041,12 @@ asm void fn_800B2EA0(void)
     bl layout_drawPane
     lwz r3, lbl_8087EFA8
     lfs f1, 0x420(r3)
-    bl fn_8068A850
+    bl std_sin
     lwz r3, lbl_8087EFA8
     frsp f30, f1
     lfs f1, 0x420(r3)
     lfs f31, 0x41c(r3)
-    bl fn_8068AD58
+    bl std_cos
     frsp f0, f1
     lwz r3, lbl_8087EFA8
     fmuls f2, f30, f31
@@ -1068,7 +1064,7 @@ asm void fn_800B2EA0(void)
     li r3, 0x1
     bl GXClearVtxDesc
     li r3, 0x0
-    bl fn_80615D20
+    bl GXInitLightDistAttn
     li r3, 0x1
     bl GXSetNumTevStages
     li r3, 0x0
@@ -1084,7 +1080,7 @@ asm void fn_800B2EA0(void)
     li r4, 0x0
     li r5, 0x0
     li r6, 0x4
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x4
     li r4, 0x0
     li r5, 0x1
@@ -1094,12 +1090,12 @@ asm void fn_800B2EA0(void)
     li r9, 0x2
     bl fn_80615D50
     li r3, 0x0
-    bl fn_80617220
+    bl GXInitTexObjDefault
     li r3, 0x0
     li r4, 0x1
     li r5, 0x0
     li r6, 0x3
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
     lwz r3, lbl_8087EEE0
     bl fn_80075DEC
     lwz r3, lbl_8087EFB4
@@ -1118,10 +1114,8 @@ asm void fn_800B2EA0(void)
     blr
 }
 
-asm void fn_800B3208(void)
+void fn_800B3208(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_800B320C(void)
@@ -1136,10 +1130,8 @@ asm void fn_800B320C(void)
     b route_createSegment
 }
 
-asm void fn_800B3228(void)
+void fn_800B3228(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_800B322C(void)
@@ -1429,10 +1421,8 @@ asm void fn_800B34C0(void)
     blr
 }
 
-asm void fn_800B35F4(void)
+void fn_800B35F4(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_800B35F8(void)
@@ -1465,16 +1455,12 @@ lbl_fn_800B35F8_00001270:
     blr
 }
 
-asm void fn_800B3654(void)
+void fn_800B3654(void)
 {
-    nofralloc
-    blr
 }
 
-asm void fn_800B3658(void)
+void fn_800B3658(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_800B365C(void)
@@ -1625,16 +1611,12 @@ asm void fn_800B3770(void)
     blr
 }
 
-asm void fn_800B3870(void)
+void fn_800B3870(void)
 {
-    nofralloc
-    blr
 }
 
-asm void fn_800B3874(void)
+void fn_800B3874(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_800B3878(void)

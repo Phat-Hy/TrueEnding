@@ -9,27 +9,27 @@ extern void dtor_80084684(void);
 extern void collision_testLineSegment(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_8008BBD8(void);
+extern void map_debugLog(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_applyWeights(void);
-extern void fn_800CB360(void);
+extern void morph_reset(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB440(void);
+extern void morph_updateWeights(void);
 extern void morph_updateMesh(void);
 extern void fn_800CB6E4(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void fn_8012476C(void);
-extern void fn_8013CB68(void);
-extern void fn_801539E0(void);
+extern void npc_updateTalkInteraction(void);
+extern void inventory_unequipItem(void);
 extern void fn_80155DAC(void);
 extern void fn_80164DCC(void);
-extern void fn_8016DA4C(void);
-extern void fn_80179D44(void);
+extern void debuff_clearStatus(void);
+extern void actor_getMovementFlags(void);
 extern void fn_801905AC(void);
 extern void fn_801905DC(void);
-extern void fn_803EA77C(void);
+extern void chest_spawnLoot(void);
 extern void PSMTXRotRad(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
@@ -126,13 +126,13 @@ asm void fn_8019A580(void)
     stfs f2, 0x14(r3)
     stw r0, 0x560(r4)
     lwz r3, 0x4(r3)
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lwz r3, 0x4(r31)
     lwz r0, 0x12a4(r3)
     srwi. r0, r0, 31
     beq lbl_fn_8019A580_00000078
     mr r3, r30
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_8019A580_00000078:
     lwz r3, 0x4(r31)
     lwz r0, 0x12a4(r3)
@@ -375,7 +375,7 @@ asm void fn_8019A8A8(void)
     stfs f0, 0x94(r1)
     stfs f3, 0x98(r1)
     stfs f4, 0x9c(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     mr r7, r3
     mr r3, r30
     mr r8, r31
@@ -661,7 +661,7 @@ lbl_fn_8019AC60_00000808:
     stw r4, 0x48(r1)
     stw r0, 0x4c(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_8019AC60_000008DC
     lwz r7, 0x3c(r1)
@@ -959,7 +959,7 @@ lbl_fn_8019B0F0_00000C0C:
     stw r4, 0x48(r1)
     stw r0, 0x4c(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_8019B0F0_00000CE0
     lwz r7, 0x3c(r1)
@@ -1049,7 +1049,7 @@ asm void fn_8019B29C(void)
     stw r5, 0xc(r3)
     stw r0, 0x1c(r3)
     addi r3, r3, 0x20
-    bl fn_800CB360
+    bl morph_reset
     stw r28, 0x24(r30)
     lwz r3, 0x4(r30)
     lwz r0, 0x58c(r3)
@@ -1065,7 +1065,7 @@ lbl_fn_8019B29C_00000D94:
     clrrwi r0, r0, 1
     stw r0, 0x5c0(r3)
     lwz r3, 0x4(r30)
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lwz r3, 0x4(r30)
     li r4, 0x1
     bl fn_80164DCC
@@ -1074,7 +1074,7 @@ lbl_fn_8019B29C_00000D94:
     srwi. r0, r0, 31
     beq lbl_fn_8019B29C_00000DDC
     mr r3, r27
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_8019B29C_00000DDC:
     lwz r3, 0x4(r30)
     lwz r0, 0x12a4(r3)
@@ -1440,7 +1440,7 @@ lbl_fn_8019B6A8_000012F0:
     lwz r3, 0x4(r31)
     stfs f2, 0x50(r1)
     lfs f2, 0x568(r3)
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
     lwz r3, 0x4(r31)
     li r4, 0x0
     addi r29, r3, 0xb0
@@ -1483,7 +1483,7 @@ lbl_fn_8019B6A8_000012F0:
     bl skin_applyWeights
     addi r3, r31, 0x20
     addi r4, r1, 0x8
-    bl fn_800CB440
+    bl morph_updateWeights
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -1617,7 +1617,7 @@ lbl_fn_8019BA1C_0000156C:
     stw r4, 0x48(r1)
     stw r0, 0x4c(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_8019BA1C_00001640
     lwz r7, 0x3c(r1)
@@ -1826,7 +1826,7 @@ asm void fn_8019BD48(void)
     mr r4, r30
     li r5, 0xa
     li r6, 0x1e
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_8019BD48_00001874:
     lwz r31, 0x1c(r1)
     mr r3, r29

@@ -6,7 +6,7 @@ extern void _restgpr_20(void);
 extern void _restgpr_27(void);
 extern void _savegpr_20(void);
 extern void _savegpr_27(void);
-extern void fn_8004D388(void);
+extern void collision_queryGeometry(void);
 extern void collision_testLineSegment(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
@@ -22,22 +22,22 @@ extern void atn_Task_setActive(void);
 extern void str_skipWhitespace(void);
 extern void fn_800E41FC(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8C6C(void);
+extern void scissor_clipFrustum(void);
 extern void clip_calculateFrustum(void);
 extern void fn_80103F60(void);
 extern void fn_80108378(void);
-extern void fn_8011FC10(void);
+extern void skill_findNodeById(void);
 extern void fn_801255C8(void);
 extern void fn_80126214(void);
 extern void fn_80128930(void);
 extern void fn_8012D8B8(void);
 extern void boss_updatePhaseState(void);
-extern void fn_8013CB68(void);
+extern void npc_updateTalkInteraction(void);
 extern void fn_801426A4(void);
-extern void fn_80145334(void);
+extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
-extern void fn_8014C540(void);
-extern void fn_8015495C(void);
+extern void dialog_updateScriptState(void);
+extern void equip_applyToCharacter(void);
 extern void actor_setState(void);
 extern void fn_80176548(void);
 extern void fn_80176ACC(void);
@@ -840,7 +840,7 @@ lbl_fn_8030646C_000009B4:
     stw r0, 0x1524(r31)
 lbl_fn_8030646C_000009C8:
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
     lwz r0, 0x58c(r31)
     addi r3, r1, 0x14
     psq_l f1, 0x528(r31), 0, 0
@@ -886,7 +886,7 @@ lbl_fn_8030646C_00000A5C:
     extrwi. r0, r0, 1, 6
     bne lbl_fn_8030646C_00000A80
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
 lbl_fn_8030646C_00000A80:
     lwz r0, 0x58c(r31)
     cmpwi r0, 0xc
@@ -2302,7 +2302,7 @@ lbl_fn_803073C4_00001E28:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     lwz r3, 0x14bc(r24)
     addi r0, r3, 0x1
     stw r0, 0x14bc(r24)
@@ -2326,7 +2326,7 @@ lbl_fn_803073C4_00001EC4:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     lwz r3, 0x14bc(r24)
     addi r0, r3, 0x1
     stw r0, 0x14bc(r24)
@@ -2999,7 +2999,7 @@ lbl_fn_803073C4_0000289C:
     stfs f0, 0x2c4(r1)
     stfs f3, 0x2c0(r1)
     stfs f4, 0x2c8(r1)
-    bl fn_8004D388
+    bl collision_queryGeometry
     cmpwi r3, 0x0
     beq lbl_fn_803073C4_00002B00
     addi r5, r1, 0x688
@@ -3388,7 +3388,7 @@ lbl_fn_803073C4_00002EB4:
     cmpwi r3, 0x0
     beq lbl_fn_803073C4_00002ED8
     lwz r4, 0x0(r26)
-    bl fn_8011FC10
+    bl skill_findNodeById
     mr r25, r3
     b lbl_fn_803073C4_00002EDC
 lbl_fn_803073C4_00002ED8:
@@ -3465,7 +3465,7 @@ lbl_fn_803073C4_00002F4C:
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     stw r21, 0xd18(r25)
     mr r3, r25
     mr r4, r31
@@ -3550,7 +3550,7 @@ lbl_fn_803073C4_00003100:
     addi r4, r1, 0x328
     fmuls f2, f0, f29
     li r5, 0x0
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
 lbl_fn_803073C4_0000311C:
     addi r11, r1, 0x700
     psq_l f31, 0x748(r1), 0, 0

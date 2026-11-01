@@ -9,19 +9,19 @@ extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
 extern void node_createNamedChild(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void msg_getMessageById(void);
 extern void ref_releaseHandle(void);
 extern void fn_800D0240(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void str_findChar(void);
 extern void actor_spawnActorWithId(void);
 extern void save_validateHeader(void);
 extern void saveSlot_readSummary(void);
-extern void fn_801F64D0(void);
+extern void save_createWorkerTask(void);
 extern void thread_findAndNotify(void);
 extern void thread_dispatchToQueue(void);
 extern void fn_8036E89C(void);
@@ -40,7 +40,7 @@ extern void fn_80470528(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_80473F88(void);
+extern void shockwave_freeEmitter(void);
 extern void fn_804A39EC(void);
 extern void fn_804A3A68(void);
 extern void fn_804A436C(void);
@@ -781,7 +781,7 @@ lbl_fn_8057F284_00000998:
     mr r3, r29
     addi r31, r31, lbl_807612E4@l
     addi r4, r31, 0x11
-    bl fn_801F64D0
+    bl save_createWorkerTask
     stw r3, 0x68(r29)
     li r4, 0x1
     bl atn_Task_setActive
@@ -826,7 +826,7 @@ lbl_fn_8057F284_00000998:
 lbl_fn_8057F284_00000A50:
     mr r3, r29
     mr r4, r25
-    bl fn_801F64D0
+    bl save_createWorkerTask
     add r5, r29, r26
     li r4, 0x1
     stw r3, 0x98(r5)
@@ -850,7 +850,7 @@ lbl_fn_8057F284_00000A50:
 lbl_fn_8057F284_00000AAC:
     mr r3, r29
     mr r4, r25
-    bl fn_801F64D0
+    bl save_createWorkerTask
     add r5, r29, r26
     li r4, 0x1
     stw r3, 0xac(r5)
@@ -1008,7 +1008,7 @@ asm void fn_8057F7AC(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_8057F7AC_00000D04
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_8057F7AC_00000D04:
     addis r3, r30, 0x2
     addic. r0, r3, 0x5b44
@@ -1059,7 +1059,7 @@ asm void fn_8057F884(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     bne lbl_fn_8057F884_00000DB8
     li r3, 0x1
@@ -1357,7 +1357,7 @@ lbl_fn_8057FC28_000011B4:
     b lbl_fn_8057FC28_000011F8
 lbl_fn_8057FC28_000011C0:
     addi r3, r3, 0x58
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     lwz r3, lbl_8087F490
     cmpwi r3, 0x0
     beq lbl_fn_8057FC28_000011E8
@@ -1444,10 +1444,7 @@ lbl_fn_8057FD00_000012D8:
     blr
 }
 
-asm void fn_8057FDE4(void)
-{
-    nofralloc
-    blr
+void fn_8057FDE4(void) {
 }
 
 asm void fn_8057FDE8(void)

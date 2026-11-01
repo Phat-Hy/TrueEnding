@@ -18,21 +18,21 @@ extern void morph_updateMesh(void);
 extern void atn_Task_setActive(void);
 extern void str_parseInt(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8C6C(void);
+extern void scissor_clipFrustum(void);
 extern void fn_80108F38(void);
 extern void boss_updatePhaseState(void);
-extern void fn_80145334(void);
+extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
-extern void fn_8014C540(void);
-extern void fn_80151448(void);
+extern void dialog_updateScriptState(void);
+extern void inventory_applyItemStats(void);
 extern void actor_setState(void);
 extern void fn_8017039C(void);
 extern void fn_80170A20(void);
 extern void fn_801781B0(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
-extern void fn_802375C4(void);
-extern void fn_802376D0(void);
+extern void res_Resource_destructor(void);
+extern void res_MsgHandle_isLoading(void);
 extern void res_MsgHandle_unload(void);
 extern void res_MsgHandle_update(void);
 extern void res_findResourceSlot(void);
@@ -47,7 +47,7 @@ extern void fn_802805C8(void);
 extern void fn_80281924(void);
 extern void fn_802826A0(void);
 extern void fn_802829DC(void);
-extern void fn_8035B78C(void);
+extern void entity_Instance_destructor(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_destructor(void);
@@ -61,7 +61,7 @@ extern void printf(void);
 extern void strcmp(void);
 extern void atoi(void);
 extern void abort(void);
-extern void fn_8068A850(void);
+extern void std_sin(void);
 
 /* External data declarations */
 extern u8 jumptable_807854B0[];
@@ -161,7 +161,7 @@ lbl_fn_8027CD9C_00000094:
 lbl_fn_8027CD9C_000000B4:
     addi r3, r29, 0x155c
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     addic. r31, r29, 0x1550
     beq lbl_fn_8027CD9C_000000E0
     mr r3, r31
@@ -204,7 +204,7 @@ lbl_fn_8027CD9C_00000140:
 lbl_fn_8027CD9C_00000150:
     mr r3, r29
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r30, 0x0
     ble lbl_fn_8027CD9C_0000016C
     mr r3, r29
@@ -245,7 +245,7 @@ lbl_fn_8027CF28_000001CC:
     cmpwi r3, 0x0
     bne lbl_fn_8027CF28_00000A80
     addi r3, r27, 0x155c
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_8027CF28_00000A80
     addi r3, r27, 0x1568
@@ -1068,7 +1068,7 @@ lbl_fn_8027D838_00000D5C:
     lfs f1, lbl_80883948
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     b lbl_fn_8027D838_00001260
     lfs f31, 0x2e4(r31)
     addi r3, r31, 0xb0
@@ -1115,7 +1115,7 @@ lbl_fn_8027D838_00000E14:
     lfs f1, lbl_80883948
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     b lbl_fn_8027D838_00001260
     lfs f31, 0x2e4(r31)
     addi r3, r31, 0xb0
@@ -1162,7 +1162,7 @@ lbl_fn_8027D838_00000ECC:
     lfs f1, lbl_80883948
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     b lbl_fn_8027D838_00001260
     mr r3, r31
     bl fn_8027F8A8
@@ -1392,9 +1392,9 @@ lbl_fn_8027D838_00001260:
     lfs f0, 0x14e0(r31)
     mr r3, r31
     stfs f0, 0x5b0(r31)
-    bl fn_8014C540
+    bl dialog_updateScriptState
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     addi r29, r1, 0x80
     psq_l f1, 0x528(r31), 0, 0
     psq_st f1, 0x0(r29), 0, 0
@@ -1743,7 +1743,7 @@ lbl_fn_8027E410_00001700:
     bgt lbl_fn_8027E410_000017BC
     lis r3, lbl_80744E78@ha
     lfd f1, lbl_80744E78@l(r3)
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     fneg f0, f0
     fcmpo cr0, f31, f0
@@ -1753,7 +1753,7 @@ lbl_fn_8027E410_00001700:
 lbl_fn_8027E410_000017BC:
     lis r3, lbl_80744E78@ha
     lfd f1, lbl_80744E78@l(r3)
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     fcmpo cr0, f31, f0
     ble lbl_fn_8027E410_000017D8
@@ -1811,7 +1811,7 @@ lbl_fn_8027E410_00001834:
 lbl_fn_8027E410_00001894:
     mr r3, r30
     mr r4, r31
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r12, 0x0(r30)
     mr r3, r30
     mr r4, r31

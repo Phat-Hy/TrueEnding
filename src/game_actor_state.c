@@ -7,7 +7,7 @@ extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void fn_80060D58(void);
 extern void fn_80061AE4(void);
-extern void fn_8006EF48(void);
+extern void script_executeOpcode(void);
 extern void fn_800A4450(void);
 extern void msg_getMessageById(void);
 extern void fn_800A55D4(void);
@@ -16,7 +16,7 @@ extern void ref_releaseHandle(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
 extern void str_findChar(void);
-extern void fn_80116FC0(void);
+extern void actor_findSpawnTemplate(void);
 extern void actor_spawnActorWithId(void);
 extern void fn_80119ECC(void);
 extern void fn_80119F0C(void);
@@ -30,7 +30,7 @@ extern void fn_8012AFE8(void);
 extern void fn_801F4F84(void);
 extern void fn_801FEC74(void);
 extern void thread_findAndNotify(void);
-extern void fn_801FEDBC(void);
+extern void thread_findTaskById(void);
 extern void thread_dispatchToQueue(void);
 extern void fn_8036E964(void);
 extern void world_getGlobalFlag(void);
@@ -545,7 +545,7 @@ lbl_fn_801189B4_0000063C:
     lfs f2, lbl_80881748
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lwz r0, 0x20(r1)
     fmr f31, f1
     srwi. r0, r0, 31
@@ -563,7 +563,7 @@ lbl_fn_801189B4_00000664:
     mr r4, r3
     mr r3, r27
     li r5, 0x0
-    bl fn_801FEDBC
+    bl thread_findTaskById
     lfs f2, 0x48(r1)
     lfs f0, lbl_8088174C
     fcmpo cr0, f2, f0
@@ -776,7 +776,7 @@ lbl_fn_801189B4_000008E0:
     li r5, 0x1
     lfs f2, lbl_80881748
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     fcmpo cr0, f30, f1
     ble lbl_fn_801189B4_000009AC
     lfs f0, lbl_80881748
@@ -793,7 +793,7 @@ lbl_fn_801189B4_00000980:
     mr r4, r3
     mr r3, r26
     li r5, 0x0
-    bl fn_801FEDBC
+    bl thread_findTaskById
 lbl_fn_801189B4_000009AC:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
@@ -1155,7 +1155,7 @@ lbl_fn_801191A8_00000E58:
     beq lbl_fn_801191A8_00000ED0
     li r3, 0x1
     li r4, 0x11a
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r4, 0x60(r31)
     lis r5, lbl_80736B10@ha
     addi r5, r5, lbl_80736B10@l
@@ -1595,7 +1595,7 @@ lbl_fn_8011999C_00001464:
     beq lbl_fn_8011999C_000014D0
     li r3, 0x1
     li r4, 0x11c
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r4, 0x60(r31)
     lis r5, lbl_80736B10@ha
     addi r5, r5, lbl_80736B10@l
@@ -1636,7 +1636,7 @@ lbl_fn_8011999C_000014DC:
     beq lbl_fn_8011999C_0000156C
     li r3, 0x1
     li r4, 0x11e
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r4, 0x60(r31)
     lis r5, lbl_80736B10@ha
     addi r5, r5, lbl_80736B10@l
@@ -1707,7 +1707,7 @@ lbl_fn_8011999C_000015C8:
     bl thread_findAndNotify
     li r3, 0x1
     li r4, 0x11b
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r4, 0x64(r31)
     mr r29, r3
     addi r3, r30, 0x289
@@ -1807,7 +1807,7 @@ lbl_fn_8011999C_00001778:
     beq lbl_fn_8011999C_000017E4
     li r3, 0x1
     li r4, 0x120
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r4, 0x60(r31)
     lis r5, lbl_80736B10@ha
     addi r5, r5, lbl_80736B10@l
@@ -1867,7 +1867,7 @@ lbl_fn_8011999C_0000185C:
     beq lbl_fn_8011999C_000018C8
     li r3, 0x1
     li r4, 0x120
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r4, 0x60(r31)
     lis r5, lbl_80736B10@ha
     addi r5, r5, lbl_80736B10@l

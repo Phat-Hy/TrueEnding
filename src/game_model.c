@@ -35,7 +35,7 @@ extern void PSMTXConcat(void);
 extern void fn_80615E00(void);
 extern void fn_80615FF0(void);
 extern void fn_80616250(void);
-extern void fn_806952C4(void);
+extern void msl_releaseRefCount(void);
 extern void runtime_clampDouble(void);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
@@ -899,7 +899,7 @@ lbl_atn_Model_updateAnimation_00000B60:
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_atn_Model_updateAnimation_00000BA8
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_atn_Model_updateAnimation_00000BA8:
     lwz r5, 0x8b0(r23)
     mr r4, r25
@@ -1271,7 +1271,7 @@ lbl_atn_Model_updateAnimation_000010DC:
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_atn_Model_updateAnimation_00001124
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_atn_Model_updateAnimation_00001124:
     lwz r5, 0x8c8(r23)
     mr r4, r25
@@ -1351,7 +1351,7 @@ lbl_atn_Model_updateAnimation_0000120C:
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_atn_Model_updateAnimation_00001254
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_atn_Model_updateAnimation_00001254:
     lwz r5, 0x8e0(r23)
     mr r4, r25
@@ -1419,7 +1419,7 @@ lbl_atn_Model_updateAnimation_0000130C:
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_atn_Model_updateAnimation_00001354
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_atn_Model_updateAnimation_00001354:
     lwz r5, 0x8f8(r23)
     mr r4, r25

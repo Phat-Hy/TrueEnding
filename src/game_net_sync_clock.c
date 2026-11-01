@@ -8,20 +8,20 @@ extern void _savegpr_16(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void mem_alloc(void);
-extern void fn_800CB360(void);
+extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void str_findChar(void);
 extern void wcs_vformat(void);
 extern void save_validateHeader(void);
 extern void fn_801F4728(void);
-extern void fn_801F48C8(void);
+extern void save_parseSlotStats(void);
 extern void fn_801F4C14(void);
-extern void fn_801F4CB4(void);
+extern void save_formatSlotTitle(void);
 extern void saveSlot_readSummary(void);
 extern void thread_dispatchToQueue(void);
 extern void fn_8020924C(void);
@@ -276,7 +276,7 @@ lbl_fn_804C822C_00000280:
     addi r4, r28, 0x3db
     addi r5, r30, 0x1
     li r6, 0x0
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
 lbl_fn_804C822C_00000294:
     lwz r3, lbl_8087F610
     mr r4, r21
@@ -354,7 +354,7 @@ lbl_fn_804C822C_000002C8:
     lwz r3, 0xc4(r17)
     addi r4, r28, 0x424
     addi r5, r1, 0x18
-    bl fn_801F48C8
+    bl save_parseSlotStats
     lwz r4, lbl_8087F4F0
     mr r5, r18
     addi r3, r1, 0x8
@@ -362,7 +362,7 @@ lbl_fn_804C822C_000002C8:
     lwz r3, 0xc4(r17)
     addi r4, r28, 0x434
     addi r5, r1, 0x8
-    bl fn_801F48C8
+    bl save_parseSlotStats
 lbl_fn_804C822C_000003DC:
     lwz r18, 0xa0(r22)
     cmpwi r18, 0x0
@@ -544,7 +544,7 @@ asm void fn_804C87E0(void)
     stw r28, 0x168(r29)
     stw r28, 0x16c(r29)
     stfs f0, 0x170(r29)
-    bl fn_800CB360
+    bl morph_reset
     lis r4, lbl_80759374@ha
     stw r28, 0x178(r29)
     addi r4, r4, lbl_80759374@l
@@ -889,7 +889,7 @@ asm void fn_804C8CF4(void)
     stw r31, 0xc(r1)
     stw r30, 0x8(r1)
     mr r30, r3
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_804C8CF4_00000B60
     addi r31, r30, 0x17c
@@ -1337,16 +1337,10 @@ lbl_fn_804C8D80_0000112C:
     blr
 }
 
-asm void fn_804C9358(void)
-{
-    nofralloc
-    blr
+void fn_804C9358(void) {
 }
 
-asm void fn_804C935C(void)
-{
-    nofralloc
-    blr
+void fn_804C935C(void) {
 }
 
 asm void fn_804C9360(void)

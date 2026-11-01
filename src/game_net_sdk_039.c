@@ -19,7 +19,7 @@ extern void strcmp(void);
 extern void fn_806A420C(void);
 extern void fn_806A4260(void);
 extern void fn_806A426C(void);
-extern void fn_806D58F0(void);
+extern void net_bufferGetCount(void);
 extern void fn_806D7AA0(void);
 extern void net_socketClose(void);
 extern void fn_806D7DA0(void);
@@ -2372,7 +2372,7 @@ asm void fn_806F2820(void)
     cmpwi r0, 0x0
     beq lbl_fn_806F2820_00001FC4
     lwz r3, 0x168(r3)
-    bl fn_806D58F0
+    bl net_bufferGetCount
     lwz r12, 0x178(r31)
     mr r7, r3
     lwz r3, 0x4(r31)
@@ -2390,26 +2390,14 @@ lbl_fn_806F2820_00001FC4:
     blr
 }
 
-asm void fn_806F2880(void)
-{
-    nofralloc
-    blr
+void fn_806F2880(void) {
 }
 
-asm void fn_806F2890(void)
-{
-    nofralloc
-    blr
+void fn_806F2890(void) {
 }
 
-asm void fn_806F28A0(void)
-{
-    nofralloc
-    blr
+void fn_806F28A0(void) {
 }
 
-asm void fn_806F28B0(void)
-{
-    nofralloc
-    blr
+void fn_806F28B0(void) {
 }

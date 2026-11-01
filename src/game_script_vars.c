@@ -18,13 +18,13 @@ extern void fn_801092C8(void);
 extern void fn_80126214(void);
 extern void fn_8012D8B8(void);
 extern void fn_80139560(void);
-extern void fn_80144710(void);
-extern void fn_80145334(void);
+extern void quest_evaluateConditions(void);
+extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
-extern void fn_8014C540(void);
-extern void fn_8015495C(void);
+extern void dialog_updateScriptState(void);
+extern void equip_applyToCharacter(void);
 extern void fn_8015EB2C(void);
-extern void fn_8016DA4C(void);
+extern void debuff_clearStatus(void);
 extern void fn_8016EB48(void);
 extern void fn_80170A20(void);
 extern void fn_80170F20(void);
@@ -35,7 +35,7 @@ extern void fn_8019AFE8(void);
 extern void task_mapIdToQueue(void);
 extern void res_registerResource(void);
 extern void fn_80249588(void);
-extern void fn_8035B694(void);
+extern void entity_Instance_constructor(void);
 extern void fn_8036554C(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
@@ -265,7 +265,7 @@ asm void fn_80247DA4(void)
     stfs f2, 0x1c(r1)
     psq_st f1, 0x528(r3), 0, 0
     stfs f2, 0x530(r3)
-    bl fn_80144710
+    bl quest_evaluateConditions
     lwz r3, 0x14cc(r31)
     cmpwi r3, 0x0
     ble lbl_fn_80247DA4_00000204
@@ -1056,7 +1056,7 @@ asm void fn_80248854(void)
     psq_l f1, 0x0(r4), 0, 0
     psq_st f1, 0x528(r27), 0, 0
     stfs f2, 0x530(r27)
-    bl fn_80145334
+    bl quest_updateFlow
     lfs f0, lbl_808831D8
     li r0, 0x3
     stw r0, 0x50(r1)
@@ -1150,9 +1150,9 @@ asm void fn_80248A4C(void)
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     mr r3, r30
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     cmpwi r28, 0x0
     li r0, 0x1e
     stw r31, 0xfc0(r30)
@@ -1416,7 +1416,7 @@ asm void fn_80248E88(void)
     stw r31, 0xc(r1)
     stw r30, 0x8(r1)
     mr r30, r3
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lis r3, lbl_80783F78@ha
     addi r31, r30, 0x14b0
     addi r3, r3, lbl_80783F78@l
@@ -1548,17 +1548,17 @@ lbl_fn_80249004_00001458:
     mr r3, r30
     bl fn_80249394
     mr r3, r30
-    bl fn_80145334
+    bl quest_updateFlow
     mr r3, r30
-    bl fn_8014C540
+    bl dialog_updateScriptState
     b lbl_fn_80249004_000015FC
 lbl_fn_80249004_00001474:
     mr r3, r30
     bl fn_80249588
     mr r3, r30
-    bl fn_80145334
+    bl quest_updateFlow
     mr r3, r30
-    bl fn_8014C540
+    bl dialog_updateScriptState
     b lbl_fn_80249004_000015FC
 lbl_fn_80249004_00001490:
     lwz r0, 0xd18(r3)
@@ -1623,9 +1623,9 @@ lbl_fn_80249004_00001490:
     stw r0, 0x1504(r30)
     mr r3, r30
     stw r0, 0x1500(r30)
-    bl fn_80145334
+    bl quest_updateFlow
     mr r3, r30
-    bl fn_8014C540
+    bl dialog_updateScriptState
     li r31, 0x0
 lbl_fn_80249004_00001598:
     cmpwi r31, 0x0

@@ -12,14 +12,14 @@ extern void mem_alloc(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void str_findChar(void);
 extern void wcs_vformat(void);
 extern void save_validateHeader(void);
-extern void fn_801F4CB4(void);
+extern void save_formatSlotTitle(void);
 extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
-extern void fn_801FEDBC(void);
+extern void thread_findTaskById(void);
 extern void thread_dispatchToQueue(void);
 extern void fn_804A5CD8(void);
 extern void fn_804AC96C(void);
@@ -43,10 +43,10 @@ extern void fn_8050A638(void);
 extern void fn_8050BA6C(void);
 extern void __construct_new_array(void);
 extern void __destroy_new_array(void);
-extern void fn_806A8E40(void);
+extern void net_getSocket(void);
 extern void fn_806A8E70(void);
 extern void fn_806B0DE0(void);
-extern void fn_806B0E30(void);
+extern void net_getMyAid(void);
 extern void fn_806B1250(void);
 
 /* External data declarations */
@@ -747,7 +747,7 @@ asm void fn_804BC458(void)
     stw r31, 0x1c(r1)
     stw r30, 0x18(r1)
     mr r30, r3
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_804BC458_00000AAC
     li r31, 0x0
@@ -972,7 +972,7 @@ asm void fn_804BC628(void)
     li r5, 0x0
     lfd f0, 0x250(r1)
     fsubs f1, f0, f1
-    bl fn_801FEDBC
+    bl thread_findTaskById
     subi r3, r25, 0x2
     subfic r0, r25, 0x2
     nor r0, r3, r0
@@ -991,13 +991,13 @@ asm void fn_804BC628(void)
     li r5, 0x0
     lfd f0, 0x258(r1)
     fsubs f1, f0, f1
-    bl fn_801FEDBC
+    bl thread_findTaskById
     lwz r5, lbl_8087F610
     addi r4, r26, 0x28a
     lwz r3, 0x4c(r28)
     li r6, 0x0
     lwz r5, 0x5a4(r5)
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r4, lbl_8087F610
     lis r3, lbl_80790D74@ha
     addi r3, r3, lbl_80790D74@l
@@ -1436,7 +1436,7 @@ lbl_fn_804BC628_00001294:
     mr r4, r3
     mr r3, r24
     li r5, 0x0
-    bl fn_801FEDBC
+    bl thread_findTaskById
     lwz r0, 0xe60(r28)
     addi r3, r31, 0x2db
     mulli r0, r0, 0x22c
@@ -1448,7 +1448,7 @@ lbl_fn_804BC628_00001294:
     mr r4, r3
     mr r3, r24
     li r5, 0x0
-    bl fn_801FEDBC
+    bl thread_findTaskById
     lwz r4, 0x5c(r28)
     addi r3, r31, 0x2e6
     addi r24, r4, 0x58
@@ -1457,7 +1457,7 @@ lbl_fn_804BC628_00001294:
     mr r4, r3
     mr r3, r24
     li r5, 0x0
-    bl fn_801FEDBC
+    bl thread_findTaskById
     lwz r4, 0x5c(r28)
     addi r3, r31, 0x2db
     addi r24, r4, 0x58
@@ -1466,7 +1466,7 @@ lbl_fn_804BC628_00001294:
     mr r4, r3
     mr r3, r24
     li r5, 0x0
-    bl fn_801FEDBC
+    bl thread_findTaskById
     lwz r0, 0xe60(r28)
     addi r3, r31, 0x2f1
     mulli r0, r0, 0x22c
@@ -1516,7 +1516,7 @@ lbl_fn_804BC628_000013D8:
     beq lbl_fn_804BC628_00001418
     b lbl_fn_804BC628_00001440
 lbl_fn_804BC628_00001418:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r31, r3, 24
     b lbl_fn_804BC628_00001440
 lbl_fn_804BC628_00001424:
@@ -1525,7 +1525,7 @@ lbl_fn_804BC628_00001424:
     beq lbl_fn_804BC628_00001434
     b lbl_fn_804BC628_0000143C
 lbl_fn_804BC628_00001434:
-    bl fn_806A8E40
+    bl net_getSocket
     mr r31, r3
 lbl_fn_804BC628_0000143C:
     clrlwi r31, r31, 24

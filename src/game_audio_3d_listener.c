@@ -7,14 +7,14 @@ extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void vec3_copy(void);
-extern void fn_8000D3A4(void);
-extern void fn_80011034(void);
+extern void vec3_mag(void);
+extern void vec3_toEulerAngles(void);
 extern void vec3_sub(void);
 extern void fn_80063484(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_800897D8(void);
-extern void fn_8008BBD8(void);
+extern void node_destroy(void);
+extern void map_debugLog(void);
 extern void atn_Matrix_copy(void);
 extern void fn_80091CFC(void);
 extern void atn_Model_findBoneIndex(void);
@@ -23,7 +23,7 @@ extern void fn_80094B6C(void);
 extern void fn_800CB6E4(void);
 extern void atn_Task_setActive(void);
 extern void fn_800F29D0(void);
-extern void fn_800F7FA0(void);
+extern void viewport_getGlobalContext(void);
 extern void fn_800F7FA8(void);
 extern void fn_800F7FD8(void);
 extern void fn_800F80A8(void);
@@ -32,18 +32,18 @@ extern void fn_800F8290(void);
 extern void fn_80127D8C(void);
 extern void fn_80129978(void);
 extern void boss_updatePhaseState(void);
-extern void fn_80145334(void);
+extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
-extern void fn_8014C540(void);
+extern void dialog_updateScriptState(void);
 extern void fn_801A03E8(void);
 extern void sound_initGlobalInstances(void);
 extern void fn_80239D58(void);
 extern void res_findResourceSlot(void);
-extern void fn_8023A680(void);
+extern void res_Shader_bindParams(void);
 extern void fn_8031FAA4(void);
 extern void fn_8031FE4C(void);
-extern void fn_8035B694(void);
-extern void fn_8035B78C(void);
+extern void entity_Instance_constructor(void);
+extern void entity_Instance_destructor(void);
 extern void world_setLocalFlag(void);
 extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
@@ -55,7 +55,7 @@ extern void PSVECMag(void);
 extern void printf(void);
 extern void strcmp(void);
 extern void abort(void);
-extern void fn_8068AD58(void);
+extern void std_cos(void);
 extern void std_atan2(void);
 extern void __ptmf_scall(void);
 
@@ -676,7 +676,7 @@ lbl_fn_8031E078_000007BC:
     lwz r3, lbl_8087F3C0
     li r10, 0x0
     lwz r4, 0x8(r29)
-    bl fn_8023A680
+    bl res_Shader_bindParams
 lbl_fn_8031E078_00000814:
     addi r11, r1, 0x340
     psq_l f31, 0x398(r1), 0, 0
@@ -714,30 +714,30 @@ asm void fn_8031E8BC(void)
     mr r31, r5
     cmpwi r0, 0x0
     bne lbl_fn_8031E8BC_000008C0
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r4, r29
     li r5, 0x0
     bl fn_80239D58
     cmpwi r3, 0x0
     beq lbl_fn_8031E8BC_00000ABC
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r4, r29
     li r5, 0x0
     li r6, 0x0
     bl res_findResourceSlot
     b lbl_fn_8031E8BC_00000ABC
 lbl_fn_8031E8BC_000008C0:
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r4, r29
     li r5, 0x0
     bl fn_80239D58
     cmpwi r3, 0x0
     bne lbl_fn_8031E8BC_00000928
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r4, r29
     li r5, 0x0
     bl fn_800F7FA8
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     li r0, 0x0
     stw r0, 0x8(r1)
     li r4, -0x1
@@ -752,7 +752,7 @@ lbl_fn_8031E8BC_000008C0:
     li r9, 0x0
     lwz r4, 0xc(r29)
     li r10, 0x0
-    bl fn_8023A680
+    bl res_Shader_bindParams
 lbl_fn_8031E8BC_00000928:
     lwz r5, 0x34(r29)
     mr r4, r30
@@ -760,7 +760,7 @@ lbl_fn_8031E8BC_00000928:
     addi r5, r5, 0x30
     bl vec3_sub
     addi r3, r1, 0x48
-    bl fn_8000D3A4
+    bl vec3_mag
     lfs f0, lbl_80884E3C
     fmr f31, f1
     fcmpo cr0, f1, f0
@@ -828,7 +828,7 @@ lbl_fn_8031E8BC_00000A10:
     lwz r4, 0x34(r29)
     addi r3, r1, 0x18
     addi r4, r4, 0x3c
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lwz r3, 0x34(r29)
     addi r4, r1, 0x18
     bl fn_800F80B8
@@ -882,7 +882,7 @@ asm void fn_8031EB3C(void)
     stw r31, 0xc(r1)
     stw r30, 0x8(r1)
     mr r30, r3
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lwz r7, 0x12a4(r30)
     li r12, 0x0
     lfs f7, lbl_80884E48
@@ -969,11 +969,11 @@ asm void fn_8031EC5C(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_8031EC5C_00000C44
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_8031EC5C_00000C44:
     mr r3, r30
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r31, 0x0
     ble lbl_fn_8031EC5C_00000C60
     mr r3, r30
@@ -1163,7 +1163,7 @@ lbl_fn_8031ECDC_00000ED0:
     stw r4, 0x198(r1)
     stw r0, 0x19c(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_8031ECDC_00000F54
     addic. r0, r1, 0x26c
@@ -1312,7 +1312,7 @@ lbl_fn_8031ECDC_00001104:
     stw r4, 0xf0(r1)
     stw r0, 0xf4(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_8031ECDC_00001188
     addic. r0, r1, 0x258
@@ -1721,7 +1721,7 @@ lbl_fn_8031F654_00001668:
     stw r0, 0x156c(r31)
     psq_st f1, 0x0(r5), 0, 0
     stfs f2, 0x10(r1)
-    bl fn_8014C540
+    bl dialog_updateScriptState
     lwz r0, 0x7e0(r31)
     rlwinm r0, r0, 0, 26, 26
     cmplwi r0, 0x20
@@ -1776,7 +1776,7 @@ lbl_fn_8031F654_00001764:
     stw r0, 0x12a4(r31)
 lbl_fn_8031F654_00001770:
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     lwz r3, lbl_8087F430
     lwz r0, 0x868(r3)
     cmpwi r0, 0x6
@@ -1868,7 +1868,7 @@ asm void fn_8031F810(void)
     stfs f2, 0x40(r1)
     fdivs f0, f0, f5
     stfs f0, 0x44(r1)
-    bl fn_8068AD58
+    bl std_cos
     frsp f2, f1
     lfs f1, lbl_80884E70
     lfs f0, lbl_80884E90

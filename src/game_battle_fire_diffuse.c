@@ -12,8 +12,8 @@ extern void dtor_80084684(void);
 extern void fn_8000D430(void);
 extern void fn_80041C0C(void);
 extern void talk_formatQuotedString(void);
-extern void fn_8005BBF8(void);
-extern void fn_8005BCE8(void);
+extern void talk_parseQuotes(void);
+extern void talk_copySpeakerName(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
@@ -24,14 +24,14 @@ extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void atn_LH_Texture_destructAndFree(void);
 extern void str_skipWhitespace(void);
-extern void fn_800EF73C(void);
+extern void cam_destroyMsgHandle(void);
 extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_update(void);
 extern void res_registerResource(void);
-extern void fn_803EC568(void);
-extern void fn_803EC69C(void);
-extern void fn_803EC91C(void);
+extern void task_createWorker(void);
+extern void task_destroyWorker(void);
+extern void task_updateWorker(void);
 extern void fn_803EDCF4(void);
 extern void fn_8041CD24(void);
 extern void boss_getOffset54(void);
@@ -221,15 +221,15 @@ lbl_fn_8041CF94_00000180:
     li r5, 0x20
     li r6, 0x6
     bl __destroy_new_array
-    lis r4, fn_800EF73C@ha
+    lis r4, cam_destroyMsgHandle@ha
     addi r3, r30, 0xf4
-    addi r4, r4, fn_800EF73C@l
+    addi r4, r4, cam_destroyMsgHandle@l
     li r5, 0xc
     li r6, 0x6
     bl __destroy_new_array
     mr r3, r30
     li r4, 0x0
-    bl fn_803EC69C
+    bl task_destroyWorker
     cmpwi r31, 0x0
     ble lbl_fn_8041CF94_000001CC
     mr r3, r30
@@ -362,7 +362,7 @@ asm void fn_8041D2C4(void)
     cmpwi r3, 0x0
     bne lbl_fn_8041D2C4_00000364
     mr r3, r31
-    bl fn_803EC91C
+    bl task_updateWorker
     cmpwi r3, 0x0
     beq lbl_fn_8041D2C4_00000374
 lbl_fn_8041D2C4_00000364:
@@ -968,7 +968,7 @@ asm void fn_8041DAB8(void)
     addi r4, r4, lbl_807774B8@l
     stw r4, 0x108(r1)
     la r4, lbl_8087D710
-    bl fn_8005BCE8
+    bl talk_copySpeakerName
     lis r27, lbl_807531A0@ha
     addi r30, r1, 0x8
     addi r27, r27, lbl_807531A0@l
@@ -1106,7 +1106,7 @@ lbl_fn_8041DAB8_00000D4C:
     stfs f1, 0x210(r31)
 lbl_fn_8041DAB8_00000DD0:
     addi r3, r1, 0x108
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_8041DAB8_00000BD4
     lfd f31, 0x758(r1)
@@ -1174,7 +1174,7 @@ asm void fn_8041DDE4(void)
     mr r4, r28
     mr r5, r29
     mr r6, r30
-    bl fn_803EC568
+    bl task_createWorker
     lis r3, lbl_8078DEF0@ha
     li r0, 0x0
     addi r3, r3, lbl_8078DEF0@l
@@ -1232,7 +1232,7 @@ lbl_fn_8041DEB0_00000F60:
 lbl_fn_8041DEB0_00000F6C:
     mr r3, r30
     li r4, 0x0
-    bl fn_803EC69C
+    bl task_destroyWorker
     cmpwi r31, 0x0
     ble lbl_fn_8041DEB0_00000F88
     mr r3, r30
@@ -1256,7 +1256,7 @@ asm void fn_8041DF38(void)
     addi r11, r1, 0x60
     bl _savegpr_26
     mr r26, r3
-    bl fn_803EC91C
+    bl task_updateWorker
     cmpwi r3, 0x0
     bne lbl_fn_8041DF38_0000128C
     lwz r3, 0xf4(r26)
@@ -1981,7 +1981,7 @@ asm void fn_8041E89C(void)
     addi r4, r4, lbl_807774B8@l
     stw r4, 0x8(r1)
     la r4, lbl_8087D710
-    bl fn_8005BCE8
+    bl talk_copySpeakerName
     lis r3, lbl_807531F0@ha
     li r31, 0x1
     addi r30, r3, lbl_807531F0@l
@@ -2033,7 +2033,7 @@ lbl_fn_8041E89C_00001A10:
     stfs f1, 0x104(r27)
 lbl_fn_8041E89C_00001A64:
     addi r3, r1, 0x8
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_8041E89C_000019B4
     lmw r27, 0x64c(r1)

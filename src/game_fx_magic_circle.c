@@ -6,9 +6,9 @@ extern void __files(void);
 extern void _restgpr_25(void);
 extern void _savegpr_25(void);
 extern void dtor_80084684(void);
-extern void fn_8000D0F8(void);
-extern void fn_8000D3A4(void);
-extern void fn_8001047C(void);
+extern void mtx_getTranslation(void);
+extern void vec3_mag(void);
+extern void vec3_assign(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void vec3_sub(void);
 extern void fn_8003EA3C(void);
@@ -17,12 +17,12 @@ extern void mem_free(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800F7FF0(void);
+extern void viewport_getNextSequenceId(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8574(void);
-extern void fn_800F8C6C(void);
+extern void viewport_updateCulling(void);
+extern void scissor_clipFrustum(void);
 extern void clip_calculateFrustum(void);
-extern void fn_8013C38C(void);
+extern void npc_getPosition(void);
 extern void fn_8013C480(void);
 extern void fn_8014052C(void);
 extern void actor_setState(void);
@@ -42,7 +42,7 @@ extern void PSVECNormalize(void);
 extern void printf(void);
 extern void rand(void);
 extern void abort(void);
-extern void fn_8068AD58(void);
+extern void std_cos(void);
 extern void std_fmod(void);
 extern void math_u64DivMod(void);
 
@@ -145,10 +145,10 @@ lbl_fn_8029F148_00000064:
     b lbl_fn_8029F148_0000023C
 lbl_fn_8029F148_000000A4:
     lwz r3, 0x14d4(r31)
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r1, 0x2c
-    bl fn_8001047C
+    bl vec3_assign
     lis r4, lbl_80745C70@ha
     addi r3, r31, 0xb0
     addi r4, r4, lbl_80745C70@l
@@ -156,7 +156,7 @@ lbl_fn_8029F148_000000A4:
     bl atn_Model_getBoneMatrix
     mr r4, r3
     addi r3, r1, 0x20
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     addi r3, r1, 0x14
     addi r4, r1, 0x2c
     addi r5, r1, 0x20
@@ -164,7 +164,7 @@ lbl_fn_8029F148_000000A4:
     lfs f0, lbl_80883D28
     addi r3, r1, 0x14
     stfs f0, 0x18(r1)
-    bl fn_8000D3A4
+    bl vec3_mag
     lfs f0, lbl_80883D90
     fmr f30, f1
     fcmpo cr0, f1, f0
@@ -178,7 +178,7 @@ lbl_fn_8029F148_000000A4:
     b lbl_fn_8029F148_0000012C
 lbl_fn_8029F148_00000124:
     addi r3, r1, 0x14
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
 lbl_fn_8029F148_0000012C:
     lwz r0, 0x58c(r31)
     cmpwi r0, 0x10
@@ -401,7 +401,7 @@ lbl_fn_8029F3FC_0000040C:
     fadds f4, f4, f5
     stfs f4, 0x155c(r31)
     fmsubs f1, f3, f4, f0
-    bl fn_8068AD58
+    bl std_cos
     frsp f4, f1
     lfs f3, lbl_80883D30
     lfs f0, 0x155c(r31)
@@ -721,7 +721,7 @@ lbl_fn_8029F738_00000870:
     lfs f2, lbl_80883D30
     li r10, 0x0
     lwz r3, lbl_8087F048
-    bl fn_800F8574
+    bl viewport_updateCulling
     b lbl_fn_8029F738_00000958
 lbl_fn_8029F738_000008F8:
     lwz r4, 0x14fc(r31)
@@ -1852,7 +1852,7 @@ lbl_fn_802A0818_000018C8:
     lfs f1, lbl_80883D28
     stfs f3, 0x24(r1)
     stfs f0, 0x28(r1)
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     b lbl_fn_802A0818_00001998
 lbl_fn_802A0818_0000198C:
     lwz r3, lbl_8087F048

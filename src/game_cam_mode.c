@@ -10,7 +10,7 @@ extern void actor_dispatchMessage(void);
 extern void fn_80044C50(void);
 extern void fn_80044CCC(void);
 extern void fn_80044E0C(void);
-extern void fn_8004D388(void);
+extern void collision_queryGeometry(void);
 extern void collision_testLineSegment(void);
 extern void mem_realloc(void);
 extern void fn_800E2FE0(void);
@@ -18,15 +18,15 @@ extern void fn_800EC7F0(void);
 extern void fn_800EF7F8(void);
 extern void fn_8011F970(void);
 extern void fn_8014FB60(void);
-extern void fn_8016F3D0(void);
-extern void fn_80179D44(void);
+extern void battle_canTargetActor(void);
+extern void actor_getMovementFlags(void);
 extern void fn_80207C00(void);
 extern void fn_80207C08(void);
 extern void fn_80207C34(void);
 extern void task_findEntryById(void);
 extern void fn_8021A984(void);
-extern void fn_80237518(void);
-extern void fn_80237654(void);
+extern void res_MsgHandle_ctor(void);
+extern void res_Resource_unload(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_unload(void);
@@ -116,7 +116,7 @@ void fn_800EF3E8(void);
 void cam_initStickBindings(void);
 void camera_setMode(void);
 void fn_800EF6BC(void);
-void fn_800EF73C(void);
+void cam_destroyMsgHandle(void);
 
 asm void fn_800EDFE8(void)
 {
@@ -672,7 +672,7 @@ lbl_fn_800EE640_00000740:
     mr r3, r31
     mr r4, r30
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     bne lbl_fn_800EE640_00000768
     li r3, 0x0
@@ -1106,7 +1106,7 @@ lbl_fn_800EE794_00000C04:
     stw r29, 0x100(r1)
     stw r29, 0x104(r1)
     stw r29, 0x108(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     oris r7, r3, 0x8000
     mr r3, r26
     mr r5, r27
@@ -1144,7 +1144,7 @@ lbl_fn_800EE794_00000DC4:
     lwz r26, lbl_8087EE98
     stfs f3, 0x78(r1)
     stfs f0, 0x6c(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     oris r7, r3, 0x8000
     mr r3, r26
     mr r5, r27
@@ -1179,7 +1179,7 @@ lbl_fn_800EE794_00000E58:
     stfs f2, 0x70(r1)
     stfs f3, 0x78(r1)
     stfs f0, 0x6c(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     oris r7, r3, 0x8000
     mr r3, r26
     mr r5, r27
@@ -1212,7 +1212,7 @@ lbl_fn_800EE794_00000EE0:
     stfs f3, 0x78(r1)
     stfs f0, 0xc(r1)
     stfs f0, 0x10(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lfs f1, lbl_80881330
     oris r7, r3, 0x8000
     mr r3, r26
@@ -1221,7 +1221,7 @@ lbl_fn_800EE794_00000EE0:
     addi r6, r1, 0x8
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004D388
+    bl collision_queryGeometry
     cmpwi r3, 0x0
     beq lbl_fn_800EE794_00000F74
     addi r3, r1, 0xd8
@@ -1678,7 +1678,7 @@ lbl_cam_initStickBindings_0000148C:
     beq lbl_cam_initStickBindings_000014B8
     mr r4, r30
     addi r3, r31, 0x1c
-    bl fn_80237654
+    bl res_Resource_unload
 lbl_cam_initStickBindings_000014B8:
     lwz r3, 0x0(r31)
     lis r4, lbl_80735428@ha
@@ -1846,7 +1846,7 @@ asm void fn_800EF6BC(void)
     addi r3, r27, 0x10
     bl res_MsgHandle_constructor
     addi r3, r27, 0x1c
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     addi r3, r27, 0x28
     bl res_MsgHandle_constructor
     addi r29, r27, 0x34
@@ -1868,7 +1868,7 @@ asm void fn_800EF6BC(void)
     blr
 }
 
-asm void fn_800EF73C(void)
+asm void cam_destroyMsgHandle(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1879,18 +1879,18 @@ asm void fn_800EF73C(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    beq lbl_fn_800EF73C_0000179C
+    beq lbl_cam_destroyMsgHandle_0000179C
     bl res_MsgHandle_unload
     addic. r3, r30, 0x4
-    beq lbl_fn_800EF73C_0000178C
+    beq lbl_cam_destroyMsgHandle_0000178C
     li r4, 0x0
     bl atn_LoadHandle_destructor
-lbl_fn_800EF73C_0000178C:
+lbl_cam_destroyMsgHandle_0000178C:
     cmpwi r31, 0x0
-    ble lbl_fn_800EF73C_0000179C
+    ble lbl_cam_destroyMsgHandle_0000179C
     mr r3, r30
     bl dtor_80084684
-lbl_fn_800EF73C_0000179C:
+lbl_cam_destroyMsgHandle_0000179C:
     mr r3, r30
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)

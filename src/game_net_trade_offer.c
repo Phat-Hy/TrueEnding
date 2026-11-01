@@ -13,7 +13,7 @@ extern void mem_free(void);
 extern void mem_realloc(void);
 extern void fn_800C16B4(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB440(void);
+extern void morph_updateWeights(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void atn_LH_Texture_destructAndFree(void);
 extern void actor_spawnActorWithId(void);
@@ -188,7 +188,7 @@ lbl_fn_8052DEF0_00000178:
     bl actor_spawnActorWithId
     addi r3, r29, 0x1340
     addi r4, r1, 0x8
-    bl fn_800CB440
+    bl morph_updateWeights
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle

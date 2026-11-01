@@ -16,7 +16,7 @@ extern void item_useConsumable(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
-extern void fn_800697D8(void);
+extern void boss_recordDamage(void);
 extern void fn_8006A9A4(void);
 extern void fn_8006AA20(void);
 extern void fn_8006AD24(void);
@@ -37,7 +37,7 @@ extern void fn_800CA7D4(void);
 extern void fn_800CAD9C(void);
 extern void fn_800CAE24(void);
 extern void fn_800CB1F4(void);
-extern void fn_800CB360(void);
+extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB404(void);
 extern void fn_800CB480(void);
@@ -82,7 +82,7 @@ extern void fn_806095E0(void);
 extern void fn_80624AB0(void);
 extern void printf(void);
 extern void abort(void);
-extern void fn_806952C4(void);
+extern void msl_releaseRefCount(void);
 extern void runtime_registerStaticObject(void);
 extern void fn_80703F90(void);
 extern void fn_80704780(void);
@@ -350,7 +350,7 @@ lbl_sound_updateActiveTasks_00000100:
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_sound_updateActiveTasks_0000013C
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_sound_updateActiveTasks_0000013C:
     lwz r4, 0x0(r26)
     addi r3, r26, 0x4
@@ -2419,7 +2419,7 @@ lbl_fn_80047DCC_00001D1C:
     cmpwi r3, 0x0
     beq lbl_fn_80047DCC_00001D4C
     addi r4, r1, 0x208
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_fn_80047DCC_00001D4C:
     stw r29, 0x2c(r31)
 lbl_fn_80047DCC_00001D50:
@@ -2546,7 +2546,7 @@ lbl_fn_80047DCC_00001ED8:
     cmpwi r3, 0x0
     beq lbl_fn_80047DCC_00001F10
     addi r4, r1, 0x108
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_fn_80047DCC_00001F10:
     li r3, 0x3
     li r0, 0x0
@@ -2641,7 +2641,7 @@ lbl_fn_80047DCC_0000203C:
     cmpwi r3, 0x0
     beq lbl_fn_80047DCC_0000206C
     addi r4, r1, 0x8
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_fn_80047DCC_0000206C:
     stw r27, 0x2c(r31)
 lbl_fn_80047DCC_00002070:
@@ -5913,7 +5913,7 @@ asm void fn_8004AD9C(void)
     stw r4, 0x0(r3)
     stw r31, 0x4(r3)
     addi r3, r3, 0x8
-    bl fn_800CB360
+    bl morph_reset
     stw r31, 0xc(r30)
     mr r3, r30
     stw r31, 0x10(r30)

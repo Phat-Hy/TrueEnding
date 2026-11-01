@@ -4,11 +4,11 @@
 /* External function declarations */
 extern void _restgpr_20(void);
 extern void _savegpr_20(void);
-extern void fn_8000D114(void);
+extern void vec3_set(void);
 extern void vec3_copy(void);
 extern void fn_80011410(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
-extern void fn_80013410(void);
+extern void vec3_add(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
@@ -18,12 +18,12 @@ extern void ref_releaseHandle(void);
 extern void fn_800EFD04(void);
 extern void fn_800EFDA0(void);
 extern void fn_800F72CC(void);
-extern void fn_800F7FA0(void);
+extern void viewport_getGlobalContext(void);
 extern void fn_800F7FA8(void);
 extern void fn_800F8524(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8574(void);
-extern void fn_800F8C6C(void);
+extern void viewport_updateCulling(void);
+extern void scissor_clipFrustum(void);
 extern void fn_801010A0(void);
 extern void fn_8010B250(void);
 extern void fn_8010EE78(void);
@@ -33,7 +33,7 @@ extern void fn_8014052C(void);
 extern void actor_setState(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
-extern void fn_8023A680(void);
+extern void res_Shader_bindParams(void);
 extern void res_registerResource(void);
 extern void fn_80276AE4(void);
 extern void fn_803458DC(void);
@@ -142,16 +142,16 @@ asm void fn_80348FF4(void)
     fcmpo cr0, f1, f0
     cror eq, gt, eq
     bne lbl_fn_80348FF4_0000040C
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r4, r31
     li r5, 0x3e8
     li r6, 0x1
     bl res_findResourceSlot
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r4, r31
     li r5, 0x3e8
     bl fn_800F7FA8
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     lis r6, lbl_807C7030@ha
     lfs f1, lbl_80885398
     addi r6, r6, lbl_807C7030@l
@@ -180,7 +180,7 @@ lbl_fn_80348FF4_000000B4:
     addi r3, r1, 0x60
     lfs f3, lbl_808853B0
     fmr f2, f1
-    bl fn_8000D114
+    bl vec3_set
     lis r29, lbl_8074AA58@ha
     addi r3, r31, 0xb0
     addi r29, r29, lbl_8074AA58@l
@@ -192,11 +192,11 @@ lbl_fn_80348FF4_000000B4:
     mr r3, r31
     addi r4, r1, 0x60
     bl fn_803489F4
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r4, r31
     li r5, 0x3e8
     bl fn_800F7FA8
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     li r30, 0x0
     stw r30, 0x8(r1)
     li r0, -0x1
@@ -211,7 +211,7 @@ lbl_fn_80348FF4_000000B4:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_8023A680
+    bl res_Shader_bindParams
     lfs f1, lbl_80885398
     addi r3, r1, 0x18
     addi r4, r29, 0x3bc
@@ -243,7 +243,7 @@ lbl_fn_80348FF4_000001AC:
     addi r3, r1, 0x54
     lfs f3, lbl_808853B0
     fmr f2, f1
-    bl fn_8000D114
+    bl vec3_set
     lis r4, lbl_8074AA58@ha
     addi r3, r31, 0xb0
     addi r4, r4, lbl_8074AA58@l
@@ -351,7 +351,7 @@ lbl_fn_80348FF4_00000340:
     addi r3, r1, 0x48
     addi r4, r31, 0x528
     addi r5, r1, 0x28
-    bl fn_80013410
+    bl vec3_add
     addi r3, r31, 0x181c
     bl fn_80349450
     cmpwi r3, 0x0
@@ -368,7 +368,7 @@ lbl_fn_80348FF4_00000340:
     bl fn_80349470
     b lbl_fn_80348FF4_0000040C
 lbl_fn_80348FF4_000003B8:
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r4, r31
     li r5, 0x3e8
     li r6, 0x1
@@ -1207,7 +1207,7 @@ lbl_fn_80349BA0_00000F58:
     lfs f2, lbl_80885398
     li r9, 0x104
     li r10, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
     addi r30, r30, 0x1
     cmpwi r30, 0x8
     blt lbl_fn_80349BA0_00000D94
@@ -1551,7 +1551,7 @@ lbl_fn_8034A194_00001490:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     lwz r5, lbl_8087F430
     li r0, 0xa
     lfs f0, lbl_80885398
@@ -1873,7 +1873,7 @@ lbl_fn_8034A644_00001940:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     lwz r5, lbl_8087F430
     li r0, 0xa
     lfs f3, lbl_80885438
@@ -2101,7 +2101,7 @@ lbl_fn_8034A644_00001C90:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     lwz r5, lbl_8087F430
     li r0, 0xa
     lfs f3, lbl_80885438

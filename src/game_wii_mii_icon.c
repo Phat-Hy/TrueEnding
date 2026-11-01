@@ -4,11 +4,11 @@
 /* External function declarations */
 extern void _restgpr_22(void);
 extern void _savegpr_22(void);
-extern void fn_8004D388(void);
+extern void collision_queryGeometry(void);
 extern void mem_alloc(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_80097D40(void);
+extern void atn_Anim_getLayerTrack(void);
 extern void atn_Anim_getDuration(void);
 extern void fn_8011BF3C(void);
 extern void fn_8012A288(void);
@@ -29,8 +29,8 @@ extern void PSVECMag(void);
 extern void fn_805F99F0(void);
 extern void fn_805F9AB0(void);
 extern void strcmp(void);
-extern void fn_8068A850(void);
-extern void fn_8068AD58(void);
+extern void std_sin(void);
+extern void std_cos(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
 extern void vec3_isNonZero(void);
@@ -262,7 +262,7 @@ lbl_fn_8056796C_00000200:
     fmuls f0, f0, f4
     stfs f3, 0x574(r29)
     stfs f0, 0x57c(r29)
-    bl fn_8068AD58
+    bl std_cos
     frsp f4, f1
     lfs f3, 0x570(r29)
     lfs f0, lbl_80887F40
@@ -270,7 +270,7 @@ lbl_fn_8056796C_00000200:
     fmuls f3, f3, f4
     stfs f0, 0xbc(r1)
     stfs f3, 0xb8(r1)
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     lfs f6, 0x570(r29)
     lfs f4, 0xb8(r1)
@@ -455,7 +455,7 @@ lbl_fn_8056796C_00000518:
     addi r6, r1, 0xb8
     addi r8, r29, 0x5b8
     li r9, 0x0
-    bl fn_8004D388
+    bl collision_queryGeometry
     addi r5, r1, 0x190
     lfs f2, 0x198(r1)
     addi r4, r1, 0xd0
@@ -833,7 +833,7 @@ lbl_fn_805682DC_00000A9C:
     addi r3, r31, 0xb0
     lwz r4, 0x488(r31)
     lfs f29, 0x3a4(r5)
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     beq lbl_fn_805682DC_00000AC0
     bl atn_Anim_getDuration
@@ -845,7 +845,7 @@ lbl_fn_805682DC_00000AC4:
     fcmpu cr0, f0, f1
     lwz r4, 0x490(r31)
     addi r3, r31, 0xb0
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     beq lbl_fn_805682DC_00000AE8
     bl atn_Anim_getDuration

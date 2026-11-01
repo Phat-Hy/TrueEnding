@@ -14,11 +14,11 @@ extern void _savegpr_20(void);
 extern void _savegpr_21(void);
 extern void fn_8004ECC0(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_800BFAC8(void);
+extern void motion_updateFogAdj(void);
 extern void ref_releaseHandle(void);
 extern void fn_8011F8F4(void);
 extern void fn_8011F91C(void);
-extern void fn_8011FC10(void);
+extern void skill_findNodeById(void);
 extern void fn_8011FE3C(void);
 extern void magic_dispatchActionCommand(void);
 extern void boss_updatePhaseState(void);
@@ -802,7 +802,7 @@ lbl_fn_803AEA24_000009CC:
     b lbl_fn_803AEA24_00000A20
 lbl_fn_803AEA24_00000A04:
     lwz r3, lbl_8087F408
-    bl fn_8011FC10
+    bl skill_findNodeById
     mr r5, r3
     b lbl_fn_803AEA24_00000A20
 lbl_fn_803AEA24_00000A14:
@@ -2440,7 +2440,7 @@ lbl_fn_803AF83C_00001FF0:
     lwz r4, lbl_8087EFB4
     stfs f8, 0xe4(r1)
     stfs f0, 0xe0(r1)
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f9, 0x14c(r1)
     addi r4, r1, 0xb0
     lfs f8, 0xf4(r1)
@@ -2462,7 +2462,7 @@ lbl_fn_803AF83C_00001FF0:
     stfs f0, 0xd4(r1)
     stfs f9, 0xd8(r1)
     stfs f8, 0xdc(r1)
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     addi r3, r1, 0xa4
     lfs f2, 0xac(r1)
     psq_l f1, 0x0(r3), 0, 0

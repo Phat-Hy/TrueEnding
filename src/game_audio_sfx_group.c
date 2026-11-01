@@ -11,7 +11,7 @@ extern void mem_getAllocSize(void);
 extern void route_createSegment(void);
 extern void node_createNamedChild(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_80097D40(void);
+extern void atn_Anim_getLayerTrack(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void ref_releaseHandle(void);
 extern void system_getNextSequenceId(void);
@@ -20,9 +20,9 @@ extern void fn_80107168(void);
 extern void fn_801092C8(void);
 extern void fn_8012DB04(void);
 extern void fn_8012DD70(void);
-extern void fn_8013CB68(void);
+extern void npc_updateTalkInteraction(void);
 extern void fn_80140588(void);
-extern void fn_80148990(void);
+extern void quest_ctorRewardItem(void);
 extern void fn_801595BC(void);
 extern void fn_8015E7A0(void);
 extern void fn_8016E4C4(void);
@@ -30,7 +30,7 @@ extern void fn_801781B0(void);
 extern void task_findEntryById(void);
 extern void fn_80310314(void);
 extern void fn_80375184(void);
-extern void fn_803EA77C(void);
+extern void chest_spawnLoot(void);
 extern void fn_8044D6AC(void);
 extern void fn_805A40BC(void);
 extern void fn_805A4258(void);
@@ -235,7 +235,7 @@ lbl_fn_80311BB8_00000208:
 lbl_fn_80311BB8_00000210:
     li r28, 0x0
     li r26, 0x0
-    lis r31, fn_80148990@ha
+    lis r31, quest_ctorRewardItem@ha
     li r30, 0x8
     b lbl_fn_80311BB8_000005C0
 lbl_fn_80311BB8_00000224:
@@ -257,7 +257,7 @@ lbl_fn_80311BB8_00000244:
     la r6, lbl_8087D9E0
     li r7, 0x0
     bl mem_realloc
-    addi r4, r31, fn_80148990@l
+    addi r4, r31, quest_ctorRewardItem@l
     li r5, 0x0
     li r6, 0x14
     li r7, 0x8
@@ -371,7 +371,7 @@ lbl_fn_80311BB8_000003DC:
     li r7, 0x0
     bl mem_realloc
     mr r7, r25
-    addi r4, r31, fn_80148990@l
+    addi r4, r31, quest_ctorRewardItem@l
     li r5, 0x0
     li r6, 0x14
     bl runtime_registerStaticObject
@@ -1142,7 +1142,7 @@ lbl_fn_803123D0_00000E6C:
     li r6, 0x0
     lfs f1, lbl_80884CA4
     lfs f2, lbl_80884CDC
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_803123D0_00000F54:
     lwz r3, 0x14e4(r29)
     cmpwi r3, 0x0
@@ -1372,7 +1372,7 @@ lbl_fn_803123D0_00001278:
     addi r4, r1, 0x90
     fmuls f2, f0, f30
     li r5, 0x0
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
 lbl_fn_803123D0_00001294:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
@@ -1701,7 +1701,7 @@ lbl_fn_8031319C_000016C0:
     lfs f1, lbl_80884CA4
     li r6, 0x0
     lfs f2, lbl_80884CDC
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_8031319C_00001704:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
@@ -1805,7 +1805,7 @@ lbl_fn_803132D0_0000180C:
     stfs f0, 0x28(r1)
     lwz r3, 0x14e4(r31)
     addi r3, r3, 0xb0
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     beq lbl_fn_803132D0_00001890
     li r27, 0x3a

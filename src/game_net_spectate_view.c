@@ -17,8 +17,8 @@ extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
 extern void fn_8006144C(void);
 extern void skill_calculateDamage(void);
-extern void fn_80061824(void);
-extern void fn_8006EF48(void);
+extern void skill_calcTrajectory(void);
+extern void script_executeOpcode(void);
 extern void fn_8006F2F0(void);
 extern void mem_free(void);
 extern void mem_getAllocSize(void);
@@ -31,7 +31,7 @@ extern void fn_801F4F84(void);
 extern void thread_findAndNotify(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
-extern void fn_80473F88(void);
+extern void shockwave_freeEmitter(void);
 extern void fn_804A0F58(void);
 extern void printf(void);
 extern void strcmp(void);
@@ -346,7 +346,7 @@ lbl_spectateView_update_00000394:
     mr r4, r29
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lwz r3, lbl_8087EEE0
     lis r28, lbl_8075D550@ha
     lfs f6, lbl_80887BB4
@@ -380,7 +380,7 @@ lbl_spectateView_update_00000394:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     fadds f28, f31, f23
     lis r29, lbl_80793940@ha
     lfd f26, lbl_8075D550@l(r28)
@@ -399,7 +399,7 @@ lbl_spectateView_update_0000046C:
     addi r4, r1, 0xd8
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lwz r5, lbl_8087EEE0
     addi r0, r28, 0x1
     xoris r3, r0, 0x8000
@@ -438,7 +438,7 @@ lbl_spectateView_update_0000046C:
     fmadds f23, f2, f28, f0
     lis r10, 0xff00
     fmr f2, f23
-    bl fn_80061824
+    bl skill_calcTrajectory
     lwz r0, 0x2b8(r30)
     cmpw r28, r0
     bne lbl_spectateView_update_00000564
@@ -1395,7 +1395,7 @@ lbl_spectateView_renderInterface_000012DC:
     cmpwi r3, 0x0
     bne lbl_spectateView_renderInterface_0000099C
     addi r3, r15, 0x438
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     addi r11, r1, 0x6d0
     psq_l f31, 0x6d8(r1), 0, 0
     lfd f31, 0x6d0(r1)

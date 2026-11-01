@@ -14,8 +14,8 @@ extern void str_findChar(void);
 extern void wcs_vformat(void);
 extern void actor_spawnActorWithId(void);
 extern void magic_dispatchActionCommand(void);
-extern void fn_801F4CB4(void);
-extern void fn_801FEDBC(void);
+extern void save_formatSlotTitle(void);
+extern void thread_findTaskById(void);
 extern void thread_dispatchToQueue(void);
 extern void fn_804A436C(void);
 extern void fn_804AC734(void);
@@ -95,16 +95,10 @@ void fn_804BE4A4(void);
 void fn_804BE610(void);
 void fn_804BEDB8(void);
 
-asm void fn_804BD9B0(void)
-{
-    nofralloc
-    blr
+void fn_804BD9B0(void) {
 }
 
-asm void fn_804BD9B4(void)
-{
-    nofralloc
-    blr
+void fn_804BD9B4(void) {
 }
 
 asm void fn_804BD9B8(void)
@@ -547,7 +541,7 @@ lbl_fn_804BDD68_00000538:
     li r5, 0x0
     lfd f0, 0x48(r1)
     fsubs f1, f0, f1
-    bl fn_801FEDBC
+    bl thread_findTaskById
     subi r3, r27, 0x2
     subfic r0, r27, 0x2
     nor r0, r3, r0
@@ -566,13 +560,13 @@ lbl_fn_804BDD68_00000538:
     li r5, 0x0
     lfd f0, 0x50(r1)
     fsubs f1, f0, f1
-    bl fn_801FEDBC
+    bl thread_findTaskById
     lwz r5, lbl_8087F610
     addi r4, r28, 0x28a
     lwz r3, 0x4c(r31)
     li r6, 0x0
     lwz r5, 0x5a4(r5)
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r4, lbl_8087F610
     lis r3, lbl_80790D74@ha
     addi r3, r3, lbl_80790D74@l
@@ -925,7 +919,7 @@ lbl_fn_804BE4A4_00000B68:
     mr r4, r3
     mr r3, r31
     li r5, 0x0
-    bl fn_801FEDBC
+    bl thread_findTaskById
 lbl_fn_804BE4A4_00000BB0:
     lwz r4, 0xd8c(r30)
     mr r3, r30

@@ -11,22 +11,22 @@ extern void fn_8004ECC0(void);
 extern void fn_80051B70(void);
 extern void fn_80051CD8(void);
 extern void talk_formatQuotedString(void);
-extern void fn_8005BBF8(void);
-extern void fn_8005BCE8(void);
+extern void talk_parseQuotes(void);
+extern void talk_copySpeakerName(void);
 extern void mem_alloc(void);
 extern void route_findNextWaypoint(void);
 extern void route_createSegment(void);
-extern void fn_80087E9C(void);
+extern void route_createWaypoint(void);
 extern void fn_80088724(void);
 extern void node_createNamedChild(void);
-extern void fn_8008AD4C(void);
-extern void fn_8008B140(void);
+extern void area_updateZoneState(void);
+extern void map_processTrigger(void);
 extern void fn_8008CD60(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800A4228(void);
-extern void fn_800BFAC8(void);
+extern void motion_updateFogAdj(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void event_findEntryById(void);
@@ -35,8 +35,8 @@ extern void fn_8021D990(void);
 extern void fn_8021D9D4(void);
 extern void fn_8021E4E4(void);
 extern void sound_initGlobalInstances(void);
-extern void fn_80237518(void);
-extern void fn_802375C4(void);
+extern void res_MsgHandle_ctor(void);
+extern void res_Resource_destructor(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_unload(void);
@@ -51,11 +51,11 @@ extern void world_setGlobalFlag(void);
 extern void fn_803750E4(void);
 extern void fn_80375184(void);
 extern void fn_803E3050(void);
-extern void fn_803EC568(void);
-extern void fn_803EC69C(void);
+extern void task_createWorker(void);
+extern void task_destroyWorker(void);
 extern void fn_803EC758(void);
 extern void fn_803EC7A0(void);
-extern void fn_803EC91C(void);
+extern void task_updateWorker(void);
 extern void fn_803ECBD4(void);
 extern void fn_804392C0(void);
 extern void fn_8043A08C(void);
@@ -162,7 +162,7 @@ asm void fn_80436000(void)
     stwu r1, -0x10(r1)
     mflr r0
     stw r0, 0x14(r1)
-    bl fn_803EC91C
+    bl task_updateWorker
     cntlzw r0, r3
     srwi r3, r0, 5
     lwz r0, 0x14(r1)
@@ -605,7 +605,7 @@ asm void fn_80436624(void)
     stw r30, 0x8(r1)
     mr r30, r3
     addi r3, r3, 0xf4
-    bl fn_8008B140
+    bl map_processTrigger
     cmpwi r3, 0x0
     beq lbl_fn_80436624_00000654
     li r3, 0x1
@@ -677,7 +677,7 @@ asm void fn_804366A0(void)
     addi r4, r4, lbl_807774B8@l
     stw r4, 0x8(r1)
     la r4, lbl_8087D710
-    bl fn_8005BCE8
+    bl talk_copySpeakerName
     lis r31, lbl_807541F0@ha
     li r29, 0x0
     addi r31, r31, lbl_807541F0@l
@@ -697,7 +697,7 @@ lbl_fn_804366A0_0000074C:
     mr r4, r3
     addi r3, r27, 0xf4
     li r5, 0x0
-    bl fn_8008AD4C
+    bl area_updateZoneState
     mr r3, r27
     addi r4, r27, 0xf4
     addi r5, r1, 0x8
@@ -721,7 +721,7 @@ lbl_fn_804366A0_000007A0:
     bl res_MsgHandle_destructor
 lbl_fn_804366A0_000007DC:
     addi r3, r1, 0x8
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_804366A0_0000074C
     lmw r27, 0x64c(r1)
@@ -1146,7 +1146,7 @@ lbl_fn_80436D04_00000D68:
     addi r5, r29, 0x6c
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_808868F0
     mr r3, r30
     lfs f2, lbl_808868F4
@@ -1164,7 +1164,7 @@ lbl_fn_80436D04_00000D68:
     addi r5, r29, 0x90
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     mr r3, r30
     addi r4, r31, 0x37
     addi r5, r29, 0x9c
@@ -1230,7 +1230,7 @@ asm void fn_80436EB8(void)
     mr r31, r3
     stw r30, 0x18(r1)
     stw r29, 0x14(r1)
-    bl fn_803EC568
+    bl task_createWorker
     addi r4, r31, 0x15c
     addi r5, r31, 0x288
     lfs f0, lbl_80886900
@@ -1308,7 +1308,7 @@ lbl_fn_80436EB8_00000F70:
     stw r30, 0xf08(r31)
     bl res_MsgHandle_constructor
     addi r3, r31, 0xf18
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     stw r30, 0x54(r31)
     li r29, 0x0
     li r30, 0x0
@@ -1483,7 +1483,7 @@ asm void fn_8043723C(void)
     beq lbl_fn_8043723C_000012C4
     li r4, -0x1
     addi r3, r3, 0xf18
-    bl fn_802375C4
+    bl res_Resource_destructor
     addic. r31, r29, 0xf0c
     beq lbl_fn_8043723C_00001290
     mr r3, r31
@@ -1501,7 +1501,7 @@ lbl_fn_8043723C_00001290:
     bl __destroy_new_array
     mr r3, r29
     li r4, 0x0
-    bl fn_803EC69C
+    bl task_destroyWorker
     cmpwi r30, 0x0
     ble lbl_fn_8043723C_000012C4
     mr r3, r29
@@ -1523,7 +1523,7 @@ asm void fn_804372E4(void)
     stwu r1, -0x10(r1)
     mflr r0
     stw r0, 0x14(r1)
-    bl fn_803EC91C
+    bl task_updateWorker
     cntlzw r0, r3
     srwi r3, r0, 5
     lwz r0, 0x14(r1)
@@ -2213,7 +2213,7 @@ lbl_fn_804375C0_00001BE0:
     lwz r4, lbl_8087EFB4
     stfs f8, 0x104(r1)
     stfs f0, 0x100(r1)
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f9, 0x140(r1)
     addi r4, r1, 0xb4
     lfs f8, 0x114(r1)
@@ -2235,7 +2235,7 @@ lbl_fn_804375C0_00001BE0:
     stfs f0, 0xf4(r1)
     stfs f9, 0xf8(r1)
     stfs f8, 0xfc(r1)
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     addi r3, r1, 0xa8
     lfs f2, 0xb0(r1)
     psq_l f1, 0x0(r3), 0, 0

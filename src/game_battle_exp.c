@@ -69,7 +69,7 @@ void fn_8017639C(void);
 void fn_801763E0(void);
 void fn_80176428(void);
 void fn_80176548(void);
-void fn_801765D8(void);
+void battle_awardExp(void);
 void fn_80176ACC(void);
 void fn_80176B68(void);
 void fn_80176D2C(void);
@@ -258,7 +258,7 @@ lbl_fn_80176548_00000234:
     blr
 }
 
-asm void fn_801765D8(void)
+asm void battle_awardExp(void)
 {
     nofralloc
     stwu r1, -0x70(r1)
@@ -288,19 +288,19 @@ asm void fn_801765D8(void)
     bctrl
     lwz r3, 0x648(r30)
     cmpwi r3, 0x0
-    beq lbl_fn_801765D8_000002B4
+    beq lbl_battle_awardExp_000002B4
     li r4, 0x0
     bl fn_80044E0C
-lbl_fn_801765D8_000002B4:
+lbl_battle_awardExp_000002B4:
     lwz r3, 0x64c(r30)
     cmpwi r3, 0x0
-    beq lbl_fn_801765D8_000002C8
+    beq lbl_battle_awardExp_000002C8
     li r4, 0x0
     bl fn_80044E0C
-lbl_fn_801765D8_000002C8:
+lbl_battle_awardExp_000002C8:
     lwz r0, 0xf80(r30)
     cmpwi r0, 0x0
-    bne lbl_fn_801765D8_000002F4
+    bne lbl_battle_awardExp_000002F4
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x38(r1)
@@ -308,8 +308,8 @@ lbl_fn_801765D8_000002C8:
     lwz r0, 0x8(r5)
     stw r3, 0x3c(r1)
     stw r0, 0x40(r1)
-    b lbl_fn_801765D8_00000310
-lbl_fn_801765D8_000002F4:
+    b lbl_battle_awardExp_00000310
+lbl_battle_awardExp_000002F4:
     addi r3, r31, 0x1c80
     lwz r5, 0x1c80(r31)
     lwz r4, 0x4(r3)
@@ -317,7 +317,7 @@ lbl_fn_801765D8_000002F4:
     stw r5, 0x38(r1)
     stw r4, 0x3c(r1)
     stw r0, 0x40(r1)
-lbl_fn_801765D8_00000310:
+lbl_battle_awardExp_00000310:
     lwz r5, 0x38(r1)
     addi r3, r1, 0x2c
     lwz r4, 0x3c(r1)
@@ -327,17 +327,17 @@ lbl_fn_801765D8_00000310:
     stw r0, 0x34(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_801765D8_000005BC
+    beq lbl_battle_awardExp_000005BC
     lwz r0, 0x55c(r30)
     cmpwi cr1, r0, 0x6
-    bne cr1, lbl_fn_801765D8_000005BC
+    bne cr1, lbl_battle_awardExp_000005BC
     lwz r0, 0x560(r30)
     cmpwi r0, 0x1d
-    bne lbl_fn_801765D8_000005BC
-    bne cr1, lbl_fn_801765D8_000003D8
+    bne lbl_battle_awardExp_000005BC
+    bne cr1, lbl_battle_awardExp_000003D8
     lwz r0, 0xf80(r30)
     cmpwi r0, 0x0
-    bne lbl_fn_801765D8_00000380
+    bne lbl_battle_awardExp_00000380
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x44(r1)
@@ -345,8 +345,8 @@ lbl_fn_801765D8_00000310:
     lwz r0, 0x8(r5)
     stw r3, 0x48(r1)
     stw r0, 0x4c(r1)
-    b lbl_fn_801765D8_0000039C
-lbl_fn_801765D8_00000380:
+    b lbl_battle_awardExp_0000039C
+lbl_battle_awardExp_00000380:
     addi r3, r31, 0x1c8c
     lwz r5, 0x1c8c(r31)
     lwz r4, 0x4(r3)
@@ -354,7 +354,7 @@ lbl_fn_801765D8_00000380:
     stw r5, 0x44(r1)
     stw r4, 0x48(r1)
     stw r0, 0x4c(r1)
-lbl_fn_801765D8_0000039C:
+lbl_battle_awardExp_0000039C:
     lwz r5, 0x44(r1)
     addi r3, r1, 0x8
     lwz r4, 0x48(r1)
@@ -364,26 +364,26 @@ lbl_fn_801765D8_0000039C:
     stw r0, 0x10(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_801765D8_000003D8
+    beq lbl_battle_awardExp_000003D8
     lwz r3, 0xf80(r30)
     lwz r12, 0x0(r3)
     lwz r12, 0x1c(r12)
     mtctr r12
     bctrl
-lbl_fn_801765D8_000003D8:
+lbl_battle_awardExp_000003D8:
     lwz r0, 0x55c(r30)
     cmpwi r0, 0x6
-    beq lbl_fn_801765D8_0000058C
+    beq lbl_battle_awardExp_0000058C
     cmpwi r0, 0x8
-    beq lbl_fn_801765D8_000003F0
+    beq lbl_battle_awardExp_000003F0
     stw r0, 0x564(r30)
-lbl_fn_801765D8_000003F0:
+lbl_battle_awardExp_000003F0:
     lwz r0, 0x55c(r30)
     cmpwi r0, 0x6
-    bne lbl_fn_801765D8_0000058C
+    bne lbl_battle_awardExp_0000058C
     lwz r0, 0xf80(r30)
     cmpwi r0, 0x0
-    bne lbl_fn_801765D8_00000428
+    bne lbl_battle_awardExp_00000428
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x50(r1)
@@ -391,8 +391,8 @@ lbl_fn_801765D8_000003F0:
     lwz r0, 0x8(r5)
     stw r3, 0x54(r1)
     stw r0, 0x58(r1)
-    b lbl_fn_801765D8_00000444
-lbl_fn_801765D8_00000428:
+    b lbl_battle_awardExp_00000444
+lbl_battle_awardExp_00000428:
     addi r3, r31, 0x1c98
     lwz r5, 0x1c98(r31)
     lwz r4, 0x4(r3)
@@ -400,7 +400,7 @@ lbl_fn_801765D8_00000428:
     stw r5, 0x50(r1)
     stw r4, 0x54(r1)
     stw r0, 0x58(r1)
-lbl_fn_801765D8_00000444:
+lbl_battle_awardExp_00000444:
     lwz r5, 0x50(r1)
     addi r3, r1, 0x20
     lwz r4, 0x54(r1)
@@ -410,26 +410,26 @@ lbl_fn_801765D8_00000444:
     stw r0, 0x28(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_801765D8_00000480
+    beq lbl_battle_awardExp_00000480
     lwz r3, 0xf80(r30)
     lwz r12, 0x0(r3)
     lwz r12, 0x1c(r12)
     mtctr r12
     bctrl
-lbl_fn_801765D8_00000480:
+lbl_battle_awardExp_00000480:
     lwz r0, 0x55c(r30)
     cmpwi r0, 0x6
-    beq lbl_fn_801765D8_0000055C
+    beq lbl_battle_awardExp_0000055C
     cmpwi r0, 0x8
-    beq lbl_fn_801765D8_00000498
+    beq lbl_battle_awardExp_00000498
     stw r0, 0x564(r30)
-lbl_fn_801765D8_00000498:
+lbl_battle_awardExp_00000498:
     lwz r0, 0x55c(r30)
     cmpwi r0, 0x6
-    bne lbl_fn_801765D8_0000055C
+    bne lbl_battle_awardExp_0000055C
     lwz r0, 0xf80(r30)
     cmpwi r0, 0x0
-    bne lbl_fn_801765D8_000004D0
+    bne lbl_battle_awardExp_000004D0
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x5c(r1)
@@ -437,8 +437,8 @@ lbl_fn_801765D8_00000498:
     lwz r0, 0x8(r5)
     stw r3, 0x60(r1)
     stw r0, 0x64(r1)
-    b lbl_fn_801765D8_000004EC
-lbl_fn_801765D8_000004D0:
+    b lbl_battle_awardExp_000004EC
+lbl_battle_awardExp_000004D0:
     addi r3, r31, 0x1ca4
     lwz r5, 0x1ca4(r31)
     lwz r4, 0x4(r3)
@@ -446,7 +446,7 @@ lbl_fn_801765D8_000004D0:
     stw r5, 0x5c(r1)
     stw r4, 0x60(r1)
     stw r0, 0x64(r1)
-lbl_fn_801765D8_000004EC:
+lbl_battle_awardExp_000004EC:
     lwz r5, 0x5c(r1)
     addi r3, r1, 0x14
     lwz r4, 0x60(r1)
@@ -456,13 +456,13 @@ lbl_fn_801765D8_000004EC:
     stw r0, 0x1c(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_801765D8_00000528
+    beq lbl_battle_awardExp_00000528
     lwz r3, 0xf80(r30)
     lwz r12, 0x0(r3)
     lwz r12, 0x1c(r12)
     mtctr r12
     bctrl
-lbl_fn_801765D8_00000528:
+lbl_battle_awardExp_00000528:
     mr r3, r30
     li r4, 0x6
     bl actor_setState
@@ -470,48 +470,48 @@ lbl_fn_801765D8_00000528:
     li r0, 0x0
     cmpwi r3, 0x0
     stw r0, 0xf80(r30)
-    beq lbl_fn_801765D8_0000055C
+    beq lbl_battle_awardExp_0000055C
     lwz r12, 0x0(r3)
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-lbl_fn_801765D8_0000055C:
+lbl_battle_awardExp_0000055C:
     lwz r3, 0xf80(r30)
     li r4, 0x6
     li r0, 0x0
     stw r4, 0x55c(r30)
     cmpwi r3, 0x0
     stw r0, 0xf80(r30)
-    beq lbl_fn_801765D8_0000058C
+    beq lbl_battle_awardExp_0000058C
     lwz r12, 0x0(r3)
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-lbl_fn_801765D8_0000058C:
+lbl_battle_awardExp_0000058C:
     lwz r3, 0xf80(r30)
     li r4, 0x6
     li r0, 0x0
     stw r4, 0x55c(r30)
     cmpwi r3, 0x0
     stw r0, 0xf80(r30)
-    beq lbl_fn_801765D8_000005BC
+    beq lbl_battle_awardExp_000005BC
     lwz r12, 0x0(r3)
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-lbl_fn_801765D8_000005BC:
+lbl_battle_awardExp_000005BC:
     lwz r3, lbl_8087F048
     cmpwi r3, 0x0
-    beq lbl_fn_801765D8_000005DC
+    beq lbl_battle_awardExp_000005DC
     mr r4, r30
     bl fn_801059F8
     lwz r3, lbl_8087F048
     mr r4, r30
     bl fn_80105B3C
-lbl_fn_801765D8_000005DC:
+lbl_battle_awardExp_000005DC:
     lwz r0, 0x12a8(r30)
     addi r4, r30, 0xf20
     lfs f0, lbl_8088196C
@@ -535,7 +535,7 @@ lbl_fn_801765D8_000005DC:
     bl fn_80178A6C
     lwz r7, 0xd1c(r30)
     cmpwi r7, 0x0
-    beq lbl_fn_801765D8_000006D8
+    beq lbl_battle_awardExp_000006D8
     lwz r0, 0x12a8(r7)
     mr r5, r7
     lwz r6, 0x1028(r7)
@@ -543,63 +543,63 @@ lbl_fn_801765D8_000005DC:
     extrwi r0, r0, 1, 15
     cntlzw r0, r0
     srwi r3, r0, 5
-    b lbl_fn_801765D8_00000678
-lbl_fn_801765D8_0000065C:
+    b lbl_battle_awardExp_00000678
+lbl_battle_awardExp_0000065C:
     lwz r0, 0xfe8(r5)
     cmplw r0, r30
-    bne lbl_fn_801765D8_00000670
+    bne lbl_battle_awardExp_00000670
     li r0, 0x1
-    b lbl_fn_801765D8_00000694
-lbl_fn_801765D8_00000670:
+    b lbl_battle_awardExp_00000694
+lbl_battle_awardExp_00000670:
     addi r5, r5, 0x4
     addi r4, r4, 0x1
-lbl_fn_801765D8_00000678:
+lbl_battle_awardExp_00000678:
     cmpwi r3, 0x0
     mr r0, r6
-    bne lbl_fn_801765D8_00000688
+    bne lbl_battle_awardExp_00000688
     slwi r0, r6, 1
-lbl_fn_801765D8_00000688:
+lbl_battle_awardExp_00000688:
     cmpw r4, r0
-    blt lbl_fn_801765D8_0000065C
+    blt lbl_battle_awardExp_0000065C
     li r0, 0x0
-lbl_fn_801765D8_00000694:
+lbl_battle_awardExp_00000694:
     cmpwi r0, 0x0
-    beq lbl_fn_801765D8_000006D8
+    beq lbl_battle_awardExp_000006D8
     li r0, 0x10
     mr r4, r7
     li r3, 0x0
     mtctr r0
-lbl_fn_801765D8_000006AC:
+lbl_battle_awardExp_000006AC:
     lwz r0, 0xfe8(r4)
     cmplw r0, r30
-    bne lbl_fn_801765D8_000006CC
+    bne lbl_battle_awardExp_000006CC
     slwi r0, r3, 2
     li r4, 0x0
     add r3, r7, r0
     stw r4, 0xfe8(r3)
-    b lbl_fn_801765D8_000006D8
-lbl_fn_801765D8_000006CC:
+    b lbl_battle_awardExp_000006D8
+lbl_battle_awardExp_000006CC:
     addi r4, r4, 0x4
     addi r3, r3, 0x1
-    bdnz lbl_fn_801765D8_000006AC
-lbl_fn_801765D8_000006D8:
+    bdnz lbl_battle_awardExp_000006AC
+lbl_battle_awardExp_000006D8:
     addi r3, r30, 0x1220
     li r4, 0x0
     bl fn_80121E14
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
-    beq lbl_fn_801765D8_00000718
+    beq lbl_battle_awardExp_00000718
     lwz r3, 0x10d8(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_801765D8_00000718
+    beq lbl_battle_awardExp_00000718
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 30, 30
     cmplwi r0, 0x2
-    bne lbl_fn_801765D8_00000718
+    bne lbl_battle_awardExp_00000718
     mr r4, r30
     li r5, 0x0
     bl fn_803CC718
-lbl_fn_801765D8_00000718:
+lbl_battle_awardExp_00000718:
     lwz r0, 0x74(r1)
     lwz r31, 0x6c(r1)
     lwz r30, 0x68(r1)

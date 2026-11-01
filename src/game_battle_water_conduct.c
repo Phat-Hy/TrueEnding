@@ -13,17 +13,17 @@ extern void fn_80057F28(void);
 extern void fn_80058078(void);
 extern void fn_800580BC(void);
 extern void talk_formatQuotedString(void);
-extern void fn_8005BBF8(void);
-extern void fn_8005BCE8(void);
+extern void talk_parseQuotes(void);
+extern void talk_copySpeakerName(void);
 extern void mem_alloc(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
-extern void fn_80087E9C(void);
+extern void route_createWaypoint(void);
 extern void fn_80088724(void);
 extern void node_createNamedChild(void);
-extern void fn_8008AD4C(void);
-extern void fn_8008B140(void);
+extern void area_updateZoneState(void);
+extern void map_processTrigger(void);
 extern void fn_80092F1C(void);
 extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -53,7 +53,7 @@ extern void PSVECDotProduct(void);
 extern void rand(void);
 extern void strcmp(void);
 extern void atoi(void);
-extern void fn_8068A850(void);
+extern void std_sin(void);
 extern void vec3_isNonZero(void);
 extern int sprintf(char* str, const char* format, ...);
 extern char* strcpy(char* dest, const char* src);
@@ -174,7 +174,7 @@ asm void fn_80419AFC(void)
     stw r30, 0x28(r1)
     mr r30, r3
     addi r3, r3, 0xf4
-    bl fn_8008B140
+    bl map_processTrigger
     cmpwi r3, 0x0
     beq lbl_fn_80419AFC_000000E4
     li r3, 0x1
@@ -290,7 +290,7 @@ asm void fn_80419C00(void)
     addi r4, r4, lbl_807774B8@l
     stw r4, 0x210(r1)
     la r4, lbl_8087D710
-    bl fn_8005BCE8
+    bl talk_copySpeakerName
     lis r28, lbl_80753050@ha
     lis r31, lbl_80777668@ha
     lfs f30, lbl_808864F8
@@ -317,7 +317,7 @@ lbl_fn_80419C00_0000029C:
     mr r4, r3
     addi r3, r23, 0xf4
     li r5, 0x0
-    bl fn_8008AD4C
+    bl area_updateZoneState
     mr r3, r23
     addi r4, r23, 0xf4
     addi r5, r1, 0x210
@@ -798,7 +798,7 @@ lbl_fn_80419C00_0000098C:
     stfs f0, 0x98(r23)
 lbl_fn_80419C00_00000A00:
     addi r3, r1, 0x210
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_80419C00_0000029C
     li r0, 0x888
@@ -1749,7 +1749,7 @@ lbl_fn_8041B094_000016AC:
     addi r5, r27, 0x6c
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_80886520
     mr r3, r30
     lfs f2, lbl_80886504
@@ -1767,7 +1767,7 @@ lbl_fn_8041B094_000016AC:
     addi r5, r27, 0x90
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     mr r3, r30
     addi r4, r31, 0x93
     addi r5, r27, 0x9c
@@ -1808,7 +1808,7 @@ lbl_fn_8041B094_00001790:
     lfs f3, lbl_8088651C
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lwz r5, 0x530(r27)
     mr r3, r28
     lfs f1, lbl_80886514
@@ -1967,7 +1967,7 @@ lbl_fn_8041B28C_000019EC:
     fcmpo cr0, f27, f0
     bge lbl_fn_8041B28C_00001A3C
     fmr f1, f29
-    bl fn_8068A850
+    bl std_sin
     frsp f27, f1
     addi r3, r1, 0x20
     addi r4, r1, 0x14

@@ -9,10 +9,10 @@ extern void fn_80128CF8(void);
 extern void fn_80129144(void);
 extern void fn_80129670(void);
 extern void fn_80153698(void);
-extern void fn_801539E0(void);
+extern void inventory_unequipItem(void);
 extern void fn_80155DAC(void);
 extern void fn_8016EB48(void);
-extern void fn_80179D44(void);
+extern void actor_getMovementFlags(void);
 extern void fn_8036DAF4(void);
 extern void fn_803C11A4(void);
 extern void fn_803C1338(void);
@@ -285,7 +285,7 @@ lbl_fn_801255C8_000002E0:
     lwz r0, 0x12a4(r3)
     srwi. r0, r0, 31
     beq lbl_fn_801255C8_00000304
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_801255C8_00000304:
     lwz r3, 0xa4(r31)
     lwz r0, 0x12a4(r3)
@@ -1288,7 +1288,7 @@ lbl_fn_80126214_00001098:
     lwz r4, 0x24(r31)
     mr r3, r6
     addi r26, r4, 0x528
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lwz r7, 0xa0(r31)
     mr r5, r3
     lfs f1, lbl_80881864
@@ -1303,7 +1303,7 @@ lbl_fn_80126214_00001148:
     cmpwi r0, 0x5
     bne lbl_fn_80126214_00001180
     mr r3, r6
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lwz r7, 0xa0(r31)
     mr r5, r3
     lfs f1, lbl_80881864
@@ -1364,7 +1364,7 @@ lbl_fn_80126214_00001180:
     stfs f6, 0xcc(r1)
     lwz r3, 0xa4(r31)
     stfs f5, 0xd0(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lwz r7, 0xa0(r31)
     mr r5, r3
     lfs f1, lbl_80881864
@@ -2534,7 +2534,7 @@ lbl_fn_80126214_00002258:
     lwz r4, 0x24(r31)
     lwz r3, 0xa4(r31)
     addi r26, r4, 0x528
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lwz r7, 0xa0(r31)
     mr r5, r3
     lfs f1, lbl_80881864

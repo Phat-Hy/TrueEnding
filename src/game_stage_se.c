@@ -7,20 +7,20 @@ extern void __register_global_object(void);
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8003EFB0(void);
+extern void ui_destroyWidget(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_8008BBD8(void);
+extern void map_debugLog(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_8011FC10(void);
+extern void skill_findNodeById(void);
 extern void magic_dispatchActionCommand(void);
 extern void fn_8012476C(void);
 extern void fn_801446F0(void);
 extern void fn_80154344(void);
 extern void fn_80155DAC(void);
 extern void fn_80164DCC(void);
-extern void fn_8016DA4C(void);
+extern void debuff_clearStatus(void);
 extern void fn_801750FC(void);
 extern void fn_8018F81C(void);
 extern void fn_8018F84C(void);
@@ -267,7 +267,7 @@ lbl_fn_801A10CC_00000218:
     stw r4, 0x6c(r1)
     stw r0, 0x70(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_801A10CC_000002EC
     lwz r7, 0x60(r1)
@@ -491,11 +491,11 @@ lbl_fn_801A1548_000004D8:
     bne lbl_fn_801A1548_00000578
     lis r3, lbl_807C6BB8@ha
     stwu r6, lbl_807C6BB8@l(r3)
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     li r29, 0x1
     lis r5, lbl_807C7BDC@ha
     stw r6, 0x4(r3)
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     stw r6, 0x8(r3)
     addi r5, r5, lbl_807C7BDC@l
     stw r29, 0xc(r3)
@@ -510,10 +510,10 @@ lbl_fn_801A1548_00000578:
     bne lbl_fn_801A1548_000005C0
     li r0, 0x0
     li r29, 0x1
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     lis r5, lbl_807C7BDC@ha
     stw r0, 0x0(r3)
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     addi r5, r5, lbl_807C7BDC@l
     stw r0, 0x4(r3)
     stw r0, 0x8(r3)
@@ -529,10 +529,10 @@ lbl_fn_801A1548_000005C0:
     stw r29, 0xc(r3)
     bne lbl_fn_801A1548_00000608
     li r0, 0x0
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     lis r5, lbl_807C7BDC@ha
     stw r0, 0x0(r3)
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     stw r0, 0x4(r3)
     addi r5, r5, lbl_807C7BDC@l
     stw r0, 0x8(r3)
@@ -578,11 +578,11 @@ lbl_fn_801A1548_00000674:
     lis r3, lbl_807C6BB8@ha
     li r0, 0x0
     stwu r0, lbl_807C6BB8@l(r3)
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     li r30, 0x1
     lis r5, lbl_807C7BDC@ha
     stw r0, 0x4(r3)
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     addi r5, r5, lbl_807C7BDC@l
     stw r0, 0x8(r3)
     stw r30, 0xc(r3)
@@ -689,7 +689,7 @@ asm void fn_801A1854(void)
     bne lbl_fn_801A1854_0000094C
     lwz r3, lbl_8087F408
     li r4, 0x4
-    bl fn_8011FC10
+    bl skill_findNodeById
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_801A1854_0000094C
@@ -826,7 +826,7 @@ lbl_fn_801A1854_000009E8:
     bne lbl_fn_801A1854_00000AF4
     lwz r3, lbl_8087F408
     li r4, 0x4
-    bl fn_8011FC10
+    bl skill_findNodeById
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_801A1854_00000AF4
@@ -1044,7 +1044,7 @@ asm void fn_801A1D9C(void)
     bne lbl_fn_801A1D9C_00000D9C
     lwz r3, lbl_8087F408
     li r4, 0x4
-    bl fn_8011FC10
+    bl skill_findNodeById
     cmpwi r3, 0x0
     mr r28, r3
     beq lbl_fn_801A1D9C_00000D9C
@@ -1099,7 +1099,7 @@ lbl_fn_801A1D9C_00000DD8:
     bne lbl_fn_801A1D9C_00000EE4
     lwz r3, lbl_8087F408
     li r4, 0x4
-    bl fn_8011FC10
+    bl skill_findNodeById
     cmpwi r3, 0x0
     mr r28, r3
     beq lbl_fn_801A1D9C_00000EE4
@@ -1247,7 +1247,7 @@ lbl_fn_801A2058_00001024:
     stw r4, 0x20(r1)
     stw r0, 0x24(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_801A2058_00001098
     lwz r5, 0x18(r1)
@@ -1417,7 +1417,7 @@ lbl_fn_801A2290_00001234:
     lwz r4, 0x4(r3)
     stw r0, 0x560(r4)
     lwz r3, 0x4(r3)
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lwz r3, 0x4(r30)
     li r4, 0x1
     bl fn_80164DCC
@@ -1547,10 +1547,7 @@ lbl_fn_801A2414_00001400:
     blr
 }
 
-asm void fn_801A24E0(void)
-{
-    nofralloc
-    blr
+void fn_801A24E0(void) {
 }
 
 asm void fn_801A24E4(void)
@@ -1625,7 +1622,7 @@ lbl_fn_801A24E4_000014F4:
     stw r4, 0x9c(r1)
     stw r0, 0xa0(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_801A24E4_000015C8
     lwz r7, 0x90(r1)
@@ -1768,7 +1765,7 @@ lbl_fn_801A24E4_00001710:
     stw r4, 0x74(r1)
     stw r0, 0x78(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_801A24E4_000017E4
     lwz r7, 0x68(r1)

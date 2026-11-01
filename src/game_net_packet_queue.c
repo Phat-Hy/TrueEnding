@@ -6,15 +6,15 @@ extern void _restgpr_23(void);
 extern void _savegpr_23(void);
 extern void dtor_80084684(void);
 extern void fn_80060D58(void);
-extern void fn_8006EF48(void);
+extern void script_executeOpcode(void);
 extern void fn_800A4450(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void str_findChar(void);
 extern void wcs_vformat(void);
-extern void fn_80116FC0(void);
+extern void actor_findSpawnTemplate(void);
 extern void fn_801F4AA0(void);
 extern void fn_801FEC74(void);
 extern void thread_findAndNotifySlot(void);
@@ -251,7 +251,7 @@ asm void fn_804AF384(void)
     stw r30, 0x28(r1)
     stw r29, 0x24(r1)
     mr r29, r3
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_804AF384_00000344
     addi r31, r29, 0x15c
@@ -320,7 +320,7 @@ lbl_fn_804AF384_000002D8:
     lfs f2, lbl_80887308
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lwz r0, 0x8(r1)
     srwi. r0, r0, 31
     beq lbl_fn_804AF384_000002FC
@@ -480,7 +480,7 @@ lbl_fn_804AF520_0000051C:
     lfs f2, lbl_80887308
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lwz r0, 0x5c(r1)
     fmr f31, f1
     srwi. r0, r0, 31
@@ -523,7 +523,7 @@ lbl_fn_804AF520_000005BC:
     lfs f2, lbl_80887308
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lwz r0, 0x50(r1)
     fmr f31, f1
     srwi. r0, r0, 31
@@ -566,7 +566,7 @@ lbl_fn_804AF520_0000065C:
     lfs f2, lbl_80887308
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lwz r0, 0x44(r1)
     fmr f31, f1
     srwi. r0, r0, 31
@@ -609,7 +609,7 @@ lbl_fn_804AF520_000006FC:
     lfs f2, lbl_80887308
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lwz r0, 0x38(r1)
     fmr f31, f1
     srwi. r0, r0, 31
@@ -652,7 +652,7 @@ lbl_fn_804AF520_0000079C:
     lfs f2, lbl_80887308
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lwz r0, 0x2c(r1)
     fmr f31, f1
     srwi. r0, r0, 31
@@ -1159,7 +1159,7 @@ lbl_fn_804AF520_00000EE4:
     lfs f2, lbl_80887308
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lwz r0, 0x20(r1)
     fmr f31, f1
     srwi. r0, r0, 31
@@ -1202,7 +1202,7 @@ lbl_fn_804AF520_00000F84:
     lfs f2, lbl_80887308
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lwz r0, 0x14(r1)
     fmr f31, f1
     srwi. r0, r0, 31
@@ -1245,7 +1245,7 @@ lbl_fn_804AF520_00001024:
     lfs f2, lbl_80887308
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lwz r0, 0x8(r1)
     fmr f31, f1
     srwi. r0, r0, 31
@@ -1462,7 +1462,7 @@ lbl_fn_804AF520_00001338:
     addi r4, r3, 0x547b
     stfs f0, 0x100(r5)
     li r3, 0x0
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r4, 0x88(r30)
     lis r5, lbl_80757B7C@ha
     addi r5, r5, lbl_80757B7C@l
@@ -1828,16 +1828,10 @@ lbl_fn_804AF520_00001894:
     blr
 }
 
-asm void fn_804B0A70(void)
-{
-    nofralloc
-    blr
+void fn_804B0A70(void) {
 }
 
-asm void fn_804B0A74(void)
-{
-    nofralloc
-    blr
+void fn_804B0A74(void) {
 }
 
 asm void fn_804B0A78(void)

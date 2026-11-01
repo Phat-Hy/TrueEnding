@@ -17,8 +17,8 @@ extern void fn_8006D008(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void fn_8008A4E0(void);
-extern void fn_8008AD4C(void);
-extern void fn_8008B140(void);
+extern void area_updateZoneState(void);
+extern void map_processTrigger(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800D5908(void);
@@ -37,7 +37,7 @@ extern void fn_8046DD20(void);
 extern void fn_8046F5CC(void);
 extern void fn_8046F834(void);
 extern void atn_Curve_evalHermite(void);
-extern void fn_80473F88(void);
+extern void shockwave_freeEmitter(void);
 extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXTrans(void);
@@ -826,7 +826,7 @@ asm void atn_LH_ColliObject_onNotify(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     lwz r3, lbl_8087F518
     mr r4, r31
     li r5, 0x1
@@ -1075,7 +1075,7 @@ asm void atn_LH_ColliTree_onNotify(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     lwz r3, lbl_8087F518
     mr r4, r31
     li r5, 0x1
@@ -1517,7 +1517,7 @@ lbl_atn_LoadEffect_destructor_00001308:
     cmplwi r0, 0x1
     bne lbl_atn_LoadEffect_destructor_00001344
     mr r3, r21
-    bl fn_8008B140
+    bl map_processTrigger
     cmpwi r3, 0x0
     beq lbl_atn_LoadEffect_destructor_00001398
     li r22, 0x1
@@ -1688,7 +1688,7 @@ lbl_atn_LoadEffect_destructor_0000157C:
 lbl_atn_LoadEffect_destructor_00001594:
     lwz r4, 0x7c(r1)
 lbl_atn_LoadEffect_destructor_00001598:
-    bl fn_8008AD4C
+    bl area_updateZoneState
     lwz r0, 0x68(r1)
     srwi. r0, r0, 31
     beq lbl_atn_LoadEffect_destructor_000015D8
@@ -1706,7 +1706,7 @@ lbl_atn_LoadEffect_destructor_000015CC:
     lwz r4, 0x7c(r1)
 lbl_atn_LoadEffect_destructor_000015D0:
     li r5, 0x0
-    bl fn_8008AD4C
+    bl area_updateZoneState
 lbl_atn_LoadEffect_destructor_000015D8:
     lwz r3, 0x90(r17)
     stwx r26, r3, r23
@@ -1934,7 +1934,7 @@ asm void atn_LH_Effect_onNotify(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     lwz r3, lbl_8087F518
     mr r4, r31
     li r5, 0x1

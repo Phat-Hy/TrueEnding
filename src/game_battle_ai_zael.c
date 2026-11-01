@@ -6,8 +6,8 @@ extern void _restgpr_21(void);
 extern void _savegpr_21(void);
 extern void dtor_80084684(void);
 extern void talk_formatQuotedString(void);
-extern void fn_8005BBF8(void);
-extern void fn_8005BCE8(void);
+extern void talk_parseQuotes(void);
+extern void talk_copySpeakerName(void);
 extern void fn_80069758(void);
 extern void fn_8006AA20(void);
 extern void mem_alloc(void);
@@ -17,11 +17,11 @@ extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void fn_80087858(void);
 extern void route_createSegment(void);
-extern void fn_80087E9C(void);
+extern void route_createWaypoint(void);
 extern void fn_80088724(void);
 extern void node_createNamedChild(void);
-extern void fn_8008AD4C(void);
-extern void fn_8008B140(void);
+extern void area_updateZoneState(void);
+extern void map_processTrigger(void);
 extern void atn_Model_findBoneIndex(void);
 extern void lockon_updateTarget(void);
 extern void fn_800971D4(void);
@@ -29,9 +29,9 @@ extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_playAnimationByName(void);
-extern void fn_800CB360(void);
+extern void morph_reset(void);
 extern void ref_releaseHandle(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void str_skipWhitespace(void);
 extern void fn_802180A8(void);
 extern void res_MsgHandle_constructor(void);
@@ -39,12 +39,12 @@ extern void fn_803EBC44(void);
 extern void fn_803EBE74(void);
 extern void fn_803EC0A4(void);
 extern void fn_803EC0F8(void);
-extern void fn_803EC568(void);
-extern void fn_803EC69C(void);
+extern void task_createWorker(void);
+extern void task_destroyWorker(void);
 extern void fn_803EC758(void);
 extern void fn_803EC7A0(void);
-extern void fn_803EC91C(void);
-extern void fn_803ED0D4(void);
+extern void task_updateWorker(void);
+extern void task_initWorkerContext(void);
 extern void fn_803ED5D0(void);
 extern void fn_803ED774(void);
 extern void fn_803F3334(void);
@@ -140,11 +140,11 @@ asm void fn_8042F97C(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_803EC91C
+    bl task_updateWorker
     cmpwi r3, 0x0
     bne lbl_fn_8042F97C_00000074
     mr r3, r31
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_8042F97C_00000074
     li r0, 0x1
@@ -203,7 +203,7 @@ asm void fn_8042FA08(void)
     mr r4, r3
     mr r3, r31
     li r5, 0x1
-    bl fn_803ED0D4
+    bl task_initWorkerContext
 lbl_fn_8042FA08_000000F0:
     lfs f0, lbl_80886818
     li r0, 0x0
@@ -425,7 +425,7 @@ lbl_fn_8042FAC4_000003DC:
     mr r4, r3
     mr r3, r31
     li r5, 0x1
-    bl fn_803ED0D4
+    bl task_initWorkerContext
 lbl_fn_8042FAC4_0000041C:
     lwz r0, 0x84(r1)
     psq_l f31, 0x78(r1), 0, 0
@@ -856,11 +856,11 @@ asm void fn_804303D4(void)
     stw r31, 0xc(r1)
     mr r31, r3
     addi r3, r3, 0x104
-    bl fn_8008B140
+    bl map_processTrigger
     cmpwi r3, 0x0
     bne lbl_fn_804303D4_00000A8C
     addi r3, r31, 0x4d4
-    bl fn_8008B140
+    bl map_processTrigger
     cmpwi r3, 0x0
     beq lbl_fn_804303D4_00000A94
 lbl_fn_804303D4_00000A8C:
@@ -918,7 +918,7 @@ asm void fn_80430428(void)
     addi r4, r4, lbl_807774B8@l
     stw r4, 0x108(r1)
     la r4, lbl_8087D710
-    bl fn_8005BCE8
+    bl talk_copySpeakerName
     lis r29, lbl_80753FDC@ha
     li r26, 0x0
     addi r29, r29, lbl_80753FDC@l
@@ -939,7 +939,7 @@ lbl_fn_80430428_00000B5C:
     mr r4, r3
     addi r3, r31, 0x104
     li r5, 0x0
-    bl fn_8008AD4C
+    bl area_updateZoneState
     mr r3, r31
     addi r4, r31, 0x104
     addi r5, r1, 0x108
@@ -956,7 +956,7 @@ lbl_fn_80430428_00000BB0:
     mr r4, r3
     addi r3, r31, 0x4d4
     li r5, 0x0
-    bl fn_8008AD4C
+    bl area_updateZoneState
     mr r3, r31
     addi r4, r31, 0x4d4
     addi r5, r1, 0x108
@@ -1058,7 +1058,7 @@ lbl_fn_80430428_00000D38:
     blt lbl_fn_80430428_00000D18
 lbl_fn_80430428_00000D44:
     addi r3, r1, 0x108
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_80430428_00000B5C
     lwz r3, 0x8a8(r31)
@@ -1168,7 +1168,7 @@ asm void fn_804307B4(void)
     addi r4, r4, lbl_807774B8@l
     stw r4, 0x8(r1)
     la r4, lbl_8087D710
-    bl fn_8005BCE8
+    bl talk_copySpeakerName
     lis r31, lbl_80753FDC@ha
     li r30, 0x0
     addi r31, r31, lbl_80753FDC@l
@@ -1205,7 +1205,7 @@ lbl_fn_804307B4_00000F2C:
     addi r29, r29, 0x8
 lbl_fn_804307B4_00000F58:
     addi r3, r1, 0x8
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_804307B4_00000EE8
     lmw r27, 0x64c(r1)
@@ -1256,11 +1256,11 @@ lbl_fn_804308F8_00000FC8:
     stfs f0, 0x708(r31)
     addi r4, r31, 0x104
     li r5, 0x1
-    bl fn_803ED0D4
+    bl task_initWorkerContext
     mr r3, r31
     addi r4, r31, 0x4d4
     li r5, 0x1
-    bl fn_803ED0D4
+    bl task_initWorkerContext
     lwz r0, 0x8cc(r31)
     cmpwi r0, 0x0
     beq lbl_fn_804308F8_000011C0
@@ -1369,7 +1369,7 @@ lbl_fn_804308F8_00001178:
     mr r4, r3
     mr r3, r31
     li r5, 0x1
-    bl fn_803ED0D4
+    bl task_initWorkerContext
 lbl_fn_804308F8_000011B8:
     mr r3, r31
     bl fn_8042FDBC
@@ -1624,7 +1624,7 @@ lbl_fn_80430DE4_000014CC:
     addi r5, r29, 0x6c
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_80886854
     mr r3, r30
     lfs f2, lbl_80886858
@@ -1642,7 +1642,7 @@ lbl_fn_80430DE4_000014CC:
     addi r5, r29, 0x90
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     mr r3, r30
     addi r4, r31, 0x5f
     addi r5, r29, 0x9c
@@ -1764,7 +1764,7 @@ lbl_fn_80430FC0_000016E4:
     bl fn_800971D4
     mr r3, r30
     li r4, 0x0
-    bl fn_803EC69C
+    bl task_destroyWorker
     cmpwi r31, 0x0
     ble lbl_fn_80430FC0_00001718
     mr r3, r30
@@ -1855,7 +1855,7 @@ asm void fn_8043119C(void)
     stw r31, 0xc(r1)
     stw r30, 0x8(r1)
     mr r30, r3
-    bl fn_803EC568
+    bl task_createWorker
     lis r4, lbl_8078EDA8@ha
     addi r3, r30, 0xf4
     addi r4, r4, lbl_8078EDA8@l
@@ -1899,7 +1899,7 @@ asm void fn_8043119C(void)
     stb r31, 0x3078(r30)
     stw r31, 0x3098(r30)
     stw r31, 0x309c(r30)
-    bl fn_800CB360
+    bl morph_reset
     li r3, 0x6
     li r0, 0x2
     stw r3, 0xe8(r30)

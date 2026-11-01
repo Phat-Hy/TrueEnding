@@ -13,8 +13,8 @@ extern void _savegpr_20(void);
 extern void _savegpr_25(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_80061824(void);
-extern void fn_8006EF48(void);
+extern void skill_calcTrajectory(void);
+extern void script_executeOpcode(void);
 extern void str_assignBuffer(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
@@ -1890,7 +1890,7 @@ lbl_fn_800D9960_00001738:
     lfs f2, lbl_80881230
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lwz r0, 0x20(r20)
     cmpwi r0, 0x0
     beq lbl_fn_800D9960_00001760
@@ -2015,7 +2015,7 @@ lbl_fn_800D9960_00001908:
     lfs f2, lbl_80881230
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     fadds f0, f23, f1
     fnmsubs f0, f31, f0, f24
     fadds f20, f22, f0
@@ -2042,7 +2042,7 @@ lbl_fn_800D9960_00001960:
     lfs f2, lbl_80881230
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     stw r30, 0x28c(r1)
     xoris r3, r22, 0x8000
     lwz r0, 0x68(r1)
@@ -2110,7 +2110,7 @@ lbl_fn_800D9960_00001A24:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lwz r0, 0x4c(r1)
     fsubs f1, f20, f26
     lfs f4, 0x38(r20)
@@ -2134,7 +2134,7 @@ lbl_fn_800D9960_00001A98:
     fmr f8, f6
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lwz r0, 0x4c(r1)
     fadds f1, f20, f26
     lfs f4, 0x38(r20)
@@ -2158,7 +2158,7 @@ lbl_fn_800D9960_00001AF0:
     fmr f8, f6
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lwz r0, 0x4c(r1)
     fadds f1, f20, f26
     lfs f4, 0x38(r20)
@@ -2182,7 +2182,7 @@ lbl_fn_800D9960_00001B48:
     fmr f8, f6
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     b lbl_fn_800D9960_00001BD4
 lbl_fn_800D9960_00001B74:
     rlwinm. r0, r3, 0, 30, 30
@@ -2210,7 +2210,7 @@ lbl_fn_800D9960_00001BAC:
     fmr f8, f6
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
 lbl_fn_800D9960_00001BD4:
     lwz r0, 0x24(r20)
     rlwinm. r0, r0, 0, 29, 29
@@ -2313,7 +2313,7 @@ lbl_fn_800D9960_00001D04:
     li r9, 0x0
     fmr f8, f6
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lfs f0, 0x58(r1)
     fcmpo cr0, f0, f28
     cror eq, gt, eq
@@ -2412,7 +2412,7 @@ lbl_fn_800D9960_00001E4C:
     li r9, 0x0
     fmr f8, f6
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lfs f0, 0x58(r1)
     fcmpo cr0, f0, f28
     cror eq, gt, eq
@@ -2511,7 +2511,7 @@ lbl_fn_800D9960_00001F94:
     li r9, 0x0
     fmr f8, f6
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lfs f0, 0x58(r1)
     fcmpo cr0, f0, f28
     cror eq, gt, eq
@@ -2610,7 +2610,7 @@ lbl_fn_800D9960_000020DC:
     li r9, 0x0
     fmr f8, f6
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     b lbl_fn_800D9960_0000224C
 lbl_fn_800D9960_00002104:
     lfs f0, 0x58(r1)
@@ -2711,7 +2711,7 @@ lbl_fn_800D9960_00002228:
     li r9, 0x0
     fmr f8, f6
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
 lbl_fn_800D9960_0000224C:
     lwz r0, 0x4c(r1)
     srwi. r0, r0, 31

@@ -9,18 +9,18 @@ extern void _savegpr_16(void);
 extern void _savegpr_21(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
-extern void fn_80061824(void);
-extern void fn_8006EF48(void);
+extern void skill_calcTrajectory(void);
+extern void script_executeOpcode(void);
 extern void mem_alloc(void);
 extern void node_createNamedChild(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void fn_800A4450(void);
-extern void fn_800BFAC8(void);
+extern void motion_updateFogAdj(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void str_findChar(void);
 extern void wcs_vformat(void);
 extern void fn_800E2AF8(void);
@@ -31,7 +31,7 @@ extern void fn_8011F7FC(void);
 extern void fn_801546F4(void);
 extern void fn_8016DF3C(void);
 extern void fn_8016EB48(void);
-extern void fn_801765D8(void);
+extern void battle_awardExp(void);
 extern void fn_80176ACC(void);
 extern void save_validateHeader(void);
 extern void fn_801F4484(void);
@@ -232,7 +232,7 @@ asm void fn_80549E5C(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_80549E5C_0000011C
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_80549E5C_0000011C:
     cmpwi r30, 0x0
     beq lbl_fn_80549E5C_00000130
@@ -260,7 +260,7 @@ asm void fn_80549EEC(void)
     stwu r1, -0x10(r1)
     mflr r0
     stw r0, 0x14(r1)
-    bl fn_800D3FA4
+    bl bloom_processPasses
     neg r0, r3
     or r0, r0, r3
     srwi r3, r0, 31
@@ -551,7 +551,7 @@ lbl_fn_8054A0A0_00000508:
     cmpwi r31, 0x0
     bne lbl_fn_8054A0A0_00000550
     lwz r3, 0x48(r29)
-    bl fn_801765D8
+    bl battle_awardExp
 lbl_fn_8054A0A0_00000550:
     lwz r0, 0x50(r30)
     cmpwi r0, 0x1
@@ -1540,7 +1540,7 @@ asm void fn_8054B048(void)
     li r31, 0x1
     stw r30, 0x8(r1)
     mr r30, r3
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     bne lbl_fn_8054B048_000012E4
     li r31, 0x0
@@ -1906,7 +1906,7 @@ lbl_fn_8054B328_00001804:
     lwz r4, lbl_8087EFB4
     addi r3, r1, 0x58
     addi r5, r1, 0x64
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f3, 0x58(r1)
     lfs f0, 0x6c(r19)
     lfs f4, 0x5c(r1)
@@ -1983,7 +1983,7 @@ lbl_fn_8054B328_000018A8:
     fmuls f0, f0, f3
     stfs f4, 0x4c(r1)
     fmuls f15, f24, f0
-    bl fn_8006EF48
+    bl script_executeOpcode
     frsp f0, f21
     lfs f3, 0x60(r1)
     lfs f5, 0x5c(r1)
@@ -2206,7 +2206,7 @@ lbl_fn_8054B328_00001C48:
     lfs f2, lbl_80887D60
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lwz r0, 0x10(r19)
     fsubs f17, f17, f15
     lfs f0, 0x58(r1)
@@ -2233,7 +2233,7 @@ lbl_fn_8054B328_00001C9C:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lfs f6, lbl_80887D60
     fmr f1, f15
     fmr f2, f17
@@ -2250,7 +2250,7 @@ lbl_fn_8054B328_00001C9C:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     b lbl_fn_8054B328_00002190
 lbl_fn_8054B328_00001D28:
     fmr f1, f19
@@ -2259,7 +2259,7 @@ lbl_fn_8054B328_00001D28:
     addi r4, r19, 0x20
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lfs f0, 0x58(r1)
     fnmsubs f17, f26, f19, f17
     lfs f6, lbl_80887D60
@@ -2279,7 +2279,7 @@ lbl_fn_8054B328_00001D28:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lfs f6, lbl_80887D60
     fmr f1, f15
     fmr f4, f19
@@ -2296,7 +2296,7 @@ lbl_fn_8054B328_00001D28:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lfs f6, lbl_80887D60
     fmr f2, f17
     fmr f4, f19
@@ -2313,7 +2313,7 @@ lbl_fn_8054B328_00001D28:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lfs f6, lbl_80887D60
     fmr f1, f15
     fmr f4, f19
@@ -2330,7 +2330,7 @@ lbl_fn_8054B328_00001D28:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lfs f6, lbl_80887D60
     oris r5, r17, 0xff
     fmr f1, f15
@@ -2348,7 +2348,7 @@ lbl_fn_8054B328_00001D28:
     fmr f8, f6
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     b lbl_fn_8054B328_00002190
 lbl_fn_8054B328_00001EAC:
     lwz r3, 0x0(r19)
@@ -2405,7 +2405,7 @@ lbl_fn_8054B328_00001F48:
     lfs f2, lbl_80887D60
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lfs f0, 0x58(r1)
     fsubs f17, f17, f15
     lfs f6, lbl_80887D60
@@ -2427,7 +2427,7 @@ lbl_fn_8054B328_00001F48:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lfs f6, lbl_80887D60
     fmr f1, f15
     fmr f2, f17
@@ -2444,7 +2444,7 @@ lbl_fn_8054B328_00001F48:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     b lbl_fn_8054B328_00002190
 lbl_fn_8054B328_00002018:
     lwz r3, 0x0(r19)
@@ -2498,7 +2498,7 @@ lbl_fn_8054B328_000020A8:
     li r5, 0x1
     fmr f1, f19
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lfs f0, 0x58(r1)
     cmpwi r18, 0x0
     fnmsubs f15, f24, f1, f0
@@ -2529,7 +2529,7 @@ lbl_fn_8054B328_00002108:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lfs f6, lbl_80887D60
     fmr f1, f15
     fmr f2, f17
@@ -2546,7 +2546,7 @@ lbl_fn_8054B328_00002108:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
 lbl_fn_8054B328_00002190:
     lwz r4, 0xa4(r19)
     cmpwi r4, 0x0
@@ -2830,7 +2830,7 @@ lbl_fn_8054B328_000024B4:
     li r5, 0x1
     lfs f2, lbl_80887D60
     li r6, 0x4
-    bl fn_8006EF48
+    bl script_executeOpcode
     lwz r4, 0xa0(r19)
     fmr f15, f1
     addi r3, r27, 0x2be
@@ -2875,7 +2875,7 @@ lbl_fn_8054B328_00002664:
     addi r4, r1, 0x70
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lfs f0, 0x58(r1)
     fnmsubs f17, f26, f19, f17
     lfs f6, lbl_80887D60
@@ -2895,7 +2895,7 @@ lbl_fn_8054B328_00002664:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lfs f6, lbl_80887D60
     fmr f1, f15
     fmr f2, f17
@@ -2912,7 +2912,7 @@ lbl_fn_8054B328_00002664:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
 lbl_fn_8054B328_00002720:
     lwz r3, 0x94(r19)
     cmpwi r3, 0x0
@@ -3506,7 +3506,7 @@ lbl_fn_8054B328_00003000:
     lfs f1, lbl_80887D74
     li r6, 0x1
     lfs f2, lbl_80887D60
-    bl fn_8006EF48
+    bl script_executeOpcode
     lwz r0, 0x10(r1)
     fmr f15, f1
     srwi r0, r0, 31
@@ -3732,7 +3732,7 @@ lbl_fn_8054B328_00003360:
     lfs f2, lbl_80887D60
     li r6, 0x1
     fmr f1, f16
-    bl fn_8006EF48
+    bl script_executeOpcode
     lfs f0, 0x58(r1)
     fnmsubs f17, f26, f16, f17
     lfs f6, lbl_80887D60
@@ -3752,7 +3752,7 @@ lbl_fn_8054B328_00003360:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lfs f6, lbl_80887D60
     oris r5, r17, 0xff
     fmr f1, f15
@@ -3770,7 +3770,7 @@ lbl_fn_8054B328_00003360:
     fmr f8, f6
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
 lbl_fn_8054B328_00003424:
     lwz r4, 0x14(r19)
     clrlwi r0, r4, 31
@@ -3855,7 +3855,7 @@ lbl_fn_8054B328_0000351C:
     lfs f2, lbl_80887D60
     li r6, 0x1
     fmr f1, f16
-    bl fn_8006EF48
+    bl script_executeOpcode
     lfs f0, 0x58(r1)
     fnmsubs f17, f26, f16, f17
     lfs f6, lbl_80887D60
@@ -3875,7 +3875,7 @@ lbl_fn_8054B328_0000351C:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lfs f6, lbl_80887D60
     fmr f1, f15
     fmr f4, f16
@@ -3892,7 +3892,7 @@ lbl_fn_8054B328_0000351C:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lfs f6, lbl_80887D60
     fmr f2, f17
     fmr f4, f16
@@ -3909,7 +3909,7 @@ lbl_fn_8054B328_0000351C:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lfs f6, lbl_80887D60
     fmr f1, f15
     fmr f4, f16
@@ -3926,7 +3926,7 @@ lbl_fn_8054B328_0000351C:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lfs f6, lbl_80887D60
     oris r5, r17, 0xff
     fmr f1, f15
@@ -3944,7 +3944,7 @@ lbl_fn_8054B328_0000351C:
     fmr f8, f6
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
 lbl_fn_8054B328_000036A4:
     lwz r0, 0x14(r19)
     rlwinm r0, r0, 0, 17, 17
@@ -3968,7 +3968,7 @@ lbl_fn_8054B328_000036CC:
     lfs f2, lbl_80887D60
     li r6, 0x1
     fmr f1, f16
-    bl fn_8006EF48
+    bl script_executeOpcode
     lfs f0, 0x58(r1)
     fnmsubs f17, f26, f16, f17
     lfs f6, lbl_80887D60
@@ -3988,7 +3988,7 @@ lbl_fn_8054B328_000036CC:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lfs f6, lbl_80887D60
     oris r5, r17, 0xff
     fmr f1, f15
@@ -4006,7 +4006,7 @@ lbl_fn_8054B328_000036CC:
     fmr f8, f6
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
 lbl_fn_8054B328_00003790:
     lwz r0, 0x14(r19)
     rlwinm r3, r0, 0, 10, 10
@@ -4029,7 +4029,7 @@ lbl_fn_8054B328_000037BC:
     addi r4, r1, 0x70
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lfs f0, 0x58(r1)
     fnmsubs f17, f26, f19, f17
     lfs f6, lbl_80887D60
@@ -4049,7 +4049,7 @@ lbl_fn_8054B328_000037BC:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lfs f6, lbl_80887D60
     fmr f1, f15
     fmr f4, f19
@@ -4066,7 +4066,7 @@ lbl_fn_8054B328_000037BC:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lfs f6, lbl_80887D60
     fmr f2, f17
     fmr f4, f19
@@ -4083,7 +4083,7 @@ lbl_fn_8054B328_000037BC:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lfs f6, lbl_80887D60
     fmr f1, f15
     fmr f4, f19
@@ -4100,7 +4100,7 @@ lbl_fn_8054B328_000037BC:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lfs f6, lbl_80887D60
     oris r5, r17, 0xff
     fmr f1, f15
@@ -4118,7 +4118,7 @@ lbl_fn_8054B328_000037BC:
     fmr f8, f6
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
 lbl_fn_8054B328_00003944:
     addi r19, r19, 0xb4
 lbl_fn_8054B328_00003948:

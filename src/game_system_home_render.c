@@ -15,8 +15,8 @@ extern void fn_80051CD8(void);
 extern void fn_8005454C(void);
 extern void talk_parseQuotedString(void);
 extern void talk_formatQuotedString(void);
-extern void fn_8005BBF8(void);
-extern void fn_8005BCE8(void);
+extern void talk_parseQuotes(void);
+extern void talk_copySpeakerName(void);
 extern void skill_calculateDamage(void);
 extern void fn_800629F0(void);
 extern void fn_80063764(void);
@@ -26,17 +26,17 @@ extern void mem_alloc(void);
 extern void mem_getAllocSize(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
-extern void fn_80087E9C(void);
+extern void route_createWaypoint(void);
 extern void node_createNamedChild(void);
-extern void fn_800897D8(void);
-extern void fn_8008AD4C(void);
-extern void fn_8008B140(void);
+extern void node_destroy(void);
+extern void area_updateZoneState(void);
+extern void map_processTrigger(void);
 extern void lockon_updateTarget(void);
 extern void atn_Anim_applyLayerTransform(void);
-extern void fn_800BFAC8(void);
+extern void motion_updateFogAdj(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void str_findChar(void);
@@ -51,7 +51,7 @@ extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_80473F88(void);
+extern void shockwave_freeEmitter(void);
 extern void PSMTXRotRad(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
@@ -162,7 +162,7 @@ lbl_fn_80361CA4_00000048:
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_80361CA4_00000074
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_80361CA4_00000074:
     mr r3, r30
     li r4, 0x0
@@ -185,7 +185,7 @@ lbl_fn_80361CA4_00000090:
 asm void fn_80361D50(void)
 {
     nofralloc
-    b fn_800D3FA4
+    b bloom_processPasses
 }
 
 asm void fn_80361D54(void)
@@ -489,7 +489,7 @@ lbl_fn_8036205C_000004B4:
     stfs f0, 0x20(r1)
     stfs f3, 0x24(r1)
     stfs f6, 0x28(r1)
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f0, 0x10(r1)
     fcmpo cr0, f30, f0
     bge lbl_fn_8036205C_00000590
@@ -623,7 +623,7 @@ asm void fn_80362344(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_80362344_000006EC
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_80362344_000006EC:
     mr r3, r30
     li r4, 0x0
@@ -680,7 +680,7 @@ asm void fn_803623C8(void)
 asm void fn_8036243C(void)
 {
     nofralloc
-    b fn_800D3FA4
+    b bloom_processPasses
 }
 
 asm void fn_80362440(void)
@@ -807,7 +807,7 @@ lbl_fn_80362598_00000944:
     lwz r4, lbl_8087EFB4
     addi r3, r1, 0x8
     addi r5, r31, 0x64
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f0, lbl_808856A0
     lfs f1, 0x10(r1)
     fcmpo cr0, f0, f1
@@ -933,7 +933,7 @@ asm void fn_80362774(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_80362774_00000B1C
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_80362774_00000B1C:
     mr r3, r30
     li r4, 0x0
@@ -1036,7 +1036,7 @@ asm void fn_803627F8(void)
 asm void fn_80362924(void)
 {
     nofralloc
-    b fn_800D3FA4
+    b bloom_processPasses
 }
 
 asm void fn_80362928(void)
@@ -1242,7 +1242,7 @@ lbl_fn_80362B94_00000F44:
     lwz r4, lbl_8087EFB4
     stfs f1, 0x18(r1)
     stfs f0, 0x1c(r1)
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f0, lbl_808856A0
     lfs f1, 0x10(r1)
     fcmpo cr0, f0, f1
@@ -1368,7 +1368,7 @@ asm void fn_80362D90(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_80362D90_00001138
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_80362D90_00001138:
     mr r3, r30
     li r4, 0x0
@@ -1424,7 +1424,7 @@ asm void fn_80362E14(void)
 asm void fn_80362E84(void)
 {
     nofralloc
-    b fn_800D3FA4
+    b bloom_processPasses
 }
 
 asm void fn_80362E88(void)
@@ -1463,7 +1463,7 @@ lbl_fn_80362E8C_0000123C:
     addi r3, r1, 0x8
     lwz r4, lbl_8087EFB4
     addi r5, r5, 0x2c
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f0, lbl_808856A0
     lfs f1, 0x10(r1)
     fcmpo cr0, f0, f1
@@ -1655,7 +1655,7 @@ lbl_fn_80363108_000014EC:
     addi r4, r30, 0xb
     addi r5, r28, 0x34
     addi r6, r31, fn_8036324C@l
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_808856A0
     mr r3, r29
     lfs f2, lbl_808856A4
@@ -1863,7 +1863,7 @@ lbl_fn_80363284_000017DC:
     mr r4, r31
     addi r3, r29, 0x4
     li r5, 0x0
-    bl fn_8008AD4C
+    bl area_updateZoneState
     mr r3, r30
     bl talk_formatQuotedString
     bl str_findChar
@@ -1941,13 +1941,13 @@ lbl_fn_8036354C_000018D4:
     stw r0, 0x3f4(r31)
 lbl_fn_8036354C_000018F4:
     addi r3, r31, 0x4
-    bl fn_8008B140
+    bl map_processTrigger
     cmpwi r3, 0x0
     bne lbl_fn_8036354C_0000191C
     mr r3, r31
     bl fn_803637D4
     addi r3, r31, 0x3ec
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     li r0, 0x2
     stw r0, 0x3f4(r31)
 lbl_fn_8036354C_0000191C:
@@ -2007,7 +2007,7 @@ asm void fn_803635E8(void)
     addi r4, r4, lbl_807774B8@l
     stw r4, 0x308(r1)
     la r4, lbl_8087D710
-    bl fn_8005BCE8
+    bl talk_copySpeakerName
     lis r31, lbl_8074B780@ha
     addi r31, r31, lbl_8074B780@l
 lbl_fn_803635E8_000019F4:
@@ -2039,13 +2039,13 @@ lbl_fn_803635E8_000019F4:
     addi r3, r29, 0x4
     addi r4, r1, 0x208
     li r5, 0x0
-    bl fn_8008AD4C
+    bl area_updateZoneState
     b lbl_fn_803635E8_00001B04
 lbl_fn_803635E8_00001A6C:
     addi r3, r29, 0x4
     addi r4, r1, 0x208
     addi r5, r1, 0x108
-    bl fn_8008AD4C
+    bl area_updateZoneState
     b lbl_fn_803635E8_00001B04
 lbl_fn_803635E8_00001A80:
     mr r3, r30
@@ -2084,7 +2084,7 @@ lbl_fn_803635E8_00001AB0:
     bl atn_Anim_applyLayerTransform
 lbl_fn_803635E8_00001B04:
     addi r3, r1, 0x308
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_803635E8_000019F4
     lwz r0, 0x954(r1)

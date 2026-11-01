@@ -14,7 +14,7 @@ extern void fn_80051CD8(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void node_createNamedChild(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void fn_80097A20(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
@@ -22,7 +22,7 @@ extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void str_calcHash(void);
 extern void fn_80102890(void);
 extern void fn_8011CD84(void);
@@ -35,9 +35,9 @@ extern void fn_801354B4(void);
 extern void fn_80136138(void);
 extern void boss_updatePhaseState(void);
 extern void fn_80139560(void);
-extern void fn_80145334(void);
+extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
-extern void fn_8016F3D0(void);
+extern void battle_canTargetActor(void);
 extern void sound_initGlobalInstances(void);
 extern void res_registerResource(void);
 extern void fn_8032B314(void);
@@ -46,7 +46,7 @@ extern void fn_8032B7F0(void);
 extern void fn_8032BE88(void);
 extern void fn_8032C1EC(void);
 extern void world_getGlobalFlag(void);
-extern void fn_80473F88(void);
+extern void shockwave_freeEmitter(void);
 extern void fn_80541BDC(void);
 extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
@@ -243,7 +243,7 @@ asm void fn_80547878(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_80547878_000001BC
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_80547878_000001BC:
     cmpwi r30, 0x0
     beq lbl_fn_80547878_000001D0
@@ -273,7 +273,7 @@ asm void fn_80547908(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_80547908_00000260
     lwz r0, 0x54(r31)
@@ -493,7 +493,7 @@ lbl_fn_80547B58_000004C8:
     cmplw r28, r0
     blt lbl_fn_80547B58_000004BC
     addi r3, r4, 0x8c
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     b lbl_fn_80547B58_000004EC
 lbl_fn_80547B58_000004E8:
     li r30, 0x1
@@ -646,7 +646,7 @@ asm void fn_80547DC4(void)
     mr r31, r3
     bl fn_80139560
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0
@@ -1820,7 +1820,7 @@ asm void fn_80548E48(void)
     stwu r1, -0x10(r1)
     mflr r0
     stw r0, 0x14(r1)
-    bl fn_800D3FA4
+    bl bloom_processPasses
     neg r0, r3
     or r0, r0, r3
     srwi r3, r0, 31
@@ -2637,7 +2637,7 @@ lbl_fn_80548E74_000022D0:
     mr r3, r16
     mr r4, r22
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     beq lbl_fn_80548E74_000023BC
     lwz r0, 0xd18(r16)

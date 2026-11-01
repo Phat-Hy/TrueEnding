@@ -14,7 +14,7 @@ extern void ref_releaseHandle(void);
 extern void fn_800CFBA0(void);
 extern void str_findChar(void);
 extern void wcs_vformat(void);
-extern void fn_80116FC0(void);
+extern void actor_findSpawnTemplate(void);
 extern void fn_80117214(void);
 extern void actor_spawnActorWithId(void);
 extern void fn_801CF334(void);
@@ -28,7 +28,7 @@ extern void fn_801E6EF0(void);
 extern void fn_801E7D78(void);
 extern void fn_801E7EA8(void);
 extern void fn_801F45F4(void);
-extern void fn_801F48C8(void);
+extern void save_parseSlotStats(void);
 extern void saveSlot_readSummary(void);
 extern void save_computeCrc32(void);
 extern void fn_801F6E78(void);
@@ -716,7 +716,7 @@ lbl_fn_801D7AC0_000008B8:
     mr r5, r25
     addi r25, r4, lbl_8073CA28@l
     addi r4, r25, 0x61
-    bl fn_801F48C8
+    bl save_parseSlotStats
     addi r24, r1, 0x20
     psq_l f1, 0x0(r26), 0, 0
     psq_l f2, 0x8(r26), 0, 0
@@ -726,7 +726,7 @@ lbl_fn_801D7AC0_000008B8:
     bl profile_getMetricValue
     mr r5, r24
     addi r4, r25, 0x68
-    bl fn_801F48C8
+    bl save_parseSlotStats
     lfs f30, lbl_80882AE0
     mr r23, r29
     lfs f31, lbl_80882ADC
@@ -1253,7 +1253,7 @@ lbl_fn_801D80BC_00000FEC:
     lwz r28, lbl_8087F580
     li r3, 0x1
     li r4, 0x111
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     mr r4, r3
     mr r3, r28
     bl fn_804A4294

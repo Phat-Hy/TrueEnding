@@ -21,7 +21,7 @@ extern void fn_8009EE30(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
 extern void str_findChar(void);
-extern void fn_80116FC0(void);
+extern void actor_findSpawnTemplate(void);
 extern void fn_801D082C(void);
 extern void saveSlot_readSummary(void);
 extern void save_computeCrc32(void);
@@ -1353,7 +1353,7 @@ lbl_fn_8051531C_00001158:
     beq lbl_fn_8051531C_000011B8
     li r3, 0x0
     li r4, 0x2742
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lis r4, lbl_8075B7A4@ha
     mr r17, r3
     addi r4, r4, lbl_8075B7A4@l

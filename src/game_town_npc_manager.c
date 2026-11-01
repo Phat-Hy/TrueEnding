@@ -29,7 +29,7 @@ extern void fn_801638A0(void);
 extern void fn_80165F54(void);
 extern void fn_801698E4(void);
 extern void fn_80176548(void);
-extern void fn_80179D44(void);
+extern void actor_getMovementFlags(void);
 extern void world_getGlobalFlag(void);
 extern void fn_803ABFD4(void);
 extern void fn_803AC088(void);
@@ -44,7 +44,7 @@ extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECDotProduct(void);
 extern void PSVECCrossProduct(void);
-extern void fn_8068A850(void);
+extern void std_sin(void);
 extern void std_atan2(void);
 
 /* External data declarations */
@@ -411,7 +411,7 @@ lbl_fn_803CB044_00000480:
     stw r31, 0x100(r1)
     stw r31, 0x104(r1)
     stw r31, 0x108(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     oris r7, r3, 0x8000
     mr r3, r21
     addi r4, r1, 0xc8
@@ -1551,7 +1551,7 @@ asm void fn_803CC3BC(void)
     mr r24, r4
     mr r25, r5
     mr r22, r6
-    bl fn_8068A850
+    bl std_sin
     frsp f31, f1
     lfs f30, 0x620(r22)
     lfs f28, lbl_80885CBC

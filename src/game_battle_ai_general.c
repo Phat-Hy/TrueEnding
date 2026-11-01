@@ -13,15 +13,15 @@ extern void _savegpr_23(void);
 extern void _savegpr_26(void);
 extern void dtor_80013D60(void);
 extern void dtor_80084684(void);
-extern void fn_8003E4A4(void);
-extern void fn_8004212C(void);
+extern void str_initFromCStr(void);
+extern void str_getData(void);
 extern void fn_80043EAC(void);
 extern void Arms_destructor(void);
 extern void Arms_execute(void);
 extern void Arms_slot3(void);
-extern void fn_80057A64(void);
+extern void mission_updateStub(void);
 extern void talk_formatQuotedString(void);
-extern void fn_8005BBF8(void);
+extern void talk_parseQuotes(void);
 extern void fn_80063200(void);
 extern void fn_8006AA20(void);
 extern void mem_alloc(void);
@@ -30,12 +30,12 @@ extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void route_findNextWaypoint(void);
 extern void route_createSegment(void);
-extern void fn_80087E9C(void);
+extern void route_createWaypoint(void);
 extern void fn_80088724(void);
 extern void node_createNamedChild(void);
 extern void fn_8008A4E0(void);
-extern void fn_8008AD4C(void);
-extern void fn_8008B140(void);
+extern void area_updateZoneState(void);
+extern void map_processTrigger(void);
 extern void fn_8008CD60(void);
 extern void fn_800902C0(void);
 extern void atn_Model_findBoneIndex(void);
@@ -50,7 +50,7 @@ extern void str_skipWhitespace(void);
 extern void fn_800E0AA8(void);
 extern void fn_8011D424(void);
 extern void fn_8011F91C(void);
-extern void fn_8011FC10(void);
+extern void skill_findNodeById(void);
 extern void fn_8011FE3C(void);
 extern void fn_801207D4(void);
 extern void fn_801354B4(void);
@@ -60,10 +60,10 @@ extern void task_findEntryById(void);
 extern void fn_80223EE0(void);
 extern void fn_8032AC1C(void);
 extern void fn_8032AF90(void);
-extern void fn_803EC568(void);
-extern void fn_803EC69C(void);
+extern void task_createWorker(void);
+extern void task_destroyWorker(void);
 extern void fn_803EC758(void);
-extern void fn_803EC91C(void);
+extern void task_updateWorker(void);
 extern void fn_803ED610(void);
 extern void fn_803EDCF4(void);
 extern void fn_803EFCA8(void);
@@ -280,7 +280,7 @@ lbl_fn_8043C368_000000D8:
     bne lbl_fn_8043C368_000000F4
     lwz r3, lbl_8087F408
     lwz r4, 0x24(r4)
-    bl fn_8011FC10
+    bl skill_findNodeById
     stw r3, 0x30c(r31)
     b lbl_fn_8043C368_0000010C
 lbl_fn_8043C368_000000F4:
@@ -1535,7 +1535,7 @@ asm void fn_8043D618(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_803EC568
+    bl task_createWorker
     lfs f1, lbl_808869C8
     lis r3, lbl_8078F178@ha
     li r0, 0x0
@@ -1740,7 +1740,7 @@ lbl_fn_8043D6F4_000015AC:
 lbl_fn_8043D6F4_000015C8:
     mr r3, r30
     li r4, 0x0
-    bl fn_803EC69C
+    bl task_destroyWorker
     cmpwi r31, 0x0
     ble lbl_fn_8043D6F4_000015E4
     mr r3, r30
@@ -1773,7 +1773,7 @@ asm void fn_8043D940(void)
     stw r30, 0x18(r1)
     stw r29, 0x14(r1)
     mr r29, r3
-    bl fn_803EC91C
+    bl task_updateWorker
     cmpwi r3, 0x0
     bne lbl_fn_8043D940_000016A4
     li r30, 0x0
@@ -2095,7 +2095,7 @@ asm void fn_8043DD78(void)
     addi r3, r29, 0x114
     bl fn_80223EE0
     addi r3, r1, 0x24
-    bl fn_80057A64
+    bl mission_updateStub
     addi r3, r29, 0x60
     bl boss_getOffset50
     mr r31, r3
@@ -2141,7 +2141,7 @@ lbl_fn_8043DD78_00001B20:
     stw r3, 0x8(r1)
     addi r3, r1, 0x18
     addi r4, r1, 0x30
-    bl fn_8003E4A4
+    bl str_initFromCStr
     mr r3, r29
     addi r4, r1, 0x18
     bl fn_8043E134
@@ -2180,7 +2180,7 @@ lbl_fn_8043DD78_00001B9C:
     bl talk_formatQuotedString
     mr r4, r3
     addi r3, r1, 0xc
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r29, 0x114
     addi r4, r1, 0xc
     bl fn_801207D4
@@ -2252,7 +2252,7 @@ lbl_fn_8043DD78_00001C84:
     stw r3, 0xf8(r29)
 lbl_fn_8043DD78_00001CC8:
     addi r3, r1, 0x130
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_8043DD78_00001AAC
     addi r3, r29, 0x140
@@ -2262,7 +2262,7 @@ lbl_fn_8043DD78_00001CC8:
     b lbl_fn_8043DD78_00001D1C
 lbl_fn_8043DD78_00001CEC:
     addi r3, r29, 0x108
-    bl fn_8004212C
+    bl str_getData
     mr r31, r3
     mr r4, r30
     addi r3, r29, 0x124
@@ -2710,7 +2710,7 @@ lbl_fn_8043E580_000022B0:
     addi r5, r29, 0x6c
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_808869E4
     mr r3, r30
     lfs f2, lbl_808869E8
@@ -2728,7 +2728,7 @@ lbl_fn_8043E580_000022B0:
     addi r5, r29, 0x90
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     mr r3, r30
     addi r4, r31, 0x73
     addi r5, r29, 0x198
@@ -3448,7 +3448,7 @@ lbl_fn_8043F028_00002D90:
     addi r4, r4, lbl_80754498@l
     li r5, 0x0
     addi r4, r4, 0x1
-    bl fn_8008AD4C
+    bl area_updateZoneState
 lbl_fn_8043F028_00002DA8:
     mr r3, r31
     lwz r31, 0xc(r1)
@@ -3544,7 +3544,7 @@ lbl_fn_8043F178_00002EB8:
     cmpwi r3, 0x0
     beq lbl_fn_8043F178_00002EF4
     lwz r3, 0x2a8(r30)
-    bl fn_8008B140
+    bl map_processTrigger
     cmpwi r3, 0x0
     beq lbl_fn_8043F178_00002EF4
     li r31, 0x1

@@ -13,7 +13,7 @@ extern void fn_800A58D0(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CFBA0(void);
 extern void str_findChar(void);
-extern void fn_80116FC0(void);
+extern void actor_findSpawnTemplate(void);
 extern void fn_80117214(void);
 extern void actor_spawnActorWithId(void);
 extern void fn_801CDD9C(void);
@@ -48,7 +48,7 @@ extern void fn_801E6B10(void);
 extern void fn_801E6EF0(void);
 extern void fn_801E6FC8(void);
 extern void fn_801F4728(void);
-extern void fn_801F48C8(void);
+extern void save_parseSlotStats(void);
 extern void saveSlot_readSummary(void);
 extern void save_computeCrc32(void);
 extern void thread_dispatchToQueue(void);
@@ -1526,7 +1526,7 @@ lbl_fn_801D4E74_00001490:
     addi r4, r30, 0x460
     psq_st f1, 0x0(r5), 0, 0
     psq_st f2, 0x8(r5), 0, 0
-    bl fn_801F48C8
+    bl save_parseSlotStats
     lwz r0, 0x90(r1)
     srwi. r0, r0, 31
     beq lbl_fn_801D4E74_000014EC
@@ -1725,7 +1725,7 @@ lbl_fn_801D54C0_00001754:
     lwz r31, lbl_8087F580
     li r3, 0x1
     li r4, 0x105
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     mr r4, r3
     mr r3, r31
     bl fn_804A4294
@@ -1764,7 +1764,7 @@ lbl_fn_801D54C0_000017E4:
     lwz r31, lbl_8087F580
     li r3, 0x1
     li r4, 0x105
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     mr r4, r3
     mr r3, r31
     bl fn_804A4294
@@ -1831,7 +1831,7 @@ lbl_fn_801D54C0_000018DC:
     lwz r31, lbl_8087F580
     li r3, 0x1
     li r4, 0x105
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     mr r4, r3
     mr r3, r31
     bl fn_804A4294
@@ -1851,7 +1851,7 @@ lbl_fn_801D54C0_0000192C:
     lwz r31, lbl_8087F580
     li r3, 0x1
     li r4, 0x106
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     mr r4, r3
     mr r3, r31
     bl fn_804A4294
@@ -1880,7 +1880,7 @@ lbl_fn_801D54C0_00001994:
     lwz r31, lbl_8087F580
     li r3, 0x1
     li r4, 0x105
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     mr r4, r3
     mr r3, r31
     bl fn_804A4294
@@ -1909,7 +1909,7 @@ lbl_fn_801D54C0_00001A00:
     lwz r31, lbl_8087F580
     li r3, 0x1
     li r4, 0x105
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     mr r4, r3
     mr r3, r31
     bl fn_804A4294

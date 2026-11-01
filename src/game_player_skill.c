@@ -7,35 +7,35 @@ extern void dtor_80013D60(void);
 extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
-extern void fn_8003E4A4(void);
+extern void str_initFromCStr(void);
 extern void fn_8004203C(void);
-extern void fn_8004212C(void);
+extern void str_getData(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_80089AD4(void);
-extern void fn_8008B140(void);
+extern void map_processTrigger(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void str_findChar(void);
-extern void fn_80120D24(void);
-extern void fn_80120D34(void);
+extern void equip_getElementPtr8(void);
+extern void equip_getElementPtr0(void);
 extern void fn_80120D44(void);
 extern void fn_80120E38(void);
 extern void fn_80120E48(void);
 extern void fn_80120F4C(void);
 extern void actor_setState(void);
 extern void fn_80219544(void);
-extern void fn_80237518(void);
-extern void fn_802375C4(void);
-extern void fn_80237654(void);
+extern void res_MsgHandle_ctor(void);
+extern void res_Resource_destructor(void);
+extern void res_Resource_unload(void);
 extern void res_MsgHandle_destructor(void);
 extern void fn_8035B808(void);
 extern void fn_8035B824(void);
@@ -85,7 +85,7 @@ void fn_8011FB18(void);
 void fn_8011FB48(void);
 void fn_8011FB98(void);
 void fn_8011FBD8(void);
-void fn_8011FC10(void);
+void skill_findNodeById(void);
 void fn_8011FC38(void);
 void fn_8011FC84(void);
 void fn_8011FD04(void);
@@ -373,7 +373,7 @@ lbl_fn_8011FA18_000002BC:
     srawi. r0, r0, 31
     beq lbl_fn_8011FA18_000002D4
     addi r3, r30, 0xb0
-    bl fn_8008B140
+    bl map_processTrigger
 lbl_fn_8011FA18_000002D4:
     lwz r0, 0x38(r30)
     rlwinm r0, r0, 0, 29, 29
@@ -533,19 +533,19 @@ lbl_fn_8011FBD8_00000484:
     blr
 }
 
-asm void fn_8011FC10(void)
+asm void skill_findNodeById(void)
 {
     nofralloc
     lwz r3, 0x48(r3)
-    b lbl_fn_8011FC10_000004AC
-lbl_fn_8011FC10_0000049C:
+    b lbl_skill_findNodeById_000004AC
+lbl_skill_findNodeById_0000049C:
     lwz r0, 0x58(r3)
     cmpw r4, r0
     beqlr
     lwz r3, 0x14ac(r3)
-lbl_fn_8011FC10_000004AC:
+lbl_skill_findNodeById_000004AC:
     cmpwi r3, 0x0
-    bne lbl_fn_8011FC10_0000049C
+    bne lbl_skill_findNodeById_0000049C
     li r3, 0x0
     blr
 }
@@ -591,7 +591,7 @@ lbl_fn_8011FC84_00000528:
     srawi. r0, r0, 31
     beq lbl_fn_8011FC84_00000540
     addi r3, r30, 0xb0
-    bl fn_8008B140
+    bl map_processTrigger
 lbl_fn_8011FC84_00000540:
     lwz r0, 0x38(r30)
     rlwinm r0, r0, 0, 29, 29
@@ -776,7 +776,7 @@ lbl_fn_8011FE64_00000724:
 asm void fn_8011FEBC(void)
 {
     nofralloc
-    b fn_800D3FA4
+    b bloom_processPasses
 }
 
 asm void fn_8011FEC0(void)
@@ -810,7 +810,7 @@ lbl_fn_8011FEC0_00000780:
 asm void fn_8011FF18(void)
 {
     nofralloc
-    b fn_800D3FA4
+    b bloom_processPasses
 }
 
 asm void fn_8011FF1C(void)
@@ -844,7 +844,7 @@ lbl_fn_8011FF1C_000007DC:
 asm void fn_8011FF74(void)
 {
     nofralloc
-    b fn_800D3FA4
+    b bloom_processPasses
 }
 
 asm void fn_8011FF78(void)
@@ -1005,7 +1005,7 @@ lbl_fn_8011FFF8_00000A20:
     stw r3, 0x2c(r26)
     mr r4, r24
     addi r3, r1, 0x20
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x44
     addi r4, r1, 0x20
     bl fn_801207D4
@@ -1019,7 +1019,7 @@ lbl_fn_8011FFF8_00000A54:
     stw r3, 0x2c(r26)
     mr r4, r24
     addi r3, r1, 0x14
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x38
     addi r4, r1, 0x14
     bl fn_801207D4
@@ -1033,7 +1033,7 @@ lbl_fn_8011FFF8_00000A88:
     stw r3, 0x2c(r26)
     mr r4, r24
     addi r3, r1, 0x8
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x2c
     addi r4, r1, 0x8
     bl fn_801207D4
@@ -1096,14 +1096,14 @@ lbl_fn_8011FFF8_00000B38:
 lbl_fn_8011FFF8_00000B7C:
     mr r4, r24
     addi r3, r1, 0x44
-    bl fn_80120D34
-    bl fn_8004212C
+    bl equip_getElementPtr0
+    bl str_getData
     mr r30, r3
     mr r4, r24
     addi r3, r31, 0xc
-    bl fn_80120D24
+    bl equip_getElementPtr8
     mr r4, r30
-    bl fn_80237654
+    bl res_Resource_unload
     addi r24, r24, 0x1
 lbl_fn_8011FFF8_00000BA8:
     addi r3, r1, 0x44
@@ -1127,8 +1127,8 @@ lbl_fn_8011FFF8_00000BB8:
 lbl_fn_8011FFF8_00000BEC:
     mr r4, r24
     addi r3, r1, 0x38
-    bl fn_80120D34
-    bl fn_8004212C
+    bl equip_getElementPtr0
+    bl str_getData
     mr r30, r3
     mr r4, r24
     addi r3, r31, 0x18
@@ -1158,8 +1158,8 @@ lbl_fn_8011FFF8_00000C28:
 lbl_fn_8011FFF8_00000C5C:
     mr r4, r24
     addi r3, r1, 0x2c
-    bl fn_80120D34
-    bl fn_8004212C
+    bl equip_getElementPtr0
+    bl str_getData
     mr r30, r3
     mr r4, r24
     addi r3, r31, 0x24
@@ -1375,10 +1375,7 @@ lbl_fn_801204A8_00000F44:
     blr
 }
 
-asm void fn_801206E8(void)
-{
-    nofralloc
-    blr
+void fn_801206E8(void) {
 }
 
 asm void fn_801206EC(void)
@@ -1791,12 +1788,12 @@ asm void fn_80120C30(void)
     addi r3, r3, 0x10
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80237518@ha
-    lis r5, fn_802375C4@ha
+    lis r4, res_MsgHandle_ctor@ha
+    lis r5, res_Resource_destructor@ha
     mr r7, r26
     li r6, 0xc
-    addi r4, r4, fn_80237518@l
-    addi r5, r5, fn_802375C4@l
+    addi r4, r4, res_MsgHandle_ctor@l
+    addi r5, r5, res_Resource_destructor@l
     bl runtime_registerStaticObject
     mr r30, r3
     b lbl_fn_80120C30_00001518
@@ -1830,9 +1827,9 @@ lbl_fn_80120C30_00001548:
 lbl_fn_80120C30_00001570:
     cmplw r27, r31
     blt lbl_fn_80120C30_00001548
-    lis r4, fn_802375C4@ha
+    lis r4, res_Resource_destructor@ha
     lwz r3, 0x8(r25)
-    addi r4, r4, fn_802375C4@l
+    addi r4, r4, res_Resource_destructor@l
     bl __destroy_arr
 lbl_fn_80120C30_00001588:
     stw r30, 0x8(r25)

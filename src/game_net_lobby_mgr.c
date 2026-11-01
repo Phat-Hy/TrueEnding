@@ -11,13 +11,13 @@ extern void _savegpr_23(void);
 extern void _savegpr_27(void);
 extern void dtor_80013D60(void);
 extern void dtor_80084684(void);
-extern void fn_8000D114(void);
+extern void vec3_set(void);
 extern void vec3_copy(void);
 extern void fn_800109E0(void);
-extern void fn_80013410(void);
-extern void fn_8003E4A4(void);
+extern void vec3_add(void);
+extern void str_initFromCStr(void);
 extern void fn_8004203C(void);
-extern void fn_8004212C(void);
+extern void str_getData(void);
 extern void fn_80043014(void);
 extern void talk_parseQuotedString(void);
 extern void fn_8006B0C8(void);
@@ -33,8 +33,8 @@ extern void fn_800F80A8(void);
 extern void fn_801125F8(void);
 extern void fn_8012044C(void);
 extern void fn_801495E8(void);
-extern void fn_80237518(void);
-extern void fn_80237654(void);
+extern void res_MsgHandle_ctor(void);
+extern void res_Resource_unload(void);
 extern void res_findResourceSlot(void);
 extern void fn_8023A184(void);
 extern void fn_8030B408(void);
@@ -326,7 +326,7 @@ asm void fn_804985E4(void)
     bl atn_LoadHandle_getName
     mr r4, r3
     addi r3, r1, 0x54
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0xa8
     addi r4, r1, 0x54
     bl fn_8006B0C8
@@ -451,7 +451,7 @@ lbl_fn_804985E4_00000494:
     fmr f2, f30
     addi r3, r1, 0x84
     fmr f3, f31
-    bl fn_8000D114
+    bl vec3_set
     lwz r3, 0x8(r1)
     lwz r3, 0x2c(r3)
     lwz r22, 0x0(r3)
@@ -485,7 +485,7 @@ lbl_fn_804985E4_00000494:
     addi r3, r1, 0x48
     addi r5, r21, 0x124
     addi r4, r4, 0x4
-    bl fn_80013410
+    bl vec3_add
     mr r3, r24
     addi r4, r1, 0x48
     bl fn_80498EAC
@@ -566,7 +566,7 @@ lbl_fn_804985E4_0000061C:
     fmr f2, f30
     addi r3, r1, 0x78
     fmr f3, f31
-    bl fn_8000D114
+    bl vec3_set
     lwz r3, 0x2c(r25)
     lwz r22, 0x0(r3)
     mr r3, r22
@@ -630,7 +630,7 @@ lbl_fn_804985E4_00000740:
     addi r3, r1, 0x3c
     addi r4, r25, 0x4
     addi r5, r21, 0x124
-    bl fn_80013410
+    bl vec3_add
     addi r3, r1, 0xb8
     addi r4, r1, 0x3c
     bl fn_800F80A8
@@ -677,7 +677,7 @@ lbl_fn_804985E4_00000808:
     bl fn_80499734
     addi r3, r1, 0x6c
     addi r4, r23, 0x63
-    bl fn_8003E4A4
+    bl str_initFromCStr
     li r24, 0x0
     b lbl_fn_804985E4_00000AB8
 lbl_fn_804985E4_00000840:
@@ -707,7 +707,7 @@ lbl_fn_804985E4_00000840:
     fmr f2, f31
     addi r3, r1, 0x60
     fmr f3, f30
-    bl fn_8000D114
+    bl vec3_set
     addi r3, r1, 0x148
     bl talk_parseQuotedString
     mr r22, r3
@@ -731,13 +731,13 @@ lbl_fn_804985E4_00000840:
     addi r5, r23, 0x6c
     bl fn_8006D008
     addi r3, r1, 0x24
-    bl fn_8004212C
+    bl str_getData
     mr r22, r3
     mr r4, r24
     addi r3, r21, 0x60
     bl fn_80497864
     mr r4, r22
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r1, 0x24
     li r4, -0x1
     bl dtor_80013D60
@@ -747,7 +747,7 @@ lbl_fn_804985E4_00000840:
     addi r3, r1, 0x18
     addi r4, r25, 0x4
     addi r5, r21, 0x124
-    bl fn_80013410
+    bl vec3_add
     mr r4, r24
     addi r3, r21, 0x60
     bl fn_80497864
@@ -944,10 +944,7 @@ asm void fn_80498EF8(void)
     b PSMTXScale
 }
 
-asm void fn_80498F08(void)
-{
-    nofralloc
-    blr
+void fn_80498F08(void) {
 }
 
 asm void fn_80498F0C(void)
@@ -976,10 +973,7 @@ asm void fn_80498F14(void)
     blr
 }
 
-asm void fn_80498F4C(void)
-{
-    nofralloc
-    blr
+void fn_80498F4C(void) {
 }
 
 asm void fn_80498F50(void)
@@ -1636,7 +1630,7 @@ asm void fn_804997E4(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     li r0, 0x0
     stb r0, 0xc(r31)
     mr r3, r31

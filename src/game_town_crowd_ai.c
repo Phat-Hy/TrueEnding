@@ -12,12 +12,12 @@ extern void mem_alloc(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void fn_800D03AC(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void fn_8011F91C(void);
-extern void fn_8011FC10(void);
+extern void skill_findNodeById(void);
 extern void fn_8011FE3C(void);
 extern void fn_80124B60(void);
 extern void fn_8016E4C4(void);
@@ -449,7 +449,7 @@ lbl_fn_803CCCC0_00000424:
 lbl_fn_803CCCC0_00000434:
     lwz r3, lbl_8087F408
     lwz r4, 0x198(r31)
-    bl fn_8011FC10
+    bl skill_findNodeById
     b lbl_fn_803CCCC0_00000450
 lbl_fn_803CCCC0_00000444:
     lwz r3, lbl_8087F8A0
@@ -1427,7 +1427,7 @@ asm void fn_803CDA5C(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_803CDA5C_000011AC
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_803CDA5C_000011AC:
     mr r3, r30
     li r4, 0x0
@@ -1487,10 +1487,7 @@ lbl_fn_803CDAE4_00001254:
     blr
 }
 
-asm void fn_803CDB64(void)
-{
-    nofralloc
-    blr
+void fn_803CDB64(void) {
 }
 
 asm void fn_803CDB68(void)
@@ -1864,10 +1861,7 @@ lbl_fn_803CDF84_00001760:
     blr
 }
 
-asm void fn_803CE070(void)
-{
-    nofralloc
-    blr
+void fn_803CE070(void) {
 }
 
 asm void fn_803CE074(void)

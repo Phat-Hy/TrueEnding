@@ -32,7 +32,7 @@ extern void save_validateHeader(void);
 extern void saveSlot_readSummary(void);
 extern void save_computeCrc32(void);
 extern void fn_801F6E78(void);
-extern void fn_801F837C(void);
+extern void save_findEntryByName(void);
 extern void fn_801F8598(void);
 extern void thread_findAndNotify(void);
 extern void fn_80201E78(void);
@@ -328,7 +328,7 @@ lbl_fn_8052635C_00000294:
     addi r4, r4, lbl_8075C6C4@l
     mr r3, r31
     addi r4, r4, 0x27d
-    bl fn_801F837C
+    bl save_findEntryByName
 lbl_fn_8052635C_000002DC:
     lwz r3, 0x1c(r28)
     slwi r0, r26, 3
@@ -339,7 +339,7 @@ lbl_fn_8052635C_000002DC:
     addi r4, r4, lbl_8075C6C4@l
     mr r3, r31
     addi r4, r4, 0x289
-    bl fn_801F837C
+    bl save_findEntryByName
     b lbl_fn_8052635C_00000360
 lbl_fn_8052635C_00000308:
     lwz r3, 0x1c(r28)
@@ -351,7 +351,7 @@ lbl_fn_8052635C_00000308:
     addi r27, r27, lbl_8075C6C4@l
     mr r3, r31
     addi r4, r27, 0x27d
-    bl fn_801F837C
+    bl save_findEntryByName
     lwz r0, 0xc(r28)
     addi r4, r26, 0x1
     cmpw r4, r0
@@ -363,7 +363,7 @@ lbl_fn_8052635C_00000308:
     mr r5, r3
     mr r3, r31
     addi r4, r27, 0x289
-    bl fn_801F837C
+    bl save_findEntryByName
 lbl_fn_8052635C_00000360:
     cmpwi r30, 0x0
     beq lbl_fn_8052635C_000003FC

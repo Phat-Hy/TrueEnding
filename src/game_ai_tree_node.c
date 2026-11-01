@@ -14,13 +14,13 @@ extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void wcs_vformat(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8574(void);
+extern void viewport_updateCulling(void);
 extern void clip_calculateFrustum(void);
 extern void fn_80109828(void);
 extern void fn_80139560(void);
-extern void fn_80148990(void);
+extern void quest_ctorRewardItem(void);
 extern void fn_8016D74C(void);
-extern void fn_8016DA4C(void);
+extern void debuff_clearStatus(void);
 extern void actor_setState(void);
 extern void fn_80178208(void);
 extern void fn_801C02F4(void);
@@ -241,9 +241,9 @@ lbl_fn_80257B50_000001F8:
     la r6, lbl_8087D9E0
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     li r5, 0x0
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r6, 0x14
     li r7, 0x8
     bl runtime_registerStaticObject
@@ -355,9 +355,9 @@ lbl_fn_80257B50_00000398:
     addi r3, r3, 0x10
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     mr r7, r30
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r5, 0x0
     li r6, 0x14
     bl runtime_registerStaticObject
@@ -493,9 +493,9 @@ lbl_fn_80257B50_000005AC:
     la r6, lbl_8087D9E0
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     li r5, 0x0
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r6, 0x14
     li r7, 0x8
     bl runtime_registerStaticObject
@@ -606,9 +606,9 @@ lbl_fn_80257B50_0000074C:
     addi r3, r3, 0x10
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     mr r7, r30
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r5, 0x0
     li r6, 0x14
     bl runtime_registerStaticObject
@@ -1262,7 +1262,7 @@ lbl_fn_80258A50_00001114:
     cmpwi r4, 0x0
     beq lbl_fn_80258A50_00001418
     mr r3, r20
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     li r0, 0x1
     stb r0, 0x1d(r25)
     addi r5, r1, 0x2c
@@ -1458,7 +1458,7 @@ lbl_fn_80258A50_000013A8:
     lfd f0, 0x138(r1)
     fsubs f0, f0, f30
     stfs f0, 0xe0(r1)
-    bl fn_800F8574
+    bl viewport_updateCulling
     addi r21, r21, 0x1
     cmpw r21, r22
     blt lbl_fn_80258A50_000011FC

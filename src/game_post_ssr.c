@@ -20,11 +20,11 @@ extern void fn_801092C8(void);
 extern void fn_80109828(void);
 extern void fn_8012D8B8(void);
 extern void fn_8013310C(void);
-extern void fn_80145334(void);
-extern void fn_8015495C(void);
+extern void quest_updateFlow(void);
+extern void equip_applyToCharacter(void);
 extern void fn_80166D3C(void);
 extern void fn_8016CAD0(void);
-extern void fn_8016DA4C(void);
+extern void debuff_clearStatus(void);
 extern void fn_8016E484(void);
 extern void actor_setState(void);
 extern void fn_80176ACC(void);
@@ -196,9 +196,9 @@ asm void fn_802D57B8(void)
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     mr r3, r31
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     li r0, 0x2
     stw r0, 0x58c(r31)
     mr r3, r31
@@ -1807,7 +1807,7 @@ lbl_fn_802D67F8_000018A8:
     stw r17, 0xd18(r22)
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     lfs f2, 0xc(r21)
     mr r3, r22
     psq_l f1, 0x4(r21), 0, 0
@@ -1821,7 +1821,7 @@ lbl_fn_802D67F8_000018A8:
     psq_st f1, 0x534(r22), 0, 0
     stfs f30, 0x58(r1)
     stfs f2, 0x53c(r22)
-    bl fn_80145334
+    bl quest_updateFlow
     addi r20, r20, 0x1
     addi r14, r14, 0x4
 lbl_fn_802D67F8_00001910:

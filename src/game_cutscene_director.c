@@ -5,34 +5,34 @@
 extern void _restgpr_22(void);
 extern void _savegpr_22(void);
 extern void vec3_copy(void);
-extern void fn_8000D3A4(void);
-extern void fn_8001047C(void);
-extern void fn_80011034(void);
+extern void vec3_mag(void);
+extern void vec3_assign(void);
+extern void vec3_toEulerAngles(void);
 extern void fn_80011220(void);
 extern void vec3_sub(void);
-extern void fn_80013410(void);
+extern void vec3_add(void);
 extern void fn_80013484(void);
 extern void fn_8004ECC0(void);
 extern void collision_testLineSegment(void);
-extern void fn_80057A64(void);
+extern void mission_updateStub(void);
 extern void fn_80057A68(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_80097D40(void);
+extern void atn_Anim_getLayerTrack(void);
 extern void atn_Anim_getDuration(void);
 extern void fn_800F72CC(void);
 extern void fn_800F7FD8(void);
 extern void system_getNextSequenceId(void);
-extern void fn_80121F00(void);
+extern void equip_getGlobalManager(void);
 extern void fn_8012A1B8(void);
 extern void fn_8012A288(void);
 extern void fn_8013A194(void);
-extern void fn_8013C38C(void);
+extern void npc_getPosition(void);
 extern void fn_801404F8(void);
 extern void fn_80140500(void);
-extern void fn_80148990(void);
+extern void quest_ctorRewardItem(void);
 extern void fn_802A7910(void);
 extern void fn_802A7964(void);
 extern void fn_80323C18(void);
@@ -182,7 +182,7 @@ lbl_fn_803252E0_0000011C:
     addi r3, r31, 0xb0
     lwz r4, 0x488(r31)
     lfs f29, 0x3a4(r5)
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     beq lbl_fn_803252E0_00000140
     bl atn_Anim_getDuration
@@ -194,7 +194,7 @@ lbl_fn_803252E0_00000144:
     fcmpu cr0, f0, f1
     lwz r4, 0x490(r31)
     addi r3, r31, 0xb0
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     beq lbl_fn_803252E0_00000168
     bl atn_Anim_getDuration
@@ -1005,9 +1005,9 @@ lbl_fn_80325F2C_00000D08:
     la r6, lbl_8087D9E0
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     li r5, 0x0
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r6, 0x14
     li r7, 0x8
     bl runtime_registerStaticObject
@@ -1119,9 +1119,9 @@ lbl_fn_80325F2C_00000EA8:
     addi r3, r3, 0x10
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     mr r7, r30
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r5, 0x0
     li r6, 0x14
     bl runtime_registerStaticObject
@@ -1279,9 +1279,9 @@ lbl_fn_80325F2C_0000110C:
     la r6, lbl_8087D9E0
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     li r5, 0x0
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r6, 0x14
     li r7, 0x8
     bl runtime_registerStaticObject
@@ -1393,9 +1393,9 @@ lbl_fn_80325F2C_000012AC:
     addi r3, r3, 0x10
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     mr r7, r30
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r5, 0x0
     li r6, 0x14
     bl runtime_registerStaticObject
@@ -1585,16 +1585,16 @@ lbl_fn_803267E8_00001584:
     lwz r3, 0x14bc(r3)
     cmpwi r3, 0x0
     beq lbl_fn_803267E8_00001B58
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r1, 0x15c
-    bl fn_8001047C
+    bl vec3_assign
     addi r3, r1, 0x150
     addi r4, r1, 0x15c
     addi r5, r31, 0x528
     bl vec3_sub
     addi r3, r1, 0x150
-    bl fn_8000D3A4
+    bl vec3_mag
     lwz r0, 0x14cc(r31)
     fmr f30, f1
     cmpwi r0, 0x0
@@ -1646,7 +1646,7 @@ lbl_fn_803267E8_0000163C:
     bl fn_80140500
     addi r3, r1, 0x144
     addi r4, r31, 0x528
-    bl fn_8001047C
+    bl vec3_assign
     lfs f1, 0x148(r1)
     addi r3, r1, 0xe4
     lfs f0, lbl_80884F30
@@ -1661,7 +1661,7 @@ lbl_fn_803267E8_0000163C:
     addi r3, r1, 0x138
     addi r4, r1, 0x144
     addi r5, r1, 0xf0
-    bl fn_80013410
+    bl vec3_add
     bl fn_801404F8
     addi r4, r1, 0x1b8
     addi r5, r1, 0x144
@@ -1687,7 +1687,7 @@ lbl_fn_803267E8_0000163C:
     addi r5, r1, 0x144
     bl vec3_sub
     addi r3, r1, 0xc0
-    bl fn_8000D3A4
+    bl vec3_mag
     lfs f0, lbl_80884FCC
     fcmpo cr0, f1, f0
     ble lbl_fn_803267E8_00001770
@@ -1698,7 +1698,7 @@ lbl_fn_803267E8_0000163C:
     addi r3, r1, 0xb4
     stfs f0, 0x1504(r31)
     addi r4, r1, 0x150
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lfs f1, lbl_80884F10
     addi r3, r31, 0x1518
     lfs f2, 0xb8(r1)
@@ -1732,7 +1732,7 @@ lbl_fn_803267E8_00001788:
     bl fn_80140500
     addi r3, r1, 0x12c
     addi r4, r31, 0x528
-    bl fn_8001047C
+    bl vec3_assign
     lfs f1, 0x130(r1)
     addi r3, r1, 0x9c
     lfs f0, lbl_80884F30
@@ -1747,7 +1747,7 @@ lbl_fn_803267E8_00001788:
     addi r3, r1, 0x120
     addi r4, r1, 0x12c
     addi r5, r1, 0xa8
-    bl fn_80013410
+    bl vec3_add
     bl fn_801404F8
     addi r4, r1, 0x168
     addi r5, r1, 0x12c
@@ -1773,7 +1773,7 @@ lbl_fn_803267E8_00001788:
     addi r5, r1, 0x12c
     bl vec3_sub
     addi r3, r1, 0x78
-    bl fn_8000D3A4
+    bl vec3_mag
     lfs f0, lbl_80884FD0
     fcmpo cr0, f1, f0
     ble lbl_fn_803267E8_00001B58
@@ -1784,7 +1784,7 @@ lbl_fn_803267E8_00001788:
     addi r3, r1, 0x6c
     stfs f0, 0x1504(r31)
     addi r4, r1, 0x150
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lfs f1, lbl_80884F10
     addi r3, r31, 0x1518
     lfs f2, 0x70(r1)
@@ -1799,7 +1799,7 @@ lbl_fn_803267E8_000018C0:
     b lbl_fn_803267E8_00001B58
 lbl_fn_803267E8_000018CC:
     addi r3, r1, 0x114
-    bl fn_80057A64
+    bl mission_updateStub
     lwz r3, 0x14bc(r31)
     bl fn_8012A1B8
     lfs f1, 0x4(r3)
@@ -1828,7 +1828,7 @@ lbl_fn_803267E8_00001924:
     bne lbl_fn_803267E8_00001950
     li r0, 0x1
     stw r0, 0x15e4(r31)
-    bl fn_80121F00
+    bl equip_getGlobalManager
     li r4, 0x5a
     li r5, 0x3
     bl world_setLocalFlag
@@ -1852,7 +1852,7 @@ lbl_fn_803267E8_00001950:
     bl vec3_sub
     addi r3, r1, 0x54
     addi r4, r1, 0x48
-    bl fn_80011034
+    bl vec3_toEulerAngles
     addi r3, r31, 0x1518
     addi r4, r1, 0x54
     bl vec3_copy
@@ -1902,7 +1902,7 @@ lbl_fn_803267E8_00001A10:
     bl vec3_sub
     addi r3, r1, 0x30
     addi r4, r1, 0x24
-    bl fn_80011034
+    bl vec3_toEulerAngles
     addi r3, r31, 0x1518
     addi r4, r1, 0x30
     bl vec3_copy
@@ -1920,7 +1920,7 @@ lbl_fn_803267E8_00001A74:
     bl fn_800F7FD8
     addi r3, r1, 0x18
     addi r4, r1, 0xc
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lfs f0, 0x1c(r1)
     fsubs f1, f0, f31
     bl fn_802A7964
@@ -1935,14 +1935,14 @@ lbl_fn_803267E8_00001A74:
     bge lbl_fn_803267E8_00001B58
     addi r3, r1, 0x108
     addi r4, r31, 0x528
-    bl fn_8001047C
+    bl vec3_assign
     lfs f1, 0x10c(r1)
     addi r3, r1, 0xfc
     lfs f0, lbl_80884F30
     addi r4, r1, 0x15c
     fadds f0, f1, f0
     stfs f0, 0x10c(r1)
-    bl fn_8001047C
+    bl vec3_assign
     lfs f1, 0x100(r1)
     lfs f0, lbl_80884F30
     fadds f0, f1, f0

@@ -5,7 +5,7 @@
 extern void OSGetTime(void);
 extern void __register_global_object(void);
 extern void dungeon_initGlobalContext(void);
-extern void fn_800838B8(void);
+extern void town_synchronizedDispatch(void);
 extern void atn_Task_setActive(void);
 extern void wcs_vformat(void);
 extern void fn_8047961C(void);
@@ -15,15 +15,15 @@ extern void fn_804B50C0(void);
 extern void fn_804B6204(void);
 extern void fn_804C2D5C(void);
 extern void fn_804C54FC(void);
-extern void fn_804D818C(void);
+extern void net_voiceCodec_destroy(void);
 extern void fn_804F6E98(void);
 extern void fn_804F7A54(void);
 extern void fn_804FB224(void);
 extern void fn_8050128C(void);
 extern void fn_8050E098(void);
 extern void wcslen(void);
-extern void fn_806A8E40(void);
-extern void fn_806B0E30(void);
+extern void net_getSocket(void);
+extern void net_getMyAid(void);
 
 /* External data declarations */
 extern u8 lbl_807C8AE8[];
@@ -95,7 +95,7 @@ asm void fn_804F4CBC(void)
     la r7, lbl_8087E1B0
     la r8, lbl_8087E1AC
     li r9, 0x0
-    bl fn_800838B8
+    bl town_synchronizedDispatch
     stw r3, lbl_8087F600
 lbl_fn_804F4CBC_00000068:
     lwz r0, lbl_8087F600
@@ -114,7 +114,7 @@ lbl_fn_804F4CBC_00000078:
     la r7, lbl_8087E1B0
     la r8, lbl_8087E1AC
     li r9, 0x0
-    bl fn_800838B8
+    bl town_synchronizedDispatch
     stw r3, lbl_8087F600
 lbl_fn_804F4CBC_000000AC:
     lbz r0, lbl_8087F5F8
@@ -125,9 +125,9 @@ lbl_fn_804F4CBC_000000AC:
     lwz r30, lbl_8087F600
     sth r3, 0xa(r1)
     bne lbl_fn_804F4CBC_000000EC
-    lis r4, fn_804D818C@ha
+    lis r4, net_voiceCodec_destroy@ha
     lis r5, lbl_807C8AE8@ha
-    addi r4, r4, fn_804D818C@l
+    addi r4, r4, net_voiceCodec_destroy@l
     la r3, lbl_8087F5FC
     addi r5, r5, lbl_807C8AE8@l
     bl __register_global_object
@@ -202,7 +202,7 @@ asm void fn_804F4E44(void)
     la r7, lbl_8087E1B0
     la r8, lbl_8087E1AC
     li r9, 0x0
-    bl fn_800838B8
+    bl town_synchronizedDispatch
     stw r3, lbl_8087F600
 lbl_fn_804F4E44_000001D8:
     lwz r29, lbl_8087F600
@@ -321,7 +321,7 @@ asm void fn_804F4FC8(void)
     la r7, lbl_8087E1B0
     la r8, lbl_8087E1AC
     li r9, 0x0
-    bl fn_800838B8
+    bl town_synchronizedDispatch
     stw r3, lbl_8087F600
 lbl_fn_804F4FC8_00000364:
     lwz r28, lbl_8087F600
@@ -338,9 +338,9 @@ lbl_fn_804F4FC8_00000364:
     subfe r30, r7, r3
     sth r5, 0xa(r1)
     bne lbl_fn_804F4FC8_000003BC
-    lis r4, fn_804D818C@ha
+    lis r4, net_voiceCodec_destroy@ha
     lis r5, lbl_807C8AE8@ha
-    addi r4, r4, fn_804D818C@l
+    addi r4, r4, net_voiceCodec_destroy@l
     la r3, lbl_8087F5FC
     addi r5, r5, lbl_807C8AE8@l
     bl __register_global_object
@@ -552,7 +552,7 @@ lbl_fn_804F50E0_00000620:
     beq lbl_fn_804F50E0_00000654
     b lbl_fn_804F50E0_00000678
 lbl_fn_804F50E0_00000654:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r3, r3, 24
     b lbl_fn_804F50E0_00000678
 lbl_fn_804F50E0_00000660:
@@ -561,7 +561,7 @@ lbl_fn_804F50E0_00000660:
     beq lbl_fn_804F50E0_00000670
     b lbl_fn_804F50E0_00000674
 lbl_fn_804F50E0_00000670:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_804F50E0_00000674:
     clrlwi r3, r3, 24
 lbl_fn_804F50E0_00000678:
@@ -676,7 +676,7 @@ lbl_fn_804F50E0_00000794:
     li r0, 0x0
     b lbl_fn_804F50E0_0000081C
 lbl_fn_804F50E0_000007F4:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804F50E0_0000081C
 lbl_fn_804F50E0_00000800:
@@ -686,7 +686,7 @@ lbl_fn_804F50E0_00000800:
     li r3, 0x0
     b lbl_fn_804F50E0_00000818
 lbl_fn_804F50E0_00000814:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_804F50E0_00000818:
     clrlwi r0, r3, 24
 lbl_fn_804F50E0_0000081C:
@@ -734,7 +734,7 @@ lbl_fn_804F50E0_00000884:
     li r0, 0x0
     b lbl_fn_804F50E0_000008DC
 lbl_fn_804F50E0_000008B4:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804F50E0_000008DC
 lbl_fn_804F50E0_000008C0:
@@ -744,7 +744,7 @@ lbl_fn_804F50E0_000008C0:
     li r3, 0x0
     b lbl_fn_804F50E0_000008D8
 lbl_fn_804F50E0_000008D4:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_804F50E0_000008D8:
     clrlwi r0, r3, 24
 lbl_fn_804F50E0_000008DC:
@@ -1131,10 +1131,7 @@ lbl_fn_804F50E0_00000DC8:
     blr
 }
 
-asm void fn_804F5A98(void)
-{
-    nofralloc
-    blr
+void fn_804F5A98(void) {
 }
 
 asm void fn_804F5A9C(void)
@@ -1607,22 +1604,13 @@ lbl_fn_804F5FD0_0000140C:
     blr
 }
 
-asm void fn_804F60D8(void)
-{
-    nofralloc
-    blr
+void fn_804F60D8(void) {
 }
 
-asm void fn_804F60DC(void)
-{
-    nofralloc
-    blr
+void fn_804F60DC(void) {
 }
 
-asm void fn_804F60E0(void)
-{
-    nofralloc
-    blr
+void fn_804F60E0(void) {
 }
 
 asm void fn_804F60E4(void)

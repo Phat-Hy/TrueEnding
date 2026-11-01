@@ -17,17 +17,17 @@ extern void sys_copyString(void);
 extern void fn_8000ECA8(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
-extern void fn_8003E4A4(void);
+extern void str_initFromCStr(void);
 extern void fn_800502A8(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
 extern void talk_formatQuotedString(void);
-extern void fn_8005BBF8(void);
-extern void fn_8005BCE8(void);
-extern void fn_80061824(void);
+extern void talk_parseQuotes(void);
+extern void talk_copySpeakerName(void);
+extern void skill_calcTrajectory(void);
 extern void fn_8006B2D8(void);
-extern void fn_8006EF48(void);
+extern void script_executeOpcode(void);
 extern void fn_80070A70(void);
 extern void fn_80070C98(void);
 extern void mem_alloc(void);
@@ -36,8 +36,8 @@ extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_8008A4E0(void);
 extern void fn_8008A76C(void);
-extern void fn_8008AD4C(void);
-extern void fn_8008B140(void);
+extern void area_updateZoneState(void);
+extern void map_processTrigger(void);
 extern void fn_8008CD60(void);
 extern void fn_800902C0(void);
 extern void atn_Model_findBoneIndex(void);
@@ -47,7 +47,7 @@ extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void str_skipWhitespace(void);
 extern void str_findChar(void);
 extern void fn_8010D770(void);
@@ -76,7 +76,7 @@ extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_80473F88(void);
+extern void shockwave_freeEmitter(void);
 extern void fn_80570A78(void);
 extern void fn_805A6A84(void);
 extern void PSMTXConcat(void);
@@ -167,7 +167,7 @@ void fn_80041D44(void);
 void fn_8004203C(void);
 void fn_800420F4(void);
 void fn_80042108(void);
-void fn_8004212C(void);
+void str_getData(void);
 void fn_80042148(void);
 void fn_8004215C(void);
 void fn_80042218(void);
@@ -452,7 +452,7 @@ asm void AreaEffConfig_execute(void)
     mr r3, r31
     bl fn_80041D44
     addi r3, r31, 0x48
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     lwz r0, 0x38(r31)
     li r3, 0x1
     ori r0, r0, 0x4
@@ -497,7 +497,7 @@ lbl_fn_80041D44_00000348:
     bl talk_parseQuotedString
     mr r4, r3
     addi r3, r1, 0x28
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x28
     bl fn_80042218
     cmpwi r3, 0x0
@@ -594,7 +594,7 @@ lbl_fn_80041D44_0000049C:
     addi r3, r1, 0x60
     bl fn_80042684
     addi r3, r1, 0x28
-    bl fn_8004212C
+    bl str_getData
     bl str_findChar
     stw r3, 0x60(r1)
     addi r3, r1, 0x68
@@ -753,15 +753,15 @@ asm void fn_80042108(void)
     blr
 }
 
-asm void fn_8004212C(void)
+asm void str_getData(void)
 {
     nofralloc
     lwz r0, 0x0(r3)
     srwi. r0, r0, 31
-    bne lbl_fn_8004212C_000006F0
+    bne lbl_str_getData_000006F0
     addi r3, r3, 0x1
     blr
-lbl_fn_8004212C_000006F0:
+lbl_str_getData_000006F0:
     lwz r3, 0x8(r3)
     blr
 }
@@ -2278,7 +2278,7 @@ lbl_ArenaTask_destructor_00001A9C:
 asm void ArenaTask_slot1(void)
 {
     nofralloc
-    b fn_800D3FA4
+    b bloom_processPasses
 }
 
 asm void ArenaTask_execute(void)
@@ -2528,7 +2528,7 @@ lbl_ArenaTask_draw_00001DDC:
     addi r4, r1, 0x8
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lfs f3, lbl_80880844
     fmr f4, f31
     lfs f2, lbl_8088084C
@@ -2547,7 +2547,7 @@ lbl_ArenaTask_draw_00001DDC:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
 lbl_ArenaTask_draw_00001E74:
     lwz r4, 0x2b8(r31)
     cmpwi r4, 0x0
@@ -3294,12 +3294,12 @@ lbl_Arms_execute_00002850:
     mr r3, r31
     bl fn_8004439C
     addi r3, r31, 0x27c
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     li r0, 0x2
     stw r0, 0x284(r31)
 lbl_Arms_execute_00002868:
     addi r3, r31, 0x10
-    bl fn_8008B140
+    bl map_processTrigger
     cmpwi r3, 0x0
     beq lbl_Arms_execute_00002880
     li r3, 0x1
@@ -3415,7 +3415,7 @@ asm void fn_8004439C(void)
     addi r4, r4, lbl_807774B8@l
     stw r4, 0x308(r1)
     la r4, lbl_8087D710
-    bl fn_8005BCE8
+    bl talk_copySpeakerName
     lis r30, lbl_80730E5C@ha
     lfs f31, lbl_80880860
     addi r30, r30, lbl_80730E5C@l
@@ -3448,13 +3448,13 @@ lbl_fn_8004439C_00002A0C:
     addi r3, r31, 0x10
     addi r4, r1, 0x208
     li r5, 0x0
-    bl fn_8008AD4C
+    bl area_updateZoneState
     b lbl_fn_8004439C_00002C44
 lbl_fn_8004439C_00002A84:
     addi r3, r31, 0x10
     addi r4, r1, 0x208
     addi r5, r1, 0x108
-    bl fn_8008AD4C
+    bl area_updateZoneState
     b lbl_fn_8004439C_00002C44
 lbl_fn_8004439C_00002A98:
     mr r3, r29
@@ -3573,7 +3573,7 @@ lbl_fn_8004439C_00002C2C:
     bl res_MsgHandle_destructor
 lbl_fn_8004439C_00002C44:
     addi r3, r1, 0x308
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_8004439C_00002A0C
     lwz r0, 0x29c(r31)

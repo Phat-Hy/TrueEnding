@@ -9,13 +9,13 @@ extern void _savegpr_20(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void fn_80626AA0(void);
-extern void fn_80626C60(void);
+extern void scapi_getConfigItem(void);
 extern void scapi_cleanupContext(void);
 extern void fn_80627180(void);
 extern void fn_80627400(void);
 extern void bta_sys_logEvent(void);
 extern void bta_sys_log(void);
-extern void fn_80629850(void);
+extern void bta_sys_traceDebug(void);
 extern void fn_80629870(void);
 extern void fn_80629890(void);
 extern void fn_80629E20(void);
@@ -383,7 +383,7 @@ asm void fn_806484E8(void)
     mr r6, r26
     addi r3, r3, 0x3
     addi r4, r4, lbl_807B75D0@l
-    bl fn_80629850
+    bl bta_sys_traceDebug
 lbl_fn_806484E8_0000025C:
     cmpwi r29, 0x0
     bne lbl_fn_806484E8_000002C8
@@ -584,7 +584,7 @@ asm void fn_8064879C(void)
     mr r6, r30
     addi r3, r3, 0x3
     addi r4, r4, lbl_807B763C@l
-    bl fn_80629850
+    bl bta_sys_traceDebug
 lbl_fn_8064879C_00000510:
     cmpwi r31, 0x0
     bne lbl_fn_8064879C_00000550
@@ -1653,7 +1653,7 @@ lbl_fn_80649554_0000135C:
     mr r6, r30
     addi r3, r3, 0x3
     addi r4, r4, lbl_807B7850@l
-    bl fn_80629850
+    bl bta_sys_traceDebug
 lbl_fn_80649554_0000138C:
     lwz r12, 0x8c(r31)
     cmpwi r12, 0x0
@@ -2256,7 +2256,7 @@ lbl_fn_80649DC8_00001B38:
     mr r5, r30
     addi r4, r31, 0x1c
     addi r3, r3, 0x1
-    bl fn_80629850
+    bl bta_sys_traceDebug
 lbl_fn_80649DC8_00001B80:
     li r4, 0x0
 lbl_fn_80649DC8_00001B84:
@@ -2333,7 +2333,7 @@ lbl_fn_80649ECC_00001C40:
     mr r5, r29
     addi r4, r31, 0x1c
     addi r3, r3, 0x1
-    bl fn_80629850
+    bl bta_sys_traceDebug
 lbl_fn_80649ECC_00001C88:
     li r4, 0x0
 lbl_fn_80649ECC_00001C8C:
@@ -2410,7 +2410,7 @@ lbl_fn_80649FD4_00001D48:
     mr r5, r29
     addi r4, r31, 0x1c
     addi r3, r3, 0x1
-    bl fn_80629850
+    bl bta_sys_traceDebug
 lbl_fn_80649FD4_00001D90:
     li r4, 0x0
 lbl_fn_80649FD4_00001D94:
@@ -2494,7 +2494,7 @@ lbl_fn_8064A0E0_00001E58:
     mr r5, r28
     addi r4, r31, 0x1c
     addi r3, r3, 0x1
-    bl fn_80629850
+    bl bta_sys_traceDebug
 lbl_fn_8064A0E0_00001EA0:
     li r30, 0x0
 lbl_fn_8064A0E0_00001EA4:
@@ -2577,7 +2577,7 @@ lbl_fn_8064A204_00001F74:
     mr r5, r27
     addi r4, r29, 0x1c
     addi r3, r3, 0x1
-    bl fn_80629850
+    bl bta_sys_traceDebug
 lbl_fn_8064A204_00001FBC:
     li r28, 0x0
 lbl_fn_8064A204_00001FC0:
@@ -2772,7 +2772,7 @@ lbl_fn_8064A4A4_0000221C:
     mr r5, r28
     addi r4, r31, 0x1c
     addi r3, r3, 0x1
-    bl fn_80629850
+    bl bta_sys_traceDebug
 lbl_fn_8064A4A4_00002264:
     li r30, 0x0
 lbl_fn_8064A4A4_00002268:
@@ -2909,7 +2909,7 @@ lbl_fn_8064A638_000023F4:
     mr r6, r28
     addi r4, r30, 0x3c
     lis r3, 0x9
-    bl fn_80629850
+    bl bta_sys_traceDebug
     b lbl_fn_8064A638_00002540
     lbz r0, 0x6d(r31)
     cmpwi r0, 0x0
@@ -2980,7 +2980,7 @@ lbl_fn_8064A638_00002514:
     mr r5, r28
     addi r4, r30, 0x70
     addi r3, r3, 0x3
-    bl fn_80629850
+    bl bta_sys_traceDebug
 lbl_fn_8064A638_00002540:
     lwz r0, 0x64(r1)
     lwz r31, 0x5c(r1)
@@ -3041,7 +3041,7 @@ lbl_fn_8064A84C_000025E8:
     mr r6, r28
     addi r4, r30, 0x3c
     lis r3, 0x9
-    bl fn_80629850
+    bl bta_sys_traceDebug
     b lbl_fn_8064A84C_000026FC
 lbl_fn_8064A84C_00002614:
     lhz r0, 0x0(r29)
@@ -3106,7 +3106,7 @@ lbl_fn_8064A84C_000026D0:
     mr r5, r28
     addi r4, r30, 0x70
     addi r3, r3, 0x3
-    bl fn_80629850
+    bl bta_sys_traceDebug
 lbl_fn_8064A84C_000026FC:
     lwz r0, 0x64(r1)
     lwz r31, 0x5c(r1)
@@ -3162,7 +3162,7 @@ lbl_fn_8064AA08_00002774:
     mr r6, r29
     addi r4, r31, 0x3c
     lis r3, 0x9
-    bl fn_80629850
+    bl bta_sys_traceDebug
     b lbl_fn_8064AA08_00002824
     mr r3, r28
     mr r4, r30
@@ -3188,7 +3188,7 @@ lbl_fn_8064AA08_000027F8:
     mr r5, r29
     addi r4, r31, 0x70
     addi r3, r3, 0x3
-    bl fn_80629850
+    bl bta_sys_traceDebug
 lbl_fn_8064AA08_00002824:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
@@ -3243,7 +3243,7 @@ lbl_fn_8064AB30_0000289C:
     mr r6, r28
     addi r4, r30, 0x3c
     lis r3, 0x9
-    bl fn_80629850
+    bl bta_sys_traceDebug
     b lbl_fn_8064AB30_00002998
     mr r3, r31
     mr r4, r29
@@ -3289,7 +3289,7 @@ lbl_fn_8064AB30_0000296C:
     mr r5, r28
     addi r4, r30, 0x70
     addi r3, r3, 0x3
-    bl fn_80629850
+    bl bta_sys_traceDebug
 lbl_fn_8064AB30_00002998:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
@@ -3375,7 +3375,7 @@ lbl_fn_8064ACA4_00002A8C:
     mr r5, r30
     addi r3, r3, 0x3
     addi r4, r4, lbl_807B7B78@l
-    bl fn_80629850
+    bl bta_sys_traceDebug
 lbl_fn_8064ACA4_00002ABC:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
@@ -3455,7 +3455,7 @@ lbl_fn_8064ADC4_00002BA8:
     mr r5, r31
     addi r3, r3, 0x3
     addi r4, r4, lbl_807B7B78@l
-    bl fn_80629850
+    bl bta_sys_traceDebug
 lbl_fn_8064ADC4_00002BD8:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
@@ -3558,7 +3558,7 @@ lbl_fn_8064AEDC_00002D1C:
     mr r5, r30
     addi r3, r3, 0x3
     addi r4, r4, lbl_807B7B78@l
-    bl fn_80629850
+    bl bta_sys_traceDebug
 lbl_fn_8064AEDC_00002D4C:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
@@ -3596,7 +3596,7 @@ asm void fn_8064B054(void)
 lbl_fn_8064B054_00002DBC:
     li r6, 0x0
 lbl_fn_8064B054_00002DC0:
-    bl fn_80629850
+    bl bta_sys_traceDebug
 lbl_fn_8064B054_00002DC4:
     lhz r4, 0x0(r31)
     cmpwi r4, 0x0
@@ -3838,7 +3838,7 @@ asm void fn_8064B2C8(void)
     mr r6, r31
     lis r3, 0x9
     addi r4, r4, lbl_807B7DD4@l
-    bl fn_80629850
+    bl bta_sys_traceDebug
     b lbl_fn_8064B2C8_00003138
 lbl_fn_8064B2C8_0000310C:
     lis r3, lbl_808238C8@ha
@@ -3889,7 +3889,7 @@ asm void fn_8064B43C(void)
     mr r6, r31
     lis r3, 0x9
     addi r4, r4, lbl_807B7DD4@l
-    bl fn_80629850
+    bl bta_sys_traceDebug
     b lbl_fn_8064B43C_000032D4
     li r4, 0x3
     bl fn_8064E27C
@@ -4019,7 +4019,7 @@ lbl_fn_8064B5D8_00003364:
     mr r6, r4
     addi r4, r7, 0x14
     lis r3, 0x9
-    bl fn_80629850
+    bl bta_sys_traceDebug
     b lbl_fn_8064B5D8_00003490
     lwz r3, 0x6c(r3)
     addi r3, r3, 0x62
@@ -4142,7 +4142,7 @@ lbl_fn_8064B794_00003518:
     mr r6, r4
     addi r4, r7, 0x14
     lis r3, 0x9
-    bl fn_80629850
+    bl bta_sys_traceDebug
     b lbl_fn_8064B794_000035E0
     lwz r3, 0x6c(r3)
     addi r3, r3, 0x62
@@ -4213,7 +4213,7 @@ asm void fn_8064B8E4(void)
     mr r6, r30
     lis r3, 0x9
     addi r4, r4, lbl_807B7DD4@l
-    bl fn_80629850
+    bl bta_sys_traceDebug
     b lbl_fn_8064B8E4_000037CC
     li r4, 0x3
     bl fn_8064E27C
@@ -4294,7 +4294,7 @@ lbl_fn_8064B8E4_000036F0:
     mr r6, r30
     lis r3, 0x9
     addi r4, r4, lbl_807B7DD4@l
-    bl fn_80629850
+    bl bta_sys_traceDebug
     b lbl_fn_8064B8E4_000037CC
 lbl_fn_8064B8E4_000037A0:
     lis r3, lbl_808238C8@ha
@@ -4343,7 +4343,7 @@ asm void fn_8064BAD0(void)
     lbz r5, 0x68(r31)
     lis r3, 0x9
     addi r4, r4, lbl_807B7DD4@l
-    bl fn_80629850
+    bl bta_sys_traceDebug
     b lbl_fn_8064BAD0_000038EC
     bl fn_8064E4A8
     b lbl_fn_8064BAD0_000038EC
@@ -5422,7 +5422,7 @@ asm void fn_8064C904(void)
 lbl_fn_8064C904_00004648:
     clrlslwi r29, r3, 25, 1
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_8064C904_000046B0
@@ -5473,7 +5473,7 @@ asm void fn_8064C9B4(void)
 lbl_fn_8064C9B4_000046F8:
     clrlslwi r29, r3, 25, 1
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_8064C9B4_00004760
@@ -5525,7 +5525,7 @@ asm void fn_8064CA64(void)
 lbl_fn_8064CA64_000047AC:
     clrlslwi r28, r0, 25, 1
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     mr r29, r3
     beq lbl_fn_8064CA64_00004824
@@ -5580,7 +5580,7 @@ asm void fn_8064CB28(void)
 lbl_fn_8064CB28_0000486C:
     clrlslwi r29, r3, 25, 1
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_8064CB28_000048D4
@@ -5745,7 +5745,7 @@ asm void fn_8064CD70(void)
     mr r28, r7
     mr r29, r8
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     beq lbl_fn_8064CD70_00004B54
     neg r0, r27
@@ -5807,7 +5807,7 @@ asm void fn_8064CE58(void)
     stw r30, 0x8(r1)
     mr r30, r3
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     beq lbl_fn_8064CE58_00004BD8
     neg r0, r31
@@ -5846,7 +5846,7 @@ asm void fn_8064CEDC(void)
     stw r30, 0x8(r1)
     mr r30, r3
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     beq lbl_fn_8064CEDC_00004C5C
     neg r0, r31
@@ -5889,7 +5889,7 @@ asm void fn_8064CF60(void)
     mr r27, r5
     mr r29, r6
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     beq lbl_fn_8064CF60_00004D7C
     neg r0, r27
@@ -5968,7 +5968,7 @@ asm void fn_8064D080(void)
     stw r28, 0x10(r1)
     mr r28, r3
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     beq lbl_fn_8064D080_00004E24
     neg r0, r30
@@ -6017,7 +6017,7 @@ asm void fn_8064D130(void)
     mr r30, r6
     mr r31, r7
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     mr r5, r3
     beq lbl_fn_8064D130_00004F48
@@ -6151,7 +6151,7 @@ asm void fn_8064D2F4(void)
 lbl_fn_8064D2F4_0000503C:
     clrlslwi r30, r0, 25, 1
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_8064D2F4_000050B0
@@ -6305,7 +6305,7 @@ lbl_fn_8064D3B4_00005250:
     blt lbl_fn_8064D3B4_00005280
     addi r4, r31, 0x10
     lis r3, 0x9
-    bl fn_80629850
+    bl bta_sys_traceDebug
 lbl_fn_8064D3B4_00005280:
     li r3, 0x32
     b lbl_fn_8064D3B4_00005620
@@ -6630,7 +6630,7 @@ lbl_fn_8064D928_000056AC:
     lbz r5, 0x3(r30)
     addi r4, r7, 0x78
     lis r3, 0x9
-    bl fn_80629850
+    bl bta_sys_traceDebug
 lbl_fn_8064D928_000056D0:
     mr r3, r29
     bl scapi_cleanupContext
@@ -6987,7 +6987,7 @@ lbl_fn_8064D928_00005BD0:
     cmpwi r31, 0x0
     beq lbl_fn_8064D928_00005C40
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     beq lbl_fn_8064D928_00005C40
     li r0, 0xc

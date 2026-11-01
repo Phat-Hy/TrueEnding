@@ -13,13 +13,13 @@ extern void str_findChar(void);
 extern void fn_80109828(void);
 extern void fn_8011F8F4(void);
 extern void fn_8011F91C(void);
-extern void fn_8011FC10(void);
+extern void skill_findNodeById(void);
 extern void fn_8011FE3C(void);
-extern void fn_80145334(void);
+extern void quest_updateFlow(void);
 extern void fn_8015E7A0(void);
 extern void fn_80171420(void);
 extern void fn_80171DB0(void);
-extern void fn_801765D8(void);
+extern void battle_awardExp(void);
 extern void fn_8018059C(void);
 extern void fn_8018120C(void);
 extern void fn_80181284(void);
@@ -165,7 +165,7 @@ lbl_fn_803A5118_0000007C:
     b lbl_fn_803A5118_000000D0
 lbl_fn_803A5118_000000B4:
     lwz r3, lbl_8087F408
-    bl fn_8011FC10
+    bl skill_findNodeById
     mr r29, r3
     b lbl_fn_803A5118_000000D0
 lbl_fn_803A5118_000000C4:
@@ -190,7 +190,7 @@ lbl_fn_803A5118_000000D0:
     b lbl_fn_803A5118_0000022C
 lbl_fn_803A5118_0000010C:
     mr r3, r29
-    bl fn_801765D8
+    bl battle_awardExp
     b lbl_fn_803A5118_0000022C
 lbl_fn_803A5118_00000118:
     lwz r0, 0x38(r29)
@@ -230,7 +230,7 @@ lbl_fn_803A5118_00000118:
     bl atn_Anim_getLayerDuration
     stfs f1, 0x2e4(r29)
     mr r3, r29
-    bl fn_80145334
+    bl quest_updateFlow
     lwz r0, 0x38(r29)
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0x38(r29)
@@ -433,7 +433,7 @@ lbl_fn_803A54C0_0000042C:
 lbl_fn_803A54C0_00000468:
     lwz r3, lbl_8087F408
     mr r4, r0
-    bl fn_8011FC10
+    bl skill_findNodeById
     mr r29, r3
     b lbl_fn_803A54C0_0000048C
 lbl_fn_803A54C0_0000047C:
@@ -549,7 +549,7 @@ lbl_fn_803A5650_000005C8:
     b lbl_fn_803A5650_0000061C
 lbl_fn_803A5650_00000600:
     lwz r3, lbl_8087F408
-    bl fn_8011FC10
+    bl skill_findNodeById
     mr r28, r3
     b lbl_fn_803A5650_0000061C
 lbl_fn_803A5650_00000610:
@@ -1802,7 +1802,7 @@ lbl_fn_803A6744_000016B8:
     b lbl_fn_803A6744_0000170C
 lbl_fn_803A6744_000016F0:
     lwz r3, lbl_8087F408
-    bl fn_8011FC10
+    bl skill_findNodeById
     mr r6, r3
     b lbl_fn_803A6744_0000170C
 lbl_fn_803A6744_00001700:

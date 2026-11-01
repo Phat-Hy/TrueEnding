@@ -15,11 +15,11 @@ extern void fn_8004B290(void);
 extern void fn_8004B338(void);
 extern void fn_8005E7F4(void);
 extern void fn_80060D58(void);
-extern void fn_80061824(void);
-extern void fn_800697D8(void);
+extern void skill_calcTrajectory(void);
+extern void boss_recordDamage(void);
 extern void fn_8006A250(void);
 extern void fn_8006A5A8(void);
-extern void fn_8006EF48(void);
+extern void script_executeOpcode(void);
 extern void fn_80076FF8(void);
 extern void fn_80079044(void);
 extern void mem_alloc(void);
@@ -27,9 +27,9 @@ extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void fn_80087858(void);
 extern void route_createSegment(void);
-extern void fn_80087E9C(void);
+extern void route_createWaypoint(void);
 extern void node_createNamedChild(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void fn_800BC2E0(void);
 extern void fn_800C16B4(void);
 extern void fn_800C1A1C(void);
@@ -41,7 +41,7 @@ extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void fn_801F0544(void);
 extern void save_validateHeader(void);
 extern void fn_801FEB9C(void);
@@ -462,7 +462,7 @@ lbl_fn_805319C8_000003E8:
     lfs f2, lbl_80887B30
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lwz r0, 0xc(r26)
     lfs f20, lbl_80887B30
     cmpwi r0, 0x0
@@ -517,7 +517,7 @@ lbl_fn_805319C8_00000478:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lfs f6, lbl_80887B30
     fmr f1, f20
     lfs f4, 0x8(r26)
@@ -534,7 +534,7 @@ lbl_fn_805319C8_00000478:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lwz r3, lbl_8087EEB0
     stw r28, 0xa0(r3)
 lbl_fn_805319C8_00000510:
@@ -1388,7 +1388,7 @@ lbl_spectateManager_init_0000118C:
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_spectateManager_init_000011B0
-    bl fn_800897D8
+    bl node_destroy
 lbl_spectateManager_init_000011B0:
     addic. r4, r30, 0x2e4
     beq lbl_spectateManager_init_000011DC
@@ -1696,7 +1696,7 @@ lbl_spectateManager_update_000015F4:
     cmpwi r4, 0x1
     bne lbl_spectateManager_update_00001774
     mr r3, r30
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_spectateManager_update_000021FC
     li r3, 0x0
@@ -1794,7 +1794,7 @@ lbl_spectateManager_update_00001774:
     bne lbl_spectateManager_update_00001D1C
     mr r3, r30
     li r26, 0x1
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_spectateManager_update_000017C4
     addi r3, r30, 0x268
@@ -2347,7 +2347,7 @@ lbl_spectateManager_update_00001FC8:
     addi r5, r30, 0x31c
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_80887C04
     mr r3, r29
     lfs f2, lbl_80887C08
@@ -2356,7 +2356,7 @@ lbl_spectateManager_update_00001FC8:
     addi r5, r30, 0x328
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_80887BB4
     mr r3, r29
     lfs f2, lbl_80887C0C
@@ -2434,7 +2434,7 @@ lbl_spectateManager_update_00002108:
     bl sprintf
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x50
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_spectateManager_update_00002160:
     addi r26, r26, 0x10
     addi r31, r31, 0x1

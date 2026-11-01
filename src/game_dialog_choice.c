@@ -3,11 +3,11 @@
 
 /* External function declarations */
 extern void __register_global_object(void);
-extern void fn_8003EFB0(void);
+extern void ui_destroyWidget(void);
 extern void fn_80044E0C(void);
 extern void fn_800457A4(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_80097D40(void);
+extern void atn_Anim_getLayerTrack(void);
 extern void fn_8010C00C(void);
 extern void fn_8012B988(void);
 extern void fn_8013407C(void);
@@ -44,7 +44,7 @@ extern u32 lbl_808819A4;
 extern u32 lbl_80881A0C;
 
 /* Function declarations */
-void fn_8014DEE4(void);
+void dialog_selectChoice(void);
 void fn_8014EE48(void);
 void fn_8014EEC4(void);
 void fn_8014EF48(void);
@@ -53,7 +53,7 @@ void fn_8014F4FC(void);
 void fn_8014F5D4(void);
 void fn_8014F698(void);
 
-asm void fn_8014DEE4(void)
+asm void dialog_selectChoice(void)
 {
     nofralloc
     stwu r1, -0x1e0(r1)
@@ -69,80 +69,80 @@ asm void fn_8014DEE4(void)
     mr r28, r4
     lwz r7, 0x650(r3)
     cmpwi r7, 0x0
-    beq lbl_fn_8014DEE4_00000F44
+    beq lbl_dialog_selectChoice_00000F44
     cmpw r4, r7
-    bge lbl_fn_8014DEE4_00000F44
+    bge lbl_dialog_selectChoice_00000F44
     lwz r0, lbl_8087F610
     cmpwi r0, 0x0
-    beq lbl_fn_8014DEE4_000000B8
+    beq lbl_dialog_selectChoice_000000B8
     lwz r5, 0x5c(r3)
     lwz r0, 0x11c(r5)
     cmpwi r0, 0x2
-    bne lbl_fn_8014DEE4_000000B8
+    bne lbl_dialog_selectChoice_000000B8
     cmplwi r7, 0x2
-    ble lbl_fn_8014DEE4_000000B8
+    ble lbl_dialog_selectChoice_000000B8
     cmpwi r4, 0x1
-    bne lbl_fn_8014DEE4_0000007C
+    bne lbl_dialog_selectChoice_0000007C
     lwz r5, 0x658(r3)
     lwz r0, 0x4(r5)
     cmpwi r0, 0x0
-    beq lbl_fn_8014DEE4_00000094
-lbl_fn_8014DEE4_0000007C:
+    beq lbl_dialog_selectChoice_00000094
+lbl_dialog_selectChoice_0000007C:
     cmpwi r4, 0x0
-    bne lbl_fn_8014DEE4_000000B8
+    bne lbl_dialog_selectChoice_000000B8
     lwz r5, 0x65c(r3)
     lwz r0, 0x4(r5)
     cmpwi r0, 0x0
-    bne lbl_fn_8014DEE4_000000B8
-lbl_fn_8014DEE4_00000094:
+    bne lbl_dialog_selectChoice_000000B8
+lbl_dialog_selectChoice_00000094:
     lwz r5, 0x658(r3)
     cmpwi r4, 0x0
     lwz r0, 0x65c(r3)
     stw r0, 0x658(r3)
     stw r5, 0x65c(r3)
-    bne lbl_fn_8014DEE4_000000B0
-    b lbl_fn_8014DEE4_000000B4
-lbl_fn_8014DEE4_000000B0:
+    bne lbl_dialog_selectChoice_000000B0
+    b lbl_dialog_selectChoice_000000B4
+lbl_dialog_selectChoice_000000B0:
     li r0, 0x0
-lbl_fn_8014DEE4_000000B4:
+lbl_dialog_selectChoice_000000B4:
     stw r0, 0x64c(r3)
-lbl_fn_8014DEE4_000000B8:
+lbl_dialog_selectChoice_000000B8:
     lwz r3, 0x648(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_8014DEE4_000000CC
+    beq lbl_dialog_selectChoice_000000CC
     li r4, 0x1
     bl fn_80044E0C
-lbl_fn_8014DEE4_000000CC:
+lbl_dialog_selectChoice_000000CC:
     lwz r3, 0x64c(r30)
     cmpwi r3, 0x0
-    beq lbl_fn_8014DEE4_000000E0
+    beq lbl_dialog_selectChoice_000000E0
     li r4, 0x1
     bl fn_80044E0C
-lbl_fn_8014DEE4_000000E0:
+lbl_dialog_selectChoice_000000E0:
     slwi r0, r28, 2
     stw r28, 0x674(r30)
     add r3, r30, r0
     cmpwi r28, 0x0
     lwz r0, 0x654(r3)
     stw r0, 0x648(r30)
-    bne lbl_fn_8014DEE4_00000128
+    bne lbl_dialog_selectChoice_00000128
     lwz r3, 0x678(r30)
     cmpwi r3, 0x0
-    beq lbl_fn_8014DEE4_00000128
+    beq lbl_dialog_selectChoice_00000128
     lwz r12, 0x0(r3)
     lwz r12, 0xc(r12)
     mtctr r12
     bctrl
     cmpwi r3, 0x0
-    bne lbl_fn_8014DEE4_00000128
+    bne lbl_dialog_selectChoice_00000128
     lwz r0, 0x678(r30)
     stw r0, 0x648(r30)
-lbl_fn_8014DEE4_00000128:
+lbl_dialog_selectChoice_00000128:
     cmpwi r29, 0x0
-    bne lbl_fn_8014DEE4_00000F44
+    bne lbl_dialog_selectChoice_00000F44
     lwz r7, 0xd1c(r30)
     cmpwi r7, 0x0
-    beq lbl_fn_8014DEE4_000001D8
+    beq lbl_dialog_selectChoice_000001D8
     lwz r0, 0x12a8(r7)
     mr r5, r7
     lwz r6, 0x1028(r7)
@@ -150,103 +150,103 @@ lbl_fn_8014DEE4_00000128:
     extrwi r0, r0, 1, 15
     cntlzw r0, r0
     srwi r3, r0, 5
-    b lbl_fn_8014DEE4_00000178
-lbl_fn_8014DEE4_0000015C:
+    b lbl_dialog_selectChoice_00000178
+lbl_dialog_selectChoice_0000015C:
     lwz r0, 0xfe8(r5)
     cmplw r0, r30
-    bne lbl_fn_8014DEE4_00000170
+    bne lbl_dialog_selectChoice_00000170
     li r0, 0x1
-    b lbl_fn_8014DEE4_00000194
-lbl_fn_8014DEE4_00000170:
+    b lbl_dialog_selectChoice_00000194
+lbl_dialog_selectChoice_00000170:
     addi r5, r5, 0x4
     addi r4, r4, 0x1
-lbl_fn_8014DEE4_00000178:
+lbl_dialog_selectChoice_00000178:
     cmpwi r3, 0x0
     mr r0, r6
-    bne lbl_fn_8014DEE4_00000188
+    bne lbl_dialog_selectChoice_00000188
     slwi r0, r6, 1
-lbl_fn_8014DEE4_00000188:
+lbl_dialog_selectChoice_00000188:
     cmpw r4, r0
-    blt lbl_fn_8014DEE4_0000015C
+    blt lbl_dialog_selectChoice_0000015C
     li r0, 0x0
-lbl_fn_8014DEE4_00000194:
+lbl_dialog_selectChoice_00000194:
     cmpwi r0, 0x0
-    beq lbl_fn_8014DEE4_000001D8
+    beq lbl_dialog_selectChoice_000001D8
     li r0, 0x10
     mr r4, r7
     li r3, 0x0
     mtctr r0
-lbl_fn_8014DEE4_000001AC:
+lbl_dialog_selectChoice_000001AC:
     lwz r0, 0xfe8(r4)
     cmplw r0, r30
-    bne lbl_fn_8014DEE4_000001CC
+    bne lbl_dialog_selectChoice_000001CC
     slwi r0, r3, 2
     li r4, 0x0
     add r3, r7, r0
     stw r4, 0xfe8(r3)
-    b lbl_fn_8014DEE4_000001D8
-lbl_fn_8014DEE4_000001CC:
+    b lbl_dialog_selectChoice_000001D8
+lbl_dialog_selectChoice_000001CC:
     addi r4, r4, 0x4
     addi r3, r3, 0x1
-    bdnz lbl_fn_8014DEE4_000001AC
-lbl_fn_8014DEE4_000001D8:
+    bdnz lbl_dialog_selectChoice_000001AC
+lbl_dialog_selectChoice_000001D8:
     lwz r3, 0x648(r30)
     lwz r0, 0x4(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_8014DEE4_00000238
+    bne lbl_dialog_selectChoice_00000238
     lwz r3, 0x5c(r30)
     lwz r0, 0x11c(r3)
     cmpwi r0, 0x2
-    bne lbl_fn_8014DEE4_00000238
+    bne lbl_dialog_selectChoice_00000238
     lwz r0, 0x650(r30)
     cmplwi r0, 0x2
-    blt lbl_fn_8014DEE4_00000238
+    blt lbl_dialog_selectChoice_00000238
     lwz r3, 0x67c(r30)
     lwz r0, 0x658(r30)
     cmpwi r3, 0x0
     stw r0, 0x64c(r30)
-    beq lbl_fn_8014DEE4_00000238
+    beq lbl_dialog_selectChoice_00000238
     lwz r12, 0x0(r3)
     lwz r12, 0xc(r12)
     mtctr r12
     bctrl
     cmpwi r3, 0x0
-    bne lbl_fn_8014DEE4_00000238
+    bne lbl_dialog_selectChoice_00000238
     lwz r0, 0x67c(r30)
     stw r0, 0x64c(r30)
-lbl_fn_8014DEE4_00000238:
+lbl_dialog_selectChoice_00000238:
     addi r3, r30, 0x7d4
     bl fn_8012B988
     lwz r3, lbl_8087F9E8
     cmpwi r3, 0x0
-    beq lbl_fn_8014DEE4_00000254
+    beq lbl_dialog_selectChoice_00000254
     mr r4, r30
     bl fn_8059C088
-lbl_fn_8014DEE4_00000254:
+lbl_dialog_selectChoice_00000254:
     addi r3, r30, 0x7d4
     bl fn_8013407C
     lwz r3, lbl_8087F048
     cmpwi r3, 0x0
-    beq lbl_fn_8014DEE4_00000270
+    beq lbl_dialog_selectChoice_00000270
     mr r4, r30
     bl fn_8010C00C
-lbl_fn_8014DEE4_00000270:
+lbl_dialog_selectChoice_00000270:
     cmpwi r31, 0x0
-    bne lbl_fn_8014DEE4_00000C08
+    bne lbl_dialog_selectChoice_00000C08
     lwz r3, 0x648(r30)
     lwz r0, 0x4(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_8014DEE4_0000029C
+    beq lbl_dialog_selectChoice_0000029C
     cmpwi r0, 0x1
-    beq lbl_fn_8014DEE4_00000698
+    beq lbl_dialog_selectChoice_00000698
     cmpwi r0, 0x2
-    beq lbl_fn_8014DEE4_00000840
-    b lbl_fn_8014DEE4_000009D0
-lbl_fn_8014DEE4_0000029C:
+    beq lbl_dialog_selectChoice_00000840
+    b lbl_dialog_selectChoice_000009D0
+lbl_dialog_selectChoice_0000029C:
     lwz r3, 0x5c(r30)
     lwz r0, 0x11c(r3)
     cmpwi r0, 0x2
-    bne lbl_fn_8014DEE4_00000440
+    bne lbl_dialog_selectChoice_00000440
     mr r3, r30
     li r4, 0x0
     li r5, 0x4
@@ -347,23 +347,23 @@ lbl_fn_8014DEE4_0000029C:
     li r4, 0x18
     li r5, 0x15f
     bl dialog_setScriptSlot
-    b lbl_fn_8014DEE4_000009D0
-lbl_fn_8014DEE4_00000440:
+    b lbl_dialog_selectChoice_000009D0
+lbl_dialog_selectChoice_00000440:
     lwz r3, 0x50(r30)
     bl task_mapIdToQueue
     cmpwi r3, 0x0
-    bne lbl_fn_8014DEE4_00000464
+    bne lbl_dialog_selectChoice_00000464
     mr r3, r30
     li r4, 0x0
     li r5, 0x5
     bl dialog_setScriptSlot
-    b lbl_fn_8014DEE4_00000474
-lbl_fn_8014DEE4_00000464:
+    b lbl_dialog_selectChoice_00000474
+lbl_dialog_selectChoice_00000464:
     mr r3, r30
     li r4, 0x0
     li r5, 0x3
     bl dialog_setScriptSlot
-lbl_fn_8014DEE4_00000474:
+lbl_dialog_selectChoice_00000474:
     mr r3, r30
     li r4, 0x1
     li r5, 0x15
@@ -440,7 +440,7 @@ lbl_fn_8014DEE4_00000474:
     lwz r3, 0x274(r3)
     lwz r0, 0x7c(r3)
     cmpwi r0, 0x1
-    bne lbl_fn_8014DEE4_0000060C
+    bne lbl_dialog_selectChoice_0000060C
     mr r3, r30
     li r4, 0x13
     li r5, 0x165
@@ -465,28 +465,28 @@ lbl_fn_8014DEE4_00000474:
     li r4, 0x18
     li r5, 0x169
     bl dialog_setScriptSlot
-    b lbl_fn_8014DEE4_000009D0
-lbl_fn_8014DEE4_0000060C:
+    b lbl_dialog_selectChoice_000009D0
+lbl_dialog_selectChoice_0000060C:
     mr r3, r30
     li r4, 0x13
     li r5, 0x156
     bl dialog_setScriptSlot
     addi r3, r30, 0xb0
     li r4, 0x157
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
-    beq lbl_fn_8014DEE4_00000644
+    beq lbl_dialog_selectChoice_00000644
     mr r3, r30
     li r4, 0x14
     li r5, 0x157
     bl dialog_setScriptSlot
-    b lbl_fn_8014DEE4_00000654
-lbl_fn_8014DEE4_00000644:
+    b lbl_dialog_selectChoice_00000654
+lbl_dialog_selectChoice_00000644:
     mr r3, r30
     li r4, 0x14
     li r5, 0x156
     bl dialog_setScriptSlot
-lbl_fn_8014DEE4_00000654:
+lbl_dialog_selectChoice_00000654:
     mr r3, r30
     li r4, 0x16
     li r5, 0x15c
@@ -503,8 +503,8 @@ lbl_fn_8014DEE4_00000654:
     li r4, 0x18
     li r5, 0x15f
     bl dialog_setScriptSlot
-    b lbl_fn_8014DEE4_000009D0
-lbl_fn_8014DEE4_00000698:
+    b lbl_dialog_selectChoice_000009D0
+lbl_dialog_selectChoice_00000698:
     mr r3, r30
     li r4, 0x0
     li r5, 0x0
@@ -525,9 +525,9 @@ lbl_fn_8014DEE4_00000698:
     bl task_mapIdToQueue
     cmpwi r3, 0x0
     li r5, 0x25
-    bne lbl_fn_8014DEE4_000006F0
+    bne lbl_dialog_selectChoice_000006F0
     li r5, 0x26
-lbl_fn_8014DEE4_000006F0:
+lbl_dialog_selectChoice_000006F0:
     mr r3, r30
     li r4, 0x4
     bl dialog_setScriptSlot
@@ -611,8 +611,8 @@ lbl_fn_8014DEE4_000006F0:
     li r4, 0x18
     li r5, 0x15f
     bl dialog_setScriptSlot
-    b lbl_fn_8014DEE4_000009D0
-lbl_fn_8014DEE4_00000840:
+    b lbl_dialog_selectChoice_000009D0
+lbl_dialog_selectChoice_00000840:
     mr r3, r30
     li r4, 0x0
     li r5, 0x1
@@ -713,11 +713,11 @@ lbl_fn_8014DEE4_00000840:
     li r4, 0x18
     li r5, 0x15f
     bl dialog_setScriptSlot
-lbl_fn_8014DEE4_000009D0:
+lbl_dialog_selectChoice_000009D0:
     lwz r3, 0x5c(r30)
     lwz r0, 0x11c(r3)
     cmpwi r0, 0x2
-    bne lbl_fn_8014DEE4_00000A44
+    bne lbl_dialog_selectChoice_00000A44
     mr r3, r30
     li r4, 0x19
     li r5, 0x1c4
@@ -742,11 +742,11 @@ lbl_fn_8014DEE4_000009D0:
     li r4, 0x1e
     li r5, 0x1d1
     bl dialog_setScriptSlot
-    b lbl_fn_8014DEE4_00000C00
-lbl_fn_8014DEE4_00000A44:
+    b lbl_dialog_selectChoice_00000C00
+lbl_dialog_selectChoice_00000A44:
     lwz r0, 0x690(r30)
     cmpwi r0, 0x0
-    beq lbl_fn_8014DEE4_00000AB4
+    beq lbl_dialog_selectChoice_00000AB4
     mr r3, r30
     li r4, 0x19
     li r5, 0x1c2
@@ -771,13 +771,13 @@ lbl_fn_8014DEE4_00000A44:
     li r4, 0x1e
     li r5, 0x1cd
     bl dialog_setScriptSlot
-    b lbl_fn_8014DEE4_00000C00
-lbl_fn_8014DEE4_00000AB4:
+    b lbl_dialog_selectChoice_00000C00
+lbl_dialog_selectChoice_00000AB4:
     lwz r3, 0x648(r30)
     lwz r3, 0x274(r3)
     lwz r0, 0x7c(r3)
     cmpwi r0, 0x1
-    bne lbl_fn_8014DEE4_00000B2C
+    bne lbl_dialog_selectChoice_00000B2C
     mr r3, r30
     li r4, 0x19
     li r5, 0x1c4
@@ -802,12 +802,12 @@ lbl_fn_8014DEE4_00000AB4:
     li r4, 0x1e
     li r5, 0x1d1
     bl dialog_setScriptSlot
-    b lbl_fn_8014DEE4_00000C00
-lbl_fn_8014DEE4_00000B2C:
+    b lbl_dialog_selectChoice_00000C00
+lbl_dialog_selectChoice_00000B2C:
     lwz r3, 0x50(r30)
     subis r0, r3, 0x1
     cmplwi r0, 0x8709
-    bne lbl_fn_8014DEE4_00000BA0
+    bne lbl_dialog_selectChoice_00000BA0
     mr r3, r30
     li r4, 0x19
     li r5, 0x2
@@ -832,8 +832,8 @@ lbl_fn_8014DEE4_00000B2C:
     li r4, 0x1e
     li r5, 0x14
     bl dialog_setScriptSlot
-    b lbl_fn_8014DEE4_00000C00
-lbl_fn_8014DEE4_00000BA0:
+    b lbl_dialog_selectChoice_00000C00
+lbl_dialog_selectChoice_00000BA0:
     mr r3, r30
     li r4, 0x19
     li r5, 0x1c0
@@ -858,13 +858,13 @@ lbl_fn_8014DEE4_00000BA0:
     li r4, 0x1e
     li r5, 0x1c9
     bl dialog_setScriptSlot
-lbl_fn_8014DEE4_00000C00:
+lbl_dialog_selectChoice_00000C00:
     mr r3, r30
     bl fn_8014FD30
-lbl_fn_8014DEE4_00000C08:
+lbl_dialog_selectChoice_00000C08:
     lwz r0, 0x648(r30)
     cmpwi r0, 0x0
-    beq lbl_fn_8014DEE4_00000F44
+    beq lbl_dialog_selectChoice_00000F44
     lis r4, lbl_80737A9C@ha
     addi r3, r30, 0xb0
     addi r4, r4, lbl_80737A9C@l
@@ -872,14 +872,14 @@ lbl_fn_8014DEE4_00000C08:
     addi r4, r4, 0x34f
     bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
-    bge lbl_fn_8014DEE4_00000C3C
+    bge lbl_dialog_selectChoice_00000C3C
     li r0, 0x0
-    b lbl_fn_8014DEE4_00000C48
-lbl_fn_8014DEE4_00000C3C:
+    b lbl_dialog_selectChoice_00000C48
+lbl_dialog_selectChoice_00000C3C:
     mulli r0, r3, 0x30
     lwz r3, 0xec(r30)
     add r0, r3, r0
-lbl_fn_8014DEE4_00000C48:
+lbl_dialog_selectChoice_00000C48:
     lwz r4, 0x648(r30)
     lis r3, lbl_807C7060@ha
     addi r3, r3, lbl_807C7060@l
@@ -899,10 +899,10 @@ lbl_fn_8014DEE4_00000C48:
     psq_st f6, 0x250(r4), 0, 0
     lwz r0, 0x64c(r30)
     cmpwi r0, 0x0
-    beq lbl_fn_8014DEE4_00000F44
+    beq lbl_dialog_selectChoice_00000F44
     lwz r0, 0x12a8(r30)
     extrwi. r0, r0, 1, 26
-    beq lbl_fn_8014DEE4_00000D20
+    beq lbl_dialog_selectChoice_00000D20
     lis r4, lbl_80737A9C@ha
     addi r3, r30, 0xb0
     addi r4, r4, lbl_80737A9C@l
@@ -910,14 +910,14 @@ lbl_fn_8014DEE4_00000C48:
     addi r4, r4, 0x35c
     bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
-    bge lbl_fn_8014DEE4_00000CCC
+    bge lbl_dialog_selectChoice_00000CCC
     li r0, 0x0
-    b lbl_fn_8014DEE4_00000CD8
-lbl_fn_8014DEE4_00000CCC:
+    b lbl_dialog_selectChoice_00000CD8
+lbl_dialog_selectChoice_00000CCC:
     mulli r0, r3, 0x30
     lwz r3, 0xec(r30)
     add r0, r3, r0
-lbl_fn_8014DEE4_00000CD8:
+lbl_dialog_selectChoice_00000CD8:
     lwz r4, 0x64c(r30)
     lis r3, lbl_807C7060@ha
     addi r3, r3, lbl_807C7060@l
@@ -935,8 +935,8 @@ lbl_fn_8014DEE4_00000CD8:
     psq_st f4, 0x240(r4), 0, 0
     psq_st f5, 0x248(r4), 0, 0
     psq_st f6, 0x250(r4), 0, 0
-    b lbl_fn_8014DEE4_00000F44
-lbl_fn_8014DEE4_00000D20:
+    b lbl_dialog_selectChoice_00000F44
+lbl_dialog_selectChoice_00000D20:
     lis r4, lbl_80737A9C@ha
     addi r3, r30, 0xb0
     addi r4, r4, lbl_80737A9C@l
@@ -944,14 +944,14 @@ lbl_fn_8014DEE4_00000D20:
     addi r4, r4, 0x35c
     bl atn_Model_findBoneIndex
     cmpwi r3, 0x0
-    bge lbl_fn_8014DEE4_00000D48
+    bge lbl_dialog_selectChoice_00000D48
     li r0, 0x0
-    b lbl_fn_8014DEE4_00000D54
-lbl_fn_8014DEE4_00000D48:
+    b lbl_dialog_selectChoice_00000D54
+lbl_dialog_selectChoice_00000D48:
     mulli r0, r3, 0x30
     lwz r3, 0xec(r30)
     add r0, r3, r0
-lbl_fn_8014DEE4_00000D54:
+lbl_dialog_selectChoice_00000D54:
     lwz r3, 0x64c(r30)
     addi r31, r1, 0x20
     lfs f1, lbl_8088196C
@@ -974,7 +974,7 @@ lbl_fn_8014DEE4_00000D54:
     stfs f0, 0x48(r1)
     stfs f0, 0x34(r1)
     stfs f0, 0x20(r1)
-    beq lbl_fn_8014DEE4_00000E00
+    beq lbl_dialog_selectChoice_00000E00
     addi r3, r1, 0x80
     li r4, 0x7a
     bl PSMTXRotRad
@@ -995,11 +995,11 @@ lbl_fn_8014DEE4_00000D54:
     psq_st f4, 0x18(r31), 0, 0
     psq_st f5, 0x20(r31), 0, 0
     psq_st f6, 0x28(r31), 0, 0
-lbl_fn_8014DEE4_00000E00:
+lbl_dialog_selectChoice_00000E00:
     lfs f0, lbl_8088196C
     lfs f1, 0xc(r1)
     fcmpu cr0, f0, f1
-    beq lbl_fn_8014DEE4_00000E60
+    beq lbl_dialog_selectChoice_00000E60
     addi r3, r1, 0xe0
     li r4, 0x79
     bl PSMTXRotRad
@@ -1020,11 +1020,11 @@ lbl_fn_8014DEE4_00000E00:
     psq_st f4, 0x18(r31), 0, 0
     psq_st f5, 0x20(r31), 0, 0
     psq_st f6, 0x28(r31), 0, 0
-lbl_fn_8014DEE4_00000E60:
+lbl_dialog_selectChoice_00000E60:
     lfs f0, lbl_8088196C
     lfs f1, 0x8(r1)
     fcmpu cr0, f0, f1
-    beq lbl_fn_8014DEE4_00000EC0
+    beq lbl_dialog_selectChoice_00000EC0
     addi r3, r1, 0x140
     li r4, 0x78
     bl PSMTXRotRad
@@ -1045,7 +1045,7 @@ lbl_fn_8014DEE4_00000E60:
     psq_st f4, 0x18(r31), 0, 0
     psq_st f5, 0x20(r31), 0, 0
     psq_st f6, 0x28(r31), 0, 0
-lbl_fn_8014DEE4_00000EC0:
+lbl_dialog_selectChoice_00000EC0:
     lfs f1, lbl_8088196C
     addi r3, r1, 0x1a0
     lfs f2, lbl_808819A4
@@ -1079,7 +1079,7 @@ lbl_fn_8014DEE4_00000EC0:
     psq_st f4, 0x240(r3), 0, 0
     psq_st f5, 0x248(r3), 0, 0
     psq_st f6, 0x250(r3), 0, 0
-lbl_fn_8014DEE4_00000F44:
+lbl_dialog_selectChoice_00000F44:
     lwz r0, 0x1e4(r1)
     lwz r31, 0x1dc(r1)
     lwz r30, 0x1d8(r1)
@@ -1729,7 +1729,7 @@ lbl_fn_8014F698_0000182C:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8014DEE4
+    bl dialog_selectChoice
 lbl_fn_8014F698_0000184C:
     lwz r4, 0x8(r1)
     mr r3, r27
@@ -1767,11 +1767,11 @@ lbl_fn_8014F698_000018AC:
     lis r3, lbl_807C6BB8@ha
     li r0, 0x0
     stwu r0, lbl_807C6BB8@l(r3)
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     li r30, 0x1
     lis r5, lbl_807C7B10@ha
     stw r0, 0x4(r3)
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     addi r5, r5, lbl_807C7B10@l
     stw r0, 0x8(r3)
     stw r30, 0xc(r3)

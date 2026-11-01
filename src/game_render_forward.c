@@ -10,12 +10,12 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8574(void);
+extern void viewport_updateCulling(void);
 extern void clip_calculateFrustum(void);
 extern void fn_801010A0(void);
 extern void fn_8010EE78(void);
 extern void fn_8013A258(void);
-extern void fn_8013CB68(void);
+extern void npc_updateTalkInteraction(void);
 extern void fn_80158BB4(void);
 extern void actor_setState(void);
 extern void task_findEntryById(void);
@@ -87,16 +87,10 @@ void fn_802B52D8(void);
 void fn_802B55B0(void);
 void fn_802B596C(void);
 
-asm void fn_802B43C0(void)
-{
-    nofralloc
-    blr
+void fn_802B43C0(void) {
 }
 
-asm void fn_802B43C4(void)
-{
-    nofralloc
-    blr
+void fn_802B43C4(void) {
 }
 
 asm void fn_802B43C8(void)
@@ -312,7 +306,7 @@ lbl_fn_802B43C8_000002B8:
     oris r0, r0, 0x4000
     stw r0, 0x14cc(r31)
     li r5, 0x1
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
     lwz r3, 0x16a0(r31)
     lwz r0, 0x16f8(r31)
     ori r6, r3, 0x1
@@ -1747,7 +1741,7 @@ lbl_fn_802B596C_00001780:
     lfs f2, lbl_80884034
     stfs f0, 0x48(r1)
     lwz r5, 0x1688(r31)
-    bl fn_800F8574
+    bl viewport_updateCulling
     b lbl_fn_802B596C_000019C8
 lbl_fn_802B596C_000017E8:
     xoris r0, r0, 0x8000
@@ -1805,7 +1799,7 @@ lbl_fn_802B596C_000017E8:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
     b lbl_fn_802B596C_000019C8
 lbl_fn_802B596C_000018CC:
     addi r4, r1, 0x58

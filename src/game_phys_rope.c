@@ -6,13 +6,13 @@ extern void __register_global_object(void);
 extern void _restgpr_25(void);
 extern void _savegpr_25(void);
 extern void dtor_80084684(void);
-extern void fn_8000D0F8(void);
-extern void fn_8000D114(void);
+extern void mtx_getTranslation(void);
+extern void vec3_set(void);
 extern void fn_8000DD0C(void);
-extern void fn_80011034(void);
+extern void vec3_toEulerAngles(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
-extern void fn_8003EFB0(void);
-extern void fn_8004D388(void);
+extern void ui_destroyWidget(void);
+extern void collision_queryGeometry(void);
 extern void collision_testLineSegment(void);
 extern void fn_8005361C(void);
 extern void atn_Matrix_copy_2(void);
@@ -26,11 +26,11 @@ extern void clip_calculateFrustum(void);
 extern void fn_800FB1BC(void);
 extern void fn_800FB4B0(void);
 extern void fn_80110858(void);
-extern void fn_8016F3D0(void);
+extern void battle_canTargetActor(void);
 extern void fn_8021A8D0(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
-extern void fn_8023A680(void);
+extern void res_Shader_bindParams(void);
 extern void fn_80373164(void);
 extern void fn_805706C4(void);
 extern void fn_8059A000(void);
@@ -267,11 +267,11 @@ asm void fn_8010EE78(void)
     bne lbl_fn_8010EE78_00000254
     lis r3, lbl_807C6BB8@ha
     stwu r29, lbl_807C6BB8@l(r3)
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     li r30, 0x1
     lis r5, lbl_807C7888@ha
     stw r29, 0x4(r3)
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     stw r29, 0x8(r3)
     addi r5, r5, lbl_807C7888@l
     stw r30, 0xc(r3)
@@ -435,7 +435,7 @@ lbl_fn_8010F018_000003AC:
     li r9, 0x0
     stw r0, 0x10(r1)
     li r10, 0x0
-    bl fn_8023A680
+    bl res_Shader_bindParams
 lbl_fn_8010F018_00000474:
     lwz r3, lbl_8087F3C0
     li r0, 0x0
@@ -541,7 +541,7 @@ asm void fn_8010F26C(void)
     lwz r3, lbl_8087F3C0
     li r9, 0x0
     li r10, 0x0
-    bl fn_8023A680
+    bl res_Shader_bindParams
 lbl_fn_8010F26C_000005F4:
     lwz r3, lbl_8087F3C0
     li r0, 0x0
@@ -706,7 +706,7 @@ asm void fn_8010F4BC(void)
     bne lbl_fn_8010F4BC_000008AC
     mr r4, r31
     addi r3, r1, 0x74
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     mr r4, r31
     addi r3, r1, 0xb0
     bl atn_Matrix_copy_2
@@ -716,14 +716,14 @@ asm void fn_8010F4BC(void)
     addi r3, r1, 0x20
     lfs f3, lbl_8088164C
     fmr f2, f1
-    bl fn_8000D114
+    bl vec3_set
     mr r4, r3
     addi r3, r1, 0x2c
     addi r5, r1, 0xb0
     bl fn_8010F6FC
     addi r3, r1, 0x68
     addi r4, r1, 0x2c
-    bl fn_80011034
+    bl vec3_toEulerAngles
     addi r3, r30, 0x2c
     bl fn_8010EDFC
     addi r3, r30, 0x2c
@@ -754,7 +754,7 @@ lbl_fn_8010F4BC_000008AC:
     bl fn_800F7FD8
     addi r3, r1, 0x44
     addi r4, r1, 0x14
-    bl fn_80011034
+    bl vec3_toEulerAngles
     addi r3, r30, 0x2c
     bl fn_8010EDFC
     addi r3, r30, 0x2c
@@ -770,7 +770,7 @@ lbl_fn_8010F4BC_00000924:
     bl fn_800F7FD8
     addi r3, r1, 0x38
     addi r4, r1, 0x8
-    bl fn_80011034
+    bl vec3_toEulerAngles
     addi r3, r30, 0x2c
     bl fn_8010EDFC
     addi r3, r30, 0x2c
@@ -1537,7 +1537,7 @@ asm void fn_801100A0(void)
     cmpwi r4, 0x0
     beq lbl_fn_801100A0_0000187C
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     bne lbl_fn_801100A0_0000187C
     lfs f2, 0x1c(r31)
@@ -1886,7 +1886,7 @@ lbl_fn_801100A0_00001924:
     stfs f6, 0x18(r1)
     lwz r10, 0x68(r31)
     lfs f1, 0x58(r10)
-    bl fn_8004D388
+    bl collision_queryGeometry
     mr r29, r3
     b lbl_fn_801100A0_000019A8
 lbl_fn_801100A0_0000198C:

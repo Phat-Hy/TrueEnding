@@ -13,34 +13,34 @@ extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
 extern void mem_free(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_80092954(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
-extern void fn_8011FC10(void);
+extern void skill_findNodeById(void);
 extern void fn_80133130(void);
 extern void fn_80134270(void);
 extern void fn_80134290(void);
 extern void boss_updatePhaseState(void);
-extern void fn_80145334(void);
+extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
-extern void fn_8014C540(void);
-extern void fn_80151448(void);
+extern void dialog_updateScriptState(void);
+extern void inventory_applyItemStats(void);
 extern void fn_8015C6A0(void);
 extern void actor_setState(void);
-extern void fn_80237518(void);
-extern void fn_802375C4(void);
-extern void fn_802376D0(void);
+extern void res_MsgHandle_ctor(void);
+extern void res_Resource_destructor(void);
+extern void res_MsgHandle_isLoading(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_unload(void);
 extern void res_MsgHandle_update(void);
 extern void fn_80277BC0(void);
 extern void fn_802790A0(void);
 extern void fn_80279280(void);
-extern void fn_8035B78C(void);
+extern void entity_Instance_destructor(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_destructor(void);
@@ -56,7 +56,7 @@ extern void printf(void);
 extern void strcmp(void);
 extern void atoi(void);
 extern void abort(void);
-extern void fn_8068A850(void);
+extern void std_sin(void);
 extern void __destroy_new_array(void);
 
 /* External data declarations */
@@ -119,13 +119,13 @@ asm void fn_80272C6C(void)
     addi r3, r3, 0x8c
     bl res_MsgHandle_constructor
     addi r3, r31, 0x98
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     addi r3, r31, 0xa4
     bl res_MsgHandle_constructor
     addi r3, r31, 0xb0
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     addi r3, r31, 0xbc
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     addi r3, r31, 0xc8
     bl res_MsgHandle_constructor
     addi r3, r31, 0xd4
@@ -182,10 +182,10 @@ lbl_fn_80272CF0_000000EC:
 lbl_fn_80272CF0_0000010C:
     addi r3, r29, 0xbc
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     addi r3, r29, 0xb0
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     addic. r31, r29, 0xa4
     beq lbl_fn_80272CF0_00000144
     mr r3, r31
@@ -197,7 +197,7 @@ lbl_fn_80272CF0_0000010C:
 lbl_fn_80272CF0_00000144:
     addi r3, r29, 0x98
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     addic. r31, r29, 0x8c
     beq lbl_fn_80272CF0_00000170
     mr r3, r31
@@ -243,7 +243,7 @@ asm void fn_80272E0C(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_80272E0C_000001EC
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_80272E0C_000001EC:
     addic. r3, r29, 0x1938
     beq lbl_fn_80272E0C_000001FC
@@ -327,7 +327,7 @@ lbl_fn_80272E0C_000002E0:
 lbl_fn_80272E0C_00000310:
     mr r3, r29
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r30, 0x0
     ble lbl_fn_80272E0C_0000032C
     mr r3, r29
@@ -374,7 +374,7 @@ lbl_fn_80272FB8_000003A4:
     cmpwi r3, 0x0
     bne lbl_fn_80272FB8_00000424
     mr r3, r17
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_80272FB8_00000424
     mr r3, r18
@@ -382,11 +382,11 @@ lbl_fn_80272FB8_000003A4:
     cmpwi r3, 0x0
     bne lbl_fn_80272FB8_00000424
     mr r3, r19
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_80272FB8_00000424
     mr r3, r20
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_80272FB8_00000424
     mr r3, r21
@@ -825,7 +825,7 @@ lbl_fn_80272FB8_00000A28:
     mr r30, r3
     lwz r3, lbl_8087F408
     mr r4, r30
-    bl fn_8011FC10
+    bl skill_findNodeById
     cmpwi r3, 0x0
     mr r27, r3
     beq lbl_fn_80272FB8_00000C74
@@ -1373,9 +1373,9 @@ lbl_fn_80273970_000011F0:
     bctrl
 lbl_fn_80273970_00001224:
     mr r3, r21
-    bl fn_8014C540
+    bl dialog_updateScriptState
     mr r3, r21
-    bl fn_80145334
+    bl quest_updateFlow
     mr r3, r21
     bl fn_80279280
     lwz r3, 0x14e0(r21)
@@ -1706,7 +1706,7 @@ lbl_fn_80274268_00001684:
     fmr f31, f1
     lfs f0, lbl_80883854
     fmuls f1, f3, f0
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     fcmpo cr0, f31, f0
     ble lbl_fn_80274268_0000172C
@@ -1773,7 +1773,7 @@ lbl_fn_80274268_000017A8:
 lbl_fn_80274268_00001808:
     mr r3, r30
     mr r4, r31
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r12, 0x0(r30)
     mr r3, r30
     mr r4, r31

@@ -13,8 +13,8 @@ extern void actor_dispatchMessage(void);
 extern void fn_80016F48(void);
 extern void fn_8004B338(void);
 extern void talk_formatQuotedString(void);
-extern void fn_8005BBF8(void);
-extern void fn_8005BCE8(void);
+extern void talk_parseQuotes(void);
+extern void talk_copySpeakerName(void);
 extern void fn_8006AA20(void);
 extern void fn_8006AD24(void);
 extern void fn_8006B174(void);
@@ -36,7 +36,7 @@ extern void str_findChar(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_getStatus(void);
-extern void fn_80473F88(void);
+extern void shockwave_freeEmitter(void);
 extern void strcmp(void);
 extern void runtime_registerStaticObject(void);
 extern void __construct_new_array(void);
@@ -81,7 +81,7 @@ void fn_80089620(void);
 void fn_800897C8(void);
 void fn_800897D0(void);
 void fn_800897D4(void);
-void fn_800897D8(void);
+void node_destroy(void);
 void fn_8008984C(void);
 void fn_80089854(void);
 void fn_8008985C(void);
@@ -106,7 +106,7 @@ void fn_8008A4E0(void);
 void atn_LH_Material_destructor(void);
 void fn_8008A76C(void);
 void fn_8008AA90(void);
-void fn_8008AD4C(void);
+void area_updateZoneState(void);
 
 asm void node_createNamedChild(void)
 {
@@ -460,7 +460,7 @@ void fn_800897D4(void)
 {
 }
 
-asm void fn_800897D8(void)
+asm void node_destroy(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -470,24 +470,24 @@ asm void fn_800897D8(void)
     mr r31, r4
     lwz r5, 0x48(r4)
     cmpwi r5, 0x0
-    beq lbl_fn_800897D8_000004BC
+    beq lbl_node_destroy_000004BC
     addi r0, r3, 0x74
     cmplw r0, r4
-    beq lbl_fn_800897D8_000004BC
+    beq lbl_node_destroy_000004BC
     lwz r12, 0x0(r5)
     mr r3, r5
     lwz r12, 0x24(r12)
     mtctr r12
     bctrl
     cmpwi r31, 0x0
-    beq lbl_fn_800897D8_000004BC
+    beq lbl_node_destroy_000004BC
     lwz r12, 0x0(r31)
     mr r3, r31
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-lbl_fn_800897D8_000004BC:
+lbl_node_destroy_000004BC:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0
@@ -903,7 +903,7 @@ asm void fn_80089CE4(void)
     stw r30, 0x8(r1)
     mr r30, r3
     beq lbl_fn_80089CE4_000009D8
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     addic. r0, r30, 0x10
     beq lbl_fn_80089CE4_000009B4
     lwz r3, 0x14(r30)
@@ -1157,7 +1157,7 @@ asm void fn_8008A00C(void)
     addi r4, r4, lbl_807774B8@l
     stw r4, 0x34(r1)
     la r4, lbl_8087D710
-    bl fn_8005BCE8
+    bl talk_copySpeakerName
     addi r29, r1, 0x10
     addi r28, r1, 0x1c
     addi r27, r1, 0x28
@@ -1426,7 +1426,7 @@ lbl_fn_8008A00C_000010B4:
     stw r0, 0x0(r23)
 lbl_fn_8008A00C_0000110C:
     addi r3, r1, 0x34
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_8008A00C_00000D3C
     addi r11, r1, 0x690
@@ -1640,7 +1640,7 @@ asm void fn_8008A76C(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_8008A76C_00001444
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_8008A76C_00001444:
     addic. r0, r30, 0x208
     beq lbl_fn_8008A76C_0000146C
@@ -1663,7 +1663,7 @@ lbl_fn_8008A76C_00001484:
     addic. r29, r30, 0x1c4
     beq lbl_fn_8008A76C_000014CC
     mr r3, r29
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     addic. r0, r29, 0x10
     beq lbl_fn_8008A76C_000014B8
     lwz r3, 0x14(r29)
@@ -2058,7 +2058,7 @@ lbl_fn_8008AA90_000019BC:
     blr
 }
 
-asm void fn_8008AD4C(void)
+asm void area_updateZoneState(void)
 {
     nofralloc
     stwu r1, -0xa0(r1)
@@ -2082,15 +2082,15 @@ asm void fn_8008AD4C(void)
     stw r0, 0x74(r1)
     stw r0, 0x78(r1)
     stw r0, 0x7c(r1)
-    bne lbl_fn_8008AD4C_00001B78
+    bne lbl_area_updateZoneState_00001B78
     cmpwi r0, 0x0
-    bne lbl_fn_8008AD4C_00001A3C
+    bne lbl_area_updateZoneState_00001A3C
     lbz r0, 0x74(r1)
     clrlwi r28, r0, 25
-    b lbl_fn_8008AD4C_00001A40
-lbl_fn_8008AD4C_00001A3C:
+    b lbl_area_updateZoneState_00001A40
+lbl_area_updateZoneState_00001A3C:
     li r28, 0x0
-lbl_fn_8008AD4C_00001A40:
+lbl_area_updateZoneState_00001A40:
     lbz r0, 0x34(r1)
     mr r3, r30
     stb r0, 0x30(r1)
@@ -2131,36 +2131,36 @@ lbl_fn_8008AD4C_00001A40:
     bl fn_8006AD24
     lwz r0, 0x74(r1)
     srwi. r5, r0, 31
-    bne lbl_fn_8008AD4C_00001B08
+    bne lbl_area_updateZoneState_00001B08
     lwz r4, 0x0(r3)
     srwi. r0, r4, 31
-    bne lbl_fn_8008AD4C_00001B08
+    bne lbl_area_updateZoneState_00001B08
     lwz r0, 0x4(r3)
     stw r0, 0x78(r1)
     stw r4, 0x74(r1)
     lwz r0, 0x8(r3)
     stw r0, 0x7c(r1)
-    b lbl_fn_8008AD4C_00001B60
-lbl_fn_8008AD4C_00001B08:
+    b lbl_area_updateZoneState_00001B60
+lbl_area_updateZoneState_00001B08:
     cmpwi r5, 0x0
-    beq lbl_fn_8008AD4C_00001B18
+    beq lbl_area_updateZoneState_00001B18
     lwz r5, 0x78(r1)
-    b lbl_fn_8008AD4C_00001B20
-lbl_fn_8008AD4C_00001B18:
+    b lbl_area_updateZoneState_00001B20
+lbl_area_updateZoneState_00001B18:
     lbz r0, 0x74(r1)
     clrlwi r5, r0, 25
-lbl_fn_8008AD4C_00001B20:
+lbl_area_updateZoneState_00001B20:
     lwz r0, 0x0(r3)
     srwi. r0, r0, 31
-    bne lbl_fn_8008AD4C_00001B3C
+    bne lbl_area_updateZoneState_00001B3C
     lbz r0, 0x0(r3)
     addi r6, r3, 0x1
     clrlwi r4, r0, 25
-    b lbl_fn_8008AD4C_00001B44
-lbl_fn_8008AD4C_00001B3C:
+    b lbl_area_updateZoneState_00001B44
+lbl_area_updateZoneState_00001B3C:
     lwz r6, 0x8(r3)
     lwz r4, 0x4(r3)
-lbl_fn_8008AD4C_00001B44:
+lbl_area_updateZoneState_00001B44:
     lbz r0, 0x24(r1)
     add r7, r6, r4
     stb r0, 0x20(r1)
@@ -2168,22 +2168,22 @@ lbl_fn_8008AD4C_00001B44:
     addi r8, r1, 0x20
     li r4, 0x0
     bl actor_dispatchMessage
-lbl_fn_8008AD4C_00001B60:
+lbl_area_updateZoneState_00001B60:
     lwz r0, 0x68(r1)
     srwi. r0, r0, 31
-    beq lbl_fn_8008AD4C_00001BC0
+    beq lbl_area_updateZoneState_00001BC0
     lwz r3, 0x70(r1)
     bl dtor_80084684
-    b lbl_fn_8008AD4C_00001BC0
-lbl_fn_8008AD4C_00001B78:
+    b lbl_area_updateZoneState_00001BC0
+lbl_area_updateZoneState_00001B78:
     cmpwi r0, 0x0
-    bne lbl_fn_8008AD4C_00001B8C
+    bne lbl_area_updateZoneState_00001B8C
     lbz r0, 0x74(r1)
     clrlwi r27, r0, 25
-    b lbl_fn_8008AD4C_00001B90
-lbl_fn_8008AD4C_00001B8C:
+    b lbl_area_updateZoneState_00001B90
+lbl_area_updateZoneState_00001B8C:
     li r27, 0x0
-lbl_fn_8008AD4C_00001B90:
+lbl_area_updateZoneState_00001B90:
     lbz r0, 0x1c(r1)
     mr r3, r28
     stb r0, 0x18(r1)
@@ -2196,32 +2196,32 @@ lbl_fn_8008AD4C_00001B90:
     addi r8, r1, 0x18
     li r4, 0x0
     bl actor_dispatchMessage
-lbl_fn_8008AD4C_00001BC0:
+lbl_area_updateZoneState_00001BC0:
     lwz r0, 0x74(r1)
     srwi. r0, r0, 31
-    bne lbl_fn_8008AD4C_00001BD4
+    bne lbl_area_updateZoneState_00001BD4
     addi r3, r1, 0x75
-    b lbl_fn_8008AD4C_00001BD8
-lbl_fn_8008AD4C_00001BD4:
+    b lbl_area_updateZoneState_00001BD8
+lbl_area_updateZoneState_00001BD4:
     lwz r3, 0x7c(r1)
-lbl_fn_8008AD4C_00001BD8:
+lbl_area_updateZoneState_00001BD8:
     bl fn_8006AA20
     cmpwi r3, 0x0
-    beq lbl_fn_8008AD4C_00001C10
+    beq lbl_area_updateZoneState_00001C10
     lwz r0, 0x74(r1)
     addi r3, r29, 0xfc
     srwi. r0, r0, 31
-    bne lbl_fn_8008AD4C_00001BFC
+    bne lbl_area_updateZoneState_00001BFC
     addi r4, r1, 0x75
-    b lbl_fn_8008AD4C_00001C00
-lbl_fn_8008AD4C_00001BFC:
+    b lbl_area_updateZoneState_00001C00
+lbl_area_updateZoneState_00001BFC:
     lwz r4, 0x7c(r1)
-lbl_fn_8008AD4C_00001C00:
+lbl_area_updateZoneState_00001C00:
     lwz r12, 0x0(r3)
     lwz r12, 0xc(r12)
     mtctr r12
     bctrl
-lbl_fn_8008AD4C_00001C10:
+lbl_area_updateZoneState_00001C10:
     li r0, 0x0
     stw r0, 0x5c(r1)
     mr r3, r30
@@ -2247,26 +2247,26 @@ lbl_fn_8008AD4C_00001C10:
     bl fn_8006B174
     lwz r0, 0x50(r1)
     srwi. r0, r0, 31
-    bne lbl_fn_8008AD4C_00001C80
+    bne lbl_area_updateZoneState_00001C80
     addi r3, r1, 0x51
-    b lbl_fn_8008AD4C_00001C84
-lbl_fn_8008AD4C_00001C80:
+    b lbl_area_updateZoneState_00001C84
+lbl_area_updateZoneState_00001C80:
     lwz r3, 0x58(r1)
-lbl_fn_8008AD4C_00001C84:
+lbl_area_updateZoneState_00001C84:
     bl str_findChar
     lwz r0, 0x50(r1)
     mr r31, r3
     srwi. r0, r0, 31
-    beq lbl_fn_8008AD4C_00001CA0
+    beq lbl_area_updateZoneState_00001CA0
     lwz r3, 0x58(r1)
     bl dtor_80084684
-lbl_fn_8008AD4C_00001CA0:
+lbl_area_updateZoneState_00001CA0:
     lwz r0, 0x5c(r1)
     srwi. r0, r0, 31
-    beq lbl_fn_8008AD4C_00001CB4
+    beq lbl_area_updateZoneState_00001CB4
     lwz r3, 0x64(r1)
     bl dtor_80084684
-lbl_fn_8008AD4C_00001CB4:
+lbl_area_updateZoneState_00001CB4:
     li r0, 0x0
     stw r0, 0x44(r1)
     mr r3, r30
@@ -2292,26 +2292,26 @@ lbl_fn_8008AD4C_00001CB4:
     bl fn_8006B174
     lwz r0, 0x38(r1)
     srwi. r0, r0, 31
-    bne lbl_fn_8008AD4C_00001D24
+    bne lbl_area_updateZoneState_00001D24
     addi r3, r1, 0x39
-    b lbl_fn_8008AD4C_00001D28
-lbl_fn_8008AD4C_00001D24:
+    b lbl_area_updateZoneState_00001D28
+lbl_area_updateZoneState_00001D24:
     lwz r3, 0x40(r1)
-lbl_fn_8008AD4C_00001D28:
+lbl_area_updateZoneState_00001D28:
     bl str_findChar
     lwz r0, 0x38(r1)
     mr r30, r3
     srwi. r0, r0, 31
-    beq lbl_fn_8008AD4C_00001D44
+    beq lbl_area_updateZoneState_00001D44
     lwz r3, 0x40(r1)
     bl dtor_80084684
-lbl_fn_8008AD4C_00001D44:
+lbl_area_updateZoneState_00001D44:
     lwz r0, 0x44(r1)
     srwi. r0, r0, 31
-    beq lbl_fn_8008AD4C_00001D58
+    beq lbl_area_updateZoneState_00001D58
     lwz r3, 0x4c(r1)
     bl dtor_80084684
-lbl_fn_8008AD4C_00001D58:
+lbl_area_updateZoneState_00001D58:
     rlwinm r4, r30, 0, 16, 23
     lis r0, 0x4330
     rlwimi r4, r31, 0, 24, 31
@@ -2326,10 +2326,10 @@ lbl_fn_8008AD4C_00001D58:
     stfs f0, 0x98(r29)
     lwz r0, 0x74(r1)
     srwi. r0, r0, 31
-    beq lbl_fn_8008AD4C_00001D9C
+    beq lbl_area_updateZoneState_00001D9C
     lwz r3, 0x7c(r1)
     bl dtor_80084684
-lbl_fn_8008AD4C_00001D9C:
+lbl_area_updateZoneState_00001D9C:
     addi r11, r1, 0xa0
     bl _restgpr_27
     lwz r0, 0xa4(r1)

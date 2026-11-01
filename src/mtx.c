@@ -1,8 +1,8 @@
 #include "revolution/types.h"
 
 /* External functions */
-extern void fn_8068AD58(void);
-extern void fn_8068A850(void);
+extern void std_cos(void);
+extern void std_sin(void);
 extern void fn_8068AE24(void);
 extern void PSVECNormalize(void);
 extern void PSVECCrossProduct(void);
@@ -48,10 +48,10 @@ asm void PSMTXRotRad(void) {
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    bl fn_8068AD58
+    bl std_cos
     frsp f31, f1
     fmr f1, f30
-    bl fn_8068A850
+    bl std_sin
     frsp f2, f1
     mr r3, r30
     fmr f1, f31
@@ -182,10 +182,10 @@ asm void PSMTXRotAxis(void) {
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    bl fn_8068AD58
+    bl std_cos
     frsp f31, f1
     fmr f1, f30
-    bl fn_8068A850
+    bl std_sin
     frsp f2, f1
     mr r3, r30
     fmr f1, f31

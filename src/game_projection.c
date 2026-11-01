@@ -6,26 +6,26 @@ extern void _restgpr_16(void);
 extern void _savegpr_16(void);
 extern void fn_80060D58(void);
 extern void skill_calculateDamage(void);
-extern void fn_80061824(void);
+extern void skill_calcTrajectory(void);
 extern void fn_80062C8C(void);
 extern void fn_80063484(void);
 extern void fn_80063764(void);
 extern void fn_80063D3C(void);
-extern void fn_8006EF48(void);
+extern void script_executeOpcode(void);
 extern void fn_8006F2F0(void);
 extern void fn_8008CD60(void);
-extern void fn_800BFAC8(void);
+extern void motion_updateFogAdj(void);
 extern void str_findChar(void);
 extern void wcs_vformat(void);
 extern void fn_80103484(void);
-extern void fn_8016F3D0(void);
+extern void battle_canTargetActor(void);
 extern void thread_findAndNotify(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
 extern void PSVECSquareMag(void);
 extern void swprintf(void);
-extern void fn_8068AD58(void);
+extern void std_cos(void);
 extern void fn_8068AEA0(void);
 extern void std_atan2(void);
 extern void runtime_clampDouble(void);
@@ -559,7 +559,7 @@ lbl_fn_800F5314_0000067C:
     fadds f0, f3, f0
     lwz r4, lbl_8087EFB4
     stfs f0, 0x2b4(r1)
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     addi r3, r1, 0x1f0
     lfs f2, 0x1f8(r1)
     psq_l f1, 0x0(r3), 0, 0
@@ -630,7 +630,7 @@ lbl_fn_800F5314_00000798:
     li r5, 0x1
     lfs f2, lbl_80881478
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lfs f6, lbl_80881478
     addi r4, r1, 0x478
     lfs f4, lbl_808814FC
@@ -649,7 +649,7 @@ lbl_fn_800F5314_00000798:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
 lbl_fn_800F5314_00000820:
     lwz r3, lbl_8087F0A8
     lwz r24, 0x5c(r3)
@@ -716,7 +716,7 @@ lbl_fn_800F5314_000008C0:
     addi r3, r1, 0x2a4
     lwz r4, lbl_8087EFB4
     addi r5, r5, 0x528
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f0, 0x2ac(r1)
     fcmpo cr0, f0, f30
     blt lbl_fn_800F5314_00000D30
@@ -745,7 +745,7 @@ lbl_fn_800F5314_00000978:
     beq lbl_fn_800F5314_00000998
     lwz r4, 0x0(r23)
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     bne lbl_fn_800F5314_00000998
     addi r21, r21, 0x1
@@ -794,7 +794,7 @@ lbl_fn_800F5314_000009A0:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     fadds f22, f22, f25
     mr r17, r25
     addis r22, r31, 0x3
@@ -818,7 +818,7 @@ lbl_fn_800F5314_00000A8C:
     beq lbl_fn_800F5314_00000BA4
     lwz r4, 0x0(r23)
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     bne lbl_fn_800F5314_00000BA4
     lwz r4, 0x0(r23)
@@ -853,7 +853,7 @@ lbl_fn_800F5314_00000AC4:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lwz r5, 0x0(r17)
     addi r3, r1, 0x6b8
     addi r4, r27, 0x1e9
@@ -883,7 +883,7 @@ lbl_fn_800F5314_00000AC4:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     fadds f22, f22, f25
 lbl_fn_800F5314_00000BA4:
     addi r17, r17, 0x934
@@ -918,7 +918,7 @@ lbl_fn_800F5314_00000C04:
     beq lbl_fn_800F5314_00000D1C
     lwz r4, 0x0(r23)
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     bne lbl_fn_800F5314_00000D1C
     lwz r4, 0x0(r17)
@@ -953,7 +953,7 @@ lbl_fn_800F5314_00000C3C:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lwz r5, 0x0(r17)
     addi r3, r1, 0x6b8
     addi r4, r27, 0x1e9
@@ -983,7 +983,7 @@ lbl_fn_800F5314_00000C3C:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     fadds f22, f22, f25
 lbl_fn_800F5314_00000D1C:
     addi r17, r17, 0x934
@@ -1063,7 +1063,7 @@ lbl_fn_800F5314_00000DBC:
     lwz r4, lbl_8087EFB4
     addi r3, r1, 0x298
     addi r5, r21, 0x528
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f0, 0x2a0(r1)
     fcmpo cr0, f0, f29
     blt lbl_fn_800F5314_00001148
@@ -1101,7 +1101,7 @@ lbl_fn_800F5314_00000E88:
     beq lbl_fn_800F5314_00000EC8
     mr r4, r21
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     beq lbl_fn_800F5314_00000EC8
     addi r22, r22, 0x1
@@ -1218,7 +1218,7 @@ lbl_fn_800F5314_0000100C:
     mr r3, r30
     mr r4, r21
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     beq lbl_fn_800F5314_00001130
     cmplw r19, r30
@@ -1248,7 +1248,7 @@ lbl_fn_800F5314_0000105C:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     lwz r6, 0x60(r30)
     addi r3, r1, 0x5b8
     lwz r5, 0x58(r30)
@@ -1277,7 +1277,7 @@ lbl_fn_800F5314_0000105C:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     fadds f23, f23, f25
 lbl_fn_800F5314_00001130:
     addi r18, r18, 0x934
@@ -1351,7 +1351,7 @@ lbl_fn_800F5314_0000118C:
     stfs f0, 0x1cc(r1)
     stfs f3, 0x1d0(r1)
     stfs f4, 0x1d4(r1)
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     addis r3, r31, 0x3
     lwz r5, 0x63bc(r3)
     cmpwi r5, 0x12c
@@ -1420,7 +1420,7 @@ lbl_fn_800F5314_000012E4:
     stfs f0, 0x1b4(r1)
     stfs f3, 0x1b8(r1)
     stfs f4, 0x1bc(r1)
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f0, 0x27c(r1)
     fcmpo cr0, f0, f28
     blt lbl_fn_800F5314_000013A0
@@ -1710,7 +1710,7 @@ lbl_fn_800F5314_00001490:
     fcmpo cr0, f0, f29
     ble lbl_fn_800F5314_00001CF8
     fmuls f1, f30, f0
-    bl fn_8068AD58
+    bl std_cos
     lwz r3, 0x50(r1)
     frsp f3, f1
     lwz r4, 0x54(r1)
@@ -1727,7 +1727,7 @@ lbl_fn_800F5314_00001490:
     ble lbl_fn_800F5314_00001CF8
     lfs f0, 0x50(r3)
     fmuls f1, f30, f0
-    bl fn_8068AD58
+    bl std_cos
     lwz r3, 0x50(r1)
     frsp f4, f1
     lwz r0, 0x54(r1)
@@ -2062,7 +2062,7 @@ lbl_fn_800F5314_00001CF8:
     mulli r0, r0, 0x28
     add r5, r5, r0
     addi r5, r5, 0xc
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f0, 0x234(r1)
     fcmpo cr0, f29, f0
     cror eq, lt, eq
@@ -2100,7 +2100,7 @@ lbl_fn_800F5314_00001CF8:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
 lbl_fn_800F5314_00001DBC:
     lwz r4, 0x54(r1)
     lwz r3, 0x54(r1)

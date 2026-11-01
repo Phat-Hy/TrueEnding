@@ -9,10 +9,10 @@ extern void _savegpr_27(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Task_setActive(void);
 extern void fn_8012D8B8(void);
-extern void fn_80145334(void);
+extern void quest_updateFlow(void);
 extern void fn_80154654(void);
 extern void actor_setState(void);
-extern void fn_801765D8(void);
+extern void battle_awardExp(void);
 extern void fn_80176ACC(void);
 extern void fn_801781B0(void);
 extern void fn_80395848(void);
@@ -447,7 +447,7 @@ lbl_fn_803972A8_000004F4:
     cmplwi r0, 0x4
     beq lbl_fn_803972A8_00000834
     mr r3, r22
-    bl fn_801765D8
+    bl battle_awardExp
     b lbl_fn_803972A8_00000834
 lbl_fn_803972A8_00000524:
     lwz r0, 0x0(r4)
@@ -660,7 +660,7 @@ lbl_fn_803972A8_000007FC:
     mr r3, r22
     rlwinm r0, r0, 0, 17, 15
     stw r0, 0x12a4(r22)
-    bl fn_80145334
+    bl quest_updateFlow
 lbl_fn_803972A8_00000810:
     mr r3, r22
     bl fn_80176ACC
@@ -671,7 +671,7 @@ lbl_fn_803972A8_0000081C:
     cmplwi r0, 0x4
     beq lbl_fn_803972A8_00000834
     mr r3, r22
-    bl fn_801765D8
+    bl battle_awardExp
 lbl_fn_803972A8_00000834:
     cmpwi r22, 0x0
     beq lbl_fn_803972A8_00000880
@@ -1128,7 +1128,7 @@ lbl_fn_80397BEC_00000E38:
     cmplwi r0, 0x4
     beq lbl_fn_80397BEC_00001178
     mr r3, r22
-    bl fn_801765D8
+    bl battle_awardExp
     b lbl_fn_80397BEC_00001178
 lbl_fn_80397BEC_00000E68:
     lwz r0, 0x0(r4)
@@ -1341,7 +1341,7 @@ lbl_fn_80397BEC_00001140:
     mr r3, r22
     rlwinm r0, r0, 0, 17, 15
     stw r0, 0x12a4(r22)
-    bl fn_80145334
+    bl quest_updateFlow
 lbl_fn_80397BEC_00001154:
     mr r3, r22
     bl fn_80176ACC
@@ -1352,7 +1352,7 @@ lbl_fn_80397BEC_00001160:
     cmplwi r0, 0x4
     beq lbl_fn_80397BEC_00001178
     mr r3, r22
-    bl fn_801765D8
+    bl battle_awardExp
 lbl_fn_80397BEC_00001178:
     cmpwi r22, 0x0
     beq lbl_fn_80397BEC_000011C4

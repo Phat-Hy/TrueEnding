@@ -36,7 +36,7 @@ extern void str_parseInt(void);
 extern void str_findChar(void);
 extern void fn_800DCA6C(void);
 extern void atn_LoadHandle_getName(void);
-extern void fn_80473F88(void);
+extern void shockwave_freeEmitter(void);
 extern void fn_804741C0(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
@@ -44,7 +44,7 @@ extern void PSVECNormalize(void);
 extern void fn_805F9D20(void);
 extern void rand(void);
 extern void strncmp(void);
-extern void fn_806952C4(void);
+extern void msl_releaseRefCount(void);
 extern void runtime_registerStaticObject(void);
 extern void __destroy_arr(void);
 extern void vec3_isNonZero(void);
@@ -97,7 +97,7 @@ void fn_80097B74(void);
 void vec3_clear(void* ptr);
 void atn_Anim_setLayerAnimation(void);
 void cursor_updateSlotState(void);
-void fn_80097D40(void);
+void atn_Anim_getLayerTrack(void);
 void atn_Anim_getLayerDuration(void);
 void fn_80097D9C(void);
 void fn_80097E80(void);
@@ -727,7 +727,7 @@ asm void fn_80097A20(void)
     lwz r5, 0x228(r3)
     add r31, r5, r0
     mr r3, r31
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     li r0, 0x0
     stw r0, 0x8(r31)
     slwi r0, r30, 4
@@ -963,18 +963,18 @@ lbl_cursor_updateSlotState_00000B44:
     blr
 }
 
-asm void fn_80097D40(void)
+asm void atn_Anim_getLayerTrack(void)
 {
     nofralloc
     cmpwi r4, 0x0
-    blt lbl_fn_80097D40_00000B80
+    blt lbl_atn_Anim_getLayerTrack_00000B80
     lwz r0, 0x224(r3)
     cmpw r4, r0
-    blt lbl_fn_80097D40_00000B88
-lbl_fn_80097D40_00000B80:
+    blt lbl_atn_Anim_getLayerTrack_00000B88
+lbl_atn_Anim_getLayerTrack_00000B80:
     li r3, 0x0
     blr
-lbl_fn_80097D40_00000B88:
+lbl_atn_Anim_getLayerTrack_00000B88:
     mulli r0, r4, 0xc
     lwz r3, 0x228(r3)
     add r3, r3, r0
@@ -1613,7 +1613,7 @@ lbl_fn_80097E80_00001424:
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_80097E80_0000146C
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_80097E80_0000146C:
     lwz r6, 0x35c(r24)
     mr r4, r16

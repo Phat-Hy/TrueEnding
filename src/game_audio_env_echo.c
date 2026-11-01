@@ -3,31 +3,31 @@
 
 /* External function declarations */
 extern void vec3_copy(void);
-extern void fn_8000D3A4(void);
-extern void fn_8001047C(void);
-extern void fn_80011034(void);
+extern void vec3_mag(void);
+extern void vec3_assign(void);
+extern void vec3_toEulerAngles(void);
 extern void fn_80012C88(void);
 extern void vec3_sub(void);
-extern void fn_80013410(void);
-extern void fn_8004D388(void);
+extern void vec3_add(void);
+extern void collision_queryGeometry(void);
 extern void collision_testLineSegment(void);
 extern void fn_80051BC4(void);
-extern void fn_80057A64(void);
+extern void mission_updateStub(void);
 extern void atn_Matrix_copy(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_800E932C(void);
 extern void fn_800F72CC(void);
-extern void fn_800F7FA0(void);
+extern void viewport_getGlobalContext(void);
 extern void fn_800F7FA8(void);
-extern void fn_800F7FF0(void);
+extern void viewport_getNextSequenceId(void);
 extern void fn_800F80A8(void);
 extern void fn_800F80B8(void);
 extern void fn_800F8290(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8574(void);
+extern void viewport_updateCulling(void);
 extern void fn_800FBA9C(void);
 extern void fn_8013A194(void);
-extern void fn_8013C38C(void);
+extern void npc_getPosition(void);
 extern void fn_801404F8(void);
 extern void fn_80140500(void);
 extern void fn_8014052C(void);
@@ -35,11 +35,11 @@ extern void fn_80158CA4(void);
 extern void fn_80158E1C(void);
 extern void actor_setState(void);
 extern void fn_80176548(void);
-extern void fn_801765D8(void);
+extern void battle_awardExp(void);
 extern void sound_initGlobalInstances(void);
 extern void fn_80239D58(void);
 extern void res_findResourceSlot(void);
-extern void fn_8023A680(void);
+extern void res_Shader_bindParams(void);
 extern void fn_80267B20(void);
 extern void fn_80267B28(void);
 extern void fn_8031A670(void);
@@ -586,7 +586,7 @@ asm void fn_80319090(void)
     stw r4, 0x5c0(r31)
     ori r0, r0, 0x8000
     stw r0, 0x12a4(r31)
-    bl fn_801765D8
+    bl battle_awardExp
     b lbl_fn_80319090_00000788
 lbl_fn_80319090_000006BC:
     li r0, 0x0
@@ -607,7 +607,7 @@ lbl_fn_80319090_000006BC:
     addi r6, r31, 0x1540
     addi r8, r31, 0x5b8
     li r9, 0x0
-    bl fn_8004D388
+    bl collision_queryGeometry
     lfs f3, 0x1544(r31)
     cmpwi r3, 0x0
     lfs f0, 0x154c(r31)
@@ -945,12 +945,12 @@ asm void fn_8031958C(void)
     li r0, 0x0
     stw r0, 0x15b4(r31)
 lbl_fn_8031958C_00000BBC:
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r4, r31
     li r5, 0x3e8
     li r6, 0x1
     bl res_findResourceSlot
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r4, r31
     li r5, 0x3e9
     li r6, 0x1
@@ -958,7 +958,7 @@ lbl_fn_8031958C_00000BBC:
     b lbl_fn_8031958C_00000F4C
 lbl_fn_8031958C_00000BE8:
     addi r3, r1, 0xe4
-    bl fn_80057A64
+    bl mission_updateStub
     lwz r3, 0x15b4(r31)
     bl fn_80267B20
     cmpwi r3, 0x6
@@ -968,7 +968,7 @@ lbl_fn_8031958C_00000BE8:
     cmpwi r3, 0x8c
     bne lbl_fn_8031958C_00000D24
     lwz r3, 0x15b4(r31)
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r1, 0xe4
     bl vec3_copy
@@ -993,7 +993,7 @@ lbl_fn_8031958C_00000BE8:
     addi r3, r1, 0x84
     addi r4, r31, 0x528
     addi r5, r1, 0x78
-    bl fn_80013410
+    bl vec3_add
     addi r3, r1, 0x90
     addi r4, r1, 0xe4
     addi r5, r1, 0x84
@@ -1002,14 +1002,14 @@ lbl_fn_8031958C_00000BE8:
     addi r4, r1, 0x90
     bl vec3_copy
     addi r3, r31, 0x155c
-    bl fn_8000D3A4
+    bl vec3_mag
     lfs f0, lbl_80884DD0
     addi r3, r31, 0x155c
     fdivs f31, f1, f0
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
     addi r3, r1, 0xd8
     addi r4, r31, 0x155c
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lfs f1, 0x5b0(r31)
     addi r3, r1, 0x60
     addi r4, r31, 0x155c
@@ -1017,7 +1017,7 @@ lbl_fn_8031958C_00000BE8:
     addi r3, r1, 0x6c
     addi r4, r31, 0x528
     addi r5, r1, 0x60
-    bl fn_80013410
+    bl vec3_add
     addi r3, r1, 0x150
     addi r4, r1, 0x6c
     bl fn_800F80A8
@@ -1063,13 +1063,13 @@ lbl_fn_8031958C_00000D38:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
 lbl_fn_8031958C_00000D8C:
     addi r3, r1, 0x180
     bl fn_80140500
     addi r3, r1, 0xcc
     addi r4, r31, 0x528
-    bl fn_8001047C
+    bl vec3_assign
     lfs f1, lbl_80884DD4
     addi r3, r1, 0x54
     addi r4, r31, 0x155c
@@ -1077,7 +1077,7 @@ lbl_fn_8031958C_00000D8C:
     addi r3, r1, 0xc0
     addi r4, r1, 0xcc
     addi r5, r1, 0x54
-    bl fn_80013410
+    bl vec3_add
     bl fn_801404F8
     lis r7, 0x8000
     addi r4, r1, 0x180
@@ -1105,7 +1105,7 @@ lbl_fn_8031958C_00000E08:
     addi r3, r1, 0x3c
     addi r4, r31, 0x528
     addi r5, r1, 0x30
-    bl fn_80013410
+    bl vec3_add
     addi r3, r1, 0x48
     addi r4, r1, 0xe4
     addi r5, r1, 0x3c
@@ -1114,14 +1114,14 @@ lbl_fn_8031958C_00000E08:
     addi r4, r1, 0x48
     bl vec3_copy
     addi r3, r31, 0x155c
-    bl fn_8000D3A4
+    bl vec3_mag
     lfs f0, lbl_80884DD0
     addi r3, r31, 0x155c
     fdivs f31, f1, f0
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
     addi r3, r1, 0xb4
     addi r4, r31, 0x155c
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lfs f1, 0x5b0(r31)
     addi r3, r1, 0x18
     addi r4, r31, 0x155c
@@ -1129,7 +1129,7 @@ lbl_fn_8031958C_00000E08:
     addi r3, r1, 0x24
     addi r4, r31, 0x528
     addi r5, r1, 0x18
-    bl fn_80013410
+    bl vec3_add
     addi r3, r1, 0x120
     addi r4, r1, 0x24
     bl fn_800F80A8
@@ -1153,17 +1153,17 @@ lbl_fn_8031958C_00000E08:
     addi r3, r31, 0x1618
     addi r4, r1, 0xf0
     bl atn_Matrix_copy
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r4, r31
     li r5, 0x3e9
     bl fn_80239D58
     cmpwi r3, 0x0
     bne lbl_fn_8031958C_00000F4C
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r4, r31
     li r5, 0x3e9
     bl fn_800F7FA8
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     li r0, 0x0
     stw r0, 0x8(r1)
     li r0, -0x1
@@ -1178,7 +1178,7 @@ lbl_fn_8031958C_00000E08:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_8023A680
+    bl res_Shader_bindParams
 lbl_fn_8031958C_00000F4C:
     lwz r0, 0x1f4(r1)
     psq_l f31, 0x1e8(r1), 0, 0
@@ -1898,7 +1898,7 @@ lbl_fn_80319C90_000018B0:
     lwz r3, lbl_8087F3C0
     li r9, 0x0
     li r10, 0x0
-    bl fn_8023A680
+    bl res_Shader_bindParams
     stw r28, 0x8(r1)
     addi r4, r31, 0x15a8
     lfs f1, lbl_80884D78
@@ -1911,7 +1911,7 @@ lbl_fn_80319C90_000018B0:
     li r9, 0x0
     li r10, 0x0
     lwz r3, lbl_8087F3C0
-    bl fn_8023A680
+    bl res_Shader_bindParams
     lwz r0, 0x3e4(r1)
     psq_l f31, 0x3d8(r1), 0, 0
     lfd f31, 0x3d0(r1)

@@ -8,7 +8,7 @@ extern void collision_testLineSegment(void);
 extern void fn_80051B70(void);
 extern void fn_80063764(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_800BFAC8(void);
+extern void motion_updateFogAdj(void);
 extern void skin_playAnimationByName(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
@@ -16,10 +16,10 @@ extern void atn_Task_setActive(void);
 extern void clip_calculateFrustum(void);
 extern void fn_800FDB20(void);
 extern void fn_80101434(void);
-extern void fn_8011FC10(void);
+extern void skill_findNodeById(void);
 extern void fn_8012D8B8(void);
-extern void fn_80145334(void);
-extern void fn_8015495C(void);
+extern void quest_updateFlow(void);
+extern void equip_applyToCharacter(void);
 extern void fn_8015E4B0(void);
 extern void fn_80176ACC(void);
 extern void task_findEntryById(void);
@@ -386,7 +386,7 @@ lbl_fn_802C5F5C_000002C0:
     lwz r4, lbl_8087EFB4
     stfs f8, 0xa8(r1)
     stfs f0, 0xa4(r1)
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f9, 0xe0(r1)
     addi r4, r1, 0x68
     lfs f8, 0xb8(r1)
@@ -408,7 +408,7 @@ lbl_fn_802C5F5C_000002C0:
     stfs f0, 0x98(r1)
     stfs f9, 0x9c(r1)
     stfs f8, 0xa0(r1)
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     addi r3, r1, 0x5c
     lfs f2, 0x64(r1)
     psq_l f1, 0x0(r3), 0, 0
@@ -696,7 +696,7 @@ lbl_fn_802C653C_00000888:
     slwi r0, r0, 4
     add r4, r4, r0
     lwz r4, 0x4(r4)
-    bl fn_8011FC10
+    bl skill_findNodeById
     mr r4, r3
     mr r3, r31
     mr r5, r30
@@ -757,7 +757,7 @@ lbl_fn_802C653C_00000968:
     slwi r0, r0, 4
     add r4, r4, r0
     lwz r4, 0x8(r4)
-    bl fn_8011FC10
+    bl skill_findNodeById
     mr r4, r3
     mr r3, r31
     mr r5, r30
@@ -818,7 +818,7 @@ lbl_fn_802C653C_00000A48:
     slwi r0, r0, 4
     add r4, r4, r0
     lwz r4, 0xc(r4)
-    bl fn_8011FC10
+    bl skill_findNodeById
     mr r4, r3
     mr r3, r31
     mr r5, r30
@@ -900,7 +900,7 @@ lbl_fn_802C6878_00000BB0:
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     lfs f3, lbl_808842A8
     addi r4, r1, 0x14
     lfs f0, lbl_808843D0
@@ -923,7 +923,7 @@ lbl_fn_802C6878_00000BB0:
     stfs f3, 0x10(r1)
     psq_st f1, 0x574(r30), 0, 0
     stfs f2, 0x57c(r30)
-    bl fn_80145334
+    bl quest_updateFlow
     li r0, 0x1
     stw r0, 0xd18(r30)
     lis r4, lbl_807C7030@ha

@@ -10,7 +10,7 @@ extern void dtor_80084684(void);
 extern void fn_8006F420(void);
 extern void str_assignBuffer(void);
 extern void dungeon_initGlobalContext(void);
-extern void fn_800838B8(void);
+extern void town_synchronizedDispatch(void);
 extern void fn_800A5218(void);
 extern void fn_800DBF68(void);
 extern void fn_800DC500(void);
@@ -25,12 +25,12 @@ extern void wcscpy(void);
 extern void wcsncpy(void);
 extern void wcscmp(void);
 extern void fn_8069641C(void);
-extern void fn_806A8E40(void);
+extern void net_getSocket(void);
 extern void fn_806ABCF0(void);
 extern void fn_806ABF40(void);
 extern void fn_806ABF80(void);
 extern void fn_806AC0A0(void);
-extern void fn_806B0E30(void);
+extern void net_getMyAid(void);
 extern void fn_806CF2F0(void);
 extern void fn_806CFAC0(void);
 extern void fn_806CFB00(void);
@@ -384,7 +384,7 @@ lbl_fn_8050DEAC_0000035C:
     li r0, 0x0
     b lbl_fn_8050DEAC_000003AC
 lbl_fn_8050DEAC_00000384:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_8050DEAC_000003AC
 lbl_fn_8050DEAC_00000390:
@@ -394,7 +394,7 @@ lbl_fn_8050DEAC_00000390:
     li r3, 0x0
     b lbl_fn_8050DEAC_000003A8
 lbl_fn_8050DEAC_000003A4:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_8050DEAC_000003A8:
     clrlwi r0, r3, 24
 lbl_fn_8050DEAC_000003AC:
@@ -455,7 +455,7 @@ lbl_fn_8050DEAC_00000444:
     li r0, 0x0
     b lbl_fn_8050DEAC_00000494
 lbl_fn_8050DEAC_0000046C:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_8050DEAC_00000494
 lbl_fn_8050DEAC_00000478:
@@ -465,7 +465,7 @@ lbl_fn_8050DEAC_00000478:
     li r3, 0x0
     b lbl_fn_8050DEAC_00000490
 lbl_fn_8050DEAC_0000048C:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_8050DEAC_00000490:
     clrlwi r0, r3, 24
 lbl_fn_8050DEAC_00000494:
@@ -629,7 +629,7 @@ lbl_fn_8050E098_0000069C:
     la r7, lbl_8087E1B0
     la r8, lbl_8087E1AC
     li r9, 0x0
-    bl fn_800838B8
+    bl town_synchronizedDispatch
     stw r3, lbl_8087F600
 lbl_fn_8050E098_000006CC:
     lwz r5, 0x8(r1)
@@ -809,7 +809,7 @@ lbl_fn_8050E414_00000924:
     la r7, lbl_8087E1B0
     la r8, lbl_8087E1AC
     li r9, 0x0
-    bl fn_800838B8
+    bl town_synchronizedDispatch
     stw r3, lbl_8087F600
 lbl_fn_8050E414_00000954:
     lwz r5, 0x0(r28)

@@ -35,7 +35,7 @@ extern void fn_803750E4(void);
 extern void fn_80445F44(void);
 extern void fn_804490E0(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_80473F88(void);
+extern void shockwave_freeEmitter(void);
 extern void fn_804A24C4(void);
 extern void fn_804A28F8(void);
 extern void rand(void);
@@ -112,7 +112,7 @@ lbl_fn_8044386C_0000002C:
     li r0, 0x1
     stw r0, -0x24f8(r3)
     subi r3, r3, 0x2500
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     li r3, 0x0
     b lbl_fn_8044386C_00000060
 lbl_fn_8044386C_0000005C:

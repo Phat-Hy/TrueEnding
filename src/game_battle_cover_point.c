@@ -9,20 +9,20 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
-extern void fn_8008AD4C(void);
-extern void fn_8008B140(void);
+extern void area_updateZoneState(void);
+extern void map_processTrigger(void);
 extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void skin_applyWeights(void);
-extern void fn_800CB360(void);
+extern void morph_reset(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB440(void);
+extern void morph_updateWeights(void);
 extern void fn_800CB518(void);
 extern void morph_updateMesh(void);
 extern void fn_800CB6B0(void);
-extern void fn_803EC568(void);
-extern void fn_803EC69C(void);
-extern void fn_803EC91C(void);
+extern void task_createWorker(void);
+extern void task_destroyWorker(void);
+extern void task_updateWorker(void);
 extern void fn_8040B560(void);
 extern void fn_8040B60C(void);
 extern void fn_8040B668(void);
@@ -34,8 +34,8 @@ extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void rand(void);
-extern void fn_8068A850(void);
-extern void fn_8068AD58(void);
+extern void std_sin(void);
+extern void std_cos(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
 extern void runtime_registerStaticObject(void);
@@ -194,12 +194,12 @@ lbl_fn_8040BE88_00000130:
     fmuls f1, f1, f2
     fadds f1, f0, f1
     stfs f1, 0x3e4(r30)
-    bl fn_8068AD58
+    bl std_cos
     lfs f0, 0x3e4(r30)
     frsp f2, f1
     fneg f1, f0
     stfs f2, 0x3ec(r30)
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     stfs f0, 0x3f4(r30)
 lbl_fn_8040BE88_000001AC:
@@ -308,12 +308,12 @@ lbl_fn_8040C058_000002E0:
     stfs f0, 0x3e4(r31)
 lbl_fn_8040C058_00000330:
     lfs f1, 0x3e4(r31)
-    bl fn_8068AD58
+    bl std_cos
     lfs f0, 0x3e4(r31)
     frsp f3, f1
     fneg f1, f0
     stfs f3, 0x3ec(r31)
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     stfs f0, 0x3f4(r31)
     b lbl_fn_8040C058_00000368
@@ -425,7 +425,7 @@ lbl_fn_8040C058_0000045C:
     lfs f0, 0x50(r1)
     lfd f1, lbl_80752AD8@l(r3)
     fmadds f30, f3, f0, f4
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     fcmpo cr0, f30, f0
     ble lbl_fn_8040C058_000005C4
@@ -578,12 +578,12 @@ lbl_fn_8040C058_000006DC:
     stfs f0, 0x3e4(r31)
 lbl_fn_8040C058_00000730:
     lfs f1, 0x3e4(r31)
-    bl fn_8068AD58
+    bl std_cos
     lfs f0, 0x3e4(r31)
     frsp f3, f1
     fneg f1, f0
     stfs f3, 0x3ec(r31)
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     stfs f0, 0x3f4(r31)
 lbl_fn_8040C058_00000754:
@@ -696,12 +696,12 @@ lbl_fn_8040C610_00000898:
     stfs f0, 0x3e4(r30)
 lbl_fn_8040C610_000008E8:
     lfs f1, 0x3e4(r30)
-    bl fn_8068AD58
+    bl std_cos
     lfs f0, 0x3e4(r30)
     frsp f3, f1
     fneg f1, f0
     stfs f3, 0x3ec(r30)
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     stfs f0, 0x3f4(r30)
     b lbl_fn_8040C610_00000920
@@ -813,7 +813,7 @@ lbl_fn_8040C610_00000A14:
     lfs f0, 0x5c(r1)
     lfd f1, lbl_80752AD8@l(r3)
     fmadds f30, f3, f0, f4
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     fcmpo cr0, f30, f0
     ble lbl_fn_8040C610_00000B7C
@@ -896,7 +896,7 @@ lbl_fn_8040C610_00000B7C:
     lfs f0, 0x50(r1)
     lfd f1, lbl_80752AD8@l(r3)
     fmadds f30, f3, f0, f4
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     fcmpo cr0, f30, f0
     ble lbl_fn_8040C610_00000CBC
@@ -1059,12 +1059,12 @@ lbl_fn_8040C610_00000DF8:
     stfs f0, 0x3e4(r30)
 lbl_fn_8040C610_00000E4C:
     lfs f1, 0x3e4(r30)
-    bl fn_8068AD58
+    bl std_cos
     lfs f0, 0x3e4(r30)
     frsp f3, f1
     fneg f1, f0
     stfs f3, 0x3ec(r30)
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     stfs f0, 0x3f4(r30)
 lbl_fn_8040C610_00000E70:
@@ -1180,12 +1180,12 @@ lbl_fn_8040CD2C_00000FB0:
     stfs f0, 0x3e4(r31)
 lbl_fn_8040CD2C_00001008:
     lfs f1, 0x3e4(r31)
-    bl fn_8068AD58
+    bl std_cos
     lfs f0, 0x3e4(r31)
     frsp f3, f1
     fneg f1, f0
     stfs f3, 0x3ec(r31)
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     stfs f0, 0x3f4(r31)
     b lbl_fn_8040CD2C_00001320
@@ -1453,7 +1453,7 @@ asm void fn_8040D244(void)
     mr r29, r3
     lwz r5, 0x18(r5)
     lwz r6, 0x1c(r30)
-    bl fn_803EC568
+    bl task_createWorker
     lis r3, lbl_8078D500@ha
     li r31, 0x0
     addi r3, r3, lbl_8078D500@l
@@ -1463,7 +1463,7 @@ asm void fn_8040D244(void)
     stw r31, 0x60c(r29)
     stw r30, 0x630(r29)
     stw r31, 0x634(r29)
-    bl fn_800CB360
+    bl morph_reset
     lfs f0, lbl_80886318
     lwz r3, 0x60c(r29)
     stfs f0, 0x63c(r29)
@@ -1565,7 +1565,7 @@ lbl_fn_8040D3A0_00001568:
 lbl_fn_8040D3A0_00001574:
     mr r3, r30
     li r4, 0x0
-    bl fn_803EC69C
+    bl task_destroyWorker
     cmpwi r31, 0x0
     ble lbl_fn_8040D3A0_00001590
     mr r3, r30
@@ -1593,7 +1593,7 @@ asm void fn_8040D434(void)
     psq_st f30, 0x78(r1), 0, 0
     bl _savegpr_21
     mr r26, r3
-    bl fn_803EC91C
+    bl task_updateWorker
     cmpwi r3, 0x0
     bne lbl_fn_8040D434_00001844
     lbz r0, 0xf4(r26)
@@ -1611,7 +1611,7 @@ lbl_fn_8040D434_000015FC:
     lwz r0, 0x60c(r26)
     add r3, r0, r24
     addi r3, r3, 0x4
-    bl fn_8008AD4C
+    bl area_updateZoneState
     mr r22, r26
     addi r21, r26, 0x1f5
     li r27, 0x0
@@ -1664,7 +1664,7 @@ lbl_fn_8040D434_000016C4:
     cmpwi r0, 0x0
     bne lbl_fn_8040D434_00001810
     addi r3, r29, 0x4
-    bl fn_8008B140
+    bl map_processTrigger
     cmpwi r3, 0x0
     bne lbl_fn_8040D434_00001808
     mr r3, r29
@@ -1856,7 +1856,7 @@ lbl_fn_8040D6F8_00001910:
     bl skin_applyWeights
     addi r3, r31, 0x638
     addi r4, r1, 0x10
-    bl fn_800CB440
+    bl morph_updateWeights
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle
@@ -1897,7 +1897,7 @@ lbl_fn_8040D6F8_000019CC:
     bl skin_applyWeights
     addi r3, r31, 0x638
     addi r4, r1, 0xc
-    bl fn_800CB440
+    bl morph_updateWeights
     addi r3, r1, 0xc
     li r4, -0x1
     bl ref_releaseHandle
@@ -1924,7 +1924,7 @@ lbl_fn_8040D6F8_00001A50:
     bl skin_applyWeights
     addi r3, r31, 0x638
     addi r4, r1, 0x8
-    bl fn_800CB440
+    bl morph_updateWeights
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle

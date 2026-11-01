@@ -17,14 +17,14 @@ extern void fn_8004B338(void);
 extern void fn_80069BF4(void);
 extern void fn_8006AA20(void);
 extern void fn_8006B174(void);
-extern void fn_8006EF48(void);
+extern void script_executeOpcode(void);
 extern void str_assignBuffer(void);
 extern void fn_8007A748(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_8008B130(void);
-extern void fn_80097D40(void);
+extern void atn_Anim_getLayerTrack(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_setActive(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
@@ -537,7 +537,7 @@ lbl_fn_80227434_000005D8:
     blt lbl_fn_80227434_000005F4
     mr r4, r24
     addi r3, r26, 0xb0
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     bne lbl_fn_80227434_000005F8
 lbl_fn_80227434_000005F4:
@@ -2010,7 +2010,7 @@ lbl_fn_80228CA0_00001984:
     la r4, lbl_8087DBD8
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     slwi r0, r31, 4
     add r3, r26, r0
     lfs f0, 0xd0(r3)
@@ -2121,7 +2121,7 @@ lbl_fn_80228CA0_00001A90:
     mr r4, r27
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     add r3, r26, r31
     addic. r0, r1, 0x28
     lfs f0, 0xd0(r3)

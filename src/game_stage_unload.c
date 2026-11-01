@@ -6,18 +6,18 @@ extern void __files(void);
 extern void dtor_80084684(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_8008BBD8(void);
+extern void map_debugLog(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_8012476C(void);
 extern void fn_801426A4(void);
-extern void fn_801539E0(void);
+extern void inventory_unequipItem(void);
 extern void fn_80155DAC(void);
-extern void fn_8016DA4C(void);
+extern void debuff_clearStatus(void);
 extern void fn_801750FC(void);
 extern void fn_801B2EDC(void);
-extern void fn_803EA77C(void);
+extern void chest_spawnLoot(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
@@ -117,7 +117,7 @@ asm void fn_80198C08(void)
     stw r5, 0x2c(r3)
     stw r0, 0x560(r4)
     lwz r3, 0x4(r3)
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lwz r3, 0x4(r31)
     lwz r0, 0x12a4(r3)
     extrwi. r0, r0, 1, 25
@@ -129,7 +129,7 @@ lbl_fn_80198C08_00000094:
     lwz r0, 0x12a4(r3)
     srwi. r0, r0, 31
     beq lbl_fn_80198C08_000000A8
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_80198C08_000000A8:
     lwz r3, 0x4(r31)
     lwz r0, 0x12a4(r3)
@@ -366,7 +366,7 @@ lbl_fn_80198C08_00000408:
     lfs f1, lbl_80881FBC
     li r6, 0x0
     lfs f2, lbl_80881FF4
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_80198C08_0000042C:
     psq_l f31, 0x138(r1), 0, 0
     mr r3, r31
@@ -1598,7 +1598,7 @@ lbl_fn_8019A0C4_00001598:
     stw r4, 0x48(r1)
     stw r0, 0x4c(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_8019A0C4_0000166C
     lwz r7, 0x3c(r1)
@@ -1780,13 +1780,13 @@ asm void fn_8019A3F4(void)
     stw r5, 0x8(r3)
     stw r0, 0x560(r4)
     lwz r3, 0x4(r3)
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lwz r3, 0x4(r30)
     lwz r0, 0x12a4(r3)
     srwi. r0, r0, 31
     beq lbl_fn_8019A3F4_0000184C
     mr r3, r31
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_8019A3F4_0000184C:
     lwz r3, 0x4(r30)
     lwz r0, 0x12a4(r3)

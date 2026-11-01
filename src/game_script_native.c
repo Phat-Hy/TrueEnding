@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void _restgpr_17(void);
 extern void _savegpr_17(void);
-extern void fn_8004D388(void);
+extern void collision_queryGeometry(void);
 extern void collision_testLineSegment(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -13,15 +13,15 @@ extern void ref_releaseHandle(void);
 extern void fn_800E8630(void);
 extern void fn_800EB7A0(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8C6C(void);
+extern void scissor_clipFrustum(void);
 extern void fn_80126214(void);
 extern void fn_8013322C(void);
 extern void fn_8013A258(void);
-extern void fn_8013CB68(void);
-extern void fn_80144710(void);
+extern void npc_updateTalkInteraction(void);
+extern void quest_evaluateConditions(void);
 extern void fn_801489CC(void);
 extern void dialog_renderWindow(void);
-extern void fn_80151448(void);
+extern void inventory_applyItemStats(void);
 extern void fn_80158BB4(void);
 extern void fn_80158CA4(void);
 extern void fn_8015DEC0(void);
@@ -29,8 +29,8 @@ extern void fn_8015E4B0(void);
 extern void fn_801656A4(void);
 extern void fn_8016E4C4(void);
 extern void actor_setState(void);
-extern void fn_801765D8(void);
-extern void fn_80179D44(void);
+extern void battle_awardExp(void);
+extern void actor_getMovementFlags(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
 extern void fn_8023A02C(void);
@@ -261,7 +261,7 @@ lbl_fn_80252A90_0000021C:
 lbl_fn_80252A90_00000230:
     mr r3, r28
     mr r4, r29
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r12, 0x0(r28)
     mr r3, r28
     mr r4, r29
@@ -849,7 +849,7 @@ lbl_fn_802531F4_00000AA8:
     mr r3, r29
     addi r4, r1, 0x40
     li r5, 0x1
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
 lbl_fn_802531F4_00000AC0:
     lwz r0, 0x560(r29)
     cmpwi r0, 0x7e
@@ -1047,7 +1047,7 @@ lbl_fn_80253684_00000D98:
     ori r0, r4, 0x8000
     stw r0, 0x12a4(r31)
     mr r3, r31
-    bl fn_801765D8
+    bl battle_awardExp
     b lbl_fn_80253684_00000E9C
 lbl_fn_80253684_00000DAC:
     lfs f2, 0x2e4(r31)
@@ -1357,7 +1357,7 @@ lbl_fn_80253884_00001214:
     mr r3, r31
     addi r4, r1, 0x8
     li r5, 0x1
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
 lbl_fn_80253884_0000122C:
     lwz r0, lbl_8087F048
     cmpwi r0, 0x0
@@ -1367,7 +1367,7 @@ lbl_fn_80253884_0000122C:
     cmpwi r3, 0x0
     beq lbl_fn_80253884_0000129C
     mr r3, r31
-    bl fn_80144710
+    bl quest_evaluateConditions
     lwz r0, 0x560(r31)
     cmpwi r0, 0xa
     bne lbl_fn_80253884_0000126C
@@ -1388,7 +1388,7 @@ lbl_fn_80253884_00001278:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
 lbl_fn_80253884_0000129C:
     lwz r0, 0x144(r1)
     psq_l f31, 0x138(r1), 0, 0
@@ -1828,7 +1828,7 @@ lbl_fn_80253F00_00001768:
     stw r29, 0xd0(r1)
     stw r29, 0xd4(r1)
     stw r29, 0xd8(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     oris r7, r3, 0x8000
     mr r3, r17
     mr r5, r23
@@ -1858,7 +1858,7 @@ lbl_fn_80253F00_00001910:
     stfs f2, 0x40(r1)
     stfs f3, 0x48(r1)
     stfs f0, 0x3c(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     oris r7, r3, 0x8000
     mr r3, r17
     mr r5, r23
@@ -1886,7 +1886,7 @@ lbl_fn_80253F00_00001984:
     stfs f0, 0x48(r1)
     stfs f30, 0xc(r1)
     stfs f30, 0x10(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lfs f1, lbl_80883374
     oris r7, r3, 0x8000
     mr r3, r17
@@ -1895,7 +1895,7 @@ lbl_fn_80253F00_00001984:
     addi r6, r1, 0x8
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004D388
+    bl collision_queryGeometry
     cmpwi r3, 0x0
     beq lbl_fn_80253F00_00001A00
     psq_l f1, 0x0(r22), 0, 0
@@ -1967,7 +1967,7 @@ lbl_fn_80253F00_00001AD0:
     lfs f1, lbl_8088333C
     lfs f2, lbl_80883358
     addi r4, r3, 0x534
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
     psq_l f31, 0x168(r1), 0, 0
     mr r3, r17
     lfd f31, 0x160(r1)

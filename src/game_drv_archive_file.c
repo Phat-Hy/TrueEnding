@@ -14,10 +14,10 @@ extern void fn_800A55D4(void);
 extern void ref_releaseHandle(void);
 extern void morph_updateMesh(void);
 extern void fn_8012D180(void);
-extern void fn_8014DEE4(void);
+extern void dialog_selectChoice(void);
 extern void fn_80160170(void);
 extern void fn_80160324(void);
-extern void fn_8016F3D0(void);
+extern void battle_canTargetActor(void);
 extern void fn_801781B0(void);
 extern void fn_80178864(void);
 extern void fn_8017ABD4(void);
@@ -90,10 +90,8 @@ asm void fn_805A96C4(void)
     blr
 }
 
-asm void fn_805A96D4(void)
+void fn_805A96D4(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_805A96D8(void)
@@ -926,7 +924,7 @@ lbl_fn_805AA018_00000BF4:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8014DEE4
+    bl dialog_selectChoice
     b lbl_fn_805AA018_00000CB0
 lbl_fn_805AA018_00000C20:
     cmpwi r30, 0xa
@@ -938,7 +936,7 @@ lbl_fn_805AA018_00000C20:
     li r4, 0x1
     li r5, 0x0
     li r6, 0x0
-    bl fn_8014DEE4
+    bl dialog_selectChoice
     b lbl_fn_805AA018_00000CB0
 lbl_fn_805AA018_00000C4C:
     lwz r3, 0x5c(r31)
@@ -954,7 +952,7 @@ lbl_fn_805AA018_00000C4C:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8014DEE4
+    bl dialog_selectChoice
     b lbl_fn_805AA018_00000CB0
 lbl_fn_805AA018_00000C88:
     cmpwi r30, 0xa
@@ -966,7 +964,7 @@ lbl_fn_805AA018_00000C88:
     li r4, 0x1
     li r5, 0x0
     li r6, 0x0
-    bl fn_8014DEE4
+    bl dialog_selectChoice
 lbl_fn_805AA018_00000CB0:
     addi r3, r31, 0x7d4
     bl fn_8012D180
@@ -1797,7 +1795,7 @@ lbl_fn_805AA950_00001810:
     lwz r3, 0x54(r28)
     li r5, 0x1
     lwz r4, 0x4(r21)
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     bne lbl_fn_805AA950_0000191C
 lbl_fn_805AA950_0000184C:
@@ -1947,7 +1945,7 @@ lbl_fn_805AA950_00001A24:
     lwz r3, 0x54(r28)
     li r5, 0x1
     lwz r4, 0x4(r23)
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     bne lbl_fn_805AA950_00001AAC
 lbl_fn_805AA950_00001A6C:

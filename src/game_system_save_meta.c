@@ -19,28 +19,28 @@ extern void fn_80099E9C(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void system_getNextSequenceId(void);
 extern void fn_8011F91C(void);
-extern void fn_80121F00(void);
+extern void equip_getGlobalManager(void);
 extern void fn_8013322C(void);
 extern void boss_updatePhaseState(void);
 extern void fn_80139550(void);
-extern void fn_8013C38C(void);
+extern void npc_getPosition(void);
 extern void fn_8013C480(void);
 extern void fn_8013C504(void);
-extern void fn_80144710(void);
-extern void fn_80145334(void);
+extern void quest_evaluateConditions(void);
+extern void quest_updateFlow(void);
 extern void quest_checkCondition(void);
-extern void fn_8014C540(void);
-extern void fn_80151448(void);
+extern void dialog_updateScriptState(void);
+extern void inventory_applyItemStats(void);
 extern void fn_8015ECC4(void);
 extern void fn_8016E4C4(void);
 extern void actor_setState(void);
 extern void task_findEntryById(void);
-extern void fn_802376D0(void);
+extern void res_MsgHandle_isLoading(void);
 extern void res_MsgHandle_update(void);
 extern void res_findResourceSlot(void);
 extern void fn_80244CAC(void);
@@ -198,10 +198,7 @@ asm void fn_803458C0(void)
     blr
 }
 
-asm void fn_803458CC(void)
-{
-    nofralloc
-    blr
+void fn_803458CC(void) {
 }
 
 asm void fn_803458D0(void)
@@ -212,10 +209,7 @@ asm void fn_803458D0(void)
     blr
 }
 
-asm void fn_803458DC(void)
-{
-    nofralloc
-    blr
+void fn_803458DC(void) {
 }
 
 asm void fn_803458E0(void)
@@ -444,7 +438,7 @@ asm void fn_80345BA8(void)
     cmpwi r3, 0x0
     bne lbl_fn_80345BA8_00000B08
     addi r3, r29, 0x1648
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_80345BA8_00000B08
     addi r3, r29, 0x16cc
@@ -456,7 +450,7 @@ asm void fn_80345BA8(void)
     cmpwi r3, 0x0
     bne lbl_fn_80345BA8_00000B08
     addi r3, r29, 0x17d8
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_80345BA8_00000B08
     addi r3, r29, 0x1704
@@ -496,7 +490,7 @@ asm void fn_80345BA8(void)
     cmpwi r3, 0x0
     bne lbl_fn_80345BA8_00000B08
     mr r3, r29
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_80345BA8_00000B08
     mr r3, r29
@@ -533,10 +527,10 @@ asm void fn_80345BA8(void)
     oris r0, r0, 0x388
     ori r0, r0, 0x400
     stw r0, 0x7ec(r29)
-    bl fn_80121F00
+    bl equip_getGlobalManager
     cmpwi r3, 0x0
     beq lbl_fn_80345BA8_00000528
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_8013C504
     mr r31, r3
     b lbl_fn_80345BA8_0000052C
@@ -1011,7 +1005,7 @@ asm void fn_80346384(void)
     bl fn_8034F41C
 lbl_fn_80346384_00000BC8:
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     mr r3, r31
     bl fn_803470F0
     b lbl_fn_80346384_0000110C
@@ -1050,7 +1044,7 @@ lbl_fn_80346384_00000BEC:
 lbl_fn_80346384_00000C54:
     mr r3, r31
     bl fn_80352EA4
-    bl fn_80121F00
+    bl equip_getGlobalManager
     li r4, 0x8c
     bl world_getLocalFlag
     cmpwi r3, 0x0
@@ -1110,7 +1104,7 @@ lbl_fn_80346384_00000D30:
     cmpwi r30, 0x0
     bne lbl_fn_80346384_00000CFC
 lbl_fn_80346384_00000D38:
-    bl fn_80121F00
+    bl equip_getGlobalManager
     li r4, 0x8c
     li r5, 0x0
     bl world_setLocalFlag
@@ -1160,7 +1154,7 @@ lbl_fn_80346384_00000DD0:
     lbz r0, 0x1808(r31)
     cmpwi r0, 0x0
     bne lbl_fn_80346384_00000E04
-    bl fn_8013C38C
+    bl npc_getPosition
     lfs f1, 0x4(r3)
     lfs f0, lbl_808853AC
     fcmpo cr0, f1, f0
@@ -1266,12 +1260,12 @@ lbl_fn_80346384_00000F50:
 lbl_fn_80346384_00000F68:
     mr r3, r31
     bl fn_80339F74
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl kpad_getClampData
     mr r28, r3
     bl fn_8000D9E8
     bl fn_8000DCF4
-    bl fn_8013C38C
+    bl npc_getPosition
     lfs f2, 0x4(r3)
     lfs f1, 0x52c(r31)
     lfs f0, lbl_808853B0
@@ -1298,9 +1292,9 @@ lbl_fn_80346384_00000FAC:
     bl fn_80339F84
 lbl_fn_80346384_00000FE0:
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     mr r3, r31
     bl fn_803470F0
     lfs f1, lbl_808853B4
@@ -1321,7 +1315,7 @@ lbl_fn_80346384_00000FE0:
     lbz r0, 0x17ec(r31)
     cmpwi r0, 0x0
     bne lbl_fn_80346384_00001078
-    bl fn_80144710
+    bl quest_evaluateConditions
     addi r3, r1, 0x8
     li r4, 0x0
     bl fn_80317034
@@ -1420,7 +1414,7 @@ asm void fn_80346990(void)
     beq lbl_fn_80346990_000011C0
     li r0, 0x0
     stw r0, 0x40(r4)
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r12, 0x0(r30)
     mr r3, r30
     mr r4, r31

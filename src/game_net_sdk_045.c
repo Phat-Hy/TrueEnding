@@ -24,7 +24,7 @@ extern void fn_806A4260(void);
 extern void fn_806A4264(void);
 extern void fn_806A426C(void);
 extern void fn_806A4270(void);
-extern void fn_806D58F0(void);
+extern void net_bufferGetCount(void);
 extern void net_bufferGetElement(void);
 extern void fn_806D62F0(void);
 extern void fn_806D63A0(void);
@@ -158,7 +158,7 @@ lbl_fn_806FCFE0_00000068:
     lwz r3, lbl_808627E0@l(r31)
     cmpwi r3, 0x0
     beq lbl_fn_806FCFE0_000000A0
-    bl fn_806D58F0
+    bl net_bufferGetCount
     subi r30, r3, 0x1
     b lbl_fn_806FCFE0_00000098
 lbl_fn_806FCFE0_00000084:
@@ -490,7 +490,7 @@ lbl_fn_806FD420_00000518:
     addi r28, r28, 0x1
 lbl_fn_806FD420_0000051C:
     lwz r3, lbl_808627E0@l(r29)
-    bl fn_806D58F0
+    bl net_bufferGetCount
     cmpw r28, r3
     blt lbl_fn_806FD420_000004F8
     li r31, 0x0
@@ -647,7 +647,7 @@ lbl_fn_806FD420_00000758:
     addi r28, r28, 0x1
 lbl_fn_806FD420_0000075C:
     lwz r3, lbl_808627E0@l(r29)
-    bl fn_806D58F0
+    bl net_bufferGetCount
     cmpw r28, r3
     blt lbl_fn_806FD420_00000738
     li r28, 0x0
@@ -709,7 +709,7 @@ lbl_fn_806FD420_00000834:
     addi r28, r28, 0x1
 lbl_fn_806FD420_00000838:
     lwz r3, lbl_808627E0@l(r31)
-    bl fn_806D58F0
+    bl net_bufferGetCount
     cmpw r28, r3
     blt lbl_fn_806FD420_00000818
     li r3, 0x0

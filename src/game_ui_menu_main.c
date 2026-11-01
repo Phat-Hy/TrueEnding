@@ -8,19 +8,19 @@ extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_8008BBD8(void);
+extern void map_debugLog(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_80145334(void);
-extern void fn_801539E0(void);
+extern void quest_updateFlow(void);
+extern void inventory_unequipItem(void);
 extern void fn_80154344(void);
-extern void fn_8015495C(void);
+extern void equip_applyToCharacter(void);
 extern void fn_80155DAC(void);
 extern void fn_80178208(void);
 extern void fn_80192758(void);
 extern void fn_801B2EDC(void);
 extern void fn_801B618C(void);
-extern void fn_803EA77C(void);
+extern void chest_spawnLoot(void);
 extern void fn_8054770C(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
@@ -191,7 +191,7 @@ asm void fn_801B3EEC(void)
     stw r0, 0x638(r7)
     li r7, 0x1
     lwz r3, 0x4(r30)
-    bl fn_8015495C
+    bl equip_applyToCharacter
 lbl_fn_801B3EEC_00000114:
     li r3, 0x1
     b lbl_fn_801B3EEC_000001BC
@@ -558,7 +558,7 @@ lbl_fn_801B4394_000005F8:
     psq_st f1, 0x534(r3), 0, 0
     stfs f2, 0x53c(r3)
     lwz r3, 0x4(r28)
-    bl fn_80145334
+    bl quest_updateFlow
     lwz r3, lbl_8087F498
     cmpwi r3, 0x0
     beq lbl_fn_801B4394_00000654
@@ -567,7 +567,7 @@ lbl_fn_801B4394_000005F8:
     lfs f1, lbl_80882484
     li r6, 0x0
     lfs f2, lbl_8088248C
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_801B4394_00000654:
     lwz r31, 0x1c(r1)
     mr r3, r28
@@ -632,7 +632,7 @@ lbl_fn_801B44E8_000006E8:
     ori r0, r0, 0x1
     stw r0, 0x5c0(r3)
     lwz r3, 0x4(r30)
-    bl fn_8015495C
+    bl equip_applyToCharacter
     lwz r3, 0x4(r30)
     li r0, 0x1
     lfs f1, lbl_80882484
@@ -682,7 +682,7 @@ lbl_fn_801B44E8_000006E8:
     stfs f2, 0x530(r4)
     stfs f2, 0x1c(r1)
     lwz r3, 0x4(r30)
-    bl fn_80145334
+    bl quest_updateFlow
     li r3, 0x1
     b lbl_fn_801B44E8_00000858
 lbl_fn_801B44E8_00000804:
@@ -975,7 +975,7 @@ lbl_fn_801B47EC_00000BC0:
     stw r4, 0x19c(r1)
     stb r0, 0x1a0(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_801B47EC_00000D14
     lwz r8, 0x180(r1)
@@ -1339,7 +1339,7 @@ lbl_fn_801B4D34_00001140:
     lwz r0, 0x12a4(r3)
     srwi. r0, r0, 31
     beq lbl_fn_801B4D34_00001154
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_801B4D34_00001154:
     lwz r3, 0x4(r31)
     li r4, 0x0
@@ -1826,7 +1826,7 @@ lbl_fn_801B54E8_000017C0:
     stw r4, 0x48(r1)
     stw r0, 0x4c(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_801B54E8_00001894
     lwz r7, 0x3c(r1)

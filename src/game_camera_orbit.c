@@ -15,29 +15,29 @@ extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
 extern void fn_8006AFF8(void);
 extern void mem_free(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_applyWeights(void);
-extern void fn_800CB360(void);
+extern void morph_reset(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB440(void);
+extern void morph_updateWeights(void);
 extern void fn_800CB58C(void);
 extern void morph_updateMesh(void);
 extern void fn_800CB6E4(void);
 extern void atn_Task_setActive(void);
 extern void str_parseInt(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8C6C(void);
+extern void scissor_clipFrustum(void);
 extern void clip_calculateFrustum(void);
 extern void boss_updatePhaseState(void);
-extern void fn_80145334(void);
-extern void fn_8014C540(void);
+extern void quest_updateFlow(void);
+extern void dialog_updateScriptState(void);
 extern void fn_8016E4C4(void);
 extern void actor_setState(void);
 extern void fn_8017039C(void);
 extern void fn_80170A20(void);
-extern void fn_801765D8(void);
+extern void battle_awardExp(void);
 extern void task_findEntryById(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
@@ -146,7 +146,7 @@ lbl_fn_802E8250_00000068:
     ori r0, r4, 0x8000
     stw r0, 0x12a4(r31)
     mr r3, r31
-    bl fn_801765D8
+    bl battle_awardExp
     b lbl_fn_802E8250_00000084
 lbl_fn_802E8250_0000007C:
     li r0, 0x1e
@@ -323,7 +323,7 @@ asm void fn_802E84C8(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_802E84C8_000002C4
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_802E84C8_000002C4:
     addic. r31, r29, 0x1510
     beq lbl_fn_802E84C8_000002E4
@@ -421,9 +421,9 @@ asm void fn_802E8580(void)
     addi r3, r29, 0x1594
     bl res_MsgHandle_constructor
     addi r3, r29, 0x15a0
-    bl fn_800CB360
+    bl morph_reset
     addi r3, r29, 0x15a4
-    bl fn_800CB360
+    bl morph_reset
     lwz r0, 0x12a4(r29)
     lis r3, lbl_80747F70@ha
     lfs f0, lbl_808847A8
@@ -672,7 +672,7 @@ asm void fn_802E89B0(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_802E89B0_000007D8
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_802E89B0_000007D8:
     addi r3, r29, 0x15a4
     li r4, -0x1
@@ -1590,7 +1590,7 @@ lbl_fn_802E9590_00001480:
     bl skin_applyWeights
     addi r3, r31, 0x15a4
     addi r4, r1, 0x14
-    bl fn_800CB440
+    bl morph_updateWeights
     addi r3, r1, 0x14
     li r4, -0x1
     bl ref_releaseHandle
@@ -1615,7 +1615,7 @@ lbl_fn_802E9590_00001508:
     bl skin_applyWeights
     addi r3, r31, 0x15a0
     addi r4, r1, 0x10
-    bl fn_800CB440
+    bl morph_updateWeights
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle
@@ -1684,7 +1684,7 @@ lbl_fn_802E9590_00001610:
     lfs f1, lbl_808847A8
     li r9, 0x3c
     li r10, 0x5
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
 lbl_fn_802E9590_0000165C:
     lwz r4, 0x14f4(r31)
     cmpwi r4, 0x0
@@ -1983,9 +1983,9 @@ lbl_fn_802E9590_00001AA0:
     mr r3, r31
     addi r0, r4, 0x1
     stw r0, 0x14fc(r31)
-    bl fn_8014C540
+    bl dialog_updateScriptState
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     lwz r0, 0x134(r1)
     psq_l f31, 0x128(r1), 0, 0
     lfd f31, 0x120(r1)

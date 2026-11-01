@@ -16,9 +16,9 @@ extern void fn_8004A660(void);
 extern void fn_80060D58(void);
 extern void skill_calculateDamage(void);
 extern void fn_80063D3C(void);
-extern void fn_800897D8(void);
-extern void fn_8008BBD8(void);
-extern void fn_800BFAC8(void);
+extern void node_destroy(void);
+extern void map_debugLog(void);
+extern void motion_updateFogAdj(void);
 extern void fn_800C7E70(void);
 extern void fn_800C81CC(void);
 extern void fn_800C8278(void);
@@ -156,7 +156,7 @@ lbl_fn_800CDD8C_000000D4:
     stw r4, 0x20(r1)
     stw r0, 0x24(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_800CDD8C_00000134
     addic. r0, r1, 0x38
@@ -217,7 +217,7 @@ lbl_fn_800CDD8C_000001AC:
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_800CDD8C_000001D0
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_800CDD8C_000001D0:
     addic. r3, r30, 0x34e0
     beq lbl_fn_800CDD8C_000001F4
@@ -291,7 +291,7 @@ lbl_fn_800CDF84_000002B0:
     stw r4, 0x20(r1)
     stw r0, 0x24(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_800CDF84_00000310
     addic. r0, r1, 0x38
@@ -556,7 +556,7 @@ lbl_fn_800CE368_00000694:
     stw r4, 0x20(r1)
     stw r0, 0x24(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_800CE368_000006F4
     addic. r0, r1, 0x38
@@ -1338,7 +1338,7 @@ lbl_fn_800CECF0_000011E4:
     lwz r4, lbl_8087EFB4
     addi r3, r1, 0x8
     addi r5, r24, 0x70
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f0, 0x10(r1)
     fcmpo cr0, f0, f29
     blt lbl_fn_800CECF0_000012C4
@@ -1729,7 +1729,7 @@ lbl_fn_800CF45C_00001788:
     stw r4, 0x20(r1)
     stw r0, 0x24(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_800CF45C_000017E8
     addic. r0, r1, 0x38

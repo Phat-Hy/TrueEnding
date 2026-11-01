@@ -12,7 +12,7 @@ extern void fn_80056DB8(void);
 extern void atn_ColliCapsule_destructor(void);
 extern void route_createSegment(void);
 extern void node_createNamedChild(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_80094958(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -21,26 +21,26 @@ extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void fn_80107A68(void);
 extern void fn_80108F38(void);
-extern void fn_8011FC10(void);
+extern void skill_findNodeById(void);
 extern void fn_8013322C(void);
 extern void boss_updatePhaseState(void);
-extern void fn_80145334(void);
-extern void fn_8014C540(void);
+extern void quest_updateFlow(void);
+extern void dialog_updateScriptState(void);
 extern void actor_setState(void);
 extern void fn_80170A20(void);
-extern void fn_801765D8(void);
+extern void battle_awardExp(void);
 extern void fn_8020A81C(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
-extern void fn_80237518(void);
-extern void fn_80237654(void);
-extern void fn_802376D0(void);
+extern void res_MsgHandle_ctor(void);
+extern void res_Resource_unload(void);
+extern void res_MsgHandle_isLoading(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_unload(void);
 extern void res_MsgHandle_update(void);
 extern void res_findResourceSlot(void);
-extern void fn_8023A680(void);
+extern void res_Shader_bindParams(void);
 extern void res_registerResource(void);
 extern void fn_802C1FEC(void);
 extern void fn_802C2BCC(void);
@@ -53,7 +53,7 @@ extern void fn_802C5F5C(void);
 extern void fn_802C653C(void);
 extern void fn_802C69BC(void);
 extern void fn_802C6DF4(void);
-extern void fn_8035B694(void);
+extern void entity_Instance_constructor(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
 extern void fn_8037D4C0(void);
@@ -956,7 +956,7 @@ asm void fn_802C0B68(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_802C0B68_00000B5C
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_802C0B68_00000B5C:
     addic. r31, r29, 0x191c
     beq lbl_fn_802C0B68_00000B7C
@@ -1007,7 +1007,7 @@ asm void fn_802C0C38(void)
     stw r29, 0x84(r1)
     stw r28, 0x80(r1)
     mr r28, r3
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lis r3, lbl_807866F0@ha
     li r30, 0x0
     addi r3, r3, lbl_807866F0@l
@@ -1017,7 +1017,7 @@ asm void fn_802C0C38(void)
     stw r30, 0x14d4(r28)
     stw r30, 0x14d8(r28)
     stw r30, 0x1524(r28)
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     addi r3, r28, 0x1578
     bl res_MsgHandle_constructor
     addi r31, r28, 0x1600
@@ -1051,7 +1051,7 @@ asm void fn_802C0C38(void)
     addi r3, r28, 0x16b0
     bl res_MsgHandle_constructor
     addi r3, r28, 0x16f4
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     lwz r8, 0x12a4(r28)
     lis r31, lbl_80746C90@ha
     lwz r0, 0x958(r28)
@@ -1107,7 +1107,7 @@ asm void fn_802C0C38(void)
     bl fn_80094958
     addi r3, r28, 0x156c
     addi r4, r31, 0x34
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r28, 0x1578
     addi r4, r31, 0x4d
     bl res_MsgHandle_destructor
@@ -1136,7 +1136,7 @@ asm void fn_802C0C38(void)
     stfs f0, 0x16ec(r28)
     stfs f0, 0x16d8(r28)
     stfs f0, 0x16c4(r28)
-    bl fn_80237654
+    bl res_Resource_unload
     lfs f9, lbl_808842B4
     li r0, 0x1
     lfs f8, lbl_808842B8
@@ -1202,7 +1202,7 @@ asm void fn_802C0F28(void)
     cmpwi r3, 0x0
     bne lbl_fn_802C0F28_00001194
     addi r3, r31, 0x156c
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_802C0F28_00001194
     addi r3, r31, 0x1578
@@ -1218,7 +1218,7 @@ asm void fn_802C0F28(void)
     cmpwi r3, 0x0
     bne lbl_fn_802C0F28_00001194
     addi r3, r31, 0x16f4
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_802C0F28_00001194
     lwz r0, 0x170c(r31)
@@ -1425,10 +1425,10 @@ lbl_fn_802C1208_00001218:
 lbl_fn_802C1208_00001220:
     lwz r3, lbl_8087F408
     lwz r4, 0x4(r28)
-    bl fn_8011FC10
+    bl skill_findNodeById
     cmpwi r3, 0x0
     beq lbl_fn_802C1208_00001238
-    bl fn_801765D8
+    bl battle_awardExp
 lbl_fn_802C1208_00001238:
     addi r31, r31, 0x1
     addi r28, r28, 0x4
@@ -1884,7 +1884,7 @@ lbl_fn_802C1208_000017FC:
     stw r0, 0x10(r1)
     li r9, 0x0
     li r10, 0x0
-    bl fn_8023A680
+    bl res_Shader_bindParams
     b lbl_fn_802C1208_00001C98
     mr r3, r30
     bl fn_802C4480
@@ -2167,9 +2167,9 @@ lbl_fn_802C1208_00001D2C:
     bl fn_802C4E80
 lbl_fn_802C1208_00001D38:
     mr r3, r30
-    bl fn_8014C540
+    bl dialog_updateScriptState
     mr r3, r30
-    bl fn_80145334
+    bl quest_updateFlow
     mr r3, r30
     bl fn_802C1FEC
     lis r4, lbl_80746C90@ha

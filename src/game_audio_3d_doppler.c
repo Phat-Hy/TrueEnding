@@ -4,12 +4,12 @@
 /* External function declarations */
 extern void vec3_copy(void);
 extern void fn_8000DD0C(void);
-extern void fn_8001047C(void);
-extern void fn_80011034(void);
+extern void vec3_assign(void);
+extern void vec3_toEulerAngles(void);
 extern void fn_80011220(void);
 extern void vec3_sub(void);
-extern void fn_8004D388(void);
-extern void fn_80057A64(void);
+extern void collision_queryGeometry(void);
+extern void mission_updateStub(void);
 extern void fn_80057A68(void);
 extern void fn_80063484(void);
 extern void atn_Matrix_copy(void);
@@ -31,17 +31,17 @@ extern void fn_8013322C(void);
 extern void fn_80133EE8(void);
 extern void fn_8013A194(void);
 extern void fn_8013A258(void);
-extern void fn_80145334(void);
+extern void quest_updateFlow(void);
 extern void fn_801495E8(void);
 extern void fn_80149624(void);
 extern void dialog_renderWindow(void);
-extern void fn_8014C540(void);
-extern void fn_80151448(void);
-extern void fn_8015495C(void);
+extern void dialog_updateScriptState(void);
+extern void inventory_applyItemStats(void);
+extern void equip_applyToCharacter(void);
 extern void fn_8015B238(void);
 extern void fn_8015E4B0(void);
 extern void fn_8016D454(void);
-extern void fn_8016DA4C(void);
+extern void debuff_clearStatus(void);
 extern void actor_setState(void);
 extern void fn_8016EB48(void);
 extern void fn_80176548(void);
@@ -85,8 +85,8 @@ extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void rand(void);
 extern void strcmp(void);
-extern void fn_8068A850(void);
-extern void fn_8068AD58(void);
+extern void std_sin(void);
+extern void std_cos(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
 extern void __ptmf_scall(void);
@@ -330,10 +330,10 @@ asm void fn_80323690(void)
     stw r5, 0x14c8(r3)
     stw r0, 0x14bc(r3)
     addi r3, r1, 0x58
-    bl fn_8001047C
+    bl vec3_assign
     addi r3, r1, 0x4c
     addi r4, r30, 0x534
-    bl fn_8001047C
+    bl vec3_assign
     mr r3, r30
     bl fn_80323C18
     lwz r0, 0xd18(r30)
@@ -374,7 +374,7 @@ lbl_fn_80323690_00000274:
     li r29, 0x0
     stw r29, 0xc(r1)
     addi r3, r1, 0x40
-    bl fn_80057A64
+    bl mission_updateStub
     mr r3, r30
     addi r4, r1, 0xc
     addi r5, r1, 0x40
@@ -407,7 +407,7 @@ lbl_fn_80323690_00000274:
     bl vec3_sub
     addi r3, r1, 0x1c
     addi r4, r1, 0x10
-    bl fn_80011034
+    bl vec3_toEulerAngles
     addi r3, r30, 0x14e8
     addi r4, r1, 0x1c
     bl vec3_copy
@@ -644,9 +644,9 @@ lbl_fn_80323690_0000064C:
 lbl_fn_80323690_000006A0:
     stfs f30, 0x14b4(r30)
     mr r3, r30
-    bl fn_8014C540
+    bl dialog_updateScriptState
     mr r3, r30
-    bl fn_80145334
+    bl quest_updateFlow
     lwz r3, 0x15ec(r30)
     cmpwi r31, 0x0
     subi r0, r3, 0x1
@@ -773,7 +773,7 @@ asm void fn_80323CDC(void)
     lwz r0, 0x4(r5)
     cmpwi r0, 0x2710
     bne lbl_fn_80323CDC_00000860
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r12, 0x0(r30)
     mr r3, r30
     mr r4, r31
@@ -813,7 +813,7 @@ lbl_fn_80323CDC_000008BC:
     bne lbl_fn_80323CDC_000008F4
     mr r3, r30
     mr r4, r31
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r12, 0x0(r30)
     mr r3, r30
     mr r4, r31
@@ -847,7 +847,7 @@ lbl_fn_80323CDC_000008F4:
 lbl_fn_80323CDC_0000094C:
     mr r3, r30
     mr r4, r31
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r12, 0x0(r30)
     mr r3, r30
     mr r4, r31
@@ -1050,9 +1050,9 @@ lbl_fn_80323E50_00000BE4:
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     mr r3, r30
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lfs f0, lbl_80884F1C
     li r3, 0x2
     li r0, 0x1
@@ -1847,7 +1847,7 @@ lbl_fn_80324A38_00001760:
     fmuls f0, f0, f4
     stfs f3, 0x574(r30)
     stfs f0, 0x57c(r30)
-    bl fn_8068AD58
+    bl std_cos
     frsp f4, f1
     lfs f3, 0x570(r30)
     lfs f0, lbl_80884F10
@@ -1855,7 +1855,7 @@ lbl_fn_80324A38_00001760:
     fmuls f3, f3, f4
     stfs f0, 0xa0(r1)
     stfs f3, 0x9c(r1)
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     lfs f6, 0x570(r30)
     lfs f4, 0x9c(r1)
@@ -1989,7 +1989,7 @@ lbl_fn_80324A38_000019B0:
     addi r6, r1, 0x9c
     addi r8, r30, 0x5b8
     li r9, 0x0
-    bl fn_8004D388
+    bl collision_queryGeometry
     addi r5, r1, 0x140
     lfs f2, 0x148(r1)
     addi r4, r1, 0xb4

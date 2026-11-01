@@ -26,7 +26,7 @@ extern void fn_80134134(void);
 extern void fn_80134168(void);
 extern void fn_801341B8(void);
 extern void fn_8014FCE8(void);
-extern void fn_8016F3D0(void);
+extern void battle_canTargetActor(void);
 extern void fn_80171DB0(void);
 extern void event_findEntryById(void);
 extern void sound_initGlobalInstances(void);
@@ -295,7 +295,7 @@ lbl_fn_80109F7C_000002E0:
     mr r3, r26
     mr r4, r23
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     beq lbl_fn_80109F7C_00000328
     lwz r0, 0x940(r23)
@@ -522,7 +522,7 @@ lbl_fn_8010A4A8_000005E0:
     mr r3, r30
     mr r4, r0
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cntlzw r0, r3
     srwi r31, r0, 5
     b lbl_fn_8010A4A8_00000634
@@ -760,7 +760,7 @@ lbl_fn_8010A868_00000944:
     beq lbl_fn_8010A868_00000974
     lwz r3, 0x0(r27)
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cntlzw r0, r3
     srwi r24, r0, 5
     b lbl_fn_8010A868_00000988

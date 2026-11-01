@@ -27,7 +27,7 @@ void fn_800832AC(void);
 void atn_SmallAllocator_allocate(void);
 void fn_80083760(void);
 void fn_800838AC(void);
-void fn_800838B8(void);
+void town_synchronizedDispatch(void);
 void fn_800839EC(void);
 void fn_80083AD4(void);
 void fn_80083E10(void);
@@ -479,7 +479,7 @@ asm void fn_800838AC(void)
     b fn_800832AC
 }
 
-asm void fn_800838B8(void)
+asm void town_synchronizedDispatch(void)
 {
     nofralloc
     stwu r1, -0x30(r1)
@@ -493,19 +493,19 @@ asm void fn_800838B8(void)
     mr r29, r7
     lwz r0, 0x1b0(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_800838B8_00000644
+    beq lbl_town_synchronizedDispatch_00000644
     addi r31, r3, 0x1b4
-    b lbl_fn_800838B8_00000648
-lbl_fn_800838B8_00000644:
+    b lbl_town_synchronizedDispatch_00000648
+lbl_town_synchronizedDispatch_00000644:
     li r31, 0x0
-lbl_fn_800838B8_00000648:
+lbl_town_synchronizedDispatch_00000648:
     cmpwi r31, 0x0
-    beq lbl_fn_800838B8_00000658
+    beq lbl_town_synchronizedDispatch_00000658
     mr r3, r31
     bl OSLockMutex
-lbl_fn_800838B8_00000658:
+lbl_town_synchronizedDispatch_00000658:
     cmpwi r28, 0x9
-    bne lbl_fn_800838B8_00000688
+    bne lbl_town_synchronizedDispatch_00000688
     lwz r12, 0x198(r25)
     addi r3, r25, 0x198
     mr r4, r26
@@ -515,8 +515,8 @@ lbl_fn_800838B8_00000658:
     mr r7, r29
     mtctr r12
     bctrl
-    b lbl_fn_800838B8_000006AC
-lbl_fn_800838B8_00000688:
+    b lbl_town_synchronizedDispatch_000006AC
+lbl_town_synchronizedDispatch_00000688:
     lwz r12, 0x138(r25)
     addi r3, r25, 0x138
     mr r4, r26
@@ -526,14 +526,14 @@ lbl_fn_800838B8_00000688:
     mr r7, r29
     mtctr r12
     bctrl
-lbl_fn_800838B8_000006AC:
+lbl_town_synchronizedDispatch_000006AC:
     cmpwi r3, 0x0
     mr r30, r3
-    bne lbl_fn_800838B8_00000718
+    bne lbl_town_synchronizedDispatch_00000718
     addi r3, r25, 0x168
     bl fn_80084FA0
     cmpwi r3, 0x0
-    beq lbl_fn_800838B8_000006F0
+    beq lbl_town_synchronizedDispatch_000006F0
     lwz r12, 0x168(r25)
     addi r3, r25, 0x168
     mr r4, r26
@@ -543,8 +543,8 @@ lbl_fn_800838B8_000006AC:
     mr r7, r29
     mtctr r12
     bctrl
-    b lbl_fn_800838B8_00000714
-lbl_fn_800838B8_000006F0:
+    b lbl_town_synchronizedDispatch_00000714
+lbl_town_synchronizedDispatch_000006F0:
     lwz r12, 0x150(r25)
     addi r3, r25, 0x150
     mr r4, r26
@@ -554,14 +554,14 @@ lbl_fn_800838B8_000006F0:
     mr r7, r29
     mtctr r12
     bctrl
-lbl_fn_800838B8_00000714:
+lbl_town_synchronizedDispatch_00000714:
     mr r30, r3
-lbl_fn_800838B8_00000718:
+lbl_town_synchronizedDispatch_00000718:
     cmpwi r31, 0x0
-    beq lbl_fn_800838B8_00000728
+    beq lbl_town_synchronizedDispatch_00000728
     mr r3, r31
     bl OSUnlockMutex
-lbl_fn_800838B8_00000728:
+lbl_town_synchronizedDispatch_00000728:
     mr r3, r30
     lmw r25, 0x14(r1)
     lwz r0, 0x34(r1)

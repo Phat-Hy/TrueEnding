@@ -21,7 +21,7 @@ extern void fn_804730D4(void);
 extern void fn_80473104(void);
 extern void printf(void);
 extern void abort(void);
-extern void fn_806952C4(void);
+extern void msl_releaseRefCount(void);
 extern void vec3_isNonZero(void);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
@@ -1361,7 +1361,7 @@ lbl_fn_804714B0_0000102C:
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_804714B0_00001068
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_804714B0_00001068:
     lwz r3, 0x0(r16)
     mr r4, r17

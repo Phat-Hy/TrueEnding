@@ -9,8 +9,8 @@ extern void atn_ColliBase_destructor(void);
 extern void fn_80057F28(void);
 extern void fn_800588FC(void);
 extern void talk_formatQuotedString(void);
-extern void fn_8005BBF8(void);
-extern void fn_8005BCE8(void);
+extern void talk_parseQuotes(void);
+extern void talk_copySpeakerName(void);
 extern void mem_alloc(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
@@ -24,13 +24,13 @@ extern void fn_800C1814(void);
 extern void fn_800C1990(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB440(void);
+extern void morph_updateWeights(void);
 extern void morph_updateMesh(void);
 extern void atn_LH_Texture_destructAndFree(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void fn_8011F91C(void);
-extern void fn_8011FC10(void);
+extern void skill_findNodeById(void);
 extern void fn_8011FE3C(void);
 extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_constructor(void);
@@ -42,11 +42,11 @@ extern void world_getGlobalFlag(void);
 extern void world_setGlobalFlag(void);
 extern void fn_80375184(void);
 extern void fn_80376730(void);
-extern void fn_803EC568(void);
-extern void fn_803EC69C(void);
+extern void task_createWorker(void);
+extern void task_destroyWorker(void);
 extern void fn_803EC758(void);
-extern void fn_803EC91C(void);
-extern void fn_803ED0D4(void);
+extern void task_updateWorker(void);
+extern void task_initWorkerContext(void);
 extern void fn_803ED5D0(void);
 extern void fn_803EDB18(void);
 extern void fn_8041D180(void);
@@ -57,7 +57,7 @@ extern void atn_LoadHandle_destructor(void);
 extern void fn_80491528(void);
 extern void PSVECSquareMag(void);
 extern void strcmp(void);
-extern void fn_8068AD58(void);
+extern void std_cos(void);
 extern void std_fmod(void);
 extern void __destroy_arr(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -151,7 +151,7 @@ asm void fn_80421E54(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_803EC91C
+    bl task_updateWorker
     cmpwi r3, 0x0
     bne lbl_fn_80421E54_00000030
     li r0, 0x0
@@ -448,7 +448,7 @@ lbl_fn_80422084_000003F8:
     bl skin_applyWeights
     addi r3, r31, 0x104
     addi r4, r1, 0x14
-    bl fn_800CB440
+    bl morph_updateWeights
     addi r3, r1, 0x14
     li r4, -0x1
     bl ref_releaseHandle
@@ -759,7 +759,7 @@ asm void fn_80422684(void)
     mr r30, r3
     lwz r5, 0x18(r5)
     lwz r6, 0x1c(r31)
-    bl fn_803EC568
+    bl task_createWorker
     lis r4, lbl_8078E2A8@ha
     stw r31, 0xf4(r30)
     addi r4, r4, lbl_8078E2A8@l
@@ -938,7 +938,7 @@ lbl_fn_804227A4_00000AC4:
 lbl_fn_804227A4_00000AD0:
     mr r3, r30
     li r4, 0x0
-    bl fn_803EC69C
+    bl task_destroyWorker
     cmpwi r31, 0x0
     ble lbl_fn_804227A4_00000AEC
     mr r3, r30
@@ -962,7 +962,7 @@ asm void fn_80422960(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_803EC91C
+    bl task_updateWorker
     cmpwi r3, 0x0
     beq lbl_fn_80422960_00000B3C
     li r0, 0x0
@@ -1095,7 +1095,7 @@ lbl_fn_804229A8_00000CC8:
 lbl_fn_804229A8_00000CDC:
     lwz r3, lbl_8087F408
     lwz r4, 0x24(r4)
-    bl fn_8011FC10
+    bl skill_findNodeById
     stw r3, 0x148(r31)
     b lbl_fn_804229A8_00000D00
 lbl_fn_804229A8_00000CF0:
@@ -1320,7 +1320,7 @@ lbl_fn_80422BF4_00000FBC:
     psq_st f1, 0x104(r31), 0, 0
     fmr f1, f7
     stfs f5, 0x8(r1)
-    bl fn_8068AD58
+    bl std_cos
     frsp f4, f1
     lfs f3, lbl_8088664C
     lfs f0, 0x104(r31)
@@ -1331,7 +1331,7 @@ lbl_fn_80422BF4_00000FBC:
     b lbl_fn_80422BF4_0000104C
 lbl_fn_80422BF4_00001034:
     lfs f1, 0x150(r31)
-    bl fn_8068AD58
+    bl std_cos
     frsp f4, f1
     lfs f3, lbl_8088664C
     lfs f0, 0x104(r31)
@@ -1339,7 +1339,7 @@ lbl_fn_80422BF4_00001034:
 lbl_fn_80422BF4_0000104C:
     lfs f1, 0x150(r31)
     stfs f5, 0x104(r31)
-    bl fn_8068AD58
+    bl std_cos
     frsp f4, f1
     lfs f3, lbl_8088664C
     lfs f0, 0x108(r31)
@@ -1350,7 +1350,7 @@ lbl_fn_80422BF4_0000104C:
     b lbl_fn_80422BF4_00001090
 lbl_fn_80422BF4_00001078:
     lfs f1, 0x150(r31)
-    bl fn_8068AD58
+    bl std_cos
     frsp f4, f1
     lfs f3, lbl_8088664C
     lfs f0, 0x108(r31)
@@ -1450,7 +1450,7 @@ asm void fn_80422F78(void)
     addi r4, r4, lbl_807774B8@l
     stw r4, 0x8(r1)
     la r4, lbl_8087D710
-    bl fn_8005BCE8
+    bl talk_copySpeakerName
     lis r31, lbl_80753410@ha
     addi r31, r31, lbl_80753410@l
 lbl_fn_80422F78_000011D4:
@@ -1499,7 +1499,7 @@ lbl_fn_80422F78_00001214:
     stfs f1, 0x15c(r30)
 lbl_fn_80422F78_0000127C:
     addi r3, r1, 0x8
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_80422F78_000011D4
     lwz r0, 0x654(r1)
@@ -1724,7 +1724,7 @@ asm void fn_8042335C(void)
     mr r4, r28
     mr r5, r29
     mr r6, r30
-    bl fn_803EC568
+    bl task_createWorker
     lis r4, lbl_8078E340@ha
     addi r3, r31, 0xf4
     addi r4, r4, lbl_8078E340@l
@@ -1799,7 +1799,7 @@ lbl_fn_80423434_0000164C:
     bl fn_800971D4
     mr r3, r29
     li r4, 0x0
-    bl fn_803EC69C
+    bl task_destroyWorker
     cmpwi r30, 0x0
     ble lbl_fn_80423434_00001680
     mr r3, r29
@@ -1823,7 +1823,7 @@ asm void fn_804234F4(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_803EC91C
+    bl task_updateWorker
     cmpwi r3, 0x0
     bne lbl_fn_804234F4_00001710
     lwz r4, 0xf8(r31)
@@ -1883,7 +1883,7 @@ asm void fn_8042357C(void)
     mr r4, r3
     mr r3, r31
     li r5, 0x1
-    bl fn_803ED0D4
+    bl task_initWorkerContext
 lbl_fn_8042357C_0000178C:
     addi r3, r31, 0x894
     psq_l f1, 0xfc(r31), 0, 0
@@ -1983,7 +1983,7 @@ lbl_fn_80423684_000018B8:
     mr r4, r3
     mr r3, r31
     li r5, 0x1
-    bl fn_803ED0D4
+    bl task_initWorkerContext
 lbl_fn_80423684_000018F8:
     addi r3, r31, 0x894
     psq_l f1, 0xfc(r31), 0, 0

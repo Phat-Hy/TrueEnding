@@ -13,15 +13,15 @@ extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void str_findChar(void);
 extern void wcs_vformat(void);
-extern void fn_80116FC0(void);
+extern void actor_findSpawnTemplate(void);
 extern void fn_801F4728(void);
 extern void fn_801F4998(void);
-extern void fn_801F4CB4(void);
+extern void save_formatSlotTitle(void);
 extern void saveSlot_readSummary(void);
-extern void fn_801FEDBC(void);
+extern void thread_findTaskById(void);
 extern void thread_dispatchToQueue(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
@@ -444,7 +444,7 @@ lbl_fn_804B2C20_00000474:
     mr r4, r3
     mr r3, r30
     li r5, 0x0
-    bl fn_801FEDBC
+    bl thread_findTaskById
     b lbl_fn_804B2C20_0000078C
     lwz r4, 0xb8(r3)
     lwz r0, 0x38(r4)
@@ -951,7 +951,7 @@ asm void fn_804B3838(void)
     mr r4, r3
     mr r3, r30
     li r5, 0x0
-    bl fn_801FEDBC
+    bl thread_findTaskById
     lwz r3, 0x8c(r31)
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 30, 28
@@ -1159,7 +1159,7 @@ lbl_fn_804B39F8_00000FBC:
 lbl_fn_804B39F8_00000FC4:
     li r3, 0x0
     li r4, 0x166
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r4, 0x6c(r31)
     lis r5, lbl_80757B7C@ha
     addi r5, r5, lbl_80757B7C@l
@@ -1175,7 +1175,7 @@ lbl_fn_804B39F8_00000FC4:
 lbl_fn_804B39F8_00001000:
     li r3, 0x0
     li r4, 0x164
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r4, 0x6c(r31)
     lis r5, lbl_80757B7C@ha
     addi r5, r5, lbl_80757B7C@l
@@ -1231,7 +1231,7 @@ lbl_fn_804B3C78_000010A8:
     lis r4, 0x89
     li r3, 0x0
     addi r4, r4, 0x547b
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     mr r4, r3
     addi r3, r1, 0x208
     crclr 6
@@ -1243,7 +1243,7 @@ lbl_fn_804B3C78_000010E0:
     lis r4, 0x89
     li r3, 0x0
     addi r4, r4, 0x547c
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     mr r4, r3
     addi r3, r1, 0x208
     crclr 6
@@ -1255,7 +1255,7 @@ lbl_fn_804B3C78_0000110C:
     lis r4, 0x89
     li r3, 0x0
     addi r4, r4, 0x54d7
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     mr r4, r3
     addi r3, r1, 0x208
     crclr 6
@@ -1266,7 +1266,7 @@ lbl_fn_804B3C78_00001134:
     lis r4, 0x89
     li r3, 0x0
     addi r4, r4, 0x547b
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     mr r4, r3
     addi r3, r1, 0x8
     crclr 6
@@ -1278,7 +1278,7 @@ lbl_fn_804B3C78_00001160:
     lis r4, 0x89
     li r3, 0x0
     addi r4, r4, 0x547c
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     mr r4, r3
     addi r3, r1, 0x8
     crclr 6
@@ -1290,7 +1290,7 @@ lbl_fn_804B3C78_0000118C:
     lis r4, 0x89
     li r3, 0x0
     addi r4, r4, 0x54d7
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     mr r4, r3
     addi r3, r1, 0x8
     crclr 6
@@ -1429,7 +1429,7 @@ lbl_fn_804B3EFC_00001350:
     lwz r5, 0x0(r22)
     addi r4, r31, 0x3ae
     li r6, 0x0
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r4, 0x8c(r30)
     addi r3, r31, 0x51e
     addi r21, r4, 0x58
@@ -1454,7 +1454,7 @@ lbl_fn_804B3EFC_00001350:
     addi r4, r31, 0x53a
     lwz r5, 0x4(r22)
     li r6, 0x0
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r21, 0x8c(r30)
     cmpwi r21, 0x0
     beq lbl_fn_804B3EFC_00001438
@@ -1478,7 +1478,7 @@ lbl_fn_804B3EFC_00001454:
     addi r4, r31, 0x3ae
     addi r5, r26, 0x1
     li r6, 0x0
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r4, 0x8c(r30)
     addi r21, r23, 0x6
     addi r3, r31, 0x51e
@@ -1719,7 +1719,7 @@ asm void fn_804B43A8(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_804B43A8_000017C8
     addi r3, r31, 0x48

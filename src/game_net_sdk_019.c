@@ -21,7 +21,7 @@ extern void fn_806A7130(void);
 extern void net_formatLog(void);
 extern void fn_806A9CA0(void);
 extern void fn_806AB920(void);
-extern void fn_806AB980(void);
+extern void http_formatParam(void);
 extern void fn_806ACCF0(void);
 extern void fn_806ACE00(void);
 extern void fn_806AEB10(void);
@@ -1385,7 +1385,7 @@ lbl_fn_806C5C10_00001218:
     addi r4, r1, 0x8
     addi r5, r1, 0x14
     li r6, 0x2f
-    bl fn_806AB980
+    bl http_formatParam
     addi r3, r1, 0x8
     addi r5, r31, 0x5c
     li r4, 0xc
@@ -1396,7 +1396,7 @@ lbl_fn_806C5C10_00001218:
     addi r4, r1, 0x8
     addi r5, r1, 0x14
     li r6, 0x2f
-    bl fn_806AB980
+    bl http_formatParam
     lis r28, lbl_80860898@ha
     lwz r3, lbl_80860898@l(r28)
     lwz r0, 0x908(r3)
@@ -1439,7 +1439,7 @@ lbl_fn_806C5C10_000012D4:
     addi r4, r1, 0x8
     addi r5, r1, 0x14
     li r6, 0x2f
-    bl fn_806AB980
+    bl http_formatParam
     addi r4, r1, 0x14
     li r3, 0x1
     li r5, 0x0
@@ -1582,7 +1582,7 @@ lbl_fn_806C5EB0_000014E0:
     addi r4, r1, 0x8
     addi r5, r1, 0x14
     li r6, 0x2f
-    bl fn_806AB980
+    bl http_formatParam
     addi r3, r1, 0x8
     addi r5, r31, 0x5c
     li r4, 0xc
@@ -1593,7 +1593,7 @@ lbl_fn_806C5EB0_000014E0:
     addi r4, r1, 0x8
     addi r5, r1, 0x14
     li r6, 0x2f
-    bl fn_806AB980
+    bl http_formatParam
     lis r28, lbl_80860898@ha
     lwz r3, lbl_80860898@l(r28)
     lwz r0, 0x908(r3)
@@ -1636,7 +1636,7 @@ lbl_fn_806C5EB0_0000159C:
     addi r4, r1, 0x8
     addi r5, r1, 0x14
     li r6, 0x2f
-    bl fn_806AB980
+    bl http_formatParam
     addi r4, r1, 0x14
     li r3, 0x1
     li r5, 0x0
@@ -1786,7 +1786,7 @@ lbl_fn_806C6180_000017C8:
     addi r4, r1, 0x8
     addi r5, r1, 0x14
     li r6, 0x2f
-    bl fn_806AB980
+    bl http_formatParam
     addi r3, r1, 0x8
     addi r5, r31, 0x5c
     li r4, 0xc
@@ -1797,7 +1797,7 @@ lbl_fn_806C6180_000017C8:
     addi r4, r1, 0x8
     addi r5, r1, 0x14
     li r6, 0x2f
-    bl fn_806AB980
+    bl http_formatParam
     lis r28, lbl_80860898@ha
     lwz r3, lbl_80860898@l(r28)
     lwz r0, 0x908(r3)
@@ -1840,7 +1840,7 @@ lbl_fn_806C6180_00001884:
     addi r4, r1, 0x8
     addi r5, r1, 0x14
     li r6, 0x2f
-    bl fn_806AB980
+    bl http_formatParam
     addi r4, r1, 0x14
     li r3, 0x1
     li r5, 0x0
@@ -1993,7 +1993,7 @@ lbl_fn_806C6470_00001AB0:
     addi r4, r1, 0x8
     addi r5, r1, 0x14
     li r6, 0x2f
-    bl fn_806AB980
+    bl http_formatParam
     addi r3, r1, 0x8
     addi r5, r31, 0x5c
     li r4, 0xc
@@ -2004,7 +2004,7 @@ lbl_fn_806C6470_00001AB0:
     addi r4, r1, 0x8
     addi r5, r1, 0x14
     li r6, 0x2f
-    bl fn_806AB980
+    bl http_formatParam
     lis r28, lbl_80860898@ha
     lwz r3, lbl_80860898@l(r28)
     lwz r0, 0x908(r3)
@@ -2047,7 +2047,7 @@ lbl_fn_806C6470_00001B6C:
     addi r4, r1, 0x8
     addi r5, r1, 0x14
     li r6, 0x2f
-    bl fn_806AB980
+    bl http_formatParam
     addi r4, r1, 0x14
     li r3, 0x1
     li r5, 0x0
@@ -3980,7 +3980,7 @@ lbl_fn_806C6750_00003864:
     addi r4, r1, 0x14
     addi r5, r1, 0x20
     li r6, 0x2f
-    bl fn_806AB980
+    bl http_formatParam
     addi r3, r1, 0x14
     addi r5, r30, 0x5c
     li r4, 0xc
@@ -3991,7 +3991,7 @@ lbl_fn_806C6750_00003864:
     addi r4, r1, 0x14
     addi r5, r1, 0x20
     li r6, 0x2f
-    bl fn_806AB980
+    bl http_formatParam
     lis r27, lbl_80860898@ha
     lwz r3, lbl_80860898@l(r27)
     lwz r0, 0x908(r3)
@@ -4034,7 +4034,7 @@ lbl_fn_806C6750_00003920:
     addi r4, r1, 0x14
     addi r5, r1, 0x20
     li r6, 0x2f
-    bl fn_806AB980
+    bl http_formatParam
     addi r4, r1, 0x20
     li r3, 0x1
     li r5, 0x0

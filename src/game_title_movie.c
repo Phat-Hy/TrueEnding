@@ -9,7 +9,7 @@ extern void _savegpr_24(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void collision_testLineSegment(void);
-extern void fn_800697D8(void);
+extern void boss_recordDamage(void);
 extern void fn_8008B978(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -17,7 +17,7 @@ extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void fn_8011F8F4(void);
 extern void fn_8011F91C(void);
-extern void fn_8011FC10(void);
+extern void skill_findNodeById(void);
 extern void fn_8011FE3C(void);
 extern void fn_8013310C(void);
 extern void fn_8013322C(void);
@@ -42,8 +42,8 @@ extern void fn_803EEE10(void);
 extern void fn_80444020(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
-extern void fn_8068A850(void);
-extern void fn_8068AD58(void);
+extern void std_sin(void);
+extern void std_cos(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -307,7 +307,7 @@ lbl_fn_803A914C_00000250:
     stfs f7, 0x24(r1)
     fmuls f3, f3, f4
     fmuls f1, f3, f0
-    bl fn_8068A850
+    bl std_sin
     lfs f5, 0xb8(r27)
     frsp f4, f1
     lfs f0, lbl_80885BB8
@@ -526,7 +526,7 @@ lbl_fn_803A956C_00000540:
     stfs f7, 0x24(r1)
     fmuls f3, f3, f4
     fmuls f1, f3, f0
-    bl fn_8068AD58
+    bl std_cos
     lfs f4, 0xb8(r31)
     frsp f3, f1
     lfs f0, lbl_80885BB8
@@ -986,7 +986,7 @@ lbl_fn_803A9C40_00000BDC:
 lbl_fn_803A9C40_00000C18:
     lwz r3, lbl_8087F408
     mr r4, r0
-    bl fn_8011FC10
+    bl skill_findNodeById
     mr r28, r3
     b lbl_fn_803A9C40_00000C3C
 lbl_fn_803A9C40_00000C2C:
@@ -1094,7 +1094,7 @@ lbl_fn_803A9DBC_00000D58:
 lbl_fn_803A9DBC_00000D94:
     lwz r3, lbl_8087F408
     mr r4, r0
-    bl fn_8011FC10
+    bl skill_findNodeById
     mr r30, r3
     b lbl_fn_803A9DBC_00000DB8
 lbl_fn_803A9DBC_00000DA8:
@@ -1674,7 +1674,7 @@ lbl_fn_803AA5E4_00001574:
     b lbl_fn_803AA5E4_000015C8
 lbl_fn_803AA5E4_000015AC:
     lwz r3, lbl_8087F408
-    bl fn_8011FC10
+    bl skill_findNodeById
     mr r27, r3
     b lbl_fn_803AA5E4_000015C8
 lbl_fn_803AA5E4_000015BC:
@@ -1727,7 +1727,7 @@ lbl_fn_803AA5E4_000015E0:
     bl sprintf
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x108
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_fn_803AA5E4_00001678:
     lwz r0, 0x38(r27)
     cmpwi r29, 0x0
@@ -1768,7 +1768,7 @@ lbl_fn_803AA5E4_000016E0:
     bl sprintf
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x8
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_fn_803AA5E4_00001708:
     lwz r4, 0x0(r31)
     lis r3, lbl_8074ED24@ha
@@ -1840,7 +1840,7 @@ lbl_fn_803AA82C_000017BC:
     b lbl_fn_803AA82C_00001810
 lbl_fn_803AA82C_000017F4:
     lwz r3, lbl_8087F408
-    bl fn_8011FC10
+    bl skill_findNodeById
     mr r5, r3
     b lbl_fn_803AA82C_00001810
 lbl_fn_803AA82C_00001804:
@@ -1927,7 +1927,7 @@ lbl_fn_803AA954_000018E4:
     b lbl_fn_803AA954_00001938
 lbl_fn_803AA954_0000191C:
     lwz r3, lbl_8087F408
-    bl fn_8011FC10
+    bl skill_findNodeById
     mr r5, r3
     b lbl_fn_803AA954_00001938
 lbl_fn_803AA954_0000192C:

@@ -6,40 +6,40 @@ extern void __files(void);
 extern void _restgpr_24(void);
 extern void _savegpr_24(void);
 extern void dtor_80084684(void);
-extern void fn_8000D114(void);
+extern void vec3_set(void);
 extern void vec3_copy(void);
-extern void fn_8000D3A4(void);
-extern void fn_8001047C(void);
-extern void fn_80011034(void);
+extern void vec3_mag(void);
+extern void vec3_assign(void);
+extern void vec3_toEulerAngles(void);
 extern void fn_80011410(void);
 extern void fn_80012C88(void);
 extern void vec3_sub(void);
 extern void fn_800133B0(void);
 extern void fn_80013404(void);
-extern void fn_80013410(void);
+extern void vec3_add(void);
 extern void fn_80013484(void);
 extern void collision_testLineSegment(void);
-extern void fn_80057A64(void);
+extern void mission_updateStub(void);
 extern void fn_80057A68(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void fn_8008B964(void);
-extern void fn_8008BBD8(void);
+extern void map_debugLog(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800A56A8(void);
 extern void fn_800F7258(void);
 extern void fn_800F72CC(void);
-extern void fn_800F7FF0(void);
+extern void viewport_getNextSequenceId(void);
 extern void fn_801156BC(void);
 extern void fn_80116E6C(void);
 extern void fn_8012A1B8(void);
 extern void fn_8013A13C(void);
 extern void fn_8013C3B4(void);
-extern void fn_8013CB68(void);
+extern void npc_updateTalkInteraction(void);
 extern void fn_8014052C(void);
 extern void fn_801446F0(void);
-extern void fn_80179D44(void);
+extern void actor_getMovementFlags(void);
 extern void fn_80188A70(void);
 extern void fn_80188AA0(void);
 extern void fn_80192758(void);
@@ -650,7 +650,7 @@ asm void fn_801C2198(void)
     stfs f2, 0x88(r1)
     stfs f3, 0x90(r1)
     stfs f0, 0x84(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     oris r7, r3, 0x8000
     mr r3, r24
     mr r5, r26
@@ -880,7 +880,7 @@ lbl_fn_801C2198_000009F4:
     stfs f2, 0x88(r1)
     stfs f3, 0x90(r1)
     stfs f0, 0x84(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     oris r7, r3, 0x8000
     mr r3, r24
     mr r5, r25
@@ -1309,7 +1309,7 @@ lbl_fn_801C2870_00001070:
     stfs f2, 0x4c(r1)
     lwz r3, 0x4(r29)
     lfs f2, 0x2c(r29)
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
     lfs f3, 0x234(r30)
     lfs f0, lbl_80882704
     fcmpo cr0, f3, f0
@@ -1527,7 +1527,7 @@ lbl_fn_801C2CC0_00001360:
     psq_st f1, 0x0(r7), 0, 0
     stfs f2, 0x180(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_801C2CC0_0000147C
     lwz r6, 0x168(r1)
@@ -1651,7 +1651,7 @@ lbl_fn_801C2CC0_00001560:
     stw r4, 0xb8(r1)
     stw r0, 0xbc(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_801C2CC0_00001634
     lwz r7, 0xac(r1)
@@ -1963,7 +1963,7 @@ asm void fn_801C346C(void)
     stw r30, 0x168(r1)
     mr r30, r3
     addi r3, r1, 0xf8
-    bl fn_80057A64
+    bl mission_updateStub
     bl fn_801156BC
     li r4, 0x0
     li r5, 0x0
@@ -1981,13 +1981,13 @@ asm void fn_801C346C(void)
     fneg f0, f1
     addi r3, r1, 0xf8
     stfs f0, 0x100(r1)
-    bl fn_8000D3A4
+    bl vec3_mag
     fmr f28, f1
     lwz r3, 0x4(r30)
     bl fn_8012A1B8
     mr r4, r3
     addi r3, r1, 0xec
-    bl fn_8001047C
+    bl vec3_assign
     lfs f0, lbl_8088274C
     fcmpo cr0, f28, f0
     cror eq, gt, eq
@@ -1998,7 +1998,7 @@ asm void fn_801C346C(void)
     lfs f27, 0x4(r3)
     addi r3, r1, 0xb0
     addi r4, r1, 0xf8
-    bl fn_80011034
+    bl vec3_toEulerAngles
     addi r3, r1, 0xec
     addi r4, r1, 0xb0
     bl vec3_copy
@@ -2033,7 +2033,7 @@ lbl_fn_801C346C_00001A68:
     lfs f1, lbl_80882748
     fmuls f3, f3, f0
     fmr f2, f1
-    bl fn_8000D114
+    bl vec3_set
     lfs f1, 0xf0(r1)
     addi r3, r1, 0x138
     bl fn_8013A13C
@@ -2043,12 +2043,12 @@ lbl_fn_801C346C_00001A68:
     addi r3, r1, 0xd4
     addi r4, r30, 0x8
     addi r5, r1, 0xe0
-    bl fn_80013410
+    bl vec3_add
     addi r3, r1, 0xd4
     addi r4, r30, 0x14
     bl fn_80013484
     addi r3, r1, 0xd4
-    bl fn_8000D3A4
+    bl vec3_mag
     fcmpo cr0, f1, f29
     ble lbl_fn_801C346C_00001AD4
     addi r3, r30, 0x8
@@ -2059,7 +2059,7 @@ lbl_fn_801C346C_00001AD4:
     addi r3, r1, 0x98
     addi r4, r30, 0x8
     addi r5, r1, 0xe0
-    bl fn_80013410
+    bl vec3_add
     addi r3, r1, 0xa4
     addi r4, r1, 0x98
     addi r5, r30, 0x14
@@ -2070,7 +2070,7 @@ lbl_fn_801C346C_00001AD4:
     lfs f0, lbl_80882748
     addi r3, r1, 0xe0
     stfs f0, 0xe4(r1)
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
     lfs f0, lbl_8088275C
     addi r3, r1, 0x80
     addi r4, r1, 0xe0
@@ -2079,7 +2079,7 @@ lbl_fn_801C346C_00001AD4:
     addi r3, r1, 0x8c
     addi r4, r1, 0x80
     addi r5, r30, 0x14
-    bl fn_80013410
+    bl vec3_add
     addi r3, r30, 0x8
     addi r4, r1, 0x8c
     bl vec3_copy
@@ -2110,11 +2110,11 @@ lbl_fn_801C346C_00001B84:
     addi r4, r1, 0x68
     bl vec3_copy
     addi r3, r1, 0xe0
-    bl fn_8000D3A4
+    bl vec3_mag
     fcmpo cr0, f30, f1
     bge lbl_fn_801C346C_00001BE4
     addi r3, r1, 0xe0
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
     fmr f1, f30
     addi r3, r1, 0x50
     addi r4, r1, 0xe0
@@ -2122,7 +2122,7 @@ lbl_fn_801C346C_00001B84:
     addi r3, r1, 0x5c
     addi r4, r30, 0x14
     addi r5, r1, 0x50
-    bl fn_80013410
+    bl vec3_add
     addi r3, r30, 0x8
     addi r4, r1, 0x5c
     bl vec3_copy
@@ -2135,13 +2135,13 @@ lbl_fn_801C346C_00001BE4:
     addi r4, r1, 0x44
     bl vec3_copy
     addi r3, r1, 0xe0
-    bl fn_8000D3A4
+    bl vec3_mag
     lfs f0, lbl_80882748
     fmr f30, f1
     fcmpo cr0, f1, f0
     ble lbl_fn_801C346C_00001D40
     addi r3, r1, 0xe0
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
     lwz r4, 0x4(r30)
     addi r3, r1, 0xc8
     bl fn_8014052C
@@ -2167,11 +2167,11 @@ lbl_fn_801C346C_00001C50:
     bge lbl_fn_801C346C_00001D40
     addi r3, r1, 0x2c
     addi r4, r1, 0xe0
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lfs f27, 0x30(r1)
     addi r3, r1, 0x20
     addi r4, r1, 0xc8
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lfs f28, 0x24(r1)
     fsubs f1, f27, f28
     bl fn_800133B0
@@ -2213,7 +2213,7 @@ lbl_fn_801C346C_00001CF4:
     addi r3, r1, 0x14
     addi r4, r30, 0x14
     addi r5, r1, 0xe0
-    bl fn_80013410
+    bl vec3_add
     addi r3, r30, 0x8
     addi r4, r1, 0x14
     bl vec3_copy
@@ -2222,10 +2222,10 @@ lbl_fn_801C346C_00001D40:
     bl fn_8012A1B8
     mr r4, r3
     addi r3, r1, 0xbc
-    bl fn_8001047C
+    bl vec3_assign
     addi r3, r1, 0x8
     addi r4, r1, 0xe0
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lfs f0, 0xc(r1)
     addi r4, r1, 0xbc
     stfs f0, 0xc0(r1)

@@ -5,34 +5,34 @@
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void vec3_copy(void);
-extern void fn_8000D3A4(void);
-extern void fn_8001047C(void);
-extern void fn_80011034(void);
+extern void vec3_mag(void);
+extern void vec3_assign(void);
+extern void vec3_toEulerAngles(void);
 extern void fn_80011220(void);
 extern void vec3_sub(void);
 extern void fn_8004ECC0(void);
 extern void collision_testLineSegment(void);
-extern void fn_80057A64(void);
+extern void mission_updateStub(void);
 extern void fn_80063D3C(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_80097D40(void);
+extern void atn_Anim_getLayerTrack(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void atn_Anim_getDuration(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void fn_800F7FD8(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8C6C(void);
+extern void scissor_clipFrustum(void);
 extern void fn_80107A68(void);
 extern void fn_8012A1B8(void);
 extern void fn_8012A288(void);
-extern void fn_8013C38C(void);
+extern void npc_getPosition(void);
 extern void fn_8013C480(void);
 extern void fn_801404F8(void);
-extern void fn_80144710(void);
+extern void quest_evaluateConditions(void);
 extern void actor_setState(void);
 extern void fn_80170A20(void);
-extern void fn_801765D8(void);
+extern void battle_awardExp(void);
 extern void task_findEntryById(void);
 extern void res_findResourceSlot(void);
 extern void fn_80279788(void);
@@ -208,7 +208,7 @@ lbl_fn_804628B4_0000011C:
     addi r3, r31, 0xb0
     lwz r4, 0x488(r31)
     lfs f29, 0x3a4(r5)
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     beq lbl_fn_804628B4_00000140
     bl atn_Anim_getDuration
@@ -220,7 +220,7 @@ lbl_fn_804628B4_00000144:
     fcmpu cr0, f0, f1
     lwz r4, 0x490(r31)
     addi r3, r31, 0xb0
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     beq lbl_fn_804628B4_00000168
     bl atn_Anim_getDuration
@@ -747,16 +747,16 @@ asm void fn_80463174(void)
     cmpwi r0, 0x0
     beq lbl_fn_80463174_00000CB8
     mr r3, r0
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r1, 0x8c
-    bl fn_8001047C
+    bl vec3_assign
     addi r3, r1, 0x80
     addi r4, r1, 0x8c
     addi r5, r31, 0x528
     bl vec3_sub
     addi r3, r1, 0x80
-    bl fn_8000D3A4
+    bl vec3_mag
     lwz r0, 0x14c4(r31)
     cmpwi r0, 0x0
     bne lbl_fn_80463174_00000960
@@ -787,7 +787,7 @@ lbl_fn_80463174_00000988:
     bgt lbl_fn_80463174_00000B24
     addi r3, r1, 0x74
     li r29, 0x0
-    bl fn_80057A64
+    bl mission_updateStub
     lwz r0, 0x1558(r31)
     li r28, 0x0
     cmpwi r0, 0x0
@@ -823,7 +823,7 @@ lbl_fn_80463174_000009CC:
     addi r5, r31, 0x528
     bl vec3_sub
     addi r3, r1, 0x68
-    bl fn_8000D3A4
+    bl vec3_mag
     fmr f28, f1
     mr r3, r31
     bl fn_8012A1B8
@@ -833,7 +833,7 @@ lbl_fn_80463174_000009CC:
     bl fn_800F7FD8
     addi r3, r1, 0x38
     addi r4, r1, 0x2c
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lfs f0, 0x3c(r1)
     fsubs f1, f0, f29
     bl fn_802A7964
@@ -862,7 +862,7 @@ lbl_fn_80463174_00000A9C:
     addi r3, r1, 0x20
     addi r4, r1, 0x74
     stw r0, 0x14c4(r31)
-    bl fn_8001047C
+    bl vec3_assign
     mr r5, r3
     mr r3, r31
     mr r4, r28
@@ -920,13 +920,13 @@ lbl_fn_80463174_00000B7C:
     bl fn_80466974
 lbl_fn_80463174_00000B8C:
     lwz r3, 0x1554(r31)
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r1, 0x5c
     addi r5, r31, 0x528
     bl vec3_sub
     addi r3, r1, 0x80
-    bl fn_8000D3A4
+    bl vec3_mag
     fmr f30, f1
     mr r3, r31
     bl fn_8012A1B8
@@ -936,7 +936,7 @@ lbl_fn_80463174_00000B8C:
     bl fn_800F7FD8
     addi r3, r1, 0x14
     addi r4, r1, 0x8
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lfs f0, 0x18(r1)
     fsubs f1, f0, f31
     bl fn_802A7964
@@ -951,14 +951,14 @@ lbl_fn_80463174_00000B8C:
     bge lbl_fn_80463174_00000CB8
     addi r3, r1, 0x50
     addi r4, r31, 0x528
-    bl fn_8001047C
+    bl vec3_assign
     lfs f1, 0x54(r1)
     addi r3, r1, 0x44
     lfs f0, lbl_80886D9C
     addi r4, r1, 0x8c
     fadds f0, f1, f0
     stfs f0, 0x54(r1)
-    bl fn_8001047C
+    bl vec3_assign
     lfs f1, 0x48(r1)
     lfs f0, lbl_80886D9C
     fadds f0, f1, f0
@@ -1187,7 +1187,7 @@ lbl_fn_80463610_00000ECC:
     stw r5, 0x1740(r31)
     stw r4, 0x17b0(r31)
     stw r0, 0x12a4(r31)
-    bl fn_801765D8
+    bl battle_awardExp
     lwz r3, lbl_8087F408
     lfs f30, lbl_80886D60
     lwz r30, 0x48(r3)
@@ -1464,7 +1464,7 @@ lbl_fn_804638A4_0000131C:
     cror eq, lt, eq
     bne lbl_fn_804638A4_00001378
     mr r3, r29
-    bl fn_80144710
+    bl quest_evaluateConditions
     li r3, 0x5b4
     bl task_findEntryById
     mr r7, r3
@@ -1476,7 +1476,7 @@ lbl_fn_804638A4_0000131C:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
 lbl_fn_804638A4_00001378:
     lwz r0, 0x124(r1)
     psq_l f31, 0x118(r1), 0, 0
@@ -2129,7 +2129,7 @@ lbl_fn_80463F20_00001CA0:
     psq_st f1, 0x0(r30), 0, 0
     psq_st f1, 0x534(r31), 0, 0
     stfs f2, 0x53c(r31)
-    bl fn_80144710
+    bl quest_evaluateConditions
     li r3, 0x5b4
     bl task_findEntryById
     mr r30, r3
@@ -2142,7 +2142,7 @@ lbl_fn_80463F20_00001CA0:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     lwz r0, 0x18f4(r31)
     cmpwi r0, 0x0
     beq lbl_fn_80463F20_00001D2C

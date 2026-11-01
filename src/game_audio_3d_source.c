@@ -2,21 +2,21 @@
 #pragma function_align 4
 
 /* External function declarations */
-extern void fn_8004D388(void);
+extern void collision_queryGeometry(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_80097D40(void);
+extern void atn_Anim_getLayerTrack(void);
 extern void atn_Anim_getDuration(void);
 extern void fn_800EAECC(void);
 extern void fn_800EB270(void);
 extern void fn_800EB49C(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8C6C(void);
+extern void scissor_clipFrustum(void);
 extern void fn_8012539C(void);
 extern void fn_80126214(void);
 extern void fn_80134270(void);
 extern void fn_8013A258(void);
-extern void fn_80144710(void);
-extern void fn_80151448(void);
+extern void quest_evaluateConditions(void);
+extern void inventory_applyItemStats(void);
 extern void fn_80158BB4(void);
 extern void fn_80158CA4(void);
 extern void fn_8015E4B0(void);
@@ -38,8 +38,8 @@ extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void rand(void);
-extern void fn_8068A850(void);
-extern void fn_8068AD58(void);
+extern void std_sin(void);
+extern void std_cos(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
 extern void math_u64DivMod(void);
@@ -286,7 +286,7 @@ lbl_fn_8031FBFC_00000254:
 lbl_fn_8031FBFC_00000260:
     mr r3, r30
     mr r4, r31
-    bl fn_80151448
+    bl inventory_applyItemStats
     mr r3, r30
     mr r4, r31
     bl fn_8031FD34
@@ -605,7 +605,7 @@ lbl_fn_8031FE4C_000006B4:
     cmpwi r0, 0x0
     beq lbl_fn_8031FE4C_0000080C
     mr r3, r31
-    bl fn_80144710
+    bl quest_evaluateConditions
     li r3, 0x687
     bl task_findEntryById
     mr r30, r3
@@ -659,7 +659,7 @@ lbl_fn_8031FE4C_00000784:
     lwz r10, 0x594(r31)
     li r5, 0x0
     li r9, 0x1e
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     lwz r0, 0x594(r31)
     cmpwi r0, 0x0
     ble lbl_fn_8031FE4C_0000080C
@@ -1345,7 +1345,7 @@ lbl_fn_803209E0_0000112C:
     fmuls f0, f0, f4
     stfs f3, 0x574(r29)
     stfs f0, 0x57c(r29)
-    bl fn_8068AD58
+    bl std_cos
     frsp f4, f1
     lfs f3, 0x570(r29)
     lfs f0, lbl_80884E48
@@ -1353,7 +1353,7 @@ lbl_fn_803209E0_0000112C:
     fmuls f3, f3, f4
     stfs f0, 0xac(r1)
     stfs f3, 0xa8(r1)
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     lfs f6, 0x570(r29)
     lfs f4, 0xa8(r1)
@@ -1521,7 +1521,7 @@ lbl_fn_803209E0_00001400:
     addi r6, r1, 0xa8
     addi r8, r29, 0x5b8
     li r9, 0x0
-    bl fn_8004D388
+    bl collision_queryGeometry
     addi r5, r1, 0x180
     lfs f2, 0x188(r1)
     addi r4, r1, 0xc0
@@ -1899,7 +1899,7 @@ lbl_fn_8032130C_00001984:
     addi r3, r31, 0xb0
     lwz r4, 0x488(r31)
     lfs f29, 0x3a4(r5)
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     beq lbl_fn_8032130C_000019A8
     bl atn_Anim_getDuration
@@ -1911,7 +1911,7 @@ lbl_fn_8032130C_000019AC:
     fcmpu cr0, f0, f1
     lwz r4, 0x490(r31)
     addi r3, r31, 0xb0
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     beq lbl_fn_8032130C_000019D0
     bl atn_Anim_getDuration

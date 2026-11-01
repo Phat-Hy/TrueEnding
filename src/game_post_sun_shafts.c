@@ -18,27 +18,27 @@ extern void atn_Anim_getLayerDuration(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void fn_800EC204(void);
-extern void fn_800EF73C(void);
+extern void cam_destroyMsgHandle(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void fn_80103F60(void);
 extern void fn_80108378(void);
-extern void fn_8011FC10(void);
-extern void fn_80121F00(void);
+extern void skill_findNodeById(void);
+extern void equip_getGlobalManager(void);
 extern void boss_updatePhaseState(void);
 extern void fn_8013A258(void);
 extern void fn_8013C504(void);
-extern void fn_8013CB68(void);
-extern void fn_80144710(void);
-extern void fn_80145334(void);
-extern void fn_8014C540(void);
+extern void npc_updateTalkInteraction(void);
+extern void quest_evaluateConditions(void);
+extern void quest_updateFlow(void);
+extern void dialog_updateScriptState(void);
 extern void fn_8016E484(void);
 extern void actor_setState(void);
 extern void fn_801A03E0(void);
 extern void task_findEntryById(void);
-extern void fn_80237518(void);
-extern void fn_80237654(void);
-extern void fn_802376D0(void);
+extern void res_MsgHandle_ctor(void);
+extern void res_Resource_unload(void);
+extern void res_MsgHandle_isLoading(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_update(void);
@@ -323,7 +323,7 @@ asm void fn_802D0038(void)
     stfs f0, 0x1570(r30)
     stfs f0, 0x1574(r30)
     stfs f0, 0x1578(r30)
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     addi r3, r30, 0x1588
     bl res_MsgHandle_constructor
     addi r3, r30, 0x1594
@@ -346,11 +346,11 @@ asm void fn_802D0038(void)
     addi r3, r30, 0x15d8
     bl res_MsgHandle_constructor
     lis r4, res_MsgHandle_constructor@ha
-    lis r5, fn_800EF73C@ha
+    lis r5, cam_destroyMsgHandle@ha
     stw r28, 0x15e8(r30)
     addi r3, r30, 0x15f0
     addi r4, r4, res_MsgHandle_constructor@l
-    addi r5, r5, fn_800EF73C@l
+    addi r5, r5, cam_destroyMsgHandle@l
     stw r28, 0x15ec(r30)
     li r6, 0xc
     li r7, 0x2
@@ -555,7 +555,7 @@ lbl_fn_802D0038_000005D4:
     bl res_MsgHandle_destructor
     addi r3, r30, 0x157c
     addi r4, r31, 0x8d
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r30, 0x1588
     addi r4, r31, 0xa3
     bl res_MsgHandle_destructor
@@ -652,7 +652,7 @@ asm void fn_802D0594(void)
     cmpwi r3, 0x0
     bne lbl_fn_802D0594_00000CD4
     addi r3, r29, 0x157c
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_802D0594_00000CD4
     addi r3, r29, 0x1588
@@ -699,10 +699,10 @@ asm void fn_802D0594(void)
     bl boss_getOffset54
     cmpwi r3, 0x0
     beq lbl_fn_802D0594_00000C6C
-    bl fn_80121F00
+    bl equip_getGlobalManager
     cmpwi r3, 0x0
     beq lbl_fn_802D0594_00000C6C
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_8013C504
     cmpwi r3, 0x0
     beq lbl_fn_802D0594_00000C6C
@@ -730,7 +730,7 @@ lbl_fn_802D0594_000008A8:
     bl talk_parseQuotedString
     bl str_parseInt
     mr r30, r3
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_8013C504
     mr r4, r30
     bl fn_800EC204
@@ -766,7 +766,7 @@ lbl_fn_802D0594_00000928:
     bl talk_parseQuotedString
     bl str_parseInt
     mr r30, r3
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_8013C504
     mr r4, r30
     bl fn_800EC204
@@ -793,7 +793,7 @@ lbl_fn_802D0594_00000980:
     mr r30, r3
     bl fn_801A03E0
     mr r4, r30
-    bl fn_8011FC10
+    bl skill_findNodeById
     cmpwi r3, 0x0
     stw r3, 0x8(r1)
     beq lbl_fn_802D0594_000009B4
@@ -1183,7 +1183,7 @@ lbl_fn_802D0B84_00000EE8:
     bne lbl_fn_802D0B84_00001004
 lbl_fn_802D0B84_00000F0C:
     mr r3, r31
-    bl fn_80144710
+    bl quest_evaluateConditions
     psq_l f1, 0x528(r31), 0, 0
     addi r7, r1, 0xdc
     lfs f2, 0x530(r31)
@@ -1243,7 +1243,7 @@ lbl_fn_802D0B84_00000FE4:
     mr r3, r31
     li r5, 0x0
     fmuls f2, f0, f4
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
 lbl_fn_802D0B84_00000FFC:
     mr r3, r31
     bl fn_802D3370
@@ -2546,9 +2546,9 @@ lbl_fn_802D0B84_00002328:
     stfs f0, 0x538(r31)
 lbl_fn_802D0B84_00002330:
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     lwz r3, lbl_8087F048
     mr r4, r31
     bl fn_80103F60

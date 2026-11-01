@@ -21,26 +21,26 @@ extern void fn_8007708C(void);
 extern void route_findNextWaypoint(void);
 extern void route_createSegment(void);
 extern void node_createNamedChild(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void fn_80092954(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_800CB360(void);
+extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void system_getNextSequenceId(void);
 extern void boss_updatePhaseState(void);
-extern void fn_8015495C(void);
-extern void fn_8016DA4C(void);
+extern void equip_applyToCharacter(void);
+extern void debuff_clearStatus(void);
 extern void actor_setState(void);
 extern void fn_80178A6C(void);
-extern void fn_80179D44(void);
+extern void actor_getMovementFlags(void);
 extern void task_findEntryById(void);
-extern void fn_80237518(void);
-extern void fn_802375C4(void);
-extern void fn_80237654(void);
-extern void fn_802376D0(void);
+extern void res_MsgHandle_ctor(void);
+extern void res_Resource_destructor(void);
+extern void res_Resource_unload(void);
+extern void res_MsgHandle_isLoading(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_unload(void);
@@ -71,8 +71,8 @@ extern void fn_802A36B0(void);
 extern void fn_802A36B8(void);
 extern void fn_802A3D6C(void);
 extern void fn_802A7970(void);
-extern void fn_8035B694(void);
-extern void fn_8035B78C(void);
+extern void entity_Instance_constructor(void);
+extern void entity_Instance_destructor(void);
 extern void fn_8037D4C0(void);
 extern void fn_803C1560(void);
 extern void boss_getOffset54(void);
@@ -309,7 +309,7 @@ lbl_fn_802A4194_000001B0:
     lwz r30, 0x15a8(r28)
     slwi r31, r31, 2
     lwz r29, 0x10d8(r4)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lwzx r4, r30, r31
     mr r5, r3
     lfs f1, lbl_80883E24
@@ -411,7 +411,7 @@ lbl_fn_802A42CC_00000318:
     lwz r29, 0x15a8(r31)
     mr r3, r31
     lwz r28, 0x10d8(r4)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lwzx r4, r29, r30
     mr r5, r3
     lfs f1, lbl_80883E24
@@ -495,9 +495,9 @@ asm void fn_802A4478(void)
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     mr r3, r28
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     li r31, 0x0
     li r0, 0x2
     stw r0, 0x58c(r28)
@@ -630,10 +630,7 @@ asm void fn_802A4628(void)
     blr
 }
 
-asm void fn_802A46E0(void)
-{
-    nofralloc
-    blr
+void fn_802A46E0(void) {
 }
 
 asm void fn_802A46E4(void)
@@ -845,10 +842,7 @@ asm void fn_802A49BC(void)
     blr
 }
 
-asm void fn_802A49C4(void)
-{
-    nofralloc
-    blr
+void fn_802A49C4(void) {
 }
 
 asm void fn_802A49C8(void)
@@ -894,7 +888,7 @@ asm void fn_802A4A04(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_802A4A04_000009BC
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_802A4A04_000009BC:
     addic. r3, r30, 0x167c
     beq lbl_fn_802A4A04_000009CC
@@ -1008,7 +1002,7 @@ asm void fn_802A4BBC(void)
     mr r30, r5
     lwz r5, 0x20(r5)
     mr r29, r3
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lfs f0, lbl_80883E38
     lis r3, lbl_80785D28@ha
     li r31, 0x0
@@ -1036,7 +1030,7 @@ asm void fn_802A4BBC(void)
     stw r31, 0x14f4(r29)
     bl res_MsgHandle_constructor
     addi r3, r29, 0x1508
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     addi r3, r29, 0x1514
     bl res_MsgHandle_constructor
     addi r3, r29, 0x1520
@@ -1044,7 +1038,7 @@ asm void fn_802A4BBC(void)
     addi r3, r29, 0x152c
     bl res_MsgHandle_constructor
     addi r3, r29, 0x1538
-    bl fn_800CB360
+    bl morph_reset
     lfs f0, lbl_80883E44
     addi r3, r29, 0x1654
     lfs f2, lbl_80883E3C
@@ -1135,7 +1129,7 @@ asm void fn_802A4BBC(void)
     addi r28, r28, lbl_80745FE4@l
     addi r3, r29, 0x1508
     addi r4, r28, 0xe
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r29, 0x1514
     addi r4, r28, 0x1c
     bl res_MsgHandle_destructor
@@ -1327,7 +1321,7 @@ asm void fn_802A5054(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_802A5054_0000100C
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_802A5054_0000100C:
     addic. r3, r29, 0x1844
     beq lbl_fn_802A5054_0000101C
@@ -1400,7 +1394,7 @@ lbl_fn_802A5054_000010D8:
 lbl_fn_802A5054_000010F8:
     addi r3, r29, 0x1508
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     addic. r31, r29, 0x14fc
     beq lbl_fn_802A5054_00001124
     mr r3, r31
@@ -1412,7 +1406,7 @@ lbl_fn_802A5054_000010F8:
 lbl_fn_802A5054_00001124:
     mr r3, r29
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r30, 0x0
     ble lbl_fn_802A5054_00001140
     mr r3, r29
@@ -1458,7 +1452,7 @@ lbl_fn_802A51F4_000011B4:
     cmpwi r3, 0x0
     bne lbl_fn_802A51F4_00001964
     addi r3, r30, 0x1508
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_802A51F4_00001964
     addi r3, r30, 0x1514

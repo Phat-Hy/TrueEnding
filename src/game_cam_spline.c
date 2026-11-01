@@ -17,21 +17,21 @@ extern void ref_releaseHandle(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void str_findChar(void);
 extern void cam_initStickBindings(void);
 extern void fn_801334CC(void);
 extern void save_validateHeader(void);
-extern void fn_801F64D0(void);
+extern void save_createWorkerTask(void);
 extern void fn_801F6C2C(void);
 extern void save_computeCrc32(void);
 extern void fn_801F6D7C(void);
-extern void fn_801F837C(void);
+extern void save_findEntryByName(void);
 extern void fn_801F8598(void);
 extern void thread_findAndNotifySlot(void);
 extern void fn_80207C34(void);
-extern void fn_802375C4(void);
-extern void fn_802376D0(void);
+extern void res_Resource_destructor(void);
+extern void res_MsgHandle_isLoading(void);
 extern void fn_8023772C(void);
 extern void res_MsgHandle_unload(void);
 extern void res_MsgHandle_update(void);
@@ -43,7 +43,7 @@ extern void fn_80444CF8(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_getName(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_80473F88(void);
+extern void shockwave_freeEmitter(void);
 extern void __destroy_arr(void);
 extern int sprintf(char* str, const char* format, ...);
 
@@ -155,7 +155,7 @@ lbl_fn_800EF7F8_000000A0:
 lbl_fn_800EF7F8_000000C0:
     addi r3, r29, 0x1c
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     addic. r31, r29, 0x10
     beq lbl_fn_800EF7F8_000000EC
     mr r3, r31
@@ -241,7 +241,7 @@ lbl_fn_800EF91C_000001C0:
     b lbl_fn_800EF91C_00000234
 lbl_fn_800EF91C_000001D8:
     addi r3, r29, 0x1c
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     beq lbl_fn_800EF91C_000001F0
     li r0, 0x1
@@ -340,9 +340,9 @@ lbl_fn_800EFA18_000002D4:
     addi r3, r28, 0x28
     bl res_MsgHandle_unload
     addi r3, r28, 0x34
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     addi r3, r28, 0x3c
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     b lbl_fn_800EFA18_000003A4
 lbl_fn_800EFA18_0000033C:
     lwz r4, lbl_8087F038
@@ -365,9 +365,9 @@ lbl_fn_800EFA18_0000033C:
     addi r3, r28, 0x28
     bl res_MsgHandle_unload
     addi r3, r28, 0x34
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     addi r3, r28, 0x3c
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     b lbl_fn_800EFA18_000003A4
 lbl_fn_800EFA18_0000039C:
     mr r3, r28
@@ -551,7 +551,7 @@ lbl_fn_800EFD04_000005BC:
     cmpwi r31, 0x0
     beq lbl_fn_800EFD04_000005E8
     addi r3, r31, 0x1c
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_800EFD04_000005E8
     lwz r0, 0x1c(r31)
@@ -798,28 +798,28 @@ asm void fn_800EFFD8(void)
 lbl_fn_800EFFD8_000008BC:
     mr r3, r31
     mr r4, r29
-    bl fn_801F64D0
+    bl save_createWorkerTask
     add r5, r31, r26
     li r4, 0x1
     stw r3, 0x54(r5)
     bl atn_Task_setActive
     mr r3, r31
     mr r4, r28
-    bl fn_801F64D0
+    bl save_createWorkerTask
     add r5, r31, r26
     li r4, 0x1
     stw r3, 0x70(r5)
     bl atn_Task_setActive
     mr r3, r31
     mr r4, r27
-    bl fn_801F64D0
+    bl save_createWorkerTask
     add r5, r31, r26
     li r4, 0x1
     stw r3, 0x8c(r5)
     bl atn_Task_setActive
     mr r3, r31
     mr r4, r30
-    bl fn_801F64D0
+    bl save_createWorkerTask
     add r5, r31, r26
     li r4, 0x1
     stw r3, 0xa8(r5)
@@ -832,13 +832,13 @@ lbl_fn_800EFFD8_000008BC:
     mr r3, r31
     addi r30, r30, lbl_80735460@l
     addi r4, r30, 0xbd
-    bl fn_801F64D0
+    bl save_createWorkerTask
     stw r3, 0x17c(r31)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r31
     addi r4, r30, 0xe1
-    bl fn_801F64D0
+    bl save_createWorkerTask
     stw r3, 0x180(r31)
     li r4, 0x1
     bl atn_Task_setActive
@@ -906,7 +906,7 @@ asm void fn_800F01BC(void)
     stw r0, 0x8(r1)
     mr r27, r3
     stw r0, 0x10(r1)
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_800F01BC_00000C00
     lwz r0, 0x38(r27)
@@ -1904,17 +1904,17 @@ lbl_fn_800F0D14_000018A8:
     lwz r5, 0x60(r24)
     lwz r3, 0x54(r28)
     lwz r5, 0x8(r5)
-    bl fn_801F837C
+    bl save_findEntryByName
     lwz r5, 0x60(r24)
     addi r4, r22, 0x133
     lwz r3, 0x70(r28)
     lwz r5, 0x8(r5)
-    bl fn_801F837C
+    bl save_findEntryByName
     lwz r5, 0x60(r24)
     addi r4, r22, 0x138
     lwz r3, 0x70(r28)
     lwz r5, 0x8(r5)
-    bl fn_801F837C
+    bl save_findEntryByName
     addi r28, r28, 0x4
     addi r27, r27, 0x90
     addi r26, r26, 0x1
@@ -1941,11 +1941,11 @@ lbl_fn_800F0D14_000018FC:
     lwz r3, 0x17c(r23)
     addi r4, r26, 0x141
     la r5, lbl_8087D970
-    bl fn_801F837C
+    bl save_findEntryByName
     lwz r3, 0x17c(r23)
     addi r4, r26, 0x148
     la r5, lbl_8087D970
-    bl fn_801F837C
+    bl save_findEntryByName
     lwz r3, 0x180(r23)
     fmr f1, f29
     lfs f0, lbl_808813B8
@@ -1956,11 +1956,11 @@ lbl_fn_800F0D14_000018FC:
     lwz r3, 0x180(r23)
     addi r4, r26, 0x141
     la r5, lbl_8087D970
-    bl fn_801F837C
+    bl save_findEntryByName
     lwz r3, 0x180(r23)
     addi r4, r26, 0x148
     la r5, lbl_8087D970
-    bl fn_801F837C
+    bl save_findEntryByName
     li r0, -0x1
     li r25, 0x1
     stw r24, 0x168(r23)
@@ -2004,11 +2004,11 @@ lbl_fn_800F0D14_000019CC:
     lwz r3, 0x17c(r23)
     addi r4, r1, 0x20
     addi r5, r1, 0xc0
-    bl fn_801F837C
+    bl save_findEntryByName
     lwz r3, 0x180(r23)
     addi r4, r1, 0x20
     addi r5, r1, 0xc0
-    bl fn_801F837C
+    bl save_findEntryByName
     cmpwi r22, 0x1
     blt lbl_fn_800F0D14_00001A84
     lwz r0, 0x1c(r1)
@@ -2067,11 +2067,11 @@ lbl_fn_800F0D14_00001AA8:
     addi r24, r24, lbl_80735460@l
     addi r5, r1, 0x40
     addi r4, r24, 0x148
-    bl fn_801F837C
+    bl save_findEntryByName
     lwz r3, 0x180(r23)
     addi r4, r24, 0x148
     addi r5, r1, 0x40
-    bl fn_801F837C
+    bl save_findEntryByName
     addi r22, r22, 0x1
 lbl_fn_800F0D14_00001B50:
     lis r4, lbl_80735460@ha

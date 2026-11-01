@@ -13,10 +13,10 @@ extern void atn_Anim_getLayerDuration(void);
 extern void fn_800A56A8(void);
 extern void fn_8010A308(void);
 extern void fn_801446F0(void);
-extern void fn_801539E0(void);
+extern void inventory_unequipItem(void);
 extern void fn_80155DAC(void);
 extern void fn_80176DFC(void);
-extern void fn_803EA77C(void);
+extern void chest_spawnLoot(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
@@ -1026,7 +1026,7 @@ asm void fn_801B9A54(void)
     addi r30, r3, 0xb0
     srwi. r0, r0, 31
     beq lbl_fn_801B9A54_00000CDC
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_801B9A54_00000CDC:
     lwz r3, 0x4(r29)
     lwz r0, 0x12a4(r3)
@@ -1395,7 +1395,7 @@ lbl_fn_801B9DE4_00001228:
     li r6, 0x0
     lfs f1, lbl_80882554
     lfs f2, lbl_8088257C
-    bl fn_803EA77C
+    bl chest_spawnLoot
     b lbl_fn_801B9DE4_000013A4
 lbl_fn_801B9DE4_00001248:
     addi r28, r1, 0x154
@@ -1487,7 +1487,7 @@ lbl_fn_801B9DE4_00001388:
     li r6, 0x0
     lfs f1, lbl_80882554
     lfs f2, lbl_8088257C
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_801B9DE4_000013A4:
     addi r3, r1, 0x16c
     lwz r4, 0x4(r27)
@@ -1673,7 +1673,7 @@ lbl_fn_801B9DE4_0000162C:
     li r6, 0x0
     lfs f1, lbl_80882554
     lfs f2, lbl_8088257C
-    bl fn_803EA77C
+    bl chest_spawnLoot
     b lbl_fn_801B9DE4_0000173C
 lbl_fn_801B9DE4_0000164C:
     bge lbl_fn_801B9DE4_0000173C
@@ -1738,7 +1738,7 @@ lbl_fn_801B9DE4_00001720:
     li r6, 0x0
     lfs f1, lbl_80882554
     lfs f2, lbl_8088257C
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_801B9DE4_0000173C:
     cmpwi r29, 0x0
     li r0, 0x0

@@ -12,8 +12,8 @@ extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_8008A00C(void);
-extern void fn_8008AD4C(void);
-extern void fn_8008B140(void);
+extern void area_updateZoneState(void);
+extern void map_processTrigger(void);
 extern void lockon_updateTarget(void);
 extern void fn_800A03A0(void);
 extern void fn_800A03E4(void);
@@ -23,13 +23,13 @@ extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
 extern void save_validateHeader(void);
-extern void fn_801F64D0(void);
+extern void save_createWorkerTask(void);
 extern void fn_801F69A8(void);
 extern void fn_801F6A38(void);
-extern void fn_80237518(void);
-extern void fn_802375C4(void);
-extern void fn_80237654(void);
-extern void fn_802376D0(void);
+extern void res_MsgHandle_ctor(void);
+extern void res_Resource_destructor(void);
+extern void res_Resource_unload(void);
+extern void res_MsgHandle_isLoading(void);
 extern void fn_8023772C(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
@@ -40,7 +40,7 @@ extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_80473F88(void);
+extern void shockwave_freeEmitter(void);
 extern void PSMTXConcat(void);
 extern void PSMTXTrans(void);
 extern void PSMTXScale(void);
@@ -223,7 +223,7 @@ asm void fn_80202AF0(void)
     stw r0, 0x104(r28)
     mr r3, r28
     addi r4, r28, 0x4c
-    bl fn_801F64D0
+    bl save_createWorkerTask
     stw r3, 0x48(r28)
     li r4, 0x1
     stb r31, 0x4e(r3)
@@ -282,7 +282,7 @@ asm void fn_80202CA4(void)
     rlwimi r0, r4, 24, 0, 7
     stw r0, 0x104(r3)
     addi r4, r3, 0x4c
-    bl fn_801F64D0
+    bl save_createWorkerTask
     stw r3, 0x48(r31)
     li r0, 0x0
     li r4, 0x1
@@ -1184,7 +1184,7 @@ asm void fn_802039A0(void)
     cmpwi r31, 0x0
     beq lbl_fn_802039A0_00000F94
     mr r3, r31
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     li r0, 0x0
     stw r0, 0x8(r31)
     lwz r31, 0x18(r30)
@@ -1423,7 +1423,7 @@ lbl_fn_80203C7C_0000126C:
     lwz r4, 0x10(r31)
 lbl_fn_80203C7C_00001270:
     li r5, 0x0
-    bl fn_8008AD4C
+    bl area_updateZoneState
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0
@@ -1467,7 +1467,7 @@ asm void fn_80203D50(void)
     mflr r0
     lwz r3, 0x24(r3)
     stw r0, 0x14(r1)
-    bl fn_8008B140
+    bl map_processTrigger
     cntlzw r0, r3
     srwi r3, r0, 5
     lwz r0, 0x14(r1)
@@ -1532,11 +1532,11 @@ lbl_fn_80203D7C_000013B0:
     bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_80203D7C_000013D8
-    bl fn_80237518
+    bl res_MsgHandle_ctor
 lbl_fn_80203D7C_000013D8:
     stw r3, 0x18(r28)
     mr r4, r29
-    bl fn_80237654
+    bl res_Resource_unload
     li r0, 0x2
     stw r0, 0x1c(r28)
 lbl_fn_80203D7C_000013EC:
@@ -1587,7 +1587,7 @@ lbl_fn_80203E78_00001474:
     bl fn_8023772C
     lwz r3, 0x18(r30)
     li r4, 0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
 lbl_fn_80203E78_00001490:
     li r0, 0x0
     stw r0, 0x18(r30)
@@ -1622,7 +1622,7 @@ lbl_fn_80203F1C_000014E8:
     cmpwi r0, 0x2
     bne lbl_fn_80203F1C_0000150C
     lwz r3, 0x18(r31)
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     beq lbl_fn_80203F1C_0000150C
     li r3, 0x0
@@ -1695,7 +1695,7 @@ asm void fn_80204028(void)
     cmpwi r0, 0x0
     beq lbl_fn_80204028_0000160C
     mr r3, r0
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     lwz r3, 0x18(r31)
     cmpwi r3, 0x0
     beq lbl_fn_80204028_00001604
@@ -1790,7 +1790,7 @@ asm void fn_80204150(void)
     cmpwi r0, 0x0
     beq lbl_fn_80204150_0000176C
     mr r3, r0
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     lwz r3, 0x18(r30)
     cmpwi r3, 0x0
     beq lbl_fn_80204150_00001730

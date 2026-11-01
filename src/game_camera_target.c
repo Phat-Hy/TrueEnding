@@ -8,7 +8,7 @@ extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
 extern void route_createSegment(void);
 extern void node_createNamedChild(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
@@ -16,7 +16,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void skin_playAnimationByName(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB440(void);
+extern void morph_updateWeights(void);
 extern void morph_updateMesh(void);
 extern void atn_Task_setActive(void);
 extern void str_parseInt(void);
@@ -25,18 +25,18 @@ extern void wcs_vformat(void);
 extern void fn_800EB7A0(void);
 extern void fn_800EE360(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8C6C(void);
+extern void scissor_clipFrustum(void);
 extern void fn_801092C8(void);
 extern void fn_80109828(void);
 extern void boss_updatePhaseState(void);
-extern void fn_80145334(void);
-extern void fn_8014C540(void);
-extern void fn_8015495C(void);
-extern void fn_8016DA4C(void);
+extern void quest_updateFlow(void);
+extern void dialog_updateScriptState(void);
+extern void equip_applyToCharacter(void);
+extern void debuff_clearStatus(void);
 extern void actor_setState(void);
 extern void fn_8017039C(void);
 extern void fn_80170A20(void);
-extern void fn_801765D8(void);
+extern void battle_awardExp(void);
 extern void fn_80178A6C(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
@@ -52,8 +52,8 @@ extern void fn_802E3B24(void);
 extern void fn_802E3EE8(void);
 extern void fn_802E470C(void);
 extern void fn_802E8084(void);
-extern void fn_8035B694(void);
-extern void fn_8035B78C(void);
+extern void entity_Instance_constructor(void);
+extern void entity_Instance_destructor(void);
 extern void fn_80375184(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
@@ -171,7 +171,7 @@ lbl_fn_802E1054_0000003C:
     mr r3, r31
     ori r0, r0, 0x8000
     stw r0, 0x12a4(r31)
-    bl fn_801765D8
+    bl battle_awardExp
 lbl_fn_802E1054_00000070:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
@@ -448,7 +448,7 @@ asm void fn_802E1414(void)
     bl skin_applyWeights
     addi r3, r29, 0x1560
     addi r4, r1, 0x10
-    bl fn_800CB440
+    bl morph_updateWeights
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle
@@ -663,9 +663,9 @@ asm void fn_802E177C(void)
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     mr r3, r28
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     li r0, 0x2
     stw r0, 0x58c(r28)
     mr r3, r28
@@ -1120,7 +1120,7 @@ asm void fn_802E1DF0(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_802E1DF0_00000DE8
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_802E1DF0_00000DE8:
     addic. r4, r30, 0x1638
     beq lbl_fn_802E1DF0_00000E14
@@ -1344,7 +1344,7 @@ asm void fn_802E211C(void)
     stw r28, 0x110(r1)
     mr r28, r3
     lwz r5, 0x20(r5)
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lis r3, lbl_80787160@ha
     addi r31, r28, 0x14b0
     addi r3, r3, lbl_80787160@l
@@ -1444,7 +1444,7 @@ asm void fn_802E2270(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_802E2270_00001268
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_802E2270_00001268:
     addic. r31, r29, 0x14f8
     beq lbl_fn_802E2270_00001288
@@ -1462,7 +1462,7 @@ lbl_fn_802E2270_00001288:
 lbl_fn_802E2270_00001298:
     mr r3, r29
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r30, 0x0
     ble lbl_fn_802E2270_000012B4
     mr r3, r29
@@ -2029,7 +2029,7 @@ lbl_fn_802E289C_00001A44:
     lfs f1, lbl_808846EC
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     b lbl_fn_802E289C_00001CCC
     lfs f31, 0x2e4(r31)
     addi r3, r31, 0xb0
@@ -2068,7 +2068,7 @@ lbl_fn_802E289C_00001ADC:
     lfs f1, lbl_808846EC
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     b lbl_fn_802E289C_00001CCC
     lfs f31, 0x2e4(r31)
     addi r3, r31, 0xb0
@@ -2107,7 +2107,7 @@ lbl_fn_802E289C_00001B74:
     lfs f1, lbl_808846EC
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     b lbl_fn_802E289C_00001CCC
     lwz r0, 0x55c(r31)
     cmpwi r0, 0x6
@@ -2185,9 +2185,9 @@ lbl_fn_802E289C_00001CCC:
     lfs f0, 0x14c8(r31)
     mr r3, r31
     stfs f0, 0x52c(r31)
-    bl fn_8014C540
+    bl dialog_updateScriptState
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     lfs f2, 0x530(r31)
     lis r3, lbl_80747D90@ha
     addi r3, r3, lbl_80747D90@l

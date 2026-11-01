@@ -11,11 +11,11 @@ extern void fn_8003EA3C(void);
 extern void fn_8003F030(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_8008BBD8(void);
+extern void map_debugLog(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void str_findChar(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8574(void);
+extern void viewport_updateCulling(void);
 extern void clip_calculateFrustum(void);
 extern void fn_800FB4B0(void);
 extern void fn_801070C8(void);
@@ -25,8 +25,8 @@ extern void fn_80108C10(void);
 extern void fn_801092C8(void);
 extern void fn_8010CCD8(void);
 extern void fn_8012F034(void);
-extern void fn_8015495C(void);
-extern void fn_8016DA4C(void);
+extern void equip_applyToCharacter(void);
+extern void debuff_clearStatus(void);
 extern void fn_80192758(void);
 extern void fn_801B2EDC(void);
 extern void fn_801BDE68(void);
@@ -43,7 +43,7 @@ extern void world_setGlobalFlag(void);
 extern void fn_803750E4(void);
 extern void fn_80375184(void);
 extern void fn_803761AC(void);
-extern void fn_803EA77C(void);
+extern void chest_spawnLoot(void);
 extern void fn_8054A340(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXRotAxis(void);
@@ -415,7 +415,7 @@ lbl_fn_801BE630_00000434:
     cmpwi r21, 0x0
     beq lbl_fn_801BE630_000017D8
     lwz r3, 0x4(r31)
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     li r15, 0x1
     stb r15, 0x1d(r31)
     lwz r0, 0x4(r19)
@@ -998,7 +998,7 @@ lbl_fn_801BE630_00000CDC:
     addi r6, r1, 0x220
     addi r7, r1, 0x1f0
     li r8, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
     addi r17, r17, 0x1
     addi r16, r16, 0xf
     cmpwi r17, 0x4
@@ -1042,7 +1042,7 @@ lbl_fn_801BE630_00000D1C:
     fdivs f0, f21, f0
     stfs f0, 0x514(r1)
     lwz r4, 0x4(r31)
-    bl fn_800F8574
+    bl viewport_updateCulling
     b lbl_fn_801BE630_0000158C
 lbl_fn_801BE630_00000DB4:
     lwz r3, lbl_8087F048
@@ -1055,7 +1055,7 @@ lbl_fn_801BE630_00000DB4:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
     b lbl_fn_801BE630_0000158C
 lbl_fn_801BE630_00000DE4:
     cmpwi r0, 0x8
@@ -1284,7 +1284,7 @@ lbl_fn_801BE630_00001034:
     lfs f2, lbl_808825E8
     li r9, 0x2
     li r10, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
     addi r17, r17, 0x1
     addi r16, r16, 0x4
 lbl_fn_801BE630_00001144:
@@ -1360,7 +1360,7 @@ lbl_fn_801BE630_000011E8:
     lwz r0, 0x14(r31)
     stw r0, 0x4b8(r1)
     lwz r4, 0x4(r31)
-    bl fn_800F8574
+    bl viewport_updateCulling
     b lbl_fn_801BE630_0000158C
 lbl_fn_801BE630_00001260:
     lwz r0, 0x4(r19)
@@ -1689,7 +1689,7 @@ lbl_fn_801BE630_00001708:
     li r5, 0x1e
     lfs f2, lbl_80882608
     li r6, 0x1e
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_801BE630_00001734:
     mr r3, r19
     bl fn_8021A8D0
@@ -1756,13 +1756,13 @@ lbl_fn_801BE630_000017D8:
     stw r3, 0x63c(r4)
     stw r0, 0x638(r4)
     lwz r3, 0x4(r31)
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lwz r3, 0x4(r31)
     li r4, 0x0
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
 lbl_fn_801BE630_00001844:
     li r18, 0x1
     b lbl_fn_801BE630_0000187C
@@ -1895,7 +1895,7 @@ lbl_fn_801BFF28_000019F8:
     stw r4, 0x48(r1)
     stw r0, 0x4c(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_801BFF28_00001ACC
     lwz r7, 0x3c(r1)

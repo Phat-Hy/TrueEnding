@@ -30,21 +30,21 @@ extern void GXClearVtxDesc(void);
 extern void fn_80614790(void);
 extern void fn_806149C0(void);
 extern void fn_80615C40(void);
-extern void fn_80615D20(void);
+extern void GXInitLightDistAttn(void);
 extern void fn_80615D50(void);
 extern void fn_80615FF0(void);
 extern void fn_80616200(void);
 extern void fn_80616250(void);
 extern void fn_80616390(void);
 extern void fn_80617200(void);
-extern void fn_80617220(void);
+extern void GXInitTexObjDefault(void);
 extern void fn_80617340(void);
 extern void GXSetTevSwapMode(void);
-extern void fn_80617730(void);
+extern void GXSetTevSwapModeTable(void);
 extern void fn_806177B0(void);
-extern void fn_80617880(void);
+extern void GXSetTevOrder(void);
 extern void GXSetNumTevStages(void);
-extern void fn_80617D50(void);
+extern void GXSetTevAlphaIn(void);
 extern void fn_8061A0F0(void);
 extern void fn_8061A100(void);
 extern void fn_80653DA0(void);
@@ -819,7 +819,7 @@ asm void fn_805CE550(void)
     li r7, 0x0
     bl GXSetVtxAttrFmt
     li r3, 0x1
-    bl fn_80615D20
+    bl GXInitLightDistAttn
     li r3, 0x4
     li r4, 0x0
     li r5, 0x0
@@ -843,12 +843,12 @@ asm void fn_805CE550(void)
     li r4, 0xff
     li r5, 0xff
     li r6, 0x4
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x0
     li r4, 0x4
     bl fn_80617340
     li r3, 0x0
-    bl fn_80617220
+    bl GXInitTexObjDefault
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -858,7 +858,7 @@ asm void fn_805CE550(void)
     li r5, 0x1
     li r6, 0x2
     li r7, 0x3
-    bl fn_80617730
+    bl GXSetTevSwapModeTable
     li r3, 0x7
     li r4, 0x0
     li r5, 0x0
@@ -869,7 +869,7 @@ asm void fn_805CE550(void)
     li r4, 0x4
     li r5, 0x5
     li r6, 0xf
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
     li r3, 0x6
     li r4, 0x0
     bl fn_806149C0

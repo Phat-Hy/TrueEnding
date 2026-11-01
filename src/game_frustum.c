@@ -6,7 +6,7 @@ extern void _restgpr_22(void);
 extern void _restgpr_23(void);
 extern void _savegpr_22(void);
 extern void _savegpr_23(void);
-extern void fn_8008B140(void);
+extern void map_processTrigger(void);
 extern void fn_800902C0(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
@@ -30,12 +30,12 @@ extern void fn_80154488(void);
 extern void fn_801656A4(void);
 extern void fn_8016E484(void);
 extern void fn_8016F368(void);
-extern void fn_8016F3D0(void);
+extern void battle_canTargetActor(void);
 extern void save_validateHeader(void);
 extern void fn_8020BD78(void);
 extern void task_mapIdToQueue(void);
-extern void fn_80237654(void);
-extern void fn_802376D0(void);
+extern void res_Resource_unload(void);
+extern void res_MsgHandle_isLoading(void);
 extern void fn_8023772C(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_unload(void);
@@ -251,7 +251,7 @@ lbl_fn_800F2C9C_0000016C:
 lbl_fn_800F2C9C_0000017C:
     mr r3, r29
     addi r4, r1, 0x8
-    bl fn_80237654
+    bl res_Resource_unload
     addi r26, r26, 0x1
     addi r29, r29, 0xc
     cmpwi r26, 0x7
@@ -274,7 +274,7 @@ lbl_fn_800F2C9C_000001C0:
     bl sprintf
     mr r3, r29
     addi r4, r1, 0x8
-    bl fn_80237654
+    bl res_Resource_unload
     mr r5, r26
     addi r3, r1, 0x8
     addi r4, r30, 0xa3
@@ -282,7 +282,7 @@ lbl_fn_800F2C9C_000001C0:
     bl sprintf
     mr r3, r28
     addi r4, r1, 0x8
-    bl fn_80237654
+    bl res_Resource_unload
     addi r26, r26, 0x1
     addi r28, r28, 0xc
     cmpwi r26, 0x5
@@ -296,7 +296,7 @@ lbl_fn_800F2C9C_000001C0:
 lbl_fn_800F2C9C_00000228:
     lwz r4, 0x0(r29)
     mr r3, r30
-    bl fn_80237654
+    bl res_Resource_unload
     addi r26, r26, 0x1
     addi r30, r30, 0xc
     cmpwi r26, 0x3
@@ -455,7 +455,7 @@ lbl_fn_800F2C9C_00000228:
     addis r3, r31, 0x4
     lwz r4, lbl_80881430
     subi r3, r3, 0x760c
-    bl fn_80237654
+    bl res_Resource_unload
     addis r3, r31, 0x4
     lwz r4, lbl_80881460
     subi r3, r3, 0x73b0
@@ -763,7 +763,7 @@ lbl_fn_800F3490_0000090C:
     li r26, 0x0
 lbl_fn_800F3490_00000914:
     mr r3, r30
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     beq lbl_fn_800F3490_00000928
     li r28, 0x1
@@ -782,13 +782,13 @@ lbl_fn_800F3490_00000928:
     addi r29, r29, 0x651c
 lbl_fn_800F3490_00000958:
     mr r3, r29
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     beq lbl_fn_800F3490_0000096C
     li r28, 0x1
 lbl_fn_800F3490_0000096C:
     mr r3, r30
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     beq lbl_fn_800F3490_00000980
     li r28, 0x1
@@ -803,7 +803,7 @@ lbl_fn_800F3490_00000980:
     addi r29, r29, 0x6594
 lbl_fn_800F3490_000009A0:
     mr r3, r29
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     beq lbl_fn_800F3490_000009B4
     li r28, 0x1
@@ -1013,7 +1013,7 @@ lbl_fn_800F3490_00000C84:
 lbl_fn_800F3490_00000C88:
     addis r3, r31, 0x4
     subi r3, r3, 0x760c
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     beq lbl_fn_800F3490_00000CA0
     li r28, 0x1
@@ -1072,7 +1072,7 @@ lbl_fn_800F3490_00000D38:
     subi r30, r30, 0x45ac
 lbl_fn_800F3490_00000D54:
     mr r3, r30
-    bl fn_8008B140
+    bl map_processTrigger
     cmpwi r3, 0x0
     beq lbl_fn_800F3490_00000D68
     li r28, 0x1
@@ -1130,27 +1130,27 @@ asm void fn_800F39A4(void)
     mr r28, r3
     addis r3, r3, 0x4
     subi r3, r3, 0x7688
-    bl fn_80237654
+    bl res_Resource_unload
     addis r3, r28, 0x4
     lwz r4, lbl_808813F8
     subi r3, r3, 0x767c
-    bl fn_80237654
+    bl res_Resource_unload
     addis r3, r28, 0x4
     lwz r4, lbl_808813FC
     subi r3, r3, 0x7658
-    bl fn_80237654
+    bl res_Resource_unload
     addis r3, r28, 0x4
     lwz r4, lbl_80881400
     subi r3, r3, 0x764c
-    bl fn_80237654
+    bl res_Resource_unload
     addis r3, r28, 0x4
     lwz r4, lbl_80881404
     subi r3, r3, 0x7670
-    bl fn_80237654
+    bl res_Resource_unload
     addis r3, r28, 0x4
     lwz r4, lbl_80881408
     subi r3, r3, 0x7664
-    bl fn_80237654
+    bl res_Resource_unload
     lis r31, lbl_80736040@ha
     addis r3, r28, 0x4
     addi r31, r31, lbl_80736040@l
@@ -1244,12 +1244,12 @@ asm void fn_800F3B4C(void)
     li r29, 0x0
     subi r3, r3, 0x7688
     stw r28, 0x10(r1)
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_800F3B4C_00000FE4
     addis r3, r30, 0x4
     subi r3, r3, 0x767c
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     beq lbl_fn_800F3B4C_00000FE8
 lbl_fn_800F3B4C_00000FE4:
@@ -1260,12 +1260,12 @@ lbl_fn_800F3B4C_00000FE8:
     addis r3, r30, 0x4
     li r29, 0x0
     subi r3, r3, 0x7658
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_800F3B4C_0000101C
     addis r3, r30, 0x4
     subi r3, r3, 0x764c
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     beq lbl_fn_800F3B4C_00001020
 lbl_fn_800F3B4C_0000101C:
@@ -1279,12 +1279,12 @@ lbl_fn_800F3B4C_0000102C:
     addis r3, r30, 0x4
     li r29, 0x0
     subi r3, r3, 0x7670
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_800F3B4C_00001058
     addis r3, r30, 0x4
     subi r3, r3, 0x7664
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     beq lbl_fn_800F3B4C_0000105C
 lbl_fn_800F3B4C_00001058:
@@ -1681,7 +1681,7 @@ lbl_fn_800F3EF4_00001588:
     mr r3, r28
     mr r4, r30
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     bne lbl_fn_800F3EF4_00001620
     lwz r0, 0x48(r31)
@@ -1999,7 +1999,7 @@ lbl_fn_800F3EF4_000019E8:
     mr r3, r25
     mr r4, r30
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     beq lbl_fn_800F3EF4_00001A88
     lwz r0, 0x7e0(r30)
@@ -2310,7 +2310,7 @@ lbl_fn_800F3EF4_00001E98:
     mr r3, r25
     mr r4, r22
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     beq lbl_fn_800F3EF4_00001EC0
     lwz r0, 0x12a4(r22)

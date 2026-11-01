@@ -9,15 +9,15 @@ extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void fn_8004ECC0(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_80097D40(void);
+extern void atn_Anim_getLayerTrack(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800A55D4(void);
-extern void fn_8013CB68(void);
+extern void npc_updateTalkInteraction(void);
 extern void fn_801446F0(void);
-extern void fn_801539E0(void);
+extern void inventory_unequipItem(void);
 extern void fn_80155DAC(void);
 extern void fn_803C18DC(void);
-extern void fn_803EA77C(void);
+extern void chest_spawnLoot(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
@@ -27,7 +27,7 @@ extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
 extern void PSVECCrossProduct(void);
 extern void rand(void);
-extern void fn_8068A850(void);
+extern void std_sin(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
 
@@ -155,7 +155,7 @@ lbl_fn_801AB6B8_000000D8:
     li r6, 0x0
     lfs f1, lbl_808822A0
     lfs f2, lbl_808822AC
-    bl fn_803EA77C
+    bl chest_spawnLoot
     b lbl_fn_801AB6B8_00000308
 lbl_fn_801AB6B8_000000F8:
     li r0, 0x1
@@ -254,7 +254,7 @@ lbl_fn_801AB6B8_00000240:
     li r6, 0x0
     lfs f1, lbl_808822A0
     lfs f2, lbl_808822AC
-    bl fn_803EA77C
+    bl chest_spawnLoot
     b lbl_fn_801AB6B8_000002F0
 lbl_fn_801AB6B8_00000260:
     lwz r4, 0x4(r30)
@@ -1105,7 +1105,7 @@ asm void fn_801AC434(void)
     fmr f31, f1
     lis r3, lbl_8073A9B8@ha
     lfd f1, lbl_8073A9B8@l(r3)
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     fcmpo cr0, f31, f0
     ble lbl_fn_801AC434_00001040
@@ -1361,7 +1361,7 @@ lbl_fn_801AC434_0000121C:
     lwz r0, 0x12a4(r3)
     srwi. r0, r0, 31
     beq lbl_fn_801AC434_00001230
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_801AC434_00001230:
     lwz r3, 0x4(r27)
     lwz r0, 0x12a4(r3)
@@ -1415,7 +1415,7 @@ lbl_fn_801AC434_000012D4:
 lbl_fn_801AC434_000012E0:
     mr r3, r31
     mr r4, r29
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     bne lbl_fn_801AC434_000012F8
     li r29, 0x33
@@ -1458,7 +1458,7 @@ lbl_fn_801AC434_00001338:
     li r6, 0x0
     lfs f1, lbl_808822F0
     lfs f2, lbl_80882310
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_801AC434_00001390:
     psq_l f31, 0x228(r1), 0, 0
     mr r3, r27
@@ -1518,7 +1518,7 @@ lbl_fn_801ACA74_00001444:
     lfs f1, lbl_808822EC
     li r5, 0x0
     lfs f2, 0x568(r3)
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
     psq_l f31, 0x18(r1), 0, 0
     mr r3, r31
     lfd f31, 0x10(r1)
@@ -1802,7 +1802,7 @@ lbl_fn_801ACE88_00001858:
     lfs f1, lbl_808822EC
     li r5, 0x0
     lfs f2, 0x568(r3)
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
     psq_l f31, 0x18(r1), 0, 0
     mr r3, r31
     lfd f31, 0x10(r1)
@@ -2031,7 +2031,7 @@ lbl_fn_801ACF4C_00001B4C:
     li r6, 0x0
     lfs f1, lbl_808822F0
     lfs f2, lbl_80882310
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_801ACF4C_00001BC8:
     psq_l f31, 0x148(r1), 0, 0
     mr r3, r28

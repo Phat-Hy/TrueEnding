@@ -3,9 +3,9 @@
 
 /* External function declarations */
 extern void vec3_copy(void);
-extern void fn_8000D3A4(void);
-extern void fn_8001047C(void);
-extern void fn_80011034(void);
+extern void vec3_mag(void);
+extern void vec3_assign(void);
+extern void vec3_toEulerAngles(void);
 extern void fn_80017064(void);
 extern void fn_80057A68(void);
 extern void mem_alloc(void);
@@ -27,14 +27,14 @@ extern void clip_calculateFrustum(void);
 extern void fn_80116BAC(void);
 extern void fn_8011D1FC(void);
 extern void fn_8011D21C(void);
-extern void fn_80121F00(void);
+extern void equip_getGlobalManager(void);
 extern void magic_dispatchActionCommand(void);
 extern void fn_80126214(void);
 extern void fn_8013537C(void);
 extern void fn_801370B8(void);
 extern void fn_80138E1C(void);
 extern void fn_8013A4E8(void);
-extern void fn_8013CB68(void);
+extern void npc_updateTalkInteraction(void);
 extern void fn_801698E4(void);
 extern void fn_8016BBCC(void);
 extern void actor_setState(void);
@@ -52,7 +52,7 @@ extern void world_getGlobalFlag(void);
 extern void PSMTXRotRad(void);
 extern void PSMTX44Identity(void);
 extern void std_atan2(void);
-extern void fn_806952C4(void);
+extern void msl_releaseRefCount(void);
 extern void vec3_isNonZero(void);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
@@ -143,7 +143,7 @@ asm void fn_80139560(void)
     stw r30, 0x98(r1)
     addi r4, r31, 0x534
     stw r29, 0x94(r1)
-    bl fn_8001047C
+    bl vec3_assign
     lfs f1, lbl_8088196C
     lfs f0, lbl_80881964
     stfs f1, 0x14(r1)
@@ -265,10 +265,10 @@ lbl_fn_80139560_000001D8:
     stfs f0, 0x10(r1)
     b lbl_fn_80139560_00000700
 lbl_fn_80139560_000001F4:
-    bl fn_80121F00
+    bl equip_getGlobalManager
     cmpwi r3, 0x0
     beq lbl_fn_80139560_00000220
-    bl fn_80121F00
+    bl equip_getGlobalManager
     li r4, 0x3
     bl world_getGlobalFlag
     cmpwi r3, 0x1
@@ -277,10 +277,10 @@ lbl_fn_80139560_000001F4:
     stfs f0, 0x10(r1)
     b lbl_fn_80139560_00000700
 lbl_fn_80139560_00000220:
-    bl fn_80121F00
+    bl equip_getGlobalManager
     cmpwi r3, 0x0
     beq lbl_fn_80139560_0000024C
-    bl fn_80121F00
+    bl equip_getGlobalManager
     li r4, 0x3
     bl world_getGlobalFlag
     cmpwi r3, 0x2
@@ -312,10 +312,10 @@ lbl_fn_80139560_00000298:
     lfs f0, lbl_80881984
     stfs f0, 0x10(r1)
 lbl_fn_80139560_000002A0:
-    bl fn_80121F00
+    bl equip_getGlobalManager
     cmpwi r3, 0x0
     beq lbl_fn_80139560_00000700
-    bl fn_80121F00
+    bl equip_getGlobalManager
     li r4, 0x3
     bl world_getGlobalFlag
     cmpwi r3, 0x3
@@ -440,9 +440,9 @@ lbl_fn_80139560_00000468:
     bl fn_80139F58
     mr r4, r3
     addi r3, r1, 0x60
-    bl fn_8001047C
+    bl vec3_assign
     addi r3, r1, 0x60
-    bl fn_8000D3A4
+    bl vec3_mag
     frsp f2, f1
     lfs f0, lbl_808819B8
     stfs f1, 0x14(r1)
@@ -453,7 +453,7 @@ lbl_fn_80139560_00000468:
     bl fn_800F7FD8
     addi r3, r1, 0x48
     addi r4, r1, 0x3c
-    bl fn_80011034
+    bl vec3_toEulerAngles
     addi r3, r1, 0x6c
     addi r4, r1, 0x48
     bl vec3_copy
@@ -467,10 +467,10 @@ lbl_fn_80139560_000004D4:
     bl fn_800F7F80
     cmpwi r3, 0x0
     beq lbl_fn_80139560_0000050C
-    bl fn_80121F00
+    bl equip_getGlobalManager
     cmpwi r3, 0x0
     beq lbl_fn_80139560_0000050C
-    bl fn_80121F00
+    bl equip_getGlobalManager
     li r4, 0x3
     bl world_getGlobalFlag
     cmpwi r3, 0x1
@@ -579,7 +579,7 @@ lbl_fn_80139560_00000624:
     bne lbl_fn_80139560_0000069C
     addi r3, r1, 0x18
     addi r4, r31, 0x574
-    bl fn_80011034
+    bl vec3_toEulerAngles
     mr r3, r31
     addi r4, r1, 0x18
     bl fn_801698E4
@@ -655,7 +655,7 @@ lbl_fn_80139560_00000780:
     lfs f2, 0x10(r1)
     addi r4, r1, 0x6c
     li r5, 0x0
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
 lbl_fn_80139560_00000798:
     lwz r0, 0x54c(r31)
     rlwinm r0, r0, 0, 23, 23
@@ -1306,7 +1306,7 @@ lbl_fn_8013A258_00000EC0:
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_8013A258_00000F08
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_8013A258_00000F08:
     lwz r4, 0x3c(r1)
     addi r3, r1, 0x40

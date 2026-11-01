@@ -88,7 +88,7 @@ void fn_800696C8(void);
 void fn_8006974C(void);
 void fn_80069758(void);
 void fn_80069798(void);
-void fn_800697D8(void);
+void boss_recordDamage(void);
 void fn_800698DC(void);
 void fn_80069BF4(void);
 void fn_80069D48(void);
@@ -865,7 +865,7 @@ lbl_fn_80069798_00000A10:
     blr
 }
 
-asm void fn_800697D8(void)
+asm void boss_recordDamage(void)
 {
     nofralloc
     stwu r1, -0xa0(r1)
@@ -878,7 +878,7 @@ asm void fn_800697D8(void)
     mr r29, r4
     lwz r0, 0x0(r3)
     cmplwi r0, 0x40
-    bge lbl_fn_800697D8_00000B10
+    bge lbl_boss_recordDamage_00000B10
     li r30, 0x0
     li r4, 0x12c
     lis r0, 0xffff
@@ -888,17 +888,17 @@ asm void fn_800697D8(void)
     stw r0, 0x8c(r1)
     bl strlen
     cmplwi r3, 0x7f
-    blt lbl_fn_800697D8_00000A94
+    blt lbl_boss_recordDamage_00000A94
     mr r4, r29
     addi r3, r1, 0x8
     li r5, 0x7e
     bl strncpy
     stb r30, 0x86(r1)
-    b lbl_fn_800697D8_00000ABC
-lbl_fn_800697D8_00000A94:
+    b lbl_boss_recordDamage_00000ABC
+lbl_boss_recordDamage_00000A94:
     addi r30, r1, 0x8
     cmplw r29, r30
-    beq lbl_fn_800697D8_00000ABC
+    beq lbl_boss_recordDamage_00000ABC
     mr r3, r29
     bl strlen
     mr r5, r3
@@ -906,31 +906,31 @@ lbl_fn_800697D8_00000A94:
     mr r4, r29
     addi r5, r5, 0x1
     bl memcpy
-lbl_fn_800697D8_00000ABC:
+lbl_boss_recordDamage_00000ABC:
     lwz r0, 0x0(r31)
     mulli r0, r0, 0x88
     add r0, r31, r0
     addic. r6, r0, 0x4
-    beq lbl_fn_800697D8_00000B04
+    beq lbl_boss_recordDamage_00000B04
     li r0, 0x10
     subi r5, r6, 0x4
     addi r4, r1, 0x4
     mtctr r0
-lbl_fn_800697D8_00000AE0:
+lbl_boss_recordDamage_00000AE0:
     lwz r3, 0x4(r4)
     lwzu r0, 0x8(r4)
     stw r3, 0x4(r5)
     stwu r0, 0x8(r5)
-    bdnz lbl_fn_800697D8_00000AE0
+    bdnz lbl_boss_recordDamage_00000AE0
     lwz r0, 0x88(r1)
     stw r0, 0x80(r6)
     lwz r0, 0x8c(r1)
     stw r0, 0x84(r6)
-lbl_fn_800697D8_00000B04:
+lbl_boss_recordDamage_00000B04:
     lwz r3, 0x0(r31)
     addi r0, r3, 0x1
     stw r0, 0x0(r31)
-lbl_fn_800697D8_00000B10:
+lbl_boss_recordDamage_00000B10:
     lwz r0, 0xa4(r1)
     lwz r31, 0x9c(r1)
     lwz r30, 0x98(r1)

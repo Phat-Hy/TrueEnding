@@ -14,15 +14,15 @@ extern void ref_releaseHandle(void);
 extern void morph_updateMesh(void);
 extern void wcs_vformat(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8C6C(void);
+extern void scissor_clipFrustum(void);
 extern void fn_80109828(void);
 extern void fn_8013A258(void);
-extern void fn_8013CB68(void);
-extern void fn_80145334(void);
+extern void npc_updateTalkInteraction(void);
+extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void dialog_setScriptSlot(void);
-extern void fn_8014C540(void);
-extern void fn_80151448(void);
+extern void dialog_updateScriptState(void);
+extern void inventory_applyItemStats(void);
 extern void fn_80158BB4(void);
 extern void fn_8015AC48(void);
 extern void fn_8016BEDC(void);
@@ -312,7 +312,7 @@ lbl_fn_802A5A1C_000002D4:
     lfs f1, lbl_80883E40
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     b lbl_fn_802A5A1C_00000DFC
     mr r3, r31
     bl fn_802A8BBC
@@ -1029,9 +1029,9 @@ lbl_fn_802A5A1C_00000DFC:
     mr r3, r31
     addi r0, r4, 0x1
     stw r0, 0x15e4(r31)
-    bl fn_8014C540
+    bl dialog_updateScriptState
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     mr r3, r31
     bl fn_802A7970
     lwz r3, 0x58c(r31)
@@ -1435,7 +1435,7 @@ lbl_fn_802A6D58_000013E0:
 lbl_fn_802A6D58_00001404:
     mr r3, r30
     mr r4, r31
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r12, 0x0(r30)
     mr r3, r30
     mr r4, r31
@@ -1638,10 +1638,7 @@ lbl_fn_802A6E80_000016E4:
     blr
 }
 
-asm void fn_802A7118(void)
-{
-    nofralloc
-    blr
+void fn_802A7118(void) {
 }
 
 asm void fn_802A711C(void)
@@ -1854,7 +1851,7 @@ lbl_fn_802A711C_000019B0:
     addi r4, r1, 0x74
     fmuls f2, f0, f29
     li r5, 0x1
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
     lwz r3, 0x1694(r31)
     lwz r0, 0x16ec(r31)
     ori r6, r3, 0x1

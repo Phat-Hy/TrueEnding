@@ -11,7 +11,7 @@ extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_80040B40(void);
-extern void fn_8004D388(void);
+extern void collision_queryGeometry(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
@@ -19,26 +19,26 @@ extern void fn_8006AFF8(void);
 extern void mem_free(void);
 extern void route_createSegment(void);
 extern void node_createNamedChild(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void msg_getMessageById(void);
 extern void skin_playAnimationByName(void);
-extern void fn_800CB360(void);
+extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8C6C(void);
+extern void scissor_clipFrustum(void);
 extern void fn_80102824(void);
 extern void boss_updatePhaseState(void);
 extern void fn_801446F0(void);
-extern void fn_80144710(void);
-extern void fn_80145334(void);
-extern void fn_8014C540(void);
-extern void fn_801539E0(void);
+extern void quest_evaluateConditions(void);
+extern void quest_updateFlow(void);
+extern void dialog_updateScriptState(void);
+extern void inventory_unequipItem(void);
 extern void fn_80155DAC(void);
 extern void fn_80158BB4(void);
 extern void fn_80164DCC(void);
@@ -48,14 +48,14 @@ extern void fn_8017039C(void);
 extern void fn_80170A20(void);
 extern void fn_801750FC(void);
 extern void fn_80176548(void);
-extern void fn_80179D44(void);
+extern void actor_getMovementFlags(void);
 extern void fn_8017A33C(void);
 extern void fn_8017AC3C(void);
 extern void task_findEntryById(void);
-extern void fn_80237518(void);
-extern void fn_802375C4(void);
-extern void fn_80237654(void);
-extern void fn_802376D0(void);
+extern void res_MsgHandle_ctor(void);
+extern void res_Resource_destructor(void);
+extern void res_Resource_unload(void);
+extern void res_MsgHandle_isLoading(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_unload(void);
@@ -71,8 +71,8 @@ extern void fn_802F5370(void);
 extern void fn_802F566C(void);
 extern void fn_802F58A0(void);
 extern void fn_802F66CC(void);
-extern void fn_8035B694(void);
-extern void fn_8035B78C(void);
+extern void entity_Instance_constructor(void);
+extern void entity_Instance_destructor(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
@@ -92,7 +92,7 @@ extern void strcmp(void);
 extern void strncmp(void);
 extern void atoi(void);
 extern void abort(void);
-extern void fn_8068A850(void);
+extern void std_sin(void);
 extern void std_fmod(void);
 extern void math_u64DivMod(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -187,7 +187,7 @@ asm void fn_802F0964(void)
     mr r8, r0
     li r4, 0x0
     li r5, 0x0
-    b fn_800F8C6C
+    b scissor_clipFrustum
 }
 
 asm void fn_802F0988(void)
@@ -482,7 +482,7 @@ lbl_fn_802F09D4_000003BC:
     stw r0, 0xf8(r1)
     bl fn_80176548
     mr r3, r30
-    bl fn_80179D44
+    bl actor_getMovementFlags
     mr r7, r3
     lwz r3, lbl_8087EE98
     lfs f1, 0x14(r1)
@@ -491,7 +491,7 @@ lbl_fn_802F09D4_000003BC:
     addi r6, r1, 0x24
     addi r8, r30, 0x5b8
     li r9, 0x0
-    bl fn_8004D388
+    bl collision_queryGeometry
     addi r4, r1, 0xc8
     lfs f2, 0xd0(r1)
     psq_l f1, 0x0(r4), 0, 0
@@ -571,7 +571,7 @@ lbl_fn_802F09D4_000004F4:
     lfs f1, lbl_80884850
     li r5, 0x0
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
 lbl_fn_802F09D4_00000550:
     addi r3, r1, 0x48
     lfs f2, 0x50(r1)
@@ -667,7 +667,7 @@ asm void fn_802F0F60(void)
     fmr f31, f1
     lis r3, lbl_80748470@ha
     lfd f1, lbl_80748470@l(r3)
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     fcmpo cr0, f31, f0
     bge lbl_fn_802F0F60_000006E4
@@ -817,7 +817,7 @@ lbl_fn_802F1120_00000820:
     stfs f2, 0x53c(r3)
     stfs f0, 0x10(r1)
     lwz r3, 0x152c(r31)
-    bl fn_80145334
+    bl quest_updateFlow
 lbl_fn_802F1120_000008C8:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
@@ -857,7 +857,7 @@ asm void fn_802F1240(void)
     srwi. r0, r0, 31
     beq lbl_fn_802F1240_00000950
     mr r3, r31
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_802F1240_00000950:
     lwz r0, 0x12a4(r31)
     extrwi. r0, r0, 1, 25
@@ -1046,14 +1046,14 @@ asm void fn_802F1524(void)
     mr r31, r5
     lwz r5, 0x20(r5)
     mr r30, r3
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lis r3, lbl_80787938@ha
     li r29, 0x0
     addi r3, r3, lbl_80787938@l
     stw r3, 0x0(r30)
     addi r3, r30, 0x14d4
     stw r29, 0x14b0(r30)
-    bl fn_800CB360
+    bl morph_reset
     addi r3, r30, 0x14d8
     bl res_MsgHandle_constructor
     lfs f1, lbl_808848D0
@@ -1063,7 +1063,7 @@ asm void fn_802F1524(void)
     stw r0, 0x14e4(r30)
     stfs f1, 0x14e8(r30)
     stfs f0, 0x14f0(r30)
-    bl fn_800CB360
+    bl morph_reset
     addi r3, r30, 0x1518
     bl res_MsgHandle_constructor
     lfs f0, lbl_808848DC
@@ -1091,7 +1091,7 @@ asm void fn_802F1524(void)
     stw r0, 0x15a0(r30)
     bl res_MsgHandle_constructor
     addi r3, r30, 0x15b8
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     addi r28, r30, 0x15c4
     mr r3, r28
     bl atn_LoadHandle_constructor
@@ -1261,7 +1261,7 @@ lbl_fn_802F1524_00000E9C:
     bl res_MsgHandle_destructor
     addi r3, r30, 0x15b8
     addi r4, r31, 0x75
-    bl fn_80237654
+    bl res_Resource_unload
     lwz r0, 0x20(r1)
     srwi. r0, r0, 31
     beq lbl_fn_802F1524_00000F38
@@ -1310,7 +1310,7 @@ asm void fn_802F18E0(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_802F18E0_00000FC8
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_802F18E0_00000FC8:
     addic. r3, r29, 0x15c4
     beq lbl_fn_802F18E0_00000FD8
@@ -1319,7 +1319,7 @@ lbl_fn_802F18E0_00000FC8:
 lbl_fn_802F18E0_00000FD8:
     addi r3, r29, 0x15b8
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     addic. r31, r29, 0x15ac
     beq lbl_fn_802F18E0_00001004
     mr r3, r31
@@ -1368,7 +1368,7 @@ lbl_fn_802F18E0_00001080:
     bl ref_releaseHandle
     mr r3, r29
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r30, 0x0
     ble lbl_fn_802F18E0_000010A8
     mr r3, r29
@@ -1425,7 +1425,7 @@ lbl_fn_802F1A2C_00001128:
     cmpwi r3, 0x0
     bne lbl_fn_802F1A2C_000018F4
     addi r3, r18, 0x15b8
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_802F1A2C_000018F4
     addi r3, r18, 0x15c4
@@ -2060,7 +2060,7 @@ lbl_fn_802F2294_00001A4C:
     cror eq, lt, eq
     bne lbl_fn_802F2294_00001E9C
     mr r3, r31
-    bl fn_80144710
+    bl quest_evaluateConditions
     lwz r3, lbl_8087F048
     mr r6, r31
     lwz r7, 0x1528(r31)
@@ -2070,7 +2070,7 @@ lbl_fn_802F2294_00001A4C:
     lfs f1, lbl_808848DC
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     b lbl_fn_802F2294_00001E9C
     mr r3, r31
     bl fn_802F3BE8
@@ -2418,9 +2418,9 @@ lbl_fn_802F2294_00001F64:
     bl fn_80040B40
 lbl_fn_802F2294_00001FB0:
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     lwz r0, 0x58c(r31)
     cmpwi r0, 0x11
     bne lbl_fn_802F2294_00002170

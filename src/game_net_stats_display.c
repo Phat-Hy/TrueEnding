@@ -9,7 +9,7 @@ extern void dtor_80084684(void);
 extern void fn_80063484(void);
 extern void mem_free(void);
 extern void msg_getMessageById(void);
-extern void fn_800BFAC8(void);
+extern void motion_updateFogAdj(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void str_calcHash(void);
@@ -22,12 +22,12 @@ extern void fn_80105BD8(void);
 extern void fn_8012D8B8(void);
 extern void fn_8012DB04(void);
 extern void fn_80139560(void);
-extern void fn_80144710(void);
-extern void fn_80145334(void);
+extern void quest_evaluateConditions(void);
+extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
-extern void fn_8014C540(void);
-extern void fn_80151448(void);
-extern void fn_8015495C(void);
+extern void dialog_updateScriptState(void);
+extern void inventory_applyItemStats(void);
+extern void equip_applyToCharacter(void);
 extern void fn_8015EB2C(void);
 extern void fn_80161570(void);
 extern void fn_8016AB0C(void);
@@ -36,19 +36,19 @@ extern void fn_8016E4C4(void);
 extern void fn_8016EB48(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
-extern void fn_80237518(void);
-extern void fn_802375C4(void);
-extern void fn_80237654(void);
-extern void fn_802376D0(void);
+extern void res_MsgHandle_ctor(void);
+extern void res_Resource_destructor(void);
+extern void res_Resource_unload(void);
+extern void res_MsgHandle_isLoading(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_unload(void);
 extern void res_MsgHandle_update(void);
 extern void res_findResourceSlot(void);
 extern void fn_8023A184(void);
-extern void fn_8023A680(void);
-extern void fn_8035B694(void);
-extern void fn_8035B78C(void);
+extern void res_Shader_bindParams(void);
+extern void entity_Instance_constructor(void);
+extern void entity_Instance_destructor(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
 extern void fn_803E2A30(void);
@@ -64,7 +64,7 @@ extern void PSVECDotProduct(void);
 extern void printf(void);
 extern void rand(void);
 extern void abort(void);
-extern void fn_8068A850(void);
+extern void std_sin(void);
 extern void std_atan2(void);
 
 /* External data declarations */
@@ -351,7 +351,7 @@ asm void fn_80546004(void)
     stw r30, 0x18(r1)
     stw r29, 0x14(r1)
     mr r29, r3
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lis r3, lbl_80794608@ha
     li r30, 0x0
     addi r3, r3, lbl_80794608@l
@@ -359,9 +359,9 @@ asm void fn_80546004(void)
     addi r3, r29, 0x14b8
     stw r30, 0x14b0(r29)
     stw r30, 0x14b4(r29)
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     addi r3, r29, 0x14c4
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     addi r3, r29, 0x14d0
     bl res_MsgHandle_constructor
     lwz r0, 0x54c(r29)
@@ -375,11 +375,11 @@ asm void fn_80546004(void)
     stw r30, 0x14f8(r29)
     stw r30, 0x14fc(r29)
     stw r0, 0x54c(r29)
-    bl fn_80237654
+    bl res_Resource_unload
     addi r31, r31, lbl_8075E324@l
     addi r3, r29, 0x14c4
     addi r4, r31, 0xd
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r29, 0x14d0
     addi r4, r31, 0x1f
     bl res_MsgHandle_destructor
@@ -420,13 +420,13 @@ asm void fn_805460D0(void)
 lbl_fn_805460D0_0000042C:
     addi r3, r29, 0x14c4
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     addi r3, r29, 0x14b8
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     mr r3, r29
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r30, 0x0
     ble lbl_fn_805460D0_00000460
     mr r3, r29
@@ -451,11 +451,11 @@ asm void fn_8054616C(void)
     stw r31, 0x1c(r1)
     mr r31, r3
     addi r3, r3, 0x14b8
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_8054616C_000004C4
     addi r3, r31, 0x14c4
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_8054616C_000004C4
     addi r3, r31, 0x14d0
@@ -583,12 +583,12 @@ lbl_fn_8054622C_00000650:
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
 lbl_fn_8054622C_0000067C:
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
     lwz r4, 0x14a8(r31)
     lwz r3, 0x12a4(r31)
     lwz r0, 0x54c(r31)
@@ -657,9 +657,9 @@ lbl_fn_8054622C_000006B4:
     stfs f0, 0x74(r1)
     bl fn_8023A184
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
     lwz r0, 0x14e8(r31)
     cmpwi r0, 0x3c
     ble lbl_fn_8054622C_00000C94
@@ -713,9 +713,9 @@ lbl_fn_8054622C_00000858:
     mtctr r12
     bctrl
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
     b lbl_fn_8054622C_00000C94
 lbl_fn_8054622C_00000884:
     bl fn_8015EB2C
@@ -727,9 +727,9 @@ lbl_fn_8054622C_00000884:
     mtctr r12
     bctrl
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
     b lbl_fn_8054622C_00000C94
 lbl_fn_8054622C_000008B8:
     lwz r3, lbl_8087F048
@@ -972,13 +972,13 @@ lbl_fn_8054622C_00000BC0:
     lwz r3, lbl_8087F3C0
     li r8, 0x0
     li r9, 0x0
-    bl fn_8023A680
+    bl res_Shader_bindParams
     lfs f3, 0x52c(r31)
     mr r3, r31
     lfs f0, lbl_80887D04
     fadds f0, f3, f0
     stfs f0, 0x52c(r31)
-    bl fn_80144710
+    bl quest_evaluateConditions
     addi r3, r31, 0x7d4
     bl fn_8012D8B8
     lfs f0, 0x14ec(r31)
@@ -1106,7 +1106,7 @@ asm void fn_80546A4C(void)
     fmuls f31, f31, f4
     stfs f0, 0x2c(r1)
     stfs f3, 0x30(r1)
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f0, lbl_80887CE0
     lfs f3, 0x28(r1)
     fcmpo cr0, f0, f3
@@ -1477,7 +1477,7 @@ lbl_fn_80546B88_000012D4:
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     lfs f1, lbl_80887D1C
     li r17, 0x1
     stw r17, 0xd18(r18)
@@ -1496,7 +1496,7 @@ lbl_fn_80546B88_000012D4:
     mr r3, r18
     rlwinm r0, r0, 0, 7, 5
     stw r0, 0x12a4(r18)
-    bl fn_80145334
+    bl quest_updateFlow
     li r3, 0x0
     li r4, 0x0
     bl sound_initGlobalInstances
@@ -1513,12 +1513,12 @@ lbl_fn_80546B88_000012D4:
     li r7, 0x0
     li r10, 0x0
     lwz r3, lbl_8087F3C0
-    bl fn_8023A680
+    bl res_Shader_bindParams
     lwz r4, 0x14e4(r18)
     mr r3, r18
     addi r0, r4, 0x1
     stw r0, 0x14e4(r18)
-    bl fn_80145334
+    bl quest_updateFlow
     b lbl_fn_80546B88_000016CC
 lbl_fn_80546B88_0000141C:
     addi r3, r1, 0x90
@@ -1672,9 +1672,9 @@ lbl_fn_80546B88_00001628:
     psq_st f1, 0x0(r17), 0, 0
     psq_st f1, 0x534(r18), 0, 0
     stfs f2, 0x53c(r18)
-    bl fn_80144710
+    bl quest_evaluateConditions
     mr r3, r18
-    bl fn_80145334
+    bl quest_updateFlow
     psq_l f1, 0x528(r18), 0, 0
     addi r3, r1, 0xc8
     psq_st f1, 0x0(r3), 0, 0
@@ -1741,7 +1741,7 @@ asm void fn_805473E0(void)
     stw r5, 0x68(r4)
     b lbl_fn_805473E0_00001764
 lbl_fn_805473E0_00001748:
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r12, 0x0(r30)
     mr r3, r30
     mr r4, r31
@@ -1849,7 +1849,7 @@ lbl_fn_8054746C_00001830:
     fmr f31, f1
     lis r3, lbl_8075E308@ha
     lfd f1, lbl_8075E308@l(r3)
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     fcmpo cr0, f31, f0
     ble lbl_fn_8054746C_00001928

@@ -11,12 +11,12 @@ extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void talk_formatQuotedString(void);
-extern void fn_8005BBF8(void);
-extern void fn_8005BCE8(void);
+extern void talk_parseQuotes(void);
+extern void talk_copySpeakerName(void);
 extern void fn_8006B0C8(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_8008AD4C(void);
+extern void area_updateZoneState(void);
 extern void fn_8008B138(void);
 extern void fn_80092F1C(void);
 extern void fn_800A1934(void);
@@ -29,7 +29,7 @@ extern void fn_800A1F84(void);
 extern void str_skipWhitespace(void);
 extern void fn_800DC500(void);
 extern void str_findChar(void);
-extern void fn_802376D0(void);
+extern void res_MsgHandle_isLoading(void);
 extern void res_MsgHandle_update(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
@@ -37,7 +37,7 @@ extern void atn_Curve_evaluate(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_getName(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_80473F88(void);
+extern void shockwave_freeEmitter(void);
 extern void fn_80476884(void);
 extern void fn_804768B4(void);
 extern void strcmp(void);
@@ -127,7 +127,7 @@ asm void fn_800A005C(void)
     addi r4, r4, lbl_807774B8@l
     stw r4, 0x430(r1)
     la r4, lbl_8087D710
-    bl fn_8005BCE8
+    bl talk_copySpeakerName
     mr r3, r30
     bl atn_LoadHandle_getName
     stw r28, 0x18(r1)
@@ -226,7 +226,7 @@ lbl_fn_800A005C_000001E8:
     addi r3, r30, 0x10
     addi r4, r1, 0x330
     li r5, 0x0
-    bl fn_8008AD4C
+    bl area_updateZoneState
     b lbl_fn_800A005C_000002FC
 lbl_fn_800A005C_00000220:
     lwz r0, 0x24(r1)
@@ -245,7 +245,7 @@ lbl_fn_800A005C_00000240:
     addi r3, r30, 0x10
     addi r4, r1, 0x330
     addi r5, r1, 0x230
-    bl fn_8008AD4C
+    bl area_updateZoneState
     b lbl_fn_800A005C_000002FC
 lbl_fn_800A005C_00000260:
     mr r3, r26
@@ -293,7 +293,7 @@ lbl_fn_800A005C_000002D4:
     bl fn_80092F1C
 lbl_fn_800A005C_000002FC:
     addi r3, r1, 0x430
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_800A005C_00000130
     lwz r0, 0x24(r1)
@@ -348,7 +348,7 @@ asm void fn_800A03E4(void)
     lwz r0, 0x8(r3)
     cmpwi r0, 0x0
     beq lbl_fn_800A03E4_000003BC
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     li r0, 0x0
     stw r0, 0x8(r30)
 lbl_fn_800A03E4_000003BC:
@@ -747,7 +747,7 @@ asm void fn_800A091C(void)
 lbl_fn_800A091C_000008E8:
     lwz r0, 0x14(r29)
     add r3, r0, r31
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     beq lbl_fn_800A091C_00000904
     li r3, 0x1

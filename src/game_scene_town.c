@@ -8,12 +8,12 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_8008BBD8(void);
+extern void map_debugLog(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_801539E0(void);
+extern void inventory_unequipItem(void);
 extern void fn_80155DAC(void);
-extern void fn_8016DA4C(void);
+extern void debuff_clearStatus(void);
 extern void fn_80188A70(void);
 extern void fn_80188AA0(void);
 extern void fn_80191960(void);
@@ -463,7 +463,7 @@ lbl_fn_801A9E94_00000538:
     stw r4, 0x48(r1)
     stw r0, 0x4c(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_801A9E94_0000060C
     lwz r7, 0x3c(r1)
@@ -934,7 +934,7 @@ lbl_fn_801AA550_00000BF4:
     stw r4, 0x48(r1)
     stw r0, 0x4c(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_801AA550_00000CC8
     lwz r7, 0x3c(r1)
@@ -1349,7 +1349,7 @@ asm void fn_801AAB64(void)
     stw r8, 0x98(r3)
     stw r0, 0x560(r4)
     lwz r3, 0x4(r3)
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lwz r3, 0x4(r30)
     lwz r0, 0x12a4(r3)
     extrwi. r0, r0, 1, 25
@@ -1361,7 +1361,7 @@ lbl_fn_801AAB64_0000114C:
     lwz r0, 0x12a4(r3)
     srwi. r0, r0, 31
     beq lbl_fn_801AAB64_00001160
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_801AAB64_00001160:
     lwz r0, 0x80(r30)
     rlwinm r0, r0, 0, 30, 30
@@ -1955,7 +1955,7 @@ lbl_fn_801AB294_000019B4:
     psq_st f1, 0x0(r7), 0, 0
     stfs f2, 0x188(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_801AB294_00001AD0
     lwz r6, 0x170(r1)
@@ -2059,7 +2059,7 @@ lbl_fn_801AB294_00001B70:
     stw r4, 0x30(r1)
     stw r0, 0x34(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_801AB294_00001BE4
     lwz r5, 0x28(r1)

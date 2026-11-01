@@ -48,29 +48,29 @@ extern void __GXSetVtxDesc(void);
 extern void GXClearVtxDesc(void);
 extern void fn_80615B60(void);
 extern void fn_80615C40(void);
-extern void fn_80615D20(void);
+extern void GXInitLightDistAttn(void);
 extern void fn_80615D50(void);
 extern void fn_80616250(void);
 extern void fn_806163C0(void);
 extern void fn_80616EF0(void);
 extern void fn_80617340(void);
-extern void fn_806173E0(void);
+extern void GXSetTevColorIn(void);
 extern void fn_80617420(void);
 extern void GXSetTevIndirect(void);
 extern void fn_806174C0(void);
 extern void fn_80617520(void);
 extern void fn_806175F0(void);
 extern void GXSetTevSwapMode(void);
-extern void fn_80617730(void);
-extern void fn_80617880(void);
+extern void GXSetTevSwapModeTable(void);
+extern void GXSetTevOrder(void);
 extern void GXSetNumTevStages(void);
 extern void fn_80618030(void);
 extern void GXLoadPosMtxImm(void);
 extern void GXLoadNrmMtxImm3x3(void);
 extern void GXSetCurrentMtx(void);
 extern void GXLoadTexMtxImm(void);
-extern void fn_8068A850(void);
-extern void fn_8068AD58(void);
+extern void std_sin(void);
+extern void std_cos(void);
 
 /* External data declarations */
 extern u8 lbl_80732638[];
@@ -132,10 +132,7 @@ void atn_Model_drawMeshNode(void);
 void reticle_updateTargetNodes(void);
 void atn_Reticle_updateDraw(void);
 
-asm void fn_8009B938(void)
-{
-    nofralloc
-    blr
+void fn_8009B938(void) {
 }
 
 asm void atn_Model_drawSubNodes(void)
@@ -427,10 +424,10 @@ lbl_atn_Model_loadTexMatrices_000003E0:
     fcmpu cr0, f30, f25
     beq lbl_atn_Model_loadTexMatrices_00000420
     fmr f1, f25
-    bl fn_8068A850
+    bl std_sin
     frsp f24, f1
     fmr f1, f25
-    bl fn_8068AD58
+    bl std_cos
     frsp f3, f1
     addi r3, r1, 0x98
     fmr f1, f29
@@ -931,7 +928,7 @@ lbl_atn_Model_setupMeshMaterial_00000B24:
     stw r0, 0x78(r1)
     lbz r5, 0x75(r1)
     lbz r4, 0x78(r1)
-    bl fn_80617730
+    bl GXSetTevSwapModeTable
     lwz r3, lbl_8087EFB4
     lwz r0, 0x2f8(r3)
     cmpwi r0, 0x4
@@ -1333,10 +1330,10 @@ lbl_fn_8009C84C_000010B0:
     fcmpu cr0, f31, f23
     beq lbl_fn_8009C84C_000010F0
     fmr f1, f23
-    bl fn_8068A850
+    bl std_sin
     frsp f22, f1
     fmr f1, f23
-    bl fn_8068AD58
+    bl std_cos
     frsp f3, f1
     addi r3, r1, 0x38
     fmr f1, f27
@@ -1618,7 +1615,7 @@ lbl_fn_8009CC28_000014AC:
     li r3, 0x4
     bl fn_80615C40
     li r3, 0x1
-    bl fn_80615D20
+    bl GXInitLightDistAttn
     li r3, 0x4
     li r4, 0x0
     li r5, 0x0
@@ -1703,10 +1700,10 @@ lbl_fn_8009CC28_000015EC:
     fcmpu cr0, f3, f27
     beq lbl_fn_8009CC28_00001630
     fmr f1, f27
-    bl fn_8068A850
+    bl std_sin
     frsp f26, f1
     fmr f1, f27
-    bl fn_8068AD58
+    bl std_cos
     frsp f3, f1
     addi r3, r1, 0x30
     fmr f1, f31
@@ -1753,7 +1750,7 @@ lbl_fn_8009CC28_00001674:
     stw r0, 0x18(r1)
     lbz r5, 0x15(r1)
     lbz r4, 0x18(r1)
-    bl fn_80617730
+    bl GXSetTevSwapModeTable
     li r3, 0x0
     li r4, 0x0
     li r5, 0x3
@@ -1762,13 +1759,13 @@ lbl_fn_8009CC28_00001674:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x4
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x0
     li r4, 0xf
     li r5, 0xf
     li r6, 0xf
     li r7, 0xa
-    bl fn_806173E0
+    bl GXSetTevColorIn
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -1842,7 +1839,7 @@ lbl_fn_8009CC28_000017B4:
     li r4, 0xff
     li r5, 0xff
     li r6, 0x4
-    bl fn_80617880
+    bl GXSetTevOrder
 lbl_fn_8009CC28_0000181C:
     lwz r0, 0xf4(r1)
     psq_l f31, 0xe8(r1), 0, 0
@@ -1891,7 +1888,7 @@ asm void fn_8009D1A4(void)
     li r3, 0x5
     bl fn_80615C40
     li r3, 0x1
-    bl fn_80615D20
+    bl GXInitLightDistAttn
     li r3, 0x4
     li r4, 0x0
     li r5, 0x0
@@ -1906,7 +1903,7 @@ asm void fn_8009D1A4(void)
     li r4, 0x0
     li r5, 0x0
     li r6, 0xff
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x0
     li r4, 0x3
     bl fn_80617340
@@ -1916,7 +1913,7 @@ asm void fn_8009D1A4(void)
     li r4, 0x0
     li r5, 0x0
     li r6, 0xff
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x0
     li r4, 0x1
     li r5, 0x4

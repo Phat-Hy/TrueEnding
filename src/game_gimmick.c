@@ -30,7 +30,7 @@ extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_80473F88(void);
+extern void shockwave_freeEmitter(void);
 extern void taskManager_updateTasks(void);
 extern void PSMTXMultVec(void);
 extern void fn_805F9EF0(void);
@@ -1409,7 +1409,7 @@ lbl_fn_8006D3F8_000011AC:
     li r4, 0x1
     bl fn_8006D54C
     mr r3, r28
-    bl fn_80473F88
+    bl shockwave_freeEmitter
 lbl_fn_8006D3F8_00001200:
     addi r26, r26, 0x1
     addi r28, r28, 0x8

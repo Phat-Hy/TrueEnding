@@ -2,24 +2,24 @@
 #pragma function_align 4
 
 /* External function declarations */
-extern void fn_8004D388(void);
+extern void collision_queryGeometry(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8C6C(void);
-extern void fn_80144710(void);
-extern void fn_80148990(void);
-extern void fn_8015495C(void);
+extern void scissor_clipFrustum(void);
+extern void quest_evaluateConditions(void);
+extern void quest_ctorRewardItem(void);
+extern void equip_applyToCharacter(void);
 extern void fn_80158BB4(void);
-extern void fn_8016DA4C(void);
+extern void debuff_clearStatus(void);
 extern void actor_setState(void);
 extern void fn_8016F824(void);
 extern void fn_80170A20(void);
 extern void fn_80176548(void);
-extern void fn_801765D8(void);
+extern void battle_awardExp(void);
 extern void fn_80178A6C(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
@@ -488,7 +488,7 @@ lbl_fn_802C42D4_00000578:
     mr r31, r3
 lbl_fn_802C42D4_00000584:
     mr r3, r30
-    bl fn_80144710
+    bl quest_evaluateConditions
     lwz r3, lbl_8087F048
     mr r6, r30
     lwz r8, 0x590(r30)
@@ -498,7 +498,7 @@ lbl_fn_802C42D4_00000584:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     b lbl_fn_802C42D4_00000670
 lbl_fn_802C42D4_000005B8:
     lfs f1, 0x2e4(r30)
@@ -644,7 +644,7 @@ lbl_fn_802C4480_00000700:
     addi r8, r30, 0x5b8
     lis r7, 0x8000
     li r9, 0x0
-    bl fn_8004D388
+    bl collision_queryGeometry
     addi r4, r1, 0x78
     addi r3, r1, 0x8
     psq_l f1, 0x0(r4), 0, 0
@@ -689,7 +689,7 @@ lbl_fn_802C4480_00000868:
     mr r31, r3
 lbl_fn_802C4480_00000874:
     mr r3, r30
-    bl fn_80144710
+    bl quest_evaluateConditions
     lwz r3, lbl_8087F048
     mr r6, r30
     lwz r8, 0x590(r30)
@@ -699,7 +699,7 @@ lbl_fn_802C4480_00000874:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
 lbl_fn_802C4480_000008A4:
     lwz r0, 0xe4(r1)
     psq_l f31, 0xd8(r1), 0, 0
@@ -769,7 +769,7 @@ lbl_fn_802C46BC_00000958:
     stw r5, 0x1608(r30)
     stw r4, 0x1654(r30)
     stw r0, 0x12a4(r30)
-    bl fn_801765D8
+    bl battle_awardExp
     lwz r3, lbl_8087F430
     li r4, 0xf9
     li r5, 0x1
@@ -1074,9 +1074,9 @@ asm void fn_802C4B70(void)
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     mr r3, r29
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lfs f0, lbl_808842AC
     li r0, 0x9
     li r31, 0x1
@@ -1437,9 +1437,9 @@ lbl_fn_802C5068_00001330:
     la r6, lbl_8087D9E0
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     li r5, 0x0
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r6, 0x14
     li r7, 0x8
     bl runtime_registerStaticObject
@@ -1551,9 +1551,9 @@ lbl_fn_802C5068_000014D0:
     addi r3, r3, 0x10
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     mr r7, r30
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r5, 0x0
     li r6, 0x14
     bl runtime_registerStaticObject
@@ -1727,9 +1727,9 @@ lbl_fn_802C5068_00001774:
     la r6, lbl_8087D9E0
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     li r5, 0x0
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r6, 0x14
     li r7, 0x8
     bl runtime_registerStaticObject
@@ -1841,9 +1841,9 @@ lbl_fn_802C5068_00001914:
     addi r3, r3, 0x10
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     mr r7, r30
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r5, 0x0
     li r6, 0x14
     bl runtime_registerStaticObject
@@ -2013,9 +2013,9 @@ lbl_fn_802C5068_00001BA8:
     la r6, lbl_8087D9E0
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     li r5, 0x0
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r6, 0x14
     li r7, 0x8
     bl runtime_registerStaticObject
@@ -2127,9 +2127,9 @@ lbl_fn_802C5068_00001D48:
     addi r3, r3, 0x10
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     mr r7, r30
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r5, 0x0
     li r6, 0x14
     bl runtime_registerStaticObject

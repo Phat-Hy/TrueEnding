@@ -12,7 +12,7 @@ extern void msg_getMessageById(void);
 extern void ref_releaseHandle(void);
 extern void str_findChar(void);
 extern void wcs_vformat(void);
-extern void fn_80116FC0(void);
+extern void actor_findSpawnTemplate(void);
 extern void fn_80117214(void);
 extern void actor_spawnActorWithId(void);
 extern void fn_801347C8(void);
@@ -31,7 +31,7 @@ extern void save_computeCrc32(void);
 extern void fn_801F6E78(void);
 extern void fn_801F7590(void);
 extern void fn_801F7DF0(void);
-extern void fn_801F837C(void);
+extern void save_findEntryByName(void);
 extern void profile_getMetricValue(void);
 extern void perf_getMetricValue(void);
 extern void fn_8020BCEC(void);
@@ -281,7 +281,7 @@ lbl_fn_801D5AB0_0000025C:
     lwz r28, lbl_8087F580
     li r3, 0x1
     li r4, 0x105
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     mr r4, r3
     mr r3, r28
     bl fn_804A4294
@@ -333,7 +333,7 @@ lbl_fn_801D5AB0_00000350:
     lwz r28, lbl_8087F580
     li r3, 0x1
     li r4, 0x107
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     mr r4, r3
     mr r3, r28
     bl fn_804A4294
@@ -560,7 +560,7 @@ lbl_fn_801D5F04_00000668:
     lwz r31, lbl_8087F580
     li r3, 0x1
     li r4, 0x105
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     mr r4, r3
     mr r3, r31
     bl fn_804A4294
@@ -1551,7 +1551,7 @@ lbl_fn_801D6C1C_000013FC:
     mulli r25, r0, 0x54
     add r5, r18, r25
     addi r5, r5, 0x10
-    bl fn_801F837C
+    bl save_findEntryByName
     cmpwi r28, 0x0
     li r19, 0x1
     beq lbl_fn_801D6C1C_000014E8
@@ -1729,7 +1729,7 @@ lbl_fn_801D6F84_000016C4:
     mr r3, r27
     addi r4, r31, 0x16
     addi r5, r1, 0x8
-    bl fn_801F837C
+    bl save_findEntryByName
     stfs f30, 0x50(r27)
     b lbl_fn_801D6F84_0000170C
 lbl_fn_801D6F84_00001708:

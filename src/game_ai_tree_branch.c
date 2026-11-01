@@ -21,7 +21,7 @@ extern void talk_setSpeakerName(void);
 extern void fn_8006AFF8(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -38,12 +38,12 @@ extern void fn_80103F60(void);
 extern void fn_80108378(void);
 extern void fn_80109828(void);
 extern void boss_updatePhaseState(void);
-extern void fn_80145334(void);
-extern void fn_8014C540(void);
+extern void quest_updateFlow(void);
+extern void dialog_updateScriptState(void);
 extern void fn_801513D0(void);
 extern void fn_8015E4B0(void);
 extern void actor_setState(void);
-extern void fn_801765D8(void);
+extern void battle_awardExp(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_constructor(void);
@@ -57,8 +57,8 @@ extern void fn_8025BD1C(void);
 extern void fn_8025BF58(void);
 extern void fn_8025C29C(void);
 extern void fn_8025C460(void);
-extern void fn_8035B694(void);
-extern void fn_8035B78C(void);
+extern void entity_Instance_constructor(void);
+extern void entity_Instance_destructor(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
 extern void boss_getOffset54(void);
@@ -990,7 +990,7 @@ asm void fn_8025A060(void)
     mr r31, r5
     lwz r5, 0x20(r5)
     mr r30, r3
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lis r3, lbl_807847E0@ha
     addi r28, r30, 0x14b0
     addi r3, r3, lbl_807847E0@l
@@ -1291,7 +1291,7 @@ asm void fn_8025A4A4(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_8025A4A4_000010D4
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_8025A4A4_000010D4:
     addic. r3, r29, 0x1580
     beq lbl_fn_8025A4A4_000010E4
@@ -1390,7 +1390,7 @@ lbl_fn_8025A4A4_00001214:
 lbl_fn_8025A4A4_00001224:
     mr r3, r29
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r30, 0x0
     ble lbl_fn_8025A4A4_00001240
     mr r3, r29
@@ -1967,7 +1967,7 @@ lbl_fn_8025ACA0_00001A20:
     stw r4, 0x5c0(r31)
     ori r0, r0, 0x8000
     stw r0, 0x12a4(r31)
-    bl fn_801765D8
+    bl battle_awardExp
     mr r3, r31
     bl fn_800EE360
     b lbl_fn_8025ACA0_00001FCC
@@ -2336,9 +2336,9 @@ lbl_fn_8025ACA0_00001FC0:
     bl fn_8025C29C
 lbl_fn_8025ACA0_00001FCC:
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     lwz r3, lbl_8087F8A0
     lfs f31, lbl_808834C8
     lwz r29, 0x48(r3)

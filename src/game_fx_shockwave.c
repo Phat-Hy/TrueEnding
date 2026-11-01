@@ -18,7 +18,7 @@ extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
 extern void fn_8006AFF8(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void fn_800DB3EC(void);
@@ -27,16 +27,16 @@ extern void str_skipWhitespace(void);
 extern void fn_800EC204(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
-extern void fn_80121F00(void);
+extern void equip_getGlobalManager(void);
 extern void fn_8012F034(void);
 extern void fn_8013322C(void);
 extern void fn_80133B30(void);
 extern void boss_updatePhaseState(void);
 extern void fn_8013C504(void);
-extern void fn_80145334(void);
-extern void fn_8014C540(void);
+extern void quest_updateFlow(void);
+extern void dialog_updateScriptState(void);
 extern void actor_setState(void);
-extern void fn_80179D44(void);
+extern void actor_getMovementFlags(void);
 extern void task_findEntryById(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
@@ -65,8 +65,8 @@ extern void fn_80299A7C(void);
 extern void fn_8029A0A8(void);
 extern void fn_8029B704(void);
 extern void fn_8029C564(void);
-extern void fn_8035B694(void);
-extern void fn_8035B78C(void);
+extern void entity_Instance_constructor(void);
+extern void entity_Instance_destructor(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
 extern void kpad_getClampData(void);
@@ -447,7 +447,7 @@ asm void fn_80293738(void)
     mr r30, r5
     lwz r5, 0x20(r5)
     mr r29, r3
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lis r3, lbl_80785978@ha
     li r28, 0x0
     addi r3, r3, lbl_80785978@l
@@ -764,7 +764,7 @@ asm void fn_80293BC8(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_80293BC8_000008AC
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_80293BC8_000008AC:
     addic. r3, r30, 0x1660
     beq lbl_fn_80293BC8_000008BC
@@ -900,7 +900,7 @@ lbl_fn_80293BC8_00000A74:
     bl __destroy_new_array
     mr r3, r30
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r31, 0x0
     ble lbl_fn_80293BC8_00000AA8
     mr r3, r30
@@ -959,10 +959,10 @@ asm void fn_80293E30(void)
     ori r0, r0, 0xc219
     oris r0, r0, 0x380
     stw r0, 0x7ec(r27)
-    bl fn_80121F00
+    bl equip_getGlobalManager
     cmpwi r3, 0x0
     beq lbl_fn_80293E30_00000B84
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_8013C504
     mr r29, r3
     b lbl_fn_80293E30_00000B88
@@ -1947,7 +1947,7 @@ lbl_fn_802946BC_0000197C:
     lwz r29, 0x1564(r31)
     mr r3, r31
     lwz r27, 0x10d8(r4)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lwzx r4, r29, r28
     mr r5, r3
     lfs f1, lbl_80883C0C
@@ -2072,9 +2072,9 @@ lbl_fn_802946BC_00001B4C:
     bl fn_80296268
 lbl_fn_802946BC_00001B60:
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     lwz r12, 0x0(r31)
     mr r3, r31
     lwz r12, 0xf8(r12)

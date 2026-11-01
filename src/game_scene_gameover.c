@@ -9,22 +9,22 @@ extern void dtor_80084684(void);
 extern void collision_testLineSegment(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_8008BBD8(void);
+extern void map_debugLog(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_80097D40(void);
+extern void atn_Anim_getLayerTrack(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_8010653C(void);
 extern void fn_801065E4(void);
 extern void fn_8010A308(void);
 extern void fn_801446F0(void);
-extern void fn_801539E0(void);
-extern void fn_8015495C(void);
+extern void inventory_unequipItem(void);
+extern void equip_applyToCharacter(void);
 extern void fn_80178078(void);
-extern void fn_80179D44(void);
+extern void actor_getMovementFlags(void);
 extern void world_getGlobalFlag(void);
 extern void fn_803C11A4(void);
 extern void fn_803C1560(void);
-extern void fn_803EA77C(void);
+extern void chest_spawnLoot(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSVECNormalize(void);
@@ -199,7 +199,7 @@ lbl_fn_801B22AC_000000F0:
     lwz r4, lbl_8087F430
     mr r3, r30
     lwz r31, 0x10d8(r4)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lwz r6, 0xd0c(r30)
     mr r5, r3
     lwz r7, 0xd04(r30)
@@ -282,7 +282,7 @@ asm void fn_801B2480(void)
     addi r31, r3, 0xb0
     srwi. r0, r0, 31
     beq lbl_fn_801B2480_00000244
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_801B2480_00000244:
     li r0, 0x1
     stw r0, 0x34c(r31)
@@ -374,7 +374,7 @@ lbl_fn_801B2560_00000354:
     lwz r4, lbl_8087F430
     mr r3, r30
     lwz r31, 0x10d8(r4)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lwz r6, 0xd0c(r30)
     mr r5, r3
     lwz r7, 0xd04(r30)
@@ -818,7 +818,7 @@ lbl_fn_801B2A80_00000904:
     stw r4, 0x48(r1)
     stw r0, 0x4c(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_801B2A80_000009D8
     lwz r7, 0x3c(r1)
@@ -1246,7 +1246,7 @@ asm void fn_801B3098(void)
     li r6, 0x0
     lfs f1, lbl_80882428
     lfs f2, lbl_8088243C
-    bl fn_803EA77C
+    bl chest_spawnLoot
     b lbl_fn_801B3098_00000F54
 lbl_fn_801B3098_00000F0C:
     addi r4, r1, 0x224
@@ -1335,7 +1335,7 @@ lbl_fn_801B3098_00000FD8:
     li r6, 0x0
     lfs f1, lbl_80882428
     lfs f2, lbl_8088243C
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_801B3098_00001060:
     li r0, 0x1
     stb r0, 0x2d(r29)
@@ -1362,7 +1362,7 @@ lbl_fn_801B3098_00001070:
     stfs f2, 0x214(r1)
     stfs f2, 0x208(r1)
     stfs f0, 0x204(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     oris r7, r3, 0x8000
     mr r3, r24
     mr r5, r25
@@ -1430,7 +1430,7 @@ lbl_fn_801B3098_00001118:
     psq_st f1, 0x0(r25), 0, 0
     stfs f2, 0x208(r1)
     stfs f0, 0x204(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     oris r7, r3, 0x8000
     mr r3, r22
     mr r5, r25
@@ -1947,7 +1947,7 @@ lbl_fn_801B3098_00001980:
     rlwinm r0, r0, 0, 28, 28
     subf r0, r0, r5
     srwi r21, r0, 31
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     beq lbl_fn_801B3098_000019D0
     lfs f21, 0x234(r31)
@@ -1997,7 +1997,7 @@ lbl_fn_801B3098_00001A1C:
     stw r0, 0x638(r7)
     li r7, 0x1
     lwz r3, 0x4(r29)
-    bl fn_8015495C
+    bl equip_applyToCharacter
 lbl_fn_801B3098_00001A60:
     li r3, 0x1
     b lbl_fn_801B3098_00001B54

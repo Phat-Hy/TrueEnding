@@ -18,7 +18,7 @@ extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void fn_800E8FB8(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8574(void);
+extern void viewport_updateCulling(void);
 extern void clip_calculateFrustum(void);
 extern void fn_800FFE68(void);
 extern void fn_801004FC(void);
@@ -34,7 +34,7 @@ extern void fn_8012F3D8(void);
 extern void fn_80134134(void);
 extern void fn_801346C8(void);
 extern void fn_80152D10(void);
-extern void fn_801539E0(void);
+extern void inventory_unequipItem(void);
 extern void fn_80155790(void);
 extern void fn_80155DAC(void);
 extern void fn_801562A0(void);
@@ -49,7 +49,7 @@ extern void fn_801647BC(void);
 extern void fn_80164DCC(void);
 extern void fn_8016D74C(void);
 extern void fn_8016DDB0(void);
-extern void fn_8016F3D0(void);
+extern void battle_canTargetActor(void);
 extern void fn_80178018(void);
 extern void fn_80178078(void);
 extern void fn_801781B0(void);
@@ -1352,7 +1352,7 @@ lbl_fn_800E7F04_00001120:
     beq lbl_fn_800E7F04_00001180
     mr r3, r17
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     bne lbl_fn_800E7F04_00001180
     lwz r0, 0x7e0(r18)
@@ -1471,7 +1471,7 @@ lbl_fn_800E7F04_00001200:
     addi r8, r1, 0xb8
     li r9, 0x2006
     li r10, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
     b lbl_fn_800E7F04_0000134C
 lbl_fn_800E7F04_00001310:
     lwz r23, lbl_8087F048
@@ -1488,7 +1488,7 @@ lbl_fn_800E7F04_00001310:
     li r8, 0x0
     li r9, 0x2
     li r10, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
 lbl_fn_800E7F04_0000134C:
     addi r18, r18, 0x1
 lbl_fn_800E7F04_00001350:
@@ -2011,7 +2011,7 @@ lbl_fn_800E8688_000019D4:
     psq_l f1, 0x0(r5), 0, 0
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x88(r1)
-    bl fn_801539E0
+    bl inventory_unequipItem
     b lbl_fn_800E8688_00001BF8
 lbl_fn_800E8688_00001AC8:
     lwz r6, lbl_8087F430
@@ -2062,7 +2062,7 @@ lbl_fn_800E8688_00001AC8:
     psq_l f1, 0x0(r5), 0, 0
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x88(r1)
-    bl fn_801539E0
+    bl inventory_unequipItem
     b lbl_fn_800E8688_00001BF8
 lbl_fn_800E8688_00001B90:
     lfs f3, lbl_808812DC

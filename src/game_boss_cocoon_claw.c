@@ -2,18 +2,18 @@
 #pragma function_align 4
 
 /* External function declarations */
-extern void fn_8004D388(void);
+extern void collision_queryGeometry(void);
 extern void fn_80063D3C(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8574(void);
-extern void fn_800F8C6C(void);
+extern void viewport_updateCulling(void);
+extern void scissor_clipFrustum(void);
 extern void fn_80107A68(void);
 extern void fn_80108C10(void);
 extern void fn_8012DF7C(void);
-extern void fn_80144710(void);
+extern void quest_evaluateConditions(void);
 extern void fn_80148B0C(void);
 extern void fn_8015B238(void);
 extern void actor_setState(void);
@@ -524,7 +524,7 @@ lbl_fn_80464608_00000634:
     psq_st f1, 0x0(r30), 0, 0
     psq_st f1, 0x534(r31), 0, 0
     stfs f2, 0x53c(r31)
-    bl fn_80144710
+    bl quest_evaluateConditions
     li r3, 0x5b4
     bl task_findEntryById
     mr r30, r3
@@ -537,7 +537,7 @@ lbl_fn_80464608_00000634:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     lwz r0, 0x18f4(r31)
     cmpwi r0, 0x0
     beq lbl_fn_80464608_000006C0
@@ -726,7 +726,7 @@ lbl_fn_80464CF0_00000888:
     stfs f0, 0x5c(r1)
     addi r8, r31, 0x5b8
     li r9, 0x0
-    bl fn_8004D388
+    bl collision_queryGeometry
     addi r3, r1, 0x2c8
     lfs f2, 0x2d0(r1)
     psq_l f1, 0x0(r3), 0, 0
@@ -749,7 +749,7 @@ lbl_fn_80464CF0_00000888:
 lbl_fn_80464CF0_000009AC:
     bne lbl_fn_80464CF0_00000A04
     mr r3, r31
-    bl fn_80144710
+    bl quest_evaluateConditions
     li r0, 0x0
     stw r0, 0x1574(r31)
     lfs f31, 0x538(r31)
@@ -767,7 +767,7 @@ lbl_fn_80464CF0_000009AC:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     b lbl_fn_80464CF0_00000C6C
 lbl_fn_80464CF0_00000A04:
     li r4, 0x0
@@ -908,7 +908,7 @@ lbl_fn_80464CF0_00000BB0:
     stfs f0, 0x3c(r1)
     addi r8, r31, 0x5b8
     li r9, 0x0
-    bl fn_8004D388
+    bl collision_queryGeometry
     addi r3, r1, 0x228
     lfs f2, 0x230(r1)
     psq_l f1, 0x0(r3), 0, 0
@@ -1918,7 +1918,7 @@ lbl_fn_80465B88_0000194C:
     lwz r3, lbl_8087F048
     fdivs f0, f31, f0
     stfs f0, 0x1fc(r1)
-    bl fn_800F8574
+    bl viewport_updateCulling
     b lbl_fn_80465B88_00001C8C
 lbl_fn_80465B88_00001ADC:
     cmpwi r0, 0x2

@@ -5,13 +5,13 @@
 extern void __files(void);
 extern void dtor_80013D60(void);
 extern void dtor_80084684(void);
-extern void fn_8000D114(void);
+extern void vec3_set(void);
 extern void vec3_copy(void);
-extern void fn_80011034(void);
-extern void fn_8003E4A4(void);
-extern void fn_8004212C(void);
+extern void vec3_toEulerAngles(void);
+extern void str_initFromCStr(void);
+extern void str_getData(void);
 extern void collision_testLineSegment(void);
-extern void fn_80057A64(void);
+extern void mission_updateStub(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
@@ -21,9 +21,9 @@ extern void mem_free(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
-extern void fn_80087E9C(void);
+extern void route_createWaypoint(void);
 extern void node_createNamedChild(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void fn_8008A76C(void);
 extern void atn_Model_findBoneIndex(void);
 extern void skin_applyWeights(void);
@@ -43,16 +43,16 @@ extern void fn_800EDFE8(void);
 extern void fn_800F52F0(void);
 extern void system_getNextSequenceId(void);
 extern void boss_updatePhaseState(void);
-extern void fn_80145334(void);
-extern void fn_8014C540(void);
+extern void quest_updateFlow(void);
+extern void dialog_updateScriptState(void);
 extern void fn_80158E1C(void);
 extern void actor_setState(void);
 extern void fn_8020A780(void);
 extern void task_findEntryById(void);
-extern void fn_80237518(void);
-extern void fn_802375C4(void);
-extern void fn_80237654(void);
-extern void fn_802376D0(void);
+extern void res_MsgHandle_ctor(void);
+extern void res_Resource_destructor(void);
+extern void res_Resource_unload(void);
+extern void res_MsgHandle_isLoading(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_unload(void);
@@ -66,8 +66,8 @@ extern void fn_8031CA30(void);
 extern void fn_8031D350(void);
 extern void fn_8031D4F4(void);
 extern void fn_8031E8BC(void);
-extern void fn_8035B694(void);
-extern void fn_8035B78C(void);
+extern void entity_Instance_constructor(void);
+extern void entity_Instance_destructor(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_destructor(void);
@@ -422,7 +422,7 @@ lbl_fn_8031A670_0000031C:
     bl fn_80158E1C
     addi r3, r1, 0x5c
     addi r4, r1, 0x2c
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lis r3, lbl_80749580@ha
     lfs f1, 0x60(r1)
     lfd f2, lbl_80749580@l(r3)
@@ -442,7 +442,7 @@ lbl_fn_8031A670_0000042C:
 lbl_fn_8031A670_00000440:
     addi r3, r1, 0x68
     addi r4, r1, 0x20
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lis r3, lbl_80749580@ha
     lfs f1, 0x6c(r1)
     lfd f2, lbl_80749580@l(r3)
@@ -512,7 +512,7 @@ lbl_fn_8031A670_000004E0:
     bl PSVECNormalize
     mr r4, r29
     addi r3, r1, 0x8c
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lis r3, lbl_80749580@ha
     lfs f1, 0x90(r1)
     lfd f2, lbl_80749580@l(r3)
@@ -552,7 +552,7 @@ lbl_fn_8031A670_00000588:
     bl PSVECNormalize
     mr r4, r29
     addi r3, r1, 0xa4
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lis r3, lbl_80749580@ha
     lfs f1, 0xa8(r1)
     lfd f2, lbl_80749580@l(r3)
@@ -939,7 +939,7 @@ asm void fn_8031AF88(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_8031AF88_00000B50
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_8031AF88_00000B50:
     lis r4, fn_8008A76C@ha
     addi r3, r29, 0x1648
@@ -949,10 +949,10 @@ lbl_fn_8031AF88_00000B50:
     bl __destroy_new_array
     addi r3, r29, 0x15a8
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     addi r3, r29, 0x159c
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     addic. r31, r29, 0x1590
     beq lbl_fn_8031AF88_00000BA0
     mr r3, r31
@@ -964,7 +964,7 @@ lbl_fn_8031AF88_00000B50:
 lbl_fn_8031AF88_00000BA0:
     addi r3, r29, 0x1584
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     addic. r31, r29, 0x1550
     beq lbl_fn_8031AF88_00000BCC
     mr r3, r31
@@ -981,7 +981,7 @@ lbl_fn_8031AF88_00000BCC:
 lbl_fn_8031AF88_00000BDC:
     mr r3, r29
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r30, 0x0
     ble lbl_fn_8031AF88_00000BF8
     mr r3, r29
@@ -1017,7 +1017,7 @@ asm void fn_8031B0A8(void)
     stw r29, 0x104(r1)
     mr r29, r3
     lwz r5, 0x20(r5)
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lis r4, lbl_80788890@ha
     addi r3, r29, 0x14b0
     addi r4, r4, lbl_80788890@l
@@ -1029,46 +1029,46 @@ asm void fn_8031B0A8(void)
     stw r30, 0x14bc(r29)
     stw r30, 0x14c0(r29)
     stw r30, 0x14c4(r29)
-    bl fn_80057A64
+    bl mission_updateStub
     lfs f1, lbl_80884DF0
     addi r3, r29, 0x14d4
     fmr f2, f1
     fmr f3, f1
-    bl fn_8000D114
+    bl vec3_set
     lfs f1, lbl_80884DF0
     addi r3, r29, 0x14e0
     fmr f2, f1
     fmr f3, f1
-    bl fn_8000D114
+    bl vec3_set
     lfs f0, lbl_80884DF4
     addi r3, r29, 0x14f0
     stfs f0, 0x14ec(r29)
-    bl fn_80057A64
+    bl mission_updateStub
     lfs f1, lbl_80884DF0
     addi r3, r29, 0x1500
     fmr f2, f1
     fmr f3, f1
-    bl fn_8000D114
+    bl vec3_set
     lfs f1, lbl_80884DF0
     addi r3, r29, 0x150c
     fmr f2, f1
     fmr f3, f1
-    bl fn_8000D114
+    bl vec3_set
     lfs f1, lbl_80884DF0
     addi r3, r29, 0x1518
     fmr f2, f1
     fmr f3, f1
-    bl fn_8000D114
+    bl vec3_set
     addi r3, r29, 0x1524
-    bl fn_80057A64
+    bl mission_updateStub
     li r0, 0x5a
     stw r0, 0x1530(r29)
     addi r3, r29, 0x1538
     bl fn_8031D4F4
     addi r3, r29, 0x1574
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     addi r3, r29, 0x1580
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     addi r3, r29, 0x158c
     bl res_MsgHandle_constructor
     addi r3, r29, 0x1598
@@ -1094,14 +1094,14 @@ asm void fn_8031B0A8(void)
     lis r30, lbl_8074973C@ha
     addi r3, r1, 0x2c
     addi r4, r30, lbl_8074973C@l
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r30, r30, lbl_8074973C@l
     addi r3, r1, 0x20
     addi r4, r30, 0x18
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x14
     addi r4, r31, 0x2c
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x74
     addi r4, r30, 0x2b
     li r5, 0x0
@@ -1121,7 +1121,7 @@ asm void fn_8031B0A8(void)
 lbl_fn_8031B0A8_00000DDC:
     addi r3, r1, 0x98
     bl fn_800ED4D8
-    bl fn_8004212C
+    bl str_getData
     addi r4, r30, 0x2d
     li r5, 0x8
     bl strncmp
@@ -1129,7 +1129,7 @@ lbl_fn_8031B0A8_00000DDC:
     bne lbl_fn_8031B0A8_00000E18
     addi r3, r1, 0x98
     bl fn_800ED4D8
-    bl fn_8004212C
+    bl str_getData
     mr r4, r3
     addi r3, r1, 0x20
     addi r4, r4, 0x8
@@ -1158,7 +1158,7 @@ lbl_fn_8031B0A8_00000E20:
     addi r5, r1, 0x20
     bl fn_8006AFF8
     addi r3, r1, 0x8
-    bl fn_8004212C
+    bl str_getData
     lwz r12, 0x14b0(r29)
     mr r4, r3
     addi r3, r29, 0x14b0
@@ -1169,10 +1169,10 @@ lbl_fn_8031B0A8_00000E20:
     addi r3, r29, 0x1574
     addi r31, r31, lbl_8074973C@l
     addi r4, r31, 0x36
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r29, 0x1580
     addi r4, r31, 0x47
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r29, 0x158c
     addi r4, r31, 0x58
     bl res_MsgHandle_destructor
@@ -1290,7 +1290,7 @@ lbl_fn_8031B3CC_00001030:
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_8031B3CC_00001064
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_8031B3CC_00001064:
     addic. r30, r28, 0x15b0
     beq lbl_fn_8031B3CC_00001084
@@ -1330,10 +1330,10 @@ lbl_fn_8031B3CC_000010C4:
 lbl_fn_8031B3CC_000010E4:
     addi r3, r28, 0x1580
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     addi r3, r28, 0x1574
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     addic. r30, r28, 0x1538
     beq lbl_fn_8031B3CC_0000120C
     lis r3, lbl_807889C0@ha
@@ -1413,7 +1413,7 @@ lbl_fn_8031B3CC_0000120C:
 lbl_fn_8031B3CC_0000121C:
     mr r3, r28
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r29, 0x0
     ble lbl_fn_8031B3CC_00001238
     mr r3, r28
@@ -1449,11 +1449,11 @@ asm void fn_8031B6E0(void)
     cmpwi r3, 0x0
     bne lbl_fn_8031B6E0_0000150C
     addi r3, r31, 0x1574
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_8031B6E0_0000150C
     addi r3, r31, 0x1580
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_8031B6E0_0000150C
     addi r3, r31, 0x158c
@@ -1529,7 +1529,7 @@ lbl_fn_8031B6E0_00001334:
     addi r5, r31, 0x528
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     addi r3, r31, 0x14b0
     bl boss_getOffset54
     cmpwi r3, 0x0
@@ -2140,9 +2140,9 @@ lbl_fn_8031B9B4_00001C5C:
     bl fn_8031D350
 lbl_fn_8031B9B4_00001CA8:
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     lfs f9, 0x52c(r31)
     addi r5, r1, 0x20
     lfs f8, 0x5a8(r31)

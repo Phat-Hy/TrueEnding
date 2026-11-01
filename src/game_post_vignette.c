@@ -10,24 +10,24 @@ extern void mem_getAllocSize(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
 extern void node_createNamedChild(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800BFAC8(void);
+extern void motion_updateFogAdj(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void str_findChar(void);
 extern void system_getNextSequenceId(void);
 extern void fn_801031D0(void);
 extern void boss_updatePhaseState(void);
-extern void fn_80144710(void);
-extern void fn_80145334(void);
-extern void fn_80148990(void);
+extern void quest_evaluateConditions(void);
+extern void quest_updateFlow(void);
+extern void quest_ctorRewardItem(void);
 extern void quest_checkCondition(void);
 extern void dialog_renderWindow(void);
-extern void fn_8014C540(void);
-extern void fn_80151448(void);
+extern void dialog_updateScriptState(void);
+extern void inventory_applyItemStats(void);
 extern void actor_setState(void);
 extern void fn_80170A20(void);
 extern void fn_80178A6C(void);
@@ -35,7 +35,7 @@ extern void save_validateHeader(void);
 extern void thread_findAndNotifySlot(void);
 extern void thread_dispatchToQueue(void);
 extern void task_findEntryById(void);
-extern void fn_802375C4(void);
+extern void res_Resource_destructor(void);
 extern void res_MsgHandle_unload(void);
 extern void fn_802C9880(void);
 extern void fn_802C9BF8(void);
@@ -48,8 +48,8 @@ extern void fn_802CB74C(void);
 extern void fn_802CB8A0(void);
 extern void fn_802CC39C(void);
 extern void fn_802CC708(void);
-extern void fn_8035B694(void);
-extern void fn_8035B78C(void);
+extern void entity_Instance_constructor(void);
+extern void entity_Instance_destructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void fn_8059B670(void);
 extern void PSMTXConcat(void);
@@ -163,11 +163,11 @@ asm void fn_802C7AA8(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_802C7AA8_00000094
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_802C7AA8_00000094:
     addi r3, r29, 0x16f4
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     addic. r31, r29, 0x16b0
     beq lbl_fn_802C7AA8_000000C0
     mr r3, r31
@@ -207,10 +207,10 @@ lbl_fn_802C7AA8_00000100:
 lbl_fn_802C7AA8_00000120:
     addi r3, r29, 0x156c
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     mr r3, r29
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r30, 0x0
     ble lbl_fn_802C7AA8_00000148
     mr r3, r29
@@ -246,7 +246,7 @@ asm void fn_802C7BE4(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lwz r0, 0x12a4(r31)
     li r8, 0x0
     lfs f2, lbl_808843E8
@@ -317,11 +317,11 @@ asm void fn_802C7CBC(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_802C7CBC_000002A4
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_802C7CBC_000002A4:
     mr r3, r30
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r31, 0x0
     ble lbl_fn_802C7CBC_000002C0
     mr r3, r30
@@ -359,7 +359,7 @@ asm void fn_802C7D3C(void)
     bne lbl_fn_802C7D3C_00000334
 lbl_fn_802C7D3C_00000324:
     mr r3, r31
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     bne lbl_fn_802C7D3C_00000338
 lbl_fn_802C7D3C_00000334:
@@ -771,9 +771,9 @@ lbl_fn_802C7F10_00000910:
     bl fn_802C9BF8
 lbl_fn_802C7F10_00000920:
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     lwz r0, 0x58c(r31)
     cmpwi r0, 0xd
     bne lbl_fn_802C7F10_00000A30
@@ -880,7 +880,7 @@ lbl_fn_802C7F10_00000A98:
     lwz r3, 0x14d0(r31)
     cmpwi r3, 0x0
     beq lbl_fn_802C7F10_00000B24
-    bl fn_80144710
+    bl quest_evaluateConditions
     li r0, 0x0
     stw r0, 0x40(r1)
     addi r4, r1, 0x40
@@ -1006,7 +1006,7 @@ lbl_fn_802C85B0_00000C58:
     lwz r4, lbl_8087EFB4
     stfs f1, 0x1c(r1)
     stfs f0, 0x18(r1)
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lwz r4, 0x1540(r31)
     lis r30, lbl_80746DEC@ha
     addi r30, r30, lbl_80746DEC@l
@@ -1153,7 +1153,7 @@ lbl_fn_802C881C_00000E7C:
 lbl_fn_802C881C_00000E94:
     mr r3, r30
     mr r4, r31
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r12, 0x0(r30)
     mr r3, r30
     mr r4, r31
@@ -1321,9 +1321,9 @@ lbl_fn_802C8A68_000010C4:
     la r6, lbl_8087D9E0
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     li r5, 0x0
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r6, 0x14
     li r7, 0x8
     bl runtime_registerStaticObject
@@ -1435,9 +1435,9 @@ lbl_fn_802C8A68_00001264:
     addi r3, r3, 0x10
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     mr r7, r30
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r5, 0x0
     li r6, 0x14
     bl runtime_registerStaticObject
@@ -1595,9 +1595,9 @@ lbl_fn_802C8A68_000014C8:
     la r6, lbl_8087D9E0
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     li r5, 0x0
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r6, 0x14
     li r7, 0x8
     bl runtime_registerStaticObject
@@ -1709,9 +1709,9 @@ lbl_fn_802C8A68_00001668:
     addi r3, r3, 0x10
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     mr r7, r30
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r5, 0x0
     li r6, 0x14
     bl runtime_registerStaticObject

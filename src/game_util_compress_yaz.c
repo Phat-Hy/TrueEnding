@@ -9,10 +9,10 @@ extern void mem_alloc(void);
 extern void msg_getMessageById(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void actor_spawnActorWithId(void);
 extern void fn_801347C8(void);
-extern void fn_8014DEE4(void);
+extern void dialog_selectChoice(void);
 extern void fn_8014EEC4(void);
 extern void fn_8014F5D4(void);
 extern void fn_80206B9C(void);
@@ -150,7 +150,7 @@ asm void fn_8058B4A8(void)
     addi r11, r1, 0x20
     bl _savegpr_27
     mr r28, r3
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_8058B4A8_00000444
     mr r3, r28
@@ -1240,7 +1240,7 @@ lbl_fn_8058BE7C_00000FF8:
     mr r4, r23
     li r5, 0x0
     li r6, 0x1
-    bl fn_8014DEE4
+    bl dialog_selectChoice
 lbl_fn_8058BE7C_00001098:
     addis r3, r27, 0x2
     li r5, 0x1

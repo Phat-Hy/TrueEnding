@@ -6,16 +6,16 @@ extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void mem_alloc(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void atn_LH_Texture_destructAndFree(void);
-extern void fn_80237518(void);
-extern void fn_802375C4(void);
+extern void res_MsgHandle_ctor(void);
+extern void res_Resource_destructor(void);
 extern void world_getGlobalFlag(void);
 extern void world_setGlobalFlag(void);
 extern void kpad_getClampData(void);
@@ -250,10 +250,7 @@ asm void fn_803CE408(void)
     blr
 }
 
-asm void fn_803CE448(void)
-{
-    nofralloc
-    blr
+void fn_803CE448(void) {
 }
 
 asm void fn_803CE44C(void)
@@ -375,7 +372,7 @@ asm void fn_803CE5B0(void)
     stwu r1, -0x10(r1)
     mflr r0
     stw r0, 0x14(r1)
-    bl fn_800D3FA4
+    bl bloom_processPasses
     neg r0, r3
     or r0, r0, r3
     srwi r3, r0, 31
@@ -437,10 +434,7 @@ lbl_fn_803CE5DC_000003F8:
     blr
 }
 
-asm void fn_803CE684(void)
-{
-    nofralloc
-    blr
+void fn_803CE684(void) {
 }
 
 asm void fn_803CE688(void)
@@ -927,9 +921,9 @@ lbl_fn_803CE980_000009F0:
     stw r29, 0x114c(r31)
     stw r29, 0x1150(r31)
     stw r29, 0x1154(r31)
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     addi r3, r31, 0x1164
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     addi r4, r31, 0x11f0
     addi r3, r31, 0x1554
     lfs f0, lbl_80885D58
@@ -948,17 +942,17 @@ lbl_fn_803CE980_00000ACC:
     addi r4, r4, 0x7c
     bdnz lbl_fn_803CE980_00000ACC
 lbl_fn_803CE980_00000AD8:
-    lis r29, fn_80237518@ha
-    lis r30, fn_802375C4@ha
+    lis r29, res_MsgHandle_ctor@ha
+    lis r30, res_Resource_destructor@ha
     addi r3, r31, 0x1554
     li r6, 0xc
-    addi r4, r29, fn_80237518@l
-    addi r5, r30, fn_802375C4@l
+    addi r4, r29, res_MsgHandle_ctor@l
+    addi r5, r30, res_Resource_destructor@l
     li r7, 0x4
     bl __construct_new_array
     addi r3, r31, 0x1584
-    addi r4, r29, fn_80237518@l
-    addi r5, r30, fn_802375C4@l
+    addi r4, r29, res_MsgHandle_ctor@l
+    addi r5, r30, res_Resource_destructor@l
     li r6, 0xc
     li r7, 0x4
     bl __construct_new_array
@@ -1664,25 +1658,25 @@ asm void fn_803CF79C(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_803CF79C_00001578
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_803CF79C_00001578:
-    lis r31, fn_802375C4@ha
+    lis r31, res_Resource_destructor@ha
     addi r3, r29, 0x1584
-    addi r4, r31, fn_802375C4@l
+    addi r4, r31, res_Resource_destructor@l
     li r5, 0xc
     li r6, 0x4
     bl __destroy_new_array
     addi r3, r29, 0x1554
-    addi r4, r31, fn_802375C4@l
+    addi r4, r31, res_Resource_destructor@l
     li r5, 0xc
     li r6, 0x4
     bl __destroy_new_array
     addi r3, r29, 0x1164
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     addi r3, r29, 0x1158
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     addi r3, r29, 0xe64
     li r4, -0x1
     bl atn_LH_Texture_destructAndFree
@@ -1743,7 +1737,7 @@ asm void fn_803CF8F0(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_803CF8F0_000016A8
     mr r3, r31

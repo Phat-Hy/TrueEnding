@@ -37,7 +37,7 @@ extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void PSVECCrossProduct(void);
 extern void rand(void);
-extern void fn_8068A850(void);
+extern void std_sin(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
 
@@ -1132,7 +1132,7 @@ lbl_fn_8022D790_00000EF8:
     lfs f0, lbl_808830DC
     fadds f1, f1, f2
     fmuls f1, f0, f1
-    bl fn_8068A850
+    bl std_sin
     frsp f2, f1
     lfs f1, lbl_808830D4
     lfs f0, lbl_808830E0
@@ -1144,7 +1144,7 @@ lbl_fn_8022D790_00000F2C:
     lfs f0, lbl_808830DC
     fadds f1, f1, f2
     fmuls f1, f0, f1
-    bl fn_8068A850
+    bl std_sin
     frsp f2, f1
     lfs f1, lbl_808830D4
     lfs f0, lbl_808830E0

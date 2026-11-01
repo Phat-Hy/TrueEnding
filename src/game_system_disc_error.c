@@ -15,7 +15,7 @@ extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
 extern void fn_8006AF38(void);
 extern void mem_free(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_8009373C(void);
 extern void atn_Anim_applyLayerTransform(void);
@@ -24,25 +24,25 @@ extern void atn_Anim_getLayerDuration(void);
 extern void fn_800E2DD4(void);
 extern void fn_800E2FE0(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8574(void);
+extern void viewport_updateCulling(void);
 extern void clip_calculateFrustum(void);
 extern void fn_8010A308(void);
-extern void fn_80145334(void);
-extern void fn_8014C540(void);
-extern void fn_8015495C(void);
+extern void quest_updateFlow(void);
+extern void dialog_updateScriptState(void);
+extern void equip_applyToCharacter(void);
 extern void fn_8015ECC4(void);
 extern void fn_80161570(void);
 extern void fn_8016E4C4(void);
 extern void fn_8016EB48(void);
-extern void fn_80179D44(void);
+extern void actor_getMovementFlags(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
-extern void fn_802375C4(void);
+extern void res_Resource_destructor(void);
 extern void res_MsgHandle_unload(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
-extern void fn_8035B694(void);
-extern void fn_8035B78C(void);
+extern void entity_Instance_constructor(void);
+extern void entity_Instance_destructor(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
@@ -695,7 +695,7 @@ asm void fn_80354398(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_80354398_00000748
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_80354398_00000748:
     addic. r31, r29, 0x1cac
     beq lbl_fn_80354398_00000768
@@ -713,7 +713,7 @@ lbl_fn_80354398_00000768:
 lbl_fn_80354398_00000778:
     addi r3, r29, 0x17d8
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     addic. r3, r29, 0x170c
     beq lbl_fn_80354398_00000794
     li r4, 0x0
@@ -780,7 +780,7 @@ lbl_fn_80354398_00000844:
 lbl_fn_80354398_00000864:
     addi r3, r29, 0x1648
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     addic. r31, r29, 0x163c
     beq lbl_fn_80354398_00000890
     mr r3, r31
@@ -825,7 +825,7 @@ lbl_fn_80354398_000008F0:
     bl __destroy_new_array
     mr r3, r29
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r30, 0x0
     ble lbl_fn_80354398_00000924
     mr r3, r29
@@ -852,7 +852,7 @@ asm void fn_803545E0(void)
     mr r27, r5
     lwz r5, 0x20(r5)
     mr r31, r3
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lis r3, lbl_807896B8@ha
     addi r30, r31, 0x14b0
     addi r3, r3, lbl_807896B8@l
@@ -1223,7 +1223,7 @@ lbl_fn_80354AA4_00000E5C:
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     mr r3, r31
     li r4, 0x0
     li r5, 0x0
@@ -1275,16 +1275,16 @@ lbl_fn_80354AA4_00000E5C:
     bl clip_calculateFrustum
 lbl_fn_80354AA4_00000F64:
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
     b lbl_fn_80354AA4_000010E0
 lbl_fn_80354AA4_00000F78:
     bl fn_80354EE4
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
     b lbl_fn_80354AA4_000010E0
 lbl_fn_80354AA4_00000F90:
     lwz r7, 0x38(r3)
@@ -1379,7 +1379,7 @@ lbl_fn_80354AA4_000010CC:
     b lbl_fn_80354AA4_000010E0
 lbl_fn_80354AA4_000010D8:
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
 lbl_fn_80354AA4_000010E0:
     lwz r0, 0x44(r1)
     psq_l f31, 0x38(r1), 0, 0
@@ -1766,7 +1766,7 @@ lbl_fn_80354EE4_0000152C:
     stfs f4, 0x68(r1)
     stfs f3, 0x6c(r1)
     stfs f0, 0x70(r1)
-    bl fn_800F8574
+    bl viewport_updateCulling
 lbl_fn_80354EE4_00001678:
     lfs f30, 0x2e4(r31)
     addi r3, r31, 0xb0
@@ -1782,7 +1782,7 @@ lbl_fn_80354EE4_00001678:
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     mr r3, r31
     li r4, 0x0
     li r5, 0x0
@@ -1895,7 +1895,7 @@ asm void fn_80355390(void)
     stfs f0, 0x78(r1)
     stw r31, 0x16c(r1)
     stw r31, 0x170(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     oris r7, r3, 0x8000
     mr r3, r28
     mr r5, r30

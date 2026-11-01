@@ -11,9 +11,9 @@ extern void dtor_80084684(void);
 extern void fn_8006F2F0(void);
 extern void fn_8006F420(void);
 extern void fn_800DC97C(void);
-extern void fn_8016F3D0(void);
+extern void battle_canTargetActor(void);
 extern void net_getPacketManager(void);
-extern void fn_804D818C(void);
+extern void net_voiceCodec_destroy(void);
 extern void fn_804FB224(void);
 extern void fn_8050128C(void);
 extern void fn_80502874(void);
@@ -35,12 +35,12 @@ extern void strcmp(void);
 extern void strstr(void);
 extern void atoi(void);
 extern void wcscmp(void);
-extern void fn_806A8E40(void);
+extern void net_getSocket(void);
 extern void fn_806A8E70(void);
 extern void fn_806ABE70(void);
 extern void fn_806ABEE0(void);
 extern void fn_806B0DE0(void);
-extern void fn_806B0E30(void);
+extern void net_getMyAid(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
 
@@ -1221,9 +1221,9 @@ lbl_fn_804DCA58_00000E9C:
     extsb. r0, r0
     sth r3, 0x26(r1)
     bne lbl_fn_804DCA58_00000F14
-    lis r4, fn_804D818C@ha
+    lis r4, net_voiceCodec_destroy@ha
     lis r5, lbl_807C8AE8@ha
-    addi r4, r4, fn_804D818C@l
+    addi r4, r4, net_voiceCodec_destroy@l
     la r3, lbl_8087F5FC
     addi r5, r5, lbl_807C8AE8@l
     bl __register_global_object
@@ -1887,7 +1887,7 @@ asm void fn_804DD3F4(void)
     li r0, 0x0
     b lbl_fn_804DD3F4_000017D4
 lbl_fn_804DD3F4_000017AC:
-    bl fn_806B0E30
+    bl net_getMyAid
     clrlwi r0, r3, 24
     b lbl_fn_804DD3F4_000017D4
 lbl_fn_804DD3F4_000017B8:
@@ -1897,7 +1897,7 @@ lbl_fn_804DD3F4_000017B8:
     li r3, 0x0
     b lbl_fn_804DD3F4_000017D0
 lbl_fn_804DD3F4_000017CC:
-    bl fn_806A8E40
+    bl net_getSocket
 lbl_fn_804DD3F4_000017D0:
     clrlwi r0, r3, 24
 lbl_fn_804DD3F4_000017D4:
@@ -1961,7 +1961,7 @@ lbl_fn_804DD3F4_00001890:
     beq lbl_fn_804DD3F4_000018C8
     lwz r4, 0x0(r28)
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     beq lbl_fn_804DD3F4_000018C8
     lwz r0, 0xb0(r30)

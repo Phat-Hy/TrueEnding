@@ -14,7 +14,7 @@ extern void _savegpr_24(void);
 extern void _savegpr_25(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
-extern void fn_80626C60(void);
+extern void scapi_getConfigItem(void);
 extern void scapi_cleanupContext(void);
 extern void fn_80627180(void);
 extern void fn_806272C0(void);
@@ -25,7 +25,7 @@ extern void fn_80627580(void);
 extern void fn_80629650(void);
 extern void bta_sys_logEvent(void);
 extern void bta_sys_log(void);
-extern void fn_80629850(void);
+extern void bta_sys_traceDebug(void);
 extern void fn_80629870(void);
 extern void fn_806298B0(void);
 extern void fn_806298D0(void);
@@ -600,7 +600,7 @@ lbl_fn_806425D4_00000558:
     mr r6, r27
     addi r4, r31, 0x324
     addi r3, r3, 0x1
-    bl fn_80629850
+    bl bta_sys_traceDebug
 lbl_fn_806425D4_00000588:
     li r3, 0x0
     b lbl_fn_806425D4_000005D8
@@ -710,7 +710,7 @@ asm void fn_8064281C(void)
     mr r5, r30
     addi r3, r3, 0x2
     addi r4, r4, lbl_807B62D4@l
-    bl fn_80629850
+    bl bta_sys_traceDebug
 lbl_fn_8064281C_000006F0:
     mr r4, r30
     li r3, 0x0
@@ -876,7 +876,7 @@ asm void fn_80642A34(void)
     mr r5, r28
     addi r4, r31, 0x49c
     addi r3, r3, 0x2
-    bl fn_80629850
+    bl bta_sys_traceDebug
 lbl_fn_80642A34_00000914:
     mr r4, r28
     li r3, 0x0
@@ -1191,7 +1191,7 @@ lbl_fn_80642D8C_00000CB8:
     lbz r6, 0x6(r26)
     addi r3, r3, 0x2
     addi r4, r31, 0x84
-    bl fn_80629850
+    bl bta_sys_traceDebug
 lbl_fn_80642D8C_00000D30:
     mr r3, r28
     bl fn_806478E4
@@ -1235,7 +1235,7 @@ lbl_fn_80642D8C_00000D30:
     addi r3, r3, 0x2
     addi r4, r31, 0x84
     subi r6, r6, 0x1112
-    bl fn_80629850
+    bl bta_sys_traceDebug
 lbl_fn_80642D8C_00000DDC:
     mr r3, r28
     bl fn_806478E4
@@ -1267,7 +1267,7 @@ lbl_fn_80642D8C_00000DDC:
     addi r3, r3, 0x2
     addi r4, r31, 0x84
     subi r6, r6, 0x1112
-    bl fn_80629850
+    bl bta_sys_traceDebug
 lbl_fn_80642D8C_00000E58:
     mr r3, r28
     bl fn_806478E4
@@ -1367,7 +1367,7 @@ lbl_fn_80643020_00000F50:
     addi r3, r3, 0x2
     addi r4, r30, 0x84
     li r6, 0x5
-    bl fn_80629850
+    bl bta_sys_traceDebug
 lbl_fn_80643020_00000FC4:
     mr r3, r31
     bl fn_806478E4
@@ -1605,7 +1605,7 @@ lbl_fn_806432F8_000012F0:
     lhz r6, 0xa(r26)
     addi r3, r3, 0x2
     addi r4, r31, 0x318
-    bl fn_80629850
+    bl bta_sys_traceDebug
 lbl_fn_806432F8_00001330:
     mr r3, r29
     bl fn_806478E4
@@ -1902,7 +1902,7 @@ lbl_fn_80643714_00001724:
     lhz r6, 0x0(r30)
     addi r3, r3, 0x2
     addi r4, r31, 0x510
-    bl fn_80629850
+    bl bta_sys_traceDebug
 lbl_fn_80643714_00001770:
     lwz r5, 0x30(r29)
     mr r4, r30
@@ -2556,7 +2556,7 @@ asm void fn_8064421C(void)
     stw r29, 0x14(r1)
     mr r29, r3
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_8064421C_000021E0
@@ -2693,7 +2693,7 @@ lbl_fn_80644370_00002288:
     mr r6, r28
     lis r3, 0x8
     addi r4, r4, lbl_807B6F68@l
-    bl fn_80629850
+    bl bta_sys_traceDebug
 lbl_fn_80644370_000022B8:
     cmpwi r28, 0x0
     beq lbl_fn_80644370_000022CC
@@ -4107,7 +4107,7 @@ lbl_fn_806454BC_00003580:
     mr r5, r24
     addi r4, r30, 0xb4
     addi r3, r3, 0x1
-    bl fn_80629850
+    bl bta_sys_traceDebug
 lbl_fn_806454BC_000035B0:
     mr r3, r27
     bl scapi_cleanupContext
@@ -4243,7 +4243,7 @@ lbl_fn_806457EC_00003728:
     lhz r5, 0x28(r15)
     addi r3, r29, 0x1
     addi r4, r23, 0x134
-    bl fn_80629850
+    bl bta_sys_traceDebug
 lbl_fn_806457EC_00003798:
     cmplwi r17, 0x2
     bne lbl_fn_806457EC_000036C4
@@ -4264,7 +4264,7 @@ lbl_fn_806457EC_00003798:
     mr r6, r17
     addi r3, r29, 0x1
     addi r4, r23, 0x158
-    bl fn_80629850
+    bl bta_sys_traceDebug
 lbl_fn_806457EC_000037E8:
     mr r3, r15
     mr r4, r16
@@ -4365,7 +4365,7 @@ lbl_fn_806457EC_000038C8:
     mr r5, r17
     addi r3, r29, 0x1
     addi r4, r23, 0x1d4
-    bl fn_80629850
+    bl bta_sys_traceDebug
     b lbl_fn_806457EC_000036C4
 lbl_fn_806457EC_0000396C:
     lbz r5, 0x35(r3)
@@ -4377,7 +4377,7 @@ lbl_fn_806457EC_0000396C:
     mr r6, r25
     addi r3, r29, 0x1
     addi r4, r23, 0x204
-    bl fn_80629850
+    bl bta_sys_traceDebug
     b lbl_fn_806457EC_000036C4
 lbl_fn_806457EC_00003998:
     lhz r0, 0x12(r1)
@@ -4740,7 +4740,7 @@ lbl_fn_806457EC_00003EA8:
     mr r6, r25
     addi r3, r29, 0x1
     addi r4, r23, 0x230
-    bl fn_80629850
+    bl bta_sys_traceDebug
     b lbl_fn_806457EC_000036C4
 lbl_fn_806457EC_00003EF0:
     lhz r0, 0x18(r1)
@@ -5242,7 +5242,7 @@ asm void fn_806466D4(void)
     stw r28, 0x10(r1)
     mr r28, r3
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     bne lbl_fn_806466D4_000045A4
     li r3, 0x0
@@ -5952,7 +5952,7 @@ asm void fn_806470E0(void)
     mr r27, r5
     mr r24, r6
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     mr r31, r3
     bne lbl_fn_806470E0_00004FCC
@@ -6942,7 +6942,7 @@ lbl_fn_80647D80_00005C84:
     srwi r4, r0, 31
     add r0, r0, r4
     clrlwi r30, r0, 16
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     beq lbl_fn_80647D80_00005D04
     lhz r4, 0x28(r31)

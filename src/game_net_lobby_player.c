@@ -19,7 +19,7 @@ extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
 extern void node_createNamedChild(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void fn_8008B130(void);
 extern void fn_8009FE24(void);
 extern void fn_800B1BAC(void);
@@ -32,7 +32,7 @@ extern void fn_800BDB40(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void fn_800D5B58(void);
 extern void str_findChar(void);
 extern void fn_8021771C(void);
@@ -43,7 +43,7 @@ extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_getName(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_80473F88(void);
+extern void shockwave_freeEmitter(void);
 extern void fn_804786F8(void);
 extern void fn_80491418(void);
 extern void fn_80491440(void);
@@ -1057,7 +1057,7 @@ lbl_fn_8049DDD8_00000C84:
     bl fn_800BDB40
     bl fn_8009FE24
     addi r3, r30, 0x60
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     addic. r3, r30, 0xfc
     beq lbl_fn_8049DDD8_00000CA8
     bl fn_80470528
@@ -1073,7 +1073,7 @@ lbl_fn_8049DDD8_00000CA8:
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_8049DDD8_00000CD8
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_8049DDD8_00000CD8:
     addic. r3, r30, 0x68
     beq lbl_fn_8049DDD8_00000CE8
@@ -1265,10 +1265,10 @@ lbl_fn_8049DEE4_00000E88:
     stfs f0, 0x48(r3)
 lbl_fn_8049DEE4_00000F88:
     addi r3, r27, 0x58
-    bl fn_80473F88
+    bl shockwave_freeEmitter
 lbl_fn_8049DEE4_00000F90:
     mr r3, r27
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_8049DEE4_000012B8
     addi r3, r27, 0x60

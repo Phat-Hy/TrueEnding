@@ -8,13 +8,13 @@ extern void _savegpr_25(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void talk_formatQuotedString(void);
-extern void fn_8005BBF8(void);
-extern void fn_8005BCE8(void);
+extern void talk_parseQuotes(void);
+extern void talk_copySpeakerName(void);
 extern void mem_alloc(void);
 extern void fn_8008A4E0(void);
 extern void fn_8008A76C(void);
-extern void fn_8008B140(void);
-extern void fn_8008BBD8(void);
+extern void map_processTrigger(void);
+extern void map_debugLog(void);
 extern void fn_800902C0(void);
 extern void fn_800920B8(void);
 extern void fn_800928B0(void);
@@ -22,7 +22,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void str_skipWhitespace(void);
 extern void str_findChar(void);
 extern void fn_800F29D0(void);
-extern void fn_8015495C(void);
+extern void equip_applyToCharacter(void);
 extern void fn_8016D3F8(void);
 extern void actor_setState(void);
 extern void fn_8016EB48(void);
@@ -32,9 +32,9 @@ extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_unload(void);
 extern void res_MsgHandle_update(void);
 extern void res_registerResource(void);
-extern void fn_803EC568(void);
-extern void fn_803EC69C(void);
-extern void fn_803EC91C(void);
+extern void task_createWorker(void);
+extern void task_destroyWorker(void);
+extern void task_updateWorker(void);
 extern void fn_803ECBD4(void);
 extern void fn_803EDB18(void);
 extern void fn_803FFC50(void);
@@ -42,8 +42,8 @@ extern void atn_LoadHandle_destructor(void);
 extern void PSVECSquareMag(void);
 extern void rand(void);
 extern void strcmp(void);
-extern void fn_8068A850(void);
-extern void fn_8068AD58(void);
+extern void std_sin(void);
+extern void std_cos(void);
 extern void std_fmod(void);
 extern void __ptmf_scall(void);
 
@@ -858,7 +858,7 @@ lbl_fn_803FD328_00000AF8:
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     lwz r3, 0xf8(r25)
     lwz r0, 0x55c(r3)
     cmpwi r0, 0x6
@@ -971,7 +971,7 @@ asm void fn_803FDF68(void)
     mr r30, r3
     beq lbl_fn_803FDF68_00000C7C
     li r4, 0x0
-    bl fn_803EC69C
+    bl task_destroyWorker
     cmpwi r31, 0x0
     ble lbl_fn_803FDF68_00000C7C
     mr r3, r30
@@ -1027,7 +1027,7 @@ asm void fn_803FDFC0(void)
     addi r4, r4, lbl_807774B8@l
     stw r4, 0x8(r1)
     la r4, lbl_8087D710
-    bl fn_8005BCE8
+    bl talk_copySpeakerName
     lis r26, lbl_807526BC@ha
     mr r31, r27
     addi r26, r26, lbl_807526BC@l
@@ -1165,7 +1165,7 @@ lbl_fn_803FDFC0_00000F00:
     bl res_MsgHandle_destructor
 lbl_fn_803FDFC0_00000F28:
     addi r3, r1, 0x8
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_803FDFC0_00000D44
     cmpwi r30, 0x2
@@ -1279,7 +1279,7 @@ asm void fn_803FE390(void)
     mr r4, r30
     mr r5, r29
     mr r6, r28
-    bl fn_803EC568
+    bl task_createWorker
     lis r4, lbl_8078D098@ha
     addi r3, r31, 0xf4
     addi r4, r4, lbl_8078D098@l
@@ -1406,7 +1406,7 @@ asm void fn_803FE570(void)
     lwz r6, 0x1c(r30)
     mr r4, r27
     lwz r5, 0x18(r30)
-    bl fn_803EC568
+    bl task_createWorker
     lis r4, lbl_8078D098@ha
     addi r3, r31, 0xf4
     addi r4, r4, lbl_8078D098@l
@@ -1554,7 +1554,7 @@ lbl_fn_803FE798_000014B8:
     bl fn_8008A76C
     mr r3, r29
     li r4, 0x0
-    bl fn_803EC69C
+    bl task_destroyWorker
     cmpwi r30, 0x0
     ble lbl_fn_803FE798_000014E0
     mr r3, r29
@@ -1578,11 +1578,11 @@ asm void fn_803FE828(void)
     stw r0, 0xa4(r1)
     stw r31, 0x9c(r1)
     mr r31, r3
-    bl fn_803EC91C
+    bl task_updateWorker
     cmpwi r3, 0x0
     bne lbl_fn_803FE828_00001830
     addi r3, r31, 0xf4
-    bl fn_8008B140
+    bl map_processTrigger
     cmpwi r3, 0x0
     bne lbl_fn_803FE828_00001830
     addi r3, r31, 0x398
@@ -1679,7 +1679,7 @@ lbl_fn_803FE828_00001664:
     stw r4, 0x50(r1)
     stw r0, 0x54(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_803FE828_000016D8
     addic. r0, r1, 0x84
@@ -1947,7 +1947,7 @@ lbl_fn_803FEC54_00001A30:
     lfs f1, 0x384(r31)
     lfs f0, 0x14(r30)
     fadds f1, f1, f0
-    bl fn_8068AD58
+    bl std_cos
     lfs f2, lbl_808860C8
     frsp f4, f1
     lfs f0, 0x10(r30)
@@ -1960,7 +1960,7 @@ lbl_fn_803FEC54_00001A30:
     fmuls f0, f0, f2
     fmuls f0, f0, f4
     stfs f0, 0x378(r31)
-    bl fn_8068AD58
+    bl std_cos
     lfs f0, 0x8(r30)
     frsp f4, f1
     lfs f1, 0x384(r31)
@@ -1971,7 +1971,7 @@ lbl_fn_803FEC54_00001A30:
     fmuls f0, f3, f4
     fmuls f0, f2, f0
     stfs f0, 0x37c(r31)
-    bl fn_8068AD58
+    bl std_cos
     lfs f0, 0x8(r30)
     frsp f4, f1
     lfs f5, lbl_808860CC
@@ -2008,7 +2008,7 @@ lbl_fn_803FEC54_00001B08:
     lfs f0, 0x384(r31)
     fnmsubs f1, f2, f3, f1
     fdivs f1, f0, f1
-    bl fn_8068A850
+    bl std_sin
     frsp f3, f1
     lfs f0, lbl_808860C4
     lfs f2, 0x20(r30)

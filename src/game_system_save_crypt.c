@@ -9,10 +9,10 @@ extern void _savegpr_27(void);
 extern void dtor_80013D60(void);
 extern void dtor_80084684(void);
 extern void fn_8000D760(void);
-extern void fn_8003E4A4(void);
-extern void fn_8004212C(void);
+extern void str_initFromCStr(void);
+extern void str_getData(void);
 extern void collision_testLineSegment(void);
-extern void fn_80057A64(void);
+extern void mission_updateStub(void);
 extern void fn_80057A68(void);
 extern void fn_80063D3C(void);
 extern void fn_8006AFF8(void);
@@ -21,7 +21,7 @@ extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
 extern void node_createNamedChild(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Task_setActive(void);
@@ -39,15 +39,15 @@ extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void fn_80103F60(void);
 extern void fn_80108378(void);
-extern void fn_80121F00(void);
+extern void equip_getGlobalManager(void);
 extern void fn_8016E4C4(void);
 extern void actor_setState(void);
 extern void save_validateHeader(void);
 extern void fn_8020A780(void);
 extern void sound_initGlobalInstances(void);
-extern void fn_80237518(void);
-extern void fn_802375C4(void);
-extern void fn_80237654(void);
+extern void res_MsgHandle_ctor(void);
+extern void res_Resource_destructor(void);
+extern void res_Resource_unload(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_unload(void);
@@ -64,12 +64,12 @@ extern void fn_803458CC(void);
 extern void fn_803458D0(void);
 extern void fn_803458E0(void);
 extern void fn_80354110(void);
-extern void fn_8035B694(void);
-extern void fn_8035B78C(void);
+extern void entity_Instance_constructor(void);
+extern void entity_Instance_destructor(void);
 extern void world_setGlobalFlag(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
-extern void fn_803EA77C(void);
+extern void chest_spawnLoot(void);
 extern void atn_LoadHandle_destructor(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
@@ -605,7 +605,7 @@ asm void fn_80344060(void)
     lfs f2, lbl_8088525C
     li r5, 0x2
     li r6, 0x0
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_80344060_00000688:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
@@ -1751,7 +1751,7 @@ asm void fn_8034515C(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_8034515C_0000169C
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_8034515C_0000169C:
     addic. r3, r29, 0x16b8
     beq lbl_fn_8034515C_000016AC
@@ -1796,7 +1796,7 @@ lbl_fn_8034515C_0000170C:
 lbl_fn_8034515C_0000172C:
     addi r3, r29, 0x1668
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     addic. r31, r29, 0x1638
     beq lbl_fn_8034515C_00001758
     mr r3, r31
@@ -1835,7 +1835,7 @@ lbl_fn_8034515C_00001798:
 lbl_fn_8034515C_000017B8:
     addi r3, r29, 0x15c8
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     addic. r31, r29, 0x15bc
     beq lbl_fn_8034515C_000017E4
     mr r3, r31
@@ -1871,7 +1871,7 @@ lbl_fn_8034515C_00001824:
     bl __destroy_new_array
     mr r3, r29
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r30, 0x0
     ble lbl_fn_8034515C_00001858
     mr r3, r29
@@ -1898,7 +1898,7 @@ asm void fn_80345384(void)
     mr r27, r5
     lwz r5, 0x20(r5)
     mr r31, r3
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lis r3, lbl_80789550@ha
     li r28, 0x0
     addi r3, r3, lbl_80789550@l
@@ -1928,7 +1928,7 @@ asm void fn_80345384(void)
     stw r28, 0x15d8(r31)
     bl fn_803458CC
     addi r3, r31, 0x160c
-    bl fn_80057A64
+    bl mission_updateStub
     addi r3, r31, 0x1618
     bl res_MsgHandle_constructor
     addi r3, r31, 0x1624
@@ -1938,9 +1938,9 @@ asm void fn_80345384(void)
     addi r3, r31, 0x163c
     bl res_MsgHandle_constructor
     addi r3, r31, 0x1648
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     addi r3, r31, 0x1654
-    bl fn_80057A64
+    bl mission_updateStub
     addi r3, r31, 0x1660
     bl fn_803165E0
     addi r3, r31, 0x1690
@@ -1959,9 +1959,9 @@ asm void fn_80345384(void)
     addi r3, r31, 0x16e0
     stb r28, 0x16d8(r31)
     stfs f0, 0x16dc(r31)
-    bl fn_80057A64
+    bl mission_updateStub
     addi r3, r31, 0x16f8
-    bl fn_80057A64
+    bl mission_updateStub
     addi r3, r31, 0x1704
     bl fn_802FCF14
     addi r3, r31, 0x170c
@@ -1975,7 +1975,7 @@ lbl_fn_80345384_000019B0:
     cmplw r29, r28
     blt lbl_fn_80345384_000019B0
     mr r3, r28
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     li r28, 0x0
     li r0, 0x96
     li r30, 0xa
@@ -2020,14 +2020,14 @@ lbl_fn_80345384_000019B0:
     stfs f0, 0x1cd8(r31)
     stw r5, 0x1cdc(r31)
     stw r0, 0x12a4(r31)
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r29, r29, lbl_8074AA58@l
     addi r3, r1, 0x20
     addi r4, r29, 0x18
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x14
     addi r4, r27, 0x2c
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x74
     addi r4, r29, 0x31
     li r5, 0x0
@@ -2047,7 +2047,7 @@ lbl_fn_80345384_000019B0:
 lbl_fn_80345384_00001ADC:
     addi r3, r1, 0x98
     bl fn_800ED4D8
-    bl fn_8004212C
+    bl str_getData
     addi r4, r29, 0x33
     li r5, 0x8
     bl strncmp
@@ -2055,7 +2055,7 @@ lbl_fn_80345384_00001ADC:
     bne lbl_fn_80345384_00001B18
     addi r3, r1, 0x98
     bl fn_800ED4D8
-    bl fn_8004212C
+    bl str_getData
     mr r4, r3
     addi r3, r1, 0x20
     addi r4, r4, 0x8
@@ -2084,7 +2084,7 @@ lbl_fn_80345384_00001B20:
     addi r5, r1, 0x20
     bl fn_8006AFF8
     addi r3, r1, 0x8
-    bl fn_8004212C
+    bl str_getData
     lwz r12, 0x180c(r31)
     mr r4, r3
     addi r3, r31, 0x180c
@@ -2104,7 +2104,7 @@ lbl_fn_80345384_00001B20:
     bl res_MsgHandle_destructor
     addi r3, r31, 0x1648
     addi r4, r30, 0x66
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r31, 0x16c0
     addi r4, r30, 0x77
     bl res_MsgHandle_destructor
@@ -2113,7 +2113,7 @@ lbl_fn_80345384_00001B20:
     bl res_MsgHandle_destructor
     addi r3, r31, 0x17d8
     addi r4, r30, 0x93
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r31, 0x1618
     addi r4, r30, 0xa1
     bl res_MsgHandle_destructor
@@ -2158,12 +2158,12 @@ lbl_fn_80345384_00001B20:
     stw r3, 0x17f8(r31)
     li r4, 0x1
     bl atn_Task_setActive
-    bl fn_80121F00
+    bl equip_getGlobalManager
     li r4, 0x65
     li r5, 0x1
     li r6, 0x0
     bl world_setGlobalFlag
-    bl fn_80121F00
+    bl equip_getGlobalManager
     li r4, 0x68
     li r5, 0x1
     li r6, 0x0

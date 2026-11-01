@@ -11,13 +11,13 @@ extern void _savegpr_25(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8006EF48(void);
+extern void script_executeOpcode(void);
 extern void fn_800A4450(void);
 extern void str_findChar(void);
-extern void fn_80116FC0(void);
+extern void actor_findSpawnTemplate(void);
 extern void fn_80124C6C(void);
 extern void fn_801EFA78(void);
-extern void fn_801F48C8(void);
+extern void save_parseSlotStats(void);
 extern void saveSlot_readSummary(void);
 extern void fn_801F6C2C(void);
 extern void save_computeCrc32(void);
@@ -271,7 +271,7 @@ lbl_fn_804A5824_000002E0:
     lhz r6, 0x12c(r27)
     li r5, 0x1
     lfs f2, lbl_808871D0
-    bl fn_8006EF48
+    bl script_executeOpcode
     lwz r0, 0x8(r1)
     fmr f31, f1
     srwi. r0, r0, 31
@@ -763,7 +763,7 @@ lbl_fn_804A5E40_000008DC:
     slwi r0, r0, 2
     add r3, r27, r0
     lwz r3, 0x1d8(r3)
-    bl fn_801F48C8
+    bl save_parseSlotStats
     lwz r4, lbl_8087F0A8
     addi r3, r1, 0x28
     lwz r5, 0x20(r30)
@@ -775,7 +775,7 @@ lbl_fn_804A5E40_000008DC:
     slwi r0, r0, 2
     add r3, r27, r0
     lwz r3, 0x1d8(r3)
-    bl fn_801F48C8
+    bl save_parseSlotStats
     lwz r0, 0x1cc(r27)
     addi r3, r31, 0x1f0
     slwi r0, r0, 2
@@ -789,7 +789,7 @@ lbl_fn_804A5E40_000008DC:
     bl thread_dispatchToQueue
     lwz r4, 0x24(r30)
     li r3, 0x0
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r0, 0x1cc(r27)
     mr r26, r3
     addi r3, r31, 0x1fa
@@ -866,7 +866,7 @@ lbl_fn_804A5E40_000008DC:
     slwi r0, r0, 2
     add r3, r27, r0
     lwz r3, 0x1e0(r3)
-    bl fn_801F48C8
+    bl save_parseSlotStats
     lwz r4, lbl_8087F0A8
     addi r3, r1, 0x8
     lwz r5, 0x20(r30)
@@ -878,7 +878,7 @@ lbl_fn_804A5E40_000008DC:
     slwi r0, r0, 2
     add r3, r27, r0
     lwz r3, 0x1e0(r3)
-    bl fn_801F48C8
+    bl save_parseSlotStats
     lwz r0, 0x1cc(r27)
     addi r3, r31, 0x1f0
     slwi r0, r0, 2
@@ -892,7 +892,7 @@ lbl_fn_804A5E40_000008DC:
     bl thread_dispatchToQueue
     lwz r4, 0x24(r30)
     li r3, 0x0
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r0, 0x1cc(r27)
     mr r26, r3
     addi r3, r31, 0x1fa
@@ -976,7 +976,7 @@ asm void fn_804A62C8(void)
     bctr
     li r3, 0x1
     li r4, 0x104
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r4, 0x6c(r30)
     lis r5, lbl_807573D0@ha
     addi r5, r5, lbl_807573D0@l
@@ -991,7 +991,7 @@ asm void fn_804A62C8(void)
     b lbl_fn_804A62C8_00000F70
     li r3, 0x1
     li r4, 0x108
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r4, 0x6c(r30)
     lis r5, lbl_807573D0@ha
     addi r5, r5, lbl_807573D0@l
@@ -1006,7 +1006,7 @@ asm void fn_804A62C8(void)
     b lbl_fn_804A62C8_00000F70
     li r3, 0x1
     li r4, 0x109
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r4, 0x6c(r30)
     lis r5, lbl_807573D0@ha
     addi r5, r5, lbl_807573D0@l
@@ -1021,7 +1021,7 @@ asm void fn_804A62C8(void)
     b lbl_fn_804A62C8_00000F70
     li r3, 0x1
     li r4, 0x10a
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r4, 0x6c(r30)
     lis r5, lbl_807573D0@ha
     addi r5, r5, lbl_807573D0@l
@@ -1036,7 +1036,7 @@ asm void fn_804A62C8(void)
     b lbl_fn_804A62C8_00000F70
     li r3, 0x1
     li r4, 0x10b
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r4, 0x6c(r30)
     lis r5, lbl_807573D0@ha
     addi r5, r5, lbl_807573D0@l
@@ -1051,7 +1051,7 @@ asm void fn_804A62C8(void)
     b lbl_fn_804A62C8_00000F70
     li r3, 0x1
     li r4, 0x10c
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r4, 0x6c(r30)
     lis r5, lbl_807573D0@ha
     addi r5, r5, lbl_807573D0@l
@@ -1066,7 +1066,7 @@ asm void fn_804A62C8(void)
     b lbl_fn_804A62C8_00000F70
     li r3, 0x1
     li r4, 0x10e
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r4, 0x6c(r30)
     lis r5, lbl_807573D0@ha
     addi r5, r5, lbl_807573D0@l
@@ -1081,7 +1081,7 @@ asm void fn_804A62C8(void)
     b lbl_fn_804A62C8_00000F70
     li r3, 0x1
     li r4, 0x10f
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r4, 0x6c(r30)
     lis r5, lbl_807573D0@ha
     addi r5, r5, lbl_807573D0@l
@@ -1096,7 +1096,7 @@ asm void fn_804A62C8(void)
     b lbl_fn_804A62C8_00000F70
     li r3, 0x1
     li r4, 0x110
-    bl fn_80116FC0
+    bl actor_findSpawnTemplate
     lwz r4, 0x6c(r30)
     lis r5, lbl_807573D0@ha
     addi r5, r5, lbl_807573D0@l

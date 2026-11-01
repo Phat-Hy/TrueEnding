@@ -19,7 +19,7 @@ extern void fn_802346AC(void);
 extern void fn_802347DC(void);
 extern void fn_80234958(void);
 extern void res_findResourceSlot(void);
-extern void fn_8023A680(void);
+extern void res_Shader_bindParams(void);
 extern void fn_8024067C(void);
 extern void fn_8024068C(void);
 extern void fn_80242FF4(void);
@@ -27,7 +27,7 @@ extern void fn_80243514(void);
 extern void fn_8068B39C(void);
 extern void fn_806920C0(void);
 extern void fn_8069293C(void);
-extern void fn_806952C4(void);
+extern void msl_releaseRefCount(void);
 
 /* External data declarations */
 extern u8 lbl_80779AB8[];
@@ -96,7 +96,7 @@ lbl_fn_8023B724_00000040:
     lwz r6, 0xc(r27)
     lwz r7, 0x10(r27)
     lfs f1, 0x2c(r27)
-    bl fn_8023A680
+    bl res_Shader_bindParams
     lwz r6, 0x54(r27)
     mr r31, r3
     lwz r5, 0x50(r27)
@@ -427,7 +427,7 @@ lbl_fn_8023BA10_00000524:
     lwz r3, 0x3c(r1)
     cmpwi r3, 0x0
     beq lbl_fn_8023BA10_0000053C
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_8023BA10_0000053C:
     lwz r5, 0x0(r30)
     lhz r0, 0x30(r5)
@@ -922,7 +922,7 @@ lbl_fn_8023C0C0_00000C14:
     lwz r3, 0x2c(r1)
     cmpwi r3, 0x0
     beq lbl_fn_8023C0C0_00000C2C
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_8023C0C0_00000C2C:
     cmpwi r28, 0x0
     li r28, 0x0
@@ -1274,7 +1274,7 @@ lbl_fn_8023C6F4_000010BC:
     lwz r3, 0x24(r1)
     cmpwi r3, 0x0
     beq lbl_fn_8023C6F4_000010D4
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_8023C6F4_000010D4:
     cmpwi r29, 0x0
     addi r25, r1, 0x70
@@ -1535,7 +1535,7 @@ lbl_fn_8023C6F4_00001434:
     lwz r3, 0x1c(r1)
     cmpwi r3, 0x0
     beq lbl_fn_8023C6F4_0000144C
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_8023C6F4_0000144C:
     lhz r0, 0x30(r26)
     rlwinm. r0, r0, 0, 22, 22
@@ -1849,7 +1849,7 @@ lbl_fn_8023C6F4_00001864:
     lwz r3, 0x14(r1)
     cmpwi r3, 0x0
     beq lbl_fn_8023C6F4_0000187C
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_8023C6F4_0000187C:
     cmpwi r29, 0x0
     li r30, 0x0

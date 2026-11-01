@@ -25,14 +25,14 @@ extern void atn_Task_setActive(void);
 extern void str_skipWhitespace(void);
 extern void fn_8012D8B8(void);
 extern void boss_updatePhaseState(void);
-extern void fn_80145334(void);
-extern void fn_80148990(void);
+extern void quest_updateFlow(void);
+extern void quest_ctorRewardItem(void);
 extern void dialog_renderWindow(void);
-extern void fn_8014C540(void);
+extern void dialog_updateScriptState(void);
 extern void fn_8015AC48(void);
 extern void fn_8016E4C4(void);
 extern void actor_setState(void);
-extern void fn_8016F3D0(void);
+extern void battle_canTargetActor(void);
 extern void fn_80178A6C(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
@@ -128,7 +128,7 @@ lbl_fn_8030FEAC_00000038:
     mr r3, r29
     mr r4, r30
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     bne lbl_fn_8030FEAC_00000098
     lfs f1, 0x530(r30)
@@ -161,7 +161,7 @@ lbl_fn_8030FEAC_000000B0:
     mr r3, r29
     mr r4, r30
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     bne lbl_fn_8030FEAC_00000110
     lfs f1, 0x530(r30)
@@ -808,7 +808,7 @@ lbl_fn_803104D4_000009AC:
 lbl_fn_803104D4_000009B4:
     li r28, 0x0
     li r26, 0x0
-    lis r31, fn_80148990@ha
+    lis r31, quest_ctorRewardItem@ha
     li r30, 0x8
     b lbl_fn_803104D4_00000D64
 lbl_fn_803104D4_000009C8:
@@ -830,7 +830,7 @@ lbl_fn_803104D4_000009E8:
     la r6, lbl_8087D9E0
     li r7, 0x0
     bl mem_realloc
-    addi r4, r31, fn_80148990@l
+    addi r4, r31, quest_ctorRewardItem@l
     li r5, 0x0
     li r6, 0x14
     li r7, 0x8
@@ -944,7 +944,7 @@ lbl_fn_803104D4_00000B80:
     li r7, 0x0
     bl mem_realloc
     mr r7, r27
-    addi r4, r31, fn_80148990@l
+    addi r4, r31, quest_ctorRewardItem@l
     li r5, 0x0
     li r6, 0x14
     bl runtime_registerStaticObject
@@ -1282,7 +1282,7 @@ asm void fn_80310EF8(void)
     mtctr r12
     bctrl
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
     lwz r0, 0x38(r31)
     clrlwi r0, r0, 31
     cmplwi r0, 0x1
@@ -1291,7 +1291,7 @@ asm void fn_80310EF8(void)
     extrwi. r0, r0, 1, 6
     bne lbl_fn_80310EF8_000010A4
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
 lbl_fn_80310EF8_000010A4:
     lfs f2, 0x530(r31)
     lis r3, lbl_80749264@ha
@@ -1750,7 +1750,7 @@ lbl_fn_80311364_000016D4:
 lbl_fn_80311364_000016DC:
     li r28, 0x0
     li r26, 0x0
-    lis r31, fn_80148990@ha
+    lis r31, quest_ctorRewardItem@ha
     li r30, 0x8
     b lbl_fn_80311364_00001A8C
 lbl_fn_80311364_000016F0:
@@ -1772,7 +1772,7 @@ lbl_fn_80311364_00001710:
     la r6, lbl_8087D9E0
     li r7, 0x0
     bl mem_realloc
-    addi r4, r31, fn_80148990@l
+    addi r4, r31, quest_ctorRewardItem@l
     li r5, 0x0
     li r6, 0x14
     li r7, 0x8
@@ -1886,7 +1886,7 @@ lbl_fn_80311364_000018A8:
     li r7, 0x0
     bl mem_realloc
     mr r7, r25
-    addi r4, r31, fn_80148990@l
+    addi r4, r31, quest_ctorRewardItem@l
     li r5, 0x0
     li r6, 0x14
     bl runtime_registerStaticObject

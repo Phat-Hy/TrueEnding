@@ -7,11 +7,11 @@ extern void _restgpr_21(void);
 extern void _savegpr_19(void);
 extern void _savegpr_21(void);
 extern void vec3_copy(void);
-extern void fn_8000D3A4(void);
+extern void vec3_mag(void);
 extern void fn_8000D9E8(void);
 extern void fn_8000DCF4(void);
-extern void fn_8001047C(void);
-extern void fn_80011034(void);
+extern void vec3_assign(void);
+extern void vec3_toEulerAngles(void);
 extern void fn_80012C88(void);
 extern void vec3_sub(void);
 extern void fn_80013484(void);
@@ -43,7 +43,7 @@ extern void fn_8021A888(void);
 extern void sound_initGlobalInstances(void);
 extern void fn_80239D58(void);
 extern void res_findResourceSlot(void);
-extern void fn_8023A680(void);
+extern void res_Shader_bindParams(void);
 extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXTrans(void);
@@ -99,12 +99,12 @@ void fn_800F7F60(void);
 void fn_800F7F80(void);
 void fn_800F7F90(void);
 void fn_800F7F98(void);
-void fn_800F7FA0(void);
+void viewport_getGlobalContext(void);
 void fn_800F7FA8(void);
 void fn_800F7FB4(void);
 void fn_800F7FBC(void);
 void fn_800F7FD8(void);
-void fn_800F7FF0(void);
+void viewport_getNextSequenceId(void);
 void fn_800F7FF8(void);
 void fn_800F8014(void);
 void fn_800F8098(void);
@@ -123,7 +123,7 @@ void fn_800F8524(void);
 void fn_800F8538(void);
 void fn_800F8544(void);
 s32 system_getNextSequenceId(s32* obj);
-void fn_800F8574(void);
+void viewport_updateCulling(void);
 
 asm void fn_800F7250(void)
 {
@@ -287,15 +287,15 @@ lbl_fn_800F72F4_000001F0:
 lbl_fn_800F72F4_00000208:
     cmpwi r22, 0x0
     beq lbl_fn_800F72F4_00000254
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     li r4, 0x1
     bl fn_800F7F98
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r4, r29
     li r5, 0x0
     li r6, 0x0
     bl res_findResourceSlot
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     li r4, 0x0
     bl fn_800F7F98
     li r0, 0xc
@@ -316,14 +316,14 @@ lbl_fn_800F72F4_00000254:
     rlwinm r0, r0, 0, 27, 27
     cmpwi r0, 0x10
     beq lbl_fn_800F72F4_00000388
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     li r4, 0x1
     bl fn_800F7F98
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r4, r29
     li r5, 0x0
     bl fn_800F7FA8
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     li r23, 0x0
     stw r23, 0x8(r1)
     li r25, -0x1
@@ -339,8 +339,8 @@ lbl_fn_800F72F4_00000254:
     li r9, 0x0
     li r10, 0x0
     subi r4, r4, 0x7670
-    bl fn_8023A680
-    bl fn_800F7FA0
+    bl res_Shader_bindParams
+    bl viewport_getGlobalContext
     stw r23, 0x8(r1)
     addis r4, r26, 0x4
     lfs f1, lbl_80881510
@@ -353,7 +353,7 @@ lbl_fn_800F72F4_00000254:
     li r9, 0x0
     li r10, 0x0
     subi r4, r4, 0x7664
-    bl fn_8023A680
+    bl res_Shader_bindParams
     mr r3, r27
     bl fn_800F7FB4
     cmpwi r3, 0x12
@@ -363,7 +363,7 @@ lbl_fn_800F72F4_00000254:
     cmpwi r3, 0x11
     bne lbl_fn_800F72F4_0000037C
 lbl_fn_800F72F4_00000338:
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     li r0, 0x0
     stw r0, 0x8(r1)
     li r0, -0x1
@@ -379,9 +379,9 @@ lbl_fn_800F72F4_00000338:
     li r9, 0x0
     li r10, 0x0
     subi r4, r4, 0x7670
-    bl fn_8023A680
+    bl res_Shader_bindParams
 lbl_fn_800F72F4_0000037C:
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     li r4, 0x0
     bl fn_800F7F98
 lbl_fn_800F72F4_00000388:
@@ -398,12 +398,12 @@ lbl_fn_800F72F4_000003A4:
     bl fn_800F7FBC
     mr r4, r3
     addi r3, r1, 0x1bc
-    bl fn_8001047C
+    bl vec3_assign
     mr r3, r30
     bl fn_800F7FBC
     mr r4, r3
     addi r3, r1, 0x1b0
-    bl fn_8001047C
+    bl vec3_assign
     addi r3, r1, 0x178
     addi r4, r1, 0x1b0
     addi r5, r1, 0x1bc
@@ -439,17 +439,17 @@ lbl_fn_800F72F4_000003A4:
     addi r4, r1, 0x148
     bl vec3_copy
     addi r3, r1, 0x1a4
-    bl fn_8000D3A4
+    bl vec3_mag
     lfs f2, lbl_808814B0
     addi r3, r1, 0x1a4
     lfs f0, lbl_808814C8
     fsubs f1, f1, f2
     fdivs f0, f1, f0
     stfs f0, 0x24(r1)
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
     addi r3, r1, 0x198
     addi r4, r1, 0x1a4
-    bl fn_80011034
+    bl vec3_toEulerAngles
     addi r3, r1, 0x188
     bl fn_80041B8C
     cmpwi r28, 0x1
@@ -599,7 +599,7 @@ lbl_fn_800F72F4_00000668:
     addi r4, r1, 0xcc
     bl vec3_copy
     addi r3, r1, 0x1a4
-    bl fn_8000D3A4
+    bl vec3_mag
     lfs f2, lbl_808814B0
     addi r3, r1, 0x24
     lfs f0, lbl_808814C8
@@ -611,10 +611,10 @@ lbl_fn_800F72F4_00000668:
     bl fn_800F8524
     stfs f1, 0x24(r1)
     addi r3, r1, 0x1a4
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
     addi r3, r1, 0xc0
     addi r4, r1, 0x1a4
-    bl fn_80011034
+    bl vec3_toEulerAngles
     addi r3, r1, 0x198
     addi r4, r1, 0xc0
     bl vec3_copy
@@ -641,7 +641,7 @@ lbl_fn_800F72F4_00000668:
     addi r5, r1, 0x1f8
     bl vec3_sub
     addi r3, r1, 0xb4
-    bl fn_8000D3A4
+    bl vec3_mag
     lfs f2, lbl_808814B0
     lfs f0, lbl_808814C8
     fsubs f1, f1, f2
@@ -885,7 +885,7 @@ lbl_fn_800F72F4_00000A9C:
     addi r5, r1, 0x1c8
     bl vec3_sub
     addi r3, r1, 0x60
-    bl fn_8000D3A4
+    bl vec3_mag
     lfs f2, lbl_808814B0
     lfs f0, lbl_808814C8
     fsubs f1, f1, f2
@@ -943,7 +943,7 @@ lbl_fn_800F72F4_00000B7C:
     bl vec3_copy
     stfs f27, 0x6c(r29)
 lbl_fn_800F72F4_00000BD0:
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r4, r29
     li r5, 0x0
     bl fn_80239D58
@@ -966,17 +966,17 @@ lbl_fn_800F72F4_00000C14:
     addis r23, r26, 0x4
     subi r23, r23, 0x7688
 lbl_fn_800F72F4_00000C1C:
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     li r4, 0x1
     bl fn_800F7F98
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     li r4, 0x5
     bl fn_800F84D0
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r4, r29
     li r5, 0x0
     bl fn_800F7FA8
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     li r28, 0x0
     stw r28, 0x8(r1)
     li r27, -0x1
@@ -991,8 +991,8 @@ lbl_fn_800F72F4_00000C1C:
     li r6, 0x5
     li r8, 0x0
     li r9, 0x0
-    bl fn_8023A680
-    bl fn_800F7FA0
+    bl res_Shader_bindParams
+    bl viewport_getGlobalContext
     stw r28, 0x8(r1)
     addi r4, r23, 0xc
     lfs f1, lbl_80881494
@@ -1004,11 +1004,11 @@ lbl_fn_800F72F4_00000C1C:
     stw r26, 0x10(r1)
     li r8, 0x0
     li r9, 0x0
-    bl fn_8023A680
-    bl fn_800F7FA0
+    bl res_Shader_bindParams
+    bl viewport_getGlobalContext
     li r4, 0x0
     bl fn_800F84D0
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     li r4, 0x0
     bl fn_800F7F98
 lbl_fn_800F72F4_00000CD0:
@@ -1066,7 +1066,7 @@ asm void fn_800F7F98(void)
     blr
 }
 
-asm void fn_800F7FA0(void)
+asm void viewport_getGlobalContext(void)
 {
     nofralloc
     lwz r3, lbl_8087F3C0
@@ -1112,7 +1112,7 @@ asm void fn_800F7FD8(void)
     b PSVECNormalize
 }
 
-asm void fn_800F7FF0(void)
+asm void viewport_getNextSequenceId(void)
 {
     nofralloc
     mr r4, r3
@@ -1574,7 +1574,7 @@ s32 system_getNextSequenceId(s32* obj)
     return cur;
 }
 
-asm void fn_800F8574(void)
+asm void viewport_updateCulling(void)
 {
     nofralloc
     stwu r1, -0x390(r1)
@@ -1613,25 +1613,25 @@ asm void fn_800F8574(void)
     mr r25, r8
     mr r26, r9
     mr r27, r10
-    bne lbl_fn_800F8574_000013C0
+    bne lbl_viewport_updateCulling_000013C0
     li r3, 0x0
-    b lbl_fn_800F8574_000019B4
-lbl_fn_800F8574_000013C0:
+    b lbl_viewport_updateCulling_000019B4
+lbl_viewport_updateCulling_000013C0:
     lwz r3, 0xb0(r5)
     bl fn_800EFF04
     cmpwi r3, 0x0
     mr r19, r3
-    beq lbl_fn_800F8574_00001420
+    beq lbl_viewport_updateCulling_00001420
     lwz r0, 0x48(r22)
     lfs f22, lbl_80881494
     cmpwi r0, 0x0
-    bne lbl_fn_800F8574_000013F8
+    bne lbl_viewport_updateCulling_000013F8
     mr r3, r23
     bl fn_8021A888
     cmpwi r3, 0x0
-    beq lbl_fn_800F8574_000013F8
+    beq lbl_viewport_updateCulling_000013F8
     lfs f22, lbl_80881524
-lbl_fn_800F8574_000013F8:
+lbl_viewport_updateCulling_000013F8:
     fmr f1, f22
     mr r4, r19
     mr r5, r24
@@ -1642,7 +1642,7 @@ lbl_fn_800F8574_000013F8:
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
-lbl_fn_800F8574_00001420:
+lbl_viewport_updateCulling_00001420:
     lfs f2, 0x8(r20)
     addi r19, r1, 0x54
     psq_l f1, 0x0(r20), 0, 0
@@ -1652,25 +1652,25 @@ lbl_fn_800F8574_00001420:
     frsp f7, f7
     stfs f2, 0x5c(r1)
     fcmpo cr0, f7, f0
-    bge lbl_fn_800F8574_0000146C
+    bge lbl_viewport_updateCulling_0000146C
     lfs f7, 0x54(r1)
     lfs f0, lbl_80881478
     fcmpo cr0, f7, f0
-    ble lbl_fn_800F8574_00001460
+    ble lbl_viewport_updateCulling_00001460
     lfs f0, lbl_808814D8
-    b lbl_fn_800F8574_00001464
-lbl_fn_800F8574_00001460:
+    b lbl_viewport_updateCulling_00001464
+lbl_viewport_updateCulling_00001460:
     lfs f0, lbl_808814DC
-lbl_fn_800F8574_00001464:
+lbl_viewport_updateCulling_00001464:
     stfs f0, 0x4c(r1)
-    b lbl_fn_800F8574_00001480
-lbl_fn_800F8574_0000146C:
+    b lbl_viewport_updateCulling_00001480
+lbl_viewport_updateCulling_0000146C:
     frsp f2, f2
     lfs f1, 0x54(r1)
     bl std_atan2
     frsp f0, f1
     stfs f0, 0x4c(r1)
-lbl_fn_800F8574_00001480:
+lbl_viewport_updateCulling_00001480:
     lfs f0, 0x4c(r1)
     addi r3, r1, 0x1a8
     li r4, 0x79
@@ -1731,26 +1731,26 @@ lbl_fn_800F8574_00001480:
     fabs f7, f2
     frsp f7, f7
     fcmpo cr0, f7, f0
-    bge lbl_fn_800F8574_0000159C
+    bge lbl_viewport_updateCulling_0000159C
     lfs f7, 0x40(r1)
     lfs f0, lbl_80881478
     fcmpo cr0, f7, f0
-    ble lbl_fn_800F8574_0000158C
+    ble lbl_viewport_updateCulling_0000158C
     lfs f0, lbl_808814D8
-    b lbl_fn_800F8574_00001590
-lbl_fn_800F8574_0000158C:
+    b lbl_viewport_updateCulling_00001590
+lbl_viewport_updateCulling_0000158C:
     lfs f0, lbl_808814DC
-lbl_fn_800F8574_00001590:
+lbl_viewport_updateCulling_00001590:
     fneg f0, f0
     stfs f0, 0x48(r1)
-    b lbl_fn_800F8574_000015B0
-lbl_fn_800F8574_0000159C:
+    b lbl_viewport_updateCulling_000015B0
+lbl_viewport_updateCulling_0000159C:
     lfs f1, 0x40(r1)
     bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x48(r1)
-lbl_fn_800F8574_000015B0:
+lbl_viewport_updateCulling_000015B0:
     lfs f2, lbl_80881478
     addi r3, r1, 0x48
     lfs f7, lbl_80881494
@@ -1773,7 +1773,7 @@ lbl_fn_800F8574_000015B0:
     stfs f7, 0x2a0(r1)
     stfs f7, 0x28c(r1)
     stfs f7, 0x278(r1)
-    beq lbl_fn_800F8574_00001660
+    beq lbl_viewport_updateCulling_00001660
     fmr f1, f0
     addi r3, r1, 0xb8
     li r4, 0x7a
@@ -1795,11 +1795,11 @@ lbl_fn_800F8574_000015B0:
     psq_st f4, 0x18(r20), 0, 0
     psq_st f5, 0x20(r20), 0, 0
     psq_st f6, 0x28(r20), 0, 0
-lbl_fn_800F8574_00001660:
+lbl_viewport_updateCulling_00001660:
     lfs f0, lbl_80881478
     lfs f1, 0x58(r1)
     fcmpu cr0, f0, f1
-    beq lbl_fn_800F8574_000016C0
+    beq lbl_viewport_updateCulling_000016C0
     addi r3, r1, 0x118
     li r4, 0x79
     bl PSMTXRotRad
@@ -1820,11 +1820,11 @@ lbl_fn_800F8574_00001660:
     psq_st f4, 0x18(r20), 0, 0
     psq_st f5, 0x20(r20), 0, 0
     psq_st f6, 0x28(r20), 0, 0
-lbl_fn_800F8574_000016C0:
+lbl_viewport_updateCulling_000016C0:
     lfs f0, lbl_80881478
     lfs f1, 0x54(r1)
     fcmpu cr0, f0, f1
-    beq lbl_fn_800F8574_00001720
+    beq lbl_viewport_updateCulling_00001720
     addi r3, r1, 0x178
     li r4, 0x78
     bl PSMTXRotRad
@@ -1845,7 +1845,7 @@ lbl_fn_800F8574_000016C0:
     psq_st f4, 0x18(r20), 0, 0
     psq_st f5, 0x20(r20), 0, 0
     psq_st f6, 0x28(r20), 0, 0
-lbl_fn_800F8574_00001720:
+lbl_viewport_updateCulling_00001720:
     lis r3, lbl_80735EB0@ha
     lis r4, 0x4178
     lfs f27, lbl_80881478
@@ -1861,8 +1861,8 @@ lbl_fn_800F8574_00001720:
     lfs f22, lbl_80881530
     li r20, 0x20
     lfs f23, lbl_808814AC
-    b lbl_fn_800F8574_00001984
-lbl_fn_800F8574_00001760:
+    b lbl_viewport_updateCulling_00001984
+lbl_viewport_updateCulling_00001760:
     stfs f27, 0x60(r1)
     stfs f27, 0x64(r1)
     stfs f28, 0x68(r1)
@@ -1939,29 +1939,29 @@ lbl_fn_800F8574_00001760:
     stw r27, 0x7c(r1)
     stfs f24, 0x80(r1)
     stfs f25, 0x84(r1)
-    bne lbl_fn_800F8574_00001904
+    bne lbl_viewport_updateCulling_00001904
     lwz r6, lbl_8087F048
     li r4, 0x0
     mr r5, r6
     mtctr r19
-lbl_fn_800F8574_000018A4:
+lbl_viewport_updateCulling_000018A4:
     lwz r0, 0x154(r5)
     rlwinm r3, r0, 0, 15, 15
     subis r0, r3, 0x1
     cmplwi r0, 0x0
-    beq lbl_fn_800F8574_000018C8
+    beq lbl_viewport_updateCulling_000018C8
     mulli r0, r4, 0xa0
     add r3, r6, r0
     addi r3, r3, 0x150
-    b lbl_fn_800F8574_000018D8
-lbl_fn_800F8574_000018C8:
+    b lbl_viewport_updateCulling_000018D8
+lbl_viewport_updateCulling_000018C8:
     addi r5, r5, 0xa0
     addi r4, r4, 0x1
-    bdnz lbl_fn_800F8574_000018A4
+    bdnz lbl_viewport_updateCulling_000018A4
     li r3, 0x0
-lbl_fn_800F8574_000018D8:
+lbl_viewport_updateCulling_000018D8:
     cmpwi r3, 0x0
-    beq lbl_fn_800F8574_00001990
+    beq lbl_viewport_updateCulling_00001990
     lfs f1, lbl_808814CC
     mr r5, r24
     mr r7, r22
@@ -1970,32 +1970,32 @@ lbl_fn_800F8574_000018D8:
     addi r6, r1, 0x60
     li r8, -0x1
     bl fn_8010EE78
-    b lbl_fn_800F8574_00001980
-lbl_fn_800F8574_00001904:
+    b lbl_viewport_updateCulling_00001980
+lbl_viewport_updateCulling_00001904:
     lwz r6, lbl_8087F048
     li r4, 0x0
     mr r5, r6
     mtctr r20
-lbl_fn_800F8574_00001914:
+lbl_viewport_updateCulling_00001914:
     addis r3, r5, 0x1
     lwz r0, -0x5eac(r3)
     rlwinm r3, r0, 0, 15, 15
     subis r0, r3, 0x1
     cmplwi r0, 0x0
-    beq lbl_fn_800F8574_00001940
+    beq lbl_viewport_updateCulling_00001940
     mulli r0, r4, 0xc8
     addis r3, r6, 0x1
     add r3, r3, r0
     subi r3, r3, 0x5eb0
-    b lbl_fn_800F8574_00001950
-lbl_fn_800F8574_00001940:
+    b lbl_viewport_updateCulling_00001950
+lbl_viewport_updateCulling_00001940:
     addi r5, r5, 0xc8
     addi r4, r4, 0x1
-    bdnz lbl_fn_800F8574_00001914
+    bdnz lbl_viewport_updateCulling_00001914
     li r3, 0x0
-lbl_fn_800F8574_00001950:
+lbl_viewport_updateCulling_00001950:
     cmpwi r3, 0x0
-    beq lbl_fn_800F8574_00001990
+    beq lbl_viewport_updateCulling_00001990
     lwz r12, 0x0(r3)
     mr r5, r24
     mr r7, r22
@@ -2006,24 +2006,24 @@ lbl_fn_800F8574_00001950:
     addi r6, r1, 0x60
     mtctr r12
     bctrl
-lbl_fn_800F8574_00001980:
+lbl_viewport_updateCulling_00001980:
     addi r28, r28, 0x1
-lbl_fn_800F8574_00001984:
+lbl_viewport_updateCulling_00001984:
     lwz r0, 0x48(r23)
     cmpw r28, r0
-    blt lbl_fn_800F8574_00001760
-lbl_fn_800F8574_00001990:
+    blt lbl_viewport_updateCulling_00001760
+lbl_viewport_updateCulling_00001990:
     lfs f8, 0x12cc(r22)
     lfs f7, lbl_80881534
     lfs f0, lbl_80881494
     fadds f7, f8, f7
     fcmpo cr0, f7, f0
-    ble lbl_fn_800F8574_000019AC
+    ble lbl_viewport_updateCulling_000019AC
     fmr f7, f0
-lbl_fn_800F8574_000019AC:
+lbl_viewport_updateCulling_000019AC:
     stfs f7, 0x12cc(r22)
     li r3, 0x1
-lbl_fn_800F8574_000019B4:
+lbl_viewport_updateCulling_000019B4:
     addi r11, r1, 0x2f0
     psq_l f31, 0x388(r1), 0, 0
     lfd f31, 0x380(r1)

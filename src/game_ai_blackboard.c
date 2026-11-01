@@ -15,16 +15,16 @@ extern void atn_Anim_getLayerDuration(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8C6C(void);
+extern void scissor_clipFrustum(void);
 extern void fn_80139560(void);
-extern void fn_80144710(void);
-extern void fn_80145334(void);
-extern void fn_8014C540(void);
-extern void fn_8015495C(void);
+extern void quest_evaluateConditions(void);
+extern void quest_updateFlow(void);
+extern void dialog_updateScriptState(void);
+extern void equip_applyToCharacter(void);
 extern void fn_801561E4(void);
 extern void fn_80158BB4(void);
 extern void fn_80158CA4(void);
-extern void fn_8016DA4C(void);
+extern void debuff_clearStatus(void);
 extern void actor_setState(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
@@ -574,9 +574,9 @@ lbl_fn_8025D648_000006B0:
     lwz r0, 0x14ec(r31)
     mr r3, r31
     stw r0, 0x14f0(r31)
-    bl fn_8014C540
+    bl dialog_updateScriptState
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0
@@ -614,7 +614,7 @@ asm void fn_8025D704(void)
     lwz r0, 0x5c0(r3)
     ori r0, r0, 0x1
     stw r0, 0x5c0(r3)
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     li r31, 0x0
     stw r31, 0x14d0(r30)
     mr r3, r30
@@ -640,7 +640,7 @@ asm void fn_8025D704(void)
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     stw r31, 0x14f8(r30)
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -1215,7 +1215,7 @@ lbl_fn_8025DE7C_00000F5C:
     stw r3, 0x590(r31)
 lbl_fn_8025DE7C_00000FD0:
     mr r3, r31
-    bl fn_80144710
+    bl quest_evaluateConditions
     lwz r3, lbl_8087F048
     mr r6, r31
     lwz r7, 0x638(r31)
@@ -1225,7 +1225,7 @@ lbl_fn_8025DE7C_00000FD0:
     lfs f1, lbl_808834F0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
 lbl_fn_8025DE7C_00001000:
     lwz r0, 0x34(r1)
     lwz r31, 0x2c(r1)
@@ -1749,7 +1749,7 @@ asm void fn_8025E748(void)
     lfs f1, lbl_808834F0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     b lbl_fn_8025E748_0000181C
 lbl_fn_8025E748_000017BC:
     lfs f31, 0x2e4(r3)

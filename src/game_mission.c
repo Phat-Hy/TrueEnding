@@ -66,7 +66,7 @@ extern u32 lbl_80880978;
 extern u32 lbl_80880980;
 
 /* Function declarations */
-void fn_80057A64(void);
+void mission_updateStub(void);
 void fn_80057A68(void);
 void fn_80057A78(void);
 void atn_ColliBox_testRay(void);
@@ -106,7 +106,7 @@ void fn_80059660(void);
 void fn_80059784(void);
 void fn_80059A40(void);
 
-void fn_80057A64(void)
+void mission_updateStub(void)
 {
 }
 

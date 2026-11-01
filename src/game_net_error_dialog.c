@@ -7,9 +7,9 @@ extern void _restgpr_26(void);
 extern void _savegpr_14(void);
 extern void _savegpr_26(void);
 extern void fn_800629F0(void);
-extern void fn_8006EF48(void);
+extern void script_executeOpcode(void);
 extern void fn_8009EE30(void);
-extern void fn_800BFAC8(void);
+extern void motion_updateFogAdj(void);
 extern void str_findChar(void);
 extern void saveSlot_readSummary(void);
 extern void save_computeCrc32(void);
@@ -407,7 +407,7 @@ lbl_fn_8051CF7C_00000468:
     li r5, 0x1
     lfs f2, lbl_80887904
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     stfs f1, 0x1900(r28)
     b lbl_fn_8051CF7C_000004E4
 lbl_fn_8051CF7C_000004B0:
@@ -671,7 +671,7 @@ lbl_fn_8051CF7C_00000834:
     stfs f4, 0x48(r1)
     stfs f0, 0x44(r1)
     stfs f6, 0x4c(r1)
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lwz r4, 0x1994(r28)
     lis r29, lbl_8075BF40@ha
     addi r29, r29, lbl_8075BF40@l
@@ -1476,7 +1476,7 @@ lbl_fn_8051D868_00001380:
     lwz r4, lbl_8087EFB4
     addi r3, r1, 0x110
     addi r5, r1, 0x1a0
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     psq_l f1, 0x0(r31), 0, 0
     addi r3, r23, 0x287
     lfs f2, 0x118(r1)
@@ -1788,7 +1788,7 @@ lbl_fn_8051D868_0000189C:
     addi r5, r27, 0x18f0
     stfs f7, 0x18c(r1)
     stfs f7, 0x190(r1)
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lwz r4, 0x1904(r27)
     lis r15, lbl_8075BF40@ha
     addi r15, r15, lbl_8075BF40@l

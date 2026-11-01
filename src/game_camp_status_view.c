@@ -7,7 +7,7 @@ extern void _savegpr_25(void);
 extern void dtor_80084684(void);
 extern void fn_80089B5C(void);
 extern void fn_8011F91C(void);
-extern void fn_8011FC10(void);
+extern void skill_findNodeById(void);
 extern void fn_8011FE3C(void);
 extern void fn_8012AE50(void);
 extern void fn_8012AFE8(void);
@@ -15,8 +15,8 @@ extern void fn_8012B3E8(void);
 extern void fn_8012B988(void);
 extern void fn_8012D8B8(void);
 extern void fn_80133B30(void);
-extern void fn_80145334(void);
-extern void fn_8014DEE4(void);
+extern void quest_updateFlow(void);
+extern void dialog_selectChoice(void);
 extern void fn_8014EEC4(void);
 extern void fn_80153698(void);
 extern void fn_8015E7A0(void);
@@ -511,7 +511,7 @@ lbl_fn_803B9804_00000574:
     lwz r4, 0x8c(r31)
     lwz r3, lbl_8087F408
     lwzx r4, r4, r27
-    bl fn_8011FC10
+    bl skill_findNodeById
     cmpwi r3, 0x0
     beq lbl_fn_803B9804_000005B8
     lwz r4, 0x8c(r31)
@@ -1493,7 +1493,7 @@ lbl_fn_803BA620_000012E0:
     nor r0, r4, r0
     srawi r0, r0, 31
     andc r4, r8, r0
-    bl fn_8014DEE4
+    bl dialog_selectChoice
     b lbl_fn_803BA620_00001324
 lbl_fn_803BA620_00001318:
     mr r3, r29
@@ -1505,7 +1505,7 @@ lbl_fn_803BA620_00001324:
     cmpwi r0, 0x4
     bne lbl_fn_803BA620_0000136C
     mr r3, r29
-    bl fn_80145334
+    bl quest_updateFlow
     lwz r3, lbl_8087F430
     mr r5, r29
     addi r4, r1, 0x50

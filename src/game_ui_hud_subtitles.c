@@ -11,7 +11,7 @@ extern void actor_dispatchMessage(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_80087E9C(void);
+extern void route_createWaypoint(void);
 extern void node_createNamedChild(void);
 extern void fn_800A03A0(void);
 extern void fn_800A0448(void);
@@ -22,7 +22,7 @@ extern void fn_801CCE50(void);
 extern void fn_801CD184(void);
 extern void fn_801CE4CC(void);
 extern void save_validateHeader(void);
-extern void fn_801F64D0(void);
+extern void save_createWorkerTask(void);
 extern void fn_80201E78(void);
 extern void fn_80202A6C(void);
 extern void fn_80206B14(void);
@@ -182,7 +182,7 @@ lbl_fn_801CFACC_000000A8:
     addi r5, r29, 0xa4
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_80882A18
     mr r3, r30
     lfs f2, lbl_80882A1C
@@ -191,7 +191,7 @@ lbl_fn_801CFACC_000000A8:
     addi r5, r29, 0xb0
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_80882A18
     mr r3, r30
     lfs f2, lbl_80882A1C
@@ -200,7 +200,7 @@ lbl_fn_801CFACC_000000A8:
     addi r5, r29, 0xbc
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_80882A18
     mr r3, r30
     lfs f2, lbl_80882A1C
@@ -209,7 +209,7 @@ lbl_fn_801CFACC_000000A8:
     addi r5, r29, 0xc8
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_80882A18
     mr r3, r30
     lfs f2, lbl_80882A1C
@@ -218,7 +218,7 @@ lbl_fn_801CFACC_000000A8:
     addi r5, r29, 0xaa8
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_80882A18
     mr r3, r30
     lfs f2, lbl_80882A1C
@@ -227,7 +227,7 @@ lbl_fn_801CFACC_000000A8:
     addi r5, r29, 0xab4
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_80882A18
     mr r3, r30
     lfs f2, lbl_80882A1C
@@ -236,7 +236,7 @@ lbl_fn_801CFACC_000000A8:
     addi r5, r29, 0xac0
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)
@@ -260,34 +260,19 @@ asm void fn_801CFC30(void)
     blr
 }
 
-asm void fn_801CFC38(void)
-{
-    nofralloc
-    blr
+void fn_801CFC38(void) {
 }
 
-asm void fn_801CFC3C(void)
-{
-    nofralloc
-    blr
+void fn_801CFC3C(void) {
 }
 
-asm void fn_801CFC40(void)
-{
-    nofralloc
-    blr
+void fn_801CFC40(void) {
 }
 
-asm void fn_801CFC44(void)
-{
-    nofralloc
-    blr
+void fn_801CFC44(void) {
 }
 
-asm void fn_801CFC48(void)
-{
-    nofralloc
-    blr
+void fn_801CFC48(void) {
 }
 
 asm void fn_801CFC4C(void)
@@ -297,10 +282,7 @@ asm void fn_801CFC4C(void)
     blr
 }
 
-asm void fn_801CFC54(void)
-{
-    nofralloc
-    blr
+void fn_801CFC54(void) {
 }
 
 asm void fn_801CFC58(void)
@@ -2006,7 +1988,7 @@ lbl_fn_801D1324_00001A28:
     mr r3, r31
     addi r4, r4, lbl_8073C56C@l
     addi r4, r4, 0x2eb
-    bl fn_801F64D0
+    bl save_createWorkerTask
     stw r3, 0xb88(r31)
     li r4, 0x1
     bl atn_Task_setActive

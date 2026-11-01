@@ -11,8 +11,8 @@ extern void _savegpr_20(void);
 extern void dtor_80084684(void);
 extern void fn_80051CD8(void);
 extern void talk_formatQuotedString(void);
-extern void fn_8005BBF8(void);
-extern void fn_8005BCE8(void);
+extern void talk_parseQuotes(void);
+extern void talk_copySpeakerName(void);
 extern void fn_800629F0(void);
 extern void fn_80063D3C(void);
 extern void mem_alloc(void);
@@ -24,9 +24,9 @@ extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_unload(void);
 extern void res_MsgHandle_update(void);
-extern void fn_803EC568(void);
-extern void fn_803EC69C(void);
-extern void fn_803EC91C(void);
+extern void task_createWorker(void);
+extern void task_destroyWorker(void);
+extern void task_updateWorker(void);
 extern void fn_8043465C(void);
 extern void fn_804348C4(void);
 extern void fn_80435684(void);
@@ -169,7 +169,7 @@ asm void fn_80432D74(void)
     stw r31, 0xc(r1)
     stw r30, 0x8(r1)
     mr r30, r3
-    bl fn_803EC568
+    bl task_createWorker
     lis r4, lbl_8078EE40@ha
     addi r3, r30, 0xf4
     addi r4, r4, lbl_8078EE40@l
@@ -318,7 +318,7 @@ lbl_fn_80432EC0_000002E4:
 lbl_fn_80432EC0_00000304:
     mr r3, r29
     li r4, 0x0
-    bl fn_803EC69C
+    bl task_destroyWorker
     cmpwi r30, 0x0
     ble lbl_fn_80432EC0_00000320
     mr r3, r29
@@ -340,7 +340,7 @@ asm void fn_80432FD0(void)
     stwu r1, -0x10(r1)
     mflr r0
     stw r0, 0x14(r1)
-    bl fn_803EC91C
+    bl task_updateWorker
     cntlzw r0, r3
     srwi r3, r0, 5
     lwz r0, 0x14(r1)
@@ -756,7 +756,7 @@ asm void fn_804334EC(void)
     addi r4, r4, lbl_807774B8@l
     stw r4, 0x858(r1)
     la r4, lbl_8087D710
-    bl fn_8005BCE8
+    bl talk_copySpeakerName
     lis r25, lbl_807541B8@ha
     lfs f31, lbl_808868A4
     addi r25, r25, lbl_807541B8@l
@@ -1854,7 +1854,7 @@ lbl_fn_804334EC_000018FC:
     bdnz lbl_fn_804334EC_00001488
 lbl_fn_804334EC_00001904:
     addi r3, r1, 0x858
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_804334EC_00000930
     li r0, 0xee8

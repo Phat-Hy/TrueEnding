@@ -28,7 +28,7 @@ extern void fn_803E2110(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSVECDotProduct(void);
-extern void fn_8068A850(void);
+extern void std_sin(void);
 extern void vec3_isNonZero(void);
 
 /* External data declarations */
@@ -61,7 +61,7 @@ void fn_8015121C(void);
 void fn_8015123C(void);
 void fn_80151270(void);
 void fn_801513D0(void);
-void fn_80151448(void);
+void inventory_applyItemStats(void);
 void fn_80152A20(void);
 void fn_80152A24(void);
 
@@ -101,10 +101,7 @@ asm void fn_80151210(void)
     blr
 }
 
-asm void fn_80151218(void)
-{
-    nofralloc
-    blr
+void fn_80151218(void) {
 }
 
 asm void fn_8015121C(void)
@@ -269,7 +266,7 @@ asm void fn_801513D0(void)
 lbl_fn_801513D0_00000248:
     mr r3, r30
     mr r4, r31
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r12, 0x0(r30)
     mr r3, r30
     mr r4, r31
@@ -285,7 +282,7 @@ lbl_fn_801513D0_0000026C:
     blr
 }
 
-asm void fn_80151448(void)
+asm void inventory_applyItemStats(void)
 {
     nofralloc
     stwu r1, -0x200(r1)
@@ -306,112 +303,112 @@ asm void fn_80151448(void)
     stw r5, 0x12a4(r3)
     mr r27, r4
     addi r30, r30, lbl_8077A720@l
-    beq lbl_fn_80151448_000002DC
+    beq lbl_inventory_applyItemStats_000002DC
     extrwi. r0, r5, 1, 21
-    beq lbl_fn_80151448_000002DC
+    beq lbl_inventory_applyItemStats_000002DC
     ori r29, r29, 0x40
-lbl_fn_80151448_000002DC:
+lbl_inventory_applyItemStats_000002DC:
     rlwinm r0, r28, 0, 21, 21
     cmplwi r0, 0x400
-    beq lbl_fn_80151448_00000308
+    beq lbl_inventory_applyItemStats_00000308
     lwz r0, 0x55c(r3)
     cmpwi r0, 0x6
-    bne lbl_fn_80151448_00000308
+    bne lbl_inventory_applyItemStats_00000308
     lwz r4, 0x560(r3)
     subi r0, r4, 0x1
     cmplwi r0, 0x1
-    bgt lbl_fn_80151448_00000308
+    bgt lbl_inventory_applyItemStats_00000308
     ori r29, r29, 0x400
-lbl_fn_80151448_00000308:
+lbl_inventory_applyItemStats_00000308:
     rlwinm r0, r28, 0, 19, 19
     cmplwi r0, 0x1000
-    beq lbl_fn_80151448_00000364
+    beq lbl_inventory_applyItemStats_00000364
     lwz r0, 0x55c(r3)
     cmpwi r0, 0x6
-    bne lbl_fn_80151448_00000330
+    bne lbl_inventory_applyItemStats_00000330
     lwz r0, 0x560(r3)
     cmpwi r0, 0x60
-    bne lbl_fn_80151448_00000330
+    bne lbl_inventory_applyItemStats_00000330
     ori r29, r29, 0x1000
-lbl_fn_80151448_00000330:
+lbl_inventory_applyItemStats_00000330:
     addi r3, r3, 0xd74
     bl fn_8011D21C
     cmpwi r3, 0x0
-    bne lbl_fn_80151448_00000350
+    bne lbl_inventory_applyItemStats_00000350
     lwz r0, 0xd94(r26)
     rlwinm r0, r0, 0, 30, 30
     cmplwi r0, 0x2
-    beq lbl_fn_80151448_00000360
-lbl_fn_80151448_00000350:
+    beq lbl_inventory_applyItemStats_00000360
+lbl_inventory_applyItemStats_00000350:
     lwz r0, 0xd94(r26)
     rlwinm r0, r0, 0, 29, 29
     cmplwi r0, 0x4
-    bne lbl_fn_80151448_00000364
-lbl_fn_80151448_00000360:
+    bne lbl_inventory_applyItemStats_00000364
+lbl_inventory_applyItemStats_00000360:
     ori r29, r29, 0x1000
-lbl_fn_80151448_00000364:
+lbl_inventory_applyItemStats_00000364:
     lwz r3, 0x8(r27)
     lwz r0, 0xac(r3)
     rlwinm r0, r0, 0, 29, 29
     cmpwi r0, 0x4
-    bne lbl_fn_80151448_0000037C
+    bne lbl_inventory_applyItemStats_0000037C
     ori r28, r28, 0x8
-lbl_fn_80151448_0000037C:
+lbl_inventory_applyItemStats_0000037C:
     lwz r3, 0x0(r27)
     cmpwi r3, 0x0
-    beq lbl_fn_80151448_000003A0
+    beq lbl_inventory_applyItemStats_000003A0
     addi r3, r3, 0x7d4
     li r4, 0x48
     bl fn_80133EE8
     cmpwi r3, 0x0
-    beq lbl_fn_80151448_000003A0
+    beq lbl_inventory_applyItemStats_000003A0
     ori r28, r28, 0x8
-lbl_fn_80151448_000003A0:
+lbl_inventory_applyItemStats_000003A0:
     rlwinm r31, r28, 0, 28, 28
     cmplwi r31, 0x8
-    beq lbl_fn_80151448_000003BC
+    beq lbl_inventory_applyItemStats_000003BC
     lwz r0, 0x48(r27)
     cmpwi r0, 0x0
-    beq lbl_fn_80151448_000003BC
+    beq lbl_inventory_applyItemStats_000003BC
     ori r29, r29, 0x8
-lbl_fn_80151448_000003BC:
+lbl_inventory_applyItemStats_000003BC:
     cmplwi r31, 0x8
-    bne lbl_fn_80151448_000003C8
+    bne lbl_inventory_applyItemStats_000003C8
     oris r29, r29, 0x40
-lbl_fn_80151448_000003C8:
+lbl_inventory_applyItemStats_000003C8:
     rlwinm r0, r28, 0, 26, 26
     cmplwi r0, 0x20
-    beq lbl_fn_80151448_000003F8
+    beq lbl_inventory_applyItemStats_000003F8
     lwz r3, 0x8(r27)
     lwz r0, 0xac(r3)
     rlwinm r0, r0, 0, 21, 21
     cmpwi r0, 0x400
-    bne lbl_fn_80151448_000003F8
+    bne lbl_inventory_applyItemStats_000003F8
     lwz r0, 0x12a4(r26)
     srwi. r0, r0, 31
-    beq lbl_fn_80151448_000003F8
+    beq lbl_inventory_applyItemStats_000003F8
     ori r29, r29, 0x20
-lbl_fn_80151448_000003F8:
+lbl_inventory_applyItemStats_000003F8:
     rlwinm r3, r28, 0, 14, 14
     subis r0, r3, 0x2
     cmplwi r0, 0x0
-    beq lbl_fn_80151448_00000418
+    beq lbl_inventory_applyItemStats_00000418
     lwz r0, 0x12a8(r26)
     extrwi. r0, r0, 1, 1
-    beq lbl_fn_80151448_00000418
+    beq lbl_inventory_applyItemStats_00000418
     oris r29, r29, 0x2
-lbl_fn_80151448_00000418:
+lbl_inventory_applyItemStats_00000418:
     lwz r0, 0x44(r27)
     cmpwi r0, 0x0
-    bne lbl_fn_80151448_00000AB8
+    bne lbl_inventory_applyItemStats_00000AB8
     lwz r0, 0x12a4(r26)
     srwi. r0, r0, 31
-    beq lbl_fn_80151448_00000438
+    beq lbl_inventory_applyItemStats_00000438
     lfs f1, lbl_80881964
-    b lbl_fn_80151448_0000043C
-lbl_fn_80151448_00000438:
+    b lbl_inventory_applyItemStats_0000043C
+lbl_inventory_applyItemStats_00000438:
     lfs f1, lbl_80881968
-lbl_fn_80151448_0000043C:
+lbl_inventory_applyItemStats_0000043C:
     lfs f0, lbl_8088196C
     addi r3, r1, 0x138
     stfs f0, 0x74(r1)
@@ -430,11 +427,11 @@ lbl_fn_80151448_0000043C:
     rlwinm r0, r28, 0, 27, 27
     fmr f31, f1
     cmplwi r0, 0x10
-    bne lbl_fn_80151448_000004DC
+    bne lbl_inventory_applyItemStats_000004DC
     lwz r3, 0x0(r27)
     rlwinm r29, r29, 0, 28, 26
     cmpwi r3, 0x0
-    beq lbl_fn_80151448_000004DC
+    beq lbl_inventory_applyItemStats_000004DC
     addi r3, r3, 0x7d4
     li r4, -0x1
     li r5, 0x10
@@ -445,51 +442,51 @@ lbl_fn_80151448_0000043C:
     addi r3, r3, 0x7d4
     bl fn_80133F6C
     cmpwi r3, 0x0
-    bgt lbl_fn_80151448_000004DC
+    bgt lbl_inventory_applyItemStats_000004DC
     lwz r3, 0xc(r27)
     lwz r0, 0x94(r27)
     rlwinm r3, r3, 0, 7, 5
     stw r3, 0xc(r27)
     rlwinm r0, r0, 0, 7, 5
     stw r0, 0x94(r27)
-lbl_fn_80151448_000004DC:
+lbl_inventory_applyItemStats_000004DC:
     cmplwi r31, 0x8
-    beq lbl_fn_80151448_0000058C
+    beq lbl_inventory_applyItemStats_0000058C
     lwz r0, 0x12a4(r26)
     extrwi. r0, r0, 1, 26
-    beq lbl_fn_80151448_0000058C
+    beq lbl_inventory_applyItemStats_0000058C
     lwz r3, lbl_8087F0A8
     lfs f1, lbl_808819A8
     lfs f0, 0x334(r3)
     fmuls f1, f1, f0
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     fcmpo cr0, f31, f0
-    bgt lbl_fn_80151448_00000534
+    bgt lbl_inventory_applyItemStats_00000534
     lwz r0, 0x12a8(r26)
     extrwi. r0, r0, 1, 15
-    bne lbl_fn_80151448_00000534
+    bne lbl_inventory_applyItemStats_00000534
     lwz r0, lbl_8087F610
     cmpwi r0, 0x0
-    beq lbl_fn_80151448_0000058C
+    beq lbl_inventory_applyItemStats_0000058C
     lwz r0, 0x48(r26)
     cmpwi r0, 0x0
-    bne lbl_fn_80151448_0000058C
-lbl_fn_80151448_00000534:
+    bne lbl_inventory_applyItemStats_0000058C
+lbl_inventory_applyItemStats_00000534:
     lwz r5, 0x7e0(r26)
     li r4, 0x1
     rlwinm r3, r5, 0, 12, 12
     subis r0, r3, 0x8
     cmplwi r0, 0x0
-    beq lbl_fn_80151448_00000560
+    beq lbl_inventory_applyItemStats_00000560
     rlwinm r3, r5, 0, 7, 7
     subis r0, r3, 0x100
     cmplwi r0, 0x0
-    beq lbl_fn_80151448_00000560
+    beq lbl_inventory_applyItemStats_00000560
     li r4, 0x0
-lbl_fn_80151448_00000560:
+lbl_inventory_applyItemStats_00000560:
     cmpwi r4, 0x0
-    bne lbl_fn_80151448_0000058C
+    bne lbl_inventory_applyItemStats_0000058C
     lfs f1, 0x8d8(r26)
     lfs f0, lbl_808819C4
     fabs f1, f1
@@ -497,50 +494,50 @@ lbl_fn_80151448_00000560:
     fcmpo cr0, f1, f0
     mfcr r0
     srwi. r0, r0, 31
-    bne lbl_fn_80151448_0000058C
+    bne lbl_inventory_applyItemStats_0000058C
     ori r29, r29, 0x8
-lbl_fn_80151448_0000058C:
+lbl_inventory_applyItemStats_0000058C:
     lwz r3, lbl_8087F048
     cmpwi r3, 0x0
-    beq lbl_fn_80151448_000005C8
+    beq lbl_inventory_applyItemStats_000005C8
     mr r5, r26
     mr r6, r26
     li r4, 0x5
     bl fn_8010CD3C
     cmpwi r3, 0x0
-    beq lbl_fn_80151448_000005C8
+    beq lbl_inventory_applyItemStats_000005C8
     lwz r3, lbl_8087F048
     mr r5, r26
     mr r6, r26
     li r4, 0x5
     bl fn_8010CF28
     ori r29, r29, 0x20
-lbl_fn_80151448_000005C8:
+lbl_inventory_applyItemStats_000005C8:
     rlwinm r0, r28, 0, 24, 24
     cmplwi r0, 0x80
-    beq lbl_fn_80151448_00000608
+    beq lbl_inventory_applyItemStats_00000608
     lwz r3, 0x4(r27)
     cmpwi r3, 0x0
-    beq lbl_fn_80151448_00000608
+    beq lbl_inventory_applyItemStats_00000608
     lwz r0, 0x7e0(r3)
     rlwinm r0, r0, 0, 27, 27
     cmplwi r0, 0x10
-    bne lbl_fn_80151448_000005F4
+    bne lbl_inventory_applyItemStats_000005F4
     ori r29, r29, 0x80
-lbl_fn_80151448_000005F4:
+lbl_inventory_applyItemStats_000005F4:
     lwz r0, 0x7e0(r3)
     rlwinm r0, r0, 0, 17, 17
     cmplwi r0, 0x4000
-    bne lbl_fn_80151448_00000608
+    bne lbl_inventory_applyItemStats_00000608
     ori r29, r29, 0x80
-lbl_fn_80151448_00000608:
+lbl_inventory_applyItemStats_00000608:
     lwz r31, 0x0(r27)
     li r28, 0x0
     cmpwi r31, 0x0
-    beq lbl_fn_80151448_000007D0
+    beq lbl_inventory_applyItemStats_000007D0
     lwz r0, 0xf80(r31)
     cmpwi r0, 0x0
-    bne lbl_fn_80151448_00000644
+    bne lbl_inventory_applyItemStats_00000644
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x168(r1)
@@ -548,8 +545,8 @@ lbl_fn_80151448_00000608:
     lwz r0, 0x8(r5)
     stw r3, 0x16c(r1)
     stw r0, 0x170(r1)
-    b lbl_fn_80151448_00000660
-lbl_fn_80151448_00000644:
+    b lbl_inventory_applyItemStats_00000660
+lbl_inventory_applyItemStats_00000644:
     addi r3, r30, 0x5c4
     lwz r5, 0x5c4(r30)
     lwz r4, 0x4(r3)
@@ -557,7 +554,7 @@ lbl_fn_80151448_00000644:
     stw r5, 0x168(r1)
     stw r4, 0x16c(r1)
     stw r0, 0x170(r1)
-lbl_fn_80151448_00000660:
+lbl_inventory_applyItemStats_00000660:
     lwz r5, 0x168(r1)
     addi r3, r1, 0x5c
     lwz r4, 0x16c(r1)
@@ -567,24 +564,24 @@ lbl_fn_80151448_00000660:
     stw r0, 0x64(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_80151448_000006A0
+    beq lbl_inventory_applyItemStats_000006A0
     lwz r3, 0xf80(r31)
     lwz r12, 0x0(r3)
     lwz r12, 0x30(r12)
     mtctr r12
     bctrl
-    b lbl_fn_80151448_000006A4
-lbl_fn_80151448_000006A0:
+    b lbl_inventory_applyItemStats_000006A4
+lbl_inventory_applyItemStats_000006A0:
     li r3, 0x0
-lbl_fn_80151448_000006A4:
+lbl_inventory_applyItemStats_000006A4:
     cmpwi r3, 0x0
-    bne lbl_fn_80151448_000006B0
+    bne lbl_inventory_applyItemStats_000006B0
     li r28, 0x1
-lbl_fn_80151448_000006B0:
+lbl_inventory_applyItemStats_000006B0:
     lwz r31, 0x0(r27)
     lwz r0, 0xf80(r31)
     cmpwi r0, 0x0
-    bne lbl_fn_80151448_000006E0
+    bne lbl_inventory_applyItemStats_000006E0
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x174(r1)
@@ -592,8 +589,8 @@ lbl_fn_80151448_000006B0:
     lwz r0, 0x8(r5)
     stw r3, 0x178(r1)
     stw r0, 0x17c(r1)
-    b lbl_fn_80151448_000006FC
-lbl_fn_80151448_000006E0:
+    b lbl_inventory_applyItemStats_000006FC
+lbl_inventory_applyItemStats_000006E0:
     addi r3, r30, 0x5d0
     lwz r5, 0x5d0(r30)
     lwz r4, 0x4(r3)
@@ -601,7 +598,7 @@ lbl_fn_80151448_000006E0:
     stw r5, 0x174(r1)
     stw r4, 0x178(r1)
     stw r0, 0x17c(r1)
-lbl_fn_80151448_000006FC:
+lbl_inventory_applyItemStats_000006FC:
     lwz r5, 0x174(r1)
     addi r3, r1, 0x50
     lwz r4, 0x178(r1)
@@ -611,60 +608,60 @@ lbl_fn_80151448_000006FC:
     stw r0, 0x58(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_80151448_0000073C
+    beq lbl_inventory_applyItemStats_0000073C
     lwz r3, 0xf80(r31)
     lwz r12, 0x0(r3)
     lwz r12, 0x30(r12)
     mtctr r12
     bctrl
-    b lbl_fn_80151448_00000740
-lbl_fn_80151448_0000073C:
+    b lbl_inventory_applyItemStats_00000740
+lbl_inventory_applyItemStats_0000073C:
     li r3, 0x0
-lbl_fn_80151448_00000740:
+lbl_inventory_applyItemStats_00000740:
     srwi r4, r3, 31
     clrlwi r0, r3, 31
     xor r0, r0, r4
     subf. r0, r4, r0
-    bne lbl_fn_80151448_000007B0
+    bne lbl_inventory_applyItemStats_000007B0
     lwz r3, 0x0(r27)
     lwz r0, 0x12d0(r3)
     addi r4, r3, 0x12d4
     mtctr r0
     cmplwi r0, 0x0
-    ble lbl_fn_80151448_000007A0
-lbl_fn_80151448_0000076C:
+    ble lbl_inventory_applyItemStats_000007A0
+lbl_inventory_applyItemStats_0000076C:
     lwz r5, 0x0(r4)
     lwz r0, 0xac(r5)
     rlwinm r3, r0, 0, 5, 5
     subis r0, r3, 0x400
     cmplwi r0, 0x0
-    bne lbl_fn_80151448_00000798
+    bne lbl_inventory_applyItemStats_00000798
     lwz r3, 0x4(r5)
     cmpwi r3, 0x0
-    ble lbl_fn_80151448_00000798
+    ble lbl_inventory_applyItemStats_00000798
     bl task_findEntryById
-    b lbl_fn_80151448_000007A4
-lbl_fn_80151448_00000798:
+    b lbl_inventory_applyItemStats_000007A4
+lbl_inventory_applyItemStats_00000798:
     addi r4, r4, 0x14
-    bdnz lbl_fn_80151448_0000076C
-lbl_fn_80151448_000007A0:
+    bdnz lbl_inventory_applyItemStats_0000076C
+lbl_inventory_applyItemStats_000007A0:
     li r3, 0x0
-lbl_fn_80151448_000007A4:
+lbl_inventory_applyItemStats_000007A4:
     cmpwi r3, 0x0
-    beq lbl_fn_80151448_000007B0
+    beq lbl_inventory_applyItemStats_000007B0
     li r28, 0x1
-lbl_fn_80151448_000007B0:
+lbl_inventory_applyItemStats_000007B0:
     lwz r31, 0x0(r27)
     lwz r0, 0x55c(r31)
     cmpwi r0, 0x6
-    bne lbl_fn_80151448_000007D0
+    bne lbl_inventory_applyItemStats_000007D0
     lwz r0, 0x560(r31)
     cmpwi r0, 0x9
-    bne lbl_fn_80151448_000007D0
+    bne lbl_inventory_applyItemStats_000007D0
     li r28, 0x1
-lbl_fn_80151448_000007D0:
+lbl_inventory_applyItemStats_000007D0:
     cmpwi r28, 0x0
-    beq lbl_fn_80151448_000007FC
+    beq lbl_inventory_applyItemStats_000007FC
     lwz r12, 0x0(r26)
     mr r3, r26
     mr r4, r31
@@ -673,23 +670,23 @@ lbl_fn_80151448_000007D0:
     bctrl
     lwz r0, 0xfe4(r26)
     stw r0, 0x74(r27)
-    b lbl_fn_80151448_00000804
-lbl_fn_80151448_000007FC:
+    b lbl_inventory_applyItemStats_00000804
+lbl_inventory_applyItemStats_000007FC:
     li r0, 0x0
     stw r0, 0x74(r27)
-lbl_fn_80151448_00000804:
+lbl_inventory_applyItemStats_00000804:
     lwz r3, lbl_8087F430
     li r4, 0x548
     bl world_getGlobalFlag
     cmpwi r3, 0x1
-    bne lbl_fn_80151448_00000854
+    bne lbl_inventory_applyItemStats_00000854
     lwz r0, 0x48(r26)
     cmpwi r0, 0x0
-    beq lbl_fn_80151448_00000854
+    beq lbl_inventory_applyItemStats_00000854
     lwz r3, 0x8(r27)
     lwz r0, 0x4(r3)
     cmpwi r0, 0xd0
-    beq lbl_fn_80151448_00000854
+    beq lbl_inventory_applyItemStats_00000854
     lwz r3, 0x0(r27)
     ori r29, r29, 0x2008
     li r4, 0x1
@@ -697,59 +694,59 @@ lbl_fn_80151448_00000804:
     lwz r12, 0x7c(r12)
     mtctr r12
     bctrl
-    b lbl_fn_80151448_00000964
-lbl_fn_80151448_00000854:
+    b lbl_inventory_applyItemStats_00000964
+lbl_inventory_applyItemStats_00000854:
     lwz r3, lbl_8087F430
     li r4, 0x28
     bl world_getGlobalFlag
     cmpwi r3, 0x0
-    bne lbl_fn_80151448_00000964
+    bne lbl_inventory_applyItemStats_00000964
     lwz r3, 0x0(r27)
     cmpwi r3, 0x0
-    beq lbl_fn_80151448_00000964
+    beq lbl_inventory_applyItemStats_00000964
     lwz r0, 0x958(r3)
     rlwinm r0, r0, 0, 29, 29
     cmplwi r0, 0x4
-    beq lbl_fn_80151448_00000964
+    beq lbl_inventory_applyItemStats_00000964
     rlwinm r0, r29, 0, 28, 28
     li r28, 0x0
     cmplwi r0, 0x8
-    bne lbl_fn_80151448_000008B8
+    bne lbl_inventory_applyItemStats_000008B8
     lwz r3, 0x12a4(r26)
     extrwi. r0, r3, 1, 26
-    beq lbl_fn_80151448_000008B8
+    beq lbl_inventory_applyItemStats_000008B8
     srwi. r0, r3, 31
-    bne lbl_fn_80151448_000008B8
+    bne lbl_inventory_applyItemStats_000008B8
     lwz r0, 0x80(r27)
     srwi. r0, r0, 31
-    bne lbl_fn_80151448_000008B8
+    bne lbl_inventory_applyItemStats_000008B8
     li r28, 0x1
-lbl_fn_80151448_000008B8:
+lbl_inventory_applyItemStats_000008B8:
     lwz r0, lbl_8087F610
     cmpwi r0, 0x0
-    bne lbl_fn_80151448_000008F8
+    bne lbl_inventory_applyItemStats_000008F8
     addi r3, r26, 0x7d4
     li r4, 0x2
     li r5, 0x0
     bl fn_801346C8
     cmpwi r3, 0x0
-    bne lbl_fn_80151448_000008F8
+    bne lbl_inventory_applyItemStats_000008F8
     addi r3, r26, 0x7d4
     li r4, 0x3
     li r5, 0x0
     bl fn_801346C8
     cmpwi r3, 0x0
-    bne lbl_fn_80151448_000008F8
+    bne lbl_inventory_applyItemStats_000008F8
     li r28, 0x0
-lbl_fn_80151448_000008F8:
+lbl_inventory_applyItemStats_000008F8:
     cmpwi r28, 0x0
-    beq lbl_fn_80151448_00000964
+    beq lbl_inventory_applyItemStats_00000964
     lwz r5, 0x0(r27)
     mr r4, r26
     li r3, 0x1
     bl fn_80041A28
     cmpwi r3, 0x3
-    bne lbl_fn_80151448_00000938
+    bne lbl_inventory_applyItemStats_00000938
     lwz r3, 0x0(r27)
     ori r29, r29, 0x2008
     li r4, 0x1
@@ -757,21 +754,21 @@ lbl_fn_80151448_000008F8:
     lwz r12, 0x7c(r12)
     mtctr r12
     bctrl
-    b lbl_fn_80151448_00000964
-lbl_fn_80151448_00000938:
+    b lbl_inventory_applyItemStats_00000964
+lbl_inventory_applyItemStats_00000938:
     lwz r0, 0x12a4(r26)
     li r3, 0x0
     extrwi. r0, r0, 1, 26
-    beq lbl_fn_80151448_00000958
+    beq lbl_inventory_applyItemStats_00000958
     lwz r0, 0xf58(r26)
     cmpwi r0, 0xf
-    blt lbl_fn_80151448_00000958
+    blt lbl_inventory_applyItemStats_00000958
     li r3, 0x1
-lbl_fn_80151448_00000958:
+lbl_inventory_applyItemStats_00000958:
     lwz r0, 0x12a4(r26)
     rlwimi r0, r3, 9, 22, 22
     stw r0, 0x12a4(r26)
-lbl_fn_80151448_00000964:
+lbl_inventory_applyItemStats_00000964:
     lfs f0, lbl_80881964
     li r0, 0x0
     li r3, 0x1
@@ -801,37 +798,37 @@ lbl_fn_80151448_00000964:
     bl fn_8003EA3C
     lwz r0, 0x80(r27)
     extrwi. r0, r0, 1, 1
-    beq lbl_fn_80151448_000009E4
+    beq lbl_inventory_applyItemStats_000009E4
     rlwinm r29, r29, 0, 29, 27
     oris r29, r29, 0x20
-lbl_fn_80151448_000009E4:
+lbl_inventory_applyItemStats_000009E4:
     lwz r0, 0x80(r27)
     extrwi. r0, r0, 1, 2
-    beq lbl_fn_80151448_000009F4
+    beq lbl_inventory_applyItemStats_000009F4
     rlwinm r29, r29, 0, 7, 5
-lbl_fn_80151448_000009F4:
+lbl_inventory_applyItemStats_000009F4:
     lwz r0, 0x80(r27)
     extrwi. r0, r0, 1, 3
-    beq lbl_fn_80151448_00000A04
+    beq lbl_inventory_applyItemStats_00000A04
     rlwinm r29, r29, 0, 17, 15
-lbl_fn_80151448_00000A04:
+lbl_inventory_applyItemStats_00000A04:
     lwz r3, 0x4(r27)
     cmpwi r3, 0x0
-    beq lbl_fn_80151448_00000A38
+    beq lbl_inventory_applyItemStats_00000A38
     lwz r0, 0x48(r3)
     cmpwi r0, 0x2
-    bne lbl_fn_80151448_00000A38
+    bne lbl_inventory_applyItemStats_00000A38
     lwz r0, 0x68(r27)
     cmpwi r0, 0x0
-    bge lbl_fn_80151448_00000A38
+    bge lbl_inventory_applyItemStats_00000A38
     lwz r4, 0x0(r27)
     mr r3, r26
     li r5, 0x1
     bl fn_80150460
-lbl_fn_80151448_00000A38:
+lbl_inventory_applyItemStats_00000A38:
     lwz r0, 0x64(r27)
     cmpwi r0, 0x1
-    bne lbl_fn_80151448_00000A64
+    bne lbl_inventory_applyItemStats_00000A64
     lwz r4, 0x34(r27)
     mr r3, r26
     lwz r7, 0x38(r27)
@@ -840,47 +837,47 @@ lbl_fn_80151448_00000A38:
     addi r5, r27, 0x10
     addi r6, r27, 0x1c
     bl fn_8015076C
-lbl_fn_80151448_00000A64:
+lbl_inventory_applyItemStats_00000A64:
     lwz r3, 0x8(r27)
     rlwinm r0, r29, 0, 26, 26
     cmplwi r0, 0x20
     lwz r0, 0xc4(r3)
     stw r0, 0x88(r27)
-    bne lbl_fn_80151448_00000A88
+    bne lbl_inventory_applyItemStats_00000A88
     li r0, 0x2
     stw r0, 0x84(r27)
-    b lbl_fn_80151448_00000AA8
-lbl_fn_80151448_00000A88:
+    b lbl_inventory_applyItemStats_00000AA8
+lbl_inventory_applyItemStats_00000A88:
     rlwinm r0, r29, 0, 28, 28
     cmplwi r0, 0x8
-    bne lbl_fn_80151448_00000AA0
+    bne lbl_inventory_applyItemStats_00000AA0
     li r0, 0x1
     stw r0, 0x84(r27)
-    b lbl_fn_80151448_00000AA8
-lbl_fn_80151448_00000AA0:
+    b lbl_inventory_applyItemStats_00000AA8
+lbl_inventory_applyItemStats_00000AA0:
     li r0, 0x0
     stw r0, 0x84(r27)
-lbl_fn_80151448_00000AA8:
+lbl_inventory_applyItemStats_00000AA8:
     li r0, 0x1
     stw r0, 0x8c(r27)
     stw r0, 0x90(r27)
-    b lbl_fn_80151448_0000172C
-lbl_fn_80151448_00000AB8:
+    b lbl_inventory_applyItemStats_0000172C
+lbl_inventory_applyItemStats_00000AB8:
     cmpwi r0, 0x1
-    bne lbl_fn_80151448_000010DC
+    bne lbl_inventory_applyItemStats_000010DC
     cmplwi r31, 0x8
-    beq lbl_fn_80151448_00000BB8
+    beq lbl_inventory_applyItemStats_00000BB8
     lwz r3, 0x12a4(r26)
     lwz r31, lbl_8087F0A8
     extrwi. r0, r3, 1, 26
-    beq lbl_fn_80151448_00000BB8
+    beq lbl_inventory_applyItemStats_00000BB8
     srwi. r0, r3, 31
-    beq lbl_fn_80151448_00000AE8
+    beq lbl_inventory_applyItemStats_00000AE8
     lfs f1, lbl_80881964
-    b lbl_fn_80151448_00000AEC
-lbl_fn_80151448_00000AE8:
+    b lbl_inventory_applyItemStats_00000AEC
+lbl_inventory_applyItemStats_00000AE8:
     lfs f1, lbl_80881968
-lbl_fn_80151448_00000AEC:
+lbl_inventory_applyItemStats_00000AEC:
     lfs f0, lbl_8088196C
     addi r3, r1, 0x108
     stfs f0, 0x68(r1)
@@ -900,31 +897,31 @@ lbl_fn_80151448_00000AEC:
     fmr f31, f1
     lfs f0, 0x334(r31)
     fmuls f1, f2, f0
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     fcmpo cr0, f31, f0
-    bgt lbl_fn_80151448_00000B60
+    bgt lbl_inventory_applyItemStats_00000B60
     lwz r0, lbl_8087F610
     cmpwi r0, 0x0
-    beq lbl_fn_80151448_00000BB8
+    beq lbl_inventory_applyItemStats_00000BB8
     lwz r0, 0x48(r26)
     cmpwi r0, 0x0
-    bne lbl_fn_80151448_00000BB8
-lbl_fn_80151448_00000B60:
+    bne lbl_inventory_applyItemStats_00000BB8
+lbl_inventory_applyItemStats_00000B60:
     lwz r5, 0x7e0(r26)
     li r4, 0x1
     rlwinm r3, r5, 0, 12, 12
     subis r0, r3, 0x8
     cmplwi r0, 0x0
-    beq lbl_fn_80151448_00000B8C
+    beq lbl_inventory_applyItemStats_00000B8C
     rlwinm r3, r5, 0, 7, 7
     subis r0, r3, 0x100
     cmplwi r0, 0x0
-    beq lbl_fn_80151448_00000B8C
+    beq lbl_inventory_applyItemStats_00000B8C
     li r4, 0x0
-lbl_fn_80151448_00000B8C:
+lbl_inventory_applyItemStats_00000B8C:
     cmpwi r4, 0x0
-    bne lbl_fn_80151448_00000BB8
+    bne lbl_inventory_applyItemStats_00000BB8
     lfs f1, 0x8d8(r26)
     lfs f0, lbl_808819C4
     fabs f1, f1
@@ -932,33 +929,33 @@ lbl_fn_80151448_00000B8C:
     fcmpo cr0, f1, f0
     mfcr r0
     srwi. r0, r0, 31
-    bne lbl_fn_80151448_00000BB8
+    bne lbl_inventory_applyItemStats_00000BB8
     ori r29, r29, 0x8
-lbl_fn_80151448_00000BB8:
+lbl_inventory_applyItemStats_00000BB8:
     clrlwi r0, r28, 31
     cmplwi r0, 0x1
-    beq lbl_fn_80151448_00000C0C
+    beq lbl_inventory_applyItemStats_00000C0C
     lwz r0, 0x48(r26)
     cmpwi r0, 0x0
-    beq lbl_fn_80151448_00000BDC
+    beq lbl_inventory_applyItemStats_00000BDC
     lwz r0, lbl_8087F610
     cmpwi r0, 0x0
-    beq lbl_fn_80151448_00000C0C
-lbl_fn_80151448_00000BDC:
+    beq lbl_inventory_applyItemStats_00000C0C
+lbl_inventory_applyItemStats_00000BDC:
     lwz r0, 0x12a4(r26)
     srwi. r0, r0, 31
-    beq lbl_fn_80151448_00000C0C
+    beq lbl_inventory_applyItemStats_00000C0C
     li r3, 0x0
-    beq lbl_fn_80151448_00000C00
+    beq lbl_inventory_applyItemStats_00000C00
     lwz r0, 0xc48(r26)
     cmpwi r0, 0x0
-    beq lbl_fn_80151448_00000C00
+    beq lbl_inventory_applyItemStats_00000C00
     li r3, 0x1
-lbl_fn_80151448_00000C00:
+lbl_inventory_applyItemStats_00000C00:
     cmpwi r3, 0x0
-    bne lbl_fn_80151448_00000C0C
+    bne lbl_inventory_applyItemStats_00000C0C
     ori r29, r29, 0x1
-lbl_fn_80151448_00000C0C:
+lbl_inventory_applyItemStats_00000C0C:
     lfs f0, lbl_80881964
     li r0, 0x0
     stw r0, 0xe4(r1)
@@ -972,31 +969,31 @@ lbl_fn_80151448_00000C0C:
     lwz r0, 0x12a4(r26)
     extrwi r0, r0, 1, 9
     stw r0, 0xec(r1)
-    beq lbl_fn_80151448_00000C80
+    beq lbl_inventory_applyItemStats_00000C80
     lwz r4, 0x0(r27)
     cmpwi r4, 0x0
-    beq lbl_fn_80151448_00000C80
+    beq lbl_inventory_applyItemStats_00000C80
     lwz r0, 0x48(r4)
     cmpwi r0, 0x0
-    bne lbl_fn_80151448_00000C80
+    bne lbl_inventory_applyItemStats_00000C80
     lwz r4, 0x8(r27)
     cmpwi r4, 0x0
-    beq lbl_fn_80151448_00000C80
+    beq lbl_inventory_applyItemStats_00000C80
     lwz r0, 0x4(r4)
     cmpwi r0, 0x133
-    bne lbl_fn_80151448_00000C80
+    bne lbl_inventory_applyItemStats_00000C80
     li r4, 0xda
     bl world_getGlobalFlag
     stw r3, 0xe4(r1)
-lbl_fn_80151448_00000C80:
+lbl_inventory_applyItemStats_00000C80:
     lwz r3, 0x0(r27)
     cmpwi r3, 0x0
-    beq lbl_fn_80151448_00000CE4
+    beq lbl_inventory_applyItemStats_00000CE4
     addi r3, r3, 0x7d4
     li r4, 0x43
     bl fn_80134134
     cmpwi r3, 0x0
-    beq lbl_fn_80151448_00000CE4
+    beq lbl_inventory_applyItemStats_00000CE4
     lwz r3, 0x0(r27)
     li r4, 0x43
     li r5, -0x1
@@ -1014,7 +1011,7 @@ lbl_fn_80151448_00000C80:
     fadds f0, f1, f0
     fdivs f0, f1, f0
     stfs f0, 0xe8(r1)
-lbl_fn_80151448_00000CE4:
+lbl_inventory_applyItemStats_00000CE4:
     lwz r4, 0x8(r27)
     mr r7, r29
     lwz r5, 0x0(r27)
@@ -1026,23 +1023,23 @@ lbl_fn_80151448_00000CE4:
     bl fn_8003EA3C
     lwz r0, 0x80(r27)
     extrwi. r0, r0, 1, 1
-    beq lbl_fn_80151448_00000D1C
+    beq lbl_inventory_applyItemStats_00000D1C
     rlwinm r29, r29, 0, 29, 27
     oris r29, r29, 0x20
-lbl_fn_80151448_00000D1C:
+lbl_inventory_applyItemStats_00000D1C:
     lwz r0, 0x80(r27)
     extrwi. r0, r0, 1, 2
-    beq lbl_fn_80151448_00000D2C
+    beq lbl_inventory_applyItemStats_00000D2C
     rlwinm r29, r29, 0, 7, 5
-lbl_fn_80151448_00000D2C:
+lbl_inventory_applyItemStats_00000D2C:
     lwz r0, 0x80(r27)
     extrwi. r0, r0, 1, 3
-    beq lbl_fn_80151448_00000D3C
+    beq lbl_inventory_applyItemStats_00000D3C
     rlwinm r29, r29, 0, 17, 15
-lbl_fn_80151448_00000D3C:
+lbl_inventory_applyItemStats_00000D3C:
     lwz r0, 0x64(r27)
     cmpwi r0, 0x1
-    bne lbl_fn_80151448_00000D68
+    bne lbl_inventory_applyItemStats_00000D68
     lwz r4, 0x34(r27)
     mr r3, r26
     lwz r7, 0x38(r27)
@@ -1051,7 +1048,7 @@ lbl_fn_80151448_00000D3C:
     addi r5, r27, 0x10
     addi r6, r27, 0x1c
     bl fn_8015076C
-lbl_fn_80151448_00000D68:
+lbl_inventory_applyItemStats_00000D68:
     lwz r5, 0x8(r27)
     extrwi r3, r29, 1, 28
     li r0, 0x1
@@ -1064,17 +1061,17 @@ lbl_fn_80151448_00000D68:
     rlwinm r3, r0, 0, 16, 16
     addis r0, r3, 0x0
     cmplwi r0, 0x8000
-    bne lbl_fn_80151448_0000172C
+    bne lbl_inventory_applyItemStats_0000172C
     mr r3, r26
     bl fn_80151270
     cmpwi r3, 0x0
-    beq lbl_fn_80151448_000010C0
+    beq lbl_inventory_applyItemStats_000010C0
     lwz r0, 0x12a4(r26)
     extrwi. r0, r0, 1, 29
-    bne lbl_fn_80151448_000010C0
+    bne lbl_inventory_applyItemStats_000010C0
     lwz r3, 0x1208(r26)
     cmpwi r3, 0x0
-    beq lbl_fn_80151448_00000E14
+    beq lbl_inventory_applyItemStats_00000E14
     lfs f0, lbl_8088196C
     li r28, 0x0
     li r0, 0x3
@@ -1095,7 +1092,7 @@ lbl_fn_80151448_00000D68:
     li r0, 0xff
     stb r0, 0x520(r3)
     stw r28, 0x1208(r26)
-lbl_fn_80151448_00000E14:
+lbl_inventory_applyItemStats_00000E14:
     lis r5, lbl_80737A9C@ha
     li r3, 0x18
     addi r5, r5, lbl_80737A9C@l
@@ -1106,18 +1103,18 @@ lbl_fn_80151448_00000E14:
     bl mem_alloc
     cmpwi r3, 0x0
     mr r31, r3
-    beq lbl_fn_80151448_00000E50
+    beq lbl_inventory_applyItemStats_00000E50
     mr r4, r26
     li r5, 0x1
     bl fn_801C8938
     mr r31, r3
-lbl_fn_80151448_00000E50:
+lbl_inventory_applyItemStats_00000E50:
     lwz r0, 0x55c(r26)
     cmpwi r0, 0x6
-    bne lbl_fn_80151448_00000EE0
+    bne lbl_inventory_applyItemStats_00000EE0
     lwz r0, 0xf80(r26)
     cmpwi r0, 0x0
-    bne lbl_fn_80151448_00000E88
+    bne lbl_inventory_applyItemStats_00000E88
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x188(r1)
@@ -1125,8 +1122,8 @@ lbl_fn_80151448_00000E50:
     lwz r0, 0x8(r5)
     stw r3, 0x18c(r1)
     stw r0, 0x190(r1)
-    b lbl_fn_80151448_00000EA4
-lbl_fn_80151448_00000E88:
+    b lbl_inventory_applyItemStats_00000EA4
+lbl_inventory_applyItemStats_00000E88:
     addi r3, r30, 0x5dc
     lwz r5, 0x5dc(r30)
     lwz r4, 0x4(r3)
@@ -1134,7 +1131,7 @@ lbl_fn_80151448_00000E88:
     stw r5, 0x188(r1)
     stw r4, 0x18c(r1)
     stw r0, 0x190(r1)
-lbl_fn_80151448_00000EA4:
+lbl_inventory_applyItemStats_00000EA4:
     lwz r5, 0x188(r1)
     addi r3, r1, 0x44
     lwz r4, 0x18c(r1)
@@ -1144,26 +1141,26 @@ lbl_fn_80151448_00000EA4:
     stw r0, 0x4c(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_80151448_00000EE0
+    beq lbl_inventory_applyItemStats_00000EE0
     lwz r3, 0xf80(r26)
     lwz r12, 0x0(r3)
     lwz r12, 0x1c(r12)
     mtctr r12
     bctrl
-lbl_fn_80151448_00000EE0:
+lbl_inventory_applyItemStats_00000EE0:
     lwz r0, 0x55c(r26)
     cmpwi r0, 0x6
-    beq lbl_fn_80151448_00001094
+    beq lbl_inventory_applyItemStats_00001094
     cmpwi r0, 0x8
-    beq lbl_fn_80151448_00000EF8
+    beq lbl_inventory_applyItemStats_00000EF8
     stw r0, 0x564(r26)
-lbl_fn_80151448_00000EF8:
+lbl_inventory_applyItemStats_00000EF8:
     lwz r0, 0x55c(r26)
     cmpwi r0, 0x6
-    bne lbl_fn_80151448_00001094
+    bne lbl_inventory_applyItemStats_00001094
     lwz r0, 0xf80(r26)
     cmpwi r0, 0x0
-    bne lbl_fn_80151448_00000F30
+    bne lbl_inventory_applyItemStats_00000F30
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x194(r1)
@@ -1171,8 +1168,8 @@ lbl_fn_80151448_00000EF8:
     lwz r0, 0x8(r5)
     stw r3, 0x198(r1)
     stw r0, 0x19c(r1)
-    b lbl_fn_80151448_00000F4C
-lbl_fn_80151448_00000F30:
+    b lbl_inventory_applyItemStats_00000F4C
+lbl_inventory_applyItemStats_00000F30:
     addi r3, r30, 0x5e8
     lwz r5, 0x5e8(r30)
     lwz r4, 0x4(r3)
@@ -1180,7 +1177,7 @@ lbl_fn_80151448_00000F30:
     stw r5, 0x194(r1)
     stw r4, 0x198(r1)
     stw r0, 0x19c(r1)
-lbl_fn_80151448_00000F4C:
+lbl_inventory_applyItemStats_00000F4C:
     lwz r5, 0x194(r1)
     addi r3, r1, 0x2c
     lwz r4, 0x198(r1)
@@ -1190,26 +1187,26 @@ lbl_fn_80151448_00000F4C:
     stw r0, 0x34(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_80151448_00000F88
+    beq lbl_inventory_applyItemStats_00000F88
     lwz r3, 0xf80(r26)
     lwz r12, 0x0(r3)
     lwz r12, 0x1c(r12)
     mtctr r12
     bctrl
-lbl_fn_80151448_00000F88:
+lbl_inventory_applyItemStats_00000F88:
     lwz r0, 0x55c(r26)
     cmpwi r0, 0x6
-    beq lbl_fn_80151448_00001064
+    beq lbl_inventory_applyItemStats_00001064
     cmpwi r0, 0x8
-    beq lbl_fn_80151448_00000FA0
+    beq lbl_inventory_applyItemStats_00000FA0
     stw r0, 0x564(r26)
-lbl_fn_80151448_00000FA0:
+lbl_inventory_applyItemStats_00000FA0:
     lwz r0, 0x55c(r26)
     cmpwi r0, 0x6
-    bne lbl_fn_80151448_00001064
+    bne lbl_inventory_applyItemStats_00001064
     lwz r0, 0xf80(r26)
     cmpwi r0, 0x0
-    bne lbl_fn_80151448_00000FD8
+    bne lbl_inventory_applyItemStats_00000FD8
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x1a0(r1)
@@ -1217,8 +1214,8 @@ lbl_fn_80151448_00000FA0:
     lwz r0, 0x8(r5)
     stw r3, 0x1a4(r1)
     stw r0, 0x1a8(r1)
-    b lbl_fn_80151448_00000FF4
-lbl_fn_80151448_00000FD8:
+    b lbl_inventory_applyItemStats_00000FF4
+lbl_inventory_applyItemStats_00000FD8:
     addi r3, r30, 0x5f4
     lwz r5, 0x5f4(r30)
     lwz r4, 0x4(r3)
@@ -1226,7 +1223,7 @@ lbl_fn_80151448_00000FD8:
     stw r5, 0x1a0(r1)
     stw r4, 0x1a4(r1)
     stw r0, 0x1a8(r1)
-lbl_fn_80151448_00000FF4:
+lbl_inventory_applyItemStats_00000FF4:
     lwz r5, 0x1a0(r1)
     addi r3, r1, 0x38
     lwz r4, 0x1a4(r1)
@@ -1236,13 +1233,13 @@ lbl_fn_80151448_00000FF4:
     stw r0, 0x40(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_80151448_00001030
+    beq lbl_inventory_applyItemStats_00001030
     lwz r3, 0xf80(r26)
     lwz r12, 0x0(r3)
     lwz r12, 0x1c(r12)
     mtctr r12
     bctrl
-lbl_fn_80151448_00001030:
+lbl_inventory_applyItemStats_00001030:
     mr r3, r26
     li r4, 0x6
     bl actor_setState
@@ -1250,121 +1247,121 @@ lbl_fn_80151448_00001030:
     li r0, 0x0
     cmpwi r3, 0x0
     stw r0, 0xf80(r26)
-    beq lbl_fn_80151448_00001064
+    beq lbl_inventory_applyItemStats_00001064
     lwz r12, 0x0(r3)
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-lbl_fn_80151448_00001064:
+lbl_inventory_applyItemStats_00001064:
     lwz r3, 0xf80(r26)
     li r4, 0x6
     li r0, 0x0
     stw r4, 0x55c(r26)
     cmpwi r3, 0x0
     stw r0, 0xf80(r26)
-    beq lbl_fn_80151448_00001094
+    beq lbl_inventory_applyItemStats_00001094
     lwz r12, 0x0(r3)
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-lbl_fn_80151448_00001094:
+lbl_inventory_applyItemStats_00001094:
     lwz r3, 0xf80(r26)
     li r0, 0x6
     stw r0, 0x55c(r26)
     cmpwi r3, 0x0
     stw r31, 0xf80(r26)
-    beq lbl_fn_80151448_000010C0
+    beq lbl_inventory_applyItemStats_000010C0
     lwz r12, 0x0(r3)
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-lbl_fn_80151448_000010C0:
+lbl_inventory_applyItemStats_000010C0:
     lwz r3, 0x8(r27)
     lwz r0, 0x4(r3)
     cmpwi r0, 0x147
-    bne lbl_fn_80151448_0000172C
+    bne lbl_inventory_applyItemStats_0000172C
     li r0, 0x0
     stw r0, 0x90(r27)
-    b lbl_fn_80151448_0000172C
-lbl_fn_80151448_000010DC:
+    b lbl_inventory_applyItemStats_0000172C
+lbl_inventory_applyItemStats_000010DC:
     cmpwi r0, 0x2
-    bne lbl_fn_80151448_00001664
+    bne lbl_inventory_applyItemStats_00001664
     cmplwi r31, 0x8
-    beq lbl_fn_80151448_00001214
+    beq lbl_inventory_applyItemStats_00001214
     lwz r3, 0x8(r27)
     lbz r0, 0x1(r3)
     cmpwi r0, 0x1
-    bne lbl_fn_80151448_000011B0
+    bne lbl_inventory_applyItemStats_000011B0
     lwz r0, 0x48(r26)
     cmpwi r0, 0x0
-    beq lbl_fn_80151448_00001114
+    beq lbl_inventory_applyItemStats_00001114
     lwz r0, lbl_8087F610
     cmpwi r0, 0x0
-    beq lbl_fn_80151448_0000114C
-lbl_fn_80151448_00001114:
+    beq lbl_inventory_applyItemStats_0000114C
+lbl_inventory_applyItemStats_00001114:
     lwz r0, 0x12a4(r26)
     srwi. r0, r0, 31
-    beq lbl_fn_80151448_0000114C
+    beq lbl_inventory_applyItemStats_0000114C
     li r3, 0x0
-    beq lbl_fn_80151448_00001138
+    beq lbl_inventory_applyItemStats_00001138
     lwz r0, 0xc48(r26)
     cmpwi r0, 0x0
-    beq lbl_fn_80151448_00001138
+    beq lbl_inventory_applyItemStats_00001138
     li r3, 0x1
-lbl_fn_80151448_00001138:
+lbl_inventory_applyItemStats_00001138:
     cmpwi r3, 0x0
-    bne lbl_fn_80151448_0000114C
+    bne lbl_inventory_applyItemStats_0000114C
     oris r29, r29, 0x8
     ori r29, r29, 0x9
-    b lbl_fn_80151448_00001214
-lbl_fn_80151448_0000114C:
+    b lbl_inventory_applyItemStats_00001214
+lbl_inventory_applyItemStats_0000114C:
     lwz r0, 0x12a4(r26)
     extrwi. r0, r0, 1, 26
-    beq lbl_fn_80151448_00001214
+    beq lbl_inventory_applyItemStats_00001214
     lwz r5, 0x7e0(r26)
     li r4, 0x1
     rlwinm r3, r5, 0, 12, 12
     subis r0, r3, 0x8
     cmplwi r0, 0x0
-    beq lbl_fn_80151448_00001184
+    beq lbl_inventory_applyItemStats_00001184
     rlwinm r3, r5, 0, 7, 7
     subis r0, r3, 0x100
     cmplwi r0, 0x0
-    beq lbl_fn_80151448_00001184
+    beq lbl_inventory_applyItemStats_00001184
     li r4, 0x0
-lbl_fn_80151448_00001184:
+lbl_inventory_applyItemStats_00001184:
     cmpwi r4, 0x0
-    bne lbl_fn_80151448_00001214
+    bne lbl_inventory_applyItemStats_00001214
     lfs f1, 0x8d8(r26)
     lfs f0, lbl_808819C4
     fabs f1, f1
     frsp f1, f1
     fcmpo cr0, f1, f0
-    blt lbl_fn_80151448_00001214
+    blt lbl_inventory_applyItemStats_00001214
     oris r29, r29, 0x8
     ori r29, r29, 0x8
-    b lbl_fn_80151448_00001214
-lbl_fn_80151448_000011B0:
+    b lbl_inventory_applyItemStats_00001214
+lbl_inventory_applyItemStats_000011B0:
     lwz r0, 0x12a4(r26)
     extrwi. r0, r0, 1, 26
-    beq lbl_fn_80151448_00001214
+    beq lbl_inventory_applyItemStats_00001214
     lwz r5, 0x7e0(r26)
     li r4, 0x1
     rlwinm r3, r5, 0, 12, 12
     subis r0, r3, 0x8
     cmplwi r0, 0x0
-    beq lbl_fn_80151448_000011E8
+    beq lbl_inventory_applyItemStats_000011E8
     rlwinm r3, r5, 0, 7, 7
     subis r0, r3, 0x100
     cmplwi r0, 0x0
-    beq lbl_fn_80151448_000011E8
+    beq lbl_inventory_applyItemStats_000011E8
     li r4, 0x0
-lbl_fn_80151448_000011E8:
+lbl_inventory_applyItemStats_000011E8:
     cmpwi r4, 0x0
-    bne lbl_fn_80151448_00001214
+    bne lbl_inventory_applyItemStats_00001214
     lfs f1, 0x8d8(r26)
     lfs f0, lbl_808819C4
     fabs f1, f1
@@ -1372,9 +1369,9 @@ lbl_fn_80151448_000011E8:
     fcmpo cr0, f1, f0
     mfcr r0
     srwi. r0, r0, 31
-    bne lbl_fn_80151448_00001214
+    bne lbl_inventory_applyItemStats_00001214
     ori r29, r29, 0x8
-lbl_fn_80151448_00001214:
+lbl_inventory_applyItemStats_00001214:
     lfs f0, lbl_80881964
     li r0, 0x0
     li r3, 0x1
@@ -1397,23 +1394,23 @@ lbl_fn_80151448_00001214:
     bl fn_8003EA3C
     lwz r0, 0x80(r27)
     extrwi. r0, r0, 1, 1
-    beq lbl_fn_80151448_00001278
+    beq lbl_inventory_applyItemStats_00001278
     rlwinm r29, r29, 0, 29, 27
     oris r29, r29, 0x20
-lbl_fn_80151448_00001278:
+lbl_inventory_applyItemStats_00001278:
     lwz r0, 0x80(r27)
     extrwi. r0, r0, 1, 2
-    beq lbl_fn_80151448_00001288
+    beq lbl_inventory_applyItemStats_00001288
     rlwinm r29, r29, 0, 7, 5
-lbl_fn_80151448_00001288:
+lbl_inventory_applyItemStats_00001288:
     lwz r0, 0x80(r27)
     extrwi. r0, r0, 1, 3
-    beq lbl_fn_80151448_00001298
+    beq lbl_inventory_applyItemStats_00001298
     rlwinm r29, r29, 0, 17, 15
-lbl_fn_80151448_00001298:
+lbl_inventory_applyItemStats_00001298:
     lwz r0, 0x64(r27)
     cmpwi r0, 0x1
-    bne lbl_fn_80151448_000012C4
+    bne lbl_inventory_applyItemStats_000012C4
     lwz r4, 0x34(r27)
     mr r3, r26
     lwz r7, 0x38(r27)
@@ -1422,18 +1419,18 @@ lbl_fn_80151448_00001298:
     addi r5, r27, 0x10
     addi r6, r27, 0x1c
     bl fn_8015076C
-lbl_fn_80151448_000012C4:
+lbl_inventory_applyItemStats_000012C4:
     lwz r3, 0x8(r27)
     li r0, -0x1
     stw r0, 0x88(r27)
     cmpwi r3, 0x0
-    beq lbl_fn_80151448_000012EC
+    beq lbl_inventory_applyItemStats_000012EC
     lwz r0, 0x4(r3)
     cmpwi r0, 0xa4
-    bne lbl_fn_80151448_000012EC
+    bne lbl_inventory_applyItemStats_000012EC
     li r0, 0x2
     stw r0, 0x88(r27)
-lbl_fn_80151448_000012EC:
+lbl_inventory_applyItemStats_000012EC:
     lwz r5, 0x0(r27)
     li r31, 0x0
     li r0, 0x1
@@ -1448,17 +1445,17 @@ lbl_fn_80151448_000012EC:
     rlwinm r3, r0, 0, 16, 16
     addis r0, r3, 0x0
     cmplwi r0, 0x8000
-    bne lbl_fn_80151448_0000172C
+    bne lbl_inventory_applyItemStats_0000172C
     mr r3, r26
     bl fn_80151270
     cmpwi r3, 0x0
-    beq lbl_fn_80151448_00001648
+    beq lbl_inventory_applyItemStats_00001648
     lwz r0, 0x12a4(r26)
     extrwi. r0, r0, 1, 29
-    bne lbl_fn_80151448_00001648
+    bne lbl_inventory_applyItemStats_00001648
     lwz r3, 0x1208(r26)
     cmpwi r3, 0x0
-    beq lbl_fn_80151448_0000139C
+    beq lbl_inventory_applyItemStats_0000139C
     lfs f0, lbl_8088196C
     li r0, 0x3
     stw r31, 0x84(r1)
@@ -1478,7 +1475,7 @@ lbl_fn_80151448_000012EC:
     li r0, 0xff
     stb r0, 0x520(r3)
     stw r31, 0x1208(r26)
-lbl_fn_80151448_0000139C:
+lbl_inventory_applyItemStats_0000139C:
     lis r5, lbl_80737A9C@ha
     li r3, 0x18
     addi r5, r5, lbl_80737A9C@l
@@ -1489,18 +1486,18 @@ lbl_fn_80151448_0000139C:
     bl mem_alloc
     cmpwi r3, 0x0
     mr r31, r3
-    beq lbl_fn_80151448_000013D8
+    beq lbl_inventory_applyItemStats_000013D8
     mr r4, r26
     li r5, 0x1
     bl fn_801C8938
     mr r31, r3
-lbl_fn_80151448_000013D8:
+lbl_inventory_applyItemStats_000013D8:
     lwz r0, 0x55c(r26)
     cmpwi r0, 0x6
-    bne lbl_fn_80151448_00001468
+    bne lbl_inventory_applyItemStats_00001468
     lwz r0, 0xf80(r26)
     cmpwi r0, 0x0
-    bne lbl_fn_80151448_00001410
+    bne lbl_inventory_applyItemStats_00001410
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x1ac(r1)
@@ -1508,8 +1505,8 @@ lbl_fn_80151448_000013D8:
     lwz r0, 0x8(r5)
     stw r3, 0x1b0(r1)
     stw r0, 0x1b4(r1)
-    b lbl_fn_80151448_0000142C
-lbl_fn_80151448_00001410:
+    b lbl_inventory_applyItemStats_0000142C
+lbl_inventory_applyItemStats_00001410:
     addi r3, r30, 0x600
     lwz r5, 0x600(r30)
     lwz r4, 0x4(r3)
@@ -1517,7 +1514,7 @@ lbl_fn_80151448_00001410:
     stw r5, 0x1ac(r1)
     stw r4, 0x1b0(r1)
     stw r0, 0x1b4(r1)
-lbl_fn_80151448_0000142C:
+lbl_inventory_applyItemStats_0000142C:
     lwz r5, 0x1ac(r1)
     addi r3, r1, 0x20
     lwz r4, 0x1b0(r1)
@@ -1527,26 +1524,26 @@ lbl_fn_80151448_0000142C:
     stw r0, 0x28(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_80151448_00001468
+    beq lbl_inventory_applyItemStats_00001468
     lwz r3, 0xf80(r26)
     lwz r12, 0x0(r3)
     lwz r12, 0x1c(r12)
     mtctr r12
     bctrl
-lbl_fn_80151448_00001468:
+lbl_inventory_applyItemStats_00001468:
     lwz r0, 0x55c(r26)
     cmpwi r0, 0x6
-    beq lbl_fn_80151448_0000161C
+    beq lbl_inventory_applyItemStats_0000161C
     cmpwi r0, 0x8
-    beq lbl_fn_80151448_00001480
+    beq lbl_inventory_applyItemStats_00001480
     stw r0, 0x564(r26)
-lbl_fn_80151448_00001480:
+lbl_inventory_applyItemStats_00001480:
     lwz r0, 0x55c(r26)
     cmpwi r0, 0x6
-    bne lbl_fn_80151448_0000161C
+    bne lbl_inventory_applyItemStats_0000161C
     lwz r0, 0xf80(r26)
     cmpwi r0, 0x0
-    bne lbl_fn_80151448_000014B8
+    bne lbl_inventory_applyItemStats_000014B8
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x1b8(r1)
@@ -1554,8 +1551,8 @@ lbl_fn_80151448_00001480:
     lwz r0, 0x8(r5)
     stw r3, 0x1bc(r1)
     stw r0, 0x1c0(r1)
-    b lbl_fn_80151448_000014D4
-lbl_fn_80151448_000014B8:
+    b lbl_inventory_applyItemStats_000014D4
+lbl_inventory_applyItemStats_000014B8:
     addi r3, r30, 0x60c
     lwz r5, 0x60c(r30)
     lwz r4, 0x4(r3)
@@ -1563,7 +1560,7 @@ lbl_fn_80151448_000014B8:
     stw r5, 0x1b8(r1)
     stw r4, 0x1bc(r1)
     stw r0, 0x1c0(r1)
-lbl_fn_80151448_000014D4:
+lbl_inventory_applyItemStats_000014D4:
     lwz r5, 0x1b8(r1)
     addi r3, r1, 0x8
     lwz r4, 0x1bc(r1)
@@ -1573,26 +1570,26 @@ lbl_fn_80151448_000014D4:
     stw r0, 0x10(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_80151448_00001510
+    beq lbl_inventory_applyItemStats_00001510
     lwz r3, 0xf80(r26)
     lwz r12, 0x0(r3)
     lwz r12, 0x1c(r12)
     mtctr r12
     bctrl
-lbl_fn_80151448_00001510:
+lbl_inventory_applyItemStats_00001510:
     lwz r0, 0x55c(r26)
     cmpwi r0, 0x6
-    beq lbl_fn_80151448_000015EC
+    beq lbl_inventory_applyItemStats_000015EC
     cmpwi r0, 0x8
-    beq lbl_fn_80151448_00001528
+    beq lbl_inventory_applyItemStats_00001528
     stw r0, 0x564(r26)
-lbl_fn_80151448_00001528:
+lbl_inventory_applyItemStats_00001528:
     lwz r0, 0x55c(r26)
     cmpwi r0, 0x6
-    bne lbl_fn_80151448_000015EC
+    bne lbl_inventory_applyItemStats_000015EC
     lwz r0, 0xf80(r26)
     cmpwi r0, 0x0
-    bne lbl_fn_80151448_00001560
+    bne lbl_inventory_applyItemStats_00001560
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x1c4(r1)
@@ -1600,8 +1597,8 @@ lbl_fn_80151448_00001528:
     lwz r0, 0x8(r5)
     stw r3, 0x1c8(r1)
     stw r0, 0x1cc(r1)
-    b lbl_fn_80151448_0000157C
-lbl_fn_80151448_00001560:
+    b lbl_inventory_applyItemStats_0000157C
+lbl_inventory_applyItemStats_00001560:
     addi r3, r30, 0x618
     lwz r5, 0x618(r30)
     lwz r4, 0x4(r3)
@@ -1609,7 +1606,7 @@ lbl_fn_80151448_00001560:
     stw r5, 0x1c4(r1)
     stw r4, 0x1c8(r1)
     stw r0, 0x1cc(r1)
-lbl_fn_80151448_0000157C:
+lbl_inventory_applyItemStats_0000157C:
     lwz r5, 0x1c4(r1)
     addi r3, r1, 0x14
     lwz r4, 0x1c8(r1)
@@ -1619,13 +1616,13 @@ lbl_fn_80151448_0000157C:
     stw r0, 0x1c(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_80151448_000015B8
+    beq lbl_inventory_applyItemStats_000015B8
     lwz r3, 0xf80(r26)
     lwz r12, 0x0(r3)
     lwz r12, 0x1c(r12)
     mtctr r12
     bctrl
-lbl_fn_80151448_000015B8:
+lbl_inventory_applyItemStats_000015B8:
     mr r3, r26
     li r4, 0x6
     bl actor_setState
@@ -1633,48 +1630,48 @@ lbl_fn_80151448_000015B8:
     li r0, 0x0
     cmpwi r3, 0x0
     stw r0, 0xf80(r26)
-    beq lbl_fn_80151448_000015EC
+    beq lbl_inventory_applyItemStats_000015EC
     lwz r12, 0x0(r3)
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-lbl_fn_80151448_000015EC:
+lbl_inventory_applyItemStats_000015EC:
     lwz r3, 0xf80(r26)
     li r4, 0x6
     li r0, 0x0
     stw r4, 0x55c(r26)
     cmpwi r3, 0x0
     stw r0, 0xf80(r26)
-    beq lbl_fn_80151448_0000161C
+    beq lbl_inventory_applyItemStats_0000161C
     lwz r12, 0x0(r3)
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-lbl_fn_80151448_0000161C:
+lbl_inventory_applyItemStats_0000161C:
     lwz r3, 0xf80(r26)
     li r0, 0x6
     stw r0, 0x55c(r26)
     cmpwi r3, 0x0
     stw r31, 0xf80(r26)
-    beq lbl_fn_80151448_00001648
+    beq lbl_inventory_applyItemStats_00001648
     lwz r12, 0x0(r3)
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-lbl_fn_80151448_00001648:
+lbl_inventory_applyItemStats_00001648:
     lwz r3, 0x8(r27)
     lwz r0, 0x4(r3)
     cmpwi r0, 0x147
-    bne lbl_fn_80151448_0000172C
+    bne lbl_inventory_applyItemStats_0000172C
     li r0, 0x0
     stw r0, 0x90(r27)
-    b lbl_fn_80151448_0000172C
-lbl_fn_80151448_00001664:
+    b lbl_inventory_applyItemStats_0000172C
+lbl_inventory_applyItemStats_00001664:
     cmpwi r0, 0x3
-    bne lbl_fn_80151448_0000172C
+    bne lbl_inventory_applyItemStats_0000172C
     lis r8, lbl_807C6B90@ha
     lwz r4, 0x8(r27)
     lwz r5, 0x0(r27)
@@ -1687,20 +1684,20 @@ lbl_fn_80151448_00001664:
     bl fn_8003EA3C
     lwz r0, 0x80(r27)
     extrwi. r0, r0, 1, 1
-    beq lbl_fn_80151448_000016A8
+    beq lbl_inventory_applyItemStats_000016A8
     rlwinm r29, r29, 0, 29, 27
     oris r29, r29, 0x20
-lbl_fn_80151448_000016A8:
+lbl_inventory_applyItemStats_000016A8:
     lwz r0, 0x80(r27)
     extrwi. r0, r0, 1, 2
-    beq lbl_fn_80151448_000016B8
+    beq lbl_inventory_applyItemStats_000016B8
     rlwinm r29, r29, 0, 7, 5
-lbl_fn_80151448_000016B8:
+lbl_inventory_applyItemStats_000016B8:
     lwz r0, 0x80(r27)
     extrwi. r0, r0, 1, 3
-    beq lbl_fn_80151448_000016C8
+    beq lbl_inventory_applyItemStats_000016C8
     rlwinm r29, r29, 0, 17, 15
-lbl_fn_80151448_000016C8:
+lbl_inventory_applyItemStats_000016C8:
     lwz r4, 0x0(r27)
     li r6, -0x1
     lwz r0, 0x68(r27)
@@ -1712,100 +1709,100 @@ lbl_fn_80151448_000016C8:
     srwi r0, r3, 31
     stw r5, 0x84(r27)
     stw r0, 0x8c(r27)
-    bne lbl_fn_80151448_00001724
+    bne lbl_inventory_applyItemStats_00001724
     lwz r0, 0x6c(r27)
     cmpwi r0, 0x0
-    bne lbl_fn_80151448_00001724
+    bne lbl_inventory_applyItemStats_00001724
     lwz r0, 0x70(r27)
     cmpwi r0, 0x0
-    bne lbl_fn_80151448_00001724
+    bne lbl_inventory_applyItemStats_00001724
     lwz r0, 0x80(r27)
     srwi. r0, r0, 31
-    bne lbl_fn_80151448_00001724
+    bne lbl_inventory_applyItemStats_00001724
     stw r5, 0x90(r27)
-    b lbl_fn_80151448_0000172C
-lbl_fn_80151448_00001724:
+    b lbl_inventory_applyItemStats_0000172C
+lbl_inventory_applyItemStats_00001724:
     li r0, 0x1
     stw r0, 0x90(r27)
-lbl_fn_80151448_0000172C:
+lbl_inventory_applyItemStats_0000172C:
     lwz r0, 0x68(r27)
     stw r29, 0x94(r27)
     cmpwi r0, 0x0
-    ble lbl_fn_80151448_00001744
+    ble lbl_inventory_applyItemStats_00001744
     li r0, 0x0
     stw r0, 0xc4c(r26)
-lbl_fn_80151448_00001744:
+lbl_inventory_applyItemStats_00001744:
     lwz r0, 0x12a4(r26)
     extrwi. r0, r0, 1, 3
-    beq lbl_fn_80151448_0000183C
+    beq lbl_inventory_applyItemStats_0000183C
     lwz r6, 0x38(r26)
     li r4, 0x0
     li r3, 0x0
     li r5, 0x0
     rlwinm r0, r6, 0, 29, 29
     cmplwi r0, 0x4
-    beq lbl_fn_80151448_0000177C
+    beq lbl_inventory_applyItemStats_0000177C
     clrlwi r0, r6, 31
     cmplwi r0, 0x1
-    beq lbl_fn_80151448_0000177C
+    beq lbl_inventory_applyItemStats_0000177C
     li r5, 0x1
-lbl_fn_80151448_0000177C:
+lbl_inventory_applyItemStats_0000177C:
     cmpwi r5, 0x0
-    beq lbl_fn_80151448_00001798
+    beq lbl_inventory_applyItemStats_00001798
     lwz r0, 0x7e0(r26)
     rlwinm r0, r0, 0, 26, 26
     cmplwi r0, 0x20
-    beq lbl_fn_80151448_00001798
+    beq lbl_inventory_applyItemStats_00001798
     li r3, 0x1
-lbl_fn_80151448_00001798:
+lbl_inventory_applyItemStats_00001798:
     cmpwi r3, 0x0
-    beq lbl_fn_80151448_000017CC
+    beq lbl_inventory_applyItemStats_000017CC
     lwz r0, 0x55c(r26)
     li r3, 0x0
     cmpwi r0, 0x6
-    bne lbl_fn_80151448_000017C0
+    bne lbl_inventory_applyItemStats_000017C0
     lwz r0, 0x560(r26)
     cmpwi r0, 0x1c
-    bne lbl_fn_80151448_000017C0
+    bne lbl_inventory_applyItemStats_000017C0
     li r3, 0x1
-lbl_fn_80151448_000017C0:
+lbl_inventory_applyItemStats_000017C0:
     cmpwi r3, 0x0
-    bne lbl_fn_80151448_000017CC
+    bne lbl_inventory_applyItemStats_000017CC
     li r4, 0x1
-lbl_fn_80151448_000017CC:
+lbl_inventory_applyItemStats_000017CC:
     cmpwi r4, 0x0
-    bne lbl_fn_80151448_000017DC
+    bne lbl_inventory_applyItemStats_000017DC
     li r0, 0x0
-    b lbl_fn_80151448_00001828
-lbl_fn_80151448_000017DC:
+    b lbl_inventory_applyItemStats_00001828
+lbl_inventory_applyItemStats_000017DC:
     lwz r0, 0x7e0(r26)
     rlwinm r0, r0, 0, 25, 25
     cmplwi r0, 0x40
-    bne lbl_fn_80151448_00001800
+    bne lbl_inventory_applyItemStats_00001800
     lwz r0, 0xf94(r26)
     cmpwi r0, 0x0
-    bne lbl_fn_80151448_00001800
+    bne lbl_inventory_applyItemStats_00001800
     li r0, 0x0
-    b lbl_fn_80151448_00001828
-lbl_fn_80151448_00001800:
+    b lbl_inventory_applyItemStats_00001828
+lbl_inventory_applyItemStats_00001800:
     lwz r0, 0x55c(r26)
     cmpwi r0, 0x6
-    bne lbl_fn_80151448_00001824
+    bne lbl_inventory_applyItemStats_00001824
     lwz r3, 0x560(r26)
     subi r0, r3, 0x11
     cmplwi r0, 0x2
-    bgt lbl_fn_80151448_00001824
+    bgt lbl_inventory_applyItemStats_00001824
     li r0, 0x0
-    b lbl_fn_80151448_00001828
-lbl_fn_80151448_00001824:
+    b lbl_inventory_applyItemStats_00001828
+lbl_inventory_applyItemStats_00001824:
     li r0, 0x1
-lbl_fn_80151448_00001828:
+lbl_inventory_applyItemStats_00001828:
     cmpwi r0, 0x0
-    bne lbl_fn_80151448_0000183C
+    bne lbl_inventory_applyItemStats_0000183C
     mr r3, r26
     li r4, 0x1
     bl fn_80164DCC
-lbl_fn_80151448_0000183C:
+lbl_inventory_applyItemStats_0000183C:
     addi r11, r1, 0x1f0
     psq_l f31, 0x1f8(r1), 0, 0
     lfd f31, 0x1f0(r1)
@@ -1816,10 +1813,7 @@ lbl_fn_80151448_0000183C:
     blr
 }
 
-asm void fn_80152A20(void)
-{
-    nofralloc
-    blr
+void fn_80152A20(void) {
 }
 
 asm void fn_80152A24(void)

@@ -12,20 +12,20 @@ extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_applyWeights(void);
-extern void fn_800CB360(void);
+extern void morph_reset(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB440(void);
+extern void morph_updateWeights(void);
 extern void fn_80105AB0(void);
 extern void fn_801446F0(void);
-extern void fn_801539E0(void);
+extern void inventory_unequipItem(void);
 extern void fn_80155DAC(void);
-extern void fn_8016DA4C(void);
+extern void debuff_clearStatus(void);
 extern void fn_80178018(void);
 extern void fn_80178078(void);
 extern void fn_801C3414(void);
 extern void task_mapIdToQueue(void);
 extern void fn_803E2110(void);
-extern void fn_803EA77C(void);
+extern void chest_spawnLoot(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
@@ -1724,7 +1724,7 @@ asm void fn_801BC288(void)
     lwz r0, 0x12a4(r3)
     srwi. r0, r0, 31
     beq lbl_fn_801BC288_000016F4
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_801BC288_000016F4:
     lwz r3, 0x4(r31)
     lwz r0, 0x12a4(r3)
@@ -1734,7 +1734,7 @@ lbl_fn_801BC288_000016F4:
     bl fn_80155DAC
 lbl_fn_801BC288_0000170C:
     lwz r3, 0x4(r31)
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lwz r4, 0x4(r31)
     mr r3, r31
     lwz r0, 0x12a4(r4)
@@ -1929,7 +1929,7 @@ asm void fn_801BC5B8(void)
     stw r3, 0x0(r27)
     addi r3, r27, 0x30
     stfs f0, 0x2c(r27)
-    bl fn_800CB360
+    bl morph_reset
     lfs f0, lbl_808825E8
     li r4, 0x0
     li r3, 0x1
@@ -2041,7 +2041,7 @@ lbl_fn_801BC5B8_00001B10:
     bl skin_applyWeights
     addi r3, r27, 0x30
     addi r4, r1, 0x8
-    bl fn_800CB440
+    bl morph_updateWeights
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -2119,7 +2119,7 @@ lbl_fn_801BC5B8_00001C54:
     lfs f2, lbl_80882608
     li r5, 0x15
     li r6, 0x0
-    bl fn_803EA77C
+    bl chest_spawnLoot
 lbl_fn_801BC5B8_00001C6C:
     psq_l f31, 0xa8(r1), 0, 0
     mr r3, r27

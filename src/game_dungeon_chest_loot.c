@@ -14,7 +14,7 @@ extern void fn_80049B2C(void);
 extern void fn_80049B74(void);
 extern void fn_80049C3C(void);
 extern void fn_80049CDC(void);
-extern void fn_800697D8(void);
+extern void boss_recordDamage(void);
 extern void fn_8006AA20(void);
 extern void skin_playAnimationByName(void);
 extern void skin_applyWeights(void);
@@ -22,11 +22,11 @@ extern void fn_800C93D4(void);
 extern void fn_800C97F8(void);
 extern void fn_800C9C64(void);
 extern void fn_800CA7D4(void);
-extern void fn_800CB360(void);
+extern void morph_reset(void);
 extern void fn_800CB36C(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB404(void);
-extern void fn_800CB440(void);
+extern void morph_updateWeights(void);
 extern void fn_800CB58C(void);
 extern void fn_800CB5B4(void);
 extern void morph_updateMesh(void);
@@ -42,7 +42,7 @@ extern void fn_8036554C(void);
 extern void fn_803761CC(void);
 extern void fn_803EB668(void);
 extern void fn_803EB7E4(void);
-extern void fn_80473F88(void);
+extern void shockwave_freeEmitter(void);
 extern void rand(void);
 extern int sprintf(char* str, const char* format, ...);
 
@@ -68,7 +68,7 @@ void fn_803E907C(void);
 void fn_803E9608(void);
 void fn_803E9B7C(void);
 void fn_803EA09C(void);
-void fn_803EA77C(void);
+void chest_spawnLoot(void);
 
 asm void fn_803E907C(void)
 {
@@ -88,7 +88,7 @@ asm void fn_803E907C(void)
     mr r30, r7
     mr r24, r8
     addi r3, r1, 0x8
-    bl fn_800CB360
+    bl morph_reset
     lwz r0, 0x394(r27)
     cmplwi r0, 0x20
     blt lbl_fn_803E907C_00000068
@@ -165,7 +165,7 @@ lbl_fn_803E907C_000000E8:
     bl sprintf
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x10
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_fn_803E907C_0000015C:
     mr r3, r31
     li r4, 0x0
@@ -187,7 +187,7 @@ lbl_fn_803E907C_0000015C:
     stfs f0, 0x1158(r4)
 lbl_fn_803E907C_000001A4:
     addi r3, r31, 0x10
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     li r0, 0x0
     lis r3, lbl_807C7030@ha
     stw r0, 0x18(r31)
@@ -223,7 +223,7 @@ lbl_fn_803E907C_000001D8:
     stfs f0, 0x1158(r4)
 lbl_fn_803E907C_0000022C:
     addi r3, r31, 0x10
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     li r25, 0x0
     lis r3, lbl_807C7030@ha
     stw r25, 0x18(r31)
@@ -347,7 +347,7 @@ lbl_fn_803E907C_00000368:
     stfs f0, 0x1158(r3)
 lbl_fn_803E907C_00000408:
     li r3, 0x10
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     li r0, 0x0
     lis r4, lbl_807C7030@ha
     stw r0, 0x18(r3)
@@ -466,7 +466,7 @@ asm void fn_803E9608(void)
     mr r30, r6
     mr r25, r7
     addi r3, r1, 0x8
-    bl fn_800CB360
+    bl morph_reset
     lwz r0, 0x394(r28)
     cmplwi r0, 0x20
     blt lbl_fn_803E9608_000005F0
@@ -543,7 +543,7 @@ lbl_fn_803E9608_00000670:
     bl sprintf
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x10
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_fn_803E9608_000006E4:
     mr r3, r31
     li r4, 0x0
@@ -565,7 +565,7 @@ lbl_fn_803E9608_000006E4:
     stfs f0, 0x1158(r4)
 lbl_fn_803E9608_0000072C:
     addi r3, r31, 0x10
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     li r0, 0x0
     lis r3, lbl_807C7030@ha
     stw r0, 0x18(r31)
@@ -601,7 +601,7 @@ lbl_fn_803E9608_00000760:
     stfs f0, 0x1158(r4)
 lbl_fn_803E9608_000007B4:
     addi r3, r31, 0x10
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     li r26, 0x0
     lis r3, lbl_807C7030@ha
     stw r26, 0x18(r31)
@@ -720,7 +720,7 @@ lbl_fn_803E9608_000008EC:
     stfs f0, 0x1158(r3)
 lbl_fn_803E9608_0000097C:
     li r3, 0x10
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     li r0, 0x0
     lis r4, lbl_807C7030@ha
     stw r0, 0x18(r3)
@@ -839,7 +839,7 @@ asm void fn_803E9B7C(void)
     mr r30, r6
     mr r25, r7
     addi r3, r1, 0x8
-    bl fn_800CB360
+    bl morph_reset
     lwz r0, 0x394(r28)
     cmplwi r0, 0x20
     blt lbl_fn_803E9B7C_00000B64
@@ -900,7 +900,7 @@ lbl_fn_803E9B7C_00000B9C:
     bl sprintf
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x10
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_fn_803E9B7C_00000C28:
     mr r3, r31
     li r4, 0x0
@@ -922,7 +922,7 @@ lbl_fn_803E9B7C_00000C28:
     stfs f0, 0x1158(r4)
 lbl_fn_803E9B7C_00000C70:
     addi r3, r31, 0x10
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     li r0, 0x0
     lis r3, lbl_807C7030@ha
     stw r0, 0x18(r31)
@@ -958,7 +958,7 @@ lbl_fn_803E9B7C_00000CA4:
     stfs f0, 0x1158(r4)
 lbl_fn_803E9B7C_00000CF8:
     addi r3, r31, 0x10
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     li r0, 0x0
     lis r3, lbl_807C7030@ha
     stw r0, 0x18(r31)
@@ -1067,7 +1067,7 @@ lbl_fn_803E9B7C_00000DCC:
     stfs f0, 0x1158(r4)
 lbl_fn_803E9B7C_00000E9C:
     li r3, 0x10
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     li r0, 0x0
     lis r3, lbl_807C7030@ha
     stw r0, 0x18(r25)
@@ -1188,7 +1188,7 @@ asm void fn_803EA09C(void)
     mr r23, r8
     mr r30, r9
     addi r3, r1, 0x10
-    bl fn_800CB360
+    bl morph_reset
     lwz r0, 0x394(r26)
     cmplwi r0, 0x20
     blt lbl_fn_803EA09C_0000108C
@@ -1257,7 +1257,7 @@ lbl_fn_803EA09C_000010F4:
     bl sprintf
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x118
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_fn_803EA09C_00001168:
     mr r3, r31
     li r4, 0x0
@@ -1279,7 +1279,7 @@ lbl_fn_803EA09C_00001168:
     stfs f0, 0x1158(r4)
 lbl_fn_803EA09C_000011B0:
     addi r3, r31, 0x10
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     li r0, 0x0
     lis r3, lbl_807C7030@ha
     stw r0, 0x18(r31)
@@ -1315,7 +1315,7 @@ lbl_fn_803EA09C_000011E4:
     stfs f0, 0x1158(r4)
 lbl_fn_803EA09C_00001238:
     addi r3, r31, 0x10
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     li r24, 0x0
     lis r3, lbl_807C7030@ha
     stw r24, 0x18(r31)
@@ -1430,7 +1430,7 @@ lbl_fn_803EA09C_000013BC:
     bl skin_applyWeights
     mr r3, r31
     addi r4, r1, 0xc
-    bl fn_800CB440
+    bl morph_updateWeights
     addi r3, r1, 0xc
     li r4, -0x1
     bl ref_releaseHandle
@@ -1444,7 +1444,7 @@ lbl_fn_803EA09C_00001404:
     bl skin_playAnimationByName
     mr r3, r31
     addi r4, r1, 0x8
-    bl fn_800CB440
+    bl morph_updateWeights
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -1514,7 +1514,7 @@ lbl_fn_803EA09C_00001494:
     stfs f0, 0x1158(r3)
 lbl_fn_803EA09C_00001528:
     li r3, 0x10
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     li r0, 0x0
     lis r4, lbl_807C7030@ha
     stw r0, 0x18(r3)
@@ -1638,7 +1638,7 @@ lbl_fn_803EA09C_000016E0:
     blr
 }
 
-asm void fn_803EA77C(void)
+asm void chest_spawnLoot(void)
 {
     nofralloc
     stwu r1, -0x70(r1)
@@ -1658,86 +1658,86 @@ asm void fn_803EA77C(void)
     mr r29, r4
     mr r30, r5
     mr r31, r6
-    beq lbl_fn_803EA77C_00001758
+    beq lbl_chest_spawnLoot_00001758
     mr r3, r0
     bl fn_803761CC
     cmpwi r3, 0x0
-    beq lbl_fn_803EA77C_000019D8
-lbl_fn_803EA77C_00001758:
+    beq lbl_chest_spawnLoot_000019D8
+lbl_chest_spawnLoot_00001758:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
-    beq lbl_fn_803EA77C_00001770
+    beq lbl_chest_spawnLoot_00001770
     lwz r0, 0x54e4(r3)
     cmpwi r0, 0x8
-    beq lbl_fn_803EA77C_000019D8
-lbl_fn_803EA77C_00001770:
+    beq lbl_chest_spawnLoot_000019D8
+lbl_chest_spawnLoot_00001770:
     lwz r4, lbl_8087F540
     cmpwi r4, 0x0
-    beq lbl_fn_803EA77C_0000178C
+    beq lbl_chest_spawnLoot_0000178C
     lwz r0, 0x70(r4)
     cmpwi r0, 0x0
-    beq lbl_fn_803EA77C_0000178C
-    b lbl_fn_803EA77C_000019D8
-lbl_fn_803EA77C_0000178C:
+    beq lbl_chest_spawnLoot_0000178C
+    b lbl_chest_spawnLoot_000019D8
+lbl_chest_spawnLoot_0000178C:
     cmpwi r3, 0x0
-    beq lbl_fn_803EA77C_000017A4
+    beq lbl_chest_spawnLoot_000017A4
     lwz r3, lbl_8087F430
     lwz r0, 0x5538(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_803EA77C_000019D8
-lbl_fn_803EA77C_000017A4:
+    bne lbl_chest_spawnLoot_000019D8
+lbl_chest_spawnLoot_000017A4:
     lwz r3, lbl_8087F490
     cmpwi r3, 0x0
-    beq lbl_fn_803EA77C_000017DC
+    beq lbl_chest_spawnLoot_000017DC
     lwz r3, 0x2640(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_803EA77C_000017DC
+    beq lbl_chest_spawnLoot_000017DC
     lwz r0, 0x50(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_803EA77C_000017DC
+    beq lbl_chest_spawnLoot_000017DC
     lfs f0, 0x60(r3)
     fcmpo cr0, f0, f31
-    bge lbl_fn_803EA77C_000017DC
+    bge lbl_chest_spawnLoot_000017DC
     li r0, 0x0
-    b lbl_fn_803EA77C_000017E0
-lbl_fn_803EA77C_000017DC:
+    b lbl_chest_spawnLoot_000017E0
+lbl_chest_spawnLoot_000017DC:
     li r0, 0x1
-lbl_fn_803EA77C_000017E0:
+lbl_chest_spawnLoot_000017E0:
     cmpwi r0, 0x0
-    beq lbl_fn_803EA77C_000019D8
+    beq lbl_chest_spawnLoot_000019D8
     lwz r0, 0x110(r28)
     cmplwi r0, 0x10
-    bge lbl_fn_803EA77C_000019D8
+    bge lbl_chest_spawnLoot_000019D8
     addi r26, r28, 0x48
     li r27, 0x0
-    b lbl_fn_803EA77C_00001820
-lbl_fn_803EA77C_00001800:
+    b lbl_chest_spawnLoot_00001820
+lbl_chest_spawnLoot_00001800:
     mr r3, r26
     bl fn_800CB58C
     cmpwi r3, 0x0
-    bne lbl_fn_803EA77C_00001818
+    bne lbl_chest_spawnLoot_00001818
     li r0, 0x1
-    b lbl_fn_803EA77C_00001830
-lbl_fn_803EA77C_00001818:
+    b lbl_chest_spawnLoot_00001830
+lbl_chest_spawnLoot_00001818:
     addi r26, r26, 0x30
     addi r27, r27, 0x1
-lbl_fn_803EA77C_00001820:
+lbl_chest_spawnLoot_00001820:
     lwz r0, 0x10c(r28)
     cmpw r27, r0
-    blt lbl_fn_803EA77C_00001800
+    blt lbl_chest_spawnLoot_00001800
     li r0, 0x0
-lbl_fn_803EA77C_00001830:
+lbl_chest_spawnLoot_00001830:
     cmpwi r0, 0x0
-    beq lbl_fn_803EA77C_000019D8
+    beq lbl_chest_spawnLoot_000019D8
     cmpwi r29, 0x0
-    bne lbl_fn_803EA77C_000018D0
+    bne lbl_chest_spawnLoot_000018D0
     lwz r0, lbl_8087F428
     cmpwi r0, 0x0
-    beq lbl_fn_803EA77C_000018D0
+    beq lbl_chest_spawnLoot_000018D0
     lwz r3, lbl_8087F8A0
     lwz r3, 0x4c(r3)
     subic. r26, r3, 0x1
-    ble lbl_fn_803EA77C_000018D0
+    ble lbl_chest_spawnLoot_000018D0
     bl rand
     divw r0, r3, r26
     mullw r0, r0, r26
@@ -1747,70 +1747,70 @@ lbl_fn_803EA77C_00001830:
     bl fn_8011F944
     mr r27, r3
     mr r26, r27
-lbl_fn_803EA77C_00001880:
+lbl_chest_spawnLoot_00001880:
     mr r3, r26
     mr r4, r30
     bl fn_80179EBC
     cmpwi r3, 0x0
-    beq lbl_fn_803EA77C_000018B0
+    beq lbl_chest_spawnLoot_000018B0
     lwz r3, 0x7c(r26)
     mr r4, r30
     bl fn_8021FD7C
     cmpwi r3, 0x0
-    beq lbl_fn_803EA77C_000018B0
+    beq lbl_chest_spawnLoot_000018B0
     mr r29, r26
-    b lbl_fn_803EA77C_000018D0
-lbl_fn_803EA77C_000018B0:
+    b lbl_chest_spawnLoot_000018D0
+lbl_chest_spawnLoot_000018B0:
     lwz r26, 0x14ac(r26)
     cmpwi r26, 0x0
-    bne lbl_fn_803EA77C_000018C8
+    bne lbl_chest_spawnLoot_000018C8
     lwz r3, lbl_8087F428
     bl fn_8036554C
     mr r26, r3
-lbl_fn_803EA77C_000018C8:
+lbl_chest_spawnLoot_000018C8:
     cmplw r26, r27
-    bne lbl_fn_803EA77C_00001880
-lbl_fn_803EA77C_000018D0:
+    bne lbl_chest_spawnLoot_00001880
+lbl_chest_spawnLoot_000018D0:
     cmpwi r29, 0x0
-    beq lbl_fn_803EA77C_000019D8
+    beq lbl_chest_spawnLoot_000019D8
     mr r3, r29
     mr r4, r30
     bl fn_80179EBC
     cmpwi r3, 0x0
-    bne lbl_fn_803EA77C_000018F0
-    b lbl_fn_803EA77C_000019D8
-lbl_fn_803EA77C_000018F0:
+    bne lbl_chest_spawnLoot_000018F0
+    b lbl_chest_spawnLoot_000019D8
+lbl_chest_spawnLoot_000018F0:
     lwz r3, 0x7c(r29)
     mr r4, r30
     bl fn_8021FD7C
     cmpwi r3, 0x0
-    beq lbl_fn_803EA77C_000019D8
+    beq lbl_chest_spawnLoot_000019D8
     lwz r4, lbl_8087F0A8
     lwz r0, 0x174(r4)
     cmpwi r0, 0x1
-    blt lbl_fn_803EA77C_00001918
+    blt lbl_chest_spawnLoot_00001918
     lfs f30, lbl_80885F4C
-lbl_fn_803EA77C_00001918:
+lbl_chest_spawnLoot_00001918:
     subi r4, r30, 0x24
     li r7, 0x0
     cmplwi r4, 0x4
-    bgt lbl_fn_803EA77C_0000193C
+    bgt lbl_chest_spawnLoot_0000193C
     li r0, 0x1
     slw r0, r0, r4
     andi. r0, r0, 0x15
-    beq lbl_fn_803EA77C_0000193C
+    beq lbl_chest_spawnLoot_0000193C
     li r7, 0x1
-lbl_fn_803EA77C_0000193C:
+lbl_chest_spawnLoot_0000193C:
     cmplwi r4, 0x4
     li r5, 0x0
-    bgt lbl_fn_803EA77C_00001958
+    bgt lbl_chest_spawnLoot_00001958
     li r0, 0x1
     slw r0, r0, r4
     andi. r0, r0, 0x15
-    bne lbl_fn_803EA77C_0000195C
-lbl_fn_803EA77C_00001958:
+    bne lbl_chest_spawnLoot_0000195C
+lbl_chest_spawnLoot_00001958:
     li r5, 0x1
-lbl_fn_803EA77C_0000195C:
+lbl_chest_spawnLoot_0000195C:
     lwz r0, 0x110(r28)
     li r4, 0x0
     stw r4, 0xc(r1)
@@ -1826,7 +1826,7 @@ lbl_fn_803EA77C_0000195C:
     stw r5, 0x20(r1)
     stw r7, 0x24(r1)
     stw r31, 0x28(r1)
-    beq lbl_fn_803EA77C_000019CC
+    beq lbl_chest_spawnLoot_000019CC
     stw r29, 0x0(r6)
     frsp f1, f30
     frsp f0, f31
@@ -1839,11 +1839,11 @@ lbl_fn_803EA77C_0000195C:
     stw r7, 0x1c(r6)
     stw r31, 0x20(r6)
     stw r4, 0x24(r6)
-lbl_fn_803EA77C_000019CC:
+lbl_chest_spawnLoot_000019CC:
     lwz r3, 0x110(r28)
     addi r0, r3, 0x1
     stw r0, 0x110(r28)
-lbl_fn_803EA77C_000019D8:
+lbl_chest_spawnLoot_000019D8:
     addi r11, r1, 0x50
     psq_l f31, 0x68(r1), 0, 0
     lfd f31, 0x60(r1)

@@ -10,25 +10,25 @@ extern void fn_8000D430(void);
 extern void fn_8000D7DC(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
-extern void fn_8003EFB0(void);
+extern void ui_destroyWidget(void);
 extern void fn_8004B290(void);
 extern void fn_8004B338(void);
 extern void atn_ColliBase_destructor(void);
 extern void talk_formatQuotedString(void);
-extern void fn_8005BBF8(void);
-extern void fn_8005BCE8(void);
+extern void talk_parseQuotes(void);
+extern void talk_copySpeakerName(void);
 extern void fn_8006A004(void);
 extern void fn_8006AD24(void);
 extern void fn_8006B0C8(void);
 extern void fn_8006D008(void);
 extern void mem_alloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void fn_800899DC(void);
-extern void fn_8008AD4C(void);
+extern void area_updateZoneState(void);
 extern void fn_8008B130(void);
-extern void fn_8008B140(void);
-extern void fn_8008BBD8(void);
+extern void map_processTrigger(void);
+extern void map_debugLog(void);
 extern void fn_80091CFC(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_80092EC8(void);
@@ -38,7 +38,7 @@ extern void fn_800971D4(void);
 extern void fn_80097510(void);
 extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_80097D40(void);
+extern void atn_Anim_getLayerTrack(void);
 extern void fn_80097E80(void);
 extern void fn_80099E9C(void);
 extern void ref_releaseHandle(void);
@@ -62,7 +62,7 @@ extern void fn_80137E68(void);
 extern void fn_80137FC0(void);
 extern void fn_80138528(void);
 extern void fn_8014C228(void);
-extern void fn_8014DEE4(void);
+extern void dialog_selectChoice(void);
 extern void fn_8014FD30(void);
 extern void fn_8014FF9C(void);
 extern void fn_8020EE8C(void);
@@ -289,7 +289,7 @@ lbl_fn_80136138_000001BC:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8014DEE4
+    bl dialog_selectChoice
 lbl_fn_80136138_000001DC:
     lbz r0, lbl_8087EE74
     extsb. r0, r0
@@ -297,11 +297,11 @@ lbl_fn_80136138_000001DC:
     lis r3, lbl_807C6BB8@ha
     li r0, 0x0
     stwu r0, lbl_807C6BB8@l(r3)
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     li r29, 0x1
     lis r5, lbl_807C7B10@ha
     stw r0, 0x4(r3)
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     addi r5, r5, lbl_807C7B10@l
     stw r0, 0x8(r3)
     stw r29, 0xc(r3)
@@ -491,7 +491,7 @@ lbl_fn_80136138_00000480:
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_80136138_000004A4
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_80136138_000004A4:
     mr r3, r30
     li r4, 0x0
@@ -622,7 +622,7 @@ lbl_boss_updatePhaseState_00000648:
     stw r0, 0xac(r30)
 lbl_boss_updatePhaseState_00000650:
     addi r3, r30, 0xb0
-    bl fn_8008B140
+    bl map_processTrigger
     cmpwi r3, 0x0
     beq lbl_boss_updatePhaseState_00000664
     li r31, 0x1
@@ -893,7 +893,7 @@ lbl_boss_updatePhaseState_000009F8:
     stw r4, 0xb8(r1)
     stw r0, 0xbc(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_boss_updatePhaseState_00000A7C
     addic. r0, r1, 0x144
@@ -1195,7 +1195,7 @@ lbl_boss_updatePhaseState_00000E34:
     bctrl
     addi r3, r30, 0xb0
     li r4, 0x1dc
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     bne lbl_boss_updatePhaseState_00000EA8
     lwz r0, 0x7ec(r30)
@@ -1214,7 +1214,7 @@ lbl_boss_updatePhaseState_00000EA8:
 lbl_boss_updatePhaseState_00000ECC:
     addi r3, r30, 0xb0
     li r4, 0x45
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     bne lbl_boss_updatePhaseState_00000EEC
     lwz r0, 0xc10(r30)
@@ -1223,7 +1223,7 @@ lbl_boss_updatePhaseState_00000ECC:
 lbl_boss_updatePhaseState_00000EEC:
     addi r3, r30, 0xb0
     li r4, 0x1dd
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     bne lbl_boss_updatePhaseState_00000F0C
     lwz r0, 0xc10(r30)
@@ -1232,7 +1232,7 @@ lbl_boss_updatePhaseState_00000EEC:
 lbl_boss_updatePhaseState_00000F0C:
     addi r3, r30, 0xb0
     li r4, 0x46
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     bne lbl_boss_updatePhaseState_00000F2C
     lwz r0, 0xc10(r30)
@@ -1241,7 +1241,7 @@ lbl_boss_updatePhaseState_00000F0C:
 lbl_boss_updatePhaseState_00000F2C:
     addi r3, r30, 0xb0
     li r4, 0x68
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     bne lbl_boss_updatePhaseState_00000F4C
     lwz r0, 0xc10(r30)
@@ -1250,7 +1250,7 @@ lbl_boss_updatePhaseState_00000F2C:
 lbl_boss_updatePhaseState_00000F4C:
     addi r3, r30, 0xb0
     li r4, 0x1de
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     bne lbl_boss_updatePhaseState_00000F6C
     lwz r0, 0xc10(r30)
@@ -1271,7 +1271,7 @@ lbl_boss_updatePhaseState_00000F88:
     beq lbl_boss_updatePhaseState_00000FAC
     addi r3, r30, 0xb0
     li r4, 0x8e
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     bne lbl_boss_updatePhaseState_00000FB8
 lbl_boss_updatePhaseState_00000FAC:
@@ -1292,7 +1292,7 @@ lbl_boss_updatePhaseState_00000FB8:
 lbl_boss_updatePhaseState_00000FE0:
     addi r3, r30, 0xb0
     li r4, 0x5d
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     bne lbl_boss_updatePhaseState_00001000
     lwz r0, 0x54c(r30)
@@ -1443,7 +1443,7 @@ asm void fn_801371AC(void)
     addi r4, r4, lbl_807774B8@l
     stw r4, 0x870(r1)
     la r4, lbl_8087D710
-    bl fn_8005BCE8
+    bl talk_copySpeakerName
     li r0, 0x20
     addi r3, r1, 0x76c
     mtctr r0
@@ -1513,13 +1513,13 @@ lbl_fn_801371AC_000012C0:
     addi r3, r17, 0xb0
     addi r4, r1, 0x670
     li r5, 0x0
-    bl fn_8008AD4C
+    bl area_updateZoneState
     b lbl_fn_801371AC_000012F8
 lbl_fn_801371AC_000012E8:
     addi r3, r17, 0xb0
     addi r4, r1, 0x670
     addi r5, r1, 0x770
-    bl fn_8008AD4C
+    bl area_updateZoneState
 lbl_fn_801371AC_000012F8:
     mr r3, r17
     addi r4, r17, 0xb0
@@ -2076,7 +2076,7 @@ lbl_fn_801371AC_00001AD4:
     bl dtor_80084684
 lbl_fn_801371AC_00001AE8:
     addi r3, r1, 0x870
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_801371AC_0000122C
     lmw r16, 0xeb0(r1)

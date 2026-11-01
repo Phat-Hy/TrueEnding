@@ -4,10 +4,10 @@
 /* External function declarations */
 extern void dtor_80013D60(void);
 extern void vec3_copy(void);
-extern void fn_8003E4A4(void);
-extern void fn_8004212C(void);
+extern void str_initFromCStr(void);
+extern void str_getData(void);
 extern void fn_80056DB8(void);
-extern void fn_80057A64(void);
+extern void mission_updateStub(void);
 extern void atn_ColliCapsule_destructor(void);
 extern void fn_80063D3C(void);
 extern void fn_8006AFF8(void);
@@ -29,14 +29,14 @@ extern void fn_800ED4D8(void);
 extern void fn_800ED4E0(void);
 extern void fn_800EDFE8(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8574(void);
-extern void fn_800F8C6C(void);
+extern void viewport_updateCulling(void);
+extern void scissor_clipFrustum(void);
 extern void fn_8012DB04(void);
 extern void boss_updatePhaseState(void);
-extern void fn_80144710(void);
-extern void fn_80145334(void);
-extern void fn_8014C540(void);
-extern void fn_80151448(void);
+extern void quest_evaluateConditions(void);
+extern void quest_updateFlow(void);
+extern void dialog_updateScriptState(void);
+extern void inventory_applyItemStats(void);
 extern void fn_8015AC48(void);
 extern void fn_8015E7A0(void);
 extern void actor_setState(void);
@@ -51,7 +51,7 @@ extern void res_registerResource(void);
 extern void fn_802AC550(void);
 extern void fn_802BABC0(void);
 extern void fn_802FCF14(void);
-extern void fn_8035B694(void);
+extern void entity_Instance_constructor(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
 extern void fn_8045ABB4(void);
@@ -591,7 +591,7 @@ asm void fn_80458270(void)
     stw r28, 0x100(r1)
     mr r28, r3
     lwz r5, 0x20(r5)
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lis r4, lbl_8078F7F0@ha
     addi r3, r28, 0x14b0
     addi r4, r4, lbl_8078F7F0@l
@@ -605,9 +605,9 @@ asm void fn_80458270(void)
     stw r31, 0x14c0(r28)
     stw r31, 0x14c4(r28)
     stw r0, 0x14d0(r28)
-    bl fn_80057A64
+    bl mission_updateStub
     addi r3, r28, 0x14e0
-    bl fn_80057A64
+    bl mission_updateStub
     addi r3, r28, 0x14f0
     bl res_MsgHandle_constructor
     lis r4, fn_802AC550@ha
@@ -627,7 +627,7 @@ asm void fn_80458270(void)
     stw r31, 0x18f0(r28)
     bl fn_80458550
     addi r3, r28, 0x1948
-    bl fn_80057A64
+    bl mission_updateStub
     stw r31, 0x1960(r28)
     addi r3, r28, 0x1964
     bl fn_802FCF14
@@ -646,14 +646,14 @@ asm void fn_80458270(void)
     addi r4, r30, lbl_80754DE0@l
     stfs f0, 0x1988(r28)
     stw r0, 0x12a4(r28)
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r31, r30, lbl_80754DE0@l
     addi r3, r1, 0x20
     addi r4, r31, 0x18
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x14
     addi r4, r29, 0x2c
-    bl fn_8003E4A4
+    bl str_initFromCStr
     addi r3, r1, 0x74
     addi r4, r31, 0x2b
     li r5, 0x0
@@ -673,7 +673,7 @@ asm void fn_80458270(void)
 lbl_fn_80458270_0000078C:
     addi r3, r1, 0x98
     bl fn_800ED4D8
-    bl fn_8004212C
+    bl str_getData
     addi r4, r31, 0x2d
     li r5, 0x8
     bl strncmp
@@ -681,7 +681,7 @@ lbl_fn_80458270_0000078C:
     bne lbl_fn_80458270_000007C8
     addi r3, r1, 0x98
     bl fn_800ED4D8
-    bl fn_8004212C
+    bl str_getData
     mr r4, r3
     addi r3, r1, 0x20
     addi r4, r4, 0x8
@@ -710,7 +710,7 @@ lbl_fn_80458270_000007D0:
     addi r5, r1, 0x20
     bl fn_8006AFF8
     addi r3, r1, 0x8
-    bl fn_8004212C
+    bl str_getData
     lwz r12, 0x14b0(r28)
     mr r4, r3
     addi r3, r28, 0x14b0
@@ -1241,7 +1241,7 @@ lbl_fn_8045883C_00000F94:
     bl task_findEntryById
     mr r30, r3
     mr r3, r31
-    bl fn_80144710
+    bl quest_evaluateConditions
     lwz r3, lbl_8087F048
     mr r6, r31
     lwz r8, 0x590(r31)
@@ -1251,7 +1251,7 @@ lbl_fn_8045883C_00000F94:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     lwz r0, 0x1984(r31)
     cmpwi r0, 0x0
     beq lbl_fn_8045883C_000014E4
@@ -1353,7 +1353,7 @@ lbl_fn_8045883C_000010E8:
     li r8, 0x0
     li r9, 0x24
     li r10, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
     b lbl_fn_8045883C_000014E4
 lbl_fn_8045883C_00001180:
     lfs f31, 0x2e4(r3)
@@ -1641,9 +1641,9 @@ lbl_fn_8045883C_000015A4:
     stfs f0, 0x52c(r31)
 lbl_fn_8045883C_000015C4:
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     mr r3, r31
     bl fn_8045F4CC
     lbz r0, 0x197c(r31)
@@ -1955,7 +1955,7 @@ lbl_fn_80459358_000019D8:
 lbl_fn_80459358_00001A64:
     mr r3, r30
     mr r4, r31
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r12, 0x0(r30)
     mr r3, r30
     mr r4, r31

@@ -11,9 +11,9 @@ extern void atn_Anim_getLayerDuration(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB688(void);
-extern void fn_801539E0(void);
+extern void inventory_unequipItem(void);
 extern void fn_80155DAC(void);
-extern void fn_80179D44(void);
+extern void actor_getMovementFlags(void);
 extern void fn_8017C9AC(void);
 extern void fn_8018059C(void);
 extern void task_mapIdToQueue(void);
@@ -426,7 +426,7 @@ asm void fn_801C3D1C(void)
     fadds f0, f3, f0
     stfs f4, 0x18(r1)
     stfs f0, 0xc(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     oris r7, r3, 0x8000
     mr r3, r29
     mr r5, r31
@@ -1271,7 +1271,7 @@ asm void fn_801C48B4(void)
     lwz r0, 0x12a4(r3)
     srwi. r0, r0, 31
     beq lbl_fn_801C48B4_0000101C
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_801C48B4_0000101C:
     lwz r30, 0x4(r31)
     li r4, 0x3

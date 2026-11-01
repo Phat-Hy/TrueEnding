@@ -11,7 +11,7 @@ extern void mem_alloc(void);
 extern void skin_playAnimationByName(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
-extern void fn_800F8574(void);
+extern void viewport_updateCulling(void);
 extern void fn_80108C10(void);
 extern void fn_8010B250(void);
 extern void fn_8010CF28(void);
@@ -120,10 +120,7 @@ asm void fn_80441E54(void)
     blr
 }
 
-asm void fn_80441E88(void)
-{
-    nofralloc
-    blr
+void fn_80441E88(void) {
 }
 
 asm void fn_80441E8C(void)
@@ -764,7 +761,7 @@ lbl_fn_80441F24_0000096C:
     addi r8, r19, 0xa0
     li r9, 0x0
     li r10, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
     addi r22, r22, 0x1
     cmpwi r22, 0x2
     blt lbl_fn_80441F24_00000594
@@ -982,7 +979,7 @@ asm void fn_80442A9C(void)
     li r10, 0x0
     lfs f1, lbl_80886A80
     lfs f2, lbl_80886A9C
-    bl fn_800F8574
+    bl viewport_updateCulling
     lwz r0, 0x34(r1)
     lwz r31, 0x2c(r1)
     lwz r30, 0x28(r1)

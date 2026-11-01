@@ -12,7 +12,7 @@ extern void _savegpr_24(void);
 extern void _savegpr_27(void);
 extern void qsort(void);
 extern void fn_806A4270(void);
-extern void fn_806D7A90(void);
+extern void net_socketConnect(void);
 extern void fn_806D7AA0(void);
 extern void net_socketClose(void);
 extern void fn_806D7AE0(void);
@@ -38,7 +38,7 @@ extern u8 lbl_80860DD0[];
 void pad_03_806D5798_text(void);
 void fn_806D57A0(void);
 void fn_806D5850(void);
-void fn_806D58F0(void);
+void net_bufferGetCount(void);
 void net_bufferGetElement(void);
 void fn_806D5930(void);
 void fn_806D5A60(void);
@@ -85,7 +85,7 @@ asm void fn_806D57A0(void)
     stw r28, 0x10(r1)
     mr r28, r3
     li r3, 0x18
-    bl fn_806D7A90
+    bl net_socketConnect
     cmpwi r29, 0x0
     mr r31, r3
     bne lbl_fn_806D57A0_00000048
@@ -101,7 +101,7 @@ lbl_fn_806D57A0_00000048:
     beq lbl_fn_806D57A0_00000090
     lwz r0, 0x8(r3)
     mullw r3, r29, r0
-    bl fn_806D7A90
+    bl net_socketConnect
     stw r3, 0x14(r31)
     li r4, 0x0
     lwz r5, 0x4(r31)
@@ -174,7 +174,7 @@ lbl_fn_806D5850_00000134:
     blr
 }
 
-asm void fn_806D58F0(void)
+asm void net_bufferGetCount(void)
 {
     nofralloc
     lwz r3, 0x0(r3)
@@ -924,10 +924,10 @@ asm void fn_806D6250(void)
     mr r27, r6
     mr r28, r7
     li r3, 0x14
-    bl fn_806D7A90
+    bl net_socketConnect
     mr r30, r3
     slwi r3, r25, 2
-    bl fn_806D7A90
+    bl net_socketConnect
     stw r3, 0x0(r30)
     li r31, 0x0
     li r29, 0x0
@@ -972,10 +972,10 @@ asm void fn_806D62F0(void)
     mr r27, r7
     mr r28, r8
     li r3, 0x14
-    bl fn_806D7A90
+    bl net_socketConnect
     mr r30, r3
     slwi r3, r24, 2
-    bl fn_806D7A90
+    bl net_socketConnect
     stw r3, 0x0(r30)
     li r29, 0x0
     li r31, 0x0
@@ -1067,7 +1067,7 @@ lbl_fn_806D6420_00000CBC:
 lbl_fn_806D6420_00000CC8:
     lwz r3, 0x0(r28)
     lwzx r3, r3, r31
-    bl fn_806D58F0
+    bl net_bufferGetCount
     add r29, r29, r3
     addi r31, r31, 0x4
     addi r30, r30, 0x1

@@ -8,9 +8,9 @@ extern void _restgpr_27(void);
 extern void _savegpr_24(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8000D0F8(void);
-extern void fn_8000D3A4(void);
-extern void fn_8001047C(void);
+extern void mtx_getTranslation(void);
+extern void vec3_mag(void);
+extern void vec3_assign(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void vec3_sub(void);
 extern void fn_80057A68(void);
@@ -23,12 +23,12 @@ extern void ref_releaseHandle(void);
 extern void wcs_vformat(void);
 extern void fn_800E0AA8(void);
 extern void fn_800E0AB0(void);
-extern void fn_800F7FF0(void);
+extern void viewport_getNextSequenceId(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8574(void);
+extern void viewport_updateCulling(void);
 extern void clip_calculateFrustum(void);
 extern void fn_80109828(void);
-extern void fn_8013C38C(void);
+extern void npc_getPosition(void);
 extern void fn_8014052C(void);
 extern void actor_setState(void);
 extern void fn_801A03E8(void);
@@ -49,7 +49,7 @@ extern void PSVECNormalize(void);
 extern void printf(void);
 extern void rand(void);
 extern void abort(void);
-extern void fn_8068AD58(void);
+extern void std_cos(void);
 extern void math_u64DivMod(void);
 
 /* External data declarations */
@@ -112,10 +112,10 @@ asm void fn_80296B8C(void)
     stw r29, 0x44(r1)
     mr r29, r4
     lwz r3, 0x14b0(r3)
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r1, 0x2c
-    bl fn_8001047C
+    bl vec3_assign
     lis r4, lbl_80745818@ha
     addi r3, r31, 0xb0
     addi r4, r4, lbl_80745818@l
@@ -123,7 +123,7 @@ asm void fn_80296B8C(void)
     bl atn_Model_getBoneMatrix
     mr r4, r3
     addi r3, r1, 0x20
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     addi r3, r1, 0x14
     addi r4, r1, 0x2c
     addi r5, r1, 0x20
@@ -131,7 +131,7 @@ asm void fn_80296B8C(void)
     lfs f0, lbl_80883BE8
     addi r3, r1, 0x14
     stfs f0, 0x18(r1)
-    bl fn_8000D3A4
+    bl vec3_mag
     lfs f0, lbl_80883C5C
     fmr f30, f1
     fcmpo cr0, f1, f0
@@ -145,7 +145,7 @@ asm void fn_80296B8C(void)
     b lbl_fn_80296B8C_000000B8
 lbl_fn_80296B8C_000000B0:
     addi r3, r1, 0x14
-    bl fn_800F7FF0
+    bl viewport_getNextSequenceId
 lbl_fn_80296B8C_000000B8:
     addi r3, r31, 0x1510
     li r30, 0x0
@@ -355,7 +355,7 @@ lbl_fn_80296DB8_00000394:
     fadds f4, f4, f5
     stfs f4, 0x152c(r31)
     fmsubs f1, f3, f4, f0
-    bl fn_8068AD58
+    bl std_cos
     frsp f4, f1
     lfs f3, lbl_80883BF0
     lfs f0, 0x152c(r31)
@@ -695,7 +695,7 @@ lbl_fn_80297114_00000820:
     lfs f2, lbl_80883BF0
     li r10, 0x0
     lwz r3, lbl_8087F048
-    bl fn_800F8574
+    bl viewport_updateCulling
 lbl_fn_80297114_000008C8:
     lwz r0, 0x264(r1)
     psq_l f31, 0x258(r1), 0, 0

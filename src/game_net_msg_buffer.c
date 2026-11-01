@@ -7,7 +7,7 @@ extern void __register_global_object(void);
 extern void _restgpr_14(void);
 extern void _savegpr_14(void);
 extern void dtor_80084684(void);
-extern void fn_8003EFB0(void);
+extern void ui_destroyWidget(void);
 extern void dungeon_initGlobalContext(void);
 extern void fn_80083AD4(void);
 extern void atn_Task_setActive(void);
@@ -15,12 +15,12 @@ extern void fn_800E2FE0(void);
 extern void fn_800EE5AC(void);
 extern void boss_updatePhaseState(void);
 extern void fn_80139560(void);
-extern void fn_80145334(void);
+extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
-extern void fn_8014C540(void);
+extern void dialog_updateScriptState(void);
 extern void fn_8015EB2C(void);
 extern void fn_80176ACC(void);
-extern void fn_8035B78C(void);
+extern void entity_Instance_destructor(void);
 extern void fn_8050128C(void);
 extern void fn_80508F0C(void);
 extern void printf(void);
@@ -311,7 +311,7 @@ asm void fn_804FC52C(void)
     mr r30, r3
     beq lbl_fn_804FC52C_00000324
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r31, 0x0
     ble lbl_fn_804FC52C_00000324
     mr r3, r30
@@ -417,11 +417,11 @@ lbl_fn_804FC5AC_00000454:
     lis r3, lbl_807C6BB8@ha
     li r0, 0x0
     stwu r0, lbl_807C6BB8@l(r3)
-    lis r4, fn_8003EFB0@ha
+    lis r4, ui_destroyWidget@ha
     li r30, 0x1
     lis r5, lbl_807C8F48@ha
     stw r0, 0x4(r3)
-    addi r4, r4, fn_8003EFB0@l
+    addi r4, r4, ui_destroyWidget@l
     addi r5, r5, lbl_807C8F48@l
     stw r0, 0x8(r3)
     stw r30, 0xc(r3)
@@ -474,7 +474,7 @@ lbl_fn_804FC5AC_00000530:
     stw r0, 0x14b4(r31)
 lbl_fn_804FC5AC_00000538:
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
     lwz r4, 0x648(r31)
     mr r3, r31
     bl fn_800EE5AC
@@ -485,7 +485,7 @@ lbl_fn_804FC5AC_00000538:
     bl fn_800EE5AC
 lbl_fn_804FC5AC_00000560:
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     b lbl_fn_804FC5AC_0000057C
 lbl_fn_804FC5AC_0000056C:
     li r0, 0x0

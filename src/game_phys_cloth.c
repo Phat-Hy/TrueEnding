@@ -20,7 +20,7 @@ extern void atn_Task_unlink(void);
 extern void fn_801255C8(void);
 extern void fn_80126214(void);
 extern void fn_80128A30(void);
-extern void fn_8013CB68(void);
+extern void npc_updateTalkInteraction(void);
 extern void fn_802144A8(void);
 extern void fn_803CE148(void);
 extern void fn_8046EC7C(void);
@@ -1013,7 +1013,7 @@ lbl_fn_8010DD34_00000C28:
     addi r4, r1, 0x104
     li r5, 0x0
     fmr f1, f31
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
     li r3, 0x0
 lbl_fn_8010DD34_00000C48:
     lwz r0, 0x244(r1)
@@ -1566,7 +1566,7 @@ lbl_fn_8010E7B8_00001390:
     addi r4, r1, 0x74
     li r5, 0x0
     fmr f1, f31
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
     li r3, 0x0
 lbl_fn_8010E7B8_000013B0:
     lwz r0, 0x134(r1)

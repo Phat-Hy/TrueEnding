@@ -19,7 +19,7 @@ extern void fn_800A58D0(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800D5908(void);
@@ -38,11 +38,11 @@ extern void fn_801F362C(void);
 extern void save_validateHeader(void);
 extern void fn_801F4484(void);
 extern void fn_801F465C(void);
-extern void fn_801F48C8(void);
+extern void save_parseSlotStats(void);
 extern void fn_801FEA9C(void);
 extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
-extern void fn_801FEDBC(void);
+extern void thread_findTaskById(void);
 extern void printf(void);
 extern void wcslen(void);
 extern void wcsncmp(void);
@@ -281,7 +281,7 @@ lbl_fn_801F0F74_00000230:
     li r29, 0x0
 lbl_fn_801F0F74_00000264:
     mr r3, r26
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     bne lbl_fn_801F0F74_00000278
     li r29, 0x0
@@ -335,10 +335,7 @@ lbl_fn_801F1048_000002E4:
     blr
 }
 
-asm void fn_801F1094(void)
-{
-    nofralloc
-    blr
+void fn_801F1094(void) {
 }
 
 asm void fn_801F1098(void)
@@ -482,7 +479,7 @@ lbl_fn_801F10E0_000003C8:
     mr r4, r3
     mr r3, r23
     li r5, 0x0
-    bl fn_801FEDBC
+    bl thread_findTaskById
     add r3, r31, r29
     lwz r4, 0x180(r24)
     lfs f31, 0x24(r3)
@@ -514,7 +511,7 @@ lbl_fn_801F10E0_000003C8:
     psq_st f1, 0x0(r5), 0, 0
     psq_st f2, 0x8(r5), 0, 0
     lwz r3, 0x180(r3)
-    bl fn_801F48C8
+    bl save_parseSlotStats
     mulli r4, r26, 0x34
     slwi r0, r28, 2
     addi r5, r1, 0x28
@@ -530,7 +527,7 @@ lbl_fn_801F10E0_000003C8:
     psq_st f1, 0x0(r5), 0, 0
     psq_st f2, 0x8(r5), 0, 0
     lwz r3, 0x0(r23)
-    bl fn_801F48C8
+    bl save_parseSlotStats
     b lbl_fn_801F10E0_00000664
 lbl_fn_801F10E0_000005E0:
     mulli r3, r26, 0x34
@@ -549,7 +546,7 @@ lbl_fn_801F10E0_000005E0:
     psq_st f1, 0x0(r5), 0, 0
     psq_st f2, 0x8(r5), 0, 0
     lwz r3, 0x180(r3)
-    bl fn_801F48C8
+    bl save_parseSlotStats
     mulli r4, r26, 0x34
     slwi r0, r28, 2
     addi r5, r1, 0x8
@@ -565,7 +562,7 @@ lbl_fn_801F10E0_000005E0:
     psq_st f1, 0x0(r5), 0, 0
     psq_st f2, 0x8(r5), 0, 0
     lwz r3, 0x0(r23)
-    bl fn_801F48C8
+    bl save_parseSlotStats
 lbl_fn_801F10E0_00000664:
     lwz r3, 0x0(r23)
     li r4, 0x0

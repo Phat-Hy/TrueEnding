@@ -13,17 +13,17 @@ extern void fn_8000D430(void);
 extern void fn_80056DB8(void);
 extern void atn_ColliBase_destructor(void);
 extern void talk_formatQuotedString(void);
-extern void fn_8005BBF8(void);
-extern void fn_8005BCE8(void);
+extern void talk_parseQuotes(void);
+extern void talk_copySpeakerName(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void route_findNextWaypoint(void);
 extern void route_createSegment(void);
-extern void fn_80087E9C(void);
+extern void route_createWaypoint(void);
 extern void fn_80088724(void);
 extern void node_createNamedChild(void);
-extern void fn_8008AD4C(void);
-extern void fn_8008B140(void);
+extern void area_updateZoneState(void);
+extern void map_processTrigger(void);
 extern void fn_8008CD60(void);
 extern void fn_80092A4C(void);
 extern void fn_80094F98(void);
@@ -36,10 +36,10 @@ extern void fn_80097E80(void);
 extern void str_skipWhitespace(void);
 extern void fn_802180A8(void);
 extern void fn_803C1560(void);
-extern void fn_803EC568(void);
-extern void fn_803EC69C(void);
+extern void task_createWorker(void);
+extern void task_destroyWorker(void);
 extern void fn_803EC758(void);
-extern void fn_803EC91C(void);
+extern void task_updateWorker(void);
 extern void fn_803F11F8(void);
 extern void fn_8042952C(void);
 extern void fn_804491F4(void);
@@ -373,7 +373,7 @@ lbl_fn_804275D0_00000290:
     addi r5, r29, 0x6c
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_808866C4
     mr r3, r30
     lfs f2, lbl_808866C8
@@ -391,7 +391,7 @@ lbl_fn_804275D0_00000290:
     addi r5, r29, 0x90
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     mr r3, r30
     addi r4, r31, 0x68
     addi r5, r29, 0x9c
@@ -986,7 +986,7 @@ asm void fn_80427F28(void)
     mr r30, r3
     lwz r5, 0x18(r5)
     lwz r6, 0x1c(r31)
-    bl fn_803EC568
+    bl task_createWorker
     lfs f0, lbl_808866D0
     lis r3, lbl_8078E508@ha
     li r0, 0x0
@@ -1108,7 +1108,7 @@ lbl_fn_804280B4_00000D54:
 lbl_fn_804280B4_00000D60:
     mr r3, r30
     li r4, 0x0
-    bl fn_803EC69C
+    bl task_destroyWorker
     cmpwi r31, 0x0
     ble lbl_fn_804280B4_00000D7C
     mr r3, r30
@@ -1135,7 +1135,7 @@ asm void fn_8042813C(void)
     mr r31, r3
     cmpwi r0, 0x0
     bne lbl_fn_8042813C_00000E54
-    bl fn_803EC91C
+    bl task_updateWorker
     cmpwi r3, 0x0
     bne lbl_fn_8042813C_00000EF8
     li r26, 0x0
@@ -1149,7 +1149,7 @@ lbl_fn_8042813C_00000DD4:
     lwz r0, 0x5f8(r31)
     add r3, r0, r29
     addi r3, r3, 0x54
-    bl fn_8008AD4C
+    bl area_updateZoneState
     addi r28, r31, 0x1f4
     addi r27, r31, 0x3f4
     li r25, 0x0
@@ -1186,7 +1186,7 @@ lbl_fn_8042813C_00000E68:
     lwz r0, 0x5f8(r31)
     add r3, r0, r30
     addi r3, r3, 0x54
-    bl fn_8008B140
+    bl map_processTrigger
     neg r0, r3
     or r0, r0, r3
     srwi. r0, r0, 31
@@ -1372,7 +1372,7 @@ asm void fn_804283EC(void)
     addi r4, r4, lbl_807774B8@l
     stw r4, 0x8(r1)
     la r4, lbl_8087D710
-    bl fn_8005BCE8
+    bl talk_copySpeakerName
     lis r31, lbl_8075371C@ha
     addi r30, r27, 0x1f4
     addi r29, r27, 0x3f4
@@ -1425,7 +1425,7 @@ lbl_fn_804283EC_00001180:
     stfs f1, 0x600(r27)
 lbl_fn_804283EC_000011A4:
     addi r3, r1, 0x8
-    bl fn_8005BBF8
+    bl talk_parseQuotes
     cmpwi r3, 0x0
     bne lbl_fn_804283EC_000010F8
     lmw r27, 0x64c(r1)
@@ -1846,7 +1846,7 @@ asm void fn_80428B0C(void)
     lwz r5, 0x18(r30)
     mr r4, r29
     lwz r6, 0x1c(r30)
-    bl fn_803EC568
+    bl task_createWorker
     lis r4, lbl_8078E5A8@ha
     li r3, 0x0
     addi r4, r4, lbl_8078E5A8@l
@@ -1888,7 +1888,7 @@ asm void fn_80428BC8(void)
     mr r30, r3
     beq lbl_fn_80428BC8_00001860
     li r4, 0x0
-    bl fn_803EC69C
+    bl task_destroyWorker
     cmpwi r31, 0x0
     ble lbl_fn_80428BC8_00001860
     mr r3, r30
@@ -1911,7 +1911,7 @@ asm void fn_80428C20(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_803EC91C
+    bl task_updateWorker
     cmpwi r3, 0x0
     bne lbl_fn_80428C20_000018AC
     li r0, 0x2

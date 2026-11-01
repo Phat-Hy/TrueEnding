@@ -10,18 +10,18 @@ extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB440(void);
+extern void morph_updateWeights(void);
 extern void morph_updateMesh(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8574(void);
+extern void viewport_updateCulling(void);
 extern void fn_80108F38(void);
 extern void fn_80126214(void);
 extern void fn_8013A258(void);
-extern void fn_8013CB68(void);
+extern void npc_updateTalkInteraction(void);
 extern void fn_801426A4(void);
 extern void fn_80148B0C(void);
 extern void dialog_renderWindow(void);
-extern void fn_80151448(void);
+extern void inventory_applyItemStats(void);
 extern void fn_80158BB4(void);
 extern void actor_setState(void);
 extern void fn_801781B0(void);
@@ -40,7 +40,7 @@ extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
-extern void fn_8068A850(void);
+extern void std_sin(void);
 extern void std_atan2(void);
 extern void math_u64DivMod(void);
 
@@ -337,7 +337,7 @@ lbl_fn_80283FD4_000002FC:
     lfs f3, 0x1534(r30)
     lfs f0, lbl_80883A00
     fmuls f1, f3, f0
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     fneg f0, f0
     fcmpo cr0, f31, f0
@@ -348,7 +348,7 @@ lbl_fn_80283FD4_000003D0:
     lfs f3, 0x1534(r30)
     lfs f0, lbl_80883A00
     fmuls f1, f3, f0
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     fcmpo cr0, f31, f0
     ble lbl_fn_80283FD4_000003F0
@@ -425,7 +425,7 @@ lbl_fn_80283FD4_00000494:
 lbl_fn_80283FD4_000004F4:
     mr r3, r30
     mr r4, r31
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r12, 0x0(r30)
     mr r3, r30
     mr r4, r31
@@ -1127,7 +1127,7 @@ lbl_fn_802847CC_00000F04:
     fmr f1, f0
     lfs f0, 0x568(r3)
     fmuls f2, f0, f30
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
 lbl_fn_802847CC_00000F2C:
     lwz r0, 0x214(r1)
     psq_l f31, 0x208(r1), 0, 0
@@ -1474,7 +1474,7 @@ lbl_fn_80285064_0000136C:
     bl skin_applyWeights
     addi r3, r31, 0x151c
     addi r4, r1, 0x10
-    bl fn_800CB440
+    bl morph_updateWeights
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle
@@ -1873,7 +1873,7 @@ lbl_fn_80285064_0000199C:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
 lbl_fn_80285064_00001A0C:
     lwz r0, 0x2e4(r1)
     psq_l f31, 0x2d8(r1), 0, 0

@@ -15,18 +15,18 @@ extern void mem_getAllocSize(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void node_createNamedChild(void);
-extern void fn_800897D8(void);
-extern void fn_8008BBD8(void);
+extern void node_destroy(void);
+extern void map_debugLog(void);
 extern void atn_Model_findBoneIndex(void);
 extern void str_parseInt(void);
-extern void fn_80148990(void);
+extern void quest_ctorRewardItem(void);
 extern void fn_801957F0(void);
 extern void task_findEntryById(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_unload(void);
-extern void fn_8035B694(void);
-extern void fn_8035B78C(void);
+extern void entity_Instance_constructor(void);
+extern void entity_Instance_destructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void fn_805A3D00(void);
 extern void fn_805A49E8(void);
@@ -261,9 +261,9 @@ lbl_fn_80308E6C_00000240:
     la r6, lbl_8087D9E0
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     li r5, 0x0
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r6, 0x14
     li r7, 0x8
     bl runtime_registerStaticObject
@@ -375,9 +375,9 @@ lbl_fn_80308E6C_000003E0:
     addi r3, r3, 0x10
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     mr r7, r30
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r5, 0x0
     li r6, 0x14
     bl runtime_registerStaticObject
@@ -507,9 +507,9 @@ lbl_fn_80308E6C_000005DC:
     la r6, lbl_8087D9E0
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     li r5, 0x0
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r6, 0x14
     li r7, 0x8
     bl runtime_registerStaticObject
@@ -620,9 +620,9 @@ lbl_fn_80308E6C_0000077C:
     addi r3, r3, 0x10
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     mr r7, r30
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r5, 0x0
     li r6, 0x14
     bl runtime_registerStaticObject
@@ -1137,7 +1137,7 @@ lbl_fn_803098D0_00000EE4:
     stw r4, 0xa8(r1)
     stw r0, 0xac(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_803098D0_00000FB8
     lwz r7, 0x9c(r1)
@@ -1472,7 +1472,7 @@ asm void fn_8030A07C(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_8030A07C_000013B4
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_8030A07C_000013B4:
     addic. r31, r29, 0x163c
     beq lbl_fn_8030A07C_000013D4
@@ -1523,7 +1523,7 @@ asm void fn_8030A144(void)
     mr r29, r3
     stw r28, 0x650(r1)
     lwz r5, 0x20(r5)
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lfs f0, lbl_80884BAC
     lis r3, lbl_807880D0@ha
     li r31, 0x0
@@ -1844,7 +1844,7 @@ asm void fn_8030A5D8(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_8030A5D8_00001910
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_8030A5D8_00001910:
     addic. r31, r29, 0x15f4
     beq lbl_fn_8030A5D8_00001930
@@ -1866,7 +1866,7 @@ lbl_fn_8030A5D8_00001930:
 lbl_fn_8030A5D8_00001950:
     mr r3, r29
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r30, 0x0
     ble lbl_fn_8030A5D8_0000196C
     mr r3, r29

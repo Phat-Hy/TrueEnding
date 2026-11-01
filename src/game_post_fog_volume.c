@@ -15,25 +15,25 @@ extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
 extern void fn_8006AFF8(void);
 extern void mem_free(void);
-extern void fn_800897D8(void);
-extern void fn_800CB360(void);
+extern void node_destroy(void);
+extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void fn_800E0AA8(void);
 extern void fn_800E0AB0(void);
 extern void fn_800EC204(void);
-extern void fn_800EF73C(void);
-extern void fn_8011FC10(void);
-extern void fn_80121F00(void);
+extern void cam_destroyMsgHandle(void);
+extern void skill_findNodeById(void);
+extern void equip_getGlobalManager(void);
 extern void boss_updatePhaseState(void);
 extern void fn_8013C504(void);
 extern void fn_801A03E0(void);
 extern void fn_8020A81C(void);
-extern void fn_80237518(void);
-extern void fn_802375C4(void);
-extern void fn_80237654(void);
-extern void fn_802376D0(void);
+extern void res_MsgHandle_ctor(void);
+extern void res_Resource_destructor(void);
+extern void res_Resource_unload(void);
+extern void res_MsgHandle_isLoading(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_unload(void);
@@ -43,8 +43,8 @@ extern void fn_80244FC0(void);
 extern void fn_802D8B6C(void);
 extern void fn_802DDBB0(void);
 extern void fn_802E2468(void);
-extern void fn_8035B694(void);
-extern void fn_8035B78C(void);
+extern void entity_Instance_constructor(void);
+extern void entity_Instance_destructor(void);
 extern void fn_8036554C(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
@@ -149,28 +149,16 @@ lbl_fn_802D7058_00000094:
     blr
 }
 
-asm void fn_802D70FC(void)
-{
-    nofralloc
-    blr
+void fn_802D70FC(void) {
 }
 
-asm void fn_802D7100(void)
-{
-    nofralloc
-    blr
+void fn_802D7100(void) {
 }
 
-asm void fn_802D7104(void)
-{
-    nofralloc
-    blr
+void fn_802D7104(void) {
 }
 
-asm void fn_802D7108(void)
-{
-    nofralloc
-    blr
+void fn_802D7108(void) {
 }
 
 asm void fn_802D710C(void)
@@ -194,7 +182,7 @@ asm void fn_802D710C(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_802D710C_00000100
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_802D710C_00000100:
     addic. r3, r30, 0x1650
     beq lbl_fn_802D710C_00000110
@@ -258,9 +246,9 @@ lbl_fn_802D710C_000001C0:
     li r4, 0x0
     bl atn_LoadHandle_destructor
 lbl_fn_802D710C_000001E0:
-    lis r4, fn_800EF73C@ha
+    lis r4, cam_destroyMsgHandle@ha
     addi r3, r30, 0x15f0
-    addi r4, r4, fn_800EF73C@l
+    addi r4, r4, cam_destroyMsgHandle@l
     li r5, 0xc
     li r6, 0x2
     bl __destroy_new_array
@@ -323,7 +311,7 @@ lbl_fn_802D710C_000002A4:
 lbl_fn_802D710C_000002C4:
     addi r3, r30, 0x157c
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     addic. r29, r30, 0x1554
     beq lbl_fn_802D710C_000002F0
     mr r3, r29
@@ -437,7 +425,7 @@ asm void fn_802D7480(void)
     mr r31, r5
     lwz r5, 0x20(r5)
     mr r30, r3
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lfs f0, lbl_808845E8
     lis r3, lbl_80786E20@ha
     li r28, 0x0
@@ -473,7 +461,7 @@ asm void fn_802D7480(void)
     stfs f0, 0x1518(r30)
     stfs f0, 0x151c(r30)
     stfs f0, 0x1520(r30)
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     addi r3, r30, 0x1530
     bl res_MsgHandle_constructor
     addi r3, r30, 0x153c
@@ -493,7 +481,7 @@ asm void fn_802D7480(void)
     addi r3, r30, 0x1588
     stw r28, 0x1580(r30)
     stw r0, 0x1584(r30)
-    bl fn_800CB360
+    bl morph_reset
     addi r3, r30, 0x158c
     bl res_MsgHandle_constructor
     addi r3, r30, 0x1598
@@ -718,7 +706,7 @@ lbl_fn_802D7480_00000840:
     bl res_MsgHandle_destructor
     addi r3, r30, 0x1524
     addi r4, r31, 0x8c
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r30, 0x1530
     addi r4, r31, 0xa5
     bl res_MsgHandle_destructor
@@ -829,7 +817,7 @@ asm void fn_802D7A3C(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_802D7A3C_00000A30
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_802D7A3C_00000A30:
     addic. r4, r30, 0x168c
     beq lbl_fn_802D7A3C_00000A5C
@@ -1068,7 +1056,7 @@ lbl_fn_802D7A3C_00000D60:
 lbl_fn_802D7A3C_00000D80:
     addi r3, r30, 0x1524
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     addic. r29, r30, 0x1508
     beq lbl_fn_802D7A3C_00000DAC
     mr r3, r29
@@ -1098,7 +1086,7 @@ lbl_fn_802D7A3C_00000DCC:
 lbl_fn_802D7A3C_00000DEC:
     mr r3, r30
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r31, 0x0
     ble lbl_fn_802D7A3C_00000E08
     mr r3, r30
@@ -1148,7 +1136,7 @@ asm void fn_802D7E80(void)
     cmpwi r3, 0x0
     bne lbl_fn_802D7E80_000014C4
     addi r3, r31, 0x1524
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     bne lbl_fn_802D7E80_000014C4
     addi r3, r31, 0x1530
@@ -1207,10 +1195,10 @@ asm void fn_802D7E80(void)
     bl boss_getOffset54
     cmpwi r3, 0x0
     beq lbl_fn_802D7E80_00001420
-    bl fn_80121F00
+    bl equip_getGlobalManager
     cmpwi r3, 0x0
     beq lbl_fn_802D7E80_00001420
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_8013C504
     cmpwi r3, 0x0
     beq lbl_fn_802D7E80_00001420
@@ -1239,7 +1227,7 @@ lbl_fn_802D7E80_00000FF8:
     bl talk_parseQuotedString
     bl str_parseInt
     mr r28, r3
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_8013C504
     mr r4, r28
     bl fn_800EC204
@@ -1273,7 +1261,7 @@ lbl_fn_802D7E80_00001074:
     bl talk_parseQuotedString
     bl str_parseInt
     mr r28, r3
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_8013C504
     mr r4, r28
     bl fn_800EC204
@@ -1322,7 +1310,7 @@ lbl_fn_802D7E80_00001118:
     mr r28, r3
     bl fn_801A03E0
     mr r4, r28
-    bl fn_8011FC10
+    bl skill_findNodeById
     cmpwi r3, 0x0
     stw r3, 0xc(r1)
     beq lbl_fn_802D7E80_0000114C
@@ -1357,7 +1345,7 @@ lbl_fn_802D7E80_00001194:
     mr r28, r3
     bl fn_801A03E0
     mr r4, r28
-    bl fn_8011FC10
+    bl skill_findNodeById
     cmpwi r3, 0x0
     stw r3, 0x8(r1)
     beq lbl_fn_802D7E80_000011C8
@@ -1417,7 +1405,7 @@ lbl_fn_802D7E80_00001264:
     bl talk_parseQuotedString
     bl str_parseInt
     mr r28, r3
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl fn_8013C504
     mr r4, r28
     bl fn_800EC204

@@ -20,15 +20,15 @@ extern void fn_80101340(void);
 extern void fn_80108C10(void);
 extern void fn_801162A0(void);
 extern void fn_8012DF7C(void);
-extern void fn_8013C38C(void);
-extern void fn_80144710(void);
+extern void npc_getPosition(void);
+extern void quest_evaluateConditions(void);
 extern void fn_80148B0C(void);
 extern void dialog_renderWindow(void);
-extern void fn_8014C540(void);
+extern void dialog_updateScriptState(void);
 extern void actor_setState(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
-extern void fn_8023A680(void);
+extern void res_Shader_bindParams(void);
 extern void res_registerResource(void);
 extern void fn_8029F3AC(void);
 extern void fn_802A4968(void);
@@ -57,7 +57,7 @@ extern void printf(void);
 extern void rand(void);
 extern void abort(void);
 extern void fn_8068A918(void);
-extern void fn_8068AD58(void);
+extern void std_cos(void);
 
 /* External data declarations */
 extern u8 lbl_807549B0[];
@@ -565,7 +565,7 @@ lbl_fn_804541A0_00000630:
     addi r3, r31, 0x19a0
     bl fn_80454554
     lwz r3, 0x0(r3)
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r1, 0x8
     addi r5, r31, 0x528
@@ -625,7 +625,7 @@ lbl_fn_804541A0_00000708:
     bl fn_80454538
 lbl_fn_804541A0_00000718:
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
     mr r3, r31
     bl fn_80454F08
     mr r3, r31
@@ -1384,7 +1384,7 @@ lbl_fn_80454F08_000011C0:
     fsubs f4, f4, f5
     fdivs f3, f4, f3
     fmuls f1, f0, f3
-    bl fn_8068AD58
+    bl std_cos
     lwz r3, lbl_8087F430
     frsp f3, f1
     lfs f0, lbl_80886BBC
@@ -1581,7 +1581,7 @@ lbl_fn_80454F08_00001420:
     stfs f2, 0x548(r30)
 lbl_fn_80454F08_000014D4:
     mr r3, r30
-    bl fn_80144710
+    bl quest_evaluateConditions
     lwz r5, 0x100(r30)
     li r0, 0x0
     lwz r4, 0x2bc(r30)
@@ -1732,7 +1732,7 @@ lbl_fn_8045531C_000016FC:
     lfs f0, lbl_80886BB8
     fdivs f1, f2, f1
     fmuls f1, f0, f1
-    bl fn_8068AD58
+    bl std_cos
     frsp f2, f1
     lfs f1, lbl_80886B94
     lis r4, lbl_807C8A48@ha
@@ -2120,7 +2120,7 @@ lbl_fn_80455638_00001BEC:
     li r9, 0x0
     li r10, 0x0
     lwz r3, lbl_8087F3C0
-    bl fn_8023A680
+    bl res_Shader_bindParams
     lfs f1, lbl_80886B78
     addi r3, r1, 0x18
     addi r4, r31, 0x16f

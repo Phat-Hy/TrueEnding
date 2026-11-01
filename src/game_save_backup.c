@@ -23,7 +23,7 @@ extern void fn_801F9488(void);
 extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
 extern void fn_801FED70(void);
-extern void fn_801FEDBC(void);
+extern void thread_findTaskById(void);
 extern void thread_dispatchToQueue(void);
 extern void fn_801FEEFC(void);
 extern void wcslen(void);
@@ -49,7 +49,7 @@ void fn_801F791C(void);
 void fn_801F7A18(void);
 void fn_801F7DF0(void);
 void fn_801F80A8(void);
-void fn_801F837C(void);
+void save_findEntryByName(void);
 void fn_801F8598(void);
 void fn_801F8830(void);
 void fn_801F8914(void);
@@ -1052,7 +1052,7 @@ lbl_fn_801F80A8_00000DC8:
     blr
 }
 
-asm void fn_801F837C(void)
+asm void save_findEntryByName(void)
 {
     nofralloc
     stwu r1, -0x40(r1)
@@ -1072,13 +1072,13 @@ asm void fn_801F837C(void)
     lwz r0, 0x24(r1)
     stw r3, 0x20(r1)
     srwi. r0, r0, 31
-    bne lbl_fn_801F837C_00000E40
+    bne lbl_save_findEntryByName_00000E40
     lbz r0, 0x24(r1)
     clrlwi r30, r0, 25
-    b lbl_fn_801F837C_00000E44
-lbl_fn_801F837C_00000E40:
+    b lbl_save_findEntryByName_00000E44
+lbl_save_findEntryByName_00000E40:
     lwz r30, 0x28(r1)
-lbl_fn_801F837C_00000E44:
+lbl_save_findEntryByName_00000E44:
     lbz r0, 0x1c(r1)
     mr r3, r29
     stb r0, 0x18(r1)
@@ -1097,45 +1097,45 @@ lbl_fn_801F837C_00000E44:
     li r3, 0x0
     mtctr r0
     cmplwi r0, 0x0
-    ble lbl_fn_801F837C_00000F3C
-lbl_fn_801F837C_00000E90:
+    ble lbl_save_findEntryByName_00000F3C
+lbl_save_findEntryByName_00000E90:
     lwz r0, 0x1e0(r4)
     cmplw r5, r0
-    bne lbl_fn_801F837C_00000F30
+    bne lbl_save_findEntryByName_00000F30
     slwi r0, r3, 4
     add r3, r31, r0
     lwzu r0, 0x1e4(r3)
     srwi. r5, r0, 31
-    bne lbl_fn_801F837C_00000ED4
+    bne lbl_save_findEntryByName_00000ED4
     lwz r4, 0x24(r1)
     srwi. r0, r4, 31
-    bne lbl_fn_801F837C_00000ED4
+    bne lbl_save_findEntryByName_00000ED4
     lwz r0, 0x28(r1)
     stw r4, 0x0(r3)
     stw r0, 0x4(r3)
     lwz r0, 0x2c(r1)
     stw r0, 0x8(r3)
-    b lbl_fn_801F837C_00000FD0
-lbl_fn_801F837C_00000ED4:
+    b lbl_save_findEntryByName_00000FD0
+lbl_save_findEntryByName_00000ED4:
     cmpwi r5, 0x0
-    beq lbl_fn_801F837C_00000EE4
+    beq lbl_save_findEntryByName_00000EE4
     lwz r5, 0x4(r3)
-    b lbl_fn_801F837C_00000EEC
-lbl_fn_801F837C_00000EE4:
+    b lbl_save_findEntryByName_00000EEC
+lbl_save_findEntryByName_00000EE4:
     lbz r0, 0x0(r3)
     clrlwi r5, r0, 25
-lbl_fn_801F837C_00000EEC:
+lbl_save_findEntryByName_00000EEC:
     lwz r0, 0x24(r1)
     srwi. r0, r0, 31
-    bne lbl_fn_801F837C_00000F08
+    bne lbl_save_findEntryByName_00000F08
     lbz r0, 0x24(r1)
     addi r6, r1, 0x26
     clrlwi r0, r0, 25
-    b lbl_fn_801F837C_00000F10
-lbl_fn_801F837C_00000F08:
+    b lbl_save_findEntryByName_00000F10
+lbl_save_findEntryByName_00000F08:
     lwz r6, 0x2c(r1)
     lwz r0, 0x28(r1)
-lbl_fn_801F837C_00000F10:
+lbl_save_findEntryByName_00000F10:
     lbz r4, 0x8(r1)
     slwi r0, r0, 1
     stb r4, 0xc(r1)
@@ -1143,29 +1143,29 @@ lbl_fn_801F837C_00000F10:
     addi r8, r1, 0xc
     li r4, 0x0
     bl str_assignBuffer
-    b lbl_fn_801F837C_00000FD0
-lbl_fn_801F837C_00000F30:
+    b lbl_save_findEntryByName_00000FD0
+lbl_save_findEntryByName_00000F30:
     addi r4, r4, 0x10
     addi r3, r3, 0x1
-    bdnz lbl_fn_801F837C_00000E90
-lbl_fn_801F837C_00000F3C:
+    bdnz lbl_save_findEntryByName_00000E90
+lbl_save_findEntryByName_00000F3C:
     lwz r0, 0x1dc(r31)
     slwi r0, r0, 4
     add r0, r31, r0
     addic. r30, r0, 0x1e0
-    beq lbl_fn_801F837C_00000FC4
+    beq lbl_save_findEntryByName_00000FC4
     lwz r0, 0x20(r1)
     stw r0, 0x0(r30)
     lwz r3, 0x24(r1)
     srwi. r0, r3, 31
-    bne lbl_fn_801F837C_00000F7C
+    bne lbl_save_findEntryByName_00000F7C
     lwz r0, 0x28(r1)
     stw r3, 0x4(r30)
     stw r0, 0x8(r30)
     lwz r0, 0x2c(r1)
     stw r0, 0xc(r30)
-    b lbl_fn_801F837C_00000FC4
-lbl_fn_801F837C_00000F7C:
+    b lbl_save_findEntryByName_00000FC4
+lbl_save_findEntryByName_00000F7C:
     li r0, 0x0
     stw r0, 0x4(r30)
     addi r3, r30, 0x4
@@ -1184,19 +1184,19 @@ lbl_fn_801F837C_00000F7C:
     li r5, 0x0
     add r7, r6, r0
     bl str_assignBuffer
-lbl_fn_801F837C_00000FC4:
+lbl_save_findEntryByName_00000FC4:
     lwz r3, 0x1dc(r31)
     addi r0, r3, 0x1
     stw r0, 0x1dc(r31)
-lbl_fn_801F837C_00000FD0:
+lbl_save_findEntryByName_00000FD0:
     addic. r0, r1, 0x24
-    beq lbl_fn_801F837C_00000FEC
+    beq lbl_save_findEntryByName_00000FEC
     lwz r0, 0x24(r1)
     srwi. r0, r0, 31
-    beq lbl_fn_801F837C_00000FEC
+    beq lbl_save_findEntryByName_00000FEC
     lwz r3, 0x2c(r1)
     bl dtor_80084684
-lbl_fn_801F837C_00000FEC:
+lbl_save_findEntryByName_00000FEC:
     lwz r0, 0x44(r1)
     lwz r31, 0x3c(r1)
     lwz r30, 0x38(r1)
@@ -1930,7 +1930,7 @@ lbl_fn_801F8E6C_0000199C:
     addi r3, r3, 0x58
     lwz r4, 0x4(r29)
     extsb r5, r5
-    bl fn_801FEDBC
+    bl thread_findTaskById
     b lbl_fn_801F8E6C_000019D0
 lbl_fn_801F8E6C_000019BC:
     lwz r3, 0x48(r31)

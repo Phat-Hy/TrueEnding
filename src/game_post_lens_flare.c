@@ -13,12 +13,12 @@ extern void system_getNextSequenceId(void);
 extern void fn_801028E4(void);
 extern void fn_8012D8B8(void);
 extern void fn_8013A258(void);
-extern void fn_8013CB68(void);
-extern void fn_80148990(void);
-extern void fn_8015495C(void);
-extern void fn_8016DA4C(void);
+extern void npc_updateTalkInteraction(void);
+extern void quest_ctorRewardItem(void);
+extern void equip_applyToCharacter(void);
+extern void debuff_clearStatus(void);
 extern void actor_setState(void);
-extern void fn_801765D8(void);
+extern void battle_awardExp(void);
 extern void fn_80178A6C(void);
 extern void fn_8017A300(void);
 extern void sound_initGlobalInstances(void);
@@ -111,9 +111,9 @@ lbl_fn_802CE504_00000038:
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     mr r3, r31
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     li r0, 0x2
     stw r0, 0x58c(r31)
     mr r3, r31
@@ -421,9 +421,9 @@ lbl_fn_802CE8EC_000004D0:
     la r6, lbl_8087D9E0
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     li r5, 0x0
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r6, 0x14
     li r7, 0x8
     bl runtime_registerStaticObject
@@ -535,9 +535,9 @@ lbl_fn_802CE8EC_00000670:
     addi r3, r3, 0x10
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_80148990@ha
+    lis r4, quest_ctorRewardItem@ha
     mr r7, r30
-    addi r4, r4, fn_80148990@l
+    addi r4, r4, quest_ctorRewardItem@l
     li r5, 0x0
     li r6, 0x14
     bl runtime_registerStaticObject
@@ -1080,7 +1080,7 @@ lbl_fn_802CF054_00000E50:
     addi r4, r1, 0x74
     fmuls f2, f0, f30
     li r5, 0x0
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
 lbl_fn_802CF054_00000E6C:
     lwz r0, 0x144(r1)
     psq_l f31, 0x138(r1), 0, 0
@@ -1466,7 +1466,7 @@ lbl_fn_802CF728_000013C0:
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     cmpwi r30, 0x0
     li r3, 0x0
     stw r3, 0xd1c(r29)
@@ -1586,7 +1586,7 @@ lbl_fn_802CF9AC_000015A8:
     mr r3, r31
     ori r0, r0, 0x8000
     stw r0, 0x12a4(r31)
-    bl fn_801765D8
+    bl battle_awardExp
     mr r3, r31
     bl fn_800EE360
 lbl_fn_802CF9AC_000015C4:

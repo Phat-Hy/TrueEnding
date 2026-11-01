@@ -6,13 +6,13 @@ extern void __files(void);
 extern void _restgpr_26(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
-extern void fn_8000D114(void);
-extern void fn_8001047C(void);
+extern void vec3_set(void);
+extern void vec3_assign(void);
 extern void fn_80011410(void);
-extern void fn_8004D388(void);
+extern void collision_queryGeometry(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_8008BBD8(void);
+extern void map_debugLog(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800F52F0(void);
@@ -20,10 +20,10 @@ extern void fn_8012476C(void);
 extern void fn_8012A1B8(void);
 extern void fn_80139F4C(void);
 extern void fn_8013A13C(void);
-extern void fn_801539E0(void);
+extern void inventory_unequipItem(void);
 extern void fn_80155DAC(void);
 extern void fn_8015E4B0(void);
-extern void fn_8016DA4C(void);
+extern void debuff_clearStatus(void);
 extern void fn_80176548(void);
 extern void fn_80178208(void);
 extern void fn_801B4BC8(void);
@@ -378,7 +378,7 @@ lbl_fn_801B5A2C_000003CC:
     stw r4, 0x19c(r1)
     stb r0, 0x1a0(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_801B5A2C_00000520
     lwz r8, 0x180(r1)
@@ -624,7 +624,7 @@ lbl_fn_801B5EC0_00000760:
     stw r4, 0x48(r1)
     stb r0, 0x4c(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_801B5EC0_000008B4
     lwz r8, 0x2c(r1)
@@ -723,7 +723,7 @@ asm void fn_801B618C(void)
     stw r6, 0xc(r3)
     stw r0, 0x560(r4)
     lwz r3, 0x4(r3)
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lwz r3, 0x4(r30)
     lwz r0, 0x12a4(r3)
     extrwi. r0, r0, 1, 25
@@ -735,7 +735,7 @@ lbl_fn_801B618C_00000954:
     lwz r0, 0x12a4(r3)
     srwi. r0, r0, 31
     beq lbl_fn_801B618C_00000968
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_801B618C_00000968:
     lwz r3, 0x4(r30)
     lwz r0, 0x12a4(r3)
@@ -941,7 +941,7 @@ asm void fn_801B6494(void)
     addi r3, r1, 0x50
     lfs f3, lbl_808824D4
     fmr f2, f1
-    bl fn_8000D114
+    bl vec3_set
     lwz r3, 0x4(r30)
     bl fn_8012A1B8
     lfs f1, 0x4(r3)
@@ -959,7 +959,7 @@ asm void fn_801B6494(void)
     stw r6, 0x38(r1)
     stw r5, 0x3c(r1)
     stw r0, 0x40(r1)
-    bl fn_8001047C
+    bl vec3_assign
     lwz r5, 0x4(r30)
     mr r6, r3
     addi r3, r1, 0xd8
@@ -980,7 +980,7 @@ lbl_fn_801B6494_00000CC8:
     addi r3, r1, 0x44
     lfs f3, lbl_808824D4
     fmr f2, f1
-    bl fn_8000D114
+    bl vec3_set
     lwz r3, 0x4(r30)
     bl fn_8012A1B8
     lfs f1, 0x4(r3)
@@ -998,7 +998,7 @@ lbl_fn_801B6494_00000CC8:
     stw r6, 0x20(r1)
     stw r5, 0x24(r1)
     stw r0, 0x28(r1)
-    bl fn_8001047C
+    bl vec3_assign
     lwz r5, 0x4(r30)
     mr r6, r3
     addi r3, r1, 0x88
@@ -1131,7 +1131,7 @@ lbl_fn_801B66F0_00000ED8:
     stw r4, 0x14(r1)
     stw r0, 0x18(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_801B66F0_00000FAC
     lwz r7, 0x8(r1)
@@ -1447,7 +1447,7 @@ lbl_fn_801B6A80_00001304:
     stfs f2, 0x40(r1)
     stw r0, 0x44(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_801B6A80_0000143C
     lwz r7, 0x28(r1)
@@ -1787,7 +1787,7 @@ lbl_fn_801B6E70_000017EC:
     addi r6, r1, 0x28
     lis r7, 0x8000
     li r9, 0x0
-    bl fn_8004D388
+    bl collision_queryGeometry
     addi r4, r1, 0x1a0
     lwz r5, 0x4(r30)
     addi r3, r1, 0x8

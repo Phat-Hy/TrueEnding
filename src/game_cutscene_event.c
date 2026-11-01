@@ -29,21 +29,21 @@ extern void ref_releaseHandle(void);
 extern void fn_800CFD18(void);
 extern void fn_800E2DD4(void);
 extern void fn_800E2FE0(void);
-extern void fn_800EF73C(void);
-extern void fn_80145334(void);
-extern void fn_8014C540(void);
-extern void fn_80151448(void);
+extern void cam_destroyMsgHandle(void);
+extern void quest_updateFlow(void);
+extern void dialog_updateScriptState(void);
+extern void inventory_applyItemStats(void);
 extern void sound_initGlobalInstances(void);
-extern void fn_80237518(void);
-extern void fn_80237654(void);
-extern void fn_802376D0(void);
+extern void res_MsgHandle_ctor(void);
+extern void res_Resource_unload(void);
+extern void res_MsgHandle_isLoading(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_update(void);
 extern void res_findResourceSlot(void);
-extern void fn_8023A680(void);
+extern void res_Shader_bindParams(void);
 extern void res_registerResource(void);
-extern void fn_8035B694(void);
+extern void entity_Instance_constructor(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
 extern void fn_803750E4(void);
@@ -594,7 +594,7 @@ asm void fn_8032C52C(void)
     mr r27, r5
     mr r31, r3
     lwz r5, 0x20(r5)
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lis r3, lbl_80788D20@ha
     lis r4, fn_80057F28@ha
     addi r3, r3, lbl_80788D20@l
@@ -607,17 +607,17 @@ asm void fn_8032C52C(void)
     li r7, 0x2
     bl __construct_new_array
     lis r4, res_MsgHandle_constructor@ha
-    lis r5, fn_800EF73C@ha
+    lis r5, cam_destroyMsgHandle@ha
     addi r3, r31, 0x15c0
     li r6, 0xc
     addi r4, r4, res_MsgHandle_constructor@l
-    addi r5, r5, fn_800EF73C@l
+    addi r5, r5, cam_destroyMsgHandle@l
     li r7, 0x4
     bl __construct_new_array
     addi r3, r31, 0x15f0
     bl res_MsgHandle_constructor
     addi r3, r31, 0x15fc
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     li r29, 0x0
     addi r28, r31, 0x161c
     stw r29, 0x1608(r31)
@@ -682,7 +682,7 @@ asm void fn_8032C52C(void)
     bl atn_Anim_applyLayerTransform
     addi r3, r31, 0x15fc
     addi r4, r30, 0x90
-    bl fn_80237654
+    bl res_Resource_unload
     stw r29, 0x24(r1)
     addi r3, r27, 0x2c
     addi r4, r30, 0xa1
@@ -855,7 +855,7 @@ lbl_fn_8032C850_00000A5C:
     cmpwi r3, 0x0
     bne lbl_fn_8032C850_00000A7C
     addi r3, r29, 0x15fc
-    bl fn_802376D0
+    bl res_MsgHandle_isLoading
     cmpwi r3, 0x0
     beq lbl_fn_8032C850_00000A84
 lbl_fn_8032C850_00000A7C:
@@ -1149,9 +1149,9 @@ lbl_fn_8032CBFC_00000E6C:
     mr r3, r31
     bl fn_8032D1F4
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
     b lbl_fn_8032CBFC_00001060
 lbl_fn_8032CBFC_00000E88:
     lwz r3, 0x1610(r31)
@@ -1164,9 +1164,9 @@ lbl_fn_8032CBFC_00000E88:
     bl fn_803750E4
 lbl_fn_8032CBFC_00000EA8:
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
     b lbl_fn_8032CBFC_00001060
 lbl_fn_8032CBFC_00000EBC:
     lfs f31, 0x2e4(r31)
@@ -1187,9 +1187,9 @@ lbl_fn_8032CBFC_00000EF0:
     stw r0, 0x58c(r31)
 lbl_fn_8032CBFC_00000EF8:
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
     b lbl_fn_8032CBFC_00001060
 lbl_fn_8032CBFC_00000F0C:
     lwz r0, 0x1608(r31)
@@ -1273,9 +1273,9 @@ lbl_fn_8032CBFC_00000FFC:
     stw r0, 0x1608(r31)
 lbl_fn_8032CBFC_00001044:
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
     b lbl_fn_8032CBFC_00001060
 lbl_fn_8032CBFC_00001058:
     mr r3, r31
@@ -1875,7 +1875,7 @@ lbl_fn_8032D5EC_000018C4:
     li r7, 0x0
     li r10, 0x0
     lwz r3, lbl_8087F3C0
-    bl fn_8023A680
+    bl res_Shader_bindParams
     b lbl_fn_8032D5EC_00001C00
 lbl_fn_8032D5EC_0000192C:
     cmpwi r0, 0x2
@@ -2056,7 +2056,7 @@ lbl_fn_8032D5EC_00001BD4:
 lbl_fn_8032D5EC_00001BDC:
     mr r3, r28
     mr r4, r29
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r12, 0x0(r28)
     mr r3, r28
     mr r4, r29

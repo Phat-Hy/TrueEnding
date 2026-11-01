@@ -10,7 +10,7 @@ extern void _savegpr_14(void);
 extern void _savegpr_25(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
-extern void fn_8000D114(void);
+extern void vec3_set(void);
 extern void fn_8000DD14(void);
 extern void fn_8000DD98(void);
 extern void fn_8004B338(void);
@@ -40,7 +40,7 @@ extern void fn_800C0508(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void fn_800DBF68(void);
 extern void str_findChar(void);
 extern void fn_800E0000(void);
@@ -75,13 +75,13 @@ extern void fn_80614190(void);
 extern void GXSetTexCopySrc(void);
 extern void GXSetTexCopyDst(void);
 extern void GXCopyTex(void);
-extern void fn_80615D20(void);
+extern void GXInitLightDistAttn(void);
 extern void fn_80615FF0(void);
 extern void fn_80616250(void);
 extern void fn_80617340(void);
-extern void fn_80617880(void);
+extern void GXSetTevOrder(void);
 extern void GXSetNumTevStages(void);
-extern void fn_80617D50(void);
+extern void GXSetTevAlphaIn(void);
 extern void printf(void);
 extern void wcslen(void);
 extern void abort(void);
@@ -305,14 +305,14 @@ lbl_fn_804ABA2C_00000144:
     li r3, 0x1
     bl GXClearVtxDesc
     li r3, 0x0
-    bl fn_80615D20
+    bl GXInitLightDistAttn
     li r3, 0x1
     bl GXSetNumTevStages
     li r3, 0x0
     li r4, 0x1
     li r5, 0x0
     li r6, 0x3
-    bl fn_80617D50
+    bl GXSetTevAlphaIn
     li r3, 0x0
     li r4, 0x1
     li r5, 0x4
@@ -325,7 +325,7 @@ lbl_fn_804ABA2C_00000144:
     li r4, 0x0
     li r5, 0x0
     li r6, 0xff
-    bl fn_80617880
+    bl GXSetTevOrder
     mr r3, r29
     bl fn_804ABF44
     bl fn_804ABF40
@@ -357,7 +357,7 @@ lbl_fn_804ABA2C_00000144:
     lfs f2, 0x5e0(r28)
     addi r3, r1, 0x78
     lfs f3, lbl_80887250
-    bl fn_8000D114
+    bl vec3_set
     mr r4, r3
     mr r6, r27
     addi r3, r1, 0xc0
@@ -376,7 +376,7 @@ lbl_fn_804ABA2C_00000144:
     lfs f2, 0x5e0(r28)
     fadds f1, f1, f0
     lfs f3, lbl_80887250
-    bl fn_8000D114
+    bl vec3_set
     mr r4, r3
     mr r6, r27
     addi r3, r1, 0xe0
@@ -397,7 +397,7 @@ lbl_fn_804ABA2C_00000144:
     fadds f1, f3, f1
     lfs f3, lbl_80887250
     fadds f2, f2, f0
-    bl fn_8000D114
+    bl vec3_set
     mr r4, r3
     mr r6, r27
     addi r3, r1, 0x100
@@ -416,7 +416,7 @@ lbl_fn_804ABA2C_00000144:
     lfs f1, 0x5dc(r28)
     fadds f2, f2, f0
     lfs f3, lbl_80887250
-    bl fn_8000D114
+    bl vec3_set
     mr r4, r3
     mr r6, r27
     addi r3, r1, 0x120
@@ -542,10 +542,7 @@ asm void fn_804ABF34(void)
     b __GXSetVtxDesc
 }
 
-asm void fn_804ABF40(void)
-{
-    nofralloc
-    blr
+void fn_804ABF40(void) {
 }
 
 asm void fn_804ABF44(void)
@@ -1074,7 +1071,7 @@ asm void fn_804AC5E0(void)
     stw r30, 0x18(r1)
     stw r29, 0x14(r1)
     mr r29, r3
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     beq lbl_fn_804AC5E0_00000CE8
     lwz r4, 0x54(r29)

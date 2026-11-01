@@ -8,18 +8,18 @@ extern void actor_dispatchMessage(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_80087E9C(void);
+extern void route_createWaypoint(void);
 extern void node_createNamedChild(void);
 extern void atn_Model_findBoneIndex(void);
 extern void msg_getMessageString(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void str_findChar(void);
-extern void fn_800EF73C(void);
+extern void cam_destroyMsgHandle(void);
 extern void actor_spawnActorWithId(void);
 extern void fn_8012B028(void);
 extern void fn_80134800(void);
-extern void fn_801F4CB4(void);
+extern void save_formatSlotTitle(void);
 extern void fn_801F6C10(void);
 extern void save_computeCrc32(void);
 extern void fn_801F8598(void);
@@ -361,7 +361,7 @@ lbl_fn_805112FC_00000378:
     addi r5, r29, 0xa4
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_808877D4
     mr r3, r30
     lfs f2, lbl_808877D8
@@ -370,7 +370,7 @@ lbl_fn_805112FC_00000378:
     addi r5, r29, 0xb0
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_808877D4
     mr r3, r30
     lfs f2, lbl_808877D8
@@ -379,7 +379,7 @@ lbl_fn_805112FC_00000378:
     addi r5, r29, 0xbc
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lfs f1, lbl_808877D4
     mr r3, r30
     lfs f2, lbl_808877D8
@@ -388,7 +388,7 @@ lbl_fn_805112FC_00000378:
     addi r5, r29, 0xc8
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087E9C
+    bl route_createWaypoint
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)
@@ -575,10 +575,7 @@ lbl_fn_805115D4_0000068C:
     blr
 }
 
-asm void fn_80511668(void)
-{
-    nofralloc
-    blr
+void fn_80511668(void) {
 }
 
 asm void fn_8051166C(void)
@@ -1001,7 +998,7 @@ lbl_fn_80511AE0_00000C18:
     mr r3, r29
     addi r4, r28, 0x3c
     li r6, 0x0
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     addi r3, r28, 0x42
     bl str_findChar
     lfs f1, lbl_808877D0
@@ -1019,7 +1016,7 @@ lbl_fn_80511AE0_00000C58:
     li r6, 0x0
     stfd f0, 0xe0(r1)
     lwz r5, 0xe4(r1)
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r0, 0x94(r1)
     lis r3, lbl_8075B2A8@ha
     lfd f1, lbl_8075B2A8@l(r3)
@@ -1053,7 +1050,7 @@ lbl_fn_80511AE0_00000CE0:
     mr r3, r29
     addi r4, r28, 0x49
     li r6, 0x0
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     addi r3, r28, 0x4f
     bl str_findChar
     fmr f1, f30
@@ -1304,16 +1301,10 @@ asm void fn_8051201C(void)
     blr
 }
 
-asm void fn_80512024(void)
-{
-    nofralloc
-    blr
+void fn_80512024(void) {
 }
 
-asm void fn_80512028(void)
-{
-    nofralloc
-    blr
+void fn_80512028(void) {
 }
 
 asm void fn_8051202C(void)
@@ -1943,11 +1934,11 @@ asm void fn_805128C4(void)
     addi r3, r3, lbl_80793320@l
     stw r3, 0x0(r30)
     li r0, 0x0
-    lis r5, fn_800EF73C@ha
+    lis r5, cam_destroyMsgHandle@ha
     stw r0, 0xd4(r30)
     addi r3, r30, 0xd8
     addi r4, r4, res_MsgHandle_constructor@l
-    addi r5, r5, fn_800EF73C@l
+    addi r5, r5, cam_destroyMsgHandle@l
     li r6, 0xc
     li r7, 0x8
     bl __construct_new_array

@@ -12,7 +12,7 @@ extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
 extern void fn_8006AFF8(void);
 extern void mem_alloc(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -23,22 +23,22 @@ extern void str_parseInt(void);
 extern void fn_800E9ED8(void);
 extern void fn_800EFC64(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8574(void);
+extern void viewport_updateCulling(void);
 extern void fn_80103F60(void);
 extern void fn_80108378(void);
 extern void fn_8011F91C(void);
-extern void fn_8011FC10(void);
+extern void skill_findNodeById(void);
 extern void fn_80126214(void);
 extern void fn_8012B3E8(void);
 extern void fn_8012B988(void);
 extern void fn_80133130(void);
 extern void boss_updatePhaseState(void);
 extern void fn_8013A258(void);
-extern void fn_8013CB68(void);
-extern void fn_80145334(void);
-extern void fn_8014C540(void);
+extern void npc_updateTalkInteraction(void);
+extern void quest_updateFlow(void);
+extern void dialog_updateScriptState(void);
 extern void fn_80154654(void);
-extern void fn_8015495C(void);
+extern void equip_applyToCharacter(void);
 extern void fn_80155A88(void);
 extern void fn_801561E4(void);
 extern void fn_80158EF0(void);
@@ -47,7 +47,7 @@ extern void fn_801644D4(void);
 extern void fn_8016E4C4(void);
 extern void actor_setState(void);
 extern void fn_8016EB48(void);
-extern void fn_8016F3D0(void);
+extern void battle_canTargetActor(void);
 extern void fn_80178208(void);
 extern void fn_80179AD0(void);
 extern void fn_801CCD00(void);
@@ -66,8 +66,8 @@ extern void fn_80252E6C(void);
 extern void fn_802531F4(void);
 extern void fn_80253884(void);
 extern void fn_80253C9C(void);
-extern void fn_8035B694(void);
-extern void fn_8035B78C(void);
+extern void entity_Instance_constructor(void);
+extern void entity_Instance_destructor(void);
 extern void world_setGlobalFlag(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
@@ -207,7 +207,7 @@ lbl_fn_80250884_000000DC:
     mr r3, r30
     mr r4, r29
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     bne lbl_fn_80250884_0000014C
     lfs f3, 0x530(r30)
@@ -263,7 +263,7 @@ asm void fn_80250A24(void)
     mr r31, r5
     mr r30, r3
     lwz r5, 0x20(r5)
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lis r3, lbl_807843B8@ha
     li r29, 0x0
     addi r3, r3, lbl_807843B8@l
@@ -518,7 +518,7 @@ lbl_fn_80250D90_00000558:
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_80250D90_0000057C
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_80250D90_0000057C:
     addic. r3, r29, 0x1508
     beq lbl_fn_80250D90_0000058C
@@ -563,7 +563,7 @@ lbl_fn_80250D90_000005EC:
 lbl_fn_80250D90_0000060C:
     mr r3, r29
     li r4, 0x0
-    bl fn_8035B78C
+    bl entity_Instance_destructor
     cmpwi r30, 0x0
     ble lbl_fn_80250D90_00000628
     mr r3, r29
@@ -778,7 +778,7 @@ lbl_fn_80250ECC_000008F4:
     stw r3, 0x14f8(r30)
     mr r4, r3
     lwz r3, lbl_8087F408
-    bl fn_8011FC10
+    bl skill_findNodeById
     stw r3, 0x14fc(r30)
 lbl_fn_80250ECC_00000928:
     addi r3, r1, 0x8
@@ -1733,7 +1733,7 @@ lbl_fn_80251344_000016D8:
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     mr r3, r29
     li r4, 0x0
     li r5, 0x0
@@ -1957,7 +1957,7 @@ lbl_fn_80251344_00001A24:
     mr r3, r29
     addi r4, r1, 0x104
     li r5, 0x1
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
 lbl_fn_80251344_00001A3C:
     lwz r0, 0x55c(r29)
     cmpwi r0, 0x6
@@ -2252,7 +2252,7 @@ lbl_fn_80251344_00001E30:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
     b lbl_fn_80251344_00001F44
 lbl_fn_80251344_00001E94:
     mr r3, r29
@@ -2304,9 +2304,9 @@ lbl_fn_80251344_00001F30:
     bl fn_802531F4
 lbl_fn_80251344_00001F44:
     mr r3, r29
-    bl fn_8014C540
+    bl dialog_updateScriptState
     mr r3, r29
-    bl fn_80145334
+    bl quest_updateFlow
     lwz r0, 0x14bc(r29)
     cmpwi r0, 0x2
     beq lbl_fn_80251344_00001F68

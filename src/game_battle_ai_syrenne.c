@@ -15,11 +15,11 @@ extern void fn_80051CD8(void);
 extern void mem_alloc(void);
 extern void fn_8008A4E0(void);
 extern void fn_8008A76C(void);
-extern void fn_800BFAC8(void);
+extern void motion_updateFogAdj(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB688(void);
-extern void fn_800EF73C(void);
+extern void cam_destroyMsgHandle(void);
 extern void event_findEntryById(void);
 extern void fn_80216AFC(void);
 extern void fn_8021D720(void);
@@ -35,8 +35,8 @@ extern void fn_803E3050(void);
 extern void fn_803E3BE8(void);
 extern void fn_803E5E64(void);
 extern void fn_803E6ADC(void);
-extern void fn_803EC568(void);
-extern void fn_803EC69C(void);
+extern void task_createWorker(void);
+extern void task_destroyWorker(void);
 extern void fn_80445130(void);
 extern void fn_80448F9C(void);
 extern void fn_8044E418(void);
@@ -498,7 +498,7 @@ lbl_fn_804348C4_000003EC:
     lwz r4, lbl_8087EFB4
     stfs f8, 0x110(r1)
     stfs f0, 0x10c(r1)
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     lfs f9, 0x148(r1)
     addi r4, r1, 0xc8
     lfs f8, 0x120(r1)
@@ -520,7 +520,7 @@ lbl_fn_804348C4_000003EC:
     stfs f0, 0x100(r1)
     stfs f9, 0x104(r1)
     stfs f8, 0x108(r1)
-    bl fn_800BFAC8
+    bl motion_updateFogAdj
     addi r3, r1, 0xbc
     lfs f2, 0xc4(r1)
     psq_l f1, 0x0(r3), 0, 0
@@ -1696,7 +1696,7 @@ asm void fn_80435CE4(void)
     mr r4, r28
     mr r5, r29
     mr r6, r30
-    bl fn_803EC568
+    bl task_createWorker
     lis r4, lbl_8078EED8@ha
     addi r3, r31, 0xf4
     addi r4, r4, lbl_8078EED8@l
@@ -1704,11 +1704,11 @@ asm void fn_80435CE4(void)
     li r4, 0x9
     bl fn_8008A4E0
     lis r4, res_MsgHandle_constructor@ha
-    lis r5, fn_800EF73C@ha
+    lis r5, cam_destroyMsgHandle@ha
     addi r3, r31, 0x308
     li r6, 0xc
     addi r4, r4, res_MsgHandle_constructor@l
-    addi r5, r5, fn_800EF73C@l
+    addi r5, r5, cam_destroyMsgHandle@l
     li r7, 0x3
     bl __construct_new_array
     li r5, 0x1
@@ -1770,7 +1770,7 @@ asm void fn_80435DEC(void)
     lwz r5, 0x18(r30)
     lwz r6, 0x1c(r30)
     add r5, r5, r0
-    bl fn_803EC568
+    bl task_createWorker
     lis r4, lbl_8078EED8@ha
     addi r3, r31, 0xf4
     addi r4, r4, lbl_8078EED8@l
@@ -1778,11 +1778,11 @@ asm void fn_80435DEC(void)
     li r4, 0x9
     bl fn_8008A4E0
     lis r4, res_MsgHandle_constructor@ha
-    lis r5, fn_800EF73C@ha
+    lis r5, cam_destroyMsgHandle@ha
     addi r3, r31, 0x308
     li r6, 0xc
     addi r4, r4, res_MsgHandle_constructor@l
-    addi r5, r5, fn_800EF73C@l
+    addi r5, r5, cam_destroyMsgHandle@l
     li r7, 0x3
     bl __construct_new_array
     li r5, 0x1
@@ -1865,9 +1865,9 @@ asm void fn_80435F58(void)
     li r6, 0x0
     bl res_findResourceSlot
 lbl_fn_80435F58_000019A0:
-    lis r4, fn_800EF73C@ha
+    lis r4, cam_destroyMsgHandle@ha
     addi r3, r30, 0x308
-    addi r4, r4, fn_800EF73C@l
+    addi r4, r4, cam_destroyMsgHandle@l
     li r5, 0xc
     li r6, 0x3
     bl __destroy_new_array
@@ -1876,7 +1876,7 @@ lbl_fn_80435F58_000019A0:
     bl fn_8008A76C
     mr r3, r30
     li r4, 0x0
-    bl fn_803EC69C
+    bl task_destroyWorker
     cmpwi r31, 0x0
     ble lbl_fn_80435F58_000019E0
     mr r3, r30

@@ -11,7 +11,7 @@ extern void actor_dispatchMessage(void);
 extern void fn_800698DC(void);
 extern void fn_8006AC08(void);
 extern void fn_8006BD78(void);
-extern void fn_8006EF48(void);
+extern void script_executeOpcode(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void fn_800A4450(void);
@@ -28,7 +28,7 @@ extern void fn_804730E4(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_getStatus(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_80473F88(void);
+extern void shockwave_freeEmitter(void);
 extern void taskManager_updateTasks(void);
 extern void fn_805F9EF0(void);
 extern void memcmp(void);
@@ -237,7 +237,7 @@ lbl_fn_8046ECDC_000001D0:
     lfs f2, lbl_80886EC0
     li r5, 0x1
     li r6, 0x4
-    bl fn_8006EF48
+    bl script_executeOpcode
     lwz r0, 0x8(r1)
     fmr f31, f1
     srwi. r0, r0, 31
@@ -2079,7 +2079,7 @@ asm void atn_LH_Binary_onNotify(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    bl fn_80473F88
+    bl shockwave_freeEmitter
     lwz r3, lbl_8087F518
     mr r4, r31
     li r5, 0x1

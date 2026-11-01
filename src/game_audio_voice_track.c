@@ -4,12 +4,12 @@
 /* External function declarations */
 extern void _restgpr_22(void);
 extern void _savegpr_22(void);
-extern void fn_8000D0F8(void);
-extern void fn_8000D114(void);
+extern void mtx_getTranslation(void);
+extern void vec3_set(void);
 extern void vec3_copy(void);
-extern void fn_8001047C(void);
+extern void vec3_assign(void);
 extern void fn_800109E0(void);
-extern void fn_80011034(void);
+extern void vec3_toEulerAngles(void);
 extern void fn_80011410(void);
 extern void fn_80012C88(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
@@ -24,18 +24,18 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
-extern void fn_800F7FA0(void);
+extern void viewport_getGlobalContext(void);
 extern void fn_800F7FD8(void);
 extern void clip_calculateFrustum(void);
 extern void fn_801125F8(void);
-extern void fn_80121F00(void);
+extern void equip_getGlobalManager(void);
 extern void magic_getOffset6C(void);
 extern void fn_80139550(void);
 extern void fn_80139F24(void);
 extern void fn_80139F3C(void);
 extern void fn_8013A194(void);
 extern void fn_8013C554(void);
-extern void fn_8014C540(void);
+extern void dialog_updateScriptState(void);
 extern void fn_8017A300(void);
 extern void fn_801C3910(void);
 extern void fn_8020A81C(void);
@@ -111,7 +111,7 @@ asm void fn_803041C8(void)
     stw r30, 0x188(r1)
     lfs f31, 0x16c8(r3)
     addi r3, r1, 0x110
-    bl fn_8000D114
+    bl vec3_set
     lwz r4, 0x1604(r31)
     cmpwi r4, 0x0
     beq lbl_fn_803041C8_00000050
@@ -128,7 +128,7 @@ lbl_fn_803041C8_00000050:
     bl fn_800F7FD8
     addi r3, r1, 0x104
     addi r4, r1, 0x80
-    bl fn_80011034
+    bl vec3_toEulerAngles
     addi r3, r1, 0x5c
     addi r4, r31, 0x1608
     addi r5, r1, 0x110
@@ -138,7 +138,7 @@ lbl_fn_803041C8_00000050:
     bl fn_800F7FD8
     addi r3, r1, 0xf8
     addi r4, r1, 0x68
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lwz r0, 0x14f0(r31)
     cmpwi r0, 0x0
     bne lbl_fn_803041C8_00000284
@@ -210,7 +210,7 @@ lbl_fn_803041C8_00000108:
     bl fn_800F7FD8
     addi r3, r1, 0xec
     addi r4, r1, 0x50
-    bl fn_80011034
+    bl vec3_toEulerAngles
     addi r3, r1, 0x2c
     addi r4, r31, 0x1608
     addi r5, r31, 0x528
@@ -220,14 +220,14 @@ lbl_fn_803041C8_00000108:
     bl fn_800F7FD8
     addi r3, r1, 0xe0
     addi r4, r1, 0x38
-    bl fn_80011034
+    bl vec3_toEulerAngles
     li r30, 0x2
     stw r30, 0x1624(r31)
     addi r3, r1, 0xd4
     addi r4, r31, 0x534
     lfs f0, 0xf0(r1)
     stfs f0, 0x538(r31)
-    bl fn_8001047C
+    bl vec3_assign
     lfs f1, lbl_80884A20
     addi r3, r31, 0x15d8
     stfs f1, 0xd4(r1)
@@ -257,7 +257,7 @@ lbl_fn_803041C8_00000258:
     li r0, 0x1
     stfs f0, 0x52c(r31)
     stw r0, 0x14f0(r31)
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl magic_getOffset6C
     lfs f1, lbl_80884A9C
     li r4, 0x1
@@ -299,12 +299,12 @@ lbl_fn_803041C8_00000284:
     mr r3, r31
     stfs f0, 0x534(r31)
     bl fn_80301200
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r4, r31
     li r5, 0x190
     li r6, 0x1
     bl res_findResourceSlot
-    bl fn_80121F00
+    bl equip_getGlobalManager
     li r4, 0xa4
     li r5, 0x0
     bl world_setLocalFlag
@@ -370,7 +370,7 @@ lbl_fn_803041C8_000003E8:
     bl fn_800F7FD8
     addi r3, r1, 0x20
     addi r4, r1, 0x14
-    bl fn_80011034
+    bl vec3_toEulerAngles
     lfs f0, 0x24(r1)
     li r0, 0x0
     stfs f0, 0x538(r31)
@@ -394,7 +394,7 @@ lbl_fn_803041C8_00000438:
     bl ref_releaseHandle
     addi r3, r1, 0x98
     addi r4, r31, 0x534
-    bl fn_8001047C
+    bl vec3_assign
     lfs f1, lbl_80884A20
     addi r3, r31, 0x15d8
     stfs f1, 0x98(r1)
@@ -409,7 +409,7 @@ lbl_fn_803041C8_00000438:
     bl fn_80011410
     lfs f0, lbl_80884A20
     stfs f0, 0x15dc(r31)
-    bl fn_80121F00
+    bl equip_getGlobalManager
     bl magic_getOffset6C
     lfs f1, lbl_80884A9C
     li r4, 0x1
@@ -423,7 +423,7 @@ lbl_fn_803041C8_000004CC:
     bl atn_Model_getBoneMatrix
     mr r4, r3
     addi r3, r1, 0x8c
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     li r3, 0x64d
     bl task_findEntryById
     mr r30, r3
@@ -638,7 +638,7 @@ lbl_fn_80304718_0000073C:
     mr r3, r31
     bl fn_8017A300
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
 lbl_fn_80304718_00000818:
     lfs f1, 0x2e4(r31)
     lfs f0, lbl_80884A44

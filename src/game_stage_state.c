@@ -7,12 +7,12 @@ extern void dtor_80084684(void);
 extern void mem_free(void);
 extern void fn_80084A78(void);
 extern void mem_getAllocSize(void);
-extern void fn_8008BBD8(void);
+extern void map_debugLog(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800DCA6C(void);
 extern void fn_8012476C(void);
-extern void fn_801539E0(void);
+extern void inventory_unequipItem(void);
 extern void fn_80155DAC(void);
 extern void fn_80188F08(void);
 extern void fn_80188F40(void);
@@ -21,7 +21,7 @@ extern void fn_801905DC(void);
 extern void printf(void);
 extern void strcmp(void);
 extern void abort(void);
-extern void fn_806952C4(void);
+extern void msl_releaseRefCount(void);
 extern void __ptmf_scall(void);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
@@ -143,7 +143,7 @@ lbl_fn_8019BFF0_000000D0:
     lwz r0, 0x12a4(r3)
     srwi. r0, r0, 31
     beq lbl_fn_8019BFF0_000000E4
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_8019BFF0_000000E4:
     lwz r3, 0x4(r31)
     lwz r0, 0x12a4(r3)
@@ -339,7 +339,7 @@ lbl_fn_8019C234_00000374:
     stw r4, 0xfc(r1)
     stw r0, 0x100(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_8019C234_00000458
     lwz r7, 0xf0(r1)
@@ -458,7 +458,7 @@ lbl_fn_8019C234_0000051C:
     stw r4, 0xc0(r1)
     stw r0, 0xc4(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_8019C234_00000638
     lwz r10, 0xa8(r1)
@@ -653,7 +653,7 @@ lbl_fn_8019C234_00000804:
     stw r4, 0x80(r1)
     stw r0, 0x84(r1)
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_8019C234_000008D8
     lwz r7, 0x74(r1)
@@ -1224,7 +1224,7 @@ asm void fn_8019CF64(void)
     mr r29, r3
     mr r3, r31
     crclr 6
-    bl fn_8008BBD8
+    bl map_debugLog
     cmpwi r3, 0x0
     bne lbl_fn_8019CF64_00001118
     li r0, 0x0
@@ -1628,7 +1628,7 @@ lbl_fn_8019D42C_00001548:
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_8019D42C_00001590
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_8019D42C_00001590:
     lwz r4, 0x0(r31)
     addi r3, r31, 0x4
@@ -1690,7 +1690,7 @@ lbl_fn_8019D42C_00001634:
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_8019D42C_0000167C
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_8019D42C_0000167C:
     lwz r4, 0x14(r31)
     addi r3, r31, 0x18

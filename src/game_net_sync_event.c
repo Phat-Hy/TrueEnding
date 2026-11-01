@@ -6,15 +6,15 @@ extern void _restgpr_18(void);
 extern void _restgpr_23(void);
 extern void _savegpr_18(void);
 extern void _savegpr_23(void);
-extern void fn_80061824(void);
+extern void skill_calcTrajectory(void);
 extern void fn_80061AE4(void);
-extern void fn_8006EF48(void);
+extern void script_executeOpcode(void);
 extern void str_findChar(void);
 extern void wcs_vformat(void);
 extern void fn_801F4C14(void);
-extern void fn_801F4CB4(void);
+extern void save_formatSlotTitle(void);
 extern void saveSlot_readSummary(void);
-extern void fn_801FEDBC(void);
+extern void thread_findTaskById(void);
 extern void thread_dispatchToQueue(void);
 extern void fn_8020924C(void);
 extern void fn_804A3C24(void);
@@ -717,7 +717,7 @@ lbl_fn_804CBCD0_000008AC:
     li r5, 0x1
     lfs f2, lbl_808874E0
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     fcmpo cr0, f28, f1
     ble lbl_fn_804CBCD0_00000938
     stfs f31, 0x170(r25)
@@ -1053,7 +1053,7 @@ lbl_fn_804CBCD0_00000D54:
     li r5, 0x1
     lfs f2, lbl_808874E0
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     fctiwz f0, f1
     stfd f0, 0x98(r1)
     lwz r3, 0x9c(r1)
@@ -1075,7 +1075,7 @@ lbl_fn_804CBCD0_00000D54:
     li r8, 0x0
     li r9, 0x0
     lis r10, 0xff00
-    bl fn_80061824
+    bl skill_calcTrajectory
     b lbl_fn_804CBCD0_00000E5C
 lbl_fn_804CBCD0_00000DD4:
     lwz r0, 0xe4(r25)
@@ -1180,7 +1180,7 @@ lbl_fn_804CC618_00000F1C:
     mr r4, r3
     mr r3, r28
     li r5, 0x0
-    bl fn_801FEDBC
+    bl thread_findTaskById
     cmpwi r23, 0x15
     bgt lbl_fn_804CC618_00000FE4
     cmpwi r23, 0x0
@@ -1495,7 +1495,7 @@ lbl_fn_804CC7A4_00001354:
     mr r4, r3
     mr r3, r22
     li r5, 0x0
-    bl fn_801FEDBC
+    bl thread_findTaskById
     b lbl_fn_804CC7A4_000013B0
 lbl_fn_804CC7A4_00001388:
     stw r19, 0x110(r26)
@@ -1507,7 +1507,7 @@ lbl_fn_804CC7A4_00001388:
     mr r4, r3
     mr r3, r22
     li r5, 0x0
-    bl fn_801FEDBC
+    bl thread_findTaskById
 lbl_fn_804CC7A4_000013B0:
     addi r21, r21, 0x1
     addi r25, r25, 0x8
@@ -2050,7 +2050,7 @@ lbl_fn_804CCB54_00001AB4:
     lwz r5, 0xe8(r26)
     addi r4, r25, 0x138
     li r6, 0x0
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r0, 0xe8(r26)
     addi r4, r25, 0x146
     lwz r3, 0x50(r26)
@@ -2065,7 +2065,7 @@ lbl_fn_804CCB54_00001AEC:
     addi r5, r5, 0x1
 lbl_fn_804CCB54_00001AFC:
     li r6, 0x0
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r3, 0x50(r26)
     lis r25, lbl_80759374@ha
     la r27, lbl_8087E140

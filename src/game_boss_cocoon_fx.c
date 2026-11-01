@@ -13,7 +13,7 @@ extern void dtor_80084684(void);
 extern void talk_parseDialogue(void);
 extern void fn_8005B8F8(void);
 extern void fn_8005B9AC(void);
-extern void fn_8006EF48(void);
+extern void script_executeOpcode(void);
 extern void fn_8006F420(void);
 extern void str_assignBuffer(void);
 extern void mem_alloc(void);
@@ -25,7 +25,7 @@ extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
-extern void fn_800D3FA4(void);
+extern void bloom_processPasses(void);
 extern void atn_LH_Texture_destructAndFree(void);
 extern void atn_LH_Texture_update(void);
 extern void wcs_parseInt(void);
@@ -34,13 +34,13 @@ extern void fn_800DFB40(void);
 extern void fn_800E0908(void);
 extern void save_validateHeader(void);
 extern void fn_801F4728(void);
-extern void fn_801F4CB4(void);
+extern void save_formatSlotTitle(void);
 extern void fn_801F4DDC(void);
 extern void fn_801F4E30(void);
 extern void saveSlot_readSummary(void);
 extern void save_computeCrc32(void);
 extern void fn_801F6E78(void);
-extern void fn_801F837C(void);
+extern void save_findEntryByName(void);
 extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
 extern void thread_dispatchToQueue(void);
@@ -776,7 +776,7 @@ lbl_fn_8046A20C_00000964:
     lwz r3, 0x58(r27)
     addi r4, r30, 0x168
     addi r5, r29, 0x14
-    bl fn_801F837C
+    bl save_findEntryByName
     cmpwi r28, 0x0
     lwz r3, 0x58(r27)
     addi r4, r30, 0x171
@@ -1052,7 +1052,7 @@ asm void task_Book_destructor(void)
     b lbl_task_Book_destructor_00000EE4
 lbl_task_Book_destructor_00000D2C:
     mr r3, r31
-    bl fn_800D3FA4
+    bl bloom_processPasses
     cmpwi r3, 0x0
     bne lbl_task_Book_destructor_00000D44
     li r3, 0x0
@@ -1634,7 +1634,7 @@ lbl_fn_8046AE7C_00001528:
     lfs f2, lbl_80886E88
     li r5, 0x1
     li r6, 0x1
-    bl fn_8006EF48
+    bl script_executeOpcode
     lwz r3, 0x50(r24)
     lis r23, lbl_80755394@ha
     fmr f31, f1
@@ -1678,23 +1678,23 @@ lbl_fn_8046AE7C_000015A0:
     lwz r3, 0x50(r24)
     li r6, 0x0
     addi r5, r5, 0x1
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r5, 0x94(r24)
     addi r4, r23, 0x1d4
     lwz r3, 0x50(r24)
     li r6, 0x0
     addi r5, r5, 0x1
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r3, 0x50(r24)
     addi r4, r23, 0x1dc
     lwz r5, 0x98(r24)
     li r6, 0x0
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lwz r3, 0x50(r24)
     addi r4, r23, 0x1e4
     lwz r5, 0x98(r24)
     li r6, 0x0
-    bl fn_801F4CB4
+    bl save_formatSlotTitle
     lfs f0, lbl_80886E88
     addi r3, r23, 0x1ef
     stfs f0, 0x78(r1)

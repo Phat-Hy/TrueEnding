@@ -8,23 +8,23 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
-extern void fn_800F8C6C(void);
+extern void scissor_clipFrustum(void);
 extern void fn_80103F60(void);
 extern void fn_80108378(void);
 extern void fn_80133130(void);
 extern void fn_80133EE8(void);
 extern void fn_80139560(void);
-extern void fn_80145334(void);
+extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
-extern void fn_8014C540(void);
-extern void fn_80151448(void);
+extern void dialog_updateScriptState(void);
+extern void inventory_applyItemStats(void);
 extern void fn_8015E4B0(void);
-extern void fn_8016DA4C(void);
+extern void debuff_clearStatus(void);
 extern void actor_setState(void);
 extern void fn_80170A20(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
-extern void fn_8023A680(void);
+extern void res_Shader_bindParams(void);
 extern void res_registerResource(void);
 extern void fn_8024D120(void);
 extern void fn_8024E7E4(void);
@@ -43,8 +43,8 @@ extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
-extern void fn_8068A850(void);
-extern void fn_8068AD58(void);
+extern void std_sin(void);
+extern void std_cos(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
 
@@ -232,7 +232,7 @@ lbl_fn_8024B4F0_00000140:
     bl res_registerResource
 lbl_fn_8024B4F0_000001CC:
     mr r3, r31
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     li r30, 0x0
     stw r30, 0x58c(r31)
     mr r3, r31
@@ -338,7 +338,7 @@ lbl_fn_8024B4F0_00000338:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
 lbl_fn_8024B4F0_0000035C:
     lfs f30, 0x2e4(r31)
     addi r3, r31, 0xb0
@@ -749,9 +749,9 @@ lbl_fn_8024B4F0_00000940:
     bl fn_8024D120
 lbl_fn_8024B4F0_0000095C:
     mr r3, r31
-    bl fn_8014C540
+    bl dialog_updateScriptState
     mr r3, r31
-    bl fn_80145334
+    bl quest_updateFlow
     mr r3, r31
     bl fn_8024BE94
 lbl_fn_8024B4F0_00000974:
@@ -915,7 +915,7 @@ lbl_fn_8024BE94_00000A80:
     lfs f1, 0x1644(r31)
     lfs f0, lbl_808832D0
     fmuls f1, f0, f1
-    bl fn_8068AD58
+    bl std_cos
     lfs f3, 0x2e4(r31)
     frsp f2, f1
     lfs f0, lbl_808832A4
@@ -952,7 +952,7 @@ lbl_fn_8024BE94_00000C28:
     lfs f1, 0x1644(r31)
     lfs f0, lbl_808832D0
     fmuls f1, f0, f1
-    bl fn_8068AD58
+    bl std_cos
     frsp f1, f1
     lfs f0, lbl_808832D4
     fmadds f29, f0, f1, f0
@@ -974,7 +974,7 @@ lbl_fn_8024BE94_00000C78:
     lfs f1, 0x1644(r31)
     lfs f0, lbl_808832D0
     fmuls f1, f0, f1
-    bl fn_8068AD58
+    bl std_cos
     frsp f1, f1
     lfs f0, lbl_808832D4
     fmadds f29, f0, f1, f0
@@ -1516,7 +1516,7 @@ lbl_fn_8024C46C_00001408:
     lwz r3, lbl_8087F3C0
     li r7, 0x0
     li r10, 0x0
-    bl fn_8023A680
+    bl res_Shader_bindParams
     lwz r0, 0x16bc(r29)
     cmpwi r0, 0x0
     beq lbl_fn_8024C46C_00001758
@@ -1611,7 +1611,7 @@ lbl_fn_8024C46C_0000157C:
     lwz r3, lbl_8087F3C0
     li r7, 0x0
     li r10, 0x0
-    bl fn_8023A680
+    bl res_Shader_bindParams
     lis r4, lbl_8074367C@ha
     lfs f1, lbl_8088326C
     addi r4, r4, lbl_8074367C@l
@@ -1713,7 +1713,7 @@ lbl_fn_8024C46C_000016DC:
 lbl_fn_8024C46C_00001734:
     mr r3, r29
     mr r4, r30
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r12, 0x0(r29)
     mr r3, r29
     mr r4, r30
@@ -1861,7 +1861,7 @@ lbl_fn_8024CD24_000018E0:
     bl PSVECDotProduct
     fmr f31, f1
     lfd f1, 0xa0(r31)
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     fcmpo cr0, f31, f0
     ble lbl_fn_8024CD24_00001980
@@ -1877,7 +1877,7 @@ lbl_fn_8024CD24_000018E0:
     b lbl_fn_8024CD24_00001BF8
 lbl_fn_8024CD24_00001980:
     lfd f1, 0xa8(r31)
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     fcmpo cr0, f31, f0
     ble lbl_fn_8024CD24_00001BD4

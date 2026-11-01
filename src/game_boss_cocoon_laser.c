@@ -11,7 +11,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void system_getNextSequenceId(void);
 extern void fn_8013A258(void);
-extern void fn_80144710(void);
+extern void quest_evaluateConditions(void);
 extern void actor_setState(void);
 extern void sound_initGlobalInstances(void);
 extern void res_registerResource(void);
@@ -25,8 +25,8 @@ extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
-extern void fn_8068A850(void);
-extern void fn_8068AD58(void);
+extern void std_sin(void);
+extern void std_cos(void);
 extern void std_atan2(void);
 extern void vec3_isNonZero(void);
 
@@ -1345,7 +1345,7 @@ lbl_fn_8045BFFC_000011EC:
     fmr f31, f1
     lis r3, lbl_80754DC8@ha
     lfd f1, lbl_80754DC8@l(r3)
-    bl fn_8068A850
+    bl std_sin
     frsp f0, f1
     fcmpo cr0, f31, f0
     cror eq, gt, eq
@@ -1617,7 +1617,7 @@ lbl_fn_8045C83C_0000166C:
     psq_st f1, 0x0(r30), 0, 0
     psq_st f1, 0x534(r28), 0, 0
     stfs f2, 0x53c(r28)
-    bl fn_80144710
+    bl quest_evaluateConditions
     li r0, 0x0
     stw r0, 0x5c(r1)
     addi r3, r28, 0xb0
@@ -1683,7 +1683,7 @@ asm void fn_8045CB24(void)
     fsubs f2, f2, f3
     fmuls f1, f1, f2
     fmuls f1, f0, f1
-    bl fn_8068AD58
+    bl std_cos
     frsp f1, f1
     lfs f0, lbl_80886C64
     lfs f2, lbl_80886C30
@@ -1702,7 +1702,7 @@ lbl_fn_8045CB24_000017A0:
     fsubs f2, f2, f3
     fmuls f1, f1, f2
     fmuls f1, f0, f1
-    bl fn_8068AD58
+    bl std_cos
     frsp f1, f1
     lfs f0, lbl_80886C64
     fmadds f2, f0, f1, f0
@@ -1942,7 +1942,7 @@ lbl_fn_8045CB24_00001AC4:
     fsubs f2, f2, f3
     fmuls f1, f1, f2
     fmuls f1, f0, f1
-    bl fn_8068AD58
+    bl std_cos
     frsp f1, f1
     lfs f0, lbl_80886C64
     lfs f2, lbl_80886C30
@@ -1961,7 +1961,7 @@ lbl_fn_8045CB24_00001B20:
     fsubs f2, f2, f3
     fmuls f1, f1, f2
     fmuls f1, f0, f1
-    bl fn_8068AD58
+    bl std_cos
     frsp f1, f1
     lfs f0, lbl_80886C64
     fmadds f2, f0, f1, f0
@@ -2007,7 +2007,7 @@ lbl_fn_8045CB24_00001BC4:
     fsubs f2, f2, f3
     fmuls f1, f1, f2
     fmuls f1, f0, f1
-    bl fn_8068AD58
+    bl std_cos
     frsp f1, f1
     lfs f0, lbl_80886C64
     lfs f2, lbl_80886C30
@@ -2026,7 +2026,7 @@ lbl_fn_8045CB24_00001C10:
     fsubs f2, f2, f3
     fmuls f1, f1, f2
     fmuls f1, f0, f1
-    bl fn_8068AD58
+    bl std_cos
     frsp f1, f1
     lfs f0, lbl_80886C64
     fmadds f2, f0, f1, f0
@@ -2049,7 +2049,7 @@ lbl_fn_8045CB24_00001C60:
     fsubs f2, f2, f3
     fmuls f1, f1, f2
     fmuls f1, f0, f1
-    bl fn_8068AD58
+    bl std_cos
     frsp f1, f1
     lfs f0, lbl_80886C64
     lfs f2, lbl_80886C30
@@ -2068,7 +2068,7 @@ lbl_fn_8045CB24_00001CAC:
     fsubs f2, f2, f3
     fmuls f1, f1, f2
     fmuls f1, f0, f1
-    bl fn_8068AD58
+    bl std_cos
     frsp f1, f1
     lfs f0, lbl_80886C64
     fmadds f2, f0, f1, f0

@@ -11,31 +11,31 @@ extern void talk_setSpeakerName(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800CB360(void);
+extern void morph_reset(void);
 extern void morph_updateMesh(void);
 extern void str_parseInt(void);
 extern void fn_800EB7A0(void);
 extern void fn_800EE360(void);
 extern void atn_LH_Xsca_destructor(void);
 extern void system_getNextSequenceId(void);
-extern void fn_8013CB68(void);
-extern void fn_8015495C(void);
-extern void fn_8016DA4C(void);
+extern void npc_updateTalkInteraction(void);
+extern void equip_applyToCharacter(void);
+extern void debuff_clearStatus(void);
 extern void fn_8016E864(void);
 extern void actor_setState(void);
 extern void fn_8017039C(void);
-extern void fn_801765D8(void);
+extern void battle_awardExp(void);
 extern void fn_80178A6C(void);
 extern void fn_8020A81C(void);
 extern void sound_initGlobalInstances(void);
-extern void fn_80237518(void);
-extern void fn_80237654(void);
+extern void res_MsgHandle_ctor(void);
+extern void res_Resource_unload(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
 extern void fn_802FCF14(void);
-extern void fn_8035B694(void);
+extern void entity_Instance_constructor(void);
 extern void PSMTXRotRad(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
@@ -169,7 +169,7 @@ lbl_fn_802FB39C_00000104:
     ori r0, r4, 0x8000
     stw r0, 0x12a4(r30)
     mr r3, r30
-    bl fn_801765D8
+    bl battle_awardExp
     mr r3, r30
     bl fn_800EE360
     b lbl_fn_802FB39C_000002E8
@@ -293,7 +293,7 @@ lbl_fn_802FB39C_000002B0:
     stfs f2, 0x88(r1)
     stfs f2, 0x54(r1)
     lfs f2, lbl_80884994
-    bl fn_8013CB68
+    bl npc_updateTalkInteraction
     li r0, 0x1e
     stw r0, 0x1434(r30)
 lbl_fn_802FB39C_000002E8:
@@ -1094,9 +1094,9 @@ asm void fn_802FC188(void)
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_8015495C
+    bl equip_applyToCharacter
     mr r3, r31
-    bl fn_8016DA4C
+    bl debuff_clearStatus
     lwz r3, 0x14f4(r31)
     li r0, 0x0
     stw r0, 0x14b0(r31)
@@ -1548,7 +1548,7 @@ asm void fn_802FC850(void)
     mr r31, r5
     lwz r5, 0x20(r5)
     mr r30, r3
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lfs f0, lbl_80884A20
     lis r4, lbl_80787C10@ha
     li r28, 0x0
@@ -1568,7 +1568,7 @@ asm void fn_802FC850(void)
     addi r3, r30, 0x1540
     bl res_MsgHandle_constructor
     addi r3, r30, 0x154c
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     addi r3, r30, 0x1558
     bl res_MsgHandle_constructor
     addi r3, r30, 0x1564
@@ -1578,13 +1578,13 @@ asm void fn_802FC850(void)
     addi r3, r30, 0x157c
     bl res_MsgHandle_constructor
     addi r3, r30, 0x1588
-    bl fn_80237518
+    bl res_MsgHandle_ctor
     addi r3, r30, 0x1594
     bl res_MsgHandle_constructor
     addi r3, r30, 0x15a0
     bl res_MsgHandle_constructor
     addi r3, r30, 0x15ac
-    bl fn_800CB360
+    bl morph_reset
     li r0, 0x1
     li r6, 0x3e8
     lis r4, fn_802FCF14@ha
@@ -1663,13 +1663,13 @@ asm void fn_802FC850(void)
     bl res_MsgHandle_destructor
     addi r3, r30, 0x1588
     addi r4, r29, 0x2c
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r30, 0x1540
     addi r4, r29, 0x42
     bl res_MsgHandle_destructor
     addi r3, r30, 0x154c
     addi r4, r29, 0x58
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r30, 0x1558
     addi r4, r29, 0x6e
     bl res_MsgHandle_destructor

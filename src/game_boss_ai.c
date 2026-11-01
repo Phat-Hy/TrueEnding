@@ -10,13 +10,13 @@ extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_80056DB8(void);
-extern void fn_800697D8(void);
+extern void boss_recordDamage(void);
 extern void fn_8006AD24(void);
 extern void fn_8007A75C(void);
 extern void mem_alloc(void);
 extern void mem_getAllocSize(void);
 extern void lockon_updateTarget(void);
-extern void fn_800CB360(void);
+extern void morph_reset(void);
 extern void atn_Task_constructor(void);
 extern void fn_8011BD14(void);
 extern void fn_8011D24C(void);
@@ -1490,7 +1490,7 @@ lbl_fn_801354B4_000012D4:
     stw r28, 0x1400(r29)
     stw r28, 0x1404(r29)
     stw r28, 0x1408(r29)
-    bl fn_800CB360
+    bl morph_reset
     lwz r3, 0x48(r29)
     li r0, 0x1
     lfs f1, lbl_8088196C
@@ -1547,7 +1547,7 @@ lbl_fn_801354B4_000013AC:
     bl sprintf
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x168
-    bl fn_800697D8
+    bl boss_recordDamage
 lbl_fn_801354B4_00001448:
     li r3, 0x0
     bl fn_8020924C

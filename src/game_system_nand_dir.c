@@ -11,8 +11,8 @@ extern void atn_Anim_getLayerDuration(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8574(void);
-extern void fn_800F8C6C(void);
+extern void viewport_updateCulling(void);
+extern void scissor_clipFrustum(void);
 extern void clip_calculateFrustum(void);
 extern void fn_8015ECC4(void);
 extern void fn_8016C7D8(void);
@@ -21,7 +21,7 @@ extern void fn_80192FB4(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
 extern void fn_8023A254(void);
-extern void fn_8023A680(void);
+extern void res_Shader_bindParams(void);
 extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXTrans(void);
@@ -583,7 +583,7 @@ lbl_fn_8034AE48_00000668:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     lwz r8, lbl_8087F430
     li r0, 0xa
     lfs f3, lbl_80885398
@@ -712,7 +712,7 @@ lbl_fn_8034AE48_00000854:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     lwz r5, lbl_8087F430
     li r0, 0xa
     lfs f0, lbl_80885398
@@ -1952,7 +1952,7 @@ asm void fn_8034C714(void)
     lwz r3, lbl_8087F3C0
     li r9, 0x0
     li r10, 0x0
-    bl fn_8023A680
+    bl res_Shader_bindParams
     lis r4, lbl_8074AA58@ha
     lfs f1, lbl_80885398
     addi r4, r4, lbl_8074AA58@l
@@ -2119,7 +2119,7 @@ lbl_fn_8034C714_00001C74:
     li r8, 0x0
     lis r9, 0x100
     li r10, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
     addi r27, r27, 0x1
     cmpwi r27, 0x4
     blt lbl_fn_8034C714_00001C74

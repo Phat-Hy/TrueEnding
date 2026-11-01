@@ -831,16 +831,10 @@ asm void fn_805430EC(void)
     blr
 }
 
-asm void fn_805430F4(void)
-{
-    nofralloc
-    blr
+void fn_805430F4(void) {
 }
 
-asm void fn_805430F8(void)
-{
-    nofralloc
-    blr
+void fn_805430F8(void) {
 }
 
 asm void fn_805430FC(void)
@@ -850,16 +844,10 @@ asm void fn_805430FC(void)
     blr
 }
 
-asm void fn_80543104(void)
-{
-    nofralloc
-    blr
+void fn_80543104(void) {
 }
 
-asm void fn_80543108(void)
-{
-    nofralloc
-    blr
+void fn_80543108(void) {
 }
 
 asm void fn_8054310C(void)

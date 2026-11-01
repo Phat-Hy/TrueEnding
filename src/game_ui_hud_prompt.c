@@ -6,24 +6,24 @@ extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_8003EA3C(void);
-extern void fn_8004D388(void);
+extern void collision_queryGeometry(void);
 extern void collision_testLineSegment(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800F8574(void);
-extern void fn_800F8C6C(void);
+extern void viewport_updateCulling(void);
+extern void scissor_clipFrustum(void);
 extern void fn_800FB4B0(void);
 extern void fn_801092C8(void);
 extern void fn_8011BF3C(void);
 extern void magic_dispatchActionCommand(void);
 extern void fn_801240B4(void);
-extern void fn_801539E0(void);
+extern void inventory_unequipItem(void);
 extern void fn_80176548(void);
 extern void fn_80178018(void);
 extern void fn_80178078(void);
-extern void fn_80179D44(void);
+extern void actor_getMovementFlags(void);
 extern void fn_801A4E08(void);
 extern void fn_801C3414(void);
 extern void fn_801C3458(void);
@@ -436,7 +436,7 @@ lbl_fn_801C900C_000003BC:
     addi r6, r1, 0x18
     addi r7, r7, 0x80
     li r9, 0x0
-    bl fn_8004D388
+    bl collision_queryGeometry
     lwz r5, 0x4(r31)
     addi r4, r1, 0x190
     lfs f7, 0x190(r1)
@@ -577,7 +577,7 @@ lbl_fn_801C93C4_00000654:
     lwz r0, 0x12a4(r3)
     srwi. r0, r0, 31
     beq lbl_fn_801C93C4_00000668
-    bl fn_801539E0
+    bl inventory_unequipItem
 lbl_fn_801C93C4_00000668:
     mr r3, r31
     lwz r31, 0x1c(r1)
@@ -839,7 +839,7 @@ lbl_fn_801C951C_00000A08:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_800F8574
+    bl viewport_updateCulling
     b lbl_fn_801C951C_00000B20
 lbl_fn_801C951C_00000A38:
     lbz r0, 0x1(r30)
@@ -856,7 +856,7 @@ lbl_fn_801C951C_00000A38:
     li r5, 0x0
     li r9, 0x1e
     li r10, -0x1
-    bl fn_800F8C6C
+    bl scissor_clipFrustum
     b lbl_fn_801C951C_00000B20
 lbl_fn_801C951C_00000A78:
     lwz r0, 0xac(r30)
@@ -2042,7 +2042,7 @@ lbl_fn_801CA1E0_00001AF8:
     stfs f4, 0x114(r1)
     stfs f0, 0x108(r1)
     lwz r3, 0x4(r29)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     oris r7, r3, 0x8000
     lwz r3, lbl_8087EE98
     mr r5, r28

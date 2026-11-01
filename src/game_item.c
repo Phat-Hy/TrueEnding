@@ -31,8 +31,8 @@ extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
 extern void PSVECCrossProduct(void);
-extern void fn_8068A850(void);
-extern void fn_8068AD58(void);
+extern void std_sin(void);
+extern void std_cos(void);
 extern void fn_8068AE24(void);
 extern void fn_8068AE9C(void);
 extern void std_atan2(void);
@@ -102,7 +102,7 @@ void atn_ColliBase_getAABB(void);
 void fn_8004D258(void);
 void atn_ColliBase_testBox(void);
 void fn_8004D314(void);
-void fn_8004D388(void);
+void collision_queryGeometry(void);
 void fn_8004ECC0(void);
 void collision_testLineSegment(void);
 void fn_8004F45C(void);
@@ -465,11 +465,11 @@ lbl_item_useConsumable_000004E8:
     fmr f1, f0
     lfs f2, 0x70(r1)
     stfs f2, 0xc4(r1)
-    bl fn_8068A850
+    bl std_sin
     lfs f0, 0x38(r31)
     frsp f31, f1
     fmr f1, f0
-    bl fn_8068AD58
+    bl std_cos
     frsp f24, f1
     lfs f9, 0xc8(r1)
     lfs f0, 0xd0(r1)
@@ -2328,7 +2328,7 @@ asm void fn_8004D314(void)
     stw r0, 0x40(r1)
     stw r0, 0x44(r1)
     stw r0, 0x48(r1)
-    bl fn_8004D388
+    bl collision_queryGeometry
     cmpwi r3, 0x0
     beq lbl_fn_8004D314_00001FF8
     cmpwi r31, 0x0
@@ -2351,7 +2351,7 @@ lbl_fn_8004D314_00001FFC:
     blr
 }
 
-asm void fn_8004D388(void)
+asm void collision_queryGeometry(void)
 {
     nofralloc
     stwu r1, -0x720(r1)
@@ -2406,10 +2406,10 @@ asm void fn_8004D388(void)
     stw r8, 0x18(r1)
     stw r9, 0x1c(r1)
     cror eq, lt, eq
-    bne lbl_fn_8004D388_000020EC
+    bne lbl_collision_queryGeometry_000020EC
     li r3, 0x0
-    b lbl_fn_8004D388_000038A0
-lbl_fn_8004D388_000020EC:
+    b lbl_collision_queryGeometry_000038A0
+lbl_collision_queryGeometry_000020EC:
     psq_l f1, 0x0(r6), 0, 0
     li r0, 0x0
     lfs f2, 0x8(r6)
@@ -2436,7 +2436,7 @@ lbl_fn_8004D388_000020EC:
     lfs f0, lbl_808808E0
     fmr f14, f1
     fcmpo cr0, f1, f0
-    ble lbl_fn_8004D388_0000217C
+    ble lbl_collision_queryGeometry_0000217C
     addi r15, r1, 0x110
     psq_l f1, 0x0(r14), 0, 0
     lfs f2, 0x1fc(r1)
@@ -2445,10 +2445,10 @@ lbl_fn_8004D388_000020EC:
     mr r4, r15
     stfs f2, 0x118(r1)
     bl PSVECNormalize
-    b lbl_fn_8004D388_00002180
-lbl_fn_8004D388_0000217C:
+    b lbl_collision_queryGeometry_00002180
+lbl_collision_queryGeometry_0000217C:
     addi r15, r1, 0x1e8
-lbl_fn_8004D388_00002180:
+lbl_collision_queryGeometry_00002180:
     fmuls f3, f16, f16
     lfs f4, lbl_808808DC
     lfs f0, lbl_808808E4
@@ -2498,7 +2498,7 @@ lbl_fn_8004D388_00002180:
     stfs f4, 0x1d0(r1)
     stfs f4, 0x1d4(r1)
     stfs f4, 0x1d8(r1)
-    ble lbl_fn_8004D388_000025C0
+    ble lbl_collision_queryGeometry_000025C0
     stw r0, 0x2dc(r1)
     addi r4, r1, 0x2a8
     lwz r5, 0x10(r1)
@@ -2524,7 +2524,7 @@ lbl_fn_8004D388_00002180:
     stfs f4, 0x1c8(r1)
     bl collision_testLineSegment
     cmpwi r3, 0x0
-    beq lbl_fn_8004D388_000025C0
+    beq lbl_collision_queryGeometry_000025C0
     lwz r3, 0x10(r1)
     addi r5, r1, 0x104
     lwz r4, 0x10(r1)
@@ -2549,7 +2549,7 @@ lbl_fn_8004D388_00002180:
     lfs f0, lbl_808808E8
     fmr f14, f1
     fcmpo cr0, f1, f0
-    ble lbl_fn_8004D388_000023D8
+    ble lbl_collision_queryGeometry_000023D8
     addi r3, r1, 0xec
     psq_l f1, 0x0(r14), 0, 0
     lfs f2, 0x1fc(r1)
@@ -2562,11 +2562,11 @@ lbl_fn_8004D388_00002180:
     fmuls f4, f3, f16
     fmuls f0, f0, f14
     fcmpo cr0, f4, f0
-    bge lbl_fn_8004D388_0000234C
-    b lbl_fn_8004D388_00002350
-lbl_fn_8004D388_0000234C:
+    bge lbl_collision_queryGeometry_0000234C
+    b lbl_collision_queryGeometry_00002350
+lbl_collision_queryGeometry_0000234C:
     fmr f4, f0
-lbl_fn_8004D388_00002350:
+lbl_collision_queryGeometry_00002350:
     lfs f3, lbl_808808D8
     lfs f0, lbl_808808EC
     fmuls f6, f3, f16
@@ -2574,11 +2574,11 @@ lbl_fn_8004D388_00002350:
     fmuls f0, f0, f14
     fmuls f5, f3, f4
     fcmpo cr0, f6, f0
-    bge lbl_fn_8004D388_00002374
-    b lbl_fn_8004D388_00002378
-lbl_fn_8004D388_00002374:
+    bge lbl_collision_queryGeometry_00002374
+    b lbl_collision_queryGeometry_00002378
+lbl_collision_queryGeometry_00002374:
     fmr f6, f0
-lbl_fn_8004D388_00002378:
+lbl_collision_queryGeometry_00002378:
     lfs f3, lbl_808808D8
     lfs f0, lbl_808808EC
     fmuls f4, f3, f16
@@ -2586,11 +2586,11 @@ lbl_fn_8004D388_00002378:
     fmuls f0, f0, f14
     fmuls f6, f3, f6
     fcmpo cr0, f4, f0
-    bge lbl_fn_8004D388_0000239C
-    b lbl_fn_8004D388_000023A0
-lbl_fn_8004D388_0000239C:
+    bge lbl_collision_queryGeometry_0000239C
+    b lbl_collision_queryGeometry_000023A0
+lbl_collision_queryGeometry_0000239C:
     fmr f4, f0
-lbl_fn_8004D388_000023A0:
+lbl_collision_queryGeometry_000023A0:
     lfs f0, 0xec(r1)
     lfs f3, 0x1f8(r1)
     fmuls f7, f0, f4
@@ -2605,62 +2605,62 @@ lbl_fn_8004D388_000023A0:
     stfs f4, 0x1f4(r1)
     stfs f3, 0x1f8(r1)
     stfs f0, 0x1fc(r1)
-lbl_fn_8004D388_000023D8:
+lbl_collision_queryGeometry_000023D8:
     addi r3, r1, 0x2d0
     addi r4, r1, 0x1e8
     bl PSVECDotProduct
     lfs f0, lbl_808808F0
     fcmpo cr0, f1, f0
-    ble lbl_fn_8004D388_00002424
+    ble lbl_collision_queryGeometry_00002424
     lwz r0, 0x2dc(r1)
     cmpwi r0, 0x0
-    beq lbl_fn_8004D388_00002400
+    beq lbl_collision_queryGeometry_00002400
     stw r0, 0x5a0(r1)
-lbl_fn_8004D388_00002400:
+lbl_collision_queryGeometry_00002400:
     lwz r3, 0x2e0(r1)
     cmpwi r3, 0x0
-    beq lbl_fn_8004D388_00002480
+    beq lbl_collision_queryGeometry_00002480
     lwz r0, 0x8(r3)
     rlwinm r0, r0, 0, 30, 30
     cmplwi r0, 0x2
-    beq lbl_fn_8004D388_00002480
+    beq lbl_collision_queryGeometry_00002480
     ori r30, r30, 0x1
-    b lbl_fn_8004D388_00002480
-lbl_fn_8004D388_00002424:
+    b lbl_collision_queryGeometry_00002480
+lbl_collision_queryGeometry_00002424:
     addi r3, r1, 0x2d0
     addi r4, r1, 0x1e8
     bl PSVECDotProduct
     lfs f0, lbl_808808F4
     fcmpo cr0, f1, f0
-    bge lbl_fn_8004D388_00002460
+    bge lbl_collision_queryGeometry_00002460
     lwz r3, 0x2e0(r1)
     cmpwi r3, 0x0
-    beq lbl_fn_8004D388_00002480
+    beq lbl_collision_queryGeometry_00002480
     lwz r0, 0x8(r3)
     rlwinm r0, r0, 0, 30, 30
     cmplwi r0, 0x2
-    beq lbl_fn_8004D388_00002480
+    beq lbl_collision_queryGeometry_00002480
     ori r30, r30, 0x100
-    b lbl_fn_8004D388_00002480
-lbl_fn_8004D388_00002460:
+    b lbl_collision_queryGeometry_00002480
+lbl_collision_queryGeometry_00002460:
     lwz r3, 0x2e0(r1)
     cmpwi r3, 0x0
-    beq lbl_fn_8004D388_00002480
+    beq lbl_collision_queryGeometry_00002480
     lwz r0, 0x8(r3)
     rlwinm r0, r0, 0, 30, 30
     cmplwi r0, 0x2
-    beq lbl_fn_8004D388_00002480
+    beq lbl_collision_queryGeometry_00002480
     ori r30, r30, 0x20
-lbl_fn_8004D388_00002480:
+lbl_collision_queryGeometry_00002480:
     cmpwi r3, 0x0
-    beq lbl_fn_8004D388_000024A0
+    beq lbl_collision_queryGeometry_000024A0
     lwz r0, 0x8(r3)
     rlwinm r0, r0, 0, 30, 30
     cmplwi r0, 0x2
-    bne lbl_fn_8004D388_000024A0
+    bne lbl_collision_queryGeometry_000024A0
     ori r30, r30, 0x2
     stw r3, 0x59c(r1)
-lbl_fn_8004D388_000024A0:
+lbl_collision_queryGeometry_000024A0:
     lwz r5, 0x2dc(r1)
     addi r15, r1, 0x1d0
     lwz r3, 0x8(r1)
@@ -2669,91 +2669,91 @@ lbl_fn_8004D388_000024A0:
     li r14, 0x0
     addis r3, r3, 0x1
     lwz r3, -0x6fcc(r3)
-    beq lbl_fn_8004D388_000025BC
+    beq lbl_collision_queryGeometry_000025BC
     lwz r0, 0x4(r5)
     rlwinm r0, r0, 0, 23, 23
     cmplwi r0, 0x100
-    bne lbl_fn_8004D388_000024FC
+    bne lbl_collision_queryGeometry_000024FC
     cmpwi r3, 0x0
     ori r14, r14, 0x4
-    beq lbl_fn_8004D388_000024E4
+    beq lbl_collision_queryGeometry_000024E4
     ori r14, r14, 0x1
-lbl_fn_8004D388_000024E4:
+lbl_collision_queryGeometry_000024E4:
     addi r3, r1, 0x2d0
     bl PSVECDotProduct
     lfs f0, lbl_808808F8
     fcmpo cr0, f1, f0
-    bge lbl_fn_8004D388_000024FC
+    bge lbl_collision_queryGeometry_000024FC
     ori r14, r14, 0x8
-lbl_fn_8004D388_000024FC:
+lbl_collision_queryGeometry_000024FC:
     lwz r3, 0x2dc(r1)
     lwz r3, 0x4(r3)
     rlwinm r0, r3, 0, 22, 22
     cmplwi r0, 0x200
-    bne lbl_fn_8004D388_00002514
+    bne lbl_collision_queryGeometry_00002514
     ori r14, r14, 0x10
-lbl_fn_8004D388_00002514:
+lbl_collision_queryGeometry_00002514:
     rlwinm r0, r3, 0, 19, 19
     cmplwi r0, 0x1000
-    bne lbl_fn_8004D388_00002538
+    bne lbl_collision_queryGeometry_00002538
     addi r3, r1, 0x2ac
     lfs f2, 0x2b4(r1)
     psq_l f1, 0x0(r3), 0, 0
     ori r14, r14, 0x40
     psq_st f1, 0x0(r15), 0, 0
     stfs f2, 0x1d8(r1)
-lbl_fn_8004D388_00002538:
+lbl_collision_queryGeometry_00002538:
     lwz r3, 0x2dc(r1)
     lwz r0, 0x4(r3)
     rlwinm r0, r0, 0, 18, 18
     cmplwi r0, 0x2000
-    bne lbl_fn_8004D388_00002564
+    bne lbl_collision_queryGeometry_00002564
     addi r3, r1, 0x2ac
     lfs f2, 0x2b4(r1)
     psq_l f1, 0x0(r3), 0, 0
     ori r14, r14, 0x80
     psq_st f1, 0x0(r15), 0, 0
     stfs f2, 0x1d8(r1)
-lbl_fn_8004D388_00002564:
+lbl_collision_queryGeometry_00002564:
     lwz r3, 0x2dc(r1)
     lwz r0, 0x4(r3)
     rlwinm r0, r0, 0, 17, 17
     cmplwi r0, 0x4000
-    bne lbl_fn_8004D388_00002590
+    bne lbl_collision_queryGeometry_00002590
     addi r3, r1, 0x2ac
     lfs f2, 0x2b4(r1)
     psq_l f1, 0x0(r3), 0, 0
     ori r14, r14, 0x200
     psq_st f1, 0x0(r15), 0, 0
     stfs f2, 0x1d8(r1)
-lbl_fn_8004D388_00002590:
+lbl_collision_queryGeometry_00002590:
     lwz r3, 0x2dc(r1)
     lwz r3, 0x4(r3)
     rlwinm r0, r3, 0, 16, 16
     cmplwi r0, 0x8000
-    bne lbl_fn_8004D388_000025A8
+    bne lbl_collision_queryGeometry_000025A8
     ori r14, r14, 0x400
-lbl_fn_8004D388_000025A8:
+lbl_collision_queryGeometry_000025A8:
     rlwinm r3, r3, 0, 13, 13
     subis r0, r3, 0x4
     cmplwi r0, 0x0
-    bne lbl_fn_8004D388_000025BC
+    bne lbl_collision_queryGeometry_000025BC
     ori r14, r14, 0x800
-lbl_fn_8004D388_000025BC:
+lbl_collision_queryGeometry_000025BC:
     or r30, r30, r14
-lbl_fn_8004D388_000025C0:
+lbl_collision_queryGeometry_000025C0:
     rlwinm r3, r25, 0, 26, 26
     li r0, 0x4
     cmplwi r3, 0x20
     stw r0, 0x5ac(r1)
-    bne lbl_fn_8004D388_000025DC
+    bne lbl_collision_queryGeometry_000025DC
     li r0, 0x8
     stw r0, 0x5ac(r1)
-lbl_fn_8004D388_000025DC:
+lbl_collision_queryGeometry_000025DC:
     rlwinm r3, r25, 0, 7, 7
     subis r0, r3, 0x100
     cmplwi r0, 0x0
-    bne lbl_fn_8004D388_000026AC
+    bne lbl_collision_queryGeometry_000026AC
     addi r3, r1, 0x1f4
     bl PSVECMag
     lfs f0, lbl_808808FC
@@ -2763,10 +2763,10 @@ lbl_fn_8004D388_000025DC:
     stfd f0, 0x578(r1)
     lwz r0, 0x57c(r1)
     cmpwi r0, 0x1
-    bge lbl_fn_8004D388_0000261C
+    bge lbl_collision_queryGeometry_0000261C
     li r0, 0x1
-    b lbl_fn_8004D388_0000263C
-lbl_fn_8004D388_0000261C:
+    b lbl_collision_queryGeometry_0000263C
+lbl_collision_queryGeometry_0000261C:
     addi r3, r1, 0x1f4
     bl PSVECMag
     lfs f0, lbl_808808FC
@@ -2775,13 +2775,13 @@ lbl_fn_8004D388_0000261C:
     fctiwz f0, f0
     stfd f0, 0x578(r1)
     lwz r0, 0x57c(r1)
-lbl_fn_8004D388_0000263C:
+lbl_collision_queryGeometry_0000263C:
     cmpwi r0, 0x8
-    ble lbl_fn_8004D388_00002650
+    ble lbl_collision_queryGeometry_00002650
     li r0, 0x8
     stw r0, 0x5a8(r1)
-    b lbl_fn_8004D388_000026B4
-lbl_fn_8004D388_00002650:
+    b lbl_collision_queryGeometry_000026B4
+lbl_collision_queryGeometry_00002650:
     addi r3, r1, 0x1f4
     bl PSVECMag
     lfs f0, lbl_808808FC
@@ -2791,11 +2791,11 @@ lbl_fn_8004D388_00002650:
     stfd f0, 0x578(r1)
     lwz r0, 0x57c(r1)
     cmpwi r0, 0x1
-    bge lbl_fn_8004D388_00002684
+    bge lbl_collision_queryGeometry_00002684
     li r0, 0x1
     stw r0, 0x5a8(r1)
-    b lbl_fn_8004D388_000026B4
-lbl_fn_8004D388_00002684:
+    b lbl_collision_queryGeometry_000026B4
+lbl_collision_queryGeometry_00002684:
     addi r3, r1, 0x1f4
     bl PSVECMag
     lfs f0, lbl_808808FC
@@ -2805,11 +2805,11 @@ lbl_fn_8004D388_00002684:
     stfd f0, 0x578(r1)
     lwz r0, 0x57c(r1)
     stw r0, 0x5a8(r1)
-    b lbl_fn_8004D388_000026B4
-lbl_fn_8004D388_000026AC:
+    b lbl_collision_queryGeometry_000026B4
+lbl_collision_queryGeometry_000026AC:
     li r0, 0x1
     stw r0, 0x5a8(r1)
-lbl_fn_8004D388_000026B4:
+lbl_collision_queryGeometry_000026B4:
     lwz r0, 0x5a8(r1)
     lis r4, lbl_80731038@ha
     lfd f3, lbl_80731038@l(r4)
@@ -2852,8 +2852,8 @@ lbl_fn_8004D388_000026B4:
     lfs f14, lbl_808808F4
     stfd f0, 0x590(r1)
     stw r0, 0x598(r1)
-    b lbl_fn_8004D388_00003340
-lbl_fn_8004D388_00002760:
+    b lbl_collision_queryGeometry_00003340
+lbl_collision_queryGeometry_00002760:
     addi r3, r1, 0x1b8
     lfs f2, 0x1c0(r1)
     psq_l f1, 0x0(r3), 0, 0
@@ -2862,8 +2862,8 @@ lbl_fn_8004D388_00002760:
     li r29, 0x0
     li r24, 0x0
     stfs f2, 0x1fc(r1)
-    b lbl_fn_8004D388_00003328
-lbl_fn_8004D388_00002784:
+    b lbl_collision_queryGeometry_00003328
+lbl_collision_queryGeometry_00002784:
     lfs f2, 0x208(r1)
     li r0, -0x1
     lfs f0, 0x1fc(r1)
@@ -2926,25 +2926,25 @@ lbl_fn_8004D388_00002784:
     bl fn_8004CD5C
     cmpwi r3, 0x0
     mr r19, r3
-    beq lbl_fn_8004D388_00003334
+    beq lbl_collision_queryGeometry_00003334
     lfs f20, lbl_80880900
     mr r15, r31
     li r28, -0x1
     li r16, 0x4
     li r17, 0x0
-    b lbl_fn_8004D388_00002950
-lbl_fn_8004D388_00002898:
+    b lbl_collision_queryGeometry_00002950
+lbl_collision_queryGeometry_00002898:
     lwz r3, 0x34(r15)
     lwz r0, 0x4(r3)
     rlwinm r0, r0, 0, 21, 21
     cmplwi r0, 0x400
-    bne lbl_fn_8004D388_000028B4
+    bne lbl_collision_queryGeometry_000028B4
     ori r30, r30, 0x4
-    b lbl_fn_8004D388_00002948
-lbl_fn_8004D388_000028B4:
+    b lbl_collision_queryGeometry_00002948
+lbl_collision_queryGeometry_000028B4:
     lwz r0, 0x0(r15)
     cmplw r16, r0
-    blt lbl_fn_8004D388_00002948
+    blt lbl_collision_queryGeometry_00002948
     lfs f3, 0x1b4(r1)
     addi r3, r1, 0x2c
     lfs f0, 0xc(r15)
@@ -2963,34 +2963,34 @@ lbl_fn_8004D388_000028B4:
     fmuls f0, f16, f16
     mtctr r29
     cmpwi r29, 0x0
-    ble lbl_fn_8004D388_00002928
-lbl_fn_8004D388_0000290C:
+    ble lbl_collision_queryGeometry_00002928
+lbl_collision_queryGeometry_0000290C:
     lwz r3, 0x40(r4)
     lwz r0, 0x40(r15)
     cmplw r3, r0
-    bne lbl_fn_8004D388_00002920
+    bne lbl_collision_queryGeometry_00002920
     fmadds f1, f22, f0, f1
-lbl_fn_8004D388_00002920:
+lbl_collision_queryGeometry_00002920:
     addi r4, r4, 0x50
-    bdnz lbl_fn_8004D388_0000290C
-lbl_fn_8004D388_00002928:
+    bdnz lbl_collision_queryGeometry_0000290C
+lbl_collision_queryGeometry_00002928:
     lwz r0, 0x0(r15)
     cmplw r16, r0
-    bgt lbl_fn_8004D388_0000293C
+    bgt lbl_collision_queryGeometry_0000293C
     fcmpo cr0, f20, f1
-    ble lbl_fn_8004D388_00002948
-lbl_fn_8004D388_0000293C:
+    ble lbl_collision_queryGeometry_00002948
+lbl_collision_queryGeometry_0000293C:
     fmr f20, f1
     mr r16, r0
     mr r28, r17
-lbl_fn_8004D388_00002948:
+lbl_collision_queryGeometry_00002948:
     addi r15, r15, 0x50
     addi r17, r17, 0x1
-lbl_fn_8004D388_00002950:
+lbl_collision_queryGeometry_00002950:
     cmpw r17, r19
-    blt lbl_fn_8004D388_00002898
+    blt lbl_collision_queryGeometry_00002898
     cmpwi r28, 0x0
-    blt lbl_fn_8004D388_00003334
+    blt lbl_collision_queryGeometry_00003334
     mulli r0, r28, 0x50
     lfs f19, lbl_808808DC
     lfs f18, lbl_80880900
@@ -3000,18 +3000,18 @@ lbl_fn_8004D388_00002950:
     addi r17, r16, 0x28
     li r26, -0x1
     li r15, 0x0
-    b lbl_fn_8004D388_00002A38
-lbl_fn_8004D388_00002988:
+    b lbl_collision_queryGeometry_00002A38
+lbl_collision_queryGeometry_00002988:
     lwz r3, 0x34(r18)
     lwz r0, 0x4(r3)
     rlwinm r0, r0, 0, 21, 21
     cmplwi r0, 0x400
-    beq lbl_fn_8004D388_00002A30
+    beq lbl_collision_queryGeometry_00002A30
     cmpw r15, r28
-    beq lbl_fn_8004D388_00002A30
+    beq lbl_collision_queryGeometry_00002A30
     lwz r0, 0x0(r18)
     cmplwi r0, 0x1
-    bne lbl_fn_8004D388_00002A30
+    bne lbl_collision_queryGeometry_00002A30
     lfs f3, 0x1b4(r1)
     addi r3, r1, 0x20
     lfs f0, 0xc(r18)
@@ -3028,28 +3028,28 @@ lbl_fn_8004D388_00002988:
     bl PSVECSquareMag
     fcmpo cr0, f18, f1
     fmr f17, f1
-    ble lbl_fn_8004D388_00002A30
+    ble lbl_collision_queryGeometry_00002A30
     addi r3, r18, 0x28
     addi r4, r1, 0x1e8
     bl PSVECDotProduct
     fcmpo cr0, f1, f23
-    bge lbl_fn_8004D388_00002A30
+    bge lbl_collision_queryGeometry_00002A30
     mr r3, r17
     addi r4, r18, 0x28
     bl PSVECDotProduct
     fcmpo cr0, f1, f24
-    ble lbl_fn_8004D388_00002A30
+    ble lbl_collision_queryGeometry_00002A30
     fcmpo cr0, f1, f25
-    bge lbl_fn_8004D388_00002A30
+    bge lbl_collision_queryGeometry_00002A30
     fmr f18, f17
     mr r26, r15
     fmr f19, f1
-lbl_fn_8004D388_00002A30:
+lbl_collision_queryGeometry_00002A30:
     addi r18, r18, 0x50
     addi r15, r15, 0x1
-lbl_fn_8004D388_00002A38:
+lbl_collision_queryGeometry_00002A38:
     cmpw r15, r19
-    blt lbl_fn_8004D388_00002988
+    blt lbl_collision_queryGeometry_00002988
     addi r3, r16, 0x28
     addi r4, r1, 0x1e8
     bl PSVECDotProduct
@@ -3092,66 +3092,66 @@ lbl_fn_8004D388_00002A38:
     lwz r0, 0x40(r5)
     mtctr r29
     cmpwi r29, 0x0
-    ble lbl_fn_8004D388_00002B0C
-lbl_fn_8004D388_00002AEC:
+    ble lbl_collision_queryGeometry_00002B0C
+lbl_collision_queryGeometry_00002AEC:
     lwz r3, 0x40(r4)
     cmplw r3, r0
-    bne lbl_fn_8004D388_00002B00
+    bne lbl_collision_queryGeometry_00002B00
     mr r6, r7
-    b lbl_fn_8004D388_00002B0C
-lbl_fn_8004D388_00002B00:
+    b lbl_collision_queryGeometry_00002B0C
+lbl_collision_queryGeometry_00002B00:
     addi r4, r4, 0x50
     addi r7, r7, 0x1
-    bdnz lbl_fn_8004D388_00002AEC
-lbl_fn_8004D388_00002B0C:
+    bdnz lbl_collision_queryGeometry_00002AEC
+lbl_collision_queryGeometry_00002B0C:
     cmpwi r6, 0x0
-    blt lbl_fn_8004D388_00002C5C
+    blt lbl_collision_queryGeometry_00002C5C
     mulli r0, r28, 0x50
     add r16, r31, r0
     lwzx r0, r31, r0
     cmplwi r0, 0x1
-    bne lbl_fn_8004D388_00002C50
+    bne lbl_collision_queryGeometry_00002C50
     fcmpo cr0, f17, f23
-    bge lbl_fn_8004D388_00002C5C
+    bge lbl_collision_queryGeometry_00002C5C
     cmpwi r29, 0x2
-    blt lbl_fn_8004D388_00002C5C
+    blt lbl_collision_queryGeometry_00002C5C
     addi r19, r1, 0x2f8
     addi r18, r16, 0x28
     li r15, -0x1
     li r17, 0x0
-    b lbl_fn_8004D388_00002BAC
-lbl_fn_8004D388_00002B4C:
+    b lbl_collision_queryGeometry_00002BAC
+lbl_collision_queryGeometry_00002B4C:
     lwz r0, 0x0(r19)
     cmplwi r0, 0x1
-    bne lbl_fn_8004D388_00002BA4
+    bne lbl_collision_queryGeometry_00002BA4
     lwz r3, 0x40(r19)
     lwz r0, 0x40(r16)
     cmplw r3, r0
-    beq lbl_fn_8004D388_00002BA4
+    beq lbl_collision_queryGeometry_00002BA4
     addi r3, r19, 0x28
     addi r4, r1, 0x1e8
     bl PSVECDotProduct
     fcmpo cr0, f1, f23
-    bge lbl_fn_8004D388_00002BA4
+    bge lbl_collision_queryGeometry_00002BA4
     mr r3, r18
     addi r4, r19, 0x28
     bl PSVECDotProduct
     fcmpo cr0, f1, f24
-    ble lbl_fn_8004D388_00002BA4
+    ble lbl_collision_queryGeometry_00002BA4
     fcmpo cr0, f1, f25
-    bge lbl_fn_8004D388_00002BA4
+    bge lbl_collision_queryGeometry_00002BA4
     fmr f19, f1
     mr r15, r17
-    b lbl_fn_8004D388_00002BB4
-lbl_fn_8004D388_00002BA4:
+    b lbl_collision_queryGeometry_00002BB4
+lbl_collision_queryGeometry_00002BA4:
     addi r19, r19, 0x50
     addi r17, r17, 0x1
-lbl_fn_8004D388_00002BAC:
+lbl_collision_queryGeometry_00002BAC:
     cmpw r17, r29
-    blt lbl_fn_8004D388_00002B4C
-lbl_fn_8004D388_00002BB4:
+    blt lbl_collision_queryGeometry_00002B4C
+lbl_collision_queryGeometry_00002BB4:
     cmpwi r15, 0x0
-    blt lbl_fn_8004D388_00002C5C
+    blt lbl_collision_queryGeometry_00002C5C
     cntlzw r0, r28
     addi r4, r1, 0x2f8
     srwi r26, r0, 5
@@ -3188,31 +3188,31 @@ lbl_fn_8004D388_00002BB4:
     psq_l f1, 0x44(r4), 0, 0
     psq_st f1, 0x44(r3), 0, 0
     stfs f2, 0x4c(r3)
-    b lbl_fn_8004D388_00002C5C
-lbl_fn_8004D388_00002C50:
+    b lbl_collision_queryGeometry_00002C5C
+lbl_collision_queryGeometry_00002C50:
     rlwinm r0, r25, 0, 26, 26
     cmplwi r0, 0x20
-    bne lbl_fn_8004D388_00003334
-lbl_fn_8004D388_00002C5C:
+    bne lbl_collision_queryGeometry_00003334
+lbl_collision_queryGeometry_00002C5C:
     cmpwi r26, 0x0
     li r0, 0x1
     stw r0, 0x5a4(r1)
     li r15, 0x1
     addi r29, r29, 0x1
     addi r24, r24, 0x50
-    blt lbl_fn_8004D388_00002FE0
+    blt lbl_collision_queryGeometry_00002FE0
     mulli r0, r28, 0x50
     add r16, r31, r0
     lwzx r0, r31, r0
     cmplwi r0, 0x1
-    bne lbl_fn_8004D388_00002FE0
+    bne lbl_collision_queryGeometry_00002FE0
     fcmpo cr0, f17, f23
-    bge lbl_fn_8004D388_00002FE0
+    bge lbl_collision_queryGeometry_00002FE0
     fmr f1, f19
     bl fn_8068AE9C
     frsp f0, f1
     fmuls f1, f26, f0
-    bl fn_8068A850
+    bl std_sin
     mulli r0, r26, 0x50
     lfs f7, 0x30(r16)
     lfs f5, 0x2c(r16)
@@ -3231,7 +3231,7 @@ lbl_fn_8004D388_00002C5C:
     stfs f4, 0x1a4(r1)
     bl PSVECSquareMag
     fcmpo cr0, f1, f28
-    ble lbl_fn_8004D388_00002FE0
+    ble lbl_collision_queryGeometry_00002FE0
     addi r3, r1, 0x1a0
     mr r4, r3
     bl PSVECNormalize
@@ -3241,11 +3241,11 @@ lbl_fn_8004D388_00002C5C:
     stfs f0, 0x194(r1)
     stfs f27, 0x198(r1)
     stfs f3, 0x19c(r1)
-    bne lbl_fn_8004D388_00002D88
+    bne lbl_collision_queryGeometry_00002D88
     addi r3, r1, 0x194
     bl PSVECSquareMag
     fcmpo cr0, f1, f28
-    ble lbl_fn_8004D388_00002FE0
+    ble lbl_collision_queryGeometry_00002FE0
     addi r3, r1, 0x194
     lfs f2, 0x19c(r1)
     psq_l f1, 0x0(r3), 0, 0
@@ -3268,8 +3268,8 @@ lbl_fn_8004D388_00002C5C:
     bl PSVECDotProduct
     fcmpo cr0, f1, f18
     cror eq, gt, eq
-    bne lbl_fn_8004D388_00002FE0
-lbl_fn_8004D388_00002D88:
+    bne lbl_collision_queryGeometry_00002FE0
+lbl_collision_queryGeometry_00002D88:
     mulli r0, r28, 0x50
     addi r6, r1, 0x240
     addi r4, r1, 0x1e8
@@ -3320,7 +3320,7 @@ lbl_fn_8004D388_00002D88:
     lfs f0, 0x20c(r1)
     fmuls f0, f0, f0
     fcmpo cr0, f1, f0
-    bge lbl_fn_8004D388_00002FE0
+    bge lbl_collision_queryGeometry_00002FE0
     addi r3, r1, 0x240
     mr r4, r14
     addi r5, r1, 0x210
@@ -3370,12 +3370,12 @@ lbl_fn_8004D388_00002D88:
     stfs f7, 0x160(r1)
     bl PSVECSquareMag
     fcmpo cr0, f1, f28
-    ble lbl_fn_8004D388_00002FE0
+    ble lbl_collision_queryGeometry_00002FE0
     addi r3, r1, 0x158
     addi r4, r1, 0x1a0
     bl PSVECDotProduct
     fcmpo cr0, f1, f27
-    ble lbl_fn_8004D388_00002FE0
+    ble lbl_collision_queryGeometry_00002FE0
     lfs f0, 0x20c(r1)
     addi r3, r1, 0x98
     lfs f5, 0x204(r1)
@@ -3410,7 +3410,7 @@ lbl_fn_8004D388_00002D88:
     lfs f0, 0x20c(r1)
     fmuls f0, f0, f0
     fcmpo cr0, f1, f0
-    bge lbl_fn_8004D388_00002FE0
+    bge lbl_collision_queryGeometry_00002FE0
     addi r3, r1, 0x14c
     lfs f2, 0x154(r1)
     psq_l f1, 0x0(r3), 0, 0
@@ -3420,23 +3420,23 @@ lbl_fn_8004D388_00002D88:
     stfs f27, 0x1f4(r1)
     stfs f27, 0x1f8(r1)
     stfs f27, 0x1fc(r1)
-lbl_fn_8004D388_00002FE0:
+lbl_collision_queryGeometry_00002FE0:
     cmpwi r15, 0x0
-    beq lbl_fn_8004D388_0000315C
+    beq lbl_collision_queryGeometry_0000315C
     fcmpo cr0, f17, f26
-    ble lbl_fn_8004D388_00003070
+    ble lbl_collision_queryGeometry_00003070
     mulli r0, r28, 0x50
     add r15, r31, r0
     lwz r3, 0x38(r15)
     cmpwi r3, 0x0
-    beq lbl_fn_8004D388_00003070
+    beq lbl_collision_queryGeometry_00003070
     lwz r0, 0x8(r3)
     rlwinm r0, r0, 0, 30, 30
     cmplwi r0, 0x2
-    beq lbl_fn_8004D388_00003070
+    beq lbl_collision_queryGeometry_00003070
     lwz r0, 0x0(r15)
     cmplwi r0, 0x1
-    bne lbl_fn_8004D388_00003070
+    bne lbl_collision_queryGeometry_00003070
     fmr f1, f20
     bl math_u64DivMod
     frsp f4, f1
@@ -3451,14 +3451,14 @@ lbl_fn_8004D388_00002FE0:
     lfs f0, 0x14(r15)
     fadds f0, f31, f0
     fcmpo cr0, f3, f0
-    bge lbl_fn_8004D388_00003060
+    bge lbl_collision_queryGeometry_00003060
     stfs f0, 0x204(r1)
-lbl_fn_8004D388_00003060:
+lbl_collision_queryGeometry_00003060:
     stfs f27, 0x1f4(r1)
     stfs f27, 0x1f8(r1)
     stfs f27, 0x1fc(r1)
-    b lbl_fn_8004D388_0000315C
-lbl_fn_8004D388_00003070:
+    b lbl_collision_queryGeometry_0000315C
+lbl_collision_queryGeometry_00003070:
     mulli r0, r28, 0x50
     lfs f4, 0x208(r1)
     lfs f3, 0x204(r1)
@@ -3518,148 +3518,148 @@ lbl_fn_8004D388_00003070:
     stfs f4, 0x1f4(r1)
     stfs f3, 0x1f8(r1)
     stfs f0, 0x1fc(r1)
-lbl_fn_8004D388_0000315C:
+lbl_collision_queryGeometry_0000315C:
     fcmpo cr0, f17, f15
-    ble lbl_fn_8004D388_000031A0
+    ble lbl_collision_queryGeometry_000031A0
     mulli r0, r28, 0x50
     add r16, r31, r0
     lwz r0, 0x34(r16)
     cmpwi r0, 0x0
-    beq lbl_fn_8004D388_0000317C
+    beq lbl_collision_queryGeometry_0000317C
     stw r0, 0x5a0(r1)
-lbl_fn_8004D388_0000317C:
+lbl_collision_queryGeometry_0000317C:
     lwz r4, 0x38(r16)
     cmpwi r4, 0x0
-    beq lbl_fn_8004D388_000031FC
+    beq lbl_collision_queryGeometry_000031FC
     lwz r0, 0x8(r4)
     rlwinm r0, r0, 0, 30, 30
     cmplwi r0, 0x2
-    beq lbl_fn_8004D388_000031FC
+    beq lbl_collision_queryGeometry_000031FC
     ori r30, r30, 0x1
-    b lbl_fn_8004D388_000031FC
-lbl_fn_8004D388_000031A0:
+    b lbl_collision_queryGeometry_000031FC
+lbl_collision_queryGeometry_000031A0:
     fcmpo cr0, f17, f14
-    bge lbl_fn_8004D388_000031D4
+    bge lbl_collision_queryGeometry_000031D4
     mulli r0, r28, 0x50
     add r16, r31, r0
     lwz r4, 0x38(r16)
     cmpwi r4, 0x0
-    beq lbl_fn_8004D388_000031FC
+    beq lbl_collision_queryGeometry_000031FC
     lwz r0, 0x8(r4)
     rlwinm r0, r0, 0, 30, 30
     cmplwi r0, 0x2
-    beq lbl_fn_8004D388_000031FC
+    beq lbl_collision_queryGeometry_000031FC
     ori r30, r30, 0x100
-    b lbl_fn_8004D388_000031FC
-lbl_fn_8004D388_000031D4:
+    b lbl_collision_queryGeometry_000031FC
+lbl_collision_queryGeometry_000031D4:
     mulli r0, r28, 0x50
     add r16, r31, r0
     lwz r4, 0x38(r16)
     cmpwi r4, 0x0
-    beq lbl_fn_8004D388_000031FC
+    beq lbl_collision_queryGeometry_000031FC
     lwz r0, 0x8(r4)
     rlwinm r0, r0, 0, 30, 30
     cmplwi r0, 0x2
-    beq lbl_fn_8004D388_000031FC
+    beq lbl_collision_queryGeometry_000031FC
     ori r30, r30, 0x20
-lbl_fn_8004D388_000031FC:
+lbl_collision_queryGeometry_000031FC:
     cmpwi r4, 0x0
-    beq lbl_fn_8004D388_00003220
+    beq lbl_collision_queryGeometry_00003220
     lwz r3, 0x38(r16)
     lwz r0, 0x8(r3)
     rlwinm r0, r0, 0, 30, 30
     cmplwi r0, 0x2
-    bne lbl_fn_8004D388_00003220
+    bne lbl_collision_queryGeometry_00003220
     ori r30, r30, 0x2
     stw r4, 0x59c(r1)
-lbl_fn_8004D388_00003220:
+lbl_collision_queryGeometry_00003220:
     lwz r4, 0x34(r16)
     li r15, 0x0
     lwz r3, -0x6fcc(r23)
     cmpwi r4, 0x0
-    beq lbl_fn_8004D388_00003324
+    beq lbl_collision_queryGeometry_00003324
     lwz r0, 0x4(r4)
     rlwinm r0, r0, 0, 23, 23
     cmplwi r0, 0x100
-    bne lbl_fn_8004D388_00003270
+    bne lbl_collision_queryGeometry_00003270
     cmpwi r3, 0x0
     ori r15, r15, 0x4
-    beq lbl_fn_8004D388_00003254
+    beq lbl_collision_queryGeometry_00003254
     ori r15, r15, 0x1
-lbl_fn_8004D388_00003254:
+lbl_collision_queryGeometry_00003254:
     addi r4, r1, 0x1dc
     addi r3, r16, 0x28
     bl PSVECDotProduct
     lfd f0, 0x590(r1)
     fcmpo cr0, f1, f0
-    bge lbl_fn_8004D388_00003270
+    bge lbl_collision_queryGeometry_00003270
     ori r15, r15, 0x8
-lbl_fn_8004D388_00003270:
+lbl_collision_queryGeometry_00003270:
     lwz r3, 0x34(r16)
     lwz r3, 0x4(r3)
     rlwinm r0, r3, 0, 22, 22
     cmplwi r0, 0x200
-    bne lbl_fn_8004D388_00003288
+    bne lbl_collision_queryGeometry_00003288
     ori r15, r15, 0x10
-lbl_fn_8004D388_00003288:
+lbl_collision_queryGeometry_00003288:
     rlwinm r0, r3, 0, 19, 19
     cmplwi r0, 0x1000
-    bne lbl_fn_8004D388_000032A8
+    bne lbl_collision_queryGeometry_000032A8
     psq_l f1, 0x4(r16), 0, 0
     ori r15, r15, 0x40
     lfs f2, 0xc(r16)
     psq_st f1, 0x0(r20), 0, 0
     stfs f2, 0x1d8(r1)
-lbl_fn_8004D388_000032A8:
+lbl_collision_queryGeometry_000032A8:
     lwz r3, 0x34(r16)
     lwz r0, 0x4(r3)
     rlwinm r0, r0, 0, 18, 18
     cmplwi r0, 0x2000
-    bne lbl_fn_8004D388_000032D0
+    bne lbl_collision_queryGeometry_000032D0
     psq_l f1, 0x4(r16), 0, 0
     ori r15, r15, 0x80
     lfs f2, 0xc(r16)
     psq_st f1, 0x0(r20), 0, 0
     stfs f2, 0x1d8(r1)
-lbl_fn_8004D388_000032D0:
+lbl_collision_queryGeometry_000032D0:
     lwz r3, 0x34(r16)
     lwz r0, 0x4(r3)
     rlwinm r0, r0, 0, 17, 17
     cmplwi r0, 0x4000
-    bne lbl_fn_8004D388_000032F8
+    bne lbl_collision_queryGeometry_000032F8
     psq_l f1, 0x4(r16), 0, 0
     ori r15, r15, 0x200
     lfs f2, 0xc(r16)
     psq_st f1, 0x0(r20), 0, 0
     stfs f2, 0x1d8(r1)
-lbl_fn_8004D388_000032F8:
+lbl_collision_queryGeometry_000032F8:
     lwz r3, 0x34(r16)
     lwz r3, 0x4(r3)
     rlwinm r0, r3, 0, 16, 16
     cmplwi r0, 0x8000
-    bne lbl_fn_8004D388_00003310
+    bne lbl_collision_queryGeometry_00003310
     ori r15, r15, 0x400
-lbl_fn_8004D388_00003310:
+lbl_collision_queryGeometry_00003310:
     rlwinm r3, r3, 0, 13, 13
     subis r0, r3, 0x4
     cmplwi r0, 0x0
-    bne lbl_fn_8004D388_00003324
+    bne lbl_collision_queryGeometry_00003324
     ori r15, r15, 0x800
-lbl_fn_8004D388_00003324:
+lbl_collision_queryGeometry_00003324:
     or r30, r30, r15
-lbl_fn_8004D388_00003328:
+lbl_collision_queryGeometry_00003328:
     lwz r0, 0x5ac(r1)
     cmpw r29, r0
-    blt lbl_fn_8004D388_00002784
-lbl_fn_8004D388_00003334:
+    blt lbl_collision_queryGeometry_00002784
+lbl_collision_queryGeometry_00003334:
     lwz r3, 0x598(r1)
     addi r3, r3, 0x1
     stw r3, 0x598(r1)
-lbl_fn_8004D388_00003340:
+lbl_collision_queryGeometry_00003340:
     lwz r3, 0x598(r1)
     lwz r0, 0x5a8(r1)
     cmpw r3, r0
-    blt lbl_fn_8004D388_00002760
+    blt lbl_collision_queryGeometry_00002760
     lwz r4, 0x10(r1)
     addi r3, r1, 0x128
     lfs f3, 0x208(r1)
@@ -3680,7 +3680,7 @@ lbl_fn_8004D388_00003340:
     lfs f0, lbl_808808E4
     fmuls f0, f0, f3
     fcmpo cr0, f1, f0
-    ble lbl_fn_8004D388_0000367C
+    ble lbl_collision_queryGeometry_0000367C
     addi r3, r1, 0x128
     mr r4, r3
     bl PSVECNormalize
@@ -3716,7 +3716,7 @@ lbl_fn_8004D388_00003340:
     stfs f4, 0x124(r1)
     bl collision_testLineSegment
     cmpwi r3, 0x0
-    beq lbl_fn_8004D388_00003678
+    beq lbl_collision_queryGeometry_00003678
     lfs f4, 0x27c(r1)
     addi r6, r1, 0x68
     lfs f0, 0x278(r1)
@@ -3745,56 +3745,56 @@ lbl_fn_8004D388_00003340:
     bl PSVECDotProduct
     lfs f0, lbl_808808F0
     fcmpo cr0, f1, f0
-    ble lbl_fn_8004D388_000034DC
+    ble lbl_collision_queryGeometry_000034DC
     lwz r0, 0x28c(r1)
     cmpwi r0, 0x0
-    beq lbl_fn_8004D388_000034B8
+    beq lbl_collision_queryGeometry_000034B8
     stw r0, 0x5a0(r1)
-lbl_fn_8004D388_000034B8:
+lbl_collision_queryGeometry_000034B8:
     lwz r3, 0x290(r1)
     cmpwi r3, 0x0
-    beq lbl_fn_8004D388_00003538
+    beq lbl_collision_queryGeometry_00003538
     lwz r0, 0x8(r3)
     rlwinm r0, r0, 0, 30, 30
     cmplwi r0, 0x2
-    beq lbl_fn_8004D388_00003538
+    beq lbl_collision_queryGeometry_00003538
     ori r30, r30, 0x1
-    b lbl_fn_8004D388_00003538
-lbl_fn_8004D388_000034DC:
+    b lbl_collision_queryGeometry_00003538
+lbl_collision_queryGeometry_000034DC:
     addi r3, r1, 0x280
     addi r4, r1, 0x1e8
     bl PSVECDotProduct
     lfs f0, lbl_808808F4
     fcmpo cr0, f1, f0
-    bge lbl_fn_8004D388_00003518
+    bge lbl_collision_queryGeometry_00003518
     lwz r3, 0x290(r1)
     cmpwi r3, 0x0
-    beq lbl_fn_8004D388_00003538
+    beq lbl_collision_queryGeometry_00003538
     lwz r0, 0x8(r3)
     rlwinm r0, r0, 0, 30, 30
     cmplwi r0, 0x2
-    beq lbl_fn_8004D388_00003538
+    beq lbl_collision_queryGeometry_00003538
     ori r30, r30, 0x100
-    b lbl_fn_8004D388_00003538
-lbl_fn_8004D388_00003518:
+    b lbl_collision_queryGeometry_00003538
+lbl_collision_queryGeometry_00003518:
     lwz r3, 0x290(r1)
     cmpwi r3, 0x0
-    beq lbl_fn_8004D388_00003538
+    beq lbl_collision_queryGeometry_00003538
     lwz r0, 0x8(r3)
     rlwinm r0, r0, 0, 30, 30
     cmplwi r0, 0x2
-    beq lbl_fn_8004D388_00003538
+    beq lbl_collision_queryGeometry_00003538
     ori r30, r30, 0x20
-lbl_fn_8004D388_00003538:
+lbl_collision_queryGeometry_00003538:
     cmpwi r3, 0x0
-    beq lbl_fn_8004D388_00003558
+    beq lbl_collision_queryGeometry_00003558
     lwz r0, 0x8(r3)
     rlwinm r0, r0, 0, 30, 30
     cmplwi r0, 0x2
-    bne lbl_fn_8004D388_00003558
+    bne lbl_collision_queryGeometry_00003558
     ori r30, r30, 0x2
     stw r3, 0x59c(r1)
-lbl_fn_8004D388_00003558:
+lbl_collision_queryGeometry_00003558:
     lwz r5, 0x28c(r1)
     addi r14, r1, 0x1d0
     lwz r3, 0x8(r1)
@@ -3803,84 +3803,84 @@ lbl_fn_8004D388_00003558:
     li r15, 0x0
     addis r3, r3, 0x1
     lwz r3, -0x6fcc(r3)
-    beq lbl_fn_8004D388_00003674
+    beq lbl_collision_queryGeometry_00003674
     lwz r0, 0x4(r5)
     rlwinm r0, r0, 0, 23, 23
     cmplwi r0, 0x100
-    bne lbl_fn_8004D388_000035B4
+    bne lbl_collision_queryGeometry_000035B4
     cmpwi r3, 0x0
     ori r15, r15, 0x4
-    beq lbl_fn_8004D388_0000359C
+    beq lbl_collision_queryGeometry_0000359C
     ori r15, r15, 0x1
-lbl_fn_8004D388_0000359C:
+lbl_collision_queryGeometry_0000359C:
     addi r3, r1, 0x280
     bl PSVECDotProduct
     lfs f0, lbl_808808F8
     fcmpo cr0, f1, f0
-    bge lbl_fn_8004D388_000035B4
+    bge lbl_collision_queryGeometry_000035B4
     ori r15, r15, 0x8
-lbl_fn_8004D388_000035B4:
+lbl_collision_queryGeometry_000035B4:
     lwz r3, 0x28c(r1)
     lwz r3, 0x4(r3)
     rlwinm r0, r3, 0, 22, 22
     cmplwi r0, 0x200
-    bne lbl_fn_8004D388_000035CC
+    bne lbl_collision_queryGeometry_000035CC
     ori r15, r15, 0x10
-lbl_fn_8004D388_000035CC:
+lbl_collision_queryGeometry_000035CC:
     rlwinm r0, r3, 0, 19, 19
     cmplwi r0, 0x1000
-    bne lbl_fn_8004D388_000035F0
+    bne lbl_collision_queryGeometry_000035F0
     addi r3, r1, 0x25c
     lfs f2, 0x264(r1)
     psq_l f1, 0x0(r3), 0, 0
     ori r15, r15, 0x40
     psq_st f1, 0x0(r14), 0, 0
     stfs f2, 0x1d8(r1)
-lbl_fn_8004D388_000035F0:
+lbl_collision_queryGeometry_000035F0:
     lwz r3, 0x28c(r1)
     lwz r0, 0x4(r3)
     rlwinm r0, r0, 0, 18, 18
     cmplwi r0, 0x2000
-    bne lbl_fn_8004D388_0000361C
+    bne lbl_collision_queryGeometry_0000361C
     addi r3, r1, 0x25c
     lfs f2, 0x264(r1)
     psq_l f1, 0x0(r3), 0, 0
     ori r15, r15, 0x80
     psq_st f1, 0x0(r14), 0, 0
     stfs f2, 0x1d8(r1)
-lbl_fn_8004D388_0000361C:
+lbl_collision_queryGeometry_0000361C:
     lwz r3, 0x28c(r1)
     lwz r0, 0x4(r3)
     rlwinm r0, r0, 0, 17, 17
     cmplwi r0, 0x4000
-    bne lbl_fn_8004D388_00003648
+    bne lbl_collision_queryGeometry_00003648
     addi r3, r1, 0x25c
     lfs f2, 0x264(r1)
     psq_l f1, 0x0(r3), 0, 0
     ori r15, r15, 0x200
     psq_st f1, 0x0(r14), 0, 0
     stfs f2, 0x1d8(r1)
-lbl_fn_8004D388_00003648:
+lbl_collision_queryGeometry_00003648:
     lwz r3, 0x28c(r1)
     lwz r3, 0x4(r3)
     rlwinm r0, r3, 0, 16, 16
     cmplwi r0, 0x8000
-    bne lbl_fn_8004D388_00003660
+    bne lbl_collision_queryGeometry_00003660
     ori r15, r15, 0x400
-lbl_fn_8004D388_00003660:
+lbl_collision_queryGeometry_00003660:
     rlwinm r3, r3, 0, 13, 13
     subis r0, r3, 0x4
     cmplwi r0, 0x0
-    bne lbl_fn_8004D388_00003674
+    bne lbl_collision_queryGeometry_00003674
     ori r15, r15, 0x800
-lbl_fn_8004D388_00003674:
+lbl_collision_queryGeometry_00003674:
     or r30, r30, r15
-lbl_fn_8004D388_00003678:
+lbl_collision_queryGeometry_00003678:
     li r14, 0x1
-lbl_fn_8004D388_0000367C:
+lbl_collision_queryGeometry_0000367C:
     lwz r0, 0xc(r1)
     cmpwi r0, 0x0
-    beq lbl_fn_8004D388_00003798
+    beq lbl_collision_queryGeometry_00003798
     addi r5, r1, 0x200
     lfs f2, 0x208(r1)
     psq_l f1, 0x0(r5), 0, 0
@@ -3914,7 +3914,7 @@ lbl_fn_8004D388_0000367C:
     fsubs f0, f3, f0
     fmuls f0, f0, f0
     fcmpo cr0, f0, f4
-    bge lbl_fn_8004D388_00003750
+    bge lbl_collision_queryGeometry_00003750
     lwz r3, 0xc(r1)
     lfs f3, 0x14(r3)
     lwz r3, 0x10(r1)
@@ -3922,7 +3922,7 @@ lbl_fn_8004D388_0000367C:
     fsubs f0, f3, f0
     fmuls f0, f0, f0
     fcmpo cr0, f0, f4
-    bge lbl_fn_8004D388_00003750
+    bge lbl_collision_queryGeometry_00003750
     lwz r3, 0xc(r1)
     lfs f3, 0x18(r3)
     lwz r3, 0x10(r1)
@@ -3930,8 +3930,8 @@ lbl_fn_8004D388_0000367C:
     fsubs f0, f3, f0
     fmuls f0, f0, f0
     fcmpo cr0, f0, f4
-    blt lbl_fn_8004D388_00003798
-lbl_fn_8004D388_00003750:
+    blt lbl_collision_queryGeometry_00003798
+lbl_collision_queryGeometry_00003750:
     lwz r3, 0x10(r1)
     li r0, 0x0
     lwz r4, 0xc(r1)
@@ -3949,28 +3949,28 @@ lbl_fn_8004D388_00003750:
     stw r0, 0x34(r4)
     stw r0, 0x3c(r4)
     stw r0, 0x38(r4)
-    b lbl_fn_8004D388_000038A0
-lbl_fn_8004D388_00003798:
+    b lbl_collision_queryGeometry_000038A0
+lbl_collision_queryGeometry_00003798:
     lwz r0, 0xc(r1)
     cmpwi r0, 0x0
-    beq lbl_fn_8004D388_0000389C
+    beq lbl_collision_queryGeometry_0000389C
     lwz r0, 0x5a4(r1)
     cmpwi r0, 0x0
-    beq lbl_fn_8004D388_0000389C
+    beq lbl_collision_queryGeometry_0000389C
     cmpwi r14, 0x0
-    bne lbl_fn_8004D388_000037C4
+    bne lbl_collision_queryGeometry_000037C4
     rlwinm r0, r30, 0, 30, 30
     cmplwi r0, 0x2
-    bne lbl_fn_8004D388_0000389C
-lbl_fn_8004D388_000037C4:
+    bne lbl_collision_queryGeometry_0000389C
+lbl_collision_queryGeometry_000037C4:
     rlwinm r3, r25, 0, 6, 6
     subis r0, r3, 0x200
     cmplwi r0, 0x0
-    bne lbl_fn_8004D388_0000389C
+    bne lbl_collision_queryGeometry_0000389C
     rlwinm r3, r25, 0, 7, 7
     subis r0, r3, 0x100
     cmplwi r0, 0x0
-    beq lbl_fn_8004D388_0000389C
+    beq lbl_collision_queryGeometry_0000389C
     lwz r3, 0x10(r1)
     addi r5, r1, 0x50
     lwz r4, 0x10(r1)
@@ -3996,7 +3996,7 @@ lbl_fn_8004D388_000037C4:
     lfs f0, lbl_80880924
     fmuls f0, f0, f3
     fcmpo cr0, f1, f0
-    ble lbl_fn_8004D388_0000389C
+    ble lbl_collision_queryGeometry_0000389C
     fmr f1, f16
     lwz r3, 0x8(r1)
     lwz r4, 0xc(r1)
@@ -4005,7 +4005,7 @@ lbl_fn_8004D388_000037C4:
     oris r7, r25, 0x8100
     lwz r8, 0x18(r1)
     lwz r9, 0x1c(r1)
-    bl fn_8004D388
+    bl collision_queryGeometry
     addi r3, r1, 0x1d0
     lwz r0, 0x5a0(r1)
     psq_l f1, 0x0(r3), 0, 0
@@ -4017,9 +4017,9 @@ lbl_fn_8004D388_000037C4:
     stw r0, 0x38(r3)
     psq_st f1, 0x44(r3), 0, 0
     stfs f2, 0x4c(r3)
-lbl_fn_8004D388_0000389C:
+lbl_collision_queryGeometry_0000389C:
     lwz r3, 0x5a4(r1)
-lbl_fn_8004D388_000038A0:
+lbl_collision_queryGeometry_000038A0:
     addi r11, r1, 0x600
     psq_l f31, 0x718(r1), 0, 0
     lfd f31, 0x710(r1)

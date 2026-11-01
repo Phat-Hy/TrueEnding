@@ -16,7 +16,7 @@ extern void fn_8067E570(void);
 extern void fn_8068B39C(void);
 extern void fn_806920C0(void);
 extern void fn_8069293C(void);
-extern void fn_806952C4(void);
+extern void msl_releaseRefCount(void);
 
 /* External data declarations */
 extern u8 lbl_80783CA8[];
@@ -116,7 +116,7 @@ lbl_fn_8023F5E0_00000108:
     lwz r3, 0x2c(r1)
     cmpwi r3, 0x0
     beq lbl_fn_8023F5E0_00000120
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_8023F5E0_00000120:
     fmr f1, f31
     li r27, 0x0
@@ -345,7 +345,7 @@ lbl_fn_8023F5E0_00000434:
     lwz r3, 0x24(r1)
     cmpwi r3, 0x0
     beq lbl_fn_8023F5E0_0000044C
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_8023F5E0_0000044C:
     lwz r0, 0x48(r1)
     srwi r0, r0, 31
@@ -712,7 +712,7 @@ lbl_fn_8023FD90_00000904:
     lwz r3, 0x1c(r1)
     cmpwi r3, 0x0
     beq lbl_fn_8023FD90_0000091C
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_8023FD90_0000091C:
     lwz r12, 0x0(r30)
     mr r3, r30
@@ -774,7 +774,7 @@ lbl_fn_8023FD90_000009E4:
     lwz r3, 0x14(r1)
     cmpwi r3, 0x0
     beq lbl_fn_8023FD90_000009FC
-    bl fn_806952C4
+    bl msl_releaseRefCount
 lbl_fn_8023FD90_000009FC:
     lhz r0, 0x30(r27)
     rlwinm. r0, r0, 0, 22, 22
