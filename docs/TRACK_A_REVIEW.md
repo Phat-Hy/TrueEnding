@@ -131,3 +131,50 @@ relocated bytes and show as a diff. But the rule should be explicit:
    `asm void` body link clean and match, which is exactly the failure mode the round-4 `asm void` count is meant to
    catch (this review used that count to confirm the A3 conversion was real rather than a deletion).
 3. Keep the "generated file only" scope and the idempotence marker; both are right.
+
+## Round 6 review — `e961a00..cc4497d` (12 commits, Batches 11-14 + 8 decompilations)
+
+Read through `git grep`/`git show` on `origin/track-a` only (never from this working tree), at
+`cc4497d`. Checked mechanically: **300 renames since `main`, 0 duplicate names among them**, and 3
+duplicate names that pre-date this round (`@stringBase0`, `ShutdownFunctionInfo`, `BootInfo` — all
+from the original split, not from these commits). The addresses renamed are `fn_*` -> `name` in
+place: the map's line count is unchanged (39 934 entries), so this is a naming round, not an
+insertion round.
+
+**The one name Track B can verify from its own dossier is right.** `taskManager_initSystem` is
+`fn_8047A4C8` (size `0x9F4`), which is exactly the function `5c.46 AP-BE` identified as the **only
+writer** of the manager slot `0x8087EE94`, called only from `main`. `g_TaskManager` at
+`.sbss:0x8087EE94` came with it, and that pair is the most useful thing in this round for Track B:
+AP-BE's open question is the 12-byte manager object's `+0`/`+4`/`+8` words, and a named global plus a
+named initialiser is what a runtime probe needs to speak about.
+
+**The `tools/patch_ldscript.py` ask from round 5 is 2/3 actioned, with a naming mismatch that keeps
+the point of the ask.** All three addresses are now in `config/symbols.txt`:
+`0x8087FB84` and `0x8087FB88` as the DWARF labels `@LOCAL@SIInit__Fv@Initialized` and
+`@LOCAL@SIGetType__Fl@cmdTypeAndStatus`, and `0x807BB4A8` as the local object `@2934`. But the shim
+still injects its **own** names for them (`lbl_LOCAL_SIInit__Fv_Initialized`,
+`lbl_LOCAL_SIGetType__Fl_cmdTypeAndStatus`, `lbl_807BB4A8`), so `grep`-ing the map for a symbol the
+linker knows still fails — which was the whole reason for the rule. Either the shim should inject the
+map's names, or the map should carry the shim's names as aliases at the same address. Rule 2 holds:
+the shim defines **0** functions (checked: no `type:function` entry), only labels and data.
+
+**The evidence bar is the thing that slipped this round.** Batch 14 (`573267f`) is a bare subject
+with an empty body; Batches 11-13 likewise carry no per-rename justification, and the queue table is
+the closest thing to evidence in the tree. Round 4's rule was that each rename names its reason in
+the message. This is cheap to restore (one line per name: caller, import, or string it touches) and
+it is what lets a reviewer check 13 names in a minute instead of a tracing session.
+
+**What this round is worth to Track B, measured rather than claimed.** Applied to this session's own
+run logs (7 files, 670 `fn_` probe mentions, 20 distinct addresses): **84 mentions (12.5 %) sit at
+addresses this round named, and 17 of the 20 distinct addresses are now named.** The largest single
+address left is **`fn_800EF3EC`** — the function `recomp/`'s `[TLS Camera]` probe prints 143 times in
+every run (`cam_obj=0x81345BF0 lr=0x800EF68C`) — which is unnamed and is therefore the first thing a
+Batch 15 should take. It is also the cleanest possible rename: the probe line already says what it
+is, and its caller (`0x800EF68C`) is in the same unit.
+
+**One methodological note, not a criticism of the work.** `docs/TRACK_A_QUEUE.md`'s hit counts are
+cumulative over the 521 logs retained in `logs_ap/`, so a routine that appears once per frame in a log
+that was re-run 200 times scores 200x. That is a defensible way to rank *how much of Track B's
+recorded history* a name would touch, but it is not per-run frequency, and the file should say so in
+one line - a reader will assume "hits" means "per run". The per-run measure is the one a Track B probe
+is worth: 143 mentions per run for `fn_800EF3EC` against 15 137 cumulative for the queue's top entry.
