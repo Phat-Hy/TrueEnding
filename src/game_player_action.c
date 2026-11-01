@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void fn_80018240(void);
 extern void fn_80018BAC(void);
-extern void fn_8004ECC0(void);
+extern void item_testLineOfSight(void);
 extern void talk_parseDialogue(void);
 extern void fn_8005B8F8(void);
 extern void fn_8005B9AC(void);
@@ -29,7 +29,7 @@ extern void fn_80153B44(void);
 extern void fn_80153FA0(void);
 extern void fn_80154344(void);
 extern void fn_80155790(void);
-extern void fn_80155DAC(void);
+extern void inventory_calcTotalStats(void);
 extern void fn_8016E484(void);
 extern void fn_8016F4D8(void);
 extern void fn_8016F5EC(void);
@@ -1065,7 +1065,7 @@ lbl_fn_8011C074_00000CF4:
     bne lbl_fn_8011C074_00000D18
     mr r3, r31
     li r4, 0x1
-    bl fn_80155DAC
+    bl inventory_calcTotalStats
     b lbl_fn_8011C074_00000D4C
 lbl_fn_8011C074_00000D18:
     cmpwi r3, 0x0
@@ -1080,7 +1080,7 @@ lbl_fn_8011C074_00000D18:
     beq lbl_fn_8011C074_00000D4C
     mr r3, r31
     li r4, 0x0
-    bl fn_80155DAC
+    bl inventory_calcTotalStats
 lbl_fn_8011C074_00000D4C:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
@@ -1306,7 +1306,7 @@ lbl_fn_8011C4AC_00000FF0:
     lfs f2, 0x608(r10)
     stfs f2, 0x10(r1)
     psq_st f1, 0x0(r6), 0, 0
-    bl fn_8004ECC0
+    bl item_testLineOfSight
     cmpwi r3, 0x0
     beq lbl_fn_8011C4AC_0000107C
     li r0, 0x0

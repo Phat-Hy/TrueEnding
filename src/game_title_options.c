@@ -21,7 +21,7 @@ extern void msg_getMessageById(void);
 extern void msg_getMessageString(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
-extern void fn_800DBF68(void);
+extern void env_updateAtmosphere(void);
 extern void wcs_parseInt(void);
 extern void fn_800E0908(void);
 extern void fn_80119ECC(void);
@@ -2024,7 +2024,7 @@ lbl_fn_803B3D2C_000018C8:
     mr r19, r3
     mr r3, r27
     mr r4, r19
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     lbz r3, 0x2c(r1)
     slwi r0, r19, 1
     stb r3, 0x28(r1)

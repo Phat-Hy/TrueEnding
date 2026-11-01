@@ -115,7 +115,7 @@ void fn_8006AB54(void);
 void fn_8006AC08(void);
 void fn_8006AD24(void);
 void fn_8006AF38(void);
-void fn_8006AFF8(void);
+void boss_initActionStream(void);
 void fn_8006B0C8(void);
 void fn_8006B174(void);
 void fn_8006B2D8(void);
@@ -2511,7 +2511,7 @@ lbl_fn_8006AD24_00002000:
     mr r5, r30
     addi r3, r1, 0x24
     addi r4, r1, 0x30
-    bl fn_8006AFF8
+    bl boss_initActionStream
     lwz r0, 0x0(r31)
     srwi. r4, r0, 31
     bne lbl_fn_8006AD24_00002060
@@ -2668,7 +2668,7 @@ lbl_fn_8006AF38_000021E4:
     blr
 }
 
-asm void fn_8006AFF8(void)
+asm void boss_initActionStream(void)
 {
     nofralloc
     stwu r1, -0x30(r1)
@@ -2682,26 +2682,26 @@ asm void fn_8006AFF8(void)
     stw r0, 0x8(r3)
     lwz r0, 0x0(r4)
     srwi. r0, r0, 31
-    bne lbl_fn_8006AFF8_00002288
+    bne lbl_boss_initActionStream_00002288
     lbz r0, 0x0(r4)
     addi r29, r4, 0x1
     clrlwi r31, r0, 25
-    b lbl_fn_8006AFF8_00002290
-lbl_fn_8006AFF8_00002288:
+    b lbl_boss_initActionStream_00002290
+lbl_boss_initActionStream_00002288:
     lwz r29, 0x8(r4)
     lwz r31, 0x4(r4)
-lbl_fn_8006AFF8_00002290:
+lbl_boss_initActionStream_00002290:
     lwz r0, 0x0(r5)
     srwi. r0, r0, 31
-    bne lbl_fn_8006AFF8_000022AC
+    bne lbl_boss_initActionStream_000022AC
     lbz r0, 0x0(r5)
     addi r28, r5, 0x1
     clrlwi r30, r0, 25
-    b lbl_fn_8006AFF8_000022B4
-lbl_fn_8006AFF8_000022AC:
+    b lbl_boss_initActionStream_000022B4
+lbl_boss_initActionStream_000022AC:
     lwz r28, 0x8(r5)
     lwz r30, 0x4(r5)
-lbl_fn_8006AFF8_000022B4:
+lbl_boss_initActionStream_000022B4:
     mr r3, r27
     add r4, r31, r30
     bl actor_validateIndex

@@ -6,7 +6,7 @@ extern void _restgpr_25(void);
 extern void _restgpr_27(void);
 extern void _savegpr_25(void);
 extern void _savegpr_27(void);
-extern void fn_8004ECC0(void);
+extern void item_testLineOfSight(void);
 extern void collision_testLineSegment(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -30,7 +30,7 @@ extern void fn_8015E7A0(void);
 extern void debuff_clearStatus(void);
 extern void actor_setState(void);
 extern void battle_awardExp(void);
-extern void fn_80178A6C(void);
+extern void battle_updateActorStatus(void);
 extern void task_findEntryById(void);
 extern void fn_802CCFD8(void);
 extern void world_setLocalFlag(void);
@@ -1294,7 +1294,7 @@ lbl_fn_802CC19C_0000108C:
     stfs f2, 0x34(r1)
     stfs f4, 0x3c(r1)
     stfs f0, 0x30(r1)
-    bl fn_8004ECC0
+    bl item_testLineOfSight
 lbl_fn_802CC19C_00001158:
     lfs f5, 0x58(r1)
     addi r4, r1, 0x14
@@ -1587,7 +1587,7 @@ asm void fn_802CC708(void)
     mtctr r12
     bctrl
     mr r3, r31
-    bl fn_80178A6C
+    bl battle_updateActorStatus
     mr r3, r31
     li r4, 0x0
     li r5, 0x1

@@ -47,7 +47,7 @@ extern void fn_801E6714(void);
 extern void fn_801E6B10(void);
 extern void fn_801E6EF0(void);
 extern void fn_801E6FC8(void);
-extern void fn_801F4728(void);
+extern void save_parseSlotHeader(void);
 extern void save_parseSlotStats(void);
 extern void saveSlot_readSummary(void);
 extern void save_computeCrc32(void);
@@ -650,7 +650,7 @@ lbl_fn_801D3DF4_00000768:
     bl profile_getMetricValue
     addi r4, r31, 0x396
     addi r5, r1, 0xc0
-    bl fn_801F4728
+    bl save_parseSlotHeader
 lbl_fn_801D3DF4_00000830:
     addi r11, r1, 0x380
     bl _restgpr_26

@@ -9,7 +9,7 @@ extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
-extern void fn_800DBF68(void);
+extern void env_updateAtmosphere(void);
 extern void str_findChar(void);
 extern void wcs_vformat(void);
 extern void save_validateHeader(void);
@@ -58,7 +58,7 @@ void fn_801F6C10(void);
 void fn_801F6C2C(void);
 void fn_801F6C38(void);
 void save_computeCrc32(void);
-void fn_801F6D7C(void);
+void save_verifyBlockCrc(void);
 void fn_801F6E78(void);
 void fn_801F72D4(void);
 
@@ -383,7 +383,7 @@ lbl_fn_801F5E9C_00000464:
     stw r0, 0x8(r30)
     stw r0, 0xc(r30)
     lwz r4, 0x28(r1)
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     lwz r0, 0x28(r1)
     addi r3, r30, 0x4
     lbz r4, 0x10(r1)
@@ -571,7 +571,7 @@ lbl_fn_801F60B8_000006FC:
     stw r0, 0x8(r30)
     stw r0, 0xc(r30)
     lwz r4, 0x28(r1)
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     lwz r0, 0x28(r1)
     addi r3, r30, 0x4
     lbz r4, 0x14(r1)
@@ -1388,7 +1388,7 @@ lbl_save_computeCrc32_0000119C:
     blr
 }
 
-asm void fn_801F6D7C(void)
+asm void save_verifyBlockCrc(void)
 {
     nofralloc
     stwu r1, -0x30(r1)
@@ -1414,45 +1414,45 @@ asm void fn_801F6D7C(void)
     stfs f31, 0x10(r1)
     mtctr r8
     cmplwi r8, 0x0
-    ble lbl_fn_801F6D7C_00001260
-lbl_fn_801F6D7C_00001214:
+    ble lbl_save_verifyBlockCrc_00001260
+lbl_save_verifyBlockCrc_00001214:
     lbz r0, 0x5c(r7)
     extsb r0, r0
     cmpw r5, r0
-    bne lbl_fn_801F6D7C_00001254
+    bne lbl_save_verifyBlockCrc_00001254
     lbz r0, 0x5d(r7)
     extsb r0, r0
     cmpw r4, r0
-    bne lbl_fn_801F6D7C_00001254
+    bne lbl_save_verifyBlockCrc_00001254
     lwz r0, 0x60(r7)
     cmplw r3, r0
-    bne lbl_fn_801F6D7C_00001254
+    bne lbl_save_verifyBlockCrc_00001254
     mulli r0, r6, 0xc
     lwz r4, 0x10(r1)
     add r3, r31, r0
     stw r4, 0x64(r3)
-    b lbl_fn_801F6D7C_00001298
-lbl_fn_801F6D7C_00001254:
+    b lbl_save_verifyBlockCrc_00001298
+lbl_save_verifyBlockCrc_00001254:
     addi r7, r7, 0xc
     addi r6, r6, 0x1
-    bdnz lbl_fn_801F6D7C_00001214
-lbl_fn_801F6D7C_00001260:
+    bdnz lbl_save_verifyBlockCrc_00001214
+lbl_save_verifyBlockCrc_00001260:
     lwz r0, 0x58(r31)
     mulli r0, r0, 0xc
     add r0, r31, r0
     addic. r3, r0, 0x5c
-    beq lbl_fn_801F6D7C_0000128C
+    beq lbl_save_verifyBlockCrc_0000128C
     lwz r0, 0x8(r1)
     stw r0, 0x0(r3)
     lwz r0, 0xc(r1)
     stw r0, 0x4(r3)
     lwz r0, 0x10(r1)
     stw r0, 0x8(r3)
-lbl_fn_801F6D7C_0000128C:
+lbl_save_verifyBlockCrc_0000128C:
     lwz r3, 0x58(r31)
     addi r0, r3, 0x1
     stw r0, 0x58(r31)
-lbl_fn_801F6D7C_00001298:
+lbl_save_verifyBlockCrc_00001298:
     lwz r0, 0x34(r1)
     lfd f31, 0x28(r1)
     lwz r31, 0x24(r1)

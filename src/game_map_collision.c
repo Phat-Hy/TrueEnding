@@ -20,7 +20,7 @@ extern void ref_releaseHandle(void);
 extern void str_parseInt(void);
 extern void fn_80125474(void);
 extern void fn_801255C8(void);
-extern void fn_80126214(void);
+extern void enemy_updateCombatBehavior(void);
 extern void fn_80128818(void);
 extern void fn_80139560(void);
 extern void quest_updateFlow(void);
@@ -33,7 +33,7 @@ extern void actor_getMovementFlags(void);
 extern void fn_80182134(void);
 extern void entity_Instance_constructor(void);
 extern void entity_Instance_destructor(void);
-extern void fn_803C1560(void);
+extern void craft_forgeUpgradeWeapon(void);
 extern void fn_803CD958(void);
 extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
@@ -1635,7 +1635,7 @@ asm void fn_80181A64(void)
     li r6, 0x0
     li r7, 0x0
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     mr r29, r3
     mr r3, r20
     bl actor_getMovementFlags
@@ -1646,7 +1646,7 @@ asm void fn_80181A64(void)
     li r6, 0x0
     li r7, 0x0
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     lfs f3, 0x530(r22)
     addi r5, r1, 0x14
     lfs f0, 0x530(r20)
@@ -1715,7 +1715,7 @@ lbl_fn_80181A64_00001640:
     li r6, 0x0
     li r7, 0x0
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     lwz r0, 0xa4(r26)
     mr r30, r3
     subi r4, r30, 0x1
@@ -1860,7 +1860,7 @@ asm void fn_80181D94(void)
     li r7, 0x0
     li r8, 0x1
     mr r3, r29
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     cmpwi r3, 0x0
     beq lbl_fn_80181D94_0000189C
     subi r0, r3, 0x1
@@ -1915,7 +1915,7 @@ lbl_fn_80181D94_00001900:
     bl fn_801255C8
 lbl_fn_80181D94_00001928:
     mr r3, r31
-    bl fn_80126214
+    bl enemy_updateCombatBehavior
     psq_l f1, 0x58(r31), 0, 0
     addi r29, r1, 0x68
     lfs f2, 0x60(r31)

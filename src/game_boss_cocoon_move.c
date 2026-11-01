@@ -9,7 +9,7 @@ extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CFD18(void);
 extern void fn_801F6C2C(void);
-extern void fn_801F6D7C(void);
+extern void save_verifyBlockCrc(void);
 extern void fn_801F791C(void);
 extern void save_findEntryByName(void);
 extern void fn_80213E60(void);
@@ -1295,7 +1295,7 @@ lbl_fn_8044F96C_000010A8:
     fmr f1, f31
     mr r4, r30
     li r5, 0x0
-    bl fn_801F6D7C
+    bl save_verifyBlockCrc
 lbl_fn_8044F96C_000010C4:
     addi r27, r27, 0x4
 lbl_fn_8044F96C_000010C8:
@@ -1317,7 +1317,7 @@ lbl_fn_8044F96C_000010F4:
     fmr f1, f31
     mr r4, r30
     li r5, 0x1
-    bl fn_801F6D7C
+    bl save_verifyBlockCrc
 lbl_fn_8044F96C_00001110:
     addi r28, r28, 0x4
 lbl_fn_8044F96C_00001114:
@@ -1339,7 +1339,7 @@ lbl_fn_8044F96C_00001140:
     fmr f1, f31
     mr r4, r30
     li r5, 0x2
-    bl fn_801F6D7C
+    bl save_verifyBlockCrc
 lbl_fn_8044F96C_0000115C:
     addi r28, r28, 0x4
 lbl_fn_8044F96C_00001160:
@@ -1361,7 +1361,7 @@ lbl_fn_8044F96C_0000118C:
     fmr f1, f31
     mr r4, r30
     li r5, 0x3
-    bl fn_801F6D7C
+    bl save_verifyBlockCrc
 lbl_fn_8044F96C_000011A8:
     addi r28, r28, 0x4
 lbl_fn_8044F96C_000011AC:

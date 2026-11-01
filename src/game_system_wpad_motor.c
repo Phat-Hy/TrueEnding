@@ -14,7 +14,7 @@ extern void fn_8006A250(void);
 extern void fn_8006A900(void);
 extern void fn_8006AA20(void);
 extern void fn_8006D0C8(void);
-extern void fn_8007708C(void);
+extern void chapter_updateProgression(void);
 extern void mem_getAllocSize(void);
 extern void fn_8009246C(void);
 extern void msg_getMessageById(void);
@@ -47,7 +47,7 @@ extern void magic_dispatchActionCommand(void);
 extern void fn_80123C7C(void);
 extern void fn_801240B4(void);
 extern void fn_8012AFE8(void);
-extern void fn_8016EB48(void);
+extern void battle_applyStatusEffect(void);
 extern void fn_8017AD44(void);
 extern void fn_80182890(void);
 extern void fn_80183774(void);
@@ -102,7 +102,7 @@ extern void fn_803BE590(void);
 extern void fn_803BE670(void);
 extern void fn_803BE6B8(void);
 extern void fn_803BEBAC(void);
-extern void fn_803C1560(void);
+extern void craft_forgeUpgradeWeapon(void);
 extern void fn_803CCD98(void);
 extern void fn_803CE148(void);
 extern void fn_803CE154(void);
@@ -1669,7 +1669,7 @@ lbl_world_Manager_draw_00001330:
     stfs f4, 0x5c(r1)
     stfs f0, 0x58(r1)
     lwz r3, 0x10d8(r28)
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     cmpwi r3, 0x0
     beq lbl_world_Manager_draw_000014E4
     subi r0, r3, 0x1
@@ -1695,7 +1695,7 @@ lbl_world_Manager_draw_00001330:
     psq_st f1, 0x534(r24), 0, 0
     stfs f0, 0x30(r1)
     stfs f2, 0x53c(r24)
-    bl fn_8016EB48
+    bl battle_applyStatusEffect
 lbl_world_Manager_draw_000014E4:
     lwz r5, 0x551c(r28)
     li r30, 0x0
@@ -2032,7 +2032,7 @@ lbl_world_Manager_draw_00001970:
     psq_st f1, 0x534(r3), 0, 0
     stfs f2, 0x53c(r3)
     stfs f0, 0x24(r1)
-    bl fn_8016EB48
+    bl battle_applyStatusEffect
 lbl_world_Manager_draw_000019C0:
     lwz r0, 0x5694(r28)
     li r3, 0x0
@@ -3178,7 +3178,7 @@ lbl_world_Manager_draw_000029F0:
     subi r0, r4, 0xe4f
     addi r4, r24, 0x34
     clrlwi r5, r0, 16
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_world_Manager_draw_00002A2C
     li r29, 0x1

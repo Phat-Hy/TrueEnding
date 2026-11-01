@@ -19,14 +19,14 @@ extern void morph_updateMesh(void);
 extern void system_getNextSequenceId(void);
 extern void viewport_updateCulling(void);
 extern void scissor_clipFrustum(void);
-extern void fn_80126214(void);
-extern void fn_8013A258(void);
+extern void enemy_updateCombatBehavior(void);
+extern void npc_initScriptContext(void);
 extern void npc_getPosition(void);
 extern void npc_updateTalkInteraction(void);
 extern void fn_801426A4(void);
 extern void actor_setState(void);
-extern void fn_8017039C(void);
-extern void fn_80170A20(void);
+extern void battle_resolveAggroHierarchy(void);
+extern void battle_updateTargetAggro(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
@@ -268,7 +268,7 @@ asm void fn_8027EB14(void)
     cmpwi r0, 0x7
     bne lbl_fn_8027EB14_00000B84
     addi r3, r3, 0x1030
-    bl fn_80126214
+    bl enemy_updateCombatBehavior
     addi r4, r31, 0x1088
     addi r30, r1, 0x1a0
     psq_l f1, 0x0(r4), 0, 0
@@ -878,7 +878,7 @@ lbl_fn_8027EB14_00000AC8:
 lbl_fn_8027EB14_00000B84:
     cmpwi r0, 0x6
     bne lbl_fn_8027EB14_00000B94
-    bl fn_8013A258
+    bl npc_initScriptContext
     b lbl_fn_8027EB14_00000BD4
 lbl_fn_8027EB14_00000B94:
     cmpwi r30, 0x0
@@ -1249,7 +1249,7 @@ lbl_fn_8027F8A8_00001080:
     mr r4, r31
     stw r31, 0x1504(r30)
     li r5, 0x2
-    bl fn_8017039C
+    bl battle_resolveAggroHierarchy
     lfs f3, lbl_8088394C
     li r0, 0x1
     lfs f0, lbl_808839AC
@@ -1723,7 +1723,7 @@ lbl_fn_8027FA7C_00001780:
     stw r30, 0x1504(r31)
     mr r4, r28
     li r5, 0x2
-    bl fn_80170A20
+    bl battle_updateTargetAggro
     lfs f3, lbl_8088394C
     li r0, 0x1
     lfs f0, lbl_808839AC

@@ -62,7 +62,7 @@ void fn_801F4484(void);
 void fn_801F4514(void);
 void fn_801F45F4(void);
 void fn_801F465C(void);
-void fn_801F4728(void);
+void save_parseSlotHeader(void);
 void fn_801F4818(void);
 void save_parseSlotStats(void);
 void fn_801F4998(void);
@@ -463,7 +463,7 @@ lbl_fn_801F465C_000004E0:
     blr
 }
 
-asm void fn_801F4728(void)
+asm void save_parseSlotHeader(void)
 {
     nofralloc
     stwu r1, -0x30(r1)

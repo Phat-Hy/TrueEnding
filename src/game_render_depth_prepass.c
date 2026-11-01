@@ -13,7 +13,7 @@ extern void atn_ColliCapsule_destructor(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
-extern void fn_8006AFF8(void);
+extern void boss_initActionStream(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
@@ -47,9 +47,9 @@ extern void equip_applyToCharacter(void);
 extern void fn_80158BB4(void);
 extern void debuff_clearStatus(void);
 extern void actor_setState(void);
-extern void fn_80170A20(void);
+extern void battle_updateTargetAggro(void);
 extern void fn_801781B0(void);
-extern void fn_80178A6C(void);
+extern void battle_updateActorStatus(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_ctor(void);
@@ -767,7 +767,7 @@ lbl_fn_802B23E8_000008D4:
     addi r3, r1, 0x20
     addi r4, r1, 0x38
     addi r5, r1, 0x2c
-    bl fn_8006AFF8
+    bl boss_initActionStream
     li r0, 0x0
     stw r0, 0x166c(r30)
     addi r3, r30, 0x1850
@@ -1746,7 +1746,7 @@ lbl_fn_802B3534_0000166C:
     mtctr r12
     bctrl
     mr r3, r30
-    bl fn_80178A6C
+    bl battle_updateActorStatus
     mr r3, r30
     li r4, 0x0
     li r5, 0x1
@@ -2632,7 +2632,7 @@ lbl_fn_802B3764_000023AC:
     mr r3, r31
     lfs f1, lbl_80884064
     li r5, 0x0
-    bl fn_80170A20
+    bl battle_updateTargetAggro
 lbl_fn_802B3764_000023DC:
     mr r3, r31
     bl fn_802B43C8

@@ -10,13 +10,13 @@ extern void fn_80129144(void);
 extern void fn_80129670(void);
 extern void fn_80153698(void);
 extern void inventory_unequipItem(void);
-extern void fn_80155DAC(void);
-extern void fn_8016EB48(void);
+extern void inventory_calcTotalStats(void);
+extern void battle_applyStatusEffect(void);
 extern void actor_getMovementFlags(void);
 extern void fn_8036DAF4(void);
 extern void fn_803C11A4(void);
 extern void fn_803C1338(void);
-extern void fn_803C1560(void);
+extern void craft_forgeUpgradeWeapon(void);
 extern void fn_803CD958(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
@@ -55,7 +55,7 @@ void fn_80125320(void);
 void fn_8012539C(void);
 void fn_80125474(void);
 void fn_801255C8(void);
-void fn_80126214(void);
+void enemy_updateCombatBehavior(void);
 
 asm void fn_80125320(void)
 {
@@ -292,7 +292,7 @@ lbl_fn_801255C8_00000304:
     extrwi. r0, r0, 1, 25
     beq lbl_fn_801255C8_0000031C
     li r4, 0x0
-    bl fn_80155DAC
+    bl inventory_calcTotalStats
 lbl_fn_801255C8_0000031C:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
@@ -1135,7 +1135,7 @@ lbl_fn_801255C8_00000EDC:
     blr
 }
 
-asm void fn_80126214(void)
+asm void enemy_updateCombatBehavior(void)
 {
     nofralloc
     stwu r1, -0x2d0(r1)
@@ -1148,7 +1148,7 @@ asm void fn_80126214(void)
     mr r31, r3
     bl fn_80125474
     cmpwi r3, 0x0
-    bne lbl_fn_80126214_0000106C
+    bne lbl_enemy_updateCombatBehavior_0000106C
     lwz r3, 0xa4(r31)
     lis r4, lbl_807C7030@ha
     addi r4, r4, lbl_807C7030@l
@@ -1166,95 +1166,95 @@ asm void fn_80126214(void)
     lwz r4, 0x38(r3)
     rlwinm r0, r4, 0, 29, 29
     cmplwi r0, 0x4
-    beq lbl_fn_80126214_00000F78
+    beq lbl_enemy_updateCombatBehavior_00000F78
     clrlwi r0, r4, 31
     cmplwi r0, 0x1
-    beq lbl_fn_80126214_00000F78
+    beq lbl_enemy_updateCombatBehavior_00000F78
     li r7, 0x1
-lbl_fn_80126214_00000F78:
+lbl_enemy_updateCombatBehavior_00000F78:
     cmpwi r7, 0x0
-    beq lbl_fn_80126214_00000F94
+    beq lbl_enemy_updateCombatBehavior_00000F94
     lwz r0, 0x7e0(r3)
     rlwinm r0, r0, 0, 26, 26
     cmplwi r0, 0x20
-    beq lbl_fn_80126214_00000F94
+    beq lbl_enemy_updateCombatBehavior_00000F94
     li r6, 0x1
-lbl_fn_80126214_00000F94:
+lbl_enemy_updateCombatBehavior_00000F94:
     cmpwi r6, 0x0
-    beq lbl_fn_80126214_00000FC8
+    beq lbl_enemy_updateCombatBehavior_00000FC8
     lwz r0, 0x55c(r3)
     li r4, 0x0
     cmpwi r0, 0x6
-    bne lbl_fn_80126214_00000FBC
+    bne lbl_enemy_updateCombatBehavior_00000FBC
     lwz r0, 0x560(r3)
     cmpwi r0, 0x1c
-    bne lbl_fn_80126214_00000FBC
+    bne lbl_enemy_updateCombatBehavior_00000FBC
     li r4, 0x1
-lbl_fn_80126214_00000FBC:
+lbl_enemy_updateCombatBehavior_00000FBC:
     cmpwi r4, 0x0
-    bne lbl_fn_80126214_00000FC8
+    bne lbl_enemy_updateCombatBehavior_00000FC8
     li r5, 0x1
-lbl_fn_80126214_00000FC8:
+lbl_enemy_updateCombatBehavior_00000FC8:
     cmpwi r5, 0x0
-    beq lbl_fn_80126214_00000FE0
+    beq lbl_enemy_updateCombatBehavior_00000FE0
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8016EB48
-lbl_fn_80126214_00000FE0:
+    bl battle_applyStatusEffect
+lbl_enemy_updateCombatBehavior_00000FE0:
     li r0, 0x1
     stw r0, 0x2c(r31)
     lwz r3, 0xa4(r31)
     lwz r0, 0x12a4(r3)
     srwi. r0, r0, 31
-    bne lbl_fn_80126214_000026A8
+    bne lbl_enemy_updateCombatBehavior_000026A8
     lwz r0, 0x44(r31)
     cmpwi r0, 0x1
-    bne lbl_fn_80126214_000026A8
+    bne lbl_enemy_updateCombatBehavior_000026A8
     lwz r4, 0xc(r31)
     cmpwi r4, 0x0
-    ble lbl_fn_80126214_000026A8
+    ble lbl_enemy_updateCombatBehavior_000026A8
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
-    beq lbl_fn_80126214_00001024
+    beq lbl_enemy_updateCombatBehavior_00001024
     lwz r3, 0x10d8(r3)
-    b lbl_fn_80126214_0000103C
-lbl_fn_80126214_00001024:
+    b lbl_enemy_updateCombatBehavior_0000103C
+lbl_enemy_updateCombatBehavior_00001024:
     lwz r3, lbl_8087F540
     cmpwi r3, 0x0
-    beq lbl_fn_80126214_00001038
+    beq lbl_enemy_updateCombatBehavior_00001038
     lwz r3, 0x1a6c(r3)
-    b lbl_fn_80126214_0000103C
-lbl_fn_80126214_00001038:
+    b lbl_enemy_updateCombatBehavior_0000103C
+lbl_enemy_updateCombatBehavior_00001038:
     li r3, 0x0
-lbl_fn_80126214_0000103C:
+lbl_enemy_updateCombatBehavior_0000103C:
     cmpwi r3, 0x0
-    beq lbl_fn_80126214_000026A8
+    beq lbl_enemy_updateCombatBehavior_000026A8
     subi r0, r4, 0x1
     lwz r3, 0xb0(r3)
     slwi r0, r0, 6
     add r3, r3, r0
     lwz r0, 0x3c(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_80126214_000026A8
+    beq lbl_enemy_updateCombatBehavior_000026A8
     li r0, 0x0
     stw r0, 0x3c(r3)
-    b lbl_fn_80126214_000026A8
-lbl_fn_80126214_0000106C:
+    b lbl_enemy_updateCombatBehavior_000026A8
+lbl_enemy_updateCombatBehavior_0000106C:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
-    beq lbl_fn_80126214_00001080
+    beq lbl_enemy_updateCombatBehavior_00001080
     lwz r30, 0x10d8(r3)
-    b lbl_fn_80126214_00001098
-lbl_fn_80126214_00001080:
+    b lbl_enemy_updateCombatBehavior_00001098
+lbl_enemy_updateCombatBehavior_00001080:
     lwz r3, lbl_8087F540
     cmpwi r3, 0x0
-    beq lbl_fn_80126214_00001094
+    beq lbl_enemy_updateCombatBehavior_00001094
     lwz r30, 0x1a6c(r3)
-    b lbl_fn_80126214_00001098
-lbl_fn_80126214_00001094:
+    b lbl_enemy_updateCombatBehavior_00001098
+lbl_enemy_updateCombatBehavior_00001094:
     li r30, 0x0
-lbl_fn_80126214_00001098:
+lbl_enemy_updateCombatBehavior_00001098:
     lwz r6, 0xa4(r31)
     addi r3, r1, 0xd4
     lwz r0, 0x40(r31)
@@ -1275,7 +1275,7 @@ lbl_fn_80126214_00001098:
     psq_l f1, 0x0(r3), 0, 0
     psq_st f1, 0x0(r5), 0, 0
     stfs f2, 0x60(r31)
-    bgt lbl_fn_80126214_000025B8
+    bgt lbl_enemy_updateCombatBehavior_000025B8
     lis r3, jumptable_8077A678@ha
     slwi r0, r0, 2
     addi r3, r3, jumptable_8077A678@l
@@ -1284,7 +1284,7 @@ lbl_fn_80126214_00001098:
     bctr
     lwz r0, 0x44(r31)
     cmpwi r0, 0x4
-    bne lbl_fn_80126214_00001148
+    bne lbl_enemy_updateCombatBehavior_00001148
     lwz r4, 0x24(r31)
     mr r3, r6
     addi r26, r4, 0x528
@@ -1296,12 +1296,12 @@ lbl_fn_80126214_00001098:
     mr r4, r26
     li r6, 0x0
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     stw r3, 0x8(r31)
-    b lbl_fn_80126214_0000126C
-lbl_fn_80126214_00001148:
+    b lbl_enemy_updateCombatBehavior_0000126C
+lbl_enemy_updateCombatBehavior_00001148:
     cmpwi r0, 0x5
-    bne lbl_fn_80126214_00001180
+    bne lbl_enemy_updateCombatBehavior_00001180
     mr r3, r6
     bl actor_getMovementFlags
     lwz r7, 0xa0(r31)
@@ -1311,12 +1311,12 @@ lbl_fn_80126214_00001148:
     addi r4, r31, 0x30
     li r6, 0x0
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     stw r3, 0x8(r31)
-    b lbl_fn_80126214_0000126C
-lbl_fn_80126214_00001180:
+    b lbl_enemy_updateCombatBehavior_0000126C
+lbl_enemy_updateCombatBehavior_00001180:
     cmpwi r0, 0x7
-    bne lbl_fn_80126214_0000126C
+    bne lbl_enemy_updateCombatBehavior_0000126C
     lwz r5, 0x24(r31)
     addi r29, r1, 0x11c
     lfs f3, lbl_80881858
@@ -1372,29 +1372,29 @@ lbl_fn_80126214_00001180:
     mr r4, r29
     li r6, 0x0
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     stw r3, 0x8(r31)
-lbl_fn_80126214_0000126C:
+lbl_enemy_updateCombatBehavior_0000126C:
     addi r3, r31, 0x58
     bl PSVECSquareMag
     lfs f0, lbl_80881868
     fcmpo cr0, f1, f0
-    bge lbl_fn_80126214_00001474
+    bge lbl_enemy_updateCombatBehavior_00001474
     lwz r3, 0x4(r31)
     li r4, 0x0
     lwz r0, 0x8(r31)
     stw r4, 0x90(r31)
     cmpw r3, r0
-    beq lbl_fn_80126214_000012A8
+    beq lbl_enemy_updateCombatBehavior_000012A8
     mr r3, r31
     bl fn_80128CF8
     cmpwi r3, 0x0
-    beq lbl_fn_80126214_000012B4
-lbl_fn_80126214_000012A8:
+    beq lbl_enemy_updateCombatBehavior_000012B4
+lbl_enemy_updateCombatBehavior_000012A8:
     mr r3, r31
     bl fn_80129144
-    b lbl_fn_80126214_000025B8
-lbl_fn_80126214_000012B4:
+    b lbl_enemy_updateCombatBehavior_000025B8
+lbl_enemy_updateCombatBehavior_000012B4:
     lwz r3, 0x4(r31)
     stw r3, 0x0(r31)
     subi r0, r3, 0x1
@@ -1406,27 +1406,27 @@ lbl_fn_80126214_000012B4:
     bl fn_803CD958
     clrlwi. r5, r3, 16
     stw r5, 0x4(r31)
-    ble lbl_fn_80126214_00001418
+    ble lbl_enemy_updateCombatBehavior_00001418
     lwz r3, lbl_8087F430
     mr r30, r5
     addi r29, r1, 0xbc
     cmpwi r3, 0x0
-    beq lbl_fn_80126214_00001300
+    beq lbl_enemy_updateCombatBehavior_00001300
     lwz r26, 0x10d8(r3)
-    b lbl_fn_80126214_00001318
-lbl_fn_80126214_00001300:
+    b lbl_enemy_updateCombatBehavior_00001318
+lbl_enemy_updateCombatBehavior_00001300:
     lwz r3, lbl_8087F540
     cmpwi r3, 0x0
-    beq lbl_fn_80126214_00001314
+    beq lbl_enemy_updateCombatBehavior_00001314
     lwz r26, 0x1a6c(r3)
-    b lbl_fn_80126214_00001318
-lbl_fn_80126214_00001314:
+    b lbl_enemy_updateCombatBehavior_00001318
+lbl_enemy_updateCombatBehavior_00001314:
     li r26, 0x0
-lbl_fn_80126214_00001318:
+lbl_enemy_updateCombatBehavior_00001318:
     lwz r3, 0x48(r31)
     rlwinm r0, r3, 0, 30, 30
     cmplwi r0, 0x2
-    bne lbl_fn_80126214_0000134C
+    bne lbl_enemy_updateCombatBehavior_0000134C
     subi r0, r5, 0x1
     lwz r3, 0x9c(r26)
     mulli r0, r0, 0x30
@@ -1435,11 +1435,11 @@ lbl_fn_80126214_00001318:
     lfs f2, 0xc(r3)
     stfs f2, 0xc4(r1)
     psq_st f1, 0x0(r29), 0, 0
-    b lbl_fn_80126214_00001404
-lbl_fn_80126214_0000134C:
+    b lbl_enemy_updateCombatBehavior_00001404
+lbl_enemy_updateCombatBehavior_0000134C:
     rlwinm r0, r3, 0, 27, 27
     cmplwi r0, 0x10
-    bne lbl_fn_80126214_000013F8
+    bne lbl_enemy_updateCombatBehavior_000013F8
     lfs f3, lbl_80881858
     addi r3, r31, 0x58
     lfs f0, lbl_8088185C
@@ -1453,15 +1453,15 @@ lbl_fn_80126214_0000134C:
     bl PSVECSquareMag
     lfs f0, lbl_80881858
     fcmpu cr0, f0, f1
-    bne lbl_fn_80126214_000013AC
+    bne lbl_enemy_updateCombatBehavior_000013AC
     addi r3, r1, 0x8
     lfs f2, 0x10(r1)
     addi r4, r1, 0x14
     psq_l f1, 0x0(r3), 0, 0
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x1c(r1)
-    b lbl_fn_80126214_000013E0
-lbl_fn_80126214_000013AC:
+    b lbl_enemy_updateCombatBehavior_000013E0
+lbl_enemy_updateCombatBehavior_000013AC:
     addi r28, r1, 0x14
     addi r27, r1, 0x20
     psq_l f1, 0x0(r28), 0, 0
@@ -1475,30 +1475,30 @@ lbl_fn_80126214_000013AC:
     lfs f2, 0x28(r1)
     psq_st f1, 0x0(r28), 0, 0
     stfs f2, 0x1c(r1)
-lbl_fn_80126214_000013E0:
+lbl_enemy_updateCombatBehavior_000013E0:
     mr r3, r29
     mr r4, r26
     mr r5, r30
     addi r6, r1, 0x14
     bl fn_803C1338
-    b lbl_fn_80126214_00001404
-lbl_fn_80126214_000013F8:
+    b lbl_enemy_updateCombatBehavior_00001404
+lbl_enemy_updateCombatBehavior_000013F8:
     mr r3, r29
     mr r4, r26
     bl fn_803C11A4
-lbl_fn_80126214_00001404:
+lbl_enemy_updateCombatBehavior_00001404:
     psq_l f1, 0x0(r29), 0, 0
     lfs f2, 0x8(r29)
     stfs f2, 0x54(r31)
     psq_st f1, 0x4c(r31), 0, 0
-    b lbl_fn_80126214_0000142C
-lbl_fn_80126214_00001418:
+    b lbl_enemy_updateCombatBehavior_0000142C
+lbl_enemy_updateCombatBehavior_00001418:
     lwz r3, 0xa4(r31)
     psq_l f1, 0x528(r3), 0, 0
     lfs f2, 0x530(r3)
     stfs f2, 0x54(r31)
     psq_st f1, 0x4c(r31), 0, 0
-lbl_fn_80126214_0000142C:
+lbl_enemy_updateCombatBehavior_0000142C:
     lwz r4, 0xa4(r31)
     addi r3, r1, 0xb0
     lfs f3, 0x54(r31)
@@ -1516,11 +1516,11 @@ lbl_fn_80126214_0000142C:
     psq_l f1, 0x0(r3), 0, 0
     psq_st f1, 0x58(r31), 0, 0
     stfs f2, 0x60(r31)
-    b lbl_fn_80126214_000025B8
-lbl_fn_80126214_00001474:
+    b lbl_enemy_updateCombatBehavior_000025B8
+lbl_enemy_updateCombatBehavior_00001474:
     lwz r0, 0x44(r31)
     cmpwi r0, 0x4
-    bne lbl_fn_80126214_00001638
+    bne lbl_enemy_updateCombatBehavior_00001638
     lwz r3, 0xa4(r31)
     lwz r4, 0x24(r31)
     lfs f0, 0x52c(r3)
@@ -1539,16 +1539,16 @@ lbl_fn_80126214_00001474:
     stfs f3, 0x104(r1)
     fcmpo cr0, f5, f0
     stfs f4, 0x10c(r1)
-    ble lbl_fn_80126214_000014D4
+    ble lbl_enemy_updateCombatBehavior_000014D4
     lfs f0, lbl_80881858
     stfs f0, 0x108(r1)
-lbl_fn_80126214_000014D4:
+lbl_enemy_updateCombatBehavior_000014D4:
     addi r3, r1, 0x104
     bl PSVECSquareMag
     lfs f0, 0x28(r31)
     fmuls f0, f0, f0
     fcmpo cr0, f1, f0
-    bge lbl_fn_80126214_000025B8
+    bge lbl_enemy_updateCombatBehavior_000025B8
     lwz r3, 0xa4(r31)
     lis r4, lbl_807C7030@ha
     addi r4, r4, lbl_807C7030@l
@@ -1566,83 +1566,83 @@ lbl_fn_80126214_000014D4:
     lwz r7, 0x38(r3)
     rlwinm r4, r7, 0, 29, 29
     cmplwi r4, 0x4
-    beq lbl_fn_80126214_00001544
+    beq lbl_enemy_updateCombatBehavior_00001544
     clrlwi r4, r7, 31
     cmplwi r4, 0x1
-    beq lbl_fn_80126214_00001544
+    beq lbl_enemy_updateCombatBehavior_00001544
     li r6, 0x1
-lbl_fn_80126214_00001544:
+lbl_enemy_updateCombatBehavior_00001544:
     cmpwi r6, 0x0
-    beq lbl_fn_80126214_00001560
+    beq lbl_enemy_updateCombatBehavior_00001560
     lwz r4, 0x7e0(r3)
     rlwinm r4, r4, 0, 26, 26
     cmplwi r4, 0x20
-    beq lbl_fn_80126214_00001560
+    beq lbl_enemy_updateCombatBehavior_00001560
     li r0, 0x1
-lbl_fn_80126214_00001560:
+lbl_enemy_updateCombatBehavior_00001560:
     cmpwi r0, 0x0
-    beq lbl_fn_80126214_00001594
+    beq lbl_enemy_updateCombatBehavior_00001594
     lwz r0, 0x55c(r3)
     li r4, 0x0
     cmpwi r0, 0x6
-    bne lbl_fn_80126214_00001588
+    bne lbl_enemy_updateCombatBehavior_00001588
     lwz r0, 0x560(r3)
     cmpwi r0, 0x1c
-    bne lbl_fn_80126214_00001588
+    bne lbl_enemy_updateCombatBehavior_00001588
     li r4, 0x1
-lbl_fn_80126214_00001588:
+lbl_enemy_updateCombatBehavior_00001588:
     cmpwi r4, 0x0
-    bne lbl_fn_80126214_00001594
+    bne lbl_enemy_updateCombatBehavior_00001594
     li r5, 0x1
-lbl_fn_80126214_00001594:
+lbl_enemy_updateCombatBehavior_00001594:
     cmpwi r5, 0x0
-    beq lbl_fn_80126214_000015AC
+    beq lbl_enemy_updateCombatBehavior_000015AC
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8016EB48
-lbl_fn_80126214_000015AC:
+    bl battle_applyStatusEffect
+lbl_enemy_updateCombatBehavior_000015AC:
     li r0, 0x1
     stw r0, 0x2c(r31)
     lwz r3, 0xa4(r31)
     lwz r0, 0x12a4(r3)
     srwi. r0, r0, 31
-    bne lbl_fn_80126214_000025B8
+    bne lbl_enemy_updateCombatBehavior_000025B8
     lwz r0, 0x44(r31)
     cmpwi r0, 0x1
-    bne lbl_fn_80126214_000025B8
+    bne lbl_enemy_updateCombatBehavior_000025B8
     lwz r4, 0xc(r31)
     cmpwi r4, 0x0
-    ble lbl_fn_80126214_000025B8
+    ble lbl_enemy_updateCombatBehavior_000025B8
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
-    beq lbl_fn_80126214_000015F0
+    beq lbl_enemy_updateCombatBehavior_000015F0
     lwz r3, 0x10d8(r3)
-    b lbl_fn_80126214_00001608
-lbl_fn_80126214_000015F0:
+    b lbl_enemy_updateCombatBehavior_00001608
+lbl_enemy_updateCombatBehavior_000015F0:
     lwz r3, lbl_8087F540
     cmpwi r3, 0x0
-    beq lbl_fn_80126214_00001604
+    beq lbl_enemy_updateCombatBehavior_00001604
     lwz r3, 0x1a6c(r3)
-    b lbl_fn_80126214_00001608
-lbl_fn_80126214_00001604:
+    b lbl_enemy_updateCombatBehavior_00001608
+lbl_enemy_updateCombatBehavior_00001604:
     li r3, 0x0
-lbl_fn_80126214_00001608:
+lbl_enemy_updateCombatBehavior_00001608:
     cmpwi r3, 0x0
-    beq lbl_fn_80126214_000025B8
+    beq lbl_enemy_updateCombatBehavior_000025B8
     subi r0, r4, 0x1
     lwz r3, 0xb0(r3)
     slwi r0, r0, 6
     add r3, r3, r0
     lwz r0, 0x3c(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_80126214_000025B8
+    beq lbl_enemy_updateCombatBehavior_000025B8
     li r0, 0x0
     stw r0, 0x3c(r3)
-    b lbl_fn_80126214_000025B8
-lbl_fn_80126214_00001638:
+    b lbl_enemy_updateCombatBehavior_000025B8
+lbl_enemy_updateCombatBehavior_00001638:
     cmpwi r0, 0x5
-    bne lbl_fn_80126214_00001698
+    bne lbl_enemy_updateCombatBehavior_00001698
     lwz r4, 0xa4(r31)
     addi r3, r1, 0xa4
     lfs f0, 0x38(r31)
@@ -1661,13 +1661,13 @@ lbl_fn_80126214_00001638:
     lfs f0, 0x28(r31)
     fmuls f0, f0, f0
     fcmpo cr0, f1, f0
-    bge lbl_fn_80126214_000025B8
+    bge lbl_enemy_updateCombatBehavior_000025B8
     mr r3, r31
     bl fn_80129144
-    b lbl_fn_80126214_000025B8
-lbl_fn_80126214_00001698:
+    b lbl_enemy_updateCombatBehavior_000025B8
+lbl_enemy_updateCombatBehavior_00001698:
     cmpwi r0, 0x6
-    bne lbl_fn_80126214_000025B8
+    bne lbl_enemy_updateCombatBehavior_000025B8
     lwz r4, 0x24(r31)
     addi r3, r1, 0x98
     lwz r5, 0xa4(r31)
@@ -1687,10 +1687,10 @@ lbl_fn_80126214_00001698:
     lfs f0, 0x28(r31)
     fmuls f0, f0, f0
     fcmpo cr0, f1, f0
-    bge lbl_fn_80126214_000025B8
+    bge lbl_enemy_updateCombatBehavior_000025B8
     mr r3, r31
     bl fn_80129144
-    b lbl_fn_80126214_000025B8
+    b lbl_enemy_updateCombatBehavior_000025B8
     lfs f31, 0x5b0(r6)
     mr r3, r5
     bl PSVECSquareMag
@@ -1699,13 +1699,13 @@ lbl_fn_80126214_00001698:
     fmuls f0, f0, f31
     fmuls f0, f3, f0
     fcmpo cr0, f1, f0
-    blt lbl_fn_80126214_00001768
+    blt lbl_enemy_updateCombatBehavior_00001768
     lfs f3, 0x5c(r31)
     lfs f0, lbl_80881874
     fabs f3, f3
     frsp f3, f3
     fcmpo cr0, f3, f0
-    bge lbl_fn_80126214_000025B8
+    bge lbl_enemy_updateCombatBehavior_000025B8
     lwz r3, 0xa4(r31)
     lfs f0, 0x60(r31)
     lfs f6, 0x5b0(r3)
@@ -1717,8 +1717,8 @@ lbl_fn_80126214_00001698:
     fmuls f0, f0, f6
     fmuls f0, f3, f0
     fcmpo cr0, f4, f0
-    bge lbl_fn_80126214_000025B8
-lbl_fn_80126214_00001768:
+    bge lbl_enemy_updateCombatBehavior_000025B8
+lbl_enemy_updateCombatBehavior_00001768:
     lwz r3, lbl_8087F430
     addi r4, r1, 0x268
     lwz r5, 0xa4(r31)
@@ -1726,14 +1726,14 @@ lbl_fn_80126214_00001768:
     lwz r7, 0xc(r31)
     bl fn_8036DAF4
     cmpwi r3, 0x0
-    beq lbl_fn_80126214_000025B8
+    beq lbl_enemy_updateCombatBehavior_000025B8
     lwz r3, 0xa4(r31)
     addi r4, r1, 0x268
     li r5, 0x0
     bl fn_80153698
     lwz r0, 0x1c(r31)
     cmpwi r0, 0x3
-    bne lbl_fn_80126214_000018F0
+    bne lbl_enemy_updateCombatBehavior_000018F0
     lwz r3, 0xa4(r31)
     lis r4, lbl_807C7030@ha
     addi r4, r4, lbl_807C7030@l
@@ -1751,94 +1751,94 @@ lbl_fn_80126214_00001768:
     lwz r7, 0x38(r3)
     rlwinm r4, r7, 0, 29, 29
     cmplwi r4, 0x4
-    beq lbl_fn_80126214_000017FC
+    beq lbl_enemy_updateCombatBehavior_000017FC
     clrlwi r4, r7, 31
     cmplwi r4, 0x1
-    beq lbl_fn_80126214_000017FC
+    beq lbl_enemy_updateCombatBehavior_000017FC
     li r6, 0x1
-lbl_fn_80126214_000017FC:
+lbl_enemy_updateCombatBehavior_000017FC:
     cmpwi r6, 0x0
-    beq lbl_fn_80126214_00001818
+    beq lbl_enemy_updateCombatBehavior_00001818
     lwz r4, 0x7e0(r3)
     rlwinm r4, r4, 0, 26, 26
     cmplwi r4, 0x20
-    beq lbl_fn_80126214_00001818
+    beq lbl_enemy_updateCombatBehavior_00001818
     li r0, 0x1
-lbl_fn_80126214_00001818:
+lbl_enemy_updateCombatBehavior_00001818:
     cmpwi r0, 0x0
-    beq lbl_fn_80126214_0000184C
+    beq lbl_enemy_updateCombatBehavior_0000184C
     lwz r0, 0x55c(r3)
     li r4, 0x0
     cmpwi r0, 0x6
-    bne lbl_fn_80126214_00001840
+    bne lbl_enemy_updateCombatBehavior_00001840
     lwz r0, 0x560(r3)
     cmpwi r0, 0x1c
-    bne lbl_fn_80126214_00001840
+    bne lbl_enemy_updateCombatBehavior_00001840
     li r4, 0x1
-lbl_fn_80126214_00001840:
+lbl_enemy_updateCombatBehavior_00001840:
     cmpwi r4, 0x0
-    bne lbl_fn_80126214_0000184C
+    bne lbl_enemy_updateCombatBehavior_0000184C
     li r5, 0x1
-lbl_fn_80126214_0000184C:
+lbl_enemy_updateCombatBehavior_0000184C:
     cmpwi r5, 0x0
-    beq lbl_fn_80126214_00001864
+    beq lbl_enemy_updateCombatBehavior_00001864
     li r4, 0x1
     li r5, 0x0
     li r6, 0x0
-    bl fn_8016EB48
-lbl_fn_80126214_00001864:
+    bl battle_applyStatusEffect
+lbl_enemy_updateCombatBehavior_00001864:
     li r0, 0x1
     stw r0, 0x2c(r31)
     lwz r3, 0xa4(r31)
     lwz r0, 0x12a4(r3)
     srwi. r0, r0, 31
-    bne lbl_fn_80126214_000025B8
+    bne lbl_enemy_updateCombatBehavior_000025B8
     lwz r0, 0x44(r31)
     cmpwi r0, 0x1
-    bne lbl_fn_80126214_000025B8
+    bne lbl_enemy_updateCombatBehavior_000025B8
     lwz r4, 0xc(r31)
     cmpwi r4, 0x0
-    ble lbl_fn_80126214_000025B8
+    ble lbl_enemy_updateCombatBehavior_000025B8
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
-    beq lbl_fn_80126214_000018A8
+    beq lbl_enemy_updateCombatBehavior_000018A8
     lwz r3, 0x10d8(r3)
-    b lbl_fn_80126214_000018C0
-lbl_fn_80126214_000018A8:
+    b lbl_enemy_updateCombatBehavior_000018C0
+lbl_enemy_updateCombatBehavior_000018A8:
     lwz r3, lbl_8087F540
     cmpwi r3, 0x0
-    beq lbl_fn_80126214_000018BC
+    beq lbl_enemy_updateCombatBehavior_000018BC
     lwz r3, 0x1a6c(r3)
-    b lbl_fn_80126214_000018C0
-lbl_fn_80126214_000018BC:
+    b lbl_enemy_updateCombatBehavior_000018C0
+lbl_enemy_updateCombatBehavior_000018BC:
     li r3, 0x0
-lbl_fn_80126214_000018C0:
+lbl_enemy_updateCombatBehavior_000018C0:
     cmpwi r3, 0x0
-    beq lbl_fn_80126214_000025B8
+    beq lbl_enemy_updateCombatBehavior_000025B8
     subi r0, r4, 0x1
     lwz r3, 0xb0(r3)
     slwi r0, r0, 6
     add r3, r3, r0
     lwz r0, 0x3c(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_80126214_000025B8
+    beq lbl_enemy_updateCombatBehavior_000025B8
     li r0, 0x0
     stw r0, 0x3c(r3)
-    b lbl_fn_80126214_000025B8
-lbl_fn_80126214_000018F0:
+    b lbl_enemy_updateCombatBehavior_000025B8
+lbl_enemy_updateCombatBehavior_000018F0:
     cmpwi r0, 0x1
-    bne lbl_fn_80126214_0000190C
+    bne lbl_enemy_updateCombatBehavior_0000190C
     lwz r3, 0xa4(r31)
     lwz r0, 0x12a4(r3)
     oris r0, r0, 0x2000
     stw r0, 0x12a4(r3)
-    b lbl_fn_80126214_0000191C
-lbl_fn_80126214_0000190C:
+    b lbl_enemy_updateCombatBehavior_0000191C
+lbl_enemy_updateCombatBehavior_0000190C:
     lwz r3, 0xa4(r31)
     lwz r0, 0x12a4(r3)
     rlwinm r0, r0, 0, 3, 1
     stw r0, 0x12a4(r3)
-lbl_fn_80126214_0000191C:
+lbl_enemy_updateCombatBehavior_0000191C:
     lwz r3, 0xc(r31)
     lwz r0, 0x1c(r31)
     subi r3, r3, 0x1
@@ -1850,10 +1850,10 @@ lbl_fn_80126214_0000191C:
     lfs f2, 0xc(r3)
     stfs f2, 0x54(r31)
     psq_st f1, 0x4c(r31), 0, 0
-    bne lbl_fn_80126214_00001954
+    bne lbl_enemy_updateCombatBehavior_00001954
     addi r3, r1, 0x268
-    b lbl_fn_80126214_0000197C
-lbl_fn_80126214_00001954:
+    b lbl_enemy_updateCombatBehavior_0000197C
+lbl_enemy_updateCombatBehavior_00001954:
     lfs f4, 0x270(r1)
     addi r3, r1, 0x8c
     lfs f3, 0x26c(r1)
@@ -1864,14 +1864,14 @@ lbl_fn_80126214_00001954:
     stfs f4, 0x94(r1)
     stfs f0, 0x8c(r1)
     stfs f3, 0x90(r1)
-lbl_fn_80126214_0000197C:
+lbl_enemy_updateCombatBehavior_0000197C:
     psq_l f1, 0x0(r3), 0, 0
     li r0, 0x2
     lfs f2, 0x8(r3)
     stfs f2, 0x60(r31)
     psq_st f1, 0x58(r31), 0, 0
     stw r0, 0x40(r31)
-    b lbl_fn_80126214_000025B8
+    b lbl_enemy_updateCombatBehavior_000025B8
     lwz r4, 0x90(r31)
     mr r3, r5
     addi r0, r4, 0x1
@@ -1879,15 +1879,15 @@ lbl_fn_80126214_0000197C:
     bl PSVECSquareMag
     lfs f0, lbl_80881870
     fcmpo cr0, f1, f0
-    bge lbl_fn_80126214_000019C4
+    bge lbl_enemy_updateCombatBehavior_000019C4
     lwz r0, 0x90(r31)
     cmpwi r0, 0x1
-    bgt lbl_fn_80126214_000019D0
-lbl_fn_80126214_000019C4:
+    bgt lbl_enemy_updateCombatBehavior_000019D0
+lbl_enemy_updateCombatBehavior_000019C4:
     lwz r0, 0x90(r31)
     cmpwi r0, 0x5a
-    ble lbl_fn_80126214_000025B8
-lbl_fn_80126214_000019D0:
+    ble lbl_enemy_updateCombatBehavior_000025B8
+lbl_enemy_updateCombatBehavior_000019D0:
     lwz r3, 0xa4(r31)
     lis r4, lbl_807C7030@ha
     addi r4, r4, lbl_807C7030@l
@@ -1905,108 +1905,108 @@ lbl_fn_80126214_000019D0:
     lwz r7, 0x38(r3)
     rlwinm r4, r7, 0, 29, 29
     cmplwi r4, 0x4
-    beq lbl_fn_80126214_00001A28
+    beq lbl_enemy_updateCombatBehavior_00001A28
     clrlwi r4, r7, 31
     cmplwi r4, 0x1
-    beq lbl_fn_80126214_00001A28
+    beq lbl_enemy_updateCombatBehavior_00001A28
     li r6, 0x1
-lbl_fn_80126214_00001A28:
+lbl_enemy_updateCombatBehavior_00001A28:
     cmpwi r6, 0x0
-    beq lbl_fn_80126214_00001A44
+    beq lbl_enemy_updateCombatBehavior_00001A44
     lwz r4, 0x7e0(r3)
     rlwinm r4, r4, 0, 26, 26
     cmplwi r4, 0x20
-    beq lbl_fn_80126214_00001A44
+    beq lbl_enemy_updateCombatBehavior_00001A44
     li r0, 0x1
-lbl_fn_80126214_00001A44:
+lbl_enemy_updateCombatBehavior_00001A44:
     cmpwi r0, 0x0
-    beq lbl_fn_80126214_00001A78
+    beq lbl_enemy_updateCombatBehavior_00001A78
     lwz r0, 0x55c(r3)
     li r4, 0x0
     cmpwi r0, 0x6
-    bne lbl_fn_80126214_00001A6C
+    bne lbl_enemy_updateCombatBehavior_00001A6C
     lwz r0, 0x560(r3)
     cmpwi r0, 0x1c
-    bne lbl_fn_80126214_00001A6C
+    bne lbl_enemy_updateCombatBehavior_00001A6C
     li r4, 0x1
-lbl_fn_80126214_00001A6C:
+lbl_enemy_updateCombatBehavior_00001A6C:
     cmpwi r4, 0x0
-    bne lbl_fn_80126214_00001A78
+    bne lbl_enemy_updateCombatBehavior_00001A78
     li r5, 0x1
-lbl_fn_80126214_00001A78:
+lbl_enemy_updateCombatBehavior_00001A78:
     cmpwi r5, 0x0
-    beq lbl_fn_80126214_00001A90
+    beq lbl_enemy_updateCombatBehavior_00001A90
     li r4, 0x1
     li r5, 0x0
     li r6, 0x0
-    bl fn_8016EB48
-lbl_fn_80126214_00001A90:
+    bl battle_applyStatusEffect
+lbl_enemy_updateCombatBehavior_00001A90:
     li r0, 0x1
     stw r0, 0x2c(r31)
     lwz r3, 0xa4(r31)
     lwz r0, 0x12a4(r3)
     srwi. r0, r0, 31
-    bne lbl_fn_80126214_000025B8
+    bne lbl_enemy_updateCombatBehavior_000025B8
     lwz r0, 0x44(r31)
     cmpwi r0, 0x1
-    bne lbl_fn_80126214_000025B8
+    bne lbl_enemy_updateCombatBehavior_000025B8
     lwz r4, 0xc(r31)
     cmpwi r4, 0x0
-    ble lbl_fn_80126214_000025B8
+    ble lbl_enemy_updateCombatBehavior_000025B8
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
-    beq lbl_fn_80126214_00001AD4
+    beq lbl_enemy_updateCombatBehavior_00001AD4
     lwz r3, 0x10d8(r3)
-    b lbl_fn_80126214_00001AEC
-lbl_fn_80126214_00001AD4:
+    b lbl_enemy_updateCombatBehavior_00001AEC
+lbl_enemy_updateCombatBehavior_00001AD4:
     lwz r3, lbl_8087F540
     cmpwi r3, 0x0
-    beq lbl_fn_80126214_00001AE8
+    beq lbl_enemy_updateCombatBehavior_00001AE8
     lwz r3, 0x1a6c(r3)
-    b lbl_fn_80126214_00001AEC
-lbl_fn_80126214_00001AE8:
+    b lbl_enemy_updateCombatBehavior_00001AEC
+lbl_enemy_updateCombatBehavior_00001AE8:
     li r3, 0x0
-lbl_fn_80126214_00001AEC:
+lbl_enemy_updateCombatBehavior_00001AEC:
     cmpwi r3, 0x0
-    beq lbl_fn_80126214_000025B8
+    beq lbl_enemy_updateCombatBehavior_000025B8
     subi r0, r4, 0x1
     lwz r3, 0xb0(r3)
     slwi r0, r0, 6
     add r3, r3, r0
     lwz r0, 0x3c(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_80126214_000025B8
+    beq lbl_enemy_updateCombatBehavior_000025B8
     li r0, 0x0
     stw r0, 0x3c(r3)
-    b lbl_fn_80126214_000025B8
+    b lbl_enemy_updateCombatBehavior_000025B8
     mr r3, r5
     bl PSVECSquareMag
     lfs f0, 0x28(r31)
     fmuls f0, f0, f0
     fcmpo cr0, f1, f0
-    bge lbl_fn_80126214_000025B8
+    bge lbl_enemy_updateCombatBehavior_000025B8
     lwz r0, 0x78(r30)
     li r5, 0x0
     lwz r4, 0x20(r31)
     li r6, 0x0
     mtctr r0
     cmplwi r0, 0x0
-    ble lbl_fn_80126214_00001B78
-lbl_fn_80126214_00001B50:
+    ble lbl_enemy_updateCombatBehavior_00001B78
+lbl_enemy_updateCombatBehavior_00001B50:
     lwz r3, 0x7c(r30)
     lwzx r0, r3, r6
     cmpw r4, r0
-    bne lbl_fn_80126214_00001B6C
+    bne lbl_enemy_updateCombatBehavior_00001B6C
     mulli r0, r5, 0x28
     add r26, r3, r0
-    b lbl_fn_80126214_00001B7C
-lbl_fn_80126214_00001B6C:
+    b lbl_enemy_updateCombatBehavior_00001B7C
+lbl_enemy_updateCombatBehavior_00001B6C:
     addi r6, r6, 0x28
     addi r5, r5, 0x1
-    bdnz lbl_fn_80126214_00001B50
-lbl_fn_80126214_00001B78:
+    bdnz lbl_enemy_updateCombatBehavior_00001B50
+lbl_enemy_updateCombatBehavior_00001B78:
     li r26, 0x0
-lbl_fn_80126214_00001B7C:
+lbl_enemy_updateCombatBehavior_00001B7C:
     lwz r4, 0xa4(r31)
     lis r3, lbl_807371F8@ha
     lfs f3, 0x14(r26)
@@ -2017,26 +2017,26 @@ lbl_fn_80126214_00001B7C:
     frsp f3, f1
     lfs f0, lbl_8088187C
     fcmpo cr0, f3, f0
-    ble lbl_fn_80126214_00001BB0
+    ble lbl_enemy_updateCombatBehavior_00001BB0
     lfs f0, lbl_80881880
     fsubs f3, f3, f0
-lbl_fn_80126214_00001BB0:
+lbl_enemy_updateCombatBehavior_00001BB0:
     lfs f0, lbl_80881884
     fcmpo cr0, f3, f0
-    bge lbl_fn_80126214_00001BC4
+    bge lbl_enemy_updateCombatBehavior_00001BC4
     lfs f0, lbl_80881880
     fadds f3, f3, f0
-lbl_fn_80126214_00001BC4:
+lbl_enemy_updateCombatBehavior_00001BC4:
     lwz r0, 0x48(r31)
     rlwinm r0, r0, 0, 28, 28
     cmplwi r0, 0x8
-    beq lbl_fn_80126214_00001BE8
+    beq lbl_enemy_updateCombatBehavior_00001BE8
     fabs f3, f3
     lfs f0, lbl_80881888
     frsp f3, f3
     fcmpo cr0, f3, f0
-    bge lbl_fn_80126214_00001D34
-lbl_fn_80126214_00001BE8:
+    bge lbl_enemy_updateCombatBehavior_00001D34
+lbl_enemy_updateCombatBehavior_00001BE8:
     lwz r3, 0xa4(r31)
     lis r4, lbl_807C7030@ha
     addi r4, r4, lbl_807C7030@l
@@ -2054,81 +2054,81 @@ lbl_fn_80126214_00001BE8:
     lwz r7, 0x38(r3)
     rlwinm r4, r7, 0, 29, 29
     cmplwi r4, 0x4
-    beq lbl_fn_80126214_00001C40
+    beq lbl_enemy_updateCombatBehavior_00001C40
     clrlwi r4, r7, 31
     cmplwi r4, 0x1
-    beq lbl_fn_80126214_00001C40
+    beq lbl_enemy_updateCombatBehavior_00001C40
     li r6, 0x1
-lbl_fn_80126214_00001C40:
+lbl_enemy_updateCombatBehavior_00001C40:
     cmpwi r6, 0x0
-    beq lbl_fn_80126214_00001C5C
+    beq lbl_enemy_updateCombatBehavior_00001C5C
     lwz r4, 0x7e0(r3)
     rlwinm r4, r4, 0, 26, 26
     cmplwi r4, 0x20
-    beq lbl_fn_80126214_00001C5C
+    beq lbl_enemy_updateCombatBehavior_00001C5C
     li r0, 0x1
-lbl_fn_80126214_00001C5C:
+lbl_enemy_updateCombatBehavior_00001C5C:
     cmpwi r0, 0x0
-    beq lbl_fn_80126214_00001C90
+    beq lbl_enemy_updateCombatBehavior_00001C90
     lwz r0, 0x55c(r3)
     li r4, 0x0
     cmpwi r0, 0x6
-    bne lbl_fn_80126214_00001C84
+    bne lbl_enemy_updateCombatBehavior_00001C84
     lwz r0, 0x560(r3)
     cmpwi r0, 0x1c
-    bne lbl_fn_80126214_00001C84
+    bne lbl_enemy_updateCombatBehavior_00001C84
     li r4, 0x1
-lbl_fn_80126214_00001C84:
+lbl_enemy_updateCombatBehavior_00001C84:
     cmpwi r4, 0x0
-    bne lbl_fn_80126214_00001C90
+    bne lbl_enemy_updateCombatBehavior_00001C90
     li r5, 0x1
-lbl_fn_80126214_00001C90:
+lbl_enemy_updateCombatBehavior_00001C90:
     cmpwi r5, 0x0
-    beq lbl_fn_80126214_00001CA8
+    beq lbl_enemy_updateCombatBehavior_00001CA8
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8016EB48
-lbl_fn_80126214_00001CA8:
+    bl battle_applyStatusEffect
+lbl_enemy_updateCombatBehavior_00001CA8:
     li r0, 0x1
     stw r0, 0x2c(r31)
     lwz r3, 0xa4(r31)
     lwz r0, 0x12a4(r3)
     srwi. r0, r0, 31
-    bne lbl_fn_80126214_000025B8
+    bne lbl_enemy_updateCombatBehavior_000025B8
     lwz r0, 0x44(r31)
     cmpwi r0, 0x1
-    bne lbl_fn_80126214_000025B8
+    bne lbl_enemy_updateCombatBehavior_000025B8
     lwz r4, 0xc(r31)
     cmpwi r4, 0x0
-    ble lbl_fn_80126214_000025B8
+    ble lbl_enemy_updateCombatBehavior_000025B8
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
-    beq lbl_fn_80126214_00001CEC
+    beq lbl_enemy_updateCombatBehavior_00001CEC
     lwz r3, 0x10d8(r3)
-    b lbl_fn_80126214_00001D04
-lbl_fn_80126214_00001CEC:
+    b lbl_enemy_updateCombatBehavior_00001D04
+lbl_enemy_updateCombatBehavior_00001CEC:
     lwz r3, lbl_8087F540
     cmpwi r3, 0x0
-    beq lbl_fn_80126214_00001D00
+    beq lbl_enemy_updateCombatBehavior_00001D00
     lwz r3, 0x1a6c(r3)
-    b lbl_fn_80126214_00001D04
-lbl_fn_80126214_00001D00:
+    b lbl_enemy_updateCombatBehavior_00001D04
+lbl_enemy_updateCombatBehavior_00001D00:
     li r3, 0x0
-lbl_fn_80126214_00001D04:
+lbl_enemy_updateCombatBehavior_00001D04:
     cmpwi r3, 0x0
-    beq lbl_fn_80126214_000025B8
+    beq lbl_enemy_updateCombatBehavior_000025B8
     subi r0, r4, 0x1
     lwz r3, 0xb0(r3)
     slwi r0, r0, 6
     add r3, r3, r0
     lwz r0, 0x3c(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_80126214_000025B8
+    beq lbl_enemy_updateCombatBehavior_000025B8
     li r0, 0x0
     stw r0, 0x3c(r3)
-    b lbl_fn_80126214_000025B8
-lbl_fn_80126214_00001D34:
+    b lbl_enemy_updateCombatBehavior_000025B8
+lbl_enemy_updateCombatBehavior_00001D34:
     lwz r5, 0xa4(r31)
     addi r3, r1, 0x208
     lfs f3, lbl_80881858
@@ -2173,26 +2173,26 @@ lbl_fn_80126214_00001D34:
     psq_l f1, 0x0(r3), 0, 0
     psq_st f1, 0x58(r31), 0, 0
     stfs f2, 0x60(r31)
-    b lbl_fn_80126214_000025B8
+    b lbl_enemy_updateCombatBehavior_000025B8
     mr r3, r5
     bl PSVECSquareMag
     lfs f0, 0x28(r31)
     fmuls f4, f0, f0
     fcmpo cr0, f1, f4
-    blt lbl_fn_80126214_00001E30
+    blt lbl_enemy_updateCombatBehavior_00001E30
     lfs f3, 0x5c(r31)
     lfs f0, lbl_8088186C
     fabs f3, f3
     frsp f3, f3
     fcmpo cr0, f3, f0
-    ble lbl_fn_80126214_00001F7C
+    ble lbl_enemy_updateCombatBehavior_00001F7C
     lfs f3, 0x60(r31)
     lfs f0, 0x58(r31)
     fmuls f3, f3, f3
     fmadds f0, f0, f0, f3
     fcmpo cr0, f0, f4
-    bge lbl_fn_80126214_00001F7C
-lbl_fn_80126214_00001E30:
+    bge lbl_enemy_updateCombatBehavior_00001F7C
+lbl_enemy_updateCombatBehavior_00001E30:
     lwz r3, 0xa4(r31)
     lis r4, lbl_807C7030@ha
     addi r4, r4, lbl_807C7030@l
@@ -2210,81 +2210,81 @@ lbl_fn_80126214_00001E30:
     lwz r7, 0x38(r3)
     rlwinm r4, r7, 0, 29, 29
     cmplwi r4, 0x4
-    beq lbl_fn_80126214_00001E88
+    beq lbl_enemy_updateCombatBehavior_00001E88
     clrlwi r4, r7, 31
     cmplwi r4, 0x1
-    beq lbl_fn_80126214_00001E88
+    beq lbl_enemy_updateCombatBehavior_00001E88
     li r6, 0x1
-lbl_fn_80126214_00001E88:
+lbl_enemy_updateCombatBehavior_00001E88:
     cmpwi r6, 0x0
-    beq lbl_fn_80126214_00001EA4
+    beq lbl_enemy_updateCombatBehavior_00001EA4
     lwz r4, 0x7e0(r3)
     rlwinm r4, r4, 0, 26, 26
     cmplwi r4, 0x20
-    beq lbl_fn_80126214_00001EA4
+    beq lbl_enemy_updateCombatBehavior_00001EA4
     li r0, 0x1
-lbl_fn_80126214_00001EA4:
+lbl_enemy_updateCombatBehavior_00001EA4:
     cmpwi r0, 0x0
-    beq lbl_fn_80126214_00001ED8
+    beq lbl_enemy_updateCombatBehavior_00001ED8
     lwz r0, 0x55c(r3)
     li r4, 0x0
     cmpwi r0, 0x6
-    bne lbl_fn_80126214_00001ECC
+    bne lbl_enemy_updateCombatBehavior_00001ECC
     lwz r0, 0x560(r3)
     cmpwi r0, 0x1c
-    bne lbl_fn_80126214_00001ECC
+    bne lbl_enemy_updateCombatBehavior_00001ECC
     li r4, 0x1
-lbl_fn_80126214_00001ECC:
+lbl_enemy_updateCombatBehavior_00001ECC:
     cmpwi r4, 0x0
-    bne lbl_fn_80126214_00001ED8
+    bne lbl_enemy_updateCombatBehavior_00001ED8
     li r5, 0x1
-lbl_fn_80126214_00001ED8:
+lbl_enemy_updateCombatBehavior_00001ED8:
     cmpwi r5, 0x0
-    beq lbl_fn_80126214_00001EF0
+    beq lbl_enemy_updateCombatBehavior_00001EF0
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8016EB48
-lbl_fn_80126214_00001EF0:
+    bl battle_applyStatusEffect
+lbl_enemy_updateCombatBehavior_00001EF0:
     li r0, 0x1
     stw r0, 0x2c(r31)
     lwz r3, 0xa4(r31)
     lwz r0, 0x12a4(r3)
     srwi. r0, r0, 31
-    bne lbl_fn_80126214_000025B8
+    bne lbl_enemy_updateCombatBehavior_000025B8
     lwz r0, 0x44(r31)
     cmpwi r0, 0x1
-    bne lbl_fn_80126214_000025B8
+    bne lbl_enemy_updateCombatBehavior_000025B8
     lwz r4, 0xc(r31)
     cmpwi r4, 0x0
-    ble lbl_fn_80126214_000025B8
+    ble lbl_enemy_updateCombatBehavior_000025B8
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
-    beq lbl_fn_80126214_00001F34
+    beq lbl_enemy_updateCombatBehavior_00001F34
     lwz r3, 0x10d8(r3)
-    b lbl_fn_80126214_00001F4C
-lbl_fn_80126214_00001F34:
+    b lbl_enemy_updateCombatBehavior_00001F4C
+lbl_enemy_updateCombatBehavior_00001F34:
     lwz r3, lbl_8087F540
     cmpwi r3, 0x0
-    beq lbl_fn_80126214_00001F48
+    beq lbl_enemy_updateCombatBehavior_00001F48
     lwz r3, 0x1a6c(r3)
-    b lbl_fn_80126214_00001F4C
-lbl_fn_80126214_00001F48:
+    b lbl_enemy_updateCombatBehavior_00001F4C
+lbl_enemy_updateCombatBehavior_00001F48:
     li r3, 0x0
-lbl_fn_80126214_00001F4C:
+lbl_enemy_updateCombatBehavior_00001F4C:
     cmpwi r3, 0x0
-    beq lbl_fn_80126214_000025B8
+    beq lbl_enemy_updateCombatBehavior_000025B8
     subi r0, r4, 0x1
     lwz r3, 0xb0(r3)
     slwi r0, r0, 6
     add r3, r3, r0
     lwz r0, 0x3c(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_80126214_000025B8
+    beq lbl_enemy_updateCombatBehavior_000025B8
     li r0, 0x0
     stw r0, 0x3c(r3)
-    b lbl_fn_80126214_000025B8
-lbl_fn_80126214_00001F7C:
+    b lbl_enemy_updateCombatBehavior_000025B8
+lbl_enemy_updateCombatBehavior_00001F7C:
     lwz r4, 0x24(r31)
     addi r3, r1, 0x74
     lwz r5, 0xa4(r31)
@@ -2306,13 +2306,13 @@ lbl_fn_80126214_00001F7C:
     psq_l f1, 0x0(r3), 0, 0
     psq_st f1, 0x58(r31), 0, 0
     stfs f2, 0x60(r31)
-    b lbl_fn_80126214_000025B8
+    b lbl_enemy_updateCombatBehavior_000025B8
     mr r3, r5
     bl PSVECSquareMag
     lfs f0, 0x28(r31)
     fmuls f0, f0, f0
     fcmpo cr0, f1, f0
-    bge lbl_fn_80126214_00002258
+    bge lbl_enemy_updateCombatBehavior_00002258
     lwz r4, 0xa4(r31)
     lis r3, lbl_807371F8@ha
     lfs f3, 0x3c(r31)
@@ -2323,26 +2323,26 @@ lbl_fn_80126214_00001F7C:
     frsp f3, f1
     lfs f0, lbl_8088187C
     fcmpo cr0, f3, f0
-    ble lbl_fn_80126214_00002020
+    ble lbl_enemy_updateCombatBehavior_00002020
     lfs f0, lbl_80881880
     fsubs f3, f3, f0
-lbl_fn_80126214_00002020:
+lbl_enemy_updateCombatBehavior_00002020:
     lfs f0, lbl_80881884
     fcmpo cr0, f3, f0
-    bge lbl_fn_80126214_00002034
+    bge lbl_enemy_updateCombatBehavior_00002034
     lfs f0, lbl_80881880
     fadds f3, f3, f0
-lbl_fn_80126214_00002034:
+lbl_enemy_updateCombatBehavior_00002034:
     lwz r0, 0x48(r31)
     rlwinm r0, r0, 0, 28, 28
     cmplwi r0, 0x8
-    beq lbl_fn_80126214_00002058
+    beq lbl_enemy_updateCombatBehavior_00002058
     fabs f3, f3
     lfs f0, lbl_80881888
     frsp f3, f3
     fcmpo cr0, f3, f0
-    bge lbl_fn_80126214_000021A4
-lbl_fn_80126214_00002058:
+    bge lbl_enemy_updateCombatBehavior_000021A4
+lbl_enemy_updateCombatBehavior_00002058:
     lwz r3, 0xa4(r31)
     lis r4, lbl_807C7030@ha
     addi r4, r4, lbl_807C7030@l
@@ -2360,81 +2360,81 @@ lbl_fn_80126214_00002058:
     lwz r7, 0x38(r3)
     rlwinm r4, r7, 0, 29, 29
     cmplwi r4, 0x4
-    beq lbl_fn_80126214_000020B0
+    beq lbl_enemy_updateCombatBehavior_000020B0
     clrlwi r4, r7, 31
     cmplwi r4, 0x1
-    beq lbl_fn_80126214_000020B0
+    beq lbl_enemy_updateCombatBehavior_000020B0
     li r6, 0x1
-lbl_fn_80126214_000020B0:
+lbl_enemy_updateCombatBehavior_000020B0:
     cmpwi r6, 0x0
-    beq lbl_fn_80126214_000020CC
+    beq lbl_enemy_updateCombatBehavior_000020CC
     lwz r4, 0x7e0(r3)
     rlwinm r4, r4, 0, 26, 26
     cmplwi r4, 0x20
-    beq lbl_fn_80126214_000020CC
+    beq lbl_enemy_updateCombatBehavior_000020CC
     li r0, 0x1
-lbl_fn_80126214_000020CC:
+lbl_enemy_updateCombatBehavior_000020CC:
     cmpwi r0, 0x0
-    beq lbl_fn_80126214_00002100
+    beq lbl_enemy_updateCombatBehavior_00002100
     lwz r0, 0x55c(r3)
     li r4, 0x0
     cmpwi r0, 0x6
-    bne lbl_fn_80126214_000020F4
+    bne lbl_enemy_updateCombatBehavior_000020F4
     lwz r0, 0x560(r3)
     cmpwi r0, 0x1c
-    bne lbl_fn_80126214_000020F4
+    bne lbl_enemy_updateCombatBehavior_000020F4
     li r4, 0x1
-lbl_fn_80126214_000020F4:
+lbl_enemy_updateCombatBehavior_000020F4:
     cmpwi r4, 0x0
-    bne lbl_fn_80126214_00002100
+    bne lbl_enemy_updateCombatBehavior_00002100
     li r5, 0x1
-lbl_fn_80126214_00002100:
+lbl_enemy_updateCombatBehavior_00002100:
     cmpwi r5, 0x0
-    beq lbl_fn_80126214_00002118
+    beq lbl_enemy_updateCombatBehavior_00002118
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8016EB48
-lbl_fn_80126214_00002118:
+    bl battle_applyStatusEffect
+lbl_enemy_updateCombatBehavior_00002118:
     li r0, 0x1
     stw r0, 0x2c(r31)
     lwz r3, 0xa4(r31)
     lwz r0, 0x12a4(r3)
     srwi. r0, r0, 31
-    bne lbl_fn_80126214_000025B8
+    bne lbl_enemy_updateCombatBehavior_000025B8
     lwz r0, 0x44(r31)
     cmpwi r0, 0x1
-    bne lbl_fn_80126214_000025B8
+    bne lbl_enemy_updateCombatBehavior_000025B8
     lwz r4, 0xc(r31)
     cmpwi r4, 0x0
-    ble lbl_fn_80126214_000025B8
+    ble lbl_enemy_updateCombatBehavior_000025B8
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
-    beq lbl_fn_80126214_0000215C
+    beq lbl_enemy_updateCombatBehavior_0000215C
     lwz r3, 0x10d8(r3)
-    b lbl_fn_80126214_00002174
-lbl_fn_80126214_0000215C:
+    b lbl_enemy_updateCombatBehavior_00002174
+lbl_enemy_updateCombatBehavior_0000215C:
     lwz r3, lbl_8087F540
     cmpwi r3, 0x0
-    beq lbl_fn_80126214_00002170
+    beq lbl_enemy_updateCombatBehavior_00002170
     lwz r3, 0x1a6c(r3)
-    b lbl_fn_80126214_00002174
-lbl_fn_80126214_00002170:
+    b lbl_enemy_updateCombatBehavior_00002174
+lbl_enemy_updateCombatBehavior_00002170:
     li r3, 0x0
-lbl_fn_80126214_00002174:
+lbl_enemy_updateCombatBehavior_00002174:
     cmpwi r3, 0x0
-    beq lbl_fn_80126214_000025B8
+    beq lbl_enemy_updateCombatBehavior_000025B8
     subi r0, r4, 0x1
     lwz r3, 0xb0(r3)
     slwi r0, r0, 6
     add r3, r3, r0
     lwz r0, 0x3c(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_80126214_000025B8
+    beq lbl_enemy_updateCombatBehavior_000025B8
     li r0, 0x0
     stw r0, 0x3c(r3)
-    b lbl_fn_80126214_000025B8
-lbl_fn_80126214_000021A4:
+    b lbl_enemy_updateCombatBehavior_000025B8
+lbl_enemy_updateCombatBehavior_000021A4:
     lwz r5, 0xa4(r31)
     addi r3, r1, 0x1d8
     lfs f3, lbl_80881858
@@ -2479,8 +2479,8 @@ lbl_fn_80126214_000021A4:
     psq_l f1, 0x0(r3), 0, 0
     psq_st f1, 0x58(r31), 0, 0
     stfs f2, 0x60(r31)
-    b lbl_fn_80126214_000025B8
-lbl_fn_80126214_00002258:
+    b lbl_enemy_updateCombatBehavior_000025B8
+lbl_enemy_updateCombatBehavior_00002258:
     psq_l f1, 0x30(r31), 0, 0
     addi r3, r1, 0x5c
     psq_st f1, 0x4c(r31), 0, 0
@@ -2501,7 +2501,7 @@ lbl_fn_80126214_00002258:
     psq_l f1, 0x0(r3), 0, 0
     psq_st f1, 0x58(r31), 0, 0
     stfs f2, 0x60(r31)
-    b lbl_fn_80126214_000025B8
+    b lbl_enemy_updateCombatBehavior_000025B8
     lis r4, lbl_807C7030@ha
     lwz r7, 0x24(r31)
     addi r4, r4, lbl_807C7030@l
@@ -2530,7 +2530,7 @@ lbl_fn_80126214_00002258:
     fmuls f0, f3, f0
     fcmpo cr0, f1, f0
     cror eq, gt, eq
-    bne lbl_fn_80126214_000025B8
+    bne lbl_enemy_updateCombatBehavior_000025B8
     lwz r4, 0x24(r31)
     lwz r3, 0xa4(r31)
     addi r26, r4, 0x528
@@ -2542,19 +2542,19 @@ lbl_fn_80126214_00002258:
     mr r4, r26
     li r6, 0x0
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     lwz r0, 0x8(r31)
     cmpw r3, r0
-    beq lbl_fn_80126214_000025B8
+    beq lbl_enemy_updateCombatBehavior_000025B8
     mr r3, r31
     bl fn_80128090
-    b lbl_fn_80126214_000025B8
+    b lbl_enemy_updateCombatBehavior_000025B8
     mr r3, r5
     bl PSVECSquareMag
     lfs f0, 0x28(r31)
     fmuls f0, f0, f0
     fcmpo cr0, f1, f0
-    bge lbl_fn_80126214_000024CC
+    bge lbl_enemy_updateCombatBehavior_000024CC
     lwz r3, 0xa4(r31)
     lis r4, lbl_807C7030@ha
     addi r4, r4, lbl_807C7030@l
@@ -2572,81 +2572,81 @@ lbl_fn_80126214_00002258:
     lwz r7, 0x38(r3)
     rlwinm r4, r7, 0, 29, 29
     cmplwi r4, 0x4
-    beq lbl_fn_80126214_000023D8
+    beq lbl_enemy_updateCombatBehavior_000023D8
     clrlwi r4, r7, 31
     cmplwi r4, 0x1
-    beq lbl_fn_80126214_000023D8
+    beq lbl_enemy_updateCombatBehavior_000023D8
     li r6, 0x1
-lbl_fn_80126214_000023D8:
+lbl_enemy_updateCombatBehavior_000023D8:
     cmpwi r6, 0x0
-    beq lbl_fn_80126214_000023F4
+    beq lbl_enemy_updateCombatBehavior_000023F4
     lwz r4, 0x7e0(r3)
     rlwinm r4, r4, 0, 26, 26
     cmplwi r4, 0x20
-    beq lbl_fn_80126214_000023F4
+    beq lbl_enemy_updateCombatBehavior_000023F4
     li r0, 0x1
-lbl_fn_80126214_000023F4:
+lbl_enemy_updateCombatBehavior_000023F4:
     cmpwi r0, 0x0
-    beq lbl_fn_80126214_00002428
+    beq lbl_enemy_updateCombatBehavior_00002428
     lwz r0, 0x55c(r3)
     li r4, 0x0
     cmpwi r0, 0x6
-    bne lbl_fn_80126214_0000241C
+    bne lbl_enemy_updateCombatBehavior_0000241C
     lwz r0, 0x560(r3)
     cmpwi r0, 0x1c
-    bne lbl_fn_80126214_0000241C
+    bne lbl_enemy_updateCombatBehavior_0000241C
     li r4, 0x1
-lbl_fn_80126214_0000241C:
+lbl_enemy_updateCombatBehavior_0000241C:
     cmpwi r4, 0x0
-    bne lbl_fn_80126214_00002428
+    bne lbl_enemy_updateCombatBehavior_00002428
     li r5, 0x1
-lbl_fn_80126214_00002428:
+lbl_enemy_updateCombatBehavior_00002428:
     cmpwi r5, 0x0
-    beq lbl_fn_80126214_00002440
+    beq lbl_enemy_updateCombatBehavior_00002440
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8016EB48
-lbl_fn_80126214_00002440:
+    bl battle_applyStatusEffect
+lbl_enemy_updateCombatBehavior_00002440:
     li r0, 0x1
     stw r0, 0x2c(r31)
     lwz r3, 0xa4(r31)
     lwz r0, 0x12a4(r3)
     srwi. r0, r0, 31
-    bne lbl_fn_80126214_000025B8
+    bne lbl_enemy_updateCombatBehavior_000025B8
     lwz r0, 0x44(r31)
     cmpwi r0, 0x1
-    bne lbl_fn_80126214_000025B8
+    bne lbl_enemy_updateCombatBehavior_000025B8
     lwz r4, 0xc(r31)
     cmpwi r4, 0x0
-    ble lbl_fn_80126214_000025B8
+    ble lbl_enemy_updateCombatBehavior_000025B8
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
-    beq lbl_fn_80126214_00002484
+    beq lbl_enemy_updateCombatBehavior_00002484
     lwz r3, 0x10d8(r3)
-    b lbl_fn_80126214_0000249C
-lbl_fn_80126214_00002484:
+    b lbl_enemy_updateCombatBehavior_0000249C
+lbl_enemy_updateCombatBehavior_00002484:
     lwz r3, lbl_8087F540
     cmpwi r3, 0x0
-    beq lbl_fn_80126214_00002498
+    beq lbl_enemy_updateCombatBehavior_00002498
     lwz r3, 0x1a6c(r3)
-    b lbl_fn_80126214_0000249C
-lbl_fn_80126214_00002498:
+    b lbl_enemy_updateCombatBehavior_0000249C
+lbl_enemy_updateCombatBehavior_00002498:
     li r3, 0x0
-lbl_fn_80126214_0000249C:
+lbl_enemy_updateCombatBehavior_0000249C:
     cmpwi r3, 0x0
-    beq lbl_fn_80126214_000025B8
+    beq lbl_enemy_updateCombatBehavior_000025B8
     subi r0, r4, 0x1
     lwz r3, 0xb0(r3)
     slwi r0, r0, 6
     add r3, r3, r0
     lwz r0, 0x3c(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_80126214_000025B8
+    beq lbl_enemy_updateCombatBehavior_000025B8
     li r0, 0x0
     stw r0, 0x3c(r3)
-    b lbl_fn_80126214_000025B8
-lbl_fn_80126214_000024CC:
+    b lbl_enemy_updateCombatBehavior_000025B8
+lbl_enemy_updateCombatBehavior_000024CC:
     lwz r5, 0x24(r31)
     addi r3, r1, 0x148
     lfs f3, lbl_80881858
@@ -2706,7 +2706,7 @@ lbl_fn_80126214_000024CC:
     stfs f2, 0x40(r1)
     psq_st f1, 0x58(r31), 0, 0
     stfs f2, 0x60(r31)
-lbl_fn_80126214_000025B8:
+lbl_enemy_updateCombatBehavior_000025B8:
     lwz r5, 0x0(r31)
     mr r4, r31
     lwz r6, 0x4(r31)
@@ -2728,7 +2728,7 @@ lbl_fn_80126214_000025B8:
     stfs f0, 0x88(r31)
     lfs f0, 0x144(r1)
     stfs f0, 0x8c(r31)
-    beq lbl_fn_80126214_00002694
+    beq lbl_enemy_updateCombatBehavior_00002694
     lwz r4, 0xa4(r31)
     addi r3, r1, 0x2c
     lfs f3, 0x6c(r31)
@@ -2751,25 +2751,25 @@ lbl_fn_80126214_000025B8:
     lfs f0, lbl_80881894
     fmuls f0, f0, f1
     fcmpo cr0, f31, f0
-    bge lbl_fn_80126214_0000268C
+    bge lbl_enemy_updateCombatBehavior_0000268C
     lwz r3, 0x98(r31)
     addi r0, r3, 0x1
     stw r0, 0x98(r31)
     cmpwi r0, 0x1e
-    ble lbl_fn_80126214_00002694
+    ble lbl_enemy_updateCombatBehavior_00002694
     mr r3, r31
     bl fn_80128090
-    b lbl_fn_80126214_00002694
-lbl_fn_80126214_0000268C:
+    b lbl_enemy_updateCombatBehavior_00002694
+lbl_enemy_updateCombatBehavior_0000268C:
     li r0, 0x0
     stw r0, 0x98(r31)
-lbl_fn_80126214_00002694:
+lbl_enemy_updateCombatBehavior_00002694:
     lwz r3, 0xa4(r31)
     psq_l f1, 0x528(r3), 0, 0
     lfs f2, 0x530(r3)
     stfs f2, 0x6c(r31)
     psq_st f1, 0x64(r31), 0, 0
-lbl_fn_80126214_000026A8:
+lbl_enemy_updateCombatBehavior_000026A8:
     addi r11, r1, 0x2c0
     psq_l f31, 0x2c8(r1), 0, 0
     lfd f31, 0x2c0(r1)

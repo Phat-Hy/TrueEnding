@@ -15,7 +15,7 @@ extern void mission_updateStub(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
-extern void fn_8006AFF8(void);
+extern void boss_initActionStream(void);
 extern void fn_8006CA80(void);
 extern void mem_free(void);
 extern void route_findNextWaypoint(void);
@@ -1156,7 +1156,7 @@ lbl_fn_8031B0A8_00000E20:
     addi r3, r1, 0x8
     addi r4, r1, 0x2c
     addi r5, r1, 0x20
-    bl fn_8006AFF8
+    bl boss_initActionStream
     addi r3, r1, 0x8
     bl str_getData
     lwz r12, 0x14b0(r29)

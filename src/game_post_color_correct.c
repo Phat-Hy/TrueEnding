@@ -17,10 +17,10 @@ extern void fn_80158BB4(void);
 extern void debuff_clearStatus(void);
 extern void actor_setState(void);
 extern void fn_8016F824(void);
-extern void fn_80170A20(void);
+extern void battle_updateTargetAggro(void);
 extern void fn_80176548(void);
 extern void battle_awardExp(void);
-extern void fn_80178A6C(void);
+extern void battle_updateActorStatus(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
@@ -193,7 +193,7 @@ asm void fn_802C3EDC(void)
     mr r3, r31
     lfs f1, lbl_808842B0
     li r5, 0x0
-    bl fn_80170A20
+    bl battle_updateTargetAggro
     b lbl_fn_802C3EDC_000001A4
 lbl_fn_802C3EDC_00000158:
     lwz r0, 0x1594(r3)
@@ -215,7 +215,7 @@ lbl_fn_802C3EDC_00000188:
     mr r3, r31
     lfs f1, lbl_808842B0
     li r5, 0x0
-    bl fn_80170A20
+    bl battle_updateTargetAggro
 lbl_fn_802C3EDC_000001A4:
     lwz r0, 0x1594(r31)
     cmpwi r0, 0x1
@@ -1068,7 +1068,7 @@ asm void fn_802C4B70(void)
     mtctr r12
     bctrl
     mr r3, r29
-    bl fn_80178A6C
+    bl battle_updateActorStatus
     mr r3, r29
     li r4, 0x0
     li r5, 0x1

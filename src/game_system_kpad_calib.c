@@ -6,7 +6,7 @@ extern void _restgpr_14(void);
 extern void _restgpr_26(void);
 extern void _savegpr_14(void);
 extern void _savegpr_26(void);
-extern void fn_8000D430(void);
+extern void scene_traverseNode(void);
 extern void collision_testLineSegment(void);
 extern void boss_recordDamage(void);
 extern void fn_8006A250(void);
@@ -21,9 +21,9 @@ extern void fn_801346C8(void);
 extern void quest_checkCondition(void);
 extern void dialog_selectChoice(void);
 extern void fn_80154344(void);
-extern void fn_80155DAC(void);
+extern void inventory_calcTotalStats(void);
 extern void debuff_clearStatus(void);
-extern void fn_8016EB48(void);
+extern void battle_applyStatusEffect(void);
 extern void actor_getMovementFlags(void);
 extern void fn_801E97DC(void);
 extern void fn_80216544(void);
@@ -48,7 +48,7 @@ extern void fn_803AB96C(void);
 extern void fn_803B57B0(void);
 extern void fn_803B57EC(void);
 extern void fn_803B6C88(void);
-extern void fn_803C1560(void);
+extern void craft_forgeUpgradeWeapon(void);
 extern void fn_803E43B8(void);
 extern void fn_803E4434(void);
 extern void chest_spawnLoot(void);
@@ -629,7 +629,7 @@ lbl_world_setGlobalFlag_00000724:
     beq lbl_world_setGlobalFlag_0000073C
     mr r3, r26
     li r4, 0x0
-    bl fn_80155DAC
+    bl inventory_calcTotalStats
 lbl_world_setGlobalFlag_0000073C:
     stw r28, 0x10e4(r31)
 lbl_world_setGlobalFlag_00000740:
@@ -1472,7 +1472,7 @@ lbl_fn_80371334_000012A8:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8016EB48
+    bl battle_applyStatusEffect
     lwz r4, 0x870(r31)
     addi r3, r31, 0x6c
     bl fn_80389838
@@ -1927,7 +1927,7 @@ lbl_fn_80371790_00001954:
     li r6, 0x0
     li r7, 0x0
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     subi r0, r3, 0x1
     lwz r3, 0x10d8(r15)
     mulli r0, r0, 0x30
@@ -2340,7 +2340,7 @@ lbl_fn_80371790_00001F64:
     addi r3, r20, 0xb0
     stw r0, 0x8c(r1)
     addi r4, r1, 0x8c
-    bl fn_8000D430
+    bl scene_traverseNode
     addic. r0, r1, 0x8c
     beq lbl_fn_80371790_00001FC8
     lwz r3, 0x8c(r1)

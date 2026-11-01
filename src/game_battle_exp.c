@@ -8,7 +8,7 @@ extern void _restgpr_26(void);
 extern void _savegpr_21(void);
 extern void _savegpr_25(void);
 extern void _savegpr_26(void);
-extern void fn_80044E0C(void);
+extern void menu_renderLayout(void);
 extern void fn_801059F8(void);
 extern void fn_80105B3C(void);
 extern void fn_801092C8(void);
@@ -16,7 +16,7 @@ extern void fn_80121E14(void);
 extern void fn_80135384(void);
 extern void actor_setState(void);
 extern void fn_80177EB8(void);
-extern void fn_80178A6C(void);
+extern void battle_updateActorStatus(void);
 extern void task_mapIdToQueue(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
@@ -290,13 +290,13 @@ asm void battle_awardExp(void)
     cmpwi r3, 0x0
     beq lbl_battle_awardExp_000002B4
     li r4, 0x0
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_battle_awardExp_000002B4:
     lwz r3, 0x64c(r30)
     cmpwi r3, 0x0
     beq lbl_battle_awardExp_000002C8
     li r4, 0x0
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_battle_awardExp_000002C8:
     lwz r0, 0xf80(r30)
     cmpwi r0, 0x0
@@ -532,7 +532,7 @@ lbl_battle_awardExp_000005DC:
     mtctr r12
     bctrl
     mr r3, r30
-    bl fn_80178A6C
+    bl battle_updateActorStatus
     lwz r7, 0xd1c(r30)
     cmpwi r7, 0x0
     beq lbl_battle_awardExp_000006D8

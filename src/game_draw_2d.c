@@ -7,7 +7,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_24(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8004ECC0(void);
+extern void item_testLineOfSight(void);
 extern void fn_800500FC(void);
 extern void fn_800502A8(void);
 extern void fn_80071D68(void);
@@ -43,7 +43,7 @@ extern void GXSetTexCopySrc(void);
 extern void GXSetTexCopyDst(void);
 extern void GXCopyTex(void);
 extern void GXInitLightDistAttn(void);
-extern void fn_80615D50(void);
+extern void GXInitLightSpot(void);
 extern void fn_80615FF0(void);
 extern void fn_80616250(void);
 extern void fn_80617200(void);
@@ -357,7 +357,7 @@ asm void fn_800B257C(void)
     stfs f4, 0x50(r1)
     stfs f8, 0x54(r1)
     stfs f3, 0x58(r1)
-    bl fn_8004ECC0
+    bl item_testLineOfSight
     cmpwi r3, 0x0
     bne lbl_fn_800B257C_00000364
     lfs f0, 0x34(r29)
@@ -1088,7 +1088,7 @@ asm void fn_800B2EA0(void)
     li r7, 0x1
     li r8, 0x0
     li r9, 0x2
-    bl fn_80615D50
+    bl GXInitLightSpot
     li r3, 0x0
     bl GXInitTexObjDefault
     li r3, 0x0

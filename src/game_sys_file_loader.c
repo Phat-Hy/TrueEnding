@@ -10,7 +10,7 @@ extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
 extern void mem_realloc(void);
 extern void str_skipWhitespace(void);
-extern void fn_80206B9C(void);
+extern void game_initGlobalDatabases(void);
 extern void fn_8020EF04(void);
 extern void event_findEntryById(void);
 extern void fn_8046DC5C(void);
@@ -1977,7 +1977,7 @@ lbl_fn_8021E5A4_00001994:
     b lbl_fn_8021E5A4_000019C8
 lbl_fn_8021E5A4_0000199C:
     mr r3, r19
-    bl fn_80206B9C
+    bl game_initGlobalDatabases
     cmpwi r3, 0x0
     bne lbl_fn_8021E5A4_000019BC
     mr r3, r19
@@ -2055,7 +2055,7 @@ lbl_fn_8021E5A4_00001A88:
     cmplwi r27, 0x20
     bne lbl_fn_8021E5A4_00001AA4
     lwz r3, 0x0(r24)
-    bl fn_80206B9C
+    bl game_initGlobalDatabases
     cmpwi r3, 0x0
     beq lbl_fn_8021E5A4_00001AA4
     lfs f31, lbl_80882FB4
@@ -2179,7 +2179,7 @@ lbl_fn_8021E5A4_00001C48:
     b lbl_fn_8021E5A4_00001C7C
 lbl_fn_8021E5A4_00001C50:
     mr r3, r19
-    bl fn_80206B9C
+    bl game_initGlobalDatabases
     cmpwi r3, 0x0
     bne lbl_fn_8021E5A4_00001C70
     mr r3, r19
@@ -2257,7 +2257,7 @@ lbl_fn_8021E5A4_00001D3C:
     cmplwi r30, 0x20
     bne lbl_fn_8021E5A4_00001D58
     lwz r3, 0x0(r24)
-    bl fn_80206B9C
+    bl game_initGlobalDatabases
     cmpwi r3, 0x0
     beq lbl_fn_8021E5A4_00001D58
     lfs f27, lbl_80882FB4

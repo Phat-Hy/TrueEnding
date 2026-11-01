@@ -8,7 +8,7 @@ extern void _restgpr_23(void);
 extern void _savegpr_14(void);
 extern void _savegpr_23(void);
 extern void dtor_80084684(void);
-extern void fn_8004ECC0(void);
+extern void item_testLineOfSight(void);
 extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
@@ -258,7 +258,7 @@ lbl_fn_8043A530_000001CC:
     li r4, 0x0
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ECC0
+    bl item_testLineOfSight
     cntlzw r0, r3
     srwi. r0, r0, 5
     beq lbl_fn_8043A530_000001FC

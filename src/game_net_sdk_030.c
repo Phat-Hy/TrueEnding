@@ -65,7 +65,7 @@ extern void fn_806E5A60(void);
 extern void fn_806E5B10(void);
 extern void fn_806E5D00(void);
 extern void fn_806E8B10(void);
-extern void fn_806E8E10(void);
+extern void net_formatPlayerInfo(void);
 extern void fn_806E8FB0(void);
 extern void net_setTaggedString(void);
 extern void net_copyStringSafe(void);
@@ -1416,7 +1416,7 @@ lbl_fn_806DEBA0_000011F4:
     addi r5, r1, 0x8
     li r6, 0x10
     lwz r3, 0x0(r31)
-    bl fn_806E8E10
+    bl net_formatPlayerInfo
     cmpwi r3, 0x0
     bne lbl_fn_806DEBA0_0000121C
     li r3, 0x3
@@ -1429,7 +1429,7 @@ lbl_fn_806DEBA0_0000121C:
     addi r5, r1, 0x8
     li r6, 0x10
     lwz r3, 0x0(r31)
-    bl fn_806E8E10
+    bl net_formatPlayerInfo
     cmpwi r3, 0x0
     bne lbl_fn_806DEBA0_0000124C
     li r3, 0x3

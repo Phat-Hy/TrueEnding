@@ -14,9 +14,9 @@ extern void fn_800E8630(void);
 extern void fn_800EB7A0(void);
 extern void system_getNextSequenceId(void);
 extern void scissor_clipFrustum(void);
-extern void fn_80126214(void);
-extern void fn_8013322C(void);
-extern void fn_8013A258(void);
+extern void enemy_updateCombatBehavior(void);
+extern void actor_testBitFlag(void);
+extern void npc_initScriptContext(void);
 extern void npc_updateTalkInteraction(void);
 extern void quest_evaluateConditions(void);
 extern void fn_801489CC(void);
@@ -317,7 +317,7 @@ lbl_fn_80252C40_000002D0:
     addi r3, r31, 0x7d4
     stfs f0, 0x7d8(r31)
     li r4, 0x20
-    bl fn_8013322C
+    bl actor_testBitFlag
     b lbl_fn_80252C40_00000468
 lbl_fn_80252C40_00000304:
     lwz r12, 0x0(r31)
@@ -428,7 +428,7 @@ asm void fn_80252E48(void)
     li r4, 0x20
     stfs f0, 0x7d8(r3)
     addi r3, r3, 0x7d4
-    b fn_8013322C
+    b actor_testBitFlag
 lbl_fn_80252E48_0000049C:
     b fn_800E8630
 }
@@ -699,7 +699,7 @@ asm void fn_802531F4(void)
     psq_st f1, 0x0(r4), 0, 0
     bne lbl_fn_802531F4_00000A9C
     addi r3, r3, 0x1030
-    bl fn_80126214
+    bl enemy_updateCombatBehavior
     addi r4, r29, 0x1088
     addi r31, r1, 0x4c
     psq_l f1, 0x0(r4), 0, 0
@@ -841,7 +841,7 @@ lbl_fn_802531F4_00000A70:
     b lbl_fn_802531F4_00000AA8
 lbl_fn_802531F4_00000A9C:
     bne cr1, lbl_fn_802531F4_00000AA8
-    bl fn_8013A258
+    bl npc_initScriptContext
     b lbl_fn_802531F4_00000AC0
 lbl_fn_802531F4_00000AA8:
     fmr f1, f31
@@ -1205,7 +1205,7 @@ lbl_fn_80253884_00000FC8:
     cmpwi r0, 0x7
     bne lbl_fn_80253884_00001200
     addi r3, r31, 0x1030
-    bl fn_80126214
+    bl enemy_updateCombatBehavior
     addi r4, r31, 0x1088
     addi r30, r1, 0x14
     psq_l f1, 0x0(r4), 0, 0
@@ -1349,7 +1349,7 @@ lbl_fn_80253884_00001200:
     cmpwi r0, 0x6
     bne lbl_fn_80253884_00001214
     mr r3, r31
-    bl fn_8013A258
+    bl npc_initScriptContext
     b lbl_fn_80253884_0000122C
 lbl_fn_80253884_00001214:
     fmr f1, f31

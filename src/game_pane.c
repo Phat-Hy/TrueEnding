@@ -33,7 +33,7 @@ extern void GXSetTexCopySrc(void);
 extern void GXSetTexCopyDst(void);
 extern void GXCopyTex(void);
 extern void GXInitLightDistAttn(void);
-extern void fn_80615D50(void);
+extern void GXInitLightSpot(void);
 extern void fn_80615E00(void);
 extern void fn_80615FF0(void);
 extern void fn_80616250(void);
@@ -46,7 +46,7 @@ extern void GXInitTexObjDefault(void);
 extern void fn_80617270(void);
 extern void fn_80617340(void);
 extern void GXSetTevColorIn(void);
-extern void fn_80617420(void);
+extern void GXSetTevColorOp(void);
 extern void GXSetTevIndirect(void);
 extern void fn_806174C0(void);
 extern void fn_806175F0(void);
@@ -252,7 +252,7 @@ lbl_fn_800AB774_000000A8:
     li r7, 0x0
     li r8, 0x0
     li r9, 0x2
-    bl fn_80615D50
+    bl GXInitLightSpot
     li r3, 0x5
     bl GXClearVtxDesc
     li r3, 0x0
@@ -766,7 +766,7 @@ lbl_fn_800ABD94_000006A0:
     li r7, 0x1
     li r8, 0x0
     li r9, 0x2
-    bl fn_80615D50
+    bl GXInitLightSpot
     li r3, 0x0
     bl GXInitTexObjDefault
     lwz r3, lbl_8087EEE0
@@ -792,7 +792,7 @@ lbl_fn_800ABD94_000006A0:
     li r7, 0x0
     li r8, 0x0
     li r9, 0x2
-    bl fn_80615D50
+    bl GXInitLightSpot
     li r3, 0x5
     li r4, 0x0
     li r5, 0x1
@@ -800,7 +800,7 @@ lbl_fn_800ABD94_000006A0:
     li r7, 0x0
     li r8, 0x0
     li r9, 0x2
-    bl fn_80615D50
+    bl GXInitLightSpot
     lis r4, lbl_807C7410@ha
     lwz r3, lbl_8087EEE0
     addi r4, r4, lbl_807C7410@l
@@ -983,7 +983,7 @@ lbl_fn_800ABD94_00000BC0:
     li r5, 0x7
     li r6, 0x4
     li r7, 0x7
-    bl fn_80617420
+    bl GXSetTevColorOp
     li r3, 0x1
     li r4, 0x0
     li r5, 0x0
@@ -1397,7 +1397,7 @@ asm void fn_800AC6DC(void)
     li r5, 0x7
     li r6, 0x7
     li r7, 0x5
-    bl fn_80617420
+    bl GXSetTevColorOp
     li r3, 0x2
     li r4, 0x0
     li r5, 0x0

@@ -12,7 +12,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void fn_8012476C(void);
 extern void fn_8012DF7C(void);
 extern void npc_updateTalkInteraction(void);
-extern void fn_80155DAC(void);
+extern void inventory_calcTotalStats(void);
 extern void debuff_clearStatus(void);
 extern void fn_80192758(void);
 extern void world_getGlobalFlag(void);
@@ -852,7 +852,7 @@ asm void fn_801A880C(void)
     extrwi. r0, r0, 1, 25
     beq lbl_fn_801A880C_00000A94
     li r4, 0x0
-    bl fn_80155DAC
+    bl inventory_calcTotalStats
 lbl_fn_801A880C_00000A94:
     lwz r4, 0x4(r31)
     li r0, 0x0

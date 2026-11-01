@@ -10,7 +10,7 @@ extern void dtor_80013D60(void);
 extern void dtor_80084684(void);
 extern void vec3_set(void);
 extern void vec3_copy(void);
-extern void fn_8000D9E8(void);
+extern void scene_transformPoint(void);
 extern void fn_8000D9F8(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void str_initFromCStr(void);
@@ -22,7 +22,7 @@ extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
 extern void skill_calcTrajectory(void);
-extern void fn_8006AFF8(void);
+extern void boss_initActionStream(void);
 extern void fn_8006CA80(void);
 extern void script_executeOpcode(void);
 extern void mem_getAllocSize(void);
@@ -33,7 +33,7 @@ extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
 extern void fn_8008B978(void);
 extern void lockon_updateTarget(void);
-extern void fn_800971D4(void);
+extern void cursor_Object_constructor(void);
 extern void atn_Anim_applyLayerTransform(void);
 extern void motion_updateFogAdj(void);
 extern void atn_Task_destructor(void);
@@ -543,7 +543,7 @@ lbl_fn_80452710_000004CC:
     addi r3, r1, 0x8
     addi r4, r1, 0x2c
     addi r5, r1, 0x20
-    bl fn_8006AFF8
+    bl boss_initActionStream
     addi r3, r1, 0x8
     bl str_getData
     lwz r12, 0x14b0(r28)
@@ -1213,7 +1213,7 @@ lbl_fn_80452F14_00000E68:
     addi r3, r1, 0x8
     addi r4, r1, 0x2c
     addi r5, r1, 0x20
-    bl fn_8006AFF8
+    bl boss_initActionStream
     addi r3, r1, 0x8
     bl str_getData
     lwz r12, 0x14b0(r31)
@@ -1564,7 +1564,7 @@ lbl_fn_80453570_00001364:
 lbl_fn_80453570_00001384:
     addi r3, r29, 0x14ec
     li r4, -0x1
-    bl fn_800971D4
+    bl cursor_Object_constructor
     addic. r3, r29, 0x14b0
     beq lbl_fn_80453570_000013A0
     li r4, 0x0
@@ -1698,7 +1698,7 @@ lbl_fn_8045374C_00001540:
     stfs f0, 0x10c(r1)
     stw r25, 0x110(r1)
     stw r25, 0x114(r1)
-    bl fn_8000D9E8
+    bl scene_transformPoint
     bl fn_802A36B0
     mr r24, r3
     li r30, 0xb4

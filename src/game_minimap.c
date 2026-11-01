@@ -19,7 +19,7 @@ extern void mem_getAllocSize(void);
 extern void fn_800902C0(void);
 extern void atn_Model_updateMatrices(void);
 extern void fn_80095300(void);
-extern void fn_800BDB58(void);
+extern void model_updateBoneTransforms(void);
 extern void fn_800C0A50(void);
 extern void fn_800C122C(void);
 extern void atn_LoadHandle_getName(void);
@@ -507,7 +507,7 @@ asm void fn_8008CD60(void)
     mr r4, r31
     lfs f1, 0x98(r31)
     li r5, 0x0
-    bl fn_800BDB58
+    bl model_updateBoneTransforms
     b lbl_fn_8008CD60_00000E08
 lbl_fn_8008CD60_000005F0:
     lwz r0, 0x16c(r31)
@@ -517,7 +517,7 @@ lbl_fn_8008CD60_000005F0:
     mr r4, r31
     lfs f1, lbl_80880BF8
     li r5, 0x2
-    bl fn_800BDB58
+    bl model_updateBoneTransforms
     lwz r3, 0x4(r31)
     lis r0, 0x1
     rlwinm r4, r3, 0, 15, 15
@@ -688,7 +688,7 @@ lbl_fn_8008CD60_00000888:
     mr r4, r31
     lfs f1, 0x98(r31)
     li r5, 0x10
-    bl fn_800BDB58
+    bl model_updateBoneTransforms
     b lbl_fn_8008CD60_00000E08
 lbl_fn_8008CD60_000008B4:
     rlwinm r0, r3, 0, 30, 30
@@ -716,7 +716,7 @@ lbl_fn_8008CD60_000008F8:
     mr r4, r31
     lfs f1, 0x98(r31)
     li r5, 0x0
-    bl fn_800BDB58
+    bl model_updateBoneTransforms
     b lbl_fn_8008CD60_00000AA4
 lbl_fn_8008CD60_00000918:
     lwz r3, lbl_8087EFA8
@@ -731,7 +731,7 @@ lbl_fn_8008CD60_00000918:
     mr r4, r31
     lfs f1, 0x98(r31)
     li r5, 0x3
-    bl fn_800BDB58
+    bl model_updateBoneTransforms
 lbl_fn_8008CD60_0000094C:
     lwz r6, 0x4(r31)
     li r3, 0x0
@@ -771,7 +771,7 @@ lbl_fn_8008CD60_000009BC:
     mr r4, r31
     lfs f1, 0x98(r31)
     li r5, 0x4
-    bl fn_800BDB58
+    bl model_updateBoneTransforms
 lbl_fn_8008CD60_000009D8:
     lwz r0, 0x4(r31)
     rlwinm r3, r0, 0, 7, 7
@@ -786,7 +786,7 @@ lbl_fn_8008CD60_000009D8:
     mr r4, r31
     lfs f1, 0x98(r31)
     li r5, 0x8
-    bl fn_800BDB58
+    bl model_updateBoneTransforms
 lbl_fn_8008CD60_00000A10:
     lwz r0, 0x4(r31)
     rlwinm r3, r0, 0, 7, 7
@@ -801,7 +801,7 @@ lbl_fn_8008CD60_00000A10:
     mr r4, r31
     lfs f1, 0x98(r31)
     li r5, 0x6
-    bl fn_800BDB58
+    bl model_updateBoneTransforms
 lbl_fn_8008CD60_00000A48:
     lwz r0, 0x4(r31)
     rlwinm r0, r0, 0, 17, 17
@@ -811,12 +811,12 @@ lbl_fn_8008CD60_00000A48:
     mr r4, r31
     lfs f1, 0x98(r31)
     li r5, 0xa
-    bl fn_800BDB58
+    bl model_updateBoneTransforms
     lwz r3, lbl_8087EFB4
     mr r4, r31
     lfs f1, 0x98(r31)
     li r5, 0x5
-    bl fn_800BDB58
+    bl model_updateBoneTransforms
 lbl_fn_8008CD60_00000A80:
     lwz r0, 0x4(r31)
     rlwinm r0, r0, 0, 18, 18
@@ -826,7 +826,7 @@ lbl_fn_8008CD60_00000A80:
     mr r4, r31
     lfs f1, 0x98(r31)
     li r5, 0x9
-    bl fn_800BDB58
+    bl model_updateBoneTransforms
 lbl_fn_8008CD60_00000AA4:
     lwz r3, lbl_8087EFA8
     lwz r0, 0xc(r3)

@@ -7,7 +7,7 @@ extern void __register_global_object(void);
 extern void dtor_80084684(void);
 extern void fn_80044C50(void);
 extern void fn_80044CCC(void);
-extern void fn_80044E0C(void);
+extern void menu_renderLayout(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void map_debugLog(void);
@@ -38,7 +38,7 @@ extern void fn_8015E7A0(void);
 extern void fn_801603CC(void);
 extern void fn_80161570(void);
 extern void fn_80164B00(void);
-extern void fn_80170A20(void);
+extern void battle_updateTargetAggro(void);
 extern void fn_80178208(void);
 extern void fn_80179A34(void);
 extern void fn_80179AB4(void);
@@ -1549,7 +1549,7 @@ lbl_fn_800E2FE0_00001324:
     lfs f1, lbl_808812EC
     li r5, 0x0
     lwz r4, 0x48(r4)
-    bl fn_80170A20
+    bl battle_updateTargetAggro
     li r0, 0x0
     sth r0, 0x1470(r30)
     b lbl_fn_800E2FE0_000016E0
@@ -1820,7 +1820,7 @@ lbl_fn_800E2FE0_0000173C:
 lbl_fn_800E2FE0_00001750:
     mr r3, r29
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_fn_800E2FE0_0000175C:
     lwz r29, 0x64c(r30)
     cmpwi r29, 0x0
@@ -1847,7 +1847,7 @@ lbl_fn_800E2FE0_0000179C:
 lbl_fn_800E2FE0_000017B0:
     mr r3, r29
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_fn_800E2FE0_000017BC:
     lwz r0, lbl_8087F610
     cmpwi r0, 0x0

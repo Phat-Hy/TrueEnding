@@ -20,7 +20,7 @@ extern void saveSlot_readSummary(void);
 extern void save_createWorkerTask(void);
 extern void save_computeCrc32(void);
 extern void fn_801F6E78(void);
-extern void fn_80206B9C(void);
+extern void game_initGlobalDatabases(void);
 extern void assert_formatLocation(void);
 extern void fn_8020EF04(void);
 extern void fn_804439FC(void);
@@ -202,7 +202,7 @@ lbl_fn_80584178_0000012C:
     lwz r3, 0x0(r14)
     li r18, 0x0
     li r19, 0x0
-    bl fn_80206B9C
+    bl game_initGlobalDatabases
     cmpwi r3, 0x0
     beq lbl_fn_80584178_00000150
     lwz r3, 0x0(r14)
@@ -210,7 +210,7 @@ lbl_fn_80584178_0000012C:
     mr r18, r3
 lbl_fn_80584178_00000150:
     lwz r3, 0x0(r29)
-    bl fn_80206B9C
+    bl game_initGlobalDatabases
     cmpwi r3, 0x0
     beq lbl_fn_80584178_0000016C
     lwz r3, 0x0(r29)
@@ -612,7 +612,7 @@ asm void fn_80584830(void)
     b lbl_fn_80584830_00000758
 lbl_fn_80584830_000006E8:
     lwz r3, 0x0(r4)
-    bl fn_80206B9C
+    bl game_initGlobalDatabases
     cmpwi r3, 0x0
     bne lbl_fn_80584830_00000708
     lwz r3, 0x0(r31)
@@ -665,7 +665,7 @@ asm void fn_805848E4(void)
     mr r28, r4
     lwz r29, lbl_8087F4F0
     lwz r3, 0x0(r4)
-    bl fn_80206B9C
+    bl game_initGlobalDatabases
     cmpwi r3, 0x0
     bne lbl_fn_805848E4_000007B4
     lwz r3, 0x0(r28)

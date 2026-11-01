@@ -8,7 +8,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_21(void);
 extern void _savegpr_22(void);
 extern void _savegpr_27(void);
-extern void fn_8004B338(void);
+extern void sound_releaseChannel(void);
 extern void item_useConsumable(void);
 extern void fn_8005DF90(void);
 extern void fn_80063764(void);
@@ -23,7 +23,7 @@ extern void fn_80075DEC(void);
 extern void gx_setRenderStateParam(void);
 extern void fn_800A96AC(void);
 extern void fn_800B6C70(void);
-extern void fn_800BDB58(void);
+extern void model_updateBoneTransforms(void);
 extern void fn_800C1424(void);
 extern void fn_800D5E18(void);
 extern void PSMTXConcat(void);
@@ -703,7 +703,7 @@ asm void fn_800B79E4(void)
     li r4, 0x0
     lfs f1, lbl_80880F7C
     li r5, 0x3
-    bl fn_800BDB58
+    bl model_updateBoneTransforms
 lbl_fn_800B79E4_000009AC:
     lwz r4, lbl_8087EFB4
     lwz r0, 0x104(r4)
@@ -1365,7 +1365,7 @@ lbl_fn_800B79E4_00001390:
     blt lbl_fn_800B79E4_00001390
     addi r3, r1, 0x2bc
     li r4, -0x1
-    bl fn_8004B338
+    bl sound_releaseChannel
     lwz r6, lbl_8087EFB4
     lwz r0, 0x268(r30)
     stw r0, 0x318(r6)

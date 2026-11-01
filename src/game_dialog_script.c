@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
-extern void fn_80044E0C(void);
+extern void menu_renderLayout(void);
 extern void fn_80051A88(void);
 extern void mem_alloc(void);
 extern void route_findNextWaypoint(void);
@@ -32,7 +32,7 @@ extern void fn_8012AD20(void);
 extern void fn_8012B988(void);
 extern void fn_8012E540(void);
 extern void fn_8012F188(void);
-extern void fn_8013322C(void);
+extern void actor_testBitFlag(void);
 extern void fn_801333A4(void);
 extern void fn_80134168(void);
 extern void dialog_selectChoice(void);
@@ -1034,10 +1034,10 @@ lbl_dialog_updateScriptState_00000D10:
     bne lbl_dialog_updateScriptState_0000101C
     addi r3, r28, 0x7d4
     li r4, 0x100
-    bl fn_8013322C
+    bl actor_testBitFlag
     addi r3, r28, 0x7d4
     li r4, 0x100
-    bl fn_8013322C
+    bl actor_testBitFlag
     lwz r3, lbl_8087F048
     addi r4, r28, 0xb0
     bl fn_80107850
@@ -1122,13 +1122,13 @@ lbl_dialog_updateScriptState_00000E50:
     cmpwi r3, 0x0
     beq lbl_dialog_updateScriptState_00000E80
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_dialog_updateScriptState_00000E80:
     lwz r3, 0x64c(r28)
     cmpwi r3, 0x0
     beq lbl_dialog_updateScriptState_00000E94
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_dialog_updateScriptState_00000E94:
     li r0, 0x0
     li r3, -0x1
@@ -1249,10 +1249,10 @@ lbl_dialog_updateScriptState_0000101C:
     bne lbl_dialog_updateScriptState_00001320
     addi r3, r28, 0x7d4
     lis r4, 0x1
-    bl fn_8013322C
+    bl actor_testBitFlag
     addi r3, r28, 0x7d4
     lis r4, 0x1
-    bl fn_8013322C
+    bl actor_testBitFlag
     lwz r3, lbl_8087F048
     addi r4, r28, 0xb0
     bl fn_80107B20
@@ -1337,13 +1337,13 @@ lbl_dialog_updateScriptState_00001154:
     cmpwi r3, 0x0
     beq lbl_dialog_updateScriptState_00001184
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_dialog_updateScriptState_00001184:
     lwz r3, 0x64c(r28)
     cmpwi r3, 0x0
     beq lbl_dialog_updateScriptState_00001198
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_dialog_updateScriptState_00001198:
     li r0, 0x0
     li r3, -0x1

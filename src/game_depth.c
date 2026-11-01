@@ -12,7 +12,7 @@ extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void*);
 extern void fn_8004B290(void);
-extern void fn_8004B338(void);
+extern void sound_releaseChannel(void);
 extern void item_useConsumable(void);
 extern void* dungeon_initGlobalContext(void);
 extern void fn_800839EC(void);
@@ -1095,10 +1095,10 @@ lbl_fn_800D5F68_00000F54:
     addi r3, r30, lbl_807C75F4@l
     li r5, 0x1
     bl fn_8004B290
-    lis r4, fn_8004B338@ha
+    lis r4, sound_releaseChannel@ha
     lis r5, lbl_807C75E8@ha
     addi r3, r30, lbl_807C75F4@l
-    addi r4, r4, fn_8004B338@l
+    addi r4, r4, sound_releaseChannel@l
     addi r5, r5, lbl_807C75E8@l
     bl __register_global_object
     li r0, 0x1

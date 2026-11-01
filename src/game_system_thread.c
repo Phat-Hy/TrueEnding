@@ -14,7 +14,7 @@ extern void mem_getAllocSize(void);
 extern void atn_LH_Texture_release(void);
 extern void fn_800D5908(void);
 extern void atn_LH_Texture_update(void);
-extern void fn_800DBF68(void);
+extern void env_updateAtmosphere(void);
 extern void str_findChar(void);
 extern void fn_801EDCB8(void);
 extern void fn_801F04FC(void);
@@ -1977,7 +1977,7 @@ lbl_thread_dispatchToQueue_0000190C:
     mr r30, r3
     mr r3, r31
     mr r4, r30
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     lbz r3, 0xc(r1)
     slwi r0, r30, 1
     stb r3, 0x8(r1)

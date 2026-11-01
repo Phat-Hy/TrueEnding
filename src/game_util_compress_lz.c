@@ -37,7 +37,7 @@ extern void fn_801FEC74(void);
 extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
 extern void thread_dispatchToQueue(void);
-extern void fn_80206B9C(void);
+extern void game_initGlobalDatabases(void);
 extern void assert_formatLocation(void);
 extern void fn_8020EF04(void);
 extern void fn_8020EFEC(void);
@@ -1640,7 +1640,7 @@ lbl_fn_8058AAC0_000015AC:
     b lbl_fn_8058AAC0_00001608
 lbl_fn_8058AAC0_000015B4:
     lwz r3, 0x0(r27)
-    bl fn_80206B9C
+    bl game_initGlobalDatabases
     cmpwi r3, 0x0
     beq lbl_fn_8058AAC0_000015F8
     lwz r3, 0x0(r27)

@@ -20,7 +20,7 @@ extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
 extern void fn_80092F1C(void);
 extern void lockon_updateTarget(void);
-extern void fn_800971D4(void);
+extern void cursor_Object_constructor(void);
 extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerTrack(void);
@@ -32,7 +32,7 @@ extern void fn_800EFD04(void);
 extern void fn_800EFDA0(void);
 extern void fn_801010A0(void);
 extern void fn_8010EFF0(void);
-extern void fn_802180A8(void);
+extern void task_lookupTagIndex(void);
 extern void task_findEntryById(void);
 extern void res_MsgHandle_constructor(void);
 extern void task_createWorker(void);
@@ -1075,7 +1075,7 @@ lbl_fn_8041C164_00000CF0:
 lbl_fn_8041C164_00000CFC:
     addi r3, r29, 0xf4
     li r4, -0x1
-    bl fn_800971D4
+    bl cursor_Object_constructor
     mr r3, r29
     li r4, 0x0
     bl task_destroyWorker
@@ -1584,7 +1584,7 @@ lbl_fn_8041C784_000013F8:
     bl strcpy
     addi r3, r1, 0x108
     bl talk_formatQuotedString
-    bl fn_802180A8
+    bl task_lookupTagIndex
     mr r4, r3
     addi r3, r29, 0xf4
     addi r5, r1, 0x8

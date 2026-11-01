@@ -14,7 +14,7 @@ extern void fn_800A56A8(void);
 extern void fn_8010A308(void);
 extern void fn_801446F0(void);
 extern void inventory_unequipItem(void);
-extern void fn_80155DAC(void);
+extern void inventory_calcTotalStats(void);
 extern void fn_80176DFC(void);
 extern void chest_spawnLoot(void);
 extern void PSMTXRotRad(void);
@@ -1033,7 +1033,7 @@ lbl_fn_801B9A54_00000CDC:
     extrwi. r0, r0, 1, 25
     beq lbl_fn_801B9A54_00000CF4
     li r4, 0x0
-    bl fn_80155DAC
+    bl inventory_calcTotalStats
 lbl_fn_801B9A54_00000CF4:
     li r0, 0x1
     stw r0, 0x34c(r30)

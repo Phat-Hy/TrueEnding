@@ -13,7 +13,7 @@ extern void actor_dispatchMessage(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
-extern void fn_8006AFF8(void);
+extern void boss_initActionStream(void);
 extern void mem_free(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -23,17 +23,17 @@ extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void morph_updateWeights(void);
 extern void morph_updateMesh(void);
-extern void fn_80126214(void);
+extern void enemy_updateCombatBehavior(void);
 extern void fn_8012F440(void);
-extern void fn_8013A258(void);
+extern void npc_initScriptContext(void);
 extern void npc_updateTalkInteraction(void);
 extern void fn_801426A4(void);
 extern void equip_applyToCharacter(void);
 extern void fn_8015C3A8(void);
 extern void fn_8015E7A0(void);
 extern void actor_setState(void);
-extern void fn_8016EB48(void);
-extern void fn_8017039C(void);
+extern void battle_applyStatusEffect(void);
+extern void battle_resolveAggroHierarchy(void);
 extern void fn_8021A888(void);
 extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_ctor(void);
@@ -228,7 +228,7 @@ asm void fn_8027B21C(void)
     cmpwi r0, 0x7
     bne lbl_fn_8027B21C_000005C8
     addi r3, r3, 0x1030
-    bl fn_80126214
+    bl enemy_updateCombatBehavior
     addi r4, r29, 0x1088
     addi r31, r1, 0xbc
     psq_l f1, 0x0(r4), 0, 0
@@ -527,7 +527,7 @@ lbl_fn_8027B21C_000005AC:
 lbl_fn_8027B21C_000005C8:
     cmpwi r0, 0x6
     bne lbl_fn_8027B21C_000005D8
-    bl fn_8013A258
+    bl npc_initScriptContext
     b lbl_fn_8027B21C_000005EC
 lbl_fn_8027B21C_000005D8:
     lfs f0, 0x568(r3)
@@ -1244,7 +1244,7 @@ lbl_fn_8027BE3C_00001020:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8016EB48
+    bl battle_applyStatusEffect
     lwz r8, 0x18ec(r30)
     addi r0, r30, 0x196c
     li r4, 0x0
@@ -1301,7 +1301,7 @@ asm void fn_8027C1D4(void)
     lwz r4, 0x0(r4)
     mr r3, r31
     li r5, 0x2
-    bl fn_8017039C
+    bl battle_resolveAggroHierarchy
     b lbl_fn_8027C1D4_00001118
 lbl_fn_8027C1D4_00001104:
     lwz r12, 0x0(r31)
@@ -1639,7 +1639,7 @@ lbl_fn_8027C38C_00001560:
     li r5, 0x0
     li r6, 0x0
     lwzx r3, r3, r29
-    bl fn_8016EB48
+    bl battle_applyStatusEffect
     lfs f4, 0x6c(r1)
     addi r4, r1, 0x40
     lfs f3, 0x68(r1)
@@ -2045,7 +2045,7 @@ lbl_fn_8027C990_00001BA0:
     addi r3, r1, 0x20
     addi r4, r1, 0x38
     addi r5, r1, 0x2c
-    bl fn_8006AFF8
+    bl boss_initActionStream
     lwz r0, 0x20(r1)
     addi r3, r29, 0x14b0
     srwi. r0, r0, 31

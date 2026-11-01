@@ -21,7 +21,7 @@ extern void inventory_applyItemStats(void);
 extern void fn_8015E4B0(void);
 extern void debuff_clearStatus(void);
 extern void actor_setState(void);
-extern void fn_80170A20(void);
+extern void battle_updateTargetAggro(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
 extern void res_Shader_bindParams(void);
@@ -571,7 +571,7 @@ lbl_fn_8024B4F0_0000068C:
     mr r3, r31
     lfs f1, lbl_808832A8
     li r5, 0x0
-    bl fn_80170A20
+    bl battle_updateTargetAggro
 lbl_fn_8024B4F0_000006D4:
     lwz r0, 0x12a4(r31)
     mr r3, r31
@@ -1703,7 +1703,7 @@ lbl_fn_8024C46C_000016DC:
     stw r0, 0x14bc(r29)
     li r5, 0x0
     lfs f1, lbl_808832A8
-    bl fn_80170A20
+    bl battle_updateTargetAggro
     addi r3, r29, 0x7d4
     lis r4, 0x8000
     li r5, 0x64

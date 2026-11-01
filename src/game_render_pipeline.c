@@ -8,7 +8,7 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void mtx_getTranslation(void);
 extern void vec3_set(void);
-extern void fn_8000D9E8(void);
+extern void scene_transformPoint(void);
 extern void fn_8000DCF4(void);
 extern void fn_8000DD0C(void);
 extern void fn_800109E0(void);
@@ -1854,13 +1854,13 @@ asm void fn_802A3D80(void)
     mr r28, r4
     cmpwi r0, 0x0
     beq lbl_fn_802A3D80_00001BC8
-    bl fn_8000D9E8
+    bl scene_transformPoint
     bl fn_802A4168
     addi r3, r1, 0x38
     bl fn_802A4170
     cmpwi r28, 0x0
     beq lbl_fn_802A3D80_00001968
-    bl fn_8000D9E8
+    bl scene_transformPoint
     bl fn_8000DCF4
     stw r3, 0x8(r1)
     addi r3, r1, 0x38
@@ -1868,7 +1868,7 @@ asm void fn_802A3D80(void)
     bl fn_80244FC0
     b lbl_fn_802A3D80_00001A08
 lbl_fn_802A3D80_00001968:
-    bl fn_8000D9E8
+    bl scene_transformPoint
     bl fn_802A36B0
     stw r3, 0x10(r1)
     b lbl_fn_802A3D80_0000199C

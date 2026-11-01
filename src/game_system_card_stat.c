@@ -13,7 +13,7 @@ extern void ref_releaseHandle(void);
 extern void system_getNextSequenceId(void);
 extern void scissor_clipFrustum(void);
 extern void fn_800FB4B0(void);
-extern void fn_8013322C(void);
+extern void actor_testBitFlag(void);
 extern void fn_80139560(void);
 extern void quest_evaluateConditions(void);
 extern void quest_updateFlow(void);
@@ -28,7 +28,7 @@ extern void fn_80158CA4(void);
 extern void fn_80161880(void);
 extern void fn_8016D74C(void);
 extern void actor_setState(void);
-extern void fn_80170A20(void);
+extern void battle_updateTargetAggro(void);
 extern void fn_80178208(void);
 extern void actor_getMovementFlags(void);
 extern void sound_initGlobalInstances(void);
@@ -848,7 +848,7 @@ lbl_fn_8035CE58_00000AD0:
     mr r3, r30
     lfs f1, lbl_8088563C
     li r5, 0x0
-    bl fn_80170A20
+    bl battle_updateTargetAggro
 lbl_fn_8035CE58_00000AE4:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
@@ -1636,7 +1636,7 @@ asm void fn_8035DA0C(void)
 lbl_fn_8035DA0C_000015FC:
     li r4, 0x20
     addi r3, r3, 0x7d4
-    bl fn_8013322C
+    bl actor_testBitFlag
     lwz r0, 0x14(r1)
     mtlr r0
     addi r1, r1, 0x10

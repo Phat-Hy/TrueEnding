@@ -51,7 +51,7 @@ extern void fn_806E5D00(void);
 extern void fn_806E8890(void);
 extern void fn_806E89D0(void);
 extern void fn_806E8B10(void);
-extern void fn_806E8E10(void);
+extern void net_formatPlayerInfo(void);
 extern void net_copyStringSafe(void);
 extern void fn_806E9230(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -2442,7 +2442,7 @@ lbl_fn_806E4010_0000206C:
     addi r4, r30, 0x24
     addi r5, r1, 0x10
     li r6, 0x10
-    bl fn_806E8E10
+    bl net_formatPlayerInfo
     cmpwi r3, 0x0
     bne lbl_fn_806E4010_000020D0
     li r0, 0x6a
@@ -2457,7 +2457,7 @@ lbl_fn_806E4010_000020D0:
     addi r4, r30, 0x2c
     addi r5, r1, 0x20
     li r6, 0x1f
-    bl fn_806E8E10
+    bl net_formatPlayerInfo
     cmpwi r3, 0x0
     bne lbl_fn_806E4010_00002108
     li r0, 0x6a
@@ -2469,7 +2469,7 @@ lbl_fn_806E4010_00002108:
     addi r4, r30, 0x34
     addi r5, r1, 0x64
     li r6, 0x21
-    bl fn_806E8E10
+    bl net_formatPlayerInfo
     cmpwi r3, 0x0
     bne lbl_fn_806E4010_00002134
     li r0, 0x6a

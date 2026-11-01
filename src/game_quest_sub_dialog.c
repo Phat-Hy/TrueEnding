@@ -7,7 +7,7 @@ extern void _restgpr_21(void);
 extern void _savegpr_21(void);
 extern void dtor_80084684(void);
 extern void fn_8000DB1C(void);
-extern void fn_8005C594(void);
+extern void party_updateFormation(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void fn_80112F54(void);
@@ -882,7 +882,7 @@ asm void fn_80489D08(void)
     beq lbl_fn_80489D08_00000AD8
     mr r3, r0
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
     li r0, 0x0
     stw r0, 0x4(r30)
 lbl_fn_80489D08_00000AD8:
@@ -890,7 +890,7 @@ lbl_fn_80489D08_00000AD8:
     cmpwi r3, 0x0
     beq lbl_fn_80489D08_00000AF4
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
     li r0, 0x0
     stw r0, 0x8(r30)
 lbl_fn_80489D08_00000AF4:

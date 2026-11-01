@@ -8,7 +8,7 @@ extern void _restgpr_25(void);
 extern void _savegpr_14(void);
 extern void _savegpr_25(void);
 extern void vec3_copy(void);
-extern void fn_8000D9E8(void);
+extern void scene_transformPoint(void);
 extern void fn_8000DCF4(void);
 extern void fn_8000DD0C(void);
 extern void vec3_assign(void);
@@ -50,7 +50,7 @@ extern void fn_804E82C8(void);
 extern void fn_804EB3D0(void);
 extern void fn_804EB874(void);
 extern void fn_80506530(void);
-extern void fn_8050E098(void);
+extern void net_p2p_readPayload(void);
 extern void rand(void);
 extern void net_getSocket(void);
 extern void net_getMyAid(void);
@@ -722,7 +722,7 @@ lbl_fn_804E67A0_00000844:
     li r4, -0x1
     li r5, 0x1004
     li r7, 0x1
-    bl fn_8050E098
+    bl net_p2p_readPayload
     lmw r24, 0xd0(r1)
     lwz r0, 0xf4(r1)
     mtlr r0
@@ -862,7 +862,7 @@ lbl_fn_804E6DD4_00000A18:
     li r4, -0x1
     li r5, 0x1015
     li r7, 0x0
-    bl fn_8050E098
+    bl net_p2p_readPayload
     addi r23, r1, 0x1c
     li r22, 0x0
     li r24, 0x0
@@ -978,7 +978,7 @@ lbl_fn_804E6DD4_00000BBC:
     li r4, -0x1
     li r5, 0x101c
     li r7, 0x0
-    bl fn_8050E098
+    bl net_p2p_readPayload
 lbl_fn_804E6DD4_00000C34:
     addi r22, r22, 0x1
     addi r24, r24, 0xd5c
@@ -1161,7 +1161,7 @@ lbl_fn_804E6DD4_00000E9C:
     li r4, -0x1
     li r5, 0x101c
     li r7, 0x0
-    bl fn_8050E098
+    bl net_p2p_readPayload
 lbl_fn_804E6DD4_00000EFC:
     addi r31, r31, 0x1
     addi r29, r29, 0xb4
@@ -1415,7 +1415,7 @@ lbl_fn_804E762C_00001264:
     li r4, -0x1
     li r5, 0x1014
     li r7, 0x0
-    bl fn_8050E098
+    bl net_p2p_readPayload
     addi r22, r1, 0x28
     li r21, 0x0
     li r15, 0x0
@@ -1517,7 +1517,7 @@ lbl_fn_804E762C_000013B8:
     li r4, -0x1
     li r5, 0x101a
     li r7, 0x0
-    bl fn_8050E098
+    bl net_p2p_readPayload
 lbl_fn_804E762C_000013F8:
     addi r21, r21, 0x1
     addi r15, r15, 0xd5c
@@ -1597,7 +1597,7 @@ lbl_fn_804E762C_000014D0:
     li r4, -0x1
     li r5, 0x101b
     li r7, 0x0
-    bl fn_8050E098
+    bl net_p2p_readPayload
     b lbl_fn_804E762C_0000158C
 lbl_fn_804E762C_00001528:
     lbz r0, lbl_8087F5F8
@@ -1625,7 +1625,7 @@ lbl_fn_804E762C_00001550:
     li r4, -0x1
     li r5, 0x101a
     li r7, 0x0
-    bl fn_8050E098
+    bl net_p2p_readPayload
 lbl_fn_804E762C_0000158C:
     addi r19, r19, 0x1
     addi r15, r15, 0xb4
@@ -1652,7 +1652,7 @@ asm void fn_804E7AC4(void)
     bl _savegpr_25
     mr r31, r3
     bl fn_804EB874
-    bl fn_8000D9E8
+    bl scene_transformPoint
     bl fn_8000DCF4
     mr r29, r3
     bl fn_8000DD0C
@@ -1750,7 +1750,7 @@ lbl_fn_804E7AC4_00001698:
     li r4, -0x1
     li r5, 0x1017
     li r7, 0x0
-    bl fn_8050E098
+    bl net_p2p_readPayload
 lbl_fn_804E7AC4_00001760:
     li r27, 0x0
     li r29, 0x0
@@ -1880,7 +1880,7 @@ lbl_fn_804E7AC4_00001888:
     li r4, -0x1
     li r5, 0x101e
     li r7, 0x0
-    bl fn_8050E098
+    bl net_p2p_readPayload
 lbl_fn_804E7AC4_0000195C:
     addi r27, r27, 0x1
 lbl_fn_804E7AC4_00001960:
@@ -2010,7 +2010,7 @@ lbl_fn_804E7AC4_00001A80:
     li r4, -0x1
     li r5, 0x101e
     li r7, 0x0
-    bl fn_8050E098
+    bl net_p2p_readPayload
 lbl_fn_804E7AC4_00001B50:
     addi r25, r25, 0x1
 lbl_fn_804E7AC4_00001B54:

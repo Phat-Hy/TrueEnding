@@ -8,16 +8,16 @@ extern void _restgpr_27(void);
 extern void _savegpr_25(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8000D430(void);
+extern void scene_traverseNode(void);
 extern void ui_destroyWidget(void);
-extern void fn_8004ECC0(void);
+extern void item_testLineOfSight(void);
 extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
 extern void fn_8009076C(void);
 extern void fn_80092A4C(void);
 extern void lockon_updateTarget(void);
-extern void fn_800971D4(void);
+extern void cursor_Object_constructor(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void fn_80097E80(void);
 extern void motion_updateFogAdj(void);
@@ -26,10 +26,10 @@ extern void ref_releaseHandle(void);
 extern void wcs_vformat(void);
 extern void cam_destroyMsgHandle(void);
 extern void fn_8014F698(void);
-extern void fn_801F6D7C(void);
+extern void save_verifyBlockCrc(void);
 extern void fn_801F791C(void);
 extern void save_findEntryByName(void);
-extern void fn_80206B9C(void);
+extern void game_initGlobalDatabases(void);
 extern void assert_formatLocation(void);
 extern void fn_8020EF04(void);
 extern void fn_8020EFEC(void);
@@ -440,7 +440,7 @@ lbl_fn_8040A32C_00000424:
     fmr f1, f31
     mr r4, r31
     li r5, 0x0
-    bl fn_801F6D7C
+    bl save_verifyBlockCrc
 lbl_fn_8040A32C_00000440:
     addi r29, r29, 0x4
 lbl_fn_8040A32C_00000444:
@@ -460,7 +460,7 @@ lbl_fn_8040A32C_00000468:
     fmr f1, f31
     mr r4, r31
     li r5, 0x1
-    bl fn_801F6D7C
+    bl save_verifyBlockCrc
 lbl_fn_8040A32C_00000484:
     addi r29, r29, 0x4
 lbl_fn_8040A32C_00000488:
@@ -479,7 +479,7 @@ lbl_fn_8040A32C_000004A8:
     fmr f1, f30
     mr r4, r31
     li r5, 0x2
-    bl fn_801F6D7C
+    bl save_verifyBlockCrc
 lbl_fn_8040A32C_000004C4:
     addi r29, r29, 0x4
 lbl_fn_8040A32C_000004C8:
@@ -498,7 +498,7 @@ lbl_fn_8040A32C_000004E8:
     fmr f1, f30
     mr r4, r31
     li r5, 0x3
-    bl fn_801F6D7C
+    bl save_verifyBlockCrc
 lbl_fn_8040A32C_00000504:
     addi r29, r29, 0x4
 lbl_fn_8040A32C_00000508:
@@ -827,7 +827,7 @@ lbl_fn_8040AB64_0000092C:
     stfs f3, 0x178(r28)
     stfs f0, 0x188(r28)
     stw r31, 0x17c(r28)
-    bl fn_80206B9C
+    bl game_initGlobalDatabases
     cmpwi r3, 0x0
     beq lbl_fn_8040AB64_000009CC
     li r0, 0x0
@@ -933,7 +933,7 @@ lbl_fn_8040AB64_00000A88:
     stfs f3, 0x40(r1)
     stfs f4, 0x44(r1)
     stfs f7, 0x48(r1)
-    bl fn_8004ECC0
+    bl item_testLineOfSight
     cmpwi r3, 0x0
     beq lbl_fn_8040AB64_00000B38
     addi r3, r1, 0x4c
@@ -955,7 +955,7 @@ lbl_fn_8040AB64_00000B38:
     cmpwi r3, 0x0
     beq lbl_fn_8040AB64_00000B94
     lwz r3, 0x4(r3)
-    bl fn_80206B9C
+    bl game_initGlobalDatabases
     cmpwi r3, 0x0
     beq lbl_fn_8040AB64_00000B94
     li r27, 0x1
@@ -1334,7 +1334,7 @@ lbl_fn_8040B394_0000109C:
     li r31, 0x0
 lbl_fn_8040B394_000010A0:
     mr r3, r29
-    bl fn_80206B9C
+    bl game_initGlobalDatabases
     cmpwi r3, 0x0
     beq lbl_fn_8040B394_000010DC
     mr r3, r29
@@ -1517,7 +1517,7 @@ asm void fn_8040B60C(void)
     beq lbl_fn_8040B60C_00001320
     li r4, -0x1
     addi r3, r3, 0x4
-    bl fn_800971D4
+    bl cursor_Object_constructor
     cmpwi r31, 0x0
     ble lbl_fn_8040B60C_00001320
     mr r3, r30
@@ -1819,7 +1819,7 @@ lbl_fn_8040B668_0000174C:
     stw r0, 0x74(r1)
     addi r3, r31, 0x4
     addi r4, r1, 0x74
-    bl fn_8000D430
+    bl scene_traverseNode
     addic. r3, r1, 0x74
     beq lbl_fn_8040B668_000018E4
     lwz r4, 0x74(r1)

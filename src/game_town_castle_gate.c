@@ -8,7 +8,7 @@ extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void str_assignBuffer(void);
 extern void mem_free(void);
-extern void fn_800DBF68(void);
+extern void env_updateAtmosphere(void);
 extern void str_findChar(void);
 extern void fn_80134250(void);
 extern void fn_80134270(void);
@@ -925,7 +925,7 @@ lbl_fn_803D73C8_0000064C:
     mr r3, r31
     stw r0, 0x4(r31)
     stw r0, 0x8(r31)
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     lwz r0, 0x4(r30)
     mr r3, r31
     lbz r4, 0x10(r1)
@@ -1081,7 +1081,7 @@ lbl_fn_803D73C8_00000890:
     lwz r4, 0x4(r30)
     stw r0, 0x4(r31)
     stw r0, 0x8(r31)
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     lwz r0, 0x4(r30)
     mr r3, r31
     lbz r4, 0xc(r1)

@@ -39,11 +39,11 @@ extern void clip_calculateFrustum(void);
 extern void fn_80109950(void);
 extern void fn_801162A0(void);
 extern void fn_801255C8(void);
-extern void fn_80126214(void);
+extern void enemy_updateCombatBehavior(void);
 extern void fn_80128930(void);
 extern void fn_8012DB04(void);
 extern void boss_updatePhaseState(void);
-extern void fn_80139550(void);
+extern void npc_updateDialogueTarget(void);
 extern void fn_80139F2C(void);
 extern void fn_80139F3C(void);
 extern void fn_80139F58(void);
@@ -64,7 +64,7 @@ extern void dialog_renderWindow(void);
 extern void dialog_updateScriptState(void);
 extern void fn_80164168(void);
 extern void actor_setState(void);
-extern void fn_8016EB48(void);
+extern void battle_applyStatusEffect(void);
 extern void fn_8016F4D8(void);
 extern void fn_8016F530(void);
 extern void fn_8016F5EC(void);
@@ -937,7 +937,7 @@ asm void fn_80313FE8(void)
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8016EB48
+    bl battle_applyStatusEffect
     lwz r0, 0x15f0(r31)
     mr r4, r31
     stw r0, 0x15f4(r31)
@@ -1800,7 +1800,7 @@ asm void fn_80314BD8(void)
     stw r0, 0x14cc(r30)
     b lbl_fn_80314BD8_0000207C
     addi r3, r30, 0xc64
-    bl fn_80126214
+    bl enemy_updateCombatBehavior
     addi r3, r30, 0xc64
     bl fn_80139F58
     mr r4, r3
@@ -2007,7 +2007,7 @@ lbl_fn_80314BD8_000019E8:
     bl fn_80139F3C
     addi r3, r30, 0xb0
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     lwz r0, 0x14bc(r30)
     fmr f31, f1
     cmpwi r0, 0x0
@@ -2248,7 +2248,7 @@ lbl_fn_80314BD8_00001D9C:
     bl vec3_copy
     addi r3, r30, 0xb0
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     lwz r0, 0x14bc(r30)
     fmr f31, f1
     cmpwi r0, 0x0
@@ -2334,7 +2334,7 @@ lbl_fn_80314BD8_00001ED0:
     bl fn_8016F5EC
     b lbl_fn_80314BD8_0000207C
     addi r3, r30, 0xc64
-    bl fn_80126214
+    bl enemy_updateCombatBehavior
     addi r3, r30, 0xc64
     bl fn_80139F58
     mr r4, r3
@@ -2367,7 +2367,7 @@ lbl_fn_80314BD8_00001F5C:
     b lbl_fn_80314BD8_000020CC
     addi r3, r30, 0xb0
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     fmr f31, f1
     addi r3, r30, 0xb0
     li r4, 0x0
@@ -2381,7 +2381,7 @@ lbl_fn_80314BD8_00001F5C:
     b lbl_fn_80314BD8_0000207C
     addi r3, r30, 0xb0
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     fmr f31, f1
     addi r3, r30, 0xb0
     li r4, 0x0

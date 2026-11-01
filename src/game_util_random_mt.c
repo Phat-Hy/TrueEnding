@@ -20,8 +20,8 @@ extern void fn_800D0974(void);
 extern void fn_800EAECC(void);
 extern void fn_8011CD84(void);
 extern void fn_8011D21C(void);
-extern void fn_80126214(void);
-extern void fn_8013A258(void);
+extern void enemy_updateCombatBehavior(void);
+extern void npc_initScriptContext(void);
 extern void npc_updateTalkInteraction(void);
 extern void inventory_applyItemStats(void);
 extern void fn_8015EB2C(void);
@@ -102,10 +102,7 @@ void fn_805A4258(void);
 void fn_805A45FC(void);
 void fn_805A4984(void);
 
-asm void fn_805A2FD4(void)
-{
-    nofralloc
-    blr
+void fn_805A2FD4(void) {
 }
 
 asm void fn_805A2FD8(void)
@@ -1537,7 +1534,7 @@ lbl_fn_805A4258_0000130C:
     cmpwi r0, 0x7
     bne lbl_fn_805A4258_000015C0
     addi r3, r3, 0x1030
-    bl fn_80126214
+    bl enemy_updateCombatBehavior
     addi r4, r31, 0x1088
     addi r29, r1, 0x68
     psq_l f1, 0x0(r4), 0, 0
@@ -1723,7 +1720,7 @@ lbl_fn_805A4258_0000159C:
 lbl_fn_805A4258_000015C0:
     cmpwi r0, 0x6
     bne lbl_fn_805A4258_000015D0
-    bl fn_8013A258
+    bl npc_initScriptContext
     b lbl_fn_805A4258_000015EC
 lbl_fn_805A4258_000015D0:
     lfs f0, 0x568(r31)

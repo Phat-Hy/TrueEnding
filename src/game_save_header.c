@@ -23,7 +23,7 @@ extern void mem_free(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void atn_Task_constructor(void);
-extern void fn_800DBF68(void);
+extern void env_updateAtmosphere(void);
 extern void wcs_parseInt(void);
 extern void fn_800E0000(void);
 extern void fn_800E0908(void);
@@ -1411,7 +1411,7 @@ lbl_fn_801F36C8_000011A8:
     stw r27, 0x8(r17)
     stw r27, 0xc(r17)
     lwz r4, 0x38(r1)
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     lwz r0, 0x38(r1)
     addi r3, r17, 0x4
     lbz r4, 0x8(r1)
@@ -1544,7 +1544,7 @@ lbl_fn_801F36C8_0000138C:
     stw r27, 0x8(r17)
     stw r27, 0xc(r17)
     lwz r4, 0x38(r1)
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     lwz r0, 0x38(r1)
     addi r3, r17, 0x4
     lbz r4, 0x14(r1)

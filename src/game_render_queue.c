@@ -16,7 +16,7 @@ extern void wcs_vformat(void);
 extern void system_getNextSequenceId(void);
 extern void scissor_clipFrustum(void);
 extern void fn_80109828(void);
-extern void fn_8013A258(void);
+extern void npc_initScriptContext(void);
 extern void npc_updateTalkInteraction(void);
 extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
@@ -27,7 +27,7 @@ extern void fn_80158BB4(void);
 extern void fn_8015AC48(void);
 extern void fn_8016BEDC(void);
 extern void actor_setState(void);
-extern void fn_80170A20(void);
+extern void battle_updateTargetAggro(void);
 extern void fn_801781B0(void);
 extern void res_findResourceSlot(void);
 extern void fn_802A74A4(void);
@@ -988,7 +988,7 @@ lbl_fn_802A5A1C_00000D44:
     mr r3, r31
     lfs f1, lbl_80883E70
     li r5, 0x0
-    bl fn_80170A20
+    bl battle_updateTargetAggro
 lbl_fn_802A5A1C_00000D74:
     mr r3, r31
     bl fn_802A711C
@@ -1825,7 +1825,7 @@ lbl_fn_802A711C_00001998:
 lbl_fn_802A711C_000019A0:
     cmpwi r0, 0x6
     bne lbl_fn_802A711C_000019B0
-    bl fn_8013A258
+    bl npc_initScriptContext
     b lbl_fn_802A711C_00001A54
 lbl_fn_802A711C_000019B0:
     lwz r3, 0x1694(r31)

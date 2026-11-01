@@ -2,7 +2,7 @@
 #pragma function_align 4
 
 /* External function declarations */
-extern void fn_80044E0C(void);
+extern void menu_renderLayout(void);
 extern void collision_testLineSegment(void);
 extern void fn_8010CA3C(void);
 extern void fn_801279E8(void);
@@ -39,7 +39,7 @@ extern u32 lbl_80881A04;
 extern u32 lbl_80881A08;
 
 /* Function declarations */
-void npc_getPosition(void);
+void *npc_getPosition(void *npc);
 void fn_8013C394(void);
 void fn_8013C3A8(void);
 void fn_8013C3B4(void);
@@ -67,11 +67,9 @@ void fn_8013C544(void);
 void fn_8013C554(void);
 void fn_8013C564(void);
 
-asm void npc_getPosition(void)
+void *npc_getPosition(void *npc)
 {
-    nofralloc
-    addi r3, r3, 0x528
-    blr
+    return (char *)npc + 0x528;
 }
 
 asm void fn_8013C394(void)
@@ -558,13 +556,13 @@ lbl_fn_8013C564_00000520:
     cmpwi r3, 0x0
     beq lbl_fn_8013C564_00000550
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_fn_8013C564_00000550:
     lwz r3, 0x64c(r29)
     cmpwi r3, 0x0
     beq lbl_fn_8013C564_00000564
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_fn_8013C564_00000564:
     li r0, 0x0
     li r3, -0x1

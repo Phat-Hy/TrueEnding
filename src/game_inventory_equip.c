@@ -3,7 +3,7 @@
 
 /* External function declarations */
 extern void fn_800185B4(void);
-extern void fn_80044E0C(void);
+extern void menu_renderLayout(void);
 extern void mem_alloc(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void skin_applyWeights(void);
@@ -71,7 +71,7 @@ void fn_80155494(void);
 void fn_80155790(void);
 void fn_80155A88(void);
 void fn_80155D70(void);
-void fn_80155DAC(void);
+void inventory_calcTotalStats(void);
 
 asm void fn_801546F4(void)
 {
@@ -332,13 +332,13 @@ lbl_equip_applyToCharacter_00000368:
     cmpwi r3, 0x0
     beq lbl_equip_applyToCharacter_00000398
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_equip_applyToCharacter_00000398:
     lwz r3, 0x64c(r29)
     cmpwi r3, 0x0
     beq lbl_equip_applyToCharacter_000003AC
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_equip_applyToCharacter_000003AC:
     li r0, 0x0
     li r3, -0x1
@@ -1715,7 +1715,7 @@ lbl_fn_80155D70_000016B0:
     blr
 }
 
-asm void fn_80155DAC(void)
+asm void inventory_calcTotalStats(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -1725,11 +1725,11 @@ asm void fn_80155DAC(void)
     mr r31, r3
     lwz r5, 0x12a4(r3)
     extrwi. r0, r5, 1, 29
-    beq lbl_fn_80155DAC_000016E4
+    beq lbl_inventory_calcTotalStats_000016E4
     extrwi r0, r5, 1, 25
     cmplw r0, r4
-    beq lbl_fn_80155DAC_00001A18
-lbl_fn_80155DAC_000016E4:
+    beq lbl_inventory_calcTotalStats_00001A18
+lbl_inventory_calcTotalStats_000016E4:
     lwz r5, 0x12a8(r3)
     lwz r0, 0x12a4(r3)
     extrwi r5, r5, 1, 29
@@ -1737,11 +1737,11 @@ lbl_fn_80155DAC_000016E4:
     rlwimi r0, r4, 6, 25, 25
     stw r0, 0x12a4(r3)
     extrwi. r0, r0, 1, 25
-    beq lbl_fn_80155DAC_0000192C
+    beq lbl_inventory_calcTotalStats_0000192C
     lwz r4, 0x50(r3)
     subis r0, r4, 0xa
     cmplwi r0, 0xae76
-    bne lbl_fn_80155DAC_0000175C
+    bne lbl_inventory_calcTotalStats_0000175C
     lfs f0, lbl_80881964
     li r0, 0x1
     stw r0, 0x3fc(r3)
@@ -1759,10 +1759,10 @@ lbl_fn_80155DAC_000016E4:
     lfs f0, lbl_80881A74
     stfs f1, 0x2e8(r31)
     stfs f0, 0x2e4(r31)
-    b lbl_fn_80155DAC_00001914
-lbl_fn_80155DAC_0000175C:
+    b lbl_inventory_calcTotalStats_00001914
+lbl_inventory_calcTotalStats_0000175C:
     cmplwi r0, 0xae77
-    bne lbl_fn_80155DAC_000017AC
+    bne lbl_inventory_calcTotalStats_000017AC
     lfs f0, lbl_80881964
     li r0, 0x1
     stw r0, 0x3fc(r3)
@@ -1780,51 +1780,51 @@ lbl_fn_80155DAC_0000175C:
     lfs f0, lbl_80881B1C
     stfs f1, 0x2e8(r31)
     stfs f0, 0x2e4(r31)
-    b lbl_fn_80155DAC_00001914
-lbl_fn_80155DAC_000017AC:
+    b lbl_inventory_calcTotalStats_00001914
+lbl_inventory_calcTotalStats_000017AC:
     lwz r5, 0x48(r3)
     cmpwi r5, 0x0
-    bne lbl_fn_80155DAC_000017E0
+    bne lbl_inventory_calcTotalStats_000017E0
     lwz r4, lbl_8087F0A8
     lwz r0, 0x278(r4)
     cmpwi r0, 0x0
-    beq lbl_fn_80155DAC_000017E0
+    beq lbl_inventory_calcTotalStats_000017E0
     lwz r4, 0x5c(r3)
     lwz r0, 0x11c(r4)
     cmpwi r0, 0x1
-    bne lbl_fn_80155DAC_000017E0
+    bne lbl_inventory_calcTotalStats_000017E0
     li r0, 0x1
-    b lbl_fn_80155DAC_00001800
-lbl_fn_80155DAC_000017E0:
+    b lbl_inventory_calcTotalStats_00001800
+lbl_inventory_calcTotalStats_000017E0:
     cmpwi r5, 0x0
-    bne lbl_fn_80155DAC_000017FC
+    bne lbl_inventory_calcTotalStats_000017FC
     lwz r0, 0x12a8(r3)
     extrwi. r0, r0, 1, 14
-    beq lbl_fn_80155DAC_000017FC
+    beq lbl_inventory_calcTotalStats_000017FC
     li r0, 0x1
-    b lbl_fn_80155DAC_00001800
-lbl_fn_80155DAC_000017FC:
+    b lbl_inventory_calcTotalStats_00001800
+lbl_inventory_calcTotalStats_000017FC:
     li r0, 0x0
-lbl_fn_80155DAC_00001800:
+lbl_inventory_calcTotalStats_00001800:
     cmpwi r0, 0x0
-    beq lbl_fn_80155DAC_0000188C
+    beq lbl_inventory_calcTotalStats_0000188C
     lwz r0, 0x674(r3)
     cmpwi r0, 0x0
-    bge lbl_fn_80155DAC_00001848
+    bge lbl_inventory_calcTotalStats_00001848
     lwz r3, lbl_8087F430
     li r4, 0x25
     bl world_getGlobalFlag
     cmpwi r3, 0x1
-    beq lbl_fn_80155DAC_00001848
+    beq lbl_inventory_calcTotalStats_00001848
     lwz r3, lbl_8087F430
     li r4, 0x25
     bl world_getGlobalFlag
     cmpwi r3, 0x2
-    bne lbl_fn_80155DAC_0000188C
+    bne lbl_inventory_calcTotalStats_0000188C
     bl fn_8013539C
     cmpwi r3, 0x0
-    beq lbl_fn_80155DAC_0000188C
-lbl_fn_80155DAC_00001848:
+    beq lbl_inventory_calcTotalStats_0000188C
+lbl_inventory_calcTotalStats_00001848:
     mr r3, r31
     li r4, 0x1
     li r5, 0x0
@@ -1842,10 +1842,10 @@ lbl_fn_80155DAC_00001848:
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
-lbl_fn_80155DAC_0000188C:
+lbl_inventory_calcTotalStats_0000188C:
     lwz r0, 0x674(r31)
     cmpwi r0, 0x0
-    blt lbl_fn_80155DAC_000018D8
+    blt lbl_inventory_calcTotalStats_000018D8
     lfs f0, lbl_80881964
     li r0, 0x1
     stw r0, 0x3fc(r31)
@@ -1861,8 +1861,8 @@ lbl_fn_80155DAC_0000188C:
     bl atn_Anim_setLayerAnimation
     lfs f0, lbl_80881964
     stfs f0, 0x2e8(r31)
-    b lbl_fn_80155DAC_00001914
-lbl_fn_80155DAC_000018D8:
+    b lbl_inventory_calcTotalStats_00001914
+lbl_inventory_calcTotalStats_000018D8:
     lfs f0, lbl_80881964
     li r0, 0x1
     stw r0, 0x3fc(r31)
@@ -1878,57 +1878,57 @@ lbl_fn_80155DAC_000018D8:
     bl atn_Anim_setLayerAnimation
     lfs f0, lbl_80881964
     stfs f0, 0x2e8(r31)
-lbl_fn_80155DAC_00001914:
+lbl_inventory_calcTotalStats_00001914:
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0x4
     li r6, 0x20
     bl fn_8023A02C
-    b lbl_fn_80155DAC_00001A18
-lbl_fn_80155DAC_0000192C:
+    b lbl_inventory_calcTotalStats_00001A18
+lbl_inventory_calcTotalStats_0000192C:
     lwz r5, 0x48(r3)
     cmpwi r5, 0x0
-    bne lbl_fn_80155DAC_00001960
+    bne lbl_inventory_calcTotalStats_00001960
     lwz r4, lbl_8087F0A8
     lwz r0, 0x278(r4)
     cmpwi r0, 0x0
-    beq lbl_fn_80155DAC_00001960
+    beq lbl_inventory_calcTotalStats_00001960
     lwz r4, 0x5c(r3)
     lwz r0, 0x11c(r4)
     cmpwi r0, 0x1
-    bne lbl_fn_80155DAC_00001960
+    bne lbl_inventory_calcTotalStats_00001960
     li r0, 0x1
-    b lbl_fn_80155DAC_00001980
-lbl_fn_80155DAC_00001960:
+    b lbl_inventory_calcTotalStats_00001980
+lbl_inventory_calcTotalStats_00001960:
     cmpwi r5, 0x0
-    bne lbl_fn_80155DAC_0000197C
+    bne lbl_inventory_calcTotalStats_0000197C
     lwz r0, 0x12a8(r3)
     extrwi. r0, r0, 1, 14
-    beq lbl_fn_80155DAC_0000197C
+    beq lbl_inventory_calcTotalStats_0000197C
     li r0, 0x1
-    b lbl_fn_80155DAC_00001980
-lbl_fn_80155DAC_0000197C:
+    b lbl_inventory_calcTotalStats_00001980
+lbl_inventory_calcTotalStats_0000197C:
     li r0, 0x0
-lbl_fn_80155DAC_00001980:
+lbl_inventory_calcTotalStats_00001980:
     cmpwi r0, 0x0
-    beq lbl_fn_80155DAC_00001A04
+    beq lbl_inventory_calcTotalStats_00001A04
     lwz r3, lbl_8087F430
     li r4, 0x25
     bl world_getGlobalFlag
     cmpwi r3, 0x1
-    blt lbl_fn_80155DAC_000019E4
+    blt lbl_inventory_calcTotalStats_000019E4
     lwz r3, 0x648(r31)
     cmpwi r3, 0x0
-    beq lbl_fn_80155DAC_000019B0
+    beq lbl_inventory_calcTotalStats_000019B0
     li r4, 0x1
-    bl fn_80044E0C
-lbl_fn_80155DAC_000019B0:
+    bl menu_renderLayout
+lbl_inventory_calcTotalStats_000019B0:
     lwz r3, 0x64c(r31)
     cmpwi r3, 0x0
-    beq lbl_fn_80155DAC_000019C4
+    beq lbl_inventory_calcTotalStats_000019C4
     li r4, 0x1
-    bl fn_80044E0C
-lbl_fn_80155DAC_000019C4:
+    bl menu_renderLayout
+lbl_inventory_calcTotalStats_000019C4:
     li r0, 0x0
     li r3, -0x1
     stw r3, 0x674(r31)
@@ -1936,23 +1936,23 @@ lbl_fn_80155DAC_000019C4:
     stw r0, 0x648(r31)
     stw r0, 0x64c(r31)
     bl fn_8014C228
-    b lbl_fn_80155DAC_00001A04
-lbl_fn_80155DAC_000019E4:
+    b lbl_inventory_calcTotalStats_00001A04
+lbl_inventory_calcTotalStats_000019E4:
     lwz r0, 0x674(r31)
     cmpwi r0, 0x0
-    blt lbl_fn_80155DAC_00001A04
+    blt lbl_inventory_calcTotalStats_00001A04
     mr r3, r31
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
     bl dialog_selectChoice
-lbl_fn_80155DAC_00001A04:
+lbl_inventory_calcTotalStats_00001A04:
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0x4
     li r6, 0x20
     bl fn_8023A098
-lbl_fn_80155DAC_00001A18:
+lbl_inventory_calcTotalStats_00001A18:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     mtlr r0

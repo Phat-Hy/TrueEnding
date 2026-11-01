@@ -2,7 +2,7 @@
 #pragma function_align 4
 
 /* External function declarations */
-extern void fn_8004B338(void);
+extern void sound_releaseChannel(void);
 extern void item_useConsumable(void);
 extern void mem_alloc(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -20,7 +20,7 @@ extern void debuff_clearStatus(void);
 extern void fn_8016DDB0(void);
 extern void actor_setState(void);
 extern void fn_80178208(void);
-extern void fn_80178A6C(void);
+extern void battle_updateActorStatus(void);
 extern void fn_80196428(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
@@ -987,7 +987,7 @@ lbl_fn_8045D3A4_00000BEC:
 lbl_fn_8045D3A4_00000D14:
     addi r3, r1, 0x238
     li r4, -0x1
-    bl fn_8004B338
+    bl sound_releaseChannel
     lwz r0, 0x454(r1)
     psq_l f31, 0x448(r1), 0, 0
     lfd f31, 0x440(r1)
@@ -1847,7 +1847,7 @@ asm void fn_8045EB60(void)
     mtctr r12
     bctrl
     mr r3, r30
-    bl fn_80178A6C
+    bl battle_updateActorStatus
     mr r3, r30
     li r4, 0x0
     li r5, 0x1

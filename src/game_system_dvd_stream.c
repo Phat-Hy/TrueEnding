@@ -10,7 +10,7 @@ extern void dtor_80084684(void);
 extern void fn_8004B290(void);
 extern void item_useConsumable(void);
 extern void collision_queryGeometry(void);
-extern void fn_8004ECC0(void);
+extern void item_testLineOfSight(void);
 extern void collision_testLineSegment(void);
 extern void fn_8006A250(void);
 extern void script_executeOpcode(void);
@@ -1423,7 +1423,7 @@ lbl_fn_803786FC_00001194:
     stfs f4, 0x54(r1)
     li r9, 0x0
     stfs f0, 0x58(r1)
-    bl fn_8004ECC0
+    bl item_testLineOfSight
     cmpwi r3, 0x0
     beq lbl_fn_803786FC_000015EC
     addi r4, r1, 0x38
@@ -1496,7 +1496,7 @@ lbl_fn_803786FC_000012C4:
     stfs f4, 0x54(r1)
     li r9, 0x0
     stfs f0, 0x58(r1)
-    bl fn_8004ECC0
+    bl item_testLineOfSight
     cmpwi r3, 0x0
     beq lbl_fn_803786FC_000015EC
     addi r4, r1, 0x38

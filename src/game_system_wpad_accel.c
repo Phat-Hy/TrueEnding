@@ -14,7 +14,7 @@ extern void fn_800E2FE0(void);
 extern void fn_800EFB78(void);
 extern void fn_8011BF3C(void);
 extern void fn_80154344(void);
-extern void fn_80155DAC(void);
+extern void inventory_calcTotalStats(void);
 extern void fn_8015EB2C(void);
 extern void fn_8016D0A0(void);
 extern void fn_80175AEC(void);
@@ -866,7 +866,7 @@ lbl_fn_8036D2D0_00000ACC:
     beq lbl_fn_8036D2D0_00000AE4
     mr r3, r27
     li r4, 0x0
-    bl fn_80155DAC
+    bl inventory_calcTotalStats
 lbl_fn_8036D2D0_00000AE4:
     li r0, 0x0
     stw r0, 0x56d8(r30)

@@ -6,12 +6,12 @@ extern void _restgpr_24(void);
 extern void _savegpr_24(void);
 extern void vec3_set(void);
 extern void vec3_copy(void);
-extern void fn_8000D9E8(void);
+extern void scene_transformPoint(void);
 extern void fn_8000D9F8(void);
 extern void vec3_assign(void);
 extern void fn_80012C88(void);
 extern void vec3_add(void);
-extern void fn_8004B338(void);
+extern void sound_releaseChannel(void);
 extern void item_useConsumable(void);
 extern void fn_8004BF64(void);
 extern void fn_8008B964(void);
@@ -164,7 +164,7 @@ asm void fn_8052C10C(void)
     bl fn_8052AFF4
     li r0, 0x0
     stw r0, 0x10(r1)
-    bl fn_8000D9E8
+    bl scene_transformPoint
     lwz r4, 0x10(r1)
     bl fn_8054A340
     stw r3, 0x14(r1)
@@ -259,7 +259,7 @@ lbl_fn_8052C10C_000001B8:
     cmpwi r30, 0x0
     bne lbl_fn_8052C10C_000002E8
     stw r27, 0x10(r1)
-    bl fn_8000D9E8
+    bl scene_transformPoint
     mr r4, r27
     bl fn_8011F970
     cmpwi r3, 0x0
@@ -1946,7 +1946,7 @@ lbl_fn_8052D46C_000019A8:
     bl fn_80116BD4
     addi r3, r1, 0x1e8
     li r4, -0x1
-    bl fn_8004B338
+    bl sound_releaseChannel
     lwz r0, 0x3f4(r1)
     lwz r31, 0x3ec(r1)
     lwz r30, 0x3e8(r1)

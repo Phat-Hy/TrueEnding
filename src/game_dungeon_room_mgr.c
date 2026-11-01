@@ -9,7 +9,7 @@ extern void _savegpr_27(void);
 extern void atn_Model_findBoneIndex(void);
 extern void motion_updateFogAdj(void);
 extern void battle_canTargetActor(void);
-extern void fn_801F6D7C(void);
+extern void save_verifyBlockCrc(void);
 extern void fn_801F7DF0(void);
 extern void save_findEntryByName(void);
 extern void task_mapIdToQueue(void);
@@ -364,7 +364,7 @@ lbl_fn_803DE89C_000003D4:
     stfs f4, 0x54(r3)
     fsubs f1, f0, f3
     lwz r3, 0x10b4(r7)
-    bl fn_801F6D7C
+    bl save_verifyBlockCrc
     b lbl_fn_803DE89C_000004A0
 lbl_fn_803DE89C_00000440:
     slwi r0, r30, 2
@@ -390,7 +390,7 @@ lbl_fn_803DE89C_00000440:
     stfs f4, 0x54(r3)
     fsubs f1, f0, f3
     lwz r3, 0x10b4(r7)
-    bl fn_801F6D7C
+    bl save_verifyBlockCrc
 lbl_fn_803DE89C_000004A0:
     psq_l f1, 0x10(r29), 0, 0
     addi r4, r1, 0x3c
@@ -489,12 +489,12 @@ lbl_fn_803DE89C_000005E8:
     addi r30, r30, lbl_807506A0@l
     lwz r3, 0x10b4(r31)
     addi r4, r30, 0x10a2
-    bl fn_801F6D7C
+    bl save_verifyBlockCrc
     lwz r3, 0x10b4(r31)
     addi r4, r30, 0x10a2
     lfs f1, 0x34(r1)
     li r5, 0x1
-    bl fn_801F6D7C
+    bl save_verifyBlockCrc
     lwz r30, 0x4(r29)
     mr r3, r29
     bl fn_8059A268

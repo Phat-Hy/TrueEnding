@@ -34,7 +34,7 @@ extern void mem_free(void);
 extern void mem_realloc(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void fn_800D5908(void);
-extern void fn_800DBF68(void);
+extern void env_updateAtmosphere(void);
 extern void wcs_parseInt(void);
 extern void fn_800E19AC(void);
 extern void fn_8020A3E4(void);
@@ -300,7 +300,7 @@ lbl_fn_8046B798_0000027C:
     mr r23, r3
     mr r3, r29
     mr r4, r23
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     lbz r3, 0x14(r1)
     slwi r0, r23, 1
     stb r3, 0x10(r1)

@@ -51,7 +51,7 @@ void fn_800DBCC8(void);
 void fn_800DBD58(void);
 void fn_800DBF5C(void);
 void fn_800DBF64(void);
-void fn_800DBF68(void);
+void env_updateAtmosphere(void);
 
 asm void fn_800DA9A4(void)
 {
@@ -380,7 +380,7 @@ lbl_fn_800DAD6C_00000448:
     addi r3, r27, 0x8
     stw r0, 0xc(r27)
     stw r0, 0x10(r27)
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     lwz r0, 0xc(r29)
     addi r3, r27, 0x8
     lbz r4, 0x1c(r1)
@@ -591,7 +591,7 @@ lbl_fn_800DAD6C_0000075C:
     lwz r4, 0xc(r29)
     stw r0, 0xc(r27)
     stw r0, 0x10(r27)
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     lwz r0, 0xc(r29)
     addi r3, r27, 0x8
     lbz r4, 0x8(r1)
@@ -665,7 +665,7 @@ lbl_fn_800DAD6C_00000874:
     stw r27, 0xc(r30)
     stw r27, 0x10(r30)
     lwz r4, 0xc(r31)
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     lbz r0, 0x10(r1)
     addi r3, r30, 0x8
     stb r0, 0x14(r1)
@@ -1618,7 +1618,7 @@ asm void fn_800DBF5C(void)
 void fn_800DBF64(void) {
 }
 
-asm void fn_800DBF68(void)
+asm void env_updateAtmosphere(void)
 {
     nofralloc
     stwu r1, -0x30(r1)
@@ -1630,7 +1630,7 @@ asm void fn_800DBF68(void)
     stmw r24, 0x10(r1)
     mr r31, r3
     mr r24, r4
-    ble lbl_fn_800DBF68_00001610
+    ble lbl_env_updateAtmosphere_00001610
     lis r4, lbl_807347FC@ha
     lis r3, __files@ha
     addi r4, r4, lbl_807347FC@l
@@ -1640,44 +1640,44 @@ asm void fn_800DBF68(void)
     crclr 6
     bl printf
     bl abort
-lbl_fn_800DBF68_00001610:
+lbl_env_updateAtmosphere_00001610:
     lwz r0, 0x0(r31)
     srwi. r29, r0, 31
-    bne lbl_fn_800DBF68_0000162C
+    bne lbl_env_updateAtmosphere_0000162C
     lbz r0, 0x0(r31)
     li r3, 0x5
     clrlwi r27, r0, 25
-    b lbl_fn_800DBF68_00001634
-lbl_fn_800DBF68_0000162C:
+    b lbl_env_updateAtmosphere_00001634
+lbl_env_updateAtmosphere_0000162C:
     lwz r27, 0x4(r31)
     clrlwi r3, r0, 1
-lbl_fn_800DBF68_00001634:
+lbl_env_updateAtmosphere_00001634:
     cmplw r24, r27
-    bge lbl_fn_800DBF68_00001640
+    bge lbl_env_updateAtmosphere_00001640
     mr r24, r27
-lbl_fn_800DBF68_00001640:
+lbl_env_updateAtmosphere_00001640:
     addi r0, r24, 0x1
     li r30, 0x5
     cmplwi r0, 0x5
-    ble lbl_fn_800DBF68_00001658
+    ble lbl_env_updateAtmosphere_00001658
     addi r0, r24, 0x8
     clrrwi r30, r0, 3
-lbl_fn_800DBF68_00001658:
+lbl_env_updateAtmosphere_00001658:
     cmplw cr1, r30, r3
-    beq cr1, lbl_fn_800DBF68_00001774
+    beq cr1, lbl_env_updateAtmosphere_00001774
     cmplwi r30, 0x5
-    bne lbl_fn_800DBF68_00001678
+    bne lbl_env_updateAtmosphere_00001678
     lwz r25, 0x8(r31)
     addi r26, r31, 0x2
     li r24, 0x0
-    b lbl_fn_800DBF68_00001708
-lbl_fn_800DBF68_00001678:
-    ble cr1, lbl_fn_800DBF68_000016B4
+    b lbl_env_updateAtmosphere_00001708
+lbl_env_updateAtmosphere_00001678:
+    ble cr1, lbl_env_updateAtmosphere_000016B4
     slwi r3, r30, 1
     bl mem_free
     cmpwi r3, 0x0
     mr r26, r3
-    bne lbl_fn_800DBF68_000016F0
+    bne lbl_env_updateAtmosphere_000016F0
     lis r3, __files@ha
     lis r4, lbl_80777BF8@ha
     addi r3, r3, __files@l
@@ -1686,13 +1686,13 @@ lbl_fn_800DBF68_00001678:
     crclr 6
     bl printf
     bl abort
-    b lbl_fn_800DBF68_000016F0
-lbl_fn_800DBF68_000016B4:
+    b lbl_env_updateAtmosphere_000016F0
+lbl_env_updateAtmosphere_000016B4:
     slwi r3, r30, 1
     bl mem_free
     cmpwi r3, 0x0
     mr r26, r3
-    bne lbl_fn_800DBF68_000016E8
+    bne lbl_env_updateAtmosphere_000016E8
     lis r3, __files@ha
     lis r4, lbl_80777BF8@ha
     addi r3, r3, __files@l
@@ -1701,18 +1701,18 @@ lbl_fn_800DBF68_000016B4:
     crclr 6
     bl printf
     bl abort
-lbl_fn_800DBF68_000016E8:
+lbl_env_updateAtmosphere_000016E8:
     cmpwi r26, 0x0
-    beq lbl_fn_800DBF68_00001774
-lbl_fn_800DBF68_000016F0:
+    beq lbl_env_updateAtmosphere_00001774
+lbl_env_updateAtmosphere_000016F0:
     cmpwi r29, 0x0
     li r24, 0x1
-    beq lbl_fn_800DBF68_00001704
+    beq lbl_env_updateAtmosphere_00001704
     lwz r25, 0x8(r31)
-    b lbl_fn_800DBF68_00001708
-lbl_fn_800DBF68_00001704:
+    b lbl_env_updateAtmosphere_00001708
+lbl_env_updateAtmosphere_00001704:
     addi r25, r31, 0x2
-lbl_fn_800DBF68_00001708:
+lbl_env_updateAtmosphere_00001708:
     slwi r3, r27, 1
     extrwi r0, r27, 1, 1
     add r0, r0, r3
@@ -1724,25 +1724,25 @@ lbl_fn_800DBF68_00001708:
     cmpwi r29, 0x0
     li r0, 0x0
     sthx r0, r26, r28
-    beq lbl_fn_800DBF68_00001740
+    beq lbl_env_updateAtmosphere_00001740
     mr r3, r25
     bl dtor_80084684
-lbl_fn_800DBF68_00001740:
+lbl_env_updateAtmosphere_00001740:
     lwz r0, 0x0(r31)
     cmpwi r24, 0x0
     rlwimi r0, r24, 31, 0, 0
     stw r0, 0x0(r31)
-    bne lbl_fn_800DBF68_00001764
+    bne lbl_env_updateAtmosphere_00001764
     lbz r0, 0x0(r31)
     rlwimi r0, r27, 0, 25, 31
     stb r0, 0x0(r31)
-    b lbl_fn_800DBF68_00001774
-lbl_fn_800DBF68_00001764:
+    b lbl_env_updateAtmosphere_00001774
+lbl_env_updateAtmosphere_00001764:
     rlwimi r0, r30, 0, 1, 31
     stw r26, 0x8(r31)
     stw r27, 0x4(r31)
     stw r0, 0x0(r31)
-lbl_fn_800DBF68_00001774:
+lbl_env_updateAtmosphere_00001774:
     lmw r24, 0x10(r1)
     lwz r0, 0x34(r1)
     mtlr r0

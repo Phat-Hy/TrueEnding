@@ -7,7 +7,7 @@ extern void _restgpr_26(void);
 extern void _savegpr_25(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
-extern void fn_8004ECC0(void);
+extern void item_testLineOfSight(void);
 extern void mem_free(void);
 extern void fn_80084A78(void);
 extern void mem_getAllocSize(void);
@@ -1529,7 +1529,7 @@ lbl_fn_80599458_00001404:
     stfs f13, 0x3c(r1)
     stfs f7, 0x40(r1)
     stfs f11, 0x44(r1)
-    bl fn_8004ECC0
+    bl item_testLineOfSight
     cmpwi r3, 0x0
     bne lbl_fn_80599458_0000148C
     li r0, 0x2

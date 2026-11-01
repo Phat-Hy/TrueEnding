@@ -23,7 +23,7 @@ extern void fn_80178078(void);
 extern void actor_getMovementFlags(void);
 extern void world_getGlobalFlag(void);
 extern void fn_803C11A4(void);
-extern void fn_803C1560(void);
+extern void craft_forgeUpgradeWeapon(void);
 extern void chest_spawnLoot(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
@@ -207,7 +207,7 @@ lbl_fn_801B22AC_000000F0:
     lfs f1, lbl_808823CC
     addi r4, r30, 0x528
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     lwz r4, 0x4(r29)
     stw r3, 0xc64(r4)
 lbl_fn_801B22AC_00000154:
@@ -382,7 +382,7 @@ lbl_fn_801B2560_00000354:
     lfs f1, lbl_808823CC
     addi r4, r30, 0x528
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     lwz r4, 0x4(r29)
     stw r3, 0xc64(r4)
 lbl_fn_801B2560_000003B8:
@@ -1924,7 +1924,7 @@ lbl_fn_801B3098_00001920:
     li r6, 0x0
     li r7, 0x0
     li r8, 0x0
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     cmpwi r3, 0x0
     ble lbl_fn_801B3098_00001A78
     mr r5, r3

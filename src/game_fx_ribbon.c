@@ -40,7 +40,7 @@ extern void fn_802921F8(void);
 extern void fn_80292C9C(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
-extern void fn_803C1560(void);
+extern void craft_forgeUpgradeWeapon(void);
 extern void fn_803CD958(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
@@ -586,7 +586,7 @@ lbl_fn_8028AFD8_000006AC:
     li r6, 0x0
     li r7, 0x2
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     lwz r4, lbl_8087F430
     mr r25, r3
     mr r3, r28
@@ -600,7 +600,7 @@ lbl_fn_8028AFD8_000006AC:
     li r6, 0x0
     li r7, 0x2
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     lwz r5, lbl_8087F430
     mr r24, r3
     lwz r31, 0x1504(r28)
@@ -660,7 +660,7 @@ lbl_fn_8028AFD8_000007CC:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     lwz r4, lbl_8087F430
     mr r24, r3
     mr r3, r28
@@ -674,7 +674,7 @@ lbl_fn_8028AFD8_000007CC:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     lwz r5, lbl_8087F430
     mr r25, r3
     lwz r31, 0x1504(r28)
@@ -834,7 +834,7 @@ lbl_fn_8028AFD8_00000A68:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     lwz r5, lbl_8087F430
     subi r0, r3, 0x1
     lis r4, 0xff00
@@ -1129,7 +1129,7 @@ asm void fn_8028B75C(void)
     li r6, 0x0
     li r7, 0x1
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     subi r0, r3, 0x1
     lwz r3, 0x9c(r30)
     mulli r0, r0, 0x30
@@ -1459,7 +1459,7 @@ lbl_fn_8028B75C_000012F8:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     subi r0, r3, 0x1
     lwz r3, 0x9c(r30)
     mulli r0, r0, 0x30
@@ -1743,7 +1743,7 @@ lbl_fn_8028BFE0_00001784:
     li r6, 0x0
     li r7, 0x2
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     lwz r0, 0x150c(r31)
     cmpw r0, r3
     bne lbl_fn_8028BFE0_00001B10
@@ -1795,7 +1795,7 @@ lbl_fn_8028BFE0_0000180C:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     subi r0, r3, 0x1
     lwz r3, 0x9c(r29)
     mulli r0, r0, 0x30
@@ -2166,7 +2166,7 @@ lbl_fn_8028BFE0_00001DB0:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     subi r0, r3, 0x1
     lwz r3, 0x9c(r29)
     mulli r0, r0, 0x30

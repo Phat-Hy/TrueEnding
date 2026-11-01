@@ -7,7 +7,7 @@ extern void _savegpr_22(void);
 extern void dtor_80084684(void);
 extern void fn_8016F824(void);
 extern void fn_8016FDCC(void);
-extern void fn_8017039C(void);
+extern void battle_resolveAggroHierarchy(void);
 extern void fn_805B3124(void);
 extern void fn_805B325C(void);
 extern void fn_805B33BC(void);
@@ -610,7 +610,7 @@ lbl_fn_805AF618_00000828:
     lwz r3, 0x10(r23)
     li r5, 0x0
     lwz r4, 0x10(r25)
-    bl fn_8017039C
+    bl battle_resolveAggroHierarchy
 lbl_fn_805AF618_00000840:
     lwz r3, 0x4(r23)
     cmpwi r3, 0x0
@@ -1450,7 +1450,7 @@ lbl_fn_805B01C4_000013D4:
     lwz r3, 0x10(r23)
     li r5, 0x0
     lwz r4, 0x10(r25)
-    bl fn_8017039C
+    bl battle_resolveAggroHierarchy
 lbl_fn_805B01C4_000013EC:
     lwz r3, 0x4(r23)
     cmpwi r3, 0x0
@@ -2290,7 +2290,7 @@ lbl_fn_805B0D70_00001F80:
     lwz r3, 0x10(r23)
     li r5, 0x0
     lwz r4, 0x10(r25)
-    bl fn_8017039C
+    bl battle_resolveAggroHierarchy
 lbl_fn_805B0D70_00001F98:
     lwz r3, 0x4(r23)
     cmpwi r3, 0x0

@@ -17,7 +17,7 @@ extern void fn_80057A68(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
-extern void fn_8006AFF8(void);
+extern void boss_initActionStream(void);
 extern void node_destroy(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -29,7 +29,7 @@ extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void equip_getGlobalManager(void);
 extern void fn_8012F034(void);
-extern void fn_8013322C(void);
+extern void actor_testBitFlag(void);
 extern void fn_80133B30(void);
 extern void boss_updatePhaseState(void);
 extern void fn_8013C504(void);
@@ -70,7 +70,7 @@ extern void entity_Instance_destructor(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
 extern void kpad_getClampData(void);
-extern void fn_803C1560(void);
+extern void craft_forgeUpgradeWeapon(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
@@ -674,7 +674,7 @@ lbl_fn_80293738_0000075C:
     addi r3, r1, 0x20
     addi r4, r1, 0x38
     addi r5, r1, 0x2c
-    bl fn_8006AFF8
+    bl boss_initActionStream
     lwz r0, 0x20(r1)
     addi r3, r29, 0x1660
     srwi. r0, r0, 31
@@ -1605,7 +1605,7 @@ asm void fn_802946BC(void)
     bl atn_Anim_setLayerAnimation
     addi r3, r31, 0x7d4
     li r4, 0x20
-    bl fn_8013322C
+    bl actor_testBitFlag
     lfs f0, lbl_80883BF0
     stfs f0, 0x7d8(r31)
     b lbl_fn_802946BC_000015C8
@@ -1956,7 +1956,7 @@ lbl_fn_802946BC_0000197C:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     subi r0, r3, 0x1
     lwz r3, 0x153c(r31)
     mulli r0, r0, 0x30

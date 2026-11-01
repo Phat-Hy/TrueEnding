@@ -447,10 +447,7 @@ asm void gdev_cc_initinterrupts(void)
     blr
 }
 
-asm void fn_80675190(void)
-{
-    nofralloc
-    blr
+void fn_80675190(void) {
 }
 
 asm void fn_80675194(void)

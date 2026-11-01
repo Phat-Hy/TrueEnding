@@ -22,7 +22,7 @@ extern void fn_80153698(void);
 extern void fn_8015E7A0(void);
 extern void fn_8016F824(void);
 extern void fn_8016FDCC(void);
-extern void fn_8017039C(void);
+extern void battle_resolveAggroHierarchy(void);
 extern void fn_80171420(void);
 extern void fn_80183618(void);
 extern void fn_80183774(void);
@@ -1557,7 +1557,7 @@ lbl_fn_803BA620_000013E8:
     lwz r4, 0x28(r30)
     mr r3, r29
     lhz r5, 0x26(r30)
-    bl fn_8017039C
+    bl battle_resolveAggroHierarchy
     b lbl_fn_803BA620_00001430
 lbl_fn_803BA620_000013FC:
     lwz r3, lbl_8087F8A0

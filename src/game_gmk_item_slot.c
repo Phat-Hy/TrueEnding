@@ -27,7 +27,7 @@ extern void mem_alloc(void);
 extern void fn_800928B0(void);
 extern void fn_800A4228(void);
 extern void msg_getMessageById(void);
-extern void fn_800BDB58(void);
+extern void model_updateBoneTransforms(void);
 extern void fn_800CF7DC(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void atn_LH_Texture_destructAndFree(void);
@@ -729,7 +729,7 @@ lbl_fn_8044073C_000007DC:
     mr r4, r31
     lfs f1, lbl_80886A20
     li r5, 0x13
-    bl fn_800BDB58
+    bl model_updateBoneTransforms
 lbl_fn_8044073C_000007F0:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)

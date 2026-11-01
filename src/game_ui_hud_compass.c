@@ -13,7 +13,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void inventory_unequipItem(void);
-extern void fn_80155DAC(void);
+extern void inventory_calcTotalStats(void);
 extern void fn_80178018(void);
 extern void fn_80178078(void);
 extern void fn_8017AC3C(void);
@@ -136,7 +136,7 @@ asm void fn_801C5A04(void)
     stw r0, 0x560(r4)
     li r4, 0x0
     lwz r3, 0x4(r3)
-    bl fn_80155DAC
+    bl inventory_calcTotalStats
     lwz r3, 0x4(r31)
     lwz r0, 0x12a4(r3)
     srwi. r0, r0, 31
@@ -688,7 +688,7 @@ asm void fn_801C61EC(void)
     stw r0, 0x560(r4)
     li r4, 0x0
     lwz r3, 0x4(r3)
-    bl fn_80155DAC
+    bl inventory_calcTotalStats
     lwz r3, 0x4(r30)
     lwz r0, 0x12a4(r3)
     srwi. r0, r0, 31

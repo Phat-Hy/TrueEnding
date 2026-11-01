@@ -7,9 +7,9 @@ extern void _savegpr_22(void);
 extern void dtor_80084684(void);
 extern void fn_8004B20C(void);
 extern void fn_8004B290(void);
-extern void fn_8004B338(void);
+extern void sound_releaseChannel(void);
 extern void boss_recordDamage(void);
-extern void fn_8007708C(void);
+extern void chapter_updateProgression(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void fn_80084A78(void);
@@ -996,7 +996,7 @@ lbl_fn_80376568_00000AB8:
     subi r0, r4, 0xe4f
     mr r4, r3
     clrlwi r5, r0, 16
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_80376568_00000B04
     li r30, 0x1
@@ -1512,7 +1512,7 @@ asm void fn_80376D40(void)
     stw r0, lbl_8087F440
     li r4, -0x1
     addi r3, r3, 0x94
-    bl fn_8004B338
+    bl sound_releaseChannel
     addic. r31, r29, 0x54
     beq lbl_fn_80376D40_00001224
     mr r3, r31

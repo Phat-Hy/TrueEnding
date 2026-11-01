@@ -15,7 +15,7 @@ extern void collision_queryGeometry(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
-extern void fn_8006AFF8(void);
+extern void boss_initActionStream(void);
 extern void mem_free(void);
 extern void route_createSegment(void);
 extern void node_createNamedChild(void);
@@ -39,13 +39,13 @@ extern void quest_evaluateConditions(void);
 extern void quest_updateFlow(void);
 extern void dialog_updateScriptState(void);
 extern void inventory_unequipItem(void);
-extern void fn_80155DAC(void);
+extern void inventory_calcTotalStats(void);
 extern void fn_80158BB4(void);
 extern void fn_80164DCC(void);
 extern void fn_8016C1E0(void);
 extern void actor_setState(void);
-extern void fn_8017039C(void);
-extern void fn_80170A20(void);
+extern void battle_resolveAggroHierarchy(void);
+extern void battle_updateTargetAggro(void);
 extern void fn_801750FC(void);
 extern void fn_80176548(void);
 extern void actor_getMovementFlags(void);
@@ -864,7 +864,7 @@ lbl_fn_802F1240_00000950:
     beq lbl_fn_802F1240_00000968
     mr r3, r31
     li r4, 0x0
-    bl fn_80155DAC
+    bl inventory_calcTotalStats
 lbl_fn_802F1240_00000968:
     lwz r0, 0x139c(r31)
     cmpwi r0, 0x0
@@ -1218,7 +1218,7 @@ lbl_fn_802F1524_00000E70:
     addi r3, r1, 0x20
     addi r4, r1, 0x38
     addi r5, r1, 0x2c
-    bl fn_8006AFF8
+    bl boss_initActionStream
     lwz r0, 0x20(r1)
     addi r3, r30, 0x15c4
     srwi. r0, r0, 31
@@ -2197,7 +2197,7 @@ lbl_fn_802F2294_00001C54:
     lwz r5, 0x15a8(r31)
     mr r3, r31
     li r4, 0x259
-    bl fn_8017039C
+    bl battle_resolveAggroHierarchy
 lbl_fn_802F2294_00001C80:
     mr r3, r31
     bl fn_802F33A0
@@ -2338,7 +2338,7 @@ lbl_fn_802F2294_00001E60:
     mr r3, r31
     lfs f1, lbl_80884904
     lwz r5, 0x15a8(r31)
-    bl fn_80170A20
+    bl battle_updateTargetAggro
 lbl_fn_802F2294_00001E8C:
     mr r3, r31
     bl fn_802F33A0

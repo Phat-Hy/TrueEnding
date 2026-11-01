@@ -6,7 +6,7 @@ extern void __files(void);
 extern void _restgpr_24(void);
 extern void _savegpr_24(void);
 extern void dtor_80084684(void);
-extern void fn_8004ECC0(void);
+extern void item_testLineOfSight(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void map_debugLog(void);
@@ -652,7 +652,7 @@ lbl_fn_801BC97C_00000744:
     li r4, 0x0
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ECC0
+    bl item_testLineOfSight
     cmpwi r3, 0x0
     beq lbl_fn_801BC97C_00000AD4
     lfs f3, lbl_808825E4
@@ -735,7 +735,7 @@ lbl_fn_801BC97C_00000744:
     stfs f4, 0x1a8(r1)
     li r9, 0x0
     stfs f0, 0x1ac(r1)
-    bl fn_8004ECC0
+    bl item_testLineOfSight
     cmpwi r3, 0x0
     beq lbl_fn_801BC97C_00000A94
     lfs f4, 0x194(r1)
@@ -807,7 +807,7 @@ lbl_fn_801BC97C_00000744:
     stfs f4, 0x1a8(r1)
     li r9, 0x0
     stfs f0, 0x1ac(r1)
-    bl fn_8004ECC0
+    bl item_testLineOfSight
     cmpwi r3, 0x0
     beq lbl_fn_801BC97C_00000A50
     li r26, 0x0

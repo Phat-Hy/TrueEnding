@@ -16,7 +16,7 @@ extern void fn_800133B0(void);
 extern void vec3_add(void);
 extern void skill_calculateDamage(void);
 extern void fn_80063764(void);
-extern void fn_8007708C(void);
+extern void chapter_updateProgression(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
@@ -35,7 +35,7 @@ extern void fn_800F8524(void);
 extern void fn_801162A0(void);
 extern void skill_findNodeById(void);
 extern void equip_getGlobalManager(void);
-extern void fn_8013322C(void);
+extern void actor_testBitFlag(void);
 extern void boss_updatePhaseState(void);
 extern void fn_8013C504(void);
 extern void quest_updateFlow(void);
@@ -290,7 +290,7 @@ lbl_fn_8030A848_00000248:
     stfs f0, 0x504(r30)
     stfs f0, 0x508(r30)
     stw r0, 0x14b4(r30)
-    bl fn_8013322C
+    bl actor_testBitFlag
     lbz r0, 0x150d(r30)
     cmpwi r0, 0x0
     beq lbl_fn_8030A848_000002D0
@@ -496,7 +496,7 @@ lbl_fn_8030A848_00000538:
     beq lbl_fn_8030A848_00000570
     addi r4, r3, 0x34
     li r5, 0x4b
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_8030A848_00000570
     li r31, 0x1
@@ -514,7 +514,7 @@ lbl_fn_8030A848_00000584:
     beq lbl_fn_8030A848_000005B0
     addi r4, r3, 0x34
     li r5, 0x4c
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_8030A848_000005B0
     li r31, 0x1
@@ -684,7 +684,7 @@ lbl_fn_8030A848_000007FC:
     beq lbl_fn_8030A848_00000828
     addi r4, r3, 0x34
     li r5, 0x4d
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_8030A848_00000828
     li r30, 0x1

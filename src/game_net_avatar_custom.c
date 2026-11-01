@@ -11,7 +11,7 @@ extern void _savegpr_23(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8000D9E8(void);
+extern void scene_transformPoint(void);
 extern void actor_dispatchMessage(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
@@ -1790,7 +1790,7 @@ asm void fn_8052793C(void)
     addi r11, r1, 0x160
     bl _savegpr_19
     mr r31, r3
-    bl fn_8000D9E8
+    bl scene_transformPoint
     li r4, 0x0
     bl fn_8054A340
     cmpwi r3, 0x0
@@ -1827,7 +1827,7 @@ lbl_fn_8052793C_00001750:
     beq lbl_fn_8052793C_00002030
     cmpwi r3, 0x0
     beq lbl_fn_8052793C_00002030
-    bl fn_8000D9E8
+    bl scene_transformPoint
     lwz r4, 0x4(r23)
     bl fn_8054A340
     cmpwi r3, 0x0

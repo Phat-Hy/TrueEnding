@@ -13,7 +13,7 @@ extern void wcs_vformat(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void fn_80109828(void);
-extern void fn_8013322C(void);
+extern void actor_testBitFlag(void);
 extern void fn_801426A4(void);
 extern void fn_801595BC(void);
 extern void fn_8015AC48(void);
@@ -1968,7 +1968,7 @@ lbl_fn_802A8BBC_00001AD8:
     bne lbl_fn_802A8BBC_00001B04
     addi r3, r31, 0x7d4
     li r4, 0x80
-    bl fn_8013322C
+    bl actor_testBitFlag
     mr r3, r31
     bl fn_80166A54
 lbl_fn_802A8BBC_00001B04:

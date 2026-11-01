@@ -13,7 +13,7 @@ extern void fn_8004829C(void);
 extern void fn_8004B290(void);
 extern void fn_8005C220(void);
 extern void fn_8006A250(void);
-extern void fn_8007708C(void);
+extern void chapter_updateProgression(void);
 extern void dungeon_initGlobalContext(void);
 extern void town_synchronizedDispatch(void);
 extern void mem_alloc(void);
@@ -46,10 +46,10 @@ extern void fn_80107F20(void);
 extern void fn_80107FC8(void);
 extern void fn_8013310C(void);
 extern void fn_80133130(void);
-extern void fn_8013322C(void);
+extern void actor_testBitFlag(void);
 extern void dialog_selectChoice(void);
 extern void fn_8014EEC4(void);
-extern void fn_80155DAC(void);
+extern void inventory_calcTotalStats(void);
 extern void fn_80160324(void);
 extern void actor_setState(void);
 extern void fn_8017C7F8(void);
@@ -772,7 +772,7 @@ lbl_fn_804CF640_00000798:
     stw r5, 0x12a4(r31)
     cntlzw r0, r0
     srwi r4, r0, 5
-    bl fn_80155DAC
+    bl inventory_calcTotalStats
     lbz r7, 0x12(r30)
     lwz r5, 0x12a4(r31)
     extrwi r3, r7, 1, 26
@@ -857,7 +857,7 @@ lbl_fn_804CF640_00000904:
     bne lbl_fn_804CF640_00000940
     addi r3, r31, 0x7d4
     lis r4, 0x8
-    bl fn_8013322C
+    bl actor_testBitFlag
     lwz r3, lbl_8087F048
     cmpwi r3, 0x0
     beq lbl_fn_804CF640_00000940
@@ -902,7 +902,7 @@ lbl_fn_804CF640_000009B4:
     bne lbl_fn_804CF640_000009EC
     addi r3, r31, 0x7d4
     li r4, 0x4
-    bl fn_8013322C
+    bl actor_testBitFlag
     lwz r3, lbl_8087F048
     cmpwi r3, 0x0
     beq lbl_fn_804CF640_000009EC
@@ -949,7 +949,7 @@ lbl_fn_804CF640_00000A64:
     bne lbl_fn_804CF640_00000AA0
     addi r3, r31, 0x7d4
     lis r4, 0x200
-    bl fn_8013322C
+    bl actor_testBitFlag
     lwz r3, lbl_8087F048
     cmpwi r3, 0x0
     beq lbl_fn_804CF640_00000AA0
@@ -990,7 +990,7 @@ lbl_fn_804CF640_00000B00:
     bne lbl_fn_804CF640_00000B3C
     addi r3, r31, 0x7d4
     lis r4, 0x40
-    bl fn_8013322C
+    bl actor_testBitFlag
     lwz r3, lbl_8087F048
     cmpwi r3, 0x0
     beq lbl_fn_804CF640_00000B3C
@@ -1029,7 +1029,7 @@ lbl_fn_804CF640_00000B98:
     bne lbl_fn_804CF640_00000BD0
     addi r3, r31, 0x7d4
     li r4, 0x1
-    bl fn_8013322C
+    bl actor_testBitFlag
     lwz r3, lbl_8087F048
     cmpwi r3, 0x0
     beq lbl_fn_804CF640_00000BD0
@@ -1076,7 +1076,7 @@ lbl_fn_804CF640_00000C48:
     lis r4, 0x1
     addi r3, r31, 0x7d4
     addi r4, r4, -0x8000
-    bl fn_8013322C
+    bl actor_testBitFlag
     lwz r3, lbl_8087F048
     cmpwi r3, 0x0
     beq lbl_fn_804CF640_00000C90
@@ -1119,7 +1119,7 @@ lbl_fn_804CF640_00000CF0:
     bne lbl_fn_804CF640_00000D3C
     addi r3, r31, 0x7d4
     li r4, 0x80
-    bl fn_8013322C
+    bl actor_testBitFlag
     lwz r3, lbl_8087F048
     cmpwi r3, 0x0
     beq lbl_fn_804CF640_00000D3C
@@ -1468,7 +1468,7 @@ asm void fn_804D00DC(void)
     cmpwi r0, 0x0
     beq lbl_fn_804D00DC_000011A4
     mr r3, r4
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_804D00DC_000011A4
     li r31, 0x1

@@ -13,7 +13,7 @@ extern void gx_drawScreenQuad(void);
 extern void fn_80075DEC(void);
 extern void fn_80075F58(void);
 extern void fn_800763FC(void);
-extern void fn_800BDB58(void);
+extern void model_updateBoneTransforms(void);
 extern void fn_800BFB70(void);
 extern void fn_800C0FBC(void);
 extern void atn_LH_Texture_destructAndFree(void);
@@ -37,7 +37,7 @@ extern void GXDrawDone(void);
 extern void fn_80617200(void);
 extern void GXInitTexObjDefault(void);
 extern void GXSetTevColorIn(void);
-extern void fn_80617420(void);
+extern void GXSetTevColorOp(void);
 extern void GXSetTevIndirect(void);
 extern void fn_806174C0(void);
 extern void fn_806175F0(void);
@@ -378,7 +378,7 @@ asm void fn_800D7254(void)
     mr r4, r3
     stw r0, 0x4(r3)
     lwz r3, lbl_8087EFB4
-    b fn_800BDB58
+    b model_updateBoneTransforms
 }
 
 asm void tex_bakeCharacterTexture(void)
@@ -909,7 +909,7 @@ asm void fn_800D775C(void)
     li r5, 0x6
     li r6, 0x4
     li r7, 0x7
-    bl fn_80617420
+    bl GXSetTevColorOp
     li r3, 0x1
     li r4, 0x2
     li r5, 0x2
@@ -952,7 +952,7 @@ asm void fn_800D775C(void)
     li r5, 0x6
     li r6, 0x4
     li r7, 0x0
-    bl fn_80617420
+    bl GXSetTevColorOp
     li r3, 0x2
     li r4, 0x3
     li r5, 0x3
@@ -995,7 +995,7 @@ asm void fn_800D775C(void)
     li r5, 0x6
     li r6, 0x4
     li r7, 0x0
-    bl fn_80617420
+    bl GXSetTevColorOp
     li r3, 0x3
     li r4, 0x0
     li r5, 0x0
@@ -1030,7 +1030,7 @@ asm void fn_800D775C(void)
     li r5, 0x7
     li r6, 0x7
     li r7, 0x0
-    bl fn_80617420
+    bl GXSetTevColorOp
     li r3, 0x3
     bl GXInitTexObjDefault
     li r3, 0x4
@@ -1070,7 +1070,7 @@ asm void fn_800D775C(void)
     li r5, 0x7
     li r6, 0x7
     li r7, 0x0
-    bl fn_80617420
+    bl GXSetTevColorOp
     li r3, 0x4
     bl GXInitTexObjDefault
     li r3, 0x0
@@ -1197,7 +1197,7 @@ asm void fn_800D7D00(void)
     li r5, 0x4
     li r6, 0x6
     li r7, 0x7
-    bl fn_80617420
+    bl GXSetTevColorOp
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -1318,7 +1318,7 @@ asm void fn_800D7F18(void)
     li r5, 0x4
     li r6, 0x6
     li r7, 0x7
-    bl fn_80617420
+    bl GXSetTevColorOp
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0

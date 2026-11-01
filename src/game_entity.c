@@ -84,11 +84,11 @@ extern void atn_Model_findBoneIndex(void);
 extern void fn_80161570(void);
 extern void fn_80161880(void);
 extern void fn_80176428(void);
-extern void fn_802180A8(void);
+extern void task_lookupTagIndex(void);
 extern void task_findEntryById(void);
 extern void fn_8021A984(void);
 extern void world_getGlobalFlag(void);
-extern void fn_803C1560(void);
+extern void craft_forgeUpgradeWeapon(void);
 extern void fn_80599C94(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
@@ -226,7 +226,7 @@ lbl_fn_8001B508_000000AC:
     add r31, r3, r0
 lbl_fn_8001B508_000000B8:
     mr r3, r30
-    bl fn_802180A8
+    bl task_lookupTagIndex
     mr r4, r3
     lwz r3, lbl_8087EE60
     mr r5, r31
@@ -234,7 +234,7 @@ lbl_fn_8001B508_000000B8:
     bl fn_80161880
     b lbl_fn_8001B508_000000F8
 lbl_fn_8001B508_000000D8:
-    bl fn_802180A8
+    bl task_lookupTagIndex
     lfs f1, lbl_8088076C
     mr r4, r3
     lwz r3, lbl_8087EE60
@@ -263,7 +263,7 @@ asm void fn_8001B5B4(void)
     li r5, 0x0
     li r7, 0x0
     li r8, 0x1
-    b fn_803C1560
+    b craft_forgeUpgradeWeapon
 }
 
 asm void fn_8001B5DC(void)

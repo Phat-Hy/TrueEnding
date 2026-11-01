@@ -5,10 +5,10 @@
 extern void __register_global_object(void);
 extern void _restgpr_26(void);
 extern void _savegpr_26(void);
-extern void fn_8000D430(void);
+extern void scene_traverseNode(void);
 extern void ui_destroyWidget(void);
 extern void fn_8004B290(void);
-extern void fn_8004B338(void);
+extern void sound_releaseChannel(void);
 extern void item_useConsumable(void);
 extern void collision_queryGeometry(void);
 extern void fn_8007A7BC(void);
@@ -953,10 +953,10 @@ lbl_fn_80144F4C_00000BE8:
     blt lbl_fn_80144F4C_00000BD0
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_8004B338
+    bl sound_releaseChannel
     addi r3, r1, 0x204
     li r4, -0x1
-    bl fn_8004B338
+    bl sound_releaseChannel
     lwz r0, 0x454(r1)
     psq_l f31, 0x448(r1), 0, 0
     lfd f31, 0x440(r1)
@@ -3043,7 +3043,7 @@ lbl_quest_updateFlow_00002A20:
     stw r0, 0x27c(r1)
     addi r3, r26, 0xb0
     addi r4, r1, 0x27c
-    bl fn_8000D430
+    bl scene_traverseNode
     addic. r3, r1, 0x27c
     beq lbl_quest_updateFlow_00002A70
     lwz r4, 0x27c(r1)

@@ -5,8 +5,8 @@
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void fn_80017064(void);
-extern void fn_80044E0C(void);
-extern void fn_8004ECC0(void);
+extern void menu_renderLayout(void);
+extern void item_testLineOfSight(void);
 extern void boss_recordDamage(void);
 extern void fn_801059F8(void);
 extern void fn_80105B3C(void);
@@ -66,8 +66,8 @@ void fn_8016F634(void);
 void fn_8016F67C(void);
 void fn_8016F824(void);
 void fn_8016FDCC(void);
-void fn_8017039C(void);
-void fn_80170A20(void);
+void battle_resolveAggroHierarchy(void);
+void battle_updateTargetAggro(void);
 
 asm void fn_8016F368(void)
 {
@@ -383,7 +383,7 @@ asm void fn_8016F67C(void)
     stfs f5, 0x1c(r1)
     stfs f3, 0x24(r1)
     stfs f0, 0x18(r1)
-    bl fn_8004ECC0
+    bl item_testLineOfSight
     cmpwi r3, 0x0
     beq lbl_fn_8016F67C_000004A0
     psq_l f1, 0x528(r30), 0, 0
@@ -420,7 +420,7 @@ asm void fn_8016F67C(void)
     stfs f2, 0x1c(r1)
     stfs f3, 0x24(r1)
     stfs f0, 0x18(r1)
-    bl fn_8004ECC0
+    bl item_testLineOfSight
     cmpwi r3, 0x0
     bne lbl_fn_8016F67C_000004A0
     li r3, 0x1
@@ -539,13 +539,13 @@ lbl_fn_8016F824_00000608:
     cmpwi r3, 0x0
     beq lbl_fn_8016F824_00000638
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_fn_8016F824_00000638:
     lwz r3, 0x64c(r30)
     cmpwi r3, 0x0
     beq lbl_fn_8016F824_0000064C
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_fn_8016F824_0000064C:
     li r0, 0x0
     li r3, -0x1
@@ -949,13 +949,13 @@ lbl_fn_8016FDCC_00000BD8:
     cmpwi r3, 0x0
     beq lbl_fn_8016FDCC_00000C08
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_fn_8016FDCC_00000C08:
     lwz r3, 0x64c(r30)
     cmpwi r3, 0x0
     beq lbl_fn_8016FDCC_00000C1C
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_fn_8016FDCC_00000C1C:
     li r0, 0x0
     li r3, -0x1
@@ -1245,7 +1245,7 @@ lbl_fn_8016FDCC_00001014:
     blr
 }
 
-asm void fn_8017039C(void)
+asm void battle_resolveAggroHierarchy(void)
 {
     nofralloc
     stwu r1, -0x270(r1)
@@ -1258,25 +1258,25 @@ asm void fn_8017039C(void)
     mr r31, r4
     mr r6, r5
     cmpwi r27, 0x0
-    beq lbl_fn_8017039C_0000114C
+    beq lbl_battle_resolveAggroHierarchy_0000114C
     lwz r3, 0x13fc(r27)
     cmpwi r3, 0x0
-    beq lbl_fn_8017039C_00001074
-    bl fn_8017039C
-    b lbl_fn_8017039C_000016A0
-lbl_fn_8017039C_00001074:
+    beq lbl_battle_resolveAggroHierarchy_00001074
+    bl battle_resolveAggroHierarchy
+    b lbl_battle_resolveAggroHierarchy_000016A0
+lbl_battle_resolveAggroHierarchy_00001074:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
-    beq lbl_fn_8017039C_00001088
+    beq lbl_battle_resolveAggroHierarchy_00001088
     lwz r0, 0x10d8(r3)
-    b lbl_fn_8017039C_0000108C
-lbl_fn_8017039C_00001088:
+    b lbl_battle_resolveAggroHierarchy_0000108C
+lbl_battle_resolveAggroHierarchy_00001088:
     li r0, 0x0
-lbl_fn_8017039C_0000108C:
+lbl_battle_resolveAggroHierarchy_0000108C:
     cmpwi r0, 0x0
-    beq lbl_fn_8017039C_000016A0
+    beq lbl_battle_resolveAggroHierarchy_000016A0
     cmpwi r4, 0x0
-    ble lbl_fn_8017039C_000010C8
+    ble lbl_battle_resolveAggroHierarchy_000010C8
     mr r4, r31
     addi r3, r27, 0x1030
     addi r5, r27, 0x528
@@ -1284,14 +1284,14 @@ lbl_fn_8017039C_0000108C:
     addi r3, r27, 0x1030
     bl fn_801255C8
     cmpwi r3, 0x0
-    beq lbl_fn_8017039C_000010C8
+    beq lbl_battle_resolveAggroHierarchy_000010C8
     mr r3, r27
     bl fn_801718F8
-    b lbl_fn_8017039C_000016A0
-lbl_fn_8017039C_000010C8:
+    b lbl_battle_resolveAggroHierarchy_000016A0
+lbl_battle_resolveAggroHierarchy_000010C8:
     lwz r0, lbl_8087EEB8
     cmpwi r0, 0x0
-    beq lbl_fn_8017039C_000016A0
+    beq lbl_battle_resolveAggroHierarchy_000016A0
     lis r3, 0x51ec
     lwz r8, 0x50(r27)
     subi r0, r3, 0x7ae1
@@ -1321,20 +1321,20 @@ lbl_fn_8017039C_000010C8:
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x40
     bl boss_recordDamage
-    b lbl_fn_8017039C_000016A0
-lbl_fn_8017039C_0000114C:
+    b lbl_battle_resolveAggroHierarchy_000016A0
+lbl_battle_resolveAggroHierarchy_0000114C:
     lwz r5, lbl_8087F430
     cmpwi r5, 0x0
-    beq lbl_fn_8017039C_00001160
+    beq lbl_battle_resolveAggroHierarchy_00001160
     lwz r0, 0x10d8(r5)
-    b lbl_fn_8017039C_00001164
-lbl_fn_8017039C_00001160:
+    b lbl_battle_resolveAggroHierarchy_00001164
+lbl_battle_resolveAggroHierarchy_00001160:
     li r0, 0x0
-lbl_fn_8017039C_00001164:
+lbl_battle_resolveAggroHierarchy_00001164:
     cmpwi r0, 0x0
-    beq lbl_fn_8017039C_000016A0
+    beq lbl_battle_resolveAggroHierarchy_000016A0
     cmpwi r4, 0x0
-    ble lbl_fn_8017039C_00001620
+    ble lbl_battle_resolveAggroHierarchy_00001620
     addi r5, r3, 0x528
     mr r4, r31
     addi r3, r3, 0x1030
@@ -1342,26 +1342,26 @@ lbl_fn_8017039C_00001164:
     addi r3, r30, 0x1030
     bl fn_801255C8
     cmpwi r3, 0x0
-    beq lbl_fn_8017039C_00001620
+    beq lbl_battle_resolveAggroHierarchy_00001620
     addi r3, r30, 0xc58
     li r4, 0x0
     bl fn_8011BEB8
     lwz r0, 0x12a4(r30)
     srwi. r0, r0, 31
-    beq lbl_fn_8017039C_000012E8
+    beq lbl_battle_resolveAggroHierarchy_000012E8
     lwz r0, 0x12a4(r30)
     clrlwi r0, r0, 2
     stw r0, 0x12a4(r30)
     lwz r3, lbl_8087F430
     lwz r4, 0x10d8(r3)
     cmpwi r4, 0x0
-    beq lbl_fn_8017039C_00001210
+    beq lbl_battle_resolveAggroHierarchy_00001210
     lwz r3, 0xc38(r30)
     cmpwi r3, 0x0
-    ble lbl_fn_8017039C_00001210
+    ble lbl_battle_resolveAggroHierarchy_00001210
     lwz r0, 0xc3c(r30)
     cmpwi r0, 0x0
-    ble lbl_fn_8017039C_00001210
+    ble lbl_battle_resolveAggroHierarchy_00001210
     subi r0, r3, 0x1
     lwz r3, 0xb0(r4)
     slwi r0, r0, 6
@@ -1374,50 +1374,50 @@ lbl_fn_8017039C_00001164:
     slwi r0, r0, 6
     add r3, r4, r0
     stw r5, 0x3c(r3)
-lbl_fn_8017039C_00001210:
+lbl_battle_resolveAggroHierarchy_00001210:
     lwz r4, 0x48(r30)
     cmpwi r4, 0x0
-    bne lbl_fn_8017039C_00001244
+    bne lbl_battle_resolveAggroHierarchy_00001244
     lwz r3, lbl_8087F0A8
     lwz r0, 0x278(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_8017039C_00001244
+    beq lbl_battle_resolveAggroHierarchy_00001244
     lwz r3, 0x5c(r30)
     lwz r0, 0x11c(r3)
     cmpwi r0, 0x1
-    bne lbl_fn_8017039C_00001244
+    bne lbl_battle_resolveAggroHierarchy_00001244
     li r0, 0x1
-    b lbl_fn_8017039C_00001264
-lbl_fn_8017039C_00001244:
+    b lbl_battle_resolveAggroHierarchy_00001264
+lbl_battle_resolveAggroHierarchy_00001244:
     cmpwi r4, 0x0
-    bne lbl_fn_8017039C_00001260
+    bne lbl_battle_resolveAggroHierarchy_00001260
     lwz r0, 0x12a8(r30)
     extrwi. r0, r0, 1, 14
-    beq lbl_fn_8017039C_00001260
+    beq lbl_battle_resolveAggroHierarchy_00001260
     li r0, 0x1
-    b lbl_fn_8017039C_00001264
-lbl_fn_8017039C_00001260:
+    b lbl_battle_resolveAggroHierarchy_00001264
+lbl_battle_resolveAggroHierarchy_00001260:
     li r0, 0x0
-lbl_fn_8017039C_00001264:
+lbl_battle_resolveAggroHierarchy_00001264:
     cmpwi r0, 0x0
-    beq lbl_fn_8017039C_000012E8
+    beq lbl_battle_resolveAggroHierarchy_000012E8
     lwz r3, lbl_8087F430
     li r4, 0x25
     bl world_getGlobalFlag
     cmpwi r3, 0x1
-    blt lbl_fn_8017039C_000012C8
+    blt lbl_battle_resolveAggroHierarchy_000012C8
     lwz r3, 0x648(r30)
     cmpwi r3, 0x0
-    beq lbl_fn_8017039C_00001294
+    beq lbl_battle_resolveAggroHierarchy_00001294
     li r4, 0x1
-    bl fn_80044E0C
-lbl_fn_8017039C_00001294:
+    bl menu_renderLayout
+lbl_battle_resolveAggroHierarchy_00001294:
     lwz r3, 0x64c(r30)
     cmpwi r3, 0x0
-    beq lbl_fn_8017039C_000012A8
+    beq lbl_battle_resolveAggroHierarchy_000012A8
     li r4, 0x1
-    bl fn_80044E0C
-lbl_fn_8017039C_000012A8:
+    bl menu_renderLayout
+lbl_battle_resolveAggroHierarchy_000012A8:
     li r0, 0x0
     li r3, -0x1
     stw r3, 0x674(r30)
@@ -1425,27 +1425,27 @@ lbl_fn_8017039C_000012A8:
     stw r0, 0x648(r30)
     stw r0, 0x64c(r30)
     bl fn_8014C228
-    b lbl_fn_8017039C_000012E8
-lbl_fn_8017039C_000012C8:
+    b lbl_battle_resolveAggroHierarchy_000012E8
+lbl_battle_resolveAggroHierarchy_000012C8:
     lwz r0, 0x674(r30)
     cmpwi r0, 0x0
-    blt lbl_fn_8017039C_000012E8
+    blt lbl_battle_resolveAggroHierarchy_000012E8
     mr r3, r30
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
     bl dialog_selectChoice
-lbl_fn_8017039C_000012E8:
+lbl_battle_resolveAggroHierarchy_000012E8:
     lwz r0, 0x12a4(r30)
     extrwi. r0, r0, 1, 26
-    beq lbl_fn_8017039C_00001300
+    beq lbl_battle_resolveAggroHierarchy_00001300
     lwz r0, 0x12a4(r30)
     rlwinm r0, r0, 0, 27, 25
     stw r0, 0x12a4(r30)
-lbl_fn_8017039C_00001300:
+lbl_battle_resolveAggroHierarchy_00001300:
     lwz r7, 0xd1c(r30)
     cmpwi r7, 0x0
-    beq lbl_fn_8017039C_000013A8
+    beq lbl_battle_resolveAggroHierarchy_000013A8
     lwz r0, 0x12a8(r7)
     mr r5, r7
     lwz r6, 0x1028(r7)
@@ -1453,55 +1453,55 @@ lbl_fn_8017039C_00001300:
     extrwi r0, r0, 1, 15
     cntlzw r0, r0
     srwi r3, r0, 5
-    b lbl_fn_8017039C_00001348
-lbl_fn_8017039C_0000132C:
+    b lbl_battle_resolveAggroHierarchy_00001348
+lbl_battle_resolveAggroHierarchy_0000132C:
     lwz r0, 0xfe8(r5)
     cmplw r0, r30
-    bne lbl_fn_8017039C_00001340
+    bne lbl_battle_resolveAggroHierarchy_00001340
     li r0, 0x1
-    b lbl_fn_8017039C_00001364
-lbl_fn_8017039C_00001340:
+    b lbl_battle_resolveAggroHierarchy_00001364
+lbl_battle_resolveAggroHierarchy_00001340:
     addi r5, r5, 0x4
     addi r4, r4, 0x1
-lbl_fn_8017039C_00001348:
+lbl_battle_resolveAggroHierarchy_00001348:
     cmpwi r3, 0x0
     mr r0, r6
-    bne lbl_fn_8017039C_00001358
+    bne lbl_battle_resolveAggroHierarchy_00001358
     slwi r0, r6, 1
-lbl_fn_8017039C_00001358:
+lbl_battle_resolveAggroHierarchy_00001358:
     cmpw r4, r0
-    blt lbl_fn_8017039C_0000132C
+    blt lbl_battle_resolveAggroHierarchy_0000132C
     li r0, 0x0
-lbl_fn_8017039C_00001364:
+lbl_battle_resolveAggroHierarchy_00001364:
     cmpwi r0, 0x0
-    beq lbl_fn_8017039C_000013A8
+    beq lbl_battle_resolveAggroHierarchy_000013A8
     li r0, 0x10
     mr r4, r7
     li r3, 0x0
     mtctr r0
-lbl_fn_8017039C_0000137C:
+lbl_battle_resolveAggroHierarchy_0000137C:
     lwz r0, 0xfe8(r4)
     cmplw r0, r30
-    bne lbl_fn_8017039C_0000139C
+    bne lbl_battle_resolveAggroHierarchy_0000139C
     slwi r0, r3, 2
     li r4, 0x0
     add r3, r7, r0
     stw r4, 0xfe8(r3)
-    b lbl_fn_8017039C_000013A8
-lbl_fn_8017039C_0000139C:
+    b lbl_battle_resolveAggroHierarchy_000013A8
+lbl_battle_resolveAggroHierarchy_0000139C:
     addi r4, r4, 0x4
     addi r3, r3, 0x1
-    bdnz lbl_fn_8017039C_0000137C
-lbl_fn_8017039C_000013A8:
+    bdnz lbl_battle_resolveAggroHierarchy_0000137C
+lbl_battle_resolveAggroHierarchy_000013A8:
     lwz r3, lbl_8087F048
     cmpwi r3, 0x0
-    beq lbl_fn_8017039C_000013C8
+    beq lbl_battle_resolveAggroHierarchy_000013C8
     mr r4, r30
     bl fn_801059F8
     lwz r3, lbl_8087F048
     mr r4, r30
     bl fn_80105B3C
-lbl_fn_8017039C_000013C8:
+lbl_battle_resolveAggroHierarchy_000013C8:
     lwz r0, 0x12a8(r30)
     addi r3, r30, 0xc58
     lfs f0, lbl_8088196C
@@ -1516,19 +1516,19 @@ lbl_fn_8017039C_000013C8:
     bl fn_80017064
     lwz r0, 0x55c(r30)
     cmpwi r0, 0x7
-    beq lbl_fn_8017039C_000015B4
+    beq lbl_battle_resolveAggroHierarchy_000015B4
     cmpwi r0, 0x6
-    beq lbl_fn_8017039C_00001418
+    beq lbl_battle_resolveAggroHierarchy_00001418
     cmpwi r0, 0x8
-    beq lbl_fn_8017039C_00001418
+    beq lbl_battle_resolveAggroHierarchy_00001418
     stw r0, 0x564(r30)
-lbl_fn_8017039C_00001418:
+lbl_battle_resolveAggroHierarchy_00001418:
     lwz r0, 0x55c(r30)
     cmpwi r0, 0x6
-    bne lbl_fn_8017039C_000015B4
+    bne lbl_battle_resolveAggroHierarchy_000015B4
     lwz r0, 0xf80(r30)
     cmpwi r0, 0x0
-    bne lbl_fn_8017039C_00001450
+    bne lbl_battle_resolveAggroHierarchy_00001450
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x240(r1)
@@ -1536,8 +1536,8 @@ lbl_fn_8017039C_00001418:
     lwz r0, 0x8(r5)
     stw r3, 0x244(r1)
     stw r0, 0x248(r1)
-    b lbl_fn_8017039C_0000146C
-lbl_fn_8017039C_00001450:
+    b lbl_battle_resolveAggroHierarchy_0000146C
+lbl_battle_resolveAggroHierarchy_00001450:
     lis r5, lbl_8077C154@ha
     lwzu r4, lbl_8077C154@l(r5)
     stw r4, 0x240(r1)
@@ -1545,7 +1545,7 @@ lbl_fn_8017039C_00001450:
     lwz r0, 0x8(r5)
     stw r3, 0x244(r1)
     stw r0, 0x248(r1)
-lbl_fn_8017039C_0000146C:
+lbl_battle_resolveAggroHierarchy_0000146C:
     lwz r5, 0x240(r1)
     addi r3, r1, 0x14
     lwz r4, 0x244(r1)
@@ -1555,26 +1555,26 @@ lbl_fn_8017039C_0000146C:
     stw r0, 0x1c(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_8017039C_000014A8
+    beq lbl_battle_resolveAggroHierarchy_000014A8
     lwz r3, 0xf80(r30)
     lwz r12, 0x0(r3)
     lwz r12, 0x1c(r12)
     mtctr r12
     bctrl
-lbl_fn_8017039C_000014A8:
+lbl_battle_resolveAggroHierarchy_000014A8:
     lwz r0, 0x55c(r30)
     cmpwi r0, 0x6
-    beq lbl_fn_8017039C_00001584
+    beq lbl_battle_resolveAggroHierarchy_00001584
     cmpwi r0, 0x8
-    beq lbl_fn_8017039C_000014C0
+    beq lbl_battle_resolveAggroHierarchy_000014C0
     stw r0, 0x564(r30)
-lbl_fn_8017039C_000014C0:
+lbl_battle_resolveAggroHierarchy_000014C0:
     lwz r0, 0x55c(r30)
     cmpwi r0, 0x6
-    bne lbl_fn_8017039C_00001584
+    bne lbl_battle_resolveAggroHierarchy_00001584
     lwz r0, 0xf80(r30)
     cmpwi r0, 0x0
-    bne lbl_fn_8017039C_000014F8
+    bne lbl_battle_resolveAggroHierarchy_000014F8
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x24c(r1)
@@ -1582,8 +1582,8 @@ lbl_fn_8017039C_000014C0:
     lwz r0, 0x8(r5)
     stw r3, 0x250(r1)
     stw r0, 0x254(r1)
-    b lbl_fn_8017039C_00001514
-lbl_fn_8017039C_000014F8:
+    b lbl_battle_resolveAggroHierarchy_00001514
+lbl_battle_resolveAggroHierarchy_000014F8:
     lis r5, lbl_8077C160@ha
     lwzu r4, lbl_8077C160@l(r5)
     stw r4, 0x24c(r1)
@@ -1591,7 +1591,7 @@ lbl_fn_8017039C_000014F8:
     lwz r0, 0x8(r5)
     stw r3, 0x250(r1)
     stw r0, 0x254(r1)
-lbl_fn_8017039C_00001514:
+lbl_battle_resolveAggroHierarchy_00001514:
     lwz r5, 0x24c(r1)
     addi r3, r1, 0x8
     lwz r4, 0x250(r1)
@@ -1601,13 +1601,13 @@ lbl_fn_8017039C_00001514:
     stw r0, 0x10(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_8017039C_00001550
+    beq lbl_battle_resolveAggroHierarchy_00001550
     lwz r3, 0xf80(r30)
     lwz r12, 0x0(r3)
     lwz r12, 0x1c(r12)
     mtctr r12
     bctrl
-lbl_fn_8017039C_00001550:
+lbl_battle_resolveAggroHierarchy_00001550:
     mr r3, r30
     li r4, 0x6
     bl actor_setState
@@ -1615,32 +1615,32 @@ lbl_fn_8017039C_00001550:
     li r0, 0x0
     cmpwi r3, 0x0
     stw r0, 0xf80(r30)
-    beq lbl_fn_8017039C_00001584
+    beq lbl_battle_resolveAggroHierarchy_00001584
     lwz r12, 0x0(r3)
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-lbl_fn_8017039C_00001584:
+lbl_battle_resolveAggroHierarchy_00001584:
     lwz r3, 0xf80(r30)
     li r4, 0x6
     li r0, 0x0
     stw r4, 0x55c(r30)
     cmpwi r3, 0x0
     stw r0, 0xf80(r30)
-    beq lbl_fn_8017039C_000015B4
+    beq lbl_battle_resolveAggroHierarchy_000015B4
     lwz r12, 0x0(r3)
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-lbl_fn_8017039C_000015B4:
+lbl_battle_resolveAggroHierarchy_000015B4:
     lwz r3, 0x1208(r30)
     li r0, 0x7
     stw r0, 0x55c(r30)
     cmpwi r3, 0x0
-    beq lbl_fn_8017039C_000016A0
-    beq lbl_fn_8017039C_000016A0
+    beq lbl_battle_resolveAggroHierarchy_000016A0
+    beq lbl_battle_resolveAggroHierarchy_000016A0
     lfs f0, lbl_8088196C
     li r28, 0x0
     li r0, 0x3
@@ -1661,11 +1661,11 @@ lbl_fn_8017039C_000015B4:
     li r0, 0xff
     stb r0, 0x520(r3)
     stw r28, 0x1208(r30)
-    b lbl_fn_8017039C_000016A0
-lbl_fn_8017039C_00001620:
+    b lbl_battle_resolveAggroHierarchy_000016A0
+lbl_battle_resolveAggroHierarchy_00001620:
     lwz r0, lbl_8087EEB8
     cmpwi r0, 0x0
-    beq lbl_fn_8017039C_000016A0
+    beq lbl_battle_resolveAggroHierarchy_000016A0
     lis r3, 0x51ec
     lwz r8, 0x50(r30)
     subi r0, r3, 0x7ae1
@@ -1695,7 +1695,7 @@ lbl_fn_8017039C_00001620:
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x140
     bl boss_recordDamage
-lbl_fn_8017039C_000016A0:
+lbl_battle_resolveAggroHierarchy_000016A0:
     addi r11, r1, 0x270
     bl _restgpr_27
     lwz r0, 0x274(r1)
@@ -1704,7 +1704,7 @@ lbl_fn_8017039C_000016A0:
     blr
 }
 
-asm void fn_80170A20(void)
+asm void battle_updateTargetAggro(void)
 {
     nofralloc
     stwu r1, -0x70(r1)
@@ -1723,32 +1723,32 @@ asm void fn_80170A20(void)
     lfs f0, lbl_80881964
     fcmpo cr0, f31, f0
     cror eq, gt, eq
-    bne lbl_fn_80170A20_00001700
+    bne lbl_battle_updateTargetAggro_00001700
     stfs f31, 0x1058(r31)
-lbl_fn_80170A20_00001700:
+lbl_battle_updateTargetAggro_00001700:
     addi r3, r31, 0x1030
     bl fn_801255C8
     cmpwi r3, 0x0
-    beq lbl_fn_80170A20_00001B98
+    beq lbl_battle_updateTargetAggro_00001B98
     addi r3, r31, 0xc58
     li r4, 0x0
     bl fn_8011BEB8
     lwz r0, 0x12a4(r31)
     srwi. r0, r0, 31
-    beq lbl_fn_80170A20_00001864
+    beq lbl_battle_updateTargetAggro_00001864
     lwz r0, 0x12a4(r31)
     clrlwi r0, r0, 2
     stw r0, 0x12a4(r31)
     lwz r3, lbl_8087F430
     lwz r4, 0x10d8(r3)
     cmpwi r4, 0x0
-    beq lbl_fn_80170A20_0000178C
+    beq lbl_battle_updateTargetAggro_0000178C
     lwz r3, 0xc38(r31)
     cmpwi r3, 0x0
-    ble lbl_fn_80170A20_0000178C
+    ble lbl_battle_updateTargetAggro_0000178C
     lwz r0, 0xc3c(r31)
     cmpwi r0, 0x0
-    ble lbl_fn_80170A20_0000178C
+    ble lbl_battle_updateTargetAggro_0000178C
     subi r0, r3, 0x1
     lwz r3, 0xb0(r4)
     slwi r0, r0, 6
@@ -1761,50 +1761,50 @@ lbl_fn_80170A20_00001700:
     slwi r0, r0, 6
     add r3, r4, r0
     stw r5, 0x3c(r3)
-lbl_fn_80170A20_0000178C:
+lbl_battle_updateTargetAggro_0000178C:
     lwz r4, 0x48(r31)
     cmpwi r4, 0x0
-    bne lbl_fn_80170A20_000017C0
+    bne lbl_battle_updateTargetAggro_000017C0
     lwz r3, lbl_8087F0A8
     lwz r0, 0x278(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_80170A20_000017C0
+    beq lbl_battle_updateTargetAggro_000017C0
     lwz r3, 0x5c(r31)
     lwz r0, 0x11c(r3)
     cmpwi r0, 0x1
-    bne lbl_fn_80170A20_000017C0
+    bne lbl_battle_updateTargetAggro_000017C0
     li r0, 0x1
-    b lbl_fn_80170A20_000017E0
-lbl_fn_80170A20_000017C0:
+    b lbl_battle_updateTargetAggro_000017E0
+lbl_battle_updateTargetAggro_000017C0:
     cmpwi r4, 0x0
-    bne lbl_fn_80170A20_000017DC
+    bne lbl_battle_updateTargetAggro_000017DC
     lwz r0, 0x12a8(r31)
     extrwi. r0, r0, 1, 14
-    beq lbl_fn_80170A20_000017DC
+    beq lbl_battle_updateTargetAggro_000017DC
     li r0, 0x1
-    b lbl_fn_80170A20_000017E0
-lbl_fn_80170A20_000017DC:
+    b lbl_battle_updateTargetAggro_000017E0
+lbl_battle_updateTargetAggro_000017DC:
     li r0, 0x0
-lbl_fn_80170A20_000017E0:
+lbl_battle_updateTargetAggro_000017E0:
     cmpwi r0, 0x0
-    beq lbl_fn_80170A20_00001864
+    beq lbl_battle_updateTargetAggro_00001864
     lwz r3, lbl_8087F430
     li r4, 0x25
     bl world_getGlobalFlag
     cmpwi r3, 0x1
-    blt lbl_fn_80170A20_00001844
+    blt lbl_battle_updateTargetAggro_00001844
     lwz r3, 0x648(r31)
     cmpwi r3, 0x0
-    beq lbl_fn_80170A20_00001810
+    beq lbl_battle_updateTargetAggro_00001810
     li r4, 0x1
-    bl fn_80044E0C
-lbl_fn_80170A20_00001810:
+    bl menu_renderLayout
+lbl_battle_updateTargetAggro_00001810:
     lwz r3, 0x64c(r31)
     cmpwi r3, 0x0
-    beq lbl_fn_80170A20_00001824
+    beq lbl_battle_updateTargetAggro_00001824
     li r4, 0x1
-    bl fn_80044E0C
-lbl_fn_80170A20_00001824:
+    bl menu_renderLayout
+lbl_battle_updateTargetAggro_00001824:
     li r0, 0x0
     li r3, -0x1
     stw r3, 0x674(r31)
@@ -1812,27 +1812,27 @@ lbl_fn_80170A20_00001824:
     stw r0, 0x648(r31)
     stw r0, 0x64c(r31)
     bl fn_8014C228
-    b lbl_fn_80170A20_00001864
-lbl_fn_80170A20_00001844:
+    b lbl_battle_updateTargetAggro_00001864
+lbl_battle_updateTargetAggro_00001844:
     lwz r0, 0x674(r31)
     cmpwi r0, 0x0
-    blt lbl_fn_80170A20_00001864
+    blt lbl_battle_updateTargetAggro_00001864
     mr r3, r31
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
     bl dialog_selectChoice
-lbl_fn_80170A20_00001864:
+lbl_battle_updateTargetAggro_00001864:
     lwz r0, 0x12a4(r31)
     extrwi. r0, r0, 1, 26
-    beq lbl_fn_80170A20_0000187C
+    beq lbl_battle_updateTargetAggro_0000187C
     lwz r0, 0x12a4(r31)
     rlwinm r0, r0, 0, 27, 25
     stw r0, 0x12a4(r31)
-lbl_fn_80170A20_0000187C:
+lbl_battle_updateTargetAggro_0000187C:
     lwz r7, 0xd1c(r31)
     cmpwi r7, 0x0
-    beq lbl_fn_80170A20_00001924
+    beq lbl_battle_updateTargetAggro_00001924
     lwz r0, 0x12a8(r7)
     mr r5, r7
     lwz r6, 0x1028(r7)
@@ -1840,55 +1840,55 @@ lbl_fn_80170A20_0000187C:
     extrwi r0, r0, 1, 15
     cntlzw r0, r0
     srwi r3, r0, 5
-    b lbl_fn_80170A20_000018C4
-lbl_fn_80170A20_000018A8:
+    b lbl_battle_updateTargetAggro_000018C4
+lbl_battle_updateTargetAggro_000018A8:
     lwz r0, 0xfe8(r5)
     cmplw r0, r31
-    bne lbl_fn_80170A20_000018BC
+    bne lbl_battle_updateTargetAggro_000018BC
     li r0, 0x1
-    b lbl_fn_80170A20_000018E0
-lbl_fn_80170A20_000018BC:
+    b lbl_battle_updateTargetAggro_000018E0
+lbl_battle_updateTargetAggro_000018BC:
     addi r5, r5, 0x4
     addi r4, r4, 0x1
-lbl_fn_80170A20_000018C4:
+lbl_battle_updateTargetAggro_000018C4:
     cmpwi r3, 0x0
     mr r0, r6
-    bne lbl_fn_80170A20_000018D4
+    bne lbl_battle_updateTargetAggro_000018D4
     slwi r0, r6, 1
-lbl_fn_80170A20_000018D4:
+lbl_battle_updateTargetAggro_000018D4:
     cmpw r4, r0
-    blt lbl_fn_80170A20_000018A8
+    blt lbl_battle_updateTargetAggro_000018A8
     li r0, 0x0
-lbl_fn_80170A20_000018E0:
+lbl_battle_updateTargetAggro_000018E0:
     cmpwi r0, 0x0
-    beq lbl_fn_80170A20_00001924
+    beq lbl_battle_updateTargetAggro_00001924
     li r0, 0x10
     mr r4, r7
     li r3, 0x0
     mtctr r0
-lbl_fn_80170A20_000018F8:
+lbl_battle_updateTargetAggro_000018F8:
     lwz r0, 0xfe8(r4)
     cmplw r0, r31
-    bne lbl_fn_80170A20_00001918
+    bne lbl_battle_updateTargetAggro_00001918
     slwi r0, r3, 2
     li r4, 0x0
     add r3, r7, r0
     stw r4, 0xfe8(r3)
-    b lbl_fn_80170A20_00001924
-lbl_fn_80170A20_00001918:
+    b lbl_battle_updateTargetAggro_00001924
+lbl_battle_updateTargetAggro_00001918:
     addi r4, r4, 0x4
     addi r3, r3, 0x1
-    bdnz lbl_fn_80170A20_000018F8
-lbl_fn_80170A20_00001924:
+    bdnz lbl_battle_updateTargetAggro_000018F8
+lbl_battle_updateTargetAggro_00001924:
     lwz r3, lbl_8087F048
     cmpwi r3, 0x0
-    beq lbl_fn_80170A20_00001944
+    beq lbl_battle_updateTargetAggro_00001944
     mr r4, r31
     bl fn_801059F8
     lwz r3, lbl_8087F048
     mr r4, r31
     bl fn_80105B3C
-lbl_fn_80170A20_00001944:
+lbl_battle_updateTargetAggro_00001944:
     lwz r0, 0x12a8(r31)
     addi r3, r31, 0xc58
     lfs f0, lbl_8088196C
@@ -1903,19 +1903,19 @@ lbl_fn_80170A20_00001944:
     bl fn_80017064
     lwz r0, 0x55c(r31)
     cmpwi r0, 0x7
-    beq lbl_fn_80170A20_00001B30
+    beq lbl_battle_updateTargetAggro_00001B30
     cmpwi r0, 0x6
-    beq lbl_fn_80170A20_00001994
+    beq lbl_battle_updateTargetAggro_00001994
     cmpwi r0, 0x8
-    beq lbl_fn_80170A20_00001994
+    beq lbl_battle_updateTargetAggro_00001994
     stw r0, 0x564(r31)
-lbl_fn_80170A20_00001994:
+lbl_battle_updateTargetAggro_00001994:
     lwz r0, 0x55c(r31)
     cmpwi r0, 0x6
-    bne lbl_fn_80170A20_00001B30
+    bne lbl_battle_updateTargetAggro_00001B30
     lwz r0, 0xf80(r31)
     cmpwi r0, 0x0
-    bne lbl_fn_80170A20_000019CC
+    bne lbl_battle_updateTargetAggro_000019CC
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x40(r1)
@@ -1923,8 +1923,8 @@ lbl_fn_80170A20_00001994:
     lwz r0, 0x8(r5)
     stw r3, 0x44(r1)
     stw r0, 0x48(r1)
-    b lbl_fn_80170A20_000019E8
-lbl_fn_80170A20_000019CC:
+    b lbl_battle_updateTargetAggro_000019E8
+lbl_battle_updateTargetAggro_000019CC:
     lis r5, lbl_8077C16C@ha
     lwzu r4, lbl_8077C16C@l(r5)
     stw r4, 0x40(r1)
@@ -1932,7 +1932,7 @@ lbl_fn_80170A20_000019CC:
     lwz r0, 0x8(r5)
     stw r3, 0x44(r1)
     stw r0, 0x48(r1)
-lbl_fn_80170A20_000019E8:
+lbl_battle_updateTargetAggro_000019E8:
     lwz r5, 0x40(r1)
     addi r3, r1, 0x14
     lwz r4, 0x44(r1)
@@ -1942,26 +1942,26 @@ lbl_fn_80170A20_000019E8:
     stw r0, 0x1c(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_80170A20_00001A24
+    beq lbl_battle_updateTargetAggro_00001A24
     lwz r3, 0xf80(r31)
     lwz r12, 0x0(r3)
     lwz r12, 0x1c(r12)
     mtctr r12
     bctrl
-lbl_fn_80170A20_00001A24:
+lbl_battle_updateTargetAggro_00001A24:
     lwz r0, 0x55c(r31)
     cmpwi r0, 0x6
-    beq lbl_fn_80170A20_00001B00
+    beq lbl_battle_updateTargetAggro_00001B00
     cmpwi r0, 0x8
-    beq lbl_fn_80170A20_00001A3C
+    beq lbl_battle_updateTargetAggro_00001A3C
     stw r0, 0x564(r31)
-lbl_fn_80170A20_00001A3C:
+lbl_battle_updateTargetAggro_00001A3C:
     lwz r0, 0x55c(r31)
     cmpwi r0, 0x6
-    bne lbl_fn_80170A20_00001B00
+    bne lbl_battle_updateTargetAggro_00001B00
     lwz r0, 0xf80(r31)
     cmpwi r0, 0x0
-    bne lbl_fn_80170A20_00001A74
+    bne lbl_battle_updateTargetAggro_00001A74
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x4c(r1)
@@ -1969,8 +1969,8 @@ lbl_fn_80170A20_00001A3C:
     lwz r0, 0x8(r5)
     stw r3, 0x50(r1)
     stw r0, 0x54(r1)
-    b lbl_fn_80170A20_00001A90
-lbl_fn_80170A20_00001A74:
+    b lbl_battle_updateTargetAggro_00001A90
+lbl_battle_updateTargetAggro_00001A74:
     lis r5, lbl_8077C178@ha
     lwzu r4, lbl_8077C178@l(r5)
     stw r4, 0x4c(r1)
@@ -1978,7 +1978,7 @@ lbl_fn_80170A20_00001A74:
     lwz r0, 0x8(r5)
     stw r3, 0x50(r1)
     stw r0, 0x54(r1)
-lbl_fn_80170A20_00001A90:
+lbl_battle_updateTargetAggro_00001A90:
     lwz r5, 0x4c(r1)
     addi r3, r1, 0x8
     lwz r4, 0x50(r1)
@@ -1988,13 +1988,13 @@ lbl_fn_80170A20_00001A90:
     stw r0, 0x10(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_80170A20_00001ACC
+    beq lbl_battle_updateTargetAggro_00001ACC
     lwz r3, 0xf80(r31)
     lwz r12, 0x0(r3)
     lwz r12, 0x1c(r12)
     mtctr r12
     bctrl
-lbl_fn_80170A20_00001ACC:
+lbl_battle_updateTargetAggro_00001ACC:
     mr r3, r31
     li r4, 0x6
     bl actor_setState
@@ -2002,32 +2002,32 @@ lbl_fn_80170A20_00001ACC:
     li r0, 0x0
     cmpwi r3, 0x0
     stw r0, 0xf80(r31)
-    beq lbl_fn_80170A20_00001B00
+    beq lbl_battle_updateTargetAggro_00001B00
     lwz r12, 0x0(r3)
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-lbl_fn_80170A20_00001B00:
+lbl_battle_updateTargetAggro_00001B00:
     lwz r3, 0xf80(r31)
     li r4, 0x6
     li r0, 0x0
     stw r4, 0x55c(r31)
     cmpwi r3, 0x0
     stw r0, 0xf80(r31)
-    beq lbl_fn_80170A20_00001B30
+    beq lbl_battle_updateTargetAggro_00001B30
     lwz r12, 0x0(r3)
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-lbl_fn_80170A20_00001B30:
+lbl_battle_updateTargetAggro_00001B30:
     lwz r3, 0x1208(r31)
     li r0, 0x7
     stw r0, 0x55c(r31)
     cmpwi r3, 0x0
-    beq lbl_fn_80170A20_00001B98
-    beq lbl_fn_80170A20_00001B98
+    beq lbl_battle_updateTargetAggro_00001B98
+    beq lbl_battle_updateTargetAggro_00001B98
     lfs f0, lbl_8088196C
     li r30, 0x0
     li r0, 0x3
@@ -2048,7 +2048,7 @@ lbl_fn_80170A20_00001B30:
     li r0, 0xff
     stb r0, 0x520(r3)
     stw r30, 0x1208(r31)
-lbl_fn_80170A20_00001B98:
+lbl_battle_updateTargetAggro_00001B98:
     lwz r0, 0x74(r1)
     psq_l f31, 0x68(r1), 0, 0
     lfd f31, 0x60(r1)

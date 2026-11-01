@@ -20,7 +20,7 @@ extern void fn_80502874(void);
 extern void fn_80509CB0(void);
 extern void fn_80509DA4(void);
 extern void fn_8050BA6C(void);
-extern void fn_8050E098(void);
+extern void net_p2p_readPayload(void);
 extern void fn_8050EAEC(void);
 extern void fn_8050F468(void);
 extern void fn_8050F474(void);
@@ -1637,7 +1637,7 @@ lbl_fn_804DCA58_00001468:
     li r4, -0x1
     li r5, 0x1034
     li r7, 0x1
-    bl fn_8050E098
+    bl net_p2p_readPayload
     addi r11, r1, 0x90
     psq_l f31, 0xb8(r1), 0, 0
     lfd f31, 0xb0(r1)

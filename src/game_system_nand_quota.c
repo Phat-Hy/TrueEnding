@@ -6,7 +6,7 @@ extern void _restgpr_23(void);
 extern void _restgpr_27(void);
 extern void _savegpr_23(void);
 extern void _savegpr_27(void);
-extern void fn_8004B338(void);
+extern void sound_releaseChannel(void);
 extern void item_useConsumable(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
@@ -1681,7 +1681,7 @@ lbl_fn_8034DE90_00001790:
 lbl_fn_8034DE90_000017AC:
     addi r3, r1, 0x1e0
     li r4, -0x1
-    bl fn_8004B338
+    bl sound_releaseChannel
 lbl_fn_8034DE90_000017B8:
     lwz r0, 0x16f4(r29)
     addi r3, r29, 0x16f8

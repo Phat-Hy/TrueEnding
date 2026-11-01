@@ -16,7 +16,7 @@ extern void fn_8015C988(void);
 extern void fn_80161570(void);
 extern void fn_8016ADF4(void);
 extern void fn_8016D74C(void);
-extern void fn_80170A20(void);
+extern void battle_updateTargetAggro(void);
 extern void actor_getMovementFlags(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
@@ -1910,7 +1910,7 @@ lbl_fn_803326C0_00001A6C:
     mr r3, r31
     lfs f1, lbl_80885094
     li r5, 0x0
-    bl fn_80170A20
+    bl battle_updateTargetAggro
 lbl_fn_803326C0_00001A80:
     lwz r0, 0x124(r1)
     psq_l f31, 0x118(r1), 0, 0

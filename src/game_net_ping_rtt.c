@@ -30,7 +30,7 @@ extern void actor_spawnActorWithId(void);
 extern void fn_8011745C(void);
 extern void fn_801D082C(void);
 extern void save_validateHeader(void);
-extern void fn_801F4728(void);
+extern void save_parseSlotHeader(void);
 extern void saveSlot_readSummary(void);
 extern void save_computeCrc32(void);
 extern void fn_801F6E78(void);
@@ -1676,7 +1676,7 @@ lbl_fn_80516E0C_00001594:
     stfs f0, 0x10c(r1)
     stfs f0, 0x108(r1)
     lwz r3, 0xf0(r30)
-    bl fn_801F4728
+    bl save_parseSlotHeader
     li r3, 0x0
     li r4, 0x196
     bl actor_findSpawnTemplate

@@ -17,7 +17,7 @@ extern void fn_800EE4D8(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void fn_800FBA9C(void);
-extern void fn_8013322C(void);
+extern void actor_testBitFlag(void);
 extern void boss_updatePhaseState(void);
 extern void quest_updateFlow(void);
 extern void dialog_updateScriptState(void);
@@ -1907,7 +1907,7 @@ asm void fn_80357004(void)
 lbl_fn_80357004_0000193C:
     li r4, 0x20
     addi r3, r3, 0x7d4
-    bl fn_8013322C
+    bl actor_testBitFlag
     b lbl_fn_80357004_00001B58
 lbl_fn_80357004_0000194C:
     lwz r12, 0x0(r3)

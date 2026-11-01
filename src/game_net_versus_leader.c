@@ -15,7 +15,7 @@ extern void atn_Task_setActive(void);
 extern void str_findChar(void);
 extern void wcs_vformat(void);
 extern void actor_spawnActorWithId(void);
-extern void fn_801F4728(void);
+extern void save_parseSlotHeader(void);
 extern void fn_801F4998(void);
 extern void save_formatSlotTitle(void);
 extern void saveSlot_readSummary(void);
@@ -609,13 +609,13 @@ lbl_fn_804BFB54_000006B8:
     lwz r3, 0x88(r21)
     addi r4, r24, lbl_80790D68@l
     addi r5, r1, 0x44
-    bl fn_801F4728
+    bl save_parseSlotHeader
     b lbl_fn_804BFB54_00000854
 lbl_fn_804BFB54_00000754:
     lwz r3, 0x80(r21)
     addi r4, r25, lbl_80790D58@l
     addi r5, r1, 0x44
-    bl fn_801F4728
+    bl save_parseSlotHeader
     lwz r17, 0x80(r21)
     addi r3, r26, lbl_80790D4C@l
     bl str_findChar
@@ -636,7 +636,7 @@ lbl_fn_804BFB54_00000754:
     stfs f1, 0x50(r1)
     stfs f0, 0x54(r1)
     lwz r3, 0x84(r21)
-    bl fn_801F4728
+    bl save_parseSlotHeader
     lwz r17, 0x80(r21)
     addi r3, r28, lbl_80790D30@l
     bl str_findChar
@@ -657,11 +657,11 @@ lbl_fn_804BFB54_00000754:
     stfs f1, 0x50(r1)
     stfs f0, 0x54(r1)
     lwz r3, 0x8c(r21)
-    bl fn_801F4728
+    bl save_parseSlotHeader
     lwz r3, 0x90(r21)
     addi r4, r30, lbl_80790D20@l
     addi r5, r1, 0x44
-    bl fn_801F4728
+    bl save_parseSlotHeader
     lfs f4, 0xbc(r1)
     addi r4, r31, lbl_80790D10@l
     lfs f3, 0xc0(r1)
@@ -675,7 +675,7 @@ lbl_fn_804BFB54_00000754:
     stfs f1, 0x50(r1)
     stfs f0, 0x54(r1)
     lwz r3, 0x94(r21)
-    bl fn_801F4728
+    bl save_parseSlotHeader
 lbl_fn_804BFB54_00000854:
     lwz r0, 0xd88(r18)
     cmpwi r0, 0x4
@@ -703,7 +703,7 @@ lbl_fn_804BFB54_00000854:
     stfs f1, 0xc8(r1)
     stfs f0, 0xcc(r1)
     lwz r3, 0x5c(r18)
-    bl fn_801F4728
+    bl save_parseSlotHeader
 lbl_fn_804BFB54_000008C0:
     lwz r3, 0xa0(r21)
     cmpwi r3, 0x0
@@ -791,13 +791,13 @@ lbl_fn_804BFB54_00000978:
     lwz r3, 0x88(r22)
     addi r4, r29, lbl_80790D68@l
     addi r5, r1, 0x8
-    bl fn_801F4728
+    bl save_parseSlotHeader
     b lbl_fn_804BFB54_00000B14
 lbl_fn_804BFB54_00000A14:
     lwz r3, 0x80(r22)
     addi r4, r28, lbl_80790D58@l
     addi r5, r1, 0x8
-    bl fn_801F4728
+    bl save_parseSlotHeader
     lwz r17, 0x80(r22)
     addi r3, r27, lbl_80790D4C@l
     bl str_findChar
@@ -818,7 +818,7 @@ lbl_fn_804BFB54_00000A14:
     stfs f1, 0x14(r1)
     stfs f0, 0x18(r1)
     lwz r3, 0x84(r22)
-    bl fn_801F4728
+    bl save_parseSlotHeader
     lwz r17, 0x80(r22)
     addi r3, r25, lbl_80790D30@l
     bl str_findChar
@@ -839,11 +839,11 @@ lbl_fn_804BFB54_00000A14:
     stfs f1, 0x14(r1)
     stfs f0, 0x18(r1)
     lwz r3, 0x8c(r22)
-    bl fn_801F4728
+    bl save_parseSlotHeader
     lwz r3, 0x90(r22)
     addi r4, r23, lbl_80790D20@l
     addi r5, r1, 0x8
-    bl fn_801F4728
+    bl save_parseSlotHeader
     lfs f4, 0xbc(r1)
     addi r4, r21, lbl_80790D10@l
     lfs f3, 0xc0(r1)
@@ -857,7 +857,7 @@ lbl_fn_804BFB54_00000A14:
     stfs f1, 0x14(r1)
     stfs f0, 0x18(r1)
     lwz r3, 0x94(r22)
-    bl fn_801F4728
+    bl save_parseSlotHeader
 lbl_fn_804BFB54_00000B14:
     addi r22, r22, 0x22c
     addi r19, r19, 0x1

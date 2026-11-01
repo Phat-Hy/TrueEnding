@@ -15,9 +15,9 @@ extern void morph_updateMesh(void);
 extern void system_getNextSequenceId(void);
 extern void viewport_updateCulling(void);
 extern void fn_80103F60(void);
-extern void fn_80126214(void);
-extern void fn_8013322C(void);
-extern void fn_8013A258(void);
+extern void enemy_updateCombatBehavior(void);
+extern void actor_testBitFlag(void);
+extern void npc_initScriptContext(void);
 extern void npc_updateTalkInteraction(void);
 extern void fn_801426A4(void);
 extern void fn_80148B0C(void);
@@ -477,7 +477,7 @@ lbl_fn_802F2FA4_0000053C:
     beq lbl_fn_802F2FA4_00000604
     addi r3, r31, 0x7d4
     li r4, 0x20
-    bl fn_8013322C
+    bl actor_testBitFlag
     lwz r3, 0x14ec(r31)
     li r0, 0x0
     lfs f0, lbl_808848FC
@@ -525,7 +525,7 @@ lbl_fn_802F2FA4_00000604:
     beq lbl_fn_802F2FA4_000006C0
     addi r3, r31, 0x7d4
     li r4, 0x20
-    bl fn_8013322C
+    bl actor_testBitFlag
     lwz r3, 0x14ec(r31)
     li r0, 0x0
     lfs f0, lbl_808848FC
@@ -739,7 +739,7 @@ asm void fn_802F33A0(void)
     cmpwi r0, 0x7
     bne lbl_fn_802F33A0_00000D48
     addi r3, r3, 0x1030
-    bl fn_80126214
+    bl enemy_updateCombatBehavior
     addi r4, r29, 0x1088
     addi r31, r1, 0xbc
     psq_l f1, 0x0(r4), 0, 0
@@ -1029,7 +1029,7 @@ lbl_fn_802F33A0_00000D2C:
 lbl_fn_802F33A0_00000D48:
     cmpwi r0, 0x6
     bne lbl_fn_802F33A0_00000D58
-    bl fn_8013A258
+    bl npc_initScriptContext
     b lbl_fn_802F33A0_00000D6C
 lbl_fn_802F33A0_00000D58:
     lfs f0, 0x568(r3)

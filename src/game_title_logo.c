@@ -18,7 +18,7 @@ extern void skill_findNodeById(void);
 extern void fn_8011FE3C(void);
 extern void fn_80161570(void);
 extern void fn_80161B70(void);
-extern void fn_8017039C(void);
+extern void battle_resolveAggroHierarchy(void);
 extern void fn_80170F20(void);
 extern void fn_80171DB0(void);
 extern void fn_801781B0(void);
@@ -2064,7 +2064,7 @@ lbl_fn_803A8470_00001A34:
     lwz r4, 0x24(r28)
     mr r3, r31
     li r5, 0x0
-    bl fn_8017039C
+    bl battle_resolveAggroHierarchy
     b lbl_fn_803A8470_00001E58
 lbl_fn_803A8470_00001A64:
     lfs f3, lbl_80885B10

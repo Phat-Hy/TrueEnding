@@ -19,7 +19,7 @@ extern void str_findChar(void);
 extern void wcs_vformat(void);
 extern void actor_spawnActorWithId(void);
 extern void save_validateHeader(void);
-extern void fn_801F4728(void);
+extern void save_parseSlotHeader(void);
 extern void saveSlot_readSummary(void);
 extern void fn_801FEC74(void);
 extern void thread_findAndNotifySlot(void);
@@ -874,7 +874,7 @@ lbl_fn_804CDBFC_000009CC:
     stfs f0, 0x20(r1)
     stfs f31, 0x24(r1)
     lwz r3, 0x4c(r27)
-    bl fn_801F4728
+    bl save_parseSlotHeader
     addi r28, r28, 0x1
     addi r27, r27, 0x4
     cmpwi r28, 0x3
@@ -1052,7 +1052,7 @@ lbl_fn_804CDE1C_00000C54:
     stfs f0, 0x14(r1)
     stfs f31, 0x18(r1)
     lwz r3, 0x4c(r27)
-    bl fn_801F4728
+    bl save_parseSlotHeader
     addi r28, r28, 0x1
     addi r27, r27, 0x4
     cmpwi r28, 0x3
@@ -1235,7 +1235,7 @@ lbl_fn_804CE120_00000EDC:
     stfs f0, 0x28(r1)
     stfs f31, 0x2c(r1)
     lwz r3, 0x4c(r28)
-    bl fn_801F4728
+    bl save_parseSlotHeader
     addi r30, r30, 0x1
     addi r28, r28, 0x4
     cmpwi r30, 0x3
@@ -1650,7 +1650,7 @@ lbl_fn_804CE61C_000014A0:
     stfs f0, 0x18(r1)
     stfs f31, 0x1c(r1)
     lwz r3, 0x4c(r28)
-    bl fn_801F4728
+    bl save_parseSlotHeader
     addi r29, r29, 0x1
     addi r28, r28, 0x4
     cmpwi r29, 0x3

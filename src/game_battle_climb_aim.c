@@ -20,13 +20,13 @@ extern void map_debugLog(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_80092F1C(void);
 extern void lockon_updateTarget(void);
-extern void fn_800971D4(void);
+extern void cursor_Object_constructor(void);
 extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
-extern void fn_802180A8(void);
+extern void task_lookupTagIndex(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_constructor(void);
@@ -781,7 +781,7 @@ lbl_fn_8040FC30_000008C4:
 lbl_fn_8040FC30_000008D0:
     addi r3, r29, 0xf4
     li r4, -0x1
-    bl fn_800971D4
+    bl cursor_Object_constructor
     mr r3, r29
     li r4, 0x0
     bl task_destroyWorker
@@ -1129,7 +1129,7 @@ lbl_fn_80410028_00000D6C:
     bl strcpy
     addi r3, r1, 0x108
     bl talk_formatQuotedString
-    bl fn_802180A8
+    bl task_lookupTagIndex
     mr r4, r3
     addi r3, r31, 0xf4
     addi r5, r1, 0x8
@@ -1839,7 +1839,7 @@ asm void fn_80410B38(void)
     beq lbl_fn_80410B38_000017B8
     li r4, -0x1
     addi r3, r3, 0xf4
-    bl fn_800971D4
+    bl cursor_Object_constructor
     mr r3, r30
     li r4, 0x0
     bl task_destroyWorker
@@ -1990,7 +1990,7 @@ lbl_fn_80410BF8_00001978:
     bl strcpy
     addi r3, r1, 0x108
     bl talk_formatQuotedString
-    bl fn_802180A8
+    bl task_lookupTagIndex
     mr r4, r3
     addi r3, r29, 0xf4
     addi r5, r1, 0x8

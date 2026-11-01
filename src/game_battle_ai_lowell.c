@@ -7,7 +7,7 @@ extern void _restgpr_26(void);
 extern void _savegpr_14(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
-extern void fn_8004ECC0(void);
+extern void item_testLineOfSight(void);
 extern void fn_80051B70(void);
 extern void fn_80051CD8(void);
 extern void talk_formatQuotedString(void);
@@ -2342,7 +2342,7 @@ lbl_fn_804375C0_00001EDC:
     li r4, 0x0
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ECC0
+    bl item_testLineOfSight
     cntlzw r0, r3
     srwi. r0, r0, 5
     beq lbl_fn_804375C0_00001F3C
@@ -2428,7 +2428,7 @@ lbl_fn_804375C0_0000202C:
     li r4, 0x0
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ECC0
+    bl item_testLineOfSight
     cntlzw r0, r3
     srwi. r0, r0, 5
     beq lbl_fn_804375C0_000020A8

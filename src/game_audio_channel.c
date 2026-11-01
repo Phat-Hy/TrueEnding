@@ -17,8 +17,8 @@ extern void fn_801426A4(void);
 extern void fn_80148B0C(void);
 extern void fn_80158BB4(void);
 extern void actor_setState(void);
-extern void fn_8017039C(void);
-extern void fn_80170A20(void);
+extern void battle_resolveAggroHierarchy(void);
+extern void battle_updateTargetAggro(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
@@ -1139,7 +1139,7 @@ lbl_fn_802FA2F4_00000F68:
     fmr f1, f0
 lbl_fn_802FA2F4_00000F6C:
     li r5, 0x0
-    bl fn_80170A20
+    bl battle_updateTargetAggro
 lbl_fn_802FA2F4_00000F74:
     mr r3, r31
     bl fn_802F8EBC
@@ -1984,7 +1984,7 @@ lbl_fn_802FB0C4_00001B80:
     mr r3, r30
     li r5, 0x0
     lwz r4, 0x0(r4)
-    bl fn_8017039C
+    bl battle_resolveAggroHierarchy
 lbl_fn_802FB0C4_00001BAC:
     mr r3, r30
     bl fn_802F8EBC

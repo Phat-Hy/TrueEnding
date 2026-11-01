@@ -22,7 +22,7 @@ extern void fn_800DC980(void);
 extern void fn_800F7250(void);
 extern void fn_80112F54(void);
 extern void fn_801207D4(void);
-extern void fn_80139550(void);
+extern void npc_updateDialogueTarget(void);
 extern void fn_80139F2C(void);
 extern void fn_8020A780(void);
 extern void fn_80218218(void);
@@ -1230,7 +1230,7 @@ lbl_fn_80224638_00000E8C:
     fmr f31, f1
     lwz r4, 0x0(r27)
     mr r3, r23
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     cmpwi r21, 0x0
     fmr f30, f1
     bge lbl_fn_80224638_00000ECC

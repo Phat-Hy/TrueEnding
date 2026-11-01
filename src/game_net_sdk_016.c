@@ -9,7 +9,7 @@ extern void _savegpr_16(void);
 extern void snprintf(void);
 extern void fn_806A420C(void);
 extern void fn_806A4270(void);
-extern void fn_806A7130(void);
+extern void net_checkConnectionSession(void);
 extern void net_formatLog(void);
 extern void fn_806AB920(void);
 extern void http_formatParam(void);
@@ -1160,7 +1160,7 @@ lbl_fn_806BCD40_00000FEC:
     mr r3, r29
     stb r0, 0x751(r5)
     subi r4, r4, 0x4ff0
-    bl fn_806A7130
+    bl net_checkConnectionSession
     lwz r6, lbl_80860898@l(r22)
     addi r3, r1, 0x24
     addi r5, r27, 0x5c
@@ -1416,7 +1416,7 @@ lbl_fn_806BCD40_000013C0:
     mr r3, r24
     li r4, 0x0
     stb r0, 0x751(r5)
-    bl fn_806A7130
+    bl net_checkConnectionSession
     lwz r6, lbl_80860898@l(r22)
     addi r3, r1, 0x18
     addi r5, r27, 0x5c

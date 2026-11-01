@@ -11,7 +11,7 @@ extern void vec3_set(void);
 extern void vec3_copy(void);
 extern void vec3_mag(void);
 extern void fn_8000D3A8(void);
-extern void fn_8000D430(void);
+extern void scene_traverseNode(void);
 extern void fn_8000DD0C(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
@@ -28,7 +28,7 @@ extern void talk_setSpeakerName(void);
 extern void fn_8006AC08(void);
 extern void fn_8006AD24(void);
 extern void fn_8006AF38(void);
-extern void fn_8006AFF8(void);
+extern void boss_initActionStream(void);
 extern void fn_8006B2D8(void);
 extern void fn_8006BA30(void);
 extern void fn_8006BA38(void);
@@ -87,7 +87,7 @@ extern void fn_803727D4(void);
 extern void fn_8037529C(void);
 extern void fn_8037F688(void);
 extern void fn_80392A04(void);
-extern void fn_803C1560(void);
+extern void craft_forgeUpgradeWeapon(void);
 extern void fn_803CFC58(void);
 extern void fn_803CFC64(void);
 extern void fn_803D2134(void);
@@ -608,7 +608,7 @@ lbl_fn_805BAC18_00000420:
     lwz r3, 0x50(r29)
     bl fn_8000DD0C
     addi r4, r1, 0x114
-    bl fn_8000D430
+    bl scene_traverseNode
     addi r3, r1, 0x114
     li r4, -0x1
     bl fn_8000D3A8
@@ -1432,7 +1432,7 @@ lbl_fn_805BB658_00001144:
     addi r3, r1, 0x3c
     addi r4, r1, 0x54
     addi r5, r1, 0x48
-    bl fn_8006AFF8
+    bl boss_initActionStream
     lwz r0, 0x9c(r1)
     srwi. r3, r0, 31
     bne lbl_fn_805BB658_000011DC
@@ -1963,7 +1963,7 @@ asm void fn_805BC1C4(void)
     li r6, 0x0
     li r7, 0x0
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     subi r0, r3, 0x1
     lwz r4, 0x5b0(r30)
     mulli r0, r0, 0x30

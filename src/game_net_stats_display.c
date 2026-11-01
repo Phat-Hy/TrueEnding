@@ -33,7 +33,7 @@ extern void fn_80161570(void);
 extern void fn_8016AB0C(void);
 extern void fn_8016DDB0(void);
 extern void fn_8016E4C4(void);
-extern void fn_8016EB48(void);
+extern void battle_applyStatusEffect(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_ctor(void);
@@ -577,7 +577,7 @@ lbl_fn_8054622C_00000650:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8016EB48
+    bl battle_applyStatusEffect
     mr r3, r31
     li r4, 0x0
     li r5, 0x1

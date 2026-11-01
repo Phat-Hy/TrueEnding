@@ -20,7 +20,7 @@ extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
 extern void fn_8008CD60(void);
 extern void lockon_updateTarget(void);
-extern void fn_800971D4(void);
+extern void cursor_Object_constructor(void);
 extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -31,7 +31,7 @@ extern void morph_updateWeights(void);
 extern void fn_800CB518(void);
 extern void morph_updateMesh(void);
 extern void fn_800CB6E4(void);
-extern void fn_802180A8(void);
+extern void task_lookupTagIndex(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_unload(void);
 extern void res_findResourceSlot(void);
@@ -1557,7 +1557,7 @@ lbl_fn_80406600_00001404:
     bl strcpy
     addi r3, r1, 0x8
     bl talk_formatQuotedString
-    bl fn_802180A8
+    bl task_lookupTagIndex
     stw r3, 0x5f8(r29)
     addi r30, r30, 0x100
     addi r29, r29, 0x4
@@ -1794,10 +1794,10 @@ lbl_fn_80406998_00001758:
 lbl_fn_80406998_00001764:
     addi r3, r29, 0x4c4
     li r4, -0x1
-    bl fn_800971D4
+    bl cursor_Object_constructor
     addi r3, r29, 0xf4
     li r4, -0x1
-    bl fn_800971D4
+    bl cursor_Object_constructor
     mr r3, r29
     li r4, 0x0
     bl task_destroyWorker

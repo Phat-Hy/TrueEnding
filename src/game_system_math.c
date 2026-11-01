@@ -17,7 +17,7 @@ extern void talk_setSpeakerName(void);
 extern void talk_parseDialogue(void);
 extern void fn_8005B8F8(void);
 extern void fn_8005B9AC(void);
-extern void fn_8006AFF8(void);
+extern void boss_initActionStream(void);
 extern void fn_8006B0C8(void);
 extern void fn_8006B2D8(void);
 extern void fn_8006BA8C(void);
@@ -1584,7 +1584,7 @@ lbl_fn_8020CC64_000013EC:
     addi r3, r1, 0x50
     addi r4, r1, 0x5c
     addi r5, r1, 0x8c
-    bl fn_8006AFF8
+    bl boss_initActionStream
     lwz r0, 0x8c(r1)
     srwi. r3, r0, 31
     bne lbl_fn_8020CC64_0000143C
@@ -1691,7 +1691,7 @@ lbl_fn_8020CC64_00001540:
     mr r5, r22
     addi r3, r1, 0x38
     addi r4, r1, 0x44
-    bl fn_8006AFF8
+    bl boss_initActionStream
     lwz r0, 0x0(r22)
     srwi. r4, r0, 31
     bne lbl_fn_8020CC64_000015BC

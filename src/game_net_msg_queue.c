@@ -20,7 +20,7 @@ extern void fn_804F6E98(void);
 extern void fn_804F7A54(void);
 extern void fn_804FB224(void);
 extern void fn_8050128C(void);
-extern void fn_8050E098(void);
+extern void net_p2p_readPayload(void);
 extern void wcslen(void);
 extern void net_getSocket(void);
 extern void net_getMyAid(void);
@@ -146,7 +146,7 @@ lbl_fn_804F4CBC_000000EC:
     mr r6, r29
     li r5, 0x1035
     li r7, 0x1
-    bl fn_8050E098
+    bl net_p2p_readPayload
     lwz r3, lbl_8087F610
     li r0, 0x1
     addis r3, r3, 0x1
@@ -361,7 +361,7 @@ lbl_fn_804F4FC8_000003BC:
     mr r6, r27
     li r5, 0x1035
     li r7, 0x1
-    bl fn_8050E098
+    bl net_p2p_readPayload
 lbl_fn_804F4FC8_000003F8:
     lmw r27, 0x1c(r1)
     lwz r0, 0x34(r1)

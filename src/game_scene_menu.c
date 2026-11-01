@@ -25,7 +25,7 @@ extern void fn_80133130(void);
 extern void fn_801446F0(void);
 extern void inventory_unequipItem(void);
 extern void equip_applyToCharacter(void);
-extern void fn_80155DAC(void);
+extern void inventory_calcTotalStats(void);
 extern void debuff_clearStatus(void);
 extern void actor_getMovementFlags(void);
 extern void fn_80192758(void);
@@ -1616,7 +1616,7 @@ asm void fn_801A77BC(void)
     extrwi. r0, r0, 1, 25
     beq lbl_fn_801A77BC_000014AC
     li r4, 0x0
-    bl fn_80155DAC
+    bl inventory_calcTotalStats
 lbl_fn_801A77BC_000014AC:
     lwz r3, 0x4(r30)
     li r0, 0x1

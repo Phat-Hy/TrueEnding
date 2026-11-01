@@ -15,7 +15,7 @@ extern void quest_updateFlow(void);
 extern void inventory_unequipItem(void);
 extern void fn_80154344(void);
 extern void equip_applyToCharacter(void);
-extern void fn_80155DAC(void);
+extern void inventory_calcTotalStats(void);
 extern void fn_80178208(void);
 extern void fn_80192758(void);
 extern void fn_801B2EDC(void);
@@ -1360,7 +1360,7 @@ lbl_fn_801B4D34_00001184:
     extrwi. r0, r0, 1, 25
     beq lbl_fn_801B4D34_0000119C
     li r4, 0x0
-    bl fn_80155DAC
+    bl inventory_calcTotalStats
 lbl_fn_801B4D34_0000119C:
     lwz r3, 0x4(r31)
     li r0, 0x1

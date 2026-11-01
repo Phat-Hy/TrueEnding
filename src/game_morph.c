@@ -84,7 +84,7 @@ void fn_800CB09C(void);
 void fn_800CB0A0(void);
 void fn_800CB14C(void);
 void fn_800CB1F4(void);
-void morph_reset(void);
+void morph_reset(void *ptr);
 void fn_800CB36C(void);
 void ref_releaseHandle(void);
 void fn_800CB404(void);
@@ -1300,12 +1300,9 @@ lbl_fn_800CB1F4_00000F14:
     blr
 }
 
-asm void morph_reset(void)
+void morph_reset(void *ptr)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, 0x0(r3)
-    blr
+    *(u32 *)ptr = 0;
 }
 
 asm void fn_800CB36C(void)

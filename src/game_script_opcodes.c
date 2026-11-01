@@ -29,10 +29,10 @@ extern void clip_calculateFrustum(void);
 extern void fn_80105BD8(void);
 extern void skill_findNodeById(void);
 extern void equip_getGlobalManager(void);
-extern void fn_80126214(void);
-extern void fn_8013322C(void);
+extern void enemy_updateCombatBehavior(void);
+extern void actor_testBitFlag(void);
 extern void boss_updatePhaseState(void);
-extern void fn_8013A258(void);
+extern void npc_initScriptContext(void);
 extern void fn_8013C504(void);
 extern void npc_updateTalkInteraction(void);
 extern void quest_updateFlow(void);
@@ -44,7 +44,7 @@ extern void debuff_clearStatus(void);
 extern void actor_setState(void);
 extern void battle_awardExp(void);
 extern void fn_80178208(void);
-extern void fn_80178A6C(void);
+extern void battle_updateActorStatus(void);
 extern void fn_801A03E0(void);
 extern void fn_801C02F4(void);
 extern void thread_findAndNotifySlot(void);
@@ -1726,7 +1726,7 @@ lbl_fn_80245BBC_000015A0:
     mtctr r12
     bctrl
     mr r3, r31
-    bl fn_80178A6C
+    bl battle_updateActorStatus
     mr r3, r31
     li r4, 0x0
     li r5, 0x1
@@ -1795,7 +1795,7 @@ lbl_fn_80245BBC_00001758:
     mtctr r12
     bctrl
     mr r3, r27
-    bl fn_80178A6C
+    bl battle_updateActorStatus
     mr r3, r27
     li r4, 0x0
     li r5, 0x1
@@ -1853,7 +1853,7 @@ lbl_fn_80245BBC_00001848:
     addi r3, r31, 0x7d4
     stfs f0, 0x7d8(r31)
     li r4, 0x20
-    bl fn_8013322C
+    bl actor_testBitFlag
     li r0, 0x1
     stw r0, 0x15ac(r31)
 lbl_fn_80245BBC_00001880:
@@ -1915,7 +1915,7 @@ asm void fn_80245F14(void)
     cmpwi r0, 0x7
     bne lbl_fn_80245F14_00001B64
     addi r3, r29, 0x1030
-    bl fn_80126214
+    bl enemy_updateCombatBehavior
     addi r4, r29, 0x1088
     addi r31, r1, 0x68
     psq_l f1, 0x0(r4), 0, 0
@@ -2059,7 +2059,7 @@ lbl_fn_80245F14_00001B64:
     cmpwi r0, 0x6
     bne lbl_fn_80245F14_00001B78
     mr r3, r29
-    bl fn_8013A258
+    bl npc_initScriptContext
     b lbl_fn_80245F14_00001B94
 lbl_fn_80245F14_00001B78:
     lfs f0, 0x568(r29)

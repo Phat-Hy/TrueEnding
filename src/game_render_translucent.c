@@ -19,7 +19,7 @@ extern void system_getNextSequenceId(void);
 extern void viewport_updateCulling(void);
 extern void scissor_clipFrustum(void);
 extern void fn_801255C8(void);
-extern void fn_80126214(void);
+extern void enemy_updateCombatBehavior(void);
 extern void fn_80128930(void);
 extern void fn_80128A30(void);
 extern void fn_8012DB04(void);
@@ -1544,7 +1544,7 @@ lbl_fn_802B8AA4_000013B8:
     b lbl_fn_802B8AA4_0000209C
 lbl_fn_802B8AA4_000013D8:
     addi r3, r31, 0xc64
-    bl fn_80126214
+    bl enemy_updateCombatBehavior
     lwz r0, 0xc90(r31)
     cmpwi r0, 0x0
     beq lbl_fn_802B8AA4_000013F8

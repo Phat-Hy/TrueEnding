@@ -8,7 +8,7 @@ extern void _savegpr_25(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_8000D760(void);
-extern void fn_8000D9E8(void);
+extern void scene_transformPoint(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_80056DB8(void);
@@ -16,8 +16,8 @@ extern void atn_ColliBase_destructor(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
-extern void fn_8006AFF8(void);
-extern void fn_8007708C(void);
+extern void boss_initActionStream(void);
+extern void chapter_updateProgression(void);
 extern void route_findNextWaypoint(void);
 extern void route_createSegment(void);
 extern void node_createNamedChild(void);
@@ -34,7 +34,7 @@ extern void boss_updatePhaseState(void);
 extern void equip_applyToCharacter(void);
 extern void debuff_clearStatus(void);
 extern void actor_setState(void);
-extern void fn_80178A6C(void);
+extern void battle_updateActorStatus(void);
 extern void actor_getMovementFlags(void);
 extern void task_findEntryById(void);
 extern void res_MsgHandle_ctor(void);
@@ -74,7 +74,7 @@ extern void fn_802A7970(void);
 extern void entity_Instance_constructor(void);
 extern void entity_Instance_destructor(void);
 extern void fn_8037D4C0(void);
-extern void fn_803C1560(void);
+extern void craft_forgeUpgradeWeapon(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
@@ -318,7 +318,7 @@ lbl_fn_802A4194_000001B0:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     subi r0, r3, 0x1
     lwz r4, 0x9c(r29)
     mulli r0, r0, 0x30
@@ -420,7 +420,7 @@ lbl_fn_802A42CC_00000318:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     subi r0, r3, 0x1
     lwz r4, 0x156c(r31)
     mulli r0, r0, 0x30
@@ -489,7 +489,7 @@ asm void fn_802A4478(void)
     mtctr r12
     bctrl
     mr r3, r28
-    bl fn_80178A6C
+    bl battle_updateActorStatus
     mr r3, r28
     li r4, 0x0
     li r5, 0x1
@@ -642,7 +642,7 @@ asm void fn_802A46E4(void)
     stw r31, 0xc(r1)
     mr r31, r3
     stw r30, 0x8(r1)
-    bl fn_8000D9E8
+    bl scene_transformPoint
     bl fn_802A36B0
     lwz r0, 0x15c8(r31)
     mr r30, r3
@@ -822,7 +822,7 @@ asm void fn_802A4968(void)
     mulli r0, r4, 0x1a
     add r4, r3, r0
     addi r4, r4, 0x34
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_802A4968_00000910
     li r31, 0x1
@@ -1259,7 +1259,7 @@ lbl_fn_802A4BBC_00000F2C:
     addi r3, r1, 0x20
     addi r4, r1, 0x38
     addi r5, r1, 0x2c
-    bl fn_8006AFF8
+    bl boss_initActionStream
     lwz r0, 0x20(r1)
     addi r3, r29, 0x1844
     srwi. r0, r0, 31

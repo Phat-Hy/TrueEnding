@@ -33,14 +33,14 @@ extern void fn_8015AC48(void);
 extern void fn_8016E4C4(void);
 extern void actor_setState(void);
 extern void battle_canTargetActor(void);
-extern void fn_80178A6C(void);
+extern void battle_updateActorStatus(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
 extern void fn_80312EF8(void);
 extern void fn_803132D0(void);
 extern void fn_803C11A4(void);
-extern void fn_803C1560(void);
+extern void craft_forgeUpgradeWeapon(void);
 extern void fn_803CD958(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
@@ -630,7 +630,7 @@ lbl_fn_803104D4_00000728:
     li r5, 0x0
     li r6, 0x0
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     cmpwi r3, 0x0
     ble lbl_fn_803104D4_00000940
     lwz r0, 0x151c(r25)
@@ -2062,7 +2062,7 @@ lbl_fn_80311364_00001AC4:
     stfs f0, 0x2e4(r27)
     bl fn_80097E80
     b lbl_fn_80311364_00001CEC
-    bl fn_80178A6C
+    bl battle_updateActorStatus
     lwz r25, 0x151c(r27)
     cmpwi r25, 0x0
     beq lbl_fn_80311364_00001BF4

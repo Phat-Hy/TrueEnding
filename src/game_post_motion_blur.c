@@ -2,16 +2,16 @@
 #pragma function_align 4
 
 /* External function declarations */
-extern void fn_8004ECC0(void);
+extern void item_testLineOfSight(void);
 extern void fn_80094958(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void system_getNextSequenceId(void);
-extern void fn_80126214(void);
-extern void fn_8013A258(void);
+extern void enemy_updateCombatBehavior(void);
+extern void npc_initScriptContext(void);
 extern void npc_updateTalkInteraction(void);
 extern void inventory_applyItemStats(void);
 extern void actor_setState(void);
-extern void fn_80170A20(void);
+extern void battle_updateTargetAggro(void);
 extern void fn_8017A300(void);
 extern void sound_initGlobalInstances(void);
 extern void res_Shader_bindParams(void);
@@ -963,7 +963,7 @@ asm void fn_802C2BCC(void)
     cmpwi r0, 0x7
     bne lbl_fn_802C2BCC_000010F4
     addi r3, r3, 0x1030
-    bl fn_80126214
+    bl enemy_updateCombatBehavior
     addi r4, r29, 0x1088
     addi r31, r1, 0xe0
     psq_l f1, 0x0(r4), 0, 0
@@ -1141,7 +1141,7 @@ lbl_fn_802C2BCC_00000E48:
     lfs f1, lbl_808842B0
     mr r3, r29
     li r5, 0x0
-    bl fn_80170A20
+    bl battle_updateTargetAggro
 lbl_fn_802C2BCC_00000EE4:
     lfs f0, lbl_8088436C
     fcmpo cr0, f31, f0
@@ -1293,7 +1293,7 @@ lbl_fn_802C2BCC_000010F4:
     stfs f31, 0x584(r3)
     b lbl_fn_802C2BCC_0000111C
 lbl_fn_802C2BCC_00001114:
-    bl fn_8013A258
+    bl npc_initScriptContext
     b lbl_fn_802C2BCC_00001134
 lbl_fn_802C2BCC_0000111C:
     fmr f1, f31
@@ -2053,7 +2053,7 @@ lbl_fn_802C38E4_00001BC8:
     fadds f0, f0, f4
     stfs f3, 0x84(r1)
     stfs f0, 0x78(r1)
-    bl fn_8004ECC0
+    bl item_testLineOfSight
     lwz r4, 0x1594(r30)
     cntlzw r0, r3
     srwi r3, r0, 5

@@ -23,7 +23,7 @@ extern void fn_80062C8C(void);
 extern void fn_80063200(void);
 extern void fn_80063484(void);
 extern void fn_800638B0(void);
-extern void fn_8007708C(void);
+extern void chapter_updateProgression(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
@@ -1183,7 +1183,7 @@ lbl_fn_80014A5C_00000DA0:
     subi r0, r4, 0xe48
     addi r4, r3, 0x34
     clrlwi r5, r0, 16
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_80014A5C_00000DD4
     li r21, 0x1
@@ -1199,7 +1199,7 @@ lbl_fn_80014A5C_00000DD4:
     subi r0, r4, 0xe4e
     addi r4, r3, 0x34
     clrlwi r5, r0, 16
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_80014A5C_00000E10
     li r21, 0x1
@@ -1216,7 +1216,7 @@ lbl_fn_80014A5C_00000E18:
     subi r0, r4, 0xe48
     addi r4, r3, 0x34
     clrlwi r5, r0, 16
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_80014A5C_00000E4C
     li r21, 0x1
@@ -1240,7 +1240,7 @@ lbl_fn_80014A5C_00000E70:
     subi r0, r4, 0xe4e
     addi r4, r3, 0x34
     clrlwi r5, r0, 16
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_80014A5C_00000EA4
     li r21, 0x1
@@ -1265,7 +1265,7 @@ lbl_fn_80014A5C_00000ECC:
     subi r0, r4, 0xe4c
     addi r4, r3, 0x9c
     clrlwi r5, r0, 16
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_80014A5C_00000F00
     li r21, 0x1
@@ -1391,7 +1391,7 @@ lbl_fn_80014A5C_00001070:
     subi r0, r4, 0xe4a
     addi r4, r3, 0x9c
     clrlwi r5, r0, 16
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_80014A5C_000010A4
     li r21, 0x1

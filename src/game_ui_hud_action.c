@@ -17,7 +17,7 @@ extern void viewport_updateCulling(void);
 extern void fn_80134168(void);
 extern void inventory_unequipItem(void);
 extern void fn_80154344(void);
-extern void fn_80155DAC(void);
+extern void inventory_calcTotalStats(void);
 extern void debuff_clearStatus(void);
 extern void fn_8017AC3C(void);
 extern void fn_80188F08(void);
@@ -1287,7 +1287,7 @@ lbl_fn_801C82F8_00001074:
     extrwi. r0, r0, 1, 25
     beq lbl_fn_801C82F8_0000108C
     li r4, 0x0
-    bl fn_80155DAC
+    bl inventory_calcTotalStats
 lbl_fn_801C82F8_0000108C:
     li r0, 0x0
     stw r0, 0x174(r1)
@@ -1683,7 +1683,7 @@ lbl_fn_801C8938_00001634:
     extrwi. r0, r0, 1, 25
     beq lbl_fn_801C8938_0000164C
     li r4, 0x0
-    bl fn_80155DAC
+    bl inventory_calcTotalStats
 lbl_fn_801C8938_0000164C:
     lwz r3, 0x4(r31)
     bl debuff_clearStatus

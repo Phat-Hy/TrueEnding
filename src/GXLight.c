@@ -41,15 +41,15 @@ extern f32 lbl_808887AC;
 void fn_80615700(void);
 void fn_80615720(void);
 void fn_806158C0(void);
-void fn_80615990(void);
+void fn_80615990(void *light, f32 x, f32 y, f32 z);
 void fn_806159A0(void);
 void fn_806159C0(void);
-void fn_80615AD0(void);
+void fn_80615AD0(void *dest, const void *src);
 void fn_80615AE0(void);
 void fn_80615B60(void);
 void fn_80615C40(void);
 void GXInitLightDistAttn(void);
-void fn_80615D50(void);
+void GXInitLightSpot(void);
 void fn_80615E00(void);
 void fn_80615F30(void);
 void fn_80615FF0(void);
@@ -249,13 +249,12 @@ lbl_fn_806158C0_00000274:
     blr
 }
 
-asm void fn_80615990(void)
+void fn_80615990(void *light, f32 x, f32 y, f32 z)
 {
-    nofralloc
-    stfs f1, 0x28(r3)
-    stfs f2, 0x2c(r3)
-    stfs f3, 0x30(r3)
-    blr
+    f32 *p = (f32 *)((char *)light + 0x28);
+    p[0] = x;
+    p[1] = y;
+    p[2] = z;
 }
 
 asm void fn_806159A0(void)
@@ -343,12 +342,9 @@ lbl_fn_806159C0_00000354:
     blr
 }
 
-asm void fn_80615AD0(void)
+void fn_80615AD0(void *dest, const void *src)
 {
-    nofralloc
-    lwz r0, 0x0(r4)
-    stw r0, 0xc(r3)
-    blr
+    *(u32 *)((char *)dest + 0xc) = *(const u32 *)src;
 }
 
 asm void fn_80615AE0(void)
@@ -534,7 +530,7 @@ asm void GXInitLightDistAttn(void)
     blr
 }
 
-asm void fn_80615D50(void)
+asm void GXInitLightSpot(void)
 {
     nofralloc
     cmpwi r9, 0x0
@@ -543,9 +539,9 @@ asm void fn_80615D50(void)
     clrlwi r11, r3, 30
     rlwimi r10, r6, 0, 31, 31
     rlwimi r10, r5, 6, 25, 25
-    bne lbl_fn_80615D50_00000670
+    bne lbl_GXInitLightSpot_00000670
     li r8, 0x0
-lbl_fn_80615D50_00000670:
+lbl_GXInitLightSpot_00000670:
     subfic r5, r9, 0x2
     subi r4, r9, 0x2
     or r4, r5, r4
@@ -566,13 +562,13 @@ lbl_fn_80615D50_00000670:
     lwz r4, 0x5fc(r5)
     or r0, r4, r0
     stw r0, 0x5fc(r5)
-    bne lbl_fn_80615D50_000006D8
+    bne lbl_GXInitLightSpot_000006D8
     stw r10, 0xc0(r5)
     lwz r0, 0x5fc(r5)
     ori r0, r0, 0x5000
     stw r0, 0x5fc(r5)
     blr
-lbl_fn_80615D50_000006D8:
+lbl_GXInitLightSpot_000006D8:
     cmpwi r3, 0x5
     bnelr
     stw r10, 0xc4(r5)

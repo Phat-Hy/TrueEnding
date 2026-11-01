@@ -18,7 +18,7 @@ extern void _savegpr_24(void);
 extern void _savegpr_25(void);
 extern void snprintf(void);
 extern void fn_806A7110(void);
-extern void fn_806A7130(void);
+extern void net_checkConnectionSession(void);
 extern void fn_806A72E0(void);
 extern void fn_806A7400(void);
 extern void net_formatLog(void);
@@ -761,7 +761,7 @@ lbl_fn_806B42B0_00000844:
     li r3, 0x9
     stb r31, 0x751(r5)
     subi r4, r4, 0x3881
-    bl fn_806A7130
+    bl net_checkConnectionSession
     lwz r6, lbl_80860898@l(r18)
     addi r3, r1, 0x2c
     addi r5, r30, 0x5c
@@ -2244,7 +2244,7 @@ lbl_fn_806B5860_00001ED4:
     li r3, 0x19
     stb r0, 0x751(r5)
     subi r4, r4, 0x3a30
-    bl fn_806A7130
+    bl net_checkConnectionSession
     lwz r6, lbl_80860898@l(r26)
     addi r3, r1, 0x5c
     addi r5, r27, 0x5c
@@ -2452,7 +2452,7 @@ lbl_fn_806B5860_000021EC:
     li r3, 0x19
     stb r0, 0x751(r5)
     subi r4, r4, 0x3a2e
-    bl fn_806A7130
+    bl net_checkConnectionSession
     lwz r6, lbl_80860898@l(r28)
     addi r3, r1, 0x50
     addi r5, r27, 0x5c
@@ -3328,7 +3328,7 @@ lbl_fn_806B5860_00002EE8:
     li r3, 0x19
     stb r0, 0x751(r5)
     subi r4, r4, 0x3a2f
-    bl fn_806A7130
+    bl net_checkConnectionSession
     lwz r6, lbl_80860898@l(r26)
     addi r3, r1, 0x44
     addi r5, r27, 0x5c
@@ -3530,7 +3530,7 @@ lbl_fn_806B5860_000031D4:
     li r3, 0x19
     stb r0, 0x751(r5)
     subi r4, r4, 0x3a2f
-    bl fn_806A7130
+    bl net_checkConnectionSession
     lwz r6, lbl_80860898@l(r28)
     addi r3, r1, 0x38
     addi r5, r27, 0x5c
@@ -3970,7 +3970,7 @@ lbl_fn_806B5860_000037FC:
     li r3, 0x19
     stb r28, 0x751(r5)
     subi r4, r4, 0x3a2f
-    bl fn_806A7130
+    bl net_checkConnectionSession
     lwz r6, lbl_80860898@l(r31)
     addi r3, r1, 0x2c
     addi r5, r27, 0x5c
@@ -4132,7 +4132,7 @@ lbl_fn_806B5860_00003AB4:
     li r3, 0x19
     stb r0, 0x751(r5)
     subi r4, r4, 0x3a2f
-    bl fn_806A7130
+    bl net_checkConnectionSession
     lwz r6, lbl_80860898@l(r28)
     addi r3, r1, 0x20
     addi r5, r27, 0x5c
@@ -4450,7 +4450,7 @@ lbl_fn_806B5860_00003EEC:
     li r3, 0x19
     stb r31, 0x751(r5)
     subi r4, r4, 0x3a30
-    bl fn_806A7130
+    bl net_checkConnectionSession
     lwz r6, lbl_80860898@l(r28)
     addi r3, r1, 0x14
     addi r5, r27, 0x5c
@@ -4889,7 +4889,7 @@ lbl_fn_806B5860_0000459C:
     li r3, 0x6
     stb r0, 0x751(r5)
     subi r4, r4, 0x4c12
-    bl fn_806A7130
+    bl net_checkConnectionSession
     lwz r6, lbl_80860898@l(r31)
     addi r3, r1, 0x8
     addi r5, r27, 0x5c

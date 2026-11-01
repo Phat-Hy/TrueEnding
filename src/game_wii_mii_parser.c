@@ -31,13 +31,13 @@ extern void fn_800F7FD8(void);
 extern void scissor_clipFrustum(void);
 extern void fn_801125F8(void);
 extern void fn_8011C044(void);
-extern void fn_80126214(void);
+extern void enemy_updateCombatBehavior(void);
 extern void fn_80129978(void);
 extern void fn_8012DB04(void);
 extern void boss_updatePhaseState(void);
 extern void fn_80139F4C(void);
 extern void fn_80139F58(void);
-extern void fn_8013A258(void);
+extern void npc_initScriptContext(void);
 extern void quest_evaluateConditions(void);
 extern void quest_updateFlow(void);
 extern void quest_checkCondition(void);
@@ -49,7 +49,7 @@ extern void fn_80158CA4(void);
 extern void fn_8015E7A0(void);
 extern void fn_8015EB2C(void);
 extern void fn_8016D454(void);
-extern void fn_8016EB48(void);
+extern void battle_applyStatusEffect(void);
 extern void fn_8016F67C(void);
 extern void actor_getMovementFlags(void);
 extern void task_mapIdToQueue(void);
@@ -60,7 +60,7 @@ extern void fn_8031F2A4(void);
 extern void entity_Instance_constructor(void);
 extern void entity_Instance_destructor(void);
 extern void fn_803754C4(void);
-extern void fn_803C1560(void);
+extern void craft_forgeUpgradeWeapon(void);
 extern void fn_80568EE4(void);
 extern void fn_80568F14(void);
 extern void fn_805693D0(void);
@@ -1607,7 +1607,7 @@ lbl_fn_80566FB8_000013BC:
     li r4, 0x1
     li r5, 0x1
     li r6, 0x1
-    bl fn_8016EB48
+    bl battle_applyStatusEffect
     lwz r0, 0x55c(r31)
     cmpwi r0, 0x2
     bne lbl_fn_80566FB8_00001420
@@ -1721,7 +1721,7 @@ lbl_fn_80567428_00001570:
     li r6, 0x0
     li r7, 0x0
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     stw r3, 0x0(r27)
 lbl_fn_80567428_000015A8:
     lwz r0, 0xd18(r30)
@@ -1987,7 +1987,7 @@ lbl_fn_80567600_00001914:
     b lbl_fn_80567600_000019C8
 lbl_fn_80567600_00001944:
     addi r3, r31, 0x1030
-    bl fn_80126214
+    bl enemy_updateCombatBehavior
     addi r3, r31, 0x1030
     bl fn_80139F58
     mr r4, r3
@@ -2019,7 +2019,7 @@ lbl_fn_80567600_000019B4:
     cmpwi r3, 0x6
     bne lbl_fn_80567600_000019C8
     mr r3, r31
-    bl fn_8013A258
+    bl npc_initScriptContext
     b lbl_fn_80567600_000019F8
 lbl_fn_80567600_000019C8:
     addi r3, r31, 0x7d4

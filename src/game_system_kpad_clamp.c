@@ -7,7 +7,7 @@ extern void _savegpr_26(void);
 extern void vec3_set(void);
 extern void vec3_copy(void);
 extern void fn_8000D3A8(void);
-extern void fn_8000D430(void);
+extern void scene_traverseNode(void);
 extern void fn_8000DD0C(void);
 extern void vec3_assign(void);
 extern void fn_800109E0(void);
@@ -58,9 +58,9 @@ extern void quest_checkCondition(void);
 extern void dialog_selectChoice(void);
 extern void fn_80151210(void);
 extern void inventory_unequipItem(void);
-extern void fn_80155DAC(void);
+extern void inventory_calcTotalStats(void);
 extern void fn_801750FC(void);
-extern void fn_80178A6C(void);
+extern void battle_updateActorStatus(void);
 extern void fn_801C0738(void);
 extern void thread_findAndNotify(void);
 extern void fn_8021A984(void);
@@ -665,7 +665,7 @@ lbl_fn_803729B4_00000694:
     bl fn_800F52F0
     bl fn_8012D8B8
     mr r3, r26
-    bl fn_80178A6C
+    bl battle_updateActorStatus
     mr r3, r26
     bl fn_8013C3A8
     cmpwi r3, 0x0
@@ -679,7 +679,7 @@ lbl_fn_803729B4_000006D0:
     beq lbl_fn_803729B4_000006EC
     mr r3, r26
     li r4, 0x0
-    bl fn_80155DAC
+    bl inventory_calcTotalStats
 lbl_fn_803729B4_000006EC:
     mr r3, r26
     bl fn_80267B20
@@ -842,7 +842,7 @@ lbl_fn_803729B4_000008B8:
     mr r3, r26
     bl fn_8000DD0C
     addi r4, r1, 0x8c
-    bl fn_8000D430
+    bl scene_traverseNode
     addi r3, r1, 0x8c
     li r4, -0x1
     bl fn_8000D3A8

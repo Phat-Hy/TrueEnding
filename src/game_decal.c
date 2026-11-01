@@ -35,7 +35,7 @@ extern void fn_80134134(void);
 extern void fn_80139560(void);
 extern void quest_evaluateConditions(void);
 extern void fn_80155790(void);
-extern void fn_80155DAC(void);
+extern void inventory_calcTotalStats(void);
 extern void fn_80158BB4(void);
 extern void fn_80158CA4(void);
 extern void fn_8016AFE8(void);
@@ -1263,7 +1263,7 @@ lbl_fn_800E62AC_00000FD0:
     bne lbl_fn_800E62AC_00001018
     mr r3, r25
     li r4, 0x0
-    bl fn_80155DAC
+    bl inventory_calcTotalStats
     b lbl_fn_800E62AC_00001390
 lbl_fn_800E62AC_00001018:
     lwz r3, 0x50(r25)

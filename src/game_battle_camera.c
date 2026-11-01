@@ -7,7 +7,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void fn_80017064(void);
-extern void fn_80044E0C(void);
+extern void menu_renderLayout(void);
 extern void collision_testLineSegment(void);
 extern void mem_alloc(void);
 extern void atn_Anim_getLayerTrack(void);
@@ -169,13 +169,13 @@ lbl_fn_80170F20_00000128:
     cmpwi r3, 0x0
     beq lbl_fn_80170F20_00000158
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_fn_80170F20_00000158:
     lwz r3, 0x64c(r31)
     cmpwi r3, 0x0
     beq lbl_fn_80170F20_0000016C
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_fn_80170F20_0000016C:
     li r0, 0x0
     li r3, -0x1
@@ -515,13 +515,13 @@ lbl_fn_80171420_00000608:
     cmpwi r3, 0x0
     beq lbl_fn_80171420_00000638
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_fn_80171420_00000638:
     lwz r3, 0x64c(r31)
     cmpwi r3, 0x0
     beq lbl_fn_80171420_0000064C
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_fn_80171420_0000064C:
     li r0, 0x0
     li r3, -0x1
@@ -851,13 +851,13 @@ lbl_fn_801718F8_00000AC0:
     cmpwi r3, 0x0
     beq lbl_fn_801718F8_00000AF0
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_fn_801718F8_00000AF0:
     lwz r3, 0x64c(r31)
     cmpwi r3, 0x0
     beq lbl_fn_801718F8_00000B04
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_fn_801718F8_00000B04:
     li r0, 0x0
     li r3, -0x1

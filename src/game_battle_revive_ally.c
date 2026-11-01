@@ -9,7 +9,7 @@ extern void _savegpr_25(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8000D430(void);
+extern void scene_traverseNode(void);
 extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
@@ -18,7 +18,7 @@ extern void area_updateZoneState(void);
 extern void fn_8009076C(void);
 extern void fn_80092A4C(void);
 extern void lockon_updateTarget(void);
-extern void fn_800971D4(void);
+extern void cursor_Object_constructor(void);
 extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void fn_80097E80(void);
@@ -1176,7 +1176,7 @@ asm void fn_80404864(void)
     bl ref_releaseHandle
     addi r3, r30, 0x4
     li r4, -0x1
-    bl fn_800971D4
+    bl cursor_Object_constructor
     cmpwi r31, 0x0
     ble lbl_fn_80404864_00000FE0
     mr r3, r30
@@ -1464,7 +1464,7 @@ lbl_fn_804048CC_000013D8:
     stw r0, 0x74(r1)
     addi r3, r31, 0x4
     addi r4, r1, 0x74
-    bl fn_8000D430
+    bl scene_traverseNode
     addic. r3, r1, 0x74
     beq lbl_fn_804048CC_00001438
     lwz r4, 0x74(r1)

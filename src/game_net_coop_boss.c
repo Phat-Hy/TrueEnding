@@ -7,9 +7,9 @@ extern void _restgpr_23(void);
 extern void _savegpr_20(void);
 extern void _savegpr_23(void);
 extern void dtor_80084684(void);
-extern void fn_8000D430(void);
+extern void scene_traverseNode(void);
 extern void fn_8004B290(void);
-extern void fn_8004B338(void);
+extern void sound_releaseChannel(void);
 extern void item_useConsumable(void);
 extern void fn_8005E3E4(void);
 extern void fn_8005E7F4(void);
@@ -27,8 +27,8 @@ extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
 extern void fn_80092954(void);
 extern void lockon_updateTarget(void);
-extern void fn_800971D4(void);
-extern void fn_800BDB58(void);
+extern void cursor_Object_constructor(void);
+extern void model_updateBoneTransforms(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
@@ -1469,10 +1469,10 @@ asm void fn_804A83E4(void)
 lbl_fn_804A83E4_00001248:
     addi r3, r30, 0x640
     li r4, -0x1
-    bl fn_8004B338
+    bl sound_releaseChannel
     addi r3, r30, 0x208
     li r4, -0x1
-    bl fn_800971D4
+    bl cursor_Object_constructor
     addi r3, r30, 0x1d8
     li r4, -0x1
     bl atn_LH_Texture_destructAndFree
@@ -1762,7 +1762,7 @@ lbl_fn_804A8644_0000165C:
     addi r3, r31, 0x208
     addi r4, r1, 0x38
     stw r0, 0x38(r1)
-    bl fn_8000D430
+    bl scene_traverseNode
     addic. r3, r1, 0x38
     beq lbl_fn_804A8644_000016B0
     lwz r4, 0x38(r1)
@@ -3256,7 +3256,7 @@ lbl_fn_804A894C_00002B9C:
     lwz r3, lbl_8087EFB4
     li r5, 0x2
     lfs f1, lbl_80887250
-    bl fn_800BDB58
+    bl model_updateBoneTransforms
     cmpwi r24, 0x0
     beq lbl_fn_804A894C_00002BB8
     addi r24, r24, 0x48
@@ -3265,7 +3265,7 @@ lbl_fn_804A894C_00002BB8:
     mr r4, r24
     lfs f1, lbl_80887250
     li r5, 0x10
-    bl fn_800BDB58
+    bl model_updateBoneTransforms
 lbl_fn_804A894C_00002BCC:
     addi r11, r1, 0x3e0
     psq_l f31, 0x4b8(r1), 0, 0

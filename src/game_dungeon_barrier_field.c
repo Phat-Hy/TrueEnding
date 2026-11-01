@@ -7,7 +7,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_22(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8000D430(void);
+extern void scene_traverseNode(void);
 extern void talk_parseQuotedString(void);
 extern void talk_setSpeakerName(void);
 extern void talk_formatQuotedString(void);
@@ -1239,7 +1239,7 @@ lbl_task_initWorkerContext_00000FDC:
     stw r0, 0x38(r1)
     mr r3, r29
     addi r4, r1, 0x38
-    bl fn_8000D430
+    bl scene_traverseNode
     addic. r3, r1, 0x38
     beq lbl_task_initWorkerContext_00001038
     lwz r4, 0x38(r1)

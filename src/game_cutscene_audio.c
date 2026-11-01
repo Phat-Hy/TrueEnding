@@ -8,7 +8,7 @@ extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void vec3_mag(void);
-extern void fn_8000D9E8(void);
+extern void scene_transformPoint(void);
 extern void fn_8000DCF4(void);
 extern void vec3_sub(void);
 extern void vec3_add(void);
@@ -37,7 +37,7 @@ extern void clip_calculateFrustum(void);
 extern void equip_getGlobalManager(void);
 extern void magic_getOffset6C(void);
 extern void fn_8012A1B8(void);
-extern void fn_8013322C(void);
+extern void actor_testBitFlag(void);
 extern void boss_updatePhaseState(void);
 extern void fn_80139560(void);
 extern void fn_8013A194(void);
@@ -49,7 +49,7 @@ extern void fn_801513D0(void);
 extern void fn_8015E7A0(void);
 extern void fn_8016D74C(void);
 extern void actor_setState(void);
-extern void fn_80170A20(void);
+extern void battle_updateTargetAggro(void);
 extern void actor_getMovementFlags(void);
 extern void task_findEntryById(void);
 extern void fn_8021A4CC(void);
@@ -1225,7 +1225,7 @@ lbl_fn_8032E938_00000F08:
     lwz r0, 0xd1c(r31)
     cmpwi r0, 0x0
     bne lbl_fn_8032E938_00000F4C
-    bl fn_8000D9E8
+    bl scene_transformPoint
     bl fn_8000DCF4
     stw r3, 0xd1c(r31)
 lbl_fn_8032E938_00000F4C:
@@ -1621,7 +1621,7 @@ asm void fn_8032EF2C(void)
     nofralloc
     li r4, 0x20
     addi r3, r3, 0x7d4
-    b fn_8013322C
+    b actor_testBitFlag
 }
 
 asm void fn_8032EF38(void)
@@ -1705,7 +1705,7 @@ lbl_fn_8032EF38_000015AC:
     mr r3, r31
     lfs f1, lbl_80885094
     li r5, 0x0
-    bl fn_80170A20
+    bl battle_updateTargetAggro
     b lbl_fn_8032EF38_00001634
 lbl_fn_8032EF38_000015CC:
     lwz r0, 0x58c(r3)

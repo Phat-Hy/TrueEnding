@@ -15,7 +15,7 @@ extern void collision_testLineSegment(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
-extern void fn_8006AFF8(void);
+extern void boss_initActionStream(void);
 extern void mem_alloc(void);
 extern void route_createSegment(void);
 extern void node_createNamedChild(void);
@@ -24,7 +24,7 @@ extern void atn_Task_setActive(void);
 extern void wcs_vformat(void);
 extern void viewport_updateCulling(void);
 extern void fn_80109828(void);
-extern void fn_8013322C(void);
+extern void actor_testBitFlag(void);
 extern void fn_80134674(void);
 extern void boss_updatePhaseState(void);
 extern void fn_80139560(void);
@@ -42,7 +42,7 @@ extern void res_findResourceSlot(void);
 extern void entity_Instance_constructor(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
-extern void fn_803C1560(void);
+extern void craft_forgeUpgradeWeapon(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
@@ -1246,7 +1246,7 @@ lbl_fn_8025F8C8_00000FD4:
     li r6, 0x0
     li r7, 0x0
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     lwz r4, lbl_8087F430
     subi r0, r3, 0x1
     mulli r0, r0, 0x30
@@ -1499,7 +1499,7 @@ lbl_fn_8025F8C8_000013C8:
     bne lbl_fn_8025F8C8_0000141C
     addi r3, r30, 0x7d4
     li r4, 0x20
-    bl fn_8013322C
+    bl actor_testBitFlag
     lfs f5, 0x30(r31)
     mr r3, r30
     lfs f4, lbl_80883570
@@ -1725,7 +1725,7 @@ lbl_fn_8025FE60_0000171C:
     addi r3, r1, 0x20
     addi r4, r1, 0x38
     addi r5, r1, 0x2c
-    bl fn_8006AFF8
+    bl boss_initActionStream
     lwz r0, 0x20(r1)
     addi r3, r30, 0x14b0
     srwi. r0, r0, 31

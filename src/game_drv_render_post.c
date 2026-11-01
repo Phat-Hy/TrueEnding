@@ -31,7 +31,7 @@ extern void fn_80614790(void);
 extern void fn_806149C0(void);
 extern void fn_80615C40(void);
 extern void GXInitLightDistAttn(void);
-extern void fn_80615D50(void);
+extern void GXInitLightSpot(void);
 extern void fn_80615FF0(void);
 extern void fn_80616200(void);
 extern void fn_80616250(void);
@@ -827,7 +827,7 @@ asm void fn_805CE550(void)
     li r7, 0x0
     li r8, 0x0
     li r9, 0x2
-    bl fn_80615D50
+    bl GXInitLightSpot
     lwz r0, 0x0(r31)
     addi r4, r1, 0x8
     stw r0, 0x8(r1)

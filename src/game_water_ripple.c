@@ -9,7 +9,7 @@ extern void dtor_80084684(void);
 extern void fn_8006F17C(void);
 extern void str_assignBuffer(void);
 extern void mem_free(void);
-extern void fn_800DBF68(void);
+extern void env_updateAtmosphere(void);
 extern void fn_800E0908(void);
 extern void fn_80658220(void);
 extern void fn_80658240(void);
@@ -1252,7 +1252,7 @@ lbl_fn_800E0000_00001044:
     stw r28, 0x4(r23)
     stw r28, 0x8(r23)
     lwz r4, 0x50(r1)
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     lwz r0, 0x50(r1)
     mr r3, r23
     lbz r4, 0x1c(r1)
@@ -1384,7 +1384,7 @@ lbl_fn_800E0000_00001224:
     stw r28, 0x4(r23)
     stw r28, 0x8(r23)
     lwz r4, 0x50(r1)
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     lwz r0, 0x50(r1)
     mr r3, r23
     lbz r4, 0x20(r1)
@@ -1521,7 +1521,7 @@ lbl_fn_800E0000_0000141C:
     stw r0, 0x4(r16)
     stw r0, 0x8(r16)
     lwz r4, 0x44(r1)
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     lwz r0, 0x44(r1)
     mr r3, r16
     lbz r4, 0xc(r1)
@@ -1674,7 +1674,7 @@ lbl_fn_800E0000_00001654:
     stw r0, 0x4(r16)
     stw r0, 0x8(r16)
     lwz r4, 0x44(r1)
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     lwz r0, 0x44(r1)
     mr r3, r16
     lbz r4, 0x10(r1)

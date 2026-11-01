@@ -78,7 +78,7 @@ void fn_801784BC(void);
 void fn_80178668(void);
 void fn_80178864(void);
 void fn_801789D8(void);
-void fn_80178A6C(void);
+void battle_updateActorStatus(void);
 void fn_80178BFC(void);
 void fn_80179730(void);
 
@@ -957,7 +957,7 @@ lbl_fn_801789D8_00000B98:
     blr
 }
 
-asm void fn_80178A6C(void)
+asm void battle_updateActorStatus(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -968,95 +968,95 @@ asm void fn_80178A6C(void)
     lwz r0, 0x1374(r3)
     clrlwi r0, r0, 31
     cmplwi r0, 0x1
-    bne lbl_fn_80178A6C_00000BE4
+    bne lbl_battle_updateActorStatus_00000BE4
     lwz r3, lbl_8087F9E8
     mr r4, r31
     bl fn_8059C8DC
-lbl_fn_80178A6C_00000BE4:
+lbl_battle_updateActorStatus_00000BE4:
     lwz r0, 0x1374(r31)
     rlwinm r0, r0, 0, 29, 29
     cmplwi r0, 0x4
-    bne lbl_fn_80178A6C_00000C00
+    bne lbl_battle_updateActorStatus_00000C00
     lwz r3, lbl_8087F9E8
     mr r4, r31
     bl fn_8059CA78
-lbl_fn_80178A6C_00000C00:
+lbl_battle_updateActorStatus_00000C00:
     lwz r0, 0x1374(r31)
     rlwinm r0, r0, 0, 30, 30
     cmplwi r0, 0x2
-    bne lbl_fn_80178A6C_00000C1C
+    bne lbl_battle_updateActorStatus_00000C1C
     lwz r3, lbl_8087F9E8
     mr r4, r31
     bl fn_8059C990
-lbl_fn_80178A6C_00000C1C:
+lbl_battle_updateActorStatus_00000C1C:
     lwz r0, 0x1374(r31)
     rlwinm r0, r0, 0, 28, 28
     cmplwi r0, 0x8
-    bne lbl_fn_80178A6C_00000C38
+    bne lbl_battle_updateActorStatus_00000C38
     lwz r3, lbl_8087F9E8
     mr r4, r31
     bl fn_8059CB30
-lbl_fn_80178A6C_00000C38:
+lbl_battle_updateActorStatus_00000C38:
     lwz r0, 0x1374(r31)
     rlwinm r0, r0, 0, 23, 23
     cmplwi r0, 0x100
-    bne lbl_fn_80178A6C_00000C54
+    bne lbl_battle_updateActorStatus_00000C54
     lwz r3, lbl_8087F9E8
     mr r4, r31
     bl fn_8059CCA0
-lbl_fn_80178A6C_00000C54:
+lbl_battle_updateActorStatus_00000C54:
     lwz r0, 0x1374(r31)
     rlwinm r0, r0, 0, 27, 27
     cmplwi r0, 0x10
-    bne lbl_fn_80178A6C_00000C70
+    bne lbl_battle_updateActorStatus_00000C70
     lwz r3, lbl_8087F9E8
     mr r4, r31
     bl fn_8059CBE8
-lbl_fn_80178A6C_00000C70:
+lbl_battle_updateActorStatus_00000C70:
     lwz r0, 0x1374(r31)
     rlwinm r0, r0, 0, 26, 26
     cmplwi r0, 0x20
-    bne lbl_fn_80178A6C_00000C90
+    bne lbl_battle_updateActorStatus_00000C90
     lwz r3, lbl_8087F9E8
     mr r4, r31
     li r5, 0x0
     bl fn_8059CFB4
-lbl_fn_80178A6C_00000C90:
+lbl_battle_updateActorStatus_00000C90:
     lwz r0, 0x1374(r31)
     rlwinm r0, r0, 0, 25, 25
     cmplwi r0, 0x40
-    bne lbl_fn_80178A6C_00000CB0
+    bne lbl_battle_updateActorStatus_00000CB0
     lwz r3, lbl_8087F9E8
     mr r4, r31
     li r5, 0x0
     bl fn_8059D008
-lbl_fn_80178A6C_00000CB0:
+lbl_battle_updateActorStatus_00000CB0:
     lwz r0, 0x1374(r31)
     rlwinm r0, r0, 0, 22, 22
     cmplwi r0, 0x200
-    bne lbl_fn_80178A6C_00000CD0
+    bne lbl_battle_updateActorStatus_00000CD0
     lwz r3, lbl_8087F9E8
     mr r4, r31
     li r5, 0x0
     bl fn_8059D05C
-lbl_fn_80178A6C_00000CD0:
+lbl_battle_updateActorStatus_00000CD0:
     lwz r0, 0x1374(r31)
     rlwinm r0, r0, 0, 21, 21
     cmplwi r0, 0x400
-    bne lbl_fn_80178A6C_00000CF0
+    bne lbl_battle_updateActorStatus_00000CF0
     lwz r3, lbl_8087F9E8
     mr r4, r31
     li r5, 0x0
     bl fn_8059D0B0
-lbl_fn_80178A6C_00000CF0:
+lbl_battle_updateActorStatus_00000CF0:
     lwz r0, 0x1374(r31)
     rlwinm r0, r0, 0, 20, 20
     cmplwi r0, 0x800
-    bne lbl_fn_80178A6C_00000D0C
+    bne lbl_battle_updateActorStatus_00000D0C
     lwz r3, lbl_8087F9E8
     mr r4, r31
     bl fn_8059D16C
-lbl_fn_80178A6C_00000D0C:
+lbl_battle_updateActorStatus_00000D0C:
     lfs f0, lbl_8088196C
     li r0, 0x0
     stw r0, 0x1374(r31)

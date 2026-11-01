@@ -24,7 +24,7 @@ extern void fn_8006BB6C(void);
 extern void fn_8006F420(void);
 extern void str_assignBuffer(void);
 extern void mem_realloc(void);
-extern void fn_800DBF68(void);
+extern void env_updateAtmosphere(void);
 extern void str_parseInt(void);
 extern void wcs_parseInt(void);
 extern void str_skipWhitespace(void);
@@ -48,7 +48,7 @@ extern void fn_8020A59C(void);
 extern void fn_8020A5D4(void);
 extern void fn_8020A780(void);
 extern void fn_8020A808(void);
-extern void fn_802180A8(void);
+extern void task_lookupTagIndex(void);
 extern void fn_80219544(void);
 extern void fn_8046DC5C(void);
 extern void fn_8046DD20(void);
@@ -404,7 +404,7 @@ lbl_fn_802088A4_00000338:
     mr r30, r3
     mr r3, r31
     mr r4, r30
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     lbz r3, 0xc(r1)
     slwi r0, r30, 1
     stb r3, 0x8(r1)
@@ -522,7 +522,7 @@ lbl_fn_80208A3C_000004CC:
     mr r28, r3
     mr r3, r29
     mr r4, r28
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     lbz r3, 0x8(r1)
     slwi r0, r28, 1
     stb r3, 0xc(r1)
@@ -1340,7 +1340,7 @@ lbl_fn_80209300_00001010:
     b lbl_fn_80209300_00001040
 lbl_fn_80209300_00001034:
     mr r3, r21
-    bl fn_802180A8
+    bl task_lookupTagIndex
     stw r3, 0x38(r25)
 lbl_fn_80209300_00001040:
     addi r22, r22, 0x1
@@ -1360,7 +1360,7 @@ lbl_fn_80209300_00001054:
     b lbl_fn_80209300_00001084
 lbl_fn_80209300_00001078:
     mr r3, r22
-    bl fn_802180A8
+    bl task_lookupTagIndex
     stw r3, 0x48(r23)
 lbl_fn_80209300_00001084:
     addi r21, r21, 0x1

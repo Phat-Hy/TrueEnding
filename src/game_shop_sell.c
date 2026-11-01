@@ -2,7 +2,7 @@
 #pragma function_align 4
 
 /* External function declarations */
-extern void fn_80044E0C(void);
+extern void menu_renderLayout(void);
 extern void mem_alloc(void);
 extern void fn_801059F8(void);
 extern void fn_80105B3C(void);
@@ -1163,13 +1163,13 @@ lbl_fn_8015A46C_00000FAC:
     cmpwi r3, 0x0
     beq lbl_fn_8015A46C_00000FDC
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_fn_8015A46C_00000FDC:
     lwz r3, 0x64c(r28)
     cmpwi r3, 0x0
     beq lbl_fn_8015A46C_00000FF0
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_fn_8015A46C_00000FF0:
     li r0, 0x0
     li r3, -0x1

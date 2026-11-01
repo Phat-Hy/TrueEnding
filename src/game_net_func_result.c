@@ -28,7 +28,7 @@ extern void str_findChar(void);
 extern void wcs_vformat(void);
 extern void actor_spawnActorWithId(void);
 extern void thread_dispatchToQueue(void);
-extern void fn_80206B9C(void);
+extern void game_initGlobalDatabases(void);
 extern void fn_80209184(void);
 extern void fn_8020C07C(void);
 extern void fn_8020C4B0(void);
@@ -1356,7 +1356,7 @@ lbl_fn_80506560_000010DC:
     bl fn_803BD49C
     mr r23, r3
     mr r3, r25
-    bl fn_80206B9C
+    bl game_initGlobalDatabases
     cmpwi r3, 0x0
     beq lbl_fn_80506560_00001138
     addi r24, r25, 0x1
@@ -1537,7 +1537,7 @@ lbl_fn_80506560_00001338:
     bl fn_803BD49C
     mr r22, r3
     mr r3, r23
-    bl fn_80206B9C
+    bl game_initGlobalDatabases
     cmpwi r3, 0x0
     beq lbl_fn_80506560_00001394
     addi r24, r23, 0x1
@@ -1695,7 +1695,7 @@ lbl_fn_80506560_00001548:
     bl fn_803BD49C
     mr r22, r3
     mr r3, r24
-    bl fn_80206B9C
+    bl game_initGlobalDatabases
     cmpwi r3, 0x0
     beq lbl_fn_80506560_000015A4
     addi r23, r24, 0x1
@@ -1760,7 +1760,7 @@ lbl_fn_80506560_00001620:
     bl fn_803BD49C
     mr r23, r3
     mr r3, r20
-    bl fn_80206B9C
+    bl game_initGlobalDatabases
     cmpwi r3, 0x0
     beq lbl_fn_80506560_0000167C
     addi r22, r20, 0x1

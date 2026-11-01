@@ -57,16 +57,16 @@ extern u32 lbl_8087FFB0;
 
 /* Function declarations */
 void fn_80609570(void);
-void fn_806095C0(void);
-void fn_806095D0(void);
-void fn_806095E0(void);
-void fn_806095F0(void);
-void fn_80609600(void);
-void fn_80609610(void);
-void fn_80609620(void);
-void fn_80609640(void);
-void fn_80609650(void);
-void fn_80609660(void);
+void fn_806095C0(u32 val);
+u32 fn_806095D0(void);
+void fn_806095E0(u32 val);
+u16 fn_806095F0(void);
+u16 fn_80609600(void);
+u16 fn_80609610(void);
+void fn_80609620(u32 val);
+void fn_80609640(u16 val);
+void fn_80609650(u16 val);
+void fn_80609660(u16 val);
 void fn_80609670(void);
 void fn_806098D0(void);
 void fn_80609980(void);
@@ -100,79 +100,58 @@ asm void fn_80609570(void)
     blr
 }
 
-asm void fn_806095C0(void)
+void fn_806095C0(u32 val)
 {
-    nofralloc
-    stw r3, lbl_8087FF68
-    blr
+    lbl_8087FF68 = val;
 }
 
-asm void fn_806095D0(void)
+u32 fn_806095D0(void)
 {
-    nofralloc
-    lwz r3, lbl_8087FF68
-    blr
+    return lbl_8087FF68;
 }
 
-asm void fn_806095E0(void)
+void fn_806095E0(u32 val)
 {
-    nofralloc
-    stw r3, lbl_8087FF60
-    blr
+    lbl_8087FF60 = val;
 }
 
-asm void fn_806095F0(void)
+u16 fn_806095F0(void)
 {
-    nofralloc
-    lhz r3, lbl_8087FF54
-    blr
+    return lbl_8087FF54;
 }
 
-asm void fn_80609600(void)
+u16 fn_80609600(void)
 {
-    nofralloc
-    lhz r3, lbl_8087FF52
-    blr
+    return lbl_8087FF52;
 }
 
-asm void fn_80609610(void)
+u16 fn_80609610(void)
 {
-    nofralloc
-    lhz r3, lbl_8087FF50
-    blr
+    return lbl_8087FF50;
 }
 
-asm void fn_80609620(void)
+void fn_80609620(u32 val)
 {
-    nofralloc
-    cmplwi r3, 0x8000
-    ble lbl_fn_80609620_000000C0
-    lis r3, 0x1
-    addi r3, r3, -0x8000
-lbl_fn_80609620_000000C0:
-    sth r3, lbl_8087FF56
-    blr
+    if (val > 0x8000)
+    {
+        val = 0x8000;
+    }
+    lbl_8087FF56 = val;
 }
 
-asm void fn_80609640(void)
+void fn_80609640(u16 val)
 {
-    nofralloc
-    sth r3, lbl_8087FF54
-    blr
+    lbl_8087FF54 = val;
 }
 
-asm void fn_80609650(void)
+void fn_80609650(u16 val)
 {
-    nofralloc
-    sth r3, lbl_8087FF52
-    blr
+    lbl_8087FF52 = val;
 }
 
-asm void fn_80609660(void)
+void fn_80609660(u16 val)
 {
-    nofralloc
-    sth r3, lbl_8087FF50
-    blr
+    lbl_8087FF50 = val;
 }
 
 asm void fn_80609670(void)

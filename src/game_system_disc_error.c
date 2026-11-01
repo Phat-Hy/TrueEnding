@@ -33,7 +33,7 @@ extern void equip_applyToCharacter(void);
 extern void fn_8015ECC4(void);
 extern void fn_80161570(void);
 extern void fn_8016E4C4(void);
-extern void fn_8016EB48(void);
+extern void battle_applyStatusEffect(void);
 extern void actor_getMovementFlags(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
@@ -1228,7 +1228,7 @@ lbl_fn_80354AA4_00000E5C:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8016EB48
+    bl battle_applyStatusEffect
     lfs f1, lbl_808854DC
     mr r3, r31
     lfs f0, lbl_808854D8
@@ -1787,7 +1787,7 @@ lbl_fn_80354EE4_00001678:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8016EB48
+    bl battle_applyStatusEffect
 lbl_fn_80354EE4_000016C8:
     lwz r0, 0x124(r1)
     psq_l f31, 0x118(r1), 0, 0

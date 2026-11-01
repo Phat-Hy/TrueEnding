@@ -10,7 +10,7 @@ extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
 extern void fn_80011220(void);
 extern void vec3_sub(void);
-extern void fn_8004ECC0(void);
+extern void item_testLineOfSight(void);
 extern void collision_testLineSegment(void);
 extern void mission_updateStub(void);
 extern void fn_80063D3C(void);
@@ -31,7 +31,7 @@ extern void fn_8013C480(void);
 extern void fn_801404F8(void);
 extern void quest_evaluateConditions(void);
 extern void actor_setState(void);
-extern void fn_80170A20(void);
+extern void battle_updateTargetAggro(void);
 extern void battle_awardExp(void);
 extern void task_findEntryById(void);
 extern void res_findResourceSlot(void);
@@ -971,7 +971,7 @@ lbl_fn_80463174_00000B8C:
     addi r8, r31, 0x5b8
     li r4, 0x0
     li r9, 0x0
-    bl fn_8004ECC0
+    bl item_testLineOfSight
     cmpwi r3, 0x0
     bne lbl_fn_80463174_00000CB8
     li r0, 0x5
@@ -1046,7 +1046,7 @@ asm void fn_804635B4(void)
     lwz r4, 0x1554(r3)
     li r5, 0x0
     lfs f1, lbl_80886E20
-    bl fn_80170A20
+    bl battle_updateTargetAggro
 lbl_fn_804635B4_00000D40:
     mr r3, r31
     bl fn_80461838

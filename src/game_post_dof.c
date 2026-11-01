@@ -22,12 +22,12 @@ extern void clip_calculateFrustum(void);
 extern void fn_80107A68(void);
 extern void fn_80108F38(void);
 extern void skill_findNodeById(void);
-extern void fn_8013322C(void);
+extern void actor_testBitFlag(void);
 extern void boss_updatePhaseState(void);
 extern void quest_updateFlow(void);
 extern void dialog_updateScriptState(void);
 extern void actor_setState(void);
-extern void fn_80170A20(void);
+extern void battle_updateTargetAggro(void);
 extern void battle_awardExp(void);
 extern void fn_8020A81C(void);
 extern void task_findEntryById(void);
@@ -178,7 +178,7 @@ asm void fn_802C0058(void)
     bne lbl_fn_802C0058_000003D8
     addi r3, r31, 0x7d4
     li r4, 0x4000
-    bl fn_8013322C
+    bl actor_testBitFlag
     lwz r3, lbl_8087F048
     addi r4, r31, 0xb0
     bl fn_80107A68
@@ -2104,7 +2104,7 @@ lbl_fn_802C1208_00001C18:
     mr r3, r30
     lfs f1, lbl_808842B0
     li r5, 0x0
-    bl fn_80170A20
+    bl battle_updateTargetAggro
     b lbl_fn_802C1208_00001C88
 lbl_fn_802C1208_00001C68:
     mr r3, r30
@@ -2114,7 +2114,7 @@ lbl_fn_802C1208_00001C68:
     mr r3, r30
     lfs f1, lbl_808842B0
     li r5, 0x0
-    bl fn_80170A20
+    bl battle_updateTargetAggro
 lbl_fn_802C1208_00001C88:
     mr r3, r30
     bl fn_802C2BCC

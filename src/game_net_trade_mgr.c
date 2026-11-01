@@ -11,7 +11,7 @@ extern void vec3_set(void);
 extern void vec3_assign(void);
 extern void vec3_add(void);
 extern void fn_8004B290(void);
-extern void fn_8004B338(void);
+extern void sound_releaseChannel(void);
 extern void fn_8006A250(void);
 extern void fn_8006CA80(void);
 extern void fn_80076FF8(void);
@@ -894,7 +894,7 @@ lbl_fn_8052B014_00000A90:
     bl fn_800C1FB4
     mr r3, r31
     li r4, -0x1
-    bl fn_8004B338
+    bl sound_releaseChannel
 lbl_fn_8052B014_00000AB0:
     addic. r31, r29, 0x468
     beq lbl_fn_8052B014_00000AD0
@@ -903,14 +903,14 @@ lbl_fn_8052B014_00000AB0:
     bl fn_800C1FB4
     mr r3, r31
     li r4, -0x1
-    bl fn_8004B338
+    bl sound_releaseChannel
 lbl_fn_8052B014_00000AD0:
     addi r3, r29, 0x260
     li r4, -0x1
-    bl fn_8004B338
+    bl sound_releaseChannel
     addi r3, r29, 0x6c
     li r4, -0x1
-    bl fn_8004B338
+    bl sound_releaseChannel
     mr r3, r29
     li r4, 0x0
     bl atn_Task_destructor

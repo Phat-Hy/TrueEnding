@@ -10,8 +10,8 @@ extern void mem_getAllocSize(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void system_getNextSequenceId(void);
-extern void fn_80126214(void);
-extern void fn_8013A258(void);
+extern void enemy_updateCombatBehavior(void);
+extern void npc_initScriptContext(void);
 extern void npc_getPosition(void);
 extern void npc_updateTalkInteraction(void);
 extern void quest_ctorRewardItem(void);
@@ -787,7 +787,7 @@ asm void fn_802E37DC(void)
     cmpwi r0, 0x7
     bne lbl_fn_802E37DC_00000C38
     addi r3, r3, 0x1030
-    bl fn_80126214
+    bl enemy_updateCombatBehavior
     addi r4, r29, 0x1088
     addi r31, r1, 0x74
     psq_l f1, 0x0(r4), 0, 0
@@ -957,7 +957,7 @@ lbl_fn_802E37DC_00000BCC:
 lbl_fn_802E37DC_00000C38:
     cmpwi r0, 0x6
     bne lbl_fn_802E37DC_00000C48
-    bl fn_8013A258
+    bl npc_initScriptContext
     b lbl_fn_802E37DC_00000C64
 lbl_fn_802E37DC_00000C48:
     lfs f0, 0x568(r29)

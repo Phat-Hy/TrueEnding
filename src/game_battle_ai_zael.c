@@ -24,7 +24,7 @@ extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
 extern void atn_Model_findBoneIndex(void);
 extern void lockon_updateTarget(void);
-extern void fn_800971D4(void);
+extern void cursor_Object_constructor(void);
 extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -33,7 +33,7 @@ extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void bloom_processPasses(void);
 extern void str_skipWhitespace(void);
-extern void fn_802180A8(void);
+extern void task_lookupTagIndex(void);
 extern void res_MsgHandle_constructor(void);
 extern void fn_803EBC44(void);
 extern void fn_803EBE74(void);
@@ -975,7 +975,7 @@ lbl_fn_80430428_00000BF0:
     bl strcpy
     addi r3, r1, 0x108
     bl talk_formatQuotedString
-    bl fn_802180A8
+    bl task_lookupTagIndex
     mr r4, r3
     addi r3, r31, 0x4d4
     addi r5, r1, 0x8
@@ -1758,10 +1758,10 @@ lbl_fn_80430FC0_000016D8:
 lbl_fn_80430FC0_000016E4:
     addi r3, r30, 0x4d4
     li r4, -0x1
-    bl fn_800971D4
+    bl cursor_Object_constructor
     addi r3, r30, 0x104
     li r4, -0x1
-    bl fn_800971D4
+    bl cursor_Object_constructor
     mr r3, r30
     li r4, 0x0
     bl task_destroyWorker

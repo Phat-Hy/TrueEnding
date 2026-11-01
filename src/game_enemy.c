@@ -26,11 +26,11 @@ extern void fn_80614790(void);
 extern void fn_80615B60(void);
 extern void fn_80615C40(void);
 extern void GXInitLightDistAttn(void);
-extern void fn_80615D50(void);
+extern void GXInitLightSpot(void);
 extern void GXInitTexObjDefault(void);
 extern void fn_80617340(void);
 extern void GXSetTevColorIn(void);
-extern void fn_80617420(void);
+extern void GXSetTevColorOp(void);
 extern void GXSetTevIndirect(void);
 extern void fn_806174C0(void);
 extern void fn_806175F0(void);
@@ -114,7 +114,7 @@ asm void atn_ComDrawLine_execute(void)
     li r7, 0x1
     li r8, 0x0
     li r9, 0x2
-    bl fn_80615D50
+    bl GXInitLightSpot
     li r3, 0x1
     li r4, 0x4
     li r5, 0x5
@@ -308,7 +308,7 @@ asm void atn_ComDrawTexture_execute(void)
     li r7, 0x1
     li r8, 0x0
     li r9, 0x2
-    bl fn_80615D50
+    bl GXInitLightSpot
     li r3, 0x0
     li r4, 0x1
     li r5, 0x4
@@ -551,7 +551,7 @@ asm void atn_ComDrawTextureAdd_execute(void)
     li r7, 0x1
     li r8, 0x0
     li r9, 0x2
-    bl fn_80615D50
+    bl GXInitLightSpot
     li r3, 0x0
     li r4, 0x1
     li r5, 0x4
@@ -870,7 +870,7 @@ asm void atn_ComDrawTextureMask_execute(void)
     li r5, 0x4
     li r6, 0x5
     li r7, 0x7
-    bl fn_80617420
+    bl GXSetTevColorOp
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -896,7 +896,7 @@ asm void atn_ComDrawTextureMask_execute(void)
     li r5, 0x0
     li r6, 0x4
     li r7, 0x7
-    bl fn_80617420
+    bl GXSetTevColorOp
     li r3, 0x1
     li r4, 0x0
     li r5, 0x0
@@ -918,7 +918,7 @@ asm void atn_ComDrawTextureMask_execute(void)
     li r7, 0x1
     li r8, 0x0
     li r9, 0x2
-    bl fn_80615D50
+    bl GXInitLightSpot
     li r3, 0x0
     li r4, 0x1
     li r5, 0x4
@@ -1450,7 +1450,7 @@ lbl_atn_ComDrawTextureMono_execute_00001108:
     li r5, 0x7
     li r6, 0x7
     li r7, 0x7
-    bl fn_80617420
+    bl GXSetTevColorOp
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -1490,7 +1490,7 @@ lbl_atn_ComDrawTextureMono_execute_00001108:
     li r5, 0x7
     li r6, 0x7
     li r7, 0x7
-    bl fn_80617420
+    bl GXSetTevColorOp
     li r3, 0x1
     li r4, 0x0
     li r5, 0x0
@@ -1530,7 +1530,7 @@ lbl_atn_ComDrawTextureMono_execute_00001108:
     li r5, 0x7
     li r6, 0x7
     li r7, 0x7
-    bl fn_80617420
+    bl GXSetTevColorOp
     li r3, 0x2
     li r4, 0x0
     li r5, 0x0
@@ -1567,7 +1567,7 @@ lbl_atn_ComDrawTextureMono_execute_00001108:
     li r5, 0x4
     li r6, 0x5
     li r7, 0x7
-    bl fn_80617420
+    bl GXSetTevColorOp
     li r3, 0x3
     li r4, 0x0
     li r5, 0x0
@@ -1596,7 +1596,7 @@ lbl_atn_ComDrawTextureMono_execute_00001108:
     li r7, 0x1
     li r8, 0x0
     li r9, 0x2
-    bl fn_80615D50
+    bl GXInitLightSpot
     li r3, 0x0
     li r4, 0x1
     li r5, 0x4
@@ -2089,7 +2089,7 @@ lbl_atn_ComDrawTextureMaskMono_execute_00001AEC:
     li r5, 0x7
     li r6, 0x7
     li r7, 0x1
-    bl fn_80617420
+    bl GXSetTevColorOp
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -2129,7 +2129,7 @@ lbl_atn_ComDrawTextureMaskMono_execute_00001AEC:
     li r5, 0x7
     li r6, 0x7
     li r7, 0x1
-    bl fn_80617420
+    bl GXSetTevColorOp
     li r3, 0x1
     li r4, 0x0
     li r5, 0x0
@@ -2169,7 +2169,7 @@ lbl_atn_ComDrawTextureMaskMono_execute_00001AEC:
     li r5, 0x7
     li r6, 0x7
     li r7, 0x1
-    bl fn_80617420
+    bl GXSetTevColorOp
     li r3, 0x2
     li r4, 0x0
     li r5, 0x0
@@ -2206,7 +2206,7 @@ lbl_atn_ComDrawTextureMaskMono_execute_00001AEC:
     li r5, 0x4
     li r6, 0x5
     li r7, 0x7
-    bl fn_80617420
+    bl GXSetTevColorOp
     li r3, 0x3
     li r4, 0x0
     li r5, 0x0
@@ -2235,7 +2235,7 @@ lbl_atn_ComDrawTextureMaskMono_execute_00001AEC:
     li r7, 0x1
     li r8, 0x0
     li r9, 0x2
-    bl fn_80615D50
+    bl GXInitLightSpot
     li r3, 0x0
     li r4, 0x1
     li r5, 0x4
@@ -2535,7 +2535,7 @@ asm void atn_ComDrawFont_execute(void)
     li r5, 0x4
     li r6, 0x5
     li r7, 0x7
-    bl fn_80617420
+    bl GXSetTevColorOp
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -2557,7 +2557,7 @@ asm void atn_ComDrawFont_execute(void)
     li r7, 0x1
     li r8, 0x0
     li r9, 0x2
-    bl fn_80615D50
+    bl GXInitLightSpot
     li r3, 0x0
     li r4, 0x1
     li r5, 0x4
@@ -2914,7 +2914,7 @@ lbl_atn_ComDrawFontSideFade_execute_000029CC:
     li r5, 0x4
     li r6, 0x5
     li r7, 0x7
-    bl fn_80617420
+    bl GXSetTevColorOp
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -2936,7 +2936,7 @@ lbl_atn_ComDrawFontSideFade_execute_000029CC:
     li r7, 0x1
     li r8, 0x0
     li r9, 0x2
-    bl fn_80615D50
+    bl GXInitLightSpot
     li r3, 0x0
     li r4, 0x1
     li r5, 0x4
@@ -3240,7 +3240,7 @@ asm void atn_ComDrawColliObject_execute(void)
     li r7, 0x0
     li r8, 0x0
     li r9, 0x2
-    bl fn_80615D50
+    bl GXInitLightSpot
     addi r3, r30, 0x15c
     li r4, 0x0
     bl GXLoadPosMtxImm
@@ -3326,7 +3326,7 @@ asm void atn_ComDrawColliTree_execute(void)
     li r7, 0x0
     li r8, 0x0
     li r9, 0x2
-    bl fn_80615D50
+    bl GXInitLightSpot
     addi r3, r30, 0x15c
     li r4, 0x0
     bl GXLoadPosMtxImm
@@ -3448,7 +3448,7 @@ lbl_atn_ComDrawD3TextureMask_execute_000031C8:
     li r5, 0x4
     li r6, 0x5
     li r7, 0x7
-    bl fn_80617420
+    bl GXSetTevColorOp
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -3474,7 +3474,7 @@ lbl_atn_ComDrawD3TextureMask_execute_000031C8:
     li r5, 0x0
     li r6, 0x4
     li r7, 0x7
-    bl fn_80617420
+    bl GXSetTevColorOp
     li r3, 0x1
     li r4, 0x0
     li r5, 0x0
@@ -3496,7 +3496,7 @@ lbl_atn_ComDrawD3TextureMask_execute_000031C8:
     li r7, 0x1
     li r8, 0x0
     li r9, 0x2
-    bl fn_80615D50
+    bl GXInitLightSpot
     li r3, 0x0
     li r4, 0x1
     li r5, 0x4
@@ -3536,7 +3536,7 @@ lbl_atn_ComDrawD3TextureMask_execute_00003344:
     li r5, 0x4
     li r6, 0x5
     li r7, 0x7
-    bl fn_80617420
+    bl GXSetTevColorOp
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -3558,7 +3558,7 @@ lbl_atn_ComDrawD3TextureMask_execute_00003344:
     li r7, 0x1
     li r8, 0x0
     li r9, 0x2
-    bl fn_80615D50
+    bl GXInitLightSpot
     li r3, 0x0
     li r4, 0x1
     li r5, 0x4
@@ -3712,7 +3712,7 @@ asm void atn_ComDrawWindow_execute(void)
     li r5, 0x4
     li r6, 0x5
     li r7, 0x7
-    bl fn_80617420
+    bl GXSetTevColorOp
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -3738,7 +3738,7 @@ asm void atn_ComDrawWindow_execute(void)
     li r5, 0x0
     li r6, 0x4
     li r7, 0x7
-    bl fn_80617420
+    bl GXSetTevColorOp
     li r3, 0x1
     li r4, 0x0
     li r5, 0x0
@@ -3760,7 +3760,7 @@ asm void atn_ComDrawWindow_execute(void)
     li r7, 0x1
     li r8, 0x0
     li r9, 0x2
-    bl fn_80615D50
+    bl GXInitLightSpot
     li r3, 0x0
     li r4, 0x1
     li r5, 0x4

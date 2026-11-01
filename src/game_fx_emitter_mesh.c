@@ -13,7 +13,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void atn_Task_setActive(void);
 extern void system_getNextSequenceId(void);
 extern void fn_80133130(void);
-extern void fn_8013322C(void);
+extern void actor_testBitFlag(void);
 extern void quest_updateFlow(void);
 extern void quest_ctorRewardItem(void);
 extern void dialog_renderWindow(void);
@@ -42,7 +42,7 @@ extern void fn_8028EF20(void);
 extern void fn_8028F1D0(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
-extern void fn_803C1560(void);
+extern void craft_forgeUpgradeWeapon(void);
 extern void fn_8059B670(void);
 extern void PSMTXRotRad(void);
 extern void PSMTX44Identity(void);
@@ -315,7 +315,7 @@ lbl_fn_80288E38_00000244:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     subi r0, r3, 0x1
     lwz r3, 0x9c(r29)
     mulli r0, r0, 0x30
@@ -1166,7 +1166,7 @@ asm void fn_80289C98(void)
     bne lbl_fn_80289C98_00000F50
     li r4, 0x4
     addi r3, r3, 0x7d4
-    bl fn_8013322C
+    bl actor_testBitFlag
     mr r3, r29
     bl fn_80168E60
 lbl_fn_80289C98_00000F50:

@@ -2,7 +2,7 @@
 #pragma function_align 4
 
 /* External function declarations */
-extern void fn_8000D9E8(void);
+extern void scene_transformPoint(void);
 extern void fn_8000DCF4(void);
 extern void vec3_assign(void);
 extern void vec3_sub(void);
@@ -15,7 +15,7 @@ extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void fn_800E0AA8(void);
 extern void system_getNextSequenceId(void);
-extern void fn_8013322C(void);
+extern void actor_testBitFlag(void);
 extern void npc_getPosition(void);
 extern void quest_ctorRewardItem(void);
 extern void inventory_applyItemStats(void);
@@ -330,7 +330,7 @@ lbl_fn_8033A154_000002BC:
     li r4, 0x20
     stfs f0, 0x7d8(r3)
     addi r3, r3, 0x7d4
-    bl fn_8013322C
+    bl actor_testBitFlag
     li r31, 0x0
     li r0, 0x2
     stw r0, 0x14bc(r30)
@@ -512,7 +512,7 @@ lbl_fn_8033A154_000005A0:
     li r4, 0x20
     stfs f0, 0x7d8(r3)
     addi r3, r3, 0x7d4
-    bl fn_8013322C
+    bl actor_testBitFlag
     b lbl_fn_8033A154_00000884
 lbl_fn_8033A154_000005B8:
     lwz r3, lbl_8087F430
@@ -545,7 +545,7 @@ lbl_fn_8033A154_000005F4:
     fadds f0, f0, f1
     stfs f0, 0x7d8(r3)
     addi r3, r3, 0x7d4
-    bl fn_8013322C
+    bl actor_testBitFlag
     lwz r3, 0x68(r31)
     lwz r0, 0x16c0(r30)
     subf. r0, r3, r0
@@ -721,7 +721,7 @@ asm void fn_8033A7A0(void)
     lwz r0, 0x14b0(r3)
     cmpwi r0, 0x0
     beq lbl_fn_8033A7A0_00000C64
-    bl fn_8000D9E8
+    bl scene_transformPoint
     bl fn_8000DCF4
     lwz r3, 0x14b0(r30)
     bl npc_getPosition

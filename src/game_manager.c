@@ -16,7 +16,7 @@ extern void mtx_getTranslation(void);
 extern void vec3_set(void);
 extern void vec3_copy(void);
 extern void vec3_mag(void);
-extern void fn_8000D430(void);
+extern void scene_traverseNode(void);
 extern void fn_8000DD0C(void);
 extern void mem_free(void);
 extern s32 atn_Model_findBoneIndex(void*, u32, int);
@@ -263,7 +263,7 @@ lbl_fn_8001011C_000001B8:
     stw r0, 0x38(r1)
     lwz r3, 0x1c(r30)
     lwz r3, 0x48(r3)
-    bl fn_8000D430
+    bl scene_traverseNode
     addic. r3, r1, 0x38
     beq lbl_fn_8001011C_00000230
     lwz r4, 0x38(r1)
@@ -603,7 +603,7 @@ lbl_fn_80010490_0000067C:
     stw r0, 0x50(r1)
     lwz r3, 0x1c(r28)
     lwz r3, 0x48(r3)
-    bl fn_8000D430
+    bl scene_traverseNode
     addic. r3, r1, 0x50
     beq lbl_fn_80010490_00000894
     lwz r4, 0x50(r1)
@@ -1699,7 +1699,7 @@ lbl_fn_80011420_0000160C:
     stw r0, 0x5c(r1)
     lwz r3, 0x1c(r31)
     lwz r3, 0x48(r3)
-    bl fn_8000D430
+    bl scene_traverseNode
     addic. r3, r1, 0x5c
     beq lbl_fn_80011420_00001820
     lwz r4, 0x5c(r1)

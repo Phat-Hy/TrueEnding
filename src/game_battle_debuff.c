@@ -6,7 +6,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void fn_80044C50(void);
 extern void fn_80044CCC(void);
-extern void fn_80044E0C(void);
+extern void menu_renderLayout(void);
 extern void mem_alloc(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
@@ -66,7 +66,7 @@ void fn_8016E71C(void);
 void fn_8016E800(void);
 void fn_8016E864(void);
 void actor_setState(void);
-void fn_8016EB48(void);
+void battle_applyStatusEffect(void);
 
 asm void fn_8016D3F8(void)
 {
@@ -988,13 +988,13 @@ lbl_fn_8016DF3C_00000C6C:
     cmpwi r3, 0x0
     beq lbl_fn_8016DF3C_00000C9C
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_fn_8016DF3C_00000C9C:
     lwz r3, 0x64c(r30)
     cmpwi r3, 0x0
     beq lbl_fn_8016DF3C_00000CB0
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_fn_8016DF3C_00000CB0:
     li r0, 0x0
     li r3, -0x1
@@ -1169,13 +1169,13 @@ lbl_fn_8016DF3C_00000EEC:
     cmpwi r3, 0x0
     beq lbl_fn_8016DF3C_00000F1C
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_fn_8016DF3C_00000F1C:
     lwz r3, 0x64c(r30)
     cmpwi r3, 0x0
     beq lbl_fn_8016DF3C_00000F30
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_fn_8016DF3C_00000F30:
     li r0, 0x0
     li r3, -0x1
@@ -1350,13 +1350,13 @@ lbl_fn_8016E4C4_00001164:
     cmpwi r3, 0x0
     beq lbl_fn_8016E4C4_00001178
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_fn_8016E4C4_00001178:
     lwz r3, 0x64c(r29)
     cmpwi r3, 0x0
     beq lbl_fn_8016E4C4_0000118C
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_fn_8016E4C4_0000118C:
     addi r30, r29, 0x680
     li r31, 0x0
@@ -1437,13 +1437,13 @@ lbl_fn_8016E5F0_00001290:
     cmpwi r3, 0x0
     beq lbl_fn_8016E5F0_000012A4
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_fn_8016E5F0_000012A4:
     lwz r3, 0x64c(r29)
     cmpwi r3, 0x0
     beq lbl_fn_8016E5F0_000012B8
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_fn_8016E5F0_000012B8:
     addi r30, r29, 0x680
     li r31, 0x0
@@ -1505,13 +1505,13 @@ lbl_fn_8016E71C_00001374:
     cmpwi r3, 0x0
     beq lbl_fn_8016E71C_00001388
     mr r4, r30
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_fn_8016E71C_00001388:
     lwz r3, 0x64c(r29)
     cmpwi r3, 0x0
     beq lbl_fn_8016E71C_0000139C
     mr r4, r30
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_fn_8016E71C_0000139C:
     addi r30, r29, 0x680
     li r31, 0x0
@@ -1787,7 +1787,7 @@ lbl_actor_setState_00001734:
     blr
 }
 
-asm void fn_8016EB48(void)
+asm void battle_applyStatusEffect(void)
 {
     nofralloc
     stwu r1, -0xd0(r1)
@@ -1803,10 +1803,10 @@ asm void fn_8016EB48(void)
     mr r29, r5
     mr r30, r6
     addi r31, r31, lbl_8077A720@l
-    bne lbl_fn_8016EB48_0000180C
+    bne lbl_battle_applyStatusEffect_0000180C
     lwz r0, 0xf80(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_8016EB48_000017B4
+    bne lbl_battle_applyStatusEffect_000017B4
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x5c(r1)
@@ -1814,8 +1814,8 @@ asm void fn_8016EB48(void)
     lwz r0, 0x8(r5)
     stw r3, 0x60(r1)
     stw r0, 0x64(r1)
-    b lbl_fn_8016EB48_000017D0
-lbl_fn_8016EB48_000017B4:
+    b lbl_battle_applyStatusEffect_000017D0
+lbl_battle_applyStatusEffect_000017B4:
     addi r3, r31, 0x19b0
     lwz r5, 0x19b0(r31)
     lwz r4, 0x4(r3)
@@ -1823,7 +1823,7 @@ lbl_fn_8016EB48_000017B4:
     stw r5, 0x5c(r1)
     stw r4, 0x60(r1)
     stw r0, 0x64(r1)
-lbl_fn_8016EB48_000017D0:
+lbl_battle_applyStatusEffect_000017D0:
     lwz r5, 0x5c(r1)
     addi r3, r1, 0x38
     lwz r4, 0x60(r1)
@@ -1833,26 +1833,26 @@ lbl_fn_8016EB48_000017D0:
     stw r0, 0x40(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_8016EB48_0000180C
+    beq lbl_battle_applyStatusEffect_0000180C
     lwz r3, 0xf80(r27)
     lwz r12, 0x0(r3)
     lwz r12, 0x1c(r12)
     mtctr r12
     bctrl
-lbl_fn_8016EB48_0000180C:
+lbl_battle_applyStatusEffect_0000180C:
     lwz r0, 0x55c(r27)
     cmpwi r0, 0x6
-    beq lbl_fn_8016EB48_000019C0
+    beq lbl_battle_applyStatusEffect_000019C0
     cmpwi r0, 0x8
-    beq lbl_fn_8016EB48_00001824
+    beq lbl_battle_applyStatusEffect_00001824
     stw r0, 0x564(r27)
-lbl_fn_8016EB48_00001824:
+lbl_battle_applyStatusEffect_00001824:
     lwz r0, 0x55c(r27)
     cmpwi r0, 0x6
-    bne lbl_fn_8016EB48_000019C0
+    bne lbl_battle_applyStatusEffect_000019C0
     lwz r0, 0xf80(r27)
     cmpwi r0, 0x0
-    bne lbl_fn_8016EB48_0000185C
+    bne lbl_battle_applyStatusEffect_0000185C
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x68(r1)
@@ -1860,8 +1860,8 @@ lbl_fn_8016EB48_00001824:
     lwz r0, 0x8(r5)
     stw r3, 0x6c(r1)
     stw r0, 0x70(r1)
-    b lbl_fn_8016EB48_00001878
-lbl_fn_8016EB48_0000185C:
+    b lbl_battle_applyStatusEffect_00001878
+lbl_battle_applyStatusEffect_0000185C:
     addi r3, r31, 0x19bc
     lwz r5, 0x19bc(r31)
     lwz r4, 0x4(r3)
@@ -1869,7 +1869,7 @@ lbl_fn_8016EB48_0000185C:
     stw r5, 0x68(r1)
     stw r4, 0x6c(r1)
     stw r0, 0x70(r1)
-lbl_fn_8016EB48_00001878:
+lbl_battle_applyStatusEffect_00001878:
     lwz r5, 0x68(r1)
     addi r3, r1, 0x50
     lwz r4, 0x6c(r1)
@@ -1879,26 +1879,26 @@ lbl_fn_8016EB48_00001878:
     stw r0, 0x58(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_8016EB48_000018B4
+    beq lbl_battle_applyStatusEffect_000018B4
     lwz r3, 0xf80(r27)
     lwz r12, 0x0(r3)
     lwz r12, 0x1c(r12)
     mtctr r12
     bctrl
-lbl_fn_8016EB48_000018B4:
+lbl_battle_applyStatusEffect_000018B4:
     lwz r0, 0x55c(r27)
     cmpwi r0, 0x6
-    beq lbl_fn_8016EB48_00001990
+    beq lbl_battle_applyStatusEffect_00001990
     cmpwi r0, 0x8
-    beq lbl_fn_8016EB48_000018CC
+    beq lbl_battle_applyStatusEffect_000018CC
     stw r0, 0x564(r27)
-lbl_fn_8016EB48_000018CC:
+lbl_battle_applyStatusEffect_000018CC:
     lwz r0, 0x55c(r27)
     cmpwi r0, 0x6
-    bne lbl_fn_8016EB48_00001990
+    bne lbl_battle_applyStatusEffect_00001990
     lwz r0, 0xf80(r27)
     cmpwi r0, 0x0
-    bne lbl_fn_8016EB48_00001904
+    bne lbl_battle_applyStatusEffect_00001904
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x74(r1)
@@ -1906,8 +1906,8 @@ lbl_fn_8016EB48_000018CC:
     lwz r0, 0x8(r5)
     stw r3, 0x78(r1)
     stw r0, 0x7c(r1)
-    b lbl_fn_8016EB48_00001920
-lbl_fn_8016EB48_00001904:
+    b lbl_battle_applyStatusEffect_00001920
+lbl_battle_applyStatusEffect_00001904:
     addi r3, r31, 0x19c8
     lwz r5, 0x19c8(r31)
     lwz r4, 0x4(r3)
@@ -1915,7 +1915,7 @@ lbl_fn_8016EB48_00001904:
     stw r5, 0x74(r1)
     stw r4, 0x78(r1)
     stw r0, 0x7c(r1)
-lbl_fn_8016EB48_00001920:
+lbl_battle_applyStatusEffect_00001920:
     lwz r5, 0x74(r1)
     addi r3, r1, 0x44
     lwz r4, 0x78(r1)
@@ -1925,13 +1925,13 @@ lbl_fn_8016EB48_00001920:
     stw r0, 0x4c(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_8016EB48_0000195C
+    beq lbl_battle_applyStatusEffect_0000195C
     lwz r3, 0xf80(r27)
     lwz r12, 0x0(r3)
     lwz r12, 0x1c(r12)
     mtctr r12
     bctrl
-lbl_fn_8016EB48_0000195C:
+lbl_battle_applyStatusEffect_0000195C:
     mr r3, r27
     li r4, 0x6
     bl actor_setState
@@ -1939,65 +1939,65 @@ lbl_fn_8016EB48_0000195C:
     li r0, 0x0
     cmpwi r3, 0x0
     stw r0, 0xf80(r27)
-    beq lbl_fn_8016EB48_00001990
+    beq lbl_battle_applyStatusEffect_00001990
     lwz r12, 0x0(r3)
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-lbl_fn_8016EB48_00001990:
+lbl_battle_applyStatusEffect_00001990:
     lwz r3, 0xf80(r27)
     li r4, 0x6
     li r0, 0x0
     stw r4, 0x55c(r27)
     cmpwi r3, 0x0
     stw r0, 0xf80(r27)
-    beq lbl_fn_8016EB48_000019C0
+    beq lbl_battle_applyStatusEffect_000019C0
     lwz r12, 0x0(r3)
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-lbl_fn_8016EB48_000019C0:
+lbl_battle_applyStatusEffect_000019C0:
     lwz r3, 0xf80(r27)
     li r4, 0x6
     li r0, 0x0
     stw r4, 0x55c(r27)
     cmpwi r3, 0x0
     stw r0, 0xf80(r27)
-    beq lbl_fn_8016EB48_000019F0
+    beq lbl_battle_applyStatusEffect_000019F0
     lwz r12, 0x0(r3)
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-lbl_fn_8016EB48_000019F0:
+lbl_battle_applyStatusEffect_000019F0:
     lwz r0, 0x48(r27)
     cmpwi r0, 0x0
-    bne lbl_fn_8016EB48_00001BE4
+    bne lbl_battle_applyStatusEffect_00001BE4
     lwz r3, 0x7e0(r27)
     rlwinm r0, r3, 0, 23, 23
     cmplwi r0, 0x100
-    beq lbl_fn_8016EB48_00001BE4
+    beq lbl_battle_applyStatusEffect_00001BE4
     rlwinm r3, r3, 0, 15, 15
     subis r0, r3, 0x1
     cmplwi r0, 0x0
-    beq lbl_fn_8016EB48_00001BE4
+    beq lbl_battle_applyStatusEffect_00001BE4
     lwz r0, 0x55c(r27)
     cmpwi r0, 0x1
-    beq lbl_fn_8016EB48_00001BD8
+    beq lbl_battle_applyStatusEffect_00001BD8
     cmpwi r0, 0x6
-    beq lbl_fn_8016EB48_00001A3C
+    beq lbl_battle_applyStatusEffect_00001A3C
     cmpwi r0, 0x8
-    beq lbl_fn_8016EB48_00001A3C
+    beq lbl_battle_applyStatusEffect_00001A3C
     stw r0, 0x564(r27)
-lbl_fn_8016EB48_00001A3C:
+lbl_battle_applyStatusEffect_00001A3C:
     lwz r0, 0x55c(r27)
     cmpwi r0, 0x6
-    bne lbl_fn_8016EB48_00001BD8
+    bne lbl_battle_applyStatusEffect_00001BD8
     lwz r0, 0xf80(r27)
     cmpwi r0, 0x0
-    bne lbl_fn_8016EB48_00001A74
+    bne lbl_battle_applyStatusEffect_00001A74
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x80(r1)
@@ -2005,8 +2005,8 @@ lbl_fn_8016EB48_00001A3C:
     lwz r0, 0x8(r5)
     stw r3, 0x84(r1)
     stw r0, 0x88(r1)
-    b lbl_fn_8016EB48_00001A90
-lbl_fn_8016EB48_00001A74:
+    b lbl_battle_applyStatusEffect_00001A90
+lbl_battle_applyStatusEffect_00001A74:
     addi r3, r31, 0x19d4
     lwz r5, 0x19d4(r31)
     lwz r4, 0x4(r3)
@@ -2014,7 +2014,7 @@ lbl_fn_8016EB48_00001A74:
     stw r5, 0x80(r1)
     stw r4, 0x84(r1)
     stw r0, 0x88(r1)
-lbl_fn_8016EB48_00001A90:
+lbl_battle_applyStatusEffect_00001A90:
     lwz r5, 0x80(r1)
     addi r3, r1, 0x20
     lwz r4, 0x84(r1)
@@ -2024,26 +2024,26 @@ lbl_fn_8016EB48_00001A90:
     stw r0, 0x28(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_8016EB48_00001ACC
+    beq lbl_battle_applyStatusEffect_00001ACC
     lwz r3, 0xf80(r27)
     lwz r12, 0x0(r3)
     lwz r12, 0x1c(r12)
     mtctr r12
     bctrl
-lbl_fn_8016EB48_00001ACC:
+lbl_battle_applyStatusEffect_00001ACC:
     lwz r0, 0x55c(r27)
     cmpwi r0, 0x6
-    beq lbl_fn_8016EB48_00001BA8
+    beq lbl_battle_applyStatusEffect_00001BA8
     cmpwi r0, 0x8
-    beq lbl_fn_8016EB48_00001AE4
+    beq lbl_battle_applyStatusEffect_00001AE4
     stw r0, 0x564(r27)
-lbl_fn_8016EB48_00001AE4:
+lbl_battle_applyStatusEffect_00001AE4:
     lwz r0, 0x55c(r27)
     cmpwi r0, 0x6
-    bne lbl_fn_8016EB48_00001BA8
+    bne lbl_battle_applyStatusEffect_00001BA8
     lwz r0, 0xf80(r27)
     cmpwi r0, 0x0
-    bne lbl_fn_8016EB48_00001B1C
+    bne lbl_battle_applyStatusEffect_00001B1C
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x8c(r1)
@@ -2051,8 +2051,8 @@ lbl_fn_8016EB48_00001AE4:
     lwz r0, 0x8(r5)
     stw r3, 0x90(r1)
     stw r0, 0x94(r1)
-    b lbl_fn_8016EB48_00001B38
-lbl_fn_8016EB48_00001B1C:
+    b lbl_battle_applyStatusEffect_00001B38
+lbl_battle_applyStatusEffect_00001B1C:
     addi r3, r31, 0x19e0
     lwz r5, 0x19e0(r31)
     lwz r4, 0x4(r3)
@@ -2060,7 +2060,7 @@ lbl_fn_8016EB48_00001B1C:
     stw r5, 0x8c(r1)
     stw r4, 0x90(r1)
     stw r0, 0x94(r1)
-lbl_fn_8016EB48_00001B38:
+lbl_battle_applyStatusEffect_00001B38:
     lwz r5, 0x8c(r1)
     addi r3, r1, 0x2c
     lwz r4, 0x90(r1)
@@ -2070,13 +2070,13 @@ lbl_fn_8016EB48_00001B38:
     stw r0, 0x34(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_8016EB48_00001B74
+    beq lbl_battle_applyStatusEffect_00001B74
     lwz r3, 0xf80(r27)
     lwz r12, 0x0(r3)
     lwz r12, 0x1c(r12)
     mtctr r12
     bctrl
-lbl_fn_8016EB48_00001B74:
+lbl_battle_applyStatusEffect_00001B74:
     mr r3, r27
     li r4, 0x6
     bl actor_setState
@@ -2084,45 +2084,45 @@ lbl_fn_8016EB48_00001B74:
     li r0, 0x0
     cmpwi r3, 0x0
     stw r0, 0xf80(r27)
-    beq lbl_fn_8016EB48_00001BA8
+    beq lbl_battle_applyStatusEffect_00001BA8
     lwz r12, 0x0(r3)
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-lbl_fn_8016EB48_00001BA8:
+lbl_battle_applyStatusEffect_00001BA8:
     lwz r3, 0xf80(r27)
     li r4, 0x6
     li r0, 0x0
     stw r4, 0x55c(r27)
     cmpwi r3, 0x0
     stw r0, 0xf80(r27)
-    beq lbl_fn_8016EB48_00001BD8
+    beq lbl_battle_applyStatusEffect_00001BD8
     lwz r12, 0x0(r3)
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-lbl_fn_8016EB48_00001BD8:
+lbl_battle_applyStatusEffect_00001BD8:
     li r0, 0x1
     stw r0, 0x55c(r27)
-    b lbl_fn_8016EB48_00001DA8
-lbl_fn_8016EB48_00001BE4:
+    b lbl_battle_applyStatusEffect_00001DA8
+lbl_battle_applyStatusEffect_00001BE4:
     lwz r0, 0x55c(r27)
     cmpwi r0, 0x2
-    beq lbl_fn_8016EB48_00001DA0
+    beq lbl_battle_applyStatusEffect_00001DA0
     cmpwi r0, 0x6
-    beq lbl_fn_8016EB48_00001C04
+    beq lbl_battle_applyStatusEffect_00001C04
     cmpwi r0, 0x8
-    beq lbl_fn_8016EB48_00001C04
+    beq lbl_battle_applyStatusEffect_00001C04
     stw r0, 0x564(r27)
-lbl_fn_8016EB48_00001C04:
+lbl_battle_applyStatusEffect_00001C04:
     lwz r0, 0x55c(r27)
     cmpwi r0, 0x6
-    bne lbl_fn_8016EB48_00001DA0
+    bne lbl_battle_applyStatusEffect_00001DA0
     lwz r0, 0xf80(r27)
     cmpwi r0, 0x0
-    bne lbl_fn_8016EB48_00001C3C
+    bne lbl_battle_applyStatusEffect_00001C3C
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x98(r1)
@@ -2130,8 +2130,8 @@ lbl_fn_8016EB48_00001C04:
     lwz r0, 0x8(r5)
     stw r3, 0x9c(r1)
     stw r0, 0xa0(r1)
-    b lbl_fn_8016EB48_00001C58
-lbl_fn_8016EB48_00001C3C:
+    b lbl_battle_applyStatusEffect_00001C58
+lbl_battle_applyStatusEffect_00001C3C:
     addi r3, r31, 0x19ec
     lwz r5, 0x19ec(r31)
     lwz r4, 0x4(r3)
@@ -2139,7 +2139,7 @@ lbl_fn_8016EB48_00001C3C:
     stw r5, 0x98(r1)
     stw r4, 0x9c(r1)
     stw r0, 0xa0(r1)
-lbl_fn_8016EB48_00001C58:
+lbl_battle_applyStatusEffect_00001C58:
     lwz r5, 0x98(r1)
     addi r3, r1, 0x8
     lwz r4, 0x9c(r1)
@@ -2149,26 +2149,26 @@ lbl_fn_8016EB48_00001C58:
     stw r0, 0x10(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_8016EB48_00001C94
+    beq lbl_battle_applyStatusEffect_00001C94
     lwz r3, 0xf80(r27)
     lwz r12, 0x0(r3)
     lwz r12, 0x1c(r12)
     mtctr r12
     bctrl
-lbl_fn_8016EB48_00001C94:
+lbl_battle_applyStatusEffect_00001C94:
     lwz r0, 0x55c(r27)
     cmpwi r0, 0x6
-    beq lbl_fn_8016EB48_00001D70
+    beq lbl_battle_applyStatusEffect_00001D70
     cmpwi r0, 0x8
-    beq lbl_fn_8016EB48_00001CAC
+    beq lbl_battle_applyStatusEffect_00001CAC
     stw r0, 0x564(r27)
-lbl_fn_8016EB48_00001CAC:
+lbl_battle_applyStatusEffect_00001CAC:
     lwz r0, 0x55c(r27)
     cmpwi r0, 0x6
-    bne lbl_fn_8016EB48_00001D70
+    bne lbl_battle_applyStatusEffect_00001D70
     lwz r0, 0xf80(r27)
     cmpwi r0, 0x0
-    bne lbl_fn_8016EB48_00001CE4
+    bne lbl_battle_applyStatusEffect_00001CE4
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0xa4(r1)
@@ -2176,8 +2176,8 @@ lbl_fn_8016EB48_00001CAC:
     lwz r0, 0x8(r5)
     stw r3, 0xa8(r1)
     stw r0, 0xac(r1)
-    b lbl_fn_8016EB48_00001D00
-lbl_fn_8016EB48_00001CE4:
+    b lbl_battle_applyStatusEffect_00001D00
+lbl_battle_applyStatusEffect_00001CE4:
     addi r3, r31, 0x19f8
     lwz r5, 0x19f8(r31)
     lwz r4, 0x4(r3)
@@ -2185,7 +2185,7 @@ lbl_fn_8016EB48_00001CE4:
     stw r5, 0xa4(r1)
     stw r4, 0xa8(r1)
     stw r0, 0xac(r1)
-lbl_fn_8016EB48_00001D00:
+lbl_battle_applyStatusEffect_00001D00:
     lwz r5, 0xa4(r1)
     addi r3, r1, 0x14
     lwz r4, 0xa8(r1)
@@ -2195,13 +2195,13 @@ lbl_fn_8016EB48_00001D00:
     stw r0, 0x1c(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_8016EB48_00001D3C
+    beq lbl_battle_applyStatusEffect_00001D3C
     lwz r3, 0xf80(r27)
     lwz r12, 0x0(r3)
     lwz r12, 0x1c(r12)
     mtctr r12
     bctrl
-lbl_fn_8016EB48_00001D3C:
+lbl_battle_applyStatusEffect_00001D3C:
     mr r3, r27
     li r4, 0x6
     bl actor_setState
@@ -2209,47 +2209,47 @@ lbl_fn_8016EB48_00001D3C:
     li r0, 0x0
     cmpwi r3, 0x0
     stw r0, 0xf80(r27)
-    beq lbl_fn_8016EB48_00001D70
+    beq lbl_battle_applyStatusEffect_00001D70
     lwz r12, 0x0(r3)
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-lbl_fn_8016EB48_00001D70:
+lbl_battle_applyStatusEffect_00001D70:
     lwz r3, 0xf80(r27)
     li r4, 0x6
     li r0, 0x0
     stw r4, 0x55c(r27)
     cmpwi r3, 0x0
     stw r0, 0xf80(r27)
-    beq lbl_fn_8016EB48_00001DA0
+    beq lbl_battle_applyStatusEffect_00001DA0
     lwz r12, 0x0(r3)
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-lbl_fn_8016EB48_00001DA0:
+lbl_battle_applyStatusEffect_00001DA0:
     li r0, 0x2
     stw r0, 0x55c(r27)
-lbl_fn_8016EB48_00001DA8:
+lbl_battle_applyStatusEffect_00001DA8:
     cmpwi r28, 0x0
-    bne lbl_fn_8016EB48_00001EF8
+    bne lbl_battle_applyStatusEffect_00001EF8
     lwz r0, 0x12a4(r27)
     srwi. r0, r0, 31
-    beq lbl_fn_8016EB48_00001EF8
+    beq lbl_battle_applyStatusEffect_00001EF8
     lwz r0, 0x12a4(r27)
     clrlwi r0, r0, 2
     stw r0, 0x12a4(r27)
     lwz r3, lbl_8087F430
     lwz r4, 0x10d8(r3)
     cmpwi r4, 0x0
-    beq lbl_fn_8016EB48_00001E20
+    beq lbl_battle_applyStatusEffect_00001E20
     lwz r3, 0xc38(r27)
     cmpwi r3, 0x0
-    ble lbl_fn_8016EB48_00001E20
+    ble lbl_battle_applyStatusEffect_00001E20
     lwz r0, 0xc3c(r27)
     cmpwi r0, 0x0
-    ble lbl_fn_8016EB48_00001E20
+    ble lbl_battle_applyStatusEffect_00001E20
     subi r0, r3, 0x1
     lwz r3, 0xb0(r4)
     slwi r0, r0, 6
@@ -2262,50 +2262,50 @@ lbl_fn_8016EB48_00001DA8:
     slwi r0, r0, 6
     add r3, r4, r0
     stw r5, 0x3c(r3)
-lbl_fn_8016EB48_00001E20:
+lbl_battle_applyStatusEffect_00001E20:
     lwz r4, 0x48(r27)
     cmpwi r4, 0x0
-    bne lbl_fn_8016EB48_00001E54
+    bne lbl_battle_applyStatusEffect_00001E54
     lwz r3, lbl_8087F0A8
     lwz r0, 0x278(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_8016EB48_00001E54
+    beq lbl_battle_applyStatusEffect_00001E54
     lwz r3, 0x5c(r27)
     lwz r0, 0x11c(r3)
     cmpwi r0, 0x1
-    bne lbl_fn_8016EB48_00001E54
+    bne lbl_battle_applyStatusEffect_00001E54
     li r0, 0x1
-    b lbl_fn_8016EB48_00001E74
-lbl_fn_8016EB48_00001E54:
+    b lbl_battle_applyStatusEffect_00001E74
+lbl_battle_applyStatusEffect_00001E54:
     cmpwi r4, 0x0
-    bne lbl_fn_8016EB48_00001E70
+    bne lbl_battle_applyStatusEffect_00001E70
     lwz r0, 0x12a8(r27)
     extrwi. r0, r0, 1, 14
-    beq lbl_fn_8016EB48_00001E70
+    beq lbl_battle_applyStatusEffect_00001E70
     li r0, 0x1
-    b lbl_fn_8016EB48_00001E74
-lbl_fn_8016EB48_00001E70:
+    b lbl_battle_applyStatusEffect_00001E74
+lbl_battle_applyStatusEffect_00001E70:
     li r0, 0x0
-lbl_fn_8016EB48_00001E74:
+lbl_battle_applyStatusEffect_00001E74:
     cmpwi r0, 0x0
-    beq lbl_fn_8016EB48_00001EF8
+    beq lbl_battle_applyStatusEffect_00001EF8
     lwz r3, lbl_8087F430
     li r4, 0x25
     bl world_getGlobalFlag
     cmpwi r3, 0x1
-    blt lbl_fn_8016EB48_00001ED8
+    blt lbl_battle_applyStatusEffect_00001ED8
     lwz r3, 0x648(r27)
     cmpwi r3, 0x0
-    beq lbl_fn_8016EB48_00001EA4
+    beq lbl_battle_applyStatusEffect_00001EA4
     li r4, 0x1
-    bl fn_80044E0C
-lbl_fn_8016EB48_00001EA4:
+    bl menu_renderLayout
+lbl_battle_applyStatusEffect_00001EA4:
     lwz r3, 0x64c(r27)
     cmpwi r3, 0x0
-    beq lbl_fn_8016EB48_00001EB8
+    beq lbl_battle_applyStatusEffect_00001EB8
     li r4, 0x1
-    bl fn_80044E0C
-lbl_fn_8016EB48_00001EB8:
+    bl menu_renderLayout
+lbl_battle_applyStatusEffect_00001EB8:
     li r0, 0x0
     li r3, -0x1
     stw r3, 0x674(r27)
@@ -2313,44 +2313,44 @@ lbl_fn_8016EB48_00001EB8:
     stw r0, 0x648(r27)
     stw r0, 0x64c(r27)
     bl fn_8014C228
-    b lbl_fn_8016EB48_00001EF8
-lbl_fn_8016EB48_00001ED8:
+    b lbl_battle_applyStatusEffect_00001EF8
+lbl_battle_applyStatusEffect_00001ED8:
     lwz r0, 0x674(r27)
     cmpwi r0, 0x0
-    blt lbl_fn_8016EB48_00001EF8
+    blt lbl_battle_applyStatusEffect_00001EF8
     mr r3, r27
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
     bl dialog_selectChoice
-lbl_fn_8016EB48_00001EF8:
+lbl_battle_applyStatusEffect_00001EF8:
     cmpwi r29, 0x0
-    bne lbl_fn_8016EB48_00001F18
+    bne lbl_battle_applyStatusEffect_00001F18
     lwz r0, 0x12a4(r27)
     extrwi. r0, r0, 1, 26
-    beq lbl_fn_8016EB48_00001F18
+    beq lbl_battle_applyStatusEffect_00001F18
     lwz r0, 0x12a4(r27)
     rlwinm r0, r0, 0, 27, 25
     stw r0, 0x12a4(r27)
-lbl_fn_8016EB48_00001F18:
+lbl_battle_applyStatusEffect_00001F18:
     cmpwi r30, 0x0
-    bne lbl_fn_8016EB48_00001F58
+    bne lbl_battle_applyStatusEffect_00001F58
     lwz r3, lbl_8087F048
     cmpwi r3, 0x0
-    beq lbl_fn_8016EB48_00001F40
+    beq lbl_battle_applyStatusEffect_00001F40
     mr r4, r27
     bl fn_801059F8
     lwz r3, lbl_8087F048
     mr r4, r27
     bl fn_80105B3C
-lbl_fn_8016EB48_00001F40:
+lbl_battle_applyStatusEffect_00001F40:
     lwz r0, 0x12a8(r27)
     lfs f0, lbl_8088196C
     rlwinm r0, r0, 0, 24, 22
     stw r0, 0x12a8(r27)
     stfs f0, 0xfb8(r27)
     stfs f0, 0xfbc(r27)
-lbl_fn_8016EB48_00001F58:
+lbl_battle_applyStatusEffect_00001F58:
     addi r11, r1, 0xd0
     bl _restgpr_27
     lwz r0, 0xd4(r1)

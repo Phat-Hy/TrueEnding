@@ -9,12 +9,12 @@ extern void _savegpr_26(void);
 extern void fn_8003E918(void);
 extern void str_assignBuffer(void);
 extern void ref_releaseHandle(void);
-extern void fn_800DBF68(void);
+extern void env_updateAtmosphere(void);
 extern void fn_800FDE60(void);
 extern void fn_801333E4(void);
 extern void fn_8016F824(void);
 extern void fn_8016FDCC(void);
-extern void fn_8017039C(void);
+extern void battle_resolveAggroHierarchy(void);
 extern void fn_80171DB0(void);
 extern void fn_801781B0(void);
 extern void fn_80219EC4(void);
@@ -115,7 +115,7 @@ lbl_fn_805ADB2C_00000064:
 lbl_fn_805ADB2C_0000006C:
     mr r3, r27
     add r4, r31, r30
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     lbz r3, 0x14(r1)
     slwi r0, r31, 1
     stb r3, 0x10(r1)
@@ -1645,7 +1645,7 @@ lbl_fn_805AED78_000013DC:
     mr r4, r3
     mr r3, r29
     li r5, 0x0
-    bl fn_8017039C
+    bl battle_resolveAggroHierarchy
     b lbl_fn_805AED78_0000140C
     b lbl_fn_805AED78_00001460
 lbl_fn_805AED78_0000140C:

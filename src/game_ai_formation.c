@@ -5,7 +5,7 @@
 extern void mtx_getTranslation(void);
 extern void vec3_copy(void);
 extern void vec3_mag(void);
-extern void fn_8000D9E8(void);
+extern void scene_transformPoint(void);
 extern void fn_8000DCF4(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
@@ -26,11 +26,11 @@ extern void system_getNextSequenceId(void);
 extern void fn_801162A0(void);
 extern void equip_getGlobalManager(void);
 extern void magic_getOffset6C(void);
-extern void fn_80126214(void);
+extern void enemy_updateCombatBehavior(void);
 extern void fn_8012F034(void);
-extern void fn_8013322C(void);
+extern void actor_testBitFlag(void);
 extern void fn_80139F4C(void);
-extern void fn_8013A258(void);
+extern void npc_initScriptContext(void);
 extern void npc_getPosition(void);
 extern void fn_8013C3B4(void);
 extern void npc_updateTalkInteraction(void);
@@ -680,7 +680,7 @@ lbl_fn_80265B00_00000760:
     bl equip_getGlobalManager
     bl magic_getOffset6C
     mr r29, r3
-    bl fn_8000D9E8
+    bl scene_transformPoint
     bl fn_8000DCF4
     lwz r0, 0x163c(r31)
     cmpwi r0, 0x0
@@ -1488,7 +1488,7 @@ asm void fn_80266A24(void)
     beq lbl_fn_80266A24_000012B0
     addi r3, r30, 0x7d4
     li r4, 0x20
-    bl fn_8013322C
+    bl actor_testBitFlag
 lbl_fn_80266A24_000012B0:
     lwz r0, 0x1658(r30)
     cmpwi r0, 0x0
@@ -1753,7 +1753,7 @@ lbl_fn_80266A24_00001664:
     bl fn_800F7FA8
     addi r3, r30, 0x7d4
     li r4, 0x20
-    bl fn_8013322C
+    bl actor_testBitFlag
     lwz r0, 0x14c0(r30)
     lfs f0, lbl_80883670
     cmpwi r0, 0x0
@@ -1791,7 +1791,7 @@ lbl_fn_80266A24_000016C4:
     li r4, 0xea
     li r5, 0x1
     bl world_setLocalFlag
-    bl fn_8000D9E8
+    bl scene_transformPoint
     bl fn_8000DCF4
     cmpwi r3, 0x0
     beq lbl_fn_80266A24_00001788
@@ -1998,7 +1998,7 @@ asm void fn_80267134(void)
     cmpwi r0, 0x1
     bne lbl_fn_80267134_00001BE8
     addi r3, r3, 0x1030
-    bl fn_80126214
+    bl enemy_updateCombatBehavior
     addi r4, r31, 0x1088
     lfs f2, 0x1090(r31)
     psq_l f1, 0x0(r4), 0, 0
@@ -2313,7 +2313,7 @@ lbl_fn_80267134_00001E2C:
 lbl_fn_80267134_00001E58:
     cmpwi r0, 0x6
     bne lbl_fn_80267134_00001E68
-    bl fn_8013A258
+    bl npc_initScriptContext
     b lbl_fn_80267134_00001E84
 lbl_fn_80267134_00001E68:
     lfs f0, 0x568(r31)

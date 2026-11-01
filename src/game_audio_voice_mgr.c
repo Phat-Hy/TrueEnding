@@ -2,7 +2,7 @@
 #pragma function_align 4
 
 /* External function declarations */
-extern void fn_8004B338(void);
+extern void sound_releaseChannel(void);
 extern void item_useConsumable(void);
 extern void collision_testLineSegment(void);
 extern void fn_80063764(void);
@@ -1666,7 +1666,7 @@ lbl_fn_803012AC_0000172C:
     blt lbl_fn_803012AC_0000172C
     addi r3, r1, 0x1b8
     li r4, -0x1
-    bl fn_8004B338
+    bl sound_releaseChannel
     lwz r0, 0x3d4(r1)
     psq_l f31, 0x3c8(r1), 0, 0
     lfd f31, 0x3c0(r1)

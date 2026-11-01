@@ -23,7 +23,7 @@ extern void GXSetTexCopySrc(void);
 extern void GXSetTexCopyDst(void);
 extern void GXCopyTex(void);
 extern void GXInitLightDistAttn(void);
-extern void fn_80615D50(void);
+extern void GXInitLightSpot(void);
 extern void fn_80615FF0(void);
 extern void fn_80616250(void);
 extern void GXDrawDone(void);
@@ -220,7 +220,7 @@ lbl_layout_drawPane_0000009C:
     li r7, 0x0
     li r8, 0x0
     li r9, 0x2
-    bl fn_80615D50
+    bl GXInitLightSpot
     li r3, 0x5
     bl GXClearVtxDesc
     li r3, 0x0
@@ -937,7 +937,7 @@ lbl_fn_800A9E64_00000A28:
     li r7, 0x1
     li r8, 0x0
     li r9, 0x2
-    bl fn_80615D50
+    bl GXInitLightSpot
     li r3, 0x0
     bl GXInitTexObjDefault
     lwz r3, lbl_8087EEE0

@@ -8,7 +8,7 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void ui_destroyWidget(void);
 extern void fn_8004B290(void);
-extern void fn_8004B338(void);
+extern void sound_releaseChannel(void);
 extern void atn_ColliBase_destructor(void);
 extern void fn_80057F28(void);
 extern void fn_800588FC(void);
@@ -27,7 +27,7 @@ extern void atn_Model_findBoneIndex(void);
 extern void fn_80092954(void);
 extern void fn_80095D44(void);
 extern void lockon_updateTarget(void);
-extern void fn_800971D4(void);
+extern void cursor_Object_constructor(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerTrack(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -1729,7 +1729,7 @@ lbl_fn_803F4948_00001654:
 lbl_fn_803F4948_00001660:
     addi r3, r29, 0xf4
     li r4, -0x1
-    bl fn_800971D4
+    bl cursor_Object_constructor
     mr r3, r29
     li r4, 0x0
     bl task_destroyWorker
@@ -1803,7 +1803,7 @@ lbl_fn_803F4A4C_00001754:
     beq lbl_fn_803F4A4C_00001778
     addi r3, r30, 0x8
     li r4, -0x1
-    bl fn_8004B338
+    bl sound_releaseChannel
     mr r3, r30
     bl dtor_80084684
 lbl_fn_803F4A4C_00001778:

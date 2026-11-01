@@ -5,7 +5,7 @@
 extern void _restgpr_14(void);
 extern void _savegpr_14(void);
 extern void dtor_80084684(void);
-extern void fn_8000D430(void);
+extern void scene_traverseNode(void);
 extern void fn_80056DB8(void);
 extern void atn_ColliBase_destructor(void);
 extern void fn_80057F28(void);
@@ -16,7 +16,7 @@ extern void mem_alloc(void);
 extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
 extern void lockon_updateTarget(void);
-extern void fn_800971D4(void);
+extern void cursor_Object_constructor(void);
 extern void fn_8009EE30(void);
 extern void skin_applyWeights(void);
 extern void morph_reset(void);
@@ -1217,7 +1217,7 @@ lbl_fn_803F76D8_00000EB0:
 lbl_fn_803F76D8_00000EBC:
     addi r3, r29, 0xf4
     li r4, -0x1
-    bl fn_800971D4
+    bl cursor_Object_constructor
     mr r3, r29
     li r4, 0x0
     bl task_destroyWorker
@@ -1476,7 +1476,7 @@ lbl_fn_803F77B8_00001278:
     mr r3, r16
     addi r4, r1, 0x80
     stw r0, 0x80(r1)
-    bl fn_8000D430
+    bl scene_traverseNode
     cmpwi r14, 0x0
     beq lbl_fn_803F77B8_00001578
     lwz r3, 0x80(r1)

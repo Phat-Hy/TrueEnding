@@ -13,7 +13,7 @@ extern void fn_8000FAE4(void);
 extern void fn_80012934(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
-extern void fn_8004B338(void);
+extern void sound_releaseChannel(void);
 extern void fn_80069BF4(void);
 extern void fn_8006AA20(void);
 extern void fn_8006B174(void);
@@ -40,7 +40,7 @@ extern void fn_80136138(void);
 extern void fn_80179A34(void);
 extern void fn_80179AB4(void);
 extern void save_validateHeader(void);
-extern void fn_802180A8(void);
+extern void task_lookupTagIndex(void);
 extern void fn_802251F8(void);
 extern void fn_802253E4(void);
 extern void fn_80225C80(void);
@@ -525,7 +525,7 @@ lbl_fn_80227434_000005A4:
 lbl_fn_80227434_000005B8:
     lwz r3, 0x40(r1)
 lbl_fn_80227434_000005BC:
-    bl fn_802180A8
+    bl task_lookupTagIndex
     lwz r0, 0x38(r1)
     mr r24, r3
     srwi. r0, r0, 31
@@ -1003,11 +1003,11 @@ lbl_fn_80227FC0_00000BE4:
     beq lbl_fn_80227FC0_00000C10
     addi r3, r3, 0x8
     li r4, -0x1
-    bl fn_8004B338
+    bl sound_releaseChannel
 lbl_fn_80227FC0_00000C10:
     addi r3, r29, 0x142c
     li r4, -0x1
-    bl fn_8004B338
+    bl sound_releaseChannel
     mr r3, r29
     li r4, 0x0
     bl fn_80136138

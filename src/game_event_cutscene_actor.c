@@ -56,7 +56,7 @@ extern void atn_Task_constructor(void);
 extern void atn_Fog_apply(void);
 extern void atn_Task_pause(void);
 extern void fn_800D2D7C(void);
-extern void fn_800DBF68(void);
+extern void env_updateAtmosphere(void);
 extern void fn_800DCA6C(void);
 extern void fn_80185AD4(void);
 extern void fn_80186520(void);
@@ -308,7 +308,7 @@ lbl_fn_8047961C_000001D0:
     mr r24, r3
     mr r3, r30
     mr r4, r24
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     lbz r3, 0xc(r1)
     slwi r0, r24, 1
     stb r3, 0x8(r1)

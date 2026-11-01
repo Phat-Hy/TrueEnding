@@ -9,14 +9,14 @@ extern void _savegpr_25(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void fn_80019E88(void);
-extern void fn_8004ECC0(void);
+extern void item_testLineOfSight(void);
 extern void fn_8012539C(void);
 extern void fn_801255C8(void);
-extern void fn_8016EB48(void);
+extern void battle_applyStatusEffect(void);
 extern void actor_getMovementFlags(void);
 extern void fn_803C11A4(void);
 extern void fn_803C1338(void);
-extern void fn_803C1560(void);
+extern void craft_forgeUpgradeWeapon(void);
 extern void fn_803CD958(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
@@ -371,7 +371,7 @@ lbl_fn_80127D8C_00000460:
     cmpwi r8, 0x0
     beq lbl_fn_80127D8C_00000470
     mr r3, r11
-    bl fn_8016EB48
+    bl battle_applyStatusEffect
 lbl_fn_80127D8C_00000470:
     li r0, 0x1
     stw r0, 0x2c(r31)
@@ -485,7 +485,7 @@ lbl_fn_80127EF4_000005E4:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8016EB48
+    bl battle_applyStatusEffect
 lbl_fn_80127EF4_00000600:
     li r0, 0x1
     stw r0, 0x2c(r31)
@@ -624,7 +624,7 @@ lbl_fn_80128090_000007A8:
     addi r4, r28, 0x4
     li r6, 0x0
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     mr r4, r3
     mr r3, r31
     mr r5, r26
@@ -670,7 +670,7 @@ lbl_fn_80128090_0000084C:
     addi r4, r27, 0x528
     li r6, 0x0
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     mr r4, r3
     mr r3, r31
     mr r5, r26
@@ -727,7 +727,7 @@ lbl_fn_80128090_00000924:
     mr r4, r27
     li r6, 0x0
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     mr r4, r3
     mr r3, r31
     mr r5, r26
@@ -778,7 +778,7 @@ lbl_fn_80128090_000009DC:
     addi r4, r27, 0x528
     li r6, 0x0
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     mr r4, r3
     mr r3, r31
     mr r5, r26
@@ -824,7 +824,7 @@ lbl_fn_80128090_00000A88:
     addi r4, r27, 0x528
     li r6, 0x0
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     mr r4, r3
     mr r3, r31
     mr r5, r26
@@ -892,7 +892,7 @@ lbl_fn_80128508_00000B70:
     mr r4, r31
     li r6, 0x0
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     cmpwi r3, 0x0
     ble lbl_fn_80128508_00000CF0
     li r0, 0x0
@@ -968,7 +968,7 @@ lbl_fn_80128508_00000B70:
     stfs f0, 0x14(r1)
     stfs f1, 0x18(r1)
     stfs f2, 0x1c(r1)
-    bl fn_8004ECC0
+    bl item_testLineOfSight
     cmpwi r3, 0x0
     beq lbl_fn_80128508_00000CF0
     lwz r0, 0x0(r30)
@@ -1035,7 +1035,7 @@ lbl_fn_801286F0_00000D58:
     addi r4, r30, 0x4
     li r6, 0x0
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     mr r4, r3
     mr r3, r25
     mr r5, r27
@@ -1128,7 +1128,7 @@ lbl_fn_80128818_00000ECC:
     addi r4, r30, 0x4
     li r6, 0x0
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     mr r4, r3
     mr r3, r26
     mr r5, r28
@@ -1192,7 +1192,7 @@ lbl_fn_80128930_00000FAC:
     addi r4, r28, 0x528
     li r6, 0x0
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     mr r4, r3
     mr r3, r27
     mr r5, r29
@@ -1267,7 +1267,7 @@ lbl_fn_80128A30_000010A4:
     mr r4, r28
     li r6, 0x0
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     mr r4, r3
     mr r3, r27
     mr r5, r29
@@ -1340,7 +1340,7 @@ lbl_fn_80128B20_000011A8:
     addi r4, r28, 0x528
     li r6, 0x0
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     mr r4, r3
     mr r3, r27
     mr r5, r29
@@ -1408,7 +1408,7 @@ lbl_fn_80128C08_00001290:
     addi r4, r28, 0x528
     li r6, 0x0
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     mr r4, r3
     mr r3, r27
     mr r5, r29
@@ -1687,7 +1687,7 @@ lbl_fn_80128CF8_00001618:
     stfs f0, 0x2c(r1)
     stfs f3, 0x30(r1)
     stfs f4, 0x34(r1)
-    bl fn_8004ECC0
+    bl item_testLineOfSight
     cmpwi r3, 0x0
     bne lbl_fn_80128CF8_0000173C
     lfs f3, 0xa0(r1)
@@ -1718,7 +1718,7 @@ lbl_fn_80128CF8_00001618:
     stfs f0, 0x14(r1)
     stfs f5, 0x18(r1)
     stfs f6, 0x1c(r1)
-    bl fn_8004ECC0
+    bl item_testLineOfSight
     cmpwi r3, 0x0
     beq lbl_fn_80128CF8_00001744
 lbl_fn_80128CF8_0000173C:

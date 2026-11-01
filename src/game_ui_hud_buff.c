@@ -7,9 +7,9 @@ extern void _restgpr_27(void);
 extern void _savegpr_23(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8000D430(void);
+extern void scene_traverseNode(void);
 extern void fn_8004B290(void);
-extern void fn_8004B338(void);
+extern void sound_releaseChannel(void);
 extern void fn_80063484(void);
 extern void fn_80076FF8(void);
 extern void mem_getAllocSize(void);
@@ -347,7 +347,7 @@ lbl_fn_801CC4F4_00000278:
     stw r0, 0xbc(r1)
     addi r3, r31, 0xb0
     addi r4, r1, 0xbc
-    bl fn_8000D430
+    bl scene_traverseNode
     addic. r3, r1, 0xbc
     beq lbl_fn_801CC4F4_00000330
     lwz r4, 0xbc(r1)
@@ -1075,7 +1075,7 @@ asm void fn_801CD184(void)
 lbl_fn_801CD184_00000D6C:
     addi r3, r30, 0x220
     li r4, -0x1
-    bl fn_8004B338
+    bl sound_releaseChannel
     mr r3, r30
     li r4, 0x0
     bl fn_8050FA80

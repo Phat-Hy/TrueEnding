@@ -33,7 +33,7 @@ extern void graphic_initViewportTransform(void);
 extern void fn_800B0A48(void);
 extern void fn_800B1554(void);
 extern void fn_800B1598(void);
-extern void fn_800BDB58(void);
+extern void model_updateBoneTransforms(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void bloom_processPasses(void);
@@ -1554,7 +1554,7 @@ asm void fn_800A9558(void)
     addi r4, r31, 0x58
     lwz r3, lbl_8087EFB4
     lwz r5, 0x778(r31)
-    bl fn_800BDB58
+    bl model_updateBoneTransforms
 lbl_fn_800A9558_00001398:
     addi r3, r31, 0x2c4
     bl fn_800AEF4C
@@ -1564,7 +1564,7 @@ lbl_fn_800A9558_00001398:
     addi r4, r31, 0x2c4
     lfs f1, lbl_80880D20
     li r5, 0xe
-    bl fn_800BDB58
+    bl model_updateBoneTransforms
 lbl_fn_800A9558_000013BC:
     lwz r3, lbl_8087EFA8
     lwz r0, 0xd4(r3)
@@ -1574,13 +1574,13 @@ lbl_fn_800A9558_000013BC:
     addi r4, r31, 0x9c
     lwz r3, lbl_8087EFB4
     li r5, 0xe
-    bl fn_800BDB58
+    bl model_updateBoneTransforms
 lbl_fn_800A9558_000013E0:
     lwz r3, lbl_8087EFB4
     addi r4, r31, 0x118
     lfs f1, lbl_80880D20
     li r5, 0xe
-    bl fn_800BDB58
+    bl model_updateBoneTransforms
     lwz r3, lbl_8087EFA8
     lwz r0, 0x324(r3)
     cmpwi r0, 0x0
@@ -1597,14 +1597,14 @@ lbl_fn_800A9558_000013E0:
     lfd f0, 0x8(r1)
     lwz r5, 0x778(r31)
     fsubs f1, f0, f1
-    bl fn_800BDB58
+    bl model_updateBoneTransforms
 lbl_fn_800A9558_00001438:
     lwz r6, lbl_8087EFA8
     addi r4, r31, 0x428
     lwz r3, lbl_8087EFB4
     li r5, 0xe
     lfs f1, 0x3e4(r6)
-    bl fn_800BDB58
+    bl model_updateBoneTransforms
     addi r3, r31, 0x340
     bl fn_800B0A48
     cmpwi r3, 0x0
@@ -1613,7 +1613,7 @@ lbl_fn_800A9558_00001438:
     addi r4, r31, 0x340
     lfs f1, lbl_80880D20
     li r5, 0xe
-    bl fn_800BDB58
+    bl model_updateBoneTransforms
 lbl_fn_800A9558_00001474:
     lwz r3, lbl_8087EFA8
     lwz r0, 0x374(r3)
@@ -1623,7 +1623,7 @@ lbl_fn_800A9558_00001474:
     addi r4, r31, 0x33c
     lfs f1, lbl_80880D20
     li r5, 0xe
-    bl fn_800BDB58
+    bl model_updateBoneTransforms
 lbl_fn_800A9558_00001498:
     li r0, 0x0
     stw r0, 0x54(r31)

@@ -10,7 +10,7 @@ extern void fn_80056DB8(void);
 extern void mission_updateStub(void);
 extern void atn_ColliCapsule_destructor(void);
 extern void fn_80063D3C(void);
-extern void fn_8006AFF8(void);
+extern void boss_initActionStream(void);
 extern void fn_8006CA80(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
@@ -40,7 +40,7 @@ extern void inventory_applyItemStats(void);
 extern void fn_8015AC48(void);
 extern void fn_8015E7A0(void);
 extern void actor_setState(void);
-extern void fn_80170A20(void);
+extern void battle_updateTargetAggro(void);
 extern void fn_8020A780(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
@@ -708,7 +708,7 @@ lbl_fn_80458270_000007D0:
     addi r3, r1, 0x8
     addi r4, r1, 0x2c
     addi r5, r1, 0x20
-    bl fn_8006AFF8
+    bl boss_initActionStream
     addi r3, r1, 0x8
     bl str_getData
     lwz r12, 0x14b0(r28)
@@ -1567,7 +1567,7 @@ lbl_fn_8045883C_0000149C:
     mr r3, r31
     lfs f1, lbl_80886C5C
     li r5, 0x0
-    bl fn_80170A20
+    bl battle_updateTargetAggro
 lbl_fn_8045883C_000014C8:
     mr r3, r31
     bl fn_8045B82C

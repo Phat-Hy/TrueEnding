@@ -9,7 +9,7 @@ extern void _savegpr_14(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_8000D844(void);
-extern void fn_8004ECC0(void);
+extern void item_testLineOfSight(void);
 extern void fn_80051CD8(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
@@ -2108,7 +2108,7 @@ lbl_fn_80548E74_00001B4C:
     lis r7, 0x8000
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ECC0
+    bl item_testLineOfSight
     cmpwi r3, 0x0
     bne lbl_fn_80548E74_00001B80
     lwz r0, 0x4c(r17)

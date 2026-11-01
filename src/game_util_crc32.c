@@ -9,7 +9,7 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void battle_canTargetActor(void);
 extern void fn_801784BC(void);
-extern void fn_80178A6C(void);
+extern void battle_updateActorStatus(void);
 extern void fn_80179730(void);
 extern void fn_8021A960(void);
 extern void fn_8021A984(void);
@@ -117,7 +117,7 @@ asm void fn_8059C088(void)
     bne lbl_fn_8059C088_00000050
 lbl_fn_8059C088_00000044:
     mr r3, r29
-    bl fn_80178A6C
+    bl battle_updateActorStatus
     b lbl_fn_8059C088_00000200
 lbl_fn_8059C088_00000050:
     lwz r0, 0x55c(r4)

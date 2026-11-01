@@ -27,7 +27,7 @@ extern void fn_801162A0(void);
 extern void fn_80129978(void);
 extern void fn_80129A48(void);
 extern void fn_8012A190(void);
-extern void fn_80139550(void);
+extern void npc_updateDialogueTarget(void);
 extern void fn_8013A13C(void);
 extern void fn_8013A194(void);
 extern void npc_getPosition(void);
@@ -1529,7 +1529,7 @@ lbl_fn_802F0328_00001448:
     addi r3, r31, 0xb0
     stfs f0, 0x14dc(r31)
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     fmr f31, f1
     addi r3, r31, 0xb0
     li r4, 0x0
@@ -1561,7 +1561,7 @@ lbl_fn_802F0328_00001490:
     fmr f31, f1
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     fcmpo cr0, f1, f31
     cror eq, gt, eq
     bne lbl_fn_802F0328_00001938
@@ -1748,7 +1748,7 @@ lbl_fn_802F0328_0000175C:
     b lbl_fn_802F0328_00001938
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     fmr f31, f1
     addi r3, r31, 0xb0
     li r4, 0x0
@@ -1817,7 +1817,7 @@ lbl_fn_802F0328_00001880:
     b lbl_fn_802F0328_00001954
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     fmr f31, f1
     addi r3, r31, 0xb0
     li r4, 0x0

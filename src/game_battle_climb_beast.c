@@ -10,8 +10,8 @@ extern void mtx_getTranslation(void);
 extern void vec3_set(void);
 extern void vec3_copy(void);
 extern void fn_8000D3A8(void);
-extern void fn_8000D430(void);
-extern void fn_8000D9E8(void);
+extern void scene_traverseNode(void);
+extern void scene_transformPoint(void);
 extern void fn_8000DCF4(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
@@ -20,7 +20,7 @@ extern void vec3_sub(void);
 extern void vec3_add(void);
 extern void fn_80013484(void);
 extern void ui_destroyWidget(void);
-extern void fn_8004ECC0(void);
+extern void item_testLineOfSight(void);
 extern void collision_testLineSegment(void);
 extern void mission_updateStub(void);
 extern void talk_formatQuotedString(void);
@@ -909,7 +909,7 @@ lbl_fn_803FA5C8_00000A20:
     lwz r0, 0x54(r31)
     cmpwi r0, 0x2
     bne lbl_fn_803FA5C8_00000A58
-    bl fn_8000D9E8
+    bl scene_transformPoint
     bl fn_8000DCF4
     mr r5, r3
     mr r3, r31
@@ -920,7 +920,7 @@ lbl_fn_803FA5C8_00000A20:
 lbl_fn_803FA5C8_00000A58:
     cmpwi r0, 0x6
     bne lbl_fn_803FA5C8_00000A80
-    bl fn_8000D9E8
+    bl scene_transformPoint
     bl fn_8000DCF4
     mr r5, r3
     mr r3, r31
@@ -929,7 +929,7 @@ lbl_fn_803FA5C8_00000A58:
     bl fn_803FB870
     b lbl_fn_803FA5C8_00000FB8
 lbl_fn_803FA5C8_00000A80:
-    bl fn_8000D9E8
+    bl scene_transformPoint
     bl fn_8000DCF4
     mr r5, r3
     mr r3, r31
@@ -993,7 +993,7 @@ lbl_fn_803FA5C8_00000B08:
     addi r7, r7, 0x20
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ECC0
+    bl item_testLineOfSight
     cmpwi r3, 0x0
     beq lbl_fn_803FA5C8_00000F70
     li r0, 0x4
@@ -1106,7 +1106,7 @@ lbl_fn_803FA5C8_00000D20:
     lwz r0, 0x4f0(r31)
     cmpwi r0, 0x0
     beq lbl_fn_803FA5C8_00000D4C
-    bl fn_8000D9E8
+    bl scene_transformPoint
     bl fn_8000DCF4
     mr r5, r3
     mr r3, r31
@@ -1122,7 +1122,7 @@ lbl_fn_803FA5C8_00000D4C:
     fsubs f1, f2, f1
     fcmpo cr0, f1, f0
     bge lbl_fn_803FA5C8_00000D88
-    bl fn_8000D9E8
+    bl scene_transformPoint
     bl fn_8000DCF4
     mr r5, r3
     mr r3, r31
@@ -1186,7 +1186,7 @@ lbl_fn_803FA5C8_00000E38:
     cmpwi r3, 0x0
     beq lbl_fn_803FA5C8_00000F70
 lbl_fn_803FA5C8_00000E58:
-    bl fn_8000D9E8
+    bl scene_transformPoint
     bl fn_802A36B0
     lfs f31, lbl_8088603C
     mr r30, r3
@@ -1278,7 +1278,7 @@ lbl_fn_803FA5C8_00000F94:
     bl fn_80317034
     addi r3, r31, 0xf4
     addi r4, r1, 0xfc
-    bl fn_8000D430
+    bl scene_traverseNode
     addi r3, r1, 0xfc
     li r4, -0x1
     bl fn_8000D3A8

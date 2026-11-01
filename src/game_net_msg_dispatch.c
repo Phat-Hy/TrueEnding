@@ -13,7 +13,7 @@ extern void skill_calcTrajectory(void);
 extern void fn_8006F2F0(void);
 extern void str_assignBuffer(void);
 extern void motion_updateFogAdj(void);
-extern void fn_800DBF68(void);
+extern void env_updateAtmosphere(void);
 extern void fn_8050284C(void);
 extern void fn_80502874(void);
 extern void fn_8050B96C(void);
@@ -1726,7 +1726,7 @@ asm void fn_804F8468(void)
     mr r16, r3
     mr r3, r15
     mr r4, r16
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     lbz r3, 0x234(r1)
     slwi r0, r16, 1
     stb r3, 0x230(r1)
@@ -1968,7 +1968,7 @@ lbl_fn_804F8468_000018B4:
     mr r16, r3
     mr r3, r15
     mr r4, r16
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     lbz r3, 0x20c(r1)
     slwi r0, r16, 1
     stb r3, 0x208(r1)
@@ -2651,7 +2651,7 @@ lbl_fn_804F8468_000023B0:
     mr r16, r3
     mr r3, r15
     mr r4, r16
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     lbz r3, 0x17c(r1)
     slwi r0, r16, 1
     stb r3, 0x178(r1)
@@ -3199,7 +3199,7 @@ lbl_fn_804F8468_00002BD4:
     mr r16, r3
     mr r3, r15
     mr r4, r16
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     lbz r3, 0xfc(r1)
     slwi r0, r16, 1
     stb r3, 0xf8(r1)

@@ -15,7 +15,7 @@ extern void morph_updateMesh(void);
 extern void str_findChar(void);
 extern void actor_spawnActorWithId(void);
 extern void magic_dispatchActionCommand(void);
-extern void fn_801F4728(void);
+extern void save_parseSlotHeader(void);
 extern void save_formatSlotTitle(void);
 extern void saveSlot_readSummary(void);
 extern void thread_findAndNotify(void);
@@ -1170,7 +1170,7 @@ lbl_fn_804CAAE8_00000EB0:
     stfs f1, 0x64(r1)
     stfs f0, 0x68(r1)
     lwz r3, 0x58(r27)
-    bl fn_801F4728
+    bl save_parseSlotHeader
     addi r28, r28, 0x1
     addi r27, r27, 0x4
     cmpwi r28, 0x3
@@ -1225,7 +1225,7 @@ lbl_fn_804CAAE8_00000F48:
     stfs f1, 0x64(r1)
     stfs f0, 0x68(r1)
     lwz r3, 0x74(r27)
-    bl fn_801F4728
+    bl save_parseSlotHeader
     addi r26, r26, 0x1
     addi r27, r27, 0x4
     cmpwi r26, 0x18
@@ -1261,7 +1261,7 @@ lbl_fn_804CAAE8_00001014:
     stfs f1, 0x64(r1)
     stfs f0, 0x68(r1)
     lwz r3, 0x64(r27)
-    bl fn_801F4728
+    bl save_parseSlotHeader
     lwz r28, 0x64(r27)
     mr r3, r29
     bl str_findChar
@@ -1282,7 +1282,7 @@ lbl_fn_804CAAE8_00001014:
     stfs f1, 0x64(r1)
     stfs f0, 0x68(r1)
     lwz r3, 0x6c(r27)
-    bl fn_801F4728
+    bl save_parseSlotHeader
     addi r26, r26, 0x1
     addi r27, r27, 0x4
     cmpwi r26, 0x2
@@ -1345,7 +1345,7 @@ lbl_fn_804CAD90_0000114C:
     stfs f1, 0x64(r1)
     stfs f0, 0x68(r1)
     lwz r3, 0x64(r28)
-    bl fn_801F4728
+    bl save_parseSlotHeader
     lwz r30, 0x64(r28)
     mr r3, r29
     bl str_findChar
@@ -1366,7 +1366,7 @@ lbl_fn_804CAD90_0000114C:
     stfs f1, 0x64(r1)
     stfs f0, 0x68(r1)
     lwz r3, 0x6c(r28)
-    bl fn_801F4728
+    bl save_parseSlotHeader
     addi r27, r27, 0x1
     addi r28, r28, 0x4
     cmpwi r27, 0x2
@@ -1393,7 +1393,7 @@ lbl_fn_804CAD90_0000114C:
     stfs f1, 0x64(r1)
     stfs f0, 0x68(r1)
     lwz r3, 0x54(r26)
-    bl fn_801F4728
+    bl save_parseSlotHeader
     lwz r29, 0x54(r26)
     addi r3, r31, 0x21c
     bl str_findChar
@@ -1414,7 +1414,7 @@ lbl_fn_804CAD90_0000114C:
     stfs f1, 0x68(r1)
     stfs f0, 0x64(r1)
     lwz r3, 0xd4(r26)
-    bl fn_801F4728
+    bl save_parseSlotHeader
     lwz r4, 0xd4(r26)
     addi r3, r31, 0x234
     addi r29, r4, 0x58

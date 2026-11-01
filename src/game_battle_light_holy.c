@@ -21,7 +21,7 @@ extern void node_createNamedChild(void);
 extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
 extern void lockon_updateTarget(void);
-extern void fn_800971D4(void);
+extern void cursor_Object_constructor(void);
 extern void fn_800C1814(void);
 extern void fn_800C1990(void);
 extern void skin_playAnimationByName(void);
@@ -692,7 +692,7 @@ lbl_fn_80420BE0_000007A8:
 lbl_fn_80420BE0_000007C8:
     addi r3, r29, 0xf4
     li r4, -0x1
-    bl fn_800971D4
+    bl cursor_Object_constructor
     mr r3, r29
     li r4, 0x0
     bl task_destroyWorker

@@ -29,7 +29,7 @@ extern void fn_8011D1FC(void);
 extern void fn_8011D21C(void);
 extern void equip_getGlobalManager(void);
 extern void magic_dispatchActionCommand(void);
-extern void fn_80126214(void);
+extern void enemy_updateCombatBehavior(void);
 extern void fn_8013537C(void);
 extern void fn_801370B8(void);
 extern void fn_80138E1C(void);
@@ -89,7 +89,7 @@ extern u32 lbl_808819C8;
 extern u32 lbl_808819CC;
 
 /* Function declarations */
-void fn_80139550(void);
+void npc_updateDialogueTarget(void);
 void fn_80139560(void);
 void fn_80139E90(void);
 void fn_80139E9C(void);
@@ -120,9 +120,9 @@ void fn_8013A1A8(void);
 void fn_8013A214(void);
 void fn_8013A21C(void);
 void fn_8013A248(void);
-void fn_8013A258(void);
+void npc_initScriptContext(void);
 
-asm void fn_80139550(void)
+asm void npc_updateDialogueTarget(void)
 {
     nofralloc
     mulli r0, r4, 0x30
@@ -435,7 +435,7 @@ lbl_fn_80139560_00000438:
     b lbl_fn_80139560_00000700
 lbl_fn_80139560_00000468:
     addi r3, r31, 0x1030
-    bl fn_80126214
+    bl enemy_updateCombatBehavior
     addi r3, r31, 0x1030
     bl fn_80139F58
     mr r4, r3
@@ -1170,7 +1170,7 @@ asm void fn_8013A248(void)
     blr
 }
 
-asm void fn_8013A258(void)
+asm void npc_initScriptContext(void)
 {
     nofralloc
     stwu r1, -0x70(r1)
@@ -1180,7 +1180,7 @@ asm void fn_8013A258(void)
     mr r31, r3
     lwz r0, 0xf80(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_8013A258_00000D48
+    bne lbl_npc_initScriptContext_00000D48
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x50(r1)
@@ -1188,8 +1188,8 @@ asm void fn_8013A258(void)
     lwz r0, 0x8(r5)
     stw r3, 0x54(r1)
     stw r0, 0x58(r1)
-    b lbl_fn_8013A258_00000D64
-lbl_fn_8013A258_00000D48:
+    b lbl_npc_initScriptContext_00000D64
+lbl_npc_initScriptContext_00000D48:
     lis r5, lbl_8077A798@ha
     lwzu r4, lbl_8077A798@l(r5)
     stw r4, 0x50(r1)
@@ -1197,7 +1197,7 @@ lbl_fn_8013A258_00000D48:
     lwz r0, 0x8(r5)
     stw r3, 0x54(r1)
     stw r0, 0x58(r1)
-lbl_fn_8013A258_00000D64:
+lbl_npc_initScriptContext_00000D64:
     lwz r5, 0x50(r1)
     addi r3, r1, 0x30
     lwz r4, 0x54(r1)
@@ -1207,14 +1207,14 @@ lbl_fn_8013A258_00000D64:
     stw r0, 0x38(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_8013A258_00000F84
+    beq lbl_npc_initScriptContext_00000F84
     lwz r3, 0xf80(r31)
     lwz r12, 0x0(r3)
     lwz r12, 0xc(r12)
     mtctr r12
     bctrl
     cmpwi r3, 0x0
-    beq lbl_fn_8013A258_00000F84
+    beq lbl_npc_initScriptContext_00000F84
     lwz r4, 0xf80(r31)
     addi r3, r1, 0x3c
     lwz r12, 0x0(r4)
@@ -1223,7 +1223,7 @@ lbl_fn_8013A258_00000D64:
     bctrl
     lwz r0, 0x3c(r1)
     cmpwi r0, 0x0
-    bne lbl_fn_8013A258_00000DEC
+    bne lbl_npc_initScriptContext_00000DEC
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x5c(r1)
@@ -1231,8 +1231,8 @@ lbl_fn_8013A258_00000D64:
     lwz r0, 0x8(r5)
     stw r3, 0x60(r1)
     stw r0, 0x64(r1)
-    b lbl_fn_8013A258_00000E08
-lbl_fn_8013A258_00000DEC:
+    b lbl_npc_initScriptContext_00000E08
+lbl_npc_initScriptContext_00000DEC:
     lis r5, lbl_8077A7A4@ha
     lwzu r4, lbl_8077A7A4@l(r5)
     stw r4, 0x5c(r1)
@@ -1240,7 +1240,7 @@ lbl_fn_8013A258_00000DEC:
     lwz r0, 0x8(r5)
     stw r3, 0x60(r1)
     stw r0, 0x64(r1)
-lbl_fn_8013A258_00000E08:
+lbl_npc_initScriptContext_00000E08:
     lwz r5, 0x5c(r1)
     addi r3, r1, 0x24
     lwz r4, 0x60(r1)
@@ -1250,10 +1250,10 @@ lbl_fn_8013A258_00000E08:
     stw r0, 0x2c(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_8013A258_00000F20
+    beq lbl_npc_initScriptContext_00000F20
     lwz r0, 0x3c(r1)
     cmpwi r0, 0x0
-    bne lbl_fn_8013A258_00000F08
+    bne lbl_npc_initScriptContext_00000F08
     lis r4, lbl_80775B60@ha
     li r0, 0x0
     addi r4, r4, lbl_80775B60@l
@@ -1274,7 +1274,7 @@ lbl_fn_8013A258_00000E08:
     stw r0, 0x14(r1)
     bl mem_free
     cmpwi r3, 0x0
-    beq lbl_fn_8013A258_00000EAC
+    beq lbl_npc_initScriptContext_00000EAC
     li r0, 0x1
     stw r0, 0x4(r3)
     lis r4, lbl_80775B98@ha
@@ -1282,13 +1282,13 @@ lbl_fn_8013A258_00000E08:
     addi r4, r4, lbl_80775B98@l
     stw r4, 0x0(r3)
     stw r31, 0xc(r3)
-lbl_fn_8013A258_00000EAC:
+lbl_npc_initScriptContext_00000EAC:
     li r0, 0x0
     stw r3, 0x20(r1)
     stw r0, 0x10(r1)
-    b lbl_fn_8013A258_00000EC0
+    b lbl_npc_initScriptContext_00000EC0
     bl mem_getAllocSize
-lbl_fn_8013A258_00000EC0:
+lbl_npc_initScriptContext_00000EC0:
     lis r4, lbl_80775BC8@ha
     lwz r3, 0x1c(r1)
     addi r4, r4, lbl_80775BC8@l
@@ -1299,50 +1299,50 @@ lbl_fn_8013A258_00000EC0:
     stw r4, 0x18(r1)
     bl fn_800DCA6C
     addic. r3, r1, 0x18
-    beq lbl_fn_8013A258_00000F08
+    beq lbl_npc_initScriptContext_00000F08
     addic. r3, r3, 0x4
-    beq lbl_fn_8013A258_00000F08
-    beq lbl_fn_8013A258_00000F08
+    beq lbl_npc_initScriptContext_00000F08
+    beq lbl_npc_initScriptContext_00000F08
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_8013A258_00000F08
+    beq lbl_npc_initScriptContext_00000F08
     bl msl_releaseRefCount
-lbl_fn_8013A258_00000F08:
+lbl_npc_initScriptContext_00000F08:
     lwz r4, 0x3c(r1)
     addi r3, r1, 0x40
     lwz r12, 0x4(r4)
     mtctr r12
     bctrl
-    b lbl_fn_8013A258_00000F48
-lbl_fn_8013A258_00000F20:
+    b lbl_npc_initScriptContext_00000F48
+lbl_npc_initScriptContext_00000F20:
     lwz r3, 0xf80(r31)
     li r0, 0x0
     cmpwi r3, 0x0
     stw r0, 0xf80(r31)
-    beq lbl_fn_8013A258_00000F48
+    beq lbl_npc_initScriptContext_00000F48
     lwz r12, 0x0(r3)
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-lbl_fn_8013A258_00000F48:
+lbl_npc_initScriptContext_00000F48:
     addic. r3, r1, 0x3c
-    beq lbl_fn_8013A258_00000F84
+    beq lbl_npc_initScriptContext_00000F84
     lwz r4, 0x3c(r1)
     cmpwi r4, 0x0
-    beq lbl_fn_8013A258_00000F84
+    beq lbl_npc_initScriptContext_00000F84
     lwz r12, 0x0(r4)
     cmpwi r12, 0x0
-    beq lbl_fn_8013A258_00000F7C
+    beq lbl_npc_initScriptContext_00000F7C
     addi r3, r3, 0x4
     li r5, 0x1
     mr r4, r3
     mtctr r12
     bctrl
-lbl_fn_8013A258_00000F7C:
+lbl_npc_initScriptContext_00000F7C:
     li r0, 0x0
     stw r0, 0x3c(r1)
-lbl_fn_8013A258_00000F84:
+lbl_npc_initScriptContext_00000F84:
     lwz r0, 0x74(r1)
     lwz r31, 0x6c(r1)
     mtlr r0

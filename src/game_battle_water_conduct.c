@@ -30,7 +30,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void str_skipWhitespace(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
-extern void fn_802180A8(void);
+extern void task_lookupTagIndex(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_destructor(void);
@@ -355,7 +355,7 @@ lbl_fn_80419C00_00000338:
     bl strcpy
     addi r3, r1, 0x210
     bl talk_formatQuotedString
-    bl fn_802180A8
+    bl task_lookupTagIndex
     mr r4, r3
     addi r3, r23, 0xf4
     addi r5, r1, 0x110
@@ -438,7 +438,7 @@ lbl_fn_80419C00_00000448:
     mr r30, r3
     addi r3, r1, 0x210
     bl talk_formatQuotedString
-    bl fn_802180A8
+    bl task_lookupTagIndex
     stw r3, 0xe8(r1)
     addi r3, r1, 0x210
     bl talk_formatQuotedString

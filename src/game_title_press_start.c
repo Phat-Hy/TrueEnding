@@ -8,7 +8,7 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
-extern void fn_8004ECC0(void);
+extern void item_testLineOfSight(void);
 extern void mem_free(void);
 extern void fn_8020924C(void);
 extern void fn_8020A81C(void);
@@ -1621,7 +1621,7 @@ lbl_fn_803ABE54_000014F4:
     li r4, 0x0
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ECC0
+    bl item_testLineOfSight
     cmpwi r3, 0x0
     bne lbl_fn_803ABE54_00001538
     li r3, 0x1

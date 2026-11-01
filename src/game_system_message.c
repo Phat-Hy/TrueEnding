@@ -13,7 +13,7 @@ extern void mem_getAllocSize(void);
 extern void fn_80206B14(void);
 extern void fn_80206B68(void);
 extern void fn_80206B70(void);
-extern void fn_80206B9C(void);
+extern void game_initGlobalDatabases(void);
 extern void assert_formatLocation(void);
 extern void fn_8020ED84(void);
 extern void fn_8020EE58(void);
@@ -185,7 +185,7 @@ lbl_fn_802124B4_0000016C:
     cmpwi r0, 0x0
     bge lbl_fn_802124B4_00000234
     lwz r3, 0x4(r3)
-    bl fn_80206B9C
+    bl game_initGlobalDatabases
     cmpwi r3, 0x0
     beq lbl_fn_802124B4_000001D4
     li r29, 0x0
@@ -263,7 +263,7 @@ asm void fn_80212714(void)
     mr r31, r3
     beq lbl_fn_80212714_000002C8
     lwz r3, 0x4(r3)
-    bl fn_80206B9C
+    bl game_initGlobalDatabases
     cmpwi r3, 0x0
     beq lbl_fn_80212714_000002A0
     lwz r3, 0x4(r31)
@@ -314,7 +314,7 @@ lbl_fn_80212790_000002FC:
     ble lbl_fn_80212790_00000364
     cmpwi r30, 0x0
     beq lbl_fn_80212790_00000364
-    bl fn_80206B9C
+    bl game_initGlobalDatabases
     cmpwi r3, 0x0
     beq lbl_fn_80212790_00000344
     lwz r3, 0x4(r30)
@@ -1690,7 +1690,7 @@ asm void fn_80213B78(void)
     b lbl_fn_80213B78_00001988
 lbl_fn_80213B78_00001704:
     lwz r3, 0x4(r3)
-    bl fn_80206B9C
+    bl game_initGlobalDatabases
     cmpwi r3, 0x0
     beq lbl_fn_80213B78_000017EC
     lwz r3, 0x4(r31)

@@ -14,8 +14,8 @@ extern void vec3_set(void);
 extern void vec3_copy(void);
 extern void vec3_mag(void);
 extern void fn_8000D3A8(void);
-extern void fn_8000D430(void);
-extern void fn_8000D9E8(void);
+extern void scene_traverseNode(void);
+extern void scene_transformPoint(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
 extern void fn_80011410(void);
@@ -35,7 +35,7 @@ extern void map_processTrigger(void);
 extern void fn_8008CD60(void);
 extern void fn_80092F1C(void);
 extern void lockon_updateTarget(void);
-extern void fn_800971D4(void);
+extern void cursor_Object_constructor(void);
 extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -58,7 +58,7 @@ extern void fn_800F80B8(void);
 extern void fn_80116E64(void);
 extern void equip_getGlobalManager(void);
 extern void fn_8012A190(void);
-extern void fn_80139550(void);
+extern void npc_updateDialogueTarget(void);
 extern void fn_80139F3C(void);
 extern void fn_8013A13C(void);
 extern void npc_getPosition(void);
@@ -827,7 +827,7 @@ asm void fn_80416764(void)
     beq lbl_fn_80416764_00000970
     li r4, -0x1
     addi r3, r3, 0xf4
-    bl fn_800971D4
+    bl cursor_Object_constructor
     mr r3, r30
     li r4, 0x0
     bl task_destroyWorker
@@ -1523,7 +1523,7 @@ asm void fn_804170D8(void)
     mr r30, r3
     beq lbl_fn_804170D8_000012D4
     li r4, -0x1
-    bl fn_800971D4
+    bl cursor_Object_constructor
     cmpwi r31, 0x0
     ble lbl_fn_804170D8_000012D4
     mr r3, r30
@@ -1588,7 +1588,7 @@ lbl_fn_80417130_00001384:
     bl __destroy_new_array
     addi r3, r29, 0xfc
     li r4, -0x1
-    bl fn_800971D4
+    bl cursor_Object_constructor
     mr r3, r29
     li r4, 0x0
     bl task_destroyWorker
@@ -2130,7 +2130,7 @@ lbl_fn_8041766C_00001AE4:
     bl fn_80317034
     mr r3, r26
     addi r4, r1, 0x104
-    bl fn_8000D430
+    bl scene_traverseNode
     addi r3, r1, 0x104
     li r4, -0x1
     bl fn_8000D3A8
@@ -2146,7 +2146,7 @@ lbl_fn_8041766C_00001B3C:
     bl fn_80317034
     mr r3, r26
     addi r4, r1, 0xf0
-    bl fn_8000D430
+    bl scene_traverseNode
     addi r3, r1, 0xf0
     li r4, -0x1
     bl fn_8000D3A8
@@ -2156,7 +2156,7 @@ lbl_fn_8041766C_00001B3C:
     fmr f28, f1
     mr r3, r26
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     fcmpo cr0, f1, f28
     cror eq, gt, eq
     bne lbl_fn_8041766C_00001C3C
@@ -2257,7 +2257,7 @@ lbl_fn_8041766C_00001CD8:
     bl fn_80417FF8
     b lbl_fn_8041766C_00001D14
 lbl_fn_8041766C_00001D04:
-    bl fn_8000D9E8
+    bl scene_transformPoint
     mr r4, r3
     addi r3, r1, 0x1a8
     bl fn_80417F40
@@ -2432,7 +2432,7 @@ lbl_fn_8041766C_00001EF8:
     bl fn_80317034
     mr r3, r25
     addi r4, r1, 0xdc
-    bl fn_8000D430
+    bl scene_traverseNode
     addi r3, r1, 0xdc
     li r4, -0x1
     bl fn_8000D3A8

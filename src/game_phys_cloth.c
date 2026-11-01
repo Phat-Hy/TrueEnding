@@ -18,7 +18,7 @@ extern void fn_800C37FC(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_unlink(void);
 extern void fn_801255C8(void);
-extern void fn_80126214(void);
+extern void enemy_updateCombatBehavior(void);
 extern void fn_80128A30(void);
 extern void npc_updateTalkInteraction(void);
 extern void fn_802144A8(void);
@@ -698,7 +698,7 @@ lbl_fn_8010DD34_00000788:
     mr r3, r28
     psq_st f1, 0x30(r28), 0, 0
     stfs f2, 0x38(r28)
-    bl fn_80126214
+    bl enemy_updateCombatBehavior
     psq_l f1, 0x58(r28), 0, 0
     addi r3, r1, 0xf8
     lfs f2, 0x60(r28)
@@ -1399,7 +1399,7 @@ lbl_fn_8010E7B8_00001130:
     b lbl_fn_8010E7B8_0000135C
 lbl_fn_8010E7B8_00001140:
     mr r3, r29
-    bl fn_80126214
+    bl enemy_updateCombatBehavior
     psq_l f1, 0x58(r29), 0, 0
     addi r3, r1, 0x68
     lfs f2, 0x60(r29)

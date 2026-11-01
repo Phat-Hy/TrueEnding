@@ -12,7 +12,7 @@ extern void fn_80011220(void);
 extern void vec3_sub(void);
 extern void vec3_add(void);
 extern void fn_80013484(void);
-extern void fn_8004ECC0(void);
+extern void item_testLineOfSight(void);
 extern void collision_testLineSegment(void);
 extern void mission_updateStub(void);
 extern void fn_80057A68(void);
@@ -1954,7 +1954,7 @@ lbl_fn_803267E8_00001A74:
     li r4, 0x0
     lis r7, 0x8000
     li r9, 0x0
-    bl fn_8004ECC0
+    bl item_testLineOfSight
     cmpwi r3, 0x0
     bne lbl_fn_803267E8_00001B58
     li r0, 0x4

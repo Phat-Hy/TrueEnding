@@ -20,7 +20,7 @@ extern void npc_getPosition(void);
 extern void fn_8014052C(void);
 extern void quest_evaluateConditions(void);
 extern void actor_setState(void);
-extern void fn_80170A20(void);
+extern void battle_updateTargetAggro(void);
 extern void fn_80176548(void);
 extern void fn_801A03E8(void);
 extern void task_findEntryById(void);
@@ -784,7 +784,7 @@ asm void fn_80267F88(void)
     mr r3, r29
     lfs f1, lbl_808836AC
     li r5, 0x0
-    bl fn_80170A20
+    bl battle_updateTargetAggro
 lbl_fn_80267F88_00000930:
     mr r3, r29
     bl fn_80267134

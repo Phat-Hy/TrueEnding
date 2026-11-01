@@ -18,7 +18,7 @@ extern void fn_80083AD4(void);
 extern void fn_80087BB4(void);
 extern void node_createNamedChild(void);
 extern void node_destroy(void);
-extern void fn_800BDB58(void);
+extern void model_updateBoneTransforms(void);
 extern void fn_805B55AC(void);
 extern void fn_805B56C4(void);
 extern void fn_805B5714(void);
@@ -1084,7 +1084,7 @@ asm void fn_800DCE0C(void)
     lwz r3, lbl_8087EFB4
     lfs f1, 0x10(r4)
     li r5, 0x12
-    b fn_800BDB58
+    b model_updateBoneTransforms
 }
 
 asm void fn_800DCE20(void)

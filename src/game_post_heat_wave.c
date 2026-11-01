@@ -18,7 +18,7 @@ extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void morph_updateMesh(void);
 extern void system_getNextSequenceId(void);
-extern void fn_8013A258(void);
+extern void npc_initScriptContext(void);
 extern void npc_updateTalkInteraction(void);
 extern void quest_updateFlow(void);
 extern void quest_ctorRewardItem(void);
@@ -440,7 +440,7 @@ lbl_fn_802D8B7C_00000494:
     cmpwi r0, 0x6
     bne lbl_fn_802D8B7C_000004D4
     mr r3, r31
-    bl fn_8013A258
+    bl npc_initScriptContext
     b lbl_fn_802D8B7C_000004EC
 lbl_fn_802D8B7C_000004D4:
     lfs f0, 0x568(r31)

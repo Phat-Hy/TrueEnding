@@ -16,12 +16,12 @@ extern void GXSetVtxAttrFmt(void);
 extern void __GXSetVtxDesc(void);
 extern void GXClearVtxDesc(void);
 extern void GXInitLightDistAttn(void);
-extern void fn_80615D50(void);
+extern void GXInitLightSpot(void);
 extern void fn_80617200(void);
 extern void GXInitTexObjDefault(void);
 extern void fn_80617340(void);
 extern void GXSetTevColorIn(void);
-extern void fn_80617420(void);
+extern void GXSetTevColorOp(void);
 extern void GXSetTevIndirect(void);
 extern void fn_806174C0(void);
 extern void GXSetTevSwapMode(void);
@@ -1726,7 +1726,7 @@ lbl_fn_805D8520_00001784:
     li r7, 0x0
     li r8, 0x0
     li r9, 0x2
-    bl fn_80615D50
+    bl GXInitLightSpot
     li r3, 0x5
     li r4, 0x0
     li r5, 0x0
@@ -1734,7 +1734,7 @@ lbl_fn_805D8520_00001784:
     li r7, 0x0
     li r8, 0x0
     li r9, 0x2
-    bl fn_80615D50
+    bl GXInitLightSpot
     li r3, 0x1
     bl GXClearVtxDesc
     li r3, 0x0
@@ -1775,7 +1775,7 @@ lbl_fn_805D8520_00001784:
     li r5, 0x4
     li r6, 0x5
     li r7, 0x7
-    bl fn_80617420
+    bl GXSetTevColorOp
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -1856,7 +1856,7 @@ lbl_fn_805D8520_00001984:
     li r7, 0x0
     li r8, 0x0
     li r9, 0x2
-    bl fn_80615D50
+    bl GXInitLightSpot
     li r3, 0x5
     li r4, 0x0
     li r5, 0x0
@@ -1864,7 +1864,7 @@ lbl_fn_805D8520_00001984:
     li r7, 0x0
     li r8, 0x0
     li r9, 0x2
-    bl fn_80615D50
+    bl GXInitLightSpot
     li r3, 0x1
     bl GXClearVtxDesc
     li r3, 0x0
@@ -1963,7 +1963,7 @@ lbl_fn_805D8520_00001B28:
     li r7, 0x0
     li r8, 0x0
     li r9, 0x2
-    bl fn_80615D50
+    bl GXInitLightSpot
     li r3, 0x5
     li r4, 0x0
     li r5, 0x0
@@ -1971,7 +1971,7 @@ lbl_fn_805D8520_00001B28:
     li r7, 0x0
     li r8, 0x0
     li r9, 0x2
-    bl fn_80615D50
+    bl GXInitLightSpot
     li r3, 0x1
     bl GXClearVtxDesc
     li r3, 0x0
@@ -2070,7 +2070,7 @@ lbl_fn_805D8520_00001CCC:
     li r7, 0x0
     li r8, 0x0
     li r9, 0x2
-    bl fn_80615D50
+    bl GXInitLightSpot
     li r3, 0x5
     li r4, 0x0
     li r5, 0x0
@@ -2078,7 +2078,7 @@ lbl_fn_805D8520_00001CCC:
     li r7, 0x0
     li r8, 0x0
     li r9, 0x2
-    bl fn_80615D50
+    bl GXInitLightSpot
     li r3, 0x1
     bl GXClearVtxDesc
     li r3, 0x0
@@ -2177,7 +2177,7 @@ lbl_fn_805D8520_00001E70:
     li r7, 0x0
     li r8, 0x0
     li r9, 0x2
-    bl fn_80615D50
+    bl GXInitLightSpot
     li r3, 0x5
     li r4, 0x0
     li r5, 0x0
@@ -2185,7 +2185,7 @@ lbl_fn_805D8520_00001E70:
     li r7, 0x0
     li r8, 0x0
     li r9, 0x2
-    bl fn_80615D50
+    bl GXInitLightSpot
     li r3, 0x1
     bl GXClearVtxDesc
     li r3, 0x0

@@ -49,13 +49,13 @@ extern void GXClearVtxDesc(void);
 extern void fn_80615B60(void);
 extern void fn_80615C40(void);
 extern void GXInitLightDistAttn(void);
-extern void fn_80615D50(void);
+extern void GXInitLightSpot(void);
 extern void fn_80616250(void);
 extern void fn_806163C0(void);
 extern void fn_80616EF0(void);
 extern void fn_80617340(void);
 extern void GXSetTevColorIn(void);
-extern void fn_80617420(void);
+extern void GXSetTevColorOp(void);
 extern void GXSetTevIndirect(void);
 extern void fn_806174C0(void);
 extern void fn_80617520(void);
@@ -1056,7 +1056,7 @@ lbl_fn_8009C508_00000D04:
 lbl_fn_8009C508_00000D1C:
     lwz r8, 0x10(r31)
     mr r9, r28
-    bl fn_80615D50
+    bl GXInitLightSpot
     addi r31, r31, 0x18
     addi r29, r29, 0x1
 lbl_fn_8009C508_00000D30:
@@ -1623,7 +1623,7 @@ lbl_fn_8009CC28_000014AC:
     li r7, 0x0
     li r8, 0x2
     li r9, 0x2
-    bl fn_80615D50
+    bl GXInitLightSpot
     cmpwi r29, 0x0
     lwz r29, lbl_8087EEE0
     beq lbl_fn_8009CC28_000017B4
@@ -1778,7 +1778,7 @@ lbl_fn_8009CC28_00001674:
     li r5, 0x7
     li r6, 0x7
     li r7, 0x4
-    bl fn_80617420
+    bl GXSetTevColorOp
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -1896,7 +1896,7 @@ asm void fn_8009D1A4(void)
     li r7, 0x0
     li r8, 0x2
     li r9, 0x2
-    bl fn_80615D50
+    bl GXInitLightSpot
     li r3, 0x1
     bl GXSetNumTevStages
     li r3, 0x0

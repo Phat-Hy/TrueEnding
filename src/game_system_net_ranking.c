@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void _restgpr_14(void);
 extern void _savegpr_14(void);
-extern void fn_8004ECC0(void);
+extern void item_testLineOfSight(void);
 extern void collision_testLineSegment(void);
 extern void fn_80051B70(void);
 extern void motion_updateFogAdj(void);
@@ -1005,7 +1005,7 @@ lbl_fn_80399734_00000DA0:
     li r4, 0x0
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ECC0
+    bl item_testLineOfSight
     cmpwi r3, 0x0
     bne lbl_fn_80399734_00000DDC
     li r0, 0x1
@@ -1198,7 +1198,7 @@ lbl_fn_80399734_00001078:
     li r4, 0x0
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ECC0
+    bl item_testLineOfSight
     cmpwi r3, 0x0
     bne lbl_fn_80399734_000010B4
     li r0, 0x1
@@ -1539,7 +1539,7 @@ lbl_fn_80399734_00001594:
     li r4, 0x0
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ECC0
+    bl item_testLineOfSight
     cmpwi r3, 0x0
     bne lbl_fn_80399734_000015D0
     li r0, 0x1
@@ -1686,7 +1686,7 @@ lbl_fn_80399734_000017C0:
     li r4, 0x0
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ECC0
+    bl item_testLineOfSight
     cmpwi r3, 0x0
     bne lbl_fn_80399734_000017FC
     li r0, 0x1

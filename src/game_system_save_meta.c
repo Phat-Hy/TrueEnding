@@ -5,8 +5,8 @@
 extern void __files(void);
 extern void dtor_80084684(void);
 extern void fn_8000D3A8(void);
-extern void fn_8000D430(void);
-extern void fn_8000D9E8(void);
+extern void scene_traverseNode(void);
+extern void scene_transformPoint(void);
 extern void fn_8000DCF4(void);
 extern void fn_8000DD0C(void);
 extern void fn_8004203C(void);
@@ -25,9 +25,9 @@ extern void str_skipWhitespace(void);
 extern void system_getNextSequenceId(void);
 extern void fn_8011F91C(void);
 extern void equip_getGlobalManager(void);
-extern void fn_8013322C(void);
+extern void actor_testBitFlag(void);
 extern void boss_updatePhaseState(void);
-extern void fn_80139550(void);
+extern void npc_updateDialogueTarget(void);
 extern void npc_getPosition(void);
 extern void fn_8013C480(void);
 extern void fn_8013C504(void);
@@ -566,7 +566,7 @@ lbl_fn_80345BA8_00000570:
     bl talk_parseQuotedString
     bl str_parseInt
     mr r30, r3
-    bl fn_8000D9E8
+    bl scene_transformPoint
     mr r4, r30
     bl fn_8011F91C
     stw r3, 0x14c4(r29)
@@ -978,7 +978,7 @@ asm void fn_80346384(void)
     beq lbl_fn_80346384_00000BDC
     li r4, 0x0
     addi r3, r3, 0xb0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     lfs f0, lbl_80885390
     fcmpo cr0, f1, f0
     cror eq, gt, eq
@@ -992,7 +992,7 @@ asm void fn_80346384(void)
     fmr f31, f1
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     fcmpo cr0, f1, f31
     cror eq, gt, eq
     bne lbl_fn_80346384_00000BC8
@@ -1037,7 +1037,7 @@ lbl_fn_80346384_00000BEC:
     lwz r0, 0x14b0(r31)
     cmpwi r0, 0x0
     bne lbl_fn_80346384_00000C54
-    bl fn_8000D9E8
+    bl scene_transformPoint
     bl fn_8000DCF4
     stw r3, 0x14b0(r31)
     stw r3, 0xd1c(r31)
@@ -1081,7 +1081,7 @@ lbl_fn_80346384_00000CC0:
     bl fn_80353EE4
     mr r3, r31
     bl fn_80353F0C
-    bl fn_8000D9E8
+    bl scene_transformPoint
     bl fn_802A36B0
     mr r30, r3
     b lbl_fn_80346384_00000D30
@@ -1149,7 +1149,7 @@ lbl_fn_80346384_00000DC4:
     addi r3, r31, 0x7d4
     bl fn_80265804
 lbl_fn_80346384_00000DD0:
-    bl fn_8000D9E8
+    bl scene_transformPoint
     bl fn_8000DCF4
     lbz r0, 0x1808(r31)
     cmpwi r0, 0x0
@@ -1263,7 +1263,7 @@ lbl_fn_80346384_00000F68:
     bl equip_getGlobalManager
     bl kpad_getClampData
     mr r28, r3
-    bl fn_8000D9E8
+    bl scene_transformPoint
     bl fn_8000DCF4
     bl npc_getPosition
     lfs f2, 0x4(r3)
@@ -1322,7 +1322,7 @@ lbl_fn_80346384_00000FE0:
     lwz r3, 0x17e4(r31)
     bl fn_8000DD0C
     addi r4, r1, 0x8
-    bl fn_8000D430
+    bl scene_traverseNode
     addi r3, r1, 0x8
     li r4, -0x1
     bl fn_8000D3A8
@@ -1490,7 +1490,7 @@ lbl_fn_80346A34_0000129C:
     li r4, 0x20
     stfs f0, 0x7d8(r3)
     addi r3, r3, 0x7d4
-    bl fn_8013322C
+    bl actor_testBitFlag
     li r0, 0x0
     stw r0, 0x14b4(r31)
     stw r0, 0x14b8(r31)
@@ -1649,7 +1649,7 @@ lbl_fn_80346A34_000014F8:
     stfs f0, 0x7d8(r3)
     li r4, 0x20
     addi r3, r3, 0x7d4
-    bl fn_8013322C
+    bl actor_testBitFlag
 lbl_fn_80346A34_00001518:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)

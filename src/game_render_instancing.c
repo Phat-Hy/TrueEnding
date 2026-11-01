@@ -24,7 +24,7 @@ extern void equip_applyToCharacter(void);
 extern void fn_8015AC48(void);
 extern void debuff_clearStatus(void);
 extern void actor_setState(void);
-extern void fn_80178A6C(void);
+extern void battle_updateActorStatus(void);
 extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_ctor(void);
 extern void res_Resource_unload(void);
@@ -1483,7 +1483,7 @@ lbl_fn_802ABF6C_000013C8:
     mtctr r12
     bctrl
     mr r3, r30
-    bl fn_80178A6C
+    bl battle_updateActorStatus
     mr r3, r30
     li r4, 0x0
     li r5, 0x1

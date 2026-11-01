@@ -22,7 +22,7 @@ extern void battle_canTargetActor(void);
 extern void fn_80178668(void);
 extern void fn_80178864(void);
 extern void fn_8017C7F8(void);
-extern void fn_80206B9C(void);
+extern void game_initGlobalDatabases(void);
 extern void fn_8020EF04(void);
 extern void event_findEntryById(void);
 extern void task_findEntryById(void);
@@ -56,7 +56,7 @@ extern void fn_8050C1DC(void);
 extern void fn_8050C7F4(void);
 extern void fn_8050C844(void);
 extern void fn_8050DDE0(void);
-extern void fn_8050E098(void);
+extern void net_p2p_readPayload(void);
 extern void fn_8050EAEC(void);
 extern void fn_8054D798(void);
 extern void rand(void);
@@ -323,7 +323,7 @@ lbl_fn_804E4490_000002E4:
     li r0, 0x1
     stw r3, -0x698c(r4)
     stw r0, -0x6988(r4)
-    bl fn_80206B9C
+    bl game_initGlobalDatabases
     cmpwi r3, 0x0
     bne lbl_fn_804E4490_00000328
     addis r3, r28, 0x1
@@ -453,7 +453,7 @@ lbl_fn_804E4490_000004A8:
     li r4, -0x1
     li r5, 0x1012
     li r7, 0x1
-    bl fn_8050E098
+    bl net_p2p_readPayload
     bl net_getPacketManager
     li r4, -0x1
     li r5, 0x1
@@ -1104,7 +1104,7 @@ lbl_fn_804E4EB4_00000D28:
     li r4, -0x1
     li r5, 0x103b
     li r7, 0x1
-    bl fn_8050E098
+    bl net_p2p_readPayload
     lwz r3, 0xe4(r23)
     li r18, -0x5
     addi r0, r3, 0x1
@@ -1373,7 +1373,7 @@ lbl_fn_804E4EB4_000010D8:
     li r4, -0x1
     li r5, 0x1002
     li r7, 0x1
-    bl fn_8050E098
+    bl net_p2p_readPayload
     stw r18, 0x564(r15)
     lwz r3, lbl_8087F448
     cmpwi r3, 0x0
@@ -1528,7 +1528,7 @@ lbl_fn_804E4EB4_00001304:
     li r4, -0x1
     li r5, 0x103a
     li r7, 0x1
-    bl fn_8050E098
+    bl net_p2p_readPayload
     bl net_getPacketManager
     li r4, -0x1
     li r5, 0x1
@@ -1586,7 +1586,7 @@ lbl_fn_804E4EB4_000013E4:
     li r4, -0x1
     li r5, 0x103b
     li r7, 0x1
-    bl fn_8050E098
+    bl net_p2p_readPayload
     b lbl_fn_804E4EB4_0000165C
 lbl_fn_804E4EB4_00001418:
     lwz r0, 0x48(r3)
@@ -1892,7 +1892,7 @@ lbl_fn_804E5BC8_00001844:
     li r4, -0x1
     li r5, 0x103a
     li r7, 0x1
-    bl fn_8050E098
+    bl net_p2p_readPayload
     bl net_getPacketManager
     li r4, -0x1
     li r5, 0x1

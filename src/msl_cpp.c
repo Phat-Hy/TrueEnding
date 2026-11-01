@@ -5321,10 +5321,7 @@ lbl_fn_8068AEB4_00004200:
     blr
 }
 
-asm void fn_8068B0FC(void)
-{
-    nofralloc
-    blr
+void fn_8068B0FC(void) {
 }
 
 asm void math_u64DivMod(void)
@@ -5740,10 +5737,7 @@ lbl_fn_8068B50C_000046EC:
     blr
 }
 
-asm void fn_8068B60C(void)
-{
-    nofralloc
-    blr
+void fn_8068B60C(void) {
 }
 
 asm void fn_8068B610(void)
@@ -6058,10 +6052,7 @@ asm void fn_8068BA50(void)
     blr
 }
 
-asm void fn_8068BA58(void)
-{
-    nofralloc
-    blr
+void fn_8068BA58(void) {
 }
 
 asm void fn_8068BA5C(void)
@@ -13354,10 +13345,7 @@ lbl_dtor_80691AC0_0000AC34:
     blr
 }
 
-asm void fn_80691B44(void)
-{
-    nofralloc
-    blr
+void fn_80691B44(void) {
 }
 
 asm void fn_80691B48(void)

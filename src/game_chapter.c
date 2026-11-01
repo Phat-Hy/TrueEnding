@@ -21,7 +21,7 @@ extern void fn_80088AF4(void);
 extern void node_createNamedChild(void);
 extern void node_destroy(void);
 extern void fn_800BDB40(void);
-extern void fn_800BDB58(void);
+extern void model_updateBoneTransforms(void);
 extern void motion_updateFogAdj(void);
 extern void fn_800C169C(void);
 extern void fn_800C2448(void);
@@ -38,7 +38,7 @@ extern void __GXSetVtxDesc(void);
 extern void GXClearVtxDesc(void);
 extern void fn_80614790(void);
 extern void GXInitLightDistAttn(void);
-extern void fn_80615D50(void);
+extern void GXInitLightSpot(void);
 extern void fn_80617340(void);
 extern void GXSetTevOrder(void);
 extern void GXSetNumTevStages(void);
@@ -84,7 +84,7 @@ extern u32 lbl_80880AF8;
 
 /* Function declarations */
 void fn_80077058(void);
-void fn_8007708C(void);
+void chapter_updateProgression(void);
 void fn_80077160(void);
 void fn_80077418(void);
 void atn_LensFlare_destructor(void);
@@ -112,7 +112,7 @@ asm void fn_80077058(void)
     blr
 }
 
-asm void fn_8007708C(void)
+asm void chapter_updateProgression(void)
 {
     nofralloc
     li r0, 0x2
@@ -120,57 +120,57 @@ asm void fn_8007708C(void)
     li r8, 0x0
     li r3, 0x1
     mtctr r0
-lbl_fn_8007708C_00000048:
+lbl_chapter_updateProgression_00000048:
     lbz r0, 0x0(r4)
     slw r7, r3, r8
     and r0, r7, r0
     cmpw r7, r0
-    bne lbl_fn_8007708C_00000070
+    bne lbl_chapter_updateProgression_00000070
     lhz r0, 0xa(r6)
     cmplw r5, r0
-    bne lbl_fn_8007708C_00000070
+    bne lbl_chapter_updateProgression_00000070
     li r3, 0x1
     blr
-lbl_fn_8007708C_00000070:
+lbl_chapter_updateProgression_00000070:
     addi r8, r8, 0x1
     lbz r0, 0x0(r4)
     slw r7, r3, r8
     and r0, r7, r0
     cmpw r7, r0
-    bne lbl_fn_8007708C_0000009C
+    bne lbl_chapter_updateProgression_0000009C
     lhz r0, 0xc(r6)
     cmplw r5, r0
-    bne lbl_fn_8007708C_0000009C
+    bne lbl_chapter_updateProgression_0000009C
     li r3, 0x1
     blr
-lbl_fn_8007708C_0000009C:
+lbl_chapter_updateProgression_0000009C:
     addi r8, r8, 0x1
     lbz r0, 0x0(r4)
     slw r7, r3, r8
     and r0, r7, r0
     cmpw r7, r0
-    bne lbl_fn_8007708C_000000C8
+    bne lbl_chapter_updateProgression_000000C8
     lhz r0, 0xe(r6)
     cmplw r5, r0
-    bne lbl_fn_8007708C_000000C8
+    bne lbl_chapter_updateProgression_000000C8
     li r3, 0x1
     blr
-lbl_fn_8007708C_000000C8:
+lbl_chapter_updateProgression_000000C8:
     addi r8, r8, 0x1
     lbz r0, 0x0(r4)
     slw r7, r3, r8
     and r0, r7, r0
     cmpw r7, r0
-    bne lbl_fn_8007708C_000000F4
+    bne lbl_chapter_updateProgression_000000F4
     lhz r0, 0x10(r6)
     cmplw r5, r0
-    bne lbl_fn_8007708C_000000F4
+    bne lbl_chapter_updateProgression_000000F4
     li r3, 0x1
     blr
-lbl_fn_8007708C_000000F4:
+lbl_chapter_updateProgression_000000F4:
     addi r6, r6, 0x8
     addi r8, r8, 0x1
-    bdnz lbl_fn_8007708C_00000048
+    bdnz lbl_chapter_updateProgression_00000048
     li r3, 0x0
     blr
 }
@@ -458,7 +458,7 @@ asm void fn_80077534(void)
     lwz r3, lbl_8087EFB4
     lfs f1, lbl_80880AD0
     li r5, 0xc
-    b fn_800BDB58
+    b model_updateBoneTransforms
 }
 
 asm void atn_LensFlare_draw(void)
@@ -2139,7 +2139,7 @@ asm void fn_80078938(void)
     li r7, 0x1
     li r8, 0x0
     li r9, 0x2
-    bl fn_80615D50
+    bl GXInitLightSpot
     li r3, 0x0
     li r4, 0x1
     li r5, 0x4

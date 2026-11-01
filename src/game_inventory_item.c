@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void _restgpr_26(void);
 extern void _savegpr_26(void);
-extern void fn_80044E0C(void);
+extern void menu_renderLayout(void);
 extern void collision_testLineSegment(void);
 extern void fn_80050A1C(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -26,7 +26,7 @@ extern void fn_80107FC8(void);
 extern void fn_80108080(void);
 extern void fn_8011BEB8(void);
 extern void fn_8012DD70(void);
-extern void fn_8013322C(void);
+extern void actor_testBitFlag(void);
 extern void fn_8013539C(void);
 extern void fn_8014C228(void);
 extern void dialog_selectChoice(void);
@@ -34,7 +34,7 @@ extern void fn_8015487C(void);
 extern void fn_80154C08(void);
 extern void fn_80164DCC(void);
 extern void actor_setState(void);
-extern void fn_80178A6C(void);
+extern void battle_updateActorStatus(void);
 extern void actor_getMovementFlags(void);
 extern void fn_80204E04(void);
 extern void fn_8021A888(void);
@@ -105,7 +105,7 @@ asm void fn_80152D10(void)
     mtctr r12
     bctrl
     mr r3, r31
-    bl fn_80178A6C
+    bl battle_updateActorStatus
     li r0, 0x2
     stw r0, 0x58c(r31)
     addi r3, r31, 0x7d4
@@ -177,13 +177,13 @@ lbl_fn_80152D10_0000010C:
     cmpwi r3, 0x0
     beq lbl_fn_80152D10_0000013C
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_fn_80152D10_0000013C:
     lwz r3, 0x64c(r31)
     cmpwi r3, 0x0
     beq lbl_fn_80152D10_00000150
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_fn_80152D10_00000150:
     li r0, 0x0
     li r3, -0x1
@@ -542,7 +542,7 @@ lbl_fn_80153004_00000654:
 lbl_fn_80153004_00000658:
     addi r3, r30, 0x7d4
     li r4, 0x40
-    bl fn_8013322C
+    bl actor_testBitFlag
     li r0, -0x1
     stw r0, 0xf94(r30)
     lwz r3, lbl_8087F048
@@ -1069,13 +1069,13 @@ lbl_inventory_unequipItem_00000D9C:
     cmpwi r3, 0x0
     beq lbl_inventory_unequipItem_00000DCC
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_inventory_unequipItem_00000DCC:
     lwz r3, 0x64c(r31)
     cmpwi r3, 0x0
     beq lbl_inventory_unequipItem_00000DE0
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_inventory_unequipItem_00000DE0:
     li r0, 0x0
     li r3, -0x1
@@ -1721,13 +1721,13 @@ lbl_fn_80154344_000016CC:
     cmpwi r3, 0x0
     beq lbl_fn_80154344_000016FC
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_fn_80154344_000016FC:
     lwz r3, 0x64c(r31)
     cmpwi r3, 0x0
     beq lbl_fn_80154344_00001710
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_fn_80154344_00001710:
     li r0, 0x0
     li r3, -0x1

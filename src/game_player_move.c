@@ -21,13 +21,13 @@ extern void actor_findSpawnTemplate(void);
 extern void actor_spawnActorWithId(void);
 extern void fn_8011BBD0(void);
 extern void fn_80124C6C(void);
-extern void fn_801F4728(void);
+extern void save_parseSlotHeader(void);
 extern void save_parseSlotStats(void);
 extern void fn_801F4C14(void);
 extern void save_formatSlotTitle(void);
 extern void fn_801F4D80(void);
 extern void saveSlot_readSummary(void);
-extern void fn_801F6D7C(void);
+extern void save_verifyBlockCrc(void);
 extern void fn_801F6E78(void);
 extern void fn_801FEC74(void);
 extern void thread_findAndNotify(void);
@@ -1099,7 +1099,7 @@ lbl_fn_8011AD38_00000EB0:
     addi r5, r1, 0x8
     stfs f31, 0x14(r1)
     lwz r3, 0x74(r31)
-    bl fn_801F4728
+    bl save_parseSlotHeader
     lwz r3, 0xf4(r31)
     addi r4, r27, 0x360
     addi r5, r1, 0x8
@@ -1209,22 +1209,22 @@ lbl_fn_8011AD38_00000FD8:
     addi r4, r27, 0x360
     lfs f1, lbl_80881790
     li r5, 0x0
-    bl fn_801F6D7C
+    bl save_verifyBlockCrc
     lwz r3, 0xf4(r31)
     addi r4, r27, 0x360
     lfs f1, lbl_80881794
     li r5, 0x1
-    bl fn_801F6D7C
+    bl save_verifyBlockCrc
     lwz r3, 0xf4(r31)
     addi r4, r27, 0x360
     lfs f1, lbl_80881764
     li r5, 0x2
-    bl fn_801F6D7C
+    bl save_verifyBlockCrc
     lwz r3, 0xf4(r31)
     addi r4, r27, 0x360
     lfs f1, lbl_80881764
     li r5, 0x3
-    bl fn_801F6D7C
+    bl save_verifyBlockCrc
     b lbl_fn_8011AD38_000010D4
 lbl_fn_8011AD38_000010C0:
     fsubs f0, f0, f31

@@ -103,7 +103,7 @@ void fn_8004D258(void);
 void atn_ColliBase_testBox(void);
 void fn_8004D314(void);
 void collision_queryGeometry(void);
-void fn_8004ECC0(void);
+void item_testLineOfSight(void);
 void collision_testLineSegment(void);
 void fn_8004F45C(void);
 void fn_8004F50C(void);
@@ -4064,7 +4064,7 @@ lbl_collision_queryGeometry_000038A0:
     blr
 }
 
-asm void fn_8004ECC0(void)
+asm void item_testLineOfSight(void)
 {
     nofralloc
     stwu r1, -0x60(r1)
@@ -4080,20 +4080,20 @@ asm void fn_8004ECC0(void)
     stw r0, 0x48(r1)
     bl collision_testLineSegment
     cmpwi r3, 0x0
-    beq lbl_fn_8004ECC0_000039A4
+    beq lbl_item_testLineOfSight_000039A4
     cmpwi r31, 0x0
-    beq lbl_fn_8004ECC0_0000399C
+    beq lbl_item_testLineOfSight_0000399C
     addi r3, r1, 0x18
     lfs f2, 0x20(r1)
     psq_l f1, 0x0(r3), 0, 0
     psq_st f1, 0x0(r31), 0, 0
     stfs f2, 0x8(r31)
-lbl_fn_8004ECC0_0000399C:
+lbl_item_testLineOfSight_0000399C:
     li r3, 0x1
-    b lbl_fn_8004ECC0_000039A8
-lbl_fn_8004ECC0_000039A4:
+    b lbl_item_testLineOfSight_000039A8
+lbl_item_testLineOfSight_000039A4:
     li r3, 0x0
-lbl_fn_8004ECC0_000039A8:
+lbl_item_testLineOfSight_000039A8:
     lwz r0, 0x64(r1)
     lwz r31, 0x5c(r1)
     mtlr r0

@@ -13,7 +13,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void fn_801255C8(void);
-extern void fn_80126214(void);
+extern void enemy_updateCombatBehavior(void);
 extern void fn_80128508(void);
 extern void fn_80128A30(void);
 extern void fn_80129954(void);
@@ -22,7 +22,7 @@ extern void fn_80129A48(void);
 extern void fn_80139560(void);
 extern void fn_8015E7A0(void);
 extern void fn_80161570(void);
-extern void fn_8016EB48(void);
+extern void battle_applyStatusEffect(void);
 extern void fn_80182874(void);
 extern void fn_80183860(void);
 extern void world_getGlobalFlag(void);
@@ -609,7 +609,7 @@ asm void fn_8017F118(void)
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8016EB48
+    bl battle_applyStatusEffect
     mr r3, r31
     li r4, 0x1
     bl fn_8017F4A0
@@ -629,7 +629,7 @@ lbl_fn_8017F118_000007B4:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8016EB48
+    bl battle_applyStatusEffect
     li r0, 0x1
     stw r0, 0x14fc(r31)
     mr r3, r31
@@ -1535,7 +1535,7 @@ asm void fn_8017FED0(void)
     stw r29, 0x1c4(r1)
     addi r29, r3, 0xc64
     mr r3, r29
-    bl fn_80126214
+    bl enemy_updateCombatBehavior
     psq_l f1, 0x58(r29), 0, 0
     addi r30, r1, 0xd4
     lfs f2, 0x60(r29)

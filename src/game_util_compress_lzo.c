@@ -14,13 +14,13 @@ extern void fn_8013407C(void);
 extern void quest_checkCondition(void);
 extern void fn_8014FAD0(void);
 extern void fn_80150178(void);
-extern void fn_801F4728(void);
+extern void save_parseSlotHeader(void);
 extern void saveSlot_readSummary(void);
 extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
 extern void thread_dispatchToQueue(void);
 extern void fn_80206B14(void);
-extern void fn_80206B9C(void);
+extern void game_initGlobalDatabases(void);
 extern void assert_generateId(void);
 extern void assert_formatLocation(void);
 extern void fn_8020ED84(void);
@@ -341,7 +341,7 @@ lbl_fn_8058D170_000002F0:
     stfs f0, 0x14(r1)
     stfs f0, 0x10(r1)
     lwz r3, 0x5bec(r6)
-    bl fn_801F4728
+    bl save_parseSlotHeader
     addis r3, r31, 0x2
     lwz r0, 0x6088(r3)
     cmpwi r0, 0x1
@@ -1081,7 +1081,7 @@ lbl_fn_8058DB14_00000D98:
     beq lbl_fn_8058DB14_00000E04
     lwz r26, 0x4(r3)
     mr r3, r26
-    bl fn_80206B9C
+    bl game_initGlobalDatabases
     cmpwi r3, 0x0
     beq lbl_fn_8058DB14_00000E04
     mr r3, r31

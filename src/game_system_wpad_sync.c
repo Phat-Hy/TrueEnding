@@ -11,7 +11,7 @@ extern void fn_8004829C(void);
 extern void fn_8004895C(void);
 extern void fn_80049654(void);
 extern void fn_800498D4(void);
-extern void fn_8004B338(void);
+extern void sound_releaseChannel(void);
 extern void boss_recordDamage(void);
 extern void fn_8006A250(void);
 extern void fn_8006A5A8(void);
@@ -2001,7 +2001,7 @@ lbl_world_Manager_destructor_000019A4:
 lbl_world_Manager_destructor_000019D0:
     addi r3, r25, 0x8
     li r4, -0x1
-    bl fn_8004B338
+    bl sound_releaseChannel
 lbl_world_Manager_destructor_000019DC:
     addi r3, r28, 0x6c
     li r4, -0x1

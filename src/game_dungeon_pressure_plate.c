@@ -16,7 +16,7 @@ extern void ref_releaseHandle(void);
 extern void str_findChar(void);
 extern void fn_80134250(void);
 extern void fn_80134270(void);
-extern void fn_801F6D7C(void);
+extern void save_verifyBlockCrc(void);
 extern void fn_801F80A8(void);
 extern void thread_findAndNotifySlot(void);
 extern void perf_getMetricValue(void);
@@ -2077,19 +2077,19 @@ lbl_fn_803E5200_00001AF0:
     addi r29, r29, lbl_807506A0@l
     li r5, 0x0
     addi r4, r29, 0x1596
-    bl fn_801F6D7C
+    bl save_verifyBlockCrc
     mr r3, r30
     bl perf_getMetricValue
     lfs f1, lbl_80885D58
     addi r4, r29, 0x1596
     li r5, 0x1
-    bl fn_801F6D7C
+    bl save_verifyBlockCrc
     mr r3, r30
     bl perf_getMetricValue
     fmr f1, f31
     addi r4, r29, 0x1596
     li r5, 0x4
-    bl fn_801F6D7C
+    bl save_verifyBlockCrc
     addi r11, r1, 0x1f0
     psq_l f31, 0x288(r1), 0, 0
     lfd f31, 0x280(r1)

@@ -8,7 +8,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8004B338(void);
+extern void sound_releaseChannel(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
 extern void fn_800C16B4(void);
@@ -1428,7 +1428,7 @@ lbl_fn_8052EEC0_000013FC:
     subi r28, r28, 0x1f4
     li r4, -0x1
     mr r3, r28
-    bl fn_8004B338
+    bl sound_releaseChannel
     subi r29, r29, 0x1
 lbl_fn_8052EEC0_00001410:
     cmpwi r29, 0x0
@@ -1610,7 +1610,7 @@ lbl_fn_8052EEC0_000016B4:
     subi r31, r31, 0x1f4
     li r4, -0x1
     mr r3, r31
-    bl fn_8004B338
+    bl sound_releaseChannel
     subi r26, r26, 0x1
 lbl_fn_8052EEC0_000016C8:
     cmpwi r26, 0x0

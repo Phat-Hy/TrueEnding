@@ -6,13 +6,13 @@ extern void __register_global_object(void);
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8000D430(void);
+extern void scene_traverseNode(void);
 extern void fn_8000D7DC(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void ui_destroyWidget(void);
 extern void fn_8004B290(void);
-extern void fn_8004B338(void);
+extern void sound_releaseChannel(void);
 extern void atn_ColliBase_destructor(void);
 extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
@@ -34,7 +34,7 @@ extern void atn_Model_findBoneIndex(void);
 extern void fn_80092EC8(void);
 extern void fn_80092F1C(void);
 extern void fn_80095D44(void);
-extern void fn_800971D4(void);
+extern void cursor_Object_constructor(void);
 extern void fn_80097510(void);
 extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -66,7 +66,7 @@ extern void dialog_selectChoice(void);
 extern void fn_8014FD30(void);
 extern void fn_8014FF9C(void);
 extern void fn_8020EE8C(void);
-extern void fn_802180A8(void);
+extern void task_lookupTagIndex(void);
 extern void task_mapIdToQueue(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
@@ -368,7 +368,7 @@ lbl_fn_80136138_000002C0:
 lbl_fn_80136138_000002E0:
     addi r3, r27, 0x4
     li r4, -0x1
-    bl fn_800971D4
+    bl cursor_Object_constructor
     mr r3, r27
     bl dtor_80084684
 lbl_fn_80136138_000002F4:
@@ -462,7 +462,7 @@ lbl_fn_80136138_00000424:
 lbl_fn_80136138_00000434:
     addi r3, r30, 0xb0
     li r4, -0x1
-    bl fn_800971D4
+    bl cursor_Object_constructor
     addic. r3, r30, 0xa4
     beq lbl_fn_80136138_00000450
     li r4, 0x0
@@ -785,7 +785,7 @@ lbl_boss_updatePhaseState_00000878:
     beq lbl_boss_updatePhaseState_0000089C
     addi r3, r27, 0x8
     li r4, -0x1
-    bl fn_8004B338
+    bl sound_releaseChannel
     mr r3, r27
     bl dtor_80084684
 lbl_boss_updatePhaseState_0000089C:
@@ -1132,7 +1132,7 @@ lbl_boss_updatePhaseState_00000D8C:
     stw r0, 0x12c(r1)
     addi r3, r30, 0xb0
     addi r4, r1, 0x12c
-    bl fn_8000D430
+    bl scene_traverseNode
     addic. r3, r1, 0x12c
     beq lbl_boss_updatePhaseState_00000DE8
     lwz r4, 0x12c(r1)
@@ -1685,7 +1685,7 @@ lbl_fn_801371AC_00001528:
     bl strcpy
     addi r3, r1, 0x870
     bl talk_formatQuotedString
-    bl fn_802180A8
+    bl task_lookupTagIndex
     mr r4, r3
     addi r3, r17, 0xb0
     addi r5, r1, 0x470

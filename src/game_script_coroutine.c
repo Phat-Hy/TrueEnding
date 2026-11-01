@@ -10,7 +10,7 @@ extern void system_getNextSequenceId(void);
 extern void scissor_clipFrustum(void);
 extern void fn_8015F568(void);
 extern void actor_setState(void);
-extern void fn_80170A20(void);
+extern void battle_updateTargetAggro(void);
 extern void fn_80176548(void);
 extern void battle_awardExp(void);
 extern void sound_initGlobalInstances(void);
@@ -355,7 +355,7 @@ lbl_fn_8024D120_00000440:
     mr r3, r31
     lfs f1, lbl_808832A8
     li r5, 0x0
-    bl fn_80170A20
+    bl battle_updateTargetAggro
     b lbl_fn_8024D120_00001078
 lbl_fn_8024D120_00000458:
     lwz r0, 0x1624(r31)
@@ -623,7 +623,7 @@ lbl_fn_8024D120_00000838:
     mr r3, r31
     lfs f1, lbl_808832A8
     li r5, 0x0
-    bl fn_80170A20
+    bl battle_updateTargetAggro
     b lbl_fn_8024D120_00001078
 lbl_fn_8024D120_00000850:
     lfs f0, 0x1668(r31)
@@ -1027,7 +1027,7 @@ lbl_fn_8024D120_00000E3C:
     mr r3, r31
     lfs f1, lbl_808832A8
     li r5, 0x0
-    bl fn_80170A20
+    bl battle_updateTargetAggro
     b lbl_fn_8024D120_00001078
 lbl_fn_8024D120_00000E54:
     cmpwi r6, 0x0

@@ -30,7 +30,7 @@ extern void fn_8011F7D4(void);
 extern void fn_8011F7FC(void);
 extern void fn_801546F4(void);
 extern void fn_8016DF3C(void);
-extern void fn_8016EB48(void);
+extern void battle_applyStatusEffect(void);
 extern void battle_awardExp(void);
 extern void fn_80176ACC(void);
 extern void save_validateHeader(void);
@@ -369,7 +369,7 @@ lbl_fn_8054A004_000002C4:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8016EB48
+    bl battle_applyStatusEffect
     mr r3, r31
     li r4, 0x0
     bl atn_Task_setActive

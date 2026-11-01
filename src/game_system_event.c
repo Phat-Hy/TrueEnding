@@ -21,7 +21,7 @@ extern void wcs_vformat(void);
 extern void fn_80206B14(void);
 extern void fn_80206B68(void);
 extern void fn_80206B70(void);
-extern void fn_80206B9C(void);
+extern void game_initGlobalDatabases(void);
 extern void assert_formatLocation(void);
 extern void fn_8020ED84(void);
 extern void fn_8020EE58(void);
@@ -943,7 +943,7 @@ lbl_fn_80211648_00000BB4:
     li r3, 0x0
     b lbl_fn_80211648_00000C5C
 lbl_fn_80211648_00000BC8:
-    bl fn_80206B9C
+    bl game_initGlobalDatabases
     cmpwi r3, 0x0
     beq lbl_fn_80211648_00000C28
     lwz r3, 0x4(r31)
@@ -1433,7 +1433,7 @@ lbl_fn_80211940_0000120C:
     add r0, r3, r0
     stw r0, 0xc8(r29)
     lwz r3, 0x4(r29)
-    bl fn_80206B9C
+    bl game_initGlobalDatabases
     cmpwi r3, 0x0
     beq lbl_fn_80211940_0000166C
     li r28, 0x0

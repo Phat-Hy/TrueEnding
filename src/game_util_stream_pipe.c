@@ -19,7 +19,7 @@ extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void node_destroy(void);
 extern void fn_800D0240(void);
-extern void fn_802180A8(void);
+extern void task_lookupTagIndex(void);
 extern void fn_805391E8(void);
 extern void fn_80539334(void);
 extern void fn_805393FC(void);
@@ -577,7 +577,7 @@ asm void fn_8057D518(void)
     lwz r30, 0x24(r6)
     bl memcpy
     addi r3, r31, 0x4
-    bl fn_802180A8
+    bl task_lookupTagIndex
     lwz r4, 0x8(r1)
     mr r31, r3
     mr r3, r30

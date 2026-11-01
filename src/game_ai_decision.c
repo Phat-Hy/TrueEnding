@@ -9,7 +9,7 @@ extern void collision_testLineSegment(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
-extern void fn_8006AFF8(void);
+extern void boss_initActionStream(void);
 extern void node_destroy(void);
 extern void fn_80094958(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -28,7 +28,7 @@ extern void equip_applyToCharacter(void);
 extern void debuff_clearStatus(void);
 extern void actor_setState(void);
 extern void battle_awardExp(void);
-extern void fn_80178A6C(void);
+extern void battle_updateActorStatus(void);
 extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
@@ -44,7 +44,7 @@ extern void fn_802648CC(void);
 extern void fn_80264C88(void);
 extern void entity_Instance_constructor(void);
 extern void entity_Instance_destructor(void);
-extern void fn_803C1560(void);
+extern void craft_forgeUpgradeWeapon(void);
 extern void chest_spawnLoot(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
@@ -160,7 +160,7 @@ lbl_fn_802620A8_00000054:
     mtctr r12
     bctrl
     mr r3, r30
-    bl fn_80178A6C
+    bl battle_updateActorStatus
     mr r3, r30
     li r4, 0x0
     li r5, 0x1
@@ -396,7 +396,7 @@ lbl_fn_802621D4_000003DC:
     li r6, 0x0
     li r7, 0x0
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     lwz r4, lbl_8087F430
     subi r0, r3, 0x1
     mulli r0, r0, 0x30
@@ -880,7 +880,7 @@ lbl_fn_80262938_00000ACC:
     addi r3, r1, 0x20
     addi r4, r1, 0x38
     addi r5, r1, 0x2c
-    bl fn_8006AFF8
+    bl boss_initActionStream
     lwz r0, 0x20(r1)
     addi r3, r30, 0x14b0
     srwi. r0, r0, 31
@@ -2058,7 +2058,7 @@ lbl_fn_802639C8_00001B8C:
     mtctr r12
     bctrl
     mr r3, r30
-    bl fn_80178A6C
+    bl battle_updateActorStatus
     mr r3, r30
     li r4, 0x0
     li r5, 0x1

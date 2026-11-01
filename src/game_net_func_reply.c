@@ -23,7 +23,7 @@ extern void fn_8050D5BC(void);
 extern void fn_8050D680(void);
 extern void fn_8050D72C(void);
 extern void fn_8050DDE0(void);
-extern void fn_8050E098(void);
+extern void net_p2p_readPayload(void);
 extern void fn_8050E6D0(void);
 extern void fn_8050E6F8(void);
 extern void fn_8050E7E0(void);
@@ -1200,7 +1200,7 @@ lbl_fn_80509B50_00000EB0:
     li r5, 0x13
     li r6, 0x0
     li r7, 0x1
-    bl fn_8050E098
+    bl net_p2p_readPayload
     lwz r3, lbl_8087F62C
     li r4, -0x1
     li r5, 0x1
@@ -1244,7 +1244,7 @@ lbl_fn_80509B50_00000F6C:
     li r5, 0x8
     li r6, 0x0
     li r7, 0x1
-    bl fn_8050E098
+    bl net_p2p_readPayload
     lwz r3, lbl_8087F62C
     li r4, -0x1
     li r5, 0x1
@@ -1819,7 +1819,7 @@ asm void fn_8050A3D4(void)
     li r5, 0x14
     li r6, 0x0
     li r7, 0x1
-    bl fn_8050E098
+    bl net_p2p_readPayload
     lwz r3, lbl_8087F62C
     li r4, -0x1
     li r5, 0x1
@@ -1904,7 +1904,7 @@ lbl_fn_8050A4E4_00001848:
     li r5, 0x13
     li r6, 0x0
     li r7, 0x1
-    bl fn_8050E098
+    bl net_p2p_readPayload
     lwz r3, lbl_8087F62C
     li r4, -0x1
     li r5, 0x1

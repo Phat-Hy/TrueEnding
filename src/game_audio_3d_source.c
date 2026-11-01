@@ -12,9 +12,9 @@ extern void fn_800EB49C(void);
 extern void system_getNextSequenceId(void);
 extern void scissor_clipFrustum(void);
 extern void fn_8012539C(void);
-extern void fn_80126214(void);
+extern void enemy_updateCombatBehavior(void);
 extern void fn_80134270(void);
-extern void fn_8013A258(void);
+extern void npc_initScriptContext(void);
 extern void quest_evaluateConditions(void);
 extern void inventory_applyItemStats(void);
 extern void fn_80158BB4(void);
@@ -23,9 +23,9 @@ extern void fn_8015E4B0(void);
 extern void fn_8015E7A0(void);
 extern void fn_8015EB2C(void);
 extern void actor_setState(void);
-extern void fn_8016EB48(void);
-extern void fn_8017039C(void);
-extern void fn_80170A20(void);
+extern void battle_applyStatusEffect(void);
+extern void battle_resolveAggroHierarchy(void);
+extern void battle_updateTargetAggro(void);
 extern void fn_80176548(void);
 extern void task_findEntryById(void);
 extern void fn_803227A0(void);
@@ -585,7 +585,7 @@ lbl_fn_8031FE4C_0000064C:
     li r4, 0x1
     li r5, 0x1
     li r6, 0x1
-    bl fn_8016EB48
+    bl battle_applyStatusEffect
     lwz r0, 0x55c(r31)
     cmpwi r0, 0x2
     bne lbl_fn_8031FE4C_000006B4
@@ -800,7 +800,7 @@ lbl_fn_803202E0_00000984:
     mr r3, r30
     lfs f1, lbl_80884EB4
     li r5, 0x0
-    bl fn_80170A20
+    bl battle_updateTargetAggro
     b lbl_fn_803202E0_00000EC0
 lbl_fn_803202E0_000009AC:
     lwz r3, lbl_8087F430
@@ -813,7 +813,7 @@ lbl_fn_803202E0_000009AC:
     lwz r4, 0x1568(r30)
     mr r3, r30
     li r5, 0x0
-    bl fn_8017039C
+    bl battle_resolveAggroHierarchy
     b lbl_fn_803202E0_00000EC0
 lbl_fn_803202E0_000009DC:
     cmpwi r0, 0x7
@@ -831,7 +831,7 @@ lbl_fn_803202E0_000009DC:
     b lbl_fn_803202E0_00000C38
 lbl_fn_803202E0_00000A10:
     addi r3, r30, 0x1030
-    bl fn_80126214
+    bl enemy_updateCombatBehavior
     addi r4, r30, 0x1088
     addi r29, r1, 0x80
     psq_l f1, 0x0(r4), 0, 0
@@ -1048,7 +1048,7 @@ lbl_fn_803202E0_00000CEC:
     lwz r4, 0x1568(r30)
     mr r3, r30
     li r5, 0x0
-    bl fn_8017039C
+    bl battle_resolveAggroHierarchy
     b lbl_fn_803202E0_00000EE4
 lbl_fn_803202E0_00000D44:
     lfs f4, 0xc(r3)
@@ -1076,7 +1076,7 @@ lbl_fn_803202E0_00000D44:
     mr r3, r30
     lfs f1, lbl_80884EB4
     li r5, 0x0
-    bl fn_80170A20
+    bl battle_updateTargetAggro
     li r0, 0x0
     li r3, 0x270f
     stw r3, 0x1568(r30)
@@ -1147,7 +1147,7 @@ lbl_fn_803202E0_00000EAC:
     cmpwi r0, 0x6
     bne lbl_fn_803202E0_00000EC0
     mr r3, r30
-    bl fn_8013A258
+    bl npc_initScriptContext
     b lbl_fn_803202E0_00000EE4
 lbl_fn_803202E0_00000EC0:
     lwz r12, 0x0(r30)

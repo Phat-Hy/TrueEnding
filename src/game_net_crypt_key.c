@@ -17,7 +17,7 @@ extern void bloom_processPasses(void);
 extern void str_findChar(void);
 extern void wcs_vformat(void);
 extern void actor_findSpawnTemplate(void);
-extern void fn_801F4728(void);
+extern void save_parseSlotHeader(void);
 extern void fn_801F4998(void);
 extern void save_formatSlotTitle(void);
 extern void saveSlot_readSummary(void);
@@ -811,7 +811,7 @@ lbl_fn_804B3494_00000A7C:
     lwz r3, 0x58(r30)
     addi r4, r29, 0x49c
     addi r5, r1, 0x44
-    bl fn_801F4728
+    bl save_parseSlotHeader
     b lbl_fn_804B3494_00000AE0
 lbl_fn_804B3494_00000AC4:
     lwz r3, lbl_8087F628
@@ -846,7 +846,7 @@ lbl_fn_804B3494_00000AE0:
     stw r6, 0x28(r1)
     stw r0, 0x2c(r1)
     lwz r3, 0xb8(r3)
-    bl fn_801F4728
+    bl save_parseSlotHeader
     lwz r3, lbl_8087F610
     lwz r28, lbl_8087F5A0
     lwz r4, 0xc28(r31)
@@ -1124,7 +1124,7 @@ lbl_fn_804B39F8_00000F00:
     lwz r3, 0x58(r31)
     addi r4, r30, 0x49c
     addi r5, r1, 0x30
-    bl fn_801F4728
+    bl save_parseSlotHeader
 lbl_fn_804B39F8_00000F54:
     lwz r3, lbl_8087F610
     mr r4, r28
@@ -1146,7 +1146,7 @@ lbl_fn_804B39F8_00000F54:
     lwz r3, 0x5c(r31)
     addi r4, r30, 0x49c
     addi r5, r1, 0x1c
-    bl fn_801F4728
+    bl save_parseSlotHeader
 lbl_fn_804B39F8_00000FA8:
     lwz r3, lbl_8087F628
     li r4, 0x0

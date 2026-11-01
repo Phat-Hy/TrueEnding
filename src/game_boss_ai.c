@@ -37,7 +37,7 @@ extern void fn_802092C0(void);
 extern void fn_8020A81C(void);
 extern void fn_8020A888(void);
 extern void fn_8020ED84(void);
-extern void fn_802180A8(void);
+extern void task_lookupTagIndex(void);
 extern void fn_80218260(void);
 extern void fn_80219EB4(void);
 extern void fn_80219EBC(void);
@@ -1164,10 +1164,10 @@ asm void fn_801354B4(void)
     mr r3, r24
     bl atn_LoadHandle_constructor
     lis r27, lbl_8078FEF0@ha
-    lis r26, fn_802180A8@ha
+    lis r26, task_lookupTagIndex@ha
     addi r27, r27, lbl_8078FEF0@l
     addi r23, r29, 0x98
-    addi r26, r26, fn_802180A8@l
+    addi r26, r26, task_lookupTagIndex@l
     stw r27, 0x0(r24)
     mr r3, r23
     stw r26, 0x8(r24)

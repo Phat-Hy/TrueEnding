@@ -11,7 +11,7 @@ extern void _savegpr_20(void);
 extern void _savegpr_25(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
-extern void fn_8000D430(void);
+extern void scene_traverseNode(void);
 extern void mem_alloc(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
@@ -21,7 +21,7 @@ extern void fn_80088724(void);
 extern void node_createNamedChild(void);
 extern void map_processTrigger(void);
 extern void fn_80092A4C(void);
-extern void fn_800971D4(void);
+extern void cursor_Object_constructor(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_80097E80(void);
@@ -929,7 +929,7 @@ asm void fn_80402A40(void)
     beq lbl_fn_80402A40_00000C30
     li r4, -0x1
     addi r3, r3, 0x10
-    bl fn_800971D4
+    bl cursor_Object_constructor
     cmpwi r31, 0x0
     ble lbl_fn_80402A40_00000C30
     mr r3, r30
@@ -1456,7 +1456,7 @@ lbl_fn_80402BD0_0000137C:
     lwz r0, 0x10c(r23)
     add r3, r0, r22
     addi r3, r3, 0x10
-    bl fn_8000D430
+    bl scene_traverseNode
     cmpwi r25, 0x0
     beq lbl_fn_80402BD0_000013E4
     lwz r3, 0xa4(r1)
@@ -1876,7 +1876,7 @@ lbl_fn_80403308_000019A4:
     lwz r0, 0x10c(r18)
     add r3, r0, r17
     addi r3, r3, 0x10
-    bl fn_8000D430
+    bl scene_traverseNode
     cmpwi r26, 0x0
     beq lbl_fn_80403308_00001A0C
     lwz r3, 0x50(r1)

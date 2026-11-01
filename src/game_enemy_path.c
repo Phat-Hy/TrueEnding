@@ -26,7 +26,7 @@ extern void atn_Model_findBoneIndex(void);
 extern void fn_800F7260(void);
 extern void viewport_getNextSequenceId(void);
 extern void fn_801125F8(void);
-extern void fn_8016EB48(void);
+extern void battle_applyStatusEffect(void);
 extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void strcmp(void);
@@ -244,7 +244,7 @@ lbl_fn_80129144_00000240:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8016EB48
+    bl battle_applyStatusEffect
 lbl_fn_80129144_0000025C:
     li r0, 0x1
     stw r0, 0x2c(r31)
@@ -393,7 +393,7 @@ lbl_fn_80129144_00000464:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8016EB48
+    bl battle_applyStatusEffect
 lbl_fn_80129144_00000480:
     li r0, 0x1
     stw r0, 0x2c(r31)

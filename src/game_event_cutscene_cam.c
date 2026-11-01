@@ -12,7 +12,7 @@ extern void _savegpr_20(void);
 extern void _savegpr_25(void);
 extern void dtor_80084684(void);
 extern void fn_8004B290(void);
-extern void fn_8004B338(void);
+extern void sound_releaseChannel(void);
 extern void item_useConsumable(void);
 extern void skill_calcTrajectory(void);
 extern void atn_normalizePath(char* str);
@@ -204,9 +204,9 @@ asm void fn_804778DC(void)
     mr r16, r4
     cmpwi r0, 0x0
     beq lbl_fn_804778DC_00000104
-    lis r4, fn_8004B338@ha
+    lis r4, sound_releaseChannel@ha
     mr r3, r0
-    addi r4, r4, fn_8004B338@l
+    addi r4, r4, sound_releaseChannel@l
     bl __destroy_arr
 lbl_fn_804778DC_00000104:
     cmpwi r14, 0x0
@@ -220,11 +220,11 @@ lbl_fn_804778DC_00000104:
     li r7, 0x0
     bl mem_realloc
     lis r4, fn_80477DAC@ha
-    lis r5, fn_8004B338@ha
+    lis r5, sound_releaseChannel@ha
     mr r7, r14
     li r6, 0x1f4
     addi r4, r4, fn_80477DAC@l
-    addi r5, r5, fn_8004B338@l
+    addi r5, r5, sound_releaseChannel@l
     bl runtime_registerStaticObject
     stw r3, 0x6c(r15)
     b lbl_fn_804778DC_00000158

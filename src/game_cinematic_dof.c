@@ -9,7 +9,7 @@ extern void dtor_80013D60(void);
 extern void dtor_80084684(void);
 extern void vec3_set(void);
 extern void fn_8000D760(void);
-extern void fn_8000D9E8(void);
+extern void scene_transformPoint(void);
 extern void fn_8000DCF4(void);
 extern void fn_8000DD0C(void);
 extern void str_initFromCStr(void);
@@ -20,7 +20,7 @@ extern void mission_updateStub(void);
 extern void fn_80057A68(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
-extern void fn_8006AFF8(void);
+extern void boss_initActionStream(void);
 extern void fn_8006CA80(void);
 extern void mem_free(void);
 extern void route_findNextWaypoint(void);
@@ -54,7 +54,7 @@ extern void fn_80129978(void);
 extern void fn_80129A48(void);
 extern void fn_8012D180(void);
 extern void boss_updatePhaseState(void);
-extern void fn_80139550(void);
+extern void npc_updateDialogueTarget(void);
 extern void fn_80139F3C(void);
 extern void npc_getPosition(void);
 extern void fn_8013C480(void);
@@ -725,7 +725,7 @@ lbl_fn_803388A4_00000730:
     addi r3, r1, 0x8
     addi r4, r1, 0x2c
     addi r5, r1, 0x20
-    bl fn_8006AFF8
+    bl boss_initActionStream
     addi r3, r1, 0x8
     bl str_getData
     lwz r12, 0x16b8(r31)
@@ -1511,7 +1511,7 @@ lbl_fn_80338FD0_00001290:
 lbl_fn_80338FD0_000012A0:
     lwz r0, 0x16c4(r31)
     stw r0, 0x16c0(r31)
-    bl fn_8000D9E8
+    bl scene_transformPoint
     li r4, 0x4
     bl fn_8054A340
     lwz r4, 0x14d8(r31)
@@ -1602,7 +1602,7 @@ asm void fn_80339760(void)
     beq lbl_fn_80339760_00001514
     li r4, 0x0
     addi r3, r3, 0xb0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     lfs f0, lbl_80885250
     fcmpo cr0, f1, f0
     bge lbl_fn_80339760_000013E0
@@ -1646,7 +1646,7 @@ lbl_fn_80339760_0000143C:
     bl fn_8016E4C4
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     lfs f0, lbl_80885258
     fcmpo cr0, f1, f0
     cror eq, gt, eq
@@ -1676,7 +1676,7 @@ lbl_fn_80339760_000014BC:
     fmr f31, f1
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     fcmpo cr0, f1, f31
     cror eq, gt, eq
     bne lbl_fn_80339760_00001500
@@ -1712,7 +1712,7 @@ lbl_fn_80339760_00001524:
     lwz r0, 0x14b0(r31)
     cmpwi r0, 0x0
     bne lbl_fn_80339760_00001568
-    bl fn_8000D9E8
+    bl scene_transformPoint
     bl fn_8000DCF4
     stw r3, 0x14b0(r31)
     stw r3, 0xd1c(r31)
@@ -1752,7 +1752,7 @@ lbl_fn_80339760_000015CC:
     bl fn_80341E14
     mr r3, r31
     bl fn_80344BB4
-    bl fn_8000D9E8
+    bl scene_transformPoint
     bl fn_802A36B0
     mr r29, r3
     b lbl_fn_80339760_00001634
@@ -1922,7 +1922,7 @@ lbl_fn_80339760_00001834:
     li r0, 0x1
     stb r0, 0x14c8(r31)
 lbl_fn_80339760_00001860:
-    bl fn_8000D9E8
+    bl scene_transformPoint
     bl fn_8000DCF4
     lwz r0, 0xd18(r31)
     li r30, 0x0
@@ -2031,7 +2031,7 @@ lbl_fn_80339760_000019E4:
     bl equip_getGlobalManager
     bl kpad_getClampData
     mr r28, r3
-    bl fn_8000D9E8
+    bl scene_transformPoint
     bl fn_8000DCF4
     bl npc_getPosition
     lfs f2, 0x4(r3)

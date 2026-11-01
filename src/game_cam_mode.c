@@ -9,7 +9,7 @@ extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_80044C50(void);
 extern void fn_80044CCC(void);
-extern void fn_80044E0C(void);
+extern void menu_renderLayout(void);
 extern void collision_queryGeometry(void);
 extern void collision_testLineSegment(void);
 extern void mem_realloc(void);
@@ -587,7 +587,7 @@ lbl_fn_800EE5AC_0000061C:
 lbl_fn_800EE5AC_00000630:
     mr r3, r30
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_fn_800EE5AC_0000063C:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)

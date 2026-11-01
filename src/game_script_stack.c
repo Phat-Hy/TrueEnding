@@ -23,7 +23,7 @@ extern void fn_80105BD8(void);
 extern void fn_80109828(void);
 extern void fn_8010CB2C(void);
 extern void fn_8012D8B8(void);
-extern void fn_8013322C(void);
+extern void actor_testBitFlag(void);
 extern void boss_updatePhaseState(void);
 extern void quest_evaluateConditions(void);
 extern void quest_updateFlow(void);
@@ -35,7 +35,7 @@ extern void actor_setState(void);
 extern void fn_8017547C(void);
 extern void battle_awardExp(void);
 extern void fn_80176ACC(void);
-extern void fn_80178A6C(void);
+extern void battle_updateActorStatus(void);
 extern void task_mapIdToQueue(void);
 extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_constructor(void);
@@ -617,7 +617,7 @@ asm void fn_80246914(void)
     mtctr r12
     bctrl
     mr r3, r30
-    bl fn_80178A6C
+    bl battle_updateActorStatus
     mr r3, r30
     li r4, 0x0
     li r5, 0x1
@@ -1868,7 +1868,7 @@ lbl_fn_802478C4_000018E0:
 lbl_fn_802478C4_000018E4:
     addi r3, r31, 0x7d4
     li r4, 0x20
-    bl fn_8013322C
+    bl actor_testBitFlag
     lwz r3, lbl_8087F430
     mr r5, r30
     li r4, 0x7

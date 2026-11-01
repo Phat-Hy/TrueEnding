@@ -217,7 +217,7 @@ void fn_80044BD4(void);
 void fn_80044C30(void);
 void fn_80044C50(void);
 void fn_80044CCC(void);
-void fn_80044E0C(void);
+void menu_renderLayout(void);
 void fn_80044E98(void);
 void fn_80044F54(void);
 void fn_80044FBC(void);
@@ -4113,7 +4113,7 @@ lbl_fn_80044CCC_000033A4:
     blr
 }
 
-asm void fn_80044E0C(void)
+asm void menu_renderLayout(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -4123,10 +4123,10 @@ asm void fn_80044E0C(void)
     mr r31, r3
     lwz r0, 0x2a0(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_80044E0C_00003434
+    beq lbl_menu_renderLayout_00003434
     lwz r3, lbl_8087F3C0
     cmpwi r3, 0x0
-    beq lbl_fn_80044E0C_00003434
+    beq lbl_menu_renderLayout_00003434
     li r0, 0x2
     stw r0, 0xb8(r3)
     mr r6, r4
@@ -4140,13 +4140,13 @@ asm void fn_80044E0C(void)
     stw r0, 0x2a0(r31)
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
-    beq lbl_fn_80044E0C_00003434
+    beq lbl_menu_renderLayout_00003434
     lwz r3, 0x5590(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_80044E0C_00003434
+    beq lbl_menu_renderLayout_00003434
     lwz r4, 0x29c(r31)
     bl fn_80570A78
-lbl_fn_80044E0C_00003434:
+lbl_menu_renderLayout_00003434:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0

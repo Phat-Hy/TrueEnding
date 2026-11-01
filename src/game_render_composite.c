@@ -11,7 +11,7 @@ extern void str_initFromCStr(void);
 extern void str_getData(void);
 extern void mission_updateStub(void);
 extern void atn_ColliCapsule_destructor(void);
-extern void fn_8006AFF8(void);
+extern void boss_initActionStream(void);
 extern void fn_8006CA80(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
@@ -1418,7 +1418,7 @@ lbl_fn_802BA92C_0000122C:
     addi r3, r1, 0x8
     addi r4, r1, 0x2c
     addi r5, r1, 0x20
-    bl fn_8006AFF8
+    bl boss_initActionStream
     lis r4, lbl_80746B20@ha
     addi r3, r28, 0x191c
     addi r4, r4, lbl_80746B20@l

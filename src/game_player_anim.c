@@ -13,8 +13,8 @@ extern void fn_8011C074(void);
 extern void fn_8011E200(void);
 extern void fn_801656A4(void);
 extern void fn_80167C34(void);
-extern void fn_8016EB48(void);
-extern void fn_8017039C(void);
+extern void battle_applyStatusEffect(void);
+extern void battle_resolveAggroHierarchy(void);
 extern void fn_80170F20(void);
 extern void fn_80171DB0(void);
 extern void fn_8017B3C0(void);
@@ -293,7 +293,7 @@ lbl_fn_8011CD84_000002E8:
     ble lbl_fn_8011CD84_0000030C
     mr r3, r31
     li r5, 0x0
-    bl fn_8017039C
+    bl battle_resolveAggroHierarchy
     b lbl_fn_8011CD84_00000414
 lbl_fn_8011CD84_0000030C:
     lfs f3, 0x530(r29)
@@ -452,7 +452,7 @@ lbl_fn_8011CD84_00000508:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8016EB48
+    bl battle_applyStatusEffect
     mr r3, r31
     bl fn_80167C34
     b lbl_fn_8011CD84_00000560
@@ -464,7 +464,7 @@ lbl_fn_8011CD84_00000540:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    bl fn_8016EB48
+    bl battle_applyStatusEffect
 lbl_fn_8011CD84_00000560:
     lwz r0, 0x14a8(r31)
     oris r0, r0, 0x400

@@ -10,7 +10,7 @@ extern void _savegpr_14(void);
 extern void _savegpr_24(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
-extern void fn_8000D9E8(void);
+extern void scene_transformPoint(void);
 extern void fn_8000D9F8(void);
 extern void fn_8000DCF4(void);
 extern void vec3_assign(void);
@@ -21,7 +21,7 @@ extern void mem_free(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void motion_updateFogAdj(void);
-extern void fn_800DBF68(void);
+extern void env_updateAtmosphere(void);
 extern void str_findChar(void);
 extern void wcs_vformat(void);
 extern void fn_800F52F0(void);
@@ -612,10 +612,10 @@ asm void fn_805AB82C(void)
     bne lbl_fn_805AB82C_000006C0
     li r26, 0x0
 lbl_fn_805AB82C_000006C0:
-    bl fn_8000D9E8
+    bl scene_transformPoint
     cmpwi r3, 0x0
     beq lbl_fn_805AB82C_000006D8
-    bl fn_8000D9E8
+    bl scene_transformPoint
     bl fn_8000DCF4
     b lbl_fn_805AB82C_000006DC
 lbl_fn_805AB82C_000006D8:
@@ -626,80 +626,80 @@ lbl_fn_805AB82C_000006DC:
     bne lbl_fn_805AB82C_000009D8
     addi r3, r1, 0x40
     bl fn_805ABD78
-    bl fn_8000D9E8
+    bl scene_transformPoint
     cmpwi r3, 0x0
     beq lbl_fn_805AB82C_00000810
     addi r3, r1, 0x40
     addi r4, r1, 0xc
     bl fn_805AB50C
-    bl fn_8000D9E8
+    bl scene_transformPoint
     li r4, 0x0
     bl fn_8054A340
     mr r4, r3
     addi r3, r1, 0x40
     bl fn_805AB1DC
-    bl fn_8000D9E8
+    bl scene_transformPoint
     li r4, 0x2
     bl fn_8054A340
     mr r4, r3
     addi r3, r1, 0x40
     bl fn_805AB1DC
-    bl fn_8000D9E8
+    bl scene_transformPoint
     li r4, 0x3
     bl fn_8054A340
     mr r4, r3
     addi r3, r1, 0x40
     bl fn_805AB1DC
-    bl fn_8000D9E8
+    bl scene_transformPoint
     li r4, 0x6
     bl fn_8054A340
     mr r4, r3
     addi r3, r1, 0x40
     bl fn_805AB1DC
-    bl fn_8000D9E8
+    bl scene_transformPoint
     li r4, 0x1
     bl fn_8054A340
     mr r4, r3
     addi r3, r1, 0x40
     bl fn_805AB1DC
-    bl fn_8000D9E8
+    bl scene_transformPoint
     li r4, 0x9
     bl fn_8054A340
     mr r4, r3
     addi r3, r1, 0x40
     bl fn_805AB1DC
-    bl fn_8000D9E8
+    bl scene_transformPoint
     li r4, 0xa
     bl fn_8054A340
     mr r4, r3
     addi r3, r1, 0x40
     bl fn_805AB1DC
-    bl fn_8000D9E8
+    bl scene_transformPoint
     li r4, 0x4
     bl fn_8054A340
     mr r4, r3
     addi r3, r1, 0x40
     bl fn_805AB1DC
-    bl fn_8000D9E8
+    bl scene_transformPoint
     li r4, 0x5
     bl fn_8054A340
     mr r4, r3
     addi r3, r1, 0x40
     bl fn_805AB1DC
-    bl fn_8000D9E8
+    bl scene_transformPoint
     li r4, 0xb
     bl fn_8054A340
     mr r4, r3
     addi r3, r1, 0x40
     bl fn_805AB1DC
-    bl fn_8000D9E8
+    bl scene_transformPoint
     li r4, 0xe
     bl fn_8054A340
     mr r4, r3
     addi r3, r1, 0x40
     bl fn_805AB1DC
 lbl_fn_805AB82C_00000810:
-    bl fn_8000D9E8
+    bl scene_transformPoint
     bl fn_802A36B0
     stw r3, 0x8(r1)
     lis r30, lbl_80763990@ha
@@ -2392,7 +2392,7 @@ lbl_fn_805AC75C_00001FC8:
     mr r17, r3
     mr r3, r22
     mr r4, r17
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     addi r6, r1, 0x158
     lbz r3, 0x34(r1)
     stb r3, 0x30(r1)
@@ -2427,7 +2427,7 @@ lbl_fn_805AC75C_00002080:
     stw r23, 0x4(r17)
     stw r23, 0x8(r17)
     lwz r4, 0x6c(r1)
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     lwz r0, 0x6c(r1)
     mr r3, r17
     lbz r4, 0x24(r1)
@@ -2559,7 +2559,7 @@ lbl_fn_805AC75C_00002260:
     stw r23, 0x4(r17)
     stw r23, 0x8(r17)
     lwz r4, 0x6c(r1)
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     lwz r0, 0x6c(r1)
     mr r3, r17
     lbz r4, 0x28(r1)
@@ -2694,7 +2694,7 @@ lbl_fn_805AC75C_0000244C:
     mr r27, r3
     mr r3, r26
     mr r4, r27
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     slwi r0, r27, 1
     stb r24, 0x18(r1)
     mr r3, r26
@@ -2727,7 +2727,7 @@ lbl_fn_805AC75C_000024D8:
     stw r16, 0x4(r27)
     stw r16, 0x8(r27)
     lwz r4, 0x60(r1)
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     lwz r0, 0x60(r1)
     mr r3, r27
     lbz r4, 0xc(r1)
@@ -2858,7 +2858,7 @@ lbl_fn_805AC75C_000026B4:
     stw r16, 0x4(r27)
     stw r16, 0x8(r27)
     lwz r4, 0x60(r1)
-    bl fn_800DBF68
+    bl env_updateAtmosphere
     lwz r0, 0x60(r1)
     mr r3, r27
     lbz r4, 0x10(r1)

@@ -33,7 +33,7 @@ extern void GXSetTexCopySrc(void);
 extern void GXSetTexCopyDst(void);
 extern void GXCopyTex(void);
 extern void GXInitLightDistAttn(void);
-extern void fn_80615D50(void);
+extern void GXInitLightSpot(void);
 extern void fn_80615FF0(void);
 extern void fn_80616250(void);
 extern void fn_806163C0(void);
@@ -1763,7 +1763,7 @@ lbl_fn_800AE568_000017F8:
     li r7, 0x0
     li r8, 0x0
     li r9, 0x2
-    bl fn_80615D50
+    bl GXInitLightSpot
     li r3, 0x2
     bl GXClearVtxDesc
     li r3, 0x0

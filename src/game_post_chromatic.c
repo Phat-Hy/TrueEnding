@@ -11,7 +11,7 @@ extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
 extern void fn_80063D3C(void);
-extern void fn_8006AFF8(void);
+extern void boss_initActionStream(void);
 extern void fn_8006CA80(void);
 extern void route_createSegment(void);
 extern void fn_80088FAC(void);
@@ -55,9 +55,9 @@ extern void equip_applyToCharacter(void);
 extern void debuff_clearStatus(void);
 extern void fn_8016DDB0(void);
 extern void actor_setState(void);
-extern void fn_80170A20(void);
+extern void battle_updateTargetAggro(void);
 extern void battle_awardExp(void);
-extern void fn_80178A6C(void);
+extern void battle_updateActorStatus(void);
 extern void fn_8020A780(void);
 extern void fn_8020A81C(void);
 extern void task_findEntryById(void);
@@ -225,7 +225,7 @@ lbl_fn_802CCC24_000000E0:
     mtctr r12
     bctrl
     mr r3, r31
-    bl fn_80178A6C
+    bl battle_updateActorStatus
     mr r3, r31
     li r4, 0x0
     li r5, 0x1
@@ -622,7 +622,7 @@ lbl_fn_802CCFD8_0000067C:
     addi r3, r1, 0x8
     addi r4, r1, 0x2c
     addi r5, r1, 0x20
-    bl fn_8006AFF8
+    bl boss_initActionStream
     addi r3, r1, 0x8
     bl str_getData
     lwz r12, 0x14b0(r28)
@@ -1547,7 +1547,7 @@ lbl_fn_802CD73C_0000140C:
     mr r3, r31
     lfs f1, lbl_80884510
     li r5, 0x0
-    bl fn_80170A20
+    bl battle_updateTargetAggro
     b lbl_fn_802CD73C_0000145C
 lbl_fn_802CD73C_00001448:
     cmpwi r0, 0x1
@@ -1792,7 +1792,7 @@ lbl_fn_802CD73C_00001760:
     mtctr r12
     bctrl
     mr r3, r31
-    bl fn_80178A6C
+    bl battle_updateActorStatus
     mr r3, r31
     li r4, 0x0
     li r5, 0x1

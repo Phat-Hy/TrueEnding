@@ -15,7 +15,7 @@ extern void fn_80106680(void);
 extern void fn_8012B3E8(void);
 extern void fn_8012B988(void);
 extern void fn_8013310C(void);
-extern void fn_8013322C(void);
+extern void actor_testBitFlag(void);
 extern void fn_80134250(void);
 extern void fn_80134270(void);
 extern void fn_801346C8(void);
@@ -1270,7 +1270,7 @@ lbl_fn_8017A5D8_00000F6C:
     bne lbl_fn_8017A5D8_00000FD8
     li r4, 0x800
     addi r3, r3, 0x7d4
-    bl fn_8013322C
+    bl actor_testBitFlag
     lfs f0, lbl_8088196C
     li r0, 0x0
     stw r0, 0xc04(r31)

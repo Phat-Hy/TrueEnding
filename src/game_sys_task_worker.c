@@ -81,7 +81,7 @@ extern u32 lbl_80882F58;
 
 /* Function declarations */
 void fn_80217E18(void);
-void fn_802180A8(void);
+void task_lookupTagIndex(void);
 void fn_80218218(void);
 void fn_8021823C(void);
 void fn_80218260(void);
@@ -281,7 +281,7 @@ lbl_fn_80217E18_00000254:
     blr
 }
 
-asm void fn_802180A8(void)
+asm void task_lookupTagIndex(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -292,100 +292,100 @@ asm void fn_802180A8(void)
     lwz r4, lbl_8087F290
     li r5, 0x0
     mtctr r0
-lbl_fn_802180A8_000002B0:
+lbl_task_lookupTagIndex_000002B0:
     lwz r0, 0x0(r4)
     cmplw r3, r0
-    bne lbl_fn_802180A8_000002D8
+    bne lbl_task_lookupTagIndex_000002D8
     lwz r4, lbl_8087F298
     li r3, -0x1
     lbzx r0, r4, r5
     cmpwi r0, 0x0
-    beq lbl_fn_802180A8_000003F0
+    beq lbl_task_lookupTagIndex_000003F0
     mr r3, r5
-    b lbl_fn_802180A8_000003F0
-lbl_fn_802180A8_000002D8:
+    b lbl_task_lookupTagIndex_000003F0
+lbl_task_lookupTagIndex_000002D8:
     addi r4, r4, 0x4
     addi r5, r5, 0x1
-    bdnz lbl_fn_802180A8_000002B0
+    bdnz lbl_task_lookupTagIndex_000002B0
     li r0, 0x4
     lwz r4, lbl_8087F294
     li r5, 0x0
     mtctr r0
-lbl_fn_802180A8_000002F4:
+lbl_task_lookupTagIndex_000002F4:
     lwz r0, 0x0(r4)
     cmplw r3, r0
-    bne lbl_fn_802180A8_00000308
+    bne lbl_task_lookupTagIndex_00000308
     mr r3, r5
-    b lbl_fn_802180A8_000003F0
-lbl_fn_802180A8_00000308:
+    b lbl_task_lookupTagIndex_000003F0
+lbl_task_lookupTagIndex_00000308:
     lwz r0, 0x4(r4)
     addi r5, r5, 0x1
     cmplw r3, r0
-    bne lbl_fn_802180A8_00000320
+    bne lbl_task_lookupTagIndex_00000320
     mr r3, r5
-    b lbl_fn_802180A8_000003F0
-lbl_fn_802180A8_00000320:
+    b lbl_task_lookupTagIndex_000003F0
+lbl_task_lookupTagIndex_00000320:
     lwz r0, 0x8(r4)
     addi r5, r5, 0x1
     cmplw r3, r0
-    bne lbl_fn_802180A8_00000338
+    bne lbl_task_lookupTagIndex_00000338
     mr r3, r5
-    b lbl_fn_802180A8_000003F0
-lbl_fn_802180A8_00000338:
+    b lbl_task_lookupTagIndex_000003F0
+lbl_task_lookupTagIndex_00000338:
     lwz r0, 0xc(r4)
     addi r5, r5, 0x1
     cmplw r3, r0
-    bne lbl_fn_802180A8_00000350
+    bne lbl_task_lookupTagIndex_00000350
     mr r3, r5
-    b lbl_fn_802180A8_000003F0
-lbl_fn_802180A8_00000350:
+    b lbl_task_lookupTagIndex_000003F0
+lbl_task_lookupTagIndex_00000350:
     lwz r0, 0x10(r4)
     addi r5, r5, 0x1
     cmplw r3, r0
-    bne lbl_fn_802180A8_00000368
+    bne lbl_task_lookupTagIndex_00000368
     mr r3, r5
-    b lbl_fn_802180A8_000003F0
-lbl_fn_802180A8_00000368:
+    b lbl_task_lookupTagIndex_000003F0
+lbl_task_lookupTagIndex_00000368:
     lwz r0, 0x14(r4)
     addi r5, r5, 0x1
     cmplw r3, r0
-    bne lbl_fn_802180A8_00000380
+    bne lbl_task_lookupTagIndex_00000380
     mr r3, r5
-    b lbl_fn_802180A8_000003F0
-lbl_fn_802180A8_00000380:
+    b lbl_task_lookupTagIndex_000003F0
+lbl_task_lookupTagIndex_00000380:
     lwz r0, 0x18(r4)
     addi r5, r5, 0x1
     cmplw r3, r0
-    bne lbl_fn_802180A8_00000398
+    bne lbl_task_lookupTagIndex_00000398
     mr r3, r5
-    b lbl_fn_802180A8_000003F0
-lbl_fn_802180A8_00000398:
+    b lbl_task_lookupTagIndex_000003F0
+lbl_task_lookupTagIndex_00000398:
     lwz r0, 0x1c(r4)
     addi r5, r5, 0x1
     cmplw r3, r0
-    bne lbl_fn_802180A8_000003B0
+    bne lbl_task_lookupTagIndex_000003B0
     mr r3, r5
-    b lbl_fn_802180A8_000003F0
-lbl_fn_802180A8_000003B0:
+    b lbl_task_lookupTagIndex_000003F0
+lbl_task_lookupTagIndex_000003B0:
     lwz r0, 0x20(r4)
     addi r5, r5, 0x1
     cmplw r3, r0
-    bne lbl_fn_802180A8_000003C8
+    bne lbl_task_lookupTagIndex_000003C8
     mr r3, r5
-    b lbl_fn_802180A8_000003F0
-lbl_fn_802180A8_000003C8:
+    b lbl_task_lookupTagIndex_000003F0
+lbl_task_lookupTagIndex_000003C8:
     lwz r0, 0x24(r4)
     addi r5, r5, 0x1
     cmplw r3, r0
-    bne lbl_fn_802180A8_000003E0
+    bne lbl_task_lookupTagIndex_000003E0
     mr r3, r5
-    b lbl_fn_802180A8_000003F0
-lbl_fn_802180A8_000003E0:
+    b lbl_task_lookupTagIndex_000003F0
+lbl_task_lookupTagIndex_000003E0:
     addi r4, r4, 0x28
     addi r5, r5, 0x1
-    bdnz lbl_fn_802180A8_000002F4
+    bdnz lbl_task_lookupTagIndex_000002F4
     li r3, -0x1
-lbl_fn_802180A8_000003F0:
+lbl_task_lookupTagIndex_000003F0:
     lwz r0, 0x14(r1)
     mtlr r0
     addi r1, r1, 0x10

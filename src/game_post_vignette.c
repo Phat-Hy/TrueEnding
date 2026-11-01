@@ -3,7 +3,7 @@
 
 /* External function declarations */
 extern void dtor_80084684(void);
-extern void fn_8000D430(void);
+extern void scene_traverseNode(void);
 extern void atn_ColliBase_destructor(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
@@ -29,8 +29,8 @@ extern void dialog_renderWindow(void);
 extern void dialog_updateScriptState(void);
 extern void inventory_applyItemStats(void);
 extern void actor_setState(void);
-extern void fn_80170A20(void);
-extern void fn_80178A6C(void);
+extern void battle_updateTargetAggro(void);
+extern void battle_updateActorStatus(void);
 extern void save_validateHeader(void);
 extern void thread_findAndNotifySlot(void);
 extern void thread_dispatchToQueue(void);
@@ -523,7 +523,7 @@ lbl_fn_802C7F10_00000524:
     cror eq, gt, eq
     bne lbl_fn_802C7F10_000005AC
     mr r3, r31
-    bl fn_80178A6C
+    bl battle_updateActorStatus
     li r0, 0x0
     stw r0, 0x14b8(r31)
     stw r0, 0x14bc(r31)
@@ -753,7 +753,7 @@ lbl_fn_802C7F10_000008AC:
     mr r3, r31
     lfs f1, lbl_80884408
     li r5, 0x0
-    bl fn_80170A20
+    bl battle_updateTargetAggro
     b lbl_fn_802C7F10_00000910
 lbl_fn_802C7F10_000008F0:
     mr r3, r31
@@ -763,7 +763,7 @@ lbl_fn_802C7F10_000008F0:
     mr r3, r31
     lfs f1, lbl_80884408
     li r5, 0x0
-    bl fn_80170A20
+    bl battle_updateTargetAggro
 lbl_fn_802C7F10_00000910:
     mr r3, r31
     bl fn_802C9880
@@ -886,7 +886,7 @@ lbl_fn_802C7F10_00000A98:
     addi r4, r1, 0x40
     lwz r3, 0x14d0(r31)
     addi r3, r3, 0xb0
-    bl fn_8000D430
+    bl scene_traverseNode
     addic. r3, r1, 0x40
     beq lbl_fn_802C7F10_00000B18
     lwz r4, 0x40(r1)

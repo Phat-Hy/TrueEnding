@@ -11,7 +11,7 @@ extern void _savegpr_25(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void fn_80017064(void);
-extern void fn_80044E0C(void);
+extern void menu_renderLayout(void);
 extern void collision_testLineSegment(void);
 extern void fn_80050A1C(void);
 extern void talk_parseQuotedString(void);
@@ -32,7 +32,7 @@ extern void boss_updatePhaseState(void);
 extern void fn_8014C228(void);
 extern void dialog_selectChoice(void);
 extern void actor_setState(void);
-extern void fn_8017039C(void);
+extern void battle_resolveAggroHierarchy(void);
 extern void fn_801718F8(void);
 extern void entity_Instance_constructor(void);
 extern void world_getGlobalFlag(void);
@@ -281,7 +281,7 @@ lbl_fn_8017B434_00000200:
     beq lbl_fn_8017B434_00000238
     mr r4, r31
     li r5, 0x8
-    bl fn_8017039C
+    bl battle_resolveAggroHierarchy
     b lbl_fn_8017B434_0000086C
 lbl_fn_8017B434_00000238:
     lwz r3, lbl_8087F430
@@ -431,13 +431,13 @@ lbl_fn_8017B434_00000430:
     cmpwi r3, 0x0
     beq lbl_fn_8017B434_00000460
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_fn_8017B434_00000460:
     lwz r3, 0x64c(r29)
     cmpwi r3, 0x0
     beq lbl_fn_8017B434_00000474
     li r4, 0x1
-    bl fn_80044E0C
+    bl menu_renderLayout
 lbl_fn_8017B434_00000474:
     li r0, 0x0
     li r3, -0x1

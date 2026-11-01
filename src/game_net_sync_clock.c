@@ -18,7 +18,7 @@ extern void bloom_processPasses(void);
 extern void str_findChar(void);
 extern void wcs_vformat(void);
 extern void save_validateHeader(void);
-extern void fn_801F4728(void);
+extern void save_parseSlotHeader(void);
 extern void save_parseSlotStats(void);
 extern void fn_801F4C14(void);
 extern void save_formatSlotTitle(void);
@@ -197,7 +197,7 @@ lbl_fn_804C822C_00000104:
     stfs f1, 0x5c(r1)
     stfs f0, 0x60(r1)
     lwz r3, 0xc4(r17)
-    bl fn_801F4728
+    bl save_parseSlotHeader
     lwz r3, lbl_8087F86C
     lwz r16, 0x9f4(r3)
     cmpwi r16, 0x0
@@ -411,7 +411,7 @@ lbl_fn_804C822C_00000428:
     stfs f1, 0x5c(r1)
     stfs f0, 0x60(r1)
     lwz r3, 0xa0(r22)
-    bl fn_801F4728
+    bl save_parseSlotHeader
     b lbl_fn_804C822C_000004F4
 lbl_fn_804C822C_00000494:
     lwz r4, 0xa0(r22)

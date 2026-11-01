@@ -128,7 +128,7 @@ void fn_8020689C(void);
 void fn_80206B14(void);
 void fn_80206B68(void);
 void fn_80206B70(void);
-void fn_80206B9C(void);
+void game_initGlobalDatabases(void);
 void assert_generateId(void);
 void assert_formatLocation(void);
 void fn_80206D18(void);
@@ -399,7 +399,7 @@ lbl_fn_80206B70_00000330:
     blr
 }
 
-asm void fn_80206B9C(void)
+asm void game_initGlobalDatabases(void)
 {
     nofralloc
     lis r5, 0x14f9

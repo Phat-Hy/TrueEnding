@@ -6,18 +6,18 @@ extern void _restgpr_19(void);
 extern void _restgpr_26(void);
 extern void _savegpr_19(void);
 extern void _savegpr_26(void);
-extern void fn_8004B338(void);
+extern void sound_releaseChannel(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
 extern void fn_8005E3E4(void);
 extern void fn_8005E7F4(void);
 extern void fn_80076FF8(void);
-extern void fn_800BDB58(void);
+extern void model_updateBoneTransforms(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void str_findChar(void);
-extern void fn_801F4728(void);
+extern void save_parseSlotHeader(void);
 extern void thread_findAndNotify(void);
 extern void world_getGlobalFlag(void);
 extern void boss_getOffset54(void);
@@ -251,7 +251,7 @@ asm void fn_804A9EB4(void)
     stfs f3, 0x1c(r1)
     lwz r3, 0x5d8(r29)
     stfs f0, 0x24(r1)
-    bl fn_801F4728
+    bl save_parseSlotHeader
     fneg f3, f26
     lfs f0, lbl_808872BC
     lwz r4, 0x5d8(r29)
@@ -532,7 +532,7 @@ lbl_fn_804A9EB4_000005BC:
     lwz r3, lbl_8087EFB4
     li r5, 0x2
     lfs f1, lbl_80887250
-    bl fn_800BDB58
+    bl model_updateBoneTransforms
     cmpwi r29, 0x0
     beq lbl_fn_804A9EB4_000005D8
     addi r29, r29, 0x48
@@ -541,7 +541,7 @@ lbl_fn_804A9EB4_000005D8:
     mr r4, r29
     lfs f1, lbl_80887250
     li r5, 0x10
-    bl fn_800BDB58
+    bl model_updateBoneTransforms
     addi r11, r1, 0x70
     psq_l f31, 0xf8(r1), 0, 0
     lfd f31, 0xf0(r1)
@@ -1862,7 +1862,7 @@ lbl_fn_804AB060_00001910:
     blt lbl_fn_804AB060_00001910
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_8004B338
+    bl sound_releaseChannel
     lwz r0, 0x214(r1)
     lwz r31, 0x20c(r1)
     mtlr r0

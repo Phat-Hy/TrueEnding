@@ -40,7 +40,7 @@ extern void bloom_processPasses(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void str_findChar(void);
-extern void fn_802180A8(void);
+extern void task_lookupTagIndex(void);
 extern void fn_8035FF44(void);
 extern void fn_8035FF94(void);
 extern void fn_8036055C(void);
@@ -2077,7 +2077,7 @@ lbl_fn_803635E8_00001AB0:
     bl strcpy
     addi r3, r1, 0x308
     bl talk_formatQuotedString
-    bl fn_802180A8
+    bl task_lookupTagIndex
     mr r4, r3
     addi r3, r29, 0x4
     addi r5, r1, 0x8

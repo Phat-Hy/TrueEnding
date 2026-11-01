@@ -11,7 +11,7 @@ extern void mission_updateStub(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
-extern void fn_8006AFF8(void);
+extern void boss_initActionStream(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
@@ -30,7 +30,7 @@ extern void debuff_clearStatus(void);
 extern void actor_setState(void);
 extern void fn_8016F824(void);
 extern void battle_awardExp(void);
-extern void fn_80178A6C(void);
+extern void battle_updateActorStatus(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
 extern void res_Resource_unload(void);
@@ -1673,7 +1673,7 @@ lbl_fn_80272660_0000162C:
     mtctr r12
     bctrl
     mr r3, r31
-    bl fn_80178A6C
+    bl battle_updateActorStatus
     mr r3, r31
     li r4, 0x0
     li r5, 0x1
@@ -1952,7 +1952,7 @@ lbl_fn_8027278C_00001A7C:
     addi r3, r1, 0x20
     addi r4, r1, 0x38
     addi r5, r1, 0x2c
-    bl fn_8006AFF8
+    bl boss_initActionStream
     lwz r0, 0x20(r1)
     addi r3, r28, 0x1938
     srwi. r0, r0, 31

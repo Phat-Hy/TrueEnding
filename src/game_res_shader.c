@@ -15,7 +15,7 @@ extern void _savegpr_26(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_800928B0(void);
-extern void fn_800BDB58(void);
+extern void model_updateBoneTransforms(void);
 extern void fn_8022BEAC(void);
 extern void fn_8022C3F0(void);
 extern void fn_8022FAC4(void);
@@ -162,7 +162,7 @@ lbl_fn_80239C6C_000000C8:
     lwz r3, lbl_8087EFB4
     li r5, 0xb
     lfs f1, lbl_80883160
-    bl fn_800BDB58
+    bl model_updateBoneTransforms
     lwz r0, 0xb0(r31)
     clrlwi r0, r0, 31
     cmplwi r0, 0x1
@@ -175,7 +175,7 @@ lbl_fn_80239C6C_000000F8:
     lwz r3, lbl_8087EFB4
     li r5, 0x6
     lfs f1, lbl_80883160
-    bl fn_800BDB58
+    bl model_updateBoneTransforms
 lbl_fn_80239C6C_00000108:
     lwz r0, 0xb0(r31)
     rlwinm r0, r0, 0, 28, 28
@@ -189,7 +189,7 @@ lbl_fn_80239C6C_00000124:
     mr r4, r31
     lfs f1, lbl_80883168
     li r5, 0x4
-    bl fn_800BDB58
+    bl model_updateBoneTransforms
 lbl_fn_80239C6C_00000138:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)

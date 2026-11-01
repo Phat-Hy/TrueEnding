@@ -12,14 +12,14 @@ extern void fn_800EE360(void);
 extern void system_getNextSequenceId(void);
 extern void fn_801028E4(void);
 extern void fn_8012D8B8(void);
-extern void fn_8013A258(void);
+extern void npc_initScriptContext(void);
 extern void npc_updateTalkInteraction(void);
 extern void quest_ctorRewardItem(void);
 extern void equip_applyToCharacter(void);
 extern void debuff_clearStatus(void);
 extern void actor_setState(void);
 extern void battle_awardExp(void);
-extern void fn_80178A6C(void);
+extern void battle_updateActorStatus(void);
 extern void fn_8017A300(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
@@ -105,7 +105,7 @@ lbl_fn_802CE504_00000038:
     mtctr r12
     bctrl
     mr r3, r31
-    bl fn_80178A6C
+    bl battle_updateActorStatus
     mr r3, r31
     li r4, 0x0
     li r5, 0x1
@@ -1071,7 +1071,7 @@ lbl_fn_802CF054_00000E00:
 lbl_fn_802CF054_00000E40:
     cmpwi r0, 0x6
     bne lbl_fn_802CF054_00000E50
-    bl fn_8013A258
+    bl npc_initScriptContext
     b lbl_fn_802CF054_00000E6C
 lbl_fn_802CF054_00000E50:
     lfs f0, 0x568(r29)

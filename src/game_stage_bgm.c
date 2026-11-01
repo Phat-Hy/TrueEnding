@@ -41,7 +41,7 @@ extern void fn_80116BAC(void);
 extern void fn_801240B4(void);
 extern void fn_8012A1B8(void);
 extern void fn_8012A218(void);
-extern void fn_80139550(void);
+extern void npc_updateDialogueTarget(void);
 extern void fn_80139F3C(void);
 extern void fn_8013A158(void);
 extern void fn_8013A194(void);
@@ -1012,7 +1012,7 @@ lbl_fn_8019FEC4_00000B80:
     mr r3, r30
     li r4, 0x0
     fsubs f30, f1, f0
-    bl fn_80139550
+    bl npc_updateDialogueTarget
     fcmpo cr0, f1, f30
     ble lbl_fn_8019FEC4_00000BC4
     lfs f1, lbl_80882114

@@ -36,7 +36,7 @@ extern u32 lbl_80881918;
 /* Function declarations */
 void fn_8013310C(void);
 void fn_80133130(void);
-void fn_8013322C(void);
+void actor_testBitFlag(void);
 void fn_801333A4(void);
 void fn_801333E4(void);
 void fn_801334CC(void);
@@ -154,7 +154,7 @@ lbl_fn_80133130_00000110:
     blr
 }
 
-asm void fn_8013322C(void)
+asm void actor_testBitFlag(void)
 {
     nofralloc
     lwz r0, 0xc(r3)
@@ -170,65 +170,65 @@ asm void fn_8013322C(void)
     li r6, 0x1
     stw r7, 0x10(r3)
     mtctr r0
-lbl_fn_8013322C_00000154:
+lbl_actor_testBitFlag_00000154:
     slw r7, r6, r9
     and r0, r7, r4
     cmplw r7, r0
-    bne lbl_fn_8013322C_00000168
+    bne lbl_actor_testBitFlag_00000168
     stw r5, 0x24c(r8)
-lbl_fn_8013322C_00000168:
+lbl_actor_testBitFlag_00000168:
     addi r9, r9, 0x1
     slw r7, r6, r9
     and r0, r7, r4
     cmplw r7, r0
-    bne lbl_fn_8013322C_00000180
+    bne lbl_actor_testBitFlag_00000180
     stw r5, 0x250(r8)
-lbl_fn_8013322C_00000180:
+lbl_actor_testBitFlag_00000180:
     addi r9, r9, 0x1
     slw r7, r6, r9
     and r0, r7, r4
     cmplw r7, r0
-    bne lbl_fn_8013322C_00000198
+    bne lbl_actor_testBitFlag_00000198
     stw r5, 0x254(r8)
-lbl_fn_8013322C_00000198:
+lbl_actor_testBitFlag_00000198:
     addi r9, r9, 0x1
     slw r7, r6, r9
     and r0, r7, r4
     cmplw r7, r0
-    bne lbl_fn_8013322C_000001B0
+    bne lbl_actor_testBitFlag_000001B0
     stw r5, 0x258(r8)
-lbl_fn_8013322C_000001B0:
+lbl_actor_testBitFlag_000001B0:
     addi r9, r9, 0x1
     slw r7, r6, r9
     and r0, r7, r4
     cmplw r7, r0
-    bne lbl_fn_8013322C_000001C8
+    bne lbl_actor_testBitFlag_000001C8
     stw r5, 0x25c(r8)
-lbl_fn_8013322C_000001C8:
+lbl_actor_testBitFlag_000001C8:
     addi r9, r9, 0x1
     slw r7, r6, r9
     and r0, r7, r4
     cmplw r7, r0
-    bne lbl_fn_8013322C_000001E0
+    bne lbl_actor_testBitFlag_000001E0
     stw r5, 0x260(r8)
-lbl_fn_8013322C_000001E0:
+lbl_actor_testBitFlag_000001E0:
     addi r9, r9, 0x1
     slw r7, r6, r9
     and r0, r7, r4
     cmplw r7, r0
-    bne lbl_fn_8013322C_000001F8
+    bne lbl_actor_testBitFlag_000001F8
     stw r5, 0x264(r8)
-lbl_fn_8013322C_000001F8:
+lbl_actor_testBitFlag_000001F8:
     addi r9, r9, 0x1
     slw r7, r6, r9
     and r0, r7, r4
     cmplw r7, r0
-    bne lbl_fn_8013322C_00000210
+    bne lbl_actor_testBitFlag_00000210
     stw r5, 0x268(r8)
-lbl_fn_8013322C_00000210:
+lbl_actor_testBitFlag_00000210:
     addi r8, r8, 0x20
     addi r9, r9, 0x1
-    bdnz lbl_fn_8013322C_00000154
+    bdnz lbl_actor_testBitFlag_00000154
     lwz r5, 0x2f0(r3)
     cmpwi r5, 0x0
     beqlr
@@ -240,14 +240,14 @@ lbl_fn_8013322C_00000210:
     stw r4, 0xc(r3)
     rlwinm r0, r0, 0, 12, 10
     stw r0, 0x10(r3)
-    b lbl_fn_8013322C_00000288
-lbl_fn_8013322C_0000024C:
+    b lbl_actor_testBitFlag_00000288
+lbl_actor_testBitFlag_0000024C:
     add r4, r5, r7
     lwz r4, 0x654(r4)
     lwz r4, 0x274(r4)
     lwz r0, 0xf0(r4)
     cmpwi r0, 0x0
-    beq lbl_fn_8013322C_00000280
+    beq lbl_actor_testBitFlag_00000280
     lwz r4, 0xc(r3)
     lwz r0, 0x10(r3)
     oris r4, r4, 0x10
@@ -255,13 +255,13 @@ lbl_fn_8013322C_0000024C:
     oris r0, r0, 0x10
     stw r0, 0x10(r3)
     blr
-lbl_fn_8013322C_00000280:
+lbl_actor_testBitFlag_00000280:
     addi r7, r7, 0x4
     addi r6, r6, 0x1
-lbl_fn_8013322C_00000288:
+lbl_actor_testBitFlag_00000288:
     lwz r0, 0x650(r5)
     cmplw r6, r0
-    blt lbl_fn_8013322C_0000024C
+    blt lbl_actor_testBitFlag_0000024C
     blr
 }
 

@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void _restgpr_23(void);
 extern void _savegpr_23(void);
-extern void fn_8004ECC0(void);
+extern void item_testLineOfSight(void);
 extern void collision_testLineSegment(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -1078,7 +1078,7 @@ lbl_fn_8032943C_00000D9C:
     stfs f3, 0x48(r1)
     stfs f2, 0x40(r1)
     stfs f0, 0x3c(r1)
-    bl fn_8004ECC0
+    bl item_testLineOfSight
     cmpwi r3, 0x0
     beq lbl_fn_8032943C_00000E68
     lfs f0, 0x54(r1)

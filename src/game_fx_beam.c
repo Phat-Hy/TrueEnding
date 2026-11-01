@@ -16,7 +16,7 @@ extern void fn_8028B75C(void);
 extern void fn_8028FC28(void);
 extern void fn_8029101C(void);
 extern void fn_80292DB4(void);
-extern void fn_803C1560(void);
+extern void craft_forgeUpgradeWeapon(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
@@ -725,7 +725,7 @@ lbl_fn_8028E800_000008A8:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     subi r0, r3, 0x1
     lwz r3, 0x9c(r30)
     mulli r0, r0, 0x30
@@ -1497,7 +1497,7 @@ asm void fn_8028F560(void)
     li r6, 0x0
     li r7, 0x2
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     stw r3, 0x1504(r29)
     mr r3, r29
     lwz r4, lbl_8087F430
@@ -1511,7 +1511,7 @@ asm void fn_8028F560(void)
     li r6, 0x0
     li r7, 0x2
     li r8, 0x1
-    bl fn_803C1560
+    bl craft_forgeUpgradeWeapon
     stw r3, 0x1508(r29)
     addi r31, r1, 0x5c
     lwz r5, 0x152c(r29)

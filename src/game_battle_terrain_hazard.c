@@ -26,7 +26,7 @@ extern void map_processTrigger(void);
 extern void fn_8008CD60(void);
 extern void atn_Model_findBoneIndex(void);
 extern void lockon_updateTarget(void);
-extern void fn_800971D4(void);
+extern void cursor_Object_constructor(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void cam_destroyMsgHandle(void);
@@ -501,7 +501,7 @@ asm void fn_804182A8(void)
     stw r0, lbl_8087F4B8
     li r4, -0x1
     addi r3, r3, 0xf4
-    bl fn_800971D4
+    bl cursor_Object_constructor
     mr r3, r30
     li r4, 0x0
     bl task_destroyWorker
@@ -1616,7 +1616,7 @@ lbl_fn_8041919C_0000137C:
 lbl_fn_8041919C_000013CC:
     addi r3, r28, 0xf4
     li r4, -0x1
-    bl fn_800971D4
+    bl cursor_Object_constructor
     mr r3, r28
     li r4, 0x0
     bl task_destroyWorker

@@ -19,7 +19,7 @@ extern void fn_800A96AC(void);
 extern void fn_800B0A70(void);
 extern void fn_800B23C4(void);
 extern void fn_800B257C(void);
-extern void fn_800BDB58(void);
+extern void model_updateBoneTransforms(void);
 extern void fn_800BFB70(void);
 extern void fn_800BFCB4(void);
 extern void fn_800C0508(void);
@@ -44,7 +44,7 @@ extern void GXCopyTex(void);
 extern void fn_80615B60(void);
 extern void fn_80615C40(void);
 extern void GXInitLightDistAttn(void);
-extern void fn_80615D50(void);
+extern void GXInitLightSpot(void);
 extern void fn_80615FF0(void);
 extern void fn_80616250(void);
 extern void GXDrawDone(void);
@@ -56,7 +56,7 @@ extern void GXInitTexObjDefault(void);
 extern void fn_80617270(void);
 extern void fn_80617340(void);
 extern void GXSetTevColorIn(void);
-extern void fn_80617420(void);
+extern void GXSetTevColorOp(void);
 extern void GXSetTevIndirect(void);
 extern void fn_806174C0(void);
 extern void fn_806175F0(void);
@@ -162,7 +162,7 @@ asm void fn_800B0CD4(void)
     li r7, 0x0
     li r8, 0x0
     li r9, 0x2
-    bl fn_80615D50
+    bl GXInitLightSpot
     li r3, 0x1
     bl GXClearVtxDesc
     li r3, 0x0
@@ -238,7 +238,7 @@ lbl_fn_800B0CD4_000000F0:
     li r5, 0x5
     li r6, 0x4
     li r7, 0x7
-    bl fn_80617420
+    bl GXSetTevColorOp
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -490,7 +490,7 @@ lbl_fn_800B105C_000003C0:
     li r7, 0x1
     li r8, 0x0
     li r9, 0x2
-    bl fn_80615D50
+    bl GXInitLightSpot
     li r3, 0x1
     bl fn_80617200
     li r3, 0x4
@@ -500,7 +500,7 @@ lbl_fn_800B105C_000003C0:
     li r7, 0x0
     li r8, 0x0
     li r9, 0x2
-    bl fn_80615D50
+    bl GXInitLightSpot
     li r3, 0x2
     bl GXClearVtxDesc
     li r3, 0x0
@@ -1201,7 +1201,7 @@ asm void fn_800B1C1C(void)
     lwz r3, lbl_8087EFB4
     lfs f1, lbl_80880ECC
     li r5, 0x8
-    b fn_800BDB58
+    b model_updateBoneTransforms
 }
 
 asm void fn_800B1C30(void)
@@ -1267,7 +1267,7 @@ asm void fn_800B1C44(void)
     li r7, 0x1
     li r8, 0x0
     li r9, 0x2
-    bl fn_80615D50
+    bl GXInitLightSpot
     lfs f10, lbl_80880EF4
     addi r4, r1, 0x1c
     lfs f0, 0x20(r31)
@@ -1425,7 +1425,7 @@ asm void fn_800B1C44(void)
     li r5, 0x7
     li r6, 0x7
     li r7, 0x5
-    bl fn_80617420
+    bl GXSetTevColorOp
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0

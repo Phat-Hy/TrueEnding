@@ -25,7 +25,7 @@ extern void mem_getAllocSize(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void str_findChar(void);
-extern void fn_801F4728(void);
+extern void save_parseSlotHeader(void);
 extern void fn_801F4998(void);
 extern void fn_801F4F84(void);
 extern void thread_findAndNotify(void);
@@ -509,7 +509,7 @@ lbl_spectateView_update_000005C0:
     lwz r3, 0x60(r30)
     addi r4, r28, 0x254
     addi r5, r1, 0x38
-    bl fn_801F4728
+    bl save_parseSlotHeader
     lfs f2, 0x10(r1)
     lfs f0, lbl_80887BB8
     fcmpo cr0, f2, f0

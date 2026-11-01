@@ -40,7 +40,7 @@ extern u32 lbl_808809A0;
 extern u32 lbl_808809A4;
 
 /* Function declarations */
-void fn_8005C594(void);
+void party_updateFormation(void);
 void atn_SinusCurve_evaluate(void);
 void atn_CosinusCurve_destructor(void);
 void atn_CosinusCurve_evaluate(void);
@@ -66,7 +66,7 @@ void fn_8005DED8(void);
 void fn_8005DF90(void);
 void fn_8005DFC8(void);
 
-asm void fn_8005C594(void)
+asm void party_updateFormation(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -76,27 +76,27 @@ asm void fn_8005C594(void)
     stmw r26, 0x8(r1)
     mr r30, r3
     mr r31, r4
-    beq lbl_fn_8005C594_000004F8
+    beq lbl_party_updateFormation_000004F8
     addic. r0, r3, 0x4
-    beq lbl_fn_8005C594_00000284
+    beq lbl_party_updateFormation_00000284
     lwz r28, 0x4(r3)
     cmpwi r28, 0x0
-    beq lbl_fn_8005C594_00000284
+    beq lbl_party_updateFormation_00000284
     addic. r0, r28, 0x4
-    beq lbl_fn_8005C594_00000158
+    beq lbl_party_updateFormation_00000158
     lwz r29, 0x4(r28)
     cmpwi r29, 0x0
-    beq lbl_fn_8005C594_00000158
+    beq lbl_party_updateFormation_00000158
     addic. r0, r29, 0x4
-    beq lbl_fn_8005C594_000000CC
+    beq lbl_party_updateFormation_000000CC
     lwz r27, 0x4(r29)
     cmpwi r27, 0x0
-    beq lbl_fn_8005C594_000000CC
+    beq lbl_party_updateFormation_000000CC
     addic. r0, r27, 0x4
-    beq lbl_fn_8005C594_00000090
+    beq lbl_party_updateFormation_00000090
     lwz r26, 0x4(r27)
     cmpwi r26, 0x0
-    beq lbl_fn_8005C594_00000090
+    beq lbl_party_updateFormation_00000090
     addi r3, r26, 0x4
     li r4, -0x1
     bl talk_executeCommand
@@ -105,12 +105,12 @@ asm void fn_8005C594(void)
     bl talk_executeCommand
     mr r3, r26
     bl dtor_80084684
-lbl_fn_8005C594_00000090:
+lbl_party_updateFormation_00000090:
     cmpwi r27, 0x0
-    beq lbl_fn_8005C594_000000C4
+    beq lbl_party_updateFormation_000000C4
     lwz r26, 0x0(r27)
     cmpwi r26, 0x0
-    beq lbl_fn_8005C594_000000C4
+    beq lbl_party_updateFormation_000000C4
     addi r3, r26, 0x4
     li r4, -0x1
     bl talk_executeCommand
@@ -119,20 +119,20 @@ lbl_fn_8005C594_00000090:
     bl talk_executeCommand
     mr r3, r26
     bl dtor_80084684
-lbl_fn_8005C594_000000C4:
+lbl_party_updateFormation_000000C4:
     mr r3, r27
     bl dtor_80084684
-lbl_fn_8005C594_000000CC:
+lbl_party_updateFormation_000000CC:
     cmpwi r29, 0x0
-    beq lbl_fn_8005C594_00000150
+    beq lbl_party_updateFormation_00000150
     lwz r26, 0x0(r29)
     cmpwi r26, 0x0
-    beq lbl_fn_8005C594_00000150
+    beq lbl_party_updateFormation_00000150
     addic. r0, r26, 0x4
-    beq lbl_fn_8005C594_00000114
+    beq lbl_party_updateFormation_00000114
     lwz r27, 0x4(r26)
     cmpwi r27, 0x0
-    beq lbl_fn_8005C594_00000114
+    beq lbl_party_updateFormation_00000114
     addi r3, r27, 0x4
     li r4, -0x1
     bl talk_executeCommand
@@ -141,12 +141,12 @@ lbl_fn_8005C594_000000CC:
     bl talk_executeCommand
     mr r3, r27
     bl dtor_80084684
-lbl_fn_8005C594_00000114:
+lbl_party_updateFormation_00000114:
     cmpwi r26, 0x0
-    beq lbl_fn_8005C594_00000148
+    beq lbl_party_updateFormation_00000148
     lwz r27, 0x0(r26)
     cmpwi r27, 0x0
-    beq lbl_fn_8005C594_00000148
+    beq lbl_party_updateFormation_00000148
     addi r3, r27, 0x4
     li r4, -0x1
     bl talk_executeCommand
@@ -155,28 +155,28 @@ lbl_fn_8005C594_00000114:
     bl talk_executeCommand
     mr r3, r27
     bl dtor_80084684
-lbl_fn_8005C594_00000148:
+lbl_party_updateFormation_00000148:
     mr r3, r26
     bl dtor_80084684
-lbl_fn_8005C594_00000150:
+lbl_party_updateFormation_00000150:
     mr r3, r29
     bl dtor_80084684
-lbl_fn_8005C594_00000158:
+lbl_party_updateFormation_00000158:
     cmpwi r28, 0x0
-    beq lbl_fn_8005C594_0000027C
+    beq lbl_party_updateFormation_0000027C
     lwz r29, 0x0(r28)
     cmpwi r29, 0x0
-    beq lbl_fn_8005C594_0000027C
+    beq lbl_party_updateFormation_0000027C
     addic. r0, r29, 0x4
-    beq lbl_fn_8005C594_000001F0
+    beq lbl_party_updateFormation_000001F0
     lwz r26, 0x4(r29)
     cmpwi r26, 0x0
-    beq lbl_fn_8005C594_000001F0
+    beq lbl_party_updateFormation_000001F0
     addic. r0, r26, 0x4
-    beq lbl_fn_8005C594_000001B4
+    beq lbl_party_updateFormation_000001B4
     lwz r27, 0x4(r26)
     cmpwi r27, 0x0
-    beq lbl_fn_8005C594_000001B4
+    beq lbl_party_updateFormation_000001B4
     addi r3, r27, 0x4
     li r4, -0x1
     bl talk_executeCommand
@@ -185,12 +185,12 @@ lbl_fn_8005C594_00000158:
     bl talk_executeCommand
     mr r3, r27
     bl dtor_80084684
-lbl_fn_8005C594_000001B4:
+lbl_party_updateFormation_000001B4:
     cmpwi r26, 0x0
-    beq lbl_fn_8005C594_000001E8
+    beq lbl_party_updateFormation_000001E8
     lwz r27, 0x0(r26)
     cmpwi r27, 0x0
-    beq lbl_fn_8005C594_000001E8
+    beq lbl_party_updateFormation_000001E8
     addi r3, r27, 0x4
     li r4, -0x1
     bl talk_executeCommand
@@ -199,20 +199,20 @@ lbl_fn_8005C594_000001B4:
     bl talk_executeCommand
     mr r3, r27
     bl dtor_80084684
-lbl_fn_8005C594_000001E8:
+lbl_party_updateFormation_000001E8:
     mr r3, r26
     bl dtor_80084684
-lbl_fn_8005C594_000001F0:
+lbl_party_updateFormation_000001F0:
     cmpwi r29, 0x0
-    beq lbl_fn_8005C594_00000274
+    beq lbl_party_updateFormation_00000274
     lwz r26, 0x0(r29)
     cmpwi r26, 0x0
-    beq lbl_fn_8005C594_00000274
+    beq lbl_party_updateFormation_00000274
     addic. r0, r26, 0x4
-    beq lbl_fn_8005C594_00000238
+    beq lbl_party_updateFormation_00000238
     lwz r27, 0x4(r26)
     cmpwi r27, 0x0
-    beq lbl_fn_8005C594_00000238
+    beq lbl_party_updateFormation_00000238
     addi r3, r27, 0x4
     li r4, -0x1
     bl talk_executeCommand
@@ -221,12 +221,12 @@ lbl_fn_8005C594_000001F0:
     bl talk_executeCommand
     mr r3, r27
     bl dtor_80084684
-lbl_fn_8005C594_00000238:
+lbl_party_updateFormation_00000238:
     cmpwi r26, 0x0
-    beq lbl_fn_8005C594_0000026C
+    beq lbl_party_updateFormation_0000026C
     lwz r27, 0x0(r26)
     cmpwi r27, 0x0
-    beq lbl_fn_8005C594_0000026C
+    beq lbl_party_updateFormation_0000026C
     addi r3, r27, 0x4
     li r4, -0x1
     bl talk_executeCommand
@@ -235,36 +235,36 @@ lbl_fn_8005C594_00000238:
     bl talk_executeCommand
     mr r3, r27
     bl dtor_80084684
-lbl_fn_8005C594_0000026C:
+lbl_party_updateFormation_0000026C:
     mr r3, r26
     bl dtor_80084684
-lbl_fn_8005C594_00000274:
+lbl_party_updateFormation_00000274:
     mr r3, r29
     bl dtor_80084684
-lbl_fn_8005C594_0000027C:
+lbl_party_updateFormation_0000027C:
     mr r3, r28
     bl dtor_80084684
-lbl_fn_8005C594_00000284:
+lbl_party_updateFormation_00000284:
     cmpwi r30, 0x0
-    beq lbl_fn_8005C594_000004E8
+    beq lbl_party_updateFormation_000004E8
     lwz r29, 0x0(r30)
     cmpwi r29, 0x0
-    beq lbl_fn_8005C594_000004E8
+    beq lbl_party_updateFormation_000004E8
     addic. r0, r29, 0x4
-    beq lbl_fn_8005C594_000003BC
+    beq lbl_party_updateFormation_000003BC
     lwz r28, 0x4(r29)
     cmpwi r28, 0x0
-    beq lbl_fn_8005C594_000003BC
+    beq lbl_party_updateFormation_000003BC
     addic. r0, r28, 0x4
-    beq lbl_fn_8005C594_00000330
+    beq lbl_party_updateFormation_00000330
     lwz r26, 0x4(r28)
     cmpwi r26, 0x0
-    beq lbl_fn_8005C594_00000330
+    beq lbl_party_updateFormation_00000330
     addic. r0, r26, 0x4
-    beq lbl_fn_8005C594_000002F4
+    beq lbl_party_updateFormation_000002F4
     lwz r27, 0x4(r26)
     cmpwi r27, 0x0
-    beq lbl_fn_8005C594_000002F4
+    beq lbl_party_updateFormation_000002F4
     addi r3, r27, 0x4
     li r4, -0x1
     bl talk_executeCommand
@@ -273,12 +273,12 @@ lbl_fn_8005C594_00000284:
     bl talk_executeCommand
     mr r3, r27
     bl dtor_80084684
-lbl_fn_8005C594_000002F4:
+lbl_party_updateFormation_000002F4:
     cmpwi r26, 0x0
-    beq lbl_fn_8005C594_00000328
+    beq lbl_party_updateFormation_00000328
     lwz r27, 0x0(r26)
     cmpwi r27, 0x0
-    beq lbl_fn_8005C594_00000328
+    beq lbl_party_updateFormation_00000328
     addi r3, r27, 0x4
     li r4, -0x1
     bl talk_executeCommand
@@ -287,20 +287,20 @@ lbl_fn_8005C594_000002F4:
     bl talk_executeCommand
     mr r3, r27
     bl dtor_80084684
-lbl_fn_8005C594_00000328:
+lbl_party_updateFormation_00000328:
     mr r3, r26
     bl dtor_80084684
-lbl_fn_8005C594_00000330:
+lbl_party_updateFormation_00000330:
     cmpwi r28, 0x0
-    beq lbl_fn_8005C594_000003B4
+    beq lbl_party_updateFormation_000003B4
     lwz r26, 0x0(r28)
     cmpwi r26, 0x0
-    beq lbl_fn_8005C594_000003B4
+    beq lbl_party_updateFormation_000003B4
     addic. r0, r26, 0x4
-    beq lbl_fn_8005C594_00000378
+    beq lbl_party_updateFormation_00000378
     lwz r27, 0x4(r26)
     cmpwi r27, 0x0
-    beq lbl_fn_8005C594_00000378
+    beq lbl_party_updateFormation_00000378
     addi r3, r27, 0x4
     li r4, -0x1
     bl talk_executeCommand
@@ -309,12 +309,12 @@ lbl_fn_8005C594_00000330:
     bl talk_executeCommand
     mr r3, r27
     bl dtor_80084684
-lbl_fn_8005C594_00000378:
+lbl_party_updateFormation_00000378:
     cmpwi r26, 0x0
-    beq lbl_fn_8005C594_000003AC
+    beq lbl_party_updateFormation_000003AC
     lwz r27, 0x0(r26)
     cmpwi r27, 0x0
-    beq lbl_fn_8005C594_000003AC
+    beq lbl_party_updateFormation_000003AC
     addi r3, r27, 0x4
     li r4, -0x1
     bl talk_executeCommand
@@ -323,28 +323,28 @@ lbl_fn_8005C594_00000378:
     bl talk_executeCommand
     mr r3, r27
     bl dtor_80084684
-lbl_fn_8005C594_000003AC:
+lbl_party_updateFormation_000003AC:
     mr r3, r26
     bl dtor_80084684
-lbl_fn_8005C594_000003B4:
+lbl_party_updateFormation_000003B4:
     mr r3, r28
     bl dtor_80084684
-lbl_fn_8005C594_000003BC:
+lbl_party_updateFormation_000003BC:
     cmpwi r29, 0x0
-    beq lbl_fn_8005C594_000004E0
+    beq lbl_party_updateFormation_000004E0
     lwz r28, 0x0(r29)
     cmpwi r28, 0x0
-    beq lbl_fn_8005C594_000004E0
+    beq lbl_party_updateFormation_000004E0
     addic. r0, r28, 0x4
-    beq lbl_fn_8005C594_00000454
+    beq lbl_party_updateFormation_00000454
     lwz r26, 0x4(r28)
     cmpwi r26, 0x0
-    beq lbl_fn_8005C594_00000454
+    beq lbl_party_updateFormation_00000454
     addic. r0, r26, 0x4
-    beq lbl_fn_8005C594_00000418
+    beq lbl_party_updateFormation_00000418
     lwz r27, 0x4(r26)
     cmpwi r27, 0x0
-    beq lbl_fn_8005C594_00000418
+    beq lbl_party_updateFormation_00000418
     addi r3, r27, 0x4
     li r4, -0x1
     bl talk_executeCommand
@@ -353,12 +353,12 @@ lbl_fn_8005C594_000003BC:
     bl talk_executeCommand
     mr r3, r27
     bl dtor_80084684
-lbl_fn_8005C594_00000418:
+lbl_party_updateFormation_00000418:
     cmpwi r26, 0x0
-    beq lbl_fn_8005C594_0000044C
+    beq lbl_party_updateFormation_0000044C
     lwz r27, 0x0(r26)
     cmpwi r27, 0x0
-    beq lbl_fn_8005C594_0000044C
+    beq lbl_party_updateFormation_0000044C
     addi r3, r27, 0x4
     li r4, -0x1
     bl talk_executeCommand
@@ -367,20 +367,20 @@ lbl_fn_8005C594_00000418:
     bl talk_executeCommand
     mr r3, r27
     bl dtor_80084684
-lbl_fn_8005C594_0000044C:
+lbl_party_updateFormation_0000044C:
     mr r3, r26
     bl dtor_80084684
-lbl_fn_8005C594_00000454:
+lbl_party_updateFormation_00000454:
     cmpwi r28, 0x0
-    beq lbl_fn_8005C594_000004D8
+    beq lbl_party_updateFormation_000004D8
     lwz r26, 0x0(r28)
     cmpwi r26, 0x0
-    beq lbl_fn_8005C594_000004D8
+    beq lbl_party_updateFormation_000004D8
     addic. r0, r26, 0x4
-    beq lbl_fn_8005C594_0000049C
+    beq lbl_party_updateFormation_0000049C
     lwz r27, 0x4(r26)
     cmpwi r27, 0x0
-    beq lbl_fn_8005C594_0000049C
+    beq lbl_party_updateFormation_0000049C
     addi r3, r27, 0x4
     li r4, -0x1
     bl talk_executeCommand
@@ -389,12 +389,12 @@ lbl_fn_8005C594_00000454:
     bl talk_executeCommand
     mr r3, r27
     bl dtor_80084684
-lbl_fn_8005C594_0000049C:
+lbl_party_updateFormation_0000049C:
     cmpwi r26, 0x0
-    beq lbl_fn_8005C594_000004D0
+    beq lbl_party_updateFormation_000004D0
     lwz r27, 0x0(r26)
     cmpwi r27, 0x0
-    beq lbl_fn_8005C594_000004D0
+    beq lbl_party_updateFormation_000004D0
     addi r3, r27, 0x4
     li r4, -0x1
     bl talk_executeCommand
@@ -403,21 +403,21 @@ lbl_fn_8005C594_0000049C:
     bl talk_executeCommand
     mr r3, r27
     bl dtor_80084684
-lbl_fn_8005C594_000004D0:
+lbl_party_updateFormation_000004D0:
     mr r3, r26
     bl dtor_80084684
-lbl_fn_8005C594_000004D8:
+lbl_party_updateFormation_000004D8:
     mr r3, r28
     bl dtor_80084684
-lbl_fn_8005C594_000004E0:
+lbl_party_updateFormation_000004E0:
     mr r3, r29
     bl dtor_80084684
-lbl_fn_8005C594_000004E8:
+lbl_party_updateFormation_000004E8:
     cmpwi r31, 0x0
-    ble lbl_fn_8005C594_000004F8
+    ble lbl_party_updateFormation_000004F8
     mr r3, r30
     bl dtor_80084684
-lbl_fn_8005C594_000004F8:
+lbl_party_updateFormation_000004F8:
     mr r3, r30
     lmw r26, 0x8(r1)
     lwz r0, 0x24(r1)
@@ -476,13 +476,13 @@ lbl_atn_SinusCurve_evaluate_00000580:
     beq lbl_atn_SinusCurve_evaluate_000005CC
     lwz r3, 0x4(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_SinusCurve_evaluate_000005CC:
     cmpwi r31, 0x0
     beq lbl_atn_SinusCurve_evaluate_000005E0
     lwz r3, 0x0(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_SinusCurve_evaluate_000005E0:
     mr r3, r31
     bl dtor_80084684
@@ -496,13 +496,13 @@ lbl_atn_SinusCurve_evaluate_000005E8:
     beq lbl_atn_SinusCurve_evaluate_00000610
     lwz r3, 0x4(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_SinusCurve_evaluate_00000610:
     cmpwi r31, 0x0
     beq lbl_atn_SinusCurve_evaluate_00000624
     lwz r3, 0x0(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_SinusCurve_evaluate_00000624:
     mr r3, r31
     bl dtor_80084684
@@ -524,13 +524,13 @@ lbl_atn_SinusCurve_evaluate_00000634:
     beq lbl_atn_SinusCurve_evaluate_00000670
     lwz r3, 0x4(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_SinusCurve_evaluate_00000670:
     cmpwi r31, 0x0
     beq lbl_atn_SinusCurve_evaluate_00000684
     lwz r3, 0x0(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_SinusCurve_evaluate_00000684:
     mr r3, r31
     bl dtor_80084684
@@ -544,13 +544,13 @@ lbl_atn_SinusCurve_evaluate_0000068C:
     beq lbl_atn_SinusCurve_evaluate_000006B4
     lwz r3, 0x4(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_SinusCurve_evaluate_000006B4:
     cmpwi r31, 0x0
     beq lbl_atn_SinusCurve_evaluate_000006C8
     lwz r3, 0x0(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_SinusCurve_evaluate_000006C8:
     mr r3, r31
     bl dtor_80084684
@@ -624,13 +624,13 @@ lbl_atn_CosinusCurve_destructor_0000077C:
     beq lbl_atn_CosinusCurve_destructor_000007C8
     lwz r3, 0x4(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_CosinusCurve_destructor_000007C8:
     cmpwi r31, 0x0
     beq lbl_atn_CosinusCurve_destructor_000007DC
     lwz r3, 0x0(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_CosinusCurve_destructor_000007DC:
     mr r3, r31
     bl dtor_80084684
@@ -644,13 +644,13 @@ lbl_atn_CosinusCurve_destructor_000007E4:
     beq lbl_atn_CosinusCurve_destructor_0000080C
     lwz r3, 0x4(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_CosinusCurve_destructor_0000080C:
     cmpwi r31, 0x0
     beq lbl_atn_CosinusCurve_destructor_00000820
     lwz r3, 0x0(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_CosinusCurve_destructor_00000820:
     mr r3, r31
     bl dtor_80084684
@@ -672,13 +672,13 @@ lbl_atn_CosinusCurve_destructor_00000830:
     beq lbl_atn_CosinusCurve_destructor_0000086C
     lwz r3, 0x4(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_CosinusCurve_destructor_0000086C:
     cmpwi r31, 0x0
     beq lbl_atn_CosinusCurve_destructor_00000880
     lwz r3, 0x0(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_CosinusCurve_destructor_00000880:
     mr r3, r31
     bl dtor_80084684
@@ -692,13 +692,13 @@ lbl_atn_CosinusCurve_destructor_00000888:
     beq lbl_atn_CosinusCurve_destructor_000008B0
     lwz r3, 0x4(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_CosinusCurve_destructor_000008B0:
     cmpwi r31, 0x0
     beq lbl_atn_CosinusCurve_destructor_000008C4
     lwz r3, 0x0(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_CosinusCurve_destructor_000008C4:
     mr r3, r31
     bl dtor_80084684
@@ -771,13 +771,13 @@ lbl_atn_CosinusCurve_evaluate_00000974:
     beq lbl_atn_CosinusCurve_evaluate_000009C0
     lwz r3, 0x4(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_CosinusCurve_evaluate_000009C0:
     cmpwi r31, 0x0
     beq lbl_atn_CosinusCurve_evaluate_000009D4
     lwz r3, 0x0(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_CosinusCurve_evaluate_000009D4:
     mr r3, r31
     bl dtor_80084684
@@ -791,13 +791,13 @@ lbl_atn_CosinusCurve_evaluate_000009DC:
     beq lbl_atn_CosinusCurve_evaluate_00000A04
     lwz r3, 0x4(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_CosinusCurve_evaluate_00000A04:
     cmpwi r31, 0x0
     beq lbl_atn_CosinusCurve_evaluate_00000A18
     lwz r3, 0x0(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_CosinusCurve_evaluate_00000A18:
     mr r3, r31
     bl dtor_80084684
@@ -819,13 +819,13 @@ lbl_atn_CosinusCurve_evaluate_00000A28:
     beq lbl_atn_CosinusCurve_evaluate_00000A64
     lwz r3, 0x4(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_CosinusCurve_evaluate_00000A64:
     cmpwi r31, 0x0
     beq lbl_atn_CosinusCurve_evaluate_00000A78
     lwz r3, 0x0(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_CosinusCurve_evaluate_00000A78:
     mr r3, r31
     bl dtor_80084684
@@ -839,13 +839,13 @@ lbl_atn_CosinusCurve_evaluate_00000A80:
     beq lbl_atn_CosinusCurve_evaluate_00000AA8
     lwz r3, 0x4(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_CosinusCurve_evaluate_00000AA8:
     cmpwi r31, 0x0
     beq lbl_atn_CosinusCurve_evaluate_00000ABC
     lwz r3, 0x0(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_CosinusCurve_evaluate_00000ABC:
     mr r3, r31
     bl dtor_80084684
@@ -916,13 +916,13 @@ lbl_atn_ConstantCurve_destructor_00000B64:
     beq lbl_atn_ConstantCurve_destructor_00000BB0
     lwz r3, 0x4(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_ConstantCurve_destructor_00000BB0:
     cmpwi r31, 0x0
     beq lbl_atn_ConstantCurve_destructor_00000BC4
     lwz r3, 0x0(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_ConstantCurve_destructor_00000BC4:
     mr r3, r31
     bl dtor_80084684
@@ -936,13 +936,13 @@ lbl_atn_ConstantCurve_destructor_00000BCC:
     beq lbl_atn_ConstantCurve_destructor_00000BF4
     lwz r3, 0x4(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_ConstantCurve_destructor_00000BF4:
     cmpwi r31, 0x0
     beq lbl_atn_ConstantCurve_destructor_00000C08
     lwz r3, 0x0(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_ConstantCurve_destructor_00000C08:
     mr r3, r31
     bl dtor_80084684
@@ -964,13 +964,13 @@ lbl_atn_ConstantCurve_destructor_00000C18:
     beq lbl_atn_ConstantCurve_destructor_00000C54
     lwz r3, 0x4(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_ConstantCurve_destructor_00000C54:
     cmpwi r31, 0x0
     beq lbl_atn_ConstantCurve_destructor_00000C68
     lwz r3, 0x0(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_ConstantCurve_destructor_00000C68:
     mr r3, r31
     bl dtor_80084684
@@ -984,13 +984,13 @@ lbl_atn_ConstantCurve_destructor_00000C70:
     beq lbl_atn_ConstantCurve_destructor_00000C98
     lwz r3, 0x4(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_ConstantCurve_destructor_00000C98:
     cmpwi r31, 0x0
     beq lbl_atn_ConstantCurve_destructor_00000CAC
     lwz r3, 0x0(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_ConstantCurve_destructor_00000CAC:
     mr r3, r31
     bl dtor_80084684
@@ -1059,13 +1059,13 @@ lbl_atn_ConstantCurve_evaluate_00000D4C:
     beq lbl_atn_ConstantCurve_evaluate_00000D98
     lwz r3, 0x4(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_ConstantCurve_evaluate_00000D98:
     cmpwi r31, 0x0
     beq lbl_atn_ConstantCurve_evaluate_00000DAC
     lwz r3, 0x0(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_ConstantCurve_evaluate_00000DAC:
     mr r3, r31
     bl dtor_80084684
@@ -1079,13 +1079,13 @@ lbl_atn_ConstantCurve_evaluate_00000DB4:
     beq lbl_atn_ConstantCurve_evaluate_00000DDC
     lwz r3, 0x4(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_ConstantCurve_evaluate_00000DDC:
     cmpwi r31, 0x0
     beq lbl_atn_ConstantCurve_evaluate_00000DF0
     lwz r3, 0x0(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_ConstantCurve_evaluate_00000DF0:
     mr r3, r31
     bl dtor_80084684
@@ -1107,13 +1107,13 @@ lbl_atn_ConstantCurve_evaluate_00000E00:
     beq lbl_atn_ConstantCurve_evaluate_00000E3C
     lwz r3, 0x4(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_ConstantCurve_evaluate_00000E3C:
     cmpwi r31, 0x0
     beq lbl_atn_ConstantCurve_evaluate_00000E50
     lwz r3, 0x0(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_ConstantCurve_evaluate_00000E50:
     mr r3, r31
     bl dtor_80084684
@@ -1127,13 +1127,13 @@ lbl_atn_ConstantCurve_evaluate_00000E58:
     beq lbl_atn_ConstantCurve_evaluate_00000E80
     lwz r3, 0x4(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_ConstantCurve_evaluate_00000E80:
     cmpwi r31, 0x0
     beq lbl_atn_ConstantCurve_evaluate_00000E94
     lwz r3, 0x0(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_ConstantCurve_evaluate_00000E94:
     mr r3, r31
     bl dtor_80084684
@@ -1208,13 +1208,13 @@ lbl_atn_Polynomial1Curve_destructor_00000F4C:
     beq lbl_atn_Polynomial1Curve_destructor_00000F98
     lwz r3, 0x4(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_Polynomial1Curve_destructor_00000F98:
     cmpwi r31, 0x0
     beq lbl_atn_Polynomial1Curve_destructor_00000FAC
     lwz r3, 0x0(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_Polynomial1Curve_destructor_00000FAC:
     mr r3, r31
     bl dtor_80084684
@@ -1228,13 +1228,13 @@ lbl_atn_Polynomial1Curve_destructor_00000FB4:
     beq lbl_atn_Polynomial1Curve_destructor_00000FDC
     lwz r3, 0x4(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_Polynomial1Curve_destructor_00000FDC:
     cmpwi r31, 0x0
     beq lbl_atn_Polynomial1Curve_destructor_00000FF0
     lwz r3, 0x0(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_Polynomial1Curve_destructor_00000FF0:
     mr r3, r31
     bl dtor_80084684
@@ -1256,13 +1256,13 @@ lbl_atn_Polynomial1Curve_destructor_00001000:
     beq lbl_atn_Polynomial1Curve_destructor_0000103C
     lwz r3, 0x4(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_Polynomial1Curve_destructor_0000103C:
     cmpwi r31, 0x0
     beq lbl_atn_Polynomial1Curve_destructor_00001050
     lwz r3, 0x0(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_Polynomial1Curve_destructor_00001050:
     mr r3, r31
     bl dtor_80084684
@@ -1276,13 +1276,13 @@ lbl_atn_Polynomial1Curve_destructor_00001058:
     beq lbl_atn_Polynomial1Curve_destructor_00001080
     lwz r3, 0x4(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_Polynomial1Curve_destructor_00001080:
     cmpwi r31, 0x0
     beq lbl_atn_Polynomial1Curve_destructor_00001094
     lwz r3, 0x0(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_Polynomial1Curve_destructor_00001094:
     mr r3, r31
     bl dtor_80084684
@@ -1351,13 +1351,13 @@ lbl_atn_Polynomial1Curve_evaluate_00001134:
     beq lbl_atn_Polynomial1Curve_evaluate_00001180
     lwz r3, 0x4(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_Polynomial1Curve_evaluate_00001180:
     cmpwi r31, 0x0
     beq lbl_atn_Polynomial1Curve_evaluate_00001194
     lwz r3, 0x0(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_Polynomial1Curve_evaluate_00001194:
     mr r3, r31
     bl dtor_80084684
@@ -1371,13 +1371,13 @@ lbl_atn_Polynomial1Curve_evaluate_0000119C:
     beq lbl_atn_Polynomial1Curve_evaluate_000011C4
     lwz r3, 0x4(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_Polynomial1Curve_evaluate_000011C4:
     cmpwi r31, 0x0
     beq lbl_atn_Polynomial1Curve_evaluate_000011D8
     lwz r3, 0x0(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_Polynomial1Curve_evaluate_000011D8:
     mr r3, r31
     bl dtor_80084684
@@ -1399,13 +1399,13 @@ lbl_atn_Polynomial1Curve_evaluate_000011E8:
     beq lbl_atn_Polynomial1Curve_evaluate_00001224
     lwz r3, 0x4(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_Polynomial1Curve_evaluate_00001224:
     cmpwi r31, 0x0
     beq lbl_atn_Polynomial1Curve_evaluate_00001238
     lwz r3, 0x0(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_Polynomial1Curve_evaluate_00001238:
     mr r3, r31
     bl dtor_80084684
@@ -1419,13 +1419,13 @@ lbl_atn_Polynomial1Curve_evaluate_00001240:
     beq lbl_atn_Polynomial1Curve_evaluate_00001268
     lwz r3, 0x4(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_Polynomial1Curve_evaluate_00001268:
     cmpwi r31, 0x0
     beq lbl_atn_Polynomial1Curve_evaluate_0000127C
     lwz r3, 0x0(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_Polynomial1Curve_evaluate_0000127C:
     mr r3, r31
     bl dtor_80084684
@@ -1494,13 +1494,13 @@ lbl_atn_Polynomial2Curve_destructor_0000131C:
     beq lbl_atn_Polynomial2Curve_destructor_00001368
     lwz r3, 0x4(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_Polynomial2Curve_destructor_00001368:
     cmpwi r31, 0x0
     beq lbl_atn_Polynomial2Curve_destructor_0000137C
     lwz r3, 0x0(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_Polynomial2Curve_destructor_0000137C:
     mr r3, r31
     bl dtor_80084684
@@ -1514,13 +1514,13 @@ lbl_atn_Polynomial2Curve_destructor_00001384:
     beq lbl_atn_Polynomial2Curve_destructor_000013AC
     lwz r3, 0x4(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_Polynomial2Curve_destructor_000013AC:
     cmpwi r31, 0x0
     beq lbl_atn_Polynomial2Curve_destructor_000013C0
     lwz r3, 0x0(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_Polynomial2Curve_destructor_000013C0:
     mr r3, r31
     bl dtor_80084684
@@ -1542,13 +1542,13 @@ lbl_atn_Polynomial2Curve_destructor_000013D0:
     beq lbl_atn_Polynomial2Curve_destructor_0000140C
     lwz r3, 0x4(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_Polynomial2Curve_destructor_0000140C:
     cmpwi r31, 0x0
     beq lbl_atn_Polynomial2Curve_destructor_00001420
     lwz r3, 0x0(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_Polynomial2Curve_destructor_00001420:
     mr r3, r31
     bl dtor_80084684
@@ -1562,13 +1562,13 @@ lbl_atn_Polynomial2Curve_destructor_00001428:
     beq lbl_atn_Polynomial2Curve_destructor_00001450
     lwz r3, 0x4(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_Polynomial2Curve_destructor_00001450:
     cmpwi r31, 0x0
     beq lbl_atn_Polynomial2Curve_destructor_00001464
     lwz r3, 0x0(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_Polynomial2Curve_destructor_00001464:
     mr r3, r31
     bl dtor_80084684
@@ -1641,13 +1641,13 @@ lbl_atn_Polynomial2Curve_evaluate_00001514:
     beq lbl_atn_Polynomial2Curve_evaluate_00001560
     lwz r3, 0x4(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_Polynomial2Curve_evaluate_00001560:
     cmpwi r31, 0x0
     beq lbl_atn_Polynomial2Curve_evaluate_00001574
     lwz r3, 0x0(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_Polynomial2Curve_evaluate_00001574:
     mr r3, r31
     bl dtor_80084684
@@ -1661,13 +1661,13 @@ lbl_atn_Polynomial2Curve_evaluate_0000157C:
     beq lbl_atn_Polynomial2Curve_evaluate_000015A4
     lwz r3, 0x4(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_Polynomial2Curve_evaluate_000015A4:
     cmpwi r31, 0x0
     beq lbl_atn_Polynomial2Curve_evaluate_000015B8
     lwz r3, 0x0(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_Polynomial2Curve_evaluate_000015B8:
     mr r3, r31
     bl dtor_80084684
@@ -1689,13 +1689,13 @@ lbl_atn_Polynomial2Curve_evaluate_000015C8:
     beq lbl_atn_Polynomial2Curve_evaluate_00001604
     lwz r3, 0x4(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_Polynomial2Curve_evaluate_00001604:
     cmpwi r31, 0x0
     beq lbl_atn_Polynomial2Curve_evaluate_00001618
     lwz r3, 0x0(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_Polynomial2Curve_evaluate_00001618:
     mr r3, r31
     bl dtor_80084684
@@ -1709,13 +1709,13 @@ lbl_atn_Polynomial2Curve_evaluate_00001620:
     beq lbl_atn_Polynomial2Curve_evaluate_00001648
     lwz r3, 0x4(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_Polynomial2Curve_evaluate_00001648:
     cmpwi r31, 0x0
     beq lbl_atn_Polynomial2Curve_evaluate_0000165C
     lwz r3, 0x0(r31)
     li r4, 0x1
-    bl fn_8005C594
+    bl party_updateFormation
 lbl_atn_Polynomial2Curve_evaluate_0000165C:
     mr r3, r31
     bl dtor_80084684

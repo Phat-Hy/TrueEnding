@@ -8,7 +8,7 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
-extern void fn_8004B338(void);
+extern void sound_releaseChannel(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
@@ -16,7 +16,7 @@ extern void fn_8006AA20(void);
 extern void fn_8006AC08(void);
 extern void fn_8006B46C(void);
 extern void script_executeOpcode(void);
-extern void fn_8007708C(void);
+extern void chapter_updateProgression(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
@@ -599,7 +599,7 @@ lbl_fn_805BCD00_000006B8:
     subi r0, r4, 0xe4f
     addi r4, r3, 0x34
     clrlwi r5, r0, 16
-    bl fn_8007708C
+    bl chapter_updateProgression
     cmpwi r3, 0x0
     beq lbl_fn_805BCD00_00000704
     li r29, 0x1
@@ -1057,10 +1057,10 @@ lbl_fn_805BD3B0_00000D18:
 lbl_fn_805BD3B0_00000D34:
     addi r3, r30, 0x280
     li r4, -0x1
-    bl fn_8004B338
+    bl sound_releaseChannel
     addi r3, r30, 0x8c
     li r4, -0x1
-    bl fn_8004B338
+    bl sound_releaseChannel
     mr r3, r30
     li r4, 0x0
     bl atn_Task_destructor
