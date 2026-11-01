@@ -5,7 +5,7 @@
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
 extern void fn_80013F78(void);
-extern void fn_80014798(void);
+extern void atn_LH_Binary_destructor(void);
 extern void fn_8004B378(void);
 extern void fn_800616C0(void);
 extern void fn_80063D3C(void);
@@ -1598,11 +1598,11 @@ asm void fn_803936A4(void)
     lis r3, lbl_8078B128@ha
     lis r4, fn_8006CA80@ha
     addi r3, r3, lbl_8078B128@l
-    lis r5, fn_80014798@ha
+    lis r5, atn_LH_Binary_destructor@ha
     stw r3, 0x0(r21)
     addi r3, r21, 0x48
     addi r4, r4, fn_8006CA80@l
-    addi r5, r5, fn_80014798@l
+    addi r5, r5, atn_LH_Binary_destructor@l
     li r6, 0x8
     li r7, 0x3
     bl fn_806958E0

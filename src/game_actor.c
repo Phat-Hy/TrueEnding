@@ -138,7 +138,7 @@ void fn_800142D4(void);
 void fn_800143E8(void);
 void fn_800144FC(void);
 void fn_80014564(void);
-void fn_80014798(void);
+void atn_LH_Binary_destructor(void);
 void fn_800147F0(void);
 void fn_8001482C(void);
 void fn_8001486C(void);
@@ -909,7 +909,7 @@ lbl_fn_80014564_00000960:
     blr
 }
 
-asm void fn_80014798(void)
+asm void atn_LH_Binary_destructor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -920,14 +920,14 @@ asm void fn_80014798(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    beq lbl_fn_80014798_00000A74
+    beq lbl_atn_LH_Binary_destructor_00000A74
     li r4, 0x0
     bl atn_LoadHandle_destructor
     cmpwi r31, 0x0
-    ble lbl_fn_80014798_00000A74
+    ble lbl_atn_LH_Binary_destructor_00000A74
     mr r3, r30
     bl dtor_80084684
-lbl_fn_80014798_00000A74:
+lbl_atn_LH_Binary_destructor_00000A74:
     mr r3, r30
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)

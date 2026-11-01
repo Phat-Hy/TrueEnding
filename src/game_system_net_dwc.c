@@ -6,7 +6,7 @@ extern void _restgpr_18(void);
 extern void _savegpr_18(void);
 extern void dtor_80084684(void);
 extern void fn_80013F78(void);
-extern void fn_80014798(void);
+extern void atn_LH_Binary_destructor(void);
 extern void fn_800575BC(void);
 extern void fn_800594DC(void);
 extern void fn_80069D48(void);
@@ -1219,9 +1219,9 @@ lbl_fn_80394320_00000F64:
     mr r3, r26
     bl dtor_80084684
 lbl_fn_80394320_00000F6C:
-    lis r4, fn_80014798@ha
+    lis r4, atn_LH_Binary_destructor@ha
     addi r3, r30, 0x48
-    addi r4, r4, fn_80014798@l
+    addi r4, r4, atn_LH_Binary_destructor@l
     li r5, 0x8
     li r6, 0x3
     bl fn_806959D8

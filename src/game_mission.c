@@ -75,7 +75,7 @@ void fn_80057D40(void);
 void fn_80057DEC(void);
 void fn_80057E38(void);
 void fn_80057F28(void);
-void fn_80058020(void);
+void atn_LH_ColliObject_destructor(void);
 void fn_80058078(void);
 void fn_800580BC(void);
 void fn_80058120(void);
@@ -87,7 +87,7 @@ void fn_800584D8(void);
 void fn_8005886C(void);
 void fn_800588FC(void);
 void fn_80058A1C(void);
-void fn_80058B20(void);
+void atn_LH_ColliTree_destructor(void);
 void fn_80058B78(void);
 void fn_80058BBC(void);
 void fn_80058C20(void);
@@ -534,7 +534,7 @@ lbl_fn_80057F28_0000053C:
     blr
 }
 
-asm void fn_80058020(void)
+asm void atn_LH_ColliObject_destructor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -545,14 +545,14 @@ asm void fn_80058020(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    beq lbl_fn_80058020_000005F8
+    beq lbl_atn_LH_ColliObject_destructor_000005F8
     li r4, 0x0
     bl atn_LoadHandle_destructor
     cmpwi r31, 0x0
-    ble lbl_fn_80058020_000005F8
+    ble lbl_atn_LH_ColliObject_destructor_000005F8
     mr r3, r30
     bl dtor_80084684
-lbl_fn_80058020_000005F8:
+lbl_atn_LH_ColliObject_destructor_000005F8:
     mr r3, r30
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -1328,7 +1328,7 @@ lbl_fn_80058A1C_00001030:
     blr
 }
 
-asm void fn_80058B20(void)
+asm void atn_LH_ColliTree_destructor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1339,14 +1339,14 @@ asm void fn_80058B20(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    beq lbl_fn_80058B20_000010F8
+    beq lbl_atn_LH_ColliTree_destructor_000010F8
     li r4, 0x0
     bl atn_LoadHandle_destructor
     cmpwi r31, 0x0
-    ble lbl_fn_80058B20_000010F8
+    ble lbl_atn_LH_ColliTree_destructor_000010F8
     mr r3, r30
     bl dtor_80084684
-lbl_fn_80058B20_000010F8:
+lbl_atn_LH_ColliTree_destructor_000010F8:
     mr r3, r30
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)

@@ -205,7 +205,7 @@ void fn_80043BDC(void);
 void fn_80043BF4(void);
 void fn_80043D58(void);
 void fn_80043EAC(void);
-void fn_800440DC(void);
+void atn_LH_Efp_destructor(void);
 void fn_80044134(void);
 void fn_8004424C(void);
 void fn_80044394(void);
@@ -3162,7 +3162,7 @@ lbl_fn_80043EAC_00002648:
     blr
 }
 
-asm void fn_800440DC(void)
+asm void atn_LH_Efp_destructor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -3173,14 +3173,14 @@ asm void fn_800440DC(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    beq lbl_fn_800440DC_000026C8
+    beq lbl_atn_LH_Efp_destructor_000026C8
     li r4, 0x0
     bl atn_LoadHandle_destructor
     cmpwi r31, 0x0
-    ble lbl_fn_800440DC_000026C8
+    ble lbl_atn_LH_Efp_destructor_000026C8
     mr r3, r30
     bl dtor_80084684
-lbl_fn_800440DC_000026C8:
+lbl_atn_LH_Efp_destructor_000026C8:
     mr r3, r30
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)

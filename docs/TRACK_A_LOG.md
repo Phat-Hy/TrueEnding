@@ -23,6 +23,41 @@ Next:     the 3-5 functions worth naming or decompiling next
 
 <!-- newest first -->
 
+### 2026-11-01 — Batch 5: atn::Load* & atn::LH_* Collision, Effect, Particle Pack, and Material Resource Renames (20 functions)
+
+Numbers:  progress before -> after: 99.30 % -> 99.30 % (7,425,512 / 7,477,608 bytes, 18,054 / 18,155 functions)
+Named:
+- fn_80014798 -> atn_LH_Binary_destructor (evidence: virtual destructor slot 0 in vtable lbl_8078FBB0 [atn::LH_Binary])
+- fn_804705B8 -> atn_LH_Binary_onNotify (evidence: virtual notify callback slot 1 in vtable lbl_8078FBB0 [atn::LH_Binary])
+- fn_80472344 -> atn_LoadColliObject_constructor (evidence: slot 0 in vtable lbl_8078FC10 [atn::LoadColliObject])
+- fn_8047239C -> atn_LoadColliObject_destructor (evidence: slot 1 in vtable lbl_8078FC10 [atn::LoadColliObject])
+- fn_80058020 -> atn_LH_ColliObject_destructor (evidence: virtual destructor slot 0 in vtable lbl_8078FC38 [atn::LH_ColliObject])
+- fn_80472A50 -> atn_LH_ColliObject_onNotify (evidence: virtual notify callback slot 1 in vtable lbl_8078FC38 [atn::LH_ColliObject])
+- fn_80472CAC -> atn_LoadColliTree_constructor (evidence: slot 0 in vtable lbl_8078FC68 [atn::LoadColliTree])
+- fn_80472D04 -> atn_LoadColliTree_destructor (evidence: slot 1 in vtable lbl_8078FC68 [atn::LoadColliTree])
+- fn_80058B20 -> atn_LH_ColliTree_destructor (evidence: virtual destructor slot 0 in vtable lbl_8078FC90 [atn::LH_ColliTree])
+- fn_80472D80 -> atn_LH_ColliTree_onNotify (evidence: virtual notify callback slot 1 in vtable lbl_8078FC90 [atn::LH_ColliTree])
+- fn_804731C0 -> atn_LoadEffect_constructor (evidence: slot 0 in vtable lbl_8078FCD0 [atn::LoadEffect])
+- fn_804732DC -> atn_LoadEffect_destructor (evidence: slot 1 in vtable lbl_8078FCD0 [atn::LoadEffect])
+- fn_8023756C -> atn_LH_Effect_destructor (evidence: virtual destructor slot 0 in vtable lbl_8078FCF8 [atn::LH_Effect])
+- fn_804738E0 -> atn_LH_Effect_onNotify (evidence: virtual notify callback slot 1 in vtable lbl_8078FCF8 [atn::LH_Effect])
+- fn_80473B20 -> atn_LoadEfp_constructor (evidence: slot 0 in vtable lbl_8078FD20 [atn::LoadEfp])
+- fn_80473BC0 -> atn_LoadEfp_destructor (evidence: slot 1 in vtable lbl_8078FD20 [atn::LoadEfp])
+- fn_800440DC -> atn_LH_Efp_destructor (evidence: virtual destructor slot 0 in vtable lbl_8078FD48 [atn::LH_Efp])
+- fn_80473C3C -> atn_LH_Efp_onNotify (evidence: virtual notify callback slot 1 in vtable lbl_8078FD48 [atn::LH_Efp])
+- fn_80474224 -> atn_LoadMaterial_constructor (evidence: slot 0 in vtable lbl_8078FD80 [atn::LoadMaterial])
+- fn_804742F4 -> atn_LoadMaterial_destructor (evidence: slot 1 in vtable lbl_8078FD80 [atn::LoadMaterial])
+Decompiled: none in this unit
+Notes:
+- Completes the asset loader and handle taxonomy for collision data (object and tree), raw binary packages (`atn::LH_Binary`), visual effects (`atn::LH_Effect`), particle archives (`atn::LH_Efp`), and material definition bundles (`atn::LH_Material`):
+  - Every resource type in `atn::` follows the symmetric pair pattern: an asynchronous loader task (`atn::Load*`) and an active resource handle (`atn::LH_*`).
+  - All 15 local `lbl_fn_*` assembly labels inside caller asm blocks were simultaneously normalized to `lbl_atn_*` across 14 source files.
+Next:
+1. `atn_LH_Texture_constructor` (`fn_800D5738`, 120 B) and `atn_LH_Texture_destructor` (`fn_800D57B0`, 88 B) -> decompile to C in `src/game_depth.c`.
+2. `fn_800D7278` (1252 B): character texture bake (EFB copy + `GXDrawDone` + readback).
+3. Batch 6 renames in `atn::LoadModel`, `atn::LoadMotion`, and `atn::LH_MotionSet` loaders.
+
+
 ### 2026-11-01 — Batch 4: atn::Load* & atn::LH_* Resource Subsystem Renames (20 functions)
 
 Numbers:  progress before -> after: 99.30 % -> 99.30 % (7,425,512 / 7,477,608 bytes, 18,054 / 18,155 functions)

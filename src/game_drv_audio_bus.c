@@ -5,7 +5,7 @@
 extern void _restgpr_21(void);
 extern void _savegpr_21(void);
 extern void dtor_80084684(void);
-extern void fn_80014798(void);
+extern void atn_LH_Binary_destructor(void);
 extern void fn_80060D58(void);
 extern void fn_800616C0(void);
 extern void fn_800638B0(void);
@@ -144,9 +144,9 @@ asm void fn_805B342C(void)
     mr r30, r3
     beq lbl_fn_805B342C_00000140
     li r0, 0x0
-    lis r4, fn_80014798@ha
+    lis r4, atn_LH_Binary_destructor@ha
     stw r0, lbl_8087FA00
-    addi r4, r4, fn_80014798@l
+    addi r4, r4, atn_LH_Binary_destructor@l
     li r5, 0x8
     li r6, 0x3
     addi r3, r3, 0x80
@@ -249,11 +249,11 @@ asm void fn_805B3518(void)
     mr r3, r27
     bl atn_LoadHandle_constructor
     lis r4, fn_8006CA80@ha
-    lis r5, fn_80014798@ha
+    lis r5, atn_LH_Binary_destructor@ha
     stw r31, 0x0(r27)
     addi r3, r28, 0x80
     addi r4, r4, fn_8006CA80@l
-    addi r5, r5, fn_80014798@l
+    addi r5, r5, atn_LH_Binary_destructor@l
     li r6, 0x8
     li r7, 0x3
     bl fn_806958E0

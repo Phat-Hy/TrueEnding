@@ -83,10 +83,10 @@ extern u32 lbl_80886F00;
 extern u32 lbl_80886F04;
 
 /* Function declarations */
-void fn_80473B20(void);
-void fn_80473BC0(void);
+void atn_LoadEfp_constructor(void);
+void atn_LoadEfp_destructor(void);
 void fn_80473C20(void);
-void fn_80473C3C(void);
+void atn_LH_Efp_onNotify(void);
 void fn_80473C88(void);
 void atn_LoadHandle_constructor(void);
 void atn_LoadHandle_destructor(void);
@@ -97,8 +97,8 @@ void fn_80473F50(void);
 void fn_80473F88(void);
 void fn_80473FCC(void);
 void fn_804741C0(void);
-void fn_80474224(void);
-void fn_804742F4(void);
+void atn_LoadMaterial_constructor(void);
+void atn_LoadMaterial_destructor(void);
 void fn_8047462C(void);
 void fn_80474678(void);
 void fn_80474860(void);
@@ -110,7 +110,7 @@ void fn_80474E4C(void);
 void fn_80474E68(void);
 void fn_80474F0C(void);
 
-asm void fn_80473B20(void)
+asm void atn_LoadEfp_constructor(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -122,32 +122,32 @@ asm void fn_80473B20(void)
     mr r30, r4
     stw r29, 0x14(r1)
     mr r29, r3
-    beq lbl_fn_80473B20_00000080
+    beq lbl_atn_LoadEfp_constructor_00000080
     addic. r31, r3, 0x5c
-    beq lbl_fn_80473B20_00000064
+    beq lbl_atn_LoadEfp_constructor_00000064
     mr r3, r31
     bl fn_802437C0
     cmpwi r31, 0x0
-    beq lbl_fn_80473B20_00000064
+    beq lbl_atn_LoadEfp_constructor_00000064
     lwz r3, 0x4(r31)
     cmpwi r3, 0x0
-    beq lbl_fn_80473B20_00000058
+    beq lbl_atn_LoadEfp_constructor_00000058
     lis r4, fn_80243758@ha
     addi r4, r4, fn_80243758@l
     bl fn_80695A50
-lbl_fn_80473B20_00000058:
+lbl_atn_LoadEfp_constructor_00000058:
     li r0, 0x0
     stw r0, 0x4(r31)
     stw r0, 0x0(r31)
-lbl_fn_80473B20_00000064:
+lbl_atn_LoadEfp_constructor_00000064:
     mr r3, r29
     li r4, 0x0
     bl fn_8047304C
     cmpwi r30, 0x0
-    ble lbl_fn_80473B20_00000080
+    ble lbl_atn_LoadEfp_constructor_00000080
     mr r3, r29
     bl dtor_80084684
-lbl_fn_80473B20_00000080:
+lbl_atn_LoadEfp_constructor_00000080:
     lwz r31, 0x1c(r1)
     mr r3, r29
     lwz r30, 0x18(r1)
@@ -158,7 +158,7 @@ lbl_fn_80473B20_00000080:
     blr
 }
 
-asm void fn_80473BC0(void)
+asm void atn_LoadEfp_destructor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -168,19 +168,19 @@ asm void fn_80473BC0(void)
     mr r31, r3
     lbz r0, 0x4(r3)
     cmplwi r0, 0x2
-    bne lbl_fn_80473BC0_000000EC
+    bne lbl_atn_LoadEfp_destructor_000000EC
     lwz r4, 0x54(r3)
     lwz r5, 0x50(r3)
     addi r3, r3, 0x5c
     bl fn_80243814
     cmpwi r3, 0x0
-    bne lbl_fn_80473BC0_000000EC
+    bne lbl_atn_LoadEfp_destructor_000000EC
     mr r3, r31
     li r4, 0x3
     bl fn_80473104
     mr r3, r31
     bl fn_80473130
-lbl_fn_80473BC0_000000EC:
+lbl_atn_LoadEfp_destructor_000000EC:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0
@@ -201,7 +201,7 @@ lbl_fn_80473C20_00000114:
     blr
 }
 
-asm void fn_80473C3C(void)
+asm void atn_LH_Efp_onNotify(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -664,7 +664,7 @@ lbl_fn_804741C0_000006EC:
     blr
 }
 
-asm void fn_80474224(void)
+asm void atn_LoadMaterial_constructor(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -676,45 +676,45 @@ asm void fn_80474224(void)
     mr r30, r4
     stw r29, 0x14(r1)
     mr r29, r3
-    beq lbl_fn_80474224_000007B4
+    beq lbl_atn_LoadMaterial_constructor_000007B4
     lis r4, lbl_8078FD80@ha
     lwz r31, 0x5c(r3)
     addi r4, r4, lbl_8078FD80@l
     stw r4, 0x0(r3)
-    b lbl_fn_80474224_00000750
-lbl_fn_80474224_00000740:
+    b lbl_atn_LoadMaterial_constructor_00000750
+lbl_atn_LoadMaterial_constructor_00000740:
     lwz r3, 0x0(r31)
     li r4, 0x1
     bl fn_8007C3F8
     addi r31, r31, 0x4
-lbl_fn_80474224_00000750:
+lbl_atn_LoadMaterial_constructor_00000750:
     lwz r0, 0x60(r29)
     lwz r3, 0x5c(r29)
     slwi r0, r0, 2
     add r0, r3, r0
     cmplw r31, r0
-    bne lbl_fn_80474224_00000740
+    bne lbl_atn_LoadMaterial_constructor_00000740
     addic. r4, r29, 0x5c
-    beq lbl_fn_80474224_00000798
-    beq lbl_fn_80474224_00000798
-    beq lbl_fn_80474224_00000798
-    beq lbl_fn_80474224_00000798
+    beq lbl_atn_LoadMaterial_constructor_00000798
+    beq lbl_atn_LoadMaterial_constructor_00000798
+    beq lbl_atn_LoadMaterial_constructor_00000798
+    beq lbl_atn_LoadMaterial_constructor_00000798
     lwz r3, 0x0(r4)
     cmpwi r3, 0x0
-    beq lbl_fn_80474224_00000798
+    beq lbl_atn_LoadMaterial_constructor_00000798
     lwz r0, 0x4(r4)
     subf r0, r0, r0
     stw r0, 0x4(r4)
     bl dtor_80084684
-lbl_fn_80474224_00000798:
+lbl_atn_LoadMaterial_constructor_00000798:
     mr r3, r29
     li r4, 0x0
     bl fn_8047304C
     cmpwi r30, 0x0
-    ble lbl_fn_80474224_000007B4
+    ble lbl_atn_LoadMaterial_constructor_000007B4
     mr r3, r29
     bl dtor_80084684
-lbl_fn_80474224_000007B4:
+lbl_atn_LoadMaterial_constructor_000007B4:
     lwz r31, 0x1c(r1)
     mr r3, r29
     lwz r30, 0x18(r1)
@@ -725,7 +725,7 @@ lbl_fn_80474224_000007B4:
     blr
 }
 
-asm void fn_804742F4(void)
+asm void atn_LoadMaterial_destructor(void)
 {
     nofralloc
     stwu r1, -0x70(r1)
@@ -735,7 +735,7 @@ asm void fn_804742F4(void)
     mr r30, r3
     lbz r0, 0x4(r3)
     cmplwi r0, 0x2
-    bne lbl_fn_804742F4_00000AF8
+    bne lbl_atn_LoadMaterial_destructor_00000AF8
     lwz r17, 0x54(r3)
     lis r20, lbl_80755D68@ha
     lis r4, __files@ha
@@ -750,8 +750,8 @@ asm void fn_804742F4(void)
     lis r26, 0x1555
     lis r28, 0x2aab
     lis r29, lbl_80775A88@ha
-    b lbl_fn_804742F4_00000ACC
-lbl_fn_804742F4_00000830:
+    b lbl_atn_LoadMaterial_destructor_00000ACC
+lbl_atn_LoadMaterial_destructor_00000830:
     addi r5, r20, lbl_80755D68@l
     li r3, 0x54
     mr r6, r5
@@ -760,11 +760,11 @@ lbl_fn_804742F4_00000830:
     bl fn_80084320
     cmpwi r3, 0x0
     mr r16, r3
-    beq lbl_fn_804742F4_00000860
+    beq lbl_atn_LoadMaterial_destructor_00000860
     li r4, 0x0
     bl fn_8007C144
     mr r16, r3
-lbl_fn_804742F4_00000860:
+lbl_atn_LoadMaterial_destructor_00000860:
     mr r3, r16
     mr r5, r31
     mr r6, r18
@@ -774,25 +774,25 @@ lbl_fn_804742F4_00000860:
     lwz r4, 0x60(r30)
     lwz r3, 0x64(r30)
     cmplw r4, r3
-    bge lbl_fn_804742F4_000008A4
+    bge lbl_atn_LoadMaterial_destructor_000008A4
     addi r4, r4, 0x1
     lwz r3, 0x5c(r30)
     slwi r0, r4, 2
     stw r4, 0x60(r30)
     add r3, r3, r0
     stw r16, -0x4(r3)
-    b lbl_fn_804742F4_00000AC0
-lbl_fn_804742F4_000008A4:
+    b lbl_atn_LoadMaterial_destructor_00000AC0
+lbl_atn_LoadMaterial_destructor_000008A4:
     subi r0, r21, 0x1
     subf r0, r3, r0
     cmplwi r0, 0x1
-    bge lbl_fn_804742F4_000008C8
+    bge lbl_atn_LoadMaterial_destructor_000008C8
     addi r4, r22, 0x1
     addi r3, r23, 0xa0
     crclr 6
     bl fn_80680770
     bl fn_80686EA4
-lbl_fn_804742F4_000008C8:
+lbl_atn_LoadMaterial_destructor_000008C8:
     addi r3, r30, 0x64
     stw r24, 0x14(r1)
     subi r0, r21, 0x1
@@ -807,16 +807,16 @@ lbl_fn_804742F4_000008C8:
     subf r0, r25, r0
     cmplw r3, r0
     stw r3, 0x8(r1)
-    ble lbl_fn_804742F4_00000918
+    ble lbl_atn_LoadMaterial_destructor_00000918
     addi r4, r22, 0x1
     addi r3, r23, 0xa0
     crclr 6
     bl fn_80680770
     bl fn_80686EA4
-lbl_fn_804742F4_00000918:
+lbl_atn_LoadMaterial_destructor_00000918:
     addi r0, r26, 0x5555
     cmplw r25, r0
-    bge lbl_fn_804742F4_00000960
+    bge lbl_atn_LoadMaterial_destructor_00000960
     addi r4, r25, 0x1
     subi r5, r27, 0x3333
     slwi r3, r4, 2
@@ -827,51 +827,51 @@ lbl_fn_804742F4_00000918:
     srwi r4, r4, 2
     stw r4, 0x10(r1)
     cmplw r4, r0
-    bge lbl_fn_804742F4_00000954
+    bge lbl_atn_LoadMaterial_destructor_00000954
     addi r3, r1, 0x8
-lbl_fn_804742F4_00000954:
+lbl_atn_LoadMaterial_destructor_00000954:
     lwz r0, 0x0(r3)
     add r18, r25, r0
-    b lbl_fn_804742F4_0000099C
-lbl_fn_804742F4_00000960:
+    b lbl_atn_LoadMaterial_destructor_0000099C
+lbl_atn_LoadMaterial_destructor_00000960:
     subi r0, r28, 0x5556
     cmplw r25, r0
-    bge lbl_fn_804742F4_00000998
+    bge lbl_atn_LoadMaterial_destructor_00000998
     addi r3, r25, 0x1
     lwz r0, 0x8(r1)
     srwi r3, r3, 1
     stw r3, 0xc(r1)
     cmplw r3, r0
     addi r3, r1, 0xc
-    bge lbl_fn_804742F4_0000098C
+    bge lbl_atn_LoadMaterial_destructor_0000098C
     addi r3, r1, 0x8
-lbl_fn_804742F4_0000098C:
+lbl_atn_LoadMaterial_destructor_0000098C:
     lwz r0, 0x0(r3)
     add r18, r25, r0
-    b lbl_fn_804742F4_0000099C
-lbl_fn_804742F4_00000998:
+    b lbl_atn_LoadMaterial_destructor_0000099C
+lbl_atn_LoadMaterial_destructor_00000998:
     subi r18, r21, 0x1
-lbl_fn_804742F4_0000099C:
+lbl_atn_LoadMaterial_destructor_0000099C:
     subi r0, r21, 0x1
     cmplw r18, r0
-    ble lbl_fn_804742F4_000009BC
+    ble lbl_atn_LoadMaterial_destructor_000009BC
     addi r4, r22, 0x1
     addi r3, r23, 0xa0
     crclr 6
     bl fn_80680770
     bl fn_80686EA4
-lbl_fn_804742F4_000009BC:
+lbl_atn_LoadMaterial_destructor_000009BC:
     slwi r3, r18, 2
     bl fn_800844D8
     cmpwi r3, 0x0
     mr r25, r3
-    bne lbl_fn_804742F4_000009E4
+    bne lbl_atn_LoadMaterial_destructor_000009E4
     addi r3, r23, 0xa0
     addi r4, r29, lbl_80775A88@l
     crclr 6
     bl fn_80680770
     bl fn_80686EA4
-lbl_fn_804742F4_000009E4:
+lbl_atn_LoadMaterial_destructor_000009E4:
     lwz r0, 0x18(r1)
     stw r25, 0x14(r1)
     slwi r3, r0, 2
@@ -921,30 +921,30 @@ lbl_fn_804742F4_000009E4:
     lwz r0, 0x18(r1)
     stw r0, 0x60(r30)
     stw r24, 0x18(r1)
-    beq lbl_fn_804742F4_00000AC0
+    beq lbl_atn_LoadMaterial_destructor_00000AC0
     lwz r3, 0x14(r1)
     cmpwi r3, 0x0
-    beq lbl_fn_804742F4_00000AC0
+    beq lbl_atn_LoadMaterial_destructor_00000AC0
     stw r24, 0x18(r1)
     bl dtor_80084684
-lbl_fn_804742F4_00000AC0:
+lbl_atn_LoadMaterial_destructor_00000AC0:
     lwz r0, 0x50(r30)
     subf r3, r17, r31
     subf r18, r3, r0
-lbl_fn_804742F4_00000ACC:
+lbl_atn_LoadMaterial_destructor_00000ACC:
     cmpwi r31, 0x0
-    beq lbl_fn_804742F4_00000AE4
+    beq lbl_atn_LoadMaterial_destructor_00000AE4
     lwz r0, 0x50(r30)
     subf r3, r17, r31
     cmpw r3, r0
-    blt lbl_fn_804742F4_00000830
-lbl_fn_804742F4_00000AE4:
+    blt lbl_atn_LoadMaterial_destructor_00000830
+lbl_atn_LoadMaterial_destructor_00000AE4:
     mr r3, r30
     bl fn_80473130
     mr r3, r30
     li r4, 0x3
     bl fn_80473104
-lbl_fn_804742F4_00000AF8:
+lbl_atn_LoadMaterial_destructor_00000AF8:
     lmw r16, 0x30(r1)
     lwz r0, 0x74(r1)
     mtlr r0

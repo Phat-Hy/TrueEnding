@@ -91,7 +91,7 @@ void fn_8047054C(void);
 void fn_80470564(void);
 void fn_80470580(void);
 void fn_8047059C(void);
-void fn_804705B8(void);
+void atn_LH_Binary_onNotify(void);
 
 asm void fn_8046EBC4(void)
 {
@@ -2069,7 +2069,7 @@ lbl_fn_8047059C_000019EC:
     blr
 }
 
-asm void fn_804705B8(void)
+asm void atn_LH_Binary_onNotify(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
