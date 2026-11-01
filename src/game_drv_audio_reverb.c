@@ -62,8 +62,8 @@ extern void fn_80116BAC(void);
 extern void fn_80116BD4(void);
 extern void fn_80121F00(void);
 extern void fn_80122280(void);
-extern void fn_801231B8(void);
-extern void fn_801231D0(void);
+extern void magic_isField28Zero(void);
+extern void magic_dispatchActionCommand(void);
 extern void fn_80147A08(void);
 extern void quest_checkCondition(void);
 extern void fn_801498F0(void);
@@ -750,7 +750,7 @@ lbl_fn_805BAC18_00000864:
     bl fn_800F52F8
     bl fn_80116BAC
     li r4, 0x25
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
     beq lbl_fn_805BAC18_000008AC
     li r28, 0x0
@@ -761,7 +761,7 @@ lbl_fn_805BAC18_000008AC:
     bl fn_800F52F8
     bl fn_80116BAC
     li r4, 0x26
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
     beq lbl_fn_805BAC18_000008D4
     li r28, 0x1
@@ -770,7 +770,7 @@ lbl_fn_805BAC18_000008AC:
     stw r28, 0x4(r3)
 lbl_fn_805BAC18_000008D4:
     bl fn_801156C4
-    bl fn_801231B8
+    bl magic_isField28Zero
     cntlzw r0, r3
     srwi r0, r0, 5
     stw r0, 0x5b4(r29)
@@ -785,7 +785,7 @@ lbl_fn_805BAC18_000008E8:
     bl fn_800F52F8
     bl fn_80116BAC
     li r4, 0x29
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
     beq lbl_fn_805BAC18_00000924
     li r0, 0x1
@@ -809,7 +809,7 @@ lbl_fn_805BAC18_0000095C:
     bl fn_800F52F8
     bl fn_80116BAC
     li r4, 0x2a
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
     beq lbl_fn_805BAC18_00000978
     li r30, 0x1
@@ -831,7 +831,7 @@ lbl_fn_805BAC18_000009AC:
     bl fn_800F52F8
     bl fn_80116BAC
     li r4, 0x1
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
     beq lbl_fn_805BAC18_00000A1C
     li r0, 0x0
@@ -841,7 +841,7 @@ lbl_fn_805BAC18_000009D0:
     bl fn_800F52F8
     bl fn_80116BAC
     li r4, 0x0
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
     beq lbl_fn_805BAC18_000009EC
     li r30, 0x1

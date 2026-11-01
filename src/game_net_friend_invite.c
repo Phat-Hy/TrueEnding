@@ -41,7 +41,7 @@ extern void fn_801125F8(void);
 extern void fn_80112960(void);
 extern void fn_80114AA0(void);
 extern void fn_801156BC(void);
-extern void fn_80122550(void);
+extern void magic_getOffset6C(void);
 extern void fn_8012B3E8(void);
 extern void fn_8012B988(void);
 extern void fn_8012D8B8(void);
@@ -3593,7 +3593,7 @@ lbl_fn_804D25D4_00002D44:
     lwz r3, 0x5e0(r24)
     cmpwi r3, 0x0
     beq lbl_fn_804D25D4_00002D74
-    bl fn_80122550
+    bl magic_getOffset6C
     lfs f1, lbl_808875CC
     li r4, 0x1
     li r5, 0x1

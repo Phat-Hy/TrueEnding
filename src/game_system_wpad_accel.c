@@ -110,7 +110,7 @@ void fn_8036DB3C(void);
 void fn_8036DBC0(void);
 void fn_8036DDD4(void);
 void fn_8036E098(void);
-void fn_8036E170(void);
+void wpad_accel_updateOrientation(void);
 void fn_8036E428(void);
 void fn_8036E430(void);
 void fn_8036E494(void);
@@ -1385,7 +1385,7 @@ lbl_fn_8036E098_000011B0:
     blr
 }
 
-asm void fn_8036E170(void)
+asm void wpad_accel_updateOrientation(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -1396,64 +1396,64 @@ asm void fn_8036E170(void)
     stw r30, 0x18(r1)
     lwz r0, 0x54e4(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_8036E170_000012AC
+    beq lbl_wpad_accel_updateOrientation_000012AC
     cmpwi r0, 0xe
-    beq lbl_fn_8036E170_000012AC
+    beq lbl_wpad_accel_updateOrientation_000012AC
     cmpwi r0, 0x3
-    beq lbl_fn_8036E170_00001208
+    beq lbl_wpad_accel_updateOrientation_00001208
     li r3, 0x0
-    b lbl_fn_8036E170_0000146C
-lbl_fn_8036E170_00001208:
+    b lbl_wpad_accel_updateOrientation_0000146C
+lbl_wpad_accel_updateOrientation_00001208:
     lwz r4, lbl_8087F9C8
     cmpwi r4, 0x0
-    beq lbl_fn_8036E170_0000122C
+    beq lbl_wpad_accel_updateOrientation_0000122C
     addis r4, r4, 0x2
     lwz r0, 0x5b40(r4)
     cmpwi r0, 0x0
-    bne lbl_fn_8036E170_0000122C
+    bne lbl_wpad_accel_updateOrientation_0000122C
     li r3, 0x0
-    b lbl_fn_8036E170_0000146C
-lbl_fn_8036E170_0000122C:
+    b lbl_wpad_accel_updateOrientation_0000146C
+lbl_wpad_accel_updateOrientation_0000122C:
     lwz r4, lbl_8087F9E0
     cmpwi r4, 0x0
-    beq lbl_fn_8036E170_00001250
+    beq lbl_wpad_accel_updateOrientation_00001250
     addis r4, r4, 0x2
     lwz r0, 0x5b40(r4)
     cmpwi r0, 0x0
-    bne lbl_fn_8036E170_00001250
+    bne lbl_wpad_accel_updateOrientation_00001250
     li r3, 0x0
-    b lbl_fn_8036E170_0000146C
-lbl_fn_8036E170_00001250:
+    b lbl_wpad_accel_updateOrientation_0000146C
+lbl_wpad_accel_updateOrientation_00001250:
     lwz r4, lbl_8087F9D0
     cmpwi r4, 0x0
-    beq lbl_fn_8036E170_00001274
+    beq lbl_wpad_accel_updateOrientation_00001274
     addis r4, r4, 0x2
     lwz r0, 0x5b40(r4)
     cmpwi r0, 0x0
-    bne lbl_fn_8036E170_00001274
+    bne lbl_wpad_accel_updateOrientation_00001274
     li r3, 0x0
-    b lbl_fn_8036E170_0000146C
-lbl_fn_8036E170_00001274:
+    b lbl_wpad_accel_updateOrientation_0000146C
+lbl_wpad_accel_updateOrientation_00001274:
     lwz r4, lbl_8087F9D8
     cmpwi r4, 0x0
-    beq lbl_fn_8036E170_00001298
+    beq lbl_wpad_accel_updateOrientation_00001298
     addis r4, r4, 0x2
     lwz r0, 0x5b40(r4)
     cmpwi r0, 0x0
-    bne lbl_fn_8036E170_00001298
+    bne lbl_wpad_accel_updateOrientation_00001298
     li r3, 0x0
-    b lbl_fn_8036E170_0000146C
-lbl_fn_8036E170_00001298:
+    b lbl_wpad_accel_updateOrientation_0000146C
+lbl_wpad_accel_updateOrientation_00001298:
     lwz r0, lbl_8087F508
     cmpwi r0, 0x0
-    beq lbl_fn_8036E170_000012AC
+    beq lbl_wpad_accel_updateOrientation_000012AC
     li r3, 0x0
-    b lbl_fn_8036E170_0000146C
-lbl_fn_8036E170_000012AC:
+    b lbl_wpad_accel_updateOrientation_0000146C
+lbl_wpad_accel_updateOrientation_000012AC:
     lwz r3, 0x5620(r3)
     lwz r6, 0x48(r3)
     cmpwi r6, 0x0
-    beq lbl_fn_8036E170_000012E4
+    beq lbl_wpad_accel_updateOrientation_000012E4
     lwz r4, 0x58(r3)
     lwz r0, 0x54(r3)
     lwz r5, 0x4c(r3)
@@ -1463,123 +1463,123 @@ lbl_fn_8036E170_000012AC:
     and r0, r0, r5
     subf r0, r0, r4
     srwi r0, r0, 31
-    b lbl_fn_8036E170_000012E8
-lbl_fn_8036E170_000012E4:
+    b lbl_wpad_accel_updateOrientation_000012E8
+lbl_wpad_accel_updateOrientation_000012E4:
     li r0, 0x1
-lbl_fn_8036E170_000012E8:
+lbl_wpad_accel_updateOrientation_000012E8:
     cmpwi r0, 0x0
-    bne lbl_fn_8036E170_000012F8
+    bne lbl_wpad_accel_updateOrientation_000012F8
     li r3, 0x0
-    b lbl_fn_8036E170_0000146C
-lbl_fn_8036E170_000012F8:
+    b lbl_wpad_accel_updateOrientation_0000146C
+lbl_wpad_accel_updateOrientation_000012F8:
     cmpwi r3, 0x0
-    beq lbl_fn_8036E170_0000131C
+    beq lbl_wpad_accel_updateOrientation_0000131C
     cmpwi r6, 0x0
-    beq lbl_fn_8036E170_0000131C
+    beq lbl_wpad_accel_updateOrientation_0000131C
     bl fn_8006A204
     cmpwi r3, 0x0
-    bne lbl_fn_8036E170_0000131C
+    bne lbl_wpad_accel_updateOrientation_0000131C
     li r3, 0x0
-    b lbl_fn_8036E170_0000146C
-lbl_fn_8036E170_0000131C:
+    b lbl_wpad_accel_updateOrientation_0000146C
+lbl_wpad_accel_updateOrientation_0000131C:
     lwz r3, lbl_8087F540
     bl fn_80481668
     cmpwi r3, 0x0
-    beq lbl_fn_8036E170_00001334
+    beq lbl_wpad_accel_updateOrientation_00001334
     li r3, 0x0
-    b lbl_fn_8036E170_0000146C
-lbl_fn_8036E170_00001334:
+    b lbl_wpad_accel_updateOrientation_0000146C
+lbl_wpad_accel_updateOrientation_00001334:
     lwz r0, 0x1294(r31)
     cmpwi r0, 0x0
-    bne lbl_fn_8036E170_0000134C
+    bne lbl_wpad_accel_updateOrientation_0000134C
     lwz r0, lbl_8087F610
     cmpwi r0, 0x0
-    beq lbl_fn_8036E170_00001354
-lbl_fn_8036E170_0000134C:
+    beq lbl_wpad_accel_updateOrientation_00001354
+lbl_wpad_accel_updateOrientation_0000134C:
     li r3, 0x0
-    b lbl_fn_8036E170_0000146C
-lbl_fn_8036E170_00001354:
+    b lbl_wpad_accel_updateOrientation_0000146C
+lbl_wpad_accel_updateOrientation_00001354:
     lwz r3, lbl_8087F490
     lwz r3, 0x263c(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_8036E170_00001378
+    beq lbl_wpad_accel_updateOrientation_00001378
     lwz r0, 0x50(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_8036E170_00001378
+    beq lbl_wpad_accel_updateOrientation_00001378
     li r3, 0x0
-    b lbl_fn_8036E170_0000146C
-lbl_fn_8036E170_00001378:
+    b lbl_wpad_accel_updateOrientation_0000146C
+lbl_wpad_accel_updateOrientation_00001378:
     lwz r0, 0x56d4(r31)
     cmpwi r0, 0x0
-    bne lbl_fn_8036E170_00001390
+    bne lbl_wpad_accel_updateOrientation_00001390
     lwz r0, 0x56d8(r31)
     cmpwi r0, 0x0
-    beq lbl_fn_8036E170_00001398
-lbl_fn_8036E170_00001390:
+    beq lbl_wpad_accel_updateOrientation_00001398
+lbl_wpad_accel_updateOrientation_00001390:
     li r3, 0x0
-    b lbl_fn_8036E170_0000146C
-lbl_fn_8036E170_00001398:
+    b lbl_wpad_accel_updateOrientation_0000146C
+lbl_wpad_accel_updateOrientation_00001398:
     lwz r0, 0x54e4(r31)
     cmpwi r0, 0x3
-    beq lbl_fn_8036E170_00001418
+    beq lbl_wpad_accel_updateOrientation_00001418
     lwz r3, lbl_8087F8A0
     lwz r30, 0x48(r3)
     mr r3, r30
     bl fn_8017C974
     cmpwi r3, 0x0
-    bne lbl_fn_8036E170_000013C8
+    bne lbl_wpad_accel_updateOrientation_000013C8
     lwz r0, 0x5760(r31)
     cmpwi r0, 0x0
-    ble lbl_fn_8036E170_000013D0
-lbl_fn_8036E170_000013C8:
+    ble lbl_wpad_accel_updateOrientation_000013D0
+lbl_wpad_accel_updateOrientation_000013C8:
     li r3, 0x0
-    b lbl_fn_8036E170_0000146C
-lbl_fn_8036E170_000013D0:
+    b lbl_wpad_accel_updateOrientation_0000146C
+lbl_wpad_accel_updateOrientation_000013D0:
     lfs f1, 0x568(r30)
     lfs f0, lbl_808857C0
     fcmpo cr0, f1, f0
-    bge lbl_fn_8036E170_000013E8
+    bge lbl_wpad_accel_updateOrientation_000013E8
     li r3, 0x0
-    b lbl_fn_8036E170_0000146C
-lbl_fn_8036E170_000013E8:
+    b lbl_wpad_accel_updateOrientation_0000146C
+lbl_wpad_accel_updateOrientation_000013E8:
     lwz r0, 0x55c(r30)
     cmpwi r0, 0x1
-    beq lbl_fn_8036E170_00001418
+    beq lbl_wpad_accel_updateOrientation_00001418
     cmpwi r0, 0x6
-    bne lbl_fn_8036E170_00001410
+    bne lbl_wpad_accel_updateOrientation_00001410
     lwz r0, 0x560(r30)
     cmpwi r0, 0x4
-    beq lbl_fn_8036E170_00001418
+    beq lbl_wpad_accel_updateOrientation_00001418
     li r3, 0x0
-    b lbl_fn_8036E170_0000146C
-lbl_fn_8036E170_00001410:
+    b lbl_wpad_accel_updateOrientation_0000146C
+lbl_wpad_accel_updateOrientation_00001410:
     li r3, 0x0
-    b lbl_fn_8036E170_0000146C
-lbl_fn_8036E170_00001418:
+    b lbl_wpad_accel_updateOrientation_0000146C
+lbl_wpad_accel_updateOrientation_00001418:
     lwz r3, 0x10d8(r31)
     cmpwi r3, 0x0
-    beq lbl_fn_8036E170_00001444
+    beq lbl_wpad_accel_updateOrientation_00001444
     lwz r3, 0x134(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_8036E170_00001444
+    beq lbl_wpad_accel_updateOrientation_00001444
     lwz r0, 0xe8(r3)
     cmpwi r0, 0x0
-    ble lbl_fn_8036E170_00001444
+    ble lbl_wpad_accel_updateOrientation_00001444
     li r3, 0x0
-    b lbl_fn_8036E170_0000146C
-lbl_fn_8036E170_00001444:
+    b lbl_wpad_accel_updateOrientation_0000146C
+lbl_wpad_accel_updateOrientation_00001444:
     lwz r3, lbl_8087EF68
     cmpwi r3, 0x0
-    beq lbl_fn_8036E170_00001468
+    beq lbl_wpad_accel_updateOrientation_00001468
     addi r4, r1, 0x8
     bl fn_800A4228
     cmpwi r3, 0x0
-    beq lbl_fn_8036E170_00001468
+    beq lbl_wpad_accel_updateOrientation_00001468
     li r3, 0x0
-    b lbl_fn_8036E170_0000146C
-lbl_fn_8036E170_00001468:
+    b lbl_wpad_accel_updateOrientation_0000146C
+lbl_wpad_accel_updateOrientation_00001468:
     li r3, 0x1
-lbl_fn_8036E170_0000146C:
+lbl_wpad_accel_updateOrientation_0000146C:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)

@@ -14,7 +14,7 @@ extern void fn_80097D7C(void);
 extern void fn_80097E80(void);
 extern void fn_800A56A8(void);
 extern void fn_8012111C(void);
-extern void fn_801231D0(void);
+extern void magic_dispatchActionCommand(void);
 extern void quest_checkCondition(void);
 extern void fn_80378D34(void);
 extern void fn_8037F744(void);
@@ -2787,7 +2787,7 @@ lbl_fn_803792F0_000027E0:
     lwz r3, lbl_8087F0A8
     li r4, 0x0
     addi r3, r3, 0x48c
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
     beq lbl_fn_803792F0_00002840
     lwz r0, lbl_8087F610
@@ -2811,7 +2811,7 @@ lbl_fn_803792F0_00002840:
     lwz r3, lbl_8087F0A8
     li r4, 0x0
     addi r3, r3, 0x48c
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
     bne lbl_fn_803792F0_00002894
     lwz r0, lbl_8087F610

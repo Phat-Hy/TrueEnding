@@ -37,7 +37,7 @@ extern void fn_8020F248(void);
 extern void fn_8020F84C(void);
 extern void fn_8020FDEC(void);
 extern void fn_80210244(void);
-extern void fn_80210ACC(void);
+extern void event_processScriptAction(void);
 extern void fn_802130BC(void);
 extern void fn_8021414C(void);
 extern void fn_802144A8(void);
@@ -1871,7 +1871,7 @@ void fn_80207F80(void)
     fn_8020FDEC();
     fn_80217E18();
     fn_8021996C();
-    fn_80210ACC();
+    event_processScriptAction();
     fn_8020AFF4();
     fn_80216CD0();
     fn_8020F130();

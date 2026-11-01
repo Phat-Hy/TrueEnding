@@ -13,7 +13,7 @@ extern void fn_800A56A8(void);
 extern void fn_800A58D0(void);
 extern void fn_801002DC(void);
 extern void fn_80116BD4(void);
-extern void fn_801231D0(void);
+extern void magic_dispatchActionCommand(void);
 extern void fn_801240B4(void);
 extern void world_getGlobalFlag(void);
 extern void fn_80383F7C(void);
@@ -203,7 +203,7 @@ lbl_fn_80385B48_000001B8:
     lwz r3, lbl_8087F0A8
     li r4, 0x24
     addi r3, r3, 0x48c
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
     bne lbl_fn_80385B48_000001F0
     li r31, 0x1
@@ -452,7 +452,7 @@ lbl_fn_80385B48_000004C8:
     lwz r3, lbl_8087F0A8
     li r4, 0x24
     addi r3, r3, 0x48c
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
     beq lbl_fn_80385B48_0000060C
     lwz r3, lbl_8087F048

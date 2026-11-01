@@ -68,7 +68,7 @@ extern u32 lbl_80882EEC;
 
 /* Function declarations */
 void fn_80210AC4(void);
-void fn_80210ACC(void);
+void event_processScriptAction(void);
 void fn_80211244(void);
 void fn_80211480(void);
 void fn_802114D8(void);
@@ -88,7 +88,7 @@ asm void fn_80210AC4(void)
     blr
 }
 
-asm void fn_80210ACC(void)
+asm void event_processScriptAction(void)
 {
     nofralloc
     stwu r1, -0x690(r1)
@@ -139,12 +139,12 @@ asm void fn_80210ACC(void)
     addi r4, r4, 0x15
     bl fn_80682428
     cmpwi r3, 0x0
-    bne lbl_fn_80210ACC_000000DC
+    bne lbl_event_processScriptAction_000000DC
     addi r3, r1, 0x14
     bl fn_8005B3CC
     bl fn_80684600
     mr r21, r3
-lbl_fn_80210ACC_000000DC:
+lbl_event_processScriptAction_000000DC:
     addi r3, r1, 0x14
     bl fn_8005B5F8
     li r0, 0x0
@@ -153,22 +153,22 @@ lbl_fn_80210ACC_000000DC:
     addi r19, r19, lbl_8073FA60@l
     stw r0, 0xc(r1)
     stw r0, 0x8(r1)
-    b lbl_fn_80210ACC_00000124
-lbl_fn_80210ACC_00000100:
+    b lbl_event_processScriptAction_00000124
+lbl_event_processScriptAction_00000100:
     addi r3, r1, 0x14
     bl fn_8005B3CC
     addi r4, r19, 0x1d
     bl fn_80682428
     cmpwi r3, 0x0
-    beq lbl_fn_80210ACC_00000124
+    beq lbl_event_processScriptAction_00000124
     lwz r3, lbl_8087F224
     addi r0, r3, 0x1
     stw r0, lbl_8087F224
-lbl_fn_80210ACC_00000124:
+lbl_event_processScriptAction_00000124:
     addi r3, r1, 0x14
     bl fn_8005B5F8
     cmpwi r3, 0x0
-    bne lbl_fn_80210ACC_00000100
+    bne lbl_event_processScriptAction_00000100
     lwz r3, lbl_8087F224
     addi r0, r3, 0x100
     stw r0, lbl_8087F224
@@ -211,8 +211,8 @@ lbl_fn_80210ACC_00000124:
     li r29, 0x64
     lis r30, lbl_8073FA10@ha
     lis r31, lbl_8073FA30@ha
-    b lbl_fn_80210ACC_00000704
-lbl_fn_80210ACC_000001E0:
+    b lbl_event_processScriptAction_00000704
+lbl_event_processScriptAction_000001E0:
     lwz r0, lbl_8087F220
     mr r5, r21
     addi r4, r1, 0x14
@@ -288,40 +288,40 @@ lbl_fn_80210ACC_000001E0:
     mr r25, r3
     addi r17, r30, lbl_8073FA10@l
     li r18, 0x0
-lbl_fn_80210ACC_0000030C:
+lbl_event_processScriptAction_0000030C:
     lwz r4, 0x0(r17)
     mr r3, r25
     bl fn_80682428
     cmpwi r3, 0x0
-    bne lbl_fn_80210ACC_00000324
-    b lbl_fn_80210ACC_00000338
-lbl_fn_80210ACC_00000324:
+    bne lbl_event_processScriptAction_00000324
+    b lbl_event_processScriptAction_00000338
+lbl_event_processScriptAction_00000324:
     addi r18, r18, 0x1
     addi r17, r17, 0x4
     cmpwi r18, 0x6
-    blt lbl_fn_80210ACC_0000030C
+    blt lbl_event_processScriptAction_0000030C
     li r18, 0x0
-lbl_fn_80210ACC_00000338:
+lbl_event_processScriptAction_00000338:
     stb r18, 0xc0(r19)
     addi r3, r1, 0x14
     bl fn_8005B3CC
     mr r18, r3
     addi r17, r31, lbl_8073FA30@l
     li r25, 0x0
-lbl_fn_80210ACC_00000350:
+lbl_event_processScriptAction_00000350:
     lwz r4, 0x0(r17)
     mr r3, r18
     bl fn_80682428
     cmpwi r3, 0x0
-    bne lbl_fn_80210ACC_00000368
-    b lbl_fn_80210ACC_0000037C
-lbl_fn_80210ACC_00000368:
+    bne lbl_event_processScriptAction_00000368
+    b lbl_event_processScriptAction_0000037C
+lbl_event_processScriptAction_00000368:
     addi r25, r25, 0x1
     addi r17, r17, 0x4
     cmpwi r25, 0x2
-    blt lbl_fn_80210ACC_00000350
+    blt lbl_event_processScriptAction_00000350
     li r25, 0x0
-lbl_fn_80210ACC_0000037C:
+lbl_event_processScriptAction_0000037C:
     stb r25, 0xc1(r19)
     addi r3, r1, 0x14
     bl fn_8005B3CC
@@ -336,21 +336,21 @@ lbl_fn_80210ACC_0000037C:
     addi r0, r19, 0xcc
     mr r18, r3
     cmplw r3, r0
-    beq lbl_fn_80210ACC_000003D0
+    beq lbl_event_processScriptAction_000003D0
     bl strlen
     mr r5, r3
     mr r4, r18
     addi r3, r19, 0xcc
     addi r5, r5, 0x1
     bl memcpy
-lbl_fn_80210ACC_000003D0:
+lbl_event_processScriptAction_000003D0:
     addi r3, r19, 0xcc
     bl strlen
     lbzx r0, r24, r3
     extsb r0, r0
     cntlzw r0, r0
     srwi. r0, r0, 5
-    beq lbl_fn_80210ACC_0000043C
+    beq lbl_event_processScriptAction_0000043C
     add r3, r19, r3
     addi r5, r19, 0xcc
     addi r3, r3, 0xcc
@@ -358,25 +358,25 @@ lbl_fn_80210ACC_000003D0:
     subf r0, r5, r3
     mtctr r0
     cmplw r5, r3
-    beq lbl_fn_80210ACC_00000438
-lbl_fn_80210ACC_0000040C:
+    beq lbl_event_processScriptAction_00000438
+lbl_event_processScriptAction_0000040C:
     lbz r3, 0x0(r5)
     lbz r0, 0x0(r4)
     extsb r3, r3
     extsb r0, r0
     cmpw r3, r0
-    beq lbl_fn_80210ACC_0000042C
+    beq lbl_event_processScriptAction_0000042C
     li r0, 0x0
-    b lbl_fn_80210ACC_0000043C
-lbl_fn_80210ACC_0000042C:
+    b lbl_event_processScriptAction_0000043C
+lbl_event_processScriptAction_0000042C:
     addi r5, r5, 0x1
     addi r4, r4, 0x1
-    bdnz lbl_fn_80210ACC_0000040C
-lbl_fn_80210ACC_00000438:
+    bdnz lbl_event_processScriptAction_0000040C
+lbl_event_processScriptAction_00000438:
     li r0, 0x1
-lbl_fn_80210ACC_0000043C:
+lbl_event_processScriptAction_0000043C:
     cmpwi r0, 0x0
-    bne lbl_fn_80210ACC_000004B8
+    bne lbl_event_processScriptAction_000004B8
     addi r25, r26, 0x20
     addi r3, r19, 0xcc
     bl strlen
@@ -384,55 +384,55 @@ lbl_fn_80210ACC_0000043C:
     extsb r0, r0
     cntlzw r0, r0
     srwi. r0, r0, 5
-    beq lbl_fn_80210ACC_000004B0
+    beq lbl_event_processScriptAction_000004B0
     add r3, r19, r3
     addi r4, r19, 0xcc
     addi r3, r3, 0xcc
     subf r0, r4, r3
     mtctr r0
     cmplw r4, r3
-    beq lbl_fn_80210ACC_000004AC
-lbl_fn_80210ACC_00000480:
+    beq lbl_event_processScriptAction_000004AC
+lbl_event_processScriptAction_00000480:
     lbz r3, 0x0(r4)
     lbz r0, 0x0(r25)
     extsb r3, r3
     extsb r0, r0
     cmpw r3, r0
-    beq lbl_fn_80210ACC_000004A0
+    beq lbl_event_processScriptAction_000004A0
     li r0, 0x0
-    b lbl_fn_80210ACC_000004B0
-lbl_fn_80210ACC_000004A0:
+    b lbl_event_processScriptAction_000004B0
+lbl_event_processScriptAction_000004A0:
     addi r4, r4, 0x1
     addi r25, r25, 0x1
-    bdnz lbl_fn_80210ACC_00000480
-lbl_fn_80210ACC_000004AC:
+    bdnz lbl_event_processScriptAction_00000480
+lbl_event_processScriptAction_000004AC:
     li r0, 0x1
-lbl_fn_80210ACC_000004B0:
+lbl_event_processScriptAction_000004B0:
     cmpwi r0, 0x0
-    beq lbl_fn_80210ACC_000004BC
-lbl_fn_80210ACC_000004B8:
+    beq lbl_event_processScriptAction_000004BC
+lbl_event_processScriptAction_000004B8:
     stb r27, 0xcc(r19)
-lbl_fn_80210ACC_000004BC:
+lbl_event_processScriptAction_000004BC:
     addi r3, r1, 0x14
     bl fn_8005B3CC
     addi r0, r19, 0xdc
     mr r18, r3
     cmplw r3, r0
-    beq lbl_fn_80210ACC_000004EC
+    beq lbl_event_processScriptAction_000004EC
     bl strlen
     mr r5, r3
     mr r4, r18
     addi r3, r19, 0xdc
     addi r5, r5, 0x1
     bl memcpy
-lbl_fn_80210ACC_000004EC:
+lbl_event_processScriptAction_000004EC:
     addi r3, r19, 0xdc
     bl strlen
     lbzx r0, r24, r3
     extsb r0, r0
     cntlzw r0, r0
     srwi. r0, r0, 5
-    beq lbl_fn_80210ACC_00000558
+    beq lbl_event_processScriptAction_00000558
     add r3, r19, r3
     addi r5, r19, 0xdc
     addi r3, r3, 0xdc
@@ -440,25 +440,25 @@ lbl_fn_80210ACC_000004EC:
     subf r0, r5, r3
     mtctr r0
     cmplw r5, r3
-    beq lbl_fn_80210ACC_00000554
-lbl_fn_80210ACC_00000528:
+    beq lbl_event_processScriptAction_00000554
+lbl_event_processScriptAction_00000528:
     lbz r3, 0x0(r5)
     lbz r0, 0x0(r4)
     extsb r3, r3
     extsb r0, r0
     cmpw r3, r0
-    beq lbl_fn_80210ACC_00000548
+    beq lbl_event_processScriptAction_00000548
     li r0, 0x0
-    b lbl_fn_80210ACC_00000558
-lbl_fn_80210ACC_00000548:
+    b lbl_event_processScriptAction_00000558
+lbl_event_processScriptAction_00000548:
     addi r5, r5, 0x1
     addi r4, r4, 0x1
-    bdnz lbl_fn_80210ACC_00000528
-lbl_fn_80210ACC_00000554:
+    bdnz lbl_event_processScriptAction_00000528
+lbl_event_processScriptAction_00000554:
     li r0, 0x1
-lbl_fn_80210ACC_00000558:
+lbl_event_processScriptAction_00000558:
     cmpwi r0, 0x0
-    bne lbl_fn_80210ACC_000005D4
+    bne lbl_event_processScriptAction_000005D4
     addi r25, r26, 0x20
     addi r3, r19, 0xdc
     bl strlen
@@ -466,38 +466,38 @@ lbl_fn_80210ACC_00000558:
     extsb r0, r0
     cntlzw r0, r0
     srwi. r0, r0, 5
-    beq lbl_fn_80210ACC_000005CC
+    beq lbl_event_processScriptAction_000005CC
     add r3, r19, r3
     addi r4, r19, 0xdc
     addi r3, r3, 0xdc
     subf r0, r4, r3
     mtctr r0
     cmplw r4, r3
-    beq lbl_fn_80210ACC_000005C8
-lbl_fn_80210ACC_0000059C:
+    beq lbl_event_processScriptAction_000005C8
+lbl_event_processScriptAction_0000059C:
     lbz r3, 0x0(r4)
     lbz r0, 0x0(r25)
     extsb r3, r3
     extsb r0, r0
     cmpw r3, r0
-    beq lbl_fn_80210ACC_000005BC
+    beq lbl_event_processScriptAction_000005BC
     li r0, 0x0
-    b lbl_fn_80210ACC_000005CC
-lbl_fn_80210ACC_000005BC:
+    b lbl_event_processScriptAction_000005CC
+lbl_event_processScriptAction_000005BC:
     addi r4, r4, 0x1
     addi r25, r25, 0x1
-    bdnz lbl_fn_80210ACC_0000059C
-lbl_fn_80210ACC_000005C8:
+    bdnz lbl_event_processScriptAction_0000059C
+lbl_event_processScriptAction_000005C8:
     li r0, 0x1
-lbl_fn_80210ACC_000005CC:
+lbl_event_processScriptAction_000005CC:
     cmpwi r0, 0x0
-    beq lbl_fn_80210ACC_000005D8
-lbl_fn_80210ACC_000005D4:
+    beq lbl_event_processScriptAction_000005D8
+lbl_event_processScriptAction_000005D4:
     stb r27, 0xdc(r19)
-lbl_fn_80210ACC_000005D8:
+lbl_event_processScriptAction_000005D8:
     mr r18, r19
     li r17, 0x0
-lbl_fn_80210ACC_000005E0:
+lbl_event_processScriptAction_000005E0:
     addi r3, r1, 0x14
     bl fn_8005B3CC
     bl fn_80684600
@@ -521,7 +521,7 @@ lbl_fn_80210ACC_000005E0:
     stw r3, 0xfc(r18)
     cmpwi r17, 0x2
     addi r18, r18, 0x14
-    blt lbl_fn_80210ACC_000005E0
+    blt lbl_event_processScriptAction_000005E0
     addi r3, r1, 0x14
     bl fn_8005B3CC
     bl fn_80684600
@@ -535,21 +535,21 @@ lbl_fn_80210ACC_000005E0:
     addi r0, r19, 0x114
     mr r18, r3
     cmplw r3, r0
-    beq lbl_fn_80210ACC_00000690
+    beq lbl_event_processScriptAction_00000690
     bl strlen
     mr r5, r3
     mr r4, r18
     addi r3, r19, 0x114
     addi r5, r5, 0x1
     bl memcpy
-lbl_fn_80210ACC_00000690:
+lbl_event_processScriptAction_00000690:
     addi r3, r1, 0x14
     bl fn_8005B3CC
     bl fn_80684600
     stw r3, 0x130(r19)
     mr r18, r19
     li r17, 0x0
-lbl_fn_80210ACC_000006A8:
+lbl_event_processScriptAction_000006A8:
     addi r3, r1, 0x14
     bl fn_8005B3CC
     bl fn_80684600
@@ -562,7 +562,7 @@ lbl_fn_80210ACC_000006A8:
     cmpwi r17, 0x4
     stb r3, 0x12c(r4)
     addi r18, r18, 0x4
-    blt lbl_fn_80210ACC_000006A8
+    blt lbl_event_processScriptAction_000006A8
     addi r3, r1, 0x14
     bl fn_8005B3CC
     bl fn_80684600
@@ -573,18 +573,18 @@ lbl_fn_80210ACC_000006A8:
     sth r3, 0xbe(r19)
     addi r23, r23, 0x138
     addi r20, r20, 0x1
-lbl_fn_80210ACC_00000704:
+lbl_event_processScriptAction_00000704:
     addi r3, r1, 0x14
     bl fn_8005B5F8
     cmpwi r3, 0x0
-    bne lbl_fn_80210ACC_000001E0
+    bne lbl_event_processScriptAction_000001E0
     mulli r7, r20, 0x138
     li r6, 0x1
     li r5, -0x1
     li r4, 0xa
     li r3, 0x0
-    b lbl_fn_80210ACC_00000750
-lbl_fn_80210ACC_0000072C:
+    b lbl_event_processScriptAction_00000750
+lbl_event_processScriptAction_0000072C:
     lwz r0, lbl_8087F220
     addi r20, r20, 0x1
     stbx r6, r7, r0
@@ -594,10 +594,10 @@ lbl_fn_80210ACC_0000072C:
     sth r4, 0xbc(r8)
     stb r3, 0xcc(r8)
     stb r3, 0xdc(r8)
-lbl_fn_80210ACC_00000750:
+lbl_event_processScriptAction_00000750:
     lwz r0, lbl_8087F224
     cmpw r20, r0
-    blt lbl_fn_80210ACC_0000072C
+    blt lbl_event_processScriptAction_0000072C
     mr r3, r22
     li r4, 0x0
     bl fn_8006BB6C

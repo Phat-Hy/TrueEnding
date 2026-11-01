@@ -30,7 +30,7 @@ extern void fn_80108C10(void);
 extern void fn_80109828(void);
 extern void fn_801125F8(void);
 extern void fn_80121F00(void);
-extern void fn_80122550(void);
+extern void magic_getOffset6C(void);
 extern void fn_8012AFE8(void);
 extern void fn_80139550(void);
 extern void fn_80139F24(void);
@@ -620,7 +620,7 @@ lbl_fn_8028CB38_00000644:
     bl fn_800FAB80
 lbl_fn_8028CB38_00000740:
     bl fn_80121F00
-    bl fn_80122550
+    bl magic_getOffset6C
     lfs f1, lbl_80883AA0
     li r4, 0x1
     fmr f2, f1

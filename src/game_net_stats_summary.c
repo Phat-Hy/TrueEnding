@@ -28,7 +28,7 @@ extern void fn_800C3124(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
 extern void fn_800DC6B4(void);
-extern void fn_801231D0(void);
+extern void magic_dispatchActionCommand(void);
 extern void boss_updatePhaseState(void);
 extern void fn_801F3FF8(void);
 extern void fn_801FEC74(void);
@@ -460,7 +460,7 @@ lbl_fn_8053F1B8_000004C8:
     lwz r3, lbl_8087F0A8
     li r4, 0x0
     addi r3, r3, 0x48c
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
     beq lbl_fn_8053F1B8_00000560
     lwz r4, 0x2c0(r31)

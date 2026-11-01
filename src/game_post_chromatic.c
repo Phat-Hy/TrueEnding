@@ -44,7 +44,7 @@ extern void fn_800F52F0(void);
 extern void fn_800F8548(void);
 extern void fn_800F8574(void);
 extern void fn_800F8C6C(void);
-extern void fn_801231D0(void);
+extern void magic_dispatchActionCommand(void);
 extern void boss_updatePhaseState(void);
 extern void fn_80144710(void);
 extern void fn_80145334(void);
@@ -1109,7 +1109,7 @@ lbl_fn_802CD73C_00000DB8:
     lwz r3, lbl_8087F0A8
     li r4, 0x2
     addi r3, r3, 0x48c
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
     beq lbl_fn_802CD73C_00000EAC
     li r0, 0x0

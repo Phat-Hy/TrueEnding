@@ -43,7 +43,7 @@ extern void fn_80116E7C(void);
 extern void fn_80119ECC(void);
 extern void fn_8011F87C(void);
 extern void fn_8011FB98(void);
-extern void fn_801231D0(void);
+extern void magic_dispatchActionCommand(void);
 extern void fn_80123C7C(void);
 extern void fn_801240B4(void);
 extern void fn_8012AFE8(void);
@@ -74,7 +74,7 @@ extern void fn_8036B44C(void);
 extern void fn_8036CA60(void);
 extern void fn_8036CC90(void);
 extern void fn_8036CFA4(void);
-extern void fn_8036E170(void);
+extern void wpad_accel_updateOrientation(void);
 extern void fn_8036E494(void);
 extern void fn_8036EE0C(void);
 extern void fn_8036FD4C(void);
@@ -2599,7 +2599,7 @@ lbl_world_Manager_draw_0000218C:
     stw r0, 0x5760(r28)
     beq lbl_world_Manager_draw_000021C4
     mr r3, r28
-    bl fn_8036E170
+    bl wpad_accel_updateOrientation
     cmpwi r3, 0x0
     beq lbl_world_Manager_draw_000021BC
     mr r3, r28
@@ -2686,7 +2686,7 @@ lbl_world_Manager_draw_000022B8:
     lwz r3, lbl_8087F0A8
     li r4, 0x0
     addi r3, r3, 0x48c
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
     beq lbl_world_Manager_draw_00002348
     lwz r0, 0x56f4(r28)
@@ -2855,7 +2855,7 @@ lbl_world_Manager_draw_00002540:
     lwz r3, lbl_8087F0A8
     li r4, 0xb
     addi r3, r3, 0x48c
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
     beq lbl_world_Manager_draw_000025B0
     lwz r3, 0x5590(r28)
@@ -2909,7 +2909,7 @@ lbl_world_Manager_draw_00002614:
     lwz r3, lbl_8087F0A8
     li r4, 0x2d
     addi r3, r3, 0x48c
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
     beq lbl_world_Manager_draw_0000265C
     lwz r0, 0x56f0(r28)
@@ -3117,7 +3117,7 @@ lbl_world_Manager_draw_000028F0:
     lwz r3, lbl_8087F0A8
     li r4, 0x28
     addi r3, r3, 0x48c
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
     beq lbl_world_Manager_draw_00002A90
     lwz r3, lbl_8087F540
@@ -3129,7 +3129,7 @@ lbl_world_Manager_draw_0000295C:
     lwz r3, lbl_8087F0A8
     li r4, 0x27
     addi r3, r3, 0x48c
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
     beq lbl_world_Manager_draw_00002A90
     li r0, 0x78
@@ -3143,7 +3143,7 @@ lbl_world_Manager_draw_00002980:
     lwz r3, lbl_8087F0A8
     li r4, 0x27
     addi r3, r3, 0x48c
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
     beq lbl_world_Manager_draw_000029C4
 lbl_world_Manager_draw_000029A8:
@@ -3196,7 +3196,7 @@ lbl_world_Manager_draw_00002A4C:
     lwz r3, lbl_8087F0A8
     li r4, 0x27
     addi r3, r3, 0x48c
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
     beq lbl_world_Manager_draw_00002A70
     li r0, 0x1
@@ -3517,11 +3517,11 @@ lbl_world_Manager_draw_00002F18:
     lwz r3, lbl_8087F0A8
     li r4, 0x10
     addi r3, r3, 0x48c
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
     beq lbl_world_Manager_draw_00002F68
     mr r3, r28
-    bl fn_8036E170
+    bl wpad_accel_updateOrientation
     cmpwi r3, 0x0
     beq lbl_world_Manager_draw_00002F68
     lwz r3, 0x5624(r28)

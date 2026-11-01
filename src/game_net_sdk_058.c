@@ -58,7 +58,7 @@ extern void fn_80710940(void);
 extern void fn_807109E0(void);
 extern void fn_807109F0(void);
 extern void fn_80711390(void);
-extern void fn_80711440(void);
+extern void net_alarm_scheduleTimeout(void);
 extern void fn_807114E0(void);
 extern void fn_80711770(void);
 extern void fn_80717A40(void);
@@ -711,7 +711,7 @@ lbl_fn_80718540_0000074C:
     bl fn_80704780
 lbl_fn_80718540_00000758:
     bl fn_80711390
-    bl fn_80711440
+    bl net_alarm_scheduleTimeout
     lwz r3, 0xc(r26)
     lwz r0, 0x4(r26)
     add r30, r27, r3

@@ -18,7 +18,7 @@ extern void fn_80047DCC(void);
 extern void fn_8004C9B4(void);
 extern void fn_8004D124(void);
 extern void fn_8004D258(void);
-extern void fn_8005DD60(void);
+extern void party_initTextures(void);
 extern void fn_8005DED8(void);
 extern void fn_800696C8(void);
 extern void fn_80069E50(void);
@@ -85,7 +85,7 @@ extern void fn_8057E8C8(void);
 extern void fn_8057EAF4(void);
 extern void fn_805A6B58(void);
 extern void fn_805A6BD8(void);
-extern void fn_805A6BDC(void);
+extern void archive_mountCheckStatus(void);
 extern void fn_805A6D14(void);
 extern void OSInitMutex(void);
 extern void VISetNextFrameBuffer(void);
@@ -697,7 +697,7 @@ lbl_main_000006C0:
     subfe r0, r5, r3
     stw r0, 0x10(r15)
     lwz r3, lbl_8087F534
-    bl fn_805A6BDC
+    bl archive_mountCheckStatus
     lwz r4, lbl_8087F0A8
     lwz r3, lbl_8087EEE0
     lwz r4, 0x30(r4)
@@ -1709,7 +1709,7 @@ lbl_taskManager_initSystem_00001464:
     lwz r3, 0xdc(r1)
     bl dtor_80084684
 lbl_taskManager_initSystem_00001594:
-    bl fn_8005DD60
+    bl party_initTextures
     lis r4, lbl_8075626C@ha
     li r0, 0x0
     addi r4, r4, lbl_8075626C@l

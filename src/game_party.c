@@ -60,7 +60,7 @@ void atn_CosinusCurve_getDerivative(void);
 void atn_CosinusCurve_getDuration(void);
 void atn_SinusCurve_getDerivative(void);
 void atn_SinusCurve_getDuration(void);
-void fn_8005DD60(void);
+void party_initTextures(void);
 void atn_DrawHelper_destructor(void);
 void fn_8005DED8(void);
 void fn_8005DF90(void);
@@ -1864,7 +1864,7 @@ asm void atn_SinusCurve_getDuration(void)
     blr
 }
 
-asm void fn_8005DD60(void)
+asm void party_initTextures(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1873,7 +1873,7 @@ asm void fn_8005DD60(void)
     stw r31, 0xc(r1)
     lwz r0, lbl_8087EEB0
     cmpwi r0, 0x0
-    bne lbl_fn_8005DD60_00001888
+    bne lbl_party_initTextures_00001888
     lis r5, lbl_80731340@ha
     li r3, 0x504
     addi r5, r5, lbl_80731340@l
@@ -1883,7 +1883,7 @@ asm void fn_8005DD60(void)
     bl fn_80084320
     cmpwi r3, 0x0
     mr r31, r3
-    beq lbl_fn_8005DD60_00001884
+    beq lbl_party_initTextures_00001884
     lis r4, lbl_807777C0@ha
     li r0, 0x0
     addi r4, r4, lbl_807777C0@l
@@ -1913,9 +1913,9 @@ asm void fn_8005DD60(void)
     stfs f0, 0xcc(r31)
     stfs f0, 0xb8(r31)
     stfs f0, 0xa4(r31)
-lbl_fn_8005DD60_00001884:
+lbl_party_initTextures_00001884:
     stw r31, lbl_8087EEB0
-lbl_fn_8005DD60_00001888:
+lbl_party_initTextures_00001888:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0

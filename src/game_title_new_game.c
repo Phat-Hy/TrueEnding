@@ -20,7 +20,7 @@ extern void fn_8011F8F4(void);
 extern void fn_8011F91C(void);
 extern void fn_8011FC10(void);
 extern void fn_8011FE3C(void);
-extern void fn_801231D0(void);
+extern void magic_dispatchActionCommand(void);
 extern void boss_updatePhaseState(void);
 extern void fn_8036554C(void);
 extern void world_getGlobalFlag(void);
@@ -2202,7 +2202,7 @@ lbl_fn_803AF83C_00001DA8:
     lwz r3, lbl_8087F0A8
     li r4, 0x0
     addi r3, r3, 0x48c
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
 lbl_fn_803AF83C_00001DB8:
     cmpwi r3, 0x0
     beq lbl_fn_803AF83C_000024E0

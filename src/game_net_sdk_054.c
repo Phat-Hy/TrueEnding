@@ -118,7 +118,7 @@ void fn_807112D0(void);
 void fn_80711320(void);
 void fn_80711390(void);
 void fn_80711430(void);
-void fn_80711440(void);
+void net_alarm_scheduleTimeout(void);
 void fn_807114E0(void);
 void net_resetAllSockets(void);
 void fn_80711630(void);
@@ -2011,7 +2011,7 @@ asm void fn_80711430(void)
     blr
 }
 
-asm void fn_80711440(void)
+asm void net_alarm_scheduleTimeout(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -2021,7 +2021,7 @@ asm void fn_80711440(void)
     mr r31, r3
     lbz r0, 0x0(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_80711440_000019FC
+    bne lbl_net_alarm_scheduleTimeout_000019FC
     addi r3, r3, 0x8
     bl OSCreateAlarm
     bl OSGetTime
@@ -2048,7 +2048,7 @@ asm void fn_80711440(void)
     bl fn_805EC3B0
     li r0, 0x1
     stb r0, 0x0(r31)
-lbl_fn_80711440_000019FC:
+lbl_net_alarm_scheduleTimeout_000019FC:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0

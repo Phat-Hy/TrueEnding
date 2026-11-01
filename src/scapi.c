@@ -67,7 +67,7 @@ void fn_80624C70(void);
 void fn_80624CD0(void);
 void fn_80624D30(void);
 void fn_80624D40(void);
-void fn_80624D90(void);
+void scapi_computeChecksumBlock(void);
 void fn_80624F00(void);
 void fn_80624F90(void);
 void fn_80624FD0(void);
@@ -449,7 +449,7 @@ lbl_fn_80624D40_000003F8:
     blr
 }
 
-asm void fn_80624D90(void)
+asm void scapi_computeChecksumBlock(void)
 {
     nofralloc
     lis r6, 0x73b6
@@ -460,21 +460,21 @@ asm void fn_80624D90(void)
     li r6, 0x0
     li r10, 0x0
     mtctr r0
-lbl_fn_80624D90_00000430:
+lbl_scapi_computeChecksumBlock_00000430:
     addis r8, r10, 0x8000
     lbz r8, 0x3800(r8)
     cmpwi r8, 0x0
-    beq lbl_fn_80624D90_00000484
+    beq lbl_scapi_computeChecksumBlock_00000484
     lbzx r7, r3, r12
     xor r0, r8, r11
     clrlwi r8, r0, 24
     extsb. r0, r7
-    bne lbl_fn_80624D90_00000464
+    bne lbl_scapi_computeChecksumBlock_00000464
     cmplwi r8, 0x3d
-    bne lbl_fn_80624D90_00000464
+    bne lbl_scapi_computeChecksumBlock_00000464
     li r9, 0x1
-    b lbl_fn_80624D90_000004FC
-lbl_fn_80624D90_00000464:
+    b lbl_scapi_computeChecksumBlock_000004FC
+lbl_scapi_computeChecksumBlock_00000464:
     extsb r7, r7
     addi r0, r12, 0x1
     xor r7, r8, r7
@@ -483,7 +483,7 @@ lbl_fn_80624D90_00000464:
     extrwi r7, r7, 1, 26
     neg r7, r7
     and r12, r0, r7
-lbl_fn_80624D90_00000484:
+lbl_scapi_computeChecksumBlock_00000484:
     addi r10, r10, 0x1
     srwi r7, r11, 31
     addis r8, r10, 0x8000
@@ -491,17 +491,17 @@ lbl_fn_80624D90_00000484:
     lbz r8, 0x3800(r8)
     or r11, r7, r0
     cmpwi r8, 0x0
-    beq lbl_fn_80624D90_000004E8
+    beq lbl_scapi_computeChecksumBlock_000004E8
     lbzx r7, r3, r12
     xor r0, r8, r11
     clrlwi r8, r0, 24
     extsb. r0, r7
-    bne lbl_fn_80624D90_000004C8
+    bne lbl_scapi_computeChecksumBlock_000004C8
     cmplwi r8, 0x3d
-    bne lbl_fn_80624D90_000004C8
+    bne lbl_scapi_computeChecksumBlock_000004C8
     li r9, 0x1
-    b lbl_fn_80624D90_000004FC
-lbl_fn_80624D90_000004C8:
+    b lbl_scapi_computeChecksumBlock_000004FC
+lbl_scapi_computeChecksumBlock_000004C8:
     extsb r7, r7
     addi r0, r12, 0x1
     xor r7, r8, r7
@@ -510,50 +510,50 @@ lbl_fn_80624D90_000004C8:
     extrwi r7, r7, 1, 26
     neg r7, r7
     and r12, r0, r7
-lbl_fn_80624D90_000004E8:
+lbl_scapi_computeChecksumBlock_000004E8:
     srwi r7, r11, 31
     slwi r0, r11, 1
     or r11, r7, r0
     addi r10, r10, 0x1
-    bdnz lbl_fn_80624D90_00000430
-lbl_fn_80624D90_000004FC:
+    bdnz lbl_scapi_computeChecksumBlock_00000430
+lbl_scapi_computeChecksumBlock_000004FC:
     cmpwi r9, 0x0
-    beq lbl_fn_80624D90_00000578
+    beq lbl_scapi_computeChecksumBlock_00000578
     addi r10, r10, 0x1
-    b lbl_fn_80624D90_00000568
+    b lbl_scapi_computeChecksumBlock_00000568
     nop
-lbl_fn_80624D90_00000510:
+lbl_scapi_computeChecksumBlock_00000510:
     addis r3, r10, 0x8000
     srwi r7, r11, 31
     lbz r3, 0x3800(r3)
     slwi r0, r11, 1
     or r11, r7, r0
     cmpwi r3, 0x0
-    beq lbl_fn_80624D90_00000548
+    beq lbl_scapi_computeChecksumBlock_00000548
     xor r0, r3, r11
     clrlwi r3, r0, 24
     cmplwi r3, 0xd
-    beq lbl_fn_80624D90_00000544
+    beq lbl_scapi_computeChecksumBlock_00000544
     cmplwi r3, 0xa
-    bne lbl_fn_80624D90_00000548
-lbl_fn_80624D90_00000544:
+    bne lbl_scapi_computeChecksumBlock_00000548
+lbl_scapi_computeChecksumBlock_00000544:
     li r3, 0x0
-lbl_fn_80624D90_00000548:
+lbl_scapi_computeChecksumBlock_00000548:
     cmpwi r3, 0x0
     stb r3, 0x0(r4)
     addi r6, r6, 0x1
     addi r4, r4, 0x1
-    bne lbl_fn_80624D90_00000564
+    bne lbl_scapi_computeChecksumBlock_00000564
     li r3, 0x1
     blr
-lbl_fn_80624D90_00000564:
+lbl_scapi_computeChecksumBlock_00000564:
     addi r10, r10, 0x1
-lbl_fn_80624D90_00000568:
+lbl_scapi_computeChecksumBlock_00000568:
     cmplwi r10, 0x100
-    bge lbl_fn_80624D90_00000578
+    bge lbl_scapi_computeChecksumBlock_00000578
     cmplw r6, r5
-    blt lbl_fn_80624D90_00000510
-lbl_fn_80624D90_00000578:
+    blt lbl_scapi_computeChecksumBlock_00000510
+lbl_scapi_computeChecksumBlock_00000578:
     li r3, 0x0
     blr
 }
@@ -571,7 +571,7 @@ asm void fn_80624F00(void)
     stw r30, 0x18(r1)
     lis r30, lbl_807B3098@ha
     addi r30, r30, lbl_807B3098@l
-    bl fn_80624D90
+    bl scapi_computeChecksumBlock
     cmpwi r3, 0x0
     beq lbl_fn_80624F00_000005E8
     b lbl_fn_80624F00_000005D8
@@ -610,7 +610,7 @@ asm void fn_80624F90(void)
     la r4, lbl_80880150
     stw r0, 0x14(r1)
     li r5, 0x6
-    bl fn_80624D90
+    bl scapi_computeChecksumBlock
     cmpwi r3, 0x0
     li r3, 0x0
     beq lbl_fn_80624F90_0000063C
@@ -633,7 +633,7 @@ asm void fn_80624FD0(void)
     stw r31, 0x1c(r1)
     mr r31, r3
     la r3, lbl_8087EA58
-    bl fn_80624D90
+    bl scapi_computeChecksumBlock
     cmpwi r3, 0x0
     beq lbl_fn_80624FD0_000006A0
     mr r5, r31
@@ -668,7 +668,7 @@ asm void fn_80625040(void)
     stw r30, 0x18(r1)
     lis r30, lbl_807B30E0@ha
     addi r30, r30, lbl_807B30E0@l
-    bl fn_80624D90
+    bl scapi_computeChecksumBlock
     cmpwi r3, 0x0
     beq lbl_fn_80625040_00000728
     b lbl_fn_80625040_00000718

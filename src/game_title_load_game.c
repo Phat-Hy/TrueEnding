@@ -7,7 +7,7 @@ extern void _savegpr_14(void);
 extern void fn_8004ECC0(void);
 extern void fn_800BFAC8(void);
 extern void fn_800CB3A0(void);
-extern void fn_801231D0(void);
+extern void magic_dispatchActionCommand(void);
 extern void boss_updatePhaseState(void);
 extern void world_getGlobalFlag(void);
 extern void fn_8037F690(void);
@@ -567,7 +567,7 @@ lbl_fn_803B0808_00000730:
     lwz r3, lbl_8087F0A8
     li r4, 0x0
     addi r3, r3, 0x48c
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
 lbl_fn_803B0808_00000740:
     cmpwi r3, 0x0
     beq lbl_fn_803B0808_00000E68
@@ -1655,7 +1655,7 @@ lbl_fn_803B17C4_000016EC:
     lwz r3, lbl_8087F0A8
     li r4, 0x0
     addi r3, r3, 0x48c
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
 lbl_fn_803B17C4_000016FC:
     cmpwi r3, 0x0
     beq lbl_fn_803B17C4_00001E24

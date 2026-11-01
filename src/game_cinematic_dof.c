@@ -49,7 +49,7 @@ extern void fn_800F7FA0(void);
 extern void fn_800F7FA8(void);
 extern void fn_8011FC10(void);
 extern void fn_80121F00(void);
-extern void fn_80122550(void);
+extern void magic_getOffset6C(void);
 extern void fn_80129978(void);
 extern void fn_80129A48(void);
 extern void fn_8012D180(void);
@@ -1657,7 +1657,7 @@ lbl_fn_80339760_0000143C:
     cmpwi r0, 0x0
     bne lbl_fn_80339760_000014BC
     bl fn_80121F00
-    bl fn_80122550
+    bl magic_getOffset6C
     lfs f1, lbl_80885238
     li r4, 0x14
     lfs f2, lbl_8088525C

@@ -28,7 +28,7 @@ extern void fn_800FFE68(void);
 extern void fn_80108A54(void);
 extern void fn_8010CA34(void);
 extern void fn_8011E81C(void);
-extern void fn_801231D0(void);
+extern void magic_dispatchActionCommand(void);
 extern void fn_801237F0(void);
 extern void fn_801240B4(void);
 extern void fn_80134134(void);
@@ -899,7 +899,7 @@ lbl_fn_800E62AC_00000A98:
     lwz r3, lbl_8087F0A8
     li r4, 0x31
     addi r3, r3, 0x48c
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
     beq lbl_fn_800E62AC_00000DB8
     lwz r0, 0x55c(r25)
@@ -1346,7 +1346,7 @@ lbl_fn_800E62AC_0000113C:
     lwz r3, lbl_8087F0A8
     li r4, 0x6
     addi r3, r3, 0x48c
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
     beq lbl_fn_800E62AC_00001390
     lwz r0, 0x640(r25)
@@ -1383,7 +1383,7 @@ lbl_fn_800E62AC_000011B0:
     stw r0, 0x12a4(r25)
     lwz r3, lbl_8087F0A8
     addi r3, r3, 0x48c
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
     beq lbl_fn_800E62AC_00001390
     lfs f1, lbl_808812E4
@@ -1398,7 +1398,7 @@ lbl_fn_800E62AC_000011F8:
     lwz r3, lbl_8087F0A8
     li r4, 0x16
     addi r3, r3, 0x48c
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
     beq lbl_fn_800E62AC_00001220
     mr r3, r25
@@ -1414,7 +1414,7 @@ lbl_fn_800E62AC_00001238:
     lwz r3, lbl_8087F0A8
     li r4, 0x1e
     addi r3, r3, 0x48c
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
     beq lbl_fn_800E62AC_000012BC
     lwz r0, 0xfc4(r25)
@@ -1479,7 +1479,7 @@ lbl_fn_800E62AC_00001328:
     lwz r3, lbl_8087F0A8
     li r4, 0x16
     addi r3, r3, 0x48c
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
     beq lbl_fn_800E62AC_00001378
     cmpwi r28, 0x0
@@ -1490,7 +1490,7 @@ lbl_fn_800E62AC_00001350:
     lwz r3, lbl_8087F0A8
     li r4, 0x2
     addi r3, r3, 0x48c
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
     bne lbl_fn_800E62AC_00001378
 lbl_fn_800E62AC_00001368:

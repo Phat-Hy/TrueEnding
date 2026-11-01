@@ -27,7 +27,7 @@ extern void fn_80107168(void);
 extern void fn_80107208(void);
 extern void fn_80108A54(void);
 extern void fn_8010AB94(void);
-extern void fn_801231D0(void);
+extern void magic_dispatchActionCommand(void);
 extern void fn_801237F0(void);
 extern void fn_801240B4(void);
 extern void fn_8012F3D8(void);
@@ -175,7 +175,7 @@ lbl_fn_800E70EC_00000078:
     bne lbl_fn_800E70EC_0000014C
     addi r3, r31, 0x48c
     li r4, 0x4
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
     beq lbl_fn_800E70EC_0000014C
     lwz r0, 0x12a4(r29)
@@ -382,7 +382,7 @@ asm void fn_800E73EC(void)
     addi r3, r31, 0x48c
     li r30, 0x1
     li r4, 0x11
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
     beq lbl_fn_800E73EC_000003A0
     lfs f1, lbl_808812E4
@@ -587,7 +587,7 @@ lbl_fn_800E7650_00000644:
     stw r0, 0x12a4(r3)
     lwz r3, lbl_8087F0A8
     addi r3, r3, 0x48c
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
     beq lbl_fn_800E7650_00000974
     lfs f1, lbl_808812E4
@@ -627,7 +627,7 @@ lbl_fn_800E7650_000006E4:
     lwz r3, lbl_8087F0A8
     li r4, 0x16
     addi r3, r3, 0x48c
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
     beq lbl_fn_800E7650_000007B8
     lwz r0, 0x12a4(r29)
@@ -689,7 +689,7 @@ lbl_fn_800E7650_000007D0:
     lwz r3, lbl_8087F0A8
     li r4, 0x1e
     addi r3, r3, 0x48c
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
     bne lbl_fn_800E7650_000007F4
     lwz r3, lbl_8087F048
@@ -717,7 +717,7 @@ lbl_fn_800E7650_00000828:
     stw r0, 0x12a4(r3)
     lwz r3, lbl_8087F0A8
     addi r3, r3, 0x48c
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
     beq lbl_fn_800E7650_0000086C
     lfs f1, lbl_808812E4
@@ -873,7 +873,7 @@ lbl_fn_800E7650_00000A84:
     lwz r3, lbl_8087F0A8
     li r4, 0x6
     addi r3, r3, 0x48c
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
     beq lbl_fn_800E7650_00000AE0
     lwz r0, 0x12a4(r29)
@@ -1190,7 +1190,7 @@ asm void fn_800E7F04(void)
     lwz r3, lbl_8087F0A8
     li r4, 0x8
     addi r3, r3, 0x48c
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
     beq lbl_fn_800E7F04_00001430
     lwz r0, 0x1430(r17)
@@ -1533,7 +1533,7 @@ lbl_fn_800E7F04_00001394:
     li r18, 0x0
     li r4, 0x8
     addi r3, r3, 0x48c
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
     beq lbl_fn_800E7F04_000013F8
     li r18, 0x1

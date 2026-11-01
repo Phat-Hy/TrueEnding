@@ -51,8 +51,8 @@ extern void fn_801162A0(void);
 extern void fn_80116BAC(void);
 extern void fn_80116E6C(void);
 extern void fn_80121F00(void);
-extern void fn_80122550(void);
-extern void fn_801231B0(void);
+extern void magic_getOffset6C(void);
+extern void magic_getOffset244(void);
 extern void fn_80124C6C(void);
 extern void fn_80139ED0(void);
 extern void fn_80139EFC(void);
@@ -672,7 +672,7 @@ lbl_fn_803D2A6C_00000580:
     bl fn_8000DCF4
     mr r31, r3
     bl fn_80121F00
-    bl fn_80122550
+    bl magic_getOffset6C
     cmpwi r21, 0x0
     mr r28, r3
     beq lbl_fn_803D2A6C_0000067C
@@ -1110,7 +1110,7 @@ lbl_fn_803D2A6C_00000B90:
     addi r3, r1, 0x464
     bl fn_80139F60
     bl fn_80121F00
-    bl fn_80122550
+    bl magic_getOffset6C
     bl fn_803D6EEC
     bl fn_80116E6C
     lfs f1, 0x4(r3)
@@ -1678,7 +1678,7 @@ lbl_fn_803D2A6C_00001414:
     cmpwi r0, 0x0
     beq lbl_fn_803D2A6C_000014E4
     bl fn_800F52F8
-    bl fn_801231B0
+    bl magic_getOffset244
     bl fn_801156C4
     bl fn_803D6FE4
     lwz r0, 0x724(r24)
@@ -2798,7 +2798,7 @@ lbl_fn_803D2A6C_00002464:
     lfs f24, lbl_80885D58
     mr r31, r3
     bl fn_80121F00
-    bl fn_80122550
+    bl magic_getOffset6C
     bl fn_803D6EEC
     bl fn_80113CCC
     mr r4, r3

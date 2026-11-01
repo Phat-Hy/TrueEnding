@@ -35,7 +35,7 @@ extern void fn_800EF73C(void);
 extern void fn_800F8548(void);
 extern void fn_800FAB80(void);
 extern void fn_80121F00(void);
-extern void fn_80122550(void);
+extern void magic_getOffset6C(void);
 extern void fn_8012A1B8(void);
 extern void fn_8013322C(void);
 extern void boss_updatePhaseState(void);
@@ -1314,7 +1314,7 @@ lbl_fn_8032E938_00001080:
     cmpwi r0, 0x9
     beq lbl_fn_8032E938_000010CC
     bl fn_80121F00
-    bl fn_80122550
+    bl magic_getOffset6C
     lwz r0, 0x14cc(r31)
     mr r29, r3
     cmpwi r0, 0x0

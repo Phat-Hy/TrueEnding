@@ -13,7 +13,7 @@ extern void fn_800CB3A0(void);
 extern void fn_800CF45C(void);
 extern void fn_800F8548(void);
 extern void fn_800FAB80(void);
-extern void fn_801231D0(void);
+extern void magic_dispatchActionCommand(void);
 extern void fn_8015ECC4(void);
 extern void fn_8016DDB0(void);
 extern void fn_8016E970(void);
@@ -622,7 +622,7 @@ lbl_fn_8034ECE8_000007F4:
     lwz r3, lbl_8087F0A8
     li r4, 0x0
     addi r3, r3, 0x48c
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
     beq lbl_fn_8034ECE8_00000904
     lwz r4, 0x1550(r30)

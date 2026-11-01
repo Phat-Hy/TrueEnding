@@ -25,7 +25,7 @@ extern void fn_800F84D0(void);
 extern void fn_800F8548(void);
 extern void fn_801162A0(void);
 extern void fn_80121F00(void);
-extern void fn_80122550(void);
+extern void magic_getOffset6C(void);
 extern void fn_80126214(void);
 extern void fn_8012F034(void);
 extern void fn_8013322C(void);
@@ -678,7 +678,7 @@ lbl_fn_80265B00_00000760:
     mr r3, r31
     bl fn_80145334
     bl fn_80121F00
-    bl fn_80122550
+    bl magic_getOffset6C
     mr r29, r3
     bl fn_8000D9E8
     bl fn_8000DCF4

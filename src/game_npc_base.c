@@ -28,7 +28,7 @@ extern void fn_80116BAC(void);
 extern void fn_8011D1FC(void);
 extern void fn_8011D21C(void);
 extern void fn_80121F00(void);
-extern void fn_801231D0(void);
+extern void magic_dispatchActionCommand(void);
 extern void fn_80126214(void);
 extern void fn_8013537C(void);
 extern void fn_801370B8(void);
@@ -217,7 +217,7 @@ lbl_fn_80139560_00000124:
     bl fn_800F52F8
     bl fn_80116BAC
     li r4, 0x1f
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
     beq lbl_fn_80139560_00000160
     mr r3, r31
@@ -227,7 +227,7 @@ lbl_fn_80139560_00000160:
     bl fn_800F52F8
     bl fn_80116BAC
     li r4, 0x20
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
     beq lbl_fn_80139560_00000700
     lis r5, lbl_80737A9C@ha

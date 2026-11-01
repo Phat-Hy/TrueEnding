@@ -19,7 +19,7 @@ extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
 extern void fn_800DC6B4(void);
-extern void fn_800EF3EC(void);
+extern void cam_initStickBindings(void);
 extern void fn_801334CC(void);
 extern void fn_801F3FF8(void);
 extern void fn_801F64D0(void);
@@ -371,7 +371,7 @@ lbl_fn_800EFA18_0000033C:
     b lbl_fn_800EFA18_000003A4
 lbl_fn_800EFA18_0000039C:
     mr r3, r28
-    bl fn_800EF3EC
+    bl cam_initStickBindings
 lbl_fn_800EFA18_000003A4:
     addi r30, r30, 0x48
     addi r29, r29, 0x1

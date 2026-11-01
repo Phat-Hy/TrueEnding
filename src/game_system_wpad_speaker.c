@@ -19,7 +19,7 @@ extern void fn_800DC6B4(void);
 extern void fn_800DD3FC(void);
 extern void fn_800E426C(void);
 extern void fn_800E4278(void);
-extern void fn_801231D0(void);
+extern void magic_dispatchActionCommand(void);
 extern void dialog_renderWindow(void);
 extern void fn_8014DEE4(void);
 extern void fn_8016EB48(void);
@@ -1941,7 +1941,7 @@ lbl_fn_8036CC90_00001A70:
     lwz r3, lbl_8087F0A8
     li r4, 0x8
     addi r3, r3, 0x48c
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
     beq lbl_fn_8036CC90_00001B2C
     lwz r3, lbl_8087F490

@@ -21,7 +21,7 @@ extern void fn_8010220C(void);
 extern void fn_80108C10(void);
 extern void fn_801092C8(void);
 extern void fn_80122330(void);
-extern void fn_801231D0(void);
+extern void magic_dispatchActionCommand(void);
 extern void fn_801240B4(void);
 extern void fn_801248DC(void);
 extern void fn_80124B60(void);
@@ -749,7 +749,7 @@ lbl_fn_800E4278_0000087C:
 lbl_fn_800E4278_000008A8:
     lwz r3, lbl_8087F0A8
     addi r3, r3, 0x48c
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
     beq lbl_fn_800E4278_00000B30
     cmpwi r31, 0x3
@@ -999,7 +999,7 @@ lbl_fn_800E4278_00000C48:
     lwz r3, lbl_8087F0A8
     li r4, 0x2
     addi r3, r3, 0x48c
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
     beq lbl_fn_800E4278_00000D3C
     cmpwi r24, 0x4
@@ -1069,7 +1069,7 @@ lbl_fn_800E4278_00000D3C:
     stw r0, 0x198(r1)
     li r4, 0x13
     addi r3, r3, 0x48c
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
     beq lbl_fn_800E4278_00000D78
     mr r3, r22
@@ -1171,13 +1171,13 @@ lbl_fn_800E4278_00000E7C:
     stw r5, 0x198(r1)
     addi r3, r3, 0x48c
     stw r0, 0x19c(r1)
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
     bne lbl_fn_800E4278_00000F04
     lwz r3, lbl_8087F0A8
     li r4, 0x4
     addi r3, r3, 0x48c
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
     beq lbl_fn_800E4278_00001070
 lbl_fn_800E4278_00000F04:
@@ -1202,13 +1202,13 @@ lbl_fn_800E4278_00000F2C:
     stw r5, 0x198(r1)
     addi r3, r3, 0x48c
     stw r0, 0x19c(r1)
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
     bne lbl_fn_800E4278_00000F74
     lwz r3, lbl_8087F0A8
     li r4, 0x0
     addi r3, r3, 0x48c
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
     beq lbl_fn_800E4278_00001070
 lbl_fn_800E4278_00000F74:
@@ -1244,7 +1244,7 @@ lbl_fn_800E4278_00000FCC:
     li r26, 0x1
     li r4, 0x2
     addi r3, r3, 0x48c
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     mr r24, r3
     b lbl_fn_800E4278_00001070
 lbl_fn_800E4278_00000FF8:
@@ -1277,7 +1277,7 @@ lbl_fn_800E4278_00001040:
     stw r5, 0x198(r1)
     addi r3, r3, 0x48c
     stw r0, 0x19c(r1)
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     mr r24, r3
 lbl_fn_800E4278_00001070:
     cmpwi r26, 0x0
@@ -1327,7 +1327,7 @@ lbl_fn_800E4278_000010CC:
     li r26, 0x1
     addi r3, r3, 0x48c
     li r4, 0x13
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
     beq lbl_fn_800E4278_00001148
     mr r3, r22
@@ -1415,7 +1415,7 @@ lbl_fn_800E4278_00001254:
     bne lbl_fn_800E4278_00001278
     addi r3, r3, 0x48c
     li r4, 0x2
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
     beq lbl_fn_800E4278_0000158C
 lbl_fn_800E4278_00001278:
@@ -1886,7 +1886,7 @@ lbl_fn_800E4278_0000191C:
     stw r0, 0x12a4(r22)
     lwz r3, lbl_8087F0A8
     addi r3, r3, 0x48c
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
     beq lbl_fn_800E4278_00001964
     lfs f1, lbl_808812E4

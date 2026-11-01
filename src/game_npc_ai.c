@@ -34,7 +34,7 @@ extern void fn_801125F8(void);
 extern void fn_801162A0(void);
 extern void fn_8011BF3C(void);
 extern void fn_80121F00(void);
-extern void fn_80122560(void);
+extern void f32_abs(void);
 extern void fn_801255C8(void);
 extern void fn_80126214(void);
 extern void fn_80127D8C(void);
@@ -478,7 +478,7 @@ lbl_fn_8013A4E8_000004F0:
     addi r5, r27, 0x528
     bl fn_80013338
     lfs f1, 0x358(r1)
-    bl fn_80122560
+    bl f32_abs
     lfs f0, lbl_808819D4
     fcmpo cr0, f1, f0
     ble lbl_fn_8013A4E8_00000524
@@ -762,7 +762,7 @@ lbl_fn_8013A4E8_000008F0:
     addi r5, r27, 0x528
     bl fn_80013338
     lfs f1, 0x328(r1)
-    bl fn_80122560
+    bl f32_abs
     lfs f0, lbl_808819D4
     fcmpo cr0, f1, f0
     ble lbl_fn_8013A4E8_00000940

@@ -113,7 +113,7 @@ void fn_800EF3D8(void);
 void fn_800EF3DC(void);
 void fn_800EF3E0(void);
 void fn_800EF3E8(void);
-void fn_800EF3EC(void);
+void cam_initStickBindings(void);
 void camera_setMode(void);
 void fn_800EF6BC(void);
 void fn_800EF73C(void);
@@ -1635,7 +1635,7 @@ asm void fn_800EF3E8(void)
     b fn_800E2FE0
 }
 
-asm void fn_800EF3EC(void)
+asm void cam_initStickBindings(void)
 {
     nofralloc
     stwu r1, -0x220(r1)
@@ -1647,7 +1647,7 @@ asm void fn_800EF3EC(void)
     stw r29, 0x214(r1)
     lwz r0, 0x44(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_800EF3EC_00001584
+    bne lbl_cam_initStickBindings_00001584
     lwz r5, 0x0(r3)
     li r0, 0x1
     lis r4, lbl_80735428@ha
@@ -1657,11 +1657,11 @@ asm void fn_800EF3EC(void)
     addi r4, r4, lbl_80735428@l
     bl fn_80682428
     cmpwi r3, 0x0
-    beq lbl_fn_800EF3EC_00001460
+    beq lbl_cam_initStickBindings_00001460
     mr r4, r30
     addi r3, r31, 0x4
     bl fn_8023780C
-lbl_fn_800EF3EC_00001460:
+lbl_cam_initStickBindings_00001460:
     lwz r3, 0x0(r31)
     lis r4, lbl_80735428@ha
     addi r4, r4, lbl_80735428@l
@@ -1669,11 +1669,11 @@ lbl_fn_800EF3EC_00001460:
     mr r3, r30
     bl fn_80682428
     cmpwi r3, 0x0
-    beq lbl_fn_800EF3EC_0000148C
+    beq lbl_cam_initStickBindings_0000148C
     mr r4, r30
     addi r3, r31, 0x10
     bl fn_8023780C
-lbl_fn_800EF3EC_0000148C:
+lbl_cam_initStickBindings_0000148C:
     lwz r3, 0x0(r31)
     lis r4, lbl_80735428@ha
     addi r4, r4, lbl_80735428@l
@@ -1681,11 +1681,11 @@ lbl_fn_800EF3EC_0000148C:
     mr r3, r30
     bl fn_80682428
     cmpwi r3, 0x0
-    beq lbl_fn_800EF3EC_000014B8
+    beq lbl_cam_initStickBindings_000014B8
     mr r4, r30
     addi r3, r31, 0x1c
     bl fn_80237654
-lbl_fn_800EF3EC_000014B8:
+lbl_cam_initStickBindings_000014B8:
     lwz r3, 0x0(r31)
     lis r4, lbl_80735428@ha
     addi r4, r4, lbl_80735428@l
@@ -1693,11 +1693,11 @@ lbl_fn_800EF3EC_000014B8:
     mr r3, r30
     bl fn_80682428
     cmpwi r3, 0x0
-    beq lbl_fn_800EF3EC_000014E4
+    beq lbl_cam_initStickBindings_000014E4
     mr r4, r30
     addi r3, r31, 0x28
     bl fn_8023780C
-lbl_fn_800EF3EC_000014E4:
+lbl_cam_initStickBindings_000014E4:
     lwz r3, 0x0(r31)
     lis r30, lbl_80735428@ha
     addi r4, r30, lbl_80735428@l
@@ -1705,7 +1705,7 @@ lbl_fn_800EF3EC_000014E4:
     mr r3, r29
     bl fn_80682428
     cmpwi r3, 0x0
-    beq lbl_fn_800EF3EC_00001534
+    beq lbl_cam_initStickBindings_00001534
     addi r4, r30, lbl_80735428@l
     mr r5, r29
     addi r3, r1, 0x108
@@ -1718,7 +1718,7 @@ lbl_fn_800EF3EC_000014E4:
     lwz r12, 0xc(r12)
     mtctr r12
     bctrl
-lbl_fn_800EF3EC_00001534:
+lbl_cam_initStickBindings_00001534:
     lwz r3, 0x0(r31)
     lis r30, lbl_80735428@ha
     addi r4, r30, lbl_80735428@l
@@ -1726,7 +1726,7 @@ lbl_fn_800EF3EC_00001534:
     mr r3, r29
     bl fn_80682428
     cmpwi r3, 0x0
-    beq lbl_fn_800EF3EC_00001584
+    beq lbl_cam_initStickBindings_00001584
     addi r4, r30, lbl_80735428@l
     mr r5, r29
     addi r3, r1, 0x8
@@ -1739,7 +1739,7 @@ lbl_fn_800EF3EC_00001534:
     lwz r12, 0xc(r12)
     mtctr r12
     bctrl
-lbl_fn_800EF3EC_00001584:
+lbl_cam_initStickBindings_00001584:
     lwz r0, 0x224(r1)
     lwz r31, 0x21c(r1)
     lwz r30, 0x218(r1)
@@ -1820,7 +1820,7 @@ lbl_camera_setMode_00001678:
     beq lbl_camera_setMode_000016A4
 lbl_camera_setMode_0000169C:
     mr r3, r29
-    bl fn_800EF3EC
+    bl cam_initStickBindings
 lbl_camera_setMode_000016A4:
     addi r31, r31, 0x48
     addi r30, r30, 0x1

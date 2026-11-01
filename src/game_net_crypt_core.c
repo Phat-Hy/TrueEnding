@@ -17,7 +17,7 @@ extern void atn_Task_setActive(void);
 extern void fn_800DC6B4(void);
 extern void fn_800DD3FC(void);
 extern void fn_80117228(void);
-extern void fn_801231D0(void);
+extern void magic_dispatchActionCommand(void);
 extern void fn_801F0544(void);
 extern void fn_801F4728(void);
 extern void fn_801F4998(void);
@@ -238,7 +238,7 @@ lbl_fn_804B0F58_000001E4:
     lwz r3, lbl_8087F0A8
     li r4, 0x34
     addi r3, r3, 0x48c
-    bl fn_801231D0
+    bl magic_dispatchActionCommand
     cmpwi r3, 0x0
     beq lbl_fn_804B0F58_0000034C
     lwz r3, lbl_8087F610
