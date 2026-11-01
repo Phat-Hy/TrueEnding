@@ -390,10 +390,7 @@ asm void fn_8050AAD4(void)
     b fn_8050AA9C
 }
 
-asm void fn_8050AAE0(void)
-{
-    nofralloc
-    blr
+void fn_8050AAE0(void) {
 }
 
 asm void fn_8050AAE4(void)
@@ -900,10 +897,7 @@ lbl_fn_8050B01C_00000A60:
     blr
 }
 
-asm void fn_8050B1A8(void)
-{
-    nofralloc
-    blr
+void fn_8050B1A8(void) {
 }
 
 asm void fn_8050B1AC(void)

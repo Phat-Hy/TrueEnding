@@ -299,10 +299,7 @@ lbl_net_player_interpolateState_00000348:
     blr
 }
 
-asm void fn_801EDC74(void)
-{
-    nofralloc
-    blr
+void fn_801EDC74(void) {
 }
 
 asm void fn_801EDC78(void)
@@ -327,16 +324,10 @@ lbl_fn_801EDC78_000003A4:
     blr
 }
 
-asm void fn_801EDCB8(void)
-{
-    nofralloc
-    blr
+void fn_801EDCB8(void) {
 }
 
-asm void fn_801EDCBC(void)
-{
-    nofralloc
-    blr
+void fn_801EDCBC(void) {
 }
 
 asm void fn_801EDCC0(void)
@@ -346,10 +337,7 @@ asm void fn_801EDCC0(void)
     blr
 }
 
-asm void fn_801EDCC8(void)
-{
-    nofralloc
-    blr
+void fn_801EDCC8(void) {
 }
 
 asm void fn_801EDCCC(void)

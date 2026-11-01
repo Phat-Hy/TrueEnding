@@ -257,22 +257,13 @@ lbl_fn_80512B48_0000021C:
     blr
 }
 
-asm void fn_80512C74(void)
-{
-    nofralloc
-    blr
+void fn_80512C74(void) {
 }
 
-asm void fn_80512C78(void)
-{
-    nofralloc
-    blr
+void fn_80512C78(void) {
 }
 
-asm void fn_80512C7C(void)
-{
-    nofralloc
-    blr
+void fn_80512C7C(void) {
 }
 
 asm void fn_80512C80(void)

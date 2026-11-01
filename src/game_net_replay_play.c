@@ -77,16 +77,10 @@ void fn_804C76EC(void);
 void fn_804C7C34(void);
 void fn_804C7D7C(void);
 
-asm void fn_804C66C8(void)
-{
-    nofralloc
-    blr
+void fn_804C66C8(void) {
 }
 
-asm void fn_804C66CC(void)
-{
-    nofralloc
-    blr
+void fn_804C66CC(void) {
 }
 
 asm void fn_804C66D0(void)

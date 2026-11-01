@@ -1828,16 +1828,10 @@ lbl_fn_804AF520_00001894:
     blr
 }
 
-asm void fn_804B0A70(void)
-{
-    nofralloc
-    blr
+void fn_804B0A70(void) {
 }
 
-asm void fn_804B0A74(void)
-{
-    nofralloc
-    blr
+void fn_804B0A74(void) {
 }
 
 asm void fn_804B0A78(void)
