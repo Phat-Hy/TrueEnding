@@ -6,7 +6,7 @@ extern void OSGetTime(void);
 extern void __register_global_object(void);
 extern void fn_800827E0(void);
 extern void fn_800838B8(void);
-extern void fn_800D246C(void);
+extern void atn_Task_setActive(void);
 extern void fn_800DD3FC(void);
 extern void fn_8047961C(void);
 extern void fn_804AE3BC(void);
@@ -284,7 +284,7 @@ asm void fn_804F4F68(void)
     bl fn_804AF520
     lwz r3, lbl_8087F5A8
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F5A8
     li r4, 0x1
     bl fn_804B50C0

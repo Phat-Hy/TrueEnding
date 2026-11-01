@@ -25,9 +25,9 @@ extern void fn_8008937C(void);
 extern void fn_80097C08(void);
 extern void fn_800CB360(void);
 extern void fn_800CDF84(void);
-extern void fn_800D1D3C(void);
-extern void fn_800D2338(void);
-extern void fn_800D246C(void);
+extern void atn_Task_constructor(void);
+extern void atn_Task_unlink(void);
+extern void atn_Task_setActive(void);
 extern void fn_80107274(void);
 extern void fn_80107380(void);
 extern void fn_801076D0(void);
@@ -342,7 +342,7 @@ lbl_fn_804CF078_000001F4:
 asm void fn_804CF190(void)
 {
     nofralloc
-    b fn_800D2338
+    b atn_Task_unlink
 }
 
 asm void fn_804CF194(void)
@@ -1631,7 +1631,7 @@ asm void fn_804D0328(void)
     addi r11, r1, 0x180
     bl _savegpr_26
     mr r29, r3
-    bl fn_800D1D3C
+    bl atn_Task_constructor
     addi r6, r29, 0x60
     addi r3, r29, 0x348
     lis r4, lbl_807916E0@ha
@@ -2593,17 +2593,17 @@ lbl_fn_804D0328_000021B0:
     bl fn_804AE820
     lwz r3, lbl_8087F59C
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     mr r3, r29
     bl fn_804B4C50
     lwz r3, lbl_8087F5A8
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     mr r3, r29
     bl fn_804AC430
     lwz r3, lbl_8087F588
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     mr r3, r29
     bl fn_80490EB8
     addis r3, r29, 0x1

@@ -14,8 +14,8 @@ extern void fn_80084320(void);
 extern void fn_800A2664(void);
 extern void fn_800A555C(void);
 extern void fn_800CB3A0(void);
-extern void fn_800D1D3C(void);
-extern void fn_800D246C(void);
+extern void atn_Task_constructor(void);
+extern void atn_Task_setActive(void);
 extern void fn_800DC6B4(void);
 extern void fn_800DD3FC(void);
 extern void fn_80117228(void);
@@ -130,7 +130,7 @@ lbl_fn_804AD738_00000074:
     beq lbl_fn_804AD738_000000A0
     mr r3, r31
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lfs f0, lbl_808872F8
     stfs f0, 0x104(r31)
     lwz r0, 0xfc(r31)
@@ -142,7 +142,7 @@ lbl_fn_804AD738_000000A0:
     beq lbl_fn_804AD738_000000CC
     mr r3, r31
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lfs f0, lbl_808872F8
     stfs f0, 0x104(r31)
     lwz r0, 0xfc(r31)
@@ -154,7 +154,7 @@ lbl_fn_804AD738_000000CC:
     beq lbl_fn_804AD738_000000F8
     mr r3, r31
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lfs f0, lbl_808872F8
     stfs f0, 0x104(r31)
     lwz r0, 0xfc(r31)
@@ -166,7 +166,7 @@ lbl_fn_804AD738_000000F8:
     beq lbl_fn_804AD738_00000124
     mr r3, r31
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lfs f0, lbl_808872F8
     stfs f0, 0x104(r31)
     lwz r0, 0xfc(r31)
@@ -178,7 +178,7 @@ lbl_fn_804AD738_00000124:
     beq lbl_fn_804AD738_00000150
     mr r3, r31
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lfs f0, lbl_808872F8
     stfs f0, 0x104(r31)
     lwz r0, 0xfc(r31)
@@ -190,7 +190,7 @@ lbl_fn_804AD738_00000150:
     beq lbl_fn_804AD738_0000017C
     mr r3, r31
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lfs f0, lbl_808872F8
     stfs f0, 0x104(r31)
     lwz r0, 0xfc(r31)
@@ -316,7 +316,7 @@ lbl_fn_804AD8CC_00000304:
     beq lbl_fn_804AD8CC_00000330
     mr r3, r30
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lfs f0, lbl_808872F8
     stfs f0, 0x104(r30)
     lwz r0, 0xfc(r30)
@@ -328,7 +328,7 @@ lbl_fn_804AD8CC_00000330:
     beq lbl_fn_804AD8CC_0000035C
     mr r3, r30
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lfs f0, lbl_808872F8
     stfs f0, 0x104(r30)
     lwz r0, 0xfc(r30)
@@ -340,7 +340,7 @@ lbl_fn_804AD8CC_0000035C:
     beq lbl_fn_804AD8CC_00000388
     mr r3, r30
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lfs f0, lbl_808872F8
     stfs f0, 0x104(r30)
     lwz r0, 0xfc(r30)
@@ -352,7 +352,7 @@ lbl_fn_804AD8CC_00000388:
     beq lbl_fn_804AD8CC_000003B4
     mr r3, r30
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lfs f0, lbl_808872F8
     stfs f0, 0x104(r30)
     lwz r0, 0xfc(r30)
@@ -364,7 +364,7 @@ lbl_fn_804AD8CC_000003B4:
     beq lbl_fn_804AD8CC_000003E0
     mr r3, r30
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lfs f0, lbl_808872F8
     stfs f0, 0x104(r30)
     lwz r0, 0xfc(r30)
@@ -376,7 +376,7 @@ lbl_fn_804AD8CC_000003E0:
     beq lbl_fn_804AD8CC_0000040C
     mr r3, r30
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lfs f0, lbl_808872F8
     stfs f0, 0x104(r30)
     lwz r0, 0xfc(r30)
@@ -1353,7 +1353,7 @@ asm void fn_804AE888(void)
     addi r11, r1, 0x40
     bl _savegpr_25
     mr r31, r3
-    bl fn_800D1D3C
+    bl atn_Task_constructor
     lis r3, lbl_80790AB0@ha
     lis r8, lbl_80790B40@ha
     li r28, 0x0
@@ -1828,7 +1828,7 @@ lbl_fn_804AE888_00001828:
     cmpwi r3, 0x0
     beq lbl_fn_804AE888_0000183C
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
 lbl_fn_804AE888_0000183C:
     addi r28, r28, 0x4
 lbl_fn_804AE888_00001840:
@@ -1871,7 +1871,7 @@ lbl_fn_804AE888_00001878:
     mr r30, r3
     beq lbl_fn_804AE888_00001958
     mr r4, r31
-    bl fn_800D1D3C
+    bl atn_Task_constructor
     lis r3, lbl_80790A78@ha
     addi r28, r30, 0x48
     addi r3, r3, lbl_80790A78@l
@@ -1895,7 +1895,7 @@ lbl_fn_804AE888_00001910:
     bl fn_801F3FF8
     stw r3, 0xb8(r27)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     addi r28, r28, 0x1
     addi r26, r26, 0x4
     cmpwi r28, 0x3

@@ -25,9 +25,9 @@ extern void fn_800846FC(void);
 extern void fn_80084C24(void);
 extern void fn_8008B130(void);
 extern void fn_80097D40(void);
-extern void fn_800D1D3C(void);
-extern void fn_800D246C(void);
-extern void fn_800D5738(void);
+extern void atn_Task_constructor(void);
+extern void atn_Task_setActive(void);
+extern void atn_LH_Texture_constructor(void);
 extern void fn_800D5908(void);
 extern void fn_800DAA3C(void);
 extern void fn_800DAB68(void);
@@ -1070,7 +1070,7 @@ asm void fn_802280B4(void)
     addi r11, r1, 0x90
     bl _savegpr_14
     mr r21, r3
-    bl fn_800D1D3C
+    bl atn_Task_constructor
     addi r5, r21, 0x54
     addi r3, r21, 0xcc
     lis r4, lbl_807839E0@ha
@@ -1133,7 +1133,7 @@ lbl_fn_802280B4_00000D60:
     stw r14, 0x114(r21)
     stw r16, 0x118(r21)
     stw r14, 0x11c(r21)
-    bl fn_800D5738
+    bl atn_LH_Texture_constructor
     lis r7, lbl_80742E58@ha
     lfs f0, lbl_8088308C
     addi r6, r7, lbl_80742E58@l
@@ -1477,7 +1477,7 @@ lbl_fn_802280B4_00001210:
     slwi r0, r0, 3
     add r3, r21, r0
     lwz r3, 0x50(r3)
-    bl fn_800D246C
+    bl atn_Task_setActive
 lbl_fn_802280B4_00001258:
     lwz r3, 0x48(r21)
     addi r0, r3, 0x1
@@ -1537,7 +1537,7 @@ lbl_fn_802280B4_000012F4:
     bl fn_801F3FF8
     stw r3, 0x10c(r21)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     addi r4, r14, lbl_80742EA8@l
     addi r3, r21, 0x120
     addi r4, r4, 0x24
@@ -1914,7 +1914,7 @@ lbl_fn_80228AF8_0000182C:
     li r4, 0x0
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0x38(r26)
-    bl fn_800D246C
+    bl atn_Task_setActive
 lbl_fn_80228AF8_00001858:
     lmw r26, 0x18(r1)
     lwz r0, 0x34(r1)

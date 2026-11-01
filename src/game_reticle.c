@@ -31,7 +31,7 @@ extern void fn_800C0A98(void);
 extern void fn_800C24B4(void);
 extern void fn_800C258C(void);
 extern void fn_800C607C(void);
-extern void fn_800D5738(void);
+extern void atn_LH_Texture_constructor(void);
 extern void fn_800D5808(void);
 extern void fn_800D594C(void);
 extern void fn_800D59B8(void);
@@ -1929,7 +1929,7 @@ asm void fn_8009D1A4(void)
     bne lbl_fn_8009D1A4_0000197C
     lis r29, lbl_807C72B0@ha
     addi r3, r29, lbl_807C72B0@l
-    bl fn_800D5738
+    bl atn_LH_Texture_constructor
     lis r4, fn_800D5808@ha
     addi r3, r29, lbl_807C72B0@l
     addi r4, r4, fn_800D5808@l
@@ -1943,7 +1943,7 @@ lbl_fn_8009D1A4_0000197C:
     bne lbl_fn_8009D1A4_000019B0
     lis r29, lbl_807C72E0@ha
     addi r3, r29, lbl_807C72E0@l
-    bl fn_800D5738
+    bl atn_LH_Texture_constructor
     lis r4, fn_800D5808@ha
     addi r3, r29, lbl_807C72E0@l
     addi r4, r4, fn_800D5808@l
@@ -1957,7 +1957,7 @@ lbl_fn_8009D1A4_000019B0:
     bne lbl_fn_8009D1A4_000019E4
     lis r29, lbl_807C7310@ha
     addi r3, r29, lbl_807C7310@l
-    bl fn_800D5738
+    bl atn_LH_Texture_constructor
     lis r4, fn_800D5808@ha
     addi r3, r29, lbl_807C7310@l
     addi r4, r4, fn_800D5808@l
@@ -1971,7 +1971,7 @@ lbl_fn_8009D1A4_000019E4:
     bne lbl_fn_8009D1A4_00001A18
     lis r29, lbl_807C7340@ha
     addi r3, r29, lbl_807C7340@l
-    bl fn_800D5738
+    bl atn_LH_Texture_constructor
     lis r4, fn_800D5808@ha
     addi r3, r29, lbl_807C7340@l
     addi r4, r4, fn_800D5808@l
@@ -1985,7 +1985,7 @@ lbl_fn_8009D1A4_00001A18:
     bne lbl_fn_8009D1A4_00001A4C
     lis r29, lbl_807C7370@ha
     addi r3, r29, lbl_807C7370@l
-    bl fn_800D5738
+    bl atn_LH_Texture_constructor
     lis r4, fn_800D5808@ha
     addi r3, r29, lbl_807C7370@l
     addi r4, r4, fn_800D5808@l

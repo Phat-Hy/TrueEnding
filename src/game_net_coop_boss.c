@@ -29,11 +29,11 @@ extern void fn_80092954(void);
 extern void fn_80096E94(void);
 extern void fn_800971D4(void);
 extern void fn_800BDB58(void);
-extern void fn_800D1D3C(void);
-extern void fn_800D1E9C(void);
-extern void fn_800D246C(void);
+extern void atn_Task_constructor(void);
+extern void atn_Task_destructor(void);
+extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
-extern void fn_800D5738(void);
+extern void atn_LH_Texture_constructor(void);
 extern void fn_800D5808(void);
 extern void fn_800D5908(void);
 extern void fn_800D59B8(void);
@@ -1128,7 +1128,7 @@ asm void fn_804A7F18(void)
     mr r30, r3
     stw r29, 0x14(r1)
     stw r28, 0x10(r1)
-    bl fn_800D1D3C
+    bl atn_Task_constructor
     lis r3, lbl_80790818@ha
     li r29, 0x1
     addi r3, r3, lbl_80790818@l
@@ -1143,23 +1143,23 @@ asm void fn_804A7F18(void)
     addi r3, r30, 0x58
     addi r4, r4, lbl_8078FBB0@l
     stw r4, 0x0(r28)
-    bl fn_800D5738
+    bl atn_LH_Texture_constructor
     addi r3, r30, 0x88
-    bl fn_800D5738
+    bl atn_LH_Texture_constructor
     addi r3, r30, 0xb8
-    bl fn_800D5738
+    bl atn_LH_Texture_constructor
     addi r3, r30, 0xe8
-    bl fn_800D5738
+    bl atn_LH_Texture_constructor
     addi r3, r30, 0x118
-    bl fn_800D5738
+    bl atn_LH_Texture_constructor
     addi r3, r30, 0x148
-    bl fn_800D5738
+    bl atn_LH_Texture_constructor
     addi r3, r30, 0x178
-    bl fn_800D5738
+    bl atn_LH_Texture_constructor
     addi r3, r30, 0x1a8
-    bl fn_800D5738
+    bl atn_LH_Texture_constructor
     addi r3, r30, 0x1d8
-    bl fn_800D5738
+    bl atn_LH_Texture_constructor
     lis r4, 0xa0
     addi r3, r30, 0x208
     addi r4, r4, 0x1
@@ -1348,7 +1348,7 @@ lbl_fn_804A7F18_00001074:
     addi r3, r30, 0x15c4
     stw r29, 0x15bc(r30)
     stfs f0, 0x15c0(r30)
-    bl fn_800D5738
+    bl atn_LH_Texture_constructor
     stw r29, 0x160c(r30)
     addi r3, r30, 0x50
     mr r4, r31
@@ -1392,7 +1392,7 @@ lbl_fn_804A7F18_00001074:
     bl fn_801F3FF8
     stw r3, 0x5d8(r30)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r0, 0x15bc(r30)
     addi r4, r31, 0x12b
     cmpwi r0, 0x0
@@ -1507,7 +1507,7 @@ lbl_fn_804A83E4_00001248:
 lbl_fn_804A83E4_000012DC:
     mr r3, r30
     li r4, 0x0
-    bl fn_800D1E9C
+    bl atn_Task_destructor
     cmpwi r31, 0x0
     ble lbl_fn_804A83E4_000012F8
     mr r3, r30
@@ -1587,7 +1587,7 @@ lbl_fn_804A8504_000013F4:
     bne lbl_fn_804A8504_00001438
     lwz r3, 0x5d8(r30)
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r4, 0x5d8(r30)
     mr r3, r30
     lwz r0, 0xfc(r4)

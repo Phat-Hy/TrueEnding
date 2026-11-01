@@ -5,7 +5,7 @@
 extern void _restgpr_21(void);
 extern void _savegpr_21(void);
 extern void fn_80092814(void);
-extern void fn_800D246C(void);
+extern void atn_Task_setActive(void);
 extern void fn_80101524(void);
 extern void fn_801067D0(void);
 extern void fn_80107F20(void);
@@ -470,7 +470,7 @@ lbl_fn_8012F440_00000568:
     beq lbl_fn_8012F440_000005E4
     lwz r3, 0x2f0(r3)
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x2f0(r21)
     li r0, 0x0
     stw r0, 0x58c(r3)

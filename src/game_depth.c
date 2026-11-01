@@ -65,10 +65,10 @@ extern u32 lbl_80881200;
 extern u32 lbl_80881204;
 
 /* Function declarations */
-void fn_800D56C4(void);
-void fn_800D5714(void);
-void fn_800D5738(void);
-void fn_800D57B0(void);
+void atn_TaskBase_isValid(void);
+void atn_Task_initCookie(void);
+void atn_LH_Texture_constructor(void);
+void atn_LH_Texture_destructor(void);
 void fn_800D5808(void);
 void fn_800D58A4(void);
 void fn_800D5908(void);
@@ -89,11 +89,11 @@ void fn_800D6B60(void);
 void fn_800D6BA0(void);
 void fn_800D6BE0(void);
 
-asm void fn_800D56C4(void)
+asm void atn_TaskBase_isValid(void)
 {
     nofralloc
     cmpwi r3, 0x0
-    beq lbl_fn_800D56C4_00000048
+    beq lbl_atn_TaskBase_isValid_00000048
     lis r5, lbl_807C75D0@ha
     lwz r6, 0x8(r3)
     addi r4, r5, lbl_807C75D0@l
@@ -103,19 +103,19 @@ asm void fn_800D56C4(void)
     xor r0, r6, r0
     xor r4, r5, r4
     or. r0, r4, r0
-    bne lbl_fn_800D56C4_00000048
+    bne lbl_atn_TaskBase_isValid_00000048
     lwz r0, 0x10(r3)
     lwz r3, 0x14(r3)
     or. r0, r3, r0
-    beq lbl_fn_800D56C4_00000048
+    beq lbl_atn_TaskBase_isValid_00000048
     li r3, 0x1
     blr
-lbl_fn_800D56C4_00000048:
+lbl_atn_TaskBase_isValid_00000048:
     li r3, 0x0
     blr
 }
 
-asm void fn_800D5714(void)
+asm void atn_Task_initCookie(void)
 {
     nofralloc
     lis r3, lbl_80734628@ha
@@ -129,7 +129,7 @@ asm void fn_800D5714(void)
     blr
 }
 
-asm void fn_800D5738(void)
+asm void atn_LH_Texture_constructor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -164,7 +164,7 @@ asm void fn_800D5738(void)
     blr
 }
 
-asm void fn_800D57B0(void)
+asm void atn_LH_Texture_destructor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -175,14 +175,14 @@ asm void fn_800D57B0(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    beq lbl_fn_800D57B0_00000128
+    beq lbl_atn_LH_Texture_destructor_00000128
     li r4, 0x0
     bl fn_80473E8C
     cmpwi r31, 0x0
-    ble lbl_fn_800D57B0_00000128
+    ble lbl_atn_LH_Texture_destructor_00000128
     mr r3, r30
     bl dtor_80084684
-lbl_fn_800D57B0_00000128:
+lbl_atn_LH_Texture_destructor_00000128:
     mr r3, r30
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)

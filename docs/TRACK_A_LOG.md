@@ -23,6 +23,37 @@ Next:     the 3-5 functions worth naming or decompiling next
 
 <!-- newest first -->
 
+### 2026-11-01 — Batch 2: atn::Task & atn::LH_ Resource Subsystem Renames (17 functions)
+
+Numbers:  progress before -> after: 99.30 % -> 99.30 % (7,425,512 / 7,477,608 bytes, 18,054 / 18,155 functions)
+Named:
+- fn_800D1D3C -> atn_Task_constructor (evidence: calls atn_TaskBase_constructor, assigns vtable lbl_807796D0 [atn::Task], calls atn_Task_linkParent)
+- fn_800D1E9C -> atn_Task_destructor (evidence: slot 0 in vtable lbl_807796D0 [atn::Task], unlinks subtasks, calls atn_TaskBase_destructor)
+- fn_800D2860 -> atn_Task_execute (evidence: slot 1 in vtable lbl_807796D0 [atn::Task], default virtual execute callback returning 1)
+- fn_800D1D94 -> atn_Task_linkParent (evidence: links task to parent task tree at 0x20/0x18/0x1c and increments parent child counter at 0x3c)
+- fn_800D2338 -> atn_Task_unlink (evidence: unlinks task from parent and sibling chain and resets tree pointers)
+- fn_800D2398 -> atn_Task_destroy (evidence: unlinks task from tree and dispatches recursive child destruction)
+- fn_800D246C -> atn_Task_setActive (evidence: sets/clears bit 0 active flag in task flags at 0x38 based on r4 boolean)
+- fn_800D2868 -> atn_Task_executeChildren (evidence: iterates linked child tasks at 0x18, checks 0xdead magic, and invokes task execution callbacks)
+- fn_800D2AD8 -> atn_Task_pause (evidence: sets pause bit in task flags at 0x38 for task and child hierarchy)
+- fn_800D2C50 -> atn_Task_resume (evidence: clears pause bit in task flags at 0x38 for task and child hierarchy)
+- fn_800D3B74 -> atn_Task_deleteLater (evidence: marks task with deferred deletion flag in flags at 0x38)
+- fn_800D5618 -> atn_TaskBase_constructor (evidence: assigns vtable lbl_807796F0 [atn::TaskBase] and allocates 64-bit instance cookie)
+- fn_800D5670 -> atn_TaskBase_destructor (evidence: slot 0 in vtable lbl_807796F0 [atn::TaskBase], zeroes cookie and invokes operator delete)
+- fn_800D56C4 -> atn_TaskBase_isValid (evidence: validates task pointer against global cookie lbl_807C75D0 and checks non-zero task ID)
+- fn_800D5714 -> atn_Task_initCookie (evidence: seeds 64-bit global task cookie lbl_807C75D0 from rodata seed lbl_80734628)
+- fn_800D5738 -> atn_LH_Texture_constructor (evidence: assigns vtable lbl_8078FFB0 [atn::LH_Texture] and zeroes texture layout chunk)
+- fn_800D57B0 -> atn_LH_Texture_destructor (evidence: slot 0 in vtable lbl_8078FFB0 [atn::LH_Texture], invokes operator delete)
+Decompiled: none in this unit
+Notes:
+- Resolves the core task management architecture behind the entire game engine. Track B's Chapter-1 investigation hinges on how tasks are spawned and executed (`GameTask`, `PopupTask`, `TutorialTask`). Naming these 17 functions reveals the exact tree structure: parent pointer (`+0x20`), child head (`+0x18`), sibling next (`+0x1c`), root pointer (`+0x24`), flags (`+0x38`), child count (`+0x3c`), and validity cookies (`+0x8..0x14`).
+- All local `lbl_fn_*` assembly labels inside asm blocks were simultaneously normalized to `lbl_atn_*` in the same unit across all 254 caller files.
+Next:
+1. `fn_8036F268` (2276 B): only writer of field state `+0x5538 = 1` at `+0x360` (Chapter-1 field stall).
+2. `fn_800D7278` (1252 B): character texture bake (EFB copy + `GXDrawDone` + readback).
+3. Batch 3 renames in `atn::LH_` layout and resource loaders.
+
+
 ### 2026-11-01 — Unit A2: C Decompilation & Telemetry Analysis of fn_80207F80 and fn_802189EC
 
 Numbers:  progress before -> after: 99.30 % -> 99.30 % (7,425,512 / 7,477,608 bytes, 18,054 / 18,155 functions)

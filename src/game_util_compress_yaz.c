@@ -8,7 +8,7 @@ extern void dtor_80084684(void);
 extern void fn_80084320(void);
 extern void fn_800A555C(void);
 extern void fn_800CB3A0(void);
-extern void fn_800D246C(void);
+extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
 extern void fn_80117228(void);
 extern void fn_801347C8(void);
@@ -187,7 +187,7 @@ asm void fn_8058B4A8(void)
     ori r0, r0, 0x4
     stw r0, 0x38(r3)
     lwz r3, 0x5b70(r5)
-    bl fn_800D246C
+    bl atn_Task_setActive
     addis r5, r28, 0x2
     li r4, 0x0
     lwz r3, 0x5b70(r5)
@@ -199,7 +199,7 @@ asm void fn_8058B4A8(void)
     ori r0, r0, 0x4
     stw r0, 0x38(r3)
     lwz r3, 0x5b74(r5)
-    bl fn_800D246C
+    bl atn_Task_setActive
     addis r6, r28, 0x2
     lfs f1, lbl_80888150
     lwz r3, 0x5b74(r6)
@@ -237,7 +237,7 @@ lbl_fn_8058B4A8_000001C4:
     addis r3, r28, 0x2
     li r4, 0x0
     lwz r3, 0x5ba4(r3)
-    bl fn_800D246C
+    bl atn_Task_setActive
     addis r5, r28, 0x2
     li r31, 0x0
     lwz r3, 0x5ba4(r5)
@@ -248,7 +248,7 @@ lbl_fn_8058B4A8_000001C4:
     ori r0, r0, 0x4
     stw r0, 0x38(r3)
     lwz r3, 0x5bb8(r5)
-    bl fn_800D246C
+    bl atn_Task_setActive
     addis r4, r28, 0x2
     mr r30, r28
     lwz r3, 0x5bb8(r4)
@@ -263,7 +263,7 @@ lbl_fn_8058B4A8_00000268:
     addis r3, r30, 0x2
     li r4, 0x0
     lwz r3, 0x5ba8(r3)
-    bl fn_800D246C
+    bl atn_Task_setActive
     addis r5, r30, 0x2
     li r4, 0x0
     lwz r3, 0x5ba8(r5)
@@ -273,7 +273,7 @@ lbl_fn_8058B4A8_00000268:
     ori r0, r0, 0x4
     stw r0, 0x38(r3)
     lwz r3, 0x5bb0(r5)
-    bl fn_800D246C
+    bl atn_Task_setActive
     addis r4, r30, 0x2
     addi r29, r29, 0x1
     lwz r3, 0x5bb0(r4)
@@ -292,7 +292,7 @@ lbl_fn_8058B4A8_000002D8:
     addis r3, r27, 0x2
     li r4, 0x0
     lwz r3, 0x5bbc(r3)
-    bl fn_800D246C
+    bl atn_Task_setActive
     addis r4, r27, 0x2
     addi r30, r30, 0x1
     lwz r3, 0x5bbc(r4)
@@ -310,7 +310,7 @@ lbl_fn_8058B4A8_0000031C:
     addis r3, r27, 0x2
     li r4, 0x0
     lwz r3, 0x5bc8(r3)
-    bl fn_800D246C
+    bl atn_Task_setActive
     addis r5, r27, 0x2
     li r4, 0x0
     lwz r3, 0x5bc8(r5)
@@ -318,7 +318,7 @@ lbl_fn_8058B4A8_0000031C:
     ori r0, r0, 0x4
     stw r0, 0x38(r3)
     lwz r3, 0x5bd4(r5)
-    bl fn_800D246C
+    bl atn_Task_setActive
     addis r3, r27, 0x2
     addi r29, r29, 0x1
     lwz r3, 0x5bd4(r3)
@@ -336,7 +336,7 @@ lbl_fn_8058B4A8_00000378:
     cmpwi r3, 0x0
     beq lbl_fn_8058B4A8_000003C0
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     addis r4, r27, 0x2
     lwz r3, 0x5be0(r4)
     lwz r0, 0xfc(r3)
@@ -357,7 +357,7 @@ lbl_fn_8058B4A8_000003C0:
     addis r3, r28, 0x2
     li r4, 0x0
     lwz r3, 0x5be8(r3)
-    bl fn_800D246C
+    bl atn_Task_setActive
     addis r5, r28, 0x2
     li r4, 0x0
     lwz r3, 0x5be8(r5)
@@ -369,7 +369,7 @@ lbl_fn_8058B4A8_000003C0:
     ori r0, r0, 0x4
     stw r0, 0x38(r3)
     lwz r3, 0x5bec(r5)
-    bl fn_800D246C
+    bl atn_Task_setActive
     addis r6, r28, 0x2
     li r0, 0x1
     lwz r5, 0x5bec(r6)

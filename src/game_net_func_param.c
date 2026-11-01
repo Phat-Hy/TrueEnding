@@ -10,8 +10,8 @@ extern void fn_800A58D0(void);
 extern void fn_800C63D8(void);
 extern void fn_800C73B0(void);
 extern void fn_800C755C(void);
-extern void fn_800D1E9C(void);
-extern void fn_800D246C(void);
+extern void atn_Task_destructor(void);
+extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
 extern void fn_800DC6B4(void);
 extern void fn_801F4728(void);
@@ -1189,7 +1189,7 @@ asm void fn_80504A44(void)
 lbl_fn_80504A44_00000F78:
     mr r3, r30
     li r4, 0x0
-    bl fn_800D1E9C
+    bl atn_Task_destructor
     cmpwi r31, 0x0
     ble lbl_fn_80504A44_00000F94
     mr r3, r30
@@ -1227,7 +1227,7 @@ asm void fn_80504AB8(void)
     beq lbl_fn_80504AB8_00001018
     mr r3, r31
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lfs f0, lbl_80887760
     stfs f0, 0x104(r31)
     lwz r0, 0xfc(r31)
@@ -1239,7 +1239,7 @@ lbl_fn_80504AB8_00001018:
     beq lbl_fn_80504AB8_00001044
     mr r3, r31
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lfs f0, lbl_80887760
     stfs f0, 0x104(r31)
     lwz r0, 0xfc(r31)
@@ -1252,7 +1252,7 @@ lbl_fn_80504AB8_00001044:
 lbl_fn_80504AB8_00001050:
     lwz r3, 0x50(r31)
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x50(r31)
     addi r30, r30, 0x1
     cmpwi r30, 0x26
@@ -1269,7 +1269,7 @@ lbl_fn_80504AB8_00001050:
 lbl_fn_80504AB8_00001090:
     lwz r3, 0xe8(r31)
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0xe8(r31)
     addi r30, r30, 0x1
     cmpwi r30, 0x4
@@ -1502,7 +1502,7 @@ lbl_fn_80504D50_000013C4:
     beq lbl_fn_80504D50_00001408
     mr r3, r30
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lfs f0, lbl_80887764
     stfs f0, 0x104(r30)
     lwz r0, 0xfc(r30)
@@ -1514,7 +1514,7 @@ lbl_fn_80504D50_00001408:
     beq lbl_fn_80504D50_00001434
     mr r3, r30
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lfs f0, lbl_80887764
     stfs f0, 0x104(r30)
     lwz r0, 0xfc(r30)
@@ -1538,7 +1538,7 @@ lbl_fn_80504D50_00001460:
     beq lbl_fn_80504D50_00001488
     mr r3, r30
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     stfs f31, 0x104(r30)
     lwz r0, 0xfc(r30)
     rlwinm r0, r0, 0, 4, 2
@@ -1560,7 +1560,7 @@ lbl_fn_80504D50_000014B0:
     beq lbl_fn_80504D50_000014D8
     mr r3, r30
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     stfs f31, 0x104(r30)
     lwz r0, 0xfc(r30)
     rlwinm r0, r0, 0, 4, 2

@@ -9,7 +9,7 @@ extern void _savegpr_26(void);
 extern void fn_8009EE30(void);
 extern void atn_Anim_getDuration(void);
 extern void fn_800BFAC8(void);
-extern void fn_800D2338(void);
+extern void atn_Task_unlink(void);
 extern void fn_800DC6B4(void);
 extern void fn_80116FC0(void);
 extern void fn_801CE148(void);
@@ -130,7 +130,7 @@ lbl_fn_801D14D4_00000058:
     lwz r3, 0xb88(r31)
     cmpwi r3, 0x0
     beq lbl_fn_801D14D4_00000084
-    bl fn_800D2338
+    bl atn_Task_unlink
     li r0, 0x0
     stw r0, 0xb88(r31)
 lbl_fn_801D14D4_00000084:

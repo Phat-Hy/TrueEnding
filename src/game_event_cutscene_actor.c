@@ -52,9 +52,9 @@ extern void fn_800CECF0(void);
 extern void fn_800CFDF0(void);
 extern void fn_800CFFB8(void);
 extern void fn_800D0684(void);
-extern void fn_800D1D3C(void);
+extern void atn_Task_constructor(void);
 extern void fn_800D2494(void);
-extern void fn_800D2AD8(void);
+extern void atn_Task_pause(void);
 extern void fn_800D2D7C(void);
 extern void fn_800DBF68(void);
 extern void fn_800DCA6C(void);
@@ -645,7 +645,7 @@ lbl_main_00000654:
     lwz r3, lbl_8087F530
     bl fn_800D2D7C
     lwz r3, lbl_8087F530
-    bl fn_800D2AD8
+    bl atn_Task_pause
     lwz r3, lbl_8087F4E8
     bl fn_8044073C
     lwz r7, lbl_8087F0A8
@@ -1293,7 +1293,7 @@ lbl_fn_8047A4C8_00000F34:
     cmpwi r3, 0x0
     beq lbl_fn_8047A4C8_00000F8C
     li r4, 0x0
-    bl fn_800D1D3C
+    bl atn_Task_constructor
 lbl_fn_8047A4C8_00000F8C:
     stw r3, lbl_8087F530
     bl fn_80089620

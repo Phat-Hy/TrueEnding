@@ -13,7 +13,7 @@ extern void fn_80069D48(void);
 extern void fn_800844D8(void);
 extern void fn_800846FC(void);
 extern void fn_80084C24(void);
-extern void fn_800D1E9C(void);
+extern void atn_Task_destructor(void);
 extern void fn_800DCA6C(void);
 extern void fn_800E1D5C(void);
 extern void fn_801360C4(void);
@@ -1227,7 +1227,7 @@ lbl_fn_80394320_00000F6C:
     bl fn_806959D8
     mr r3, r30
     li r4, 0x0
-    bl fn_800D1E9C
+    bl atn_Task_destructor
     cmpwi r31, 0x0
     ble lbl_fn_80394320_00000FA0
     mr r3, r30

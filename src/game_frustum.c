@@ -10,7 +10,7 @@ extern void fn_8008B140(void);
 extern void fn_800902C0(void);
 extern void fn_800C31F4(void);
 extern void fn_800CB3A0(void);
-extern void fn_800D246C(void);
+extern void atn_Task_setActive(void);
 extern void fn_800D58A4(void);
 extern void fn_800D5908(void);
 extern void fn_800D59B8(void);
@@ -1164,7 +1164,7 @@ asm void fn_800F39A4(void)
     addis r5, r28, 0x1
     li r4, 0x1
     stw r3, -0x34d0(r5)
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r4, lbl_808813D8
     mr r3, r28
     li r5, 0x0
@@ -1172,7 +1172,7 @@ asm void fn_800F39A4(void)
     addis r5, r28, 0x1
     li r4, 0x1
     stw r3, -0x34a0(r5)
-    bl fn_800D246C
+    bl atn_Task_setActive
     mr r3, r28
     addi r4, r31, 0x182
     li r5, 0x0
@@ -1180,7 +1180,7 @@ asm void fn_800F39A4(void)
     addis r5, r28, 0x4
     li r4, 0x1
     stw r3, -0x1d0c(r5)
-    bl fn_800D246C
+    bl atn_Task_setActive
     addis r31, r28, 0x3
     lis r30, lbl_80735988@ha
     addi r30, r30, lbl_80735988@l

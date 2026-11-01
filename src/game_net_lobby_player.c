@@ -29,9 +29,9 @@ extern void fn_800B23C8(void);
 extern void fn_800B28F8(void);
 extern void fn_800B2D2C(void);
 extern void fn_800BDB40(void);
-extern void fn_800D1D3C(void);
-extern void fn_800D1E9C(void);
-extern void fn_800D246C(void);
+extern void atn_Task_constructor(void);
+extern void atn_Task_destructor(void);
+extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
 extern void fn_800D5B58(void);
 extern void fn_800DC6B4(void);
@@ -140,7 +140,7 @@ asm void fn_8049D1BC(void)
     beq lbl_fn_8049D1BC_0000005C
     mr r3, r30
     li r4, 0x0
-    bl fn_800D1E9C
+    bl atn_Task_destructor
 lbl_fn_8049D1BC_0000005C:
     cmpwi r31, 0x0
     ble lbl_fn_8049D1BC_0000006C
@@ -624,7 +624,7 @@ asm void fn_8049D7E4(void)
     bl _savegpr_26
     mr r26, r3
     mr r27, r5
-    bl fn_800D1D3C
+    bl atn_Task_constructor
     lis r3, lbl_80790740@ha
     li r30, 0x0
     addi r3, r3, lbl_80790740@l
@@ -732,7 +732,7 @@ asm void fn_8049D974(void)
     mr r29, r5
     mr r30, r6
     mr r31, r7
-    bl fn_800D1D3C
+    bl atn_Task_constructor
     lis r3, lbl_80790740@ha
     li r26, 0x0
     addi r3, r3, lbl_80790740@l
@@ -1092,7 +1092,7 @@ lbl_fn_8049DDD8_00000CF8:
 lbl_fn_8049DDD8_00000D08:
     mr r3, r30
     li r4, 0x0
-    bl fn_800D1E9C
+    bl atn_Task_destructor
     cmpwi r31, 0x0
     ble lbl_fn_8049DDD8_00000D24
     mr r3, r30
@@ -1321,7 +1321,7 @@ lbl_fn_8049DEE4_00001044:
 lbl_fn_8049DEE4_0000104C:
     mr r3, r25
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r25, 0x4c(r25)
 lbl_fn_8049DEE4_0000105C:
     cmpwi r25, 0x0
@@ -1421,7 +1421,7 @@ lbl_fn_8049DEE4_000011A8:
 lbl_fn_8049DEE4_000011AC:
     lwz r3, 0x304(r24)
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r0, 0xc4(r27)
     cmpwi r0, 0x0
     beq lbl_fn_8049DEE4_000011D4
@@ -1482,7 +1482,7 @@ lbl_fn_8049DEE4_00001268:
 lbl_fn_8049DEE4_00001284:
     lwz r3, 0x304(r25)
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
 lbl_fn_8049DEE4_00001290:
     addi r26, r26, 0x4
     addi r24, r24, 0x1

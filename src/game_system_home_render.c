@@ -34,8 +34,8 @@ extern void fn_8008B140(void);
 extern void fn_80096E94(void);
 extern void fn_80097A88(void);
 extern void fn_800BFAC8(void);
-extern void fn_800D1D3C(void);
-extern void fn_800D1E9C(void);
+extern void atn_Task_constructor(void);
+extern void atn_Task_destructor(void);
 extern void fn_800D3FA4(void);
 extern void fn_800DC12C(void);
 extern void fn_800DC288(void);
@@ -166,7 +166,7 @@ lbl_fn_80361CA4_00000048:
 lbl_fn_80361CA4_00000074:
     mr r3, r30
     li r4, 0x0
-    bl fn_800D1E9C
+    bl atn_Task_destructor
 lbl_fn_80361CA4_00000080:
     cmpwi r31, 0x0
     ble lbl_fn_80361CA4_00000090
@@ -568,7 +568,7 @@ asm void fn_80362278(void)
     mr r31, r3
     beq lbl_fn_80362278_00000680
     mr r4, r29
-    bl fn_800D1D3C
+    bl atn_Task_constructor
     lis r4, lbl_80789E58@ha
     lis r3, lbl_80789D80@ha
     addi r4, r4, lbl_80789E58@l
@@ -627,7 +627,7 @@ asm void fn_80362344(void)
 lbl_fn_80362344_000006EC:
     mr r3, r30
     li r4, 0x0
-    bl fn_800D1E9C
+    bl atn_Task_destructor
 lbl_fn_80362344_000006F8:
     cmpwi r31, 0x0
     ble lbl_fn_80362344_00000708
@@ -878,7 +878,7 @@ asm void fn_803626A8(void)
     mr r31, r3
     beq lbl_fn_803626A8_00000AB0
     mr r4, r29
-    bl fn_800D1D3C
+    bl atn_Task_constructor
     lis r4, lbl_80789E58@ha
     lis r3, lbl_80789D38@ha
     addi r4, r4, lbl_80789E58@l
@@ -937,7 +937,7 @@ asm void fn_80362774(void)
 lbl_fn_80362774_00000B1C:
     mr r3, r30
     li r4, 0x0
-    bl fn_800D1E9C
+    bl atn_Task_destructor
 lbl_fn_80362774_00000B28:
     cmpwi r31, 0x0
     ble lbl_fn_80362774_00000B38
@@ -1313,7 +1313,7 @@ asm void fn_80362CC4(void)
     mr r31, r3
     beq lbl_fn_80362CC4_000010CC
     mr r4, r29
-    bl fn_800D1D3C
+    bl atn_Task_constructor
     lis r4, lbl_80789E58@ha
     lis r3, lbl_80789CF0@ha
     addi r4, r4, lbl_80789E58@l
@@ -1372,7 +1372,7 @@ asm void fn_80362D90(void)
 lbl_fn_80362D90_00001138:
     mr r3, r30
     li r4, 0x0
-    bl fn_800D1E9C
+    bl atn_Task_destructor
 lbl_fn_80362D90_00001144:
     cmpwi r31, 0x0
     ble lbl_fn_80362D90_00001154

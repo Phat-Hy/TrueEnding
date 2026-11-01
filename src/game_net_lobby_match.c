@@ -31,7 +31,7 @@ extern void fn_80096E94(void);
 extern void fn_800971D4(void);
 extern void fn_800B1B28(void);
 extern void fn_800C16B4(void);
-extern void fn_800D1E9C(void);
+extern void atn_Task_destructor(void);
 extern void fn_800DC12C(void);
 extern void fn_800DC288(void);
 extern void fn_800DC6B4(void);
@@ -974,7 +974,7 @@ asm void fn_8049C350(void)
     beq lbl_fn_8049C350_00000C14
     mr r3, r30
     li r4, 0x0
-    bl fn_800D1E9C
+    bl atn_Task_destructor
 lbl_fn_8049C350_00000C14:
     cmpwi r31, 0x0
     ble lbl_fn_8049C350_00000C24

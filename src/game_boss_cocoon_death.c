@@ -26,10 +26,10 @@ extern void fn_800C3124(void);
 extern void fn_800C31F4(void);
 extern void fn_800C344C(void);
 extern void fn_800CB3A0(void);
-extern void fn_800D1D3C(void);
-extern void fn_800D1E9C(void);
-extern void fn_800D2338(void);
-extern void fn_800D246C(void);
+extern void atn_Task_constructor(void);
+extern void atn_Task_destructor(void);
+extern void atn_Task_unlink(void);
+extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
 extern void fn_800DC6B4(void);
 extern void fn_800EC204(void);
@@ -1337,7 +1337,7 @@ asm void fn_80468FBC(void)
     stw r29, 0x14(r1)
     stw r28, 0x10(r1)
     mr r28, r3
-    bl fn_800D1D3C
+    bl atn_Task_constructor
     lis r3, lbl_8078FAF0@ha
     addi r30, r28, 0x48
     addi r3, r3, lbl_8078FAF0@l
@@ -1366,14 +1366,14 @@ asm void fn_80468FBC(void)
     bl fn_801F3FF8
     stw r3, 0x50(r28)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     mr r3, r28
     addi r4, r31, 0x20
     li r5, 0x0
     bl fn_801F3FF8
     stw r3, 0x54(r28)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     addi r30, r31, 0x44
     li r29, 0x0
     li r31, 0x0
@@ -1384,7 +1384,7 @@ lbl_fn_80468FBC_0000112C:
     add r5, r28, r31
     li r4, 0x1
     stw r3, 0x58(r5)
-    bl fn_800D246C
+    bl atn_Task_setActive
     addi r29, r29, 0x1
     addi r31, r31, 0x4
     cmpwi r29, 0xa
@@ -1397,20 +1397,20 @@ lbl_fn_80468FBC_0000112C:
     bl fn_801F3FF8
     stw r3, 0x84(r28)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     mr r3, r28
     addi r4, r31, 0x85
     li r5, 0x0
     bl fn_801F3FF8
     stw r3, 0x88(r28)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     mr r3, r28
     addi r4, r31, 0xa7
     bl fn_801F64D0
     stw r3, 0x80(r28)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r12, 0x48(r28)
     addi r3, r28, 0x48
     addi r4, r31, 0xb6
@@ -1484,7 +1484,7 @@ lbl_fn_80469144_00001298:
 lbl_fn_80469144_000012A8:
     mr r3, r30
     li r4, 0x0
-    bl fn_800D1E9C
+    bl atn_Task_destructor
     cmpwi r31, 0x0
     ble lbl_fn_80469144_000012C4
     mr r3, r30
@@ -1768,7 +1768,7 @@ lbl_fn_80469494_000016A4:
 lbl_fn_80469494_000016BC:
     cmpwi r3, 0x0
     beq lbl_fn_80469494_000016D0
-    bl fn_800D2338
+    bl atn_Task_unlink
     li r0, 0x0
     stw r0, 0xa8(r30)
 lbl_fn_80469494_000016D0:

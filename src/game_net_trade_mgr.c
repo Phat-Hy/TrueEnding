@@ -31,9 +31,9 @@ extern void fn_800C1FB4(void);
 extern void fn_800CB360(void);
 extern void fn_800CB3A0(void);
 extern void fn_800CFBA0(void);
-extern void fn_800D1D3C(void);
-extern void fn_800D1E9C(void);
-extern void fn_800D246C(void);
+extern void atn_Task_constructor(void);
+extern void atn_Task_destructor(void);
+extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
 extern void fn_801125F8(void);
 extern void fn_80112960(void);
@@ -329,7 +329,7 @@ asm void fn_8052A8F0(void)
     stw r30, 0x48(r1)
     stw r29, 0x44(r1)
     mr r29, r3
-    bl fn_800D1D3C
+    bl atn_Task_constructor
     lis r4, lbl_80793830@ha
     addi r3, r29, 0x48
     addi r4, r4, lbl_80793830@l
@@ -499,47 +499,47 @@ lbl_fn_8052A8F0_000004C4:
     bl fn_8052ACD4
     lwz r3, 0x460(r29)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     mr r3, r29
     bl fn_8052911C
     stw r3, 0x11d0(r29)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     mr r3, r29
     bl fn_805268CC
     stw r3, 0x11d4(r29)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     mr r3, r29
     bl fn_8051B924
     stw r3, 0x11d8(r29)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     mr r3, r29
     bl fn_805169FC
     stw r3, 0x11dc(r29)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     mr r3, r29
     bl fn_80521E20
     stw r3, 0x11e0(r29)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     mr r3, r29
     bl fn_801CFD68
     stw r3, 0x11e4(r29)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     mr r3, r29
     bl fn_805128C4
     stw r3, 0x11ec(r29)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     mr r3, r29
     bl fn_80514724
     stw r3, 0x11e8(r29)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r12, 0x1334(r29)
     addi r3, r29, 0x1334
     addi r4, r31, 0x50
@@ -913,7 +913,7 @@ lbl_fn_8052B014_00000AD0:
     bl fn_8004B338
     mr r3, r29
     li r4, 0x0
-    bl fn_800D1E9C
+    bl atn_Task_destructor
     cmpwi r30, 0x0
     ble lbl_fn_8052B014_00000B04
     mr r3, r29
@@ -970,7 +970,7 @@ lbl_fn_8052B190_00000B74:
     bne lbl_fn_8052B190_0000116C
     lwz r3, 0x460(r25)
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x11d0(r25)
     lwz r4, 0x460(r25)
     lwz r12, 0x0(r3)
@@ -979,7 +979,7 @@ lbl_fn_8052B190_00000B74:
     bctrl
     lwz r3, 0x11d0(r25)
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x11d4(r25)
     lwz r4, 0x460(r25)
     lwz r12, 0x0(r3)
@@ -988,7 +988,7 @@ lbl_fn_8052B190_00000B74:
     bctrl
     lwz r3, 0x11d4(r25)
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x11d8(r25)
     lwz r4, 0x460(r25)
     lwz r12, 0x0(r3)
@@ -997,7 +997,7 @@ lbl_fn_8052B190_00000B74:
     bctrl
     lwz r3, 0x11d8(r25)
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x11dc(r25)
     lwz r4, 0x460(r25)
     lwz r12, 0x0(r3)
@@ -1006,7 +1006,7 @@ lbl_fn_8052B190_00000B74:
     bctrl
     lwz r3, 0x11dc(r25)
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x11e0(r25)
     lwz r4, 0x460(r25)
     lwz r12, 0x0(r3)
@@ -1015,7 +1015,7 @@ lbl_fn_8052B190_00000B74:
     bctrl
     lwz r3, 0x11e0(r25)
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x11e4(r25)
     lwz r4, 0x460(r25)
     lwz r12, 0x0(r3)
@@ -1024,7 +1024,7 @@ lbl_fn_8052B190_00000B74:
     bctrl
     lwz r3, 0x11e4(r25)
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x11ec(r25)
     lwz r4, 0x460(r25)
     lwz r12, 0x0(r3)
@@ -1033,7 +1033,7 @@ lbl_fn_8052B190_00000B74:
     bctrl
     lwz r3, 0x11ec(r25)
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x11e8(r25)
     lwz r4, 0x460(r25)
     lwz r12, 0x0(r3)
@@ -1042,7 +1042,7 @@ lbl_fn_8052B190_00000B74:
     bctrl
     lwz r3, 0x11e8(r25)
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     mr r3, r25
     li r4, 0x0
     bl fn_8052DEF0

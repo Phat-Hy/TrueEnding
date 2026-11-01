@@ -17,7 +17,7 @@ extern void fn_800763C0(void);
 extern void fn_80084320(void);
 extern void fn_800846FC(void);
 extern void fn_80084C24(void);
-extern void fn_800D5738(void);
+extern void atn_LH_Texture_constructor(void);
 extern void fn_800D5808(void);
 extern void fn_800D58A4(void);
 extern void fn_800D5908(void);
@@ -538,11 +538,11 @@ asm void fn_8006C8F8(void)
     nofralloc
     stwu r1, -0x10(r1)
     mflr r0
-    lis r4, fn_800D5738@ha
+    lis r4, atn_LH_Texture_constructor@ha
     lis r5, fn_800D5808@ha
     stw r0, 0x14(r1)
     li r6, 0x30
-    addi r4, r4, fn_800D5738@l
+    addi r4, r4, atn_LH_Texture_constructor@l
     addi r5, r5, fn_800D5808@l
     stw r31, 0xc(r1)
     li r7, 0x38

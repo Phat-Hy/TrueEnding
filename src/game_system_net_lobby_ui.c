@@ -17,7 +17,7 @@ extern void fn_80013338(void);
 extern void fn_80013410(void);
 extern void fn_80057A64(void);
 extern void fn_800697D8(void);
-extern void fn_800D2338(void);
+extern void atn_Task_unlink(void);
 extern void fn_800EC204(void);
 extern void fn_800F7FF0(void);
 extern void fn_801162A0(void);
@@ -1000,7 +1000,7 @@ lbl_fn_803A24A4_00000BA0:
     addi r4, r4, 0x13e
     bl fn_80572B70
     lwz r3, lbl_8087F430
-    bl fn_800D2338
+    bl atn_Task_unlink
 lbl_fn_803A24A4_00000C2C:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)

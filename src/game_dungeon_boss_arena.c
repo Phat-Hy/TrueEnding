@@ -28,10 +28,10 @@ extern void fn_8008937C(void);
 extern void fn_800897D8(void);
 extern void fn_8008BBD8(void);
 extern void fn_800CB3A0(void);
-extern void fn_800D1D3C(void);
-extern void fn_800D1E9C(void);
-extern void fn_800D2338(void);
-extern void fn_800D246C(void);
+extern void atn_Task_constructor(void);
+extern void atn_Task_destructor(void);
+extern void atn_Task_unlink(void);
+extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
 extern void fn_800DC288(void);
 extern void fn_800DC6B4(void);
@@ -309,7 +309,7 @@ asm void fn_803EE024(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_800D1D3C
+    bl atn_Task_constructor
     lis r4, lbl_8078CAB0@ha
     li r5, 0x0
     lis r3, lbl_80751F60@ha
@@ -420,7 +420,7 @@ lbl_fn_803EE124_0000027C:
 lbl_fn_803EE124_0000029C:
     mr r3, r30
     li r4, 0x0
-    bl fn_800D1E9C
+    bl atn_Task_destructor
     cmpwi r31, 0x0
     ble lbl_fn_803EE124_000002B8
     mr r3, r30
@@ -454,7 +454,7 @@ asm void fn_803EE1F0(void)
     bl fn_80435CE4
     stw r3, 0x80(r31)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x48(r31)
     lwz r4, 0x80(r31)
     cmpwi r3, 0x0
@@ -479,7 +479,7 @@ lbl_fn_803EE1F0_00000354:
     bl fn_804093B4
     stw r3, 0x84(r31)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x48(r31)
     lwz r4, 0x84(r31)
     cmpwi r3, 0x0
@@ -538,7 +538,7 @@ asm void fn_803EE318(void)
     rlwinm r0, r0, 0, 30, 30
     cmplwi r0, 0x2
     bne lbl_fn_803EE318_00000440
-    bl fn_800D2338
+    bl atn_Task_unlink
     li r0, 0x0
     stw r0, 0x68(r31)
     stw r0, 0x6c(r31)
@@ -1239,7 +1239,7 @@ asm void fn_803EEC64(void)
     mr r29, r5
     stw r28, 0x10(r1)
     mr r28, r3
-    bl fn_800D1D3C
+    bl atn_Task_constructor
     lis r3, lbl_8078CA78@ha
     addi r31, r28, 0x48
     addi r3, r3, lbl_8078CA78@l
@@ -1875,7 +1875,7 @@ lbl_fn_803EF4DC_00001628:
 lbl_fn_803EF4DC_00001638:
     mr r3, r29
     li r4, 0x0
-    bl fn_800D1E9C
+    bl atn_Task_destructor
     cmpwi r30, 0x0
     ble lbl_fn_803EF4DC_00001654
     mr r3, r29

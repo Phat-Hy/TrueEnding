@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void fn_800827E0(void);
 extern void fn_800838B8(void);
-extern void fn_800D246C(void);
+extern void atn_Task_setActive(void);
 extern void fn_800E2A24(void);
 extern void fn_8012111C(void);
 extern void fn_8014F698(void);
@@ -866,7 +866,7 @@ asm void fn_804F1F38(void)
     beq lbl_fn_804F1F38_00000B04
     mr r3, r4
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
 lbl_fn_804F1F38_00000B04:
     li r29, 0x0
     li r30, 0x0
@@ -899,7 +899,7 @@ lbl_fn_804F1F38_00000B3C:
     cmpwi r3, 0x0
     beq lbl_fn_804F1F38_00000B78
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
 lbl_fn_804F1F38_00000B78:
     addi r29, r29, 0x1
     addi r30, r30, 0xd5c

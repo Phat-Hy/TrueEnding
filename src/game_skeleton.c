@@ -15,7 +15,7 @@ extern void fn_8008771C(void);
 extern void fn_80087994(void);
 extern void fn_80087E9C(void);
 extern void fn_800B6218(void);
-extern void fn_800D5738(void);
+extern void atn_LH_Texture_constructor(void);
 extern void fn_800D5808(void);
 extern void fn_800D5908(void);
 extern void fn_800D59B8(void);
@@ -531,9 +531,9 @@ lbl_fn_800C1720_00000574:
     addi r3, r3, 0x10
     li r7, 0x0
     bl fn_800846FC
-    lis r4, fn_800D5738@ha
+    lis r4, atn_LH_Texture_constructor@ha
     lis r5, fn_800D5808@ha
-    addi r4, r4, fn_800D5738@l
+    addi r4, r4, atn_LH_Texture_constructor@l
     li r6, 0x30
     addi r5, r5, fn_800D5808@l
     li r7, 0x1
@@ -581,9 +581,9 @@ lbl_fn_800C1814_00000620:
     addi r3, r3, 0x10
     li r7, 0x0
     bl fn_800846FC
-    lis r4, fn_800D5738@ha
+    lis r4, atn_LH_Texture_constructor@ha
     lis r5, fn_800D5808@ha
-    addi r4, r4, fn_800D5738@l
+    addi r4, r4, atn_LH_Texture_constructor@l
     li r6, 0x30
     addi r5, r5, fn_800D5808@l
     li r7, 0x1
@@ -805,7 +805,7 @@ asm void fn_800C1A1C(void)
     stw r30, 0x118(r28)
     stw r30, 0x11c(r28)
     stw r30, 0x120(r28)
-    bl fn_800D5738
+    bl atn_LH_Texture_constructor
     lfs f2, lbl_808810EC
     addi r29, r1, 0x78
     lfs f28, lbl_808810D0
@@ -1634,11 +1634,11 @@ lbl_fn_800C2634_000014B8:
     addi r3, r3, 0x10
     li r7, 0x0
     bl fn_800846FC
-    lis r4, fn_800D5738@ha
+    lis r4, atn_LH_Texture_constructor@ha
     lis r5, fn_800D5808@ha
     mr r7, r31
     li r6, 0x30
-    addi r4, r4, fn_800D5738@l
+    addi r4, r4, atn_LH_Texture_constructor@l
     addi r5, r5, fn_800D5808@l
     bl fn_80695720
     stw r3, 0xb8(r30)
@@ -1810,9 +1810,9 @@ lbl_fn_800C289C_0000173C:
     addi r3, r3, 0x10
     li r7, 0x0
     bl fn_800846FC
-    lis r4, fn_800D5738@ha
+    lis r4, atn_LH_Texture_constructor@ha
     lis r5, fn_800D5808@ha
-    addi r4, r4, fn_800D5738@l
+    addi r4, r4, atn_LH_Texture_constructor@l
     li r6, 0x30
     addi r5, r5, fn_800D5808@l
     li r7, 0x1
@@ -1964,9 +1964,9 @@ lbl_fn_800C2B24_0000196C:
     addi r3, r3, 0x10
     li r7, 0x0
     bl fn_800846FC
-    lis r4, fn_800D5738@ha
+    lis r4, atn_LH_Texture_constructor@ha
     lis r5, fn_800D5808@ha
-    addi r4, r4, fn_800D5738@l
+    addi r4, r4, atn_LH_Texture_constructor@l
     li r6, 0x30
     addi r5, r5, fn_800D5808@l
     li r7, 0x1

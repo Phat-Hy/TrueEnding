@@ -11,8 +11,8 @@ extern void fn_80044E0C(void);
 extern void fn_80084320(void);
 extern void fn_800844D8(void);
 extern void fn_8008BBD8(void);
-extern void fn_800D2338(void);
-extern void fn_800D246C(void);
+extern void atn_Task_unlink(void);
+extern void atn_Task_setActive(void);
 extern void fn_800E0B18(void);
 extern void fn_800E3E78(void);
 extern void fn_800E3EA4(void);
@@ -957,7 +957,7 @@ asm void fn_800E2D4C(void)
     cmpwi r0, 0x0
     beq lbl_fn_800E2D4C_00000AB4
     mr r3, r5
-    bl fn_800D2338
+    bl atn_Task_unlink
 lbl_fn_800E2D4C_00000AB4:
     mr r3, r30
     li r4, 0x0
@@ -1018,7 +1018,7 @@ lbl_fn_800E2DD4_00000B60:
     stw r0, 0x14a8(r30)
     beq lbl_fn_800E2DD4_00000C14
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x1438(r30)
     lwz r0, 0x38(r3)
     ori r0, r0, 0x4

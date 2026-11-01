@@ -13,7 +13,7 @@ extern void fn_80084320(void);
 extern void fn_80084F84(void);
 extern void fn_800C31F4(void);
 extern void fn_800CB3A0(void);
-extern void fn_800D246C(void);
+extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
 extern void fn_800DC6B4(void);
 extern void fn_800DD3FC(void);
@@ -1642,7 +1642,7 @@ asm void fn_8036CA60(void)
     mr r29, r3
     stw r28, 0x10(r1)
     lwz r3, 0x10d8(r3)
-    bl fn_800D246C
+    bl atn_Task_setActive
     cmpwi r30, 0x0
     ble lbl_fn_8036CA60_00001670
     lwz r3, 0x10d8(r29)

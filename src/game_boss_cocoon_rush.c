@@ -19,7 +19,7 @@ extern void fn_800844D8(void);
 extern void fn_8008A4E0(void);
 extern void fn_8008AD4C(void);
 extern void fn_8008B140(void);
-extern void fn_800D5738(void);
+extern void atn_LH_Texture_constructor(void);
 extern void fn_800D5808(void);
 extern void fn_800D5908(void);
 extern void fn_800D59B8(void);
@@ -1725,9 +1725,9 @@ lbl_fn_804732DC_000015E4:
     cmpwi r3, 0x0
     mr r26, r3
     beq lbl_fn_804732DC_0000161C
-    bl fn_800D5738
+    bl atn_LH_Texture_constructor
     addi r3, r26, 0x30
-    bl fn_800D5738
+    bl atn_LH_Texture_constructor
 lbl_fn_804732DC_0000161C:
     mr r3, r18
     bl strlen
@@ -1863,7 +1863,7 @@ lbl_fn_804732DC_000017D4:
     cmpwi r3, 0x0
     mr r18, r3
     beq lbl_fn_804732DC_00001800
-    bl fn_800D5738
+    bl atn_LH_Texture_constructor
     mr r18, r3
 lbl_fn_804732DC_00001800:
     lwz r0, 0x74(r1)

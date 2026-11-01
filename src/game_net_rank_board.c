@@ -16,7 +16,7 @@ extern void fn_8009EE30(void);
 extern void fn_800A555C(void);
 extern void fn_800CB3A0(void);
 extern void fn_800CB5B4(void);
-extern void fn_800D2338(void);
+extern void atn_Task_unlink(void);
 extern void fn_800DC12C(void);
 extern void fn_80117228(void);
 extern void fn_801F4D80(void);
@@ -318,7 +318,7 @@ asm void fn_8051EF24(void)
     lwz r3, 0x1908(r25)
     cmpwi r3, 0x0
     beq lbl_fn_8051EF24_00000330
-    bl fn_800D2338
+    bl atn_Task_unlink
     stw r30, 0x1908(r25)
 lbl_fn_8051EF24_00000330:
     lwz r12, 0x0(r25)
@@ -462,7 +462,7 @@ asm void fn_8051F13C(void)
     stw r0, 0x199c(r3)
     beq lbl_fn_8051F13C_00000538
     mr r3, r4
-    bl fn_800D2338
+    bl atn_Task_unlink
     li r0, 0x0
     stw r0, 0x1908(r31)
 lbl_fn_8051F13C_00000538:
@@ -1063,7 +1063,7 @@ lbl_fn_8051F7D4_00000DCC:
     lwz r3, 0x1908(r31)
     cmpwi r3, 0x0
     beq lbl_fn_8051F7D4_00000EC4
-    bl fn_800D2338
+    bl atn_Task_unlink
     li r0, 0x0
     stw r0, 0x1908(r31)
     b lbl_fn_8051F7D4_00000EC4
@@ -1201,7 +1201,7 @@ lbl_fn_8051FB80_00000FB8:
     lwz r3, 0x1908(r3)
     cmpwi r3, 0x0
     beq lbl_fn_8051FB80_00000FD0
-    bl fn_800D2338
+    bl atn_Task_unlink
     li r0, 0x0
     stw r0, 0x1908(r31)
 lbl_fn_8051FB80_00000FD0:

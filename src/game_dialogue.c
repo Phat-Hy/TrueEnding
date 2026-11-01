@@ -13,7 +13,7 @@ extern void fn_8007AA64(void);
 extern void fn_80084320(void);
 extern void fn_800846FC(void);
 extern void fn_80084C24(void);
-extern void fn_800D5738(void);
+extern void atn_LH_Texture_constructor(void);
 extern void fn_800D5808(void);
 extern void fn_800D5908(void);
 extern void fn_800D594C(void);
@@ -1215,7 +1215,7 @@ lbl_fn_8007C018_00000FF0:
     bl fn_80084320
     cmpwi r3, 0x0
     beq lbl_fn_8007C018_00001020
-    bl fn_800D5738
+    bl atn_LH_Texture_constructor
 lbl_fn_8007C018_00001020:
     cmpwi r31, 0x0
     stw r3, 0x4(r29)

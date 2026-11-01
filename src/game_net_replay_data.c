@@ -12,10 +12,10 @@ extern void fn_8006EF48(void);
 extern void fn_80084320(void);
 extern void fn_800C31F4(void);
 extern void fn_800CB3A0(void);
-extern void fn_800D1D3C(void);
-extern void fn_800D1E9C(void);
-extern void fn_800D2338(void);
-extern void fn_800D246C(void);
+extern void atn_Task_constructor(void);
+extern void atn_Task_destructor(void);
+extern void atn_Task_unlink(void);
+extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
 extern void fn_800DC6B4(void);
 extern void fn_80117228(void);
@@ -158,7 +158,7 @@ lbl_fn_804C4530_00000070:
     beq lbl_fn_804C4530_000000E0
     mr r3, r29
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lfs f0, lbl_80887478
     stfs f0, 0x104(r29)
     lwz r0, 0xfc(r29)
@@ -182,7 +182,7 @@ lbl_fn_804C4530_000000F8:
     beq lbl_fn_804C4530_00000138
     mr r3, r29
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lfs f0, lbl_80887474
     stfs f0, 0x104(r29)
     lwz r0, 0xfc(r29)
@@ -351,7 +351,7 @@ lbl_fn_804C4530_0000031C:
     beq lbl_fn_804C4530_000003A8
     mr r3, r29
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lfs f0, lbl_80887478
     stfs f0, 0x104(r29)
     lwz r0, 0xfc(r29)
@@ -375,7 +375,7 @@ lbl_fn_804C4530_000003C0:
     beq lbl_fn_804C4530_00000400
     mr r3, r29
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lfs f0, lbl_80887474
     stfs f0, 0x104(r29)
     lwz r0, 0xfc(r29)
@@ -528,7 +528,7 @@ lbl_fn_804C4530_000005E4:
     beq lbl_fn_804C4530_00000630
     mr r3, r29
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lfs f0, lbl_80887478
     stfs f0, 0x104(r29)
     lwz r0, 0xfc(r29)
@@ -552,7 +552,7 @@ lbl_fn_804C4530_00000648:
     beq lbl_fn_804C4530_00000688
     mr r3, r29
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lfs f0, lbl_80887474
     stfs f0, 0x104(r29)
     lwz r0, 0xfc(r29)
@@ -716,7 +716,7 @@ lbl_fn_804C4530_00000868:
     beq lbl_fn_804C4530_000008E4
     mr r3, r29
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lfs f0, lbl_80887478
     stfs f0, 0x104(r29)
     lwz r0, 0xfc(r29)
@@ -740,7 +740,7 @@ lbl_fn_804C4530_000008FC:
     beq lbl_fn_804C4530_0000093C
     mr r3, r29
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lfs f0, lbl_80887474
     stfs f0, 0x104(r29)
     lwz r0, 0xfc(r29)
@@ -1336,7 +1336,7 @@ lbl_fn_804C54FC_00001100:
 asm void fn_804C5638(void)
 {
     nofralloc
-    b fn_800D2338
+    b atn_Task_unlink
 }
 
 asm void fn_804C563C(void)
@@ -1400,7 +1400,7 @@ asm void fn_804C56D4(void)
     psq_st f31, 0x28(r1), 0, 0
     bl _savegpr_26
     mr r29, r3
-    bl fn_800D1D3C
+    bl atn_Task_constructor
     lis r3, lbl_80790EB0@ha
     lis r4, lbl_80758E44@ha
     li r0, 0x0
@@ -1798,7 +1798,7 @@ lbl_fn_804C56D4_00001758:
     cmpwi r3, 0x0
     beq lbl_fn_804C56D4_0000176C
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
 lbl_fn_804C56D4_0000176C:
     addi r28, r28, 0x4
 lbl_fn_804C56D4_00001770:
@@ -1849,7 +1849,7 @@ asm void fn_804C5CE8(void)
 lbl_fn_804C5CE8_0000180C:
     mr r3, r30
     li r4, 0x0
-    bl fn_800D1E9C
+    bl atn_Task_destructor
     cmpwi r31, 0x0
     ble lbl_fn_804C5CE8_00001828
     mr r3, r30
@@ -1929,7 +1929,7 @@ lbl_fn_804C5E1C_0000190C:
     cmpwi r3, 0x0
     beq lbl_fn_804C5E1C_00001920
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
 lbl_fn_804C5E1C_00001920:
     addi r31, r31, 0x4
 lbl_fn_804C5E1C_00001924:
@@ -1944,7 +1944,7 @@ lbl_fn_804C5E1C_00001924:
     bl fn_804C5E9C
     mr r3, r30
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -1999,7 +1999,7 @@ asm void fn_804C5E9C(void)
     beq lbl_fn_804C5E9C_00002178
     mr r3, r30
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lfs f0, lbl_808874B0
     stfs f0, 0x104(r30)
     lwz r0, 0xfc(r30)
@@ -2020,7 +2020,7 @@ lbl_fn_804C5E9C_00001A34:
     beq lbl_fn_804C5E9C_00001A80
     mr r3, r30
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lfs f0, lbl_808874B0
     stfs f0, 0x104(r30)
     lwz r0, 0xfc(r30)
@@ -2055,7 +2055,7 @@ lbl_fn_804C5E9C_00001A9C:
     mr r3, r28
     ori r0, r0, 0x10
     stw r0, 0x54c(r28)
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F430
     mr r4, r28
     bl fn_803729B4
@@ -2088,7 +2088,7 @@ lbl_fn_804C5E9C_00001B04:
     beq lbl_fn_804C5E9C_00001B84
     mr r3, r30
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lfs f0, lbl_808874B0
     stfs f0, 0x104(r30)
     lwz r0, 0xfc(r30)
@@ -2122,7 +2122,7 @@ lbl_fn_804C5E9C_00001BD0:
     beq lbl_fn_804C5E9C_00001BFC
     mr r3, r30
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lfs f0, lbl_808874B0
     stfs f0, 0x104(r30)
     lwz r0, 0xfc(r30)
@@ -2139,7 +2139,7 @@ lbl_fn_804C5E9C_00001C0C:
     beq lbl_fn_804C5E9C_00001C34
     mr r3, r29
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     stfs f31, 0x104(r29)
     lwz r0, 0xfc(r29)
     rlwinm r0, r0, 0, 4, 2
@@ -2155,7 +2155,7 @@ lbl_fn_804C5E9C_00001C34:
     beq lbl_fn_804C5E9C_00001C74
     mr r3, r29
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lfs f0, lbl_808874B0
     stfs f0, 0x104(r29)
     lwz r0, 0xfc(r29)
@@ -2185,7 +2185,7 @@ lbl_fn_804C5E9C_00001C74:
     beq lbl_fn_804C5E9C_00001CE8
     mr r3, r29
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lfs f0, lbl_808874B0
     stfs f0, 0x104(r29)
     lwz r0, 0xfc(r29)
@@ -2197,7 +2197,7 @@ lbl_fn_804C5E9C_00001CE8:
     beq lbl_fn_804C5E9C_00001D14
     mr r3, r29
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lfs f0, lbl_808874B0
     stfs f0, 0x104(r29)
     lwz r0, 0xfc(r29)
@@ -2255,7 +2255,7 @@ lbl_fn_804C5E9C_00001D98:
     beq lbl_fn_804C5E9C_00001DEC
     mr r3, r29
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lfs f0, lbl_808874B0
     stfs f0, 0x104(r29)
     lwz r0, 0xfc(r29)
@@ -2284,7 +2284,7 @@ lbl_fn_804C5E9C_00001DEC:
     beq lbl_fn_804C5E9C_00001E5C
     mr r3, r29
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lfs f0, lbl_808874B0
     stfs f0, 0x104(r29)
     lwz r0, 0xfc(r29)
@@ -2339,7 +2339,7 @@ lbl_fn_804C5E9C_00001EB4:
     beq lbl_fn_804C5E9C_00001F24
     mr r3, r29
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lfs f0, lbl_808874B4
     stfs f0, 0x104(r29)
     lwz r0, 0xfc(r29)
@@ -2351,7 +2351,7 @@ lbl_fn_804C5E9C_00001F24:
     beq lbl_fn_804C5E9C_00001F50
     mr r3, r29
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lfs f0, lbl_808874B0
     stfs f0, 0x104(r29)
     lwz r0, 0xfc(r29)
@@ -2414,7 +2414,7 @@ lbl_fn_804C5E9C_00001FB4:
     beq lbl_fn_804C5E9C_00002038
     mr r3, r29
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lfs f0, lbl_808874BC
     stfs f0, 0x104(r29)
     lwz r0, 0xfc(r29)
@@ -2430,7 +2430,7 @@ lbl_fn_804C5E9C_00002038:
     beq lbl_fn_804C5E9C_00002074
     mr r3, r29
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lfs f0, lbl_808874BC
     stfs f0, 0x104(r29)
     lwz r0, 0xfc(r29)
@@ -2442,7 +2442,7 @@ lbl_fn_804C5E9C_00002074:
     beq lbl_fn_804C5E9C_000020A0
     mr r3, r29
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lfs f0, lbl_808874BC
     stfs f0, 0x104(r29)
     lwz r0, 0xfc(r29)
@@ -2454,7 +2454,7 @@ lbl_fn_804C5E9C_000020A0:
     beq lbl_fn_804C5E9C_000020CC
     mr r3, r29
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lfs f0, lbl_808874BC
     stfs f0, 0x104(r29)
     lwz r0, 0xfc(r29)
@@ -2470,7 +2470,7 @@ lbl_fn_804C5E9C_000020D8:
     beq lbl_fn_804C5E9C_00002100
     mr r3, r29
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     stfs f31, 0x104(r29)
     lwz r0, 0xfc(r29)
     rlwinm r0, r0, 0, 4, 2
@@ -2481,7 +2481,7 @@ lbl_fn_804C5E9C_00002100:
     beq lbl_fn_804C5E9C_00002128
     mr r3, r29
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     stfs f31, 0x104(r29)
     lwz r0, 0xfc(r29)
     rlwinm r0, r0, 0, 4, 2
@@ -2500,7 +2500,7 @@ lbl_fn_804C5E9C_00002140:
     beq lbl_fn_804C5E9C_00002168
     mr r3, r29
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     stfs f31, 0x104(r29)
     lwz r0, 0xfc(r29)
     rlwinm r0, r0, 0, 4, 2

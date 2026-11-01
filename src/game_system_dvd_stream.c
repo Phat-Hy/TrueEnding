@@ -21,7 +21,7 @@ extern void fn_8008937C(void);
 extern void fn_800A555C(void);
 extern void fn_800A55AC(void);
 extern void fn_800CB3A0(void);
-extern void fn_800D2338(void);
+extern void atn_Task_unlink(void);
 extern void fn_800DC6B4(void);
 extern void fn_80116FC0(void);
 extern void fn_80117228(void);
@@ -174,7 +174,7 @@ lbl_fn_803775DC_0000008C:
     b lbl_fn_803775DC_0000011C
 lbl_fn_803775DC_000000AC:
     lwz r3, lbl_8087F430
-    bl fn_800D2338
+    bl atn_Task_unlink
     lis r4, lbl_8074DEC0@ha
     lwz r3, lbl_8087F9AC
     addi r4, r4, lbl_8074DEC0@l
@@ -205,7 +205,7 @@ lbl_fn_803775DC_000000EC:
     bl fn_80370F8C
 lbl_fn_803775DC_0000011C:
     mr r3, r29
-    bl fn_800D2338
+    bl atn_Task_unlink
     b lbl_fn_803775DC_00000AFC
 lbl_fn_803775DC_00000128:
     lwz r4, 0x288(r3)
@@ -491,7 +491,7 @@ lbl_fn_803775DC_00000518:
     lwz r0, 0x13c(r3)
     cmpwi r0, 0x7
     bne lbl_fn_803775DC_00000594
-    bl fn_800D2338
+    bl atn_Task_unlink
     lwz r3, 0x70(r29)
     li r0, 0x1
     stw r3, 0x74(r29)

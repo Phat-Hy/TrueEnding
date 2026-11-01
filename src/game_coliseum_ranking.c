@@ -34,10 +34,10 @@ extern void fn_80084C24(void);
 extern void fn_8009E690(void);
 extern void fn_800C18BC(void);
 extern void fn_800C2D88(void);
-extern void fn_800D1D3C(void);
-extern void fn_800D1E9C(void);
+extern void atn_Task_constructor(void);
+extern void atn_Task_destructor(void);
 extern void fn_800D3FA4(void);
-extern void fn_800D5738(void);
+extern void atn_LH_Texture_constructor(void);
 extern void fn_800D5808(void);
 extern void fn_800D5908(void);
 extern void fn_800D59B8(void);
@@ -575,7 +575,7 @@ asm void fn_804963A4(void)
     mr r31, r5
     stw r30, 0x8(r1)
     mr r30, r3
-    bl fn_800D1D3C
+    bl atn_Task_constructor
     lis r3, lbl_807902E8@ha
     li r0, 0x0
     addi r3, r3, lbl_807902E8@l
@@ -746,7 +746,7 @@ lbl_fn_8049655C_00000700:
     beq lbl_fn_8049655C_00000714
     mr r3, r29
     li r4, 0x0
-    bl fn_800D1E9C
+    bl atn_Task_destructor
 lbl_fn_8049655C_00000714:
     cmpwi r30, 0x0
     ble lbl_fn_8049655C_00000724
@@ -904,7 +904,7 @@ lbl_fn_80496774_00000914:
     beq lbl_fn_80496774_00000928
     mr r3, r29
     li r4, 0x0
-    bl fn_800D1E9C
+    bl atn_Task_destructor
 lbl_fn_80496774_00000928:
     cmpwi r30, 0x0
     ble lbl_fn_80496774_00000938
@@ -1388,7 +1388,7 @@ lbl_fn_80496E00_00000FAC:
     beq lbl_fn_80496E00_00000FC0
     mr r3, r30
     li r4, 0x0
-    bl fn_800D1E9C
+    bl atn_Task_destructor
 lbl_fn_80496E00_00000FC0:
     cmpwi r31, 0x0
     ble lbl_fn_80496E00_00000FD0
@@ -1523,7 +1523,7 @@ asm void fn_80496F6C(void)
     bl memcpy
 lbl_fn_80496F6C_00001154:
     addi r3, r27, 0xf0
-    bl fn_800D5738
+    bl atn_LH_Texture_constructor
     lfs f0, lbl_808870E0
     li r3, 0x1
     li r0, 0x0
@@ -1676,7 +1676,7 @@ lbl_fn_804970D4_00001354:
     beq lbl_fn_804970D4_00001368
     mr r3, r26
     li r4, 0x0
-    bl fn_800D1E9C
+    bl atn_Task_destructor
 lbl_fn_804970D4_00001368:
     cmpwi r27, 0x0
     ble lbl_fn_804970D4_00001378

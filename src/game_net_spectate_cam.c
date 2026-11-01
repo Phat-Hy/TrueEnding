@@ -30,8 +30,8 @@ extern void fn_800CB3A0(void);
 extern void fn_800CB480(void);
 extern void fn_800CB538(void);
 extern void fn_800CF45C(void);
-extern void fn_800D2338(void);
-extern void fn_800D246C(void);
+extern void atn_Task_unlink(void);
+extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
 extern void fn_80117914(void);
 extern void fn_80124C6C(void);
@@ -295,7 +295,7 @@ asm void fn_80533BE0(void)
     stw r0, 0x434(r3)
     lwz r3, 0x2cc(r3)
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r4, 0x2cc(r31)
     li r0, 0x1
     lis r3, 0x100
@@ -506,7 +506,7 @@ lbl_fn_80533BE0_00000534:
 lbl_fn_80533BE0_000005BC:
     lwz r3, 0x2c8(r31)
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x2c8(r31)
     li r7, 0x1
     li r6, 0x0
@@ -1545,14 +1545,14 @@ lbl_fn_80534074_00001558:
     lwz r3, 0x6e0(r28)
     cmpwi r3, 0x0
     beq lbl_fn_80534074_00001570
-    bl fn_800D2338
+    bl atn_Task_unlink
     li r0, 0x0
     stw r0, 0x6e0(r28)
 lbl_fn_80534074_00001570:
     lwz r3, 0x6e4(r28)
     cmpwi r3, 0x0
     beq lbl_fn_80534074_00001588
-    bl fn_800D2338
+    bl atn_Task_unlink
     li r0, 0x0
     stw r0, 0x6e4(r28)
 lbl_fn_80534074_00001588:
@@ -1950,7 +1950,7 @@ lbl_fn_80534074_00001AE8:
     lwz r0, 0x13c(r3)
     cmpwi r0, 0x7
     bne lbl_fn_80534074_00001B64
-    bl fn_800D2338
+    bl atn_Task_unlink
     mr r3, r28
     li r4, 0xb
     bl fn_80533BE0
@@ -1958,7 +1958,7 @@ lbl_fn_80534074_00001AE8:
 lbl_fn_80534074_00001B64:
     cmpwi r0, 0x8
     bne lbl_fn_80534074_00002308
-    bl fn_800D2338
+    bl atn_Task_unlink
     mr r3, r28
     bl fn_803B8C6C
     stw r3, 0x6e8(r28)
@@ -2207,7 +2207,7 @@ lbl_fn_80534074_00001EE4:
     lwz r3, lbl_8087F470
     cmpwi r3, 0x0
     beq lbl_fn_80534074_00001EF4
-    bl fn_800D2338
+    bl atn_Task_unlink
 lbl_fn_80534074_00001EF4:
     lwz r0, lbl_8087EF68
     cmpwi r0, 0x0
@@ -2368,7 +2368,7 @@ lbl_fn_80534074_00002108:
     addi r3, r28, 0x284
     bl fn_800CB480
     mr r3, r28
-    bl fn_800D2338
+    bl atn_Task_unlink
     lwz r0, 0x2b4(r28)
     cmpwi r0, 0x0
     beq lbl_fn_80534074_00002160

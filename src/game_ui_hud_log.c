@@ -8,8 +8,8 @@ extern void dtor_80084684(void);
 extern void fn_80013F78(void);
 extern void fn_80084320(void);
 extern void fn_8008B130(void);
-extern void fn_800D2338(void);
-extern void fn_800D246C(void);
+extern void atn_Task_unlink(void);
+extern void atn_Task_setActive(void);
 extern void fn_8012B988(void);
 extern void fn_80134774(void);
 extern void fn_8014DEE4(void);
@@ -335,7 +335,7 @@ lbl_fn_801CE148_000003A4:
     bl fn_801E7FF8
     stw r3, 0xd4(r30)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     addi r3, r26, 0x48
     addi r4, r1, 0x50
     psq_l f1, 0x0(r3), 0, 0
@@ -363,7 +363,7 @@ lbl_fn_801CE148_000003A4:
     bl fn_801E7FF8
     stw r3, 0xdc(r30)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     addi r3, r26, 0x3c
     addi r4, r1, 0x44
     psq_l f1, 0x0(r3), 0, 0
@@ -385,7 +385,7 @@ lbl_fn_801CE148_00000464:
     bl fn_801E7FF8
     stw r3, 0xd8(r30)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     addi r3, r26, 0x54
     addi r4, r1, 0x38
     psq_l f1, 0x0(r3), 0, 0
@@ -411,7 +411,7 @@ lbl_fn_801CE148_000004C0:
     beq lbl_fn_801CE148_000004FC
     bl fn_801E9164
     lwz r3, 0xdc(r30)
-    bl fn_800D2338
+    bl atn_Task_unlink
     li r0, 0x0
     stw r0, 0xdc(r30)
 lbl_fn_801CE148_000004FC:
@@ -441,7 +441,7 @@ lbl_fn_801CE148_00000548:
     bl fn_801E7FF8
     stw r3, 0xd8(r30)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     addi r5, r26, 0x54
     lwz r6, 0xd8(r30)
     lfs f2, 0x8(r5)
@@ -477,7 +477,7 @@ lbl_fn_801CE148_000005B8:
     beq lbl_fn_801CE148_000005F0
     bl fn_801E9164
     lwz r3, 0xd8(r30)
-    bl fn_800D2338
+    bl atn_Task_unlink
     li r0, 0x0
     stw r0, 0xd8(r30)
 lbl_fn_801CE148_000005F0:
@@ -502,7 +502,7 @@ lbl_fn_801CE148_0000062C:
     bl fn_801E7FF8
     stw r3, 0xdc(r30)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     addi r5, r26, 0x3c
     lwz r6, 0xdc(r30)
     lfs f2, 0x8(r5)
@@ -579,7 +579,7 @@ asm void fn_801CE518(void)
     mr r3, r0
     bl fn_801E9164
     lwz r3, 0xd4(r30)
-    bl fn_800D2338
+    bl atn_Task_unlink
     stw r31, 0xd4(r30)
 lbl_fn_801CE518_00000744:
     lwz r3, 0xd8(r30)
@@ -587,7 +587,7 @@ lbl_fn_801CE518_00000744:
     beq lbl_fn_801CE518_00000764
     bl fn_801E9164
     lwz r3, 0xd8(r30)
-    bl fn_800D2338
+    bl atn_Task_unlink
     li r0, 0x0
     stw r0, 0xd8(r30)
 lbl_fn_801CE518_00000764:
@@ -596,7 +596,7 @@ lbl_fn_801CE518_00000764:
     beq lbl_fn_801CE518_00000784
     bl fn_801E9164
     lwz r3, 0xdc(r30)
-    bl fn_800D2338
+    bl atn_Task_unlink
     li r0, 0x0
     stw r0, 0xdc(r30)
 lbl_fn_801CE518_00000784:

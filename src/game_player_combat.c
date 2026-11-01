@@ -24,7 +24,7 @@ extern void fn_80098948(void);
 extern void fn_80099010(void);
 extern void fn_800A0548(void);
 extern void fn_800A08E0(void);
-extern void fn_800D1D3C(void);
+extern void atn_Task_constructor(void);
 extern void fn_800DC288(void);
 extern void fn_800DC6B4(void);
 extern void fn_8011D320(void);
@@ -1550,7 +1550,7 @@ asm void fn_8011F6B0(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_800D1D3C
+    bl atn_Task_constructor
     lis r3, lbl_8077A1E8@ha
     li r0, 0x0
     addi r3, r3, lbl_8077A1E8@l

@@ -9,7 +9,7 @@ extern void fn_8006F72C(void);
 extern void fn_800846FC(void);
 extern void fn_80084C24(void);
 extern void fn_800A6BD4(void);
-extern void fn_800D5738(void);
+extern void atn_LH_Texture_constructor(void);
 extern void fn_800D5808(void);
 extern void fn_800D58A4(void);
 extern void fn_800DBF68(void);
@@ -478,9 +478,9 @@ lbl_fn_801F94F4_000005B4:
     bdnz lbl_fn_801F94F4_000005B4
 lbl_fn_801F94F4_000005C4:
     addi r3, r30, 0x194
-    bl fn_800D5738
+    bl atn_LH_Texture_constructor
     addi r3, r30, 0x1c4
-    bl fn_800D5738
+    bl atn_LH_Texture_constructor
     addi r5, r30, 0x1f8
     addi r3, r30, 0x204
     cmplw r5, r3

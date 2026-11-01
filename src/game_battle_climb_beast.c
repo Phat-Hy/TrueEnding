@@ -39,7 +39,7 @@ extern void fn_800CB3A0(void);
 extern void fn_800CB440(void);
 extern void fn_800CB5C8(void);
 extern void fn_800CB6E4(void);
-extern void fn_800D246C(void);
+extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
 extern void fn_800DC288(void);
 extern void fn_800F52F8(void);
@@ -365,7 +365,7 @@ lbl_fn_803F9FA8_0000027C:
     bl fn_804093B4
     stw r3, 0x51c(r31)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x4c4(r31)
     addi r4, r1, 0x8
     lfs f0, lbl_80886038
@@ -432,7 +432,7 @@ asm void fn_803FA148(void)
     cmpwi r3, 0x0
     beq lbl_fn_803FA148_000003B0
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x51c(r31)
     lwz r0, 0x38(r3)
     ori r0, r0, 0x4

@@ -42,8 +42,8 @@ extern void fn_800CB6E4(void);
 extern void fn_800CB6F8(void);
 extern void fn_800CFDC8(void);
 extern void fn_800D03AC(void);
-extern void fn_800D1D3C(void);
-extern void fn_800D1E9C(void);
+extern void atn_Task_constructor(void);
+extern void atn_Task_destructor(void);
 extern void fn_800D3FA4(void);
 extern void fn_800DC288(void);
 extern void fn_800EC654(void);
@@ -1439,7 +1439,7 @@ asm void fn_80360C5C(void)
 lbl_fn_80360C5C_000010AC:
     mr r3, r30
     li r4, 0x0
-    bl fn_800D1E9C
+    bl atn_Task_destructor
     cmpwi r31, 0x0
     ble lbl_fn_80360C5C_000010C8
     mr r3, r30
@@ -1796,7 +1796,7 @@ asm void fn_8036111C(void)
     mr r31, r3
     beq lbl_fn_8036111C_000015D0
     mr r4, r29
-    bl fn_800D1D3C
+    bl atn_Task_constructor
     lis r4, lbl_80789E58@ha
     lis r3, lbl_80789E10@ha
     addi r4, r4, lbl_80789E58@l
@@ -1855,7 +1855,7 @@ asm void fn_803611E8(void)
 lbl_fn_803611E8_0000163C:
     mr r3, r30
     li r4, 0x0
-    bl fn_800D1E9C
+    bl atn_Task_destructor
 lbl_fn_803611E8_00001648:
     cmpwi r31, 0x0
     ble lbl_fn_803611E8_00001658
@@ -2023,7 +2023,7 @@ asm void fn_80361414(void)
     mr r31, r3
     beq lbl_fn_80361414_000018D0
     mr r4, r29
-    bl fn_800D1D3C
+    bl atn_Task_constructor
     lis r4, lbl_80789E58@ha
     lis r3, lbl_80789DC8@ha
     addi r4, r4, lbl_80789E58@l

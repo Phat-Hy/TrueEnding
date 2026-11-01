@@ -16,7 +16,7 @@ extern void fn_8007A154(void);
 extern void fn_800844D8(void);
 extern void fn_800C16B4(void);
 extern void fn_800C1990(void);
-extern void fn_800D246C(void);
+extern void atn_Task_setActive(void);
 extern void fn_80373148(void);
 extern void fn_8041D180(void);
 extern void fn_8041D198(void);
@@ -1754,7 +1754,7 @@ asm void fn_80487184(void)
     bl fn_8006A5A8
     stw r3, 0x1a9c(r31)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x1a9c(r31)
     li r0, 0x12
     stw r0, 0x78(r3)
@@ -1842,7 +1842,7 @@ lbl_fn_80487184_0000197C:
 lbl_fn_80487184_00001998:
     lwz r3, 0x1a7c(r31)
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x1a7c(r31)
     li r4, 0x0
     lwz r0, 0x38(r3)
@@ -1853,7 +1853,7 @@ lbl_fn_80487184_00001998:
     rlwinm r0, r0, 0, 4, 2
     stw r0, 0xfc(r3)
     lwz r3, 0x1a80(r31)
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x1a80(r31)
     li r4, 0x0
     lwz r0, 0x38(r3)
@@ -1864,13 +1864,13 @@ lbl_fn_80487184_00001998:
     rlwinm r0, r0, 0, 4, 2
     stw r0, 0xfc(r3)
     lwz r3, 0x1aa8(r31)
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x1aa8(r31)
     li r0, 0x0
     li r4, 0x0
     stw r0, 0x48(r3)
     lwz r3, 0x23ac(r31)
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x23ac(r31)
     li r4, 0x0
     lwz r0, 0x38(r3)
@@ -1881,7 +1881,7 @@ lbl_fn_80487184_00001998:
     rlwinm r0, r0, 0, 4, 2
     stw r0, 0xfc(r3)
     lwz r3, 0x23b0(r31)
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x23b0(r31)
     li r4, 0x0
     lwz r0, 0x38(r3)
@@ -1892,7 +1892,7 @@ lbl_fn_80487184_00001998:
     rlwinm r0, r0, 0, 4, 2
     stw r0, 0xfc(r3)
     lwz r3, 0x48(r31)
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x48(r31)
     lwz r0, 0x38(r3)
     ori r0, r0, 0x4
@@ -1905,7 +1905,7 @@ lbl_fn_80487184_00001998:
     cmpwi r3, 0x0
     beq lbl_fn_80487184_00001ABC
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r4, 0x1a9c(r31)
     li r0, 0x1
     lwz r3, 0x38(r4)
@@ -1916,7 +1916,7 @@ lbl_fn_80487184_00001998:
 lbl_fn_80487184_00001ABC:
     lwz r3, 0x241c(r31)
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x241c(r31)
     li r4, 0x0
     lwz r0, 0xfc(r3)
@@ -1927,7 +1927,7 @@ lbl_fn_80487184_00001ABC:
     ori r0, r0, 0x4
     stw r0, 0x38(r3)
     lwz r3, 0x2438(r31)
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r4, 0x2438(r31)
     li r3, 0x1
     lwz r0, 0xfc(r4)

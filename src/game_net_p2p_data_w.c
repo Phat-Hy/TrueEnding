@@ -13,9 +13,9 @@ extern void fn_800A0548(void);
 extern void atn_Anim_getDuration(void);
 extern void fn_800A55AC(void);
 extern void fn_800CB3A0(void);
-extern void fn_800D1D3C(void);
-extern void fn_800D1E9C(void);
-extern void fn_800D246C(void);
+extern void atn_Task_constructor(void);
+extern void atn_Task_destructor(void);
+extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
 extern void fn_800DC6B4(void);
 extern void fn_800DD3FC(void);
@@ -415,7 +415,7 @@ asm void fn_8050F940(void)
     mr r29, r4
     stw r28, 0x10(r1)
     mr r28, r3
-    bl fn_800D1D3C
+    bl atn_Task_constructor
     lfs f0, lbl_808877C8
     lis r3, lbl_807932B8@ha
     li r31, 0x0
@@ -531,7 +531,7 @@ lbl_fn_8050FA80_0000053C:
 lbl_fn_8050FA80_00000558:
     mr r3, r30
     li r4, 0x0
-    bl fn_800D1E9C
+    bl atn_Task_destructor
     cmpwi r31, 0x0
     ble lbl_fn_8050FA80_00000574
     mr r3, r30
@@ -583,7 +583,7 @@ lbl_fn_8050FB3C_000005E8:
     bl fn_80202A6C
     stw r3, 0x0(r28)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     b lbl_fn_8050FB3C_00000634
 lbl_fn_8050FB3C_00000618:
     lwz r4, 0x4(r29)
@@ -592,7 +592,7 @@ lbl_fn_8050FB3C_00000618:
     bl fn_80201E78
     stw r3, 0x0(r28)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
 lbl_fn_8050FB3C_00000634:
     addi r29, r29, 0xc
     addi r28, r28, 0x40
@@ -764,14 +764,14 @@ lbl_fn_8050FD3C_00000834:
     cmpwi r3, 0x0
     beq lbl_fn_8050FD3C_0000086C
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     b lbl_fn_8050FD3C_0000086C
 lbl_fn_8050FD3C_00000858:
     lwz r3, 0x0(r23)
     cmpwi r3, 0x0
     beq lbl_fn_8050FD3C_0000086C
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
 lbl_fn_8050FD3C_0000086C:
     lbz r0, 0x8(r24)
     addi r27, r27, 0x1

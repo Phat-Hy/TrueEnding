@@ -11,8 +11,8 @@ extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void fn_8004ED34(void);
 extern void fn_80084320(void);
-extern void fn_800D1D3C(void);
-extern void fn_800D1E9C(void);
+extern void atn_Task_constructor(void);
+extern void atn_Task_destructor(void);
 extern void fn_800D3FA4(void);
 extern void fn_800EFC64(void);
 extern void fn_800F8548(void);
@@ -1010,7 +1010,7 @@ asm void fn_8059AC0C(void)
     stw r31, 0xc(r1)
     stw r30, 0x8(r1)
     mr r30, r3
-    bl fn_800D1D3C
+    bl atn_Task_constructor
     lis r3, lbl_80796B28@ha
     lis r4, fn_80598878@ha
     addi r3, r3, lbl_80796B28@l
@@ -1226,7 +1226,7 @@ lbl_fn_8059AD10_00000F64:
     bl fn_806959D8
     mr r3, r29
     li r4, 0x0
-    bl fn_800D1E9C
+    bl atn_Task_destructor
     cmpwi r30, 0x0
     ble lbl_fn_8059AD10_00000F98
     mr r3, r29

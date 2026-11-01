@@ -10,7 +10,7 @@ extern void dtor_80084684(void);
 extern void fn_8003EFB0(void);
 extern void fn_800827E0(void);
 extern void fn_80083AD4(void);
-extern void fn_800D246C(void);
+extern void atn_Task_setActive(void);
 extern void fn_800E2FE0(void);
 extern void fn_800EE5AC(void);
 extern void fn_8013655C(void);
@@ -464,7 +464,7 @@ lbl_fn_804FC5AC_00000508:
     li r4, 0x1
     clrrwi r0, r0, 1
     stw r0, 0x5c0(r31)
-    bl fn_800D246C
+    bl atn_Task_setActive
     li r0, 0x1
     stw r0, 0x14b4(r31)
     stw r0, 0x1450(r31)

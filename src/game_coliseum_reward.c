@@ -34,7 +34,7 @@ extern void fn_800C1A1C(void);
 extern void fn_800C23E8(void);
 extern void fn_800C2448(void);
 extern void fn_800C2E30(void);
-extern void fn_800D246C(void);
+extern void atn_Task_setActive(void);
 extern void fn_800DC288(void);
 extern void fn_800DC6B4(void);
 extern void fn_801207D4(void);
@@ -399,7 +399,7 @@ lbl_fn_80494354_0000046C:
     bl fn_804948D8
     lwz r3, 0x304(r28)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     b lbl_fn_80494354_00000560
 lbl_fn_80494354_000004B0:
     mr r3, r31

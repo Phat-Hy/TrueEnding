@@ -8,8 +8,8 @@ extern void fn_8006F72C(void);
 extern void fn_800BFAC8(void);
 extern void fn_800C31F4(void);
 extern void fn_800CB3A0(void);
-extern void fn_800D2338(void);
-extern void fn_800D246C(void);
+extern void atn_Task_unlink(void);
+extern void atn_Task_setActive(void);
 extern void fn_800DBF68(void);
 extern void fn_800DC6B4(void);
 extern void fn_800DD3FC(void);
@@ -840,7 +840,7 @@ asm void fn_803E627C(void)
     bl fn_801F3FF8
     stw r3, 0x262c(r31)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r4, 0x262c(r31)
     li r0, 0x12
     lwz r3, 0xfc(r4)
@@ -865,7 +865,7 @@ lbl_fn_803E627C_00000A2C:
     bl fn_801F3FF8
     stw r3, 0x2630(r31)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r4, 0x2630(r31)
     li r0, 0xf
     lwz r3, 0xfc(r4)
@@ -890,7 +890,7 @@ lbl_fn_803E627C_00000A8C:
     bl fn_801F3FF8
     stw r3, 0x2634(r31)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r4, 0x2634(r31)
     li r0, 0xf
     lwz r3, 0xfc(r4)
@@ -919,21 +919,21 @@ asm void fn_803E63D0(void)
     cmpwi r0, 0x0
     beq lbl_fn_803E63D0_00000B34
     mr r3, r0
-    bl fn_800D2338
+    bl atn_Task_unlink
     li r0, 0x0
     stw r0, 0x262c(r31)
 lbl_fn_803E63D0_00000B34:
     lwz r3, 0x2630(r31)
     cmpwi r3, 0x0
     beq lbl_fn_803E63D0_00000B4C
-    bl fn_800D2338
+    bl atn_Task_unlink
     li r0, 0x0
     stw r0, 0x2630(r31)
 lbl_fn_803E63D0_00000B4C:
     lwz r3, 0x2634(r31)
     cmpwi r3, 0x0
     beq lbl_fn_803E63D0_00000B64
-    bl fn_800D2338
+    bl atn_Task_unlink
     li r0, 0x0
     stw r0, 0x2634(r31)
 lbl_fn_803E63D0_00000B64:
@@ -1007,21 +1007,21 @@ asm void fn_803E64F0(void)
     stw r31, 0xc(r1)
     mr r31, r3
     lwz r3, 0x262c(r3)
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x262c(r31)
     li r4, 0x0
     lwz r0, 0x38(r3)
     ori r0, r0, 0x4
     stw r0, 0x38(r3)
     lwz r3, 0x2630(r31)
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x2630(r31)
     li r4, 0x0
     lwz r0, 0x38(r3)
     ori r0, r0, 0x4
     stw r0, 0x38(r3)
     lwz r3, 0x2634(r31)
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x2634(r31)
     lwz r0, 0x38(r3)
     ori r0, r0, 0x4

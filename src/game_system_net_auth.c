@@ -7,7 +7,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_14(void);
 extern void _savegpr_27(void);
 extern void fn_80092814(void);
-extern void fn_800D246C(void);
+extern void atn_Task_setActive(void);
 extern void fn_8012D8B8(void);
 extern void fn_80145334(void);
 extern void fn_80154654(void);
@@ -648,7 +648,7 @@ lbl_fn_803972A8_000007B8:
     li r0, 0x0
     li r4, 0x0
     stw r0, 0x58c(r22)
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r0, 0x12a4(r22)
     extrwi. r0, r0, 1, 6
     beq lbl_fn_803972A8_000007FC
@@ -1329,7 +1329,7 @@ lbl_fn_80397BEC_000010FC:
     li r0, 0x0
     li r4, 0x0
     stw r0, 0x58c(r22)
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r0, 0x12a4(r22)
     extrwi. r0, r0, 1, 6
     beq lbl_fn_80397BEC_00001140

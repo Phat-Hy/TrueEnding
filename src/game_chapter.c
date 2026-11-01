@@ -25,7 +25,7 @@ extern void fn_800BDB58(void);
 extern void fn_800BFAC8(void);
 extern void fn_800C169C(void);
 extern void fn_800C2448(void);
-extern void fn_800D5738(void);
+extern void atn_LH_Texture_constructor(void);
 extern void fn_800D5808(void);
 extern void fn_800D5908(void);
 extern void fn_800D59B8(void);
@@ -194,11 +194,11 @@ asm void fn_80077160(void)
     lfs f2, 0x8(r6)
     addi r7, r7, lbl_80777D08@l
     stw r7, 0x0(r3)
-    lis r7, fn_800D5738@ha
+    lis r7, atn_LH_Texture_constructor@ha
     lis r6, fn_800D5808@ha
     mr r24, r5
     stw r4, 0x4(r3)
-    addi r4, r7, fn_800D5738@l
+    addi r4, r7, atn_LH_Texture_constructor@l
     addi r5, r6, fn_800D5808@l
     mr r31, r3
     psq_st f1, 0x8(r3), 0, 0

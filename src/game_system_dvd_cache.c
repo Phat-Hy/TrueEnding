@@ -16,10 +16,10 @@ extern void fn_80084A78(void);
 extern void fn_80084C24(void);
 extern void fn_800897D8(void);
 extern void fn_800CFBA0(void);
-extern void fn_800D1D3C(void);
-extern void fn_800D1E9C(void);
-extern void fn_800D2338(void);
-extern void fn_800D246C(void);
+extern void atn_Task_constructor(void);
+extern void atn_Task_destructor(void);
+extern void atn_Task_unlink(void);
+extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
 extern void fn_800DCA6C(void);
 extern void fn_801F3FF8(void);
@@ -846,13 +846,13 @@ lbl_fn_80376324_000008B4:
     beq lbl_fn_80376324_000009D8
     lwz r3, 0x56f0(r30)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     b lbl_fn_80376324_000009D8
 lbl_fn_80376324_000008D4:
     lwz r3, 0x56f0(r30)
     cmpwi r3, 0x0
     beq lbl_fn_80376324_000008F0
-    bl fn_800D2338
+    bl atn_Task_unlink
     li r0, 0x0
     stw r0, 0x56f0(r30)
     stw r0, 0x571c(r30)
@@ -867,19 +867,19 @@ lbl_fn_80376324_00000904:
     bl fn_8056B3D8
     lwz r3, lbl_8087F8A0
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F428
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F408
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x10d8(r30)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F3C0
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F490
     lwz r3, 0x263c(r3)
     lwz r0, 0x38(r3)
@@ -949,19 +949,19 @@ lbl_fn_80376568_00000A2C:
     bl fn_8056BD38
     lwz r3, lbl_8087F8A0
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F428
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F408
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x10d8(r31)
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F3C0
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F490
     lwz r3, 0x263c(r3)
     lwz r0, 0x38(r3)
@@ -984,7 +984,7 @@ lbl_fn_80376568_00000AB8:
     li r30, 0x0
     stw r30, 0x54e4(r31)
     lwz r3, 0x56ec(r31)
-    bl fn_800D2338
+    bl atn_Task_unlink
     stw r30, 0x56ec(r31)
     lwz r3, lbl_8087EEF0
     cmpwi r3, 0x0
@@ -1043,7 +1043,7 @@ asm void fn_803766E4(void)
     cmpwi r0, 0x0
     beq lbl_fn_803766E4_00000B9C
     mr r3, r0
-    bl fn_800D2338
+    bl atn_Task_unlink
     li r0, 0x0
     stw r0, 0x56f0(r31)
 lbl_fn_803766E4_00000B9C:
@@ -1134,10 +1134,10 @@ asm void fn_80376804(void)
     bne lbl_fn_80376804_00000CD8
     lwz r3, 0x48(r3)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F3C0
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
 lbl_fn_80376804_00000CD8:
     lwz r3, 0x54(r31)
     cmpwi r3, 0x0
@@ -1244,10 +1244,10 @@ lbl_fn_80376804_00000E50:
     bne lbl_fn_80376804_00000E74
     lwz r3, 0x48(r31)
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F3C0
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
 lbl_fn_80376804_00000E74:
     lwz r0, 0x54(r1)
     lwz r31, 0x4c(r1)
@@ -1307,7 +1307,7 @@ lbl_fn_80376A0C_00000F18:
 lbl_fn_80376A0C_00000F20:
     mr r3, r29
     li r4, 0x0
-    bl fn_800D1E9C
+    bl atn_Task_destructor
     cmpwi r30, 0x0
     ble lbl_fn_80376A0C_00000F3C
     mr r3, r29
@@ -1416,7 +1416,7 @@ asm void fn_80376BE8(void)
     stw r30, 0x58(r1)
     stw r29, 0x54(r1)
     mr r29, r3
-    bl fn_800D1D3C
+    bl atn_Task_constructor
     lis r3, lbl_8078A4B8@ha
     li r30, 0x0
     addi r3, r3, lbl_8078A4B8@l
@@ -1444,14 +1444,14 @@ asm void fn_80376BE8(void)
     bl fn_801F3FF8
     stw r3, 0x48(r29)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     mr r3, r29
     addi r4, r31, 0x1f
     li r5, 0x0
     bl fn_801F3FF8
     stw r3, 0x4c(r29)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F0A8
     lwz r0, 0x194(r3)
     cmpwi r0, 0x0
@@ -1462,7 +1462,7 @@ asm void fn_80376BE8(void)
     bl fn_801F3FF8
     stw r3, 0x50(r29)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
 lbl_fn_80376BE8_0000114C:
     lis r31, lbl_8074DEC0@ha
     addi r3, r29, 0x54
@@ -1527,7 +1527,7 @@ asm void fn_80376D40(void)
 lbl_fn_80376D40_00001224:
     mr r3, r29
     li r4, 0x0
-    bl fn_800D1E9C
+    bl atn_Task_destructor
     cmpwi r30, 0x0
     ble lbl_fn_80376D40_00001240
     mr r3, r29
@@ -1597,7 +1597,7 @@ asm void fn_80376DD8(void)
     bl fn_804A39EC
     lwz r3, 0x4c(r31)
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r4, 0x4c(r31)
     li r0, 0x0
     lwz r3, 0x38(r4)
@@ -1608,7 +1608,7 @@ asm void fn_80376DD8(void)
     cmpwi r3, 0x0
     beq lbl_fn_80376DD8_00001388
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x50(r31)
     lfs f0, lbl_808857FC
     lwz r0, 0xfc(r3)

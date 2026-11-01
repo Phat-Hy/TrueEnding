@@ -10,8 +10,8 @@ extern void fn_800CFBA0(void);
 extern void fn_800CFD18(void);
 extern void fn_800D0518(void);
 extern void fn_800D089C(void);
-extern void fn_800D2338(void);
-extern void fn_800D246C(void);
+extern void atn_Task_unlink(void);
+extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
 extern void fn_800F3490(void);
 extern void fn_801092C8(void);
@@ -138,7 +138,7 @@ asm void fn_8036E964(void)
     lwz r3, lbl_8087F068
     cmpwi r3, 0x0
     beq lbl_fn_8036E964_00000058
-    bl fn_800D2338
+    bl atn_Task_unlink
 lbl_fn_8036E964_00000058:
     lwz r0, 0x14(r1)
     mtlr r0
@@ -208,7 +208,7 @@ asm void fn_8036EA3C(void)
     lwz r3, lbl_8087F508
     cmpwi r3, 0x0
     beq lbl_fn_8036EA3C_00000130
-    bl fn_800D2338
+    bl atn_Task_unlink
 lbl_fn_8036EA3C_00000130:
     lwz r0, 0x14(r1)
     mtlr r0
@@ -350,36 +350,36 @@ lbl_fn_8036EA6C_000002F0:
 lbl_fn_8036EA6C_0000031C:
     lwz r3, lbl_8087F558
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F048
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F8A0
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F408
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F890
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087EE68
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F3C0
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F418
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x10d8(r31)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F540
     cmpwi r3, 0x0
     beq lbl_fn_8036EA6C_000003B4
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     b lbl_fn_8036EA6C_000003B4
 lbl_fn_8036EA6C_000003A0:
     lwz r3, lbl_8087F8A0
@@ -607,38 +607,38 @@ lbl_fn_8036EE0C_0000068C:
 lbl_fn_8036EE0C_000006B8:
     lwz r3, lbl_8087F558
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F048
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F8A0
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F408
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F890
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087EE68
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F3C0
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F418
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x10d8(r31)
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F490
     bl fn_803E4100
     lwz r3, lbl_8087F540
     cmpwi r3, 0x0
     beq lbl_fn_8036EE0C_00000758
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     b lbl_fn_8036EE0C_00000758
 lbl_fn_8036EE0C_00000744:
     lwz r3, lbl_8087F8A0
@@ -1312,7 +1312,7 @@ lbl_fn_8036F268_000010C8:
     lwz r0, 0x48(r3)
     cmpwi r0, 0x8e
     bne lbl_fn_8036F268_000010EC
-    bl fn_800D2338
+    bl atn_Task_unlink
     li r0, 0x0
     stw r0, 0x56f0(r31)
 lbl_fn_8036F268_000010EC:
@@ -1420,22 +1420,22 @@ asm void fn_8036FB4C(void)
     stw r0, 0x54e4(r3)
     lwz r5, 0x10d8(r3)
     lwz r3, 0x134(r5)
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F8A0
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F408
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F890
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087EE68
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F3C0
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r4, 0x5624(r30)
     li r0, 0x0
     stw r0, 0x56e4(r30)
@@ -1492,22 +1492,22 @@ asm void fn_8036FC58(void)
     stw r31, 0x54e4(r3)
     lwz r5, 0x10d8(r3)
     lwz r3, 0x134(r5)
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F8A0
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F408
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F890
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087EE68
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, lbl_8087F3C0
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x5624(r30)
     lis r5, 0xff00
     li r4, 0x12

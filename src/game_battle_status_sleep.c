@@ -27,7 +27,7 @@ extern void fn_8009EE30(void);
 extern void fn_800A04A0(void);
 extern void atn_Anim_getDuration(void);
 extern void fn_800B2180(void);
-extern void fn_800D246C(void);
+extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
 extern void fn_800DC288(void);
 extern void fn_800EF73C(void);
@@ -700,7 +700,7 @@ lbl_fn_8042B134_000007E0:
     cmpwi r3, 0x0
     beq lbl_fn_8042B134_00000804
     li r4, 0x0
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x164(r30)
     lwz r0, 0x38(r3)
     ori r0, r0, 0x4
@@ -964,7 +964,7 @@ lbl_fn_8042B3BC_00000B40:
     bl fn_8049CDBC
     stw r3, 0x164(r30)
     li r4, 0x1
-    bl fn_800D246C
+    bl atn_Task_setActive
     lwz r3, 0x164(r30)
     lwz r0, 0x50(r3)
     cmpwi r0, 0x0
