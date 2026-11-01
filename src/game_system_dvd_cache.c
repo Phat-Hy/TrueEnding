@@ -52,7 +52,7 @@ extern void fn_805BC6CC(void);
 extern void strncmp(void);
 extern void atoi(void);
 extern void fn_806952C4(void);
-extern void fn_80695AD0(void);
+extern void vec3_isNonZero(void);
 extern int sprintf(char* str, const char* format, ...);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
@@ -1171,7 +1171,7 @@ lbl_fn_80376804_00000D34:
     stw r5, 0x24(r1)
     stw r4, 0x28(r1)
     stw r0, 0x2c(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80376804_00000E50
     lwz r0, 0x5c(r31)

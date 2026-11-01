@@ -19,16 +19,16 @@ extern void fn_8006AFF8(void);
 extern void fn_8006CA80(void);
 extern void mem_free(void);
 extern void route_findNextWaypoint(void);
-extern void fn_8008771C(void);
+extern void route_interpolatePath(void);
 extern void fn_80087994(void);
 extern void fn_80087E9C(void);
 extern void fn_8008937C(void);
 extern void fn_800897D8(void);
 extern void fn_8008A76C(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_800C344C(void);
+extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB5C8(void);
+extern void morph_updateMesh(void);
 extern void fn_800EB7A0(void);
 extern void fn_800EC254(void);
 extern void fn_800EC2C4(void);
@@ -68,8 +68,8 @@ extern void fn_8031D4F4(void);
 extern void fn_8031E8BC(void);
 extern void fn_8035B694(void);
 extern void fn_8035B78C(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void PSMTXConcat(void);
@@ -189,7 +189,7 @@ asm void fn_8031A484(void)
     addi r5, r31, 0x528
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -1281,7 +1281,7 @@ lbl_fn_8031B3CC_00001030:
     addi r3, r28, 0x1570
     li r4, 0x0
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     addic. r0, r28, 0x15bc
     beq lbl_fn_8031B3CC_00001064
     lwz r4, 0x15bc(r28)
@@ -1389,7 +1389,7 @@ lbl_fn_8031B3CC_000011C0:
     addi r3, r30, 0x38
     li r4, 0x0
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     addi r3, r30, 0x38
     li r4, -0x1
     bl ref_releaseHandle
@@ -1511,7 +1511,7 @@ lbl_fn_8031B6E0_00001334:
     addi r5, r31, 0x14ec
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     mr r3, r29
     addi r4, r30, 0xb5
     addi r5, r31, 0x58c
@@ -1531,14 +1531,14 @@ lbl_fn_8031B6E0_00001334:
     li r7, 0x0
     bl fn_80087E9C
     addi r3, r31, 0x14b0
-    bl fn_80470580
+    bl boss_getOffset54
     cmpwi r3, 0x0
     beq lbl_fn_8031B6E0_000014B0
     addi r3, r31, 0x14b0
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r28, r3
     addi r3, r31, 0x14b0
-    bl fn_80470580
+    bl boss_getOffset54
     lis r4, lbl_807772D0@ha
     li r0, 0x0
     addi r4, r4, lbl_807772D0@l
@@ -1797,7 +1797,7 @@ lbl_fn_8031B9B4_0000179C:
     addi r3, r31, 0x1570
     li r4, 0x0
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
 lbl_fn_8031B9B4_000017AC:
     lwz r3, lbl_8087F3C0
     mr r4, r31
@@ -2341,7 +2341,7 @@ lbl_fn_8031B9B4_00001FB0:
     addi r3, r31, 0x1570
     li r4, 0xa
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
 lbl_fn_8031B9B4_00001FC0:
     lwz r30, 0x1560(r31)
     b lbl_fn_8031B9B4_00002044

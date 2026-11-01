@@ -24,10 +24,10 @@ extern void fn_800971D4(void);
 extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800C344C(void);
+extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
-extern void fn_800CB5C8(void);
+extern void morph_updateMesh(void);
 extern void str_skipWhitespace(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800FAB80(void);
@@ -47,8 +47,8 @@ extern void fn_803ED0D4(void);
 extern void fn_803ED5D0(void);
 extern void fn_803ED774(void);
 extern void fn_803EDB18(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void atn_LoadHandle_destructor(void);
 extern void PSMTXRotRad(void);
 extern void PSMTX44Identity(void);
@@ -268,10 +268,10 @@ asm void fn_804070B4(void)
     stw r29, 0x744(r1)
     mr r29, r3
     addi r3, r3, 0x60
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r30, r3
     addi r3, r29, 0x60
-    bl fn_80470580
+    bl boss_getOffset54
     lis r4, lbl_807774D8@ha
     li r0, 0x0
     addi r4, r4, lbl_807774D8@l
@@ -858,7 +858,7 @@ lbl_fn_80407408_000009FC:
     addi r5, r30, 0x6c
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r30, 0x940
     addi r4, r1, 0x14
     bl fn_800CB440
@@ -914,7 +914,7 @@ lbl_fn_80407408_00000AC8:
     addi r3, r30, 0x940
     li r4, 0x0
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lis r4, lbl_807528E0@ha
     lfs f1, lbl_8088625C
     addi r4, r4, lbl_807528E0@l
@@ -923,7 +923,7 @@ lbl_fn_80407408_00000AC8:
     addi r5, r30, 0x6c
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle

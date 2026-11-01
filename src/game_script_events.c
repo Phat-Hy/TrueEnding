@@ -6,7 +6,7 @@ extern void fn_80094958(void);
 extern void fn_80094B6C(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800C344C(void);
+extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void fn_800F8C6C(void);
 extern void fn_80103F60(void);
@@ -441,7 +441,7 @@ lbl_fn_8024B4F0_000004CC:
     addi r5, r31, 0x528
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle
@@ -1470,7 +1470,7 @@ lbl_fn_8024C46C_000012F8:
     addi r5, r29, 0x528
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x1c
     li r4, -0x1
     bl ref_releaseHandle
@@ -1620,7 +1620,7 @@ lbl_fn_8024C46C_0000157C:
     addi r5, r29, 0x528
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x18
     li r4, -0x1
     bl ref_releaseHandle

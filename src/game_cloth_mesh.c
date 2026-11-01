@@ -9,7 +9,7 @@ extern void _savegpr_25(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void talk_parseQuotedString(void);
 extern void fn_8005B5F8(void);
 extern void fn_8005B6E8(void);
@@ -18,11 +18,11 @@ extern void mem_free(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800C344C(void);
+extern void skin_applyWeights(void);
 extern void fn_800CB360(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
-extern void fn_800CB5C8(void);
+extern void morph_updateMesh(void);
 extern void fn_80126214(void);
 extern void fn_8012F440(void);
 extern void fn_8013A258(void);
@@ -1485,7 +1485,7 @@ lbl_fn_8027C38C_000012CC:
     addi r5, r30, 0x528
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r30, 0x19c0
     addi r4, r1, 0x10
     bl fn_800CB440
@@ -1524,7 +1524,7 @@ lbl_fn_8027C38C_000013D8:
     addi r3, r30, 0x19c0
     li r4, 0x0
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lfs f0, lbl_808838DC
     li r0, 0x1
     stw r0, 0x3fc(r30)
@@ -1947,7 +1947,7 @@ asm void fn_8027C990(void)
     addi r8, r1, 0x18
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     addi r27, r31, 0x18
     stw r28, 0x2c(r1)
     addi r26, r1, 0x2c
@@ -1967,7 +1967,7 @@ asm void fn_8027C990(void)
     addi r8, r1, 0x10
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     addi r3, r30, 0x2c
     bl strlen
     lis r4, lbl_807772D0@ha
@@ -2035,7 +2035,7 @@ lbl_fn_8027C990_00001B60:
     addi r6, r26, 0x8
     addi r8, r1, 0x8
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_8027C990_00001B90:
     addi r3, r1, 0x44
     bl fn_8005B5F8

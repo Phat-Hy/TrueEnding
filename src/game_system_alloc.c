@@ -16,7 +16,7 @@ extern void atn_LH_Texture_update(void);
 extern void net_player_interpolateState(void);
 extern void fn_801EDC78(void);
 extern void fn_801F9E70(void);
-extern void fn_80695D84(void);
+extern void runtime_clampDouble(void);
 
 /* External data declarations */
 
@@ -129,7 +129,7 @@ lbl_player_updateEquipment_00000158:
     lfs f1, lbl_80882CAC
     lfs f0, lbl_80882CA8
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_player_updateEquipment_00000168:
     mr r30, r3
 lbl_player_updateEquipment_0000016C:
@@ -151,7 +151,7 @@ lbl_player_updateEquipment_000001A0:
     lfs f1, lbl_80882CAC
     lfs f0, lbl_80882CA8
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_player_updateEquipment_000001B0:
     mr r29, r3
 lbl_player_updateEquipment_000001B4:
@@ -173,7 +173,7 @@ lbl_player_updateEquipment_000001E8:
     lfs f1, lbl_80882CAC
     lfs f0, lbl_80882CA8
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_player_updateEquipment_000001F8:
     mr r28, r3
 lbl_player_updateEquipment_000001FC:
@@ -195,7 +195,7 @@ lbl_player_updateEquipment_00000230:
     lfs f1, lbl_80882CAC
     lfs f0, lbl_80882CA8
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_player_updateEquipment_00000240:
     lfs f2, 0x30(r1)
     slwi r3, r3, 24
@@ -221,7 +221,7 @@ lbl_player_updateEquipment_0000028C:
     lfs f1, lbl_80882CAC
     lfs f0, lbl_80882CA8
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_player_updateEquipment_0000029C:
     mr r28, r3
 lbl_player_updateEquipment_000002A0:
@@ -243,7 +243,7 @@ lbl_player_updateEquipment_000002D4:
     lfs f1, lbl_80882CAC
     lfs f0, lbl_80882CA8
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_player_updateEquipment_000002E4:
     mr r29, r3
 lbl_player_updateEquipment_000002E8:
@@ -265,7 +265,7 @@ lbl_player_updateEquipment_0000031C:
     lfs f1, lbl_80882CAC
     lfs f0, lbl_80882CA8
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_player_updateEquipment_0000032C:
     mr r30, r3
 lbl_player_updateEquipment_00000330:
@@ -287,7 +287,7 @@ lbl_player_updateEquipment_00000364:
     lfs f1, lbl_80882CAC
     lfs f0, lbl_80882CA8
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_player_updateEquipment_00000374:
     lwz r7, 0x10(r31)
     slwi r6, r3, 24

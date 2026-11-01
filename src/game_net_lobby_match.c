@@ -13,13 +13,13 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_8000D430(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_80045A24(void);
 extern void talk_formatQuotedString(void);
 extern void fn_8006B174(void);
 extern void fn_800709F4(void);
 extern void mem_alloc(void);
-extern void fn_8008771C(void);
+extern void route_interpolatePath(void);
 extern void fn_80087858(void);
 extern void fn_8008937C(void);
 extern void fn_8008AD4C(void);
@@ -34,7 +34,7 @@ extern void fn_800C16B4(void);
 extern void atn_Task_destructor(void);
 extern void fn_800DC12C(void);
 extern void str_skipWhitespace(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_804962B0(void);
 extern void fn_804963A4(void);
 extern void PSMTXConcat(void);
@@ -225,7 +225,7 @@ asm void fn_8049B880(void)
     addi r8, r1, 0x8
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r31
     addi r3, r1, 0x1c
     bl fn_8006B174
@@ -243,13 +243,13 @@ lbl_fn_8049B880_00000190:
 lbl_fn_8049B880_000001A4:
     lwz r3, 0x24(r1)
 lbl_fn_8049B880_000001A8:
-    bl fn_800DC6B4
+    bl str_findChar
     cmplw r27, r3
     beq lbl_fn_8049B880_000001CC
     lis r3, lbl_80756B84@ha
     addi r3, r3, lbl_80756B84@l
     addi r3, r3, 0xe4
-    bl fn_800DC6B4
+    bl str_findChar
     cmplw r27, r3
     bne lbl_fn_8049B880_000001D8
 lbl_fn_8049B880_000001CC:
@@ -1308,7 +1308,7 @@ asm void fn_8049C7AC(void)
     addi r8, r1, 0x8
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r30
     addi r3, r1, 0x1c
     bl fn_8006B174
@@ -1326,13 +1326,13 @@ lbl_fn_8049C7AC_000010C0:
 lbl_fn_8049C7AC_000010D4:
     lwz r3, 0x24(r1)
 lbl_fn_8049C7AC_000010D8:
-    bl fn_800DC6B4
+    bl str_findChar
     cmplw r27, r3
     beq lbl_fn_8049C7AC_000010FC
     lis r3, lbl_80756CD8@ha
     addi r3, r3, lbl_80756CD8@l
     addi r3, r3, 0xed
-    bl fn_800DC6B4
+    bl str_findChar
     cmplw r27, r3
     bne lbl_fn_8049C7AC_00001100
 lbl_fn_8049C7AC_000010FC:
@@ -1529,7 +1529,7 @@ lbl_fn_8049CA9C_0000134C:
     addi r4, r31, 0xf
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_8088714C
     mr r3, r26
     lfs f2, lbl_80887150
@@ -1538,7 +1538,7 @@ lbl_fn_8049CA9C_0000134C:
     addi r4, r31, 0x19
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_8088714C
     mr r3, r26
     lfs f2, lbl_80887150

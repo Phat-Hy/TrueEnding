@@ -53,7 +53,7 @@ extern void PSMTXRotRad(void);
 extern void PSMTX44Identity(void);
 extern void std_atan2(void);
 extern void fn_806952C4(void);
-extern void fn_80695AD0(void);
+extern void vec3_isNonZero(void);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
 
@@ -503,7 +503,7 @@ lbl_fn_80139560_00000550:
     addi r4, r31, 0xf80
     bl fn_8013A1A8
     addi r3, r1, 0x30
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80139560_000006D8
     addi r3, r31, 0xf80
@@ -529,7 +529,7 @@ lbl_fn_80139560_00000550:
     addi r4, r1, 0x78
     bl fn_800C61C0
     addi r3, r1, 0x24
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80139560_000005E4
     addi r3, r1, 0x78
@@ -1205,7 +1205,7 @@ lbl_fn_8013A258_00000D64:
     stw r5, 0x30(r1)
     stw r4, 0x34(r1)
     stw r0, 0x38(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_8013A258_00000F84
     lwz r3, 0xf80(r31)
@@ -1248,7 +1248,7 @@ lbl_fn_8013A258_00000E08:
     stw r5, 0x24(r1)
     stw r4, 0x28(r1)
     stw r0, 0x2c(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_8013A258_00000F20
     lwz r0, 0x3c(r1)

@@ -41,7 +41,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_8011EDE0(void);
 extern void fn_80129A48(void);
 extern void fn_8012AC40(void);
@@ -109,7 +109,7 @@ void fn_8000E6B0(void);
 void fn_8000E7B8(void);
 void fn_8000E820(void);
 void fn_8000EB84(void);
-void fn_8000EB8C(void);
+void sys_copyString(void);
 void fn_8000EC88(void);
 void fn_8000ECA8(void);
 void fn_8000ECC8(void);
@@ -373,7 +373,7 @@ lbl_fn_8000E474_0000036C:
     b lbl_fn_8000E474_00000420
 lbl_fn_8000E474_0000039C:
     lwz r3, 0x50(r31)
-    bl fn_800DC6B4
+    bl str_findChar
     mr r28, r3
     lwz r3, 0x1c(r27)
     bl fn_8000DE3C
@@ -618,7 +618,7 @@ asm void fn_8000E820(void)
     addi r3, r30, 0x8
     addi r29, r29, lbl_8072F924@l
     addi r4, r29, 0x39
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_8000E820_000006E8
 lbl_fn_8000E820_000006DC:
@@ -628,7 +628,7 @@ lbl_fn_8000E820_000006DC:
 lbl_fn_8000E820_000006E8:
     addi r3, r30, 0x8
     addi r4, r29, 0x40
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_8000E820_000007D4
     li r0, 0x7
@@ -650,7 +650,7 @@ lbl_fn_8000E820_000006E8:
     b lbl_fn_8000E820_000007C4
 lbl_fn_8000E820_00000740:
     lwz r3, 0x50(r29)
-    bl fn_800DC6B4
+    bl str_findChar
     mr r27, r3
     lwz r3, 0x1c(r30)
     bl fn_8000DE3C
@@ -848,7 +848,7 @@ asm void fn_8000EB84(void)
     blr
 }
 
-asm void fn_8000EB8C(void)
+asm void sys_copyString(void)
 {
     nofralloc
     stwu r1, -0x30(r1)
@@ -865,55 +865,55 @@ asm void fn_8000EB8C(void)
     mr r31, r3
     lwz r0, 0x0(r29)
     srwi. r0, r0, 31
-    bne lbl_fn_8000EB8C_00000A48
+    bne lbl_sys_copyString_00000A48
     lbz r0, 0x0(r29)
     clrlwi r4, r0, 25
-    b lbl_fn_8000EB8C_00000A4C
-lbl_fn_8000EB8C_00000A48:
+    b lbl_sys_copyString_00000A4C
+lbl_sys_copyString_00000A48:
     lwz r4, 0x4(r29)
-lbl_fn_8000EB8C_00000A4C:
+lbl_sys_copyString_00000A4C:
     stw r4, 0x8(r1)
     lwz r0, 0x0(r29)
     srwi. r0, r0, 31
-    bne lbl_fn_8000EB8C_00000A6C
+    bne lbl_sys_copyString_00000A6C
     lbz r0, 0x0(r29)
     addi r3, r29, 0x1
     clrlwi r0, r0, 25
-    b lbl_fn_8000EB8C_00000A74
-lbl_fn_8000EB8C_00000A6C:
+    b lbl_sys_copyString_00000A74
+lbl_sys_copyString_00000A6C:
     lwz r3, 0x8(r29)
     lwz r0, 0x4(r29)
-lbl_fn_8000EB8C_00000A74:
+lbl_sys_copyString_00000A74:
     cmplw r4, r0
     stw r0, 0x10(r1)
     addi r4, r1, 0x10
-    bge lbl_fn_8000EB8C_00000A88
+    bge lbl_sys_copyString_00000A88
     addi r4, r1, 0x8
-lbl_fn_8000EB8C_00000A88:
+lbl_sys_copyString_00000A88:
     lwz r0, 0x0(r4)
     mr r4, r30
     stw r0, 0x14(r1)
     addi r5, r1, 0x14
     cmplw r31, r0
-    bge lbl_fn_8000EB8C_00000AA4
+    bge lbl_sys_copyString_00000AA4
     addi r5, r1, 0xc
-lbl_fn_8000EB8C_00000AA4:
+lbl_sys_copyString_00000AA4:
     lwz r5, 0x0(r5)
     bl fn_8067E23C
     cmpwi r3, 0x0
-    bne lbl_fn_8000EB8C_00000AD8
+    bne lbl_sys_copyString_00000AD8
     lwz r0, 0x14(r1)
     cmplw r0, r31
-    bge lbl_fn_8000EB8C_00000AC8
+    bge lbl_sys_copyString_00000AC8
     li r3, -0x1
-    b lbl_fn_8000EB8C_00000AD8
-lbl_fn_8000EB8C_00000AC8:
-    bne lbl_fn_8000EB8C_00000AD4
+    b lbl_sys_copyString_00000AD8
+lbl_sys_copyString_00000AC8:
+    bne lbl_sys_copyString_00000AD4
     li r3, 0x0
-    b lbl_fn_8000EB8C_00000AD8
-lbl_fn_8000EB8C_00000AD4:
+    b lbl_sys_copyString_00000AD8
+lbl_sys_copyString_00000AD4:
     li r3, 0x1
-lbl_fn_8000EB8C_00000AD8:
+lbl_sys_copyString_00000AD8:
     cntlzw r0, r3
     lwz r31, 0x2c(r1)
     lwz r30, 0x28(r1)

@@ -11,7 +11,7 @@ extern void _savegpr_22(void);
 extern void _savegpr_25(void);
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void talk_parseQuotedString(void);
 extern void fn_8005B5F8(void);
 extern void fn_8005B6E8(void);
@@ -25,7 +25,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
 extern void fn_800CB360(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB5C8(void);
+extern void morph_updateMesh(void);
 extern void atn_Task_setActive(void);
 extern void fn_800DC12C(void);
 extern void str_skipWhitespace(void);
@@ -48,8 +48,8 @@ extern void res_findResourceSlot(void);
 extern void fn_8023A680(void);
 extern void fn_8035B694(void);
 extern void fn_8035B78C(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
@@ -441,7 +441,7 @@ asm void fn_802F66CC(void)
     addi r3, r31, 0x1514
     li r4, 0x0
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, 0x14ec(r31)
     li r0, 0x0
     stw r0, 0x1590(r31)
@@ -1067,7 +1067,7 @@ asm void fn_802F6E64(void)
     addi r8, r1, 0x18
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     addi r27, r28, 0x18
     stw r29, 0x2c(r1)
     addi r26, r1, 0x2c
@@ -1087,7 +1087,7 @@ asm void fn_802F6E64(void)
     addi r8, r1, 0x10
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     addi r3, r31, 0x2c
     bl strlen
     lis r4, lbl_807772D0@ha
@@ -1155,7 +1155,7 @@ lbl_fn_802F6E64_00000E94:
     addi r6, r26, 0x8
     addi r8, r1, 0x8
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_802F6E64_00000EC4:
     addi r3, r1, 0x44
     bl fn_8005B5F8
@@ -1394,7 +1394,7 @@ lbl_fn_802F73FC_000011BC:
     cmpwi r3, 0x0
     bne lbl_fn_802F73FC_00001B30
     addi r3, r18, 0x160c
-    bl fn_80470580
+    bl boss_getOffset54
     cmpwi r3, 0x0
     beq lbl_fn_802F73FC_00001A5C
     lwz r3, lbl_8087F430
@@ -1404,10 +1404,10 @@ lbl_fn_802F73FC_000011BC:
     cmpwi r0, 0x0
     beq lbl_fn_802F73FC_00001A5C
     addi r3, r18, 0x160c
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r20, r3
     addi r3, r18, 0x160c
-    bl fn_80470580
+    bl boss_getOffset54
     lis r4, lbl_807772D0@ha
     li r22, 0x0
     addi r4, r4, lbl_807772D0@l

@@ -9,7 +9,7 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void vec3_copy(void);
 extern void fn_8000DD04(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_80070B60(void);
 extern void fn_80070C98(void);
 extern void fn_80080048(void);
@@ -33,7 +33,7 @@ extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800D87A4(void);
 extern void fn_800D87B0(void);
 extern void fn_800D8808(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_getData(void);
 extern void fn_80476130(void);
@@ -41,7 +41,7 @@ extern void PSMTXMultVec(void);
 extern void fn_8067E23C(void);
 extern void runtime_registerStaticObject(void);
 extern void fn_80695A50(void);
-extern void fn_80695AD0(void);
+extern void vec3_isNonZero(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -669,9 +669,9 @@ lbl_fn_80095750_00000834:
     add r7, r27, r0
     addi r8, r1, 0x8
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r3, r27
-    bl fn_800DC6B4
+    bl str_findChar
     stw r3, 0xc(r31)
     addi r3, r30, 0x4
     stw r30, 0x10(r31)
@@ -902,7 +902,7 @@ asm void fn_80095B08(void)
 lbl_fn_80095B08_00000BA8:
     lwz r3, 0x8(r4)
 lbl_fn_80095B08_00000BAC:
-    bl fn_800DC6B4
+    bl str_findChar
     mr r31, r3
     addi r30, r28, 0x1
     li r29, 0x0
@@ -1226,7 +1226,7 @@ lbl_fn_80095F10_00000FDC:
     stw r5, 0x8(r1)
     stw r4, 0xc(r1)
     stw r0, 0x10(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80095F10_00001268
     lwz r3, 0x208(r30)

@@ -8,7 +8,7 @@ extern void fn_8003EA3C(void);
 extern void fn_8004D388(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800C344C(void);
+extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800F8574(void);
@@ -1495,7 +1495,7 @@ asm void fn_8026A4FC(void)
     stfs f2, 0x530(r30)
     li r7, -0x1
     stfs f0, 0x538(r30)
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle

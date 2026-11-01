@@ -13,7 +13,7 @@ struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct 
 extern void atn_LH_Texture_destructAndFree(void);
 extern void atn_LH_Texture_release(void);
 extern void fn_800DBF68(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_800DD3FC(void);
 extern void fn_801EC158(void);
 extern void fn_801EC6C0(void);
@@ -61,7 +61,7 @@ asm void fn_801F8FE4(void)
     mr r3, r4
     stb r0, 0x8(r1)
     stb r0, 0x9(r1)
-    bl fn_800DC6B4
+    bl str_findChar
     lbz r4, 0x9(r1)
     mr r7, r31
     lbz r0, 0x8(r1)
@@ -134,7 +134,7 @@ asm void fn_801F90E0(void)
     mr r3, r4
     stb r0, 0x8(r1)
     stb r5, 0x9(r1)
-    bl fn_800DC6B4
+    bl str_findChar
     lbz r4, 0x9(r1)
     mr r7, r31
     lbz r0, 0x8(r1)
@@ -242,7 +242,7 @@ lbl_fn_801F91DC_0000027C:
     mr r3, r29
     stw r0, 0x28(r1)
     stw r0, 0x2c(r1)
-    bl fn_800DC6B4
+    bl str_findChar
     lwz r0, 0x24(r1)
     stw r3, 0x20(r1)
     srwi. r0, r0, 31
@@ -522,7 +522,7 @@ lbl_fn_801F94F4_00000644:
     crclr 6
     bl sprintf
     addi r3, r1, 0x8
-    bl fn_800DC6B4
+    bl str_findChar
     stw r3, 0x12c(r30)
     addi r3, r30, 0x130
     lfs f1, lbl_80882CA0
@@ -567,7 +567,7 @@ lbl_fn_801F94F4_000006CC:
     crclr 6
     bl sprintf
     addi r3, r1, 0x8
-    bl fn_800DC6B4
+    bl str_findChar
     stw r3, 0x160(r30)
     addi r3, r30, 0x164
     lfs f1, lbl_80882CA0

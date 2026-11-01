@@ -8,7 +8,7 @@ extern void _savegpr_24(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_800458D4(void);
 extern void fn_800458F4(void);
 extern void fn_8006B174(void);
@@ -16,7 +16,7 @@ extern void fn_8006B2D8(void);
 extern void fn_80070C98(void);
 extern void mem_alloc(void);
 extern void route_findNextWaypoint(void);
-extern void fn_8008771C(void);
+extern void route_interpolatePath(void);
 extern void fn_80087994(void);
 extern void fn_8008937C(void);
 extern void fn_800897D8(void);
@@ -34,7 +34,7 @@ extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
 extern void fn_800D5B58(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_8021771C(void);
 extern void fn_8037DD00(void);
 extern void fn_803EE5AC(void);
@@ -199,7 +199,7 @@ asm void fn_8049D264(void)
     lis r4, lbl_80756EC8@ha
     addi r3, r4, lbl_80756EC8@l
     lwz r31, 0x0(r5)
-    bl fn_800DC6B4
+    bl str_findChar
     lwz r30, 0x70(r29)
     mr r29, r3
     b lbl_fn_8049D264_0000011C
@@ -1149,7 +1149,7 @@ lbl_fn_8049DEE4_00000D84:
     addi r8, r1, 0x8
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r28
     addi r3, r1, 0x10
     bl fn_8006B174
@@ -1237,7 +1237,7 @@ lbl_fn_8049DEE4_00000E88:
     addi r5, r27, 0x110
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_80887160
     mr r3, r25
     lfs f2, lbl_80887164
@@ -1246,7 +1246,7 @@ lbl_fn_8049DEE4_00000E88:
     addi r5, r27, 0x114
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     mr r3, r27
     bl fn_8049ED90
     lwz r3, 0xf4(r27)
@@ -1620,7 +1620,7 @@ lbl_fn_8049E480_00001408:
     addi r8, r1, 0x1c
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r18
     addi r3, r1, 0x84
     bl fn_8006B174
@@ -1760,7 +1760,7 @@ lbl_fn_8049E480_000015F0:
     addi r8, r1, 0x14
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r17
     addi r3, r1, 0x6c
     bl fn_8006B174
@@ -1899,7 +1899,7 @@ lbl_fn_8049E480_000017C8:
     addi r8, r1, 0xc
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r16
     addi r3, r1, 0x54
     bl fn_8006B174

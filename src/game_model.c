@@ -36,7 +36,7 @@ extern void fn_80615E00(void);
 extern void fn_80615FF0(void);
 extern void fn_80616250(void);
 extern void fn_806952C4(void);
-extern void fn_80695D84(void);
+extern void runtime_clampDouble(void);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
 
@@ -757,7 +757,7 @@ lbl_atn_Model_updateAnimation_0000099C:
     lfs f7, lbl_808810C8
     lfs f0, lbl_80881094
     fmadds f1, f7, f8, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_atn_Model_updateAnimation_000009AC:
     mr r27, r3
 lbl_atn_Model_updateAnimation_000009B0:
@@ -779,7 +779,7 @@ lbl_atn_Model_updateAnimation_000009E4:
     lfs f7, lbl_808810C8
     lfs f0, lbl_80881094
     fmadds f1, f7, f8, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_atn_Model_updateAnimation_000009F4:
     mr r25, r3
 lbl_atn_Model_updateAnimation_000009F8:
@@ -801,7 +801,7 @@ lbl_atn_Model_updateAnimation_00000A2C:
     lfs f7, lbl_808810C8
     lfs f0, lbl_80881094
     fmadds f1, f7, f8, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_atn_Model_updateAnimation_00000A3C:
     mr r24, r3
 lbl_atn_Model_updateAnimation_00000A40:
@@ -823,7 +823,7 @@ lbl_atn_Model_updateAnimation_00000A74:
     lfs f7, lbl_808810C8
     lfs f0, lbl_80881094
     fmadds f1, f7, f8, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_atn_Model_updateAnimation_00000A84:
     slwi r5, r25, 8
     slwi r4, r3, 24

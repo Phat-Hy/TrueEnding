@@ -8,7 +8,7 @@ extern void _savegpr_14(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_800502A8(void);
 extern void talk_formatQuotedString(void);
 extern void fn_8006AA20(void);
@@ -38,10 +38,10 @@ extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800D5908(void);
 extern void atn_LH_Texture_update(void);
 extern void str_skipWhitespace(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void res_findResourceSlot(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void fn_804714A4(void);
 extern void fn_804714B0(void);
 extern void atn_LoadHandle_constructor(void);
@@ -181,7 +181,7 @@ asm void fn_80499E14(void)
     addi r8, r1, 0x8
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r29
     addi r3, r1, 0x1c
     bl fn_8006B174
@@ -199,13 +199,13 @@ lbl_fn_80499E14_00000148:
 lbl_fn_80499E14_0000015C:
     lwz r3, 0x24(r1)
 lbl_fn_80499E14_00000160:
-    bl fn_800DC6B4
+    bl str_findChar
     cmplw r26, r3
     beq lbl_fn_80499E14_00000184
     lis r3, lbl_80756A8C@ha
     addi r3, r3, lbl_80756A8C@l
     addi r3, r3, 0x85
-    bl fn_800DC6B4
+    bl str_findChar
     cmplw r26, r3
     bne lbl_fn_80499E14_0000025C
 lbl_fn_80499E14_00000184:
@@ -444,7 +444,7 @@ lbl_fn_8049A09C_0000045C:
     addi r8, r1, 0x10
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r28
     addi r3, r1, 0x48
     bl fn_8006B174
@@ -518,7 +518,7 @@ lbl_fn_8049A09C_0000056C:
     addi r8, r1, 0x8
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r28
     addi r3, r1, 0x24
     bl fn_8006B174
@@ -1571,10 +1571,10 @@ asm void fn_8049B1F0(void)
     li r0, 0x0
     stw r0, 0x50(r1)
     addi r3, r27, 0x50
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r26, r3
     addi r3, r27, 0x50
-    bl fn_80470580
+    bl boss_getOffset54
     mr r4, r3
     mr r5, r26
     addi r3, r1, 0x28
@@ -1599,7 +1599,7 @@ lbl_fn_8049B1F0_00001524:
     stw r0, 0x50(r1)
 lbl_fn_8049B1F0_0000152C:
     addi r3, r27, 0x50
-    bl fn_80470580
+    bl boss_getOffset54
     mr r31, r3
     addi r3, r27, 0x50
     bl atn_LoadHandle_getName
@@ -1622,7 +1622,7 @@ lbl_fn_8049B1F0_0000152C:
     addi r8, r1, 0x20
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r28
     addi r3, r1, 0x44
     bl fn_8006B0C8
@@ -1699,7 +1699,7 @@ lbl_fn_8049B1F0_00001664:
     lwz r0, 0x48(r1)
     li r5, 0x0
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_8049B1F0_000016AC:
     lwz r0, 0x38(r1)
     lis r3, lbl_80756B84@ha
@@ -1724,7 +1724,7 @@ lbl_fn_8049B1F0_000016D4:
     add r7, r26, r0
     addi r8, r1, 0x10
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lwz r0, 0x38(r1)
     lwz r26, 0x20(r31)
     srwi. r0, r0, 31
@@ -1746,7 +1746,7 @@ lbl_fn_8049B1F0_00001724:
     add r7, r26, r0
     addi r8, r1, 0x8
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lwz r0, 0x38(r1)
     srwi. r0, r0, 31
     bne lbl_fn_8049B1F0_00001768

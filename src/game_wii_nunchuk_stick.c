@@ -16,7 +16,7 @@ extern void fn_80093D98(void);
 extern void fn_80093E90(void);
 extern void fn_80094958(void);
 extern void fn_80094B6C(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_80112918(void);
 extern void fn_801129B4(void);
 extern void fn_80112F5C(void);
@@ -39,7 +39,7 @@ extern void fn_8068B770(void);
 extern void fn_8068BC30(void);
 extern void fn_8068BD60(void);
 extern void fn_8068C240(void);
-extern void fn_80695D84(void);
+extern void runtime_clampDouble(void);
 
 /* External data declarations */
 extern u8 lbl_8075E858[];
@@ -539,7 +539,7 @@ lbl_fn_80559B30_000006AC:
     lfs f1, lbl_80887E68
     lfs f0, lbl_80887E50
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_80559B30_000006BC:
     mr r24, r3
 lbl_fn_80559B30_000006C0:
@@ -561,7 +561,7 @@ lbl_fn_80559B30_000006F4:
     lfs f1, lbl_80887E68
     lfs f0, lbl_80887E50
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_80559B30_00000704:
     mr r28, r3
 lbl_fn_80559B30_00000708:
@@ -583,7 +583,7 @@ lbl_fn_80559B30_0000073C:
     lfs f1, lbl_80887E68
     lfs f0, lbl_80887E50
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_80559B30_0000074C:
     mr r25, r3
 lbl_fn_80559B30_00000750:
@@ -605,7 +605,7 @@ lbl_fn_80559B30_00000784:
     lfs f1, lbl_80887E68
     lfs f0, lbl_80887E50
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_80559B30_00000794:
     slwi r3, r3, 24
     slwi r0, r24, 16
@@ -652,7 +652,7 @@ lbl_fn_80559B30_000007B8:
     stfs f1, 0xb0(r1)
     fdivs f0, f0, f4
     stfs f0, 0xb4(r1)
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     mr r3, r26
     bl fn_80093E90

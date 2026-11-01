@@ -7,7 +7,7 @@ extern void _savegpr_17(void);
 extern void dtor_80013D60(void);
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_8003E4A4(void);
 extern void fn_8004212C(void);
 extern void fn_800422CC(void);
@@ -28,7 +28,7 @@ extern void fn_800DBF68(void);
 extern void fn_800DC12C(void);
 extern void fn_800DC1DC(void);
 extern void str_skipWhitespace(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_800EC254(void);
 extern void fn_800EC2C4(void);
 extern void fn_800EC440(void);
@@ -362,7 +362,7 @@ asm void fn_80208814(void)
     addi r8, r1, 0x8
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)
@@ -1294,7 +1294,7 @@ lbl_fn_80209300_00000F7C:
     lwz r0, lbl_8087F1B0
     mr r3, r25
     add r23, r0, r27
-    bl fn_800DC6B4
+    bl str_findChar
     stw r3, 0x0(r23)
     addi r3, r1, 0xc
     bl talk_parseQuotedString
@@ -1373,7 +1373,7 @@ lbl_fn_80209300_0000109C:
     lwz r0, lbl_8087F1A8
     mr r3, r25
     add r21, r0, r26
-    bl fn_800DC6B4
+    bl str_findChar
     stw r3, 0x0(r21)
     addi r3, r1, 0xc
     bl talk_parseQuotedString
@@ -1423,7 +1423,7 @@ asm void fn_802096A8(void)
     addi r8, r1, 0x8
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r31
     addi r3, r1, 0x10
     bl fn_8006B174
@@ -1435,7 +1435,7 @@ asm void fn_802096A8(void)
 lbl_fn_802096A8_0000117C:
     lwz r3, 0x18(r1)
 lbl_fn_802096A8_00001180:
-    bl fn_800DC6B4
+    bl str_findChar
     lwz r0, 0x10(r1)
     mr r31, r3
     srwi. r0, r0, 31
@@ -1507,7 +1507,7 @@ asm void fn_802097C4(void)
     addi r8, r1, 0x8
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r31
     addi r3, r1, 0x10
     bl fn_8006B174
@@ -1519,7 +1519,7 @@ asm void fn_802097C4(void)
 lbl_fn_802097C4_00001298:
     lwz r3, 0x18(r1)
 lbl_fn_802097C4_0000129C:
-    bl fn_800DC6B4
+    bl str_findChar
     lwz r0, 0x10(r1)
     mr r31, r3
     srwi. r0, r0, 31
@@ -1701,7 +1701,7 @@ lbl_fn_80209960_000014E8:
     add r3, r0, r23
     bl memset
     mr r3, r19
-    bl fn_800DC6B4
+    bl str_findChar
     lwz r0, lbl_8087F1B8
     add r4, r0, r23
     stw r3, 0xc0(r4)

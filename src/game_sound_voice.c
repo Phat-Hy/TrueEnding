@@ -12,7 +12,7 @@ extern void fn_800A555C(void);
 extern void fn_800A55AC(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CFBA0(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_800DD3FC(void);
 extern void fn_80116FC0(void);
 extern void fn_80117214(void);
@@ -159,7 +159,7 @@ lbl_fn_801D7354_00000094:
     crclr 6
     bl sprintf
     addi r3, r1, 0x30
-    bl fn_800DC6B4
+    bl str_findChar
     mr r5, r3
     mr r4, r24
     addi r3, r1, 0x8
@@ -328,7 +328,7 @@ lbl_fn_801D7560_000002DC:
     stfs f0, 0x34(r1)
     bl fn_805112AC
     addi r3, r1, 0x60
-    bl fn_800DC6B4
+    bl str_findChar
     mr r5, r3
     mr r4, r27
     addi r3, r1, 0x4c
@@ -365,7 +365,7 @@ lbl_fn_801D7560_00000370:
     lwz r5, 0x1378(r30)
     bl fn_805112AC
     addi r3, r1, 0x60
-    bl fn_800DC6B4
+    bl str_findChar
     mr r5, r3
     mr r4, r27
     addi r3, r1, 0x38
@@ -760,7 +760,7 @@ lbl_fn_801D7AC0_0000092C:
     bl fn_80202118
     mr r24, r3
     addi r3, r1, 0x78
-    bl fn_800DC6B4
+    bl str_findChar
     mr r5, r3
     mr r4, r24
     addi r3, r1, 0x60

@@ -16,7 +16,7 @@ extern void fn_8004D388(void);
 extern void fn_8004ED34(void);
 extern void fn_8005361C(void);
 extern void atn_Matrix_copy_2(void);
-extern void fn_800C344C(void);
+extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_destructor(void);
 extern void fn_800F7FD8(void);
@@ -1598,7 +1598,7 @@ asm void fn_801100A0(void)
     addi r3, r1, 0xc
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0xc
     li r4, -0x1
     bl ref_releaseHandle
@@ -1804,7 +1804,7 @@ lbl_fn_801100A0_000017E0:
     addi r5, r5, 0x528
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle

@@ -13,7 +13,7 @@ extern void fn_8008BBD8(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void fn_800C31F4(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB5C8(void);
+extern void morph_updateMesh(void);
 extern void fn_80105B3C(void);
 extern void fn_80105B4C(void);
 extern void fn_801070C8(void);
@@ -128,7 +128,7 @@ asm void fn_801BC904(void)
     stw r5, 0x0(r3)
     li r5, 0x0
     addi r3, r3, 0x30
-    bl fn_800CB5C8
+    bl morph_updateMesh
     addi r3, r30, 0x30
     li r4, -0x1
     bl ref_releaseHandle

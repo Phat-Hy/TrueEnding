@@ -30,8 +30,8 @@ extern void fn_800DC12C(void);
 extern void str_skipWhitespace(void);
 extern void fn_8037E12C(void);
 extern void fn_80389884(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void atn_LoadHandle_getName(void);
 extern void fn_80491F94(void);
 extern void fn_804963F8(void);
@@ -242,10 +242,10 @@ asm void fn_8049ED90(void)
     bl _savegpr_26
     mr r31, r3
     addi r3, r3, 0x58
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r28, r3
     addi r3, r31, 0x58
-    bl fn_80470580
+    bl boss_getOffset54
     lis r4, lbl_807774D8@ha
     li r30, 0x0
     addi r4, r4, lbl_807774D8@l
@@ -1806,14 +1806,14 @@ lbl_fn_804A04AC_0000193C:
     lwz r4, lbl_8087F430
     addi r3, r3, 0x60
     addi r30, r4, 0x6c
-    bl fn_80470580
+    bl boss_getOffset54
     cmpwi r3, 0x0
     beq lbl_fn_804A04AC_00001980
     addi r3, r25, 0x60
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r31, r3
     addi r3, r25, 0x60
-    bl fn_80470580
+    bl boss_getOffset54
     mr r4, r3
     mr r3, r30
     mr r5, r31

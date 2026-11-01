@@ -48,7 +48,7 @@ extern void strcmp(void);
 extern void abort(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
-extern void fn_80695AD0(void);
+extern void vec3_isNonZero(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
 
@@ -574,7 +574,7 @@ lbl_fn_8017B434_00000638:
     stw r5, 0x8(r1)
     stw r4, 0xc(r1)
     stw r0, 0x10(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_8017B434_00000674
     lwz r3, 0xf80(r29)
@@ -620,7 +620,7 @@ lbl_fn_8017B434_000006E0:
     stw r5, 0x14(r1)
     stw r4, 0x18(r1)
     stw r0, 0x1c(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_8017B434_0000071C
     lwz r3, 0xf80(r29)

@@ -12,7 +12,7 @@ extern void talk_parseQuotedString(void);
 extern void fn_8005B5F8(void);
 extern void fn_8005B6E8(void);
 extern void route_findNextWaypoint(void);
-extern void fn_8008771C(void);
+extern void route_interpolatePath(void);
 extern void fn_80087858(void);
 extern void fn_80087994(void);
 extern void fn_80087E9C(void);
@@ -815,7 +815,7 @@ lbl_fn_8037E9E0_0000090C:
     addi r5, r29, 0x8d8
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_808858E8
     mr r3, r30
     lfs f2, lbl_808859A0
@@ -824,7 +824,7 @@ lbl_fn_8037E9E0_0000090C:
     addi r5, r29, 0x8dc
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     mr r3, r30
     addi r4, r31, 0x10d
     addi r5, r29, 0x9f4
@@ -851,7 +851,7 @@ lbl_fn_8037E9E0_0000090C:
     addi r5, r29, 0x9ec
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     mr r3, r30
     addi r4, r31, 0x133
     bl fn_8008937C
@@ -919,7 +919,7 @@ asm void fn_8037ECF0(void)
     addi r4, r31, 0x167
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_808858E8
     mr r3, r30
     lfs f2, lbl_808859B0
@@ -946,7 +946,7 @@ asm void fn_8037ECF0(void)
     addi r5, r29, 0xc
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_808859B8
     mr r3, r30
     lfs f2, lbl_808859BC
@@ -955,7 +955,7 @@ asm void fn_8037ECF0(void)
     addi r5, r29, 0x10
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_808859B8
     mr r3, r30
     lfs f2, lbl_808859BC
@@ -964,7 +964,7 @@ asm void fn_8037ECF0(void)
     addi r5, r29, 0x14
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_808859B8
     mr r3, r30
     lfs f2, lbl_808859BC
@@ -973,7 +973,7 @@ asm void fn_8037ECF0(void)
     addi r5, r29, 0x18
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_808858E8
     mr r3, r30
     lfs f2, lbl_808858F8
@@ -982,7 +982,7 @@ asm void fn_8037ECF0(void)
     addi r5, r29, 0x1c
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_808858E8
     mr r3, r30
     lfs f2, lbl_808858F8
@@ -991,7 +991,7 @@ asm void fn_8037ECF0(void)
     addi r5, r29, 0x20
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_808858E8
     mr r3, r30
     lfs f2, lbl_808858F8
@@ -1000,7 +1000,7 @@ asm void fn_8037ECF0(void)
     addi r5, r29, 0x24
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_808858E8
     mr r3, r30
     lfs f2, lbl_808858F8
@@ -1009,7 +1009,7 @@ asm void fn_8037ECF0(void)
     addi r5, r29, 0x28
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_808858E8
     mr r3, r30
     lfs f2, lbl_808858F8
@@ -1018,7 +1018,7 @@ asm void fn_8037ECF0(void)
     addi r5, r29, 0x2c
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_808858E8
     mr r3, r30
     lfs f2, lbl_808858F8
@@ -1027,7 +1027,7 @@ asm void fn_8037ECF0(void)
     addi r5, r29, 0x30
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_808859C0
     mr r3, r30
     lfs f2, lbl_8088599C

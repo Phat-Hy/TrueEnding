@@ -11,7 +11,7 @@ extern void _restgpr_26(void);
 extern BOOL OSDisableInterrupts(void);
 extern BOOL OSRestoreInterrupts(BOOL);
 extern void std_pow(void);
-extern void fn_80695D84(void);
+extern void runtime_clampDouble(void);
 
 /* External large data symbols */
 extern u8 lbl_807AF800[];
@@ -111,7 +111,7 @@ lbl_fn_8060D190_000000AC:
 lbl_fn_8060D190_000000B4:
     lfs f0, lbl_80888620
     fmuls f1, f0, f3
-    bl fn_80695D84
+    bl runtime_clampDouble
     cmpwi r3, 0x0
     stw r3, 0x14(r28)
     bne lbl_fn_8060D190_000000D4
@@ -247,7 +247,7 @@ lbl_fn_8060D3B0_00000290:
     lwz r0, 0x1c(r3)
     fmuls f1, f0, f1
     stw r0, 0x14(r30)
-    bl fn_80695D84
+    bl runtime_clampDouble
     stw r3, 0x30(r30)
     lis r4, lbl_807AF820@ha
     addi r4, r4, lbl_807AF820@l
@@ -1054,7 +1054,7 @@ lbl_fn_8060DDD0_00000DB4:
     lfs f0, 0xbc(r3)
     stw r28, 0x28(r3)
     fmuls f1, f1, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
     lis r29, lbl_807AF820@ha
     stw r3, 0x2c(r31)
     lfd f29, lbl_80888670

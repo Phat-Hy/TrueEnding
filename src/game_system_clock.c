@@ -44,7 +44,7 @@ extern void fn_80686A48(void);
 extern void abort(void);
 extern void runtime_registerStaticObject(void);
 extern void fn_80695A50(void);
-extern void fn_80695D84(void);
+extern void runtime_clampDouble(void);
 
 /* External data declarations */
 extern u8 lbl_8073E628[];
@@ -723,7 +723,7 @@ lbl_fn_801FF778_000008D0:
     lfs f1, lbl_80882CC8
     lfs f0, lbl_80882CC4
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_801FF778_000008E0:
     mr r29, r3
 lbl_fn_801FF778_000008E4:
@@ -745,7 +745,7 @@ lbl_fn_801FF778_00000918:
     lfs f1, lbl_80882CC8
     lfs f0, lbl_80882CC4
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_801FF778_00000928:
     mr r30, r3
 lbl_fn_801FF778_0000092C:
@@ -767,7 +767,7 @@ lbl_fn_801FF778_00000960:
     lfs f1, lbl_80882CC8
     lfs f0, lbl_80882CC4
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_801FF778_00000970:
     mr r31, r3
 lbl_fn_801FF778_00000974:
@@ -789,7 +789,7 @@ lbl_fn_801FF778_000009A8:
     lfs f1, lbl_80882CC8
     lfs f0, lbl_80882CC4
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_801FF778_000009B8:
     slwi r3, r3, 24
     slwi r0, r29, 16

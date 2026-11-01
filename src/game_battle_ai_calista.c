@@ -10,7 +10,7 @@ extern void _savegpr_23(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void talk_formatQuotedString(void);
 extern void fn_8005BBF8(void);
 extern void fn_8005BCE8(void);
@@ -23,7 +23,7 @@ extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void fn_800C31F4(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB5C8(void);
+extern void morph_updateMesh(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
 extern void fn_800DC12C(void);
@@ -53,8 +53,8 @@ extern void fn_803EC69C(void);
 extern void fn_803EC91C(void);
 extern void fn_804439FC(void);
 extern void fn_8044D6AC(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void atn_LoadHandle_destructor(void);
 extern void fn_804A24C4(void);
 extern void fn_804A251C(void);
@@ -181,7 +181,7 @@ asm void fn_80431388(void)
     stw r5, 0x0(r3)
     li r5, 0x0
     addi r3, r3, 0x30a0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     addi r3, r29, 0x30a0
     li r4, -0x1
     bl ref_releaseHandle
@@ -273,7 +273,7 @@ lbl_fn_80431458_000001C4:
     addi r8, r1, 0x8
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     cmpwi r25, 0x0
     beq lbl_fn_80431458_00000284
     li r3, 0x1428
@@ -1143,7 +1143,7 @@ lbl_fn_80431774_00000DF4:
     addi r3, r30, 0x30a0
     li r4, 0x96
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     b lbl_fn_80431774_00000FBC
 lbl_fn_80431774_00000EAC:
     stw r29, 0x34c(r3)
@@ -1297,10 +1297,10 @@ asm void fn_8043239C(void)
     bl _savegpr_23
     mr r29, r3
     addi r3, r3, 0x60
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r30, r3
     addi r3, r29, 0x60
-    bl fn_80470580
+    bl boss_getOffset54
     lis r4, lbl_807774D8@ha
     li r0, 0x0
     addi r4, r4, lbl_807774D8@l
@@ -1774,7 +1774,7 @@ lbl_fn_804329BC_00001760:
     addi r3, r31, 0x30a0
     li r4, 0xf
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
 lbl_fn_804329BC_0000177C:
     li r3, 0x1
     li r0, 0x3
@@ -1820,7 +1820,7 @@ lbl_fn_804329BC_0000180C:
     addi r3, r31, 0x30a0
     li r4, 0xf
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
 lbl_fn_804329BC_00001828:
     li r3, 0x0
     li r0, 0x4

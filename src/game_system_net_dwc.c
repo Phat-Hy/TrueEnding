@@ -5,7 +5,7 @@
 extern void _restgpr_18(void);
 extern void _savegpr_18(void);
 extern void dtor_80084684(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void atn_LH_Binary_destructor(void);
 extern void fn_800575BC(void);
 extern void atn_ColliBox_destructor(void);
@@ -27,8 +27,8 @@ extern void fn_803AB948(void);
 extern void fn_803AD278(void);
 extern void fn_803AD508(void);
 extern void fn_803AD668(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_8068B50C(void);
 extern void fn_8068B610(void);
@@ -313,7 +313,7 @@ lbl_fn_80393BEC_00000344:
     mr r3, r29
     addi r8, r1, 0xc
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_80393BEC_00000360:
     lwz r0, 0x18(r1)
     srwi. r0, r0, 31
@@ -1270,14 +1270,14 @@ lbl_fn_80394BA4_00000FFC:
     li r29, 0x0
 lbl_fn_80394BA4_00001010:
     mr r3, r30
-    bl fn_80470580
+    bl boss_getOffset54
     cmpwi r3, 0x0
     beq lbl_fn_80394BA4_00001048
     mr r3, r30
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r31, r3
     mr r3, r30
-    bl fn_80470580
+    bl boss_getOffset54
     mr r5, r3
     mr r3, r28
     mr r4, r29

@@ -6,7 +6,7 @@ extern void _restgpr_14(void);
 extern void _savegpr_14(void);
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void atn_LH_Binary_destructor(void);
 extern void fn_8006AA20(void);
 extern void fn_8006AD24(void);
@@ -25,8 +25,8 @@ extern void fn_800D594C(void);
 extern void atn_LH_Texture_update(void);
 extern void fn_800DC978(void);
 extern void fn_8046F544(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
@@ -754,7 +754,7 @@ lbl_fn_8006CABC_000008D0:
     addi r3, r1, 0x90
     addi r8, r1, 0x30
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_8006CABC_000008EC:
     lwz r0, 0x78(r1)
     srwi. r0, r0, 31
@@ -795,7 +795,7 @@ lbl_fn_8006CABC_0000094C:
     add r7, r27, r0
     addi r8, r1, 0x28
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lwz r0, 0x90(r1)
     srwi. r0, r0, 31
     bne lbl_fn_8006CABC_00000994
@@ -817,7 +817,7 @@ lbl_fn_8006CABC_00000998:
     addi r8, r1, 0x20
     add r7, r7, r0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_8006CABC_000009CC:
     lwz r0, 0x90(r1)
     srwi. r0, r0, 31
@@ -892,7 +892,7 @@ lbl_fn_8006CABC_00000AB4:
     addi r3, r1, 0x90
     addi r8, r1, 0x18
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_8006CABC_00000AD0:
     lwz r0, 0x60(r1)
     srwi. r0, r0, 31
@@ -922,7 +922,7 @@ lbl_fn_8006CABC_00000AF8:
     addi r8, r1, 0x10
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r25
     addi r3, r1, 0x90
     bl fn_8006AD24
@@ -946,10 +946,10 @@ lbl_fn_8006CABC_00000B80:
 lbl_fn_8006CABC_00000B84:
     bl taskManager_updateTasks
     addi r3, r1, 0x40
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r24, r3
     addi r3, r1, 0x40
-    bl fn_80470580
+    bl boss_getOffset54
     mr r7, r3
     mr r3, r15
     mr r4, r18
@@ -1002,7 +1002,7 @@ lbl_fn_8006CABC_00000C34:
     add r7, r14, r0
     addi r8, r1, 0xc
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     addi r3, r1, 0x38
     bl atn_LoadHandle_constructor
     lwz r0, 0x48(r1)
@@ -1019,10 +1019,10 @@ lbl_fn_8006CABC_00000C90:
 lbl_fn_8006CABC_00000C94:
     bl taskManager_updateTasks
     addi r3, r1, 0x38
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r14, r3
     addi r3, r1, 0x38
-    bl fn_80470580
+    bl boss_getOffset54
     mr r4, r3
     mr r3, r15
     mr r5, r14
@@ -1089,7 +1089,7 @@ lbl_fn_8006D008_00000D64:
     addi r8, r1, 0x10
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lbz r0, 0xc(r1)
     mr r4, r30
     stb r0, 0x8(r1)
@@ -1097,7 +1097,7 @@ lbl_fn_8006D008_00000D64:
     add r7, r28, r31
     addi r8, r1, 0x8
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lmw r27, 0x1c(r1)
     lwz r0, 0x34(r1)
     mtlr r0
@@ -1181,7 +1181,7 @@ lbl_fn_8006D0C8_00000EB0:
     add r7, r19, r0
     addi r8, r1, 0x28
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lwz r0, 0x3c(r1)
     srwi. r0, r0, 31
     bne lbl_fn_8006D0C8_00000EF4
@@ -1202,7 +1202,7 @@ lbl_fn_8006D0C8_00000EF8:
     addi r8, r1, 0x20
     add r7, r7, r0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lwz r0, 0x3c(r1)
     srwi. r0, r0, 31
     bne lbl_fn_8006D0C8_00000F3C
@@ -1243,7 +1243,7 @@ lbl_fn_8006D0C8_00000F88:
     add r7, r18, r0
     addi r8, r1, 0x18
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lwz r0, 0x3c(r1)
     srwi. r0, r0, 31
     bne lbl_fn_8006D0C8_00000FCC
@@ -1264,7 +1264,7 @@ lbl_fn_8006D0C8_00000FD0:
     addi r8, r1, 0x10
     add r7, r7, r0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     stw r20, 0x30(r1)
     mr r3, r17
     stw r20, 0x34(r1)
@@ -1281,7 +1281,7 @@ lbl_fn_8006D0C8_00000FD0:
     addi r8, r1, 0x8
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r16
     addi r3, r1, 0x3c
     bl fn_8006AD24
@@ -1393,14 +1393,14 @@ lbl_fn_8006D3F8_000011AC:
     cmpwi r0, 0x0
     bne lbl_fn_8006D3F8_00001200
     mr r3, r28
-    bl fn_80470580
+    bl boss_getOffset54
     cmpwi r3, 0x0
     beq lbl_fn_8006D3F8_00001200
     mr r3, r28
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r31, r3
     mr r3, r28
-    bl fn_80470580
+    bl boss_getOffset54
     mr r7, r3
     mr r3, r24
     mr r5, r25

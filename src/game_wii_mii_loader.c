@@ -7,7 +7,7 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_8000D430(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void talk_formatQuotedString(void);
 extern void fn_8005BBF8(void);
 extern void fn_8005BCE8(void);
@@ -33,8 +33,8 @@ extern void fn_8020CC64(void);
 extern void fn_8020DE0C(void);
 extern void fn_8020EF4C(void);
 extern void fn_80219558(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void atn_LoadHandle_getName(void);
 extern void fn_80481668(void);
 extern void fn_804EB654(void);
@@ -48,7 +48,7 @@ extern void PSVECMag(void);
 extern void strcmp(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
-extern void fn_80695AD0(void);
+extern void vec3_isNonZero(void);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
 
@@ -93,10 +93,10 @@ asm void fn_80564344(void)
     stmw r20, 0x710(r1)
     mr r22, r3
     addi r3, r3, 0x418
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r24, r3
     addi r3, r22, 0x418
-    bl fn_80470580
+    bl boss_getOffset54
     lis r4, lbl_807774D8@ha
     li r27, 0x0
     addi r4, r4, lbl_807774D8@l
@@ -175,7 +175,7 @@ lbl_fn_80564344_00000128:
     add r7, r27, r0
     addi r8, r1, 0x60
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     addi r3, r1, 0xd4
     bl talk_formatQuotedString
     lwz r0, 0xbc(r1)
@@ -199,7 +199,7 @@ lbl_fn_80564344_00000180:
     add r7, r27, r0
     addi r8, r1, 0x58
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lwz r0, 0x14(r22)
     cmpwi r0, 0x0
     bne lbl_fn_80564344_0000072C
@@ -255,7 +255,7 @@ lbl_fn_80564344_00000260:
     addi r3, r1, 0xc8
     addi r8, r1, 0x50
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_80564344_0000027C:
     lwz r0, 0x98(r1)
     srwi. r0, r0, 31
@@ -330,7 +330,7 @@ lbl_fn_80564344_00000348:
     add r7, r21, r0
     addi r8, r1, 0x48
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lwz r0, 0xbc(r1)
     srwi. r0, r0, 31
     bne lbl_fn_80564344_0000038C
@@ -391,7 +391,7 @@ lbl_fn_80564344_00000434:
     addi r3, r1, 0xbc
     addi r8, r1, 0x40
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_80564344_00000450:
     lwz r0, 0x80(r1)
     srwi. r0, r0, 31
@@ -471,7 +471,7 @@ lbl_fn_80564344_00000530:
     add r7, r21, r0
     addi r8, r1, 0x38
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     b lbl_fn_80564344_000006DC
 lbl_fn_80564344_00000564:
     lwz r0, 0xbc(r1)
@@ -504,7 +504,7 @@ lbl_fn_80564344_000005A0:
     add r7, r21, r0
     addi r8, r1, 0x30
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     b lbl_fn_80564344_000006DC
 lbl_fn_80564344_000005D4:
     lwz r0, 0xbc(r1)
@@ -537,7 +537,7 @@ lbl_fn_80564344_00000610:
     add r7, r21, r0
     addi r8, r1, 0x28
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     b lbl_fn_80564344_000006DC
 lbl_fn_80564344_00000644:
     lwz r0, 0xbc(r1)
@@ -609,7 +609,7 @@ lbl_fn_80564344_000006FC:
     add r7, r21, r0
     addi r8, r1, 0x20
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_80564344_0000072C:
     lwz r0, 0xbc(r1)
     srwi r0, r0, 31
@@ -689,7 +689,7 @@ lbl_fn_80564344_00000808:
     add r7, r21, r0
     addi r8, r1, 0x18
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lwz r0, 0xbc(r1)
     srwi r0, r0, 31
     cntlzw r0, r0
@@ -846,10 +846,10 @@ lbl_fn_80564344_000009F8:
 lbl_fn_80564344_00000A6C:
     lwz r20, 0x430(r22)
     addi r3, r22, 0x428
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r23, r3
     addi r3, r22, 0x428
-    bl fn_80470580
+    bl boss_getOffset54
     mr r4, r3
     mr r3, r20
     mr r5, r23
@@ -896,7 +896,7 @@ lbl_fn_80564344_00000A6C:
     addi r8, r1, 0x10
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r23
     addi r3, r1, 0x74
     bl fn_8006B174
@@ -945,7 +945,7 @@ lbl_fn_80564344_00000BD4:
     addi r3, r1, 0xb0
     addi r8, r1, 0x8
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_80564344_00000BF0:
     lwz r0, 0x68(r1)
     srwi. r0, r0, 31
@@ -1063,10 +1063,10 @@ asm void fn_80565068(void)
     bl _savegpr_27
     mr r31, r3
     addi r3, r3, 0x418
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r30, r3
     addi r3, r31, 0x418
-    bl fn_80470580
+    bl boss_getOffset54
     lis r4, lbl_807774D8@ha
     li r0, 0x0
     addi r4, r4, lbl_807774D8@l
@@ -1225,7 +1225,7 @@ lbl_fn_80565068_00000F88:
     stw r5, 0x14(r1)
     stw r4, 0x18(r1)
     stw r0, 0x1c(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80565068_00000FF8
     li r5, 0x0
@@ -1281,7 +1281,7 @@ lbl_fn_80565068_00001050:
     stw r5, 0x8(r1)
     stw r4, 0xc(r1)
     stw r0, 0x10(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80565068_000010C8
     li r29, 0x0
@@ -1358,7 +1358,7 @@ lbl_fn_8056542C_0000115C:
     stw r5, 0x8(r1)
     stw r4, 0xc(r1)
     stw r0, 0x10(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_8056542C_00001208
     li r28, 0x0
@@ -1452,7 +1452,7 @@ lbl_fn_8056556C_00001264:
     addi r8, r1, 0x8
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r29
     addi r3, r1, 0x10
     bl fn_8006B174
@@ -1631,7 +1631,7 @@ lbl_fn_805657D0_00001514:
     stw r5, 0x14(r1)
     stw r4, 0x18(r1)
     stw r0, 0x1c(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_805657D0_00001584
     li r5, 0x0
@@ -1687,7 +1687,7 @@ lbl_fn_805657D0_000015DC:
     stw r5, 0x8(r1)
     stw r4, 0xc(r1)
     stw r0, 0x10(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_805657D0_00001654
     li r29, 0x0
@@ -1769,7 +1769,7 @@ lbl_fn_805659B8_000016F8:
     stw r5, 0x8(r1)
     stw r4, 0xc(r1)
     stw r0, 0x10(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_805659B8_00001768
     li r5, 0x0
@@ -1825,7 +1825,7 @@ lbl_fn_805659B8_000017C0:
     stw r5, 0x14(r1)
     stw r4, 0x18(r1)
     stw r0, 0x1c(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_805659B8_00001838
     li r28, 0x0

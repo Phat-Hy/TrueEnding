@@ -44,7 +44,7 @@ extern void fn_803EDB0C(void);
 extern void fn_803EFDA4(void);
 extern void fn_803FFD10(void);
 extern void fn_804006E0(void);
-extern void fn_80470580(void);
+extern void boss_getOffset54(void);
 extern void atn_LoadHandle_getStatus(void);
 extern void atn_LoadHandle_getName(void);
 extern void fn_804918A4(void);
@@ -320,7 +320,7 @@ asm void fn_804985E4(void)
     cmpwi r3, 0x3
     bne lbl_fn_804985E4_00000AF8
     addi r3, r21, 0x58
-    bl fn_80470580
+    bl boss_getOffset54
     addi r27, r3, 0x10
     addi r3, r21, 0x58
     bl atn_LoadHandle_getName

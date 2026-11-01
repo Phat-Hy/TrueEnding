@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void talk_parseQuotedString(void);
 extern void fn_8005B5F8(void);
 extern void fn_8005B6E8(void);
@@ -570,7 +570,7 @@ lbl_fn_80204958_0000063C:
     addi r8, r1, 0xc
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lbz r26, 0x14(r1)
     addi r23, r24, 0xf
 lbl_fn_80204958_0000069C:
@@ -591,7 +591,7 @@ lbl_fn_80204958_0000069C:
     li r5, 0x1
     li r6, 0x0
     li r7, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     b lbl_fn_80204958_0000069C
 lbl_fn_80204958_000006E8:
     lwz r0, 0x1c(r1)
@@ -989,7 +989,7 @@ lbl_fn_80204E54_00000B64:
     addi r8, r1, 0x20
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     addi r15, r27, 0x7
     stw r28, 0xb0(r1)
     mr r3, r15
@@ -1011,7 +1011,7 @@ lbl_fn_80204E54_00000B64:
     addi r8, r1, 0x1c
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lwz r0, 0x2c(r1)
     stb r28, 0xc8(r1)
     srwi. r0, r0, 31
@@ -1063,7 +1063,7 @@ lbl_fn_80204E54_00000D78:
     lwz r0, 0xb4(r1)
     li r5, 0x0
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_80204E54_00000DB8:
     lwz r4, 0xbc(r1)
     srwi. r0, r4, 31
@@ -1090,7 +1090,7 @@ lbl_fn_80204E54_00000DDC:
     lwz r0, 0xc0(r1)
     li r5, 0x0
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_80204E54_00000E1C:
     addic. r0, r25, 0xc
     lbz r5, 0xc8(r1)
@@ -1730,7 +1730,7 @@ lbl_fn_80205BE8_000016E4:
     lwz r6, 0x8(r31)
     lwz r0, 0x4(r31)
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_80205BE8_00001724:
     lwz r3, 0xc(r31)
     srwi. r0, r3, 31
@@ -1758,7 +1758,7 @@ lbl_fn_80205BE8_00001748:
     lwz r6, 0x14(r31)
     lwz r0, 0x10(r31)
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_80205BE8_0000178C:
     lbz r0, 0x18(r31)
     stb r0, 0x18(r30)
@@ -1800,7 +1800,7 @@ lbl_fn_80205BE8_000017E8:
     lwz r6, 0x38(r31)
     lwz r0, 0x34(r31)
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_80205BE8_0000182C:
     lwz r0, 0x1c(r31)
     lwz r7, 0x28(r31)
@@ -2183,7 +2183,7 @@ lbl_fn_80205BE8_00001D04:
     stb r0, 0x14(r1)
     addi r8, r1, 0x14
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     li r0, 0x1
     b lbl_fn_80205BE8_000022FC
 lbl_fn_80205BE8_00001D24:
@@ -2640,7 +2640,7 @@ lbl_fn_80205BE8_000022E0:
     stb r0, 0xc(r1)
     addi r8, r1, 0xc
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     li r0, 0x1
 lbl_fn_80205BE8_000022FC:
     stb r0, 0x2c(r31)

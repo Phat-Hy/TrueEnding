@@ -95,8 +95,8 @@ extern void fn_80453DB4(void);
 extern void fn_80453DBC(void);
 extern void fn_80453E20(void);
 extern void fn_8045817C(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void strncmp(void);
@@ -663,7 +663,7 @@ lbl_fn_80452998_00000698:
     li r7, 0x0
     bl fn_80087994
     addi r3, r29, 0x14b0
-    bl fn_80470580
+    bl boss_getOffset54
     cmpwi r3, 0x0
     beq lbl_fn_80452998_00000780
     lwz r3, lbl_8087F430
@@ -673,10 +673,10 @@ lbl_fn_80452998_00000698:
     cmpwi r0, 0x0
     beq lbl_fn_80452998_00000780
     addi r3, r29, 0x14b0
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r30, r3
     addi r3, r29, 0x14b0
-    bl fn_80470580
+    bl boss_getOffset54
     lis r4, lbl_807772D0@ha
     li r0, 0x0
     addi r4, r4, lbl_807772D0@l
@@ -1661,7 +1661,7 @@ asm void fn_8045374C(void)
     stw r0, 0x7ec(r31)
     bl fn_8045817C
     addi r3, r31, 0x14b0
-    bl fn_80470580
+    bl boss_getOffset54
     cmpwi r3, 0x0
     beq lbl_fn_8045374C_00001540
     bl fn_80121F00
@@ -1672,10 +1672,10 @@ asm void fn_8045374C(void)
     cmpwi r3, 0x0
     beq lbl_fn_8045374C_00001540
     addi r3, r31, 0x14b0
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r25, r3
     addi r3, r31, 0x14b0
-    bl fn_80470580
+    bl boss_getOffset54
     mr r4, r3
     mr r5, r25
     addi r3, r1, 0x120

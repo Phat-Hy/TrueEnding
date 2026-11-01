@@ -26,11 +26,11 @@ extern void fn_800A0548(void);
 extern void fn_800A08E0(void);
 extern void atn_Task_constructor(void);
 extern void str_skipWhitespace(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_8011D320(void);
 extern void fn_802180A8(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_80473F88(void);
 extern void printf(void);
@@ -153,59 +153,59 @@ lbl_fn_8011E200_000000F4:
     lis r14, lbl_80736FA8@ha
     addi r3, r14, lbl_80736FA8@l
     lwz r20, 0x16c(r4)
-    bl fn_800DC6B4
+    bl str_findChar
     addi r15, r14, lbl_80736FA8@l
     mr r22, r3
     addi r3, r15, 0x5
-    bl fn_800DC6B4
+    bl str_findChar
     mr r23, r3
     addi r3, r15, 0xa
-    bl fn_800DC6B4
+    bl str_findChar
     mr r24, r3
     addi r3, r15, 0x10
-    bl fn_800DC6B4
+    bl str_findChar
     mr r25, r3
     addi r3, r15, 0x16
-    bl fn_800DC6B4
+    bl str_findChar
     mr r14, r3
     addi r3, r15, 0x1f
-    bl fn_800DC6B4
+    bl str_findChar
     stw r3, 0x40(r1)
     addi r3, r15, 0x28
-    bl fn_800DC6B4
+    bl str_findChar
     stw r3, 0x44(r1)
     addi r3, r15, 0x36
-    bl fn_800DC6B4
+    bl str_findChar
     stw r3, 0x48(r1)
     addi r3, r15, 0x44
-    bl fn_800DC6B4
+    bl str_findChar
     stw r3, 0x4c(r1)
     addi r3, r15, 0x4b
-    bl fn_800DC6B4
+    bl str_findChar
     stw r3, 0x50(r1)
     addi r3, r15, 0x53
-    bl fn_800DC6B4
+    bl str_findChar
     stw r3, 0x54(r1)
     addi r3, r15, 0x5b
-    bl fn_800DC6B4
+    bl str_findChar
     stw r3, 0x58(r1)
     addi r3, r15, 0x67
-    bl fn_800DC6B4
+    bl str_findChar
     stw r3, 0x5c(r1)
     addi r3, r15, 0x6e
-    bl fn_800DC6B4
+    bl str_findChar
     stw r3, 0x60(r1)
     addi r3, r15, 0x76
-    bl fn_800DC6B4
+    bl str_findChar
     stw r3, 0x64(r1)
     addi r3, r15, 0x7d
-    bl fn_800DC6B4
+    bl str_findChar
     stw r3, 0x68(r1)
     addi r3, r15, 0x88
-    bl fn_800DC6B4
+    bl str_findChar
     stw r3, 0x6c(r1)
     addi r3, r15, 0x8f
-    bl fn_800DC6B4
+    bl str_findChar
     li r0, 0x0
     stw r0, 0x34(r1)
     li r0, 0x0
@@ -1030,10 +1030,10 @@ asm void fn_8011EF14(void)
     b lbl_fn_8011EF14_00001498
 lbl_fn_8011EF14_00000D4C:
     mr r3, r15
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r16, r3
     mr r3, r15
-    bl fn_80470580
+    bl boss_getOffset54
     lis r4, lbl_807774D8@ha
     li r0, 0x0
     addi r4, r4, lbl_807774D8@l
@@ -1305,7 +1305,7 @@ lbl_fn_8011EF14_00001140:
     extsb. r0, r0
     beq lbl_fn_8011EF14_000013A8
     mr r3, r16
-    bl fn_800DC6B4
+    bl str_findChar
     lwz r5, 0x18(r1)
     mr r17, r3
     lwz r4, 0x1c(r1)

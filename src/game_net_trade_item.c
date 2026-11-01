@@ -19,7 +19,7 @@ extern void fn_800A97C4(void);
 extern void fn_800C16B4(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB58C(void);
-extern void fn_800CB5C8(void);
+extern void morph_updateMesh(void);
 extern void fn_800F52F0(void);
 extern void fn_800F7260(void);
 extern void fn_800F7FF0(void);
@@ -1440,7 +1440,7 @@ lbl_fn_8052CA70_00000E14:
     addi r3, r30, 0x1340
     li r4, 0xa
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
 lbl_fn_8052CA70_000012B8:
     li r0, 0x0
     stw r0, 0x5c(r30)
@@ -1934,7 +1934,7 @@ lbl_fn_8052D46C_00001978:
     addi r3, r31, 0x1340
     li r4, 0x14
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
 lbl_fn_8052D46C_000019A8:
     lfs f1, 0x1214(r31)
     addi r3, r31, 0x6c

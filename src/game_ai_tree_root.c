@@ -53,8 +53,8 @@ extern void fn_8025D704(void);
 extern void fn_8035B78C(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void PSMTXConcat(void);
@@ -453,10 +453,10 @@ asm void fn_80256384(void)
     lwz r25, 0x10d8(r4)
     li r20, 0x0
     addi r3, r3, 0x14b4
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r19, r3
     addi r3, r22, 0x14b4
-    bl fn_80470580
+    bl boss_getOffset54
     lis r4, lbl_807772D0@ha
     li r0, 0x0
     addi r4, r4, lbl_807772D0@l

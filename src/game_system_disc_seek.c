@@ -14,7 +14,7 @@ extern void fn_80063D3C(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void route_findNextWaypoint(void);
-extern void fn_8008771C(void);
+extern void route_interpolatePath(void);
 extern void fn_80087994(void);
 extern void fn_8008937C(void);
 extern void fn_8008BBD8(void);
@@ -22,7 +22,7 @@ extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
 extern void fn_800C31F4(void);
-extern void fn_800C344C(void);
+extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CF45C(void);
 extern void system_getNextSequenceId(void);
@@ -462,7 +462,7 @@ lbl_fn_803524E4_00000458:
     addi r5, r27, 0x4
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle
@@ -629,7 +629,7 @@ lbl_fn_803526A8_000006B8:
     addi r4, r29, 0x425
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle
@@ -1525,7 +1525,7 @@ lbl_fn_80353370_000012F4:
     addi r5, r28, 0x1ce0
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_80885378
     mr r3, r29
     lfs f2, lbl_808854B8
@@ -1534,7 +1534,7 @@ lbl_fn_80353370_000012F4:
     addi r5, r28, 0x1ce4
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_80885378
     mr r3, r29
     lfs f2, lbl_808854B8
@@ -1543,7 +1543,7 @@ lbl_fn_80353370_000012F4:
     addi r5, r28, 0x1ce8
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_80885378
     mr r3, r29
     lfs f2, lbl_80885490
@@ -1552,7 +1552,7 @@ lbl_fn_80353370_000012F4:
     addi r5, r28, 0x1cd8
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     mr r3, r29
     addi r4, r30, 0x21e
     addi r5, r28, 0x1cdc
@@ -1570,7 +1570,7 @@ lbl_fn_80353370_000012F4:
     addi r5, r28, 0x1cc8
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)

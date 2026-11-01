@@ -7,7 +7,7 @@ extern void _restgpr_15(void);
 extern void _savegpr_15(void);
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void skill_calculateDamage(void);
 extern void mem_free(void);
 extern void fn_801207CC(void);
@@ -301,7 +301,7 @@ lbl_fn_80220660_00000314:
     mr r3, r31
     addi r8, r1, 0xc
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_80220660_00000330:
     addi r28, r28, 0xc
     addi r31, r31, 0xc
@@ -369,7 +369,7 @@ lbl_fn_80220660_000003E0:
     lwz r6, 0x8(r30)
     lwz r0, 0x4(r30)
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_80220660_00000420:
     lwz r3, 0x8(r26)
     addi r30, r30, 0xc
@@ -471,7 +471,7 @@ lbl_fn_80220660_0000054C:
     lwz r6, 0x8(r28)
     lwz r0, 0x4(r28)
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_80220660_0000058C:
     lwz r3, 0x8(r26)
     addi r28, r28, 0xc
@@ -589,7 +589,7 @@ lbl_fn_80220AE4_000006F4:
     lwz r6, 0x8(r21)
     lwz r0, 0x4(r21)
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_80220AE4_00000734:
     lwz r3, 0x8(r25)
     addi r21, r21, 0xc
@@ -804,7 +804,7 @@ lbl_fn_80220AE4_00000A08:
     lwz r6, 0x8(r21)
     lwz r0, 0x4(r21)
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_80220AE4_00000A48:
     lwz r3, 0x8(r22)
     addi r21, r21, 0xc
@@ -911,7 +911,7 @@ lbl_fn_80220AE4_00000B90:
     lwz r6, 0x8(r19)
     lwz r0, 0x4(r19)
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_80220AE4_00000BD0:
     lwz r3, 0x8(r22)
     addi r19, r19, 0xc
@@ -1143,7 +1143,7 @@ lbl_fn_802212C4_00000EB4:
     lwz r6, 0x8(r30)
     lwz r0, 0x4(r30)
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_802212C4_00000EF4:
     lwz r3, 0x8(r28)
     addi r30, r30, 0xc
@@ -1374,7 +1374,7 @@ lbl_fn_802214F8_000011EC:
     mr r3, r30
     addi r8, r1, 0x18
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_802214F8_00001208:
     addi r27, r27, 0xc
     addi r30, r30, 0xc
@@ -1442,7 +1442,7 @@ lbl_fn_802214F8_000012B8:
     lwz r6, 0x8(r31)
     lwz r0, 0x4(r31)
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_802214F8_000012F8:
     lwz r3, 0x8(r28)
     addi r31, r31, 0xc
@@ -1544,7 +1544,7 @@ lbl_fn_802214F8_00001424:
     lwz r6, 0x8(r27)
     lwz r0, 0x4(r27)
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_802214F8_00001464:
     lwz r3, 0x8(r28)
     addi r27, r27, 0xc
@@ -1638,7 +1638,7 @@ lbl_fn_802219CC_00001568:
     lwz r6, 0x8(r27)
     lwz r0, 0x4(r27)
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_802219CC_000015A8:
     lwz r0, 0x24(r1)
     srwi. r0, r0, 31
@@ -1698,7 +1698,7 @@ lbl_fn_802219CC_00001644:
     lwz r6, 0x8(r27)
     lwz r0, 0x4(r27)
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_802219CC_00001684:
     lwz r0, 0x18(r1)
     lwz r3, 0x8(r17)

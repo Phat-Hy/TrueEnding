@@ -28,7 +28,7 @@ extern void PSVECDotProduct(void);
 extern void fn_8068A850(void);
 extern void fn_8068AD58(void);
 extern void std_atan2(void);
-extern void fn_80695AD0(void);
+extern void vec3_isNonZero(void);
 
 /* External data declarations */
 extern u8 lbl_80754D30[];
@@ -120,7 +120,7 @@ lbl_fn_8045B40C_00000068:
     stw r5, 0x8(r1)
     stw r4, 0xc(r1)
     stw r0, 0x10(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_8045B40C_000000AC
     lwz r3, 0xf80(r31)

@@ -14,13 +14,13 @@ extern void fn_80062C8C(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void route_findNextWaypoint(void);
-extern void fn_8008771C(void);
+extern void route_interpolatePath(void);
 extern void fn_8008937C(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_80097E80(void);
-extern void fn_800C344C(void);
+extern void skin_applyWeights(void);
 extern void atn_Task_setActive(void);
 extern void str_skipWhitespace(void);
 extern void fn_8012D8B8(void);
@@ -42,8 +42,8 @@ extern void fn_803132D0(void);
 extern void fn_803C11A4(void);
 extern void fn_803C1560(void);
 extern void fn_803CD958(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_805A3C58(void);
 extern void fn_805A3D00(void);
@@ -298,7 +298,7 @@ lbl_fn_80310098_00000260:
     addi r5, r27, 0x14e4
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_80884C5C
     mr r3, r29
     lfs f2, lbl_80884C9C
@@ -307,7 +307,7 @@ lbl_fn_80310098_00000260:
     addi r5, r27, 0x14e8
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     mr r3, r29
     addi r4, r30, 0x94
     addi r5, r27, 0x1570
@@ -426,7 +426,7 @@ asm void fn_80310314(void)
     li r6, 0x0
     lfs f1, lbl_80884CA4
     li r7, -0x1
-    b fn_800C344C
+    b skin_applyWeights
 }
 
 asm void fn_80310330(void)
@@ -581,10 +581,10 @@ lbl_fn_803104D4_00000678:
     b lbl_fn_803104D4_00000DA0
 lbl_fn_803104D4_00000690:
     addi r3, r25, 0x14b4
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r26, r3
     addi r3, r25, 0x14b4
-    bl fn_80470580
+    bl boss_getOffset54
     mr r4, r3
     mr r3, r25
     mr r5, r26
@@ -600,10 +600,10 @@ lbl_fn_803104D4_00000690:
     stw r0, 0x38(r3)
 lbl_fn_803104D4_000006D8:
     addi r3, r25, 0x14b4
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r26, r3
     addi r3, r25, 0x14b4
-    bl fn_80470580
+    bl boss_getOffset54
     mr r4, r3
     mr r3, r25
     mr r5, r26

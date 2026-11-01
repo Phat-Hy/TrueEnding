@@ -26,7 +26,7 @@ extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_80154654(void);
 extern void actor_setState(void);
 extern void fn_801765D8(void);
@@ -1418,7 +1418,7 @@ lbl_fn_801EC158_00001228:
     crclr 6
     bl sprintf
     addi r3, r1, 0x8
-    bl fn_800DC6B4
+    bl str_findChar
     stw r3, 0x1c(r30)
     addi r3, r30, 0x20
     lfs f1, lbl_80882BE8
@@ -1466,7 +1466,7 @@ lbl_fn_801EC158_000012D4:
     crclr 6
     bl sprintf
     addi r3, r1, 0x8
-    bl fn_800DC6B4
+    bl str_findChar
     stw r3, 0x5c(r30)
     addi r3, r30, 0x60
     lfs f1, lbl_80882BF0
@@ -1509,7 +1509,7 @@ lbl_fn_801EC158_0000137C:
     crclr 6
     bl sprintf
     addi r3, r1, 0x8
-    bl fn_800DC6B4
+    bl str_findChar
     stw r3, 0x90(r30)
     addi r3, r30, 0x94
     lfs f1, lbl_80882BE0
@@ -1526,7 +1526,7 @@ lbl_fn_801EC158_0000137C:
     crclr 6
     bl sprintf
     addi r3, r1, 0x8
-    bl fn_800DC6B4
+    bl str_findChar
     stw r3, 0xa0(r30)
     addi r3, r30, 0xa4
     li r4, 0x0
@@ -1543,7 +1543,7 @@ lbl_fn_801EC158_0000137C:
     crclr 6
     bl sprintf
     addi r3, r1, 0x8
-    bl fn_800DC6B4
+    bl str_findChar
     stw r3, 0xb8(r30)
     addi r3, r30, 0xbc
     lfs f1, lbl_80882BF0
@@ -1586,7 +1586,7 @@ lbl_fn_801EC158_000014AC:
     crclr 6
     bl sprintf
     addi r3, r1, 0x8
-    bl fn_800DC6B4
+    bl str_findChar
     stw r3, 0xec(r30)
     addi r3, r30, 0xf0
     lfs f1, lbl_80882BF4

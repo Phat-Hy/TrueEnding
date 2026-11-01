@@ -18,11 +18,11 @@ extern void fn_8008B140(void);
 extern void lockon_updateTarget(void);
 extern void fn_800971D4(void);
 extern void fn_8009EE30(void);
-extern void fn_800C344C(void);
+extern void skin_applyWeights(void);
 extern void fn_800CB360(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
-extern void fn_800CB5C8(void);
+extern void morph_updateMesh(void);
 extern void sound_initGlobalInstances(void);
 extern void fn_80237518(void);
 extern void fn_802375C4(void);
@@ -45,8 +45,8 @@ extern void fn_803ED5D0(void);
 extern void fn_803EDB18(void);
 extern void fn_803EDCF4(void);
 extern void fn_803F8324(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void atn_LoadHandle_destructor(void);
 extern void fn_8049994C(void);
 extern void PSMTXConcat(void);
@@ -353,7 +353,7 @@ asm void fn_803F6B88(void)
     stw r5, 0x0(r3)
     li r5, 0x0
     addi r3, r3, 0x168
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, 0x174(r30)
     cmpwi r3, 0x0
     beq lbl_fn_803F6B88_00000338
@@ -424,7 +424,7 @@ asm void fn_803F6C70(void)
     addi r3, r31, 0x168
     li r4, 0xa
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     li r0, 0x0
     stw r0, 0xf4(r31)
     mr r3, r31
@@ -541,10 +541,10 @@ asm void fn_803F6E0C(void)
     stmw r27, 0x64c(r1)
     mr r31, r3
     addi r3, r3, 0x60
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r29, r3
     addi r3, r31, 0x60
-    bl fn_80470580
+    bl boss_getOffset54
     lis r4, lbl_807774D8@ha
     li r0, 0x0
     addi r4, r4, lbl_807774D8@l
@@ -814,7 +814,7 @@ asm void fn_803F7198(void)
     addi r3, r29, 0x168
     li r4, 0xa
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     mulli r0, r30, 0x38
     cmpwi r30, 0x0
     add r3, r29, r0
@@ -937,7 +937,7 @@ lbl_fn_803F7198_00000ADC:
     addi r5, r29, 0x6c
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     cmpwi r30, 0x0
     bne lbl_fn_803F7198_00000B0C
     addi r3, r29, 0x168

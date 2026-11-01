@@ -34,7 +34,7 @@ extern void PSVECSquareMag(void);
 extern void PSVECDotProduct(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
-extern void fn_80695AD0(void);
+extern void vec3_isNonZero(void);
 
 /* External data declarations */
 extern u8 lbl_80737810[];
@@ -325,7 +325,7 @@ lbl_fn_801765D8_00000310:
     stw r5, 0x2c(r1)
     stw r4, 0x30(r1)
     stw r0, 0x34(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_801765D8_000005BC
     lwz r0, 0x55c(r30)
@@ -362,7 +362,7 @@ lbl_fn_801765D8_0000039C:
     stw r5, 0x8(r1)
     stw r4, 0xc(r1)
     stw r0, 0x10(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_801765D8_000003D8
     lwz r3, 0xf80(r30)
@@ -408,7 +408,7 @@ lbl_fn_801765D8_00000444:
     stw r5, 0x20(r1)
     stw r4, 0x24(r1)
     stw r0, 0x28(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_801765D8_00000480
     lwz r3, 0xf80(r30)
@@ -454,7 +454,7 @@ lbl_fn_801765D8_000004EC:
     stw r5, 0x14(r1)
     stw r4, 0x18(r1)
     stw r0, 0x1c(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_801765D8_00000528
     lwz r3, 0xf80(r30)
@@ -690,7 +690,7 @@ lbl_fn_80176B68_00000830:
     stw r5, 0x38(r1)
     stw r4, 0x3c(r1)
     stw r0, 0x40(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80176B68_00000868
     lwz r0, 0x12a4(r30)
@@ -814,7 +814,7 @@ lbl_fn_80176D2C_000009F4:
     stw r5, 0x8(r1)
     stw r4, 0xc(r1)
     stw r0, 0x10(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80176D2C_00000A48
     lwz r0, 0x12a4(r30)

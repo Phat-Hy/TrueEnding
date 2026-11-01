@@ -5,7 +5,7 @@
 extern void __files(void);
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_8006B174(void);
 extern void fn_8006B2D8(void);
 extern void fn_8006BB6C(void);
@@ -16,7 +16,7 @@ extern void mem_getAllocSize(void);
 extern void fn_800DC880(void);
 extern void fn_8020F130(void);
 extern void fn_8020F75C(void);
-extern void fn_80470580(void);
+extern void boss_getOffset54(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_80473F88(void);
 extern void fn_80480468(void);
@@ -87,7 +87,7 @@ lbl_fn_80575F70_0000002C:
     b lbl_fn_80575F70_0000004C
 lbl_fn_80575F70_00000044:
     addi r3, r31, 0x1c4
-    bl fn_80470580
+    bl boss_getOffset54
 lbl_fn_80575F70_0000004C:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
@@ -222,7 +222,7 @@ lbl_fn_80576034_000001C8:
     addi r8, r1, 0x8
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r30
     addi r3, r1, 0x28
     bl fn_8006B174
@@ -1020,7 +1020,7 @@ lbl_fn_80576BD0_00000CA8:
     add r7, r29, r0
     addi r8, r1, 0xc
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lwz r31, 0x1c(r1)
     mr r3, r28
     lwz r30, 0x18(r1)
@@ -1285,7 +1285,7 @@ asm void fn_80576F74(void)
     addi r8, r1, 0xc
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lis r3, lbl_80782F88@ha
     stw r29, 0x4c(r1)
     addi r3, r3, lbl_80782F88@l
@@ -1327,7 +1327,7 @@ lbl_fn_80576F74_0000110C:
     lwz r0, 0x44(r1)
     li r5, 0x0
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_80576F74_0000114C:
     lwz r0, 0x4c(r1)
     lis r3, lbl_80782F88@ha
@@ -1496,7 +1496,7 @@ lbl_fn_80576F74_0000137C:
     lwz r0, 0x44(r1)
     li r5, 0x0
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_80576F74_000013BC:
     lwz r0, 0x4c(r1)
     stw r0, 0x14(r26)
@@ -1553,7 +1553,7 @@ lbl_fn_80576F74_00001450:
     lwz r6, 0x10(r30)
     lwz r0, 0xc(r30)
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_80576F74_00001490:
     lwz r0, 0x14(r30)
     stw r0, 0x14(r29)
@@ -1691,7 +1691,7 @@ asm void fn_80577578(void)
     addi r8, r1, 0x10
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lwz r3, lbl_8087F9B8
     lwz r7, 0x2c(r3)
     lwz r0, 0x8(r7)
@@ -1732,7 +1732,7 @@ lbl_fn_80577578_000016F0:
     add r7, r6, r4
     addi r8, r1, 0xc
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_80577578_0000170C:
     lwz r0, 0x18(r1)
     srwi. r0, r0, 31
@@ -1792,7 +1792,7 @@ asm void fn_805776B4(void)
     addi r8, r1, 0xc
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lis r3, lbl_80782F60@ha
     stw r30, 0x4c(r1)
     addi r3, r3, lbl_80782F60@l
@@ -1835,7 +1835,7 @@ lbl_fn_805776B4_00001848:
     lwz r0, 0x44(r1)
     li r5, 0x0
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_805776B4_00001888:
     lwz r0, 0x4c(r1)
     lis r3, lbl_80782F60@ha
@@ -2006,7 +2006,7 @@ lbl_fn_805776B4_00001AC0:
     lwz r0, 0x44(r1)
     li r5, 0x0
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_805776B4_00001B00:
     lwz r0, 0x4c(r1)
     stw r0, 0x14(r26)
@@ -2065,7 +2065,7 @@ lbl_fn_805776B4_00001B9C:
     lwz r6, 0x10(r30)
     lwz r0, 0xc(r30)
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_805776B4_00001BDC:
     lwz r0, 0x14(r30)
     stw r0, 0x14(r29)

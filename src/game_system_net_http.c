@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void atn_LH_Binary_destructor(void);
 extern void item_useConsumable(void);
 extern void skill_calculateDamage(void);
@@ -1704,7 +1704,7 @@ asm void fn_803936A4(void)
     addi r8, r1, 0x30
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lwz r0, 0x60(r1)
     srwi. r0, r0, 31
     bne lbl_fn_803936A4_000017D0
@@ -1755,7 +1755,7 @@ lbl_fn_803936A4_0000183C:
     add r7, r22, r0
     addi r8, r1, 0x28
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lwz r0, 0x60(r1)
     srwi. r0, r0, 31
     bne lbl_fn_803936A4_00001880
@@ -1819,7 +1819,7 @@ lbl_fn_803936A4_0000190C:
     addi r8, r1, 0x20
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     addi r3, r1, 0x54
     addi r4, r1, 0x48
     bl fn_8006B2D8
@@ -1848,7 +1848,7 @@ lbl_fn_803936A4_0000198C:
     add r7, r26, r0
     addi r8, r1, 0x18
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     addi r3, r1, 0x3c
     addi r4, r1, 0x38
     bl fn_80393BEC
@@ -1877,7 +1877,7 @@ lbl_fn_803936A4_00001A04:
     add r7, r6, r0
     addi r8, r1, 0x10
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lwz r0, 0x3c(r1)
     srwi. r0, r0, 31
     beq lbl_fn_803936A4_00001A30
@@ -1903,7 +1903,7 @@ lbl_fn_803936A4_00001A4C:
     add r7, r25, r0
     addi r8, r1, 0x8
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lwz r0, 0x54(r1)
     srwi. r0, r0, 31
     bne lbl_fn_803936A4_00001A8C

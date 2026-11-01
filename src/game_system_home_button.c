@@ -7,7 +7,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_80049B2C(void);
 extern void fn_80049B74(void);
 extern void fn_8004A1D4(void);
@@ -20,7 +20,7 @@ extern void mem_alloc(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_8008771C(void);
+extern void route_interpolatePath(void);
 extern void fn_80087E9C(void);
 extern void fn_8008937C(void);
 extern void fn_800897D8(void);
@@ -28,14 +28,14 @@ extern void fn_800BFAC8(void);
 extern void fn_800C3184(void);
 extern void fn_800C31E4(void);
 extern void fn_800C31F4(void);
-extern void fn_800C344C(void);
+extern void skin_applyWeights(void);
 extern void fn_800CB360(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
 extern void fn_800CB480(void);
 extern void fn_800CB518(void);
 extern void fn_800CB5B4(void);
-extern void fn_800CB5C8(void);
+extern void morph_updateMesh(void);
 extern void fn_800CB69C(void);
 extern void fn_800CB6B0(void);
 extern void fn_800CB6E4(void);
@@ -726,7 +726,7 @@ lbl_fn_80360230_00000710:
     addi r5, r31, 0x30
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     mr r3, r29
     addi r4, r1, 0x14
     bl fn_800CB440
@@ -861,7 +861,7 @@ asm void fn_80360504(void)
     lwz r3, 0x58(r3)
     lwzux r31, r3, r0
     addi r3, r3, 0x58
-    bl fn_800CB5C8
+    bl morph_updateMesh
     cmpwi r31, 0x0
     beq lbl_fn_80360504_00000950
     mr r3, r31
@@ -1021,7 +1021,7 @@ lbl_fn_803606CC_00000B30:
     add r3, r0, r31
     lwzx r30, r31, r0
     addi r3, r3, 0x58
-    bl fn_800CB5C8
+    bl morph_updateMesh
     cmpwi r30, 0x0
     beq lbl_fn_803606CC_00000B60
     mr r3, r30
@@ -1328,7 +1328,7 @@ asm void fn_80360B00(void)
     stw r31, 0xc(r1)
     mr r31, r3
     addi r3, r3, 0x194
-    bl fn_800CB5C8
+    bl morph_updateMesh
     li r0, 0x1
     stw r0, 0x19c(r31)
     lwz r31, 0xc(r1)
@@ -1543,7 +1543,7 @@ lbl_fn_80360CDC_000011DC:
     addi r4, r29, 0x14
     addi r5, r5, 0x38
     addi r6, r30, fn_80361100@l
-    bl fn_8008771C
+    bl route_interpolatePath
     lwz r5, 0x50(r31)
     mr r3, r28
     lfs f1, lbl_808856A0
@@ -1553,7 +1553,7 @@ lbl_fn_80360CDC_000011DC:
     lfs f3, lbl_808856A8
     addi r5, r5, 0x28
     addi r6, r30, fn_80361100@l
-    bl fn_8008771C
+    bl route_interpolatePath
     lwz r5, 0x50(r31)
     mr r3, r28
     lfs f1, lbl_808856A0
@@ -1563,7 +1563,7 @@ lbl_fn_80360CDC_000011DC:
     lfs f3, lbl_808856A8
     addi r5, r5, 0x3c
     addi r6, r30, fn_80361100@l
-    bl fn_8008771C
+    bl route_interpolatePath
 lbl_fn_80360CDC_00001288:
     lwz r0, 0x124(r1)
     lwz r31, 0x11c(r1)
@@ -2088,7 +2088,7 @@ asm void fn_803614E8(void)
     addi r8, r1, 0x20
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lis r3, lbl_8074B6B8@ha
     stw r14, 0x34(r1)
     addi r3, r3, lbl_8074B6B8@l
@@ -2116,7 +2116,7 @@ asm void fn_803614E8(void)
     addi r8, r1, 0x1c
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lwz r0, 0x40(r1)
     stb r14, 0xf0(r1)
     srwi. r0, r0, 31
@@ -2170,7 +2170,7 @@ lbl_fn_803614E8_00001A4C:
     lwz r0, 0xdc(r1)
     li r5, 0x0
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_803614E8_00001A90:
     lwz r4, 0xe4(r1)
     srwi. r0, r4, 31
@@ -2198,7 +2198,7 @@ lbl_fn_803614E8_00001AB4:
     lwz r0, 0xe8(r1)
     li r5, 0x0
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_803614E8_00001AF8:
     addi r14, r1, 0xd8
     lbz r5, 0xf0(r1)

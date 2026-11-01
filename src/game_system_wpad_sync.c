@@ -70,8 +70,8 @@ extern void fn_80442F68(void);
 extern void fn_8046F96C(void);
 extern void fn_8047043C(void);
 extern void fn_80470528(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void fn_80473F88(void);
@@ -1474,10 +1474,10 @@ lbl_world_Manager_destructor_000011C4:
     bl dtor_80084684
 lbl_world_Manager_destructor_000011F4:
     addi r3, r28, 0x550c
-    bl fn_80470580
+    bl boss_getOffset54
     mr r25, r3
     addi r3, r28, 0x550c
-    bl fn_8047059C
+    bl boss_getOffset50
     cmpwi r25, 0x0
     srwi r5, r3, 2
     beq lbl_world_Manager_destructor_00001228

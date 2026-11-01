@@ -11,7 +11,7 @@ extern void fn_800DCA6C(void);
 extern void fn_80365708(void);
 extern void fn_803B27F8(void);
 extern void fn_803B29A8(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset50(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_80531ED4(void);
 extern void fn_80572860(void);
@@ -1813,7 +1813,7 @@ lbl_fn_80575F10_000019D8:
     b lbl_fn_80575F10_000019F8
 lbl_fn_80575F10_000019F0:
     addi r3, r31, 0x1c4
-    bl fn_8047059C
+    bl boss_getOffset50
 lbl_fn_80575F10_000019F8:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)

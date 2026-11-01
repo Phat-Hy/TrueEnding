@@ -16,7 +16,7 @@ extern void fn_800A55D4(void);
 extern void fn_800A56A8(void);
 extern void fn_800A58D0(void);
 extern void fn_800BFAC8(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_80112974(void);
 extern void fn_80114468(void);
 extern void fn_8011447C(void);
@@ -1245,7 +1245,7 @@ lbl_fn_8055DBF8_00000EC8:
     lis r4, lbl_8075FAF8@ha
     mr r24, r3
     addi r3, r4, lbl_8075FAF8@l
-    bl fn_800DC6B4
+    bl str_findChar
     lwz r3, lbl_8087F3C0
     li r0, 0x4
     stw r0, 0xb8(r3)
@@ -1519,7 +1519,7 @@ lbl_fn_8055E258_000012D4:
 lbl_fn_8055E258_00001318:
     lfs f31, lbl_80887EB8
 lbl_fn_8055E258_0000131C:
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     mr r3, r31

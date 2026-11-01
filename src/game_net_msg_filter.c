@@ -7,7 +7,7 @@ extern void __register_global_object(void);
 extern void _restgpr_26(void);
 extern void _savegpr_26(void);
 extern void mem_free(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_8050E630(void);
 extern void printf(void);
 extern void abort(void);
@@ -1217,7 +1217,7 @@ asm void fn_804FF47C(void)
     stw r30, 0x8(r1)
     lis r30, lbl_807C8AE8@ha
     addi r30, r30, lbl_807C8AE8@l
-    bl fn_800DC6B4
+    bl str_findChar
     stw r3, lbl_8087F604
     la r3, lbl_8087F608
     bl fn_8068B770

@@ -49,7 +49,7 @@ extern void PSVECMag(void);
 extern void printf(void);
 extern void abort(void);
 extern void std_atan2(void);
-extern void fn_80695AD0(void);
+extern void vec3_isNonZero(void);
 
 /* External data declarations */
 extern u8 lbl_807433F0[];
@@ -438,7 +438,7 @@ lbl_fn_80247FB0_00000430:
     stw r5, 0x68(r1)
     stw r4, 0x6c(r1)
     stw r0, 0x70(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80247FB0_0000049C
     lwz r3, 0xf80(r31)

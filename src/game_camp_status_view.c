@@ -40,7 +40,7 @@ extern void fn_803AD148(void);
 extern void fn_803AD278(void);
 extern void fn_803B84DC(void);
 extern void fn_803B8F50(void);
-extern void fn_80470580(void);
+extern void boss_getOffset54(void);
 extern void fn_8049B72C(void);
 extern void fn_804A0BCC(void);
 extern void fn_804A0E90(void);
@@ -122,7 +122,7 @@ asm void fn_803B9638(void)
     li r4, 0x0
     bl fn_80622180
     addi r3, r31, 0x58
-    bl fn_80470580
+    bl boss_getOffset54
     mr r4, r3
     addi r3, r31, 0x200
     li r5, 0x6000
@@ -137,7 +137,7 @@ asm void fn_803B9638(void)
 lbl_fn_803B9638_00000090:
     add r3, r31, r29
     addi r3, r3, 0x60
-    bl fn_80470580
+    bl boss_getOffset54
     add r5, r31, r30
     mr r4, r3
     addi r3, r5, 0x6200

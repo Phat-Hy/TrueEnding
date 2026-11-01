@@ -6,7 +6,7 @@ extern void _restgpr_24(void);
 extern void _savegpr_24(void);
 extern void dtor_80084684(void);
 extern void route_findNextWaypoint(void);
-extern void fn_8008771C(void);
+extern void route_interpolatePath(void);
 extern void fn_80087994(void);
 extern void fn_8008937C(void);
 extern void fn_800897D8(void);
@@ -17,7 +17,7 @@ extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_80117228(void);
 extern void fn_801F3FF8(void);
 extern void saveSlot_readSummary(void);
@@ -188,7 +188,7 @@ lbl_fn_8057EAF4_0000005C:
     addi r5, r28, 0x48
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_808880A4
     mr r3, r29
     lfs f2, lbl_808880AC
@@ -197,7 +197,7 @@ lbl_fn_8057EAF4_0000005C:
     addi r5, r28, 0x4c
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_808880B0
     mr r3, r29
     lfs f2, lbl_808880B4
@@ -206,7 +206,7 @@ lbl_fn_8057EAF4_0000005C:
     addi r5, r28, 0x44
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_808880B0
     mr r3, r29
     lfs f2, lbl_808880B4
@@ -215,7 +215,7 @@ lbl_fn_8057EAF4_0000005C:
     addi r5, r28, 0x40
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_80888098
     mr r3, r29
     lfs f2, lbl_808880B8
@@ -224,7 +224,7 @@ lbl_fn_8057EAF4_0000005C:
     addi r5, r28, 0x54
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     mr r3, r30
     addi r4, r31, 0x8d
     bl fn_8008937C
@@ -305,7 +305,7 @@ lbl_fn_8057EAF4_0000005C:
     addi r5, r28, 0x98
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_808880A4
     mr r3, r29
     lfs f2, lbl_80888098
@@ -314,7 +314,7 @@ lbl_fn_8057EAF4_0000005C:
     addi r5, r28, 0x9c
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_808880A4
     mr r3, r29
     lfs f2, lbl_80888098
@@ -323,7 +323,7 @@ lbl_fn_8057EAF4_0000005C:
     addi r5, r28, 0xa0
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     mr r3, r30
     addi r4, r31, 0x141
     addi r5, r28, 0x20
@@ -1817,7 +1817,7 @@ lbl_fn_80580268_000017BC:
     bl sprintf
     lwz r31, 0x80(r30)
     addi r3, r1, 0x20
-    bl fn_800DC6B4
+    bl str_findChar
     mr r5, r3
     mr r4, r31
     addi r3, r1, 0x8
@@ -1899,7 +1899,7 @@ lbl_fn_80580370_0000192C:
     addi r3, r3, lbl_807612E4@l
     addi r3, r3, 0x266
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     mr r3, r29
     mr r5, r30
@@ -1921,7 +1921,7 @@ lbl_fn_80580370_0000197C:
     addi r30, r30, lbl_807612E4@l
     addi r3, r30, 0x26c
     addi r28, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     mr r3, r28
     mr r5, r29
@@ -1944,7 +1944,7 @@ lbl_fn_80580370_000019DC:
     lwz r4, 0x70(r31)
     addi r3, r30, 0x275
     addi r28, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_808880C4
     mr r4, r3
     mr r3, r28
@@ -1954,7 +1954,7 @@ lbl_fn_80580370_00001A00:
     lwz r4, 0x70(r31)
     addi r3, r30, 0x275
     addi r28, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_808880C0
     mr r4, r3
     mr r3, r28
@@ -1964,7 +1964,7 @@ lbl_fn_80580370_00001A24:
     lwz r4, 0x70(r31)
     addi r3, r30, 0x275
     addi r28, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_808880D0
     mr r4, r3
     mr r3, r28
@@ -1974,7 +1974,7 @@ lbl_fn_80580370_00001A48:
     lwz r4, 0x70(r31)
     addi r3, r30, 0x275
     addi r28, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_808880CC
     mr r4, r3
     mr r3, r28

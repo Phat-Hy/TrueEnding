@@ -39,7 +39,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void fn_80097D40(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void str_skipWhitespace(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_800EF73C(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800FAB80(void);
@@ -66,8 +66,8 @@ extern void fn_803F11F8(void);
 extern void fn_803F3334(void);
 extern void fn_80424AD4(void);
 extern void fn_80424FB4(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void atn_LoadHandle_destructor(void);
 extern void fn_8049994C(void);
 extern void fn_80499B9C(void);
@@ -541,10 +541,10 @@ asm void fn_804259B8(void)
     stmw r27, 0x64c(r1)
     mr r27, r3
     addi r3, r3, 0x60
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r30, r3
     addi r3, r27, 0x60
-    bl fn_80470580
+    bl boss_getOffset54
     lis r4, lbl_807774D8@ha
     li r0, 0x0
     addi r4, r4, lbl_807774D8@l
@@ -634,7 +634,7 @@ lbl_fn_804259B8_00000680:
     bl fn_80058B78
     addi r3, r1, 0x8
     bl talk_formatQuotedString
-    bl fn_800DC6B4
+    bl str_findChar
     stw r3, 0x124(r31)
 lbl_fn_804259B8_000006A8:
     addi r3, r1, 0x8
@@ -1708,10 +1708,10 @@ asm void fn_804269E0(void)
     stw r28, 0x740(r1)
     mr r28, r3
     addi r3, r3, 0x60
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r31, r3
     addi r3, r28, 0x60
-    bl fn_80470580
+    bl boss_getOffset54
     lis r4, lbl_807774D8@ha
     li r0, 0x0
     addi r4, r4, lbl_807774D8@l

@@ -9,7 +9,7 @@ extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void talk_formatQuotedString(void);
 extern void fn_8005BBF8(void);
 extern void fn_8005BCE8(void);
@@ -28,11 +28,11 @@ extern void fn_800A1E24(void);
 extern void fn_800A1F84(void);
 extern void str_skipWhitespace(void);
 extern void fn_800DC500(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_802376D0(void);
 extern void res_MsgHandle_update(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void atn_Curve_evaluate(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_getName(void);
@@ -94,10 +94,10 @@ asm void fn_800A005C(void)
     psq_stx f31, r1, r0, 0, 0
     bl _savegpr_26
     mr r30, r3
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r31, r3
     mr r3, r30
-    bl fn_80470580
+    bl boss_getOffset54
     lis r4, lbl_807774D8@ha
     li r28, 0x0
     addi r4, r4, lbl_807774D8@l
@@ -148,7 +148,7 @@ asm void fn_800A005C(void)
     addi r8, r1, 0x10
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r31
     addi r3, r1, 0x24
     bl fn_8006B0C8
@@ -193,7 +193,7 @@ lbl_fn_800A005C_00000174:
     add r7, r27, r0
     addi r8, r1, 0x8
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     b lbl_fn_800A005C_000002FC
 lbl_fn_800A005C_000001A8:
     mr r3, r26
@@ -411,7 +411,7 @@ asm void fn_800A04A0(void)
     stw r29, 0xc(r1)
     mr r29, r3
     mr r3, r5
-    bl fn_800DC6B4
+    bl str_findChar
     lwz r7, 0x8(r29)
     li r6, 0x0
     lwz r0, 0x14(r7)

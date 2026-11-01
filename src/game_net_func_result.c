@@ -24,7 +24,7 @@ extern void ref_releaseHandle(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void fn_800DC1DC(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_800DD3FC(void);
 extern void fn_80117228(void);
 extern void fn_801FEE08(void);
@@ -34,8 +34,8 @@ extern void fn_8020C07C(void);
 extern void fn_8020C4B0(void);
 extern void fn_8021F3E8(void);
 extern void fn_803BD49C(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
@@ -195,7 +195,7 @@ lbl_fn_80505514_00000080:
     addi r3, r1, 0x40
     la r28, lbl_8087E440
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     mr r3, r29
     mr r5, r28
@@ -286,7 +286,7 @@ lbl_fn_80505514_00000244:
     sth r28, 0x32(r1)
     lwz r4, 0x4c(r31)
     addi r27, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     mr r3, r27
     addi r5, r1, 0x30
@@ -320,7 +320,7 @@ lbl_fn_80505514_000002C0:
     sth r30, 0x32(r1)
     lwz r4, 0x4c(r31)
     addi r27, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     mr r3, r27
     addi r5, r1, 0x30
@@ -357,7 +357,7 @@ lbl_fn_80505514_00000324:
     sth r28, 0x32(r1)
     lwz r4, 0x4c(r31)
     addi r27, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     mr r3, r27
     addi r5, r1, 0x30
@@ -584,7 +584,7 @@ asm void fn_80505AB8(void)
     addi r3, r1, 0x20
     la r31, lbl_8087E440
     addi r30, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     mr r3, r30
     mr r5, r31
@@ -877,10 +877,10 @@ asm void fn_80505F58(void)
     cmpwi r3, 0x0
     bne lbl_fn_80505F58_00000A98
     addi r3, r30, 0xa10
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r31, r3
     addi r3, r30, 0xa10
-    bl fn_80470580
+    bl boss_getOffset54
     mr r4, r3
     mr r3, r30
     mr r5, r31

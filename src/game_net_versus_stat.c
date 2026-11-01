@@ -10,7 +10,7 @@ extern void fn_800A555C(void);
 extern void fn_800A55AC(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_800DD3FC(void);
 extern void fn_80117228(void);
 extern void magic_dispatchActionCommand(void);
@@ -535,7 +535,7 @@ lbl_fn_804BDD68_00000538:
     srawi r0, r0, 31
     addi r26, r4, 0x58
     clrlwi r29, r0, 24
-    bl fn_800DC6B4
+    bl str_findChar
     xoris r0, r29, 0x8000
     lis r29, 0x4330
     lis r30, lbl_80758848@ha
@@ -556,7 +556,7 @@ lbl_fn_804BDD68_00000538:
     addi r3, r28, 0x27d
     addi r26, r4, 0x58
     clrlwi r27, r0, 24
-    bl fn_800DC6B4
+    bl str_findChar
     xoris r0, r27, 0x8000
     stw r0, 0x54(r1)
     mr r4, r3
@@ -587,7 +587,7 @@ lbl_fn_804BDD68_000006DC:
     addi r30, r30, lbl_807588DC@l
     addi r3, r30, 0x298
     addi r26, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     mr r3, r26
     mr r5, r29
@@ -612,7 +612,7 @@ lbl_fn_804BDD68_000006DC:
     lwz r4, 0x4c(r31)
     addi r3, r30, 0x2a6
     addi r26, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     mr r3, r26
     addi r5, r1, 0x8
@@ -920,7 +920,7 @@ lbl_fn_804BE4A4_00000B68:
     addi r3, r3, 0x324
     lwz r4, 0x64(r30)
     addi r31, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_808873F8
     mr r4, r3
     mr r3, r31

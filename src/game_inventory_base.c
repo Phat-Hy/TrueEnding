@@ -29,7 +29,7 @@ extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSVECDotProduct(void);
 extern void fn_8068A850(void);
-extern void fn_80695AD0(void);
+extern void vec3_isNonZero(void);
 
 /* External data declarations */
 extern u8 lbl_80737808[];
@@ -565,7 +565,7 @@ lbl_fn_80151448_00000660:
     stw r5, 0x5c(r1)
     stw r4, 0x60(r1)
     stw r0, 0x64(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80151448_000006A0
     lwz r3, 0xf80(r31)
@@ -609,7 +609,7 @@ lbl_fn_80151448_000006FC:
     stw r5, 0x50(r1)
     stw r4, 0x54(r1)
     stw r0, 0x58(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80151448_0000073C
     lwz r3, 0xf80(r31)
@@ -1142,7 +1142,7 @@ lbl_fn_80151448_00000EA4:
     stw r5, 0x44(r1)
     stw r4, 0x48(r1)
     stw r0, 0x4c(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80151448_00000EE0
     lwz r3, 0xf80(r26)
@@ -1188,7 +1188,7 @@ lbl_fn_80151448_00000F4C:
     stw r5, 0x2c(r1)
     stw r4, 0x30(r1)
     stw r0, 0x34(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80151448_00000F88
     lwz r3, 0xf80(r26)
@@ -1234,7 +1234,7 @@ lbl_fn_80151448_00000FF4:
     stw r5, 0x38(r1)
     stw r4, 0x3c(r1)
     stw r0, 0x40(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80151448_00001030
     lwz r3, 0xf80(r26)
@@ -1525,7 +1525,7 @@ lbl_fn_80151448_0000142C:
     stw r5, 0x20(r1)
     stw r4, 0x24(r1)
     stw r0, 0x28(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80151448_00001468
     lwz r3, 0xf80(r26)
@@ -1571,7 +1571,7 @@ lbl_fn_80151448_000014D4:
     stw r5, 0x8(r1)
     stw r4, 0xc(r1)
     stw r0, 0x10(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80151448_00001510
     lwz r3, 0xf80(r26)
@@ -1617,7 +1617,7 @@ lbl_fn_80151448_0000157C:
     stw r5, 0x14(r1)
     stw r4, 0x18(r1)
     stw r0, 0x1c(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80151448_000015B8
     lwz r3, 0xf80(r26)

@@ -11,7 +11,7 @@ extern void fn_8000EE8C(void);
 extern void fn_8000FAE8(void);
 extern void fn_800127CC(void);
 extern void fn_800128FC(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_8004B0E4(void);
 extern void fn_80069BF4(void);
 extern void fn_8006A250(void);
@@ -27,7 +27,7 @@ extern void fn_800C310C(void);
 extern void fn_800C3124(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void magic_dispatchActionCommand(void);
 extern void boss_updatePhaseState(void);
 extern void fn_801F3FF8(void);
@@ -416,7 +416,7 @@ lbl_fn_8053F1B8_0000044C:
     lis r3, lbl_8075E148@ha
     addi r3, r3, lbl_8075E148@l
     addi r3, r3, 0x23
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     addi r3, r30, 0x58
@@ -987,7 +987,7 @@ lbl_fn_8053F81C_00000C1C:
     addi r3, r24, 0x68
     addi r8, r1, 0x18
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_8053F81C_00000C38:
     lwz r0, 0x5c(r1)
     srwi. r0, r0, 31
@@ -1075,7 +1075,7 @@ lbl_fn_8053F81C_00000D50:
     addi r3, r24, 0x68
     addi r8, r1, 0x10
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_8053F81C_00000D6C:
     lwz r0, 0x38(r1)
     srwi. r0, r0, 31
@@ -1137,7 +1137,7 @@ lbl_fn_8053F81C_00000E28:
     addi r3, r24, 0x68
     addi r8, r1, 0x8
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_8053F81C_00000E44:
     lwz r0, 0x20(r1)
     srwi. r0, r0, 31

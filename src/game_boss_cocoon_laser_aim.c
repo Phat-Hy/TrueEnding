@@ -7,7 +7,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_800698DC(void);
 extern void fn_8006AC08(void);
 extern void fn_8006BD78(void);
@@ -16,7 +16,7 @@ extern void mem_alloc(void);
 extern void mem_free(void);
 extern void fn_800A4450(void);
 extern void fn_800A5B38(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_801F3FF8(void);
 extern void saveSlot_readSummary(void);
 extern void fn_801FEC74(void);
@@ -89,8 +89,8 @@ void fn_8047043C(void);
 void fn_80470528(void);
 void fn_8047054C(void);
 void fn_80470564(void);
-void fn_80470580(void);
-void fn_8047059C(void);
+void boss_getOffset54(void);
+void boss_getOffset50(void);
 void atn_LH_Binary_onNotify(void);
 
 asm void fn_8046EBC4(void)
@@ -200,7 +200,7 @@ asm void fn_8046ECDC(void)
     mr r27, r4
     addi r29, r5, 0x58
     addi r3, r30, 0x164
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_80886EC0
     mr r4, r3
     mr r3, r29
@@ -214,7 +214,7 @@ asm void fn_8046ECDC(void)
     beq lbl_fn_8046ECDC_00000228
     lwz r29, 0x3ee0(r31)
     addi r3, r30, 0x196
-    bl fn_800DC6B4
+    bl str_findChar
     mr r5, r3
     mr r4, r29
     addi r3, r1, 0x14
@@ -250,7 +250,7 @@ lbl_fn_8046ECDC_000001F8:
     addi r3, r3, lbl_8075561C@l
     addi r3, r3, 0x1a3
     addi r28, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f0, lbl_80886ED8
     mr r4, r3
     mr r3, r28
@@ -276,7 +276,7 @@ lbl_fn_8046ECDC_00000228:
     addi r3, r3, lbl_8075561C@l
     addi r3, r3, 0x164
     addi r28, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_80886EC4
     mr r4, r3
     mr r3, r28
@@ -303,7 +303,7 @@ lbl_fn_8046ECDC_000002B8:
     addi r3, r3, lbl_8075561C@l
     addi r3, r3, 0x164
     addi r28, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     mr r3, r28
@@ -730,7 +730,7 @@ asm void fn_8046F460(void)
     addi r4, r4, 0x1
 lbl_fn_8046F460_000008C0:
     mr r3, r4
-    bl fn_800DC6B4
+    bl str_findChar
     lwz r4, 0x4028(r31)
     addi r6, r31, 0x4024
     b lbl_fn_8046F460_000008F0
@@ -1218,7 +1218,7 @@ lbl_fn_8046FA18_00000EE0:
     bl memcpy
 lbl_fn_8046FA18_00000F08:
     addi r3, r29, 0x30
-    bl fn_800DC6B4
+    bl str_findChar
     rlwinm. r0, r31, 0, 30, 30
     stw r3, 0x28(r29)
     beq lbl_fn_8046FA18_00000F44
@@ -1239,11 +1239,11 @@ lbl_fn_8046FA18_00000F44:
     li r0, 0x1
     stw r0, 0x78(r29)
     addi r3, r29, 0x8
-    bl fn_80470580
+    bl boss_getOffset54
     cmpwi r3, 0x0
     beq lbl_fn_8046FA18_00000F78
     addi r3, r29, 0x8
-    bl fn_8047059C
+    bl boss_getOffset50
     cmpwi r3, 0x0
     bne lbl_fn_8046FA18_00000F8C
 lbl_fn_8046FA18_00000F78:
@@ -1254,11 +1254,11 @@ lbl_fn_8046FA18_00000F78:
     b lbl_fn_8046FA18_00000FD8
 lbl_fn_8046FA18_00000F8C:
     addi r3, r29, 0x8
-    bl fn_80470580
+    bl boss_getOffset54
     lwz r0, 0x0(r3)
     addi r3, r29, 0x8
     stw r0, 0x0(r29)
-    bl fn_80470580
+    bl boss_getOffset54
     lwz r0, 0x0(r29)
     addi r3, r3, 0x4
     stw r3, 0x4(r29)
@@ -1348,7 +1348,7 @@ lbl_atn_Arc_findFile_000010A8:
     li r0, 0x0
     stb r0, 0x0(r7)
     addi r3, r1, 0x8
-    bl fn_800DC6B4
+    bl str_findChar
     lwz r6, 0x0(r31)
     li r7, 0x0
     lwz r5, 0x4(r31)
@@ -1445,7 +1445,7 @@ asm void fn_8046FD7C(void)
     cmpwi r0, 0x0
     beq lbl_fn_8046FD7C_000015BC
     addi r3, r3, 0x1c
-    bl fn_80470580
+    bl boss_getOffset54
     cmpwi r3, 0x0
     beq lbl_fn_8046FD7C_000015BC
     lbz r0, 0x0(r24)
@@ -1454,7 +1454,7 @@ asm void fn_8046FD7C(void)
     addi r24, r24, 0x1
 lbl_fn_8046FD7C_0000120C:
     addi r3, r28, 0x1c
-    bl fn_80470580
+    bl boss_getOffset54
     lwz r5, 0x8(r3)
     addi r26, r3, 0x10
     lwz r0, 0xc(r3)
@@ -1616,7 +1616,7 @@ lbl_fn_8046FD7C_00001414:
     addi r8, r1, 0x8
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r31
     addi r3, r1, 0x20
     li r16, 0x1
@@ -1838,11 +1838,11 @@ asm void fn_804702BC(void)
     li r0, 0x1
     stw r0, 0x78(r31)
     addi r3, r31, 0x8
-    bl fn_80470580
+    bl boss_getOffset54
     cmpwi r3, 0x0
     beq lbl_fn_804702BC_00001750
     addi r3, r31, 0x8
-    bl fn_8047059C
+    bl boss_getOffset50
     cmpwi r3, 0x0
     bne lbl_fn_804702BC_00001760
 lbl_fn_804702BC_00001750:
@@ -1852,11 +1852,11 @@ lbl_fn_804702BC_00001750:
     b lbl_fn_804702BC_00001780
 lbl_fn_804702BC_00001760:
     addi r3, r31, 0x8
-    bl fn_80470580
+    bl boss_getOffset54
     lwz r0, 0x0(r3)
     addi r3, r31, 0x8
     stw r0, 0x0(r31)
-    bl fn_80470580
+    bl boss_getOffset54
     addi r0, r3, 0x4
     stw r0, 0x4(r31)
 lbl_fn_804702BC_00001780:
@@ -2043,28 +2043,28 @@ lbl_fn_80470564_000019B4:
     blr
 }
 
-asm void fn_80470580(void)
+asm void boss_getOffset54(void)
 {
     nofralloc
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_80470580_000019D0
+    beq lbl_boss_getOffset54_000019D0
     lwz r3, 0x54(r3)
     blr
-lbl_fn_80470580_000019D0:
+lbl_boss_getOffset54_000019D0:
     li r3, 0x0
     blr
 }
 
-asm void fn_8047059C(void)
+asm void boss_getOffset50(void)
 {
     nofralloc
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_8047059C_000019EC
+    beq lbl_boss_getOffset50_000019EC
     lwz r3, 0x50(r3)
     blr
-lbl_fn_8047059C_000019EC:
+lbl_boss_getOffset50_000019EC:
     li r3, 0x0
     blr
 }

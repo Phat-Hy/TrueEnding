@@ -15,7 +15,7 @@ extern void fn_800C31F4(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_800DD3FC(void);
 extern void fn_800E426C(void);
 extern void fn_800E4278(void);
@@ -1292,7 +1292,7 @@ lbl_world_Manager_postUpdate_000010E0:
     addi r3, r3, lbl_8074DC1C@l
     addi r3, r3, 0x15d
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_8088570C
     mr r4, r3
     mr r3, r29
@@ -1349,7 +1349,7 @@ lbl_world_Manager_postUpdate_000011D8:
     addi r3, r3, lbl_8074DC1C@l
     addi r3, r3, 0x15d
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_8088570C
     mr r4, r3
     mr r3, r29

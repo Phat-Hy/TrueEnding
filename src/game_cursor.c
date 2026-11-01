@@ -10,7 +10,7 @@ extern void _savegpr_24(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void talk_formatQuotedString(void);
 extern void fn_8006B174(void);
 extern void mem_alloc(void);
@@ -33,7 +33,7 @@ extern void fn_800A1060(void);
 extern void fn_800A787C(void);
 extern void fn_800A8BE4(void);
 extern void fn_800DC12C(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_800DCA6C(void);
 extern void atn_LoadHandle_getName(void);
 extern void fn_80473F88(void);
@@ -47,7 +47,7 @@ extern void strncmp(void);
 extern void fn_806952C4(void);
 extern void runtime_registerStaticObject(void);
 extern void fn_80695A50(void);
-extern void fn_80695AD0(void);
+extern void vec3_isNonZero(void);
 extern void fn_8072D210(void);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
@@ -1108,10 +1108,10 @@ lbl_fn_80097E80_00000D28:
     lis r14, lbl_80732368@ha
     addi r14, r14, lbl_80732368@l
     addi r3, r14, 0x260
-    bl fn_800DC6B4
+    bl str_findChar
     mr r19, r3
     addi r3, r14, 0x266
-    bl fn_800DC6B4
+    bl str_findChar
     lwz r0, 0x230(r24)
     mr r20, r3
     cmpwi r0, 0x0
@@ -1242,7 +1242,7 @@ lbl_fn_80097E80_00000EC0:
     addi r8, r1, 0x14
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     addi r4, r1, 0x64
     addi r3, r1, 0x58
     bl fn_8006B174
@@ -1354,7 +1354,7 @@ lbl_fn_80097E80_00001060:
     addi r8, r1, 0xc
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r14
     addi r3, r1, 0x40
     bl fn_8006B174
@@ -1552,7 +1552,7 @@ lbl_fn_80097E80_00001360:
     stw r5, 0x34(r1)
     stw r4, 0x38(r1)
     stw r0, 0x3c(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80097E80_00001488
     lwz r0, 0x35c(r24)
@@ -2246,7 +2246,7 @@ lbl_fn_80098DD8_00001D10:
     lwz r25, 0x50(r3)
     addi r4, r4, lbl_80732368@l
     addi r3, r4, 0x26c
-    bl fn_800DC6B4
+    bl str_findChar
     mulli r0, r25, 0x18
     add r4, r26, r0
     lwz r6, 0x16c(r4)

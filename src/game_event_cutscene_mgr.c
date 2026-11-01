@@ -5,7 +5,7 @@
 extern void __files(void);
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_80041C0C(void);
 extern void fn_8004B338(void);
 extern void talk_formatQuotedString(void);
@@ -24,7 +24,7 @@ extern void fn_800A03E4(void);
 extern void fn_800A0448(void);
 extern void fn_800A091C(void);
 extern void fn_800DC500(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_800EF73C(void);
 extern void fn_802375C4(void);
 extern void atn_Arc_decompressChunk(void);
@@ -215,7 +215,7 @@ asm void fn_80475F20(void)
     addi r3, r1, 0x10
     bl fn_8006B404
     addi r3, r1, 0x10
-    bl fn_800DC6B4
+    bl str_findChar
     cmpwi r28, 0x0
     mr r5, r3
     li r30, 0x0
@@ -488,7 +488,7 @@ asm void fn_80476220(void)
     addi r8, r1, 0x18
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lwz r0, 0x2c(r1)
     li r4, -0x1
     srwi. r0, r0, 31
@@ -570,7 +570,7 @@ lbl_fn_80476220_000005B0:
     addi r3, r1, 0x2c
     addi r8, r1, 0x10
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_80476220_000005CC:
     lwz r0, 0x20(r1)
     srwi. r0, r0, 31
@@ -623,7 +623,7 @@ lbl_fn_80476220_00000650:
     li r5, -0x1
     li r6, 0x0
     li r7, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_80476220_0000067C:
     lwz r0, 0x2c(r1)
     srwi r0, r0, 31
@@ -817,7 +817,7 @@ asm void fn_804766B0(void)
     addi r3, r1, 0x10
     bl fn_8006B404
     addi r3, r1, 0x10
-    bl fn_800DC6B4
+    bl str_findChar
     cmpwi r28, 0x0
     mr r5, r3
     li r29, 0x0
@@ -1138,7 +1138,7 @@ asm void fn_80476AC8(void)
     addi r3, r1, 0x10
     bl fn_8006B404
     addi r3, r1, 0x10
-    bl fn_800DC6B4
+    bl str_findChar
     cmpwi r28, 0x0
     mr r5, r3
     li r30, 0x0
@@ -1859,7 +1859,7 @@ asm void fn_8047749C(void)
     addi r3, r1, 0x10
     bl fn_8006B404
     addi r3, r1, 0x10
-    bl fn_800DC6B4
+    bl str_findChar
     cmpwi r28, 0x0
     mr r5, r3
     li r30, 0x0

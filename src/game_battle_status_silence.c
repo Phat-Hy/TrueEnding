@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_80051CD8(void);
 extern void fn_80056DB8(void);
 extern void atn_ColliBase_destructor(void);
@@ -28,11 +28,11 @@ extern void lockon_updateTarget(void);
 extern void fn_800971D4(void);
 extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_800C344C(void);
+extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void str_skipWhitespace(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_8011D424(void);
 extern void fn_8011E81C(void);
 extern void fn_801354B4(void);
@@ -55,8 +55,8 @@ extern void fn_803ED774(void);
 extern void fn_803EDB18(void);
 extern void fn_803EDCF4(void);
 extern void fn_803F11F8(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
@@ -694,10 +694,10 @@ asm void fn_8042CA54(void)
     stw r29, 0x744(r1)
     mr r29, r3
     addi r3, r3, 0x60
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r30, r3
     addi r3, r29, 0x60
-    bl fn_80470580
+    bl boss_getOffset54
     lis r4, lbl_807774D8@ha
     li r0, 0x0
     addi r4, r4, lbl_807774D8@l
@@ -1219,10 +1219,10 @@ asm void fn_8042D140(void)
     stmw r24, 0x760(r1)
     mr r28, r3
     addi r3, r3, 0x60
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r26, r3
     addi r3, r28, 0x60
-    bl fn_80470580
+    bl boss_getOffset54
     lis r4, lbl_807774D8@ha
     li r31, 0x0
     addi r4, r4, lbl_807774D8@l
@@ -1298,7 +1298,7 @@ lbl_fn_8042D140_00000EF0:
     add r7, r7, r24
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     cmpwi r28, 0x0
     beq lbl_fn_8042D140_00000FF8
     li r3, 0x1428
@@ -1745,7 +1745,7 @@ lbl_fn_8042D7C0_00001538:
     mr r3, r26
     lwzx r28, r4, r30
     lwz r27, 0x8c(r28)
-    bl fn_800DC6B4
+    bl str_findChar
     cmplw r27, r3
     bne lbl_fn_8042D7C0_0000155C
     stw r28, 0x868(r25)
@@ -1996,7 +1996,7 @@ lbl_fn_8042D93C_000018A8:
     addi r5, r1, 0x38
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0xc
     li r4, -0x1
     bl ref_releaseHandle

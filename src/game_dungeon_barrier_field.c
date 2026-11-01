@@ -41,8 +41,8 @@ extern void fn_803F10AC(void);
 extern void fn_803F11F8(void);
 extern void fn_803F1310(void);
 extern void fn_803F1A38(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_getStatus(void);
@@ -455,10 +455,10 @@ lbl_fn_803EC91C_00000478:
     mtctr r12
     bctrl
     addi r3, r31, 0x60
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r30, r3
     addi r3, r31, 0x60
-    bl fn_80470580
+    bl boss_getOffset54
     mr r4, r3
     mr r5, r30
     addi r3, r31, 0xb0

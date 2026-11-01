@@ -20,7 +20,7 @@ extern void fn_800928B0(void);
 extern void fn_80093F1C(void);
 extern void fn_80094420(void);
 extern void fn_800948F0(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_8048B3B8(void);
 extern void fn_8048BD04(void);
 extern void fn_8048C884(void);
@@ -846,7 +846,7 @@ lbl_fn_80555B88_00000AC8:
     lis r3, lbl_8075EB60@ha
     addi r3, r3, lbl_8075EB60@l
     addi r3, r3, 0x24
-    bl fn_800DC6B4
+    bl str_findChar
     mr r31, r3
     mr r3, r30
     bl fn_8001296C

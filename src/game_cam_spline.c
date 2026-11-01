@@ -18,7 +18,7 @@ extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void cam_initStickBindings(void);
 extern void fn_801334CC(void);
 extern void fn_801F3FF8(void);
@@ -1750,7 +1750,7 @@ lbl_fn_800F0D14_00001668:
     addi r22, r3, lbl_80735460@l
     addi r3, r22, 0x128
     addi r24, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f29
     mr r4, r3
     mr r3, r24

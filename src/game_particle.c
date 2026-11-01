@@ -5,7 +5,7 @@
 extern void __files(void);
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_8006F72C(void);
 extern void fn_800DBF68(void);
 extern void fn_800E2778(void);
@@ -647,7 +647,7 @@ lbl_fn_800E0F84_00000774:
     add r7, r26, r0
     addi r8, r1, 0x10
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lwz r0, 0x18(r30)
     srwi. r3, r0, 31
     bne lbl_fn_800E0F84_000007D4
@@ -686,7 +686,7 @@ lbl_fn_800E0F84_00000810:
     addi r3, r30, 0x18
     addi r8, r1, 0x8
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_800E0F84_0000082C:
     addi r3, r30, 0xc
 lbl_fn_800E0F84_00000830:
@@ -849,7 +849,7 @@ lbl_fn_800E114C_00000A24:
     add r7, r23, r0
     addi r8, r1, 0x8
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     addi r3, r26, 0xc
 lbl_fn_800E114C_00000A58:
     lmw r23, 0x1c(r1)
@@ -1343,7 +1343,7 @@ lbl_fn_800E19AC_000010E4:
     lwz r0, 0x4(r31)
     li r5, 0x0
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_800E19AC_00001124:
     mr r3, r30
     lwz r31, 0x1c(r1)
@@ -1744,7 +1744,7 @@ lbl_fn_800E1E64_0000163C:
     addi r8, r1, 0xc
     li r5, 0x0
     addi r3, r3, 0x2c
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lwz r3, 0x2c(r27)
     srwi r0, r3, 31
     cntlzw r0, r0

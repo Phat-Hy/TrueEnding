@@ -17,7 +17,7 @@ extern void fn_80134674(void);
 extern void fn_80139560(void);
 extern void fn_80144710(void);
 extern void fn_80145334(void);
-extern void fn_8014C0B4(void);
+extern void dialog_setScriptSlot(void);
 extern void fn_8014C540(void);
 extern void fn_80151448(void);
 extern void fn_801561E4(void);
@@ -41,7 +41,7 @@ extern void PSVECNormalize(void);
 extern void PSVECMag(void);
 extern void rand(void);
 extern void std_atan2(void);
-extern void fn_80695AD0(void);
+extern void vec3_isNonZero(void);
 
 /* External data declarations */
 extern u8 jumptable_80784A94[];
@@ -259,7 +259,7 @@ lbl_fn_802604E0_0000024C:
     stw r5, 0x50(r1)
     stw r4, 0x54(r1)
     stw r0, 0x58(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_802604E0_000002C0
     lwz r3, 0xf80(r31)
@@ -714,13 +714,13 @@ lbl_fn_802604E0_0000094C:
     lwz r5, 0x484(r31)
     mr r3, r31
     li r4, 0x19
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     b lbl_fn_802604E0_00000978
 lbl_fn_802604E0_00000968:
     mr r3, r31
     li r4, 0x19
     li r5, 0x1c4
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
 lbl_fn_802604E0_00000978:
     lwz r0, 0x58c(r31)
     cmpwi r0, 0xb

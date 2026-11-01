@@ -16,9 +16,9 @@ extern void fn_8008BBD8(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800C344C(void);
+extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB5C8(void);
+extern void morph_updateMesh(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800FAB80(void);
 extern void fn_8013A258(void);
@@ -156,7 +156,7 @@ lbl_fn_802DF570_00000068:
     addi r3, r31, 0x1560
     li r4, 0x0
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0x64
@@ -229,7 +229,7 @@ lbl_fn_802DF570_000001A0:
     addi r3, r31, 0x1560
     li r4, 0x0
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0x64
@@ -268,7 +268,7 @@ lbl_fn_802DF570_00000220:
     addi r3, r31, 0x1560
     li r4, 0x0
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0x64
@@ -1299,7 +1299,7 @@ lbl_fn_802E03F0_000010AC:
     addi r5, r31, 0x614
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -1543,7 +1543,7 @@ asm void fn_802E094C(void)
     addi r3, r30, 0x1560
     li r4, 0x0
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, lbl_8087F3C0
     mr r4, r30
     li r5, 0x64
@@ -1705,7 +1705,7 @@ lbl_fn_802E094C_00001624:
     addi r5, r30, 0x1504
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle
@@ -1754,7 +1754,7 @@ asm void fn_802E0C60(void)
     addi r3, r31, 0x1560
     li r4, 0x0
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0x64
@@ -1907,7 +1907,7 @@ asm void fn_802E0EC8(void)
     addi r5, r30, 0x614
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -1937,7 +1937,7 @@ lbl_fn_802E0EC8_000019B4:
     addi r3, r30, 0x1560
     li r4, 0x0
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, lbl_8087F3C0
     mr r4, r30
     li r5, 0x64
@@ -1956,7 +1956,7 @@ lbl_fn_802E0EC8_00001A48:
     addi r3, r30, 0x1560
     li r4, 0x0
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, lbl_8087F3C0
     mr r4, r30
     li r5, 0x64

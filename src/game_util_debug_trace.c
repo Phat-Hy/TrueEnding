@@ -11,11 +11,11 @@ extern void fn_8004ECC0(void);
 extern void mem_free(void);
 extern void fn_80084A78(void);
 extern void mem_getAllocSize(void);
-extern void fn_800C344C(void);
+extern void skin_applyWeights(void);
 extern void fn_800CB360(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
-extern void fn_800CB5C8(void);
+extern void morph_updateMesh(void);
 extern void fn_800CB6E4(void);
 extern void fn_800DCA6C(void);
 extern void fn_800EFC64(void);
@@ -50,7 +50,7 @@ extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSVECSquareMag(void);
 extern void fn_806952C4(void);
-extern void fn_80695AD0(void);
+extern void vec3_isNonZero(void);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
 
@@ -1028,7 +1028,7 @@ lbl_fn_805991E4_00000D10:
     stw r5, 0x24(r1)
     stw r4, 0x28(r1)
     stw r0, 0x2c(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_805991E4_00000E28
     lwz r0, 0x68(r31)
@@ -1104,7 +1104,7 @@ lbl_fn_805991E4_00000E28:
     addi r3, r31, 0x64
     li r4, 0x1e
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r0, 0x7c(r31)
     cmpwi r0, 0x0
     beq lbl_fn_805991E4_00000E8C
@@ -1336,7 +1336,7 @@ lbl_fn_80599458_00001184:
     addi r5, r30, 0x10
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x14
     li r4, -0x1
     bl ref_releaseHandle
@@ -1346,7 +1346,7 @@ lbl_fn_80599458_00001184:
     addi r5, r30, 0x10
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r30, 0x64
     addi r4, r1, 0x10
     bl fn_800CB440

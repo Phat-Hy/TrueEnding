@@ -28,7 +28,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
 extern void fn_80097D40(void);
 extern void atn_Task_destructor(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_8011E81C(void);
 extern void fn_80129930(void);
 extern void fn_80129954(void);
@@ -4451,7 +4451,7 @@ lbl_fn_80013558_00003980:
     bl dtor_80084684
 lbl_fn_80013558_00003A3C:
     lwz r3, 0x50(r19)
-    bl fn_800DC6B4
+    bl str_findChar
     lwz r5, 0x1c(r15)
     mr r4, r3
     lwz r3, 0x48(r5)

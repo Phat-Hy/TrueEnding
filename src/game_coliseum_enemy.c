@@ -22,7 +22,7 @@ extern void fn_800C1FB4(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void fn_800D3FA4(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_800DCA6C(void);
 extern void fn_80373148(void);
 extern void atn_LoadHandle_constructor(void);
@@ -251,7 +251,7 @@ lbl_fn_80490884_000001E4:
     fdivs f7, f7, f9
     fsubs f0, f0, f7
     stfs f0, 0x78(r29)
-    bl fn_800DC6B4
+    bl str_findChar
     stw r3, 0x8c(r29)
     mr r3, r29
     lwz r31, 0x1dc(r1)
@@ -442,7 +442,7 @@ lbl_fn_80490B0C_000004C0:
     fdivs f7, f7, f9
     fsubs f0, f0, f7
     stfs f0, 0x78(r29)
-    bl fn_800DC6B4
+    bl str_findChar
     stw r3, 0x8c(r29)
     mr r3, r29
     lwz r31, 0x20c(r1)
@@ -1758,7 +1758,7 @@ asm void fn_80491EA0(void)
     stw r0, 0x5c(r29)
     stw r0, 0x60(r29)
     stw r0, 0x64(r29)
-    bl fn_800DC6B4
+    bl str_findChar
     stw r3, 0x68(r29)
     mr r3, r30
     mr r4, r31
@@ -1824,7 +1824,7 @@ asm void fn_80491F94(void)
     stw r0, 0x5c(r31)
     stw r0, 0x60(r31)
     stw r0, 0x64(r31)
-    bl fn_800DC6B4
+    bl str_findChar
     stw r3, 0x68(r31)
     mr r3, r30
     mr r4, r29

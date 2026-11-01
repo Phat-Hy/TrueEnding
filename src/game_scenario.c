@@ -15,7 +15,7 @@ extern void fn_800641CC(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_8008771C(void);
+extern void route_interpolatePath(void);
 extern void fn_80087E9C(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
@@ -35,7 +35,7 @@ extern void strcmp(void);
 extern void strncmp(void);
 extern void fn_8068B100(void);
 extern void runtime_registerStaticObject(void);
-extern void fn_80695D84(void);
+extern void runtime_clampDouble(void);
 extern void strchr(void);
 extern u32 strlen(const char* str);
 
@@ -559,7 +559,7 @@ lbl_fn_800795DC_00000610:
     lfs f1, lbl_80880B10
     lfs f0, lbl_80880B20
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800795DC_00000620:
     mr r30, r3
 lbl_fn_800795DC_00000624:
@@ -581,7 +581,7 @@ lbl_fn_800795DC_00000658:
     lfs f1, lbl_80880B10
     lfs f0, lbl_80880B20
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800795DC_00000668:
     mr r29, r3
 lbl_fn_800795DC_0000066C:
@@ -603,7 +603,7 @@ lbl_fn_800795DC_000006A0:
     lfs f1, lbl_80880B10
     lfs f0, lbl_80880B20
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800795DC_000006B0:
     mr r28, r3
 lbl_fn_800795DC_000006B4:
@@ -625,7 +625,7 @@ lbl_fn_800795DC_000006E8:
     lfs f1, lbl_80880B10
     lfs f0, lbl_80880B20
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800795DC_000006F8:
     slwi r4, r29, 8
     slwi r3, r3, 24
@@ -658,7 +658,7 @@ lbl_fn_800795DC_0000075C:
     lfs f1, lbl_80880B10
     lfs f0, lbl_80880B20
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800795DC_0000076C:
     mr r28, r3
 lbl_fn_800795DC_00000770:
@@ -680,7 +680,7 @@ lbl_fn_800795DC_000007A4:
     lfs f1, lbl_80880B10
     lfs f0, lbl_80880B20
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800795DC_000007B4:
     mr r29, r3
 lbl_fn_800795DC_000007B8:
@@ -702,7 +702,7 @@ lbl_fn_800795DC_000007EC:
     lfs f1, lbl_80880B10
     lfs f0, lbl_80880B20
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800795DC_000007FC:
     mr r30, r3
 lbl_fn_800795DC_00000800:
@@ -724,7 +724,7 @@ lbl_fn_800795DC_00000834:
     lfs f1, lbl_80880B10
     lfs f0, lbl_80880B20
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800795DC_00000844:
     lfs f1, 0x24(r31)
     slwi r4, r29, 8
@@ -998,7 +998,7 @@ lbl_fn_80079BC8_00000BD0:
     addi r5, r29, 0x24
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_80880B00
     mr r3, r30
     lfs f2, lbl_80880B34
@@ -1007,7 +1007,7 @@ lbl_fn_80079BC8_00000BD0:
     addi r5, r29, 0x28
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_80880B00
     mr r3, r30
     lfs f2, lbl_80880B04
@@ -1016,7 +1016,7 @@ lbl_fn_80079BC8_00000BD0:
     addi r5, r29, 0x34
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_80880B00
     mr r3, r30
     lfs f2, lbl_80880B04
@@ -1025,7 +1025,7 @@ lbl_fn_80079BC8_00000BD0:
     addi r5, r29, 0x38
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_80880B00
     mr r3, r30
     lfs f2, lbl_80880B04
@@ -1034,7 +1034,7 @@ lbl_fn_80079BC8_00000BD0:
     addi r5, r29, 0x3c
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     b lbl_fn_80079BC8_00000E78
 lbl_fn_80079BC8_00000CB4:
     lis r31, lbl_807318A0@ha
@@ -1065,7 +1065,7 @@ lbl_fn_80079BC8_00000CB4:
     addi r5, r29, 0x24
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_80880B00
     mr r3, r30
     lfs f2, lbl_80880B34
@@ -1074,7 +1074,7 @@ lbl_fn_80079BC8_00000CB4:
     addi r5, r29, 0x28
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_80880B00
     mr r3, r30
     lfs f2, lbl_80880B3C
@@ -1083,7 +1083,7 @@ lbl_fn_80079BC8_00000CB4:
     addi r5, r29, 0x30
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_80880B00
     mr r3, r30
     lfs f2, lbl_80880B04
@@ -1092,7 +1092,7 @@ lbl_fn_80079BC8_00000CB4:
     addi r5, r29, 0x34
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_80880B00
     mr r3, r30
     lfs f2, lbl_80880B04
@@ -1101,7 +1101,7 @@ lbl_fn_80079BC8_00000CB4:
     addi r5, r29, 0x38
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_80880B00
     mr r3, r30
     lfs f2, lbl_80880B04
@@ -1110,7 +1110,7 @@ lbl_fn_80079BC8_00000CB4:
     addi r5, r29, 0x3c
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     b lbl_fn_80079BC8_00000E78
 lbl_fn_80079BC8_00000DE0:
     lis r31, lbl_807318A0@ha
@@ -1132,7 +1132,7 @@ lbl_fn_80079BC8_00000DE0:
     addi r5, r29, 0x34
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_80880B00
     mr r3, r30
     lfs f2, lbl_80880B04
@@ -1141,7 +1141,7 @@ lbl_fn_80079BC8_00000DE0:
     addi r5, r29, 0x38
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_80880B00
     mr r3, r30
     lfs f2, lbl_80880B04
@@ -1150,7 +1150,7 @@ lbl_fn_80079BC8_00000DE0:
     addi r5, r29, 0x3c
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
 lbl_fn_80079BC8_00000E78:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)

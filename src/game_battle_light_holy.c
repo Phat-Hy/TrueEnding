@@ -12,7 +12,7 @@ extern void fn_8005BBF8(void);
 extern void fn_8005BCE8(void);
 extern void mem_alloc(void);
 extern void route_findNextWaypoint(void);
-extern void fn_8008771C(void);
+extern void route_interpolatePath(void);
 extern void fn_80087994(void);
 extern void fn_80087BB4(void);
 extern void fn_80087E9C(void);
@@ -25,10 +25,10 @@ extern void fn_800971D4(void);
 extern void fn_800C1814(void);
 extern void fn_800C1990(void);
 extern void fn_800C31F4(void);
-extern void fn_800C344C(void);
+extern void skin_applyWeights(void);
 extern void fn_800CB360(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB5C8(void);
+extern void morph_updateMesh(void);
 extern void fn_800CB688(void);
 extern void str_skipWhitespace(void);
 extern void system_getNextSequenceId(void);
@@ -49,8 +49,8 @@ extern void fn_803EC91C(void);
 extern void fn_803ED0D4(void);
 extern void fn_803ED774(void);
 extern void fn_803F11F8(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void atn_LoadHandle_destructor(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
@@ -165,10 +165,10 @@ asm void fn_8042049C(void)
     bl _savegpr_18
     mr r31, r3
     addi r3, r3, 0x60
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r25, r3
     addi r3, r31, 0x60
-    bl fn_80470580
+    bl boss_getOffset54
     lis r4, lbl_807774D8@ha
     li r23, 0x0
     addi r4, r4, lbl_807774D8@l
@@ -761,10 +761,10 @@ asm void fn_80420D0C(void)
     stw r28, 0x640(r1)
     mr r28, r3
     addi r3, r3, 0x60
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r31, r3
     addi r3, r28, 0x60
-    bl fn_80470580
+    bl boss_getOffset54
     lis r4, lbl_807774D8@ha
     li r0, 0x0
     addi r4, r4, lbl_807774D8@l
@@ -1231,7 +1231,7 @@ lbl_fn_80421308_00000EA0:
     addi r5, r30, 0x6c
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle
@@ -1692,7 +1692,7 @@ lbl_fn_80421904_000014DC:
     addi r5, r28, 0xfc
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_808865FC
     mr r3, r29
     lfs f2, lbl_80886600
@@ -1701,7 +1701,7 @@ lbl_fn_80421904_000014DC:
     addi r5, r28, 0x100
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lis r31, 0x2
     mr r3, r29
     addi r4, r30, 0x24
@@ -1738,7 +1738,7 @@ lbl_fn_80421904_000014DC:
     addi r5, r28, 0x110
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_808865FC
     mr r3, r29
     lfs f2, lbl_80886600
@@ -1747,7 +1747,7 @@ lbl_fn_80421904_000014DC:
     addi r5, r28, 0x114
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lwz r0, 0x44(r1)
     lwz r31, 0x3c(r1)
     lwz r30, 0x38(r1)
@@ -1834,7 +1834,7 @@ asm void fn_80421B7C(void)
     stw r5, 0x0(r3)
     li r5, 0x0
     addi r3, r3, 0x104
-    bl fn_800CB5C8
+    bl morph_updateMesh
     addic. r31, r29, 0x114
     beq lbl_fn_80421B7C_00001750
     mr r3, r31
@@ -1927,10 +1927,10 @@ asm void fn_80421CCC(void)
     stw r29, 0x644(r1)
     mr r29, r3
     addi r3, r3, 0x60
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r30, r3
     addi r3, r29, 0x60
-    bl fn_80470580
+    bl boss_getOffset54
     lis r4, lbl_807774D8@ha
     li r0, 0x0
     addi r4, r4, lbl_807774D8@l

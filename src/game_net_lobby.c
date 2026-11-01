@@ -15,7 +15,7 @@ extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void route_findNextWaypoint(void);
-extern void fn_8008771C(void);
+extern void route_interpolatePath(void);
 extern void fn_80087994(void);
 extern void fn_8008937C(void);
 extern void fn_800897D8(void);
@@ -23,7 +23,7 @@ extern void fn_800BFAC8(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void fn_800D3FA4(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_800DD3FC(void);
 extern void fn_801E9544(void);
 extern void fn_801EB188(void);
@@ -41,7 +41,7 @@ extern void fn_8044441C(void);
 extern void fn_804444E8(void);
 extern void PSVECSquareMag(void);
 extern void rand(void);
-extern void fn_80695D84(void);
+extern void runtime_clampDouble(void);
 extern int sprintf(char* str, const char* format, ...);
 extern char* strcpy(char* dest, const char* src);
 
@@ -344,7 +344,7 @@ lbl_fn_801E996C_0000030C:
     addi r3, r3, lbl_8073CBEC@l
     addi r3, r3, 0x24
     addi r31, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_80882B30
     mr r4, r3
     mr r3, r31
@@ -356,7 +356,7 @@ lbl_fn_801E996C_00000344:
     addi r3, r3, lbl_8073CBEC@l
     addi r3, r3, 0x24
     addi r31, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_80882B40
     mr r4, r3
     mr r3, r31
@@ -447,7 +447,7 @@ lbl_fn_801E9B84_00000494:
     lwz r4, 0x48(r30)
     addi r3, r1, 0x80
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     mr r3, r29
@@ -464,7 +464,7 @@ lbl_fn_801E9B84_00000494:
     addi r3, r1, 0xc0
     lfd f0, 0x200(r1)
     fsubs f31, f0, f1
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     mr r3, r29
@@ -573,7 +573,7 @@ lbl_fn_801E9B84_00000670:
     lwz r4, 0x48(r30)
     addi r3, r1, 0x140
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     mr r3, r29
     addi r5, r1, 0x180
@@ -1264,7 +1264,7 @@ lbl_fn_801EA534_00000F28:
     addi r5, r30, 0x54
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_80882B80
     mr r3, r28
     lfs f2, lbl_80882B84
@@ -1273,7 +1273,7 @@ lbl_fn_801EA534_00000F28:
     addi r5, r30, 0x58
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_80882B80
     mr r3, r28
     lfs f2, lbl_80882B84
@@ -1282,7 +1282,7 @@ lbl_fn_801EA534_00000F28:
     addi r5, r30, 0x5c
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     mr r3, r30
     mr r4, r31
     bl fn_801EB93C
@@ -1653,7 +1653,7 @@ lbl_fn_801EAB24_00001558:
     b lbl_fn_801EAB24_00001574
 lbl_fn_801EAB24_0000156C:
     fmadds f1, f27, f25, f28
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_801EAB24_00001574:
     mr r20, r3
 lbl_fn_801EAB24_00001578:
@@ -1671,7 +1671,7 @@ lbl_fn_801EAB24_00001590:
     b lbl_fn_801EAB24_000015AC
 lbl_fn_801EAB24_000015A4:
     fmadds f1, f27, f0, f28
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_801EAB24_000015AC:
     mr r21, r3
 lbl_fn_801EAB24_000015B0:
@@ -1689,7 +1689,7 @@ lbl_fn_801EAB24_000015C8:
     b lbl_fn_801EAB24_000015E4
 lbl_fn_801EAB24_000015DC:
     fmadds f1, f27, f0, f28
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_801EAB24_000015E4:
     mr r22, r3
 lbl_fn_801EAB24_000015E8:
@@ -1707,7 +1707,7 @@ lbl_fn_801EAB24_00001600:
     b lbl_fn_801EAB24_0000161C
 lbl_fn_801EAB24_00001614:
     fmadds f1, f27, f0, f28
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_801EAB24_0000161C:
     slwi r5, r21, 8
     slwi r4, r3, 24

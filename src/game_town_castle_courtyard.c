@@ -10,7 +10,7 @@ extern void atn_Model_findBoneIndex(void);
 extern void fn_800BFAC8(void);
 extern void fn_800C31F4(void);
 extern void ref_releaseHandle(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_801346C8(void);
 extern void fn_8016E484(void);
 extern void fn_801F465C(void);
@@ -1478,7 +1478,7 @@ lbl_fn_803D83A8_00001428:
     addi r14, r14, lbl_807506A0@l
     addi r3, r14, 0x11e6
     addi r17, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     mr r3, r17
     mr r5, r16
@@ -2069,7 +2069,7 @@ lbl_fn_803D83A8_00001CA8:
     lfs f20, 0x19c(r1)
     addi r3, r14, 0x1215
     addi r16, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f20
     mr r4, r3
     mr r3, r16
@@ -2079,7 +2079,7 @@ lbl_fn_803D83A8_00001CA8:
     addi r3, r14, 0x1215
     lfs f20, 0x1a0(r1)
     addi r14, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f20
     mr r4, r3
     mr r3, r14
@@ -2541,7 +2541,7 @@ lbl_fn_803D83A8_000023D8:
     addi r3, r3, lbl_807506A0@l
     addi r3, r3, 0x129b
     addi r14, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     mr r3, r14
     mr r5, r16
@@ -2562,7 +2562,7 @@ lbl_fn_803D83A8_00002424:
     addi r3, r3, lbl_807506A0@l
     addi r3, r3, 0x12a7
     addi r14, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     mr r3, r14
     mr r5, r16
@@ -2583,7 +2583,7 @@ lbl_fn_803D83A8_00002470:
     addi r3, r3, lbl_807506A0@l
     addi r3, r3, 0x12b3
     addi r14, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     mr r3, r14
     mr r5, r16
@@ -2604,7 +2604,7 @@ lbl_fn_803D83A8_000024BC:
     addi r3, r3, lbl_807506A0@l
     addi r3, r3, 0x12bf
     addi r14, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     mr r3, r14
     mr r5, r16

@@ -15,7 +15,7 @@ extern void fn_8006EF48(void);
 extern void fn_8006F2F0(void);
 extern void fn_8008CD60(void);
 extern void fn_800BFAC8(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_800DD3FC(void);
 extern void fn_80103484(void);
 extern void fn_8016F3D0(void);
@@ -28,7 +28,7 @@ extern void swprintf(void);
 extern void fn_8068AD58(void);
 extern void fn_8068AEA0(void);
 extern void std_atan2(void);
-extern void fn_80695D84(void);
+extern void runtime_clampDouble(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -250,7 +250,7 @@ lbl_fn_800F5314_00000214:
     lfs f24, -0x34a4(r4)
     addi r3, r3, 0x1c6
     addi r19, r5, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f24
     mr r4, r3
     mr r3, r19
@@ -460,7 +460,7 @@ lbl_fn_800F5314_00000530:
     addi r19, r19, lbl_80736040@l
     addi r3, r19, 0x1cd
     addi r20, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f25
     mr r4, r3
     mr r3, r20
@@ -469,7 +469,7 @@ lbl_fn_800F5314_00000530:
     addi r3, r19, 0x1cd
     lwz r4, -0x34a0(r4)
     addi r20, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f25
     mr r4, r3
     mr r3, r20
@@ -1513,7 +1513,7 @@ lbl_fn_800F5314_00001478:
     fdivs f0, f0, f27
 lbl_fn_800F5314_00001490:
     fmuls f1, f28, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
     add r0, r21, r22
     slwi r4, r3, 24
     clrlwi r0, r0, 27

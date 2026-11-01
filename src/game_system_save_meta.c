@@ -102,8 +102,8 @@ extern void world_setGlobalFlag(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
 extern void fn_80373148(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_804A04AC(void);
 extern void PSMTXRotRad(void);
@@ -544,16 +544,16 @@ lbl_fn_80345BA8_00000528:
     li r31, 0x0
 lbl_fn_80345BA8_0000052C:
     addi r3, r29, 0x180c
-    bl fn_80470580
+    bl boss_getOffset54
     cmpwi r3, 0x0
     beq lbl_fn_80345BA8_00000AD8
     cmpwi r31, 0x0
     beq lbl_fn_80345BA8_00000AD8
     addi r3, r29, 0x180c
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r31, r3
     addi r3, r29, 0x180c
-    bl fn_80470580
+    bl boss_getOffset54
     mr r4, r3
     mr r5, r31
     addi r3, r1, 0x10

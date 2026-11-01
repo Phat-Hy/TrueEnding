@@ -9,7 +9,7 @@ extern void fn_8006969C(void);
 extern void fn_800696B4(void);
 extern void mem_alloc(void);
 extern void fn_800C31F4(void);
-extern void fn_800C344C(void);
+extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void fn_800F8574(void);
 extern void fn_80108C10(void);
@@ -903,7 +903,7 @@ lbl_fn_80441F24_00000AA4:
     li r6, 0x0
     addi r4, r4, 0xe
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle

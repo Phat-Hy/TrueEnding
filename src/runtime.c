@@ -32,10 +32,10 @@ void dtor_80695824(void);
 void fn_806958E0(void);
 void fn_806959D8(void);
 void fn_80695A50(void);
-void fn_80695AD0(void);
+void vec3_isNonZero(void);
 void fn_80695B00(void);
 void fn_80695B28(void);
-void fn_80695D84(void);
+void runtime_clampDouble(void);
 void __save_fpr(void);
 void __restore_fpr(void);
 void __save_gpr(void);
@@ -626,7 +626,7 @@ lbl_fn_80695A50_0000063C:
     blr
 }
 
-asm void fn_80695AD0(void)
+asm void vec3_isNonZero(void)
 {
     nofralloc
     lwz r5, 0x0(r3)
@@ -843,7 +843,7 @@ lbl_fn_80695B28_000008F0:
     blr
 }
 
-asm void fn_80695D84(void)
+asm void runtime_clampDouble(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -855,20 +855,20 @@ asm void fn_80695D84(void)
     lfd f4, 0x10(r4)
     fcmpu cr0, f1, f0
     fcmpu cr6, f1, f3
-    blt lbl_fn_80695D84_00000958
+    blt lbl_runtime_clampDouble_00000958
     subi r3, r3, 0x1
-    bge cr6, lbl_fn_80695D84_00000958
+    bge cr6, lbl_runtime_clampDouble_00000958
     fcmpu cr7, f1, f4
     fmr f2, f1
-    blt cr7, lbl_fn_80695D84_00000944
+    blt cr7, lbl_runtime_clampDouble_00000944
     fsub f2, f1, f4
-lbl_fn_80695D84_00000944:
+lbl_runtime_clampDouble_00000944:
     fctiwz f2, f2
     stfd f2, 0x8(r1)
     lwz r3, 0xc(r1)
-    blt cr7, lbl_fn_80695D84_00000958
+    blt cr7, lbl_runtime_clampDouble_00000958
     addis r3, r3, 0x8000
-lbl_fn_80695D84_00000958:
+lbl_runtime_clampDouble_00000958:
     addi r1, r1, 0x10
     blr
 }

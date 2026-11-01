@@ -10,7 +10,7 @@ extern void _savegpr_22(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_80051CD8(void);
 extern void fn_8005454C(void);
 extern void talk_parseQuotedString(void);
@@ -25,7 +25,7 @@ extern void fn_8006AC08(void);
 extern void mem_alloc(void);
 extern void mem_getAllocSize(void);
 extern void route_findNextWaypoint(void);
-extern void fn_8008771C(void);
+extern void route_interpolatePath(void);
 extern void fn_80087E9C(void);
 extern void fn_8008937C(void);
 extern void fn_800897D8(void);
@@ -39,7 +39,7 @@ extern void atn_Task_destructor(void);
 extern void fn_800D3FA4(void);
 extern void fn_800DC12C(void);
 extern void str_skipWhitespace(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_802180A8(void);
 extern void fn_8035FF44(void);
 extern void fn_8035FF94(void);
@@ -47,8 +47,8 @@ extern void fn_8036055C(void);
 extern void fn_80360B40(void);
 extern void fn_80360EA4(void);
 extern void fn_803637D4(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_80473F88(void);
@@ -1664,7 +1664,7 @@ lbl_fn_80363108_000014EC:
     addi r4, r30, 0x1d
     addi r5, r28, 0x30
     addi r6, r31, fn_8036324C@l
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_808856A0
     mr r3, r29
     lfs f2, lbl_8088569C
@@ -1673,7 +1673,7 @@ lbl_fn_80363108_000014EC:
     addi r4, r30, 0x24
     addi r5, r28, 0x44
     addi r6, r31, fn_8036324C@l
-    bl fn_8008771C
+    bl route_interpolatePath
     mr r3, r29
     mr r10, r28
     addi r4, r30, 0x4c
@@ -1773,7 +1773,7 @@ asm void fn_80363284(void)
     addi r8, r1, 0x8
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r27
     addi r3, r1, 0x20
     bl fn_8006AC08
@@ -1866,7 +1866,7 @@ lbl_fn_80363284_000017DC:
     bl fn_8008AD4C
     mr r3, r30
     bl talk_formatQuotedString
-    bl fn_800DC6B4
+    bl str_findChar
     stw r3, 0x3d8(r29)
     mr r3, r30
     bl talk_formatQuotedString
@@ -1974,10 +1974,10 @@ asm void fn_803635E8(void)
     stw r29, 0x944(r1)
     mr r29, r3
     addi r3, r3, 0x3ec
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r30, r3
     addi r3, r29, 0x3ec
-    bl fn_80470580
+    bl boss_getOffset54
     lis r4, lbl_807774D8@ha
     li r0, 0x0
     addi r4, r4, lbl_807774D8@l

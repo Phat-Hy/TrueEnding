@@ -28,7 +28,7 @@ extern void fn_8068AD58(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
 extern void fn_8068B100(void);
-extern void fn_80695AD0(void);
+extern void vec3_isNonZero(void);
 
 /* External data declarations */
 extern u8 lbl_80737390[];
@@ -1043,7 +1043,7 @@ lbl_fn_801426A4_00000DD8:
     stw r5, 0x20(r1)
     stw r4, 0x24(r1)
     stw r0, 0x28(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_801426A4_00000E14
     lwz r3, 0xf80(r29)
@@ -1089,7 +1089,7 @@ lbl_fn_801426A4_00000E80:
     stw r5, 0x8(r1)
     stw r4, 0xc(r1)
     stw r0, 0x10(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_801426A4_00000EBC
     lwz r3, 0xf80(r29)
@@ -1135,7 +1135,7 @@ lbl_fn_801426A4_00000F28:
     stw r5, 0x14(r1)
     stw r4, 0x18(r1)
     stw r0, 0x1c(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_801426A4_00000F64
     lwz r3, 0xf80(r29)
@@ -1327,7 +1327,7 @@ lbl_fn_801437D0_000011EC:
     stw r5, 0x68(r1)
     stw r4, 0x6c(r1)
     stw r0, 0x70(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_801437D0_00001230
     lwz r3, 0xf80(r30)

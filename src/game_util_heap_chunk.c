@@ -20,7 +20,7 @@ extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
 extern void fn_800DBF68(void);
 extern void fn_800DC12C(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_80116FC0(void);
 extern void fn_80117228(void);
 extern void fn_801F3FF8(void);
@@ -54,8 +54,8 @@ extern void fn_80444564(void);
 extern void fn_80444BE8(void);
 extern void fn_80444C48(void);
 extern void fn_80444C50(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void fn_804A39EC(void);
 extern void fn_804A3A68(void);
 extern void fn_804A55FC(void);
@@ -413,10 +413,10 @@ asm void fn_80585FD8(void)
     addi r4, r4, 0xfc
     bl fn_805849EC
     addi r3, r30, 0x58
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r31, r3
     addi r3, r30, 0x58
-    bl fn_80470580
+    bl boss_getOffset54
     lwz r12, 0x0(r30)
     mr r4, r3
     mr r3, r30
@@ -624,7 +624,7 @@ lbl_fn_80586220_000006A8:
     bl sprintf
     lwz r15, 0xa8(r31)
     addi r3, r1, 0x70
-    bl fn_800DC6B4
+    bl str_findChar
     mr r5, r3
     mr r4, r15
     addi r3, r1, 0x44
@@ -942,7 +942,7 @@ asm void fn_805866F8(void)
     crclr 6
     bl sprintf
     addi r3, r1, 0x88
-    bl fn_800DC6B4
+    bl str_findChar
     mr r5, r3
     mr r4, r27
     addi r3, r1, 0x48
@@ -964,7 +964,7 @@ asm void fn_805866F8(void)
     lwz r29, 0x8(r24)
     addi r3, r31, 0x18d
     addi r25, r26, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     mr r3, r25
     mr r5, r29
@@ -1054,7 +1054,7 @@ lbl_fn_805866F8_00000C9C:
     lis r3, lbl_807616DC@ha
     addi r3, r3, lbl_807616DC@l
     addi r3, r3, 0x1a5
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_808880F0
     mr r4, r3
     addi r3, r26, 0x58
@@ -1074,7 +1074,7 @@ lbl_fn_805866F8_00000D48:
     lis r3, lbl_807616DC@ha
     addi r3, r3, lbl_807616DC@l
     addi r3, r3, 0x1a5
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_808880F4
     mr r4, r3
     addi r3, r26, 0x58
@@ -1126,7 +1126,7 @@ lbl_fn_805866F8_00000DE8:
     bl fn_80116FC0
     mr r25, r3
     addi r3, r1, 0x88
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     mr r3, r27
     mr r5, r25
@@ -1144,7 +1144,7 @@ lbl_fn_805866F8_00000E40:
     lis r3, lbl_807616DC@ha
     addi r3, r3, lbl_807616DC@l
     addi r3, r3, 0x1a5
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_808880F0
     mr r4, r3
     addi r3, r26, 0x58
@@ -1253,7 +1253,7 @@ lbl_fn_805866F8_00000FCC:
     bl fn_80116FC0
     mr r25, r3
     addi r3, r1, 0x88
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     mr r3, r27
     mr r5, r25
@@ -1267,7 +1267,7 @@ lbl_fn_805866F8_00001024:
     lis r3, lbl_807616DC@ha
     addi r3, r3, lbl_807616DC@l
     addi r3, r3, 0x1a5
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_808880F0
     mr r4, r3
     addi r3, r26, 0x58
@@ -1307,7 +1307,7 @@ lbl_fn_805866F8_00001094:
     crclr 6
     bl sprintf
     addi r3, r1, 0x88
-    bl fn_800DC6B4
+    bl str_findChar
     mr r5, r3
     mr r4, r26
     addi r3, r1, 0x5c
@@ -1568,10 +1568,10 @@ asm void fn_80587070(void)
     mr r3, r31
     bl fn_8057F8FC
     addi r3, r31, 0x58
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r30, r3
     addi r3, r31, 0x58
-    bl fn_80470580
+    bl boss_getOffset54
     lwz r12, 0x0(r31)
     mr r4, r3
     mr r3, r31
@@ -1887,7 +1887,7 @@ lbl_fn_805873BC_00001888:
     addis r4, r31, 0x2
     addi r3, r1, 0x20
     lwz r30, 0x5b74(r4)
-    bl fn_800DC6B4
+    bl str_findChar
     mr r5, r3
     mr r4, r30
     addi r3, r1, 0x8

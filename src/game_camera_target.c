@@ -14,10 +14,10 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800C31F4(void);
-extern void fn_800C344C(void);
+extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
-extern void fn_800CB5C8(void);
+extern void morph_updateMesh(void);
 extern void atn_Task_setActive(void);
 extern void fn_800DC12C(void);
 extern void str_skipWhitespace(void);
@@ -55,8 +55,8 @@ extern void fn_802E8084(void);
 extern void fn_8035B694(void);
 extern void fn_8035B78C(void);
 extern void fn_80375184(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
@@ -346,7 +346,7 @@ asm void fn_802E1290(void)
     addi r4, r4, 0x1b8
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle
@@ -445,7 +445,7 @@ asm void fn_802E1414(void)
     addi r5, r29, 0x614
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r29, 0x1560
     addi r4, r1, 0x10
     bl fn_800CB440
@@ -583,14 +583,14 @@ asm void fn_802E1624(void)
     addi r5, r30, 0x614
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle
     addi r3, r30, 0x1560
     li r4, 0x0
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, lbl_8087F3C0
     mr r4, r30
     li r5, 0x64
@@ -754,7 +754,7 @@ lbl_fn_802E177C_00000874:
     addi r3, r28, 0x1560
     li r4, 0x0
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, lbl_8087F3C0
     mr r4, r28
     li r5, 0x64
@@ -1657,10 +1657,10 @@ lbl_fn_802E2470_00001514:
     ori r0, r0, 0xc21d
     oris r0, r0, 0x380
     stw r0, 0x7ec(r31)
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r30, r3
     addi r3, r31, 0x14b0
-    bl fn_80470580
+    bl boss_getOffset54
     mr r4, r3
     mr r3, r31
     mr r5, r30

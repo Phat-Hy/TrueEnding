@@ -14,7 +14,7 @@ extern void fn_8001282C(void);
 extern void fn_800128FC(void);
 extern void fn_8001296C(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_80069BF4(void);
 extern void fn_8006B174(void);
 extern void mem_getAllocSize(void);
@@ -468,7 +468,7 @@ asm void fn_80557F88(void)
     addi r8, r1, 0x10
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r30
     addi r3, r1, 0xa0
     bl fn_8006B174
@@ -521,7 +521,7 @@ lbl_fn_80557F88_000005FC:
     addi r3, r1, 0xa0
     addi r8, r1, 0x8
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_80557F88_00000618:
     lwz r0, 0x88(r1)
     srwi. r0, r0, 31

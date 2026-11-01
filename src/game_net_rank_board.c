@@ -7,7 +7,7 @@ extern void _restgpr_25(void);
 extern void _savegpr_21(void);
 extern void _savegpr_25(void);
 extern void dtor_80084684(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void talk_parseQuotedString(void);
 extern void fn_8005B5F8(void);
 extern void fn_8005B6E8(void);
@@ -27,8 +27,8 @@ extern void fn_8036FB4C(void);
 extern void fn_80373148(void);
 extern void fn_803743AC(void);
 extern void fn_8037587C(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void fn_80473F88(void);
 extern void fn_804A62C8(void);
 extern void fn_805113EC(void);
@@ -2022,10 +2022,10 @@ lbl_fn_80520638_00001A9C:
     stw r28, 0x3c(r1)
     stw r28, 0x40(r1)
     stfs f0, 0x44(r1)
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r24, r3
     addi r3, r23, 0x19c4
-    bl fn_80470580
+    bl boss_getOffset54
     lwz r12, 0xb0(r1)
     mr r4, r3
     mr r5, r24
@@ -2148,7 +2148,7 @@ lbl_fn_80520638_00001C74:
     add r7, r22, r0
     addi r8, r1, 0x8
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lwz r0, 0x10(r1)
     srwi r0, r0, 31
     cntlzw r0, r0

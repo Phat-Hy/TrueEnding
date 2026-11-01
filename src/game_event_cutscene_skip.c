@@ -8,7 +8,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_14(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_8004829C(void);
 extern void fn_8004895C(void);
 extern void fn_80049654(void);
@@ -1685,7 +1685,7 @@ lbl_fn_804805F0_00001510:
     addi r3, r1, 0x5c
     addi r8, r1, 0x8
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_804805F0_0000152C:
     lwz r0, 0x50(r1)
     srwi. r0, r0, 31

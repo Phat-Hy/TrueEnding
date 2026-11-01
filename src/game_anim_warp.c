@@ -19,7 +19,7 @@ extern void fn_8004ED34(void);
 extern void atn_Matrix_copy_2(void);
 extern void atn_Matrix_copy(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_800C344C(void);
+extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void fn_800DD3FC(void);
@@ -1758,7 +1758,7 @@ lbl_fn_80279280_0000174C:
     addi r5, r1, 0x30
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle

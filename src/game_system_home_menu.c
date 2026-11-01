@@ -10,7 +10,7 @@ extern void _savegpr_23(void);
 extern void _savegpr_24(void);
 extern void dtor_80013D60(void);
 extern void dtor_80084684(void);
-extern void fn_8000EB8C(void);
+extern void sys_copyString(void);
 extern void fn_8000ECA8(void);
 extern void fn_8003E4A4(void);
 extern void fn_8004203C(void);
@@ -31,7 +31,7 @@ extern void fn_800629F0(void);
 extern void mem_alloc(void);
 extern void mem_getAllocSize(void);
 extern void route_findNextWaypoint(void);
-extern void fn_8008771C(void);
+extern void route_interpolatePath(void);
 extern void fn_8008937C(void);
 extern void fn_800897D8(void);
 extern void fn_80089ACC(void);
@@ -43,7 +43,7 @@ extern void fn_800CB480(void);
 extern void fn_800CB538(void);
 extern void fn_800CB58C(void);
 extern void fn_800CB5B4(void);
-extern void fn_800CB5C8(void);
+extern void morph_updateMesh(void);
 extern void fn_800CB69C(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
@@ -74,8 +74,8 @@ extern void fn_80362FA4(void);
 extern void fn_80363108(void);
 extern void world_getGlobalFlag(void);
 extern void world_getLocalFlag(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
@@ -404,7 +404,7 @@ lbl_fn_8035DFB8_00000374:
     li r6, 0x0
     lfs f3, lbl_80885680
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
 lbl_fn_8035DFB8_000003CC:
     lwz r5, 0xbc(r31)
     li r6, 0x1
@@ -525,7 +525,7 @@ lbl_fn_8035E314_00000548:
     li r5, 0x0
     add r3, r0, r29
     addi r3, r3, 0x58
-    bl fn_800CB5C8
+    bl morph_updateMesh
     addi r29, r29, 0x5c
     addi r28, r28, 0x1
 lbl_fn_8035E314_00000568:
@@ -929,7 +929,7 @@ lbl_fn_8035E858_00000A7C:
     add r3, r0, r30
     lwzx r29, r30, r0
     addi r3, r3, 0x58
-    bl fn_800CB5C8
+    bl morph_updateMesh
     cmpwi r29, 0x0
     beq lbl_fn_8035E858_00000AAC
     mr r3, r29
@@ -1710,10 +1710,10 @@ asm void fn_8035F3D4(void)
     stmw r25, 0x664(r1)
     mr r28, r3
     addi r3, r3, 0x48
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r26, r3
     addi r3, r28, 0x48
-    bl fn_80470580
+    bl boss_getOffset54
     mr r4, r3
     mr r5, r26
     addi r3, r1, 0x20
@@ -1730,7 +1730,7 @@ lbl_fn_8035F3D4_0000160C:
     bl fn_8003E4A4
     addi r3, r1, 0x14
     addi r4, r26, 0x2c
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_8035F3D4_00001734
     addi r3, r1, 0x20
@@ -1740,7 +1740,7 @@ lbl_fn_8035F3D4_0000160C:
     bl fn_8020A780
     addi r3, r1, 0x14
     addi r4, r26, 0x32
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_8035F3D4_00001670
     addi r3, r1, 0x20
@@ -1751,7 +1751,7 @@ lbl_fn_8035F3D4_0000160C:
 lbl_fn_8035F3D4_00001670:
     addi r3, r1, 0x14
     addi r4, r26, 0x3d
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_8035F3D4_00001698
     addi r3, r1, 0x20
@@ -1762,7 +1762,7 @@ lbl_fn_8035F3D4_00001670:
 lbl_fn_8035F3D4_00001698:
     addi r3, r1, 0x14
     addi r4, r26, 0x47
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_8035F3D4_000016C0
     addi r3, r1, 0x20
@@ -1773,7 +1773,7 @@ lbl_fn_8035F3D4_00001698:
 lbl_fn_8035F3D4_000016C0:
     addi r3, r1, 0x14
     addi r4, r26, 0x53
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_8035F3D4_000016E8
     addi r3, r1, 0x20
@@ -1784,7 +1784,7 @@ lbl_fn_8035F3D4_000016C0:
 lbl_fn_8035F3D4_000016E8:
     addi r3, r1, 0x14
     addi r4, r26, 0x5c
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_8035F3D4_00001710
     addi r3, r1, 0x20
@@ -1795,7 +1795,7 @@ lbl_fn_8035F3D4_000016E8:
 lbl_fn_8035F3D4_00001710:
     addi r3, r1, 0x14
     addi r4, r26, 0x68
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_8035F3D4_00001734
     addi r3, r1, 0x20
@@ -1819,10 +1819,10 @@ lbl_fn_8035F3D4_00001734:
     addi r3, r28, 0x48
     li r30, 0x0
     li r29, 0x0
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r26, r3
     addi r3, r28, 0x48
-    bl fn_80470580
+    bl boss_getOffset54
     lwz r12, 0x20(r1)
     mr r4, r3
     mr r5, r26
@@ -1841,7 +1841,7 @@ lbl_fn_8035F3D4_000017AC:
     bl fn_8003E4A4
     addi r3, r1, 0x8
     addi r4, r31, 0x2c
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_8035F3D4_00001D44
     addi r3, r1, 0x20
@@ -1851,7 +1851,7 @@ lbl_fn_8035F3D4_000017AC:
     bl fn_8020A780
     addi r3, r1, 0x8
     addi r4, r31, 0x72
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_8035F3D4_00001858
     b lbl_fn_8035F3D4_00001848
@@ -1863,12 +1863,12 @@ lbl_fn_8035F3D4_00001800:
     bl fn_8020A780
     addi r3, r1, 0x8
     addi r4, r31, 0x79
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     bne lbl_fn_8035F3D4_00001858
     addi r3, r1, 0x8
     addi r4, r31, 0x7d
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_8035F3D4_00001848
     addi r3, r1, 0x20
@@ -1882,7 +1882,7 @@ lbl_fn_8035F3D4_00001848:
 lbl_fn_8035F3D4_00001858:
     addi r3, r1, 0x8
     addi r4, r31, 0x32
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_8035F3D4_00001904
     b lbl_fn_8035F3D4_000018F0
@@ -1894,7 +1894,7 @@ lbl_fn_8035F3D4_00001870:
     bl fn_8020A780
     addi r3, r1, 0x8
     addi r4, r31, 0x79
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     bne lbl_fn_8035F3D4_00001D44
     addi r3, r1, 0x8
@@ -1929,7 +1929,7 @@ lbl_fn_8035F3D4_000018F0:
 lbl_fn_8035F3D4_00001904:
     addi r3, r1, 0x8
     addi r4, r31, 0x3d
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_8035F3D4_000019B0
     b lbl_fn_8035F3D4_0000199C
@@ -1941,7 +1941,7 @@ lbl_fn_8035F3D4_0000191C:
     bl fn_8020A780
     addi r3, r1, 0x8
     addi r4, r31, 0x79
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     bne lbl_fn_8035F3D4_00001D44
     addi r3, r1, 0x8
@@ -1976,7 +1976,7 @@ lbl_fn_8035F3D4_0000199C:
 lbl_fn_8035F3D4_000019B0:
     addi r3, r1, 0x8
     addi r4, r31, 0x47
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_8035F3D4_00001A5C
     b lbl_fn_8035F3D4_00001A48
@@ -1988,7 +1988,7 @@ lbl_fn_8035F3D4_000019C8:
     bl fn_8020A780
     addi r3, r1, 0x8
     addi r4, r31, 0x79
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     bne lbl_fn_8035F3D4_00001D44
     addi r3, r1, 0x8
@@ -2023,7 +2023,7 @@ lbl_fn_8035F3D4_00001A48:
 lbl_fn_8035F3D4_00001A5C:
     addi r3, r1, 0x8
     addi r4, r31, 0x53
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_8035F3D4_00001B08
     b lbl_fn_8035F3D4_00001AF4
@@ -2035,7 +2035,7 @@ lbl_fn_8035F3D4_00001A74:
     bl fn_8020A780
     addi r3, r1, 0x8
     addi r4, r31, 0x79
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     bne lbl_fn_8035F3D4_00001D44
     addi r3, r1, 0x8
@@ -2070,7 +2070,7 @@ lbl_fn_8035F3D4_00001AF4:
 lbl_fn_8035F3D4_00001B08:
     addi r3, r1, 0x8
     addi r4, r31, 0x5c
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_8035F3D4_00001BB4
     b lbl_fn_8035F3D4_00001BA0
@@ -2082,7 +2082,7 @@ lbl_fn_8035F3D4_00001B20:
     bl fn_8020A780
     addi r3, r1, 0x8
     addi r4, r31, 0x79
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     bne lbl_fn_8035F3D4_00001D44
     addi r3, r1, 0x8
@@ -2117,7 +2117,7 @@ lbl_fn_8035F3D4_00001BA0:
 lbl_fn_8035F3D4_00001BB4:
     addi r3, r1, 0x8
     addi r4, r31, 0x68
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_8035F3D4_00001C7C
     b lbl_fn_8035F3D4_00001C68
@@ -2129,7 +2129,7 @@ lbl_fn_8035F3D4_00001BCC:
     bl fn_8020A780
     addi r3, r1, 0x8
     addi r4, r31, 0x79
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     bne lbl_fn_8035F3D4_00001D44
     addi r3, r1, 0x8
@@ -2172,7 +2172,7 @@ lbl_fn_8035F3D4_00001C68:
 lbl_fn_8035F3D4_00001C7C:
     addi r3, r1, 0x8
     addi r4, r31, 0x85
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_8035F3D4_00001D44
     addi r3, r1, 0x20
@@ -2191,7 +2191,7 @@ lbl_fn_8035F3D4_00001CB0:
     bl fn_8020A780
     addi r3, r1, 0x8
     addi r4, r31, 0x79
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     bne lbl_fn_8035F3D4_00001D44
     addi r3, r1, 0x8

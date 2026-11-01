@@ -27,13 +27,13 @@ extern void ref_releaseHandle(void);
 extern void fn_800CB404(void);
 extern void fn_800CB4EC(void);
 extern void fn_800CB58C(void);
-extern void fn_800CB5C8(void);
+extern void morph_updateMesh(void);
 extern void fn_800CB6F8(void);
 extern void fn_800CFDA0(void);
 extern void fn_800CFDC8(void);
 extern void fn_800D0AB0(void);
 extern void str_skipWhitespace(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_8021FFB0(void);
 extern void fn_803CC6B4(void);
 extern void fn_803E3BE8(void);
@@ -330,7 +330,7 @@ lbl_fn_803EAC3C_00000230:
     li r4, 0x0
     li r5, 0x0
     mr r3, r30
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, 0x18(r30)
     cmpwi r3, 0x0
     beq lbl_fn_803EAC3C_00000280
@@ -616,7 +616,7 @@ lbl_fn_803EB038_00000630:
 lbl_fn_803EB038_00000638:
     li r4, 0x0
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r4, 0x18(r31)
     cmpwi r4, 0x0
     beq lbl_fn_803EB038_0000067C
@@ -874,7 +874,7 @@ lbl_fn_803EB394_00000970:
     mr r3, r25
     li r4, 0x0
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, 0x18(r25)
     cmpwi r3, 0x0
     beq lbl_fn_803EB394_000009D4
@@ -946,7 +946,7 @@ lbl_fn_803EB4A8_00000A90:
     mr r3, r24
     li r4, 0x0
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, 0x18(r24)
     cmpwi r3, 0x0
     beq lbl_fn_803EB4A8_00000AD0
@@ -993,7 +993,7 @@ lbl_fn_803EB4A8_00000B30:
     mr r3, r27
     li r4, 0xa
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     cmpwi r31, 0x0
     bne lbl_fn_803EB4A8_00000B94
     lwz r3, 0x18(r27)
@@ -1098,7 +1098,7 @@ lbl_fn_803EB668_00000C94:
     mr r3, r27
     li r4, 0x5
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r4, 0x18(r27)
     cmpwi r4, 0x0
     beq lbl_fn_803EB668_00000CE8
@@ -1208,7 +1208,7 @@ lbl_fn_803EB7E4_00000E28:
     mr r3, r30
     li r4, 0x0
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, 0x18(r30)
     cmpwi r3, 0x0
     beq lbl_fn_803EB7E4_00000E68
@@ -1402,7 +1402,7 @@ lbl_fn_803EBAC8_000010AC:
     mr r3, r26
     mr r4, r24
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, 0x18(r26)
     cmpwi r3, 0x0
     beq lbl_fn_803EBAC8_000010EC
@@ -1808,7 +1808,7 @@ asm void fn_803EC0A4(void)
     mr r30, r3
     mr r3, r31
     bl talk_formatQuotedString
-    bl fn_800DC6B4
+    bl str_findChar
     stw r3, 0x0(r30)
     mr r3, r31
     bl talk_formatQuotedString

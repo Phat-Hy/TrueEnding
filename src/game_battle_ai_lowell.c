@@ -69,8 +69,8 @@ extern void fn_8044E610(void);
 extern void fn_8044E644(void);
 extern void fn_8044F2D4(void);
 extern void fn_80450B60(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void atn_LoadHandle_destructor(void);
 extern void fn_8054E100(void);
 extern void fn_8054E52C(void);
@@ -644,10 +644,10 @@ asm void fn_804366A0(void)
     stmw r27, 0x64c(r1)
     mr r27, r3
     addi r3, r3, 0x60
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r29, r3
     addi r3, r27, 0x60
-    bl fn_80470580
+    bl boss_getOffset54
     lis r4, lbl_807774D8@ha
     li r30, 0x0
     addi r4, r4, lbl_807774D8@l

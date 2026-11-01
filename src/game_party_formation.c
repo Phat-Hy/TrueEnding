@@ -13,7 +13,7 @@ extern void fn_801B8AD0(void);
 extern void fn_801B9A54(void);
 extern void fn_801BB1C8(void);
 extern void fn_801C43F0(void);
-extern void fn_80695AD0(void);
+extern void vec3_isNonZero(void);
 
 /* External data declarations */
 extern u8 lbl_80737A9C[];
@@ -92,7 +92,7 @@ lbl_fn_80161B70_000000B8:
     stw r5, 0x8(r1)
     stw r4, 0xc(r1)
     stw r0, 0x10(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80161B70_000000F4
     lwz r3, 0xf80(r29)
@@ -138,7 +138,7 @@ lbl_fn_80161B70_00000160:
     stw r5, 0x20(r1)
     stw r4, 0x24(r1)
     stw r0, 0x28(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80161B70_0000019C
     lwz r3, 0xf80(r29)
@@ -184,7 +184,7 @@ lbl_fn_80161B70_00000208:
     stw r5, 0x14(r1)
     stw r4, 0x18(r1)
     stw r0, 0x1c(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80161B70_00000244
     lwz r3, 0xf80(r29)
@@ -296,7 +296,7 @@ lbl_fn_80161E58_00000398:
     stw r5, 0x8(r1)
     stw r4, 0xc(r1)
     stw r0, 0x10(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80161E58_000003D4
     lwz r3, 0xf80(r29)
@@ -342,7 +342,7 @@ lbl_fn_80161E58_00000440:
     stw r5, 0x20(r1)
     stw r4, 0x24(r1)
     stw r0, 0x28(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80161E58_0000047C
     lwz r3, 0xf80(r29)
@@ -388,7 +388,7 @@ lbl_fn_80161E58_000004E8:
     stw r5, 0x14(r1)
     stw r4, 0x18(r1)
     stw r0, 0x1c(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80161E58_00000524
     lwz r3, 0xf80(r29)
@@ -504,7 +504,7 @@ lbl_fn_80162140_00000688:
     stw r5, 0x8(r1)
     stw r4, 0xc(r1)
     stw r0, 0x10(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80162140_000006C4
     lwz r3, 0xf80(r29)
@@ -550,7 +550,7 @@ lbl_fn_80162140_00000730:
     stw r5, 0x20(r1)
     stw r4, 0x24(r1)
     stw r0, 0x28(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80162140_0000076C
     lwz r3, 0xf80(r29)
@@ -596,7 +596,7 @@ lbl_fn_80162140_000007D8:
     stw r5, 0x14(r1)
     stw r4, 0x18(r1)
     stw r0, 0x1c(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80162140_00000814
     lwz r3, 0xf80(r29)
@@ -711,7 +711,7 @@ lbl_fn_80162428_00000974:
     stw r5, 0x8(r1)
     stw r4, 0xc(r1)
     stw r0, 0x10(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80162428_000009B0
     lwz r3, 0xf80(r29)
@@ -757,7 +757,7 @@ lbl_fn_80162428_00000A1C:
     stw r5, 0x20(r1)
     stw r4, 0x24(r1)
     stw r0, 0x28(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80162428_00000A58
     lwz r3, 0xf80(r29)
@@ -803,7 +803,7 @@ lbl_fn_80162428_00000AC4:
     stw r5, 0x14(r1)
     stw r4, 0x18(r1)
     stw r0, 0x1c(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80162428_00000B00
     lwz r3, 0xf80(r29)
@@ -920,7 +920,7 @@ lbl_fn_80162720_00000C68:
     stw r5, 0x8(r1)
     stw r4, 0xc(r1)
     stw r0, 0x10(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80162720_00000CA4
     lwz r3, 0xf80(r29)
@@ -966,7 +966,7 @@ lbl_fn_80162720_00000D10:
     stw r5, 0x20(r1)
     stw r4, 0x24(r1)
     stw r0, 0x28(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80162720_00000D4C
     lwz r3, 0xf80(r29)
@@ -1012,7 +1012,7 @@ lbl_fn_80162720_00000DB8:
     stw r5, 0x14(r1)
     stw r4, 0x18(r1)
     stw r0, 0x1c(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80162720_00000DF4
     lwz r3, 0xf80(r29)
@@ -1126,7 +1126,7 @@ lbl_fn_80162A08_00000F50:
     stw r5, 0x8(r1)
     stw r4, 0xc(r1)
     stw r0, 0x10(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80162A08_00000F8C
     lwz r3, 0xf80(r29)
@@ -1172,7 +1172,7 @@ lbl_fn_80162A08_00000FF8:
     stw r5, 0x20(r1)
     stw r4, 0x24(r1)
     stw r0, 0x28(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80162A08_00001034
     lwz r3, 0xf80(r29)
@@ -1218,7 +1218,7 @@ lbl_fn_80162A08_000010A0:
     stw r5, 0x14(r1)
     stw r4, 0x18(r1)
     stw r0, 0x1c(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80162A08_000010DC
     lwz r3, 0xf80(r29)
@@ -1335,7 +1335,7 @@ lbl_fn_80162CF0_00001244:
     stw r5, 0x8(r1)
     stw r4, 0xc(r1)
     stw r0, 0x10(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80162CF0_00001280
     lwz r3, 0xf80(r29)
@@ -1381,7 +1381,7 @@ lbl_fn_80162CF0_000012EC:
     stw r5, 0x20(r1)
     stw r4, 0x24(r1)
     stw r0, 0x28(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80162CF0_00001328
     lwz r3, 0xf80(r29)
@@ -1427,7 +1427,7 @@ lbl_fn_80162CF0_00001394:
     stw r5, 0x14(r1)
     stw r4, 0x18(r1)
     stw r0, 0x1c(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80162CF0_000013D0
     lwz r3, 0xf80(r29)
@@ -1542,7 +1542,7 @@ lbl_fn_80162FE8_00001530:
     stw r5, 0x8(r1)
     stw r4, 0xc(r1)
     stw r0, 0x10(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80162FE8_0000156C
     lwz r3, 0xf80(r29)
@@ -1588,7 +1588,7 @@ lbl_fn_80162FE8_000015D8:
     stw r5, 0x20(r1)
     stw r4, 0x24(r1)
     stw r0, 0x28(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80162FE8_00001614
     lwz r3, 0xf80(r29)
@@ -1634,7 +1634,7 @@ lbl_fn_80162FE8_00001680:
     stw r5, 0x14(r1)
     stw r4, 0x18(r1)
     stw r0, 0x1c(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80162FE8_000016BC
     lwz r3, 0xf80(r29)
@@ -1748,7 +1748,7 @@ lbl_fn_801632D0_00001818:
     stw r5, 0x8(r1)
     stw r4, 0xc(r1)
     stw r0, 0x10(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_801632D0_00001854
     lwz r3, 0xf80(r29)
@@ -1794,7 +1794,7 @@ lbl_fn_801632D0_000018C0:
     stw r5, 0x20(r1)
     stw r4, 0x24(r1)
     stw r0, 0x28(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_801632D0_000018FC
     lwz r3, 0xf80(r29)
@@ -1840,7 +1840,7 @@ lbl_fn_801632D0_00001968:
     stw r5, 0x14(r1)
     stw r4, 0x18(r1)
     stw r0, 0x1c(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_801632D0_000019A4
     lwz r3, 0xf80(r29)

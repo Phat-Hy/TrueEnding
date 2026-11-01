@@ -9,7 +9,7 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_8000FAE4(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_80016F48(void);
 extern void fn_8004B338(void);
 extern void talk_formatQuotedString(void);
@@ -32,7 +32,7 @@ extern void atn_LH_Texture_update(void);
 extern void fn_800D87C4(void);
 extern void fn_800DC12C(void);
 extern void str_skipWhitespace(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_getStatus(void);
@@ -949,7 +949,7 @@ asm void fn_80089D70(void)
     mr r29, r6
     mr r30, r7
     mr r31, r8
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f0, 0x0(r28)
     psq_l f1, 0x0(r28), 0, 0
     fabs f0, f0
@@ -2102,7 +2102,7 @@ lbl_fn_8008AD4C_00001A40:
     add r7, r30, r0
     addi r8, r1, 0x30
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lis r3, lbl_80732368@ha
     li r0, 0x0
     addi r3, r3, lbl_80732368@l
@@ -2125,7 +2125,7 @@ lbl_fn_8008AD4C_00001A40:
     addi r8, r1, 0x28
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r28
     addi r3, r1, 0x74
     bl fn_8006AD24
@@ -2167,7 +2167,7 @@ lbl_fn_8008AD4C_00001B44:
     addi r3, r1, 0x74
     addi r8, r1, 0x20
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_8008AD4C_00001B60:
     lwz r0, 0x68(r1)
     srwi. r0, r0, 31
@@ -2195,7 +2195,7 @@ lbl_fn_8008AD4C_00001B90:
     add r7, r28, r0
     addi r8, r1, 0x18
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_8008AD4C_00001BC0:
     lwz r0, 0x74(r1)
     srwi. r0, r0, 31
@@ -2241,7 +2241,7 @@ lbl_fn_8008AD4C_00001C10:
     addi r8, r1, 0x10
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r28
     addi r3, r1, 0x50
     bl fn_8006B174
@@ -2253,7 +2253,7 @@ lbl_fn_8008AD4C_00001C10:
 lbl_fn_8008AD4C_00001C80:
     lwz r3, 0x58(r1)
 lbl_fn_8008AD4C_00001C84:
-    bl fn_800DC6B4
+    bl str_findChar
     lwz r0, 0x50(r1)
     mr r31, r3
     srwi. r0, r0, 31
@@ -2286,7 +2286,7 @@ lbl_fn_8008AD4C_00001CB4:
     addi r8, r1, 0x8
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r28
     addi r3, r1, 0x38
     bl fn_8006B174
@@ -2298,7 +2298,7 @@ lbl_fn_8008AD4C_00001CB4:
 lbl_fn_8008AD4C_00001D24:
     lwz r3, 0x40(r1)
 lbl_fn_8008AD4C_00001D28:
-    bl fn_800DC6B4
+    bl str_findChar
     lwz r0, 0x38(r1)
     mr r30, r3
     srwi. r0, r0, 31

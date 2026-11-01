@@ -12,7 +12,7 @@ extern void mem_alloc(void);
 extern void fn_800971D4(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB5C8(void);
+extern void morph_updateMesh(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
 extern void system_getNextSequenceId(void);
@@ -353,7 +353,7 @@ lbl_fn_803FB870_00000310:
     li r4, 0xa
     li r5, 0x0
     stfs f0, 0x80(r30)
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r4, 0x51c(r30)
     li r0, 0xff
     stb r0, 0x520(r30)
@@ -523,7 +523,7 @@ lbl_fn_803FBC34_000005A0:
     addi r3, r30, 0x518
     li r4, 0xa
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r0, 0x64(r1)
     lwz r31, 0x5c(r1)
     lwz r30, 0x58(r1)

@@ -12,7 +12,7 @@ extern void dtor_80084684(void);
 extern void fn_8000FAE4(void);
 extern void fn_80012934(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_8004B338(void);
 extern void fn_80069BF4(void);
 extern void fn_8006AA20(void);
@@ -53,7 +53,7 @@ extern void fn_80686A48(void);
 extern void runtime_registerStaticObject(void);
 extern void fn_806959D8(void);
 extern void fn_80695A50(void);
-extern void fn_80695AD0(void);
+extern void vec3_isNonZero(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
 
@@ -174,7 +174,7 @@ lbl_fn_80227434_000000A8:
     stw r5, 0x50(r1)
     stw r4, 0x54(r1)
     stw r0, 0x58(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80227434_0000034C
     lwzx r4, r30, r31
@@ -371,7 +371,7 @@ lbl_fn_80227434_0000034C:
     addi r8, r1, 0xc
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     cmpwi r27, 0x0
     beq lbl_fn_80227434_000003CC
     cmpwi r27, 0x1
@@ -403,7 +403,7 @@ lbl_fn_80227434_000003EC:
     add r7, r27, r0
     addi r8, r1, 0x14
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     b lbl_fn_80227434_00000518
 lbl_fn_80227434_00000420:
     lwz r0, 0x38(r1)
@@ -427,7 +427,7 @@ lbl_fn_80227434_00000440:
     add r7, r27, r0
     addi r8, r1, 0x1c
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     b lbl_fn_80227434_00000518
 lbl_fn_80227434_00000474:
     lwz r0, 0x38(r1)
@@ -451,7 +451,7 @@ lbl_fn_80227434_00000494:
     add r7, r27, r0
     addi r8, r1, 0x24
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     b lbl_fn_80227434_00000518
 lbl_fn_80227434_000004C8:
     lwz r0, 0x38(r1)
@@ -475,7 +475,7 @@ lbl_fn_80227434_000004E8:
     add r7, r27, r0
     addi r8, r1, 0x2c
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_80227434_00000518:
     lis r4, lbl_80742D7C@ha
     mr r5, r28
@@ -510,7 +510,7 @@ lbl_fn_80227434_00000574:
     addi r3, r1, 0x38
     addi r8, r1, 0x34
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lwz r0, 0x44(r1)
     srwi. r0, r0, 31
     beq lbl_fn_80227434_000005A4
@@ -606,7 +606,7 @@ asm void fn_80227A94(void)
     addi r8, r1, 0x18
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lwz r3, 0x1428(r23)
     cmpwi r3, 0x0
     beq lbl_fn_80227A94_0000082C
@@ -633,7 +633,7 @@ asm void fn_80227A94(void)
     addi r8, r1, 0x10
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r26
     addi r3, r1, 0x2c
     bl fn_8006B174
@@ -680,7 +680,7 @@ lbl_fn_80227A94_000007D4:
     addi r3, r1, 0x44
     addi r8, r1, 0x8
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_80227A94_000007F0:
     lwz r0, 0x20(r1)
     srwi. r0, r0, 31
@@ -1704,7 +1704,7 @@ asm void fn_80228928(void)
     addi r8, r1, 0x20
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     b lbl_fn_80228928_000016AC
 lbl_fn_80228928_00001574:
     lwz r0, 0x21c(r3)
@@ -1731,7 +1731,7 @@ lbl_fn_80228928_00001574:
     addi r8, r1, 0x18
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     b lbl_fn_80228928_000016AC
 lbl_fn_80228928_000015DC:
     addi r3, r3, 0xb0
@@ -1755,7 +1755,7 @@ lbl_fn_80228928_000015DC:
     addi r8, r1, 0x10
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lwz r3, 0x28(r1)
     srwi. r0, r3, 31
     bne lbl_fn_80228928_00001658
@@ -1781,7 +1781,7 @@ lbl_fn_80228928_00001658:
     lwz r0, 0x2c(r1)
     li r5, 0x0
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_80228928_00001698:
     lwz r0, 0x28(r1)
     srwi. r0, r0, 31

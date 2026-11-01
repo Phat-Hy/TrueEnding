@@ -10,9 +10,9 @@ extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800C344C(void);
+extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB5C8(void);
+extern void morph_updateMesh(void);
 extern void fn_800CB688(void);
 extern void fn_800CB6E4(void);
 extern void fn_800EE360(void);
@@ -270,7 +270,7 @@ lbl_fn_802A91D0_000001FC:
     addi r3, r31, 0x1538
     li r4, 0x0
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, 0x1694(r31)
     lwz r0, 0x16ec(r31)
     ori r6, r3, 0x1
@@ -331,7 +331,7 @@ asm void fn_802A94C8(void)
     addi r3, r31, 0x1538
     li r4, 0x0
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, 0x1694(r31)
     lwz r0, 0x16ec(r31)
     ori r6, r3, 0x1
@@ -632,7 +632,7 @@ lbl_fn_802A97C8_00000778:
     addi r3, r31, 0x1538
     li r4, 0x0
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, 0x1694(r31)
     lwz r0, 0x16ec(r31)
     ori r6, r3, 0x1
@@ -884,7 +884,7 @@ lbl_fn_802A9ADC_00000B8C:
     li r6, 0x0
     addi r4, r29, 0x21f
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -1308,7 +1308,7 @@ lbl_fn_802AA1B8_000011B0:
     addi r3, r30, 0x1538
     li r4, 0x0
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     li r3, 0x0
     li r0, 0x13
     stw r3, 0x14c0(r30)
@@ -1476,7 +1476,7 @@ lbl_fn_802AA534_00001444:
     addi r3, r31, 0x1538
     li r4, 0x0
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     li r3, 0x0
     li r0, 0x13
     stw r3, 0x14c0(r31)
@@ -1726,7 +1726,7 @@ asm void fn_802AA89C(void)
     addi r5, r31, 0x528
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     lfs f1, lbl_80883E38
     addi r3, r1, 0x10
     li r4, 0x0

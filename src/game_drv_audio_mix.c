@@ -14,7 +14,7 @@ extern void _savegpr_21(void);
 extern void _savegpr_25(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void talk_formatQuotedString(void);
 extern void fn_8005BBF8(void);
 extern void fn_8005BCE8(void);
@@ -26,8 +26,8 @@ extern void fn_800C18BC(void);
 extern void fn_800C2448(void);
 extern void fn_800C24B4(void);
 extern void world_getGlobalFlag(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_8049B780(void);
 extern void fn_8049D974(void);
@@ -1496,10 +1496,10 @@ asm void fn_805B7B28(void)
     bl _savegpr_25
     mr r27, r3
     addi r3, r3, 0x58
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r28, r3
     addi r3, r27, 0x58
-    bl fn_80470580
+    bl boss_getOffset54
     lis r4, lbl_807774D8@ha
     li r0, 0x0
     addi r4, r4, lbl_807774D8@l
@@ -1566,7 +1566,7 @@ lbl_fn_805B7B28_00001380:
     add r7, r26, r0
     addi r8, r1, 0x14
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     b lbl_fn_805B7B28_000017E8
 lbl_fn_805B7B28_000013B4:
     mr r3, r25
@@ -1597,7 +1597,7 @@ lbl_fn_805B7B28_000013F0:
     add r7, r26, r0
     addi r8, r1, 0xc
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     b lbl_fn_805B7B28_000017E8
 lbl_fn_805B7B28_00001424:
     mr r3, r25

@@ -11,7 +11,7 @@ extern void mem_free(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_800DD3FC(void);
 extern void fn_80117228(void);
 extern void fn_801173A8(void);
@@ -30,8 +30,8 @@ extern void fn_80444564(void);
 extern void fn_8044D490(void);
 extern void fn_8044D678(void);
 extern void fn_8044D6AC(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void fn_804A24C4(void);
 extern void fn_804A251C(void);
 extern void fn_804A2800(void);
@@ -505,7 +505,7 @@ asm void fn_805846C4(void)
     crclr 6
     bl sprintf
     addi r3, r1, 0x20
-    bl fn_800DC6B4
+    bl str_findChar
     mr r5, r3
     mr r4, r29
     addi r3, r1, 0x8
@@ -543,7 +543,7 @@ asm void fn_80584754(void)
     mr r29, r6
     mr r30, r7
     addi r3, r31, 0x29c
-    bl fn_800DC6B4
+    bl str_findChar
     mr r5, r3
     mr r4, r27
     addi r3, r1, 0x8
@@ -1451,10 +1451,10 @@ asm void fn_8058537C(void)
     mr r3, r26
     bl fn_8057F8FC
     addi r3, r26, 0x58
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r27, r3
     addi r3, r26, 0x58
-    bl fn_80470580
+    bl boss_getOffset54
     lwz r12, 0x0(r26)
     mr r4, r3
     mr r3, r26
@@ -1909,10 +1909,10 @@ lbl_fn_80585994_000018CC:
     stw r5, 0x5b04(r6)
     stw r4, 0x5b0c(r6)
     stw r0, 0x5b10(r6)
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r30, r3
     addi r3, r31, 0x58
-    bl fn_80470580
+    bl boss_getOffset54
     lwz r12, 0x0(r31)
     mr r4, r3
     mr r3, r31

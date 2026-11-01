@@ -9,7 +9,7 @@ extern void _savegpr_27(void);
 extern void fn_80043B34(void);
 extern void fn_80043BDC(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_80109828(void);
 extern void fn_8011F8F4(void);
 extern void fn_8011F91C(void);
@@ -1904,7 +1904,7 @@ lbl_fn_803A68B8_0000182C:
     addi r3, r1, 0x8
     li r29, -0x1
     li r28, 0x0
-    bl fn_800DC6B4
+    bl str_findChar
     li r0, 0x10
     mr r4, r27
     li r5, 0x0

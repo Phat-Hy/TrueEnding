@@ -10,7 +10,7 @@ extern void _savegpr_25(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_80057F28(void);
 extern void fn_80058078(void);
 extern void fn_800580BC(void);
@@ -24,7 +24,7 @@ extern void mem_free(void);
 extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800C344C(void);
+extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CFD18(void);
 extern void fn_800E2DD4(void);
@@ -47,8 +47,8 @@ extern void fn_8035B694(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
 extern void fn_803750E4(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void PSMTXConcat(void);
@@ -712,7 +712,7 @@ lbl_fn_8032C52C_00000864:
     addi r6, r30, 0x8
     addi r8, r1, 0x10
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lis r4, lbl_80749DC0@ha
     addi r3, r1, 0x18
     addi r4, r4, lbl_80749DC0@l
@@ -757,7 +757,7 @@ lbl_fn_8032C52C_00000918:
     addi r3, r1, 0x24
     addi r8, r1, 0x8
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_8032C52C_00000934:
     lwz r0, 0x18(r1)
     srwi. r0, r0, 31
@@ -899,10 +899,10 @@ asm void fn_8032C964(void)
     mr r30, r3
     addi r3, r3, 0x161c
     stw r29, 0x644(r1)
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r31, r3
     addi r3, r30, 0x161c
-    bl fn_80470580
+    bl boss_getOffset54
     lis r4, lbl_807772D0@ha
     li r0, 0x0
     addi r4, r4, lbl_807772D0@l
@@ -1398,7 +1398,7 @@ asm void fn_8032CF10(void)
     addi r5, r31, 0x528
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle
@@ -1598,7 +1598,7 @@ lbl_fn_8032D1F4_000013CC:
     addi r5, r31, 0x528
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle
@@ -2023,7 +2023,7 @@ lbl_fn_8032D5EC_0000192C:
     addi r5, r28, 0x528
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x18
     li r4, -0x1
     bl ref_releaseHandle

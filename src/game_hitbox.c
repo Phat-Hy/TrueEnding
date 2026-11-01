@@ -7,7 +7,7 @@ extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_800C344C(void);
+extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void fn_800EFBC4(void);
 extern void fn_800EFDA0(void);
@@ -199,7 +199,7 @@ asm void fn_80107208(void)
     addi r3, r1, 0x8
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle

@@ -12,7 +12,7 @@ extern void _savegpr_16(void);
 extern void _savegpr_25(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
@@ -20,7 +20,7 @@ extern void mem_getAllocSize(void);
 extern void fn_8009EE30(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_80116FC0(void);
 extern void fn_801D082C(void);
 extern void saveSlot_readSummary(void);
@@ -427,7 +427,7 @@ lbl_fn_80514788_000003F4:
     add r7, r30, r0
     addi r8, r1, 0x8
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     li r0, 0xc
     stw r0, 0x4c(r31)
     cmpwi r0, 0x0
@@ -906,7 +906,7 @@ lbl_fn_80514C90_00000A8C:
     bl fn_80202118
     mr r27, r3
     addi r3, r1, 0x100
-    bl fn_800DC6B4
+    bl str_findChar
     mr r5, r3
     mr r4, r27
     addi r3, r1, 0xd4
@@ -1010,7 +1010,7 @@ lbl_fn_80514C90_00000C58:
     bl fn_80202118
     mr r27, r3
     addi r3, r1, 0x100
-    bl fn_800DC6B4
+    bl str_findChar
     mr r5, r3
     mr r4, r27
     addi r3, r1, 0xc0
@@ -1066,7 +1066,7 @@ lbl_fn_80514C90_00000D10:
     bl fn_80202118
     mr r27, r3
     addi r3, r1, 0x100
-    bl fn_800DC6B4
+    bl str_findChar
     mr r5, r3
     mr r4, r27
     addi r3, r1, 0xac
@@ -1110,7 +1110,7 @@ lbl_fn_80514C90_00000DDC:
     bl fn_80202118
     mr r27, r3
     addi r3, r1, 0x100
-    bl fn_800DC6B4
+    bl str_findChar
     mr r5, r3
     mr r4, r27
     addi r3, r1, 0x98
@@ -1331,7 +1331,7 @@ lbl_fn_8051531C_00001118:
     bl fn_80202118
     mr r15, r3
     mr r3, r19
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     mr r5, r20
     addi r3, r15, 0x58
@@ -1362,7 +1362,7 @@ lbl_fn_8051531C_00001158:
     bl fn_80202118
     mr r15, r3
     mr r3, r16
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     mr r5, r17
     addi r3, r15, 0x58

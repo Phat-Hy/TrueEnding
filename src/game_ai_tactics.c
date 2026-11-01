@@ -11,7 +11,7 @@ extern void fn_8004D388(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_800F52F0(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800F8574(void);
@@ -46,7 +46,7 @@ extern void PSVECNormalize(void);
 extern void PSVECMag(void);
 extern void rand(void);
 extern void std_atan2(void);
-extern void fn_80695AD0(void);
+extern void vec3_isNonZero(void);
 
 /* External data declarations */
 extern u8 lbl_807445D8[];
@@ -596,7 +596,7 @@ lbl_fn_80267CB4_0000065C:
     stw r5, 0x60(r1)
     stw r4, 0x64(r1)
     stw r0, 0x68(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80267CB4_00000694
     lwz r0, 0x12a4(r31)
@@ -719,7 +719,7 @@ lbl_fn_80267E7C_00000824:
     stw r5, 0x8(r1)
     stw r4, 0xc(r1)
     stw r0, 0x10(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80267E7C_000008A0
     lwz r0, 0x12a4(r30)
@@ -1524,7 +1524,7 @@ lbl_fn_8026860C_00001374:
     lwz r0, 0x14b8(r31)
     stw r0, 0x118(r1)
     stfs f0, 0x128(r1)
-    bl fn_800DC6B4
+    bl str_findChar
     stw r3, 0x134(r1)
     li r3, 0x617
     lwz r30, lbl_8087F048
@@ -1607,7 +1607,7 @@ lbl_fn_8026860C_00001504:
     stw r7, 0x118(r1)
     addi r3, r3, 0x1fd
     stfs f0, 0x128(r1)
-    bl fn_800DC6B4
+    bl str_findChar
     stw r3, 0x134(r1)
     li r3, 0x617
     lwz r30, lbl_8087F048

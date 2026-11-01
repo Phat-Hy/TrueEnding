@@ -13,7 +13,7 @@ extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_8003E120(void);
 extern void fn_8006969C(void);
 extern void mem_alloc(void);
@@ -979,7 +979,7 @@ lbl_fn_805BEEC8_00000C00:
     addi r6, r6, lbl_807640C0@l
 lbl_fn_805BEEC8_00000C08:
     add r7, r7, r31
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lis r4, fn_805BEFD0@ha
     lis r5, fn_805BEFE8@ha
     addi r3, r29, 0x24

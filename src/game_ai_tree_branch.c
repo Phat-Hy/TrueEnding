@@ -11,7 +11,7 @@ extern void _savegpr_25(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_8004ED34(void);
 extern void fn_80056DB8(void);
 extern void atn_ColliBase_destructor(void);
@@ -25,7 +25,7 @@ extern void fn_800897D8(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800C344C(void);
+extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void fn_800DC12C(void);
@@ -61,8 +61,8 @@ extern void fn_8035B694(void);
 extern void fn_8035B78C(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
@@ -76,7 +76,7 @@ extern void strncmp(void);
 extern void atoi(void);
 extern void abort(void);
 extern void fn_8068B100(void);
-extern void fn_80695AD0(void);
+extern void vec3_isNonZero(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -1072,7 +1072,7 @@ asm void fn_8025A060(void)
     addi r8, r1, 0x18
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     addi r27, r28, 0x18
     stw r29, 0x2c(r1)
     addi r26, r1, 0x2c
@@ -1092,7 +1092,7 @@ asm void fn_8025A060(void)
     addi r8, r1, 0x10
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     addi r3, r31, 0x2c
     bl strlen
     lis r4, lbl_807772D0@ha
@@ -1160,7 +1160,7 @@ lbl_fn_8025A060_00000ED4:
     addi r6, r26, 0x8
     addi r8, r1, 0x8
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_8025A060_00000F04:
     addi r3, r1, 0x44
     bl fn_8005B5F8
@@ -1455,7 +1455,7 @@ lbl_fn_8025A67C_000012A0:
     cmpwi r3, 0x0
     bne lbl_fn_8025A67C_00001868
     addi r3, r18, 0x14b0
-    bl fn_80470580
+    bl boss_getOffset54
     cmpwi r3, 0x0
     beq lbl_fn_8025A67C_000017BC
     lwz r3, lbl_8087F430
@@ -1465,10 +1465,10 @@ lbl_fn_8025A67C_000012A0:
     cmpwi r0, 0x0
     beq lbl_fn_8025A67C_000017BC
     addi r3, r18, 0x14b0
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r20, r3
     addi r3, r18, 0x14b0
-    bl fn_80470580
+    bl boss_getOffset54
     lis r4, lbl_807772D0@ha
     li r22, 0x0
     addi r4, r4, lbl_807772D0@l
@@ -2126,7 +2126,7 @@ lbl_fn_8025ACA0_00001C34:
     addi r5, r31, 0x528
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle
@@ -2225,7 +2225,7 @@ lbl_fn_8025ACA0_00001E0C:
     stw r5, 0x40(r1)
     stw r4, 0x44(r1)
     stw r0, 0x48(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_8025ACA0_00001E78
     lwz r3, 0xf80(r31)

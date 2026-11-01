@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void _restgpr_26(void);
 extern void _savegpr_26(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
@@ -14,7 +14,7 @@ extern void atn_Model_findBoneIndex(void);
 extern void fn_800A55AC(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_800EF73C(void);
 extern void fn_80117228(void);
 extern void fn_8012B028(void);
@@ -744,7 +744,7 @@ lbl_fn_805117C0_00000884:
     bl fn_80202118
     mr r31, r3
     mr r3, r29
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     addi r3, r31, 0x58
@@ -1003,7 +1003,7 @@ lbl_fn_80511AE0_00000C18:
     li r6, 0x0
     bl fn_801F4CB4
     addi r3, r28, 0x42
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_808877D0
     mr r4, r3
     addi r3, r29, 0x58
@@ -1041,7 +1041,7 @@ lbl_fn_80511AE0_00000CB8:
     addi r3, r3, lbl_8075B2B8@l
     fdivs f31, f0, f2
     addi r3, r3, 0x42
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     addi r3, r29, 0x58
@@ -1055,7 +1055,7 @@ lbl_fn_80511AE0_00000CE0:
     li r6, 0x0
     bl fn_801F4CB4
     addi r3, r28, 0x4f
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f30
     mr r4, r3
     addi r3, r29, 0x58
@@ -1084,7 +1084,7 @@ lbl_fn_80511AE0_00000D54:
     lis r28, lbl_8075B2B8@ha
     addi r28, r28, lbl_8075B2B8@l
     addi r3, r28, 0x57
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     addi r3, r29, 0x58
@@ -1095,7 +1095,7 @@ lbl_fn_80511AE0_00000D54:
     bl fn_8021946C
     mr r30, r3
     addi r3, r28, 0x5e
-    bl fn_800DC6B4
+    bl str_findChar
     neg r0, r30
     lis r5, lbl_8075B2B0@ha
     or r0, r0, r30
@@ -1973,7 +1973,7 @@ lbl_fn_805128C4_000019B4:
     add r7, r31, r0
     addi r8, r1, 0xc
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     li r0, 0xd
     stw r0, 0x4c(r30)
     cmpwi r0, 0x0

@@ -34,8 +34,8 @@ extern void fn_8044D710(void);
 extern void fn_8044D884(void);
 extern void fn_8044D9BC(void);
 extern void fn_8044E1BC(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void atn_LoadHandle_destructor(void);
 extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
@@ -723,10 +723,10 @@ asm void fn_804334EC(void)
     bl _savegpr_14
     mr r15, r3
     addi r3, r3, 0x60
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r16, r3
     addi r3, r15, 0x60
-    bl fn_80470580
+    bl boss_getOffset54
     lis r4, lbl_807774D8@ha
     li r24, 0x0
     addi r4, r4, lbl_807774D8@l

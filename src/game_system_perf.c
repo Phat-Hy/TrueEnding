@@ -5,7 +5,7 @@
 extern void dtor_80084684(void);
 extern void fn_8000FAE4(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_8004FF58(void);
 extern void fn_8006AD24(void);
 extern void mem_alloc(void);
@@ -35,8 +35,8 @@ extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_unload(void);
 extern void res_MsgHandle_update(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
@@ -1261,7 +1261,7 @@ lbl_fn_80203A44_00001014:
     lwz r6, 0x10(r30)
     lwz r0, 0xc(r30)
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_80203A44_0000105C:
     lis r3, lbl_8073E780@ha
     li r0, 0x0
@@ -1285,7 +1285,7 @@ lbl_fn_80203A44_0000105C:
     addi r8, r1, 0x8
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r28
     addi r3, r1, 0x24
     bl fn_8006AD24
@@ -1882,10 +1882,10 @@ lbl_fn_80204230_00001820:
     stw r30, 0xc(r1)
     stw r30, 0x10(r1)
     lwz r3, 0x18(r29)
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r31, r3
     lwz r3, 0x18(r29)
-    bl fn_80470580
+    bl boss_getOffset54
     mr r4, r3
     mr r5, r31
     addi r3, r1, 0x8

@@ -10,7 +10,7 @@ extern void dtor_80084684(void);
 extern void fn_8003EFB0(void);
 extern void fn_80051B70(void);
 extern void mem_alloc(void);
-extern void fn_8008771C(void);
+extern void route_interpolatePath(void);
 extern void fn_80087E9C(void);
 extern void fn_80088724(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -792,7 +792,7 @@ asm void fn_805A5224(void)
     addi r5, r29, 0x568
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)

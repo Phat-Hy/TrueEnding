@@ -43,7 +43,7 @@ extern void PSVECDotProduct(void);
 extern void PSVECCrossProduct(void);
 extern void fn_8068A850(void);
 extern void fn_8068AD58(void);
-extern void fn_80695AD0(void);
+extern void vec3_isNonZero(void);
 
 /* External data declarations */
 extern u8 lbl_80735324[];
@@ -1270,7 +1270,7 @@ lbl_fn_800E9ED8_000010DC:
     stw r5, 0x3c(r1)
     stw r4, 0x40(r1)
     stw r0, 0x44(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_800E9ED8_00001A08
     lwz r3, 0xf80(r31)
@@ -1757,7 +1757,7 @@ lbl_fn_800E9ED8_000017F4:
     stw r5, 0xc(r1)
     stw r4, 0x10(r1)
     stw r0, 0x14(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_800E9ED8_00001868
     lwz r3, 0xf80(r31)

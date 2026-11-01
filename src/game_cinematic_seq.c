@@ -30,7 +30,7 @@ extern void fn_80134674(void);
 extern void boss_updatePhaseState(void);
 extern void fn_801437D0(void);
 extern void fn_80145334(void);
-extern void fn_8014C0B4(void);
+extern void dialog_setScriptSlot(void);
 extern void fn_8014C540(void);
 extern void fn_80151448(void);
 extern void fn_8015783C(void);
@@ -49,8 +49,8 @@ extern void res_MsgHandle_update(void);
 extern void res_registerResource(void);
 extern void fn_8035B78C(void);
 extern void fn_803EA77C(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_8059C2AC(void);
@@ -535,10 +535,10 @@ lbl_fn_80334E74_00000524:
     b lbl_fn_80334E74_000005EC
 lbl_fn_80334E74_0000052C:
     addi r3, r30, 0x14b4
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r31, r3
     addi r3, r30, 0x14b4
-    bl fn_80470580
+    bl boss_getOffset54
     mr r4, r3
     mr r3, r30
     mr r5, r31
@@ -886,11 +886,11 @@ lbl_fn_80335374_00000A20:
     mr r3, r31
     li r4, 0x0
     li r5, 0x146
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r31
     li r4, 0x1
     li r5, 0x147
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     lwz r3, 0x1580(r31)
     lfs f0, lbl_80885198
     cmpwi r3, 0x0

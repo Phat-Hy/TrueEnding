@@ -16,7 +16,7 @@ extern void fn_8005B9AC(void);
 extern void fn_8006A250(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
-extern void fn_8008771C(void);
+extern void route_interpolatePath(void);
 extern void fn_80087994(void);
 extern void fn_8008937C(void);
 extern void fn_800897D8(void);
@@ -32,8 +32,8 @@ extern void fn_800DC12C(void);
 extern void str_skipWhitespace(void);
 extern void fn_800DC3CC(void);
 extern void fn_80453DBC(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
@@ -809,10 +809,10 @@ asm void fn_805303D4(void)
     stfs f0, 0x132c(r29)
     lfs f0, 0x394(r5)
     stfs f0, 0x1330(r29)
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r31, r3
     addi r3, r29, 0x1334
-    bl fn_80470580
+    bl boss_getOffset54
     lwz r12, 0x8(r1)
     mr r4, r3
     mr r5, r31
@@ -926,10 +926,10 @@ asm void fn_805305D4(void)
     la r4, lbl_8087D720
     bl fn_8005B6E8
     addi r3, r30, 0x1344
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r17, r3
     addi r3, r30, 0x1344
-    bl fn_80470580
+    bl boss_getOffset54
     lwz r12, 0x8c(r1)
     mr r4, r3
     mr r5, r17
@@ -1715,7 +1715,7 @@ lbl_fn_80531090_00001724:
     addi r5, r29, 0x4c
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     addi r3, r29, 0x7c
     addi r4, r31, 0x42
     bl fn_800D5908
@@ -1884,10 +1884,10 @@ asm void fn_80531398(void)
     bl _savegpr_23
     mr r26, r3
     addi r3, r3, 0x64
-    bl fn_8047059C
+    bl boss_getOffset50
     srwi r28, r3, 1
     addi r3, r26, 0x64
-    bl fn_80470580
+    bl boss_getOffset54
     lis r4, lbl_8077A090@ha
     li r0, 0x0
     addi r4, r4, lbl_8077A090@l

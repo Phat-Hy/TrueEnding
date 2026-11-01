@@ -18,7 +18,7 @@ extern void fn_80076FF8(void);
 extern void fn_80079044(void);
 extern void mem_alloc(void);
 extern void route_findNextWaypoint(void);
-extern void fn_8008771C(void);
+extern void route_interpolatePath(void);
 extern void fn_80087858(void);
 extern void fn_80087994(void);
 extern void fn_80087E9C(void);
@@ -1086,7 +1086,7 @@ lbl_fn_8052B190_00000B74:
     addi r5, r25, 0x1368
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     mr r3, r28
     addi r4, r29, 0xa2
     addi r5, r25, 0x1220

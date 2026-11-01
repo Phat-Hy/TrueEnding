@@ -29,7 +29,7 @@ extern void atn_Anim_applyLayerTransform(void);
 extern void fn_80097D40(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800CB440(void);
-extern void fn_800CB5C8(void);
+extern void morph_updateMesh(void);
 extern void str_skipWhitespace(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800FAB80(void);
@@ -50,8 +50,8 @@ extern void fn_803ED5D0(void);
 extern void fn_803ED774(void);
 extern void fn_803EDB18(void);
 extern void fn_803F42C8(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void atn_LoadHandle_destructor(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
@@ -121,7 +121,7 @@ lbl_fn_803F1A38_00000024:
     addi r3, r27, 0xc
     li r4, 0x0
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     addi r27, r27, 0x10
 lbl_fn_803F1A38_00000038:
     lwz r0, 0x5c(r30)
@@ -149,7 +149,7 @@ lbl_fn_803F1A38_00000084:
     addi r3, r31, 0xc
     li r4, 0xf
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     addi r0, r30, 0x60
     subf r0, r0, r31
     srawi r0, r0, 4
@@ -1447,10 +1447,10 @@ asm void fn_803F2CD0(void)
     bl _savegpr_25
     mr r29, r3
     addi r3, r3, 0x60
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r28, r3
     addi r3, r29, 0x60
-    bl fn_80470580
+    bl boss_getOffset54
     lis r4, lbl_807774D8@ha
     li r0, 0x0
     addi r4, r4, lbl_807774D8@l

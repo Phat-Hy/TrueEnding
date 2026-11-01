@@ -17,7 +17,7 @@ extern void fn_800C2448(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_800F8348(void);
 extern void fn_801856A4(void);
 extern void fn_801F4998(void);
@@ -149,7 +149,7 @@ asm void fn_8048EE78(void)
     lwz r4, 0x23ac(r31)
     addi r3, r30, 0x2bf
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f26
     mr r4, r3
     mr r3, r29
@@ -158,7 +158,7 @@ asm void fn_8048EE78(void)
     lwz r4, 0x23ac(r31)
     addi r3, r30, 0x2bf
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f27
     mr r4, r3
     mr r3, r29
@@ -167,7 +167,7 @@ asm void fn_8048EE78(void)
     lwz r4, 0x23ac(r31)
     addi r3, r30, 0x2bf
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f28
     mr r4, r3
     mr r3, r29
@@ -176,7 +176,7 @@ asm void fn_8048EE78(void)
     lwz r4, 0x23ac(r31)
     addi r3, r30, 0x2bf
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f29
     mr r4, r3
     mr r3, r29
@@ -185,7 +185,7 @@ asm void fn_8048EE78(void)
     lwz r4, 0x23ac(r31)
     addi r3, r30, 0x2bf
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_80887048
     mr r4, r3
     mr r3, r29
@@ -194,7 +194,7 @@ asm void fn_8048EE78(void)
     lwz r4, 0x23ac(r31)
     addi r3, r30, 0x2ca
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f30
     mr r4, r3
     mr r3, r29
@@ -224,7 +224,7 @@ lbl_fn_8048EE78_0000019C:
     lwz r4, 0x23b0(r31)
     addi r3, r30, 0x2bf
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f26
     mr r4, r3
     mr r3, r29
@@ -233,7 +233,7 @@ lbl_fn_8048EE78_0000019C:
     lwz r4, 0x23b0(r31)
     addi r3, r30, 0x2bf
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f27
     mr r4, r3
     mr r3, r29
@@ -242,7 +242,7 @@ lbl_fn_8048EE78_0000019C:
     lwz r4, 0x23b0(r31)
     addi r3, r30, 0x2bf
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f28
     mr r4, r3
     mr r3, r29
@@ -251,7 +251,7 @@ lbl_fn_8048EE78_0000019C:
     lwz r4, 0x23b0(r31)
     addi r3, r30, 0x2bf
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f29
     mr r4, r3
     mr r3, r29
@@ -260,7 +260,7 @@ lbl_fn_8048EE78_0000019C:
     lwz r4, 0x23b0(r31)
     addi r3, r30, 0x2bf
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_80887048
     mr r4, r3
     mr r3, r29
@@ -269,7 +269,7 @@ lbl_fn_8048EE78_0000019C:
     lwz r4, 0x23b0(r31)
     addi r3, r30, 0x2ca
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f30
     mr r4, r3
     mr r3, r29

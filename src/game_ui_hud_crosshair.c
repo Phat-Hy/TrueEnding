@@ -12,7 +12,7 @@ extern void fn_800A555C(void);
 extern void fn_800A58D0(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CFBA0(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_80116FC0(void);
 extern void fn_80117214(void);
 extern void fn_80117228(void);
@@ -177,7 +177,7 @@ asm void fn_801D3DF4(void)
     bl fn_80202118
     mr r27, r3
     addi r3, r1, 0x2f8
-    bl fn_800DC6B4
+    bl str_findChar
     mr r5, r3
     mr r4, r27
     addi r3, r1, 0xac
@@ -226,7 +226,7 @@ asm void fn_801D3DF4(void)
     bl fn_80202118
     mr r26, r3
     addi r3, r1, 0x2f8
-    bl fn_800DC6B4
+    bl str_findChar
     mr r5, r3
     mr r4, r26
     addi r3, r1, 0x98
@@ -307,7 +307,7 @@ lbl_fn_801D3DF4_00000258:
     bl fn_80202118
     mr r26, r3
     addi r3, r1, 0x2f8
-    bl fn_800DC6B4
+    bl str_findChar
     mr r5, r3
     mr r4, r26
     addi r3, r1, 0x84
@@ -381,7 +381,7 @@ lbl_fn_801D3DF4_00000394:
     bl fn_80202118
     mr r26, r3
     addi r3, r1, 0x2f8
-    bl fn_800DC6B4
+    bl str_findChar
     mr r5, r3
     mr r4, r26
     addi r3, r1, 0x70
@@ -430,7 +430,7 @@ lbl_fn_801D3DF4_00000494:
     bl fn_80202118
     mr r26, r3
     addi r3, r1, 0x2f8
-    bl fn_800DC6B4
+    bl str_findChar
     mr r5, r3
     mr r4, r26
     addi r3, r1, 0x5c
@@ -470,7 +470,7 @@ lbl_fn_801D3DF4_00000494:
     bl fn_80202118
     mr r26, r3
     addi r3, r1, 0x2f8
-    bl fn_800DC6B4
+    bl str_findChar
     mr r5, r3
     mr r4, r26
     addi r3, r1, 0x48
@@ -547,7 +547,7 @@ lbl_fn_801D3DF4_00000494:
     bl sprintf
     lwz r26, 0xb2c(r28)
     addi r3, r1, 0x2f8
-    bl fn_800DC6B4
+    bl str_findChar
     mr r5, r3
     mr r4, r26
     addi r3, r1, 0x34
@@ -579,7 +579,7 @@ lbl_fn_801D3DF4_00000494:
     bl sprintf
     lwz r26, 0xb30(r28)
     addi r3, r1, 0x2f8
-    bl fn_800DC6B4
+    bl str_findChar
     mr r5, r3
     mr r4, r26
     addi r3, r1, 0x20
@@ -641,7 +641,7 @@ lbl_fn_801D3DF4_00000768:
     bl fn_80202118
     mr r26, r3
     addi r3, r1, 0x2f8
-    bl fn_800DC6B4
+    bl str_findChar
     mr r5, r3
     mr r4, r26
     addi r3, r1, 0xc0
@@ -1513,7 +1513,7 @@ lbl_fn_801D4E74_00001490:
     addi r28, r31, 0x58
     addi r30, r30, lbl_8073C56C@l
     addi r3, r30, 0x459
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     mr r3, r28
     mr r5, r29

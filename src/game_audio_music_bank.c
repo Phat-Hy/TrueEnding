@@ -18,7 +18,7 @@ extern void skill_calculateDamage(void);
 extern void fn_80063764(void);
 extern void fn_8007708C(void);
 extern void route_findNextWaypoint(void);
-extern void fn_8008771C(void);
+extern void route_interpolatePath(void);
 extern void fn_80087994(void);
 extern void fn_8008937C(void);
 extern void atn_Model_findBoneIndex(void);
@@ -199,7 +199,7 @@ lbl_fn_8030A6A0_000000C4:
     addi r5, r29, 0x1608
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_80884BB8
     mr r3, r30
     lfs f2, lbl_80884BBC
@@ -208,7 +208,7 @@ lbl_fn_8030A6A0_000000C4:
     addi r5, r29, 0x160c
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lwz r5, 0x14a8(r29)
     li r3, 0x2
     lfs f0, lbl_80884BA8

@@ -11,7 +11,7 @@ extern void fn_800A555C(void);
 extern void fn_800CB360(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
-extern void fn_800CB5C8(void);
+extern void morph_updateMesh(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
@@ -529,7 +529,7 @@ lbl_fn_803B6324_00000600:
     addi r3, r31, 0x6c
     li r4, 0x0
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, lbl_8087F0A8
     lfs f1, lbl_80885C34
     lwz r0, 0x174(r3)
@@ -569,7 +569,7 @@ lbl_fn_803B6324_00000668:
     li r5, 0x0
     ori r0, r0, 0x4
     stw r0, 0x38(r6)
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lbz r0, 0x71(r31)
     cmpwi r0, 0x0
     beq lbl_fn_803B6324_00000824
@@ -771,7 +771,7 @@ lbl_fn_803B6970_0000095C:
     addi r3, r31, 0x6c
     li r4, 0xa
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, 0x54(r31)
     addi r0, r3, 0xa
     stw r0, 0x54(r31)
@@ -941,7 +941,7 @@ lbl_fn_803B6C88_00000B9C:
     lwz r0, 0x38(r6)
     ori r0, r0, 0x4
     stw r0, 0x38(r6)
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lbz r0, 0x71(r29)
     cmpwi r0, 0x0
     beq lbl_fn_803B6C88_00000C3C
@@ -1089,7 +1089,7 @@ lbl_fn_803B6E04_00000DD4:
     addi r3, r31, 0x6c
     li r4, 0xa
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, 0x54(r31)
     addi r0, r3, 0xa
     stw r0, 0x54(r31)

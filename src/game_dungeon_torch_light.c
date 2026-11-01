@@ -11,7 +11,7 @@ extern void ref_releaseHandle(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
 extern void fn_800DBF68(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_800DD3FC(void);
 extern void fn_8016DAB0(void);
 extern void fn_801F3FF8(void);
@@ -337,7 +337,7 @@ lbl_fn_803E598C_00000314:
     addi r31, r31, lbl_807506A0@l
     addi r3, r31, 0x159e
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     mr r3, r29
     mr r5, r28
@@ -345,7 +345,7 @@ lbl_fn_803E598C_00000314:
     lwz r4, 0x2550(r30)
     addi r3, r31, 0x1130
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     mr r3, r29
     mr r5, r28
@@ -468,7 +468,7 @@ lbl_fn_803E5C60_000004F4:
     lfs f31, 0xc(r1)
     addi r30, r30, lbl_807506A0@l
     addi r3, r30, 0x1215
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     addi r3, r31, 0x58
@@ -476,7 +476,7 @@ lbl_fn_803E5C60_000004F4:
     bl fn_801FED24
     lfs f31, 0x10(r1)
     addi r3, r30, 0x1215
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     addi r3, r31, 0x58
@@ -773,7 +773,7 @@ lbl_fn_803E5E64_000008F8:
     addi r3, r29, 0x15a9
     lwz r4, 0xdb8(r30)
     addi r28, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     mr r3, r28
     addi r5, r1, 0x8
@@ -781,7 +781,7 @@ lbl_fn_803E5E64_000008F8:
     lwz r4, 0xdb8(r30)
     addi r3, r29, 0x11ab
     addi r28, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     mr r3, r28
     addi r5, r1, 0x8
@@ -789,7 +789,7 @@ lbl_fn_803E5E64_000008F8:
     lwz r4, 0xdb8(r30)
     addi r3, r29, 0x14d4
     addi r28, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     mr r3, r28
     addi r5, r1, 0x8
@@ -1229,7 +1229,7 @@ lbl_fn_803E668C_00000F48:
     lis r3, lbl_807506A0@ha
     addi r3, r3, lbl_807506A0@l
     addi r3, r3, 0x1605
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     addi r3, r31, 0x58
@@ -1465,7 +1465,7 @@ asm void fn_803E6ADC(void)
     addi r3, r31, 0x113e
     lwz r4, 0xa84(r27)
     addi r30, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_80885EF0
     mr r4, r3
     mr r3, r30
@@ -1474,7 +1474,7 @@ asm void fn_803E6ADC(void)
     lwz r4, 0xa84(r27)
     addi r3, r31, 0x113e
     addi r30, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_80885F08
     mr r4, r3
     mr r3, r30

@@ -9,7 +9,7 @@ extern void _savegpr_14(void);
 extern void _savegpr_25(void);
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void talk_parseQuotedString(void);
 extern void fn_8005B5F8(void);
 extern void fn_8005B6E8(void);
@@ -18,12 +18,12 @@ extern void mem_free(void);
 extern void fn_800897D8(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800C344C(void);
+extern void skin_applyWeights(void);
 extern void fn_800CB360(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
 extern void fn_800CB58C(void);
-extern void fn_800CB5C8(void);
+extern void morph_updateMesh(void);
 extern void fn_800CB6E4(void);
 extern void atn_Task_setActive(void);
 extern void fn_800DC12C(void);
@@ -51,8 +51,8 @@ extern void fn_802EB1F4(void);
 extern void fn_802EB61C(void);
 extern void fn_802EC38C(void);
 extern void world_setLocalFlag(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
@@ -481,7 +481,7 @@ asm void fn_802E8580(void)
     addi r8, r1, 0x18
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     addi r27, r31, 0x18
     stw r28, 0x2c(r1)
     addi r26, r1, 0x2c
@@ -501,7 +501,7 @@ asm void fn_802E8580(void)
     addi r8, r1, 0x10
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     addi r3, r30, 0x2c
     bl strlen
     lis r4, lbl_807772D0@ha
@@ -569,7 +569,7 @@ lbl_fn_802E8580_0000063C:
     addi r6, r26, 0x8
     addi r8, r1, 0x8
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_802E8580_0000066C:
     addi r3, r1, 0x44
     bl fn_8005B5F8
@@ -659,11 +659,11 @@ asm void fn_802E89B0(void)
     stw r5, 0x0(r3)
     li r5, 0x0
     addi r3, r3, 0x15a0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     addi r3, r29, 0x15a4
     li r4, 0x5
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     addic. r0, r29, 0x15bc
     beq lbl_fn_802E89B0_000007D8
     lwz r4, 0x15bc(r29)
@@ -821,7 +821,7 @@ lbl_fn_802E8B88_0000097C:
     mr r3, r15
     bl fn_802EC38C
     addi r3, r15, 0x14d4
-    bl fn_80470580
+    bl boss_getOffset54
     cmpwi r3, 0x0
     beq lbl_fn_802E8B88_000012E0
     lwz r3, lbl_8087F430
@@ -831,10 +831,10 @@ lbl_fn_802E8B88_0000097C:
     cmpwi r0, 0x0
     beq lbl_fn_802E8B88_000012E0
     addi r3, r15, 0x14d4
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r16, r3
     addi r3, r15, 0x14d4
-    bl fn_80470580
+    bl boss_getOffset54
     lis r4, lbl_807772D0@ha
     li r21, 0x0
     addi r4, r4, lbl_807772D0@l
@@ -1554,11 +1554,11 @@ lbl_fn_802E9590_00001448:
     addi r3, r31, 0x15a0
     li r4, 0x5
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     addi r3, r31, 0x15a4
     li r4, 0x5
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     b lbl_fn_802E9590_00001AA0
 lbl_fn_802E9590_00001480:
     lwz r0, 0x7e0(r3)
@@ -1574,7 +1574,7 @@ lbl_fn_802E9590_00001480:
     li r4, 0x5
     li r5, 0x0
     addi r3, r3, 0x15a0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     addi r3, r31, 0x15a4
     bl fn_800CB58C
     cmpwi r3, 0x0
@@ -1587,7 +1587,7 @@ lbl_fn_802E9590_00001480:
     addi r5, r31, 0x528
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r31, 0x15a4
     addi r4, r1, 0x14
     bl fn_800CB440
@@ -1599,7 +1599,7 @@ lbl_fn_802E9590_00001508:
     li r4, 0x5
     li r5, 0x0
     addi r3, r3, 0x15a4
-    bl fn_800CB5C8
+    bl morph_updateMesh
     addi r3, r31, 0x15a0
     bl fn_800CB58C
     cmpwi r3, 0x0
@@ -1612,7 +1612,7 @@ lbl_fn_802E9590_00001508:
     addi r5, r31, 0x528
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r31, 0x15a0
     addi r4, r1, 0x10
     bl fn_800CB440

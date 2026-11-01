@@ -67,7 +67,7 @@ extern void PSMTXMultVec(void);
 extern void PSVECDotProduct(void);
 extern void fn_8068A850(void);
 extern void fn_806952C4(void);
-extern void fn_80695AD0(void);
+extern void vec3_isNonZero(void);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
 
@@ -616,7 +616,7 @@ lbl_fn_800E589C_000006E0:
     stw r5, 0x8(r1)
     stw r4, 0xc(r1)
     stw r0, 0x10(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_800E589C_00000754
     lwz r3, 0xf80(r30)
@@ -946,7 +946,7 @@ lbl_fn_800E62AC_00000B64:
     stw r5, 0x44(r1)
     stw r4, 0x48(r1)
     stw r0, 0x4c(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_800E62AC_00000D78
     lwz r3, 0xf80(r25)
@@ -998,7 +998,7 @@ lbl_fn_800E62AC_00000C28:
     stw r5, 0x38(r1)
     stw r4, 0x3c(r1)
     stw r0, 0x40(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_800E62AC_00000D3C
     lwz r0, 0x50(r1)

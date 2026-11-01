@@ -6,7 +6,7 @@ extern void __files(void);
 extern void dtor_80013D60(void);
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_8003E4A4(void);
 extern void fn_8004203C(void);
 extern void fn_8004212C(void);
@@ -24,7 +24,7 @@ extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
 extern void fn_800DC12C(void);
 extern void str_skipWhitespace(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_80120D24(void);
 extern void fn_80120D34(void);
 extern void fn_80120D44(void);
@@ -964,7 +964,7 @@ lbl_fn_8011FFF8_00000944:
     stw r26, 0x0(r3)
     mr r26, r3
     mr r3, r24
-    bl fn_800DC6B4
+    bl str_findChar
     stw r3, 0x4(r26)
     addi r3, r1, 0x50
     bl talk_parseQuotedString
@@ -1069,7 +1069,7 @@ lbl_fn_8011FFF8_00000AC8:
     stw r3, 0x24(r26)
     addi r3, r1, 0x50
     bl talk_parseQuotedString
-    bl fn_800DC6B4
+    bl str_findChar
     stw r3, 0x28(r26)
     addi r3, r1, 0x50
     bl talk_parseQuotedString
@@ -1510,7 +1510,7 @@ lbl_fn_801207D4_000010C0:
     lwz r0, 0x4(r30)
     li r5, 0x0
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_801207D4_00001104:
     lwz r3, 0x4(r29)
     addi r0, r3, 0x1
@@ -1662,7 +1662,7 @@ lbl_fn_801207D4_000012F4:
     lwz r0, 0x4(r30)
     li r5, 0x0
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_801207D4_00001334:
     lwz r4, 0x28(r1)
     lis r3, 0x2aab

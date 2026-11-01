@@ -11,7 +11,7 @@ extern void mem_free(void);
 extern void mem_realloc(void);
 extern void fn_80084A78(void);
 extern void mem_getAllocSize(void);
-extern void fn_8008771C(void);
+extern void route_interpolatePath(void);
 extern void fn_80087994(void);
 extern void fn_80087E9C(void);
 extern void fn_800B6218(void);
@@ -36,7 +36,7 @@ extern void std_fmod(void);
 extern void fn_806952C4(void);
 extern void runtime_registerStaticObject(void);
 extern void fn_80695A50(void);
-extern void fn_80695AD0(void);
+extern void vec3_isNonZero(void);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
 
@@ -156,7 +156,7 @@ lbl_fn_800C122C_00000070:
     stw r5, 0x48(r1)
     stw r4, 0x4c(r1)
     stw r0, 0x50(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_800C122C_000001D4
     lwz r0, 0x300(r30)
@@ -313,7 +313,7 @@ lbl_fn_800C1424_000002AC:
     stw r5, 0x18(r1)
     stw r4, 0x1c(r1)
     stw r0, 0x20(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_800C1424_00000410
     lwz r0, 0x300(r31)
@@ -2176,7 +2176,7 @@ asm void fn_800C2E30(void)
     addi r4, r30, 0x35
     addi r5, r28, 0x160
     addi r6, r31, fn_800C2EE0@l
-    bl fn_8008771C
+    bl route_interpolatePath
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)

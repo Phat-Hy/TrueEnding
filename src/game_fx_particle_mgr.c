@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800CB5C8(void);
+extern void morph_updateMesh(void);
 extern void fn_800EE360(void);
 extern void system_getNextSequenceId(void);
 extern void actor_setState(void);
@@ -323,7 +323,7 @@ lbl_fn_80280184_00000384:
     addi r3, r31, 0x15a8
     li r4, 0xf
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0xc8
@@ -394,7 +394,7 @@ lbl_fn_802805C8_000004BC:
     addi r3, r31, 0x15a8
     li r4, 0xf
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0xc8

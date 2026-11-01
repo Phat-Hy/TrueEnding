@@ -13,7 +13,7 @@ extern void mem_alloc(void);
 extern void mem_free(void);
 extern void fn_8008BBD8(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800F8574(void);
 extern void fn_800FAB80(void);
@@ -1272,7 +1272,7 @@ lbl_fn_801BE630_00001034:
     lfd f0, 0x5a8(r1)
     fsubs f0, f0, f30
     stfs f0, 0x4f4(r1)
-    bl fn_800DC6B4
+    bl str_findChar
     stw r3, 0x4f8(r1)
     mr r5, r19
     lwz r3, lbl_8087F048

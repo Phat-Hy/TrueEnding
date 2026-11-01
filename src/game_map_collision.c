@@ -25,7 +25,7 @@ extern void fn_80128818(void);
 extern void fn_80139560(void);
 extern void fn_80145334(void);
 extern void dialog_renderWindow(void);
-extern void fn_8014C0B4(void);
+extern void dialog_setScriptSlot(void);
 extern void fn_8014C228(void);
 extern void fn_801598B4(void);
 extern void fn_80159BA4(void);
@@ -50,7 +50,7 @@ extern void strcmp(void);
 extern void abort(void);
 extern void fn_8068AE9C(void);
 extern void std_atan2(void);
-extern void fn_80695D84(void);
+extern void runtime_clampDouble(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
 
@@ -653,7 +653,7 @@ lbl_fn_80180AE0_0000078C:
     lfs f1, lbl_80881C14
     lfs f0, lbl_80881C10
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_80180AE0_0000079C:
     mr r30, r3
 lbl_fn_80180AE0_000007A0:
@@ -675,7 +675,7 @@ lbl_fn_80180AE0_000007D4:
     lfs f1, lbl_80881C14
     lfs f0, lbl_80881C10
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_80180AE0_000007E4:
     mr r29, r3
 lbl_fn_80180AE0_000007E8:
@@ -697,7 +697,7 @@ lbl_fn_80180AE0_0000081C:
     lfs f1, lbl_80881C14
     lfs f0, lbl_80881C10
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_80180AE0_0000082C:
     mr r28, r3
 lbl_fn_80180AE0_00000830:
@@ -719,7 +719,7 @@ lbl_fn_80180AE0_00000864:
     lfs f1, lbl_80881C14
     lfs f0, lbl_80881C10
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_80180AE0_00000874:
     lfs f3, lbl_80881C04
     slwi r4, r29, 8
@@ -781,7 +781,7 @@ lbl_fn_80180AE0_00000948:
     lfs f1, lbl_80881C14
     lfs f0, lbl_80881C10
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_80180AE0_00000958:
     mr r28, r3
 lbl_fn_80180AE0_0000095C:
@@ -803,7 +803,7 @@ lbl_fn_80180AE0_00000990:
     lfs f1, lbl_80881C14
     lfs f0, lbl_80881C10
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_80180AE0_000009A0:
     mr r30, r3
 lbl_fn_80180AE0_000009A4:
@@ -825,7 +825,7 @@ lbl_fn_80180AE0_000009D8:
     lfs f1, lbl_80881C14
     lfs f0, lbl_80881C10
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_80180AE0_000009E8:
     mr r29, r3
 lbl_fn_80180AE0_000009EC:
@@ -847,7 +847,7 @@ lbl_fn_80180AE0_00000A20:
     lfs f1, lbl_80881C14
     lfs f0, lbl_80881C10
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_80180AE0_00000A30:
     lfs f3, lbl_80881C04
     slwi r4, r30, 8
@@ -914,7 +914,7 @@ lbl_fn_80180AE0_00000B20:
     lfs f1, lbl_80881C14
     lfs f0, lbl_80881C10
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_80180AE0_00000B30:
     mr r29, r3
 lbl_fn_80180AE0_00000B34:
@@ -936,7 +936,7 @@ lbl_fn_80180AE0_00000B68:
     lfs f1, lbl_80881C14
     lfs f0, lbl_80881C10
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_80180AE0_00000B78:
     mr r30, r3
 lbl_fn_80180AE0_00000B7C:
@@ -958,7 +958,7 @@ lbl_fn_80180AE0_00000BB0:
     lfs f1, lbl_80881C14
     lfs f0, lbl_80881C10
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_80180AE0_00000BC0:
     mr r31, r3
 lbl_fn_80180AE0_00000BC4:
@@ -980,7 +980,7 @@ lbl_fn_80180AE0_00000BF8:
     lfs f1, lbl_80881C14
     lfs f0, lbl_80881C10
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_80180AE0_00000C08:
     lfs f3, lbl_80881C04
     slwi r4, r30, 8
@@ -1027,20 +1027,20 @@ asm void fn_8018120C(void)
     li r4, 0x3
     li r5, 0x1f
     lwz r3, 0x48(r3)
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     lwz r3, lbl_8087F8A0
     li r4, 0x2
     li r5, 0x19
     lwz r3, 0x48(r3)
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r31
     li r4, 0x3
     li r5, 0x1f
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r31
     li r4, 0x2
     li r5, 0x19
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0
@@ -1374,20 +1374,20 @@ lbl_fn_8018161C_00001118:
     li r4, 0x3
     li r5, 0x1f
     lwz r3, 0x48(r3)
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     lwz r3, lbl_8087F8A0
     li r4, 0x2
     li r5, 0x19
     lwz r3, 0x48(r3)
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x3
     li r5, 0x1f
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r30
     li r4, 0x2
     li r5, 0x19
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     lwz r0, 0x14b0(r30)
     cmpwi r0, 0x2
     beq lbl_fn_8018161C_000011A0

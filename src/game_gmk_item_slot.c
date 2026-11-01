@@ -65,7 +65,7 @@ extern void fn_80658240(void);
 extern void fn_80660CF0(void);
 extern void fn_806823B0(void);
 extern void fn_8068A850(void);
-extern void fn_80695D84(void);
+extern void runtime_clampDouble(void);
 extern char* strcpy(char* dest, const char* src);
 
 /* External data declarations */
@@ -785,7 +785,7 @@ lbl_fn_80440994_00000864:
 lbl_fn_80440994_00000890:
     lfs f0, lbl_80886A2C
     fmuls f1, f0, f1
-    bl fn_80695D84
+    bl runtime_clampDouble
     lwz r7, lbl_8087EEE0
     slwi r0, r3, 24
     oris r4, r0, 0xff

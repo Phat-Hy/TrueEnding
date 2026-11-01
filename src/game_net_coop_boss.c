@@ -19,7 +19,7 @@ extern void fn_80061824(void);
 extern void fn_8006EF48(void);
 extern void fn_8007FAF0(void);
 extern void mem_alloc(void);
-extern void fn_8008771C(void);
+extern void route_interpolatePath(void);
 extern void fn_80087994(void);
 extern void fn_8008937C(void);
 extern void fn_800897D8(void);
@@ -37,7 +37,7 @@ struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct 
 extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800D5908(void);
 extern void atn_LH_Texture_update(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_800DD3FC(void);
 extern void fn_801F3FF8(void);
 extern void fn_80211480(void);
@@ -53,7 +53,7 @@ extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECMag(void);
 extern void std_atan2(void);
-extern void fn_80695D84(void);
+extern void runtime_clampDouble(void);
 
 /* External data declarations */
 extern u8 lbl_807573B8[];
@@ -168,7 +168,7 @@ lbl_fn_804A71F0_00000058:
 lbl_fn_804A71F0_00000088:
     lwz r25, 0x4(r31)
     addi r3, r26, 0x8
-    bl fn_800DC6B4
+    bl str_findChar
     cmplw r25, r3
     bne lbl_fn_804A71F0_000000A0
     li r27, 0x1
@@ -201,7 +201,7 @@ lbl_fn_804A71F0_000000F8:
     lfs f1, lbl_80887218
     lfs f0, lbl_80887224
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_804A71F0_00000108:
     mr r27, r3
 lbl_fn_804A71F0_0000010C:
@@ -223,7 +223,7 @@ lbl_fn_804A71F0_00000140:
     lfs f1, lbl_80887218
     lfs f0, lbl_80887224
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_804A71F0_00000150:
     mr r26, r3
 lbl_fn_804A71F0_00000154:
@@ -245,7 +245,7 @@ lbl_fn_804A71F0_00000188:
     lfs f1, lbl_80887218
     lfs f0, lbl_80887224
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_804A71F0_00000198:
     mr r25, r3
 lbl_fn_804A71F0_0000019C:
@@ -267,7 +267,7 @@ lbl_fn_804A71F0_000001D0:
     lfs f1, lbl_80887218
     lfs f0, lbl_80887224
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_804A71F0_000001E0:
     lfs f2, 0x0(r28)
     slwi r3, r3, 24
@@ -294,7 +294,7 @@ lbl_fn_804A71F0_00000230:
     lfs f1, lbl_80887218
     lfs f0, lbl_80887224
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_804A71F0_00000240:
     mr r27, r3
 lbl_fn_804A71F0_00000244:
@@ -316,7 +316,7 @@ lbl_fn_804A71F0_00000278:
     lfs f1, lbl_80887218
     lfs f0, lbl_80887224
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_804A71F0_00000288:
     mr r26, r3
 lbl_fn_804A71F0_0000028C:
@@ -338,7 +338,7 @@ lbl_fn_804A71F0_000002C0:
     lfs f1, lbl_80887218
     lfs f0, lbl_80887224
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_804A71F0_000002D0:
     mr r25, r3
 lbl_fn_804A71F0_000002D4:
@@ -360,7 +360,7 @@ lbl_fn_804A71F0_00000308:
     lfs f1, lbl_80887218
     lfs f0, lbl_80887224
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_804A71F0_00000318:
     lfs f2, lbl_8088722C
     slwi r3, r3, 24
@@ -391,7 +391,7 @@ lbl_fn_804A71F0_00000378:
     lfs f1, lbl_80887218
     lfs f0, lbl_80887224
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_804A71F0_00000388:
     mr r27, r3
 lbl_fn_804A71F0_0000038C:
@@ -413,7 +413,7 @@ lbl_fn_804A71F0_000003C0:
     lfs f1, lbl_80887218
     lfs f0, lbl_80887224
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_804A71F0_000003D0:
     mr r26, r3
 lbl_fn_804A71F0_000003D4:
@@ -435,7 +435,7 @@ lbl_fn_804A71F0_00000408:
     lfs f1, lbl_80887218
     lfs f0, lbl_80887224
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_804A71F0_00000418:
     mr r25, r3
 lbl_fn_804A71F0_0000041C:
@@ -457,7 +457,7 @@ lbl_fn_804A71F0_00000450:
     lfs f1, lbl_80887218
     lfs f0, lbl_80887224
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_804A71F0_00000460:
     slwi r3, r3, 24
     slwi r0, r27, 16
@@ -489,7 +489,7 @@ lbl_fn_804A71F0_000004C4:
     lfs f1, lbl_80887218
     lfs f0, lbl_80887224
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_804A71F0_000004D4:
     mr r27, r3
 lbl_fn_804A71F0_000004D8:
@@ -511,7 +511,7 @@ lbl_fn_804A71F0_0000050C:
     lfs f1, lbl_80887218
     lfs f0, lbl_80887224
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_804A71F0_0000051C:
     mr r26, r3
 lbl_fn_804A71F0_00000520:
@@ -533,7 +533,7 @@ lbl_fn_804A71F0_00000554:
     lfs f1, lbl_80887218
     lfs f0, lbl_80887224
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_804A71F0_00000564:
     mr r25, r3
 lbl_fn_804A71F0_00000568:
@@ -555,7 +555,7 @@ lbl_fn_804A71F0_0000059C:
     lfs f1, lbl_80887218
     lfs f0, lbl_80887224
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_804A71F0_000005AC:
     slwi r3, r3, 24
     slwi r0, r27, 16
@@ -586,7 +586,7 @@ lbl_fn_804A71F0_0000060C:
     lfs f1, lbl_80887218
     lfs f0, lbl_80887224
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_804A71F0_0000061C:
     mr r27, r3
 lbl_fn_804A71F0_00000620:
@@ -608,7 +608,7 @@ lbl_fn_804A71F0_00000654:
     lfs f1, lbl_80887218
     lfs f0, lbl_80887224
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_804A71F0_00000664:
     mr r26, r3
 lbl_fn_804A71F0_00000668:
@@ -630,7 +630,7 @@ lbl_fn_804A71F0_0000069C:
     lfs f1, lbl_80887218
     lfs f0, lbl_80887224
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_804A71F0_000006AC:
     mr r25, r3
 lbl_fn_804A71F0_000006B0:
@@ -652,7 +652,7 @@ lbl_fn_804A71F0_000006E4:
     lfs f1, lbl_80887218
     lfs f0, lbl_80887224
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_804A71F0_000006F4:
     slwi r3, r3, 24
     slwi r0, r27, 16
@@ -686,7 +686,7 @@ lbl_fn_804A71F0_00000760:
     lfs f1, lbl_80887218
     lfs f0, lbl_80887224
     fmadds f1, f1, f3, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_804A71F0_00000770:
     mr r25, r3
 lbl_fn_804A71F0_00000774:
@@ -708,7 +708,7 @@ lbl_fn_804A71F0_000007A8:
     lfs f1, lbl_80887218
     lfs f0, lbl_80887224
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_804A71F0_000007B8:
     mr r27, r3
 lbl_fn_804A71F0_000007BC:
@@ -730,7 +730,7 @@ lbl_fn_804A71F0_000007F0:
     lfs f1, lbl_80887218
     lfs f0, lbl_80887224
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_804A71F0_00000800:
     mr r26, r3
 lbl_fn_804A71F0_00000804:
@@ -752,7 +752,7 @@ lbl_fn_804A71F0_00000838:
     lfs f1, lbl_80887218
     lfs f0, lbl_80887224
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_804A71F0_00000848:
     slwi r3, r3, 24
     slwi r0, r25, 16
@@ -784,7 +784,7 @@ lbl_fn_804A71F0_000008A8:
     lfs f1, lbl_80887218
     lfs f0, lbl_80887224
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_804A71F0_000008B8:
     mr r26, r3
 lbl_fn_804A71F0_000008BC:
@@ -806,7 +806,7 @@ lbl_fn_804A71F0_000008F0:
     lfs f1, lbl_80887218
     lfs f0, lbl_80887224
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_804A71F0_00000900:
     mr r27, r3
 lbl_fn_804A71F0_00000904:
@@ -828,7 +828,7 @@ lbl_fn_804A71F0_00000938:
     lfs f1, lbl_80887218
     lfs f0, lbl_80887224
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_804A71F0_00000948:
     mr r31, r3
 lbl_fn_804A71F0_0000094C:
@@ -850,7 +850,7 @@ lbl_fn_804A71F0_00000980:
     lfs f1, lbl_80887218
     lfs f0, lbl_80887224
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_804A71F0_00000990:
     slwi r3, r3, 24
     slwi r0, r26, 16
@@ -910,7 +910,7 @@ lbl_fn_804A71F0_00000A60:
     lfs f1, lbl_80887218
     lfs f0, lbl_80887224
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_804A71F0_00000A70:
     mr r31, r3
 lbl_fn_804A71F0_00000A74:
@@ -932,7 +932,7 @@ lbl_fn_804A71F0_00000AA8:
     lfs f1, lbl_80887218
     lfs f0, lbl_80887224
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_804A71F0_00000AB8:
     mr r30, r3
 lbl_fn_804A71F0_00000ABC:
@@ -954,7 +954,7 @@ lbl_fn_804A71F0_00000AF0:
     lfs f1, lbl_80887218
     lfs f0, lbl_80887224
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_804A71F0_00000B00:
     mr r28, r3
 lbl_fn_804A71F0_00000B04:
@@ -976,7 +976,7 @@ lbl_fn_804A71F0_00000B38:
     lfs f1, lbl_80887218
     lfs f0, lbl_80887224
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_804A71F0_00000B48:
     slwi r3, r3, 24
     slwi r0, r31, 16
@@ -1424,7 +1424,7 @@ lbl_fn_804A7F18_00001174:
     addi r5, r30, 0x15c0
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     mr r3, r28
     addi r4, r31, 0x144
     addi r5, r30, 0x160c
@@ -2820,7 +2820,7 @@ lbl_fn_804A894C_000025B4:
     b lbl_fn_804A894C_000025D0
 lbl_fn_804A894C_000025C8:
     fmadds f1, f29, f0, f24
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_804A894C_000025D0:
     mr r22, r3
 lbl_fn_804A894C_000025D4:
@@ -2838,7 +2838,7 @@ lbl_fn_804A894C_000025EC:
     b lbl_fn_804A894C_00002608
 lbl_fn_804A894C_00002600:
     fmadds f1, f29, f0, f24
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_804A894C_00002608:
     mr r21, r3
 lbl_fn_804A894C_0000260C:
@@ -2856,7 +2856,7 @@ lbl_fn_804A894C_00002624:
     b lbl_fn_804A894C_00002640
 lbl_fn_804A894C_00002638:
     fmadds f1, f29, f0, f24
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_804A894C_00002640:
     mr r20, r3
 lbl_fn_804A894C_00002644:
@@ -2874,7 +2874,7 @@ lbl_fn_804A894C_0000265C:
     b lbl_fn_804A894C_00002678
 lbl_fn_804A894C_00002670:
     fmadds f1, f29, f0, f24
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_804A894C_00002678:
     stfs f27, 0x8(r1)
     slwi r0, r22, 16
@@ -2914,7 +2914,7 @@ lbl_fn_804A894C_000026F0:
     b lbl_fn_804A894C_0000270C
 lbl_fn_804A894C_00002704:
     fmadds f1, f29, f0, f24
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_804A894C_0000270C:
     mr r22, r3
 lbl_fn_804A894C_00002710:
@@ -2932,7 +2932,7 @@ lbl_fn_804A894C_00002728:
     b lbl_fn_804A894C_00002744
 lbl_fn_804A894C_0000273C:
     fmadds f1, f29, f0, f24
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_804A894C_00002744:
     mr r21, r3
 lbl_fn_804A894C_00002748:
@@ -2950,7 +2950,7 @@ lbl_fn_804A894C_00002760:
     b lbl_fn_804A894C_0000277C
 lbl_fn_804A894C_00002774:
     fmadds f1, f29, f0, f24
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_804A894C_0000277C:
     mr r20, r3
 lbl_fn_804A894C_00002780:
@@ -2968,7 +2968,7 @@ lbl_fn_804A894C_00002798:
     b lbl_fn_804A894C_000027B4
 lbl_fn_804A894C_000027AC:
     fmadds f1, f29, f0, f24
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_804A894C_000027B4:
     stfs f27, 0x8(r1)
     slwi r0, r22, 16
@@ -3014,7 +3014,7 @@ lbl_fn_804A894C_00002840:
     b lbl_fn_804A894C_0000285C
 lbl_fn_804A894C_00002854:
     fmadds f1, f29, f0, f24
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_804A894C_0000285C:
     mr r22, r3
 lbl_fn_804A894C_00002860:
@@ -3032,7 +3032,7 @@ lbl_fn_804A894C_00002878:
     b lbl_fn_804A894C_00002894
 lbl_fn_804A894C_0000288C:
     fmadds f1, f29, f0, f24
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_804A894C_00002894:
     mr r21, r3
 lbl_fn_804A894C_00002898:
@@ -3050,7 +3050,7 @@ lbl_fn_804A894C_000028B0:
     b lbl_fn_804A894C_000028CC
 lbl_fn_804A894C_000028C4:
     fmadds f1, f29, f0, f24
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_804A894C_000028CC:
     mr r20, r3
 lbl_fn_804A894C_000028D0:
@@ -3068,7 +3068,7 @@ lbl_fn_804A894C_000028E8:
     b lbl_fn_804A894C_00002904
 lbl_fn_804A894C_000028FC:
     fmadds f1, f29, f0, f24
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_804A894C_00002904:
     stfs f27, 0x8(r1)
     fmuls f11, f24, f20
@@ -3110,7 +3110,7 @@ lbl_fn_804A894C_00002984:
     b lbl_fn_804A894C_000029A0
 lbl_fn_804A894C_00002998:
     fmadds f1, f29, f0, f24
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_804A894C_000029A0:
     mr r20, r3
 lbl_fn_804A894C_000029A4:
@@ -3128,7 +3128,7 @@ lbl_fn_804A894C_000029BC:
     b lbl_fn_804A894C_000029D8
 lbl_fn_804A894C_000029D0:
     fmadds f1, f29, f0, f24
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_804A894C_000029D8:
     mr r21, r3
 lbl_fn_804A894C_000029DC:
@@ -3146,7 +3146,7 @@ lbl_fn_804A894C_000029F4:
     b lbl_fn_804A894C_00002A10
 lbl_fn_804A894C_00002A08:
     fmadds f1, f29, f0, f24
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_804A894C_00002A10:
     mr r22, r3
 lbl_fn_804A894C_00002A14:
@@ -3164,7 +3164,7 @@ lbl_fn_804A894C_00002A2C:
     b lbl_fn_804A894C_00002A48
 lbl_fn_804A894C_00002A40:
     fmadds f1, f29, f0, f24
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_804A894C_00002A48:
     stfs f27, 0x8(r1)
     fmuls f11, f24, f22

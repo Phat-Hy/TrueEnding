@@ -7,7 +7,7 @@ extern void fn_800C16B4(void);
 extern void fn_800C2448(void);
 extern void fn_800C31F4(void);
 extern void ref_releaseHandle(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_801FED24(void);
 extern void fn_80373148(void);
 extern void fn_8041D180(void);
@@ -412,7 +412,7 @@ lbl_fn_80481818_000003C0:
     stfs f0, 0x1c(r1)
     stfs f1, 0x10(r1)
     stfs f1, 0x14(r1)
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     mr r3, r29
@@ -422,7 +422,7 @@ lbl_fn_80481818_000003C0:
     addi r3, r30, 0x27d
     lfs f31, 0x1c(r1)
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     mr r3, r29
@@ -432,7 +432,7 @@ lbl_fn_80481818_000003C0:
     addi r3, r30, 0x27d
     lfs f31, 0x10(r1)
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     mr r3, r29
@@ -442,7 +442,7 @@ lbl_fn_80481818_000003C0:
     addi r3, r30, 0x27d
     lfs f31, 0x14(r1)
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     mr r3, r29

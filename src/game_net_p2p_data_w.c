@@ -17,7 +17,7 @@ extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_800DD3FC(void);
 extern void fn_80117228(void);
 extern void fn_801D0960(void);
@@ -632,7 +632,7 @@ lbl_fn_8050FC08_00000688:
     mr r4, r28
     bl fn_800A03E4
     lwz r3, 0x0(r30)
-    bl fn_800DC6B4
+    bl str_findChar
     stw r3, 0xc(r29)
 lbl_fn_8050FC08_000006B8:
     addi r30, r30, 0x8
@@ -813,7 +813,7 @@ lbl_p2p_sendDataPacket_000008DC:
     lwz r3, 0x0(r26)
     lwzx r22, r4, r23
     lwz r21, 0x8c(r22)
-    bl fn_800DC6B4
+    bl str_findChar
     cmplw r21, r3
     bne lbl_p2p_sendDataPacket_00000AA8
     cmpwi r22, 0x0

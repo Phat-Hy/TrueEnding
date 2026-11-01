@@ -4,7 +4,7 @@
 extern void __GXFlushTextureState(void);
 extern void __GXSetDirtyState(void);
 extern void fn_806148E0(void);
-extern void fn_80695D84(void);
+extern void runtime_clampDouble(void);
 
 /* Jump tables */
 extern u32 jumptable_807B0E58[];
@@ -452,7 +452,7 @@ lbl_fn_80617A10_000004C8:
     fsubs f0, f0, f2
     fdivs f0, f3, f0
     stfs f0, 0xc(r1)
-    bl fn_80695D84
+    bl runtime_clampDouble
     lis r4, 0xcc01
     li r0, 0x61
     stb r0, -0x8000(r4)

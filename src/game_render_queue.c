@@ -11,7 +11,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void fn_800A555C(void);
 extern void fn_800C31F4(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB5C8(void);
+extern void morph_updateMesh(void);
 extern void fn_800DD3FC(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800F8C6C(void);
@@ -20,7 +20,7 @@ extern void fn_8013A258(void);
 extern void fn_8013CB68(void);
 extern void fn_80145334(void);
 extern void dialog_renderWindow(void);
-extern void fn_8014C0B4(void);
+extern void dialog_setScriptSlot(void);
 extern void fn_8014C540(void);
 extern void fn_80151448(void);
 extern void fn_80158BB4(void);
@@ -120,19 +120,19 @@ asm void fn_802A5A1C(void)
     mr r31, r3
     stw r30, 0x358(r1)
     stw r29, 0x354(r1)
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r31
     li r4, 0x1c
     li r5, 0x1c7
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r31
     li r4, 0x1d
     li r5, 0x1c7
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r31
     li r4, 0x1e
     li r5, 0x1c7
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     lwz r3, 0x58c(r31)
     lfs f0, lbl_80883E4C
     subi r0, r3, 0x9
@@ -198,7 +198,7 @@ lbl_fn_802A5A1C_000000AC:
     addi r3, r31, 0x1538
     li r4, 0x0
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, 0x1694(r31)
     lwz r0, 0x16ec(r31)
     ori r6, r3, 0x1
@@ -277,7 +277,7 @@ lbl_fn_802A5A1C_000001A0:
     addi r3, r31, 0x1538
     li r4, 0x0
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, 0x1694(r31)
     lwz r0, 0x16ec(r31)
     ori r6, r3, 0x1
@@ -347,7 +347,7 @@ lbl_fn_802A5A1C_000002D4:
     addi r3, r31, 0x1538
     li r4, 0x0
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, 0x1694(r31)
     lwz r0, 0x16ec(r31)
     ori r6, r3, 0x1
@@ -440,7 +440,7 @@ lbl_fn_802A5A1C_00000474:
     addi r3, r31, 0x1538
     li r4, 0x0
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, 0x1694(r31)
     lwz r0, 0x16ec(r31)
     ori r6, r3, 0x1
@@ -571,7 +571,7 @@ lbl_fn_802A5A1C_00000708:
     addi r3, r31, 0x1538
     li r4, 0x0
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     li r3, 0x0
     li r0, 0x13
     stw r3, 0x14c0(r31)
@@ -710,7 +710,7 @@ lbl_fn_802A5A1C_000008D8:
     addi r3, r31, 0x1538
     li r4, 0x0
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r4, 0x1694(r31)
     li r0, 0x0
     lwz r3, 0x16ec(r31)
@@ -887,7 +887,7 @@ lbl_fn_802A5A1C_00000B08:
     addi r3, r31, 0x1538
     li r4, 0x0
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r4, 0x1694(r31)
     li r0, 0x0
     lwz r3, 0x16ec(r31)
@@ -933,7 +933,7 @@ lbl_fn_802A5A1C_00000B08:
     addi r3, r31, 0x1538
     li r4, 0x0
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, 0x1694(r31)
     lwz r0, 0x16ec(r31)
     ori r6, r3, 0x1
@@ -1571,7 +1571,7 @@ lbl_fn_802A6E80_00001558:
     addi r3, r31, 0x1538
     li r4, 0x0
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, 0x1694(r31)
     lwz r0, 0x16ec(r31)
     ori r6, r3, 0x1

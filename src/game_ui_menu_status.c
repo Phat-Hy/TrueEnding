@@ -11,7 +11,7 @@ extern void fn_8004ED34(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800C344C(void);
+extern void skin_applyWeights(void);
 extern void fn_800CB360(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
@@ -2038,7 +2038,7 @@ lbl_fn_801BC5B8_00001B10:
     lfs f1, lbl_808825E8
     addi r5, r5, 0x528
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r27, 0x30
     addi r4, r1, 0x8
     bl fn_800CB440

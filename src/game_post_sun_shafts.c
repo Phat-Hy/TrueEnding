@@ -7,7 +7,7 @@ extern void _savegpr_25(void);
 extern void dtor_80084684(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_8004203C(void);
 extern void talk_parseQuotedString(void);
 extern void fn_8005B5F8(void);
@@ -52,8 +52,8 @@ extern void fn_802D4628(void);
 extern void fn_802D4E9C(void);
 extern void fn_802D5020(void);
 extern void fn_80373148(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_804A04AC(void);
@@ -427,7 +427,7 @@ asm void fn_802D0038(void)
     addi r8, r1, 0x18
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     addi r29, r27, 0x18
     stw r28, 0x2c(r1)
     addi r26, r1, 0x2c
@@ -447,7 +447,7 @@ asm void fn_802D0038(void)
     addi r8, r1, 0x10
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     addi r3, r31, 0x2c
     bl strlen
     lis r4, lbl_807772D0@ha
@@ -515,7 +515,7 @@ lbl_fn_802D0038_00000568:
     addi r6, r26, 0x8
     addi r8, r1, 0x8
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_802D0038_00000598:
     addi r3, r1, 0x44
     bl fn_8005B5F8
@@ -696,7 +696,7 @@ asm void fn_802D0594(void)
     cmpwi r3, 0x0
     bne lbl_fn_802D0594_00000CD4
     addi r3, r29, 0x1650
-    bl fn_80470580
+    bl boss_getOffset54
     cmpwi r3, 0x0
     beq lbl_fn_802D0594_00000C6C
     bl fn_80121F00
@@ -707,10 +707,10 @@ asm void fn_802D0594(void)
     cmpwi r3, 0x0
     beq lbl_fn_802D0594_00000C6C
     addi r3, r29, 0x1650
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r31, r3
     addi r3, r29, 0x1650
-    bl fn_80470580
+    bl boss_getOffset54
     mr r4, r3
     mr r5, r31
     addi r3, r1, 0x14

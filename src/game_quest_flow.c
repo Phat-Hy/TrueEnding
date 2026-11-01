@@ -62,7 +62,7 @@ extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
-extern void fn_80695AD0(void);
+extern void vec3_isNonZero(void);
 
 /* External data declarations */
 extern u8 lbl_80737490[];
@@ -2757,7 +2757,7 @@ lbl_fn_80145334_000025DC:
     stw r5, 0xec(r1)
     stw r4, 0xf0(r1)
     stw r0, 0xf4(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80145334_00002618
     lwz r3, 0xf80(r26)
@@ -3291,7 +3291,7 @@ lbl_fn_80145334_00002D94:
     stw r5, 0xe0(r1)
     stw r4, 0xe4(r1)
     stw r0, 0xe8(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80145334_00002EB4
     lwz r3, 0xf80(r26)

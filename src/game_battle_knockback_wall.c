@@ -40,7 +40,7 @@ extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_80097E80(void);
-extern void fn_800C344C(void);
+extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB688(void);
 extern void fn_800D8814(void);
@@ -92,8 +92,8 @@ extern void fn_80417F40(void);
 extern void fn_80417FF8(void);
 extern void fn_804180B0(void);
 extern void fn_804180BC(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void atn_LoadHandle_destructor(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
@@ -875,10 +875,10 @@ asm void fn_804167FC(void)
     stw r29, 0x744(r1)
     mr r29, r3
     addi r3, r3, 0x60
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r30, r3
     addi r3, r29, 0x60
-    bl fn_80470580
+    bl boss_getOffset54
     lis r4, lbl_807774D8@ha
     li r0, 0x0
     addi r4, r4, lbl_807774D8@l
@@ -971,10 +971,10 @@ asm void fn_80416960(void)
     mr r31, r3
     addi r3, r3, 0x60
     stw r30, 0x648(r1)
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r30, r3
     addi r3, r31, 0x60
-    bl fn_80470580
+    bl boss_getOffset54
     lis r4, lbl_807774D8@ha
     li r0, 0x0
     addi r4, r4, lbl_807774D8@l
@@ -1643,10 +1643,10 @@ asm void fn_8041726C(void)
     stmw r27, 0x64c(r1)
     mr r31, r3
     addi r3, r3, 0x60
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r29, r3
     addi r3, r31, 0x60
-    bl fn_80470580
+    bl boss_getOffset54
     lis r4, lbl_807774D8@ha
     li r0, 0x0
     addi r4, r4, lbl_807774D8@l
@@ -2098,7 +2098,7 @@ lbl_fn_8041766C_000019F0:
     addi r3, r1, 0x8
     slwi r0, r0, 2
     lwzx r4, r21, r0
-    bl fn_800C344C
+    bl skin_applyWeights
     bl fn_80116E64
     cmpwi r3, 0x0
     beq lbl_fn_8041766C_00001AC8

@@ -10,7 +10,7 @@ extern void mem_alloc(void);
 extern void mem_free(void);
 extern void fn_80084A78(void);
 extern void mem_getAllocSize(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_800DCA6C(void);
 extern void atn_Arc_decompressChunk(void);
 extern void fn_8046D1EC(void);
@@ -22,7 +22,7 @@ extern void fn_80473104(void);
 extern void printf(void);
 extern void abort(void);
 extern void fn_806952C4(void);
-extern void fn_80695AD0(void);
+extern void vec3_isNonZero(void);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
 
@@ -73,7 +73,7 @@ asm void fn_80470604(void)
     addi r3, r1, 0x10
     bl fn_8006B404
     addi r3, r1, 0x10
-    bl fn_800DC6B4
+    bl str_findChar
     cmpwi r28, 0x0
     mr r5, r3
     li r29, 0x0
@@ -1313,7 +1313,7 @@ lbl_fn_804714B0_00000F90:
     stw r5, 0x24(r1)
     stw r4, 0x28(r1)
     stw r0, 0x2c(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_804714B0_00001088
     lwz r0, 0x0(r16)

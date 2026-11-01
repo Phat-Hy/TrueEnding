@@ -5,7 +5,7 @@
 extern void _restgpr_24(void);
 extern void _savegpr_24(void);
 extern void fn_800BFAC8(void);
-extern void fn_800C344C(void);
+extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CFD18(void);
 extern void fn_801F6C2C(void);
@@ -211,7 +211,7 @@ lbl_fn_8044EA34_000001F0:
     addi r5, r31, 0x8
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle

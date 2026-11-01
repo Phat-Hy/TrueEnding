@@ -18,7 +18,7 @@ extern void fn_8005BCE8(void);
 extern void fn_8007FAF0(void);
 extern void mem_alloc(void);
 extern void route_findNextWaypoint(void);
-extern void fn_8008771C(void);
+extern void route_interpolatePath(void);
 extern void fn_80087994(void);
 extern void fn_80087E9C(void);
 extern void fn_80088724(void);
@@ -55,8 +55,8 @@ extern void fn_803ED0D4(void);
 extern void fn_803ED5D0(void);
 extern void fn_803EDB18(void);
 extern void fn_803F11F8(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_getStatus(void);
 extern void PSVECSquareMag(void);
@@ -131,10 +131,10 @@ asm void fn_803F33A4(void)
     stmw r23, 0x64c(r1)
     mr r25, r3
     addi r3, r3, 0x60
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r27, r3
     addi r3, r25, 0x60
-    bl fn_80470580
+    bl boss_getOffset54
     lis r4, lbl_807774D8@ha
     li r0, 0x0
     addi r4, r4, lbl_807774D8@l
@@ -1062,7 +1062,7 @@ lbl_fn_803F3FBC_00000C80:
     addi r5, r28, 0x278
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     mr r3, r29
     addi r4, r31, 0x175
     addi r5, r28, 0x27c

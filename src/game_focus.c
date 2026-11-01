@@ -11,7 +11,7 @@ extern void fn_80098948(void);
 extern void fn_800A0548(void);
 extern void atn_Anim_getDuration(void);
 extern void fn_800A08E0(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_800DCA6C(void);
 extern void fn_805ED460(void);
 extern void fn_805ED5A0(void);
@@ -21,7 +21,7 @@ extern void PSMTXQuat(void);
 extern void PSMTXMultVec(void);
 extern void fn_805F99F0(void);
 extern void fn_806952C4(void);
-extern void fn_80695AD0(void);
+extern void vec3_isNonZero(void);
 extern void fn_8072D210(void);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
@@ -827,7 +827,7 @@ lbl_fn_800991D0_00000B2C:
     stw r5, 0x1b0(r1)
     stw r4, 0x1b4(r1)
     stw r0, 0x1b8(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_800991D0_00000C50
     lwz r0, 0x370(r15)
@@ -943,7 +943,7 @@ asm void fn_80099E9C(void)
     stw r30, 0x10(r1)
     mr r30, r3
     mr r3, r4
-    bl fn_800DC6B4
+    bl str_findChar
     lwz r5, 0x16c(r30)
     cmpwi r5, 0x0
     bne lbl_fn_80099E9C_00000D0C
@@ -1816,7 +1816,7 @@ lbl_fn_8009A5CC_000018F4:
     stw r5, 0x5c(r1)
     stw r4, 0x60(r1)
     stw r0, 0x64(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_8009A5CC_00001A60
     lwz r18, 0x48(r15)
@@ -2504,7 +2504,7 @@ lbl_fn_8009ADA4_0000230C:
     stw r5, 0xa4(r1)
     stw r4, 0xa8(r1)
     stw r0, 0xac(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_8009ADA4_00002478
     lwz r18, 0x48(r15)
@@ -2686,7 +2686,7 @@ lbl_fn_8009ADA4_000025B8:
     stw r5, 0x98(r1)
     stw r4, 0x9c(r1)
     stw r0, 0xa0(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_8009ADA4_000026EC
     stw r28, 0x70(r1)

@@ -7,7 +7,7 @@ extern void _restgpr_14(void);
 extern void _savegpr_14(void);
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void talk_formatQuotedString(void);
 extern void fn_8006AC08(void);
 extern void fn_80079044(void);
@@ -276,7 +276,7 @@ lbl_fn_8049248C_00000290:
     addi r8, r1, 0x10
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r14
     addi r3, r1, 0x1b0
     bl fn_8006AC08
@@ -370,7 +370,7 @@ lbl_fn_8049248C_00000400:
     add r7, r14, r0
     addi r8, r1, 0x8
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_8049248C_00000430:
     lwz r0, 0x1f8(r1)
     mr r3, r15

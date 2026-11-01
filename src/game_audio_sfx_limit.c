@@ -18,7 +18,7 @@ extern void fn_8005B6E8(void);
 extern void fn_8006AFF8(void);
 extern void fn_8006CA80(void);
 extern void route_findNextWaypoint(void);
-extern void fn_8008771C(void);
+extern void route_interpolatePath(void);
 extern void fn_80087994(void);
 extern void fn_80087E9C(void);
 extern void fn_8008937C(void);
@@ -77,8 +77,8 @@ extern void fn_80319578(void);
 extern void fn_8031958C(void);
 extern void fn_803199A4(void);
 extern void fn_8035B694(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_805A5224(void);
 extern void PSMTXConcat(void);
@@ -1341,7 +1341,7 @@ lbl_fn_803165EC_000010B8:
     addi r5, r30, 0x14f0
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     mr r3, r28
     addi r4, r29, 0xd9
     addi r5, r30, 0x58c
@@ -1361,14 +1361,14 @@ lbl_fn_803165EC_000010B8:
     li r7, 0x0
     bl fn_80087E9C
     addi r3, r30, 0x14b0
-    bl fn_80470580
+    bl boss_getOffset54
     cmpwi r3, 0x0
     beq lbl_fn_803165EC_000012FC
     addi r3, r30, 0x14b0
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r27, r3
     addi r3, r30, 0x14b0
-    bl fn_80470580
+    bl boss_getOffset54
     lis r4, lbl_807772D0@ha
     li r0, 0x0
     addi r4, r4, lbl_807772D0@l

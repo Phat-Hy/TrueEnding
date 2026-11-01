@@ -13,7 +13,7 @@ extern void fn_8005BBF8(void);
 extern void fn_8005BCE8(void);
 extern void mem_alloc(void);
 extern void route_findNextWaypoint(void);
-extern void fn_8008771C(void);
+extern void route_interpolatePath(void);
 extern void fn_8008937C(void);
 extern void lockon_updateTarget(void);
 extern void fn_800971D4(void);
@@ -22,10 +22,10 @@ extern void fn_800C16B4(void);
 extern void fn_800C16C0(void);
 extern void fn_800C1814(void);
 extern void fn_800C1990(void);
-extern void fn_800C344C(void);
+extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
-extern void fn_800CB5C8(void);
+extern void morph_updateMesh(void);
 extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800DC12C(void);
 extern void str_skipWhitespace(void);
@@ -51,8 +51,8 @@ extern void fn_803ED5D0(void);
 extern void fn_803EDB18(void);
 extern void fn_8041D180(void);
 extern void fn_8041D198(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void atn_LoadHandle_destructor(void);
 extern void fn_80491528(void);
 extern void PSVECSquareMag(void);
@@ -381,7 +381,7 @@ lbl_fn_80422084_00000320:
     addi r3, r31, 0x104
     li r4, 0xf
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     b lbl_fn_80422084_000005E4
 lbl_fn_80422084_00000334:
     stw r5, 0x54(r3)
@@ -439,7 +439,7 @@ lbl_fn_80422084_000003F8:
     addi r3, r31, 0x104
     li r4, 0xf
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lis r3, lbl_807533A8@ha
     lfs f1, lbl_80886620
     lwz r4, lbl_807533A8@l(r3)
@@ -447,7 +447,7 @@ lbl_fn_80422084_000003F8:
     addi r5, r31, 0x6c
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r31, 0x104
     addi r4, r1, 0x14
     bl fn_800CB440
@@ -487,7 +487,7 @@ lbl_fn_80422084_00000494:
     addi r5, r31, 0x6c
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle
@@ -563,7 +563,7 @@ lbl_fn_80422084_000005D4:
     addi r3, r31, 0x104
     li r4, 0xf
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
 lbl_fn_80422084_000005E4:
     lwz r3, 0x54(r31)
 lbl_fn_80422084_000005E8:
@@ -684,7 +684,7 @@ lbl_fn_80422510_00000720:
     addi r5, r29, 0x120
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lwz r0, 0x44(r1)
     lwz r31, 0x3c(r1)
     lwz r30, 0x38(r1)
@@ -1421,10 +1421,10 @@ asm void fn_80422F78(void)
     stw r29, 0x644(r1)
     mr r29, r3
     addi r3, r3, 0x60
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r30, r3
     addi r3, r29, 0x60
-    bl fn_80470580
+    bl boss_getOffset54
     lis r4, lbl_807774D8@ha
     li r0, 0x0
     addi r4, r4, lbl_807774D8@l
@@ -1635,7 +1635,7 @@ lbl_fn_804231C0_000013CC:
     addi r5, r27, 0x198
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_80886630
     mr r3, r29
     lfs f2, lbl_80886650
@@ -1644,7 +1644,7 @@ lbl_fn_804231C0_000013CC:
     addi r5, r27, 0x19c
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     addi r30, r27, 0x158
     addi r29, r27, 0x15c
     li r27, 0x0
@@ -1665,7 +1665,7 @@ lbl_fn_804231C0_00001458:
     addi r4, r31, 0x22
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_80886630
     mr r3, r26
     lfs f2, lbl_80886650
@@ -1674,7 +1674,7 @@ lbl_fn_804231C0_00001458:
     addi r4, r31, 0x28
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     addi r27, r27, 0x1
     addi r29, r29, 0xc
     cmpwi r27, 0x5

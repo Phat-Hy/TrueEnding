@@ -53,7 +53,7 @@ void fn_80087320(void);
 void route_findNextWaypoint(void);
 void fn_800875EC(void);
 void fn_800875F8(void);
-void fn_8008771C(void);
+void route_interpolatePath(void);
 void fn_80087858(void);
 void fn_80087994(void);
 void fn_80087AA0(void);
@@ -1343,7 +1343,7 @@ lbl_fn_800875F8_000011A8:
     blr
 }
 
-asm void fn_8008771C(void)
+asm void route_interpolatePath(void)
 {
     nofralloc
     stwu r1, -0x40(r1)
@@ -1371,13 +1371,13 @@ asm void fn_8008771C(void)
     bl mem_alloc
     cmpwi r3, 0x0
     mr r31, r3
-    beq lbl_fn_8008771C_00001290
+    beq lbl_route_interpolatePath_00001290
     addi r0, r3, 0x4
     lis r4, lbl_80778808@ha
     cmplw r27, r0
     addi r4, r4, lbl_80778808@l
     stw r4, 0x0(r3)
-    beq lbl_fn_8008771C_00001258
+    beq lbl_route_interpolatePath_00001258
     mr r3, r27
     bl strlen
     mr r5, r3
@@ -1385,7 +1385,7 @@ asm void fn_8008771C(void)
     addi r3, r31, 0x4
     addi r5, r5, 0x1
     bl memcpy
-lbl_fn_8008771C_00001258:
+lbl_route_interpolatePath_00001258:
     li r0, 0x0
     stw r0, 0x44(r31)
     lis r3, lbl_80778730@ha
@@ -1400,9 +1400,9 @@ lbl_fn_8008771C_00001258:
     stfs f30, 0x60(r31)
     stfs f31, 0x64(r31)
     stb r0, 0x68(r31)
-lbl_fn_8008771C_00001290:
+lbl_route_interpolatePath_00001290:
     cmpwi r31, 0x0
-    beq lbl_fn_8008771C_000012D8
+    beq lbl_route_interpolatePath_000012D8
     lwz r12, 0x0(r31)
     mr r3, r31
     mr r4, r29
@@ -1412,15 +1412,15 @@ lbl_fn_8008771C_00001290:
     bctrl
     lwz r0, 0x58(r26)
     cmpwi r0, 0x0
-    bne lbl_fn_8008771C_000012CC
+    bne lbl_route_interpolatePath_000012CC
     stw r31, 0x58(r26)
     stw r31, 0x5c(r26)
-    b lbl_fn_8008771C_000012D8
-lbl_fn_8008771C_000012CC:
+    b lbl_route_interpolatePath_000012D8
+lbl_route_interpolatePath_000012CC:
     lwz r3, 0x5c(r26)
     stw r31, 0x44(r3)
     stw r31, 0x5c(r26)
-lbl_fn_8008771C_000012D8:
+lbl_route_interpolatePath_000012D8:
     lfd f31, 0x38(r1)
     lfd f30, 0x30(r1)
     lfd f29, 0x28(r1)

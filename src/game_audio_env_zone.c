@@ -13,11 +13,11 @@ extern void fn_80013410(void);
 extern void fn_8004ED34(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_800C344C(void);
+extern void skin_applyWeights(void);
 extern void fn_800CB360(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
-extern void fn_800CB5C8(void);
+extern void morph_updateMesh(void);
 extern void fn_800EB7A0(void);
 extern void fn_800F72CC(void);
 extern void fn_800F7FA0(void);
@@ -978,7 +978,7 @@ lbl_fn_8031CA30_00000C6C:
     addi r5, r1, 0x368
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle
@@ -1285,7 +1285,7 @@ lbl_fn_8031D57C_00001130:
     addi r3, r30, 0x38
     li r4, 0x0
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     addi r3, r30, 0x38
     li r4, -0x1
     bl ref_releaseHandle
@@ -1390,7 +1390,7 @@ lbl_fn_8031D6DC_000012AC:
     addi r3, r28, 0x38
     li r4, 0x0
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     li r0, 0x1
     stw r0, 0x4(r28)
     lis r4, lbl_8074973C@ha
@@ -1931,7 +1931,7 @@ lbl_fn_8031D6DC_00001A94:
     addi r4, r4, 0xf5
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r28, 0x38
     addi r4, r1, 0x24
     bl fn_800CB440

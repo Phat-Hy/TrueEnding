@@ -11,7 +11,7 @@ extern void mem_alloc(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void fn_8011F91C(void);
-extern void fn_8014C0B4(void);
+extern void dialog_setScriptSlot(void);
 extern void fn_8014C228(void);
 extern void fn_801598B4(void);
 extern void fn_80159E9C(void);
@@ -768,12 +768,12 @@ asm void fn_801829B4(void)
     beq lbl_fn_801829B4_00000944
     li r4, 0x3
     li r5, 0x1f
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     lwz r3, lbl_8087F8A0
     li r4, 0x2
     li r5, 0x19
     lwz r3, 0x48(r3)
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
 lbl_fn_801829B4_00000944:
     li r0, 0x0
     stw r0, 0x54(r31)

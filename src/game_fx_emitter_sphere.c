@@ -14,7 +14,7 @@ extern void fn_8000E18C(void);
 extern void fn_80011034(void);
 extern void vec3_sub(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_8004203C(void);
 extern void fn_80057A68(void);
 extern void talk_parseQuotedString(void);
@@ -24,7 +24,7 @@ extern void fn_8006AFF8(void);
 extern void fn_800897D8(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
-extern void fn_800CB5C8(void);
+extern void morph_updateMesh(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800DC12C(void);
@@ -59,8 +59,8 @@ extern void fn_80288E30(void);
 extern void fn_802914F8(void);
 extern void fn_8035B694(void);
 extern void fn_8035B78C(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
@@ -326,7 +326,7 @@ lbl_fn_80287400_000002CC:
     addi r3, r28, 0x151c
     li r4, 0xf
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, lbl_8087F3C0
     mr r4, r28
     li r5, 0xc8
@@ -385,7 +385,7 @@ asm void fn_80287788(void)
     addi r3, r31, 0x151c
     li r4, 0x0
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0xc8
@@ -409,7 +409,7 @@ lbl_fn_80287788_000003F8:
     addi r3, r31, 0x151c
     li r4, 0xf
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0xc8
@@ -524,7 +524,7 @@ lbl_fn_802878EC_000005A8:
     addi r3, r29, 0x151c
     li r4, 0xf
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, lbl_8087F3C0
     mr r4, r29
     li r5, 0xc8
@@ -789,7 +789,7 @@ lbl_fn_802878EC_00000984:
     addi r3, r29, 0x151c
     li r4, 0xf
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, lbl_8087F3C0
     mr r4, r29
     li r5, 0xc8
@@ -1006,7 +1006,7 @@ lbl_fn_80287E7C_00000BC8:
     addi r8, r1, 0x18
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     addi r27, r31, 0x18
     stw r28, 0x2c(r1)
     addi r26, r1, 0x2c
@@ -1026,7 +1026,7 @@ lbl_fn_80287E7C_00000BC8:
     addi r8, r1, 0x10
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     addi r3, r30, 0x2c
     bl strlen
     lis r4, lbl_807772D0@ha
@@ -1094,7 +1094,7 @@ lbl_fn_80287E7C_00000DF8:
     addi r6, r26, 0x8
     addi r8, r1, 0x8
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_80287E7C_00000E28:
     addi r3, r1, 0x44
     bl fn_8005B5F8
@@ -1438,16 +1438,16 @@ asm void fn_802885EC(void)
     bl fn_8013C504
     mr r30, r3
     addi r3, r31, 0x1984
-    bl fn_80470580
+    bl boss_getOffset54
     cmpwi r3, 0x0
     beq lbl_fn_802885EC_00001938
     cmpwi r30, 0x0
     beq lbl_fn_802885EC_00001938
     addi r3, r31, 0x1984
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r30, r3
     addi r3, r31, 0x1984
-    bl fn_80470580
+    bl boss_getOffset54
     mr r4, r3
     mr r5, r30
     addi r3, r1, 0x38

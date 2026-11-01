@@ -9,7 +9,7 @@ extern void _savegpr_25(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_8004ED34(void);
 extern void fn_8006B174(void);
 extern void mem_free(void);
@@ -18,7 +18,7 @@ extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void fn_80097D40(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800C344C(void);
+extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void fn_801070C8(void);
 extern void fn_80107208(void);
@@ -48,7 +48,7 @@ extern void printf(void);
 extern void rand(void);
 extern void abort(void);
 extern void std_atan2(void);
-extern void fn_80695AD0(void);
+extern void vec3_isNonZero(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -508,7 +508,7 @@ lbl_fn_801AD34C_0000055C:
     addi r8, r1, 0x8
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r25
     addi r3, r1, 0xb8
     bl fn_8006B174
@@ -994,7 +994,7 @@ lbl_fn_801ADC14_00000C20:
     addi r3, r1, 0xc
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0xc
     li r4, -0x1
     bl ref_releaseHandle
@@ -1008,7 +1008,7 @@ lbl_fn_801ADC14_00000CAC:
     addi r3, r1, 0x8
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -1429,7 +1429,7 @@ lbl_fn_801AE4E8_00001298:
     stw r5, 0x50(r1)
     stw r4, 0x54(r1)
     stw r0, 0x58(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_801AE4E8_000012F8
     li r0, 0x0

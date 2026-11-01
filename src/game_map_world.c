@@ -37,7 +37,7 @@ extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void atoi(void);
 extern void fn_80686A64(void);
-extern void fn_80695AD0(void);
+extern void vec3_isNonZero(void);
 
 /* External data declarations */
 extern u8 lbl_807374B8[];
@@ -729,7 +729,7 @@ lbl_fn_8017A160_0000080C:
     stw r5, 0x8(r1)
     stw r4, 0xc(r1)
     stw r0, 0x10(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_8017A160_0000084C
     lwz r3, 0xf80(r31)
@@ -795,7 +795,7 @@ lbl_fn_8017A228_000008DC:
     stw r5, 0x8(r1)
     stw r4, 0xc(r1)
     stw r0, 0x10(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_8017A228_00000920
     lwz r3, 0xf80(r30)
@@ -956,7 +956,7 @@ lbl_fn_8017A450_00000AF0:
     stw r5, 0x8(r1)
     stw r4, 0xc(r1)
     stw r0, 0x10(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_8017A450_00000B30
     lwz r3, 0xf80(r31)

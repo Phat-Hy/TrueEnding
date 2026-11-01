@@ -15,14 +15,14 @@ extern void fn_800A5584(void);
 extern void fn_800A55AC(void);
 extern void fn_800A55D4(void);
 extern void fn_800A58D0(void);
-extern void fn_800C344C(void);
+extern void skin_applyWeights(void);
 extern void fn_800CB360(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
-extern void fn_800CB5C8(void);
+extern void morph_updateMesh(void);
 extern void fn_800CB6B0(void);
 extern void fn_800CB6E4(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_800EF73C(void);
 extern void fn_8011FFF8(void);
 extern void fn_8017C974(void);
@@ -501,7 +501,7 @@ lbl_fn_8012111C_000004B8:
     addi r3, r31, 0x28
     li r4, 0xf
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     li r0, 0x0
     stw r0, 0x2c(r31)
 lbl_fn_8012111C_000004DC:
@@ -651,7 +651,7 @@ lbl_fn_8012133C_000006D8:
     stw r3, 0x130(r1)
     lwz r3, 0x4(r15)
     bl fn_80218218
-    bl fn_800DC6B4
+    bl str_findChar
     lwz r4, 0x8(r15)
     stw r3, 0x134(r1)
     mr r3, r23
@@ -1220,7 +1220,7 @@ lbl_fn_8012133C_00000EDC:
     stfs f3, 0x58(r1)
     stfs f0, 0x5c(r1)
     lfs f1, 0x20(r24)
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x20
     addi r4, r1, 0x1c
     bl fn_800CB440
@@ -1261,7 +1261,7 @@ lbl_fn_8012133C_00000F34:
     stfs f4, 0x4c(r1)
     stfs f0, 0x48(r1)
     lfs f1, 0x20(r24)
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x20
     addi r4, r1, 0x18
     bl fn_800CB440
@@ -1385,7 +1385,7 @@ lbl_fn_80121E14_00001140:
     srawi r4, r4, 31
     addi r3, r30, 0x28
     andc r4, r0, r4
-    bl fn_800CB5C8
+    bl morph_updateMesh
     li r0, 0x0
     stw r0, 0x2c(r30)
 lbl_fn_80121E14_00001174:
@@ -1407,13 +1407,13 @@ asm void fn_80121EB0(void)
     lis r31, lbl_80737138@ha
     addi r31, r31, lbl_80737138@l
     addi r3, r31, 0xa1
-    bl fn_800DC6B4
+    bl str_findChar
     stw r3, lbl_8087F078
     addi r3, r31, 0xaa
-    bl fn_800DC6B4
+    bl str_findChar
     stw r3, lbl_8087F07C
     addi r3, r31, 0xb4
-    bl fn_800DC6B4
+    bl str_findChar
     lwz r31, 0xc(r1)
     lwz r0, 0x14(r1)
     stw r3, lbl_8087F080

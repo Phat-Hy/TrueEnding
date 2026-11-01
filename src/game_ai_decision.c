@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_8004ED34(void);
 extern void talk_parseQuotedString(void);
 extern void fn_8005B5F8(void);
@@ -46,8 +46,8 @@ extern void fn_8035B694(void);
 extern void fn_8035B78C(void);
 extern void fn_803C1560(void);
 extern void fn_803EA77C(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
@@ -782,7 +782,7 @@ asm void fn_80262938(void)
     addi r8, r1, 0x18
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     addi r27, r28, 0x18
     stw r29, 0x2c(r1)
     addi r26, r1, 0x2c
@@ -802,7 +802,7 @@ asm void fn_80262938(void)
     addi r8, r1, 0x10
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     addi r3, r31, 0x2c
     bl strlen
     lis r4, lbl_807772D0@ha
@@ -870,7 +870,7 @@ lbl_fn_80262938_00000A8C:
     addi r6, r26, 0x8
     addi r8, r1, 0x8
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_80262938_00000ABC:
     addi r3, r1, 0x44
     bl fn_8005B5F8
@@ -1019,10 +1019,10 @@ lbl_fn_80262CF8_00000C90:
     cmpwi r3, 0x0
     bne lbl_fn_80262CF8_00000DA8
     addi r3, r30, 0x14b0
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r31, r3
     addi r3, r30, 0x14b0
-    bl fn_80470580
+    bl boss_getOffset54
     mr r4, r3
     mr r3, r30
     mr r5, r31

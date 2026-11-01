@@ -23,7 +23,7 @@ extern void fn_80064F00(void);
 extern void fn_8008B964(void);
 extern void atn_Matrix_copy(void);
 extern void fn_800C31F4(void);
-extern void fn_800C344C(void);
+extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void fn_800EE180(void);
 extern void fn_800EFD04(void);
@@ -53,7 +53,7 @@ extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void rand(void);
 extern void std_atan2(void);
-extern void fn_80695D84(void);
+extern void runtime_clampDouble(void);
 
 /* External data declarations */
 extern u8 lbl_80735DD0[];
@@ -1409,7 +1409,7 @@ lbl_fn_800F8348_0000114C:
     lfs f1, lbl_8088150C
     lfs f0, lbl_80881500
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800F8348_0000115C:
     mr r29, r3
 lbl_fn_800F8348_00001160:
@@ -1431,7 +1431,7 @@ lbl_fn_800F8348_00001194:
     lfs f1, lbl_8088150C
     lfs f0, lbl_80881500
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800F8348_000011A4:
     mr r30, r3
 lbl_fn_800F8348_000011A8:
@@ -1453,7 +1453,7 @@ lbl_fn_800F8348_000011DC:
     lfs f1, lbl_8088150C
     lfs f0, lbl_80881500
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800F8348_000011EC:
     mr r31, r3
 lbl_fn_800F8348_000011F0:
@@ -1475,7 +1475,7 @@ lbl_fn_800F8348_00001224:
     lfs f1, lbl_8088150C
     lfs f0, lbl_80881500
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800F8348_00001234:
     slwi r3, r3, 24
     slwi r0, r29, 16
@@ -1638,7 +1638,7 @@ lbl_fn_800F8574_000013F8:
     addi r3, r1, 0x8
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle

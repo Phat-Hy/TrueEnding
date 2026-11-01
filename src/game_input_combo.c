@@ -7,20 +7,20 @@ extern void _restgpr_14(void);
 extern void _savegpr_14(void);
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void talk_parseQuotedString(void);
 extern void fn_8005B5F8(void);
 extern void fn_8005B6E8(void);
 extern void fn_8006AFF8(void);
 extern void mem_free(void);
 extern void route_findNextWaypoint(void);
-extern void fn_8008771C(void);
+extern void route_interpolatePath(void);
 extern void fn_80087994(void);
 extern void fn_80088FAC(void);
 extern void fn_8008937C(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800CB5C8(void);
+extern void morph_updateMesh(void);
 extern void atn_Task_setActive(void);
 extern void fn_800DC12C(void);
 extern void fn_800EB7A0(void);
@@ -44,8 +44,8 @@ extern void res_registerResource(void);
 extern void fn_802E8580(void);
 extern void fn_802E89B0(void);
 extern void world_setLocalFlag(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_804DA490(void);
 extern void fn_804DA4A4(void);
@@ -904,11 +904,11 @@ asm void fn_802EC280(void)
     addi r3, r31, 0x15a0
     li r4, 0x5
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     addi r3, r31, 0x15a4
     li r4, 0x5
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     mr r3, r31
     bl fn_800EB7A0
     lwz r0, 0x14(r1)
@@ -970,7 +970,7 @@ lbl_fn_802EC38C_00000BD0:
     addi r5, r29, 0x15d8
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     mr r3, r30
     addi r4, r31, 0x1ea
     addi r5, r29, 0x15e4
@@ -988,7 +988,7 @@ lbl_fn_802EC38C_00000BD0:
     addi r5, r29, 0x15dc
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     mr r3, r30
     addi r4, r31, 0x1fb
     addi r5, r29, 0x15e8
@@ -1006,7 +1006,7 @@ lbl_fn_802EC38C_00000BD0:
     addi r5, r29, 0x15e0
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     mr r3, r30
     addi r4, r31, 0x20c
     addi r5, r29, 0x15ec
@@ -1024,7 +1024,7 @@ lbl_fn_802EC38C_00000BD0:
     addi r5, r29, 0x15f0
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_808847A8
     mr r3, r30
     lfs f2, lbl_808847AC
@@ -1033,7 +1033,7 @@ lbl_fn_802EC38C_00000BD0:
     addi r5, r29, 0x15f4
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     mr r3, r30
     addi r4, r31, 0x226
     addi r5, r29, 0x1528
@@ -1051,7 +1051,7 @@ lbl_fn_802EC38C_00000BD0:
     addi r5, r29, 0x15f8
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     mr r3, r30
     addi r4, r31, 0x23b
     addi r5, r29, 0x15fc
@@ -1096,7 +1096,7 @@ lbl_fn_802EC38C_00000BD0:
     addi r5, r29, 0x152c
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)
@@ -1177,7 +1177,7 @@ asm void fn_802EC670(void)
     addi r8, r1, 0x18
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     addi r27, r28, 0x18
     stw r29, 0x2c(r1)
     addi r26, r1, 0x2c
@@ -1197,7 +1197,7 @@ asm void fn_802EC670(void)
     addi r8, r1, 0x10
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     addi r3, r31, 0x2c
     bl strlen
     lis r4, lbl_807772D0@ha
@@ -1265,7 +1265,7 @@ lbl_fn_802EC670_00001034:
     addi r6, r26, 0x8
     addi r8, r1, 0x8
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_802EC670_00001064:
     addi r3, r1, 0x44
     bl fn_8005B5F8
@@ -1401,7 +1401,7 @@ lbl_fn_802EC9A8_000011D8:
     mr r3, r15
     bl fn_802EC38C
     addi r3, r15, 0x14d4
-    bl fn_80470580
+    bl boss_getOffset54
     cmpwi r3, 0x0
     beq lbl_fn_802EC9A8_00001B74
     lwz r3, lbl_8087F430
@@ -1411,10 +1411,10 @@ lbl_fn_802EC9A8_000011D8:
     cmpwi r0, 0x0
     beq lbl_fn_802EC9A8_00001B74
     addi r3, r15, 0x14d4
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r16, r3
     addi r3, r15, 0x14d4
-    bl fn_80470580
+    bl boss_getOffset54
     lis r4, lbl_807772D0@ha
     li r21, 0x0
     addi r4, r4, lbl_807772D0@l

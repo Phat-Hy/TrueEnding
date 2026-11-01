@@ -18,7 +18,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void fn_800A555C(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_8010C00C(void);
 extern void fn_80117228(void);
 extern void fn_8012B988(void);
@@ -1789,7 +1789,7 @@ lbl_fn_801CDA00_00001620:
     bl fn_80202118
     mr r28, r3
     addi r3, r1, 0x90
-    bl fn_800DC6B4
+    bl str_findChar
     mr r5, r3
     mr r4, r28
     addi r3, r1, 0x64
@@ -1850,7 +1850,7 @@ lbl_fn_801CDA00_000017C0:
     bl fn_80202118
     mr r28, r3
     addi r3, r1, 0x90
-    bl fn_800DC6B4
+    bl str_findChar
     mr r5, r3
     mr r4, r28
     addi r3, r1, 0x50

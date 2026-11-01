@@ -18,7 +18,7 @@ extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void fn_8001336C(void);
 extern void mem_free(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_800C344C(void);
+extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void fn_800E0AA8(void);
 extern void system_getNextSequenceId(void);
@@ -1768,7 +1768,7 @@ lbl_fn_802A36B8_000017F0:
     addi r5, r1, 0x48
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x28
     li r4, -0x1
     bl ref_releaseHandle

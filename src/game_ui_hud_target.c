@@ -8,7 +8,7 @@ extern void fn_8008B130(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800C344C(void);
+extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB688(void);
 extern void fn_801539E0(void);
@@ -1132,7 +1132,7 @@ asm void fn_801C4738(void)
     lwzx r4, r4, r0
     li r6, 0x0
     li r7, -0x1
-    b fn_800C344C
+    b skin_applyWeights
 }
 
 asm void fn_801C4750(void)

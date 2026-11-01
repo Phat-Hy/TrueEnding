@@ -6,7 +6,7 @@ extern void _restgpr_26(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_80044C50(void);
 extern void fn_80044CCC(void);
 extern void fn_80044E0C(void);
@@ -46,7 +46,7 @@ extern void strcmp(void);
 extern void std_atan2(void);
 extern void runtime_registerStaticObject(void);
 extern void fn_80695A50(void);
-extern void fn_80695AD0(void);
+extern void vec3_isNonZero(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -157,7 +157,7 @@ lbl_fn_800EDFE8_0000004C:
     lwz r0, 0xc(r31)
     li r5, 0x0
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_800EDFE8_00000090:
     lwz r4, 0x14(r31)
     srwi. r0, r4, 31
@@ -186,7 +186,7 @@ lbl_fn_800EDFE8_000000B4:
     lwz r0, 0x0(r28)
     li r5, 0x0
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_800EDFE8_000000FC:
     lwz r0, 0x4(r31)
     mr r3, r30
@@ -523,7 +523,7 @@ lbl_fn_800EE4D8_00000558:
     stw r5, 0x8(r1)
     stw r4, 0xc(r1)
     stw r0, 0x10(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_800EE4D8_000005A4
     lwz r3, 0xf80(r31)

@@ -8,7 +8,7 @@ extern void _savegpr_16(void);
 extern void dtor_80084684(void);
 extern void fn_8000D528(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
@@ -518,7 +518,7 @@ asm void fn_8057BAC0(void)
     addi r8, r1, 0x10
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lwz r3, lbl_8087F9B8
     lwz r7, 0x54(r3)
     lwz r0, 0x8(r7)
@@ -559,7 +559,7 @@ lbl_fn_8057BAC0_00000714:
     add r7, r6, r4
     addi r8, r1, 0xc
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_8057BAC0_00000730:
     lwz r0, 0x18(r1)
     srwi. r0, r0, 31
@@ -639,7 +639,7 @@ lbl_fn_8057BC0C_000007CC:
     addi r8, r1, 0xc
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lis r3, lbl_80794430@ha
     stw r24, 0x4c(r1)
     addi r3, r3, lbl_80794430@l
@@ -680,7 +680,7 @@ lbl_fn_8057BC0C_000008A4:
     lwz r0, 0x44(r1)
     li r5, 0x0
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_8057BC0C_000008E4:
     lwz r0, 0x4c(r1)
     lis r3, lbl_80794430@ha
@@ -847,7 +847,7 @@ lbl_fn_8057BC0C_00000B0C:
     lwz r0, 0x44(r1)
     li r5, 0x0
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_8057BC0C_00000B4C:
     lwz r0, 0x4c(r1)
     stw r0, 0x14(r26)
@@ -902,7 +902,7 @@ lbl_fn_8057BC0C_00000BD8:
     lwz r6, 0x10(r30)
     lwz r0, 0xc(r30)
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_8057BC0C_00000C18:
     lwz r0, 0x14(r30)
     stw r0, 0x14(r29)
@@ -1047,7 +1047,7 @@ asm void fn_8057C238(void)
     addi r8, r1, 0x10
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lwz r3, lbl_8087F9B8
     lwz r7, 0x40(r3)
     lwz r0, 0x8(r7)
@@ -1088,7 +1088,7 @@ lbl_fn_8057C238_00000E8C:
     add r7, r6, r4
     addi r8, r1, 0xc
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_8057C238_00000EA8:
     lwz r0, 0x18(r1)
     srwi. r0, r0, 31

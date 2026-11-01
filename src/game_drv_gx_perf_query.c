@@ -27,7 +27,7 @@ extern void fn_805E2E10(void);
 extern void fn_805E4960(void);
 extern void fn_805E4F80(void);
 extern void fn_80608020(void);
-extern void fn_80695D84(void);
+extern void runtime_clampDouble(void);
 
 /* External data declarations */
 extern u8 lbl_80764668[];
@@ -198,7 +198,7 @@ asm void fn_805E3030(void)
     lfs f0, lbl_80764678@l(r3)
     fmuls f1, f2, f1
     fmuls f1, f0, f1
-    bl fn_80695D84
+    bl runtime_clampDouble
     lwz r5, 0x4(r31)
     li r6, 0x1
     srwi r4, r3, 16
@@ -242,7 +242,7 @@ asm void fn_805E30D0(void)
     lfs f0, lbl_80764678@l(r3)
     fmuls f1, f2, f1
     fmuls f1, f0, f1
-    bl fn_80695D84
+    bl runtime_clampDouble
     lwz r4, 0x4(r31)
     stw r3, 0xce(r4)
     lwz r3, 0x4(r31)
@@ -740,7 +740,7 @@ lbl_fn_805E3760_00000918:
     fdivs f0, f29, f0
     fdivs f0, f30, f0
     fmuls f1, f31, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
     stw r3, 0x18(r29)
     add r28, r28, r27
     stw r31, 0x24(r29)
@@ -1012,7 +1012,7 @@ lbl_fn_805E3960_00000C9C:
     fdivs f0, f1, f0
     fdivs f0, f30, f0
     fmuls f1, f31, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
     stw r3, 0x1c(r27)
     b lbl_fn_805E3960_00000DF4
 lbl_fn_805E3960_00000D34:

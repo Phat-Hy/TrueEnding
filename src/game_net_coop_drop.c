@@ -16,14 +16,14 @@ extern void fn_80076FF8(void);
 extern void fn_800BDB58(void);
 extern void fn_800DC12C(void);
 extern void str_skipWhitespace(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_801F4728(void);
 extern void fn_801FECE0(void);
 extern void world_getGlobalFlag(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void strcmp(void);
-extern void fn_80695D84(void);
+extern void runtime_clampDouble(void);
 
 /* External data declarations */
 extern u8 lbl_80757648[];
@@ -258,7 +258,7 @@ asm void fn_804A9EB4(void)
     addi r3, r26, 0x17c
     fmuls f25, f0, f3
     addi r28, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f25
     mr r4, r3
     mr r3, r28
@@ -269,7 +269,7 @@ asm void fn_804A9EB4(void)
     addi r3, r26, 0x182
     fmuls f25, f0, f3
     addi r28, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f25
     mr r4, r3
     mr r3, r28
@@ -280,7 +280,7 @@ asm void fn_804A9EB4(void)
     addi r3, r26, 0x188
     fmuls f25, f0, f3
     addi r26, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f25
     mr r4, r3
     mr r3, r26
@@ -344,7 +344,7 @@ lbl_fn_804A9EB4_00000338:
     b lbl_fn_804A9EB4_00000354
 lbl_fn_804A9EB4_0000034C:
     fmadds f1, f31, f0, f29
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_804A9EB4_00000354:
     mr r28, r3
 lbl_fn_804A9EB4_00000358:
@@ -362,7 +362,7 @@ lbl_fn_804A9EB4_00000370:
     b lbl_fn_804A9EB4_0000038C
 lbl_fn_804A9EB4_00000384:
     fmadds f1, f31, f0, f29
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_804A9EB4_0000038C:
     mr r27, r3
 lbl_fn_804A9EB4_00000390:
@@ -380,7 +380,7 @@ lbl_fn_804A9EB4_000003A8:
     b lbl_fn_804A9EB4_000003C4
 lbl_fn_804A9EB4_000003BC:
     fmadds f1, f31, f0, f29
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_804A9EB4_000003C4:
     mr r26, r3
 lbl_fn_804A9EB4_000003C8:
@@ -398,7 +398,7 @@ lbl_fn_804A9EB4_000003E0:
     b lbl_fn_804A9EB4_000003FC
 lbl_fn_804A9EB4_000003F4:
     fmadds f1, f31, f0, f29
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_804A9EB4_000003FC:
     stfs f30, 0x8(r1)
     slwi r4, r27, 8
@@ -439,7 +439,7 @@ lbl_fn_804A9EB4_00000478:
     b lbl_fn_804A9EB4_00000494
 lbl_fn_804A9EB4_0000048C:
     fmadds f1, f31, f0, f29
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_804A9EB4_00000494:
     mr r26, r3
 lbl_fn_804A9EB4_00000498:
@@ -457,7 +457,7 @@ lbl_fn_804A9EB4_000004B0:
     b lbl_fn_804A9EB4_000004CC
 lbl_fn_804A9EB4_000004C4:
     fmadds f1, f31, f0, f29
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_804A9EB4_000004CC:
     mr r27, r3
 lbl_fn_804A9EB4_000004D0:
@@ -475,7 +475,7 @@ lbl_fn_804A9EB4_000004E8:
     b lbl_fn_804A9EB4_00000504
 lbl_fn_804A9EB4_000004FC:
     fmadds f1, f31, f0, f29
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_804A9EB4_00000504:
     mr r28, r3
 lbl_fn_804A9EB4_00000508:
@@ -493,7 +493,7 @@ lbl_fn_804A9EB4_00000520:
     b lbl_fn_804A9EB4_0000053C
 lbl_fn_804A9EB4_00000534:
     fmadds f1, f31, f0, f29
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_804A9EB4_0000053C:
     stfs f30, 0x8(r1)
     slwi r4, r27, 8
@@ -592,10 +592,10 @@ asm void fn_804AA490(void)
     bl _savegpr_19
     mr r23, r3
     addi r3, r3, 0x50
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r22, r3
     addi r3, r23, 0x50
-    bl fn_80470580
+    bl boss_getOffset54
     lis r4, lbl_807772D0@ha
     li r29, 0x0
     addi r4, r4, lbl_807772D0@l

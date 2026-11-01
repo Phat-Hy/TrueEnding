@@ -9,10 +9,10 @@ extern void vec3_sub(void);
 extern void fn_8004D124(void);
 extern void atn_ColliCapsule_destructor(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_800C344C(void);
+extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
-extern void fn_800CB5C8(void);
+extern void morph_updateMesh(void);
 extern void fn_800DD3FC(void);
 extern void fn_800EB7A0(void);
 extern void fn_800F7FD8(void);
@@ -792,7 +792,7 @@ asm void fn_802AB510(void)
     addi r5, r30, 0x528
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r30, 0x1538
     addi r4, r1, 0x8
     bl fn_800CB440
@@ -1218,7 +1218,7 @@ lbl_fn_802AB97C_00000FE4:
     addi r3, r31, 0x1538
     li r4, 0x0
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, 0x1694(r31)
     lwz r0, 0x16ec(r31)
     ori r6, r3, 0x1
@@ -1526,7 +1526,7 @@ lbl_fn_802ABF6C_000013C8:
     addi r3, r30, 0x1538
     li r4, 0x0
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r4, 0x1694(r30)
     lwz r0, 0x16ec(r30)
     ori r7, r4, 0x1

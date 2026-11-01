@@ -7,7 +7,7 @@ extern void fn_8000D430(void);
 extern void atn_ColliBase_destructor(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_8008771C(void);
+extern void route_interpolatePath(void);
 extern void fn_80087994(void);
 extern void fn_8008937C(void);
 extern void fn_800897D8(void);
@@ -17,7 +17,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void fn_800BFAC8(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void system_getNextSequenceId(void);
 extern void fn_801031D0(void);
 extern void boss_updatePhaseState(void);
@@ -406,7 +406,7 @@ lbl_fn_802C7D3C_00000394:
     addi r5, r31, 0x1550
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_808843E8
     mr r3, r29
     lfs f2, lbl_808843F4
@@ -415,7 +415,7 @@ lbl_fn_802C7D3C_00000394:
     addi r5, r31, 0x1554
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_808843E8
     mr r3, r29
     lfs f2, lbl_808843F4
@@ -424,7 +424,7 @@ lbl_fn_802C7D3C_00000394:
     addi r5, r31, 0x14cc
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lwz r3, 0x1438(r31)
     li r0, 0x1
     lfs f0, lbl_808843E8
@@ -1013,7 +1013,7 @@ lbl_fn_802C85B0_00000C58:
     lfs f31, 0x8(r1)
     addi r3, r30, 0x5a
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     mr r3, r29
@@ -1023,7 +1023,7 @@ lbl_fn_802C85B0_00000C58:
     addi r3, r30, 0x5a
     lfs f31, 0xc(r1)
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     mr r3, r29
@@ -1044,7 +1044,7 @@ lbl_fn_802C85B0_00000CF8:
     addi r30, r30, lbl_80746DEC@l
     addi r3, r30, 0x65
     addi r28, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     mr r3, r28
     mr r5, r29
@@ -1052,7 +1052,7 @@ lbl_fn_802C85B0_00000CF8:
     lwz r4, 0x1540(r31)
     addi r3, r30, 0x73
     addi r28, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     mr r3, r28
     mr r5, r29
@@ -1060,7 +1060,7 @@ lbl_fn_802C85B0_00000CF8:
     lwz r4, 0x1540(r31)
     addi r3, r30, 0x81
     addi r28, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     mr r3, r28
     mr r5, r29

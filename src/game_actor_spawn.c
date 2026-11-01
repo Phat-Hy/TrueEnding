@@ -9,7 +9,7 @@ extern void _savegpr_21(void);
 extern void _savegpr_25(void);
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_80060D58(void);
 extern void fn_8006F72C(void);
 extern void fn_8006FA4C(void);
@@ -24,7 +24,7 @@ struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct 
 extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800D5908(void);
 extern void fn_800DBF68(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_800DD3FC(void);
 extern void fn_80119030(void);
 extern void fn_8011B018(void);
@@ -42,8 +42,8 @@ extern void fn_803B87A8(void);
 extern void fn_803BEAB4(void);
 extern void fn_80470364(void);
 extern void fn_80470528(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
@@ -1771,7 +1771,7 @@ lbl_fn_80117FE4_000014E4:
     addi r8, r1, 0x18
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lwz r0, 0x20(r1)
     lwz r22, 0x70(r23)
     srwi. r0, r0, 31
@@ -1793,7 +1793,7 @@ lbl_fn_80117FE4_00001598:
     add r7, r22, r0
     addi r8, r1, 0x10
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lwz r0, 0x20(r1)
     addi r22, r30, 0x21c
     srwi. r0, r0, 31
@@ -1815,7 +1815,7 @@ lbl_fn_80117FE4_000015E8:
     add r7, r22, r0
     addi r8, r1, 0x8
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lwz r0, 0x20(r1)
     mr r3, r27
     srwi. r0, r0, 31
@@ -1849,10 +1849,10 @@ lbl_fn_80117FE4_0000166C:
     cmpwi r3, 0x0
     bne lbl_fn_80117FE4_000019B8
     addi r3, r24, 0x4b8
-    bl fn_8047059C
+    bl boss_getOffset50
     srwi r25, r3, 1
     addi r3, r24, 0x4b8
-    bl fn_80470580
+    bl boss_getOffset54
     mr r4, r3
     mr r3, r24
     mr r5, r25
@@ -1868,7 +1868,7 @@ lbl_fn_80117FE4_0000166C:
     addi r25, r25, lbl_80736B10@l
     addi r3, r25, 0x225
     addi r21, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_80881748
     mr r4, r3
     mr r3, r21
@@ -1876,7 +1876,7 @@ lbl_fn_80117FE4_0000166C:
     lwz r4, 0x70(r24)
     addi r3, r25, 0x22c
     addi r21, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_80881748
     mr r4, r3
     mr r3, r21
@@ -1884,7 +1884,7 @@ lbl_fn_80117FE4_0000166C:
     lwz r4, 0x70(r24)
     addi r3, r25, 0x233
     addi r21, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_80881748
     mr r4, r3
     mr r3, r21
@@ -1937,7 +1937,7 @@ lbl_fn_80117FE4_00001734:
     addi r25, r25, lbl_80736B10@l
     addi r3, r25, 0x233
     addi r21, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_80881748
     mr r4, r3
     mr r3, r21
@@ -1945,7 +1945,7 @@ lbl_fn_80117FE4_00001734:
     lwz r4, 0x68(r24)
     addi r3, r25, 0x233
     addi r21, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_80881748
     mr r4, r3
     mr r3, r21

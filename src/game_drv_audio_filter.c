@@ -7,7 +7,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_8004B338(void);
 extern void talk_parseQuotedString(void);
 extern void fn_8005B5F8(void);
@@ -26,7 +26,7 @@ extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
 extern void str_skipWhitespace(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_80116FC0(void);
 extern void magic_dispatchActionCommand(void);
 extern void fn_801F3FF8(void);
@@ -34,8 +34,8 @@ extern void fn_801F4C14(void);
 extern void fn_801FED24(void);
 extern void fn_8021A4CC(void);
 extern void fn_8021F09C(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
@@ -211,7 +211,7 @@ lbl_fn_805BC740_0000011C:
     addi r8, r1, 0x8
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r29
     addi r3, r1, 0x20
     bl fn_8006AC08
@@ -396,7 +396,7 @@ lbl_fn_805BC9F4_000003C0:
     lwz r4, 0x4(r28)
     addi r3, r30, 0x43
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     mr r3, r29
@@ -426,7 +426,7 @@ lbl_fn_805BC9F4_00000420:
     stfs f0, 0x100(r4)
     lwz r4, 0xb0(r31)
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     mr r3, r29
@@ -448,7 +448,7 @@ lbl_fn_805BC9F4_00000420:
     fmr f31, f1
     addi r3, r30, 0x97
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f0, lbl_808884AC
     mr r4, r3
     mr r3, r29
@@ -458,7 +458,7 @@ lbl_fn_805BC9F4_00000420:
     lwz r4, 0xb0(r31)
     addi r3, r30, 0xa2
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f0, lbl_808884B0
     mr r4, r3
     mr r3, r29
@@ -703,10 +703,10 @@ asm void fn_805BCF08(void)
     stmw r21, 0x694(r1)
     mr r21, r3
     addi r3, r3, 0x5c
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r23, r3
     addi r3, r21, 0x5c
-    bl fn_80470580
+    bl boss_getOffset54
     lis r4, lbl_807772D0@ha
     li r27, 0x0
     addi r4, r4, lbl_807772D0@l
@@ -774,7 +774,7 @@ lbl_fn_805BCF08_000008FC:
     addi r8, r1, 0x10
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r25
     addi r3, r1, 0x4c
     bl fn_8006B46C
@@ -803,7 +803,7 @@ lbl_fn_805BCF08_00000990:
     addi r8, r1, 0x8
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r24
     addi r3, r1, 0x28
     bl fn_8006AC08
@@ -1534,7 +1534,7 @@ lbl_fn_805BD4BC_000013E4:
     add r7, r23, r0
     addi r8, r1, 0x14
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r3, r23
     bl mem_getAllocSize
     b lbl_fn_805BD4BC_000015B8
@@ -1646,7 +1646,7 @@ lbl_fn_805BD4BC_00001580:
     add r7, r24, r0
     addi r8, r1, 0xc
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r3, r24
     bl mem_getAllocSize
 lbl_fn_805BD4BC_000015B8:

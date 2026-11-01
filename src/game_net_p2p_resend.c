@@ -17,7 +17,7 @@ extern void mem_getAllocSize(void);
 extern void fn_800C1FB4(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void atn_LH_Texture_destructAndFree(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_800EF73C(void);
 extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_update(void);
@@ -202,7 +202,7 @@ lbl_fn_80512B48_00000178:
     add r3, r23, r25
     lwzx r22, r4, r24
     lwz r21, 0x8c(r22)
-    bl fn_800DC6B4
+    bl str_findChar
     cmplw r21, r3
     bne lbl_fn_80512B48_000001EC
     lwz r0, 0xd4(r27)

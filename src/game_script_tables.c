@@ -8,7 +8,7 @@ extern void _savegpr_25(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_8003EA3C(void);
 extern void atn_ColliBase_destructor(void);
 extern void talk_parseQuotedString(void);
@@ -56,8 +56,8 @@ extern void fn_8035B694(void);
 extern void fn_8035B78C(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
@@ -1457,7 +1457,7 @@ asm void fn_8024A650(void)
     addi r8, r1, 0x18
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     addi r27, r31, 0x18
     stw r28, 0x2c(r1)
     addi r26, r1, 0x2c
@@ -1477,7 +1477,7 @@ asm void fn_8024A650(void)
     addi r8, r1, 0x10
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     addi r3, r30, 0x2c
     bl strlen
     lis r4, lbl_807772D0@ha
@@ -1545,7 +1545,7 @@ lbl_fn_8024A650_00001420:
     addi r6, r26, 0x8
     addi r8, r1, 0x8
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_8024A650_00001450:
     addi r3, r1, 0x44
     bl fn_8005B5F8
@@ -1877,7 +1877,7 @@ lbl_fn_8024AD30_000017F8:
     stw r0, 0x7ec(r29)
     lwz r4, lbl_8087F430
     lwz r30, 0x10d8(r4)
-    bl fn_80470580
+    bl boss_getOffset54
     cmpwi r3, 0x0
     beq lbl_fn_8024AD30_00001F10
     lwz r3, lbl_8087F430
@@ -1887,10 +1887,10 @@ lbl_fn_8024AD30_000017F8:
     cmpwi r0, 0x0
     beq lbl_fn_8024AD30_00001F10
     addi r3, r29, 0x1588
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r31, r3
     addi r3, r29, 0x1588
-    bl fn_80470580
+    bl boss_getOffset54
     lis r4, lbl_807772D0@ha
     li r0, 0x0
     addi r4, r4, lbl_807772D0@l

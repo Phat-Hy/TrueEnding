@@ -16,7 +16,7 @@ extern void atn_ColliCapsule_destructor(void);
 extern void fn_8007708C(void);
 extern void mem_alloc(void);
 extern void route_findNextWaypoint(void);
-extern void fn_8008771C(void);
+extern void route_interpolatePath(void);
 extern void fn_8008937C(void);
 extern void fn_800897D8(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -24,14 +24,14 @@ extern void fn_800A555C(void);
 extern void fn_800C3094(void);
 extern void fn_800C3124(void);
 extern void fn_800C31F4(void);
-extern void fn_800C344C(void);
+extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_800EC204(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800FBA9C(void);
@@ -56,8 +56,8 @@ extern void world_setLocalFlag(void);
 extern void fn_80469AB8(void);
 extern void fn_80469C64(void);
 extern void fn_80469D60(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
@@ -196,7 +196,7 @@ lbl_fn_80467F50_00000044:
     addi r5, r31, 0x528
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -1524,10 +1524,10 @@ lbl_task_Library_destructor_00001314:
     b lbl_task_Library_destructor_00001528
 lbl_task_Library_destructor_0000132C:
     addi r3, r29, 0x48
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r31, r3
     addi r3, r29, 0x48
-    bl fn_80470580
+    bl boss_getOffset54
     mr r4, r3
     mr r3, r29
     mr r5, r31
@@ -1615,7 +1615,7 @@ lbl_task_Library_destructor_00001468:
     la r5, lbl_8087E030
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_80886E94
     mr r3, r30
     lfs f2, lbl_80886E98
@@ -1624,7 +1624,7 @@ lbl_task_Library_destructor_00001468:
     la r5, lbl_8087E034
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_80886E94
     mr r3, r30
     lfs f2, lbl_80886E98
@@ -1633,7 +1633,7 @@ lbl_task_Library_destructor_00001468:
     la r5, lbl_8087E038
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     mr r3, r30
     addi r4, r31, 0x106
     la r5, lbl_8087E03C
@@ -1651,7 +1651,7 @@ lbl_task_Library_destructor_00001468:
     la r5, lbl_8087E040
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     li r3, 0x1
 lbl_task_Library_destructor_00001528:
     lwz r0, 0x24(r1)
@@ -1690,10 +1690,10 @@ lbl_fn_80469494_00001594:
     cmpwi r31, 0x0
     beq lbl_fn_80469494_000015C4
     addi r3, r30, 0x48
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r31, r3
     addi r3, r30, 0x48
-    bl fn_80470580
+    bl boss_getOffset54
     mr r4, r3
     mr r3, r30
     mr r5, r31
@@ -1870,7 +1870,7 @@ asm void fn_80469650(void)
     addi r3, r3, lbl_80755394@l
     addi r3, r3, 0x118
     addi r28, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     subfic r0, r29, 0xa
     lis r5, lbl_80755320@ha
     xoris r0, r0, 0x8000
@@ -1892,7 +1892,7 @@ lbl_fn_80469650_00001878:
     addi r3, r3, lbl_80755394@l
     addi r3, r3, 0x118
     addi r28, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     xoris r0, r29, 0x8000
     stw r0, 0x14(r1)
     lis r5, lbl_80755320@ha
@@ -1911,7 +1911,7 @@ lbl_fn_80469650_000018C8:
     addi r3, r3, lbl_80755394@l
     addi r3, r3, 0x118
     addi r28, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_80886E8C
     mr r4, r3
     mr r3, r28
@@ -1924,7 +1924,7 @@ lbl_fn_80469650_000018F0:
     addi r3, r3, lbl_80755394@l
     addi r3, r3, 0x118
     addi r28, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     subfic r0, r31, 0xa
     lis r5, lbl_80755320@ha
     xoris r0, r0, 0x8000
@@ -1946,7 +1946,7 @@ lbl_fn_80469650_00001944:
     addi r3, r3, lbl_80755394@l
     addi r3, r3, 0x118
     addi r28, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     xoris r0, r31, 0x8000
     stw r0, 0x14(r1)
     lis r5, lbl_80755320@ha
@@ -1965,7 +1965,7 @@ lbl_fn_80469650_00001994:
     addi r3, r3, lbl_80755394@l
     addi r3, r3, 0x118
     addi r28, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_80886E8C
     mr r4, r3
     mr r3, r28
@@ -1977,7 +1977,7 @@ lbl_fn_80469650_000019C0:
     addi r31, r31, lbl_80755394@l
     addi r3, r31, 0x118
     addi r28, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_80886E88
     mr r4, r3
     mr r3, r28
@@ -1985,7 +1985,7 @@ lbl_fn_80469650_000019C0:
     lwz r4, 0x88(r30)
     addi r3, r31, 0x118
     addi r28, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_80886E88
     mr r4, r3
     mr r3, r28

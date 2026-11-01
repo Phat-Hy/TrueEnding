@@ -10,7 +10,7 @@ extern void _savegpr_17(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void talk_parseDialogue(void);
 extern void fn_8005B8F8(void);
 extern void fn_8005B9AC(void);
@@ -39,8 +39,8 @@ extern void fn_801F1418(void);
 extern void fn_801F14FC(void);
 extern void fn_801F1658(void);
 extern void fn_801F1E7C(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
@@ -50,7 +50,7 @@ extern void printf(void);
 extern void fn_80686A48(void);
 extern void fn_80686A64(void);
 extern void abort(void);
-extern void fn_80695D84(void);
+extern void runtime_clampDouble(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -749,7 +749,7 @@ lbl_save_updateHeader_000008E0:
     b lbl_save_updateHeader_000008FC
 lbl_save_updateHeader_000008F4:
     fmadds f1, f30, f0, f31
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_save_updateHeader_000008FC:
     mr r18, r3
 lbl_save_updateHeader_00000900:
@@ -767,7 +767,7 @@ lbl_save_updateHeader_00000918:
     b lbl_save_updateHeader_00000934
 lbl_save_updateHeader_0000092C:
     fmadds f1, f30, f0, f31
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_save_updateHeader_00000934:
     mr r17, r3
 lbl_save_updateHeader_00000938:
@@ -785,7 +785,7 @@ lbl_save_updateHeader_00000950:
     b lbl_save_updateHeader_0000096C
 lbl_save_updateHeader_00000964:
     fmadds f1, f30, f0, f31
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_save_updateHeader_0000096C:
     mr r30, r3
 lbl_save_updateHeader_00000970:
@@ -803,7 +803,7 @@ lbl_save_updateHeader_00000988:
     b lbl_save_updateHeader_000009A4
 lbl_save_updateHeader_0000099C:
     fmadds f1, f30, f0, f31
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_save_updateHeader_000009A4:
     lfs f0, 0x50(r1)
     slwi r4, r3, 24
@@ -827,7 +827,7 @@ lbl_save_updateHeader_000009DC:
     b lbl_save_updateHeader_000009F8
 lbl_save_updateHeader_000009F0:
     fmadds f1, f30, f0, f31
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_save_updateHeader_000009F8:
     mr r17, r3
 lbl_save_updateHeader_000009FC:
@@ -845,7 +845,7 @@ lbl_save_updateHeader_00000A14:
     b lbl_save_updateHeader_00000A30
 lbl_save_updateHeader_00000A28:
     fmadds f1, f30, f0, f31
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_save_updateHeader_00000A30:
     mr r18, r3
 lbl_save_updateHeader_00000A34:
@@ -863,7 +863,7 @@ lbl_save_updateHeader_00000A4C:
     b lbl_save_updateHeader_00000A68
 lbl_save_updateHeader_00000A60:
     fmadds f1, f30, f0, f31
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_save_updateHeader_00000A68:
     mr r19, r3
 lbl_save_updateHeader_00000A6C:
@@ -881,7 +881,7 @@ lbl_save_updateHeader_00000A84:
     b lbl_save_updateHeader_00000AA0
 lbl_save_updateHeader_00000A98:
     fmadds f1, f30, f0, f31
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_save_updateHeader_00000AA0:
     slwi r5, r18, 8
     slwi r4, r3, 24
@@ -1176,7 +1176,7 @@ asm void fn_801F35B4(void)
     addi r3, r3, 0xc
     bl taskManager_updateTasks
     addi r3, r31, 0xc
-    bl fn_80470580
+    bl boss_getOffset54
     cmpwi r3, 0x0
     beq lbl_fn_801F35B4_00000E98
     li r0, 0x2
@@ -1221,14 +1221,14 @@ asm void fn_801F362C(void)
     b lbl_fn_801F362C_00000F54
 lbl_fn_801F362C_00000F0C:
     addi r3, r30, 0xc
-    bl fn_80470580
+    bl boss_getOffset54
     cmpwi r3, 0x0
     beq lbl_fn_801F362C_00000F40
     addi r3, r30, 0xc
-    bl fn_8047059C
+    bl boss_getOffset50
     srwi r31, r3, 1
     addi r3, r30, 0xc
-    bl fn_80470580
+    bl boss_getOffset54
     mr r4, r3
     mr r3, r30
     subi r5, r31, 0x1
@@ -2008,7 +2008,7 @@ asm void fn_801F407C(void)
     addi r8, r1, 0x10
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lis r3, lbl_8073E420@ha
     stw r30, 0x18(r1)
     addi r3, r3, lbl_8073E420@l
@@ -2030,7 +2030,7 @@ asm void fn_801F407C(void)
     addi r8, r1, 0x8
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r3, r29
     mr r4, r27
     bl fn_8006AD24

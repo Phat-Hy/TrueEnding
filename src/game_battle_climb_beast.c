@@ -33,11 +33,11 @@ extern void atn_Matrix_copy_2(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_80092F1C(void);
 extern void lockon_updateTarget(void);
-extern void fn_800C344C(void);
+extern void skin_applyWeights(void);
 extern void fn_800CB360(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
-extern void fn_800CB5C8(void);
+extern void morph_updateMesh(void);
 extern void fn_800CB6E4(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
@@ -90,8 +90,8 @@ extern void fn_803EFDAC(void);
 extern void fn_803FB870(void);
 extern void fn_803FBC34(void);
 extern void fn_804093B4(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void fn_804EB1B0(void);
 extern void PSVECNormalize(void);
 extern void PSVECMag(void);
@@ -478,10 +478,10 @@ asm void fn_803FA214(void)
     stw r29, 0x744(r1)
     mr r29, r3
     addi r3, r3, 0x60
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r30, r3
     addi r3, r29, 0x60
-    bl fn_80470580
+    bl boss_getOffset54
     lis r4, lbl_807774D8@ha
     li r0, 0x0
     addi r4, r4, lbl_807774D8@l
@@ -600,10 +600,10 @@ asm void fn_803FA3D0(void)
     stw r28, 0x640(r1)
     mr r28, r3
     addi r3, r3, 0x60
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r31, r3
     addi r3, r28, 0x60
-    bl fn_80470580
+    bl boss_getOffset54
     lis r4, lbl_807774D8@ha
     li r0, 0x0
     addi r4, r4, lbl_807774D8@l
@@ -855,7 +855,7 @@ lbl_fn_803FA5C8_00000944:
     addi r5, r31, 0x6c
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r31, 0x518
     addi r4, r1, 0x8
     bl fn_803FAE08
@@ -1666,7 +1666,7 @@ lbl_fn_803FAF8C_00001494:
     addi r5, r30, 0x6c
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x18
     li r4, -0x1
     bl ref_releaseHandle
@@ -1730,7 +1730,7 @@ lbl_fn_803FAF8C_00001594:
     addi r3, r30, 0x518
     li r4, 0xa
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lfs f0, lbl_80886038
     li r0, 0xff
     stw r29, 0x4cc(r30)
@@ -1800,7 +1800,7 @@ lbl_fn_803FAF8C_000015DC:
     psq_st f1, 0x4e4(r30), 0, 0
     lfs f1, lbl_8088603C
     stfs f2, 0x4ec(r30)
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x14
     li r4, -0x1
     bl ref_releaseHandle
@@ -1874,7 +1874,7 @@ lbl_fn_803FAF8C_000016F4:
     fmuls f4, f12, f4
     fnmsubs f0, f3, f4, f0
     stfs f0, 0x4e8(r30)
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle
@@ -1891,7 +1891,7 @@ lbl_fn_803FAF8C_00001808:
     psq_st f1, 0x6c(r30), 0, 0
     stw r6, 0x4f0(r30)
     stb r0, 0x520(r30)
-    bl fn_800CB5C8
+    bl morph_updateMesh
     b lbl_fn_803FAF8C_00001870
 lbl_fn_803FAF8C_0000183C:
     lwz r0, 0x4fc(r30)
@@ -1906,7 +1906,7 @@ lbl_fn_803FAF8C_0000183C:
     addi r3, r30, 0x518
     li r4, 0xa
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
 lbl_fn_803FAF8C_00001870:
     lfs f0, lbl_80886038
     stfs f0, 0x4d4(r30)

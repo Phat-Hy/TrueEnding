@@ -21,7 +21,7 @@ extern void gx_setRenderStateParam(void);
 extern void fn_800848B4(void);
 extern void mem_getAllocSize(void);
 extern void route_findNextWaypoint(void);
-extern void fn_8008771C(void);
+extern void route_interpolatePath(void);
 extern void fn_80087994(void);
 extern void fn_80087E9C(void);
 extern void fn_80088AF4(void);
@@ -191,7 +191,7 @@ asm void fn_800B23C8(void)
     addi r5, r29, 0x4c
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_80880ED0
     mr r3, r30
     lfs f2, lbl_80880F04
@@ -200,7 +200,7 @@ asm void fn_800B23C8(void)
     addi r5, r29, 0x50
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_80880EF0
     mr r3, r30
     lfs f2, lbl_80880F0C
@@ -209,7 +209,7 @@ asm void fn_800B23C8(void)
     addi r5, r29, 0x54
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_80880ED0
     mr r3, r30
     lfs f2, lbl_80880F0C
@@ -218,7 +218,7 @@ asm void fn_800B23C8(void)
     addi r5, r29, 0x58
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_80880ED0
     mr r3, r30
     lfs f2, lbl_80880F0C
@@ -227,7 +227,7 @@ asm void fn_800B23C8(void)
     addi r5, r29, 0x5c
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_80880F14
     mr r3, r30
     lfs f2, lbl_80880F18

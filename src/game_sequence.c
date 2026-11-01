@@ -110,7 +110,7 @@ extern void fn_80618630(void);
 extern void __GXSetIndTexMtx(void);
 extern void fn_8068A850(void);
 extern void fn_8068AD58(void);
-extern void fn_80695D84(void);
+extern void runtime_clampDouble(void);
 
 /* External data declarations */
 extern u8 jumptable_80777C18[];
@@ -258,7 +258,7 @@ asm void gx_drawScreenQuad(void)
     lfd f1, 0x60(r1)
     fsubs f1, f1, f2
     fadds f1, f1, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
     lwz r0, 0x68(r29)
     mr r28, r3
     lfd f2, lbl_807316C8@l(r31)
@@ -268,7 +268,7 @@ asm void gx_drawScreenQuad(void)
     lfd f1, 0x68(r1)
     fsubs f1, f1, f2
     fadds f1, f1, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
     lwz r0, 0x64(r29)
     mr r27, r3
     lfd f1, lbl_807316C8@l(r31)
@@ -278,7 +278,7 @@ asm void gx_drawScreenQuad(void)
     lfd f0, 0x60(r1)
     fsubs f0, f0, f1
     fadds f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
     lwz r0, 0x60(r29)
     mr r26, r3
     lfd f1, lbl_807316C8@l(r31)
@@ -288,7 +288,7 @@ asm void gx_drawScreenQuad(void)
     lfd f0, 0x68(r1)
     fsubs f0, f0, f1
     fadds f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
     mr r4, r26
     mr r5, r27
     mr r6, r28
@@ -558,7 +558,7 @@ asm void gx_drawScreenQuad(void)
     lfd f1, 0x60(r1)
     fsubs f1, f1, f2
     fadds f1, f1, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
     lwz r0, 0x68(r29)
     mr r26, r3
     lfd f2, lbl_807316C8@l(r31)
@@ -568,7 +568,7 @@ asm void gx_drawScreenQuad(void)
     lfd f1, 0x68(r1)
     fsubs f1, f1, f2
     fadds f1, f1, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
     lwz r0, 0x64(r29)
     mr r27, r3
     lfd f1, lbl_807316C8@l(r31)
@@ -578,7 +578,7 @@ asm void gx_drawScreenQuad(void)
     lfd f0, 0x60(r1)
     fsubs f0, f0, f1
     fadds f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
     lwz r0, 0x60(r29)
     mr r28, r3
     lfd f1, lbl_807316C8@l(r31)
@@ -588,7 +588,7 @@ asm void gx_drawScreenQuad(void)
     lfd f0, 0x68(r1)
     fsubs f0, f0, f1
     fadds f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
     mr r4, r28
     mr r5, r27
     mr r6, r26
@@ -4626,7 +4626,7 @@ asm void fn_80075DEC(void)
     lfd f1, 0x8(r1)
     fsubs f1, f1, f2
     fadds f1, f1, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
     lwz r0, 0x68(r31)
     mr r28, r3
     lfd f2, lbl_807316C8@l(r27)
@@ -4636,7 +4636,7 @@ asm void fn_80075DEC(void)
     lfd f1, 0x10(r1)
     fsubs f1, f1, f2
     fadds f1, f1, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
     lwz r0, 0x64(r31)
     mr r29, r3
     lfd f1, lbl_807316C8@l(r27)
@@ -4646,7 +4646,7 @@ asm void fn_80075DEC(void)
     lfd f0, 0x8(r1)
     fsubs f0, f0, f1
     fadds f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
     lwz r0, 0x60(r31)
     mr r30, r3
     lfd f1, lbl_807316C8@l(r27)
@@ -4656,7 +4656,7 @@ asm void fn_80075DEC(void)
     lfd f0, 0x10(r1)
     fsubs f0, f0, f1
     fadds f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
     mr r4, r30
     mr r5, r29
     mr r6, r28
@@ -4720,7 +4720,7 @@ asm void fn_80075F58(void)
     lfd f1, 0x8(r1)
     fsubs f1, f1, f2
     fadds f1, f1, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
     lwz r0, 0x68(r27)
     mr r29, r3
     lfd f2, lbl_807316C8@l(r28)
@@ -4730,7 +4730,7 @@ asm void fn_80075F58(void)
     lfd f1, 0x10(r1)
     fsubs f1, f1, f2
     fadds f1, f1, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
     lwz r0, 0x64(r27)
     mr r30, r3
     lfd f1, lbl_807316C8@l(r28)
@@ -4740,7 +4740,7 @@ asm void fn_80075F58(void)
     lfd f0, 0x8(r1)
     fsubs f0, f0, f1
     fadds f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
     lwz r0, 0x60(r27)
     mr r31, r3
     lfd f1, lbl_807316C8@l(r28)
@@ -4750,7 +4750,7 @@ asm void fn_80075F58(void)
     lfd f0, 0x10(r1)
     fsubs f0, f0, f1
     fadds f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
     mr r4, r31
     mr r5, r30
     mr r6, r29

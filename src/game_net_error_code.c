@@ -11,11 +11,11 @@ extern void _savegpr_22(void);
 extern void _savegpr_24(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_8008771C(void);
+extern void route_interpolatePath(void);
 extern void fn_80087994(void);
 extern void fn_80087BB4(void);
 extern void fn_80087E9C(void);
@@ -27,7 +27,7 @@ extern void ref_releaseHandle(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_80116FC0(void);
 extern void fn_80117228(void);
 extern void fn_801D082C(void);
@@ -654,7 +654,7 @@ lbl_fn_8051B7CC_000006E4:
     bl fn_80202118
     mr r31, r3
     mr r3, r29
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     addi r3, r31, 0x58
@@ -677,7 +677,7 @@ lbl_fn_8051B7CC_00000730:
     bl fn_80202118
     mr r31, r3
     mr r3, r29
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     addi r3, r31, 0x58
@@ -1156,7 +1156,7 @@ lbl_fn_8051B988_00000E34:
     add r7, r28, r0
     addi r8, r1, 0x8
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lwz r12, 0x19c4(r31)
     lis r30, lbl_8075BF40@ha
     addi r30, r30, lbl_8075BF40@l
@@ -1589,7 +1589,7 @@ lbl_fn_8051C3E0_000012B4:
     addi r5, r28, 0x4818
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_80887904
     mr r3, r29
     lfs f2, lbl_80887980
@@ -1598,7 +1598,7 @@ lbl_fn_8051C3E0_000012B4:
     addi r5, r28, 0x481c
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_80887904
     mr r3, r29
     lfs f2, lbl_80887980
@@ -1607,7 +1607,7 @@ lbl_fn_8051C3E0_000012B4:
     addi r5, r28, 0x4820
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_80887904
     mr r3, r29
     lfs f2, lbl_80887980
@@ -1616,7 +1616,7 @@ lbl_fn_8051C3E0_000012B4:
     addi r5, r28, 0x4824
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_80887970
     mr r3, r30
     lfs f2, lbl_80887974

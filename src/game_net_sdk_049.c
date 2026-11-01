@@ -15,7 +15,7 @@ extern void _savegpr_27(void);
 extern void fn_80608230(void);
 extern void fn_8060AED0(void);
 extern void fn_8060AFC0(void);
-extern void fn_80695D84(void);
+extern void runtime_clampDouble(void);
 extern void fn_80703F90(void);
 extern void fn_807046A0(void);
 extern void fn_80705450(void);
@@ -1915,7 +1915,7 @@ lbl_fn_80706E80_00001874:
 lbl_fn_80706E80_00001878:
     lfs f0, lbl_80889040
     fmuls f1, f0, f3
-    bl fn_80695D84
+    bl runtime_clampDouble
     li r0, 0x0
     srwi r4, r3, 16
     sth r4, 0x8(r1)
@@ -1966,7 +1966,7 @@ lbl_fn_80706E80_000018F0:
 lbl_fn_80706E80_00001938:
     lfs f0, lbl_80889040
     fmuls f1, f0, f31
-    bl fn_80695D84
+    bl runtime_clampDouble
     srwi r0, r3, 16
     sth r0, 0xce(r28)
     lwz r4, 0x0(r31)

@@ -24,10 +24,10 @@ extern void fn_800C31F4(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
 extern void fn_800CB5B4(void);
-extern void fn_800CB5C8(void);
+extern void morph_updateMesh(void);
 extern void fn_800CFA28(void);
 extern void atn_Task_setActive(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_800E0AA8(void);
 extern void fn_800EC204(void);
 extern void fn_800EFE3C(void);
@@ -1575,7 +1575,7 @@ asm void fn_803737C0(void)
     stfs f0, 0x100(r4)
     lwz r4, 0xb1c(r31)
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_80885708
     mr r4, r3
     mr r3, r29
@@ -1945,7 +1945,7 @@ lbl_fn_80373AE8_000018E0:
     stw r7, 0x70(r6)
     stw r0, 0x563c(r31)
     stw r9, 0x55ac(r31)
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, 0x55b4(r31)
     cmpwi r3, 0x0
     beq lbl_fn_80373AE8_00001960

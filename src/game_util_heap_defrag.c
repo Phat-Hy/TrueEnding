@@ -14,7 +14,7 @@ extern void fn_800A555C(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_800DD3FC(void);
 extern void fn_80117228(void);
 extern void fn_801F3FF8(void);
@@ -38,8 +38,8 @@ extern void fn_8044D500(void);
 extern void fn_8044D560(void);
 extern void fn_8044D678(void);
 extern void fn_8044D6AC(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void fn_804A39EC(void);
 extern void fn_804A3A68(void);
 extern void fn_804A3C24(void);
@@ -157,10 +157,10 @@ lbl_fn_80587B74_0000005C:
     b lbl_fn_80587B74_000000D0
 lbl_fn_80587B74_0000007C:
     addi r3, r3, 0x58
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r31, r3
     addi r3, r30, 0x58
-    bl fn_80470580
+    bl boss_getOffset54
     lwz r12, 0x0(r30)
     mr r4, r3
     mr r3, r30
@@ -381,7 +381,7 @@ lbl_fn_80587E40_0000037C:
     addi r5, r5, lbl_80761914@l
     addi r3, r5, 0x103
     addi r31, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     mr r3, r31
     addi r5, r1, 0x18
@@ -538,7 +538,7 @@ asm void fn_805880F4(void)
     stw r0, 0x38(r6)
     lwz r4, 0x5b74(r5)
     addi r24, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_80888114
     mr r4, r3
     mr r3, r24
@@ -572,7 +572,7 @@ lbl_fn_805880F4_0000062C:
     bl sprintf
     lwz r25, 0x5b74(r27)
     addi r3, r1, 0x50
-    bl fn_800DC6B4
+    bl str_findChar
     mr r5, r3
     mr r4, r25
     addi r3, r1, 0x28
@@ -752,7 +752,7 @@ lbl_fn_805883DC_000008D4:
     bl sprintf
     lwz r25, 0x5b70(r31)
     addi r3, r1, 0x30
-    bl fn_800DC6B4
+    bl str_findChar
     mr r5, r3
     mr r4, r25
     addi r3, r1, 0x8
@@ -1098,10 +1098,10 @@ asm void fn_80588908(void)
     mr r3, r31
     bl fn_8057F8FC
     addi r3, r31, 0x58
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r28, r3
     addi r3, r31, 0x58
-    bl fn_80470580
+    bl boss_getOffset54
     lwz r12, 0x0(r31)
     mr r4, r3
     mr r3, r31
@@ -1379,7 +1379,7 @@ lbl_fn_80588BE4_000011B0:
     addis r4, r31, 0x2
     addi r3, r1, 0x20
     lwz r30, 0x5b70(r4)
-    bl fn_800DC6B4
+    bl str_findChar
     mr r5, r3
     mr r4, r30
     addi r3, r1, 0x8

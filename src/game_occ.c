@@ -18,7 +18,7 @@ extern void fn_800BFB70(void);
 extern void fn_800C0FBC(void);
 extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800D6BE0(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_80478198(void);
 extern void __GXSetVtxDesc(void);
 extern void fn_80613BB0(void);
@@ -1448,7 +1448,7 @@ asm void fn_800D81CC(void)
     mr r3, r4
     mr r28, r5
     mr r29, r6
-    bl fn_800DC6B4
+    bl str_findChar
     stw r3, 0x0(r27)
     mr r31, r27
     li r30, 0x0
@@ -1456,7 +1456,7 @@ asm void fn_800D81CC(void)
     b lbl_fn_800D81CC_00001450
 lbl_fn_800D81CC_000013C0:
     lwz r3, 0x0(r28)
-    bl fn_800DC6B4
+    bl str_findChar
     stw r3, 0x8(r31)
     addi r30, r30, 0x1
     lfs f0, 0x4(r28)

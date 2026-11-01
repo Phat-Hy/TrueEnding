@@ -7,9 +7,9 @@ extern void DCZeroRange(void);
 extern void __files(void);
 extern void dtor_80013D60(void);
 extern void dtor_80084684(void);
-extern void fn_8000EB8C(void);
+extern void sys_copyString(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_8003E4A4(void);
 extern void fn_8004212C(void);
 extern void fn_80042218(void);
@@ -47,7 +47,7 @@ extern void atn_Arc_findFile(void);
 extern void atn_Arc_getFileEntry(void);
 extern void fn_8046FD2C(void);
 extern void fn_80470264(void);
-extern void fn_80470580(void);
+extern void boss_getOffset54(void);
 extern void fn_80473104(void);
 extern void atn_LoadHandle_getStatus(void);
 extern void fn_805F9EF0(void);
@@ -1052,7 +1052,7 @@ lbl_atn_Arc_decompressChunk_00000CD0:
     cmpwi r3, 0x3
     bne lbl_atn_Arc_decompressChunk_00000D14
     addi r3, r20, 0x10
-    bl fn_80470580
+    bl boss_getOffset54
     cmpwi r3, 0x0
     beq lbl_atn_Arc_decompressChunk_00000D14
     li r21, 0x1
@@ -1586,7 +1586,7 @@ asm void fn_8046CBC0(void)
     addi r8, r1, 0x8
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r3, r31
     bl fn_8006A9A4
     lwz r0, 0x10(r1)
@@ -1787,7 +1787,7 @@ lbl_fn_8046CC90_00001760:
     addi r31, r31, lbl_8075561C@l
     li r30, 0x0
     addi r4, r31, 0x2
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_8046CC90_00001788
     addi r30, r31, 0x8
@@ -1795,7 +1795,7 @@ lbl_fn_8046CC90_00001760:
 lbl_fn_8046CC90_00001788:
     addi r3, r1, 0x44
     addi r4, r31, 0x14
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_8046CC90_000017A4
     addi r30, r31, 0x1c
@@ -1803,7 +1803,7 @@ lbl_fn_8046CC90_00001788:
 lbl_fn_8046CC90_000017A4:
     addi r3, r1, 0x44
     addi r4, r31, 0x2a
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_8046CC90_000017C0
     addi r30, r31, 0x31
@@ -1811,7 +1811,7 @@ lbl_fn_8046CC90_000017A4:
 lbl_fn_8046CC90_000017C0:
     addi r3, r1, 0x44
     addi r4, r31, 0x3e
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_8046CC90_000017DC
     addi r30, r31, 0x42
@@ -1819,7 +1819,7 @@ lbl_fn_8046CC90_000017C0:
 lbl_fn_8046CC90_000017DC:
     addi r3, r1, 0x44
     addi r4, r31, 0x4c
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_8046CC90_000017F8
     addi r30, r31, 0x50
@@ -1827,7 +1827,7 @@ lbl_fn_8046CC90_000017DC:
 lbl_fn_8046CC90_000017F8:
     addi r3, r1, 0x44
     addi r4, r31, 0x5a
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_8046CC90_00001814
     addi r30, r31, 0x64
@@ -1835,12 +1835,12 @@ lbl_fn_8046CC90_000017F8:
 lbl_fn_8046CC90_00001814:
     addi r3, r1, 0x44
     addi r4, r31, 0x77
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     bne lbl_fn_8046CC90_0000183C
     addi r3, r1, 0x44
     addi r4, r31, 0x7c
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_8046CC90_0000184C
 lbl_fn_8046CC90_0000183C:
@@ -1851,7 +1851,7 @@ lbl_fn_8046CC90_0000183C:
 lbl_fn_8046CC90_0000184C:
     addi r3, r1, 0x44
     addi r4, r31, 0x90
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_8046CC90_00001868
     addi r30, r31, 0x99
@@ -1859,7 +1859,7 @@ lbl_fn_8046CC90_0000184C:
 lbl_fn_8046CC90_00001868:
     addi r3, r1, 0x44
     addi r4, r31, 0xa8
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_8046CC90_00001884
     addi r30, r31, 0xb0
@@ -1867,7 +1867,7 @@ lbl_fn_8046CC90_00001868:
 lbl_fn_8046CC90_00001884:
     addi r3, r1, 0x44
     addi r4, r31, 0xbe
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_8046CC90_000018A0
     addi r30, r31, 0xc2
@@ -1875,7 +1875,7 @@ lbl_fn_8046CC90_00001884:
 lbl_fn_8046CC90_000018A0:
     addi r3, r1, 0x44
     addi r4, r31, 0xd0
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_8046CC90_000018BC
     addi r30, r31, 0xd7
@@ -1883,7 +1883,7 @@ lbl_fn_8046CC90_000018A0:
 lbl_fn_8046CC90_000018BC:
     addi r3, r1, 0x44
     addi r4, r31, 0xe4
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_8046CC90_000018D8
     addi r30, r31, 0xe9
@@ -1891,12 +1891,12 @@ lbl_fn_8046CC90_000018BC:
 lbl_fn_8046CC90_000018D8:
     addi r3, r1, 0x44
     addi r4, r31, 0xf4
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     bne lbl_fn_8046CC90_00001900
     addi r3, r1, 0x44
     addi r4, r31, 0xf8
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_8046CC90_00001910
 lbl_fn_8046CC90_00001900:
@@ -1907,7 +1907,7 @@ lbl_fn_8046CC90_00001900:
 lbl_fn_8046CC90_00001910:
     addi r3, r1, 0x44
     addi r4, r31, 0x106
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_8046CC90_0000192C
     addi r30, r31, 0x10a
@@ -1915,7 +1915,7 @@ lbl_fn_8046CC90_00001910:
 lbl_fn_8046CC90_0000192C:
     addi r3, r1, 0x44
     addi r4, r31, 0x11a
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_8046CC90_00001948
     addi r30, r31, 0x11e
@@ -1923,7 +1923,7 @@ lbl_fn_8046CC90_0000192C:
 lbl_fn_8046CC90_00001948:
     addi r3, r1, 0x44
     addi r4, r31, 0x13b
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_8046CC90_00001960
     addi r30, r31, 0x12c

@@ -5,7 +5,7 @@
 extern void dtor_80013D60(void);
 extern void fn_8000D760(void);
 extern void fn_8000E18C(void);
-extern void fn_8000EB8C(void);
+extern void sys_copyString(void);
 extern void fn_8000ECA8(void);
 extern void fn_8003E4A4(void);
 extern void fn_8004212C(void);
@@ -217,7 +217,7 @@ lbl_fn_803C606C_0000014C:
     bl fn_8003E4A4
     addi r3, r1, 0x14
     addi r4, r25, 0xfe
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_803C606C_00000184
     addi r3, r1, 0x14
@@ -628,7 +628,7 @@ lbl_fn_803C65EC_000006CC:
     bl fn_8003E4A4
     addi r3, r1, 0x14
     addi r4, r30, 0xfe
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_803C65EC_00000704
     addi r3, r1, 0x14
@@ -1006,7 +1006,7 @@ lbl_fn_803C6AE8_00000BC8:
     bl fn_8003E4A4
     addi r3, r1, 0x14
     addi r4, r30, 0xfe
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_803C6AE8_00000C00
     addi r3, r1, 0x14
@@ -1384,7 +1384,7 @@ lbl_fn_803C6FE4_000010C4:
     bl fn_8003E4A4
     addi r3, r1, 0x14
     addi r4, r30, 0xfe
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_803C6FE4_000010FC
     addi r3, r1, 0x14
@@ -1766,7 +1766,7 @@ lbl_fn_803C74E0_000015D0:
     bl fn_8003E4A4
     addi r3, r1, 0x24
     addi r4, r31, 0xfe
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_803C74E0_00001608
     addi r3, r1, 0x24

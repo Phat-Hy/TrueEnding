@@ -16,7 +16,7 @@ extern void gx_setRenderStateParam(void);
 extern void fn_80076A28(void);
 extern void fn_80079994(void);
 extern void mem_realloc(void);
-extern void fn_8008771C(void);
+extern void route_interpolatePath(void);
 extern void fn_8008937C(void);
 extern void fn_800902C0(void);
 extern void fn_80094D88(void);
@@ -343,7 +343,7 @@ lbl_font_loadGlyphMetrics_000001D8:
     la r5, lbl_8087DC04
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_80883120
     mr r3, r30
     lfs f2, lbl_80883124
@@ -352,7 +352,7 @@ lbl_font_loadGlyphMetrics_000001D8:
     la r5, lbl_8087DC08
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
 lbl_font_loadGlyphMetrics_00000328:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)

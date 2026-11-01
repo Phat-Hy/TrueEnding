@@ -12,7 +12,7 @@ extern void fn_80018608(void);
 extern void fn_8003E918(void);
 extern void fn_800A55D4(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB5C8(void);
+extern void morph_updateMesh(void);
 extern void fn_8012D180(void);
 extern void fn_8014DEE4(void);
 extern void fn_80160170(void);
@@ -1124,7 +1124,7 @@ lbl_fn_805AA4E8_00000EB0:
     addi r3, r31, 0x16c0
     li r4, 0xf
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     b lbl_fn_805AA4E8_00000EF8
 lbl_fn_805AA4E8_00000ECC:
     lwz r0, 0xa78(r3)
@@ -1138,7 +1138,7 @@ lbl_fn_805AA4E8_00000EE0:
     addi r3, r31, 0x16c0
     li r4, 0xf
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
 lbl_fn_805AA4E8_00000EF8:
     lwz r3, lbl_8087F8A0
     lwz r30, 0x48(r3)
@@ -1269,7 +1269,7 @@ lbl_fn_805AA738_000010B4:
     addi r3, r30, 0x16c0
     li r4, 0xf
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lfs f1, lbl_808882F4
     li r31, 0x0
     li r0, 0x2
@@ -1290,7 +1290,7 @@ lbl_fn_805AA738_000010B4:
     stw r0, 0x15f0(r30)
     stw r31, 0x15f4(r30)
     stw r31, 0x15f8(r30)
-    bl fn_800CB5C8
+    bl morph_updateMesh
     stw r31, 0x15cc(r30)
     lwz r3, 0x15bc(r30)
     stw r31, 0x15d0(r30)

@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void __register_global_object(void);
 extern void dtor_80084684(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_8004FF58(void);
 extern void mem_alloc(void);
 extern void atn_Task_constructor(void);
@@ -722,7 +722,7 @@ lbl_fn_80201794_0000098C:
     addi r8, r1, 0x14
     add r7, r7, r0
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lwz r4, 0x0(r25)
     addi r3, r1, 0x30
     lwz r0, 0x8(r25)
@@ -769,7 +769,7 @@ lbl_fn_80201794_00000A3C:
     addi r8, r1, 0xc
     add r7, r7, r0
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lwz r4, 0xc(r25)
     li r30, 0x0
     addi r3, r1, 0x24

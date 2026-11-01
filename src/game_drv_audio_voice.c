@@ -23,7 +23,7 @@ extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_80116FC0(void);
 extern void actor_setState(void);
 extern void fn_801F4C14(void);
@@ -1627,7 +1627,7 @@ lbl_fn_805BA16C_00001474:
     mr r27, r3
     addi r3, r28, 0x1e
     addi r26, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     mr r3, r26
     mr r5, r27
@@ -1639,7 +1639,7 @@ lbl_fn_805BA16C_00001474:
     mr r27, r3
     addi r3, r28, 0x2f
     addi r26, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     mr r3, r26
     mr r5, r27

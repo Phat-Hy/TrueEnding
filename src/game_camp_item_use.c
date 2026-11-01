@@ -8,7 +8,7 @@ extern void _savegpr_16(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void atn_LH_Binary_destructor(void);
 extern void fn_8004318C(void);
 extern void fn_800431F4(void);
@@ -498,7 +498,7 @@ lbl_fn_803BEC40_0000053C:
     addi r8, r1, 0x50
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lwz r0, 0xb0(r1)
     srwi. r0, r0, 31
     bne lbl_fn_803BEC40_000005E4
@@ -549,7 +549,7 @@ lbl_fn_803BEC40_00000650:
     add r7, r21, r0
     addi r8, r1, 0x48
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lwz r0, 0xb0(r1)
     srwi. r0, r0, 31
     bne lbl_fn_803BEC40_00000694
@@ -613,7 +613,7 @@ lbl_fn_803BEC40_0000071C:
     addi r8, r1, 0x40
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     addi r3, r1, 0xa4
     addi r4, r1, 0x80
     bl fn_8006B2D8
@@ -642,7 +642,7 @@ lbl_fn_803BEC40_000007A0:
     add r7, r26, r0
     addi r8, r1, 0x38
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     addi r0, r21, 0x1
     stw r0, 0x58(r1)
     addi r3, r1, 0x74
@@ -673,7 +673,7 @@ lbl_fn_803BEC40_00000820:
     add r7, r6, r0
     addi r8, r1, 0x30
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lwz r0, 0x74(r1)
     srwi. r0, r0, 31
     beq lbl_fn_803BEC40_0000084C
@@ -699,7 +699,7 @@ lbl_fn_803BEC40_00000868:
     add r7, r25, r0
     addi r8, r1, 0x28
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lwz r0, 0xa4(r1)
     srwi. r0, r0, 31
     bne lbl_fn_803BEC40_000008A8
@@ -757,7 +757,7 @@ lbl_fn_803BEC40_0000090C:
     add r7, r7, r16
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lis r3, lbl_807500DC@ha
     stw r21, 0x68(r1)
     addi r3, r3, lbl_807500DC@l
@@ -779,7 +779,7 @@ lbl_fn_803BEC40_0000090C:
     addi r8, r1, 0x18
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r3, r22
     mr r4, r24
     bl fn_8006AD24
@@ -824,7 +824,7 @@ lbl_fn_803BEC40_000009F4:
     add r7, r7, r16
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lis r3, lbl_807500DC@ha
     stw r21, 0x5c(r1)
     addi r3, r3, lbl_807500DC@l
@@ -846,7 +846,7 @@ lbl_fn_803BEC40_000009F4:
     addi r8, r1, 0x8
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r3, r22
     mr r4, r24
     bl fn_8006AD24

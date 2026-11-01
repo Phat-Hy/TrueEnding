@@ -17,7 +17,7 @@ extern void fn_8005BBF8(void);
 extern void fn_8005BCE8(void);
 extern void mem_alloc(void);
 extern void route_findNextWaypoint(void);
-extern void fn_8008771C(void);
+extern void route_interpolatePath(void);
 extern void fn_80087994(void);
 extern void fn_80087E9C(void);
 extern void fn_80088724(void);
@@ -43,8 +43,8 @@ extern void fn_803ED774(void);
 extern void fn_803F11F8(void);
 extern void fn_8041B4D8(void);
 extern void fn_8041B724(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSVECNormalize(void);
@@ -54,7 +54,7 @@ extern void rand(void);
 extern void strcmp(void);
 extern void atoi(void);
 extern void fn_8068A850(void);
-extern void fn_80695AD0(void);
+extern void vec3_isNonZero(void);
 extern int sprintf(char* str, const char* format, ...);
 extern char* strcpy(char* dest, const char* src);
 
@@ -207,7 +207,7 @@ lbl_fn_80419AFC_0000012C:
     stw r5, 0x8(r1)
     stw r4, 0xc(r1)
     stw r0, 0x10(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80419AFC_0000016C
     lwz r3, 0x4c4(r30)
@@ -257,10 +257,10 @@ asm void fn_80419C00(void)
     bl _savegpr_22
     mr r23, r3
     addi r3, r3, 0x60
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r25, r3
     addi r3, r23, 0x60
-    bl fn_80470580
+    bl boss_getOffset54
     lis r4, lbl_807774D8@ha
     li r27, 0x0
     addi r4, r4, lbl_807774D8@l
@@ -915,7 +915,7 @@ lbl_fn_8041A488_00000B98:
     stw r5, 0x44(r1)
     stw r4, 0x48(r1)
     stw r0, 0x4c(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_8041A488_00000BD0
     lwz r3, 0x4c4(r31)
@@ -1096,7 +1096,7 @@ lbl_fn_8041A488_00000E28:
     stw r5, 0x38(r1)
     stw r4, 0x3c(r1)
     stw r0, 0x40(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_8041A488_00000E60
     lwz r3, 0x4c4(r31)
@@ -1818,7 +1818,7 @@ lbl_fn_8041B094_00001790:
     lfs f3, lbl_8088651C
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
 lbl_fn_8041B094_0000180C:
     addi r29, r29, 0x1
     addi r27, r27, 0x28

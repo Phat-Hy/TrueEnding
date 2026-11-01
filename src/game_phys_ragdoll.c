@@ -5,7 +5,7 @@
 extern void _restgpr_26(void);
 extern void _savegpr_26(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_800C344C(void);
+extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800F8574(void);
@@ -955,7 +955,7 @@ lbl_fn_80110858_00000CCC:
     addi r5, r1, 0x264
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x20
     li r4, -0x1
     bl ref_releaseHandle
@@ -1284,7 +1284,7 @@ lbl_fn_80110858_000011A0:
     addi r5, r1, 0x264
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x1c
     li r4, -0x1
     bl ref_releaseHandle
@@ -1299,7 +1299,7 @@ lbl_fn_80110858_000011EC:
     addi r5, r1, 0x264
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x18
     li r4, -0x1
     bl ref_releaseHandle
@@ -1315,7 +1315,7 @@ lbl_fn_80110858_00001224:
     addi r5, r1, 0x264
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x14
     li r4, -0x1
     bl ref_releaseHandle
@@ -1329,7 +1329,7 @@ lbl_fn_80110858_00001260:
     addi r5, r1, 0x264
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle

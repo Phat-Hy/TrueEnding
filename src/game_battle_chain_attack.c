@@ -20,7 +20,7 @@ extern void fn_800920B8(void);
 extern void fn_800928B0(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void str_skipWhitespace(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_800F29D0(void);
 extern void fn_8015495C(void);
 extern void fn_8016D3F8(void);
@@ -1047,15 +1047,15 @@ lbl_fn_803FDFC0_00000D44:
     bne lbl_fn_803FDFC0_00000DA0
     addi r3, r1, 0x8
     bl talk_formatQuotedString
-    bl fn_800DC6B4
+    bl str_findChar
     stw r3, 0x0(r28)
     addi r3, r1, 0x8
     bl talk_formatQuotedString
-    bl fn_800DC6B4
+    bl str_findChar
     stw r3, 0x4(r28)
     addi r3, r1, 0x8
     bl talk_formatQuotedString
-    bl fn_800DC6B4
+    bl str_findChar
     stw r3, 0x8(r28)
     b lbl_fn_803FDFC0_00000F28
 lbl_fn_803FDFC0_00000DA0:

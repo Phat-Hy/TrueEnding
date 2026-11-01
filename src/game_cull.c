@@ -46,7 +46,7 @@ extern void abort(void);
 extern void runtime_registerStaticObject(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
-extern void fn_80695D84(void);
+extern void runtime_clampDouble(void);
 
 /* External data declarations */
 extern u8 lbl_80734758[];
@@ -2229,7 +2229,7 @@ lbl_fn_800D9960_00001BF8:
     b lbl_fn_800D9960_00001C14
 lbl_fn_800D9960_00001C0C:
     fmadds f1, f30, f0, f31
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800D9960_00001C14:
     mr r17, r3
 lbl_fn_800D9960_00001C18:
@@ -2247,7 +2247,7 @@ lbl_fn_800D9960_00001C30:
     b lbl_fn_800D9960_00001C4C
 lbl_fn_800D9960_00001C44:
     fmadds f1, f30, f0, f31
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800D9960_00001C4C:
     mr r16, r3
 lbl_fn_800D9960_00001C50:
@@ -2265,7 +2265,7 @@ lbl_fn_800D9960_00001C68:
     b lbl_fn_800D9960_00001C84
 lbl_fn_800D9960_00001C7C:
     fmadds f1, f30, f0, f31
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800D9960_00001C84:
     mr r15, r3
 lbl_fn_800D9960_00001C88:
@@ -2283,7 +2283,7 @@ lbl_fn_800D9960_00001CA0:
     b lbl_fn_800D9960_00001CBC
 lbl_fn_800D9960_00001CB4:
     fmadds f1, f30, f0, f31
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800D9960_00001CBC:
     lwz r0, 0x4c(r1)
     slwi r4, r3, 24
@@ -2328,7 +2328,7 @@ lbl_fn_800D9960_00001D40:
     b lbl_fn_800D9960_00001D5C
 lbl_fn_800D9960_00001D54:
     fmadds f1, f30, f0, f31
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800D9960_00001D5C:
     mr r17, r3
 lbl_fn_800D9960_00001D60:
@@ -2346,7 +2346,7 @@ lbl_fn_800D9960_00001D78:
     b lbl_fn_800D9960_00001D94
 lbl_fn_800D9960_00001D8C:
     fmadds f1, f30, f0, f31
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800D9960_00001D94:
     mr r16, r3
 lbl_fn_800D9960_00001D98:
@@ -2364,7 +2364,7 @@ lbl_fn_800D9960_00001DB0:
     b lbl_fn_800D9960_00001DCC
 lbl_fn_800D9960_00001DC4:
     fmadds f1, f30, f0, f31
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800D9960_00001DCC:
     mr r15, r3
 lbl_fn_800D9960_00001DD0:
@@ -2382,7 +2382,7 @@ lbl_fn_800D9960_00001DE8:
     b lbl_fn_800D9960_00001E04
 lbl_fn_800D9960_00001DFC:
     fmadds f1, f30, f0, f31
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800D9960_00001E04:
     lwz r0, 0x4c(r1)
     slwi r4, r3, 24
@@ -2427,7 +2427,7 @@ lbl_fn_800D9960_00001E88:
     b lbl_fn_800D9960_00001EA4
 lbl_fn_800D9960_00001E9C:
     fmadds f1, f30, f0, f31
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800D9960_00001EA4:
     mr r17, r3
 lbl_fn_800D9960_00001EA8:
@@ -2445,7 +2445,7 @@ lbl_fn_800D9960_00001EC0:
     b lbl_fn_800D9960_00001EDC
 lbl_fn_800D9960_00001ED4:
     fmadds f1, f30, f0, f31
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800D9960_00001EDC:
     mr r16, r3
 lbl_fn_800D9960_00001EE0:
@@ -2463,7 +2463,7 @@ lbl_fn_800D9960_00001EF8:
     b lbl_fn_800D9960_00001F14
 lbl_fn_800D9960_00001F0C:
     fmadds f1, f30, f0, f31
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800D9960_00001F14:
     mr r15, r3
 lbl_fn_800D9960_00001F18:
@@ -2481,7 +2481,7 @@ lbl_fn_800D9960_00001F30:
     b lbl_fn_800D9960_00001F4C
 lbl_fn_800D9960_00001F44:
     fmadds f1, f30, f0, f31
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800D9960_00001F4C:
     lwz r0, 0x4c(r1)
     slwi r4, r3, 24
@@ -2526,7 +2526,7 @@ lbl_fn_800D9960_00001FD0:
     b lbl_fn_800D9960_00001FEC
 lbl_fn_800D9960_00001FE4:
     fmadds f1, f30, f0, f31
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800D9960_00001FEC:
     mr r17, r3
 lbl_fn_800D9960_00001FF0:
@@ -2544,7 +2544,7 @@ lbl_fn_800D9960_00002008:
     b lbl_fn_800D9960_00002024
 lbl_fn_800D9960_0000201C:
     fmadds f1, f30, f0, f31
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800D9960_00002024:
     mr r16, r3
 lbl_fn_800D9960_00002028:
@@ -2562,7 +2562,7 @@ lbl_fn_800D9960_00002040:
     b lbl_fn_800D9960_0000205C
 lbl_fn_800D9960_00002054:
     fmadds f1, f30, f0, f31
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800D9960_0000205C:
     mr r15, r3
 lbl_fn_800D9960_00002060:
@@ -2580,7 +2580,7 @@ lbl_fn_800D9960_00002078:
     b lbl_fn_800D9960_00002094
 lbl_fn_800D9960_0000208C:
     fmadds f1, f30, f0, f31
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800D9960_00002094:
     lwz r0, 0x4c(r1)
     slwi r4, r3, 24
@@ -2627,7 +2627,7 @@ lbl_fn_800D9960_0000211C:
     b lbl_fn_800D9960_00002138
 lbl_fn_800D9960_00002130:
     fmadds f1, f30, f0, f31
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800D9960_00002138:
     mr r15, r3
 lbl_fn_800D9960_0000213C:
@@ -2645,7 +2645,7 @@ lbl_fn_800D9960_00002154:
     b lbl_fn_800D9960_00002170
 lbl_fn_800D9960_00002168:
     fmadds f1, f30, f0, f31
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800D9960_00002170:
     mr r16, r3
 lbl_fn_800D9960_00002174:
@@ -2663,7 +2663,7 @@ lbl_fn_800D9960_0000218C:
     b lbl_fn_800D9960_000021A8
 lbl_fn_800D9960_000021A0:
     fmadds f1, f30, f0, f31
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800D9960_000021A8:
     mr r17, r3
 lbl_fn_800D9960_000021AC:
@@ -2681,7 +2681,7 @@ lbl_fn_800D9960_000021C4:
     b lbl_fn_800D9960_000021E0
 lbl_fn_800D9960_000021D8:
     fmadds f1, f30, f0, f31
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800D9960_000021E0:
     lwz r0, 0x4c(r1)
     slwi r4, r3, 24

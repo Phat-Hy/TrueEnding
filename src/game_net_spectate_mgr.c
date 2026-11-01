@@ -24,7 +24,7 @@ extern void fn_80076FF8(void);
 extern void fn_80079044(void);
 extern void mem_alloc(void);
 extern void route_findNextWaypoint(void);
-extern void fn_8008771C(void);
+extern void route_interpolatePath(void);
 extern void fn_80087858(void);
 extern void fn_80087994(void);
 extern void fn_80087E9C(void);
@@ -85,7 +85,7 @@ extern void spectateView_renderInterface(void);
 extern void PSVECNormalize(void);
 extern void fn_806163C0(void);
 extern void fn_806163E0(void);
-extern void fn_80695D84(void);
+extern void runtime_clampDouble(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
 
@@ -575,7 +575,7 @@ lbl_fn_805319C8_00000584:
 lbl_fn_805319C8_00000588:
     lfs f0, lbl_80887B74
     fmuls f1, f0, f2
-    bl fn_80695D84
+    bl runtime_clampDouble
     lwz r4, lbl_8087EEB0
     li r0, 0x13
     lis r5, lbl_8075D450@ha
@@ -2383,7 +2383,7 @@ lbl_spectateManager_update_00001FC8:
     addi r5, r30, 0x430
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_80887BB4
     mr r3, r29
     lfs f2, lbl_80887BE8
@@ -2392,7 +2392,7 @@ lbl_spectateManager_update_00001FC8:
     addi r5, r30, 0x344
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     li r31, 0x0
     li r26, 0x0
     lis r29, 0x1062

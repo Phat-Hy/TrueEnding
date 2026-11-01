@@ -30,7 +30,7 @@ extern void PSVECNormalize(void);
 extern void PSVECMag(void);
 extern void std_atan2(void);
 extern void runtime_registerStaticObject(void);
-extern void fn_80695AD0(void);
+extern void vec3_isNonZero(void);
 
 /* External data declarations */
 extern u8 lbl_80746EE0[];
@@ -193,7 +193,7 @@ lbl_fn_802CE638_0000019C:
     stw r5, 0x60(r1)
     stw r4, 0x64(r1)
     stw r0, 0x68(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_802CE638_0000024C
     lwz r3, 0x121c(r31)
@@ -321,7 +321,7 @@ lbl_fn_802CE808_00000374:
     stw r5, 0x8(r1)
     stw r4, 0xc(r1)
     stw r0, 0x10(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_802CE808_000003B0
     lwz r3, lbl_8087F3C0

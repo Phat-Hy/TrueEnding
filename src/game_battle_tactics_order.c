@@ -18,20 +18,20 @@ extern void mem_free(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void route_findNextWaypoint(void);
-extern void fn_8008771C(void);
+extern void route_interpolatePath(void);
 extern void fn_80087E9C(void);
 extern void fn_8008937C(void);
 extern void fn_800928B0(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800C31F4(void);
-extern void fn_800C344C(void);
+extern void skin_applyWeights(void);
 extern void fn_800CB360(void);
 extern void fn_800CB36C(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
 extern void fn_800CB480(void);
 extern void fn_800CB518(void);
-extern void fn_800CB5C8(void);
+extern void morph_updateMesh(void);
 extern void fn_800CB688(void);
 extern void fn_800CB6B0(void);
 extern void atn_Task_constructor(void);
@@ -1366,7 +1366,7 @@ lbl_fn_803F0764_00000FD0:
     slwi r0, r0, 5
     lfs f1, 0x1c(r23)
     add r4, r4, r0
-    bl fn_800C344C
+    bl skin_applyWeights
     lwz r3, lbl_8087EFE8
     lwz r0, 0x164(r1)
     stw r0, 0x34d0(r3)
@@ -1675,7 +1675,7 @@ lbl_fn_803F10AC_00001468:
     li r4, 0x0
     li r5, 0x0
     add r3, r0, r30
-    bl fn_800CB5C8
+    bl morph_updateMesh
     addi r30, r30, 0x4
     addi r29, r29, 0x1
 lbl_fn_803F10AC_00001484:
@@ -1707,7 +1707,7 @@ lbl_fn_803F10AC_000014D4:
     li r4, 0xf
     li r5, 0x0
     add r3, r0, r30
-    bl fn_800CB5C8
+    bl morph_updateMesh
     addi r30, r30, 0x4
     addi r29, r29, 0x1
 lbl_fn_803F10AC_000014F0:
@@ -1802,7 +1802,7 @@ lbl_fn_803F11F8_00001594:
     addi r5, r29, 0x1c
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     addi r28, r28, 0x28
     addi r26, r26, 0x1
 lbl_fn_803F11F8_00001644:
@@ -2146,7 +2146,7 @@ lbl_fn_803F1508_00001ABC:
     addi r3, r22, 0xc
     li r4, 0xf
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
 lbl_fn_803F1508_00001AE0:
     addi r22, r22, 0x10
 lbl_fn_803F1508_00001AE4:
@@ -2241,7 +2241,7 @@ lbl_fn_803F1508_00001C28:
     addi r5, r1, 0x20
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x10
     addi r4, r1, 0xc
     bl fn_800CB440

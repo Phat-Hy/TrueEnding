@@ -7,7 +7,7 @@ extern void _restgpr_14(void);
 extern void _savegpr_14(void);
 extern void dtor_80084684(void);
 extern void mem_free(void);
-extern void fn_800C344C(void);
+extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void fn_800EFDA0(void);
 extern void fn_800EFE3C(void);
@@ -1019,7 +1019,7 @@ lbl_fn_800F8C6C_00000DF0:
     addi r5, r1, 0x198
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x2c
     li r4, -0x1
     bl ref_releaseHandle
@@ -1094,7 +1094,7 @@ lbl_fn_800F8C6C_00000F10:
     addi r5, r1, 0x198
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x28
     li r4, -0x1
     bl ref_releaseHandle
@@ -1216,7 +1216,7 @@ lbl_fn_800F8C6C_000010C0:
     addi r3, r1, 0x24
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x24
     li r4, -0x1
     bl ref_releaseHandle

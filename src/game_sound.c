@@ -10,7 +10,7 @@ extern void _restgpr_26(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_8003E120(void);
 extern void item_useConsumable(void);
 extern void talk_parseQuotedString(void);
@@ -50,7 +50,7 @@ extern void fn_800CFDA0(void);
 extern void fn_800D0AB0(void);
 extern void fn_800D19FC(void);
 extern void fn_800DC12C(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_800DCA6C(void);
 extern void fn_8046DC5C(void);
 extern void fn_8046DD20(void);
@@ -1258,7 +1258,7 @@ lbl_fn_80046EE0_00000D30:
     add r7, r28, r0
     addi r8, r1, 0x38
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     li r3, 0x0
     bl fn_80607900
     bl fn_80607D70
@@ -1284,7 +1284,7 @@ lbl_fn_80046EE0_00000D30:
     addi r8, r1, 0x30
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r3, r26
     bl fn_8006A9A4
     mr r4, r26
@@ -1328,7 +1328,7 @@ lbl_fn_80046EE0_00000E48:
     addi r3, r1, 0x7c
     addi r8, r1, 0x28
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_80046EE0_00000E64:
     lwz r0, 0x64(r1)
     srwi. r0, r0, 31
@@ -1380,7 +1380,7 @@ lbl_fn_80046EE0_00000EFC:
     addi r3, r1, 0x7c
     addi r8, r1, 0x20
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_80046EE0_00000F18:
     lwz r0, 0x58(r1)
     srwi. r0, r0, 31
@@ -1440,7 +1440,7 @@ lbl_fn_80046EE0_00000FC8:
     addi r3, r1, 0x7c
     addi r8, r1, 0x18
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_80046EE0_00000FE4:
     lwz r0, 0x4c(r1)
     srwi. r0, r0, 31
@@ -1495,7 +1495,7 @@ lbl_fn_80046EE0_0000105C:
     lwz r0, 0x80(r1)
     li r5, 0x0
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_80046EE0_000010A4:
     lis r3, lbl_80730F54@ha
     li r0, 0x0
@@ -1519,7 +1519,7 @@ lbl_fn_80046EE0_000010A4:
     addi r8, r1, 0x8
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r27
     addi r3, r1, 0x70
     bl fn_8006AD24
@@ -2691,7 +2691,7 @@ lbl_fn_8004829C_000020DC:
     cmpwi r0, 0x0
     beq lbl_fn_8004829C_00002178
     mr r3, r23
-    bl fn_800DC6B4
+    bl str_findChar
     lwz r4, 0x8d4(r28)
     addi r5, r28, 0x8d4
     b lbl_fn_8004829C_00002134
@@ -2798,7 +2798,7 @@ lbl_fn_8004829C_00002250:
     cmpwi r0, 0x0
     beq lbl_fn_8004829C_000022EC
     mr r3, r21
-    bl fn_800DC6B4
+    bl str_findChar
     lwz r4, 0x8d4(r28)
     addi r5, r28, 0x8d4
     b lbl_fn_8004829C_000022A8
@@ -3213,7 +3213,7 @@ lbl_fn_800489F4_0000284C:
     cmpwi r0, 0x0
     beq lbl_fn_800489F4_000028CC
     mr r3, r30
-    bl fn_800DC6B4
+    bl str_findChar
     lwz r4, 0x8d4(r29)
     addi r5, r29, 0x8d4
     b lbl_fn_800489F4_00002888
@@ -3663,7 +3663,7 @@ lbl_fn_80048F8C_00002EAC:
     cmpwi r0, 0x0
     beq lbl_fn_80048F8C_00002F30
     mr r3, r31
-    bl fn_800DC6B4
+    bl str_findChar
     lwz r4, 0x8d4(r29)
     addi r5, r29, 0x8d4
     b lbl_fn_80048F8C_00002EEC
@@ -3716,7 +3716,7 @@ lbl_fn_80048F8C_00002F50:
     cmpwi r0, 0x0
     beq lbl_fn_80048F8C_00002FE0
     mr r3, r31
-    bl fn_800DC6B4
+    bl str_findChar
     lwz r4, 0x8d4(r30)
     addi r5, r30, 0x8d4
     b lbl_fn_80048F8C_00002F9C
@@ -3813,7 +3813,7 @@ lbl_fn_80049268_00003094:
     cmpwi r0, 0x0
     beq lbl_fn_80049268_00003114
     mr r3, r4
-    bl fn_800DC6B4
+    bl str_findChar
     lwz r4, 0x8d4(r31)
     addi r5, r31, 0x8d4
     b lbl_fn_80049268_000030D0
@@ -3915,7 +3915,7 @@ lbl_fn_8004937C_000031DC:
     cmpwi r0, 0x0
     beq lbl_fn_8004937C_0000325C
     mr r3, r28
-    bl fn_800DC6B4
+    bl str_findChar
     lwz r4, 0x8d4(r31)
     addi r5, r31, 0x8d4
     b lbl_fn_8004937C_00003218
@@ -4149,7 +4149,7 @@ lbl_fn_800496C0_000034FC:
     cmpwi r0, 0x0
     beq lbl_fn_800496C0_0000357C
     mr r3, r27
-    bl fn_800DC6B4
+    bl str_findChar
     lwz r4, 0x8d4(r31)
     addi r5, r31, 0x8d4
     b lbl_fn_800496C0_00003538
@@ -4511,7 +4511,7 @@ asm void fn_80049B74(void)
     cmpwi r0, 0x0
     beq lbl_fn_80049B74_00003A0C
     mr r3, r4
-    bl fn_800DC6B4
+    bl str_findChar
     lwz r4, 0x8d4(r31)
     addi r5, r31, 0x8d4
     b lbl_fn_80049B74_000039C8
@@ -4575,7 +4575,7 @@ asm void fn_80049C3C(void)
     cmpwi r0, 0x0
     beq lbl_fn_80049C3C_00003AC8
     mr r3, r4
-    bl fn_800DC6B4
+    bl str_findChar
     lwz r4, 0x8d4(r31)
     addi r5, r31, 0x8d4
     b lbl_fn_80049C3C_00003A90
@@ -4678,7 +4678,7 @@ asm void fn_80049D74(void)
     cmpwi r0, 0x0
     beq lbl_fn_80049D74_00003C0C
     mr r3, r4
-    bl fn_800DC6B4
+    bl str_findChar
     lwz r4, 0x8d4(r31)
     addi r5, r31, 0x8d4
     b lbl_fn_80049D74_00003BC8
@@ -5259,7 +5259,7 @@ lbl_fn_8004A3FC_0000433C:
     bl fn_800DC12C
     mr r26, r3
     addi r3, r1, 0x30
-    bl fn_800DC6B4
+    bl str_findChar
     stw r3, 0x10(r1)
     addi r3, r27, 0x8d0
     addi r4, r1, 0x10

@@ -11,7 +11,7 @@ extern void fn_8006A250(void);
 extern void fn_80079044(void);
 extern void mem_alloc(void);
 extern void route_findNextWaypoint(void);
-extern void fn_8008771C(void);
+extern void route_interpolatePath(void);
 extern void fn_80087994(void);
 extern void fn_8008937C(void);
 extern void fn_800C16C0(void);
@@ -2752,7 +2752,7 @@ lbl_fn_8047CF7C_000022C8:
     addi r5, r31, 0x2410
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_80886F8C
     mr r3, r26
     lfs f2, lbl_80886F90
@@ -2761,7 +2761,7 @@ lbl_fn_8047CF7C_000022C8:
     addi r5, r31, 0x2414
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_80886F8C
     mr r3, r26
     lfs f2, lbl_80886F90
@@ -2770,7 +2770,7 @@ lbl_fn_8047CF7C_000022C8:
     addi r5, r31, 0x2418
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_80886F8C
     mr r3, r27
     lfs f2, lbl_80886FB4
@@ -2779,7 +2779,7 @@ lbl_fn_8047CF7C_000022C8:
     addi r5, r31, 0x5c
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_80886F8C
     mr r3, r27
     lfs f2, lbl_80886FB4
@@ -2788,7 +2788,7 @@ lbl_fn_8047CF7C_000022C8:
     addi r5, r31, 0x60
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_80886F90
     mr r3, r27
     lfs f2, lbl_80886FD0
@@ -2797,7 +2797,7 @@ lbl_fn_8047CF7C_000022C8:
     addi r5, r31, 0x1a58
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     addi r3, r31, 0x1eb8
     addi r4, r29, 0x12c
     bl fn_800C1814

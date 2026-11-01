@@ -16,7 +16,7 @@ extern void fn_800A555C(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_setActive(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_800DD3FC(void);
 extern void fn_80117228(void);
 extern void fn_801F3FF8(void);
@@ -425,7 +425,7 @@ asm void fn_804ADB60(void)
     bl sprintf
     lwz r31, 0x60(r31)
     addi r3, r1, 0x48
-    bl fn_800DC6B4
+    bl str_findChar
     mr r5, r3
     mr r4, r31
     addi r3, r1, 0x1c
@@ -453,7 +453,7 @@ lbl_fn_804ADB60_000004E0:
     bl sprintf
     lwz r31, 0x64(r31)
     addi r3, r1, 0x48
-    bl fn_800DC6B4
+    bl str_findChar
     mr r5, r3
     mr r4, r31
     addi r3, r1, 0x8

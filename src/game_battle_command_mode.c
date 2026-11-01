@@ -24,12 +24,12 @@ extern void fn_800971D4(void);
 extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800C344C(void);
+extern void skin_applyWeights(void);
 extern void fn_800CB360(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
 extern void fn_800CB518(void);
-extern void fn_800CB5C8(void);
+extern void morph_updateMesh(void);
 extern void fn_800CB6E4(void);
 extern void fn_802180A8(void);
 extern void res_MsgHandle_constructor(void);
@@ -46,8 +46,8 @@ extern void fn_804048CC(void);
 extern void fn_80404E70(void);
 extern void fn_80407D24(void);
 extern void fn_80407E8C(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void atn_LoadHandle_destructor(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
@@ -543,7 +543,7 @@ lbl_fn_804058A4_000005E4:
     li r4, 0xf
     li r5, 0x0
     addi r3, r3, 0x430
-    bl fn_800CB5C8
+    bl morph_updateMesh
     li r0, 0x0
     stw r0, 0x420(r30)
     b lbl_fn_804058A4_00000710
@@ -681,7 +681,7 @@ asm void fn_80405A14(void)
     lfs f1, lbl_80886200
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r30, 0x430
     addi r4, r1, 0x8
     bl fn_800CB440
@@ -1027,7 +1027,7 @@ asm void fn_80405F88(void)
     stw r5, 0x0(r3)
     li r5, 0x0
     addi r3, r3, 0x634
-    bl fn_800CB5C8
+    bl morph_updateMesh
     addi r3, r30, 0x634
     li r4, -0x1
     bl ref_releaseHandle
@@ -1339,7 +1339,7 @@ lbl_fn_804062FC_00001094:
     addi r5, r31, 0x6c
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r31, 0x634
     addi r4, r1, 0x8
     bl fn_800CB440
@@ -1357,13 +1357,13 @@ lbl_fn_804062FC_0000115C:
     addi r3, r31, 0x634
     li r4, 0x1e
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     b lbl_fn_804062FC_000011CC
 lbl_fn_804062FC_0000117C:
     addi r3, r31, 0x634
     li r4, 0x1e
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     b lbl_fn_804062FC_000011CC
 lbl_fn_804062FC_00001190:
     cmpwi r0, 0x2
@@ -1489,10 +1489,10 @@ asm void fn_80406600(void)
     stmw r27, 0x64c(r1)
     mr r27, r3
     addi r3, r3, 0x60
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r30, r3
     addi r3, r27, 0x60
-    bl fn_80470580
+    bl boss_getOffset54
     lis r4, lbl_807774D8@ha
     li r0, 0x0
     addi r4, r4, lbl_807774D8@l

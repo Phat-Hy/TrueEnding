@@ -36,8 +36,8 @@ extern void fn_8025F35C(void);
 extern void fn_8025F45C(void);
 extern void fn_8025F754(void);
 extern void fn_803C1560(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void PSMTXRotRad(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
@@ -46,7 +46,7 @@ extern void strcmp(void);
 extern void atoi(void);
 extern void std_atan2(void);
 extern void runtime_registerStaticObject(void);
-extern void fn_80695AD0(void);
+extern void vec3_isNonZero(void);
 
 /* External data declarations */
 extern u8 jumptable_80784910[];
@@ -106,10 +106,10 @@ asm void fn_8025CFF4(void)
     mr r27, r3
     addi r3, r3, 0x14b0
     lwz r28, 0x10d8(r4)
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r30, r3
     addi r3, r27, 0x14b0
-    bl fn_80470580
+    bl boss_getOffset54
     lis r4, lbl_807772D0@ha
     li r0, 0x0
     addi r4, r4, lbl_807772D0@l
@@ -1191,7 +1191,7 @@ lbl_fn_8025DE7C_00000F5C:
     stw r5, 0x8(r1)
     stw r4, 0xc(r1)
     stw r0, 0x10(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_8025DE7C_00000FD0
     lwz r3, 0xf80(r31)

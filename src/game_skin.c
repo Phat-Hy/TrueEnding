@@ -37,7 +37,7 @@ extern void mem_realloc(void);
 extern void fn_80084A78(void);
 extern void mem_getAllocSize(void);
 extern void route_findNextWaypoint(void);
-extern void fn_8008771C(void);
+extern void route_interpolatePath(void);
 extern void fn_8008937C(void);
 extern void fn_800C507C(void);
 extern void fn_800C8780(void);
@@ -58,7 +58,7 @@ extern void fn_800D1C60(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void fn_800D3F28(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_800DCA6C(void);
 extern void printf(void);
 extern void abort(void);
@@ -119,7 +119,7 @@ void fn_800C31E4(void);
 void fn_800C31EC(void);
 void fn_800C31F4(void);
 void fn_800C32E0(void);
-void fn_800C344C(void);
+void skin_applyWeights(void);
 void fn_800C3610(void);
 void fn_800C36B8(void);
 void fn_800C3718(void);
@@ -454,7 +454,7 @@ lbl_fn_800C32E0_00000398:
     blr
 }
 
-asm void fn_800C344C(void)
+asm void skin_applyWeights(void)
 {
     nofralloc
     stwu r1, -0x30(r1)
@@ -474,23 +474,23 @@ asm void fn_800C344C(void)
     lwz r3, lbl_8087EE90
     lwz r0, 0x4(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_800C344C_0000055C
+    beq lbl_skin_applyWeights_0000055C
     lwz r0, lbl_8087EFE8
     cmpwi r0, 0x0
-    beq lbl_fn_800C344C_0000055C
+    beq lbl_skin_applyWeights_0000055C
     cmpwi r27, 0x0
     li r31, 0x0
-    beq lbl_fn_800C344C_0000042C
+    beq lbl_skin_applyWeights_0000042C
     mr r3, r27
     bl strlen
     cmpwi r3, 0x0
-    beq lbl_fn_800C344C_0000042C
+    beq lbl_skin_applyWeights_0000042C
     li r31, 0x1
-lbl_fn_800C344C_0000042C:
+lbl_skin_applyWeights_0000042C:
     cmpwi r31, 0x0
-    bne lbl_fn_800C344C_00000438
-    b lbl_fn_800C344C_0000055C
-lbl_fn_800C344C_00000438:
+    bne lbl_skin_applyWeights_00000438
+    b lbl_skin_applyWeights_0000055C
+lbl_skin_applyWeights_00000438:
     lwz r3, lbl_8087EE90
     mr r4, r27
     bl fn_80049B74
@@ -499,15 +499,15 @@ lbl_fn_800C344C_00000438:
     bl fn_800D0AB0
     cmpwi r3, 0x0
     mr r31, r3
-    bne lbl_fn_800C344C_00000460
-    b lbl_fn_800C344C_0000055C
-lbl_fn_800C344C_00000460:
+    bne lbl_skin_applyWeights_00000460
+    b lbl_skin_applyWeights_0000055C
+lbl_skin_applyWeights_00000460:
     cmpwi r30, 0x0
     lwz r3, lbl_8087EFE8
     li r4, 0x1
-    blt lbl_fn_800C344C_00000474
+    blt lbl_skin_applyWeights_00000474
     mr r4, r30
-lbl_fn_800C344C_00000474:
+lbl_skin_applyWeights_00000474:
     bl fn_800CFDA0
     stw r3, 0xa8(r31)
     mr r3, r31
@@ -516,17 +516,17 @@ lbl_fn_800C344C_00000474:
     lwz r3, lbl_8087EFE8
     lwz r0, 0x34a0(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_800C344C_000004AC
+    beq lbl_skin_applyWeights_000004AC
     mr r3, r31
     mr r4, r27
     mr r5, r28
     bl fn_800C8BA4
-    b lbl_fn_800C344C_000004B8
-lbl_fn_800C344C_000004AC:
+    b lbl_skin_applyWeights_000004B8
+lbl_skin_applyWeights_000004AC:
     mr r3, r31
     mr r4, r27
     bl fn_800C8780
-lbl_fn_800C344C_000004B8:
+lbl_skin_applyWeights_000004B8:
     fmr f1, f31
     mr r3, r31
     li r4, 0x0
@@ -540,13 +540,13 @@ lbl_fn_800C344C_000004B8:
     mr r4, r27
     bl fn_80049C3C
     cmpwi r3, 0x0
-    beq lbl_fn_800C344C_00000504
+    beq lbl_skin_applyWeights_00000504
     lfs f1, lbl_8088113C
     mr r3, r31
     fmr f2, f1
     fmr f3, f1
     bl fn_800CA2FC
-lbl_fn_800C344C_00000504:
+lbl_skin_applyWeights_00000504:
     lwz r3, lbl_8087EE90
     mr r4, r31
     bl fn_80049E44
@@ -555,14 +555,14 @@ lbl_fn_800C344C_00000504:
     mr r4, r31
     bl fn_800D0C1C
     cmpwi r3, 0x0
-    bne lbl_fn_800C344C_00000540
+    bne lbl_skin_applyWeights_00000540
     lwz r3, 0x4(r31)
     cmpwi r3, 0x0
-    beq lbl_fn_800C344C_0000055C
+    beq lbl_skin_applyWeights_0000055C
     li r4, 0x0
     bl fn_80709AD0
-    b lbl_fn_800C344C_0000055C
-lbl_fn_800C344C_00000540:
+    b lbl_skin_applyWeights_0000055C
+lbl_skin_applyWeights_00000540:
     fmr f1, f31
     lwz r3, lbl_8087EFE8
     mr r4, r31
@@ -570,7 +570,7 @@ lbl_fn_800C344C_00000540:
     mr r3, r26
     mr r4, r31
     bl fn_800CB404
-lbl_fn_800C344C_0000055C:
+lbl_skin_applyWeights_0000055C:
     addi r11, r1, 0x20
     psq_l f31, 0x28(r1), 0, 0
     lfd f31, 0x20(r1)
@@ -2133,11 +2133,11 @@ asm void fn_800C4A90(void)
 lbl_fn_800C4A90_00001A54:
     lwz r3, 0x10(r30)
     lwz r3, 0x10(r3)
-    bl fn_800DC6B4
+    bl str_findChar
     stw r3, 0x0(r31)
     lwz r3, 0x10(r30)
     lwz r3, 0x10(r3)
-    bl fn_800DC6B4
+    bl str_findChar
     stw r3, 0x4(r31)
     lis r3, lbl_80733880@ha
     addi r3, r3, lbl_80733880@l
@@ -2495,7 +2495,7 @@ lbl_fn_800C4F70_00001F50:
     li r7, 0x0
     lfs f3, lbl_8088114C
     lwz r4, 0x10(r4)
-    bl fn_8008771C
+    bl route_interpolatePath
     addi r31, r31, 0x8
     addi r29, r29, 0x1
 lbl_fn_800C4F70_00001F8C:

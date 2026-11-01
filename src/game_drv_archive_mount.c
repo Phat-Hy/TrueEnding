@@ -27,7 +27,7 @@ extern void fn_800C31F4(void);
 extern void fn_800CB360(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
-extern void fn_800CB5C8(void);
+extern void morph_updateMesh(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
@@ -71,7 +71,7 @@ extern void std_fmod(void);
 extern void fn_8068B100(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
-extern void fn_80695D84(void);
+extern void runtime_clampDouble(void);
 
 /* External data declarations */
 extern u8 lbl_807637E0[];
@@ -463,7 +463,7 @@ lbl_arms_calcWeaponHitbox_000003FC:
     fmuls f24, f26, f2
     fsubs f0, f0, f27
     fmadds f23, f28, f0, f29
-    bl fn_80695D84
+    bl runtime_clampDouble
     slwi r0, r3, 24
     lfs f4, lbl_808882B0
     oris r5, r0, 0xff
@@ -583,7 +583,7 @@ lbl_arms_calcWeaponHitbox_000005AC:
     fmuls f7, f7, f0
     fsubs f0, f7, f3
     fmadds f25, f2, f0, f6
-    bl fn_80695D84
+    bl runtime_clampDouble
     mulli r0, r31, 0x30
     slwi r4, r3, 24
     fmr f1, f25
@@ -1713,7 +1713,7 @@ lbl_fn_805A7820_00001540:
     addi r3, r24, 0x16c0
     li r4, 0xf
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lfs f3, lbl_808882F4
     li r25, 0x0
     li r0, 0x2
@@ -1734,7 +1734,7 @@ lbl_fn_805A7820_00001540:
     stw r0, 0x15f0(r24)
     stw r25, 0x15f4(r24)
     stw r25, 0x15f8(r24)
-    bl fn_800CB5C8
+    bl morph_updateMesh
     stw r25, 0x15cc(r24)
     lwz r3, 0x15bc(r24)
     stw r25, 0x15d0(r24)
@@ -1788,7 +1788,7 @@ lbl_fn_805A7820_00001660:
     addi r3, r24, 0x16c0
     li r4, 0xf
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     b lbl_fn_805A7820_00003284
 lbl_fn_805A7820_0000167C:
     cmpwi r0, 0x2
@@ -1814,7 +1814,7 @@ lbl_fn_805A7820_000016B8:
     addi r3, r24, 0x16c0
     li r4, 0xf
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     cmpwi r25, 0x0
     beq lbl_fn_805A7820_0000173C
     lwz r5, 0xa88(r24)
@@ -1886,7 +1886,7 @@ lbl_fn_805A7820_000017BC:
     addi r3, r24, 0x16c0
     li r4, 0xf
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, 0xa88(r24)
     lwz r0, 0x158c(r24)
     cmpw cr1, r0, r3
@@ -1923,7 +1923,7 @@ lbl_fn_805A7820_00001844:
     addi r3, r24, 0x16c0
     li r4, 0xf
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
 lbl_fn_805A7820_0000185C:
     li r0, 0x0
     stw r0, 0x15cc(r24)
@@ -2454,7 +2454,7 @@ lbl_fn_805A7820_00001FC8:
     addi r3, r24, 0x16c0
     li r4, 0xf
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lfs f3, lbl_808882F4
     li r25, 0x0
     li r0, 0x2
@@ -2475,7 +2475,7 @@ lbl_fn_805A7820_00001FC8:
     stw r0, 0x15f0(r24)
     stw r25, 0x15f4(r24)
     stw r25, 0x15f8(r24)
-    bl fn_800CB5C8
+    bl morph_updateMesh
     stw r25, 0x15cc(r24)
     lwz r3, 0x15bc(r24)
     stw r25, 0x15d0(r24)
@@ -2629,7 +2629,7 @@ lbl_fn_805A7820_00002268:
     addi r3, r24, 0x16c0
     li r4, 0xf
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, 0xa88(r24)
     lwz r0, 0x158c(r24)
     cmpw cr1, r0, r3
@@ -2666,7 +2666,7 @@ lbl_fn_805A7820_000022F0:
     addi r3, r24, 0x16c0
     li r4, 0xf
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
 lbl_fn_805A7820_00002308:
     li r0, 0x0
     stw r0, 0x15cc(r24)
@@ -2699,7 +2699,7 @@ lbl_fn_805A7820_00002368:
     addi r3, r24, 0x16c0
     li r4, 0xf
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, 0x158c(r24)
     cmpwi r3, 0x0
     blt lbl_fn_805A7820_000023BC
@@ -3077,7 +3077,7 @@ lbl_fn_805A7820_000028E0:
     addi r3, r24, 0x16c0
     li r4, 0xf
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lfs f3, lbl_808882F4
     li r25, 0x0
     li r0, 0x2
@@ -3098,7 +3098,7 @@ lbl_fn_805A7820_000028E0:
     stw r0, 0x15f0(r24)
     stw r25, 0x15f4(r24)
     stw r25, 0x15f8(r24)
-    bl fn_800CB5C8
+    bl morph_updateMesh
     stw r25, 0x15cc(r24)
     lwz r3, 0x15bc(r24)
     stw r25, 0x15d0(r24)
@@ -3215,7 +3215,7 @@ lbl_fn_805A7820_00002ADC:
     addi r3, r24, 0x16c0
     li r4, 0xf
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, 0xa88(r24)
     lwz r0, 0x158c(r24)
     cmpw cr1, r0, r3
@@ -3252,7 +3252,7 @@ lbl_fn_805A7820_00002B64:
     addi r3, r24, 0x16c0
     li r4, 0xf
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
 lbl_fn_805A7820_00002B7C:
     li r0, 0x0
     stw r0, 0x15cc(r24)
@@ -3292,7 +3292,7 @@ lbl_fn_805A7820_00002BF4:
     addi r3, r24, 0x16c0
     li r4, 0xf
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lfs f3, lbl_808882F4
     li r25, 0x0
     li r0, 0x2
@@ -3313,7 +3313,7 @@ lbl_fn_805A7820_00002BF4:
     stw r0, 0x15f0(r24)
     stw r25, 0x15f4(r24)
     stw r25, 0x15f8(r24)
-    bl fn_800CB5C8
+    bl morph_updateMesh
     stw r25, 0x15cc(r24)
     lwz r3, 0x15bc(r24)
     stw r25, 0x15d0(r24)
@@ -3345,7 +3345,7 @@ lbl_fn_805A7820_00002CBC:
     addi r3, r24, 0x16c0
     li r4, 0xf
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r0, 0x158c(r24)
     cmpwi r0, 0x0
     blt lbl_fn_805A7820_00002D10
@@ -3571,7 +3571,7 @@ lbl_fn_805A7820_00002FF4:
     addi r3, r24, 0x16c0
     li r4, 0xf
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, 0x158c(r24)
     cmpwi r3, 0x0
     bge lbl_fn_805A7820_00003024

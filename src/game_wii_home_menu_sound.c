@@ -19,7 +19,7 @@ extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_80116FC0(void);
 extern void fn_80117228(void);
 extern void fn_8011770C(void);
@@ -1159,7 +1159,7 @@ lbl_fn_80571A2C_00000E34:
 lbl_fn_80571A2C_00000E4C:
     lwz r31, 0x48(r31)
     addi r3, r1, 0xc8
-    bl fn_800DC6B4
+    bl str_findChar
     mr r5, r3
     mr r4, r31
     addi r3, r1, 0x30
@@ -1187,7 +1187,7 @@ lbl_fn_80571A2C_00000E84:
     bl sprintf
     lwz r31, 0x68(r31)
     addi r3, r1, 0x88
-    bl fn_800DC6B4
+    bl str_findChar
     mr r5, r3
     mr r4, r31
     addi r3, r1, 0x1c
@@ -1215,7 +1215,7 @@ lbl_fn_80571A2C_00000EF0:
     bl sprintf
     lwz r31, 0x68(r31)
     addi r3, r1, 0x48
-    bl fn_800DC6B4
+    bl str_findChar
     mr r5, r3
     mr r4, r31
     addi r3, r1, 0x8
@@ -1269,7 +1269,7 @@ lbl_fn_80571C68_00000FAC:
     mr r31, r3
     addi r3, r5, 0x99
     addi r30, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     mr r3, r30
     mr r5, r31
@@ -1289,7 +1289,7 @@ lbl_fn_80571C68_00001018:
     addi r3, r3, lbl_8075FFD0@l
     addi r3, r3, 0x99
     addi r31, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     mr r3, r31
     mr r5, r30
@@ -1311,7 +1311,7 @@ lbl_fn_80571C68_00001064:
     addi r3, r3, lbl_8075FFD0@l
     addi r3, r3, 0x99
     addi r31, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     mr r3, r31
     mr r5, r30
@@ -1914,7 +1914,7 @@ lbl_fn_80572454_000018A0:
     bl sprintf
     lwz r31, 0x48(r27)
     addi r3, r1, 0x38
-    bl fn_800DC6B4
+    bl str_findChar
     mr r5, r3
     mr r4, r31
     addi r3, r1, 0x10

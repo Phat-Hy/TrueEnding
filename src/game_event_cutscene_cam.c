@@ -27,7 +27,7 @@ extern void fn_800C31F4(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void atn_Arc_decompressChunk(void);
 extern void fn_8046D1EC(void);
 extern void fn_8046F5CC(void);
@@ -52,7 +52,7 @@ extern void runtime_registerStaticObject(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
 extern void fn_80695A50(void);
-extern void fn_80695D84(void);
+extern void runtime_clampDouble(void);
 
 /* External data declarations */
 extern u8 lbl_80756078[];
@@ -543,7 +543,7 @@ asm void fn_80477DB8(void)
     addi r3, r1, 0x10
     bl fn_8006B404
     addi r3, r1, 0x10
-    bl fn_800DC6B4
+    bl str_findChar
     cmpwi r28, 0x0
     mr r5, r3
     li r30, 0x0
@@ -900,7 +900,7 @@ asm void fn_80478204(void)
     addi r3, r1, 0x10
     bl fn_8006B404
     addi r3, r1, 0x10
-    bl fn_800DC6B4
+    bl str_findChar
     cmpwi r28, 0x0
     mr r5, r3
     li r30, 0x0
@@ -1132,7 +1132,7 @@ asm void fn_80478518(void)
     addi r3, r1, 0x10
     bl fn_8006B404
     addi r3, r1, 0x10
-    bl fn_800DC6B4
+    bl str_findChar
     cmpwi r28, 0x0
     mr r5, r3
     li r30, 0x0
@@ -2063,7 +2063,7 @@ lbl_fn_80478A70_00001A54:
     b lbl_fn_80478A70_00001A70
 lbl_fn_80478A70_00001A68:
     fmadds f1, f16, f0, f31
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_80478A70_00001A70:
     mr r24, r3
 lbl_fn_80478A70_00001A74:
@@ -2081,7 +2081,7 @@ lbl_fn_80478A70_00001A8C:
     b lbl_fn_80478A70_00001AA8
 lbl_fn_80478A70_00001AA0:
     fmadds f1, f16, f0, f31
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_80478A70_00001AA8:
     mr r21, r3
 lbl_fn_80478A70_00001AAC:
@@ -2099,7 +2099,7 @@ lbl_fn_80478A70_00001AC4:
     b lbl_fn_80478A70_00001AE0
 lbl_fn_80478A70_00001AD8:
     fmadds f1, f16, f0, f31
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_80478A70_00001AE0:
     mr r20, r3
 lbl_fn_80478A70_00001AE4:
@@ -2117,7 +2117,7 @@ lbl_fn_80478A70_00001AFC:
     b lbl_fn_80478A70_00001B18
 lbl_fn_80478A70_00001B10:
     fmadds f1, f16, f0, f31
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_80478A70_00001B18:
     lfs f6, lbl_80886F14
     slwi r4, r21, 8
@@ -2156,7 +2156,7 @@ lbl_fn_80478A70_00001B8C:
     b lbl_fn_80478A70_00001BA8
 lbl_fn_80478A70_00001BA0:
     fmadds f1, f16, f0, f31
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_80478A70_00001BA8:
     mr r20, r3
 lbl_fn_80478A70_00001BAC:
@@ -2174,7 +2174,7 @@ lbl_fn_80478A70_00001BC4:
     b lbl_fn_80478A70_00001BE0
 lbl_fn_80478A70_00001BD8:
     fmadds f1, f16, f0, f31
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_80478A70_00001BE0:
     mr r21, r3
 lbl_fn_80478A70_00001BE4:
@@ -2192,7 +2192,7 @@ lbl_fn_80478A70_00001BFC:
     b lbl_fn_80478A70_00001C18
 lbl_fn_80478A70_00001C10:
     fmadds f1, f16, f0, f31
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_80478A70_00001C18:
     mr r24, r3
 lbl_fn_80478A70_00001C1C:
@@ -2210,7 +2210,7 @@ lbl_fn_80478A70_00001C34:
     b lbl_fn_80478A70_00001C50
 lbl_fn_80478A70_00001C48:
     fmadds f1, f16, f0, f31
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_80478A70_00001C50:
     lfs f6, lbl_80886F14
     slwi r4, r21, 8

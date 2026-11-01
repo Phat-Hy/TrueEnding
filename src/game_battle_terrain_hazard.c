@@ -15,7 +15,7 @@ extern void fn_8005BBF8(void);
 extern void fn_8005BCE8(void);
 extern void mem_alloc(void);
 extern void route_findNextWaypoint(void);
-extern void fn_8008771C(void);
+extern void route_interpolatePath(void);
 extern void fn_80087858(void);
 extern void fn_80087994(void);
 extern void fn_80087E9C(void);
@@ -43,8 +43,8 @@ extern void fn_803ED774(void);
 extern void fn_803EDB18(void);
 extern void fn_803F11F8(void);
 extern void fn_8041AAC0(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void PSMTXConcat(void);
 extern void PSMTXInverse(void);
 extern void PSMTXTrans(void);
@@ -57,7 +57,7 @@ extern void fn_8068AD58(void);
 extern void std_fmod(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
-extern void fn_80695AD0(void);
+extern void vec3_isNonZero(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -668,10 +668,10 @@ asm void fn_804184BC(void)
     stw r29, 0x644(r1)
     mr r29, r3
     addi r3, r3, 0x60
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r31, r3
     addi r3, r29, 0x60
-    bl fn_80470580
+    bl boss_getOffset54
     lis r4, lbl_807774D8@ha
     li r0, 0x0
     addi r4, r4, lbl_807774D8@l
@@ -1305,7 +1305,7 @@ lbl_fn_80418C4C_00000F48:
     addi r4, r31, 0x4e
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_808864E8
     mr r3, r20
     lfs f2, lbl_808864EC
@@ -1314,7 +1314,7 @@ lbl_fn_80418C4C_00000F48:
     addi r4, r31, 0x58
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_808864E8
     mr r3, r20
     lfs f2, lbl_808864EC
@@ -1746,7 +1746,7 @@ lbl_fn_80419354_00001578:
     stw r5, 0x8(r1)
     stw r4, 0xc(r1)
     stw r0, 0x10(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80419354_000015D8
     lwz r3, 0x4c4(r31)
@@ -1791,7 +1791,7 @@ lbl_fn_80419354_00001620:
     stw r5, 0x14(r1)
     stw r4, 0x18(r1)
     stw r0, 0x1c(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80419354_00001658
     lwz r3, 0x4c4(r31)
@@ -2115,7 +2115,7 @@ lbl_fn_8041953C_00001AD8:
     stw r5, 0x8(r1)
     stw r4, 0xc(r1)
     stw r0, 0x10(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_8041953C_00001B38
     lwz r3, 0x4c4(r31)

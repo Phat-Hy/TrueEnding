@@ -8,7 +8,7 @@ extern void fn_80044E0C(void);
 extern void fn_80051A88(void);
 extern void mem_alloc(void);
 extern void route_findNextWaypoint(void);
-extern void fn_8008771C(void);
+extern void route_interpolatePath(void);
 extern void fn_80087AA0(void);
 extern void fn_80087E9C(void);
 extern void fn_80088724(void);
@@ -16,7 +16,7 @@ extern void fn_8008937C(void);
 extern void fn_80094F98(void);
 extern void fn_80097D40(void);
 extern void fn_800C122C(void);
-extern void fn_800C344C(void);
+extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void fn_800FC410(void);
 extern void fn_801059F8(void);
@@ -57,7 +57,7 @@ extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXTrans(void);
 extern void rand(void);
-extern void fn_80695AD0(void);
+extern void vec3_isNonZero(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -100,7 +100,7 @@ extern u32 lbl_80881B08;
 
 /* Function declarations */
 void fn_8014BDB0(void);
-void fn_8014C0B4(void);
+void dialog_setScriptSlot(void);
 void fn_8014C228(void);
 void fn_8014C468(void);
 void fn_8014C540(void);
@@ -198,7 +198,7 @@ lbl_fn_8014BDB0_000000CC:
     addi r5, r31, 0x568
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     mr r3, r30
     addi r4, r29, 0x487
     addi r5, r31, 0x55c
@@ -250,7 +250,7 @@ lbl_fn_8014BDB0_000001E8:
     addi r5, r31, 0xd88
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_8088196C
     mr r3, r28
     lfs f2, lbl_80881AF0
@@ -259,7 +259,7 @@ lbl_fn_8014BDB0_000001E8:
     addi r5, r31, 0xd8c
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lis r30, 0x99
     mr r3, r28
     addi r4, r29, 0x4c4
@@ -287,7 +287,7 @@ lbl_fn_8014BDB0_000001E8:
     addi r5, r31, 0xd90
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     mr r3, r28
     addi r4, r29, 0x4e7
     addi r5, r31, 0xd84
@@ -308,7 +308,7 @@ lbl_fn_8014BDB0_000002E4:
     blr
 }
 
-asm void fn_8014C0B4(void)
+asm void dialog_setScriptSlot(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -320,106 +320,106 @@ asm void fn_8014C0B4(void)
     stw r31, 0xc(r1)
     mr r31, r3
     stw r5, 0x484(r6)
-    beq lbl_fn_8014C0B4_00000348
+    beq lbl_dialog_setScriptSlot_00000348
     cmpwi r4, 0x2
-    beq lbl_fn_8014C0B4_00000390
+    beq lbl_dialog_setScriptSlot_00000390
     cmpwi r4, 0x3
-    beq lbl_fn_8014C0B4_000003D8
+    beq lbl_dialog_setScriptSlot_000003D8
     cmpwi r4, 0x1b
-    beq lbl_fn_8014C0B4_00000420
-    b lbl_fn_8014C0B4_00000464
-lbl_fn_8014C0B4_00000348:
+    beq lbl_dialog_setScriptSlot_00000420
+    b lbl_dialog_setScriptSlot_00000464
+lbl_dialog_setScriptSlot_00000348:
     mr r4, r5
     addi r3, r3, 0xb0
     bl fn_80097D40
     cmpwi r3, 0x0
-    beq lbl_fn_8014C0B4_00000368
+    beq lbl_dialog_setScriptSlot_00000368
     bl atn_LoadHandle_getName
     bl fn_802096A8
-    b lbl_fn_8014C0B4_0000036C
-lbl_fn_8014C0B4_00000368:
+    b lbl_dialog_setScriptSlot_0000036C
+lbl_dialog_setScriptSlot_00000368:
     li r3, 0x0
-lbl_fn_8014C0B4_0000036C:
+lbl_dialog_setScriptSlot_0000036C:
     cmpwi r3, 0x0
-    beq lbl_fn_8014C0B4_0000037C
+    beq lbl_dialog_setScriptSlot_0000037C
     lfs f1, 0x4(r3)
-    b lbl_fn_8014C0B4_00000380
-lbl_fn_8014C0B4_0000037C:
+    b lbl_dialog_setScriptSlot_00000380
+lbl_dialog_setScriptSlot_0000037C:
     lfs f1, lbl_80881980
-lbl_fn_8014C0B4_00000380:
+lbl_dialog_setScriptSlot_00000380:
     lfs f0, 0x514(r31)
     fmuls f0, f1, f0
     stfs f0, 0x500(r31)
-    b lbl_fn_8014C0B4_00000464
-lbl_fn_8014C0B4_00000390:
+    b lbl_dialog_setScriptSlot_00000464
+lbl_dialog_setScriptSlot_00000390:
     mr r4, r5
     addi r3, r3, 0xb0
     bl fn_80097D40
     cmpwi r3, 0x0
-    beq lbl_fn_8014C0B4_000003B0
+    beq lbl_dialog_setScriptSlot_000003B0
     bl atn_LoadHandle_getName
     bl fn_802096A8
-    b lbl_fn_8014C0B4_000003B4
-lbl_fn_8014C0B4_000003B0:
+    b lbl_dialog_setScriptSlot_000003B4
+lbl_dialog_setScriptSlot_000003B0:
     li r3, 0x0
-lbl_fn_8014C0B4_000003B4:
+lbl_dialog_setScriptSlot_000003B4:
     cmpwi r3, 0x0
-    beq lbl_fn_8014C0B4_000003C4
+    beq lbl_dialog_setScriptSlot_000003C4
     lfs f1, 0x4(r3)
-    b lbl_fn_8014C0B4_000003C8
-lbl_fn_8014C0B4_000003C4:
+    b lbl_dialog_setScriptSlot_000003C8
+lbl_dialog_setScriptSlot_000003C4:
     lfs f1, lbl_80881984
-lbl_fn_8014C0B4_000003C8:
+lbl_dialog_setScriptSlot_000003C8:
     lfs f0, 0x514(r31)
     fmuls f0, f1, f0
     stfs f0, 0x504(r31)
-    b lbl_fn_8014C0B4_00000464
-lbl_fn_8014C0B4_000003D8:
+    b lbl_dialog_setScriptSlot_00000464
+lbl_dialog_setScriptSlot_000003D8:
     mr r4, r5
     addi r3, r3, 0xb0
     bl fn_80097D40
     cmpwi r3, 0x0
-    beq lbl_fn_8014C0B4_000003F8
+    beq lbl_dialog_setScriptSlot_000003F8
     bl atn_LoadHandle_getName
     bl fn_802096A8
-    b lbl_fn_8014C0B4_000003FC
-lbl_fn_8014C0B4_000003F8:
+    b lbl_dialog_setScriptSlot_000003FC
+lbl_dialog_setScriptSlot_000003F8:
     li r3, 0x0
-lbl_fn_8014C0B4_000003FC:
+lbl_dialog_setScriptSlot_000003FC:
     cmpwi r3, 0x0
-    beq lbl_fn_8014C0B4_0000040C
+    beq lbl_dialog_setScriptSlot_0000040C
     lfs f1, 0x4(r3)
-    b lbl_fn_8014C0B4_00000410
-lbl_fn_8014C0B4_0000040C:
+    b lbl_dialog_setScriptSlot_00000410
+lbl_dialog_setScriptSlot_0000040C:
     lfs f1, lbl_80881964
-lbl_fn_8014C0B4_00000410:
+lbl_dialog_setScriptSlot_00000410:
     lfs f0, 0x514(r31)
     fmuls f0, f1, f0
     stfs f0, 0x508(r31)
-    b lbl_fn_8014C0B4_00000464
-lbl_fn_8014C0B4_00000420:
+    b lbl_dialog_setScriptSlot_00000464
+lbl_dialog_setScriptSlot_00000420:
     mr r4, r5
     addi r3, r3, 0xb0
     bl fn_80097D40
     cmpwi r3, 0x0
-    beq lbl_fn_8014C0B4_00000440
+    beq lbl_dialog_setScriptSlot_00000440
     bl atn_LoadHandle_getName
     bl fn_802096A8
-    b lbl_fn_8014C0B4_00000444
-lbl_fn_8014C0B4_00000440:
+    b lbl_dialog_setScriptSlot_00000444
+lbl_dialog_setScriptSlot_00000440:
     li r3, 0x0
-lbl_fn_8014C0B4_00000444:
+lbl_dialog_setScriptSlot_00000444:
     cmpwi r3, 0x0
-    beq lbl_fn_8014C0B4_00000454
+    beq lbl_dialog_setScriptSlot_00000454
     lfs f1, 0x4(r3)
-    b lbl_fn_8014C0B4_00000458
-lbl_fn_8014C0B4_00000454:
+    b lbl_dialog_setScriptSlot_00000458
+lbl_dialog_setScriptSlot_00000454:
     lfs f1, lbl_80881988
-lbl_fn_8014C0B4_00000458:
+lbl_dialog_setScriptSlot_00000458:
     lfs f0, 0x514(r31)
     fmuls f0, f1, f0
     stfs f0, 0x50c(r31)
-lbl_fn_8014C0B4_00000464:
+lbl_dialog_setScriptSlot_00000464:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0
@@ -437,15 +437,15 @@ asm void fn_8014C228(void)
     stw r31, 0xc(r1)
     mr r31, r3
     lwz r5, 0x510(r3)
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r31
     li r4, 0x1
     li r5, 0x14
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r31
     li r4, 0x2
     li r5, 0x1a
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     lwz r3, 0x50(r31)
     bl fn_80219558
     cmpwi r3, 0x0
@@ -453,122 +453,122 @@ asm void fn_8014C228(void)
     mr r3, r31
     li r4, 0x3
     li r5, 0x23
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     b lbl_fn_8014C228_000004EC
 lbl_fn_8014C228_000004DC:
     mr r3, r31
     li r4, 0x3
     li r5, 0x20
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
 lbl_fn_8014C228_000004EC:
     mr r3, r31
     li r4, 0x4
     li r5, 0x28
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r31
     li r4, 0x5
     li r5, 0x195
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r31
     li r4, 0x6
     li r5, 0x196
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r31
     li r4, 0x7
     li r5, 0x1b1
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r31
     li r4, 0x8
     li r5, 0x1b2
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r31
     li r4, 0x9
     li r5, 0x197
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r31
     li r4, 0xa
     li r5, 0x198
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r31
     li r4, 0xb
     li r5, 0x1b3
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r31
     li r4, 0xc
     li r5, 0x1b4
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r31
     li r4, 0xd
     li r5, 0x199
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r31
     li r4, 0xe
     li r5, 0x19a
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r31
     li r4, 0xf
     li r5, 0x1b5
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r31
     li r4, 0x10
     li r5, 0x1b6
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r31
     li r4, 0x11
     li r5, 0x19b
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r31
     li r4, 0x12
     li r5, 0x19c
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r31
     li r4, 0x13
     li r5, 0x156
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r31
     li r4, 0x14
     li r5, 0x156
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r31
     li r4, 0x16
     li r5, 0x15c
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r31
     li r4, 0x15
     li r5, 0x15d
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r31
     li r4, 0x17
     li r5, 0x15e
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r31
     li r4, 0x18
     li r5, 0x15f
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r31
     li r4, 0x19
     li r5, 0x1c0
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r31
     li r4, 0x1a
     li r5, 0x1c1
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r31
     li r4, 0x1b
     li r5, 0x1c6
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r31
     li r4, 0x1c
     li r5, 0x1c7
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r31
     li r4, 0x1d
     li r5, 0x1c8
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r31
     li r4, 0x1e
     li r5, 0x1c9
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r31
     bl fn_8014FD30
     lwz r0, 0x14(r1)
@@ -591,7 +591,7 @@ asm void fn_8014C468(void)
     bne lbl_fn_8014C468_000006E8
     lwz r5, 0x510(r3)
     li r4, 0x0
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     b lbl_fn_8014C468_0000077C
 lbl_fn_8014C468_000006E8:
     lwz r0, 0x4(r4)
@@ -609,7 +609,7 @@ lbl_fn_8014C468_00000708:
     bne lbl_fn_8014C468_00000728
     li r4, 0x0
     li r5, 0x4
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     b lbl_fn_8014C468_0000077C
 lbl_fn_8014C468_00000728:
     lwz r3, 0x50(r3)
@@ -619,23 +619,23 @@ lbl_fn_8014C468_00000728:
     mr r3, r31
     li r4, 0x0
     li r5, 0x5
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     b lbl_fn_8014C468_0000077C
 lbl_fn_8014C468_0000074C:
     mr r3, r31
     li r4, 0x0
     li r5, 0x3
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     b lbl_fn_8014C468_0000077C
 lbl_fn_8014C468_00000760:
     li r4, 0x0
     li r5, 0x0
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     b lbl_fn_8014C468_0000077C
 lbl_fn_8014C468_00000770:
     li r4, 0x0
     li r5, 0x1
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
 lbl_fn_8014C468_0000077C:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
@@ -784,7 +784,7 @@ lbl_fn_8014C540_0000096C:
     stw r5, 0x38(r1)
     stw r4, 0x3c(r1)
     stw r0, 0x40(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_8014C540_000009A8
     lwz r3, 0xf80(r28)
@@ -830,7 +830,7 @@ lbl_fn_8014C540_00000A14:
     stw r5, 0x20(r1)
     stw r4, 0x24(r1)
     stw r0, 0x28(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_8014C540_00000A50
     lwz r3, 0xf80(r28)
@@ -876,7 +876,7 @@ lbl_fn_8014C540_00000ABC:
     stw r5, 0x2c(r1)
     stw r4, 0x30(r1)
     stw r0, 0x34(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_8014C540_00000AF8
     lwz r3, 0xf80(r28)
@@ -1237,7 +1237,7 @@ lbl_fn_8014C540_00000FEC:
     addi r5, r28, 0x528
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x1c
     li r4, -0x1
     bl ref_releaseHandle
@@ -1452,7 +1452,7 @@ lbl_fn_8014C540_000012F0:
     addi r5, r28, 0x528
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x18
     li r4, -0x1
     bl ref_releaseHandle

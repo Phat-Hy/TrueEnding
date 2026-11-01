@@ -10,7 +10,7 @@ extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void fn_8000E18C(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_8003EA3C(void);
 extern void fn_8004203C(void);
 extern void talk_parseQuotedString(void);
@@ -21,10 +21,10 @@ extern void mem_free(void);
 extern void fn_80087994(void);
 extern void fn_8008937C(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_800C344C(void);
+extern void skin_applyWeights(void);
 extern void fn_800CB360(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB5C8(void);
+extern void morph_updateMesh(void);
 extern void fn_800DC12C(void);
 extern void str_skipWhitespace(void);
 extern void fn_800E0AA8(void);
@@ -57,8 +57,8 @@ extern void fn_802E1A0C(void);
 extern void fn_802E5B30(void);
 extern void world_setLocalFlag(void);
 extern void fn_803EEE10(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_805A3C58(void);
@@ -441,7 +441,7 @@ asm void fn_802DDDB8(void)
     addi r8, r1, 0x18
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     addi r27, r28, 0x18
     stw r29, 0x2c(r1)
     addi r26, r1, 0x2c
@@ -461,7 +461,7 @@ asm void fn_802DDDB8(void)
     addi r8, r1, 0x10
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     addi r3, r31, 0x2c
     bl strlen
     lis r4, lbl_807772D0@ha
@@ -529,7 +529,7 @@ lbl_fn_802DDDB8_0000054C:
     addi r6, r26, 0x8
     addi r8, r1, 0x8
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_802DDDB8_0000057C:
     addi r3, r1, 0x44
     bl fn_8005B5F8
@@ -673,7 +673,7 @@ asm void fn_802DE27C(void)
     cmpwi r3, 0x0
     bne lbl_fn_802DE27C_00000C38
     addi r3, r31, 0x1630
-    bl fn_80470580
+    bl boss_getOffset54
     cmpwi r3, 0x0
     beq lbl_fn_802DE27C_00000B94
     bl fn_80121F00
@@ -684,10 +684,10 @@ asm void fn_802DE27C(void)
     cmpwi r3, 0x0
     beq lbl_fn_802DE27C_00000B94
     addi r3, r31, 0x1630
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r29, r3
     addi r3, r31, 0x1630
-    bl fn_80470580
+    bl boss_getOffset54
     mr r4, r3
     mr r5, r29
     addi r3, r1, 0x28
@@ -1856,7 +1856,7 @@ asm void fn_802DF398(void)
     addi r3, r30, 0x1560
     li r4, 0x0
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, lbl_8087F3C0
     mr r4, r30
     li r5, 0x64
@@ -1921,7 +1921,7 @@ lbl_fn_802DF428_000018D0:
     addi r5, r30, 0x614
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -1949,7 +1949,7 @@ lbl_fn_802DF428_00001948:
     addi r3, r30, 0x1560
     li r4, 0x0
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, lbl_8087F3C0
     mr r4, r30
     li r5, 0x64

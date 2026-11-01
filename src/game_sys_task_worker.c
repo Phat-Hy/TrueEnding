@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_80049E54(void);
 extern void fn_8004A03C(void);
 extern void talk_parseQuotedString(void);
@@ -17,15 +17,15 @@ extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void fn_800DC12C(void);
 extern void str_skipWhitespace(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_8011FFF8(void);
 extern void fn_8021771C(void);
 extern void fn_8021AF98(void);
 extern void fn_8021AFF4(void);
 extern void fn_8046DC5C(void);
 extern void fn_8046DD20(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
@@ -138,7 +138,7 @@ asm void fn_80217E18(void)
     li r31, 0x1
 lbl_fn_80217E18_0000006C:
     lwz r3, 0x0(r30)
-    bl fn_800DC6B4
+    bl str_findChar
     lwz r4, lbl_8087F290
     addi r30, r30, 0x4
     stwx r3, r4, r29
@@ -162,7 +162,7 @@ lbl_fn_80217E18_0000006C:
     li r31, 0x0
 lbl_fn_80217E18_000000C8:
     lwz r3, 0x0(r30)
-    bl fn_800DC6B4
+    bl str_findChar
     lwz r4, lbl_8087F294
     addi r28, r28, 0x1
     cmpwi r28, 0x28
@@ -181,10 +181,10 @@ lbl_fn_80217E18_000000C8:
     addi r4, r4, 0x1
     bl taskManager_updateTasks
     addi r3, r1, 0x8
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r30, r3
     addi r3, r1, 0x8
-    bl fn_80470580
+    bl boss_getOffset54
     lis r4, lbl_807772D0@ha
     li r0, 0x0
     addi r4, r4, lbl_807772D0@l
@@ -260,7 +260,7 @@ lbl_fn_80217E18_00000230:
     extsb. r0, r0
     beq lbl_fn_80217E18_00000254
     addi r3, r1, 0x20
-    bl fn_800DC6B4
+    bl str_findChar
     lwz r4, lbl_8087F29C
     stw r3, 0x0(r4)
 lbl_fn_80217E18_00000254:
@@ -287,7 +287,7 @@ asm void fn_802180A8(void)
     stwu r1, -0x10(r1)
     mflr r0
     stw r0, 0x14(r1)
-    bl fn_800DC6B4
+    bl str_findChar
     li r0, 0x23a
     lwz r4, lbl_8087F290
     li r5, 0x0
@@ -711,7 +711,7 @@ asm void fn_802185FC(void)
     addi r8, r1, 0x8
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r31
     addi r3, r1, 0x10
     bl fn_8006B174
@@ -723,7 +723,7 @@ asm void fn_802185FC(void)
 lbl_fn_802185FC_0000086C:
     lwz r3, 0x18(r1)
 lbl_fn_802185FC_00000870:
-    bl fn_800DC6B4
+    bl str_findChar
     lwz r0, 0x10(r1)
     mr r31, r3
     srwi. r0, r0, 31

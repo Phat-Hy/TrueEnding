@@ -2,7 +2,7 @@
 
 /* External functions referenced */
 extern void fn_80615F30(void);
-extern void fn_80695D84(void);
+extern void runtime_clampDouble(void);
 
 /* External SDA symbols */
 extern u32 __GXData;
@@ -219,7 +219,7 @@ asm void fn_80614E90(void)
     mr r28, r3
     mr r30, r29
     fdivs f1, f0, f28
-    bl fn_80695D84
+    bl runtime_clampDouble
     subi r0, r28, 0x1
     clrlwi r4, r3, 23
     slwi r31, r0, 8
@@ -258,7 +258,7 @@ lbl_fn_80614E90_000002F0:
     fsubs f1, f1, f31
     fdivs f28, f1, f0
     fdivs f1, f30, f28
-    bl fn_80695D84
+    bl runtime_clampDouble
     clrlwi r4, r3, 23
     divwu r3, r31, r4
     subi r0, r4, 0x81
@@ -299,7 +299,7 @@ lbl_fn_80614E90_0000037C:
     fsubs f1, f1, f30
     fdivs f28, f1, f0
     fdivs f1, f31, f28
-    bl fn_80695D84
+    bl runtime_clampDouble
     clrlwi r4, r3, 23
     divwu r3, r31, r4
     subi r0, r4, 0x81
@@ -352,7 +352,7 @@ asm void fn_806150C0(void)
     lfs f0, lbl_80888740
     stw r0, 0x14(r1)
     fdivs f1, f0, f1
-    bl fn_80695D84
+    bl runtime_clampDouble
     lis r4, 0xcc01
     li r0, 0x61
     stb r0, -0x8000(r4)

@@ -17,7 +17,7 @@ extern void fn_80049CDC(void);
 extern void fn_800697D8(void);
 extern void fn_8006AA20(void);
 extern void fn_800C31F4(void);
-extern void fn_800C344C(void);
+extern void skin_applyWeights(void);
 extern void fn_800C93D4(void);
 extern void fn_800C97F8(void);
 extern void fn_800C9C64(void);
@@ -29,7 +29,7 @@ extern void fn_800CB404(void);
 extern void fn_800CB440(void);
 extern void fn_800CB58C(void);
 extern void fn_800CB5B4(void);
-extern void fn_800CB5C8(void);
+extern void morph_updateMesh(void);
 extern void fn_800CB654(void);
 extern void fn_800CB6F8(void);
 extern void fn_800CFDA0(void);
@@ -170,7 +170,7 @@ lbl_fn_803E907C_0000015C:
     mr r3, r31
     li r4, 0x0
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r4, 0x18(r31)
     cmpwi r4, 0x0
     beq lbl_fn_803E907C_000001A4
@@ -206,7 +206,7 @@ lbl_fn_803E907C_000001D8:
     mr r3, r31
     li r4, 0x0
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r4, 0x18(r31)
     cmpwi r4, 0x0
     beq lbl_fn_803E907C_0000022C
@@ -331,7 +331,7 @@ lbl_fn_803E907C_00000368:
     stw r4, 0x12c(r1)
     stw r4, 0x130(r1)
     b lbl_fn_803E907C_00000444
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, 0x18(r4)
     cmpwi r3, 0x0
     beq lbl_fn_803E907C_00000408
@@ -548,7 +548,7 @@ lbl_fn_803E9608_000006E4:
     mr r3, r31
     li r4, 0x0
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r4, 0x18(r31)
     cmpwi r4, 0x0
     beq lbl_fn_803E9608_0000072C
@@ -584,7 +584,7 @@ lbl_fn_803E9608_00000760:
     mr r3, r31
     li r4, 0x0
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r4, 0x18(r31)
     cmpwi r4, 0x0
     beq lbl_fn_803E9608_000007B4
@@ -704,7 +704,7 @@ lbl_fn_803E9608_000008EC:
     stw r4, 0x12c(r1)
     stw r4, 0x130(r1)
     b lbl_fn_803E9608_000009B8
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, 0x18(r4)
     cmpwi r3, 0x0
     beq lbl_fn_803E9608_0000097C
@@ -905,7 +905,7 @@ lbl_fn_803E9B7C_00000C28:
     mr r3, r31
     li r4, 0x0
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r4, 0x18(r31)
     cmpwi r4, 0x0
     beq lbl_fn_803E9B7C_00000C70
@@ -941,7 +941,7 @@ lbl_fn_803E9B7C_00000CA4:
     mr r3, r31
     li r4, 0x0
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r4, 0x18(r31)
     cmpwi r4, 0x0
     beq lbl_fn_803E9B7C_00000CF8
@@ -1051,7 +1051,7 @@ lbl_fn_803E9B7C_00000DCC:
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r4, 0x18(r29)
     cmpwi r4, 0x0
     beq lbl_fn_803E9B7C_00000E9C
@@ -1262,7 +1262,7 @@ lbl_fn_803EA09C_00001168:
     mr r3, r31
     li r4, 0x0
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r4, 0x18(r31)
     cmpwi r4, 0x0
     beq lbl_fn_803EA09C_000011B0
@@ -1298,7 +1298,7 @@ lbl_fn_803EA09C_000011E4:
     mr r3, r31
     li r4, 0x0
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r4, 0x18(r31)
     cmpwi r4, 0x0
     beq lbl_fn_803EA09C_00001238
@@ -1427,7 +1427,7 @@ lbl_fn_803EA09C_000013BC:
     addi r3, r1, 0xc
     addi r5, r27, 0x528
     li r7, 0x2
-    bl fn_800C344C
+    bl skin_applyWeights
     mr r3, r31
     addi r4, r1, 0xc
     bl fn_800CB440
@@ -1498,7 +1498,7 @@ lbl_fn_803EA09C_00001494:
     stw r4, 0x234(r1)
     stw r4, 0x238(r1)
     b lbl_fn_803EA09C_00001564
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, 0x18(r4)
     cmpwi r3, 0x0
     beq lbl_fn_803EA09C_00001528

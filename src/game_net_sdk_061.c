@@ -19,7 +19,7 @@ extern void _savegpr_25(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void fn_8060AE60(void);
-extern void fn_80695D84(void);
+extern void runtime_clampDouble(void);
 extern void fn_80703F90(void);
 extern void fn_80704260(void);
 extern void fn_80704890(void);
@@ -2303,12 +2303,12 @@ lbl_fn_8071F7C0_00001C28:
 lbl_fn_8071F7C0_00001C70:
     lfs f0, lbl_808892D0
     fmuls f1, f0, f23
-    bl fn_80695D84
+    bl runtime_clampDouble
     cmplwi r3, 0xffff
     bge lbl_fn_8071F7C0_00001C94
     lfs f0, lbl_808892D0
     fmuls f1, f0, f23
-    bl fn_80695D84
+    bl runtime_clampDouble
     b lbl_fn_8071F7C0_00001C9C
 lbl_fn_8071F7C0_00001C94:
     lis r3, 0x1
@@ -2326,12 +2326,12 @@ lbl_fn_8071F7C0_00001CA0:
 lbl_fn_8071F7C0_00001CBC:
     lfs f0, lbl_808892D0
     fmuls f1, f0, f22
-    bl fn_80695D84
+    bl runtime_clampDouble
     cmplwi r3, 0xffff
     bge lbl_fn_8071F7C0_00001CE0
     lfs f0, lbl_808892D0
     fmuls f1, f0, f22
-    bl fn_80695D84
+    bl runtime_clampDouble
     b lbl_fn_8071F7C0_00001CE8
 lbl_fn_8071F7C0_00001CE0:
     lis r3, 0x1
@@ -2350,12 +2350,12 @@ lbl_fn_8071F7C0_00001CEC:
 lbl_fn_8071F7C0_00001D0C:
     lfs f0, lbl_808892D0
     fmuls f1, f0, f17
-    bl fn_80695D84
+    bl runtime_clampDouble
     cmplwi r3, 0xffff
     bge lbl_fn_8071F7C0_00001D30
     lfs f0, lbl_808892D0
     fmuls f1, f0, f17
-    bl fn_80695D84
+    bl runtime_clampDouble
     b lbl_fn_8071F7C0_00001D38
 lbl_fn_8071F7C0_00001D30:
     lis r3, 0x1
@@ -2373,12 +2373,12 @@ lbl_fn_8071F7C0_00001D3C:
 lbl_fn_8071F7C0_00001D58:
     lfs f0, lbl_808892D0
     fmuls f1, f0, f21
-    bl fn_80695D84
+    bl runtime_clampDouble
     cmplwi r3, 0xffff
     bge lbl_fn_8071F7C0_00001D7C
     lfs f0, lbl_808892D0
     fmuls f1, f0, f21
-    bl fn_80695D84
+    bl runtime_clampDouble
     b lbl_fn_8071F7C0_00001D84
 lbl_fn_8071F7C0_00001D7C:
     lis r3, 0x1
@@ -2396,12 +2396,12 @@ lbl_fn_8071F7C0_00001D88:
 lbl_fn_8071F7C0_00001DA4:
     lfs f0, lbl_808892D0
     fmuls f1, f0, f20
-    bl fn_80695D84
+    bl runtime_clampDouble
     cmplwi r3, 0xffff
     bge lbl_fn_8071F7C0_00001DC8
     lfs f0, lbl_808892D0
     fmuls f1, f0, f20
-    bl fn_80695D84
+    bl runtime_clampDouble
     b lbl_fn_8071F7C0_00001DD0
 lbl_fn_8071F7C0_00001DC8:
     lis r3, 0x1
@@ -2420,12 +2420,12 @@ lbl_fn_8071F7C0_00001DD4:
 lbl_fn_8071F7C0_00001DF4:
     lfs f0, lbl_808892D0
     fmuls f1, f0, f17
-    bl fn_80695D84
+    bl runtime_clampDouble
     cmplwi r3, 0xffff
     bge lbl_fn_8071F7C0_00001E18
     lfs f0, lbl_808892D0
     fmuls f1, f0, f17
-    bl fn_80695D84
+    bl runtime_clampDouble
     b lbl_fn_8071F7C0_00001E20
 lbl_fn_8071F7C0_00001E18:
     lis r3, 0x1
@@ -2443,12 +2443,12 @@ lbl_fn_8071F7C0_00001E24:
 lbl_fn_8071F7C0_00001E40:
     lfs f0, lbl_808892D0
     fmuls f1, f0, f19
-    bl fn_80695D84
+    bl runtime_clampDouble
     cmplwi r3, 0xffff
     bge lbl_fn_8071F7C0_00001E64
     lfs f0, lbl_808892D0
     fmuls f1, f0, f19
-    bl fn_80695D84
+    bl runtime_clampDouble
     b lbl_fn_8071F7C0_00001E6C
 lbl_fn_8071F7C0_00001E64:
     lis r3, 0x1
@@ -2466,12 +2466,12 @@ lbl_fn_8071F7C0_00001E70:
 lbl_fn_8071F7C0_00001E8C:
     lfs f0, lbl_808892D0
     fmuls f1, f0, f18
-    bl fn_80695D84
+    bl runtime_clampDouble
     cmplwi r3, 0xffff
     bge lbl_fn_8071F7C0_00001EB0
     lfs f0, lbl_808892D0
     fmuls f1, f0, f18
-    bl fn_80695D84
+    bl runtime_clampDouble
     b lbl_fn_8071F7C0_00001EB8
 lbl_fn_8071F7C0_00001EB0:
     lis r3, 0x1
@@ -2490,12 +2490,12 @@ lbl_fn_8071F7C0_00001EBC:
 lbl_fn_8071F7C0_00001EDC:
     lfs f0, lbl_808892D0
     fmuls f1, f0, f17
-    bl fn_80695D84
+    bl runtime_clampDouble
     cmplwi r3, 0xffff
     bge lbl_fn_8071F7C0_00001F00
     lfs f0, lbl_808892D0
     fmuls f1, f0, f17
-    bl fn_80695D84
+    bl runtime_clampDouble
     b lbl_fn_8071F7C0_00001F08
 lbl_fn_8071F7C0_00001F00:
     lis r3, 0x1
@@ -2514,12 +2514,12 @@ lbl_fn_8071F7C0_00001F0C:
 lbl_fn_8071F7C0_00001F2C:
     lfs f0, lbl_808892D0
     fmuls f1, f0, f17
-    bl fn_80695D84
+    bl runtime_clampDouble
     cmplwi r3, 0xffff
     bge lbl_fn_8071F7C0_00001F50
     lfs f0, lbl_808892D0
     fmuls f1, f0, f17
-    bl fn_80695D84
+    bl runtime_clampDouble
     b lbl_fn_8071F7C0_00001F58
 lbl_fn_8071F7C0_00001F50:
     lis r3, 0x1
@@ -2538,12 +2538,12 @@ lbl_fn_8071F7C0_00001F5C:
 lbl_fn_8071F7C0_00001F7C:
     lfs f0, lbl_808892D0
     fmuls f1, f0, f17
-    bl fn_80695D84
+    bl runtime_clampDouble
     cmplwi r3, 0xffff
     bge lbl_fn_8071F7C0_00001FA0
     lfs f0, lbl_808892D0
     fmuls f1, f0, f17
-    bl fn_80695D84
+    bl runtime_clampDouble
     b lbl_fn_8071F7C0_00001FA8
 lbl_fn_8071F7C0_00001FA0:
     lis r3, 0x1
@@ -2562,12 +2562,12 @@ lbl_fn_8071F7C0_00001FAC:
 lbl_fn_8071F7C0_00001FCC:
     lfs f0, lbl_808892D0
     fmuls f1, f0, f17
-    bl fn_80695D84
+    bl runtime_clampDouble
     cmplwi r3, 0xffff
     bge lbl_fn_8071F7C0_00001FF0
     lfs f0, lbl_808892D0
     fmuls f1, f0, f17
-    bl fn_80695D84
+    bl runtime_clampDouble
     b lbl_fn_8071F7C0_00001FF8
 lbl_fn_8071F7C0_00001FF0:
     lis r3, 0x1
@@ -2586,12 +2586,12 @@ lbl_fn_8071F7C0_00001FFC:
 lbl_fn_8071F7C0_0000201C:
     lfs f0, lbl_808892D0
     fmuls f1, f0, f17
-    bl fn_80695D84
+    bl runtime_clampDouble
     cmplwi r3, 0xffff
     bge lbl_fn_8071F7C0_00002040
     lfs f0, lbl_808892D0
     fmuls f1, f0, f17
-    bl fn_80695D84
+    bl runtime_clampDouble
     b lbl_fn_8071F7C0_00002048
 lbl_fn_8071F7C0_00002040:
     lis r3, 0x1
@@ -2611,12 +2611,12 @@ lbl_fn_8071F7C0_0000204C:
 lbl_fn_8071F7C0_00002070:
     lfs f0, lbl_808892D0
     fmuls f1, f0, f17
-    bl fn_80695D84
+    bl runtime_clampDouble
     cmplwi r3, 0xffff
     bge lbl_fn_8071F7C0_00002094
     lfs f0, lbl_808892D0
     fmuls f1, f0, f17
-    bl fn_80695D84
+    bl runtime_clampDouble
     b lbl_fn_8071F7C0_0000209C
 lbl_fn_8071F7C0_00002094:
     lis r3, 0x1
@@ -2636,12 +2636,12 @@ lbl_fn_8071F7C0_000020A0:
 lbl_fn_8071F7C0_000020C4:
     lfs f0, lbl_808892D0
     fmuls f1, f0, f17
-    bl fn_80695D84
+    bl runtime_clampDouble
     cmplwi r3, 0xffff
     bge lbl_fn_8071F7C0_000020E8
     lfs f0, lbl_808892D0
     fmuls f1, f0, f17
-    bl fn_80695D84
+    bl runtime_clampDouble
     b lbl_fn_8071F7C0_000020F0
 lbl_fn_8071F7C0_000020E8:
     lis r3, 0x1
@@ -2661,12 +2661,12 @@ lbl_fn_8071F7C0_000020F4:
 lbl_fn_8071F7C0_00002118:
     lfs f0, lbl_808892D0
     fmuls f1, f0, f17
-    bl fn_80695D84
+    bl runtime_clampDouble
     cmplwi r3, 0xffff
     bge lbl_fn_8071F7C0_0000213C
     lfs f0, lbl_808892D0
     fmuls f1, f0, f17
-    bl fn_80695D84
+    bl runtime_clampDouble
     b lbl_fn_8071F7C0_00002144
 lbl_fn_8071F7C0_0000213C:
     lis r3, 0x1

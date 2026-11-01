@@ -6,7 +6,7 @@ extern void _restgpr_25(void);
 extern void _savegpr_25(void);
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_80057A64(void);
 extern void talk_parseQuotedString(void);
 extern void fn_8005B5F8(void);
@@ -16,11 +16,11 @@ extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800C344C(void);
+extern void skin_applyWeights(void);
 extern void fn_800CB360(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
-extern void fn_800CB5C8(void);
+extern void morph_updateMesh(void);
 extern void fn_800EB7A0(void);
 extern void fn_800EE360(void);
 extern void system_getNextSequenceId(void);
@@ -221,7 +221,7 @@ lbl_fn_80271104_000000D0:
     addi r5, r31, 0x528
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r31, 0x153c
     addi r4, r1, 0x14
     bl fn_800CB440
@@ -260,7 +260,7 @@ lbl_fn_80271104_000001D0:
     addi r3, r31, 0x153c
     li r4, 0x0
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lis r4, lbl_80744920@ha
     lfs f1, lbl_8088379C
     addi r4, r4, lbl_80744920@l
@@ -269,7 +269,7 @@ lbl_fn_80271104_000001D0:
     addi r5, r31, 0x528
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle
@@ -308,7 +308,7 @@ lbl_fn_80271104_00000284:
     addi r3, r31, 0x153c
     li r4, 0xf
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0xc8
@@ -1661,7 +1661,7 @@ lbl_fn_80272660_0000162C:
     addi r3, r31, 0x153c
     li r4, 0xf
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0xc8
@@ -1854,7 +1854,7 @@ asm void fn_8027278C(void)
     addi r8, r1, 0x18
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     addi r27, r30, 0x18
     stw r31, 0x2c(r1)
     addi r26, r1, 0x2c
@@ -1874,7 +1874,7 @@ asm void fn_8027278C(void)
     addi r8, r1, 0x10
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     addi r3, r29, 0x2c
     bl strlen
     lis r4, lbl_807772D0@ha
@@ -1942,7 +1942,7 @@ lbl_fn_8027278C_00001A3C:
     addi r6, r26, 0x8
     addi r8, r1, 0x8
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_8027278C_00001A6C:
     addi r3, r1, 0x44
     bl fn_8005B5F8

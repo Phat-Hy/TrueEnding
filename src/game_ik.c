@@ -21,7 +21,7 @@ extern void C_MTXLookAt(void);
 extern void PSMTXMultVec(void);
 extern void fn_80686A48(void);
 extern void fn_806952C4(void);
-extern void fn_80695AD0(void);
+extern void vec3_isNonZero(void);
 extern void fn_80709AD0(void);
 extern void fn_8070AD40(void);
 extern void fn_8070AD50(void);
@@ -842,7 +842,7 @@ lbl_fn_800C7568_0000092C:
     stw r5, 0x24(r1)
     stw r4, 0x28(r1)
     stw r0, 0x2c(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_800C7568_00000A84
     lwz r29, 0x2418(r26)

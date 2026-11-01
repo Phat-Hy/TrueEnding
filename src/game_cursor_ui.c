@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void DCInvalidateRange(void);
 extern void dtor_80084684(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void talk_formatQuotedString(void);
 extern void fn_800638B0(void);
 extern void fn_80063D3C(void);
@@ -12,7 +12,7 @@ extern void fn_800827E0(void);
 extern void fn_800839EC(void);
 extern void mem_alloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_8008771C(void);
+extern void route_interpolatePath(void);
 extern void fn_80087858(void);
 extern void fn_80087994(void);
 extern void fn_8008937C(void);
@@ -421,7 +421,7 @@ lbl_fn_800A85CC_00000424:
     add r7, r31, r0
     addi r8, r1, 0x8
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lwz r0, 0x6c(r28)
     lwz r3, 0x64(r28)
     srwi. r0, r0, 31
@@ -795,7 +795,7 @@ lbl_fn_800A8A80_000008C4:
     addi r5, r28, 0x60
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)

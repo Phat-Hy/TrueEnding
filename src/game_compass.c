@@ -20,7 +20,7 @@ extern void fn_8009A0F8(void);
 extern void fn_8009A2C0(void);
 extern void fn_8009A490(void);
 extern void fn_8009A504(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_80476130(void);
 extern void PSMTXConcat(void);
 extern void PSMTXConcatArray(void);
@@ -907,7 +907,7 @@ asm void fn_80091CFC(void)
     stw r28, 0x10(r1)
     mr r28, r3
     mr r3, r4
-    bl fn_800DC6B4
+    bl str_findChar
     lwz r5, 0x16c(r28)
     cmpwi r5, 0x0
     bne lbl_fn_80091CFC_00000C64
@@ -1716,7 +1716,7 @@ asm void atn_Model_findBoneIndex(void)
     stw r30, 0x8(r1)
     mr r30, r3
     mr r3, r4
-    bl fn_800DC6B4
+    bl str_findChar
     mulli r0, r31, 0x18
     add r4, r30, r0
     lwz r5, 0x16c(r4)
@@ -1820,7 +1820,7 @@ asm void fn_80092954(void)
     stw r31, 0xc(r1)
     mr r31, r3
     mr r3, r4
-    bl fn_800DC6B4
+    bl str_findChar
     lwz r0, 0x104(r31)
     li r5, 0x0
     mtctr r0

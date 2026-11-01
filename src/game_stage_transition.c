@@ -12,11 +12,11 @@ extern void mem_free(void);
 extern void fn_8008BBD8(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800C344C(void);
+extern void skin_applyWeights(void);
 extern void fn_800CB360(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
-extern void fn_800CB5C8(void);
+extern void morph_updateMesh(void);
 extern void fn_800CB6E4(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800FAB80(void);
@@ -1286,7 +1286,7 @@ asm void fn_8019B630(void)
     stw r5, 0x0(r3)
     li r5, 0x0
     addi r3, r3, 0x20
-    bl fn_800CB5C8
+    bl morph_updateMesh
     addi r3, r30, 0x20
     li r4, -0x1
     bl ref_releaseHandle
@@ -1480,7 +1480,7 @@ lbl_fn_8019B6A8_000012F0:
     li r7, -0x1
     addi r4, r6, 0x28
     li r6, 0x0
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r31, 0x20
     addi r4, r1, 0x8
     bl fn_800CB440

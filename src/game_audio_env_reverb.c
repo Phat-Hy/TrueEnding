@@ -10,7 +10,7 @@ extern void mem_free(void);
 extern void fn_8008CD60(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_800C31F4(void);
-extern void fn_800C344C(void);
+extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void system_getNextSequenceId(void);
 extern void dialog_renderWindow(void);
@@ -1598,7 +1598,7 @@ lbl_fn_80317EF8_00001560:
     lfs f1, lbl_80884D78
     li r7, -0x1
     stfs f0, 0x151c(r30)
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle

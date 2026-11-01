@@ -10,7 +10,7 @@ extern void dtor_80084684(void);
 extern void fn_80076FF8(void);
 extern void mem_alloc(void);
 extern void route_findNextWaypoint(void);
-extern void fn_8008771C(void);
+extern void route_interpolatePath(void);
 extern void fn_80087BB4(void);
 extern void fn_8008937C(void);
 extern void fn_800897D8(void);
@@ -20,12 +20,12 @@ extern void fn_800C31F4(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
 extern void fn_800CB518(void);
-extern void fn_800CB5C8(void);
+extern void morph_updateMesh(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_80117228(void);
 extern void fn_80124B60(void);
 extern void fn_801F3FF8(void);
@@ -129,7 +129,7 @@ asm void fn_804A2078(void)
     li r5, 0x0
     stw r0, lbl_8087F578
     addi r3, r3, 0x23c
-    bl fn_800CB5C8
+    bl morph_updateMesh
     addic. r0, r30, 0x244
     beq lbl_fn_804A2078_0000006C
     lwz r4, 0x244(r30)
@@ -242,7 +242,7 @@ lbl_fn_804A2128_00000188:
     addi r5, r31, 0x50
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     mr r3, r28
     addi r4, r29, 0x17
     addi r5, r31, 0x54
@@ -284,7 +284,7 @@ lbl_fn_804A2294_00000244:
     li r4, 0x5a
     li r5, 0x0
     addi r3, r3, 0x23c
-    bl fn_800CB5C8
+    bl morph_updateMesh
 lbl_fn_804A2294_0000026C:
     lwz r3, lbl_8087F430
     li r4, 0xfa
@@ -397,7 +397,7 @@ lbl_fn_804A233C_000003CC:
     addi r3, r31, 0x23c
     li r4, 0xf
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lis r4, lbl_807570D4@ha
     lfs f1, lbl_808871B0
     addi r4, r4, lbl_807570D4@l
@@ -1214,7 +1214,7 @@ lbl_fn_804A2D2C_00000E80:
     addi r5, r31, 0x1fc
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     li r3, 0x1
     b lbl_fn_804A2D2C_00000F00
 lbl_fn_804A2D2C_00000EFC:
@@ -1646,7 +1646,7 @@ lbl_fn_804A3438_00001478:
     bl sprintf
     lwz r29, 0x6c(r31)
     addi r3, r1, 0x20
-    bl fn_800DC6B4
+    bl str_findChar
     mr r5, r3
     mr r4, r29
     addi r3, r1, 0x8
@@ -1655,7 +1655,7 @@ lbl_fn_804A3438_00001478:
     addi r3, r30, 0x128
     lfs f31, 0x8(r1)
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     mr r3, r29
@@ -1665,7 +1665,7 @@ lbl_fn_804A3438_00001478:
     addi r3, r30, 0x128
     lfs f31, 0xc(r1)
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     mr r3, r29
@@ -1675,7 +1675,7 @@ lbl_fn_804A3438_00001478:
     addi r3, r30, 0x128
     lfs f31, 0x18(r1)
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     mr r3, r29
@@ -1685,7 +1685,7 @@ lbl_fn_804A3438_00001478:
     addi r3, r30, 0x133
     lfs f31, 0x10(r1)
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     mr r3, r29
@@ -1694,7 +1694,7 @@ lbl_fn_804A3438_00001478:
     addi r3, r30, 0x139
     lfs f31, 0x14(r1)
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     mr r3, r29
@@ -1848,7 +1848,7 @@ lbl_fn_804A3438_000017C0:
     lfs f31, 0x1fc(r31)
     addi r3, r3, 0x13f
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     mr r3, r29
@@ -1860,7 +1860,7 @@ lbl_fn_804A3438_00001814:
     addi r3, r3, lbl_807573D0@l
     addi r3, r3, 0x13f
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_808871D0
     mr r4, r3
     mr r3, r29

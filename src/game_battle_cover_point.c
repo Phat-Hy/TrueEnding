@@ -13,12 +13,12 @@ extern void fn_8008AD4C(void);
 extern void fn_8008B140(void);
 extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_800C344C(void);
+extern void skin_applyWeights(void);
 extern void fn_800CB360(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
 extern void fn_800CB518(void);
-extern void fn_800CB5C8(void);
+extern void morph_updateMesh(void);
 extern void fn_800CB6B0(void);
 extern void fn_803EC568(void);
 extern void fn_803EC69C(void);
@@ -1801,7 +1801,7 @@ asm void fn_8040D6F8(void)
     li r4, 0x0
     li r5, 0x0
     addi r3, r3, 0x638
-    bl fn_800CB5C8
+    bl morph_updateMesh
     b lbl_fn_8040D6F8_00001BA0
 lbl_fn_8040D6F8_000018C0:
     lwz r0, 0x634(r3)
@@ -1844,7 +1844,7 @@ lbl_fn_8040D6F8_00001910:
     addi r3, r31, 0x638
     li r4, 0xf
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lis r4, lbl_80752AC8@ha
     lfs f1, lbl_8088632C
     addi r4, r4, lbl_80752AC8@l
@@ -1853,7 +1853,7 @@ lbl_fn_8040D6F8_00001910:
     addi r5, r31, 0x6c
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r31, 0x638
     addi r4, r1, 0x10
     bl fn_800CB440
@@ -1886,7 +1886,7 @@ lbl_fn_8040D6F8_000019CC:
     addi r3, r31, 0x638
     li r4, 0xf
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lis r3, lbl_80752AC8@ha
     lfs f1, lbl_8088632C
     lwz r4, lbl_80752AC8@l(r3)
@@ -1894,7 +1894,7 @@ lbl_fn_8040D6F8_000019CC:
     addi r5, r31, 0x6c
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r31, 0x638
     addi r4, r1, 0xc
     bl fn_800CB440
@@ -1921,7 +1921,7 @@ lbl_fn_8040D6F8_00001A50:
     addi r5, r31, 0x6c
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r31, 0x638
     addi r4, r1, 0x8
     bl fn_800CB440
@@ -1945,7 +1945,7 @@ lbl_fn_8040D6F8_00001AB4:
     li r4, 0x0
     li r5, 0x0
     addi r3, r3, 0x638
-    bl fn_800CB5C8
+    bl morph_updateMesh
     b lbl_fn_8040D6F8_00001B18
 lbl_fn_8040D6F8_00001ADC:
     cmpwi r0, 0x2

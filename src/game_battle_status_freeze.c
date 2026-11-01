@@ -44,8 +44,8 @@ extern void fn_803F11F8(void);
 extern void fn_8042952C(void);
 extern void fn_804491F4(void);
 extern void fn_80449A18(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void fn_8054D798(void);
 extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
@@ -1339,10 +1339,10 @@ asm void fn_804283EC(void)
     stmw r27, 0x64c(r1)
     mr r27, r3
     addi r3, r3, 0x60
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r30, r3
     addi r3, r27, 0x60
-    bl fn_80470580
+    bl boss_getOffset54
     lis r4, lbl_807774D8@ha
     li r0, 0x0
     addi r4, r4, lbl_807774D8@l

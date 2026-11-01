@@ -14,7 +14,7 @@ extern void fn_80041A28(void);
 extern void fn_80044C30(void);
 extern void mem_alloc(void);
 extern void fn_800C31F4(void);
-extern void fn_800C344C(void);
+extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void fn_800E8FB8(void);
 extern void system_getNextSequenceId(void);
@@ -436,7 +436,7 @@ lbl_fn_800E73EC_00000418:
     addi r5, r27, 0x528
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -741,7 +741,7 @@ lbl_fn_800E7650_0000086C:
     addi r5, r29, 0x528
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x14
     li r4, -0x1
     bl ref_releaseHandle

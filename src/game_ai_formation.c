@@ -15,7 +15,7 @@ extern void fn_8005B5F8(void);
 extern void fn_8005B6E8(void);
 extern void fn_8009373C(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_800C344C(void);
+extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void fn_800E41FC(void);
 extern void fn_800F72CC(void);
@@ -36,7 +36,7 @@ extern void fn_8013C3B4(void);
 extern void fn_8013CB68(void);
 extern void fn_8014052C(void);
 extern void fn_80145334(void);
-extern void fn_8014C0B4(void);
+extern void dialog_setScriptSlot(void);
 extern void fn_8014C540(void);
 extern void fn_80151448(void);
 extern void fn_8015D8C0(void);
@@ -83,8 +83,8 @@ extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
 extern void fn_803E6850(void);
 extern void fn_804439FC(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void fn_8054A340(void);
 extern void PSMTXRotRad(void);
 extern void PSMTX44Identity(void);
@@ -207,10 +207,10 @@ lbl_fn_8026580C_00000080:
     psq_st f1, 0x0(r5), 0, 0
 lbl_fn_8026580C_0000009C:
     addi r3, r3, 0x14b0
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r29, r3
     addi r3, r31, 0x14b0
-    bl fn_80470580
+    bl boss_getOffset54
     lis r4, lbl_807772D0@ha
     li r0, 0x0
     addi r4, r4, lbl_807772D0@l
@@ -507,21 +507,21 @@ lbl_fn_80265B00_000004CC:
     mr r3, r31
     li r4, 0x19
     li r5, 0x1c2
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r31
     li r4, 0x1a
     li r5, 0x1c3
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     b lbl_fn_80265B00_00000528
 lbl_fn_80265B00_00000508:
     mr r3, r31
     li r4, 0x19
     li r5, 0x1c0
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
     mr r3, r31
     li r4, 0x1a
     li r5, 0x1c1
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
 lbl_fn_80265B00_00000528:
     addi r3, r31, 0x8bc
     li r4, 0x4
@@ -1390,7 +1390,7 @@ lbl_fn_80266254_00001070:
     addi r5, r31, 0x1c
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle

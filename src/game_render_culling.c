@@ -7,13 +7,13 @@ extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_8004203C(void);
 extern void fn_80056DB8(void);
 extern void talk_parseQuotedString(void);
 extern void fn_8005B5F8(void);
 extern void mem_free(void);
-extern void fn_8008771C(void);
+extern void route_interpolatePath(void);
 extern void fn_8008937C(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_800A555C(void);
@@ -34,8 +34,8 @@ extern void res_MsgHandle_update(void);
 extern void fn_802AE954(void);
 extern void world_setGlobalFlag(void);
 extern void fn_803E3384(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_805A4984(void);
 extern void PSVECMag(void);
@@ -150,10 +150,10 @@ lbl_fn_802AC590_000000D8:
     b lbl_fn_802AC590_00000380
 lbl_fn_802AC590_000000E0:
     addi r3, r31, 0x14b4
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r30, r3
     addi r3, r31, 0x14b4
-    bl fn_80470580
+    bl boss_getOffset54
     mr r4, r3
     mr r3, r31
     mr r5, r30
@@ -202,7 +202,7 @@ lbl_fn_802AC590_00000170:
     li r6, 0x0
     li r7, 0x0
     addi r5, r5, 0x18
-    bl fn_8008771C
+    bl route_interpolatePath
     addi r29, r29, 0x1c
     addi r27, r27, 0x1
 lbl_fn_802AC590_000001AC:
@@ -243,7 +243,7 @@ lbl_fn_802AC590_00000204:
     li r6, 0x0
     li r7, 0x0
     addi r5, r5, 0xc
-    bl fn_8008771C
+    bl route_interpolatePath
     addi r29, r29, 0x20
     addi r28, r28, 0x1
 lbl_fn_802AC590_00000240:
@@ -699,7 +699,7 @@ lbl_fn_802ACD3C_0000084C:
     lwz r0, 0x4(r29)
     li r5, 0x0
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_802ACD3C_00000890:
     lwz r3, 0xc(r29)
     srwi. r0, r3, 31
@@ -727,7 +727,7 @@ lbl_fn_802ACD3C_000008B4:
     lwz r0, 0x10(r29)
     li r5, 0x0
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_802ACD3C_000008F8:
     lfs f0, 0x18(r29)
     stfs f0, 0x18(r27)
@@ -885,7 +885,7 @@ lbl_fn_802ACD3C_00000AFC:
     lwz r0, 0x4(r29)
     li r5, 0x0
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_802ACD3C_00000B3C:
     lwz r3, 0xc(r29)
     srwi. r0, r3, 31
@@ -912,7 +912,7 @@ lbl_fn_802ACD3C_00000B60:
     lwz r0, 0x10(r29)
     li r5, 0x0
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_802ACD3C_00000BA0:
     lfs f0, 0x18(r29)
     stfs f0, 0x18(r30)
@@ -959,7 +959,7 @@ lbl_fn_802ACD3C_00000C0C:
     lwz r6, 0x8(r31)
     lwz r0, 0x4(r31)
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_802ACD3C_00000C4C:
     lwz r3, 0xc(r31)
     srwi. r0, r3, 31
@@ -986,7 +986,7 @@ lbl_fn_802ACD3C_00000C70:
     lwz r6, 0x14(r31)
     lwz r0, 0x10(r31)
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_802ACD3C_00000CB0:
     lfs f0, 0x18(r31)
     stfs f0, 0x18(r30)
@@ -1177,7 +1177,7 @@ lbl_fn_802AD3D4_00000EF4:
     lwz r0, 0x4(r30)
     li r5, 0x0
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_802AD3D4_00000F38:
     lfs f0, 0xc(r30)
     stfs f0, 0xc(r31)
@@ -1367,7 +1367,7 @@ lbl_fn_802AD3D4_000011B4:
     lwz r0, 0x4(r30)
     li r5, 0x0
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_802AD3D4_000011F4:
     lfs f0, 0xc(r30)
     stfs f0, 0xc(r27)
@@ -1420,7 +1420,7 @@ lbl_fn_802AD3D4_00001278:
     lwz r6, 0x8(r28)
     lwz r0, 0x4(r28)
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_802AD3D4_000012B8:
     lfs f0, 0xc(r28)
     stfs f0, 0xc(r27)

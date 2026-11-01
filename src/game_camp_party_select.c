@@ -37,8 +37,8 @@ extern void fn_803CE408(void);
 extern void fn_803CE448(void);
 extern void fn_8046ECDC(void);
 extern void fn_8046EED8(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
@@ -1961,10 +1961,10 @@ asm void fn_803B9324(void)
     stmw r23, 0xd6c(r1)
     mr r28, r3
     addi r3, r3, 0x50
-    bl fn_8047059C
+    bl boss_getOffset50
     srwi r26, r3, 1
     addi r3, r28, 0x50
-    bl fn_80470580
+    bl boss_getOffset54
     lis r4, lbl_8078B608@ha
     li r0, 0x0
     addi r4, r4, lbl_8078B608@l

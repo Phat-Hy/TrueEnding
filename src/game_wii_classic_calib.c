@@ -32,8 +32,8 @@ extern void fn_80228AF8(void);
 extern void fn_80228CA0(void);
 extern void res_findResourceSlot(void);
 extern void fn_803B3B38(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_getData(void);
@@ -2071,10 +2071,10 @@ asm void fn_80564194(void)
     stw r28, 0x840(r1)
     mr r28, r3
     addi r3, r3, 0x418
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r30, r3
     addi r3, r28, 0x418
-    bl fn_80470580
+    bl boss_getOffset54
     lis r4, lbl_807774D8@ha
     li r0, 0x0
     addi r4, r4, lbl_807774D8@l

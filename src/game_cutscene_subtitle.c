@@ -9,7 +9,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
 extern void fn_800CB58C(void);
-extern void fn_800CB5C8(void);
+extern void morph_updateMesh(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800F8C6C(void);
 extern void fn_80144710(void);
@@ -34,7 +34,7 @@ extern void PSVECMag(void);
 extern void rand(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
-extern void fn_80695AD0(void);
+extern void vec3_isNonZero(void);
 
 /* External data declarations */
 extern u8 lbl_80749F58[];
@@ -623,7 +623,7 @@ lbl_fn_8032FD30_00000750:
     addi r3, r29, 0x15b0
     li r4, 0x14
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, 0x1570(r29)
     li r4, 0x0
     lwz r0, 0x14ec(r29)
@@ -1032,7 +1032,7 @@ lbl_fn_80330218_00000D14:
     stw r5, 0xc8(r1)
     stw r4, 0xcc(r1)
     stw r0, 0xd0(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80330218_00000D88
     lwz r3, 0xf80(r31)

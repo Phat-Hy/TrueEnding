@@ -44,7 +44,7 @@ extern void fn_80617D50(void);
 extern void GXLoadPosMtxImm(void);
 extern void GXSetCurrentMtx(void);
 extern void fn_80686A48(void);
-extern void fn_80695D84(void);
+extern void runtime_clampDouble(void);
 
 /* External data declarations */
 extern u8 lbl_80731140[];
@@ -2842,7 +2842,7 @@ lbl_atn_ComDrawFontSideFade_execute_0000290C:
     bge lbl_atn_ComDrawFontSideFade_execute_0000295C
     fdivs f0, f30, f29
     fmuls f1, f26, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
     slwi r0, r3, 24
     stw r0, 0xc(r24)
     b lbl_atn_ComDrawFontSideFade_execute_00002988
@@ -2853,7 +2853,7 @@ lbl_atn_ComDrawFontSideFade_execute_0000295C:
     fdivs f0, f0, f29
     fsubs f0, f27, f0
     fmuls f1, f26, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
     slwi r0, r3, 24
     stw r0, 0xc(r24)
     b lbl_atn_ComDrawFontSideFade_execute_00002988

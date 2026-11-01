@@ -7,7 +7,7 @@ extern void _savegpr_14(void);
 extern void dtor_80084684(void);
 extern void fn_8000D430(void);
 extern void route_findNextWaypoint(void);
-extern void fn_8008771C(void);
+extern void route_interpolatePath(void);
 extern void fn_80087E9C(void);
 extern void fn_8008937C(void);
 extern void fn_80129A6C(void);
@@ -215,7 +215,7 @@ asm void fn_8012AD20(void)
     addi r5, r28, 0x38
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     mr r3, r29
     mr r10, r28
     addi r4, r30, 0x3b
@@ -242,7 +242,7 @@ asm void fn_8012AD20(void)
     addi r5, r28, 0x78
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)

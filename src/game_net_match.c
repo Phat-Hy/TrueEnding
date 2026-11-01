@@ -19,7 +19,7 @@ extern void fn_801F2398(void);
 extern void fn_801F3EF4(void);
 extern void fn_801F94F4(void);
 extern void fn_801FF1B8(void);
-extern void fn_80695D84(void);
+extern void runtime_clampDouble(void);
 
 /* External data declarations */
 extern u8 lbl_8073CDC8[];
@@ -774,7 +774,7 @@ lbl_player_syncPositionAndMotion_00000940:
     lfs f1, lbl_80882C18
     lfs f0, lbl_80882C14
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
     mr r30, r3
 lbl_player_syncPositionAndMotion_00000954:
     lfs f2, 0x2c(r1)
@@ -795,7 +795,7 @@ lbl_player_syncPositionAndMotion_00000988:
     lfs f1, lbl_80882C18
     lfs f0, lbl_80882C14
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_player_syncPositionAndMotion_00000998:
     mr r29, r3
 lbl_player_syncPositionAndMotion_0000099C:
@@ -817,7 +817,7 @@ lbl_player_syncPositionAndMotion_000009D0:
     lfs f1, lbl_80882C18
     lfs f0, lbl_80882C14
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_player_syncPositionAndMotion_000009E0:
     mr r28, r3
 lbl_player_syncPositionAndMotion_000009E4:
@@ -839,7 +839,7 @@ lbl_player_syncPositionAndMotion_00000A18:
     lfs f1, lbl_80882C18
     lfs f0, lbl_80882C14
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_player_syncPositionAndMotion_00000A28:
     lfs f2, 0x18(r1)
     slwi r3, r3, 24
@@ -865,7 +865,7 @@ lbl_player_syncPositionAndMotion_00000A74:
     lfs f1, lbl_80882C18
     lfs f0, lbl_80882C14
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_player_syncPositionAndMotion_00000A84:
     mr r28, r3
 lbl_player_syncPositionAndMotion_00000A88:
@@ -887,7 +887,7 @@ lbl_player_syncPositionAndMotion_00000ABC:
     lfs f1, lbl_80882C18
     lfs f0, lbl_80882C14
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_player_syncPositionAndMotion_00000ACC:
     mr r29, r3
 lbl_player_syncPositionAndMotion_00000AD0:
@@ -909,7 +909,7 @@ lbl_player_syncPositionAndMotion_00000B04:
     lfs f1, lbl_80882C18
     lfs f0, lbl_80882C14
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_player_syncPositionAndMotion_00000B14:
     mr r30, r3
 lbl_player_syncPositionAndMotion_00000B18:
@@ -931,7 +931,7 @@ lbl_player_syncPositionAndMotion_00000B4C:
     lfs f1, lbl_80882C18
     lfs f0, lbl_80882C14
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_player_syncPositionAndMotion_00000B5C:
     lwz r4, lbl_8087EEB0
     slwi r0, r28, 16
@@ -1900,7 +1900,7 @@ lbl_fn_801F0B5C_000018BC:
     lfs f1, lbl_80882C38
     lfs f0, lbl_80882C34
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
     mr r29, r3
 lbl_fn_801F0B5C_000018D0:
     lfs f2, 0x14(r1)
@@ -1921,7 +1921,7 @@ lbl_fn_801F0B5C_00001904:
     lfs f1, lbl_80882C38
     lfs f0, lbl_80882C34
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_801F0B5C_00001914:
     mr r30, r3
 lbl_fn_801F0B5C_00001918:
@@ -1943,7 +1943,7 @@ lbl_fn_801F0B5C_0000194C:
     lfs f1, lbl_80882C38
     lfs f0, lbl_80882C34
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_801F0B5C_0000195C:
     mr r31, r3
 lbl_fn_801F0B5C_00001960:
@@ -1965,7 +1965,7 @@ lbl_fn_801F0B5C_00001994:
     lfs f1, lbl_80882C38
     lfs f0, lbl_80882C34
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_801F0B5C_000019A4:
     slwi r4, r30, 8
     fmr f1, f31

@@ -24,7 +24,7 @@ extern void fn_800C310C(void);
 extern void fn_800C31F4(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB58C(void);
-extern void fn_800CB5C8(void);
+extern void morph_updateMesh(void);
 extern void fn_800CE368(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
@@ -87,8 +87,8 @@ extern void fn_803D6E70(void);
 extern void fn_803D7100(void);
 extern void fn_803EFDAC(void);
 extern void fn_8046ECDC(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_80473F88(void);
@@ -2402,28 +2402,28 @@ lbl_fn_804D25D4_00001BEC:
     cmpwi r21, 0x0
     beq lbl_fn_804D25D4_00001DA0
     addi r3, r24, 0x2b60
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r22, r3
     addi r3, r24, 0x2b60
-    bl fn_80470580
+    bl boss_getOffset54
     mr r4, r3
     mr r5, r22
     addi r3, r24, 0x69c
     bl fn_805061CC
     addi r3, r24, 0x2b68
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r22, r3
     addi r3, r24, 0x2b68
-    bl fn_80470580
+    bl boss_getOffset54
     mr r4, r3
     mr r5, r22
     addi r3, r24, 0x2a50
     bl fn_80506D98
     addi r3, r24, 0x2b50
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r22, r3
     addi r3, r24, 0x2b50
-    bl fn_80470580
+    bl boss_getOffset54
     mr r4, r3
     mr r5, r22
     addi r3, r24, 0x610
@@ -5461,7 +5461,7 @@ lbl_fn_804D25D4_000048D4:
     addi r3, r24, 0x2b70
     li r4, 0x0
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
 lbl_fn_804D25D4_000048F4:
     lis r3, 0x1b4f
     lwz r4, 0x5cc(r24)

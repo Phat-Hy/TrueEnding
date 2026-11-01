@@ -10,7 +10,7 @@ extern void fn_80063764(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_800BFAC8(void);
 extern void fn_800C31F4(void);
-extern void fn_800C344C(void);
+extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void fn_800FAB80(void);
@@ -40,7 +40,7 @@ extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECMag(void);
 extern void std_atan2(void);
-extern void fn_80695D84(void);
+extern void runtime_clampDouble(void);
 
 /* External data declarations */
 extern u8 lbl_80746C38[];
@@ -998,7 +998,7 @@ lbl_fn_802C69BC_00000D20:
 lbl_fn_802C69BC_00000D34:
     lfs f0, lbl_80884344
     fmadds f1, f2, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_802C69BC_00000D40:
     mr r30, r3
 lbl_fn_802C69BC_00000D44:
@@ -1020,7 +1020,7 @@ lbl_fn_802C69BC_00000D78:
     lfs f1, lbl_808843D8
     lfs f0, lbl_80884344
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_802C69BC_00000D88:
     mr r29, r3
 lbl_fn_802C69BC_00000D8C:
@@ -1042,7 +1042,7 @@ lbl_fn_802C69BC_00000DC0:
     lfs f1, lbl_808843D8
     lfs f0, lbl_80884344
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_802C69BC_00000DD0:
     mr r28, r3
 lbl_fn_802C69BC_00000DD4:
@@ -1064,7 +1064,7 @@ lbl_fn_802C69BC_00000E08:
     lfs f1, lbl_808843D8
     lfs f0, lbl_80884344
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_802C69BC_00000E18:
     slwi r5, r29, 8
     slwi r4, r3, 24
@@ -1098,7 +1098,7 @@ lbl_fn_802C69BC_00000E74:
 lbl_fn_802C69BC_00000E88:
     lfs f0, lbl_80884344
     fmadds f1, f2, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_802C69BC_00000E94:
     mr r28, r3
 lbl_fn_802C69BC_00000E98:
@@ -1120,7 +1120,7 @@ lbl_fn_802C69BC_00000ECC:
     lfs f1, lbl_808843D8
     lfs f0, lbl_80884344
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_802C69BC_00000EDC:
     mr r29, r3
 lbl_fn_802C69BC_00000EE0:
@@ -1142,7 +1142,7 @@ lbl_fn_802C69BC_00000F14:
     lfs f1, lbl_808843D8
     lfs f0, lbl_80884344
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_802C69BC_00000F24:
     mr r30, r3
 lbl_fn_802C69BC_00000F28:
@@ -1164,7 +1164,7 @@ lbl_fn_802C69BC_00000F5C:
     lfs f1, lbl_808843D8
     lfs f0, lbl_80884344
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_802C69BC_00000F6C:
     slwi r5, r29, 8
     slwi r4, r3, 24
@@ -1866,7 +1866,7 @@ lbl_fn_802C6DF4_0000195C:
     lwz r8, 0x578(r1)
     lwz r0, 0xc(r8)
     stw r0, 0x1524(r31)
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle

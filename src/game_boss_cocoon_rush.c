@@ -7,7 +7,7 @@ extern void _restgpr_15(void);
 extern void _savegpr_15(void);
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_800698DC(void);
 extern void atn_normalizePath(char* str);
 extern void fn_8006AD24(void);
@@ -23,7 +23,7 @@ struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct 
 extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800D5908(void);
 extern void atn_LH_Texture_update(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_8022D754(void);
 extern void fn_80239030(void);
 extern void fn_802396A0(void);
@@ -861,7 +861,7 @@ asm void fn_80472A9C(void)
     addi r3, r1, 0x10
     bl fn_8006B404
     addi r3, r1, 0x10
-    bl fn_800DC6B4
+    bl str_findChar
     cmpwi r28, 0x0
     mr r5, r3
     li r30, 0x0
@@ -1110,7 +1110,7 @@ asm void fn_80472DCC(void)
     addi r3, r1, 0x10
     bl fn_8006B404
     addi r3, r1, 0x10
-    bl fn_800DC6B4
+    bl str_findChar
     cmpwi r28, 0x0
     mr r5, r3
     li r30, 0x0
@@ -1262,7 +1262,7 @@ lbl_fn_80472FAC_00000FE0:
     stw r0, 0x50(r30)
     stw r0, 0x54(r30)
     stw r0, 0x58(r30)
-    bl fn_800DC6B4
+    bl str_findChar
     stw r3, 0x48(r30)
     mr r3, r30
     lwz r31, 0xc(r1)
@@ -1596,7 +1596,7 @@ lbl_atn_LoadEffect_destructor_000013F0:
     addi r8, r1, 0x18
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r18
     addi r3, r1, 0x80
     bl fn_8006B0C8
@@ -1792,7 +1792,7 @@ lbl_atn_LoadEffect_destructor_000016E0:
     addi r3, r1, 0x74
     addi r8, r1, 0x10
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_atn_LoadEffect_destructor_000016FC:
     lwz r0, 0x2c(r1)
     srwi. r0, r0, 31
@@ -1844,7 +1844,7 @@ lbl_atn_LoadEffect_destructor_00001758:
     addi r8, r1, 0x8
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r25
     addi r3, r1, 0x74
     bl fn_8006AD24
@@ -1969,7 +1969,7 @@ asm void fn_8047392C(void)
     addi r3, r1, 0x10
     bl fn_8006B404
     addi r3, r1, 0x10
-    bl fn_800DC6B4
+    bl str_findChar
     cmpwi r28, 0x0
     mr r5, r3
     li r30, 0x0

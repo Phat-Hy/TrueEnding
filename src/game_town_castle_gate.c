@@ -9,7 +9,7 @@ extern void dtor_80084684(void);
 extern void fn_8006F72C(void);
 extern void mem_free(void);
 extern void fn_800DBF68(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_80134250(void);
 extern void fn_80134270(void);
 extern void fn_801F0544(void);
@@ -297,7 +297,7 @@ asm void fn_803D6EF8(void)
     stw r31, 0x14(r1)
     mr r31, r3
     mr r3, r4
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     addi r3, r31, 0x58
@@ -356,7 +356,7 @@ asm void fn_803D6F78(void)
     stw r30, 0x10(r1)
     mr r30, r3
     mr r3, r4
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     mr r5, r31
@@ -518,7 +518,7 @@ asm void fn_803D70B4(void)
     stw r30, 0x8(r1)
     mr r30, r3
     mr r3, r4
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     mr r5, r31
     addi r3, r30, 0x58

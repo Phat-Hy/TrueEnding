@@ -9,7 +9,7 @@ extern void _savegpr_14(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void mem_free(void);
 extern void mem_getAllocSize(void);
 extern void fn_80543730(void);
@@ -1488,7 +1488,7 @@ lbl_fn_805455D0_000013DC:
     lwz r6, 0x10(r23)
     lwz r0, 0xc(r23)
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_805455D0_0000141C:
     lwz r0, 0x14(r23)
     stw r0, 0x14(r21)
@@ -1520,7 +1520,7 @@ lbl_fn_805455D0_00001454:
     lwz r6, 0x24(r23)
     lwz r0, 0x20(r23)
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_805455D0_00001494:
     stw r25, 0x28(r21)
     stw r25, 0x2c(r21)

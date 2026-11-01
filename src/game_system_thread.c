@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_80069BF4(void);
 extern void fn_8006B174(void);
 extern void fn_8006B2D8(void);
@@ -15,7 +15,7 @@ extern void atn_LH_Texture_release(void);
 extern void fn_800D5908(void);
 extern void atn_LH_Texture_update(void);
 extern void fn_800DBF68(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_801EDCB8(void);
 extern void fn_801F04FC(void);
 extern void fn_801F25E0(void);
@@ -158,7 +158,7 @@ lbl_fn_801FD5A0_000000B8:
     add r7, r7, r26
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r27
     addi r3, r1, 0x58
     bl fn_8006B174
@@ -200,7 +200,7 @@ lbl_fn_801FD5A0_000001A8:
     addi r3, r1, 0x64
     addi r8, r1, 0x20
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_801FD5A0_000001C4:
     lwz r0, 0x58(r1)
     srwi. r0, r0, 31
@@ -249,7 +249,7 @@ lbl_fn_801FD5A0_00000250:
     addi r3, r1, 0x64
     addi r8, r1, 0x18
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_801FD5A0_0000026C:
     lwz r0, 0x4c(r1)
     srwi. r0, r0, 31
@@ -363,7 +363,7 @@ lbl_fn_801FD5A0_000003B4:
     subi r5, r31, 0x1
     add r7, r26, r0
     addi r8, r1, 0x10
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_801FD5A0_000003F8:
     lwz r0, 0x64(r1)
     lis r3, lbl_8073E57C@ha
@@ -388,7 +388,7 @@ lbl_fn_801FD5A0_00000420:
     add r7, r26, r0
     addi r8, r1, 0x8
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lwz r0, 0x64(r1)
     addi r3, r1, 0x70
     srwi. r0, r0, 31
@@ -495,7 +495,7 @@ lbl_fn_801FDA20_0000054C:
     add r7, r7, r26
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r27
     addi r3, r1, 0x58
     bl fn_8006B174
@@ -537,7 +537,7 @@ lbl_fn_801FDA20_0000063C:
     addi r3, r1, 0x64
     addi r8, r1, 0x20
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_801FDA20_00000658:
     lwz r0, 0x58(r1)
     srwi. r0, r0, 31
@@ -586,7 +586,7 @@ lbl_fn_801FDA20_000006E4:
     addi r3, r1, 0x64
     addi r8, r1, 0x18
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_801FDA20_00000700:
     lwz r0, 0x4c(r1)
     srwi. r0, r0, 31
@@ -700,7 +700,7 @@ lbl_fn_801FDA20_00000848:
     subi r5, r31, 0x1
     add r7, r26, r0
     addi r8, r1, 0x10
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_801FDA20_0000088C:
     lwz r0, 0x64(r1)
     lis r3, lbl_8073E57C@ha
@@ -725,7 +725,7 @@ lbl_fn_801FDA20_000008B4:
     add r7, r26, r0
     addi r8, r1, 0x8
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lwz r0, 0x64(r1)
     addi r3, r1, 0x70
     srwi. r0, r0, 31
@@ -1743,7 +1743,7 @@ asm void fn_801FEB9C(void)
     stw r31, 0xc(r1)
     mr r31, r3
     mr r3, r4
-    bl fn_800DC6B4
+    bl str_findChar
     lwz r0, 0x0(r31)
     lwz r6, 0x8(r31)
     slwi r0, r0, 2
@@ -1779,7 +1779,7 @@ asm void fn_801FEC08(void)
     stw r31, 0xc(r1)
     mr r31, r3
     mr r3, r4
-    bl fn_800DC6B4
+    bl str_findChar
     lwz r0, 0xc(r31)
     lwz r6, 0x14(r31)
     slwi r0, r0, 2
@@ -1815,7 +1815,7 @@ asm void fn_801FEC74(void)
     stw r31, 0xc(r1)
     mr r31, r3
     mr r3, r4
-    bl fn_800DC6B4
+    bl str_findChar
     lwz r0, 0x30(r31)
     lwz r6, 0x38(r31)
     slwi r0, r0, 2

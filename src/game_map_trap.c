@@ -5,7 +5,7 @@
 extern void atn_Anim_setLayerAnimation(void);
 extern void fn_80097D40(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800C344C(void);
+extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void fn_80106878(void);
 extern void fn_8010CA34(void);
@@ -132,7 +132,7 @@ lbl_fn_8018B090_0000004C:
     addi r3, r1, 0x8
     slwi r0, r0, 2
     lwzx r4, r4, r0
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle

@@ -11,7 +11,7 @@ extern void atn_Model_findBoneIndex(void);
 extern void fn_8009373C(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800C344C(void);
+extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800FAB80(void);
@@ -1640,7 +1640,7 @@ lbl_fn_8026DB8C_00001598:
     addi r4, r4, 0x236
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x24
     li r4, -0x1
     bl ref_releaseHandle
@@ -1701,7 +1701,7 @@ lbl_fn_8026DB8C_00001640:
     addi r5, r1, 0x29c
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x20
     li r4, -0x1
     bl ref_releaseHandle
@@ -2291,7 +2291,7 @@ lbl_fn_8026DB8C_00001F30:
     addi r5, r1, 0x278
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x1c
     li r4, -0x1
     bl ref_releaseHandle
@@ -2618,7 +2618,7 @@ lbl_fn_8026DB8C_00002418:
     addi r5, r1, 0x278
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x18
     li r4, -0x1
     bl ref_releaseHandle
@@ -2641,7 +2641,7 @@ lbl_fn_8026DB8C_000024CC:
     addi r4, r4, 0x236
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x14
     li r4, -0x1
     bl ref_releaseHandle
@@ -2964,7 +2964,7 @@ lbl_fn_8026DB8C_00002988:
     addi r5, r29, 0x528
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle

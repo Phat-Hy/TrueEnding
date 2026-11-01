@@ -130,7 +130,7 @@ extern u32 lbl_80880728;
 /* Function declarations */
 void dtor_80013D60(void);
 void fn_80013DC4(void);
-void fn_80013F78(void);
+void actor_dispatchMessage(void);
 void dtor_80014250(void);
 void fn_800142C4(void);
 void fn_800142CC(void);
@@ -313,7 +313,7 @@ lbl_fn_80013DC4_00000204:
     blr
 }
 
-asm void fn_80013F78(void)
+asm void actor_dispatchMessage(void)
 {
     nofralloc
     stwu r1, -0x60(r1)
@@ -327,19 +327,19 @@ asm void fn_80013F78(void)
     stw r5, 0x8(r1)
     lwz r0, 0x0(r3)
     srwi. r31, r0, 31
-    bne lbl_fn_80013F78_0000025C
+    bne lbl_actor_dispatchMessage_0000025C
     lbz r0, 0x0(r3)
     addi r29, r3, 0x1
     li r27, 0xb
     clrlwi r28, r0, 25
-    b lbl_fn_80013F78_00000268
-lbl_fn_80013F78_0000025C:
+    b lbl_actor_dispatchMessage_00000268
+lbl_actor_dispatchMessage_0000025C:
     lwz r29, 0x8(r3)
     clrlwi r27, r0, 1
     lwz r28, 0x4(r3)
-lbl_fn_80013F78_00000268:
+lbl_actor_dispatchMessage_00000268:
     cmplw r4, r28
-    ble lbl_fn_80013F78_00000294
+    ble lbl_actor_dispatchMessage_00000294
     lis r4, lbl_8072F924@ha
     lis r3, __files@ha
     addi r4, r4, lbl_8072F924@l
@@ -349,26 +349,26 @@ lbl_fn_80013F78_00000268:
     crclr 6
     bl printf
     bl abort
-lbl_fn_80013F78_00000294:
+lbl_actor_dispatchMessage_00000294:
     lwz r0, 0x8(r1)
     subf r3, r21, r28
     stw r3, 0x14(r1)
     addi r4, r1, 0x8
     cmplw r3, r0
-    bge lbl_fn_80013F78_000002B0
+    bge lbl_actor_dispatchMessage_000002B0
     addi r4, r1, 0x14
-lbl_fn_80013F78_000002B0:
+lbl_actor_dispatchMessage_000002B0:
     lis r3, 0x8000
     subf r25, r22, r23
     subi r0, r3, 0x2
     lwz r26, 0x0(r4)
     cmplw r25, r0
-    bgt lbl_fn_80013F78_000002D8
+    bgt lbl_actor_dispatchMessage_000002D8
     subf r30, r26, r28
     subf r0, r25, r0
     cmplw r30, r0
-    ble lbl_fn_80013F78_000002FC
-lbl_fn_80013F78_000002D8:
+    ble lbl_actor_dispatchMessage_000002FC
+lbl_actor_dispatchMessage_000002D8:
     lis r4, lbl_8072F924@ha
     lis r3, __files@ha
     addi r4, r4, lbl_8072F924@l
@@ -378,28 +378,28 @@ lbl_fn_80013F78_000002D8:
     crclr 6
     bl printf
     bl abort
-lbl_fn_80013F78_000002FC:
+lbl_actor_dispatchMessage_000002FC:
     add r30, r25, r30
     add r0, r21, r26
     cmplw r30, r27
     subf r24, r0, r28
-    blt lbl_fn_80013F78_000003F0
+    blt lbl_actor_dispatchMessage_000003F0
     addi r3, r27, 0xf
     addi r0, r30, 0x1
     clrrwi r27, r3, 4
-    b lbl_fn_80013F78_0000032C
-lbl_fn_80013F78_00000320:
+    b lbl_actor_dispatchMessage_0000032C
+lbl_actor_dispatchMessage_00000320:
     slwi r3, r27, 1
     addi r3, r3, 0xf
     clrrwi r27, r3, 4
-lbl_fn_80013F78_0000032C:
+lbl_actor_dispatchMessage_0000032C:
     cmplw r27, r0
-    blt lbl_fn_80013F78_00000320
+    blt lbl_actor_dispatchMessage_00000320
     mr r3, r27
     bl mem_free
     cmpwi r3, 0x0
     mr r28, r3
-    bne lbl_fn_80013F78_00000368
+    bne lbl_actor_dispatchMessage_00000368
     lis r3, __files@ha
     lis r4, lbl_80775AC0@ha
     addi r3, r3, __files@l
@@ -408,67 +408,67 @@ lbl_fn_80013F78_0000032C:
     crclr 6
     bl printf
     bl abort
-lbl_fn_80013F78_00000368:
+lbl_actor_dispatchMessage_00000368:
     cmpwi r21, 0x0
-    beq lbl_fn_80013F78_00000380
+    beq lbl_actor_dispatchMessage_00000380
     mr r3, r28
     mr r4, r29
     mr r5, r21
     bl memcpy
-lbl_fn_80013F78_00000380:
+lbl_actor_dispatchMessage_00000380:
     add r19, r28, r21
     mr r4, r22
     mr r3, r19
     subf r5, r22, r23
     bl memmove
     cmpwi r24, 0x0
-    beq lbl_fn_80013F78_000003B0
+    beq lbl_actor_dispatchMessage_000003B0
     add r0, r29, r21
     mr r5, r24
     add r3, r19, r25
     add r4, r26, r0
     bl memcpy
-lbl_fn_80013F78_000003B0:
+lbl_actor_dispatchMessage_000003B0:
     lbz r0, lbl_8087D6C8
     cmpwi r31, 0x0
     stbx r0, r28, r30
-    beq lbl_fn_80013F78_000003CC
+    beq lbl_actor_dispatchMessage_000003CC
     mr r3, r29
     bl dtor_80084684
-    b lbl_fn_80013F78_000003D8
-lbl_fn_80013F78_000003CC:
+    b lbl_actor_dispatchMessage_000003D8
+lbl_actor_dispatchMessage_000003CC:
     lwz r0, 0x0(r20)
     oris r0, r0, 0x8000
     stw r0, 0x0(r20)
-lbl_fn_80013F78_000003D8:
+lbl_actor_dispatchMessage_000003D8:
     lwz r0, 0x0(r20)
     rlwimi r0, r27, 0, 1, 31
     stw r28, 0x8(r20)
     stw r30, 0x4(r20)
     stw r0, 0x0(r20)
-    b lbl_fn_80013F78_000004D8
-lbl_fn_80013F78_000003F0:
+    b lbl_actor_dispatchMessage_000004D8
+lbl_actor_dispatchMessage_000003F0:
     cmpwi r24, 0x0
     li r3, 0x0
     stw r3, 0x18(r1)
     stw r3, 0x1c(r1)
     stw r3, 0x20(r1)
-    beq lbl_fn_80013F78_00000474
+    beq lbl_actor_dispatchMessage_00000474
     add r0, r29, r21
     add r0, r25, r0
     cmplw r0, r23
-    bge lbl_fn_80013F78_00000474
+    bge lbl_actor_dispatchMessage_00000474
     add r0, r29, r28
     cmplw r23, r0
-    bgt lbl_fn_80013F78_00000474
+    bgt lbl_actor_dispatchMessage_00000474
     cmpwi r3, 0x0
-    bne lbl_fn_80013F78_00000438
+    bne lbl_actor_dispatchMessage_00000438
     lbz r0, 0x18(r1)
     clrlwi r5, r0, 25
-    b lbl_fn_80013F78_0000043C
-lbl_fn_80013F78_00000438:
+    b lbl_actor_dispatchMessage_0000043C
+lbl_actor_dispatchMessage_00000438:
     li r5, 0x0
-lbl_fn_80013F78_0000043C:
+lbl_actor_dispatchMessage_0000043C:
     lbz r0, 0xc(r1)
     mr r6, r22
     stb r0, 0x10(r1)
@@ -476,23 +476,23 @@ lbl_fn_80013F78_0000043C:
     addi r3, r1, 0x18
     addi r8, r1, 0x10
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lwz r0, 0x18(r1)
     srwi. r0, r0, 31
-    beq lbl_fn_80013F78_00000470
+    beq lbl_actor_dispatchMessage_00000470
     lwz r22, 0x20(r1)
-    b lbl_fn_80013F78_00000474
-lbl_fn_80013F78_00000470:
+    b lbl_actor_dispatchMessage_00000474
+lbl_actor_dispatchMessage_00000470:
     addi r22, r1, 0x19
-lbl_fn_80013F78_00000474:
+lbl_actor_dispatchMessage_00000474:
     cmpwi r24, 0x0
-    beq lbl_fn_80013F78_00000490
+    beq lbl_actor_dispatchMessage_00000490
     add r0, r29, r21
     mr r5, r24
     add r3, r0, r25
     add r4, r0, r26
     bl memmove
-lbl_fn_80013F78_00000490:
+lbl_actor_dispatchMessage_00000490:
     mr r4, r22
     mr r5, r25
     add r3, r29, r21
@@ -500,20 +500,20 @@ lbl_fn_80013F78_00000490:
     lbz r0, lbl_8087D6C9
     cmpwi r31, 0x0
     stbx r0, r29, r30
-    bne lbl_fn_80013F78_000004C0
+    bne lbl_actor_dispatchMessage_000004C0
     lbz r0, 0x0(r20)
     rlwimi r0, r30, 0, 25, 31
     stb r0, 0x0(r20)
-    b lbl_fn_80013F78_000004C4
-lbl_fn_80013F78_000004C0:
+    b lbl_actor_dispatchMessage_000004C4
+lbl_actor_dispatchMessage_000004C0:
     stw r30, 0x4(r20)
-lbl_fn_80013F78_000004C4:
+lbl_actor_dispatchMessage_000004C4:
     lwz r0, 0x18(r1)
     srwi. r0, r0, 31
-    beq lbl_fn_80013F78_000004D8
+    beq lbl_actor_dispatchMessage_000004D8
     lwz r3, 0x20(r1)
     bl dtor_80084684
-lbl_fn_80013F78_000004D8:
+lbl_actor_dispatchMessage_000004D8:
     mr r3, r20
     lmw r19, 0x2c(r1)
     lwz r0, 0x64(r1)

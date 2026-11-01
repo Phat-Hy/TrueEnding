@@ -6,7 +6,7 @@ extern void dtor_80013D60(void);
 extern void dtor_80084684(void);
 extern void fn_8000EC88(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_8003E4A4(void);
 extern void fn_8004203C(void);
 extern void fn_8004212C(void);
@@ -53,14 +53,14 @@ extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_unload(void);
 extern void fn_8036823C(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void atn_LoadHandle_destructor(void);
 extern void rand(void);
 extern void strcmp(void);
 extern void strncmp(void);
 extern void atoi(void);
-extern void fn_80695AD0(void);
+extern void vec3_isNonZero(void);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
 
@@ -112,10 +112,10 @@ asm void fn_80137B78(void)
     li r4, 0x1
     bl fn_80093014
     addi r3, r31, 0x84
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r29, r3
     addi r3, r31, 0x84
-    bl fn_80470580
+    bl boss_getOffset54
     lis r4, lbl_807774D8@ha
     li r0, 0x0
     addi r4, r4, lbl_807774D8@l
@@ -421,10 +421,10 @@ asm void fn_80137FC0(void)
     stw r30, 0x8e8(r1)
     stw r29, 0x8e4(r1)
     stw r28, 0x8e0(r1)
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r29, r3
     addi r3, r31, 0x84
-    bl fn_80470580
+    bl boss_getOffset54
     lis r4, lbl_807774D8@ha
     li r0, 0x0
     addi r4, r4, lbl_807774D8@l
@@ -809,7 +809,7 @@ asm void fn_80138528(void)
     addi r8, r1, 0x18
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lwz r0, 0x2c(r1)
     lwz r3, 0x60(r31)
     srwi. r0, r0, 31
@@ -832,7 +832,7 @@ lbl_fn_80138528_00000A70:
     add r7, r29, r0
     addi r8, r1, 0x10
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lis r3, lbl_80737A9C@ha
     li r0, 0x0
     addi r3, r3, lbl_80737A9C@l
@@ -855,7 +855,7 @@ lbl_fn_80138528_00000A70:
     addi r8, r1, 0x8
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r30
     addi r3, r1, 0x2c
     bl fn_8006AD24
@@ -885,14 +885,14 @@ lbl_fn_80138528_00000B38:
     bl dtor_80084684
 lbl_fn_80138528_00000B5C:
     addi r3, r31, 0xa4
-    bl fn_80470580
+    bl boss_getOffset54
     cmpwi r3, 0x0
     beq lbl_fn_80138528_00000D20
     addi r3, r31, 0xa4
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r30, r3
     addi r3, r31, 0xa4
-    bl fn_80470580
+    bl boss_getOffset54
     lis r4, lbl_807774D8@ha
     li r0, 0x0
     addi r4, r4, lbl_807774D8@l
@@ -1503,7 +1503,7 @@ lbl_fn_80138E1C_00001410:
     stw r5, 0x44(r1)
     stw r4, 0x48(r1)
     stw r0, 0x4c(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80138E1C_0000144C
     lwz r3, 0xf80(r29)
@@ -1549,7 +1549,7 @@ lbl_fn_80138E1C_000014B8:
     stw r5, 0x2c(r1)
     stw r4, 0x30(r1)
     stw r0, 0x34(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80138E1C_000014F4
     lwz r3, 0xf80(r29)
@@ -1595,7 +1595,7 @@ lbl_fn_80138E1C_00001560:
     stw r5, 0x38(r1)
     stw r4, 0x3c(r1)
     stw r0, 0x40(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80138E1C_0000159C
     lwz r3, 0xf80(r29)
@@ -1712,7 +1712,7 @@ lbl_fn_80138E1C_00001714:
     stw r5, 0x20(r1)
     stw r4, 0x24(r1)
     stw r0, 0x28(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80138E1C_00001750
     lwz r3, 0xf80(r29)
@@ -1758,7 +1758,7 @@ lbl_fn_80138E1C_000017BC:
     stw r5, 0x8(r1)
     stw r4, 0xc(r1)
     stw r0, 0x10(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80138E1C_000017F8
     lwz r3, 0xf80(r29)
@@ -1804,7 +1804,7 @@ lbl_fn_80138E1C_00001864:
     stw r5, 0x14(r1)
     stw r4, 0x18(r1)
     stw r0, 0x1c(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80138E1C_000018A0
     lwz r3, 0xf80(r29)

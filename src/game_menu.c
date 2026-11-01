@@ -13,10 +13,10 @@ extern void _savegpr_25(void);
 extern void _savegpr_27(void);
 extern void dtor_80013D60(void);
 extern void dtor_80084684(void);
-extern void fn_8000EB8C(void);
+extern void sys_copyString(void);
 extern void fn_8000ECA8(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_8003E4A4(void);
 extern void fn_800502A8(void);
 extern void talk_parseQuotedString(void);
@@ -49,7 +49,7 @@ extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void fn_800D3FA4(void);
 extern void str_skipWhitespace(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_8010D770(void);
 extern void fn_8014FCC4(void);
 extern void fn_8014FCE8(void);
@@ -71,8 +71,8 @@ extern void fn_803B6970(void);
 extern void fn_803B78B4(void);
 extern void fn_803CC6B4(void);
 extern void fn_8043F028(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
@@ -90,7 +90,7 @@ extern void swprintf(void);
 extern void abort(void);
 extern void runtime_registerStaticObject(void);
 extern void fn_80695A50(void);
-extern void fn_80695AD0(void);
+extern void vec3_isNonZero(void);
 extern int sprintf(char* str, const char* format, ...);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
@@ -480,10 +480,10 @@ asm void fn_80041D44(void)
     stw r28, 0x6c0(r1)
     mr r28, r3
     addi r3, r3, 0x48
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r30, r3
     addi r3, r28, 0x48
-    bl fn_80470580
+    bl boss_getOffset54
     mr r4, r3
     mr r5, r30
     addi r3, r1, 0x80
@@ -560,7 +560,7 @@ lbl_fn_80041D44_000003F0:
     stfs f1, 0x24(r1)
     addi r3, r1, 0x28
     addi r4, r30, 0x19
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_80041D44_00000464
     slwi r0, r29, 4
@@ -595,7 +595,7 @@ lbl_fn_80041D44_0000049C:
     bl fn_80042684
     addi r3, r1, 0x28
     bl fn_8004212C
-    bl fn_800DC6B4
+    bl str_findChar
     stw r3, 0x60(r1)
     addi r3, r1, 0x68
     addi r4, r1, 0x18
@@ -2618,7 +2618,7 @@ lbl_ArenaTask_draw_00001F44:
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0x38(r30)
     addi r3, r3, 0x1
-    bl fn_800DC6B4
+    bl str_findChar
     xoris r4, r29, 0x8000
     lis r0, 0x4330
     stw r4, 0x214(r1)
@@ -3097,7 +3097,7 @@ asm void fn_80043EAC(void)
     addi r8, r1, 0x8
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r28
     addi r3, r1, 0x1c
     bl fn_8006B2D8
@@ -3332,7 +3332,7 @@ lbl_Arms_execute_000028C8:
     stw r5, 0x8(r1)
     stw r4, 0xc(r1)
     stw r0, 0x10(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_Arms_execute_00002908
     lwz r3, 0x29c(r31)
@@ -3382,10 +3382,10 @@ asm void fn_8004439C(void)
     addi r3, r3, 0x27c
     stw r30, 0x948(r1)
     stw r29, 0x944(r1)
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r29, r3
     addi r3, r31, 0x27c
-    bl fn_80470580
+    bl boss_getOffset54
     lis r4, lbl_807774D8@ha
     li r0, 0x0
     addi r4, r4, lbl_807774D8@l
@@ -4061,7 +4061,7 @@ lbl_fn_80044CCC_000032DC:
     stw r5, 0x38(r1)
     stw r4, 0x3c(r1)
     stw r0, 0x40(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80044CCC_000033A4
     lwz r0, 0x2a0(r31)

@@ -9,10 +9,10 @@ extern void _savegpr_22(void);
 extern void _savegpr_25(void);
 extern void _savegpr_26(void);
 extern void route_findNextWaypoint(void);
-extern void fn_8008771C(void);
+extern void route_interpolatePath(void);
 extern void fn_80087994(void);
 extern void fn_8008937C(void);
-extern void fn_800C344C(void);
+extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void fn_800FFE68(void);
 extern void fn_801055A8(void);
@@ -770,7 +770,7 @@ lbl_fn_80100BF0_00000978:
     li r6, 0x0
     li r7, 0x0
     subi r5, r5, 0x1c60
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f2, lbl_80881494
     addis r5, r28, 0x4
     lfs f1, lbl_80881478
@@ -780,7 +780,7 @@ lbl_fn_80100BF0_00000978:
     li r6, 0x0
     li r7, 0x0
     subi r5, r5, 0x1c5c
-    bl fn_8008771C
+    bl route_interpolatePath
     addis r5, r28, 0x4
     lfs f1, lbl_80881478
     lfs f2, lbl_80881560
@@ -790,7 +790,7 @@ lbl_fn_80100BF0_00000978:
     li r6, 0x0
     li r7, 0x0
     subi r5, r5, 0x1c58
-    bl fn_8008771C
+    bl route_interpolatePath
     mr r3, r30
     addi r4, r31, 0x29e
     bl fn_8008937C
@@ -810,7 +810,7 @@ lbl_fn_80100BF0_00000978:
     li r6, 0x0
     li r7, 0x0
     subi r5, r5, 0x75f4
-    bl fn_8008771C
+    bl route_interpolatePath
     addis r5, r28, 0x4
     lfs f1, lbl_80881564
     lfs f2, lbl_808814C4
@@ -820,7 +820,7 @@ lbl_fn_80100BF0_00000978:
     li r6, 0x0
     li r7, 0x0
     subi r5, r5, 0x75f0
-    bl fn_8008771C
+    bl route_interpolatePath
     addis r5, r28, 0x4
     lfs f1, lbl_80881564
     lfs f2, lbl_808814C4
@@ -830,7 +830,7 @@ lbl_fn_80100BF0_00000978:
     li r6, 0x0
     li r7, 0x0
     subi r5, r5, 0x75ec
-    bl fn_8008771C
+    bl route_interpolatePath
     addis r5, r28, 0x4
     lfs f1, lbl_80881564
     lfs f2, lbl_808814C4
@@ -840,7 +840,7 @@ lbl_fn_80100BF0_00000978:
     li r6, 0x0
     li r7, 0x0
     subi r5, r5, 0x75e8
-    bl fn_8008771C
+    bl route_interpolatePath
     addis r5, r28, 0x4
     lfs f1, lbl_80881564
     lfs f2, lbl_808814C4
@@ -850,7 +850,7 @@ lbl_fn_80100BF0_00000978:
     li r6, 0x0
     li r7, 0x0
     subi r5, r5, 0x75e4
-    bl fn_8008771C
+    bl route_interpolatePath
     addis r5, r28, 0x4
     lfs f1, lbl_80881564
     lfs f2, lbl_808814C4
@@ -860,7 +860,7 @@ lbl_fn_80100BF0_00000978:
     li r6, 0x0
     li r7, 0x0
     subi r5, r5, 0x75e0
-    bl fn_8008771C
+    bl route_interpolatePath
     addis r5, r28, 0x4
     lfs f1, lbl_80881564
     lfs f2, lbl_808814C4
@@ -870,7 +870,7 @@ lbl_fn_80100BF0_00000978:
     li r6, 0x0
     li r7, 0x0
     subi r5, r5, 0x75dc
-    bl fn_8008771C
+    bl route_interpolatePath
     addis r5, r28, 0x4
     lfs f1, lbl_80881564
     lfs f2, lbl_808814C4
@@ -880,7 +880,7 @@ lbl_fn_80100BF0_00000978:
     li r6, 0x0
     li r7, 0x0
     subi r5, r5, 0x75d8
-    bl fn_8008771C
+    bl route_interpolatePath
     addis r5, r28, 0x4
     lfs f1, lbl_80881564
     lfs f2, lbl_808814C4
@@ -890,7 +890,7 @@ lbl_fn_80100BF0_00000978:
     li r6, 0x0
     li r7, 0x0
     subi r5, r5, 0x75d4
-    bl fn_8008771C
+    bl route_interpolatePath
     addis r5, r28, 0x4
     lfs f1, lbl_80881568
     lfs f2, lbl_8088152C
@@ -900,7 +900,7 @@ lbl_fn_80100BF0_00000978:
     li r6, 0x0
     li r7, 0x0
     subi r5, r5, 0x75d0
-    bl fn_8008771C
+    bl route_interpolatePath
     addis r5, r28, 0x4
     lfs f1, lbl_80881568
     lfs f2, lbl_8088152C
@@ -910,7 +910,7 @@ lbl_fn_80100BF0_00000978:
     li r6, 0x0
     li r7, 0x0
     subi r5, r5, 0x75cc
-    bl fn_8008771C
+    bl route_interpolatePath
     addis r5, r28, 0x4
     lfs f1, lbl_80881568
     lfs f2, lbl_8088152C
@@ -920,7 +920,7 @@ lbl_fn_80100BF0_00000978:
     li r6, 0x0
     li r7, 0x0
     subi r5, r5, 0x75c8
-    bl fn_8008771C
+    bl route_interpolatePath
     addis r5, r28, 0x4
     lfs f1, lbl_80881568
     lfs f2, lbl_8088152C
@@ -930,7 +930,7 @@ lbl_fn_80100BF0_00000978:
     li r6, 0x0
     li r7, 0x0
     subi r5, r5, 0x75c4
-    bl fn_8008771C
+    bl route_interpolatePath
     addis r5, r28, 0x4
     lfs f1, lbl_80881568
     lfs f2, lbl_8088152C
@@ -940,7 +940,7 @@ lbl_fn_80100BF0_00000978:
     li r6, 0x0
     li r7, 0x0
     subi r5, r5, 0x75c0
-    bl fn_8008771C
+    bl route_interpolatePath
     mr r3, r30
     addi r4, r31, 0x33a
     bl fn_8008937C
@@ -953,7 +953,7 @@ lbl_fn_80100BF0_00000978:
     li r6, 0x0
     li r7, 0x0
     subi r5, r5, 0x75bc
-    bl fn_8008771C
+    bl route_interpolatePath
     addis r5, r28, 0x4
     lfs f1, lbl_808814CC
     lfs f2, lbl_80881494
@@ -963,7 +963,7 @@ lbl_fn_80100BF0_00000978:
     li r6, 0x0
     li r7, 0x0
     subi r5, r5, 0x75b8
-    bl fn_8008771C
+    bl route_interpolatePath
     addis r5, r28, 0x4
     lfs f1, lbl_808814CC
     lfs f2, lbl_80881494
@@ -973,7 +973,7 @@ lbl_fn_80100BF0_00000978:
     li r6, 0x0
     li r7, 0x0
     subi r5, r5, 0x75b4
-    bl fn_8008771C
+    bl route_interpolatePath
     addis r5, r28, 0x4
     lfs f1, lbl_808814CC
     lfs f2, lbl_80881494
@@ -983,7 +983,7 @@ lbl_fn_80100BF0_00000978:
     li r6, 0x0
     li r7, 0x0
     subi r5, r5, 0x75b0
-    bl fn_8008771C
+    bl route_interpolatePath
     addis r5, r28, 0x4
     lfs f1, lbl_808814CC
     lfs f2, lbl_80881494
@@ -993,7 +993,7 @@ lbl_fn_80100BF0_00000978:
     li r6, 0x0
     li r7, 0x0
     subi r5, r5, 0x75ac
-    bl fn_8008771C
+    bl route_interpolatePath
     addis r5, r28, 0x4
     mr r3, r30
     addi r4, r31, 0x34e
@@ -1517,7 +1517,7 @@ lbl_fn_80101524_00001440:
     li r6, 0x0
     addi r4, r4, 0x365
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x30
     li r4, -0x1
     bl ref_releaseHandle
@@ -1533,7 +1533,7 @@ lbl_fn_80101524_0000148C:
     li r6, 0x0
     addi r4, r4, 0x372
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x2c
     li r4, -0x1
     bl ref_releaseHandle
@@ -1549,7 +1549,7 @@ lbl_fn_80101524_000014C8:
     li r6, 0x0
     addi r4, r4, 0x37f
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x28
     li r4, -0x1
     bl ref_releaseHandle
@@ -1565,7 +1565,7 @@ lbl_fn_80101524_00001504:
     li r6, 0x0
     addi r4, r4, 0x38c
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x24
     li r4, -0x1
     bl ref_releaseHandle
@@ -1581,7 +1581,7 @@ lbl_fn_80101524_0000153C:
     li r6, 0x0
     addi r4, r4, 0x399
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x20
     li r4, -0x1
     bl ref_releaseHandle
@@ -1597,7 +1597,7 @@ lbl_fn_80101524_0000157C:
     li r6, 0x0
     addi r4, r4, 0x3a6
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x1c
     li r4, -0x1
     bl ref_releaseHandle
@@ -1613,7 +1613,7 @@ lbl_fn_80101524_000015B8:
     li r6, 0x0
     addi r4, r4, 0x3b3
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x18
     li r4, -0x1
     bl ref_releaseHandle

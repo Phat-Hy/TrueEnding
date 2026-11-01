@@ -58,7 +58,7 @@ extern void fn_805F9AB0(void);
 extern void rand(void);
 extern void strcmp(void);
 extern void runtime_registerStaticObject(void);
-extern void fn_80695AD0(void);
+extern void vec3_isNonZero(void);
 
 /* External data declarations */
 extern u8 lbl_80749D10[];
@@ -148,7 +148,7 @@ lbl_fn_803252E0_00000094:
     stw r5, 0x14(r1)
     stw r4, 0x18(r1)
     stw r0, 0x1c(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_803252E0_000000D8
     lwz r3, 0xf80(r31)

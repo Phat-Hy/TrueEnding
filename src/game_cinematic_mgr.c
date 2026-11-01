@@ -6,7 +6,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_8004ED34(void);
 extern void talk_parseQuotedString(void);
 extern void fn_8005B5F8(void);
@@ -37,8 +37,8 @@ extern void res_MsgHandle_unload(void);
 extern void res_registerResource(void);
 extern void fn_8035B694(void);
 extern void fn_8035B78C(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
@@ -919,7 +919,7 @@ asm void fn_803335C4(void)
     addi r8, r1, 0x18
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     addi r3, r27, 0x2c
     addi r4, r29, 0x2f
     bl strstr
@@ -946,7 +946,7 @@ lbl_fn_803335C4_00000B84:
     addi r6, r30, 0x8
     addi r8, r1, 0x10
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lis r4, lbl_8074A154@ha
     addi r3, r1, 0x20
     addi r4, r4, lbl_8074A154@l
@@ -991,7 +991,7 @@ lbl_fn_803335C4_00000C38:
     addi r3, r1, 0x2c
     addi r8, r1, 0x8
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_803335C4_00000C54:
     lwz r0, 0x20(r1)
     srwi. r0, r0, 31
@@ -1098,10 +1098,10 @@ asm void fn_803338D8(void)
     stw r29, 0x644(r1)
     mr r29, r3
     addi r3, r3, 0x14b0
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r30, r3
     addi r3, r29, 0x14b0
-    bl fn_80470580
+    bl boss_getOffset54
     lis r4, lbl_807772D0@ha
     li r0, 0x0
     addi r4, r4, lbl_807772D0@l

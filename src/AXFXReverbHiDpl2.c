@@ -11,7 +11,7 @@ extern BOOL OSRestoreInterrupts(BOOL);
 extern void fn_806095D0(void);
 extern void fn_80610490(void);
 extern void fn_806104A0(void);
-extern void fn_80695D84(void);
+extern void runtime_clampDouble(void);
 
 /* External SDA symbols */
 extern u32 lbl_8087E858;
@@ -141,7 +141,7 @@ lbl_fn_8060F920_00000124:
     lfs f0, 0x94(r30)
     stw r0, 0x10(r30)
     fmuls f1, f1, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
     lwz r0, 0x20(r30)
     li r4, 0x1
     subf r3, r3, r0
@@ -262,7 +262,7 @@ lbl_fn_8060FBA0_000002D8:
     lfs f0, 0x94(r30)
     stw r0, 0x10(r30)
     fmuls f1, f1, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
     lwz r0, 0x20(r30)
     li r4, 0x1
     subf r3, r3, r0

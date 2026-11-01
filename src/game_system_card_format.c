@@ -10,13 +10,13 @@ extern void fn_8005B5F8(void);
 extern void fn_8005B6E8(void);
 extern void mem_alloc(void);
 extern void route_findNextWaypoint(void);
-extern void fn_8008771C(void);
+extern void route_interpolatePath(void);
 extern void fn_80087994(void);
 extern void fn_8008937C(void);
 extern void fn_800897D8(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800C344C(void);
+extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void str_skipWhitespace(void);
@@ -38,8 +38,8 @@ extern void res_MsgHandle_update(void);
 extern void res_registerResource(void);
 extern void fn_8035DC58(void);
 extern void fn_803EC16C(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
@@ -669,7 +669,7 @@ lbl_fn_8035B034_00000698:
     addi r5, r29, 0x14fc
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_8088552C
     mr r3, r30
     lfs f2, lbl_808855F0
@@ -678,7 +678,7 @@ lbl_fn_8035B034_00000698:
     addi r5, r29, 0x16c0
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_8088552C
     mr r3, r30
     lfs f2, lbl_808855F4
@@ -687,7 +687,7 @@ lbl_fn_8035B034_00000698:
     addi r5, r29, 0x7d8
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)
@@ -1525,7 +1525,7 @@ asm void fn_8035BC84(void)
     addi r5, r5, 0x528
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle
@@ -1594,7 +1594,7 @@ asm void fn_8035BDE8(void)
     addi r5, r5, 0x528
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -1730,7 +1730,7 @@ lbl_fn_8035BEA4_000015E0:
     addi r5, r31, 0x15ac
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     mr r3, r28
     addi r4, r29, 0x66
     addi r5, r31, 0x15b0
@@ -1847,10 +1847,10 @@ asm void fn_8035C1B4(void)
     addi r3, r3, 0x14b0
     stw r30, 0x658(r1)
     stw r29, 0x654(r1)
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r29, r3
     addi r3, r31, 0x14b0
-    bl fn_80470580
+    bl boss_getOffset54
     lis r4, lbl_807772D0@ha
     li r0, 0x0
     addi r4, r4, lbl_807772D0@l

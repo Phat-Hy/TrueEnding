@@ -8,7 +8,7 @@ extern void dtor_80013D60(void);
 extern void vec3_copy(void);
 extern void fn_8000D760(void);
 extern void fn_8000E18C(void);
-extern void fn_8000EB8C(void);
+extern void sys_copyString(void);
 extern void fn_8000ECA8(void);
 extern void fn_80013410(void);
 extern void fn_8003E4A4(void);
@@ -390,7 +390,7 @@ lbl_fn_803C3894_00000288:
     bl fn_8020A780
     addi r3, r1, 0xe0
     addi r4, r25, 0xf1
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_803C3894_00002830
     addi r3, r1, 0x2b0
@@ -400,7 +400,7 @@ lbl_fn_803C3894_00000288:
     bl fn_8020A780
     addi r3, r1, 0xe0
     addi r4, r25, 0xf7
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_803C3894_00000344
     cmpwi r29, 0x0
@@ -414,12 +414,12 @@ lbl_fn_803C3894_000002E4:
     bl fn_8020A780
     addi r3, r1, 0xe0
     addi r4, r25, 0xfe
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     bne lbl_fn_803C3894_00002830
     addi r3, r1, 0xe0
     addi r4, r25, 0x102
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_803C3894_00000330
     addi r3, r1, 0x2b0
@@ -435,7 +435,7 @@ lbl_fn_803C3894_00000330:
 lbl_fn_803C3894_00000344:
     addi r3, r1, 0xe0
     addi r4, r25, 0x10a
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_803C3894_0000070C
     b lbl_fn_803C3894_000006F8
@@ -447,12 +447,12 @@ lbl_fn_803C3894_0000035C:
     bl fn_8020A780
     addi r3, r1, 0xe0
     addi r4, r25, 0xfe
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     bne lbl_fn_803C3894_00002830
     addi r3, r1, 0xe0
     addi r4, r25, 0x116
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_803C3894_000003B4
     cmpwi r29, 0x0
@@ -465,7 +465,7 @@ lbl_fn_803C3894_0000035C:
 lbl_fn_803C3894_000003B4:
     addi r3, r1, 0xe0
     addi r4, r25, 0x11d
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_803C3894_000003E4
     cmpwi r29, 0x0
@@ -478,7 +478,7 @@ lbl_fn_803C3894_000003B4:
 lbl_fn_803C3894_000003E4:
     addi r3, r1, 0xe0
     addi r4, r25, 0x126
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_803C3894_00000414
     cmpwi r29, 0x0
@@ -491,7 +491,7 @@ lbl_fn_803C3894_000003E4:
 lbl_fn_803C3894_00000414:
     addi r3, r1, 0xe0
     addi r4, r25, 0x137
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_803C3894_00000594
     cmpwi r29, 0x0
@@ -592,7 +592,7 @@ lbl_fn_803C3894_00000580:
 lbl_fn_803C3894_00000594:
     addi r3, r1, 0xe0
     addi r4, r25, 0x146
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_803C3894_000006F8
     addi r3, r28, 0xdc
@@ -694,7 +694,7 @@ lbl_fn_803C3894_000006F8:
 lbl_fn_803C3894_0000070C:
     addi r3, r1, 0xe0
     addi r4, r25, 0x16c
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_803C3894_00000888
     addi r3, r1, 0x2b0
@@ -740,7 +740,7 @@ lbl_fn_803C3894_000007A4:
     bl fn_8020A780
     addi r3, r1, 0xe0
     addi r4, r25, 0xfe
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     bne lbl_fn_803C3894_00002830
     addi r3, r1, 0xe0
@@ -794,7 +794,7 @@ lbl_fn_803C3894_00000874:
 lbl_fn_803C3894_00000888:
     addi r3, r1, 0xe0
     addi r4, r25, 0x194
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_803C3894_000008B4
     mr r3, r28
@@ -806,7 +806,7 @@ lbl_fn_803C3894_00000888:
 lbl_fn_803C3894_000008B4:
     addi r3, r1, 0xe0
     addi r4, r25, 0x1a0
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_803C3894_000008E0
     mr r3, r28
@@ -818,7 +818,7 @@ lbl_fn_803C3894_000008B4:
 lbl_fn_803C3894_000008E0:
     addi r3, r1, 0xe0
     addi r4, r25, 0x1ae
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_803C3894_0000090C
     mr r3, r28
@@ -830,7 +830,7 @@ lbl_fn_803C3894_000008E0:
 lbl_fn_803C3894_0000090C:
     addi r3, r1, 0xe0
     addi r4, r25, 0x1bd
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_803C3894_00000ADC
     cmpwi r29, 0x0
@@ -859,7 +859,7 @@ lbl_fn_803C3894_00000968:
     bl fn_8020A780
     addi r3, r1, 0xe0
     addi r4, r25, 0xfe
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     bne lbl_fn_803C3894_00002830
     addi r3, r1, 0xe0
@@ -949,7 +949,7 @@ lbl_fn_803C3894_00000AC8:
 lbl_fn_803C3894_00000ADC:
     addi r3, r1, 0xe0
     addi r4, r25, 0x1d6
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_803C3894_00000CAC
     cmpwi r29, 0x0
@@ -978,7 +978,7 @@ lbl_fn_803C3894_00000B38:
     bl fn_8020A780
     addi r3, r1, 0xe0
     addi r4, r25, 0xfe
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     bne lbl_fn_803C3894_00002830
     addi r3, r1, 0xe0
@@ -1068,7 +1068,7 @@ lbl_fn_803C3894_00000C98:
 lbl_fn_803C3894_00000CAC:
     addi r3, r1, 0xe0
     addi r4, r25, 0x1ef
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_803C3894_00000DF4
     cmpwi r29, 0x0
@@ -1091,7 +1091,7 @@ lbl_fn_803C3894_00000CF0:
     bl fn_8020A780
     addi r3, r1, 0xe0
     addi r4, r25, 0xfe
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     bne lbl_fn_803C3894_00002830
     addi r3, r1, 0xe0
@@ -1153,7 +1153,7 @@ lbl_fn_803C3894_00000DE0:
 lbl_fn_803C3894_00000DF4:
     addi r3, r1, 0xe0
     addi r4, r25, 0x213
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_803C3894_00000FBC
     addi r3, r28, 0xfc
@@ -1194,7 +1194,7 @@ lbl_fn_803C3894_00000E78:
     bl fn_8020A780
     addi r3, r1, 0xe0
     addi r4, r25, 0xfe
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     bne lbl_fn_803C3894_00002830
     addi r3, r1, 0xe0
@@ -1272,7 +1272,7 @@ lbl_fn_803C3894_00000FA8:
 lbl_fn_803C3894_00000FBC:
     addi r3, r1, 0xe0
     addi r4, r25, 0x236
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_803C3894_000012EC
     addi r3, r28, 0xe4
@@ -1313,7 +1313,7 @@ lbl_fn_803C3894_00001040:
     bl fn_8020A780
     addi r3, r1, 0xe0
     addi r4, r25, 0xfe
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     bne lbl_fn_803C3894_00002830
     addi r3, r1, 0xe0
@@ -1486,7 +1486,7 @@ lbl_fn_803C3894_000012D8:
 lbl_fn_803C3894_000012EC:
     addi r3, r1, 0xe0
     addi r4, r25, 0x25b
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_803C3894_000015A0
     addi r3, r28, 0xec
@@ -1527,7 +1527,7 @@ lbl_fn_803C3894_00001370:
     bl fn_8020A780
     addi r3, r1, 0xe0
     addi r4, r25, 0xfe
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     bne lbl_fn_803C3894_00002830
     addi r3, r1, 0xe0
@@ -1669,7 +1669,7 @@ lbl_fn_803C3894_0000158C:
 lbl_fn_803C3894_000015A0:
     addi r3, r1, 0xe0
     addi r4, r25, 0x278
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_803C3894_00001768
     cmpwi r29, 0x0
@@ -1692,7 +1692,7 @@ lbl_fn_803C3894_000015E4:
     bl fn_8020A780
     addi r3, r1, 0xe0
     addi r4, r25, 0xfe
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     bne lbl_fn_803C3894_00002830
     addi r3, r1, 0xe0
@@ -1786,7 +1786,7 @@ lbl_fn_803C3894_00001754:
 lbl_fn_803C3894_00001768:
     addi r3, r1, 0xe0
     addi r4, r25, 0x28b
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_803C3894_00001794
     mr r3, r28
@@ -1798,7 +1798,7 @@ lbl_fn_803C3894_00001768:
 lbl_fn_803C3894_00001794:
     addi r3, r1, 0xe0
     addi r4, r25, 0x29a
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_803C3894_000017C0
     mr r3, r28
@@ -1810,7 +1810,7 @@ lbl_fn_803C3894_00001794:
 lbl_fn_803C3894_000017C0:
     addi r3, r1, 0xe0
     addi r4, r25, 0x2a9
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_803C3894_000017EC
     mr r3, r28
@@ -1822,12 +1822,12 @@ lbl_fn_803C3894_000017C0:
 lbl_fn_803C3894_000017EC:
     addi r3, r1, 0xe0
     addi r4, r25, 0x2b8
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     bne lbl_fn_803C3894_00002830
     addi r3, r1, 0xe0
     addi r4, r25, 0x2c1
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_803C3894_0000182C
     mr r3, r28
@@ -1839,7 +1839,7 @@ lbl_fn_803C3894_000017EC:
 lbl_fn_803C3894_0000182C:
     addi r3, r1, 0xe0
     addi r4, r25, 0x2cc
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_803C3894_00001858
     mr r3, r28
@@ -1851,7 +1851,7 @@ lbl_fn_803C3894_0000182C:
 lbl_fn_803C3894_00001858:
     addi r3, r1, 0xe0
     addi r4, r25, 0x2d8
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_803C3894_00001AB4
     addi r3, r1, 0x2b0
@@ -1897,7 +1897,7 @@ lbl_fn_803C3894_000018F0:
     bl fn_8020A780
     addi r3, r1, 0xe0
     addi r4, r25, 0xfe
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     bne lbl_fn_803C3894_00002830
     addi r3, r1, 0xe0
@@ -2009,7 +2009,7 @@ lbl_fn_803C3894_00001AA0:
 lbl_fn_803C3894_00001AB4:
     addi r3, r1, 0xe0
     addi r4, r25, 0x2ed
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_803C3894_00001D58
     addi r3, r1, 0x2b0
@@ -2055,7 +2055,7 @@ lbl_fn_803C3894_00001B4C:
     bl fn_8020A780
     addi r3, r1, 0xe0
     addi r4, r25, 0xfe
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     bne lbl_fn_803C3894_00002830
     addi r3, r1, 0xe0
@@ -2183,7 +2183,7 @@ lbl_fn_803C3894_00001D44:
 lbl_fn_803C3894_00001D58:
     addi r3, r1, 0xe0
     addi r4, r25, 0x306
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_803C3894_00001FBC
     addi r3, r1, 0x2b0
@@ -2229,7 +2229,7 @@ lbl_fn_803C3894_00001DF0:
     bl fn_8020A780
     addi r3, r1, 0xe0
     addi r4, r25, 0xfe
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     bne lbl_fn_803C3894_00002830
     addi r3, r1, 0xe0
@@ -2341,7 +2341,7 @@ lbl_fn_803C3894_00001FA8:
 lbl_fn_803C3894_00001FBC:
     addi r3, r1, 0xe0
     addi r4, r25, 0x319
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_803C3894_00002118
     cmpwi r29, 0x0
@@ -2362,7 +2362,7 @@ lbl_fn_803C3894_00001FF8:
     bl fn_8020A780
     addi r3, r1, 0xe0
     addi r4, r25, 0xfe
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     bne lbl_fn_803C3894_0000208C
     addi r3, r1, 0xe0
@@ -2436,7 +2436,7 @@ lbl_fn_803C3894_000020F0:
 lbl_fn_803C3894_00002118:
     addi r3, r1, 0xe0
     addi r4, r25, 0x33f
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_803C3894_000021C0
     cmpwi r29, 0x0
@@ -2456,7 +2456,7 @@ lbl_fn_803C3894_00002150:
     bl fn_8020A780
     addi r3, r1, 0xe0
     addi r4, r25, 0xfe
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     bne lbl_fn_803C3894_00002830
     addi r3, r1, 0xe0
@@ -2481,7 +2481,7 @@ lbl_fn_803C3894_000021AC:
 lbl_fn_803C3894_000021C0:
     addi r3, r1, 0xe0
     addi r4, r25, 0x357
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_803C3894_00002698
     cmpwi r29, 0x0
@@ -2501,7 +2501,7 @@ lbl_fn_803C3894_000021F8:
     bl fn_8020A780
     addi r3, r1, 0xe0
     addi r4, r25, 0xfe
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     bne lbl_fn_803C3894_00002320
     addi r3, r1, 0xe0
@@ -2650,7 +2650,7 @@ lbl_fn_803C3894_00002428:
     bl fn_8020A780
     addi r3, r1, 0xe0
     addi r4, r25, 0xfe
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     bne lbl_fn_803C3894_000024B4
     addi r3, r1, 0xe0
@@ -2816,7 +2816,7 @@ lbl_fn_803C3894_00002660:
 lbl_fn_803C3894_00002698:
     addi r3, r1, 0xe0
     addi r4, r25, 0x36c
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_803C3894_00002774
     cmpwi r29, 0x0
@@ -2839,7 +2839,7 @@ lbl_fn_803C3894_000026DC:
     bl fn_8020A780
     addi r3, r1, 0xe0
     addi r4, r25, 0xfe
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     bne lbl_fn_803C3894_00002830
     addi r3, r1, 0xe0
@@ -2874,7 +2874,7 @@ lbl_fn_803C3894_00002760:
 lbl_fn_803C3894_00002774:
     addi r3, r1, 0xe0
     addi r4, r25, 0x382
-    bl fn_8000EB8C
+    bl sys_copyString
     cmpwi r3, 0x0
     beq lbl_fn_803C3894_00002830
     addi r3, r1, 0x2b0

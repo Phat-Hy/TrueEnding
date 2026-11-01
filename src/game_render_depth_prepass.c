@@ -6,7 +6,7 @@ extern void _restgpr_25(void);
 extern void _savegpr_25(void);
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_8004D124(void);
 extern void fn_80056DB8(void);
 extern void atn_ColliCapsule_destructor(void);
@@ -15,7 +15,7 @@ extern void fn_8005B5F8(void);
 extern void fn_8005B6E8(void);
 extern void fn_8006AFF8(void);
 extern void route_findNextWaypoint(void);
-extern void fn_8008771C(void);
+extern void route_interpolatePath(void);
 extern void fn_80087994(void);
 extern void fn_80087E9C(void);
 extern void fn_8008937C(void);
@@ -25,12 +25,12 @@ extern void fn_80092954(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800C344C(void);
+extern void skin_applyWeights(void);
 extern void fn_800CB360(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
 extern void fn_800CB58C(void);
-extern void fn_800CB5C8(void);
+extern void morph_updateMesh(void);
 extern void fn_800CB6E4(void);
 extern void atn_Task_setActive(void);
 extern void fn_800DC12C(void);
@@ -72,8 +72,8 @@ extern void fn_802B5DA4(void);
 extern void fn_802B6104(void);
 extern void fn_802B6AF8(void);
 extern void fn_8037D4C0(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
@@ -229,7 +229,7 @@ lbl_fn_802B1F2C_00000074:
     addi r5, r29, 0x14fc
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     mr r3, r30
     addi r4, r31, 0xea
     addi r5, r29, 0x1510
@@ -274,7 +274,7 @@ lbl_fn_802B1F2C_00000074:
     addi r5, r29, 0x1524
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_80883F40
     mr r3, r30
     lfs f2, lbl_80884010
@@ -283,7 +283,7 @@ lbl_fn_802B1F2C_00000074:
     addi r5, r29, 0x1528
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_80884014
     mr r3, r30
     lfs f2, lbl_80884018
@@ -310,7 +310,7 @@ lbl_fn_802B1F2C_00000074:
     addi r5, r29, 0x1a94
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     mr r3, r30
     addi r4, r31, 0x243
     addi r5, r29, 0x1a44
@@ -669,7 +669,7 @@ asm void fn_802B23E8(void)
     addi r8, r1, 0x18
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     addi r26, r29, 0x41
     stw r28, 0x2c(r1)
     addi r27, r1, 0x2c
@@ -689,7 +689,7 @@ asm void fn_802B23E8(void)
     addi r8, r1, 0x10
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     addi r3, r31, 0x2c
     bl strlen
     lis r4, lbl_807772D0@ha
@@ -757,7 +757,7 @@ lbl_fn_802B23E8_00000894:
     addi r6, r26, 0x8
     addi r8, r1, 0x8
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_802B23E8_000008C4:
     addi r3, r1, 0x44
     bl fn_8005B5F8
@@ -884,7 +884,7 @@ lbl_fn_802B28BC_000009D8:
     li r31, 0x0
     stw r31, 0x154c(r30)
     addi r3, r30, 0x1850
-    bl fn_80470580
+    bl boss_getOffset54
     cmpwi r3, 0x0
     beq lbl_fn_802B28BC_00000F44
     lwz r3, lbl_8087F430
@@ -894,10 +894,10 @@ lbl_fn_802B28BC_000009D8:
     cmpwi r0, 0x0
     beq lbl_fn_802B28BC_00000F44
     addi r3, r30, 0x1850
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r28, r3
     addi r3, r30, 0x1850
-    bl fn_80470580
+    bl boss_getOffset54
     lis r4, lbl_807772D0@ha
     mr r29, r3
     addi r4, r4, lbl_807772D0@l
@@ -1472,7 +1472,7 @@ lbl_fn_802B2F64_0000127C:
     addi r5, r31, 0x528
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r31, 0x1548
     addi r4, r1, 0x8
     bl fn_800CB440
@@ -1493,7 +1493,7 @@ lbl_fn_802B2F64_000012E8:
     addi r3, r31, 0x1548
     li r4, 0x0
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
 lbl_fn_802B2F64_00001308:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)

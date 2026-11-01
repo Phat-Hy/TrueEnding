@@ -9,7 +9,7 @@ extern void dtor_80084684(void);
 extern void fn_8000D430(void);
 extern void fn_8000D7DC(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_8003EFB0(void);
 extern void fn_8004B290(void);
 extern void fn_8004B338(void);
@@ -78,8 +78,8 @@ extern void fn_80363960(void);
 extern void fn_8036823C(void);
 extern void fn_803EBBCC(void);
 extern void fn_8044D208(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_804776F4(void);
@@ -94,7 +94,7 @@ extern void strcmp(void);
 extern void strstr(void);
 extern void atoi(void);
 extern void fn_806959D8(void);
-extern void fn_80695AD0(void);
+extern void vec3_isNonZero(void);
 extern void fn_80695B00(void);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
@@ -728,7 +728,7 @@ lbl_boss_updatePhaseState_000007A4:
     stw r5, 0x120(r1)
     stw r4, 0x124(r1)
     stw r0, 0x128(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_boss_updatePhaseState_000007E0
     lwz r3, 0x121c(r30)
@@ -1410,10 +1410,10 @@ asm void fn_801371AC(void)
     stmw r16, 0xeb0(r1)
     mr r17, r3
     addi r3, r3, 0x84
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r19, r3
     addi r3, r17, 0x84
-    bl fn_80470580
+    bl boss_getOffset54
     lis r4, lbl_807774D8@ha
     li r16, 0x0
     addi r4, r4, lbl_807774D8@l
@@ -1716,7 +1716,7 @@ lbl_fn_801371AC_00001570:
     addi r8, r1, 0x28
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     addi r16, r28, 0x121
     stw r29, 0x48(r1)
     mr r3, r16
@@ -1735,7 +1735,7 @@ lbl_fn_801371AC_00001570:
     addi r8, r1, 0x20
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r3, r25
     mr r4, r24
     bl fn_8006AD24
@@ -1817,7 +1817,7 @@ lbl_fn_801371AC_0000172C:
     addi r3, r1, 0x60
     addi r8, r1, 0x18
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_801371AC_00001748:
     lwz r0, 0x30(r1)
     srwi. r0, r0, 31
@@ -2044,7 +2044,7 @@ lbl_fn_801371AC_00001A38:
     add r7, r7, r16
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lwz r0, 0x54(r1)
     mr r3, r22
     srwi. r0, r0, 31

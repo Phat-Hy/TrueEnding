@@ -14,7 +14,7 @@ extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void route_findNextWaypoint(void);
-extern void fn_8008771C(void);
+extern void route_interpolatePath(void);
 extern void fn_80087858(void);
 extern void fn_80087994(void);
 extern void fn_80087E9C(void);
@@ -52,8 +52,8 @@ extern void fn_803F3360(void);
 extern void fn_8041524C(void);
 extern void fn_80431314(void);
 extern void fn_80431320(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
@@ -885,10 +885,10 @@ asm void fn_80430428(void)
     stmw r24, 0x740(r1)
     mr r31, r3
     addi r3, r3, 0x60
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r30, r3
     addi r3, r31, 0x60
-    bl fn_80470580
+    bl boss_getOffset54
     lis r4, lbl_807774D8@ha
     li r28, 0x0
     addi r4, r4, lbl_807774D8@l
@@ -1135,10 +1135,10 @@ asm void fn_804307B4(void)
     stmw r27, 0x64c(r1)
     mr r27, r3
     addi r3, r3, 0x60
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r30, r3
     addi r3, r27, 0x60
-    bl fn_80470580
+    bl boss_getOffset54
     lis r4, lbl_807774D8@ha
     li r0, 0x0
     addi r4, r4, lbl_807774D8@l
@@ -1657,7 +1657,7 @@ lbl_fn_80430DE4_000014CC:
     addi r5, r29, 0x8bc
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_80886818
     mr r3, r30
     lfs f2, lbl_80886864
@@ -1675,7 +1675,7 @@ lbl_fn_80430DE4_000014CC:
     addi r5, r29, 0x8c4
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_80886818
     mr r3, r30
     lfs f2, lbl_80886860
@@ -1684,7 +1684,7 @@ lbl_fn_80430DE4_000014CC:
     addi r5, r29, 0x8c8
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lwz r0, 0x44(r1)
     lwz r31, 0x3c(r1)
     lwz r30, 0x38(r1)

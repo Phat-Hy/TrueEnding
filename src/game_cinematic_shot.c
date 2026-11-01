@@ -49,7 +49,7 @@ extern void PSVECSquareMag(void);
 extern void rand(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
-extern void fn_80695AD0(void);
+extern void vec3_isNonZero(void);
 
 /* External data declarations */
 extern u8 jumptable_80789168[];
@@ -1905,7 +1905,7 @@ lbl_fn_80336C8C_00001A58:
     stw r5, 0x1b4(r1)
     stw r4, 0x1b8(r1)
     stw r0, 0x1bc(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80336C8C_00001ACC
     lwz r3, 0xf80(r30)

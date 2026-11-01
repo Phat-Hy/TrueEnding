@@ -16,7 +16,7 @@ extern void fn_80011034(void);
 extern void fn_80011410(void);
 extern void fn_80012774(void);
 extern void vec3_sub(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_80049B74(void);
 extern void fn_8004AE84(void);
 extern void fn_8004B158(void);
@@ -1177,7 +1177,7 @@ lbl_fn_804881B8_00000E3C:
     add r7, r24, r0
     addi r8, r1, 0xc
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lfs f0, lbl_80886F8C
     oris r31, r31, 0x8000
     stfs f0, 0x1e8c(r22)

@@ -10,7 +10,7 @@ extern void atn_Model_findBoneIndex(void);
 extern void fn_80093C8C(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800C344C(void);
+extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB6B0(void);
 extern void atn_Task_setActive(void);
@@ -42,8 +42,8 @@ extern void fn_802B98B0(void);
 extern void fn_802B9C5C(void);
 extern void fn_80373148(void);
 extern void fn_803EEE10(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_805A3C58(void);
 extern void fn_805A3D6C(void);
@@ -60,7 +60,7 @@ extern void rand(void);
 extern void strcmp(void);
 extern void atoi(void);
 extern void std_atan2(void);
-extern void fn_80695AD0(void);
+extern void vec3_isNonZero(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -303,7 +303,7 @@ lbl_fn_802B7970_00000274:
     stw r5, 0x8(r1)
     stw r4, 0xc(r1)
     stw r0, 0x10(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_802B7970_000002B4
     lwz r3, 0x1514(r31)
@@ -314,10 +314,10 @@ lbl_fn_802B7970_00000274:
     b lbl_fn_802B7970_00000334
 lbl_fn_802B7970_000002B4:
     addi r3, r31, 0x14b4
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r30, r3
     addi r3, r31, 0x14b4
-    bl fn_80470580
+    bl boss_getOffset54
     mr r4, r3
     mr r3, r31
     mr r5, r30
@@ -1932,7 +1932,7 @@ lbl_fn_802B8AA4_0000196C:
     stw r5, 0x13c(r1)
     stw r4, 0x140(r1)
     stw r0, 0x144(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_802B8AA4_0000209C
     lwz r3, lbl_8087F4A0
@@ -1994,7 +1994,7 @@ lbl_fn_802B8AA4_000019B8:
     addi r5, r1, 0x130
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     lfs f1, lbl_80884148
     addi r3, r1, 0x18
     li r4, 0x1

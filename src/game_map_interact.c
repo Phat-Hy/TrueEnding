@@ -23,7 +23,7 @@ extern void fn_80094F98(void);
 extern void fn_800C122C(void);
 extern void fn_800C1A1C(void);
 extern void fn_800C1FB4(void);
-extern void fn_800C344C(void);
+extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB688(void);
 extern void atn_Task_destructor(void);
@@ -62,7 +62,7 @@ extern void runtime_registerStaticObject(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
 extern void fn_80695A50(void);
-extern void fn_80695D84(void);
+extern void runtime_clampDouble(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
 
@@ -741,7 +741,7 @@ lbl_fn_80184188_0000077C:
     lfs f3, lbl_80881C98
     lfs f0, lbl_80881C94
     fmadds f1, f3, f4, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_80184188_0000078C:
     mr r23, r3
 lbl_fn_80184188_00000790:
@@ -763,7 +763,7 @@ lbl_fn_80184188_000007C4:
     lfs f3, lbl_80881C98
     lfs f0, lbl_80881C94
     fmadds f1, f3, f4, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_80184188_000007D4:
     mr r24, r3
 lbl_fn_80184188_000007D8:
@@ -785,7 +785,7 @@ lbl_fn_80184188_0000080C:
     lfs f3, lbl_80881C98
     lfs f0, lbl_80881C94
     fmadds f1, f3, f4, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_80184188_0000081C:
     mr r25, r3
 lbl_fn_80184188_00000820:
@@ -807,7 +807,7 @@ lbl_fn_80184188_00000854:
     lfs f3, lbl_80881C98
     lfs f0, lbl_80881C94
     fmadds f1, f3, f4, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_80184188_00000864:
     slwi r5, r24, 8
     slwi r4, r3, 24
@@ -1090,7 +1090,7 @@ lbl_fn_80184548_00000C50:
     addi r5, r1, 0xc
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     lwz r29, lbl_8087EFE8
     cmpwi r29, 0x0
     beq lbl_fn_80184548_00000CE8

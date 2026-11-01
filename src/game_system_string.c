@@ -7,7 +7,7 @@ extern void _restgpr_24(void);
 extern void _savegpr_22(void);
 extern void _savegpr_24(void);
 extern void dtor_80084684(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void talk_parseQuotedString(void);
 extern void fn_8005B5F8(void);
 extern void fn_8005B6E8(void);
@@ -20,7 +20,7 @@ extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void fn_800DC12C(void);
 extern void str_skipWhitespace(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_802091E8(void);
 extern void fn_8046DC5C(void);
 extern void fn_8046DD20(void);
@@ -339,7 +339,7 @@ lbl_fn_8020A5D4_00000340:
     addi r8, r1, 0x10
     li r4, 0x0
     addi r3, r3, 0x8
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_8020A5D4_00000360:
     lwz r0, 0x14(r30)
     addi r3, r30, 0x14
@@ -379,7 +379,7 @@ lbl_fn_8020A5D4_000003D0:
     stb r0, 0x8(r1)
     addi r8, r1, 0x8
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_8020A5D4_000003E8:
     lbz r0, 0x18(r31)
     stb r0, 0x20(r30)
@@ -428,7 +428,7 @@ lbl_fn_8020A780_0000045C:
     add r7, r30, r0
     addi r8, r1, 0xc
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)
@@ -456,7 +456,7 @@ asm void fn_8020A81C(void)
     cmpwi r3, 0x0
     stw r0, 0x14(r1)
     beq lbl_fn_8020A81C_00000514
-    bl fn_800DC6B4
+    bl str_findChar
     lwz r5, lbl_8087F1B8
     li r6, 0x0
     lwz r0, lbl_8087F1BC
@@ -496,7 +496,7 @@ asm void fn_8020A888(void)
     lwz r3, 0x14(r3)
     cmpwi r3, 0x0
     beq lbl_fn_8020A888_00000590
-    bl fn_800DC6B4
+    bl str_findChar
     lwz r6, lbl_8087F1B8
     li r4, 0x0
     lwz r0, lbl_8087F1BC

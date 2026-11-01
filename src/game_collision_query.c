@@ -8,13 +8,13 @@ extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_80045694(void);
 extern void fn_8006B174(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_80097D40(void);
 extern void fn_800C31F4(void);
-extern void fn_800C344C(void);
+extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB518(void);
 extern void fn_800CB688(void);
@@ -1543,7 +1543,7 @@ asm void fn_80106878(void)
     addi r8, r1, 0x10
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r27
     addi r3, r1, 0xd4
     bl fn_8006B174
@@ -2084,7 +2084,7 @@ lbl_fn_80106878_00001B10:
     addi r3, r1, 0x18
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x18
     li r4, -0x1
     bl ref_releaseHandle

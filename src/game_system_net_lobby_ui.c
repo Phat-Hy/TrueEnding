@@ -33,7 +33,7 @@ extern void fn_8013C38C(void);
 extern void fn_8013C404(void);
 extern void fn_8013C42C(void);
 extern void fn_8013C504(void);
-extern void fn_8014C0B4(void);
+extern void dialog_setScriptSlot(void);
 extern void fn_8014C468(void);
 extern void fn_80161570(void);
 extern void fn_80164DCC(void);
@@ -2020,7 +2020,7 @@ lbl_fn_803A330C_00001A44:
     mr r3, r5
     addi r5, r4, 0xd5
     li r4, 0x0
-    bl fn_8014C0B4
+    bl dialog_setScriptSlot
 lbl_fn_803A330C_00001A54:
     lwz r4, 0x0(r31)
     lis r3, lbl_8074ED24@ha

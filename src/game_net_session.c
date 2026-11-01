@@ -19,7 +19,7 @@ extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_80129A48(void);
 extern void fn_80129A6C(void);
 extern void fn_80147A18(void);
@@ -167,7 +167,7 @@ lbl_fn_801E7D78_000000CC:
     bl fn_80202118
     mr r31, r3
     addi r3, r1, 0x8
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     mr r5, r26
     addi r3, r31, 0x58
@@ -255,7 +255,7 @@ lbl_fn_801E7EA8_000001FC:
     bl fn_80202118
     mr r31, r3
     addi r3, r1, 0x8
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     mr r5, r26
     addi r3, r31, 0x58

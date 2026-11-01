@@ -25,7 +25,7 @@ extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800D5908(void);
 extern void atn_LH_Texture_update(void);
 extern void fn_800DBF68(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_800E0908(void);
 extern void fn_801EC158(void);
 extern void fn_801EC6C0(void);
@@ -416,7 +416,7 @@ lbl_fn_801F10E0_000003C8:
     addi r30, r30, lbl_8073E228@l
     addi r31, r3, 0x58
     addi r3, r30, 0x41
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     mr r3, r31
@@ -432,7 +432,7 @@ lbl_fn_801F10E0_000003C8:
     addi r3, r30, 0x41
     addi r23, r4, 0x58
     fnmsubs f31, f4, f3, f0
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     mr r3, r23
@@ -445,7 +445,7 @@ lbl_fn_801F10E0_000003C8:
     lfs f0, 0x2c(r4)
     addi r23, r5, 0x58
     fmuls f31, f3, f0
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     mr r3, r23
@@ -458,7 +458,7 @@ lbl_fn_801F10E0_000003C8:
     lfs f0, 0x30(r4)
     addi r23, r5, 0x58
     fmuls f31, f3, f0
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     mr r3, r23
@@ -468,7 +468,7 @@ lbl_fn_801F10E0_000003C8:
     addi r3, r30, 0x41
     lfs f31, 0x10(r27)
     addi r23, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     mr r3, r23
@@ -477,7 +477,7 @@ lbl_fn_801F10E0_000003C8:
     lwz r4, 0x180(r24)
     addi r3, r30, 0x49
     addi r23, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f30
     mr r4, r3
     mr r3, r23
@@ -488,7 +488,7 @@ lbl_fn_801F10E0_000003C8:
     lfs f31, 0x24(r3)
     addi r3, r30, 0x51
     addi r23, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     mr r3, r23
@@ -1754,7 +1754,7 @@ lbl_fn_801F2398_000016A0:
     crclr 6
     bl sprintf
     addi r3, r1, 0x30
-    bl fn_800DC6B4
+    bl str_findChar
     stw r3, 0x134(r31)
     li r0, 0x0
     lis r30, lbl_80782BA0@ha

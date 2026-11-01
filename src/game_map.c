@@ -6,7 +6,7 @@ extern void _restgpr_20(void);
 extern void _savegpr_20(void);
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_800697D8(void);
 extern void fn_8006B0C8(void);
 extern void fn_8006B174(void);
@@ -31,7 +31,7 @@ extern void fn_800C4F38(void);
 extern void fn_800C5F5C(void);
 extern void fn_800C5FF0(void);
 extern void atn_LH_Texture_update(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void atn_LoadHandle_getStatus(void);
 extern void atn_LoadHandle_getName(void);
 extern void atn_LoadHandle_getData(void);
@@ -471,7 +471,7 @@ lbl_fn_8008B140_000004B8:
     addi r8, r1, 0xc
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r22
     addi r3, r1, 0x10
     bl fn_8006B0C8
@@ -748,7 +748,7 @@ asm void fn_8008B978(void)
     addi r8, r1, 0xc
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r22
     addi r3, r1, 0x10
     bl fn_8006B0C8
@@ -1179,7 +1179,7 @@ lbl_fn_8008BD10_00000E7C:
     add r3, r0, r30
     lwz r21, 0x50(r3)
     mr r3, r21
-    bl fn_800DC6B4
+    bl str_findChar
     mr r22, r3
     li r20, 0x0
     li r24, 0x0
@@ -1542,7 +1542,7 @@ lbl_fn_8008BD10_00001338:
     addi r8, r1, 0x8
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r22
     addi r3, r1, 0x10
     bl fn_8006B174
@@ -1596,7 +1596,7 @@ lbl_fn_8008BD10_00001448:
     add r3, r0, r23
     lwz r25, 0x50(r3)
     mr r3, r25
-    bl fn_800DC6B4
+    bl str_findChar
     mr r24, r3
     li r28, 0x0
     li r27, 0x0
@@ -1693,7 +1693,7 @@ lbl_fn_8008C62C_000015A4:
     add r3, r0, r27
     lwz r22, 0x50(r3)
     mr r3, r22
-    bl fn_800DC6B4
+    bl str_findChar
     lwz r0, 0x104(r21)
     li r6, -0x1
     li r7, 0x0
@@ -1735,7 +1735,7 @@ lbl_fn_8008C62C_000015FC:
     addi r8, r1, 0x8
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r28
     addi r3, r1, 0x10
     bl fn_8006B174

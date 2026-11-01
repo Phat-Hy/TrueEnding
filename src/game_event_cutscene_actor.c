@@ -12,7 +12,7 @@ extern void _restgpr_24(void);
 extern void _savegpr_24(void);
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_800463A8(void);
 extern void fn_80047DCC(void);
 extern void fn_8004C9B4(void);
@@ -1698,7 +1698,7 @@ lbl_taskManager_initSystem_00001464:
     addi r8, r1, 0x10
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lwz r3, lbl_8087EFB4
     mr r5, r31
     lis r4, 0x4
@@ -1732,7 +1732,7 @@ lbl_taskManager_initSystem_00001594:
     addi r8, r1, 0x8
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lwz r3, lbl_8087EEB0
     mr r5, r30
     lis r4, 0x4

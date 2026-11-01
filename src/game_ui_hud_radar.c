@@ -17,7 +17,7 @@ extern void fn_8004ED34(void);
 extern void fn_80057A64(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800CB5C8(void);
+extern void morph_updateMesh(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800F8C6C(void);
 extern void fn_8012A1B8(void);
@@ -332,7 +332,7 @@ asm void fn_801C038C(void)
     li r4, 0x5
     li r5, 0x0
     addi r3, r3, 0x30
-    b fn_800CB5C8
+    b morph_updateMesh
 }
 
 asm void fn_801C039C(void)

@@ -14,11 +14,11 @@ extern void atn_Model_findBoneIndex(void);
 extern void fn_80092954(void);
 extern void fn_8009373C(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_800C344C(void);
+extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
 extern void fn_800CB58C(void);
-extern void fn_800CB5C8(void);
+extern void morph_updateMesh(void);
 extern void fn_800CB6E4(void);
 extern void atn_Task_setActive(void);
 extern void fn_800DC12C(void);
@@ -57,8 +57,8 @@ extern void fn_802EC160(void);
 extern void fn_802EC280(void);
 extern void fn_802F1120(void);
 extern void fn_803E6850(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_804DA490(void);
 extern void fn_804DA4A4(void);
@@ -354,11 +354,11 @@ lbl_fn_802ED3F0_00000300:
     addi r3, r31, 0x15a0
     li r4, 0x5
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     addi r3, r31, 0x15a4
     li r4, 0x5
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     b lbl_fn_802ED3F0_00000418
 lbl_fn_802ED3F0_0000032C:
     lwz r0, 0x58c(r31)
@@ -370,7 +370,7 @@ lbl_fn_802ED3F0_0000032C:
     addi r3, r31, 0x15a0
     li r4, 0x5
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     addi r3, r31, 0x15a4
     bl fn_800CB58C
     cmpwi r3, 0x0
@@ -383,7 +383,7 @@ lbl_fn_802ED3F0_0000032C:
     addi r5, r31, 0x528
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r31, 0x15a4
     addi r4, r1, 0xc
     bl fn_800CB440
@@ -395,7 +395,7 @@ lbl_fn_802ED3F0_000003A4:
     addi r3, r31, 0x15a4
     li r4, 0x5
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     addi r3, r31, 0x15a0
     bl fn_800CB58C
     cmpwi r3, 0x0
@@ -408,7 +408,7 @@ lbl_fn_802ED3F0_000003A4:
     addi r5, r31, 0x528
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r31, 0x15a0
     addi r4, r1, 0x8
     bl fn_800CB440
@@ -1614,10 +1614,10 @@ lbl_fn_802EE838_000014AC:
     cmpwi r31, 0x0
     beq lbl_fn_802EE838_00001598
     addi r3, r30, 0x14b4
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r29, r3
     addi r3, r30, 0x14b4
-    bl fn_80470580
+    bl boss_getOffset54
     mr r4, r3
     mr r3, r30
     mr r5, r29

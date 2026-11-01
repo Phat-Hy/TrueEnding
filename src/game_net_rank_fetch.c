@@ -8,14 +8,14 @@ extern void _restgpr_27(void);
 extern void _savegpr_19(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_800A56A8(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_80117228(void);
 extern void fn_801D082C(void);
 extern void fn_801F3FF8(void);
@@ -1463,7 +1463,7 @@ lbl_fn_80521D48_0000127C:
     bl fn_80202118
     mr r31, r3
     mr r3, r30
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     addi r3, r31, 0x58
@@ -1604,7 +1604,7 @@ lbl_fn_80521E84_00001460:
     add r7, r29, r0
     addi r8, r1, 0x8
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     li r0, 0x7
     stw r0, 0x4c(r31)
     cmpwi r0, 0x0

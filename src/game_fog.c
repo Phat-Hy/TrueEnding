@@ -9,7 +9,7 @@ extern void mem_free(void);
 extern void fn_80084A78(void);
 extern void mem_getAllocSize(void);
 extern void route_findNextWaypoint(void);
-extern void fn_8008771C(void);
+extern void route_interpolatePath(void);
 extern void fn_80087994(void);
 extern void fn_8008937C(void);
 extern void fn_800CA834(void);
@@ -618,7 +618,7 @@ lbl_fn_800D1430_000006D4:
     addi r5, r31, 0x2a14
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     mr r3, r28
     addi r4, r30, 0x103
     bl fn_8008937C
@@ -654,7 +654,7 @@ lbl_fn_800D1430_000007A8:
     mr r7, r22
     addi r4, r30, 0x11f
     addi r6, r29, fn_800CB800@l
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_808811CC
     mr r3, r19
     lfs f2, lbl_808811B0
@@ -663,7 +663,7 @@ lbl_fn_800D1430_000007A8:
     mr r7, r22
     addi r4, r30, 0x126
     addi r6, r29, fn_800CB800@l
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_8088118C
     mr r3, r19
     lfs f2, lbl_80881188
@@ -672,7 +672,7 @@ lbl_fn_800D1430_000007A8:
     mr r7, r22
     addi r4, r30, 0x12c
     addi r6, r29, fn_800CB800@l
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_8088118C
     mr r3, r19
     lfs f2, lbl_80881188
@@ -681,7 +681,7 @@ lbl_fn_800D1430_000007A8:
     mr r7, r22
     addi r4, r30, 0x130
     addi r6, r29, fn_800CB800@l
-    bl fn_8008771C
+    bl route_interpolatePath
     addi r20, r20, 0x1
     addi r23, r23, 0x18
     cmpwi r20, 0x8
@@ -728,7 +728,7 @@ lbl_fn_800D1430_000008CC:
     mr r7, r22
     addi r4, r30, 0x11f
     addi r6, r29, fn_800CBE8C@l
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_808811CC
     mr r3, r21
     lfs f2, lbl_808811B0
@@ -737,7 +737,7 @@ lbl_fn_800D1430_000008CC:
     mr r7, r22
     addi r4, r30, 0x126
     addi r6, r29, fn_800CBE8C@l
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_8088118C
     mr r3, r21
     lfs f2, lbl_80881188
@@ -746,7 +746,7 @@ lbl_fn_800D1430_000008CC:
     mr r7, r22
     addi r4, r30, 0x12c
     addi r6, r29, fn_800CBE8C@l
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_8088118C
     mr r3, r21
     lfs f2, lbl_80881188
@@ -755,7 +755,7 @@ lbl_fn_800D1430_000008CC:
     mr r7, r22
     addi r4, r30, 0x130
     addi r6, r29, fn_800CBE8C@l
-    bl fn_8008771C
+    bl route_interpolatePath
     addi r20, r20, 0x1
     addi r23, r23, 0x18
     cmpwi r20, 0x20
@@ -802,7 +802,7 @@ lbl_fn_800D1430_000009F0:
     mr r7, r27
     addi r4, r29, 0x11f
     addi r6, r30, fn_800CC518@l
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_808811CC
     mr r3, r21
     lfs f2, lbl_808811B0
@@ -811,7 +811,7 @@ lbl_fn_800D1430_000009F0:
     mr r7, r27
     addi r4, r29, 0x126
     addi r6, r30, fn_800CC518@l
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_8088118C
     mr r3, r21
     lfs f2, lbl_80881188
@@ -820,7 +820,7 @@ lbl_fn_800D1430_000009F0:
     mr r7, r27
     addi r4, r29, 0x12c
     addi r6, r30, fn_800CC518@l
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_8088118C
     mr r3, r21
     lfs f2, lbl_80881188
@@ -829,7 +829,7 @@ lbl_fn_800D1430_000009F0:
     mr r7, r27
     addi r4, r29, 0x130
     addi r6, r30, fn_800CC518@l
-    bl fn_8008771C
+    bl route_interpolatePath
     addi r20, r20, 0x1
     addi r26, r26, 0x18
     cmpwi r20, 0x10
@@ -858,7 +858,7 @@ lbl_fn_800D1430_000009F0:
     addi r5, r31, 0x34a4
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_8088118C
     mr r3, r19
     lfs f2, lbl_808811D0
@@ -867,7 +867,7 @@ lbl_fn_800D1430_000009F0:
     addi r5, r31, 0x34a8
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_8088118C
     mr r3, r19
     lfs f2, lbl_808811D0
@@ -876,7 +876,7 @@ lbl_fn_800D1430_000009F0:
     addi r5, r31, 0x34ac
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     mr r3, r28
     addi r4, r30, 0x19c
     bl fn_8008937C
@@ -915,7 +915,7 @@ lbl_fn_800D1430_000009F0:
     addi r5, r31, 0x34c4
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_8088118C
     mr r3, r28
     lfs f2, lbl_808811A8
@@ -924,7 +924,7 @@ lbl_fn_800D1430_000009F0:
     addi r5, r31, 0x34cc
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     addi r11, r1, 0xa0
     bl _restgpr_19
     lwz r0, 0xa4(r1)

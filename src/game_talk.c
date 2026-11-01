@@ -35,7 +35,7 @@ void fn_8005BFCC(void);
 void fn_8005C1F8(void);
 void fn_8005C220(void);
 void atn_SinusCurve_destructor(void);
-void fn_8005C448(void);
+void talk_executeCommand(void);
 void fn_8005C534(void);
 
 asm void fn_8005B05C(void)
@@ -1582,7 +1582,7 @@ lbl_atn_SinusCurve_destructor_000013C8:
     blr
 }
 
-asm void fn_8005C448(void)
+asm void talk_executeCommand(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -1595,54 +1595,54 @@ asm void fn_8005C448(void)
     mr r29, r4
     stw r28, 0x10(r1)
     mr r28, r3
-    beq lbl_fn_8005C448_000014B4
+    beq lbl_talk_executeCommand_000014B4
     lwz r31, 0x0(r3)
     cmpwi r31, 0x0
-    beq lbl_fn_8005C448_000014A4
+    beq lbl_talk_executeCommand_000014A4
     addic. r0, r31, 0x4
-    beq lbl_fn_8005C448_00001460
+    beq lbl_talk_executeCommand_00001460
     lwz r30, 0x4(r31)
     cmpwi r30, 0x0
-    beq lbl_fn_8005C448_00001460
+    beq lbl_talk_executeCommand_00001460
     addic. r0, r30, 0x4
-    beq lbl_fn_8005C448_00001448
+    beq lbl_talk_executeCommand_00001448
     lwz r3, 0x4(r30)
     bl fn_8005C534
-lbl_fn_8005C448_00001448:
+lbl_talk_executeCommand_00001448:
     cmpwi r30, 0x0
-    beq lbl_fn_8005C448_00001458
+    beq lbl_talk_executeCommand_00001458
     lwz r3, 0x0(r30)
     bl fn_8005C534
-lbl_fn_8005C448_00001458:
+lbl_talk_executeCommand_00001458:
     mr r3, r30
     bl dtor_80084684
-lbl_fn_8005C448_00001460:
+lbl_talk_executeCommand_00001460:
     cmpwi r31, 0x0
-    beq lbl_fn_8005C448_0000149C
+    beq lbl_talk_executeCommand_0000149C
     lwz r30, 0x0(r31)
     cmpwi r30, 0x0
-    beq lbl_fn_8005C448_0000149C
+    beq lbl_talk_executeCommand_0000149C
     addic. r0, r30, 0x4
-    beq lbl_fn_8005C448_00001484
+    beq lbl_talk_executeCommand_00001484
     lwz r3, 0x4(r30)
     bl fn_8005C534
-lbl_fn_8005C448_00001484:
+lbl_talk_executeCommand_00001484:
     cmpwi r30, 0x0
-    beq lbl_fn_8005C448_00001494
+    beq lbl_talk_executeCommand_00001494
     lwz r3, 0x0(r30)
     bl fn_8005C534
-lbl_fn_8005C448_00001494:
+lbl_talk_executeCommand_00001494:
     mr r3, r30
     bl dtor_80084684
-lbl_fn_8005C448_0000149C:
+lbl_talk_executeCommand_0000149C:
     mr r3, r31
     bl dtor_80084684
-lbl_fn_8005C448_000014A4:
+lbl_talk_executeCommand_000014A4:
     cmpwi r29, 0x0
-    ble lbl_fn_8005C448_000014B4
+    ble lbl_talk_executeCommand_000014B4
     mr r3, r28
     bl dtor_80084684
-lbl_fn_8005C448_000014B4:
+lbl_talk_executeCommand_000014B4:
     lwz r31, 0x1c(r1)
     mr r3, r28
     lwz r30, 0x18(r1)

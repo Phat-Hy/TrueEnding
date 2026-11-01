@@ -8,7 +8,7 @@ extern void _restgpr_16(void);
 extern void _savegpr_16(void);
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_800499D0(void);
 extern void fn_8006B174(void);
 extern void fn_8006BA30(void);
@@ -87,7 +87,7 @@ void str_skipWhitespace(void);
 void fn_800DC3C8(void);
 void fn_800DC3CC(void);
 void fn_800DC500(void);
-void fn_800DC6B4(void);
+void str_findChar(void);
 void fn_800DC880(void);
 void fn_800DC978(void);
 void fn_800DC97C(void);
@@ -532,7 +532,7 @@ lbl_fn_800DC500_0000056C:
     blr
 }
 
-asm void fn_800DC6B4(void)
+asm void str_findChar(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -546,18 +546,18 @@ asm void fn_800DC6B4(void)
     cmpwi r3, 0x0
     li r0, -0x1
     li r5, 0x0
-    beq lbl_fn_800DC6B4_00000730
+    beq lbl_str_findChar_00000730
     cmplwi r3, 0x8
     subi r7, r3, 0x8
-    ble lbl_fn_800DC6B4_000006EC
+    ble lbl_str_findChar_000006EC
     addi r6, r7, 0x7
     lis r4, lbl_807348A0@ha
     srwi r6, r6, 3
     addi r4, r4, lbl_807348A0@l
     mtctr r6
     cmplwi r7, 0x0
-    ble lbl_fn_800DC6B4_000006EC
-lbl_fn_800DC6B4_000005E0:
+    ble lbl_str_findChar_000006EC
+lbl_str_findChar_000005E0:
     lbzx r6, r31, r5
     add r29, r31, r5
     srwi r9, r0, 24
@@ -624,16 +624,16 @@ lbl_fn_800DC6B4_000005E0:
     clrlslwi r6, r6, 24, 2
     lwzx r6, r4, r6
     xor r0, r0, r6
-    bdnz lbl_fn_800DC6B4_000005E0
-lbl_fn_800DC6B4_000006EC:
+    bdnz lbl_str_findChar_000005E0
+lbl_str_findChar_000006EC:
     lis r7, lbl_807348A0@ha
     subf r4, r5, r3
     addi r7, r7, lbl_807348A0@l
     add r6, r31, r5
     mtctr r4
     cmplw r5, r3
-    bge lbl_fn_800DC6B4_00000730
-lbl_fn_800DC6B4_00000708:
+    bge lbl_str_findChar_00000730
+lbl_str_findChar_00000708:
     lbz r3, 0x0(r6)
     srwi r4, r0, 24
     slwi r0, r0, 8
@@ -643,8 +643,8 @@ lbl_fn_800DC6B4_00000708:
     clrlslwi r3, r3, 24, 2
     lwzx r3, r7, r3
     xor r0, r0, r3
-    bdnz lbl_fn_800DC6B4_00000708
-lbl_fn_800DC6B4_00000730:
+    bdnz lbl_str_findChar_00000708
+lbl_str_findChar_00000730:
     li r3, -0x1
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)
@@ -801,7 +801,7 @@ lbl_fn_800DC980_00000890:
     add r7, r7, r31
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lwz r0, 0x294(r1)
     lwz r31, 0x28c(r1)
     lwz r30, 0x288(r1)
@@ -880,7 +880,7 @@ lbl_fn_800DCA70_000009C0:
     addi r8, r1, 0x8
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r30
     addi r3, r1, 0x10
     bl fn_8006B174

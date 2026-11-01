@@ -12,7 +12,7 @@ extern void _savegpr_22(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_8004FF58(void);
 extern void fn_8006B174(void);
 extern void fn_80070B60(void);
@@ -32,7 +32,7 @@ extern void fn_800A005C(void);
 extern void fn_800BDB58(void);
 extern void fn_800C0A50(void);
 extern void fn_800C122C(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
@@ -1658,7 +1658,7 @@ asm void fn_8009F788(void)
     addi r8, r1, 0x10
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r24
     addi r3, r1, 0x48
     bl fn_8006B174
@@ -1676,7 +1676,7 @@ lbl_fn_8009F788_00001628:
 lbl_fn_8009F788_0000163C:
     lwz r3, 0x50(r1)
 lbl_fn_8009F788_00001640:
-    bl fn_800DC6B4
+    bl str_findChar
     lbz r0, lbl_8087EF48
     mr r31, r3
     extsb. r0, r0
@@ -1779,7 +1779,7 @@ lbl_fn_8009F788_00001710:
     addi r8, r1, 0xc
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r25
     addi r3, r1, 0x24
     bl fn_8006B174
@@ -1810,7 +1810,7 @@ lbl_fn_8009F788_00001804:
 lbl_fn_8009F788_00001828:
     lwz r3, 0x2c(r1)
 lbl_fn_8009F788_0000182C:
-    bl fn_800DC6B4
+    bl str_findChar
     clrlwi r5, r3, 16
     lis r0, 0x4330
     lis r4, lbl_807326D0@ha

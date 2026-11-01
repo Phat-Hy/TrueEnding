@@ -42,7 +42,7 @@ extern void rand(void);
 extern void strstr(void);
 extern void fn_806958E0(void);
 extern void fn_80695A50(void);
-extern void fn_80695AD0(void);
+extern void vec3_isNonZero(void);
 
 /* External data declarations */
 extern u8 lbl_80742D7C[];
@@ -572,7 +572,7 @@ lbl_fn_8022589C_000006B4:
     stw r5, 0x14(r1)
     stw r4, 0x18(r1)
     stw r0, 0x1c(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_8022589C_000006F0
     lwz r3, 0x1840(r28)

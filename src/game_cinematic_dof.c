@@ -24,7 +24,7 @@ extern void fn_8006AFF8(void);
 extern void fn_8006CA80(void);
 extern void mem_free(void);
 extern void route_findNextWaypoint(void);
-extern void fn_8008771C(void);
+extern void route_interpolatePath(void);
 extern void fn_80087994(void);
 extern void fn_8008937C(void);
 extern void fn_800897D8(void);
@@ -132,8 +132,8 @@ extern void world_setGlobalFlag(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
 extern void fn_80373148(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_804A04AC(void);
@@ -396,7 +396,7 @@ lbl_fn_80338568_000001DC:
     addi r5, r29, 0x14e8
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_808851B0
     mr r3, r30
     lfs f2, lbl_80885234
@@ -405,7 +405,7 @@ lbl_fn_80338568_000001DC:
     addi r5, r29, 0x7d8
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)
@@ -1161,16 +1161,16 @@ lbl_fn_80338FD0_00000DA0:
     li r29, 0x0
 lbl_fn_80338FD0_00000DA4:
     addi r3, r31, 0x16b8
-    bl fn_80470580
+    bl boss_getOffset54
     cmpwi r3, 0x0
     beq lbl_fn_80338FD0_000012A0
     cmpwi r29, 0x0
     beq lbl_fn_80338FD0_000012A0
     addi r3, r31, 0x16b8
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r29, r3
     addi r3, r31, 0x16b8
-    bl fn_80470580
+    bl boss_getOffset54
     mr r4, r3
     mr r5, r29
     addi r3, r1, 0x10

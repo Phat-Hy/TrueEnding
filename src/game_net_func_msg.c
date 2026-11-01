@@ -13,7 +13,7 @@ extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_800FDE60(void);
 extern void fn_80116FC0(void);
 extern void fn_8012D8B8(void);
@@ -3416,7 +3416,7 @@ lbl_fn_8050158C_00001AE4:
     bne lbl_fn_8050158C_00002280
     lfs f23, 0x14(r1)
     addi r3, r20, 0x1
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f23
     mr r4, r3
     addi r3, r26, 0x58
@@ -3424,7 +3424,7 @@ lbl_fn_8050158C_00001AE4:
     bl fn_801FED24
     lfs f23, 0x18(r1)
     addi r3, r20, 0x1
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f23
     mr r4, r3
     addi r3, r26, 0x58
@@ -3468,7 +3468,7 @@ lbl_fn_8050158C_00001BC8:
     lwz r25, 0x26c(r1)
     ble lbl_fn_8050158C_00001D24
     addi r3, r20, 0xc
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     mr r5, r31
     addi r3, r26, 0x58
@@ -3483,7 +3483,7 @@ lbl_fn_8050158C_00001BC8:
     bl fn_80116FC0
     mr r19, r3
     addi r3, r20, 0x28
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     mr r5, r19
     addi r3, r26, 0x58
@@ -3519,13 +3519,13 @@ lbl_fn_8050158C_00001BC8:
     fadds f3, f29, f30
     bl fn_801F4AA0
     addi r3, r20, 0x65
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_80887690
     mr r4, r3
     addi r3, r26, 0x58
     bl fn_801FECE0
     addi r3, r20, 0x6b
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_80887688
     mr r4, r3
     addi r3, r26, 0x58
@@ -3535,7 +3535,7 @@ lbl_fn_8050158C_00001D24:
     bge lbl_fn_8050158C_00001E2C
     addi r19, r22, 0x4
     addi r3, r20, 0xc
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     mr r5, r19
     addi r3, r26, 0x58
@@ -3550,7 +3550,7 @@ lbl_fn_8050158C_00001D24:
     bl fn_80116FC0
     mr r19, r3
     addi r3, r20, 0x28
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     mr r5, r19
     addi r3, r26, 0x58
@@ -3586,13 +3586,13 @@ lbl_fn_8050158C_00001D24:
     fmr f3, f2
     bl fn_801F4AA0
     addi r3, r20, 0x65
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_80887690
     mr r4, r3
     addi r3, r26, 0x58
     bl fn_801FECE0
     addi r3, r20, 0x6b
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_80887690
     mr r4, r3
     addi r3, r26, 0x58
@@ -3601,7 +3601,7 @@ lbl_fn_8050158C_00001D24:
 lbl_fn_8050158C_00001E2C:
     addi r19, r22, 0x8
     addi r3, r20, 0xc
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     mr r5, r19
     addi r3, r26, 0x58
@@ -3613,7 +3613,7 @@ lbl_fn_8050158C_00001E2C:
     bl fn_801F4CB4
     addi r19, r22, 0xa
     addi r3, r20, 0x28
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     mr r5, r19
     addi r3, r26, 0x58
@@ -3649,13 +3649,13 @@ lbl_fn_8050158C_00001E2C:
     fmr f3, f1
     bl fn_801F4AA0
     addi r3, r20, 0x65
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_80887688
     mr r4, r3
     addi r3, r26, 0x58
     bl fn_801FECE0
     addi r3, r20, 0x6b
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_80887688
     mr r4, r3
     addi r3, r26, 0x58
@@ -3664,7 +3664,7 @@ lbl_fn_8050158C_00001F20:
     cmpwi r25, 0x0
     ble lbl_fn_8050158C_00002028
     addi r3, r20, 0x71
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     mr r5, r30
     addi r3, r26, 0x58
@@ -3679,7 +3679,7 @@ lbl_fn_8050158C_00001F20:
     bl fn_80116FC0
     mr r19, r3
     addi r3, r20, 0x8d
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     mr r5, r19
     addi r3, r26, 0x58
@@ -3715,13 +3715,13 @@ lbl_fn_8050158C_00001F20:
     fadds f3, f29, f30
     bl fn_801F4AA0
     addi r3, r20, 0xca
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_80887690
     mr r4, r3
     addi r3, r26, 0x58
     bl fn_801FECE0
     addi r3, r20, 0xd1
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_80887688
     mr r4, r3
     addi r3, r26, 0x58
@@ -3731,7 +3731,7 @@ lbl_fn_8050158C_00002028:
     bge lbl_fn_8050158C_00002130
     addi r19, r22, 0x4
     addi r3, r20, 0x71
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     mr r5, r19
     addi r3, r26, 0x58
@@ -3746,7 +3746,7 @@ lbl_fn_8050158C_00002028:
     bl fn_80116FC0
     mr r19, r3
     addi r3, r20, 0x8d
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     mr r5, r19
     addi r3, r26, 0x58
@@ -3782,13 +3782,13 @@ lbl_fn_8050158C_00002028:
     fmr f3, f2
     bl fn_801F4AA0
     addi r3, r20, 0xca
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_80887690
     mr r4, r3
     addi r3, r26, 0x58
     bl fn_801FECE0
     addi r3, r20, 0xd1
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_80887690
     mr r4, r3
     addi r3, r26, 0x58
@@ -3797,7 +3797,7 @@ lbl_fn_8050158C_00002028:
 lbl_fn_8050158C_00002130:
     addi r19, r22, 0x8
     addi r3, r20, 0x71
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     mr r5, r19
     addi r3, r26, 0x58
@@ -3809,7 +3809,7 @@ lbl_fn_8050158C_00002130:
     bl fn_801F4CB4
     addi r19, r22, 0xa
     addi r3, r20, 0x8d
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     mr r5, r19
     addi r3, r26, 0x58
@@ -3845,13 +3845,13 @@ lbl_fn_8050158C_00002130:
     fmr f3, f1
     bl fn_801F4AA0
     addi r3, r20, 0xca
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_80887688
     mr r4, r3
     addi r3, r26, 0x58
     bl fn_801FECE0
     addi r3, r20, 0xd1
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_80887688
     mr r4, r3
     addi r3, r26, 0x58
@@ -3865,13 +3865,13 @@ lbl_fn_8050158C_00002224:
     addi r4, r21, 0xc4
     bl fn_8021C6A4
     addi r3, r20, 0xd8
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     addi r3, r26, 0x58
     addi r5, r1, 0x60
     bl fn_801FEE08
     addi r3, r20, 0xe6
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_80887688
     mr r4, r3
     addi r3, r26, 0x58

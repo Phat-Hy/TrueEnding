@@ -19,7 +19,7 @@ extern void fn_800838B8(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void route_findNextWaypoint(void);
-extern void fn_8008771C(void);
+extern void route_interpolatePath(void);
 extern void fn_80087994(void);
 extern void fn_8008937C(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -2557,7 +2557,7 @@ lbl_fn_804D0328_00001F0C:
     addi r5, r29, 0x5c8
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     mr r3, r27
     addi r4, r30, 0x144
     bl fn_8008937C

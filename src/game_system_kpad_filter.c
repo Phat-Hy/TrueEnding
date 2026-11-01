@@ -14,7 +14,7 @@ extern void ref_releaseHandle(void);
 extern void fn_800CFA28(void);
 extern void fn_800CFBA0(void);
 extern void atn_Task_setActive(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_800F0D14(void);
 extern void fn_801058F8(void);
 extern void fn_8010ABF4(void);
@@ -499,7 +499,7 @@ asm void fn_803743AC(void)
     stfs f0, 0x100(r4)
     lwz r4, 0xb1c(r31)
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_80885708
     mr r4, r3
     mr r3, r29

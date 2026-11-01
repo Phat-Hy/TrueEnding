@@ -12,7 +12,7 @@ extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
 extern void fn_800CB518(void);
 extern void fn_800CB58C(void);
-extern void fn_800CB5C8(void);
+extern void morph_updateMesh(void);
 extern void fn_80102EAC(void);
 extern void fn_801031D0(void);
 extern void fn_8016F3D0(void);
@@ -516,7 +516,7 @@ lbl_fn_804EB938_000005C0:
     li r4, 0xf
     li r5, 0x0
     addi r3, r3, 0x2b78
-    bl fn_800CB5C8
+    bl morph_updateMesh
     bl rand
     lis r4, lbl_807910A8@ha
     clrlslwi r0, r3, 31, 2

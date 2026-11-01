@@ -18,7 +18,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void fn_80097D40(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void atn_Anim_getDuration(void);
-extern void fn_800C344C(void);
+extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void fn_800F7FD8(void);
 extern void system_getNextSequenceId(void);
@@ -61,7 +61,7 @@ extern void PSVECSquareMag(void);
 extern void strcmp(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
-extern void fn_80695AD0(void);
+extern void vec3_isNonZero(void);
 
 /* External data declarations */
 extern u8 lbl_80755090[];
@@ -174,7 +174,7 @@ lbl_fn_804628B4_00000094:
     stw r5, 0x14(r1)
     stw r4, 0x18(r1)
     stw r0, 0x1c(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_804628B4_000000D8
     lwz r3, 0xf80(r31)
@@ -1135,7 +1135,7 @@ lbl_fn_80463610_00000DE0:
     li r7, -0x1
     stfs f0, 0x974(r8)
     stfs f0, 0x978(r8)
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle

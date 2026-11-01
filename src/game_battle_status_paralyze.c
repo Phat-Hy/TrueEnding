@@ -9,7 +9,7 @@ extern void _savegpr_18(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void talk_formatQuotedString(void);
 extern void fn_8005BBF8(void);
 extern void fn_8005BCE8(void);
@@ -36,8 +36,8 @@ extern void fn_803EC568(void);
 extern void fn_803EC69C(void);
 extern void fn_803EC91C(void);
 extern void fn_8042AB58(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void atn_LoadHandle_getName(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
@@ -1696,10 +1696,10 @@ asm void fn_8042A360(void)
     stmw r14, 0x688(r1)
     mr r15, r3
     addi r3, r3, 0x60
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r16, r3
     addi r3, r15, 0x60
-    bl fn_80470580
+    bl boss_getOffset54
     lis r4, lbl_807774D8@ha
     li r24, 0x0
     addi r4, r4, lbl_807774D8@l
@@ -1830,7 +1830,7 @@ lbl_fn_8042A360_0000173C:
     addi r8, r1, 0x18
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lwz r0, 0x28c(r15)
     lwz r3, 0x290(r15)
     cmplw r0, r3
@@ -1864,7 +1864,7 @@ lbl_fn_8042A360_000017E4:
     lwz r0, 0x30(r1)
     li r5, 0x0
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_8042A360_00001824:
     lwz r3, 0x28c(r15)
     addi r0, r3, 0x1
@@ -1995,7 +1995,7 @@ lbl_fn_8042A360_000019C0:
     lwz r0, 0x30(r1)
     li r5, 0x0
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_8042A360_00001A00:
     lwz r3, 0x3c(r1)
     subi r6, r31, 0x5555

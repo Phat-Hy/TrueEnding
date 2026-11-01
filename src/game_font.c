@@ -6,7 +6,7 @@ extern void NANDSetAutoErrorMessaging(void);
 extern void __register_global_object(void);
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_8006B0C8(void);
 extern void fn_8006B174(void);
 extern void fn_8006EF48(void);
@@ -18,7 +18,7 @@ extern void msg_formatTextWithAlignment(void* res, void* font, u32 mode);
 extern void atn_Task_constructor(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_801F0758(void);
 extern void fn_801F3FF8(void);
 extern void saveSlot_readSummary(void);
@@ -463,7 +463,7 @@ lbl_fn_800A2DE0_00000588:
     addi r8, r1, 0x30
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r30
     addi r3, r1, 0xc0
     bl fn_8006B174
@@ -604,7 +604,7 @@ lbl_fn_800A2DE0_00000794:
     addi r8, r1, 0x2c
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r30
     addi r3, r1, 0x9c
     bl fn_8006B174
@@ -745,7 +745,7 @@ lbl_fn_800A2DE0_0000099C:
     addi r8, r1, 0x24
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r30
     addi r3, r1, 0x84
     bl fn_8006B174
@@ -834,7 +834,7 @@ lbl_fn_800A2DE0_00000AF0:
     addi r8, r1, 0x1c
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r30
     addi r3, r1, 0x6c
     bl fn_8006B174
@@ -1564,7 +1564,7 @@ lbl_fn_800A2DE0_000015E0:
     addi r8, r1, 0x14
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r29
     addi r3, r1, 0x54
     bl fn_8006B174
@@ -1616,7 +1616,7 @@ lbl_fn_800A2DE0_0000169C:
     addi r8, r1, 0xc
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r29
     addi r3, r1, 0x3c
     bl fn_8006B0C8
@@ -1814,7 +1814,7 @@ lbl_fn_800A4244_0000197C:
     addi r30, r30, lbl_807327B4@l
     addi r3, r30, 0x25
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_80880CA0
     mr r4, r3
     mr r3, r29
@@ -1823,7 +1823,7 @@ lbl_fn_800A4244_0000197C:
     addi r3, r30, 0x2a
     lwz r4, -0x7d40(r4)
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_80880CA0
     mr r4, r3
     mr r3, r29
@@ -1836,7 +1836,7 @@ lbl_fn_800A4244_000019E8:
     addi r30, r30, lbl_807327B4@l
     addi r3, r30, 0x25
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_80880CA4
     mr r4, r3
     mr r3, r29
@@ -1845,7 +1845,7 @@ lbl_fn_800A4244_000019E8:
     addi r3, r30, 0x2a
     lwz r4, -0x7d40(r4)
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_80880CA8
     mr r4, r3
     mr r3, r29
@@ -1864,7 +1864,7 @@ lbl_fn_800A4244_00001A38:
     addis r4, r31, 0x1
     addi r3, r30, 0x3a
     lwz r30, -0x7d40(r4)
-    bl fn_800DC6B4
+    bl str_findChar
     mr r5, r3
     mr r4, r30
     addi r3, r1, 0x14
@@ -1901,7 +1901,7 @@ lbl_fn_800A4244_00001ADC:
     addi r5, r5, lbl_807327B4@l
     addi r3, r5, 0x47
     addi r29, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f0, lbl_80880CAC
     mr r4, r3
     mr r3, r29

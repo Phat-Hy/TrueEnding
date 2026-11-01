@@ -18,7 +18,7 @@ extern void fn_80063D3C(void);
 extern void fn_8006AFF8(void);
 extern void fn_8006CA80(void);
 extern void route_findNextWaypoint(void);
-extern void fn_8008771C(void);
+extern void route_interpolatePath(void);
 extern void fn_80087994(void);
 extern void fn_8008937C(void);
 extern void fn_800897D8(void);
@@ -1117,7 +1117,7 @@ lbl_fn_80344780_00000CD0:
     addi r5, r28, 0x177c
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_80885238
     mr r3, r29
     lfs f2, lbl_80885354
@@ -1126,7 +1126,7 @@ lbl_fn_80344780_00000CD0:
     addi r5, r28, 0x1780
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_80885238
     mr r3, r29
     lfs f2, lbl_80885354
@@ -1135,7 +1135,7 @@ lbl_fn_80344780_00000CD0:
     addi r5, r28, 0x1784
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lfs f1, lbl_80885238
     mr r3, r29
     lfs f2, lbl_8088534C
@@ -1144,7 +1144,7 @@ lbl_fn_80344780_00000CD0:
     addi r5, r28, 0x1774
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     mr r3, r29
     addi r4, r30, 0x199
     addi r5, r28, 0x1778
@@ -1162,7 +1162,7 @@ lbl_fn_80344780_00000CD0:
     addi r5, r28, 0x1764
     li r6, 0x0
     li r7, 0x0
-    bl fn_8008771C
+    bl route_interpolatePath
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)

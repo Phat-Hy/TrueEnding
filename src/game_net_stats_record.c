@@ -13,7 +13,7 @@ extern void dtor_80084684(void);
 extern void fn_8000D528(void);
 extern void fn_8000FAE4(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
@@ -1379,7 +1379,7 @@ lbl_fn_80543730_000010FC:
     lwz r0, 0xc(r31)
     li r5, 0x0
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_80543730_0000113C:
     lwz r0, 0x14(r31)
     mr r3, r30

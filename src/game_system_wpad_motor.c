@@ -121,8 +121,8 @@ extern void fn_8046F8B8(void);
 extern void fn_8046F96C(void);
 extern void fn_80470364(void);
 extern void fn_80470528(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_80473F88(void);
 extern void fn_8047E528(void);
@@ -651,10 +651,10 @@ lbl_world_Manager_draw_00000588:
     cmpwi r3, 0x0
     bne lbl_world_Manager_draw_000031A0
     addi r3, r28, 0x550c
-    bl fn_80470580
+    bl boss_getOffset54
     mr r24, r3
     addi r3, r28, 0x550c
-    bl fn_8047059C
+    bl boss_getOffset50
     cmpwi r24, 0x0
     srwi r5, r3, 2
     beq lbl_world_Manager_draw_000005D8
@@ -2334,10 +2334,10 @@ lbl_world_Manager_draw_00001DB8:
     stw r29, 0x5558(r28)
 lbl_world_Manager_draw_00001DD8:
     addi r3, r28, 0x550c
-    bl fn_80470580
+    bl boss_getOffset54
     mr r24, r3
     addi r3, r28, 0x550c
-    bl fn_8047059C
+    bl boss_getOffset50
     cmpwi r24, 0x0
     srwi r5, r3, 2
     beq lbl_world_Manager_draw_00001E0C

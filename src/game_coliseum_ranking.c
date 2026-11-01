@@ -14,7 +14,7 @@ extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void atn_ColliBase_destructor(void);
 extern void fn_80058A1C(void);
 extern void fn_80058B78(void);
@@ -57,8 +57,8 @@ extern void res_registerResource(void);
 extern void fn_803EE374(void);
 extern void fn_803FFF40(void);
 extern void fn_804003E0(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void fn_804714A4(void);
 extern void fn_804714B0(void);
 extern void atn_LoadHandle_constructor(void);
@@ -80,7 +80,7 @@ extern void strstr(void);
 extern void fn_80683B54(void);
 extern void atoi(void);
 extern void fn_80695A50(void);
-extern void fn_80695D84(void);
+extern void runtime_clampDouble(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -279,7 +279,7 @@ lbl_fn_80495F78_0000016C:
     b lbl_fn_80495F78_00000188
 lbl_fn_80495F78_00000180:
     fmadds f1, f30, f0, f31
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_80495F78_00000188:
     mr r24, r3
 lbl_fn_80495F78_0000018C:
@@ -297,7 +297,7 @@ lbl_fn_80495F78_000001A4:
     b lbl_fn_80495F78_000001C0
 lbl_fn_80495F78_000001B8:
     fmadds f1, f30, f0, f31
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_80495F78_000001C0:
     mr r25, r3
 lbl_fn_80495F78_000001C4:
@@ -315,7 +315,7 @@ lbl_fn_80495F78_000001DC:
     b lbl_fn_80495F78_000001F8
 lbl_fn_80495F78_000001F0:
     fmadds f1, f30, f0, f31
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_80495F78_000001F8:
     mr r26, r3
 lbl_fn_80495F78_000001FC:
@@ -333,7 +333,7 @@ lbl_fn_80495F78_00000214:
     b lbl_fn_80495F78_00000230
 lbl_fn_80495F78_00000228:
     fmadds f1, f30, f0, f31
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_80495F78_00000230:
     slwi r4, r3, 24
     slwi r3, r24, 16
@@ -1814,10 +1814,10 @@ lbl_fn_80497374_00001518:
     li r0, 0x0
     stw r0, 0x3c(r1)
     addi r3, r30, 0x58
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r31, r3
     addi r3, r30, 0x58
-    bl fn_80470580
+    bl boss_getOffset54
     mr r4, r3
     mr r5, r31
     addi r3, r1, 0x20
@@ -1846,7 +1846,7 @@ lbl_fn_80497374_00001590:
     cmpwi r3, 0x3
     bne lbl_fn_80497374_00001834
     addi r3, r30, 0x58
-    bl fn_80470580
+    bl boss_getOffset54
     lis r28, lbl_80756A8C@ha
     mr r31, r3
     addi r28, r28, lbl_80756A8C@l
@@ -1909,7 +1909,7 @@ lbl_fn_80497374_0000161C:
     addi r8, r1, 0xc
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r29
     addi r3, r1, 0x24
     bl fn_8006B0C8
@@ -1942,7 +1942,7 @@ lbl_fn_80497374_000016DC:
     add r7, r29, r0
     addi r8, r1, 0x14
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lwz r0, 0x24(r1)
     lwz r31, 0x20(r31)
     srwi. r0, r0, 31
@@ -1964,7 +1964,7 @@ lbl_fn_80497374_0000172C:
     add r7, r31, r0
     addi r8, r1, 0x1c
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lwz r0, 0x24(r1)
     srwi. r0, r0, 31
     bne lbl_fn_80497374_00001770

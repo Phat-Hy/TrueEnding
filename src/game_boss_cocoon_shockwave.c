@@ -20,7 +20,7 @@ extern void fn_80084A78(void);
 extern void mem_getAllocSize(void);
 extern void fn_800904E0(void);
 extern void fn_8009A584(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_800DCA6C(void);
 extern void fn_8024373C(void);
 extern void fn_80243758(void);
@@ -244,7 +244,7 @@ asm void fn_80473C88(void)
     addi r3, r1, 0x10
     bl fn_8006B404
     addi r3, r1, 0x10
-    bl fn_800DC6B4
+    bl str_findChar
     cmpwi r28, 0x0
     mr r5, r3
     li r30, 0x0
@@ -995,7 +995,7 @@ asm void fn_80474678(void)
     addi r3, r1, 0x10
     bl fn_8006B404
     addi r3, r1, 0x10
-    bl fn_800DC6B4
+    bl str_findChar
     cmpwi r28, 0x0
     mr r5, r3
     li r30, 0x0

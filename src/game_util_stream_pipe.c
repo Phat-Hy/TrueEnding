@@ -10,7 +10,7 @@ extern void _savegpr_25(void);
 extern void dtor_80084684(void);
 extern void entry_callCtors(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_800696B4(void);
 extern void fn_8006BA8C(void);
 extern void mem_alloc(void);
@@ -1124,7 +1124,7 @@ lbl_fn_8057DC3C_00000DD8:
     lwz r0, 0xc(r27)
     li r5, 0x0
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_8057DC3C_00000E1C:
     lwz r4, 0x1c(r27)
     lis r5, lbl_80779F40@ha
@@ -1163,7 +1163,7 @@ lbl_fn_8057DC3C_00000E6C:
     lwz r0, 0x20(r27)
     li r5, 0x0
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_8057DC3C_00000EB0:
     lwz r0, 0x2c(r27)
     li r3, 0x0
@@ -1574,7 +1574,7 @@ lbl_fn_8057E278_00001450:
     lwz r0, 0xc(r22)
     li r5, 0x0
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_8057E278_00001490:
     lwz r0, 0x14(r22)
     stw r0, 0x14(r20)
@@ -1606,7 +1606,7 @@ lbl_fn_8057E278_000014C8:
     lwz r0, 0x20(r22)
     li r5, 0x0
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_8057E278_00001508:
     lwz r0, 0x2c(r22)
     lwz r18, 0x28(r22)

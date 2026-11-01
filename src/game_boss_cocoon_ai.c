@@ -13,7 +13,7 @@ extern void atn_Model_findBoneIndex(void);
 extern void fn_80094958(void);
 extern void fn_80094B6C(void);
 extern void fn_80097E80(void);
-extern void fn_800C344C(void);
+extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void system_getNextSequenceId(void);
 extern void fn_80101340(void);
@@ -2127,7 +2127,7 @@ lbl_fn_80455638_00001BEC:
     addi r5, r20, 0x528
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x18
     li r4, -0x1
     bl ref_releaseHandle

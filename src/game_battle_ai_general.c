@@ -78,8 +78,8 @@ extern void fn_80442EA4(void);
 extern void fn_80442EAC(void);
 extern void fn_80442ECC(void);
 extern void fn_804444E8(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXTrans(void);
@@ -102,7 +102,7 @@ extern void fn_8068AE9C(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
 extern void runtime_registerStaticObject(void);
-extern void fn_80695AD0(void);
+extern void vec3_isNonZero(void);
 extern char* strcpy(char* dest, const char* src);
 
 /* External data declarations */
@@ -2097,10 +2097,10 @@ asm void fn_8043DD78(void)
     addi r3, r1, 0x24
     bl fn_80057A64
     addi r3, r29, 0x60
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r31, r3
     addi r3, r29, 0x60
-    bl fn_80470580
+    bl boss_getOffset54
     mr r4, r3
     mr r5, r31
     addi r3, r1, 0x130
@@ -3540,7 +3540,7 @@ lbl_fn_8043F178_00002EB8:
     stw r5, 0x8(r1)
     stw r4, 0xc(r1)
     stw r0, 0x10(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_8043F178_00002EF4
     lwz r3, 0x2a8(r30)
@@ -3660,7 +3660,7 @@ lbl_fn_8043F24C_0000304C:
     stw r5, 0x44(r1)
     stw r4, 0x48(r1)
     stw r0, 0x4c(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_8043F24C_00003258
     lwz r3, 0x2a8(r31)

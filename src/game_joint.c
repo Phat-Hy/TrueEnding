@@ -34,14 +34,14 @@ extern void fn_800C79DC(void);
 extern void fn_800C7A30(void);
 extern void fn_800C7B78(void);
 extern void fn_800C7CA8(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_800DF154(void);
 extern void atn_LoadHandle_constructor(void);
 extern void taskManager_updateTasks(void);
 extern void fn_80475DF8(void);
 extern void printf(void);
 extern void abort(void);
-extern void fn_80695AD0(void);
+extern void vec3_isNonZero(void);
 
 /* External data declarations */
 extern u8 lbl_80733880[];
@@ -1124,7 +1124,7 @@ asm void fn_800C5F5C(void)
     stw r29, 0x14(r1)
     mr r29, r3
     mr r3, r4
-    bl fn_800DC6B4
+    bl str_findChar
     lwz r30, 0x18(r29)
     mr r31, r3
     b lbl_fn_800C5F5C_00000F3C
@@ -1134,7 +1134,7 @@ lbl_fn_800C5F5C_00000F10:
     lwz r3, 0x0(r3)
     lwz r3, 0x10(r3)
     lwz r3, 0x10(r3)
-    bl fn_800DC6B4
+    bl str_findChar
     cmplw r31, r3
     bne lbl_fn_800C5F5C_00000F38
     lwz r3, 0x0(r30)
@@ -1178,7 +1178,7 @@ lbl_fn_800C5FF0_00000F9C:
     lwz r3, 0x0(r3)
     lwz r3, 0x10(r3)
     lwz r3, 0x10(r3)
-    bl fn_800DC6B4
+    bl str_findChar
     cmplw r30, r3
     bne lbl_fn_800C5FF0_00000FC4
     lwz r3, 0x0(r31)
@@ -1221,7 +1221,7 @@ asm void fn_800C607C(void)
     lis r3, lbl_80779498@ha
     addi r3, r3, lbl_80779498@l
     lwzx r3, r3, r29
-    bl fn_800DC6B4
+    bl str_findChar
     lwz r28, 0x0(r27)
     mr r31, r3
     b lbl_fn_800C607C_00001070
@@ -1229,7 +1229,7 @@ lbl_fn_800C607C_0000104C:
     lwz r3, 0x0(r28)
     lwz r3, 0x10(r3)
     lwz r3, 0x10(r3)
-    bl fn_800DC6B4
+    bl str_findChar
     cmplw r31, r3
     bne lbl_fn_800C607C_0000106C
     lwz r3, 0x0(r28)
@@ -1671,7 +1671,7 @@ lbl_fn_800C65F0_00001614:
     addi r4, r30, 0x2428
     bl fn_800C776C
     addi r3, r1, 0x88
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_800C65F0_00001668
     lwz r7, 0x2418(r30)
@@ -1730,7 +1730,7 @@ lbl_fn_800C65F0_000016F0:
     addi r4, r30, 0x2428
     bl fn_800C776C
     addi r3, r1, 0x7c
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_800C65F0_00001744
     lwz r7, 0x2418(r30)
@@ -1788,7 +1788,7 @@ lbl_fn_800C65F0_000017C8:
     addi r4, r30, 0x2428
     bl fn_800C776C
     addi r3, r1, 0x70
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_800C65F0_00001814
     lwz r4, 0x2418(r30)
@@ -1845,7 +1845,7 @@ lbl_fn_800C65F0_0000189C:
     addi r4, r30, 0x2428
     bl fn_800C776C
     addi r3, r1, 0x64
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_800C65F0_000018E8
     lwz r4, 0x2418(r30)
@@ -1884,7 +1884,7 @@ lbl_fn_800C65F0_00001908:
     addi r4, r30, 0x2428
     bl fn_800C776C
     addi r3, r1, 0x58
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_800C65F0_00001978
     lwz r4, 0x2418(r30)
@@ -1949,7 +1949,7 @@ lbl_fn_800C65F0_00001A18:
     addi r4, r30, 0x2428
     bl fn_800C776C
     addi r3, r1, 0x4c
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_800C65F0_00001A68
     lwz r4, 0x2418(r30)
@@ -1999,7 +1999,7 @@ lbl_fn_800C65F0_00001AA0:
     lhz r26, 0x808(r5)
     bl fn_800C77D8
     addi r3, r1, 0x40
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_800C65F0_00001B10
     lwz r4, 0x2418(r30)
@@ -2026,7 +2026,7 @@ lbl_fn_800C65F0_00001B20:
     addi r4, r30, 0x2450
     bl fn_800C77D8
     addi r3, r1, 0x34
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_800C65F0_00001C24
     lwz r4, 0x2418(r30)
@@ -2048,7 +2048,7 @@ lbl_fn_800C65F0_00001B74:
     addi r4, r30, 0x2464
     bl fn_800C61C0
     addi r3, r1, 0x28
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_800C65F0_00001C24
     addi r3, r30, 0x2464
@@ -2063,7 +2063,7 @@ lbl_fn_800C65F0_00001BAC:
     addi r4, r30, 0x2478
     bl fn_800C61C0
     addi r3, r1, 0x1c
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_800C65F0_00001BE4
     addi r3, r30, 0x2478
@@ -2082,7 +2082,7 @@ lbl_fn_800C65F0_00001BF0:
     addi r4, r30, 0x248c
     bl fn_800C61C0
     addi r3, r1, 0x10
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_800C65F0_00001C24
     addi r3, r30, 0x248c

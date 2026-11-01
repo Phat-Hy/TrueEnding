@@ -6,7 +6,7 @@ extern void fn_800185B4(void);
 extern void fn_80044E0C(void);
 extern void mem_alloc(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_800C344C(void);
+extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void fn_801059F8(void);
 extern void fn_80105B3C(void);
@@ -37,7 +37,7 @@ extern void fn_8023A098(void);
 extern void world_getGlobalFlag(void);
 extern void fn_80375254(void);
 extern void atoi(void);
-extern void fn_80695AD0(void);
+extern void vec3_isNonZero(void);
 
 /* External data declarations */
 extern u8 lbl_80737490[];
@@ -714,7 +714,7 @@ lbl_fn_80154EC4_00000888:
     stw r5, 0x8(r1)
     stw r4, 0xc(r1)
     stw r0, 0x10(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80154EC4_000008C4
     lwz r3, 0xf80(r29)
@@ -760,7 +760,7 @@ lbl_fn_80154EC4_00000930:
     stw r5, 0x20(r1)
     stw r4, 0x24(r1)
     stw r0, 0x28(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80154EC4_0000096C
     lwz r3, 0xf80(r29)
@@ -806,7 +806,7 @@ lbl_fn_80154EC4_000009D8:
     stw r5, 0x14(r1)
     stw r4, 0x18(r1)
     stw r0, 0x1c(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80154EC4_00000A14
     lwz r3, 0xf80(r29)
@@ -918,7 +918,7 @@ lbl_fn_801551AC_00000B68:
     stw r5, 0x8(r1)
     stw r4, 0xc(r1)
     stw r0, 0x10(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_801551AC_00000BA4
     lwz r3, 0xf80(r29)
@@ -964,7 +964,7 @@ lbl_fn_801551AC_00000C10:
     stw r5, 0x20(r1)
     stw r4, 0x24(r1)
     stw r0, 0x28(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_801551AC_00000C4C
     lwz r3, 0xf80(r29)
@@ -1010,7 +1010,7 @@ lbl_fn_801551AC_00000CB8:
     stw r5, 0x14(r1)
     stw r4, 0x18(r1)
     stw r0, 0x1c(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_801551AC_00000CF4
     lwz r3, 0xf80(r29)
@@ -1128,7 +1128,7 @@ lbl_fn_80155494_00000E60:
     stw r5, 0x8(r1)
     stw r4, 0xc(r1)
     stw r0, 0x10(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80155494_00000E9C
     lwz r3, 0xf80(r29)
@@ -1174,7 +1174,7 @@ lbl_fn_80155494_00000F08:
     stw r5, 0x20(r1)
     stw r4, 0x24(r1)
     stw r0, 0x28(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80155494_00000F44
     lwz r3, 0xf80(r29)
@@ -1220,7 +1220,7 @@ lbl_fn_80155494_00000FB0:
     stw r5, 0x14(r1)
     stw r4, 0x18(r1)
     stw r0, 0x1c(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80155494_00000FEC
     lwz r3, 0xf80(r29)
@@ -1338,7 +1338,7 @@ lbl_fn_80155790_00001158:
     stw r5, 0x8(r1)
     stw r4, 0xc(r1)
     stw r0, 0x10(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80155790_00001194
     lwz r3, 0xf80(r29)
@@ -1384,7 +1384,7 @@ lbl_fn_80155790_00001200:
     stw r5, 0x20(r1)
     stw r4, 0x24(r1)
     stw r0, 0x28(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80155790_0000123C
     lwz r3, 0xf80(r29)
@@ -1430,7 +1430,7 @@ lbl_fn_80155790_000012A8:
     stw r5, 0x14(r1)
     stw r4, 0x18(r1)
     stw r0, 0x1c(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80155790_000012E4
     lwz r3, 0xf80(r29)
@@ -1547,7 +1547,7 @@ lbl_fn_80155A88_0000144C:
     stw r5, 0x8(r1)
     stw r4, 0xc(r1)
     stw r0, 0x10(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80155A88_00001488
     lwz r3, 0xf80(r29)
@@ -1593,7 +1593,7 @@ lbl_fn_80155A88_000014F4:
     stw r5, 0x20(r1)
     stw r4, 0x24(r1)
     stw r0, 0x28(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80155A88_00001530
     lwz r3, 0xf80(r29)
@@ -1639,7 +1639,7 @@ lbl_fn_80155A88_0000159C:
     stw r5, 0x14(r1)
     stw r4, 0x18(r1)
     stw r0, 0x1c(r1)
-    bl fn_80695AD0
+    bl vec3_isNonZero
     cmpwi r3, 0x0
     beq lbl_fn_80155A88_000015D8
     lwz r3, 0xf80(r29)
@@ -1838,7 +1838,7 @@ lbl_fn_80155DAC_00001848:
     addi r5, r31, 0x528
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle

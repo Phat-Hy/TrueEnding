@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void talk_parseQuotedString(void);
 extern void fn_8005B5F8(void);
 extern void fn_8005B6E8(void);
@@ -17,7 +17,7 @@ extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void fn_800DC12C(void);
 extern void str_skipWhitespace(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_800EC654(void);
 extern void fn_800EDFE8(void);
 extern void fn_80205BE8(void);
@@ -277,7 +277,7 @@ lbl_fn_8020D688_0000026C:
 lbl_fn_8020D688_000002C4:
     addi r3, r1, 0xc64
     bl talk_parseQuotedString
-    bl fn_800DC6B4
+    bl str_findChar
     addi r25, r25, 0x1
     stwu r3, 0x4(r24)
     cmpwi r25, 0x3
@@ -962,7 +962,7 @@ lbl_fn_8020DF88_00000B30:
     addi r8, r1, 0x20
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     addi r3, r27, lbl_8073F814@l
     stw r29, 0xb0(r1)
     addi r15, r3, 0x1
@@ -985,7 +985,7 @@ lbl_fn_8020DF88_00000B30:
     addi r8, r1, 0x1c
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lwz r0, 0x2c(r1)
     stb r29, 0xc8(r1)
     srwi. r0, r0, 31
@@ -1037,7 +1037,7 @@ lbl_fn_8020DF88_00000D18:
     lwz r0, 0xb4(r1)
     li r5, 0x0
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_8020DF88_00000D58:
     lwz r4, 0xbc(r1)
     srwi. r0, r4, 31
@@ -1064,7 +1064,7 @@ lbl_fn_8020DF88_00000D7C:
     lwz r0, 0xc0(r1)
     li r5, 0x0
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_8020DF88_00000DBC:
     addic. r0, r25, 0xc
     lbz r5, 0xc8(r1)

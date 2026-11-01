@@ -7,10 +7,10 @@ extern void fn_8004ED34(void);
 extern void fn_80092954(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800C344C(void);
+extern void skin_applyWeights(void);
 extern void fn_800CB360(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB5C8(void);
+extern void morph_updateMesh(void);
 extern void atn_Task_setActive(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800F8C6C(void);
@@ -663,7 +663,7 @@ lbl_fn_8026F9BC_00000734:
     addi r5, r1, 0x40
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle
@@ -1067,7 +1067,7 @@ lbl_fn_8026FFE4_00000D0C:
     addi r3, r31, 0x153c
     li r4, 0xf
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0xc8
@@ -1119,7 +1119,7 @@ lbl_fn_8026FFE4_00000D98:
     addi r3, r31, 0x153c
     li r4, 0xf
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0xc8
@@ -1193,7 +1193,7 @@ lbl_fn_8026FFE4_00000EEC:
     addi r3, r31, 0x153c
     li r4, 0xf
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0xc8
@@ -1214,7 +1214,7 @@ lbl_fn_8026FFE4_00000EEC:
     addi r3, r31, 0x153c
     li r4, 0xf
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0xc8
@@ -1691,7 +1691,7 @@ asm void fn_802709E0(void)
     addi r3, r30, 0x153c
     li r4, 0xf
     li r5, 0x0
-    bl fn_800CB5C8
+    bl morph_updateMesh
     lwz r3, lbl_8087F3C0
     mr r4, r30
     li r5, 0xc8

@@ -9,7 +9,7 @@ extern void fn_80063764(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800C344C(void);
+extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void fn_800DD3FC(void);
 extern void fn_800EE360(void);
@@ -38,7 +38,7 @@ extern void fn_8068A4A8(void);
 extern void fn_8068AE24(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
-extern void fn_80695D84(void);
+extern void runtime_clampDouble(void);
 
 /* External data declarations */
 extern u8 lbl_807489F8[];
@@ -1016,7 +1016,7 @@ asm void fn_803012AC(void)
     addi r5, r30, 0x528
     li r6, 0x0
     li r7, -0x1
-    bl fn_800C344C
+    bl skin_applyWeights
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle
@@ -2092,7 +2092,7 @@ lbl_fn_80301DDC_00001DAC:
     lfs f7, lbl_80884ADC
     lfs f0, lbl_80884A9C
     fmadds f1, f7, f8, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_80301DDC_00001DBC:
     mr r30, r3
 lbl_fn_80301DDC_00001DC0:
@@ -2114,7 +2114,7 @@ lbl_fn_80301DDC_00001DF4:
     lfs f7, lbl_80884ADC
     lfs f0, lbl_80884A9C
     fmadds f1, f7, f8, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_80301DDC_00001E04:
     mr r29, r3
 lbl_fn_80301DDC_00001E08:
@@ -2136,7 +2136,7 @@ lbl_fn_80301DDC_00001E3C:
     lfs f7, lbl_80884ADC
     lfs f0, lbl_80884A9C
     fmadds f1, f7, f8, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_80301DDC_00001E4C:
     mr r28, r3
 lbl_fn_80301DDC_00001E50:
@@ -2158,7 +2158,7 @@ lbl_fn_80301DDC_00001E84:
     lfs f7, lbl_80884ADC
     lfs f0, lbl_80884A9C
     fmadds f1, f7, f8, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_80301DDC_00001E94:
     lfs f7, 0xb0(r1)
     slwi r4, r29, 8
@@ -2204,7 +2204,7 @@ lbl_fn_80301DDC_00001F30:
     lfs f7, lbl_80884ADC
     lfs f0, lbl_80884A9C
     fmadds f1, f7, f8, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_80301DDC_00001F40:
     mr r28, r3
 lbl_fn_80301DDC_00001F44:
@@ -2226,7 +2226,7 @@ lbl_fn_80301DDC_00001F78:
     lfs f7, lbl_80884ADC
     lfs f0, lbl_80884A9C
     fmadds f1, f7, f8, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_80301DDC_00001F88:
     mr r29, r3
 lbl_fn_80301DDC_00001F8C:
@@ -2248,7 +2248,7 @@ lbl_fn_80301DDC_00001FC0:
     lfs f7, lbl_80884ADC
     lfs f0, lbl_80884A9C
     fmadds f1, f7, f8, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_80301DDC_00001FD0:
     mr r30, r3
 lbl_fn_80301DDC_00001FD4:
@@ -2270,7 +2270,7 @@ lbl_fn_80301DDC_00002008:
     lfs f7, lbl_80884ADC
     lfs f0, lbl_80884A9C
     fmadds f1, f7, f8, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_80301DDC_00002018:
     lfs f7, 0xa4(r1)
     slwi r4, r29, 8

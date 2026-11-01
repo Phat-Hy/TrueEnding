@@ -6,7 +6,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void mem_free(void);
 extern void fn_800E0A64(void);
 extern void fn_800E14A4(void);
@@ -842,7 +842,7 @@ lbl_fn_8023C0C0_00000AFC:
     addi r3, r29, 0x18
     addi r8, r1, 0x10
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_8023C0C0_00000B18:
     lwz r0, 0x30(r1)
     srwi. r0, r0, 31
@@ -893,7 +893,7 @@ lbl_fn_8023C0C0_00000BAC:
     addi r3, r29, 0x24
     addi r8, r1, 0x18
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_8023C0C0_00000BC8:
     lwz r0, 0x3c(r1)
     srwi. r0, r0, 31
@@ -968,7 +968,7 @@ lbl_fn_8023C0C0_00000C8C:
     lwz r6, 0x8(r24)
     lwz r0, 0x4(r24)
     add r7, r6, r0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_8023C0C0_00000CD4:
     cmpwi r29, 0x0
     beq lbl_fn_8023C0C0_00000CF0

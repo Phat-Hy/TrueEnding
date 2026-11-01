@@ -24,13 +24,13 @@ extern void mem_free(void);
 extern void mem_getAllocSize(void);
 extern void fn_800DC12C(void);
 extern void str_skipWhitespace(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_801F4728(void);
 extern void fn_801F4998(void);
 extern void fn_801F4F84(void);
 extern void fn_801FECE0(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void fn_80473F88(void);
 extern void fn_804A0F58(void);
 extern void printf(void);
@@ -38,7 +38,7 @@ extern void strcmp(void);
 extern void strncmp(void);
 extern void strtok(void);
 extern void abort(void);
-extern void fn_80695D84(void);
+extern void runtime_clampDouble(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -295,7 +295,7 @@ lbl_spectateView_update_000002F4:
     addi r3, r3, lbl_8075D5B0@l
     addi r3, r3, 0x23b
     addi r28, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f25
     mr r4, r3
     mr r3, r28
@@ -312,7 +312,7 @@ lbl_spectateView_update_00000330:
     addi r27, r27, lbl_8075D5B0@l
     addi r3, r27, 0x23b
     addi r28, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f25
     mr r4, r3
     mr r3, r28
@@ -320,7 +320,7 @@ lbl_spectateView_update_00000330:
     lwz r4, 0x50(r30)
     addi r3, r27, 0x23b
     addi r27, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     lfs f1, lbl_80887BB4
     mr r4, r3
     mr r3, r27
@@ -498,7 +498,7 @@ lbl_spectateView_update_000005C0:
     stfs f0, 0x8(r1)
     stw r27, 0xc(r1)
     lwz r29, 0x5c(r30)
-    bl fn_800DC6B4
+    bl str_findChar
     mr r4, r3
     mr r3, r29
     addi r5, r1, 0x38
@@ -527,7 +527,7 @@ lbl_spectateView_update_00000674:
     lfs f1, lbl_80887C60
     lfs f0, lbl_80887BE0
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
     mr r27, r3
 lbl_spectateView_update_00000688:
     lfs f2, 0x14(r1)
@@ -548,7 +548,7 @@ lbl_spectateView_update_000006BC:
     lfs f1, lbl_80887C60
     lfs f0, lbl_80887BE0
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_spectateView_update_000006CC:
     mr r29, r3
 lbl_spectateView_update_000006D0:
@@ -570,7 +570,7 @@ lbl_spectateView_update_00000704:
     lfs f1, lbl_80887C60
     lfs f0, lbl_80887BE0
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_spectateView_update_00000714:
     mr r28, r3
 lbl_spectateView_update_00000718:
@@ -592,7 +592,7 @@ lbl_spectateView_update_0000074C:
     lfs f1, lbl_80887C60
     lfs f0, lbl_80887BE0
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_spectateView_update_0000075C:
     slwi r5, r3, 24
     slwi r3, r27, 16
@@ -622,7 +622,7 @@ lbl_spectateView_update_000007B8:
     lfs f25, lbl_80887BB4
 lbl_spectateView_update_000007BC:
     addi r3, r1, 0x70
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f25
     mr r4, r3
     mr r3, r27
@@ -643,7 +643,7 @@ lbl_spectateView_update_000007F8:
     addi r29, r29, lbl_8075D5B0@l
     addi r3, r29, 0x270
     addi r27, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f25
     mr r4, r3
     mr r3, r27
@@ -658,7 +658,7 @@ lbl_spectateView_update_000007F8:
 lbl_spectateView_update_0000083C:
     lfs f25, lbl_80887BB4
 lbl_spectateView_update_00000840:
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f25
     mr r4, r3
     mr r3, r27
@@ -727,10 +727,10 @@ asm void spectateView_renderInterface(void)
     la r4, lbl_8087D720
     bl fn_8005B6E8
     addi r3, r15, 0x438
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r14, r3
     addi r3, r15, 0x438
-    bl fn_80470580
+    bl boss_getOffset54
     lwz r12, 0x50(r1)
     mr r4, r3
     mr r5, r14

@@ -51,8 +51,8 @@ extern void fn_803EC16C(void);
 extern void fn_803EC374(void);
 extern void fn_803EE374(void);
 extern void fn_80470528(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_80473F88(void);
 extern void fn_8047E5DC(void);
@@ -179,18 +179,18 @@ lbl_fn_803C01C0_00000094:
     stw r0, 0x48(r31)
 lbl_fn_803C01C0_000000B0:
     mr r3, r28
-    bl fn_80470580
+    bl boss_getOffset54
     cmpwi r3, 0x0
     beq lbl_fn_803C01C0_000000F8
     mr r3, r28
-    bl fn_8047059C
+    bl boss_getOffset50
     cmpwi r3, 0x0
     beq lbl_fn_803C01C0_000000F8
     mr r3, r28
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r30, r3
     mr r3, r28
-    bl fn_80470580
+    bl boss_getOffset54
     mr r4, r3
     mr r3, r31
     mr r5, r30

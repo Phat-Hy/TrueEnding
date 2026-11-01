@@ -8,7 +8,7 @@ extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void fn_8000E18C(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void mem_getAllocSize(void);
@@ -18,7 +18,7 @@ extern void fn_800929C0(void);
 extern void fn_80093E90(void);
 extern void fn_80097E80(void);
 extern void atn_Task_constructor(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_80145334(void);
 extern void dialog_renderWindow(void);
 extern void fn_8036554C(void);
@@ -816,7 +816,7 @@ asm void fn_8000D528(void)
     addi r8, r1, 0xc
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     lfs f0, lbl_80880668
     lis r3, lbl_80775A20@ha
     li r30, 0x0
@@ -1339,7 +1339,7 @@ lbl_fn_8000DB24_00001048:
     b lbl_fn_8000DB24_00001100
 lbl_fn_8000DB24_0000107C:
     lwz r3, 0x50(r31)
-    bl fn_800DC6B4
+    bl str_findChar
     mr r28, r3
     lwz r3, 0x1c(r26)
     bl fn_8000DE3C

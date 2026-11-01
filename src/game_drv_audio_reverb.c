@@ -19,7 +19,7 @@ extern void fn_80011410(void);
 extern void vec3_sub(void);
 extern void fn_80013410(void);
 extern void fn_80013DC4(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void item_useConsumable(void);
 extern void fn_8004ED34(void);
 extern void talk_parseQuotedString(void);
@@ -46,7 +46,7 @@ extern void ref_releaseHandle(void);
 extern void fn_800D089C(void);
 extern void atn_Task_setActive(void);
 extern void str_skipWhitespace(void);
-extern void fn_800DC6B4(void);
+extern void str_findChar(void);
 extern void fn_800DCA70(void);
 extern void fn_800F52F8(void);
 extern void fn_800F7260(void);
@@ -94,8 +94,8 @@ extern void fn_803D2134(void);
 extern void fn_803D6E2C(void);
 extern void fn_803D6F44(void);
 extern void fn_803D6F68(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void fn_804A5E40(void);
 extern void fn_805BA34C(void);
 extern void PSMTXRotRad(void);
@@ -252,7 +252,7 @@ lbl_fn_805BA938_00000084:
     addi r3, r31, 0x3d
     add r4, r29, r0
     lwz r28, 0x478(r4)
-    bl fn_800DC6B4
+    bl str_findChar
     mr r5, r3
     mr r4, r28
     addi r3, r1, 0x18
@@ -302,7 +302,7 @@ lbl_fn_805BA938_00000084:
     add r4, r29, r0
     lwz r4, 0x4b4(r4)
     addi r28, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     mr r3, r28
@@ -315,7 +315,7 @@ lbl_fn_805BA938_00000084:
     add r4, r29, r0
     lwz r4, 0x4b4(r4)
     addi r28, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     mr r3, r28
@@ -328,7 +328,7 @@ lbl_fn_805BA938_00000084:
     add r4, r29, r0
     lwz r4, 0x4b4(r4)
     addi r28, r4, 0x58
-    bl fn_800DC6B4
+    bl str_findChar
     fmr f1, f31
     mr r4, r3
     mr r3, r28
@@ -1093,7 +1093,7 @@ asm void fn_805BB5A0(void)
     lwz r31, 0x478(r4)
     addi r3, r3, lbl_80763F38@l
     addi r3, r3, 0x3d
-    bl fn_800DC6B4
+    bl str_findChar
     mr r5, r3
     mr r4, r31
     addi r3, r1, 0x8
@@ -1133,10 +1133,10 @@ asm void fn_805BB658(void)
     bl _savegpr_14
     mr r15, r3
     addi r3, r3, 0x5a4
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r16, r3
     addi r3, r15, 0x5a4
-    bl fn_80470580
+    bl boss_getOffset54
     lis r4, lbl_807772D0@ha
     li r25, 0x0
     addi r4, r4, lbl_807772D0@l
@@ -1278,7 +1278,7 @@ lbl_fn_805BB658_00000EB0:
     add r7, r7, r16
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r5, r23
     addi r3, r1, 0x9c
     addi r4, r29, 0x4d
@@ -1471,7 +1471,7 @@ lbl_fn_805BB658_00001218:
     addi r3, r1, 0x9c
     addi r8, r1, 0x10
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
 lbl_fn_805BB658_00001234:
     lwz r0, 0x3c(r1)
     srwi. r0, r0, 31
@@ -1566,7 +1566,7 @@ lbl_fn_805BB658_00001310:
     addi r8, r1, 0x8
     li r4, 0x0
     li r5, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r4, r22
     addi r3, r1, 0xa8
     bl fn_8006AD24

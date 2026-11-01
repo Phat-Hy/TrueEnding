@@ -30,8 +30,8 @@ extern void fn_803EC69C(void);
 extern void fn_803EC91C(void);
 extern void fn_80401E50(void);
 extern void fn_804023E0(void);
-extern void fn_80470580(void);
-extern void fn_8047059C(void);
+extern void boss_getOffset54(void);
+extern void boss_getOffset50(void);
 extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXScale(void);
@@ -1209,10 +1209,10 @@ asm void fn_8040134C(void)
     bl _savegpr_27
     mr r31, r3
     addi r3, r3, 0x60
-    bl fn_8047059C
+    bl boss_getOffset50
     mr r30, r3
     addi r3, r31, 0x60
-    bl fn_80470580
+    bl boss_getOffset54
     lis r4, lbl_807774D8@ha
     li r0, 0x0
     addi r4, r4, lbl_807774D8@l

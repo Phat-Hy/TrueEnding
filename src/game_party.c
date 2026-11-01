@@ -3,7 +3,7 @@
 
 /* External function declarations */
 extern void dtor_80084684(void);
-extern void fn_8005C448(void);
+extern void talk_executeCommand(void);
 extern void fn_8005E000(void);
 extern void fn_8006C7FC(void);
 extern void fn_8006C858(void);
@@ -99,10 +99,10 @@ asm void fn_8005C594(void)
     beq lbl_fn_8005C594_00000090
     addi r3, r26, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r26
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r26
     bl dtor_80084684
 lbl_fn_8005C594_00000090:
@@ -113,10 +113,10 @@ lbl_fn_8005C594_00000090:
     beq lbl_fn_8005C594_000000C4
     addi r3, r26, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r26
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r26
     bl dtor_80084684
 lbl_fn_8005C594_000000C4:
@@ -135,10 +135,10 @@ lbl_fn_8005C594_000000CC:
     beq lbl_fn_8005C594_00000114
     addi r3, r27, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r27
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r27
     bl dtor_80084684
 lbl_fn_8005C594_00000114:
@@ -149,10 +149,10 @@ lbl_fn_8005C594_00000114:
     beq lbl_fn_8005C594_00000148
     addi r3, r27, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r27
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r27
     bl dtor_80084684
 lbl_fn_8005C594_00000148:
@@ -179,10 +179,10 @@ lbl_fn_8005C594_00000158:
     beq lbl_fn_8005C594_000001B4
     addi r3, r27, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r27
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r27
     bl dtor_80084684
 lbl_fn_8005C594_000001B4:
@@ -193,10 +193,10 @@ lbl_fn_8005C594_000001B4:
     beq lbl_fn_8005C594_000001E8
     addi r3, r27, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r27
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r27
     bl dtor_80084684
 lbl_fn_8005C594_000001E8:
@@ -215,10 +215,10 @@ lbl_fn_8005C594_000001F0:
     beq lbl_fn_8005C594_00000238
     addi r3, r27, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r27
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r27
     bl dtor_80084684
 lbl_fn_8005C594_00000238:
@@ -229,10 +229,10 @@ lbl_fn_8005C594_00000238:
     beq lbl_fn_8005C594_0000026C
     addi r3, r27, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r27
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r27
     bl dtor_80084684
 lbl_fn_8005C594_0000026C:
@@ -267,10 +267,10 @@ lbl_fn_8005C594_00000284:
     beq lbl_fn_8005C594_000002F4
     addi r3, r27, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r27
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r27
     bl dtor_80084684
 lbl_fn_8005C594_000002F4:
@@ -281,10 +281,10 @@ lbl_fn_8005C594_000002F4:
     beq lbl_fn_8005C594_00000328
     addi r3, r27, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r27
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r27
     bl dtor_80084684
 lbl_fn_8005C594_00000328:
@@ -303,10 +303,10 @@ lbl_fn_8005C594_00000330:
     beq lbl_fn_8005C594_00000378
     addi r3, r27, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r27
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r27
     bl dtor_80084684
 lbl_fn_8005C594_00000378:
@@ -317,10 +317,10 @@ lbl_fn_8005C594_00000378:
     beq lbl_fn_8005C594_000003AC
     addi r3, r27, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r27
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r27
     bl dtor_80084684
 lbl_fn_8005C594_000003AC:
@@ -347,10 +347,10 @@ lbl_fn_8005C594_000003BC:
     beq lbl_fn_8005C594_00000418
     addi r3, r27, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r27
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r27
     bl dtor_80084684
 lbl_fn_8005C594_00000418:
@@ -361,10 +361,10 @@ lbl_fn_8005C594_00000418:
     beq lbl_fn_8005C594_0000044C
     addi r3, r27, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r27
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r27
     bl dtor_80084684
 lbl_fn_8005C594_0000044C:
@@ -383,10 +383,10 @@ lbl_fn_8005C594_00000454:
     beq lbl_fn_8005C594_0000049C
     addi r3, r27, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r27
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r27
     bl dtor_80084684
 lbl_fn_8005C594_0000049C:
@@ -397,10 +397,10 @@ lbl_fn_8005C594_0000049C:
     beq lbl_fn_8005C594_000004D0
     addi r3, r27, 0x4
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r27
     li r4, -0x1
-    bl fn_8005C448
+    bl talk_executeCommand
     mr r3, r27
     bl dtor_80084684
 lbl_fn_8005C594_000004D0:

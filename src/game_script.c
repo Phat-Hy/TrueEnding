@@ -19,7 +19,7 @@ extern void _savegpr_22(void);
 extern void _savegpr_25(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_80013F78(void);
+extern void actor_dispatchMessage(void);
 extern void fn_80050A1C(void);
 extern void fn_800629F0(void);
 extern void fn_800697D8(void);
@@ -81,7 +81,7 @@ extern void wmemcpy(void);
 extern void wmemmove(void);
 extern void fn_80686A48(void);
 extern void abort(void);
-extern void fn_80695D84(void);
+extern void runtime_clampDouble(void);
 extern void memmove(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
@@ -678,7 +678,7 @@ lbl_fn_8006F5E8_000006E8:
     addi r8, r1, 0x8
     add r7, r7, r0
     li r4, 0x0
-    bl fn_80013F78
+    bl actor_dispatchMessage
     mr r3, r30
     lwz r31, 0x11c(r1)
     lwz r30, 0x118(r1)
@@ -2980,7 +2980,7 @@ lbl_fn_800713D4_000026B4:
     lfd f1, 0x8(r1)
     fsubs f1, f1, f2
     fadds f1, f1, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
     lwz r0, 0x68(r30)
     mr r28, r3
     lfd f2, lbl_807316C8@l(r27)
@@ -2990,7 +2990,7 @@ lbl_fn_800713D4_000026B4:
     lfd f1, 0x10(r1)
     fsubs f1, f1, f2
     fadds f1, f1, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
     lwz r0, 0x64(r30)
     mr r29, r3
     lfd f1, lbl_807316C8@l(r27)
@@ -3000,7 +3000,7 @@ lbl_fn_800713D4_000026B4:
     lfd f0, 0x8(r1)
     fsubs f0, f0, f1
     fadds f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
     lwz r0, 0x60(r30)
     mr r31, r3
     lfd f1, lbl_807316C8@l(r27)
@@ -3010,7 +3010,7 @@ lbl_fn_800713D4_000026B4:
     lfd f0, 0x10(r1)
     fsubs f0, f0, f1
     fadds f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
     mr r4, r31
     mr r5, r29
     mr r6, r28
@@ -3169,7 +3169,7 @@ lbl_fn_8007192C_00002A24:
     lfd f1, 0x10(r1)
     fsubs f1, f1, f2
     fadds f1, f1, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
     lwz r0, 0x68(r31)
     mr r28, r3
     lfd f2, lbl_807316C8@l(r27)
@@ -3179,7 +3179,7 @@ lbl_fn_8007192C_00002A24:
     lfd f1, 0x18(r1)
     fsubs f1, f1, f2
     fadds f1, f1, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
     lwz r0, 0x64(r31)
     mr r29, r3
     lfd f1, lbl_807316C8@l(r27)
@@ -3189,7 +3189,7 @@ lbl_fn_8007192C_00002A24:
     lfd f0, 0x10(r1)
     fsubs f0, f0, f1
     fadds f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
     lwz r0, 0x60(r31)
     mr r30, r3
     lfd f1, lbl_807316C8@l(r27)
@@ -3199,7 +3199,7 @@ lbl_fn_8007192C_00002A24:
     lfd f0, 0x18(r1)
     fsubs f0, f0, f1
     fadds f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
     mr r4, r30
     mr r5, r29
     mr r6, r28

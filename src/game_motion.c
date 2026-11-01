@@ -32,7 +32,7 @@ extern void fn_80618290(void);
 extern void GXLoadPosMtxImm(void);
 extern void GXSetCurrentMtx(void);
 extern void fn_806185A0(void);
-extern void fn_80695D84(void);
+extern void runtime_clampDouble(void);
 
 /* External data declarations */
 extern u8 jumptable_807791E0[];
@@ -1036,7 +1036,7 @@ lbl_fn_800BFCB4_00000CB8:
     lfs f1, lbl_808810C8
     lfs f0, lbl_80881094
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800BFCB4_00000CC8:
     mr r26, r3
 lbl_fn_800BFCB4_00000CCC:
@@ -1058,7 +1058,7 @@ lbl_fn_800BFCB4_00000D00:
     lfs f1, lbl_808810C8
     lfs f0, lbl_80881094
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800BFCB4_00000D10:
     mr r25, r3
 lbl_fn_800BFCB4_00000D14:
@@ -1080,7 +1080,7 @@ lbl_fn_800BFCB4_00000D48:
     lfs f1, lbl_808810C8
     lfs f0, lbl_80881094
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800BFCB4_00000D58:
     mr r24, r3
 lbl_fn_800BFCB4_00000D5C:
@@ -1102,7 +1102,7 @@ lbl_fn_800BFCB4_00000D90:
     lfs f1, lbl_808810C8
     lfs f0, lbl_80881094
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800BFCB4_00000DA0:
     slwi r3, r3, 24
     slwi r0, r26, 16
@@ -1137,7 +1137,7 @@ lbl_fn_800BFCB4_00000E10:
     lfs f1, lbl_808810C8
     lfs f0, lbl_80881094
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800BFCB4_00000E20:
     mr r24, r3
 lbl_fn_800BFCB4_00000E24:
@@ -1159,7 +1159,7 @@ lbl_fn_800BFCB4_00000E58:
     lfs f1, lbl_808810C8
     lfs f0, lbl_80881094
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800BFCB4_00000E68:
     mr r26, r3
 lbl_fn_800BFCB4_00000E6C:
@@ -1181,7 +1181,7 @@ lbl_fn_800BFCB4_00000EA0:
     lfs f1, lbl_808810C8
     lfs f0, lbl_80881094
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800BFCB4_00000EB0:
     mr r25, r3
 lbl_fn_800BFCB4_00000EB4:
@@ -1203,7 +1203,7 @@ lbl_fn_800BFCB4_00000EE8:
     lfs f1, lbl_808810C8
     lfs f0, lbl_80881094
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800BFCB4_00000EF8:
     slwi r3, r3, 24
     slwi r0, r24, 16
@@ -1238,7 +1238,7 @@ lbl_fn_800BFCB4_00000F68:
     lfs f1, lbl_808810C8
     lfs f0, lbl_80881094
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800BFCB4_00000F78:
     mr r25, r3
 lbl_fn_800BFCB4_00000F7C:
@@ -1260,7 +1260,7 @@ lbl_fn_800BFCB4_00000FB0:
     lfs f1, lbl_808810C8
     lfs f0, lbl_80881094
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800BFCB4_00000FC0:
     mr r27, r3
 lbl_fn_800BFCB4_00000FC4:
@@ -1282,7 +1282,7 @@ lbl_fn_800BFCB4_00000FF8:
     lfs f1, lbl_808810C8
     lfs f0, lbl_80881094
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800BFCB4_00001008:
     mr r26, r3
 lbl_fn_800BFCB4_0000100C:
@@ -1304,7 +1304,7 @@ lbl_fn_800BFCB4_00001040:
     lfs f1, lbl_808810C8
     lfs f0, lbl_80881094
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800BFCB4_00001050:
     slwi r3, r3, 24
     slwi r0, r25, 16
@@ -1339,7 +1339,7 @@ lbl_fn_800BFCB4_000010C0:
     lfs f1, lbl_808810C8
     lfs f0, lbl_80881094
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800BFCB4_000010D0:
     mr r26, r3
 lbl_fn_800BFCB4_000010D4:
@@ -1361,7 +1361,7 @@ lbl_fn_800BFCB4_00001108:
     lfs f1, lbl_808810C8
     lfs f0, lbl_80881094
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800BFCB4_00001118:
     mr r28, r3
 lbl_fn_800BFCB4_0000111C:
@@ -1383,7 +1383,7 @@ lbl_fn_800BFCB4_00001150:
     lfs f1, lbl_808810C8
     lfs f0, lbl_80881094
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800BFCB4_00001160:
     mr r27, r3
 lbl_fn_800BFCB4_00001164:
@@ -1405,7 +1405,7 @@ lbl_fn_800BFCB4_00001198:
     lfs f1, lbl_808810C8
     lfs f0, lbl_80881094
     fmadds f1, f1, f2, f0
-    bl fn_80695D84
+    bl runtime_clampDouble
 lbl_fn_800BFCB4_000011A8:
     slwi r3, r3, 24
     slwi r0, r26, 16
