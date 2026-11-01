@@ -86,15 +86,15 @@ void fn_804761CC(void);
 void fn_804761E8(void);
 void fn_80476204(void);
 void fn_80476220(void);
-void fn_8047656C(void);
-void fn_804765C4(void);
-void fn_80476664(void);
+void atn_LoadMotion_constructor(void);
+void atn_LoadMotion_destructor(void);
+void atn_LH_Motion_onNotify(void);
 void fn_804766B0(void);
 void fn_80476884(void);
 void fn_804768B4(void);
 void fn_804768D0(void);
-void fn_804768EC(void);
-void fn_804769D8(void);
+void atn_LoadMotionCommandData_slot0(void);
+void atn_LoadMotionCommandData_slot1(void);
 void atn_LH_Model_onNotify(void);
 void fn_80476AC8(void);
 void fn_80476CE4(void);
@@ -699,7 +699,7 @@ lbl_fn_80476220_00000750:
     blr
 }
 
-asm void fn_8047656C(void)
+asm void atn_LoadMotion_constructor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -710,14 +710,14 @@ asm void fn_8047656C(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    beq lbl_fn_8047656C_000007B0
+    beq lbl_atn_LoadMotion_constructor_000007B0
     li r4, 0x0
     bl fn_8047304C
     cmpwi r31, 0x0
-    ble lbl_fn_8047656C_000007B0
+    ble lbl_atn_LoadMotion_constructor_000007B0
     mr r3, r30
     bl dtor_80084684
-lbl_fn_8047656C_000007B0:
+lbl_atn_LoadMotion_constructor_000007B0:
     mr r3, r30
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -727,7 +727,7 @@ lbl_fn_8047656C_000007B0:
     blr
 }
 
-asm void fn_804765C4(void)
+asm void atn_LoadMotion_destructor(void)
 {
     nofralloc
     stwu r1, -0x30(r1)
@@ -737,7 +737,7 @@ asm void fn_804765C4(void)
     mr r31, r3
     lbz r0, 0x4(r3)
     cmplwi r0, 0x2
-    bne lbl_fn_804765C4_00000858
+    bne lbl_atn_LoadMotion_destructor_00000858
     li r4, 0x3
     bl fn_80473104
     addi r3, r1, 0x8
@@ -751,22 +751,22 @@ asm void fn_804765C4(void)
     lwz r5, 0x50(r31)
     bl fn_804714B0
     addic. r3, r1, 0xc
-    beq lbl_fn_804765C4_00000858
+    beq lbl_atn_LoadMotion_destructor_00000858
     lwz r4, 0xc(r1)
     cmpwi r4, 0x0
-    beq lbl_fn_804765C4_00000858
+    beq lbl_atn_LoadMotion_destructor_00000858
     lwz r12, 0x0(r4)
     cmpwi r12, 0x0
-    beq lbl_fn_804765C4_00000850
+    beq lbl_atn_LoadMotion_destructor_00000850
     addi r3, r3, 0x4
     li r5, 0x1
     mr r4, r3
     mtctr r12
     bctrl
-lbl_fn_804765C4_00000850:
+lbl_atn_LoadMotion_destructor_00000850:
     li r0, 0x0
     stw r0, 0xc(r1)
-lbl_fn_804765C4_00000858:
+lbl_atn_LoadMotion_destructor_00000858:
     lwz r0, 0x34(r1)
     lwz r31, 0x2c(r1)
     mtlr r0
@@ -774,7 +774,7 @@ lbl_fn_804765C4_00000858:
     blr
 }
 
-asm void fn_80476664(void)
+asm void atn_LH_Motion_onNotify(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -976,7 +976,7 @@ lbl_fn_804768D0_00000AEC:
     blr
 }
 
-asm void fn_804768EC(void)
+asm void atn_LoadMotionCommandData_slot0(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -988,53 +988,53 @@ asm void fn_804768EC(void)
     mr r30, r4
     stw r29, 0x14(r1)
     mr r29, r3
-    beq lbl_fn_804768EC_00000BC0
+    beq lbl_atn_LoadMotionCommandData_slot0_00000BC0
     addic. r31, r3, 0x68
-    beq lbl_fn_804768EC_00000BA4
+    beq lbl_atn_LoadMotionCommandData_slot0_00000BA4
     addic. r0, r31, 0x24
-    beq lbl_fn_804768EC_00000B44
+    beq lbl_atn_LoadMotionCommandData_slot0_00000B44
     lwz r3, 0x2c(r31)
     cmpwi r3, 0x0
-    beq lbl_fn_804768EC_00000B44
+    beq lbl_atn_LoadMotionCommandData_slot0_00000B44
     lis r4, fn_80041C0C@ha
     addi r4, r4, fn_80041C0C@l
     bl fn_80695A50
-lbl_fn_804768EC_00000B44:
+lbl_atn_LoadMotionCommandData_slot0_00000B44:
     addic. r0, r31, 0x18
-    beq lbl_fn_804768EC_00000B64
+    beq lbl_atn_LoadMotionCommandData_slot0_00000B64
     lwz r3, 0x20(r31)
     cmpwi r3, 0x0
-    beq lbl_fn_804768EC_00000B64
+    beq lbl_atn_LoadMotionCommandData_slot0_00000B64
     lis r4, fn_800EF73C@ha
     addi r4, r4, fn_800EF73C@l
     bl fn_80695A50
-lbl_fn_804768EC_00000B64:
+lbl_atn_LoadMotionCommandData_slot0_00000B64:
     addic. r0, r31, 0xc
-    beq lbl_fn_804768EC_00000B84
+    beq lbl_atn_LoadMotionCommandData_slot0_00000B84
     lwz r3, 0x14(r31)
     cmpwi r3, 0x0
-    beq lbl_fn_804768EC_00000B84
+    beq lbl_atn_LoadMotionCommandData_slot0_00000B84
     lis r4, fn_802375C4@ha
     addi r4, r4, fn_802375C4@l
     bl fn_80695A50
-lbl_fn_804768EC_00000B84:
+lbl_atn_LoadMotionCommandData_slot0_00000B84:
     cmpwi r31, 0x0
-    beq lbl_fn_804768EC_00000BA4
+    beq lbl_atn_LoadMotionCommandData_slot0_00000BA4
     lwz r3, 0x8(r31)
     cmpwi r3, 0x0
-    beq lbl_fn_804768EC_00000BA4
-    beq lbl_fn_804768EC_00000BA4
+    beq lbl_atn_LoadMotionCommandData_slot0_00000BA4
+    beq lbl_atn_LoadMotionCommandData_slot0_00000BA4
     subi r3, r3, 0x10
     bl fn_80084C24
-lbl_fn_804768EC_00000BA4:
+lbl_atn_LoadMotionCommandData_slot0_00000BA4:
     mr r3, r29
     li r4, 0x0
     bl fn_8047304C
     cmpwi r30, 0x0
-    ble lbl_fn_804768EC_00000BC0
+    ble lbl_atn_LoadMotionCommandData_slot0_00000BC0
     mr r3, r29
     bl dtor_80084684
-lbl_fn_804768EC_00000BC0:
+lbl_atn_LoadMotionCommandData_slot0_00000BC0:
     lwz r31, 0x1c(r1)
     mr r3, r29
     lwz r30, 0x18(r1)
@@ -1045,7 +1045,7 @@ lbl_fn_804768EC_00000BC0:
     blr
 }
 
-asm void fn_804769D8(void)
+asm void atn_LoadMotionCommandData_slot1(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1055,37 +1055,37 @@ asm void fn_804769D8(void)
     mr r31, r3
     lbz r0, 0x4(r3)
     cmplwi r0, 0x2
-    bne lbl_fn_804769D8_00000C68
+    bne lbl_atn_LoadMotionCommandData_slot1_00000C68
     lwz r0, 0x5c(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_804769D8_00000C4C
+    beq lbl_atn_LoadMotionCommandData_slot1_00000C4C
     lwz r12, 0x60(r3)
     cmpwi r12, 0x0
-    beq lbl_fn_804769D8_00000C2C
+    beq lbl_atn_LoadMotionCommandData_slot1_00000C2C
     lwz r4, 0x54(r3)
     lwz r5, 0x50(r3)
     mtctr r12
     addi r3, r3, 0x68
     bctrl
-lbl_fn_804769D8_00000C2C:
+lbl_atn_LoadMotionCommandData_slot1_00000C2C:
     lwz r0, 0x64(r31)
     cmpwi r0, 0x0
-    bne lbl_fn_804769D8_00000C40
+    bne lbl_atn_LoadMotionCommandData_slot1_00000C40
     mr r3, r31
     bl fn_80473130
-lbl_fn_804769D8_00000C40:
+lbl_atn_LoadMotionCommandData_slot1_00000C40:
     li r0, 0x0
     stw r0, 0x5c(r31)
-    b lbl_fn_804769D8_00000C68
-lbl_fn_804769D8_00000C4C:
+    b lbl_atn_LoadMotionCommandData_slot1_00000C68
+lbl_atn_LoadMotionCommandData_slot1_00000C4C:
     addi r3, r3, 0x68
     bl fn_800A091C
     cmpwi r3, 0x0
-    bne lbl_fn_804769D8_00000C68
+    bne lbl_atn_LoadMotionCommandData_slot1_00000C68
     mr r3, r31
     li r4, 0x3
     bl fn_80473104
-lbl_fn_804769D8_00000C68:
+lbl_atn_LoadMotionCommandData_slot1_00000C68:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0

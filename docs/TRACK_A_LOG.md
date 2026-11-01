@@ -23,6 +23,43 @@ Next:     the 3-5 functions worth naming or decompiling next
 
 <!-- newest first -->
 
+### 2026-11-01 — Batch 6: atn::LoadModel, atn::LoadMotion, atn::Loader, BookTask, and LibraryTask Renames (20 functions)
+
+Numbers:  progress before -> after: 99.30 % -> 99.30 % (7,425,512 / 7,477,608 bytes, 18,054 / 18,155 functions)
+Named:
+- fn_8008A714 -> atn_LH_Material_destructor (evidence: virtual destructor slot 0 in vtable lbl_8078FDA8 [atn::LH_Material])
+- fn_8047462C -> atn_LH_Material_onNotify (evidence: virtual notify callback slot 1 in vtable lbl_8078FDA8 [atn::LH_Material])
+- fn_80474888 -> atn_LoadModel_constructor (evidence: slot 0 in vtable lbl_8078FDD8 [atn::LoadModel])
+- fn_804749C8 -> atn_LoadModel_destructor (evidence: slot 1 in vtable lbl_8078FDD8 [atn::LoadModel])
+- fn_8047656C -> atn_LoadMotion_constructor (evidence: slot 0 in vtable lbl_8078FE28 [atn::LoadMotion])
+- fn_804765C4 -> atn_LoadMotion_destructor (evidence: slot 1 in vtable lbl_8078FE28 [atn::LoadMotion])
+- fn_80097128 -> atn_LH_Motion_destructor (evidence: virtual destructor slot 0 in vtable lbl_8078FE50 [atn::LH_Motion])
+- fn_80476664 -> atn_LH_Motion_onNotify (evidence: virtual notify callback slot 1 in vtable lbl_8078FE50 [atn::LH_Motion])
+- fn_804768EC -> atn_LoadMotionCommandData_slot0 (evidence: slot 0 in vtable lbl_8078FE78 [atn::LoadMotionCommandData])
+- fn_804769D8 -> atn_LoadMotionCommandData_slot1 (evidence: slot 1 in vtable lbl_8078FE78 [atn::LoadMotionCommandData])
+- fn_8046D9B0 -> atn_Loader_constructor (evidence: initializes base atn::Loader task, assigns vtable lbl_8078FB70 [atn::Loader])
+- fn_8046DD5C -> atn_Loader_destructor (evidence: virtual destructor slot 1 of vtable lbl_8078FB70 [atn::Loader])
+- fn_8046DD60 -> atn_Loader_execute (evidence: virtual execute slot 2 of vtable lbl_8078FB70 [atn::Loader])
+- fn_8046E058 -> atn_Loader_finish (evidence: virtual completion callback slot 3 of vtable lbl_8078FB70 [atn::Loader])
+- fn_8046A5A8 -> task_Book_constructor (evidence: initializes BookTask, assigns vtable lbl_8078FAB0 [BookTask])
+- fn_8046A690 -> task_Book_destructor (evidence: virtual destructor slot 1 in vtable lbl_8078FAB0 [BookTask])
+- fn_8046A8A4 -> task_Book_execute (evidence: virtual execute slot 2 in vtable lbl_8078FAB0 [BookTask])
+- fn_8046A90C -> task_Book_draw (evidence: virtual draw slot 3 in vtable lbl_8078FAB0 [BookTask])
+- fn_80469144 -> task_Library_constructor (evidence: initializes LibraryTask, assigns vtable lbl_8078FAF0 [LibraryTask])
+- fn_80469230 -> task_Library_destructor (evidence: virtual destructor slot 1 in vtable lbl_8078FAF0 [LibraryTask])
+Decompiled: none in this unit
+Notes:
+- Resolves the core async loaders and file system tasks of the engine:
+  - Base class `atn::Loader` (`fn_8046D9B0`, `fn_8046DD5C`, `fn_8046DD60`, `fn_8046E058`) orchestrates low-level DVD reading queues and file streaming.
+  - Model loaders (`atn::LoadModel`) and skeletal motion loaders (`atn::LoadMotion`, `atn::LH_Motion`) manage mesh chunks and animation clip tracks.
+  - High-level book and library UI tasks (`BookTask` and `LibraryTask`) handle in-game journal and lore screen rendering.
+  - All 16 local `lbl_fn_*` assembly labels inside caller asm blocks were simultaneously normalized to `lbl_atn_*` / `lbl_task_*` across 7 source files.
+Next:
+1. `atn_LH_Texture_constructor` (`fn_800D5738`, 120 B) and `atn_LH_Texture_destructor` (`fn_800D57B0`, 88 B) -> decompile to C in `src/game_depth.c`.
+2. `fn_800D7278` (1252 B): character texture bake (EFB copy + `GXDrawDone` + readback).
+3. Batch 7 renames in `task_Library` methods and `atn::LoadMotionSet`.
+
+
 ### 2026-11-01 — Batch 5: atn::Load* & atn::LH_* Collision, Effect, Particle Pack, and Material Resource Renames (20 functions)
 
 Numbers:  progress before -> after: 99.30 % -> 99.30 % (7,425,512 / 7,477,608 bytes, 18,054 / 18,155 functions)

@@ -86,7 +86,7 @@ void fn_80095F10(void);
 void fn_80096218(void);
 void fn_80096E94(void);
 void fn_800970CC(void);
-void fn_80097128(void);
+void atn_LH_Motion_destructor(void);
 void fn_80097180(void);
 
 asm void fn_80094F98(void)
@@ -2447,7 +2447,7 @@ lbl_fn_800970CC_00002174:
     blr
 }
 
-asm void fn_80097128(void)
+asm void atn_LH_Motion_destructor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -2458,14 +2458,14 @@ asm void fn_80097128(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    beq lbl_fn_80097128_000021CC
+    beq lbl_atn_LH_Motion_destructor_000021CC
     li r4, 0x0
     bl atn_LoadHandle_destructor
     cmpwi r31, 0x0
-    ble lbl_fn_80097128_000021CC
+    ble lbl_atn_LH_Motion_destructor_000021CC
     mr r3, r30
     bl dtor_80084684
-lbl_fn_80097128_000021CC:
+lbl_atn_LH_Motion_destructor_000021CC:
     mr r3, r30
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)

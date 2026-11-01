@@ -103,7 +103,7 @@ void fn_80089EE4(void);
 void fn_8008A00C(void);
 void fn_8008A4B0(void);
 void fn_8008A4E0(void);
-void fn_8008A714(void);
+void atn_LH_Material_destructor(void);
 void fn_8008A76C(void);
 void fn_8008AA90(void);
 void fn_8008AD4C(void);
@@ -1604,7 +1604,7 @@ asm void fn_8008A4E0(void)
     blr
 }
 
-asm void fn_8008A714(void)
+asm void atn_LH_Material_destructor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1615,14 +1615,14 @@ asm void fn_8008A714(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    beq lbl_fn_8008A714_000013D4
+    beq lbl_atn_LH_Material_destructor_000013D4
     li r4, 0x0
     bl atn_LoadHandle_destructor
     cmpwi r31, 0x0
-    ble lbl_fn_8008A714_000013D4
+    ble lbl_atn_LH_Material_destructor_000013D4
     mr r3, r30
     bl dtor_80084684
-lbl_fn_8008A714_000013D4:
+lbl_atn_LH_Material_destructor_000013D4:
     mr r3, r30
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)

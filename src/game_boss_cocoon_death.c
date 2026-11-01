@@ -138,8 +138,8 @@ void fn_80468D48(void);
 void fn_80468F48(void);
 void fn_80468F54(void);
 void fn_80468FBC(void);
-void fn_80469144(void);
-void fn_80469230(void);
+void task_Library_constructor(void);
+void task_Library_destructor(void);
 void fn_80469494(void);
 void fn_80469650(void);
 
@@ -1430,7 +1430,7 @@ lbl_fn_80468FBC_0000112C:
     blr
 }
 
-asm void fn_80469144(void)
+asm void task_Library_constructor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1441,55 +1441,55 @@ asm void fn_80469144(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    beq lbl_fn_80469144_000012C4
+    beq lbl_task_Library_constructor_000012C4
     lis r4, lbl_8078FAF0@ha
     addi r4, r4, lbl_8078FAF0@l
     stw r4, 0x0(r3)
     lwz r0, lbl_8087F508
     cmpwi r0, 0x0
-    beq lbl_fn_80469144_00001238
+    beq lbl_task_Library_constructor_00001238
     li r0, 0x0
     stw r0, lbl_8087F508
-lbl_fn_80469144_00001238:
+lbl_task_Library_constructor_00001238:
     lis r3, lbl_80755394@ha
     addi r3, r3, lbl_80755394@l
     addi r3, r3, 0xd9
     bl fn_800C3124
     addic. r0, r30, 0xac
-    beq lbl_fn_80469144_0000126C
+    beq lbl_task_Library_constructor_0000126C
     lwz r4, 0xac(r30)
     cmpwi r4, 0x0
-    beq lbl_fn_80469144_0000126C
+    beq lbl_task_Library_constructor_0000126C
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
-    beq lbl_fn_80469144_0000126C
+    beq lbl_task_Library_constructor_0000126C
     bl fn_800897D8
-lbl_fn_80469144_0000126C:
+lbl_task_Library_constructor_0000126C:
     addic. r4, r30, 0x9c
-    beq lbl_fn_80469144_00001298
-    beq lbl_fn_80469144_00001298
-    beq lbl_fn_80469144_00001298
+    beq lbl_task_Library_constructor_00001298
+    beq lbl_task_Library_constructor_00001298
+    beq lbl_task_Library_constructor_00001298
     lwz r3, 0x0(r4)
     cmpwi r3, 0x0
-    beq lbl_fn_80469144_00001298
+    beq lbl_task_Library_constructor_00001298
     lwz r0, 0x4(r4)
     subf r0, r0, r0
     stw r0, 0x4(r4)
     bl dtor_80084684
-lbl_fn_80469144_00001298:
+lbl_task_Library_constructor_00001298:
     addic. r3, r30, 0x48
-    beq lbl_fn_80469144_000012A8
+    beq lbl_task_Library_constructor_000012A8
     li r4, 0x0
     bl atn_LoadHandle_destructor
-lbl_fn_80469144_000012A8:
+lbl_task_Library_constructor_000012A8:
     mr r3, r30
     li r4, 0x0
     bl atn_Task_destructor
     cmpwi r31, 0x0
-    ble lbl_fn_80469144_000012C4
+    ble lbl_task_Library_constructor_000012C4
     mr r3, r30
     bl dtor_80084684
-lbl_fn_80469144_000012C4:
+lbl_task_Library_constructor_000012C4:
     mr r3, r30
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -1499,7 +1499,7 @@ lbl_fn_80469144_000012C4:
     blr
 }
 
-asm void fn_80469230(void)
+asm void task_Library_destructor(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -1512,17 +1512,17 @@ asm void fn_80469230(void)
     addi r3, r3, 0x48
     bl fn_80473F50
     cmpwi r3, 0x0
-    beq lbl_fn_80469230_00001314
+    beq lbl_task_Library_destructor_00001314
     li r3, 0x0
-    b lbl_fn_80469230_00001528
-lbl_fn_80469230_00001314:
+    b lbl_task_Library_destructor_00001528
+lbl_task_Library_destructor_00001314:
     mr r3, r29
     bl fn_800D3FA4
     cmpwi r3, 0x0
-    bne lbl_fn_80469230_0000132C
+    bne lbl_task_Library_destructor_0000132C
     li r3, 0x0
-    b lbl_fn_80469230_00001528
-lbl_fn_80469230_0000132C:
+    b lbl_task_Library_destructor_00001528
+lbl_task_Library_destructor_0000132C:
     addi r3, r29, 0x48
     bl fn_8047059C
     mr r31, r3
@@ -1573,7 +1573,7 @@ lbl_fn_80469230_0000132C:
     lwz r0, 0x38(r3)
     ori r0, r0, 0x4
     stw r0, 0x38(r3)
-lbl_fn_80469230_000013F4:
+lbl_task_Library_destructor_000013F4:
     lwz r3, 0x58(r30)
     li r4, 0x1
     lfs f1, lbl_80886E88
@@ -1587,24 +1587,24 @@ lbl_fn_80469230_000013F4:
     lwz r0, 0x38(r3)
     ori r0, r0, 0x4
     stw r0, 0x38(r3)
-    blt lbl_fn_80469230_000013F4
+    blt lbl_task_Library_destructor_000013F4
     lwz r0, 0xac(r29)
     lis r3, lbl_80755394@ha
     addi r3, r3, lbl_80755394@l
     cmpwi r0, 0x0
     addi r4, r3, 0xe6
-    bne lbl_fn_80469230_00001464
+    bne lbl_task_Library_destructor_00001464
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
-    beq lbl_fn_80469230_00001464
+    beq lbl_task_Library_destructor_00001464
     addi r3, r3, 0x10
     bl fn_8008937C
     stw r3, 0xac(r29)
     mr r30, r3
-    b lbl_fn_80469230_00001468
-lbl_fn_80469230_00001464:
+    b lbl_task_Library_destructor_00001468
+lbl_task_Library_destructor_00001464:
     li r30, 0x0
-lbl_fn_80469230_00001468:
+lbl_task_Library_destructor_00001468:
     lis r31, lbl_80755394@ha
     lfs f1, lbl_80886E94
     addi r31, r31, lbl_80755394@l
@@ -1653,7 +1653,7 @@ lbl_fn_80469230_00001468:
     li r7, 0x0
     bl fn_8008771C
     li r3, 0x1
-lbl_fn_80469230_00001528:
+lbl_task_Library_destructor_00001528:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)

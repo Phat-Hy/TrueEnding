@@ -105,10 +105,10 @@ void fn_80469D60(void);
 void fn_8046A20C(void);
 void fn_8046A370(void);
 void fn_8046A514(void);
-void fn_8046A5A8(void);
-void fn_8046A690(void);
-void fn_8046A8A4(void);
-void fn_8046A90C(void);
+void task_Book_constructor(void);
+void task_Book_destructor(void);
+void task_Book_execute(void);
+void task_Book_draw(void);
 void fn_8046A980(void);
 void fn_8046A9D0(void);
 void fn_8046ACDC(void);
@@ -962,7 +962,7 @@ lbl_fn_8046A514_00000BE8:
     blr
 }
 
-asm void fn_8046A5A8(void)
+asm void task_Book_constructor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -973,55 +973,55 @@ asm void fn_8046A5A8(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    beq lbl_fn_8046A5A8_00000CD0
+    beq lbl_task_Book_constructor_00000CD0
     lwz r0, 0x9c(r3)
     lis r4, lbl_8078FAB0@ha
     addi r4, r4, lbl_8078FAB0@l
     stw r4, 0x0(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_8046A5A8_00000C50
+    beq lbl_task_Book_constructor_00000C50
     lis r4, fn_8046A514@ha
     mr r3, r0
     addi r4, r4, fn_8046A514@l
     bl fn_80695A50
-lbl_fn_8046A5A8_00000C50:
+lbl_task_Book_constructor_00000C50:
     addic. r0, r30, 0x98
     li r0, 0x0
     stw r0, 0x9c(r30)
     stw r0, 0x98(r30)
-    beq lbl_fn_8046A5A8_00000C88
+    beq lbl_task_Book_constructor_00000C88
     cmpwi r0, 0x0
-    beq lbl_fn_8046A5A8_00000C7C
+    beq lbl_task_Book_constructor_00000C7C
     lis r4, fn_8046A514@ha
     li r3, 0x0
     addi r4, r4, fn_8046A514@l
     bl fn_80695A50
-lbl_fn_8046A5A8_00000C7C:
+lbl_task_Book_constructor_00000C7C:
     li r0, 0x0
     stw r0, 0x9c(r30)
     stw r0, 0x98(r30)
-lbl_fn_8046A5A8_00000C88:
+lbl_task_Book_constructor_00000C88:
     addic. r0, r30, 0x88
-    beq lbl_fn_8046A5A8_00000CA4
+    beq lbl_task_Book_constructor_00000CA4
     lwz r0, 0x88(r30)
     srwi. r0, r0, 31
-    beq lbl_fn_8046A5A8_00000CA4
+    beq lbl_task_Book_constructor_00000CA4
     lwz r3, 0x90(r30)
     bl dtor_80084684
-lbl_fn_8046A5A8_00000CA4:
+lbl_task_Book_constructor_00000CA4:
     addic. r3, r30, 0x48
-    beq lbl_fn_8046A5A8_00000CB4
+    beq lbl_task_Book_constructor_00000CB4
     li r4, 0x0
     bl atn_LoadHandle_destructor
-lbl_fn_8046A5A8_00000CB4:
+lbl_task_Book_constructor_00000CB4:
     mr r3, r30
     li r4, 0x0
     bl atn_Task_destructor
     cmpwi r31, 0x0
-    ble lbl_fn_8046A5A8_00000CD0
+    ble lbl_task_Book_constructor_00000CD0
     mr r3, r30
     bl dtor_80084684
-lbl_fn_8046A5A8_00000CD0:
+lbl_task_Book_constructor_00000CD0:
     mr r3, r30
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -1031,7 +1031,7 @@ lbl_fn_8046A5A8_00000CD0:
     blr
 }
 
-asm void fn_8046A690(void)
+asm void task_Book_destructor(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -1043,21 +1043,21 @@ asm void fn_8046A690(void)
     stw r29, 0x14(r1)
     lwz r0, 0x74(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_8046A690_00000E2C
+    bne lbl_task_Book_destructor_00000E2C
     addi r3, r3, 0x48
     bl fn_80473F50
     cmpwi r3, 0x0
-    beq lbl_fn_8046A690_00000D2C
+    beq lbl_task_Book_destructor_00000D2C
     li r3, 0x0
-    b lbl_fn_8046A690_00000EE4
-lbl_fn_8046A690_00000D2C:
+    b lbl_task_Book_destructor_00000EE4
+lbl_task_Book_destructor_00000D2C:
     mr r3, r31
     bl fn_800D3FA4
     cmpwi r3, 0x0
-    bne lbl_fn_8046A690_00000D44
+    bne lbl_task_Book_destructor_00000D44
     li r3, 0x0
-    b lbl_fn_8046A690_00000EE4
-lbl_fn_8046A690_00000D44:
+    b lbl_task_Book_destructor_00000EE4
+lbl_task_Book_destructor_00000D44:
     addi r3, r31, 0x48
     bl fn_8047059C
     mr r30, r3
@@ -1089,7 +1089,7 @@ lbl_fn_8046A690_00000D44:
     lwz r0, 0x38(r3)
     ori r0, r0, 0x4
     stw r0, 0x38(r3)
-lbl_fn_8046A690_00000DC0:
+lbl_task_Book_destructor_00000DC0:
     lwz r3, 0x54(r30)
     li r4, 0x1
     lfs f1, lbl_80886E88
@@ -1113,36 +1113,36 @@ lbl_fn_8046A690_00000DC0:
     lwz r0, 0x38(r3)
     ori r0, r0, 0x4
     stw r0, 0x38(r3)
-    blt lbl_fn_8046A690_00000DC0
+    blt lbl_task_Book_destructor_00000DC0
     li r0, 0x1
     stw r0, 0x74(r31)
-    b lbl_fn_8046A690_00000EE0
-lbl_fn_8046A690_00000E2C:
+    b lbl_task_Book_destructor_00000EE0
+lbl_task_Book_destructor_00000E2C:
     cmpwi r0, 0x1
-    bne lbl_fn_8046A690_00000EE0
+    bne lbl_task_Book_destructor_00000EE0
     li r29, 0x0
     li r30, 0x0
-    b lbl_fn_8046A690_00000E68
-lbl_fn_8046A690_00000E40:
+    b lbl_task_Book_destructor_00000E68
+lbl_task_Book_destructor_00000E40:
     lwz r0, 0x9c(r31)
     add r3, r0, r30
     addi r3, r3, 0xc
     bl fn_800D59B8
     cmpwi r3, 0x0
-    beq lbl_fn_8046A690_00000E60
+    beq lbl_task_Book_destructor_00000E60
     li r3, 0x0
-    b lbl_fn_8046A690_00000EE4
-lbl_fn_8046A690_00000E60:
+    b lbl_task_Book_destructor_00000EE4
+lbl_task_Book_destructor_00000E60:
     addi r30, r30, 0x54
     addi r29, r29, 0x1
-lbl_fn_8046A690_00000E68:
+lbl_task_Book_destructor_00000E68:
     lwz r0, 0x98(r31)
     cmplw r29, r0
-    blt lbl_fn_8046A690_00000E40
+    blt lbl_task_Book_destructor_00000E40
     lwz r30, 0x9c(r31)
     lwz r0, 0x4(r30)
     cmpwi r0, 0x2
-    bne lbl_fn_8046A690_00000EA4
+    bne lbl_task_Book_destructor_00000EA4
     addi r3, r30, 0x2c
     bl fn_80473F18
     lis r4, lbl_80755394@ha
@@ -1151,10 +1151,10 @@ lbl_fn_8046A690_00000E68:
     lwz r3, 0x5c(r31)
     addi r4, r4, 0x1bd
     bl fn_801F4E30
-lbl_fn_8046A690_00000EA4:
+lbl_task_Book_destructor_00000EA4:
     lwz r0, 0x8(r30)
     cmpwi r0, 0x2
-    bne lbl_fn_8046A690_00000ED0
+    bne lbl_task_Book_destructor_00000ED0
     addi r3, r30, 0x2c
     bl fn_80473F18
     lis r4, lbl_80755394@ha
@@ -1163,14 +1163,14 @@ lbl_fn_8046A690_00000EA4:
     lwz r3, 0x68(r31)
     addi r4, r4, 0x1bd
     bl fn_801F4E30
-lbl_fn_8046A690_00000ED0:
+lbl_task_Book_destructor_00000ED0:
     li r0, 0x2
     stw r0, 0x74(r31)
     li r3, 0x1
-    b lbl_fn_8046A690_00000EE4
-lbl_fn_8046A690_00000EE0:
+    b lbl_task_Book_destructor_00000EE4
+lbl_task_Book_destructor_00000EE0:
     li r3, 0x0
-lbl_fn_8046A690_00000EE4:
+lbl_task_Book_destructor_00000EE4:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)
@@ -1180,7 +1180,7 @@ lbl_fn_8046A690_00000EE4:
     blr
 }
 
-asm void fn_8046A8A4(void)
+asm void task_Book_execute(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1200,9 +1200,9 @@ asm void fn_8046A8A4(void)
     stw r0, 0x80(r3)
     andc r0, r7, r4
     stw r0, 0x84(r3)
-    bne lbl_fn_8046A8A4_00000F4C
+    bne lbl_task_Book_execute_00000F4C
     bl fn_8046ACDC
-lbl_fn_8046A8A4_00000F4C:
+lbl_task_Book_execute_00000F4C:
     mr r3, r31
     bl fn_8046A9D0
     lwz r0, 0x14(r1)
@@ -1212,7 +1212,7 @@ lbl_fn_8046A8A4_00000F4C:
     blr
 }
 
-asm void fn_8046A90C(void)
+asm void task_Book_draw(void)
 {
     nofralloc
     lwz r4, 0x50(r3)
