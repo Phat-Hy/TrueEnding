@@ -81,11 +81,11 @@ void fn_804B47E0(void);
 void fn_804B49C0(void);
 void fn_804B49E0(void);
 void fn_804B4AD0(void);
-void fn_804B4B38(void);
+u32 fn_804B4B38(void);
 void fn_804B4B40(void);
-void fn_804B4BA8(void);
+u32 fn_804B4BA8(void);
 void fn_804B4BB0(void);
-void fn_804B4C18(void);
+u32 fn_804B4C18(void);
 void fn_804B4C20(void);
 void fn_804B4C50(void);
 void fn_804B4CB8(void);
@@ -460,11 +460,9 @@ lbl_fn_804B4AD0_000004A8:
     blr
 }
 
-asm void fn_804B4B38(void)
+u32 fn_804B4B38(void)
 {
-    nofralloc
-    li r3, 0x41
-    blr
+    return 0x41;
 }
 
 asm void fn_804B4B40(void)
@@ -501,11 +499,9 @@ lbl_fn_804B4B40_00000518:
     blr
 }
 
-asm void fn_804B4BA8(void)
+u32 fn_804B4BA8(void)
 {
-    nofralloc
-    li r3, 0x1e
-    blr
+    return 0x1e;
 }
 
 asm void fn_804B4BB0(void)
@@ -542,11 +538,9 @@ lbl_fn_804B4BB0_00000588:
     blr
 }
 
-asm void fn_804B4C18(void)
+u32 fn_804B4C18(void)
 {
-    nofralloc
-    li r3, 0x1e
-    blr
+    return 0x1e;
 }
 
 asm void fn_804B4C20(void)

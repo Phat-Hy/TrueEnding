@@ -81,7 +81,7 @@ void fn_8000DB24(void);
 void fn_8000DCF4(void);
 void fn_8000DCFC(void);
 void fn_8000DD04(void);
-void scene_getRootNode(void);
+void *scene_getRootNode(void *obj);
 void fn_8000DD14(void);
 void fn_8000DD98(void);
 void fn_8000DDA0(void);
@@ -1402,11 +1402,9 @@ asm void fn_8000DD04(void)
     blr
 }
 
-asm void scene_getRootNode(void)
+void *scene_getRootNode(void *obj)
 {
-    nofralloc
-    addi r3, r3, 0xb0
-    blr
+    return (char *)obj + 0xb0;
 }
 
 asm void fn_8000DD14(void)

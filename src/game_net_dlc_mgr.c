@@ -654,10 +654,9 @@ asm void fn_80547DC4(void)
     blr
 }
 
-asm void fn_80547DF8(void)
+void fn_80547DF8(void)
 {
-    nofralloc
-    b dialog_renderWindow
+    dialog_renderWindow();
 }
 
 asm void fn_80547DFC(void)

@@ -339,16 +339,14 @@ lbl_fn_804CF078_000001F4:
     blr
 }
 
-asm void fn_804CF190(void)
+void fn_804CF190(void)
 {
-    nofralloc
-    b atn_Task_unlink
+    atn_Task_unlink();
 }
 
-asm void fn_804CF194(void)
+void fn_804CF194(void)
 {
-    nofralloc
-    b OSGetTime
+    OSGetTime();
 }
 
 asm void fn_804CF198(void)

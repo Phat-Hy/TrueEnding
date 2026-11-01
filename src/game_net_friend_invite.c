@@ -375,16 +375,16 @@ void fn_804D147C(void);
 void fn_804D14BC(void);
 u32 net_getFriendManager(void);
 void fn_804D16A0(void);
-void fn_804D16D0(void);
-void fn_804D16D8(void);
-void fn_804D16E0(void);
+u32 fn_804D16D0(void);
+u32 fn_804D16D8(void);
+u32 fn_804D16E0(void);
 void fn_804D16E8(void);
-void fn_804D16F4(void);
+u32 fn_804D16F4(void);
 void fn_804D16FC(void);
 void fn_804D1F70(void);
 void fn_804D1FDC(void);
 void fn_804D201C(void);
-void fn_804D24AC(void);
+void *fn_804D24AC(void *obj);
 void fn_804D24B4(void);
 void fn_804D250C(void);
 void fn_804D25D4(void);
@@ -615,25 +615,19 @@ asm void fn_804D16A0(void)
     blr
 }
 
-asm void fn_804D16D0(void)
+u32 fn_804D16D0(void)
 {
-    nofralloc
-    lwz r3, lbl_8087F59C
-    blr
+    return lbl_8087F59C;
 }
 
-asm void fn_804D16D8(void)
+u32 fn_804D16D8(void)
 {
-    nofralloc
-    lwz r3, lbl_8087F5A8
-    blr
+    return lbl_8087F5A8;
 }
 
-asm void fn_804D16E0(void)
+u32 fn_804D16E0(void)
 {
-    nofralloc
-    lwz r3, lbl_8087F588
-    blr
+    return lbl_8087F588;
 }
 
 asm void fn_804D16E8(void)
@@ -644,11 +638,9 @@ asm void fn_804D16E8(void)
     blr
 }
 
-asm void fn_804D16F4(void)
+u32 fn_804D16F4(void)
 {
-    nofralloc
-    lwz r3, lbl_8087F420
-    blr
+    return lbl_8087F420;
 }
 
 asm void fn_804D16FC(void)
@@ -1603,11 +1595,9 @@ lbl_fn_804D201C_00001094:
     blr
 }
 
-asm void fn_804D24AC(void)
+void *fn_804D24AC(void *obj)
 {
-    nofralloc
-    lwz r3, 0x324(r3)
-    blr
+    return *(void **)((char *)obj + 0x324);
 }
 
 asm void fn_804D24B4(void)
