@@ -84,7 +84,7 @@ void fn_801F5460(void);
 void fn_801F54CC(void);
 void fn_801F5644(void);
 void fn_801F5740(void);
-void fn_801F583C(void);
+void param_table_setPropertyAngle(void);
 
 asm void fn_801F4230(void)
 {
@@ -1727,7 +1727,7 @@ lbl_fn_801F5740_000015F4:
     blr
 }
 
-asm void fn_801F583C(void)
+asm void param_table_setPropertyAngle(void)
 {
     nofralloc
     stwu r1, -0x60(r1)
@@ -1759,45 +1759,45 @@ asm void fn_801F583C(void)
     stfs f31, 0x34(r1)
     mtctr r8
     cmplwi r8, 0x0
-    ble lbl_fn_801F583C_000016D0
-lbl_fn_801F583C_00001684:
+    ble lbl_param_table_setPropertyAngle_000016D0
+lbl_param_table_setPropertyAngle_00001684:
     lbz r0, 0x5c(r7)
     extsb r0, r0
     cmpw r5, r0
-    bne lbl_fn_801F583C_000016C4
+    bne lbl_param_table_setPropertyAngle_000016C4
     lbz r0, 0x5d(r7)
     extsb r0, r0
     cmpw r4, r0
-    bne lbl_fn_801F583C_000016C4
+    bne lbl_param_table_setPropertyAngle_000016C4
     lwz r0, 0x60(r7)
     cmplw r3, r0
-    bne lbl_fn_801F583C_000016C4
+    bne lbl_param_table_setPropertyAngle_000016C4
     mulli r0, r6, 0xc
     lwz r4, 0x34(r1)
     add r3, r29, r0
     stw r4, 0x64(r3)
-    b lbl_fn_801F583C_00001708
-lbl_fn_801F583C_000016C4:
+    b lbl_param_table_setPropertyAngle_00001708
+lbl_param_table_setPropertyAngle_000016C4:
     addi r7, r7, 0xc
     addi r6, r6, 0x1
-    bdnz lbl_fn_801F583C_00001684
-lbl_fn_801F583C_000016D0:
+    bdnz lbl_param_table_setPropertyAngle_00001684
+lbl_param_table_setPropertyAngle_000016D0:
     lwz r0, 0x58(r29)
     mulli r0, r0, 0xc
     add r0, r29, r0
     addic. r3, r0, 0x5c
-    beq lbl_fn_801F583C_000016FC
+    beq lbl_param_table_setPropertyAngle_000016FC
     lwz r0, 0x2c(r1)
     stw r0, 0x0(r3)
     lwz r0, 0x30(r1)
     stw r0, 0x4(r3)
     lwz r0, 0x34(r1)
     stw r0, 0x8(r3)
-lbl_fn_801F583C_000016FC:
+lbl_param_table_setPropertyAngle_000016FC:
     lwz r3, 0x58(r29)
     addi r0, r3, 0x1
     stw r0, 0x58(r29)
-lbl_fn_801F583C_00001708:
+lbl_param_table_setPropertyAngle_00001708:
     li r3, 0x2
     li r0, 0x1
     stb r3, 0x20(r1)
@@ -1816,45 +1816,45 @@ lbl_fn_801F583C_00001708:
     stfs f31, 0x28(r1)
     mtctr r8
     cmplwi r8, 0x0
-    ble lbl_fn_801F583C_000017A0
-lbl_fn_801F583C_00001754:
+    ble lbl_param_table_setPropertyAngle_000017A0
+lbl_param_table_setPropertyAngle_00001754:
     lbz r0, 0x5c(r7)
     extsb r0, r0
     cmpw r5, r0
-    bne lbl_fn_801F583C_00001794
+    bne lbl_param_table_setPropertyAngle_00001794
     lbz r0, 0x5d(r7)
     extsb r0, r0
     cmpw r4, r0
-    bne lbl_fn_801F583C_00001794
+    bne lbl_param_table_setPropertyAngle_00001794
     lwz r0, 0x60(r7)
     cmplw r3, r0
-    bne lbl_fn_801F583C_00001794
+    bne lbl_param_table_setPropertyAngle_00001794
     mulli r0, r6, 0xc
     lwz r4, 0x28(r1)
     add r3, r29, r0
     stw r4, 0x64(r3)
-    b lbl_fn_801F583C_000017D8
-lbl_fn_801F583C_00001794:
+    b lbl_param_table_setPropertyAngle_000017D8
+lbl_param_table_setPropertyAngle_00001794:
     addi r7, r7, 0xc
     addi r6, r6, 0x1
-    bdnz lbl_fn_801F583C_00001754
-lbl_fn_801F583C_000017A0:
+    bdnz lbl_param_table_setPropertyAngle_00001754
+lbl_param_table_setPropertyAngle_000017A0:
     lwz r0, 0x58(r29)
     mulli r0, r0, 0xc
     add r0, r29, r0
     addic. r3, r0, 0x5c
-    beq lbl_fn_801F583C_000017CC
+    beq lbl_param_table_setPropertyAngle_000017CC
     lwz r0, 0x20(r1)
     stw r0, 0x0(r3)
     lwz r0, 0x24(r1)
     stw r0, 0x4(r3)
     lwz r0, 0x28(r1)
     stw r0, 0x8(r3)
-lbl_fn_801F583C_000017CC:
+lbl_param_table_setPropertyAngle_000017CC:
     lwz r3, 0x58(r29)
     addi r0, r3, 0x1
     stw r0, 0x58(r29)
-lbl_fn_801F583C_000017D8:
+lbl_param_table_setPropertyAngle_000017D8:
     li r0, 0x2
     stb r0, 0x14(r1)
     lfs f31, 0x8(r31)
@@ -1872,45 +1872,45 @@ lbl_fn_801F583C_000017D8:
     stfs f31, 0x1c(r1)
     mtctr r8
     cmplwi r8, 0x0
-    ble lbl_fn_801F583C_0000186C
-lbl_fn_801F583C_00001820:
+    ble lbl_param_table_setPropertyAngle_0000186C
+lbl_param_table_setPropertyAngle_00001820:
     lbz r0, 0x5c(r7)
     extsb r0, r0
     cmpw r5, r0
-    bne lbl_fn_801F583C_00001860
+    bne lbl_param_table_setPropertyAngle_00001860
     lbz r0, 0x5d(r7)
     extsb r0, r0
     cmpw r4, r0
-    bne lbl_fn_801F583C_00001860
+    bne lbl_param_table_setPropertyAngle_00001860
     lwz r0, 0x60(r7)
     cmplw r3, r0
-    bne lbl_fn_801F583C_00001860
+    bne lbl_param_table_setPropertyAngle_00001860
     mulli r0, r6, 0xc
     lwz r4, 0x1c(r1)
     add r3, r29, r0
     stw r4, 0x64(r3)
-    b lbl_fn_801F583C_000018A4
-lbl_fn_801F583C_00001860:
+    b lbl_param_table_setPropertyAngle_000018A4
+lbl_param_table_setPropertyAngle_00001860:
     addi r7, r7, 0xc
     addi r6, r6, 0x1
-    bdnz lbl_fn_801F583C_00001820
-lbl_fn_801F583C_0000186C:
+    bdnz lbl_param_table_setPropertyAngle_00001820
+lbl_param_table_setPropertyAngle_0000186C:
     lwz r0, 0x58(r29)
     mulli r0, r0, 0xc
     add r0, r29, r0
     addic. r3, r0, 0x5c
-    beq lbl_fn_801F583C_00001898
+    beq lbl_param_table_setPropertyAngle_00001898
     lwz r0, 0x14(r1)
     stw r0, 0x0(r3)
     lwz r0, 0x18(r1)
     stw r0, 0x4(r3)
     lwz r0, 0x1c(r1)
     stw r0, 0x8(r3)
-lbl_fn_801F583C_00001898:
+lbl_param_table_setPropertyAngle_00001898:
     lwz r3, 0x58(r29)
     addi r0, r3, 0x1
     stw r0, 0x58(r29)
-lbl_fn_801F583C_000018A4:
+lbl_param_table_setPropertyAngle_000018A4:
     li r3, 0x2
     li r0, 0x3
     stb r3, 0x8(r1)
@@ -1929,45 +1929,45 @@ lbl_fn_801F583C_000018A4:
     stfs f31, 0x10(r1)
     mtctr r8
     cmplwi r8, 0x0
-    ble lbl_fn_801F583C_0000193C
-lbl_fn_801F583C_000018F0:
+    ble lbl_param_table_setPropertyAngle_0000193C
+lbl_param_table_setPropertyAngle_000018F0:
     lbz r0, 0x5c(r7)
     extsb r0, r0
     cmpw r5, r0
-    bne lbl_fn_801F583C_00001930
+    bne lbl_param_table_setPropertyAngle_00001930
     lbz r0, 0x5d(r7)
     extsb r0, r0
     cmpw r4, r0
-    bne lbl_fn_801F583C_00001930
+    bne lbl_param_table_setPropertyAngle_00001930
     lwz r0, 0x60(r7)
     cmplw r3, r0
-    bne lbl_fn_801F583C_00001930
+    bne lbl_param_table_setPropertyAngle_00001930
     mulli r0, r6, 0xc
     lwz r4, 0x10(r1)
     add r3, r29, r0
     stw r4, 0x64(r3)
-    b lbl_fn_801F583C_00001974
-lbl_fn_801F583C_00001930:
+    b lbl_param_table_setPropertyAngle_00001974
+lbl_param_table_setPropertyAngle_00001930:
     addi r7, r7, 0xc
     addi r6, r6, 0x1
-    bdnz lbl_fn_801F583C_000018F0
-lbl_fn_801F583C_0000193C:
+    bdnz lbl_param_table_setPropertyAngle_000018F0
+lbl_param_table_setPropertyAngle_0000193C:
     lwz r0, 0x58(r29)
     mulli r0, r0, 0xc
     add r0, r29, r0
     addic. r3, r0, 0x5c
-    beq lbl_fn_801F583C_00001968
+    beq lbl_param_table_setPropertyAngle_00001968
     lwz r0, 0x8(r1)
     stw r0, 0x0(r3)
     lwz r0, 0xc(r1)
     stw r0, 0x4(r3)
     lwz r0, 0x10(r1)
     stw r0, 0x8(r3)
-lbl_fn_801F583C_00001968:
+lbl_param_table_setPropertyAngle_00001968:
     lwz r3, 0x58(r29)
     addi r0, r3, 0x1
     stw r0, 0x58(r29)
-lbl_fn_801F583C_00001974:
+lbl_param_table_setPropertyAngle_00001974:
     lwz r0, 0x64(r1)
     psq_l f31, 0x58(r1), 0, 0
     lfd f31, 0x50(r1)

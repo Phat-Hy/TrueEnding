@@ -12,7 +12,7 @@ extern void msg_formatWindowLayout(void);
 extern void msg_isWindowActive(void);
 extern void proj_getGlobalManager(void);
 extern void fn_800F7258(void);
-extern void fn_801156BC(void);
+extern void actor_getGlobalManager(void);
 extern void actor_getStreamPipe(void);
 extern void fn_80116E6C(void);
 extern void equip_getGlobalManager(void);
@@ -1187,7 +1187,7 @@ asm void magic_dispatchActionCommand(void)
     li r4, 0x1
     bl fn_80121F08
     b lbl_magic_dispatchActionCommand_000014E8
-    bl fn_801156BC
+    bl actor_getGlobalManager
     li r4, 0x0
     bl msg_isWindowActive
     cmpwi r3, 0x0
@@ -1338,7 +1338,7 @@ lbl_magic_dispatchActionCommand_00001188:
 lbl_magic_dispatchActionCommand_0000118C:
     mr r3, r31
     b lbl_magic_dispatchActionCommand_000014E8
-    bl fn_801156BC
+    bl actor_getGlobalManager
     li r4, 0x0
     li r5, 0x4
     li r6, 0x0
@@ -1410,13 +1410,13 @@ lbl_magic_dispatchActionCommand_00001290:
     bl fn_80121F08
     b lbl_magic_dispatchActionCommand_000014E8
 lbl_magic_dispatchActionCommand_000012A8:
-    bl fn_801156BC
+    bl actor_getGlobalManager
     li r4, 0x0
     li r5, 0x6
     li r6, 0x0
     bl msg_formatWindowLayout
     fneg f31, f1
-    bl fn_801156BC
+    bl actor_getGlobalManager
     li r4, 0x0
     li r5, 0x5
     li r6, 0x0
@@ -1457,7 +1457,7 @@ lbl_magic_dispatchActionCommand_00001350:
     mr r3, r31
     b lbl_magic_dispatchActionCommand_000014E8
 lbl_magic_dispatchActionCommand_00001358:
-    bl fn_801156BC
+    bl actor_getGlobalManager
     li r4, 0x0
     li r5, 0x6
     li r6, 0x0
@@ -1527,7 +1527,7 @@ lbl_magic_dispatchActionCommand_00001444:
     mr r4, r30
     bl player_getSpellStatus
     mr r31, r3
-    bl fn_801156BC
+    bl actor_getGlobalManager
     mr r5, r31
     li r4, 0x0
     bl msg_getMessageById

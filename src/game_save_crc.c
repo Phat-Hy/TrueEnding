@@ -40,7 +40,7 @@ extern u32 lbl_80882C94;
 extern u32 lbl_80882C98;
 
 /* Function declarations */
-void fn_801F5BC8(void);
+void param_table_setPropertyFloat(void);
 void fn_801F5E9C(void);
 void fn_801F60B8(void);
 void fn_801F6350(void);
@@ -62,7 +62,7 @@ void save_verifyBlockCrc(void);
 void save_calculateBlockCrc(void);
 void fn_801F72D4(void);
 
-asm void fn_801F5BC8(void)
+asm void param_table_setPropertyFloat(void)
 {
     nofralloc
     stwu r1, -0x50(r1)
@@ -96,45 +96,45 @@ asm void fn_801F5BC8(void)
     stfs f31, 0x28(r1)
     mtctr r8
     cmplwi r8, 0x0
-    ble lbl_fn_801F5BC8_000000CC
-lbl_fn_801F5BC8_00000080:
+    ble lbl_param_table_setPropertyFloat_000000CC
+lbl_param_table_setPropertyFloat_00000080:
     lbz r0, 0x5c(r7)
     extsb r0, r0
     cmpw r5, r0
-    bne lbl_fn_801F5BC8_000000C0
+    bne lbl_param_table_setPropertyFloat_000000C0
     lbz r0, 0x5d(r7)
     extsb r0, r0
     cmpw r4, r0
-    bne lbl_fn_801F5BC8_000000C0
+    bne lbl_param_table_setPropertyFloat_000000C0
     lwz r0, 0x60(r7)
     cmplw r3, r0
-    bne lbl_fn_801F5BC8_000000C0
+    bne lbl_param_table_setPropertyFloat_000000C0
     mulli r0, r6, 0xc
     lwz r4, 0x28(r1)
     add r3, r29, r0
     stw r4, 0x64(r3)
-    b lbl_fn_801F5BC8_00000104
-lbl_fn_801F5BC8_000000C0:
+    b lbl_param_table_setPropertyFloat_00000104
+lbl_param_table_setPropertyFloat_000000C0:
     addi r7, r7, 0xc
     addi r6, r6, 0x1
-    bdnz lbl_fn_801F5BC8_00000080
-lbl_fn_801F5BC8_000000CC:
+    bdnz lbl_param_table_setPropertyFloat_00000080
+lbl_param_table_setPropertyFloat_000000CC:
     lwz r0, 0x58(r29)
     mulli r0, r0, 0xc
     add r0, r29, r0
     addic. r3, r0, 0x5c
-    beq lbl_fn_801F5BC8_000000F8
+    beq lbl_param_table_setPropertyFloat_000000F8
     lwz r0, 0x20(r1)
     stw r0, 0x0(r3)
     lwz r0, 0x24(r1)
     stw r0, 0x4(r3)
     lwz r0, 0x28(r1)
     stw r0, 0x8(r3)
-lbl_fn_801F5BC8_000000F8:
+lbl_param_table_setPropertyFloat_000000F8:
     lwz r3, 0x58(r29)
     addi r0, r3, 0x1
     stw r0, 0x58(r29)
-lbl_fn_801F5BC8_00000104:
+lbl_param_table_setPropertyFloat_00000104:
     lfs f1, lbl_80882C98
     li r3, 0x3
     lfs f0, 0x4(r31)
@@ -155,45 +155,45 @@ lbl_fn_801F5BC8_00000104:
     stfs f31, 0x1c(r1)
     mtctr r8
     cmplwi r8, 0x0
-    ble lbl_fn_801F5BC8_000001A4
-lbl_fn_801F5BC8_00000158:
+    ble lbl_param_table_setPropertyFloat_000001A4
+lbl_param_table_setPropertyFloat_00000158:
     lbz r0, 0x5c(r7)
     extsb r0, r0
     cmpw r5, r0
-    bne lbl_fn_801F5BC8_00000198
+    bne lbl_param_table_setPropertyFloat_00000198
     lbz r0, 0x5d(r7)
     extsb r0, r0
     cmpw r4, r0
-    bne lbl_fn_801F5BC8_00000198
+    bne lbl_param_table_setPropertyFloat_00000198
     lwz r0, 0x60(r7)
     cmplw r3, r0
-    bne lbl_fn_801F5BC8_00000198
+    bne lbl_param_table_setPropertyFloat_00000198
     mulli r0, r6, 0xc
     lwz r4, 0x1c(r1)
     add r3, r29, r0
     stw r4, 0x64(r3)
-    b lbl_fn_801F5BC8_000001DC
-lbl_fn_801F5BC8_00000198:
+    b lbl_param_table_setPropertyFloat_000001DC
+lbl_param_table_setPropertyFloat_00000198:
     addi r7, r7, 0xc
     addi r6, r6, 0x1
-    bdnz lbl_fn_801F5BC8_00000158
-lbl_fn_801F5BC8_000001A4:
+    bdnz lbl_param_table_setPropertyFloat_00000158
+lbl_param_table_setPropertyFloat_000001A4:
     lwz r0, 0x58(r29)
     mulli r0, r0, 0xc
     add r0, r29, r0
     addic. r3, r0, 0x5c
-    beq lbl_fn_801F5BC8_000001D0
+    beq lbl_param_table_setPropertyFloat_000001D0
     lwz r0, 0x14(r1)
     stw r0, 0x0(r3)
     lwz r0, 0x18(r1)
     stw r0, 0x4(r3)
     lwz r0, 0x1c(r1)
     stw r0, 0x8(r3)
-lbl_fn_801F5BC8_000001D0:
+lbl_param_table_setPropertyFloat_000001D0:
     lwz r3, 0x58(r29)
     addi r0, r3, 0x1
     stw r0, 0x58(r29)
-lbl_fn_801F5BC8_000001DC:
+lbl_param_table_setPropertyFloat_000001DC:
     lfs f1, lbl_80882C98
     li r0, 0x3
     lfs f0, 0x8(r31)
@@ -213,45 +213,45 @@ lbl_fn_801F5BC8_000001DC:
     stfs f31, 0x10(r1)
     mtctr r8
     cmplwi r8, 0x0
-    ble lbl_fn_801F5BC8_00000278
-lbl_fn_801F5BC8_0000022C:
+    ble lbl_param_table_setPropertyFloat_00000278
+lbl_param_table_setPropertyFloat_0000022C:
     lbz r0, 0x5c(r7)
     extsb r0, r0
     cmpw r5, r0
-    bne lbl_fn_801F5BC8_0000026C
+    bne lbl_param_table_setPropertyFloat_0000026C
     lbz r0, 0x5d(r7)
     extsb r0, r0
     cmpw r4, r0
-    bne lbl_fn_801F5BC8_0000026C
+    bne lbl_param_table_setPropertyFloat_0000026C
     lwz r0, 0x60(r7)
     cmplw r3, r0
-    bne lbl_fn_801F5BC8_0000026C
+    bne lbl_param_table_setPropertyFloat_0000026C
     mulli r0, r6, 0xc
     lwz r4, 0x10(r1)
     add r3, r29, r0
     stw r4, 0x64(r3)
-    b lbl_fn_801F5BC8_000002B0
-lbl_fn_801F5BC8_0000026C:
+    b lbl_param_table_setPropertyFloat_000002B0
+lbl_param_table_setPropertyFloat_0000026C:
     addi r7, r7, 0xc
     addi r6, r6, 0x1
-    bdnz lbl_fn_801F5BC8_0000022C
-lbl_fn_801F5BC8_00000278:
+    bdnz lbl_param_table_setPropertyFloat_0000022C
+lbl_param_table_setPropertyFloat_00000278:
     lwz r0, 0x58(r29)
     mulli r0, r0, 0xc
     add r0, r29, r0
     addic. r3, r0, 0x5c
-    beq lbl_fn_801F5BC8_000002A4
+    beq lbl_param_table_setPropertyFloat_000002A4
     lwz r0, 0x8(r1)
     stw r0, 0x0(r3)
     lwz r0, 0xc(r1)
     stw r0, 0x4(r3)
     lwz r0, 0x10(r1)
     stw r0, 0x8(r3)
-lbl_fn_801F5BC8_000002A4:
+lbl_param_table_setPropertyFloat_000002A4:
     lwz r3, 0x58(r29)
     addi r0, r3, 0x1
     stw r0, 0x58(r29)
-lbl_fn_801F5BC8_000002B0:
+lbl_param_table_setPropertyFloat_000002B0:
     lwz r0, 0x54(r1)
     psq_l f31, 0x48(r1), 0, 0
     lfd f31, 0x40(r1)

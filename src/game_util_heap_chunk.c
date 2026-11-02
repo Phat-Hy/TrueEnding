@@ -56,7 +56,7 @@ extern void fn_80444C48(void);
 extern void fn_80444C50(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
-extern void fn_804A39EC(void);
+extern void atn_Task_scheduleCallback(void);
 extern void fn_804A3A68(void);
 extern void fn_804A55FC(void);
 extern void fn_804A5824(void);
@@ -1583,7 +1583,7 @@ asm void fn_80587070(void)
     li r4, 0x1
     lfs f2, lbl_80888114
     li r5, 0x0
-    bl fn_804A39EC
+    bl atn_Task_scheduleCallback
     addis r5, r31, 0x2
     li r4, 0x0
     lwz r3, 0x5b6c(r5)
@@ -1617,7 +1617,7 @@ asm void fn_80587070(void)
     lwz r3, 0x5b68(r6)
     stfs f0, 0x104(r3)
     lwz r3, 0x5b74(r6)
-    bl fn_804A39EC
+    bl atn_Task_scheduleCallback
     mr r29, r31
     li r30, 0x0
 lbl_fn_80587070_00001520:

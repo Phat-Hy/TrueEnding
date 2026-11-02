@@ -83,7 +83,7 @@ extern u32 lbl_80888458;
 void fn_805B8DB8(void);
 void fn_805B96AC(void);
 void fn_805B983C(void);
-void fn_805B99AC(void);
+void voice_tree_destroyRecursively(void);
 void fn_805B9B0C(void);
 void fn_805B9BA8(void);
 void fn_805B9D5C(void);
@@ -964,7 +964,7 @@ lbl_fn_805B983C_00000BDC:
     blr
 }
 
-asm void fn_805B99AC(void)
+asm void voice_tree_destroyRecursively(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -978,87 +978,87 @@ asm void fn_805B99AC(void)
     mr r28, r3
     lwz r31, 0x0(r4)
     cmpwi r31, 0x0
-    beq lbl_fn_805B99AC_00000CA0
+    beq lbl_voice_tree_destroyRecursively_00000CA0
     lwz r30, 0x0(r31)
     cmpwi r30, 0x0
-    beq lbl_fn_805B99AC_00000C5C
+    beq lbl_voice_tree_destroyRecursively_00000C5C
     lwz r4, 0x0(r30)
     cmpwi r4, 0x0
-    beq lbl_fn_805B99AC_00000C40
-    bl fn_805B99AC
-lbl_fn_805B99AC_00000C40:
+    beq lbl_voice_tree_destroyRecursively_00000C40
+    bl voice_tree_destroyRecursively
+lbl_voice_tree_destroyRecursively_00000C40:
     lwz r4, 0x4(r30)
     cmpwi r4, 0x0
-    beq lbl_fn_805B99AC_00000C54
+    beq lbl_voice_tree_destroyRecursively_00000C54
     mr r3, r28
-    bl fn_805B99AC
-lbl_fn_805B99AC_00000C54:
+    bl voice_tree_destroyRecursively
+lbl_voice_tree_destroyRecursively_00000C54:
     mr r3, r30
     bl dtor_80084684
-lbl_fn_805B99AC_00000C5C:
+lbl_voice_tree_destroyRecursively_00000C5C:
     lwz r30, 0x4(r31)
     cmpwi r30, 0x0
-    beq lbl_fn_805B99AC_00000C98
+    beq lbl_voice_tree_destroyRecursively_00000C98
     lwz r4, 0x0(r30)
     cmpwi r4, 0x0
-    beq lbl_fn_805B99AC_00000C7C
+    beq lbl_voice_tree_destroyRecursively_00000C7C
     mr r3, r28
-    bl fn_805B99AC
-lbl_fn_805B99AC_00000C7C:
+    bl voice_tree_destroyRecursively
+lbl_voice_tree_destroyRecursively_00000C7C:
     lwz r4, 0x4(r30)
     cmpwi r4, 0x0
-    beq lbl_fn_805B99AC_00000C90
+    beq lbl_voice_tree_destroyRecursively_00000C90
     mr r3, r28
-    bl fn_805B99AC
-lbl_fn_805B99AC_00000C90:
+    bl voice_tree_destroyRecursively
+lbl_voice_tree_destroyRecursively_00000C90:
     mr r3, r30
     bl dtor_80084684
-lbl_fn_805B99AC_00000C98:
+lbl_voice_tree_destroyRecursively_00000C98:
     mr r3, r31
     bl dtor_80084684
-lbl_fn_805B99AC_00000CA0:
+lbl_voice_tree_destroyRecursively_00000CA0:
     lwz r30, 0x4(r29)
     cmpwi r30, 0x0
-    beq lbl_fn_805B99AC_00000D2C
+    beq lbl_voice_tree_destroyRecursively_00000D2C
     lwz r31, 0x0(r30)
     cmpwi r31, 0x0
-    beq lbl_fn_805B99AC_00000CE8
+    beq lbl_voice_tree_destroyRecursively_00000CE8
     lwz r4, 0x0(r31)
     cmpwi r4, 0x0
-    beq lbl_fn_805B99AC_00000CCC
+    beq lbl_voice_tree_destroyRecursively_00000CCC
     mr r3, r28
-    bl fn_805B99AC
-lbl_fn_805B99AC_00000CCC:
+    bl voice_tree_destroyRecursively
+lbl_voice_tree_destroyRecursively_00000CCC:
     lwz r4, 0x4(r31)
     cmpwi r4, 0x0
-    beq lbl_fn_805B99AC_00000CE0
+    beq lbl_voice_tree_destroyRecursively_00000CE0
     mr r3, r28
-    bl fn_805B99AC
-lbl_fn_805B99AC_00000CE0:
+    bl voice_tree_destroyRecursively
+lbl_voice_tree_destroyRecursively_00000CE0:
     mr r3, r31
     bl dtor_80084684
-lbl_fn_805B99AC_00000CE8:
+lbl_voice_tree_destroyRecursively_00000CE8:
     lwz r31, 0x4(r30)
     cmpwi r31, 0x0
-    beq lbl_fn_805B99AC_00000D24
+    beq lbl_voice_tree_destroyRecursively_00000D24
     lwz r4, 0x0(r31)
     cmpwi r4, 0x0
-    beq lbl_fn_805B99AC_00000D08
+    beq lbl_voice_tree_destroyRecursively_00000D08
     mr r3, r28
-    bl fn_805B99AC
-lbl_fn_805B99AC_00000D08:
+    bl voice_tree_destroyRecursively
+lbl_voice_tree_destroyRecursively_00000D08:
     lwz r4, 0x4(r31)
     cmpwi r4, 0x0
-    beq lbl_fn_805B99AC_00000D1C
+    beq lbl_voice_tree_destroyRecursively_00000D1C
     mr r3, r28
-    bl fn_805B99AC
-lbl_fn_805B99AC_00000D1C:
+    bl voice_tree_destroyRecursively
+lbl_voice_tree_destroyRecursively_00000D1C:
     mr r3, r31
     bl dtor_80084684
-lbl_fn_805B99AC_00000D24:
+lbl_voice_tree_destroyRecursively_00000D24:
     mr r3, r30
     bl dtor_80084684
-lbl_fn_805B99AC_00000D2C:
+lbl_voice_tree_destroyRecursively_00000D2C:
     mr r3, r29
     bl dtor_80084684
     lwz r0, 0x24(r1)

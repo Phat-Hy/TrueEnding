@@ -32,7 +32,7 @@ extern void fn_8044D060(void);
 extern void fn_8044D104(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
-extern void fn_804A39EC(void);
+extern void atn_Task_scheduleCallback(void);
 extern void fn_804A3A68(void);
 extern void fn_804A5824(void);
 extern void dlc_findItemInCatalog(void);
@@ -179,7 +179,7 @@ asm void fn_8058B4A8(void)
     li r4, 0x1
     lfs f2, lbl_80888154
     li r5, 0x0
-    bl fn_804A39EC
+    bl atn_Task_scheduleCallback
     addis r5, r28, 0x2
     li r4, 0x0
     lwz r3, 0x5b6c(r5)
@@ -214,7 +214,7 @@ asm void fn_8058B4A8(void)
     ori r0, r0, 0x4
     stw r0, 0x38(r3)
     lwz r3, 0x5b78(r6)
-    bl fn_804A39EC
+    bl atn_Task_scheduleCallback
     mr r27, r28
     li r29, 0x0
 lbl_fn_8058B4A8_000001C4:

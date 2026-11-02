@@ -39,14 +39,14 @@ extern void fn_804A7EA4(void);
 extern void fn_805B6508(void);
 extern void fn_805B8DB8(void);
 extern void fn_805B983C(void);
-extern void fn_805B99AC(void);
+extern void voice_tree_destroyRecursively(void);
 extern void PSVECSquareMag(void);
 extern void fn_806077F0(void);
 extern void fn_806078A0(void);
 extern void fn_806078E0(void);
 extern void fn_806820D4(void);
 extern void strcmp(void);
-extern void fn_80683B54(void);
+extern void msl_atol(void);
 extern void atoi(void);
 extern u32 strlen(const char* str);
 
@@ -629,13 +629,13 @@ lbl_fn_805B6EB0_00000664:
     cmpwi r4, 0x0
     beq lbl_fn_805B6EB0_000006B4
     mr r3, r29
-    bl fn_805B99AC
+    bl voice_tree_destroyRecursively
 lbl_fn_805B6EB0_000006B4:
     lwz r4, 0x4(r26)
     cmpwi r4, 0x0
     beq lbl_fn_805B6EB0_000006C8
     mr r3, r29
-    bl fn_805B99AC
+    bl voice_tree_destroyRecursively
 lbl_fn_805B6EB0_000006C8:
     mr r3, r26
     bl dtor_80084684
@@ -647,13 +647,13 @@ lbl_fn_805B6EB0_000006D0:
     cmpwi r4, 0x0
     beq lbl_fn_805B6EB0_000006F0
     mr r3, r29
-    bl fn_805B99AC
+    bl voice_tree_destroyRecursively
 lbl_fn_805B6EB0_000006F0:
     lwz r4, 0x4(r26)
     cmpwi r4, 0x0
     beq lbl_fn_805B6EB0_00000704
     mr r3, r29
-    bl fn_805B99AC
+    bl voice_tree_destroyRecursively
 lbl_fn_805B6EB0_00000704:
     mr r3, r26
     bl dtor_80084684
@@ -671,13 +671,13 @@ lbl_fn_805B6EB0_00000714:
     cmpwi r4, 0x0
     beq lbl_fn_805B6EB0_00000740
     mr r3, r29
-    bl fn_805B99AC
+    bl voice_tree_destroyRecursively
 lbl_fn_805B6EB0_00000740:
     lwz r4, 0x4(r27)
     cmpwi r4, 0x0
     beq lbl_fn_805B6EB0_00000754
     mr r3, r29
-    bl fn_805B99AC
+    bl voice_tree_destroyRecursively
 lbl_fn_805B6EB0_00000754:
     mr r3, r27
     bl dtor_80084684
@@ -689,13 +689,13 @@ lbl_fn_805B6EB0_0000075C:
     cmpwi r4, 0x0
     beq lbl_fn_805B6EB0_0000077C
     mr r3, r29
-    bl fn_805B99AC
+    bl voice_tree_destroyRecursively
 lbl_fn_805B6EB0_0000077C:
     lwz r4, 0x4(r27)
     cmpwi r4, 0x0
     beq lbl_fn_805B6EB0_00000790
     mr r3, r29
-    bl fn_805B99AC
+    bl voice_tree_destroyRecursively
 lbl_fn_805B6EB0_00000790:
     mr r3, r27
     bl dtor_80084684
@@ -725,13 +725,13 @@ lbl_fn_805B6EB0_000007A8:
     cmpwi r4, 0x0
     beq lbl_fn_805B6EB0_000007F8
     mr r3, r29
-    bl fn_805B99AC
+    bl voice_tree_destroyRecursively
 lbl_fn_805B6EB0_000007F8:
     lwz r4, 0x4(r28)
     cmpwi r4, 0x0
     beq lbl_fn_805B6EB0_0000080C
     mr r3, r29
-    bl fn_805B99AC
+    bl voice_tree_destroyRecursively
 lbl_fn_805B6EB0_0000080C:
     mr r3, r28
     bl dtor_80084684
@@ -743,13 +743,13 @@ lbl_fn_805B6EB0_00000814:
     cmpwi r4, 0x0
     beq lbl_fn_805B6EB0_00000834
     mr r3, r29
-    bl fn_805B99AC
+    bl voice_tree_destroyRecursively
 lbl_fn_805B6EB0_00000834:
     lwz r4, 0x4(r28)
     cmpwi r4, 0x0
     beq lbl_fn_805B6EB0_00000848
     mr r3, r29
-    bl fn_805B99AC
+    bl voice_tree_destroyRecursively
 lbl_fn_805B6EB0_00000848:
     mr r3, r28
     bl dtor_80084684
@@ -767,13 +767,13 @@ lbl_fn_805B6EB0_00000858:
     cmpwi r4, 0x0
     beq lbl_fn_805B6EB0_00000884
     mr r3, r29
-    bl fn_805B99AC
+    bl voice_tree_destroyRecursively
 lbl_fn_805B6EB0_00000884:
     lwz r4, 0x4(r28)
     cmpwi r4, 0x0
     beq lbl_fn_805B6EB0_00000898
     mr r3, r29
-    bl fn_805B99AC
+    bl voice_tree_destroyRecursively
 lbl_fn_805B6EB0_00000898:
     mr r3, r28
     bl dtor_80084684
@@ -785,13 +785,13 @@ lbl_fn_805B6EB0_000008A0:
     cmpwi r4, 0x0
     beq lbl_fn_805B6EB0_000008C0
     mr r3, r29
-    bl fn_805B99AC
+    bl voice_tree_destroyRecursively
 lbl_fn_805B6EB0_000008C0:
     lwz r4, 0x4(r28)
     cmpwi r4, 0x0
     beq lbl_fn_805B6EB0_000008D4
     mr r3, r29
-    bl fn_805B99AC
+    bl voice_tree_destroyRecursively
 lbl_fn_805B6EB0_000008D4:
     mr r3, r28
     bl dtor_80084684
@@ -1614,7 +1614,7 @@ lbl_fn_805B7B28_00001424:
     stw r3, 0x13c(r27)
     addi r3, r1, 0x118
     bl talk_formatQuotedString
-    bl fn_80683B54
+    bl msl_atol
     frsp f0, f1
     stfs f0, 0x134(r27)
     b lbl_fn_805B7B28_000017E8
@@ -1626,17 +1626,17 @@ lbl_fn_805B7B28_00001470:
     bne lbl_fn_805B7B28_000014C4
     addi r3, r1, 0x118
     bl talk_formatQuotedString
-    bl fn_80683B54
+    bl msl_atol
     frsp f0, f1
     addi r3, r1, 0x118
     stfs f0, 0x140(r27)
     bl talk_formatQuotedString
-    bl fn_80683B54
+    bl msl_atol
     frsp f0, f1
     addi r3, r1, 0x118
     stfs f0, 0x144(r27)
     bl talk_formatQuotedString
-    bl fn_80683B54
+    bl msl_atol
     frsp f0, f1
     stfs f0, 0x148(r27)
     b lbl_fn_805B7B28_000017E8

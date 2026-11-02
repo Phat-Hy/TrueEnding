@@ -28,7 +28,7 @@ extern void fn_80112958(void);
 extern void fn_80112960(void);
 extern void fn_80113CCC(void);
 extern void fn_80114AA0(void);
-extern void fn_801156BC(void);
+extern void actor_getGlobalManager(void);
 extern void actor_getStreamPipe(void);
 extern void actor_calcSpawnTransform(void);
 extern void actor_spawnActorWithId(void);
@@ -1564,7 +1564,7 @@ lbl_fn_8052D46C_0000148C:
     mr r4, r3
     addi r3, r1, 0x17c
     bl vec3_assign
-    bl fn_801156BC
+    bl actor_getGlobalManager
     lwz r0, 0x121c(r31)
     cmpwi r0, 0x0
     beq lbl_fn_8052D46C_000014E4

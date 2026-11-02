@@ -37,7 +37,7 @@ extern void fn_800F833C(void);
 extern void fn_800F84D8(void);
 extern void fn_80112F54(void);
 extern void fn_80113CCC(void);
-extern void fn_801156BC(void);
+extern void actor_getGlobalManager(void);
 extern void fn_801162A4(void);
 extern void fn_80116E64(void);
 extern void fn_8012A1E0(void);
@@ -257,17 +257,17 @@ lbl_fn_80487490_00000170:
     stw r0, 0x1eac(r31)
     addi r4, r4, lbl_807C7028@l
     bl fn_804827CC
-    bl fn_801156BC
+    bl actor_getGlobalManager
     cmpwi r3, 0x0
     beq lbl_fn_80487490_000001E8
-    bl fn_801156BC
+    bl actor_getGlobalManager
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
     bl msg_formatWindowLayout
     fneg f0, f1
     stfs f0, 0x28(r1)
-    bl fn_801156BC
+    bl actor_getGlobalManager
     li r4, 0x0
     li r5, 0x1
     li r6, 0x0

@@ -61,7 +61,7 @@ extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_804A39EC(void);
+extern void atn_Task_scheduleCallback(void);
 extern void fn_804A3A68(void);
 extern void fn_804A4494(void);
 extern void PSMTXRotRad(void);
@@ -1533,7 +1533,7 @@ lbl_task_Library_destructor_0000132C:
     lfs f1, lbl_80886E88
     li r5, 0x0
     lfs f2, lbl_80886E8C
-    bl fn_804A39EC
+    bl atn_Task_scheduleCallback
     lwz r3, 0x50(r29)
     li r4, 0x1
     lfs f1, lbl_80886E88
@@ -1543,19 +1543,19 @@ lbl_task_Library_destructor_0000132C:
     ori r0, r0, 0x4
     stw r0, 0x38(r3)
     lwz r3, 0x54(r29)
-    bl fn_804A39EC
+    bl atn_Task_scheduleCallback
     lwz r3, 0x84(r29)
     li r4, 0x1
     lfs f1, lbl_80886E88
     li r5, 0x0
     lfs f2, lbl_80886E90
-    bl fn_804A39EC
+    bl atn_Task_scheduleCallback
     lwz r3, 0x88(r29)
     li r4, 0x1
     lfs f1, lbl_80886E88
     li r5, 0x0
     lfs f2, lbl_80886E90
-    bl fn_804A39EC
+    bl atn_Task_scheduleCallback
     lwz r3, 0x80(r29)
     li r4, 0x1
     lfs f1, lbl_80886E88

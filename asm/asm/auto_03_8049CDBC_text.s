@@ -7691,7 +7691,7 @@
 .endfn fn_804A3438
 
 # .text:0x6C30 | 0x804A39EC | size: 0x7C
-.fn fn_804A39EC, global
+.fn atn_Task_scheduleCallback, global
 /* 804A39EC 0049E04C  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 804A39F0 0049E050  7C 08 02 A6 */	mflr r0
 /* 804A39F4 0049E054  2C 03 00 00 */	cmpwi r3, 0x0
@@ -7724,7 +7724,7 @@
 /* 804A3A5C 0049E0BC  7C 08 03 A6 */	mtlr r0
 /* 804A3A60 0049E0C0  38 21 00 20 */	addi r1, r1, 0x20
 /* 804A3A64 0049E0C4  4E 80 00 20 */	blr
-.endfn fn_804A39EC
+.endfn atn_Task_scheduleCallback
 
 # .text:0x6CAC | 0x804A3A68 | size: 0x88
 .fn fn_804A3A68, global

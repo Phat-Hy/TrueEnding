@@ -2662,7 +2662,7 @@
 .endfn fn_801F5740
 
 # .text:0x2468 | 0x801F583C | size: 0x38C
-.fn fn_801F583C, global
+.fn param_table_setPropertyAngle, global
 /* 801F583C 001EFE9C  94 21 FF A0 */	stwu r1, -0x60(r1)
 /* 801F5840 001EFEA0  7C 08 02 A6 */	mflr r0
 /* 801F5844 001EFEA4  38 C0 00 02 */	li r6, 0x2
@@ -2910,10 +2910,10 @@
 /* 801F5BBC 001F021C  7C 08 03 A6 */	mtlr r0
 /* 801F5BC0 001F0220  38 21 00 60 */	addi r1, r1, 0x60
 /* 801F5BC4 001F0224  4E 80 00 20 */	blr
-.endfn fn_801F583C
+.endfn param_table_setPropertyAngle
 
 # .text:0x27F4 | 0x801F5BC8 | size: 0x2D4
-.fn fn_801F5BC8, global
+.fn param_table_setPropertyFloat, global
 /* 801F5BC8 001F0228  94 21 FF B0 */	stwu r1, -0x50(r1)
 /* 801F5BCC 001F022C  7C 08 02 A6 */	mflr r0
 /* 801F5BD0 001F0230  38 C0 00 03 */	li r6, 0x3
@@ -3110,7 +3110,7 @@
 /* 801F5E90 001F04F0  7C 08 03 A6 */	mtlr r0
 /* 801F5E94 001F04F4  38 21 00 50 */	addi r1, r1, 0x50
 /* 801F5E98 001F04F8  4E 80 00 20 */	blr
-.endfn fn_801F5BC8
+.endfn param_table_setPropertyFloat
 
 # .text:0x2AC8 | 0x801F5E9C | size: 0x21C
 .fn fn_801F5E9C, global

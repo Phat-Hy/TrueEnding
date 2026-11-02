@@ -227,9 +227,9 @@ void fn_8004A600(void);
 void fn_8004A660(void);
 void sound_traverseNodeTree(void);
 void fn_8004A7C4(void);
-void fn_8004A8FC(void);
+void sound_map_destroyRecursively(void);
 void fn_8004AA5C(void);
-void fn_8004ABDC(void);
+void sound_voice_tree_destroyRecursively(void);
 void fn_8004AD3C(void);
 void fn_8004AD9C(void);
 void fn_8004ADF4(void);
@@ -945,13 +945,13 @@ lbl_fn_800467E4_000008EC:
     cmpwi r4, 0x0
     beq lbl_fn_800467E4_0000093C
     mr r3, r29
-    bl fn_8004A8FC
+    bl sound_map_destroyRecursively
 lbl_fn_800467E4_0000093C:
     lwz r4, 0x4(r28)
     cmpwi r4, 0x0
     beq lbl_fn_800467E4_00000950
     mr r3, r29
-    bl fn_8004A8FC
+    bl sound_map_destroyRecursively
 lbl_fn_800467E4_00000950:
     mr r3, r28
     bl dtor_80084684
@@ -963,13 +963,13 @@ lbl_fn_800467E4_00000958:
     cmpwi r4, 0x0
     beq lbl_fn_800467E4_00000978
     mr r3, r29
-    bl fn_8004A8FC
+    bl sound_map_destroyRecursively
 lbl_fn_800467E4_00000978:
     lwz r4, 0x4(r28)
     cmpwi r4, 0x0
     beq lbl_fn_800467E4_0000098C
     mr r3, r29
-    bl fn_8004A8FC
+    bl sound_map_destroyRecursively
 lbl_fn_800467E4_0000098C:
     mr r3, r28
     bl dtor_80084684
@@ -987,13 +987,13 @@ lbl_fn_800467E4_0000099C:
     cmpwi r4, 0x0
     beq lbl_fn_800467E4_000009C8
     mr r3, r29
-    bl fn_8004A8FC
+    bl sound_map_destroyRecursively
 lbl_fn_800467E4_000009C8:
     lwz r4, 0x4(r28)
     cmpwi r4, 0x0
     beq lbl_fn_800467E4_000009DC
     mr r3, r29
-    bl fn_8004A8FC
+    bl sound_map_destroyRecursively
 lbl_fn_800467E4_000009DC:
     mr r3, r28
     bl dtor_80084684
@@ -1005,13 +1005,13 @@ lbl_fn_800467E4_000009E4:
     cmpwi r4, 0x0
     beq lbl_fn_800467E4_00000A04
     mr r3, r29
-    bl fn_8004A8FC
+    bl sound_map_destroyRecursively
 lbl_fn_800467E4_00000A04:
     lwz r4, 0x4(r28)
     cmpwi r4, 0x0
     beq lbl_fn_800467E4_00000A18
     mr r3, r29
-    bl fn_8004A8FC
+    bl sound_map_destroyRecursively
 lbl_fn_800467E4_00000A18:
     mr r3, r28
     bl dtor_80084684
@@ -1041,13 +1041,13 @@ lbl_fn_800467E4_00000A30:
     cmpwi r4, 0x0
     beq lbl_fn_800467E4_00000A80
     mr r3, r29
-    bl fn_8004ABDC
+    bl sound_voice_tree_destroyRecursively
 lbl_fn_800467E4_00000A80:
     lwz r4, 0x4(r28)
     cmpwi r4, 0x0
     beq lbl_fn_800467E4_00000A94
     mr r3, r29
-    bl fn_8004ABDC
+    bl sound_voice_tree_destroyRecursively
 lbl_fn_800467E4_00000A94:
     mr r3, r28
     bl dtor_80084684
@@ -1059,13 +1059,13 @@ lbl_fn_800467E4_00000A9C:
     cmpwi r4, 0x0
     beq lbl_fn_800467E4_00000ABC
     mr r3, r29
-    bl fn_8004ABDC
+    bl sound_voice_tree_destroyRecursively
 lbl_fn_800467E4_00000ABC:
     lwz r4, 0x4(r28)
     cmpwi r4, 0x0
     beq lbl_fn_800467E4_00000AD0
     mr r3, r29
-    bl fn_8004ABDC
+    bl sound_voice_tree_destroyRecursively
 lbl_fn_800467E4_00000AD0:
     mr r3, r28
     bl dtor_80084684
@@ -1083,13 +1083,13 @@ lbl_fn_800467E4_00000AE0:
     cmpwi r4, 0x0
     beq lbl_fn_800467E4_00000B0C
     mr r3, r29
-    bl fn_8004ABDC
+    bl sound_voice_tree_destroyRecursively
 lbl_fn_800467E4_00000B0C:
     lwz r4, 0x4(r28)
     cmpwi r4, 0x0
     beq lbl_fn_800467E4_00000B20
     mr r3, r29
-    bl fn_8004ABDC
+    bl sound_voice_tree_destroyRecursively
 lbl_fn_800467E4_00000B20:
     mr r3, r28
     bl dtor_80084684
@@ -1101,13 +1101,13 @@ lbl_fn_800467E4_00000B28:
     cmpwi r4, 0x0
     beq lbl_fn_800467E4_00000B48
     mr r3, r29
-    bl fn_8004ABDC
+    bl sound_voice_tree_destroyRecursively
 lbl_fn_800467E4_00000B48:
     lwz r4, 0x4(r28)
     cmpwi r4, 0x0
     beq lbl_fn_800467E4_00000B5C
     mr r3, r29
-    bl fn_8004ABDC
+    bl sound_voice_tree_destroyRecursively
 lbl_fn_800467E4_00000B5C:
     mr r3, r28
     bl dtor_80084684
@@ -1833,13 +1833,13 @@ lbl_fn_80047628_0000154C:
     cmpwi r4, 0x0
     beq lbl_fn_80047628_00001584
     addi r3, r31, 0x8d0
-    bl fn_8004A8FC
+    bl sound_map_destroyRecursively
 lbl_fn_80047628_00001584:
     lwz r4, 0x4(r28)
     cmpwi r4, 0x0
     beq lbl_fn_80047628_00001598
     addi r3, r31, 0x8d0
-    bl fn_8004A8FC
+    bl sound_map_destroyRecursively
 lbl_fn_80047628_00001598:
     mr r3, r28
     bl dtor_80084684
@@ -1851,13 +1851,13 @@ lbl_fn_80047628_000015A0:
     cmpwi r4, 0x0
     beq lbl_fn_80047628_000015C0
     addi r3, r31, 0x8d0
-    bl fn_8004A8FC
+    bl sound_map_destroyRecursively
 lbl_fn_80047628_000015C0:
     lwz r4, 0x4(r28)
     cmpwi r4, 0x0
     beq lbl_fn_80047628_000015D4
     addi r3, r31, 0x8d0
-    bl fn_8004A8FC
+    bl sound_map_destroyRecursively
 lbl_fn_80047628_000015D4:
     mr r3, r28
     bl dtor_80084684
@@ -1875,13 +1875,13 @@ lbl_fn_80047628_000015E4:
     cmpwi r4, 0x0
     beq lbl_fn_80047628_00001610
     addi r3, r31, 0x8d0
-    bl fn_8004A8FC
+    bl sound_map_destroyRecursively
 lbl_fn_80047628_00001610:
     lwz r4, 0x4(r29)
     cmpwi r4, 0x0
     beq lbl_fn_80047628_00001624
     addi r3, r31, 0x8d0
-    bl fn_8004A8FC
+    bl sound_map_destroyRecursively
 lbl_fn_80047628_00001624:
     mr r3, r29
     bl dtor_80084684
@@ -1893,13 +1893,13 @@ lbl_fn_80047628_0000162C:
     cmpwi r4, 0x0
     beq lbl_fn_80047628_0000164C
     addi r3, r31, 0x8d0
-    bl fn_8004A8FC
+    bl sound_map_destroyRecursively
 lbl_fn_80047628_0000164C:
     lwz r4, 0x4(r29)
     cmpwi r4, 0x0
     beq lbl_fn_80047628_00001660
     addi r3, r31, 0x8d0
-    bl fn_8004A8FC
+    bl sound_map_destroyRecursively
 lbl_fn_80047628_00001660:
     mr r3, r29
     bl dtor_80084684
@@ -4899,13 +4899,13 @@ asm void fn_8004A03C(void)
     cmpwi r4, 0x0
     beq lbl_fn_8004A03C_00003EA0
     addi r3, r28, 0x8ac
-    bl fn_8004ABDC
+    bl sound_voice_tree_destroyRecursively
 lbl_fn_8004A03C_00003EA0:
     lwz r4, 0x4(r29)
     cmpwi r4, 0x0
     beq lbl_fn_8004A03C_00003EB4
     addi r3, r28, 0x8ac
-    bl fn_8004ABDC
+    bl sound_voice_tree_destroyRecursively
 lbl_fn_8004A03C_00003EB4:
     mr r3, r29
     bl dtor_80084684
@@ -4917,13 +4917,13 @@ lbl_fn_8004A03C_00003EBC:
     cmpwi r4, 0x0
     beq lbl_fn_8004A03C_00003EDC
     addi r3, r28, 0x8ac
-    bl fn_8004ABDC
+    bl sound_voice_tree_destroyRecursively
 lbl_fn_8004A03C_00003EDC:
     lwz r4, 0x4(r29)
     cmpwi r4, 0x0
     beq lbl_fn_8004A03C_00003EF0
     addi r3, r28, 0x8ac
-    bl fn_8004ABDC
+    bl sound_voice_tree_destroyRecursively
 lbl_fn_8004A03C_00003EF0:
     mr r3, r29
     bl dtor_80084684
@@ -4941,13 +4941,13 @@ lbl_fn_8004A03C_00003F00:
     cmpwi r4, 0x0
     beq lbl_fn_8004A03C_00003F2C
     addi r3, r28, 0x8ac
-    bl fn_8004ABDC
+    bl sound_voice_tree_destroyRecursively
 lbl_fn_8004A03C_00003F2C:
     lwz r4, 0x4(r30)
     cmpwi r4, 0x0
     beq lbl_fn_8004A03C_00003F40
     addi r3, r28, 0x8ac
-    bl fn_8004ABDC
+    bl sound_voice_tree_destroyRecursively
 lbl_fn_8004A03C_00003F40:
     mr r3, r30
     bl dtor_80084684
@@ -4959,13 +4959,13 @@ lbl_fn_8004A03C_00003F48:
     cmpwi r4, 0x0
     beq lbl_fn_8004A03C_00003F68
     addi r3, r28, 0x8ac
-    bl fn_8004ABDC
+    bl sound_voice_tree_destroyRecursively
 lbl_fn_8004A03C_00003F68:
     lwz r4, 0x4(r30)
     cmpwi r4, 0x0
     beq lbl_fn_8004A03C_00003F7C
     addi r3, r28, 0x8ac
-    bl fn_8004ABDC
+    bl sound_voice_tree_destroyRecursively
 lbl_fn_8004A03C_00003F7C:
     mr r3, r30
     bl dtor_80084684
@@ -5534,7 +5534,7 @@ lbl_fn_8004A7C4_000046E8:
     blr
 }
 
-asm void fn_8004A8FC(void)
+asm void sound_map_destroyRecursively(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -5548,87 +5548,87 @@ asm void fn_8004A8FC(void)
     mr r28, r3
     lwz r31, 0x0(r4)
     cmpwi r31, 0x0
-    beq lbl_fn_8004A8FC_000047AC
+    beq lbl_sound_map_destroyRecursively_000047AC
     lwz r30, 0x0(r31)
     cmpwi r30, 0x0
-    beq lbl_fn_8004A8FC_00004768
+    beq lbl_sound_map_destroyRecursively_00004768
     lwz r4, 0x0(r30)
     cmpwi r4, 0x0
-    beq lbl_fn_8004A8FC_0000474C
-    bl fn_8004A8FC
-lbl_fn_8004A8FC_0000474C:
+    beq lbl_sound_map_destroyRecursively_0000474C
+    bl sound_map_destroyRecursively
+lbl_sound_map_destroyRecursively_0000474C:
     lwz r4, 0x4(r30)
     cmpwi r4, 0x0
-    beq lbl_fn_8004A8FC_00004760
+    beq lbl_sound_map_destroyRecursively_00004760
     mr r3, r28
-    bl fn_8004A8FC
-lbl_fn_8004A8FC_00004760:
+    bl sound_map_destroyRecursively
+lbl_sound_map_destroyRecursively_00004760:
     mr r3, r30
     bl dtor_80084684
-lbl_fn_8004A8FC_00004768:
+lbl_sound_map_destroyRecursively_00004768:
     lwz r30, 0x4(r31)
     cmpwi r30, 0x0
-    beq lbl_fn_8004A8FC_000047A4
+    beq lbl_sound_map_destroyRecursively_000047A4
     lwz r4, 0x0(r30)
     cmpwi r4, 0x0
-    beq lbl_fn_8004A8FC_00004788
+    beq lbl_sound_map_destroyRecursively_00004788
     mr r3, r28
-    bl fn_8004A8FC
-lbl_fn_8004A8FC_00004788:
+    bl sound_map_destroyRecursively
+lbl_sound_map_destroyRecursively_00004788:
     lwz r4, 0x4(r30)
     cmpwi r4, 0x0
-    beq lbl_fn_8004A8FC_0000479C
+    beq lbl_sound_map_destroyRecursively_0000479C
     mr r3, r28
-    bl fn_8004A8FC
-lbl_fn_8004A8FC_0000479C:
+    bl sound_map_destroyRecursively
+lbl_sound_map_destroyRecursively_0000479C:
     mr r3, r30
     bl dtor_80084684
-lbl_fn_8004A8FC_000047A4:
+lbl_sound_map_destroyRecursively_000047A4:
     mr r3, r31
     bl dtor_80084684
-lbl_fn_8004A8FC_000047AC:
+lbl_sound_map_destroyRecursively_000047AC:
     lwz r30, 0x4(r29)
     cmpwi r30, 0x0
-    beq lbl_fn_8004A8FC_00004838
+    beq lbl_sound_map_destroyRecursively_00004838
     lwz r31, 0x0(r30)
     cmpwi r31, 0x0
-    beq lbl_fn_8004A8FC_000047F4
+    beq lbl_sound_map_destroyRecursively_000047F4
     lwz r4, 0x0(r31)
     cmpwi r4, 0x0
-    beq lbl_fn_8004A8FC_000047D8
+    beq lbl_sound_map_destroyRecursively_000047D8
     mr r3, r28
-    bl fn_8004A8FC
-lbl_fn_8004A8FC_000047D8:
+    bl sound_map_destroyRecursively
+lbl_sound_map_destroyRecursively_000047D8:
     lwz r4, 0x4(r31)
     cmpwi r4, 0x0
-    beq lbl_fn_8004A8FC_000047EC
+    beq lbl_sound_map_destroyRecursively_000047EC
     mr r3, r28
-    bl fn_8004A8FC
-lbl_fn_8004A8FC_000047EC:
+    bl sound_map_destroyRecursively
+lbl_sound_map_destroyRecursively_000047EC:
     mr r3, r31
     bl dtor_80084684
-lbl_fn_8004A8FC_000047F4:
+lbl_sound_map_destroyRecursively_000047F4:
     lwz r31, 0x4(r30)
     cmpwi r31, 0x0
-    beq lbl_fn_8004A8FC_00004830
+    beq lbl_sound_map_destroyRecursively_00004830
     lwz r4, 0x0(r31)
     cmpwi r4, 0x0
-    beq lbl_fn_8004A8FC_00004814
+    beq lbl_sound_map_destroyRecursively_00004814
     mr r3, r28
-    bl fn_8004A8FC
-lbl_fn_8004A8FC_00004814:
+    bl sound_map_destroyRecursively
+lbl_sound_map_destroyRecursively_00004814:
     lwz r4, 0x4(r31)
     cmpwi r4, 0x0
-    beq lbl_fn_8004A8FC_00004828
+    beq lbl_sound_map_destroyRecursively_00004828
     mr r3, r28
-    bl fn_8004A8FC
-lbl_fn_8004A8FC_00004828:
+    bl sound_map_destroyRecursively
+lbl_sound_map_destroyRecursively_00004828:
     mr r3, r31
     bl dtor_80084684
-lbl_fn_8004A8FC_00004830:
+lbl_sound_map_destroyRecursively_00004830:
     mr r3, r30
     bl dtor_80084684
-lbl_fn_8004A8FC_00004838:
+lbl_sound_map_destroyRecursively_00004838:
     mr r3, r29
     bl dtor_80084684
     lwz r0, 0x24(r1)
@@ -5750,7 +5750,7 @@ lbl_fn_8004AA5C_000049C4:
     blr
 }
 
-asm void fn_8004ABDC(void)
+asm void sound_voice_tree_destroyRecursively(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -5764,87 +5764,87 @@ asm void fn_8004ABDC(void)
     mr r28, r3
     lwz r31, 0x0(r4)
     cmpwi r31, 0x0
-    beq lbl_fn_8004ABDC_00004A8C
+    beq lbl_sound_voice_tree_destroyRecursively_00004A8C
     lwz r30, 0x0(r31)
     cmpwi r30, 0x0
-    beq lbl_fn_8004ABDC_00004A48
+    beq lbl_sound_voice_tree_destroyRecursively_00004A48
     lwz r4, 0x0(r30)
     cmpwi r4, 0x0
-    beq lbl_fn_8004ABDC_00004A2C
-    bl fn_8004ABDC
-lbl_fn_8004ABDC_00004A2C:
+    beq lbl_sound_voice_tree_destroyRecursively_00004A2C
+    bl sound_voice_tree_destroyRecursively
+lbl_sound_voice_tree_destroyRecursively_00004A2C:
     lwz r4, 0x4(r30)
     cmpwi r4, 0x0
-    beq lbl_fn_8004ABDC_00004A40
+    beq lbl_sound_voice_tree_destroyRecursively_00004A40
     mr r3, r28
-    bl fn_8004ABDC
-lbl_fn_8004ABDC_00004A40:
+    bl sound_voice_tree_destroyRecursively
+lbl_sound_voice_tree_destroyRecursively_00004A40:
     mr r3, r30
     bl dtor_80084684
-lbl_fn_8004ABDC_00004A48:
+lbl_sound_voice_tree_destroyRecursively_00004A48:
     lwz r30, 0x4(r31)
     cmpwi r30, 0x0
-    beq lbl_fn_8004ABDC_00004A84
+    beq lbl_sound_voice_tree_destroyRecursively_00004A84
     lwz r4, 0x0(r30)
     cmpwi r4, 0x0
-    beq lbl_fn_8004ABDC_00004A68
+    beq lbl_sound_voice_tree_destroyRecursively_00004A68
     mr r3, r28
-    bl fn_8004ABDC
-lbl_fn_8004ABDC_00004A68:
+    bl sound_voice_tree_destroyRecursively
+lbl_sound_voice_tree_destroyRecursively_00004A68:
     lwz r4, 0x4(r30)
     cmpwi r4, 0x0
-    beq lbl_fn_8004ABDC_00004A7C
+    beq lbl_sound_voice_tree_destroyRecursively_00004A7C
     mr r3, r28
-    bl fn_8004ABDC
-lbl_fn_8004ABDC_00004A7C:
+    bl sound_voice_tree_destroyRecursively
+lbl_sound_voice_tree_destroyRecursively_00004A7C:
     mr r3, r30
     bl dtor_80084684
-lbl_fn_8004ABDC_00004A84:
+lbl_sound_voice_tree_destroyRecursively_00004A84:
     mr r3, r31
     bl dtor_80084684
-lbl_fn_8004ABDC_00004A8C:
+lbl_sound_voice_tree_destroyRecursively_00004A8C:
     lwz r30, 0x4(r29)
     cmpwi r30, 0x0
-    beq lbl_fn_8004ABDC_00004B18
+    beq lbl_sound_voice_tree_destroyRecursively_00004B18
     lwz r31, 0x0(r30)
     cmpwi r31, 0x0
-    beq lbl_fn_8004ABDC_00004AD4
+    beq lbl_sound_voice_tree_destroyRecursively_00004AD4
     lwz r4, 0x0(r31)
     cmpwi r4, 0x0
-    beq lbl_fn_8004ABDC_00004AB8
+    beq lbl_sound_voice_tree_destroyRecursively_00004AB8
     mr r3, r28
-    bl fn_8004ABDC
-lbl_fn_8004ABDC_00004AB8:
+    bl sound_voice_tree_destroyRecursively
+lbl_sound_voice_tree_destroyRecursively_00004AB8:
     lwz r4, 0x4(r31)
     cmpwi r4, 0x0
-    beq lbl_fn_8004ABDC_00004ACC
+    beq lbl_sound_voice_tree_destroyRecursively_00004ACC
     mr r3, r28
-    bl fn_8004ABDC
-lbl_fn_8004ABDC_00004ACC:
+    bl sound_voice_tree_destroyRecursively
+lbl_sound_voice_tree_destroyRecursively_00004ACC:
     mr r3, r31
     bl dtor_80084684
-lbl_fn_8004ABDC_00004AD4:
+lbl_sound_voice_tree_destroyRecursively_00004AD4:
     lwz r31, 0x4(r30)
     cmpwi r31, 0x0
-    beq lbl_fn_8004ABDC_00004B10
+    beq lbl_sound_voice_tree_destroyRecursively_00004B10
     lwz r4, 0x0(r31)
     cmpwi r4, 0x0
-    beq lbl_fn_8004ABDC_00004AF4
+    beq lbl_sound_voice_tree_destroyRecursively_00004AF4
     mr r3, r28
-    bl fn_8004ABDC
-lbl_fn_8004ABDC_00004AF4:
+    bl sound_voice_tree_destroyRecursively
+lbl_sound_voice_tree_destroyRecursively_00004AF4:
     lwz r4, 0x4(r31)
     cmpwi r4, 0x0
-    beq lbl_fn_8004ABDC_00004B08
+    beq lbl_sound_voice_tree_destroyRecursively_00004B08
     mr r3, r28
-    bl fn_8004ABDC
-lbl_fn_8004ABDC_00004B08:
+    bl sound_voice_tree_destroyRecursively
+lbl_sound_voice_tree_destroyRecursively_00004B08:
     mr r3, r31
     bl dtor_80084684
-lbl_fn_8004ABDC_00004B10:
+lbl_sound_voice_tree_destroyRecursively_00004B10:
     mr r3, r30
     bl dtor_80084684
-lbl_fn_8004ABDC_00004B18:
+lbl_sound_voice_tree_destroyRecursively_00004B18:
     mr r3, r29
     bl dtor_80084684
     lwz r0, 0x24(r1)

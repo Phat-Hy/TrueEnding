@@ -54,7 +54,7 @@ extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_getName(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_804A39EC(void);
+extern void atn_Task_scheduleCallback(void);
 extern void fn_804A4930(void);
 extern void fn_804A55FC(void);
 extern void printf(void);
@@ -1072,7 +1072,7 @@ lbl_task_Book_destructor_00000D44:
     lfs f1, lbl_80886E88
     li r5, 0x0
     lfs f2, lbl_80886E8C
-    bl fn_804A39EC
+    bl atn_Task_scheduleCallback
     lwz r4, 0x50(r31)
     lis r3, lbl_80755394@ha
     addi r3, r3, lbl_80755394@l
@@ -1095,7 +1095,7 @@ lbl_task_Book_destructor_00000DC0:
     lfs f1, lbl_80886E88
     li r5, 0x0
     lfs f2, lbl_80886E8C
-    bl fn_804A39EC
+    bl atn_Task_scheduleCallback
     lwz r3, 0x54(r30)
     li r4, 0x1
     lfs f1, lbl_80886E88
@@ -1105,7 +1105,7 @@ lbl_task_Book_destructor_00000DC0:
     ori r0, r0, 0x4
     stw r0, 0x38(r3)
     lwz r3, 0x60(r30)
-    bl fn_804A39EC
+    bl atn_Task_scheduleCallback
     lwz r3, 0x60(r30)
     addi r29, r29, 0x1
     cmpwi r29, 0x3

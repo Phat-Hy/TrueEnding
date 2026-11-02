@@ -10,7 +10,7 @@ extern void _savegpr_25(void);
 extern void _savegpr_26(void);
 extern void memcmp(void);
 extern void strncmp(void);
-extern void fn_80683B54(void);
+extern void msl_atol(void);
 extern void atoi(void);
 extern void net_pollActiveSockets(void);
 extern void fn_806D7350(void);
@@ -1506,7 +1506,7 @@ lbl_fn_806E0DE0_000013E4:
     b lbl_fn_806E0DE0_00001420
 lbl_fn_806E0DE0_00001410:
     addi r3, r1, 0x100
-    bl fn_80683B54
+    bl msl_atol
     frsp f0, f1
     stfs f0, 0x1bc(r1)
 lbl_fn_806E0DE0_00001420:
@@ -1523,7 +1523,7 @@ lbl_fn_806E0DE0_00001420:
     b lbl_fn_806E0DE0_0000145C
 lbl_fn_806E0DE0_0000144C:
     addi r3, r1, 0x100
-    bl fn_80683B54
+    bl msl_atol
     frsp f0, f1
     stfs f0, 0x1c0(r1)
 lbl_fn_806E0DE0_0000145C:

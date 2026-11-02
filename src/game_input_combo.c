@@ -56,7 +56,7 @@ extern void PSVECNormalize(void);
 extern void printf(void);
 extern void strcmp(void);
 extern void strncmp(void);
-extern void fn_80683B54(void);
+extern void msl_atol(void);
 extern void atoi(void);
 extern void abort(void);
 extern void std_atan2(void);
@@ -1853,17 +1853,17 @@ lbl_fn_802EC9A8_000018D4:
     bne lbl_fn_802EC9A8_00001928
     addi r3, r1, 0x48
     bl talk_parseQuotedString
-    bl fn_80683B54
+    bl msl_atol
     frsp f0, f1
     addi r3, r1, 0x48
     stfs f0, 0x15d8(r15)
     bl talk_parseQuotedString
-    bl fn_80683B54
+    bl msl_atol
     frsp f0, f1
     addi r3, r1, 0x48
     stfs f0, 0x15dc(r15)
     bl talk_parseQuotedString
-    bl fn_80683B54
+    bl msl_atol
     frsp f0, f1
     stfs f0, 0x15e0(r15)
     b lbl_fn_802EC9A8_00001B64
@@ -1875,7 +1875,7 @@ lbl_fn_802EC9A8_00001928:
     bne lbl_fn_802EC9A8_00001954
     addi r3, r1, 0x48
     bl talk_parseQuotedString
-    bl fn_80683B54
+    bl msl_atol
     frsp f0, f1
     stfs f0, 0x15f8(r15)
     b lbl_fn_802EC9A8_00001B64
@@ -1909,7 +1909,7 @@ lbl_fn_802EC9A8_000019A4:
     bne lbl_fn_802EC9A8_000019D0
     addi r3, r1, 0x48
     bl talk_parseQuotedString
-    bl fn_80683B54
+    bl msl_atol
     frsp f0, f1
     stfs f0, 0x15f0(r15)
     b lbl_fn_802EC9A8_00001B64
@@ -1921,7 +1921,7 @@ lbl_fn_802EC9A8_000019D0:
     bne lbl_fn_802EC9A8_000019FC
     addi r3, r1, 0x48
     bl talk_parseQuotedString
-    bl fn_80683B54
+    bl msl_atol
     frsp f0, f1
     stfs f0, 0x15f4(r15)
     b lbl_fn_802EC9A8_00001B64

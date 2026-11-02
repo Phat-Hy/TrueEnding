@@ -169164,7 +169164,7 @@
 .endfn fn_80682830
 
 # .text:0x8D4F4 | 0x80683B54 | size: 0x5C
-.fn fn_80683B54, global
+.fn msl_atol, global
 /* 80683B54 0067E1B4  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 80683B58 0067E1B8  7C 08 02 A6 */	mflr r0
 /* 80683B5C 0067E1BC  3C 80 80 68 */	lis r4, fn_8068204C@ha
@@ -169189,7 +169189,7 @@
 /* 80683BA4 0067E204  7C 08 03 A6 */	mtlr r0
 /* 80683BA8 0067E208  38 21 00 20 */	addi r1, r1, 0x20
 /* 80683BAC 0067E20C  4E 80 00 20 */	blr
-.endfn fn_80683B54
+.endfn msl_atol
 
 # .text:0x8D550 | 0x80683BB0 | size: 0x414
 .fn fn_80683BB0, global

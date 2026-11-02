@@ -106,7 +106,7 @@ void fn_804A2FBC(void);
 void fn_804A313C(void);
 void fn_804A3228(void);
 void fn_804A3438(void);
-void fn_804A39EC(void);
+void atn_Task_scheduleCallback(void);
 void fn_804A3A68(void);
 
 asm void fn_804A2078(void)
@@ -1950,7 +1950,7 @@ lbl_fn_804A3438_00001938:
     blr
 }
 
-asm void fn_804A39EC(void)
+asm void atn_Task_scheduleCallback(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -1965,7 +1965,7 @@ asm void fn_804A39EC(void)
     mr r31, r5
     stw r30, 0x8(r1)
     mr r30, r3
-    beq lbl_fn_804A39EC_000019D0
+    beq lbl_atn_Task_scheduleCallback_000019D0
     li r4, 0x0
     bl atn_Task_setActive
     lwz r0, 0xfc(r30)
@@ -1976,7 +1976,7 @@ asm void fn_804A39EC(void)
     stfs f31, 0x104(r30)
     stfs f30, 0x100(r30)
     stw r3, 0xe4(r30)
-lbl_fn_804A39EC_000019D0:
+lbl_atn_Task_scheduleCallback_000019D0:
     lwz r0, 0x24(r1)
     lfd f31, 0x18(r1)
     lfd f30, 0x10(r1)

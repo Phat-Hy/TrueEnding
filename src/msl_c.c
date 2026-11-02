@@ -163,7 +163,7 @@ void fn_806825FC(void);
 void strtok(void);
 void strstr(void);
 void fn_80682830(void);
-void fn_80683B54(void);
+void msl_atol(void);
 void fn_80683BB0(void);
 void fn_80683FC4(void);
 void fn_8068446C(void);
@@ -10312,7 +10312,7 @@ lbl_fn_80682830_000086D0:
     blr
 }
 
-asm void fn_80683B54(void)
+asm void msl_atol(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -10331,10 +10331,10 @@ asm void fn_80683B54(void)
     bl fn_80682830
     lwz r0, 0xc(r1)
     cmpwi r0, 0x0
-    beq lbl_fn_80683B54_00008734
+    beq lbl_msl_atol_00008734
     li r0, 0x22
     stw r0, lbl_80880348
-lbl_fn_80683B54_00008734:
+lbl_msl_atol_00008734:
     lwz r0, 0x24(r1)
     mtlr r0
     addi r1, r1, 0x20

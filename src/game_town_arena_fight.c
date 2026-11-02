@@ -45,7 +45,7 @@ extern void fn_8010D320(void);
 extern void fn_8010F6FC(void);
 extern void phys_scaleGravity(void);
 extern void fn_80113CCC(void);
-extern void fn_801156BC(void);
+extern void actor_getGlobalManager(void);
 extern void actor_getStreamPipe(void);
 extern void vec3_sqMag(void);
 extern void fn_80116BAC(void);
@@ -132,7 +132,7 @@ extern void fn_803D2148(void);
 extern void fn_803D215C(void);
 extern void fn_803D218C(void);
 extern void fn_803D2A54(void);
-extern void fn_803D2A60(void);
+extern void town_entity_resetTimer(void);
 extern void fn_803D6DE4(void);
 extern void fn_803D6DF4(void);
 extern void fn_803D6E1C(void);
@@ -321,7 +321,7 @@ asm void fn_803D2A6C(void)
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_0000009C
     lwz r3, 0x68(r24)
-    bl fn_803D2A60
+    bl town_entity_resetTimer
 lbl_fn_803D2A6C_0000009C:
     lwz r3, 0x6c(r24)
     cmpwi r3, 0x0
@@ -330,14 +330,14 @@ lbl_fn_803D2A6C_0000009C:
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_000000BC
     lwz r3, 0x6c(r24)
-    bl fn_803D2A60
+    bl town_entity_resetTimer
 lbl_fn_803D2A6C_000000BC:
     lwz r3, 0x70(r24)
     bl town_entity_isActive
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_000000D4
     lwz r3, 0x70(r24)
-    bl fn_803D2A60
+    bl town_entity_resetTimer
 lbl_fn_803D2A6C_000000D4:
     lwz r3, 0x5c(r24)
     bl script_setTaskTerminated
@@ -372,7 +372,7 @@ lbl_fn_803D2A6C_00000138:
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00000150
     lwz r3, 0xc8(r21)
-    bl fn_803D2A60
+    bl town_entity_resetTimer
 lbl_fn_803D2A6C_00000150:
     lwz r3, 0xcc(r21)
     cmpwi r3, 0x0
@@ -381,14 +381,14 @@ lbl_fn_803D2A6C_00000150:
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00000170
     lwz r3, 0xcc(r21)
-    bl fn_803D2A60
+    bl town_entity_resetTimer
 lbl_fn_803D2A6C_00000170:
     lwz r3, 0xd0(r21)
     bl town_entity_isActive
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00000188
     lwz r3, 0xd0(r21)
-    bl fn_803D2A60
+    bl town_entity_resetTimer
 lbl_fn_803D2A6C_00000188:
     lwz r3, 0xbc(r21)
     bl script_setTaskTerminated
@@ -456,7 +456,7 @@ lbl_fn_803D2A6C_00000264:
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_0000027C
     lwz r3, 0x6fc(r21)
-    bl fn_803D2A60
+    bl town_entity_resetTimer
 lbl_fn_803D2A6C_0000027C:
     lwz r3, 0x6fc(r21)
     bl script_setTaskTerminated
@@ -484,7 +484,7 @@ lbl_fn_803D2A6C_000002CC:
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_000002E4
     lwz r3, 0x8a0(r21)
-    bl fn_803D2A60
+    bl town_entity_resetTimer
 lbl_fn_803D2A6C_000002E4:
     lwz r3, 0x8a0(r21)
     bl script_setTaskTerminated
@@ -569,7 +569,7 @@ lbl_fn_803D2A6C_000003FC:
     li r19, 0x0
 lbl_fn_803D2A6C_0000040C:
     lwz r3, 0x84c(r21)
-    bl fn_803D2A60
+    bl town_entity_resetTimer
     lwz r3, 0x84c(r21)
     bl script_setTaskTerminated
     addi r19, r19, 0x1
@@ -582,7 +582,7 @@ lbl_fn_803D2A6C_0000040C:
     li r19, 0x0
 lbl_fn_803D2A6C_0000043C:
     lwz r3, 0x878(r21)
-    bl fn_803D2A60
+    bl town_entity_resetTimer
     lwz r3, 0x878(r21)
     bl script_setTaskTerminated
     addi r19, r19, 0x1
@@ -2146,7 +2146,7 @@ lbl_fn_803D2A6C_00001ADC:
     slwi r0, r19, 2
     add r21, r20, r0
     lwz r3, 0x318(r21)
-    bl fn_803D2A60
+    bl town_entity_resetTimer
     bl fn_803D70A0
     addi r4, r19, 0xe3
     bl fn_803D7084
@@ -2603,7 +2603,7 @@ lbl_fn_803D2A6C_00002194:
     fmr f3, f1
     fmr f4, f1
     bl fn_803D6FEC
-    bl fn_801156BC
+    bl actor_getGlobalManager
     li r4, 0x0
     bl msg_isWindowActive
     addi r3, r1, 0x580
@@ -2875,7 +2875,7 @@ lbl_fn_803D2A6C_00002544:
 lbl_fn_803D2A6C_000025A8:
     mr r3, r26
     bl perf_getMetricValue
-    bl fn_803D2A60
+    bl town_entity_resetTimer
     b lbl_fn_803D2A6C_000027AC
 lbl_fn_803D2A6C_000025B8:
     mr r3, r26
@@ -2892,7 +2892,7 @@ lbl_fn_803D2A6C_000025DC:
     bl gate_clearActiveFlag
     mr r3, r27
     bl perf_getMetricValue
-    bl fn_803D2A60
+    bl town_entity_resetTimer
     b lbl_fn_803D2A6C_000027AC
 lbl_fn_803D2A6C_000025F4:
     lwz r0, 0x14(r31)
@@ -2932,7 +2932,7 @@ lbl_fn_803D2A6C_0000264C:
 lbl_fn_803D2A6C_00002678:
     mr r3, r27
     bl perf_getMetricValue
-    bl fn_803D2A60
+    bl town_entity_resetTimer
     b lbl_fn_803D2A6C_000027AC
 lbl_fn_803D2A6C_00002688:
     lwz r0, 0x0(r31)
@@ -2945,7 +2945,7 @@ lbl_fn_803D2A6C_00002688:
     ble lbl_fn_803D2A6C_000026B4
     mr r3, r26
     bl perf_getMetricValue
-    bl fn_803D2A60
+    bl town_entity_resetTimer
 lbl_fn_803D2A6C_000026B4:
     addi r3, r24, 0xc38
     bl fn_80372574
@@ -3202,28 +3202,28 @@ lbl_fn_803D2A6C_000029B8:
 lbl_fn_803D2A6C_00002A6C:
     lwz r3, 0xb38(r30)
     bl perf_getMetricValue
-    bl fn_803D2A60
+    bl town_entity_resetTimer
     lwz r3, 0xb3c(r30)
     bl perf_getMetricValue
-    bl fn_803D2A60
+    bl town_entity_resetTimer
     lwz r3, 0xb40(r30)
     bl perf_getMetricValue
-    bl fn_803D2A60
+    bl town_entity_resetTimer
     lwz r3, 0xb44(r30)
     bl perf_getMetricValue
-    bl fn_803D2A60
+    bl town_entity_resetTimer
     lwz r3, 0xb50(r30)
     bl perf_getMetricValue
-    bl fn_803D2A60
+    bl town_entity_resetTimer
     lwz r3, 0xb54(r30)
     bl perf_getMetricValue
-    bl fn_803D2A60
+    bl town_entity_resetTimer
     lwz r3, 0xb48(r30)
     bl perf_getMetricValue
-    bl fn_803D2A60
+    bl town_entity_resetTimer
     lwz r3, 0xb4c(r30)
     bl perf_getMetricValue
-    bl fn_803D2A60
+    bl town_entity_resetTimer
 lbl_fn_803D2A6C_00002ACC:
     addi r25, r25, 0x1
     addi r30, r30, 0x20
@@ -4117,7 +4117,7 @@ lbl_fn_803D2A6C_00003794:
     b lbl_fn_803D2A6C_000037C0
 lbl_fn_803D2A6C_000037A8:
     lwz r3, 0x574(r22)
-    bl fn_803D2A60
+    bl town_entity_resetTimer
     lwz r3, 0x574(r22)
     addi r4, r23, 0x10f2
     lfs f1, lbl_80885D58

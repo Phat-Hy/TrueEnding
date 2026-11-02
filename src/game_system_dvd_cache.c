@@ -42,7 +42,7 @@ extern void fn_803BDEE4(void);
 extern void fn_803BE8C0(void);
 extern void atn_LoadHandle_destructor(void);
 extern void fn_80481668(void);
-extern void fn_804A39EC(void);
+extern void atn_Task_scheduleCallback(void);
 extern void fn_8056B3D8(void);
 extern void fn_8056BD38(void);
 extern void fn_80570A18(void);
@@ -1547,7 +1547,7 @@ asm void fn_80376DD8(void)
     lfs f1, lbl_808857FC
     li r5, 0x0
     lfs f2, lbl_80885800
-    bl fn_804A39EC
+    bl atn_Task_scheduleCallback
     lwz r3, 0x4c(r31)
     li r4, 0x0
     bl atn_Task_setActive

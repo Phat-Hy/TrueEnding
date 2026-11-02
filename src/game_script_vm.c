@@ -106,7 +106,7 @@ void fn_80243758(void);
 void fn_802437B4(void *p);
 void fn_802437C0(void);
 void fn_80243814(void);
-void *fn_802438C4(const void *p, u32 idx);
+void *script_vm_getThreadEntry(const void *p, u32 idx);
 void fn_802438D4(void);
 void *fn_80243EF0(void *p);
 void fn_80243EF8(void);
@@ -1344,7 +1344,7 @@ lbl_fn_80243814_00000FD0:
     blr
 }
 
-void *fn_802438C4(const void *p, u32 idx)
+void *script_vm_getThreadEntry(const void *p, u32 idx)
 {
     return (u8 *)*(const void **)((const u8 *)p + 0x4) + idx * 0x54;
 }
@@ -1430,7 +1430,7 @@ lbl_fn_802438D4_000010E4:
     bl sprintf
     mr r3, r24
     mr r4, r27
-    bl fn_802438C4
+    bl script_vm_getThreadEntry
     addi r3, r3, 0x48
     addi r4, r1, 0x30
     bl res_Resource_unload
@@ -1442,7 +1442,7 @@ lbl_fn_802438D4_000010E4:
     mr r30, r3
     mr r3, r24
     mr r4, r27
-    bl fn_802438C4
+    bl script_vm_getThreadEntry
     stw r30, 0x0(r3)
     li r26, 0x1
     b lbl_fn_802438D4_00001558
@@ -1460,7 +1460,7 @@ lbl_fn_802438D4_00001164:
     mr r30, r3
     mr r3, r24
     mr r4, r27
-    bl fn_802438C4
+    bl script_vm_getThreadEntry
     stw r30, 0x4(r3)
     addi r3, r1, 0x130
     li r4, 0x1
@@ -1470,12 +1470,12 @@ lbl_fn_802438D4_00001164:
     mr r30, r3
     mr r3, r24
     mr r4, r27
-    bl fn_802438C4
+    bl script_vm_getThreadEntry
     stw r30, 0x8(r3)
     mr r3, r24
     mr r4, r27
     lwz r30, 0x10(r24)
-    bl fn_802438C4
+    bl script_vm_getThreadEntry
     lwz r0, 0x8(r3)
     cmpw r30, r0
     ble lbl_fn_802438D4_000011E8
@@ -1483,7 +1483,7 @@ lbl_fn_802438D4_00001164:
 lbl_fn_802438D4_000011E8:
     mr r3, r24
     mr r4, r27
-    bl fn_802438C4
+    bl script_vm_getThreadEntry
     lwz r30, 0x8(r3)
 lbl_fn_802438D4_000011F8:
     stw r30, 0x10(r24)
@@ -1502,7 +1502,7 @@ lbl_fn_802438D4_00001200:
     fmr f31, f1
     mr r3, r24
     mr r4, r27
-    bl fn_802438C4
+    bl script_vm_getThreadEntry
     stfs f31, 0xc(r3)
     addi r3, r1, 0x130
     li r4, 0x1
@@ -1512,7 +1512,7 @@ lbl_fn_802438D4_00001200:
     fmr f31, f1
     mr r3, r24
     mr r4, r27
-    bl fn_802438C4
+    bl script_vm_getThreadEntry
     stfs f31, 0x10(r3)
     addi r3, r1, 0x130
     li r4, 0x2
@@ -1522,7 +1522,7 @@ lbl_fn_802438D4_00001200:
     fmr f31, f1
     mr r3, r24
     mr r4, r27
-    bl fn_802438C4
+    bl script_vm_getThreadEntry
     stfs f31, 0x14(r3)
     b lbl_fn_802438D4_00001558
 lbl_fn_802438D4_00001290:
@@ -1539,7 +1539,7 @@ lbl_fn_802438D4_00001290:
     fmr f31, f1
     mr r3, r24
     mr r4, r27
-    bl fn_802438C4
+    bl script_vm_getThreadEntry
     stfs f31, 0x18(r3)
     addi r3, r1, 0x130
     li r4, 0x1
@@ -1549,7 +1549,7 @@ lbl_fn_802438D4_00001290:
     fmr f31, f1
     mr r3, r24
     mr r4, r27
-    bl fn_802438C4
+    bl script_vm_getThreadEntry
     stfs f31, 0x1c(r3)
     addi r3, r1, 0x130
     li r4, 0x2
@@ -1559,11 +1559,11 @@ lbl_fn_802438D4_00001290:
     fmr f31, f1
     mr r3, r24
     mr r4, r27
-    bl fn_802438C4
+    bl script_vm_getThreadEntry
     stfs f31, 0x20(r3)
     mr r3, r24
     mr r4, r27
-    bl fn_802438C4
+    bl script_vm_getThreadEntry
     addi r3, r3, 0x18
     bl fn_80243EF8
     b lbl_fn_802438D4_00001558
@@ -1581,7 +1581,7 @@ lbl_fn_802438D4_00001334:
     fmr f31, f1
     mr r3, r24
     mr r4, r27
-    bl fn_802438C4
+    bl script_vm_getThreadEntry
     stfs f31, 0x24(r3)
     b lbl_fn_802438D4_00001558
 lbl_fn_802438D4_00001374:
@@ -1598,7 +1598,7 @@ lbl_fn_802438D4_00001374:
     fmr f31, f1
     mr r3, r24
     mr r4, r27
-    bl fn_802438C4
+    bl script_vm_getThreadEntry
     stfs f31, 0x34(r3)
     addi r3, r1, 0x130
     li r4, 0x1
@@ -1608,7 +1608,7 @@ lbl_fn_802438D4_00001374:
     fmr f31, f1
     mr r3, r24
     mr r4, r27
-    bl fn_802438C4
+    bl script_vm_getThreadEntry
     stfs f31, 0x28(r3)
     addi r3, r1, 0x130
     li r4, 0x2
@@ -1618,7 +1618,7 @@ lbl_fn_802438D4_00001374:
     fmr f31, f1
     mr r3, r24
     mr r4, r27
-    bl fn_802438C4
+    bl script_vm_getThreadEntry
     stfs f31, 0x2c(r3)
     addi r3, r1, 0x130
     li r4, 0x3
@@ -1628,7 +1628,7 @@ lbl_fn_802438D4_00001374:
     fmr f31, f1
     mr r3, r24
     mr r4, r27
-    bl fn_802438C4
+    bl script_vm_getThreadEntry
     stfs f31, 0x30(r3)
     b lbl_fn_802438D4_00001558
 lbl_fn_802438D4_0000142C:
@@ -1645,7 +1645,7 @@ lbl_fn_802438D4_0000142C:
     mr r30, r3
     mr r3, r24
     mr r4, r27
-    bl fn_802438C4
+    bl script_vm_getThreadEntry
     stw r30, 0x38(r3)
     addi r3, r1, 0x130
     li r4, 0x1
@@ -1659,7 +1659,7 @@ lbl_fn_802438D4_0000142C:
     mr r30, r3
     mr r3, r24
     mr r4, r27
-    bl fn_802438C4
+    bl script_vm_getThreadEntry
     stw r30, 0x3c(r3)
     addi r3, r1, 0x130
     li r4, 0x3
@@ -1669,7 +1669,7 @@ lbl_fn_802438D4_0000142C:
     mr r30, r3
     mr r3, r24
     mr r4, r27
-    bl fn_802438C4
+    bl script_vm_getThreadEntry
     stw r30, 0x40(r3)
     addi r3, r1, 0x130
     li r4, 0x4
@@ -1679,19 +1679,19 @@ lbl_fn_802438D4_0000142C:
     mr r30, r3
     mr r3, r24
     mr r4, r27
-    bl fn_802438C4
+    bl script_vm_getThreadEntry
     cmpwi r25, 0x2
     stw r30, 0x44(r3)
     bge lbl_fn_802438D4_00001520
     mr r3, r24
     mr r4, r27
-    bl fn_802438C4
+    bl script_vm_getThreadEntry
     lwz r0, 0x44(r3)
     cmpwi r0, 0x0
     bne lbl_fn_802438D4_00001520
     mr r3, r24
     mr r4, r27
-    bl fn_802438C4
+    bl script_vm_getThreadEntry
     stw r31, 0x44(r3)
 lbl_fn_802438D4_00001520:
     addi r3, r1, 0x14

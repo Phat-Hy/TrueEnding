@@ -31,7 +31,7 @@ extern void msg_formatWindowLayout(void);
 extern void fn_800F7258(void);
 extern void vec3_scale(void);
 extern void viewport_getNextSequenceId(void);
-extern void fn_801156BC(void);
+extern void actor_getGlobalManager(void);
 extern void fn_80116E6C(void);
 extern void path_getFollowerNode(void);
 extern void mtx_rotYRad(void);
@@ -1964,7 +1964,7 @@ asm void fn_801C346C(void)
     mr r30, r3
     addi r3, r1, 0xf8
     bl mission_updateStub
-    bl fn_801156BC
+    bl actor_getGlobalManager
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
@@ -1973,7 +1973,7 @@ asm void fn_801C346C(void)
     lfs f0, lbl_80882748
     stfs f0, 0xfc(r1)
     stfs f1, 0xf8(r1)
-    bl fn_801156BC
+    bl actor_getGlobalManager
     li r4, 0x0
     li r5, 0x1
     li r6, 0x0

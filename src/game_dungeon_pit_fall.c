@@ -21,8 +21,8 @@ extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void bloom_processPasses(void);
 extern void fn_80179F98(void);
-extern void fn_801F583C(void);
-extern void fn_801F5BC8(void);
+extern void param_table_setPropertyAngle(void);
+extern void param_table_setPropertyFloat(void);
 extern void fn_803EA09C(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
@@ -119,7 +119,7 @@ asm void fn_803E746C(void)
     stfs f2, 0x13c(r1)
     stfs f1, 0x140(r1)
     stfs f0, 0x144(r1)
-    bl fn_801F583C
+    bl param_table_setPropertyAngle
     lfs f3, lbl_80885DFC
     mr r3, r28
     lfs f2, lbl_80885D58
@@ -131,7 +131,7 @@ asm void fn_803E746C(void)
     stfs f2, 0x12c(r1)
     stfs f1, 0x130(r1)
     stfs f0, 0x134(r1)
-    bl fn_801F583C
+    bl param_table_setPropertyAngle
     addi r30, r29, 0x40
     lfs f3, 0x40(r29)
     lfs f2, 0x4(r30)
@@ -144,7 +144,7 @@ asm void fn_803E746C(void)
     stfs f2, 0x11c(r1)
     stfs f1, 0x120(r1)
     stfs f0, 0x124(r1)
-    bl fn_801F5BC8
+    bl param_table_setPropertyFloat
     lfs f3, 0x40(r29)
     mr r3, r28
     lfs f2, 0x4(r30)
@@ -156,7 +156,7 @@ asm void fn_803E746C(void)
     stfs f2, 0x10c(r1)
     stfs f1, 0x110(r1)
     stfs f0, 0x114(r1)
-    bl fn_801F5BC8
+    bl param_table_setPropertyFloat
     b lbl_fn_803E746C_00000428
 lbl_fn_803E746C_000000FC:
     cmpwi r4, 0x2
@@ -171,7 +171,7 @@ lbl_fn_803E746C_000000FC:
     stfs f1, 0xfc(r1)
     stfs f0, 0x100(r1)
     stfs f0, 0x104(r1)
-    bl fn_801F583C
+    bl param_table_setPropertyAngle
     lfs f1, lbl_80885D58
     mr r3, r28
     lfs f0, lbl_80885E28
@@ -181,7 +181,7 @@ lbl_fn_803E746C_000000FC:
     stfs f1, 0xec(r1)
     stfs f0, 0xf0(r1)
     stfs f0, 0xf4(r1)
-    bl fn_801F583C
+    bl param_table_setPropertyAngle
     addi r30, r29, 0x10
     lfs f3, 0x10(r29)
     lfs f2, 0x4(r30)
@@ -194,7 +194,7 @@ lbl_fn_803E746C_000000FC:
     stfs f2, 0xdc(r1)
     stfs f1, 0xe0(r1)
     stfs f0, 0xe4(r1)
-    bl fn_801F5BC8
+    bl param_table_setPropertyFloat
     lfs f3, 0x10(r29)
     mr r3, r28
     lfs f2, 0x4(r30)
@@ -206,7 +206,7 @@ lbl_fn_803E746C_000000FC:
     stfs f2, 0xcc(r1)
     stfs f1, 0xd0(r1)
     stfs f0, 0xd4(r1)
-    bl fn_801F5BC8
+    bl param_table_setPropertyFloat
     b lbl_fn_803E746C_00000428
 lbl_fn_803E746C_000001C0:
     cmpwi r4, 0x3
@@ -222,7 +222,7 @@ lbl_fn_803E746C_000001C0:
     stfs f1, 0xbc(r1)
     stfs f0, 0xc0(r1)
     stfs f2, 0xc4(r1)
-    bl fn_801F583C
+    bl param_table_setPropertyAngle
     lfs f2, lbl_80885E28
     mr r3, r28
     lfs f1, lbl_80885D58
@@ -233,7 +233,7 @@ lbl_fn_803E746C_000001C0:
     stfs f1, 0xac(r1)
     stfs f0, 0xb0(r1)
     stfs f2, 0xb4(r1)
-    bl fn_801F583C
+    bl param_table_setPropertyAngle
     addi r30, r29, 0x20
     lfs f3, 0x20(r29)
     lfs f2, 0x4(r30)
@@ -246,7 +246,7 @@ lbl_fn_803E746C_000001C0:
     stfs f2, 0x9c(r1)
     stfs f1, 0xa0(r1)
     stfs f0, 0xa4(r1)
-    bl fn_801F5BC8
+    bl param_table_setPropertyFloat
     lfs f3, 0x20(r29)
     mr r3, r28
     lfs f2, 0x4(r30)
@@ -258,7 +258,7 @@ lbl_fn_803E746C_000001C0:
     stfs f2, 0x8c(r1)
     stfs f1, 0x90(r1)
     stfs f0, 0x94(r1)
-    bl fn_801F5BC8
+    bl param_table_setPropertyFloat
     b lbl_fn_803E746C_00000428
 lbl_fn_803E746C_0000028C:
     cmpwi r4, 0x1
@@ -275,7 +275,7 @@ lbl_fn_803E746C_0000028C:
     stfs f2, 0x7c(r1)
     stfs f1, 0x80(r1)
     stfs f0, 0x84(r1)
-    bl fn_801F583C
+    bl param_table_setPropertyAngle
     lfs f3, lbl_80885DE8
     mr r3, r28
     lfs f2, lbl_80885D58
@@ -287,7 +287,7 @@ lbl_fn_803E746C_0000028C:
     stfs f2, 0x6c(r1)
     stfs f1, 0x70(r1)
     stfs f0, 0x74(r1)
-    bl fn_801F583C
+    bl param_table_setPropertyAngle
     addi r30, r29, 0x0
     lfs f3, 0x0(r29)
     lfs f2, 0x4(r30)
@@ -300,7 +300,7 @@ lbl_fn_803E746C_0000028C:
     stfs f2, 0x5c(r1)
     stfs f1, 0x60(r1)
     stfs f0, 0x64(r1)
-    bl fn_801F5BC8
+    bl param_table_setPropertyFloat
     lfs f3, 0x0(r29)
     mr r3, r28
     lfs f2, 0x4(r30)
@@ -312,7 +312,7 @@ lbl_fn_803E746C_0000028C:
     stfs f2, 0x4c(r1)
     stfs f1, 0x50(r1)
     stfs f0, 0x54(r1)
-    bl fn_801F5BC8
+    bl param_table_setPropertyFloat
     b lbl_fn_803E746C_00000428
 lbl_fn_803E746C_00000360:
     lfs f3, lbl_80885DE8
@@ -327,7 +327,7 @@ lbl_fn_803E746C_00000360:
     stfs f2, 0x3c(r1)
     stfs f1, 0x40(r1)
     stfs f0, 0x44(r1)
-    bl fn_801F583C
+    bl param_table_setPropertyAngle
     lfs f3, lbl_80885DE8
     mr r3, r28
     lfs f2, lbl_80885D58
@@ -339,7 +339,7 @@ lbl_fn_803E746C_00000360:
     stfs f2, 0x2c(r1)
     stfs f1, 0x30(r1)
     stfs f0, 0x34(r1)
-    bl fn_801F583C
+    bl param_table_setPropertyAngle
     addi r31, r29, 0x50
     lfs f3, 0x50(r29)
     lfs f2, 0x4(r31)
@@ -352,7 +352,7 @@ lbl_fn_803E746C_00000360:
     stfs f2, 0x1c(r1)
     stfs f1, 0x20(r1)
     stfs f0, 0x24(r1)
-    bl fn_801F5BC8
+    bl param_table_setPropertyFloat
     lfs f3, 0x50(r29)
     mr r3, r28
     lfs f2, 0x4(r31)
@@ -364,7 +364,7 @@ lbl_fn_803E746C_00000360:
     stfs f2, 0xc(r1)
     stfs f1, 0x10(r1)
     stfs f0, 0x14(r1)
-    bl fn_801F5BC8
+    bl param_table_setPropertyFloat
 lbl_fn_803E746C_00000428:
     lwz r0, 0x164(r1)
     lwz r31, 0x15c(r1)

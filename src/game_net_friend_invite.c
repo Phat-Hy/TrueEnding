@@ -40,7 +40,7 @@ extern void viewport_initAudioInstances(void);
 extern void phys_scaleGravity(void);
 extern void fn_80112960(void);
 extern void fn_80114AA0(void);
-extern void fn_801156BC(void);
+extern void actor_getGlobalManager(void);
 extern void magic_getOffset6C(void);
 extern void fn_8012B3E8(void);
 extern void enemy_updateNavSteering(void);
@@ -2143,7 +2143,7 @@ lbl_fn_804D25D4_00001840:
     bl fn_804D16F4
     bl fn_8036503C
 lbl_fn_804D25D4_00001864:
-    bl fn_801156BC
+    bl actor_getGlobalManager
     li r4, 0x0
     li r5, 0x4
     bl msg_getMessageById
@@ -2199,7 +2199,7 @@ lbl_fn_804D25D4_000018FC:
     bl atn_Task_unlink
     b lbl_fn_804D25D4_00004898
 lbl_fn_804D25D4_00001934:
-    bl fn_801156BC
+    bl actor_getGlobalManager
     li r4, 0x0
     li r5, 0x5
     bl msg_getMessageById
@@ -2785,7 +2785,7 @@ lbl_fn_804D25D4_000021C4:
     cmpwi r3, 0x1
     bne lbl_fn_804D25D4_000022C4
 lbl_fn_804D25D4_00002200:
-    bl fn_801156BC
+    bl actor_getGlobalManager
     li r4, 0x0
     li r5, 0x5
     bl msg_getMessageById
@@ -4795,7 +4795,7 @@ lbl_fn_804D25D4_00003EAC:
     li r4, 0x0
     bl fn_804D65A8
     li r20, 0x0
-    bl fn_801156BC
+    bl actor_getGlobalManager
     li r4, 0x0
     li r5, 0x4
     bl msg_getMessageById
@@ -4841,7 +4841,7 @@ lbl_fn_804D25D4_00003FE4:
     lwz r0, -0x6660(r3)
     cmpwi r0, 0x0
     ble lbl_fn_804D25D4_0000401C
-    bl fn_801156BC
+    bl actor_getGlobalManager
     li r4, 0x0
     li r5, 0x4
     bl msg_getMessageById

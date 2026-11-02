@@ -95,7 +95,7 @@ extern u32 lbl_80881710;
 
 /* Function declarations */
 void fn_801151A4(void);
-u32 fn_801156BC(void);
+u32 actor_getGlobalManager(void);
 u32 actor_getStreamPipe(void);
 u32 fn_801156CC(void *p);
 void *fn_801156D8(void *p);
@@ -467,7 +467,7 @@ lbl_fn_801151A4_00000358:
     blr
 }
 
-u32 fn_801156BC(void)
+u32 actor_getGlobalManager(void)
 {
     return lbl_8087EF70;
 }
@@ -1442,19 +1442,19 @@ lbl_fn_801162A4_000012D0:
     mr r3, r29
     bl fn_80116BA4
     fmr f31, f1
-    bl fn_801156BC
+    bl actor_getGlobalManager
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
     bl msg_formatWindowLayout
     fneg f0, f1
     stfs f0, 0x14(r1)
-    bl fn_801156BC
+    bl actor_getGlobalManager
     li r4, 0x0
     bl msg_isWindowActive
     cmpwi r3, 0x0
     beq lbl_fn_801162A4_0000135C
-    bl fn_801156BC
+    bl actor_getGlobalManager
     li r4, 0x0
     li r5, 0x2
     li r6, 0x0
@@ -1529,19 +1529,19 @@ lbl_fn_801162A4_00001430:
     fmuls f0, f1, f0
     stfs f0, 0x14(r1)
 lbl_fn_801162A4_00001440:
-    bl fn_801156BC
+    bl actor_getGlobalManager
     li r4, 0x0
     li r5, 0x1
     li r6, 0x0
     bl msg_formatWindowLayout
     fneg f0, f1
     stfs f0, 0x10(r1)
-    bl fn_801156BC
+    bl actor_getGlobalManager
     li r4, 0x0
     bl msg_isWindowActive
     cmpwi r3, 0x0
     beq lbl_fn_801162A4_00001494
-    bl fn_801156BC
+    bl actor_getGlobalManager
     li r4, 0x0
     li r5, 0x3
     li r6, 0x0

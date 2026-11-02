@@ -40,7 +40,7 @@ extern void fn_8044D678(void);
 extern void fn_8044D6AC(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
-extern void fn_804A39EC(void);
+extern void atn_Task_scheduleCallback(void);
 extern void fn_804A3A68(void);
 extern void net_initCoopSession(void);
 extern void fn_804A55FC(void);
@@ -1149,7 +1149,7 @@ lbl_fn_80588908_00000E80:
     li r4, 0x1
     lfs f2, lbl_80888130
     li r5, 0x0
-    bl fn_804A39EC
+    bl atn_Task_scheduleCallback
     addis r5, r31, 0x2
     li r4, 0x0
     lwz r3, 0x5b68(r5)
@@ -1172,7 +1172,7 @@ lbl_fn_80588908_00000E80:
     ori r0, r0, 0x4
     stw r0, 0x38(r3)
     lwz r3, 0x5b70(r6)
-    bl fn_804A39EC
+    bl atn_Task_scheduleCallback
     mr r27, r31
     li r26, 0x0
 lbl_fn_80588908_00000F08:

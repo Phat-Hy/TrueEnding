@@ -16,7 +16,7 @@ extern void memcmp(void);
 extern void strcmp(void);
 extern void strncmp(void);
 extern void strstr(void);
-extern void fn_80683B54(void);
+extern void msl_atol(void);
 extern void atoi(void);
 extern void fn_8068B1FC(void);
 extern void net_formatIpAddress(void);
@@ -2205,7 +2205,7 @@ lbl_fn_806FEBD0_00001C54:
     b lbl_fn_806FEBD0_00001C6C
 lbl_fn_806FEBD0_00001C60:
     mr r3, r31
-    bl fn_80683B54
+    bl msl_atol
     fmr f31, f1
 lbl_fn_806FEBD0_00001C6C:
     fmr f1, f31

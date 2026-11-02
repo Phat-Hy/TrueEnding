@@ -77,7 +77,7 @@ extern void PSMTXTrans(void);
 extern void rand(void);
 extern void strcmp(void);
 extern void strstr(void);
-extern void fn_80683B54(void);
+extern void msl_atol(void);
 extern void atoi(void);
 extern void __destroy_arr(void);
 extern void runtime_clampDouble(void);
@@ -1305,27 +1305,27 @@ lbl_fn_80496CC0_00000EAC:
     stw r3, 0x0(r30)
     mr r3, r27
     bl talk_formatQuotedString
-    bl fn_80683B54
+    bl msl_atol
     frsp f0, f1
     mr r3, r27
     stfs f0, 0x8(r30)
     bl talk_formatQuotedString
-    bl fn_80683B54
+    bl msl_atol
     frsp f0, f1
     mr r3, r27
     stfs f0, 0x4(r30)
     bl talk_formatQuotedString
-    bl fn_80683B54
+    bl msl_atol
     frsp f0, f1
     mr r3, r27
     stfs f0, 0xc(r30)
     bl talk_formatQuotedString
-    bl fn_80683B54
+    bl msl_atol
     frsp f0, f1
     mr r3, r27
     stfs f0, 0x10(r30)
     bl talk_formatQuotedString
-    bl fn_80683B54
+    bl msl_atol
     frsp f0, f1
     addi r28, r28, 0x1
     addi r31, r31, 0x1c

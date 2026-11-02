@@ -32,7 +32,7 @@ void fn_803D215C(void);
 void fn_803D218C(void *p, f32 val);
 void fn_803D2194(void);
 void fn_803D2A54(void *p);
-void fn_803D2A60(void *p);
+void town_entity_resetTimer(void *p);
 
 asm void fn_803D164C(void)
 {
@@ -1380,7 +1380,7 @@ void fn_803D2A54(void *p)
     *(f32 *)((u8 *)p + 0x100) = *(f32 *)&lbl_80885D58;
 }
 
-void fn_803D2A60(void *p)
+void town_entity_resetTimer(void *p)
 {
     *(f32 *)((u8 *)p + 0x50) = *(f32 *)&lbl_80885D58;
 }
