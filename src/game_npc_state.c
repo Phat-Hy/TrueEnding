@@ -47,7 +47,7 @@ u32 fn_8013C3DC(void *p);
 void fn_8013C3E4(void);
 u32 fn_8013C3F4(void *p);
 void *fn_8013C3FC(void *p);
-void fn_8013C404(void);
+u32 fn_8013C404(void *p, u32 mask);
 u32 fn_8013C41C(void *p);
 u32 fn_8013C424(void *p);
 f32 fn_8013C42C(void *p);
@@ -126,15 +126,9 @@ void *fn_8013C3FC(void *p)
     return (u8 *)p + 0x70;
 }
 
-asm void fn_8013C404(void)
+u32 fn_8013C404(void *p, u32 mask)
 {
-    nofralloc
-    lwz r0, 0x54c(r3)
-    and r0, r4, r0
-    subf r0, r4, r0
-    cntlzw r0, r0
-    srwi r3, r0, 5
-    blr
+    return (*(u32 *)((u8 *)p + 0x54c) & mask) == mask;
 }
 
 u32 fn_8013C41C(void *p)

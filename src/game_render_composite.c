@@ -118,7 +118,7 @@ void fn_802BA64C(void);
 void fn_802BA67C(void);
 void fn_802BA898(void);
 void fn_802BA92C(void);
-void fn_802BABC0(void);
+void fn_802BABC0(void *p);
 void fn_802BABCC(void);
 void fn_802BADB0(void);
 void fn_802BAFAC(void);
@@ -1459,12 +1459,9 @@ lbl_fn_802BA92C_0000122C:
     blr
 }
 
-asm void fn_802BABC0(void)
+void fn_802BABC0(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, 0x0(r3)
-    blr
+    *(u32 *)p = 0;
 }
 
 asm void fn_802BABCC(void)

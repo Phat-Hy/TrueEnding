@@ -74,7 +74,7 @@ extern u32 lbl_808814B4;
 
 /* Function declarations */
 void fn_800F1378(void);
-void fn_800F13B0(void);
+void fn_800F13B0(void *p);
 void fn_800F13BC(void);
 void fn_800F1430(void);
 void fn_800F1EE0(void);
@@ -102,12 +102,9 @@ asm void fn_800F1378(void)
     blr
 }
 
-asm void fn_800F13B0(void)
+void fn_800F13B0(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, 0x170(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x170) = 0;
 }
 
 asm void fn_800F13BC(void)

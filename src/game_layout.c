@@ -94,7 +94,7 @@ void fn_800A9E54(void);
 void fn_800A9E64(void);
 void fn_800AA6C4(void);
 void fn_800AA8DC(void);
-void fn_800AAE20(void);
+void fn_800AAE20(void *p);
 void fn_800AAE2C(void);
 
 asm void layout_drawPane(void)
@@ -1568,12 +1568,9 @@ lbl_fn_800AA8DC_000015F0:
     blr
 }
 
-asm void fn_800AAE20(void)
+void fn_800AAE20(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, 0xf4(r3)
-    blr
+    *(u32 *)((u8 *)p + 0xf4) = 0;
 }
 
 asm void fn_800AAE2C(void)

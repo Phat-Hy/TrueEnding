@@ -112,7 +112,7 @@ void *fn_80417F14(void *obj);
 void fn_80417F1C(void);
 void fn_80417F40(void);
 void fn_80417FF8(void);
-void fn_804180B0(void);
+void fn_804180B0(void *p);
 void *fn_804180BC(void *p, u32 idx);
 void fn_804180CC(void);
 void fn_8041814C(void);
@@ -317,12 +317,9 @@ lbl_fn_80417FF8_0000021C:
     blr
 }
 
-asm void fn_804180B0(void)
+void fn_804180B0(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, 0x0(r3)
-    blr
+    *(u32 *)p = 0;
 }
 
 void *fn_804180BC(void *p, u32 idx)

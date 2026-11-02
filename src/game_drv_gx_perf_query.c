@@ -60,7 +60,7 @@ void fn_805E3350(void);
 void fn_805E3460(void);
 void fn_805E3570(void);
 void fn_805E35B0(void);
-void fn_805E3660(void);
+void fn_805E3660(void *p);
 void fn_805E3670(void);
 void fn_805E3760(void);
 void fn_805E3880(void);
@@ -613,12 +613,9 @@ lbl_fn_805E35B0_00000774:
     blr
 }
 
-asm void fn_805E3660(void)
+void fn_805E3660(void *p)
 {
-    nofralloc
-    li r0, 0x3
-    stw r0, 0x30(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x30) = 3;
 }
 
 asm void fn_805E3670(void)

@@ -102,7 +102,7 @@ void fn_803F2BA0(void);
 void fn_803F2C1C(void);
 void fn_803F2CD0(void);
 void fn_803F3334(void);
-void fn_803F3360(void);
+void fn_803F3360(void *p);
 void fn_803F3374(void);
 
 asm void fn_803F1A38(void)
@@ -1894,14 +1894,10 @@ asm void fn_803F3334(void)
     blr
 }
 
-asm void fn_803F3360(void)
+void fn_803F3360(void *p)
 {
-    nofralloc
-    li r4, 0x0
-    li r0, -0x1
-    stw r4, 0x0(r3)
-    stw r0, 0x4(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x0) = 0;
+    *(u32 *)((u8 *)p + 0x4) = -1;
 }
 
 asm void fn_803F3374(void)

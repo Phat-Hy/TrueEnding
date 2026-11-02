@@ -108,7 +108,7 @@ void fn_8040099C(void);
 void fn_80400C74(void);
 void fn_80400D08(void);
 void fn_8040134C(void);
-void fn_80401610(void);
+void fn_80401610(void *p);
 void fn_8040161C(void);
 void fn_80401BF0(void);
 
@@ -1389,12 +1389,9 @@ lbl_fn_8040134C_000011FC:
     blr
 }
 
-asm void fn_80401610(void)
+void fn_80401610(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, 0x0(r3)
-    blr
+    *(u32 *)p = 0;
 }
 
 asm void fn_8040161C(void)

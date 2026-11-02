@@ -47,7 +47,7 @@ void fn_805DCAA0(void);
 u32 fn_805DCAC0(void);
 u32 fn_805DCAD0(void);
 void fn_805DCAE0(void);
-void fn_805DCAF0(void);
+u32 fn_805DCAF0(const char *str);
 void fn_805DCB00(void);
 void fn_805DCC70(void);
 void fn_805DD050(void);
@@ -553,10 +553,9 @@ asm void fn_805DCAE0(void)
     b vsnprintf
 }
 
-asm void fn_805DCAF0(void)
+u32 fn_805DCAF0(const char *str)
 {
-    nofralloc
-    b strlen
+    return strlen(str);
 }
 
 asm void fn_805DCB00(void)

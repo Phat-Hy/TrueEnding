@@ -109,7 +109,7 @@ void fn_806E52A0(void);
 void fn_806E52B0(void);
 void fn_806E5310(void);
 void fn_806E53B0(void);
-void fn_806E53D0(void);
+s32 fn_806E53D0(const s32 *a, const s32 *b);
 void fn_806E53E0(void);
 void fn_806E5500(void);
 void fn_806E5570(void);
@@ -1434,13 +1434,9 @@ asm void fn_806E53B0(void)
     blr
 }
 
-asm void fn_806E53D0(void)
+s32 fn_806E53D0(const s32 *a, const s32 *b)
 {
-    nofralloc
-    lwz r4, 0x0(r4)
-    lwz r0, 0x0(r3)
-    subf r3, r4, r0
-    blr
+    return *a - *b;
 }
 
 asm void fn_806E53E0(void)

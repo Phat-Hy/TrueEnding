@@ -49,7 +49,7 @@ void fn_80470FA4(void);
 void fn_80471078(void);
 void fn_804711B0(void);
 void fn_8047123C(void);
-void fn_804714A4(void);
+void fn_804714A4(void *p);
 void fn_804714B0(void);
 void fn_804716B8(void);
 void atn_Curve_evalHermite(void);
@@ -1234,12 +1234,9 @@ lbl_fn_8047123C_00000E90:
     blr
 }
 
-asm void fn_804714A4(void)
+void fn_804714A4(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, 0x0(r3)
-    blr
+    *(u32 *)p = 0;
 }
 
 asm void fn_804714B0(void)

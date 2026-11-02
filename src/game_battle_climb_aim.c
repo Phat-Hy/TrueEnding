@@ -100,7 +100,7 @@ void fn_8040F690(void);
 void fn_8040F994(void);
 void fn_8040F9C0(void);
 void fn_8040F9EC(void);
-void fn_8040FAA4(void);
+void fn_8040FAA4(void *p);
 void *fn_8040FAB8(void *obj);
 void fn_8040FAC0(void);
 void fn_8040FB44(void);
@@ -623,14 +623,10 @@ lbl_fn_8040F9EC_000006C0:
     blr
 }
 
-asm void fn_8040FAA4(void)
+void fn_8040FAA4(void *p)
 {
-    nofralloc
-    li r4, 0x0
-    li r0, 0x5
-    stw r4, 0x55c(r3)
-    stw r0, 0x560(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x55c) = 0;
+    *(u32 *)((u8 *)p + 0x560) = 5;
 }
 
 void *fn_8040FAB8(void *obj)

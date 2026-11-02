@@ -165,7 +165,7 @@ void AreaEffConfig_destructor(void);
 void AreaEffConfig_execute(void);
 void fn_80041D44(void);
 void menu_initWindowBuffer(void);
-void fn_800420F4(void);
+void fn_800420F4(void *p, u32 v1, u32 v2);
 void fn_80042108(void);
 void str_getData(void);
 void fn_80042148(void *p);
@@ -210,7 +210,7 @@ void Arms_destructor(void);
 void Arms_execute(void);
 u32 fn_80044394(void *p);
 void fn_8004439C(void);
-void fn_8004476C(void);
+void fn_8004476C(void *p, u32 v1, u32 v2);
 void fn_80044780(void);
 void Arms_slot3(void);
 void fn_80044BD4(void);
@@ -729,14 +729,11 @@ asm void menu_initWindowBuffer(void)
     blr
 }
 
-asm void fn_800420F4(void)
+void fn_800420F4(void *p, u32 v1, u32 v2)
 {
-    nofralloc
-    li r0, 0x0
-    stw r4, 0x4(r3)
-    stw r5, 0x8(r3)
-    stw r0, 0xc(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x4) = v1;
+    *(u32 *)((u8 *)p + 0x8) = v2;
+    *(u32 *)((u8 *)p + 0xc) = 0;
 }
 
 asm void fn_80042108(void)
@@ -3595,14 +3592,11 @@ lbl_fn_8004439C_00002CF4:
     blr
 }
 
-asm void fn_8004476C(void)
+void fn_8004476C(void *p, u32 v1, u32 v2)
 {
-    nofralloc
-    li r0, 0x0
-    stw r4, 0x4(r3)
-    stw r5, 0x8(r3)
-    stw r0, 0xc(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x4) = v1;
+    *(u32 *)((u8 *)p + 0x8) = v2;
+    *(u32 *)((u8 *)p + 0xc) = 0;
 }
 
 asm void fn_80044780(void)

@@ -167,7 +167,7 @@ void fn_8032DEA0(void);
 void fn_8032E2D4(void);
 void fn_8032E3DC(void);
 void fn_8032E938(void);
-void fn_8032EC94(void);
+void fn_8032EC94(void *p);
 void *fn_8032ECA0(void *obj);
 void *fn_8032ECA8(void *p, u32 idx);
 void fn_8032ECB8(void);
@@ -1408,12 +1408,9 @@ lbl_fn_8032E938_000011D8:
     blr
 }
 
-asm void fn_8032EC94(void)
+void fn_8032EC94(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, 0x0(r3)
-    blr
+    *(u32 *)p = 0;
 }
 
 void *fn_8032ECA0(void *obj)

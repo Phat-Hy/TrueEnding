@@ -123,7 +123,7 @@ void fn_80150460(void);
 void fn_8015061C(void);
 void fn_8015076C(void);
 void fn_8015115C(void);
-void fn_80151168(void);
+u32 fn_80151168(void *p, u32 mask);
 u32 fn_80151180(void);
 u32 fn_80151188(void *p);
 void fn_80151194(void);
@@ -1947,15 +1947,9 @@ asm void fn_8015115C(void)
     blr
 }
 
-asm void fn_80151168(void)
+u32 fn_80151168(void *p, u32 mask)
 {
-    nofralloc
-    lwz r0, 0x0(r3)
-    and r0, r4, r0
-    subf r0, r4, r0
-    cntlzw r0, r0
-    srwi r3, r0, 5
-    blr
+    return (*(u32 *)p & mask) == mask;
 }
 
 u32 fn_80151180(void)

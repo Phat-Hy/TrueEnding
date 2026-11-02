@@ -112,7 +112,7 @@ extern u32 lbl_80888360;
 extern u32 lbl_80888364;
 
 /* Function declarations */
-void fn_805AB1B4(void);
+void fn_805AB1B4(void *p, u32 val);
 void fn_805AB1C4(void);
 void fn_805AB1DC(void);
 void fn_805AB50C(void);
@@ -125,13 +125,10 @@ void fn_805ABDFC(void);
 void fn_805ABE78(void);
 void fn_805AC75C(void);
 
-asm void fn_805AB1B4(void)
+void fn_805AB1B4(void *p, u32 val)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, 0x0(r3)
-    stw r4, 0x4(r3)
-    blr
+    *(u32 *)p = 0;
+    *(u32 *)((u8 *)p + 0x4) = val;
 }
 
 asm void fn_805AB1C4(void)

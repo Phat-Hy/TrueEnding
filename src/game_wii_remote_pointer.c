@@ -245,7 +245,7 @@ extern u32 lbl_80887E1C;
 /* Function declarations */
 void fn_8054D798(void);
 void fn_8054E100(void);
-void fn_8054E520(void);
+void fn_8054E520(void *p);
 void fn_8054E52C(void);
 void fn_8054E578(void);
 
@@ -1232,12 +1232,9 @@ lbl_fn_8054E100_00000D30:
     blr
 }
 
-asm void fn_8054E520(void)
+void fn_8054E520(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, 0x4c(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x4c) = 0;
 }
 
 asm void fn_8054E52C(void)

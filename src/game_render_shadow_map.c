@@ -73,7 +73,7 @@ void fn_802B0430(void);
 void fn_802B07F0(void);
 void fn_802B0D90(void);
 u32 fn_802B12C4(void);
-void fn_802B12CC(void);
+void fn_802B12CC(void *p);
 void fn_802B12D8(void);
 void fn_802B1744(void);
 void fn_802B17AC(void);
@@ -1073,12 +1073,9 @@ u32 fn_802B12C4(void)
     return 0;
 }
 
-asm void fn_802B12CC(void)
+void fn_802B12CC(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, 0x0(r3)
-    blr
+    *(u32 *)p = 0;
 }
 
 asm void fn_802B12D8(void)

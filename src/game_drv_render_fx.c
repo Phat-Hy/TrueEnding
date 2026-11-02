@@ -38,7 +38,7 @@ extern u8 lbl_807CA1F8[];
 void fn_805CF6E0(void);
 void fn_805CF8E0(void);
 void fn_805CFA00(void);
-void fn_805CFC10(void);
+void fn_805CFC10(void *p);
 void fn_805CFC20(void);
 void fn_805D0DB0(void);
 void fn_805D0E60(void);
@@ -402,12 +402,9 @@ lbl_fn_805CFA00_000004F4:
     blr
 }
 
-asm void fn_805CFC10(void)
+void fn_805CFC10(void *p)
 {
-    nofralloc
-    li r0, -0x1
-    stw r0, 0x0(r3)
-    blr
+    *(u32 *)p = -1;
 }
 
 asm void fn_805CFC20(void)

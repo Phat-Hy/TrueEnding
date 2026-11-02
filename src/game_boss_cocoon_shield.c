@@ -93,7 +93,7 @@ void fn_8046BF88(void);
 void fn_8046C1C8(void);
 void atn_Arc_loadEntry(void);
 void atn_Arc_decompressChunk(void);
-void fn_8046CBB0(void);
+void fn_8046CBB0(void *p);
 void fn_8046CBBC(void);
 void fn_8046CBC0(void);
 void fn_8046CC90(void);
@@ -1544,12 +1544,9 @@ lbl_atn_Arc_decompressChunk_00001404:
     blr
 }
 
-asm void fn_8046CBB0(void)
+void fn_8046CBB0(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, 0x4044(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x4044) = 0;
 }
 
 void fn_8046CBBC(void)

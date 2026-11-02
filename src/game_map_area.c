@@ -106,7 +106,7 @@ extern u32 lbl_80881B7C;
 /* Function declarations */
 void fn_8017B3C0(void);
 void fn_8017B434(void);
-void fn_8017BC4C(void);
+void fn_8017BC4C(void *p);
 void fn_8017BC58(void);
 void fn_8017BDDC(void);
 void fn_8017C4C4(void);
@@ -727,12 +727,9 @@ lbl_fn_8017B434_0000086C:
     blr
 }
 
-asm void fn_8017BC4C(void)
+void fn_8017BC4C(void *p)
 {
-    nofralloc
-    li r0, -0x1
-    stw r0, 0x140c(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x140c) = -1;
 }
 
 asm void fn_8017BC58(void)

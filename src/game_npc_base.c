@@ -111,7 +111,7 @@ void mtx_rotYRad(void);
 u32 fn_8013A144(void *p);
 u32 fn_8013A150(void *p);
 u32 fn_8013A158(void *p);
-void fn_8013A16C(void);
+u32 fn_8013A16C(void *p, u32 mask);
 u32 fn_8013A184(void *p);
 u32 fn_8013A18C(void *p);
 u32 npc_getGlobalManager(void);
@@ -1010,15 +1010,9 @@ u32 fn_8013A158(void *p)
     return *(u32 *)((u8 *)p + 0x48) == 0x2;
 }
 
-asm void fn_8013A16C(void)
+u32 fn_8013A16C(void *p, u32 mask)
 {
-    nofralloc
-    lwz r0, 0xc(r3)
-    and r0, r4, r0
-    subf r0, r4, r0
-    cntlzw r0, r0
-    srwi r3, r0, 5
-    blr
+    return (*(u32 *)((u8 *)p + 0xc) & mask) == mask;
 }
 
 u32 fn_8013A184(void *p)

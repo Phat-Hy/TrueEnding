@@ -62,7 +62,7 @@ extern u32 lbl_8087DEE4;
 
 /* Function declarations */
 void fn_803C5FC4(void);
-void fn_803C5FD0(void);
+void fn_803C5FD0(void *p);
 void fn_803C5FE4(void);
 void fn_803C6028(void);
 void fn_803C606C(void);
@@ -103,14 +103,10 @@ asm void fn_803C5FC4(void)
     blr
 }
 
-asm void fn_803C5FD0(void)
+void fn_803C5FD0(void *p)
 {
-    nofralloc
-    li r4, 0x0
-    li r0, 0x20
-    stw r4, 0x0(r3)
-    stw r0, 0x4(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x0) = 0;
+    *(u32 *)((u8 *)p + 0x4) = 32;
 }
 
 asm void fn_803C5FE4(void)

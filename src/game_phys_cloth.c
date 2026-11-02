@@ -93,7 +93,7 @@ void fn_8010DAD4(void);
 void fn_8010DB14(void);
 void fn_8010DB54(void);
 void fn_8010DB68(void);
-void fn_8010DB88(void);
+void fn_8010DB88(void *p);
 void fn_8010DB94(void);
 void fn_8010DD34(void);
 void fn_8010E3F0(void);
@@ -430,12 +430,9 @@ asm void fn_8010DB68(void)
     b __construct_new_array
 }
 
-asm void fn_8010DB88(void)
+void fn_8010DB88(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, 0x0(r3)
-    blr
+    *(u32 *)p = 0;
 }
 
 asm void fn_8010DB94(void)

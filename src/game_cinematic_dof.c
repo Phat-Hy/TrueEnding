@@ -195,7 +195,7 @@ void fn_803387DC(void);
 void fn_803388A4(void);
 void fn_80338CDC(void);
 void fn_80338D04(void);
-void fn_80338D08(void);
+void fn_80338D08(void *p);
 void fn_80338D14(void);
 void fn_80338FD0(void);
 void fn_803396EC(void);
@@ -843,12 +843,9 @@ void fn_80338D04(void)
 {
 }
 
-asm void fn_80338D08(void)
+void fn_80338D08(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, 0x0(r3)
-    blr
+    *(u32 *)p = 0;
 }
 
 asm void fn_80338D14(void)

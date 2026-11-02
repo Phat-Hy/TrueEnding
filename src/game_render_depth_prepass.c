@@ -149,7 +149,7 @@ extern u32 lbl_8088406C;
 
 /* Function declarations */
 void fn_802B1F2C(void);
-void fn_802B21F4(void);
+f32 fn_802B21F4(void);
 void fn_802B21FC(void);
 void fn_802B23E8(void);
 void fn_802B28BC(void);
@@ -345,11 +345,9 @@ lbl_fn_802B1F2C_00000074:
     blr
 }
 
-asm void fn_802B21F4(void)
+f32 fn_802B21F4(void)
 {
-    nofralloc
-    lfs f1, lbl_8088401C
-    blr
+    return *(f32 *)&lbl_8088401C;
 }
 
 asm void fn_802B21FC(void)

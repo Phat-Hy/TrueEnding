@@ -82,7 +82,7 @@ extern u8 lbl_807CA208[];
 /* Small data declarations */
 
 /* Function declarations */
-void fn_805D2F60(void);
+void fn_805D2F60(void *p);
 void fn_805D2F70(void);
 void fn_805D2F80(void);
 void fn_805D2FA0(void);
@@ -130,12 +130,9 @@ void fn_805D4710(void);
 void fn_805D4730(void);
 void fn_805D4750(void);
 
-asm void fn_805D2F60(void)
+void fn_805D2F60(void *p)
 {
-    nofralloc
-    li r0, -0x1
-    stw r0, 0x0(r3)
-    blr
+    *(u32 *)p = -1;
 }
 
 void fn_805D2F70(void)

@@ -78,7 +78,7 @@ void fn_803BEAB4(void);
 void fn_803BEB54(void);
 void fn_803BEBAC(void);
 void fn_803BEC40(void);
-void fn_803BF818(void);
+void fn_803BF818(void *p);
 void fn_803BF824(void);
 void fn_803BF898(void);
 void fn_803BF8EC(void);
@@ -1058,12 +1058,9 @@ lbl_fn_803BEC40_00000D78:
     blr
 }
 
-asm void fn_803BF818(void)
+void fn_803BF818(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, 0x0(r3)
-    blr
+    *(u32 *)p = 0;
 }
 
 asm void fn_803BF824(void)

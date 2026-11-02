@@ -115,7 +115,7 @@ void fn_800A9450(void);
 void fn_800A9558(void);
 void fn_800A96AC(void);
 void fn_800A9738(void);
-void fn_800A9788(void);
+void fn_800A9788(void *p);
 void fn_800A9794(void);
 void fn_800A97C4(void);
 void fn_800A97FC(void);
@@ -1696,12 +1696,9 @@ lbl_fn_800A9738_00001574:
     blr
 }
 
-asm void fn_800A9788(void)
+void fn_800A9788(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, 0x54(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x54) = 0;
 }
 
 asm void fn_800A9794(void)

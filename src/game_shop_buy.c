@@ -55,7 +55,7 @@ void fn_80157C34(void);
 void fn_8015802C(void);
 void fn_801588A0(void);
 void shop_canPurchaseItem(void);
-void fn_80158C9C(void);
+f32 fn_80158C9C(void);
 void shop_loadCatalogItem(void);
 u32 fn_80158D58(void);
 void fn_80158D60(void);
@@ -1226,11 +1226,9 @@ lbl_shop_canPurchaseItem_00001050:
     blr
 }
 
-asm void fn_80158C9C(void)
+f32 fn_80158C9C(void)
 {
-    nofralloc
-    lfs f1, lbl_8088196C
-    blr
+    return *(f32 *)&lbl_8088196C;
 }
 
 asm void shop_loadCatalogItem(void)

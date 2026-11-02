@@ -75,7 +75,7 @@ void fn_8006C6A0(void);
 void fn_8006C7FC(void);
 void fn_8006C858(void);
 void fn_8006C8F8(void);
-void fn_8006CA14(void);
+void fn_8006CA14(void *p);
 void fn_8006CA20(void);
 void gmk_LoadHandle_constructor(void);
 void fn_8006CABC(void);
@@ -609,12 +609,9 @@ asm void fn_8006C8F8(void)
     blr
 }
 
-asm void fn_8006CA14(void)
+void fn_8006CA14(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, 0x18(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x18) = 0;
 }
 
 asm void fn_8006CA20(void)
