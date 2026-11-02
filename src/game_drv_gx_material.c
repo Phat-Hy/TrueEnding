@@ -547,10 +547,9 @@ u32 fn_805DCAD0(void)
     return *(u32 *)lbl_807CA250;
 }
 
-asm void fn_805DCAE0(void)
+void fn_805DCAE0(void)
 {
-    nofralloc
-    b vsnprintf
+    vsnprintf();
 }
 
 u32 fn_805DCAF0(const char *str)

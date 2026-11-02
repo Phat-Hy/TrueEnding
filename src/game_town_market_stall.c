@@ -106,7 +106,7 @@ void fn_803CE980(void);
 void fn_803CF734(void *p);
 void fn_803CF740(void *p);
 void fn_803CF74C(void);
-void fn_803CF78C(void);
+void fn_803CF78C(void *p);
 void fn_803CF79C(void);
 void fn_803CF8F0(void);
 void fn_803CF938(void);
@@ -1617,13 +1617,9 @@ asm void fn_803CF74C(void)
     blr
 }
 
-asm void fn_803CF78C(void)
+void fn_803CF78C(void *p)
 {
-    nofralloc
-    lwz r0, 0x4(r3)
-    subf r0, r0, r0
-    stw r0, 0x4(r3)
-    blr
+    *(u32 *)((u8 *)p + 4) -= *(u32 *)((u8 *)p + 4);
 }
 
 asm void fn_803CF79C(void)

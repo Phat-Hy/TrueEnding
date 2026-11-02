@@ -115,7 +115,7 @@ void fn_800F8290(void);
 void fn_800F831C(void);
 void fn_800F833C(void);
 void fn_800F8348(void);
-void fn_800F84BC(void);
+void fn_800F84BC(void *p, f32 a, f32 b);
 void *fn_800F84C8(void *p);
 void fn_800F84D0(void *p, void *val);
 void fn_800F84D8(void);
@@ -1468,12 +1468,10 @@ lbl_fn_800F8348_00001234:
     blr
 }
 
-asm void fn_800F84BC(void)
+void fn_800F84BC(void *p, f32 a, f32 b)
 {
-    nofralloc
-    stfs f1, 0x0(r3)
-    stfs f2, 0x4(r3)
-    blr
+    *(f32 *)((u8 *)p + 0x0) = a;
+    *(f32 *)((u8 *)p + 0x4) = b;
 }
 
 void *fn_800F84C8(void *p)

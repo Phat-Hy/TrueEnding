@@ -61,7 +61,7 @@ extern u32 lbl_8087DEE0;
 extern u32 lbl_8087DEE4;
 
 /* Function declarations */
-void fn_803C5FC4(void);
+void fn_803C5FC4(void *p, u32 a, u32 b);
 void fn_803C5FD0(void *p);
 void fn_803C5FE4(void);
 void fn_803C6028(void);
@@ -95,12 +95,10 @@ void fn_803C7388(void);
 void *fn_803C74D0(const void *p, u32 idx);
 void fn_803C74E0(void);
 
-asm void fn_803C5FC4(void)
+void fn_803C5FC4(void *p, u32 a, u32 b)
 {
-    nofralloc
-    stw r4, 0x0(r3)
-    stw r5, 0x4(r3)
-    blr
+    *(u32 *)p = a;
+    *(u32 *)((u8 *)p + 4) = b;
 }
 
 void fn_803C5FD0(void *p)

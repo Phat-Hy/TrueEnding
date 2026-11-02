@@ -113,10 +113,9 @@ void *fn_80147A00(void *p)
     return *(void **)((u8 *)p + 0x220);
 }
 
-asm void fn_80147A08(void)
+void fn_80147A08(void)
 {
-    nofralloc
-    b PSMTXQuat
+    PSMTXQuat();
 }
 
 void fn_80147A0C(void) {

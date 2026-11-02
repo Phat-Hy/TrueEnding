@@ -29,9 +29,9 @@ void fn_8058EF0C(void);
 void fn_8058FAD4(void);
 void fn_8058FE90(void);
 void *fn_8058FEB8(const void *p, u32 idx);
-void fn_8058FEC8(void);
+void fn_8058FEC8(void *dst, const void *src);
 void fn_8058FED4(void);
-void string_copyHash(void);
+void string_copyHash(void *dst, const void *src);
 void hash_advanceIterator(void);
 u32 hash_getHashValue(const void*);
 void fn_8058FF0C(void);
@@ -1277,12 +1277,9 @@ void *fn_8058FEB8(const void *p, u32 idx)
     return (u8 *)*(const void **)p + idx * 0x58;
 }
 
-asm void fn_8058FEC8(void)
+void fn_8058FEC8(void *dst, const void *src)
 {
-    nofralloc
-    lwz r0, 0x0(r4)
-    stw r0, 0x0(r3)
-    blr
+    *(u32 *)((u8 *)dst + 0x0) = *(const u32 *)((const u8 *)src + 0x0);
 }
 
 asm void fn_8058FED4(void)
@@ -1295,12 +1292,9 @@ asm void fn_8058FED4(void)
     blr
 }
 
-asm void string_copyHash(void)
+void string_copyHash(void *dst, const void *src)
 {
-    nofralloc
-    lwz r0, 0x0(r4)
-    stw r0, 0x0(r3)
-    blr
+    *(u32 *)((u8 *)dst + 0x0) = *(const u32 *)((const u8 *)src + 0x0);
 }
 
 asm void hash_advanceIterator(void)

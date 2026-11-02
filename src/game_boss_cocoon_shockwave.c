@@ -101,7 +101,7 @@ void atn_LoadMaterial_constructor(void);
 void atn_LoadMaterial_destructor(void);
 void atn_LH_Material_onNotify(void);
 void fn_80474678(void);
-void fn_80474860(void);
+void *fn_80474860(void *p);
 void fn_8047486C(void);
 void atn_LoadModel_constructor(void);
 void atn_LoadModel_destructor(void);
@@ -1114,12 +1114,9 @@ lbl_fn_80474678_00000D1C:
     blr
 }
 
-asm void fn_80474860(void)
+void *fn_80474860(void *p)
 {
-    nofralloc
-    lwz r3, 0x4(r3)
-    addi r3, r3, 0x5c
-    blr
+    return (u8 *)(*(void **)((u8 *)p + 4)) + 0x5c;
 }
 
 asm void fn_8047486C(void)

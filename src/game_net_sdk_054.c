@@ -102,7 +102,7 @@ void fn_80710810(void);
 void fn_807108E0(void);
 void fn_80710910(void);
 void fn_80710940(void);
-void fn_807109D0(void);
+u32 fn_807109D0(void *p);
 void fn_807109E0(void *p, u32 val);
 void fn_807109F0(void *p);
 void fn_80710A00(void);
@@ -1230,13 +1230,9 @@ asm void fn_80710940(void)
     blr
 }
 
-asm void fn_807109D0(void)
+u32 fn_807109D0(void *p)
 {
-    nofralloc
-    lwz r4, 0x14(r3)
-    lwz r0, 0x10(r3)
-    subf r3, r4, r0
-    blr
+    return *(u32 *)((u8 *)p + 0x4) - *(u32 *)((u8 *)p + 0x8);
 }
 
 void fn_807109E0(void *p, u32 val)

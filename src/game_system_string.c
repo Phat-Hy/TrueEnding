@@ -86,7 +86,7 @@ void fn_8020B1E0(void);
 void fn_8020B208(void);
 void fn_8020B27C(void);
 void fn_8020B2BC(void);
-void fn_8020BAC0(void);
+void fn_8020BAC0(void *p);
 void fn_8020BACC(void);
 void fn_8020BB0C(void);
 
@@ -1767,12 +1767,9 @@ lbl_fn_8020B2BC_00001720:
     blr
 }
 
-asm void fn_8020BAC0(void)
+void fn_8020BAC0(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    sth r0, 0x14(r3)
-    blr
+    *(u16 *)((u8 *)p + 0x14) = 0;
 }
 
 asm void fn_8020BACC(void)

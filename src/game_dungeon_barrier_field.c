@@ -109,7 +109,7 @@ void fn_803ED8D8(void);
 void fn_803ED8F4(void);
 void fn_803ED92C(void);
 void fn_803EDAF0(void);
-void fn_803EDB0C(void);
+void fn_803EDB0C(void *p, u32 a, u32 b);
 void barrier_testFieldCollision(void);
 void fn_803EDCF4(void);
 void fn_803EDE34(void);
@@ -1648,12 +1648,10 @@ asm void fn_803EDAF0(void)
     blr
 }
 
-asm void fn_803EDB0C(void)
+void fn_803EDB0C(void *p, u32 a, u32 b)
 {
-    nofralloc
-    stw r4, 0xa8(r3)
-    stw r5, 0xac(r3)
-    blr
+    *(u32 *)((u8 *)p + 0xa8) = a;
+    *(u32 *)((u8 *)p + 0xac) = b;
 }
 
 asm void barrier_testFieldCollision(void)

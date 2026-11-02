@@ -881,10 +881,9 @@ asm void fn_80729240(void)
     b fn_80729AE0
 }
 
-asm void fn_80729250(void)
+void fn_80729250(void)
 {
-    nofralloc
-    b vsnprintf
+    vsnprintf();
 }
 
 asm void fn_80729260(void)

@@ -81,7 +81,7 @@ void fn_80621D70(void);
 void fn_80622050(void);
 void fn_806220A0(void);
 void fn_806220F0(void);
-void fn_80622170(void);
+void *fn_80622170(void);
 void fn_80622180(void);
 void fn_80622260(void);
 void NANDAsyncCallback(void);
@@ -1283,12 +1283,9 @@ lbl_fn_806220F0_00000FF0:
     blr
 }
 
-asm void fn_80622170(void)
+void *fn_80622170(void)
 {
-    nofralloc
-    lis r3, s_homeDir_807EB280@ha
-    addi r3, r3, s_homeDir_807EB280@l
-    blr
+    return s_homeDir_807EB280;
 }
 
 asm void fn_80622180(void)

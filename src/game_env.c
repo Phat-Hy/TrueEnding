@@ -40,7 +40,7 @@ extern u32 lbl_80881244;
 void fn_800DA9A4(void);
 void fn_800DAA3C(void);
 void fn_800DAB68(void);
-void fn_800DAD3C(void);
+void fn_800DAD3C(void *p);
 void fn_800DAD48(void);
 void fn_800DAD6C(void);
 void fn_800DB3D4(void);
@@ -316,12 +316,9 @@ lbl_fn_800DAB68_00000324:
     blr
 }
 
-asm void fn_800DAD3C(void)
+void fn_800DAD3C(void *p)
 {
-    nofralloc
-    lfs f0, lbl_80881230
-    stfs f0, 0x44(r3)
-    blr
+    *(f32 *)((u8 *)p + 0x44) = *(f32 *)&lbl_80881230;
 }
 
 asm void fn_800DAD48(void)

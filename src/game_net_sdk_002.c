@@ -68,8 +68,8 @@ void fn_8069C4A4(void);
 void fn_8069C63C(void);
 void fn_8069C6E8(void);
 void fn_8069C73C(void);
-void fn_8069C7B0(void);
-void fn_8069C7B4(void);
+void *fn_8069C7B0(void *dst, const void *src, u32 n);
+u32 fn_8069C7B4(const char *s);
 void fn_8069C7B8(void);
 void fn_8069C7BC(void);
 void fn_8069C7C8(void);
@@ -602,22 +602,19 @@ lbl_fn_8069C73C_0000068C:
     blr
 }
 
-asm void fn_8069C7B0(void)
+void *fn_8069C7B0(void *dst, const void *src, u32 n)
 {
-    nofralloc
-    b memcpy
+    return memcpy(dst, src, n);
 }
 
-asm void fn_8069C7B4(void)
+u32 fn_8069C7B4(const char *s)
 {
-    nofralloc
-    b strlen
+    return strlen(s);
 }
 
-asm void fn_8069C7B8(void)
+void fn_8069C7B8(void)
 {
-    nofralloc
-    b strcmp
+    strcmp();
 }
 
 asm void fn_8069C7BC(void)

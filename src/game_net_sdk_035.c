@@ -82,7 +82,7 @@ void fn_806E92D0(void);
 void fn_806E93E0(void);
 void fn_806E95D0(void);
 void fn_806E96A0(void);
-void fn_806E9700(void);
+u32 fn_806E9700(void *p);
 void fn_806E9710(void);
 void fn_806E9730(void);
 void fn_806E9760(void);
@@ -1332,13 +1332,9 @@ lbl_fn_806E96A0_00001098:
     blr
 }
 
-asm void fn_806E9700(void)
+u32 fn_806E9700(void *p)
 {
-    nofralloc
-    lwz r4, 0x8(r3)
-    lwz r0, 0x4(r3)
-    subf r3, r4, r0
-    blr
+    return *(u32 *)((u8 *)p + 4) - *(u32 *)((u8 *)p + 8);
 }
 
 asm void fn_806E9710(void)

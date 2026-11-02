@@ -1451,10 +1451,9 @@ asm void fn_8072BBE0(void)
     b fn_8072C450
 }
 
-asm void fn_8072BBF0(void)
+void fn_8072BBF0(void)
 {
-    nofralloc
-    b vswprintf
+    vswprintf();
 }
 
 asm void fn_8072BC00(void)

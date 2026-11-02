@@ -272,22 +272,19 @@ lbl_fn_806D7860_000001BC:
     blr
 }
 
-asm void fn_806D7A30(void)
+void fn_806D7A30(void)
 {
-    nofralloc
-    b fn_8067AEC4
+    fn_8067AEC4();
 }
 
-asm void fn_806D7A40(void)
+void fn_806D7A40(void)
 {
-    nofralloc
-    b fn_8067AF64
+    fn_8067AF64();
 }
 
-asm void fn_806D7A50(void)
+void fn_806D7A50(void)
 {
-    nofralloc
-    b fn_8067B094
+    fn_8067B094();
 }
 
 asm void fn_806D7A60(void)

@@ -115,7 +115,7 @@ extern u32 lbl_80885994;
 extern u32 lbl_80885998;
 
 /* Function declarations */
-void fn_8037C690(void);
+void fn_8037C690(void *p, u32 a, u32 b);
 void fn_8037C69C(void);
 void fn_8037C71C(void);
 void fn_8037C8C4(void);
@@ -135,12 +135,10 @@ void fn_8037D8B8(void);
 void fn_8037DC68(void);
 void fn_8037DD00(void);
 
-asm void fn_8037C690(void)
+void fn_8037C690(void *p, u32 a, u32 b)
 {
-    nofralloc
-    stw r4, 0x35c(r3)
-    stw r5, 0x360(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x35c) = a;
+    *(u32 *)((u8 *)p + 0x360) = b;
 }
 
 asm void fn_8037C69C(void)

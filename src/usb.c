@@ -4359,34 +4359,29 @@ lbl_fn_8065F490_00003B5C:
     blr
 }
 
-asm void fn_8065F500(void)
+void fn_8065F500(void)
 {
-    nofralloc
-    b fn_80671CC0
+    fn_80671CC0();
 }
 
-asm void fn_8065F510(void)
+void fn_8065F510(void)
 {
-    nofralloc
-    b fn_80671D70
+    fn_80671D70();
 }
 
-asm void fn_8065F520(void)
+void fn_8065F520(void)
 {
-    nofralloc
-    b fn_80671B20
+    fn_80671B20();
 }
 
-asm void fn_8065F530(void)
+void fn_8065F530(void)
 {
-    nofralloc
-    b fn_806717C0
+    fn_806717C0();
 }
 
-asm void fn_8065F540(void)
+void fn_8065F540(void)
 {
-    nofralloc
-    b fn_80671A20
+    fn_80671A20();
 }
 
 asm void fn_8065F550(void)

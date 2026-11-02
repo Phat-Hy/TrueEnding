@@ -67,7 +67,7 @@ extern u32 lbl_80882E98;
 /* Function declarations */
 void fn_8020D688(void);
 void fn_8020DA08(void);
-void fn_8020DA68(void);
+void fn_8020DA68(void *p);
 void fn_8020DA74(void);
 void fn_8020DAB4(void);
 void fn_8020DB18(void);
@@ -356,12 +356,9 @@ asm void fn_8020DA08(void)
     blr
 }
 
-asm void fn_8020DA68(void)
+void fn_8020DA68(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    sth r0, 0x10(r3)
-    blr
+    *(u16 *)((u8 *)p + 0x10) = 0;
 }
 
 asm void fn_8020DA74(void)

@@ -5120,28 +5120,24 @@ void fn_8068AEA0(void)
     fn_80687200();
 }
 
-asm void std_atan2(void)
+void std_atan2(void)
 {
-    nofralloc
-    b fn_80687498
+    fn_80687498();
 }
 
-asm void std_fmod(void)
+void std_fmod(void)
 {
-    nofralloc
-    b fn_806876F0
+    fn_806876F0();
 }
 
-asm void std_sqrt(void)
+void std_sqrt(void)
 {
-    nofralloc
-    b fn_80687D24
+    fn_80687D24();
 }
 
-asm void std_pow(void)
+void std_pow(void)
 {
-    nofralloc
-    b fn_80687E38
+    fn_80687E38();
 }
 
 asm void fn_8068AEB4(void)
@@ -5322,10 +5318,9 @@ lbl_fn_8068AEB4_00004200:
 void fn_8068B0FC(void) {
 }
 
-asm void math_u64DivMod(void)
+void math_u64DivMod(void)
 {
-    nofralloc
-    b fn_8068AEB4
+    fn_8068AEB4();
 }
 
 asm void fn_8068B104(void)
@@ -5413,10 +5408,9 @@ lbl_fn_8068B1A4_000042F4:
     blr
 }
 
-asm void fn_8068B1F8(void)
+void fn_8068B1F8(void)
 {
-    nofralloc
-    b fn_8067DABC
+    fn_8067DABC();
 }
 
 asm void fn_8068B1FC(void)
@@ -5473,10 +5467,9 @@ lbl_fn_8068B1FC_00004398:
     blr
 }
 
-asm void fn_8068B29C(void)
+void fn_8068B29C(void)
 {
-    nofralloc
-    b fn_8067DB74
+    fn_8067DB74();
 }
 
 asm void _itow(void)

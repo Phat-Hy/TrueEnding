@@ -26,13 +26,13 @@ extern u32 lbl_80885DE8;
 /* Function declarations */
 void fn_803D164C(void);
 void fn_803D2134(void *p, f32 val);
-void fn_803D213C(void);
+void fn_803D213C(void *p);
 void fn_803D2148(void);
 void fn_803D215C(void);
 void fn_803D218C(void *p, f32 val);
 void fn_803D2194(void);
-void fn_803D2A54(void);
-void fn_803D2A60(void);
+void fn_803D2A54(void *p);
+void fn_803D2A60(void *p);
 
 asm void fn_803D164C(void)
 {
@@ -755,12 +755,9 @@ void fn_803D2134(void *p, f32 val)
     *(f32 *)((u8 *)p + 0x104) = val;
 }
 
-asm void fn_803D213C(void)
+void fn_803D213C(void *p)
 {
-    nofralloc
-    lfs f0, 0xa0(r3)
-    stfs f0, 0x100(r3)
-    blr
+    *(f32 *)((u8 *)p + 0x100) = *(f32 *)((u8 *)p + 0xa0);
 }
 
 asm void fn_803D2148(void)
@@ -1378,18 +1375,12 @@ lbl_fn_803D2194_000013E0:
     blr
 }
 
-asm void fn_803D2A54(void)
+void fn_803D2A54(void *p)
 {
-    nofralloc
-    lfs f0, lbl_80885D58
-    stfs f0, 0x100(r3)
-    blr
+    *(f32 *)((u8 *)p + 0x100) = *(f32 *)&lbl_80885D58;
 }
 
-asm void fn_803D2A60(void)
+void fn_803D2A60(void *p)
 {
-    nofralloc
-    lfs f0, lbl_80885D58
-    stfs f0, 0x50(r3)
-    blr
+    *(f32 *)((u8 *)p + 0x50) = *(f32 *)&lbl_80885D58;
 }

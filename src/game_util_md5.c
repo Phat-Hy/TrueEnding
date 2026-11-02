@@ -116,7 +116,7 @@ void fn_8059E0F0(void);
 void fn_8059E144(void);
 void *fn_8059E198(void);
 u32 fn_8059E1A0(void *p);
-void fn_8059E1A8(void);
+u32 fn_8059E1A8(void *p);
 u32 fn_8059E1B8(void);
 u32 fn_8059E1C0(void);
 void fn_8059E1C8(void);
@@ -741,13 +741,9 @@ u32 fn_8059E1A0(void *p)
     return *(u32 *)((u8 *)p + 0x74);
 }
 
-asm void fn_8059E1A8(void)
+u32 fn_8059E1A8(void *p)
 {
-    nofralloc
-    lwz r4, 0x70(r3)
-    lwz r0, 0x18(r3)
-    subf r3, r4, r0
-    blr
+    return *(u32 *)((u8 *)p + 0x0) - *(u32 *)((u8 *)p + 0x4);
 }
 
 u32 fn_8059E1B8(void)

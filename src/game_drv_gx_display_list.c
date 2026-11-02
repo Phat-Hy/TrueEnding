@@ -1608,16 +1608,14 @@ u32 fn_805DF490(void)
     return *(u32 *)lbl_807CA258;
 }
 
-asm void fn_805DF4A0(void)
+void fn_805DF4A0(void)
 {
-    nofralloc
-    b vswprintf
+    vswprintf();
 }
 
-asm void fn_805DF4B0(void)
+void fn_805DF4B0(void)
 {
-    nofralloc
-    b wcslen
+    wcslen();
 }
 
 asm void fn_805DF4C0(void)

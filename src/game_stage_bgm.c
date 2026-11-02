@@ -1333,10 +1333,9 @@ u32 bgm_getGlobalManager(void)
     return lbl_8087F408;
 }
 
-asm void vec3_dot(void)
+void vec3_dot(void)
 {
-    nofralloc
-    b PSVECDotProduct
+    PSVECDotProduct();
 }
 
 u32 fn_801A03EC(void *p)

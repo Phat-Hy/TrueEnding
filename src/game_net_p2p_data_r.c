@@ -63,9 +63,9 @@ extern u32 lbl_808877C0;
 /* Function declarations */
 void fn_8050DB78(void);
 void fn_8050DBD0(void);
-void fn_8050DBEC(void);
+void fn_8050DBEC(void *dst, const void *src);
 void fn_8050DBF8(void);
-void fn_8050DC50(void);
+void fn_8050DC50(void *dst, const void *src);
 void fn_8050DC5C(void);
 void net_p2p_flushPacketQueue(void);
 void fn_8050DE38(void);
@@ -136,12 +136,9 @@ asm void fn_8050DBD0(void)
     b memset
 }
 
-asm void fn_8050DBEC(void)
+void fn_8050DBEC(void *dst, const void *src)
 {
-    nofralloc
-    lwz r0, lbl_8087E46C
-    stw r0, 0x0(r3)
-    blr
+    *(u32 *)((u8 *)dst + 0x0) = *(const u32 *)((const u8 *)src + 0x0);
 }
 
 asm void fn_8050DBF8(void)
@@ -171,12 +168,9 @@ asm void fn_8050DBF8(void)
     blr
 }
 
-asm void fn_8050DC50(void)
+void fn_8050DC50(void *dst, const void *src)
 {
-    nofralloc
-    lwz r0, lbl_8087E468
-    stw r0, 0x0(r3)
-    blr
+    *(u32 *)((u8 *)dst + 0x0) = *(const u32 *)((const u8 *)src + 0x0);
 }
 
 asm void fn_8050DC5C(void)

@@ -2201,10 +2201,9 @@ lbl_fn_8070F270_00001B34:
     blr
 }
 
-asm void fn_8070F390(void)
+void fn_8070F390(void)
 {
-    nofralloc
-    b fn_80712610
+    fn_80712610();
 }
 
 asm void fn_8070F3A0(void)

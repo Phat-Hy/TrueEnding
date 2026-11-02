@@ -84,7 +84,7 @@ void fn_80010490(void);
 void math_mtxFromEulerAngles(void);
 void fn_80010B68(void);
 void vec3_toEulerAngles(void);
-void math_fabsf(void);
+f32 math_fabsf(f32 val);
 void fn_8001122C(void);
 void fn_800112E0(void);
 void mtx_multVec(void *v, const void *m);
@@ -123,7 +123,7 @@ void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 void vec3_sub(void);
 void fn_8001336C(void);
 void math_wrapAngle(void);
-void math_absf(void);
+f32 math_absf(f32 val);
 void vec3_add(void);
 void fn_80013444(void);
 void fn_80013484(void);
@@ -1328,12 +1328,9 @@ lbl_vec3_toEulerAngles_000010C8:
     blr
 }
 
-asm void math_fabsf(void)
+f32 math_fabsf(f32 val)
 {
-    nofralloc
-    fabs f0, f1
-    frsp f1, f0
-    blr
+    return __fabs(val);
 }
 
 asm void fn_8001122C(void)
@@ -3894,12 +3891,9 @@ lbl_math_wrapAngle_000032D8:
     blr
 }
 
-asm void math_absf(void)
+f32 math_absf(f32 val)
 {
-    nofralloc
-    fabs f0, f1
-    frsp f1, f0
-    blr
+    return __fabs(val);
 }
 
 asm void vec3_add(void)

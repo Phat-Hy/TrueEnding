@@ -168,7 +168,7 @@ extern u32 lbl_80887C18;
 extern u32 lbl_80887C1C;
 
 /* Function declarations */
-void fn_80531814(void);
+void fn_80531814(void *p);
 void fn_80531820(void);
 void fn_805319C8(void);
 void fn_80531E84(void);
@@ -177,12 +177,9 @@ void fn_80531F48(void);
 void spectateManager_init(void);
 void spectateManager_update(void);
 
-asm void fn_80531814(void)
+void fn_80531814(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    sth r0, 0x10(r3)
-    blr
+    *(u16 *)((u8 *)p + 0x10) = 0;
 }
 
 asm void fn_80531820(void)

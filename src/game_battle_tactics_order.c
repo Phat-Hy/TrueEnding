@@ -118,7 +118,7 @@ void fn_803F03D8(void);
 void fn_803F0488(void);
 void fn_803F0538(void);
 u32 fn_803F05E8(const void *p);
-void fn_803F05F0(void);
+void fn_803F05F0(void *dst, const void *src);
 u32 fn_803F05FC(const void *p);
 void *fn_803F0604(const void *p, u32 idx);
 void *fn_803F0614(const void *p, u32 idx);
@@ -833,12 +833,9 @@ u32 fn_803F05E8(const void *p)
     return *(const u32 *)p;
 }
 
-asm void fn_803F05F0(void)
+void fn_803F05F0(void *dst, const void *src)
 {
-    nofralloc
-    lwz r0, 0x0(r4)
-    stw r0, 0x0(r3)
-    blr
+    *(u32 *)dst = *(const u32 *)src;
 }
 
 u32 fn_803F05FC(const void *p)

@@ -54,7 +54,7 @@ void fn_801222D4(void);
 void fn_80122330(void);
 void* magic_getOffset6C(void* ptr);
 void* magic_getOffset51C(void* ptr);
-void f32_abs(void);
+f32 f32_abs(f32 val);
 void fn_8012256C(void);
 void player_getSpellStatus(void);
 void* magic_getOffset244(void* ptr);
@@ -259,12 +259,9 @@ void* magic_getOffset51C(void* ptr)
     return (char*)ptr + 0x51c;
 }
 
-asm void f32_abs(void)
+f32 f32_abs(f32 val)
 {
-    nofralloc
-    fabs f0, f1
-    frsp f1, f0
-    blr
+    return __fabs(val);
 }
 
 asm void fn_8012256C(void)

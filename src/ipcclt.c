@@ -1923,10 +1923,9 @@ lbl_iosAlloc_00001914:
     blr
 }
 
-asm void iosAllocAligned(void)
+void iosAllocAligned(void)
 {
-    nofralloc
-    b iosAlloc
+    iosAlloc();
 }
 
 asm void iosFree(void)

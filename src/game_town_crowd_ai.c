@@ -95,8 +95,8 @@ void fn_803CDF84(void);
 void fn_803CE070(void);
 void fn_803CE074(void);
 void fn_803CE0B4(void);
-void fn_803CE148(void);
-void fn_803CE154(void);
+u32 fn_803CE148(void);
+u32 fn_803CE154(void);
 void fn_803CE160(void);
 
 asm void fn_803CC900(void)
@@ -1936,20 +1936,14 @@ lbl_fn_803CE0B4_00001840:
     blr
 }
 
-asm void fn_803CE148(void)
+u32 fn_803CE148(void)
 {
-    nofralloc
-    lis r3, 0x2d
-    addi r3, r3, 0x5000
-    blr
+    return 0x2d5000;
 }
 
-asm void fn_803CE154(void)
+u32 fn_803CE154(void)
 {
-    nofralloc
-    lis r3, 0x2d
-    addi r3, r3, 0x5000
-    blr
+    return 0x2d5000;
 }
 
 asm void fn_803CE160(void)
