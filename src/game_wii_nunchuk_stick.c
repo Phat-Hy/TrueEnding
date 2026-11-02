@@ -8,7 +8,7 @@ extern void _restgpr_25(void);
 extern void _savegpr_24(void);
 extern void _savegpr_25(void);
 extern void fn_800112E0(void);
-extern void fn_8001296C(void);
+extern void actor_getSkeletonNode(void);
 extern void fn_80013558(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_8009290C(void);
@@ -119,7 +119,7 @@ lbl_fn_80559B30_00000094:
     li r28, 0x0
 lbl_fn_80559B30_00000098:
     mr r3, r28
-    bl fn_8001296C
+    bl actor_getSkeletonNode
     lwz r0, 0x30(r25)
     mr r27, r3
     lwz r26, 0x16c(r3)
@@ -302,7 +302,7 @@ lbl_fn_80559B30_00000320:
     li r27, 0x0
 lbl_fn_80559B30_00000324:
     mr r3, r27
-    bl fn_8001296C
+    bl actor_getSkeletonNode
     lwz r0, 0x30(r25)
     mr r26, r3
     lwz r24, 0x16c(r3)
@@ -1223,7 +1223,7 @@ lbl_fn_8055A4A0_00000F18:
     addi r27, r27, lbl_8075F058@l
     stfs f7, 0xe4(r1)
     stfs f0, 0xe8(r1)
-    bl fn_8001296C
+    bl actor_getSkeletonNode
     mr r25, r3
     mr r4, r27
     li r5, 0x0

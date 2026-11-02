@@ -109,7 +109,7 @@ void fn_800127CC(void);
 void fn_8001282C(void);
 void fn_800128FC(void);
 void fn_80012934(void);
-void fn_8001296C(void);
+void actor_getSkeletonNode(void);
 u32 fn_80012A14(void);
 void fn_80012A1C(void);
 void fn_80012AC4(void);
@@ -3109,57 +3109,57 @@ lbl_fn_80012934_00002848:
     blr
 }
 
-asm void fn_8001296C(void)
+asm void actor_getSkeletonNode(void)
 {
     nofralloc
     lwz r0, 0x20(r3)
     cmpwi r0, 0x7
-    beq lbl_fn_8001296C_00002888
+    beq lbl_actor_getSkeletonNode_00002888
     cmpwi r0, 0x1
-    beq lbl_fn_8001296C_00002888
+    beq lbl_actor_getSkeletonNode_00002888
     cmpwi r0, 0x2
-    beq lbl_fn_8001296C_000028A8
+    beq lbl_actor_getSkeletonNode_000028A8
     cmpwi r0, 0x3
-    beq lbl_fn_8001296C_000028CC
+    beq lbl_actor_getSkeletonNode_000028CC
     cmpwi r0, 0x4
-    beq lbl_fn_8001296C_000028E8
+    beq lbl_actor_getSkeletonNode_000028E8
     cmpwi r0, 0x6
-    beq lbl_fn_8001296C_000028E8
-    b lbl_fn_8001296C_000028F0
-lbl_fn_8001296C_00002888:
+    beq lbl_actor_getSkeletonNode_000028E8
+    b lbl_actor_getSkeletonNode_000028F0
+lbl_actor_getSkeletonNode_00002888:
     lwz r3, 0x1c(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_8001296C_000028A0
+    beq lbl_actor_getSkeletonNode_000028A0
     lwz r3, 0x48(r3)
     addi r3, r3, 0xb0
     blr
-lbl_fn_8001296C_000028A0:
+lbl_actor_getSkeletonNode_000028A0:
     li r3, 0x0
     blr
-lbl_fn_8001296C_000028A8:
+lbl_actor_getSkeletonNode_000028A8:
     lwz r3, 0x1c(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_8001296C_000028C4
+    beq lbl_actor_getSkeletonNode_000028C4
     lwz r12, 0x0(r3)
     lwz r12, 0x38(r12)
     mtctr r12
     bctr
-lbl_fn_8001296C_000028C4:
+lbl_actor_getSkeletonNode_000028C4:
     li r3, 0x0
     blr
-lbl_fn_8001296C_000028CC:
+lbl_actor_getSkeletonNode_000028CC:
     lwz r3, 0x1c(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_8001296C_000028E0
+    beq lbl_actor_getSkeletonNode_000028E0
     lwz r3, 0x48(r3)
     blr
-lbl_fn_8001296C_000028E0:
+lbl_actor_getSkeletonNode_000028E0:
     li r3, 0x0
     blr
-lbl_fn_8001296C_000028E8:
+lbl_actor_getSkeletonNode_000028E8:
     li r3, 0x0
     blr
-lbl_fn_8001296C_000028F0:
+lbl_actor_getSkeletonNode_000028F0:
     li r3, 0x0
     blr
 }

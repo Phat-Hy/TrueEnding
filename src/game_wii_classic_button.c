@@ -8,7 +8,7 @@ extern void _savegpr_23(void);
 extern void _savegpr_27(void);
 extern void actor_dispatchByType(void);
 extern void fn_8001260C(void);
-extern void fn_8001296C(void);
+extern void actor_getSkeletonNode(void);
 extern void item_testLineOfSight(void);
 extern void map_debugLog(void);
 extern void compass_findWaypointIndex(void);
@@ -359,7 +359,7 @@ lbl_fn_80560FEC_00000324:
     stfs f2, 0x3c(r1)
 lbl_fn_80560FEC_00000364:
     mr r3, r27
-    bl fn_8001296C
+    bl actor_getSkeletonNode
     cmpwi r3, 0x0
     mr r27, r3
     beq lbl_fn_80560FEC_000003D4

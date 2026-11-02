@@ -14,7 +14,7 @@ extern void _savegpr_24(void);
 extern void _savegpr_25(void);
 extern void dtor_80084684(void);
 extern void fn_8005ED68(void);
-extern void fn_8006F2F0(void);
+extern void script_parseToken(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void model_updateBoneTransforms(void);
@@ -549,7 +549,7 @@ lbl_skill_calculateDamage_000006DC:
     mr r4, r30
     mr r5, r24
     mr r6, r29
-    bl fn_8006F2F0
+    bl script_parseToken
     lfs f7, lbl_808809A0
     fmr f1, f26
     fmr f2, f27

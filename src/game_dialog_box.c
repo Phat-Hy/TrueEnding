@@ -9,7 +9,7 @@ extern void fn_80050A1C(void);
 extern void skill_calcTrajectory(void);
 extern void magic_castSpellCircle(void);
 extern void script_executeOpcode(void);
-extern void fn_8006F2F0(void);
+extern void script_parseToken(void);
 extern void minimap_renderOverlay(void);
 extern void atn_Model_findBoneIndex(void);
 extern void target_findEntryByName(void);
@@ -1527,7 +1527,7 @@ lbl_dialog_renderWindow_00001384:
     addi r4, r1, 0x9f8
     addi r5, r25, lbl_807C7B28@l
     li r6, 0x100
-    bl fn_8006F2F0
+    bl script_parseToken
     lwz r3, lbl_8087EEC8
     addi r4, r1, 0x9f8
     lfs f1, lbl_80881A88
@@ -1712,7 +1712,7 @@ lbl_dialog_renderWindow_00001710:
     addi r4, r1, 0x7f8
     addi r5, r1, 0x2f8
     li r6, 0x100
-    bl fn_8006F2F0
+    bl script_parseToken
     lfs f3, lbl_8088196C
     lis r5, 0xb000
     lfs f4, lbl_80881A88
@@ -1782,7 +1782,7 @@ lbl_dialog_renderWindow_00001774:
     addi r4, r1, 0x5f8
     addi r5, r1, 0x1f8
     li r6, 0x100
-    bl fn_8006F2F0
+    bl script_parseToken
     lfs f3, lbl_8088196C
     lis r5, 0xb000
     lfs f4, lbl_80881A88
@@ -2065,7 +2065,7 @@ lbl_dialog_renderWindow_00001C30:
     addi r4, r1, 0x5f8
     addi r5, r1, 0x1f8
     li r6, 0x100
-    bl fn_8006F2F0
+    bl script_parseToken
     lfs f3, lbl_8088196C
     fmr f2, f30
     lfs f4, lbl_80881A88

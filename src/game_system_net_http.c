@@ -17,7 +17,7 @@ extern void sys_getMainManager(void);
 extern void skin_playAnimationByName(void);
 extern void atn_Task_constructor(void);
 extern void actor_calcSpawnTransform(void);
-extern void fn_803918EC(void);
+extern void cam_updateLookAtVector(void);
 extern void fn_80393BEC(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
@@ -689,7 +689,7 @@ lbl_fn_80392964_000008EC:
     cmpwi r28, 0x0
     beq lbl_fn_80392964_000008FC
     mr r3, r27
-    bl fn_803918EC
+    bl cam_updateLookAtVector
 lbl_fn_80392964_000008FC:
     cmpwi r29, 0x0
     beq lbl_fn_80392964_0000090C

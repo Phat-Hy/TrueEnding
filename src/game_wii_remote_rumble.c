@@ -22,7 +22,7 @@ extern void mtx_multVec(void);
 extern void fn_80011420(void);
 extern void fn_800119C0(void);
 extern void fn_800121F0(void);
-extern void fn_8001296C(void);
+extern void actor_getSkeletonNode(void);
 extern void vec3_addAssign(void);
 extern void vec3_sub(void);
 extern void vec3_add(void);
@@ -249,7 +249,7 @@ lbl_fn_80551198_000001BC:
     bl actor_dispatchByType
     mr r3, r29
     li r24, 0x0
-    bl fn_8001296C
+    bl actor_getSkeletonNode
     cmpwi r3, 0x0
     mr r28, r3
     beq lbl_fn_80551198_00000228
@@ -703,7 +703,7 @@ lbl_fn_80551198_0000081C:
     bl vec3_copy
 lbl_fn_80551198_00000894:
     mr r3, r24
-    bl fn_8001296C
+    bl actor_getSkeletonNode
     cmpwi r3, 0x0
     mr r24, r3
     beq lbl_fn_80551198_00000920

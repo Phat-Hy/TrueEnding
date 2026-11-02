@@ -12,7 +12,7 @@ extern void fn_8037EF48(void);
 extern void fn_8037F9AC(void);
 extern void fn_80382A1C(void);
 extern void fn_8038E23C(void);
-extern void fn_803918EC(void);
+extern void cam_updateLookAtVector(void);
 extern void http_calcTransform(void);
 extern void fn_80392510(void);
 extern void http_accumulateVectors(void);
@@ -172,7 +172,7 @@ asm void fn_80389060(void)
     mr r3, r28
     bl fn_80392FE8
     mr r3, r28
-    bl fn_803918EC
+    bl cam_updateLookAtVector
     mr r3, r28
     bl http_calcTransform
     mr r3, r28
@@ -279,7 +279,7 @@ asm void fn_80389210(void)
     mr r3, r30
     bl fn_80392FE8
     mr r3, r30
-    bl fn_803918EC
+    bl cam_updateLookAtVector
     mr r3, r30
     bl http_calcTransform
     mr r3, r30
@@ -381,7 +381,7 @@ asm void fn_803893A0(void)
     mr r3, r28
     bl fn_80392510
     mr r3, r28
-    bl fn_803918EC
+    bl cam_updateLookAtVector
     mr r3, r28
     bl http_calcTransform
     mr r3, r28
@@ -472,7 +472,7 @@ lbl_fn_8038952C_00000524:
     mr r3, r29
     bl fn_80392510
     mr r3, r29
-    bl fn_803918EC
+    bl cam_updateLookAtVector
     mr r3, r29
     bl http_calcTransform
     mr r3, r29
@@ -570,7 +570,7 @@ lbl_fn_80389678_000006F4:
     mr r3, r28
     bl fn_80392510
     mr r3, r28
-    bl fn_803918EC
+    bl cam_updateLookAtVector
     mr r3, r28
     bl http_calcTransform
     mr r3, r28
@@ -968,7 +968,7 @@ lbl_fn_80389A00_00000C9C:
     mr r3, r30
     bl fn_80392FE8
     mr r3, r30
-    bl fn_803918EC
+    bl cam_updateLookAtVector
     mr r3, r30
     bl http_calcTransform
     mr r3, r30
@@ -1177,7 +1177,7 @@ lbl_fn_80389A00_00000F10:
     mr r3, r30
     bl fn_80392FE8
     mr r3, r30
-    bl fn_803918EC
+    bl cam_updateLookAtVector
     mr r3, r30
     bl http_calcTransform
     mr r3, r30
@@ -1482,7 +1482,7 @@ lbl_fn_8038A200_00001268:
     addi r3, r31, 0x1f4
     bl mtx_copyPairedSingle
     mr r3, r31
-    bl fn_803918EC
+    bl cam_updateLookAtVector
     mr r3, r31
     bl http_calcTransform
     mr r3, r31
@@ -2086,7 +2086,7 @@ lbl_fn_8038A5F0_00001BA0:
     mr r3, r29
     bl fn_80392FE8
     mr r3, r29
-    bl fn_803918EC
+    bl cam_updateLookAtVector
     mr r3, r29
     bl http_calcTransform
     mr r3, r29

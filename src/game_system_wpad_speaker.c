@@ -7,7 +7,7 @@ extern void _savegpr_27(void);
 extern void skill_calcTrajectory(void);
 extern void fn_8006A900(void);
 extern void script_executeOpcode(void);
-extern void fn_8006F2F0(void);
+extern void script_parseToken(void);
 extern void dungeon_initGlobalContext(void);
 extern void mem_alloc(void);
 extern void fn_80084F84(void);
@@ -43,7 +43,7 @@ extern void fn_803D83A8(void);
 extern void fn_803DAB4C(void);
 extern void fn_803E4478(void);
 extern void boss_updateLaserAimMatrix(void);
-extern void fn_80541214(void);
+extern void net_stats_getSelectedEntryId(void);
 extern void dlc_findItemInCatalog(void);
 extern void fn_8056BF90(void);
 extern void fn_8056F2FC(void);
@@ -453,7 +453,7 @@ lbl_world_Manager_postUpdate_00000484:
     lwz r3, lbl_8087EEC8
     li r6, 0x100
     lwz r5, 0x0(r29)
-    bl fn_8006F2F0
+    bl script_parseToken
     lis r28, lbl_8078A408@ha
     addi r3, r1, 0x380
     addi r4, r28, lbl_8078A408@l
@@ -579,13 +579,13 @@ lbl_world_Manager_postUpdate_0000067C:
     lwz r3, lbl_8087EEC8
     addi r4, r1, 0x180
     li r6, 0x100
-    bl fn_8006F2F0
+    bl script_parseToken
     mr r3, r28
-    bl fn_80541214
+    bl net_stats_getSelectedEntryId
     cmpwi r3, 0x0
     beq lbl_world_Manager_postUpdate_000006C8
     mr r3, r28
-    bl fn_80541214
+    bl net_stats_getSelectedEntryId
     lis r4, lbl_8078A408@ha
     lwz r6, 0xc(r3)
     addi r4, r4, lbl_8078A408@l
@@ -782,7 +782,7 @@ lbl_world_Manager_postUpdate_00000808:
     addi r4, r1, 0x380
     addi r5, r1, 0x80
     li r6, 0x100
-    bl fn_8006F2F0
+    bl script_parseToken
     lwz r3, lbl_8087EEC8
     addi r4, r1, 0x380
     lfs f1, lbl_80885784
@@ -820,7 +820,7 @@ lbl_world_Manager_postUpdate_00000808:
     addi r4, r1, 0x380
     addi r5, r1, 0x80
     li r6, 0x100
-    bl fn_8006F2F0
+    bl script_parseToken
     lwz r3, lbl_8087EEC8
     addi r4, r1, 0x380
     lfs f1, lbl_80885784

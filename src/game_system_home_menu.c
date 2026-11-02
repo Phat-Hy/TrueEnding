@@ -22,7 +22,7 @@ extern void fn_8004ADF4(void);
 extern void fn_8004AE84(void);
 extern void fn_8004B0E4(void);
 extern void fn_8004B158(void);
-extern void fn_8004B1EC(void);
+extern void sound_stopVoice(void);
 extern void player_transformBoundingSphere(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
@@ -538,7 +538,7 @@ lbl_fn_8035E314_0000057C:
     add r3, r30, r29
     li r4, 0x0
     addi r3, r3, 0x8c
-    bl fn_8004B1EC
+    bl sound_stopVoice
     addi r28, r28, 0x1
     addi r29, r29, 0x14
     cmplwi r28, 0x2
@@ -954,7 +954,7 @@ lbl_fn_8035E858_00000AB4:
     bne lbl_fn_8035E858_00000BC4
     lwz r3, 0xb4(r31)
     li r4, 0x3c
-    bl fn_8004B1EC
+    bl sound_stopVoice
     lwz r3, 0xb4(r31)
     addi r3, r3, 0x8
     bl morph_releaseRef
@@ -1016,7 +1016,7 @@ lbl_fn_8035E858_00000BC4:
     cmpwi r3, 0x0
     beq lbl_fn_8035E858_00000BF4
     li r4, 0x0
-    bl fn_8004B1EC
+    bl sound_stopVoice
     lwz r3, 0xb8(r31)
     addi r3, r3, 0x8
     bl morph_releaseRef
@@ -1270,7 +1270,7 @@ lbl_fn_8035ECCC_00000F58:
     stw r0, 0x180(r3)
     lwz r3, 0xb4(r3)
     lwz r4, 0x178(r31)
-    bl fn_8004B1EC
+    bl sound_stopVoice
     b lbl_fn_8035ECCC_00001514
 lbl_fn_8035ECCC_00000F70:
     lwz r5, 0xb4(r3)
@@ -1373,7 +1373,7 @@ lbl_fn_8035ECCC_000010C4:
     stw r0, 0x180(r31)
     lwz r3, 0xb4(r31)
     lwz r4, 0x178(r31)
-    bl fn_8004B1EC
+    bl sound_stopVoice
     b lbl_fn_8035ECCC_00001108
 lbl_fn_8035ECCC_00001100:
     li r0, 0x4

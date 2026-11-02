@@ -5,7 +5,7 @@
 extern void __files(void);
 extern void dtor_80084684(void);
 extern void fn_8004ADF4(void);
-extern void fn_8004B1EC(void);
+extern void sound_stopVoice(void);
 extern void sound_releaseChannel(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
@@ -1590,7 +1590,7 @@ lbl_fn_8047EFD8_00001474:
 lbl_fn_8047EFD8_00001484:
     addi r3, r29, 0x1f20
     li r4, 0x3c
-    bl fn_8004B1EC
+    bl sound_stopVoice
     addi r3, r29, 0x1f28
     bl morph_releaseRef
 lbl_fn_8047EFD8_00001498:
@@ -2021,7 +2021,7 @@ lbl_fn_8047F580_000019A4:
 lbl_fn_8047F580_000019B4:
     addi r3, r30, 0x1f20
     li r4, 0x3c
-    bl fn_8004B1EC
+    bl sound_stopVoice
     addi r3, r30, 0x1f28
     bl morph_releaseRef
     mr r3, r31

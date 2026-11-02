@@ -73,7 +73,7 @@ void fn_803903C4(void);
 void fn_803903CC(void);
 void fn_803903E0(void);
 void fn_80390A88(void);
-void fn_803918EC(void);
+void cam_updateLookAtVector(void);
 
 asm void fn_80390374(void)
 {
@@ -1555,7 +1555,7 @@ lbl_fn_80390A88_00001520:
     blr
 }
 
-asm void fn_803918EC(void)
+asm void cam_updateLookAtVector(void)
 {
     nofralloc
     stwu r1, -0x4b0(r1)
@@ -1584,7 +1584,7 @@ asm void fn_803918EC(void)
     stw r28, 0x420(r1)
     lwz r0, 0x8f4(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_803918EC_00001CF4
+    beq lbl_cam_updateLookAtVector_00001CF4
     lfs f9, 0x210(r3)
     addi r5, r1, 0xd4
     lfs f8, 0x204(r3)
@@ -1619,13 +1619,13 @@ asm void fn_803918EC(void)
     stfs f2, 0xc4(r1)
     lfs f31, 0x240(r31)
     lfs f30, 0x8fc(r31)
-    beq lbl_fn_803918EC_00001684
+    beq lbl_cam_updateLookAtVector_00001684
     lwz r0, 0x50(r4)
     rlwinm r0, r0, 0, 27, 27
     cmplwi r0, 0x10
-    beq lbl_fn_803918EC_00001684
+    beq lbl_cam_updateLookAtVector_00001684
     lfs f30, lbl_808858E8
-lbl_fn_803918EC_00001684:
+lbl_cam_updateLookAtVector_00001684:
     lwz r3, 0x8f4(r31)
     li r4, 0x0
     bl fn_805BDCC0
@@ -1634,10 +1634,10 @@ lbl_fn_803918EC_00001684:
     lfs f0, 0x8f8(r31)
     fcmpo cr0, f0, f7
     cror eq, gt, eq
-    bne lbl_fn_803918EC_000016B0
+    bne lbl_cam_updateLookAtVector_000016B0
     lfs f0, lbl_808858E8
     stfs f0, 0x8f8(r31)
-lbl_fn_803918EC_000016B0:
+lbl_cam_updateLookAtVector_000016B0:
     lfs f1, 0x8f8(r31)
     mr r3, r28
     addi r4, r1, 0xb0
@@ -1674,7 +1674,7 @@ lbl_fn_803918EC_000016B0:
     stfs f0, 0x418(r1)
     stfs f0, 0x404(r1)
     stfs f0, 0x3f0(r1)
-    beq lbl_fn_803918EC_00001794
+    beq lbl_cam_updateLookAtVector_00001794
     addi r3, r1, 0x2a0
     li r4, 0x7a
     bl PSMTXRotRad
@@ -1695,11 +1695,11 @@ lbl_fn_803918EC_000016B0:
     psq_st f4, 0x18(r30), 0, 0
     psq_st f5, 0x20(r30), 0, 0
     psq_st f6, 0x28(r30), 0, 0
-lbl_fn_803918EC_00001794:
+lbl_cam_updateLookAtVector_00001794:
     lfs f0, lbl_808858E8
     lfs f1, 0xb4(r1)
     fcmpu cr0, f0, f1
-    beq lbl_fn_803918EC_000017F4
+    beq lbl_cam_updateLookAtVector_000017F4
     addi r3, r1, 0x300
     li r4, 0x79
     bl PSMTXRotRad
@@ -1720,11 +1720,11 @@ lbl_fn_803918EC_00001794:
     psq_st f4, 0x18(r30), 0, 0
     psq_st f5, 0x20(r30), 0, 0
     psq_st f6, 0x28(r30), 0, 0
-lbl_fn_803918EC_000017F4:
+lbl_cam_updateLookAtVector_000017F4:
     lfs f0, lbl_808858E8
     lfs f1, 0xb0(r1)
     fcmpu cr0, f0, f1
-    beq lbl_fn_803918EC_00001854
+    beq lbl_cam_updateLookAtVector_00001854
     addi r3, r1, 0x360
     li r4, 0x78
     bl PSMTXRotRad
@@ -1745,7 +1745,7 @@ lbl_fn_803918EC_000017F4:
     psq_st f4, 0x18(r30), 0, 0
     psq_st f5, 0x20(r30), 0, 0
     psq_st f6, 0x28(r30), 0, 0
-lbl_fn_803918EC_00001854:
+lbl_cam_updateLookAtVector_00001854:
     addi r4, r1, 0xbc
     addi r3, r1, 0x3f0
     mr r5, r4
@@ -1760,25 +1760,25 @@ lbl_fn_803918EC_00001854:
     frsp f7, f7
     stfs f2, 0x88(r1)
     fcmpo cr0, f7, f0
-    bge lbl_fn_803918EC_000018B4
+    bge lbl_cam_updateLookAtVector_000018B4
     lfs f7, 0x80(r1)
     lfs f0, lbl_808858E8
     fcmpo cr0, f7, f0
-    ble lbl_fn_803918EC_000018A8
+    ble lbl_cam_updateLookAtVector_000018A8
     lfs f0, lbl_808859CC
-    b lbl_fn_803918EC_000018AC
-lbl_fn_803918EC_000018A8:
+    b lbl_cam_updateLookAtVector_000018AC
+lbl_cam_updateLookAtVector_000018A8:
     lfs f0, lbl_808859D0
-lbl_fn_803918EC_000018AC:
+lbl_cam_updateLookAtVector_000018AC:
     stfs f0, 0x54(r1)
-    b lbl_fn_803918EC_000018C8
-lbl_fn_803918EC_000018B4:
+    b lbl_cam_updateLookAtVector_000018C8
+lbl_cam_updateLookAtVector_000018B4:
     frsp f2, f2
     lfs f1, 0x80(r1)
     bl std_atan2
     frsp f0, f1
     stfs f0, 0x54(r1)
-lbl_fn_803918EC_000018C8:
+lbl_cam_updateLookAtVector_000018C8:
     lfs f0, 0x54(r1)
     addi r3, r1, 0x200
     li r4, 0x79
@@ -1839,26 +1839,26 @@ lbl_fn_803918EC_000018C8:
     fabs f7, f2
     frsp f7, f7
     fcmpo cr0, f7, f0
-    bge lbl_fn_803918EC_000019E4
+    bge lbl_cam_updateLookAtVector_000019E4
     lfs f7, 0x48(r1)
     lfs f0, lbl_808858E8
     fcmpo cr0, f7, f0
-    ble lbl_fn_803918EC_000019D4
+    ble lbl_cam_updateLookAtVector_000019D4
     lfs f0, lbl_808859CC
-    b lbl_fn_803918EC_000019D8
-lbl_fn_803918EC_000019D4:
+    b lbl_cam_updateLookAtVector_000019D8
+lbl_cam_updateLookAtVector_000019D4:
     lfs f0, lbl_808859D0
-lbl_fn_803918EC_000019D8:
+lbl_cam_updateLookAtVector_000019D8:
     fneg f0, f0
     stfs f0, 0x50(r1)
-    b lbl_fn_803918EC_000019F8
-lbl_fn_803918EC_000019E4:
+    b lbl_cam_updateLookAtVector_000019F8
+lbl_cam_updateLookAtVector_000019E4:
     lfs f1, 0x48(r1)
     bl std_atan2
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x50(r1)
-lbl_fn_803918EC_000019F8:
+lbl_cam_updateLookAtVector_000019F8:
     addi r3, r1, 0x50
     lfs f2, lbl_808858E8
     psq_l f1, 0x0(r3), 0, 0
@@ -1898,7 +1898,7 @@ lbl_fn_803918EC_000019F8:
     stfs f0, 0x3e8(r1)
     stfs f0, 0x3d4(r1)
     stfs f0, 0x3c0(r1)
-    beq lbl_fn_803918EC_00001AEC
+    beq lbl_cam_updateLookAtVector_00001AEC
     fmr f1, f2
     addi r3, r1, 0x1a0
     li r4, 0x7a
@@ -1920,11 +1920,11 @@ lbl_fn_803918EC_000019F8:
     psq_st f4, 0x18(r29), 0, 0
     psq_st f5, 0x20(r29), 0, 0
     psq_st f6, 0x28(r29), 0, 0
-lbl_fn_803918EC_00001AEC:
+lbl_cam_updateLookAtVector_00001AEC:
     lfs f0, lbl_808858E8
     lfs f1, 0xc(r1)
     fcmpu cr0, f0, f1
-    beq lbl_fn_803918EC_00001B4C
+    beq lbl_cam_updateLookAtVector_00001B4C
     addi r3, r1, 0x140
     li r4, 0x79
     bl PSMTXRotRad
@@ -1945,11 +1945,11 @@ lbl_fn_803918EC_00001AEC:
     psq_st f4, 0x18(r29), 0, 0
     psq_st f5, 0x20(r29), 0, 0
     psq_st f6, 0x28(r29), 0, 0
-lbl_fn_803918EC_00001B4C:
+lbl_cam_updateLookAtVector_00001B4C:
     lfs f0, lbl_808858E8
     lfs f1, 0x8(r1)
     fcmpu cr0, f0, f1
-    beq lbl_fn_803918EC_00001BAC
+    beq lbl_cam_updateLookAtVector_00001BAC
     addi r3, r1, 0xe0
     li r4, 0x78
     bl PSMTXRotRad
@@ -1970,7 +1970,7 @@ lbl_fn_803918EC_00001B4C:
     psq_st f4, 0x18(r29), 0, 0
     psq_st f5, 0x20(r29), 0, 0
     psq_st f6, 0x28(r29), 0, 0
-lbl_fn_803918EC_00001BAC:
+lbl_cam_updateLookAtVector_00001BAC:
     addi r4, r1, 0xa4
     addi r3, r1, 0x3c0
     mr r5, r4
@@ -2053,7 +2053,7 @@ lbl_fn_803918EC_00001BAC:
     psq_st f1, 0x214(r31), 0, 0
     stfs f2, 0x21c(r31)
     stfs f0, 0x8f8(r31)
-lbl_fn_803918EC_00001CF4:
+lbl_cam_updateLookAtVector_00001CF4:
     lwz r0, 0x4b4(r1)
     psq_l f31, 0x4a8(r1), 0, 0
     lfd f31, 0x4a0(r1)

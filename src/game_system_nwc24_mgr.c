@@ -50,7 +50,7 @@ extern void fn_8037F664(void);
 extern void fn_8037F688(void);
 extern void fn_80387DE4(void);
 extern void fn_8038E23C(void);
-extern void fn_803918EC(void);
+extern void cam_updateLookAtVector(void);
 extern void http_calcTransform(void);
 extern void fn_80392510(void);
 extern void http_accumulateVectors(void);
@@ -1022,7 +1022,7 @@ lbl_fn_803830A8_00000D08:
     addi r3, r30, 0x1f4
     bl mtx_copyPairedSingle
     mr r3, r30
-    bl fn_803918EC
+    bl cam_updateLookAtVector
     mr r3, r30
     bl http_calcTransform
     mr r3, r30
@@ -1573,7 +1573,7 @@ lbl_fn_8038378C_00001338:
     mr r3, r30
     bl fn_80392FE8
     mr r3, r30
-    bl fn_803918EC
+    bl cam_updateLookAtVector
     mr r3, r30
     bl http_calcTransform
     mr r3, r30
@@ -1859,7 +1859,7 @@ lbl_fn_80384188_0000187C:
     addi r3, r29, 0x1f4
     bl mtx_copyPairedSingle
     mr r3, r29
-    bl fn_803918EC
+    bl cam_updateLookAtVector
     mr r3, r29
     bl http_calcTransform
     mr r3, r29
@@ -3446,7 +3446,7 @@ lbl_fn_80384188_000030DC:
     addi r3, r29, 0x1f4
     bl mtx_copyPairedSingle
     mr r3, r29
-    bl fn_803918EC
+    bl cam_updateLookAtVector
     mr r3, r29
     bl http_calcTransform
     mr r3, r29

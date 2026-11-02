@@ -131,7 +131,7 @@ extern u32 lbl_80880A74;
 /* Function declarations */
 void script_executeOpcode(void);
 void fn_8006F17C(void);
-void fn_8006F2F0(void);
+void script_parseToken(void);
 void script_executeCommand(void);
 void fn_8006F548(void);
 void fn_8006F5E8(void);
@@ -419,7 +419,7 @@ lbl_fn_8006F17C_0000037C:
     blr
 }
 
-asm void fn_8006F2F0(void)
+asm void script_parseToken(void)
 {
     nofralloc
     stwu r1, -0x120(r1)
@@ -431,13 +431,13 @@ asm void fn_8006F2F0(void)
     mr r29, r4
     mr r30, r5
     mr r26, r6
-    beq lbl_fn_8006F2F0_000003D8
+    beq lbl_script_parseToken_000003D8
     cmpwi r5, 0x0
-    bne lbl_fn_8006F2F0_000003E0
-lbl_fn_8006F2F0_000003D8:
+    bne lbl_script_parseToken_000003E0
+lbl_script_parseToken_000003D8:
     li r3, 0x0
-    b lbl_fn_8006F2F0_000004C4
-lbl_fn_8006F2F0_000003E0:
+    b lbl_script_parseToken_000004C4
+lbl_script_parseToken_000003E0:
     mr r3, r30
     li r31, 0x0
     li r27, 0x0
@@ -445,12 +445,12 @@ lbl_fn_8006F2F0_000003E0:
     mr r4, r30
     subi r0, r26, 0x1
     li r7, 0x0
-    b lbl_fn_8006F2F0_000004AC
-lbl_fn_8006F2F0_00000400:
+    b lbl_script_parseToken_000004AC
+lbl_script_parseToken_00000400:
     lbz r5, 0x0(r4)
     add r8, r30, r7
     cmplwi r5, 0x80
-    blt lbl_fn_8006F2F0_00000450
+    blt lbl_script_parseToken_00000450
     lbz r5, 0x0(r8)
     addi r7, r7, 0x1
     lbz r6, 0x1(r8)
@@ -466,19 +466,19 @@ lbl_fn_8006F2F0_00000400:
     lhz r5, 0x3260(r5)
     sthx r5, r29, r27
     addi r27, r27, 0x2
-    b lbl_fn_8006F2F0_00000464
-lbl_fn_8006F2F0_00000450:
+    b lbl_script_parseToken_00000464
+lbl_script_parseToken_00000450:
     lbz r5, 0x0(r8)
     addi r31, r31, 0x1
     extsb r5, r5
     sthx r5, r29, r27
     addi r27, r27, 0x2
-lbl_fn_8006F2F0_00000464:
+lbl_script_parseToken_00000464:
     cmplw r31, r0
-    blt lbl_fn_8006F2F0_000004A4
+    blt lbl_script_parseToken_000004A4
     subi r0, r3, 0x1
     cmplw r7, r0
-    bge lbl_fn_8006F2F0_000004B4
+    bge lbl_script_parseToken_000004B4
     lis r4, lbl_80731538@ha
     mr r5, r30
     addi r4, r4, lbl_80731538@l
@@ -489,19 +489,19 @@ lbl_fn_8006F2F0_00000464:
     lwz r3, lbl_8087EEB8
     addi r4, r1, 0x8
     bl boss_recordDamage
-    b lbl_fn_8006F2F0_000004B4
-lbl_fn_8006F2F0_000004A4:
+    b lbl_script_parseToken_000004B4
+lbl_script_parseToken_000004A4:
     addi r7, r7, 0x1
     addi r4, r4, 0x1
-lbl_fn_8006F2F0_000004AC:
+lbl_script_parseToken_000004AC:
     cmplw r7, r3
-    blt lbl_fn_8006F2F0_00000400
-lbl_fn_8006F2F0_000004B4:
+    blt lbl_script_parseToken_00000400
+lbl_script_parseToken_000004B4:
     slwi r0, r31, 1
     li r3, 0x0
     sthx r3, r29, r0
     addi r3, r31, 0x1
-lbl_fn_8006F2F0_000004C4:
+lbl_script_parseToken_000004C4:
     lmw r26, 0x108(r1)
     lwz r0, 0x124(r1)
     mtlr r0
@@ -608,7 +608,7 @@ asm void fn_8006F548(void)
     stw r29, 0x214(r1)
     mr r29, r4
     addi r4, r1, 0x10
-    bl fn_8006F2F0
+    bl script_parseToken
     lwz r0, 0x0(r29)
     mr r30, r3
     srwi. r0, r0, 31

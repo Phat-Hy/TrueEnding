@@ -10,7 +10,7 @@ extern void dtor_80084684(void);
 extern void skill_calcTrajectory(void);
 extern void fn_80062C8C(void);
 extern void magic_updateCircleArea(void);
-extern void fn_8006F2F0(void);
+extern void script_parseToken(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
@@ -1761,7 +1761,7 @@ lbl_fn_801EAB24_00001658:
     addi r4, r1, 0x150
     addi r5, r1, 0x50
     li r6, 0x100
-    bl fn_8006F2F0
+    bl script_parseToken
     lfs f3, lbl_80882B70
     fmr f2, f24
     lfs f4, lbl_80882BA0
@@ -1793,7 +1793,7 @@ lbl_fn_801EAB24_00001658:
     addi r4, r1, 0x150
     addi r5, r1, 0x50
     li r6, 0x100
-    bl fn_8006F2F0
+    bl script_parseToken
     lfs f3, lbl_80882B70
     fmr f2, f24
     lfs f4, lbl_80882BA0
@@ -1823,7 +1823,7 @@ lbl_fn_801EAB24_00001658:
     addi r4, r1, 0x150
     addi r5, r1, 0x50
     li r6, 0x100
-    bl fn_8006F2F0
+    bl script_parseToken
     lfs f3, lbl_80882B70
     fmr f2, f24
     lfs f4, lbl_80882BA0

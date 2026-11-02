@@ -13,7 +13,7 @@ extern void atn_Model_findBoneIndex(void);
 extern void actor_calcSpawnTransform(void);
 extern void fn_80178088(void);
 extern void fn_8037F9AC(void);
-extern void fn_803918EC(void);
+extern void cam_updateLookAtVector(void);
 extern void http_calcTransform(void);
 extern void fn_80392510(void);
 extern void http_accumulateVectors(void);
@@ -814,7 +814,7 @@ lbl_fn_8038D1C0_000008F0:
     addi r3, r31, 0x1f4
     bl mtx_copyPairedSingle
     mr r3, r31
-    bl fn_803918EC
+    bl cam_updateLookAtVector
     mr r3, r31
     bl http_calcTransform
     mr r3, r31
@@ -1031,7 +1031,7 @@ lbl_fn_8038D4D4_00000C38:
     addi r3, r31, 0x1f4
     bl mtx_copyPairedSingle
     mr r3, r31
-    bl fn_803918EC
+    bl cam_updateLookAtVector
     mr r3, r31
     bl http_calcTransform
     mr r3, r31
@@ -1268,7 +1268,7 @@ lbl_fn_8038D854_00000FF8:
     addi r3, r31, 0x1f4
     bl mtx_copyPairedSingle
     mr r3, r31
-    bl fn_803918EC
+    bl cam_updateLookAtVector
     mr r3, r31
     bl http_calcTransform
     mr r3, r31
@@ -1415,7 +1415,7 @@ lbl_fn_8038DBE4_00001394:
     addi r3, r31, 0x1f4
     bl mtx_copyPairedSingle
     mr r3, r31
-    bl fn_803918EC
+    bl cam_updateLookAtVector
     mr r3, r31
     bl http_calcTransform
     mr r3, r31
@@ -1530,7 +1530,7 @@ lbl_fn_8038DDE0_0000159C:
     mr r3, r28
     bl fn_80392510
     mr r3, r28
-    bl fn_803918EC
+    bl cam_updateLookAtVector
     mr r3, r28
     bl http_calcTransform
     mr r3, r28
@@ -1693,7 +1693,7 @@ lbl_fn_8038DF5C_000016D0:
     mr r3, r30
     bl fn_80392FE8
     mr r3, r30
-    bl fn_803918EC
+    bl cam_updateLookAtVector
     mr r3, r30
     bl http_calcTransform
     mr r3, r30

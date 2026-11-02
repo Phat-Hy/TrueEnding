@@ -15,7 +15,7 @@ extern void party_evalFormationState(void);
 extern void fn_80178088(void);
 extern void fn_8037F830(void);
 extern void fn_80387DE4(void);
-extern void fn_803918EC(void);
+extern void cam_updateLookAtVector(void);
 extern void http_calcTransform(void);
 extern void fn_80392510(void);
 extern void http_accumulateVectors(void);
@@ -3341,7 +3341,7 @@ lbl_fn_8037F9AC_00002EE0:
     mr r3, r29
     bl fn_80392FE8
     mr r3, r29
-    bl fn_803918EC
+    bl cam_updateLookAtVector
     mr r3, r29
     bl http_calcTransform
     mr r3, r29

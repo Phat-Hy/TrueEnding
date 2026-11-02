@@ -33,7 +33,7 @@ extern void wcs_vformat(void);
 extern void actor_findSpawnTemplate(void);
 extern void actor_spawnActorWithId(void);
 extern void fn_80117914(void);
-extern void fn_80119ECC(void);
+extern void player_move_destroyElement(void);
 extern void enemy_nav_destroyElement(void);
 extern void boss_testAiFlag(void);
 extern void fn_801D082C(void);
@@ -2220,9 +2220,9 @@ lbl_fn_80529C74_00001C44:
     addis r3, r29, 0x1
     subic. r0, r3, 0x61a0
     beq lbl_fn_80529C74_00001C94
-    lis r4, fn_80119ECC@ha
+    lis r4, player_move_destroyElement@ha
     subi r3, r3, 0x4fdc
-    addi r4, r4, fn_80119ECC@l
+    addi r4, r4, player_move_destroyElement@l
     li r5, 0x2d4
     li r6, 0x1c
     bl __destroy_new_array

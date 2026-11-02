@@ -40,7 +40,7 @@ extern void fn_800F3170(void);
 extern void fn_800F3490(void);
 extern void fn_800F3D28(void);
 extern void fn_80116E7C(void);
-extern void fn_80119ECC(void);
+extern void player_move_destroyElement(void);
 extern void fn_8011F87C(void);
 extern void fn_8011FB98(void);
 extern void magic_dispatchActionCommand(void);
@@ -136,7 +136,7 @@ extern void fn_804A0580(void);
 extern void fn_804A2F98(void);
 extern void fn_804A2FBC(void);
 extern void fn_804A5E40(void);
-extern void fn_80541214(void);
+extern void net_stats_getSelectedEntryId(void);
 extern void fn_80547984(void);
 extern void fn_80547A24(void);
 extern void fn_80547A88(void);
@@ -1902,9 +1902,9 @@ lbl_world_Manager_draw_00001770:
     addis r3, r25, 0x1
     subic. r0, r3, 0x61a0
     beq lbl_world_Manager_draw_000017F0
-    lis r4, fn_80119ECC@ha
+    lis r4, player_move_destroyElement@ha
     subi r3, r3, 0x4fdc
-    addi r4, r4, fn_80119ECC@l
+    addi r4, r4, player_move_destroyElement@l
     li r5, 0x2d4
     li r6, 0x1c
     bl __destroy_new_array
@@ -3089,7 +3089,7 @@ lbl_world_Manager_draw_000028A4:
     cmpwi r0, 0x19d
     beq lbl_world_Manager_draw_00002A4C
 lbl_world_Manager_draw_000028D0:
-    bl fn_80541214
+    bl net_stats_getSelectedEntryId
     lwz r3, 0x10(r3)
     subi r0, r3, 0x1
     cmplwi r0, 0x1

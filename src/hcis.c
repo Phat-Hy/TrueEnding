@@ -39,7 +39,7 @@ void fn_80628160(void);
 void fn_80628170(void);
 void fn_80628180(void);
 u32 fn_80628230(void);
-void fn_80628240(void);
+void hcis_restoreInterrupts(void);
 void fn_80628270(void);
 void fn_806282C0(void);
 void fn_806282D0(void);
@@ -202,7 +202,7 @@ u32 fn_80628230(void)
     return 2;
 }
 
-asm void fn_80628240(void)
+asm void hcis_restoreInterrupts(void)
 {
     nofralloc
     lis r5, lbl_807F3760@ha

@@ -19,7 +19,7 @@ extern void fn_8006144C(void);
 extern void skill_calculateDamage(void);
 extern void skill_calcTrajectory(void);
 extern void script_executeOpcode(void);
-extern void fn_8006F2F0(void);
+extern void script_parseToken(void);
 extern void mem_free(void);
 extern void mem_getAllocSize(void);
 extern void str_parseInt(void);
@@ -392,7 +392,7 @@ lbl_spectateView_update_0000046C:
     addi r4, r1, 0xd8
     lwz r5, 0x0(r29)
     li r6, 0x100
-    bl fn_8006F2F0
+    bl script_parseToken
     fmr f1, f31
     lwz r3, lbl_8087EEC8
     lfs f2, lbl_80887BB4

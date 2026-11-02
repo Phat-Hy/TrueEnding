@@ -12,7 +12,7 @@ extern void actor_dispatchMessage(void);
 extern void fn_8004829C(void);
 extern void fn_8004895C(void);
 extern void fn_80049654(void);
-extern void fn_8004B1EC(void);
+extern void sound_stopVoice(void);
 extern void fn_8006A204(void);
 extern void fn_8006A900(void);
 extern void boss_triggerEventSequence(void);
@@ -58,7 +58,7 @@ extern void fn_8049D68C(void);
 extern void fn_8049D704(void);
 extern void fn_8053E8CC(void);
 extern void fn_8054119C(void);
-extern void fn_80541214(void);
+extern void net_stats_getSelectedEntryId(void);
 extern void fn_80541538(void);
 extern void fn_80541D00(void);
 extern void fn_805477CC(void);
@@ -512,7 +512,7 @@ asm void fn_8047FAD0(void)
     beq lbl_fn_8047FAD0_000004D4
     addi r3, r30, 0x1f20
     li r4, 0x1e
-    bl fn_8004B1EC
+    bl sound_stopVoice
     addi r3, r30, 0x1f28
     bl morph_releaseRef
     stw r31, 0x1f34(r30)
@@ -664,7 +664,7 @@ lbl_fn_8047FCC0_000006B0:
     cmpwi r0, 0xa
     bne lbl_fn_8047FCC0_00000894
     mr r3, r28
-    bl fn_80541214
+    bl net_stats_getSelectedEntryId
     lwz r0, 0x10(r3)
     cmpwi r0, 0x1
     beq lbl_fn_8047FCC0_00000704
@@ -678,7 +678,7 @@ lbl_fn_8047FCC0_00000704:
     cmpwi r27, 0x0
     beq lbl_fn_8047FCC0_00000788
     mr r3, r27
-    bl fn_80541214
+    bl net_stats_getSelectedEntryId
     cmpwi r3, 0x0
     mr r29, r3
     beq lbl_fn_8047FCC0_00000788
@@ -711,7 +711,7 @@ lbl_fn_8047FCC0_00000780:
     bl fn_8047FAD0
 lbl_fn_8047FCC0_00000788:
     mr r3, r28
-    bl fn_80541214
+    bl net_stats_getSelectedEntryId
     mr r4, r3
     lwz r3, lbl_8087EFE8
     lwz r6, 0x10(r4)
@@ -762,16 +762,16 @@ lbl_fn_8047FCC0_000007B8:
     cmpwi r0, 0x151b
     bne lbl_fn_8047FCC0_00000888
     mr r3, r27
-    bl fn_80541214
+    bl net_stats_getSelectedEntryId
     cmpwi r3, 0x0
     beq lbl_fn_8047FCC0_00000888
     mr r3, r27
-    bl fn_80541214
+    bl net_stats_getSelectedEntryId
     lwz r0, 0xc(r3)
     cmpwi r0, 0x7
     beq lbl_fn_8047FCC0_00000894
     mr r3, r27
-    bl fn_80541214
+    bl net_stats_getSelectedEntryId
     lwz r0, 0xc(r3)
     cmpwi r0, 0x8
     beq lbl_fn_8047FCC0_00000894

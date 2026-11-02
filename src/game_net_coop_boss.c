@@ -11,7 +11,7 @@ extern void scene_traverseNode(void);
 extern void sound_initChannelParams(void);
 extern void sound_releaseChannel(void);
 extern void item_useConsumable(void);
-extern void fn_8005E3E4(void);
+extern void curve_appendKeyframe(void);
 extern void fn_8005E7F4(void);
 extern void fn_8005EDF0(void);
 extern void fn_8005EE38(void);
@@ -3095,7 +3095,7 @@ lbl_fn_804A894C_00002904:
     addi r5, r24, 0x1a8
     li r6, 0x1
     li r7, 0x1
-    bl fn_8005E3E4
+    bl curve_appendKeyframe
     lfs f0, 0x83c(r31)
     fcmpo cr0, f0, f27
     cror eq, gt, eq

@@ -9,7 +9,7 @@ extern void map_debugLog(void);
 extern void fn_800C7DC4(void);
 extern void fn_800C8078(void);
 extern void fn_800C81CC(void);
-extern void fn_800CB7F0(void);
+extern void morph_resetCluster(void);
 extern void fn_800CB7F4(void);
 extern void fn_800CB7F8(void);
 extern void fn_800CB7FC(void);
@@ -82,9 +82,9 @@ lbl_fn_800CB800_00000054:
     beq lbl_fn_800CB800_00000168
     stw r4, 0x4(r3)
     li r4, 0x0
-    lis r3, fn_800CB7F0@ha
+    lis r3, morph_resetCluster@ha
     lbz r0, lbl_8087EFEE
-    addi r3, r3, fn_800CB7F0@l
+    addi r3, r3, morph_resetCluster@l
     stw r3, 0x68(r1)
     extsb. r0, r0
     stw r4, 0x6c(r1)
@@ -174,9 +174,9 @@ lbl_fn_800CB800_00000198:
     beq lbl_fn_800CB800_000002AC
     stfs f0, 0x8(r3)
     li r4, 0x0
-    lis r3, fn_800CB7F0@ha
+    lis r3, morph_resetCluster@ha
     lbz r0, lbl_8087EFEE
-    addi r3, r3, fn_800CB7F0@l
+    addi r3, r3, morph_resetCluster@l
     stw r3, 0x50(r1)
     extsb. r0, r0
     stw r4, 0x54(r1)
@@ -561,9 +561,9 @@ lbl_fn_800CBE8C_000006E0:
     beq lbl_fn_800CBE8C_000007F4
     stw r4, 0x4(r3)
     li r4, 0x0
-    lis r3, fn_800CB7F0@ha
+    lis r3, morph_resetCluster@ha
     lbz r0, lbl_8087EFEE
-    addi r3, r3, fn_800CB7F0@l
+    addi r3, r3, morph_resetCluster@l
     stw r3, 0x68(r1)
     extsb. r0, r0
     stw r4, 0x6c(r1)
@@ -653,9 +653,9 @@ lbl_fn_800CBE8C_00000824:
     beq lbl_fn_800CBE8C_00000938
     stfs f0, 0x8(r3)
     li r4, 0x0
-    lis r3, fn_800CB7F0@ha
+    lis r3, morph_resetCluster@ha
     lbz r0, lbl_8087EFEE
-    addi r3, r3, fn_800CB7F0@l
+    addi r3, r3, morph_resetCluster@l
     stw r3, 0x50(r1)
     extsb. r0, r0
     stw r4, 0x54(r1)
@@ -1040,9 +1040,9 @@ lbl_fn_800CC518_00000D6C:
     beq lbl_fn_800CC518_00000E80
     stw r4, 0x4(r3)
     li r4, 0x0
-    lis r3, fn_800CB7F0@ha
+    lis r3, morph_resetCluster@ha
     lbz r0, lbl_8087EFEE
-    addi r3, r3, fn_800CB7F0@l
+    addi r3, r3, morph_resetCluster@l
     stw r3, 0x68(r1)
     extsb. r0, r0
     stw r4, 0x6c(r1)
@@ -1132,9 +1132,9 @@ lbl_fn_800CC518_00000EB0:
     beq lbl_fn_800CC518_00000FC4
     stfs f0, 0x8(r3)
     li r4, 0x0
-    lis r3, fn_800CB7F0@ha
+    lis r3, morph_resetCluster@ha
     lbz r0, lbl_8087EFEE
-    addi r3, r3, fn_800CB7F0@l
+    addi r3, r3, morph_resetCluster@l
     stw r3, 0x50(r1)
     extsb. r0, r0
     stw r4, 0x54(r1)
@@ -2143,9 +2143,9 @@ lbl_fn_800CCBF8_00001D20:
     beq lbl_fn_800CCBF8_00001E34
     stfs f1, 0x8(r3)
     li r4, 0x0
-    lis r3, fn_800CB7F0@ha
+    lis r3, morph_resetCluster@ha
     lbz r0, lbl_8087EFEE
-    addi r3, r3, fn_800CB7F0@l
+    addi r3, r3, morph_resetCluster@l
     stw r3, 0x78(r1)
     extsb. r0, r0
     stw r4, 0x7c(r1)
@@ -2268,9 +2268,9 @@ lbl_fn_800CCBF8_00001EDC:
     beq lbl_fn_800CCBF8_00001FF0
     stfs f1, 0x8(r3)
     li r4, 0x0
-    lis r3, fn_800CB7F0@ha
+    lis r3, morph_resetCluster@ha
     lbz r0, lbl_8087EFEE
-    addi r3, r3, fn_800CB7F0@l
+    addi r3, r3, morph_resetCluster@l
     stw r3, 0x60(r1)
     extsb. r0, r0
     stw r4, 0x64(r1)
@@ -2393,9 +2393,9 @@ lbl_fn_800CCBF8_00002098:
     beq lbl_fn_800CCBF8_000021AC
     stfs f1, 0x8(r3)
     li r4, 0x0
-    lis r3, fn_800CB7F0@ha
+    lis r3, morph_resetCluster@ha
     lbz r0, lbl_8087EFEE
-    addi r3, r3, fn_800CB7F0@l
+    addi r3, r3, morph_resetCluster@l
     stw r3, 0x48(r1)
     extsb. r0, r0
     stw r4, 0x4c(r1)
@@ -2517,9 +2517,9 @@ lbl_fn_800CCBF8_00002250:
     beq lbl_fn_800CCBF8_00002364
     stfs f1, 0x8(r3)
     li r4, 0x0
-    lis r3, fn_800CB7F0@ha
+    lis r3, morph_resetCluster@ha
     lbz r0, lbl_8087EFEE
-    addi r3, r3, fn_800CB7F0@l
+    addi r3, r3, morph_resetCluster@l
     stw r3, 0x30(r1)
     extsb. r0, r0
     stw r4, 0x34(r1)
@@ -2641,9 +2641,9 @@ lbl_fn_800CCBF8_00002408:
     beq lbl_fn_800CCBF8_0000251C
     stfs f1, 0x8(r3)
     li r4, 0x0
-    lis r3, fn_800CB7F0@ha
+    lis r3, morph_resetCluster@ha
     lbz r0, lbl_8087EFEE
-    addi r3, r3, fn_800CB7F0@l
+    addi r3, r3, morph_resetCluster@l
     stw r3, 0x18(r1)
     extsb. r0, r0
     stw r4, 0x1c(r1)

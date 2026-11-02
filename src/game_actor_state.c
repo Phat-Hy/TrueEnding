@@ -18,7 +18,7 @@ extern void atn_Task_setActive(void);
 extern void str_findChar(void);
 extern void actor_findSpawnTemplate(void);
 extern void actor_spawnActorWithId(void);
-extern void fn_80119ECC(void);
+extern void player_move_destroyElement(void);
 extern void fn_80119F0C(void);
 extern void fn_8011A4D0(void);
 extern void fn_8011AD38(void);
@@ -1725,9 +1725,9 @@ lbl_fn_8011999C_0000166C:
     addis r3, r29, 0x1
     subic. r3, r3, 0x61a0
     beq lbl_fn_8011999C_000016A0
-    lis r4, fn_80119ECC@ha
+    lis r4, player_move_destroyElement@ha
     addi r3, r3, 0x11c4
-    addi r4, r4, fn_80119ECC@l
+    addi r4, r4, player_move_destroyElement@l
     li r5, 0x2d4
     li r6, 0x1c
     bl __destroy_new_array

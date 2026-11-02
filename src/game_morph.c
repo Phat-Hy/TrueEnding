@@ -111,7 +111,7 @@ void fn_800CB6F8(void);
 void fn_800CB714(void);
 void fn_800CB718(void);
 void fn_800CB788(void);
-void fn_800CB7F0(void);
+void morph_resetCluster(void);
 void fn_800CB7F4(void);
 void fn_800CB7F8(void);
 void fn_800CB7FC(void);
@@ -1745,7 +1745,7 @@ lbl_fn_800CB788_000013AC:
     blr
 }
 
-void fn_800CB7F0(void)
+void morph_resetCluster(void)
 {
     fn_800CA144();
 }

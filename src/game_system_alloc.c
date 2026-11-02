@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
-extern void fn_8005E3E4(void);
+extern void curve_appendKeyframe(void);
 extern void fn_8005E838(void);
 extern void fn_8005EEA0(void);
 extern void fn_8005F36C(void);
@@ -320,7 +320,7 @@ lbl_player_updateEquipment_00000374:
     lfs f6, 0x50(r1)
     lfs f7, 0x54(r1)
     lfs f8, 0x58(r1)
-    bl fn_8005E3E4
+    bl curve_appendKeyframe
     lhz r0, 0xe(r31)
     cmplwi r0, 0x1
     bne lbl_player_updateEquipment_0000045C
@@ -345,7 +345,7 @@ lbl_player_updateEquipment_00000374:
     lfs f7, 0x54(r1)
     lfs f8, 0x58(r1)
     lwz r6, 0x2c(r1)
-    bl fn_8005E3E4
+    bl curve_appendKeyframe
     b lbl_player_updateEquipment_00003568
 lbl_player_updateEquipment_0000045C:
     cmplwi r0, 0x2
@@ -369,7 +369,7 @@ lbl_player_updateEquipment_0000045C:
     lfs f7, 0x54(r1)
     lfs f8, 0x58(r1)
     lwz r6, 0x2c(r1)
-    bl fn_8005E3E4
+    bl curve_appendKeyframe
     lfs f0, 0x5c(r1)
     mr r4, r28
     stfs f0, 0x8(r1)
@@ -389,7 +389,7 @@ lbl_player_updateEquipment_0000045C:
     lfs f7, 0x54(r1)
     lfs f8, 0x58(r1)
     lwz r6, 0x2c(r1)
-    bl fn_8005E3E4
+    bl curve_appendKeyframe
     lfs f0, 0x5c(r1)
     mr r4, r28
     stfs f0, 0x8(r1)
@@ -409,7 +409,7 @@ lbl_player_updateEquipment_0000045C:
     lfs f7, 0x54(r1)
     lfs f8, 0x58(r1)
     lwz r6, 0x2c(r1)
-    bl fn_8005E3E4
+    bl curve_appendKeyframe
     lfs f0, 0x5c(r1)
     mr r4, r28
     stfs f0, 0x8(r1)
@@ -429,7 +429,7 @@ lbl_player_updateEquipment_0000045C:
     lfs f7, 0x54(r1)
     lfs f8, 0x58(r1)
     lwz r6, 0x2c(r1)
-    bl fn_8005E3E4
+    bl curve_appendKeyframe
     b lbl_player_updateEquipment_00003568
 lbl_player_updateEquipment_000005A8:
     cmplwi r0, 0x3
@@ -453,7 +453,7 @@ lbl_player_updateEquipment_000005A8:
     lfs f7, 0x54(r1)
     lfs f8, 0x58(r1)
     lwz r6, 0x2c(r1)
-    bl fn_8005E3E4
+    bl curve_appendKeyframe
     lfs f0, 0x5c(r1)
     mr r4, r28
     stfs f0, 0x8(r1)
@@ -473,7 +473,7 @@ lbl_player_updateEquipment_000005A8:
     lfs f7, 0x54(r1)
     lfs f8, 0x58(r1)
     lwz r6, 0x2c(r1)
-    bl fn_8005E3E4
+    bl curve_appendKeyframe
     lfs f0, 0x5c(r1)
     mr r4, r28
     stfs f0, 0x8(r1)
@@ -493,7 +493,7 @@ lbl_player_updateEquipment_000005A8:
     lfs f7, 0x54(r1)
     lfs f8, 0x58(r1)
     lwz r6, 0x2c(r1)
-    bl fn_8005E3E4
+    bl curve_appendKeyframe
     lfs f0, 0x5c(r1)
     mr r4, r28
     stfs f0, 0x8(r1)
@@ -513,7 +513,7 @@ lbl_player_updateEquipment_000005A8:
     lfs f7, 0x54(r1)
     lfs f8, 0x58(r1)
     lwz r6, 0x2c(r1)
-    bl fn_8005E3E4
+    bl curve_appendKeyframe
     lfs f0, 0x5c(r1)
     mr r4, r28
     stfs f0, 0x8(r1)
@@ -535,7 +535,7 @@ lbl_player_updateEquipment_000005A8:
     lfs f7, 0x54(r1)
     lfs f8, 0x58(r1)
     lwz r6, 0x2c(r1)
-    bl fn_8005E3E4
+    bl curve_appendKeyframe
     lfs f0, 0x5c(r1)
     mr r4, r28
     stfs f0, 0x8(r1)
@@ -557,7 +557,7 @@ lbl_player_updateEquipment_000005A8:
     lfs f7, 0x54(r1)
     lfs f8, 0x58(r1)
     lwz r6, 0x2c(r1)
-    bl fn_8005E3E4
+    bl curve_appendKeyframe
     lfs f0, 0x5c(r1)
     mr r4, r28
     stfs f0, 0x8(r1)
@@ -579,7 +579,7 @@ lbl_player_updateEquipment_000005A8:
     lfs f7, 0x54(r1)
     lfs f8, 0x58(r1)
     lwz r6, 0x2c(r1)
-    bl fn_8005E3E4
+    bl curve_appendKeyframe
     lfs f0, 0x5c(r1)
     mr r4, r28
     stfs f0, 0x8(r1)
@@ -601,7 +601,7 @@ lbl_player_updateEquipment_000005A8:
     lfs f7, 0x54(r1)
     lfs f8, 0x58(r1)
     lwz r6, 0x2c(r1)
-    bl fn_8005E3E4
+    bl curve_appendKeyframe
     b lbl_player_updateEquipment_00003568
 lbl_player_updateEquipment_00000854:
     lfs f0, 0x5c(r1)

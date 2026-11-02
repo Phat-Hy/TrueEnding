@@ -12,7 +12,7 @@ extern void fn_8001268C(void);
 extern void fn_8001271C(void);
 extern void fn_8001282C(void);
 extern void fn_800128FC(void);
-extern void fn_8001296C(void);
+extern void actor_getSkeletonNode(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_80069BF4(void);
@@ -263,7 +263,7 @@ lbl_fn_80557ABC_00000284:
     li r29, 0x0
 lbl_fn_80557ABC_00000288:
     mr r3, r5
-    bl fn_8001296C
+    bl actor_getSkeletonNode
     cmpwi r3, 0x0
     mr r28, r3
     bne lbl_fn_80557ABC_000002A4
@@ -1395,7 +1395,7 @@ lbl_fn_805588F0_0000119C:
 lbl_fn_805588F0_000011A0:
     lwz r30, 0x4(r3)
     mr r3, r7
-    bl fn_8001296C
+    bl actor_getSkeletonNode
     cmpwi r3, 0x0
     mr r28, r3
     beq lbl_fn_805588F0_00001538
@@ -1620,7 +1620,7 @@ lbl_fn_805588F0_00001490:
     lwz r29, 0x4(r3)
     mr r3, r5
     lwz r30, 0x38(r31)
-    bl fn_8001296C
+    bl actor_getSkeletonNode
     cmpwi r3, 0x0
     beq lbl_fn_805588F0_00001538
     cmpwi r30, -0x1
@@ -1965,7 +1965,7 @@ lbl_fn_8055936C_00001928:
     li r5, 0x0
 lbl_fn_8055936C_0000192C:
     mr r3, r5
-    bl fn_8001296C
+    bl actor_getSkeletonNode
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_8055936C_000019CC
@@ -2067,7 +2067,7 @@ lbl_fn_805594A4_00001A74:
     lwz r29, 0x18(r22)
     lwz r28, 0x1c(r22)
     subf r27, r26, r0
-    bl fn_8001296C
+    bl actor_getSkeletonNode
     lwz r0, 0x30(r22)
     mr r23, r3
     lwz r24, 0x16c(r3)

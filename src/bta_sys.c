@@ -33,7 +33,7 @@ extern void fn_80628000(void);
 extern void fn_80628090(void);
 extern void fn_80628140(void);
 extern void fn_80628170(void);
-extern void fn_80628240(void);
+extern void hcis_restoreInterrupts(void);
 extern void fn_80628270(void);
 extern void fn_80628310(void);
 extern void fn_80628330(void);
@@ -403,7 +403,7 @@ asm void fn_806289D0(void)
     stb r0, 0x29(r31)
     stb r30, 0x28(r31)
     stb r30, lbl_80880159
-    bl fn_80628240
+    bl hcis_restoreInterrupts
     lwz r12, 0x20(r31)
     cmpwi r12, 0x0
     beq lbl_fn_806289D0_00000378
@@ -673,7 +673,7 @@ asm void fn_80628DC0(void)
     lbz r3, 0x48(r4)
     subi r0, r3, 0x1
     stb r0, 0x48(r4)
-    bl fn_80628240
+    bl hcis_restoreInterrupts
 lbl_fn_80628DC0_00000734:
     lis r30, lbl_8081C280@ha
     addi r31, r30, lbl_8081C280@l
@@ -710,7 +710,7 @@ lbl_fn_80628DC0_000007AC:
     lbz r3, 0x48(r31)
     addi r0, r3, 0x1
     stb r0, 0x48(r31)
-    bl fn_80628240
+    bl hcis_restoreInterrupts
 lbl_fn_80628DC0_000007C0:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
@@ -740,7 +740,7 @@ asm void fn_80628EB0(void)
     lbz r3, 0x38(r4)
     subi r0, r3, 0x1
     stb r0, 0x38(r4)
-    bl fn_80628240
+    bl hcis_restoreInterrupts
 lbl_fn_80628EB0_00000824:
     lis r30, lbl_8081C280@ha
     addi r31, r30, lbl_8081C280@l
@@ -774,7 +774,7 @@ lbl_fn_80628EB0_00000890:
     lbz r3, 0x38(r31)
     addi r0, r3, 0x1
     stb r0, 0x38(r31)
-    bl fn_80628240
+    bl hcis_restoreInterrupts
 lbl_fn_80628EB0_000008A4:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
@@ -803,7 +803,7 @@ asm void fn_80628F90(void)
     addi r30, r30, lbl_8081C280@l
     li r0, 0x5
     stb r0, 0x29(r30)
-    bl fn_80628240
+    bl hcis_restoreInterrupts
     lbz r0, lbl_80880159
     cmpwi r0, 0x0
     bne lbl_fn_80628F90_0000091C
@@ -917,7 +917,7 @@ lbl_fn_80628F90_00000A98:
     bl fn_80628270
     li r0, 0x4
     stb r0, 0x29(r30)
-    bl fn_80628240
+    bl hcis_restoreInterrupts
     li r0, 0x1
     stw r0, lbl_8087EA78
 lbl_fn_80628F90_00000AB0:
@@ -957,7 +957,7 @@ lbl_fn_806291A0_00000B20:
     li r0, 0x2
     stw r28, 0x20(r30)
     stb r0, 0x29(r30)
-    bl fn_80628240
+    bl hcis_restoreInterrupts
 lbl_fn_806291A0_00000B34:
     lbz r3, 0x1c(r30)
     bl scapi_getConfigItem
@@ -1125,7 +1125,7 @@ lbl_fn_80629340_00000D80:
     lbz r3, 0x48(r30)
     addi r0, r3, 0x1
     stb r0, 0x48(r30)
-    bl fn_80628240
+    bl hcis_restoreInterrupts
     b lbl_fn_80629340_00000E60
 lbl_fn_80629340_00000D98:
     lbz r3, 0x1d(r30)
@@ -1181,7 +1181,7 @@ lbl_fn_80629340_00000E4C:
     lbz r3, 0x38(r30)
     addi r0, r3, 0x1
     stb r0, 0x38(r30)
-    bl fn_80628240
+    bl hcis_restoreInterrupts
 lbl_fn_80629340_00000E60:
     clrlwi r3, r28, 16
 lbl_fn_80629340_00000E64:
@@ -1205,7 +1205,7 @@ asm void fn_80629550(void)
     li r0, 0x0
     addi r31, r3, lbl_8081C280@l
     stb r0, 0x29(r31)
-    bl fn_80628240
+    bl hcis_restoreInterrupts
     lhz r0, 0x34(r31)
     cmpwi r0, 0x0
     beq lbl_fn_80629550_00000ED0
@@ -1262,7 +1262,7 @@ asm void fn_80629600(void)
     stb r4, 0x29(r3)
     stb r0, 0x28(r3)
     stb r0, lbl_80880159
-    bl fn_80628240
+    bl hcis_restoreInterrupts
     lwz r0, 0x14(r1)
     mtlr r0
     addi r1, r1, 0x10
@@ -1503,7 +1503,7 @@ asm void fn_80629910(void)
     stw r31, 0xc(r1)
     stw r0, lbl_8088017C
     bl fn_80628000
-    bl fn_80628240
+    bl hcis_restoreInterrupts
     bl fn_8063B448
     lis r3, lbl_80764C40@ha
     la r0, lbl_8087EAC0
@@ -1640,10 +1640,10 @@ lbl_fn_80629AA0_0000141C:
     lbz r3, lbl_8087EAC8
     addi r0, r3, 0x1
     stb r0, lbl_8087EAC8
-    bl fn_80628240
+    bl hcis_restoreInterrupts
     b lbl_fn_80629AA0_00001734
 lbl_fn_80629AA0_00001430:
-    bl fn_80628240
+    bl hcis_restoreInterrupts
     lwz r3, lbl_80880184
     li r31, 0x5
     lwz r4, lbl_80880180

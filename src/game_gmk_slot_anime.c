@@ -16,7 +16,7 @@ extern void hurtbox_testCollisionLayer(void);
 extern void fn_8010B250(void);
 extern void fn_8010CF28(void);
 extern void fn_8010F4BC(void);
-extern void fn_80119ECC(void);
+extern void player_move_destroyElement(void);
 extern void fn_8012B0B0(void);
 extern void fn_8012B3A8(void);
 extern void quest_getRewardItemSlot(void);
@@ -1324,8 +1324,8 @@ asm void fn_80442F68(void)
     bl atn_LoadHandle_destructor
 lbl_fn_80442F68_00001148:
     addis r3, r31, 0x1
-    lis r4, fn_80119ECC@ha
-    addi r4, r4, fn_80119ECC@l
+    lis r4, player_move_destroyElement@ha
+    addi r4, r4, player_move_destroyElement@l
     li r5, 0x2d4
     li r6, 0x1c
     subi r3, r3, 0x7bb0
@@ -1464,11 +1464,11 @@ lbl_fn_80442FF4_000012EC:
     bl __construct_new_array
     addis r3, r23, 0x1
     lis r4, fn_803BB3C0@ha
-    lis r5, fn_80119ECC@ha
+    lis r5, player_move_destroyElement@ha
     li r6, 0x2d4
     addi r4, r4, fn_803BB3C0@l
     li r7, 0x1c
-    addi r5, r5, fn_80119ECC@l
+    addi r5, r5, player_move_destroyElement@l
     subi r3, r3, 0x7bb0
     bl __construct_new_array
     addis r22, r23, 0x1

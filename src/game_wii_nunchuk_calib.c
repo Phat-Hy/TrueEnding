@@ -7,7 +7,7 @@ extern void _restgpr_26(void);
 extern void _savegpr_23(void);
 extern void _savegpr_26(void);
 extern void actor_dispatchByType(void);
-extern void fn_8001296C(void);
+extern void actor_getSkeletonNode(void);
 extern void fn_80012AC4(void);
 extern void player_stepMovement(void);
 extern void msg_getMessageById(void);
@@ -1229,7 +1229,7 @@ lbl_fn_8055DBF8_00000EC8:
     stfs f5, 0x40(r1)
     stfs f3, 0x44(r1)
     stfs f0, 0x48(r1)
-    bl fn_8001296C
+    bl actor_getSkeletonNode
     mr r23, r3
     mr r3, r24
     mr r4, r27

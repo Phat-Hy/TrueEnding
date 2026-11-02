@@ -17,7 +17,7 @@ extern void magic_dispatchActionCommand(void);
 extern void player_evaluateStatusCondition(void);
 extern void world_getGlobalFlag(void);
 extern void fn_80383F7C(void);
-extern void fn_803918EC(void);
+extern void cam_updateLookAtVector(void);
 extern void http_calcTransform(void);
 extern void http_accumulateVectors(void);
 extern void mtx_copyPairedSingle(void);
@@ -179,7 +179,7 @@ lbl_fn_80385B48_000000BC:
     addi r3, r28, 0x1f4
     bl mtx_copyPairedSingle
     mr r3, r28
-    bl fn_803918EC
+    bl cam_updateLookAtVector
     mr r3, r28
     bl http_calcTransform
     mr r3, r28
@@ -1783,7 +1783,7 @@ lbl_fn_80385B48_0000195C:
     addi r3, r28, 0x1f4
     bl mtx_copyPairedSingle
     mr r3, r28
-    bl fn_803918EC
+    bl cam_updateLookAtVector
     mr r3, r28
     bl http_calcTransform
     mr r3, r28

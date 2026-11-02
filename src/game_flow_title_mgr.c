@@ -8,7 +8,7 @@ extern void _restgpr_26(void);
 extern void _savegpr_14(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
-extern void fn_8006F2F0(void);
+extern void script_parseToken(void);
 extern void script_executeCommand(void);
 extern void fn_800DC97C(void);
 extern void battle_canTargetActor(void);
@@ -1085,7 +1085,7 @@ lbl_fn_804DC85C_00000CFC:
     addi r4, r1, 0x270
     lwz r5, 0x60(r1)
     li r6, 0x100
-    bl fn_8006F2F0
+    bl script_parseToken
     mr r3, r31
     mr r4, r28
     bl fn_8050F728

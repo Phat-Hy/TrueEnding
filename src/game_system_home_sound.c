@@ -16,7 +16,7 @@ extern void talk_copySpeakerName(void);
 extern void skill_calcTrajectory(void);
 extern void boss_dispatchActionTransition(void);
 extern void fn_8006BA30(void);
-extern void fn_8006F2F0(void);
+extern void script_parseToken(void);
 extern void fn_8007192C(void);
 extern void gx_syncFrameFifo(void);
 extern void fn_80071D60(void);
@@ -469,7 +469,7 @@ asm void fn_80363C28(void)
     mr r4, r27
     mr r5, r28
     mr r6, r29
-    bl fn_8006F2F0
+    bl script_parseToken
     b lbl_fn_80363C28_000004FC
 lbl_fn_80363C28_00000494:
     cmpwi r27, 0x0

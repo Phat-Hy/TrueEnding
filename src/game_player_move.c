@@ -67,14 +67,14 @@ extern u32 lbl_80881790;
 extern u32 lbl_80881794;
 
 /* Function declarations */
-void fn_80119ECC(void);
+void player_move_destroyElement(void);
 void fn_80119F0C(void);
 void fn_8011A4D0(void);
 void fn_8011AD38(void);
 void fn_8011B018(void);
 void fn_8011B3D8(void);
 
-asm void fn_80119ECC(void)
+asm void player_move_destroyElement(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -83,11 +83,11 @@ asm void fn_80119ECC(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    beq lbl_fn_80119ECC_00000028
+    beq lbl_player_move_destroyElement_00000028
     cmpwi r4, 0x0
-    ble lbl_fn_80119ECC_00000028
+    ble lbl_player_move_destroyElement_00000028
     bl dtor_80084684
-lbl_fn_80119ECC_00000028:
+lbl_player_move_destroyElement_00000028:
     mr r3, r31
     lwz r31, 0xc(r1)
     lwz r0, 0x14(r1)

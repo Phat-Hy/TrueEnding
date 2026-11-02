@@ -10,7 +10,7 @@ extern void dtor_80084684(void);
 extern void equip_calcTotalStatBonuses(void);
 extern void skill_calculateDamage(void);
 extern void skill_calcTrajectory(void);
-extern void fn_8006F2F0(void);
+extern void script_parseToken(void);
 extern void str_assignBuffer(void);
 extern void motion_updateFogAdj(void);
 extern void env_updateAtmosphere(void);
@@ -1745,7 +1745,7 @@ asm void fn_804F8468(void)
     mr r3, r14
     addi r4, r1, 0x770
     li r6, 0x100
-    bl fn_8006F2F0
+    bl script_parseToken
     lwz r0, 0x260(r1)
     sth r3, 0x238(r1)
     srwi. r0, r0, 31

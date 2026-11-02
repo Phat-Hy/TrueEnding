@@ -11,7 +11,7 @@ extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void fn_8004B0E4(void);
 extern void fn_8004B158(void);
-extern void fn_8004B1EC(void);
+extern void sound_stopVoice(void);
 extern void mem_alloc(void);
 extern void fn_800CA798(void);
 extern void fn_800CAC48(void);
@@ -1488,7 +1488,7 @@ lbl_fn_805A2438_00001220:
     srawi r0, r0, 31
     rlwinm r4, r0, 0, 26, 29
 lbl_fn_805A2438_00001230:
-    bl fn_8004B1EC
+    bl sound_stopVoice
     lwz r3, 0xf8(r30)
     addi r3, r3, 0x8
     bl morph_releaseRef

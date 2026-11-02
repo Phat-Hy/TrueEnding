@@ -21,7 +21,7 @@ extern void str_skipWhitespace(void);
 extern void actor_calcSpawnTransform(void);
 extern void fn_80124BE4(void);
 extern void fn_8038EF94(void);
-extern void fn_803918EC(void);
+extern void cam_updateLookAtVector(void);
 extern void http_calcTransform(void);
 extern void fn_80392510(void);
 extern void http_accumulateVectors(void);
@@ -1496,7 +1496,7 @@ lbl_fn_8037EF48_00001438:
     mr r3, r30
     bl fn_80392FE8
     mr r3, r30
-    bl fn_803918EC
+    bl cam_updateLookAtVector
     mr r3, r30
     bl http_calcTransform
     mr r3, r30

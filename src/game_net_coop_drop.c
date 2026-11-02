@@ -10,7 +10,7 @@ extern void sound_releaseChannel(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
-extern void fn_8005E3E4(void);
+extern void curve_appendKeyframe(void);
 extern void fn_8005E7F4(void);
 extern void fn_80076FF8(void);
 extern void model_updateBoneTransforms(void);
@@ -408,7 +408,7 @@ lbl_fn_804A9EB4_000003FC:
     addi r5, r29, 0x1a8
     li r6, 0x1
     li r7, 0x1
-    bl fn_8005E3E4
+    bl curve_appendKeyframe
     lfs f0, 0x8(r31)
     fcmpo cr0, f0, f30
     cror eq, gt, eq

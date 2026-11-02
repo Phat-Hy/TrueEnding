@@ -7,7 +7,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void fn_8004B158(void);
-extern void fn_8004B1EC(void);
+extern void sound_stopVoice(void);
 extern void item_useConsumable(void);
 extern void fn_8004BF64(void);
 extern void fn_8006A204(void);
@@ -330,7 +330,7 @@ asm void spectate_dispatchCameraMode(void)
     beq lbl_spectate_dispatchCameraMode_00000334
     addi r3, r31, 0x268
     li r4, 0x5a
-    bl fn_8004B1EC
+    bl sound_stopVoice
 lbl_spectate_dispatchCameraMode_00000334:
     lwz r0, 0x284(r31)
     cmpwi r0, 0x0
@@ -502,7 +502,7 @@ lbl_spectate_dispatchCameraMode_00000534:
     beq lbl_spectate_dispatchCameraMode_000005BC
     li r4, 0x5a
     addi r3, r3, 0x27c
-    bl fn_8004B1EC
+    bl sound_stopVoice
 lbl_spectate_dispatchCameraMode_000005BC:
     lwz r3, 0x2c8(r31)
     li r4, 0x0

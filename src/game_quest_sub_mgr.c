@@ -16,7 +16,7 @@ extern void fn_8047CB74(void);
 extern void fn_8049003C(void);
 extern void fn_80490098(void);
 extern void coliseum_spawnEnemyGroup(void);
-extern void fn_80541214(void);
+extern void net_stats_getSelectedEntryId(void);
 extern void PSVECNormalize(void);
 
 /* External data declarations */
@@ -104,7 +104,7 @@ asm void fn_804814F8(void)
     cmpwi r30, 0x0
     beq lbl_fn_804814F8_00000040
     mr r3, r30
-    bl fn_80541214
+    bl net_stats_getSelectedEntryId
     b lbl_fn_804814F8_00000044
 lbl_fn_804814F8_00000040:
     li r3, 0x0

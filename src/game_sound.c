@@ -237,7 +237,7 @@ void fn_8004AE84(void);
 void fn_8004AFAC(void);
 void fn_8004B0E4(void);
 void fn_8004B158(void);
-void fn_8004B1EC(void);
+void sound_stopVoice(void);
 void fn_8004B20C(void);
 void sound_initChannelParams(void);
 void sound_releaseChannel(void);
@@ -6222,7 +6222,7 @@ asm void fn_8004B158(void)
     blr
 }
 
-asm void fn_8004B1EC(void)
+asm void sound_stopVoice(void)
 {
     nofralloc
     lwz r3, 0x8(r3)

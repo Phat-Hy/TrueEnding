@@ -8,7 +8,7 @@ extern void actor_dispatchMessage(void);
 extern void fn_80049B2C(void);
 extern void snd_findSoundNodeByName(void);
 extern void fn_8004AFAC(void);
-extern void fn_8004B1EC(void);
+extern void sound_stopVoice(void);
 extern void talk_parseQuotedString(void);
 extern void fn_80069BF4(void);
 extern void fn_8006A004(void);
@@ -241,7 +241,7 @@ lbl_fn_805A2FD8_000001D0:
     srawi r0, r0, 31
     rlwinm r4, r0, 0, 26, 29
 lbl_fn_805A2FD8_000001E0:
-    bl fn_8004B1EC
+    bl sound_stopVoice
     lwz r0, 0xf0(r31)
     li r3, 0x0
     stw r3, 0xf8(r31)
@@ -373,7 +373,7 @@ lbl_fn_805A32CC_0000039C:
     srawi r0, r0, 31
     rlwinm r4, r0, 0, 26, 29
 lbl_fn_805A32CC_000003AC:
-    bl fn_8004B1EC
+    bl sound_stopVoice
 lbl_fn_805A32CC_000003B0:
     lwz r0, 0x4c(r30)
     lwz r5, 0xf4(r30)

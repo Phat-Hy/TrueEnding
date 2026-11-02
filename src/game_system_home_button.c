@@ -12,7 +12,7 @@ extern void fn_80049B2C(void);
 extern void snd_findSoundNodeByName(void);
 extern void fn_8004A1D4(void);
 extern void fn_8004B0E4(void);
-extern void fn_8004B1EC(void);
+extern void sound_stopVoice(void);
 extern void talk_parseQuotedString(void);
 extern void skill_calculateDamage(void);
 extern void magic_castSpellCircle(void);
@@ -582,7 +582,7 @@ lbl_fn_8035FF94_00000564:
 lbl_fn_8035FF94_0000058C:
     lwz r3, 0xb8(r27)
     li r4, 0x0
-    bl fn_8004B1EC
+    bl sound_stopVoice
     lwz r3, 0xb8(r27)
     addi r3, r3, 0x8
     bl morph_releaseRef
@@ -593,7 +593,7 @@ lbl_fn_8035FF94_000005A8:
     bne lbl_fn_8035FF94_000005CC
     lwz r3, 0xb8(r27)
     mr r4, r29
-    bl fn_8004B1EC
+    bl sound_stopVoice
     lwz r3, 0xb8(r27)
     addi r3, r3, 0x8
     bl morph_releaseRef
@@ -1065,7 +1065,7 @@ lbl_fn_80360780_00000BEC:
     beq lbl_fn_80360780_00000C34
     lwz r3, 0xb4(r3)
     mr r4, r30
-    bl fn_8004B1EC
+    bl sound_stopVoice
     lwz r3, 0xb4(r29)
     addi r3, r3, 0x8
     bl morph_releaseRef
@@ -1073,7 +1073,7 @@ lbl_fn_80360780_00000BEC:
     stw r31, 0x120(r29)
     lwz r3, 0xb8(r29)
     mr r4, r30
-    bl fn_8004B1EC
+    bl sound_stopVoice
     lwz r3, 0xb8(r29)
     addi r3, r3, 0x8
     bl morph_releaseRef

@@ -12,7 +12,7 @@ extern void fn_80063484(void);
 extern void magic_updateCircleArea(void);
 extern void magic_castSpellCircle(void);
 extern void script_executeOpcode(void);
-extern void fn_8006F2F0(void);
+extern void script_parseToken(void);
 extern void minimap_renderOverlay(void);
 extern void motion_updateFogAdj(void);
 extern void str_findChar(void);
@@ -768,7 +768,7 @@ lbl_fn_800F5314_000009A0:
     addi r4, r1, 0xbb8
     addi r5, r1, 0x6b8
     li r6, 0x100
-    bl fn_8006F2F0
+    bl script_parseToken
     lfs f3, lbl_80881478
     fmr f2, f22
     fmr f4, f25
@@ -857,7 +857,7 @@ lbl_fn_800F5314_00000AC4:
     addi r4, r1, 0xbb8
     addi r5, r1, 0x6b8
     li r6, 0x100
-    bl fn_8006F2F0
+    bl script_parseToken
     lfs f3, lbl_80881478
     fmr f2, f22
     fmr f4, f25
@@ -957,7 +957,7 @@ lbl_fn_800F5314_00000C3C:
     addi r4, r1, 0xbb8
     addi r5, r1, 0x6b8
     li r6, 0x100
-    bl fn_8006F2F0
+    bl script_parseToken
     lfs f3, lbl_80881478
     fmr f2, f22
     fmr f4, f25
@@ -1251,7 +1251,7 @@ lbl_fn_800F5314_0000105C:
     addi r4, r1, 0x9b8
     addi r5, r1, 0x5b8
     li r6, 0x100
-    bl fn_8006F2F0
+    bl script_parseToken
     lfs f3, lbl_80881478
     fmr f2, f23
     fmr f4, f25

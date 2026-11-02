@@ -20,7 +20,7 @@ extern void actor_dispatchMessage(void);
 extern void snd_findSoundNodeByName(void);
 extern void fn_8004AE84(void);
 extern void fn_8004B158(void);
-extern void fn_8004B1EC(void);
+extern void sound_stopVoice(void);
 extern void vec3_initValues(void);
 extern void magic_castSpellCircle(void);
 extern void sys_getMainManager(void);
@@ -83,7 +83,7 @@ extern void fn_80489280(void);
 extern void coliseum_spawnEnemyGroup(void);
 extern void fn_805381BC(void);
 extern void spectate_getRootNode(void);
-extern void fn_80541214(void);
+extern void net_stats_getSelectedEntryId(void);
 extern void fn_8054FAD8(void);
 extern void fn_805A38F4(void);
 extern void PSMTXInverse(void);
@@ -1720,7 +1720,7 @@ lbl_fn_8048871C_0000153C:
     beq lbl_fn_8048871C_0000155C
     mr r4, r28
     addi r3, r26, 0x1f20
-    bl fn_8004B1EC
+    bl sound_stopVoice
     addi r3, r26, 0x1f28
     bl morph_releaseRef
 lbl_fn_8048871C_0000155C:
@@ -1841,7 +1841,7 @@ asm void fn_80488B5C(void)
     cmpwi r0, 0x0
     beq lbl_fn_80488B5C_000018C4
     mr r3, r0
-    bl fn_80541214
+    bl net_stats_getSelectedEntryId
     cmpwi r3, 0x0
     beq lbl_fn_80488B5C_000018C4
     addi r3, r30, 0x1f38
@@ -1851,7 +1851,7 @@ asm void fn_80488B5C(void)
     b lbl_fn_80488B5C_000018C4
 lbl_fn_80488B5C_00001718:
     lwz r3, 0x70(r30)
-    bl fn_80541214
+    bl net_stats_getSelectedEntryId
     cmpwi r3, 0x0
     mr r27, r3
     beq lbl_fn_80488B5C_000018C4
@@ -1993,7 +1993,7 @@ asm void fn_80488D80(void)
     stw r31, 0xc(r1)
     mr r31, r3
     addi r3, r3, 0x1f20
-    bl fn_8004B1EC
+    bl sound_stopVoice
     addi r3, r31, 0x1f28
     bl morph_releaseRef
     lwz r0, 0x14(r1)

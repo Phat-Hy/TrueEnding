@@ -9,7 +9,7 @@ extern void skill_calcTrajectory(void);
 extern void fn_80062C8C(void);
 extern void fn_80063484(void);
 extern void magic_updateCircleArea(void);
-extern void fn_8006F2F0(void);
+extern void script_parseToken(void);
 extern void motion_updateFogAdj(void);
 extern void enemy_stepBehavior(void);
 extern void fn_80128A30(void);
@@ -1589,7 +1589,7 @@ lbl_fn_8017D13C_000013E0:
     addi r4, r1, 0x1b8
     lwzx r5, r5, r0
     li r6, 0x100
-    bl fn_8006F2F0
+    bl script_parseToken
     lfs f2, 0x1a8(r1)
     lfs f0, lbl_80881B7C
     fcmpo cr0, f2, f0

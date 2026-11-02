@@ -5,7 +5,7 @@
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8005E3E4(void);
+extern void curve_appendKeyframe(void);
 extern void fn_8006144C(void);
 extern void str_assignBuffer(void);
 extern void mem_realloc(void);
@@ -955,7 +955,7 @@ lbl_player_syncPositionAndMotion_00000B5C:
     lfs f5, 0x5c(r1)
     li r7, 0x1
     lwz r6, 0x14(r1)
-    bl fn_8005E3E4
+    bl curve_appendKeyframe
     lhz r0, 0xe(r31)
     cmplwi r0, 0x1
     bne lbl_player_syncPositionAndMotion_00000C1C
@@ -979,7 +979,7 @@ lbl_player_syncPositionAndMotion_00000B5C:
     lfs f4, 0x58(r1)
     lfs f5, 0x5c(r1)
     lwz r6, 0x14(r1)
-    bl fn_8005E3E4
+    bl curve_appendKeyframe
     b lbl_player_syncPositionAndMotion_00000FE0
 lbl_player_syncPositionAndMotion_00000C1C:
     cmplwi r0, 0x2
@@ -1002,7 +1002,7 @@ lbl_player_syncPositionAndMotion_00000C1C:
     lfs f4, 0x58(r1)
     lfs f5, 0x5c(r1)
     lwz r6, 0x14(r1)
-    bl fn_8005E3E4
+    bl curve_appendKeyframe
     lfs f8, lbl_80882C1C
     mr r4, r27
     stfs f8, 0x8(r1)
@@ -1021,7 +1021,7 @@ lbl_player_syncPositionAndMotion_00000C1C:
     lfs f4, 0x58(r1)
     lfs f5, 0x5c(r1)
     lwz r6, 0x14(r1)
-    bl fn_8005E3E4
+    bl curve_appendKeyframe
     lfs f8, lbl_80882C1C
     mr r4, r27
     stfs f8, 0x8(r1)
@@ -1040,7 +1040,7 @@ lbl_player_syncPositionAndMotion_00000C1C:
     lfs f4, 0x58(r1)
     lfs f5, 0x5c(r1)
     lwz r6, 0x14(r1)
-    bl fn_8005E3E4
+    bl curve_appendKeyframe
     lfs f8, lbl_80882C1C
     mr r4, r27
     stfs f8, 0x8(r1)
@@ -1059,7 +1059,7 @@ lbl_player_syncPositionAndMotion_00000C1C:
     lfs f4, 0x58(r1)
     lfs f5, 0x5c(r1)
     lwz r6, 0x14(r1)
-    bl fn_8005E3E4
+    bl curve_appendKeyframe
     b lbl_player_syncPositionAndMotion_00000FE0
 lbl_player_syncPositionAndMotion_00000D58:
     cmplwi r0, 0x3
@@ -1082,7 +1082,7 @@ lbl_player_syncPositionAndMotion_00000D58:
     lfs f4, 0x58(r1)
     lfs f5, 0x5c(r1)
     lwz r6, 0x14(r1)
-    bl fn_8005E3E4
+    bl curve_appendKeyframe
     lfs f8, lbl_80882C1C
     mr r4, r27
     stfs f8, 0x8(r1)
@@ -1101,7 +1101,7 @@ lbl_player_syncPositionAndMotion_00000D58:
     lfs f4, 0x58(r1)
     lfs f5, 0x5c(r1)
     lwz r6, 0x14(r1)
-    bl fn_8005E3E4
+    bl curve_appendKeyframe
     lfs f8, lbl_80882C1C
     mr r4, r27
     stfs f8, 0x8(r1)
@@ -1120,7 +1120,7 @@ lbl_player_syncPositionAndMotion_00000D58:
     lfs f4, 0x58(r1)
     lfs f5, 0x5c(r1)
     lwz r6, 0x14(r1)
-    bl fn_8005E3E4
+    bl curve_appendKeyframe
     lfs f8, lbl_80882C1C
     mr r4, r27
     stfs f8, 0x8(r1)
@@ -1139,7 +1139,7 @@ lbl_player_syncPositionAndMotion_00000D58:
     lfs f4, 0x58(r1)
     lfs f5, 0x5c(r1)
     lwz r6, 0x14(r1)
-    bl fn_8005E3E4
+    bl curve_appendKeyframe
     lfs f8, lbl_80882C1C
     mr r4, r27
     stfs f8, 0x8(r1)
@@ -1160,7 +1160,7 @@ lbl_player_syncPositionAndMotion_00000D58:
     lfs f4, 0x58(r1)
     lfs f5, 0x5c(r1)
     lwz r6, 0x14(r1)
-    bl fn_8005E3E4
+    bl curve_appendKeyframe
     lfs f8, lbl_80882C1C
     mr r4, r27
     stfs f8, 0x8(r1)
@@ -1181,7 +1181,7 @@ lbl_player_syncPositionAndMotion_00000D58:
     lfs f4, 0x58(r1)
     lfs f5, 0x5c(r1)
     lwz r6, 0x14(r1)
-    bl fn_8005E3E4
+    bl curve_appendKeyframe
     lfs f8, lbl_80882C1C
     mr r4, r27
     stfs f8, 0x8(r1)
@@ -1202,7 +1202,7 @@ lbl_player_syncPositionAndMotion_00000D58:
     lfs f4, 0x58(r1)
     lfs f5, 0x5c(r1)
     lwz r6, 0x14(r1)
-    bl fn_8005E3E4
+    bl curve_appendKeyframe
     lfs f8, lbl_80882C1C
     mr r4, r27
     stfs f8, 0x8(r1)
@@ -1223,7 +1223,7 @@ lbl_player_syncPositionAndMotion_00000D58:
     lfs f4, 0x58(r1)
     lfs f5, 0x5c(r1)
     lwz r6, 0x14(r1)
-    bl fn_8005E3E4
+    bl curve_appendKeyframe
 lbl_player_syncPositionAndMotion_00000FE0:
     addi r11, r1, 0x80
     bl _restgpr_27

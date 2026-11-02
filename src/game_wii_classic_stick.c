@@ -9,7 +9,7 @@ extern void _savegpr_26(void);
 extern void fn_800128FC(void);
 extern void snd_findSoundNodeByName(void);
 extern void fn_8004B0E4(void);
-extern void fn_8004B1EC(void);
+extern void sound_stopVoice(void);
 extern void skin_playAnimationByName(void);
 extern void skin_applyWeights(void);
 extern void morph_reset(void);
@@ -2205,14 +2205,14 @@ lbl_fn_805609AC_00001B18:
     cmpwi r3, 0x0
     beq lbl_fn_805609AC_00001B84
     li r4, 0x0
-    bl fn_8004B1EC
+    bl sound_stopVoice
 lbl_fn_805609AC_00001B84:
     lwz r3, lbl_8087F448
     lwz r3, 0x78(r3)
     cmpwi r3, 0x0
     beq lbl_fn_805609AC_00001B9C
     li r4, 0x0
-    bl fn_8004B1EC
+    bl sound_stopVoice
 lbl_fn_805609AC_00001B9C:
     lwz r3, lbl_8087F540
     mr r4, r29

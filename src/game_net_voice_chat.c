@@ -53,7 +53,7 @@ u32 fn_804D5FA4(void *p);
 u32 fn_804D5FAC(void *p);
 u32 fn_804D5FB4(void);
 u32 fn_804D5FBC(void);
-u32 fn_804D5FC4(void);
+u32 net_voice_getConfigParam(void);
 u32 fn_804D5FCC(void);
 u32 fn_804D5FD4(void);
 u32 fn_804D5FDC(void);
@@ -222,7 +222,7 @@ u32 fn_804D5FBC(void)
     return lbl_8087F5B8;
 }
 
-u32 fn_804D5FC4(void)
+u32 net_voice_getConfigParam(void)
 {
     return lbl_8087F5C4;
 }

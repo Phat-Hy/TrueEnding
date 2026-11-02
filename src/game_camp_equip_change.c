@@ -5,7 +5,7 @@
 extern void _restgpr_25(void);
 extern void _savegpr_25(void);
 extern void fn_800DC500(void);
-extern void fn_80119ECC(void);
+extern void player_move_destroyElement(void);
 extern void fn_8012AE50(void);
 extern void enemy_nav_destroyElement(void);
 extern void sys_findModuleById(void);
@@ -1043,11 +1043,11 @@ lbl_fn_803BDB60_00000D60:
     cmplw r27, r30
     blt lbl_fn_803BDB60_00000D60
     lis r4, fn_803BB3C0@ha
-    lis r5, fn_80119ECC@ha
+    lis r5, player_move_destroyElement@ha
     mr r3, r30
     li r6, 0x2d4
     addi r4, r4, fn_803BB3C0@l
-    addi r5, r5, fn_80119ECC@l
+    addi r5, r5, player_move_destroyElement@l
     li r7, 0x1c
     bl __construct_new_array
     addis r3, r31, 0x1

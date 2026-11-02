@@ -13,7 +13,7 @@ extern void _savegpr_27(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
-extern void fn_8006F2F0(void);
+extern void script_parseToken(void);
 extern void msg_getMessageString(void);
 extern void ref_releaseHandle(void);
 extern void str_parseInt(void);
@@ -1846,7 +1846,7 @@ lbl_fn_80581A58_00001830:
     mr r3, r24
     addi r4, r1, 0x10
     li r6, 0x20
-    bl fn_8006F2F0
+    bl script_parseToken
     addi r3, r1, 0x6c
     bl talk_parseQuotedString
     bl str_parseInt

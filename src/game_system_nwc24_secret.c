@@ -11,7 +11,7 @@ extern void actor_calcSpawnTransform(void);
 extern void world_getGlobalFlag(void);
 extern void fn_8038E540(void);
 extern void fn_8038E9B0(void);
-extern void fn_803918EC(void);
+extern void cam_updateLookAtVector(void);
 extern void http_calcTransform(void);
 extern void http_accumulateVectors(void);
 extern void mtx_copyPairedSingle(void);
@@ -491,7 +491,7 @@ lbl_fn_8038B148_000005CC:
     addi r3, r30, 0x1f4
     bl mtx_copyPairedSingle
     mr r3, r30
-    bl fn_803918EC
+    bl cam_updateLookAtVector
     mr r3, r30
     bl http_calcTransform
     mr r3, r30
@@ -1019,7 +1019,7 @@ lbl_fn_8038B650_00000D68:
     addi r3, r30, 0x1f4
     bl mtx_copyPairedSingle
     mr r3, r30
-    bl fn_803918EC
+    bl cam_updateLookAtVector
     mr r3, r30
     bl http_calcTransform
     mr r3, r30

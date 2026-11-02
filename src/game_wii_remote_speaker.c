@@ -14,7 +14,7 @@ extern void fn_800119C0(void);
 extern void fn_80011E98(void);
 extern void fn_80012294(void);
 extern void fn_80012540(void);
-extern void fn_8001296C(void);
+extern void actor_getSkeletonNode(void);
 extern void fn_80012D34(void);
 extern void fn_80013530(void);
 extern void atn_Model_findBoneIndex(void);
@@ -1200,11 +1200,11 @@ lbl_fn_8055408C_00000F2C:
     stfs f2, 0x13c(r1)
     bl actor_dispatchByType
     mr r3, r30
-    bl fn_8001296C
+    bl actor_getSkeletonNode
     cmpwi r3, 0x0
     beq lbl_fn_8055408C_00000FCC
     mr r3, r30
-    bl fn_8001296C
+    bl actor_getSkeletonNode
     mr r27, r3
     mr r4, r29
     li r5, 0x0
@@ -2020,14 +2020,14 @@ lbl_fn_80554DF0_00001AC4:
     addi r3, r1, 0x5c
     bl actor_dispatchByType
     mr r3, r31
-    bl fn_8001296C
+    bl actor_getSkeletonNode
     cmpwi r3, 0x0
     beq lbl_fn_80554DF0_00001C04
     lis r4, lbl_8075EB60@ha
     mr r3, r31
     addi r4, r4, lbl_8075EB60@l
     addi r29, r4, 0x14
-    bl fn_8001296C
+    bl actor_getSkeletonNode
     mr r30, r3
     mr r4, r29
     li r5, 0x0
@@ -2045,7 +2045,7 @@ lbl_fn_80554DF0_00001B2C:
     mr r3, r31
     addi r4, r4, lbl_8075EB60@l
     addi r30, r4, 0x1a
-    bl fn_8001296C
+    bl actor_getSkeletonNode
     mr r29, r3
     mr r4, r30
     li r5, 0x0

@@ -13,7 +13,7 @@ extern void fn_8004ADF4(void);
 extern void fn_8004AE84(void);
 extern void fn_8004B0E4(void);
 extern void fn_8004B158(void);
-extern void fn_8004B1EC(void);
+extern void sound_stopVoice(void);
 extern void sound_initChannelParams(void);
 extern void sound_releaseChannel(void);
 extern void fn_80076FF8(void);
@@ -430,7 +430,7 @@ lbl_fn_8037CA24_000003D4:
     add r3, r28, r31
     li r4, 0x0
     addi r3, r3, 0x4c
-    bl fn_8004B1EC
+    bl sound_stopVoice
     add r3, r28, r31
     addi r3, r3, 0x54
     bl morph_releaseRef
@@ -667,7 +667,7 @@ lbl_fn_8037CB38_00000718:
 lbl_fn_8037CB38_00000734:
     mr r3, r28
     mr r4, r25
-    bl fn_8004B1EC
+    bl sound_stopVoice
 lbl_fn_8037CB38_00000740:
     lwz r3, 0x78(r31)
     lwz r0, 0x10(r3)
@@ -778,7 +778,7 @@ lbl_fn_8037CB38_000008B8:
 lbl_fn_8037CB38_000008D4:
     mr r3, r28
     mr r4, r26
-    bl fn_8004B1EC
+    bl sound_stopVoice
 lbl_fn_8037CB38_000008E0:
     lwz r3, 0x78(r31)
     lwz r0, 0x10(r3)

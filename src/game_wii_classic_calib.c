@@ -43,7 +43,7 @@ extern void node_getParentNode(void);
 extern void spectate_getRootNode(void);
 extern void fn_8053B02C(void);
 extern void fn_8054119C(void);
-extern void fn_80541214(void);
+extern void net_stats_getSelectedEntryId(void);
 extern void fn_80541524(void);
 extern void fn_80564344(void);
 extern void fn_80565068(void);
@@ -713,7 +713,7 @@ asm void fn_80562FB4(void)
     lwz r0, 0x14(r30)
     subf. r0, r4, r0
     bne lbl_fn_80562FB4_0000079C
-    bl fn_80541214
+    bl net_stats_getSelectedEntryId
     bl fn_8053B02C
     lwz r0, 0xbc(r31)
     li r5, 0x0

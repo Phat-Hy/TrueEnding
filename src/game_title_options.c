@@ -24,7 +24,7 @@ extern void atn_Task_unlink(void);
 extern void env_updateAtmosphere(void);
 extern void wcs_parseInt(void);
 extern void fn_800E0908(void);
-extern void fn_80119ECC(void);
+extern void player_move_destroyElement(void);
 extern void enemy_nav_destroyElement(void);
 extern void fn_80209120(void);
 extern void event_findEntryById(void);
@@ -571,9 +571,9 @@ lbl_fn_803B2A68_00000514:
     addis r3, r29, 0x1
     subic. r3, r3, 0x61a0
     beq lbl_fn_803B2A68_00000584
-    lis r4, fn_80119ECC@ha
+    lis r4, player_move_destroyElement@ha
     addi r3, r3, 0x11c4
-    addi r4, r4, fn_80119ECC@l
+    addi r4, r4, player_move_destroyElement@l
     li r5, 0x2d4
     li r6, 0x1c
     bl __destroy_new_array
@@ -700,9 +700,9 @@ lbl_fn_803B2A68_00000718:
     addis r3, r29, 0x1
     subic. r3, r3, 0x61a0
     beq lbl_fn_803B2A68_00000764
-    lis r4, fn_80119ECC@ha
+    lis r4, player_move_destroyElement@ha
     addi r3, r3, 0x11c4
-    addi r4, r4, fn_80119ECC@l
+    addi r4, r4, player_move_destroyElement@l
     li r5, 0x2d4
     li r6, 0x1c
     bl __destroy_new_array
@@ -791,9 +791,9 @@ asm void fn_803B2FBC(void)
     addis r3, r31, 0x1
     subic. r3, r3, 0x61a0
     beq lbl_fn_803B2FBC_00000898
-    lis r4, fn_80119ECC@ha
+    lis r4, player_move_destroyElement@ha
     addi r3, r3, 0x11c4
-    addi r4, r4, fn_80119ECC@l
+    addi r4, r4, player_move_destroyElement@l
     li r5, 0x2d4
     li r6, 0x1c
     bl __destroy_new_array

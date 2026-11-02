@@ -22,7 +22,7 @@ extern void fn_803EBA54(void);
 extern void fn_8048AF9C(void);
 extern void fn_805381E0(void);
 extern void fn_8054119C(void);
-extern void fn_80541214(void);
+extern void net_stats_getSelectedEntryId(void);
 extern void fn_80541538(void);
 extern void fn_80543064(void);
 extern void fn_805A38F4(void);
@@ -842,7 +842,7 @@ asm void fn_80489C98(void)
     cmpwi r30, 0x0
     beq lbl_fn_80489C98_00000A70
     mr r3, r30
-    bl fn_80541214
+    bl net_stats_getSelectedEntryId
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_80489C98_00000A70

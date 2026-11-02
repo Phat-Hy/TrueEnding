@@ -17,7 +17,7 @@ extern void fn_80481818(void);
 extern void coliseum_spawnEnemyGroup(void);
 extern void node_getParentNode(void);
 extern void spectate_getRootNode(void);
-extern void fn_80541214(void);
+extern void net_stats_getSelectedEntryId(void);
 extern void fn_8055D004(void);
 extern void strcmp(void);
 extern void __ptmf_scall(void);
@@ -1839,11 +1839,11 @@ lbl_fn_8055BCAC_00001844:
     beq lbl_fn_8055BCAC_00001898
     cmpwi r0, 0xfb5
     bne lbl_fn_8055BCAC_0000188C
-    bl fn_80541214
+    bl net_stats_getSelectedEntryId
     cmpwi r3, 0x0
     beq lbl_fn_8055BCAC_0000188C
     mr r3, r25
-    bl fn_80541214
+    bl net_stats_getSelectedEntryId
     lwz r0, 0xc(r3)
     cmpwi r0, 0xe
     beq lbl_fn_8055BCAC_00001898

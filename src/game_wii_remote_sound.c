@@ -9,7 +9,7 @@ extern void _savegpr_27(void);
 extern void fn_8000FAE4(void);
 extern void actor_dispatchByType(void);
 extern void fn_800112E0(void);
-extern void fn_8001296C(void);
+extern void actor_getSkeletonNode(void);
 extern void fn_80012CBC(void);
 extern void fn_80012CE4(void);
 extern void fn_80012D0C(void);
@@ -130,7 +130,7 @@ lbl_fn_805553D8_000000C0:
     li r26, 0x0
 lbl_fn_805553D8_000000C4:
     mr r3, r27
-    bl fn_8001296C
+    bl actor_getSkeletonNode
     cmpwi r3, 0x0
     mr r25, r3
     beq lbl_fn_805553D8_00000794
@@ -840,7 +840,7 @@ lbl_fn_80555B88_00000AC8:
     addi r3, r1, 0x164
     bl actor_dispatchByType
     mr r3, r30
-    bl fn_8001296C
+    bl actor_getSkeletonNode
     cmpwi r3, 0x0
     beq lbl_fn_80555B88_00000B60
     lis r3, lbl_8075EB60@ha
@@ -849,7 +849,7 @@ lbl_fn_80555B88_00000AC8:
     bl str_findChar
     mr r31, r3
     mr r3, r30
-    bl fn_8001296C
+    bl actor_getSkeletonNode
     mr r27, r3
     mr r4, r31
     li r5, 0x0
@@ -1052,11 +1052,11 @@ lbl_fn_80555B88_00000DF4:
     addi r3, r1, 0x134
     bl actor_dispatchByType
     mr r3, r29
-    bl fn_8001296C
+    bl actor_getSkeletonNode
     cmpwi r3, 0x0
     beq lbl_fn_80555B88_00000E78
     mr r3, r29
-    bl fn_8001296C
+    bl actor_getSkeletonNode
     mr r27, r3
     mr r4, r28
     li r5, 0x0
@@ -1521,14 +1521,14 @@ lbl_fn_805567A8_000014A4:
     addi r3, r1, 0x50
     bl actor_dispatchByType
     mr r3, r31
-    bl fn_8001296C
+    bl actor_getSkeletonNode
     cmpwi r3, 0x0
     beq lbl_fn_805567A8_000015F0
     lis r4, lbl_8075EB60@ha
     mr r3, r31
     addi r4, r4, lbl_8075EB60@l
     addi r29, r4, 0x24
-    bl fn_8001296C
+    bl actor_getSkeletonNode
     mr r30, r3
     mr r4, r29
     li r5, 0x0
@@ -1546,7 +1546,7 @@ lbl_fn_805567A8_0000150C:
     mr r3, r31
     addi r4, r4, lbl_8075EB60@l
     addi r30, r4, 0x1a
-    bl fn_8001296C
+    bl actor_getSkeletonNode
     mr r29, r3
     mr r4, r30
     li r5, 0x0
@@ -1832,7 +1832,7 @@ lbl_fn_80556C08_000018F4:
     li r30, 0x0
 lbl_fn_80556C08_000018F8:
     mr r3, r5
-    bl fn_8001296C
+    bl actor_getSkeletonNode
     cmpwi r3, 0x0
     mr r28, r3
     bne lbl_fn_80556C08_00001914

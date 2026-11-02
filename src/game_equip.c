@@ -42,7 +42,7 @@ extern u32 lbl_808809A8;
 /* Function declarations */
 void fn_8005E000(void);
 void fn_8005E3E0(void);
-void fn_8005E3E4(void);
+void curve_appendKeyframe(void);
 void fn_8005E40C(void);
 void fn_8005E7F4(void);
 void fn_8005E838(void);
@@ -329,7 +329,7 @@ void fn_8005E3E0(void)
 {
 }
 
-asm void fn_8005E3E4(void)
+asm void curve_appendKeyframe(void)
 {
     nofralloc
     stwu r1, -0x10(r1)

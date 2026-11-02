@@ -139,7 +139,7 @@ extern void fn_804D5FA4(void);
 extern void fn_804D5FAC(void);
 extern void fn_804D5FB4(void);
 extern void fn_804D5FBC(void);
-extern void fn_804D5FC4(void);
+extern void net_voice_getConfigParam(void);
 extern void fn_804D5FCC(void);
 extern void fn_804D5FD4(void);
 extern void fn_804D5FDC(void);
@@ -1937,10 +1937,10 @@ lbl_fn_804D25D4_00001554:
     bl fn_804D5FBC
     bl fn_804BBB60
 lbl_fn_804D25D4_00001568:
-    bl fn_804D5FC4
+    bl net_voice_getConfigParam
     cmpwi r3, 0x0
     beq lbl_fn_804D25D4_0000157C
-    bl fn_804D5FC4
+    bl net_voice_getConfigParam
     bl fn_804C2F98
 lbl_fn_804D25D4_0000157C:
     bl fn_804D5FCC
@@ -2966,10 +2966,10 @@ lbl_fn_804D25D4_00002478:
     bl fn_804D5F9C
     cmpwi r3, 0xd
     bne lbl_fn_804D25D4_000024DC
-    bl fn_804D5FC4
+    bl net_voice_getConfigParam
     cmpwi r3, 0x0
     beq lbl_fn_804D25D4_0000259C
-    bl fn_804D5FC4
+    bl net_voice_getConfigParam
     bl fn_804D62E8
     cmpwi r3, 0x0
     beq lbl_fn_804D25D4_000024CC
@@ -2984,7 +2984,7 @@ lbl_fn_804D25D4_00002478:
     bl fn_804DC454
     b lbl_fn_804D25D4_00004898
 lbl_fn_804D25D4_000024CC:
-    bl fn_804D5FC4
+    bl net_voice_getConfigParam
     li r4, 0x1
     bl fn_804D62FC
     b lbl_fn_804D25D4_0000259C
@@ -3006,10 +3006,10 @@ lbl_fn_804D25D4_000024DC:
     bl fn_804D634C
     cmpwi r3, 0x0
     bne lbl_fn_804D25D4_0000254C
-    bl fn_804D5FC4
+    bl net_voice_getConfigParam
     cmpwi r3, 0x0
     beq lbl_fn_804D25D4_0000254C
-    bl fn_804D5FC4
+    bl net_voice_getConfigParam
     bl fn_804D6358
     cmpwi r3, 0x7
     blt lbl_fn_804D25D4_0000254C
@@ -3042,13 +3042,13 @@ lbl_fn_804D25D4_0000257C:
 lbl_fn_804D25D4_00002598:
     stw r22, 0x504(r24)
 lbl_fn_804D25D4_0000259C:
-    bl fn_804D5FC4
+    bl net_voice_getConfigParam
     cmpwi r3, 0x0
     beq lbl_fn_804D25D4_000025D8
     lha r21, 0x508(r24)
     cmpwi r21, -0x1
     beq lbl_fn_804D25D4_000025D8
-    bl fn_804D5FC4
+    bl net_voice_getConfigParam
     lis r4, 0x8889
     subi r0, r4, 0x7777
     mulhw r0, r0, r21
@@ -3062,10 +3062,10 @@ lbl_fn_804D25D4_000025D8:
     bl fn_804D6360
     cmpwi r3, 0x0
     bne lbl_fn_804D25D4_0000261C
-    bl fn_804D5FC4
+    bl net_voice_getConfigParam
     cmpwi r3, 0x0
     beq lbl_fn_804D25D4_00002604
-    bl fn_804D5FC4
+    bl net_voice_getConfigParam
     bl fn_804C2F9C
     cmpwi r3, 0x0
     bne lbl_fn_804D25D4_00002610
@@ -3090,10 +3090,10 @@ lbl_fn_804D25D4_00002624:
     bl fn_804D6214
     cmpwi r3, 0x1
     bne lbl_fn_804D25D4_000026A0
-    bl fn_804D5FC4
+    bl net_voice_getConfigParam
     cmpwi r3, 0x0
     beq lbl_fn_804D25D4_00002660
-    bl fn_804D5FC4
+    bl net_voice_getConfigParam
     bl fn_804D6358
     b lbl_fn_804D25D4_00002664
 lbl_fn_804D25D4_00002660:
@@ -3183,11 +3183,11 @@ lbl_fn_804D25D4_00002778:
     lbz r0, lbl_8087F614
     cmplwi r0, 0x1
     bne lbl_fn_804D25D4_000027BC
-    bl fn_804D5FC4
+    bl net_voice_getConfigParam
     bl fn_804D6358
     cmpwi r3, 0x6
     bge lbl_fn_804D25D4_000027B4
-    bl fn_804D5FC4
+    bl net_voice_getConfigParam
     li r4, 0x6
     bl fn_804BC628
 lbl_fn_804D25D4_000027B4:
@@ -3214,14 +3214,14 @@ lbl_fn_804D25D4_000027E0:
     mr r3, r24
     bl fn_804FB554
     b lbl_fn_804D25D4_00004898
-    bl fn_804D5FC4
+    bl net_voice_getConfigParam
     cmpwi r3, 0x0
     beq lbl_fn_804D25D4_00002834
-    bl fn_804D5FC4
+    bl net_voice_getConfigParam
     bl fn_804D6378
     bl fn_804D6380
     mr r22, r3
-    bl fn_804D5FC4
+    bl net_voice_getConfigParam
     bl fn_804D6378
     addi r4, r22, 0x1
     bl fn_804D6370
@@ -3247,14 +3247,14 @@ lbl_fn_804D25D4_00002834:
     li r7, 0x0
     bl dvd_showDiskErrorDialog
     b lbl_fn_804D25D4_00004898
-    bl fn_804D5FC4
+    bl net_voice_getConfigParam
     cmpwi r3, 0x0
     beq lbl_fn_804D25D4_000028B4
-    bl fn_804D5FC4
+    bl net_voice_getConfigParam
     bl fn_804D6378
     bl fn_804D6380
     mr r22, r3
-    bl fn_804D5FC4
+    bl net_voice_getConfigParam
     bl fn_804D6378
     addi r4, r22, 0x1
     bl fn_804D6370
@@ -3278,14 +3278,14 @@ lbl_fn_804D25D4_000028F0:
     mr r3, r24
     bl fn_804D87B4
     b lbl_fn_804D25D4_00004898
-    bl fn_804D5FC4
+    bl net_voice_getConfigParam
     cmpwi r3, 0x0
     beq lbl_fn_804D25D4_00002928
-    bl fn_804D5FC4
+    bl net_voice_getConfigParam
     bl fn_804D6378
     bl fn_804D6380
     mr r22, r3
-    bl fn_804D5FC4
+    bl net_voice_getConfigParam
     bl fn_804D6378
     addi r4, r22, 0x1
     bl fn_804D6370
@@ -3309,14 +3309,14 @@ lbl_fn_804D25D4_00002964:
     mr r3, r24
     bl fn_804D90E4
     b lbl_fn_804D25D4_00004898
-    bl fn_804D5FC4
+    bl net_voice_getConfigParam
     cmpwi r3, 0x0
     beq lbl_fn_804D25D4_0000299C
-    bl fn_804D5FC4
+    bl net_voice_getConfigParam
     bl fn_804D6378
     bl fn_804D6380
     mr r22, r3
-    bl fn_804D5FC4
+    bl net_voice_getConfigParam
     bl fn_804D6378
     addi r4, r22, 0x1
     bl fn_804D6370
@@ -3352,14 +3352,14 @@ lbl_fn_804D25D4_00002A04:
     mr r3, r24
     bl fn_804D9970
     b lbl_fn_804D25D4_00004898
-    bl fn_804D5FC4
+    bl net_voice_getConfigParam
     cmpwi r3, 0x0
     beq lbl_fn_804D25D4_00002A3C
-    bl fn_804D5FC4
+    bl net_voice_getConfigParam
     bl fn_804D6378
     bl fn_804D6380
     mr r22, r3
-    bl fn_804D5FC4
+    bl net_voice_getConfigParam
     bl fn_804D6378
     addi r4, r22, 0x1
     bl fn_804D6370
@@ -5478,10 +5478,10 @@ lbl_fn_804D25D4_00004958:
     bl fn_804D5FAC
     cmpwi r3, 0xc
     bne lbl_fn_804D25D4_00004984
-    bl fn_804D5FC4
+    bl net_voice_getConfigParam
     cmpwi r3, 0x0
     beq lbl_fn_804D25D4_00004984
-    bl fn_804D5FC4
+    bl net_voice_getConfigParam
     bl fn_804D6358
     cmpwi r3, 0x7
     blt lbl_fn_804D25D4_000049A4

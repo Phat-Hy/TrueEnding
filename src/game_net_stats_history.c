@@ -59,7 +59,7 @@ extern u32 lbl_80887CD4;
 void fn_80540A0C(void);
 void fn_8054119C(void);
 void fn_805411E0(void);
-void fn_80541214(void);
+void net_stats_getSelectedEntryId(void);
 void fn_80541248(void);
 void fn_805412AC(void);
 void fn_80541370(void);
@@ -659,20 +659,20 @@ lbl_fn_805411E0_000007F8:
     blr
 }
 
-asm void fn_80541214(void)
+asm void net_stats_getSelectedEntryId(void)
 {
     nofralloc
     lwz r4, 0x1a0(r3)
     cmpwi r4, 0x0
-    blt lbl_fn_80541214_00000824
+    blt lbl_net_stats_getSelectedEntryId_00000824
     lwz r0, 0xbc(r3)
     extsh r0, r0
     cmpw r4, r0
-    blt lbl_fn_80541214_0000082C
-lbl_fn_80541214_00000824:
+    blt lbl_net_stats_getSelectedEntryId_0000082C
+lbl_net_stats_getSelectedEntryId_00000824:
     li r3, 0x0
     blr
-lbl_fn_80541214_0000082C:
+lbl_net_stats_getSelectedEntryId_0000082C:
     lwz r3, 0xb8(r3)
     slwi r0, r4, 3
     lwzx r3, r3, r0

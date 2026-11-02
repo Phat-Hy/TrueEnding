@@ -34,7 +34,7 @@ extern void fn_8053EF74(void);
 extern void fn_8053F6F0(void);
 extern void fn_80540120(void);
 extern void fn_8054119C(void);
-extern void fn_80541214(void);
+extern void net_stats_getSelectedEntryId(void);
 extern void fn_80541524(void);
 extern u32 strlen(const char* str);
 
@@ -944,11 +944,11 @@ lbl_fn_8054FBE4_00000A64:
     cmpwi r0, 0xe14
     bne lbl_fn_8054FBE4_00000AB0
     mr r3, r31
-    bl fn_80541214
+    bl net_stats_getSelectedEntryId
     cmpwi r3, 0x0
     beq lbl_fn_8054FBE4_00000AB0
     mr r3, r31
-    bl fn_80541214
+    bl net_stats_getSelectedEntryId
     lwz r0, 0xc(r3)
     cmpwi r0, 0x0
     beq lbl_fn_8054FBE4_00000AE0
@@ -957,11 +957,11 @@ lbl_fn_8054FBE4_00000AB0:
     cmpwi r0, 0x151e
     bne lbl_fn_8054FBE4_00000C38
     mr r3, r31
-    bl fn_80541214
+    bl net_stats_getSelectedEntryId
     cmpwi r3, 0x0
     beq lbl_fn_8054FBE4_00000C38
     mr r3, r31
-    bl fn_80541214
+    bl net_stats_getSelectedEntryId
     lwz r0, 0xc(r3)
     cmpwi r0, 0x3
     bne lbl_fn_8054FBE4_00000C38
@@ -1093,7 +1093,7 @@ asm void fn_8054FFE4(void)
     stw r29, 0x24(r1)
     stw r0, 0x8(r1)
     stw r0, 0x10(r1)
-    bl fn_80541214
+    bl net_stats_getSelectedEntryId
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_8054FFE4_00000E38
@@ -1376,7 +1376,7 @@ lbl_fn_80550258_00001040:
     bl fn_80488DB8
 lbl_fn_80550258_00001060:
     mr r3, r15
-    bl fn_80541214
+    bl net_stats_getSelectedEntryId
     cmpwi r3, 0x0
     mr r20, r3
     beq lbl_fn_80550258_000016B8
@@ -1718,7 +1718,7 @@ lbl_fn_80550258_00001504:
     bl fn_8048F9B0
 lbl_fn_80550258_00001510:
     mr r3, r15
-    bl fn_80541214
+    bl net_stats_getSelectedEntryId
     cmpwi r3, 0x0
     mr r16, r3
     beq lbl_fn_80550258_000016B8
@@ -1864,7 +1864,7 @@ asm void fn_80550A7C(void)
     psq_st f31, 0x58(r1), 0, 0
     bl _savegpr_18
     mr r22, r3
-    bl fn_80541214
+    bl net_stats_getSelectedEntryId
     cmpwi r3, 0x0
     mr r29, r3
     beq lbl_fn_80550A7C_00001940
@@ -2065,7 +2065,7 @@ asm void fn_80550CE4(void)
     b lbl_fn_80550CE4_00001D3C
 lbl_fn_80550CE4_000019B4:
     mr r3, r21
-    bl fn_80541214
+    bl net_stats_getSelectedEntryId
     lwz r0, 0x2c(r3)
     mr r25, r3
     li r24, 0x0
