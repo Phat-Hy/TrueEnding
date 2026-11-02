@@ -112,7 +112,7 @@ void fn_801D4700(void);
 void fn_801D4A0C(void);
 void fn_801D4E74(void);
 void fn_801D52F8(void);
-void fn_801D5410(void);
+void fn_801D5410(void *p, u32 dummy, u32 val);
 void fn_801D5420(void);
 void fn_801D54A0(void);
 void fn_801D54C0(void);
@@ -1617,13 +1617,10 @@ lbl_fn_801D52F8_00001608:
     blr
 }
 
-asm void fn_801D5410(void)
+void fn_801D5410(void *p, u32 dummy, u32 val)
 {
-    nofralloc
-    lwz r0, 0x1e8(r3)
-    stw r0, 0x1ec(r3)
-    stw r5, 0x1e8(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x1ec) = *(u32 *)((u8 *)p + 0x1e8);
+    *(u32 *)((u8 *)p + 0x1e8) = val;
 }
 
 asm void fn_801D5420(void)

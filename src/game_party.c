@@ -53,12 +53,12 @@ void atn_Polynomial2Curve_evaluate(void);
 void atn_Polynomial2Curve_getDerivative(void);
 void atn_Polynomial2Curve_getDuration(void);
 void atn_Polynomial1Curve_getDerivative(void);
-void atn_Polynomial1Curve_getDuration(void);
-void atn_ConstantCurve_getDerivative(void);
+f32 atn_Polynomial1Curve_getDuration(const void *p, f32 t);
+void atn_ConstantCurve_getDerivative(void *p, f32 scale);
 f32 atn_ConstantCurve_getDuration(void *p);
-void atn_CosinusCurve_getDerivative(void);
+void atn_CosinusCurve_getDerivative(void *p, f32 scale);
 void atn_CosinusCurve_getDuration(void);
-void atn_SinusCurve_getDerivative(void);
+void atn_SinusCurve_getDerivative(void *p, f32 scale);
 void atn_SinusCurve_getDuration(void);
 void party_initTextures(void);
 void atn_DrawHelper_destructor(void);
@@ -1777,22 +1777,14 @@ asm void atn_Polynomial1Curve_getDerivative(void)
     blr
 }
 
-asm void atn_Polynomial1Curve_getDuration(void)
+f32 atn_Polynomial1Curve_getDuration(const void *p, f32 t)
 {
-    nofralloc
-    lfs f2, 0xc(r3)
-    lfs f0, 0x10(r3)
-    fmadds f1, f2, f1, f0
-    blr
+    return t * *(const f32 *)((const u8 *)p + 0xc) + *(const f32 *)((const u8 *)p + 0x10);
 }
 
-asm void atn_ConstantCurve_getDerivative(void)
+void atn_ConstantCurve_getDerivative(void *p, f32 scale)
 {
-    nofralloc
-    lfs f0, 0xc(r3)
-    fmuls f0, f0, f1
-    stfs f0, 0xc(r3)
-    blr
+    *(f32 *)((u8 *)p + 0xc) *= scale;
 }
 
 f32 atn_ConstantCurve_getDuration(void *p)
@@ -1800,13 +1792,9 @@ f32 atn_ConstantCurve_getDuration(void *p)
     return *(f32 *)((u8 *)p + 0xc);
 }
 
-asm void atn_CosinusCurve_getDerivative(void)
+void atn_CosinusCurve_getDerivative(void *p, f32 scale)
 {
-    nofralloc
-    lfs f0, 0xc(r3)
-    fmuls f0, f0, f1
-    stfs f0, 0xc(r3)
-    blr
+    *(f32 *)((u8 *)p + 0xc) *= scale;
 }
 
 asm void atn_CosinusCurve_getDuration(void)
@@ -1831,13 +1819,9 @@ asm void atn_CosinusCurve_getDuration(void)
     blr
 }
 
-asm void atn_SinusCurve_getDerivative(void)
+void atn_SinusCurve_getDerivative(void *p, f32 scale)
 {
-    nofralloc
-    lfs f0, 0xc(r3)
-    fmuls f0, f0, f1
-    stfs f0, 0xc(r3)
-    blr
+    *(f32 *)((u8 *)p + 0xc) *= scale;
 }
 
 asm void atn_SinusCurve_getDuration(void)

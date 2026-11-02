@@ -89,13 +89,9 @@ void fn_8018DD34(void);
 void fn_8018E434(void);
 void fn_8018E438(void);
 
-asm void fn_8018CADC(void)
+void fn_8018CADC(void)
 {
-    nofralloc
-    lwz r3, lbl_8087EFA8
-    lfs f0, lbl_80881EC4
-    stfs f0, 0x3a4(r3)
-    blr
+    *(f32 *)((u8 *)lbl_8087EFA8 + 0x3a4) = *(f32 *)&lbl_80881EC4;
 }
 
 asm void fn_8018CAEC(void)
@@ -772,13 +768,9 @@ lbl_fn_8018D160_00000984:
     blr
 }
 
-asm void fn_8018D49C(void)
+void fn_8018D49C(void)
 {
-    nofralloc
-    lwz r3, lbl_8087EFA8
-    lfs f0, lbl_80881EC4
-    stfs f0, 0x3a4(r3)
-    blr
+    *(f32 *)((u8 *)lbl_8087EFA8 + 0x3a4) = *(f32 *)&lbl_80881EC4;
 }
 
 asm void fn_8018D4AC(void)

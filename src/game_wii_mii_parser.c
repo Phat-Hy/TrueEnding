@@ -129,8 +129,8 @@ void fn_80565F38(void);
 void fn_80566014(void);
 void fn_805660E0(void);
 void fn_8056639C(void);
-void fn_805663FC(void);
-void fn_8056640C(void);
+void fn_805663FC(void *p);
+void fn_8056640C(void *p);
 u32 fn_8056641C(void *p);
 void fn_80566424(void);
 void fn_805664E0(void);
@@ -502,22 +502,14 @@ lbl_fn_8056639C_000004A0:
     blr
 }
 
-asm void fn_805663FC(void)
+void fn_805663FC(void *p)
 {
-    nofralloc
-    lwz r0, 0x28(r3)
-    rlwinm r0, r0, 0, 30, 28
-    stw r0, 0x28(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x28) &= ~0x6;
 }
 
-asm void fn_8056640C(void)
+void fn_8056640C(void *p)
 {
-    nofralloc
-    lwz r0, 0x28(r3)
-    ori r0, r0, 0x4
-    stw r0, 0x28(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x28) |= 0x4;
 }
 
 u32 fn_8056641C(void *p)

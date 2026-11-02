@@ -94,7 +94,7 @@ void fn_80218858(void);
 void fn_802188B4(void);
 void fn_802189EC(void);
 void *fn_80218BB4(u32 idx);
-void fn_80218BC4(void);
+void *fn_80218BC4(u32 idx);
 void fn_80218BD4(void);
 void fn_80219018(void);
 void fn_80219074(void);
@@ -1106,13 +1106,9 @@ void *fn_80218BB4(u32 idx)
     return (u8 *)lbl_8087F2B0 + idx * 0xf4;
 }
 
-asm void fn_80218BC4(void)
+void *fn_80218BC4(u32 idx)
 {
-    nofralloc
-    mulli r0, r3, 0xf4
-    lwz r3, lbl_8087F2B4
-    add r3, r3, r0
-    blr
+    return (u8 *)lbl_8087F2B4 + idx * 0xf4;
 }
 
 asm void fn_80218BD4(void)

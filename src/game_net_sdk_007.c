@@ -116,7 +116,7 @@ extern u32 lbl_80880484;
 void pad_03_806A6568_text(void);
 u32 fn_806A6570(void);
 u32 fn_806A6580(void);
-void fn_806A6590(void);
+s32 fn_806A6590(s32 val);
 void fn_806A65A0(void);
 void fn_806A65E0(void);
 void fn_806A65F0(void);
@@ -146,7 +146,7 @@ void fn_806A7420(void);
 void fn_806A74C0(void);
 void fn_806A75C0(void);
 void fn_806A75F0(void);
-void fn_806A76A0(void);
+void fn_806A76A0(u32 val);
 void net_formatLog(void);
 void fn_806A7A00(void);
 void fn_806A7A50(void);
@@ -159,8 +159,8 @@ void fn_806A7FB0(void);
 void fn_806A8030(void);
 void fn_806A8160(void);
 void fn_806A8200(void);
-void fn_806A8270(void);
-void fn_806A8280(void);
+void fn_806A8270(u32 val);
+void fn_806A8280(u32 val);
 void fn_806A8290(void);
 
 asm void pad_03_806A6568_text(void)
@@ -180,13 +180,9 @@ u32 fn_806A6580(void)
     return 0;
 }
 
-asm void fn_806A6590(void)
+s32 fn_806A6590(s32 val)
 {
-    nofralloc
-    neg r0, r3
-    or r0, r0, r3
-    srawi r3, r0, 31
-    blr
+    return val != 0 ? -1 : 0;
 }
 
 asm void fn_806A65A0(void)
@@ -1451,12 +1447,9 @@ lbl_fn_806A75F0_0000110C:
     blr
 }
 
-asm void fn_806A76A0(void)
+void fn_806A76A0(u32 val)
 {
-    nofralloc
-    lis r4, lbl_8085FF30@ha
-    stw r3, lbl_8085FF30@l(r4)
-    blr
+    *(u32 *)lbl_8085FF30 = val;
 }
 
 asm void net_formatLog(void)
@@ -2331,22 +2324,14 @@ asm void fn_806A8200(void)
     blr
 }
 
-asm void fn_806A8270(void)
+void fn_806A8270(u32 val)
 {
-    nofralloc
-    lis r4, lbl_8085FF40@ha
-    lwz r4, lbl_8085FF40@l(r4)
-    stw r3, 0x200(r4)
-    blr
+    *(u32 *)(*(u8 **)lbl_8085FF40 + 0x200) = val;
 }
 
-asm void fn_806A8280(void)
+void fn_806A8280(u32 val)
 {
-    nofralloc
-    lis r4, lbl_8085FF40@ha
-    lwz r4, lbl_8085FF40@l(r4)
-    stw r3, 0x204(r4)
-    blr
+    *(u32 *)(*(u8 **)lbl_8085FF40 + 0x204) = val;
 }
 
 asm void fn_806A8290(void)

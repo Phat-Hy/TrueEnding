@@ -33,7 +33,7 @@ void IPCReadReg(void);
 void IPCWriteReg(void);
 u32 IPCGetBufferHi(void);
 u32 IPCGetBufferLo(void);
-void IPCSetBufferLo(void);
+void IPCSetBufferLo(u32 val);
 void strnlen(void);
 void fn_8061BDC0(void);
 void IPCInterruptHandler_8061C020(void);
@@ -114,11 +114,9 @@ u32 IPCGetBufferLo(void)
     return lbl_808800EC;
 }
 
-asm void IPCSetBufferLo(void)
+void IPCSetBufferLo(u32 val)
 {
-    nofralloc
-    stw r3, lbl_808800EC
-    blr
+    lbl_808800EC = val;
 }
 
 asm void strnlen(void)

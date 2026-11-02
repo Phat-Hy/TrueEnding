@@ -118,7 +118,7 @@ void fn_807184D0(void);
 void fn_807184F0(void);
 void fn_80718540(void);
 void fn_807186F0(void);
-void fn_80718770(void);
+u32 fn_80718770(void);
 void fn_80718780(void);
 void net_getGlobalContext(void);
 void fn_80718890(void);
@@ -810,11 +810,9 @@ lbl_fn_807186F0_000008C0:
     blr
 }
 
-asm void fn_80718770(void)
+u32 fn_80718770(void)
 {
-    nofralloc
-    lbz r3, lbl_808804E8
-    blr
+    return lbl_808804E8;
 }
 
 asm void fn_80718780(void)

@@ -46,14 +46,14 @@ extern u32 lbl_80887620;
 extern u32 lbl_80887624;
 
 /* Function declarations */
-void fn_804F147C(void);
-void fn_804F148C(void);
+void fn_804F147C(void *p);
+void fn_804F148C(void *p);
 void fn_804F149C(void);
 void fn_804F1568(void);
 void fn_804F1954(void);
 void fn_804F1CA4(void);
 void fn_804F1D74(void);
-void fn_804F1F28(void);
+void fn_804F1F28(void *p);
 void fn_804F1F38(void);
 void fn_804F2044(void);
 void fn_804F225C(void);
@@ -66,22 +66,14 @@ void fn_804F2CEC(void);
 void fn_804F2DB0(void);
 void fn_804F2E40(void);
 
-asm void fn_804F147C(void)
+void fn_804F147C(void *p)
 {
-    nofralloc
-    lwz r0, 0xd0(r3)
-    oris r0, r0, 0x1000
-    stw r0, 0xd0(r3)
-    blr
+    *(u32 *)((u8 *)p + 0xd0) |= 0x10000000;
 }
 
-asm void fn_804F148C(void)
+void fn_804F148C(void *p)
 {
-    nofralloc
-    lwz r0, 0xd0(r3)
-    rlwinm r0, r0, 0, 4, 2
-    stw r0, 0xd0(r3)
-    blr
+    *(u32 *)((u8 *)p + 0xd0) &= ~0x10000000;
 }
 
 asm void fn_804F149C(void)
@@ -837,13 +829,9 @@ lbl_fn_804F1D74_00000A98:
     blr
 }
 
-asm void fn_804F1F28(void)
+void fn_804F1F28(void *p)
 {
-    nofralloc
-    lwz r0, 0xd0(r3)
-    oris r0, r0, 0x800
-    stw r0, 0xd0(r3)
-    blr
+    *(u32 *)((u8 *)p + 0xd0) |= 0x08000000;
 }
 
 asm void fn_804F1F38(void)

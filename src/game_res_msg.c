@@ -754,13 +754,9 @@ lbl_fn_80236FFC_00000928:
     blr
 }
 
-asm void fn_802371AC(void)
+void fn_802371AC(void)
 {
-    nofralloc
-    lwz r0, lbl_8087DBF8
-    slwi r0, r0, 3
-    stw r0, lbl_8087F378
-    blr
+    lbl_8087F378 = lbl_8087DBF8 << 3;
 }
 
 asm void fn_802371BC(void)

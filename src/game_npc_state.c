@@ -55,7 +55,7 @@ void *fn_8013C434(void *p);
 u32 fn_8013C43C(void *p);
 void fn_8013C444(void);
 u32 fn_8013C458(void *p);
-void fn_8013C460(void);
+void fn_8013C460(void *p, u32 val);
 void fn_8013C470(void *p, u32 val);
 u32 fn_8013C478(void *p);
 void npc_isInteractionReady(void);
@@ -167,13 +167,9 @@ u32 fn_8013C458(void *p)
     return *(u32 *)((u8 *)p + 0x648);
 }
 
-asm void fn_8013C460(void)
+void fn_8013C460(void *p, u32 val)
 {
-    nofralloc
-    lwz r0, 0x12a4(r3)
-    rlwimi r0, r4, 5, 26, 26
-    stw r0, 0x12a4(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x12a4) = (*(u32 *)((u8 *)p + 0x12a4) & ~0x20) | ((val & 1) << 5);
 }
 
 void fn_8013C470(void *p, u32 val)

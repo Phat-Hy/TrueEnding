@@ -59,7 +59,7 @@ void fn_806CCB40(void);
 void fn_806CCB70(void);
 void fn_806CCC70(void);
 void fn_806CCC90(void);
-void fn_806CCCB0(void);
+u32 fn_806CCCB0(void);
 void fn_806CCCC0(void);
 void fn_806CCDB0(void);
 void fn_806CCEA0(void);
@@ -1865,13 +1865,9 @@ asm void fn_806CCC90(void)
     b memset
 }
 
-asm void fn_806CCCB0(void)
+u32 fn_806CCCB0(void)
 {
-    nofralloc
-    lis r3, lbl_80860898@ha
-    lwz r3, lbl_80860898@l(r3)
-    lwz r3, 0x58(r3)
-    blr
+    return *(u32 *)((u8 *)lbl_80860898 + 0x58);
 }
 
 asm void fn_806CCCC0(void)

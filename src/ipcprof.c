@@ -122,13 +122,9 @@ asm void IPCiProfQueueReq(void)
     b AddReqInfo
 }
 
-asm void fn_8061DE90(void)
+void fn_8061DE90(void)
 {
-    nofralloc
-    lwz r3, IpcNumUnIssuedReqs_80880114
-    subi r0, r3, 0x1
-    stw r0, IpcNumUnIssuedReqs_80880114
-    blr
+    IpcNumUnIssuedReqs_80880114--;
 }
 
 asm void fn_8061DEA0(void)

@@ -118,7 +118,7 @@ void fn_803748E0(void);
 void fn_80374964(void);
 void fn_80374D64(void);
 void kpad_validateButtonIndex(void);
-void kpad_testActiveFlags(void);
+u32 kpad_testActiveFlags(const void *p);
 void fn_80375194(void);
 void fn_80375254(void);
 void fn_8037529C(void);
@@ -1393,13 +1393,9 @@ lbl_kpad_validateButtonIndex_000011F4:
     blr
 }
 
-asm void kpad_testActiveFlags(void)
+u32 kpad_testActiveFlags(const void *p)
 {
-    nofralloc
-    lwz r0, 0x5638(r3)
-    cntlzw r0, r0
-    srwi r3, r0, 5
-    blr
+    return *(const u32 *)((const u8 *)p + 0x5638) == 0;
 }
 
 asm void fn_80375194(void)

@@ -106,7 +106,7 @@ extern u32 lbl_80885814;
 void fn_80375B78(void);
 void fn_80375D0C(void);
 void fn_80376150(void);
-void fn_80376194(void);
+void fn_80376194(void *p, u32 val);
 u32 fn_803761A4(void);
 u32 fn_803761AC(void *p);
 u32 fn_803761BC(void *p);
@@ -589,13 +589,9 @@ lbl_fn_80376150_000005F8:
     blr
 }
 
-asm void fn_80376194(void)
+void fn_80376194(void *p, u32 val)
 {
-    nofralloc
-    cntlzw r0, r4
-    srwi r0, r0, 5
-    stw r0, 0x10f4(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x10f4) = (val == 0);
 }
 
 u32 fn_803761A4(void)

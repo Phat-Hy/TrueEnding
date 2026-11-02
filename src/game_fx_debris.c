@@ -101,7 +101,7 @@ void fn_8029C69C(void);
 void fn_8029C728(void);
 void fn_8029C8CC(void);
 void fn_8029C94C(void);
-void fn_8029CA54(void);
+f32 fn_8029CA54(const void *p);
 f32 fn_8029CA64(void);
 f32 fn_8029CA6C(void);
 f32 fn_8029CA74(void);
@@ -990,13 +990,9 @@ lbl_fn_8029C94C_00000BD4:
     blr
 }
 
-asm void fn_8029CA54(void)
+f32 fn_8029CA54(const void *p)
 {
-    nofralloc
-    lfs f1, lbl_80883D18
-    lfs f0, 0x538(r3)
-    fadds f1, f1, f0
-    blr
+    return *(f32 *)&lbl_80883D18 + *(const f32 *)((const u8 *)p + 0x538);
 }
 
 f32 fn_8029CA64(void)

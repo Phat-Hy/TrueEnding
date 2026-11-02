@@ -32,9 +32,9 @@ void *fn_8058FEB8(const void *p, u32 idx);
 void fn_8058FEC8(void *dst, const void *src);
 void fn_8058FED4(void);
 void string_copyHash(void *dst, const void *src);
-void hash_advanceIterator(void);
+void hash_advanceIterator(void *p);
 u32 hash_getHashValue(const void*);
-void hash_retreatIterator(void);
+void hash_retreatIterator(void *p);
 void fn_8058FF1C(void);
 void fn_8059044C(void);
 void fn_8059057C(void);
@@ -1297,13 +1297,9 @@ void string_copyHash(void *dst, const void *src)
     *(u32 *)((u8 *)dst + 0x0) = *(const u32 *)((const u8 *)src + 0x0);
 }
 
-asm void hash_advanceIterator(void)
+void hash_advanceIterator(void *p)
 {
-    nofralloc
-    lwz r4, 0x0(r3)
-    addi r0, r4, 0x58
-    stw r0, 0x0(r3)
-    blr
+    *(u32 *)p += 0x58;
 }
 
 u32 hash_getHashValue(const void* obj)
@@ -1311,13 +1307,9 @@ u32 hash_getHashValue(const void* obj)
     return *(const u32*)obj;
 }
 
-asm void hash_retreatIterator(void)
+void hash_retreatIterator(void *p)
 {
-    nofralloc
-    lwz r4, 0x0(r3)
-    subi r0, r4, 0x58
-    stw r0, 0x0(r3)
-    blr
+    *(u32 *)p -= 0x58;
 }
 
 asm void fn_8058FF1C(void)

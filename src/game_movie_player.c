@@ -64,8 +64,8 @@ extern u32 lbl_80885288;
 extern u32 lbl_8088528C;
 
 /* Function declarations */
-void fn_80339F04(void);
-void fn_80339F14(void);
+u32 fn_80339F04(const void *p);
+void fn_80339F14(void *p, u32 val);
 void *fn_80339F24(void *p, u32 idx);
 void fn_80339F34(void);
 void fn_80339F5C(void *p, u32 idx, f32 val);
@@ -79,22 +79,14 @@ void fn_8033A7A0(void);
 void fn_8033AB88(void);
 void fn_8033ACB0(void);
 
-asm void fn_80339F04(void)
+u32 fn_80339F04(const void *p)
 {
-    nofralloc
-    lwz r0, 0x54c(r3)
-    extrwi r0, r0, 1, 28
-    xori r3, r0, 0x1
-    blr
+    return ((*(const u32 *)((const u8 *)p + 0x54c) >> 3) & 1) ^ 1;
 }
 
-asm void fn_80339F14(void)
+void fn_80339F14(void *p, u32 val)
 {
-    nofralloc
-    lwz r0, 0x3dc(r3)
-    rlwimi r0, r4, 31, 0, 0
-    stw r0, 0x3dc(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x3dc) = (*(u32 *)((u8 *)p + 0x3dc) & ~0x80000000) | ((val & 1) << 31);
 }
 
 void *fn_80339F24(void *p, u32 idx)

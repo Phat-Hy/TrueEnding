@@ -128,7 +128,7 @@ extern u32 lbl_80883C10;
 void fn_80293368(void);
 void fn_8029350C(void);
 void fn_8029358C(void);
-void fn_80293694(void);
+f32 fn_80293694(const void *p);
 f32 fn_802936A4(void);
 f32 fn_802936AC(void);
 void fn_802936B4(void);
@@ -368,13 +368,9 @@ lbl_fn_8029358C_00000274:
     blr
 }
 
-asm void fn_80293694(void)
+f32 fn_80293694(const void *p)
 {
-    nofralloc
-    lfs f1, lbl_80883BDC
-    lfs f0, 0x538(r3)
-    fadds f1, f1, f0
-    blr
+    return *(f32 *)&lbl_80883BDC + *(const f32 *)((const u8 *)p + 0x538);
 }
 
 f32 fn_802936A4(void)

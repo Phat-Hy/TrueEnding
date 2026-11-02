@@ -87,7 +87,7 @@ void fn_80605300(void);
 void fn_80605540(void);
 void fn_806055A0(void);
 void fn_806056A0(void);
-void fn_806056C0(void);
+u32 fn_806056C0(void);
 void __VIDelay(void);
 void fn_80605760(void);
 void __VISendI2CData(void);
@@ -1324,13 +1324,10 @@ asm void fn_806056A0(void)
     blr
 }
 
-asm void fn_806056C0(void)
+u32 fn_806056C0(void)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, lbl_8087FE74
-    li r3, 0x1
-    blr
+    lbl_8087FE74 = 0;
+    return 1;
 }
 
 asm void __VIDelay(void)
@@ -3209,13 +3206,9 @@ lbl_fn_806071A0_2c94:
     blr
 }
 
-asm void fn_80607230(void)
+void fn_80607230(void)
 {
-    nofralloc
-    lwz r0, lbl_8087FE98
-    ori r0, r0, 0x80
-    stw r0, lbl_8087FE98
-    blr
+    lbl_8087FE98 |= 0x80;
 }
 
 asm void __VISetRGBModeImm(void)

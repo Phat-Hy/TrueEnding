@@ -123,7 +123,7 @@ void fn_801C0C70(void);
 void fn_801C0CC4(void);
 void fn_801C0D04(void);
 void fn_801C0D80(void);
-void fn_801C1050(void);
+void fn_801C1050(void *p, u32 val);
 void fn_801C1060(void);
 void fn_801C1084(void);
 void fn_801C1518(void);
@@ -1239,13 +1239,9 @@ lbl_fn_801C0D80_00000E84:
     blr
 }
 
-asm void fn_801C1050(void)
+void fn_801C1050(void *p, u32 val)
 {
-    nofralloc
-    lwz r0, 0x12a4(r3)
-    rlwimi r0, r4, 4, 27, 27
-    stw r0, 0x12a4(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x12a4) = (*(u32 *)((u8 *)p + 0x12a4) & ~0x10) | ((val & 1) << 4);
 }
 
 asm void fn_801C1060(void)

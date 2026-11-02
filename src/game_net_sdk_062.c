@@ -124,7 +124,7 @@ void fn_80721830(void);
 void *fn_80721840(void *p);
 void *fn_80721850(void *p);
 u8 fn_80721860(void *p);
-void fn_80721870(void);
+void *fn_80721870(void);
 void fn_80721880(void);
 void fn_80721890(void);
 void fn_80721990(void);
@@ -1742,11 +1742,9 @@ u8 fn_80721860(void *p)
     return *(u8 *)((u8 *)p + 0x230);
 }
 
-asm void fn_80721870(void)
+void *fn_80721870(void)
 {
-    nofralloc
-    la r3, lbl_80880518
-    blr
+    return &lbl_80880518;
 }
 
 void fn_80721880(void)

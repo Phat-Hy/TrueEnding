@@ -49,7 +49,7 @@ void fn_80231754(void);
 void fn_8023193C(void);
 void fn_802328DC(u32 val);
 void fn_802328EC(void);
-void fn_80232AC4(void);
+void fn_80232AC4(u32 val);
 void fn_80232ACC(void);
 void sound_initGlobalInstances(u32 r3, u32 r4);
 u32 sound_getGlobalInstance1(void);
@@ -1556,11 +1556,9 @@ lbl_fn_802328EC_0000159C:
     blr
 }
 
-asm void fn_80232AC4(void)
+void fn_80232AC4(u32 val)
 {
-    nofralloc
-    stw r3, lbl_8087F360
-    blr
+    lbl_8087F360 = val;
 }
 
 asm void fn_80232ACC(void)

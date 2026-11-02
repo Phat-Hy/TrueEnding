@@ -78,7 +78,7 @@ extern u8 lbl_808608B0[];
 void pad_03_806CD3BC_text(void);
 void fn_806CD3C0(void);
 void fn_806CD3E0(void);
-void fn_806CD450(void);
+void fn_806CD450(u32 val);
 void fn_806CD460(void);
 void fn_806CD4E0(void);
 void fn_806CD540(void);
@@ -113,7 +113,7 @@ void fn_806CEB00(void);
 void fn_806CED40(void);
 void fn_806CEED0(void);
 void fn_806CF030(void);
-void fn_806CF090(void);
+u32 fn_806CF090(const void *p);
 void *fn_806CF0A0(void *obj);
 void fn_806CF0B0(void);
 void fn_806CF0D0(void *obj, void *val);
@@ -180,13 +180,9 @@ lbl_fn_806CD3E0_00000074:
     blr
 }
 
-asm void fn_806CD450(void)
+void fn_806CD450(u32 val)
 {
-    nofralloc
-    lis r4, lbl_80860898@ha
-    lwz r4, lbl_80860898@l(r4)
-    stw r3, 0x7a8(r4)
-    blr
+    *(u32 *)((u8 *)lbl_80860898 + 0x7a8) = val;
 }
 
 asm void fn_806CD460(void)
@@ -2246,13 +2242,9 @@ lbl_fn_806CF030_00001CAC:
     blr
 }
 
-asm void fn_806CF090(void)
+u32 fn_806CF090(const void *p)
 {
-    nofralloc
-    lwz r0, 0x0(r3)
-    lwz r4, 0x4(r3)
-    clrlwi r3, r0, 21
-    blr
+    return *(const u32 *)p & 0x7ff;
 }
 
 void *fn_806CF0A0(void *obj)

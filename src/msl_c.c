@@ -91,7 +91,7 @@ void fn_8067BF50(void);
 void fn_8067C42C(void);
 void fn_8067C590(void);
 void fn_8067C734(void);
-void fn_8067CE80(void);
+s32 fn_8067CE80(s32 x);
 void __prep_buffer(void);
 void fn_8067CEB8(void);
 void __flush_buffer(void);
@@ -2100,13 +2100,9 @@ lbl_fn_8067C734_000019F4:
     blr
 }
 
-asm void fn_8067CE80(void)
+s32 fn_8067CE80(s32 x)
 {
-    nofralloc
-    srawi r4, r3, 31
-    xor r0, r4, r3
-    subf r3, r4, r0
-    blr
+    return x < 0 ? -x : x;
 }
 
 asm void __prep_buffer(void)

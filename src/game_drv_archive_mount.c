@@ -152,7 +152,7 @@ void fn_805A6B54(void);
 void fn_805A6B58(void);
 void fn_805A6BD8(void);
 void archive_mountCheckStatus(void);
-void fn_805A6D14(void);
+f32 fn_805A6D14(const void *p);
 void fn_805A6D24(void);
 void fn_805A70D8(void);
 void fn_805A70F4(void);
@@ -822,13 +822,9 @@ asm void archive_mountCheckStatus(void)
     blr
 }
 
-asm void fn_805A6D14(void)
+f32 fn_805A6D14(const void *p)
 {
-    nofralloc
-    lfs f1, lbl_808882E0
-    lfs f0, 0x78(r3)
-    fdivs f1, f1, f0
-    blr
+    return *(f32 *)&lbl_808882E0 / *(const f32 *)((const u8 *)p + 0x78);
 }
 
 asm void fn_805A6D24(void)

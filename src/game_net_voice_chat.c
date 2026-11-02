@@ -45,7 +45,7 @@ void fn_804D5F10(void);
 u32 fn_804D5F3C(void *p);
 u32 fn_804D5F44(void *p);
 void *fn_804D5F4C(void *p, u32 idx);
-void fn_804D5F5C(void);
+void fn_804D5F5C(void *p, u32 val);
 void fn_804D5F6C(void);
 void fn_804D5F80(void);
 u32 fn_804D5F9C(void *p);
@@ -166,13 +166,9 @@ void *fn_804D5F4C(void *p, u32 idx)
     return (u8 *)*(void **)p + idx * 0xd5c;
 }
 
-asm void fn_804D5F5C(void)
+void fn_804D5F5C(void *p, u32 val)
 {
-    nofralloc
-    lwz r0, 0x12a4(r3)
-    rlwimi r0, r4, 15, 16, 16
-    stw r0, 0x12a4(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x12a4) = (*(u32 *)((u8 *)p + 0x12a4) & ~0x8000) | ((val & 1) << 15);
 }
 
 asm void fn_804D5F6C(void)
