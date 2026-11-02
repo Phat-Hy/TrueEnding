@@ -47,7 +47,7 @@ void fn_8053A514(void);
 void fn_8053AC6C(void);
 void fn_8053AC8C(void);
 void fn_8053ACDC(void);
-void fn_8053AD1C(void);
+void *fn_8053AD1C(void);
 void fn_8053AD28(void);
 u32 fn_8053AD4C(void);
 void fn_8053AD54(void);
@@ -1241,12 +1241,9 @@ lbl_fn_8053ACDC_00001014:
     blr
 }
 
-asm void fn_8053AD1C(void)
+void *fn_8053AD1C(void)
 {
-    nofralloc
-    lis r3, lbl_80793C0C@ha
-    addi r3, r3, lbl_80793C0C@l
-    blr
+    return lbl_80793C0C;
 }
 
 asm void fn_8053AD28(void)

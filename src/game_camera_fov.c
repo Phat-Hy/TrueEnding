@@ -108,11 +108,11 @@ extern u32 lbl_80884698;
 
 /* Function declarations */
 void fn_802DDBB0(void);
-void fn_802DDC2C(void);
-void fn_802DDC34(void);
+f32 fn_802DDC2C(void);
+f32 fn_802DDC34(void);
 void fn_802DDC3C(void);
 void fn_802DDCDC(void);
-void fn_802DDCF4(void);
+f32 fn_802DDCF4(void);
 void fn_802DDCFC(void);
 void fn_802DDD1C(void);
 void fn_802DDDB8(void);
@@ -163,18 +163,14 @@ lbl_fn_802DDBB0_0000004C:
     blr
 }
 
-asm void fn_802DDC2C(void)
+f32 fn_802DDC2C(void)
 {
-    nofralloc
-    lfs f1, lbl_80884668
-    blr
+    return *(f32 *)&lbl_80884668;
 }
 
-asm void fn_802DDC34(void)
+f32 fn_802DDC34(void)
 {
-    nofralloc
-    lfs f1, lbl_80884600
-    blr
+    return *(f32 *)&lbl_80884600;
 }
 
 asm void fn_802DDC3C(void)
@@ -235,11 +231,9 @@ asm void fn_802DDCDC(void)
     blr
 }
 
-asm void fn_802DDCF4(void)
+f32 fn_802DDCF4(void)
 {
-    nofralloc
-    lfs f1, lbl_80884670
-    blr
+    return *(f32 *)&lbl_80884670;
 }
 
 asm void fn_802DDCFC(void)

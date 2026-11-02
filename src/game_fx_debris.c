@@ -102,10 +102,10 @@ void fn_8029C728(void);
 void fn_8029C8CC(void);
 void fn_8029C94C(void);
 void fn_8029CA54(void);
-void fn_8029CA64(void);
-void fn_8029CA6C(void);
-void fn_8029CA74(void);
-void fn_8029CA7C(void);
+f32 fn_8029CA64(void);
+f32 fn_8029CA6C(void);
+f32 fn_8029CA74(void);
+f32 fn_8029CA7C(void);
 void fn_8029CA84(void);
 void fn_8029CB00(void);
 void fn_8029CF00(void);
@@ -999,32 +999,24 @@ asm void fn_8029CA54(void)
     blr
 }
 
-asm void fn_8029CA64(void)
+f32 fn_8029CA64(void)
 {
-    nofralloc
-    lfs f1, lbl_80883D1C
-    blr
+    return *(f32 *)&lbl_80883D1C;
 }
 
-asm void fn_8029CA6C(void)
+f32 fn_8029CA6C(void)
 {
-    nofralloc
-    lfs f1, lbl_80883D20
-    blr
+    return *(f32 *)&lbl_80883D20;
 }
 
-asm void fn_8029CA74(void)
+f32 fn_8029CA74(void)
 {
-    nofralloc
-    lfs f1, lbl_80883C50
-    blr
+    return *(f32 *)&lbl_80883C50;
 }
 
-asm void fn_8029CA7C(void)
+f32 fn_8029CA7C(void)
 {
-    nofralloc
-    lfs f1, lbl_80883D14
-    blr
+    return *(f32 *)&lbl_80883D14;
 }
 
 asm void fn_8029CA84(void)

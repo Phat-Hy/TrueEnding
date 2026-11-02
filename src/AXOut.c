@@ -52,7 +52,7 @@ void fn_80609D00(void);
 void __AXGetBufferSamples(void);
 void fn_80609D80(void);
 void fn_80609E50(void);
-void fn_80609EB0(void);
+void *fn_80609EB0(void);
 void fn_80609EC0(void);
 void fn_80609F30(void);
 void fn_80609FA0(void);
@@ -325,12 +325,9 @@ lbl_fn_80609E50_00000384:
     blr
 }
 
-asm void fn_80609EB0(void)
+void *fn_80609EB0(void)
 {
-    nofralloc
-    lis r3, lbl_807D57C0@ha
-    addi r3, r3, lbl_807D57C0@l
-    blr
+    return lbl_807D57C0;
 }
 
 asm void fn_80609EC0(void)

@@ -107,7 +107,7 @@ extern u32 lbl_808831AC;
 void fn_80244674(void);
 void fn_802446F0(void);
 void fn_80244898(void);
-void fn_80244CA0(void);
+u32 fn_80244CA0(void *p);
 void script_setTaskTerminated(void);
 void fn_80244CBC(void);
 void fn_80244CCC(void);
@@ -568,12 +568,9 @@ lbl_fn_80244898_0000060C:
     blr
 }
 
-asm void fn_80244CA0(void)
+u32 fn_80244CA0(void *p)
 {
-    nofralloc
-    lwz r0, 0x38(r3)
-    extrwi r3, r0, 1, 30
-    blr
+    return (*(u32 *)((u8 *)p + 0x38) >> 1) & 1;
 }
 
 asm void script_setTaskTerminated(void)

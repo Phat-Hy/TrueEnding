@@ -127,7 +127,7 @@ void fn_802E1A88(void);
 void fn_802E1ACC(void);
 void fn_802E1CA0(void);
 void fn_802E1D30(void);
-void fn_802E1D48(void);
+f32 fn_802E1D48(void);
 void fn_802E1D50(void);
 void fn_802E1DF0(void);
 void fn_802E20FC(void);
@@ -1045,11 +1045,9 @@ asm void fn_802E1D30(void)
     blr
 }
 
-asm void fn_802E1D48(void)
+f32 fn_802E1D48(void)
 {
-    nofralloc
-    lfs f1, lbl_808846DC
-    blr
+    return *(f32 *)&lbl_808846DC;
 }
 
 asm void fn_802E1D50(void)

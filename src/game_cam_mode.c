@@ -97,7 +97,7 @@ void fn_800EE794(void);
 void fn_800EEFDC(void);
 void fn_800EF080(void);
 void fn_800EF270(void);
-void fn_800EF2AC(void);
+f32 fn_800EF2AC(void);
 void fn_800EF2B4(void);
 void fn_800EF2F0(void);
 void fn_800EF304(void);
@@ -105,9 +105,9 @@ u32 fn_800EF308(void);
 void fn_800EF310(void *p);
 u32 fn_800EF31C(void);
 void fn_800EF324(void);
-void fn_800EF368(void);
+f32 fn_800EF368(void);
 void fn_800EF370(void);
-void fn_800EF38C(void);
+f32 fn_800EF38C(void);
 void fn_800EF394(void);
 void fn_800EF3D8(void);
 void fn_800EF3DC(void);
@@ -1473,11 +1473,9 @@ asm void fn_800EF270(void)
     blr
 }
 
-asm void fn_800EF2AC(void)
+f32 fn_800EF2AC(void)
 {
-    nofralloc
-    lfs f1, lbl_808812D8
-    blr
+    return *(f32 *)&lbl_808812D8;
 }
 
 asm void fn_800EF2B4(void)
@@ -1551,11 +1549,9 @@ asm void fn_800EF324(void)
     blr
 }
 
-asm void fn_800EF368(void)
+f32 fn_800EF368(void)
 {
-    nofralloc
-    lfs f1, lbl_808813AC
-    blr
+    return *(f32 *)&lbl_808813AC;
 }
 
 asm void fn_800EF370(void)
@@ -1570,11 +1566,9 @@ asm void fn_800EF370(void)
     blr
 }
 
-asm void fn_800EF38C(void)
+f32 fn_800EF38C(void)
 {
-    nofralloc
-    lfs f1, lbl_808812D8
-    blr
+    return *(f32 *)&lbl_808812D8;
 }
 
 asm void fn_800EF394(void)

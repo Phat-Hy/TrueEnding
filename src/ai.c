@@ -36,7 +36,7 @@ void fn_80607870(void);
 void fn_80607890(void);
 void fn_806078A0(void);
 void fn_806078C0(void);
-void fn_806078D0(void);
+u32 fn_806078D0(void);
 void fn_806078E0(void);
 void fn_80607900(void);
 void fn_80607A80(void);
@@ -140,11 +140,9 @@ asm void fn_806078C0(void)
     blr
 }
 
-asm void fn_806078D0(void)
+u32 fn_806078D0(void)
 {
-    nofralloc
-    lwz r3, lbl_8087FEB8
-    blr
+    return lbl_8087FEB8;
 }
 
 asm void fn_806078E0(void)

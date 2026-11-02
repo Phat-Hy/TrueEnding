@@ -97,10 +97,10 @@ extern u32 lbl_80881710;
 void fn_801151A4(void);
 u32 fn_801156BC(void);
 u32 fn_801156C4(void);
-void fn_801156CC(void);
+u32 fn_801156CC(void *p);
 void *fn_801156D8(void *p);
 void fn_801156E0(void);
-void fn_801156F8(void);
+u32 fn_801156F8(void *p);
 void fn_80115704(void);
 void fn_801157DC(void);
 f32 vec3_sqMag(const void *v);
@@ -477,12 +477,9 @@ u32 fn_801156C4(void)
     return lbl_8087F9C0;
 }
 
-asm void fn_801156CC(void)
+u32 fn_801156CC(void *p)
 {
-    nofralloc
-    lwz r0, 0x10(r3)
-    extrwi r3, r0, 1, 29
-    blr
+    return (*(u32 *)((u8 *)p + 0x10) >> 2) & 1;
 }
 
 void *fn_801156D8(void *p)
@@ -501,12 +498,9 @@ asm void fn_801156E0(void)
     blr
 }
 
-asm void fn_801156F8(void)
+u32 fn_801156F8(void *p)
 {
-    nofralloc
-    lwz r0, 0x10(r3)
-    extrwi r3, r0, 1, 28
-    blr
+    return (*(u32 *)((u8 *)p + 0x10) >> 3) & 1;
 }
 
 asm void fn_80115704(void)

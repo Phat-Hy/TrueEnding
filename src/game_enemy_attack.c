@@ -65,7 +65,7 @@ extern u32 lbl_80881948;
 void fn_8012DD70(void);
 void enemy_calcAttackTrajectory(void);
 void fn_8012E244(void);
-void fn_8012E534(void);
+u32 fn_8012E534(void *p);
 void fn_8012E540(void);
 void fn_8012F034(void);
 void fn_8012F188(void);
@@ -629,12 +629,9 @@ lbl_fn_8012E244_000007A8:
     blr
 }
 
-asm void fn_8012E534(void)
+u32 fn_8012E534(void *p)
 {
-    nofralloc
-    lwz r0, 0xc(r3)
-    extrwi r3, r0, 1, 19
-    blr
+    return (*(u32 *)((u8 *)p + 0xc) >> 12) & 1;
 }
 
 asm void fn_8012E540(void)

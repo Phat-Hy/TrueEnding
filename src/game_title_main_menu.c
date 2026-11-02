@@ -78,8 +78,8 @@ void fn_803ACD50(void);
 void fn_803ACE18(void);
 void fn_803ACF88(void);
 void fn_803AD05C(void);
-void fn_803AD130(void);
-void fn_803AD13C(void);
+void *fn_803AD130(void);
+void *fn_803AD13C(void);
 void fn_803AD148(void);
 void fn_803AD278(void);
 void fn_803AD3D8(void);
@@ -1064,20 +1064,14 @@ lbl_fn_803AD05C_00000D44:
     blr
 }
 
-asm void fn_803AD130(void)
+void *fn_803AD130(void)
 {
-    nofralloc
-    lis r3, lbl_8078B34C@ha
-    addi r3, r3, lbl_8078B34C@l
-    blr
+    return lbl_8078B34C;
 }
 
-asm void fn_803AD13C(void)
+void *fn_803AD13C(void)
 {
-    nofralloc
-    lis r3, lbl_8078B394@ha
-    addi r3, r3, lbl_8078B394@l
-    blr
+    return lbl_8078B394;
 }
 
 asm void fn_803AD148(void)

@@ -70,7 +70,7 @@ void fn_805D5390(void);
 void fn_805D5400(void);
 void fn_805D54D0(void);
 void fn_805D5510(void);
-void fn_805D5680(void);
+void *fn_805D5680(void);
 void fn_805D5690(void);
 void fn_805D56B0(void);
 void fn_805D58C0(void);
@@ -673,12 +673,9 @@ lbl_fn_805D5510_000007D4:
     blr
 }
 
-asm void fn_805D5680(void)
+void *fn_805D5680(void)
 {
-    nofralloc
-    lis r3, lbl_807CA210@ha
-    addi r3, r3, lbl_807CA210@l
-    blr
+    return lbl_807CA210;
 }
 
 asm void fn_805D5690(void)

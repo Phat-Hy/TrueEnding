@@ -125,7 +125,7 @@ void fn_8015076C(void);
 void fn_8015115C(void);
 void fn_80151168(void);
 u32 fn_80151180(void);
-void fn_80151188(void);
+u32 fn_80151188(void *p);
 void fn_80151194(void);
 
 asm void fn_8014F860(void)
@@ -1963,12 +1963,9 @@ u32 fn_80151180(void)
     return 0;
 }
 
-asm void fn_80151188(void)
+u32 fn_80151188(void *p)
 {
-    nofralloc
-    lwz r0, 0xc(r3)
-    extrwi r3, r0, 1, 20
-    blr
+    return (*(u32 *)((u8 *)p + 0xc) >> 11) & 1;
 }
 
 asm void fn_80151194(void)

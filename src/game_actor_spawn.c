@@ -100,12 +100,12 @@ extern u32 lbl_80881750;
 extern u32 lbl_80881754;
 
 /* Function declarations */
-void fn_80116B98(void);
+u32 fn_80116B98(void *p);
 f32 fn_80116BA4(const void *p);
 void *fn_80116BAC(void *p);
 void fn_80116BB4(void);
 void fn_80116BB8(void);
-void fn_80116BC8(void);
+u32 fn_80116BC8(void *p);
 void actor_calcSpawnTransform(void);
 u32 fn_80116E64(void);
 void *fn_80116E6C(void *p);
@@ -135,12 +135,9 @@ void fn_80117E88(void);
 void fn_80117EF4(void);
 void fn_80117FE4(void);
 
-asm void fn_80116B98(void)
+u32 fn_80116B98(void *p)
 {
-    nofralloc
-    lwz r0, 0x98(r3)
-    extrwi r3, r0, 1, 13
-    blr
+    return (*(u32 *)((u8 *)p + 0x98) >> 18) & 1;
 }
 
 f32 fn_80116BA4(const void *p)
@@ -166,12 +163,9 @@ asm void fn_80116BB8(void)
     blr
 }
 
-asm void fn_80116BC8(void)
+u32 fn_80116BC8(void *p)
 {
-    nofralloc
-    lwz r0, 0x1f8(r3)
-    extrwi r3, r0, 1, 1
-    blr
+    return (*(u32 *)((u8 *)p + 0x1f8) >> 30) & 1;
 }
 
 asm void actor_calcSpawnTransform(void)

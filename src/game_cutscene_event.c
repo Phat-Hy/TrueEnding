@@ -104,7 +104,7 @@ void fn_8032BE88(void);
 void fn_8032C1EC(void);
 void fn_8032C3CC(void);
 void fn_8032C4F8(void);
-void fn_8032C524(void);
+f32 fn_8032C524(void);
 void fn_8032C52C(void);
 void fn_8032C850(void);
 void fn_8032C964(void);
@@ -577,11 +577,9 @@ lbl_fn_8032C4F8_00000694:
     blr
 }
 
-asm void fn_8032C524(void)
+f32 fn_8032C524(void)
 {
-    nofralloc
-    lfs f1, lbl_8088503C
-    blr
+    return *(f32 *)&lbl_8088503C;
 }
 
 asm void fn_8032C52C(void)

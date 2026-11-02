@@ -76,7 +76,7 @@ void fn_806A295C(void);
 void fn_806A2A58(void);
 void fn_806A2A64(void);
 void fn_806A2E8C(void);
-void fn_806A303C(void);
+void *fn_806A303C(void);
 u32 fn_806A3048(void);
 void fn_806A3050(void);
 void fn_806A30A0(void);
@@ -1078,12 +1078,9 @@ lbl_fn_806A2E8C_00000CA8:
     blr
 }
 
-asm void fn_806A303C(void)
+void *fn_806A303C(void)
 {
-    nofralloc
-    lis r3, lbl_808340E0@ha
-    addi r3, r3, lbl_808340E0@l
-    blr
+    return lbl_808340E0;
 }
 
 u32 fn_806A3048(void)

@@ -147,7 +147,7 @@ void bta_dm_send_msg(void);
 void fn_8062A36C(void);
 void fn_8062A38C(void);
 void fn_8062A3A0(void);
-void fn_8062A408(void);
+void fn_8062A408(u8 val);
 void fn_8062A410(void);
 void fn_8062A45C(void);
 void fn_8062A510(void);
@@ -536,11 +536,9 @@ lbl_fn_8062A3A0_00000374:
     blr
 }
 
-asm void fn_8062A408(void)
+void fn_8062A408(u8 val)
 {
-    nofralloc
-    stb r3, lbl_80880188
-    blr
+    lbl_80880188 = val;
 }
 
 asm void fn_8062A410(void)

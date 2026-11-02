@@ -73,7 +73,7 @@ void fn_806A9420(void);
 void fn_806A97B0(void);
 void fn_806A9CA0(void);
 void fn_806AA690(void);
-void fn_806AA7C0(void);
+void *fn_806AA7C0(void);
 void fn_806AA7D0(void);
 void fn_806AA7E0(void);
 
@@ -1950,12 +1950,9 @@ lbl_fn_806AA690_00001A0C:
     blr
 }
 
-asm void fn_806AA7C0(void)
+void *fn_806AA7C0(void)
 {
-    nofralloc
-    lis r3, lbl_807BD27C@ha
-    addi r3, r3, lbl_807BD27C@l
-    blr
+    return lbl_807BD27C;
 }
 
 asm void fn_806AA7D0(void)

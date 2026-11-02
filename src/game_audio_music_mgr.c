@@ -89,7 +89,7 @@ void fn_803098D0(void);
 void fn_80309D20(void);
 void fn_80309D50(void);
 void fn_80309E6C(void);
-void fn_8030A074(void);
+f32 fn_8030A074(void);
 void fn_8030A07C(void);
 void fn_8030A144(void);
 void fn_8030A5D8(void);
@@ -1444,11 +1444,9 @@ lbl_fn_80309E6C_000011CC:
     blr
 }
 
-asm void fn_8030A074(void)
+f32 fn_8030A074(void)
 {
-    nofralloc
-    lfs f1, lbl_80884B28
-    blr
+    return *(f32 *)&lbl_80884B28;
 }
 
 asm void fn_8030A07C(void)

@@ -23,7 +23,7 @@ void fn_80610520(void);
 void fn_80610530(void);
 void DSPSendMailBox(void);
 void fn_80610570(void);
-void fn_80610630(void);
+u32 fn_80610630(void);
 
 asm void DSPCheckInit(void)
 {
@@ -117,9 +117,7 @@ lbl_fn_80610570_0000010C:
     blr
 }
 
-asm void fn_80610630(void)
+u32 fn_80610630(void)
 {
-    nofralloc
-    lwz r3, lbl_80880038
-    blr
+    return lbl_80880038;
 }

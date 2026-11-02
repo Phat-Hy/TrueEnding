@@ -114,7 +114,7 @@ void fn_8017C52C(void);
 void fn_8017C7F8(void);
 void fn_8017C904(void);
 void map_isAreaCombatActive(void);
-void fn_8017C9A0(void);
+u32 fn_8017C9A0(void *p);
 void fn_8017C9AC(void);
 void fn_8017CB2C(void);
 u32 fn_8017CB6C(void);
@@ -1660,12 +1660,9 @@ lbl_map_isAreaCombatActive_000015D4:
     blr
 }
 
-asm void fn_8017C9A0(void)
+u32 fn_8017C9A0(void *p)
 {
-    nofralloc
-    lwz r0, 0x54c(r3)
-    extrwi r3, r0, 1, 27
-    blr
+    return (*(u32 *)((u8 *)p + 0x54c) >> 4) & 1;
 }
 
 asm void fn_8017C9AC(void)

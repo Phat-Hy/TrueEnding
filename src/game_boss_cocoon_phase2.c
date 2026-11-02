@@ -182,10 +182,10 @@ void fn_8045F4CC(void);
 void fn_8045F6A0(void);
 void fn_8045F6E0(void);
 void fn_8045F884(void);
-void fn_8045F90C(void);
+f32 fn_8045F90C(void);
 void fn_8045F914(void);
-void fn_8045F990(void);
-void fn_8045F998(void);
+f32 fn_8045F990(void);
+f32 fn_8045F998(void);
 void fn_8045F9A0(void);
 void fn_8045FAB0(void);
 void fn_8045FE2C(void);
@@ -1034,11 +1034,9 @@ lbl_fn_8045F884_00000C10:
     blr
 }
 
-asm void fn_8045F90C(void)
+f32 fn_8045F90C(void)
 {
-    nofralloc
-    lfs f1, lbl_80886C7C
-    blr
+    return *(f32 *)&lbl_80886C7C;
 }
 
 asm void fn_8045F914(void)
@@ -1079,18 +1077,14 @@ lbl_fn_8045F914_00000C9C:
     blr
 }
 
-asm void fn_8045F990(void)
+f32 fn_8045F990(void)
 {
-    nofralloc
-    lfs f1, lbl_80886D58
-    blr
+    return *(f32 *)&lbl_80886D58;
 }
 
-asm void fn_8045F998(void)
+f32 fn_8045F998(void)
 {
-    nofralloc
-    lfs f1, lbl_80886C78
-    blr
+    return *(f32 *)&lbl_80886C78;
 }
 
 asm void fn_8045F9A0(void)

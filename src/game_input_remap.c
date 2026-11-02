@@ -119,8 +119,8 @@ extern u32 lbl_8088499C;
 void fn_802F62A0(void);
 void fn_802F66CC(void);
 void fn_802F693C(void);
-void fn_802F6E54(void);
-void fn_802F6E5C(void);
+f32 fn_802F6E54(void);
+f32 fn_802F6E5C(void);
 void fn_802F6E64(void);
 void fn_802F726C(void);
 void fn_802F73FC(void);
@@ -944,18 +944,14 @@ lbl_fn_802F693C_00000B2C:
     blr
 }
 
-asm void fn_802F6E54(void)
+f32 fn_802F6E54(void)
 {
-    nofralloc
-    lfs f1, lbl_80884968
-    blr
+    return *(f32 *)&lbl_80884968;
 }
 
-asm void fn_802F6E5C(void)
+f32 fn_802F6E5C(void)
 {
-    nofralloc
-    lfs f1, lbl_80884934
-    blr
+    return *(f32 *)&lbl_80884934;
 }
 
 asm void fn_802F6E64(void)

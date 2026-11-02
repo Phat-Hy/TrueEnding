@@ -107,7 +107,7 @@ void *fn_802797A0(void *p);
 void fn_802797A8(void);
 u32 fn_802797D4(const void *p);
 void fn_802797DC(void);
-void fn_80279858(void);
+f32 fn_80279858(void);
 void fn_80279860(void);
 void fn_80279930(void);
 void fn_802799C0(void);
@@ -194,11 +194,9 @@ lbl_fn_802797DC_000000A0:
     blr
 }
 
-asm void fn_80279858(void)
+f32 fn_80279858(void)
 {
-    nofralloc
-    lfs f1, lbl_8088389C
-    blr
+    return *(f32 *)&lbl_8088389C;
 }
 
 asm void fn_80279860(void)

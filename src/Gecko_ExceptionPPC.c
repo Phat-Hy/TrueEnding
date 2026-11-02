@@ -46,7 +46,7 @@ void fn_806976AC(void);
 void fn_806977B0(void);
 void gecko_saveContextAndDispatch(void);
 void fn_80697CFC(void);
-void fn_80697D28(void);
+void *fn_80697D28(void);
 void fn_80697D34(void);
 void fn_80697E2C(void);
 void fn_80697F84(void);
@@ -1739,12 +1739,9 @@ asm void fn_80697CFC(void)
     blr
 }
 
-asm void fn_80697D28(void)
+void *fn_80697D28(void)
 {
-    nofralloc
-    lis r3, lbl_807BBFFC@ha
-    addi r3, r3, lbl_807BBFFC@l
-    blr
+    return lbl_807BBFFC;
 }
 
 asm void fn_80697D34(void)

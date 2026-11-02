@@ -136,7 +136,7 @@ void fn_8019FEC4(void);
 u32 bgm_getGlobalManager(void);
 void vec3_dot(void);
 u32 fn_801A03EC(void *p);
-void fn_801A03F4(void);
+u32 fn_801A03F4(void *p);
 u32 fn_801A0400(void *p);
 u32 fn_801A0408(void *p);
 u32 fn_801A0410(void *p);
@@ -1344,12 +1344,9 @@ u32 fn_801A03EC(void *p)
     return *(u32 *)((u8 *)p + 0x14ac);
 }
 
-asm void fn_801A03F4(void)
+u32 fn_801A03F4(void *p)
 {
-    nofralloc
-    lwz r0, 0x8(r3)
-    extrwi r3, r0, 1, 30
-    blr
+    return (*(u32 *)((u8 *)p + 0x8) >> 1) & 1;
 }
 
 u32 fn_801A0400(void *p)

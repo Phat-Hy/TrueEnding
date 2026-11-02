@@ -93,8 +93,8 @@ void fn_802FBA30(void);
 void fn_802FBE00(void);
 void fn_802FC188(void);
 void fn_802FC2E0(void);
-void fn_802FC840(void);
-void fn_802FC848(void);
+f32 fn_802FC840(void);
+f32 fn_802FC848(void);
 void fn_802FC850(void);
 
 asm void fn_802FB39C(void)
@@ -1523,18 +1523,14 @@ lbl_fn_802FC2E0_0000141C:
     blr
 }
 
-asm void fn_802FC840(void)
+f32 fn_802FC840(void)
 {
-    nofralloc
-    lfs f1, lbl_80884A18
-    blr
+    return *(f32 *)&lbl_80884A18;
 }
 
-asm void fn_802FC848(void)
+f32 fn_802FC848(void)
 {
-    nofralloc
-    lfs f1, lbl_808849F4
-    blr
+    return *(f32 *)&lbl_808849F4;
 }
 
 asm void fn_802FC850(void)

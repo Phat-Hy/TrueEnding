@@ -67,7 +67,7 @@ extern u32 lbl_80881500;
 extern u32 lbl_80881538;
 
 /* Function declarations */
-void fn_800FA4EC(void);
+f32 fn_800FA4EC(void);
 u32 fn_800FA4F4(void);
 void fn_800FA4FC(void);
 void fn_800FA9F4(void);
@@ -77,11 +77,9 @@ void fn_800FB4B0(void);
 void fn_800FBA30(void);
 void fn_800FBA9C(void);
 
-asm void fn_800FA4EC(void)
+f32 fn_800FA4EC(void)
 {
-    nofralloc
-    lfs f1, lbl_80881478
-    blr
+    return *(f32 *)&lbl_80881478;
 }
 
 u32 fn_800FA4F4(void)

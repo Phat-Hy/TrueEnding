@@ -39,7 +39,7 @@ extern u32 lbl_8087FF4C;
 
 /* Function declarations */
 void fn_80607D70(void);
-void fn_80607DD0(void);
+u32 fn_80607DD0(void);
 void fn_80607DE0(void);
 void fn_80607E00(void);
 void fn_80607EB0(void);
@@ -92,11 +92,9 @@ lbl_fn_80607D70_00000044:
     blr
 }
 
-asm void fn_80607DD0(void)
+u32 fn_80607DD0(void)
 {
-    nofralloc
-    lwz r3, lbl_8087FEF8
-    blr
+    return lbl_8087FEF8;
 }
 
 asm void fn_80607DE0(void)

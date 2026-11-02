@@ -88,7 +88,7 @@ void fn_8017A5D8(void);
 void fn_8017A9A8(void);
 void fn_8017ABD4(void);
 void fn_8017AC08(void);
-void fn_8017AC24(void);
+f32 fn_8017AC24(void);
 void fn_8017AC2C(void);
 void fn_8017AC3C(void *p, void *val);
 void fn_8017AC44(void);
@@ -1485,11 +1485,9 @@ lbl_fn_8017AC08_00001260:
     blr
 }
 
-asm void fn_8017AC24(void)
+f32 fn_8017AC24(void)
 {
-    nofralloc
-    lfs f1, lbl_80881964
-    blr
+    return *(f32 *)&lbl_80881964;
 }
 
 asm void fn_8017AC2C(void)

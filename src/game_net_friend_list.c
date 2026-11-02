@@ -177,7 +177,7 @@ void fn_804CF198(void);
 void fn_804CF374(void);
 void fn_804CF424(void);
 void fn_804CF468(void);
-void fn_804CF634(void);
+u32 fn_804CF634(void *p);
 void fn_804CF640(void);
 void fn_804D0090(void);
 void fn_804D00B8(void);
@@ -680,12 +680,9 @@ lbl_fn_804CF468_00000600:
     blr
 }
 
-asm void fn_804CF634(void)
+u32 fn_804CF634(void *p)
 {
-    nofralloc
-    lwz r0, 0x12a8(r3)
-    extrwi r3, r0, 1, 30
-    blr
+    return (*(u32 *)((u8 *)p + 0x12a8) >> 1) & 1;
 }
 
 asm void fn_804CF640(void)

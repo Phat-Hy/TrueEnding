@@ -55,7 +55,7 @@ void fn_805EEB00(void);
 void fn_805EECD0(void);
 void fn_805EED10(void);
 void __OSGetExecParams(void);
-void fn_805EED50(void);
+void fn_805EED50(u32 val);
 void fn_805EED60(void);
 void __OSLaunchMenu(void);
 
@@ -446,11 +446,9 @@ lbl___OSGetExecParams_00000518:
     blr
 }
 
-asm void fn_805EED50(void)
+void fn_805EED50(u32 val)
 {
-    nofralloc
-    stw r3, lbl_8087FC00
-    blr
+    lbl_8087FC00 = val;
 }
 
 asm void fn_805EED60(void)

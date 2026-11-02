@@ -14,19 +14,16 @@ extern u32 lbl_8087E858;
 extern u32 lbl_8087E85C;
 
 /* Function declarations */
-void fn_80610490(void);
+void *fn_80610490(void);
 void fn_806104A0(void);
 void fn_806104C0(void);
 void fn_806104D0(void);
 void fn_806104E0(void);
 void fn_806104F0(void);
 
-asm void fn_80610490(void)
+void *fn_80610490(void)
 {
-    nofralloc
-    lis r3, lbl_807AF920@ha
-    addi r3, r3, lbl_807AF920@l
-    blr
+    return lbl_807AF920;
 }
 
 asm void fn_806104A0(void)
