@@ -42,41 +42,29 @@ extern u32 lbl_8087FF6C;
 extern u32 lbl_8087FF70;
 
 /* Function declarations */
-void fn_80608B10(void);
-void fn_80608B30(void);
-void fn_80608B50(void);
+void fn_80608B10(u32 *a, u32 *b);
+void fn_80608B30(u32 *a, u32 *b);
+void fn_80608B50(u32 *a, u32 *b);
 u32 fn_80608B70(void);
 void fn_80608B80(void);
 void fn_80608BB0(void);
 
-asm void fn_80608B10(void)
+void fn_80608B10(u32 *a, u32 *b)
 {
-    nofralloc
-    lwz r0, lbl_8087FF40
-    stw r0, 0x0(r3)
-    lwz r0, lbl_8087FF34
-    stw r0, 0x0(r4)
-    blr
+    *a = lbl_8087FF40;
+    *b = lbl_8087FF34;
 }
 
-asm void fn_80608B30(void)
+void fn_80608B30(u32 *a, u32 *b)
 {
-    nofralloc
-    lwz r0, lbl_8087FF3C
-    stw r0, 0x0(r3)
-    lwz r0, lbl_8087FF30
-    stw r0, 0x0(r4)
-    blr
+    *a = lbl_8087FF3C;
+    *b = lbl_8087FF30;
 }
 
-asm void fn_80608B50(void)
+void fn_80608B50(u32 *a, u32 *b)
 {
-    nofralloc
-    lwz r0, lbl_8087FF38
-    stw r0, 0x0(r3)
-    lwz r0, lbl_8087FF2C
-    stw r0, 0x0(r4)
-    blr
+    *a = lbl_8087FF38;
+    *b = lbl_8087FF2C;
 }
 
 u32 fn_80608B70(void)

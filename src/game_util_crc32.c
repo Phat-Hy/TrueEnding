@@ -14,7 +14,7 @@ extern void fn_80179730(void);
 extern void fn_8021A960(void);
 extern void fn_8021A984(void);
 extern void sound_initGlobalInstances(void);
-extern void res_findResourceSlot(void);
+extern void res_findResourceSlot();
 extern void res_Shader_bindParams(void);
 extern void res_registerResource(void);
 extern void fn_80491DF8(void);
@@ -64,28 +64,28 @@ void fn_8059C3F8(void);
 void fn_8059C5E0(void);
 void fn_8059C6E0(void);
 void fn_8059C804(void);
-void fn_8059C8DC(void);
+void fn_8059C8DC(void *self, u32 id);
 void fn_8059C8EC(void);
-void fn_8059C990(void);
+void fn_8059C990(void *self, u32 id);
 void fn_8059C9A0(void);
-void fn_8059CA78(void);
+void fn_8059CA78(void *self, u32 id);
 void fn_8059CA88(void);
-void fn_8059CB30(void);
+void fn_8059CB30(void *self, u32 id);
 void fn_8059CB40(void);
-void fn_8059CBE8(void);
+void fn_8059CBE8(void *self, u32 id);
 void fn_8059CBF8(void);
-void fn_8059CCA0(void);
+void fn_8059CCA0(void *self, u32 id);
 void fn_8059CCB0(void);
 void fn_8059CF74(void);
-void fn_8059CFB4(void);
+void fn_8059CFB4(void *self, u32 id, u32 flag);
 void fn_8059CFC8(void);
-void fn_8059D008(void);
+void fn_8059D008(void *self, u32 id, u32 flag);
 void fn_8059D01C(void);
-void fn_8059D05C(void);
+void fn_8059D05C(void *self, u32 id, u32 flag);
 void fn_8059D070(void);
-void fn_8059D0B0(void);
+void fn_8059D0B0(void *self, u32 id, u32 flag);
 void fn_8059D0C4(void);
-void fn_8059D16C(void);
+void fn_8059D16C(void *self, u32 id);
 void fn_8059D17C(void);
 void fn_8059D26C(void);
 void fn_8059D310(void);
@@ -718,13 +718,9 @@ lbl_fn_8059C804_000007D8:
     blr
 }
 
-asm void fn_8059C8DC(void)
+void fn_8059C8DC(void *self, u32 id)
 {
-    nofralloc
-    lwz r3, lbl_8087F3C0
-    li r5, 0xa
-    li r6, 0x1
-    b res_findResourceSlot
+    res_findResourceSlot(lbl_8087F3C0, id, 0xa, 1);
 }
 
 asm void fn_8059C8EC(void)
@@ -773,13 +769,9 @@ asm void fn_8059C8EC(void)
     blr
 }
 
-asm void fn_8059C990(void)
+void fn_8059C990(void *self, u32 id)
 {
-    nofralloc
-    lwz r3, lbl_8087F3C0
-    li r5, 0xb
-    li r6, 0x1
-    b res_findResourceSlot
+    res_findResourceSlot(lbl_8087F3C0, id, 0xb, 1);
 }
 
 asm void fn_8059C9A0(void)
@@ -844,13 +836,9 @@ lbl_fn_8059C9A0_00000974:
     blr
 }
 
-asm void fn_8059CA78(void)
+void fn_8059CA78(void *self, u32 id)
 {
-    nofralloc
-    lwz r3, lbl_8087F3C0
-    li r5, 0xc
-    li r6, 0x1
-    b res_findResourceSlot
+    res_findResourceSlot(lbl_8087F3C0, id, 0xc, 1);
 }
 
 asm void fn_8059CA88(void)
@@ -900,13 +888,9 @@ asm void fn_8059CA88(void)
     blr
 }
 
-asm void fn_8059CB30(void)
+void fn_8059CB30(void *self, u32 id)
 {
-    nofralloc
-    lwz r3, lbl_8087F3C0
-    li r5, 0xd
-    li r6, 0x1
-    b res_findResourceSlot
+    res_findResourceSlot(lbl_8087F3C0, id, 0xd, 1);
 }
 
 asm void fn_8059CB40(void)
@@ -956,13 +940,9 @@ asm void fn_8059CB40(void)
     blr
 }
 
-asm void fn_8059CBE8(void)
+void fn_8059CBE8(void *self, u32 id)
 {
-    nofralloc
-    lwz r3, lbl_8087F3C0
-    li r5, 0xe
-    li r6, 0x1
-    b res_findResourceSlot
+    res_findResourceSlot(lbl_8087F3C0, id, 0xe, 1);
 }
 
 asm void fn_8059CBF8(void)
@@ -1012,13 +992,9 @@ asm void fn_8059CBF8(void)
     blr
 }
 
-asm void fn_8059CCA0(void)
+void fn_8059CCA0(void *self, u32 id)
 {
-    nofralloc
-    lwz r3, lbl_8087F3C0
-    li r5, 0xf
-    li r6, 0x1
-    b res_findResourceSlot
+    res_findResourceSlot(lbl_8087F3C0, id, 0xf, 1);
 }
 
 asm void fn_8059CCB0(void)
@@ -1243,14 +1219,9 @@ asm void fn_8059CF74(void)
     blr
 }
 
-asm void fn_8059CFB4(void)
+void fn_8059CFB4(void *self, u32 id, u32 flag)
 {
-    nofralloc
-    cntlzw r0, r5
-    lwz r3, lbl_8087F3C0
-    li r5, 0x10
-    srwi r6, r0, 5
-    b res_findResourceSlot
+    res_findResourceSlot(lbl_8087F3C0, id, 0x10, flag == 0);
 }
 
 asm void fn_8059CFC8(void)
@@ -1274,14 +1245,9 @@ asm void fn_8059CFC8(void)
     blr
 }
 
-asm void fn_8059D008(void)
+void fn_8059D008(void *self, u32 id, u32 flag)
 {
-    nofralloc
-    cntlzw r0, r5
-    lwz r3, lbl_8087F3C0
-    li r5, 0x11
-    srwi r6, r0, 5
-    b res_findResourceSlot
+    res_findResourceSlot(lbl_8087F3C0, id, 0x11, flag == 0);
 }
 
 asm void fn_8059D01C(void)
@@ -1305,14 +1271,9 @@ asm void fn_8059D01C(void)
     blr
 }
 
-asm void fn_8059D05C(void)
+void fn_8059D05C(void *self, u32 id, u32 flag)
 {
-    nofralloc
-    cntlzw r0, r5
-    lwz r3, lbl_8087F3C0
-    li r5, 0x12
-    srwi r6, r0, 5
-    b res_findResourceSlot
+    res_findResourceSlot(lbl_8087F3C0, id, 0x12, flag == 0);
 }
 
 asm void fn_8059D070(void)
@@ -1336,14 +1297,9 @@ asm void fn_8059D070(void)
     blr
 }
 
-asm void fn_8059D0B0(void)
+void fn_8059D0B0(void *self, u32 id, u32 flag)
 {
-    nofralloc
-    cntlzw r0, r5
-    lwz r3, lbl_8087F3C0
-    li r5, 0x13
-    srwi r6, r0, 5
-    b res_findResourceSlot
+    res_findResourceSlot(lbl_8087F3C0, id, 0x13, flag == 0);
 }
 
 asm void fn_8059D0C4(void)
@@ -1393,13 +1349,9 @@ asm void fn_8059D0C4(void)
     blr
 }
 
-asm void fn_8059D16C(void)
+void fn_8059D16C(void *self, u32 id)
 {
-    nofralloc
-    lwz r3, lbl_8087F3C0
-    li r5, 0x14
-    li r6, 0x1
-    b res_findResourceSlot
+    res_findResourceSlot(lbl_8087F3C0, id, 0x14, 1);
 }
 
 asm void fn_8059D17C(void)

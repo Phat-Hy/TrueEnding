@@ -782,13 +782,9 @@ lbl_GXSetArray_00000A9C:
     blr
 }
 
-asm void GXInvalidateVtxCache(void)
+void GXInvalidateVtxCache(void)
 {
-    nofralloc
-    lis r3, 0xcc01
-    li r0, 0x48
-    stb r0, -0x8000(r3)
-    blr
+    *(volatile u8 *)0xCC008000 = 0x48;
 }
 
 asm void __GXSetVtxDesc(void)

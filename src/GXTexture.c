@@ -33,8 +33,8 @@ void fn_80616640(void);
 void GXInitTexCacheRegion(void);
 void GXInitTlutRegion(void);
 void GXDrawDone(void);
-void fn_80616800(void);
-void fn_80616820(void);
+u32 fn_80616800(u32 val);
+u32 fn_80616820(u32 val);
 void fn_80616840(void);
 void fn_806168C0(void);
 void fn_80616930(void);
@@ -381,24 +381,18 @@ asm void GXDrawDone(void)
     blr
 }
 
-asm void fn_80616800(void)
+u32 fn_80616800(u32 val)
 {
-    nofralloc
-    lwz r4, __GXData
-    mr r0, r3
-    lwz r3, 0x518(r4)
-    stw r0, 0x518(r4)
-    blr
+    u32 prev = *(u32 *)((u8 *)__GXData + 0x518);
+    *(u32 *)((u8 *)__GXData + 0x518) = val;
+    return prev;
 }
 
-asm void fn_80616820(void)
+u32 fn_80616820(u32 val)
 {
-    nofralloc
-    lwz r4, __GXData
-    mr r0, r3
-    lwz r3, 0x51c(r4)
-    stw r0, 0x51c(r4)
-    blr
+    u32 prev = *(u32 *)((u8 *)__GXData + 0x51c);
+    *(u32 *)((u8 *)__GXData + 0x51c) = val;
+    return prev;
 }
 
 asm void fn_80616840(void)

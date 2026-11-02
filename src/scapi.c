@@ -9,11 +9,11 @@ extern void _restgpr_27(void);
 extern void _savegpr_18(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
-extern void fn_80623D00(void);
-extern void fn_80623DE0(void);
+extern void fn_80623D00();
+extern void fn_80623DE0();
 extern void fn_80623F10(void);
 extern void fn_806240D0(void);
-extern void fn_806241B0(void);
+extern void fn_806241B0();
 extern void fn_80628180(void);
 extern void fn_80628230(void);
 extern void hcis_restoreInterrupts(void);
@@ -56,16 +56,16 @@ void fn_806249F0(void);
 void fn_80624A50(void);
 void fn_80624AB0(void);
 void fn_80624B10(void);
-void fn_80624B50(void);
-void fn_80624B60(void);
-void fn_80624B70(void);
-void fn_80624B80(void);
+void fn_80624B50(void *p);
+void fn_80624B60(void *p);
+void fn_80624B70(void *p);
+void fn_80624B80(void *p);
 void fn_80624B90(void);
 void fn_80624C00(void);
-void fn_80624C60(void);
+void fn_80624C60(void *p);
 void fn_80624C70(void);
 void fn_80624CD0(void);
-void fn_80624D30(void);
+void fn_80624D30(void *p);
 void fn_80624D40(void);
 void scapi_computeChecksumBlock(void);
 void fn_80624F00(void);
@@ -93,7 +93,7 @@ void fn_80626500(void);
 u32 fn_806265C0(void);
 void fn_806265D0(void);
 void fn_806267F0(void);
-void fn_80626AA0(void);
+void fn_80626AA0(void *p);
 void scapi_initContext(void);
 void scapi_getConfigItem(void);
 void scapi_cleanupContext(void);
@@ -113,7 +113,7 @@ void fn_80627A70(void);
 void fn_80627B30(void);
 void fn_80627B50(void);
 void fn_80627CA0(void);
-void fn_80627D30(void);
+void fn_80627D30(void *p);
 void fn_80627D50(void);
 void fn_80627DE0(void);
 void fn_80627ED0(void);
@@ -259,36 +259,24 @@ lbl_fn_80624B10_000001BC:
     blr
 }
 
-asm void fn_80624B50(void)
+void fn_80624B50(void *p)
 {
-    nofralloc
-    li r4, 0x461
-    li r5, 0x1c
-    b fn_80623D00
+    fn_80623D00(p, 0x461, 0x1c);
 }
 
-asm void fn_80624B60(void)
+void fn_80624B60(void *p)
 {
-    nofralloc
-    li r4, 0x461
-    li r5, 0x1c
-    b fn_80623DE0
+    fn_80623DE0(p, 0x461, 0x1c);
 }
 
-asm void fn_80624B70(void)
+void fn_80624B70(void *p)
 {
-    nofralloc
-    li r4, 0x205
-    li r5, 0x1d
-    b fn_80623D00
+    fn_80623D00(p, 0x205, 0x1d);
 }
 
-asm void fn_80624B80(void)
+void fn_80624B80(void *p)
 {
-    nofralloc
-    li r4, 0x205
-    li r5, 0x1d
-    b fn_80623DE0
+    fn_80623DE0(p, 0x205, 0x1d);
 }
 
 asm void fn_80624B90(void)
@@ -353,11 +341,9 @@ lbl_fn_80624C00_000002C0:
     blr
 }
 
-asm void fn_80624C60(void)
+void fn_80624C60(void *p)
 {
-    nofralloc
-    li r4, 0x20
-    b fn_806241B0
+    fn_806241B0(p, 0x20);
 }
 
 asm void fn_80624C70(void)
@@ -416,11 +402,9 @@ lbl_fn_80624CD0_00000390:
     blr
 }
 
-asm void fn_80624D30(void)
+void fn_80624D30(void *p)
 {
-    nofralloc
-    li r4, 0x1f
-    b fn_806241B0
+    fn_806241B0(p, 0x1f);
 }
 
 asm void fn_80624D40(void)
@@ -2600,14 +2584,11 @@ lbl_fn_806267F0_00001F70:
     blr
 }
 
-asm void fn_80626AA0(void)
+void fn_80626AA0(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, 0x4(r3)
-    stw r0, 0x0(r3)
-    sth r0, 0x8(r3)
-    blr
+    *(u32 *)((u8 *)p + 4) = 0;
+    *(u32 *)p = 0;
+    *(u16 *)((u8 *)p + 8) = 0;
 }
 
 asm void scapi_initContext(void)
@@ -3977,14 +3958,11 @@ lbl_fn_80627CA0_00003390:
     blr
 }
 
-asm void fn_80627D30(void)
+void fn_80627D30(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, 0x0(r3)
-    stw r0, 0x4(r3)
-    stw r0, 0x8(r3)
-    blr
+    *(u32 *)p = 0;
+    *(u32 *)((u8 *)p + 4) = 0;
+    *(u32 *)((u8 *)p + 8) = 0;
 }
 
 asm void fn_80627D50(void)

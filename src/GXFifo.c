@@ -38,7 +38,7 @@ void GXSetGPFifo(void);
 void GXSaveCPUFifo(void);
 u8 fn_80612A50(void);
 void GXGetFifoStatus(void);
-void GXGetFifoCount(void);
+void GXGetFifoCount(const void *fifo, u32 *count, u32 *wrap);
 void fn_80612B10(void);
 void fn_80612B60(void);
 void fn_80612C00(void);
@@ -588,14 +588,10 @@ lbl_GXGetFifoStatus_0000078C:
     blr
 }
 
-asm void GXGetFifoCount(void)
+void GXGetFifoCount(const void *fifo, u32 *count, u32 *wrap)
 {
-    nofralloc
-    lwz r0, 0x14(r3)
-    stw r0, 0x0(r4)
-    lwz r0, 0x18(r3)
-    stw r0, 0x0(r5)
-    blr
+    *count = *(const u32 *)((const u8 *)fifo + 0x14);
+    *wrap = *(const u32 *)((const u8 *)fifo + 0x18);
 }
 
 asm void fn_80612B10(void)

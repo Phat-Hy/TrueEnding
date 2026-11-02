@@ -685,10 +685,8 @@ lbl_0820:
 }
 
 
-asm void fn_805FA700(void) {
-    nofralloc
-    la r3, __DVDThreadQueue
-    b OSWakeupThread
+void fn_805FA700(void) {
+    OSWakeupThread((void *)&__DVDThreadQueue);
 }
 
 

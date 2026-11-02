@@ -63,7 +63,7 @@ void nandConvertPath(void);
 void fn_80621290(void);
 void nandIsPrivatePath(void);
 void fn_806212F0(void);
-void nandIsInitialized(void);
+u32 nandIsInitialized(void);
 void nandLoggingCallback(void);
 void nandConvertErrorCode(void);
 void nandGenerateAbsPath(void);
@@ -236,14 +236,9 @@ lbl_fn_806212F0_000001E4:
     blr
 }
 
-asm void nandIsInitialized(void)
+u32 nandIsInitialized(void)
 {
-    nofralloc
-    lwz r3, s_libState_80880120
-    subi r0, r3, 0x2
-    cntlzw r0, r0
-    srwi r3, r0, 5
-    blr
+    return s_libState_80880120 == 2;
 }
 
 asm void nandLoggingCallback(void)

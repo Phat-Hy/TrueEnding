@@ -407,13 +407,10 @@ lbl_fn_80609990_00000464:
     blr
 }
 
-asm void fn_806099F0(void)
+void fn_806099F0(void)
 {
-    nofralloc
-    li r0, 0x1
-    stw r0, lbl_8087FF9C
-    la r3, lbl_8087FF90
-    b OSWakeupThread
+    lbl_8087FF9C = 1;
+    OSWakeupThread((void *)&lbl_8087FF90);
 }
 
 void fn_80609A00(void)
