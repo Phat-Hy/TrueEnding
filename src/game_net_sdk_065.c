@@ -306,12 +306,9 @@ asm void fn_80726760(void)
     blr
 }
 
-asm void fn_807267C0(void)
+void fn_807267C0(void)
 {
-    nofralloc
-    la r0, lbl_80880550
-    stw r0, lbl_80880558
-    blr
+    lbl_80880558 = (u32)&lbl_80880550;
 }
 
 asm void fn_807267D0(void)

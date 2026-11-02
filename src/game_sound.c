@@ -178,7 +178,7 @@ u32 fn_80046218(void);
 void fn_80046220(void);
 void fn_80046224(void);
 void sound_updateActiveTasks(void);
-void fn_80046398(void);
+void fn_80046398(u32 val);
 void fn_800463A8(void);
 void fn_800463FC(void);
 void fn_800465E8(void);
@@ -192,7 +192,7 @@ void fn_80047628(void);
 void fn_80047B54(void);
 void fn_80047C74(void);
 void fn_80047D20(void);
-void fn_80047DBC(void);
+void fn_80047DBC(void *p, void *src);
 void fn_80047DCC(void);
 void fn_8004829C(void);
 void fn_8004895C(void);
@@ -380,13 +380,10 @@ lbl_sound_updateActiveTasks_00000164:
     blr
 }
 
-asm void fn_80046398(void)
+void fn_80046398(u32 val)
 {
-    nofralloc
-    li r0, 0x1
-    stw r0, lbl_8087EE80
-    stw r3, lbl_8087EE84
-    blr
+    lbl_8087EE80 = 1;
+    lbl_8087EE84 = val;
 }
 
 asm void fn_800463A8(void)
@@ -2307,13 +2304,9 @@ lbl_fn_80047D20_00001BA8:
     blr
 }
 
-asm void fn_80047DBC(void)
+void fn_80047DBC(void *p, void *src)
 {
-    nofralloc
-    lwz r3, 0x2c(r4)
-    li r0, 0x0
-    stw r0, 0x30(r3)
-    blr
+    *(u32 *)((u8 *)(*(void **)((u8 *)src + 0x2c)) + 0x30) = 0;
 }
 
 asm void fn_80047DCC(void)

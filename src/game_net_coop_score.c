@@ -136,7 +136,7 @@ void fn_804ABF34(void);
 void fn_804ABF40(void);
 void *fn_804ABF44(void *obj);
 void fn_804ABF4C(void);
-void fn_804ABF74(void);
+void fn_804ABF74(void *p);
 void fn_804ABF84(void);
 void *fn_804AC3C8(void *obj);
 void *fn_804AC3D0(void *obj);
@@ -548,13 +548,9 @@ asm void fn_804ABF4C(void)
     blr
 }
 
-asm void fn_804ABF74(void)
+void fn_804ABF74(void *p)
 {
-    nofralloc
-    lis r4, lbl_807779F0@ha
-    addi r4, r4, lbl_807779F0@l
-    stw r4, 0x0(r3)
-    blr
+    *(const void **)p = lbl_807779F0;
 }
 
 asm void fn_804ABF84(void)

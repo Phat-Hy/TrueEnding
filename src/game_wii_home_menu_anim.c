@@ -77,7 +77,7 @@ void fn_80570810(void);
 void fn_80570A18(void);
 void fn_80570A44(void);
 void fn_80570A50(void);
-void fn_80570A68(void);
+void fn_80570A68(void *p);
 void fn_80570A78(void);
 void fn_80570B4C(void);
 void fn_80570BD4(void);
@@ -1791,13 +1791,9 @@ asm void fn_80570A50(void)
     blr
 }
 
-asm void fn_80570A68(void)
+void fn_80570A68(void *p)
 {
-    nofralloc
-    addis r3, r3, 0x4
-    li r0, 0x0
-    stw r0, 0x517c(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x4517c) = 0;
 }
 
 asm void fn_80570A78(void)

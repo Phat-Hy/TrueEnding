@@ -195,10 +195,10 @@ void fn_80679688(void);
 void fn_80679724(void);
 void fn_80679848(void);
 void fn_806798D0(void);
-void fn_80679944(void);
+u32 fn_80679944(void);
 void TRKTargetSupportRequest(void);
-void TRKTargetStopped(void);
-void TRKTargetSetStopped(void);
+u32 TRKTargetStopped(void);
+void TRKTargetSetStopped(u32 val);
 void fn_80679B68(void);
 void fn_80679B80(void);
 void fn_80679C5C(void);
@@ -206,7 +206,7 @@ void fn_80679D04(void);
 void fn_80679D28(void);
 void fn_80679D4C(void);
 void fn_80679F14(void);
-void TRKTargetSetInputPendingPtr(void);
+void TRKTargetSetInputPendingPtr(void *val);
 u32 fn_80679F8C(u32 val);
 void fn_80679F94(void);
 void fn_8067A024(u8 val);
@@ -5903,13 +5903,9 @@ lbl_fn_806798D0_00004A1C:
     blr
 }
 
-asm void fn_80679944(void)
+u32 fn_80679944(void)
 {
-    nofralloc
-    lis r3, gTRKCPUState@ha
-    addi r3, r3, gTRKCPUState@l
-    lwz r3, 0x80(r3)
-    blr
+    return *(u32 *)((u8 *)&gTRKCPUState + 0x80);
 }
 
 asm void TRKTargetSupportRequest(void)
@@ -6052,22 +6048,14 @@ lbl_TRKTargetSupportRequest_00004C14:
     blr
 }
 
-asm void TRKTargetStopped(void)
+u32 TRKTargetStopped(void)
 {
-    nofralloc
-    lis r3, gTRKState@ha
-    addi r3, r3, gTRKState@l
-    lwz r3, 0x98(r3)
-    blr
+    return *(u32 *)((u8 *)&gTRKState + 0x98);
 }
 
-asm void TRKTargetSetStopped(void)
+void TRKTargetSetStopped(u32 val)
 {
-    nofralloc
-    lis r4, gTRKState@ha
-    addi r4, r4, gTRKState@l
-    stw r3, 0x98(r4)
-    blr
+    *(u32 *)((u8 *)&gTRKState + 0x98) = val;
 }
 
 asm void fn_80679B68(void)
@@ -6378,13 +6366,9 @@ asm void fn_80679F14(void)
     blr
 }
 
-asm void TRKTargetSetInputPendingPtr(void)
+void TRKTargetSetInputPendingPtr(void *val)
 {
-    nofralloc
-    lis r4, gTRKState@ha
-    addi r4, r4, gTRKState@l
-    stw r3, 0xa0(r4)
-    blr
+    *(void **)((u8 *)&gTRKState + 0xa0) = val;
 }
 
 u32 fn_80679F8C(u32 val)

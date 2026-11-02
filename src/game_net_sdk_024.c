@@ -81,7 +81,7 @@ void fn_806D1610(void);
 void fn_806D1660(void);
 void fn_806D1670(void);
 u32 fn_806D1690(void);
-void fn_806D16A0(void);
+u32 fn_806D16A0(void);
 void *fn_806D16B0(void);
 void fn_806D16C0(void);
 void fn_806D16E0(void);
@@ -185,13 +185,9 @@ u32 fn_806D1690(void)
     return 1;
 }
 
-asm void fn_806D16A0(void)
+u32 fn_806D16A0(void)
 {
-    nofralloc
-    lis r3, lbl_808608C0@ha
-    addi r3, r3, lbl_808608C0@l
-    lwz r3, 0x1b8(r3)
-    blr
+    return *(u32 *)((u8 *)&lbl_808608C0 + 0x1b8);
 }
 
 void *fn_806D16B0(void)

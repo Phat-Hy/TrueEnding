@@ -64,7 +64,7 @@ void fn_8039D4C4(void);
 void fn_8039D930(void);
 void fn_8039D99C(void);
 void fn_8039D9B0(void);
-void fn_8039DA00(void);
+void fn_8039DA00(void *p, void *dst);
 void fn_8039DA10(void);
 void fn_8039DA38(void);
 void fn_8039DB2C(void);
@@ -1433,13 +1433,10 @@ asm void fn_8039D9B0(void)
     blr
 }
 
-asm void fn_8039DA00(void)
+void fn_8039DA00(void *p, void *dst)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, 0x0(r4)
-    stw r0, 0x4(r4)
-    blr
+    *(u32 *)dst = 0;
+    *(u32 *)((u8 *)dst + 4) = 0;
 }
 
 asm void fn_8039DA10(void)

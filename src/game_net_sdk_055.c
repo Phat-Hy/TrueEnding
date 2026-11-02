@@ -1943,12 +1943,9 @@ void *fn_80713470(void)
     return &lbl_808804D8;
 }
 
-asm void fn_80713480(void)
+void fn_80713480(void)
 {
-    nofralloc
-    la r0, lbl_808804B0
-    stw r0, lbl_808804D8
-    blr
+    lbl_808804D8 = (u32)&lbl_808804B0;
 }
 
 asm void fn_80713490(void)

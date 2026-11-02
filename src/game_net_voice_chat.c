@@ -58,7 +58,7 @@ u32 fn_804D5FCC(void);
 u32 fn_804D5FD4(void);
 u32 fn_804D5FDC(void);
 u32 fn_804D5FE4(void *p);
-void fn_804D5FF0(void);
+void fn_804D5FF0(void *p);
 u32 fn_804D6000(void *p);
 void fn_804D6010(void *p, u32 val);
 void fn_804D6018(void *p);
@@ -247,13 +247,9 @@ u32 fn_804D5FE4(void *p)
     return *(u32 *)((u8 *)p + 0xbecc);
 }
 
-asm void fn_804D5FF0(void)
+void fn_804D5FF0(void *p)
 {
-    nofralloc
-    addis r3, r3, 0x1
-    li r0, 0x0
-    stw r0, -0x4180(r3)
-    blr
+    *(u32 *)((u8 *)p + 0xbe80) = 0;
 }
 
 u32 fn_804D6000(void *p)

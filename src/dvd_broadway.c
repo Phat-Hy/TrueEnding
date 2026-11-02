@@ -85,14 +85,14 @@ void DVDLowUnencryptedRead(void);
 void fn_806018F0(void);
 void fn_80601A90(void);
 void DVDLowRequestError(void);
-void fn_80601D70(void);
+u32 fn_80601D70(u32 val);
 void fn_80601D80(void);
 void fn_80601F00(void);
 void DVDLowReportKey(void);
 void fn_80602240(void);
 void fn_806023D0(void);
 void fn_80602580(void);
-void fn_80602700(void);
+u32 fn_80602700(void);
 u32 fn_80602710(void);
 u32 fn_80602720(void);
 void fn_80602730(void);
@@ -1936,12 +1936,10 @@ lbl_DVDLowRequestError_1950:
     blr
 }
 
-asm void fn_80601D70(void)
+u32 fn_80601D70(u32 val)
 {
-    nofralloc
-    stw r3, lbl_8087FDC8
-    li r3, 0x1
-    blr
+    lbl_8087FDC8 = val;
+    return 1;
 }
 
 asm void fn_80601D80(void)
@@ -2623,13 +2621,9 @@ lbl_fn_80602580_22e8:
     blr
 }
 
-asm void fn_80602700(void)
+u32 fn_80602700(void)
 {
-    nofralloc
-    lis r3, lbl_807D1360@ha
-    addi r3, r3, lbl_807D1360@l
-    lwz r3, 0x4(r3)
-    blr
+    return *(u32 *)((u8 *)&lbl_807D1360 + 0x4);
 }
 
 u32 fn_80602710(void)

@@ -61,8 +61,8 @@ void fn_804EA6B4(void);
 void fn_804EA760(void);
 void fn_804EA814(void);
 void fn_804EA8BC(void);
-void fn_804EAA54(void);
-void fn_804EAA60(void);
+u32 fn_804EAA54(void);
+void fn_804EAA60(u32 val);
 void fn_804EAA6C(void);
 void fn_804EAA88(void);
 void fn_804EAEE4(void);
@@ -1086,20 +1086,14 @@ lbl_fn_804EA8BC_00000DCC:
     blr
 }
 
-asm void fn_804EAA54(void)
+u32 fn_804EAA54(void)
 {
-    nofralloc
-    lwz r3, lbl_8087F628
-    lwz r3, 0x25c(r3)
-    blr
+    return *(u32 *)((u8 *)lbl_8087F628 + 0x25c);
 }
 
-asm void fn_804EAA60(void)
+void fn_804EAA60(u32 val)
 {
-    nofralloc
-    lwz r3, lbl_8087F628
-    stw r4, 0x25c(r3)
-    blr
+    *(u32 *)((u8 *)lbl_8087F628 + 0x25c) = val;
 }
 
 asm void fn_804EAA6C(void)

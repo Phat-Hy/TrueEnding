@@ -18,7 +18,7 @@ void *fn_80610490(void);
 void fn_806104A0(void);
 void fn_806104C0(void);
 void fn_806104D0(void);
-void fn_806104E0(void);
+void fn_806104E0(u32 a, u32 b);
 void fn_806104F0(void);
 
 void *fn_80610490(void)
@@ -52,12 +52,10 @@ asm void fn_806104D0(void)
     b fn_805ECB00
 }
 
-asm void fn_806104E0(void)
+void fn_806104E0(u32 a, u32 b)
 {
-    nofralloc
-    stw r3, lbl_8087E858
-    stw r4, lbl_8087E85C
-    blr
+    lbl_8087E858 = a;
+    lbl_8087E85C = b;
 }
 
 asm void fn_806104F0(void)

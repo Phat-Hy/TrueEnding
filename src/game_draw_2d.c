@@ -1299,13 +1299,9 @@ asm void fn_800B33A8(void)
     blr
 }
 
-asm void fn_800B3454(void)
+void fn_800B3454(void)
 {
-    nofralloc
-    lwz r3, lbl_8087EFB4
-    li r0, 0x0
-    stw r0, 0x954(r3)
-    blr
+    *(u32 *)((u8 *)lbl_8087EFB4 + 0x954) = 0;
 }
 
 asm void atn_HUD_drawNodeList(void)

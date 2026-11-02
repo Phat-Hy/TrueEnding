@@ -146,7 +146,7 @@ void fn_80360C5C(void);
 void fn_80360CDC(void);
 void fn_80360EA0(void);
 void fn_80360EA4(void);
-void fn_8036102C(void);
+void fn_8036102C(void *p, u32 val);
 void fn_8036103C(void);
 void fn_80361100(void);
 void fn_8036111C(void);
@@ -1676,13 +1676,10 @@ lbl_fn_80360EA4_00001420:
     blr
 }
 
-asm void fn_8036102C(void)
+void fn_8036102C(void *p, u32 val)
 {
-    nofralloc
-    li r0, 0x1e
-    stw r4, 0x58(r3)
-    stw r0, 0x5c(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x58) = val;
+    *(u32 *)((u8 *)p + 0x5c) = 0x1e;
 }
 
 asm void fn_8036103C(void)

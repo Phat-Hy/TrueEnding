@@ -120,7 +120,7 @@ void fn_805D40F0(void);
 void *fn_805D41D0(void);
 void fn_805D41E0(void);
 void fn_805D4200(void);
-void fn_805D4240(void);
+void fn_805D4240(void *p);
 u32 fn_805D4250(void);
 void fn_805D4260(void);
 void fn_805D4520(void);
@@ -1113,13 +1113,9 @@ u32 fn_805D3C80(const void *p)
     return *(const u32 *)((const char *)p + 0x28);
 }
 
-asm void fn_805D3C90(void)
+void fn_805D3C90(void)
 {
-    nofralloc
-    lis r3, lbl_807CA200@ha
-    li r0, 0x0
-    stw r0, lbl_807CA200@l(r3)
-    blr
+    *(u32 *)lbl_807CA200 = 0;
 }
 
 asm void fn_805D3CA0(void)
@@ -1537,13 +1533,9 @@ lbl_fn_805D4200_000012C8:
     blr
 }
 
-asm void fn_805D4240(void)
+void fn_805D4240(void *p)
 {
-    nofralloc
-    lis r4, lbl_80799210@ha
-    addi r4, r4, lbl_80799210@l
-    stw r4, 0x0(r3)
-    blr
+    *(const void **)p = lbl_80799210;
 }
 
 u32 fn_805D4250(void)

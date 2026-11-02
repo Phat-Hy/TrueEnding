@@ -43,7 +43,7 @@ u32 fn_805DDE70(const void *p);
 void fn_805DDE80(void *p, u32 val);
 u32 fn_805DDE90(const void *p);
 void fn_805DDEA0(void *p, u32 val);
-void fn_805DDEB0(void);
+void fn_805DDEB0(void *p);
 u32 fn_805DDEC0(const void *p);
 void fn_805DDED0(void);
 void fn_805DE0D0(void);
@@ -113,13 +113,9 @@ void fn_805DDEA0(void *p, u32 val)
     *(u32 *)((char *)p + 0x5c) = val;
 }
 
-asm void fn_805DDEB0(void)
+void fn_805DDEB0(void *p)
 {
-    nofralloc
-    lis r4, lbl_807CA25C@ha
-    addi r4, r4, lbl_807CA25C@l
-    stw r4, 0x5c(r3)
-    blr
+    *(const void **)((u8 *)p + 0x5c) = lbl_807CA25C;
 }
 
 u32 fn_805DDEC0(const void *p)

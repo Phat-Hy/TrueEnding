@@ -946,22 +946,14 @@ lbl_fn_806AE2E0_00000B94:
     blr
 }
 
-asm void fn_806AE4A0(void)
+void fn_806AE4A0(void)
 {
-    nofralloc
-    lis r3, lbl_8085FF88@ha
-    li r0, 0x1
-    stw r0, lbl_8085FF88@l(r3)
-    blr
+    *(u32 *)lbl_8085FF88 = 1;
 }
 
-asm void fn_806AE4B0(void)
+void fn_806AE4B0(void)
 {
-    nofralloc
-    lis r3, lbl_8085FF88@ha
-    li r0, 0x0
-    stw r0, lbl_8085FF88@l(r3)
-    blr
+    *(u32 *)lbl_8085FF88 = 0;
 }
 
 asm void fn_806AE4C0(void)

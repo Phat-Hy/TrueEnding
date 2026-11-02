@@ -1750,13 +1750,9 @@ lbl_net_sendSessionCommand_0000165C:
     blr
 }
 
-asm void fn_806ACF20(void)
+void fn_806ACF20(void)
 {
-    nofralloc
-    lis r3, lbl_8085FF78@ha
-    li r0, 0x0
-    stw r0, lbl_8085FF78@l(r3)
-    blr
+    *(u32 *)lbl_8085FF78 = 0;
 }
 
 asm void fn_806ACF30(void)

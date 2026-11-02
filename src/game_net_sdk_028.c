@@ -93,7 +93,7 @@ void fn_806D9AB0(void);
 void fn_806D9BB0(void);
 void fn_806D9CE0(void);
 void fn_806D9D80(void);
-void fn_806D9EE0(void);
+u32 fn_806D9EE0(void);
 void fn_806D9EF0(void);
 void fn_806DA070(void);
 void fn_806DA120(void);
@@ -578,13 +578,9 @@ lbl_fn_806D9D80_00000634:
     blr
 }
 
-asm void fn_806D9EE0(void)
+u32 fn_806D9EE0(void)
 {
-    nofralloc
-    lis r3, lbl_80860F58@ha
-    addi r3, r3, lbl_80860F58@l
-    lwz r3, 0xc(r3)
-    blr
+    return *(u32 *)((u8 *)&lbl_80860F58 + 0xc);
 }
 
 asm void fn_806D9EF0(void)

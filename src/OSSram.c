@@ -23,7 +23,7 @@ extern u8 Scb_807CB600[];
 /* Function declarations */
 void __OSInitSram(void);
 void UnlockSram(void);
-void __OSSyncSram(void);
+u32 __OSSyncSram(void);
 void fn_805F4420(void);
 void fn_805F4550(void);
 void fn_805F45D0(void);
@@ -375,13 +375,9 @@ lbl_UnlockSram_000004A8:
     blr
 }
 
-asm void __OSSyncSram(void)
+u32 __OSSyncSram(void)
 {
-    nofralloc
-    lis r3, Scb_807CB600@ha
-    addi r3, r3, Scb_807CB600@l
-    lwz r3, 0x4c(r3)
-    blr
+    return *(u32 *)((u8 *)&Scb_807CB600 + 0x4c);
 }
 
 asm void fn_805F4420(void)

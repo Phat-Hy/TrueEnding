@@ -74,7 +74,7 @@ void fn_80179AB4(void);
 void fn_80179AD0(void);
 void actor_getMovementFlags(void);
 void fn_80179EBC(void);
-void fn_80179F98(void);
+void fn_80179F98(void *p, u32 val);
 void fn_80179FA8(void);
 void fn_8017A160(void);
 u32 fn_8017A220(void);
@@ -552,13 +552,10 @@ lbl_fn_80179EBC_000005D4:
     blr
 }
 
-asm void fn_80179F98(void)
+void fn_80179F98(void *p, u32 val)
 {
-    nofralloc
-    li r0, 0x5a
-    stw r4, 0x1384(r3)
-    stw r0, 0x1380(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x1384) = val;
+    *(u32 *)((u8 *)p + 0x1380) = 0x5a;
 }
 
 asm void fn_80179FA8(void)

@@ -86,7 +86,7 @@ extern u32 lbl_8087F510;
 void fn_8046B798(void);
 void fn_8046BB60(void);
 void atn_Arc_initDecompressHeader(void);
-void fn_8046BBE0(void);
+void fn_8046BBE0(void *p, void *src);
 void atn_Arc_decompressEntry(void);
 void fn_8046BEE4(void);
 void fn_8046BF88(void);
@@ -412,13 +412,9 @@ asm void atn_Arc_initDecompressHeader(void)
     blr
 }
 
-asm void fn_8046BBE0(void)
+void fn_8046BBE0(void *p, void *src)
 {
-    nofralloc
-    lwz r3, 0x2c(r4)
-    li r0, 0x2
-    stw r0, 0x0(r3)
-    blr
+    *(u32 *)(*(void **)((u8 *)src + 0x2c)) = 2;
 }
 
 asm void atn_Arc_decompressEntry(void)

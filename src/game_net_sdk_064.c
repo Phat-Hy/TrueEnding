@@ -115,13 +115,13 @@ void fn_80725200(void);
 void fn_80725250(void);
 void net_listInsertNode(void);
 void net_listRemoveNode(void);
-void fn_80725300(void);
+void fn_80725300(void *p);
 void fn_80725310(void);
 void fn_80725350(void);
 void fn_80725480(void);
 void fn_80725670(void);
 void fn_807256E0(void);
-void fn_807257B0(void);
+void fn_807257B0(void *p);
 void fn_807257C0(void);
 void fn_80725800(void);
 void fn_80725930(void);
@@ -1198,13 +1198,9 @@ asm void net_listRemoveNode(void)
     blr
 }
 
-asm void fn_80725300(void)
+void fn_80725300(void *p)
 {
-    nofralloc
-    lis r4, lbl_807C65A4@ha
-    addi r4, r4, lbl_807C65A4@l
-    stw r4, 0x0(r3)
-    blr
+    *(const void **)p = lbl_807C65A4;
 }
 
 asm void fn_80725310(void)
@@ -1536,13 +1532,9 @@ lbl_fn_807256E0_00001298:
     blr
 }
 
-asm void fn_807257B0(void)
+void fn_807257B0(void *p)
 {
-    nofralloc
-    lis r4, lbl_807C6590@ha
-    addi r4, r4, lbl_807C6590@l
-    stw r4, 0x0(r3)
-    blr
+    *(const void **)p = lbl_807C6590;
 }
 
 asm void fn_807257C0(void)

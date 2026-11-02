@@ -3966,13 +3966,9 @@ lbl_fn_8067E570_00003178:
     blr
 }
 
-asm void __stdio_atexit(void)
+void __stdio_atexit(void)
 {
-    nofralloc
-    lis r3, __close_all@ha
-    addi r3, r3, __close_all@l
-    stw r3, __stdio_exit
-    blr
+    __stdio_exit = (u32)__close_all;
 }
 
 asm void parse_format_8067E5FC(void)

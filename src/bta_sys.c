@@ -150,9 +150,9 @@ void bta_sys_sendmsg(void);
 void bta_sys_sendMsgToApp(void);
 void bd_addr_copy(void);
 void fn_80629ED8(void);
-void fn_80629F78(void);
-void fn_80629F88(void);
-void fn_80629F98(void);
+void fn_80629F78(u32 val);
+void fn_80629F88(u32 val);
+void fn_80629F98(u32 val);
 void fn_80629FA8(void);
 
 asm void fn_806286D0(void)
@@ -1998,31 +1998,19 @@ lbl_fn_80629ED8_000018A0:
     blr
 }
 
-asm void fn_80629F78(void)
+void fn_80629F78(u32 val)
 {
-    nofralloc
-    lis r4, lbl_8081FB78@ha
-    addi r4, r4, lbl_8081FB78@l
-    stw r3, 0x80(r4)
-    blr
+    *(u32 *)((u8 *)&lbl_8081FB78 + 0x80) = val;
 }
 
-asm void fn_80629F88(void)
+void fn_80629F88(u32 val)
 {
-    nofralloc
-    lis r4, lbl_8081FB78@ha
-    addi r4, r4, lbl_8081FB78@l
-    stw r3, 0x88(r4)
-    blr
+    *(u32 *)((u8 *)&lbl_8081FB78 + 0x88) = val;
 }
 
-asm void fn_80629F98(void)
+void fn_80629F98(u32 val)
 {
-    nofralloc
-    lis r4, lbl_8081FB78@ha
-    addi r4, r4, lbl_8081FB78@l
-    stw r3, 0x84(r4)
-    blr
+    *(u32 *)((u8 *)&lbl_8081FB78 + 0x84) = val;
 }
 
 asm void fn_80629FA8(void)

@@ -84,7 +84,7 @@ void fn_8044D208(void);
 void weapon_getDamageParam(void);
 void fn_8044D404(void);
 void fn_8044D490(void);
-void fn_8044D4F0(void);
+void fn_8044D4F0(void *p);
 void fn_8044D500(void);
 void fn_8044D530(void);
 u32 fn_8044D560(void *p);
@@ -487,13 +487,9 @@ lbl_fn_8044D490_000004B0:
     blr
 }
 
-asm void fn_8044D4F0(void)
+void fn_8044D4F0(void *p)
 {
-    nofralloc
-    addis r3, r3, 0x1
-    li r0, 0x0
-    stw r0, -0x24d4(r3)
-    blr
+    *(u32 *)((u8 *)p + 0xdb2c) = 0;
 }
 
 asm void fn_8044D500(void)

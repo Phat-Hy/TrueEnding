@@ -107,7 +107,7 @@ extern u32 lbl_80880DCC;
 
 /* Function declarations */
 void fn_800AB774(void);
-void fn_800ABD84(void);
+void fn_800ABD84(void *p);
 void fn_800ABD94(void);
 void fn_800AC5F4(void);
 void fn_800AC6DC(void);
@@ -511,13 +511,9 @@ lbl_fn_800AB774_00000514:
     blr
 }
 
-asm void fn_800ABD84(void)
+void fn_800ABD84(void *p)
 {
-    nofralloc
-    lis r4, lbl_80778D78@ha
-    addi r4, r4, lbl_80778D78@l
-    stw r4, 0x0(r3)
-    blr
+    *(const void **)p = lbl_80778D78;
 }
 
 asm void fn_800ABD94(void)

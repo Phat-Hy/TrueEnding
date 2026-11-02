@@ -90,7 +90,7 @@ extern u32 lbl_80880D74;
 
 /* Function declarations */
 void layout_drawPane(void);
-void fn_800A9E54(void);
+void fn_800A9E54(void *p);
 void fn_800A9E64(void);
 void fn_800AA6C4(void);
 void fn_800AA8DC(void);
@@ -506,13 +506,9 @@ lbl_layout_drawPane_0000054C:
     blr
 }
 
-asm void fn_800A9E54(void)
+void fn_800A9E54(void *p)
 {
-    nofralloc
-    lis r4, lbl_80778CE0@ha
-    addi r4, r4, lbl_80778CE0@l
-    stw r4, 0x0(r3)
-    blr
+    *(const void **)p = lbl_80778CE0;
 }
 
 asm void fn_800A9E64(void)

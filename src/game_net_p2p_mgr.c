@@ -264,13 +264,9 @@ asm void fn_8050A964(void)
     blr
 }
 
-asm void fn_8050A984(void)
+void fn_8050A984(void)
 {
-    nofralloc
-    lwz r3, lbl_8087F628
-    li r0, 0xb
-    stw r0, 0xc8(r3)
-    blr
+    *(u32 *)((u8 *)lbl_8087F628 + 0xc8) = 0xb;
 }
 
 asm void fn_8050A994(void)
