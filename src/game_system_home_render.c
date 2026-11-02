@@ -1423,10 +1423,9 @@ void fn_80362E84(void)
     bloom_processPasses();
 }
 
-asm void fn_80362E88(void)
+void fn_80362E88(void)
 {
-    nofralloc
-    b fn_80360EA4
+    fn_80360EA4();
 }
 
 asm void fn_80362E8C(void)

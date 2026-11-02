@@ -4128,10 +4128,9 @@ asm void fn_80671F60(void)
     blr
 }
 
-asm void fn_80671FC0(void)
+void fn_80671FC0(void)
 {
-    nofralloc
-    b fn_80672470
+    fn_80672470();
 }
 
 asm void fn_80671FD0(void)

@@ -786,16 +786,14 @@ lbl_fn_8071C790_000008A4:
     blr
 }
 
-asm void fn_8071C840(void)
+void fn_8071C840(void)
 {
-    nofralloc
-    b fn_8071B350
+    fn_8071B350();
 }
 
-asm void fn_8071C850(void)
+void fn_8071C850(void)
 {
-    nofralloc
-    b fn_8071B840
+    fn_8071B840();
 }
 
 asm void fn_8071C860(void)

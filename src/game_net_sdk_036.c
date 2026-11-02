@@ -295,22 +295,19 @@ lbl_fn_806EA8A0_0000024C:
     blr
 }
 
-asm void fn_806EA8F0(void)
+void fn_806EA8F0(void)
 {
-    nofralloc
-    b fn_806EE550
+    fn_806EE550();
 }
 
-asm void fn_806EA900(void)
+void fn_806EA900(void)
 {
-    nofralloc
-    b fn_806EA2C0
+    fn_806EA2C0();
 }
 
-asm void fn_806EA910(void)
+void fn_806EA910(void)
 {
-    nofralloc
-    b fn_806EA370
+    fn_806EA370();
 }
 
 asm void fn_806EA920(void)
@@ -508,10 +505,9 @@ lbl_fn_806EAAD0_00000528:
     blr
 }
 
-asm void fn_806EABD0(void)
+void fn_806EABD0(void)
 {
-    nofralloc
-    b fn_806EDE80
+    fn_806EDE80();
 }
 
 asm void fn_806EABE0(void)

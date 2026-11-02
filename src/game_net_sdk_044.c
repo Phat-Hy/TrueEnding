@@ -962,10 +962,9 @@ lbl_fn_806FB750_00000BD0:
     blr
 }
 
-asm void fn_806FBAE0(void)
+void fn_806FBAE0(void)
 {
-    nofralloc
-    b fn_806FB750
+    fn_806FB750();
 }
 
 asm void fn_806FBAF0(void)

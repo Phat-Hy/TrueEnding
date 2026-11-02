@@ -30,7 +30,7 @@ extern f32 lbl_808886E0;
 extern f32 lbl_808886E4;
 
 /* Function declarations */
-void fn_8060EDF0(void);
+u32 fn_8060EDF0(void);
 void fn_8060EE00(void);
 void fn_8060F060(void);
 void fn_8060F210(void);
@@ -38,12 +38,9 @@ void fn_8060F2A0(void);
 void fn_8060F600(void);
 void fn_8060F800(void);
 
-asm void fn_8060EDF0(void)
+u32 fn_8060EDF0(void)
 {
-    nofralloc
-    lis r3, 0x1
-    subi r3, r3, 0x6a00
-    blr
+    return 0x10000 - 0x6a00;
 }
 
 asm void fn_8060EE00(void)

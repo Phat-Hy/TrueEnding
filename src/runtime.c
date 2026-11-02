@@ -147,16 +147,14 @@ lbl___register_atexit_00000014:
     blr
 }
 
-asm void fn_806954CC(void)
+void fn_806954CC(void)
 {
-    nofralloc
-    b abort
+    abort();
 }
 
-asm void fn_806954D0(void)
+void fn_806954D0(void)
 {
-    nofralloc
-    b fn_806954D4
+    fn_806954D4();
 }
 
 asm void fn_806954D4(void)

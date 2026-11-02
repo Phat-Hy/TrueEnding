@@ -773,10 +773,9 @@ lbl_fn_8011FE64_00000724:
     blr
 }
 
-asm void fn_8011FEBC(void)
+void fn_8011FEBC(void)
 {
-    nofralloc
-    b bloom_processPasses
+    bloom_processPasses();
 }
 
 asm void fn_8011FEC0(void)
@@ -807,10 +806,9 @@ lbl_fn_8011FEC0_00000780:
     blr
 }
 
-asm void fn_8011FF18(void)
+void fn_8011FF18(void)
 {
-    nofralloc
-    b bloom_processPasses
+    bloom_processPasses();
 }
 
 asm void fn_8011FF1C(void)

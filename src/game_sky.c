@@ -316,10 +316,9 @@ lbl_str_skipWhitespace_00000294:
     blr
 }
 
-asm void fn_800DC3C8(void)
+void fn_800DC3C8(void)
 {
-    nofralloc
-    b fn_80686B90
+    fn_80686B90();
 }
 
 asm void fn_800DC3CC(void)
@@ -733,16 +732,14 @@ lbl_str_calcHash_00000830:
     blr
 }
 
-asm void fn_800DC978(void)
+void fn_800DC978(void)
 {
-    nofralloc
-    b fn_8068B1A4
+    fn_8068B1A4();
 }
 
-asm void fn_800DC97C(void)
+void fn_800DC97C(void)
 {
-    nofralloc
-    b fn_8068B29C
+    fn_8068B29C();
 }
 
 asm void fn_800DC980(void)
@@ -1350,10 +1347,9 @@ asm void fn_800DD17C(void)
     blr
 }
 
-asm void fn_800DD1D0(void)
+void fn_800DD1D0(void)
 {
-    nofralloc
-    b fn_805B6C10
+    fn_805B6C10();
 }
 
 u32 fn_800DD1D4(void *p)
@@ -1361,16 +1357,14 @@ u32 fn_800DD1D4(void *p)
     return *(u32 *)((u8 *)p + 0x80);
 }
 
-asm void fn_800DD1DC(void)
+void fn_800DD1DC(void)
 {
-    nofralloc
-    b fn_805B6958
+    fn_805B6958();
 }
 
-asm void fn_800DD1E0(void)
+void fn_800DD1E0(void)
 {
-    nofralloc
-    b fn_805B6934
+    fn_805B6934();
 }
 
 u32 fn_800DD1E4(void)

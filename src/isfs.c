@@ -1457,10 +1457,9 @@ lbl_fn_8061B860_00001340:
     blr
 }
 
-asm void fn_8061B930(void)
+void fn_8061B930(void)
 {
-    nofralloc
-    b fn_8061CE50
+    fn_8061CE50();
 }
 
 asm void fn_8061B940(void)

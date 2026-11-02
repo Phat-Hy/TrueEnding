@@ -737,10 +737,9 @@ asm void fn_806CFE90(void)
     blr
 }
 
-asm void fn_806CFEA0(void)
+void fn_806CFEA0(void)
 {
-    nofralloc
-    b fn_806CFEB0
+    fn_806CFEB0();
 }
 
 asm void fn_806CFEB0(void)

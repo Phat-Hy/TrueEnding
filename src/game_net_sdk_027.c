@@ -1543,22 +1543,19 @@ lbl_fn_806D8A90_00001270:
     blr
 }
 
-asm void fn_806D8AF0(void)
+void fn_806D8AF0(void)
 {
-    nofralloc
-    b OSInitMutex
+    OSInitMutex();
 }
 
-asm void fn_806D8B00(void)
+void fn_806D8B00(void)
 {
-    nofralloc
-    b OSLockMutex
+    OSLockMutex();
 }
 
-asm void fn_806D8B10(void)
+void fn_806D8B10(void)
 {
-    nofralloc
-    b OSUnlockMutex
+    OSUnlockMutex();
 }
 
 asm void fn_806D8B20(void)

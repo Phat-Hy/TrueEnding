@@ -1091,10 +1091,9 @@ lbl_InitMetroTRK_BBA_00000AF8:
     blr
 }
 
-asm void EnableMetroTRKInterrupts(void)
+void EnableMetroTRKInterrupts(void)
 {
-    nofralloc
-    b fn_80675E60
+    fn_80675E60();
 }
 
 asm void fn_80675A1C(void)
@@ -4518,10 +4517,9 @@ lbl_fn_80678668_0000379C:
     blr
 }
 
-asm void fn_806786D0(void)
+void fn_806786D0(void)
 {
-    nofralloc
-    b fn_806786E4
+    fn_806786E4();
 }
 
 asm void fn_806786D4(void)

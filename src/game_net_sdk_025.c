@@ -1011,10 +1011,9 @@ asm void fn_806D42D0(void)
     b fn_806D4050
 }
 
-asm void fn_806D42E0(void)
+void fn_806D42E0(void)
 {
-    nofralloc
-    b fn_806D16A0
+    fn_806D16A0();
 }
 
 asm void fn_806D42F0(void)
@@ -2189,28 +2188,24 @@ asm void fn_806D52B0(void)
     b fn_806D3BF0
 }
 
-asm void fn_806D52C0(void)
+void fn_806D52C0(void)
 {
-    nofralloc
-    b fn_806D3D70
+    fn_806D3D70();
 }
 
-asm void fn_806D52D0(void)
+void fn_806D52D0(void)
 {
-    nofralloc
-    b fn_806D3F50
+    fn_806D3F50();
 }
 
-asm void fn_806D52E0(void)
+void fn_806D52E0(void)
 {
-    nofralloc
-    b fn_806D3F90
+    fn_806D3F90();
 }
 
-asm void fn_806D52F0(void)
+void fn_806D52F0(void)
 {
-    nofralloc
-    b fn_806D4030
+    fn_806D4030();
 }
 
 asm void fn_806D5300(void)

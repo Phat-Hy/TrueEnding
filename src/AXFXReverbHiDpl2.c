@@ -31,7 +31,7 @@ extern f32 lbl_80888710;
 extern f64 lbl_80888714;
 
 /* Function declarations */
-void fn_8060F910(void);
+u32 fn_8060F910(void);
 void fn_8060F920(void);
 void fn_8060FBA0(void);
 void fn_8060FD50(void);
@@ -39,12 +39,9 @@ void fn_8060FDE0(void);
 void fn_80610170(void);
 void fn_80610380(void);
 
-asm void fn_8060F910(void)
+u32 fn_8060F910(void)
 {
-    nofralloc
-    lis r3, 0x1
-    subi r3, r3, 0x3800
-    blr
+    return 0x10000 - 0x3800;
 }
 
 asm void fn_8060F920(void)

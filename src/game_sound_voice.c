@@ -398,10 +398,9 @@ lbl_fn_801D7560_00000434:
     blr
 }
 
-asm void fn_801D77A0(void)
+void fn_801D77A0(void)
 {
-    nofralloc
-    b fn_801D77A4
+    fn_801D77A4();
 }
 
 asm void fn_801D77A4(void)

@@ -1267,10 +1267,9 @@ asm void fn_8070C740(void)
     blr
 }
 
-asm void fn_8070C770(void)
+void fn_8070C770(void)
 {
-    nofralloc
-    b net_listRemoveNode
+    net_listRemoveNode();
 }
 
 asm void fn_8070C780(void)

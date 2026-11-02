@@ -5110,16 +5110,14 @@ lbl_fn_8068AE24_00003F98:
     blr
 }
 
-asm void fn_8068AE9C(void)
+void fn_8068AE9C(void)
 {
-    nofralloc
-    b fn_80686F34
+    fn_80686F34();
 }
 
-asm void fn_8068AEA0(void)
+void fn_8068AEA0(void)
 {
-    nofralloc
-    b fn_80687200
+    fn_80687200();
 }
 
 asm void std_atan2(void)

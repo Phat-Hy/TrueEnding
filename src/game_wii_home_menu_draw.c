@@ -644,10 +644,9 @@ lbl_fn_80572EDC_00000784:
     blr
 }
 
-asm void fn_80572F44(void)
+void fn_80572F44(void)
 {
-    nofralloc
-    b fn_800C3990
+    fn_800C3990();
 }
 
 asm void fn_80572F48(void)

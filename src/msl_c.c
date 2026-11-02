@@ -2347,10 +2347,9 @@ lbl_fn_8067D06C_00001D1C:
     blr
 }
 
-asm void fn_8067D19C(void)
+void fn_8067D19C(void)
 {
-    nofralloc
-    b fn_8067D1A0
+    fn_8067D1A0();
 }
 
 asm void fn_8067D1A0(void)
@@ -2419,10 +2418,9 @@ lbl_fn_8067D1A0_00001DF4:
     blr
 }
 
-asm void fn_8067D27C(void)
+void fn_8067D27C(void)
 {
-    nofralloc
-    b fn_8067D280
+    fn_8067D280();
 }
 
 asm void fn_8067D280(void)
@@ -2660,10 +2658,9 @@ lbl_fn_8067D280_00002140:
     blr
 }
 
-asm void fn_8067D5C0(void)
+void fn_8067D5C0(void)
 {
-    nofralloc
-    b __fwrite
+    __fwrite();
 }
 
 asm void __fwrite(void)
@@ -3227,10 +3224,9 @@ lbl_fn_8067DC64_00002898:
     blr
 }
 
-asm void fn_8067DD0C(void)
+void fn_8067DD0C(void)
 {
-    nofralloc
-    b fn_8067DC64
+    fn_8067DC64();
 }
 
 asm void _fseek(void)
@@ -3362,10 +3358,9 @@ lbl__fseek_00002A50:
     blr
 }
 
-asm void fn_8067DED4(void)
+void fn_8067DED4(void)
 {
-    nofralloc
-    b _fseek
+    _fseek();
 }
 
 asm void fn_8067DED8(void)
