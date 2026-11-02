@@ -71,6 +71,7 @@ was written for and has not been regenerated since: **the table above is current
 | Gate | `pwsh tools/invariant.ps1` | **PASS attempt 1** (handover 1680; guest 2800 `54CB46BD…` 38.20 / 0.00 %; guest 3500 `A81F3E35…` 89.89 / 1.85 %) — on aurora, see `DEEPSEEK_HARNESS_HANDOVER.md` §5c.46 AP-BR |
 | Renderer | Aurora | migration **P1-P4 closed**: aurora publishes every presented frame (3 086 / 3 086 blitted, 0 failures) and the gate's references are recorded on its picture; the hand-rolled layer stays as the per-frame fallback and `TLS_LAYER=1` |
 | Recompiled DOL | 459 / 459 chunks | 100 % of the retail DOL's chunks run natively (472 objects linked); Track A's *decompilation* is 99.30 % of code bytes (data 0.06 %), which the port does not consume |
+| Speed | playable ≥ 30 fps in the field | **not yet: 3-6 fps** (aurora) / 5-10 fps (`TLS_LAYER=1`), boot/title 24-60 fps. The cost is the recompiled guest CPU — 150-200 ms/frame at the 321 000-block budget, ≈470 ns per block — not the renderer (the aurora readback is ~25-35 % on top). Measured breakdown and the planned dispatch experiments: `DEEPSEEK_HARNESS_HANDOVER.md` §5c.46 AP-BR §11/§13 |
 | Build | 472 objects | green |
 
 *What is **not** measured:* how much of the game's content runs. The gate covers Boot → Title → Chapter 1

@@ -17185,4 +17185,35 @@ not the picture.
 
 **What a playtest should now see:** a restored window that updates during boot (black content, not a frozen
 window), the title at guest frame ~300 (present ~364, ≈75 s at 5 fps), and New Game leading to the field at
-3-6 fps (§11). Still not playable speed; now at least visible.
+3-6 fps (§11). Still not playable speed; now at least visible. **Confirmed by the owner on 2026-11-02: the
+game loads and the title appears with this fix.**
+
+**13. THE NEXT SESSION IS A PERFORMANCE SESSION, and this is the plan it should start from.** The picture
+work is done and the gate is green; what stands between this port and "playable" is the frame cost. Measured
+(§11): the field spends **150-200 ms of guest CPU per frame at 321 000 blocks** — and the budget is *hit
+every frame*, so the guest is being cut off, not merely slow — i.e. **≈470 ns per recompiled block**.
+Everything else is small: Gfx/Present is 24 ms with `--novsync`, aurora's readback adds ~25-35 % on top of
+that, and the audio stream is free (`--no-audio` changed nothing).
+
+The dispatch loop is the place to look first (`recomp/host_runner.c:542`, `tls_run_blocks`). Per block it
+does: `dolrecomp_call(ctx, ctx->pc)` (pc → recompiled-function lookup), `host_watch_os_current_thread(ctx,
+pc_before)` and `host_watch_addrs(ctx, pc_before)` (two instrumented hooks), plus a PC-history sample every
+1024 blocks. At 470 ns/block a few tens of nanoseconds of per-block overhead is the entire budget.
+
+Three experiments, cheapest first, each a 400-frame run (≈40 s) compared at fixed frames 180/300/2100:
+1. **Headless A/B** (`--headless`): if headless is also ~150 ms/frame the cost is entirely in the dispatch
+   loop; if it drops, part of it is the GX tap/parse path that `d3d11_present` drives.
+2. **Hook census**: build a variant with `host_watch_os_current_thread` / `host_watch_addrs` compiled out
+   (they are inert unless a watch is armed, but they are still two calls per block) and compare the same
+   frames — this separates instrumentation from dispatch.
+3. **Dispatch cost**: `dolrecomp_call` per block is a table lookup + an indirect call. Measure a variant with
+   a "same pc as the last block" fast path and/or direct-threaded exits (each chunk jumps to its successor
+   instead of returning to the loop). This is where a 3x is plausible.
+
+**Success criterion:** the field no longer hits the 321 000-block budget and runs at **≥30 fps** on this
+laptop — ~3x today's throughput, i.e. ~1M blocks per frame at 33 ms. Trimming 10 % is not the fix.
+
+Two smaller independent items are also open: (a) the promotion's ~25-35 % readback cost for *interactive*
+play (publish every Nth frame, or present without a CPU round-trip — the gate must stay on the full-rate
+path); (b) the gate should gain a **speed assertion**, or the next PASS will again say nothing about whether
+the game is playable.
