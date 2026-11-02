@@ -107,7 +107,7 @@ void *fn_803D7194(void *p);
 u32 fn_803D719C(void *p);
 u32 fn_803D71A8(void *p);
 u32 fn_803D71BC(void *p);
-u32 fn_803D71C4(void);
+u32 gfx_getDevice(void);
 u32 fn_803D71CC(void *p);
 u32 fn_803D71D4(void *p);
 void fn_803D71DC(void);
@@ -552,7 +552,7 @@ u32 fn_803D71BC(void *p)
     return *(u32 *)((u8 *)p + 0x3c);
 }
 
-u32 fn_803D71C4(void)
+u32 gfx_getDevice(void)
 {
     return lbl_8087EEE0;
 }

@@ -48278,18 +48278,18 @@
 
 # .data:0x23140 | 0x807935E0 | size: 0x30
 .obj jumptable_807935E0, global
-	.4byte fn_805266C0+0x1F8
-	.4byte fn_805266C0+0x44
-	.4byte fn_805266C0+0x6C
-	.4byte fn_805266C0+0x94
-	.4byte fn_805266C0+0xBC
-	.4byte fn_805266C0+0xE4
-	.4byte fn_805266C0+0x10C
-	.4byte fn_805266C0+0x134
-	.4byte fn_805266C0+0x15C
-	.4byte fn_805266C0+0x184
-	.4byte fn_805266C0+0x1AC
-	.4byte fn_805266C0+0x1D4
+	.4byte avatar_custom_setOption+0x1F8
+	.4byte avatar_custom_setOption+0x44
+	.4byte avatar_custom_setOption+0x6C
+	.4byte avatar_custom_setOption+0x94
+	.4byte avatar_custom_setOption+0xBC
+	.4byte avatar_custom_setOption+0xE4
+	.4byte avatar_custom_setOption+0x10C
+	.4byte avatar_custom_setOption+0x134
+	.4byte avatar_custom_setOption+0x15C
+	.4byte avatar_custom_setOption+0x184
+	.4byte avatar_custom_setOption+0x1AC
+	.4byte avatar_custom_setOption+0x1D4
 .endobj jumptable_807935E0
 
 # .data:0x23170 | 0x80793610 | size: 0x64

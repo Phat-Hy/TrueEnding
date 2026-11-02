@@ -91,7 +91,7 @@ void fn_806E9860(void);
 void fn_806E9900(void);
 void dwc_invokeCallbackSafe(void);
 void fn_806E9AD0(void);
-void fn_806E9BB0(void);
+void dwc_invokeCompleteCallback(void);
 void fn_806E9C70(void);
 void fn_806E9D30(void);
 void fn_806E9E40(void);
@@ -1687,7 +1687,7 @@ lbl_fn_806E9AD0_0000154C:
     blr
 }
 
-asm void fn_806E9BB0(void)
+asm void dwc_invokeCompleteCallback(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1696,16 +1696,16 @@ asm void fn_806E9BB0(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bne lbl_fn_806E9BB0_0000158C
+    bne lbl_dwc_invokeCompleteCallback_0000158C
     li r3, 0x1
-    b lbl_fn_806E9BB0_00001610
-lbl_fn_806E9BB0_0000158C:
+    b lbl_dwc_invokeCompleteCallback_00001610
+lbl_dwc_invokeCompleteCallback_0000158C:
     lwz r0, 0x30(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_806E9BB0_000015A0
+    bne lbl_dwc_invokeCompleteCallback_000015A0
     li r3, 0x1
-    b lbl_fn_806E9BB0_00001610
-lbl_fn_806E9BB0_000015A0:
+    b lbl_dwc_invokeCompleteCallback_00001610
+lbl_dwc_invokeCompleteCallback_000015A0:
     lwz r5, 0x24(r3)
     lwz r6, 0x8(r3)
     addi r0, r5, 0x1
@@ -1726,16 +1726,16 @@ lbl_fn_806E9BB0_000015A0:
     lwz r3, 0x8(r31)
     lwz r0, 0x14(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_806E9BB0_0000160C
+    beq lbl_dwc_invokeCompleteCallback_0000160C
     lwz r0, 0x1c(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_806E9BB0_0000160C
+    bne lbl_dwc_invokeCompleteCallback_0000160C
     bl fn_806EE4E0
     li r3, 0x0
-    b lbl_fn_806E9BB0_00001610
-lbl_fn_806E9BB0_0000160C:
+    b lbl_dwc_invokeCompleteCallback_00001610
+lbl_dwc_invokeCompleteCallback_0000160C:
     li r3, 0x1
-lbl_fn_806E9BB0_00001610:
+lbl_dwc_invokeCompleteCallback_00001610:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0

@@ -18,7 +18,7 @@ extern void scapi_getConfigItem(void);
 extern void scapi_cleanupContext(void);
 extern void fn_80627180(void);
 extern void fn_806272C0(void);
-extern void fn_80627400(void);
+extern void scapi_dequeueBuffer(void);
 extern void fn_806274A0(void);
 extern void fn_80627570(void);
 extern void fn_80627580(void);
@@ -2442,14 +2442,14 @@ asm void fn_80644078(void)
     addi r3, r3, 0x70
     bl fn_80627180
     addi r3, r27, 0x70
-    bl fn_80627400
+    bl scapi_dequeueBuffer
     mr r28, r3
     b lbl_fn_80644078_00001F60
 lbl_fn_80644078_00001F4C:
     cmpwi r4, 0x0
     bne lbl_fn_80644078_00001F60
     addi r3, r3, 0x70
-    bl fn_80627400
+    bl scapi_dequeueBuffer
     mr r28, r3
 lbl_fn_80644078_00001F60:
     lis r31, lbl_8081FAF0@ha
@@ -2471,7 +2471,7 @@ lbl_fn_80644078_00001F98:
     mr r3, r28
     bl scapi_cleanupContext
     addi r3, r27, 0x70
-    bl fn_80627400
+    bl scapi_dequeueBuffer
     mr r28, r3
     b lbl_fn_80644078_00002088
 lbl_fn_80644078_00001FB0:
@@ -2529,7 +2529,7 @@ lbl_fn_80644078_00002030:
     lwz r3, 0x10(r27)
     bl fn_80644A04
     addi r3, r27, 0x70
-    bl fn_80627400
+    bl scapi_dequeueBuffer
     mr r28, r3
 lbl_fn_80644078_00002088:
     cmpwi r28, 0x0
@@ -3260,7 +3260,7 @@ lbl_fn_80644A04_00002A1C:
     cmpwi r0, 0x0
     bne lbl_fn_80644A04_00002B44
     addi r3, r29, 0x44
-    bl fn_80627400
+    bl scapi_dequeueBuffer
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_80644A04_00002A80
@@ -5090,7 +5090,7 @@ lbl_fn_806464AC_0000438C:
     b lbl_fn_806464AC_000043BC
 lbl_fn_806464AC_000043B0:
     addi r3, r30, 0x44
-    bl fn_80627400
+    bl scapi_dequeueBuffer
     bl scapi_cleanupContext
 lbl_fn_806464AC_000043BC:
     lwz r0, 0x44(r30)
@@ -6538,7 +6538,7 @@ asm void l2cu_release_ccb(void)
     b lbl_l2cu_release_ccb_000057B8
 lbl_l2cu_release_ccb_000057AC:
     addi r3, r30, 0x70
-    bl fn_80627400
+    bl scapi_dequeueBuffer
     bl scapi_cleanupContext
 lbl_l2cu_release_ccb_000057B8:
     lwz r0, 0x70(r30)

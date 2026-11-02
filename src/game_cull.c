@@ -95,7 +95,7 @@ void fn_800D87A4(void *p);
 void fn_800D87B0(void);
 void fn_800D87C4(void);
 void *fn_800D8808(void *p);
-void fn_800D8814(void);
+void vec4_set(void);
 void fn_800D8828(void);
 void fn_800D884C(void);
 void fn_800D8870(void);
@@ -283,7 +283,7 @@ void *fn_800D8808(void *p)
     return (u8 *)(*(void **)((u8 *)p + 0x0)) + 0x18c;
 }
 
-asm void fn_800D8814(void)
+asm void vec4_set(void)
 {
     nofralloc
     stfs f1, 0x0(r3)
@@ -936,7 +936,7 @@ asm void fn_800D8FEC(void)
     fmr f2, f1
     fmr f3, f1
     fmr f4, f1
-    bl fn_800D8814
+    bl vec4_set
     mr r5, r3
     mr r3, r28
     addi r4, r31, 0x198
@@ -981,7 +981,7 @@ lbl_fn_800D8FEC_00000AE0:
     fmr f2, f1
     fmr f3, f1
     fmr f4, f1
-    bl fn_800D8814
+    bl vec4_set
     mr r5, r3
     mr r3, r28
     addi r4, r31, 0x198
@@ -1014,7 +1014,7 @@ lbl_fn_800D8FEC_00000B90:
     fmr f2, f1
     fmr f3, f1
     fmr f4, f1
-    bl fn_800D8814
+    bl vec4_set
     mr r5, r3
     mr r3, r28
     addi r4, r31, 0x198
@@ -1029,19 +1029,19 @@ lbl_fn_800D8FEC_00000C10:
     lfs f1, lbl_80881224
     fmr f3, f2
     fmr f4, f2
-    bl fn_800D8814
+    bl vec4_set
     lfs f1, lbl_80881220
     addi r3, r1, 0x68
     lfs f2, lbl_80881224
     fmr f3, f1
     fmr f4, f1
-    bl fn_800D8814
+    bl vec4_set
     lfs f1, lbl_80881220
     addi r3, r1, 0x78
     lfs f3, lbl_80881224
     fmr f2, f1
     fmr f4, f1
-    bl fn_800D8814
+    bl vec4_set
     lis r29, lbl_807347A0@ha
     mr r27, r31
     addi r26, r31, 0x30

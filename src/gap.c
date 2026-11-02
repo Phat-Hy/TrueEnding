@@ -15,7 +15,7 @@ extern void _savegpr_27(void);
 extern void scapi_getConfigItem(void);
 extern void scapi_cleanupContext(void);
 extern void fn_80627180(void);
-extern void fn_80627400(void);
+extern void scapi_dequeueBuffer(void);
 extern void bta_sys_logEvent(void);
 extern void bta_sys_log(void);
 extern void bta_sys_traceDebug(void);
@@ -321,7 +321,7 @@ lbl_fn_8063B7D0_00000290:
     b lbl_fn_8063B7D0_000002A4
 lbl_fn_8063B7D0_00000298:
     addi r3, r31, 0x14
-    bl fn_80627400
+    bl scapi_dequeueBuffer
     bl scapi_cleanupContext
 lbl_fn_8063B7D0_000002A4:
     lwz r0, 0x14(r31)
@@ -558,7 +558,7 @@ lbl_fn_8063BAE8_000005A4:
     b lbl_fn_8063BAE8_000005CC
 lbl_fn_8063BAE8_000005C0:
     addi r3, r31, 0x14
-    bl fn_80627400
+    bl scapi_dequeueBuffer
     bl scapi_cleanupContext
 lbl_fn_8063BAE8_000005CC:
     lwz r0, 0x14(r31)
@@ -704,7 +704,7 @@ lbl_fn_8063BCD4_00000798:
     b lbl_fn_8063BCD4_000007C0
 lbl_fn_8063BCD4_000007B4:
     addi r3, r31, 0x14
-    bl fn_80627400
+    bl scapi_dequeueBuffer
     bl scapi_cleanupContext
 lbl_fn_8063BCD4_000007C0:
     lwz r0, 0x14(r31)

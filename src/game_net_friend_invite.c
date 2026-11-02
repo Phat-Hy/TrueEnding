@@ -30,7 +30,7 @@ extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
 extern void bloom_processPasses(void);
-extern void fn_800D8814(void);
+extern void vec4_set(void);
 extern void fn_800EC1F4(void);
 extern void proj_getMatrix(void);
 extern void fn_800F530C(void);
@@ -2521,7 +2521,7 @@ lbl_fn_804D25D4_00001DD0:
     lfs f4, lbl_80887590
     fmr f2, f1
     fmr f3, f1
-    bl fn_800D8814
+    bl vec4_set
     mr r22, r3
     bl input_rumble_isEnabled
     mr r4, r22

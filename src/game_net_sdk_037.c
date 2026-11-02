@@ -42,7 +42,7 @@ extern void fn_806E9760(void);
 extern void fn_806E97F0(void);
 extern void dwc_invokeCallbackSafe(void);
 extern void fn_806E9AD0(void);
-extern void fn_806E9BB0(void);
+extern void dwc_invokeCompleteCallback(void);
 extern void fn_806E9E40(void);
 extern void fn_806E9F50(void);
 extern void fn_806EA050(void);
@@ -511,7 +511,7 @@ lbl_fn_806ECC20_000005BC:
     bl net_abortConnection
     mr r3, r31
     li r4, 0x1
-    bl fn_806E9BB0
+    bl dwc_invokeCompleteCallback
     cmpwi r3, 0x0
     bne lbl_fn_806ECC20_000005E8
     li r0, 0x0
@@ -556,7 +556,7 @@ lbl_fn_806ECC20_00000658:
     bl net_abortConnection
     mr r3, r31
     li r4, 0x1
-    bl fn_806E9BB0
+    bl dwc_invokeCompleteCallback
     cmpwi r3, 0x0
     bne lbl_fn_806ECC20_00000684
     li r0, 0x0
@@ -650,7 +650,7 @@ lbl_fn_806ECE40_000007A0:
     bl net_abortConnection
     mr r3, r31
     li r4, 0x1
-    bl fn_806E9BB0
+    bl dwc_invokeCompleteCallback
     cmpwi r3, 0x0
     bne lbl_fn_806ECE40_000007CC
     li r3, 0x0
@@ -778,7 +778,7 @@ lbl_fn_806ECF70_00000960:
     bl net_abortConnection
     mr r3, r25
     li r4, 0x1
-    bl fn_806E9BB0
+    bl dwc_invokeCompleteCallback
     cmpwi r3, 0x0
     bne lbl_fn_806ECF70_0000098C
     li r0, 0x0
@@ -822,7 +822,7 @@ lbl_fn_806ECF70_000009F8:
     bl net_abortConnection
     mr r3, r25
     li r4, 0x1
-    bl fn_806E9BB0
+    bl dwc_invokeCompleteCallback
     cmpwi r3, 0x0
     bne lbl_fn_806ECF70_00000A24
     li r0, 0x0
@@ -907,7 +907,7 @@ lbl_fn_806ECF70_00000B24:
     bl net_abortConnection
     mr r3, r26
     li r4, 0x1
-    bl fn_806E9BB0
+    bl dwc_invokeCompleteCallback
     cmpwi r3, 0x0
     bne lbl_fn_806ECF70_00000B50
     li r3, 0x0
@@ -1049,7 +1049,7 @@ lbl_fn_806ED370_00000D24:
     bl net_abortConnection
     mr r3, r30
     li r4, 0x4
-    bl fn_806E9BB0
+    bl dwc_invokeCompleteCallback
     cmpwi r3, 0x0
     bne lbl_fn_806ED370_00000D50
     li r0, 0x0
@@ -1161,7 +1161,7 @@ lbl_fn_806ED370_00000EC0:
     bl net_abortConnection
     mr r3, r30
     li r4, 0x4
-    bl fn_806E9BB0
+    bl dwc_invokeCompleteCallback
     cmpwi r3, 0x0
     bne lbl_fn_806ED370_00000EEC
     li r0, 0x0

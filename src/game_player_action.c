@@ -16,7 +16,7 @@ extern void wcs_parseInt(void);
 extern void actor_spawnActorWithId(void);
 extern void fn_80117E88(void);
 extern void fn_80125320(void);
-extern void fn_8012539C(void);
+extern void enemy_resetTargetTracker(void);
 extern void enemy_stepBehavior(void);
 extern void fn_80128508(void);
 extern void fn_801286F0(void);
@@ -740,7 +740,7 @@ asm void fn_8011BD14(void)
     li r5, 0x8
     bl memset
     addi r3, r30, 0xc
-    bl fn_8012539C
+    bl enemy_resetTargetTracker
     mr r3, r30
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -806,9 +806,9 @@ lbl_player_resetActionState_00000970:
     stw r5, 0xe8(r3)
     stw r5, 0xec(r3)
     addi r3, r3, 0xc
-    bl fn_8012539C
+    bl enemy_resetTargetTracker
     addi r3, r31, 0xc
-    bl fn_8012539C
+    bl enemy_resetTargetTracker
     lwz r0, 0xd8(r31)
     ori r0, r0, 0x4
     stw r0, 0xd8(r31)
@@ -871,9 +871,9 @@ asm void fn_8011BF94(void)
     stw r31, 0xe8(r3)
     stw r31, 0xec(r3)
     addi r3, r3, 0xc
-    bl fn_8012539C
+    bl enemy_resetTargetTracker
     addi r3, r30, 0xc
-    bl fn_8012539C
+    bl enemy_resetTargetTracker
     lwz r0, 0xd8(r30)
     stw r31, 0xb4(r30)
     ori r0, r0, 0x4
@@ -911,7 +911,7 @@ asm void fn_8011C044(void)
     stw r5, 0xe8(r3)
     stw r5, 0xec(r3)
     addi r3, r3, 0xc
-    b fn_8012539C
+    b enemy_resetTargetTracker
 }
 
 asm void fn_8011C074(void)
@@ -935,7 +935,7 @@ asm void fn_8011C074(void)
     stw r6, 0xe8(r3)
     stw r6, 0xec(r3)
     addi r3, r3, 0xc
-    bl fn_8012539C
+    bl enemy_resetTargetTracker
     lha r0, 0xe2(r30)
     cmpwi r0, 0x4
     beq lbl_fn_8011C074_00000B78

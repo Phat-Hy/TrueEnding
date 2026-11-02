@@ -111,7 +111,7 @@ void fn_8052624C(void);
 void fn_8052635C(void);
 void fn_80526660(void);
 void fn_80526694(void);
-void fn_805266C0(void);
+void avatar_custom_setOption(void);
 void fn_805268CC(void);
 void fn_80526930(void);
 void fn_80526BC0(void);
@@ -451,7 +451,7 @@ asm void fn_80526694(void)
     blr
 }
 
-asm void fn_805266C0(void)
+asm void avatar_custom_setOption(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -464,7 +464,7 @@ asm void fn_805266C0(void)
     stwx r5, r3, r0
     add r31, r3, r0
     stw r4, 0x4(r31)
-    bgt lbl_fn_805266C0_0000066C
+    bgt lbl_avatar_custom_setOption_0000066C
     lis r3, jumptable_807935E0@ha
     slwi r0, r5, 2
     addi r3, r3, jumptable_807935E0@l
@@ -480,7 +480,7 @@ asm void fn_805266C0(void)
     stw r3, 0x18(r31)
     li r4, 0x1
     bl atn_Task_setActive
-    b lbl_fn_805266C0_0000066C
+    b lbl_avatar_custom_setOption_0000066C
     lis r4, lbl_8075C6C4@ha
     mr r3, r6
     addi r4, r4, lbl_8075C6C4@l
@@ -490,7 +490,7 @@ asm void fn_805266C0(void)
     stw r3, 0x18(r31)
     li r4, 0x1
     bl atn_Task_setActive
-    b lbl_fn_805266C0_0000066C
+    b lbl_avatar_custom_setOption_0000066C
     lis r4, lbl_8075C6C4@ha
     mr r3, r6
     addi r4, r4, lbl_8075C6C4@l
@@ -500,7 +500,7 @@ asm void fn_805266C0(void)
     stw r3, 0x18(r31)
     li r4, 0x1
     bl atn_Task_setActive
-    b lbl_fn_805266C0_0000066C
+    b lbl_avatar_custom_setOption_0000066C
     lis r4, lbl_8075C6C4@ha
     mr r3, r6
     addi r4, r4, lbl_8075C6C4@l
@@ -510,7 +510,7 @@ asm void fn_805266C0(void)
     stw r3, 0x18(r31)
     li r4, 0x1
     bl atn_Task_setActive
-    b lbl_fn_805266C0_0000066C
+    b lbl_avatar_custom_setOption_0000066C
     lis r4, lbl_8075C6C4@ha
     mr r3, r6
     addi r4, r4, lbl_8075C6C4@l
@@ -520,7 +520,7 @@ asm void fn_805266C0(void)
     stw r3, 0x18(r31)
     li r4, 0x1
     bl atn_Task_setActive
-    b lbl_fn_805266C0_0000066C
+    b lbl_avatar_custom_setOption_0000066C
     lis r4, lbl_8075C6C4@ha
     mr r3, r6
     addi r4, r4, lbl_8075C6C4@l
@@ -530,7 +530,7 @@ asm void fn_805266C0(void)
     stw r3, 0x18(r31)
     li r4, 0x1
     bl atn_Task_setActive
-    b lbl_fn_805266C0_0000066C
+    b lbl_avatar_custom_setOption_0000066C
     lis r4, lbl_8075C6C4@ha
     mr r3, r6
     addi r4, r4, lbl_8075C6C4@l
@@ -540,7 +540,7 @@ asm void fn_805266C0(void)
     stw r3, 0x18(r31)
     li r4, 0x1
     bl atn_Task_setActive
-    b lbl_fn_805266C0_0000066C
+    b lbl_avatar_custom_setOption_0000066C
     lis r4, lbl_8075C6C4@ha
     mr r3, r6
     addi r4, r4, lbl_8075C6C4@l
@@ -550,7 +550,7 @@ asm void fn_805266C0(void)
     stw r3, 0x18(r31)
     li r4, 0x1
     bl atn_Task_setActive
-    b lbl_fn_805266C0_0000066C
+    b lbl_avatar_custom_setOption_0000066C
     lis r4, lbl_8075C6C4@ha
     mr r3, r6
     addi r4, r4, lbl_8075C6C4@l
@@ -560,7 +560,7 @@ asm void fn_805266C0(void)
     stw r3, 0x18(r31)
     li r4, 0x1
     bl atn_Task_setActive
-    b lbl_fn_805266C0_0000066C
+    b lbl_avatar_custom_setOption_0000066C
     lis r4, lbl_8075C6C4@ha
     mr r3, r6
     addi r4, r4, lbl_8075C6C4@l
@@ -570,7 +570,7 @@ asm void fn_805266C0(void)
     stw r3, 0x18(r31)
     li r4, 0x1
     bl atn_Task_setActive
-    b lbl_fn_805266C0_0000066C
+    b lbl_avatar_custom_setOption_0000066C
     lis r4, lbl_8075C6C4@ha
     mr r3, r6
     addi r4, r4, lbl_8075C6C4@l
@@ -580,7 +580,7 @@ asm void fn_805266C0(void)
     stw r3, 0x18(r31)
     li r4, 0x1
     bl atn_Task_setActive
-lbl_fn_805266C0_0000066C:
+lbl_avatar_custom_setOption_0000066C:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0

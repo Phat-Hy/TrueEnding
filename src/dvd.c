@@ -188,7 +188,7 @@ void fn_805FD8D0(void);
 void dvd_execCommand(void);
 void fn_805FE860(void);
 void DVDInquiryAsync(void);
-void fn_805FEA30(void);
+void DVDGetCommandBlockStatus(void);
 void fn_805FEB00(void);
 void fn_805FEBA0(void);
 void fn_805FEBB0(void);
@@ -4822,7 +4822,7 @@ lbl_4134:
 }
 
 
-asm void fn_805FEA30(void) {
+asm void DVDGetCommandBlockStatus(void) {
     nofralloc
     stwu r1, -0x20(r1)
     mflr r0
@@ -4918,7 +4918,7 @@ lbl_4288:
     li r3, 0x0
     b lbl_42a4
 lbl_42a0:
-    bl fn_805FEA30
+    bl DVDGetCommandBlockStatus
 lbl_42a4:
     mr r30, r3
 lbl_42a8:

@@ -24,7 +24,7 @@ extern void node_createNamedChild(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800D8814(void);
+extern void vec4_set(void);
 extern void sound_playSpatialEffect(void);
 extern void cam_findTargetIndex(void);
 extern void fn_800F7250(void);
@@ -788,7 +788,7 @@ lbl_fn_8030AF10_0000095C:
     lfs f2, lbl_80884BB4
     fmr f3, f1
     lfs f4, lbl_80884BA8
-    bl fn_800D8814
+    bl vec4_set
     bl fn_800F8348
     mr r28, r3
     bl fn_800F7250
@@ -844,7 +844,7 @@ lbl_fn_8030AF10_0000095C:
     fmr f2, f1
     fmr f3, f1
     fmr f4, f1
-    bl fn_800D8814
+    bl vec4_set
     bl fn_800F8348
     mr r28, r3
     addi r3, r1, 0xa0
@@ -874,7 +874,7 @@ lbl_fn_8030AF10_0000095C:
     lfs f2, lbl_80884BAC
     fmr f4, f1
     fmr f3, f2
-    bl fn_800D8814
+    bl vec4_set
     bl fn_800F8348
     mr r28, r3
     addi r3, r1, 0x80
@@ -892,7 +892,7 @@ lbl_fn_8030AF10_0000095C:
     lfs f2, lbl_80884BAC
     fmr f4, f1
     fmr f3, f2
-    bl fn_800D8814
+    bl vec4_set
     bl fn_800F8348
     mr r28, r3
     addi r3, r1, 0x60
@@ -924,7 +924,7 @@ lbl_fn_8030AF10_00000B8C:
     fmr f2, f1
     fmr f3, f1
     fmr f4, f1
-    bl fn_800D8814
+    bl vec4_set
     xoris r0, r24, 0x8000
     stw r0, 0x1fc(r1)
     lfs f4, lbl_80884BA8

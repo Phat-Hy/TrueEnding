@@ -51,7 +51,7 @@ extern void thread_findAndNotifySlot(void);
 extern void thread_dispatchToQueue(void);
 extern void fn_80316F9C(void);
 extern void fn_803D6FEC(void);
-extern void fn_803D71C4(void);
+extern void gfx_getDevice(void);
 extern void fn_803D71CC(void);
 extern void fn_804A83E4(void);
 extern void fn_804A88C8(void);
@@ -197,13 +197,13 @@ lbl_fn_804ABA2C_00000048:
     addi r3, r28, 0x640
     bl fn_804ABEE4
     mr r26, r3
-    bl fn_803D71C4
+    bl gfx_getDevice
     mr r4, r26
     bl fn_80071D74
-    bl fn_803D71C4
+    bl gfx_getDevice
     bl fn_804A9E84
     mr r26, r3
-    bl fn_803D71C4
+    bl gfx_getDevice
     bl fn_804A9E8C
     mr r27, r3
     bl sys_getMainManager
@@ -215,7 +215,7 @@ lbl_fn_804ABA2C_00000048:
     mr r3, r29
     li r4, 0x1
     bl fn_800C0508
-    bl fn_803D71C4
+    bl gfx_getDevice
     subi r4, r26, 0x100
     subi r5, r27, 0x100
     srwi r0, r4, 31
@@ -250,9 +250,9 @@ lbl_fn_804ABA2C_00000048:
     mtctr r12
     bctrl
 lbl_fn_804ABA2C_00000144:
-    bl fn_803D71C4
+    bl gfx_getDevice
     bl seq_stepPlaybackTimer
-    bl fn_803D71C4
+    bl gfx_getDevice
     bl fn_800760D0
     bl fn_804ABF20
     bl fn_804ABF14
@@ -297,9 +297,9 @@ lbl_fn_804ABA2C_00000144:
     li r4, 0x0
     bl GXCopyTex
     bl __GXFlushPixelEngine
-    bl fn_803D71C4
+    bl gfx_getDevice
     bl gx_drawScreenQuad
-    bl fn_803D71C4
+    bl gfx_getDevice
     li r4, 0x0
     bl fn_804ABF28
     li r3, 0x1
@@ -330,7 +330,7 @@ lbl_fn_804ABA2C_00000144:
     bl fn_804ABF44
     bl fn_804ABF40
     mr r27, r3
-    bl fn_803D71C4
+    bl gfx_getDevice
     mr r4, r27
     li r5, 0x0
     bl seq_bindSlotResource
@@ -422,7 +422,7 @@ lbl_fn_804ABA2C_00000144:
     addi r3, r1, 0x120
     li r5, -0x1
     bl fn_804ABF4C
-    bl fn_803D71C4
+    bl gfx_getDevice
     li r4, 0x1
     bl fn_804ABF28
     addi r3, r1, 0x84
@@ -444,7 +444,7 @@ lbl_fn_804ABA2C_00000144:
     bl atn_ComDrawTextureMask_execute
     bl fn_804ABF20
     bl fn_804ABF14
-    bl fn_803D71C4
+    bl gfx_getDevice
     bl gx_drawScreenQuad
     mr r3, r31
     mr r4, r30
@@ -455,7 +455,7 @@ lbl_fn_804ABA2C_00000144:
     addi r3, r1, 0x140
     bl fn_804ABEE4
     mr r28, r3
-    bl fn_803D71C4
+    bl gfx_getDevice
     mr r4, r28
     bl fn_80071D68
     addi r3, r1, 0x140
@@ -579,7 +579,7 @@ asm void fn_804ABF84(void)
     addi r3, r1, 0x38
     addi r4, r26, 0x640
     bl fn_804AB79C
-    bl fn_803D71C4
+    bl gfx_getDevice
     bl fn_803D71CC
     xoris r3, r3, 0x8000
     lis r0, 0x4330
@@ -593,7 +593,7 @@ asm void fn_804ABF84(void)
     fsubs f2, f2, f3
     fmuls f1, f1, f2
     fdivs f30, f1, f0
-    bl fn_803D71C4
+    bl gfx_getDevice
     bl fn_80076FF8
     lfs f0, lbl_80887288
     fmr f31, f1
@@ -642,12 +642,12 @@ asm void fn_804ABF84(void)
     addi r3, r1, 0x38
     bl fn_804ABEE4
     mr r31, r3
-    bl fn_803D71C4
+    bl gfx_getDevice
     mr r4, r31
     bl fn_80071D74
-    bl fn_803D71C4
+    bl gfx_getDevice
     bl fn_804A9E84
-    bl fn_803D71C4
+    bl gfx_getDevice
     bl fn_804A9E8C
     bl sys_getMainManager
     li r4, 0x10
@@ -709,7 +709,7 @@ lbl_fn_804ABF84_00000758:
     addi r4, r31, 0x167
     li r5, 0x0
     bl fn_80093D98
-    bl fn_803D71C4
+    bl gfx_getDevice
     li r4, 0xb
     li r5, 0x0
     bl gx_setRenderStateParam
@@ -719,7 +719,7 @@ lbl_fn_804ABF84_00000758:
     lwz r12, 0x10(r12)
     mtctr r12
     bctrl
-    bl fn_803D71C4
+    bl gfx_getDevice
     li r4, 0xb
     li r5, 0x3
     bl gx_setRenderStateParam
@@ -807,9 +807,9 @@ lbl_fn_804ABF84_00000908:
     bl area_getAreaId
     cmplw r28, r3
     blt lbl_fn_804ABF84_00000898
-    bl fn_803D71C4
+    bl gfx_getDevice
     bl seq_stepPlaybackTimer
-    bl fn_803D71C4
+    bl gfx_getDevice
     bl fn_800760D0
     mr r3, r30
     mr r4, r29
@@ -820,7 +820,7 @@ lbl_fn_804ABF84_00000908:
     addi r3, r1, 0x22c
     bl fn_804ABEE4
     mr r31, r3
-    bl fn_803D71C4
+    bl gfx_getDevice
     mr r4, r31
     bl fn_80071D68
     addi r3, r1, 0x38

@@ -5074,7 +5074,7 @@
 /* 8011BE28 00116488  38 A0 00 08 */	li r5, 0x8
 /* 8011BE2C 0011648C  4B EE A8 1D */	bl memset
 /* 8011BE30 00116490  38 7E 00 0C */	addi r3, r30, 0xc
-/* 8011BE34 00116494  48 00 95 69 */	bl fn_8012539C
+/* 8011BE34 00116494  48 00 95 69 */	bl enemy_resetTargetTracker
 /* 8011BE38 00116498  7F C3 F3 78 */	mr r3, r30
 /* 8011BE3C 0011649C  83 E1 00 0C */	lwz r31, 0xc(r1)
 /* 8011BE40 001164A0  83 C1 00 08 */	lwz r30, 0x8(r1)
@@ -5138,9 +5138,9 @@
 /* 8011BF04 00116564  90 A3 00 E8 */	stw r5, 0xe8(r3)
 /* 8011BF08 00116568  90 A3 00 EC */	stw r5, 0xec(r3)
 /* 8011BF0C 0011656C  38 63 00 0C */	addi r3, r3, 0xc
-/* 8011BF10 00116570  48 00 94 8D */	bl fn_8012539C
+/* 8011BF10 00116570  48 00 94 8D */	bl enemy_resetTargetTracker
 /* 8011BF14 00116574  38 7F 00 0C */	addi r3, r31, 0xc
-/* 8011BF18 00116578  48 00 94 85 */	bl fn_8012539C
+/* 8011BF18 00116578  48 00 94 85 */	bl enemy_resetTargetTracker
 /* 8011BF1C 0011657C  80 1F 00 D8 */	lwz r0, 0xd8(r31)
 /* 8011BF20 00116580  60 00 00 04 */	ori r0, r0, 0x4
 /* 8011BF24 00116584  90 1F 00 D8 */	stw r0, 0xd8(r31)
@@ -5201,9 +5201,9 @@
 /* 8011BFD8 00116638  93 E3 00 E8 */	stw r31, 0xe8(r3)
 /* 8011BFDC 0011663C  93 E3 00 EC */	stw r31, 0xec(r3)
 /* 8011BFE0 00116640  38 63 00 0C */	addi r3, r3, 0xc
-/* 8011BFE4 00116644  48 00 93 B9 */	bl fn_8012539C
+/* 8011BFE4 00116644  48 00 93 B9 */	bl enemy_resetTargetTracker
 /* 8011BFE8 00116648  38 7E 00 0C */	addi r3, r30, 0xc
-/* 8011BFEC 0011664C  48 00 93 B1 */	bl fn_8012539C
+/* 8011BFEC 0011664C  48 00 93 B1 */	bl enemy_resetTargetTracker
 /* 8011BFF0 00116650  80 1E 00 D8 */	lwz r0, 0xd8(r30)
 /* 8011BFF4 00116654  93 FE 00 B4 */	stw r31, 0xb4(r30)
 /* 8011BFF8 00116658  60 00 00 04 */	ori r0, r0, 0x4
@@ -5240,7 +5240,7 @@
 /* 8011C064 001166C4  90 A3 00 E8 */	stw r5, 0xe8(r3)
 /* 8011C068 001166C8  90 A3 00 EC */	stw r5, 0xec(r3)
 /* 8011C06C 001166CC  38 63 00 0C */	addi r3, r3, 0xc
-/* 8011C070 001166D0  48 00 93 2C */	b fn_8012539C
+/* 8011C070 001166D0  48 00 93 2C */	b enemy_resetTargetTracker
 .endfn fn_8011C044
 
 # .text:0x4968 | 0x8011C074 | size: 0x260
@@ -5263,7 +5263,7 @@
 /* 8011C0B0 00116710  90 C3 00 E8 */	stw r6, 0xe8(r3)
 /* 8011C0B4 00116714  90 C3 00 EC */	stw r6, 0xec(r3)
 /* 8011C0B8 00116718  38 63 00 0C */	addi r3, r3, 0xc
-/* 8011C0BC 0011671C  48 00 92 E1 */	bl fn_8012539C
+/* 8011C0BC 0011671C  48 00 92 E1 */	bl enemy_resetTargetTracker
 /* 8011C0C0 00116720  A8 1E 00 E2 */	lha r0, 0xe2(r30)
 /* 8011C0C4 00116724  2C 00 00 04 */	cmpwi r0, 0x4
 /* 8011C0C8 00116728  41 82 00 20 */	beq .L_8011C0E8

@@ -102,7 +102,7 @@ void fn_80626F10(void);
 void fn_806270D0(void);
 void fn_80627180(void);
 void fn_806272C0(void);
-void fn_80627400(void);
+void scapi_dequeueBuffer(void);
 void fn_806274A0(void);
 void *fn_80627570(void *p);
 void fn_80627580(void);
@@ -3302,7 +3302,7 @@ lbl_fn_806272C0_00002A64:
     blr
 }
 
-asm void fn_80627400(void)
+asm void scapi_dequeueBuffer(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -3313,27 +3313,27 @@ asm void fn_80627400(void)
     mr r30, r3
     bl fn_80628270
     cmpwi r30, 0x0
-    beq lbl_fn_80627400_00002AB0
+    beq lbl_scapi_dequeueBuffer_00002AB0
     lhz r0, 0x8(r30)
     cmpwi r0, 0x0
-    bne lbl_fn_80627400_00002ABC
-lbl_fn_80627400_00002AB0:
+    bne lbl_scapi_dequeueBuffer_00002ABC
+lbl_scapi_dequeueBuffer_00002AB0:
     bl hcis_restoreInterrupts
     li r3, 0x0
-    b lbl_fn_80627400_00002B08
-lbl_fn_80627400_00002ABC:
+    b lbl_scapi_dequeueBuffer_00002B08
+lbl_scapi_dequeueBuffer_00002ABC:
     lwz r31, 0x0(r30)
     lwz r3, -0x8(r31)
     cmpwi r3, 0x0
-    beq lbl_fn_80627400_00002AD8
+    beq lbl_scapi_dequeueBuffer_00002AD8
     addi r0, r3, 0x8
     stw r0, 0x0(r30)
-    b lbl_fn_80627400_00002AE4
-lbl_fn_80627400_00002AD8:
+    b lbl_scapi_dequeueBuffer_00002AE4
+lbl_scapi_dequeueBuffer_00002AD8:
     li r0, 0x0
     stw r0, 0x0(r30)
     stw r0, 0x4(r30)
-lbl_fn_80627400_00002AE4:
+lbl_scapi_dequeueBuffer_00002AE4:
     lhz r4, 0x8(r30)
     li r3, 0x0
     li r0, 0x1
@@ -3343,7 +3343,7 @@ lbl_fn_80627400_00002AE4:
     stb r0, -0x2(r31)
     bl hcis_restoreInterrupts
     mr r3, r31
-lbl_fn_80627400_00002B08:
+lbl_scapi_dequeueBuffer_00002B08:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -3368,7 +3368,7 @@ asm void fn_806274A0(void)
     bne lbl_fn_806274A0_00002B5C
     bl hcis_restoreInterrupts
     mr r3, r30
-    bl fn_80627400
+    bl scapi_dequeueBuffer
     b lbl_fn_806274A0_00002BCC
 lbl_fn_806274A0_00002B5C:
     subi r5, r31, 0x8

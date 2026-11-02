@@ -47,7 +47,7 @@ extern void fn_805F34A0(void);
 extern void fn_805F3550(void);
 extern void __OSReturnToMenuForError(void);
 extern void fn_805FE860(void);
-extern void fn_805FEA30(void);
+extern void DVDGetCommandBlockStatus(void);
 extern void fn_805FEBA0(void);
 extern void fn_805FEBB0(void);
 extern void fn_805FF240(void);
@@ -221,18 +221,18 @@ lbl_fn_805EF630_000001AC:
     b lbl_fn_805EF630_00000214
 lbl_fn_805EF630_000001F0:
     addi r3, r1, 0x120
-    bl fn_805FEA30
+    bl DVDGetCommandBlockStatus
     cmpwi r3, 0x2
     bgt lbl_fn_805EF630_00000210
     addi r3, r1, 0x120
-    bl fn_805FEA30
+    bl DVDGetCommandBlockStatus
     cmpwi r3, 0x0
     bge lbl_fn_805EF630_00000214
 lbl_fn_805EF630_00000210:
     bl __OSReturnToMenuForError
 lbl_fn_805EF630_00000214:
     addi r3, r1, 0x120
-    bl fn_805FEA30
+    bl DVDGetCommandBlockStatus
     cmpwi r3, 0x0
     bne lbl_fn_805EF630_000001F0
     lis r3, 0x8000
@@ -255,18 +255,18 @@ lbl_fn_805EF630_00000248:
     b lbl_fn_805EF630_00000288
 lbl_fn_805EF630_00000264:
     addi r3, r1, 0x150
-    bl fn_805FEA30
+    bl DVDGetCommandBlockStatus
     cmpwi r3, 0x2
     bgt lbl_fn_805EF630_00000284
     addi r3, r1, 0x150
-    bl fn_805FEA30
+    bl DVDGetCommandBlockStatus
     cmpwi r3, 0x0
     bge lbl_fn_805EF630_00000288
 lbl_fn_805EF630_00000284:
     bl __OSReturnToMenuForError
 lbl_fn_805EF630_00000288:
     addi r3, r1, 0x150
-    bl fn_805FEA30
+    bl DVDGetCommandBlockStatus
     cmpwi r3, 0x0
     bne lbl_fn_805EF630_00000264
     lwz r6, lbl_8087FBFC
@@ -293,18 +293,18 @@ lbl_fn_805EF630_000002A8:
     b lbl_fn_805EF630_00000310
 lbl_fn_805EF630_000002EC:
     addi r3, r1, 0x180
-    bl fn_805FEA30
+    bl DVDGetCommandBlockStatus
     cmpwi r3, 0x2
     bgt lbl_fn_805EF630_0000030C
     addi r3, r1, 0x180
-    bl fn_805FEA30
+    bl DVDGetCommandBlockStatus
     cmpwi r3, 0x0
     bge lbl_fn_805EF630_00000310
 lbl_fn_805EF630_0000030C:
     bl __OSReturnToMenuForError
 lbl_fn_805EF630_00000310:
     addi r3, r1, 0x180
-    bl fn_805FEA30
+    bl DVDGetCommandBlockStatus
     cmpwi r3, 0x0
     bne lbl_fn_805EF630_000002EC
     lis r3, 0x8000
@@ -330,18 +330,18 @@ lbl_fn_805EF630_00000344:
     b lbl_fn_805EF630_00000390
 lbl_fn_805EF630_0000036C:
     addi r3, r1, 0x1b0
-    bl fn_805FEA30
+    bl DVDGetCommandBlockStatus
     cmpwi r3, 0x2
     bgt lbl_fn_805EF630_0000038C
     addi r3, r1, 0x1b0
-    bl fn_805FEA30
+    bl DVDGetCommandBlockStatus
     cmpwi r3, 0x0
     bge lbl_fn_805EF630_00000390
 lbl_fn_805EF630_0000038C:
     bl __OSReturnToMenuForError
 lbl_fn_805EF630_00000390:
     addi r3, r1, 0x1b0
-    bl fn_805FEA30
+    bl DVDGetCommandBlockStatus
     cmpwi r3, 0x0
     bne lbl_fn_805EF630_0000036C
     lwz r4, 0x14(r31)
@@ -390,18 +390,18 @@ lbl_fn_805EF630_00000400:
     b lbl_fn_805EF630_00000468
 lbl_fn_805EF630_00000444:
     addi r3, r1, 0xf0
-    bl fn_805FEA30
+    bl DVDGetCommandBlockStatus
     cmpwi r3, 0x2
     bgt lbl_fn_805EF630_00000464
     addi r3, r1, 0xf0
-    bl fn_805FEA30
+    bl DVDGetCommandBlockStatus
     cmpwi r3, 0x0
     bge lbl_fn_805EF630_00000468
 lbl_fn_805EF630_00000464:
     bl __OSReturnToMenuForError
 lbl_fn_805EF630_00000468:
     addi r3, r1, 0xf0
-    bl fn_805FEA30
+    bl DVDGetCommandBlockStatus
     cmpwi r3, 0x0
     bne lbl_fn_805EF630_00000444
     lis r3, 0x8000
@@ -457,18 +457,18 @@ lbl_fn_805EF630_0000050C:
     b lbl_fn_805EF630_00000558
 lbl_fn_805EF630_00000534:
     addi r3, r1, 0xc0
-    bl fn_805FEA30
+    bl DVDGetCommandBlockStatus
     cmpwi r3, 0x2
     bgt lbl_fn_805EF630_00000554
     addi r3, r1, 0xc0
-    bl fn_805FEA30
+    bl DVDGetCommandBlockStatus
     cmpwi r3, 0x0
     bge lbl_fn_805EF630_00000558
 lbl_fn_805EF630_00000554:
     bl __OSReturnToMenuForError
 lbl_fn_805EF630_00000558:
     addi r3, r1, 0xc0
-    bl fn_805FEA30
+    bl DVDGetCommandBlockStatus
     cmpwi r3, 0x0
     bne lbl_fn_805EF630_00000534
 lbl_fn_805EF630_00000568:
@@ -535,18 +535,18 @@ lbl_fn_805EF630_00000614:
     b lbl_fn_805EF630_00000678
 lbl_fn_805EF630_00000654:
     addi r3, r1, 0x90
-    bl fn_805FEA30
+    bl DVDGetCommandBlockStatus
     cmpwi r3, 0x2
     bgt lbl_fn_805EF630_00000674
     addi r3, r1, 0x90
-    bl fn_805FEA30
+    bl DVDGetCommandBlockStatus
     cmpwi r3, 0x0
     bge lbl_fn_805EF630_00000678
 lbl_fn_805EF630_00000674:
     bl __OSReturnToMenuForError
 lbl_fn_805EF630_00000678:
     addi r3, r1, 0x90
-    bl fn_805FEA30
+    bl DVDGetCommandBlockStatus
     cmpwi r3, 0x0
     bne lbl_fn_805EF630_00000654
     lis r3, 0x8000
@@ -575,18 +575,18 @@ lbl_fn_805EF630_000006AC:
     b lbl_fn_805EF630_00000704
 lbl_fn_805EF630_000006E0:
     addi r3, r1, 0x60
-    bl fn_805FEA30
+    bl DVDGetCommandBlockStatus
     cmpwi r3, 0x2
     bgt lbl_fn_805EF630_00000700
     addi r3, r1, 0x60
-    bl fn_805FEA30
+    bl DVDGetCommandBlockStatus
     cmpwi r3, 0x0
     bge lbl_fn_805EF630_00000704
 lbl_fn_805EF630_00000700:
     bl __OSReturnToMenuForError
 lbl_fn_805EF630_00000704:
     addi r3, r1, 0x60
-    bl fn_805FEA30
+    bl DVDGetCommandBlockStatus
     cmpwi r3, 0x0
     bne lbl_fn_805EF630_000006E0
     lwz r4, 0x18(r31)

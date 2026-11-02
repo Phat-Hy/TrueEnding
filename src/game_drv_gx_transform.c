@@ -72,7 +72,7 @@ void fn_805D9550(void *p, f32 a);
 void fn_805D9560(void *p, f32 val);
 void fn_805D9570(void *p, f32 val);
 f32 gx_transform_getViewportWidth(void *p);
-f32 fn_805D9590(void *p);
+f32 gx_transform_getViewportHeight(void *p);
 void fn_805D95A0(void);
 void fn_805D9830(void);
 void fn_805D9B30(void);
@@ -624,7 +624,7 @@ f32 gx_transform_getViewportWidth(void *p)
     return *(f32 *)((u8 *)p + 0x2c);
 }
 
-f32 fn_805D9590(void *p)
+f32 gx_transform_getViewportHeight(void *p)
 {
     return *(f32 *)((u8 *)p + 0x30);
 }
@@ -2022,7 +2022,7 @@ lbl_fn_805DA800_000019D0:
     bl fn_805DB3D0
     fmr f31, f1
     mr r3, r31
-    bl fn_805D9590
+    bl gx_transform_getViewportHeight
     fadds f2, f1, f31
     mr r3, r31
     fmr f1, f30

@@ -45,7 +45,7 @@ extern void fn_80522714(void);
 extern void fn_80522768(void);
 extern void fn_80526660(void);
 extern void fn_80526694(void);
-extern void fn_805266C0(void);
+extern void avatar_custom_setOption(void);
 extern void fn_80530D8C(void);
 extern void PSVECNormalize(void);
 extern void runtime_registerStaticObject(void);
@@ -1683,7 +1683,7 @@ lbl_fn_80521E84_000015AC:
     addi r3, r31, 0xf0
     li r4, 0x0
     li r5, 0x4
-    bl fn_805266C0
+    bl avatar_custom_setOption
     lis r29, lbl_8075C6C4@ha
     mr r3, r31
     addi r29, r29, lbl_8075C6C4@l
@@ -1718,12 +1718,12 @@ lbl_fn_80521E84_00001634:
     addi r3, r31, 0xfc
     li r4, 0x0
     li r5, 0x7
-    bl fn_805266C0
+    bl avatar_custom_setOption
     mr r6, r31
     addi r3, r31, 0xfc
     li r4, 0x1
     li r5, 0x9
-    bl fn_805266C0
+    bl avatar_custom_setOption
     lis r29, lbl_8075C6C4@ha
     mr r3, r31
     addi r29, r29, lbl_8075C6C4@l
@@ -1758,32 +1758,32 @@ lbl_fn_80521E84_000016D0:
     addi r3, r31, 0x108
     li r4, 0x0
     li r5, 0xb
-    bl fn_805266C0
+    bl avatar_custom_setOption
     mr r6, r31
     addi r3, r31, 0x108
     li r4, 0x1
     li r5, 0xb
-    bl fn_805266C0
+    bl avatar_custom_setOption
     mr r6, r31
     addi r3, r31, 0x108
     li r4, 0x2
     li r5, 0xb
-    bl fn_805266C0
+    bl avatar_custom_setOption
     mr r6, r31
     addi r3, r31, 0x108
     li r4, 0x3
     li r5, 0x3
-    bl fn_805266C0
+    bl avatar_custom_setOption
     mr r6, r31
     addi r3, r31, 0x108
     li r4, 0x4
     li r5, 0x5
-    bl fn_805266C0
+    bl avatar_custom_setOption
     mr r6, r31
     addi r3, r31, 0x108
     li r4, 0x5
     li r5, 0x5
-    bl fn_805266C0
+    bl avatar_custom_setOption
     lis r29, lbl_8075C6C4@ha
     mr r3, r31
     addi r29, r29, lbl_8075C6C4@l
@@ -1818,17 +1818,17 @@ lbl_fn_80521E84_000017BC:
     addi r3, r31, 0x114
     li r4, 0x0
     li r5, 0xb
-    bl fn_805266C0
+    bl avatar_custom_setOption
     mr r6, r31
     addi r3, r31, 0x114
     li r4, 0x1
     li r5, 0x5
-    bl fn_805266C0
+    bl avatar_custom_setOption
     mr r6, r31
     addi r3, r31, 0x114
     li r4, 0x2
     li r5, 0x5
-    bl fn_805266C0
+    bl avatar_custom_setOption
     lis r29, lbl_8075C6C4@ha
     mr r3, r31
     addi r29, r29, lbl_8075C6C4@l
@@ -1863,42 +1863,42 @@ lbl_fn_80521E84_0000186C:
     addi r3, r31, 0x120
     li r4, 0x0
     li r5, 0x6
-    bl fn_805266C0
+    bl avatar_custom_setOption
     mr r6, r31
     addi r3, r31, 0x120
     li r4, 0x1
     li r5, 0x3
-    bl fn_805266C0
+    bl avatar_custom_setOption
     mr r6, r31
     addi r3, r31, 0x120
     li r4, 0x2
     li r5, 0x3
-    bl fn_805266C0
+    bl avatar_custom_setOption
     mr r6, r31
     addi r3, r31, 0x120
     li r4, 0x3
     li r5, 0x3
-    bl fn_805266C0
+    bl avatar_custom_setOption
     mr r6, r31
     addi r3, r31, 0x120
     li r4, 0x4
     li r5, 0x3
-    bl fn_805266C0
+    bl avatar_custom_setOption
     mr r6, r31
     addi r3, r31, 0x120
     li r4, 0x5
     li r5, 0x3
-    bl fn_805266C0
+    bl avatar_custom_setOption
     mr r6, r31
     addi r3, r31, 0x120
     li r4, 0x6
     li r5, 0x6
-    bl fn_805266C0
+    bl avatar_custom_setOption
     mr r6, r31
     addi r3, r31, 0x120
     li r4, 0x7
     li r5, 0x3
-    bl fn_805266C0
+    bl avatar_custom_setOption
     lis r29, lbl_8075C6C4@ha
     mr r3, r31
     addi r29, r29, lbl_8075C6C4@l
@@ -1933,27 +1933,27 @@ lbl_fn_80521E84_00001980:
     addi r3, r31, 0x12c
     li r4, 0x0
     li r5, 0xb
-    bl fn_805266C0
+    bl avatar_custom_setOption
     mr r6, r31
     addi r3, r31, 0x12c
     li r4, 0x1
     li r5, 0xb
-    bl fn_805266C0
+    bl avatar_custom_setOption
     mr r6, r31
     addi r3, r31, 0x12c
     li r4, 0x2
     li r5, 0xb
-    bl fn_805266C0
+    bl avatar_custom_setOption
     mr r6, r31
     addi r3, r31, 0x12c
     li r4, 0x3
     li r5, 0x2
-    bl fn_805266C0
+    bl avatar_custom_setOption
     mr r6, r31
     addi r3, r31, 0x12c
     li r4, 0x4
     li r5, 0x8
-    bl fn_805266C0
+    bl avatar_custom_setOption
     lis r29, lbl_8075C6C4@ha
     mr r3, r31
     addi r29, r29, lbl_8075C6C4@l

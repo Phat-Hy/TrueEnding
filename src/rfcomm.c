@@ -12,7 +12,7 @@ extern void fn_80626AA0(void);
 extern void scapi_getConfigItem(void);
 extern void scapi_cleanupContext(void);
 extern void fn_80627180(void);
-extern void fn_80627400(void);
+extern void scapi_dequeueBuffer(void);
 extern void bta_sys_logEvent(void);
 extern void bta_sys_log(void);
 extern void bta_sys_traceDebug(void);
@@ -1521,7 +1521,7 @@ asm void fn_8064945C(void)
     b lbl_fn_8064945C_00001218
 lbl_fn_8064945C_000011AC:
     addi r3, r26, 0x18
-    bl fn_80627400
+    bl scapi_dequeueBuffer
     cmpwi r3, 0x0
     mr r27, r3
     beq lbl_fn_8064945C_00001210
@@ -1807,7 +1807,7 @@ lbl_fn_80649864_00001590:
     bl scapi_cleanupContext
 lbl_fn_80649864_00001594:
     addi r3, r31, 0x30
-    bl fn_80627400
+    bl scapi_dequeueBuffer
     cmpwi r3, 0x0
     bne lbl_fn_80649864_00001590
     li r0, 0x0
@@ -1817,7 +1817,7 @@ lbl_fn_80649864_000015B0:
     bl scapi_cleanupContext
 lbl_fn_80649864_000015B4:
     addi r3, r31, 0x18
-    bl fn_80627400
+    bl scapi_dequeueBuffer
     cmpwi r3, 0x0
     bne lbl_fn_80649864_000015B0
     lbz r0, 0x68(r31)
@@ -7185,7 +7185,7 @@ lbl_fn_8064E128_00005E84:
     bl scapi_cleanupContext
 lbl_fn_8064E128_00005E88:
     addi r3, r31, 0x18
-    bl fn_80627400
+    bl scapi_dequeueBuffer
     cmpwi r3, 0x0
     bne lbl_fn_8064E128_00005E84
     mr r3, r31
@@ -7614,7 +7614,7 @@ asm void fn_8064E6C8(void)
     b lbl_fn_8064E6C8_00006420
 lbl_fn_8064E6C8_00006404:
     addi r3, r31, 0x18
-    bl fn_80627400
+    bl scapi_dequeueBuffer
     cmpwi r3, 0x0
     mr r4, r3
     beq lbl_fn_8064E6C8_0000642C

@@ -96,7 +96,7 @@ extern u32 lbl_80881710;
 /* Function declarations */
 void fn_801151A4(void);
 u32 fn_801156BC(void);
-u32 fn_801156C4(void);
+u32 actor_getStreamPipe(void);
 u32 fn_801156CC(void *p);
 void *fn_801156D8(void *p);
 void fn_801156E0(void);
@@ -472,7 +472,7 @@ u32 fn_801156BC(void)
     return lbl_8087EF70;
 }
 
-u32 fn_801156C4(void)
+u32 actor_getStreamPipe(void)
 {
     return lbl_8087F9C0;
 }
@@ -1464,10 +1464,10 @@ lbl_fn_801162A4_000012D0:
     fadds f0, f0, f1
     stfs f0, 0x14(r1)
 lbl_fn_801162A4_0000135C:
-    bl fn_801156C4
+    bl actor_getStreamPipe
     cmpwi r3, 0x0
     beq lbl_fn_801162A4_0000138C
-    bl fn_801156C4
+    bl actor_getStreamPipe
     bl fn_801156D8
     bl fn_801156F8
     cmpwi r3, 0x0
@@ -1514,10 +1514,10 @@ lbl_fn_801162A4_000013CC:
     fsubs f1, f2, f1
     fdivs f0, f1, f0
     stfs f0, 0x14(r1)
-    bl fn_801156C4
+    bl actor_getStreamPipe
     cmpwi r3, 0x0
     beq lbl_fn_801162A4_00001430
-    bl fn_801156C4
+    bl actor_getStreamPipe
     bl fn_801156D8
     bl fn_801156E0
     lfs f0, 0x14(r1)
@@ -1551,10 +1551,10 @@ lbl_fn_801162A4_00001440:
     fadds f0, f0, f1
     stfs f0, 0x10(r1)
 lbl_fn_801162A4_00001494:
-    bl fn_801156C4
+    bl actor_getStreamPipe
     cmpwi r3, 0x0
     beq lbl_fn_801162A4_000014C4
-    bl fn_801156C4
+    bl actor_getStreamPipe
     bl fn_801156D8
     bl fn_801156CC
     cmpwi r3, 0x0
@@ -1601,10 +1601,10 @@ lbl_fn_801162A4_00001504:
     fsubs f1, f2, f1
     fdivs f0, f1, f0
     stfs f0, 0x10(r1)
-    bl fn_801156C4
+    bl actor_getStreamPipe
     cmpwi r3, 0x0
     beq lbl_fn_801162A4_00001568
-    bl fn_801156C4
+    bl actor_getStreamPipe
     bl fn_801156D8
     bl fn_801156E0
     lfs f0, 0x10(r1)

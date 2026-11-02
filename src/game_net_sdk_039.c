@@ -70,7 +70,7 @@ void fn_806F1E10(void);
 void fn_806F1E90(void);
 void fn_806F1F90(void);
 void fn_806F2010(void);
-void fn_806F2070(void);
+void ghiAppendDataToBuffer(void);
 void fn_806F21E0(void);
 void fn_806F23C0(void);
 void fn_806F2470(void);
@@ -1774,7 +1774,7 @@ lbl_fn_806F2010_000017B4:
     blr
 }
 
-asm void fn_806F2070(void)
+asm void ghiAppendDataToBuffer(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -1786,38 +1786,38 @@ asm void fn_806F2070(void)
     mr r31, r3
     mr r27, r4
     mr r28, r5
-    bne lbl_fn_806F2070_000017F8
+    bne lbl_ghiAppendDataToBuffer_000017F8
     li r3, 0x0
-    b lbl_fn_806F2070_00001920
-lbl_fn_806F2070_000017F8:
+    b lbl_ghiAppendDataToBuffer_00001920
+lbl_ghiAppendDataToBuffer_000017F8:
     cmpwi r4, 0x0
-    bne lbl_fn_806F2070_00001808
+    bne lbl_ghiAppendDataToBuffer_00001808
     li r3, 0x0
-    b lbl_fn_806F2070_00001920
-lbl_fn_806F2070_00001808:
+    b lbl_ghiAppendDataToBuffer_00001920
+lbl_ghiAppendDataToBuffer_00001808:
     cmpwi cr1, r5, 0x0
-    bge cr1, lbl_fn_806F2070_00001818
+    bge cr1, lbl_ghiAppendDataToBuffer_00001818
     li r3, 0x0
-    b lbl_fn_806F2070_00001920
-lbl_fn_806F2070_00001818:
+    b lbl_ghiAppendDataToBuffer_00001920
+lbl_ghiAppendDataToBuffer_00001818:
     lwz r0, 0x20(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_806F2070_0000182C
+    beq lbl_ghiAppendDataToBuffer_0000182C
     li r3, 0x0
-    b lbl_fn_806F2070_00001920
-lbl_fn_806F2070_0000182C:
-    bne cr1, lbl_fn_806F2070_0000183C
+    b lbl_ghiAppendDataToBuffer_00001920
+lbl_ghiAppendDataToBuffer_0000182C:
+    bne cr1, lbl_ghiAppendDataToBuffer_0000183C
     mr r3, r27
     bl strlen
     mr r28, r3
-lbl_fn_806F2070_0000183C:
+lbl_ghiAppendDataToBuffer_0000183C:
     lwz r0, 0xc(r31)
     add r29, r0, r28
-    b lbl_fn_806F2070_000018E8
-lbl_fn_806F2070_00001848:
+    b lbl_ghiAppendDataToBuffer_000018E8
+lbl_ghiAppendDataToBuffer_00001848:
     lwz r0, 0x18(r31)
     cmpwi r0, 0x0
-    beq lbl_fn_806F2070_00001874
+    beq lbl_ghiAppendDataToBuffer_00001874
     lwz r4, 0x0(r31)
     li r5, 0x1
     li r0, 0x2
@@ -1825,45 +1825,45 @@ lbl_fn_806F2070_00001848:
     stw r5, 0x124(r4)
     lwz r4, 0x0(r31)
     stw r0, 0x40(r4)
-    b lbl_fn_806F2070_00001920
-lbl_fn_806F2070_00001874:
+    b lbl_ghiAppendDataToBuffer_00001920
+lbl_ghiAppendDataToBuffer_00001874:
     cmpwi r31, 0x0
     lwz r0, 0x14(r31)
-    bne lbl_fn_806F2070_00001888
+    bne lbl_ghiAppendDataToBuffer_00001888
     li r0, 0x0
-    b lbl_fn_806F2070_000018C4
-lbl_fn_806F2070_00001888:
+    b lbl_ghiAppendDataToBuffer_000018C4
+lbl_ghiAppendDataToBuffer_00001888:
     cmpwi r0, 0x0
-    bgt lbl_fn_806F2070_00001898
+    bgt lbl_ghiAppendDataToBuffer_00001898
     li r0, 0x0
-    b lbl_fn_806F2070_000018C4
-lbl_fn_806F2070_00001898:
+    b lbl_ghiAppendDataToBuffer_000018C4
+lbl_ghiAppendDataToBuffer_00001898:
     add r30, r3, r0
     lwz r3, 0x4(r31)
     mr r4, r30
     bl fn_806D7AA0
     cmpwi r3, 0x0
-    bne lbl_fn_806F2070_000018B8
+    bne lbl_ghiAppendDataToBuffer_000018B8
     li r0, 0x0
-    b lbl_fn_806F2070_000018C4
-lbl_fn_806F2070_000018B8:
+    b lbl_ghiAppendDataToBuffer_000018C4
+lbl_ghiAppendDataToBuffer_000018B8:
     stw r3, 0x4(r31)
     li r0, 0x1
     stw r30, 0x8(r31)
-lbl_fn_806F2070_000018C4:
+lbl_ghiAppendDataToBuffer_000018C4:
     cmpwi r0, 0x0
-    bne lbl_fn_806F2070_000018E8
+    bne lbl_ghiAppendDataToBuffer_000018E8
     lwz r4, 0x0(r31)
     li r0, 0x1
     li r3, 0x0
     stw r0, 0x124(r4)
     lwz r4, 0x0(r31)
     stw r0, 0x40(r4)
-    b lbl_fn_806F2070_00001920
-lbl_fn_806F2070_000018E8:
+    b lbl_ghiAppendDataToBuffer_00001920
+lbl_ghiAppendDataToBuffer_000018E8:
     lwz r3, 0x8(r31)
     cmpw r29, r3
-    bge lbl_fn_806F2070_00001848
+    bge lbl_ghiAppendDataToBuffer_00001848
     lwz r3, 0x4(r31)
     mr r4, r27
     lwz r0, 0xc(r31)
@@ -1875,7 +1875,7 @@ lbl_fn_806F2070_000018E8:
     lwz r4, 0x4(r31)
     li r3, 0x1
     stbx r0, r4, r29
-lbl_fn_806F2070_00001920:
+lbl_ghiAppendDataToBuffer_00001920:
     addi r11, r1, 0x20
     bl _restgpr_27
     lwz r0, 0x24(r1)
@@ -1930,7 +1930,7 @@ lbl_fn_806F21E0_000019C4:
     mr r3, r28
     mr r4, r29
     mr r5, r30
-    bl fn_806F2070
+    bl ghiAppendDataToBuffer
     b lbl_fn_806F21E0_00001AF8
 lbl_fn_806F21E0_000019D8:
     bne cr1, lbl_fn_806F21E0_000019E8
@@ -2037,7 +2037,7 @@ asm void fn_806F23C0(void)
     li r5, 0x0
     stw r30, 0x8(r1)
     mr r30, r3
-    bl fn_806F2070
+    bl ghiAppendDataToBuffer
     cmpwi r3, 0x0
     bne lbl_fn_806F23C0_00001B4C
     li r3, 0x0
@@ -2047,7 +2047,7 @@ lbl_fn_806F23C0_00001B4C:
     mr r3, r30
     addi r4, r4, lbl_807C5778@l
     li r5, 0x2
-    bl fn_806F2070
+    bl ghiAppendDataToBuffer
     cmpwi r3, 0x0
     bne lbl_fn_806F23C0_00001B70
     li r3, 0x0
@@ -2056,7 +2056,7 @@ lbl_fn_806F23C0_00001B70:
     mr r3, r30
     mr r4, r31
     li r5, 0x0
-    bl fn_806F2070
+    bl ghiAppendDataToBuffer
     cmpwi r3, 0x0
     bne lbl_fn_806F23C0_00001B90
     li r3, 0x0
@@ -2066,7 +2066,7 @@ lbl_fn_806F23C0_00001B90:
     mr r3, r30
     addi r4, r4, lbl_807C577C@l
     li r5, 0x2
-    bl fn_806F2070
+    bl ghiAppendDataToBuffer
     neg r0, r3
     or r0, r0, r3
     srwi r3, r0, 31
@@ -2188,7 +2188,7 @@ asm void fn_806F25B0(void)
     mr r3, r31
     addi r4, r1, 0x8
     li r5, 0x0
-    bl fn_806F2070
+    bl ghiAppendDataToBuffer
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     mtlr r0

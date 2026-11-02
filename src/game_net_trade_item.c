@@ -29,7 +29,7 @@ extern void fn_80112960(void);
 extern void fn_80113CCC(void);
 extern void fn_80114AA0(void);
 extern void fn_801156BC(void);
-extern void fn_801156C4(void);
+extern void actor_getStreamPipe(void);
 extern void actor_calcSpawnTransform(void);
 extern void actor_spawnActorWithId(void);
 extern void fn_8011F970(void);
@@ -486,7 +486,7 @@ lbl_fn_8052C10C_00000520:
     lwz r4, 0x1354(r31)
     lwz r5, 0x464(r31)
     bl fn_80513024
-    bl fn_801156C4
+    bl actor_getStreamPipe
     bl fn_8052C0EC
     stw r3, 0x1360(r31)
     mr r3, r31

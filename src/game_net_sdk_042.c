@@ -26,7 +26,7 @@ extern void fn_806D7B70(void);
 extern void net_socket_getLastError(void);
 extern void net_strdup(void);
 extern void net_getTimestampMs(void);
-extern void fn_806F2070(void);
+extern void ghiAppendDataToBuffer(void);
 extern void fn_806F2600(void);
 extern void fn_806F27E0(void);
 extern void fn_806F28C0(void);
@@ -313,7 +313,7 @@ lbl_fn_806F6CA0_00000318:
     lwz r5, 0x8(r1)
     mr r4, r28
     addi r3, r25, 0xc4
-    bl fn_806F2070
+    bl ghiAppendDataToBuffer
     cmpwi r3, 0x0
     bne lbl_fn_806F6CA0_00000364
     cmpwi r28, 0x0
@@ -339,7 +339,7 @@ lbl_fn_806F6CA0_00000398:
     lwz r5, 0x8(r1)
     mr r4, r28
     addi r3, r25, 0xa0
-    bl fn_806F2070
+    bl ghiAppendDataToBuffer
     cmpwi r3, 0x0
     bne lbl_fn_806F6CA0_000003C4
     cmpwi r28, 0x0
@@ -805,7 +805,7 @@ lbl_fn_806F72F0_00000A00:
     lwz r5, 0x8(r1)
     mr r4, r31
     addi r3, r30, 0xc4
-    bl fn_806F2070
+    bl ghiAppendDataToBuffer
     cmpwi r3, 0x0
     bne lbl_fn_806F72F0_00000A44
     cmpwi r31, 0x0

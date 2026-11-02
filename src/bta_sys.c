@@ -23,7 +23,7 @@ extern void fn_80626F10(void);
 extern void fn_806270D0(void);
 extern void fn_80627180(void);
 extern void fn_806272C0(void);
-extern void fn_80627400(void);
+extern void scapi_dequeueBuffer(void);
 extern void fn_806275B0(void);
 extern void fn_80627900(void);
 extern void fn_80627D50(void);
@@ -684,7 +684,7 @@ lbl_fn_80628DC0_00000734:
     cmpwi r0, 0x0
     beq lbl_fn_80628DC0_000007C0
     addi r3, r31, 0x3c
-    bl fn_80627400
+    bl scapi_dequeueBuffer
     stw r3, 0x8(r1)
     mr r29, r3
     lis r10, fn_80628DC0@ha
@@ -751,7 +751,7 @@ lbl_fn_80628EB0_00000824:
     cmpwi r0, 0x0
     beq lbl_fn_80628EB0_000008A4
     addi r3, r31, 0x2c
-    bl fn_80627400
+    bl scapi_dequeueBuffer
     lhz r0, 0x4(r3)
     mr r29, r3
     lis r7, fn_80628EB0@ha
@@ -1212,7 +1212,7 @@ asm void fn_80629550(void)
     b lbl_fn_80629550_00000EC4
 lbl_fn_80629550_00000EB8:
     addi r3, r31, 0x2c
-    bl fn_80627400
+    bl scapi_dequeueBuffer
     bl scapi_cleanupContext
 lbl_fn_80629550_00000EC4:
     lhz r0, 0x34(r31)
@@ -1227,7 +1227,7 @@ lbl_fn_80629550_00000ED0:
     b lbl_fn_80629550_00000EF4
 lbl_fn_80629550_00000EE8:
     addi r3, r31, 0x3c
-    bl fn_80627400
+    bl scapi_dequeueBuffer
     bl scapi_cleanupContext
 lbl_fn_80629550_00000EF4:
     lhz r0, 0x44(r31)

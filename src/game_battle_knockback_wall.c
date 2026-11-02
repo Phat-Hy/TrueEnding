@@ -43,7 +43,7 @@ extern void cursor_applyAnimationTrack(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void morph_resetTargetWeight(void);
-extern void fn_800D8814(void);
+extern void vec4_set(void);
 extern void fn_800D8BB4(void);
 extern void str_skipWhitespace(void);
 extern void cam_findTargetIndex(void);
@@ -2434,7 +2434,7 @@ lbl_fn_8041766C_00001EF8:
     fmr f2, f1
     fmr f3, f1
     fmr f4, f1
-    bl fn_800D8814
+    bl vec4_set
     mr r4, r3
     mr r3, r25
     bl fn_80417F1C

@@ -52,7 +52,7 @@ extern u32 lbl_80881894;
 
 /* Function declarations */
 void fn_80125320(void);
-void fn_8012539C(void);
+void enemy_resetTargetTracker(void);
 void fn_80125474(void);
 void enemy_stepBehavior(void);
 void enemy_updateCombatBehavior(void);
@@ -82,7 +82,7 @@ asm void fn_80125320(void)
     stfs f0, 0x84(r3)
     stfs f1, 0x88(r3)
     stfs f1, 0x8c(r3)
-    bl fn_8012539C
+    bl enemy_resetTargetTracker
     stw r31, 0x2c(r30)
     mr r3, r30
     lwz r31, 0xc(r1)
@@ -93,38 +93,38 @@ asm void fn_80125320(void)
     blr
 }
 
-asm void fn_8012539C(void)
+asm void enemy_resetTargetTracker(void)
 {
     nofralloc
     lwz r0, 0x2c(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_8012539C_000000E0
+    bne lbl_enemy_resetTargetTracker_000000E0
     lwz r4, lbl_8087F430
     cmpwi r4, 0x0
-    beq lbl_fn_8012539C_0000009C
+    beq lbl_enemy_resetTargetTracker_0000009C
     lwz r4, 0x10d8(r4)
-    b lbl_fn_8012539C_000000B4
-lbl_fn_8012539C_0000009C:
+    b lbl_enemy_resetTargetTracker_000000B4
+lbl_enemy_resetTargetTracker_0000009C:
     lwz r4, lbl_8087F540
     cmpwi r4, 0x0
-    beq lbl_fn_8012539C_000000B0
+    beq lbl_enemy_resetTargetTracker_000000B0
     lwz r4, 0x1a6c(r4)
-    b lbl_fn_8012539C_000000B4
-lbl_fn_8012539C_000000B0:
+    b lbl_enemy_resetTargetTracker_000000B4
+lbl_enemy_resetTargetTracker_000000B0:
     li r4, 0x0
-lbl_fn_8012539C_000000B4:
+lbl_enemy_resetTargetTracker_000000B4:
     cmpwi r4, 0x0
-    beq lbl_fn_8012539C_000000E0
+    beq lbl_enemy_resetTargetTracker_000000E0
     lwz r5, 0xc(r3)
     cmpwi r5, 0x0
-    ble lbl_fn_8012539C_000000E0
+    ble lbl_enemy_resetTargetTracker_000000E0
     subi r0, r5, 0x1
     lwz r5, 0xb0(r4)
     slwi r4, r0, 6
     add r4, r5, r4
     li r0, 0x0
     stw r0, 0x3c(r4)
-lbl_fn_8012539C_000000E0:
+lbl_enemy_resetTargetTracker_000000E0:
     li r4, 0x0
     li r0, -0x1
     lis r5, lbl_807C7030@ha

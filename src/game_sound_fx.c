@@ -45,7 +45,7 @@ extern void fn_80105BD8(void);
 extern void fn_8011BF94(void);
 extern void fn_8011CD84(void);
 extern void fn_8011D21C(void);
-extern void fn_8012539C(void);
+extern void enemy_resetTargetTracker(void);
 extern void enemy_updateAnimTimer(void);
 extern void boss_enablePartStatusFlags(void);
 extern void fn_80133B30(void);
@@ -1380,7 +1380,7 @@ lbl_fn_800EBA5C_0000110C:
     addi r3, r31, 0xc58
     bl fn_8011BF94
     addi r3, r31, 0x1030
-    bl fn_8012539C
+    bl enemy_resetTargetTracker
     stw r30, 0x28c(r31)
     addi r3, r31, 0xb0
     addi r4, r1, 0x8

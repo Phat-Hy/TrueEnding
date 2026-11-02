@@ -56,7 +56,7 @@ extern void fn_80112958(void);
 extern void fn_80112960(void);
 extern void fn_80113CCC(void);
 extern void fn_80114AA0(void);
-extern void fn_801156C4(void);
+extern void actor_getStreamPipe(void);
 extern void fn_80116BA4(void);
 extern void fn_80116BAC(void);
 extern void actor_calcSpawnTransform(void);
@@ -749,7 +749,7 @@ lbl_fn_805BAC18_00000864:
     cmpwi r3, 0x0
     beq lbl_fn_805BAC18_000008AC
     li r28, 0x0
-    bl fn_801156C4
+    bl actor_getStreamPipe
     bl fn_80122280
     stw r28, 0x4(r3)
 lbl_fn_805BAC18_000008AC:
@@ -760,11 +760,11 @@ lbl_fn_805BAC18_000008AC:
     cmpwi r3, 0x0
     beq lbl_fn_805BAC18_000008D4
     li r28, 0x1
-    bl fn_801156C4
+    bl actor_getStreamPipe
     bl fn_80122280
     stw r28, 0x4(r3)
 lbl_fn_805BAC18_000008D4:
-    bl fn_801156C4
+    bl actor_getStreamPipe
     bl magic_isField28Zero
     cntlzw r0, r3
     srwi r0, r0, 5

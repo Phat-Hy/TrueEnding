@@ -50,7 +50,7 @@ extern void fn_8037529C(void);
 extern void fn_8037F688(void);
 extern void fn_803BF818(void);
 extern void fn_803D6E3C(void);
-extern void fn_803D71C4(void);
+extern void gfx_getDevice(void);
 extern void boss_updateLaserAimMatrix(void);
 extern void fn_80470364(void);
 extern void boss_releaseLaserTarget(void);
@@ -443,11 +443,11 @@ asm void fn_8052A8F0(void)
     lwz r12, 0xc(r12)
     mtctr r12
     bctrl
-    bl fn_803D71C4
+    bl gfx_getDevice
     bl fn_80076FF8
     addi r3, r29, 0x6c
     bl fn_8052ACCC
-    bl fn_803D71C4
+    bl gfx_getDevice
     bl fn_80076FF8
     lfs f0, lbl_80887ACC
     fcmpo cr0, f1, f0

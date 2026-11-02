@@ -11,7 +11,7 @@ extern void fn_800EB270(void);
 extern void fn_800EB49C(void);
 extern void system_getNextSequenceId(void);
 extern void scissor_clipFrustum(void);
-extern void fn_8012539C(void);
+extern void enemy_resetTargetTracker(void);
 extern void enemy_updateCombatBehavior(void);
 extern void fn_80134270(void);
 extern void npc_initScriptContext(void);
@@ -199,7 +199,7 @@ lbl_fn_8031FAA4_00000118:
     cmplw r3, r0
     beq lbl_fn_8031FAA4_0000013C
     addi r3, r31, 0x1030
-    bl fn_8012539C
+    bl enemy_resetTargetTracker
 lbl_fn_8031FAA4_0000013C:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
@@ -795,7 +795,7 @@ lbl_fn_803202E0_00000984:
     cmpwi r0, 0x0
     bne lbl_fn_803202E0_000009AC
     addi r3, r30, 0x1030
-    bl fn_8012539C
+    bl enemy_resetTargetTracker
     lwz r4, 0xd1c(r30)
     mr r3, r30
     lfs f1, lbl_80884EB4
@@ -809,7 +809,7 @@ lbl_fn_803202E0_000009AC:
     cmpwi r3, 0x0
     beq lbl_fn_803202E0_00000EC0
     addi r3, r30, 0x1030
-    bl fn_8012539C
+    bl enemy_resetTargetTracker
     lwz r4, 0x1568(r30)
     mr r3, r30
     li r5, 0x0
@@ -1044,7 +1044,7 @@ lbl_fn_803202E0_00000CEC:
     slwi r0, r0, 2
     lwzx r0, r4, r0
     stw r0, 0x1568(r30)
-    bl fn_8012539C
+    bl enemy_resetTargetTracker
     lwz r4, 0x1568(r30)
     mr r3, r30
     li r5, 0x0
@@ -1071,7 +1071,7 @@ lbl_fn_803202E0_00000D44:
     fcmpo cr0, f3, f0
     bge lbl_fn_803202E0_00000EC0
     addi r3, r30, 0x1030
-    bl fn_8012539C
+    bl enemy_resetTargetTracker
     lwz r4, 0xd1c(r30)
     mr r3, r30
     lfs f1, lbl_80884EB4

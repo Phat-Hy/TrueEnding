@@ -15,7 +15,7 @@ extern void scapi_getConfigItem(void);
 extern void scapi_cleanupContext(void);
 extern void fn_80627180(void);
 extern void fn_806272C0(void);
-extern void fn_80627400(void);
+extern void scapi_dequeueBuffer(void);
 extern void fn_806275A0(void);
 extern void fn_80629650(void);
 extern void bta_sys_logEvent(void);
@@ -4100,7 +4100,7 @@ lbl_btm_sec_dispatchCallback_0000358C:
     cmpwi r31, 0x0
     bne lbl_btm_sec_dispatchCallback_000035A0
     addi r3, r30, 0x64
-    bl fn_80627400
+    bl scapi_dequeueBuffer
     mr r31, r3
 lbl_btm_sec_dispatchCallback_000035A0:
     cmpwi r31, 0x0
@@ -4544,7 +4544,7 @@ asm void fn_8063ADA4(void)
     cmpwi r30, 0x0
     beq lbl_fn_8063ADA4_00003C0C
     addi r3, r31, 0x70
-    bl fn_80627400
+    bl scapi_dequeueBuffer
     cmpwi r3, 0x0
     beq lbl_fn_8063ADA4_00003BD8
     lbz r0, 0x9(r3)
@@ -4770,7 +4770,7 @@ asm void fn_8063B0BC(void)
     cmpwi r28, 0x0
     beq lbl_fn_8063B0BC_00003F30
     addi r3, r4, 0x70
-    bl fn_80627400
+    bl scapi_dequeueBuffer
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_8063B0BC_00003EFC
@@ -4840,7 +4840,7 @@ asm void fn_8063B1E4(void)
     addi r3, r31, 0x70
     stw r29, 0x14(r1)
     sth r0, 0x80(r31)
-    bl fn_80627400
+    bl scapi_dequeueBuffer
     cmpwi r3, 0x0
     mr r30, r3
     bne lbl_fn_8063B1E4_00003FC4

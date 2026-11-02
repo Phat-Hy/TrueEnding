@@ -13,7 +13,7 @@ extern void msg_isWindowActive(void);
 extern void proj_getGlobalManager(void);
 extern void fn_800F7258(void);
 extern void fn_801156BC(void);
-extern void fn_801156C4(void);
+extern void actor_getStreamPipe(void);
 extern void fn_80116E6C(void);
 extern void equip_getGlobalManager(void);
 extern void fn_80121F08(void);
@@ -1218,7 +1218,7 @@ lbl_magic_dispatchActionCommand_00000FB8:
 lbl_magic_dispatchActionCommand_00000FD0:
     mr r3, r31
     b lbl_magic_dispatchActionCommand_000014E8
-    bl fn_801156C4
+    bl actor_getStreamPipe
     bl fn_80122280
     lwz r0, 0x10(r3)
     cmpwi r0, 0x0
@@ -1248,7 +1248,7 @@ lbl_magic_dispatchActionCommand_00001018:
 lbl_magic_dispatchActionCommand_00001040:
     mr r3, r31
     b lbl_magic_dispatchActionCommand_000014E8
-    bl fn_801156C4
+    bl actor_getStreamPipe
     bl fn_80122280
     lwz r0, 0x8(r3)
     cmpwi r0, 0x0
@@ -1347,7 +1347,7 @@ lbl_magic_dispatchActionCommand_0000118C:
     lfs f0, lbl_80881830
     fcmpo cr0, f1, f0
     ble lbl_magic_dispatchActionCommand_000011D0
-    bl fn_801156C4
+    bl actor_getStreamPipe
     bl magic_getField8
     cmpwi r3, 0x0
     beq lbl_magic_dispatchActionCommand_000011D0
@@ -1388,7 +1388,7 @@ lbl_magic_dispatchActionCommand_000011D0:
     lwz r0, 0x38(r3)
     cmpwi r0, 0x0
     beq lbl_magic_dispatchActionCommand_000012A8
-    bl fn_801156C4
+    bl actor_getStreamPipe
     bl magic_isField28Zero
     cmpwi r3, 0x0
     bne lbl_magic_dispatchActionCommand_00001290
@@ -1430,7 +1430,7 @@ lbl_magic_dispatchActionCommand_000012A8:
     lwz r0, 0x38(r3)
     cmpwi r0, 0x0
     beq lbl_magic_dispatchActionCommand_00001358
-    bl fn_801156C4
+    bl actor_getStreamPipe
     bl magic_isField28Zero
     cmpwi r3, 0x0
     beq lbl_magic_dispatchActionCommand_00001320
@@ -1480,7 +1480,7 @@ lbl_magic_dispatchActionCommand_00001358:
 lbl_magic_dispatchActionCommand_000013A8:
     mr r3, r31
     b lbl_magic_dispatchActionCommand_000014E8
-    bl fn_801156C4
+    bl actor_getStreamPipe
     bl magic_getField20
     cmpwi r3, 0x2
     bne lbl_magic_dispatchActionCommand_000013F4
@@ -1535,7 +1535,7 @@ lbl_magic_dispatchActionCommand_00001444:
     or r0, r0, r3
     srwi r3, r0, 31
     b lbl_magic_dispatchActionCommand_000014E8
-    bl fn_801156C4
+    bl actor_getStreamPipe
     bl magic_getOffset78
     lwz r3, 0x8(r3)
     subi r0, r3, 0x1

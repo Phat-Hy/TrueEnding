@@ -32,7 +32,7 @@ extern void fn_806E97F0(void);
 extern void fn_806E9900(void);
 extern void dwc_invokeCallbackSafe(void);
 extern void fn_806E9AD0(void);
-extern void fn_806E9BB0(void);
+extern void dwc_invokeCompleteCallback(void);
 extern void fn_806E9C70(void);
 extern void fn_806E9D30(void);
 extern void fn_806E9E40(void);
@@ -143,7 +143,7 @@ lbl_fn_806EA690_00000064:
     bl fn_806EDF70
     mr r3, r31
     li r4, 0x0
-    bl fn_806E9BB0
+    bl dwc_invokeCompleteCallback
     mr r3, r31
     bl fn_806EE7E0
     b lbl_fn_806EA690_00000090
@@ -763,7 +763,7 @@ lbl_fn_806EAE70_00000868:
     bl net_abortConnection
     mr r3, r31
     li r4, 0x2
-    bl fn_806E9BB0
+    bl dwc_invokeCompleteCallback
     cmpwi r3, 0x0
     bne lbl_fn_806EAE70_00000890
     li r3, 0x0
@@ -808,7 +808,7 @@ lbl_fn_806EAE70_00000904:
     bl net_abortConnection
     mr r3, r31
     li r4, 0x2
-    bl fn_806E9BB0
+    bl dwc_invokeCompleteCallback
     cmpwi r3, 0x0
     bne lbl_fn_806EAE70_0000092C
     li r3, 0x0
@@ -859,7 +859,7 @@ lbl_fn_806EAE70_000009B4:
     bl net_abortConnection
     mr r3, r31
     li r4, 0x2
-    bl fn_806E9BB0
+    bl dwc_invokeCompleteCallback
     cmpwi r3, 0x0
     bne lbl_fn_806EAE70_000009E0
     li r3, 0x0
@@ -999,7 +999,7 @@ lbl_fn_806EB1B0_00000BA8:
     bl net_abortConnection
     mr r3, r31
     li r4, 0x2
-    bl fn_806E9BB0
+    bl dwc_invokeCompleteCallback
     cmpwi r3, 0x0
     bne lbl_fn_806EB1B0_00000BD0
     li r3, 0x0
@@ -1044,7 +1044,7 @@ lbl_fn_806EB1B0_00000C44:
     bl net_abortConnection
     mr r3, r31
     li r4, 0x2
-    bl fn_806E9BB0
+    bl dwc_invokeCompleteCallback
     cmpwi r3, 0x0
     bne lbl_fn_806EB1B0_00000C6C
     li r3, 0x0
@@ -1095,7 +1095,7 @@ lbl_fn_806EB1B0_00000CF4:
     bl net_abortConnection
     mr r3, r31
     li r4, 0x2
-    bl fn_806E9BB0
+    bl dwc_invokeCompleteCallback
     cmpwi r3, 0x0
     bne lbl_fn_806EB1B0_00000D20
     li r3, 0x0
@@ -1227,7 +1227,7 @@ lbl_fn_806EB4C0_00000ED0:
     bl net_abortConnection
     mr r3, r30
     li r4, 0x2
-    bl fn_806E9BB0
+    bl dwc_invokeCompleteCallback
     cmpwi r3, 0x0
     bne lbl_fn_806EB4C0_00000EF8
     li r0, 0x0
@@ -1310,7 +1310,7 @@ lbl_fn_806EB4C0_00000FF0:
     bl net_abortConnection
     mr r3, r30
     li r4, 0x2
-    bl fn_806E9BB0
+    bl dwc_invokeCompleteCallback
     cmpwi r3, 0x0
     bne lbl_fn_806EB4C0_00001018
     li r0, 0x0
@@ -1358,7 +1358,7 @@ lbl_fn_806EB4C0_00001094:
     bl net_abortConnection
     mr r3, r30
     li r4, 0x2
-    bl fn_806E9BB0
+    bl dwc_invokeCompleteCallback
     cmpwi r3, 0x0
     bne lbl_fn_806EB4C0_000010BC
     li r0, 0x0
@@ -1508,7 +1508,7 @@ lbl_fn_806EB4C0_000012A4:
     bl net_abortConnection
     mr r3, r30
     li r4, 0x2
-    bl fn_806E9BB0
+    bl dwc_invokeCompleteCallback
     cmpwi r3, 0x0
     bne lbl_fn_806EB4C0_000012CC
     li r0, 0x0
@@ -1574,7 +1574,7 @@ lbl_fn_806EB4C0_00001388:
     bl net_abortConnection
     mr r3, r30
     li r4, 0x2
-    bl fn_806E9BB0
+    bl dwc_invokeCompleteCallback
     cmpwi r3, 0x0
     bne lbl_fn_806EB4C0_000013B0
     li r0, 0x0
@@ -1718,7 +1718,7 @@ lbl_fn_806EB4C0_0000158C:
     cntlzw r0, r26
     mr r3, r30
     srwi r4, r0, 5
-    bl fn_806E9BB0
+    bl dwc_invokeCompleteCallback
     cmpwi r3, 0x0
     bne lbl_fn_806EB4C0_000015BC
     li r3, 0x0
@@ -1922,7 +1922,7 @@ lbl_fn_806EBE60_00001860:
     bl net_abortConnection
     mr r3, r30
     li r4, 0x2
-    bl fn_806E9BB0
+    bl dwc_invokeCompleteCallback
     cmpwi r3, 0x0
     bne lbl_fn_806EBE60_00001888
     li r3, 0x0
@@ -2169,7 +2169,7 @@ lbl_fn_806EBE60_00001BCC:
     bl net_abortConnection
     mr r3, r30
     li r4, 0x4
-    bl fn_806E9BB0
+    bl dwc_invokeCompleteCallback
     cmpwi r3, 0x0
     bne lbl_fn_806EBE60_00001BF8
     li r0, 0x0
@@ -2247,7 +2247,7 @@ lbl_fn_806EC2C0_00001CDC:
     bl net_abortConnection
     mr r3, r26
     li r4, 0x2
-    bl fn_806E9BB0
+    bl dwc_invokeCompleteCallback
     cmpwi r3, 0x0
     bne lbl_fn_806EC2C0_00001D04
     li r3, 0x0
@@ -2383,7 +2383,7 @@ lbl_fn_806EC4B0_00001EBC:
     bl net_abortConnection
     mr r3, r31
     li r4, 0x2
-    bl fn_806E9BB0
+    bl dwc_invokeCompleteCallback
     cmpwi r3, 0x0
     bne lbl_fn_806EC4B0_00001EE4
     li r0, 0x0
@@ -2516,7 +2516,7 @@ lbl_fn_806EC4B0_0000208C:
     cntlzw r0, r30
     mr r3, r31
     srwi r4, r0, 5
-    bl fn_806E9BB0
+    bl dwc_invokeCompleteCallback
     cmpwi r3, 0x0
     bne lbl_fn_806EC4B0_000020B4
     li r3, 0x0

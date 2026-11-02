@@ -10,7 +10,7 @@ extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void fn_80019E88(void);
 extern void item_testLineOfSight(void);
-extern void fn_8012539C(void);
+extern void enemy_resetTargetTracker(void);
 extern void enemy_stepBehavior(void);
 extern void battle_applyStatusEffect(void);
 extern void actor_getMovementFlags(void);
@@ -614,7 +614,7 @@ lbl_fn_80128090_000007A8:
     cmpwi r28, 0x0
     beq lbl_fn_80128090_00000AF8
     mr r3, r31
-    bl fn_8012539C
+    bl enemy_resetTargetTracker
     lwz r3, 0xa4(r31)
     bl actor_getMovementFlags
     lwz r7, 0xa0(r31)
@@ -660,7 +660,7 @@ lbl_fn_80128090_0000084C:
     cmpwi r27, 0x0
     beq lbl_fn_80128090_00000AF8
     mr r3, r31
-    bl fn_8012539C
+    bl enemy_resetTargetTracker
     lwz r3, 0xa4(r31)
     bl actor_getMovementFlags
     lwz r7, 0xa0(r31)
@@ -717,7 +717,7 @@ lbl_fn_80128090_00000924:
     cmpwi r29, 0x0
     beq lbl_fn_80128090_00000AF8
     mr r3, r31
-    bl fn_8012539C
+    bl enemy_resetTargetTracker
     lwz r3, 0xa4(r31)
     bl actor_getMovementFlags
     lwz r7, 0xa0(r31)
@@ -768,7 +768,7 @@ lbl_fn_80128090_000009DC:
     cmpwi r27, 0x0
     beq lbl_fn_80128090_00000AF8
     mr r3, r31
-    bl fn_8012539C
+    bl enemy_resetTargetTracker
     lwz r3, 0xa4(r31)
     bl actor_getMovementFlags
     lwz r7, 0xa0(r31)
@@ -814,7 +814,7 @@ lbl_fn_80128090_00000A88:
     cmpwi r27, 0x0
     beq lbl_fn_80128090_00000AF8
     mr r3, r31
-    bl fn_8012539C
+    bl enemy_resetTargetTracker
     lwz r3, 0xa4(r31)
     bl actor_getMovementFlags
     lwz r7, 0xa0(r31)
@@ -882,7 +882,7 @@ lbl_fn_80128508_00000B70:
     cmpwi r4, 0x0
     ble lbl_fn_80128508_00000CF0
     mr r3, r30
-    bl fn_8012539C
+    bl enemy_resetTargetTracker
     lwz r3, 0xa4(r30)
     bl actor_getMovementFlags
     lwz r7, 0xa0(r30)
@@ -1013,7 +1013,7 @@ lbl_fn_801286F0_00000D58:
     cmpwi r4, 0x0
     ble lbl_fn_801286F0_00000E18
     mr r3, r25
-    bl fn_8012539C
+    bl enemy_resetTargetTracker
     lwz r3, lbl_8087EE68
     mr r6, r26
     addi r4, r1, 0xc
@@ -1118,7 +1118,7 @@ lbl_fn_80128818_00000ECC:
     cmpwi r30, 0x0
     beq lbl_fn_80128818_00000F30
     mr r3, r26
-    bl fn_8012539C
+    bl enemy_resetTargetTracker
     lwz r3, 0xa4(r26)
     bl actor_getMovementFlags
     lwz r7, 0xa0(r26)
@@ -1182,7 +1182,7 @@ lbl_fn_80128930_00000F98:
     b lbl_fn_80128930_00001030
 lbl_fn_80128930_00000FAC:
     mr r3, r27
-    bl fn_8012539C
+    bl enemy_resetTargetTracker
     lwz r3, 0xa4(r27)
     bl actor_getMovementFlags
     lwz r7, 0xa0(r27)
@@ -1257,7 +1257,7 @@ lbl_fn_80128A30_000010A4:
     cmpwi r31, 0x0
     beq lbl_fn_80128A30_00001118
     mr r3, r27
-    bl fn_8012539C
+    bl enemy_resetTargetTracker
     lwz r3, 0xa4(r27)
     bl actor_getMovementFlags
     lwz r7, 0xa0(r27)
@@ -1330,7 +1330,7 @@ lbl_fn_80128B20_00001194:
     b lbl_fn_80128B20_00001200
 lbl_fn_80128B20_000011A8:
     mr r3, r27
-    bl fn_8012539C
+    bl enemy_resetTargetTracker
     lwz r3, 0xa4(r27)
     bl actor_getMovementFlags
     lwz r7, 0xa0(r27)
@@ -1398,7 +1398,7 @@ lbl_fn_80128C08_0000127C:
     b lbl_fn_80128C08_000012F0
 lbl_fn_80128C08_00001290:
     mr r3, r27
-    bl fn_8012539C
+    bl enemy_resetTargetTracker
     lwz r3, 0xa4(r27)
     bl actor_getMovementFlags
     lwz r7, 0xa0(r27)

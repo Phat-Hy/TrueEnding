@@ -12,7 +12,7 @@ extern void proj_getGlobalManager(void);
 extern void fn_800F84C8(void);
 extern void math_lerpf(void);
 extern void phys_scaleGravity(void);
-extern void fn_801156C4(void);
+extern void actor_getStreamPipe(void);
 extern void fn_801156D8(void);
 extern void fn_80116BAC(void);
 extern void equip_getGlobalManager(void);
@@ -1372,7 +1372,7 @@ lbl_fn_8038F52C_00001268:
     b lbl_fn_8038F52C_00001DE4
     mr r3, r29
     bl fn_80390374
-    bl fn_801156C4
+    bl actor_getStreamPipe
     bl fn_801156D8
     mr r4, r3
     mr r3, r29

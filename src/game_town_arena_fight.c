@@ -46,7 +46,7 @@ extern void fn_8010F6FC(void);
 extern void phys_scaleGravity(void);
 extern void fn_80113CCC(void);
 extern void fn_801156BC(void);
-extern void fn_801156C4(void);
+extern void actor_getStreamPipe(void);
 extern void vec3_sqMag(void);
 extern void fn_80116BAC(void);
 extern void fn_80116E6C(void);
@@ -186,7 +186,7 @@ extern void fn_803D7194(void);
 extern void fn_803D719C(void);
 extern void fn_803D71A8(void);
 extern void fn_803D71BC(void);
-extern void fn_803D71C4(void);
+extern void gfx_getDevice(void);
 extern void fn_803D71CC(void);
 extern void fn_803D71D4(void);
 extern void fn_803D71DC(void);
@@ -1679,7 +1679,7 @@ lbl_fn_803D2A6C_00001414:
     beq lbl_fn_803D2A6C_000014E4
     bl proj_getGlobalManager
     bl magic_getOffset244
-    bl fn_801156C4
+    bl actor_getStreamPipe
     bl fn_803D6FE4
     lwz r0, 0x724(r24)
     mr r21, r3
@@ -1871,7 +1871,7 @@ lbl_fn_803D2A6C_000016F4:
     bl fn_803D7028
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_0000181C
-    bl fn_801156C4
+    bl actor_getStreamPipe
     bl fn_803D703C
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_0000181C
@@ -3626,10 +3626,10 @@ lbl_fn_803D2A6C_0000308C:
     cmplw r18, r3
     blt lbl_fn_803D2A6C_00002F80
 lbl_fn_803D2A6C_0000309C:
-    bl fn_801156C4
+    bl actor_getStreamPipe
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_000030BC
-    bl fn_801156C4
+    bl actor_getStreamPipe
     bl fn_803D7174
     lwz r0, 0x4(r3)
     cmpwi r0, 0x0
@@ -4633,7 +4633,7 @@ lbl_fn_803D2A6C_00003F2C:
     bl vec3_copy
     b lbl_fn_803D2A6C_00003FA4
 lbl_fn_803D2A6C_00003F50:
-    bl fn_803D71C4
+    bl gfx_getDevice
     bl fn_803D71BC
     xoris r0, r3, 0x8000
     stw r0, 0xa6c(r1)
@@ -4644,7 +4644,7 @@ lbl_fn_803D2A6C_00003F50:
     fsubs f1, f1, f2
     fmuls f0, f1, f0
     stfs f0, 0xd60(r24)
-    bl fn_803D71C4
+    bl gfx_getDevice
     bl fn_803D71CC
     xoris r0, r3, 0x8000
     stw r0, 0xa64(r1)

@@ -28,7 +28,7 @@ extern void ref_releaseHandle(void);
 extern void morph_resetTargetWeight(void);
 extern void atn_Task_destructor(void);
 extern void bloom_processPasses(void);
-extern void fn_800D8814(void);
+extern void vec4_set(void);
 extern void vec3_normalize(void);
 extern void fn_800F833C(void);
 extern void fn_800F84BC(void);
@@ -1606,7 +1606,7 @@ asm void fn_80184C30(void)
     lfs f4, lbl_80881D2C
     fmr f2, f1
     fmr f3, f1
-    bl fn_800D8814
+    bl vec4_set
     lfs f1, lbl_80881D90
     mr r31, r3
     lfs f3, lbl_80881D94
@@ -1631,7 +1631,7 @@ asm void fn_80184C30(void)
     lfs f1, lbl_80881D98
     fmr f3, f2
     lfs f4, lbl_80881D2C
-    bl fn_800D8814
+    bl vec4_set
     mr r31, r3
     addi r3, r30, 0xa8
     bl fn_801856A4
@@ -1642,7 +1642,7 @@ asm void fn_80184C30(void)
     lfs f4, lbl_80881D2C
     fmr f2, f1
     fmr f3, f1
-    bl fn_800D8814
+    bl vec4_set
     mr r31, r3
     addi r3, r30, 0xa8
     bl fn_801856AC
@@ -1653,7 +1653,7 @@ asm void fn_80184C30(void)
     lfs f4, lbl_80881D2C
     fmr f2, f1
     fmr f3, f1
-    bl fn_800D8814
+    bl vec4_set
     lfs f1, lbl_80881D94
     mr r31, r3
     lfs f2, lbl_80881DA0
@@ -1678,7 +1678,7 @@ asm void fn_80184C30(void)
     lfs f1, lbl_80881D98
     fmr f3, f2
     lfs f4, lbl_80881D2C
-    bl fn_800D8814
+    bl vec4_set
     mr r31, r3
     addi r3, r30, 0x35c
     bl fn_801856A4
@@ -1689,7 +1689,7 @@ asm void fn_80184C30(void)
     lfs f4, lbl_80881D2C
     fmr f2, f1
     fmr f3, f1
-    bl fn_800D8814
+    bl vec4_set
     mr r31, r3
     addi r3, r30, 0x35c
     bl fn_801856AC
@@ -1700,7 +1700,7 @@ asm void fn_80184C30(void)
     lfs f4, lbl_80881D2C
     fmr f2, f1
     fmr f3, f1
-    bl fn_800D8814
+    bl vec4_set
     lfs f1, lbl_80881D90
     mr r31, r3
     lfs f3, lbl_80881D94
@@ -1725,7 +1725,7 @@ asm void fn_80184C30(void)
     lfs f1, lbl_80881DA8
     fmr f3, f2
     lfs f4, lbl_80881D2C
-    bl fn_800D8814
+    bl vec4_set
     mr r31, r3
     addi r3, r30, 0x610
     bl fn_801856A4
@@ -1736,7 +1736,7 @@ asm void fn_80184C30(void)
     lfs f4, lbl_80881D2C
     fmr f2, f1
     fmr f3, f1
-    bl fn_800D8814
+    bl vec4_set
     mr r31, r3
     addi r3, r30, 0x610
     bl fn_801856AC
@@ -1747,7 +1747,7 @@ asm void fn_80184C30(void)
     lfs f4, lbl_80881D2C
     fmr f2, f1
     fmr f3, f1
-    bl fn_800D8814
+    bl vec4_set
     lfs f1, lbl_80881D94
     mr r31, r3
     lfs f2, lbl_80881DA0
@@ -1772,7 +1772,7 @@ asm void fn_80184C30(void)
     lfs f1, lbl_80881DA8
     fmr f3, f2
     lfs f4, lbl_80881D2C
-    bl fn_800D8814
+    bl vec4_set
     mr r31, r3
     addi r3, r30, 0x8c4
     bl fn_801856A4
@@ -1783,7 +1783,7 @@ asm void fn_80184C30(void)
     lfs f4, lbl_80881D2C
     fmr f2, f1
     fmr f3, f1
-    bl fn_800D8814
+    bl vec4_set
     mr r31, r3
     addi r3, r30, 0x8c4
     bl fn_801856AC

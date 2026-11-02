@@ -22,7 +22,7 @@ extern void fn_805D9550(void);
 extern void fn_805D9560(void);
 extern void fn_805D9570(void);
 extern void gx_transform_getViewportWidth(void);
-extern void fn_805D9590(void);
+extern void gx_transform_getViewportHeight(void);
 extern void __ptmf_scall(void);
 extern u32 strlen(const char* str);
 extern void vsnprintf(void);
@@ -178,7 +178,7 @@ lbl_fn_805DC3B0_000000C4:
     bl fn_805DD170
     fmr f30, f1
     addi r3, r31, 0x78
-    bl fn_805D9590
+    bl gx_transform_getViewportHeight
     fmr f31, f1
     addi r3, r31, 0x78
     bl gx_transform_getViewportWidth
@@ -299,7 +299,7 @@ lbl_fn_805DC5E0_00000298:
     bl fn_805DD170
     fmr f30, f1
     addi r3, r31, 0x8
-    bl fn_805D9590
+    bl gx_transform_getViewportHeight
     fmr f31, f1
     addi r3, r31, 0x8
     bl gx_transform_getViewportWidth
@@ -393,7 +393,7 @@ asm void fn_805DC7B0(void)
     bl fn_805DD170
     fmr f30, f1
     addi r3, r1, 0x8
-    bl fn_805D9590
+    bl gx_transform_getViewportHeight
     fmr f31, f1
     addi r3, r1, 0x8
     bl gx_transform_getViewportWidth
@@ -489,7 +489,7 @@ asm void fn_805DC910(void)
     bl fn_805DD170
     fmr f30, f1
     addi r3, r1, 0x8
-    bl fn_805D9590
+    bl gx_transform_getViewportHeight
     fmr f31, f1
     addi r3, r1, 0x8
     bl gx_transform_getViewportWidth
@@ -1046,7 +1046,7 @@ asm void fn_805DD170(void)
     bl gx_transform_getViewportWidth
     stfs f1, 0xc(r1)
     mr r3, r28
-    bl fn_805D9590
+    bl gx_transform_getViewportHeight
     frsp f28, f1
     stfs f1, 0x8(r1)
     mr r3, r28
@@ -1060,7 +1060,7 @@ asm void fn_805DD170(void)
     mr r3, r28
     bl gx_transform_getViewportWidth
     mr r3, r28
-    bl fn_805D9590
+    bl gx_transform_getViewportHeight
     li r0, 0x0
     stw r0, 0x58(r1)
     lfs f2, 0xc(r1)
@@ -1314,7 +1314,7 @@ lbl_fn_805DD170_00001220:
     b lbl_fn_805DD170_000012B8
 lbl_fn_805DD170_0000122C:
     mr r3, r28
-    bl fn_805D9590
+    bl gx_transform_getViewportHeight
     cmpwi r31, 0x0
     fmr f24, f1
     beq lbl_fn_805DD170_0000124C

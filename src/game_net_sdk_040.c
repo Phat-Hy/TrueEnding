@@ -46,7 +46,7 @@ extern void fn_806F1E10(void);
 extern void fn_806F1E90(void);
 extern void fn_806F1F90(void);
 extern void fn_806F2010(void);
-extern void fn_806F2070(void);
+extern void ghiAppendDataToBuffer(void);
 extern void fn_806F21E0(void);
 extern void fn_806F2600(void);
 extern void fn_806F2630(void);
@@ -526,7 +526,7 @@ lbl_fn_806F2D30_00000578:
     addi r3, r29, 0x58
     add r4, r30, r6
     subf r5, r6, r31
-    bl fn_806F2070
+    bl ghiAppendDataToBuffer
     cmpwi r3, 0x0
     bne lbl_fn_806F2D30_00000598
     li r3, 0x0
