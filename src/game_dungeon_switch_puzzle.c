@@ -23,7 +23,7 @@ extern void fn_801F4C14(void);
 extern void save_computeCrc32(void);
 extern void save_verifyBlockCrc(void);
 extern void fn_801F791C(void);
-extern void fn_801F80A8(void);
+extern void curve_setKeyframeColorRGB(void);
 extern void save_findEntryByName(void);
 extern void save_formatSlotString(void);
 extern void fn_801F8FE4(void);
@@ -978,7 +978,7 @@ lbl_fn_803E2A30_00000CB0:
     stfs f2, 0xc(r1)
     stfs f1, 0x10(r1)
     stfs f0, 0x14(r1)
-    bl fn_801F80A8
+    bl curve_setKeyframeColorRGB
     lfs f1, lbl_80885D58
     mr r3, r29
     addi r4, r22, 0x14a0

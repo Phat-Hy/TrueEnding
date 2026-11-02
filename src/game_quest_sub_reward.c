@@ -72,7 +72,7 @@ extern void fn_8047FCC0(void);
 extern void fn_804805AC(void);
 extern void fn_804805F0(void);
 extern void fn_804814E8(void);
-extern void fn_804814F0(void);
+extern void dvd_getErrorManager(void);
 extern void fn_804814F8(void);
 extern void fn_804827CC(void);
 extern void fn_804827D8(void);
@@ -610,14 +610,14 @@ lbl_fn_80487490_0000069C:
     bl fn_8047E5D4
     cmpwi r3, 0xce7
     bne lbl_fn_80487490_00000704
-    bl fn_804814F0
+    bl dvd_getErrorManager
     cmpwi r3, 0x0
     beq lbl_fn_80487490_00000704
-    bl fn_804814F0
+    bl dvd_getErrorManager
     bl fn_8037D34C
     cmpwi r3, 0x0
     bne lbl_fn_80487490_00000704
-    bl fn_804814F0
+    bl dvd_getErrorManager
     li r4, 0x1
     li r5, 0x4
     li r6, 0x0

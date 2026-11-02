@@ -60,7 +60,7 @@ extern void fn_806FE760(void);
 extern void net_http_initConnection(void);
 extern void fn_806FE900(void);
 extern void fn_806FEA20(void);
-extern void fn_806FEAA0(void);
+extern void SBServerGetIntValue(void);
 extern void fn_806FEBD0(void);
 extern void fn_806FED20(void);
 extern void fn_806FED30(void);
@@ -1237,12 +1237,12 @@ asm void fn_806FFF60(void)
 lbl_fn_806FFF60_00000E90:
     mr r4, r29
     li r5, 0x0
-    bl fn_806FEAA0
+    bl SBServerGetIntValue
     mr r30, r3
     mr r3, r28
     mr r4, r29
     li r5, 0x0
-    bl fn_806FEAA0
+    bl SBServerGetIntValue
     subf r3, r3, r30
     b lbl_fn_806FFF60_00000F94
 lbl_fn_806FFF60_00000EB8:
@@ -1340,12 +1340,12 @@ asm void fn_80700100(void)
     mr r3, r29
     addi r27, r6, 0x498
     mr r4, r27
-    bl fn_806FEAA0
+    bl SBServerGetIntValue
     mr r31, r3
     mr r3, r28
     mr r4, r27
     li r5, 0x0
-    bl fn_806FEAA0
+    bl SBServerGetIntValue
     subf. r3, r3, r31
     bne lbl_fn_80700100_0000103C
     mr r3, r29

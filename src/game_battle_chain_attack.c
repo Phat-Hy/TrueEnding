@@ -86,7 +86,7 @@ extern u32 lbl_808860F4;
 extern u32 lbl_808860F8;
 
 /* Function declarations */
-void fn_803FD328(void);
+void chain_attack_changeState(void);
 void fn_803FDF0C(void);
 void fn_803FDF10(void);
 void fn_803FDF3C(void);
@@ -100,7 +100,7 @@ void fn_803FEB70(void);
 void fn_803FEB9C(void);
 void fn_803FEC54(void);
 
-asm void fn_803FD328(void)
+asm void chain_attack_changeState(void)
 {
     nofralloc
     stwu r1, -0x90(r1)
@@ -121,40 +121,40 @@ asm void fn_803FD328(void)
     stw r4, 0x108(r3)
     mr r26, r3
     stw r30, 0x110(r3)
-    beq lbl_fn_803FD328_00000080
+    beq lbl_chain_attack_changeState_00000080
     cmpwi r4, 0x4
-    beq lbl_fn_803FD328_000001CC
+    beq lbl_chain_attack_changeState_000001CC
     cmpwi r4, 0x6
-    beq lbl_fn_803FD328_000004B8
+    beq lbl_chain_attack_changeState_000004B8
     cmpwi r4, 0x7
-    beq lbl_fn_803FD328_000005AC
+    beq lbl_chain_attack_changeState_000005AC
     cmpwi r4, 0x8
-    beq lbl_fn_803FD328_00000878
+    beq lbl_chain_attack_changeState_00000878
     cmpwi r4, 0x9
-    beq lbl_fn_803FD328_00000984
+    beq lbl_chain_attack_changeState_00000984
     cmpwi r4, 0xa
-    beq lbl_fn_803FD328_00000AE8
-    b lbl_fn_803FD328_00000BAC
-lbl_fn_803FD328_00000080:
+    beq lbl_chain_attack_changeState_00000AE8
+    b lbl_chain_attack_changeState_00000BAC
+lbl_chain_attack_changeState_00000080:
     lwz r4, 0xf4(r3)
     lwz r0, 0x2c(r4)
     cmpwi r0, 0x0
-    beq lbl_fn_803FD328_000000B4
+    beq lbl_chain_attack_changeState_000000B4
     cmpwi r0, 0x2
-    beq lbl_fn_803FD328_000000B4
+    beq lbl_chain_attack_changeState_000000B4
     cmpwi r0, 0x1
-    beq lbl_fn_803FD328_000000C4
+    beq lbl_chain_attack_changeState_000000C4
     cmpwi r0, 0x3
-    beq lbl_fn_803FD328_0000011C
+    beq lbl_chain_attack_changeState_0000011C
     cmpwi r0, 0x4
-    beq lbl_fn_803FD328_00000174
-    b lbl_fn_803FD328_00000BAC
-lbl_fn_803FD328_000000B4:
+    beq lbl_chain_attack_changeState_00000174
+    b lbl_chain_attack_changeState_00000BAC
+lbl_chain_attack_changeState_000000B4:
     mr r3, r26
     li r4, 0x4
-    bl fn_803FD328
-    b lbl_fn_803FD328_00000BAC
-lbl_fn_803FD328_000000C4:
+    bl chain_attack_changeState
+    b lbl_chain_attack_changeState_00000BAC
+lbl_chain_attack_changeState_000000C4:
     lwz r3, 0xf8(r3)
     li r4, 0x9
     bl actor_setState
@@ -176,8 +176,8 @@ lbl_fn_803FD328_000000C4:
     lwz r3, 0xf8(r26)
     addi r3, r3, 0xb0
     bl atn_Anim_setLayerAnimation
-    b lbl_fn_803FD328_00000BAC
-lbl_fn_803FD328_0000011C:
+    b lbl_chain_attack_changeState_00000BAC
+lbl_chain_attack_changeState_0000011C:
     lwz r3, 0xf8(r3)
     li r4, 0x9
     bl actor_setState
@@ -199,8 +199,8 @@ lbl_fn_803FD328_0000011C:
     lwz r3, 0xf8(r26)
     addi r3, r3, 0xb0
     bl atn_Anim_setLayerAnimation
-    b lbl_fn_803FD328_00000BAC
-lbl_fn_803FD328_00000174:
+    b lbl_chain_attack_changeState_00000BAC
+lbl_chain_attack_changeState_00000174:
     lwz r3, 0xf8(r3)
     li r4, 0x9
     bl actor_setState
@@ -222,25 +222,25 @@ lbl_fn_803FD328_00000174:
     lwz r3, 0xf8(r26)
     addi r3, r3, 0xb0
     bl atn_Anim_setLayerAnimation
-    b lbl_fn_803FD328_00000BAC
-lbl_fn_803FD328_000001CC:
+    b lbl_chain_attack_changeState_00000BAC
+lbl_chain_attack_changeState_000001CC:
     lwz r4, 0xf4(r3)
     lwz r0, 0x28(r4)
     cmpwi r0, 0x1
-    ble lbl_fn_803FD328_000004AC
+    ble lbl_chain_attack_changeState_000004AC
     lwz r0, 0x2c(r4)
     cmpwi r0, 0x0
-    beq lbl_fn_803FD328_0000020C
+    beq lbl_chain_attack_changeState_0000020C
     cmpwi r0, 0x2
-    beq lbl_fn_803FD328_00000264
+    beq lbl_chain_attack_changeState_00000264
     cmpwi r0, 0x1
-    beq lbl_fn_803FD328_000002BC
+    beq lbl_chain_attack_changeState_000002BC
     cmpwi r0, 0x3
-    beq lbl_fn_803FD328_00000388
+    beq lbl_chain_attack_changeState_00000388
     cmpwi r0, 0x4
-    beq lbl_fn_803FD328_000003E0
-    b lbl_fn_803FD328_00000BAC
-lbl_fn_803FD328_0000020C:
+    beq lbl_chain_attack_changeState_000003E0
+    b lbl_chain_attack_changeState_00000BAC
+lbl_chain_attack_changeState_0000020C:
     lwz r3, 0xf8(r3)
     li r4, 0x9
     bl actor_setState
@@ -262,8 +262,8 @@ lbl_fn_803FD328_0000020C:
     lwz r3, 0xf8(r26)
     addi r3, r3, 0xb0
     bl atn_Anim_setLayerAnimation
-    b lbl_fn_803FD328_00000BAC
-lbl_fn_803FD328_00000264:
+    b lbl_chain_attack_changeState_00000BAC
+lbl_chain_attack_changeState_00000264:
     lwz r3, 0xf8(r3)
     li r4, 0x9
     bl actor_setState
@@ -285,8 +285,8 @@ lbl_fn_803FD328_00000264:
     lwz r3, 0xf8(r26)
     addi r3, r3, 0xb0
     bl atn_Anim_setLayerAnimation
-    b lbl_fn_803FD328_00000BAC
-lbl_fn_803FD328_000002BC:
+    b lbl_chain_attack_changeState_00000BAC
+lbl_chain_attack_changeState_000002BC:
     lwz r3, 0xf8(r3)
     li r4, 0x9
     bl actor_setState
@@ -322,16 +322,16 @@ lbl_fn_803FD328_000002BC:
     frsp f3, f1
     lfs f0, lbl_80886090
     fcmpo cr0, f3, f0
-    ble lbl_fn_803FD328_00000354
+    ble lbl_chain_attack_changeState_00000354
     lfs f0, lbl_80886094
     fsubs f3, f3, f0
-lbl_fn_803FD328_00000354:
+lbl_chain_attack_changeState_00000354:
     lfs f0, lbl_80886098
     fcmpo cr0, f3, f0
-    bge lbl_fn_803FD328_00000368
+    bge lbl_chain_attack_changeState_00000368
     lfs f0, lbl_80886094
     fadds f3, f3, f0
-lbl_fn_803FD328_00000368:
+lbl_chain_attack_changeState_00000368:
     stfs f3, 0x24(r1)
     addi r3, r1, 0x20
     lwz r4, 0xf8(r26)
@@ -339,8 +339,8 @@ lbl_fn_803FD328_00000368:
     psq_st f1, 0x534(r4), 0, 0
     lfs f2, 0x28(r1)
     stfs f2, 0x53c(r4)
-    b lbl_fn_803FD328_00000BAC
-lbl_fn_803FD328_00000388:
+    b lbl_chain_attack_changeState_00000BAC
+lbl_chain_attack_changeState_00000388:
     lwz r3, 0xf8(r3)
     li r4, 0x9
     bl actor_setState
@@ -362,8 +362,8 @@ lbl_fn_803FD328_00000388:
     lwz r3, 0xf8(r26)
     addi r3, r3, 0xb0
     bl atn_Anim_setLayerAnimation
-    b lbl_fn_803FD328_00000BAC
-lbl_fn_803FD328_000003E0:
+    b lbl_chain_attack_changeState_00000BAC
+lbl_chain_attack_changeState_000003E0:
     lwz r3, 0xf8(r3)
     li r4, 0x9
     bl actor_setState
@@ -399,16 +399,16 @@ lbl_fn_803FD328_000003E0:
     frsp f3, f1
     lfs f0, lbl_80886090
     fcmpo cr0, f3, f0
-    ble lbl_fn_803FD328_00000478
+    ble lbl_chain_attack_changeState_00000478
     lfs f0, lbl_80886094
     fsubs f3, f3, f0
-lbl_fn_803FD328_00000478:
+lbl_chain_attack_changeState_00000478:
     lfs f0, lbl_80886098
     fcmpo cr0, f3, f0
-    bge lbl_fn_803FD328_0000048C
+    bge lbl_chain_attack_changeState_0000048C
     lfs f0, lbl_80886094
     fadds f3, f3, f0
-lbl_fn_803FD328_0000048C:
+lbl_chain_attack_changeState_0000048C:
     stfs f3, 0x18(r1)
     addi r3, r1, 0x14
     lwz r4, 0xf8(r26)
@@ -416,31 +416,31 @@ lbl_fn_803FD328_0000048C:
     psq_st f1, 0x534(r4), 0, 0
     lfs f2, 0x1c(r1)
     stfs f2, 0x53c(r4)
-    b lbl_fn_803FD328_00000BAC
-lbl_fn_803FD328_000004AC:
+    b lbl_chain_attack_changeState_00000BAC
+lbl_chain_attack_changeState_000004AC:
     li r4, 0x7
-    bl fn_803FD328
-    b lbl_fn_803FD328_00000BAC
-lbl_fn_803FD328_000004B8:
+    bl chain_attack_changeState
+    b lbl_chain_attack_changeState_00000BAC
+lbl_chain_attack_changeState_000004B8:
     lwz r4, 0xf4(r3)
     lwz r0, 0x2c(r4)
     cmpwi r0, 0x0
-    beq lbl_fn_803FD328_000004EC
+    beq lbl_chain_attack_changeState_000004EC
     cmpwi r0, 0x2
-    beq lbl_fn_803FD328_000004EC
+    beq lbl_chain_attack_changeState_000004EC
     cmpwi r0, 0x4
-    beq lbl_fn_803FD328_000004EC
+    beq lbl_chain_attack_changeState_000004EC
     cmpwi r0, 0x1
-    beq lbl_fn_803FD328_000004FC
+    beq lbl_chain_attack_changeState_000004FC
     cmpwi r0, 0x3
-    beq lbl_fn_803FD328_00000554
-    b lbl_fn_803FD328_00000BAC
-lbl_fn_803FD328_000004EC:
+    beq lbl_chain_attack_changeState_00000554
+    b lbl_chain_attack_changeState_00000BAC
+lbl_chain_attack_changeState_000004EC:
     mr r3, r26
     li r4, 0x7
-    bl fn_803FD328
-    b lbl_fn_803FD328_00000BAC
-lbl_fn_803FD328_000004FC:
+    bl chain_attack_changeState
+    b lbl_chain_attack_changeState_00000BAC
+lbl_chain_attack_changeState_000004FC:
     lwz r3, 0xfc(r3)
     li r4, 0x9
     bl actor_setState
@@ -462,8 +462,8 @@ lbl_fn_803FD328_000004FC:
     lwz r3, 0xfc(r26)
     addi r3, r3, 0xb0
     bl atn_Anim_setLayerAnimation
-    b lbl_fn_803FD328_00000BAC
-lbl_fn_803FD328_00000554:
+    b lbl_chain_attack_changeState_00000BAC
+lbl_chain_attack_changeState_00000554:
     lwz r3, 0xfc(r3)
     li r4, 0x9
     bl actor_setState
@@ -485,8 +485,8 @@ lbl_fn_803FD328_00000554:
     lwz r3, 0xfc(r26)
     addi r3, r3, 0xb0
     bl atn_Anim_setLayerAnimation
-    b lbl_fn_803FD328_00000BAC
-lbl_fn_803FD328_000005AC:
+    b lbl_chain_attack_changeState_00000BAC
+lbl_chain_attack_changeState_000005AC:
     lfs f28, lbl_808860B4
     addi r29, r1, 0x8
     lfs f29, lbl_80886090
@@ -495,28 +495,28 @@ lbl_fn_803FD328_000005AC:
     li r31, 0x1
     lfs f31, lbl_80886098
     lis r25, lbl_807525B8@ha
-lbl_fn_803FD328_000005CC:
+lbl_chain_attack_changeState_000005CC:
     add r28, r26, r30
     lwz r3, 0xf8(r28)
     cmpwi r3, 0x0
-    beq lbl_fn_803FD328_00000864
+    beq lbl_chain_attack_changeState_00000864
     lwz r4, 0xf4(r26)
     lwz r0, 0x2c(r4)
     cmpwi r0, 0x0
-    beq lbl_fn_803FD328_00000610
+    beq lbl_chain_attack_changeState_00000610
     cmpwi r0, 0x2
-    beq lbl_fn_803FD328_000006C0
+    beq lbl_chain_attack_changeState_000006C0
     cmpwi r0, 0x1
-    beq lbl_fn_803FD328_0000070C
+    beq lbl_chain_attack_changeState_0000070C
     cmpwi r0, 0x3
-    beq lbl_fn_803FD328_000007C8
+    beq lbl_chain_attack_changeState_000007C8
     cmpwi r0, 0x4
-    beq lbl_fn_803FD328_00000814
-    b lbl_fn_803FD328_00000864
-lbl_fn_803FD328_00000610:
+    beq lbl_chain_attack_changeState_00000814
+    b lbl_chain_attack_changeState_00000864
+lbl_chain_attack_changeState_00000610:
     lwz r0, 0x28(r4)
     cmpwi r0, 0x1
-    bne lbl_fn_803FD328_00000668
+    bne lbl_chain_attack_changeState_00000668
     li r4, 0x9
     bl actor_setState
     lwz r3, 0xf8(r28)
@@ -535,8 +535,8 @@ lbl_fn_803FD328_00000610:
     lwz r3, 0xf8(r28)
     addi r3, r3, 0xb0
     bl atn_Anim_setLayerAnimation
-    b lbl_fn_803FD328_00000864
-lbl_fn_803FD328_00000668:
+    b lbl_chain_attack_changeState_00000864
+lbl_chain_attack_changeState_00000668:
     li r4, 0x9
     bl actor_setState
     lwz r3, 0xf8(r28)
@@ -550,17 +550,17 @@ lbl_fn_803FD328_00000668:
     stfs f28, 0x2e8(r3)
     lwz r3, 0xf8(r28)
     addi r3, r3, 0xb0
-    bne lbl_fn_803FD328_000006A4
+    bne lbl_chain_attack_changeState_000006A4
     li r5, 0x76
-lbl_fn_803FD328_000006A4:
+lbl_chain_attack_changeState_000006A4:
     lfs f1, lbl_808860AC
     li r6, 0x1
     lfs f2, lbl_808860B8
     li r7, 0x0
     li r8, 0x1
     bl atn_Anim_setLayerAnimation
-    b lbl_fn_803FD328_00000864
-lbl_fn_803FD328_000006C0:
+    b lbl_chain_attack_changeState_00000864
+lbl_chain_attack_changeState_000006C0:
     li r4, 0x9
     bl actor_setState
     lwz r3, 0xf8(r28)
@@ -579,8 +579,8 @@ lbl_fn_803FD328_000006C0:
     lwz r3, 0xf8(r28)
     addi r3, r3, 0xb0
     bl atn_Anim_setLayerAnimation
-    b lbl_fn_803FD328_00000864
-lbl_fn_803FD328_0000070C:
+    b lbl_chain_attack_changeState_00000864
+lbl_chain_attack_changeState_0000070C:
     li r4, 0x9
     bl actor_setState
     lwz r3, 0xf8(r28)
@@ -594,9 +594,9 @@ lbl_fn_803FD328_0000070C:
     stfs f28, 0x2e8(r3)
     lwz r3, 0xf8(r28)
     addi r3, r3, 0xb0
-    bne lbl_fn_803FD328_00000748
+    bne lbl_chain_attack_changeState_00000748
     li r5, 0x7b
-lbl_fn_803FD328_00000748:
+lbl_chain_attack_changeState_00000748:
     lfs f1, lbl_808860AC
     li r6, 0x0
     lfs f2, lbl_808860B8
@@ -604,7 +604,7 @@ lbl_fn_803FD328_00000748:
     li r8, 0x1
     bl atn_Anim_setLayerAnimation
     cmpwi r27, 0x1
-    bne lbl_fn_803FD328_00000864
+    bne lbl_chain_attack_changeState_00000864
     lwz r3, 0xf8(r26)
     psq_l f1, 0x534(r3), 0, 0
     psq_st f1, 0x0(r29), 0, 0
@@ -616,13 +616,13 @@ lbl_fn_803FD328_00000748:
     bl std_fmod
     frsp f0, f1
     fcmpo cr0, f0, f29
-    ble lbl_fn_803FD328_0000079C
+    ble lbl_chain_attack_changeState_0000079C
     fsubs f0, f0, f30
-lbl_fn_803FD328_0000079C:
+lbl_chain_attack_changeState_0000079C:
     fcmpo cr0, f0, f31
-    bge lbl_fn_803FD328_000007A8
+    bge lbl_chain_attack_changeState_000007A8
     fadds f0, f0, f30
-lbl_fn_803FD328_000007A8:
+lbl_chain_attack_changeState_000007A8:
     stfs f0, 0xc(r1)
     add r3, r26, r30
     lwz r3, 0xf8(r3)
@@ -630,8 +630,8 @@ lbl_fn_803FD328_000007A8:
     psq_st f1, 0x534(r3), 0, 0
     lfs f2, 0x10(r1)
     stfs f2, 0x53c(r3)
-    b lbl_fn_803FD328_00000864
-lbl_fn_803FD328_000007C8:
+    b lbl_chain_attack_changeState_00000864
+lbl_chain_attack_changeState_000007C8:
     li r4, 0x9
     bl actor_setState
     lwz r3, 0xf8(r28)
@@ -650,10 +650,10 @@ lbl_fn_803FD328_000007C8:
     lwz r3, 0xf8(r28)
     addi r3, r3, 0xb0
     bl atn_Anim_setLayerAnimation
-    b lbl_fn_803FD328_00000864
-lbl_fn_803FD328_00000814:
+    b lbl_chain_attack_changeState_00000864
+lbl_chain_attack_changeState_00000814:
     cmpwi r27, 0x1
-    bne lbl_fn_803FD328_00000864
+    bne lbl_chain_attack_changeState_00000864
     li r4, 0x9
     bl actor_setState
     lwz r3, 0xf8(r28)
@@ -672,35 +672,35 @@ lbl_fn_803FD328_00000814:
     lwz r3, 0xf8(r28)
     addi r3, r3, 0xb0
     bl atn_Anim_setLayerAnimation
-lbl_fn_803FD328_00000864:
+lbl_chain_attack_changeState_00000864:
     addi r27, r27, 0x1
     addi r30, r30, 0x4
     cmpwi r27, 0x2
-    blt lbl_fn_803FD328_000005CC
-    b lbl_fn_803FD328_00000BAC
-lbl_fn_803FD328_00000878:
+    blt lbl_chain_attack_changeState_000005CC
+    b lbl_chain_attack_changeState_00000BAC
+lbl_chain_attack_changeState_00000878:
     lwz r4, 0xfc(r3)
     cmpwi r4, 0x0
-    beq lbl_fn_803FD328_00000978
+    beq lbl_chain_attack_changeState_00000978
     lwz r3, 0xf4(r3)
     lwz r0, 0x2c(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_803FD328_000008B8
+    beq lbl_chain_attack_changeState_000008B8
     cmpwi r0, 0x2
-    beq lbl_fn_803FD328_000008B8
+    beq lbl_chain_attack_changeState_000008B8
     cmpwi r0, 0x4
-    beq lbl_fn_803FD328_000008B8
+    beq lbl_chain_attack_changeState_000008B8
     cmpwi r0, 0x1
-    beq lbl_fn_803FD328_000008C8
+    beq lbl_chain_attack_changeState_000008C8
     cmpwi r0, 0x3
-    beq lbl_fn_803FD328_00000920
-    b lbl_fn_803FD328_00000BAC
-lbl_fn_803FD328_000008B8:
+    beq lbl_chain_attack_changeState_00000920
+    b lbl_chain_attack_changeState_00000BAC
+lbl_chain_attack_changeState_000008B8:
     mr r3, r26
     li r4, 0x9
-    bl fn_803FD328
-    b lbl_fn_803FD328_00000BAC
-lbl_fn_803FD328_000008C8:
+    bl chain_attack_changeState
+    b lbl_chain_attack_changeState_00000BAC
+lbl_chain_attack_changeState_000008C8:
     mr r3, r4
     li r4, 0x9
     bl actor_setState
@@ -722,8 +722,8 @@ lbl_fn_803FD328_000008C8:
     lwz r3, 0xfc(r26)
     addi r3, r3, 0xb0
     bl atn_Anim_setLayerAnimation
-    b lbl_fn_803FD328_00000BAC
-lbl_fn_803FD328_00000920:
+    b lbl_chain_attack_changeState_00000BAC
+lbl_chain_attack_changeState_00000920:
     mr r3, r4
     li r4, 0x9
     bl actor_setState
@@ -745,34 +745,34 @@ lbl_fn_803FD328_00000920:
     lwz r3, 0xfc(r26)
     addi r3, r3, 0xb0
     bl atn_Anim_setLayerAnimation
-    b lbl_fn_803FD328_00000BAC
-lbl_fn_803FD328_00000978:
+    b lbl_chain_attack_changeState_00000BAC
+lbl_chain_attack_changeState_00000978:
     li r4, 0x9
-    bl fn_803FD328
-    b lbl_fn_803FD328_00000BAC
-lbl_fn_803FD328_00000984:
+    bl chain_attack_changeState
+    b lbl_chain_attack_changeState_00000BAC
+lbl_chain_attack_changeState_00000984:
     lwz r4, 0xf8(r3)
     cmpwi r4, 0x0
-    beq lbl_fn_803FD328_00000ADC
+    beq lbl_chain_attack_changeState_00000ADC
     lwz r3, 0xf4(r3)
     lwz r0, 0x2c(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_803FD328_000009C4
+    beq lbl_chain_attack_changeState_000009C4
     cmpwi r0, 0x2
-    beq lbl_fn_803FD328_000009C4
+    beq lbl_chain_attack_changeState_000009C4
     cmpwi r0, 0x1
-    beq lbl_fn_803FD328_000009D4
+    beq lbl_chain_attack_changeState_000009D4
     cmpwi r0, 0x3
-    beq lbl_fn_803FD328_00000A2C
+    beq lbl_chain_attack_changeState_00000A2C
     cmpwi r0, 0x4
-    beq lbl_fn_803FD328_00000A84
-    b lbl_fn_803FD328_00000BAC
-lbl_fn_803FD328_000009C4:
+    beq lbl_chain_attack_changeState_00000A84
+    b lbl_chain_attack_changeState_00000BAC
+lbl_chain_attack_changeState_000009C4:
     mr r3, r26
     li r4, 0xa
-    bl fn_803FD328
-    b lbl_fn_803FD328_00000BAC
-lbl_fn_803FD328_000009D4:
+    bl chain_attack_changeState
+    b lbl_chain_attack_changeState_00000BAC
+lbl_chain_attack_changeState_000009D4:
     mr r3, r4
     li r4, 0x9
     bl actor_setState
@@ -794,8 +794,8 @@ lbl_fn_803FD328_000009D4:
     lwz r3, 0xf8(r26)
     addi r3, r3, 0xb0
     bl atn_Anim_setLayerAnimation
-    b lbl_fn_803FD328_00000BAC
-lbl_fn_803FD328_00000A2C:
+    b lbl_chain_attack_changeState_00000BAC
+lbl_chain_attack_changeState_00000A2C:
     mr r3, r4
     li r4, 0x9
     bl actor_setState
@@ -817,8 +817,8 @@ lbl_fn_803FD328_00000A2C:
     lwz r3, 0xf8(r26)
     addi r3, r3, 0xb0
     bl atn_Anim_setLayerAnimation
-    b lbl_fn_803FD328_00000BAC
-lbl_fn_803FD328_00000A84:
+    b lbl_chain_attack_changeState_00000BAC
+lbl_chain_attack_changeState_00000A84:
     mr r3, r4
     li r4, 0x9
     bl actor_setState
@@ -840,20 +840,20 @@ lbl_fn_803FD328_00000A84:
     lwz r3, 0xf8(r26)
     addi r3, r3, 0xb0
     bl atn_Anim_setLayerAnimation
-    b lbl_fn_803FD328_00000BAC
-lbl_fn_803FD328_00000ADC:
+    b lbl_chain_attack_changeState_00000BAC
+lbl_chain_attack_changeState_00000ADC:
     li r4, 0xa
-    bl fn_803FD328
-    b lbl_fn_803FD328_00000BAC
-lbl_fn_803FD328_00000AE8:
+    bl chain_attack_changeState
+    b lbl_chain_attack_changeState_00000BAC
+lbl_chain_attack_changeState_00000AE8:
     mr r25, r26
     li r29, 0x0
     li r27, 0x2
     li r28, 0x1
-lbl_fn_803FD328_00000AF8:
+lbl_chain_attack_changeState_00000AF8:
     lwz r3, 0xf8(r25)
     cmpwi r3, 0x0
-    beq lbl_fn_803FD328_00000B84
+    beq lbl_chain_attack_changeState_00000B84
     li r4, 0x0
     li r5, 0x1
     li r6, 0x1
@@ -862,47 +862,47 @@ lbl_fn_803FD328_00000AF8:
     lwz r3, 0xf8(r25)
     lwz r0, 0x55c(r3)
     cmpwi r0, 0x6
-    bne lbl_fn_803FD328_00000B34
+    bne lbl_chain_attack_changeState_00000B34
     lwz r0, 0x560(r3)
     cmpwi r0, 0x44
-    beq lbl_fn_803FD328_00000B40
-lbl_fn_803FD328_00000B34:
+    beq lbl_chain_attack_changeState_00000B40
+lbl_chain_attack_changeState_00000B34:
     bl fn_8016D3F8
     cmpwi r3, 0x0
-    beq lbl_fn_803FD328_00000B60
-lbl_fn_803FD328_00000B40:
+    beq lbl_chain_attack_changeState_00000B60
+lbl_chain_attack_changeState_00000B40:
     lwz r3, 0xf8(r25)
     lwz r0, 0x48(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_803FD328_00000B58
+    bne lbl_chain_attack_changeState_00000B58
     stw r28, 0x564(r3)
-    b lbl_fn_803FD328_00000B74
-lbl_fn_803FD328_00000B58:
+    b lbl_chain_attack_changeState_00000B74
+lbl_chain_attack_changeState_00000B58:
     stw r27, 0x564(r3)
-    b lbl_fn_803FD328_00000B74
-lbl_fn_803FD328_00000B60:
+    b lbl_chain_attack_changeState_00000B74
+lbl_chain_attack_changeState_00000B60:
     lwz r3, 0xf8(r25)
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
     bl battle_applyStatusEffect
-lbl_fn_803FD328_00000B74:
+lbl_chain_attack_changeState_00000B74:
     lwz r3, 0xf8(r25)
     lhz r0, 0xd38(r3)
     rlwinm r0, r0, 0, 17, 15
     sth r0, 0xd38(r3)
-lbl_fn_803FD328_00000B84:
+lbl_chain_attack_changeState_00000B84:
     lwz r0, 0xf8(r25)
     addi r29, r29, 0x1
     stw r0, 0x100(r25)
     cmpwi r29, 0x2
     stw r30, 0xf8(r25)
     addi r25, r25, 0x4
-    blt lbl_fn_803FD328_00000AF8
+    blt lbl_chain_attack_changeState_00000AF8
     mr r3, r26
     li r4, 0x0
-    bl fn_803FD328
-lbl_fn_803FD328_00000BAC:
+    bl chain_attack_changeState
+lbl_chain_attack_changeState_00000BAC:
     addi r11, r1, 0x50
     psq_l f31, 0x88(r1), 0, 0
     lfd f31, 0x80(r1)

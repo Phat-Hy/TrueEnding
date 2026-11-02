@@ -364,7 +364,7 @@ void fn_8068B1A4(void);
 void fn_8068B1F8(void);
 void fn_8068B1FC(void);
 void fn_8068B29C(void);
-void fn_8068B2A0(void);
+void _itow(void);
 void fn_8068B39C(void);
 void fn_8068B47C(void);
 void fn_8068B50C(void);
@@ -5479,7 +5479,7 @@ asm void fn_8068B29C(void)
     b fn_8067DB74
 }
 
-asm void fn_8068B2A0(void)
+asm void _itow(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -5492,35 +5492,35 @@ asm void fn_8068B2A0(void)
     stw r31, 0xc(r1)
     mr r31, r4
     stw r30, 0x8(r1)
-    bge lbl_fn_8068B2A0_000043E0
+    bge lbl__itow_000043E0
     neg r3, r3
     li r7, 0x1
-lbl_fn_8068B2A0_000043E0:
+lbl__itow_000043E0:
     divwu r0, r3, r5
     mullw r0, r0, r5
     subf r9, r0, r3
     cmpwi r9, 0x9
-    ble lbl_fn_8068B2A0_00004408
+    ble lbl__itow_00004408
     addi r0, r9, 0x37
     sthx r0, r4, r6
     addi r8, r8, 0x1
     addi r6, r6, 0x2
-    b lbl_fn_8068B2A0_00004418
-lbl_fn_8068B2A0_00004408:
+    b lbl__itow_00004418
+lbl__itow_00004408:
     addi r0, r9, 0x30
     sthx r0, r4, r6
     addi r8, r8, 0x1
     addi r6, r6, 0x2
-lbl_fn_8068B2A0_00004418:
+lbl__itow_00004418:
     divwu. r3, r3, r5
-    bne lbl_fn_8068B2A0_000043E0
+    bne lbl__itow_000043E0
     cmpwi r7, 0x0
-    beq lbl_fn_8068B2A0_00004438
+    beq lbl__itow_00004438
     slwi r0, r8, 1
     li r3, 0x2d
     sthx r3, r4, r0
     addi r8, r8, 0x1
-lbl_fn_8068B2A0_00004438:
+lbl__itow_00004438:
     slwi r0, r8, 1
     li r3, 0x0
     sthx r3, r4, r0
@@ -5531,8 +5531,8 @@ lbl_fn_8068B2A0_00004438:
     mr r5, r31
     slwi r0, r4, 1
     add r6, r31, r0
-    b lbl_fn_8068B2A0_00004484
-lbl_fn_8068B2A0_00004464:
+    b lbl__itow_00004484
+lbl__itow_00004464:
     lhz r3, 0x0(r5)
     addi r30, r30, 0x1
     lhz r0, 0x0(r6)
@@ -5541,9 +5541,9 @@ lbl_fn_8068B2A0_00004464:
     addi r5, r5, 0x2
     sth r3, 0x0(r6)
     subi r6, r6, 0x2
-lbl_fn_8068B2A0_00004484:
+lbl__itow_00004484:
     cmpw r30, r4
-    blt lbl_fn_8068B2A0_00004464
+    blt lbl__itow_00004464
     mr r3, r31
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)

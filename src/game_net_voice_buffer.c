@@ -14,7 +14,7 @@ extern void ref_releaseHandle(void);
 extern void morph_updateWeights(void);
 extern void fn_800CB518(void);
 extern void morph_updateMesh(void);
-extern void fn_8017ABD4(void);
+extern void map_setRecordById(void);
 extern void fn_803E5E64(void);
 extern void fn_803EBAC8(void);
 extern void fn_80444020(void);
@@ -839,7 +839,7 @@ lbl_fn_804DA4A4_000009EC:
     extrwi r0, r0, 1, 26
     neg r4, r0
     addi r4, r4, 0x27e6
-    bl fn_8017ABD4
+    bl map_setRecordById
     lwz r4, 0x0(r31)
     li r6, 0x0
     lwz r3, lbl_8087EE68
@@ -850,7 +850,7 @@ lbl_fn_804DA4A4_000009EC:
 lbl_fn_804DA4A4_00000A58:
     mr r3, r30
     li r4, 0x0
-    bl fn_8017ABD4
+    bl map_setRecordById
     lwz r3, lbl_8087EE68
     li r5, 0x0
     lwz r4, 0x0(r31)

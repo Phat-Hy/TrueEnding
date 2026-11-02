@@ -17,7 +17,7 @@ extern void fn_801F5740(void);
 extern void fn_801F5E9C(void);
 extern void fn_801F60B8(void);
 extern void save_writeBackupSlot(void);
-extern void fn_801F80A8(void);
+extern void curve_setKeyframeColorRGB(void);
 extern void thread_findAndNotify(void);
 extern void fn_801FEEFC(void);
 extern void task_findEntryById(void);
@@ -1392,7 +1392,7 @@ asm void fn_803DDD54(void)
     stfs f2, 0x29c(r1)
     stfs f1, 0x2a0(r1)
     stfs f0, 0x2a4(r1)
-    bl fn_801F80A8
+    bl curve_setKeyframeColorRGB
     lfs f3, 0x0(r31)
     mr r3, r30
     lfs f2, 0x4(r28)
@@ -1404,7 +1404,7 @@ asm void fn_803DDD54(void)
     stfs f2, 0x28c(r1)
     stfs f1, 0x290(r1)
     stfs f0, 0x294(r1)
-    bl fn_801F80A8
+    bl curve_setKeyframeColorRGB
     b lbl_fn_803DDD54_00001BA4
     lfs f3, lbl_80885DFC
     lis r29, lbl_807506A0@ha
@@ -1443,7 +1443,7 @@ asm void fn_803DDD54(void)
     stfs f2, 0x25c(r1)
     stfs f1, 0x260(r1)
     stfs f0, 0x264(r1)
-    bl fn_801F80A8
+    bl curve_setKeyframeColorRGB
     lfs f3, 0x40(r31)
     mr r3, r30
     lfs f2, 0x4(r28)
@@ -1455,7 +1455,7 @@ asm void fn_803DDD54(void)
     stfs f2, 0x24c(r1)
     stfs f1, 0x250(r1)
     stfs f0, 0x254(r1)
-    bl fn_801F80A8
+    bl curve_setKeyframeColorRGB
     b lbl_fn_803DDD54_00001BA4
     lfs f1, lbl_80885DFC
     lis r29, lbl_807506A0@ha
@@ -1492,7 +1492,7 @@ asm void fn_803DDD54(void)
     stfs f2, 0x21c(r1)
     stfs f1, 0x220(r1)
     stfs f0, 0x224(r1)
-    bl fn_801F80A8
+    bl curve_setKeyframeColorRGB
     lfs f3, 0x60(r31)
     mr r3, r30
     lfs f2, 0x4(r28)
@@ -1504,7 +1504,7 @@ asm void fn_803DDD54(void)
     stfs f2, 0x20c(r1)
     stfs f1, 0x210(r1)
     stfs f0, 0x214(r1)
-    bl fn_801F80A8
+    bl curve_setKeyframeColorRGB
     b lbl_fn_803DDD54_00001BA4
     lfs f2, lbl_80885E28
     lis r29, lbl_807506A0@ha
@@ -1541,7 +1541,7 @@ asm void fn_803DDD54(void)
     stfs f2, 0x1dc(r1)
     stfs f1, 0x1e0(r1)
     stfs f0, 0x1e4(r1)
-    bl fn_801F80A8
+    bl curve_setKeyframeColorRGB
     lfs f3, 0x20(r31)
     mr r3, r30
     lfs f2, 0x4(r28)
@@ -1553,7 +1553,7 @@ asm void fn_803DDD54(void)
     stfs f2, 0x1cc(r1)
     stfs f1, 0x1d0(r1)
     stfs f0, 0x1d4(r1)
-    bl fn_801F80A8
+    bl curve_setKeyframeColorRGB
     b lbl_fn_803DDD54_00001BA4
     lfs f2, lbl_80885E28
     lis r29, lbl_807506A0@ha
@@ -1590,7 +1590,7 @@ asm void fn_803DDD54(void)
     stfs f2, 0x19c(r1)
     stfs f1, 0x1a0(r1)
     stfs f0, 0x1a4(r1)
-    bl fn_801F80A8
+    bl curve_setKeyframeColorRGB
     lfs f3, 0x30(r31)
     mr r3, r30
     lfs f2, 0x4(r28)
@@ -1602,7 +1602,7 @@ asm void fn_803DDD54(void)
     stfs f2, 0x18c(r1)
     stfs f1, 0x190(r1)
     stfs f0, 0x194(r1)
-    bl fn_801F80A8
+    bl curve_setKeyframeColorRGB
     b lbl_fn_803DDD54_00001BA4
     lfs f1, lbl_80885E28
     lis r29, lbl_807506A0@ha
@@ -1637,7 +1637,7 @@ asm void fn_803DDD54(void)
     stfs f2, 0x15c(r1)
     stfs f1, 0x160(r1)
     stfs f0, 0x164(r1)
-    bl fn_801F80A8
+    bl curve_setKeyframeColorRGB
     lfs f3, 0x70(r31)
     mr r3, r30
     lfs f2, 0x4(r28)
@@ -1649,7 +1649,7 @@ asm void fn_803DDD54(void)
     stfs f2, 0x14c(r1)
     stfs f1, 0x150(r1)
     stfs f0, 0x154(r1)
-    bl fn_801F80A8
+    bl curve_setKeyframeColorRGB
     b lbl_fn_803DDD54_00001BA4
     lfs f2, lbl_80885DFC
     lis r29, lbl_807506A0@ha
@@ -1686,7 +1686,7 @@ asm void fn_803DDD54(void)
     stfs f2, 0x11c(r1)
     stfs f1, 0x120(r1)
     stfs f0, 0x124(r1)
-    bl fn_801F80A8
+    bl curve_setKeyframeColorRGB
     lfs f3, 0x80(r31)
     mr r3, r30
     lfs f2, 0x4(r28)
@@ -1698,7 +1698,7 @@ asm void fn_803DDD54(void)
     stfs f2, 0x10c(r1)
     stfs f1, 0x110(r1)
     stfs f0, 0x114(r1)
-    bl fn_801F80A8
+    bl curve_setKeyframeColorRGB
     b lbl_fn_803DDD54_00001BA4
     lfs f3, lbl_80885DE8
     lis r29, lbl_807506A0@ha
@@ -1737,7 +1737,7 @@ asm void fn_803DDD54(void)
     stfs f2, 0xdc(r1)
     stfs f1, 0xe0(r1)
     stfs f0, 0xe4(r1)
-    bl fn_801F80A8
+    bl curve_setKeyframeColorRGB
     lfs f3, 0x90(r31)
     mr r3, r30
     lfs f2, 0x4(r28)
@@ -1749,7 +1749,7 @@ asm void fn_803DDD54(void)
     stfs f2, 0xcc(r1)
     stfs f1, 0xd0(r1)
     stfs f0, 0xd4(r1)
-    bl fn_801F80A8
+    bl curve_setKeyframeColorRGB
     b lbl_fn_803DDD54_00001BA4
     lfs f3, lbl_80885D58
     lis r29, lbl_807506A0@ha
@@ -1788,7 +1788,7 @@ asm void fn_803DDD54(void)
     stfs f2, 0x9c(r1)
     stfs f1, 0xa0(r1)
     stfs f0, 0xa4(r1)
-    bl fn_801F80A8
+    bl curve_setKeyframeColorRGB
     lfs f3, 0xb0(r31)
     mr r3, r30
     lfs f2, 0x4(r28)
@@ -1800,7 +1800,7 @@ asm void fn_803DDD54(void)
     stfs f2, 0x8c(r1)
     stfs f1, 0x90(r1)
     stfs f0, 0x94(r1)
-    bl fn_801F80A8
+    bl curve_setKeyframeColorRGB
     b lbl_fn_803DDD54_00001BA4
     lfs f1, lbl_80885E28
     lis r29, lbl_807506A0@ha
@@ -1837,7 +1837,7 @@ asm void fn_803DDD54(void)
     stfs f2, 0x5c(r1)
     stfs f1, 0x60(r1)
     stfs f0, 0x64(r1)
-    bl fn_801F80A8
+    bl curve_setKeyframeColorRGB
     lfs f3, 0xa0(r31)
     mr r3, r30
     lfs f2, 0x4(r28)
@@ -1849,7 +1849,7 @@ asm void fn_803DDD54(void)
     stfs f2, 0x4c(r1)
     stfs f1, 0x50(r1)
     stfs f0, 0x54(r1)
-    bl fn_801F80A8
+    bl curve_setKeyframeColorRGB
     b lbl_fn_803DDD54_00001BA4
 lbl_fn_803DDD54_00001AD8:
     lfs f3, lbl_80885DE8
@@ -1890,7 +1890,7 @@ lbl_fn_803DDD54_00001AD8:
     stfs f2, 0x1c(r1)
     stfs f1, 0x20(r1)
     stfs f0, 0x24(r1)
-    bl fn_801F80A8
+    bl curve_setKeyframeColorRGB
     lfs f3, 0x50(r31)
     mr r3, r30
     lfs f2, 0x4(r29)
@@ -1902,7 +1902,7 @@ lbl_fn_803DDD54_00001AD8:
     stfs f2, 0xc(r1)
     stfs f1, 0x10(r1)
     stfs f0, 0x14(r1)
-    bl fn_801F80A8
+    bl curve_setKeyframeColorRGB
 lbl_fn_803DDD54_00001BA4:
     lwz r0, 0x2e4(r1)
     lwz r31, 0x2dc(r1)

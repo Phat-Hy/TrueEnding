@@ -33,7 +33,7 @@ extern void task_destroyWorker(void);
 extern void task_updateWorker(void);
 extern void task_initWorkerContext(void);
 extern void dungeon_updateBarrierField(void);
-extern void fn_803FD328(void);
+extern void chain_attack_changeState(void);
 extern void fn_804093B4(void);
 extern void atn_LoadHandle_destructor(void);
 extern void PSMTXRotRad(void);
@@ -1525,7 +1525,7 @@ lbl_fn_803FC9DC_000012E0:
     stw r3, 0x10c(r31)
     mr r3, r31
     li r4, 0x0
-    bl fn_803FD328
+    bl chain_attack_changeState
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0
@@ -1619,7 +1619,7 @@ lbl_fn_803FCAB0_00001450:
     beq lbl_fn_803FCAB0_000018F4
     mr r3, r31
     li r4, 0xa
-    bl fn_803FD328
+    bl chain_attack_changeState
     b lbl_fn_803FCAB0_000018F4
 lbl_fn_803FCAB0_00001474:
     mr r30, r31
@@ -1655,24 +1655,24 @@ lbl_fn_803FCAB0_000014AC:
 lbl_fn_803FCAB0_000014E0:
     mr r3, r31
     li r4, 0xa
-    bl fn_803FD328
+    bl chain_attack_changeState
     b lbl_fn_803FCAB0_000018F4
 lbl_fn_803FCAB0_000014F0:
     cmpwi r29, 0x0
     bne lbl_fn_803FCAB0_000018F4
     mr r3, r31
     li r4, 0xa
-    bl fn_803FD328
+    bl chain_attack_changeState
     b lbl_fn_803FCAB0_000018F4
 lbl_fn_803FCAB0_00001508:
     mr r3, r31
     li r4, 0xa
-    bl fn_803FD328
+    bl chain_attack_changeState
     b lbl_fn_803FCAB0_000018F4
 lbl_fn_803FCAB0_00001518:
     mr r3, r31
     li r4, 0xa
-    bl fn_803FD328
+    bl chain_attack_changeState
     b lbl_fn_803FCAB0_000018F4
 lbl_fn_803FCAB0_00001528:
     addi r29, r29, 0x1
@@ -1700,7 +1700,7 @@ lbl_fn_803FCAB0_00001528:
     ble lbl_fn_803FCAB0_000018F4
     mr r3, r31
     li r4, 0x1
-    bl fn_803FD328
+    bl chain_attack_changeState
     b lbl_fn_803FCAB0_000018F4
     lwz r0, 0xf8(r31)
     cmpwi r0, 0x0
@@ -1724,7 +1724,7 @@ lbl_fn_803FCAB0_000015B0:
     lhz r0, 0xd38(r5)
     ori r0, r0, 0x8000
     sth r0, 0xd38(r5)
-    bl fn_803FD328
+    bl chain_attack_changeState
     b lbl_fn_803FCAB0_000018F4
     lwz r3, 0xf8(r31)
     lwz r0, 0x105c(r3)
@@ -1732,7 +1732,7 @@ lbl_fn_803FCAB0_000015B0:
     beq lbl_fn_803FCAB0_000018F4
     mr r3, r31
     li r4, 0x3
-    bl fn_803FD328
+    bl chain_attack_changeState
     b lbl_fn_803FCAB0_000018F4
     lwz r3, 0xf8(r31)
     li r4, 0x0
@@ -1744,7 +1744,7 @@ lbl_fn_803FCAB0_000015B0:
     bne lbl_fn_803FCAB0_000018F4
     mr r3, r31
     li r4, 0x4
-    bl fn_803FD328
+    bl chain_attack_changeState
     b lbl_fn_803FCAB0_000018F4
     lwz r0, 0xfc(r31)
     cmpwi r0, 0x0
@@ -1848,7 +1848,7 @@ lbl_fn_803FCAB0_0000173C:
     lhz r0, 0xd38(r5)
     ori r0, r0, 0x8000
     sth r0, 0xd38(r5)
-    bl fn_803FD328
+    bl chain_attack_changeState
     b lbl_fn_803FCAB0_000018F4
 lbl_fn_803FCAB0_000017C4:
     lwz r3, 0x110(r31)
@@ -1858,7 +1858,7 @@ lbl_fn_803FCAB0_000017C4:
     ble lbl_fn_803FCAB0_000018F4
     mr r3, r31
     li r4, 0x9
-    bl fn_803FD328
+    bl chain_attack_changeState
     b lbl_fn_803FCAB0_000018F4
     lwz r3, 0xfc(r31)
     lwz r0, 0x105c(r3)
@@ -1866,7 +1866,7 @@ lbl_fn_803FCAB0_000017C4:
     beq lbl_fn_803FCAB0_00001808
     mr r3, r31
     li r4, 0x6
-    bl fn_803FD328
+    bl chain_attack_changeState
     b lbl_fn_803FCAB0_000018F4
 lbl_fn_803FCAB0_00001808:
     lwz r3, 0x110(r31)
@@ -1876,7 +1876,7 @@ lbl_fn_803FCAB0_00001808:
     ble lbl_fn_803FCAB0_000018F4
     mr r3, r31
     li r4, 0x9
-    bl fn_803FD328
+    bl chain_attack_changeState
     b lbl_fn_803FCAB0_000018F4
     lwz r3, 0xfc(r31)
     li r4, 0x0
@@ -1888,7 +1888,7 @@ lbl_fn_803FCAB0_00001808:
     bne lbl_fn_803FCAB0_000018F4
     mr r3, r31
     li r4, 0x7
-    bl fn_803FD328
+    bl chain_attack_changeState
     b lbl_fn_803FCAB0_000018F4
     lwz r3, 0x110(r31)
     lwz r4, 0xf4(r31)
@@ -1904,7 +1904,7 @@ lbl_fn_803FCAB0_00001808:
 lbl_fn_803FCAB0_00001888:
     mr r3, r31
     li r4, 0x8
-    bl fn_803FD328
+    bl chain_attack_changeState
     b lbl_fn_803FCAB0_000018F4
     lwz r3, 0xfc(r31)
     li r4, 0x0
@@ -1916,7 +1916,7 @@ lbl_fn_803FCAB0_00001888:
     bne lbl_fn_803FCAB0_000018F4
     mr r3, r31
     li r4, 0x9
-    bl fn_803FD328
+    bl chain_attack_changeState
     b lbl_fn_803FCAB0_000018F4
     lwz r3, 0xf8(r31)
     li r4, 0x0
@@ -1928,7 +1928,7 @@ lbl_fn_803FCAB0_00001888:
     bne lbl_fn_803FCAB0_000018F4
     mr r3, r31
     li r4, 0xa
-    bl fn_803FD328
+    bl chain_attack_changeState
 lbl_fn_803FCAB0_000018F4:
     lwz r0, 0xa4(r1)
     psq_l f31, 0x98(r1), 0, 0

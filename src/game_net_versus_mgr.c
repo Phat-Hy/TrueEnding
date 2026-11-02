@@ -55,7 +55,7 @@ extern void fn_8050F86C(void);
 extern void fn_8050F8A4(void);
 extern void printf(void);
 extern void abort(void);
-extern void fn_8068B2A0(void);
+extern void _itow(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -1992,7 +1992,7 @@ lbl_fn_804B9960_00001AE0:
     lwz r3, 0x2e8(r29)
     addi r4, r1, 0xa0
     li r5, 0xa
-    bl fn_8068B2A0
+    bl _itow
     lwz r4, 0x288(r29)
     mr r3, r31
     addi r24, r4, 0x58

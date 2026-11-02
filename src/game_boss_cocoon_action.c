@@ -15,7 +15,7 @@ extern void fn_8000D9F8(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void str_initFromCStr(void);
 extern void menu_initWindowBuffer(void);
-extern void fn_80042108(void);
+extern void vec4_copy(void);
 extern void str_getData(void);
 extern void mission_updateStub(void);
 extern void talk_parseQuotedString(void);
@@ -1786,7 +1786,7 @@ lbl_fn_8045374C_0000167C:
     bl fn_800F8014
     mr r4, r3
     addi r3, r31, 0x2738
-    bl fn_80042108
+    bl vec4_copy
     lfs f2, lbl_80886B84
     addi r3, r1, 0xe8
     lfs f1, lbl_80886B98
@@ -1822,7 +1822,7 @@ lbl_fn_8045374C_0000167C:
     bl fn_800F8014
     mr r4, r3
     addi r3, r31, 0x2808
-    bl fn_80042108
+    bl vec4_copy
     lfs f2, lbl_80886B84
     addi r3, r1, 0xa8
     lfs f1, lbl_80886B90
@@ -1858,7 +1858,7 @@ lbl_fn_8045374C_0000167C:
     bl fn_800F8014
     mr r4, r3
     addi r3, r31, 0x28d8
-    bl fn_80042108
+    bl vec4_copy
     lfs f2, lbl_80886B84
     addi r3, r1, 0x68
     lfs f1, lbl_80886B98
@@ -1895,7 +1895,7 @@ lbl_fn_8045374C_0000167C:
     bl fn_800F8014
     mr r4, r3
     addi r3, r31, 0x29a8
-    bl fn_80042108
+    bl vec4_copy
     lfs f2, lbl_80886B84
     addi r3, r1, 0x28
     lfs f1, lbl_80886B98

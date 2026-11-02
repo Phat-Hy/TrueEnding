@@ -86,7 +86,7 @@ void fn_8017A450(void);
 void fn_8017A504(void);
 void fn_8017A5D8(void);
 void fn_8017A9A8(void);
-void fn_8017ABD4(void);
+void map_setRecordById(void);
 void fn_8017AC08(void);
 f32 fn_8017AC24(void);
 void fn_8017AC2C(void);
@@ -1454,7 +1454,7 @@ lbl_fn_8017A9A8_000011F8:
     blr
 }
 
-asm void fn_8017ABD4(void)
+asm void map_setRecordById(void)
 {
     nofralloc
     stwu r1, -0x10(r1)

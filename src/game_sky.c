@@ -46,7 +46,7 @@ extern void wcschr(void);
 extern void fn_80686B90(void);
 extern void fn_8068B1A4(void);
 extern void fn_8068B29C(void);
-extern void fn_8068B2A0(void);
+extern void _itow(void);
 extern void memmove(void);
 extern u32 strlen(const char* str);
 
@@ -1670,7 +1670,7 @@ lbl_wcs_vformat_000014A0:
     lwz r3, 0x0(r3)
     addi r4, r1, 0xf8
     li r5, 0x2
-    bl fn_8068B2A0
+    bl _itow
     cmpwi r18, 0x0
     mr r24, r3
     ble lbl_wcs_vformat_00001704
@@ -1686,7 +1686,7 @@ lbl_wcs_vformat_000014DC:
     lwz r3, 0x0(r3)
     addi r4, r1, 0xf8
     li r5, 0x8
-    bl fn_8068B2A0
+    bl _itow
     cmpwi r18, 0x0
     mr r24, r3
     ble lbl_wcs_vformat_00001704
@@ -1702,7 +1702,7 @@ lbl_wcs_vformat_00001518:
     lwz r3, 0x0(r3)
     addi r4, r1, 0xf8
     li r5, 0x10
-    bl fn_8068B2A0
+    bl _itow
     cmpwi r18, 0x0
     mr r24, r3
     ble lbl_wcs_vformat_00001704
@@ -1719,7 +1719,7 @@ lbl_wcs_vformat_00001554:
     addi r4, r1, 0xf8
     li r5, 0xa
     mr r3, r25
-    bl fn_8068B2A0
+    bl _itow
     cmpwi r18, 0x0
     mr r24, r3
     ble lbl_wcs_vformat_000015A0
@@ -1779,7 +1779,7 @@ lbl_wcs_vformat_000015E8:
 lbl_wcs_vformat_00001644:
     addi r4, r1, 0xf8
     li r5, 0xa
-    bl fn_8068B2A0
+    bl _itow
     mr r24, r3
     bl wcslen
     mr r29, r3
@@ -1797,7 +1797,7 @@ lbl_wcs_vformat_00001674:
     mr r3, r25
     li r5, 0xa
     add r4, r24, r0
-    bl fn_8068B2A0
+    bl _itow
     cmpwi r18, 0x0
     mr r24, r26
     ble lbl_wcs_vformat_00001704

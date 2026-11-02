@@ -58,7 +58,7 @@ extern u32 lbl_8088700C;
 
 /* Function declarations */
 u32 fn_804814E8(void);
-u32 fn_804814F0(void);
+u32 dvd_getErrorManager(void);
 void fn_804814F8(void);
 void fn_80481654(void);
 void fn_80481668(void);
@@ -86,7 +86,7 @@ u32 fn_804814E8(void)
     return lbl_8087F558;
 }
 
-u32 fn_804814F0(void)
+u32 dvd_getErrorManager(void)
 {
     return lbl_8087F448;
 }

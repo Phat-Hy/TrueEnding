@@ -42,7 +42,7 @@ extern void fn_806FC5D0(void);
 extern void fn_806FC900(void);
 extern void fn_806FE9A0(void);
 extern void fn_806FEA20(void);
-extern void fn_806FEAA0(void);
+extern void SBServerGetIntValue(void);
 extern void fn_806FEC60(void);
 extern void fn_806FEC90(void);
 extern void fn_806FECA0(void);
@@ -163,7 +163,7 @@ asm void fn_806C8700(void)
     mr r3, r28
     addi r4, r31, 0x2228
     li r5, -0x1
-    bl fn_806FEAA0
+    bl SBServerGetIntValue
     mr r5, r3
     addi r4, r31, 0x2470
     li r3, 0x400
@@ -172,7 +172,7 @@ asm void fn_806C8700(void)
     mr r3, r28
     addi r4, r31, 0x2234
     li r5, -0x1
-    bl fn_806FEAA0
+    bl SBServerGetIntValue
     mr r5, r3
     addi r4, r31, 0x2484
     li r3, 0x400
@@ -181,7 +181,7 @@ asm void fn_806C8700(void)
     mr r3, r28
     addi r4, r31, 0x188
     li r5, 0x0
-    bl fn_806FEAA0
+    bl SBServerGetIntValue
     mr r6, r3
     addi r4, r31, 0x2498
     addi r5, r31, 0x188
@@ -191,7 +191,7 @@ asm void fn_806C8700(void)
     mr r3, r28
     addi r4, r31, 0x190
     li r5, -0x1
-    bl fn_806FEAA0
+    bl SBServerGetIntValue
     mr r6, r3
     addi r4, r31, 0x24a8
     addi r5, r31, 0x190
@@ -201,7 +201,7 @@ asm void fn_806C8700(void)
     mr r3, r28
     addi r4, r31, 0x19c
     li r5, -0x1
-    bl fn_806FEAA0
+    bl SBServerGetIntValue
     mr r6, r3
     addi r4, r31, 0x24a8
     addi r5, r31, 0x19c
@@ -211,7 +211,7 @@ asm void fn_806C8700(void)
     mr r3, r28
     addi r4, r31, 0x1b4
     li r5, -0x1
-    bl fn_806FEAA0
+    bl SBServerGetIntValue
     mr r6, r3
     addi r4, r31, 0x24a8
     addi r5, r31, 0x1b4
@@ -221,7 +221,7 @@ asm void fn_806C8700(void)
     mr r3, r28
     addi r4, r31, 0x1c0
     li r5, -0x1
-    bl fn_806FEAA0
+    bl SBServerGetIntValue
     mr r6, r3
     addi r4, r31, 0x24a8
     addi r5, r31, 0x1c0
@@ -231,7 +231,7 @@ asm void fn_806C8700(void)
     mr r3, r28
     addi r4, r31, 0x1d0
     li r5, -0x1
-    bl fn_806FEAA0
+    bl SBServerGetIntValue
     mr r6, r3
     addi r4, r31, 0x24a8
     addi r5, r31, 0x1d0
@@ -263,7 +263,7 @@ lbl_fn_806C8700_00000278:
     lwz r4, 0x4(r30)
     mr r3, r28
     li r5, -0x1
-    bl fn_806FEAA0
+    bl SBServerGetIntValue
     lwz r5, 0x4(r30)
     mr r6, r3
     addi r4, r31, 0x24c8
@@ -313,7 +313,7 @@ lbl_fn_806C89D0_0000030C:
     bne lbl_fn_806C89D0_000003B0
     addi r4, r30, 0x188
     li r5, 0x0
-    bl fn_806FEAA0
+    bl SBServerGetIntValue
     lwz r6, lbl_80860898@l(r31)
     li r7, 0x0
     li r4, 0x0
@@ -465,7 +465,7 @@ lbl_fn_806C8BE0_00000530:
     bl fn_806FFEA0
     addi r4, r27, lbl_807BEB78@l
     li r5, -0x1
-    bl fn_806FEAA0
+    bl SBServerGetIntValue
     cmpw r3, r29
     ble lbl_fn_806C8BE0_00000558
     mr r29, r3

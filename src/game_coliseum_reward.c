@@ -9,7 +9,7 @@ extern void dtor_80013D60(void);
 extern void dtor_80084684(void);
 extern void str_initFromCStr(void);
 extern void fn_80041A80(void);
-extern void fn_80042108(void);
+extern void vec4_copy(void);
 extern void str_getData(void);
 extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
@@ -37,7 +37,7 @@ extern void fn_800C2E30(void);
 extern void atn_Task_setActive(void);
 extern void str_skipWhitespace(void);
 extern void str_findChar(void);
-extern void fn_801207D4(void);
+extern void player_skill_pushEntry(void);
 extern void fn_80185188(void);
 extern void fn_80185628(void);
 extern void fn_801856A4(void);
@@ -252,7 +252,7 @@ lbl_fn_80494354_00000194:
     addi r3, r28, 0x4c
     bl fn_801856A4
     mr r4, r31
-    bl fn_80042108
+    bl vec4_copy
     bl sys_getMainManager
     bl fn_804848C4
     mr r4, r3
@@ -372,7 +372,7 @@ lbl_fn_80494354_000003F0:
     bl boss_parseStateCondition
     addi r3, r28, 0x40
     addi r4, r1, 0x30
-    bl fn_801207D4
+    bl player_skill_pushEntry
     addi r3, r1, 0x30
     li r4, -0x1
     bl dtor_80013D60

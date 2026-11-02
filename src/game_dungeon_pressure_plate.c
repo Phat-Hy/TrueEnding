@@ -17,7 +17,7 @@ extern void str_findChar(void);
 extern void fn_80134250(void);
 extern void fn_80134270(void);
 extern void save_verifyBlockCrc(void);
-extern void fn_801F80A8(void);
+extern void curve_setKeyframeColorRGB(void);
 extern void thread_findAndNotifySlot(void);
 extern void perf_getMetricValue(void);
 extern void fn_803B57B0(void);
@@ -1573,7 +1573,7 @@ lbl_fn_803E4E58_000014B4:
     addi r5, r1, 0x38
     addi r29, r29, lbl_807506A0@l
     addi r4, r29, 0x155e
-    bl fn_801F80A8
+    bl curve_setKeyframeColorRGB
     lfs f3, 0x88(r1)
     mr r3, r30
     lfs f2, 0x8c(r1)
@@ -1586,7 +1586,7 @@ lbl_fn_803E4E58_000014B4:
     bl perf_getMetricValue
     addi r4, r29, 0x156a
     addi r5, r1, 0x28
-    bl fn_801F80A8
+    bl curve_setKeyframeColorRGB
     lfs f3, 0x88(r1)
     mr r3, r30
     lfs f2, 0x8c(r1)
@@ -1599,7 +1599,7 @@ lbl_fn_803E4E58_000014B4:
     bl perf_getMetricValue
     addi r4, r29, 0x1576
     addi r5, r1, 0x18
-    bl fn_801F80A8
+    bl curve_setKeyframeColorRGB
     lfs f3, 0x88(r1)
     mr r3, r30
     lfs f2, 0x8c(r1)
@@ -1612,7 +1612,7 @@ lbl_fn_803E4E58_000014B4:
     bl perf_getMetricValue
     addi r4, r29, 0x1582
     addi r5, r1, 0x8
-    bl fn_801F80A8
+    bl curve_setKeyframeColorRGB
     lfs f31, lbl_80885D58
     mr r3, r30
     lfs f30, lbl_80885F00

@@ -19,7 +19,7 @@ extern void fn_80502874(void);
 extern void fn_8050B96C(void);
 extern void fn_8050E7E0(void);
 extern void wcslen(void);
-extern void fn_8068B2A0(void);
+extern void _itow(void);
 extern void net_getSocket(void);
 extern void net_getInterfaceHandle(void);
 extern void net_isSessionActive(void);
@@ -2238,7 +2238,7 @@ lbl_fn_804F8468_00001E1C:
     lwz r3, 0x564(r25)
     addi r4, r1, 0x770
     li r5, 0xa
-    bl fn_8068B2A0
+    bl _itow
     lwz r0, 0x254(r1)
     la r3, lbl_8087E1C4
     addi r14, r3, 0xc0
@@ -2287,7 +2287,7 @@ lbl_fn_804F8468_00001ECC:
     lwz r3, 0x568(r25)
     addi r4, r1, 0x770
     li r5, 0xa
-    bl fn_8068B2A0
+    bl _itow
     lwz r0, 0x254(r1)
     la r3, lbl_8087E1C4
     addi r14, r3, 0xd0
@@ -2398,7 +2398,7 @@ lbl_fn_804F8468_00002098:
     lwz r3, 0x56c(r18)
     addi r4, r1, 0x770
     li r5, 0xa
-    bl fn_8068B2A0
+    bl _itow
     lwz r0, 0x254(r1)
     srwi. r0, r0, 31
     bne lbl_fn_804F8468_000020C0
@@ -2509,7 +2509,7 @@ lbl_fn_804F8468_00002230:
     lwz r3, 0x58c(r18)
     addi r4, r1, 0x770
     li r5, 0xa
-    bl fn_8068B2A0
+    bl _itow
     lwz r0, 0x254(r1)
     srwi. r0, r0, 31
     bne lbl_fn_804F8468_00002258
@@ -2581,7 +2581,7 @@ lbl_fn_804F8468_00002308:
     lwz r3, 0x598(r25)
     addi r4, r1, 0x770
     li r5, 0xa
-    bl fn_8068B2A0
+    bl _itow
     lwz r0, 0x254(r1)
     srwi. r0, r0, 31
     bne lbl_fn_804F8468_00002360
@@ -2686,7 +2686,7 @@ lbl_fn_804F8468_000024BC:
 lbl_fn_804F8468_000024C0:
     addi r4, r1, 0x570
     li r5, 0xa
-    bl fn_8068B2A0
+    bl _itow
     lwz r0, 0x248(r1)
     srwi. r0, r0, 31
     bne lbl_fn_804F8468_000024E4
@@ -2818,7 +2818,7 @@ lbl_fn_804F8468_0000269C:
     mr r3, r27
     addi r4, r1, 0x570
     li r5, 0xa
-    bl fn_8068B2A0
+    bl _itow
     lwz r0, 0x248(r1)
     srwi. r0, r0, 31
     bne lbl_fn_804F8468_000026C4
@@ -2883,7 +2883,7 @@ lbl_fn_804F8468_0000275C:
     lbz r3, 0x0(r29)
     addi r4, r1, 0x570
     li r5, 0xa
-    bl fn_8068B2A0
+    bl _itow
     lwz r0, 0x248(r1)
     srwi. r0, r0, 31
     bne lbl_fn_804F8468_000027B0
@@ -2930,7 +2930,7 @@ lbl_fn_804F8468_00002804:
     lwz r3, 0x4(r29)
     addi r4, r1, 0x570
     li r5, 0xa
-    bl fn_8068B2A0
+    bl _itow
     lwz r0, 0x248(r1)
     srwi. r0, r0, 31
     bne lbl_fn_804F8468_0000285C
@@ -3119,7 +3119,7 @@ lbl_fn_804F8468_00002AAC:
     lwz r3, 0x8(r29)
     addi r4, r1, 0x570
     li r5, 0xa
-    bl fn_8068B2A0
+    bl _itow
     lwz r0, 0x248(r1)
     srwi. r0, r0, 31
     bne lbl_fn_804F8468_00002B04
@@ -3213,7 +3213,7 @@ lbl_fn_804F8468_00002BD4:
     lwz r3, 0x5e8(r25)
     addi r4, r1, 0x370
     li r5, 0xa
-    bl fn_8068B2A0
+    bl _itow
     lwz r0, 0x23c(r1)
     srwi. r0, r0, 31
     bne lbl_fn_804F8468_00002C64
@@ -3370,7 +3370,7 @@ lbl_fn_804F8468_00002E48:
     mr r3, r17
     addi r4, r1, 0x370
     li r5, 0xa
-    bl fn_8068B2A0
+    bl _itow
     lwz r0, 0x23c(r1)
     srwi. r0, r0, 31
     bne lbl_fn_804F8468_00002E9C
@@ -3415,7 +3415,7 @@ lbl_fn_804F8468_00002EEC:
     lbz r3, 0xcc(r16)
     addi r4, r1, 0x370
     li r5, 0xa
-    bl fn_8068B2A0
+    bl _itow
     lwz r0, 0x23c(r1)
     srwi. r0, r0, 31
     bne lbl_fn_804F8468_00002F40
@@ -3617,7 +3617,7 @@ lbl_fn_804F8468_000031B8:
     addi r4, r1, 0x370
     li r5, 0xa
     extrwi r3, r0, 4, 6
-    bl fn_8068B2A0
+    bl _itow
     lwz r0, 0x23c(r1)
     srwi. r0, r0, 31
     bne lbl_fn_804F8468_00003214
@@ -3692,7 +3692,7 @@ lbl_fn_804F8468_000032C8:
     addi r4, r1, 0x370
     li r5, 0xa
     extrwi r3, r0, 8, 10
-    bl fn_8068B2A0
+    bl _itow
     lwz r0, 0x23c(r1)
     srwi. r0, r0, 31
     bne lbl_fn_804F8468_00003324
@@ -4043,7 +4043,7 @@ lbl_fn_804F8468_000037AC:
     lwz r3, 0xdc(r16)
     addi r4, r1, 0x370
     li r5, 0xa
-    bl fn_8068B2A0
+    bl _itow
     lwz r0, 0x23c(r1)
     srwi. r0, r0, 31
     bne lbl_fn_804F8468_00003804

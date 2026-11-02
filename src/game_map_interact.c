@@ -11,7 +11,7 @@ extern void dtor_80084684(void);
 extern void vec3_set(void);
 extern void vec3_copy(void);
 extern void menu_destroyObject(void);
-extern void fn_80042108(void);
+extern void vec4_copy(void);
 extern void fn_80042740(void);
 extern void collision_testLineSegment(void);
 extern void fn_80079044(void);
@@ -1636,7 +1636,7 @@ asm void fn_80184C30(void)
     addi r3, r30, 0xa8
     bl fn_801856A4
     mr r4, r31
-    bl fn_80042108
+    bl vec4_copy
     lfs f1, lbl_80881D90
     addi r3, r1, 0x110
     lfs f4, lbl_80881D2C
@@ -1647,7 +1647,7 @@ asm void fn_80184C30(void)
     addi r3, r30, 0xa8
     bl fn_801856AC
     mr r4, r31
-    bl fn_80042108
+    bl vec4_copy
     lfs f1, lbl_80881D30
     addi r3, r1, 0xe8
     lfs f4, lbl_80881D2C
@@ -1683,7 +1683,7 @@ asm void fn_80184C30(void)
     addi r3, r30, 0x35c
     bl fn_801856A4
     mr r4, r31
-    bl fn_80042108
+    bl vec4_copy
     lfs f1, lbl_80881D90
     addi r3, r1, 0xc8
     lfs f4, lbl_80881D2C
@@ -1694,7 +1694,7 @@ asm void fn_80184C30(void)
     addi r3, r30, 0x35c
     bl fn_801856AC
     mr r4, r31
-    bl fn_80042108
+    bl vec4_copy
     lfs f1, lbl_80881D30
     addi r3, r1, 0xa0
     lfs f4, lbl_80881D2C
@@ -1730,7 +1730,7 @@ asm void fn_80184C30(void)
     addi r3, r30, 0x610
     bl fn_801856A4
     mr r4, r31
-    bl fn_80042108
+    bl vec4_copy
     lfs f1, lbl_80881D90
     addi r3, r1, 0x80
     lfs f4, lbl_80881D2C
@@ -1741,7 +1741,7 @@ asm void fn_80184C30(void)
     addi r3, r30, 0x610
     bl fn_801856AC
     mr r4, r31
-    bl fn_80042108
+    bl vec4_copy
     lfs f1, lbl_80881D30
     addi r3, r1, 0x58
     lfs f4, lbl_80881D2C
@@ -1777,7 +1777,7 @@ asm void fn_80184C30(void)
     addi r3, r30, 0x8c4
     bl fn_801856A4
     mr r4, r31
-    bl fn_80042108
+    bl vec4_copy
     lfs f1, lbl_80881D90
     addi r3, r1, 0x38
     lfs f4, lbl_80881D2C
@@ -1788,7 +1788,7 @@ asm void fn_80184C30(void)
     addi r3, r30, 0x8c4
     bl fn_801856AC
     mr r4, r31
-    bl fn_80042108
+    bl vec4_copy
     mr r3, r30
     lwz r31, 0x31c(r1)
     lwz r30, 0x318(r1)

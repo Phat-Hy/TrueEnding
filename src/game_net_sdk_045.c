@@ -103,7 +103,7 @@ void fn_806FE900(void);
 void fn_806FE940(void);
 void fn_806FE9A0(void);
 void fn_806FEA20(void);
-void fn_806FEAA0(void);
+void SBServerGetIntValue(void);
 void fn_806FEBD0(void);
 void fn_806FEC60(void);
 void *fn_806FEC90(void *obj);
@@ -2078,7 +2078,7 @@ lbl_fn_806FEA20_00001AAC:
     blr
 }
 
-asm void fn_806FEAA0(void)
+asm void SBServerGetIntValue(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -2091,62 +2091,62 @@ asm void fn_806FEAA0(void)
     mr r30, r5
     stw r29, 0x14(r1)
     mr r29, r3
-    bne lbl_fn_806FEAA0_00001B00
+    bne lbl_SBServerGetIntValue_00001B00
     mr r3, r30
-    b lbl_fn_806FEAA0_00001BE0
-lbl_fn_806FEAA0_00001B00:
+    b lbl_SBServerGetIntValue_00001BE0
+lbl_SBServerGetIntValue_00001B00:
     lis r4, lbl_807C5DA4@ha
     mr r3, r31
     addi r4, r4, lbl_807C5DA4@l
     bl strcmp
     cmpwi r3, 0x0
-    bne lbl_fn_806FEAA0_00001B20
+    bne lbl_SBServerGetIntValue_00001B20
     lwz r3, 0x1c(r29)
-    b lbl_fn_806FEAA0_00001BE0
-lbl_fn_806FEAA0_00001B20:
+    b lbl_SBServerGetIntValue_00001BE0
+lbl_SBServerGetIntValue_00001B20:
     cmpwi r29, 0x0
-    bne lbl_fn_806FEAA0_00001B30
+    bne lbl_SBServerGetIntValue_00001B30
     li r31, 0x0
-    b lbl_fn_806FEAA0_00001B60
-lbl_fn_806FEAA0_00001B30:
+    b lbl_SBServerGetIntValue_00001B60
+lbl_SBServerGetIntValue_00001B30:
     stw r31, 0x8(r1)
     addi r4, r1, 0x8
     lwz r3, 0x18(r29)
     bl net_invokeChannelCallback
     cmpwi r3, 0x0
-    beq lbl_fn_806FEAA0_00001B5C
+    beq lbl_SBServerGetIntValue_00001B5C
     lwz r31, 0x4(r3)
     mr r3, r31
     bl strlen
     cmpwi r3, 0x0
-    bne lbl_fn_806FEAA0_00001B60
-lbl_fn_806FEAA0_00001B5C:
+    bne lbl_SBServerGetIntValue_00001B60
+lbl_SBServerGetIntValue_00001B5C:
     li r31, 0x0
-lbl_fn_806FEAA0_00001B60:
+lbl_SBServerGetIntValue_00001B60:
     cmpwi r31, 0x0
-    bne lbl_fn_806FEAA0_00001B70
+    bne lbl_SBServerGetIntValue_00001B70
     mr r3, r30
-    b lbl_fn_806FEAA0_00001BE0
-lbl_fn_806FEAA0_00001B70:
+    b lbl_SBServerGetIntValue_00001BE0
+lbl_SBServerGetIntValue_00001B70:
     lbz r0, 0x0(r31)
     cmpwi r0, 0x2d
-    beq lbl_fn_806FEAA0_00001B84
+    beq lbl_SBServerGetIntValue_00001B84
     mr r3, r31
-    b lbl_fn_806FEAA0_00001B88
-lbl_fn_806FEAA0_00001B84:
+    b lbl_SBServerGetIntValue_00001B88
+lbl_SBServerGetIntValue_00001B84:
     addi r3, r31, 0x1
-lbl_fn_806FEAA0_00001B88:
+lbl_SBServerGetIntValue_00001B88:
     lbz r0, 0x0(r3)
     li r3, 0x1
     cmplwi r0, 0xff
-    bgt lbl_fn_806FEAA0_00001B9C
+    bgt lbl_SBServerGetIntValue_00001B9C
     li r3, 0x0
-lbl_fn_806FEAA0_00001B9C:
+lbl_SBServerGetIntValue_00001B9C:
     cmpwi r3, 0x0
-    beq lbl_fn_806FEAA0_00001BAC
+    beq lbl_SBServerGetIntValue_00001BAC
     li r0, 0x0
-    b lbl_fn_806FEAA0_00001BC8
-lbl_fn_806FEAA0_00001BAC:
+    b lbl_SBServerGetIntValue_00001BC8
+lbl_SBServerGetIntValue_00001BAC:
     lis r3, lbl_807BB380@ha
     slwi r0, r0, 1
     addi r3, r3, lbl_807BB380@l
@@ -2154,15 +2154,15 @@ lbl_fn_806FEAA0_00001BAC:
     lwz r3, 0x8(r3)
     lhzx r0, r3, r0
     rlwinm r0, r0, 0, 28, 28
-lbl_fn_806FEAA0_00001BC8:
+lbl_SBServerGetIntValue_00001BC8:
     cmpwi r0, 0x0
-    bne lbl_fn_806FEAA0_00001BD8
+    bne lbl_SBServerGetIntValue_00001BD8
     mr r3, r30
-    b lbl_fn_806FEAA0_00001BE0
-lbl_fn_806FEAA0_00001BD8:
+    b lbl_SBServerGetIntValue_00001BE0
+lbl_SBServerGetIntValue_00001BD8:
     mr r3, r31
     bl atoi
-lbl_fn_806FEAA0_00001BE0:
+lbl_SBServerGetIntValue_00001BE0:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)

@@ -21,7 +21,7 @@ extern void str_calcHash(void);
 extern void fn_800DC980(void);
 extern void fn_800F7250(void);
 extern void fn_80112F54(void);
-extern void fn_801207D4(void);
+extern void player_skill_pushEntry(void);
 extern void npc_updateDialogueTarget(void);
 extern void fn_80139F2C(void);
 extern void str_appendString(void);
@@ -260,7 +260,7 @@ asm void fn_80223A10(void)
     bl str_appendString
     addi r3, r1, 0x60
     addi r4, r1, 0x50
-    bl fn_801207D4
+    bl player_skill_pushEntry
     addi r3, r1, 0x50
     addi r4, r30, 0x14
     bl str_appendString
@@ -268,7 +268,7 @@ asm void fn_80223A10(void)
 lbl_fn_80223A10_00000220:
     addi r3, r1, 0x60
     addi r4, r1, 0x50
-    bl fn_801207D4
+    bl player_skill_pushEntry
     addi r29, r29, 0x1
     cmpwi r29, 0x5
     blt lbl_fn_80223A10_00000220
@@ -329,7 +329,7 @@ lbl_fn_80223A10_00000298:
     bl str_initFromCStr
     addi r3, r1, 0x60
     addi r4, r1, 0x44
-    bl fn_801207D4
+    bl player_skill_pushEntry
     addi r3, r1, 0x44
     li r4, -0x1
     bl dtor_80013D60
@@ -348,7 +348,7 @@ lbl_fn_80223A10_00000298:
     bl str_initFromCStr
     addi r3, r1, 0x60
     addi r4, r1, 0x38
-    bl fn_801207D4
+    bl player_skill_pushEntry
     addi r3, r1, 0x38
     li r4, -0x1
     bl dtor_80013D60
@@ -364,7 +364,7 @@ lbl_fn_80223A10_00000298:
     bl str_initFromCStr
     addi r3, r1, 0x60
     addi r4, r1, 0x2c
-    bl fn_801207D4
+    bl player_skill_pushEntry
     addi r3, r1, 0x2c
     li r4, -0x1
     bl dtor_80013D60
@@ -380,7 +380,7 @@ lbl_fn_80223A10_00000298:
     bl str_initFromCStr
     addi r3, r1, 0x60
     addi r4, r1, 0x20
-    bl fn_801207D4
+    bl player_skill_pushEntry
     addi r3, r1, 0x20
     li r4, -0x1
     bl dtor_80013D60
@@ -400,7 +400,7 @@ lbl_fn_80223A10_00000298:
     bl str_initFromCStr
     addi r3, r1, 0x60
     addi r4, r1, 0x14
-    bl fn_801207D4
+    bl player_skill_pushEntry
     addi r3, r1, 0x14
     li r4, -0x1
     bl dtor_80013D60
@@ -416,7 +416,7 @@ lbl_fn_80223A10_00000298:
     bl str_initFromCStr
     addi r3, r1, 0x60
     addi r4, r1, 0x8
-    bl fn_801207D4
+    bl player_skill_pushEntry
     addi r3, r1, 0x8
     li r4, -0x1
     bl dtor_80013D60
@@ -670,7 +670,7 @@ lbl_fn_80223F50_00000728:
     bl fn_800DC980
     addi r3, r1, 0x54
     addi r4, r1, 0x44
-    bl fn_801207D4
+    bl player_skill_pushEntry
     addi r3, r1, 0x44
     li r4, -0x1
     bl dtor_80013D60
@@ -682,7 +682,7 @@ lbl_fn_80223F50_00000728:
     bl str_initFromCStr
     addi r3, r1, 0x54
     addi r4, r1, 0x38
-    bl fn_801207D4
+    bl player_skill_pushEntry
     addi r3, r1, 0x38
     li r4, -0x1
     bl dtor_80013D60
@@ -693,7 +693,7 @@ lbl_fn_80223F50_00000728:
     bl str_initFromCStr
     addi r3, r1, 0x54
     addi r4, r1, 0x2c
-    bl fn_801207D4
+    bl player_skill_pushEntry
     addi r3, r1, 0x2c
     li r4, -0x1
     bl dtor_80013D60
@@ -704,7 +704,7 @@ lbl_fn_80223F50_00000728:
     bl fn_800DC980
     addi r3, r1, 0x54
     addi r4, r1, 0x20
-    bl fn_801207D4
+    bl player_skill_pushEntry
     addi r3, r1, 0x20
     li r4, -0x1
     bl dtor_80013D60
@@ -715,7 +715,7 @@ lbl_fn_80223F50_00000728:
     bl fn_800DC980
     addi r3, r1, 0x54
     addi r4, r1, 0x14
-    bl fn_801207D4
+    bl player_skill_pushEntry
     addi r3, r1, 0x14
     li r4, -0x1
     bl dtor_80013D60
@@ -728,7 +728,7 @@ lbl_fn_80223F50_00000834:
     bl str_initFromCStr
     addi r3, r1, 0x54
     addi r4, r1, 0x8
-    bl fn_801207D4
+    bl player_skill_pushEntry
     addi r3, r1, 0x8
     li r4, -0x1
     bl dtor_80013D60
@@ -811,7 +811,7 @@ asm void fn_80224184(void)
     bl fn_800DC980
     addi r3, r1, 0x24
     addi r4, r1, 0x14
-    bl fn_801207D4
+    bl player_skill_pushEntry
     addi r3, r1, 0x14
     li r4, -0x1
     bl dtor_80013D60
@@ -822,7 +822,7 @@ lbl_fn_80224184_00000984:
     bl str_initFromCStr
     addi r3, r1, 0x24
     addi r4, r1, 0x8
-    bl fn_801207D4
+    bl player_skill_pushEntry
     addi r3, r1, 0x8
     li r4, -0x1
     bl dtor_80013D60
@@ -1183,7 +1183,7 @@ lbl_fn_80224638_00000E00:
     bl str_initFromCStr
     addi r3, r1, 0x54
     addi r4, r1, 0x44
-    bl fn_801207D4
+    bl player_skill_pushEntry
     addi r3, r1, 0x44
     li r4, -0x1
     bl dtor_80013D60
@@ -1215,7 +1215,7 @@ lbl_fn_80224638_00000ED4:
     bl str_initFromCStr
     addi r3, r1, 0x54
     addi r4, r1, 0x38
-    bl fn_801207D4
+    bl player_skill_pushEntry
     addi r3, r1, 0x38
     li r4, -0x1
     bl dtor_80013D60
@@ -1239,7 +1239,7 @@ lbl_fn_80224638_00000F20:
     addi r4, r1, 0x20
 lbl_fn_80224638_00000F3C:
     addi r3, r1, 0x54
-    bl fn_801207D4
+    bl player_skill_pushEntry
     cmpwi r28, 0x0
     beq lbl_fn_80224638_00000F58
     addi r3, r1, 0x20
@@ -1272,7 +1272,7 @@ lbl_fn_80224638_00000F94:
     addi r4, r1, 0x8
 lbl_fn_80224638_00000FB0:
     addi r3, r1, 0x54
-    bl fn_801207D4
+    bl player_skill_pushEntry
     cmpwi r29, 0x0
     beq lbl_fn_80224638_00000FCC
     addi r3, r1, 0x8

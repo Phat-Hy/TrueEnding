@@ -5,7 +5,7 @@
 extern void _restgpr_26(void);
 extern void _savegpr_26(void);
 extern void vec3_copy(void);
-extern void fn_80042108(void);
+extern void vec4_copy(void);
 extern void fn_8004AD9C(void);
 extern void boss_dispatchActionTransition(void);
 extern void fn_80079044(void);
@@ -1811,7 +1811,7 @@ asm void fn_8047CB74(void)
     mr r3, r28
     bl fn_801856A4
     addi r4, r1, 0x78
-    bl fn_80042108
+    bl vec4_copy
     mr r3, r28
     bl fn_801856AC
     fmr f1, f30
@@ -1822,7 +1822,7 @@ asm void fn_8047CB74(void)
     mr r3, r28
     bl fn_801856AC
     addi r4, r1, 0x68
-    bl fn_80042108
+    bl vec4_copy
     mr r3, r28
     bl fn_8047C778
     fmr f1, f30
@@ -1833,7 +1833,7 @@ asm void fn_8047CB74(void)
     mr r3, r28
     bl fn_8047C778
     addi r4, r1, 0x58
-    bl fn_80042108
+    bl vec4_copy
     mr r3, r28
     bl fn_8047C780
     fmr f1, f30
@@ -1846,7 +1846,7 @@ asm void fn_8047CB74(void)
     bl fn_8047C780
     addi r3, r3, 0x28
     addi r4, r1, 0x48
-    bl fn_80042108
+    bl vec4_copy
     mr r3, r28
     bl fn_8047C780
     fmr f1, f30

@@ -109,7 +109,7 @@ void fn_801206EC(void *p);
 void fn_80120700(void);
 void *fn_801207BC(const void *p, u32 idx);
 u32 fn_801207CC(void *p);
-void fn_801207D4(void);
+void player_skill_pushEntry(void);
 u32 fn_80120C20(void *p);
 void fn_80120C30(void);
 
@@ -1005,7 +1005,7 @@ lbl_fn_8011FFF8_00000A20:
     bl str_initFromCStr
     addi r3, r1, 0x44
     addi r4, r1, 0x20
-    bl fn_801207D4
+    bl player_skill_pushEntry
     addi r3, r1, 0x20
     li r4, -0x1
     bl dtor_80013D60
@@ -1019,7 +1019,7 @@ lbl_fn_8011FFF8_00000A54:
     bl str_initFromCStr
     addi r3, r1, 0x38
     addi r4, r1, 0x14
-    bl fn_801207D4
+    bl player_skill_pushEntry
     addi r3, r1, 0x14
     li r4, -0x1
     bl dtor_80013D60
@@ -1033,7 +1033,7 @@ lbl_fn_8011FFF8_00000A88:
     bl str_initFromCStr
     addi r3, r1, 0x2c
     addi r4, r1, 0x8
-    bl fn_801207D4
+    bl player_skill_pushEntry
     addi r3, r1, 0x8
     li r4, -0x1
     bl dtor_80013D60
@@ -1449,7 +1449,7 @@ u32 fn_801207CC(void *p)
     return *(u32 *)((u8 *)p + 4);
 }
 
-asm void fn_801207D4(void)
+asm void player_skill_pushEntry(void)
 {
     nofralloc
     stwu r1, -0x50(r1)
@@ -1464,21 +1464,21 @@ asm void fn_801207D4(void)
     lwz r0, 0x4(r3)
     lwz r5, 0x8(r3)
     cmplw r0, r5
-    bge lbl_fn_801207D4_00001114
+    bge lbl_player_skill_pushEntry_00001114
     mulli r0, r0, 0xc
     lwz r3, 0x0(r3)
     add. r31, r3, r0
-    beq lbl_fn_801207D4_00001104
+    beq lbl_player_skill_pushEntry_00001104
     lwz r3, 0x0(r4)
     srwi. r0, r3, 31
-    bne lbl_fn_801207D4_000010C0
+    bne lbl_player_skill_pushEntry_000010C0
     stw r3, 0x0(r31)
     lwz r0, 0x4(r4)
     stw r0, 0x4(r31)
     lwz r0, 0x8(r4)
     stw r0, 0x8(r31)
-    b lbl_fn_801207D4_00001104
-lbl_fn_801207D4_000010C0:
+    b lbl_player_skill_pushEntry_00001104
+lbl_player_skill_pushEntry_000010C0:
     li r0, 0x0
     stw r0, 0x0(r31)
     lwz r4, 0x4(r4)
@@ -1496,17 +1496,17 @@ lbl_fn_801207D4_000010C0:
     li r5, 0x0
     add r7, r6, r0
     bl actor_dispatchMessage
-lbl_fn_801207D4_00001104:
+lbl_player_skill_pushEntry_00001104:
     lwz r3, 0x4(r29)
     addi r0, r3, 0x1
     stw r0, 0x4(r29)
-    b lbl_fn_801207D4_00001484
-lbl_fn_801207D4_00001114:
+    b lbl_player_skill_pushEntry_00001484
+lbl_player_skill_pushEntry_00001114:
     lis r3, 0x1555
     addi r0, r3, 0x5555
     subf r0, r5, r0
     cmplwi r0, 0x1
-    bge lbl_fn_801207D4_00001148
+    bge lbl_player_skill_pushEntry_00001148
     lis r3, __files@ha
     lis r4, lbl_80737138@ha
     addi r3, r3, __files@l
@@ -1515,7 +1515,7 @@ lbl_fn_801207D4_00001114:
     crclr 6
     bl printf
     bl abort
-lbl_fn_801207D4_00001148:
+lbl_player_skill_pushEntry_00001148:
     li r5, 0x0
     addi r4, r29, 0x8
     lis r3, 0x1555
@@ -1532,7 +1532,7 @@ lbl_fn_801207D4_00001148:
     subf r0, r31, r0
     cmplw r3, r0
     stw r3, 0x18(r1)
-    ble lbl_fn_801207D4_000011AC
+    ble lbl_player_skill_pushEntry_000011AC
     lis r3, __files@ha
     lis r4, lbl_80737138@ha
     addi r3, r3, __files@l
@@ -1541,11 +1541,11 @@ lbl_fn_801207D4_00001148:
     crclr 6
     bl printf
     bl abort
-lbl_fn_801207D4_000011AC:
+lbl_player_skill_pushEntry_000011AC:
     lis r3, 0x71c
     addi r0, r3, 0x71c7
     cmplw r31, r0
-    bge lbl_fn_801207D4_000011FC
+    bge lbl_player_skill_pushEntry_000011FC
     addi r5, r31, 0x1
     lis r3, 0xcccd
     slwi r4, r5, 2
@@ -1557,37 +1557,37 @@ lbl_fn_801207D4_000011AC:
     srwi r4, r4, 2
     stw r4, 0x20(r1)
     cmplw r4, r0
-    bge lbl_fn_801207D4_000011F0
+    bge lbl_player_skill_pushEntry_000011F0
     addi r3, r1, 0x18
-lbl_fn_801207D4_000011F0:
+lbl_player_skill_pushEntry_000011F0:
     lwz r0, 0x0(r3)
     add r28, r31, r0
-    b lbl_fn_801207D4_00001240
-lbl_fn_801207D4_000011FC:
+    b lbl_player_skill_pushEntry_00001240
+lbl_player_skill_pushEntry_000011FC:
     lis r3, 0xe39
     subi r0, r3, 0x1c72
     cmplw r31, r0
-    bge lbl_fn_801207D4_00001238
+    bge lbl_player_skill_pushEntry_00001238
     addi r3, r31, 0x1
     lwz r0, 0x18(r1)
     srwi r3, r3, 1
     stw r3, 0x1c(r1)
     cmplw r3, r0
     addi r3, r1, 0x1c
-    bge lbl_fn_801207D4_0000122C
+    bge lbl_player_skill_pushEntry_0000122C
     addi r3, r1, 0x18
-lbl_fn_801207D4_0000122C:
+lbl_player_skill_pushEntry_0000122C:
     lwz r0, 0x0(r3)
     add r28, r31, r0
-    b lbl_fn_801207D4_00001240
-lbl_fn_801207D4_00001238:
+    b lbl_player_skill_pushEntry_00001240
+lbl_player_skill_pushEntry_00001238:
     lis r3, 0x1555
     addi r28, r3, 0x5555
-lbl_fn_801207D4_00001240:
+lbl_player_skill_pushEntry_00001240:
     lis r3, 0x1555
     addi r0, r3, 0x5555
     cmplw r28, r0
-    ble lbl_fn_801207D4_00001270
+    ble lbl_player_skill_pushEntry_00001270
     lis r3, __files@ha
     lis r4, lbl_80737138@ha
     addi r3, r3, __files@l
@@ -1596,12 +1596,12 @@ lbl_fn_801207D4_00001240:
     crclr 6
     bl printf
     bl abort
-lbl_fn_801207D4_00001270:
+lbl_player_skill_pushEntry_00001270:
     mulli r3, r28, 0xc
     bl mem_free
     cmpwi r3, 0x0
     mr r31, r3
-    bne lbl_fn_801207D4_000012A4
+    bne lbl_player_skill_pushEntry_000012A4
     lis r3, __files@ha
     lis r4, lbl_80778910@ha
     addi r3, r3, __files@l
@@ -1610,7 +1610,7 @@ lbl_fn_801207D4_00001270:
     crclr 6
     bl printf
     bl abort
-lbl_fn_801207D4_000012A4:
+lbl_player_skill_pushEntry_000012A4:
     lwz r3, 0x28(r1)
     li r0, 0x0
     stw r31, 0x24(r1)
@@ -1621,17 +1621,17 @@ lbl_fn_801207D4_000012A4:
     mulli r3, r3, 0xc
     add r3, r31, r3
     add. r31, r4, r3
-    beq lbl_fn_801207D4_00001334
+    beq lbl_player_skill_pushEntry_00001334
     lwz r4, 0x0(r30)
     srwi. r3, r4, 31
-    bne lbl_fn_801207D4_000012F4
+    bne lbl_player_skill_pushEntry_000012F4
     stw r4, 0x0(r31)
     lwz r0, 0x4(r30)
     stw r0, 0x4(r31)
     lwz r0, 0x8(r30)
     stw r0, 0x8(r31)
-    b lbl_fn_801207D4_00001334
-lbl_fn_801207D4_000012F4:
+    b lbl_player_skill_pushEntry_00001334
+lbl_player_skill_pushEntry_000012F4:
     stw r0, 0x0(r31)
     mr r3, r31
     lwz r4, 0x4(r30)
@@ -1648,7 +1648,7 @@ lbl_fn_801207D4_000012F4:
     li r5, 0x0
     add r7, r6, r0
     bl actor_dispatchMessage
-lbl_fn_801207D4_00001334:
+lbl_player_skill_pushEntry_00001334:
     lwz r4, 0x28(r1)
     lis r3, 0x2aab
     subi r6, r3, 0x5555
@@ -1699,46 +1699,46 @@ lbl_fn_801207D4_00001334:
     stw r5, 0x28(r1)
     add r29, r4, r3
     add r30, r29, r0
-    b lbl_fn_801207D4_0000141C
-lbl_fn_801207D4_00001400:
+    b lbl_player_skill_pushEntry_0000141C
+lbl_player_skill_pushEntry_00001400:
     subic. r30, r30, 0xc
-    beq lbl_fn_801207D4_0000141C
+    beq lbl_player_skill_pushEntry_0000141C
     lwz r0, 0x0(r30)
     srwi. r0, r0, 31
-    beq lbl_fn_801207D4_0000141C
+    beq lbl_player_skill_pushEntry_0000141C
     lwz r3, 0x8(r30)
     bl dtor_80084684
-lbl_fn_801207D4_0000141C:
+lbl_player_skill_pushEntry_0000141C:
     cmplw r30, r29
-    bgt lbl_fn_801207D4_00001400
+    bgt lbl_player_skill_pushEntry_00001400
     cmpwi r31, 0x0
     li r0, 0x0
     stw r0, 0x28(r1)
-    beq lbl_fn_801207D4_00001484
+    beq lbl_player_skill_pushEntry_00001484
     lwz r3, 0x24(r1)
     cmpwi r3, 0x0
-    beq lbl_fn_801207D4_00001484
+    beq lbl_player_skill_pushEntry_00001484
     mulli r0, r0, 0xc
     li r30, 0x0
     stw r30, 0x28(r1)
     add r29, r3, r0
-    b lbl_fn_801207D4_00001474
-lbl_fn_801207D4_00001454:
+    b lbl_player_skill_pushEntry_00001474
+lbl_player_skill_pushEntry_00001454:
     subic. r29, r29, 0xc
-    beq lbl_fn_801207D4_00001470
+    beq lbl_player_skill_pushEntry_00001470
     lwz r0, 0x0(r29)
     srwi. r0, r0, 31
-    beq lbl_fn_801207D4_00001470
+    beq lbl_player_skill_pushEntry_00001470
     lwz r3, 0x8(r29)
     bl dtor_80084684
-lbl_fn_801207D4_00001470:
+lbl_player_skill_pushEntry_00001470:
     subi r30, r30, 0x1
-lbl_fn_801207D4_00001474:
+lbl_player_skill_pushEntry_00001474:
     cmpwi r30, 0x0
-    bne lbl_fn_801207D4_00001454
+    bne lbl_player_skill_pushEntry_00001454
     lwz r3, 0x24(r1)
     bl dtor_80084684
-lbl_fn_801207D4_00001484:
+lbl_player_skill_pushEntry_00001484:
     lwz r0, 0x54(r1)
     lwz r31, 0x4c(r1)
     lwz r30, 0x48(r1)

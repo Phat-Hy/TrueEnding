@@ -52,7 +52,7 @@ extern void fn_8011D424(void);
 extern void skill_findNodeBySlotId(void);
 extern void skill_findNodeById(void);
 extern void skill_findNodeByTag(void);
-extern void fn_801207D4(void);
+extern void player_skill_pushEntry(void);
 extern void fn_801354B4(void);
 extern void fn_80136544(void);
 extern void str_appendString(void);
@@ -2177,7 +2177,7 @@ lbl_fn_8043DD78_00001B9C:
     bl str_initFromCStr
     addi r3, r29, 0x114
     addi r4, r1, 0xc
-    bl fn_801207D4
+    bl player_skill_pushEntry
     addi r3, r1, 0xc
     li r4, -0x1
     bl dtor_80013D60

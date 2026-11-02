@@ -84,7 +84,7 @@ extern void fn_806F1DF0(void);
 extern void fn_806FBDB0(void);
 extern void fn_806FCFE0(void);
 extern void fn_806FEA20(void);
-extern void fn_806FEAA0(void);
+extern void SBServerGetIntValue(void);
 extern void fn_806FF920(void);
 extern void fn_806FFA10(void);
 extern void fn_806FFDD0(void);
@@ -148,7 +148,7 @@ lbl_fn_806B3AE0_0000004C:
     beq lbl_fn_806B3AE0_00000074
     mr r4, r29
     mr r5, r30
-    bl fn_806FEAA0
+    bl SBServerGetIntValue
     b lbl_fn_806B3AE0_00000078
 lbl_fn_806B3AE0_00000074:
     mr r3, r30

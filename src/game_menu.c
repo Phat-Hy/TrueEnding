@@ -166,7 +166,7 @@ void AreaEffConfig_execute(void);
 void fn_80041D44(void);
 void menu_initWindowBuffer(void);
 void fn_800420F4(void *p, u32 v1, u32 v2);
-void fn_80042108(void);
+void vec4_copy(void);
 void str_getData(void);
 void fn_80042148(void *p);
 void fn_8004215C(void);
@@ -567,7 +567,7 @@ lbl_fn_80041D44_000003F0:
     addi r4, r1, 0x18
     add r3, r28, r0
     addi r3, r3, 0x58
-    bl fn_80042108
+    bl vec4_copy
     b lbl_fn_80041D44_00000550
 lbl_fn_80041D44_00000464:
     addi r3, r1, 0x8
@@ -600,7 +600,7 @@ lbl_fn_80041D44_0000049C:
     addi r3, r1, 0x68
     addi r4, r1, 0x18
     stw r29, 0x64(r1)
-    bl fn_80042108
+    bl vec4_copy
     addi r3, r1, 0x8
     bl fn_80042694
     mr r4, r3
@@ -736,7 +736,7 @@ void fn_800420F4(void *p, u32 v1, u32 v2)
     *(u32 *)((u8 *)p + 0xc) = 0;
 }
 
-asm void fn_80042108(void)
+asm void vec4_copy(void)
 {
     nofralloc
     lfs f3, 0x0(r4)

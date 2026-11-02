@@ -120,7 +120,7 @@ void fn_8064945C(void);
 void fn_80649554(void);
 void fn_806496E8(void);
 void fn_80649864(void);
-void fn_80649940(void);
+void port_find_mcb_dlci_port(void);
 void fn_80649994(void);
 void fn_80649A1C(void);
 void fn_80649A8C(void);
@@ -370,7 +370,7 @@ asm void fn_806484E8(void)
     mr r26, r5
     mr r27, r6
     mr r28, r7
-    bl fn_80649940
+    bl port_find_mcb_dlci_port
     lis r4, lbl_808238C8@ha
     mr r29, r3
     addi r4, r4, lbl_808238C8@l
@@ -495,7 +495,7 @@ asm void fn_80648698(void)
     mr r28, r5
     mr r29, r6
     mr r30, r7
-    bl fn_80649940
+    bl port_find_mcb_dlci_port
     lis r4, lbl_808238C8@ha
     mr r31, r3
     addi r4, r4, lbl_808238C8@l
@@ -571,7 +571,7 @@ asm void fn_8064879C(void)
     mr r29, r4
     stw r28, 0x10(r1)
     mr r28, r3
-    bl fn_80649940
+    bl port_find_mcb_dlci_port
     lis r4, lbl_808238C8@ha
     mr r31, r3
     addi r4, r4, lbl_808238C8@l
@@ -662,7 +662,7 @@ asm void fn_806488DC(void)
     mr r27, r3
     mr r29, r5
     mr r30, r6
-    bl fn_80649940
+    bl port_find_mcb_dlci_port
     lis r4, lbl_808238C8@ha
     mr r31, r3
     addi r4, r4, lbl_808238C8@l
@@ -756,7 +756,7 @@ asm void fn_80648A20(void)
     mr r30, r3
     mr r31, r5
     mr r28, r6
-    bl fn_80649940
+    bl port_find_mcb_dlci_port
     lis r4, lbl_808238C8@ha
     mr r29, r3
     addi r4, r4, lbl_808238C8@l
@@ -851,7 +851,7 @@ asm void fn_80648B70(void)
     mr r29, r6
     stw r28, 0x10(r1)
     mr r28, r3
-    bl fn_80649940
+    bl port_find_mcb_dlci_port
     lis r4, lbl_808238C8@ha
     mr r30, r3
     addi r4, r4, lbl_808238C8@l
@@ -927,7 +927,7 @@ asm void fn_80648C88(void)
     stw r30, 0x18(r1)
     mr r30, r5
     stw r29, 0x14(r1)
-    bl fn_80649940
+    bl port_find_mcb_dlci_port
     lis r4, lbl_808238C8@ha
     mr r31, r3
     addi r4, r4, lbl_808238C8@l
@@ -1031,7 +1031,7 @@ asm void fn_80648E00(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     stw r30, 0x8(r1)
-    bl fn_80649940
+    bl port_find_mcb_dlci_port
     lis r4, lbl_808238C8@ha
     mr r31, r3
     addi r4, r4, lbl_808238C8@l
@@ -1091,7 +1091,7 @@ asm void fn_80648EC4(void)
     stw r30, 0x18(r1)
     stw r29, 0x14(r1)
     mr r29, r5
-    bl fn_80649940
+    bl port_find_mcb_dlci_port
     lis r4, lbl_808238C8@ha
     mr r31, r3
     addi r4, r4, lbl_808238C8@l
@@ -1148,7 +1148,7 @@ asm void fn_80648F8C(void)
     mflr r0
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
-    bl fn_80649940
+    bl port_find_mcb_dlci_port
     lis r4, lbl_808238C8@ha
     mr r31, r3
     addi r4, r4, lbl_808238C8@l
@@ -1279,7 +1279,7 @@ asm void fn_8064912C(void)
     mr r28, r4
     mr r27, r3
     mr r29, r5
-    bl fn_80649940
+    bl port_find_mcb_dlci_port
     lis r4, lbl_808238C8@ha
     mr r31, r3
     addi r4, r4, lbl_808238C8@l
@@ -1442,7 +1442,7 @@ lbl_fn_8064932C_0000108C:
 lbl_fn_8064932C_0000109C:
     mr r3, r26
     mr r4, r27
-    bl fn_80649940
+    bl port_find_mcb_dlci_port
     cmpwi r3, 0x0
     mr r29, r3
     beq lbl_fn_8064932C_00001158
@@ -1861,26 +1861,26 @@ lbl_fn_80649864_00001640:
     blr
 }
 
-asm void fn_80649940(void)
+asm void port_find_mcb_dlci_port(void)
 {
     nofralloc
     cmpwi r3, 0x0
-    bne lbl_fn_80649940_00001664
+    bne lbl_port_find_mcb_dlci_port_00001664
     li r3, 0x0
     blr
-lbl_fn_80649940_00001664:
+lbl_port_find_mcb_dlci_port_00001664:
     cmplwi r4, 0x3d
-    ble lbl_fn_80649940_00001674
+    ble lbl_port_find_mcb_dlci_port_00001674
     li r3, 0x0
     blr
-lbl_fn_80649940_00001674:
+lbl_port_find_mcb_dlci_port_00001674:
     add r3, r3, r4
     lbz r3, 0x24(r3)
     cmpwi r3, 0x0
-    bne lbl_fn_80649940_0000168C
+    bne lbl_port_find_mcb_dlci_port_0000168C
     li r3, 0x0
     blr
-lbl_fn_80649940_0000168C:
+lbl_port_find_mcb_dlci_port_0000168C:
     subi r0, r3, 0x1
     lis r3, lbl_808238C8@ha
     mulli r0, r0, 0xa4
@@ -2627,7 +2627,7 @@ lbl_fn_8064A204_00002050:
 lbl_fn_8064A204_00002068:
     mr r3, r28
     mr r4, r0
-    bl fn_80649940
+    bl port_find_mcb_dlci_port
     cmpwi r3, 0x0
     mr r27, r3
     beq lbl_fn_8064A204_0000208C
@@ -4432,7 +4432,7 @@ lbl_fn_8064BBEC_00003950:
     b lbl_fn_8064BBEC_000039CC
 lbl_fn_8064BBEC_00003988:
     mr r4, r31
-    bl fn_80649940
+    bl port_find_mcb_dlci_port
     cmpwi r3, 0x0
     beq lbl_fn_8064BBEC_000039CC
     lbz r4, 0x69(r3)
@@ -4474,7 +4474,7 @@ asm void fn_8064BCD4(void)
     stw r28, 0x20(r1)
     mr r28, r4
     lbz r4, 0x0(r6)
-    bl fn_80649940
+    bl port_find_mcb_dlci_port
     cmpwi r3, 0x0
     bne lbl_fn_8064BCD4_00003A60
     cmpwi r28, 0x0
@@ -4555,7 +4555,7 @@ lbl_fn_8064BCD4_00003AD4:
 lbl_fn_8064BCD4_00003B48:
     lbz r4, 0x0(r30)
     mr r3, r29
-    bl fn_80649940
+    bl port_find_mcb_dlci_port
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_8064BCD4_00003CD4
@@ -4684,7 +4684,7 @@ asm void fn_8064BFE0(void)
     lbz r4, 0x0(r5)
     mr r28, r3
     mr r30, r5
-    bl fn_80649940
+    bl port_find_mcb_dlci_port
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_8064BFE0_00003E48
@@ -4799,7 +4799,7 @@ asm void fn_8064C14C(void)
     b lbl_fn_8064C14C_00003ED4
 lbl_fn_8064C14C_00003EA8:
     lbz r4, 0x0(r5)
-    bl fn_80649940
+    bl port_find_mcb_dlci_port
     cmpwi r3, 0x0
     beq lbl_fn_8064C14C_00003ED4
     lbz r4, 0x69(r3)
@@ -5013,7 +5013,7 @@ asm void fn_8064C404(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    bl fn_80649940
+    bl port_find_mcb_dlci_port
     lbz r0, 0x6c(r30)
     cmplwi r0, 0x5
     beq lbl_fn_8064C404_0000415C
@@ -5047,7 +5047,7 @@ asm void fn_8064C46C(void)
     stw r30, 0x18(r1)
     mr r30, r3
     sth r6, 0x8(r1)
-    bl fn_80649940
+    bl port_find_mcb_dlci_port
     lbz r0, 0x6c(r30)
     cmplwi r0, 0x5
     beq lbl_fn_8064C46C_000041CC
@@ -5084,7 +5084,7 @@ asm void fn_8064C4DC(void)
     mr r29, r4
     stw r28, 0x10(r1)
     mr r28, r3
-    bl fn_80649940
+    bl port_find_mcb_dlci_port
     lbz r0, 0x6c(r28)
     mr r31, r3
     cmplwi r0, 0x5
@@ -5166,7 +5166,7 @@ asm void fn_8064C5E4(void)
     mr r29, r4
     stw r28, 0x10(r1)
     mr r28, r3
-    bl fn_80649940
+    bl port_find_mcb_dlci_port
     lbz r0, 0x6c(r28)
     mr r31, r3
     cmplwi r0, 0x5
@@ -5235,7 +5235,7 @@ asm void fn_8064C6C0(void)
     mr r29, r4
     stw r28, 0x10(r1)
     mr r28, r3
-    bl fn_80649940
+    bl port_find_mcb_dlci_port
     lbz r0, 0x2(r3)
     mr r31, r3
     cmplwi r0, 0x2
@@ -5283,7 +5283,7 @@ asm void fn_8064C764(void)
     mr r29, r4
     stw r28, 0x10(r1)
     mr r28, r3
-    bl fn_80649940
+    bl port_find_mcb_dlci_port
     lbz r0, 0x2(r3)
     mr r31, r3
     cmplwi r0, 0x2
@@ -5331,7 +5331,7 @@ asm void fn_8064C808(void)
     mr r29, r4
     stw r28, 0x10(r1)
     mr r28, r3
-    bl fn_80649940
+    bl port_find_mcb_dlci_port
     lbz r0, 0x2(r3)
     mr r31, r3
     cmplwi r0, 0x2
@@ -5369,7 +5369,7 @@ asm void fn_8064C8A0(void)
     stwu r1, -0x10(r1)
     mflr r0
     stw r0, 0x14(r1)
-    bl fn_80649940
+    bl port_find_mcb_dlci_port
     li r4, 0xc
     li r5, 0x0
     bl fn_8064B238
@@ -5387,7 +5387,7 @@ asm void fn_8064C8CC(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r5
-    bl fn_80649940
+    bl port_find_mcb_dlci_port
     mr r5, r31
     li r4, 0xe
     bl fn_8064B238

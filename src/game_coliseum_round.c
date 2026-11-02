@@ -7,7 +7,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_8000DB1C(void);
-extern void fn_80042108(void);
+extern void vec4_copy(void);
 extern void fn_8007A154(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
@@ -1000,7 +1000,7 @@ lbl_fn_8048F9B0_00000CF8:
     bl skeleton_getGlobalManager
     bl fn_801856A4
     addi r4, r1, 0x10
-    bl fn_80042108
+    bl vec4_copy
 lbl_fn_8048F9B0_00000D28:
     lwz r0, 0xc(r1)
     addi r3, r1, 0x58

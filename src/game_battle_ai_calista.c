@@ -68,7 +68,7 @@ extern void rand(void);
 extern void strcmp(void);
 extern void atoi(void);
 extern void wcscpy(void);
-extern void fn_8068B2A0(void);
+extern void _itow(void);
 extern void __destroy_new_array(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
@@ -1053,11 +1053,11 @@ lbl_fn_80431774_00000D3C:
     lwz r3, 0x2ebc(r30)
     addi r4, r1, 0x3c8
     li r5, 0xa
-    bl fn_8068B2A0
+    bl _itow
     lwz r3, 0x2ec0(r30)
     addi r4, r1, 0x348
     li r5, 0xa
-    bl fn_8068B2A0
+    bl _itow
     lwz r4, 0x8(r29)
     addi r3, r1, 0x790
     addi r6, r1, 0x590

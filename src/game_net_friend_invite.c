@@ -92,7 +92,7 @@ extern void boss_getOffset50(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void shockwave_freeEmitter(void);
-extern void fn_804814F0(void);
+extern void dvd_getErrorManager(void);
 extern void fn_8049D68C(void);
 extern void fn_804AC734(void);
 extern void net_getPacketManager(void);
@@ -2488,10 +2488,10 @@ lbl_fn_804D25D4_00001D48:
     li r4, 0x9f0
     bl fn_804F7EF4
 lbl_fn_804D25D4_00001D78:
-    bl fn_804814F0
+    bl dvd_getErrorManager
     cmpwi r3, 0x0
     beq lbl_fn_804D25D4_00001DA0
-    bl fn_804814F0
+    bl dvd_getErrorManager
     lfs f1, lbl_808875D0
     li r4, 0x548
     li r5, 0x0
@@ -3236,10 +3236,10 @@ lbl_fn_804D25D4_00002834:
     addi r3, r24, 0x4fc
     li r4, 0xf
     bl net_friend_setErrorCode
-    bl fn_804814F0
+    bl dvd_getErrorManager
     cmpwi r3, 0x0
     beq lbl_fn_804D25D4_00004898
-    bl fn_804814F0
+    bl dvd_getErrorManager
     lfs f1, lbl_80887590
     li r4, 0x1b5b
     li r5, 0xa
@@ -3584,13 +3584,13 @@ lbl_fn_804D25D4_00002D44:
     li r5, 0x1
     bl fat_dispatchFsRequest
 lbl_fn_804D25D4_00002D74:
-    bl fn_804814F0
+    bl dvd_getErrorManager
     cmpwi r3, 0x0
     beq lbl_fn_804D25D4_00002DF4
     lwz r0, 0x540(r24)
     cmpwi r0, 0x2
     beq lbl_fn_804D25D4_00002DAC
-    bl fn_804814F0
+    bl dvd_getErrorManager
     lfs f1, lbl_808875D0
     li r4, 0x66
     li r5, 0x0
@@ -3602,7 +3602,7 @@ lbl_fn_804D25D4_00002DAC:
     lwz r0, 0x560(r24)
     cmpwi r0, 0x1
     bne lbl_fn_804D25D4_00002DD8
-    bl fn_804814F0
+    bl dvd_getErrorManager
     lfs f1, lbl_808875D0
     li r4, 0xc9
     li r5, 0x0
@@ -3611,7 +3611,7 @@ lbl_fn_804D25D4_00002DAC:
     bl dvd_showDiskErrorDialog
     b lbl_fn_804D25D4_00002DF4
 lbl_fn_804D25D4_00002DD8:
-    bl fn_804814F0
+    bl dvd_getErrorManager
     lfs f1, lbl_808875D0
     li r4, 0x8ad
     li r5, 0x0
@@ -4369,14 +4369,14 @@ lbl_fn_804D25D4_000038F0:
     bl fn_804D64CC
     cmpwi r3, 0x0
     beq lbl_fn_804D25D4_00003960
-    bl fn_804814F0
+    bl dvd_getErrorManager
     cmpwi r3, 0x0
     beq lbl_fn_804D25D4_00003960
     addis r3, r24, 0x1
     lwz r0, -0x6898(r3)
     cmpwi r0, 0x0
     bne lbl_fn_804D25D4_00003960
-    bl fn_804814F0
+    bl dvd_getErrorManager
     lfs f1, lbl_80887590
     li r4, 0x8b8
     li r5, 0xf
@@ -4699,7 +4699,7 @@ lbl_fn_804D25D4_00003DC8:
     li r4, 0x9f0
     bl fn_804F7EF4
 lbl_fn_804D25D4_00003DE8:
-    bl fn_804814F0
+    bl dvd_getErrorManager
     cmpwi r3, 0x0
     beq lbl_fn_804D25D4_00003E74
     lwz r0, 0x2b84(r24)
@@ -4708,7 +4708,7 @@ lbl_fn_804D25D4_00003DE8:
     cmpwi r0, 0x3
     bne lbl_fn_804D25D4_00003E28
 lbl_fn_804D25D4_00003E08:
-    bl fn_804814F0
+    bl dvd_getErrorManager
     lfs f1, lbl_808875D4
     li r4, 0x8cb
     li r5, 0xf
@@ -4722,7 +4722,7 @@ lbl_fn_804D25D4_00003E28:
     cmpwi r0, 0x4
     bne lbl_fn_804D25D4_00003E58
 lbl_fn_804D25D4_00003E38:
-    bl fn_804814F0
+    bl dvd_getErrorManager
     lfs f1, lbl_808875D4
     li r4, 0x3f5
     li r5, 0xf
@@ -4731,7 +4731,7 @@ lbl_fn_804D25D4_00003E38:
     bl dvd_showDiskErrorDialog
     b lbl_fn_804D25D4_00003E74
 lbl_fn_804D25D4_00003E58:
-    bl fn_804814F0
+    bl dvd_getErrorManager
     lfs f1, lbl_808875D4
     li r4, 0x1f6
     li r5, 0xf
@@ -5245,10 +5245,10 @@ lbl_fn_804D25D4_000045A8:
     addis r3, r24, 0x1
     subi r3, r3, 0x688c
     bl fn_8037F688
-    bl fn_804814F0
+    bl dvd_getErrorManager
     cmpwi r3, 0x0
     beq lbl_fn_804D25D4_0000462C
-    bl fn_804814F0
+    bl dvd_getErrorManager
     lfs f1, lbl_808875D0
     li r4, 0x548
     li r5, 0xf
@@ -5458,10 +5458,10 @@ lbl_fn_804D25D4_000048F4:
     mulli r0, r0, 0x12c
     subf. r0, r0, r4
     bne lbl_fn_804D25D4_00004AD4
-    bl fn_804814F0
+    bl dvd_getErrorManager
     cmpwi r3, 0x0
     beq lbl_fn_804D25D4_00004AD4
-    bl fn_804814F0
+    bl dvd_getErrorManager
     bl fn_804D6668
     cmpwi r3, 0x0
     bne lbl_fn_804D25D4_00004AD4
@@ -5495,7 +5495,7 @@ lbl_fn_804D25D4_00004984:
     cmpwi r3, 0x2a
     bgt lbl_fn_804D25D4_000049C4
 lbl_fn_804D25D4_000049A4:
-    bl fn_804814F0
+    bl dvd_getErrorManager
     lfs f1, lbl_808875D0
     li r4, 0x548
     li r5, 0x1e
@@ -5520,7 +5520,7 @@ lbl_fn_804D25D4_000049C4:
     lwz r0, -0x6898(r3)
     cmpwi r0, 0x0
     bne lbl_fn_804D25D4_00004A24
-    bl fn_804814F0
+    bl dvd_getErrorManager
     lfs f1, lbl_808875D0
     li r4, 0x66
     li r5, 0x1e
@@ -5529,7 +5529,7 @@ lbl_fn_804D25D4_000049C4:
     bl dvd_showDiskErrorDialog
     b lbl_fn_804D25D4_00004AD4
 lbl_fn_804D25D4_00004A24:
-    bl fn_804814F0
+    bl dvd_getErrorManager
     lfs f1, lbl_80887590
     li r4, 0x8b8
     li r5, 0x1e
@@ -5548,7 +5548,7 @@ lbl_fn_804D25D4_00004A44:
     cmpwi r0, 0x3
     bne lbl_fn_804D25D4_00004A88
 lbl_fn_804D25D4_00004A68:
-    bl fn_804814F0
+    bl dvd_getErrorManager
     lfs f1, lbl_808875D4
     li r4, 0x8cb
     li r5, 0x1e
@@ -5562,7 +5562,7 @@ lbl_fn_804D25D4_00004A88:
     cmpwi r0, 0x4
     bne lbl_fn_804D25D4_00004AB8
 lbl_fn_804D25D4_00004A98:
-    bl fn_804814F0
+    bl dvd_getErrorManager
     lfs f1, lbl_808875D4
     li r4, 0x3f5
     li r5, 0x1e
@@ -5571,7 +5571,7 @@ lbl_fn_804D25D4_00004A98:
     bl dvd_showDiskErrorDialog
     b lbl_fn_804D25D4_00004AD4
 lbl_fn_804D25D4_00004AB8:
-    bl fn_804814F0
+    bl dvd_getErrorManager
     lfs f1, lbl_808875D4
     li r4, 0x1f6
     li r5, 0x1e

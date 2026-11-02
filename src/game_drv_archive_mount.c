@@ -42,7 +42,7 @@ extern void fn_8012D180(void);
 extern void fn_80160170(void);
 extern void fn_80160324(void);
 extern void fn_8016034C(void);
-extern void fn_8017ABD4(void);
+extern void map_setRecordById(void);
 extern void save_validateHeader(void);
 extern void save_createWorkerTask(void);
 extern void task_mapIdToQueue(void);
@@ -2405,7 +2405,7 @@ lbl_fn_805A7820_00001F24:
     mulli r0, r0, 0x98
     add r4, r24, r0
     lwz r4, 0x104(r4)
-    bl fn_8017ABD4
+    bl map_setRecordById
     lwz r3, 0xec(r24)
     subi r0, r3, 0x1
     mulli r0, r0, 0x98
@@ -2759,7 +2759,7 @@ lbl_fn_805A7820_00002454:
     mulli r0, r0, 0x98
     add r4, r24, r0
     lwz r4, 0x104(r4)
-    bl fn_8017ABD4
+    bl map_setRecordById
     lwz r3, 0xec(r24)
     subi r0, r3, 0x1
     mulli r0, r0, 0x98
@@ -3641,7 +3641,7 @@ lbl_fn_805A7820_00003100:
     mulli r0, r0, 0x98
     add r4, r24, r0
     lwz r4, 0x104(r4)
-    bl fn_8017ABD4
+    bl map_setRecordById
     lwz r3, 0xec(r24)
     subi r0, r3, 0x1
     mulli r0, r0, 0x98

@@ -47,7 +47,7 @@ extern void cam_destroyMsgHandle(void);
 extern void fn_8012044C(void);
 extern void fn_801206EC(void);
 extern void fn_80120700(void);
-extern void fn_801207D4(void);
+extern void player_skill_pushEntry(void);
 extern void equip_getElementPtr0(void);
 extern void equip_getGlobalManager(void);
 extern void fn_8017CB2C(void);
@@ -2108,7 +2108,7 @@ lbl_fn_803EF780_00001948:
     bl str_initFromCStr
     addi r3, r1, 0x38
     addi r4, r1, 0x20
-    bl fn_801207D4
+    bl player_skill_pushEntry
     addi r3, r1, 0x20
     li r4, -0x1
     bl dtor_80013D60

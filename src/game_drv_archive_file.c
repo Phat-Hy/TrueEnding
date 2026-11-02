@@ -20,7 +20,7 @@ extern void fn_80160324(void);
 extern void battle_canTargetActor(void);
 extern void battle_calcAABBCenter(void);
 extern void fn_80178864(void);
-extern void fn_8017ABD4(void);
+extern void map_setRecordById(void);
 extern void fn_8017AC08(void);
 extern void task_mapIdToQueue(void);
 extern void task_findEntryById(void);
@@ -752,7 +752,7 @@ asm void fn_805AA018(void)
     bgt lbl_fn_805AA018_000009B4
     mr r3, r31
     li r4, 0x2390
-    bl fn_8017ABD4
+    bl map_setRecordById
     b lbl_fn_805AA018_00000CB0
 lbl_fn_805AA018_000009B4:
     cmpwi r30, 0x9
@@ -767,7 +767,7 @@ lbl_fn_805AA018_000009B4:
     extrwi r0, r0, 1, 26
     neg r4, r0
     addi r4, r4, 0x27e6
-    bl fn_8017ABD4
+    bl map_setRecordById
     b lbl_fn_805AA018_00000CB0
 lbl_fn_805AA018_000009EC:
     lwz r0, 0x12a8(r31)
@@ -775,18 +775,18 @@ lbl_fn_805AA018_000009EC:
     beq lbl_fn_805AA018_00000A08
     mr r3, r31
     li r4, 0x27e9
-    bl fn_8017ABD4
+    bl map_setRecordById
     b lbl_fn_805AA018_00000CB0
 lbl_fn_805AA018_00000A08:
     mr r3, r31
     li r4, 0x238f
-    bl fn_8017ABD4
+    bl map_setRecordById
     b lbl_fn_805AA018_00000CB0
     cmpwi r30, 0x4
     bne lbl_fn_805AA018_00000A30
     mr r3, r31
     li r4, 0x2392
-    bl fn_8017ABD4
+    bl map_setRecordById
     b lbl_fn_805AA018_00000CB0
 lbl_fn_805AA018_00000A30:
     cmpwi r30, 0x9
@@ -801,19 +801,19 @@ lbl_fn_805AA018_00000A30:
     extrwi r0, r0, 1, 26
     neg r4, r0
     addi r4, r4, 0x27e6
-    bl fn_8017ABD4
+    bl map_setRecordById
     b lbl_fn_805AA018_00000CB0
 lbl_fn_805AA018_00000A68:
     mr r3, r31
     li r4, 0x238d
-    bl fn_8017ABD4
+    bl map_setRecordById
     b lbl_fn_805AA018_00000CB0
     subi r0, r30, 0x3
     cmplwi r0, 0x1
     bgt lbl_fn_805AA018_00000A94
     mr r3, r31
     li r4, 0x2390
-    bl fn_8017ABD4
+    bl map_setRecordById
     b lbl_fn_805AA018_00000CB0
 lbl_fn_805AA018_00000A94:
     cmpwi r30, 0x9
@@ -828,7 +828,7 @@ lbl_fn_805AA018_00000A94:
     extrwi r0, r0, 1, 26
     neg r4, r0
     addi r4, r4, 0x27e6
-    bl fn_8017ABD4
+    bl map_setRecordById
     b lbl_fn_805AA018_00000CB0
 lbl_fn_805AA018_00000ACC:
     lwz r0, 0x12a8(r31)
@@ -836,18 +836,18 @@ lbl_fn_805AA018_00000ACC:
     beq lbl_fn_805AA018_00000AE8
     mr r3, r31
     li r4, 0x27e9
-    bl fn_8017ABD4
+    bl map_setRecordById
     b lbl_fn_805AA018_00000CB0
 lbl_fn_805AA018_00000AE8:
     mr r3, r31
     li r4, 0x238f
-    bl fn_8017ABD4
+    bl map_setRecordById
     b lbl_fn_805AA018_00000CB0
     cmpwi r30, 0x4
     bne lbl_fn_805AA018_00000B10
     mr r3, r31
     li r4, 0x2329
-    bl fn_8017ABD4
+    bl map_setRecordById
     b lbl_fn_805AA018_00000CB0
 lbl_fn_805AA018_00000B10:
     cmpwi r30, 0x9
@@ -862,7 +862,7 @@ lbl_fn_805AA018_00000B10:
     extrwi r0, r0, 1, 26
     neg r4, r0
     addi r4, r4, 0x27e6
-    bl fn_8017ABD4
+    bl map_setRecordById
     b lbl_fn_805AA018_00000CB0
 lbl_fn_805AA018_00000B48:
     lwz r0, 0x12a8(r31)
@@ -870,12 +870,12 @@ lbl_fn_805AA018_00000B48:
     beq lbl_fn_805AA018_00000B64
     mr r3, r31
     li r4, 0x27e9
-    bl fn_8017ABD4
+    bl map_setRecordById
     b lbl_fn_805AA018_00000CB0
 lbl_fn_805AA018_00000B64:
     mr r3, r31
     li r4, 0x238f
-    bl fn_8017ABD4
+    bl map_setRecordById
     b lbl_fn_805AA018_00000CB0
     cmpwi r30, 0x9
     bne lbl_fn_805AA018_00000BAC
@@ -889,12 +889,12 @@ lbl_fn_805AA018_00000B64:
     extrwi r0, r0, 1, 26
     neg r4, r0
     addi r4, r4, 0x27e6
-    bl fn_8017ABD4
+    bl map_setRecordById
     b lbl_fn_805AA018_00000CB0
 lbl_fn_805AA018_00000BAC:
     mr r3, r31
     li r4, 0x238d
-    bl fn_8017ABD4
+    bl map_setRecordById
     b lbl_fn_805AA018_00000CB0
     cmpwi r30, 0x9
     bne lbl_fn_805AA018_00000BF4
@@ -908,14 +908,14 @@ lbl_fn_805AA018_00000BAC:
     extrwi r0, r0, 1, 26
     neg r4, r0
     addi r4, r4, 0x27e6
-    bl fn_8017ABD4
+    bl map_setRecordById
     b lbl_fn_805AA018_00000CB0
 lbl_fn_805AA018_00000BF4:
     cmpwi r30, 0xb
     bne lbl_fn_805AA018_00000C20
     mr r3, r31
     li r4, 0x238e
-    bl fn_8017ABD4
+    bl map_setRecordById
     mr r3, r31
     li r4, 0x0
     li r5, 0x0
@@ -927,7 +927,7 @@ lbl_fn_805AA018_00000C20:
     bne lbl_fn_805AA018_00000CB0
     mr r3, r31
     li r4, 0x238d
-    bl fn_8017ABD4
+    bl map_setRecordById
     mr r3, r31
     li r4, 0x1
     li r5, 0x0
@@ -943,7 +943,7 @@ lbl_fn_805AA018_00000C4C:
     bne lbl_fn_805AA018_00000C88
     mr r3, r31
     li r4, 0x238e
-    bl fn_8017ABD4
+    bl map_setRecordById
     mr r3, r31
     li r4, 0x0
     li r5, 0x0
@@ -955,7 +955,7 @@ lbl_fn_805AA018_00000C88:
     bne lbl_fn_805AA018_00000CB0
     mr r3, r31
     li r4, 0x238d
-    bl fn_8017ABD4
+    bl map_setRecordById
     mr r3, r31
     li r4, 0x1
     li r5, 0x0

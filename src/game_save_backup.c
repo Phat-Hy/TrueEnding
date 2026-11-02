@@ -48,7 +48,7 @@ void save_writeBackupSlot(void);
 void fn_801F791C(void);
 void fn_801F7A18(void);
 void save_backup_formatEntry(void);
-void fn_801F80A8(void);
+void curve_setKeyframeColorRGB(void);
 void save_findEntryByName(void);
 void save_formatSlotString(void);
 void fn_801F8830(void);
@@ -851,7 +851,7 @@ lbl_save_backup_formatEntry_00000AF4:
     blr
 }
 
-asm void fn_801F80A8(void)
+asm void curve_setKeyframeColorRGB(void)
 {
     nofralloc
     stwu r1, -0x50(r1)
@@ -885,45 +885,45 @@ asm void fn_801F80A8(void)
     stfs f31, 0x28(r1)
     mtctr r8
     cmplwi r8, 0x0
-    ble lbl_fn_801F80A8_00000BE4
-lbl_fn_801F80A8_00000B98:
+    ble lbl_curve_setKeyframeColorRGB_00000BE4
+lbl_curve_setKeyframeColorRGB_00000B98:
     lbz r0, 0x5c(r7)
     extsb r0, r0
     cmpw r5, r0
-    bne lbl_fn_801F80A8_00000BD8
+    bne lbl_curve_setKeyframeColorRGB_00000BD8
     lbz r0, 0x5d(r7)
     extsb r0, r0
     cmpw r4, r0
-    bne lbl_fn_801F80A8_00000BD8
+    bne lbl_curve_setKeyframeColorRGB_00000BD8
     lwz r0, 0x60(r7)
     cmplw r3, r0
-    bne lbl_fn_801F80A8_00000BD8
+    bne lbl_curve_setKeyframeColorRGB_00000BD8
     mulli r0, r6, 0xc
     lwz r4, 0x28(r1)
     add r3, r29, r0
     stw r4, 0x64(r3)
-    b lbl_fn_801F80A8_00000C1C
-lbl_fn_801F80A8_00000BD8:
+    b lbl_curve_setKeyframeColorRGB_00000C1C
+lbl_curve_setKeyframeColorRGB_00000BD8:
     addi r7, r7, 0xc
     addi r6, r6, 0x1
-    bdnz lbl_fn_801F80A8_00000B98
-lbl_fn_801F80A8_00000BE4:
+    bdnz lbl_curve_setKeyframeColorRGB_00000B98
+lbl_curve_setKeyframeColorRGB_00000BE4:
     lwz r0, 0x58(r29)
     mulli r0, r0, 0xc
     add r0, r29, r0
     addic. r3, r0, 0x5c
-    beq lbl_fn_801F80A8_00000C10
+    beq lbl_curve_setKeyframeColorRGB_00000C10
     lwz r0, 0x20(r1)
     stw r0, 0x0(r3)
     lwz r0, 0x24(r1)
     stw r0, 0x4(r3)
     lwz r0, 0x28(r1)
     stw r0, 0x8(r3)
-lbl_fn_801F80A8_00000C10:
+lbl_curve_setKeyframeColorRGB_00000C10:
     lwz r3, 0x58(r29)
     addi r0, r3, 0x1
     stw r0, 0x58(r29)
-lbl_fn_801F80A8_00000C1C:
+lbl_curve_setKeyframeColorRGB_00000C1C:
     lfs f1, lbl_80882C98
     li r3, 0x3
     lfs f0, 0x4(r31)
@@ -944,45 +944,45 @@ lbl_fn_801F80A8_00000C1C:
     stfs f31, 0x1c(r1)
     mtctr r8
     cmplwi r8, 0x0
-    ble lbl_fn_801F80A8_00000CBC
-lbl_fn_801F80A8_00000C70:
+    ble lbl_curve_setKeyframeColorRGB_00000CBC
+lbl_curve_setKeyframeColorRGB_00000C70:
     lbz r0, 0x5c(r7)
     extsb r0, r0
     cmpw r5, r0
-    bne lbl_fn_801F80A8_00000CB0
+    bne lbl_curve_setKeyframeColorRGB_00000CB0
     lbz r0, 0x5d(r7)
     extsb r0, r0
     cmpw r4, r0
-    bne lbl_fn_801F80A8_00000CB0
+    bne lbl_curve_setKeyframeColorRGB_00000CB0
     lwz r0, 0x60(r7)
     cmplw r3, r0
-    bne lbl_fn_801F80A8_00000CB0
+    bne lbl_curve_setKeyframeColorRGB_00000CB0
     mulli r0, r6, 0xc
     lwz r4, 0x1c(r1)
     add r3, r29, r0
     stw r4, 0x64(r3)
-    b lbl_fn_801F80A8_00000CF4
-lbl_fn_801F80A8_00000CB0:
+    b lbl_curve_setKeyframeColorRGB_00000CF4
+lbl_curve_setKeyframeColorRGB_00000CB0:
     addi r7, r7, 0xc
     addi r6, r6, 0x1
-    bdnz lbl_fn_801F80A8_00000C70
-lbl_fn_801F80A8_00000CBC:
+    bdnz lbl_curve_setKeyframeColorRGB_00000C70
+lbl_curve_setKeyframeColorRGB_00000CBC:
     lwz r0, 0x58(r29)
     mulli r0, r0, 0xc
     add r0, r29, r0
     addic. r3, r0, 0x5c
-    beq lbl_fn_801F80A8_00000CE8
+    beq lbl_curve_setKeyframeColorRGB_00000CE8
     lwz r0, 0x14(r1)
     stw r0, 0x0(r3)
     lwz r0, 0x18(r1)
     stw r0, 0x4(r3)
     lwz r0, 0x1c(r1)
     stw r0, 0x8(r3)
-lbl_fn_801F80A8_00000CE8:
+lbl_curve_setKeyframeColorRGB_00000CE8:
     lwz r3, 0x58(r29)
     addi r0, r3, 0x1
     stw r0, 0x58(r29)
-lbl_fn_801F80A8_00000CF4:
+lbl_curve_setKeyframeColorRGB_00000CF4:
     lfs f1, lbl_80882C98
     li r0, 0x3
     lfs f0, 0x8(r31)
@@ -1002,45 +1002,45 @@ lbl_fn_801F80A8_00000CF4:
     stfs f31, 0x10(r1)
     mtctr r8
     cmplwi r8, 0x0
-    ble lbl_fn_801F80A8_00000D90
-lbl_fn_801F80A8_00000D44:
+    ble lbl_curve_setKeyframeColorRGB_00000D90
+lbl_curve_setKeyframeColorRGB_00000D44:
     lbz r0, 0x5c(r7)
     extsb r0, r0
     cmpw r5, r0
-    bne lbl_fn_801F80A8_00000D84
+    bne lbl_curve_setKeyframeColorRGB_00000D84
     lbz r0, 0x5d(r7)
     extsb r0, r0
     cmpw r4, r0
-    bne lbl_fn_801F80A8_00000D84
+    bne lbl_curve_setKeyframeColorRGB_00000D84
     lwz r0, 0x60(r7)
     cmplw r3, r0
-    bne lbl_fn_801F80A8_00000D84
+    bne lbl_curve_setKeyframeColorRGB_00000D84
     mulli r0, r6, 0xc
     lwz r4, 0x10(r1)
     add r3, r29, r0
     stw r4, 0x64(r3)
-    b lbl_fn_801F80A8_00000DC8
-lbl_fn_801F80A8_00000D84:
+    b lbl_curve_setKeyframeColorRGB_00000DC8
+lbl_curve_setKeyframeColorRGB_00000D84:
     addi r7, r7, 0xc
     addi r6, r6, 0x1
-    bdnz lbl_fn_801F80A8_00000D44
-lbl_fn_801F80A8_00000D90:
+    bdnz lbl_curve_setKeyframeColorRGB_00000D44
+lbl_curve_setKeyframeColorRGB_00000D90:
     lwz r0, 0x58(r29)
     mulli r0, r0, 0xc
     add r0, r29, r0
     addic. r3, r0, 0x5c
-    beq lbl_fn_801F80A8_00000DBC
+    beq lbl_curve_setKeyframeColorRGB_00000DBC
     lwz r0, 0x8(r1)
     stw r0, 0x0(r3)
     lwz r0, 0xc(r1)
     stw r0, 0x4(r3)
     lwz r0, 0x10(r1)
     stw r0, 0x8(r3)
-lbl_fn_801F80A8_00000DBC:
+lbl_curve_setKeyframeColorRGB_00000DBC:
     lwz r3, 0x58(r29)
     addi r0, r3, 0x1
     stw r0, 0x58(r29)
-lbl_fn_801F80A8_00000DC8:
+lbl_curve_setKeyframeColorRGB_00000DC8:
     lwz r0, 0x54(r1)
     psq_l f31, 0x48(r1), 0, 0
     lfd f31, 0x40(r1)

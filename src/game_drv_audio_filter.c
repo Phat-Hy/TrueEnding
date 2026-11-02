@@ -47,7 +47,7 @@ extern void fn_805BEAD0(void);
 extern void fn_805BEB18(void);
 extern void fn_805BEC6C(void);
 extern void gx_fifo_checkBufferActive(void);
-extern void fn_805BECA4(void);
+extern void gx_fifo_findNextChunk(void);
 extern void fn_805BED54(void);
 extern void fn_805BEE08(void);
 extern void fn_805BEEC8(void);
@@ -1219,7 +1219,7 @@ lbl_fn_805BD4BC_00000F6C:
     bl fn_805BED54
     stw r3, 0x30(r1)
     addi r3, r1, 0x30
-    bl fn_805BECA4
+    bl gx_fifo_findNextChunk
     lis r24, __files@ha
     stw r3, 0x2c(r1)
     mr r20, r3
@@ -1395,7 +1395,7 @@ lbl_fn_805BD4BC_00001128:
     bl dtor_80084684
 lbl_fn_805BD4BC_00001208:
     addi r3, r1, 0x2c
-    bl fn_805BECA4
+    bl gx_fifo_findNextChunk
     stw r3, 0x2c(r1)
     mr r20, r3
     addi r19, r19, 0x1
@@ -1886,7 +1886,7 @@ lbl_fn_805BDE4C_000018B8:
     add r4, r0, r27
     bl fn_805BEA38
     addi r3, r1, 0x18
-    bl fn_805BECA4
+    bl gx_fifo_findNextChunk
     stw r3, 0x18(r1)
     addi r3, r1, 0x18
     bl fn_805BED54
@@ -1909,7 +1909,7 @@ lbl_fn_805BDE4C_00001910:
     add r4, r0, r27
     bl fn_805BEA38
     addi r3, r1, 0x14
-    bl fn_805BECA4
+    bl gx_fifo_findNextChunk
     stw r3, 0x14(r1)
     addi r3, r1, 0x14
     li r27, 0x8
@@ -1929,7 +1929,7 @@ lbl_fn_805BDE4C_0000195C:
     add r4, r0, r27
     bl fn_805BEA38
     addi r3, r1, 0x14
-    bl fn_805BECA4
+    bl gx_fifo_findNextChunk
     stw r3, 0x14(r1)
     addi r3, r1, 0x14
     li r27, 0x8
@@ -1949,7 +1949,7 @@ lbl_fn_805BDE4C_000019A8:
     add r4, r0, r27
     bl fn_805BEA38
     addi r3, r1, 0x18
-    bl fn_805BECA4
+    bl gx_fifo_findNextChunk
     stw r3, 0x18(r1)
     addi r3, r1, 0x18
     bl fn_805BED54
@@ -1972,7 +1972,7 @@ lbl_fn_805BDE4C_00001A00:
     add r4, r0, r27
     bl fn_805BEA38
     addi r3, r1, 0x10
-    bl fn_805BECA4
+    bl gx_fifo_findNextChunk
     stw r3, 0x10(r1)
     addi r3, r1, 0x10
     li r27, 0x8
@@ -1992,7 +1992,7 @@ lbl_fn_805BDE4C_00001A4C:
     add r4, r0, r27
     bl fn_805BEA38
     addi r3, r1, 0x10
-    bl fn_805BECA4
+    bl gx_fifo_findNextChunk
     stw r3, 0x10(r1)
     addi r3, r1, 0x10
     li r27, 0x8
@@ -2012,7 +2012,7 @@ lbl_fn_805BDE4C_00001A98:
     add r4, r0, r27
     bl fn_805BEA38
     addi r3, r1, 0x18
-    bl fn_805BECA4
+    bl gx_fifo_findNextChunk
     stw r3, 0x18(r1)
     addi r3, r1, 0x18
     bl fn_805BED54
@@ -2035,7 +2035,7 @@ lbl_fn_805BDE4C_00001AF0:
     add r4, r0, r27
     bl fn_805BEA38
     addi r3, r1, 0xc
-    bl fn_805BECA4
+    bl gx_fifo_findNextChunk
     stw r3, 0xc(r1)
     addi r3, r1, 0xc
     li r27, 0x8
@@ -2055,7 +2055,7 @@ lbl_fn_805BDE4C_00001B3C:
     add r4, r0, r27
     bl fn_805BEA38
     addi r3, r1, 0xc
-    bl fn_805BECA4
+    bl gx_fifo_findNextChunk
     stw r3, 0xc(r1)
     addi r3, r1, 0xc
     li r27, 0x8
@@ -2075,7 +2075,7 @@ lbl_fn_805BDE4C_00001B88:
     add r4, r0, r27
     bl fn_805BEA38
     addi r3, r1, 0x18
-    bl fn_805BECA4
+    bl gx_fifo_findNextChunk
     stw r3, 0x18(r1)
     addi r3, r1, 0x18
     bl fn_805BED54
@@ -2098,7 +2098,7 @@ lbl_fn_805BDE4C_00001BE0:
     add r4, r0, r27
     bl fn_805BEA38
     addi r3, r1, 0x8
-    bl fn_805BECA4
+    bl gx_fifo_findNextChunk
     stw r3, 0x8(r1)
     addi r3, r1, 0x8
     li r27, 0x8
@@ -2118,7 +2118,7 @@ lbl_fn_805BDE4C_00001C2C:
     add r4, r0, r27
     bl fn_805BEA38
     addi r3, r1, 0x8
-    bl fn_805BECA4
+    bl gx_fifo_findNextChunk
     stw r3, 0x8(r1)
     addi r3, r1, 0x8
     li r27, 0x8

@@ -5581,7 +5581,7 @@
 .endfn fn_801F7DF0
 
 # .text:0x4CD4 | 0x801F80A8 | size: 0x2D4
-.fn fn_801F80A8, global
+.fn curve_setKeyframeColorRGB, global
 /* 801F80A8 001F2708  94 21 FF B0 */	stwu r1, -0x50(r1)
 /* 801F80AC 001F270C  7C 08 02 A6 */	mflr r0
 /* 801F80B0 001F2710  38 C0 00 03 */	li r6, 0x3
@@ -5778,7 +5778,7 @@
 /* 801F8370 001F29D0  7C 08 03 A6 */	mtlr r0
 /* 801F8374 001F29D4  38 21 00 50 */	addi r1, r1, 0x50
 /* 801F8378 001F29D8  4E 80 00 20 */	blr
-.endfn fn_801F80A8
+.endfn curve_setKeyframeColorRGB
 
 # .text:0x4FA8 | 0x801F837C | size: 0x21C
 .fn fn_801F837C, global

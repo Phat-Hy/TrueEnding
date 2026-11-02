@@ -58,7 +58,7 @@ extern void shockwave_freeEmitter(void);
 extern void fn_80572B70(void);
 extern void wcslen(void);
 extern void wcscpy(void);
-extern void fn_8068B2A0(void);
+extern void _itow(void);
 extern void fn_8068B770(void);
 extern void fn_8068BC30(void);
 extern void fn_8068BD60(void);
@@ -2057,7 +2057,7 @@ lbl_fn_803B3D2C_00001954:
     mr r3, r21
     addi r4, r1, 0x60
     li r5, 0xa
-    bl fn_8068B2A0
+    bl _itow
     lwz r0, 0x54(r1)
     srwi. r0, r0, 31
     bne lbl_fn_803B3D2C_0000197C

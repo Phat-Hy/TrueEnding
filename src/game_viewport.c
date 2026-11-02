@@ -16,7 +16,7 @@ extern void vec3_addAssign(void);
 extern void vec3_sub(void);
 extern void fn_80013484(void);
 extern void fn_80041B8C(void);
-extern void fn_80042108(void);
+extern void vec4_copy(void);
 extern void fn_80050420(void);
 extern void fn_8005E3E0(void);
 extern void fn_80064F00(void);
@@ -462,7 +462,7 @@ lbl_fn_800F72F4_000004A0:
     bl fn_800F8014
     mr r4, r3
     addi r3, r1, 0x188
-    bl fn_80042108
+    bl vec4_copy
     b lbl_fn_800F72F4_0000053C
 lbl_fn_800F72F4_000004DC:
     mr r3, r27
@@ -478,7 +478,7 @@ lbl_fn_800F72F4_000004DC:
     bl fn_800F8014
     mr r4, r3
     addi r3, r1, 0x188
-    bl fn_80042108
+    bl vec4_copy
     b lbl_fn_800F72F4_0000053C
 lbl_fn_800F72F4_00000518:
     bl proj_getGlobalManager
@@ -489,7 +489,7 @@ lbl_fn_800F72F4_00000518:
     bl fn_800F8014
     mr r4, r3
     addi r3, r1, 0x188
-    bl fn_80042108
+    bl vec4_copy
 lbl_fn_800F72F4_0000053C:
     mr r3, r27
     bl fn_800F7FB4
@@ -504,7 +504,7 @@ lbl_fn_800F72F4_0000053C:
     bl fn_800F8014
     mr r4, r3
     addi r3, r1, 0x188
-    bl fn_80042108
+    bl vec4_copy
     b lbl_fn_800F72F4_000005C4
 lbl_fn_800F72F4_00000578:
     bl proj_getGlobalManager
@@ -515,7 +515,7 @@ lbl_fn_800F72F4_00000578:
     bl fn_800F8014
     mr r4, r3
     addi r3, r1, 0x188
-    bl fn_80042108
+    bl vec4_copy
     b lbl_fn_800F72F4_000005C4
 lbl_fn_800F72F4_000005A0:
     bl proj_getGlobalManager
@@ -526,7 +526,7 @@ lbl_fn_800F72F4_000005A0:
     bl fn_800F8014
     mr r4, r3
     addi r3, r1, 0x188
-    bl fn_80042108
+    bl vec4_copy
 lbl_fn_800F72F4_000005C4:
     sth r28, 0x74(r29)
     mr r3, r27
