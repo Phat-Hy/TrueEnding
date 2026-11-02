@@ -33,8 +33,8 @@ extern void fn_800C5FF0(void);
 extern void atn_LH_Texture_update(void);
 extern void str_findChar(void);
 extern void atn_LoadHandle_getStatus(void);
-extern void atn_LoadHandle_getName(void);
-extern void atn_LoadHandle_getData(void);
+extern const char *atn_LoadHandle_getName(const void *handle);
+extern void *atn_LoadHandle_getData(const void *handle);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_80474860(void);
 extern void fn_8047486C(void);
@@ -71,8 +71,8 @@ extern u32 lbl_8087EFE0;
 extern u32 lbl_80880BF8;
 
 /* Function declarations */
-void map_getArchiveName(void);
-void fn_8008B138(void);
+const char *map_getArchiveName(void *p);
+void *fn_8008B138(void *p);
 void map_processTrigger(void);
 u32 sys_getMainManager(void);
 u32 fn_8008B96C(void);
@@ -84,18 +84,14 @@ void fn_8008BC58(void);
 void fn_8008BD10(void);
 void fn_8008C62C(void);
 
-asm void map_getArchiveName(void)
+const char *map_getArchiveName(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x164
-    b atn_LoadHandle_getName
+    return atn_LoadHandle_getName((u8 *)p + 0x164);
 }
 
-asm void fn_8008B138(void)
+void *fn_8008B138(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x164
-    b atn_LoadHandle_getData
+    return atn_LoadHandle_getData((u8 *)p + 0x164);
 }
 
 asm void map_processTrigger(void)

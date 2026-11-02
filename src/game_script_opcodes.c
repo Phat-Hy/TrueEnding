@@ -108,7 +108,7 @@ void fn_80244674(void);
 void fn_802446F0(void);
 void fn_80244898(void);
 u32 fn_80244CA0(void *p);
-void script_setTaskTerminated(void);
+void script_setTaskTerminated(void *p);
 void fn_80244CBC(void);
 void fn_80244CCC(void);
 void fn_80244FC0(void);
@@ -573,13 +573,9 @@ u32 fn_80244CA0(void *p)
     return (*(u32 *)((u8 *)p + 0x38) >> 1) & 1;
 }
 
-asm void script_setTaskTerminated(void)
+void script_setTaskTerminated(void *p)
 {
-    nofralloc
-    lwz r0, 0x38(r3)
-    ori r0, r0, 0x4
-    stw r0, 0x38(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x38) |= 0x4;
 }
 
 asm void fn_80244CBC(void)

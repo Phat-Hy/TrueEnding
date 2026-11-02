@@ -198,7 +198,7 @@ void fn_80338D04(void);
 void fn_80338D08(void *p);
 void fn_80338D14(void);
 void fn_80338FD0(void);
-void fn_803396EC(void);
+void fn_803396EC(void *p, u32 mask);
 void fn_803396FC(void);
 void fn_80339718(void);
 void fn_80339760(void);
@@ -1537,13 +1537,9 @@ lbl_fn_80338FD0_000012EC:
     blr
 }
 
-asm void fn_803396EC(void)
+void fn_803396EC(void *p, u32 mask)
 {
-    nofralloc
-    lwz r0, 0x54c(r3)
-    or r0, r0, r4
-    stw r0, 0x54c(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x54c) |= mask;
 }
 
 asm void fn_803396FC(void)

@@ -122,7 +122,7 @@ void fn_806CF130(void);
 void fn_806CF160(void);
 u32 fn_806CF190(void *p);
 u32 fn_806CF1A0(void *p);
-void fn_806CF1B0(void);
+u32 fn_806CF1B0(const void *p);
 void fn_806CF1C0(void);
 void fn_806CF200(void);
 void fn_806CF250(void);
@@ -2347,12 +2347,9 @@ u32 fn_806CF1A0(void *p)
     return (*(u32 *)p >> 16) & 1;
 }
 
-asm void fn_806CF1B0(void)
+u32 fn_806CF1B0(const void *p)
 {
-    nofralloc
-    lwz r0, 0x0(r3)
-    extrwi r3, r0, 2, 19
-    blr
+    return (*(const u32 *)p >> 11) & 3;
 }
 
 asm void fn_806CF1C0(void)

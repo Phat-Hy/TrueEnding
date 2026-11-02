@@ -134,7 +134,7 @@ void fn_802A40A8(void);
 void fn_802A4120(void);
 void *fn_802A4168(void *p);
 void fn_802A4170(void *p);
-void fn_802A4184(void);
+void *fn_802A4184(const void *p, u32 idx);
 void fn_802A4194(void);
 void fn_802A42CC(void);
 void fn_802A4454(void);
@@ -231,13 +231,9 @@ void fn_802A4170(void *p)
     *(u32 *)((u8 *)p + 0x8) = 0;
 }
 
-asm void fn_802A4184(void)
+void *fn_802A4184(const void *p, u32 idx)
 {
-    nofralloc
-    lwz r3, 0x0(r3)
-    slwi r0, r4, 2
-    add r3, r3, r0
-    blr
+    return (u8 *)(*(void **)p) + idx * 4;
 }
 
 asm void fn_802A4194(void)

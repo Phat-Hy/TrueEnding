@@ -138,7 +138,7 @@ void fn_801360D8(void);
 void fn_80136138(void);
 void fn_80136544(void);
 void boss_updatePhaseState(void);
-void fn_801370B8(void);
+u32 fn_801370B8(const void *p, u32 idx);
 void fn_801370C8(void);
 void fn_801370F4(void);
 void fn_801371AC(void);
@@ -1318,13 +1318,9 @@ lbl_boss_updatePhaseState_00001030:
     blr
 }
 
-asm void fn_801370B8(void)
+u32 fn_801370B8(const void *p, u32 idx)
 {
-    nofralloc
-    slwi r0, r4, 2
-    add r3, r3, r0
-    lwz r3, 0x484(r3)
-    blr
+    return *(const u32 *)((const u8 *)p + idx * 4 + 0x484);
 }
 
 asm void fn_801370C8(void)

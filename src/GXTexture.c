@@ -19,7 +19,7 @@ extern f64 lbl_808887B0;
 void fn_80616380(void *obj, void *val);
 void fn_80616390(void *obj, u32 val);
 u32 fn_806163A0(const void *obj);
-void fn_806163B0(void);
+u32 fn_806163B0(const void *p);
 void fn_806163C0(void);
 void fn_806163E0(void);
 void *fn_80616400(const void *obj);
@@ -66,12 +66,9 @@ u32 fn_806163A0(const void *obj)
     return *(const u32 *)((const char *)obj + 0x10);
 }
 
-asm void fn_806163B0(void)
+u32 fn_806163B0(const void *p)
 {
-    nofralloc
-    lwz r0, 0xc(r3)
-    clrlslwi r3, r0, 8, 5
-    blr
+    return (*(const u32 *)((const u8 *)p + 0xc) & 0x00ffffff) << 5;
 }
 
 asm void fn_806163C0(void)

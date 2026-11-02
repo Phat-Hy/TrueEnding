@@ -55,7 +55,7 @@ extern u8 lbl_807CA130[];
 
 /* Function declarations */
 void fn_805C1900(void);
-void fn_805C1A00(void);
+u32 fn_805C1A00(const void *p);
 void *fn_805C1A10(void *obj);
 void fn_805C1A20(void);
 void fn_805C1B00(void);
@@ -83,7 +83,7 @@ void fn_805C22A0(void);
 void fn_805C22B0(void *p, f32 val);
 void fn_805C22C0(void);
 void fn_805C2360(void);
-void fn_805C23C0(void);
+void fn_805C23C0(void *p);
 void fn_805C23D0(void);
 void fn_805C2610(void);
 void fn_805C2620(void);
@@ -191,12 +191,9 @@ lbl_fn_805C1900_000000EC:
     blr
 }
 
-asm void fn_805C1A00(void)
+u32 fn_805C1A00(const void *p)
 {
-    nofralloc
-    lbz r0, 0xcf(r3)
-    clrlwi r3, r0, 31
-    blr
+    return *(const u8 *)((const u8 *)p + 0xcf) & 1;
 }
 
 void *fn_805C1A10(void *obj)
@@ -924,13 +921,10 @@ lbl_fn_805C2360_00000AA8:
     blr
 }
 
-asm void fn_805C23C0(void)
+void fn_805C23C0(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stb r0, 0x42(r3)
-    stb r0, 0x43(r3)
-    blr
+    *(u8 *)((u8 *)p + 0x42) = 0;
+    *(u8 *)((u8 *)p + 0x43) = 0;
 }
 
 asm void fn_805C23D0(void)

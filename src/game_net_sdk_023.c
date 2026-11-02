@@ -71,7 +71,7 @@ void fn_806CFB00(void);
 void fn_806CFB40(void);
 void fn_806CFCC0(void);
 void fn_806CFD00(void);
-void fn_806CFE90(void);
+u32 fn_806CFE90(const void *p);
 void fn_806CFEA0(void);
 void fn_806CFEB0(void);
 void fn_806D0030(void);
@@ -729,12 +729,9 @@ lbl_fn_806CFD00_000007E4:
     blr
 }
 
-asm void fn_806CFE90(void)
+u32 fn_806CFE90(const void *p)
 {
-    nofralloc
-    lwz r0, 0x20(r3)
-    clrlwi r3, r0, 31
-    blr
+    return *(const u32 *)((const u8 *)p + 0x20) & 1;
 }
 
 void fn_806CFEA0(void)

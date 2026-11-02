@@ -104,7 +104,7 @@ void fn_8070C100(void);
 void fn_8070C180(void);
 void fn_8070C2B0(void);
 void fn_8070C2D0(void);
-void fn_8070C2F0(void);
+void fn_8070C2F0(void *p, u8 a, f32 b);
 void fn_8070C300(void);
 void fn_8070C440(void);
 void fn_8070C630(void);
@@ -930,12 +930,10 @@ asm void fn_8070C2D0(void)
     blr
 }
 
-asm void fn_8070C2F0(void)
+void fn_8070C2F0(void *p, u8 a, f32 b)
 {
-    nofralloc
-    stb r4, 0x3b(r3)
-    stfs f1, 0x54(r3)
-    blr
+    *(u8 *)((u8 *)p + 0x3b) = a;
+    *(f32 *)((u8 *)p + 0x54) = b;
 }
 
 asm void fn_8070C300(void)

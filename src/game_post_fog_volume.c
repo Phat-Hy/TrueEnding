@@ -91,7 +91,7 @@ void fn_802D73E4(void);
 void fn_802D7480(void);
 void fn_802D7A3C(void);
 void fn_802D7E80(void);
-void fn_802D8540(void);
+void fn_802D8540(void *p, u32 mask);
 void *fn_802D8550(const void *p, u32 idx);
 void fn_802D8560(void);
 void fn_802D8854(void);
@@ -1575,13 +1575,9 @@ lbl_fn_802D7E80_000014C8:
     blr
 }
 
-asm void fn_802D8540(void)
+void fn_802D8540(void *p, u32 mask)
 {
-    nofralloc
-    lwz r0, 0x4(r3)
-    andc r0, r0, r4
-    stw r0, 0x4(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x4) &= ~mask;
 }
 
 void *fn_802D8550(const void *p, u32 idx)

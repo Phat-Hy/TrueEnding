@@ -90,7 +90,7 @@ void atn_LH_ColliTree_onNotify(void);
 void fn_80472DCC(void);
 void fn_80472FAC(void);
 void fn_8047304C(void);
-void fn_804730D4(void);
+void fn_804730D4(void *p);
 void fn_804730E4(void);
 void boss_cocoon_setRushState(void);
 void fn_80473130(void);
@@ -1312,13 +1312,9 @@ lbl_fn_8047304C_0000108C:
     blr
 }
 
-asm void fn_804730D4(void)
+void fn_804730D4(void *p)
 {
-    nofralloc
-    lwz r4, 0x4c(r3)
-    addi r0, r4, 0x1
-    stw r0, 0x4c(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x4c) += 1;
 }
 
 asm void fn_804730E4(void)

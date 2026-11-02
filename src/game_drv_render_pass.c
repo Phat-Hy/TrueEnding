@@ -88,7 +88,7 @@ void fn_805CC6A0(void);
 void fn_805CC890(void);
 void fn_805CC8E0(void);
 void fn_805CC9D0(void);
-void fn_805CCBA0(void);
+u32 fn_805CCBA0(const void *p);
 void fn_805CCBB0(void);
 void fn_805CCBF0(void);
 void fn_805CCC80(void);
@@ -866,12 +866,9 @@ lbl_fn_805CC9D0_00000A14:
     blr
 }
 
-asm void fn_805CCBA0(void)
+u32 fn_805CCBA0(const void *p)
 {
-    nofralloc
-    lwz r3, 0xc(r3)
-    lhz r3, 0x8(r3)
-    blr
+    return *(const u16 *)((const u8 *)(*(const void **)((const u8 *)p + 0xc)) + 0x8);
 }
 
 asm void fn_805CCBB0(void)

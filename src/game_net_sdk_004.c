@@ -131,7 +131,7 @@ void *fn_806A1240(void *p);
 void *fn_806A1248(void *p);
 void *fn_806A1250(void *p);
 void *net_getSessionContext(void *p);
-void fn_806A1260(void);
+void fn_806A1260(void *p, u32 val);
 void fn_806A1270(void);
 void fn_806A1288(void);
 void fn_806A12E8(void);
@@ -1410,13 +1410,11 @@ void *net_getSessionContext(void *p)
     return (u8 *)p + 0x80c;
 }
 
-asm void fn_806A1260(void)
+void fn_806A1260(void *p, u32 val)
 {
-    nofralloc
-    cmpwi r3, 0x0
-    beqlr
-    stw r4, 0x2c(r3)
-    blr
+    if (p != 0) {
+        *(u32 *)((u8 *)p + 0x2c) = val;
+    }
 }
 
 asm void fn_806A1270(void)

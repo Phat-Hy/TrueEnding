@@ -42,7 +42,7 @@ extern u32 lbl_80887C78;
 /* Function declarations */
 void *node_getParentNode(void *p);
 void *fn_805381B0(void *p);
-void fn_805381BC(void);
+void *fn_805381BC(const void *p);
 void* spectate_getRootNode(void*);
 void fn_805381E0(void);
 void fn_805381F4(void);
@@ -72,13 +72,9 @@ void *fn_805381B0(void *p)
     return *(void **)((u8 *)(*(void **)((u8 *)p + 8)) + 8);
 }
 
-asm void fn_805381BC(void)
+void *fn_805381BC(const void *p)
 {
-    nofralloc
-    lwz r3, 0x8(r3)
-    lwz r3, 0x8(r3)
-    lwz r3, 0x8(r3)
-    blr
+    return *(void **)((u8 *)(*(void **)((u8 *)(*(void **)((u8 *)p + 8)) + 8)) + 8);
 }
 
 struct SpectateNode {

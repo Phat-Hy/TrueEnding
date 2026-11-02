@@ -120,7 +120,7 @@ void fn_800A9794(void);
 void fn_800A97C4(void);
 void fn_800A97FC(void);
 void *fn_800A9800(void *obj);
-void fn_800A9808(void);
+u32 fn_800A9808(const void *p);
 void fn_800A9818(void);
 
 asm void fn_800A81F8(void)
@@ -1747,13 +1747,9 @@ void *fn_800A9800(void *obj)
     return *(void **)((char *)obj + 4);
 }
 
-asm void fn_800A9808(void)
+u32 fn_800A9808(const void *p)
 {
-    nofralloc
-    lwz r4, 0x4(r3)
-    lwz r0, 0x8(r3)
-    add r3, r4, r0
-    blr
+    return *(const u32 *)((const u8 *)p + 0x4) + *(const u32 *)((const u8 *)p + 0x8);
 }
 
 void fn_800A9818(void)

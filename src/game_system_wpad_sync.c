@@ -169,7 +169,7 @@ void fn_80365424(void);
 u32 fn_8036545C(void);
 void fn_80365464(void);
 void fn_803654EC(void);
-void wpad_getActiveDevice(void);
+void *wpad_getActiveDevice(void);
 void fn_8036555C(void);
 void fn_8036562C(void);
 void fn_80365708(void);
@@ -358,13 +358,9 @@ lbl_fn_803654EC_00000210:
     blr
 }
 
-asm void wpad_getActiveDevice(void)
+void *wpad_getActiveDevice(void)
 {
-    nofralloc
-    lwz r3, lbl_8087F8A0
-    lwz r3, 0x48(r3)
-    lwz r3, 0x14ac(r3)
-    blr
+    return *(void **)((u8 *)(*(void **)((u8 *)lbl_8087F8A0 + 0x48)) + 0x14ac);
 }
 
 asm void fn_8036555C(void)

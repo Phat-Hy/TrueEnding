@@ -406,7 +406,7 @@ void fn_8068D170(void);
 void fn_8068D3A0(void);
 u32 fn_8068D40C(void);
 void fn_8068D414(void);
-void fn_8068D7AC(void);
+u32 fn_8068D7AC(void *d1, void *d2, u32 val, void *d3, void *dst);
 void fn_8068D7B8(void);
 void fn_8068D9BC(void);
 void fn_8068DA74(void);
@@ -414,7 +414,7 @@ void fn_8068DC84(void);
 u32 fn_8068DCF0(void);
 void fn_8068DCF8(void);
 void fn_8068E080(void);
-void fn_8068E090(void);
+u32 fn_8068E090(void *d1, void *d2, u32 val, void *d3, void *dst);
 void fn_8068E09C(void);
 void fn_8068E270(void);
 void fn_8068E3FC(void);
@@ -8216,12 +8216,10 @@ lbl_fn_8068D414_0000689C:
     blr
 }
 
-asm void fn_8068D7AC(void)
+u32 fn_8068D7AC(void *d1, void *d2, u32 val, void *d3, void *dst)
 {
-    nofralloc
-    stw r5, 0x0(r7)
-    li r3, 0x3
-    blr
+    *(u32 *)dst = val;
+    return 3;
 }
 
 asm void fn_8068D7B8(void)
@@ -8890,12 +8888,10 @@ asm void fn_8068E080(void)
     blr
 }
 
-asm void fn_8068E090(void)
+u32 fn_8068E090(void *d1, void *d2, u32 val, void *d3, void *dst)
 {
-    nofralloc
-    stw r5, 0x0(r7)
-    li r3, 0x3
-    blr
+    *(u32 *)dst = val;
+    return 3;
 }
 
 asm void fn_8068E09C(void)

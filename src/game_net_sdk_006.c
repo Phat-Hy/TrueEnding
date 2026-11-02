@@ -71,8 +71,8 @@ void fn_806A5C88(void);
 void fn_806A5C8C(void);
 void fn_806A5C90(void);
 void fn_806A5CA0(void);
-void fn_806A5DA0(void);
-void fn_806A5DB0(void);
+u32 fn_806A5DA0(u32 a, u32 b);
+void fn_806A5DB0(u32 val, u16 *hi, u16 *lo);
 void fn_806A5DC0(void);
 void fn_806A5EF0(void);
 void fn_806A5F00(void);
@@ -1896,21 +1896,15 @@ lbl_fn_806A5CA0_00001858:
     blr
 }
 
-asm void fn_806A5DA0(void)
+u32 fn_806A5DA0(u32 a, u32 b)
 {
-    nofralloc
-    slwi r0, r3, 16
-    add r3, r0, r4
-    blr
+    return (a << 16) + b;
 }
 
-asm void fn_806A5DB0(void)
+void fn_806A5DB0(u32 val, u16 *hi, u16 *lo)
 {
-    nofralloc
-    srwi r0, r3, 16
-    sth r0, 0x0(r4)
-    sth r3, 0x0(r5)
-    blr
+    *hi = val >> 16;
+    *lo = val;
 }
 
 asm void fn_806A5DC0(void)

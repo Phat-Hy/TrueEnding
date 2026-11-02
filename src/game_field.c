@@ -49,7 +49,7 @@ void fn_80084E78(void);
 void fn_80084EE8(void);
 void* field_getTextureSlot(void* field, u32 arg2, u32 arg3);
 void fn_80084F58(void);
-void fn_80084F6C(void);
+u32 fn_80084F6C(const void *p);
 void *fn_80084F7C(void *p);
 void fn_80084F84(void);
 void *fn_80084FA0(void *p);
@@ -1096,13 +1096,9 @@ asm void fn_80084F58(void)
     blr
 }
 
-asm void fn_80084F6C(void)
+u32 fn_80084F6C(const void *p)
 {
-    nofralloc
-    lwz r4, 0x4(r3)
-    lwz r0, 0x8(r3)
-    add r3, r4, r0
-    blr
+    return *(const u32 *)((const u8 *)p + 0x4) + *(const u32 *)((const u8 *)p + 0x8);
 }
 
 void *fn_80084F7C(void *p)

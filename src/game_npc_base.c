@@ -89,7 +89,7 @@ extern u32 lbl_808819C8;
 extern u32 lbl_808819CC;
 
 /* Function declarations */
-void npc_updateDialogueTarget(void);
+f32 npc_updateDialogueTarget(const void *p, u32 idx);
 void npc_calcTargetDistance(void);
 u32 fn_80139E90(void *p);
 BOOL fn_80139E9C(const void *p);
@@ -122,13 +122,9 @@ void fn_8013A21C(void);
 u32 fn_8013A248(void *p);
 void npc_initScriptContext(void);
 
-asm void npc_updateDialogueTarget(void)
+f32 npc_updateDialogueTarget(const void *p, u32 idx)
 {
-    nofralloc
-    mulli r0, r4, 0x30
-    add r3, r3, r0
-    lfs f1, 0x234(r3)
-    blr
+    return *(const f32 *)((const u8 *)p + idx * 0x30 + 0x234);
 }
 
 asm void npc_calcTargetDistance(void)

@@ -378,7 +378,7 @@ void net_friend_setErrorCode(void);
 u32 net_friend_getErrorCode(void);
 u32 fn_804D16D8(void);
 u32 fn_804D16E0(void);
-void fn_804D16E8(void);
+void *fn_804D16E8(void *p);
 u32 fn_804D16F4(void);
 void fn_804D16FC(void);
 void fn_804D1F70(void);
@@ -627,12 +627,9 @@ u32 fn_804D16E0(void)
     return lbl_8087F588;
 }
 
-asm void fn_804D16E8(void)
+void *fn_804D16E8(void *p)
 {
-    nofralloc
-    addis r3, r3, 0x1
-    subi r3, r3, 0x4130
-    blr
+    return (u8 *)p + 0xbee0;
 }
 
 u32 fn_804D16F4(void)

@@ -87,7 +87,7 @@ u32 fn_80224608(void *p);
 u32 fn_80224610(void *p);
 u32 fn_80224618(void *p);
 void *fn_80224620(void *p);
-void fn_80224628(void);
+f32 fn_80224628(const void *p, u32 idx);
 void fn_80224638(void);
 void fn_8022492C(void);
 u32 fn_802249E4(void *p);
@@ -1103,13 +1103,9 @@ void *fn_80224620(void *p)
     return (u8 *)p + 0x164;
 }
 
-asm void fn_80224628(void)
+f32 fn_80224628(const void *p, u32 idx)
 {
-    nofralloc
-    mulli r0, r4, 0x30
-    add r3, r3, r0
-    lfs f1, 0x238(r3)
-    blr
+    return *(const f32 *)((const u8 *)p + idx * 0x30 + 0x238);
 }
 
 asm void fn_80224638(void)

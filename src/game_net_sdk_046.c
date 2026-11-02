@@ -100,7 +100,7 @@ void fn_806FF3F0(void);
 void fn_806FF460(void);
 void fn_806FF490(void);
 void fn_806FF560(void *obj, u8 val);
-void fn_806FF570(void);
+void fn_806FF570(void *p, u32 a, u16 b);
 void fn_806FF580(void *obj, void *val);
 void fn_806FF590(void *obj, u8 val);
 u8 fn_806FF5A0(void *obj);
@@ -464,12 +464,10 @@ void fn_806FF560(void *obj, u8 val)
     *(u8 *)((char *)obj + 0x15) = val;
 }
 
-asm void fn_806FF570(void)
+void fn_806FF570(void *p, u32 a, u16 b)
 {
-    nofralloc
-    stw r4, 0x8(r3)
-    sth r5, 0xc(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x8) = a;
+    *(u16 *)((u8 *)p + 0xc) = b;
 }
 
 void fn_806FF580(void *obj, void *val)

@@ -109,7 +109,7 @@ void fn_806FEC60(void);
 void *fn_806FEC90(void *obj);
 void fn_806FECA0(void);
 u16 fn_806FECB0(void *obj);
-void fn_806FECC0(void);
+u32 fn_806FECC0(const void *p);
 void fn_806FECD0(void);
 void *fn_806FED00(void *obj);
 void fn_806FED10(void);
@@ -2250,12 +2250,9 @@ u16 fn_806FECB0(void *obj)
     return *(u16 *)((char *)obj + 4);
 }
 
-asm void fn_806FECC0(void)
+u32 fn_806FECC0(const void *p)
 {
-    nofralloc
-    lbz r0, 0x15(r3)
-    extrwi r3, r0, 1, 30
-    blr
+    return (*(const u8 *)((const u8 *)p + 0x15) >> 1) & 1;
 }
 
 asm void fn_806FECD0(void)

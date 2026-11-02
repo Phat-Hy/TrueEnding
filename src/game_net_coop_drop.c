@@ -52,9 +52,9 @@ extern u32 lbl_808872BC;
 /* Function declarations */
 u32 fn_804A9E44(void *p);
 void fn_804A9E4C(void *p, u32 val);
-void fn_804A9E54(void);
-void fn_804A9E64(void);
-void fn_804A9E74(void);
+void fn_804A9E54(void *p, f32 x, f32 y, f32 z);
+void fn_804A9E64(void *p, f32 x, f32 y, f32 z);
+void fn_804A9E74(void *p, f32 x, f32 y, f32 z);
 u32 fn_804A9E84(void *p);
 u32 fn_804A9E8C(void *p);
 void fn_804A9E94(void *p, f32 val);
@@ -80,31 +80,25 @@ void fn_804A9E4C(void *p, u32 val)
     *(u32 *)((u8 *)p + 0x4) = val;
 }
 
-asm void fn_804A9E54(void)
+void fn_804A9E54(void *p, f32 x, f32 y, f32 z)
 {
-    nofralloc
-    stfs f1, 0x8(r3)
-    stfs f2, 0xc(r3)
-    stfs f3, 0x10(r3)
-    blr
+    *(f32 *)((u8 *)p + 0x8) = x;
+    *(f32 *)((u8 *)p + 0xc) = y;
+    *(f32 *)((u8 *)p + 0x10) = z;
 }
 
-asm void fn_804A9E64(void)
+void fn_804A9E64(void *p, f32 x, f32 y, f32 z)
 {
-    nofralloc
-    stfs f1, 0x14(r3)
-    stfs f2, 0x18(r3)
-    stfs f3, 0x1c(r3)
-    blr
+    *(f32 *)((u8 *)p + 0x14) = x;
+    *(f32 *)((u8 *)p + 0x18) = y;
+    *(f32 *)((u8 *)p + 0x1c) = z;
 }
 
-asm void fn_804A9E74(void)
+void fn_804A9E74(void *p, f32 x, f32 y, f32 z)
 {
-    nofralloc
-    stfs f1, 0x20(r3)
-    stfs f2, 0x24(r3)
-    stfs f3, 0x28(r3)
-    blr
+    *(f32 *)((u8 *)p + 0x20) = x;
+    *(f32 *)((u8 *)p + 0x24) = y;
+    *(f32 *)((u8 *)p + 0x28) = z;
 }
 
 u32 fn_804A9E84(void *p)

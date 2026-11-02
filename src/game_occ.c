@@ -82,7 +82,7 @@ void fn_800D814C(void);
 void fn_800D818C(void);
 void fn_800D81CC(void);
 void fn_800D82BC(void);
-void fn_800D8448(void);
+void fn_800D8448(void *p);
 void fn_800D8458(void);
 void fn_800D8568(void);
 
@@ -1613,13 +1613,9 @@ lbl_fn_800D82BC_000015F4:
     blr
 }
 
-asm void fn_800D8448(void)
+void fn_800D8448(void *p)
 {
-    nofralloc
-    lwz r4, 0x0(r3)
-    addi r0, r4, 0x1
-    stw r0, 0x0(r3)
-    blr
+    *(u32 *)p += 1;
 }
 
 asm void fn_800D8458(void)

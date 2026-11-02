@@ -78,7 +78,7 @@ void fn_803576F8(void);
 void fn_803579FC(void);
 void fn_80357ED8(void);
 void fn_80357F04(void);
-void fn_80357F38(void);
+void fn_80357F38(void *p, u32 idx, f32 val);
 void fn_80357F48(void);
 
 asm void fn_80357330(void)
@@ -916,13 +916,9 @@ asm void fn_80357F04(void)
     blr
 }
 
-asm void fn_80357F38(void)
+void fn_80357F38(void *p, u32 idx, f32 val)
 {
-    nofralloc
-    mulli r0, r4, 0x30
-    add r3, r3, r0
-    stfs f1, 0x234(r3)
-    blr
+    *(f32 *)((u8 *)p + idx * 0x30 + 0x234) = val;
 }
 
 asm void fn_80357F48(void)

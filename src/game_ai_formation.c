@@ -132,8 +132,8 @@ void fn_80265804(void *p, f32 val);
 void fn_8026580C(void);
 void fn_80265B00(void);
 void fn_8026607C(void);
-void fn_802660EC(void);
-void fn_802660FC(void);
+void fn_802660EC(void *p, u32 mask);
+void fn_802660FC(void *p, u32 mask);
 void fn_8026610C(void);
 void *fn_80266154(void *p);
 void *fn_8026615C(void *p);
@@ -779,22 +779,14 @@ asm void fn_8026607C(void)
     blr
 }
 
-asm void fn_802660EC(void)
+void fn_802660EC(void *p, u32 mask)
 {
-    nofralloc
-    lwz r0, 0x9c(r3)
-    andc r0, r0, r4
-    stw r0, 0x9c(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x9c) &= ~mask;
 }
 
-asm void fn_802660FC(void)
+void fn_802660FC(void *p, u32 mask)
 {
-    nofralloc
-    lwz r0, 0x9c(r3)
-    or r0, r0, r4
-    stw r0, 0x9c(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x9c) |= mask;
 }
 
 asm void fn_8026610C(void)

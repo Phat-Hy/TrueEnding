@@ -73,7 +73,7 @@ void fn_800A0548(void);
 void fn_800A05AC(void);
 void atn_Anim_evalNode(void);
 void atn_Anim_evalNodeTransform(void);
-void atn_Anim_getDuration(void);
+f32 atn_Anim_getDuration(const void *p);
 void fn_800A08E0(void);
 void fn_800A091C(void);
 void fn_800A09D0(void);
@@ -703,12 +703,9 @@ lbl_atn_Anim_evalNodeTransform_00000838:
     blr
 }
 
-asm void atn_Anim_getDuration(void)
+f32 atn_Anim_getDuration(const void *p)
 {
-    nofralloc
-    lwz r3, 0x8(r3)
-    lfs f1, 0x10(r3)
-    blr
+    return *(const f32 *)((const u8 *)(*(const void **)((const u8 *)p + 0x8)) + 0x10);
 }
 
 asm void fn_800A08E0(void)

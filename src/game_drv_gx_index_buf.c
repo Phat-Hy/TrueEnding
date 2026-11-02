@@ -53,7 +53,7 @@ void fn_805E21E0(void);
 void fn_805E2250(void);
 void fn_805E23E0(void);
 void fn_805E2490(void);
-void fn_805E24E0(void);
+void fn_805E24E0(void *p, u32 val);
 void fn_805E24F0(void);
 void fn_805E25D0(void);
 void fn_805E2800(void);
@@ -1296,12 +1296,9 @@ asm void fn_805E2490(void)
     blr
 }
 
-asm void fn_805E24E0(void)
+void fn_805E24E0(void *p, u32 val)
 {
-    nofralloc
-    slwi r0, r4, 16
-    stw r0, 0x68(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x68) = val << 16;
 }
 
 asm void fn_805E24F0(void)

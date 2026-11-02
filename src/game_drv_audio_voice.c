@@ -93,7 +93,7 @@ void fn_805B9F54(void);
 void fn_805B9FC8(void);
 void fn_805BA11C(void);
 void fn_805BA16C(void);
-void fn_805BA34C(void);
+void *fn_805BA34C(void *p, u32 index);
 void fn_805BA358(void);
 
 asm void fn_805B8DB8(void)
@@ -1680,12 +1680,9 @@ lbl_fn_805BA16C_00001574:
     blr
 }
 
-asm void fn_805BA34C(void)
+void *fn_805BA34C(void *p, u32 index)
 {
-    nofralloc
-    mulli r0, r4, 0x4c
-    add r3, r3, r0
-    blr
+    return (u8 *)p + index * 0x4c;
 }
 
 asm void fn_805BA358(void)

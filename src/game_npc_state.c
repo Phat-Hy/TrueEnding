@@ -44,7 +44,7 @@ void fn_8013C394(void);
 u32 fn_8013C3A8(void *p);
 void fn_8013C3B4(void);
 u32 fn_8013C3DC(void *p);
-void fn_8013C3E4(void);
+f32 fn_8013C3E4(const void *p, u32 idx);
 u32 fn_8013C3F4(void *p);
 void *fn_8013C3FC(void *p);
 u32 fn_8013C404(void *p, u32 mask);
@@ -63,8 +63,8 @@ void *npc_getDialogController(const void *p);
 f32 fn_8013C50C(const void *p);
 void fn_8013C514(void);
 void *fn_8013C53C(void *p);
-void fn_8013C544(void);
-void fn_8013C554(void);
+f32 fn_8013C544(const void *p);
+void fn_8013C554(void *p, u32 idx, f32 val);
 void fn_8013C564(void);
 
 void *npc_getPosition(void *npc)
@@ -107,13 +107,9 @@ u32 fn_8013C3DC(void *p)
     return *(u32 *)((u8 *)p + 0x34c);
 }
 
-asm void fn_8013C3E4(void)
+f32 fn_8013C3E4(const void *p, u32 idx)
 {
-    nofralloc
-    mulli r0, r4, 0x30
-    add r3, r3, r0
-    lfs f1, 0x24c(r3)
-    blr
+    return *(const f32 *)((const u8 *)p + idx * 0x30 + 0x24c);
 }
 
 u32 fn_8013C3F4(void *p)
@@ -263,22 +259,14 @@ void *fn_8013C53C(void *p)
     return (u8 *)p + 0x10;
 }
 
-asm void fn_8013C544(void)
+f32 fn_8013C544(const void *p)
 {
-    nofralloc
-    lfs f1, 0x5c(r3)
-    lfs f0, 0x28(r3)
-    fmuls f1, f1, f0
-    blr
+    return *(const f32 *)((const u8 *)p + 0x5c) * *(const f32 *)((const u8 *)p + 0x28);
 }
 
-asm void fn_8013C554(void)
+void fn_8013C554(void *p, u32 idx, f32 val)
 {
-    nofralloc
-    mulli r0, r4, 0x30
-    add r3, r3, r0
-    stfs f1, 0x24c(r3)
-    blr
+    *(f32 *)((u8 *)p + idx * 0x30 + 0x24c) = val;
 }
 
 asm void fn_8013C564(void)

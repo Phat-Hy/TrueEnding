@@ -109,7 +109,7 @@ void fn_807134D0(void *p, u8 val);
 void fn_807134E0(void);
 void fn_80713580(void);
 void fn_80713690(void);
-void fn_80713820(void);
+void fn_80713820(void *p, u32 base, u32 len);
 void fn_80713830(void);
 void fn_80713850(void);
 void fn_80713920(void);
@@ -2198,13 +2198,10 @@ asm void fn_80713690(void)
     blr
 }
 
-asm void fn_80713820(void)
+void fn_80713820(void *p, u32 base, u32 len)
 {
-    nofralloc
-    add r0, r4, r5
-    stw r4, 0x1c(r3)
-    stw r0, 0x20(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x1c) = base;
+    *(u32 *)((u8 *)p + 0x20) = base + len;
 }
 
 asm void fn_80713830(void)

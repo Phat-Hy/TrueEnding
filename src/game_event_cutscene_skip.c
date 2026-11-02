@@ -109,7 +109,7 @@ void fn_8047F6E4(void);
 void fn_8047F730(void);
 void fn_8047F850(void);
 void fn_8047F88C(void);
-void fn_8047F8A4(void);
+void fn_8047F8A4(void *p, f32 val);
 void fn_8047F8B0(void *p);
 void fn_8047F8C0(void);
 void fn_8047F91C(void);
@@ -286,12 +286,9 @@ asm void fn_8047F88C(void)
     blr
 }
 
-asm void fn_8047F8A4(void)
+void fn_8047F8A4(void *p, f32 val)
 {
-    nofralloc
-    lwz r3, 0x1aa8(r3)
-    stfs f1, 0x74(r3)
-    blr
+    *(f32 *)((u8 *)(*(void **)((u8 *)p + 0x1aa8)) + 0x74) = val;
 }
 
 void fn_8047F8B0(void *p)

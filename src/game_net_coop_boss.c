@@ -123,7 +123,7 @@ void fn_804A83E4(void);
 void fn_804A8504(void);
 void fn_804A8644(void);
 void fn_804A88C8(void);
-void fn_804A893C(void);
+void fn_804A893C(void *p, u32 mask);
 void fn_804A894C(void);
 
 asm void fn_804A71F0(void)
@@ -1826,13 +1826,9 @@ asm void fn_804A88C8(void)
     blr
 }
 
-asm void fn_804A893C(void)
+void fn_804A893C(void *p, u32 mask)
 {
-    nofralloc
-    lwz r0, 0x4(r3)
-    or r0, r0, r4
-    stw r0, 0x4(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x4) |= mask;
 }
 
 asm void fn_804A894C(void)

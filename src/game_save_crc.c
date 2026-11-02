@@ -55,7 +55,7 @@ void fn_801F69A8(void);
 void fn_801F6A38(void);
 void fn_801F6A98(void);
 void fn_801F6C10(void);
-void save_getElapsedPlayTime(void);
+f32 save_getElapsedPlayTime(const void *p);
 void fn_801F6C38(void);
 void save_computeCrc32(void);
 void save_verifyBlockCrc(void);
@@ -1281,12 +1281,9 @@ lbl_fn_801F6C10_0000105C:
     blr
 }
 
-asm void save_getElapsedPlayTime(void)
+f32 save_getElapsedPlayTime(const void *p)
 {
-    nofralloc
-    lwz r3, 0x48(r3)
-    lfs f1, 0xa0(r3)
-    blr
+    return *(const f32 *)((const u8 *)(*(const void **)((const u8 *)p + 0x48)) + 0xa0);
 }
 
 asm void fn_801F6C38(void)

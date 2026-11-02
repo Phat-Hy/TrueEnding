@@ -69,7 +69,7 @@ void fn_8054154C(void);
 void fn_8054158C(void);
 void fn_80541BDC(void);
 void fn_80541C98(void);
-void fn_80541CF4(void);
+f32 fn_80541CF4(const void *p, f32 val);
 void fn_80541D00(void);
 void fn_80541F1C(void);
 void fn_80542050(void);
@@ -1477,12 +1477,9 @@ asm void fn_80541C98(void)
     blr
 }
 
-asm void fn_80541CF4(void)
+f32 fn_80541CF4(const void *p, f32 val)
 {
-    nofralloc
-    lfs f0, 0xb4(r3)
-    fadds f1, f1, f0
-    blr
+    return val + *(const f32 *)((const u8 *)p + 0xb4);
 }
 
 asm void fn_80541D00(void)
