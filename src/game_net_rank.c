@@ -88,7 +88,7 @@ void fn_801F14FC(void);
 void fn_801F1658(void);
 void fn_801F1818(void);
 void fn_801F18BC(void);
-void fn_801F18F4(void);
+void fn_801F18F4(void *p);
 void fn_801F1908(void);
 void fn_801F1970(void);
 void fn_801F1990(void);
@@ -97,7 +97,7 @@ void fn_801F19D0(void);
 void fn_801F1E7C(void);
 void fn_801F1EA0(void);
 void fn_801F2398(void);
-void fn_801F25CC(void);
+void fn_801F25CC(void *p);
 void fn_801F25E0(void);
 void fn_801F26B8(void);
 
@@ -941,14 +941,11 @@ lbl_fn_801F18BC_00000B60:
     blr
 }
 
-asm void fn_801F18F4(void)
+void fn_801F18F4(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, 0x0(r3)
-    stw r0, 0x4(r3)
-    stw r0, 0x8(r3)
-    blr
+    *(u32 *)p = 0;
+    *(u32 *)((u8 *)p + 0x4) = 0;
+    *(u32 *)((u8 *)p + 0x8) = 0;
 }
 
 asm void fn_801F1908(void)
@@ -1851,14 +1848,11 @@ lbl_fn_801F2398_00001828:
     blr
 }
 
-asm void fn_801F25CC(void)
+void fn_801F25CC(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, 0x0(r3)
-    stw r0, 0x4(r3)
-    stw r0, 0x8(r3)
-    blr
+    *(u32 *)p = 0;
+    *(u32 *)((u8 *)p + 0x4) = 0;
+    *(u32 *)((u8 *)p + 0x8) = 0;
 }
 
 asm void fn_801F25E0(void)

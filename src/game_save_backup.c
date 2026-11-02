@@ -52,7 +52,7 @@ void fn_801F80A8(void);
 void save_findEntryByName(void);
 void save_formatSlotString(void);
 void fn_801F8830(void);
-void fn_801F8914(void);
+void fn_801F8914(void *p);
 void fn_801F8928(void);
 void fn_801F8994(void);
 void fn_801F8B68(void);
@@ -1462,14 +1462,11 @@ lbl_fn_801F8830_00001368:
     blr
 }
 
-asm void fn_801F8914(void)
+void fn_801F8914(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, 0x4(r3)
-    stw r0, 0x8(r3)
-    stw r0, 0xc(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x4) = 0;
+    *(u32 *)((u8 *)p + 0x8) = 0;
+    *(u32 *)((u8 *)p + 0xc) = 0;
 }
 
 asm void fn_801F8928(void)

@@ -63,7 +63,7 @@ void fn_8011B570(void);
 void fn_8011B8D4(void);
 void fn_8011BB7C(void);
 void fn_8011BB90(void);
-void fn_8011BBBC(void);
+void fn_8011BBBC(void *p);
 void fn_8011BBD0(void);
 void fn_8011BD14(void);
 void fn_8011BE54(void);
@@ -565,14 +565,11 @@ lbl_fn_8011BB90_0000063C:
     blr
 }
 
-asm void fn_8011BBBC(void)
+void fn_8011BBBC(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, 0xc(r3)
-    stw r0, 0x10(r3)
-    stw r0, 0x14(r3)
-    blr
+    *(u32 *)((u8 *)p + 0xc) = 0;
+    *(u32 *)((u8 *)p + 0x10) = 0;
+    *(u32 *)((u8 *)p + 0x14) = 0;
 }
 
 asm void fn_8011BBD0(void)

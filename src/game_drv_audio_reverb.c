@@ -152,7 +152,7 @@ extern u32 lbl_8088849C;
 extern u32 lbl_808884A0;
 
 /* Function declarations */
-void fn_805BA924(void);
+BOOL fn_805BA924(const void *p);
 void fn_805BA938(void);
 void fn_805BAC18(void);
 void fn_805BB510(void);
@@ -169,14 +169,9 @@ void fn_805BB658(void);
 void fn_805BBD80(void);
 void fn_805BC1C4(void);
 
-asm void fn_805BA924(void)
+BOOL fn_805BA924(const void *p)
 {
-    nofralloc
-    lwz r3, 0x8(r3)
-    neg r0, r3
-    or r0, r0, r3
-    srwi r3, r0, 31
-    blr
+    return *(const u32 *)((const u8 *)p + 0x8) != 0;
 }
 
 asm void fn_805BA938(void)

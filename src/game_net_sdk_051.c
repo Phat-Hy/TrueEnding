@@ -95,8 +95,8 @@ void fn_8070AE20(void);
 void fn_8070AE60(void);
 void fn_8070AF30(void);
 void fn_8070AF64(void);
-void fn_8070AF70(void);
-void fn_8070AF90(void);
+BOOL fn_8070AF70(const void *p);
+BOOL fn_8070AF90(const void *p);
 void fn_8070AFB0(void);
 void fn_8070AFC0(void);
 void fn_8070AFD0(void);
@@ -1881,24 +1881,14 @@ lbl_fn_8070AF30_00001854:
 void fn_8070AF64(void) {
 }
 
-asm void fn_8070AF70(void)
+BOOL fn_8070AF70(const void *p)
 {
-    nofralloc
-    lwz r3, 0x8(r3)
-    neg r0, r3
-    or r0, r0, r3
-    srwi r3, r0, 31
-    blr
+    return *(const u32 *)((const u8 *)p + 0x8) != 0;
 }
 
-asm void fn_8070AF90(void)
+BOOL fn_8070AF90(const void *p)
 {
-    nofralloc
-    lwz r3, 0xc(r3)
-    neg r0, r3
-    or r0, r0, r3
-    srwi r3, r0, 31
-    blr
+    return *(const u32 *)((const u8 *)p + 0xc) != 0;
 }
 
 asm void fn_8070AFB0(void)

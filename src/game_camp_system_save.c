@@ -60,15 +60,15 @@ extern u32 lbl_80885CF8;
 extern u32 lbl_80885CFC;
 
 /* Function declarations */
-void fn_803C9304(void);
+void fn_803C9304(void *p);
 void fn_803C9318(void);
 void fn_803C9378(void);
 void fn_803C93F4(void);
 void fn_803C940C(void);
 void fn_803C94BC(void);
-void fn_803C94D0(void);
+void fn_803C94D0(void *p);
 void fn_803C94E4(void);
-void fn_803C955C(void);
+void fn_803C955C(void *p);
 void fn_803C9570(void);
 void fn_803C95E8(void);
 void fn_803C95EC(void);
@@ -81,7 +81,7 @@ u32 fn_803C9DC8(const void *p);
 void fn_803C9DD0(void);
 void *fn_803C9E58(const void *p, u32 idx);
 void fn_803C9E68(void);
-void fn_803C9E84(void);
+void fn_803C9E84(void *p);
 void fn_803C9E98(void);
 void fn_803C9EF8(void);
 void fn_803C9F70(void);
@@ -93,14 +93,11 @@ void fn_803CA530(void);
 void fn_803CA604(void);
 void fn_803CAABC(void);
 
-asm void fn_803C9304(void)
+void fn_803C9304(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, 0x0(r3)
-    stw r0, 0x4(r3)
-    stw r0, 0x8(r3)
-    blr
+    *(u32 *)p = 0;
+    *(u32 *)((u8 *)p + 0x4) = 0;
+    *(u32 *)((u8 *)p + 0x8) = 0;
 }
 
 asm void fn_803C9318(void)
@@ -244,14 +241,11 @@ asm void fn_803C94BC(void)
     blr
 }
 
-asm void fn_803C94D0(void)
+void fn_803C94D0(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, 0x0(r3)
-    stw r0, 0x4(r3)
-    stw r0, 0x8(r3)
-    blr
+    *(u32 *)p = 0;
+    *(u32 *)((u8 *)p + 0x4) = 0;
+    *(u32 *)((u8 *)p + 0x8) = 0;
 }
 
 asm void fn_803C94E4(void)
@@ -291,14 +285,11 @@ lbl_fn_803C94E4_0000023C:
     blr
 }
 
-asm void fn_803C955C(void)
+void fn_803C955C(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, 0x0(r3)
-    stw r0, 0x4(r3)
-    stw r0, 0x8(r3)
-    blr
+    *(u32 *)p = 0;
+    *(u32 *)((u8 *)p + 0x4) = 0;
+    *(u32 *)((u8 *)p + 0x8) = 0;
 }
 
 asm void fn_803C9570(void)
@@ -968,14 +959,11 @@ asm void fn_803C9E68(void)
     blr
 }
 
-asm void fn_803C9E84(void)
+void fn_803C9E84(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, 0x0(r3)
-    stw r0, 0x4(r3)
-    stw r0, 0x8(r3)
-    blr
+    *(u32 *)p = 0;
+    *(u32 *)((u8 *)p + 0x4) = 0;
+    *(u32 *)((u8 *)p + 0x8) = 0;
 }
 
 asm void fn_803C9E98(void)

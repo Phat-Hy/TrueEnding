@@ -145,7 +145,7 @@ void fn_803FA3D0(void);
 void fn_803FA540(void);
 void fn_803FA59C(void);
 void fn_803FA5C8(void);
-void fn_803FADF4(void);
+BOOL fn_803FADF4(const void *p);
 void fn_803FAE08(void);
 void fn_803FAE38(void);
 void fn_803FAE84(void *obj, u8 val);
@@ -1295,14 +1295,9 @@ lbl_fn_803FA5C8_00000FB8:
     blr
 }
 
-asm void fn_803FADF4(void)
+BOOL fn_803FADF4(const void *p)
 {
-    nofralloc
-    lwz r3, 0x0(r3)
-    neg r0, r3
-    or r0, r0, r3
-    srwi r3, r0, 31
-    blr
+    return *(const u32 *)p != 0;
 }
 
 asm void fn_803FAE08(void)

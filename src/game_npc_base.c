@@ -92,9 +92,9 @@ extern u32 lbl_808819CC;
 void npc_updateDialogueTarget(void);
 void npc_calcTargetDistance(void);
 u32 fn_80139E90(void *p);
-void fn_80139E9C(void);
+BOOL fn_80139E9C(const void *p);
 u32 fn_80139EB0(void *p);
-void fn_80139EBC(void);
+BOOL fn_80139EBC(const void *p);
 u32 fn_80139ED0(void *p);
 u32 fn_80139EDC(void *p);
 u32 fn_80139EE8(void *p);
@@ -778,14 +778,9 @@ u32 fn_80139E90(void *p)
     return (*(u32 *)((u8 *)p + 0x12a4) >> 27) & 1;
 }
 
-asm void fn_80139E9C(void)
+BOOL fn_80139E9C(const void *p)
 {
-    nofralloc
-    lwz r3, 0x1208(r3)
-    neg r0, r3
-    or r0, r0, r3
-    srwi r3, r0, 31
-    blr
+    return *(const u32 *)((const u8 *)p + 0x1208) != 0;
 }
 
 u32 fn_80139EB0(void *p)
@@ -793,14 +788,9 @@ u32 fn_80139EB0(void *p)
     return (*(u32 *)((u8 *)p + 0x12a4) >> 3) & 1;
 }
 
-asm void fn_80139EBC(void)
+BOOL fn_80139EBC(const void *p)
 {
-    nofralloc
-    lwz r3, 0xf54(r3)
-    neg r0, r3
-    or r0, r0, r3
-    srwi r3, r0, 31
-    blr
+    return *(const u32 *)((const u8 *)p + 0xf54) != 0;
 }
 
 u32 fn_80139ED0(void *p)

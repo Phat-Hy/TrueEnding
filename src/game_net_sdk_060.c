@@ -110,7 +110,7 @@ void fn_8071CD20(void);
 void fn_8071CE70(void);
 void fn_8071CF10(void);
 void fn_8071CF70(void);
-void fn_8071D060(void);
+BOOL fn_8071D060(const void *p);
 void fn_8071D080(void);
 void *fn_8071D090(void *p);
 void *fn_8071D0A0(void *p);
@@ -1396,14 +1396,9 @@ lbl_fn_8071CF70_00001098:
     blr
 }
 
-asm void fn_8071D060(void)
+BOOL fn_8071D060(const void *p)
 {
-    nofralloc
-    lwz r3, 0xe28(r3)
-    neg r0, r3
-    or r0, r0, r3
-    srwi r3, r0, 31
-    blr
+    return *(const u32 *)((const u8 *)p + 0xe28) != 0;
 }
 
 asm void fn_8071D080(void)

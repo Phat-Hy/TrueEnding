@@ -118,7 +118,7 @@ void fn_805AB1DC(void);
 void fn_805AB50C(void);
 void fn_805AB82C(void);
 u32 fn_805ABD70(const void *p);
-void fn_805ABD78(void);
+void fn_805ABD78(void *p);
 void fn_805ABD8C(void);
 void *fn_805ABDEC(const void *p, u32 idx);
 void fn_805ABDFC(void);
@@ -966,14 +966,11 @@ u32 fn_805ABD70(const void *p)
     return *(const u32 *)((const char *)p + 0xf94);
 }
 
-asm void fn_805ABD78(void)
+void fn_805ABD78(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, 0x0(r3)
-    stw r0, 0x4(r3)
-    stw r0, 0x8(r3)
-    blr
+    *(u32 *)p = 0;
+    *(u32 *)((u8 *)p + 0x4) = 0;
+    *(u32 *)((u8 *)p + 0x8) = 0;
 }
 
 asm void fn_805ABD8C(void)

@@ -73,7 +73,7 @@ void fn_802AC8E8(void);
 void fn_802ACC94(void);
 void fn_802ACCB4(void);
 void fn_802ACD3C(void);
-void fn_802AD358(void);
+void fn_802AD358(void *p);
 void fn_802AD36C(void);
 void fn_802AD3D4(void);
 void fn_802AD930(void);
@@ -1086,14 +1086,11 @@ lbl_fn_802ACD3C_00000DF0:
     blr
 }
 
-asm void fn_802AD358(void)
+void fn_802AD358(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, 0x0(r3)
-    stw r0, 0x4(r3)
-    stw r0, 0x8(r3)
-    blr
+    *(u32 *)p = 0;
+    *(u32 *)((u8 *)p + 0x4) = 0;
+    *(u32 *)((u8 *)p + 0x8) = 0;
 }
 
 asm void fn_802AD36C(void)

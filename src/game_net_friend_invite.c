@@ -369,7 +369,7 @@ extern u32 lbl_808875D4;
 extern u32 lbl_808875D8;
 
 /* Function declarations */
-void fn_804D1400(void);
+void fn_804D1400(void *p);
 void fn_804D1414(void);
 void fn_804D147C(void);
 void fn_804D14BC(void);
@@ -389,14 +389,11 @@ void fn_804D24B4(void);
 void fn_804D250C(void);
 void fn_804D25D4(void);
 
-asm void fn_804D1400(void)
+void fn_804D1400(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, 0x0(r3)
-    stw r0, 0x4(r3)
-    stw r0, 0x8(r3)
-    blr
+    *(u32 *)p = 0;
+    *(u32 *)((u8 *)p + 0x4) = 0;
+    *(u32 *)((u8 *)p + 0x8) = 0;
 }
 
 asm void fn_804D1414(void)

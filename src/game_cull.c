@@ -112,7 +112,7 @@ void fn_800D9378(void);
 void fn_800D93D4(void);
 void fn_800D9400(void);
 void fn_800D9410(void);
-void fn_800D94E4(void);
+void fn_800D94E4(void *p);
 void fn_800D94F8(void);
 void fn_800D9560(void);
 void *fn_800D9880(const void *p, u32 idx);
@@ -1229,14 +1229,11 @@ asm void fn_800D9410(void)
     blr
 }
 
-asm void fn_800D94E4(void)
+void fn_800D94E4(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, 0x0(r3)
-    stw r0, 0x4(r3)
-    stw r0, 0x8(r3)
-    blr
+    *(u32 *)p = 0;
+    *(u32 *)((u8 *)p + 0x4) = 0;
+    *(u32 *)((u8 *)p + 0x8) = 0;
 }
 
 asm void fn_800D94F8(void)

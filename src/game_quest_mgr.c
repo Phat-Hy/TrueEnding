@@ -86,7 +86,7 @@ extern u32 lbl_80881A60;
 /* Function declarations */
 void fn_801404E0(void);
 void quest_getGlobalManager(void);
-void quest_resetActiveObjectiveSlots(void);
+void quest_resetActiveObjectiveSlots(void *p);
 void fn_80140518(void);
 void quest_initMarkerCoords(void);
 void fn_80140588(void);
@@ -110,15 +110,12 @@ asm void quest_getGlobalManager(void)
     blr
 }
 
-asm void quest_resetActiveObjectiveSlots(void)
+void quest_resetActiveObjectiveSlots(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, 0x34(r3)
-    stw r0, 0x38(r3)
-    stw r0, 0x3c(r3)
-    stw r0, 0x40(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x34) = 0;
+    *(u32 *)((u8 *)p + 0x38) = 0;
+    *(u32 *)((u8 *)p + 0x3c) = 0;
+    *(u32 *)((u8 *)p + 0x40) = 0;
 }
 
 asm void fn_80140518(void)

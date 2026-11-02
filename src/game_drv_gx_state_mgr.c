@@ -76,7 +76,7 @@ void fn_805C1EF0(void);
 void fn_805C1F90(void);
 void fn_805C2040(void);
 void fn_805C20A0(void);
-void fn_805C2250(void);
+void fn_805C2250(void *p);
 void fn_805C2270(void);
 void fn_805C2290(void);
 void fn_805C22A0(void);
@@ -810,14 +810,11 @@ lbl_fn_805C20A0_00000938:
     blr
 }
 
-asm void fn_805C2250(void)
+void fn_805C2250(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, 0x10(r3)
-    stw r0, 0x14(r3)
-    stw r0, 0x18(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x10) = 0;
+    *(u32 *)((u8 *)p + 0x14) = 0;
+    *(u32 *)((u8 *)p + 0x18) = 0;
 }
 
 asm void fn_805C2270(void)

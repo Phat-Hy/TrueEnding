@@ -108,7 +108,7 @@ u32 fn_803EFD9C(const void *p);
 u32 fn_803EFDA4(const void *p);
 u32 fn_803EFDAC(const void *p);
 void fn_803EFDB4(void);
-void fn_803EFDD0(void);
+void fn_803EFDD0(void *p);
 void fn_803EFDE4(void);
 u32 fn_803EFE5C(const void *p);
 void fn_803EFE64(void);
@@ -235,14 +235,11 @@ asm void fn_803EFDB4(void)
     blr
 }
 
-asm void fn_803EFDD0(void)
+void fn_803EFDD0(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, 0x0(r3)
-    stw r0, 0x4(r3)
-    stw r0, 0x8(r3)
-    blr
+    *(u32 *)p = 0;
+    *(u32 *)((u8 *)p + 0x4) = 0;
+    *(u32 *)((u8 *)p + 0x8) = 0;
 }
 
 asm void fn_803EFDE4(void)
