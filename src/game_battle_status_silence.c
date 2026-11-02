@@ -130,7 +130,7 @@ void fn_8042CA24(void);
 void fn_8042CA54(void);
 void fn_8042CC10(void);
 void fn_8042CC40(void);
-void fn_8042CC98(void);
+u32 fn_8042CC98(void *p);
 void fn_8042CCAC(void);
 void *fn_8042CE28(void *p);
 void fn_8042CE30(void);
@@ -143,7 +143,7 @@ u32 fn_8042D138(void);
 void fn_8042D140(void);
 void fn_8042D3EC(void);
 void fn_8042D41C(void);
-void fn_8042D474(void);
+u32 fn_8042D474(void *p);
 void fn_8042D488(void);
 void fn_8042D5A0(void);
 void fn_8042D5A4(void);
@@ -849,14 +849,9 @@ asm void fn_8042CC40(void)
     blr
 }
 
-asm void fn_8042CC98(void)
+u32 fn_8042CC98(void *p)
 {
-    nofralloc
-    lwz r3, 0x54(r3)
-    subi r0, r3, 0x2
-    cntlzw r0, r0
-    srwi r3, r0, 5
-    blr
+    return *(u32 *)((u8 *)p + 0x54) == 0x2;
 }
 
 asm void fn_8042CCAC(void)
@@ -1437,14 +1432,9 @@ asm void fn_8042D41C(void)
     blr
 }
 
-asm void fn_8042D474(void)
+u32 fn_8042D474(void *p)
 {
-    nofralloc
-    lwz r3, 0x54(r3)
-    subi r0, r3, 0x1
-    cntlzw r0, r0
-    srwi r3, r0, 5
-    blr
+    return *(u32 *)((u8 *)p + 0x54) == 0x1;
 }
 
 asm void fn_8042D488(void)

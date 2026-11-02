@@ -169,7 +169,7 @@ void fn_8032E3DC(void);
 void fn_8032E938(void);
 void fn_8032EC94(void);
 void *fn_8032ECA0(void *obj);
-void fn_8032ECA8(void);
+void *fn_8032ECA8(void *p, u32 idx);
 void fn_8032ECB8(void);
 void fn_8032ECBC(void);
 void fn_8032EDC4(void);
@@ -1421,13 +1421,9 @@ void *fn_8032ECA0(void *obj)
     return (char *)obj + 0x46c;
 }
 
-asm void fn_8032ECA8(void)
+void *fn_8032ECA8(void *p, u32 idx)
 {
-    nofralloc
-    slwi r0, r4, 4
-    add r3, r3, r0
-    addi r3, r3, 0x4
-    blr
+    return (u8 *)p + 0x4 + (idx << 4);
 }
 
 void fn_8032ECB8(void)

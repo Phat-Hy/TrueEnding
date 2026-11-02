@@ -145,7 +145,7 @@ void fn_80266254(void);
 void fn_80266A24(void);
 void *fn_80266FA4(void *p);
 u32 fn_80266FAC(const void *p);
-void fn_80266FB4(void);
+void *fn_80266FB4(void *p, u32 idx);
 void fn_80266FC4(void);
 void fn_80267134(void);
 
@@ -1827,13 +1827,9 @@ u32 fn_80266FAC(const void *p)
     return *(const u32 *)((const char *)p + 0x274);
 }
 
-asm void fn_80266FB4(void)
+void *fn_80266FB4(void *p, u32 idx)
 {
-    nofralloc
-    slwi r0, r4, 2
-    add r3, r3, r0
-    addi r3, r3, 0x4
-    blr
+    return (u8 *)p + 0x4 + (idx << 2);
 }
 
 asm void fn_80266FC4(void)

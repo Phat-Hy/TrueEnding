@@ -110,7 +110,7 @@ void fn_80120700(void);
 void *fn_801207BC(const void *p, u32 idx);
 u32 fn_801207CC(void *p);
 void fn_801207D4(void);
-void fn_80120C20(void);
+u32 fn_80120C20(void *p);
 void fn_80120C30(void);
 
 asm void fn_8011F77C(void)
@@ -1749,13 +1749,9 @@ lbl_fn_801207D4_00001484:
     blr
 }
 
-asm void fn_80120C20(void)
+u32 fn_80120C20(void *p)
 {
-    nofralloc
-    lwz r0, 0x4(r3)
-    cntlzw r0, r0
-    srwi r3, r0, 5
-    blr
+    return *(u32 *)((u8 *)p + 0x4) == 0;
 }
 
 asm void fn_80120C30(void)

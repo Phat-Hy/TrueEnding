@@ -122,7 +122,7 @@ u32 fn_8059E1C0(void);
 void fn_8059E1C8(void);
 void fn_8059E220(void);
 void fn_8059E244(void);
-void fn_8059E284(void);
+u32 fn_8059E284(const void *p);
 void fn_8059E298(void);
 void fn_8059E2F0(void);
 void fn_8059E308(void);
@@ -824,14 +824,9 @@ lbl_fn_8059E244_000007DC:
     blr
 }
 
-asm void fn_8059E284(void)
+u32 fn_8059E284(const void *p)
 {
-    nofralloc
-    lwz r3, 0x4(r3)
-    neg r0, r3
-    or r0, r0, r3
-    srwi r3, r0, 31
-    blr
+    return *(const u32 *)((const u8 *)p + 0x4) != 0;
 }
 
 asm void fn_8059E298(void)

@@ -96,7 +96,7 @@ void fn_800F7260(void);
 void vec3_scale(f32 *dest, const f32 *src, f32 scale);
 void fn_800F72F4(void);
 void fn_800F7F60(void);
-void fn_800F7F80(void);
+u32 fn_800F7F80(void *p);
 u32 viewport_getFlag(void);
 void fn_800F7F98(void *p, u32 val);
 u32 viewport_getGlobalContext(void);
@@ -1034,13 +1034,9 @@ asm void fn_800F7F60(void)
     blr
 }
 
-asm void fn_800F7F80(void)
+u32 fn_800F7F80(void *p)
 {
-    nofralloc
-    lwz r0, 0x48(r3)
-    cntlzw r0, r0
-    srwi r3, r0, 5
-    blr
+    return *(u32 *)((u8 *)p + 0x48) == 0;
 }
 
 u32 viewport_getFlag(void)

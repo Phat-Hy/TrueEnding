@@ -63,7 +63,7 @@ extern u32 lbl_808877D0;
 /* Function declarations */
 void fn_8050F5AC(void);
 void fn_8050F668(void);
-void fn_8050F728(void);
+void *fn_8050F728(void *p, u32 idx);
 void fn_8050F738(void);
 void fn_8050F758(void);
 void fn_8050F768(void);
@@ -210,13 +210,9 @@ lbl_fn_8050F668_00000160:
     blr
 }
 
-asm void fn_8050F728(void)
+void *fn_8050F728(void *p, u32 idx)
 {
-    nofralloc
-    slwi r0, r4, 5
-    add r3, r3, r0
-    addi r3, r3, 0x1f0
-    blr
+    return (u8 *)p + 0x1f0 + (idx << 5);
 }
 
 asm void fn_8050F738(void)

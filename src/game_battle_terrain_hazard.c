@@ -113,7 +113,7 @@ void fn_80417F1C(void);
 void fn_80417F40(void);
 void fn_80417FF8(void);
 void fn_804180B0(void);
-void fn_804180BC(void);
+void *fn_804180BC(void *p, u32 idx);
 void fn_804180CC(void);
 void fn_8041814C(void);
 void fn_8041816C(void);
@@ -325,13 +325,9 @@ asm void fn_804180B0(void)
     blr
 }
 
-asm void fn_804180BC(void)
+void *fn_804180BC(void *p, u32 idx)
 {
-    nofralloc
-    slwi r0, r4, 2
-    add r3, r3, r0
-    addi r3, r3, 0x4
-    blr
+    return (u8 *)p + 0x4 + (idx << 2);
 }
 
 asm void fn_804180CC(void)

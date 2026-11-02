@@ -73,7 +73,7 @@ void fn_801D924C(void);
 void fn_801D9388(void);
 void fn_801D94D0(void);
 u32 fn_801DA2F0(void *p);
-void fn_801DA2F8(void);
+void *fn_801DA2F8(void *p, u32 idx);
 void fn_801DA308(void);
 
 asm void fn_801D8CC4(void)
@@ -1651,13 +1651,9 @@ u32 fn_801DA2F0(void *p)
     return *(u32 *)((u8 *)p + 0x1224);
 }
 
-asm void fn_801DA2F8(void)
+void *fn_801DA2F8(void *p, u32 idx)
 {
-    nofralloc
-    slwi r0, r4, 3
-    add r3, r3, r0
-    addi r3, r3, 0x1228
-    blr
+    return (u8 *)p + 0x1228 + (idx << 3);
 }
 
 asm void fn_801DA308(void)

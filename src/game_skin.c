@@ -144,7 +144,7 @@ void fn_800C4444(void);
 void fn_800C4894(void);
 void fn_800C49F0(void);
 void fn_800C4A90(void);
-void fn_800C4E38(void);
+void fn_800C4E38(void *p);
 void fn_800C4E50(void);
 void fn_800C4ECC(void);
 void fn_800C4F38(void);
@@ -2338,15 +2338,12 @@ lbl_fn_800C4A90_00001C30:
     blr
 }
 
-asm void fn_800C4E38(void)
+void fn_800C4E38(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, 0x0(r3)
-    stw r0, 0x4(r3)
-    stw r0, 0x8(r3)
-    stw r0, 0xc(r3)
-    blr
+    *(u32 *)p = 0;
+    *(u32 *)((u8 *)p + 0x4) = 0;
+    *(u32 *)((u8 *)p + 0x8) = 0;
+    *(u32 *)((u8 *)p + 0xc) = 0;
 }
 
 asm void fn_800C4E50(void)

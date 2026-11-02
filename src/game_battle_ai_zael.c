@@ -122,7 +122,7 @@ void fn_80430428(void);
 void fn_804307B4(void);
 void fn_804308F8(void);
 void fn_80430B54(void);
-void fn_80430BAC(void);
+u32 fn_80430BAC(void *p);
 void fn_80430BC0(void);
 void fn_80430D7C(void);
 void fn_80430DE4(void);
@@ -1410,14 +1410,9 @@ asm void fn_80430B54(void)
     blr
 }
 
-asm void fn_80430BAC(void)
+u32 fn_80430BAC(void *p)
 {
-    nofralloc
-    lwz r3, 0x54(r3)
-    subi r0, r3, 0x1
-    cntlzw r0, r0
-    srwi r3, r0, 5
-    blr
+    return *(u32 *)((u8 *)p + 0x54) == 0x1;
 }
 
 asm void fn_80430BC0(void)

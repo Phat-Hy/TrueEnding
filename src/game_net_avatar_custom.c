@@ -119,7 +119,7 @@ u32 fn_80526C18(void);
 void fn_80526C20(void);
 void fn_80526CC0(void);
 void fn_80526D98(void);
-void fn_80527404(void);
+void *fn_80527404(void *p, u32 idx);
 void fn_80527414(void);
 void fn_805275EC(void);
 void fn_8052770C(void);
@@ -1388,13 +1388,9 @@ lbl_fn_80526D98_00001170:
     blr
 }
 
-asm void fn_80527404(void)
+void *fn_80527404(void *p, u32 idx)
 {
-    nofralloc
-    mulli r0, r4, 0xac
-    add r3, r3, r0
-    addi r3, r3, 0x4
-    blr
+    return (u8 *)p + 0x4 + idx * 0xac;
 }
 
 asm void fn_80527414(void)

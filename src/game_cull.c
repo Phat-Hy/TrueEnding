@@ -110,7 +110,7 @@ void fn_800D8F5C(void);
 void fn_800D8FEC(void);
 void fn_800D9378(void);
 void fn_800D93D4(void);
-void fn_800D9400(void);
+void *fn_800D9400(void *p, u32 idx);
 void fn_800D9410(void);
 void fn_800D94E4(void *p);
 void fn_800D94F8(void);
@@ -1162,13 +1162,9 @@ lbl_fn_800D93D4_00000DD0:
     blr
 }
 
-asm void fn_800D9400(void)
+void *fn_800D9400(void *p, u32 idx)
 {
-    nofralloc
-    slwi r0, r4, 4
-    add r3, r3, r0
-    addi r3, r3, 0x30
-    blr
+    return (u8 *)p + 0x30 + (idx << 4);
 }
 
 asm void fn_800D9410(void)

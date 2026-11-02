@@ -137,7 +137,7 @@ void fn_80207250(void);
 void fn_8020726C(void);
 void fn_802072AC(void);
 void fn_80207310(void);
-void fn_802077F8(void);
+void fn_802077F8(void *p);
 void fn_80207808(void);
 void fn_8020787C(void);
 void fn_802078C4(void);
@@ -1291,13 +1291,10 @@ lbl_fn_80207310_00000F88:
     blr
 }
 
-asm void fn_802077F8(void)
+void fn_802077F8(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, 0x4(r3)
-    stw r0, 0x8(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x4) = 0;
+    *(u32 *)((u8 *)p + 0x8) = 0;
 }
 
 asm void fn_80207808(void)

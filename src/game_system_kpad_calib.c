@@ -141,7 +141,7 @@ void fn_80371320(void);
 void fn_80371334(void);
 void fn_80371664(void);
 void fn_80371674(void);
-void fn_8037177C(void);
+void fn_8037177C(void *p);
 void fn_80371790(void);
 
 asm void world_setGlobalFlag(void)
@@ -1579,14 +1579,11 @@ lbl_fn_80371674_00001424:
     blr
 }
 
-asm void fn_8037177C(void)
+void fn_8037177C(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, 0x5768(r3)
-    stw r0, 0x5774(r3)
-    stw r0, 0x5770(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x5768) = 0;
+    *(u32 *)((u8 *)p + 0x5774) = 0;
+    *(u32 *)((u8 *)p + 0x5770) = 0;
 }
 
 asm void fn_80371790(void)

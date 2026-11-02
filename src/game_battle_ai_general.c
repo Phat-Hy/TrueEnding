@@ -193,7 +193,7 @@ void fn_8043E134(void);
 void fn_8043E1F0(void);
 void fn_8043E4E4(void);
 void fn_8043E514(void);
-void fn_8043E56C(void);
+u32 fn_8043E56C(void *p);
 void fn_8043E580(void);
 void fn_8043E6B0(void);
 void fn_8043E770(void);
@@ -2645,14 +2645,9 @@ asm void fn_8043E514(void)
     blr
 }
 
-asm void fn_8043E56C(void)
+u32 fn_8043E56C(void *p)
 {
-    nofralloc
-    lwz r3, 0x54(r3)
-    subi r0, r3, 0x1
-    cntlzw r0, r0
-    srwi r3, r0, 5
-    blr
+    return *(u32 *)((u8 *)p + 0x54) == 0x1;
 }
 
 asm void fn_8043E580(void)

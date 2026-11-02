@@ -94,7 +94,7 @@ void *fn_80551D24(void *p);
 u32 fn_80551D2C(void *p);
 void fn_80551D34(void);
 u32 fn_80551D70(void *p);
-void fn_80551D78(void);
+u32 fn_80551D78(void *p);
 u32 fn_80551D8C(void *p);
 void fn_80551D94(void);
 void fn_80551DE0(void);
@@ -983,14 +983,9 @@ u32 fn_80551D70(void *p)
     return *(u32 *)((u8 *)p + 0x4);
 }
 
-asm void fn_80551D78(void)
+u32 fn_80551D78(void *p)
 {
-    nofralloc
-    lwz r3, 0x20(r3)
-    subi r0, r3, 0x6
-    cntlzw r0, r0
-    srwi r3, r0, 5
-    blr
+    return *(u32 *)((u8 *)p + 0x20) == 0x6;
 }
 
 u32 fn_80551D8C(void *p)

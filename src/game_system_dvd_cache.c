@@ -108,17 +108,17 @@ void fn_80375D0C(void);
 void fn_80376150(void);
 void fn_80376194(void);
 u32 fn_803761A4(void);
-void fn_803761AC(void);
-void fn_803761BC(void);
-void fn_803761CC(void);
+u32 fn_803761AC(void *p);
+u32 fn_803761BC(void *p);
+u32 fn_803761CC(void *p);
 u32 fn_803761DC(void *p);
 void fn_803761E4(void *p, u32 val);
 u32 fn_803761EC(void *p);
 void fn_803761F4(void *p, u32 val);
-void fn_803761FC(void);
-void fn_80376210(void);
-void fn_80376224(void);
-void fn_80376238(void);
+u32 fn_803761FC(const void *p);
+u32 fn_80376210(const void *p);
+u32 fn_80376224(const void *p);
+u32 fn_80376238(const void *p);
 void fn_8037624C(void *p, u32 val);
 void fn_80376254(void);
 void fn_80376324(void);
@@ -603,31 +603,19 @@ u32 fn_803761A4(void)
     return 1;
 }
 
-asm void fn_803761AC(void)
+u32 fn_803761AC(void *p)
 {
-    nofralloc
-    lwz r0, 0x10fc(r3)
-    cntlzw r0, r0
-    srwi r3, r0, 5
-    blr
+    return *(u32 *)((u8 *)p + 0x10fc) == 0;
 }
 
-asm void fn_803761BC(void)
+u32 fn_803761BC(void *p)
 {
-    nofralloc
-    lwz r0, 0x10f8(r3)
-    cntlzw r0, r0
-    srwi r3, r0, 5
-    blr
+    return *(u32 *)((u8 *)p + 0x10f8) == 0;
 }
 
-asm void fn_803761CC(void)
+u32 fn_803761CC(void *p)
 {
-    nofralloc
-    lwz r0, 0x1110(r3)
-    cntlzw r0, r0
-    srwi r3, r0, 5
-    blr
+    return *(u32 *)((u8 *)p + 0x1110) == 0;
 }
 
 u32 fn_803761DC(void *p)
@@ -650,44 +638,24 @@ void fn_803761F4(void *p, u32 val)
     *(u32 *)((u8 *)p + 0x111c) = val;
 }
 
-asm void fn_803761FC(void)
+u32 fn_803761FC(const void *p)
 {
-    nofralloc
-    lwz r3, 0x1164(r3)
-    neg r0, r3
-    or r0, r0, r3
-    srwi r3, r0, 31
-    blr
+    return *(const u32 *)((const u8 *)p + 0x1164) != 0;
 }
 
-asm void fn_80376210(void)
+u32 fn_80376210(const void *p)
 {
-    nofralloc
-    lwz r3, 0x117c(r3)
-    neg r0, r3
-    or r0, r0, r3
-    srwi r3, r0, 31
-    blr
+    return *(const u32 *)((const u8 *)p + 0x117c) != 0;
 }
 
-asm void fn_80376224(void)
+u32 fn_80376224(const void *p)
 {
-    nofralloc
-    lwz r3, 0x1180(r3)
-    neg r0, r3
-    or r0, r0, r3
-    srwi r3, r0, 31
-    blr
+    return *(const u32 *)((const u8 *)p + 0x1180) != 0;
 }
 
-asm void fn_80376238(void)
+u32 fn_80376238(const void *p)
 {
-    nofralloc
-    lwz r3, 0x1194(r3)
-    neg r0, r3
-    or r0, r0, r3
-    srwi r3, r0, 31
-    blr
+    return *(const u32 *)((const u8 *)p + 0x1194) != 0;
 }
 
 void fn_8037624C(void *p, u32 val)

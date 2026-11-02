@@ -44,7 +44,7 @@ void fn_801F5BC8(void);
 void fn_801F5E9C(void);
 void fn_801F60B8(void);
 void fn_801F6350(void);
-void fn_801F6450(void);
+void fn_801F6450(void *p);
 void fn_801F6464(void);
 void save_createWorkerTask(void);
 void fn_801F66A4(void);
@@ -679,14 +679,11 @@ lbl_fn_801F6350_00000870:
     blr
 }
 
-asm void fn_801F6450(void)
+void fn_801F6450(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, 0x4(r3)
-    stw r0, 0x8(r3)
-    stw r0, 0xc(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x4) = 0;
+    *(u32 *)((u8 *)p + 0x8) = 0;
+    *(u32 *)((u8 *)p + 0xc) = 0;
 }
 
 asm void fn_801F6464(void)

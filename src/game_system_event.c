@@ -77,7 +77,7 @@ void fn_8021150C(void);
 void fn_8021154C(void);
 void fn_80211648(void);
 void fn_80211734(void);
-void fn_8021175C(void);
+u32 fn_8021175C(void *p);
 void fn_80211770(void);
 void fn_80211940(void);
 
@@ -1007,14 +1007,9 @@ lbl_fn_80211734_00000C84:
     blr
 }
 
-asm void fn_8021175C(void)
+u32 fn_8021175C(void *p)
 {
-    nofralloc
-    lwz r3, 0x4(r3)
-    subi r0, r3, 0x65
-    cntlzw r0, r0
-    srwi r3, r0, 5
-    blr
+    return *(u32 *)((u8 *)p + 0x4) == 0x65;
 }
 
 asm void fn_80211770(void)

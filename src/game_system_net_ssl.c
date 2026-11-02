@@ -70,7 +70,7 @@ extern u32 lbl_80885AC8;
 /* Function declarations */
 void fn_80390374(void);
 void fn_803903C4(void);
-void fn_803903CC(void);
+u32 fn_803903CC(const void *p);
 void fn_803903E0(void);
 void fn_80390A88(void);
 void cam_updateLookAtVector(void);
@@ -107,14 +107,9 @@ asm void fn_803903C4(void)
     blr
 }
 
-asm void fn_803903CC(void)
+u32 fn_803903CC(const void *p)
 {
-    nofralloc
-    lwz r3, 0x48(r3)
-    neg r0, r3
-    or r0, r0, r3
-    srwi r3, r0, 31
-    blr
+    return *(const u32 *)((const u8 *)p + 0x48) != 0;
 }
 
 asm void fn_803903E0(void)

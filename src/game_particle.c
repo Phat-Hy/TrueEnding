@@ -26,7 +26,7 @@ extern u8 lbl_80779AB8[];
 void fn_800E0908(void);
 void fn_800E0A64(void);
 void *particle_getEmitterContext(void *p);
-void fn_800E0AB0(void);
+u32 fn_800E0AB0(void *p);
 void dtor_800E0AC0(void);
 void fn_800E0B18(void);
 void fn_800E0B90(void);
@@ -179,13 +179,9 @@ void *particle_getEmitterContext(void *p)
     return *(void **)((u8 *)p + 4);
 }
 
-asm void fn_800E0AB0(void)
+u32 fn_800E0AB0(void *p)
 {
-    nofralloc
-    lwz r0, 0x4(r3)
-    cntlzw r0, r0
-    srwi r3, r0, 5
-    blr
+    return *(u32 *)((u8 *)p + 0x4) == 0;
 }
 
 asm void dtor_800E0AC0(void)

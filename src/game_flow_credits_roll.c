@@ -53,7 +53,7 @@ extern u32 lbl_80887618;
 
 /* Function declarations */
 void fn_804E9C68(void);
-void fn_804EA524(void);
+u32 fn_804EA524(void *p);
 void fn_804EA538(void);
 void fn_804EA5E0(void);
 void fn_804EA60C(void);
@@ -691,14 +691,9 @@ lbl_fn_804E9C68_0000089C:
     blr
 }
 
-asm void fn_804EA524(void)
+u32 fn_804EA524(void *p)
 {
-    nofralloc
-    lwz r3, 0x4fc(r3)
-    subi r0, r3, 0x1e
-    cntlzw r0, r0
-    srwi r3, r0, 5
-    blr
+    return *(u32 *)((u8 *)p + 0x4fc) == 0x1e;
 }
 
 asm void fn_804EA538(void)

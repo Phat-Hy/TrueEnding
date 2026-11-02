@@ -117,7 +117,7 @@ void fn_807111E0(void);
 void fn_807112D0(void);
 void fn_80711320(void);
 void fn_80711390(void);
-void fn_80711430(void);
+void *fn_80711430(void *p, u32 idx);
 void net_alarm_scheduleTimeout(void);
 void fn_807114E0(void);
 void net_resetAllSockets(void);
@@ -2000,13 +2000,9 @@ lbl_fn_80711390_00001938:
     blr
 }
 
-asm void fn_80711430(void)
+void *fn_80711430(void *p, u32 idx)
 {
-    nofralloc
-    mulli r0, r4, 0xa8
-    add r3, r3, r0
-    addi r3, r3, 0x38
-    blr
+    return (u8 *)p + 0x38 + idx * 0xa8;
 }
 
 asm void net_alarm_scheduleTimeout(void)
