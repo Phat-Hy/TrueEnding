@@ -153,7 +153,7 @@ extern u32 lbl_80887AA8;
 void *fn_805282AC(void *p, u32 idx);
 void fn_805282BC(void);
 void fn_805282D0(void);
-void fn_80528314(void);
+void net_avatar_syncAppearance(void);
 void fn_80528458(void);
 void fn_80528578(void);
 void fn_80528698(void);
@@ -215,7 +215,7 @@ lbl_fn_805282D0_00000058:
     blr
 }
 
-asm void fn_80528314(void)
+asm void net_avatar_syncAppearance(void)
 {
     nofralloc
     stwu r1, -0x50(r1)
@@ -233,7 +233,7 @@ asm void fn_80528314(void)
     li r5, 0x0
     bl boss_testAiFlag
     cmpwi r3, 0x0
-    beq lbl_fn_80528314_00000194
+    beq lbl_net_avatar_syncAppearance_00000194
     lis r30, lbl_8075CED4@ha
     lwz r5, 0x0(r31)
     addi r30, r30, lbl_8075CED4@l
@@ -257,11 +257,11 @@ asm void fn_80528314(void)
     lwz r29, 0xc(r3)
     mr r30, r3
     cmpwi r29, 0x0
-    beq lbl_fn_80528314_0000010C
-    b lbl_fn_80528314_00000110
-lbl_fn_80528314_0000010C:
+    beq lbl_net_avatar_syncAppearance_0000010C
+    b lbl_net_avatar_syncAppearance_00000110
+lbl_net_avatar_syncAppearance_0000010C:
     la r29, lbl_808813D0
-lbl_fn_80528314_00000110:
+lbl_net_avatar_syncAppearance_00000110:
     addi r3, r1, 0x18
     bl str_findChar
     mr r4, r3
@@ -272,11 +272,11 @@ lbl_fn_80528314_00000110:
     lwz r0, 0x0(r31)
     cmpwi r5, 0x0
     stw r0, 0x8(r1)
-    beq lbl_fn_80528314_00000140
-    b lbl_fn_80528314_00000144
-lbl_fn_80528314_00000140:
+    beq lbl_net_avatar_syncAppearance_00000140
+    b lbl_net_avatar_syncAppearance_00000144
+lbl_net_avatar_syncAppearance_00000140:
     la r5, lbl_808813D0
-lbl_fn_80528314_00000144:
+lbl_net_avatar_syncAppearance_00000144:
     lwz r0, 0x8(r27)
     li r3, 0x0
     stw r5, 0x14(r1)
@@ -285,20 +285,20 @@ lbl_fn_80528314_00000144:
     stw r3, 0x10(r1)
     addic. r4, r0, 0xc
     stw r28, 0xc(r1)
-    beq lbl_fn_80528314_0000017C
+    beq lbl_net_avatar_syncAppearance_0000017C
     lwz r0, 0x8(r1)
     stw r0, 0x0(r4)
     stw r28, 0x4(r4)
     stw r3, 0x8(r4)
     stw r5, 0xc(r4)
-lbl_fn_80528314_0000017C:
+lbl_net_avatar_syncAppearance_0000017C:
     lwz r3, 0x8(r27)
     addi r0, r3, 0x1
     stw r0, 0x8(r27)
     lwz r3, 0x0(r31)
     addi r0, r3, 0x1
     stw r0, 0x0(r31)
-lbl_fn_80528314_00000194:
+lbl_net_avatar_syncAppearance_00000194:
     addi r11, r1, 0x50
     bl _restgpr_26
     lwz r0, 0x54(r1)

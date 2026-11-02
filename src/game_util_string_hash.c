@@ -23,7 +23,7 @@ extern u32 lbl_80888160;
 void fn_8058ECD8(void);
 void fn_8058ECF0(void);
 void fn_8058ED10(void);
-void fn_8058ED2C(void);
+void hash_swapBuffer(void);
 void fn_8058EEF0(void);
 void fn_8058EF0C(void);
 void fn_8058FAD4(void);
@@ -75,7 +75,7 @@ asm void fn_8058ED10(void)
     blr
 }
 
-asm void fn_8058ED2C(void)
+asm void hash_swapBuffer(void)
 {
     nofralloc
     stwu r1, -0xa0(r1)
@@ -1477,7 +1477,7 @@ lbl_fn_8058FF1C_00001448:
     addi r3, r1, 0x40
     bl hash_getHashValue
     mr r4, r30
-    bl fn_8058ED2C
+    bl hash_swapBuffer
     addi r3, r1, 0x40
     bl hash_advanceIterator
     b lbl_fn_8058FF1C_0000148C
@@ -1520,7 +1520,7 @@ lbl_fn_8058FF1C_000014B8:
     addi r3, r1, 0x40
     bl hash_getHashValue
     mr r4, r30
-    bl fn_8058ED2C
+    bl hash_swapBuffer
     addi r3, r1, 0x40
     bl hash_advanceIterator
     b lbl_fn_8058FF1C_0000148C
@@ -1536,7 +1536,7 @@ lbl_fn_8058FF1C_00001524:
     addi r3, r1, 0x40
     bl hash_getHashValue
     mr r4, r30
-    bl fn_8058ED2C
+    bl hash_swapBuffer
     addi r3, r1, 0x40
     bl hash_advanceIterator
     mr r4, r28
@@ -1587,7 +1587,7 @@ lbl_fn_8058FF1C_000015E4:
     addi r3, r1, 0x40
     bl hash_getHashValue
     mr r4, r30
-    bl fn_8058ED2C
+    bl hash_swapBuffer
 lbl_fn_8058FF1C_00001614:
     addi r3, r1, 0x40
     addi r4, r1, 0x3c
@@ -1634,7 +1634,7 @@ lbl_fn_8058FF1C_00001660:
     addi r3, r1, 0x40
     bl hash_getHashValue
     mr r4, r30
-    bl fn_8058ED2C
+    bl hash_swapBuffer
     addi r3, r1, 0x40
     bl hash_advanceIterator
     b lbl_fn_8058FF1C_00001634
@@ -1925,7 +1925,7 @@ lbl_fn_8059057C_00001AA8:
     addi r3, r1, 0x40
     bl hash_getHashValue
     mr r4, r30
-    bl fn_8058ED2C
+    bl hash_swapBuffer
     addi r3, r1, 0x40
     bl hash_advanceIterator
     b lbl_fn_8059057C_00001AEC
@@ -1968,7 +1968,7 @@ lbl_fn_8059057C_00001B18:
     addi r3, r1, 0x40
     bl hash_getHashValue
     mr r4, r30
-    bl fn_8058ED2C
+    bl hash_swapBuffer
     addi r3, r1, 0x40
     bl hash_advanceIterator
     b lbl_fn_8059057C_00001AEC
@@ -1984,7 +1984,7 @@ lbl_fn_8059057C_00001B84:
     addi r3, r1, 0x40
     bl hash_getHashValue
     mr r4, r30
-    bl fn_8058ED2C
+    bl hash_swapBuffer
     addi r3, r1, 0x40
     bl hash_advanceIterator
     mr r4, r28
@@ -2035,7 +2035,7 @@ lbl_fn_8059057C_00001C44:
     addi r3, r1, 0x40
     bl hash_getHashValue
     mr r4, r30
-    bl fn_8058ED2C
+    bl hash_swapBuffer
 lbl_fn_8059057C_00001C74:
     addi r3, r1, 0x40
     addi r4, r1, 0x3c
@@ -2082,7 +2082,7 @@ lbl_fn_8059057C_00001CC0:
     addi r3, r1, 0x40
     bl hash_getHashValue
     mr r4, r30
-    bl fn_8058ED2C
+    bl hash_swapBuffer
     addi r3, r1, 0x40
     bl hash_advanceIterator
     b lbl_fn_8059057C_00001C94

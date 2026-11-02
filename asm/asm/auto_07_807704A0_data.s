@@ -10744,23 +10744,23 @@
 
 # .data:0x8638 | 0x80778AD8 | size: 0x44
 .obj jumptable_80778AD8, global
-	.4byte fn_800A6BDC+0x68
-	.4byte fn_800A6BDC+0x94
-	.4byte fn_800A6BDC+0xC8
-	.4byte fn_800A6BDC+0xF0
-	.4byte fn_800A6BDC+0x118
-	.4byte fn_800A6BDC+0x140
-	.4byte fn_800A6BDC+0x1C4
-	.4byte fn_800A6BDC+0x1F8
-	.4byte fn_800A6BDC+0x22C
-	.4byte fn_800A6BDC+0x168
-	.4byte fn_800A6BDC+0x278
-	.4byte fn_800A6BDC+0x278
-	.4byte fn_800A6BDC+0x278
-	.4byte fn_800A6BDC+0x278
-	.4byte fn_800A6BDC+0x278
-	.4byte fn_800A6BDC+0x278
-	.4byte fn_800A6BDC+0x258
+	.4byte math_evaluateSpline+0x68
+	.4byte math_evaluateSpline+0x94
+	.4byte math_evaluateSpline+0xC8
+	.4byte math_evaluateSpline+0xF0
+	.4byte math_evaluateSpline+0x118
+	.4byte math_evaluateSpline+0x140
+	.4byte math_evaluateSpline+0x1C4
+	.4byte math_evaluateSpline+0x1F8
+	.4byte math_evaluateSpline+0x22C
+	.4byte math_evaluateSpline+0x168
+	.4byte math_evaluateSpline+0x278
+	.4byte math_evaluateSpline+0x278
+	.4byte math_evaluateSpline+0x278
+	.4byte math_evaluateSpline+0x278
+	.4byte math_evaluateSpline+0x278
+	.4byte math_evaluateSpline+0x278
+	.4byte math_evaluateSpline+0x258
 .endobj jumptable_80778AD8
 
 # .data:0x867C | 0x80778B1C | size: 0x4

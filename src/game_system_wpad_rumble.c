@@ -10,7 +10,7 @@ extern void _savegpr_25(void);
 extern void boss_recordDamage(void);
 extern void fn_8006D0C8(void);
 extern void fn_8006D3F8(void);
-extern void fn_800A6BDC(void);
+extern void math_evaluateSpline(void);
 extern void atn_Task_setActive(void);
 extern void bloom_processPasses(void);
 extern void skill_findEntryById(void);
@@ -1202,7 +1202,7 @@ lbl_fn_80367A40_00000EF8:
     fsubs f0, f0, f31
     stfs f0, 0x48(r3)
     lwz r3, 0x44(r3)
-    bl fn_800A6BDC
+    bl math_evaluateSpline
     xoris r0, r29, 0x8000
     stw r0, 0xc(r1)
     fmuls f1, f1, f30
@@ -1211,7 +1211,7 @@ lbl_fn_80367A40_00000EF8:
     fsubs f0, f0, f31
     stfs f0, 0xc(r24)
     lwz r3, 0x8(r24)
-    bl fn_800A6BDC
+    bl math_evaluateSpline
     xoris r0, r29, 0x8000
     stw r0, 0x14(r1)
     fmuls f1, f1, f30
@@ -1220,7 +1220,7 @@ lbl_fn_80367A40_00000EF8:
     fsubs f0, f0, f31
     stfs f0, 0x18(r24)
     lwz r3, 0x14(r24)
-    bl fn_800A6BDC
+    bl math_evaluateSpline
     xoris r0, r29, 0x8000
     stw r0, 0xc(r1)
     fmuls f1, f1, f30
@@ -1229,7 +1229,7 @@ lbl_fn_80367A40_00000EF8:
     fsubs f0, f0, f31
     stfs f0, 0x24(r24)
     lwz r3, 0x20(r24)
-    bl fn_800A6BDC
+    bl math_evaluateSpline
     xoris r0, r29, 0x8000
     stw r0, 0x14(r1)
     fmuls f1, f1, f30
@@ -1238,7 +1238,7 @@ lbl_fn_80367A40_00000EF8:
     fsubs f0, f0, f31
     stfs f0, 0x30(r24)
     lwz r3, 0x2c(r24)
-    bl fn_800A6BDC
+    bl math_evaluateSpline
     fmuls f0, f1, f30
     stfs f0, 0x66b0(r26)
 lbl_fn_80367A40_00000FF4:

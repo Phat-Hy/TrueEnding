@@ -154,7 +154,7 @@ extern void fn_803D6F44(void);
 extern void fn_803D6F60(void);
 extern void fn_803D6F68(void);
 extern void fn_803D6F70(void);
-extern void fn_803D6F78(void);
+extern void town_triggerEventAction(void);
 extern void fn_803D6FD4(void);
 extern void fn_803D6FDC(void);
 extern void fn_803D6FE4(void);
@@ -1386,12 +1386,12 @@ lbl_fn_803D2A6C_00000FDC:
     lfs f1, 0x44c(r1)
     addi r4, r21, 0x10a2
     li r5, 0x0
-    bl fn_803D6F78
+    bl town_triggerEventAction
     lwz r3, 0x848(r24)
     addi r4, r21, 0x10a2
     lfs f1, 0x450(r1)
     li r5, 0x1
-    bl fn_803D6F78
+    bl town_triggerEventAction
 lbl_fn_803D2A6C_0000100C:
     mr r3, r31
     bl fn_8013C3A8
@@ -1614,12 +1614,12 @@ lbl_fn_803D2A6C_000012EC:
     lfs f1, 0x404(r1)
     addi r4, r21, 0x10a2
     li r5, 0x0
-    bl fn_803D6F78
+    bl town_triggerEventAction
     lwz r3, 0x874(r24)
     addi r4, r21, 0x10a2
     lfs f1, 0x408(r1)
     li r5, 0x1
-    bl fn_803D6F78
+    bl town_triggerEventAction
     mr r4, r20
     addi r3, r1, 0x608
     bl fn_803D731C
@@ -1883,12 +1883,12 @@ lbl_fn_803D2A6C_000016F4:
     lfs f1, 0x3d0(r1)
     addi r4, r21, 0x10a2
     li r5, 0x0
-    bl fn_803D6F78
+    bl town_triggerEventAction
     lwz r3, 0x5b8(r24)
     addi r4, r21, 0x10a2
     lfs f1, 0x3d4(r1)
     li r5, 0x1
-    bl fn_803D6F78
+    bl town_triggerEventAction
     mr r3, r19
     bl proj_getMatrix
     lwz r0, 0x16c(r3)
@@ -2556,26 +2556,26 @@ lbl_fn_803D2A6C_00001FF8:
     lfs f1, 0x28(r1)
     addi r4, r23, 0x10a2
     li r5, 0x0
-    bl fn_803D6F78
+    bl town_triggerEventAction
     lwz r3, 0xa88(r24)
     addi r4, r23, 0x10a2
     lfs f1, 0x2c(r1)
     li r5, 0x1
-    bl fn_803D6F78
+    bl town_triggerEventAction
     lfs f1, lbl_80885DE0
     addi r4, r23, 0x10ad
     lfs f0, 0x20(r1)
     li r5, 0x2
     lwz r3, 0xa88(r24)
     fmuls f1, f1, f0
-    bl fn_803D6F78
+    bl town_triggerEventAction
     lfs f1, lbl_80885DE0
     addi r4, r23, 0x10ad
     lfs f0, 0x24(r1)
     li r5, 0x3
     lwz r3, 0xa88(r24)
     fmuls f1, f1, f0
-    bl fn_803D6F78
+    bl town_triggerEventAction
 lbl_fn_803D2A6C_00002154:
     lwz r0, 0xd8c(r24)
     cmpwi r0, 0x0
@@ -3597,12 +3597,12 @@ lbl_fn_803D2A6C_00002FCC:
     addi r4, r23, 0x10a2
     lfs f1, 0x32c(r1)
     li r5, 0x0
-    bl fn_803D6F78
+    bl town_triggerEventAction
     lwz r3, 0x3ec(r24)
     addi r4, r23, 0x10a2
     lfs f1, 0x330(r1)
     li r5, 0x1
-    bl fn_803D6F78
+    bl town_triggerEventAction
     lwz r3, 0x3ec(r24)
     addi r4, r23, 0x1181
     lwz r5, 0x0(r25)
@@ -4671,7 +4671,7 @@ lbl_fn_803D2A6C_00003FBC:
     add r3, r24, r0
     addi r4, r31, 0x113e
     lwz r3, 0x814(r3)
-    bl fn_803D6F78
+    bl town_triggerEventAction
     lwz r0, 0x77c(r24)
     addi r4, r31, 0x113e
     lfs f0, 0xd64(r24)
@@ -4680,7 +4680,7 @@ lbl_fn_803D2A6C_00003FBC:
     add r3, r24, r0
     fadds f1, f0, f24
     lwz r3, 0x814(r3)
-    bl fn_803D6F78
+    bl town_triggerEventAction
     lwz r0, 0x77c(r24)
     addi r4, r31, 0x113e
     lfs f1, 0xd60(r24)
@@ -4688,7 +4688,7 @@ lbl_fn_803D2A6C_00003FBC:
     slwi r0, r0, 2
     add r3, r24, r0
     lwz r3, 0x81c(r3)
-    bl fn_803D6F78
+    bl town_triggerEventAction
     lwz r0, 0x77c(r24)
     addi r4, r31, 0x113e
     lfs f0, 0xd64(r24)
@@ -4697,7 +4697,7 @@ lbl_fn_803D2A6C_00003FBC:
     add r3, r24, r0
     fadds f1, f0, f24
     lwz r3, 0x81c(r3)
-    bl fn_803D6F78
+    bl town_triggerEventAction
     lwz r0, 0x77c(r24)
     addi r4, r31, 0x113e
     lfs f1, 0xd60(r24)
@@ -4705,7 +4705,7 @@ lbl_fn_803D2A6C_00003FBC:
     slwi r0, r0, 2
     add r3, r24, r0
     lwz r3, 0x824(r3)
-    bl fn_803D6F78
+    bl town_triggerEventAction
     lwz r0, 0x77c(r24)
     addi r4, r31, 0x113e
     lfs f0, 0xd64(r24)
@@ -4714,7 +4714,7 @@ lbl_fn_803D2A6C_00003FBC:
     add r3, r24, r0
     fadds f1, f0, f24
     lwz r3, 0x824(r3)
-    bl fn_803D6F78
+    bl town_triggerEventAction
     lwz r0, 0x77c(r24)
     slwi r0, r0, 2
     add r3, r24, r0
@@ -4724,7 +4724,7 @@ lbl_fn_803D2A6C_00003FBC:
     lfs f1, 0xd60(r24)
     addi r4, r31, 0x113e
     li r5, 0x0
-    bl fn_803D6F78
+    bl town_triggerEventAction
     lwz r0, 0x77c(r24)
     addi r4, r31, 0x113e
     lfs f0, 0xd64(r24)
@@ -4733,7 +4733,7 @@ lbl_fn_803D2A6C_00003FBC:
     add r3, r24, r0
     fadds f1, f0, f24
     lwz r3, 0x82c(r3)
-    bl fn_803D6F78
+    bl town_triggerEventAction
 lbl_fn_803D2A6C_000040DC:
     lwz r3, 0xdb8(r24)
     cmpwi r3, 0x0
@@ -4811,12 +4811,12 @@ lbl_fn_803D2A6C_000041B0:
     lfs f1, 0x2cc(r1)
     addi r4, r23, 0x11c7
     li r5, 0x0
-    bl fn_803D6F78
+    bl town_triggerEventAction
     lwz r3, 0xdb8(r24)
     addi r4, r23, 0x11c7
     lfs f1, 0x2d0(r1)
     li r5, 0x1
-    bl fn_803D6F78
+    bl town_triggerEventAction
 lbl_fn_803D2A6C_00004218:
     lwz r3, 0xdbc(r24)
     cmpwi r3, 0x0
@@ -4870,12 +4870,12 @@ lbl_fn_803D2A6C_00004258:
     lfs f1, 0x2c0(r1)
     addi r4, r23, 0x11c7
     li r5, 0x0
-    bl fn_803D6F78
+    bl town_triggerEventAction
     lwz r3, 0xdbc(r24)
     addi r4, r23, 0x11c7
     lfs f1, 0x2c4(r1)
     li r5, 0x1
-    bl fn_803D6F78
+    bl town_triggerEventAction
 lbl_fn_803D2A6C_000042F8:
     bl fn_80151210
     bl fn_803CF740

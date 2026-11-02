@@ -39,7 +39,7 @@ extern u32 lbl_80880CD8;
 
 /* Function declarations */
 void fn_800A6BD4(void);
-void fn_800A6BDC(void);
+void math_evaluateSpline(void);
 void fn_800A6E8C(void);
 void fn_800A6F7C(void *p);
 void fn_800A6F88(void);
@@ -63,10 +63,10 @@ asm void fn_800A6BD4(void)
 {
     nofralloc
     stfs f1, lbl_8087EF80
-    b fn_800A6BDC
+    b math_evaluateSpline
 }
 
-asm void fn_800A6BDC(void)
+asm void math_evaluateSpline(void)
 {
     nofralloc
     stwu r1, -0xe0(r1)
@@ -87,10 +87,10 @@ asm void fn_800A6BDC(void)
     li r29, 0x0
     lis r27, 0x4330
     lis r30, jumptable_80778AD8@ha
-    b lbl_fn_800A6BDC_00000280
-lbl_fn_800A6BDC_00000054:
+    b lbl_math_evaluateSpline_00000280
+lbl_math_evaluateSpline_00000054:
     cmplwi r0, 0x10
-    bgt lbl_fn_800A6BDC_00000280
+    bgt lbl_math_evaluateSpline_00000280
     addi r3, r30, jumptable_80778AD8@l
     slwi r0, r0, 2
     lwzx r3, r3, r0
@@ -106,22 +106,22 @@ lbl_fn_800A6BDC_00000054:
     stfsx f0, r31, r0
     addi r28, r28, 0x5
     addi r29, r29, 0x1
-    b lbl_fn_800A6BDC_00000280
+    b lbl_math_evaluateSpline_00000280
     lwz r3, 0x1(r28)
     cmpwi r3, 0x0
-    beq lbl_fn_800A6BDC_000000BC
+    beq lbl_math_evaluateSpline_000000BC
     slwi r0, r29, 2
     lfs f0, 0x0(r3)
     stfsx f0, r31, r0
     addi r29, r29, 0x1
-    b lbl_fn_800A6BDC_000000C8
-lbl_fn_800A6BDC_000000BC:
+    b lbl_math_evaluateSpline_000000C8
+lbl_math_evaluateSpline_000000BC:
     slwi r0, r29, 2
     addi r29, r29, 0x1
     stfsx f31, r31, r0
-lbl_fn_800A6BDC_000000C8:
+lbl_math_evaluateSpline_000000C8:
     addi r28, r28, 0x5
-    b lbl_fn_800A6BDC_00000280
+    b lbl_math_evaluateSpline_00000280
     slwi r0, r29, 2
     addi r3, r1, 0x10
     add r3, r3, r0
@@ -131,7 +131,7 @@ lbl_fn_800A6BDC_000000C8:
     lfs f0, -0x4(r3)
     fadds f0, f1, f0
     stfs f0, -0x8(r3)
-    b lbl_fn_800A6BDC_00000280
+    b lbl_math_evaluateSpline_00000280
     slwi r0, r29, 2
     addi r3, r1, 0x10
     add r3, r3, r0
@@ -141,7 +141,7 @@ lbl_fn_800A6BDC_000000C8:
     lfs f0, -0x4(r3)
     fsubs f0, f1, f0
     stfs f0, -0x8(r3)
-    b lbl_fn_800A6BDC_00000280
+    b lbl_math_evaluateSpline_00000280
     slwi r0, r29, 2
     addi r3, r1, 0x10
     add r3, r3, r0
@@ -151,7 +151,7 @@ lbl_fn_800A6BDC_000000C8:
     lfs f0, -0x4(r3)
     fmuls f0, f1, f0
     stfs f0, -0x8(r3)
-    b lbl_fn_800A6BDC_00000280
+    b lbl_math_evaluateSpline_00000280
     slwi r0, r29, 2
     addi r3, r1, 0x10
     add r3, r3, r0
@@ -161,7 +161,7 @@ lbl_fn_800A6BDC_000000C8:
     lfs f0, -0x4(r3)
     fdivs f0, f1, f0
     stfs f0, -0x8(r3)
-    b lbl_fn_800A6BDC_00000280
+    b lbl_math_evaluateSpline_00000280
     slwi r0, r29, 2
     addi r5, r1, 0x10
     add r5, r5, r0
@@ -184,7 +184,7 @@ lbl_fn_800A6BDC_000000C8:
     lfd f0, 0xa0(r1)
     fsubs f0, f0, f30
     stfs f0, -0x8(r5)
-    b lbl_fn_800A6BDC_00000280
+    b lbl_math_evaluateSpline_00000280
     slwi r0, r29, 2
     addi r3, r1, 0x10
     add r3, r3, r0
@@ -192,14 +192,14 @@ lbl_fn_800A6BDC_000000C8:
     lfs f1, -0x8(r3)
     lfs f0, -0x4(r3)
     fcmpo cr0, f1, f0
-    ble lbl_fn_800A6BDC_000001F0
-    b lbl_fn_800A6BDC_000001F4
-lbl_fn_800A6BDC_000001F0:
+    ble lbl_math_evaluateSpline_000001F0
+    b lbl_math_evaluateSpline_000001F4
+lbl_math_evaluateSpline_000001F0:
     fmr f1, f0
-lbl_fn_800A6BDC_000001F4:
+lbl_math_evaluateSpline_000001F4:
     stfs f1, -0x8(r3)
     subi r29, r29, 0x1
-    b lbl_fn_800A6BDC_00000280
+    b lbl_math_evaluateSpline_00000280
     slwi r0, r29, 2
     addi r3, r1, 0x10
     add r3, r3, r0
@@ -207,14 +207,14 @@ lbl_fn_800A6BDC_000001F4:
     lfs f1, -0x8(r3)
     lfs f0, -0x4(r3)
     fcmpo cr0, f1, f0
-    bge lbl_fn_800A6BDC_00000224
-    b lbl_fn_800A6BDC_00000228
-lbl_fn_800A6BDC_00000224:
+    bge lbl_math_evaluateSpline_00000224
+    b lbl_math_evaluateSpline_00000228
+lbl_math_evaluateSpline_00000224:
     fmr f1, f0
-lbl_fn_800A6BDC_00000228:
+lbl_math_evaluateSpline_00000228:
     stfs f1, -0x8(r3)
     subi r29, r29, 0x1
-    b lbl_fn_800A6BDC_00000280
+    b lbl_math_evaluateSpline_00000280
     slwi r0, r29, 2
     addi r26, r1, 0x10
     add r26, r26, r0
@@ -225,7 +225,7 @@ lbl_fn_800A6BDC_00000228:
     frsp f0, f1
     subi r29, r29, 0x1
     stfs f0, -0x8(r26)
-    b lbl_fn_800A6BDC_00000280
+    b lbl_math_evaluateSpline_00000280
     slwi r0, r29, 2
     addi r28, r28, 0x1
     add r26, r31, r0
@@ -234,10 +234,10 @@ lbl_fn_800A6BDC_00000228:
     frsp f0, f1
     subi r29, r29, 0x1
     stfs f0, -0x8(r26)
-lbl_fn_800A6BDC_00000280:
+lbl_math_evaluateSpline_00000280:
     lbz r0, 0x0(r28)
     cmplwi r0, 0xff
-    bne lbl_fn_800A6BDC_00000054
+    bne lbl_math_evaluateSpline_00000054
     psq_l f31, 0xd8(r1), 0, 0
     lfd f31, 0xd0(r1)
     psq_l f30, 0xc8(r1), 0, 0

@@ -65,7 +65,7 @@ extern void fn_80511DA0(void);
 extern void fn_805282AC(void);
 extern void fn_805282BC(void);
 extern void fn_805282D0(void);
-extern void fn_80528314(void);
+extern void net_avatar_syncAppearance(void);
 extern void fn_80528458(void);
 extern void fn_80528578(void);
 extern void fn_805288C0(void);
@@ -1990,7 +1990,7 @@ lbl_fn_8052793C_00001A04:
     addi r7, r1, 0x10
     li r6, 0xa
     li r9, 0x93
-    bl fn_80528314
+    bl net_avatar_syncAppearance
     mr r3, r29
     li r4, 0x3f
     li r5, 0x0
@@ -2004,7 +2004,7 @@ lbl_fn_8052793C_00001A04:
     addi r7, r1, 0x10
     li r6, 0x3f
     li r9, 0x14e
-    bl fn_80528314
+    bl net_avatar_syncAppearance
 lbl_fn_8052793C_00001A5C:
     mr r3, r31
     mr r4, r22
@@ -2013,7 +2013,7 @@ lbl_fn_8052793C_00001A5C:
     addi r7, r1, 0x10
     li r6, 0xd
     li r9, 0x93
-    bl fn_80528314
+    bl net_avatar_syncAppearance
     mr r3, r31
     mr r4, r22
     mr r5, r29
@@ -2021,7 +2021,7 @@ lbl_fn_8052793C_00001A5C:
     addi r7, r1, 0x10
     li r6, 0x9
     li r9, 0x152
-    bl fn_80528314
+    bl net_avatar_syncAppearance
     mr r3, r31
     mr r4, r22
     mr r5, r29
@@ -2029,7 +2029,7 @@ lbl_fn_8052793C_00001A5C:
     addi r7, r1, 0x10
     li r6, 0xe
     li r9, 0x9d
-    bl fn_80528314
+    bl net_avatar_syncAppearance
     mr r3, r31
     mr r4, r22
     mr r5, r29
@@ -2037,7 +2037,7 @@ lbl_fn_8052793C_00001A5C:
     addi r7, r1, 0x10
     li r6, 0xf
     li r9, 0xa4
-    bl fn_80528314
+    bl net_avatar_syncAppearance
     mr r3, r31
     mr r4, r22
     mr r5, r29
@@ -2045,7 +2045,7 @@ lbl_fn_8052793C_00001A5C:
     addi r7, r1, 0x10
     li r6, 0x10
     li r9, 0xe1
-    bl fn_80528314
+    bl net_avatar_syncAppearance
     mr r3, r31
     mr r4, r22
     mr r5, r29
@@ -2053,7 +2053,7 @@ lbl_fn_8052793C_00001A5C:
     addi r7, r1, 0x10
     li r6, 0x2
     li r9, 0xbe
-    bl fn_80528314
+    bl net_avatar_syncAppearance
     li r19, 0x1c
     li r20, 0xa7
     b lbl_fn_8052793C_00001F98
@@ -2071,7 +2071,7 @@ lbl_fn_8052793C_00001B28:
     addi r7, r1, 0x10
     li r6, 0x32
     li r9, -0x1
-    bl fn_80528314
+    bl net_avatar_syncAppearance
     b lbl_fn_8052793C_00001B9C
 lbl_fn_8052793C_00001B64:
     mr r3, r29
@@ -2087,7 +2087,7 @@ lbl_fn_8052793C_00001B64:
     addi r7, r1, 0x10
     li r6, 0x31
     li r9, -0x1
-    bl fn_80528314
+    bl net_avatar_syncAppearance
 lbl_fn_8052793C_00001B9C:
     mr r3, r29
     li r4, 0x1a
@@ -2102,7 +2102,7 @@ lbl_fn_8052793C_00001B9C:
     addi r7, r1, 0x10
     li r6, 0x1a
     li r9, -0x1
-    bl fn_80528314
+    bl net_avatar_syncAppearance
     b lbl_fn_8052793C_00001C10
 lbl_fn_8052793C_00001BD8:
     mr r3, r29
@@ -2118,7 +2118,7 @@ lbl_fn_8052793C_00001BD8:
     addi r7, r1, 0x10
     li r6, 0x19
     li r9, -0x1
-    bl fn_80528314
+    bl net_avatar_syncAppearance
 lbl_fn_8052793C_00001C10:
     li r19, 0x3c
     li r20, 0xc5
@@ -2149,7 +2149,7 @@ lbl_fn_8052793C_00001C48:
     addi r7, r1, 0x10
     li r6, 0x22
     li r9, -0x1
-    bl fn_80528314
+    bl net_avatar_syncAppearance
     b lbl_fn_8052793C_00001CA4
 lbl_fn_8052793C_00001C84:
     mr r3, r31
@@ -2159,7 +2159,7 @@ lbl_fn_8052793C_00001C84:
     addi r7, r1, 0x10
     li r6, 0x36
     li r9, -0x1
-    bl fn_80528314
+    bl net_avatar_syncAppearance
 lbl_fn_8052793C_00001CA4:
     mr r3, r31
     mr r4, r22
@@ -2168,7 +2168,7 @@ lbl_fn_8052793C_00001CA4:
     addi r7, r1, 0x10
     li r6, 0x3
     li r9, -0x1
-    bl fn_80528314
+    bl net_avatar_syncAppearance
     li r19, 0x24
     li r20, 0xc0
     b lbl_fn_8052793C_00001F98
@@ -2192,7 +2192,7 @@ lbl_fn_8052793C_00001CFC:
     addi r7, r1, 0x10
     li r6, 0x36
     li r9, -0x1
-    bl fn_80528314
+    bl net_avatar_syncAppearance
     mr r3, r31
     mr r4, r22
     mr r5, r29
@@ -2200,7 +2200,7 @@ lbl_fn_8052793C_00001CFC:
     addi r7, r1, 0x10
     li r6, 0x3
     li r9, -0x1
-    bl fn_80528314
+    bl net_avatar_syncAppearance
     li r19, 0x35
     li r20, 0xc3
     b lbl_fn_8052793C_00001F98
@@ -2218,7 +2218,7 @@ lbl_fn_8052793C_00001D48:
     addi r7, r1, 0x10
     li r6, 0x13
     li r9, -0x1
-    bl fn_80528314
+    bl net_avatar_syncAppearance
     b lbl_fn_8052793C_00001DBC
 lbl_fn_8052793C_00001D84:
     mr r3, r29
@@ -2234,7 +2234,7 @@ lbl_fn_8052793C_00001D84:
     addi r7, r1, 0x10
     li r6, 0x12
     li r9, -0x1
-    bl fn_80528314
+    bl net_avatar_syncAppearance
 lbl_fn_8052793C_00001DBC:
     mr r3, r31
     mr r4, r22
@@ -2243,7 +2243,7 @@ lbl_fn_8052793C_00001DBC:
     addi r7, r1, 0x10
     li r6, 0x3b
     li r9, -0x1
-    bl fn_80528314
+    bl net_avatar_syncAppearance
     li r19, 0x29
     li r20, 0xc1
     b lbl_fn_8052793C_00001F98
@@ -2261,7 +2261,7 @@ lbl_fn_8052793C_00001DE8:
     addi r7, r1, 0x10
     li r6, 0x1a
     li r9, -0x1
-    bl fn_80528314
+    bl net_avatar_syncAppearance
     b lbl_fn_8052793C_00001E5C
 lbl_fn_8052793C_00001E24:
     mr r3, r29
@@ -2277,7 +2277,7 @@ lbl_fn_8052793C_00001E24:
     addi r7, r1, 0x10
     li r6, 0x19
     li r9, -0x1
-    bl fn_80528314
+    bl net_avatar_syncAppearance
 lbl_fn_8052793C_00001E5C:
     mr r3, r29
     li r4, 0x39
@@ -2292,7 +2292,7 @@ lbl_fn_8052793C_00001E5C:
     addi r7, r1, 0x10
     li r6, 0x39
     li r9, -0x1
-    bl fn_80528314
+    bl net_avatar_syncAppearance
     b lbl_fn_8052793C_00001ED0
 lbl_fn_8052793C_00001E98:
     mr r3, r29
@@ -2308,7 +2308,7 @@ lbl_fn_8052793C_00001E98:
     addi r7, r1, 0x10
     li r6, 0x38
     li r9, -0x1
-    bl fn_80528314
+    bl net_avatar_syncAppearance
 lbl_fn_8052793C_00001ED0:
     li r19, 0x1
     li r20, 0xc2
@@ -2327,7 +2327,7 @@ lbl_fn_8052793C_00001EDC:
     addi r7, r1, 0x10
     li r6, 0x17
     li r9, -0x1
-    bl fn_80528314
+    bl net_avatar_syncAppearance
     b lbl_fn_8052793C_00001F50
 lbl_fn_8052793C_00001F18:
     mr r3, r29
@@ -2343,7 +2343,7 @@ lbl_fn_8052793C_00001F18:
     addi r7, r1, 0x10
     li r6, 0x16
     li r9, -0x1
-    bl fn_80528314
+    bl net_avatar_syncAppearance
 lbl_fn_8052793C_00001F50:
     mr r3, r31
     mr r4, r22
@@ -2352,7 +2352,7 @@ lbl_fn_8052793C_00001F50:
     addi r7, r1, 0x10
     li r6, 0x2c
     li r9, -0x1
-    bl fn_80528314
+    bl net_avatar_syncAppearance
     mr r3, r31
     mr r4, r22
     mr r5, r29
@@ -2360,7 +2360,7 @@ lbl_fn_8052793C_00001F50:
     addi r7, r1, 0x10
     li r6, 0x3
     li r9, -0x1
-    bl fn_80528314
+    bl net_avatar_syncAppearance
     li r19, 0x27
     li r20, 0xc4
 lbl_fn_8052793C_00001F98:

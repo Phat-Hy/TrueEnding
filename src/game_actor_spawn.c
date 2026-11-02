@@ -26,7 +26,7 @@ extern void depth_resetRenderTarget(void);
 extern void env_updateAtmosphere(void);
 extern void str_findChar(void);
 extern void wcs_vformat(void);
-extern void fn_80119030(void);
+extern void actor_changeState(void);
 extern void fn_8011B018(void);
 extern void fn_8011B8D4(void);
 extern void fn_801F3E20(void);
@@ -1986,7 +1986,7 @@ lbl_fn_80117FE4_0000183C:
     mr r3, r24
     li r4, 0x0
     li r5, 0x0
-    bl fn_80119030
+    bl actor_changeState
     lwz r4, 0x128(r24)
     li r0, 0x1
     lfs f0, lbl_80881748

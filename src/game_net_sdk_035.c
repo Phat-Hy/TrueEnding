@@ -89,7 +89,7 @@ void fn_806E9760(void);
 void fn_806E97F0(void);
 void fn_806E9860(void);
 void fn_806E9900(void);
-void fn_806E99F0(void);
+void dwc_invokeCallbackSafe(void);
 void fn_806E9AD0(void);
 void fn_806E9BB0(void);
 void fn_806E9C70(void);
@@ -1560,7 +1560,7 @@ lbl_fn_806E9900_00001388:
     blr
 }
 
-asm void fn_806E99F0(void)
+asm void dwc_invokeCallbackSafe(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1569,25 +1569,25 @@ asm void fn_806E99F0(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bne lbl_fn_806E99F0_000013CC
+    bne lbl_dwc_invokeCallbackSafe_000013CC
     li r3, 0x1
-    b lbl_fn_806E99F0_00001470
-lbl_fn_806E99F0_000013CC:
+    b lbl_dwc_invokeCallbackSafe_00001470
+lbl_dwc_invokeCallbackSafe_000013CC:
     lwz r0, 0x28(r3)
     stw r4, 0x18(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_806E99F0_000013E4
+    bne lbl_dwc_invokeCallbackSafe_000013E4
     li r3, 0x1
-    b lbl_fn_806E99F0_00001470
-lbl_fn_806E99F0_000013E4:
+    b lbl_dwc_invokeCallbackSafe_00001470
+lbl_dwc_invokeCallbackSafe_000013E4:
     cmpwi r6, 0x0
-    beq lbl_fn_806E99F0_000013F4
+    beq lbl_dwc_invokeCallbackSafe_000013F4
     cmpwi r5, 0x0
-    bne lbl_fn_806E99F0_000013FC
-lbl_fn_806E99F0_000013F4:
+    bne lbl_dwc_invokeCallbackSafe_000013FC
+lbl_dwc_invokeCallbackSafe_000013F4:
     li r5, 0x0
     li r6, 0x0
-lbl_fn_806E99F0_000013FC:
+lbl_dwc_invokeCallbackSafe_000013FC:
     lwz r7, 0x24(r3)
     lwz r8, 0x8(r3)
     addi r0, r7, 0x1
@@ -1609,16 +1609,16 @@ lbl_fn_806E99F0_000013FC:
     lwz r3, 0x8(r31)
     lwz r0, 0x14(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_806E99F0_0000146C
+    beq lbl_dwc_invokeCallbackSafe_0000146C
     lwz r0, 0x1c(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_806E99F0_0000146C
+    bne lbl_dwc_invokeCallbackSafe_0000146C
     bl fn_806EE4E0
     li r3, 0x0
-    b lbl_fn_806E99F0_00001470
-lbl_fn_806E99F0_0000146C:
+    b lbl_dwc_invokeCallbackSafe_00001470
+lbl_dwc_invokeCallbackSafe_0000146C:
     li r3, 0x1
-lbl_fn_806E99F0_00001470:
+lbl_dwc_invokeCallbackSafe_00001470:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0
@@ -2385,7 +2385,7 @@ lbl_fn_806EA440_00001EB8:
     li r4, 0x6
     li r5, 0x0
     li r6, 0x0
-    bl fn_806E99F0
+    bl dwc_invokeCallbackSafe
     cmpwi r3, 0x0
     bne lbl_fn_806EA440_00001EDC
     li r3, 0x0

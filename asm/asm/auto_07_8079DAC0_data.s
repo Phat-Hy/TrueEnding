@@ -25637,15 +25637,15 @@
 
 # .data:0x18C00 | 0x807B66C0 | size: 0x24
 .obj jumptable_807B66C0, global
-	.4byte fn_80642D40+0x24
-	.4byte fn_80642D40+0x28
-	.4byte fn_80642D40+0x2C
-	.4byte fn_80642D40+0x30
-	.4byte fn_80642D40+0x34
-	.4byte fn_80642D40+0x38
-	.4byte fn_80642D40+0x3C
-	.4byte fn_80642D40+0x40
-	.4byte fn_80642D40+0x44
+	.4byte l2c_csm_execute+0x24
+	.4byte l2c_csm_execute+0x28
+	.4byte l2c_csm_execute+0x2C
+	.4byte l2c_csm_execute+0x30
+	.4byte l2c_csm_execute+0x34
+	.4byte l2c_csm_execute+0x38
+	.4byte l2c_csm_execute+0x3C
+	.4byte l2c_csm_execute+0x40
+	.4byte l2c_csm_execute+0x44
 .endobj jumptable_807B66C0
 
 # .data:0x18C24 | 0x807B66E4 | size: 0x1B

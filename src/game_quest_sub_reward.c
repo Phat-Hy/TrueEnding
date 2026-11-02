@@ -57,7 +57,7 @@ extern void fn_803D2A54(void);
 extern void gate_clearActiveFlag(void);
 extern void fn_803D6EDC(void);
 extern void fn_803D6EF8(void);
-extern void fn_803D6F78(void);
+extern void town_triggerEventAction(void);
 extern void fn_8041D23C(void);
 extern void fn_8047B768(void);
 extern void fn_8047BBBC(void);
@@ -339,26 +339,26 @@ lbl_fn_80487490_000002AC:
     lfs f1, 0x2424(r31)
     addi r4, r30, 0x29a
     li r5, 0x0
-    bl fn_803D6F78
+    bl town_triggerEventAction
     lwz r3, 0x241c(r31)
     addi r4, r30, 0x29a
     lfs f1, 0x2428(r31)
     li r5, 0x1
-    bl fn_803D6F78
+    bl town_triggerEventAction
     lfs f1, lbl_80887008
     addi r4, r30, 0x29a
     lfs f0, 0x2424(r31)
     li r5, 0x0
     lwz r3, 0x2438(r31)
     fadds f1, f1, f0
-    bl fn_803D6F78
+    bl town_triggerEventAction
     lfs f1, lbl_80886FE8
     addi r4, r30, 0x29a
     lfs f0, 0x2428(r31)
     li r5, 0x1
     lwz r3, 0x2438(r31)
     fadds f1, f1, f0
-    bl fn_803D6F78
+    bl town_triggerEventAction
     lfs f1, lbl_80886F8C
     addi r3, r1, 0x84
     lfs f3, lbl_80886F90

@@ -4825,11 +4825,11 @@
 # .text:0x425C | 0x800A6BD4 | size: 0x8
 .fn fn_800A6BD4, global
 /* 800A6BD4 000A1234  D0 2D 98 C0 */	stfs f1, lbl_8087EF80@sda21(r0)
-/* 800A6BD8 000A1238  48 00 00 04 */	b fn_800A6BDC
+/* 800A6BD8 000A1238  48 00 00 04 */	b math_evaluateSpline
 .endfn fn_800A6BD4
 
 # .text:0x4264 | 0x800A6BDC | size: 0x2B0
-.fn fn_800A6BDC, global
+.fn math_evaluateSpline, global
 /* 800A6BDC 000A123C  94 21 FF 20 */	stwu r1, -0xe0(r1)
 /* 800A6BE0 000A1240  7C 08 02 A6 */	mflr r0
 /* 800A6BE4 000A1244  90 01 00 E4 */	stw r0, 0xe4(r1)
@@ -5010,7 +5010,7 @@
 /* 800A6E80 000A14E0  7C 08 03 A6 */	mtlr r0
 /* 800A6E84 000A14E4  38 21 00 E0 */	addi r1, r1, 0xe0
 /* 800A6E88 000A14E8  4E 80 00 20 */	blr
-.endfn fn_800A6BDC
+.endfn math_evaluateSpline
 
 # .text:0x4514 | 0x800A6E8C | size: 0xF0
 .fn fn_800A6E8C, global

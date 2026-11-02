@@ -127,7 +127,7 @@ void fn_80642B58(void);
 void fn_80642C20(void);
 void fn_80642D20(void);
 void fn_80642D3C(void);
-void fn_80642D40(void);
+void l2c_csm_execute(void);
 void fn_80642D8C(void);
 void fn_80643020(void);
 void fn_80643190(void);
@@ -179,7 +179,7 @@ void fn_80647428(void);
 void fn_80647598(void);
 void fn_80647734(void);
 void fn_806477D8(void);
-void fn_806478E4(void);
+void l2cu_release_ccb(void);
 void fn_80647A88(void);
 void fn_80647AE4(void);
 void fn_80647B30(void);
@@ -494,7 +494,7 @@ lbl_fn_806423A0_000003FC:
     bne lbl_fn_806423A0_00000418
     li r4, 0x14
     li r5, 0x0
-    bl fn_80642D40
+    bl l2c_csm_execute
 lbl_fn_806423A0_00000418:
     lis r3, lbl_808230E0@ha
     lbz r0, lbl_808230E0@l(r3)
@@ -609,7 +609,7 @@ lbl_fn_806425D4_00000590:
     bne lbl_fn_806425D4_000005A8
     li r4, 0x15
     li r5, 0x0
-    bl fn_80642D40
+    bl l2c_csm_execute
     b lbl_fn_806425D4_000005D4
 lbl_fn_806425D4_000005A8:
     cmplwi r29, 0x1
@@ -618,12 +618,12 @@ lbl_fn_806425D4_000005A8:
     bne lbl_fn_806425D4_000005C8
     addi r5, r1, 0x8
     li r4, 0x15
-    bl fn_80642D40
+    bl l2c_csm_execute
     b lbl_fn_806425D4_000005D4
 lbl_fn_806425D4_000005C8:
     addi r5, r1, 0x8
     li r4, 0x16
-    bl fn_80642D40
+    bl l2c_csm_execute
 lbl_fn_806425D4_000005D4:
     li r3, 0x1
 lbl_fn_806425D4_000005D8:
@@ -679,7 +679,7 @@ lbl_fn_80642764_00000678:
     mr r5, r31
     stb r0, 0x24(r31)
     li r4, 0x17
-    bl fn_80642D40
+    bl l2c_csm_execute
     li r3, 0x1
 lbl_fn_80642764_00000690:
     lwz r0, 0x14(r1)
@@ -736,12 +736,12 @@ lbl_fn_8064281C_00000734:
     bne lbl_fn_8064281C_00000750
     mr r5, r31
     li r4, 0x18
-    bl fn_80642D40
+    bl l2c_csm_execute
     b lbl_fn_8064281C_0000075C
 lbl_fn_8064281C_00000750:
     mr r5, r31
     li r4, 0x19
-    bl fn_80642D40
+    bl l2c_csm_execute
 lbl_fn_8064281C_0000075C:
     li r3, 0x1
 lbl_fn_8064281C_00000760:
@@ -793,7 +793,7 @@ lbl_fn_806428EC_000007F0:
 lbl_fn_806428EC_000007F8:
     li r4, 0x1a
     li r5, 0x0
-    bl fn_80642D40
+    bl l2c_csm_execute
     li r3, 0x1
 lbl_fn_806428EC_00000808:
     lwz r0, 0x14(r1)
@@ -843,7 +843,7 @@ lbl_fn_80642990_00000894:
 lbl_fn_80642990_0000089C:
     li r4, 0x1b
     li r5, 0x0
-    bl fn_80642D40
+    bl l2c_csm_execute
     li r3, 0x1
 lbl_fn_80642990_000008AC:
     lwz r0, 0x14(r1)
@@ -905,7 +905,7 @@ lbl_fn_80642A34_00000960:
     bgt lbl_fn_80642A34_00000998
     mr r5, r29
     li r4, 0x1d
-    bl fn_80642D40
+    bl l2c_csm_execute
     lwz r3, 0x10(r30)
     lbz r3, 0x41(r3)
     neg r0, r3
@@ -1090,7 +1090,7 @@ lbl_fn_80642D20_00000BBC:
 void fn_80642D3C(void) {
 }
 
-asm void fn_80642D40(void)
+asm void l2c_csm_execute(void)
 {
     nofralloc
     lwz r0, 0x4(r3)
@@ -1160,7 +1160,7 @@ lbl_fn_80642D8C_00000C74:
     bl bta_sys_log
 lbl_fn_80642D8C_00000CB8:
     mr r3, r28
-    bl fn_806478E4
+    bl l2cu_release_ccb
     mr r12, r27
     mr r3, r29
     li r4, 0x0
@@ -1191,7 +1191,7 @@ lbl_fn_80642D8C_00000CB8:
     bl bta_sys_traceDebug
 lbl_fn_80642D8C_00000D30:
     mr r3, r28
-    bl fn_806478E4
+    bl l2cu_release_ccb
     mr r12, r30
     mr r3, r29
     lbz r4, 0x6(r26)
@@ -1235,7 +1235,7 @@ lbl_fn_80642D8C_00000D30:
     bl bta_sys_traceDebug
 lbl_fn_80642D8C_00000DDC:
     mr r3, r28
-    bl fn_806478E4
+    bl l2cu_release_ccb
     mr r12, r30
     mr r3, r29
     li r4, 0x3
@@ -1267,7 +1267,7 @@ lbl_fn_80642D8C_00000DDC:
     bl bta_sys_traceDebug
 lbl_fn_80642D8C_00000E58:
     mr r3, r28
-    bl fn_806478E4
+    bl l2cu_release_ccb
     lis r3, 0x1
     mr r12, r30
     subi r0, r3, 0x1112
@@ -1280,7 +1280,7 @@ lbl_fn_80642D8C_00000E58:
     bl scapi_cleanupContext
     b lbl_fn_80642D8C_00000E94
     mr r3, r28
-    bl fn_806478E4
+    bl l2cu_release_ccb
 lbl_fn_80642D8C_00000E94:
     addi r11, r1, 0x30
     bl _restgpr_25
@@ -1337,7 +1337,7 @@ lbl_fn_80643020_00000F08:
     bl bta_sys_log
 lbl_fn_80643020_00000F50:
     mr r3, r31
-    bl fn_806478E4
+    bl l2cu_release_ccb
     mr r12, r29
     mr r3, r27
     li r4, 0x0
@@ -1367,7 +1367,7 @@ lbl_fn_80643020_00000F50:
     bl bta_sys_traceDebug
 lbl_fn_80643020_00000FC4:
     mr r3, r31
-    bl fn_806478E4
+    bl l2cu_release_ccb
     mr r12, r28
     mr r3, r27
     li r4, 0x5
@@ -1381,7 +1381,7 @@ lbl_fn_80643020_00000FC4:
     addi r3, r3, 0x2a
     bl fn_806384E4
     mr r3, r31
-    bl fn_806478E4
+    bl l2cu_release_ccb
 lbl_fn_80643020_00001004:
     addi r11, r1, 0x30
     bl _restgpr_25
@@ -1427,7 +1427,7 @@ lbl_fn_80643190_00001068:
     addi r3, r3, 0x2a
     bl fn_806384E4
     mr r3, r29
-    bl fn_806478E4
+    bl l2cu_release_ccb
     b lbl_fn_80643190_00001168
     li r0, 0x4
     addi r3, r29, 0x18
@@ -1461,13 +1461,13 @@ lbl_fn_80643190_000010E4:
     li r5, 0x0
     bl fn_80646958
     mr r3, r29
-    bl fn_806478E4
+    bl l2cu_release_ccb
     b lbl_fn_80643190_00001168
     mr r3, r31
     bl scapi_cleanupContext
     b lbl_fn_80643190_00001168
     mr r3, r29
-    bl fn_806478E4
+    bl l2cu_release_ccb
     b lbl_fn_80643190_00001168
     lwz r3, 0x10(r29)
     lbz r4, 0x36(r29)
@@ -1478,7 +1478,7 @@ lbl_fn_80643190_000010E4:
     addi r3, r3, 0x2a
     bl fn_806384E4
     mr r3, r29
-    bl fn_806478E4
+    bl l2cu_release_ccb
 lbl_fn_80643190_00001168:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
@@ -1538,7 +1538,7 @@ lbl_fn_806432F8_000011E0:
     bl bta_sys_log
 lbl_fn_806432F8_00001230:
     mr r3, r29
-    bl fn_806478E4
+    bl l2cu_release_ccb
     mr r12, r28
     mr r3, r30
     li r4, 0x0
@@ -1605,7 +1605,7 @@ lbl_fn_806432F8_000012F0:
     bl bta_sys_traceDebug
 lbl_fn_806432F8_00001330:
     mr r3, r29
-    bl fn_806478E4
+    bl l2cu_release_ccb
     mr r12, r27
     mr r3, r30
     lhz r4, 0xa(r26)
@@ -1623,7 +1623,7 @@ lbl_fn_806432F8_00001330:
     bl bta_sys_log
 lbl_fn_806432F8_00001374:
     mr r3, r29
-    bl fn_806478E4
+    bl l2cu_release_ccb
     lis r3, 0x1
     mr r12, r27
     subi r0, r3, 0x1112
@@ -1633,7 +1633,7 @@ lbl_fn_806432F8_00001374:
     bctrl
     b lbl_fn_806432F8_000013B0
     mr r3, r29
-    bl fn_806478E4
+    bl l2cu_release_ccb
     b lbl_fn_806432F8_000013B0
     mr r3, r26
     bl scapi_cleanupContext
@@ -1692,7 +1692,7 @@ lbl_fn_8064353C_0000141C:
     bl bta_sys_log
 lbl_fn_8064353C_00001468:
     mr r3, r31
-    bl fn_806478E4
+    bl l2cu_release_ccb
     mr r12, r30
     mr r3, r29
     li r4, 0x0
@@ -1730,7 +1730,7 @@ lbl_fn_8064353C_000014C8:
     lhz r5, 0xc(r28)
     bl fn_80646958
     mr r3, r31
-    bl fn_806478E4
+    bl l2cu_release_ccb
     b lbl_fn_8064353C_00001588
     mr r3, r31
     li r4, 0x2
@@ -1748,7 +1748,7 @@ lbl_fn_8064353C_000014C8:
     bl bta_sys_log
 lbl_fn_8064353C_0000153C:
     mr r3, r31
-    bl fn_806478E4
+    bl l2cu_release_ccb
     mr r12, r30
     mr r3, r29
     li r4, 0x0
@@ -1821,7 +1821,7 @@ lbl_fn_80643714_000015F8:
     bl bta_sys_log
 lbl_fn_80643714_00001640:
     mr r3, r29
-    bl fn_806478E4
+    bl l2cu_release_ccb
     mr r12, r28
     mr r3, r27
     li r4, 0x0
@@ -2020,7 +2020,7 @@ lbl_fn_80643714_000018FC:
     bl bta_sys_log
 lbl_fn_80643714_00001934:
     mr r3, r29
-    bl fn_806478E4
+    bl l2cu_release_ccb
     mr r12, r28
     mr r3, r27
     li r4, 0x0
@@ -2081,7 +2081,7 @@ lbl_fn_80643ADC_000019C0:
     bl bta_sys_log
 lbl_fn_80643ADC_00001A08:
     mr r3, r31
-    bl fn_806478E4
+    bl l2cu_release_ccb
     mr r12, r29
     mr r3, r28
     li r4, 0x0
@@ -2243,7 +2243,7 @@ lbl_fn_80643D38_00001C20:
     bl bta_sys_log
 lbl_fn_80643D38_00001C68:
     mr r3, r25
-    bl fn_806478E4
+    bl l2cu_release_ccb
     mr r12, r28
     mr r3, r29
     li r4, 0x0
@@ -2251,7 +2251,7 @@ lbl_fn_80643D38_00001C68:
     bctrl
     b lbl_fn_80643D38_00001D90
     mr r3, r25
-    bl fn_806478E4
+    bl l2cu_release_ccb
     cmpwi r30, 0x0
     beq lbl_fn_80643D38_00001D90
     lis r3, lbl_808230E0@ha
@@ -2276,7 +2276,7 @@ lbl_fn_80643D38_00001CBC:
     lhz r6, 0x16(r25)
     bl fn_80647368
     mr r3, r25
-    bl fn_806478E4
+    bl l2cu_release_ccb
     cmpwi r30, 0x0
     beq lbl_fn_80643D38_00001D90
     lis r3, lbl_808230E0@ha
@@ -2296,7 +2296,7 @@ lbl_fn_80643D38_00001D1C:
     bctrl
     b lbl_fn_80643D38_00001D90
     mr r3, r25
-    bl fn_806478E4
+    bl l2cu_release_ccb
     cmpwi r30, 0x0
     beq lbl_fn_80643D38_00001D90
     lis r3, lbl_808230E0@ha
@@ -2374,7 +2374,7 @@ lbl_fn_80643F1C_00001DFC:
     bl bta_sys_log
 lbl_fn_80643F1C_00001E48:
     mr r3, r27
-    bl fn_806478E4
+    bl l2cu_release_ccb
     mr r12, r31
     mr r3, r30
     li r4, 0x0
@@ -2398,7 +2398,7 @@ lbl_fn_80643F1C_00001E48:
     bl bta_sys_log
 lbl_fn_80643F1C_00001EA4:
     mr r3, r27
-    bl fn_806478E4
+    bl l2cu_release_ccb
     mr r12, r31
     mr r3, r30
     li r4, 0x0
@@ -2411,7 +2411,7 @@ lbl_fn_80643F1C_00001EA4:
     lhz r6, 0x16(r27)
     bl fn_80647368
     mr r3, r27
-    bl fn_806478E4
+    bl l2cu_release_ccb
     b lbl_fn_80643F1C_00001EEC
     mr r3, r29
     bl scapi_cleanupContext
@@ -2737,7 +2737,7 @@ lbl_fn_80644370_0000234C:
     mr r3, r30
     addi r5, r1, 0x8
     li r4, 0x0
-    bl fn_80642D40
+    bl l2c_csm_execute
     lwz r30, 0x8(r30)
 lbl_fn_80644370_00002360:
     cmpwi r30, 0x0
@@ -2782,7 +2782,7 @@ lbl_fn_80644370_000023EC:
     lwz r30, 0x8(r3)
     addi r5, r1, 0x8
     li r4, 0x1
-    bl fn_80642D40
+    bl l2c_csm_execute
     mr r3, r30
 lbl_fn_80644370_00002400:
     cmpwi r3, 0x0
@@ -2842,7 +2842,7 @@ lbl_fn_806445A8_000024B0:
     lwz r30, 0x8(r3)
     clrlwi r4, r0, 24
     addi r5, r1, 0x8
-    bl fn_80642D40
+    bl l2c_csm_execute
     mr r3, r30
 lbl_fn_806445A8_000024C8:
     cmpwi r3, 0x0
@@ -2888,7 +2888,7 @@ lbl_fn_8064465C_00002544:
     lwz r29, 0x8(r3)
     addi r5, r1, 0x8
     li r4, 0x3
-    bl fn_80642D40
+    bl l2c_csm_execute
     mr r3, r29
 lbl_fn_8064465C_00002558:
     cmpwi r3, 0x0
@@ -2937,7 +2937,7 @@ lbl_fn_80644718_000025D0:
     mr r3, r31
     li r4, 0x6
     li r5, 0x0
-    bl fn_80642D40
+    bl l2c_csm_execute
 lbl_fn_80644718_000025F0:
     lwz r31, 0x8(r31)
 lbl_fn_80644718_000025F4:
@@ -2977,7 +2977,7 @@ lbl_fn_80644788_00002658:
     lwz r31, 0x8(r3)
     li r4, 0x3
     li r5, 0x0
-    bl fn_80642D40
+    bl l2c_csm_execute
     mr r3, r31
 lbl_fn_80644788_0000266C:
     cmpwi r3, 0x0
@@ -3012,7 +3012,7 @@ lbl_fn_80644788_000026D4:
     lwz r31, 0x8(r3)
     li r4, 0x3
     li r5, 0x0
-    bl fn_80642D40
+    bl l2c_csm_execute
     mr r3, r31
 lbl_fn_80644788_000026E8:
     cmpwi r3, 0x0
@@ -4154,7 +4154,7 @@ lbl_fn_806454BC_00003650:
     mr r3, r28
     mr r5, r27
     li r4, 0x13
-    bl fn_80642D40
+    bl l2c_csm_execute
 lbl_fn_806454BC_00003660:
     addi r11, r1, 0x30
     bl _restgpr_24
@@ -4273,7 +4273,7 @@ lbl_fn_806457EC_000037E8:
     bne lbl_fn_806457EC_000036C4
     li r4, 0x3
     li r5, 0x0
-    bl fn_80642D40
+    bl l2c_csm_execute
     b lbl_fn_806457EC_000036C4
     lbz r0, 0x5(r16)
     lbz r3, 0x4(r16)
@@ -4328,7 +4328,7 @@ lbl_fn_806457EC_000038C8:
     li r4, 0xa
     stw r16, 0x30(r3)
     sth r17, 0x16(r3)
-    bl fn_80642D40
+    bl l2c_csm_execute
     b lbl_fn_806457EC_000036C4
     lbz r0, 0x5(r16)
     mr r3, r15
@@ -4382,19 +4382,19 @@ lbl_fn_806457EC_00003998:
     bne lbl_fn_806457EC_000039B4
     addi r5, r1, 0x8
     li r4, 0xb
-    bl fn_80642D40
+    bl l2c_csm_execute
     b lbl_fn_806457EC_000036C4
 lbl_fn_806457EC_000039B4:
     cmplwi r0, 0x1
     bne lbl_fn_806457EC_000039CC
     addi r5, r1, 0x8
     li r4, 0xc
-    bl fn_80642D40
+    bl l2c_csm_execute
     b lbl_fn_806457EC_000036C4
 lbl_fn_806457EC_000039CC:
     addi r5, r1, 0x8
     li r4, 0xd
-    bl fn_80642D40
+    bl l2c_csm_execute
     b lbl_fn_806457EC_000036C4
     lbz r0, 0x7(r16)
     li r19, 0x0
@@ -4569,7 +4569,7 @@ lbl_fn_806457EC_00003C24:
 lbl_fn_806457EC_00003C60:
     addi r5, r1, 0x18
     li r4, 0xe
-    bl fn_80642D40
+    bl l2c_csm_execute
     b lbl_fn_806457EC_000036C4
 lbl_fn_806457EC_00003C70:
     mr r3, r15
@@ -4745,12 +4745,12 @@ lbl_fn_806457EC_00003EF0:
     bne lbl_fn_806457EC_00003F0C
     addi r5, r1, 0x18
     li r4, 0xf
-    bl fn_80642D40
+    bl l2c_csm_execute
     b lbl_fn_806457EC_000036C4
 lbl_fn_806457EC_00003F0C:
     addi r5, r1, 0x18
     li r4, 0x10
-    bl fn_80642D40
+    bl l2c_csm_execute
     b lbl_fn_806457EC_000036C4
 lbl_fn_806457EC_00003F1C:
     lbz r0, lbl_808230E0@l(r27)
@@ -4782,7 +4782,7 @@ lbl_fn_806457EC_00003F1C:
     stb r25, 0x36(r3)
     addi r5, r1, 0x8
     li r4, 0x11
-    bl fn_80642D40
+    bl l2c_csm_execute
     b lbl_fn_806457EC_000036C4
 lbl_fn_806457EC_00003F98:
     mr r3, r15
@@ -4813,7 +4813,7 @@ lbl_fn_806457EC_00003F98:
     bne lbl_fn_806457EC_000036C4
     addi r5, r1, 0x8
     li r4, 0x12
-    bl fn_80642D40
+    bl l2c_csm_execute
     b lbl_fn_806457EC_000036C4
     lhz r3, 0x7e(r30)
     subi r0, r3, 0xc
@@ -4897,7 +4897,7 @@ lbl_fn_8064625C_0000411C:
     lwz r3, 0x10(r3)
     li r4, 0x1e
     li r5, 0x0
-    b fn_80642D40
+    b l2c_csm_execute
 lbl_fn_8064625C_0000412C:
     li r3, 0x1
     b fn_806462AC
@@ -5076,7 +5076,7 @@ lbl_fn_806464AC_00004374:
     lwz r3, 0x8(r30)
     b lbl_fn_806464AC_0000438C
 lbl_fn_806464AC_00004384:
-    bl fn_806478E4
+    bl l2cu_release_ccb
     lwz r3, 0x8(r30)
 lbl_fn_806464AC_0000438C:
     cmpwi r3, 0x0
@@ -6518,7 +6518,7 @@ lbl_fn_806477D8_00005704:
     blr
 }
 
-asm void fn_806478E4(void)
+asm void l2cu_release_ccb(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -6530,59 +6530,59 @@ asm void fn_806478E4(void)
     lbz r0, 0x0(r3)
     lwz r31, 0x10(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_806478E4_000058FC
+    beq lbl_l2cu_release_ccb_000058FC
     li r0, 0x0
     stb r0, 0x0(r3)
     addi r3, r3, 0x18
     bl bta_sys_sendMsgToApp
-    b lbl_fn_806478E4_000057B8
-lbl_fn_806478E4_000057AC:
+    b lbl_l2cu_release_ccb_000057B8
+lbl_l2cu_release_ccb_000057AC:
     addi r3, r30, 0x70
     bl fn_80627400
     bl scapi_cleanupContext
-lbl_fn_806478E4_000057B8:
+lbl_l2cu_release_ccb_000057B8:
     lwz r0, 0x70(r30)
     cmpwi r0, 0x0
-    bne lbl_fn_806478E4_000057AC
+    bne lbl_l2cu_release_ccb_000057AC
     li r4, 0x0
     stw r4, 0x10(r30)
     lwz r0, 0x8(r31)
     cmplw r0, r30
-    bne lbl_fn_806478E4_000057F0
+    bne lbl_l2cu_release_ccb_000057F0
     lwz r3, 0x8(r30)
     cmpwi r3, 0x0
     stw r3, 0x8(r31)
-    beq lbl_fn_806478E4_00005824
+    beq lbl_l2cu_release_ccb_00005824
     stw r4, 0xc(r3)
-    b lbl_fn_806478E4_00005824
-lbl_fn_806478E4_000057F0:
+    b lbl_l2cu_release_ccb_00005824
+lbl_l2cu_release_ccb_000057F0:
     lwz r0, 0xc(r31)
     cmplw r0, r30
-    bne lbl_fn_806478E4_0000580C
+    bne lbl_l2cu_release_ccb_0000580C
     lwz r3, 0xc(r30)
     stw r3, 0xc(r31)
     stw r4, 0x8(r3)
-    b lbl_fn_806478E4_00005824
-lbl_fn_806478E4_0000580C:
+    b lbl_l2cu_release_ccb_00005824
+lbl_l2cu_release_ccb_0000580C:
     lwz r0, 0x8(r30)
     lwz r3, 0xc(r30)
     stw r0, 0x8(r3)
     lwz r0, 0xc(r30)
     lwz r3, 0x8(r30)
     stw r0, 0xc(r3)
-lbl_fn_806478E4_00005824:
+lbl_l2cu_release_ccb_00005824:
     lis r4, lbl_808230E0@ha
     addi r4, r4, lbl_808230E0@l
     lwz r0, 0x7b0(r4)
     cmpwi r0, 0x0
-    bne lbl_fn_806478E4_00005850
+    bne lbl_l2cu_release_ccb_00005850
     stw r30, 0x7b0(r4)
     li r0, 0x0
     stw r30, 0x7b4(r4)
     stw r0, 0x8(r30)
     stw r0, 0xc(r30)
-    b lbl_fn_806478E4_0000586C
-lbl_fn_806478E4_00005850:
+    b lbl_l2cu_release_ccb_0000586C
+lbl_l2cu_release_ccb_00005850:
     li r0, 0x0
     stw r0, 0x8(r30)
     lwz r0, 0x7b4(r4)
@@ -6590,47 +6590,47 @@ lbl_fn_806478E4_00005850:
     lwz r3, 0x7b4(r4)
     stw r30, 0x8(r3)
     stw r30, 0x7b4(r4)
-lbl_fn_806478E4_0000586C:
+lbl_l2cu_release_ccb_0000586C:
     lbz r0, 0x0(r31)
     cmpwi r0, 0x0
-    beq lbl_fn_806478E4_000058FC
+    beq lbl_l2cu_release_ccb_000058FC
     lwz r0, 0x4(r31)
     cmpwi r0, 0x4
-    bne lbl_fn_806478E4_000058FC
+    bne lbl_l2cu_release_ccb_000058FC
     lwz r0, 0x8(r31)
     cmpwi r0, 0x0
-    bne lbl_fn_806478E4_000058FC
+    bne lbl_l2cu_release_ccb_000058FC
     lhz r3, 0x58(r31)
     cmpwi r3, 0x0
-    bne lbl_fn_806478E4_000058E4
+    bne lbl_l2cu_release_ccb_000058E4
     lhz r3, 0x28(r31)
     li r4, 0x13
     bl fn_806392BC
     clrlwi r0, r3, 24
     cmplwi r0, 0x1
-    bne lbl_fn_806478E4_000058C4
+    bne lbl_l2cu_release_ccb_000058C4
     li r0, 0x5
     li r3, 0x1e
     stw r0, 0x4(r31)
-    b lbl_fn_806478E4_000058E4
-lbl_fn_806478E4_000058C4:
+    b lbl_l2cu_release_ccb_000058E4
+lbl_l2cu_release_ccb_000058C4:
     cmpwi r0, 0x0
-    bne lbl_fn_806478E4_000058E0
+    bne lbl_l2cu_release_ccb_000058E0
     li r0, 0x5
     lis r3, 0x1
     stw r0, 0x4(r31)
     subi r3, r3, 0x1
-    b lbl_fn_806478E4_000058E4
-lbl_fn_806478E4_000058E0:
+    b lbl_l2cu_release_ccb_000058E4
+lbl_l2cu_release_ccb_000058E0:
     li r3, 0x1
-lbl_fn_806478E4_000058E4:
+lbl_l2cu_release_ccb_000058E4:
     clrlwi r5, r3, 16
     cmplwi r5, 0xffff
-    beq lbl_fn_806478E4_000058FC
+    beq lbl_l2cu_release_ccb_000058FC
     addi r3, r31, 0x10
     li r4, 0x2
     bl bta_sys_sendmsg
-lbl_fn_806478E4_000058FC:
+lbl_l2cu_release_ccb_000058FC:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)

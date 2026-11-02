@@ -84,7 +84,7 @@ extern void fn_806023D0(void);
 extern void fn_80602580(void);
 extern void fn_80602700(void);
 extern void fn_80602730(void);
-extern void fn_80602BB0(void);
+extern void dvd_broadway_queueCmd(void);
 extern void fn_80602D20(void);
 extern void memcmp(void);
 
@@ -328,7 +328,7 @@ asm void fn_805FAA30(void) {
     bl OSPanic
 lbl_01bc:
     li r3, 0x0
-    bl fn_80602BB0
+    bl dvd_broadway_queueCmd
     lwz r3, __DVDLayoutFormat
     lis r6, lbl_807D0E80@ha
     addi r6, r6, lbl_807D0E80@l
@@ -1504,7 +1504,7 @@ lbl_1200:
     bl DCInvalidateRange
     stw r31, lbl_8087FD18
     li r3, 0x0
-    bl fn_80602BB0
+    bl dvd_broadway_queueCmd
     bl OSDisableInterrupts
     lwz r0, lbl_8087FD00
     mr r29, r3
@@ -1637,7 +1637,7 @@ lbl_1440:
     li r31, 0x0
     stw r31, lbl_8087FD18
     li r3, 0x0
-    bl fn_80602BB0
+    bl dvd_broadway_queueCmd
     bl OSDisableInterrupts
     lwz r0, lbl_8087FD00
     mr r29, r3
@@ -1742,7 +1742,7 @@ lbl_15ac:
     stw r29, lbl_8087FD18
     li r3, 0x0
     stw r4, lbl_8087FD50
-    bl fn_80602BB0
+    bl dvd_broadway_queueCmd
     bl OSDisableInterrupts
     lwz r0, lbl_8087FD00
     mr r30, r3
@@ -1903,7 +1903,7 @@ lbl_17fc:
     li r29, 0x0
     stw r29, lbl_8087FD18
     li r3, 0x0
-    bl fn_80602BB0
+    bl dvd_broadway_queueCmd
     lwz r3, lbl_8087FD48
     lwz r28, 0x0(r3)
     bl OSDisableInterrupts
@@ -1969,7 +1969,7 @@ lbl_18f8:
     li r29, 0x0
     stw r29, lbl_8087FD18
     li r3, 0x0
-    bl fn_80602BB0
+    bl dvd_broadway_queueCmd
     lwz r3, lbl_8087FD48
     lwz r28, 0x0(r3)
     bl OSDisableInterrupts
@@ -2168,7 +2168,7 @@ lbl_1bc8:
     li r30, 0x0
     stw r30, lbl_8087FD18
     li r3, 0x0
-    bl fn_80602BB0
+    bl dvd_broadway_queueCmd
     bl OSDisableInterrupts
     lwz r0, lbl_8087FD00
     mr r31, r3
@@ -2527,7 +2527,7 @@ lbl_2094:
     bl OSPanic
 lbl_20e4:
     li r3, 0x0
-    bl fn_80602BB0
+    bl dvd_broadway_queueCmd
     lwz r6, __DVDLayoutFormat
     lis r31, lbl_807D0E80@ha
     addi r31, r31, lbl_807D0E80@l
@@ -2647,7 +2647,7 @@ asm void fn_805FCB40(void) {
     li r3, 0x0
     addi r4, r4, fn_805FCE80@l
     stw r4, lbl_8087FD94
-    bl fn_80602BB0
+    bl dvd_broadway_queueCmd
     bl OSDisableInterrupts
     lwz r0, lbl_8087FD00
     mr r31, r3
@@ -2743,7 +2743,7 @@ lbl_23e4:
     b lbl_24a8
 lbl_2404:
     li r3, 0x0
-    bl fn_80602BB0
+    bl dvd_broadway_queueCmd
     bl OSDisableInterrupts
     lwz r0, lbl_8087FD00
     mr r31, r3
@@ -2868,7 +2868,7 @@ asm void fn_805FCE80(void) {
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     stw r30, 0x8(r1)
-    bl fn_80602BB0
+    bl dvd_broadway_queueCmd
     bl OSDisableInterrupts
     lwz r0, lbl_8087FD00
     mr r31, r3
@@ -3017,7 +3017,7 @@ lbl_27c4:
     b lbl_28a8
 lbl_27e4:
     li r3, 0x0
-    bl fn_80602BB0
+    bl dvd_broadway_queueCmd
     bl OSDisableInterrupts
     lwz r0, lbl_8087FD00
     mr r31, r3
@@ -3132,7 +3132,7 @@ lbl_295c:
     b lbl_2a20
 lbl_297c:
     li r3, 0x0
-    bl fn_80602BB0
+    bl dvd_broadway_queueCmd
     bl OSDisableInterrupts
     lwz r0, lbl_8087FD00
     mr r31, r3
@@ -3323,7 +3323,7 @@ lbl_2c0c:
     bl OSCancelAlarm
     stw r31, lbl_8087FD24
     li r3, 0x0
-    bl fn_80602BB0
+    bl dvd_broadway_queueCmd
     stw r31, lbl_8087FD28
     lwz r0, lbl_8087FD84
     cmplwi r0, 0x3
@@ -3662,7 +3662,7 @@ lbl_30cc:
     mtctr r3
     bctr 
     li r3, 0x0
-    bl fn_80602BB0
+    bl dvd_broadway_queueCmd
     li r0, 0x20
     lis r4, dvd_execCommand@ha
     stw r0, 0x1c(r29)
@@ -3690,7 +3690,7 @@ lbl_3150:
     b lbl_3598
 lbl_3158:
     li r3, 0x0
-    bl fn_80602BB0
+    bl dvd_broadway_queueCmd
     lwz r4, 0x20(r29)
     lis r0, 0x8
     lwz r3, 0x14(r29)
@@ -3749,7 +3749,7 @@ lbl_31b0:
     bl fn_806023D0
     b lbl_3598
     li r3, 0x0
-    bl fn_80602BB0
+    bl dvd_broadway_queueCmd
     lis r4, dvd_execCommand@ha
     lwz r3, 0x10(r29)
     addi r4, r4, dvd_execCommand@l
@@ -3768,7 +3768,7 @@ lbl_31b0:
     bl fn_806018F0
     b lbl_3598
     li r3, 0x0
-    bl fn_80602BB0
+    bl dvd_broadway_queueCmd
     lis r5, dvd_execCommand@ha
     lwz r3, 0x10(r29)
     lwz r4, 0x14(r29)
@@ -3776,7 +3776,7 @@ lbl_31b0:
     bl fn_80601F00
     b lbl_3598
     li r3, 0x0
-    bl fn_80602BB0
+    bl dvd_broadway_queueCmd
     li r0, 0x20
     lis r4, dvd_execCommand@ha
     stw r0, 0x1c(r29)
@@ -3785,7 +3785,7 @@ lbl_31b0:
     bl fn_80601A90
     b lbl_3598
     li r3, 0x0
-    bl fn_80602BB0
+    bl dvd_broadway_queueCmd
     lis r5, dvd_execCommand@ha
     li r3, 0x0
     addi r5, r5, dvd_execCommand@l
@@ -3818,7 +3818,7 @@ lbl_3340:
     b lbl_3598
 lbl_3348:
     li r3, 0x0
-    bl fn_80602BB0
+    bl dvd_broadway_queueCmd
     lwz r4, 0x20(r29)
     lis r0, 0x8
     lwz r3, 0x14(r29)
@@ -3877,7 +3877,7 @@ lbl_33a0:
     bl DVDLowUnencryptedRead
     b lbl_3598
     li r3, 0x0
-    bl fn_80602BB0
+    bl dvd_broadway_queueCmd
     lis r8, dvd_execCommand@ha
     lwz r3, 0x10(r29)
     lwz r7, 0x18(r29)
@@ -3888,7 +3888,7 @@ lbl_33a0:
     bl fn_80600C50
     b lbl_3598
     li r3, 0x0
-    bl fn_80602BB0
+    bl dvd_broadway_queueCmd
     lis r3, dvd_execCommand@ha
     addi r3, r3, dvd_execCommand@l
     bl fn_806015E0
@@ -3902,14 +3902,14 @@ lbl_33a0:
     bl fn_80602730
     b lbl_3598
     li r3, 0x0
-    bl fn_80602BB0
+    bl dvd_broadway_queueCmd
     lis r4, dvd_execCommand@ha
     lis r3, 0x2
     addi r4, r4, dvd_execCommand@l
     bl fn_80602240
     b lbl_3598
     li r3, 0x0
-    bl fn_80602BB0
+    bl dvd_broadway_queueCmd
     lis r3, lbl_807D0F40@ha
     li r0, 0x20
     addi r3, r3, lbl_807D0F40@l
@@ -3920,7 +3920,7 @@ lbl_33a0:
     bl fn_80600AC0
     b lbl_3598
     li r3, 0x0
-    bl fn_80602BB0
+    bl dvd_broadway_queueCmd
     lwz r10, 0x18(r29)
     lwz r0, 0x3a0(r10)
     cmpwi r0, 0x0
@@ -3950,7 +3950,7 @@ lbl_3518:
     bl fn_80601340
     b lbl_3598
     li r3, 0x0
-    bl fn_80602BB0
+    bl dvd_broadway_queueCmd
     lwz r8, 0x18(r29)
     lis r9, dvd_execCommand@ha
     lwz r3, 0x10(r29)

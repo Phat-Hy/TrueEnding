@@ -75,7 +75,7 @@ void fn_803D6F44(void);
 void *fn_803D6F60(void *p);
 void fn_803D6F68(void *p, f32 val);
 u32 fn_803D6F70(void *p);
-void fn_803D6F78(void);
+void town_triggerEventAction(void);
 void fn_803D6FD4(void *p, u32 val);
 void *fn_803D6FDC(void *p);
 u32 fn_803D6FE4(void *p);
@@ -305,7 +305,7 @@ u32 fn_803D6F70(void *p)
     return *(u32 *)((u8 *)p + 0x7fc);
 }
 
-asm void fn_803D6F78(void)
+asm void town_triggerEventAction(void)
 {
     nofralloc
     stwu r1, -0x20(r1)

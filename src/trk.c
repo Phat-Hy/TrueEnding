@@ -93,7 +93,7 @@ void fn_80675408(void);
 void TRK_main(void);
 void TRKNubMainLoop(void);
 void fn_80675568(void);
-void fn_806756A4(void);
+void TRK_fill_mem(void);
 void TRKDispatchMessage(void);
 void InitMetroTRK(void);
 void InitMetroTRK_BBA(void);
@@ -845,7 +845,7 @@ lbl_fn_80675568_0000077C:
     blr
 }
 
-asm void fn_806756A4(void)
+asm void TRK_fill_mem(void)
 {
     nofralloc
     cmpwi r5, 0x0
@@ -855,8 +855,8 @@ asm void fn_806756A4(void)
     beqlr
     srwi. r0, r5, 2
     mtctr r0
-    beq lbl_fn_806756A4_00000878
-lbl_fn_806756A4_000007AC:
+    beq lbl_TRK_fill_mem_00000878
+lbl_TRK_fill_mem_000007AC:
     clrrwi r10, r7, 2
     subf r0, r10, r7
     lwz r4, 0x0(r10)
@@ -905,12 +905,12 @@ lbl_fn_806756A4_000007AC:
     and r0, r9, r0
     or r0, r4, r0
     stw r0, 0x0(r10)
-    bdnz lbl_fn_806756A4_000007AC
+    bdnz lbl_TRK_fill_mem_000007AC
     andi. r5, r5, 0x3
     beqlr
-lbl_fn_806756A4_00000878:
+lbl_TRK_fill_mem_00000878:
     mtctr r5
-lbl_fn_806756A4_0000087C:
+lbl_TRK_fill_mem_0000087C:
     clrrwi r10, r7, 2
     subf r0, r10, r7
     lwz r4, 0x0(r10)
@@ -923,7 +923,7 @@ lbl_fn_806756A4_0000087C:
     and r0, r9, r0
     or r0, r4, r0
     stw r0, 0x0(r10)
-    bdnz lbl_fn_806756A4_0000087C
+    bdnz lbl_TRK_fill_mem_0000087C
     blr
 }
 
@@ -1993,7 +1993,7 @@ lbl_fn_8067648C_000015CC:
     addi r3, r1, 0x18
     li r4, 0x0
     li r5, 0x40
-    bl fn_806756A4
+    bl TRK_fill_mem
     lwz r0, 0x0(r26)
     li r21, 0x800
     subf r0, r31, r0
@@ -2209,7 +2209,7 @@ asm void fn_806767A8(void)
     addi r3, r1, 0x18
     li r4, 0x0
     li r5, 0x40
-    bl fn_806756A4
+    bl TRK_fill_mem
     li r0, 0x0
     stw r0, 0x0(r28)
     li r0, 0xd2
@@ -2287,7 +2287,7 @@ asm void fn_806768C0(void)
     stw r29, 0x64(r1)
     mr r29, r4
     li r4, 0x0
-    bl fn_806756A4
+    bl TRK_fill_mem
     li r3, 0xd3
     li r0, 0x40
     stb r3, 0x1c(r1)
@@ -2356,7 +2356,7 @@ asm void fn_806769A4(void)
     stw r28, 0x60(r1)
     mr r28, r3
     addi r3, r1, 0x18
-    bl fn_806756A4
+    bl TRK_fill_mem
     li r3, 0xd4
     li r0, 0x40
     stb r3, 0x1c(r1)
@@ -2781,7 +2781,7 @@ asm void fn_80676F78(void)
     li r4, 0x0
     li r5, 0x880
     addi r3, r3, 0xc
-    b fn_806756A4
+    b TRK_fill_mem
     blr
 }
 
@@ -3338,7 +3338,7 @@ asm void fn_80677684(void)
     li r0, 0x1
     addi r3, r1, 0x8
     stw r0, lbl_8088032C
-    bl fn_806756A4
+    bl TRK_fill_mem
     lwz r3, lbl_80880328
     li r0, 0x80
     li r4, 0x40
@@ -3372,7 +3372,7 @@ asm void fn_806776F4(void)
     stw r31, 0x5c(r1)
     li r31, 0x0
     stw r31, lbl_8088032C
-    bl fn_806756A4
+    bl TRK_fill_mem
     lwz r4, lbl_80880328
     li r0, 0x80
     li r3, 0x40
@@ -3408,7 +3408,7 @@ asm void fn_8067777C(void)
     li r5, 0x40
     stw r0, 0x54(r1)
     addi r3, r1, 0x8
-    bl fn_806756A4
+    bl TRK_fill_mem
     lwz r3, lbl_80880328
     li r0, 0x80
     li r4, 0x40
@@ -3440,7 +3440,7 @@ asm void fn_806777E8(void)
     li r5, 0x40
     stw r0, 0x54(r1)
     addi r3, r1, 0x8
-    bl fn_806756A4
+    bl TRK_fill_mem
     lwz r3, lbl_80880328
     li r0, 0x80
     li r4, 0x40
@@ -3486,7 +3486,7 @@ asm void fn_80677854(void)
     addi r3, r1, 0x68
     li r4, 0x0
     li r5, 0x40
-    bl fn_806756A4
+    bl TRK_fill_mem
     lwz r3, lbl_80880328
     li r0, 0x80
     li r4, 0x40
@@ -3528,7 +3528,7 @@ lbl_fn_80677854_000029F0:
     addi r3, r1, 0xa8
     li r4, 0x0
     li r5, 0x40
-    bl fn_806756A4
+    bl TRK_fill_mem
     lwz r6, lbl_80880328
     li r7, 0x80
     lwz r4, 0x20(r1)
@@ -3587,7 +3587,7 @@ lbl_fn_80677854_00002AF8:
     addi r3, r1, 0x28
     li r4, 0x0
     li r5, 0x40
-    bl fn_806756A4
+    bl TRK_fill_mem
     lwz r3, lbl_80880328
     li r0, 0x80
     li r4, 0x40
@@ -3641,7 +3641,7 @@ asm void fn_80677A88(void)
     addi r3, r1, 0x68
     li r4, 0x0
     li r5, 0x40
-    bl fn_806756A4
+    bl TRK_fill_mem
     lwz r3, lbl_80880328
     li r0, 0x80
     li r4, 0x40
@@ -3689,7 +3689,7 @@ lbl_fn_80677A88_00002C3C:
     addi r3, r1, 0xa8
     li r4, 0x0
     li r5, 0x40
-    bl fn_806756A4
+    bl TRK_fill_mem
     lwz r6, lbl_80880328
     li r0, 0x40
     li r4, 0x80
@@ -3732,7 +3732,7 @@ lbl_fn_80677A88_00002D08:
     addi r3, r1, 0x28
     li r4, 0x0
     li r5, 0x40
-    bl fn_806756A4
+    bl TRK_fill_mem
     lwz r3, lbl_80880328
     li r0, 0x80
     li r4, 0x40
@@ -3778,7 +3778,7 @@ asm void fn_80677C98(void)
     addi r3, r1, 0x50
     li r4, 0x0
     li r5, 0x40
-    bl fn_806756A4
+    bl TRK_fill_mem
     lwz r3, lbl_80880328
     li r0, 0x80
     li r4, 0x40
@@ -3882,7 +3882,7 @@ lbl_fn_80677C98_00002F14:
     addi r3, r1, 0x10
     li r4, 0x0
     li r5, 0x40
-    bl fn_806756A4
+    bl TRK_fill_mem
     lwz r3, lbl_80880328
     li r0, 0x80
     li r4, 0x40
@@ -3930,7 +3930,7 @@ asm void fn_80677E94(void)
     addi r3, r1, 0x50
     li r4, 0x0
     li r5, 0x40
-    bl fn_806756A4
+    bl TRK_fill_mem
     lwz r3, lbl_80880328
     li r0, 0x80
     li r4, 0x40
@@ -4007,7 +4007,7 @@ lbl_fn_80677E94_000030BC:
     addi r3, r1, 0x90
     li r4, 0x0
     li r5, 0x40
-    bl fn_806756A4
+    bl TRK_fill_mem
     lwz r6, lbl_80880328
     li r0, 0x40
     li r4, 0x80
@@ -4074,7 +4074,7 @@ lbl_fn_80677E94_000031A8:
     addi r3, r1, 0x10
     li r4, 0x0
     li r5, 0x40
-    bl fn_806756A4
+    bl TRK_fill_mem
     lwz r3, lbl_80880328
     li r0, 0x80
     li r4, 0x40
@@ -4116,7 +4116,7 @@ asm void fn_80678134(void)
     addi r3, r1, 0x48
     li r4, 0x0
     li r5, 0x40
-    bl fn_806756A4
+    bl TRK_fill_mem
     lwz r3, lbl_80880328
     li r0, 0x80
     li r4, 0x40
@@ -4137,7 +4137,7 @@ lbl_fn_80678134_00003284:
     addi r3, r1, 0x8
     li r4, 0x0
     li r5, 0x40
-    bl fn_806756A4
+    bl TRK_fill_mem
     lwz r3, lbl_80880328
     li r0, 0x80
     li r4, 0x40
@@ -4192,7 +4192,7 @@ lbl_fn_806781F8_00003338:
     addi r3, r1, 0x108
     li r4, 0x0
     li r5, 0x40
-    bl fn_806756A4
+    bl TRK_fill_mem
     lwz r3, lbl_80880328
     li r0, 0x80
     li r4, 0x40
@@ -4219,7 +4219,7 @@ lbl_fn_806781F8_000033A8:
     addi r3, r1, 0xc8
     li r4, 0x0
     li r5, 0x40
-    bl fn_806756A4
+    bl TRK_fill_mem
     lwz r3, lbl_80880328
     li r0, 0x80
     li r4, 0x40
@@ -4240,7 +4240,7 @@ lbl_fn_806781F8_000033F8:
     addi r3, r1, 0x88
     li r4, 0x0
     li r5, 0x40
-    bl fn_806756A4
+    bl TRK_fill_mem
     lwz r3, lbl_80880328
     li r0, 0x80
     li r4, 0x40
@@ -4264,7 +4264,7 @@ lbl_fn_806781F8_00003448:
     addi r3, r1, 0x48
     li r4, 0x0
     li r5, 0x40
-    bl fn_806756A4
+    bl TRK_fill_mem
     lwz r3, lbl_80880328
     li r0, 0x80
     li r4, 0x40
@@ -4285,7 +4285,7 @@ lbl_fn_806781F8_000034A4:
     addi r3, r1, 0x8
     li r4, 0x0
     li r5, 0x40
-    bl fn_806756A4
+    bl TRK_fill_mem
     lwz r3, lbl_80880328
     li r0, 0x80
     li r4, 0x40
@@ -4370,7 +4370,7 @@ lbl_fn_8067847C_000035C0:
     addi r3, r1, 0x8
     li r4, 0x0
     li r5, 0x40
-    bl fn_806756A4
+    bl TRK_fill_mem
     lwz r3, lbl_80880328
     li r0, 0x80
     li r4, 0x40
@@ -4427,7 +4427,7 @@ lbl_fn_80678534_00003684:
     addi r3, r1, 0x8
     li r4, 0x0
     li r5, 0x40
-    bl fn_806756A4
+    bl TRK_fill_mem
     lwz r3, lbl_80880328
     li r0, 0x80
     li r4, 0x40
@@ -5570,7 +5570,7 @@ asm void fn_80679488(void)
     stw r29, 0x464(r1)
     mr r29, r3
     addi r3, r1, 0x20
-    bl fn_806756A4
+    bl TRK_fill_mem
     lis r31, gTRKCPUState@ha
     li r4, 0x4e8
     addi r31, r31, gTRKCPUState@l
@@ -5706,7 +5706,7 @@ asm void fn_80679688(void)
     stw r30, 0x58(r1)
     mr r30, r3
     addi r3, r1, 0x10
-    bl fn_806756A4
+    bl TRK_fill_mem
     lis r31, gTRKExceptionStatus_807BAF18@ha
     li r3, 0x40
     lwz r4, gTRKExceptionStatus_807BAF18@l(r31)

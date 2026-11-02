@@ -5,7 +5,7 @@
 extern void _restgpr_26(void);
 extern void _savegpr_26(void);
 extern void battle_findTargetSlotById(void);
-extern void fn_800A6BDC(void);
+extern void math_evaluateSpline(void);
 extern void fn_8020FCE8(void);
 extern void fn_80219160(void);
 extern void task_mapIdToQueue(void);
@@ -224,7 +224,7 @@ lbl_fn_8012C6D4_00000258:
     fsubs f0, f0, f1
     stfs f0, 0x48(r31)
     lwz r3, 0x44(r31)
-    bl fn_800A6BDC
+    bl math_evaluateSpline
     fctiwz f0, f1
     stfd f0, 0x18(r1)
     lwz r0, 0x1c(r1)
@@ -240,7 +240,7 @@ lbl_fn_8012C6D4_00000298:
     fsubs f0, f0, f1
     stfs f0, 0x48(r31)
     lwz r3, 0x44(r31)
-    bl fn_800A6BDC
+    bl math_evaluateSpline
     fctiwz f0, f1
     stfd f0, 0x18(r1)
     lwz r3, 0x1c(r1)
@@ -256,7 +256,7 @@ lbl_fn_8012C6D4_000002C4:
     fsubs f0, f0, f1
     stfs f0, 0xc(r31)
     lwz r3, 0x8(r31)
-    bl fn_800A6BDC
+    bl math_evaluateSpline
     lfs f3, lbl_80881904
     fcmpo cr0, f3, f1
     ble lbl_fn_8012C6D4_00000304
@@ -269,7 +269,7 @@ lbl_fn_8012C6D4_00000304:
     fsubs f0, f0, f1
     stfs f0, 0xc(r31)
     lwz r3, 0x8(r31)
-    bl fn_800A6BDC
+    bl math_evaluateSpline
     fmr f3, f1
 lbl_fn_8012C6D4_00000328:
     slwi r0, r28, 2
@@ -288,7 +288,7 @@ lbl_fn_8012C6D4_00000328:
     stfs f1, 0x0(r27)
     stfs f0, 0x24(r31)
     lwz r3, 0x20(r31)
-    bl fn_800A6BDC
+    bl math_evaluateSpline
     lfs f3, lbl_80881904
     fcmpo cr0, f3, f1
     ble lbl_fn_8012C6D4_0000037C
@@ -301,7 +301,7 @@ lbl_fn_8012C6D4_0000037C:
     fsubs f0, f0, f1
     stfs f0, 0x24(r31)
     lwz r3, 0x20(r31)
-    bl fn_800A6BDC
+    bl math_evaluateSpline
     fmr f3, f1
 lbl_fn_8012C6D4_000003A0:
     xoris r0, r30, 0x8000
@@ -318,7 +318,7 @@ lbl_fn_8012C6D4_000003A0:
     stfs f1, 0x8(r27)
     stfs f0, 0x18(r31)
     lwz r3, 0x14(r31)
-    bl fn_800A6BDC
+    bl math_evaluateSpline
     lfs f3, lbl_80881904
     fcmpo cr0, f3, f1
     ble lbl_fn_8012C6D4_000003EC
@@ -331,7 +331,7 @@ lbl_fn_8012C6D4_000003EC:
     fsubs f0, f0, f1
     stfs f0, 0x18(r31)
     lwz r3, 0x14(r31)
-    bl fn_800A6BDC
+    bl math_evaluateSpline
     fmr f3, f1
 lbl_fn_8012C6D4_00000410:
     xoris r0, r30, 0x8000
@@ -348,7 +348,7 @@ lbl_fn_8012C6D4_00000410:
     stfs f1, 0x4(r27)
     stfs f0, 0x30(r31)
     lwz r3, 0x2c(r31)
-    bl fn_800A6BDC
+    bl math_evaluateSpline
     lfs f3, lbl_80881904
     fcmpo cr0, f3, f1
     ble lbl_fn_8012C6D4_0000045C
@@ -361,7 +361,7 @@ lbl_fn_8012C6D4_0000045C:
     fsubs f0, f0, f1
     stfs f0, 0x30(r31)
     lwz r3, 0x2c(r31)
-    bl fn_800A6BDC
+    bl math_evaluateSpline
     fmr f3, f1
 lbl_fn_8012C6D4_00000480:
     xoris r0, r30, 0x8000
@@ -378,7 +378,7 @@ lbl_fn_8012C6D4_00000480:
     stfs f1, 0xc(r27)
     stfs f0, 0x3c(r31)
     lwz r3, 0x38(r31)
-    bl fn_800A6BDC
+    bl math_evaluateSpline
     fctiwz f0, f1
     stfd f0, 0x18(r1)
     lwz r0, 0x1c(r1)
@@ -394,7 +394,7 @@ lbl_fn_8012C6D4_000004D8:
     fsubs f0, f0, f1
     stfs f0, 0x3c(r31)
     lwz r3, 0x38(r31)
-    bl fn_800A6BDC
+    bl math_evaluateSpline
     fctiwz f0, f1
     stfd f0, 0x18(r1)
     lwz r0, 0x1c(r1)
@@ -411,7 +411,7 @@ lbl_fn_8012C6D4_00000510:
     fsubs f0, f0, f1
     stfs f0, 0x48(r3)
     lwz r3, 0x44(r3)
-    bl fn_800A6BDC
+    bl math_evaluateSpline
     fctiwz f0, f1
     stfd f0, 0x18(r1)
     lwz r0, 0x1c(r1)
@@ -427,7 +427,7 @@ lbl_fn_8012C6D4_00000550:
     fsubs f0, f0, f1
     stfs f0, 0x48(r31)
     lwz r3, 0x44(r31)
-    bl fn_800A6BDC
+    bl math_evaluateSpline
     fctiwz f0, f1
     stfd f0, 0x18(r1)
     lwz r3, 0x1c(r1)
@@ -441,7 +441,7 @@ lbl_fn_8012C6D4_0000057C:
     fsubs f0, f0, f1
     stfs f0, 0xc(r31)
     lwz r3, 0x8(r31)
-    bl fn_800A6BDC
+    bl math_evaluateSpline
     lfs f2, lbl_80881904
     fcmpo cr0, f2, f1
     ble lbl_fn_8012C6D4_000005B4
@@ -454,7 +454,7 @@ lbl_fn_8012C6D4_000005B4:
     fsubs f0, f0, f1
     stfs f0, 0xc(r31)
     lwz r3, 0x8(r31)
-    bl fn_800A6BDC
+    bl math_evaluateSpline
     fmr f2, f1
 lbl_fn_8012C6D4_000005D8:
     xoris r0, r30, 0x8000
@@ -466,7 +466,7 @@ lbl_fn_8012C6D4_000005D8:
     fsubs f0, f0, f1
     stfs f0, 0x24(r31)
     lwz r3, 0x20(r31)
-    bl fn_800A6BDC
+    bl math_evaluateSpline
     lfs f2, lbl_80881904
     fcmpo cr0, f2, f1
     ble lbl_fn_8012C6D4_00000610
@@ -479,7 +479,7 @@ lbl_fn_8012C6D4_00000610:
     fsubs f0, f0, f1
     stfs f0, 0x24(r31)
     lwz r3, 0x20(r31)
-    bl fn_800A6BDC
+    bl math_evaluateSpline
     fmr f2, f1
 lbl_fn_8012C6D4_00000634:
     xoris r0, r30, 0x8000
@@ -491,7 +491,7 @@ lbl_fn_8012C6D4_00000634:
     fsubs f0, f0, f1
     stfs f0, 0x18(r31)
     lwz r3, 0x14(r31)
-    bl fn_800A6BDC
+    bl math_evaluateSpline
     lfs f2, lbl_80881904
     fcmpo cr0, f2, f1
     ble lbl_fn_8012C6D4_0000066C
@@ -504,7 +504,7 @@ lbl_fn_8012C6D4_0000066C:
     fsubs f0, f0, f1
     stfs f0, 0x18(r31)
     lwz r3, 0x14(r31)
-    bl fn_800A6BDC
+    bl math_evaluateSpline
     fmr f2, f1
 lbl_fn_8012C6D4_00000690:
     xoris r0, r30, 0x8000
@@ -516,7 +516,7 @@ lbl_fn_8012C6D4_00000690:
     fsubs f0, f0, f1
     stfs f0, 0x30(r31)
     lwz r3, 0x2c(r31)
-    bl fn_800A6BDC
+    bl math_evaluateSpline
     lfs f2, lbl_80881904
     fcmpo cr0, f2, f1
     ble lbl_fn_8012C6D4_000006C8
@@ -529,7 +529,7 @@ lbl_fn_8012C6D4_000006C8:
     fsubs f0, f0, f1
     stfs f0, 0x30(r31)
     lwz r3, 0x2c(r31)
-    bl fn_800A6BDC
+    bl math_evaluateSpline
     fmr f2, f1
 lbl_fn_8012C6D4_000006EC:
     xoris r0, r30, 0x8000
@@ -541,7 +541,7 @@ lbl_fn_8012C6D4_000006EC:
     fsubs f0, f0, f1
     stfs f0, 0x3c(r31)
     lwz r3, 0x38(r31)
-    bl fn_800A6BDC
+    bl math_evaluateSpline
     fctiwz f0, f1
     stfd f0, 0x18(r1)
     lwz r0, 0x1c(r1)
@@ -557,7 +557,7 @@ lbl_fn_8012C6D4_00000730:
     fsubs f0, f0, f1
     stfs f0, 0x3c(r31)
     lwz r3, 0x38(r31)
-    bl fn_800A6BDC
+    bl math_evaluateSpline
     fctiwz f0, f1
     stfd f0, 0x18(r1)
     lwz r0, 0x1c(r1)

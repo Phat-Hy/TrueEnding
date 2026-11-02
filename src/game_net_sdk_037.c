@@ -40,7 +40,7 @@ extern void fn_806E9710(void);
 extern void fn_806E9730(void);
 extern void fn_806E9760(void);
 extern void fn_806E97F0(void);
-extern void fn_806E99F0(void);
+extern void dwc_invokeCallbackSafe(void);
 extern void fn_806E9AD0(void);
 extern void fn_806E9BB0(void);
 extern void fn_806E9E40(void);
@@ -490,7 +490,7 @@ lbl_fn_806ECC20_0000055C:
     li r4, 0x6
     li r5, 0x0
     li r6, 0x0
-    bl fn_806E99F0
+    bl dwc_invokeCallbackSafe
     cmpwi r3, 0x0
     bne lbl_fn_806ECC20_000005E8
     li r0, 0x0
@@ -535,7 +535,7 @@ lbl_fn_806ECC20_000005FC:
     li r4, 0x2
     li r5, 0x0
     li r6, 0x0
-    bl fn_806E99F0
+    bl dwc_invokeCallbackSafe
     cmpwi r3, 0x0
     bne lbl_fn_806ECC20_00000684
     li r0, 0x0
@@ -629,7 +629,7 @@ lbl_fn_806ECE40_00000740:
     li r4, 0x6
     li r5, 0x0
     li r6, 0x0
-    bl fn_806E99F0
+    bl dwc_invokeCallbackSafe
     cmpwi r3, 0x0
     bne lbl_fn_806ECE40_000007CC
     li r3, 0x0
@@ -758,7 +758,7 @@ lbl_fn_806ECF70_00000904:
     li r4, 0x6
     li r5, 0x0
     li r6, 0x0
-    bl fn_806E99F0
+    bl dwc_invokeCallbackSafe
     cmpwi r3, 0x0
     bne lbl_fn_806ECF70_0000098C
     li r0, 0x0
@@ -802,7 +802,7 @@ lbl_fn_806ECF70_000009A0:
     li r4, 0x2
     li r5, 0x0
     li r6, 0x0
-    bl fn_806E99F0
+    bl dwc_invokeCallbackSafe
     cmpwi r3, 0x0
     bne lbl_fn_806ECF70_00000A24
     li r0, 0x0
@@ -887,7 +887,7 @@ lbl_fn_806ECF70_00000AC8:
     li r4, 0x6
     li r5, 0x0
     li r6, 0x0
-    bl fn_806E99F0
+    bl dwc_invokeCallbackSafe
     cmpwi r3, 0x0
     bne lbl_fn_806ECF70_00000B50
     li r3, 0x0
@@ -1028,7 +1028,7 @@ lbl_fn_806ED370_00000CC4:
     li r4, 0x1
     li r5, 0x0
     li r6, 0x0
-    bl fn_806E99F0
+    bl dwc_invokeCallbackSafe
     cmpwi r3, 0x0
     bne lbl_fn_806ED370_00000D50
     li r0, 0x0
@@ -1140,7 +1140,7 @@ lbl_fn_806ED370_00000E60:
     li r4, 0x1
     li r5, 0x0
     li r6, 0x0
-    bl fn_806E99F0
+    bl dwc_invokeCallbackSafe
     cmpwi r3, 0x0
     bne lbl_fn_806ED370_00000EEC
     li r0, 0x0

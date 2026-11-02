@@ -77,7 +77,7 @@ extern u32 lbl_80881774;
 /* Function declarations */
 void fn_801185E0(void);
 void fn_801189B4(void);
-void fn_80119030(void);
+void actor_changeState(void);
 void fn_801191A0(void);
 void fn_801191A4(void);
 void fn_801191A8(void);
@@ -219,7 +219,7 @@ lbl_fn_801185E0_000001C0:
     mr r3, r31
     li r4, 0x1
     li r5, 0x0
-    bl fn_80119030
+    bl actor_changeState
     b lbl_fn_801185E0_000002F8
 lbl_fn_801185E0_000001EC:
     mr r3, r31
@@ -266,7 +266,7 @@ lbl_fn_801185E0_0000026C:
     mr r3, r31
     li r4, 0x7
     li r5, 0x0
-    bl fn_80119030
+    bl actor_changeState
     b lbl_fn_801185E0_000002F8
 lbl_fn_801185E0_00000280:
     lwz r3, lbl_8087EF70
@@ -303,7 +303,7 @@ lbl_fn_801185E0_000002D0:
     mr r3, r31
     li r4, 0x1
     li r5, 0x0
-    bl fn_80119030
+    bl actor_changeState
 lbl_fn_801185E0_000002F8:
     lwz r29, 0x70(r31)
     cmpwi r29, 0x0
@@ -839,7 +839,7 @@ lbl_fn_801189B4_00000A20:
     blr
 }
 
-asm void fn_80119030(void)
+asm void actor_changeState(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -852,19 +852,19 @@ asm void fn_80119030(void)
     stw r0, 0x140(r3)
     stw r4, 0x13c(r3)
     stw r5, 0x144(r3)
-    beq lbl_fn_80119030_00000AA8
+    beq lbl_actor_changeState_00000AA8
     cmpwi r4, 0x3
-    beq lbl_fn_80119030_00000AD8
+    beq lbl_actor_changeState_00000AD8
     cmpwi r4, 0x5
-    beq lbl_fn_80119030_00000B5C
+    beq lbl_actor_changeState_00000B5C
     cmpwi r4, 0x7
-    beq lbl_fn_80119030_00000B68
+    beq lbl_actor_changeState_00000B68
     cmpwi r4, 0x6
-    beq lbl_fn_80119030_00000BA4
+    beq lbl_actor_changeState_00000BA4
     cmpwi r4, 0x8
-    beq lbl_fn_80119030_00000BA4
-    b lbl_fn_80119030_00000BAC
-lbl_fn_80119030_00000AA8:
+    beq lbl_actor_changeState_00000BA4
+    b lbl_actor_changeState_00000BAC
+lbl_actor_changeState_00000AA8:
     addi r3, r1, 0x8
     li r4, 0x1f
     bl actor_spawnActorWithId
@@ -876,23 +876,23 @@ lbl_fn_80119030_00000AA8:
     lwz r12, 0x1c(r12)
     mtctr r12
     bctrl
-    b lbl_fn_80119030_00000BAC
-lbl_fn_80119030_00000AD8:
+    b lbl_actor_changeState_00000BAC
+lbl_actor_changeState_00000AD8:
     lwz r0, 0x16c(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_80119030_00000B50
+    bne lbl_actor_changeState_00000B50
     lwz r0, 0x48(r3)
     li r4, 0x0
     stw r4, 0x148(r3)
     cmpwi r0, 0x1
-    bne lbl_fn_80119030_00000BAC
+    bne lbl_actor_changeState_00000BAC
     lwz r0, 0x174(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_80119030_00000BAC
+    bne lbl_actor_changeState_00000BAC
     lwz r4, 0x128(r3)
     bl fn_8011BBD0
     cmpwi r3, 0x0
-    beq lbl_fn_80119030_00000BAC
+    beq lbl_actor_changeState_00000BAC
     mr r3, r31
     li r4, 0x1b5
     li r5, 0x0
@@ -902,41 +902,41 @@ lbl_fn_80119030_00000AD8:
     bl atn_Task_setActive
     lwz r3, lbl_8087F0A8
     cmpwi r3, 0x0
-    beq lbl_fn_80119030_00000B44
+    beq lbl_actor_changeState_00000B44
     li r0, 0x1
     stb r0, 0x1140(r3)
-lbl_fn_80119030_00000B44:
+lbl_actor_changeState_00000B44:
     li r0, 0x1
     stw r0, 0x174(r31)
-    b lbl_fn_80119030_00000BAC
-lbl_fn_80119030_00000B50:
+    b lbl_actor_changeState_00000BAC
+lbl_actor_changeState_00000B50:
     li r0, 0x1
     stw r0, 0x148(r3)
-    b lbl_fn_80119030_00000BAC
-lbl_fn_80119030_00000B5C:
+    b lbl_actor_changeState_00000BAC
+lbl_actor_changeState_00000B5C:
     li r0, 0x0
     stw r0, 0x14c(r3)
-    b lbl_fn_80119030_00000BAC
-lbl_fn_80119030_00000B68:
+    b lbl_actor_changeState_00000BAC
+lbl_actor_changeState_00000B68:
     lwz r12, 0x0(r3)
     lwz r12, 0x20(r12)
     mtctr r12
     bctrl
     lwz r0, 0x48(r31)
     cmpwi r0, 0x0
-    bne lbl_fn_80119030_00000BAC
+    bne lbl_actor_changeState_00000BAC
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0
-    beq lbl_fn_80119030_00000BAC
+    beq lbl_actor_changeState_00000BAC
     lwz r0, 0x4b0(r31)
     cmpwi r0, 0x0
-    bne lbl_fn_80119030_00000BAC
+    bne lbl_actor_changeState_00000BAC
     bl fn_8036E964
-    b lbl_fn_80119030_00000BAC
-lbl_fn_80119030_00000BA4:
+    b lbl_actor_changeState_00000BAC
+lbl_actor_changeState_00000BA4:
     li r0, 0x1
     stw r0, 0x150(r3)
-lbl_fn_80119030_00000BAC:
+lbl_actor_changeState_00000BAC:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     mtlr r0
@@ -1007,7 +1007,7 @@ lbl_fn_801191A8_00000C60:
     mr r3, r31
     li r4, 0x3
     li r5, 0x0
-    bl fn_80119030
+    bl actor_changeState
     b lbl_fn_801191A8_00001088
 lbl_fn_801191A8_00000C94:
     li r0, 0x0
@@ -1021,7 +1021,7 @@ lbl_fn_801191A8_00000C94:
     mr r3, r31
     li r4, 0x3
     li r5, 0x0
-    bl fn_80119030
+    bl actor_changeState
     b lbl_fn_801191A8_00001088
 lbl_fn_801191A8_00000CC8:
     lwz r3, lbl_8087EF70
@@ -1054,7 +1054,7 @@ lbl_fn_801191A8_00000CE8:
     mr r3, r31
     li r4, 0x3
     li r5, 0x0
-    bl fn_80119030
+    bl actor_changeState
     b lbl_fn_801191A8_00001088
 lbl_fn_801191A8_00000D40:
     addi r3, r1, 0x18
@@ -1066,7 +1066,7 @@ lbl_fn_801191A8_00000D40:
     mr r3, r31
     li r4, 0x7
     li r5, 0x0
-    bl fn_80119030
+    bl actor_changeState
     b lbl_fn_801191A8_00001088
 lbl_fn_801191A8_00000D6C:
     addi r3, r1, 0x14
@@ -1078,7 +1078,7 @@ lbl_fn_801191A8_00000D6C:
     mr r3, r31
     li r4, 0x7
     li r5, 0x0
-    bl fn_80119030
+    bl actor_changeState
     b lbl_fn_801191A8_00001088
 lbl_fn_801191A8_00000D98:
     lwz r3, lbl_8087EF70
@@ -1143,7 +1143,7 @@ lbl_fn_801191A8_00000E58:
     mr r3, r31
     li r4, 0x4
     li r5, 0x1
-    bl fn_80119030
+    bl actor_changeState
     addi r3, r1, 0xc
     li r4, 0xb
     bl actor_spawnActorWithId
@@ -1183,7 +1183,7 @@ lbl_fn_801191A8_00000EDC:
     mr r3, r31
     li r4, 0x3
     li r5, 0x0
-    bl fn_80119030
+    bl actor_changeState
     b lbl_fn_801191A8_00001088
 lbl_fn_801191A8_00000F10:
     lwz r29, 0x134(r31)
@@ -1354,7 +1354,7 @@ lbl_fn_8011968C_00001144:
     mr r3, r31
     li r4, 0x1
     li r5, 0x0
-    bl fn_80119030
+    bl actor_changeState
     addi r3, r1, 0xc
     li r4, 0x2
     bl actor_spawnActorWithId
@@ -1374,7 +1374,7 @@ lbl_fn_8011968C_00001170:
     mr r3, r31
     li r4, 0x3
     li r5, 0x0
-    bl fn_80119030
+    bl actor_changeState
 lbl_fn_8011968C_000011A0:
     li r0, 0x0
     stw r0, 0x170(r31)
@@ -1434,7 +1434,7 @@ lbl_fn_8011979C_00001250:
     mr r3, r31
     li r4, 0x5
     li r5, 0x0
-    bl fn_80119030
+    bl actor_changeState
     addi r3, r1, 0x18
     li r4, 0x1
     bl actor_spawnActorWithId
@@ -1448,7 +1448,7 @@ lbl_fn_8011979C_0000127C:
     mr r3, r31
     li r4, 0x7
     li r5, 0x0
-    bl fn_80119030
+    bl actor_changeState
     addi r3, r1, 0x14
     li r4, 0x1
     bl actor_spawnActorWithId
@@ -1472,7 +1472,7 @@ lbl_fn_8011979C_000012D8:
     mr r3, r31
     li r4, 0x5
     li r5, 0x0
-    bl fn_80119030
+    bl actor_changeState
     addi r3, r1, 0x10
     li r4, 0x1
     bl actor_spawnActorWithId
@@ -1484,7 +1484,7 @@ lbl_fn_8011979C_00001304:
     mr r3, r31
     li r4, 0x1
     li r5, 0x0
-    bl fn_80119030
+    bl actor_changeState
     addi r3, r1, 0xc
     li r4, 0x2
     bl actor_spawnActorWithId
@@ -1508,7 +1508,7 @@ lbl_fn_8011979C_00001350:
     mr r3, r31
     li r4, 0x1
     li r5, 0x0
-    bl fn_80119030
+    bl actor_changeState
     addi r3, r1, 0x8
     li r4, 0x2
     bl actor_spawnActorWithId
@@ -1571,7 +1571,7 @@ asm void fn_8011999C(void)
     mr r3, r31
     li r4, 0x6
     li r5, 0x0
-    bl fn_80119030
+    bl actor_changeState
     addi r3, r1, 0x28
     li r4, 0xc
     bl actor_spawnActorWithId
@@ -1583,7 +1583,7 @@ lbl_fn_8011999C_00001464:
     mr r3, r31
     li r4, 0x4
     li r5, 0x1
-    bl fn_80119030
+    bl actor_changeState
     addi r3, r1, 0x24
     li r4, 0xb
     bl actor_spawnActorWithId
@@ -1624,7 +1624,7 @@ lbl_fn_8011999C_000014DC:
     mr r3, r31
     li r4, 0x4
     li r5, 0x1
-    bl fn_80119030
+    bl actor_changeState
     addi r3, r1, 0x20
     li r4, 0xb
     bl actor_spawnActorWithId
@@ -1679,7 +1679,7 @@ lbl_fn_8011999C_000015C8:
     mr r3, r31
     li r4, 0x4
     li r5, 0x1
-    bl fn_80119030
+    bl actor_changeState
     addi r3, r1, 0x1c
     li r4, 0xb
     bl actor_spawnActorWithId
@@ -1753,7 +1753,7 @@ lbl_fn_8011999C_000016D8:
     mr r3, r31
     li r4, 0x8
     li r5, 0x0
-    bl fn_80119030
+    bl actor_changeState
     addi r3, r1, 0x18
     li r4, 0xc
     bl actor_spawnActorWithId
@@ -1783,7 +1783,7 @@ lbl_fn_8011999C_00001704:
     mr r3, r31
     li r4, 0x9
     li r5, 0x0
-    bl fn_80119030
+    bl actor_changeState
     addi r3, r1, 0x14
     li r4, 0xc
     bl actor_spawnActorWithId
@@ -1795,7 +1795,7 @@ lbl_fn_8011999C_00001778:
     mr r3, r31
     li r4, 0x4
     li r5, 0x1
-    bl fn_80119030
+    bl actor_changeState
     addi r3, r1, 0x10
     li r4, 0xb
     bl actor_spawnActorWithId
@@ -1843,7 +1843,7 @@ lbl_fn_8011999C_000017F0:
     mr r3, r31
     li r4, 0x9
     li r5, 0x0
-    bl fn_80119030
+    bl actor_changeState
     addi r3, r1, 0xc
     li r4, 0xc
     bl actor_spawnActorWithId
@@ -1855,7 +1855,7 @@ lbl_fn_8011999C_0000185C:
     mr r3, r31
     li r4, 0x4
     li r5, 0x1
-    bl fn_80119030
+    bl actor_changeState
     addi r3, r1, 0x8
     li r4, 0xb
     bl actor_spawnActorWithId

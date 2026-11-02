@@ -101,7 +101,7 @@ void fn_80602A10(void);
 u32 DVDLowGetImmBufferReg(void);
 u32 DVDLowUnmaskStatusInterrupts(void);
 u32 DVDLowMaskCoverInterrupt(void);
-void fn_80602BB0(void);
+void dvd_broadway_queueCmd(void);
 u32 fn_80602D20(void);
 void fn_80602D30(void);
 
@@ -2969,7 +2969,7 @@ u32 DVDLowMaskCoverInterrupt(void)
     return 1;
 }
 
-asm void fn_80602BB0(void)
+asm void dvd_broadway_queueCmd(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -2983,10 +2983,10 @@ asm void fn_80602BB0(void)
     addi r0, r4, 0x1
     stw r0, lbl_8087FDBC
     cmpwi r0, 0x4
-    blt lbl_fn_80602BB0_27e8
+    blt lbl_dvd_broadway_queueCmd_27e8
     li r0, 0x0
     stw r0, lbl_8087FDBC
-lbl_fn_80602BB0_27e8:
+lbl_dvd_broadway_queueCmd_27e8:
     lwz r4, lbl_8087FDD4
     lis r7, lbl_807D12E0@ha
     slwi r0, r0, 5
@@ -3003,7 +3003,7 @@ lbl_fn_80602BB0_27e8:
     or r0, r0, r5
     srwi r0, r0, 31
     cmplwi r0, 0x1
-    bne lbl_fn_80602BB0_284c
+    bne lbl_dvd_broadway_queueCmd_284c
     addi r3, r31, 0x240
     crclr 6
     bl OSReport
@@ -3011,29 +3011,29 @@ lbl_fn_80602BB0_27e8:
     crclr 6
     bl OSReport
     nop
-lbl_fn_80602BB0_2848:
-    b lbl_fn_80602BB0_2848
-lbl_fn_80602BB0_284c:
+lbl_dvd_broadway_queueCmd_2848:
+    b lbl_dvd_broadway_queueCmd_2848
+lbl_dvd_broadway_queueCmd_284c:
     lwz r5, 0xc(r6)
     addis r0, r5, 0x115
     cmplwi r0, 0xdaed
-    beq lbl_fn_80602BB0_286c
+    beq lbl_dvd_broadway_queueCmd_286c
     addi r3, r31, 0x2a8
     crclr 6
     bl OSReport
-lbl_fn_80602BB0_2868:
-    b lbl_fn_80602BB0_2868
-lbl_fn_80602BB0_286c:
+lbl_dvd_broadway_queueCmd_2868:
+    b lbl_dvd_broadway_queueCmd_2868
+lbl_dvd_broadway_queueCmd_286c:
     stwx r3, r7, r8
     addi r0, r4, 0x1
     cmpwi r0, 0x4
     stw r9, 0x4(r6)
     stb r9, 0x8(r6)
     stw r0, lbl_8087FDC0
-    blt lbl_fn_80602BB0_2890
+    blt lbl_dvd_broadway_queueCmd_2890
     li r0, 0x0
     stw r0, lbl_8087FDC0
-lbl_fn_80602BB0_2890:
+lbl_dvd_broadway_queueCmd_2890:
     lwz r0, lbl_8087FDBC
     lis r3, lbl_807D12E0@ha
     slwi r5, r4, 5
@@ -3052,7 +3052,7 @@ lbl_fn_80602BB0_2890:
     li r8, 0x0
     bl IOS_IoctlAsync
     cmpwi r3, 0x0
-    beq lbl_fn_80602BB0_28fc
+    beq lbl_dvd_broadway_queueCmd_28fc
     mr r4, r3
     addi r3, r31, 0xe84
     crclr 6
@@ -3060,10 +3060,10 @@ lbl_fn_80602BB0_2890:
     li r0, 0x0
     stb r0, 0x8(r30)
     li r3, 0x0
-    b lbl_fn_80602BB0_2900
-lbl_fn_80602BB0_28fc:
+    b lbl_dvd_broadway_queueCmd_2900
+lbl_dvd_broadway_queueCmd_28fc:
     li r3, 0x1
-lbl_fn_80602BB0_2900:
+lbl_dvd_broadway_queueCmd_2900:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
