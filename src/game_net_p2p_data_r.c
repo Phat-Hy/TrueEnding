@@ -1288,10 +1288,9 @@ lbl_fn_8050E998_00000F20:
     blr
 }
 
-asm void fn_8050EAE8(void)
+void fn_8050EAE8(void)
 {
-    nofralloc
-    b fn_806CFE90
+    fn_806CFE90();
 }
 
 asm void fn_8050EAEC(void)

@@ -762,10 +762,9 @@ lbl_fn_801FDA20_0000094C:
     blr
 }
 
-asm void fn_801FDE90(void)
+void fn_801FDE90(void)
 {
-    nofralloc
-    b fn_801EDCB8
+    fn_801EDCB8();
 }
 
 asm void fn_801FDE94(void)

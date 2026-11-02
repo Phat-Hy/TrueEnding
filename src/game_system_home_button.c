@@ -1885,10 +1885,9 @@ asm void fn_8036126C(void)
     blr
 }
 
-asm void fn_803612DC(void)
+void fn_803612DC(void)
 {
-    nofralloc
-    b bloom_processPasses
+    bloom_processPasses();
 }
 
 asm void fn_803612E0(void)

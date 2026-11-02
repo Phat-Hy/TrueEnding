@@ -1635,10 +1635,9 @@ lbl_fn_8061BAC0_0000157C:
     blr
 }
 
-asm void fn_8061BB70(void)
+void fn_8061BB70(void)
 {
-    nofralloc
-    b IOS_Close
+    IOS_Close();
 }
 
 asm void fn_8061BB80(void)

@@ -1605,10 +1605,9 @@ lbl_fn_802396A0_000015A8:
     blr
 }
 
-asm void fn_80239794(void)
+void fn_80239794(void)
 {
-    nofralloc
-    b font_loadGlyphMetrics
+    font_loadGlyphMetrics();
 }
 
 asm void fn_80239798(void)

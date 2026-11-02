@@ -817,10 +817,9 @@ lbl_fn_805C3B20_000008F0:
     blr
 }
 
-asm void fn_805C3C40(void)
+void fn_805C3C40(void)
 {
-    nofralloc
-    b fn_805E09A0
+    fn_805E09A0();
 }
 
 asm void fn_805C3C50(void)
@@ -1086,10 +1085,9 @@ asm void fn_805C3F40(void)
     blr
 }
 
-asm void fn_805C3FA0(void)
+void fn_805C3FA0(void)
 {
-    nofralloc
-    b fn_805C38B0
+    fn_805C38B0();
 }
 
 asm void fn_805C3FB0(void)

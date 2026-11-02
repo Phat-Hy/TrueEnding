@@ -1845,10 +1845,9 @@ lbl_fn_802CD73C_00001890:
     blr
 }
 
-asm void fn_802CE42C(void)
+void fn_802CE42C(void)
 {
-    nofralloc
-    b dialog_renderWindow
+    dialog_renderWindow();
 }
 
 asm void fn_802CE430(void)

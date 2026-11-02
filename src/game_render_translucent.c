@@ -568,10 +568,9 @@ lbl_fn_802B7CE0_00000620:
     blr
 }
 
-asm void fn_802B7DE8(void)
+void fn_802B7DE8(void)
 {
-    nofralloc
-    b dialog_renderWindow
+    dialog_renderWindow();
 }
 
 asm void fn_802B7DEC(void)

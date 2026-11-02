@@ -2306,10 +2306,9 @@ lbl_fn_8062BAB0_00001AB0:
     blr
 }
 
-asm void fn_8062BB38(void)
+void fn_8062BB38(void)
 {
-    nofralloc
-    b fn_806345F4
+    fn_806345F4();
 }
 
 asm void fn_8062BB3C(void)

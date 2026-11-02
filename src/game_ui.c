@@ -2780,10 +2780,9 @@ lbl_fn_80040994_0000249C:
     blr
 }
 
-asm void fn_80040B40(void)
+void fn_80040B40(void)
 {
-    nofralloc
-    b fn_80040B44
+    fn_80040B44();
 }
 
 asm void fn_80040B44(void)

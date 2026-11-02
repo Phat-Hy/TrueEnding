@@ -2247,10 +2247,9 @@ lbl_ArenaTask_destructor_00001A9C:
     blr
 }
 
-asm void ArenaTask_slot1(void)
+void ArenaTask_slot1(void)
 {
-    nofralloc
-    b bloom_processPasses
+    bloom_processPasses();
 }
 
 asm void ArenaTask_execute(void)

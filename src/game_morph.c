@@ -1671,10 +1671,9 @@ lbl_fn_800CB6F8_000012E0:
     blr
 }
 
-asm void fn_800CB714(void)
+void fn_800CB714(void)
 {
-    nofralloc
-    b fn_800CA1D4
+    fn_800CA1D4();
 }
 
 asm void fn_800CB718(void)
@@ -1746,26 +1745,22 @@ lbl_fn_800CB788_000013AC:
     blr
 }
 
-asm void fn_800CB7F0(void)
+void fn_800CB7F0(void)
 {
-    nofralloc
-    b fn_800CA144
+    fn_800CA144();
 }
 
-asm void fn_800CB7F4(void)
+void fn_800CB7F4(void)
 {
-    nofralloc
-    b fn_800CA514
+    fn_800CA514();
 }
 
-asm void fn_800CB7F8(void)
+void fn_800CB7F8(void)
 {
-    nofralloc
-    b fn_800CA6C4
+    fn_800CA6C4();
 }
 
-asm void fn_800CB7FC(void)
+void fn_800CB7FC(void)
 {
-    nofralloc
-    b fn_800CA3D4
+    fn_800CA3D4();
 }

@@ -512,9 +512,9 @@ lbl_044c:
 }
 
 
-asm void fn_805FAD40(void) {
-    nofralloc
-    b fn_806003D0
+void fn_805FAD40(void)
+{
+    fn_806003D0();
 }
 
 

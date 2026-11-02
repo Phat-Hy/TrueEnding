@@ -497,10 +497,9 @@ lbl_fn_804FC5AC_0000057C:
     blr
 }
 
-asm void fn_804FC7E0(void)
+void fn_804FC7E0(void)
 {
-    nofralloc
-    b dialog_renderWindow
+    dialog_renderWindow();
 }
 
 asm void fn_804FC7E4(void)

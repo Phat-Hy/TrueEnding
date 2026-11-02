@@ -790,10 +790,9 @@ lbl_fn_80636D40_000009BC:
     blr
 }
 
-asm void fn_80636DF4(void)
+void fn_80636DF4(void)
 {
-    nofralloc
-    b scapi_cleanupContext
+    scapi_cleanupContext();
 }
 
 asm void fn_80636DF8(void)

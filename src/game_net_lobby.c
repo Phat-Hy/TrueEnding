@@ -1349,10 +1349,9 @@ lbl_fn_801EA874_00001128:
     blr
 }
 
-asm void fn_801EA920(void)
+void fn_801EA920(void)
 {
-    nofralloc
-    b bloom_processPasses
+    bloom_processPasses();
 }
 
 asm void fn_801EA924(void)

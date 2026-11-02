@@ -1392,10 +1392,9 @@ lbl_fn_800D69A8_00001398:
     blr
 }
 
-asm void fn_800D6A80(void)
+void fn_800D6A80(void)
 {
-    nofralloc
-    b fn_800D6898
+    fn_800D6898();
 }
 
 asm void fn_800D6A84(void)
@@ -1459,10 +1458,9 @@ lbl_fn_800D6A84_00001474:
     blr
 }
 
-asm void fn_800D6B5C(void)
+void fn_800D6B5C(void)
 {
-    nofralloc
-    b fn_800D6898
+    fn_800D6898();
 }
 
 asm void fn_800D6B60(void)

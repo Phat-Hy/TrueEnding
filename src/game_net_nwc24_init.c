@@ -822,10 +822,9 @@ asm void fn_80698A20(void)
     blr
 }
 
-asm void fn_80698A28(void)
+void fn_80698A28(void)
 {
-    nofralloc
-    b fn_80698088
+    fn_80698088();
 }
 
 asm void fn_80698A2C(void)

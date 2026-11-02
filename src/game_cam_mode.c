@@ -1606,10 +1606,9 @@ u32 fn_800EF3E0(void)
     return 0;
 }
 
-asm void fn_800EF3E8(void)
+void fn_800EF3E8(void)
 {
-    nofralloc
-    b fn_800E2FE0
+    fn_800E2FE0();
 }
 
 asm void cam_initStickBindings(void)

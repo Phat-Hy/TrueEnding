@@ -1803,22 +1803,19 @@ lbl_fn_806A5BC0_00001738:
     blr
 }
 
-asm void fn_806A5C88(void)
+void fn_806A5C88(void)
 {
-    nofralloc
-    b OSInitMutex
+    OSInitMutex();
 }
 
-asm void fn_806A5C8C(void)
+void fn_806A5C8C(void)
 {
-    nofralloc
-    b OSLockMutex
+    OSLockMutex();
 }
 
-asm void fn_806A5C90(void)
+void fn_806A5C90(void)
 {
-    nofralloc
-    b OSUnlockMutex
+    OSUnlockMutex();
 }
 
 asm void fn_806A5CA0(void)
@@ -1995,10 +1992,9 @@ asm void fn_806A5DC0(void)
     blr
 }
 
-asm void fn_806A5EF0(void)
+void fn_806A5EF0(void)
 {
-    nofralloc
-    b fn_806A5F00
+    fn_806A5F00();
 }
 
 asm void fn_806A5F00(void)

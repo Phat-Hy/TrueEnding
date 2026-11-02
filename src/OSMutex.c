@@ -119,16 +119,14 @@ lbl_fn_805F3350_00000104:
     blr
 }
 
-asm void fn_805F3410(void)
+void fn_805F3410(void)
 {
-    nofralloc
-    b OSInitThreadQueue
+    OSInitThreadQueue();
 }
 
-asm void fn_805F3420(void)
+void fn_805F3420(void)
 {
-    nofralloc
-    b OSWakeupThread
+    OSWakeupThread();
 }
 
 asm void fn_805F3430(void)

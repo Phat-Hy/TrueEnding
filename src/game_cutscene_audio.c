@@ -1430,10 +1430,9 @@ asm void fn_8032ECA8(void)
     blr
 }
 
-asm void fn_8032ECB8(void)
+void fn_8032ECB8(void)
 {
-    nofralloc
-    b fn_800E41FC
+    fn_800E41FC();
 }
 
 asm void fn_8032ECBC(void)

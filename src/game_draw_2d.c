@@ -885,10 +885,9 @@ lbl_fn_800B2E5C_00000AC0:
     blr
 }
 
-asm void fn_800B2E9C(void)
+void fn_800B2E9C(void)
 {
-    nofralloc
-    b fn_800B34C0
+    fn_800B34C0();
 }
 
 asm void fn_800B2EA0(void)

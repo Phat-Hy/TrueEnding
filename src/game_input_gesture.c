@@ -434,10 +434,9 @@ lbl_fn_802ED3F0_00000418:
     blr
 }
 
-asm void fn_802ED82C(void)
+void fn_802ED82C(void)
 {
-    nofralloc
-    b fn_802EBABC
+    fn_802EBABC();
 }
 
 asm void fn_802ED830(void)

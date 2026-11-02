@@ -1187,16 +1187,14 @@ lbl_fn_8001C088_00000CF0:
     blr
 }
 
-asm void fn_8001C1B4(void)
+void fn_8001C1B4(void)
 {
-    nofralloc
-    b fn_8001C284
+    fn_8001C284();
 }
 
-asm void fn_8001C1B8(void)
+void fn_8001C1B8(void)
 {
-    nofralloc
-    b fn_8001E730
+    fn_8001E730();
 }
 
 void fn_8001C1BC(void)

@@ -1333,10 +1333,9 @@ lbl_fn_804C54FC_00001100:
     blr
 }
 
-asm void fn_804C5638(void)
+void fn_804C5638(void)
 {
-    nofralloc
-    b atn_Task_unlink
+    atn_Task_unlink();
 }
 
 asm void fn_804C563C(void)

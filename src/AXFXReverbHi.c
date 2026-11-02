@@ -58,8 +58,7 @@ asm void fn_8060B140(void)
     blr
 }
 
-asm void fn_8060B170(void)
+void fn_8060B170(void)
 {
-    nofralloc
-    b fn_8060B380
+    fn_8060B380();
 }

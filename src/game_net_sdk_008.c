@@ -1955,10 +1955,9 @@ void *fn_806AA7C0(void)
     return lbl_807BD27C;
 }
 
-asm void fn_806AA7D0(void)
+void fn_806AA7D0(void)
 {
-    nofralloc
-    b fn_805EBFD0
+    fn_805EBFD0();
 }
 
 asm void fn_806AA7E0(void)

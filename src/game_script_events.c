@@ -768,10 +768,9 @@ lbl_fn_8024B4F0_00000974:
     blr
 }
 
-asm void fn_8024BE90(void)
+void fn_8024BE90(void)
 {
-    nofralloc
-    b fn_8024FCDC
+    fn_8024FCDC();
 }
 
 asm void fn_8024BE94(void)
@@ -1175,10 +1174,9 @@ lbl_fn_8024BE94_00000F44:
     blr
 }
 
-asm void fn_8024C468(void)
+void fn_8024C468(void)
 {
-    nofralloc
-    b dialog_renderWindow
+    dialog_renderWindow();
 }
 
 asm void fn_8024C46C(void)

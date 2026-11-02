@@ -182,10 +182,9 @@ lbl_fn_80361CA4_00000090:
     blr
 }
 
-asm void fn_80361D50(void)
+void fn_80361D50(void)
 {
-    nofralloc
-    b bloom_processPasses
+    bloom_processPasses();
 }
 
 asm void fn_80361D54(void)
@@ -677,10 +676,9 @@ asm void fn_803623C8(void)
     blr
 }
 
-asm void fn_8036243C(void)
+void fn_8036243C(void)
 {
-    nofralloc
-    b bloom_processPasses
+    bloom_processPasses();
 }
 
 asm void fn_80362440(void)
@@ -1033,10 +1031,9 @@ asm void fn_803627F8(void)
     blr
 }
 
-asm void fn_80362924(void)
+void fn_80362924(void)
 {
-    nofralloc
-    b bloom_processPasses
+    bloom_processPasses();
 }
 
 asm void fn_80362928(void)
@@ -1421,10 +1418,9 @@ asm void fn_80362E14(void)
     blr
 }
 
-asm void fn_80362E84(void)
+void fn_80362E84(void)
 {
-    nofralloc
-    b bloom_processPasses
+    bloom_processPasses();
 }
 
 asm void fn_80362E88(void)

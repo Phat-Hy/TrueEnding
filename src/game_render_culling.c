@@ -1867,10 +1867,9 @@ lbl_fn_802AD930_000018E4:
     blr
 }
 
-asm void fn_802ADE54(void)
+void fn_802ADE54(void)
 {
-    nofralloc
-    b dialog_renderWindow
+    dialog_renderWindow();
 }
 
 asm void fn_802ADE58(void)

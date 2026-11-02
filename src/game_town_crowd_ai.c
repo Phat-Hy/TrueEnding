@@ -614,10 +614,9 @@ lbl_fn_803CCF38_0000064C:
     blr
 }
 
-asm void fn_803CCF64(void)
+void fn_803CCF64(void)
 {
-    nofralloc
-    b fn_803CCF68
+    fn_803CCF68();
 }
 
 asm void fn_803CCF68(void)

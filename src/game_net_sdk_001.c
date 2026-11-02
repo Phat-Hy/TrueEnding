@@ -817,10 +817,9 @@ lbl_fn_8069A960_000008C0:
     blr
 }
 
-asm void fn_8069A9B4(void)
+void fn_8069A9B4(void)
 {
-    nofralloc
-    b fn_8069A574
+    fn_8069A574();
 }
 
 void fn_8069A9B8(void *p)
@@ -853,16 +852,14 @@ lbl_fn_8069A9C4_00000920:
 void fn_8069AA04(void) {
 }
 
-asm void fn_8069AA08(void)
+void fn_8069AA08(void)
 {
-    nofralloc
-    b OSLockMutex
+    OSLockMutex();
 }
 
-asm void fn_8069AA0C(void)
+void fn_8069AA0C(void)
 {
-    nofralloc
-    b OSUnlockMutex
+    OSUnlockMutex();
 }
 
 asm void fn_8069AA10(void)

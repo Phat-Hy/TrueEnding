@@ -1006,16 +1006,14 @@ lbl_texCache_freeBlock_00000D1C:
     blr
 }
 
-asm void fn_8022B848(void)
+void fn_8022B848(void)
 {
-    nofralloc
-    b fn_8022A930
+    fn_8022A930();
 }
 
-asm void fn_8022B84C(void)
+void fn_8022B84C(void)
 {
-    nofralloc
-    b fn_80229DF0
+    fn_80229DF0();
 }
 
 asm void texCache_allocateSlot(void)

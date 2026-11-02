@@ -161,10 +161,9 @@ lbl_fn_8017D0B0_00000124:
     blr
 }
 
-asm void fn_8017D138(void)
+void fn_8017D138(void)
 {
-    nofralloc
-    b dialog_renderWindow
+    dialog_renderWindow();
 }
 
 asm void fn_8017D13C(void)
