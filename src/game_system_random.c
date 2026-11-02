@@ -78,7 +78,7 @@ void fn_8020E990(void);
 void fn_8020EACC(void);
 void fn_8020EB0C(void);
 void time_wrapMilliseconds(void);
-void fn_8020EE58(void);
+u32 fn_8020EE58(void);
 void fn_8020EE60(void);
 void fn_8020EE8C(void);
 void rand_scaleRangeInt(void);
@@ -1779,11 +1779,9 @@ lbl_time_wrapMilliseconds_000017C8:
     blr
 }
 
-asm void fn_8020EE58(void)
+u32 fn_8020EE58(void)
 {
-    nofralloc
-    lwz r3, lbl_8087F1F8
-    blr
+    return lbl_8087F1F8;
 }
 
 asm void fn_8020EE60(void)

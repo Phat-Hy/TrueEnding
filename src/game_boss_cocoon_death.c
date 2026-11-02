@@ -1283,12 +1283,9 @@ lbl_fn_80468D48_00000FD8:
     blr
 }
 
-asm void fn_80468F48(void)
+void fn_80468F48(void)
 {
-    nofralloc
-    lfs f0, lbl_80886E84
-    stfs f0, lbl_8087F500
-    blr
+    *(f32 *)&lbl_8087F500 = *(f32 *)&lbl_80886E84;
 }
 
 asm void fn_80468F54(void)

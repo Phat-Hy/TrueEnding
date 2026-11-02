@@ -79,7 +79,7 @@ void fn_80604C50(void);
 void fn_80604FB0(void);
 void fn_806050D0(void);
 void fn_80605140(void);
-void fn_806051C0(void);
+u32 fn_806051C0(void);
 void fn_806051D0(void);
 void VIGetTvFormat(void);
 void fn_806052C0(void);
@@ -951,11 +951,9 @@ asm void fn_80605140(void)
     blr
 }
 
-asm void fn_806051C0(void)
+u32 fn_806051C0(void)
 {
-    nofralloc
-    lwz r3, lbl_8087FE8C
-    blr
+    return lbl_8087FE8C;
 }
 
 asm void fn_806051D0(void)

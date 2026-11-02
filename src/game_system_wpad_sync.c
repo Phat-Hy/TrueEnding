@@ -174,7 +174,7 @@ void fn_8036555C(void);
 void fn_8036562C(void);
 void fn_80365708(void);
 void world_Manager_constructor(void);
-void fn_8036635C(void);
+u32 fn_8036635C(void);
 void fn_80366364(void);
 void fn_803663A4(void);
 void world_Manager_destructor(void);
@@ -1331,11 +1331,9 @@ lbl_world_Manager_constructor_00001010:
     blr
 }
 
-asm void fn_8036635C(void)
+u32 fn_8036635C(void)
 {
-    nofralloc
-    lwz r3, lbl_8087F8A8
-    blr
+    return lbl_8087F8A8;
 }
 
 asm void fn_80366364(void)

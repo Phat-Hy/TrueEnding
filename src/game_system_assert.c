@@ -126,7 +126,7 @@ extern u32 lbl_80882D80;
 void fn_8020685C(void);
 void fn_8020689C(void);
 void sys_findModuleById(void);
-void fn_80206B68(void);
+u32 fn_80206B68(void);
 void fn_80206B70(void);
 void game_initGlobalDatabases(void);
 void assert_generateId(void);
@@ -142,7 +142,7 @@ void fn_80207808(void);
 void fn_8020787C(void);
 void fn_802078C4(void);
 void fn_80207BEC(void);
-void fn_80207C00(void);
+u32 fn_80207C00(void);
 void fn_80207C08(void);
 void fn_80207C34(void);
 void fn_80207CC0(void);
@@ -374,11 +374,9 @@ lbl_sys_findModuleById_00000304:
     blr
 }
 
-asm void fn_80206B68(void)
+u32 fn_80206B68(void)
 {
-    nofralloc
-    lwz r3, lbl_8087F168
-    blr
+    return lbl_8087F168;
 }
 
 asm void fn_80206B70(void)
@@ -1582,11 +1580,9 @@ asm void fn_80207BEC(void)
     blr
 }
 
-asm void fn_80207C00(void)
+u32 fn_80207C00(void)
 {
-    nofralloc
-    lwz r3, lbl_8087F184
-    blr
+    return lbl_8087F184;
 }
 
 asm void fn_80207C08(void)

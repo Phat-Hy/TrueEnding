@@ -137,7 +137,7 @@ void net_isConnectionActive(void);
 void net_checkConnectionSession(void);
 void fn_806A7150(void);
 void fn_806A7250(void);
-void fn_806A72B0(void);
+u32 fn_806A72B0(void);
 void fn_806A72C0(void);
 void fn_806A72E0(void);
 void fn_806A7370(void);
@@ -1159,12 +1159,9 @@ asm void fn_806A7250(void)
     blr
 }
 
-asm void fn_806A72B0(void)
+u32 fn_806A72B0(void)
 {
-    nofralloc
-    lis r3, lbl_8085FF20@ha
-    lwz r3, lbl_8085FF20@l(r3)
-    blr
+    return *(u32 *)lbl_8085FF20;
 }
 
 asm void fn_806A72C0(void)

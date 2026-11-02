@@ -61,8 +61,8 @@ void fn_805DF170(void);
 void fn_805DF2D0(void);
 void fn_805DF440(void);
 void fn_805DF460(void);
-void fn_805DF480(void);
-void fn_805DF490(void);
+u32 fn_805DF480(void);
+u32 fn_805DF490(void);
 void fn_805DF4A0(void);
 void fn_805DF4B0(void);
 void fn_805DF4C0(void);
@@ -1598,20 +1598,14 @@ asm void fn_805DF460(void)
     blr
 }
 
-asm void fn_805DF480(void)
+u32 fn_805DF480(void)
 {
-    nofralloc
-    lis r3, lbl_8079A734@ha
-    lwz r3, lbl_8079A734@l(r3)
-    blr
+    return *(u32 *)lbl_8079A734;
 }
 
-asm void fn_805DF490(void)
+u32 fn_805DF490(void)
 {
-    nofralloc
-    lis r3, lbl_807CA258@ha
-    lwz r3, lbl_807CA258@l(r3)
-    blr
+    return *(u32 *)lbl_807CA258;
 }
 
 asm void fn_805DF4A0(void)

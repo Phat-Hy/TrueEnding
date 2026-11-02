@@ -153,7 +153,7 @@ void fn_805C42B0(void);
 void fn_805C4570(void);
 void fn_805C45E0(void);
 void fn_805C4630(void);
-void fn_805C4680(void);
+u32 fn_805C4680(void);
 void fn_805C4690(void);
 
 asm void fn_805C3330(void)
@@ -1565,12 +1565,9 @@ asm void fn_805C4630(void)
     blr
 }
 
-asm void fn_805C4680(void)
+u32 fn_805C4680(void)
 {
-    nofralloc
-    lis r3, lbl_807CA148@ha
-    lwz r3, lbl_807CA148@l(r3)
-    blr
+    return *(u32 *)lbl_807CA148;
 }
 
 asm void fn_805C4690(void)

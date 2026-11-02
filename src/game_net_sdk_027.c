@@ -99,7 +99,7 @@ void fn_806D7DA0(void);
 void fn_806D7E30(void);
 void fn_806D7E70(void);
 void fn_806D7EE0(void);
-void net_socket_getLastError(void);
+u32 net_socket_getLastError(void);
 void fn_806D7F30(void);
 void fn_806D8060(void);
 void fn_806D8560(void);
@@ -688,12 +688,9 @@ lbl_fn_806D7EE0_000006A8:
     blr
 }
 
-asm void net_socket_getLastError(void)
+u32 net_socket_getLastError(void)
 {
-    nofralloc
-    lis r3, lbl_80860EB0@ha
-    lwz r3, lbl_80860EB0@l(r3)
-    blr
+    return *(u32 *)lbl_80860EB0;
 }
 
 asm void fn_806D7F30(void)

@@ -159,7 +159,7 @@ void fn_806A2138(void);
 void fn_806A21B0(void);
 void fn_806A21E4(void);
 void fn_806A222C(void);
-void fn_806A2288(void);
+u32 fn_806A2288(void);
 void fn_806A2290(void);
 void NWC24iPrepareShutdown(void);
 
@@ -2671,11 +2671,9 @@ lbl_fn_806A222C_00001FB8:
     blr
 }
 
-asm void fn_806A2288(void)
+u32 fn_806A2288(void)
 {
-    nofralloc
-    lwz r3, lbl_80880420
-    blr
+    return lbl_80880420;
 }
 
 asm void fn_806A2290(void)

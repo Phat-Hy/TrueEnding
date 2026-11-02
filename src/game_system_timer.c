@@ -76,7 +76,7 @@ void fn_8020F130(void);
 void fn_8020F190(void);
 void fn_8020F1D0(void);
 void fn_8020F248(void);
-void fn_8020F710(void);
+void fn_8020F710(void *p);
 void fn_8020F71C(void);
 void fn_8020F75C(void);
 void fn_8020F7D0(void);
@@ -616,12 +616,9 @@ lbl_fn_8020F248_0000070C:
     blr
 }
 
-asm void fn_8020F710(void)
+void fn_8020F710(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stb r0, 0x4(r3)
-    blr
+    *(u8 *)((u8 *)p + 0x4) = 0;
 }
 
 asm void fn_8020F71C(void)

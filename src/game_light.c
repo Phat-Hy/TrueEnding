@@ -70,7 +70,7 @@ extern u32 lbl_808811C4;
 extern u32 lbl_808811C8;
 
 /* Function declarations */
-void fn_800CDD40(void);
+void fn_800CDD40(void *p);
 void fn_800CDD4C(void);
 void fn_800CDD8C(void);
 void fn_800CDF84(void);
@@ -80,12 +80,9 @@ void fn_800CE9A4(void);
 void fn_800CECF0(void);
 void fn_800CF45C(void);
 
-asm void fn_800CDD40(void)
+void fn_800CDD40(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stb r0, 0x0(r3)
-    blr
+    *(u8 *)p = 0;
 }
 
 asm void fn_800CDD4C(void)

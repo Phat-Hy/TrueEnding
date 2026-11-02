@@ -44,8 +44,8 @@ void fn_805DC7B0(void);
 void fn_805DC910(void);
 void fn_805DCA80(void);
 void fn_805DCAA0(void);
-void fn_805DCAC0(void);
-void fn_805DCAD0(void);
+u32 fn_805DCAC0(void);
+u32 fn_805DCAD0(void);
 void fn_805DCAE0(void);
 void fn_805DCAF0(void);
 void fn_805DCB00(void);
@@ -537,20 +537,14 @@ asm void fn_805DCAA0(void)
     blr
 }
 
-asm void fn_805DCAC0(void)
+u32 fn_805DCAC0(void)
 {
-    nofralloc
-    lis r3, lbl_8079A730@ha
-    lwz r3, lbl_8079A730@l(r3)
-    blr
+    return *(u32 *)lbl_8079A730;
 }
 
-asm void fn_805DCAD0(void)
+u32 fn_805DCAD0(void)
 {
-    nofralloc
-    lis r3, lbl_807CA250@ha
-    lwz r3, lbl_807CA250@l(r3)
-    blr
+    return *(u32 *)lbl_807CA250;
 }
 
 asm void fn_805DCAE0(void)

@@ -85,7 +85,7 @@ void fn_8006945C(void);
 void fn_8006969C(void);
 void fn_800696B4(void);
 void fn_800696C8(void);
-void fn_8006974C(void);
+void fn_8006974C(void *p);
 void fn_80069758(void);
 void fn_80069798(void);
 void boss_recordDamage(void);
@@ -813,12 +813,9 @@ lbl_fn_800696C8_00000988:
     blr
 }
 
-asm void fn_8006974C(void)
+void fn_8006974C(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stb r0, 0x0(r3)
-    blr
+    *(u8 *)p = 0;
 }
 
 asm void fn_80069758(void)

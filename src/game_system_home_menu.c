@@ -120,11 +120,11 @@ void fn_8035DFB8(void);
 void fn_8035E244(void);
 void fn_8035E2A0(void);
 void fn_8035E314(void);
-void fn_8035E514(void);
+void *fn_8035E514(const void *p, u32 idx);
 void fn_8035E524(void);
 void fn_8035E550(void);
 void fn_8035E5B8(void);
-void fn_8035E720(void);
+void *fn_8035E720(const void *p, u32 idx);
 void fn_8035E730(void);
 void fn_8035E7CC(void);
 void fn_8035E858(void);
@@ -646,13 +646,9 @@ lbl_fn_8035E314_000006E0:
     blr
 }
 
-asm void fn_8035E514(void)
+void *fn_8035E514(const void *p, u32 idx)
 {
-    nofralloc
-    mulli r0, r4, 0x5c
-    lwz r3, 0x4(r3)
-    add r3, r3, r0
-    blr
+    return (u8 *)*(const void **)((const u8 *)p + 0x4) + idx * 0x5c;
 }
 
 asm void fn_8035E524(void)
@@ -804,13 +800,9 @@ lbl_fn_8035E5B8_000008E8:
     blr
 }
 
-asm void fn_8035E720(void)
+void *fn_8035E720(const void *p, u32 idx)
 {
-    nofralloc
-    mulli r0, r4, 0xa8
-    lwz r3, 0x4(r3)
-    add r3, r3, r0
-    blr
+    return (u8 *)*(const void **)((const u8 *)p + 0x4) + idx * 0xa8;
 }
 
 asm void fn_8035E730(void)

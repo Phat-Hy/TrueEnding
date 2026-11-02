@@ -25,7 +25,7 @@ extern u32 lbl_80880BDC;
 /* Function declarations */
 void fn_8008510C(void);
 void fn_800858FC(void);
-void fn_80085B40(void);
+void fn_80085B40(void *p);
 void fn_80085B4C(void);
 void fn_80085BE8(void);
 
@@ -749,12 +749,9 @@ lbl_fn_800858FC_00000A0C:
     blr
 }
 
-asm void fn_80085B40(void)
+void fn_80085B40(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stb r0, 0x68(r3)
-    blr
+    *(u8 *)((u8 *)p + 0x68) = 0;
 }
 
 asm void fn_80085B4C(void)

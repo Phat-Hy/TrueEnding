@@ -44,7 +44,7 @@ u32 fn_80220640(void *p);
 void fn_80220648(void);
 void fn_80220660(void);
 void fn_80220AE4(void);
-void fn_802212B4(void);
+void *fn_802212B4(const void *p, u32 idx);
 void fn_802212C4(void);
 void fn_8022144C(void);
 void fn_802214F8(void);
@@ -1043,13 +1043,9 @@ lbl_fn_80220AE4_00000D84:
     blr
 }
 
-asm void fn_802212B4(void)
+void *fn_802212B4(const void *p, u32 idx)
 {
-    nofralloc
-    mulli r0, r4, 0x14
-    lwz r3, 0x0(r3)
-    add r3, r3, r0
-    blr
+    return (u8 *)*(const void **)p + idx * 0x14;
 }
 
 asm void fn_802212C4(void)

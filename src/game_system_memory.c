@@ -103,7 +103,7 @@ void fn_802085E0(void);
 void fn_80208634(void);
 void fn_80208694(void);
 void fn_80208714(void);
-void fn_80208740(void);
+u32 fn_80208740(void);
 void fn_80208748(void);
 void fn_80208814(void);
 void fn_802088A4(void);
@@ -119,7 +119,7 @@ void fn_802091E8(void);
 void mem_findBlockById(void);
 void fn_80209294(void);
 void fn_802092C0(void);
-void fn_802092F8(void);
+u32 fn_802092F8(void);
 void fn_80209300(void);
 void fn_802096A8(void);
 void fn_802097C4(void);
@@ -263,11 +263,9 @@ lbl_fn_80208714_0000017C:
     blr
 }
 
-asm void fn_80208740(void)
+u32 fn_80208740(void)
 {
-    nofralloc
-    lwz r3, lbl_8087F194
-    blr
+    return lbl_8087F194;
 }
 
 asm void fn_80208748(void)
@@ -1131,11 +1129,9 @@ asm void fn_802092C0(void)
     blr
 }
 
-asm void fn_802092F8(void)
+u32 fn_802092F8(void)
 {
-    nofralloc
-    lwz r3, lbl_8087F19C
-    blr
+    return lbl_8087F19C;
 }
 
 asm void fn_80209300(void)

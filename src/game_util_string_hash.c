@@ -28,7 +28,7 @@ void fn_8058EEF0(void);
 void fn_8058EF0C(void);
 void fn_8058FAD4(void);
 void fn_8058FE90(void);
-void fn_8058FEB8(void);
+void *fn_8058FEB8(const void *p, u32 idx);
 void fn_8058FEC8(void);
 void fn_8058FED4(void);
 void string_copyHash(void);
@@ -1272,13 +1272,9 @@ asm void fn_8058FE90(void)
     blr
 }
 
-asm void fn_8058FEB8(void)
+void *fn_8058FEB8(const void *p, u32 idx)
 {
-    nofralloc
-    mulli r0, r4, 0x58
-    lwz r3, 0x0(r3)
-    add r3, r3, r0
-    blr
+    return (u8 *)*(const void **)p + idx * 0x58;
 }
 
 asm void fn_8058FEC8(void)

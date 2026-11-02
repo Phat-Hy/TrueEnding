@@ -76,7 +76,7 @@ extern u8 lbl_80860C88[];
 void pad_03_806D158C_text(void);
 void fn_806D1590(void);
 void fn_806D15E0(void);
-void fn_806D1600(void);
+u32 fn_806D1600(void);
 void fn_806D1610(void);
 void fn_806D1660(void);
 void fn_806D1670(void);
@@ -138,12 +138,9 @@ asm void fn_806D15E0(void)
     blr
 }
 
-asm void fn_806D1600(void)
+u32 fn_806D1600(void)
 {
-    nofralloc
-    lis r3, lbl_808608C0@ha
-    lwz r3, lbl_808608C0@l(r3)
-    blr
+    return *(u32 *)lbl_808608C0;
 }
 
 asm void fn_806D1610(void)

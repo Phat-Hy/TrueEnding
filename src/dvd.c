@@ -5518,11 +5518,9 @@ lbl_4a68:
 }
 
 
-asm void fn_805FF360(void) {
-    nofralloc
-    li r0, 0x1
-    stw r0, lbl_8087FD44
-    blr 
+void fn_805FF360(void)
+{
+    lbl_8087FD44 = 1;
 }
 
 

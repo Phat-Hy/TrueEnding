@@ -85,8 +85,8 @@ extern u32 lbl_80882F80;
 void fn_8021996C(void);
 void fn_80219C30(void);
 void task_findEntryById(void);
-void fn_80219EB4(void);
-void fn_80219EBC(void);
+u32 fn_80219EB4(void);
+u32 fn_80219EBC(void);
 void fn_80219EC4(void);
 void fn_80219F1C(void);
 void fn_80219F84(void);
@@ -487,18 +487,14 @@ lbl_task_findEntryById_00000540:
     blr
 }
 
-asm void fn_80219EB4(void)
+u32 fn_80219EB4(void)
 {
-    nofralloc
-    lwz r3, lbl_8087F2C8
-    blr
+    return lbl_8087F2C8;
 }
 
-asm void fn_80219EBC(void)
+u32 fn_80219EBC(void)
 {
-    nofralloc
-    lwz r3, lbl_8087F2CC
-    blr
+    return lbl_8087F2CC;
 }
 
 asm void fn_80219EC4(void)

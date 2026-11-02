@@ -423,12 +423,9 @@ asm void fn_805EECD0(void)
     blr
 }
 
-asm void fn_805EED10(void)
+void fn_805EED10(void)
 {
-    nofralloc
-    li r0, 0x1
-    stw r0, lbl_8087FC08
-    blr
+    lbl_8087FC08 = 1;
 }
 
 asm void __OSGetExecParams(void)

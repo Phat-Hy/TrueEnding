@@ -72,7 +72,7 @@ extern u32 lbl_80882E2C;
 
 /* Function declarations */
 void fn_8020A360(void);
-void fn_8020A3E4(void);
+u32 fn_8020A3E4(void);
 void fn_8020A3EC(void);
 void fn_8020A59C(void);
 void fn_8020A5D4(void);
@@ -128,11 +128,9 @@ asm void fn_8020A360(void)
     blr
 }
 
-asm void fn_8020A3E4(void)
+u32 fn_8020A3E4(void)
 {
-    nofralloc
-    lwz r3, lbl_8087F518
-    blr
+    return lbl_8087F518;
 }
 
 asm void fn_8020A3EC(void)

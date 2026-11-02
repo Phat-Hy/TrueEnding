@@ -67,11 +67,11 @@ extern u32 lbl_80882EE8;
 extern u32 lbl_80882EEC;
 
 /* Function declarations */
-void fn_80210AC4(void);
+u32 fn_80210AC4(void);
 void event_processScriptAction(void);
 void fn_80211244(void);
 void event_findEntryById(void);
-void fn_802114D8(void);
+u32 fn_802114D8(void);
 void fn_802114E0(void);
 void fn_8021150C(void);
 void fn_8021154C(void);
@@ -81,11 +81,9 @@ u32 fn_8021175C(void *p);
 void fn_80211770(void);
 void fn_80211940(void);
 
-asm void fn_80210AC4(void)
+u32 fn_80210AC4(void)
 {
-    nofralloc
-    lwz r3, lbl_8087F218
-    blr
+    return lbl_8087F218;
 }
 
 asm void event_processScriptAction(void)
@@ -801,11 +799,9 @@ lbl_event_findEntryById_00000A0C:
     blr
 }
 
-asm void fn_802114D8(void)
+u32 fn_802114D8(void)
 {
-    nofralloc
-    lwz r3, lbl_8087F224
-    blr
+    return lbl_8087F224;
 }
 
 asm void fn_802114E0(void)

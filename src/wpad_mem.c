@@ -101,7 +101,7 @@ void fn_8066E100(void);
 void fn_8066E3D0(void);
 void fn_8066E4B0(void);
 void fn_8066E5C0(void);
-void fn_8066E8F0(void);
+u32 fn_8066E8F0(void);
 void fn_8066E900(void);
 void fn_8066E920(void);
 void fn_8066E940(void);
@@ -5000,11 +5000,9 @@ lbl_fn_8066E5C0_00004734:
     blr
 }
 
-asm void fn_8066E8F0(void)
+u32 fn_8066E8F0(void)
 {
-    nofralloc
-    lwz r3, lbl_808802B8
-    blr
+    return lbl_808802B8;
 }
 
 asm void fn_8066E900(void)

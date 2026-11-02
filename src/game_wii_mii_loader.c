@@ -76,7 +76,7 @@ extern u32 lbl_80887F38;
 void fn_80564344(void);
 void fn_8056503C(void);
 void fn_8056504C(void);
-void fn_8056505C(void);
+void fn_8056505C(void *p);
 void fn_80565068(void);
 void fn_8056542C(void);
 void fn_8056556C(void);
@@ -1043,12 +1043,9 @@ asm void fn_8056504C(void)
     blr
 }
 
-asm void fn_8056505C(void)
+void fn_8056505C(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stb r0, 0x0(r3)
-    blr
+    *(u8 *)p = 0;
 }
 
 asm void fn_80565068(void)

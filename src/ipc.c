@@ -31,8 +31,8 @@ void IPCInit(void);
 void fn_8061BCF0(void);
 void IPCReadReg(void);
 void IPCWriteReg(void);
-void IPCGetBufferHi(void);
-void IPCGetBufferLo(void);
+u32 IPCGetBufferHi(void);
+u32 IPCGetBufferLo(void);
 void IPCSetBufferLo(void);
 void strnlen(void);
 void fn_8061BDC0(void);
@@ -104,18 +104,14 @@ asm void IPCWriteReg(void)
     blr
 }
 
-asm void IPCGetBufferHi(void)
+u32 IPCGetBufferHi(void)
 {
-    nofralloc
-    lwz r3, lbl_808800F0
-    blr
+    return lbl_808800F0;
 }
 
-asm void IPCGetBufferLo(void)
+u32 IPCGetBufferLo(void)
 {
-    nofralloc
-    lwz r3, lbl_808800EC
-    blr
+    return lbl_808800EC;
 }
 
 asm void IPCSetBufferLo(void)

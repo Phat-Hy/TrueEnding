@@ -68,7 +68,7 @@ extern u32 lbl_80882AF0;
 /* Function declarations */
 void fn_801D8CC4(void);
 u32 fn_801D9234(void *p);
-void fn_801D923C(void);
+void *fn_801D923C(const void *p, u32 idx);
 void fn_801D924C(void);
 void fn_801D9388(void);
 void fn_801D94D0(void);
@@ -453,13 +453,9 @@ u32 fn_801D9234(void *p)
     return *(u32 *)((u8 *)p + 4);
 }
 
-asm void fn_801D923C(void)
+void *fn_801D923C(const void *p, u32 idx)
 {
-    nofralloc
-    mulli r0, r4, 0x18
-    lwz r3, 0x0(r3)
-    add r3, r3, r0
-    blr
+    return (u8 *)*(const void **)p + idx * 0x18;
 }
 
 asm void fn_801D924C(void)
