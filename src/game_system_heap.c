@@ -18,7 +18,7 @@ extern void wcs_vformat(void);
 extern void fn_801EC158(void);
 extern void fn_801EC6C0(void);
 extern void fn_801EC784(void);
-extern void fn_801F04FC(void);
+extern void curve_setKeyframeValue(void);
 extern void math_evaluateCurve1D(void);
 extern void fn_801FE99C(void);
 extern void wcslen(void);
@@ -525,22 +525,22 @@ lbl_fn_801F94F4_00000644:
     lfs f1, lbl_80882CA0
     li r4, 0x0
     li r5, 0x1
-    bl fn_801F04FC
+    bl curve_setKeyframeValue
     lfs f1, lbl_80882CA0
     addi r3, r30, 0x138
     li r4, 0x0
     li r5, 0x1
-    bl fn_801F04FC
+    bl curve_setKeyframeValue
     lfs f1, lbl_80882CA4
     addi r3, r30, 0x140
     li r4, 0x0
     li r5, 0x1
-    bl fn_801F04FC
+    bl curve_setKeyframeValue
     lfs f1, lbl_80882CA4
     addi r3, r30, 0x148
     li r4, 0x0
     li r5, 0x1
-    bl fn_801F04FC
+    bl curve_setKeyframeValue
     li r29, 0x0
     li r28, 0x0
     li r27, 0x0
@@ -570,22 +570,22 @@ lbl_fn_801F94F4_000006CC:
     lfs f1, lbl_80882CA0
     li r4, 0x0
     li r5, 0x1
-    bl fn_801F04FC
+    bl curve_setKeyframeValue
     lfs f1, lbl_80882CA0
     addi r3, r30, 0x16c
     li r4, 0x0
     li r5, 0x1
-    bl fn_801F04FC
+    bl curve_setKeyframeValue
     lfs f1, lbl_80882CA4
     addi r3, r30, 0x174
     li r4, 0x0
     li r5, 0x1
-    bl fn_801F04FC
+    bl curve_setKeyframeValue
     lfs f1, lbl_80882CA4
     addi r3, r30, 0x17c
     li r4, 0x0
     li r5, 0x1
-    bl fn_801F04FC
+    bl curve_setKeyframeValue
     li r29, 0x0
     li r31, 0x0
     li r28, 0x0

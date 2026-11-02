@@ -19,7 +19,7 @@ extern void enemy_updateNavSteering(void);
 extern void enemy_updateAnimTimer(void);
 extern void fn_802085E0(void);
 extern void mem_findBlockById(void);
-extern void fn_8020A81C(void);
+extern void str_findEntryByString(void);
 extern void fn_8020FCE8(void);
 extern void fn_80214394(void);
 extern void fn_802143EC(void);
@@ -264,7 +264,7 @@ lbl_world_Manager_update_000001F4:
     cmpwi r3, 0x0
     beq lbl_world_Manager_update_00000218
     lwz r3, 0x14(r3)
-    bl fn_8020A81C
+    bl str_findEntryByString
     mr r31, r3
     b lbl_world_Manager_update_0000021C
 lbl_world_Manager_update_00000218:
@@ -1079,7 +1079,7 @@ lbl_fn_80367A40_00000D7C:
     bl task_getWorkerByIndex
     bl mem_findBlockById
     lwz r3, 0x14(r3)
-    bl fn_8020A81C
+    bl str_findEntryByString
     lwz r3, 0x10d4(r25)
     addi r27, r27, 0x1
     lwz r0, lbl_8087F4F0
@@ -1108,7 +1108,7 @@ lbl_fn_80367A40_00000DEC:
     bl task_getWorkerByIndex
     bl mem_findBlockById
     lwz r3, 0x14(r3)
-    bl fn_8020A81C
+    bl str_findEntryByString
     lwz r0, 0x28(r24)
     addi r28, r28, 0x1
     lwz r3, lbl_8087F4F0
@@ -1182,7 +1182,7 @@ lbl_fn_80367A40_00000EF8:
     bl task_getWorkerByIndex
     bl mem_findBlockById
     lwz r3, 0x14(r3)
-    bl fn_8020A81C
+    bl str_findEntryByString
     lwz r4, lbl_8087F4F0
     lwz r0, 0x78(r3)
     li r3, 0x64

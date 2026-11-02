@@ -22,7 +22,7 @@ extern void fn_8068B1FC(void);
 extern void net_formatIpAddress(void);
 extern void fn_806A4260(void);
 extern void net_castU16(void);
-extern void fn_806A426C(void);
+extern void net_sdk_noop(void);
 extern void net_truncateU16(void);
 extern void net_bufferGetCount(void);
 extern void net_bufferGetElement(void);
@@ -211,7 +211,7 @@ asm void fn_806FD090(void)
     stb r3, 0x72(r1)
     stb r0, 0x73(r1)
     lwz r3, 0x4(r31)
-    bl fn_806A426C
+    bl net_sdk_noop
     stw r3, 0x74(r1)
     lwz r0, 0x8(r31)
     stb r0, 0x79(r1)
@@ -278,7 +278,7 @@ lbl_fn_806FD090_000001D0:
     stb r30, 0x26(r1)
     stb r0, 0x27(r1)
     lwz r3, 0x4(r31)
-    bl fn_806A426C
+    bl net_sdk_noop
     stw r3, 0x28(r1)
     lwz r0, 0x3c(r31)
     stw r0, 0x2c(r1)
@@ -546,7 +546,7 @@ lbl_fn_806FD420_00000560:
     stb r3, 0x26(r1)
     stb r0, 0x27(r1)
     lwz r3, 0x4(r31)
-    bl fn_806A426C
+    bl net_sdk_noop
     stw r3, 0x28(r1)
     lwz r0, 0x3c(r31)
     stw r0, 0x2c(r1)
@@ -1110,7 +1110,7 @@ asm void fn_806FDD20(void)
     b lbl_fn_806FDD20_00000F10
 lbl_fn_806FDD20_00000DD4:
     lwz r3, 0x20(r31)
-    bl fn_806A426C
+    bl net_sdk_noop
     addi r29, r1, 0x18
     stw r3, 0x8(r1)
     mr r3, r29

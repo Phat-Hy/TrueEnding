@@ -33,7 +33,7 @@ extern void fn_806D7C40(void);
 extern void fn_806D7CB0(void);
 extern void fn_806D7D60(void);
 extern void fn_806D7EE0(void);
-extern void fn_806D7F20(void);
+extern void net_socket_getLastError(void);
 extern void fn_806D8060(void);
 extern void fn_806D8560(void);
 extern void net_strdup(void);
@@ -933,7 +933,7 @@ asm void fn_806DE550(void)
     cmpwi r3, -0x1
     bne lbl_fn_806DE550_00000BE4
     mr r3, r28
-    bl fn_806D7F20
+    bl net_socket_getLastError
     cmpwi r3, -0x6
     beq lbl_fn_806DE550_00000BD4
     cmpwi r3, -0x1a
@@ -1151,7 +1151,7 @@ lbl_fn_806DE7F0_00000E50:
     mr r29, r3
     bne lbl_fn_806DE7F0_00000EA8
     mr r3, r20
-    bl fn_806D7F20
+    bl net_socket_getLastError
     cmpwi r3, -0x6
     beq lbl_fn_806DE7F0_00000EC0
     cmpwi r3, -0x1a
@@ -2097,7 +2097,7 @@ lbl_fn_806DF2E0_00001B48:
     cmpwi r3, -0x1
     bne lbl_fn_806DF2E0_00001BB4
     lwz r3, 0x1f0(r29)
-    bl fn_806D7F20
+    bl net_socket_getLastError
     cmpwi r3, -0x6
     beq lbl_fn_806DF2E0_00001BB4
     cmpwi r3, -0x1a

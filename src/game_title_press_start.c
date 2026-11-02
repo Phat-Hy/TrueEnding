@@ -11,7 +11,7 @@ extern void actor_dispatchMessage(void);
 extern void item_testLineOfSight(void);
 extern void mem_free(void);
 extern void mem_findBlockById(void);
-extern void fn_8020A81C(void);
+extern void str_findEntryByString(void);
 extern void fn_8020FCE8(void);
 extern void fn_8036E430(void);
 extern void fn_8036E92C(void);
@@ -144,7 +144,7 @@ asm void fn_803AAAE4(void)
     cmpwi r3, 0x0
     beq lbl_fn_803AAAE4_000000C4
     lwz r3, 0x14(r3)
-    bl fn_8020A81C
+    bl str_findEntryByString
     mr r29, r3
     b lbl_fn_803AAAE4_000000C8
 lbl_fn_803AAAE4_000000C4:

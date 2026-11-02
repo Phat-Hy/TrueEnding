@@ -78,7 +78,7 @@ void fn_8020A59C(void);
 void fn_8020A5D4(void);
 void str_appendString(void);
 void fn_8020A808(void);
-void fn_8020A81C(void);
+void str_findEntryByString(void);
 void fn_8020A888(void);
 void fn_8020A90C(void);
 void fn_8020AFF4(void);
@@ -448,14 +448,14 @@ asm void fn_8020A808(void)
     blr
 }
 
-asm void fn_8020A81C(void)
+asm void str_findEntryByString(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
     mflr r0
     cmpwi r3, 0x0
     stw r0, 0x14(r1)
-    beq lbl_fn_8020A81C_00000514
+    beq lbl_str_findEntryByString_00000514
     bl str_findChar
     lwz r5, lbl_8087F1B8
     li r6, 0x0
@@ -463,21 +463,21 @@ asm void fn_8020A81C(void)
     mr r4, r5
     mtctr r0
     cmpwi r0, 0x0
-    ble lbl_fn_8020A81C_00000514
-lbl_fn_8020A81C_000004F0:
+    ble lbl_str_findEntryByString_00000514
+lbl_str_findEntryByString_000004F0:
     lwz r0, 0xc0(r4)
     cmplw r3, r0
-    bne lbl_fn_8020A81C_00000508
+    bne lbl_str_findEntryByString_00000508
     mulli r0, r6, 0x13c
     add r3, r5, r0
-    b lbl_fn_8020A81C_00000518
-lbl_fn_8020A81C_00000508:
+    b lbl_str_findEntryByString_00000518
+lbl_str_findEntryByString_00000508:
     addi r4, r4, 0x13c
     addi r6, r6, 0x1
-    bdnz lbl_fn_8020A81C_000004F0
-lbl_fn_8020A81C_00000514:
+    bdnz lbl_str_findEntryByString_000004F0
+lbl_str_findEntryByString_00000514:
     lwz r3, lbl_8087F1B8
-lbl_fn_8020A81C_00000518:
+lbl_str_findEntryByString_00000518:
     lwz r0, 0x14(r1)
     mtlr r0
     addi r1, r1, 0x10

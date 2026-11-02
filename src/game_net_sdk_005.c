@@ -103,7 +103,7 @@ void fn_806A4100(void);
 void net_formatIpAddress(void);
 void fn_806A4260(void);
 u32 net_castU16(u32 val);
-void fn_806A426C(void);
+void net_sdk_noop(void);
 u32 net_truncateU16(u32 val);
 void fn_806A4278(void);
 
@@ -2471,7 +2471,7 @@ u32 net_castU16(u32 val)
     return (u16)val;
 }
 
-void fn_806A426C(void) {
+void net_sdk_noop(void) {
 }
 
 u32 net_truncateU16(u32 val)

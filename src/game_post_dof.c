@@ -29,7 +29,7 @@ extern void dialog_updateScriptState(void);
 extern void actor_setState(void);
 extern void battle_updateTargetAggro(void);
 extern void battle_awardExp(void);
-extern void fn_8020A81C(void);
+extern void str_findEntryByString(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_ctor(void);
@@ -1171,7 +1171,7 @@ asm void fn_802C0C38(void)
     lwz r0, 0x5c(r28)
     stfs f0, 0x568(r28)
     stw r0, 0x1704(r28)
-    bl fn_8020A81C
+    bl str_findEntryByString
     lwz r0, 0x14a8(r28)
     stw r3, 0x1708(r28)
     mr r3, r28

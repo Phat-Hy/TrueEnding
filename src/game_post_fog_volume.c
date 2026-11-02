@@ -29,7 +29,7 @@ extern void equip_getGlobalManager(void);
 extern void boss_updatePhaseState(void);
 extern void npc_getDialogController(void);
 extern void bgm_getGlobalManager(void);
-extern void fn_8020A81C(void);
+extern void str_findEntryByString(void);
 extern void res_MsgHandle_ctor(void);
 extern void res_Resource_destructor(void);
 extern void res_Resource_unload(void);
@@ -1495,7 +1495,7 @@ lbl_fn_802D7E80_000013B8:
     bne lbl_fn_802D7E80_000013E8
     addi r3, r1, 0x28
     bl talk_parseQuotedString
-    bl fn_8020A81C
+    bl str_findEntryByString
     cmpwi r3, 0x0
     beq lbl_fn_802D7E80_00001410
     stw r3, 0x16b0(r31)

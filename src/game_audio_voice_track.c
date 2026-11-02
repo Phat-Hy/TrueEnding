@@ -38,7 +38,7 @@ extern void fn_8013C554(void);
 extern void dialog_updateScriptState(void);
 extern void fn_8017A300(void);
 extern void fn_801C3910(void);
-extern void fn_8020A81C(void);
+extern void str_findEntryByString(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
@@ -633,7 +633,7 @@ lbl_fn_80304718_0000073C:
     lis r3, lbl_80748A14@ha
     addi r3, r3, lbl_80748A14@l
     addi r3, r3, 0x13f
-    bl fn_8020A81C
+    bl str_findEntryByString
     mr r4, r3
     mr r3, r31
     bl fn_8017A300

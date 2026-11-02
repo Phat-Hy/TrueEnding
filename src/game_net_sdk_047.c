@@ -27,7 +27,7 @@ extern void fn_806D5930(void);
 extern void fn_806D5C90(void);
 extern void fn_806D6140(void);
 extern void fn_806D64B0(void);
-extern void fn_806D6560(void);
+extern void net_hashTable_remove(void);
 extern void net_invokeChannelCallback(void);
 extern void net_socketClose(void);
 extern void fn_806D7AE0(void);
@@ -153,7 +153,7 @@ lbl_fn_80701470_0000009C:
     mr r3, r28
     bl net_http_initConnection
     addi r4, r1, 0x8
-    bl fn_806D6560
+    bl net_hashTable_remove
 lbl_fn_80701470_000000E8:
     addi r27, r27, 0x1
 lbl_fn_80701470_000000EC:
@@ -187,7 +187,7 @@ lbl_fn_80701470_00000120:
     mr r3, r28
     bl net_http_initConnection
     addi r4, r1, 0x10
-    bl fn_806D6560
+    bl net_hashTable_remove
 lbl_fn_80701470_00000160:
     addi r26, r26, 0x4
     addi r27, r27, 0x1
@@ -331,7 +331,7 @@ lbl_fn_80701700_00000308:
     mr r3, r31
     bl net_http_initConnection
     addi r4, r1, 0x10
-    bl fn_806D6560
+    bl net_hashTable_remove
 lbl_fn_80701700_00000354:
     addi r30, r30, 0x1
 lbl_fn_80701700_00000358:
@@ -365,7 +365,7 @@ lbl_fn_80701700_0000038C:
     mr r3, r31
     bl net_http_initConnection
     addi r4, r1, 0x8
-    bl fn_806D6560
+    bl net_hashTable_remove
 lbl_fn_80701700_000003CC:
     addi r29, r29, 0x4
     addi r30, r30, 0x1
@@ -437,7 +437,7 @@ lbl_fn_80701870_0000047C:
     mr r3, r31
     bl net_http_initConnection
     addi r4, r1, 0x10
-    bl fn_806D6560
+    bl net_hashTable_remove
 lbl_fn_80701870_000004C8:
     addi r30, r30, 0x1
 lbl_fn_80701870_000004CC:
@@ -471,7 +471,7 @@ lbl_fn_80701870_00000500:
     mr r3, r31
     bl net_http_initConnection
     addi r4, r1, 0x18
-    bl fn_806D6560
+    bl net_hashTable_remove
 lbl_fn_80701870_00000540:
     addi r28, r28, 0x4
     addi r30, r30, 0x1
@@ -1732,7 +1732,7 @@ lbl_fn_80702A90_00001664:
     mr r3, r27
     bl net_http_initConnection
     addi r4, r1, 0x10
-    bl fn_806D6560
+    bl net_hashTable_remove
 lbl_fn_80702A90_000016B0:
     addi r26, r26, 0x1
 lbl_fn_80702A90_000016B4:
@@ -2487,7 +2487,7 @@ lbl_fn_807031B0_000020A8:
     mr r3, r30
     bl net_http_initConnection
     addi r4, r1, 0x18
-    bl fn_806D6560
+    bl net_hashTable_remove
 lbl_fn_807031B0_000020F4:
     addi r26, r26, 0x1
 lbl_fn_807031B0_000020F8:
@@ -2521,7 +2521,7 @@ lbl_fn_807031B0_0000212C:
     mr r3, r30
     bl net_http_initConnection
     addi r4, r1, 0x10
-    bl fn_806D6560
+    bl net_hashTable_remove
 lbl_fn_807031B0_0000216C:
     addi r27, r27, 0x4
     addi r26, r26, 0x1

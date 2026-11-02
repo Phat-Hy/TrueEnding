@@ -13,7 +13,7 @@ extern void strncmp(void);
 extern void fn_806825FC(void);
 extern void strstr(void);
 extern void atoi(void);
-extern void fn_806A426C(void);
+extern void net_sdk_noop(void);
 extern void net_truncateU16(void);
 extern void net_pollActiveSockets(void);
 extern void net_bufferGetCount(void);
@@ -23,7 +23,7 @@ extern void fn_806D7AE0(void);
 extern void fn_806D7C40(void);
 extern void fn_806D7E30(void);
 extern void fn_806D7EE0(void);
-extern void fn_806D7F20(void);
+extern void net_socket_getLastError(void);
 extern void fn_806D7F30(void);
 extern void fn_806D8560(void);
 extern void fn_806D85E0(void);
@@ -736,7 +736,7 @@ lbl_fn_806F50D0_00000880:
     lwz r3, 0x0(r27)
     lwz r3, 0x8(r3)
     bl fn_806DA870
-    bl fn_806A426C
+    bl net_sdk_noop
     stw r3, 0x1c(r1)
     addi r3, r1, 0x20
     addi r4, r1, 0x14
@@ -868,7 +868,7 @@ lbl_fn_806F50D0_00000A60:
     bl net_truncateU16
     sth r3, 0xe(r1)
     mr r3, r26
-    bl fn_806A426C
+    bl net_sdk_noop
     stw r3, 0x10(r1)
     addi r3, r1, 0x20
     addi r4, r1, 0x8
@@ -1583,7 +1583,7 @@ asm void fn_806F5D90(void)
     li r0, 0x5
     stw r4, 0x124(r31)
     stw r0, 0x40(r31)
-    bl fn_806D7F20
+    bl net_socket_getLastError
     stw r3, 0x54(r31)
     b lbl_fn_806F5D90_00001670
 lbl_fn_806F5D90_0000147C:
@@ -1596,7 +1596,7 @@ lbl_fn_806F5D90_0000147C:
     stw r3, 0x124(r31)
     lwz r3, 0x50(r31)
     stw r0, 0x40(r31)
-    bl fn_806D7F20
+    bl net_socket_getLastError
     stw r3, 0x54(r31)
     b lbl_fn_806F5D90_00001670
 lbl_fn_806F5D90_000014AC:
@@ -1614,7 +1614,7 @@ lbl_fn_806F5D90_000014AC:
     stw r3, 0x124(r31)
     lwz r3, 0x50(r31)
     stw r0, 0x40(r31)
-    bl fn_806D7F20
+    bl net_socket_getLastError
     stw r3, 0x54(r31)
     b lbl_fn_806F5D90_00001670
 lbl_fn_806F5D90_000014F0:
@@ -1663,7 +1663,7 @@ lbl_fn_806F5D90_00001570:
     cmpwi r3, -0x1
     bne lbl_fn_806F5D90_000015C8
     lwz r3, 0x50(r31)
-    bl fn_806D7F20
+    bl net_socket_getLastError
     cmpwi r3, -0x6
     beq lbl_fn_806F5D90_000015C8
     cmpwi r3, -0x1a
@@ -1697,7 +1697,7 @@ lbl_fn_806F5D90_000015F8:
     stw r0, 0x40(r31)
     bne lbl_fn_806F5D90_00001620
     lwz r3, 0x50(r31)
-    bl fn_806D7F20
+    bl net_socket_getLastError
     stw r3, 0x54(r31)
     b lbl_fn_806F5D90_00001670
 lbl_fn_806F5D90_00001620:
@@ -2175,7 +2175,7 @@ lbl_fn_806F65D0_00001CA0:
     stw r0, 0x40(r31)
     bne lbl_fn_806F65D0_00001CC8
     lwz r3, 0x50(r31)
-    bl fn_806D7F20
+    bl net_socket_getLastError
     stw r3, 0x54(r31)
     b lbl_fn_806F65D0_00001D00
 lbl_fn_806F65D0_00001CC8:
@@ -2383,7 +2383,7 @@ lbl_fn_806F67A0_00001F80:
     stw r3, 0x124(r29)
     lwz r3, 0x50(r29)
     stw r0, 0x40(r29)
-    bl fn_806D7F20
+    bl net_socket_getLastError
     stw r3, 0x54(r29)
 lbl_fn_806F67A0_00001FA4:
     lwz r0, 0x424(r1)

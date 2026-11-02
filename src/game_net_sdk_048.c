@@ -31,13 +31,13 @@ extern void fn_80609D00(void);
 extern void strncmp(void);
 extern void __construct_new_array(void);
 extern void __destroy_new_array(void);
-extern void fn_806A426C(void);
+extern void net_sdk_noop(void);
 extern void net_truncateU16(void);
 extern void net_pollActiveSockets(void);
 extern void net_bufferGetCount(void);
 extern void net_bufferGetElement(void);
 extern void fn_806D5930(void);
-extern void fn_806D6560(void);
+extern void net_hashTable_remove(void);
 extern void net_invokeChannelCallback(void);
 extern void net_socketClose(void);
 extern void net_checkSocketStatus(void);
@@ -242,7 +242,7 @@ lbl_fn_80703610_00000150:
     mr r3, r31
     bl net_http_initConnection
     addi r4, r1, 0x10
-    bl fn_806D6560
+    bl net_hashTable_remove
 lbl_fn_80703610_0000019C:
     addi r30, r30, 0x1
 lbl_fn_80703610_000001A0:
@@ -276,7 +276,7 @@ lbl_fn_80703610_000001D4:
     mr r3, r31
     bl net_http_initConnection
     addi r4, r1, 0x8
-    bl fn_806D6560
+    bl net_hashTable_remove
 lbl_fn_80703610_00000214:
     addi r29, r29, 0x4
     addi r30, r30, 0x1
@@ -441,7 +441,7 @@ asm void fn_80703A10(void)
     stb r8, 0xf(r1)
     stb r7, 0x10(r1)
     stb r0, 0x11(r1)
-    bl fn_806A426C
+    bl net_sdk_noop
     stw r3, 0x8(r1)
     addi r3, r1, 0x12
     addi r4, r1, 0x8

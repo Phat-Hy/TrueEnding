@@ -16,7 +16,7 @@ extern void strcmp(void);
 extern void strncmp(void);
 extern void strstr(void);
 extern void atoi(void);
-extern void fn_806A426C(void);
+extern void net_sdk_noop(void);
 extern void net_truncateU16(void);
 extern void fn_806D57A0(void);
 extern void fn_806D63A0(void);
@@ -1258,7 +1258,7 @@ lbl_fn_806DC260_00001074:
 lbl_fn_806DC260_0000109C:
     addi r3, r1, 0x78
     bl atoi
-    bl fn_806A426C
+    bl net_sdk_noop
     stw r3, 0x10(r24)
 lbl_fn_806DC260_000010AC:
     addi r3, r1, 0x188
@@ -1614,7 +1614,7 @@ lbl_fn_806DCD80_00001570:
 lbl_fn_806DCD80_000015C0:
     addi r3, r1, 0x18
     bl atoi
-    bl fn_806A426C
+    bl net_sdk_noop
     stw r3, 0x1c(r24)
     mr r3, r27
     addi r4, r30, 0xb8
@@ -1657,7 +1657,7 @@ lbl_fn_806DCD80_00001614:
 lbl_fn_806DCD80_00001664:
     addi r3, r1, 0x18
     bl atoi
-    bl fn_806A426C
+    bl net_sdk_noop
     stw r3, 0x24(r24)
     mr r3, r27
     addi r4, r30, 0xcc
@@ -1679,7 +1679,7 @@ lbl_fn_806DCD80_00001664:
 lbl_fn_806DCD80_000016B8:
     addi r3, r1, 0x18
     bl atoi
-    bl fn_806A426C
+    bl net_sdk_noop
     stw r3, 0x28(r24)
     mr r3, r27
     addi r4, r30, 0xd8

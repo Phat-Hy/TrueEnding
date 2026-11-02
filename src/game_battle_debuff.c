@@ -14,7 +14,7 @@ extern void colli_findDynamicSlot(void);
 extern void colli_findStaticSlot(void);
 extern void fn_80107CA8(void);
 extern void fn_8010CA34(void);
-extern void fn_8011BEB8(void);
+extern void player_resetActionState(void);
 extern void enemy_evalAnimTrack(void);
 extern void fn_8013A21C(void);
 extern void dialog_initScriptSlot(void);
@@ -923,7 +923,7 @@ lbl_fn_8016DF3C_00000B88:
 lbl_fn_8016DF3C_00000B9C:
     li r4, 0x0
     addi r3, r3, 0xc58
-    bl fn_8011BEB8
+    bl player_resetActionState
     lwz r0, 0x12a4(r30)
     srwi. r0, r0, 31
     beq lbl_fn_8016DF3C_00000CF0
@@ -1104,7 +1104,7 @@ lbl_fn_8016DF3C_00000E08:
 lbl_fn_8016DF3C_00000E1C:
     li r4, 0x0
     addi r3, r3, 0xc58
-    bl fn_8011BEB8
+    bl player_resetActionState
     lwz r0, 0x12a4(r30)
     srwi. r0, r0, 31
     beq lbl_fn_8016DF3C_00000F70

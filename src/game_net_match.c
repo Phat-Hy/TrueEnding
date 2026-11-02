@@ -57,7 +57,7 @@ void fn_801EFB90(void);
 void player_syncPositionAndMotion(void);
 void fn_801F0364(void);
 void fn_801F03AC(void);
-void fn_801F04FC(void);
+void curve_setKeyframeValue(void);
 void math_evaluateCurve1D(void);
 void fn_801F0670(void);
 void fn_801F0758(void);
@@ -1357,7 +1357,7 @@ lbl_fn_801F03AC_00001188:
     blr
 }
 
-asm void fn_801F04FC(void)
+asm void curve_setKeyframeValue(void)
 {
     nofralloc
     lwz r0, 0x4(r3)
@@ -1366,19 +1366,19 @@ asm void fn_801F04FC(void)
     mtctr r0
     cmpwi r0, 0x0
     blelr
-lbl_fn_801F04FC_000011A8:
+lbl_curve_setKeyframeValue_000011A8:
     lwz r6, 0x0(r3)
     lwzx r0, r6, r5
     cmpw r4, r0
-    bne lbl_fn_801F04FC_000011C8
+    bne lbl_curve_setKeyframeValue_000011C8
     slwi r0, r7, 3
     add r3, r6, r0
     stfs f1, 0x4(r3)
     blr
-lbl_fn_801F04FC_000011C8:
+lbl_curve_setKeyframeValue_000011C8:
     addi r5, r5, 0x8
     addi r7, r7, 0x1
-    bdnz lbl_fn_801F04FC_000011A8
+    bdnz lbl_curve_setKeyframeValue_000011A8
     blr
 }
 

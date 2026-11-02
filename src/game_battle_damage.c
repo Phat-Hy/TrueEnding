@@ -10,7 +10,7 @@ extern void mem_alloc(void);
 extern void atn_Anim_getLayerTrack(void);
 extern void colli_findDynamicSlot(void);
 extern void colli_findStaticSlot(void);
-extern void fn_8011BEB8(void);
+extern void player_resetActionState(void);
 extern void dialog_initScriptSlot(void);
 extern void dialog_selectChoice(void);
 extern void actor_setState(void);
@@ -1529,7 +1529,7 @@ lbl_fn_8016AFE8_00001484:
 lbl_fn_8016AFE8_000014B0:
     addi r3, r30, 0xc58
     li r4, 0x0
-    bl fn_8011BEB8
+    bl player_resetActionState
     lwz r0, 0x12a4(r30)
     srwi. r0, r0, 31
     beq lbl_fn_8016AFE8_00001604

@@ -34,7 +34,7 @@ void fn_806197B0(void);
 void fn_80619920(void);
 void fn_806199D0(void);
 void fn_80619A00(void);
-void fn_80619AB0(void);
+void mem_heap_free(void);
 void fn_80619B80(void);
 void fn_80619C60(void);
 void fn_80619CB0(void);
@@ -910,7 +910,7 @@ lbl_fn_80619A00_00000B30:
     blr
 }
 
-asm void fn_80619AB0(void)
+asm void mem_heap_free(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -921,13 +921,13 @@ asm void fn_80619AB0(void)
     mr r31, r4
     stw r30, 0x18(r1)
     mr r30, r3
-    beq lbl_fn_80619AB0_00000BFC
+    beq lbl_mem_heap_free_00000BFC
     lwz r0, 0x38(r3)
     rlwinm. r0, r0, 0, 29, 29
-    beq lbl_fn_80619AB0_00000B88
+    beq lbl_mem_heap_free_00000B88
     addi r3, r3, 0x20
     bl OSLockMutex
-lbl_fn_80619AB0_00000B88:
+lbl_mem_heap_free_00000B88:
     lhz r0, -0xe(r31)
     subi r6, r31, 0x10
     addi r3, r30, 0x3c
@@ -941,27 +941,27 @@ lbl_fn_80619AB0_00000B88:
     lwz r5, -0x8(r31)
     lwz r4, -0x4(r31)
     cmpwi r5, 0x0
-    beq lbl_fn_80619AB0_00000BC8
+    beq lbl_mem_heap_free_00000BC8
     stw r4, 0xc(r5)
-    b lbl_fn_80619AB0_00000BCC
-lbl_fn_80619AB0_00000BC8:
+    b lbl_mem_heap_free_00000BCC
+lbl_mem_heap_free_00000BC8:
     stw r4, 0x8(r3)
-lbl_fn_80619AB0_00000BCC:
+lbl_mem_heap_free_00000BCC:
     cmpwi r4, 0x0
-    beq lbl_fn_80619AB0_00000BDC
+    beq lbl_mem_heap_free_00000BDC
     stw r5, 0x8(r4)
-    b lbl_fn_80619AB0_00000BE0
-lbl_fn_80619AB0_00000BDC:
+    b lbl_mem_heap_free_00000BE0
+lbl_mem_heap_free_00000BDC:
     stw r5, 0xc(r3)
-lbl_fn_80619AB0_00000BE0:
+lbl_mem_heap_free_00000BE0:
     addi r4, r1, 0x8
     bl fn_806197B0
     lwz r0, 0x38(r30)
     rlwinm. r0, r0, 0, 29, 29
-    beq lbl_fn_80619AB0_00000BFC
+    beq lbl_mem_heap_free_00000BFC
     addi r3, r30, 0x20
     bl OSUnlockMutex
-lbl_fn_80619AB0_00000BFC:
+lbl_mem_heap_free_00000BFC:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)

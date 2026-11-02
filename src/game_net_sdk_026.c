@@ -55,7 +55,7 @@ void fn_806D62F0(void);
 void fn_806D63A0(void);
 void fn_806D6420(void);
 void fn_806D64B0(void);
-void fn_806D6560(void);
+void net_hashTable_remove(void);
 void net_invokeChannelCallback(void);
 void fn_806D66B0(void);
 void fn_806D6720(void);
@@ -1134,7 +1134,7 @@ lbl_fn_806D64B0_00000DA4:
     blr
 }
 
-asm void fn_806D6560(void)
+asm void net_hashTable_remove(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -1146,10 +1146,10 @@ asm void fn_806D6560(void)
     mr r30, r4
     stw r29, 0x14(r1)
     mr r29, r3
-    bne lbl_fn_806D6560_00000DF8
+    bne lbl_net_hashTable_remove_00000DF8
     li r3, 0x0
-    b lbl_fn_806D6560_00000E50
-lbl_fn_806D6560_00000DF8:
+    b lbl_net_hashTable_remove_00000E50
+lbl_net_hashTable_remove_00000DF8:
     lwz r12, 0xc(r29)
     mr r3, r30
     lwz r4, 0x4(r29)
@@ -1164,16 +1164,16 @@ lbl_fn_806D6560_00000DF8:
     li r7, 0x0
     bl fn_806D5E60
     cmpwi r3, -0x1
-    bne lbl_fn_806D6560_00000E3C
+    bne lbl_net_hashTable_remove_00000E3C
     li r3, 0x0
-    b lbl_fn_806D6560_00000E50
-lbl_fn_806D6560_00000E3C:
+    b lbl_net_hashTable_remove_00000E50
+lbl_net_hashTable_remove_00000E3C:
     lwz r5, 0x0(r29)
     mr r4, r3
     lwzx r3, r5, r31
     bl fn_806D5C90
     li r3, 0x1
-lbl_fn_806D6560_00000E50:
+lbl_net_hashTable_remove_00000E50:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)

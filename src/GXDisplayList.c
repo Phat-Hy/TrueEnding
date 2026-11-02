@@ -17,7 +17,7 @@ extern void fn_805E96D0(void);
 extern void OSLockMutex(void);
 extern void OSUnlockMutex(void);
 extern void fn_80619A00(void);
-extern void fn_80619AB0(void);
+extern void mem_heap_free(void);
 
 /* External data declarations */
 
@@ -114,7 +114,7 @@ asm void fn_8061A0E0(void)
 {
     nofralloc
     lwz r3, 0x4(r3)
-    b fn_80619AB0
+    b mem_heap_free
 }
 
 asm void fn_8061A0F0(void)

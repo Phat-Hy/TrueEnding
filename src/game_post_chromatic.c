@@ -59,7 +59,7 @@ extern void battle_updateTargetAggro(void);
 extern void battle_awardExp(void);
 extern void battle_updateActorStatus(void);
 extern void str_appendString(void);
-extern void fn_8020A81C(void);
+extern void str_findEntryByString(void);
 extern void task_findEntryById(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
@@ -927,7 +927,7 @@ lbl_fn_802CD3BC_00000B0C:
     bne lbl_fn_802CD3BC_00000B34
     addi r3, r1, 0x8
     bl talk_parseQuotedString
-    bl fn_8020A81C
+    bl str_findEntryByString
     stw r3, 0x1544(r31)
     b lbl_fn_802CD3BC_00000B60
 lbl_fn_802CD3BC_00000B34:

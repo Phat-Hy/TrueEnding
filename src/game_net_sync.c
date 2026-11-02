@@ -34,7 +34,7 @@ extern void battle_activateExpReward(void);
 extern void actor_getMovementFlags(void);
 extern void fn_801F0364(void);
 extern void fn_801F03AC(void);
-extern void fn_801F04FC(void);
+extern void curve_setKeyframeValue(void);
 extern void math_evaluateCurve1D(void);
 extern void fn_801FE89C(void);
 extern void fn_801FE91C(void);
@@ -1417,27 +1417,27 @@ lbl_fn_801EC158_00001228:
     lfs f1, lbl_80882BE8
     li r4, 0x0
     li r5, 0x1
-    bl fn_801F04FC
+    bl curve_setKeyframeValue
     lfs f1, lbl_80882BE8
     addi r3, r30, 0x28
     li r4, 0x0
     li r5, 0x1
-    bl fn_801F04FC
+    bl curve_setKeyframeValue
     lfs f1, lbl_80882BEC
     addi r3, r30, 0x30
     li r4, 0x0
     li r5, 0x1
-    bl fn_801F04FC
+    bl curve_setKeyframeValue
     lfs f1, lbl_80882BEC
     addi r3, r30, 0x38
     li r4, 0x0
     li r5, 0x1
-    bl fn_801F04FC
+    bl curve_setKeyframeValue
     lfs f1, lbl_80882BE0
     addi r3, r30, 0x40
     li r4, 0x0
     li r5, 0x1
-    bl fn_801F04FC
+    bl curve_setKeyframeValue
     mr r28, r30
     addi r27, r30, 0x20
     li r29, 0x0
@@ -1465,22 +1465,22 @@ lbl_fn_801EC158_000012D4:
     lfs f1, lbl_80882BF0
     li r4, 0x0
     li r5, 0x1
-    bl fn_801F04FC
+    bl curve_setKeyframeValue
     lfs f1, lbl_80882BF0
     addi r3, r30, 0x68
     li r4, 0x0
     li r5, 0x1
-    bl fn_801F04FC
+    bl curve_setKeyframeValue
     lfs f1, lbl_80882BF0
     addi r3, r30, 0x70
     li r4, 0x0
     li r5, 0x1
-    bl fn_801F04FC
+    bl curve_setKeyframeValue
     lfs f1, lbl_80882BF0
     addi r3, r30, 0x78
     li r4, 0x0
     li r5, 0x1
-    bl fn_801F04FC
+    bl curve_setKeyframeValue
     mr r28, r30
     addi r27, r30, 0x60
     li r29, 0x0
@@ -1508,7 +1508,7 @@ lbl_fn_801EC158_0000137C:
     lfs f1, lbl_80882BE0
     li r4, 0x0
     li r5, 0x1
-    bl fn_801F04FC
+    bl curve_setKeyframeValue
     addi r3, r30, 0x94
     li r4, 0x0
     bl math_evaluateCurve1D
@@ -1542,22 +1542,22 @@ lbl_fn_801EC158_0000137C:
     lfs f1, lbl_80882BF0
     li r4, 0x0
     li r5, 0x1
-    bl fn_801F04FC
+    bl curve_setKeyframeValue
     lfs f1, lbl_80882BF0
     addi r3, r30, 0xc4
     li r4, 0x0
     li r5, 0x1
-    bl fn_801F04FC
+    bl curve_setKeyframeValue
     lfs f1, lbl_80882BF0
     addi r3, r30, 0xcc
     li r4, 0x0
     li r5, 0x1
-    bl fn_801F04FC
+    bl curve_setKeyframeValue
     lfs f1, lbl_80882BF0
     addi r3, r30, 0xd4
     li r4, 0x0
     li r5, 0x1
-    bl fn_801F04FC
+    bl curve_setKeyframeValue
     mr r27, r30
     addi r28, r30, 0xbc
     li r29, 0x0
@@ -1585,7 +1585,7 @@ lbl_fn_801EC158_000014AC:
     lfs f1, lbl_80882BF4
     li r4, 0x0
     li r5, 0x1
-    bl fn_801F04FC
+    bl curve_setKeyframeValue
     addi r3, r30, 0xf0
     li r4, 0x0
     bl math_evaluateCurve1D

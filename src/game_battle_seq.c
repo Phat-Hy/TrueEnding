@@ -14,7 +14,7 @@ extern void fn_801079B0(void);
 extern void fn_80107B20(void);
 extern void fn_80107E68(void);
 extern void fn_80107F10(void);
-extern void fn_8011BEB8(void);
+extern void player_resetActionState(void);
 extern void actor_testBitFlag(void);
 extern void dialog_initScriptSlot(void);
 extern void dialog_selectChoice(void);
@@ -501,7 +501,7 @@ lbl_fn_80167038_00000630:
 lbl_fn_80167038_00000640:
     addi r3, r31, 0xc58
     li r4, 0x0
-    bl fn_8011BEB8
+    bl player_resetActionState
     lwz r0, 0x12a4(r31)
     srwi. r0, r0, 31
     beq lbl_fn_80167038_00000794
@@ -933,7 +933,7 @@ lbl_fn_80167640_00000C38:
 lbl_fn_80167640_00000C48:
     addi r3, r31, 0xc58
     li r4, 0x0
-    bl fn_8011BEB8
+    bl player_resetActionState
     lwz r0, 0x12a4(r31)
     srwi. r0, r0, 31
     beq lbl_fn_80167640_00000D9C

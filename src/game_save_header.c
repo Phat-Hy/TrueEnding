@@ -33,7 +33,7 @@ extern void fn_801EC784(void);
 extern void net_player_interpolateState(void);
 extern void fn_801EDC78(void);
 extern void fn_801EEE54(void);
-extern void fn_801F04FC(void);
+extern void curve_setKeyframeValue(void);
 extern void fn_801F10E0(void);
 extern void fn_801F1418(void);
 extern void fn_801F14FC(void);
@@ -1855,12 +1855,12 @@ asm void fn_801F3EF4(void)
     stw r6, 0x130(r31)
     sth r0, 0x8(r31)
     stfs f0, 0x58(r31)
-    bl fn_801F04FC
+    bl curve_setKeyframeValue
     lfs f1, lbl_80882C7C
     addi r3, r31, 0x38
     li r4, 0x0
     li r5, 0x1
-    bl fn_801F04FC
+    bl curve_setKeyframeValue
     mr r3, r31
     lwz r31, 0xc(r1)
     lwz r0, 0x14(r1)

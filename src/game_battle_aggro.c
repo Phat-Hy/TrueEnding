@@ -10,7 +10,7 @@ extern void item_testLineOfSight(void);
 extern void boss_recordDamage(void);
 extern void colli_findDynamicSlot(void);
 extern void colli_findStaticSlot(void);
-extern void fn_8011BEB8(void);
+extern void player_resetActionState(void);
 extern void fn_8011C044(void);
 extern void enemy_stepBehavior(void);
 extern void fn_80128508(void);
@@ -474,7 +474,7 @@ lbl_fn_8016F824_000004FC:
     beq lbl_fn_8016F824_000009C4
     addi r3, r30, 0xc58
     li r4, 0x0
-    bl fn_8011BEB8
+    bl player_resetActionState
     lwz r0, 0x12a4(r30)
     srwi. r0, r0, 31
     beq lbl_fn_8016F824_0000068C
@@ -884,7 +884,7 @@ lbl_fn_8016FDCC_00000AE4:
     beq lbl_fn_8016FDCC_00000F94
     addi r3, r30, 0xc58
     li r4, 0x0
-    bl fn_8011BEB8
+    bl player_resetActionState
     lwz r0, 0x12a4(r30)
     srwi. r0, r0, 31
     beq lbl_fn_8016FDCC_00000C5C
@@ -1345,7 +1345,7 @@ lbl_battle_resolveAggroHierarchy_00001164:
     beq lbl_battle_resolveAggroHierarchy_00001620
     addi r3, r30, 0xc58
     li r4, 0x0
-    bl fn_8011BEB8
+    bl player_resetActionState
     lwz r0, 0x12a4(r30)
     srwi. r0, r0, 31
     beq lbl_battle_resolveAggroHierarchy_000012E8
@@ -1732,7 +1732,7 @@ lbl_battle_updateTargetAggro_00001700:
     beq lbl_battle_updateTargetAggro_00001B98
     addi r3, r31, 0xc58
     li r4, 0x0
-    bl fn_8011BEB8
+    bl player_resetActionState
     lwz r0, 0x12a4(r31)
     srwi. r0, r0, 31
     beq lbl_battle_updateTargetAggro_00001864

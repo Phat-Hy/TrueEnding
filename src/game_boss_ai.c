@@ -34,7 +34,7 @@ extern void sys_findModuleById(void);
 extern void fn_8020787C(void);
 extern void mem_findBlockById(void);
 extern void fn_802092C0(void);
-extern void fn_8020A81C(void);
+extern void str_findEntryByString(void);
 extern void fn_8020A888(void);
 extern void time_wrapMilliseconds(void);
 extern void task_lookupTagIndex(void);
@@ -1570,12 +1570,12 @@ lbl_fn_801354B4_00001454:
 lbl_fn_801354B4_0000148C:
     lwz r3, 0x60(r29)
     lwz r3, 0x14(r3)
-    bl fn_8020A81C
+    bl str_findEntryByString
     stw r3, 0x5c(r29)
     b lbl_fn_801354B4_000014AC
 lbl_fn_801354B4_000014A0:
     li r3, 0x0
-    bl fn_8020A81C
+    bl str_findEntryByString
     stw r3, 0x5c(r29)
 lbl_fn_801354B4_000014AC:
     lwz r3, 0xc50(r29)

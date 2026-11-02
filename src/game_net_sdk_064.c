@@ -38,7 +38,7 @@ extern void GXSetCurrentMtx(void);
 extern void fn_80619920(void);
 extern void fn_806199D0(void);
 extern void fn_80619A00(void);
-extern void fn_80619AB0(void);
+extern void mem_heap_free(void);
 extern void fn_80619B80(void);
 extern void fn_80619C60(void);
 extern void vswprintf(void);
@@ -224,7 +224,7 @@ lbl_fn_807244F0_00000094:
     bl fn_80724330
     lwz r3, lbl_80880528
     mr r4, r31
-    bl fn_80619AB0
+    bl mem_heap_free
 lbl_fn_807244F0_00000108:
     addi r11, r1, 0xa0
     bl _restgpr_25
@@ -281,7 +281,7 @@ lbl_fn_80724610_0000015C:
     bl fn_80724330
     lwz r3, lbl_80880528
     mr r4, r31
-    bl fn_80619AB0
+    bl mem_heap_free
 lbl_fn_80724610_000001D0:
     addi r11, r1, 0x30
     bl _restgpr_24
@@ -324,7 +324,7 @@ lbl_fn_807246F0_0000023C:
     bl fn_807250E0
     lwz r3, lbl_80880528
     mr r4, r30
-    bl fn_80619AB0
+    bl mem_heap_free
     mr r30, r31
 lbl_fn_807246F0_00000268:
     cmpwi r30, 0x0
@@ -431,7 +431,7 @@ lbl_fn_80724790_000003C4:
     bl fn_807250E0
     lwz r3, lbl_80880528
     mr r4, r29
-    bl fn_80619AB0
+    bl mem_heap_free
 lbl_fn_80724790_000003EC:
     mr r29, r30
 lbl_fn_80724790_000003F0:
@@ -546,7 +546,7 @@ asm void fn_80724A40(void)
     ble lbl_fn_80724A40_00000580
     lwz r3, lbl_80880528
     mr r4, r31
-    bl fn_80619AB0
+    bl mem_heap_free
 lbl_fn_80724A40_00000580:
     mr r3, r31
     lwz r31, 0xc(r1)
@@ -583,7 +583,7 @@ asm void fn_80724AB0(void)
     bl fn_807250E0
     lwz r3, lbl_80880528
     mr r4, r31
-    bl fn_80619AB0
+    bl mem_heap_free
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0
@@ -620,7 +620,7 @@ asm void fn_80724B20(void)
     lwz r4, lbl_8088052C
     cmpwi r4, 0x0
     beq lbl_fn_80724B20_00000660
-    bl fn_80619AB0
+    bl mem_heap_free
 lbl_fn_80724B20_00000660:
     lwz r31, lbl_80880528
     mr r3, r31
@@ -664,7 +664,7 @@ asm void fn_80724BD0(void)
     nofralloc
     mr r4, r3
     lwz r3, lbl_80880528
-    b fn_80619AB0
+    b mem_heap_free
 }
 
 asm void fn_80724BE0(void)

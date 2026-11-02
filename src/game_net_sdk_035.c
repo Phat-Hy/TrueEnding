@@ -22,7 +22,7 @@ extern void atoi(void);
 extern void net_bufferGetCount(void);
 extern void net_bufferGetElement(void);
 extern void fn_806D5930(void);
-extern void fn_806D6560(void);
+extern void net_hashTable_remove(void);
 extern void net_socketConnect(void);
 extern void net_socketClose(void);
 extern void fn_806D7F30(void);
@@ -2374,7 +2374,7 @@ lbl_fn_806EA440_00001E68:
     lwz r3, 0x8(r1)
     lwz r3, 0x8(r3)
     lwz r3, 0xc(r3)
-    bl fn_806D6560
+    bl net_hashTable_remove
     lwz r3, 0x8(r1)
     addi r4, r1, 0x8
     lwz r3, 0x8(r3)

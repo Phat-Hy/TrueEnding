@@ -26,7 +26,7 @@ extern void actor_setState(void);
 extern void battle_resolveAggroHierarchy(void);
 extern void battle_awardExp(void);
 extern void battle_updateActorStatus(void);
-extern void fn_8020A81C(void);
+extern void str_findEntryByString(void);
 extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_ctor(void);
 extern void res_Resource_unload(void);
@@ -1984,10 +1984,10 @@ lbl_fn_802FC850_00001B10:
     oris r0, r0, 0x20
     stw r0, 0x12a4(r30)
     addi r3, r31, 0x13f
-    bl fn_8020A81C
+    bl str_findEntryByString
     stw r3, 0x166c(r30)
     addi r3, r31, 0x14c
-    bl fn_8020A81C
+    bl str_findEntryByString
     lfs f0, lbl_80884A20
     addi r11, r1, 0x660
     stw r3, 0x1670(r30)

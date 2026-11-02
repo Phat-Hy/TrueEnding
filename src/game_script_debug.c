@@ -51,7 +51,7 @@ extern void battle_canTargetActor(void);
 extern void battle_generateLootDrops(void);
 extern void fn_80179AD0(void);
 extern void fn_801CCD00(void);
-extern void fn_8020A81C(void);
+extern void str_findEntryByString(void);
 extern void task_mapIdToQueue(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
@@ -819,42 +819,42 @@ lbl_fn_80250ECC_000009A8:
     lis r3, lbl_80743AF4@ha
     addi r3, r3, lbl_80743AF4@l
     addi r3, r3, 0xa8
-    bl fn_8020A81C
+    bl str_findEntryByString
     stw r3, 0x5c(r30)
     b lbl_fn_80250ECC_00000A34
 lbl_fn_80250ECC_000009C0:
     lis r3, lbl_80743AF4@ha
     addi r3, r3, lbl_80743AF4@l
     addi r3, r3, 0xb2
-    bl fn_8020A81C
+    bl str_findEntryByString
     stw r3, 0x5c(r30)
     b lbl_fn_80250ECC_00000A34
 lbl_fn_80250ECC_000009D8:
     lis r3, lbl_80743AF4@ha
     addi r3, r3, lbl_80743AF4@l
     addi r3, r3, 0xbc
-    bl fn_8020A81C
+    bl str_findEntryByString
     stw r3, 0x5c(r30)
     b lbl_fn_80250ECC_00000A34
 lbl_fn_80250ECC_000009F0:
     lis r3, lbl_80743AF4@ha
     addi r3, r3, lbl_80743AF4@l
     addi r3, r3, 0xc6
-    bl fn_8020A81C
+    bl str_findEntryByString
     stw r3, 0x5c(r30)
     b lbl_fn_80250ECC_00000A34
 lbl_fn_80250ECC_00000A08:
     lis r3, lbl_80743AF4@ha
     addi r3, r3, lbl_80743AF4@l
     addi r3, r3, 0xd0
-    bl fn_8020A81C
+    bl str_findEntryByString
     stw r3, 0x5c(r30)
     b lbl_fn_80250ECC_00000A34
 lbl_fn_80250ECC_00000A20:
     lis r3, lbl_80743AF4@ha
     addi r3, r3, lbl_80743AF4@l
     addi r3, r3, 0xda
-    bl fn_8020A81C
+    bl str_findEntryByString
     stw r3, 0x5c(r30)
 lbl_fn_80250ECC_00000A34:
     addi r3, r30, 0x7d4

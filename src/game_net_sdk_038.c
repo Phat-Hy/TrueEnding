@@ -20,14 +20,14 @@ extern void strcmp(void);
 extern void atoi(void);
 extern void net_formatIpAddress(void);
 extern void net_castU16(void);
-extern void fn_806A426C(void);
+extern void net_sdk_noop(void);
 extern void net_truncateU16(void);
 extern void net_pollActiveSockets(void);
 extern void net_bufferGetCount(void);
 extern void net_bufferGetElement(void);
 extern void fn_806D5C90(void);
 extern void fn_806D63A0(void);
-extern void fn_806D6560(void);
+extern void net_hashTable_remove(void);
 extern void net_invokeChannelCallback(void);
 extern void fn_806D6720(void);
 extern void net_socketConnect(void);
@@ -39,7 +39,7 @@ extern void fn_806D7CF0(void);
 extern void fn_806D7DA0(void);
 extern void fn_806D7E70(void);
 extern void fn_806D7EE0(void);
-extern void fn_806D7F20(void);
+extern void net_socket_getLastError(void);
 extern void fn_806D8060(void);
 extern void fn_806D8650(void);
 extern void fn_806D86A0(void);
@@ -177,7 +177,7 @@ lbl_fn_806EE7E0_000000AC:
     lwz r3, 0x8(r3)
     addi r4, r1, 0x8
     lwz r3, 0xc(r3)
-    bl fn_806D6560
+    bl net_hashTable_remove
 lbl_fn_806EE7E0_000000BC:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
@@ -235,7 +235,7 @@ lbl_fn_806EE8B0_00000138:
     cmpwi r3, -0x1
     bne lbl_fn_806EE8B0_0000026C
     lwz r3, 0x0(r29)
-    bl fn_806D7F20
+    bl net_socket_getLastError
     cmpwi r3, -0xf
     bne lbl_fn_806EE8B0_000001B4
     mr r3, r29
@@ -410,7 +410,7 @@ lbl_fn_806EEAD0_000003E8:
     lwz r3, 0x8(r29)
     addi r4, r1, 0x8
     lwz r3, 0xc(r3)
-    bl fn_806D6560
+    bl net_hashTable_remove
 lbl_fn_806EEAD0_000003F8:
     li r3, 0x1
 lbl_fn_806EEAD0_000003FC:
@@ -505,7 +505,7 @@ lbl_fn_806EEC40_00000528:
     lwz r3, 0x8(r3)
     addi r4, r1, 0x8
     lwz r3, 0xc(r3)
-    bl fn_806D6560
+    bl net_hashTable_remove
 lbl_fn_806EEC40_00000538:
     subi r28, r28, 0x1
 lbl_fn_806EEC40_0000053C:
@@ -1001,7 +1001,7 @@ lbl_fn_806EF340_00000BCC:
     li r6, 0x0
     bl fn_806EFB80
     addi r3, r30, 0x1
-    bl fn_806A426C
+    bl net_sdk_noop
     lwz r0, 0x14(r1)
     cmplw r0, r3
     bne lbl_fn_806EF340_00000BF8
@@ -1278,7 +1278,7 @@ lbl_fn_806EF6D0_00000F44:
     b lbl_fn_806EF6D0_00000F8C
 lbl_fn_806EF6D0_00000F84:
     lwz r3, 0x0(r28)
-    bl fn_806D7F20
+    bl net_socket_getLastError
 lbl_fn_806EF6D0_00000F8C:
     lwz r3, 0x0(r28)
     bl fn_806D8650

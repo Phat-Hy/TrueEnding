@@ -13,7 +13,7 @@ extern void mem_alloc(void);
 extern void atn_Anim_getLayerTrack(void);
 extern void colli_findDynamicSlot(void);
 extern void colli_findStaticSlot(void);
-extern void fn_8011BEB8(void);
+extern void player_resetActionState(void);
 extern void fn_8011C044(void);
 extern void enemy_stepBehavior(void);
 extern void fn_80127EF4(void);
@@ -104,7 +104,7 @@ lbl_fn_80170F20_00000048:
     beq lbl_fn_80170F20_000004E0
     addi r3, r31, 0xc58
     li r4, 0x0
-    bl fn_8011BEB8
+    bl player_resetActionState
     lwz r0, 0x12a4(r31)
     srwi. r0, r0, 31
     beq lbl_fn_80170F20_000001AC
@@ -450,7 +450,7 @@ asm void fn_80171420(void)
     beq lbl_fn_80171420_000009C0
     addi r3, r31, 0xc58
     li r4, 0x0
-    bl fn_8011BEB8
+    bl player_resetActionState
     lwz r0, 0x12a4(r31)
     srwi. r0, r0, 31
     beq lbl_fn_80171420_0000068C
@@ -786,7 +786,7 @@ asm void fn_801718F8(void)
     mr r31, r3
     addi r3, r3, 0xc58
     stw r30, 0x58(r1)
-    bl fn_8011BEB8
+    bl player_resetActionState
     lwz r0, 0x12a4(r31)
     srwi. r0, r0, 31
     beq lbl_fn_801718F8_00000B44
@@ -1128,7 +1128,7 @@ asm void fn_80171DB0(void)
     beq lbl_fn_80171DB0_00001008
     addi r3, r31, 0xc58
     li r4, 0x0
-    bl fn_8011BEB8
+    bl player_resetActionState
     lwz r0, 0x12a4(r31)
     extrwi. r0, r0, 1, 26
     beq lbl_fn_80171DB0_00000EE4

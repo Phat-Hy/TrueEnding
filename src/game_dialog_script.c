@@ -26,7 +26,7 @@ extern void fn_80107B20(void);
 extern void fn_80107BE8(void);
 extern void fn_80107CA8(void);
 extern void fn_8010C00C(void);
-extern void fn_8011BEB8(void);
+extern void player_resetActionState(void);
 extern void player_testStatusCondition(void);
 extern void fn_8012AD20(void);
 extern void enemy_updateNavSteering(void);
@@ -1057,7 +1057,7 @@ lbl_dialog_updateScriptState_00000D70:
 lbl_dialog_updateScriptState_00000D80:
     addi r3, r28, 0xc58
     li r4, 0x0
-    bl fn_8011BEB8
+    bl player_resetActionState
     lwz r0, 0x12a4(r28)
     srwi. r0, r0, 31
     beq lbl_dialog_updateScriptState_00000ED4
@@ -1272,7 +1272,7 @@ lbl_dialog_updateScriptState_00001074:
 lbl_dialog_updateScriptState_00001084:
     addi r3, r28, 0xc58
     li r4, 0x0
-    bl fn_8011BEB8
+    bl player_resetActionState
     lwz r0, 0x12a4(r28)
     srwi. r0, r0, 31
     beq lbl_dialog_updateScriptState_000011D8

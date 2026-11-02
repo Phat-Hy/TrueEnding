@@ -43154,7 +43154,7 @@
 .endfn fn_80619A00
 
 # .text:0x23450 | 0x80619AB0 | size: 0xC4
-.fn fn_80619AB0, global
+.fn mem_heap_free, global
 /* 80619AB0 00614110  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 80619AB4 00614114  7C 08 02 A6 */	mflr r0
 /* 80619AB8 00614118  2C 04 00 00 */	cmpwi r4, 0x0
@@ -43210,7 +43210,7 @@
 /* 80619B68 006141C8  7C 08 03 A6 */	mtlr r0
 /* 80619B6C 006141CC  38 21 00 20 */	addi r1, r1, 0x20
 /* 80619B70 006141D0  4E 80 00 20 */	blr
-.endfn fn_80619AB0
+.endfn mem_heap_free
 
 # .text:0x23514 | 0x80619B74 | size: 0xC
 .fn gap_03_80619B74_text, global
@@ -43661,7 +43661,7 @@
 # .text:0x23A80 | 0x8061A0E0 | size: 0x8
 .fn fn_8061A0E0, global
 /* 8061A0E0 00614740  80 63 00 04 */	lwz r3, 0x4(r3)
-/* 8061A0E4 00614744  4B FF F9 CC */	b fn_80619AB0
+/* 8061A0E4 00614744  4B FF F9 CC */	b mem_heap_free
 .endfn fn_8061A0E0
 
 # .text:0x23A88 | 0x8061A0E8 | size: 0x8

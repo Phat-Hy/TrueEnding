@@ -40,7 +40,7 @@ extern void profile_getMetricValue(void);
 extern void perf_initNode(void);
 extern void perf_getMetricValue(void);
 extern void mem_findBlockById(void);
-extern void fn_8020A81C(void);
+extern void str_findEntryByString(void);
 extern void task_getWorkerByIndex(void);
 extern void fn_8021AF50(void);
 extern void fn_80372574(void);
@@ -1844,7 +1844,7 @@ lbl_fn_8052793C_000017C4:
     lwz r4, 0x4(r23)
     bl fn_801D80A0
     lwz r3, 0x14(r19)
-    bl fn_8020A81C
+    bl str_findEntryByString
     mr r4, r3
     mr r3, r22
     bl fn_803DD160

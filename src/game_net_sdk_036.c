@@ -18,7 +18,7 @@ extern void net_bufferGetElement(void);
 extern void fn_806D5930(void);
 extern void fn_806D5A60(void);
 extern void fn_806D5C90(void);
-extern void fn_806D6560(void);
+extern void net_hashTable_remove(void);
 extern void fn_806D66B0(void);
 extern void net_socketClose(void);
 extern void net_getTimestampMs(void);
@@ -132,7 +132,7 @@ asm void fn_806EA690(void)
     lwz r3, 0x8(r1)
     lwz r3, 0x8(r3)
     lwz r3, 0xc(r3)
-    bl fn_806D6560
+    bl net_hashTable_remove
     lwz r3, 0x8(r1)
     addi r4, r1, 0x8
     lwz r3, 0x8(r3)
@@ -175,7 +175,7 @@ asm void net_abortConnection(void)
     lwz r3, 0x8(r1)
     lwz r3, 0x8(r3)
     lwz r3, 0xc(r3)
-    bl fn_806D6560
+    bl net_hashTable_remove
     lwz r3, 0x8(r1)
     addi r4, r1, 0x8
     lwz r3, 0x8(r3)

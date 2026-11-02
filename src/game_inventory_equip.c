@@ -11,7 +11,7 @@ extern void ref_releaseHandle(void);
 extern void colli_findDynamicSlot(void);
 extern void colli_findStaticSlot(void);
 extern void fn_8011BE54(void);
-extern void fn_8011BEB8(void);
+extern void player_resetActionState(void);
 extern void fn_8012D180(void);
 extern void boss_findPartById(void);
 extern void fn_80134208(void);
@@ -265,7 +265,7 @@ asm void equip_applyToCharacter(void)
     addi r3, r3, 0xc58
     stw r28, 0x10(r1)
     mr r28, r5
-    bl fn_8011BEB8
+    bl player_resetActionState
     cmpwi r28, 0x0
     beq lbl_equip_applyToCharacter_000003EC
     lwz r0, 0x12a4(r29)
@@ -535,7 +535,7 @@ lbl_fn_80154C08_0000062C:
     bl fn_8011BE54
     addi r3, r30, 0xc58
     li r4, 0x0
-    bl fn_8011BEB8
+    bl player_resetActionState
     lwz r7, 0xd1c(r30)
     cmpwi r7, 0x0
     beq lbl_fn_80154C08_000006F4

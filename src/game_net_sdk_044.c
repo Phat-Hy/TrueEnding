@@ -11,7 +11,7 @@ extern void snprintf(void);
 extern void net_formatIpAddress(void);
 extern void fn_806A4260(void);
 extern void net_castU16(void);
-extern void fn_806A426C(void);
+extern void net_sdk_noop(void);
 extern void net_truncateU16(void);
 extern void fn_806D57A0(void);
 extern void net_pollActiveSockets(void);
@@ -25,7 +25,7 @@ extern void fn_806D7CF0(void);
 extern void fn_806D7DA0(void);
 extern void fn_806D7E70(void);
 extern void fn_806D7EE0(void);
-extern void fn_806D7F20(void);
+extern void net_socket_getLastError(void);
 extern void fn_806D8060(void);
 extern void fn_806D8650(void);
 extern void fn_806D86F0(void);
@@ -765,7 +765,7 @@ lbl_fn_806FB750_0000090C:
     mr r22, r3
     bne lbl_fn_806FB750_00000940
     mr r3, r23
-    bl fn_806D7F20
+    bl net_socket_getLastError
     b lbl_fn_806FB750_00000BCC
 lbl_fn_806FB750_00000940:
     addi r3, r25, 0x0
@@ -876,7 +876,7 @@ lbl_fn_806FB750_00000AA4:
     beq lbl_fn_806FB750_00000AE8
     lwz r18, 0x0(r19)
     addi r3, r30, 0x1
-    bl fn_806A426C
+    bl net_sdk_noop
     cmplw r18, r3
     beq lbl_fn_806FB750_00000AE0
     mr r21, r18
@@ -1275,7 +1275,7 @@ lbl_fn_806FBE00_00001010:
     stb r3, 0x1e(r1)
     stb r0, 0x1f(r1)
     lwz r3, 0x4(r30)
-    bl fn_806A426C
+    bl net_sdk_noop
     stw r3, 0x20(r1)
     lis r3, lbl_807C5D10@ha
     lwz r4, lbl_807C5D10@l(r3)
@@ -1364,7 +1364,7 @@ asm void fn_806FC030(void)
     stb r3, 0x1e(r1)
     stb r0, 0x1f(r1)
     lwz r3, 0x4(r31)
-    bl fn_806A426C
+    bl net_sdk_noop
     lis r30, lbl_808627F8@ha
     stw r3, 0x20(r1)
     lwz r0, lbl_808627F8@l(r30)
@@ -1452,7 +1452,7 @@ asm void fn_806FC170(void)
     stb r3, 0x4e(r1)
     stb r0, 0x4f(r1)
     lwz r3, 0x4(r28)
-    bl fn_806A426C
+    bl net_sdk_noop
     stw r3, 0x50(r1)
     li r29, 0x0
     lwz r0, 0x8(r28)
@@ -1479,7 +1479,7 @@ lbl_fn_806FC170_00001318:
     beq lbl_fn_806FC170_0000135C
     lwz r23, 0x0(r24)
     addi r3, r26, 0x1
-    bl fn_806A426C
+    bl net_sdk_noop
     cmplw r23, r3
     beq lbl_fn_806FC170_00001354
     mr r29, r23
@@ -2079,7 +2079,7 @@ lbl_fn_806FC9C0_00001B5C:
     cmpwi r3, -0x1
     bne lbl_fn_806FC9C0_00001B98
     lwz r3, 0x18(r30)
-    bl fn_806D7F20
+    bl net_socket_getLastError
     b lbl_fn_806FC9C0_00001BC0
 lbl_fn_806FC9C0_00001B98:
     mr r4, r3
@@ -2150,7 +2150,7 @@ lbl_fn_806FC9C0_00001C64:
     stb r3, 0xd6(r1)
     stb r0, 0xd7(r1)
     lwz r3, 0x4(r30)
-    bl fn_806A426C
+    bl net_sdk_noop
     stw r3, 0xd8(r1)
     lwz r0, 0x3c(r30)
     stw r0, 0xdc(r1)
@@ -2242,7 +2242,7 @@ lbl_fn_806FC9C0_00001DB4:
     stb r3, 0x8a(r1)
     stb r0, 0x8b(r1)
     lwz r3, 0x4(r30)
-    bl fn_806A426C
+    bl net_sdk_noop
     stw r3, 0x8c(r1)
     lwz r0, 0x3c(r30)
     stw r0, 0x90(r1)
@@ -2319,7 +2319,7 @@ lbl_fn_806FC9C0_00001EDC:
     stb r3, 0x3e(r1)
     stb r0, 0x3f(r1)
     lwz r3, 0x4(r30)
-    bl fn_806A426C
+    bl net_sdk_noop
     stw r3, 0x40(r1)
     lis r3, lbl_807C5D10@ha
     lwz r4, lbl_807C5D10@l(r3)

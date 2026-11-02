@@ -24,7 +24,7 @@ extern void fn_80107E58(void);
 extern void fn_80107F10(void);
 extern void fn_80107FC8(void);
 extern void fn_80108080(void);
-extern void fn_8011BEB8(void);
+extern void player_resetActionState(void);
 extern void fn_8012DD70(void);
 extern void actor_testBitFlag(void);
 extern void fn_8013539C(void);
@@ -112,7 +112,7 @@ asm void fn_80152D10(void)
     bl fn_8012DD70
     addi r3, r31, 0xc58
     li r4, 0x0
-    bl fn_8011BEB8
+    bl player_resetActionState
     lwz r0, 0x12a4(r31)
     srwi. r0, r0, 31
     beq lbl_fn_80152D10_00000190

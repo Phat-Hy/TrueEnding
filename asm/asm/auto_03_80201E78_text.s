@@ -9896,7 +9896,7 @@
 .endfn fn_8020A808
 
 # .text:0x89A4 | 0x8020A81C | size: 0x6C
-.fn fn_8020A81C, global
+.fn str_findEntryByString, global
 /* 8020A81C 00204E7C  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8020A820 00204E80  7C 08 02 A6 */	mflr r0
 /* 8020A824 00204E84  2C 03 00 00 */	cmpwi r3, 0x0
@@ -9928,7 +9928,7 @@
 /* 8020A87C 00204EDC  7C 08 03 A6 */	mtlr r0
 /* 8020A880 00204EE0  38 21 00 10 */	addi r1, r1, 0x10
 /* 8020A884 00204EE4  4E 80 00 20 */	blr
-.endfn fn_8020A81C
+.endfn str_findEntryByString
 
 # .text:0x8A10 | 0x8020A888 | size: 0x84
 .fn fn_8020A888, global

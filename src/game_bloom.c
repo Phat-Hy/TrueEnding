@@ -17,9 +17,9 @@ void fn_800D3F28(void);
 void bloom_processPasses(void);
 void bloom_renderExtractPass(void);
 void fn_800D4558(void);
-void fn_800D498C(void);
+void atn_TaskBase_setFlagRecursive(void);
 void fn_800D4DB8(void);
-void fn_800D51EC(void);
+void atn_TaskBase_clearFlagRecursive(void);
 void atn_TaskBase_constructor(void);
 void atn_TaskBase_destructor(void);
 
@@ -538,7 +538,7 @@ lbl_fn_800D4558_00000694:
     bl atn_TaskBase_isValid
 lbl_fn_800D4558_000006AC:
     mr r3, r27
-    bl fn_800D498C
+    bl atn_TaskBase_setFlagRecursive
 lbl_fn_800D4558_000006B4:
     lwz r27, 0x1c(r28)
     cmpwi r27, 0x0
@@ -548,7 +548,7 @@ lbl_fn_800D4558_000006B4:
     bl atn_TaskBase_isValid
 lbl_fn_800D4558_000006CC:
     mr r3, r27
-    bl fn_800D498C
+    bl atn_TaskBase_setFlagRecursive
 lbl_fn_800D4558_000006D4:
     lwz r0, 0x38(r28)
     ori r0, r0, 0x4
@@ -569,7 +569,7 @@ lbl_fn_800D4558_000006F8:
     bl atn_TaskBase_isValid
 lbl_fn_800D4558_00000710:
     mr r3, r28
-    bl fn_800D498C
+    bl atn_TaskBase_setFlagRecursive
 lbl_fn_800D4558_00000718:
     lwz r28, 0x1c(r27)
     cmpwi r28, 0x0
@@ -579,7 +579,7 @@ lbl_fn_800D4558_00000718:
     bl atn_TaskBase_isValid
 lbl_fn_800D4558_00000730:
     mr r3, r28
-    bl fn_800D498C
+    bl atn_TaskBase_setFlagRecursive
 lbl_fn_800D4558_00000738:
     lwz r0, 0x38(r27)
     ori r0, r0, 0x4
@@ -611,7 +611,7 @@ lbl_fn_800D4558_00000780:
     bl atn_TaskBase_isValid
 lbl_fn_800D4558_00000798:
     mr r3, r29
-    bl fn_800D498C
+    bl atn_TaskBase_setFlagRecursive
 lbl_fn_800D4558_000007A0:
     lwz r29, 0x1c(r28)
     cmpwi r29, 0x0
@@ -621,7 +621,7 @@ lbl_fn_800D4558_000007A0:
     bl atn_TaskBase_isValid
 lbl_fn_800D4558_000007B8:
     mr r3, r29
-    bl fn_800D498C
+    bl atn_TaskBase_setFlagRecursive
 lbl_fn_800D4558_000007C0:
     lwz r0, 0x38(r28)
     ori r0, r0, 0x4
@@ -642,7 +642,7 @@ lbl_fn_800D4558_000007E4:
     bl atn_TaskBase_isValid
 lbl_fn_800D4558_000007FC:
     mr r3, r29
-    bl fn_800D498C
+    bl atn_TaskBase_setFlagRecursive
 lbl_fn_800D4558_00000804:
     lwz r29, 0x1c(r28)
     cmpwi r29, 0x0
@@ -652,7 +652,7 @@ lbl_fn_800D4558_00000804:
     bl atn_TaskBase_isValid
 lbl_fn_800D4558_0000081C:
     mr r3, r29
-    bl fn_800D498C
+    bl atn_TaskBase_setFlagRecursive
 lbl_fn_800D4558_00000824:
     lwz r0, 0x38(r28)
     ori r0, r0, 0x4
@@ -695,7 +695,7 @@ lbl_fn_800D4558_00000890:
     bl atn_TaskBase_isValid
 lbl_fn_800D4558_000008A8:
     mr r3, r30
-    bl fn_800D498C
+    bl atn_TaskBase_setFlagRecursive
 lbl_fn_800D4558_000008B0:
     lwz r30, 0x1c(r29)
     cmpwi r30, 0x0
@@ -705,7 +705,7 @@ lbl_fn_800D4558_000008B0:
     bl atn_TaskBase_isValid
 lbl_fn_800D4558_000008C8:
     mr r3, r30
-    bl fn_800D498C
+    bl atn_TaskBase_setFlagRecursive
 lbl_fn_800D4558_000008D0:
     lwz r0, 0x38(r29)
     ori r0, r0, 0x4
@@ -726,7 +726,7 @@ lbl_fn_800D4558_000008F4:
     bl atn_TaskBase_isValid
 lbl_fn_800D4558_0000090C:
     mr r3, r30
-    bl fn_800D498C
+    bl atn_TaskBase_setFlagRecursive
 lbl_fn_800D4558_00000914:
     lwz r30, 0x1c(r29)
     cmpwi r30, 0x0
@@ -736,7 +736,7 @@ lbl_fn_800D4558_00000914:
     bl atn_TaskBase_isValid
 lbl_fn_800D4558_0000092C:
     mr r3, r30
-    bl fn_800D498C
+    bl atn_TaskBase_setFlagRecursive
 lbl_fn_800D4558_00000934:
     lwz r0, 0x38(r29)
     ori r0, r0, 0x4
@@ -768,7 +768,7 @@ lbl_fn_800D4558_0000097C:
     bl atn_TaskBase_isValid
 lbl_fn_800D4558_00000994:
     mr r3, r30
-    bl fn_800D498C
+    bl atn_TaskBase_setFlagRecursive
 lbl_fn_800D4558_0000099C:
     lwz r30, 0x1c(r29)
     cmpwi r30, 0x0
@@ -778,7 +778,7 @@ lbl_fn_800D4558_0000099C:
     bl atn_TaskBase_isValid
 lbl_fn_800D4558_000009B4:
     mr r3, r30
-    bl fn_800D498C
+    bl atn_TaskBase_setFlagRecursive
 lbl_fn_800D4558_000009BC:
     lwz r0, 0x38(r29)
     ori r0, r0, 0x4
@@ -799,7 +799,7 @@ lbl_fn_800D4558_000009E0:
     bl atn_TaskBase_isValid
 lbl_fn_800D4558_000009F8:
     mr r3, r30
-    bl fn_800D498C
+    bl atn_TaskBase_setFlagRecursive
 lbl_fn_800D4558_00000A00:
     lwz r30, 0x1c(r29)
     cmpwi r30, 0x0
@@ -809,7 +809,7 @@ lbl_fn_800D4558_00000A00:
     bl atn_TaskBase_isValid
 lbl_fn_800D4558_00000A18:
     mr r3, r30
-    bl fn_800D498C
+    bl atn_TaskBase_setFlagRecursive
 lbl_fn_800D4558_00000A20:
     lwz r0, 0x38(r29)
     ori r0, r0, 0x4
@@ -834,7 +834,7 @@ lbl_fn_800D4558_00000A50:
     blr
 }
 
-asm void fn_800D498C(void)
+asm void atn_TaskBase_setFlagRecursive(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -844,318 +844,318 @@ asm void fn_800D498C(void)
     mr r31, r3
     lwz r30, 0x18(r3)
     cmpwi r30, 0x0
-    beq lbl_fn_800D498C_00000C74
-    beq lbl_fn_800D498C_00000A90
+    beq lbl_atn_TaskBase_setFlagRecursive_00000C74
+    beq lbl_atn_TaskBase_setFlagRecursive_00000A90
     mr r3, r30
     bl atn_TaskBase_isValid
-lbl_fn_800D498C_00000A90:
+lbl_atn_TaskBase_setFlagRecursive_00000A90:
     lwz r29, 0x18(r30)
     cmpwi r29, 0x0
-    beq lbl_fn_800D498C_00000B7C
-    beq lbl_fn_800D498C_00000AA8
+    beq lbl_atn_TaskBase_setFlagRecursive_00000B7C
+    beq lbl_atn_TaskBase_setFlagRecursive_00000AA8
     mr r3, r29
     bl atn_TaskBase_isValid
-lbl_fn_800D498C_00000AA8:
+lbl_atn_TaskBase_setFlagRecursive_00000AA8:
     lwz r28, 0x18(r29)
     cmpwi r28, 0x0
-    beq lbl_fn_800D498C_00000B0C
-    beq lbl_fn_800D498C_00000AC0
+    beq lbl_atn_TaskBase_setFlagRecursive_00000B0C
+    beq lbl_atn_TaskBase_setFlagRecursive_00000AC0
     mr r3, r28
     bl atn_TaskBase_isValid
-lbl_fn_800D498C_00000AC0:
+lbl_atn_TaskBase_setFlagRecursive_00000AC0:
     lwz r27, 0x18(r28)
     cmpwi r27, 0x0
-    beq lbl_fn_800D498C_00000AE0
-    beq lbl_fn_800D498C_00000AD8
+    beq lbl_atn_TaskBase_setFlagRecursive_00000AE0
+    beq lbl_atn_TaskBase_setFlagRecursive_00000AD8
     mr r3, r27
     bl atn_TaskBase_isValid
-lbl_fn_800D498C_00000AD8:
+lbl_atn_TaskBase_setFlagRecursive_00000AD8:
     mr r3, r27
-    bl fn_800D498C
-lbl_fn_800D498C_00000AE0:
+    bl atn_TaskBase_setFlagRecursive
+lbl_atn_TaskBase_setFlagRecursive_00000AE0:
     lwz r27, 0x1c(r28)
     cmpwi r27, 0x0
-    beq lbl_fn_800D498C_00000B00
-    beq lbl_fn_800D498C_00000AF8
+    beq lbl_atn_TaskBase_setFlagRecursive_00000B00
+    beq lbl_atn_TaskBase_setFlagRecursive_00000AF8
     mr r3, r27
     bl atn_TaskBase_isValid
-lbl_fn_800D498C_00000AF8:
+lbl_atn_TaskBase_setFlagRecursive_00000AF8:
     mr r3, r27
-    bl fn_800D498C
-lbl_fn_800D498C_00000B00:
+    bl atn_TaskBase_setFlagRecursive
+lbl_atn_TaskBase_setFlagRecursive_00000B00:
     lwz r0, 0x38(r28)
     ori r0, r0, 0x4
     stw r0, 0x38(r28)
-lbl_fn_800D498C_00000B0C:
+lbl_atn_TaskBase_setFlagRecursive_00000B0C:
     lwz r27, 0x1c(r29)
     cmpwi r27, 0x0
-    beq lbl_fn_800D498C_00000B70
-    beq lbl_fn_800D498C_00000B24
+    beq lbl_atn_TaskBase_setFlagRecursive_00000B70
+    beq lbl_atn_TaskBase_setFlagRecursive_00000B24
     mr r3, r27
     bl atn_TaskBase_isValid
-lbl_fn_800D498C_00000B24:
+lbl_atn_TaskBase_setFlagRecursive_00000B24:
     lwz r28, 0x18(r27)
     cmpwi r28, 0x0
-    beq lbl_fn_800D498C_00000B44
-    beq lbl_fn_800D498C_00000B3C
+    beq lbl_atn_TaskBase_setFlagRecursive_00000B44
+    beq lbl_atn_TaskBase_setFlagRecursive_00000B3C
     mr r3, r28
     bl atn_TaskBase_isValid
-lbl_fn_800D498C_00000B3C:
+lbl_atn_TaskBase_setFlagRecursive_00000B3C:
     mr r3, r28
-    bl fn_800D498C
-lbl_fn_800D498C_00000B44:
+    bl atn_TaskBase_setFlagRecursive
+lbl_atn_TaskBase_setFlagRecursive_00000B44:
     lwz r28, 0x1c(r27)
     cmpwi r28, 0x0
-    beq lbl_fn_800D498C_00000B64
-    beq lbl_fn_800D498C_00000B5C
+    beq lbl_atn_TaskBase_setFlagRecursive_00000B64
+    beq lbl_atn_TaskBase_setFlagRecursive_00000B5C
     mr r3, r28
     bl atn_TaskBase_isValid
-lbl_fn_800D498C_00000B5C:
+lbl_atn_TaskBase_setFlagRecursive_00000B5C:
     mr r3, r28
-    bl fn_800D498C
-lbl_fn_800D498C_00000B64:
+    bl atn_TaskBase_setFlagRecursive
+lbl_atn_TaskBase_setFlagRecursive_00000B64:
     lwz r0, 0x38(r27)
     ori r0, r0, 0x4
     stw r0, 0x38(r27)
-lbl_fn_800D498C_00000B70:
+lbl_atn_TaskBase_setFlagRecursive_00000B70:
     lwz r0, 0x38(r29)
     ori r0, r0, 0x4
     stw r0, 0x38(r29)
-lbl_fn_800D498C_00000B7C:
+lbl_atn_TaskBase_setFlagRecursive_00000B7C:
     lwz r27, 0x1c(r30)
     cmpwi r27, 0x0
-    beq lbl_fn_800D498C_00000C68
-    beq lbl_fn_800D498C_00000B94
+    beq lbl_atn_TaskBase_setFlagRecursive_00000C68
+    beq lbl_atn_TaskBase_setFlagRecursive_00000B94
     mr r3, r27
     bl atn_TaskBase_isValid
-lbl_fn_800D498C_00000B94:
+lbl_atn_TaskBase_setFlagRecursive_00000B94:
     lwz r28, 0x18(r27)
     cmpwi r28, 0x0
-    beq lbl_fn_800D498C_00000BF8
-    beq lbl_fn_800D498C_00000BAC
+    beq lbl_atn_TaskBase_setFlagRecursive_00000BF8
+    beq lbl_atn_TaskBase_setFlagRecursive_00000BAC
     mr r3, r28
     bl atn_TaskBase_isValid
-lbl_fn_800D498C_00000BAC:
+lbl_atn_TaskBase_setFlagRecursive_00000BAC:
     lwz r29, 0x18(r28)
     cmpwi r29, 0x0
-    beq lbl_fn_800D498C_00000BCC
-    beq lbl_fn_800D498C_00000BC4
+    beq lbl_atn_TaskBase_setFlagRecursive_00000BCC
+    beq lbl_atn_TaskBase_setFlagRecursive_00000BC4
     mr r3, r29
     bl atn_TaskBase_isValid
-lbl_fn_800D498C_00000BC4:
+lbl_atn_TaskBase_setFlagRecursive_00000BC4:
     mr r3, r29
-    bl fn_800D498C
-lbl_fn_800D498C_00000BCC:
+    bl atn_TaskBase_setFlagRecursive
+lbl_atn_TaskBase_setFlagRecursive_00000BCC:
     lwz r29, 0x1c(r28)
     cmpwi r29, 0x0
-    beq lbl_fn_800D498C_00000BEC
-    beq lbl_fn_800D498C_00000BE4
+    beq lbl_atn_TaskBase_setFlagRecursive_00000BEC
+    beq lbl_atn_TaskBase_setFlagRecursive_00000BE4
     mr r3, r29
     bl atn_TaskBase_isValid
-lbl_fn_800D498C_00000BE4:
+lbl_atn_TaskBase_setFlagRecursive_00000BE4:
     mr r3, r29
-    bl fn_800D498C
-lbl_fn_800D498C_00000BEC:
+    bl atn_TaskBase_setFlagRecursive
+lbl_atn_TaskBase_setFlagRecursive_00000BEC:
     lwz r0, 0x38(r28)
     ori r0, r0, 0x4
     stw r0, 0x38(r28)
-lbl_fn_800D498C_00000BF8:
+lbl_atn_TaskBase_setFlagRecursive_00000BF8:
     lwz r28, 0x1c(r27)
     cmpwi r28, 0x0
-    beq lbl_fn_800D498C_00000C5C
-    beq lbl_fn_800D498C_00000C10
+    beq lbl_atn_TaskBase_setFlagRecursive_00000C5C
+    beq lbl_atn_TaskBase_setFlagRecursive_00000C10
     mr r3, r28
     bl atn_TaskBase_isValid
-lbl_fn_800D498C_00000C10:
+lbl_atn_TaskBase_setFlagRecursive_00000C10:
     lwz r29, 0x18(r28)
     cmpwi r29, 0x0
-    beq lbl_fn_800D498C_00000C30
-    beq lbl_fn_800D498C_00000C28
+    beq lbl_atn_TaskBase_setFlagRecursive_00000C30
+    beq lbl_atn_TaskBase_setFlagRecursive_00000C28
     mr r3, r29
     bl atn_TaskBase_isValid
-lbl_fn_800D498C_00000C28:
+lbl_atn_TaskBase_setFlagRecursive_00000C28:
     mr r3, r29
-    bl fn_800D498C
-lbl_fn_800D498C_00000C30:
+    bl atn_TaskBase_setFlagRecursive
+lbl_atn_TaskBase_setFlagRecursive_00000C30:
     lwz r29, 0x1c(r28)
     cmpwi r29, 0x0
-    beq lbl_fn_800D498C_00000C50
-    beq lbl_fn_800D498C_00000C48
+    beq lbl_atn_TaskBase_setFlagRecursive_00000C50
+    beq lbl_atn_TaskBase_setFlagRecursive_00000C48
     mr r3, r29
     bl atn_TaskBase_isValid
-lbl_fn_800D498C_00000C48:
+lbl_atn_TaskBase_setFlagRecursive_00000C48:
     mr r3, r29
-    bl fn_800D498C
-lbl_fn_800D498C_00000C50:
+    bl atn_TaskBase_setFlagRecursive
+lbl_atn_TaskBase_setFlagRecursive_00000C50:
     lwz r0, 0x38(r28)
     ori r0, r0, 0x4
     stw r0, 0x38(r28)
-lbl_fn_800D498C_00000C5C:
+lbl_atn_TaskBase_setFlagRecursive_00000C5C:
     lwz r0, 0x38(r27)
     ori r0, r0, 0x4
     stw r0, 0x38(r27)
-lbl_fn_800D498C_00000C68:
+lbl_atn_TaskBase_setFlagRecursive_00000C68:
     lwz r0, 0x38(r30)
     ori r0, r0, 0x4
     stw r0, 0x38(r30)
-lbl_fn_800D498C_00000C74:
+lbl_atn_TaskBase_setFlagRecursive_00000C74:
     lwz r27, 0x1c(r31)
     cmpwi r27, 0x0
-    beq lbl_fn_800D498C_00000E70
-    beq lbl_fn_800D498C_00000C8C
+    beq lbl_atn_TaskBase_setFlagRecursive_00000E70
+    beq lbl_atn_TaskBase_setFlagRecursive_00000C8C
     mr r3, r27
     bl atn_TaskBase_isValid
-lbl_fn_800D498C_00000C8C:
+lbl_atn_TaskBase_setFlagRecursive_00000C8C:
     lwz r28, 0x18(r27)
     cmpwi r28, 0x0
-    beq lbl_fn_800D498C_00000D78
-    beq lbl_fn_800D498C_00000CA4
+    beq lbl_atn_TaskBase_setFlagRecursive_00000D78
+    beq lbl_atn_TaskBase_setFlagRecursive_00000CA4
     mr r3, r28
     bl atn_TaskBase_isValid
-lbl_fn_800D498C_00000CA4:
+lbl_atn_TaskBase_setFlagRecursive_00000CA4:
     lwz r29, 0x18(r28)
     cmpwi r29, 0x0
-    beq lbl_fn_800D498C_00000D08
-    beq lbl_fn_800D498C_00000CBC
+    beq lbl_atn_TaskBase_setFlagRecursive_00000D08
+    beq lbl_atn_TaskBase_setFlagRecursive_00000CBC
     mr r3, r29
     bl atn_TaskBase_isValid
-lbl_fn_800D498C_00000CBC:
+lbl_atn_TaskBase_setFlagRecursive_00000CBC:
     lwz r30, 0x18(r29)
     cmpwi r30, 0x0
-    beq lbl_fn_800D498C_00000CDC
-    beq lbl_fn_800D498C_00000CD4
+    beq lbl_atn_TaskBase_setFlagRecursive_00000CDC
+    beq lbl_atn_TaskBase_setFlagRecursive_00000CD4
     mr r3, r30
     bl atn_TaskBase_isValid
-lbl_fn_800D498C_00000CD4:
+lbl_atn_TaskBase_setFlagRecursive_00000CD4:
     mr r3, r30
-    bl fn_800D498C
-lbl_fn_800D498C_00000CDC:
+    bl atn_TaskBase_setFlagRecursive
+lbl_atn_TaskBase_setFlagRecursive_00000CDC:
     lwz r30, 0x1c(r29)
     cmpwi r30, 0x0
-    beq lbl_fn_800D498C_00000CFC
-    beq lbl_fn_800D498C_00000CF4
+    beq lbl_atn_TaskBase_setFlagRecursive_00000CFC
+    beq lbl_atn_TaskBase_setFlagRecursive_00000CF4
     mr r3, r30
     bl atn_TaskBase_isValid
-lbl_fn_800D498C_00000CF4:
+lbl_atn_TaskBase_setFlagRecursive_00000CF4:
     mr r3, r30
-    bl fn_800D498C
-lbl_fn_800D498C_00000CFC:
+    bl atn_TaskBase_setFlagRecursive
+lbl_atn_TaskBase_setFlagRecursive_00000CFC:
     lwz r0, 0x38(r29)
     ori r0, r0, 0x4
     stw r0, 0x38(r29)
-lbl_fn_800D498C_00000D08:
+lbl_atn_TaskBase_setFlagRecursive_00000D08:
     lwz r29, 0x1c(r28)
     cmpwi r29, 0x0
-    beq lbl_fn_800D498C_00000D6C
-    beq lbl_fn_800D498C_00000D20
+    beq lbl_atn_TaskBase_setFlagRecursive_00000D6C
+    beq lbl_atn_TaskBase_setFlagRecursive_00000D20
     mr r3, r29
     bl atn_TaskBase_isValid
-lbl_fn_800D498C_00000D20:
+lbl_atn_TaskBase_setFlagRecursive_00000D20:
     lwz r30, 0x18(r29)
     cmpwi r30, 0x0
-    beq lbl_fn_800D498C_00000D40
-    beq lbl_fn_800D498C_00000D38
+    beq lbl_atn_TaskBase_setFlagRecursive_00000D40
+    beq lbl_atn_TaskBase_setFlagRecursive_00000D38
     mr r3, r30
     bl atn_TaskBase_isValid
-lbl_fn_800D498C_00000D38:
+lbl_atn_TaskBase_setFlagRecursive_00000D38:
     mr r3, r30
-    bl fn_800D498C
-lbl_fn_800D498C_00000D40:
+    bl atn_TaskBase_setFlagRecursive
+lbl_atn_TaskBase_setFlagRecursive_00000D40:
     lwz r30, 0x1c(r29)
     cmpwi r30, 0x0
-    beq lbl_fn_800D498C_00000D60
-    beq lbl_fn_800D498C_00000D58
+    beq lbl_atn_TaskBase_setFlagRecursive_00000D60
+    beq lbl_atn_TaskBase_setFlagRecursive_00000D58
     mr r3, r30
     bl atn_TaskBase_isValid
-lbl_fn_800D498C_00000D58:
+lbl_atn_TaskBase_setFlagRecursive_00000D58:
     mr r3, r30
-    bl fn_800D498C
-lbl_fn_800D498C_00000D60:
+    bl atn_TaskBase_setFlagRecursive
+lbl_atn_TaskBase_setFlagRecursive_00000D60:
     lwz r0, 0x38(r29)
     ori r0, r0, 0x4
     stw r0, 0x38(r29)
-lbl_fn_800D498C_00000D6C:
+lbl_atn_TaskBase_setFlagRecursive_00000D6C:
     lwz r0, 0x38(r28)
     ori r0, r0, 0x4
     stw r0, 0x38(r28)
-lbl_fn_800D498C_00000D78:
+lbl_atn_TaskBase_setFlagRecursive_00000D78:
     lwz r28, 0x1c(r27)
     cmpwi r28, 0x0
-    beq lbl_fn_800D498C_00000E64
-    beq lbl_fn_800D498C_00000D90
+    beq lbl_atn_TaskBase_setFlagRecursive_00000E64
+    beq lbl_atn_TaskBase_setFlagRecursive_00000D90
     mr r3, r28
     bl atn_TaskBase_isValid
-lbl_fn_800D498C_00000D90:
+lbl_atn_TaskBase_setFlagRecursive_00000D90:
     lwz r29, 0x18(r28)
     cmpwi r29, 0x0
-    beq lbl_fn_800D498C_00000DF4
-    beq lbl_fn_800D498C_00000DA8
+    beq lbl_atn_TaskBase_setFlagRecursive_00000DF4
+    beq lbl_atn_TaskBase_setFlagRecursive_00000DA8
     mr r3, r29
     bl atn_TaskBase_isValid
-lbl_fn_800D498C_00000DA8:
+lbl_atn_TaskBase_setFlagRecursive_00000DA8:
     lwz r30, 0x18(r29)
     cmpwi r30, 0x0
-    beq lbl_fn_800D498C_00000DC8
-    beq lbl_fn_800D498C_00000DC0
+    beq lbl_atn_TaskBase_setFlagRecursive_00000DC8
+    beq lbl_atn_TaskBase_setFlagRecursive_00000DC0
     mr r3, r30
     bl atn_TaskBase_isValid
-lbl_fn_800D498C_00000DC0:
+lbl_atn_TaskBase_setFlagRecursive_00000DC0:
     mr r3, r30
-    bl fn_800D498C
-lbl_fn_800D498C_00000DC8:
+    bl atn_TaskBase_setFlagRecursive
+lbl_atn_TaskBase_setFlagRecursive_00000DC8:
     lwz r30, 0x1c(r29)
     cmpwi r30, 0x0
-    beq lbl_fn_800D498C_00000DE8
-    beq lbl_fn_800D498C_00000DE0
+    beq lbl_atn_TaskBase_setFlagRecursive_00000DE8
+    beq lbl_atn_TaskBase_setFlagRecursive_00000DE0
     mr r3, r30
     bl atn_TaskBase_isValid
-lbl_fn_800D498C_00000DE0:
+lbl_atn_TaskBase_setFlagRecursive_00000DE0:
     mr r3, r30
-    bl fn_800D498C
-lbl_fn_800D498C_00000DE8:
+    bl atn_TaskBase_setFlagRecursive
+lbl_atn_TaskBase_setFlagRecursive_00000DE8:
     lwz r0, 0x38(r29)
     ori r0, r0, 0x4
     stw r0, 0x38(r29)
-lbl_fn_800D498C_00000DF4:
+lbl_atn_TaskBase_setFlagRecursive_00000DF4:
     lwz r29, 0x1c(r28)
     cmpwi r29, 0x0
-    beq lbl_fn_800D498C_00000E58
-    beq lbl_fn_800D498C_00000E0C
+    beq lbl_atn_TaskBase_setFlagRecursive_00000E58
+    beq lbl_atn_TaskBase_setFlagRecursive_00000E0C
     mr r3, r29
     bl atn_TaskBase_isValid
-lbl_fn_800D498C_00000E0C:
+lbl_atn_TaskBase_setFlagRecursive_00000E0C:
     lwz r30, 0x18(r29)
     cmpwi r30, 0x0
-    beq lbl_fn_800D498C_00000E2C
-    beq lbl_fn_800D498C_00000E24
+    beq lbl_atn_TaskBase_setFlagRecursive_00000E2C
+    beq lbl_atn_TaskBase_setFlagRecursive_00000E24
     mr r3, r30
     bl atn_TaskBase_isValid
-lbl_fn_800D498C_00000E24:
+lbl_atn_TaskBase_setFlagRecursive_00000E24:
     mr r3, r30
-    bl fn_800D498C
-lbl_fn_800D498C_00000E2C:
+    bl atn_TaskBase_setFlagRecursive
+lbl_atn_TaskBase_setFlagRecursive_00000E2C:
     lwz r30, 0x1c(r29)
     cmpwi r30, 0x0
-    beq lbl_fn_800D498C_00000E4C
-    beq lbl_fn_800D498C_00000E44
+    beq lbl_atn_TaskBase_setFlagRecursive_00000E4C
+    beq lbl_atn_TaskBase_setFlagRecursive_00000E44
     mr r3, r30
     bl atn_TaskBase_isValid
-lbl_fn_800D498C_00000E44:
+lbl_atn_TaskBase_setFlagRecursive_00000E44:
     mr r3, r30
-    bl fn_800D498C
-lbl_fn_800D498C_00000E4C:
+    bl atn_TaskBase_setFlagRecursive
+lbl_atn_TaskBase_setFlagRecursive_00000E4C:
     lwz r0, 0x38(r29)
     ori r0, r0, 0x4
     stw r0, 0x38(r29)
-lbl_fn_800D498C_00000E58:
+lbl_atn_TaskBase_setFlagRecursive_00000E58:
     lwz r0, 0x38(r28)
     ori r0, r0, 0x4
     stw r0, 0x38(r28)
-lbl_fn_800D498C_00000E64:
+lbl_atn_TaskBase_setFlagRecursive_00000E64:
     lwz r0, 0x38(r27)
     ori r0, r0, 0x4
     stw r0, 0x38(r27)
-lbl_fn_800D498C_00000E70:
+lbl_atn_TaskBase_setFlagRecursive_00000E70:
     lwz r0, 0x38(r31)
     ori r0, r0, 0x4
     stw r0, 0x38(r31)
@@ -1205,7 +1205,7 @@ lbl_fn_800D4DB8_00000EF4:
     bl atn_TaskBase_isValid
 lbl_fn_800D4DB8_00000F0C:
     mr r3, r27
-    bl fn_800D51EC
+    bl atn_TaskBase_clearFlagRecursive
 lbl_fn_800D4DB8_00000F14:
     lwz r27, 0x1c(r28)
     cmpwi r27, 0x0
@@ -1215,7 +1215,7 @@ lbl_fn_800D4DB8_00000F14:
     bl atn_TaskBase_isValid
 lbl_fn_800D4DB8_00000F2C:
     mr r3, r27
-    bl fn_800D51EC
+    bl atn_TaskBase_clearFlagRecursive
 lbl_fn_800D4DB8_00000F34:
     lwz r0, 0x38(r28)
     rlwinm r0, r0, 0, 30, 28
@@ -1236,7 +1236,7 @@ lbl_fn_800D4DB8_00000F58:
     bl atn_TaskBase_isValid
 lbl_fn_800D4DB8_00000F70:
     mr r3, r28
-    bl fn_800D51EC
+    bl atn_TaskBase_clearFlagRecursive
 lbl_fn_800D4DB8_00000F78:
     lwz r28, 0x1c(r27)
     cmpwi r28, 0x0
@@ -1246,7 +1246,7 @@ lbl_fn_800D4DB8_00000F78:
     bl atn_TaskBase_isValid
 lbl_fn_800D4DB8_00000F90:
     mr r3, r28
-    bl fn_800D51EC
+    bl atn_TaskBase_clearFlagRecursive
 lbl_fn_800D4DB8_00000F98:
     lwz r0, 0x38(r27)
     rlwinm r0, r0, 0, 30, 28
@@ -1278,7 +1278,7 @@ lbl_fn_800D4DB8_00000FE0:
     bl atn_TaskBase_isValid
 lbl_fn_800D4DB8_00000FF8:
     mr r3, r29
-    bl fn_800D51EC
+    bl atn_TaskBase_clearFlagRecursive
 lbl_fn_800D4DB8_00001000:
     lwz r29, 0x1c(r28)
     cmpwi r29, 0x0
@@ -1288,7 +1288,7 @@ lbl_fn_800D4DB8_00001000:
     bl atn_TaskBase_isValid
 lbl_fn_800D4DB8_00001018:
     mr r3, r29
-    bl fn_800D51EC
+    bl atn_TaskBase_clearFlagRecursive
 lbl_fn_800D4DB8_00001020:
     lwz r0, 0x38(r28)
     rlwinm r0, r0, 0, 30, 28
@@ -1309,7 +1309,7 @@ lbl_fn_800D4DB8_00001044:
     bl atn_TaskBase_isValid
 lbl_fn_800D4DB8_0000105C:
     mr r3, r29
-    bl fn_800D51EC
+    bl atn_TaskBase_clearFlagRecursive
 lbl_fn_800D4DB8_00001064:
     lwz r29, 0x1c(r28)
     cmpwi r29, 0x0
@@ -1319,7 +1319,7 @@ lbl_fn_800D4DB8_00001064:
     bl atn_TaskBase_isValid
 lbl_fn_800D4DB8_0000107C:
     mr r3, r29
-    bl fn_800D51EC
+    bl atn_TaskBase_clearFlagRecursive
 lbl_fn_800D4DB8_00001084:
     lwz r0, 0x38(r28)
     rlwinm r0, r0, 0, 30, 28
@@ -1362,7 +1362,7 @@ lbl_fn_800D4DB8_000010F0:
     bl atn_TaskBase_isValid
 lbl_fn_800D4DB8_00001108:
     mr r3, r30
-    bl fn_800D51EC
+    bl atn_TaskBase_clearFlagRecursive
 lbl_fn_800D4DB8_00001110:
     lwz r30, 0x1c(r29)
     cmpwi r30, 0x0
@@ -1372,7 +1372,7 @@ lbl_fn_800D4DB8_00001110:
     bl atn_TaskBase_isValid
 lbl_fn_800D4DB8_00001128:
     mr r3, r30
-    bl fn_800D51EC
+    bl atn_TaskBase_clearFlagRecursive
 lbl_fn_800D4DB8_00001130:
     lwz r0, 0x38(r29)
     rlwinm r0, r0, 0, 30, 28
@@ -1393,7 +1393,7 @@ lbl_fn_800D4DB8_00001154:
     bl atn_TaskBase_isValid
 lbl_fn_800D4DB8_0000116C:
     mr r3, r30
-    bl fn_800D51EC
+    bl atn_TaskBase_clearFlagRecursive
 lbl_fn_800D4DB8_00001174:
     lwz r30, 0x1c(r29)
     cmpwi r30, 0x0
@@ -1403,7 +1403,7 @@ lbl_fn_800D4DB8_00001174:
     bl atn_TaskBase_isValid
 lbl_fn_800D4DB8_0000118C:
     mr r3, r30
-    bl fn_800D51EC
+    bl atn_TaskBase_clearFlagRecursive
 lbl_fn_800D4DB8_00001194:
     lwz r0, 0x38(r29)
     rlwinm r0, r0, 0, 30, 28
@@ -1435,7 +1435,7 @@ lbl_fn_800D4DB8_000011DC:
     bl atn_TaskBase_isValid
 lbl_fn_800D4DB8_000011F4:
     mr r3, r30
-    bl fn_800D51EC
+    bl atn_TaskBase_clearFlagRecursive
 lbl_fn_800D4DB8_000011FC:
     lwz r30, 0x1c(r29)
     cmpwi r30, 0x0
@@ -1445,7 +1445,7 @@ lbl_fn_800D4DB8_000011FC:
     bl atn_TaskBase_isValid
 lbl_fn_800D4DB8_00001214:
     mr r3, r30
-    bl fn_800D51EC
+    bl atn_TaskBase_clearFlagRecursive
 lbl_fn_800D4DB8_0000121C:
     lwz r0, 0x38(r29)
     rlwinm r0, r0, 0, 30, 28
@@ -1466,7 +1466,7 @@ lbl_fn_800D4DB8_00001240:
     bl atn_TaskBase_isValid
 lbl_fn_800D4DB8_00001258:
     mr r3, r30
-    bl fn_800D51EC
+    bl atn_TaskBase_clearFlagRecursive
 lbl_fn_800D4DB8_00001260:
     lwz r30, 0x1c(r29)
     cmpwi r30, 0x0
@@ -1476,7 +1476,7 @@ lbl_fn_800D4DB8_00001260:
     bl atn_TaskBase_isValid
 lbl_fn_800D4DB8_00001278:
     mr r3, r30
-    bl fn_800D51EC
+    bl atn_TaskBase_clearFlagRecursive
 lbl_fn_800D4DB8_00001280:
     lwz r0, 0x38(r29)
     rlwinm r0, r0, 0, 30, 28
@@ -1501,7 +1501,7 @@ lbl_fn_800D4DB8_000012B0:
     blr
 }
 
-asm void fn_800D51EC(void)
+asm void atn_TaskBase_clearFlagRecursive(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -1511,318 +1511,318 @@ asm void fn_800D51EC(void)
     mr r31, r3
     lwz r30, 0x18(r3)
     cmpwi r30, 0x0
-    beq lbl_fn_800D51EC_000014D4
-    beq lbl_fn_800D51EC_000012F0
+    beq lbl_atn_TaskBase_clearFlagRecursive_000014D4
+    beq lbl_atn_TaskBase_clearFlagRecursive_000012F0
     mr r3, r30
     bl atn_TaskBase_isValid
-lbl_fn_800D51EC_000012F0:
+lbl_atn_TaskBase_clearFlagRecursive_000012F0:
     lwz r29, 0x18(r30)
     cmpwi r29, 0x0
-    beq lbl_fn_800D51EC_000013DC
-    beq lbl_fn_800D51EC_00001308
+    beq lbl_atn_TaskBase_clearFlagRecursive_000013DC
+    beq lbl_atn_TaskBase_clearFlagRecursive_00001308
     mr r3, r29
     bl atn_TaskBase_isValid
-lbl_fn_800D51EC_00001308:
+lbl_atn_TaskBase_clearFlagRecursive_00001308:
     lwz r28, 0x18(r29)
     cmpwi r28, 0x0
-    beq lbl_fn_800D51EC_0000136C
-    beq lbl_fn_800D51EC_00001320
+    beq lbl_atn_TaskBase_clearFlagRecursive_0000136C
+    beq lbl_atn_TaskBase_clearFlagRecursive_00001320
     mr r3, r28
     bl atn_TaskBase_isValid
-lbl_fn_800D51EC_00001320:
+lbl_atn_TaskBase_clearFlagRecursive_00001320:
     lwz r27, 0x18(r28)
     cmpwi r27, 0x0
-    beq lbl_fn_800D51EC_00001340
-    beq lbl_fn_800D51EC_00001338
+    beq lbl_atn_TaskBase_clearFlagRecursive_00001340
+    beq lbl_atn_TaskBase_clearFlagRecursive_00001338
     mr r3, r27
     bl atn_TaskBase_isValid
-lbl_fn_800D51EC_00001338:
+lbl_atn_TaskBase_clearFlagRecursive_00001338:
     mr r3, r27
-    bl fn_800D51EC
-lbl_fn_800D51EC_00001340:
+    bl atn_TaskBase_clearFlagRecursive
+lbl_atn_TaskBase_clearFlagRecursive_00001340:
     lwz r27, 0x1c(r28)
     cmpwi r27, 0x0
-    beq lbl_fn_800D51EC_00001360
-    beq lbl_fn_800D51EC_00001358
+    beq lbl_atn_TaskBase_clearFlagRecursive_00001360
+    beq lbl_atn_TaskBase_clearFlagRecursive_00001358
     mr r3, r27
     bl atn_TaskBase_isValid
-lbl_fn_800D51EC_00001358:
+lbl_atn_TaskBase_clearFlagRecursive_00001358:
     mr r3, r27
-    bl fn_800D51EC
-lbl_fn_800D51EC_00001360:
+    bl atn_TaskBase_clearFlagRecursive
+lbl_atn_TaskBase_clearFlagRecursive_00001360:
     lwz r0, 0x38(r28)
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0x38(r28)
-lbl_fn_800D51EC_0000136C:
+lbl_atn_TaskBase_clearFlagRecursive_0000136C:
     lwz r27, 0x1c(r29)
     cmpwi r27, 0x0
-    beq lbl_fn_800D51EC_000013D0
-    beq lbl_fn_800D51EC_00001384
+    beq lbl_atn_TaskBase_clearFlagRecursive_000013D0
+    beq lbl_atn_TaskBase_clearFlagRecursive_00001384
     mr r3, r27
     bl atn_TaskBase_isValid
-lbl_fn_800D51EC_00001384:
+lbl_atn_TaskBase_clearFlagRecursive_00001384:
     lwz r28, 0x18(r27)
     cmpwi r28, 0x0
-    beq lbl_fn_800D51EC_000013A4
-    beq lbl_fn_800D51EC_0000139C
+    beq lbl_atn_TaskBase_clearFlagRecursive_000013A4
+    beq lbl_atn_TaskBase_clearFlagRecursive_0000139C
     mr r3, r28
     bl atn_TaskBase_isValid
-lbl_fn_800D51EC_0000139C:
+lbl_atn_TaskBase_clearFlagRecursive_0000139C:
     mr r3, r28
-    bl fn_800D51EC
-lbl_fn_800D51EC_000013A4:
+    bl atn_TaskBase_clearFlagRecursive
+lbl_atn_TaskBase_clearFlagRecursive_000013A4:
     lwz r28, 0x1c(r27)
     cmpwi r28, 0x0
-    beq lbl_fn_800D51EC_000013C4
-    beq lbl_fn_800D51EC_000013BC
+    beq lbl_atn_TaskBase_clearFlagRecursive_000013C4
+    beq lbl_atn_TaskBase_clearFlagRecursive_000013BC
     mr r3, r28
     bl atn_TaskBase_isValid
-lbl_fn_800D51EC_000013BC:
+lbl_atn_TaskBase_clearFlagRecursive_000013BC:
     mr r3, r28
-    bl fn_800D51EC
-lbl_fn_800D51EC_000013C4:
+    bl atn_TaskBase_clearFlagRecursive
+lbl_atn_TaskBase_clearFlagRecursive_000013C4:
     lwz r0, 0x38(r27)
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0x38(r27)
-lbl_fn_800D51EC_000013D0:
+lbl_atn_TaskBase_clearFlagRecursive_000013D0:
     lwz r0, 0x38(r29)
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0x38(r29)
-lbl_fn_800D51EC_000013DC:
+lbl_atn_TaskBase_clearFlagRecursive_000013DC:
     lwz r27, 0x1c(r30)
     cmpwi r27, 0x0
-    beq lbl_fn_800D51EC_000014C8
-    beq lbl_fn_800D51EC_000013F4
+    beq lbl_atn_TaskBase_clearFlagRecursive_000014C8
+    beq lbl_atn_TaskBase_clearFlagRecursive_000013F4
     mr r3, r27
     bl atn_TaskBase_isValid
-lbl_fn_800D51EC_000013F4:
+lbl_atn_TaskBase_clearFlagRecursive_000013F4:
     lwz r28, 0x18(r27)
     cmpwi r28, 0x0
-    beq lbl_fn_800D51EC_00001458
-    beq lbl_fn_800D51EC_0000140C
+    beq lbl_atn_TaskBase_clearFlagRecursive_00001458
+    beq lbl_atn_TaskBase_clearFlagRecursive_0000140C
     mr r3, r28
     bl atn_TaskBase_isValid
-lbl_fn_800D51EC_0000140C:
+lbl_atn_TaskBase_clearFlagRecursive_0000140C:
     lwz r29, 0x18(r28)
     cmpwi r29, 0x0
-    beq lbl_fn_800D51EC_0000142C
-    beq lbl_fn_800D51EC_00001424
+    beq lbl_atn_TaskBase_clearFlagRecursive_0000142C
+    beq lbl_atn_TaskBase_clearFlagRecursive_00001424
     mr r3, r29
     bl atn_TaskBase_isValid
-lbl_fn_800D51EC_00001424:
+lbl_atn_TaskBase_clearFlagRecursive_00001424:
     mr r3, r29
-    bl fn_800D51EC
-lbl_fn_800D51EC_0000142C:
+    bl atn_TaskBase_clearFlagRecursive
+lbl_atn_TaskBase_clearFlagRecursive_0000142C:
     lwz r29, 0x1c(r28)
     cmpwi r29, 0x0
-    beq lbl_fn_800D51EC_0000144C
-    beq lbl_fn_800D51EC_00001444
+    beq lbl_atn_TaskBase_clearFlagRecursive_0000144C
+    beq lbl_atn_TaskBase_clearFlagRecursive_00001444
     mr r3, r29
     bl atn_TaskBase_isValid
-lbl_fn_800D51EC_00001444:
+lbl_atn_TaskBase_clearFlagRecursive_00001444:
     mr r3, r29
-    bl fn_800D51EC
-lbl_fn_800D51EC_0000144C:
+    bl atn_TaskBase_clearFlagRecursive
+lbl_atn_TaskBase_clearFlagRecursive_0000144C:
     lwz r0, 0x38(r28)
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0x38(r28)
-lbl_fn_800D51EC_00001458:
+lbl_atn_TaskBase_clearFlagRecursive_00001458:
     lwz r28, 0x1c(r27)
     cmpwi r28, 0x0
-    beq lbl_fn_800D51EC_000014BC
-    beq lbl_fn_800D51EC_00001470
+    beq lbl_atn_TaskBase_clearFlagRecursive_000014BC
+    beq lbl_atn_TaskBase_clearFlagRecursive_00001470
     mr r3, r28
     bl atn_TaskBase_isValid
-lbl_fn_800D51EC_00001470:
+lbl_atn_TaskBase_clearFlagRecursive_00001470:
     lwz r29, 0x18(r28)
     cmpwi r29, 0x0
-    beq lbl_fn_800D51EC_00001490
-    beq lbl_fn_800D51EC_00001488
+    beq lbl_atn_TaskBase_clearFlagRecursive_00001490
+    beq lbl_atn_TaskBase_clearFlagRecursive_00001488
     mr r3, r29
     bl atn_TaskBase_isValid
-lbl_fn_800D51EC_00001488:
+lbl_atn_TaskBase_clearFlagRecursive_00001488:
     mr r3, r29
-    bl fn_800D51EC
-lbl_fn_800D51EC_00001490:
+    bl atn_TaskBase_clearFlagRecursive
+lbl_atn_TaskBase_clearFlagRecursive_00001490:
     lwz r29, 0x1c(r28)
     cmpwi r29, 0x0
-    beq lbl_fn_800D51EC_000014B0
-    beq lbl_fn_800D51EC_000014A8
+    beq lbl_atn_TaskBase_clearFlagRecursive_000014B0
+    beq lbl_atn_TaskBase_clearFlagRecursive_000014A8
     mr r3, r29
     bl atn_TaskBase_isValid
-lbl_fn_800D51EC_000014A8:
+lbl_atn_TaskBase_clearFlagRecursive_000014A8:
     mr r3, r29
-    bl fn_800D51EC
-lbl_fn_800D51EC_000014B0:
+    bl atn_TaskBase_clearFlagRecursive
+lbl_atn_TaskBase_clearFlagRecursive_000014B0:
     lwz r0, 0x38(r28)
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0x38(r28)
-lbl_fn_800D51EC_000014BC:
+lbl_atn_TaskBase_clearFlagRecursive_000014BC:
     lwz r0, 0x38(r27)
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0x38(r27)
-lbl_fn_800D51EC_000014C8:
+lbl_atn_TaskBase_clearFlagRecursive_000014C8:
     lwz r0, 0x38(r30)
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0x38(r30)
-lbl_fn_800D51EC_000014D4:
+lbl_atn_TaskBase_clearFlagRecursive_000014D4:
     lwz r27, 0x1c(r31)
     cmpwi r27, 0x0
-    beq lbl_fn_800D51EC_000016D0
-    beq lbl_fn_800D51EC_000014EC
+    beq lbl_atn_TaskBase_clearFlagRecursive_000016D0
+    beq lbl_atn_TaskBase_clearFlagRecursive_000014EC
     mr r3, r27
     bl atn_TaskBase_isValid
-lbl_fn_800D51EC_000014EC:
+lbl_atn_TaskBase_clearFlagRecursive_000014EC:
     lwz r28, 0x18(r27)
     cmpwi r28, 0x0
-    beq lbl_fn_800D51EC_000015D8
-    beq lbl_fn_800D51EC_00001504
+    beq lbl_atn_TaskBase_clearFlagRecursive_000015D8
+    beq lbl_atn_TaskBase_clearFlagRecursive_00001504
     mr r3, r28
     bl atn_TaskBase_isValid
-lbl_fn_800D51EC_00001504:
+lbl_atn_TaskBase_clearFlagRecursive_00001504:
     lwz r29, 0x18(r28)
     cmpwi r29, 0x0
-    beq lbl_fn_800D51EC_00001568
-    beq lbl_fn_800D51EC_0000151C
+    beq lbl_atn_TaskBase_clearFlagRecursive_00001568
+    beq lbl_atn_TaskBase_clearFlagRecursive_0000151C
     mr r3, r29
     bl atn_TaskBase_isValid
-lbl_fn_800D51EC_0000151C:
+lbl_atn_TaskBase_clearFlagRecursive_0000151C:
     lwz r30, 0x18(r29)
     cmpwi r30, 0x0
-    beq lbl_fn_800D51EC_0000153C
-    beq lbl_fn_800D51EC_00001534
+    beq lbl_atn_TaskBase_clearFlagRecursive_0000153C
+    beq lbl_atn_TaskBase_clearFlagRecursive_00001534
     mr r3, r30
     bl atn_TaskBase_isValid
-lbl_fn_800D51EC_00001534:
+lbl_atn_TaskBase_clearFlagRecursive_00001534:
     mr r3, r30
-    bl fn_800D51EC
-lbl_fn_800D51EC_0000153C:
+    bl atn_TaskBase_clearFlagRecursive
+lbl_atn_TaskBase_clearFlagRecursive_0000153C:
     lwz r30, 0x1c(r29)
     cmpwi r30, 0x0
-    beq lbl_fn_800D51EC_0000155C
-    beq lbl_fn_800D51EC_00001554
+    beq lbl_atn_TaskBase_clearFlagRecursive_0000155C
+    beq lbl_atn_TaskBase_clearFlagRecursive_00001554
     mr r3, r30
     bl atn_TaskBase_isValid
-lbl_fn_800D51EC_00001554:
+lbl_atn_TaskBase_clearFlagRecursive_00001554:
     mr r3, r30
-    bl fn_800D51EC
-lbl_fn_800D51EC_0000155C:
+    bl atn_TaskBase_clearFlagRecursive
+lbl_atn_TaskBase_clearFlagRecursive_0000155C:
     lwz r0, 0x38(r29)
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0x38(r29)
-lbl_fn_800D51EC_00001568:
+lbl_atn_TaskBase_clearFlagRecursive_00001568:
     lwz r29, 0x1c(r28)
     cmpwi r29, 0x0
-    beq lbl_fn_800D51EC_000015CC
-    beq lbl_fn_800D51EC_00001580
+    beq lbl_atn_TaskBase_clearFlagRecursive_000015CC
+    beq lbl_atn_TaskBase_clearFlagRecursive_00001580
     mr r3, r29
     bl atn_TaskBase_isValid
-lbl_fn_800D51EC_00001580:
+lbl_atn_TaskBase_clearFlagRecursive_00001580:
     lwz r30, 0x18(r29)
     cmpwi r30, 0x0
-    beq lbl_fn_800D51EC_000015A0
-    beq lbl_fn_800D51EC_00001598
+    beq lbl_atn_TaskBase_clearFlagRecursive_000015A0
+    beq lbl_atn_TaskBase_clearFlagRecursive_00001598
     mr r3, r30
     bl atn_TaskBase_isValid
-lbl_fn_800D51EC_00001598:
+lbl_atn_TaskBase_clearFlagRecursive_00001598:
     mr r3, r30
-    bl fn_800D51EC
-lbl_fn_800D51EC_000015A0:
+    bl atn_TaskBase_clearFlagRecursive
+lbl_atn_TaskBase_clearFlagRecursive_000015A0:
     lwz r30, 0x1c(r29)
     cmpwi r30, 0x0
-    beq lbl_fn_800D51EC_000015C0
-    beq lbl_fn_800D51EC_000015B8
+    beq lbl_atn_TaskBase_clearFlagRecursive_000015C0
+    beq lbl_atn_TaskBase_clearFlagRecursive_000015B8
     mr r3, r30
     bl atn_TaskBase_isValid
-lbl_fn_800D51EC_000015B8:
+lbl_atn_TaskBase_clearFlagRecursive_000015B8:
     mr r3, r30
-    bl fn_800D51EC
-lbl_fn_800D51EC_000015C0:
+    bl atn_TaskBase_clearFlagRecursive
+lbl_atn_TaskBase_clearFlagRecursive_000015C0:
     lwz r0, 0x38(r29)
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0x38(r29)
-lbl_fn_800D51EC_000015CC:
+lbl_atn_TaskBase_clearFlagRecursive_000015CC:
     lwz r0, 0x38(r28)
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0x38(r28)
-lbl_fn_800D51EC_000015D8:
+lbl_atn_TaskBase_clearFlagRecursive_000015D8:
     lwz r28, 0x1c(r27)
     cmpwi r28, 0x0
-    beq lbl_fn_800D51EC_000016C4
-    beq lbl_fn_800D51EC_000015F0
+    beq lbl_atn_TaskBase_clearFlagRecursive_000016C4
+    beq lbl_atn_TaskBase_clearFlagRecursive_000015F0
     mr r3, r28
     bl atn_TaskBase_isValid
-lbl_fn_800D51EC_000015F0:
+lbl_atn_TaskBase_clearFlagRecursive_000015F0:
     lwz r29, 0x18(r28)
     cmpwi r29, 0x0
-    beq lbl_fn_800D51EC_00001654
-    beq lbl_fn_800D51EC_00001608
+    beq lbl_atn_TaskBase_clearFlagRecursive_00001654
+    beq lbl_atn_TaskBase_clearFlagRecursive_00001608
     mr r3, r29
     bl atn_TaskBase_isValid
-lbl_fn_800D51EC_00001608:
+lbl_atn_TaskBase_clearFlagRecursive_00001608:
     lwz r30, 0x18(r29)
     cmpwi r30, 0x0
-    beq lbl_fn_800D51EC_00001628
-    beq lbl_fn_800D51EC_00001620
+    beq lbl_atn_TaskBase_clearFlagRecursive_00001628
+    beq lbl_atn_TaskBase_clearFlagRecursive_00001620
     mr r3, r30
     bl atn_TaskBase_isValid
-lbl_fn_800D51EC_00001620:
+lbl_atn_TaskBase_clearFlagRecursive_00001620:
     mr r3, r30
-    bl fn_800D51EC
-lbl_fn_800D51EC_00001628:
+    bl atn_TaskBase_clearFlagRecursive
+lbl_atn_TaskBase_clearFlagRecursive_00001628:
     lwz r30, 0x1c(r29)
     cmpwi r30, 0x0
-    beq lbl_fn_800D51EC_00001648
-    beq lbl_fn_800D51EC_00001640
+    beq lbl_atn_TaskBase_clearFlagRecursive_00001648
+    beq lbl_atn_TaskBase_clearFlagRecursive_00001640
     mr r3, r30
     bl atn_TaskBase_isValid
-lbl_fn_800D51EC_00001640:
+lbl_atn_TaskBase_clearFlagRecursive_00001640:
     mr r3, r30
-    bl fn_800D51EC
-lbl_fn_800D51EC_00001648:
+    bl atn_TaskBase_clearFlagRecursive
+lbl_atn_TaskBase_clearFlagRecursive_00001648:
     lwz r0, 0x38(r29)
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0x38(r29)
-lbl_fn_800D51EC_00001654:
+lbl_atn_TaskBase_clearFlagRecursive_00001654:
     lwz r29, 0x1c(r28)
     cmpwi r29, 0x0
-    beq lbl_fn_800D51EC_000016B8
-    beq lbl_fn_800D51EC_0000166C
+    beq lbl_atn_TaskBase_clearFlagRecursive_000016B8
+    beq lbl_atn_TaskBase_clearFlagRecursive_0000166C
     mr r3, r29
     bl atn_TaskBase_isValid
-lbl_fn_800D51EC_0000166C:
+lbl_atn_TaskBase_clearFlagRecursive_0000166C:
     lwz r30, 0x18(r29)
     cmpwi r30, 0x0
-    beq lbl_fn_800D51EC_0000168C
-    beq lbl_fn_800D51EC_00001684
+    beq lbl_atn_TaskBase_clearFlagRecursive_0000168C
+    beq lbl_atn_TaskBase_clearFlagRecursive_00001684
     mr r3, r30
     bl atn_TaskBase_isValid
-lbl_fn_800D51EC_00001684:
+lbl_atn_TaskBase_clearFlagRecursive_00001684:
     mr r3, r30
-    bl fn_800D51EC
-lbl_fn_800D51EC_0000168C:
+    bl atn_TaskBase_clearFlagRecursive
+lbl_atn_TaskBase_clearFlagRecursive_0000168C:
     lwz r30, 0x1c(r29)
     cmpwi r30, 0x0
-    beq lbl_fn_800D51EC_000016AC
-    beq lbl_fn_800D51EC_000016A4
+    beq lbl_atn_TaskBase_clearFlagRecursive_000016AC
+    beq lbl_atn_TaskBase_clearFlagRecursive_000016A4
     mr r3, r30
     bl atn_TaskBase_isValid
-lbl_fn_800D51EC_000016A4:
+lbl_atn_TaskBase_clearFlagRecursive_000016A4:
     mr r3, r30
-    bl fn_800D51EC
-lbl_fn_800D51EC_000016AC:
+    bl atn_TaskBase_clearFlagRecursive
+lbl_atn_TaskBase_clearFlagRecursive_000016AC:
     lwz r0, 0x38(r29)
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0x38(r29)
-lbl_fn_800D51EC_000016B8:
+lbl_atn_TaskBase_clearFlagRecursive_000016B8:
     lwz r0, 0x38(r28)
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0x38(r28)
-lbl_fn_800D51EC_000016C4:
+lbl_atn_TaskBase_clearFlagRecursive_000016C4:
     lwz r0, 0x38(r27)
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0x38(r27)
-lbl_fn_800D51EC_000016D0:
+lbl_atn_TaskBase_clearFlagRecursive_000016D0:
     lwz r0, 0x38(r31)
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0x38(r31)

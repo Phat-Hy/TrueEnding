@@ -23,7 +23,7 @@ extern void net_socketConnect(void);
 extern void net_socketClose(void);
 extern void net_checkSocketStatus(void);
 extern void fn_806D7B70(void);
-extern void fn_806D7F20(void);
+extern void net_socket_getLastError(void);
 extern void net_strdup(void);
 extern void net_getTimestampMs(void);
 extern void fn_806F2070(void);
@@ -692,7 +692,7 @@ lbl_fn_806F6CA0_0000087C:
     stw r3, 0x124(r25)
     lwz r3, 0x50(r25)
     stw r0, 0x40(r25)
-    bl fn_806D7F20
+    bl net_socket_getLastError
     stw r3, 0x54(r25)
 lbl_fn_806F6CA0_000008A0:
     cmpwi r28, 0x0

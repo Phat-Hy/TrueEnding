@@ -20,7 +20,7 @@ extern void OSUnlockMutex(void);
 extern void fn_80619920(void);
 extern void fn_806199D0(void);
 extern void fn_80619A00(void);
-extern void fn_80619AB0(void);
+extern void mem_heap_free(void);
 extern void fn_806A475C(void);
 extern void fn_806A5CA0(void);
 extern void fn_806A5DC0(void);
@@ -475,7 +475,7 @@ lbl_fn_806A68F0_000003D8:
     cmpwi r28, 0x0
     beq lbl_fn_806A68F0_00000408
     mr r3, r28
-    bl fn_80619AB0
+    bl mem_heap_free
 lbl_fn_806A68F0_00000408:
     lwz r4, 0xc(r29)
     cmpwi r4, 0x0
@@ -483,7 +483,7 @@ lbl_fn_806A68F0_00000408:
     lwz r3, 0x0(r29)
     cmpwi r3, 0x0
     beq lbl_fn_806A68F0_00000424
-    bl fn_80619AB0
+    bl mem_heap_free
 lbl_fn_806A68F0_00000424:
     cmpwi r29, 0x0
     beq lbl_fn_806A68F0_0000043C
@@ -509,7 +509,7 @@ lbl_fn_806A68F0_00000464:
     lwz r4, lbl_80880478
     cmpwi r3, 0x0
     beq lbl_fn_806A68F0_00000478
-    bl fn_80619AB0
+    bl mem_heap_free
 lbl_fn_806A68F0_00000478:
     li r0, 0x0
     stw r0, lbl_80880478
@@ -530,7 +530,7 @@ lbl_fn_806A68F0_000004A4:
     lwz r3, lbl_80880470
     cmpwi r3, 0x0
     beq lbl_fn_806A68F0_000004C0
-    bl fn_80619AB0
+    bl mem_heap_free
 lbl_fn_806A68F0_000004C0:
     stw r31, 0x0(r28)
 lbl_fn_806A68F0_000004C4:

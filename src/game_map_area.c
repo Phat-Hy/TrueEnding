@@ -22,7 +22,7 @@ extern void fn_80094BD8(void);
 extern void str_parseInt(void);
 extern void colli_findDynamicSlot(void);
 extern void colli_findStaticSlot(void);
-extern void fn_8011BEB8(void);
+extern void player_resetActionState(void);
 extern void fn_8011C044(void);
 extern void fn_8011D1FC(void);
 extern void fn_8011D21C(void);
@@ -366,7 +366,7 @@ lbl_fn_8017B434_0000032C:
     beq lbl_fn_8017B434_000007EC
     addi r3, r29, 0xc58
     li r4, 0x0
-    bl fn_8011BEB8
+    bl player_resetActionState
     lwz r0, 0x12a4(r29)
     srwi. r0, r0, 31
     beq lbl_fn_8017B434_000004B4

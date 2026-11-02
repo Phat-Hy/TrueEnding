@@ -67,7 +67,7 @@ void fn_8011BBBC(void *p);
 void fn_8011BBD0(void);
 void fn_8011BD14(void);
 void fn_8011BE54(void);
-void fn_8011BEB8(void);
+void player_resetActionState(void);
 void fn_8011BF3C(void);
 void fn_8011BF94(void);
 void fn_8011C044(void);
@@ -783,7 +783,7 @@ asm void fn_8011BE54(void)
     blr
 }
 
-asm void fn_8011BEB8(void)
+asm void player_resetActionState(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -794,9 +794,9 @@ asm void fn_8011BEB8(void)
     stw r31, 0xc(r1)
     mr r31, r3
     stw r0, 0x0(r3)
-    beq lbl_fn_8011BEB8_00000970
+    beq lbl_player_resetActionState_00000970
     stw r0, 0xd0(r3)
-lbl_fn_8011BEB8_00000970:
+lbl_player_resetActionState_00000970:
     lha r4, 0xe2(r3)
     li r5, 0x0
     lhz r0, 0xe0(r3)

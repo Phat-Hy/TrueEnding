@@ -50,7 +50,7 @@ extern void fn_806CD4E0(void);
 extern void fn_806CE0F0(void);
 extern void fn_806CE1E0(void);
 extern void fn_806CE660(void);
-extern void fn_806D7F20(void);
+extern void net_socket_getLastError(void);
 extern void fn_806EABE0(void);
 extern void net_bindSessionCallback(void);
 extern void fn_806EAD00(void);
@@ -1738,7 +1738,7 @@ asm void fn_806B3030(void)
     mflr r0
     stw r0, 0x14(r1)
     bl fn_806EAD00
-    bl fn_806D7F20
+    bl net_socket_getLastError
     lis r4, lbl_8085FF9C@ha
     mr r5, r3
     stw r3, lbl_8085FF9C@l(r4)

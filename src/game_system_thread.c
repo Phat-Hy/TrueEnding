@@ -17,7 +17,7 @@ extern void atn_LH_Texture_update(void);
 extern void env_updateAtmosphere(void);
 extern void str_findChar(void);
 extern void fn_801EDCB8(void);
-extern void fn_801F04FC(void);
+extern void curve_setKeyframeValue(void);
 extern void fn_801F25E0(void);
 extern void memcmp(void);
 extern void strrchr(void);
@@ -1855,7 +1855,7 @@ lbl_thread_findAndNotify_000017C4:
     addi r3, r5, 0x4
     li r4, 0x0
     li r5, 0x1
-    b fn_801F04FC
+    b curve_setKeyframeValue
 lbl_thread_findAndNotify_000017E4:
     addi r6, r6, 0x4
 lbl_thread_findAndNotify_000017E8:
@@ -1882,7 +1882,7 @@ lbl_thread_findAndNotifySlot_00001808:
     add r3, r6, r0
     li r5, 0x1
     addi r3, r3, 0x4
-    b fn_801F04FC
+    b curve_setKeyframeValue
 lbl_thread_findAndNotifySlot_00001830:
     addi r7, r7, 0x4
 lbl_thread_findAndNotifySlot_00001834:
@@ -1909,7 +1909,7 @@ lbl_fn_801FED70_00001854:
     add r3, r6, r0
     li r5, 0x1
     addi r3, r3, 0x4
-    b fn_801F04FC
+    b curve_setKeyframeValue
 lbl_fn_801FED70_0000187C:
     addi r7, r7, 0x4
 lbl_fn_801FED70_00001880:
@@ -1936,7 +1936,7 @@ lbl_thread_findTaskById_000018A0:
     add r3, r6, r0
     li r5, 0x1
     addi r3, r3, 0x4
-    b fn_801F04FC
+    b curve_setKeyframeValue
 lbl_thread_findTaskById_000018C8:
     addi r7, r7, 0x4
 lbl_thread_findTaskById_000018CC:

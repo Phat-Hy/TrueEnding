@@ -29,7 +29,7 @@ extern void net_checkSocketStatus(void);
 extern void fn_806D7BB0(void);
 extern void fn_806D7CF0(void);
 extern void fn_806D7E70(void);
-extern void fn_806D7F20(void);
+extern void net_socket_getLastError(void);
 extern void fn_806D8650(void);
 extern void fn_806D8F10(void);
 extern void fn_806D8F20(void);
@@ -696,7 +696,7 @@ lbl_fn_806ECF70_0000081C:
     mr r25, r3
     bne lbl_fn_806ECF70_00000B88
     lwz r3, 0x0(r29)
-    bl fn_806D7F20
+    bl net_socket_getLastError
     cmpwi r3, -0xf
     bne lbl_fn_806ECF70_00000A4C
     lhz r3, 0x12(r1)

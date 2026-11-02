@@ -29,7 +29,7 @@ extern void net_checkSocketStatus(void);
 extern void fn_806D7B70(void);
 extern void fn_806D7CB0(void);
 extern void fn_806D7D60(void);
-extern void fn_806D7F20(void);
+extern void net_socket_getLastError(void);
 extern void fn_806D8650(void);
 extern void memmove(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -533,7 +533,7 @@ lbl_fn_806F9050_00000674:
     cmpwi r3, -0x1
     bne lbl_fn_806F9050_000006B4
     lwz r3, 0x0(r30)
-    bl fn_806D7F20
+    bl net_socket_getLastError
     cmpwi r3, -0x6
     beq lbl_fn_806F9050_000006C8
     cmpwi r3, -0x4c

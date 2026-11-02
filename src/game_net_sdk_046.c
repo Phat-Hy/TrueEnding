@@ -20,7 +20,7 @@ extern void strcmp(void);
 extern void strncmp(void);
 extern void fn_8068B1F8(void);
 extern void fn_8068B1FC(void);
-extern void fn_806A426C(void);
+extern void net_sdk_noop(void);
 extern void net_truncateU16(void);
 extern void fn_806D57A0(void);
 extern void net_pollActiveSockets(void);
@@ -31,7 +31,7 @@ extern void fn_806D5E40(void);
 extern void fn_806D6140(void);
 extern void fn_806D62F0(void);
 extern void fn_806D64B0(void);
-extern void fn_806D6560(void);
+extern void net_hashTable_remove(void);
 extern void net_invokeChannelCallback(void);
 extern void net_socketConnect(void);
 extern void net_socketClose(void);
@@ -1877,7 +1877,7 @@ asm void fn_80700830(void)
     mr r3, r31
     bl net_http_initConnection
     addi r4, r1, 0x8
-    bl fn_806D6560
+    bl net_hashTable_remove
 lbl_fn_80700830_00001754:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
@@ -2176,7 +2176,7 @@ lbl_fn_80700BA0_00001B24:
     mr r3, r26
     bl net_http_initConnection
     addi r4, r1, 0x18
-    bl fn_806D6560
+    bl net_hashTable_remove
 lbl_fn_80700BA0_00001B70:
     addi r31, r31, 0x1
 lbl_fn_80700BA0_00001B74:
@@ -2208,7 +2208,7 @@ lbl_fn_80700BA0_00001BA0:
     mr r3, r26
     bl net_http_initConnection
     addi r4, r1, 0x20
-    bl fn_806D6560
+    bl net_hashTable_remove
 lbl_fn_80700BA0_00001BE0:
     addi r22, r22, 0x4
     addi r31, r31, 0x1
@@ -2307,7 +2307,7 @@ lbl_fn_80700BA0_00001D08:
     mr r3, r26
     bl net_http_initConnection
     addi r4, r1, 0x10
-    bl fn_806D6560
+    bl net_hashTable_remove
 lbl_fn_80700BA0_00001D54:
     addi r23, r23, 0x1
 lbl_fn_80700BA0_00001D58:
@@ -2341,7 +2341,7 @@ lbl_fn_80700BA0_00001D8C:
     mr r3, r26
     bl net_http_initConnection
     addi r4, r1, 0x8
-    bl fn_806D6560
+    bl net_hashTable_remove
 lbl_fn_80700BA0_00001DCC:
     addi r24, r24, 0x4
     addi r23, r23, 0x1
@@ -2486,7 +2486,7 @@ lbl_fn_80700F50_00001FA0:
     stb r3, 0x33(r1)
     stb r0, 0x34(r1)
     lwz r3, 0x6bc(r23)
-    bl fn_806A426C
+    bl net_sdk_noop
     rlwinm r5, r3, 8, 8, 15
     rlwinm r4, r3, 24, 16, 23
     rlwimi r5, r3, 24, 0, 7
@@ -2562,7 +2562,7 @@ lbl_fn_80700F50_000020C0:
     mr r3, r26
     add r28, r28, r25
     add r29, r29, r25
-    bl fn_806A426C
+    bl net_sdk_noop
     stw r3, 0x14(r1)
     mr r3, r29
     addi r4, r1, 0x14
@@ -2586,7 +2586,7 @@ lbl_fn_80700F50_00002134:
     rlwinm. r0, r0, 0, 24, 24
     beq lbl_fn_80700F50_00002178
     mr r3, r27
-    bl fn_806A426C
+    bl net_sdk_noop
     rlwinm r5, r3, 8, 8, 15
     rlwinm r4, r3, 24, 16, 23
     rlwimi r5, r3, 24, 0, 7
@@ -2655,7 +2655,7 @@ lbl_fn_80700F50_00002200:
     mr r3, r23
     bl net_http_initConnection
     addi r4, r1, 0x20
-    bl fn_806D6560
+    bl net_hashTable_remove
 lbl_fn_80700F50_0000224C:
     addi r24, r24, 0x1
 lbl_fn_80700F50_00002250:
@@ -2689,7 +2689,7 @@ lbl_fn_80700F50_00002284:
     mr r3, r23
     bl net_http_initConnection
     addi r4, r1, 0x28
-    bl fn_806D6560
+    bl net_hashTable_remove
 lbl_fn_80700F50_000022C4:
     addi r25, r25, 0x4
     addi r24, r24, 0x1

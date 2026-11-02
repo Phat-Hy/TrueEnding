@@ -24,7 +24,7 @@ extern void fn_806D5930(void);
 extern void fn_806D5C90(void);
 extern void fn_806D6250(void);
 extern void fn_806D64B0(void);
-extern void fn_806D6560(void);
+extern void net_hashTable_remove(void);
 extern void net_invokeChannelCallback(void);
 extern void fn_806D6720(void);
 extern void net_socketConnect(void);
@@ -32,7 +32,7 @@ extern void fn_806D7AA0(void);
 extern void net_socketClose(void);
 extern void fn_806D7AE0(void);
 extern void fn_806D7C40(void);
-extern void fn_806D7F20(void);
+extern void net_socket_getLastError(void);
 extern void fn_806D8060(void);
 extern void fn_806D8560(void);
 extern void fn_806D8B20(void);
@@ -1855,7 +1855,7 @@ asm void fn_806E5970(void)
     mr r4, r3
     beq lbl_fn_806E5970_00001774
     lwz r3, 0x5c8(r31)
-    bl fn_806D6560
+    bl net_hashTable_remove
 lbl_fn_806E5970_00001774:
     lwz r0, 0x44(r1)
     lwz r31, 0x3c(r1)
@@ -1869,7 +1869,7 @@ asm void fn_806E59C0(void)
     nofralloc
     lwz r3, 0x0(r3)
     lwz r3, 0x5c8(r3)
-    b fn_806D6560
+    b net_hashTable_remove
 }
 
 asm void fn_806E59D0(void)
@@ -2386,7 +2386,7 @@ lbl_fn_806E5F90_00001E6C:
     cmpwi r3, -0x1
     bne lbl_fn_806E5F90_00001F00
     lwz r3, 0x4(r29)
-    bl fn_806D7F20
+    bl net_socket_getLastError
     cmpwi r3, -0x6
     beq lbl_fn_806E5F90_00001F00
     cmpwi r3, -0x1a

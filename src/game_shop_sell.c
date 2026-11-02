@@ -6,7 +6,7 @@ extern void menu_renderLayout(void);
 extern void mem_alloc(void);
 extern void colli_findDynamicSlot(void);
 extern void colli_findStaticSlot(void);
-extern void fn_8011BEB8(void);
+extern void player_resetActionState(void);
 extern void dialog_initScriptSlot(void);
 extern void dialog_selectChoice(void);
 extern void party_evalTacticCondition(void);
@@ -1098,7 +1098,7 @@ asm void fn_8015A46C(void)
     stw r28, 0xb0(r1)
     mr r28, r3
     addi r3, r3, 0xc58
-    bl fn_8011BEB8
+    bl player_resetActionState
     lwz r0, 0x12a4(r28)
     srwi. r0, r0, 31
     beq lbl_fn_8015A46C_00001030
