@@ -92,7 +92,7 @@ void fn_802D7480(void);
 void fn_802D7A3C(void);
 void fn_802D7E80(void);
 void fn_802D8540(void);
-void fn_802D8550(void);
+void *fn_802D8550(const void *p, u32 idx);
 void fn_802D8560(void);
 void fn_802D8854(void);
 
@@ -1584,13 +1584,9 @@ asm void fn_802D8540(void)
     blr
 }
 
-asm void fn_802D8550(void)
+void *fn_802D8550(const void *p, u32 idx)
 {
-    nofralloc
-    lwz r3, 0x0(r3)
-    slwi r0, r4, 2
-    add r3, r3, r0
-    blr
+    return (u8 *)*(const void **)p + (idx << 2);
 }
 
 asm void fn_802D8560(void)

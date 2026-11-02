@@ -180,7 +180,7 @@ void fn_8043D594(void);
 void fn_8043D618(void);
 void fn_8043D6E4(void);
 void fn_8043D6F4(void);
-void fn_8043D930(void);
+void *fn_8043D930(const void *p, u32 idx);
 void fn_8043D940(void);
 void fn_8043D9F8(void);
 void fn_8043DB84(void);
@@ -1754,13 +1754,9 @@ lbl_fn_8043D6F4_000015E4:
     blr
 }
 
-asm void fn_8043D930(void)
+void *fn_8043D930(const void *p, u32 idx)
 {
-    nofralloc
-    lwz r3, 0x0(r3)
-    slwi r0, r4, 2
-    add r3, r3, r0
-    blr
+    return (u8 *)*(const void **)p + (idx << 2);
 }
 
 asm void fn_8043D940(void)

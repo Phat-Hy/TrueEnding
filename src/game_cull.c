@@ -115,9 +115,9 @@ void fn_800D9410(void);
 void fn_800D94E4(void);
 void fn_800D94F8(void);
 void fn_800D9560(void);
-void fn_800D9880(void);
+void *fn_800D9880(const void *p, u32 idx);
 void fn_800D9890(void);
-void fn_800D98B0(void);
+void *fn_800D98B0(const void *p, u32 idx);
 void *fn_800D98C0(void *obj);
 void fn_800D98C8(void);
 void fn_800D98DC(void);
@@ -1500,13 +1500,9 @@ lbl_fn_800D9560_00001234:
     blr
 }
 
-asm void fn_800D9880(void)
+void *fn_800D9880(const void *p, u32 idx)
 {
-    nofralloc
-    mulli r0, r4, 0x48
-    lwz r3, 0x0(r3)
-    add r3, r3, r0
-    blr
+    return (u8 *)*(const void **)p + idx * 0x48;
 }
 
 asm void fn_800D9890(void)
@@ -1523,13 +1519,9 @@ lbl_fn_800D9890_00001284:
     blr
 }
 
-asm void fn_800D98B0(void)
+void *fn_800D98B0(const void *p, u32 idx)
 {
-    nofralloc
-    lwz r3, 0x0(r3)
-    slwi r0, r4, 2
-    add r3, r3, r0
-    blr
+    return (u8 *)*(const void **)p + (idx << 2);
 }
 
 void *fn_800D98C0(void *obj)

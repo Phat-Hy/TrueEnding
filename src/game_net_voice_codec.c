@@ -29,7 +29,7 @@ extern u32 lbl_8087F628;
 
 /* Function declarations */
 void fn_804D807C(void);
-void fn_804D8100(void);
+void *fn_804D8100(const void *p, u32 idx);
 void *fn_804D8110(void *p);
 void fn_804D8118(void);
 void net_voiceCodec_destroy(void);
@@ -82,13 +82,9 @@ asm void fn_804D807C(void)
     blr
 }
 
-asm void fn_804D8100(void)
+void *fn_804D8100(const void *p, u32 idx)
 {
-    nofralloc
-    mulli r0, r4, 0x30
-    lwz r3, 0x4(r3)
-    add r3, r3, r0
-    blr
+    return (u8 *)*(const void **)((const u8 *)p + 0x4) + idx * 0x30;
 }
 
 void *fn_804D8110(void *p)

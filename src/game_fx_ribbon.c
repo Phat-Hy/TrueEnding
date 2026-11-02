@@ -95,7 +95,7 @@ void fn_8028AC70(void);
 void fn_8028ADF4(void);
 void fn_8028AFD8(void);
 void fn_8028B47C(void);
-void fn_8028B74C(void);
+void *fn_8028B74C(const void *p, u32 idx);
 void fn_8028B75C(void);
 void fn_8028BFE0(void);
 
@@ -1062,13 +1062,9 @@ lbl_fn_8028B47C_00000DB4:
     blr
 }
 
-asm void fn_8028B74C(void)
+void *fn_8028B74C(const void *p, u32 idx)
 {
-    nofralloc
-    lwz r3, 0x0(r3)
-    slwi r0, r4, 2
-    add r3, r3, r0
-    blr
+    return (u8 *)*(const void **)p + (idx << 2);
 }
 
 asm void fn_8028B75C(void)

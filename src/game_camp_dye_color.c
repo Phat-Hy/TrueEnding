@@ -54,9 +54,9 @@ extern u32 lbl_80885CEC;
 
 /* Function declarations */
 void fn_803C1CAC(void);
-void fn_803C1E2C(void);
+void *fn_803C1E2C(const void *p, u32 idx);
 void fn_803C1E3C(void);
-void fn_803C2038(void);
+void *fn_803C2038(const void *p, u32 idx);
 void fn_803C2048(void);
 void fn_803C2090(void);
 void fn_803C221C(void);
@@ -174,13 +174,9 @@ lbl_fn_803C1CAC_0000016C:
     blr
 }
 
-asm void fn_803C1E2C(void)
+void *fn_803C1E2C(const void *p, u32 idx)
 {
-    nofralloc
-    mulli r0, r4, 0x58
-    lwz r3, 0x4(r3)
-    add r3, r3, r0
-    blr
+    return (u8 *)*(const void **)((const u8 *)p + 0x4) + idx * 0x58;
 }
 
 asm void fn_803C1E3C(void)
@@ -333,13 +329,9 @@ lbl_fn_803C1E3C_00000374:
     blr
 }
 
-asm void fn_803C2038(void)
+void *fn_803C2038(const void *p, u32 idx)
 {
-    nofralloc
-    mulli r0, r4, 0x50
-    lwz r3, 0x4(r3)
-    add r3, r3, r0
-    blr
+    return (u8 *)*(const void **)((const u8 *)p + 0x4) + idx * 0x50;
 }
 
 asm void fn_803C2048(void)

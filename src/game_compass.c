@@ -49,7 +49,7 @@ extern u32 lbl_80880C14;
 void fn_800910D4(void);
 void atn_Model_updateMatrices(void);
 void fn_80091A90(void);
-void fn_80091C00(void);
+void *fn_80091C00(const void *p, u32 idx);
 void fn_80091C10(void);
 void fn_80091CFC(void);
 void fn_800920B8(void);
@@ -816,13 +816,9 @@ lbl_fn_80091A90_00000B10:
     blr
 }
 
-asm void fn_80091C00(void)
+void *fn_80091C00(const void *p, u32 idx)
 {
-    nofralloc
-    mulli r0, r4, 0x30
-    lwz r3, 0x4(r3)
-    add r3, r3, r0
-    blr
+    return (u8 *)*(const void **)((const u8 *)p + 0x4) + idx * 0x30;
 }
 
 asm void fn_80091C10(void)

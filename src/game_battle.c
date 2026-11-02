@@ -26,7 +26,7 @@ extern void fn_8001C260(void);
 extern void fn_8001C26C(void);
 extern void fn_8003E918(void);
 extern void fn_80051E90(void);
-extern void mem_getAllocSize(void);
+extern void mem_getAllocSize(void *p);
 extern void fn_800EE794(void);
 extern void fn_80102A40(void);
 extern void fn_8010C948(void);
@@ -154,7 +154,7 @@ void *fn_8001A268(void *obj);
 void fn_8001A270(void);
 void fn_8001A2DC(void);
 void fn_8001A34C(void);
-void fn_8001A39C(void);
+void fn_8001A39C(void *p);
 void dtor_8001A3A4(void);
 void fn_8001A404(void);
 void fn_8001A444(void);
@@ -3730,11 +3730,9 @@ lbl_fn_8001A34C_00003260:
     blr
 }
 
-asm void fn_8001A39C(void)
+void fn_8001A39C(void *p)
 {
-    nofralloc
-    lwz r3, 0xc(r3)
-    b mem_getAllocSize
+    mem_getAllocSize(*(void **)((u8 *)p + 0xc));
 }
 
 asm void dtor_8001A3A4(void)

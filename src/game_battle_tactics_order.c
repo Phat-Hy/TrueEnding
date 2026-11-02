@@ -120,9 +120,9 @@ void fn_803F0538(void);
 u32 fn_803F05E8(const void *p);
 void fn_803F05F0(void);
 u32 fn_803F05FC(const void *p);
-void fn_803F0604(void);
-void fn_803F0614(void);
-void fn_803F0624(void);
+void *fn_803F0604(const void *p, u32 idx);
+void *fn_803F0614(const void *p, u32 idx);
+void *fn_803F0624(const void *p, u32 idx);
 u32 fn_803F0634(const void *p);
 void fn_803F063C(void);
 void fn_803F0688(void);
@@ -849,31 +849,19 @@ u32 fn_803F05FC(const void *p)
     return *(const u32 *)p;
 }
 
-asm void fn_803F0604(void)
+void *fn_803F0604(const void *p, u32 idx)
 {
-    nofralloc
-    mulli r0, r4, 0xc
-    lwz r3, 0x4(r3)
-    add r3, r3, r0
-    blr
+    return (u8 *)*(const void **)((const u8 *)p + 0x4) + idx * 0xc;
 }
 
-asm void fn_803F0614(void)
+void *fn_803F0614(const void *p, u32 idx)
 {
-    nofralloc
-    mulli r0, r4, 0xc
-    lwz r3, 0x4(r3)
-    add r3, r3, r0
-    blr
+    return (u8 *)*(const void **)((const u8 *)p + 0x4) + idx * 0xc;
 }
 
-asm void fn_803F0624(void)
+void *fn_803F0624(const void *p, u32 idx)
 {
-    nofralloc
-    mulli r0, r4, 0x28
-    lwz r3, 0x4(r3)
-    add r3, r3, r0
-    blr
+    return (u8 *)*(const void **)((const u8 *)p + 0x4) + idx * 0x28;
 }
 
 u32 fn_803F0634(const void *p)

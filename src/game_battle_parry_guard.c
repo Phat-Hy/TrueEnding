@@ -117,8 +117,8 @@ void fn_80412DA8(void);
 void fn_80412E5C(void);
 void fn_80412E94(void);
 void fn_80412EA0(void);
-void fn_80412F08(void);
-void fn_80412F18(void);
+void fn_80412F08(void *p);
+void fn_80412F18(void *p);
 void fn_80412F28(void);
 void fn_80412FFC(void);
 void fn_804130B8(void);
@@ -618,22 +618,16 @@ lbl_fn_80412EA0_00000644:
     blr
 }
 
-asm void fn_80412F08(void)
+void fn_80412F08(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, 0x0(r3)
-    stw r0, 0x4(r3)
-    blr
+    *(u32 *)p = 0;
+    *(u32 *)((u8 *)p + 0x4) = 0;
 }
 
-asm void fn_80412F18(void)
+void fn_80412F18(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, 0x0(r3)
-    stw r0, 0x4(r3)
-    blr
+    *(u32 *)p = 0;
+    *(u32 *)((u8 *)p + 0x4) = 0;
 }
 
 asm void fn_80412F28(void)

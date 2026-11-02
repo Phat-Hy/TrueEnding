@@ -85,9 +85,9 @@ extern u32 lbl_80881810;
 void* equip_getElementPtr8(void*, int);
 void* equip_getElementPtr0(void*, int);
 void fn_80120D44(void);
-void fn_80120E38(void);
+void *fn_80120E38(const void *p, u32 idx);
 void fn_80120E48(void);
-void fn_80120F4C(void);
+void *fn_80120F4C(const void *p, u32 idx);
 void fn_80120F5C(void);
 void atn_LH_Model_destructor(void);
 void fn_80121048(void);
@@ -189,13 +189,9 @@ lbl_fn_80120D44_000000F4:
     blr
 }
 
-asm void fn_80120E38(void)
+void *fn_80120E38(const void *p, u32 idx)
 {
-    nofralloc
-    mulli r0, r4, 0xc
-    lwz r3, 0x8(r3)
-    add r3, r3, r0
-    blr
+    return (u8 *)*(const void **)((const u8 *)p + 0x8) + idx * 0xc;
 }
 
 asm void fn_80120E48(void)
@@ -275,13 +271,9 @@ lbl_fn_80120E48_00000208:
     blr
 }
 
-asm void fn_80120F4C(void)
+void *fn_80120F4C(const void *p, u32 idx)
 {
-    nofralloc
-    lwz r3, 0x8(r3)
-    slwi r0, r4, 5
-    add r3, r3, r0
-    blr
+    return (u8 *)*(const void **)((const u8 *)p + 0x8) + (idx << 5);
 }
 
 asm void fn_80120F5C(void)

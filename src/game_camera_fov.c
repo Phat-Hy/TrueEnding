@@ -119,7 +119,7 @@ void fn_802DDDB8(void);
 void fn_802DE27C(void);
 void fn_802DE80C(void);
 void fn_802DEB00(void);
-void fn_802DEE18(void);
+void *fn_802DEE18(const void *p, u32 idx);
 void fn_802DEE28(void);
 void fn_802DF384(void);
 void fn_802DF398(void);
@@ -1432,13 +1432,9 @@ lbl_fn_802DEB00_00001248:
     blr
 }
 
-asm void fn_802DEE18(void)
+void *fn_802DEE18(const void *p, u32 idx)
 {
-    nofralloc
-    lwz r3, 0x0(r3)
-    slwi r0, r4, 2
-    add r3, r3, r0
-    blr
+    return (u8 *)*(const void **)p + (idx << 2);
 }
 
 asm void fn_802DEE28(void)

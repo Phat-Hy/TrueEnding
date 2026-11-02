@@ -70,11 +70,11 @@ extern u32 lbl_80885CBC;
 /* Function declarations */
 u32 fn_803C795C(const void *p);
 void fn_803C7964(void);
-void fn_803C7A14(void);
+void fn_803C7A14(void *p);
 void fn_803C7A24(void);
 void fn_803C7C34(void);
 void fn_803C7CDC(void);
-void fn_803C7D08(void);
+void *fn_803C7D08(const void *p, u32 idx);
 u32 fn_803C7D18(const void *p);
 void fn_803C7D20(void);
 void fn_803C7DC8(void);
@@ -95,12 +95,12 @@ void fn_803C83E4(void);
 void fn_803C83E8(void);
 u32 fn_803C8564(const void *p);
 void fn_803C856C(void);
-void fn_803C861C(void);
+void fn_803C861C(void *p);
 void fn_803C862C(void);
 void fn_803C8810(void);
 u32 fn_803C8898(const void *p);
 void fn_803C88A0(void);
-void fn_803C8950(void);
+void fn_803C8950(void *p);
 void fn_803C8960(void);
 void fn_803C8B0C(void);
 void fn_803C8BB4(void);
@@ -174,13 +174,10 @@ lbl_fn_803C7964_0000009C:
     blr
 }
 
-asm void fn_803C7A14(void)
+void fn_803C7A14(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, 0x140(r3)
-    stw r0, 0x144(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x140) = 0;
+    *(u32 *)((u8 *)p + 0x144) = 0;
 }
 
 asm void fn_803C7A24(void)
@@ -398,13 +395,9 @@ asm void fn_803C7CDC(void)
     blr
 }
 
-asm void fn_803C7D08(void)
+void *fn_803C7D08(const void *p, u32 idx)
 {
-    nofralloc
-    lwz r3, 0x4(r3)
-    slwi r0, r4, 5
-    add r3, r3, r0
-    blr
+    return (u8 *)*(const void **)((const u8 *)p + 0x4) + (idx << 5);
 }
 
 u32 fn_803C7D18(const void *p)
@@ -1105,13 +1098,10 @@ lbl_fn_803C856C_00000CA4:
     blr
 }
 
-asm void fn_803C861C(void)
+void fn_803C861C(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, 0x24(r3)
-    stw r0, 0x28(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x24) = 0;
+    *(u32 *)((u8 *)p + 0x28) = 0;
 }
 
 asm void fn_803C862C(void)
@@ -1350,13 +1340,10 @@ lbl_fn_803C88A0_00000FD8:
     blr
 }
 
-asm void fn_803C8950(void)
+void fn_803C8950(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, 0x18(r3)
-    stw r0, 0x1c(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x18) = 0;
+    *(u32 *)((u8 *)p + 0x1c) = 0;
 }
 
 asm void fn_803C8960(void)

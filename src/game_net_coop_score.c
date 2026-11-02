@@ -140,7 +140,7 @@ void fn_804ABF74(void);
 void fn_804ABF84(void);
 void *fn_804AC3C8(void *obj);
 void *fn_804AC3D0(void *obj);
-void fn_804AC3D8(void);
+void *fn_804AC3D8(const void *p, u32 idx);
 void fn_804AC3E8(void);
 void fn_804AC3F8(void);
 void fn_804AC408(void);
@@ -851,13 +851,9 @@ void *fn_804AC3D0(void *obj)
     return *(void **)(obj);
 }
 
-asm void fn_804AC3D8(void)
+void *fn_804AC3D8(const void *p, u32 idx)
 {
-    nofralloc
-    lwz r3, 0x4(r3)
-    slwi r0, r4, 2
-    add r3, r3, r0
-    blr
+    return (u8 *)*(const void **)((const u8 *)p + 0x4) + (idx << 2);
 }
 
 asm void fn_804AC3E8(void)

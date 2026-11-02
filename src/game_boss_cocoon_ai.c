@@ -104,7 +104,7 @@ void fn_80453E20(void);
 void fn_804541A0(void);
 void fn_80454514(void);
 void fn_80454538(void);
-void fn_80454554(void);
+void *fn_80454554(const void *p, u32 idx);
 void *fn_80454564(void *obj);
 void fn_8045456C(void);
 void fn_804549E8(void);
@@ -668,13 +668,9 @@ asm void fn_80454538(void)
     blr
 }
 
-asm void fn_80454554(void)
+void *fn_80454554(const void *p, u32 idx)
 {
-    nofralloc
-    mulli r0, r4, 0x18
-    lwz r3, 0x0(r3)
-    add r3, r3, r0
-    blr
+    return (u8 *)*(const void **)p + idx * 0x18;
 }
 
 void *fn_80454564(void *obj)

@@ -103,15 +103,15 @@ extern u32 lbl_80885CD8;
 extern u32 lbl_80885CDC;
 
 /* Function declarations */
-void fn_803C01B0(void);
+void *fn_803C01B0(const void *p, u32 idx);
 void fn_803C01C0(void);
-void fn_803C0624(void);
+void *fn_803C0624(const void *p, u32 idx);
 void fn_803C0634(void);
-void fn_803C0928(void);
+void *fn_803C0928(const void *p, u32 idx);
 void fn_803C0938(void);
 void fn_803C0C2C(void);
 void fn_803C0F48(void);
-void fn_803C1194(void);
+void *fn_803C1194(const void *p, u32 idx);
 void fn_803C11A4(void);
 void fn_803C1338(void);
 void craft_forgeUpgradeWeapon(void);
@@ -121,13 +121,9 @@ void fn_803C1884(void);
 void fn_803C18DC(void);
 void fn_803C1950(void);
 
-asm void fn_803C01B0(void)
+void *fn_803C01B0(const void *p, u32 idx)
 {
-    nofralloc
-    lwz r3, 0x4(r3)
-    slwi r0, r4, 5
-    add r3, r3, r0
-    blr
+    return (u8 *)*(const void **)((const u8 *)p + 0x4) + (idx << 5);
 }
 
 asm void fn_803C01C0(void)
@@ -453,13 +449,9 @@ lbl_fn_803C01C0_0000045C:
     blr
 }
 
-asm void fn_803C0624(void)
+void *fn_803C0624(const void *p, u32 idx)
 {
-    nofralloc
-    lwz r3, 0x4(r3)
-    slwi r0, r4, 2
-    add r3, r3, r0
-    blr
+    return (u8 *)*(const void **)((const u8 *)p + 0x4) + (idx << 2);
 }
 
 asm void fn_803C0634(void)
@@ -673,13 +665,9 @@ lbl_fn_803C0634_00000760:
     blr
 }
 
-asm void fn_803C0928(void)
+void *fn_803C0928(const void *p, u32 idx)
 {
-    nofralloc
-    mulli r0, r4, 0x148
-    lwz r3, 0x4(r3)
-    add r3, r3, r0
-    blr
+    return (u8 *)*(const void **)((const u8 *)p + 0x4) + idx * 0x148;
 }
 
 asm void fn_803C0938(void)
@@ -1273,13 +1261,9 @@ lbl_fn_803C0F48_00000FBC:
     blr
 }
 
-asm void fn_803C1194(void)
+void *fn_803C1194(const void *p, u32 idx)
 {
-    nofralloc
-    mulli r0, r4, 0x28
-    lwz r3, 0x4(r3)
-    add r3, r3, r0
-    blr
+    return (u8 *)*(const void **)((const u8 *)p + 0x4) + idx * 0x28;
 }
 
 asm void fn_803C11A4(void)

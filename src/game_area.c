@@ -95,7 +95,7 @@ u32 area_getAreaId(const u32 *p);
 void fn_80089AD4(void);
 void fn_80089B5C(void);
 void fn_80089C28(void);
-void fn_80089C7C(void);
+void fn_80089C7C(void *p);
 void fn_80089C8C(void);
 void fn_80089CE4(void);
 void fn_80089D70(void);
@@ -844,13 +844,10 @@ asm void fn_80089C28(void)
     blr
 }
 
-asm void fn_80089C7C(void)
+void fn_80089C7C(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, 0x0(r3)
-    stw r0, 0x4(r3)
-    blr
+    *(u32 *)p = 0;
+    *(u32 *)((u8 *)p + 4) = 0;
 }
 
 asm void fn_80089C8C(void)

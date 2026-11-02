@@ -103,7 +103,7 @@ void fn_8053E054(void);
 void fn_8053E3A0(void);
 void fn_8053E3B4(void);
 void fn_8053E4B0(void);
-void fn_8053E510(void);
+void fn_8053E510(void *p);
 void fn_8053E520(void);
 void fn_8053E58C(void);
 void fn_8053E65C(void);
@@ -1481,13 +1481,10 @@ asm void fn_8053E4B0(void)
     blr
 }
 
-asm void fn_8053E510(void)
+void fn_8053E510(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, 0x0(r3)
-    stw r0, 0x4(r3)
-    blr
+    *(u32 *)p = 0;
+    *(u32 *)((u8 *)p + 0x4) = 0;
 }
 
 asm void fn_8053E520(void)

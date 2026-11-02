@@ -99,7 +99,7 @@ extern u32 lbl_80884428;
 
 /* Function declarations */
 void fn_802C7A60(void);
-void fn_802C7AA0(void);
+f32 fn_802C7AA0(void);
 void fn_802C7AA8(void);
 void fn_802C7BC8(void);
 void fn_802C7BE4(void);
@@ -135,11 +135,9 @@ lbl_fn_802C7A60_00000038:
     blr
 }
 
-asm void fn_802C7AA0(void)
+f32 fn_802C7AA0(void)
 {
-    nofralloc
-    lfs f1, lbl_80884330
-    blr
+    return *(f32 *)&lbl_80884330;
 }
 
 asm void fn_802C7AA8(void)

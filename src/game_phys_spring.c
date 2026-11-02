@@ -82,12 +82,12 @@ extern u32 lbl_808815F4;
 void fn_8010C00C(void);
 void fn_8010C3E4(void);
 void fn_8010C948(void);
-void fn_8010CA24(void);
-void fn_8010CA2C(void);
-void fn_8010CA34(void);
+f32 fn_8010CA24(void);
+f32 fn_8010CA2C(void);
+f32 fn_8010CA34(void);
 void fn_8010CA3C(void);
 void fn_8010CB2C(void);
-void fn_8010CCD0(void);
+f32 fn_8010CCD0(void);
 void fn_8010CCD8(void);
 void fn_8010CD3C(void);
 void fn_8010CF28(void);
@@ -841,25 +841,19 @@ lbl_fn_8010C948_00000A04:
     blr
 }
 
-asm void fn_8010CA24(void)
+f32 fn_8010CA24(void)
 {
-    nofralloc
-    lfs f1, lbl_808815EC
-    blr
+    return *(f32 *)&lbl_808815EC;
 }
 
-asm void fn_8010CA2C(void)
+f32 fn_8010CA2C(void)
 {
-    nofralloc
-    lfs f1, lbl_808814D0
-    blr
+    return *(f32 *)&lbl_808814D0;
 }
 
-asm void fn_8010CA34(void)
+f32 fn_8010CA34(void)
 {
-    nofralloc
-    lfs f1, lbl_80881490
-    blr
+    return *(f32 *)&lbl_80881490;
 }
 
 asm void fn_8010CA3C(void)
@@ -1052,11 +1046,9 @@ lbl_fn_8010CB2C_00000CA0:
     blr
 }
 
-asm void fn_8010CCD0(void)
+f32 fn_8010CCD0(void)
 {
-    nofralloc
-    lfs f1, lbl_8088158C
-    blr
+    return *(f32 *)&lbl_8088158C;
 }
 
 asm void fn_8010CCD8(void)

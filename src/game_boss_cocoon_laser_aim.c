@@ -77,7 +77,7 @@ void fn_8046F8B8(void);
 void fn_8046F96C(void);
 void fn_8046FA18(void);
 void atn_Arc_findFile(void);
-void atn_Arc_getFileEntry(void);
+void *atn_Arc_getFileEntry(const void *p, u32 idx);
 void fn_8046FD2C(void);
 void fn_8046FD7C(void);
 void fn_80470198(void);
@@ -1394,13 +1394,9 @@ lbl_atn_Arc_findFile_00001144:
     blr
 }
 
-asm void atn_Arc_getFileEntry(void)
+void *atn_Arc_getFileEntry(const void *p, u32 idx)
 {
-    nofralloc
-    lwz r3, 0x4(r3)
-    slwi r0, r4, 4
-    add r3, r3, r0
-    blr
+    return (u8 *)*(const void **)((const u8 *)p + 0x4) + (idx << 4);
 }
 
 asm void fn_8046FD2C(void)
