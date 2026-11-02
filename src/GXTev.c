@@ -61,9 +61,9 @@ void GXLoadNrmMtxImm3x3(void);
 void GXSetCurrentMtx(void);
 void GXLoadTexMtxImm(void);
 void fn_806184E0(void);
-void fn_80618570(void);
+void GXSetViewport(void);
 void fn_806185A0(void);
-void fn_806185C0(void);
+void GXSetScissor(void);
 void fn_80618630(void);
 void __GXSetIndTexMtx(void);
 void GXSetIndTexCoordScale(void);
@@ -1195,7 +1195,7 @@ asm void fn_806184E0(void)
     blr
 }
 
-asm void fn_80618570(void)
+asm void GXSetViewport(void)
 {
     nofralloc
     lwz r3, __GXData
@@ -1224,7 +1224,7 @@ asm void fn_806185A0(void)
     blr
 }
 
-asm void fn_806185C0(void)
+asm void GXSetScissor(void)
 {
     nofralloc
     lwz r8, __GXData

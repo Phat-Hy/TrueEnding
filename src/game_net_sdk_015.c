@@ -15,7 +15,7 @@ extern void _savegpr_27(void);
 extern void snprintf(void);
 extern void fn_806A4260(void);
 extern void fn_806A475C(void);
-extern void fn_806A6CA0(void);
+extern void net_base64_encode(void);
 extern void net_checkConnectionSession(void);
 extern void net_memFree(void);
 extern void net_formatLog(void);
@@ -2176,7 +2176,7 @@ lbl_dwc_registerMatchStatus_00001DC8:
     slwi r4, r30, 2
     addi r5, r1, 0x330
     li r6, 0x200
-    bl fn_806A6CA0
+    bl net_base64_encode
     mr r19, r3
 lbl_dwc_registerMatchStatus_00001E24:
     lis r3, lbl_80860898@ha

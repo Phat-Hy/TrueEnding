@@ -41,7 +41,7 @@ extern void fn_806A0784(void);
 extern void fn_806A0950(void);
 extern void fn_806A0A78(void);
 extern void fn_806A0AD8(void);
-extern void fn_806A6CA0(void);
+extern void net_base64_encode(void);
 extern void fn_806A6E40(void);
 extern void net_isConnectionActive(void);
 extern void net_checkConnectionSession(void);
@@ -368,7 +368,7 @@ lbl_fn_806D1720_00000370:
     mr r3, r21
     mr r5, r27
     li r6, 0x800
-    bl fn_806A6CA0
+    bl net_base64_encode
     stbx r31, r27, r3
     add r4, r3, r27
     mr r5, r27
@@ -389,7 +389,7 @@ lbl_fn_806D1720_000003C0:
     mr r3, r21
     mr r5, r27
     li r6, 0x800
-    bl fn_806A6CA0
+    bl net_base64_encode
     stbx r31, r27, r3
     add r4, r3, r27
     mr r5, r27
@@ -403,7 +403,7 @@ lbl_fn_806D1720_000003C0:
     mr r3, r24
     mr r5, r27
     li r6, 0x800
-    bl fn_806A6CA0
+    bl net_base64_encode
     stbx r31, r27, r3
     add r4, r3, r27
     mr r5, r27
@@ -432,7 +432,7 @@ lbl_fn_806D1720_000003C0:
     mr r5, r27
     addi r3, r1, 0x88
     li r6, 0x800
-    bl fn_806A6CA0
+    bl net_base64_encode
     stbx r31, r27, r3
     add r4, r3, r27
     mr r5, r27
@@ -452,7 +452,7 @@ lbl_fn_806D1720_000003C0:
     mr r3, r23
     mr r5, r27
     li r6, 0x800
-    bl fn_806A6CA0
+    bl net_base64_encode
     stbx r31, r27, r3
     add r4, r3, r27
     mr r5, r27
@@ -469,7 +469,7 @@ lbl_fn_806D1720_000004FC:
     mr r3, r21
     mr r5, r27
     li r6, 0x800
-    bl fn_806A6CA0
+    bl net_base64_encode
     stbx r31, r27, r3
     add r4, r3, r27
     mr r5, r27
@@ -489,7 +489,7 @@ lbl_fn_806D1720_000004FC:
     mr r3, r21
     mr r5, r27
     li r6, 0x800
-    bl fn_806A6CA0
+    bl net_base64_encode
     stbx r31, r27, r3
     add r4, r3, r27
     mr r5, r27
@@ -515,7 +515,7 @@ lbl_fn_806D1720_000004FC:
     mr r5, r27
     addi r3, r1, 0x88
     li r6, 0x800
-    bl fn_806A6CA0
+    bl net_base64_encode
     stbx r31, r27, r3
     add r4, r3, r27
     mr r5, r27
@@ -547,7 +547,7 @@ lbl_fn_806D1720_0000060C:
     mr r5, r27
     addi r3, r1, 0x88
     li r6, 0x800
-    bl fn_806A6CA0
+    bl net_base64_encode
     stbx r31, r27, r3
     add r4, r3, r27
     mr r5, r27
@@ -570,7 +570,7 @@ lbl_fn_806D1720_00000684:
     mr r3, r21
     mr r5, r27
     li r6, 0x800
-    bl fn_806A6CA0
+    bl net_base64_encode
     li r22, 0x0
     stbx r22, r27, r3
     add r6, r3, r27
@@ -600,7 +600,7 @@ lbl_fn_806D1720_00000684:
     mr r3, r21
     mr r5, r27
     li r6, 0x800
-    bl fn_806A6CA0
+    bl net_base64_encode
     stbx r22, r27, r3
     add r4, r3, r27
     mr r5, r27
@@ -617,7 +617,7 @@ lbl_fn_806D1720_00000684:
     li r6, 0x800
     lwz r3, 0x41a4(r4)
     lwz r4, 0x41a8(r4)
-    bl fn_806A6CA0
+    bl net_base64_encode
     stbx r22, r27, r3
     add r4, r3, r27
     mr r5, r27
@@ -633,7 +633,7 @@ lbl_fn_806D1720_00000780:
     mr r3, r21
     mr r5, r27
     li r6, 0x800
-    bl fn_806A6CA0
+    bl net_base64_encode
     li r22, 0x0
     stbx r22, r27, r3
     add r6, r3, r27
@@ -649,7 +649,7 @@ lbl_fn_806D1720_00000780:
     mr r3, r21
     mr r5, r27
     li r6, 0x800
-    bl fn_806A6CA0
+    bl net_base64_encode
     stbx r22, r27, r3
     add r4, r3, r27
     mr r5, r27
@@ -710,7 +710,7 @@ lbl_fn_806D1720_000008A8:
     mr r5, r27
     addi r3, r1, 0x88
     li r6, 0x800
-    bl fn_806A6CA0
+    bl net_base64_encode
     li r31, 0x0
     stbx r31, r27, r3
     add r6, r3, r27
@@ -731,7 +731,7 @@ lbl_fn_806D1720_000008A8:
     mr r3, r21
     mr r5, r27
     li r6, 0x800
-    bl fn_806A6CA0
+    bl net_base64_encode
     stbx r31, r27, r3
     add r4, r3, r27
     mr r5, r27
@@ -757,7 +757,7 @@ lbl_fn_806D1720_000008A8:
     mr r5, r27
     addi r3, r1, 0x88
     li r6, 0x800
-    bl fn_806A6CA0
+    bl net_base64_encode
     stbx r31, r27, r3
     add r4, r3, r27
     mr r5, r27
@@ -787,7 +787,7 @@ lbl_fn_806D1720_000008A8:
     mr r5, r27
     addi r3, r1, 0x88
     li r6, 0x800
-    bl fn_806A6CA0
+    bl net_base64_encode
     stbx r31, r27, r3
     add r4, r3, r27
     mr r5, r27
@@ -827,7 +827,7 @@ lbl_fn_806D1720_000008A8:
     mr r5, r27
     addi r3, r1, 0x88
     li r6, 0x800
-    bl fn_806A6CA0
+    bl net_base64_encode
     stbx r31, r27, r3
     add r4, r3, r27
     mr r5, r27
@@ -864,7 +864,7 @@ lbl_fn_806D1720_00000AC8:
     mr r5, r27
     addi r3, r1, 0x88
     li r6, 0x800
-    bl fn_806A6CA0
+    bl net_base64_encode
     li r0, 0x0
     stbx r0, r27, r3
     add r6, r3, r27
@@ -899,7 +899,7 @@ lbl_fn_806D1720_00000B48:
     mr r5, r27
     addi r3, r1, 0x88
     li r6, 0x800
-    bl fn_806A6CA0
+    bl net_base64_encode
     li r0, 0x0
     stbx r0, r27, r3
     add r6, r3, r27
@@ -927,7 +927,7 @@ lbl_fn_806D1720_00000BD0:
     mr r5, r27
     addi r3, r1, 0x88
     li r6, 0x800
-    bl fn_806A6CA0
+    bl net_base64_encode
     li r22, 0x0
     stbx r22, r27, r3
     add r6, r3, r27
@@ -957,7 +957,7 @@ lbl_fn_806D1720_00000BD0:
     mr r5, r27
     addi r3, r1, 0x88
     li r6, 0x800
-    bl fn_806A6CA0
+    bl net_base64_encode
     stbx r22, r27, r3
     mr r3, r28
     mr r5, r27

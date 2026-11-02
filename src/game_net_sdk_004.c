@@ -27,7 +27,7 @@ extern void fn_805F3410(void);
 extern void fn_805F3420(void);
 extern void fn_805F6DF0(void);
 extern void IOS_Close(void);
-extern void fn_8061D080(void);
+extern void IOS_Ioctl(void);
 extern void fn_80624970(void);
 extern void fn_80624B10(void);
 extern void fn_806806A4(void);
@@ -2627,7 +2627,7 @@ asm void fn_806A21E4(void)
     mr r6, r7
     mr r7, r8
     mr r8, r9
-    bl fn_8061D080
+    bl IOS_Ioctl
     cmpwi r3, 0x0
     li r3, 0x0
     bge lbl_fn_806A21E4_00001F5C

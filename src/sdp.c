@@ -27,11 +27,11 @@ extern void bta_sys_sendMsgToApp(void);
 extern void fn_806373C8(void);
 extern void fn_80642174(void);
 extern void fn_806423A0(void);
-extern void fn_806425D4(void);
-extern void fn_80642764(void);
-extern void fn_8064281C(void);
-extern void fn_806428EC(void);
-extern void fn_80642990(void);
+extern void L2CA_Register(void);
+extern void L2CA_ConfigReq(void);
+extern void L2CA_ConfigRsp(void);
+extern void L2CA_DisconnectReq(void);
+extern void L2CA_DisconnectRsp(void);
 extern void fn_80642A34(void);
 extern void fn_80653D44(void);
 extern void memcmp(void);
@@ -3618,11 +3618,11 @@ asm void fn_80651678(void)
     mr r5, r29
     li r6, 0x0
     li r7, 0x0
-    bl fn_806425D4
+    bl L2CA_Register
     lis r31, lbl_80823CE0@ha
     mr r3, r29
     addi r4, r31, lbl_80823CE0@l
-    bl fn_80642764
+    bl L2CA_ConfigReq
     addi r3, r31, lbl_80823CE0@l
     lbz r0, 0x4630(r3)
     cmplwi r0, 0x4
@@ -3684,7 +3684,7 @@ lbl_fn_8065173C_00003078:
     stb r0, 0x0(r3)
     mr r3, r28
     addi r4, r31, lbl_80823CE0@l
-    bl fn_80642764
+    bl L2CA_ConfigReq
     addi r3, r31, lbl_80823CE0@l
     lbz r0, 0x4630(r3)
     cmplwi r0, 0x4
@@ -3807,7 +3807,7 @@ lbl_fn_806518CC_00003234:
     mr r4, r30
     stb r0, 0x2(r30)
     sth r0, 0x0(r30)
-    bl fn_8064281C
+    bl L2CA_ConfigRsp
     lis r3, lbl_80823CE0@ha
     addi r3, r3, lbl_80823CE0@l
     lbz r0, 0x4630(r3)
@@ -3928,7 +3928,7 @@ lbl_fn_80651A08_000033EC:
     cmplwi r0, 0x1
     beq lbl_fn_80651A08_00003410
     lhz r3, 0x22(r30)
-    bl fn_806428EC
+    bl L2CA_DisconnectReq
     lis r3, 0x1
     subi r0, r3, 0xe
     sth r0, 0x472(r30)
@@ -3987,7 +3987,7 @@ lbl_fn_80651B84_000034B8:
     cmpwi r30, 0x0
     beq lbl_fn_80651B84_000034C8
     mr r3, r29
-    bl fn_80642990
+    bl L2CA_DisconnectRsp
 lbl_fn_80651B84_000034C8:
     lis r3, lbl_80823CE0@ha
     addi r3, r3, lbl_80823CE0@l
@@ -4196,7 +4196,7 @@ lbl_fn_80651E64_00003780:
     cmplwi r0, 0x1
     beq lbl_fn_80651E64_0000379C
     lhz r3, 0x22(r30)
-    bl fn_806428EC
+    bl L2CA_DisconnectReq
     sth r31, 0x472(r30)
     b lbl_fn_80651E64_000037BC
 lbl_fn_80651E64_0000379C:
@@ -4296,7 +4296,7 @@ asm void fn_80651FBC(void)
     bl bta_sys_traceDebug
 lbl_fn_80651FBC_000038D4:
     lhz r3, 0x22(r31)
-    bl fn_806428EC
+    bl L2CA_DisconnectReq
     lwz r12, 0x414(r31)
     cmpwi r12, 0x0
     beq lbl_fn_80651FBC_000038FC

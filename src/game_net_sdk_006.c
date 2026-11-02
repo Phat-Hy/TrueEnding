@@ -19,7 +19,7 @@ extern void OSInitMutex(void);
 extern void OSLockMutex(void);
 extern void OSUnlockMutex(void);
 extern void IOS_Close(void);
-extern void fn_8061D080(void);
+extern void IOS_Ioctl(void);
 extern void fn_80698A2C(void);
 extern void fn_80698DEC(void);
 extern void fn_806A303C(void);
@@ -266,7 +266,7 @@ asm void fn_806A475C(void)
     li r6, 0x0
     li r7, 0x0
     li r8, 0x0
-    bl fn_8061D080
+    bl IOS_Ioctl
     mr r30, r3
     mr r4, r31
     li r3, 0x0
@@ -326,7 +326,7 @@ lbl_fn_806A47D4_00000320:
     addi r6, r29, 0x1
     li r4, 0x11
     li r8, 0x460
-    bl fn_8061D080
+    bl IOS_Ioctl
     cmpwi r3, 0x0
     mr r29, r3
     blt lbl_fn_806A47D4_000003AC
@@ -683,7 +683,7 @@ lbl_fn_806A4C5C_000007DC:
     li r6, 0x24
     li r7, 0x0
     li r8, 0x0
-    bl fn_8061D080
+    bl IOS_Ioctl
     mr r31, r3
     mr r4, r30
     li r3, 0xc

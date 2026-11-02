@@ -91,8 +91,8 @@ extern void GXLoadPosMtxImm(void);
 extern void GXLoadNrmMtxImm3x3(void);
 extern void GXSetCurrentMtx(void);
 extern void GXLoadTexMtxImm(void);
-extern void fn_80618570(void);
-extern void fn_806185C0(void);
+extern void GXSetViewport(void);
+extern void GXSetScissor(void);
 extern void fn_80618630(void);
 extern void __GXSetIndTexMtx(void);
 extern void __GXSetTevKonst(void);
@@ -761,7 +761,7 @@ lbl___GXInitGX_00000800:
     fsubs f3, f3, f4
     lfs f6, lbl_8088872C
     fsubs f4, f0, f4
-    bl fn_80618570
+    bl GXSetViewport
     addi r3, r28, 0x150
     bl fn_80618300
     bl fn_80614AF0
@@ -775,7 +775,7 @@ lbl___GXInitGX_00000800:
     li r3, 0x0
     lhz r6, 0x6(r27)
     li r4, 0x0
-    bl fn_806185C0
+    bl GXSetScissor
     li r3, 0x0
     li r4, 0x0
     bl fn_80618630

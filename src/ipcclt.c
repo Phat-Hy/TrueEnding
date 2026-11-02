@@ -59,7 +59,7 @@ void fn_8061CC60(void);
 void fn_8061CD70(void);
 void fn_8061CE50(void);
 void IOS_IoctlAsync(void);
-void fn_8061D080(void);
+void IOS_Ioctl(void);
 void fn_8061D1B0(void);
 void IOS_IoctlvAsync(void);
 void IOS_Ioctlv(void);
@@ -1154,7 +1154,7 @@ lbl_IOS_IoctlAsync_00000E7C:
     blr
 }
 
-asm void fn_8061D080(void)
+asm void IOS_Ioctl(void)
 {
     nofralloc
     stwu r1, -0x30(r1)
@@ -1170,20 +1170,20 @@ asm void fn_8061D080(void)
     mr r29, r7
     mr r30, r8
     li r31, 0x0
-    bne lbl_fn_8061D080_00000EE0
+    bne lbl_IOS_Ioctl_00000EE0
     li r31, -0x4
-    b lbl_fn_8061D080_00000F28
-lbl_fn_8061D080_00000EE0:
+    b lbl_IOS_Ioctl_00000F28
+lbl_IOS_Ioctl_00000EE0:
     lwz r3, hid_8087E8D4
     li r4, 0x40
     li r5, 0x20
     bl iosAllocAligned
     cmpwi r3, 0x0
     stw r3, 0x8(r1)
-    bne lbl_fn_8061D080_00000F04
+    bne lbl_IOS_Ioctl_00000F04
     li r31, -0x16
-    b lbl_fn_8061D080_00000F28
-lbl_fn_8061D080_00000F04:
+    b lbl_IOS_Ioctl_00000F28
+lbl_IOS_Ioctl_00000F04:
     li r5, 0x0
     stw r5, 0x20(r3)
     li r0, 0x6
@@ -1193,33 +1193,33 @@ lbl_fn_8061D080_00000F04:
     stw r5, 0x28(r4)
     stw r0, 0x0(r3)
     stw r25, 0x8(r3)
-lbl_fn_8061D080_00000F28:
+lbl_IOS_Ioctl_00000F28:
     cmpwi r31, 0x0
-    bne lbl_fn_8061D080_00000FB4
+    bne lbl_IOS_Ioctl_00000FB4
     lwz r5, 0x8(r1)
     li r31, 0x0
     cmpwi r5, 0x0
-    bne lbl_fn_8061D080_00000F48
+    bne lbl_IOS_Ioctl_00000F48
     li r31, -0x4
-    b lbl_fn_8061D080_00000F9C
-lbl_fn_8061D080_00000F48:
+    b lbl_IOS_Ioctl_00000F9C
+lbl_IOS_Ioctl_00000F48:
     cmpwi r29, 0x0
     stw r26, 0xc(r5)
-    beq lbl_fn_8061D080_00000F5C
+    beq lbl_IOS_Ioctl_00000F5C
     addis r0, r29, 0x8000
-    b lbl_fn_8061D080_00000F60
-lbl_fn_8061D080_00000F5C:
+    b lbl_IOS_Ioctl_00000F60
+lbl_IOS_Ioctl_00000F5C:
     li r0, 0x0
-lbl_fn_8061D080_00000F60:
+lbl_IOS_Ioctl_00000F60:
     stw r0, 0x18(r5)
     cmpwi r27, 0x0
     stw r30, 0x1c(r5)
-    beq lbl_fn_8061D080_00000F78
+    beq lbl_IOS_Ioctl_00000F78
     addis r0, r27, 0x8000
-    b lbl_fn_8061D080_00000F7C
-lbl_fn_8061D080_00000F78:
+    b lbl_IOS_Ioctl_00000F7C
+lbl_IOS_Ioctl_00000F78:
     li r0, 0x0
-lbl_fn_8061D080_00000F7C:
+lbl_IOS_Ioctl_00000F7C:
     stw r0, 0x10(r5)
     mr r3, r27
     mr r4, r28
@@ -1228,14 +1228,14 @@ lbl_fn_8061D080_00000F7C:
     mr r3, r29
     mr r4, r30
     bl DCFlushRange
-lbl_fn_8061D080_00000F9C:
+lbl_IOS_Ioctl_00000F9C:
     cmpwi r31, 0x0
-    bne lbl_fn_8061D080_00000FB4
+    bne lbl_IOS_Ioctl_00000FB4
     lwz r3, 0x8(r1)
     li r4, 0x0
     bl __ios_Ipc2
     mr r31, r3
-lbl_fn_8061D080_00000FB4:
+lbl_IOS_Ioctl_00000FB4:
     addi r11, r1, 0x30
     mr r3, r31
     bl _restgpr_25

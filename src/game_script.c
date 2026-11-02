@@ -71,8 +71,8 @@ extern void GXSetZCompLoc(void);
 extern void GXSetZMode(void);
 extern void GXSetBlendMode(void);
 extern void fn_80618290(void);
-extern void fn_80618570(void);
-extern void fn_806185C0(void);
+extern void GXSetViewport(void);
+extern void GXSetScissor(void);
 extern void fn_80624830(void);
 extern void fn_80624910(void);
 extern void fn_806249F0(void);
@@ -2971,7 +2971,7 @@ lbl_fn_800713D4_000026B4:
     stw r5, 0x64(r30)
     stw r6, 0x68(r30)
     stw r7, 0x6c(r30)
-    bl fn_80618570
+    bl GXSetViewport
     lwz r0, 0x6c(r30)
     lfd f2, lbl_807316C8@l(r27)
     xoris r0, r0, 0x8000
@@ -3014,7 +3014,7 @@ lbl_fn_800713D4_000026B4:
     mr r4, r31
     mr r5, r29
     mr r6, r28
-    bl fn_806185C0
+    bl GXSetScissor
     lhz r3, 0x6(r30)
     lhz r4, 0x8(r30)
     bl fn_80614E90
@@ -3160,7 +3160,7 @@ lbl_fn_8007192C_00002A24:
     fadds f4, f0, f4
     stw r6, 0x68(r31)
     stw r5, 0x6c(r31)
-    bl fn_80618570
+    bl GXSetViewport
     lwz r0, 0x6c(r31)
     lfd f2, lbl_807316C8@l(r27)
     xoris r0, r0, 0x8000
@@ -3203,7 +3203,7 @@ lbl_fn_8007192C_00002A24:
     mr r4, r30
     mr r5, r29
     mr r6, r28
-    bl fn_806185C0
+    bl GXSetScissor
     bl GXInvalidateVtxCache
     bl GXDrawDone
     addi r11, r1, 0x40

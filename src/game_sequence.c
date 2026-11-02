@@ -104,8 +104,8 @@ extern void GXLoadPosMtxImm(void);
 extern void GXLoadNrmMtxImm3x3(void);
 extern void GXSetCurrentMtx(void);
 extern void GXLoadTexMtxImm(void);
-extern void fn_80618570(void);
-extern void fn_806185C0(void);
+extern void GXSetViewport(void);
+extern void GXSetScissor(void);
 extern void fn_80618630(void);
 extern void __GXSetIndTexMtx(void);
 extern void std_sin(void);
@@ -249,7 +249,7 @@ asm void gx_drawScreenQuad(void)
     stw r30, 0x64(r29)
     stw r5, 0x68(r29)
     stw r4, 0x6c(r29)
-    bl fn_80618570
+    bl GXSetViewport
     lwz r0, 0x6c(r29)
     lfd f2, lbl_807316C8@l(r31)
     xoris r0, r0, 0x8000
@@ -292,7 +292,7 @@ asm void gx_drawScreenQuad(void)
     mr r4, r26
     mr r5, r27
     mr r6, r28
-    bl fn_806185C0
+    bl GXSetScissor
     lfs f0, lbl_80880A74
     addi r6, r1, 0x20
     stfs f0, 0x20(r1)
@@ -549,7 +549,7 @@ asm void gx_drawScreenQuad(void)
     lfs f6, lbl_80880A74
     stw r5, 0x68(r29)
     stw r4, 0x6c(r29)
-    bl fn_80618570
+    bl GXSetViewport
     lwz r0, 0x6c(r29)
     lfd f2, lbl_807316C8@l(r31)
     xoris r0, r0, 0x8000
@@ -592,7 +592,7 @@ asm void gx_drawScreenQuad(void)
     mr r4, r28
     mr r5, r27
     mr r6, r26
-    bl fn_806185C0
+    bl GXSetScissor
     li r3, 0x0
     bl fn_80614AB0
     li r3, 0x2
@@ -4617,7 +4617,7 @@ asm void seq_stepPlaybackTimer(void)
     fadds f4, f0, f4
     stw r8, 0x68(r3)
     stw r9, 0x6c(r3)
-    bl fn_80618570
+    bl GXSetViewport
     lwz r0, 0x6c(r31)
     lfd f2, lbl_807316C8@l(r27)
     xoris r0, r0, 0x8000
@@ -4660,7 +4660,7 @@ asm void seq_stepPlaybackTimer(void)
     mr r4, r30
     mr r5, r29
     mr r6, r28
-    bl fn_806185C0
+    bl GXSetScissor
     addi r11, r1, 0x30
     bl _restgpr_27
     lwz r0, 0x34(r1)
@@ -4711,7 +4711,7 @@ asm void fn_80075F58(void)
     fadds f4, f0, f4
     stw r6, 0x68(r3)
     stw r7, 0x6c(r3)
-    bl fn_80618570
+    bl GXSetViewport
     lwz r0, 0x6c(r27)
     lfd f2, lbl_807316C8@l(r28)
     xoris r0, r0, 0x8000
@@ -4754,7 +4754,7 @@ asm void fn_80075F58(void)
     mr r4, r31
     mr r5, r30
     mr r6, r29
-    bl fn_806185C0
+    bl GXSetScissor
     addi r11, r1, 0x30
     bl _restgpr_27
     lwz r0, 0x34(r1)
@@ -4770,7 +4770,7 @@ asm void fn_800760BC(void)
     mr r4, r5
     mr r5, r6
     mr r6, r7
-    b fn_806185C0
+    b GXSetScissor
 }
 
 asm void fn_800760D0(void)
@@ -4781,7 +4781,7 @@ asm void fn_800760D0(void)
     lwz r4, 0x64(r6)
     lwz r5, 0x68(r6)
     lwz r6, 0x6c(r6)
-    b fn_806185C0
+    b GXSetScissor
 }
 
 asm void fn_800760E8(void)

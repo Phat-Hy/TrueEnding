@@ -22,13 +22,13 @@ extern void fn_806357EC(void);
 extern void fn_806373C8(void);
 extern void fn_806380C0(void);
 extern void fn_80642174(void);
-extern void fn_80642310(void);
+extern void L2CA_Deregister(void);
 extern void fn_806423A0(void);
-extern void fn_806425D4(void);
-extern void fn_80642764(void);
-extern void fn_8064281C(void);
-extern void fn_806428EC(void);
-extern void fn_80642990(void);
+extern void L2CA_Register(void);
+extern void L2CA_ConfigReq(void);
+extern void L2CA_ConfigRsp(void);
+extern void L2CA_DisconnectReq(void);
+extern void L2CA_DisconnectRsp(void);
 extern void fn_80642A34(void);
 extern void fn_8064E72C(void);
 extern void fn_8064EAA4(void);
@@ -1541,7 +1541,7 @@ lbl_fn_80640134_00001364:
     clrlwi. r0, r3, 24
     bne lbl_fn_80640134_000013A4
     li r3, 0x11
-    bl fn_80642310
+    bl L2CA_Deregister
     lbz r0, 0x401(r30)
     cmplwi r0, 0x1
     blt lbl_fn_80640134_0000139C
@@ -1628,12 +1628,12 @@ lbl_fn_8064028C_0000149C:
     lhz r3, 0x16(r31)
     cmpwi r3, 0x0
     beq lbl_fn_8064028C_000014B4
-    bl fn_806428EC
+    bl L2CA_DisconnectReq
 lbl_fn_8064028C_000014B4:
     lhz r3, 0x14(r31)
     cmpwi r3, 0x0
     beq lbl_fn_8064028C_000014D0
-    bl fn_806428EC
+    bl L2CA_DisconnectReq
     b lbl_fn_8064028C_000014D0
 lbl_fn_8064028C_000014C8:
     li r0, 0x0
@@ -1680,10 +1680,10 @@ asm void fn_80640330(void)
     stb r0, 0x10(r4)
     li r7, 0x0
     lbz r4, 0x12(r4)
-    bl fn_806425D4
+    bl L2CA_Register
     lhz r3, 0x14(r30)
     addi r4, r31, 0x344
-    bl fn_80642764
+    bl L2CA_ConfigReq
     b lbl_fn_80640330_00001600
 lbl_fn_80640330_00001574:
     cmpwi r5, 0x0
@@ -1715,12 +1715,12 @@ lbl_fn_80640330_000015CC:
     lhz r3, 0x16(r31)
     cmpwi r3, 0x0
     beq lbl_fn_80640330_000015E4
-    bl fn_806428EC
+    bl L2CA_DisconnectReq
 lbl_fn_80640330_000015E4:
     lhz r3, 0x14(r31)
     cmpwi r3, 0x0
     beq lbl_fn_80640330_00001600
-    bl fn_806428EC
+    bl L2CA_DisconnectReq
     b lbl_fn_80640330_00001600
 lbl_fn_80640330_000015F8:
     li r0, 0x0
@@ -1786,7 +1786,7 @@ lbl_fn_80640460_000016B0:
     mr r5, r27
     li r6, 0x3
     li r7, 0x0
-    bl fn_806425D4
+    bl L2CA_Register
     b lbl_fn_80640460_00001858
 lbl_fn_80640460_000016D4:
     mulli r0, r24, 0x34
@@ -1844,7 +1844,7 @@ lbl_fn_80640460_0000177C:
     mr r5, r27
     li r6, 0x4
     li r7, 0x0
-    bl fn_806425D4
+    bl L2CA_Register
     b lbl_fn_80640460_00001858
 lbl_fn_80640460_000017A0:
     cmplwi r28, 0x11
@@ -1879,12 +1879,12 @@ lbl_fn_80640460_000017FC:
     li r6, 0x0
     sth r27, 0x16(r30)
     li r7, 0x0
-    bl fn_806425D4
+    bl L2CA_Register
     lis r26, lbl_80822CD8@ha
     mr r3, r27
     addi r26, r26, lbl_80822CD8@l
     addi r4, r26, 0x344
-    bl fn_80642764
+    bl L2CA_ConfigReq
     lbz r0, 0x401(r26)
     cmplwi r0, 0x4
     blt lbl_fn_80640460_00001858
@@ -2071,12 +2071,12 @@ lbl_fn_80640804_00001AC0:
     lhz r3, 0x16(r26)
     cmpwi r3, 0x0
     beq lbl_fn_80640804_00001AD8
-    bl fn_806428EC
+    bl L2CA_DisconnectReq
 lbl_fn_80640804_00001AD8:
     lhz r3, 0x14(r26)
     cmpwi r3, 0x0
     beq lbl_fn_80640804_00001AF4
-    bl fn_806428EC
+    bl L2CA_DisconnectReq
     b lbl_fn_80640804_00001AF4
 lbl_fn_80640804_00001AEC:
     li r0, 0x0
@@ -2127,12 +2127,12 @@ lbl_fn_80640804_00001B84:
     lhz r3, 0x16(r27)
     cmpwi r3, 0x0
     beq lbl_fn_80640804_00001B9C
-    bl fn_806428EC
+    bl L2CA_DisconnectReq
 lbl_fn_80640804_00001B9C:
     lhz r3, 0x14(r27)
     cmpwi r3, 0x0
     beq lbl_fn_80640804_00001BB8
-    bl fn_806428EC
+    bl L2CA_DisconnectReq
     b lbl_fn_80640804_00001BB8
 lbl_fn_80640804_00001BB0:
     li r0, 0x0
@@ -2314,12 +2314,12 @@ lbl_fn_80640A18_00001E18:
     lhz r3, 0x16(r28)
     cmpwi r3, 0x0
     beq lbl_fn_80640A18_00001E30
-    bl fn_806428EC
+    bl L2CA_DisconnectReq
 lbl_fn_80640A18_00001E30:
     lhz r3, 0x14(r28)
     cmpwi r3, 0x0
     beq lbl_fn_80640A18_00001E4C
-    bl fn_806428EC
+    bl L2CA_DisconnectReq
     b lbl_fn_80640A18_00001E4C
 lbl_fn_80640A18_00001E44:
     li r0, 0x0
@@ -2362,7 +2362,7 @@ lbl_fn_80640A18_00001EC4:
     mr r3, r28
     addi r29, r29, lbl_80822CD8@l
     addi r4, r29, 0x344
-    bl fn_80642764
+    bl L2CA_ConfigReq
     lbz r0, 0x401(r29)
     cmplwi r0, 0x4
     blt lbl_fn_80640A18_00001EF8
@@ -2526,7 +2526,7 @@ lbl_fn_80640D60_00002104:
     mr r4, r29
     stb r0, 0x2(r29)
     sth r0, 0x0(r29)
-    bl fn_8064281C
+    bl L2CA_ConfigRsp
     lhz r0, 0x4(r30)
     cmplw r28, r0
     bne lbl_fn_80640D60_0000213C
@@ -2724,12 +2724,12 @@ lbl_fn_80641008_000023D4:
     lhz r3, 0x16(r27)
     cmpwi r3, 0x0
     beq lbl_fn_80641008_000023EC
-    bl fn_806428EC
+    bl L2CA_DisconnectReq
 lbl_fn_80641008_000023EC:
     lhz r3, 0x14(r27)
     cmpwi r3, 0x0
     beq lbl_fn_80641008_00002408
-    bl fn_806428EC
+    bl L2CA_DisconnectReq
     b lbl_fn_80641008_00002408
 lbl_fn_80641008_00002400:
     li r0, 0x0
@@ -2905,7 +2905,7 @@ lbl_fn_80641314_00002660:
     cmpwi r4, 0x0
     beq lbl_fn_80641314_00002670
     mr r3, r27
-    bl fn_80642990
+    bl L2CA_DisconnectRsp
 lbl_fn_80641314_00002670:
     lis r3, lbl_80822CD8@ha
     addi r3, r3, lbl_80822CD8@l
@@ -3476,12 +3476,12 @@ lbl_fn_80641A18_00002E50:
     lhz r3, 0x16(r29)
     cmpwi r3, 0x0
     beq lbl_fn_80641A18_00002E68
-    bl fn_806428EC
+    bl L2CA_DisconnectReq
 lbl_fn_80641A18_00002E68:
     lhz r3, 0x14(r29)
     cmpwi r3, 0x0
     beq lbl_fn_80641A18_00002E84
-    bl fn_806428EC
+    bl L2CA_DisconnectReq
     b lbl_fn_80641A18_00002E84
 lbl_fn_80641A18_00002E7C:
     li r0, 0x0
@@ -3830,9 +3830,9 @@ asm void fn_80642148(void)
     mflr r0
     li r3, 0x11
     stw r0, 0x14(r1)
-    bl fn_80642310
+    bl L2CA_Deregister
     li r3, 0x13
-    bl fn_80642310
+    bl L2CA_Deregister
     lwz r0, 0x14(r1)
     mtlr r0
     addi r1, r1, 0x10

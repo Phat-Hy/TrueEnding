@@ -115,13 +115,13 @@ extern u32 lbl_80888890;
 
 /* Function declarations */
 void fn_80642174(void);
-void fn_80642310(void);
+void L2CA_Deregister(void);
 void fn_806423A0(void);
-void fn_806425D4(void);
-void fn_80642764(void);
-void fn_8064281C(void);
-void fn_806428EC(void);
-void fn_80642990(void);
+void L2CA_Register(void);
+void L2CA_ConfigReq(void);
+void L2CA_ConfigRsp(void);
+void L2CA_DisconnectReq(void);
+void L2CA_DisconnectRsp(void);
 void fn_80642A34(void);
 void fn_80642B58(void);
 void fn_80642C20(void);
@@ -312,7 +312,7 @@ lbl_fn_80642174_00000180:
     blr
 }
 
-asm void fn_80642310(void)
+asm void L2CA_Deregister(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -323,32 +323,32 @@ asm void fn_80642310(void)
     mr r31, r3
     lbz r0, lbl_808230E0@l(r4)
     cmplwi r0, 0x3
-    blt lbl_fn_80642310_000001D8
+    blt lbl_L2CA_Deregister_000001D8
     lis r3, 0x8
     lis r4, lbl_807B5FD8@ha
     mr r5, r31
     addi r3, r3, 0x2
     addi r4, r4, lbl_807B5FD8@l
     bl bta_sys_log
-lbl_fn_80642310_000001D8:
+lbl_L2CA_Deregister_000001D8:
     mr r3, r31
     bl fn_80647B40
     cmpwi r3, 0x0
-    beq lbl_fn_80642310_000001F0
+    beq lbl_L2CA_Deregister_000001F0
     bl fn_80647B30
-    b lbl_fn_80642310_00000218
-lbl_fn_80642310_000001F0:
+    b lbl_L2CA_Deregister_00000218
+lbl_L2CA_Deregister_000001F0:
     lis r3, lbl_808230E0@ha
     lbz r0, lbl_808230E0@l(r3)
     cmplwi r0, 0x2
-    blt lbl_fn_80642310_00000218
+    blt lbl_L2CA_Deregister_00000218
     lis r3, 0x8
     lis r4, lbl_807B600C@ha
     mr r5, r31
     addi r3, r3, 0x1
     addi r4, r4, lbl_807B600C@l
     bl bta_sys_log
-lbl_fn_80642310_00000218:
+lbl_L2CA_Deregister_00000218:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0
@@ -518,7 +518,7 @@ lbl_fn_806423A0_00000440:
     blr
 }
 
-asm void fn_806425D4(void)
+asm void L2CA_Register(void)
 {
     nofralloc
     stwu r1, -0x30(r1)
@@ -536,16 +536,16 @@ asm void fn_806425D4(void)
     mr r29, r6
     mr r30, r7
     addi r31, r31, lbl_807B5F30@l
-    blt lbl_fn_806425D4_000004B0
+    blt lbl_L2CA_Register_000004B0
     lis r3, 0x8
     addi r4, r31, 0x26c
     addi r3, r3, 0x2
     bl fn_80629870
-lbl_fn_806425D4_000004B0:
+lbl_L2CA_Register_000004B0:
     lis r3, lbl_808230E0@ha
     lbz r0, lbl_808230E0@l(r3)
     cmplwi r0, 0x3
-    blt lbl_fn_806425D4_000004E8
+    blt lbl_L2CA_Register_000004E8
     lis r3, 0x8
     lbz r5, 0x0(r26)
     lbz r6, 0x1(r26)
@@ -556,77 +556,77 @@ lbl_fn_806425D4_000004B0:
     lbz r9, 0x4(r26)
     lbz r10, 0x5(r26)
     bl fn_806298D0
-lbl_fn_806425D4_000004E8:
+lbl_L2CA_Register_000004E8:
     mr r3, r26
     bl fn_806465AC
     cmpwi r3, 0x0
-    bne lbl_fn_806425D4_00000520
+    bne lbl_L2CA_Register_00000520
     lis r3, lbl_808230E0@ha
     lbz r0, lbl_808230E0@l(r3)
     cmplwi r0, 0x2
-    blt lbl_fn_806425D4_00000518
+    blt lbl_L2CA_Register_00000518
     lis r3, 0x8
     addi r4, r31, 0x2dc
     addi r3, r3, 0x1
     bl bta_sys_logEvent
-lbl_fn_806425D4_00000518:
+lbl_L2CA_Register_00000518:
     li r3, 0x0
-    b lbl_fn_806425D4_000005D8
-lbl_fn_806425D4_00000520:
+    b lbl_L2CA_Register_000005D8
+lbl_L2CA_Register_00000520:
     mr r4, r28
     bl fn_80647A88
     cmpwi r3, 0x0
-    bne lbl_fn_806425D4_00000558
+    bne lbl_L2CA_Register_00000558
     lis r3, lbl_808230E0@ha
     lbz r0, lbl_808230E0@l(r3)
     cmplwi r0, 0x2
-    blt lbl_fn_806425D4_00000550
+    blt lbl_L2CA_Register_00000550
     lis r3, 0x8
     addi r4, r31, 0x300
     addi r3, r3, 0x1
     bl bta_sys_logEvent
-lbl_fn_806425D4_00000550:
+lbl_L2CA_Register_00000550:
     li r3, 0x0
-    b lbl_fn_806425D4_000005D8
-lbl_fn_806425D4_00000558:
+    b lbl_L2CA_Register_000005D8
+lbl_L2CA_Register_00000558:
     lbz r5, 0x36(r3)
     cmplw r5, r27
-    beq lbl_fn_806425D4_00000590
+    beq lbl_L2CA_Register_00000590
     lis r3, lbl_808230E0@ha
     lbz r0, lbl_808230E0@l(r3)
     cmplwi r0, 0x2
-    blt lbl_fn_806425D4_00000588
+    blt lbl_L2CA_Register_00000588
     lis r3, 0x8
     mr r6, r27
     addi r4, r31, 0x324
     addi r3, r3, 0x1
     bl bta_sys_traceDebug
-lbl_fn_806425D4_00000588:
+lbl_L2CA_Register_00000588:
     li r3, 0x0
-    b lbl_fn_806425D4_000005D8
-lbl_fn_806425D4_00000590:
+    b lbl_L2CA_Register_000005D8
+lbl_L2CA_Register_00000590:
     cmpwi r29, 0x0
-    bne lbl_fn_806425D4_000005A8
+    bne lbl_L2CA_Register_000005A8
     li r4, 0x15
     li r5, 0x0
     bl l2c_csm_execute
-    b lbl_fn_806425D4_000005D4
-lbl_fn_806425D4_000005A8:
+    b lbl_L2CA_Register_000005D4
+lbl_L2CA_Register_000005A8:
     cmplwi r29, 0x1
     sth r29, 0x12(r1)
     sth r30, 0x14(r1)
-    bne lbl_fn_806425D4_000005C8
+    bne lbl_L2CA_Register_000005C8
     addi r5, r1, 0x8
     li r4, 0x15
     bl l2c_csm_execute
-    b lbl_fn_806425D4_000005D4
-lbl_fn_806425D4_000005C8:
+    b lbl_L2CA_Register_000005D4
+lbl_L2CA_Register_000005C8:
     addi r5, r1, 0x8
     li r4, 0x16
     bl l2c_csm_execute
-lbl_fn_806425D4_000005D4:
+lbl_L2CA_Register_000005D4:
     li r3, 0x1
-lbl_fn_806425D4_000005D8:
+lbl_L2CA_Register_000005D8:
     addi r11, r1, 0x30
     bl _restgpr_26
     lwz r0, 0x34(r1)
@@ -635,7 +635,7 @@ lbl_fn_806425D4_000005D8:
     blr
 }
 
-asm void fn_80642764(void)
+asm void L2CA_ConfigReq(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -648,40 +648,40 @@ asm void fn_80642764(void)
     mr r30, r3
     lbz r0, lbl_808230E0@l(r5)
     cmplwi r0, 0x3
-    blt lbl_fn_80642764_00000634
+    blt lbl_L2CA_ConfigReq_00000634
     lis r3, 0x8
     lis r4, lbl_807B6288@ha
     mr r5, r30
     addi r3, r3, 0x2
     addi r4, r4, lbl_807B6288@l
     bl bta_sys_log
-lbl_fn_80642764_00000634:
+lbl_L2CA_ConfigReq_00000634:
     mr r4, r30
     li r3, 0x0
     bl fn_80647A88
     cmpwi r3, 0x0
-    bne lbl_fn_80642764_00000678
+    bne lbl_L2CA_ConfigReq_00000678
     lis r3, lbl_808230E0@ha
     lbz r0, lbl_808230E0@l(r3)
     cmplwi r0, 0x2
-    blt lbl_fn_80642764_00000670
+    blt lbl_L2CA_ConfigReq_00000670
     lis r3, 0x8
     lis r4, lbl_807B62A8@ha
     mr r5, r30
     addi r3, r3, 0x1
     addi r4, r4, lbl_807B62A8@l
     bl bta_sys_log
-lbl_fn_80642764_00000670:
+lbl_L2CA_ConfigReq_00000670:
     li r3, 0x0
-    b lbl_fn_80642764_00000690
-lbl_fn_80642764_00000678:
+    b lbl_L2CA_ConfigReq_00000690
+lbl_L2CA_ConfigReq_00000678:
     li r0, 0x0
     mr r5, r31
     stb r0, 0x24(r31)
     li r4, 0x17
     bl l2c_csm_execute
     li r3, 0x1
-lbl_fn_80642764_00000690:
+lbl_L2CA_ConfigReq_00000690:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -690,7 +690,7 @@ lbl_fn_80642764_00000690:
     blr
 }
 
-asm void fn_8064281C(void)
+asm void L2CA_ConfigRsp(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -703,7 +703,7 @@ asm void fn_8064281C(void)
     mr r30, r3
     lbz r0, lbl_808230E0@l(r5)
     cmplwi r0, 0x3
-    blt lbl_fn_8064281C_000006F0
+    blt lbl_L2CA_ConfigRsp_000006F0
     lis r3, 0x8
     lis r4, lbl_807B62D4@ha
     lhz r6, 0x0(r31)
@@ -711,40 +711,40 @@ asm void fn_8064281C(void)
     addi r3, r3, 0x2
     addi r4, r4, lbl_807B62D4@l
     bl bta_sys_traceDebug
-lbl_fn_8064281C_000006F0:
+lbl_L2CA_ConfigRsp_000006F0:
     mr r4, r30
     li r3, 0x0
     bl fn_80647A88
     cmpwi r3, 0x0
-    bne lbl_fn_8064281C_00000734
+    bne lbl_L2CA_ConfigRsp_00000734
     lis r3, lbl_808230E0@ha
     lbz r0, lbl_808230E0@l(r3)
     cmplwi r0, 0x2
-    blt lbl_fn_8064281C_0000072C
+    blt lbl_L2CA_ConfigRsp_0000072C
     lis r3, 0x8
     lis r4, lbl_807B6300@ha
     mr r5, r30
     addi r3, r3, 0x1
     addi r4, r4, lbl_807B6300@l
     bl bta_sys_log
-lbl_fn_8064281C_0000072C:
+lbl_L2CA_ConfigRsp_0000072C:
     li r3, 0x0
-    b lbl_fn_8064281C_00000760
-lbl_fn_8064281C_00000734:
+    b lbl_L2CA_ConfigRsp_00000760
+lbl_L2CA_ConfigRsp_00000734:
     lhz r0, 0x0(r31)
     cmpwi r0, 0x0
-    bne lbl_fn_8064281C_00000750
+    bne lbl_L2CA_ConfigRsp_00000750
     mr r5, r31
     li r4, 0x18
     bl l2c_csm_execute
-    b lbl_fn_8064281C_0000075C
-lbl_fn_8064281C_00000750:
+    b lbl_L2CA_ConfigRsp_0000075C
+lbl_L2CA_ConfigRsp_00000750:
     mr r5, r31
     li r4, 0x19
     bl l2c_csm_execute
-lbl_fn_8064281C_0000075C:
+lbl_L2CA_ConfigRsp_0000075C:
     li r3, 0x1
-lbl_fn_8064281C_00000760:
+lbl_L2CA_ConfigRsp_00000760:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -753,7 +753,7 @@ lbl_fn_8064281C_00000760:
     blr
 }
 
-asm void fn_806428EC(void)
+asm void L2CA_DisconnectReq(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -764,38 +764,38 @@ asm void fn_806428EC(void)
     mr r31, r3
     lbz r0, lbl_808230E0@l(r4)
     cmplwi r0, 0x3
-    blt lbl_fn_806428EC_000007B4
+    blt lbl_L2CA_DisconnectReq_000007B4
     lis r3, 0x8
     lis r4, lbl_807B632C@ha
     mr r5, r31
     addi r3, r3, 0x2
     addi r4, r4, lbl_807B632C@l
     bl bta_sys_log
-lbl_fn_806428EC_000007B4:
+lbl_L2CA_DisconnectReq_000007B4:
     mr r4, r31
     li r3, 0x0
     bl fn_80647A88
     cmpwi r3, 0x0
-    bne lbl_fn_806428EC_000007F8
+    bne lbl_L2CA_DisconnectReq_000007F8
     lis r3, lbl_808230E0@ha
     lbz r0, lbl_808230E0@l(r3)
     cmplwi r0, 0x2
-    blt lbl_fn_806428EC_000007F0
+    blt lbl_L2CA_DisconnectReq_000007F0
     lis r3, 0x8
     lis r4, lbl_807B6350@ha
     mr r5, r31
     addi r3, r3, 0x1
     addi r4, r4, lbl_807B6350@l
     bl bta_sys_log
-lbl_fn_806428EC_000007F0:
+lbl_L2CA_DisconnectReq_000007F0:
     li r3, 0x0
-    b lbl_fn_806428EC_00000808
-lbl_fn_806428EC_000007F8:
+    b lbl_L2CA_DisconnectReq_00000808
+lbl_L2CA_DisconnectReq_000007F8:
     li r4, 0x1a
     li r5, 0x0
     bl l2c_csm_execute
     li r3, 0x1
-lbl_fn_806428EC_00000808:
+lbl_L2CA_DisconnectReq_00000808:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0
@@ -803,7 +803,7 @@ lbl_fn_806428EC_00000808:
     blr
 }
 
-asm void fn_80642990(void)
+asm void L2CA_DisconnectRsp(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -814,38 +814,38 @@ asm void fn_80642990(void)
     mr r31, r3
     lbz r0, lbl_808230E0@l(r4)
     cmplwi r0, 0x3
-    blt lbl_fn_80642990_00000858
+    blt lbl_L2CA_DisconnectRsp_00000858
     lis r3, 0x8
     lis r4, lbl_807B637C@ha
     mr r5, r31
     addi r3, r3, 0x2
     addi r4, r4, lbl_807B637C@l
     bl bta_sys_log
-lbl_fn_80642990_00000858:
+lbl_L2CA_DisconnectRsp_00000858:
     mr r4, r31
     li r3, 0x0
     bl fn_80647A88
     cmpwi r3, 0x0
-    bne lbl_fn_80642990_0000089C
+    bne lbl_L2CA_DisconnectRsp_0000089C
     lis r3, lbl_808230E0@ha
     lbz r0, lbl_808230E0@l(r3)
     cmplwi r0, 0x2
-    blt lbl_fn_80642990_00000894
+    blt lbl_L2CA_DisconnectRsp_00000894
     lis r3, 0x8
     lis r4, lbl_807B63A0@ha
     mr r5, r31
     addi r3, r3, 0x1
     addi r4, r4, lbl_807B63A0@l
     bl bta_sys_log
-lbl_fn_80642990_00000894:
+lbl_L2CA_DisconnectRsp_00000894:
     li r3, 0x0
-    b lbl_fn_80642990_000008AC
-lbl_fn_80642990_0000089C:
+    b lbl_L2CA_DisconnectRsp_000008AC
+lbl_L2CA_DisconnectRsp_0000089C:
     li r4, 0x1b
     li r5, 0x0
     bl l2c_csm_execute
     li r3, 0x1
-lbl_fn_80642990_000008AC:
+lbl_L2CA_DisconnectRsp_000008AC:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0

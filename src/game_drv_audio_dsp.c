@@ -57,8 +57,8 @@ extern void GXSetBlendMode(void);
 extern void fn_80618290(void);
 extern void GXLoadPosMtxImm(void);
 extern void GXSetCurrentMtx(void);
-extern void fn_80618570(void);
-extern void fn_806185C0(void);
+extern void GXSetViewport(void);
+extern void GXSetScissor(void);
 extern void strcmp(void);
 
 /* External data declarations */
@@ -229,12 +229,12 @@ asm void fn_805B4F0C(void)
     fsubs f3, f3, f4
     lfs f6, lbl_808883D4
     fsubs f4, f0, f4
-    bl fn_80618570
+    bl GXSetViewport
     mr r5, r30
     mr r6, r29
     li r3, 0x0
     li r4, 0x0
-    bl fn_806185C0
+    bl GXSetScissor
     addi r3, r1, 0x20
     bl PSMTXIdentity
     addi r3, r1, 0x20

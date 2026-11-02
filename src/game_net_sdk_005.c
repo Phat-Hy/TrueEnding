@@ -23,7 +23,7 @@ extern void _savegpr_22(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void IOS_Close(void);
-extern void fn_8061D080(void);
+extern void IOS_Ioctl(void);
 extern void fn_80697F84(void);
 extern void fn_80698A2C(void);
 extern void fn_80698DEC(void);
@@ -1396,7 +1396,7 @@ lbl_fn_806A3300_000010C0:
     li r6, 0x0
     li r7, 0x0
     li r8, 0x0
-    bl fn_8061D080
+    bl IOS_Ioctl
     cmpwi r3, 0x0
     mr r30, r3
     bne lbl_fn_806A3300_000010F4
@@ -1714,7 +1714,7 @@ lbl_fn_806A37F4_000014F4:
     li r8, 0x0
     stw r31, 0x8(r3)
     lwz r3, 0x8(r1)
-    bl fn_8061D080
+    bl IOS_Ioctl
     mr r31, r3
     mr r4, r30
     li r3, 0xc
@@ -1784,7 +1784,7 @@ lbl_fn_806A38C8_000015E4:
     li r8, 0x0
     stw r30, 0x8(r3)
     lwz r3, 0x8(r1)
-    bl fn_8061D080
+    bl IOS_Ioctl
     mr r30, r3
     mr r4, r31
     li r3, 0xc
@@ -1835,7 +1835,7 @@ lbl_fn_806A39B8_00001698:
     lwz r3, 0x8(r1)
     li r7, 0x0
     li r8, 0x0
-    bl fn_8061D080
+    bl IOS_Ioctl
     mr r31, r3
     mr r4, r30
     li r3, 0xc
@@ -1902,7 +1902,7 @@ lbl_fn_806A3A5C_00001764:
     li r6, 0x24
     li r7, 0x0
     li r8, 0x0
-    bl fn_8061D080
+    bl IOS_Ioctl
     mr r31, r3
     mr r4, r30
     li r3, 0xc
@@ -1970,7 +1970,7 @@ lbl_fn_806A3B44_0000184C:
     li r6, 0x24
     li r7, 0x0
     li r8, 0x0
-    bl fn_8061D080
+    bl IOS_Ioctl
     mr r31, r3
     mr r4, r30
     li r3, 0xc
@@ -2038,7 +2038,7 @@ lbl_fn_806A3C2C_00001938:
     mr r7, r28
     li r4, 0x7
     li r6, 0x4
-    bl fn_8061D080
+    bl IOS_Ioctl
     cmpwi r3, 0x0
     mr r30, r3
     blt lbl_fn_806A3C2C_00001988
@@ -2186,7 +2186,7 @@ lbl_fn_806A3DC0_00001B1C:
     li r8, 0x0
     stw r31, 0x8(r3)
     lwz r3, 0x68(r1)
-    bl fn_8061D080
+    bl IOS_Ioctl
     mr r31, r3
     mr r4, r30
     li r3, 0xc
@@ -2240,7 +2240,7 @@ lbl_fn_806A3EF0_00001BD8:
     li r7, 0x0
     li r8, 0x0
     lwz r3, 0x8(r1)
-    bl fn_8061D080
+    bl IOS_Ioctl
     mr r31, r3
     mr r4, r30
     li r3, 0xc
@@ -2333,7 +2333,7 @@ lbl_fn_806A3FA4_00001D18:
     mr r8, r29
     li r4, 0xb
     li r6, 0x8
-    bl fn_8061D080
+    bl IOS_Ioctl
     cmpwi r3, 0x0
     mr r28, r3
     blt lbl_fn_806A3FA4_00001D60
@@ -2408,7 +2408,7 @@ lbl_fn_806A4100_00001E20:
     mr r7, r29
     li r4, 0x15
     li r8, 0x4
-    bl fn_8061D080
+    bl IOS_Ioctl
     cmpwi r3, 0x0
     mr r30, r3
     blt lbl_fn_806A4100_00001E68

@@ -40,7 +40,7 @@ extern void GXCopyTex(void);
 extern void GXInitLightObj(void);
 extern void GXClampLightAngle(void);
 extern void GXSetZCompLoc(void);
-extern void fn_80618570(void);
+extern void GXSetViewport(void);
 
 /* External data declarations */
 extern u8 lbl_80732ED0[];
@@ -1957,7 +1957,7 @@ lbl_fn_800B8964_00001C18:
     fsubs f3, f9, f10
     lfs f6, lbl_80880F84
     fsubs f4, f0, f10
-    bl fn_80618570
+    bl GXSetViewport
     lwz r4, lbl_8087EEE0
     lis r5, lbl_80732ED8@ha
     lfs f11, lbl_80880F7C

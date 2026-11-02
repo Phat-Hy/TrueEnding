@@ -17,7 +17,7 @@ extern void fn_8061CB60(void);
 extern void fn_8061CC60(void);
 extern void fn_8061CD70(void);
 extern void fn_8061CE50(void);
-extern void fn_8061D080(void);
+extern void IOS_Ioctl(void);
 extern void IOS_IoctlvAsync(void);
 extern void iosAllocAligned(void);
 extern void iosCreateHeap(void);
@@ -322,7 +322,7 @@ lbl_fn_8061A880_00000330:
     stb r28, 0x47(r30)
     stb r29, 0x48(r30)
     lwz r3, __fsFd_8087E8C0
-    bl fn_8061D080
+    bl IOS_Ioctl
     mr r31, r3
 lbl_fn_8061A880_00000370:
     cmpwi r30, 0x0
@@ -664,7 +664,7 @@ lbl_fn_8061AD30_00000818:
     li r4, 0x6
     li r6, 0x40
     li r8, 0x4c
-    bl fn_8061D080
+    bl IOS_Ioctl
     cmpwi r3, 0x0
     mr r31, r3
     bne lbl_fn_8061AD30_00000884
@@ -827,7 +827,7 @@ lbl_fn_8061AFD0_00000A74:
     li r6, 0x40
     li r7, 0x0
     li r8, 0x0
-    bl fn_8061D080
+    bl IOS_Ioctl
     mr r31, r3
 lbl_fn_8061AFD0_00000AA0:
     cmpwi r30, 0x0
@@ -964,7 +964,7 @@ lbl_ISFS_Rename_00000C44:
     li r6, 0x80
     li r7, 0x0
     li r8, 0x0
-    bl fn_8061D080
+    bl IOS_Ioctl
     mr r30, r3
 lbl_ISFS_Rename_00000C80:
     cmpwi r29, 0x0
@@ -1191,7 +1191,7 @@ lbl_ISFS_CreateFile_00000F80:
     stb r28, 0x47(r30)
     stb r29, 0x48(r30)
     lwz r3, __fsFd_8087E8C0
-    bl fn_8061D080
+    bl IOS_Ioctl
     mr r31, r3
 lbl_ISFS_CreateFile_00000FC0:
     cmpwi r30, 0x0
@@ -1431,7 +1431,7 @@ lbl_fn_8061B860_000012F0:
     li r5, 0x0
     li r6, 0x0
     li r8, 0x8
-    bl fn_8061D080
+    bl IOS_Ioctl
     cmpwi r3, 0x0
     mr r31, r3
     bne lbl_fn_8061B860_00001328

@@ -129,7 +129,7 @@ u32 fn_806A6A80(u32 val);
 void fn_806A6A90(void);
 void fn_806A6BA0(void);
 void fn_806A6C90(void);
-void fn_806A6CA0(void);
+void net_base64_encode(void);
 void fn_806A6E40(void);
 void fn_806A7020(void);
 void fn_806A70E0(void);
@@ -700,7 +700,7 @@ lbl_fn_806A6BA0_0000064C:
 void fn_806A6C90(void) {
 }
 
-asm void fn_806A6CA0(void)
+asm void net_base64_encode(void)
 {
     nofralloc
     stwu r1, -0x40(r1)
@@ -722,22 +722,22 @@ asm void fn_806A6CA0(void)
     srawi r0, r0, 31
     rlwinm r0, r0, 0, 29, 29
     add r0, r7, r0
-    bne lbl_fn_806A6CA0_00000790
+    bne lbl_net_base64_encode_00000790
     mr r3, r0
-    b lbl_fn_806A6CA0_000008B4
-lbl_fn_806A6CA0_00000790:
+    b lbl_net_base64_encode_000008B4
+lbl_net_base64_encode_00000790:
     cmplw r6, r0
-    bge lbl_fn_806A6CA0_000007A0
+    bge lbl_net_base64_encode_000007A0
     li r3, -0x1
-    b lbl_fn_806A6CA0_000008B4
-lbl_fn_806A6CA0_000007A0:
+    b lbl_net_base64_encode_000008B4
+lbl_net_base64_encode_000007A0:
     mr r26, r3
     mr r24, r23
     add r25, r3, r4
     lis r30, lbl_807BCD3C@ha
     li r31, 0x2a
-    b lbl_fn_806A6CA0_000008A8
-lbl_fn_806A6CA0_000007B8:
+    b lbl_net_base64_encode_000008A8
+lbl_net_base64_encode_000007B8:
     subf r5, r26, r25
     li r29, 0x3
     slwi r3, r5, 3
@@ -750,9 +750,9 @@ lbl_fn_806A6CA0_000007B8:
     or r0, r0, r3
     srwi r0, r0, 31
     add r27, r4, r0
-    bge lbl_fn_806A6CA0_000007F0
+    bge lbl_net_base64_encode_000007F0
     mr r29, r5
-lbl_fn_806A6CA0_000007F0:
+lbl_net_base64_encode_000007F0:
     addi r3, r1, 0x8
     li r4, 0x0
     li r5, 0x3
@@ -767,7 +767,7 @@ lbl_fn_806A6CA0_000007F0:
     srawi r0, r0, 2
     lbzx r0, r3, r0
     stb r0, 0x0(r24)
-    blt lbl_fn_806A6CA0_0000084C
+    blt lbl_net_base64_encode_0000084C
     lbz r0, 0x9(r1)
     lbz r3, 0x8(r1)
     srawi r0, r0, 4
@@ -775,12 +775,12 @@ lbl_fn_806A6CA0_000007F0:
     rlwimi r0, r3, 4, 26, 27
     lbzx r0, r4, r0
     stb r0, 0x1(r24)
-    b lbl_fn_806A6CA0_00000850
-lbl_fn_806A6CA0_0000084C:
+    b lbl_net_base64_encode_00000850
+lbl_net_base64_encode_0000084C:
     stb r31, 0x1(r24)
-lbl_fn_806A6CA0_00000850:
+lbl_net_base64_encode_00000850:
     cmplwi r27, 0x3
-    blt lbl_fn_806A6CA0_00000878
+    blt lbl_net_base64_encode_00000878
     lbz r0, 0xa(r1)
     lbz r3, 0x9(r1)
     srawi r0, r0, 6
@@ -788,28 +788,28 @@ lbl_fn_806A6CA0_00000850:
     rlwimi r0, r3, 2, 26, 29
     lbzx r0, r4, r0
     stb r0, 0x2(r24)
-    b lbl_fn_806A6CA0_0000087C
-lbl_fn_806A6CA0_00000878:
+    b lbl_net_base64_encode_0000087C
+lbl_net_base64_encode_00000878:
     stb r31, 0x2(r24)
-lbl_fn_806A6CA0_0000087C:
+lbl_net_base64_encode_0000087C:
     cmplwi r27, 0x4
-    blt lbl_fn_806A6CA0_0000089C
+    blt lbl_net_base64_encode_0000089C
     lbz r0, 0xa(r1)
     lwz r3, lbl_807BCD3C@l(r30)
     clrlwi r0, r0, 26
     lbzx r0, r3, r0
     stb r0, 0x3(r24)
-    b lbl_fn_806A6CA0_000008A0
-lbl_fn_806A6CA0_0000089C:
+    b lbl_net_base64_encode_000008A0
+lbl_net_base64_encode_0000089C:
     stb r31, 0x3(r24)
-lbl_fn_806A6CA0_000008A0:
+lbl_net_base64_encode_000008A0:
     add r26, r26, r29
     addi r24, r24, 0x4
-lbl_fn_806A6CA0_000008A8:
+lbl_net_base64_encode_000008A8:
     cmplw r26, r25
-    bne lbl_fn_806A6CA0_000007B8
+    bne lbl_net_base64_encode_000007B8
     subf r3, r23, r24
-lbl_fn_806A6CA0_000008B4:
+lbl_net_base64_encode_000008B4:
     addi r11, r1, 0x40
     bl _restgpr_23
     lwz r0, 0x44(r1)

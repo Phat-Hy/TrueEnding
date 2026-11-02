@@ -41,7 +41,7 @@ extern s32 fn_8061E850(NANDFileInfo* info, const void* buf, u32 length);
 extern s32 fn_8061E760(NANDFileInfo* info, void* buf, u32 length);
 extern s32 fn_8061FB70(NANDFileInfo* info);
 extern s32 fn_8061E470(const char* path);
-extern s32 fn_8061D080();
+extern s32 IOS_Ioctl();
 
 #define ResetDown ResetDown_8087FC70
 #define StmReady StmReady_8087FC74
@@ -188,7 +188,7 @@ void fn_805F6BF0(void) {
         OSPanic(lbl_807A9928, 0x15c, lbl_807A9934);
     }
     *(u32*)lbl_807CC0A0 = 0;
-    fn_8061D080(StmImDesc, 0x2003, lbl_807CC0A0, 0x20, lbl_807CC0C0, 0x20);
+    IOS_Ioctl(StmImDesc, 0x2003, lbl_807CC0A0, 0x20, lbl_807CC0C0, 0x20);
     OSDisableInterrupts();
     ICFlashInvalidate();
     for (;;) {
@@ -222,7 +222,7 @@ lbl_0040:
     li r4, 0x2001
     li r6, 0x20
     li r8, 0x20
-    bl fn_8061D080
+    bl IOS_Ioctl
     bl OSDisableInterrupts
     bl ICFlashInvalidate
     nop
@@ -305,7 +305,7 @@ s32 fn_805F6DF0(u32 arg) {
         return -6;
     }
     *(u32*)lbl_807CC0A0 = arg;
-    return fn_8061D080(StmImDesc, 0x6002, lbl_807CC0A0, 0x20, lbl_807CC0C0, 0x20);
+    return IOS_Ioctl(StmImDesc, 0x6002, lbl_807CC0A0, 0x20, lbl_807CC0C0, 0x20);
 }
 
 s32 __OSUnRegisterStateEvent(void) {
@@ -317,7 +317,7 @@ s32 __OSUnRegisterStateEvent(void) {
     if (!StmReady) {
         return -6;
     }
-    ret = fn_8061D080(StmImDesc, 0x3002, lbl_807CC0A0, 0x20, lbl_807CC0C0, 0x20);
+    ret = IOS_Ioctl(StmImDesc, 0x3002, lbl_807CC0A0, 0x20, lbl_807CC0C0, 0x20);
     if (ret == 0) {
         StmEhRegistered = FALSE;
     }
