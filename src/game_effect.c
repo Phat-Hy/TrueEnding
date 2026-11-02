@@ -81,7 +81,7 @@ void effect_evaluateState(void);
 void fn_8003D6E8(void);
 void effect_testLifetime(void);
 void fn_8003DD50(void);
-void fn_8003DEE0(void);
+void property_tree_destroyRecursively(void);
 void fn_8003E120(void);
 void str_initFromCStr(void);
 void fn_8003E530(void);
@@ -5085,7 +5085,7 @@ lbl_fn_8003DD50_00004578:
     blr
 }
 
-asm void fn_8003DEE0(void)
+asm void property_tree_destroyRecursively(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -5099,150 +5099,150 @@ asm void fn_8003DEE0(void)
     stw r28, 0x10(r1)
     lwz r29, 0x0(r4)
     cmpwi r29, 0x0
-    beq lbl_fn_8003DEE0_0000469C
+    beq lbl_property_tree_destroyRecursively_0000469C
     lwz r28, 0x0(r29)
     cmpwi r28, 0x0
-    beq lbl_fn_8003DEE0_00004618
+    beq lbl_property_tree_destroyRecursively_00004618
     lwz r4, 0x0(r28)
     cmpwi r4, 0x0
-    beq lbl_fn_8003DEE0_000045DC
-    bl fn_8003DEE0
-lbl_fn_8003DEE0_000045DC:
+    beq lbl_property_tree_destroyRecursively_000045DC
+    bl property_tree_destroyRecursively
+lbl_property_tree_destroyRecursively_000045DC:
     lwz r4, 0x4(r28)
     cmpwi r4, 0x0
-    beq lbl_fn_8003DEE0_000045F0
+    beq lbl_property_tree_destroyRecursively_000045F0
     mr r3, r30
-    bl fn_8003DEE0
-lbl_fn_8003DEE0_000045F0:
+    bl property_tree_destroyRecursively
+lbl_property_tree_destroyRecursively_000045F0:
     addic. r3, r28, 0xc
-    beq lbl_fn_8003DEE0_00004610
-    beq lbl_fn_8003DEE0_00004610
+    beq lbl_property_tree_destroyRecursively_00004610
+    beq lbl_property_tree_destroyRecursively_00004610
     lwz r0, 0x0(r3)
     srwi. r0, r0, 31
-    beq lbl_fn_8003DEE0_00004610
+    beq lbl_property_tree_destroyRecursively_00004610
     lwz r3, 0x8(r3)
     bl dtor_80084684
-lbl_fn_8003DEE0_00004610:
+lbl_property_tree_destroyRecursively_00004610:
     mr r3, r28
     bl dtor_80084684
-lbl_fn_8003DEE0_00004618:
+lbl_property_tree_destroyRecursively_00004618:
     lwz r28, 0x4(r29)
     cmpwi r28, 0x0
-    beq lbl_fn_8003DEE0_00004674
+    beq lbl_property_tree_destroyRecursively_00004674
     lwz r4, 0x0(r28)
     cmpwi r4, 0x0
-    beq lbl_fn_8003DEE0_00004638
+    beq lbl_property_tree_destroyRecursively_00004638
     mr r3, r30
-    bl fn_8003DEE0
-lbl_fn_8003DEE0_00004638:
+    bl property_tree_destroyRecursively
+lbl_property_tree_destroyRecursively_00004638:
     lwz r4, 0x4(r28)
     cmpwi r4, 0x0
-    beq lbl_fn_8003DEE0_0000464C
+    beq lbl_property_tree_destroyRecursively_0000464C
     mr r3, r30
-    bl fn_8003DEE0
-lbl_fn_8003DEE0_0000464C:
+    bl property_tree_destroyRecursively
+lbl_property_tree_destroyRecursively_0000464C:
     addic. r3, r28, 0xc
-    beq lbl_fn_8003DEE0_0000466C
-    beq lbl_fn_8003DEE0_0000466C
+    beq lbl_property_tree_destroyRecursively_0000466C
+    beq lbl_property_tree_destroyRecursively_0000466C
     lwz r0, 0x0(r3)
     srwi. r0, r0, 31
-    beq lbl_fn_8003DEE0_0000466C
+    beq lbl_property_tree_destroyRecursively_0000466C
     lwz r3, 0x8(r3)
     bl dtor_80084684
-lbl_fn_8003DEE0_0000466C:
+lbl_property_tree_destroyRecursively_0000466C:
     mr r3, r28
     bl dtor_80084684
-lbl_fn_8003DEE0_00004674:
+lbl_property_tree_destroyRecursively_00004674:
     addic. r3, r29, 0xc
-    beq lbl_fn_8003DEE0_00004694
-    beq lbl_fn_8003DEE0_00004694
+    beq lbl_property_tree_destroyRecursively_00004694
+    beq lbl_property_tree_destroyRecursively_00004694
     lwz r0, 0x0(r3)
     srwi. r0, r0, 31
-    beq lbl_fn_8003DEE0_00004694
+    beq lbl_property_tree_destroyRecursively_00004694
     lwz r3, 0x8(r3)
     bl dtor_80084684
-lbl_fn_8003DEE0_00004694:
+lbl_property_tree_destroyRecursively_00004694:
     mr r3, r29
     bl dtor_80084684
-lbl_fn_8003DEE0_0000469C:
+lbl_property_tree_destroyRecursively_0000469C:
     lwz r28, 0x4(r31)
     cmpwi r28, 0x0
-    beq lbl_fn_8003DEE0_00004788
+    beq lbl_property_tree_destroyRecursively_00004788
     lwz r29, 0x0(r28)
     cmpwi r29, 0x0
-    beq lbl_fn_8003DEE0_00004704
+    beq lbl_property_tree_destroyRecursively_00004704
     lwz r4, 0x0(r29)
     cmpwi r4, 0x0
-    beq lbl_fn_8003DEE0_000046C8
+    beq lbl_property_tree_destroyRecursively_000046C8
     mr r3, r30
-    bl fn_8003DEE0
-lbl_fn_8003DEE0_000046C8:
+    bl property_tree_destroyRecursively
+lbl_property_tree_destroyRecursively_000046C8:
     lwz r4, 0x4(r29)
     cmpwi r4, 0x0
-    beq lbl_fn_8003DEE0_000046DC
+    beq lbl_property_tree_destroyRecursively_000046DC
     mr r3, r30
-    bl fn_8003DEE0
-lbl_fn_8003DEE0_000046DC:
+    bl property_tree_destroyRecursively
+lbl_property_tree_destroyRecursively_000046DC:
     addic. r3, r29, 0xc
-    beq lbl_fn_8003DEE0_000046FC
-    beq lbl_fn_8003DEE0_000046FC
+    beq lbl_property_tree_destroyRecursively_000046FC
+    beq lbl_property_tree_destroyRecursively_000046FC
     lwz r0, 0x0(r3)
     srwi. r0, r0, 31
-    beq lbl_fn_8003DEE0_000046FC
+    beq lbl_property_tree_destroyRecursively_000046FC
     lwz r3, 0x8(r3)
     bl dtor_80084684
-lbl_fn_8003DEE0_000046FC:
+lbl_property_tree_destroyRecursively_000046FC:
     mr r3, r29
     bl dtor_80084684
-lbl_fn_8003DEE0_00004704:
+lbl_property_tree_destroyRecursively_00004704:
     lwz r29, 0x4(r28)
     cmpwi r29, 0x0
-    beq lbl_fn_8003DEE0_00004760
+    beq lbl_property_tree_destroyRecursively_00004760
     lwz r4, 0x0(r29)
     cmpwi r4, 0x0
-    beq lbl_fn_8003DEE0_00004724
+    beq lbl_property_tree_destroyRecursively_00004724
     mr r3, r30
-    bl fn_8003DEE0
-lbl_fn_8003DEE0_00004724:
+    bl property_tree_destroyRecursively
+lbl_property_tree_destroyRecursively_00004724:
     lwz r4, 0x4(r29)
     cmpwi r4, 0x0
-    beq lbl_fn_8003DEE0_00004738
+    beq lbl_property_tree_destroyRecursively_00004738
     mr r3, r30
-    bl fn_8003DEE0
-lbl_fn_8003DEE0_00004738:
+    bl property_tree_destroyRecursively
+lbl_property_tree_destroyRecursively_00004738:
     addic. r3, r29, 0xc
-    beq lbl_fn_8003DEE0_00004758
-    beq lbl_fn_8003DEE0_00004758
+    beq lbl_property_tree_destroyRecursively_00004758
+    beq lbl_property_tree_destroyRecursively_00004758
     lwz r0, 0x0(r3)
     srwi. r0, r0, 31
-    beq lbl_fn_8003DEE0_00004758
+    beq lbl_property_tree_destroyRecursively_00004758
     lwz r3, 0x8(r3)
     bl dtor_80084684
-lbl_fn_8003DEE0_00004758:
+lbl_property_tree_destroyRecursively_00004758:
     mr r3, r29
     bl dtor_80084684
-lbl_fn_8003DEE0_00004760:
+lbl_property_tree_destroyRecursively_00004760:
     addic. r3, r28, 0xc
-    beq lbl_fn_8003DEE0_00004780
-    beq lbl_fn_8003DEE0_00004780
+    beq lbl_property_tree_destroyRecursively_00004780
+    beq lbl_property_tree_destroyRecursively_00004780
     lwz r0, 0x0(r3)
     srwi. r0, r0, 31
-    beq lbl_fn_8003DEE0_00004780
+    beq lbl_property_tree_destroyRecursively_00004780
     lwz r3, 0x8(r3)
     bl dtor_80084684
-lbl_fn_8003DEE0_00004780:
+lbl_property_tree_destroyRecursively_00004780:
     mr r3, r28
     bl dtor_80084684
-lbl_fn_8003DEE0_00004788:
+lbl_property_tree_destroyRecursively_00004788:
     addic. r3, r31, 0xc
-    beq lbl_fn_8003DEE0_000047A8
-    beq lbl_fn_8003DEE0_000047A8
+    beq lbl_property_tree_destroyRecursively_000047A8
+    beq lbl_property_tree_destroyRecursively_000047A8
     lwz r0, 0x0(r3)
     srwi. r0, r0, 31
-    beq lbl_fn_8003DEE0_000047A8
+    beq lbl_property_tree_destroyRecursively_000047A8
     lwz r3, 0x8(r3)
     bl dtor_80084684
-lbl_fn_8003DEE0_000047A8:
+lbl_property_tree_destroyRecursively_000047A8:
     mr r3, r31
     bl dtor_80084684
     lwz r0, 0x24(r1)

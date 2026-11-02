@@ -37,7 +37,7 @@ extern void kpad_getClampData(void);
 extern void fn_8039BC0C(void);
 extern void fn_803ACD50(void);
 extern void fn_803AD148(void);
-extern void fn_803AD278(void);
+extern void menu_tree_destroyRecursively(void);
 extern void fn_803B84DC(void);
 extern void fn_803B8F50(void);
 extern void boss_getOffset54(void);
@@ -678,13 +678,13 @@ lbl_fn_803B9D78_00000774:
     cmpwi r4, 0x0
     beq lbl_fn_803B9D78_000007D8
     mr r3, r28
-    bl fn_803AD278
+    bl menu_tree_destroyRecursively
 lbl_fn_803B9D78_000007D8:
     lwz r4, 0x4(r24)
     cmpwi r4, 0x0
     beq lbl_fn_803B9D78_000007EC
     mr r3, r28
-    bl fn_803AD278
+    bl menu_tree_destroyRecursively
 lbl_fn_803B9D78_000007EC:
     mr r3, r24
     bl dtor_80084684
@@ -696,13 +696,13 @@ lbl_fn_803B9D78_000007F4:
     cmpwi r4, 0x0
     beq lbl_fn_803B9D78_00000814
     mr r3, r28
-    bl fn_803AD278
+    bl menu_tree_destroyRecursively
 lbl_fn_803B9D78_00000814:
     lwz r4, 0x4(r24)
     cmpwi r4, 0x0
     beq lbl_fn_803B9D78_00000828
     mr r3, r28
-    bl fn_803AD278
+    bl menu_tree_destroyRecursively
 lbl_fn_803B9D78_00000828:
     mr r3, r24
     bl dtor_80084684
@@ -720,13 +720,13 @@ lbl_fn_803B9D78_00000838:
     cmpwi r4, 0x0
     beq lbl_fn_803B9D78_00000864
     mr r3, r28
-    bl fn_803AD278
+    bl menu_tree_destroyRecursively
 lbl_fn_803B9D78_00000864:
     lwz r4, 0x4(r26)
     cmpwi r4, 0x0
     beq lbl_fn_803B9D78_00000878
     mr r3, r28
-    bl fn_803AD278
+    bl menu_tree_destroyRecursively
 lbl_fn_803B9D78_00000878:
     mr r3, r26
     bl dtor_80084684
@@ -738,13 +738,13 @@ lbl_fn_803B9D78_00000880:
     cmpwi r4, 0x0
     beq lbl_fn_803B9D78_000008A0
     mr r3, r28
-    bl fn_803AD278
+    bl menu_tree_destroyRecursively
 lbl_fn_803B9D78_000008A0:
     lwz r4, 0x4(r26)
     cmpwi r4, 0x0
     beq lbl_fn_803B9D78_000008B4
     mr r3, r28
-    bl fn_803AD278
+    bl menu_tree_destroyRecursively
 lbl_fn_803B9D78_000008B4:
     mr r3, r26
     bl dtor_80084684

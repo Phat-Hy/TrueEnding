@@ -49,7 +49,7 @@ extern void fn_8037F688(void);
 extern void fn_80383728(void);
 extern void mtx_copyPairedSingle(void);
 extern void fn_803CF734(void);
-extern void fn_803CFC58(void);
+extern void town_entity_isActive(void);
 extern void fn_80453DBC(void);
 extern void fn_804741C0(void);
 extern void cutscene_cam_getTargetIndex(void);
@@ -280,7 +280,7 @@ lbl_fn_8052C10C_00000208:
     cmpwi r3, 0x0
     beq lbl_fn_8052C10C_00000240
     mr r3, r25
-    bl fn_803CFC58
+    bl town_entity_isActive
     cmpwi r3, 0x0
     bne lbl_fn_8052C10C_00000240
     mr r26, r25
@@ -318,7 +318,7 @@ lbl_fn_8052C10C_00000298:
     cmpwi r3, 0x0
     beq lbl_fn_8052C10C_000002C0
     mr r3, r26
-    bl fn_803CFC58
+    bl town_entity_isActive
     cmpwi r3, 0x0
     beq lbl_fn_8052C10C_000002C4
 lbl_fn_8052C10C_000002C0:

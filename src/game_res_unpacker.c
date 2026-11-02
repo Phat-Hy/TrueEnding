@@ -6,7 +6,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_80012054(void);
-extern void fn_800128FC(void);
+extern void actor_getModelData(void);
 extern void fn_80012934(void);
 extern void fn_8005E7F4(void);
 extern void mem_getAllocSize(void);
@@ -122,34 +122,34 @@ lbl_fn_80228FD8_0000004C:
     cmpwi r3, 0x0
     beq lbl_fn_80228FD8_000000E0
     mr r3, r29
-    bl fn_800128FC
+    bl actor_getModelData
     lwz r0, 0x55c(r3)
     cmpwi r0, 0x6
     bne lbl_fn_80228FD8_00000080
     mr r3, r29
-    bl fn_800128FC
+    bl actor_getModelData
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
     bl battle_applyStatusEffect
 lbl_fn_80228FD8_00000080:
     mr r3, r29
-    bl fn_800128FC
+    bl actor_getModelData
     lwz r0, 0x12a4(r3)
     extrwi. r0, r0, 1, 25
     beq lbl_fn_80228FD8_000000A4
     mr r3, r29
-    bl fn_800128FC
+    bl actor_getModelData
     li r4, 0x0
     bl inventory_calcTotalStats
 lbl_fn_80228FD8_000000A4:
     mr r3, r29
-    bl fn_800128FC
+    bl actor_getModelData
     lwz r0, 0x1208(r3)
     cmpwi r0, 0x0
     beq lbl_fn_80228FD8_000000C4
     mr r3, r29
-    bl fn_800128FC
+    bl actor_getModelData
     bl battle_calcOutcomeBonus
 lbl_fn_80228FD8_000000C4:
     lfs f1, lbl_80883090

@@ -123,7 +123,7 @@ extern void fn_803CF734(void);
 extern void fn_803CF740(void);
 extern void fn_803CF74C(void);
 extern void fn_803CF78C(void);
-extern void fn_803CFC58(void);
+extern void town_entity_isActive(void);
 extern void fn_803CFC64(void);
 extern void fn_803CFC6C(void);
 extern void fn_803D2134(void);
@@ -317,7 +317,7 @@ asm void fn_803D2A6C(void)
     stw r0, 0xa60(r1)
     lwz r3, 0x68(r3)
     stw r0, 0xa68(r1)
-    bl fn_803CFC58
+    bl town_entity_isActive
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_0000009C
     lwz r3, 0x68(r24)
@@ -326,14 +326,14 @@ lbl_fn_803D2A6C_0000009C:
     lwz r3, 0x6c(r24)
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_000000BC
-    bl fn_803CFC58
+    bl town_entity_isActive
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_000000BC
     lwz r3, 0x6c(r24)
     bl fn_803D2A60
 lbl_fn_803D2A6C_000000BC:
     lwz r3, 0x70(r24)
-    bl fn_803CFC58
+    bl town_entity_isActive
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_000000D4
     lwz r3, 0x70(r24)
@@ -368,7 +368,7 @@ lbl_fn_803D2A6C_0000010C:
     li r19, 0x0
 lbl_fn_803D2A6C_00000138:
     lwz r3, 0xc8(r21)
-    bl fn_803CFC58
+    bl town_entity_isActive
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00000150
     lwz r3, 0xc8(r21)
@@ -377,14 +377,14 @@ lbl_fn_803D2A6C_00000150:
     lwz r3, 0xcc(r21)
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00000170
-    bl fn_803CFC58
+    bl town_entity_isActive
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00000170
     lwz r3, 0xcc(r21)
     bl fn_803D2A60
 lbl_fn_803D2A6C_00000170:
     lwz r3, 0xd0(r21)
-    bl fn_803CFC58
+    bl town_entity_isActive
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00000188
     lwz r3, 0xd0(r21)
@@ -452,7 +452,7 @@ lbl_fn_803D2A6C_00000244:
     li r19, 0x0
 lbl_fn_803D2A6C_00000264:
     lwz r3, 0x6fc(r21)
-    bl fn_803CFC58
+    bl town_entity_isActive
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_0000027C
     lwz r3, 0x6fc(r21)
@@ -480,7 +480,7 @@ lbl_fn_803D2A6C_0000027C:
     li r19, 0x0
 lbl_fn_803D2A6C_000002CC:
     lwz r3, 0x8a0(r21)
-    bl fn_803CFC58
+    bl town_entity_isActive
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_000002E4
     lwz r3, 0x8a0(r21)
@@ -527,7 +527,7 @@ lbl_fn_803D2A6C_00000364:
     lwz r3, 0x83c(r24)
     bl script_setTaskTerminated
     lwz r3, 0x840(r24)
-    bl fn_803CFC58
+    bl town_entity_isActive
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00000394
     lwz r3, 0x840(r24)
@@ -545,7 +545,7 @@ lbl_fn_803D2A6C_000003B4:
     lwz r3, 0x870(r24)
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_000003DC
-    bl fn_803CFC58
+    bl town_entity_isActive
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_000003D4
     lwz r3, 0x870(r24)
@@ -557,7 +557,7 @@ lbl_fn_803D2A6C_000003DC:
     lwz r3, 0x848(r24)
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_0000045C
-    bl fn_803CFC58
+    bl town_entity_isActive
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_000003FC
     lwz r3, 0x848(r24)
@@ -2245,7 +2245,7 @@ lbl_fn_803D2A6C_00001C2C:
     beq lbl_fn_803D2A6C_00001E18
     mr r3, r19
     li r20, 0x1
-    bl fn_803CFC58
+    bl town_entity_isActive
     cmpwi r3, 0x0
     bne lbl_fn_803D2A6C_00001CB8
     mr r3, r19
@@ -2995,7 +2995,7 @@ lbl_fn_803D2A6C_0000273C:
     cmpwi r3, 0x0
     bne lbl_fn_803D2A6C_00002770
     lwz r3, 0x814(r24)
-    bl fn_803CFC58
+    bl town_entity_isActive
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_000027AC
 lbl_fn_803D2A6C_00002770:
@@ -4176,7 +4176,7 @@ lbl_fn_803D2A6C_00003864:
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00003A38
     mr r3, r19
-    bl fn_803CFC58
+    bl town_entity_isActive
     cmpwi r3, 0x0
     bne lbl_fn_803D2A6C_00003A38
     mr r3, r19
@@ -4329,7 +4329,7 @@ lbl_fn_803D2A6C_00003A84:
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00003C80
     mr r3, r19
-    bl fn_803CFC58
+    bl town_entity_isActive
     cmpwi r3, 0x0
     bne lbl_fn_803D2A6C_00003C80
     mr r3, r19

@@ -6,7 +6,7 @@ extern void __register_global_object(void);
 extern void dtor_80084684(void);
 extern void actor_dispatchByType(void);
 extern void fn_800119C0(void);
-extern void fn_800128FC(void);
+extern void actor_getModelData(void);
 extern void fn_80046EE0(void);
 extern void fn_80047B54(void);
 extern void fn_800499D0(void);
@@ -477,7 +477,7 @@ lbl_fn_8010DB94_000004A4:
     li r30, 0x0
 lbl_fn_8010DB94_000004A8:
     mr r3, r30
-    bl fn_800128FC
+    bl actor_getModelData
     cmpwi r3, 0x0
     beq lbl_fn_8010DB94_000005A0
     mr r4, r31
@@ -495,7 +495,7 @@ lbl_fn_8010DB94_000004E0:
 lbl_fn_8010DB94_000004E4:
     lfs f31, 0x4(r3)
     mr r3, r30
-    bl fn_800128FC
+    bl actor_getModelData
     addi r31, r3, 0xc64
     addi r4, r1, 0x8
     lfs f1, lbl_808815F8
@@ -601,7 +601,7 @@ lbl_fn_8010DD34_00000648:
     li r29, 0x0
 lbl_fn_8010DD34_0000064C:
     mr r3, r29
-    bl fn_800128FC
+    bl actor_getModelData
     cmpwi r3, 0x0
     mr r31, r3
     bne lbl_fn_8010DD34_00000684
@@ -1236,7 +1236,7 @@ lbl_fn_8010E60C_00000F1C:
     li r30, 0x0
 lbl_fn_8010E60C_00000F20:
     mr r3, r30
-    bl fn_800128FC
+    bl actor_getModelData
     cmpwi r3, 0x0
     beq lbl_fn_8010E60C_00001024
     mr r4, r31
@@ -1254,10 +1254,10 @@ lbl_fn_8010E60C_00000F58:
 lbl_fn_8010E60C_00000F5C:
     lfs f31, 0x4(r3)
     mr r3, r30
-    bl fn_800128FC
+    bl actor_getModelData
     addi r31, r3, 0xc64
     mr r3, r30
-    bl fn_800128FC
+    bl actor_getModelData
     mr r5, r3
     lfs f1, lbl_80881620
     mr r3, r31
@@ -1363,7 +1363,7 @@ lbl_fn_8010E7B8_000010CC:
     li r30, 0x0
 lbl_fn_8010E7B8_000010D0:
     mr r3, r30
-    bl fn_800128FC
+    bl actor_getModelData
     cmpwi r3, 0x0
     mr r28, r3
     bne lbl_fn_8010E7B8_000010F8

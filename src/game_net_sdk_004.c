@@ -98,7 +98,7 @@ extern u32 lbl_80880428;
 void fn_806A02C0(void);
 void fn_806A0390(void);
 void fn_806A0414(void);
-void fn_806A04D8(void);
+void NHTTPAddPostDataAscii(void);
 void fn_806A059C(void);
 void fn_806A05F8(void);
 void fn_806A0638(void);
@@ -319,7 +319,7 @@ lbl_fn_806A0414_000001F8:
     blr
 }
 
-asm void fn_806A04D8(void)
+asm void NHTTPAddPostDataAscii(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -342,13 +342,13 @@ asm void fn_806A04D8(void)
     bl fn_806A123C
     cmpwi r30, 0x0
     mr r4, r3
-    bne lbl_fn_806A04D8_00000274
+    bne lbl_NHTTPAddPostDataAscii_00000274
     li r3, -0x1
-    b lbl_fn_806A04D8_000002BC
-lbl_fn_806A04D8_00000274:
+    b lbl_NHTTPAddPostDataAscii_000002BC
+lbl_NHTTPAddPostDataAscii_00000274:
     lwz r0, 0x4(r30)
     cmpwi r0, 0x0
-    beq lbl_fn_806A04D8_000002A0
+    beq lbl_NHTTPAddPostDataAscii_000002A0
     lis r3, lbl_807BC738@ha
     lis r4, lbl_807BC768@ha
     addi r3, r3, lbl_807BC738@l
@@ -356,8 +356,8 @@ lbl_fn_806A04D8_00000274:
     crclr 6
     bl fn_806806A4
     li r3, -0x1
-    b lbl_fn_806A04D8_000002BC
-lbl_fn_806A04D8_000002A0:
+    b lbl_NHTTPAddPostDataAscii_000002BC
+lbl_NHTTPAddPostDataAscii_000002A0:
     mr r3, r30
     mr r5, r28
     mr r6, r29
@@ -365,7 +365,7 @@ lbl_fn_806A04D8_000002A0:
     cntlzw r0, r3
     srwi r0, r0, 5
     neg r3, r0
-lbl_fn_806A04D8_000002BC:
+lbl_NHTTPAddPostDataAscii_000002BC:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)

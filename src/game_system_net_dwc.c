@@ -24,7 +24,7 @@ extern void fn_803957B0(void);
 extern void fn_80395848(void);
 extern void fn_8039BDB4(void);
 extern void fn_803AB948(void);
-extern void fn_803AD278(void);
+extern void menu_tree_destroyRecursively(void);
 extern void fn_803AD508(void);
 extern void fn_803AD668(void);
 extern void boss_getOffset54(void);
@@ -956,13 +956,13 @@ lbl_fn_80394320_00000BB0:
     cmpwi r4, 0x0
     beq lbl_fn_80394320_00000C00
     mr r3, r27
-    bl fn_803AD278
+    bl menu_tree_destroyRecursively
 lbl_fn_80394320_00000C00:
     lwz r4, 0x4(r26)
     cmpwi r4, 0x0
     beq lbl_fn_80394320_00000C14
     mr r3, r27
-    bl fn_803AD278
+    bl menu_tree_destroyRecursively
 lbl_fn_80394320_00000C14:
     mr r3, r26
     bl dtor_80084684
@@ -974,13 +974,13 @@ lbl_fn_80394320_00000C1C:
     cmpwi r4, 0x0
     beq lbl_fn_80394320_00000C3C
     mr r3, r27
-    bl fn_803AD278
+    bl menu_tree_destroyRecursively
 lbl_fn_80394320_00000C3C:
     lwz r4, 0x4(r26)
     cmpwi r4, 0x0
     beq lbl_fn_80394320_00000C50
     mr r3, r27
-    bl fn_803AD278
+    bl menu_tree_destroyRecursively
 lbl_fn_80394320_00000C50:
     mr r3, r26
     bl dtor_80084684
@@ -998,13 +998,13 @@ lbl_fn_80394320_00000C60:
     cmpwi r4, 0x0
     beq lbl_fn_80394320_00000C8C
     mr r3, r27
-    bl fn_803AD278
+    bl menu_tree_destroyRecursively
 lbl_fn_80394320_00000C8C:
     lwz r4, 0x4(r29)
     cmpwi r4, 0x0
     beq lbl_fn_80394320_00000CA0
     mr r3, r27
-    bl fn_803AD278
+    bl menu_tree_destroyRecursively
 lbl_fn_80394320_00000CA0:
     mr r3, r29
     bl dtor_80084684
@@ -1016,13 +1016,13 @@ lbl_fn_80394320_00000CA8:
     cmpwi r4, 0x0
     beq lbl_fn_80394320_00000CC8
     mr r3, r27
-    bl fn_803AD278
+    bl menu_tree_destroyRecursively
 lbl_fn_80394320_00000CC8:
     lwz r4, 0x4(r29)
     cmpwi r4, 0x0
     beq lbl_fn_80394320_00000CDC
     mr r3, r27
-    bl fn_803AD278
+    bl menu_tree_destroyRecursively
 lbl_fn_80394320_00000CDC:
     mr r3, r29
     bl dtor_80084684

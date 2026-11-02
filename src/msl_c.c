@@ -83,7 +83,7 @@ void fn_8067B510(void);
 void fn_8067B594(void);
 void fn_8067B600(void);
 void fn_8067B6DC(void);
-void fn_8067B964(void);
+void msl_string_to_decimal(void);
 void fn_8067BA50(void);
 void fn_8067BD6C(void);
 void fn_8067BE50(void);
@@ -574,76 +574,76 @@ lbl_fn_8067B6DC_000004E4:
     blr
 }
 
-asm void fn_8067B964(void)
+asm void msl_string_to_decimal(void)
 {
     nofralloc
     li r0, 0x0
     sth r5, 0x2(r3)
     li r7, 0x0
     stb r0, 0x0(r3)
-    b lbl_fn_8067B964_00000524
-lbl_fn_8067B964_0000050C:
+    b lbl_msl_string_to_decimal_00000524
+lbl_msl_string_to_decimal_0000050C:
     lbz r6, 0x0(r4)
     add r5, r3, r7
     addi r4, r4, 0x1
     addi r7, r7, 0x1
     subi r0, r6, 0x30
     stb r0, 0x5(r5)
-lbl_fn_8067B964_00000524:
+lbl_msl_string_to_decimal_00000524:
     cmpwi r7, 0x24
-    bge lbl_fn_8067B964_00000538
+    bge lbl_msl_string_to_decimal_00000538
     lbz r0, 0x0(r4)
     extsb. r0, r0
-    bne lbl_fn_8067B964_0000050C
-lbl_fn_8067B964_00000538:
+    bne lbl_msl_string_to_decimal_0000050C
+lbl_msl_string_to_decimal_00000538:
     lbz r0, 0x0(r4)
     stb r7, 0x4(r3)
     extsb. r0, r0
     beqlr
     cmpwi r0, 0x5
     bltlr
-    bgt lbl_fn_8067B964_00000588
+    bgt lbl_msl_string_to_decimal_00000588
     addi r5, r4, 0x1
-    b lbl_fn_8067B964_0000056C
-lbl_fn_8067B964_0000055C:
+    b lbl_msl_string_to_decimal_0000056C
+lbl_msl_string_to_decimal_0000055C:
     extsb r0, r4
     cmpwi r0, 0x30
-    bne lbl_fn_8067B964_00000588
+    bne lbl_msl_string_to_decimal_00000588
     addi r5, r5, 0x1
-lbl_fn_8067B964_0000056C:
+lbl_msl_string_to_decimal_0000056C:
     lbz r4, 0x0(r5)
     extsb. r0, r4
-    bne lbl_fn_8067B964_0000055C
+    bne lbl_msl_string_to_decimal_0000055C
     add r4, r7, r3
     lbz r0, 0x4(r4)
     clrlwi. r0, r0, 31
     beqlr
-lbl_fn_8067B964_00000588:
+lbl_msl_string_to_decimal_00000588:
     lbz r4, 0x4(r3)
     addi r6, r3, 0x5
     li r0, 0x0
     add r5, r6, r4
     subi r5, r5, 0x1
-lbl_fn_8067B964_0000059C:
+lbl_msl_string_to_decimal_0000059C:
     lbz r4, 0x0(r5)
     cmplwi r4, 0x9
-    bge lbl_fn_8067B964_000005B4
+    bge lbl_msl_string_to_decimal_000005B4
     addi r0, r4, 0x1
     stb r0, 0x0(r5)
     blr
-lbl_fn_8067B964_000005B4:
+lbl_msl_string_to_decimal_000005B4:
     cmplw r5, r6
-    bne lbl_fn_8067B964_000005D4
+    bne lbl_msl_string_to_decimal_000005D4
     li r0, 0x1
     stb r0, 0x0(r5)
     lha r4, 0x2(r3)
     addi r0, r4, 0x1
     sth r0, 0x2(r3)
     blr
-lbl_fn_8067B964_000005D4:
+lbl_msl_string_to_decimal_000005D4:
     stb r0, 0x0(r5)
     subi r5, r5, 0x1
-    b lbl_fn_8067B964_0000059C
+    b lbl_msl_string_to_decimal_0000059C
     blr
 }
 
@@ -669,127 +669,127 @@ asm void fn_8067BA50(void)
     lis r4, lbl_80765258@ha
     li r5, -0x14
     addi r4, r4, lbl_80765258@l
-    bl fn_8067B964
+    bl msl_string_to_decimal
     b lbl_fn_8067BA50_000008E8
     lis r4, lbl_80765258@ha
     li r5, -0x10
     addi r4, r4, lbl_80765258@l
     addi r4, r4, 0x2e
-    bl fn_8067B964
+    bl msl_string_to_decimal
     b lbl_fn_8067BA50_000008E8
     lis r4, lbl_80765258@ha
     li r5, -0xa
     addi r4, r4, lbl_80765258@l
     addi r4, r4, 0x55
-    bl fn_8067B964
+    bl msl_string_to_decimal
     b lbl_fn_8067BA50_000008E8
     lis r4, lbl_80765258@ha
     li r5, -0x5
     addi r4, r4, lbl_80765258@l
     addi r4, r4, 0x6d
-    bl fn_8067B964
+    bl msl_string_to_decimal
     b lbl_fn_8067BA50_000008E8
     lis r4, lbl_80765258@ha
     li r5, -0x3
     addi r4, r4, lbl_80765258@l
     addi r4, r4, 0x7a
-    bl fn_8067B964
+    bl msl_string_to_decimal
     b lbl_fn_8067BA50_000008E8
     lis r4, lbl_80765258@ha
     li r5, -0x3
     addi r4, r4, lbl_80765258@l
     addi r4, r4, 0x81
-    bl fn_8067B964
+    bl msl_string_to_decimal
     b lbl_fn_8067BA50_000008E8
     lis r4, lbl_80765258@ha
     li r5, -0x2
     addi r4, r4, lbl_80765258@l
     addi r4, r4, 0x87
-    bl fn_8067B964
+    bl msl_string_to_decimal
     b lbl_fn_8067BA50_000008E8
     lis r4, lbl_80765258@ha
     li r5, -0x2
     addi r4, r4, lbl_80765258@l
     addi r4, r4, 0x8d
-    bl fn_8067B964
+    bl msl_string_to_decimal
     b lbl_fn_8067BA50_000008E8
     lis r4, lbl_80765258@ha
     li r5, -0x2
     addi r4, r4, lbl_80765258@l
     addi r4, r4, 0x92
-    bl fn_8067B964
+    bl msl_string_to_decimal
     b lbl_fn_8067BA50_000008E8
     lis r4, lbl_80765258@ha
     li r5, -0x1
     addi r4, r4, lbl_80765258@l
     addi r4, r4, 0x96
-    bl fn_8067B964
+    bl msl_string_to_decimal
     b lbl_fn_8067BA50_000008E8
     lis r4, lbl_80765258@ha
     li r5, -0x1
     addi r4, r4, lbl_80765258@l
     addi r4, r4, 0x9a
-    bl fn_8067B964
+    bl msl_string_to_decimal
     b lbl_fn_8067BA50_000008E8
     lis r4, lbl_80765258@ha
     li r5, -0x1
     addi r4, r4, lbl_80765258@l
     addi r4, r4, 0x9d
-    bl fn_8067B964
+    bl msl_string_to_decimal
     b lbl_fn_8067BA50_000008E8
     lis r4, lbl_80765258@ha
     li r5, 0x0
     addi r4, r4, lbl_80765258@l
     addi r4, r4, 0x9f
-    bl fn_8067B964
+    bl msl_string_to_decimal
     b lbl_fn_8067BA50_000008E8
     lis r4, lbl_80765258@ha
     li r5, 0x0
     addi r4, r4, lbl_80765258@l
     addi r4, r4, 0xa1
-    bl fn_8067B964
+    bl msl_string_to_decimal
     b lbl_fn_8067BA50_000008E8
     lis r4, lbl_80765258@ha
     li r5, 0x0
     addi r4, r4, lbl_80765258@l
     addi r4, r4, 0xa3
-    bl fn_8067B964
+    bl msl_string_to_decimal
     b lbl_fn_8067BA50_000008E8
     lis r4, lbl_80765258@ha
     li r5, 0x0
     addi r4, r4, lbl_80765258@l
     addi r4, r4, 0xa5
-    bl fn_8067B964
+    bl msl_string_to_decimal
     b lbl_fn_8067BA50_000008E8
     lis r4, lbl_80765258@ha
     li r5, 0x1
     addi r4, r4, lbl_80765258@l
     addi r4, r4, 0xa7
-    bl fn_8067B964
+    bl msl_string_to_decimal
     b lbl_fn_8067BA50_000008E8
     lis r4, lbl_80765258@ha
     li r5, 0x1
     addi r4, r4, lbl_80765258@l
     addi r4, r4, 0xaa
-    bl fn_8067B964
+    bl msl_string_to_decimal
     b lbl_fn_8067BA50_000008E8
     lis r4, lbl_80765258@ha
     li r5, 0x1
     addi r4, r4, lbl_80765258@l
     addi r4, r4, 0xad
-    bl fn_8067B964
+    bl msl_string_to_decimal
     b lbl_fn_8067BA50_000008E8
     lis r4, lbl_80765258@ha
     li r5, 0x2
     addi r4, r4, lbl_80765258@l
     addi r4, r4, 0xb0
-    bl fn_8067B964
+    bl msl_string_to_decimal
     b lbl_fn_8067BA50_000008E8
     lis r4, lbl_80765258@ha
     li r5, 0x2
     addi r4, r4, lbl_80765258@l
     addi r4, r4, 0xb4
-    bl fn_8067B964
+    bl msl_string_to_decimal
     b lbl_fn_8067BA50_000008E8
 lbl_fn_8067BA50_00000818:
     srwi r0, r4, 31
@@ -832,7 +832,7 @@ lbl_fn_8067BA50_00000818:
     addi r4, r4, lbl_80765258@l
     li r5, 0x0
     addi r4, r4, 0xa1
-    bl fn_8067B964
+    bl msl_string_to_decimal
     b lbl_fn_8067BA50_000008D8
 lbl_fn_8067BA50_000008C0:
     lis r4, lbl_80765258@ha
@@ -840,7 +840,7 @@ lbl_fn_8067BA50_000008C0:
     addi r4, r4, lbl_80765258@l
     li r5, -0x1
     addi r4, r4, 0x9d
-    bl fn_8067B964
+    bl msl_string_to_decimal
 lbl_fn_8067BA50_000008D8:
     mr r3, r31
     addi r4, r1, 0x8
@@ -1755,7 +1755,7 @@ lbl_fn_8067C734_000014F4:
     sth r0, 0xfe(r1)
     extsh r29, r0
     li r5, 0x134
-    bl fn_8067B964
+    bl msl_string_to_decimal
     addi r3, r1, 0xd0
     addi r4, r1, 0xfc
     bl fn_8067BE50

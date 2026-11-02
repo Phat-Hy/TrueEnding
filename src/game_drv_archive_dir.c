@@ -54,7 +54,7 @@ extern void fn_802A36B0(void);
 extern void fn_802A4094(void);
 extern void fn_80372574(void);
 extern void fn_803CF734(void);
-extern void fn_803CFC58(void);
+extern void town_entity_isActive(void);
 extern void fn_803D6EA0(void);
 extern void fn_803D6EC0(void);
 extern void fn_803D6ED4(void);
@@ -737,7 +737,7 @@ lbl_fn_805AB82C_0000087C:
     cmpwi r28, 0x0
     beq lbl_fn_805AB82C_000009B4
     mr r3, r28
-    bl fn_803CFC58
+    bl town_entity_isActive
     cmpwi r3, 0x0
     bne lbl_fn_805AB82C_000009B4
     mr r3, r28

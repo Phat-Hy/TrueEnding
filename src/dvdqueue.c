@@ -6,7 +6,7 @@ extern u8 WaitingQueue_807D1030[];
 extern void (*lbl_8087FDA0)(s32, s32);
 extern u8 lbl_807D1060[];
 extern u8 lbl_807D10EC[];
-extern BOOL fn_8061FBE0(void*, void*, void*);
+extern BOOL NANDCloseAsync(void*, void*, void*);
 
 /* Function declarations */
 void __DVDClearWaitingQueue(void);
@@ -239,7 +239,7 @@ asm void fn_805FF7A0(void)
     addi r3, r3, lbl_807D1060@l
     addi r4, r4, fn_805FF770@l
     addi r5, r5, lbl_807D10EC@l
-    bl fn_8061FBE0
+    bl NANDCloseAsync
     cmpwi r3, 0x0
     beq lbl_exit
     lwz r12, lbl_8087FDA0

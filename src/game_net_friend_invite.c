@@ -81,7 +81,7 @@ extern void dvd_showDiskErrorDialog(void);
 extern void fat_dispatchFsRequest(void);
 extern void fn_8037F688(void);
 extern void fn_803BE590(void);
-extern void fn_803CFC58(void);
+extern void town_entity_isActive(void);
 extern void fn_803D6E1C(void);
 extern void fn_803D6E70(void);
 extern void fn_803D7100(void);
@@ -1727,7 +1727,7 @@ lbl_fn_804D25D4_00001224:
     bl atn_Task_setActive
 lbl_fn_804D25D4_00001270:
     lwz r3, 0x0(r22)
-    bl fn_803CFC58
+    bl town_entity_isActive
     cmplwi r3, 0x1
     bne lbl_fn_804D25D4_000012A0
     lwz r3, 0x0(r22)
@@ -4220,7 +4220,7 @@ lbl_fn_804D25D4_0000367C:
     lwz r3, 0x0(r30)
     bl dialog_selectChoice
     lwz r3, 0x0(r30)
-    bl fn_803CFC58
+    bl town_entity_isActive
     cmpwi r3, 0x0
     bne lbl_fn_804D25D4_000036E8
     lwz r3, 0x0(r30)
@@ -4408,7 +4408,7 @@ lbl_fn_804D25D4_00003960:
     cmpwi r3, 0x0
     beq lbl_fn_804D25D4_000039BC
     bl fn_8036635C
-    bl fn_803CFC58
+    bl town_entity_isActive
     cmpwi r3, 0x0
     bne lbl_fn_804D25D4_000039BC
     bl fn_8036635C

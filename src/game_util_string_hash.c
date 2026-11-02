@@ -34,7 +34,7 @@ void fn_8058FED4(void);
 void string_copyHash(void *dst, const void *src);
 void hash_advanceIterator(void);
 u32 hash_getHashValue(const void*);
-void fn_8058FF0C(void);
+void hash_retreatIterator(void);
 void fn_8058FF1C(void);
 void fn_8059044C(void);
 void fn_8059057C(void);
@@ -1311,7 +1311,7 @@ u32 hash_getHashValue(const void* obj)
     return *(const u32*)obj;
 }
 
-asm void fn_8058FF0C(void)
+asm void hash_retreatIterator(void)
 {
     nofralloc
     lwz r4, 0x0(r3)
@@ -1442,7 +1442,7 @@ lbl_fn_8058FF1C_000013D4:
     bne lbl_fn_8058FF1C_000013CC
 lbl_fn_8058FF1C_00001400:
     addi r3, r1, 0x3c
-    bl fn_8058FF0C
+    bl hash_retreatIterator
     mr r4, r3
     addi r3, r1, 0x40
     bl fn_8058EEF0
@@ -1495,7 +1495,7 @@ lbl_fn_8058FF1C_000014B8:
     bl hash_getHashValue
     mr r30, r3
     addi r3, r1, 0x3c
-    bl fn_8058FF0C
+    bl hash_retreatIterator
     bl hash_getHashValue
     mr r4, r3
     mr r3, r29
@@ -1537,7 +1537,7 @@ lbl_fn_8058FF1C_00001524:
     addi r3, r1, 0x3c
     bl string_copyHash
     addi r3, r1, 0x3c
-    bl fn_8058FF0C
+    bl hash_retreatIterator
     bl hash_getHashValue
     mr r30, r3
     mr r3, r27
@@ -1606,7 +1606,7 @@ lbl_fn_8058FF1C_00001634:
     beq lbl_fn_8058FF1C_0000162C
 lbl_fn_8058FF1C_00001660:
     addi r3, r1, 0x3c
-    bl fn_8058FF0C
+    bl hash_retreatIterator
     bl hash_getHashValue
     mr r30, r3
     mr r3, r27
@@ -1890,7 +1890,7 @@ lbl_fn_8059057C_00001A34:
     bne lbl_fn_8059057C_00001A2C
 lbl_fn_8059057C_00001A60:
     addi r3, r1, 0x3c
-    bl fn_8058FF0C
+    bl hash_retreatIterator
     mr r4, r3
     addi r3, r1, 0x40
     bl fn_8058EEF0
@@ -1943,7 +1943,7 @@ lbl_fn_8059057C_00001B18:
     bl hash_getHashValue
     mr r30, r3
     addi r3, r1, 0x3c
-    bl fn_8058FF0C
+    bl hash_retreatIterator
     bl hash_getHashValue
     mr r4, r3
     mr r3, r29
@@ -1985,7 +1985,7 @@ lbl_fn_8059057C_00001B84:
     addi r3, r1, 0x3c
     bl string_copyHash
     addi r3, r1, 0x3c
-    bl fn_8058FF0C
+    bl hash_retreatIterator
     bl hash_getHashValue
     mr r30, r3
     mr r3, r27
@@ -2054,7 +2054,7 @@ lbl_fn_8059057C_00001C94:
     beq lbl_fn_8059057C_00001C8C
 lbl_fn_8059057C_00001CC0:
     addi r3, r1, 0x3c
-    bl fn_8058FF0C
+    bl hash_retreatIterator
     bl hash_getHashValue
     mr r30, r3
     mr r3, r27

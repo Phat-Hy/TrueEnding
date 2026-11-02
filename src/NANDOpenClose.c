@@ -32,7 +32,7 @@ void fn_8061F9F0(void);
 void NANDPrivateOpenAsync(void);
 void nandOpenCallback(void);
 void fn_8061FB70(void);
-void fn_8061FBE0(void);
+void NANDCloseAsync(void);
 void fn_8061FC70(void);
 
 asm void fn_8061F480(void)
@@ -589,7 +589,7 @@ lbl_fn_8061FB70_00000748:
     blr
 }
 
-asm void fn_8061FBE0(void)
+asm void NANDCloseAsync(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -603,16 +603,16 @@ asm void fn_8061FBE0(void)
     mr r29, r3
     bl nandIsInitialized
     cmpwi r3, 0x0
-    bne lbl_fn_8061FBE0_00000798
+    bne lbl_NANDCloseAsync_00000798
     li r3, -0x80
-    b lbl_fn_8061FBE0_000007CC
-lbl_fn_8061FBE0_00000798:
+    b lbl_NANDCloseAsync_000007CC
+lbl_NANDCloseAsync_00000798:
     lbz r0, 0x8a(r29)
     cmplwi r0, 0x1
-    beq lbl_fn_8061FBE0_000007AC
+    beq lbl_NANDCloseAsync_000007AC
     li r3, -0x8
-    b lbl_fn_8061FBE0_000007CC
-lbl_fn_8061FBE0_000007AC:
+    b lbl_NANDCloseAsync_000007CC
+lbl_NANDCloseAsync_000007AC:
     stw r30, 0x4(r31)
     lis r4, fn_80620B70@ha
     mr r5, r31
@@ -621,7 +621,7 @@ lbl_fn_8061FBE0_000007AC:
     lwz r3, 0x0(r29)
     bl fn_8061BB80
     bl nandConvertErrorCode
-lbl_fn_8061FBE0_000007CC:
+lbl_NANDCloseAsync_000007CC:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)

@@ -39,7 +39,7 @@ extern void fn_8061E7D0(void);
 extern void fn_8061E8C0(void);
 extern void fn_8061E9E0(void);
 extern void fn_8061F9F0(void);
-extern void fn_8061FBE0(void);
+extern void NANDCloseAsync(void);
 extern void fn_806242D0(void);
 extern void fn_80624B50(void);
 extern void fn_80624B60(void);
@@ -1673,7 +1673,7 @@ lbl_fn_8066F460_00001304:
     addi r3, r31, 0xe00
     addi r4, r4, fn_8066F2B0@l
     addi r5, r31, 0xe8c
-    bl fn_8061FBE0
+    bl NANDCloseAsync
 lbl_fn_8066F460_0000132C:
     lwz r0, 0x34(r1)
     lwz r31, 0x2c(r1)
@@ -2068,7 +2068,7 @@ lbl_fn_80670120_0000186C:
     addi r3, r30, 0xe00
     addi r4, r4, fn_8066F2B0@l
     addi r5, r30, 0xe8c
-    bl fn_8061FBE0
+    bl NANDCloseAsync
 lbl_fn_80670120_00001894:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
@@ -3013,7 +3013,7 @@ lbl_fn_80670C70_0000257C:
     addi r3, r31, 0xe00
     addi r4, r4, fn_80670BD0@l
     addi r5, r31, 0xe8c
-    bl fn_8061FBE0
+    bl NANDCloseAsync
     b lbl_fn_80670C70_000025A0
 lbl_fn_80670C70_0000259C:
     li r29, 0x4

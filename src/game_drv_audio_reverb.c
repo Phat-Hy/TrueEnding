@@ -88,7 +88,7 @@ extern void fn_8037529C(void);
 extern void fn_8037F688(void);
 extern void mtx_copyPairedSingle(void);
 extern void craft_forgeUpgradeWeapon(void);
-extern void fn_803CFC58(void);
+extern void town_entity_isActive(void);
 extern void fn_803CFC64(void);
 extern void fn_803D2134(void);
 extern void gate_clearActiveFlag(void);
@@ -624,7 +624,7 @@ lbl_fn_805BAC18_000006B4:
     cror eq, gt, eq
     bne lbl_fn_805BAC18_00000BC4
     lwz r3, 0x4(r31)
-    bl fn_803CFC58
+    bl town_entity_isActive
     cmpwi r3, 0x0
     beq lbl_fn_805BAC18_000006F8
     lwz r3, 0x4(r31)

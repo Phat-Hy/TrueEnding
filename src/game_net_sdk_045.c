@@ -35,7 +35,7 @@ extern void net_socketClose(void);
 extern void fn_806D7AE0(void);
 extern void net_checkSocketStatus(void);
 extern void fn_806D7CF0(void);
-extern void fn_806D7DA0(void);
+extern void net_socket_sendto(void);
 extern void fn_806D8650(void);
 extern void fn_806D8F10(void);
 extern void net_getTimestampMs(void);
@@ -231,7 +231,7 @@ asm void fn_806FD090(void)
     li r5, 0x15
     li r6, 0x0
     li r8, 0x8
-    bl fn_806D7DA0
+    bl net_socket_sendto
 lbl_fn_806FD090_00000184:
     lwz r0, 0x1c(r31)
     cmpwi r0, 0x4
@@ -319,7 +319,7 @@ lbl_fn_806FD090_00000298:
     li r5, 0x14
     li r6, 0x0
     li r8, 0x8
-    bl fn_806D7DA0
+    bl net_socket_sendto
     bl net_getTimestampMs
     addi r3, r3, 0x2bc
     li r0, 0x7
@@ -414,7 +414,7 @@ lbl_fn_806FD2D0_000003D4:
     li r5, 0x15
     li r6, 0x0
     li r8, 0x8
-    bl fn_806D7DA0
+    bl net_socket_sendto
     b lbl_fn_806FD2D0_0000042C
 lbl_fn_806FD2D0_00000424:
     li r0, 0x8
@@ -589,7 +589,7 @@ lbl_fn_806FD420_00000668:
     li r5, 0x14
     li r6, 0x0
     li r8, 0x8
-    bl fn_806D7DA0
+    bl net_socket_sendto
     bl net_getTimestampMs
     addi r0, r3, 0x2bc
     stw r0, 0x38(r31)
@@ -1217,7 +1217,7 @@ lbl_fn_806FDD20_00000F4C:
     addi r7, r1, 0x10
     li r6, 0x0
     li r8, 0x8
-    bl fn_806D7DA0
+    bl net_socket_sendto
     li r29, 0x1
 lbl_fn_806FDD20_00000F68:
     cmpwi r29, 0x0

@@ -18,7 +18,7 @@ extern void fn_8061E3F0(void);
 extern void fn_8061E6A0(void);
 extern void fn_8061E7D0(void);
 extern void fn_8061E8C0(void);
-extern void fn_8061FBE0(void);
+extern void NANDCloseAsync(void);
 extern void snprintf(void);
 extern void strncpy(void);
 extern void wcsncpy(void);
@@ -1971,7 +1971,7 @@ lbl_fn_806D0EA0_00001AA8:
     addi r4, r4, fn_806D1700@l
     addi r3, r5, 0x5a88
     addi r5, r5, 0x59cc
-    bl fn_8061FBE0
+    bl NANDCloseAsync
     li r0, 0x6
     stw r0, 0x384(r31)
     b lbl_fn_806D0EA0_00002000
@@ -2175,7 +2175,7 @@ lbl_fn_806D0EA0_00001DBC:
     addi r4, r4, fn_806D1700@l
     addi r3, r5, 0x5a88
     addi r5, r5, 0x59cc
-    bl fn_8061FBE0
+    bl NANDCloseAsync
     li r0, 0x12
     stw r0, 0x384(r31)
     b lbl_fn_806D0EA0_00002000

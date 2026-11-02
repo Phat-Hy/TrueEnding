@@ -11,7 +11,7 @@ extern void fn_80012638(void);
 extern void fn_8001268C(void);
 extern void fn_8001271C(void);
 extern void fn_8001282C(void);
-extern void fn_800128FC(void);
+extern void actor_getModelData(void);
 extern void actor_getSkeletonNode(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
@@ -443,7 +443,7 @@ asm void fn_80557F88(void)
     mr r27, r6
     mr r28, r7
     mr r29, r8
-    bl fn_800128FC
+    bl actor_getModelData
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_80557F88_00000E20
@@ -1248,7 +1248,7 @@ lbl_fn_805588F0_00000F90:
     cmpwi r7, 0x0
     beq lbl_fn_805588F0_00000FB4
     mr r3, r7
-    bl fn_800128FC
+    bl actor_getModelData
     mr r30, r3
     b lbl_fn_805588F0_00000FB8
 lbl_fn_805588F0_00000FB4:
@@ -1420,7 +1420,7 @@ lbl_fn_805588F0_000011F4:
     bl fn_8001271C
     b lbl_fn_805588F0_00001538
     mr r3, r7
-    bl fn_800128FC
+    bl actor_getModelData
     cmpwi r3, 0x0
     beq lbl_fn_805588F0_00001538
     lwz r0, 0x30(r31)
@@ -1445,7 +1445,7 @@ lbl_fn_805588F0_00001248:
     stw r0, 0x6a0(r3)
     b lbl_fn_805588F0_00001538
     mr r3, r7
-    bl fn_800128FC
+    bl actor_getModelData
     cmpwi r3, 0x0
     beq lbl_fn_805588F0_00001538
     lwz r0, 0x30(r31)
@@ -1592,7 +1592,7 @@ lbl_fn_805588F0_00001428:
     cmpwi r5, 0x0
     beq lbl_fn_805588F0_00001448
     mr r3, r5
-    bl fn_800128FC
+    bl actor_getModelData
     b lbl_fn_805588F0_0000144C
 lbl_fn_805588F0_00001448:
     li r3, 0x0
@@ -1639,7 +1639,7 @@ lbl_fn_805588F0_000014D4:
     cmpwi r0, 0x9
     bne lbl_fn_805588F0_00001538
     mr r3, r5
-    bl fn_800128FC
+    bl actor_getModelData
     cmpwi r3, 0x0
     beq lbl_fn_805588F0_00001538
     lwz r0, 0x30(r31)
@@ -1736,7 +1736,7 @@ lbl_fn_80559020_00001618:
     cmpwi r5, 0x0
     beq lbl_fn_80559020_00001630
     mr r3, r5
-    bl fn_800128FC
+    bl actor_getModelData
     mr r30, r3
     b lbl_fn_80559020_00001634
 lbl_fn_80559020_00001630:
@@ -1840,7 +1840,7 @@ lbl_fn_80559020_00001784:
     lwz r29, 0x4(r3)
     beq lbl_fn_80559020_0000179C
     mr r3, r5
-    bl fn_800128FC
+    bl actor_getModelData
     b lbl_fn_80559020_000017A0
 lbl_fn_80559020_0000179C:
     li r3, 0x0

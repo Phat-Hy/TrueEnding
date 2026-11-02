@@ -81,7 +81,7 @@ void fn_803AD05C(void);
 void *fn_803AD130(void);
 void *fn_803AD13C(void);
 void fn_803AD148(void);
-void fn_803AD278(void);
+void menu_tree_destroyRecursively(void);
 void fn_803AD3D8(void);
 void fn_803AD508(void);
 void fn_803AD668(void);
@@ -1163,7 +1163,7 @@ lbl_fn_803AD148_00000E88:
     blr
 }
 
-asm void fn_803AD278(void)
+asm void menu_tree_destroyRecursively(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -1177,87 +1177,87 @@ asm void fn_803AD278(void)
     mr r28, r3
     lwz r31, 0x0(r4)
     cmpwi r31, 0x0
-    beq lbl_fn_803AD278_00000F4C
+    beq lbl_menu_tree_destroyRecursively_00000F4C
     lwz r30, 0x0(r31)
     cmpwi r30, 0x0
-    beq lbl_fn_803AD278_00000F08
+    beq lbl_menu_tree_destroyRecursively_00000F08
     lwz r4, 0x0(r30)
     cmpwi r4, 0x0
-    beq lbl_fn_803AD278_00000EEC
-    bl fn_803AD278
-lbl_fn_803AD278_00000EEC:
+    beq lbl_menu_tree_destroyRecursively_00000EEC
+    bl menu_tree_destroyRecursively
+lbl_menu_tree_destroyRecursively_00000EEC:
     lwz r4, 0x4(r30)
     cmpwi r4, 0x0
-    beq lbl_fn_803AD278_00000F00
+    beq lbl_menu_tree_destroyRecursively_00000F00
     mr r3, r28
-    bl fn_803AD278
-lbl_fn_803AD278_00000F00:
+    bl menu_tree_destroyRecursively
+lbl_menu_tree_destroyRecursively_00000F00:
     mr r3, r30
     bl dtor_80084684
-lbl_fn_803AD278_00000F08:
+lbl_menu_tree_destroyRecursively_00000F08:
     lwz r30, 0x4(r31)
     cmpwi r30, 0x0
-    beq lbl_fn_803AD278_00000F44
+    beq lbl_menu_tree_destroyRecursively_00000F44
     lwz r4, 0x0(r30)
     cmpwi r4, 0x0
-    beq lbl_fn_803AD278_00000F28
+    beq lbl_menu_tree_destroyRecursively_00000F28
     mr r3, r28
-    bl fn_803AD278
-lbl_fn_803AD278_00000F28:
+    bl menu_tree_destroyRecursively
+lbl_menu_tree_destroyRecursively_00000F28:
     lwz r4, 0x4(r30)
     cmpwi r4, 0x0
-    beq lbl_fn_803AD278_00000F3C
+    beq lbl_menu_tree_destroyRecursively_00000F3C
     mr r3, r28
-    bl fn_803AD278
-lbl_fn_803AD278_00000F3C:
+    bl menu_tree_destroyRecursively
+lbl_menu_tree_destroyRecursively_00000F3C:
     mr r3, r30
     bl dtor_80084684
-lbl_fn_803AD278_00000F44:
+lbl_menu_tree_destroyRecursively_00000F44:
     mr r3, r31
     bl dtor_80084684
-lbl_fn_803AD278_00000F4C:
+lbl_menu_tree_destroyRecursively_00000F4C:
     lwz r30, 0x4(r29)
     cmpwi r30, 0x0
-    beq lbl_fn_803AD278_00000FD8
+    beq lbl_menu_tree_destroyRecursively_00000FD8
     lwz r31, 0x0(r30)
     cmpwi r31, 0x0
-    beq lbl_fn_803AD278_00000F94
+    beq lbl_menu_tree_destroyRecursively_00000F94
     lwz r4, 0x0(r31)
     cmpwi r4, 0x0
-    beq lbl_fn_803AD278_00000F78
+    beq lbl_menu_tree_destroyRecursively_00000F78
     mr r3, r28
-    bl fn_803AD278
-lbl_fn_803AD278_00000F78:
+    bl menu_tree_destroyRecursively
+lbl_menu_tree_destroyRecursively_00000F78:
     lwz r4, 0x4(r31)
     cmpwi r4, 0x0
-    beq lbl_fn_803AD278_00000F8C
+    beq lbl_menu_tree_destroyRecursively_00000F8C
     mr r3, r28
-    bl fn_803AD278
-lbl_fn_803AD278_00000F8C:
+    bl menu_tree_destroyRecursively
+lbl_menu_tree_destroyRecursively_00000F8C:
     mr r3, r31
     bl dtor_80084684
-lbl_fn_803AD278_00000F94:
+lbl_menu_tree_destroyRecursively_00000F94:
     lwz r31, 0x4(r30)
     cmpwi r31, 0x0
-    beq lbl_fn_803AD278_00000FD0
+    beq lbl_menu_tree_destroyRecursively_00000FD0
     lwz r4, 0x0(r31)
     cmpwi r4, 0x0
-    beq lbl_fn_803AD278_00000FB4
+    beq lbl_menu_tree_destroyRecursively_00000FB4
     mr r3, r28
-    bl fn_803AD278
-lbl_fn_803AD278_00000FB4:
+    bl menu_tree_destroyRecursively
+lbl_menu_tree_destroyRecursively_00000FB4:
     lwz r4, 0x4(r31)
     cmpwi r4, 0x0
-    beq lbl_fn_803AD278_00000FC8
+    beq lbl_menu_tree_destroyRecursively_00000FC8
     mr r3, r28
-    bl fn_803AD278
-lbl_fn_803AD278_00000FC8:
+    bl menu_tree_destroyRecursively
+lbl_menu_tree_destroyRecursively_00000FC8:
     mr r3, r31
     bl dtor_80084684
-lbl_fn_803AD278_00000FD0:
+lbl_menu_tree_destroyRecursively_00000FD0:
     mr r3, r30
     bl dtor_80084684
-lbl_fn_803AD278_00000FD8:
+lbl_menu_tree_destroyRecursively_00000FD8:
     mr r3, r29
     bl dtor_80084684
     lwz r0, 0x24(r1)

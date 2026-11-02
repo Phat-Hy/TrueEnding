@@ -31,7 +31,7 @@ extern s32 fn_8061F9F0(const char* path, NANDFileInfo* info, u32 arg, void* call
 extern s32 fn_8061E7D0(NANDFileInfo* info, void* buf, u32 length, void* callback, void* block);
 extern s32 fn_8061E9E0(NANDFileInfo* info, u32 arg0, u32 arg1, void* callback, void* block);
 extern s32 fn_8061E8C0(NANDFileInfo* info, void* buf, u32 length, void* callback, void* block);
-extern s32 fn_8061FBE0(NANDFileInfo* info, void* callback, void* block);
+extern s32 NANDCloseAsync(NANDFileInfo* info, void* callback, void* block);
 
 extern const char lbl_807A9A10[];
 extern u32 lbl_807CC320[8];
@@ -707,7 +707,7 @@ lbl_0928:
     addi r3, r31, 0xb0
     addi r4, r4, PlayRecordCallback@l
     addi r5, r31, 0x13c
-    bl fn_8061FBE0
+    bl NANDCloseAsync
     mr r30, r3
 lbl_0940:
     cmpwi r30, 0x0
@@ -747,7 +747,7 @@ lbl_09b0:
     addi r3, r31, 0xb0
     addi r4, r4, PlayRecordCallback@l
     addi r5, r31, 0x13c
-    bl fn_8061FBE0
+    bl NANDCloseAsync
     cmpwi r3, -0x3
     mr r30, r3
     bne lbl_0a14

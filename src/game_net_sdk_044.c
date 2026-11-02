@@ -22,7 +22,7 @@ extern void fn_806D5BE0(void);
 extern void fn_806D7AE0(void);
 extern void net_checkSocketStatus(void);
 extern void fn_806D7CF0(void);
-extern void fn_806D7DA0(void);
+extern void net_socket_sendto(void);
 extern void fn_806D7E70(void);
 extern void fn_806D7EE0(void);
 extern void net_socket_getLastError(void);
@@ -1316,7 +1316,7 @@ lbl_fn_806FBE00_00001090:
     li r5, 0x49
     li r6, 0x0
     li r8, 0x8
-    bl fn_806D7DA0
+    bl net_socket_sendto
     li r0, 0x7
     stw r0, 0x1c(r30)
     bl net_getTimestampMs
@@ -1402,7 +1402,7 @@ lbl_fn_806FC030_000011C0:
     li r5, 0x12
     li r6, 0x0
     li r8, 0x8
-    bl fn_806D7DA0
+    bl net_socket_sendto
     lwz r0, 0x1c(r31)
     cmpwi r0, 0x1
     bne lbl_fn_806FC030_00001240
@@ -1538,7 +1538,7 @@ lbl_fn_806FC170_00001360:
     addi r7, r1, 0x40
     li r6, 0x0
     li r8, 0x8
-    bl fn_806D7DA0
+    bl net_socket_sendto
 lbl_fn_806FC170_00001414:
     lwz r0, 0x24(r28)
     cmpwi r0, 0x0
@@ -1563,7 +1563,7 @@ lbl_fn_806FC170_00001414:
     addi r7, r1, 0x38
     li r6, 0x0
     li r8, 0x8
-    bl fn_806D7DA0
+    bl net_socket_sendto
 lbl_fn_806FC170_00001474:
     lbz r0, 0x56(r1)
     cmpwi r0, 0x0
@@ -1611,7 +1611,7 @@ lbl_fn_806FC170_000014B4:
     addi r7, r1, 0x28
     li r6, 0x0
     li r8, 0x8
-    bl fn_806D7DA0
+    bl net_socket_sendto
 lbl_fn_806FC170_00001520:
     lwz r0, 0x2c(r28)
     cmpwi r0, 0x0
@@ -1636,7 +1636,7 @@ lbl_fn_806FC170_00001520:
     addi r7, r1, 0x20
     li r6, 0x0
     li r8, 0x8
-    bl fn_806D7DA0
+    bl net_socket_sendto
 lbl_fn_806FC170_00001580:
     li r0, 0x2
     stw r0, 0x1c(r28)
@@ -2192,7 +2192,7 @@ lbl_fn_806FC9C0_00001CFC:
     li r5, 0x14
     li r6, 0x0
     li r8, 0x8
-    bl fn_806D7DA0
+    bl net_socket_sendto
     bl net_getTimestampMs
     addi r3, r3, 0x2bc
     li r0, 0x7
@@ -2284,7 +2284,7 @@ lbl_fn_806FC9C0_00001E54:
     li r5, 0x14
     li r6, 0x0
     li r8, 0x8
-    bl fn_806D7DA0
+    bl net_socket_sendto
     bl net_getTimestampMs
     addi r3, r3, 0x2bc
     li r0, 0x7
@@ -2360,7 +2360,7 @@ lbl_fn_806FC9C0_00001F5C:
     li r5, 0x49
     li r6, 0x0
     li r8, 0x8
-    bl fn_806D7DA0
+    bl net_socket_sendto
     lwz r3, 0x30(r30)
     addi r0, r3, 0x1
     stw r0, 0x30(r30)

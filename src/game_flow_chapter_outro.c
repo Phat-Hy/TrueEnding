@@ -22,7 +22,7 @@ extern void npc_getPosition(void);
 extern void fn_8013C3A8(void);
 extern void fn_80147A00(void);
 extern void world_getLocalFlag(void);
-extern void fn_803CFC58(void);
+extern void town_entity_isActive(void);
 extern void net_getPacketManager(void);
 extern void fn_804CF374(void);
 extern void fn_804CF424(void);
@@ -1775,7 +1775,7 @@ lbl_fn_804E7AC4_0000176C:
     lwz r3, 0x0(r28)
     cmpwi r3, 0x0
     beq lbl_fn_804E7AC4_0000195C
-    bl fn_803CFC58
+    bl town_entity_isActive
     cmpwi r3, 0x0
     bne lbl_fn_804E7AC4_0000195C
     lwz r3, 0x0(r28)
@@ -1901,7 +1901,7 @@ lbl_fn_804E7AC4_0000197C:
     lwz r3, 0x10c(r1)
     cmpwi r3, 0x0
     beq lbl_fn_804E7AC4_00001B50
-    bl fn_803CFC58
+    bl town_entity_isActive
     cmpwi r3, 0x0
     beq lbl_fn_804E7AC4_000019C8
     lwz r3, 0x10c(r1)

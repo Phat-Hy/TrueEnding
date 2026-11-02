@@ -16,7 +16,7 @@ extern void net_socketConnect(void);
 extern void fn_806D7AA0(void);
 extern void net_socketClose(void);
 extern void fn_806D7AE0(void);
-extern void fn_806D7DA0(void);
+extern void net_socket_sendto(void);
 extern void fn_806D7EE0(void);
 extern void fn_806D8060(void);
 extern void fn_806D8F10(void);
@@ -2390,7 +2390,7 @@ lbl_fn_806D76E0_0000202C:
     addi r7, r30, 0x4
     li r6, 0x0
     li r8, 0x8
-    bl fn_806D7DA0
+    bl net_socket_sendto
     bl net_getTimestampMs
     li r0, 0x0
     stw r3, 0x50(r30)

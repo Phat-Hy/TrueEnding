@@ -23,7 +23,7 @@ extern void fn_8061E7D0(void);
 extern void fn_8061E8C0(void);
 extern void fn_8061ECE0(void);
 extern void fn_8061F3D0(void);
-extern void fn_8061FBE0(void);
+extern void NANDCloseAsync(void);
 extern void fn_806220A0(void);
 extern void memcmp(void);
 extern void memmove(void);
@@ -334,7 +334,7 @@ lbl_OpenCallbackFromReload_00000354:
     addi r3, r5, 0x8
     addi r4, r4, fn_80623500@l
     addi r5, r5, 0x94
-    bl fn_8061FBE0
+    bl NANDCloseAsync
     cmpwi r3, 0x0
     beq lbl_OpenCallbackFromReload_0000039C
 lbl_OpenCallbackFromReload_00000398:
@@ -370,7 +370,7 @@ asm void fn_80623250(void)
     stb r0, 0x159(r5)
     addi r4, r4, fn_80623340@l
     addi r5, r5, 0x94
-    bl fn_8061FBE0
+    bl NANDCloseAsync
     cmpwi r3, 0x0
     beq lbl_fn_80623250_00000484
 lbl_fn_80623250_0000040C:
@@ -402,7 +402,7 @@ lbl_fn_80623250_0000043C:
     addi r3, r5, 0x8
     addi r4, r4, fn_80623500@l
     addi r5, r5, 0x94
-    bl fn_8061FBE0
+    bl NANDCloseAsync
     cmpwi r3, 0x0
     beq lbl_fn_80623250_00000484
 lbl_fn_80623250_00000480:
@@ -447,7 +447,7 @@ lbl_fn_80623340_000004D4:
     addi r3, r5, 0x8
     addi r4, r4, fn_80623500@l
     addi r5, r5, 0x94
-    bl fn_8061FBE0
+    bl NANDCloseAsync
     cmpwi r3, 0x0
     beq lbl_fn_80623340_0000051C
 lbl_fn_80623340_00000518:
@@ -1634,7 +1634,7 @@ lbl_fn_806242D0_00001524:
     addi r3, r5, 0x8
     addi r4, r31, fn_806244F0@l
     addi r5, r5, 0x94
-    bl fn_8061FBE0
+    bl NANDCloseAsync
     cmpwi r3, 0x0
     beq lbl_fn_806242D0_0000162C
 lbl_fn_806242D0_000015A4:
@@ -1829,7 +1829,7 @@ lbl_fn_806244F0_000017C0:
     addi r5, r7, 0x94
     stb r0, 0x158(r7)
     addi r4, r4, fn_806244F0@l
-    bl fn_8061FBE0
+    bl NANDCloseAsync
     cmpwi r3, 0x0
     bne lbl_fn_806244F0_000018D8
     b lbl_fn_806244F0_00001970
@@ -1874,7 +1874,7 @@ lbl_fn_806244F0_000018D8:
     addi r3, r5, 0x8
     addi r4, r4, fn_806244F0@l
     addi r5, r5, 0x94
-    bl fn_8061FBE0
+    bl NANDCloseAsync
     cmpwi r3, 0x0
     beq lbl_fn_806244F0_00001970
 lbl_fn_806244F0_00001918:

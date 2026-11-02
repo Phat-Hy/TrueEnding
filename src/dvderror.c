@@ -14,7 +14,7 @@ extern void fn_805FF7A0(void);
 extern void fn_805FF770(s32);
 extern void DCFlushRange(void*, u32);
 extern s32 fn_8061E8C0(void*, void*, s32, void*, void*);
-extern s32 fn_8061FBE0(void*, void*, void*);
+extern s32 NANDCloseAsync(void*, void*, void*);
 extern s32 fn_8061E9E0(void*, s32, s32, void*, void*);
 extern s32 fn_8061E7D0(void*, void*, s32, void*, void*);
 extern s32 NANDPrivateOpenAsync(void*, void*, s32, void*, void*);
@@ -87,7 +87,7 @@ lbl_fn_805FF800_60:
     addi r3, r31, 0x0
     addi r4, r4, fn_805FF770@l
     addi r5, r31, 0x8c
-    bl fn_8061FBE0
+    bl NANDCloseAsync
     cmpwi r3, 0x0
     beq lbl_fn_805FF800_e8
     lwz r12, lbl_8087FDA0
@@ -172,7 +172,7 @@ lbl_fn_805FF900_198:
     addi r3, r31, 0x0
     addi r4, r4, fn_805FF770@l
     addi r5, r31, 0x8c
-    bl fn_8061FBE0
+    bl NANDCloseAsync
     cmpwi r3, 0x0
     beq lbl_fn_805FF900_240
     lwz r12, lbl_8087FDA0
@@ -309,7 +309,7 @@ lbl_fn_805FFB20_390:
     addi r3, r31, 0x0
     addi r4, r4, fn_805FF770@l
     addi r5, r31, 0x8c
-    bl fn_8061FBE0
+    bl NANDCloseAsync
     cmpwi r3, 0x0
     beq lbl_fn_805FFB20_3f4
     lwz r12, lbl_8087FDA0
@@ -409,7 +409,7 @@ asm void fn_805FFCB0(void)
     addi r3, r31, 0x0
     addi r4, r4, fn_805FF770@l
     addi r5, r31, 0x8c
-    bl fn_8061FBE0
+    bl NANDCloseAsync
     cmpwi r3, 0x0
     beq lbl_fn_805FFCB0_59c
     lwz r12, lbl_8087FDA0

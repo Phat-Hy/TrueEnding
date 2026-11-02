@@ -107,7 +107,7 @@ void fn_8001271C(void);
 void fn_80012774(void);
 void fn_800127CC(void);
 void fn_8001282C(void);
-void fn_800128FC(void);
+void actor_getModelData(void);
 void fn_80012934(void);
 void actor_getSkeletonNode(void);
 u32 fn_80012A14(void);
@@ -3062,24 +3062,24 @@ lbl_fn_8001282C_000027D0:
     blr
 }
 
-asm void fn_800128FC(void)
+asm void actor_getModelData(void)
 {
     nofralloc
     lwz r0, 0x20(r3)
     cmpwi r0, 0x7
-    beq lbl_fn_800128FC_000027F4
+    beq lbl_actor_getModelData_000027F4
     cmpwi r0, 0x1
-    bne lbl_fn_800128FC_00002810
-lbl_fn_800128FC_000027F4:
+    bne lbl_actor_getModelData_00002810
+lbl_actor_getModelData_000027F4:
     lwz r3, 0x1c(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_800128FC_00002808
+    beq lbl_actor_getModelData_00002808
     lwz r3, 0x48(r3)
     blr
-lbl_fn_800128FC_00002808:
+lbl_actor_getModelData_00002808:
     li r3, 0x0
     blr
-lbl_fn_800128FC_00002810:
+lbl_actor_getModelData_00002810:
     li r3, 0x0
     blr
 }
@@ -3460,7 +3460,7 @@ lbl_fn_80012D34_00002C80:
     addi r3, r1, 0x17c
     bl vec3_assign
     mr r3, r26
-    bl fn_800128FC
+    bl actor_getModelData
     bl scene_getRootNode
     lis r4, lbl_8072F924@ha
     addi r4, r4, lbl_8072F924@l

@@ -6,7 +6,7 @@ extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_8003DD50(void);
-extern void fn_8003DEE0(void);
+extern void property_tree_destroyRecursively(void);
 extern void fn_8003E530(void);
 extern void memcmp(void);
 extern u32 strlen(const char* str);
@@ -726,14 +726,14 @@ lbl_fn_8001E730_00000704:
     lwz r4, 0x0(r29)
     cmpwi r4, 0x0
     beq lbl_fn_8001E730_00000748
-    bl fn_8003DEE0
+    bl property_tree_destroyRecursively
 lbl_fn_8001E730_00000748:
     lwz r4, 0x4(r29)
     cmpwi r4, 0x0
     beq lbl_fn_8001E730_00000760
     lis r3, lbl_807C6B84@ha
     addi r3, r3, lbl_807C6B84@l
-    bl fn_8003DEE0
+    bl property_tree_destroyRecursively
 lbl_fn_8001E730_00000760:
     addic. r3, r29, 0xc
     beq lbl_fn_8001E730_00000780
@@ -755,14 +755,14 @@ lbl_fn_8001E730_00000788:
     beq lbl_fn_8001E730_000007AC
     lis r3, lbl_807C6B84@ha
     addi r3, r3, lbl_807C6B84@l
-    bl fn_8003DEE0
+    bl property_tree_destroyRecursively
 lbl_fn_8001E730_000007AC:
     lwz r4, 0x4(r29)
     cmpwi r4, 0x0
     beq lbl_fn_8001E730_000007C4
     lis r3, lbl_807C6B84@ha
     addi r3, r3, lbl_807C6B84@l
-    bl fn_8003DEE0
+    bl property_tree_destroyRecursively
 lbl_fn_8001E730_000007C4:
     addic. r3, r29, 0xc
     beq lbl_fn_8001E730_000007E4
@@ -799,14 +799,14 @@ lbl_fn_8001E730_00000814:
     beq lbl_fn_8001E730_00000844
     lis r3, lbl_807C6B84@ha
     addi r3, r3, lbl_807C6B84@l
-    bl fn_8003DEE0
+    bl property_tree_destroyRecursively
 lbl_fn_8001E730_00000844:
     lwz r4, 0x4(r30)
     cmpwi r4, 0x0
     beq lbl_fn_8001E730_0000085C
     lis r3, lbl_807C6B84@ha
     addi r3, r3, lbl_807C6B84@l
-    bl fn_8003DEE0
+    bl property_tree_destroyRecursively
 lbl_fn_8001E730_0000085C:
     addic. r3, r30, 0xc
     beq lbl_fn_8001E730_0000087C
@@ -828,14 +828,14 @@ lbl_fn_8001E730_00000884:
     beq lbl_fn_8001E730_000008A8
     lis r3, lbl_807C6B84@ha
     addi r3, r3, lbl_807C6B84@l
-    bl fn_8003DEE0
+    bl property_tree_destroyRecursively
 lbl_fn_8001E730_000008A8:
     lwz r4, 0x4(r30)
     cmpwi r4, 0x0
     beq lbl_fn_8001E730_000008C0
     lis r3, lbl_807C6B84@ha
     addi r3, r3, lbl_807C6B84@l
-    bl fn_8003DEE0
+    bl property_tree_destroyRecursively
 lbl_fn_8001E730_000008C0:
     addic. r3, r30, 0xc
     beq lbl_fn_8001E730_000008E0

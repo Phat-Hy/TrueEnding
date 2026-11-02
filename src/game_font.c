@@ -36,7 +36,7 @@ extern void fn_8061EF90(void);
 extern void msg_setStringPointer(void);
 extern void* msg_getStringPointer(const char* str);
 extern void fn_8061F9F0(void);
-extern void fn_8061FBE0(void);
+extern void NANDCloseAsync(void);
 extern void fn_80620220(void);
 extern void fn_80620830(void);
 extern void fn_80620BD0(void);
@@ -978,7 +978,7 @@ lbl_fn_800A2DE0_00000C84:
     addi r3, r31, 0x234
     addi r4, r4, fn_800A2B1C@l
     addi r5, r31, 0x178
-    bl fn_8061FBE0
+    bl NANDCloseAsync
     mr r4, r3
     mr r3, r31
     bl font_mapErrorCode
@@ -1087,7 +1087,7 @@ lbl_fn_800A2DE0_00000E7C:
     addi r3, r31, 0x234
     addi r4, r4, fn_800A2B1C@l
     addi r5, r31, 0x178
-    bl fn_8061FBE0
+    bl NANDCloseAsync
     mr r4, r3
     mr r3, r31
     bl font_mapErrorCode
@@ -1218,7 +1218,7 @@ lbl_fn_800A2DE0_000010DC:
     addi r3, r31, 0x234
     addi r4, r4, fn_800A2B1C@l
     addi r5, r31, 0x178
-    bl fn_8061FBE0
+    bl NANDCloseAsync
     mr r4, r3
     mr r3, r31
     bl font_mapErrorCode
@@ -1369,7 +1369,7 @@ lbl_fn_800A2DE0_00001318:
     addi r3, r31, 0x234
     addi r4, r4, fn_800A2B1C@l
     addi r5, r31, 0x178
-    bl fn_8061FBE0
+    bl NANDCloseAsync
     mr r4, r3
     mr r3, r31
     bl font_mapErrorCode
@@ -1425,7 +1425,7 @@ lbl_fn_800A2DE0_000013FC:
     addi r3, r31, 0x234
     addi r4, r4, fn_800A2B1C@l
     addi r5, r31, 0x178
-    bl fn_8061FBE0
+    bl NANDCloseAsync
     mr r4, r3
     mr r3, r31
     bl font_mapErrorCode

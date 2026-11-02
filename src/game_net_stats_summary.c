@@ -10,7 +10,7 @@ extern void dtor_80084684(void);
 extern void fn_8000EE8C(void);
 extern void fn_8000FAE8(void);
 extern void fn_800127CC(void);
-extern void fn_800128FC(void);
+extern void actor_getModelData(void);
 extern void actor_dispatchMessage(void);
 extern void fn_8004B0E4(void);
 extern void fn_80069BF4(void);
@@ -1441,7 +1441,7 @@ lbl_fn_80540120_000011FC:
 lbl_fn_80540120_00001224:
     cmpwi r0, 0x0
     beq lbl_fn_80540120_0000124C
-    bl fn_800128FC
+    bl actor_getModelData
     cmpwi r3, 0x0
     beq lbl_fn_80540120_0000124C
     bl boss_updatePhaseState

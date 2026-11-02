@@ -38,7 +38,7 @@ extern u32 lbl_80885DE0;
 extern u32 lbl_80885DE4;
 
 /* Function declarations */
-u32 fn_803CFC58(void *p);
+u32 town_entity_isActive(void *p);
 f32 fn_803CFC64(void *p);
 f32 fn_803CFC6C(void *p);
 void fn_803CFC74(void);
@@ -48,7 +48,7 @@ void fn_803D0B20(void);
 void fn_803D11B4(void);
 void fn_803D1574(void);
 
-u32 fn_803CFC58(void *p)
+u32 town_entity_isActive(void *p)
 {
     return (*(u32 *)((u8 *)p + 0x38) >> 2) & 1;
 }

@@ -69,7 +69,7 @@ extern void fn_8058FED4(void);
 extern void string_copyHash(void);
 extern void hash_advanceIterator(void);
 extern void hash_getHashValue(void);
-extern void fn_8058FF0C(void);
+extern void hash_retreatIterator(void);
 extern void fn_8058FF1C(void);
 extern void fn_8059185C(void);
 extern void fn_805933EC(void);
@@ -1468,7 +1468,7 @@ lbl_fn_8058E0CC_000012F8:
     bne lbl_fn_8058E0CC_000012F0
 lbl_fn_8058E0CC_00001324:
     addi r3, r1, 0x3c
-    bl fn_8058FF0C
+    bl hash_retreatIterator
     mr r4, r3
     addi r3, r1, 0x40
     bl fn_8058EEF0
@@ -1521,7 +1521,7 @@ lbl_fn_8058E0CC_000013DC:
     bl hash_getHashValue
     mr r30, r3
     addi r3, r1, 0x3c
-    bl fn_8058FF0C
+    bl hash_retreatIterator
     bl hash_getHashValue
     mr r4, r3
     mr r3, r29
@@ -1563,7 +1563,7 @@ lbl_fn_8058E0CC_00001448:
     addi r3, r1, 0x3c
     bl string_copyHash
     addi r3, r1, 0x3c
-    bl fn_8058FF0C
+    bl hash_retreatIterator
     bl hash_getHashValue
     mr r30, r3
     mr r3, r27
@@ -1632,7 +1632,7 @@ lbl_fn_8058E0CC_00001558:
     beq lbl_fn_8058E0CC_00001550
 lbl_fn_8058E0CC_00001584:
     addi r3, r1, 0x3c
-    bl fn_8058FF0C
+    bl hash_retreatIterator
     bl hash_getHashValue
     mr r30, r3
     mr r3, r27
@@ -1949,7 +1949,7 @@ lbl_fn_8058E7A8_000019D4:
     bne lbl_fn_8058E7A8_000019CC
 lbl_fn_8058E7A8_00001A00:
     addi r3, r1, 0x3c
-    bl fn_8058FF0C
+    bl hash_retreatIterator
     mr r4, r3
     addi r3, r1, 0x40
     bl fn_8058EEF0
@@ -2002,7 +2002,7 @@ lbl_fn_8058E7A8_00001AB8:
     bl hash_getHashValue
     mr r30, r3
     addi r3, r1, 0x3c
-    bl fn_8058FF0C
+    bl hash_retreatIterator
     bl hash_getHashValue
     mr r4, r3
     mr r3, r29
@@ -2044,7 +2044,7 @@ lbl_fn_8058E7A8_00001B24:
     addi r3, r1, 0x3c
     bl string_copyHash
     addi r3, r1, 0x3c
-    bl fn_8058FF0C
+    bl hash_retreatIterator
     bl hash_getHashValue
     mr r30, r3
     mr r3, r27
@@ -2113,7 +2113,7 @@ lbl_fn_8058E7A8_00001C34:
     beq lbl_fn_8058E7A8_00001C2C
 lbl_fn_8058E7A8_00001C60:
     addi r3, r1, 0x3c
-    bl fn_8058FF0C
+    bl hash_retreatIterator
     bl hash_getHashValue
     mr r30, r3
     mr r3, r27

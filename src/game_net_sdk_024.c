@@ -32,7 +32,7 @@ extern void fn_80698A28(void);
 extern void fn_806A00B8(void);
 extern void fn_806A0390(void);
 extern void fn_806A0414(void);
-extern void fn_806A04D8(void);
+extern void NHTTPAddPostDataAscii(void);
 extern void fn_806A059C(void);
 extern void fn_806A0638(void);
 extern void fn_806A06BC(void);
@@ -375,7 +375,7 @@ lbl_fn_806D1720_00000370:
     mr r3, r28
     addi r27, r4, 0x1
     addi r4, r29, 0x38c
-    bl fn_806A04D8
+    bl NHTTPAddPostDataAscii
     addi r4, r29, 0x394
     lis r3, 0x100
     crclr 6
@@ -396,7 +396,7 @@ lbl_fn_806D1720_000003C0:
     mr r3, r28
     addi r27, r4, 0x1
     addi r4, r29, 0x38c
-    bl fn_806A04D8
+    bl NHTTPAddPostDataAscii
     mr r3, r24
     bl strlen
     mr r4, r3
@@ -410,7 +410,7 @@ lbl_fn_806D1720_000003C0:
     mr r3, r28
     addi r27, r4, 0x1
     addi r4, r29, 0x3b4
-    bl fn_806A04D8
+    bl NHTTPAddPostDataAscii
     addi r4, r29, 0x3bc
     lis r3, 0x100
     crclr 6
@@ -439,7 +439,7 @@ lbl_fn_806D1720_000003C0:
     mr r3, r28
     addi r27, r4, 0x1
     addi r4, r29, 0x3e8
-    bl fn_806A04D8
+    bl NHTTPAddPostDataAscii
     mr r6, r25
     mr r5, r26
     addi r4, r29, 0x3f0
@@ -459,7 +459,7 @@ lbl_fn_806D1720_000003C0:
     mr r3, r28
     addi r27, r4, 0x1
     addi r4, r29, 0x408
-    bl fn_806A04D8
+    bl NHTTPAddPostDataAscii
     b lbl_fn_806D1720_00000780
 lbl_fn_806D1720_000004FC:
     addi r21, r29, 0x414
@@ -476,7 +476,7 @@ lbl_fn_806D1720_000004FC:
     mr r3, r28
     addi r27, r4, 0x1
     addi r4, r29, 0x38c
-    bl fn_806A04D8
+    bl NHTTPAddPostDataAscii
     addi r4, r29, 0x41c
     lis r3, 0x100
     crclr 6
@@ -496,7 +496,7 @@ lbl_fn_806D1720_000004FC:
     mr r3, r28
     addi r27, r4, 0x1
     addi r4, r29, 0x430
-    bl fn_806A04D8
+    bl NHTTPAddPostDataAscii
     lwz r5, 0x380(r30)
     addi r4, r29, 0x434
     lis r3, 0x100
@@ -522,7 +522,7 @@ lbl_fn_806D1720_000004FC:
     mr r3, r28
     addi r27, r4, 0x1
     addi r4, r29, 0x3e8
-    bl fn_806A04D8
+    bl NHTTPAddPostDataAscii
     mr r6, r25
     mr r5, r26
     addi r4, r29, 0x3f0
@@ -554,7 +554,7 @@ lbl_fn_806D1720_0000060C:
     mr r3, r28
     addi r27, r4, 0x1
     addi r4, r29, 0x3e8
-    bl fn_806A04D8
+    bl NHTTPAddPostDataAscii
     mr r6, r25
     mr r5, r26
     addi r4, r29, 0x3f0
@@ -578,7 +578,7 @@ lbl_fn_806D1720_00000684:
     mr r3, r28
     addi r4, r29, 0x440
     addi r27, r6, 0x1
-    bl fn_806A04D8
+    bl NHTTPAddPostDataAscii
     lwz r5, 0x380(r30)
     addi r4, r29, 0x448
     lis r3, 0x100
@@ -588,7 +588,7 @@ lbl_fn_806D1720_00000684:
     mr r3, r28
     addi r4, r29, 0x458
     addi r5, r29, 0x18c
-    bl fn_806A04D8
+    bl NHTTPAddPostDataAscii
     addi r4, r29, 0x460
     lis r3, 0x100
     crclr 6
@@ -607,7 +607,7 @@ lbl_fn_806D1720_00000684:
     mr r3, r28
     addi r27, r4, 0x1
     addi r4, r29, 0x478
-    bl fn_806A04D8
+    bl NHTTPAddPostDataAscii
     addi r4, r29, 0x480
     lis r3, 0x100
     crclr 6
@@ -624,7 +624,7 @@ lbl_fn_806D1720_00000684:
     mr r3, r28
     addi r27, r4, 0x1
     addi r4, r29, 0x494
-    bl fn_806A04D8
+    bl NHTTPAddPostDataAscii
 lbl_fn_806D1720_00000780:
     addi r21, r29, 0x49c
     mr r3, r21
@@ -641,7 +641,7 @@ lbl_fn_806D1720_00000780:
     mr r3, r28
     addi r4, r29, 0x4a4
     addi r27, r6, 0x1
-    bl fn_806A04D8
+    bl NHTTPAddPostDataAscii
     bl fn_805EBFD0
     mr r21, r3
     bl strlen
@@ -656,7 +656,7 @@ lbl_fn_806D1720_00000780:
     mr r3, r28
     addi r27, r4, 0x1
     addi r4, r29, 0x4ac
-    bl fn_806A04D8
+    bl NHTTPAddPostDataAscii
     addi r3, r1, 0x48
     bl fn_80621CD0
     cmpwi r3, 0x0
@@ -718,7 +718,7 @@ lbl_fn_806D1720_000008A8:
     mr r3, r28
     addi r4, r29, 0x500
     addi r27, r6, 0x1
-    bl fn_806A04D8
+    bl NHTTPAddPostDataAscii
     addi r4, r29, 0x508
     addi r5, r1, 0x88
     lis r3, 0x100
@@ -738,7 +738,7 @@ lbl_fn_806D1720_000008A8:
     mr r3, r28
     addi r27, r4, 0x1
     addi r4, r29, 0x51c
-    bl fn_806A04D8
+    bl NHTTPAddPostDataAscii
     addi r3, r1, 0x18
     bl fn_80698A28
     lbz r5, 0x18(r1)
@@ -764,7 +764,7 @@ lbl_fn_806D1720_000008A8:
     mr r3, r28
     addi r27, r4, 0x1
     addi r4, r29, 0x540
-    bl fn_806A04D8
+    bl NHTTPAddPostDataAscii
     addi r4, r29, 0x548
     addi r5, r1, 0x88
     lis r3, 0x100
@@ -794,7 +794,7 @@ lbl_fn_806D1720_000008A8:
     mr r3, r28
     addi r27, r4, 0x1
     addi r4, r29, 0x56c
-    bl fn_806A04D8
+    bl NHTTPAddPostDataAscii
     lwz r3, 0x380(r30)
     lwz r0, 0x59c8(r3)
     cmpwi r0, 0x3
@@ -834,7 +834,7 @@ lbl_fn_806D1720_000008A8:
     mr r3, r28
     addi r27, r4, 0x1
     addi r4, r29, 0x590
-    bl fn_806A04D8
+    bl NHTTPAddPostDataAscii
     addi r4, r29, 0x598
     addi r5, r1, 0x88
     lis r3, 0x100
@@ -872,7 +872,7 @@ lbl_fn_806D1720_00000AC8:
     mr r3, r28
     addi r4, r29, 0x5c0
     addi r27, r6, 0x1
-    bl fn_806A04D8
+    bl NHTTPAddPostDataAscii
 lbl_fn_806D1720_00000B48:
     bl fn_80624F90
     cmpwi r3, 0x0
@@ -907,7 +907,7 @@ lbl_fn_806D1720_00000B48:
     mr r3, r28
     addi r4, r29, 0x5e4
     addi r27, r6, 0x1
-    bl fn_806A04D8
+    bl NHTTPAddPostDataAscii
 lbl_fn_806D1720_00000BD0:
     bl fn_806AA690
     mr r6, r4
@@ -935,7 +935,7 @@ lbl_fn_806D1720_00000BD0:
     mr r3, r28
     addi r4, r29, 0x604
     addi r27, r6, 0x1
-    bl fn_806A04D8
+    bl NHTTPAddPostDataAscii
     lwz r3, 0x380(r30)
     lwz r0, 0x59c8(r3)
     cmpwi r0, 0x3
@@ -962,7 +962,7 @@ lbl_fn_806D1720_00000BD0:
     mr r3, r28
     mr r5, r27
     addi r4, r29, 0x618
-    bl fn_806A04D8
+    bl NHTTPAddPostDataAscii
 lbl_fn_806D1720_00000CA8:
     mr r3, r28
     bl fn_806A059C

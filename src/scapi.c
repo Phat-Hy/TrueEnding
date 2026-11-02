@@ -17,7 +17,7 @@ extern void fn_806241B0(void);
 extern void fn_80628180(void);
 extern void fn_80628230(void);
 extern void hcis_restoreInterrupts(void);
-extern void fn_80628270(void);
+extern void hcis_disableInterrupts(void);
 extern void fn_806282C0(void);
 extern void fn_806282D0(void);
 extern void fn_80628300(void);
@@ -2665,7 +2665,7 @@ lbl_scapi_initContext_000021D0:
     li r3, 0x0
     b lbl_scapi_initContext_000022C8
 lbl_scapi_initContext_000021FC:
-    bl fn_80628270
+    bl hcis_disableInterrupts
     addis r6, r30, 0x3
     li r5, 0x1
     lbz r7, -0x7579(r6)
@@ -2747,7 +2747,7 @@ asm void scapi_getConfigItem(void)
     li r3, 0x0
     b lbl_scapi_getConfigItem_000023B0
 lbl_scapi_getConfigItem_00002314:
-    bl fn_80628270
+    bl hcis_disableInterrupts
     clrlslwi r31, r31, 24, 4
     addis r0, r30, 0x3
     add r4, r0, r31
@@ -2872,7 +2872,7 @@ lbl_scapi_cleanupContext_000024A4:
     bl fn_806282C0
     b lbl_scapi_cleanupContext_0000252C
 lbl_scapi_cleanupContext_000024C8:
-    bl fn_80628270
+    bl hcis_disableInterrupts
     lbz r0, 0x4(r31)
     lis r3, lbl_807F3760@ha
     addi r3, r3, lbl_807F3760@l
@@ -3019,7 +3019,7 @@ lbl_fn_80626F10_00002698:
     bl fn_806282C0
     b lbl_fn_80626F10_0000272C
 lbl_fn_80626F10_000026BC:
-    bl fn_80628270
+    bl hcis_disableInterrupts
     clrlslwi r4, r28, 24, 4
     addis r0, r30, 0x3
     clrlslwi r5, r29, 24, 2
@@ -3082,7 +3082,7 @@ lbl_fn_806270D0_0000278C:
     li r3, 0x0
     b lbl_fn_806270D0_000027E4
 lbl_fn_806270D0_00002794:
-    bl fn_80628270
+    bl hcis_disableInterrupts
     lis r3, lbl_807F3760@ha
     clrlslwi r4, r31, 24, 4
     addi r3, r3, lbl_807F3760@l
@@ -3178,7 +3178,7 @@ lbl_fn_80627180_000028B4:
     bl fn_806282C0
     b lbl_fn_80627180_00002920
 lbl_fn_80627180_000028DC:
-    bl fn_80628270
+    bl hcis_disableInterrupts
     lwz r0, 0x0(r29)
     cmpwi r0, 0x0
     beq lbl_fn_80627180_000028F8
@@ -3272,7 +3272,7 @@ lbl_fn_806272C0_000029F4:
     bl fn_806282C0
     b lbl_fn_806272C0_00002A64
 lbl_fn_806272C0_00002A1C:
-    bl fn_80628270
+    bl hcis_disableInterrupts
     lwz r3, 0x0(r29)
     cmpwi r3, 0x0
     beq lbl_fn_806272C0_00002A3C
@@ -3311,7 +3311,7 @@ asm void scapi_dequeueBuffer(void)
     stw r31, 0xc(r1)
     stw r30, 0x8(r1)
     mr r30, r3
-    bl fn_80628270
+    bl hcis_disableInterrupts
     cmpwi r30, 0x0
     beq lbl_scapi_dequeueBuffer_00002AB0
     lhz r0, 0x8(r30)
@@ -3362,7 +3362,7 @@ asm void fn_806274A0(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    bl fn_80628270
+    bl hcis_disableInterrupts
     lwz r3, 0x0(r30)
     cmplw r31, r3
     bne lbl_fn_806274A0_00002B5C
@@ -3696,7 +3696,7 @@ asm void fn_80627900(void)
     bne lbl_fn_80627900_00002FC8
     b lbl_fn_80627900_000030D0
 lbl_fn_80627900_00002FC8:
-    bl fn_80628270
+    bl hcis_disableInterrupts
     addis r4, r31, 0x3
     clrlslwi r0, r30, 24, 4
     add r3, r4, r0
@@ -3862,7 +3862,7 @@ lbl_fn_80627B50_00003208:
     or r0, r0, r31
     srawi r0, r0, 31
     and r31, r29, r0
-    bl fn_80628270
+    bl hcis_disableInterrupts
     lis r4, lbl_807F3760@ha
     lis r3, 0x8000
     addi r4, r4, lbl_807F3760@l

@@ -14,7 +14,7 @@ extern void _savegpr_24(void);
 extern void _savegpr_25(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8003DEE0(void);
+extern void property_tree_destroyRecursively(void);
 extern void collision_testLineSegment(void);
 extern void mem_alloc(void);
 extern void fn_800EFC64(void);
@@ -171,13 +171,13 @@ asm void fn_8003E6B8(void)
     lwz r4, 0x0(r27)
     cmpwi r4, 0x0
     beq lbl_fn_8003E6B8_00000094
-    bl fn_8003DEE0
+    bl property_tree_destroyRecursively
 lbl_fn_8003E6B8_00000094:
     lwz r4, 0x4(r27)
     cmpwi r4, 0x0
     beq lbl_fn_8003E6B8_000000A8
     mr r3, r29
-    bl fn_8003DEE0
+    bl property_tree_destroyRecursively
 lbl_fn_8003E6B8_000000A8:
     addic. r3, r27, 0xc
     beq lbl_fn_8003E6B8_000000C8
@@ -198,13 +198,13 @@ lbl_fn_8003E6B8_000000D0:
     cmpwi r4, 0x0
     beq lbl_fn_8003E6B8_000000F0
     mr r3, r29
-    bl fn_8003DEE0
+    bl property_tree_destroyRecursively
 lbl_fn_8003E6B8_000000F0:
     lwz r4, 0x4(r27)
     cmpwi r4, 0x0
     beq lbl_fn_8003E6B8_00000104
     mr r3, r29
-    bl fn_8003DEE0
+    bl property_tree_destroyRecursively
 lbl_fn_8003E6B8_00000104:
     addic. r3, r27, 0xc
     beq lbl_fn_8003E6B8_00000124
@@ -240,13 +240,13 @@ lbl_fn_8003E6B8_00000154:
     cmpwi r4, 0x0
     beq lbl_fn_8003E6B8_00000180
     mr r3, r29
-    bl fn_8003DEE0
+    bl property_tree_destroyRecursively
 lbl_fn_8003E6B8_00000180:
     lwz r4, 0x4(r28)
     cmpwi r4, 0x0
     beq lbl_fn_8003E6B8_00000194
     mr r3, r29
-    bl fn_8003DEE0
+    bl property_tree_destroyRecursively
 lbl_fn_8003E6B8_00000194:
     addic. r3, r28, 0xc
     beq lbl_fn_8003E6B8_000001B4
@@ -267,13 +267,13 @@ lbl_fn_8003E6B8_000001BC:
     cmpwi r4, 0x0
     beq lbl_fn_8003E6B8_000001DC
     mr r3, r29
-    bl fn_8003DEE0
+    bl property_tree_destroyRecursively
 lbl_fn_8003E6B8_000001DC:
     lwz r4, 0x4(r28)
     cmpwi r4, 0x0
     beq lbl_fn_8003E6B8_000001F0
     mr r3, r29
-    bl fn_8003DEE0
+    bl property_tree_destroyRecursively
 lbl_fn_8003E6B8_000001F0:
     addic. r3, r28, 0xc
     beq lbl_fn_8003E6B8_00000210

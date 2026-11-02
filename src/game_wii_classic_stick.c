@@ -6,7 +6,7 @@ extern void _restgpr_25(void);
 extern void _restgpr_26(void);
 extern void _savegpr_25(void);
 extern void _savegpr_26(void);
-extern void fn_800128FC(void);
+extern void actor_getModelData(void);
 extern void snd_findSoundNodeByName(void);
 extern void fn_8004B0E4(void);
 extern void sound_stopVoice(void);
@@ -1692,7 +1692,7 @@ lbl_fn_805602B0_000014B4:
     cmpwi r26, 0x0
     beq lbl_fn_805602B0_000014C8
     mr r3, r26
-    bl fn_800128FC
+    bl actor_getModelData
     b lbl_fn_805602B0_000014CC
 lbl_fn_805602B0_000014C8:
     li r3, 0x0

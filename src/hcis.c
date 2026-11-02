@@ -40,7 +40,7 @@ void fn_80628170(void);
 void fn_80628180(void);
 u32 fn_80628230(void);
 void hcis_restoreInterrupts(void);
-void fn_80628270(void);
+void hcis_disableInterrupts(void);
 void fn_806282C0(void);
 void fn_806282D0(void);
 void fn_80628300(void);
@@ -216,7 +216,7 @@ asm void hcis_restoreInterrupts(void)
     b OSRestoreInterrupts
 }
 
-asm void fn_80628270(void)
+asm void hcis_disableInterrupts(void)
 {
     nofralloc
     stwu r1, -0x10(r1)

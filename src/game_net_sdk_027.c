@@ -95,7 +95,7 @@ void fn_806D7C40(void);
 void fn_806D7CB0(void);
 void fn_806D7CF0(void);
 void fn_806D7D60(void);
-void fn_806D7DA0(void);
+void net_socket_sendto(void);
 void fn_806D7E30(void);
 void fn_806D7E70(void);
 void fn_806D7EE0(void);
@@ -256,7 +256,7 @@ lbl_fn_806D7860_00000188:
     addi r7, r31, 0x4
     li r6, 0x0
     li r8, 0x8
-    bl fn_806D7DA0
+    bl net_socket_sendto
     bl net_getTimestampMs
     lwz r4, 0x54(r31)
     stw r3, 0x50(r31)
@@ -566,7 +566,7 @@ lbl_fn_806D7D60_0000052C:
     blr
 }
 
-asm void fn_806D7DA0(void)
+asm void net_socket_sendto(void)
 {
     nofralloc
     stwu r1, -0x30(r1)
@@ -591,14 +591,14 @@ asm void fn_806D7DA0(void)
     addi r7, r1, 0x8
     bl fn_806A3D74
     cmpwi r3, 0x0
-    blt lbl_fn_806D7DA0_000005A4
+    blt lbl_net_socket_sendto_000005A4
     mr r0, r3
-    b lbl_fn_806D7DA0_000005B0
-lbl_fn_806D7DA0_000005A4:
+    b lbl_net_socket_sendto_000005B0
+lbl_net_socket_sendto_000005A4:
     lis r4, lbl_80860EB0@ha
     li r0, -0x1
     stw r3, lbl_80860EB0@l(r4)
-lbl_fn_806D7DA0_000005B0:
+lbl_net_socket_sendto_000005B0:
     addi r11, r1, 0x30
     mr r3, r0
     bl _restgpr_27
