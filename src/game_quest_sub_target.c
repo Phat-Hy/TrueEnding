@@ -23,7 +23,7 @@ extern void battle_assignFieldProperty(void);
 extern void fn_80482DF4(void);
 extern void fn_80482E28(void);
 extern void fn_80482E4C(void);
-extern void fn_80491528(void);
+extern void coliseum_spawnEnemyGroup(void);
 extern void printf(void);
 extern void abort(void);
 extern void memmove(void);
@@ -1417,7 +1417,7 @@ lbl_fn_80486BEC_000013E0:
     lwz r3, lbl_8087F558
     mr r5, r31
     addi r4, r1, 0x18
-    bl fn_80491528
+    bl coliseum_spawnEnemyGroup
     addic. r3, r1, 0x18
     beq lbl_fn_80486BEC_0000142C
     lwz r4, 0x18(r1)
@@ -1537,7 +1537,7 @@ lbl_fn_80486DAC_0000158C:
     lwz r3, lbl_8087F558
     mr r5, r31
     addi r4, r1, 0x18
-    bl fn_80491528
+    bl coliseum_spawnEnemyGroup
     addic. r3, r1, 0x18
     beq lbl_fn_80486DAC_000015D8
     lwz r4, 0x18(r1)
@@ -1620,7 +1620,7 @@ lbl_fn_80486F50_000016A4:
     lwz r3, lbl_8087F558
     addi r4, r1, 0x18
     addi r5, r1, 0x8
-    bl fn_80491528
+    bl coliseum_spawnEnemyGroup
     addic. r3, r1, 0x18
     beq lbl_fn_80486F50_000016F0
     lwz r4, 0x18(r1)

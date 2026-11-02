@@ -11,7 +11,7 @@ extern void _savegpr_25(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void memcmp(void);
-extern void fn_806A4264(void);
+extern void net_castU16(void);
 extern void net_truncateU16(void);
 extern void fn_806D57A0(void);
 extern void net_pollActiveSockets(void);
@@ -700,7 +700,7 @@ lbl_fn_806ECF70_0000081C:
     cmpwi r3, -0xf
     bne lbl_fn_806ECF70_00000A4C
     lhz r3, 0x12(r1)
-    bl fn_806A4264
+    bl net_castU16
     lwz r26, 0x14(r1)
     mr r28, r3
     mr r3, r29
@@ -845,7 +845,7 @@ lbl_fn_806ECF70_00000A4C:
     cmpwi r3, -0x17
     bne lbl_fn_806ECF70_00000B70
     lhz r3, 0x12(r1)
-    bl fn_806A4264
+    bl net_castU16
     lwz r25, 0x14(r1)
     mr r28, r3
     mr r3, r29
@@ -932,7 +932,7 @@ lbl_fn_806ECF70_00000B70:
     b lbl_fn_806ECF70_00000BD0
 lbl_fn_806ECF70_00000B88:
     lhz r3, 0x12(r1)
-    bl fn_806A4264
+    bl net_castU16
     mr r0, r3
     lwz r6, 0x14(r1)
     mr r3, r29
@@ -2214,7 +2214,7 @@ lbl_fn_806EE2A0_00001D10:
     lwz r0, 0x1c(r1)
     stw r0, 0x4(r31)
     lhz r3, 0x1a(r1)
-    bl fn_806A4264
+    bl net_castU16
     sth r3, 0x8(r31)
     li r3, 0x0
     stw r31, 0x0(r26)

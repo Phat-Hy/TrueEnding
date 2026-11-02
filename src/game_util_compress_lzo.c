@@ -66,7 +66,7 @@ extern void fn_8058FE90(void);
 extern void fn_8058FEB8(void);
 extern void fn_8058FEC8(void);
 extern void fn_8058FED4(void);
-extern void fn_8058FEE8(void);
+extern void string_copyHash(void);
 extern void hash_advanceIterator(void);
 extern void hash_getHashValue(void);
 extern void fn_8058FF0C(void);
@@ -1446,10 +1446,10 @@ lbl_fn_8058E0CC_0000128C:
     bl fn_8058EF0C
     mr r4, r27
     addi r3, r1, 0x40
-    bl fn_8058FEE8
+    bl string_copyHash
     addi r3, r1, 0x3c
     addi r4, r1, 0x38
-    bl fn_8058FEE8
+    bl string_copyHash
     b lbl_fn_8058E0CC_000012F8
 lbl_fn_8058E0CC_000012F0:
     addi r3, r1, 0x40
@@ -1561,7 +1561,7 @@ lbl_fn_8058E0CC_00001448:
     bl hash_advanceIterator
     mr r4, r28
     addi r3, r1, 0x3c
-    bl fn_8058FEE8
+    bl string_copyHash
     addi r3, r1, 0x3c
     bl fn_8058FF0C
     bl hash_getHashValue
@@ -1661,7 +1661,7 @@ lbl_fn_8058E0CC_00001584:
 lbl_fn_8058E0CC_000015F0:
     mr r3, r27
     addi r4, r1, 0x40
-    bl fn_8058FEE8
+    bl string_copyHash
     b lbl_fn_8058E0CC_0000118C
 lbl_fn_8058E0CC_00001600:
     mr r3, r28
@@ -1683,7 +1683,7 @@ lbl_fn_8058E0CC_00001600:
     bl fn_8058E7A8
     mr r3, r27
     addi r4, r1, 0x40
-    bl fn_8058FEE8
+    bl string_copyHash
     b lbl_fn_8058E0CC_0000118C
 lbl_fn_8058E0CC_00001654:
     lwz r4, 0x0(r28)
@@ -1696,7 +1696,7 @@ lbl_fn_8058E0CC_00001654:
     bl fn_8058E7A8
     mr r3, r28
     addi r4, r1, 0x40
-    bl fn_8058FEE8
+    bl string_copyHash
     b lbl_fn_8058E0CC_0000118C
 lbl_fn_8058E0CC_00001684:
     lmw r27, 0x4c(r1)
@@ -1927,10 +1927,10 @@ lbl_fn_8058E7A8_00001968:
     bl fn_8058EF0C
     mr r4, r27
     addi r3, r1, 0x40
-    bl fn_8058FEE8
+    bl string_copyHash
     addi r3, r1, 0x3c
     addi r4, r1, 0x38
-    bl fn_8058FEE8
+    bl string_copyHash
     b lbl_fn_8058E7A8_000019D4
 lbl_fn_8058E7A8_000019CC:
     addi r3, r1, 0x40
@@ -2042,7 +2042,7 @@ lbl_fn_8058E7A8_00001B24:
     bl hash_advanceIterator
     mr r4, r28
     addi r3, r1, 0x3c
-    bl fn_8058FEE8
+    bl string_copyHash
     addi r3, r1, 0x3c
     bl fn_8058FF0C
     bl hash_getHashValue
@@ -2142,7 +2142,7 @@ lbl_fn_8058E7A8_00001C60:
 lbl_fn_8058E7A8_00001CCC:
     mr r3, r27
     addi r4, r1, 0x40
-    bl fn_8058FEE8
+    bl string_copyHash
     b lbl_fn_8058E7A8_00001868
 lbl_fn_8058E7A8_00001CDC:
     mr r3, r28
@@ -2164,7 +2164,7 @@ lbl_fn_8058E7A8_00001CDC:
     bl fn_8058E7A8
     mr r3, r27
     addi r4, r1, 0x40
-    bl fn_8058FEE8
+    bl string_copyHash
     b lbl_fn_8058E7A8_00001868
 lbl_fn_8058E7A8_00001D30:
     lwz r4, 0x0(r28)
@@ -2177,7 +2177,7 @@ lbl_fn_8058E7A8_00001D30:
     bl fn_8058E7A8
     mr r3, r28
     addi r4, r1, 0x40
-    bl fn_8058FEE8
+    bl string_copyHash
     b lbl_fn_8058E7A8_00001868
 lbl_fn_8058E7A8_00001D60:
     lmw r27, 0x4c(r1)

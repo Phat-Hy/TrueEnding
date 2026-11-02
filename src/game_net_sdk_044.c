@@ -10,7 +10,7 @@ extern void memcmp(void);
 extern void snprintf(void);
 extern void net_formatIpAddress(void);
 extern void fn_806A4260(void);
-extern void fn_806A4264(void);
+extern void net_castU16(void);
 extern void fn_806A426C(void);
 extern void net_truncateU16(void);
 extern void fn_806D57A0(void);
@@ -800,7 +800,7 @@ lbl_fn_806FB750_00000974:
 lbl_fn_806FB750_000009AC:
     stw r28, 0x200(r25)
     lhz r3, 0x1a(r1)
-    bl fn_806A4264
+    bl net_castU16
     mr r0, r3
     lwz r3, 0x1c(r1)
     clrlwi r4, r0, 16
@@ -811,7 +811,7 @@ lbl_fn_806FB750_000009D0:
     stw r29, 0x80(r24)
     stw r28, 0x204(r25)
     lhz r3, 0x1a(r1)
-    bl fn_806A4264
+    bl net_castU16
     mr r0, r3
     lwz r3, 0x1c(r1)
     clrlwi r4, r0, 16
@@ -822,7 +822,7 @@ lbl_fn_806FB750_000009F8:
     stw r29, 0x84(r24)
     stw r28, 0x208(r25)
     lhz r3, 0x1a(r1)
-    bl fn_806A4264
+    bl net_castU16
     mr r0, r3
     lwz r3, 0x1c(r1)
     clrlwi r4, r0, 16
@@ -907,7 +907,7 @@ lbl_fn_806FB750_00000AEC:
 lbl_fn_806FB750_00000B20:
     lhz r3, 0x12(r1)
 lbl_fn_806FB750_00000B24:
-    bl fn_806A4264
+    bl net_castU16
     lwz r0, 0x28(r1)
     slwi r0, r0, 4
     add r4, r24, r0
@@ -918,13 +918,13 @@ lbl_fn_806FB750_00000B24:
     add r3, r24, r0
     stw r4, 0x9c(r3)
     lhz r3, 0x33(r1)
-    bl fn_806A4264
+    bl net_castU16
     lwz r0, 0x28(r1)
     slwi r0, r0, 4
     add r4, r24, r0
     sth r3, 0xa0(r4)
     lhz r3, 0x1a(r1)
-    bl fn_806A4264
+    bl net_castU16
     mr r0, r3
     lwz r3, 0x1c(r1)
     clrlwi r4, r0, 16
@@ -1586,7 +1586,7 @@ lbl_fn_806FC170_0000148C:
 lbl_fn_806FC170_000014B0:
     lhz r3, 0x32(r1)
 lbl_fn_806FC170_000014B4:
-    bl fn_806A4264
+    bl net_castU16
     extrwi r0, r3, 8, 16
     stb r0, 0x5b(r1)
     stb r3, 0x5c(r1)

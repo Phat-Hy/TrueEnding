@@ -36,7 +36,7 @@ extern void fn_803EDCF4(void);
 extern void fn_8041CD24(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
-extern void fn_80491528(void);
+extern void coliseum_spawnEnemyGroup(void);
 extern void fn_8049994C(void);
 extern void fn_80499B9C(void);
 extern void fn_80499C48(void);
@@ -182,7 +182,7 @@ lbl_fn_8041CF94_00000100:
     lwz r3, lbl_8087F558
     addi r4, r1, 0x8
     li r5, 0x0
-    bl fn_80491528
+    bl coliseum_spawnEnemyGroup
     addic. r3, r1, 0x8
     beq lbl_fn_8041CF94_0000014C
     lwz r4, 0x8(r1)
@@ -453,7 +453,7 @@ lbl_fn_8041D320_00000478:
     lwz r3, lbl_8087F558
     addi r4, r1, 0x8
     addi r5, r31, 0x2dc
-    bl fn_80491528
+    bl coliseum_spawnEnemyGroup
     addic. r3, r1, 0x8
     beq lbl_fn_8041D320_000004C4
     lwz r4, 0x8(r1)
@@ -561,7 +561,7 @@ lbl_fn_8041D4B4_000005F0:
     lwz r3, lbl_8087F558
     addi r4, r1, 0x44
     addi r5, r30, 0x2dc
-    bl fn_80491528
+    bl coliseum_spawnEnemyGroup
     addic. r3, r1, 0x44
     beq lbl_fn_8041D4B4_0000063C
     lwz r4, 0x44(r1)

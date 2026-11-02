@@ -21,7 +21,7 @@ extern void mem_alloc(void);
 extern void node_destroy(void);
 extern void fn_800CA910(void);
 extern void fn_800CAA88(void);
-extern void fn_800CB480(void);
+extern void morph_releaseRef(void);
 extern void fn_800CB4C4(void);
 extern void fn_800CB538(void);
 extern void morph_hasActiveWeight(void);
@@ -433,7 +433,7 @@ lbl_fn_8037CA24_000003D4:
     bl fn_8004B1EC
     add r3, r28, r31
     addi r3, r3, 0x54
-    bl fn_800CB480
+    bl morph_releaseRef
     addi r30, r30, 0x1
     addi r31, r31, 0x14
     cmpwi r30, 0x2
@@ -854,7 +854,7 @@ lbl_fn_8037CB38_000009C8:
     bne lbl_fn_8037CB38_00000BCC
     lwz r3, 0x78(r31)
     addi r3, r3, 0x8
-    bl fn_800CB480
+    bl morph_releaseRef
     lwz r0, 0x8c(r31)
     cmpwi r0, 0x0
     ble lbl_fn_8037CB38_00000A54
@@ -910,7 +910,7 @@ lbl_fn_8037CB38_00000A88:
     bne lbl_fn_8037CB38_00000BCC
     lwz r3, 0x78(r31)
     addi r3, r3, 0x8
-    bl fn_800CB480
+    bl morph_releaseRef
     li r0, 0x6
     stw r0, 0x48(r31)
     b lbl_fn_8037CB38_00000BCC

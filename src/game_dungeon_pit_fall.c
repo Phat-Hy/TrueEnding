@@ -11,7 +11,7 @@ extern void mem_getAllocSize(void);
 extern void fn_800CA144(void);
 extern void morph_reset(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB480(void);
+extern void morph_releaseRef(void);
 extern void fn_800CB4EC(void);
 extern void fn_800CB504(void);
 extern void morph_hasActiveWeight(void);
@@ -1507,7 +1507,7 @@ lbl_fn_803E8948_00001510:
     mr r3, r29
     bl morph_updateMesh
     mr r3, r29
-    bl fn_800CB480
+    bl morph_releaseRef
     addi r30, r30, 0x1
     addi r31, r31, 0x30
     cmpwi r30, 0x4
@@ -1793,7 +1793,7 @@ lbl_fn_803E8A50_00001928:
     lwz r3, 0x24(r20)
     cmpwi r3, 0x0
     beq lbl_fn_803E8A50_00001938
-    bl fn_800CB480
+    bl morph_releaseRef
 lbl_fn_803E8A50_00001938:
     stw r26, 0x4(r20)
     b lbl_fn_803E8A50_00001A94

@@ -89,7 +89,7 @@ void fn_800CB36C(void);
 void ref_releaseHandle(void);
 void fn_800CB404(void);
 void morph_updateWeights(void);
-void fn_800CB480(void);
+void morph_releaseRef(void);
 void fn_800CB4A4(void);
 void fn_800CB4C4(void);
 void fn_800CB4EC(void);
@@ -1399,7 +1399,7 @@ lbl_morph_updateWeights_00001034:
     blr
 }
 
-asm void fn_800CB480(void)
+asm void morph_releaseRef(void)
 {
     nofralloc
     lwz r5, 0x0(r3)

@@ -13,7 +13,7 @@ extern void talk_copyUtf16String(void);
 extern void equip_calcTotalStatBonuses(void);
 extern void fn_800610A4(void);
 extern void skill_calcTrajectory(void);
-extern void fn_8006F420(void);
+extern void script_executeCommand(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
@@ -2060,7 +2060,7 @@ lbl_fn_80506D98_00001A0C:
     mr r3, r21
     addi r4, r1, 0x28
     li r6, 0x100
-    bl fn_8006F420
+    bl script_executeCommand
     lwz r3, lbl_8087EE90
     addi r4, r1, 0x28
     bl snd_findSoundNodeByName

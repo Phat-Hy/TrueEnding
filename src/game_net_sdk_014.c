@@ -15,7 +15,7 @@ extern void _savegpr_27(void);
 extern void memcmp(void);
 extern void snprintf(void);
 extern void fn_8068446C(void);
-extern void fn_806A4264(void);
+extern void net_castU16(void);
 extern void net_truncateU16(void);
 extern void fn_806A6E40(void);
 extern void net_checkConnectionSession(void);
@@ -470,7 +470,7 @@ lbl_fn_806B85B0_00000594:
     cmplw r26, r0
     bne lbl_fn_806B85B0_000005C0
     mr r3, r27
-    bl fn_806A4264
+    bl net_castU16
     lhz r0, 0x674(r24)
     clrlwi r3, r3, 16
     cmplw r3, r0
@@ -489,7 +489,7 @@ lbl_fn_806B85B0_000005C0:
     mr r3, r27
     stw r26, 0x670(r4)
     lwz r24, lbl_80860898@l(r24)
-    bl fn_806A4264
+    bl net_castU16
     sth r3, 0x674(r24)
     b lbl_fn_806B85B0_00000638
 lbl_fn_806B85B0_00000600:

@@ -25,7 +25,7 @@ extern void atn_FileList_destructor(void);
 extern void fn_8006C300(void);
 extern void fn_8006C3F0(void);
 extern void gimmick_initObject(void);
-extern void fn_8006F420(void);
+extern void script_executeCommand(void);
 extern void str_assignBuffer(void);
 extern void dungeon_initGlobalContext(void);
 extern void town_registerInteractionPoint(void);
@@ -255,7 +255,7 @@ lbl_fn_8046B798_000001B4:
     mr r3, r24
     addi r4, r1, 0x30
     li r6, 0x100
-    bl fn_8006F420
+    bl script_executeCommand
     lbz r0, 0x30(r1)
     extsb. r0, r0
     beq lbl_fn_8046B798_00000254

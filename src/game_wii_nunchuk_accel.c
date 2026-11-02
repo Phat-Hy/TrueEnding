@@ -14,7 +14,7 @@ extern void fn_8011462C(void);
 extern void fn_8047F850(void);
 extern void fn_8047F8A4(void);
 extern void fn_80481818(void);
-extern void fn_80491528(void);
+extern void coliseum_spawnEnemyGroup(void);
 extern void node_getParentNode(void);
 extern void spectate_getRootNode(void);
 extern void fn_80541214(void);
@@ -1131,7 +1131,7 @@ lbl_fn_8055BCAC_00000E7C:
     lwz r3, lbl_8087F558
     mr r5, r31
     addi r4, r1, 0x104
-    bl fn_80491528
+    bl coliseum_spawnEnemyGroup
     addic. r3, r1, 0x104
     beq lbl_fn_8055BCAC_000018D0
     lwz r4, 0x104(r1)
@@ -1670,7 +1670,7 @@ lbl_fn_8055BCAC_000015F4:
     lwz r3, lbl_8087F558
     addi r4, r1, 0xf0
     addi r5, r1, 0x184
-    bl fn_80491528
+    bl coliseum_spawnEnemyGroup
     addic. r3, r1, 0xf0
     beq lbl_fn_8055BCAC_000018D0
     lwz r4, 0xf0(r1)

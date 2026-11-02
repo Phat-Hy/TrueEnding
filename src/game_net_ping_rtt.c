@@ -36,7 +36,7 @@ extern void save_computeCrc32(void);
 extern void save_calculateBlockCrc(void);
 extern void save_writeBackupSlot(void);
 extern void fn_801F791C(void);
-extern void fn_801F7DF0(void);
+extern void save_backup_formatEntry(void);
 extern void save_findEntryByName(void);
 extern void thread_findAndNotify(void);
 extern void thread_dispatchToQueue(void);
@@ -628,7 +628,7 @@ lbl_fn_80516548_00000668:
     lfs f2, lbl_80887890
     addi r4, r30, 0x12c
     lfs f3, lbl_80887894
-    bl fn_801F7DF0
+    bl save_backup_formatEntry
     b lbl_fn_80516548_0000074C
 lbl_fn_80516548_00000714:
     stfs f30, 0x8(r1)
@@ -644,7 +644,7 @@ lbl_fn_80516548_00000714:
     lfs f2, lbl_8088789C
     addi r4, r30, 0x12c
     lfs f3, lbl_808878A0
-    bl fn_801F7DF0
+    bl save_backup_formatEntry
 lbl_fn_80516548_0000074C:
     lwz r0, 0xd4(r31)
     cmpwi r0, 0x1

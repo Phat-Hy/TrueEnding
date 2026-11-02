@@ -13,7 +13,7 @@ extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_80089ACC(void);
+extern void area_getAreaId(void);
 extern void str_skipWhitespace(void);
 extern void particle_getEmitterContext(void);
 extern void cam_testTargetVisibility(void);
@@ -192,7 +192,7 @@ asm void fn_803C606C(void)
     b lbl_fn_803C606C_00000140
 lbl_fn_803C606C_00000108:
     mr r3, r28
-    bl fn_80089ACC
+    bl area_getAreaId
     mr r31, r3
     mr r3, r30
     bl talk_parseQuotedString
@@ -599,7 +599,7 @@ asm void fn_803C65EC(void)
     b lbl_fn_803C65EC_000006C0
 lbl_fn_803C65EC_00000688:
     mr r3, r24
-    bl fn_80089ACC
+    bl area_getAreaId
     mr r28, r3
     mr r3, r26
     bl talk_parseQuotedString
@@ -973,7 +973,7 @@ asm void fn_803C6AE8(void)
     b lbl_fn_803C6AE8_00000BBC
 lbl_fn_803C6AE8_00000B84:
     mr r3, r24
-    bl fn_80089ACC
+    bl area_getAreaId
     mr r28, r3
     mr r3, r26
     bl talk_parseQuotedString
@@ -1347,7 +1347,7 @@ asm void fn_803C6FE4(void)
     b lbl_fn_803C6FE4_000010B8
 lbl_fn_803C6FE4_00001080:
     mr r3, r24
-    bl fn_80089ACC
+    bl area_getAreaId
     mr r28, r3
     mr r3, r26
     bl talk_parseQuotedString
@@ -1722,7 +1722,7 @@ asm void fn_803C74E0(void)
     b lbl_fn_803C74E0_000015B8
 lbl_fn_803C74E0_00001580:
     mr r3, r25
-    bl fn_80089ACC
+    bl area_getAreaId
     mr r29, r3
     mr r3, r26
     bl talk_parseQuotedString

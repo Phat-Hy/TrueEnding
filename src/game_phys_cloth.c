@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void __register_global_object(void);
 extern void dtor_80084684(void);
-extern void fn_80010374(void);
+extern void actor_dispatchByType(void);
 extern void fn_800119C0(void);
 extern void fn_800128FC(void);
 extern void fn_80046EE0(void);
@@ -640,7 +640,7 @@ lbl_fn_8010DD34_000006C4:
     lfs f29, 0x4(r3)
     mr r4, r29
     addi r3, r1, 0xd4
-    bl fn_80010374
+    bl actor_dispatchByType
     lfs f3, 0x118(r1)
     addi r3, r1, 0xe0
     lfs f0, 0xdc(r1)

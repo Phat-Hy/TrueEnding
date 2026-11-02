@@ -13,7 +13,7 @@ extern void fn_8005BFAC(void);
 extern void equip_calcTotalStatBonuses(void);
 extern void skill_calculateDamage(void);
 extern void gmk_LoadHandle_constructor(void);
-extern void fn_8006F420(void);
+extern void script_executeCommand(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
@@ -2071,7 +2071,7 @@ lbl_fn_803B9324_000019DC:
     mr r3, r23
     addi r4, r1, 0x8
     li r6, 0x100
-    bl fn_8006F420
+    bl script_executeCommand
     lwz r12, 0x58(r28)
     addi r3, r28, 0x58
     addi r4, r1, 0x8
@@ -2092,7 +2092,7 @@ lbl_fn_803B9324_00001A2C:
     mr r3, r23
     addi r4, r1, 0x8
     li r6, 0x100
-    bl fn_8006F420
+    bl script_executeCommand
     lwz r0, 0xc0(r28)
     addi r4, r1, 0x8
     slwi r0, r0, 3

@@ -17,7 +17,7 @@ extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void vec3_sub(void);
-extern void fn_80013404(void);
+extern void math_absf(void);
 extern void vec3_add(void);
 extern void mission_updateStub(void);
 extern void vec3_initValues(void);
@@ -991,7 +991,7 @@ lbl_fn_803D2A6C_00000A14:
     addi r5, r1, 0x488
     bl vec3_sub
     lfs f1, 0x480(r1)
-    bl fn_80013404
+    bl math_absf
     fsubs f0, f1, f31
     fcmpo cr0, f30, f0
     ble lbl_fn_803D2A6C_00000A50
@@ -999,7 +999,7 @@ lbl_fn_803D2A6C_00000A14:
     b lbl_fn_803D2A6C_00000A5C
 lbl_fn_803D2A6C_00000A50:
     lfs f1, 0x480(r1)
-    bl fn_80013404
+    bl math_absf
     fsubs f2, f1, f31
 lbl_fn_803D2A6C_00000A5C:
     lfs f1, 0x47c(r1)
@@ -2529,13 +2529,13 @@ lbl_fn_803D2A6C_00001FF8:
     lfs f1, 0x3c8(r1)
     lfs f0, 0x3bc(r1)
     fsubs f1, f1, f0
-    bl fn_80013404
+    bl math_absf
     lfs f3, lbl_80885DFC
     lfs f2, 0x3c4(r1)
     lfs f0, 0x3b8(r1)
     fmuls f27, f3, f1
     fsubs f1, f2, f0
-    bl fn_80013404
+    bl math_absf
     lfs f0, lbl_80885DFC
     fmr f2, f27
     addi r3, r1, 0x20

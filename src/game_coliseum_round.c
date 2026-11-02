@@ -39,7 +39,7 @@ extern void fn_80484074(void);
 extern void fn_804848C4(void);
 extern void fn_804848D0(void);
 extern void fn_804862C4(void);
-extern void fn_80491528(void);
+extern void coliseum_spawnEnemyGroup(void);
 extern void fn_80531090(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXQuat(void);
@@ -932,7 +932,7 @@ lbl_fn_8048F9B0_00000BA4:
     bl fn_804814E8
     addi r4, r1, 0x98
     addi r5, r1, 0x68
-    bl fn_80491528
+    bl coliseum_spawnEnemyGroup
     addi r3, r1, 0x98
     li r4, -0x1
     bl fn_8041D23C
@@ -1018,7 +1018,7 @@ lbl_fn_8048F9B0_00000D28:
     bl fn_804814E8
     addi r4, r1, 0x84
     addi r5, r1, 0x58
-    bl fn_80491528
+    bl coliseum_spawnEnemyGroup
     addi r3, r1, 0x84
     li r4, -0x1
     bl fn_8041D23C
@@ -1164,7 +1164,7 @@ lbl_fn_8048FC7C_00000F28:
     lwz r3, lbl_8087F558
     addi r4, r1, 0x18
     addi r5, r1, 0x8
-    bl fn_80491528
+    bl coliseum_spawnEnemyGroup
     addic. r3, r1, 0x18
     beq lbl_fn_8048FC7C_00000FF4
     lwz r4, 0x18(r1)

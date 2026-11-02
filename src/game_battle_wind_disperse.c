@@ -27,7 +27,7 @@ extern void battle_invokeVtableMethod(void);
 extern void battle_assignFieldProperty(void);
 extern void fn_8041E480(void);
 extern void fn_8041E7E4(void);
-extern void fn_80491528(void);
+extern void coliseum_spawnEnemyGroup(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSVECSquareMag(void);
@@ -1802,7 +1802,7 @@ lbl_fn_80420120_000017F4:
     lwz r3, lbl_8087F558
     addi r4, r1, 0x8
     addi r5, r31, 0xfc
-    bl fn_80491528
+    bl coliseum_spawnEnemyGroup
     addic. r3, r1, 0x8
     beq lbl_fn_80420120_00001840
     lwz r4, 0x8(r1)

@@ -11,7 +11,7 @@ extern void save_computeCrc32(void);
 extern void save_calculateBlockCrc(void);
 extern void save_writeBackupSlot(void);
 extern void fn_801F7A18(void);
-extern void fn_801F7DF0(void);
+extern void save_backup_formatEntry(void);
 extern void save_findEntryByName(void);
 extern void save_formatSlotString(void);
 extern void fn_801F8830(void);
@@ -1449,7 +1449,7 @@ lbl_fn_803E0E10_00001314:
     lwz r3, 0xc(r24)
     fmr f2, f1
     fmr f3, f1
-    bl fn_801F7DF0
+    bl save_backup_formatEntry
     b lbl_fn_803E0E10_000013F4
 lbl_fn_803E0E10_00001364:
     lwz r0, 0x48(r24)
@@ -1480,7 +1480,7 @@ lbl_fn_803E0E10_000013A4:
     fmr f3, f2
     lfs f1, lbl_80885EB0
     addi r4, r4, 0x141d
-    bl fn_801F7DF0
+    bl save_backup_formatEntry
     b lbl_fn_803E0E10_000013F4
 lbl_fn_803E0E10_000013D4:
     lfs f1, lbl_80885D58
@@ -1490,7 +1490,7 @@ lbl_fn_803E0E10_000013D4:
     fmr f3, f1
     lfs f2, lbl_80885EB0
     addi r4, r4, 0x141d
-    bl fn_801F7DF0
+    bl save_backup_formatEntry
 lbl_fn_803E0E10_000013F4:
     lwz r0, 0x7e0(r23)
     rlwinm r0, r0, 0, 26, 26

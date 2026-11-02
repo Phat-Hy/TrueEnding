@@ -7,7 +7,7 @@ extern void scene_transformPoint(void);
 extern void vec3_toEulerAngles(void);
 extern void vec3_sub(void);
 extern void math_wrapAngle(void);
-extern void fn_80013404(void);
+extern void math_absf(void);
 extern void magic_castSpellCircle(void);
 extern void atn_Model_findBoneIndex(void);
 extern void bsp_findLeafNode(void);
@@ -1255,7 +1255,7 @@ lbl_fn_802FFFF8_00001064:
     b lbl_fn_802FFFF8_00001238
 lbl_fn_802FFFF8_000010B4:
     fmr f1, f30
-    bl fn_80013404
+    bl math_absf
     lfs f0, lbl_80884A20
     fcmpu cr0, f1, f0
     beq lbl_fn_802FFFF8_00001238
@@ -1276,7 +1276,7 @@ lbl_fn_802FFFF8_000010D0:
     bl phys_scaleGravity
     fmr f29, f1
     fmr f1, f25
-    bl fn_80013404
+    bl math_absf
     fcmpo cr0, f1, f29
     bge lbl_fn_802FFFF8_00001238
     li r28, 0x2
@@ -1289,7 +1289,7 @@ lbl_fn_802FFFF8_0000111C:
     bl phys_scaleGravity
     fmr f29, f1
     fmr f1, f25
-    bl fn_80013404
+    bl math_absf
     fcmpo cr0, f1, f29
     bge lbl_fn_802FFFF8_0000114C
     li r28, 0x2
@@ -1309,7 +1309,7 @@ lbl_fn_802FFFF8_0000114C:
     bl task_findEntryById
     fmr f1, f30
     lfs f30, 0x50(r3)
-    bl fn_80013404
+    bl math_absf
     fcmpo cr0, f1, f30
     bge lbl_fn_802FFFF8_00001238
     li r28, 0x1
@@ -1319,7 +1319,7 @@ lbl_fn_802FFFF8_00001198:
     bl phys_scaleGravity
     fmr f31, f1
     fmr f1, f30
-    bl fn_80013404
+    bl math_absf
     fcmpo cr0, f1, f31
     bge lbl_fn_802FFFF8_00001238
     li r28, 0x3
@@ -1343,7 +1343,7 @@ lbl_fn_802FFFF8_000011BC:
     bl task_findEntryById
     fmr f1, f30
     lfs f30, 0x50(r3)
-    bl fn_80013404
+    bl math_absf
     fcmpo cr0, f1, f30
     bge lbl_fn_802FFFF8_00001238
     li r28, 0x1
@@ -1353,7 +1353,7 @@ lbl_fn_802FFFF8_00001218:
     bl phys_scaleGravity
     fmr f31, f1
     fmr f1, f30
-    bl fn_80013404
+    bl math_absf
     fcmpo cr0, f1, f31
     bge lbl_fn_802FFFF8_00001238
     li r28, 0x3

@@ -78,7 +78,7 @@ extern u32 lbl_80880698;
 
 /* Function declarations */
 void fn_8001011C(void);
-void fn_80010374(void);
+void actor_dispatchByType(void);
 void vec3_assign(void);
 void fn_80010490(void);
 void fn_800109E0(void);
@@ -123,7 +123,7 @@ void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 void vec3_sub(void);
 void fn_8001336C(void);
 void math_wrapAngle(void);
-void fn_80013404(void);
+void math_absf(void);
 void vec3_add(void);
 void fn_80013444(void);
 void fn_80013484(void);
@@ -302,24 +302,24 @@ lbl_fn_8001011C_00000230:
     blr
 }
 
-asm void fn_80010374(void)
+asm void actor_dispatchByType(void)
 {
     nofralloc
     lwz r0, 0x20(r4)
     cmpwi r0, 0x6
-    beq lbl_fn_80010374_00000290
+    beq lbl_actor_dispatchByType_00000290
     cmpwi r0, 0x7
-    beq lbl_fn_80010374_000002AC
+    beq lbl_actor_dispatchByType_000002AC
     cmpwi r0, 0x1
-    beq lbl_fn_80010374_000002AC
+    beq lbl_actor_dispatchByType_000002AC
     cmpwi r0, 0x2
-    beq lbl_fn_80010374_000002D0
+    beq lbl_actor_dispatchByType_000002D0
     cmpwi r0, 0x3
-    beq lbl_fn_80010374_000002F0
+    beq lbl_actor_dispatchByType_000002F0
     cmpwi r0, 0x4
-    beq lbl_fn_80010374_0000031C
-    b lbl_fn_80010374_00000344
-lbl_fn_80010374_00000290:
+    beq lbl_actor_dispatchByType_0000031C
+    b lbl_actor_dispatchByType_00000344
+lbl_actor_dispatchByType_00000290:
     lis r4, lbl_807C7030@ha
     addi r4, r4, lbl_807C7030@l
     psq_l f1, 0x0(r4), 0, 0
@@ -327,29 +327,29 @@ lbl_fn_80010374_00000290:
     stfs f2, 0x8(r3)
     psq_st f1, 0x0(r3), 0, 0
     blr
-lbl_fn_80010374_000002AC:
+lbl_actor_dispatchByType_000002AC:
     lwz r5, 0x1c(r4)
     cmpwi r5, 0x0
-    beq lbl_fn_80010374_000002D0
+    beq lbl_actor_dispatchByType_000002D0
     lwz r4, 0x48(r5)
     psq_l f1, 0x528(r4), 0, 0
     lfs f2, 0x530(r4)
     stfs f2, 0x8(r3)
     psq_st f1, 0x0(r3), 0, 0
     blr
-lbl_fn_80010374_000002D0:
+lbl_actor_dispatchByType_000002D0:
     lwz r5, 0x1c(r4)
     cmpwi r5, 0x0
-    beq lbl_fn_80010374_000002F0
+    beq lbl_actor_dispatchByType_000002F0
     psq_l f1, 0x6c(r5), 0, 0
     lfs f2, 0x74(r5)
     stfs f2, 0x8(r3)
     psq_st f1, 0x0(r3), 0, 0
     blr
-lbl_fn_80010374_000002F0:
+lbl_actor_dispatchByType_000002F0:
     lwz r5, 0x1c(r4)
     cmpwi r5, 0x0
-    beq lbl_fn_80010374_0000031C
+    beq lbl_actor_dispatchByType_0000031C
     lwz r4, 0x48(r5)
     lfs f0, 0x34(r4)
     lfs f3, 0x24(r4)
@@ -358,10 +358,10 @@ lbl_fn_80010374_000002F0:
     stfs f3, 0x4(r3)
     stfs f0, 0x8(r3)
     blr
-lbl_fn_80010374_0000031C:
+lbl_actor_dispatchByType_0000031C:
     lwz r4, 0x1c(r4)
     cmpwi r4, 0x0
-    beq lbl_fn_80010374_00000344
+    beq lbl_actor_dispatchByType_00000344
     lfs f4, 0x44(r4)
     lfs f3, 0x34(r4)
     lfs f0, 0x24(r4)
@@ -369,7 +369,7 @@ lbl_fn_80010374_0000031C:
     stfs f3, 0x4(r3)
     stfs f4, 0x8(r3)
     blr
-lbl_fn_80010374_00000344:
+lbl_actor_dispatchByType_00000344:
     lis r4, lbl_807C7030@ha
     addi r4, r4, lbl_807C7030@l
     psq_l f1, 0x0(r4), 0, 0
@@ -3517,12 +3517,12 @@ lbl_fn_80012D34_00002C80:
     bl math_wrapAngle
     fmr f30, f1
     fmr f1, f31
-    bl fn_80013404
+    bl math_absf
     fcmpo cr0, f1, f29
     cror eq, lt, eq
     bne lbl_fn_80012D34_00002D94
     fmr f1, f30
-    bl fn_80013404
+    bl math_absf
     fcmpo cr0, f1, f29
     cror eq, lt, eq
     beq lbl_fn_80012D34_00002DA8
@@ -3544,7 +3544,7 @@ lbl_fn_80012D34_00002DB8:
     addi r3, r1, 0x14c
     bl vec3_set
     fmr f1, f31
-    bl fn_80013404
+    bl math_absf
     fcmpo cr0, f1, f29
     cror eq, lt, eq
     bne lbl_fn_80012D34_00002DE8
@@ -3561,7 +3561,7 @@ lbl_fn_80012D34_00002DE8:
     stfs f0, 0x14c(r1)
 lbl_fn_80012D34_00002E08:
     fmr f1, f30
-    bl fn_80013404
+    bl math_absf
     fcmpo cr0, f1, f29
     cror eq, lt, eq
     bne lbl_fn_80012D34_00002E24
@@ -3602,7 +3602,7 @@ lbl_fn_80012D34_00002E84:
     beq lbl_fn_80012D34_00002EEC
     mr r4, r26
     addi r3, r1, 0x140
-    bl fn_80010374
+    bl actor_dispatchByType
     addi r3, r1, 0x134
     addi r4, r1, 0x17c
     addi r5, r1, 0x140
@@ -3658,7 +3658,7 @@ lbl_fn_80012D34_00002F00:
     beq lbl_fn_80012D34_00003000
     mr r4, r26
     addi r3, r1, 0x110
-    bl fn_80010374
+    bl actor_dispatchByType
     mr r4, r31
     addi r3, r1, 0x5c
     bl mtx_getTranslation
@@ -3706,7 +3706,7 @@ lbl_fn_80012D34_00003000:
     bl vec3_set
     mr r4, r26
     addi r3, r1, 0xf8
-    bl fn_80010374
+    bl actor_dispatchByType
     mr r4, r31
     addi r3, r1, 0x2c
     bl mtx_getTranslation
@@ -3749,10 +3749,10 @@ lbl_fn_80012D34_000030B8:
 lbl_fn_80012D34_000030D0:
     mr r4, r26
     addi r3, r1, 0xec
-    bl fn_80010374
+    bl actor_dispatchByType
     mr r4, r27
     addi r3, r1, 0xe0
-    bl fn_80010374
+    bl actor_dispatchByType
     cmpwi r29, 0x0
     beq lbl_fn_80012D34_00003120
     mr r4, r28
@@ -3894,7 +3894,7 @@ lbl_math_wrapAngle_000032D8:
     blr
 }
 
-asm void fn_80013404(void)
+asm void math_absf(void)
 {
     nofralloc
     fabs f0, f1

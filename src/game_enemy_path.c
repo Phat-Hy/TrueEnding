@@ -19,7 +19,7 @@ extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void vec3_sub(void);
 extern void fn_8001336C(void);
 extern void math_wrapAngle(void);
-extern void fn_80013404(void);
+extern void math_absf(void);
 extern void mission_updateStub(void);
 extern void vec3_initValues(void);
 extern void atn_Model_findBoneIndex(void);
@@ -820,7 +820,7 @@ lbl_fn_80129A6C_00000A04:
     addi r4, r31, 0xc
     bl vec3_copy
     lfs f1, 0xf8(r1)
-    bl fn_80013404
+    bl math_absf
     lfs f2, 0x28(r31)
     fcmpo cr0, f1, f2
     ble lbl_fn_80129A6C_00000A4C
@@ -835,7 +835,7 @@ lbl_fn_80129A6C_00000A48:
     stfs f2, 0xf8(r1)
 lbl_fn_80129A6C_00000A4C:
     lfs f1, 0xf4(r1)
-    bl fn_80013404
+    bl math_absf
     lfs f2, 0x24(r31)
     fcmpo cr0, f1, f2
     ble lbl_fn_80129A6C_00000C28
@@ -938,7 +938,7 @@ lbl_fn_80129A6C_00000B6C:
     stfs f0, 0xf4(r1)
 lbl_fn_80129A6C_00000BC8:
     lfs f1, 0xf8(r1)
-    bl fn_80013404
+    bl math_absf
     lfs f2, 0xec(r1)
     fcmpo cr0, f1, f2
     ble lbl_fn_80129A6C_00000BF8
@@ -953,7 +953,7 @@ lbl_fn_80129A6C_00000BF4:
     stfs f2, 0xf8(r1)
 lbl_fn_80129A6C_00000BF8:
     lfs f1, 0xf4(r1)
-    bl fn_80013404
+    bl math_absf
     lfs f2, 0xe8(r1)
     fcmpo cr0, f1, f2
     ble lbl_fn_80129A6C_00000C28
@@ -985,12 +985,12 @@ lbl_fn_80129A6C_00000C28:
     b lbl_fn_80129A6C_00000C98
 lbl_fn_80129A6C_00000C68:
     lfs f1, 0x18(r31)
-    bl fn_80013404
+    bl math_absf
     lfs f0, lbl_808818E0
     fcmpo cr0, f1, f0
     bgt lbl_fn_80129A6C_00000C90
     lfs f1, 0x1c(r31)
-    bl fn_80013404
+    bl math_absf
     lfs f0, lbl_808818E0
     fcmpo cr0, f1, f0
     ble lbl_fn_80129A6C_00000C98
@@ -1233,11 +1233,11 @@ lbl_fn_80129A6C_00000FBC:
     b lbl_fn_80129A6C_00001014
 lbl_fn_80129A6C_00000FF0:
     lfs f1, 0x60(r27)
-    bl fn_80013404
+    bl math_absf
     fcmpo cr0, f1, f31
     bgt lbl_fn_80129A6C_00001010
     lfs f1, 0x64(r27)
-    bl fn_80013404
+    bl math_absf
     fcmpo cr0, f1, f31
     ble lbl_fn_80129A6C_00001014
 lbl_fn_80129A6C_00001010:

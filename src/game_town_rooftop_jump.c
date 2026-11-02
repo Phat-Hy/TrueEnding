@@ -11,7 +11,7 @@ extern void motion_updateFogAdj(void);
 extern void str_findChar(void);
 extern void fn_80133BD8(void);
 extern void save_parseSlotStats(void);
-extern void fn_801F4B4C(void);
+extern void save_initSlotData(void);
 extern void fn_801F5644(void);
 extern void fn_801F5740(void);
 extern void fn_801F5E9C(void);
@@ -625,7 +625,7 @@ lbl_fn_803DD160_0000071C:
     stfs f2, 0x19c(r1)
     stfs f1, 0x1a0(r1)
     stfs f0, 0x1a4(r1)
-    bl fn_801F4B4C
+    bl save_initSlotData
     addi r5, r29, 0xe0
     lfs f3, 0xe0(r29)
     lfs f2, 0x4(r5)
@@ -638,7 +638,7 @@ lbl_fn_803DD160_0000071C:
     stfs f2, 0x18c(r1)
     stfs f1, 0x190(r1)
     stfs f0, 0x194(r1)
-    bl fn_801F4B4C
+    bl save_initSlotData
     addi r3, r30, 0x136e
     bl str_findChar
     mr r4, r3
@@ -689,7 +689,7 @@ lbl_fn_803DD160_00000860:
     stfs f2, 0x15c(r1)
     stfs f1, 0x160(r1)
     stfs f0, 0x164(r1)
-    bl fn_801F4B4C
+    bl save_initSlotData
     addi r5, r29, 0xe0
     lfs f3, 0xe0(r29)
     lfs f2, 0x4(r5)
@@ -702,7 +702,7 @@ lbl_fn_803DD160_00000860:
     stfs f2, 0x14c(r1)
     stfs f1, 0x150(r1)
     stfs f0, 0x154(r1)
-    bl fn_801F4B4C
+    bl save_initSlotData
     addi r3, r30, 0x136e
     bl str_findChar
     mr r4, r3
@@ -755,7 +755,7 @@ lbl_fn_803DD160_0000095C:
     stfs f2, 0x11c(r1)
     stfs f1, 0x120(r1)
     stfs f0, 0x124(r1)
-    bl fn_801F4B4C
+    bl save_initSlotData
     addi r5, r29, 0xe0
     lfs f3, 0xe0(r29)
     lfs f2, 0x4(r5)
@@ -768,7 +768,7 @@ lbl_fn_803DD160_0000095C:
     stfs f2, 0x10c(r1)
     stfs f1, 0x110(r1)
     stfs f0, 0x114(r1)
-    bl fn_801F4B4C
+    bl save_initSlotData
     addi r3, r30, 0x136e
     bl str_findChar
     mr r4, r3
@@ -821,7 +821,7 @@ lbl_fn_803DD160_00000A60:
     stfs f2, 0xdc(r1)
     stfs f1, 0xe0(r1)
     stfs f0, 0xe4(r1)
-    bl fn_801F4B4C
+    bl save_initSlotData
     addi r5, r29, 0xe0
     lfs f3, 0xe0(r29)
     lfs f2, 0x4(r5)
@@ -834,7 +834,7 @@ lbl_fn_803DD160_00000A60:
     stfs f2, 0xcc(r1)
     stfs f1, 0xd0(r1)
     stfs f0, 0xd4(r1)
-    bl fn_801F4B4C
+    bl save_initSlotData
     addi r3, r30, 0x136e
     bl str_findChar
     mr r4, r3
@@ -885,7 +885,7 @@ lbl_fn_803DD160_00000B64:
     stfs f2, 0x9c(r1)
     stfs f1, 0xa0(r1)
     stfs f0, 0xa4(r1)
-    bl fn_801F4B4C
+    bl save_initSlotData
     addi r5, r29, 0xe0
     lfs f3, 0xe0(r29)
     lfs f2, 0x4(r5)
@@ -898,7 +898,7 @@ lbl_fn_803DD160_00000B64:
     stfs f2, 0x8c(r1)
     stfs f1, 0x90(r1)
     stfs f0, 0x94(r1)
-    bl fn_801F4B4C
+    bl save_initSlotData
     addi r3, r30, 0x136e
     bl str_findChar
     mr r4, r3
@@ -947,7 +947,7 @@ lbl_fn_803DD160_00000C60:
     stfs f2, 0x5c(r1)
     stfs f1, 0x60(r1)
     stfs f0, 0x64(r1)
-    bl fn_801F4B4C
+    bl save_initSlotData
     addi r5, r29, 0xf0
     lfs f3, 0xf0(r29)
     lfs f2, 0x4(r5)
@@ -960,7 +960,7 @@ lbl_fn_803DD160_00000C60:
     stfs f2, 0x4c(r1)
     stfs f1, 0x50(r1)
     stfs f0, 0x54(r1)
-    bl fn_801F4B4C
+    bl save_initSlotData
     addi r3, r30, 0x136e
     bl str_findChar
     mr r4, r3
@@ -1011,7 +1011,7 @@ lbl_fn_803DD160_00000D54:
     stfs f2, 0x1c(r1)
     stfs f1, 0x20(r1)
     stfs f0, 0x24(r1)
-    bl fn_801F4B4C
+    bl save_initSlotData
     addi r5, r29, 0xf0
     lfs f3, 0xf0(r29)
     lfs f2, 0x4(r5)
@@ -1024,7 +1024,7 @@ lbl_fn_803DD160_00000D54:
     stfs f2, 0xc(r1)
     stfs f1, 0x10(r1)
     stfs f0, 0x14(r1)
-    bl fn_801F4B4C
+    bl save_initSlotData
     addi r3, r30, 0x136e
     bl str_findChar
     mr r4, r3
@@ -1102,7 +1102,7 @@ asm void fn_803DD90C(void)
     stfs f2, 0x11c(r1)
     stfs f1, 0x120(r1)
     stfs f0, 0x124(r1)
-    bl fn_801F4B4C
+    bl save_initSlotData
     lfs f3, 0x40(r29)
     mr r3, r28
     lfs f2, 0x4(r30)
@@ -1114,7 +1114,7 @@ asm void fn_803DD90C(void)
     stfs f2, 0x10c(r1)
     stfs f1, 0x110(r1)
     stfs f0, 0x114(r1)
-    bl fn_801F4B4C
+    bl save_initSlotData
     b lbl_fn_803DD90C_000012B0
 lbl_fn_803DD90C_00000F84:
     cmpwi r4, 0x2
@@ -1152,7 +1152,7 @@ lbl_fn_803DD90C_00000F84:
     stfs f2, 0xdc(r1)
     stfs f1, 0xe0(r1)
     stfs f0, 0xe4(r1)
-    bl fn_801F4B4C
+    bl save_initSlotData
     lfs f3, 0x10(r29)
     mr r3, r28
     lfs f2, 0x4(r30)
@@ -1164,7 +1164,7 @@ lbl_fn_803DD90C_00000F84:
     stfs f2, 0xcc(r1)
     stfs f1, 0xd0(r1)
     stfs f0, 0xd4(r1)
-    bl fn_801F4B4C
+    bl save_initSlotData
     b lbl_fn_803DD90C_000012B0
 lbl_fn_803DD90C_00001048:
     cmpwi r4, 0x3
@@ -1204,7 +1204,7 @@ lbl_fn_803DD90C_00001048:
     stfs f2, 0x9c(r1)
     stfs f1, 0xa0(r1)
     stfs f0, 0xa4(r1)
-    bl fn_801F4B4C
+    bl save_initSlotData
     lfs f3, 0x20(r29)
     mr r3, r28
     lfs f2, 0x4(r30)
@@ -1216,7 +1216,7 @@ lbl_fn_803DD90C_00001048:
     stfs f2, 0x8c(r1)
     stfs f1, 0x90(r1)
     stfs f0, 0x94(r1)
-    bl fn_801F4B4C
+    bl save_initSlotData
     b lbl_fn_803DD90C_000012B0
 lbl_fn_803DD90C_00001114:
     cmpwi r4, 0x1
@@ -1258,7 +1258,7 @@ lbl_fn_803DD90C_00001114:
     stfs f2, 0x5c(r1)
     stfs f1, 0x60(r1)
     stfs f0, 0x64(r1)
-    bl fn_801F4B4C
+    bl save_initSlotData
     lfs f3, 0x0(r29)
     mr r3, r28
     lfs f2, 0x4(r30)
@@ -1270,7 +1270,7 @@ lbl_fn_803DD90C_00001114:
     stfs f2, 0x4c(r1)
     stfs f1, 0x50(r1)
     stfs f0, 0x54(r1)
-    bl fn_801F4B4C
+    bl save_initSlotData
     b lbl_fn_803DD90C_000012B0
 lbl_fn_803DD90C_000011E8:
     lfs f3, lbl_80885DE8
@@ -1310,7 +1310,7 @@ lbl_fn_803DD90C_000011E8:
     stfs f2, 0x1c(r1)
     stfs f1, 0x20(r1)
     stfs f0, 0x24(r1)
-    bl fn_801F4B4C
+    bl save_initSlotData
     lfs f3, 0x50(r29)
     mr r3, r28
     lfs f2, 0x4(r31)
@@ -1322,7 +1322,7 @@ lbl_fn_803DD90C_000011E8:
     stfs f2, 0xc(r1)
     stfs f1, 0x10(r1)
     stfs f0, 0x14(r1)
-    bl fn_801F4B4C
+    bl save_initSlotData
 lbl_fn_803DD90C_000012B0:
     lwz r0, 0x164(r1)
     lwz r31, 0x15c(r1)

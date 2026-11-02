@@ -17,7 +17,7 @@ extern void _savegpr_27(void);
 extern void memcmp(void);
 extern void strncmp(void);
 extern void fn_806A4260(void);
-extern void fn_806A4264(void);
+extern void net_castU16(void);
 extern void net_truncateU16(void);
 extern void fn_806D57A0(void);
 extern void net_pollActiveSockets(void);
@@ -819,7 +819,7 @@ lbl_fn_80701CC0_000009A8:
     li r5, 0x2
     bl memcpy
     lhz r3, 0xa(r1)
-    bl fn_806A4264
+    bl net_castU16
     lwz r4, 0x0(r24)
     clrlwi r5, r3, 16
     mr r3, r26
@@ -1377,7 +1377,7 @@ lbl_fn_80702150_000011A0:
     li r5, 0x2
     bl memcpy
     lhz r3, 0x7d0(r26)
-    bl fn_806A4264
+    bl net_castU16
     sth r3, 0x7d0(r26)
     add r28, r28, r31
     subf r27, r31, r27
@@ -2242,7 +2242,7 @@ lbl_fn_807031B0_00001D68:
     li r5, 0x2
     bl memcpy
     lhz r3, 0xa(r1)
-    bl fn_806A4264
+    bl net_castU16
     clrlwi r5, r3, 16
     sth r3, 0xa(r1)
     cmplwi r5, 0x1000

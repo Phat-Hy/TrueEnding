@@ -10,7 +10,7 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void vec3_copy(void);
 extern void fn_8000DB1C(void);
-extern void fn_80010374(void);
+extern void actor_dispatchByType(void);
 extern void fn_80010B68(void);
 extern void fn_80012A1C(void);
 extern void actor_validateIndex(void);
@@ -834,7 +834,7 @@ lbl_fn_80112A00_000009CC:
 lbl_fn_80112A00_00000A04:
     lwz r4, 0x0(r30)
     addi r3, r1, 0x14
-    bl fn_80010374
+    bl actor_dispatchByType
     addi r3, r1, 0x14
     lfs f2, 0x1c(r1)
     addi r4, r1, 0x38

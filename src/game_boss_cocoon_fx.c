@@ -14,7 +14,7 @@ extern void talk_parseDialogue(void);
 extern void talk_parseDialogueTokens(void);
 extern void talk_copyUtf16String(void);
 extern void script_executeOpcode(void);
-extern void fn_8006F420(void);
+extern void script_executeCommand(void);
 extern void str_assignBuffer(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
@@ -481,7 +481,7 @@ lbl_fn_80469D60_00000518:
     mr r3, r20
     addi r4, r1, 0x2c
     li r6, 0x10
-    bl fn_8006F420
+    bl script_executeCommand
     addi r3, r1, 0xc0
     bl talk_parseDialogue
     mr r4, r3

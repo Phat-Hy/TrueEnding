@@ -15,7 +15,7 @@ extern void fn_8004B1EC(void);
 extern void mem_alloc(void);
 extern void fn_800CA798(void);
 extern void fn_800CAC48(void);
-extern void fn_800CB480(void);
+extern void morph_releaseRef(void);
 extern void fn_800CB6C4(void);
 extern void morph_dispatchTargetUpdate(void);
 extern void atn_Task_constructor(void);
@@ -1491,7 +1491,7 @@ lbl_fn_805A2438_00001230:
     bl fn_8004B1EC
     lwz r3, 0xf8(r30)
     addi r3, r3, 0x8
-    bl fn_800CB480
+    bl morph_releaseRef
     li r0, 0x0
     stw r0, 0xf8(r30)
 lbl_fn_805A2438_00001248:

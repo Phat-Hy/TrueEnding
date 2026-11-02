@@ -10,7 +10,7 @@ extern void atn_Model_findBoneIndex(void);
 extern void motion_updateFogAdj(void);
 extern void battle_canTargetActor(void);
 extern void save_verifyBlockCrc(void);
-extern void fn_801F7DF0(void);
+extern void save_backup_formatEntry(void);
 extern void save_findEntryByName(void);
 extern void task_mapIdToQueue(void);
 extern void task_findEntryById(void);
@@ -570,7 +570,7 @@ lbl_fn_803DE89C_000006DC:
     fmuls f2, f5, f3
     lwz r3, 0x10b4(r31)
     fmuls f3, f5, f0
-    bl fn_801F7DF0
+    bl save_backup_formatEntry
     lfs f5, lbl_80885EB0
     addi r4, r28, 0x13ba
     lfs f4, 0x20(r1)
@@ -580,7 +580,7 @@ lbl_fn_803DE89C_000006DC:
     fmuls f2, f5, f3
     lwz r3, 0x10b4(r31)
     fmuls f3, f5, f0
-    bl fn_801F7DF0
+    bl save_backup_formatEntry
     lfs f5, lbl_80885EB0
     addi r4, r28, 0x13c6
     lfs f4, 0x20(r1)
@@ -590,7 +590,7 @@ lbl_fn_803DE89C_000006DC:
     fmuls f2, f5, f3
     lwz r3, 0x10b4(r31)
     fmuls f3, f5, f0
-    bl fn_801F7DF0
+    bl save_backup_formatEntry
     lfs f5, lbl_80885EB0
     addi r4, r28, 0x13d2
     lfs f4, 0x20(r1)
@@ -600,7 +600,7 @@ lbl_fn_803DE89C_000006DC:
     fmuls f2, f5, f3
     lwz r3, 0x10b4(r31)
     fmuls f3, f5, f0
-    bl fn_801F7DF0
+    bl save_backup_formatEntry
     lwz r3, 0x10b4(r31)
     mr r5, r30
     addi r4, r28, 0x13de

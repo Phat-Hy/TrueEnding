@@ -21,7 +21,7 @@ extern void boss_decodePhaseBitfield(void);
 extern void fn_8006BA30(void);
 extern void fn_8006BA8C(void);
 extern void boss_triggerEventAction(void);
-extern void fn_8006F420(void);
+extern void script_executeCommand(void);
 extern void str_assignBuffer(void);
 extern void mem_realloc(void);
 extern void env_updateAtmosphere(void);
@@ -391,7 +391,7 @@ asm void fn_802088A4(void)
     mr r3, r0
     mr r4, r28
     mr r5, r29
-    bl fn_8006F420
+    bl script_executeCommand
     b lbl_fn_802088A4_000003F0
 lbl_fn_802088A4_00000338:
     li r0, 0x0
@@ -509,7 +509,7 @@ asm void fn_80208A3C(void)
     mr r4, r30
     mr r5, r27
     li r6, 0x100
-    bl fn_8006F420
+    bl script_executeCommand
     b lbl_fn_80208A3C_0000057C
 lbl_fn_80208A3C_000004CC:
     li r0, 0x0

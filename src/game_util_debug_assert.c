@@ -16,7 +16,7 @@ extern void save_formatSlotTitle(void);
 extern void saveSlot_readSummary(void);
 extern void save_computeCrc32(void);
 extern void save_calculateBlockCrc(void);
-extern void fn_801F7DF0(void);
+extern void save_backup_formatEntry(void);
 extern void save_findEntryByName(void);
 extern void thread_findAndNotify(void);
 extern void thread_dispatchToQueue(void);
@@ -1500,7 +1500,7 @@ lbl_fn_8059726C_000014B8:
     addi r4, r30, 0x2e6
     fmr f2, f1
     fmr f3, f1
-    bl fn_801F7DF0
+    bl save_backup_formatEntry
     addis r3, r28, 0x2
     lfs f1, lbl_80888168
     lwz r3, 0x5b7c(r3)
@@ -1524,7 +1524,7 @@ lbl_fn_8059726C_00001520:
     addi r4, r30, 0x2e6
     fmr f2, f1
     fmr f3, f1
-    bl fn_801F7DF0
+    bl save_backup_formatEntry
     addis r3, r28, 0x2
     lfs f1, lbl_80888170
     lwz r3, 0x5b7c(r3)
@@ -2001,7 +2001,7 @@ lbl_fn_80597558_00001C0C:
     addi r14, r4, lbl_80761D5C@l
     fmr f3, f1
     addi r4, r14, 0x2e6
-    bl fn_801F7DF0
+    bl save_backup_formatEntry
     cmpwi r19, 0x0
     beq lbl_fn_80597558_00001CEC
     li r3, 0x143
@@ -2030,7 +2030,7 @@ lbl_fn_80597558_00001C0C:
     addi r4, r14, 0x2e6
     fmr f2, f1
     fmr f3, f1
-    bl fn_801F7DF0
+    bl save_backup_formatEntry
     b lbl_fn_80597558_00001DCC
 lbl_fn_80597558_00001CCC:
     lfs f1, lbl_8088816C
@@ -2039,7 +2039,7 @@ lbl_fn_80597558_00001CCC:
     addi r4, r14, 0x2e6
     fmr f2, f1
     fmr f3, f1
-    bl fn_801F7DF0
+    bl save_backup_formatEntry
     b lbl_fn_80597558_00001DCC
 lbl_fn_80597558_00001CEC:
     mr r19, r17
@@ -2079,7 +2079,7 @@ lbl_fn_80597558_00001CF8:
     addi r4, r14, 0x2e6
     fmr f2, f1
     fmr f3, f1
-    bl fn_801F7DF0
+    bl save_backup_formatEntry
     b lbl_fn_80597558_00001DA0
 lbl_fn_80597558_00001D84:
     lfs f1, lbl_8088816C
@@ -2088,7 +2088,7 @@ lbl_fn_80597558_00001D84:
     addi r4, r14, 0x2e6
     fmr f2, f1
     fmr f3, f1
-    bl fn_801F7DF0
+    bl save_backup_formatEntry
 lbl_fn_80597558_00001DA0:
     addi r24, r24, 0x1
     addi r22, r22, 0x4

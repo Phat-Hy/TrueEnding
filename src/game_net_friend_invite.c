@@ -18,7 +18,7 @@ extern void dungeon_initGlobalContext(void);
 extern void town_updateInteractionPoints(void);
 extern void mem_getAllocSize(void);
 extern void node_destroy(void);
-extern void fn_80089ACC(void);
+extern void area_getAreaId(void);
 extern void msg_getMessageById(void);
 extern void fn_800C310C(void);
 extern void skin_playAnimationByName(void);
@@ -4113,7 +4113,7 @@ lbl_fn_804D25D4_00003530:
     addi r21, r21, 0x1
 lbl_fn_804D25D4_00003534:
     mr r3, r20
-    bl fn_80089ACC
+    bl area_getAreaId
     cmplw r21, r3
     blt lbl_fn_804D25D4_000034D4
 lbl_fn_804D25D4_00003544:

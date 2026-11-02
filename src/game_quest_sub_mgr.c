@@ -15,7 +15,7 @@ extern void battle_assignFieldProperty(void);
 extern void fn_8047CB74(void);
 extern void fn_8049003C(void);
 extern void fn_80490098(void);
-extern void fn_80491528(void);
+extern void coliseum_spawnEnemyGroup(void);
 extern void fn_80541214(void);
 extern void PSVECNormalize(void);
 
@@ -2299,7 +2299,7 @@ lbl_fn_80482ED8_00002038:
     lwz r3, lbl_8087F558
     addi r4, r1, 0x8
     addi r5, r31, 0x1ab0
-    bl fn_80491528
+    bl coliseum_spawnEnemyGroup
     addic. r3, r1, 0x8
     beq lbl_fn_80482ED8_00002084
     lwz r4, 0x8(r1)

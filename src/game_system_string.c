@@ -15,7 +15,7 @@ extern void talk_parseDialogue(void);
 extern void talk_parseDialogueTokens(void);
 extern void talk_copyUtf16String(void);
 extern void boss_triggerEventAction(void);
-extern void fn_8006F420(void);
+extern void script_executeCommand(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void str_parseInt(void);
@@ -1463,7 +1463,7 @@ lbl_fn_8020B2BC_000012B0:
     mr r5, r25
     addi r4, r1, 0x28
     li r6, 0x8
-    bl fn_8006F420
+    bl script_executeCommand
     addi r28, r29, lbl_8073F210@l
     li r25, -0x1
     li r26, 0x0
@@ -1715,7 +1715,7 @@ lbl_fn_8020B2BC_00001660:
     mr r5, r25
     addi r4, r1, 0x18
     li r6, 0x8
-    bl fn_8006F420
+    bl script_executeCommand
     addi r28, r31, lbl_8073F410@l
     li r25, -0x1
     li r26, 0x0

@@ -27,7 +27,7 @@ extern void msg_lookupFormattedEntry(void);
 extern void skeleton_getGlobalManager(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB480(void);
+extern void morph_releaseRef(void);
 extern void fn_800CB538(void);
 extern void fn_800CF45C(void);
 extern void atn_Task_unlink(void);
@@ -2364,9 +2364,9 @@ lbl_spectateCamera_update_00002108:
     cmpwi r3, 0x0
     bne lbl_spectateCamera_update_00002308
     addi r3, r28, 0x270
-    bl fn_800CB480
+    bl morph_releaseRef
     addi r3, r28, 0x284
-    bl fn_800CB480
+    bl morph_releaseRef
     mr r3, r28
     bl atn_Task_unlink
     lwz r0, 0x2b4(r28)

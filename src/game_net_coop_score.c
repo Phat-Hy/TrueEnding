@@ -30,7 +30,7 @@ extern void fn_80076FF8(void);
 extern void fn_8007FAF0(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_80089ACC(void);
+extern void area_getAreaId(void);
 extern void sys_getMainManager(void);
 extern void fn_80093D98(void);
 extern void fn_80093E30(void);
@@ -692,7 +692,7 @@ lbl_fn_804ABF84_000006F8:
 lbl_fn_804ABF84_00000758:
     addi r3, r26, 0x208
     bl fn_804AC3C8
-    bl fn_80089ACC
+    bl area_getAreaId
     cmplw r31, r3
     blt lbl_fn_804ABF84_000006F8
     lis r31, lbl_8075765C@ha
@@ -746,7 +746,7 @@ lbl_fn_804ABF84_000007FC:
 lbl_fn_804ABF84_00000828:
     addi r3, r26, 0x208
     bl fn_804AC3C8
-    bl fn_80089ACC
+    bl area_getAreaId
     cmplw r28, r3
     blt lbl_fn_804ABF84_000007FC
     lis r31, lbl_8075765C@ha
@@ -804,7 +804,7 @@ lbl_fn_804ABF84_00000898:
 lbl_fn_804ABF84_00000908:
     addi r3, r26, 0x208
     bl fn_804AC3C8
-    bl fn_80089ACC
+    bl area_getAreaId
     cmplw r28, r3
     blt lbl_fn_804ABF84_00000898
     bl fn_803D71C4

@@ -10,7 +10,7 @@ extern void talk_setSpeakerName(void);
 extern void talk_parseDialogue(void);
 extern void talk_parseDialogueTokens(void);
 extern void talk_copyUtf16String(void);
-extern void fn_8006F420(void);
+extern void script_executeCommand(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void str_parseInt(void);
@@ -862,7 +862,7 @@ lbl_fn_80216CD0_00000974:
     mr r3, r27
     addi r4, r1, 0x38
     li r6, 0x20
-    bl fn_8006F420
+    bl script_executeCommand
     addi r3, r1, 0x38
     addi r4, r29, 0xc
     bl strcmp
@@ -889,7 +889,7 @@ lbl_fn_80216CD0_00000974:
     mr r3, r27
     addi r4, r1, 0x38
     li r6, 0x20
-    bl fn_8006F420
+    bl script_executeCommand
     addi r3, r1, 0x38
     bl strlen
     add r3, r3, r30
@@ -901,7 +901,7 @@ lbl_fn_80216CD0_00000974:
     mr r3, r27
     addi r4, r1, 0x38
     li r6, 0x20
-    bl fn_8006F420
+    bl script_executeCommand
     addi r3, r1, 0x38
     bl strlen
     add r4, r3, r30
@@ -915,7 +915,7 @@ lbl_fn_80216CD0_00000974:
     mr r3, r27
     addi r4, r1, 0x38
     li r6, 0x20
-    bl fn_8006F420
+    bl script_executeCommand
     addi r3, r1, 0x38
     bl strlen
     add r3, r3, r30
@@ -927,7 +927,7 @@ lbl_fn_80216CD0_00000974:
     mr r3, r27
     addi r4, r1, 0x38
     li r6, 0x20
-    bl fn_8006F420
+    bl script_executeCommand
     addi r3, r1, 0x38
     bl strlen
     add r3, r3, r30
@@ -939,7 +939,7 @@ lbl_fn_80216CD0_00000974:
     mr r3, r27
     addi r4, r1, 0x38
     li r6, 0x40
-    bl fn_8006F420
+    bl script_executeCommand
     addi r3, r1, 0x38
     bl strlen
     lwz r4, lbl_8087F274
@@ -1013,7 +1013,7 @@ lbl_fn_80216CD0_00000BBC:
     mr r3, r27
     addi r4, r1, 0x38
     li r6, 0x20
-    bl fn_8006F420
+    bl script_executeCommand
     addi r3, r1, 0x38
     addi r4, r29, 0xc
     bl strcmp

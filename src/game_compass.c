@@ -5,7 +5,7 @@
 extern void DCZeroRange(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_80089ACC(void);
+extern void area_getAreaId(void);
 extern void sys_getMainManager(void);
 extern void atn_Matrix_copy(void);
 extern void atn_Matrix_concat(void);
@@ -471,7 +471,7 @@ asm void atn_Model_updateMatrices(void)
     addi r30, r26, 0x1c4
 lbl_atn_Model_updateMatrices_00000630:
     addi r3, r31, 0x30
-    bl fn_80089ACC
+    bl area_getAreaId
     mulli r5, r3, 0x30
     lwz r3, 0x8(r30)
     li r4, 0x1800
@@ -534,7 +534,7 @@ lbl_atn_Model_updateMatrices_00000710:
     b lbl_atn_Model_updateMatrices_00000798
 lbl_atn_Model_updateMatrices_00000720:
     addi r3, r31, 0x30
-    bl fn_80089ACC
+    bl area_getAreaId
     mr r6, r3
     mr r4, r24
     mr r5, r28
@@ -641,7 +641,7 @@ lbl_atn_Model_updateMatrices_0000089C:
     b lbl_atn_Model_updateMatrices_00000924
 lbl_atn_Model_updateMatrices_000008AC:
     addi r3, r31, 0x30
-    bl fn_80089ACC
+    bl area_getAreaId
     mr r6, r3
     mr r4, r24
     mr r5, r28

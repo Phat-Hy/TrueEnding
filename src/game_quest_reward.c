@@ -10,7 +10,7 @@ extern void fn_8000DD04(void);
 extern void vec3_toEulerAngles(void);
 extern void mtx_multVec(void);
 extern void math_wrapAngle(void);
-extern void fn_80013404(void);
+extern void math_absf(void);
 extern void vec3_initValues(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
@@ -1586,7 +1586,7 @@ lbl_fn_80148CC4_0000149C:
     fsubs f1, f1, f0
     bl math_wrapAngle
     fmr f31, f1
-    bl fn_80013404
+    bl math_absf
     lfs f2, lbl_80881ABC
     fcmpo cr0, f1, f2
     ble lbl_fn_80148CC4_00001510
@@ -1658,7 +1658,7 @@ lbl_fn_80148CC4_000015A8:
     fsubs f1, f1, f0
     bl math_wrapAngle
     fmr f31, f1
-    bl fn_80013404
+    bl math_absf
     lfs f2, lbl_80881ABC
     fcmpo cr0, f1, f2
     ble lbl_fn_80148CC4_00001BE8

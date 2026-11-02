@@ -7,7 +7,7 @@ extern void __div2i(void);
 extern void __div2u(void);
 extern void __mod2u(void);
 extern void dtor_80084684(void);
-extern void fn_8006F420(void);
+extern void script_executeCommand(void);
 extern void str_assignBuffer(void);
 extern void dungeon_initGlobalContext(void);
 extern void town_synchronizedDispatch(void);
@@ -1256,7 +1256,7 @@ lbl_fn_8050E998_00000EF4:
     lwz r5, 0x18(r1)
 lbl_fn_8050E998_00000EF8:
     li r6, 0x200
-    bl fn_8006F420
+    bl script_executeCommand
     mr r3, r24
     mr r4, r26
     bl fn_806D05A0
@@ -1391,7 +1391,7 @@ lbl_fn_8050EBCC_00001098:
     lwz r5, 0x20(r1)
 lbl_fn_8050EBCC_0000109C:
     li r6, 0x200
-    bl fn_8006F420
+    bl script_executeCommand
     lwz r0, 0x18(r1)
     srwi. r0, r0, 31
     beq lbl_fn_8050EBCC_000010B8
@@ -1774,7 +1774,7 @@ lbl_fn_8050EFD0_000015D8:
     lwz r5, 0x20(r1)
 lbl_fn_8050EFD0_000015DC:
     slwi r6, r0, 1
-    bl fn_8006F420
+    bl script_executeCommand
     addi r3, r1, 0x28
     li r4, 0x0
     bl fn_806AC0A0
@@ -1872,7 +1872,7 @@ lbl_fn_8050F19C_00001730:
     lwz r5, 0x20(r1)
 lbl_fn_8050F19C_00001734:
     slwi r6, r0, 1
-    bl fn_8006F420
+    bl script_executeCommand
     addi r3, r1, 0x28
     li r4, 0x0
     bl fn_806AC0A0

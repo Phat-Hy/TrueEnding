@@ -12,7 +12,7 @@ extern void vec3_mag(void);
 extern void fn_8000D844(void);
 extern void fn_8000DB1C(void);
 extern void fn_8001011C(void);
-extern void fn_80010374(void);
+extern void actor_dispatchByType(void);
 extern void vec3_assign(void);
 extern void fn_80010490(void);
 extern void fn_80010B68(void);
@@ -196,7 +196,7 @@ asm void fn_80551198(void)
     mr r31, r3
     addi r3, r1, 0x260
     mr r4, r31
-    bl fn_80010374
+    bl actor_dispatchByType
     mr r3, r30
     li r26, 0x0
     li r27, 0x0
@@ -243,10 +243,10 @@ asm void fn_80551198(void)
 lbl_fn_80551198_000001BC:
     mr r4, r29
     addi r3, r1, 0x248
-    bl fn_80010374
+    bl actor_dispatchByType
     mr r4, r31
     addi r3, r1, 0x23c
-    bl fn_80010374
+    bl actor_dispatchByType
     mr r3, r29
     li r24, 0x0
     bl fn_8001296C
@@ -685,7 +685,7 @@ lbl_fn_80551198_0000081C:
     mr r24, r3
     addi r3, r1, 0x1a0
     mr r4, r24
-    bl fn_80010374
+    bl actor_dispatchByType
     mr r4, r30
     addi r3, r1, 0x194
     li r5, 0x3
@@ -924,7 +924,7 @@ lbl_fn_80551198_00000BCC:
     beq lbl_fn_80551198_00000BF8
     mr r4, r31
     addi r3, r1, 0x8
-    bl fn_80010374
+    bl actor_dispatchByType
     addi r3, r1, 0x260
     addi r4, r1, 0x8
     bl fn_805523E0

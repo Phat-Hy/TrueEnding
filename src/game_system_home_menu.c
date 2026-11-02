@@ -34,12 +34,12 @@ extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void node_createNamedChild(void);
 extern void node_destroy(void);
-extern void fn_80089ACC(void);
+extern void area_getAreaId(void);
 extern void motion_updateFogAdj(void);
 extern void fn_800C31EC(void);
 extern void morph_reset(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB480(void);
+extern void morph_releaseRef(void);
 extern void fn_800CB538(void);
 extern void morph_hasActiveWeight(void);
 extern void fn_800CB5B4(void);
@@ -687,7 +687,7 @@ asm void fn_8035E550(void)
     cmpwi r3, 0x0
     bne lbl_fn_8035E550_00000784
     addi r3, r31, 0x194
-    bl fn_800CB480
+    bl morph_releaseRef
     bl fn_800C31EC
     li r0, 0x0
     stw r0, 0x19c(r31)
@@ -957,7 +957,7 @@ lbl_fn_8035E858_00000AB4:
     bl fn_8004B1EC
     lwz r3, 0xb4(r31)
     addi r3, r3, 0x8
-    bl fn_800CB480
+    bl morph_releaseRef
     lwz r28, 0x130(r31)
     li r0, 0x1
     lfs f1, lbl_80885670
@@ -1019,7 +1019,7 @@ lbl_fn_8035E858_00000BC4:
     bl fn_8004B1EC
     lwz r3, 0xb8(r31)
     addi r3, r3, 0x8
-    bl fn_800CB480
+    bl morph_releaseRef
 lbl_fn_8035E858_00000BF4:
     li r0, 0x0
     stw r0, 0x180(r31)
@@ -1492,7 +1492,7 @@ lbl_fn_8035ECCC_00001294:
 lbl_fn_8035ECCC_000012B8:
     lwz r3, 0xb4(r31)
     addi r3, r3, 0x8
-    bl fn_800CB480
+    bl morph_releaseRef
     lwz r0, 0x160(r31)
     cmpwi r0, 0x0
     ble lbl_fn_8035ECCC_00001324
@@ -1637,7 +1637,7 @@ lbl_fn_8035ECCC_000014BC:
     bne lbl_fn_8035ECCC_00001514
     lwz r3, 0xb8(r31)
     addi r3, r3, 0x8
-    bl fn_800CB480
+    bl morph_releaseRef
     li r0, 0x6
     stw r0, 0x180(r31)
     b lbl_fn_8035ECCC_00001514
@@ -2260,7 +2260,7 @@ lbl_fn_8035F3D4_00001DC0:
     addi r25, r25, 0x1
 lbl_fn_8035F3D4_00001DC4:
     addi r3, r28, 0x64
-    bl fn_80089ACC
+    bl area_getAreaId
     cmplw r25, r3
     blt lbl_fn_8035F3D4_00001D68
     lmw r25, 0x664(r1)

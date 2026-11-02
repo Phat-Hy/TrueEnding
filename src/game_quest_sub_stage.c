@@ -27,7 +27,7 @@ extern void fn_80482B24(void);
 extern void fn_80482B54(void);
 extern void fn_80482D90(void);
 extern void fn_80482EB4(void);
-extern void fn_80491528(void);
+extern void coliseum_spawnEnemyGroup(void);
 extern void fn_804918A4(void);
 extern void printf(void);
 extern void abort(void);
@@ -551,7 +551,7 @@ lbl_fn_80483714_000006F8:
     lwz r3, lbl_8087F558
     addi r4, r1, 0x18
     addi r5, r1, 0x8
-    bl fn_80491528
+    bl coliseum_spawnEnemyGroup
     addic. r3, r1, 0x18
     beq lbl_fn_80483714_00000744
     lwz r4, 0x18(r1)
@@ -1207,7 +1207,7 @@ lbl_fn_80484088_00001028:
     lwz r3, lbl_8087F558
     addi r4, r1, 0x6c
     addi r5, r1, 0x80
-    bl fn_80491528
+    bl coliseum_spawnEnemyGroup
     addic. r3, r1, 0x6c
     beq lbl_fn_80484088_00001074
     lwz r4, 0x6c(r1)
@@ -1346,7 +1346,7 @@ lbl_fn_804846FC_0000121C:
     lwz r3, lbl_8087F558
     mr r5, r31
     addi r4, r1, 0x18
-    bl fn_80491528
+    bl coliseum_spawnEnemyGroup
     addic. r3, r1, 0x18
     beq lbl_fn_804846FC_00001268
     lwz r4, 0x18(r1)
@@ -1579,7 +1579,7 @@ lbl_fn_80484A78_00001554:
     lwz r3, lbl_8087F558
     addi r4, r1, 0x18
     addi r5, r1, 0x8
-    bl fn_80491528
+    bl coliseum_spawnEnemyGroup
     addic. r3, r1, 0x18
     beq lbl_fn_80484A78_000015A0
     lwz r4, 0x18(r1)
@@ -1676,7 +1676,7 @@ lbl_fn_80484BF4_0000169C:
     lwz r3, lbl_8087F558
     addi r4, r1, 0x8
     addi r5, r31, 0x1eb8
-    bl fn_80491528
+    bl coliseum_spawnEnemyGroup
     addic. r3, r1, 0x8
     beq lbl_fn_80484BF4_000016E8
     lwz r4, 0x8(r1)
@@ -1869,7 +1869,7 @@ lbl_fn_80484E88_0000191C:
     lwz r3, lbl_8087F558
     addi r4, r1, 0x8
     li r5, 0x0
-    bl fn_80491528
+    bl coliseum_spawnEnemyGroup
     addic. r3, r1, 0x8
     beq lbl_fn_80484E88_00001968
     lwz r4, 0x8(r1)

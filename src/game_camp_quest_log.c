@@ -19,7 +19,7 @@ extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void dungeon_initGlobalContext(void);
 extern void mem_alloc(void);
-extern void fn_80089ACC(void);
+extern void area_getAreaId(void);
 extern void area_updateZoneState(void);
 extern void lockon_updateTarget(void);
 extern void str_skipWhitespace(void);
@@ -537,7 +537,7 @@ lbl_fn_803C3894_0000057C:
     addi r21, r21, 0x1
 lbl_fn_803C3894_00000580:
     addi r3, r28, 0xd4
-    bl fn_80089ACC
+    bl area_getAreaId
     cmplw r21, r3
     blt lbl_fn_803C3894_00000458
     b lbl_fn_803C3894_000006F8
@@ -563,7 +563,7 @@ lbl_fn_803C3894_00000594:
     b lbl_fn_803C3894_000006E8
 lbl_fn_803C3894_000005E0:
     addi r3, r28, 0xdc
-    bl fn_80089ACC
+    bl area_getAreaId
     mr r18, r3
     addi r3, r1, 0x2b0
     bl talk_parseQuotedString
@@ -634,7 +634,7 @@ lbl_fn_803C3894_000006E4:
     addi r18, r18, 0x1
 lbl_fn_803C3894_000006E8:
     addi r3, r28, 0xdc
-    bl fn_80089ACC
+    bl area_getAreaId
     cmplw r18, r3
     blt lbl_fn_803C3894_00000614
 lbl_fn_803C3894_000006F8:
@@ -670,7 +670,7 @@ lbl_fn_803C3894_0000070C:
     b lbl_fn_803C3894_0000079C
 lbl_fn_803C3894_0000076C:
     addi r3, r28, 0x78
-    bl fn_80089ACC
+    bl area_getAreaId
     mr r18, r3
     addi r3, r1, 0xe0
     bl str_getData
@@ -1124,7 +1124,7 @@ lbl_fn_803C3894_00000DF4:
     b lbl_fn_803C3894_00000E70
 lbl_fn_803C3894_00000E40:
     addi r3, r28, 0xfc
-    bl fn_80089ACC
+    bl area_getAreaId
     mr r21, r3
     addi r3, r1, 0x2b0
     bl talk_parseQuotedString
@@ -1243,7 +1243,7 @@ lbl_fn_803C3894_00000FBC:
     b lbl_fn_803C3894_00001038
 lbl_fn_803C3894_00001008:
     addi r3, r28, 0xe4
-    bl fn_80089ACC
+    bl area_getAreaId
     mr r31, r3
     addi r3, r1, 0x2b0
     bl talk_parseQuotedString
@@ -1457,7 +1457,7 @@ lbl_fn_803C3894_000012EC:
     b lbl_fn_803C3894_00001368
 lbl_fn_803C3894_00001338:
     addi r3, r28, 0xec
-    bl fn_80089ACC
+    bl area_getAreaId
     mr r30, r3
     addi r3, r1, 0x2b0
     bl talk_parseQuotedString
@@ -1827,7 +1827,7 @@ lbl_fn_803C3894_00001858:
     b lbl_fn_803C3894_000018E8
 lbl_fn_803C3894_000018B8:
     addi r3, r28, 0x104
-    bl fn_80089ACC
+    bl area_getAreaId
     mr r20, r3
     addi r3, r1, 0xe0
     bl str_getData
@@ -1985,7 +1985,7 @@ lbl_fn_803C3894_00001AB4:
     b lbl_fn_803C3894_00001B44
 lbl_fn_803C3894_00001B14:
     addi r3, r28, 0x10c
-    bl fn_80089ACC
+    bl area_getAreaId
     mr r20, r3
     addi r3, r1, 0xe0
     bl str_getData
@@ -2159,7 +2159,7 @@ lbl_fn_803C3894_00001D58:
     b lbl_fn_803C3894_00001DE8
 lbl_fn_803C3894_00001DB8:
     addi r3, r28, 0x114
-    bl fn_80089ACC
+    bl area_getAreaId
     mr r20, r3
     addi r3, r1, 0xe0
     bl str_getData
@@ -2361,7 +2361,7 @@ lbl_fn_803C3894_0000208C:
     b lbl_fn_803C3894_000020F0
 lbl_fn_803C3894_000020B8:
     addi r3, r28, 0xa0
-    bl fn_80089ACC
+    bl area_getAreaId
     mr r20, r3
     mr r4, r17
     addi r3, r1, 0x94
@@ -2376,7 +2376,7 @@ lbl_fn_803C3894_000020B8:
     addi r17, r17, 0x1
 lbl_fn_803C3894_000020F0:
     addi r3, r28, 0xa0
-    bl fn_80089ACC
+    bl area_getAreaId
     cmplw r17, r3
     blt lbl_fn_803C3894_000020B8
     bl dungeon_initGlobalContext
@@ -2696,13 +2696,13 @@ lbl_fn_803C3894_00002590:
     addi r21, r21, 0x1
 lbl_fn_803C3894_00002594:
     addi r3, r28, 0xac
-    bl fn_80089ACC
+    bl area_getAreaId
     cmplw r21, r3
     blt lbl_fn_803C3894_000024D4
     addi r20, r20, 0x1
 lbl_fn_803C3894_000025A8:
     addi r3, r28, 0xac
-    bl fn_80089ACC
+    bl area_getAreaId
     cmplw r20, r3
     blt lbl_fn_803C3894_000024CC
     addi r3, r1, 0x58
@@ -2846,7 +2846,7 @@ lbl_fn_803C3894_00002774:
     b lbl_fn_803C3894_000027E4
 lbl_fn_803C3894_000027C4:
     addi r3, r28, 0x180
-    bl fn_80089ACC
+    bl area_getAreaId
     mr r18, r3
     addi r3, r28, 0x180
     add r4, r18, r17
@@ -2872,7 +2872,7 @@ lbl_fn_803C3894_000027F8:
     addi r18, r18, 0x1
 lbl_fn_803C3894_00002820:
     addi r3, r28, 0x180
-    bl fn_80089ACC
+    bl area_getAreaId
     cmpw r18, r3
     blt lbl_fn_803C3894_000027F8
 lbl_fn_803C3894_00002830:
@@ -2911,7 +2911,7 @@ lbl_fn_803C3894_000028A4:
     addi r31, r31, 0x1
 lbl_fn_803C3894_000028A8:
     addi r3, r28, 0xe4
-    bl fn_80089ACC
+    bl area_getAreaId
     cmplw r31, r3
     blt lbl_fn_803C3894_00002848
     li r20, -0x1
@@ -2945,7 +2945,7 @@ lbl_fn_803C3894_0000291C:
     addi r30, r30, 0x1
 lbl_fn_803C3894_00002920:
     addi r3, r28, 0xec
-    bl fn_80089ACC
+    bl area_getAreaId
     cmplw r30, r3
     blt lbl_fn_803C3894_000028C0
     addi r3, r1, 0xe0

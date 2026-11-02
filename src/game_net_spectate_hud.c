@@ -9,7 +9,7 @@ extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void entry_callCtors(void);
-extern void fn_80010374(void);
+extern void actor_dispatchByType(void);
 extern void fn_80011964(void);
 extern void fn_80012A1C(void);
 extern void mem_free(void);
@@ -303,7 +303,7 @@ lbl_fn_805382C0_000002A4:
     bl PSMTXMultVec
     mr r4, r30
     addi r3, r1, 0x8
-    bl fn_80010374
+    bl actor_dispatchByType
     lfs f3, 0x14(r1)
     addi r3, r1, 0x14
     lfs f0, 0x8(r1)
@@ -650,7 +650,7 @@ lbl_fn_805384D0_0000077C:
     bl PSMTXMultVec
     mr r4, r28
     addi r3, r1, 0x50
-    bl fn_80010374
+    bl actor_dispatchByType
     lfs f3, 0x80(r1)
     lfs f0, 0x50(r1)
     lfs f5, 0x84(r1)

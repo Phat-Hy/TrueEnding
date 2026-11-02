@@ -40,7 +40,7 @@ extern void fn_800CB1F4(void);
 extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB404(void);
-extern void fn_800CB480(void);
+extern void morph_releaseRef(void);
 extern void fn_800CB4EC(void);
 extern void fn_800CB504(void);
 extern void fn_800CB518(void);
@@ -5948,7 +5948,7 @@ asm void fn_8004ADF4(void)
     bl fn_80709AD0
 lbl_fn_8004ADF4_00004C48:
     addi r3, r30, 0x8
-    bl fn_800CB480
+    bl morph_releaseRef
     addi r3, r30, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -5980,7 +5980,7 @@ asm void fn_8004AE84(void)
     stw r28, 0x10(r1)
     mr r28, r3
     addi r3, r3, 0x8
-    bl fn_800CB480
+    bl morph_releaseRef
     lwz r3, lbl_8087EE90
     lwz r0, 0x4(r3)
     cmpwi r0, 0x0
@@ -6063,7 +6063,7 @@ asm void fn_8004AFAC(void)
     mr r29, r5
     mr r30, r6
     addi r3, r3, 0x8
-    bl fn_800CB480
+    bl morph_releaseRef
     lwz r3, lbl_8087EE90
     lwz r0, 0x4(r3)
     cmpwi r0, 0x0

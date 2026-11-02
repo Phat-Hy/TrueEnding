@@ -26,7 +26,7 @@ extern void magic_castSpellCircle(void);
 extern void sys_getMainManager(void);
 extern void msg_formatWindowLayout(void);
 extern void skeleton_getGlobalManager(void);
-extern void fn_800CB480(void);
+extern void morph_releaseRef(void);
 extern void fn_800CB640(void);
 extern void fn_800CB6F8(void);
 extern void fn_800D089C(void);
@@ -80,7 +80,7 @@ extern void fn_80483644(void);
 extern void fn_80483E80(void);
 extern void fn_80484E6C(void);
 extern void fn_80489280(void);
-extern void fn_80491528(void);
+extern void coliseum_spawnEnemyGroup(void);
 extern void fn_805381BC(void);
 extern void spectate_getRootNode(void);
 extern void fn_80541214(void);
@@ -182,7 +182,7 @@ asm void fn_80487490(void)
     bl fn_804814E8
     addi r4, r1, 0xc4
     addi r5, r1, 0xa0
-    bl fn_80491528
+    bl coliseum_spawnEnemyGroup
     addi r3, r1, 0xc4
     li r4, -0x1
     bl fn_8041D23C
@@ -208,7 +208,7 @@ lbl_fn_80487490_000000A8:
     bl fn_804814E8
     addi r4, r1, 0xb0
     addi r5, r1, 0x90
-    bl fn_80491528
+    bl coliseum_spawnEnemyGroup
     addi r3, r1, 0xb0
     li r4, -0x1
     bl fn_8041D23C
@@ -1722,7 +1722,7 @@ lbl_fn_8048871C_0000153C:
     addi r3, r26, 0x1f20
     bl fn_8004B1EC
     addi r3, r26, 0x1f28
-    bl fn_800CB480
+    bl morph_releaseRef
 lbl_fn_8048871C_0000155C:
     mr r3, r23
     li r4, 0x4
@@ -1995,7 +1995,7 @@ asm void fn_80488D80(void)
     addi r3, r3, 0x1f20
     bl fn_8004B1EC
     addi r3, r31, 0x1f28
-    bl fn_800CB480
+    bl morph_releaseRef
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0

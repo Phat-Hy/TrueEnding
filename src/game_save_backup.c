@@ -47,7 +47,7 @@ extern u32 lbl_80882C98;
 void save_writeBackupSlot(void);
 void fn_801F791C(void);
 void fn_801F7A18(void);
-void fn_801F7DF0(void);
+void save_backup_formatEntry(void);
 void fn_801F80A8(void);
 void save_findEntryByName(void);
 void save_formatSlotString(void);
@@ -657,7 +657,7 @@ lbl_fn_801F7A18_00000844:
     blr
 }
 
-asm void fn_801F7DF0(void)
+asm void save_backup_formatEntry(void)
 {
     nofralloc
     stwu r1, -0x50(r1)
@@ -690,45 +690,45 @@ asm void fn_801F7DF0(void)
     stfs f29, 0x28(r1)
     mtctr r8
     cmplwi r8, 0x0
-    ble lbl_fn_801F7DF0_00000928
-lbl_fn_801F7DF0_000008DC:
+    ble lbl_save_backup_formatEntry_00000928
+lbl_save_backup_formatEntry_000008DC:
     lbz r0, 0x5c(r7)
     extsb r0, r0
     cmpw r5, r0
-    bne lbl_fn_801F7DF0_0000091C
+    bne lbl_save_backup_formatEntry_0000091C
     lbz r0, 0x5d(r7)
     extsb r0, r0
     cmpw r4, r0
-    bne lbl_fn_801F7DF0_0000091C
+    bne lbl_save_backup_formatEntry_0000091C
     lwz r0, 0x60(r7)
     cmplw r3, r0
-    bne lbl_fn_801F7DF0_0000091C
+    bne lbl_save_backup_formatEntry_0000091C
     mulli r0, r6, 0xc
     lwz r4, 0x28(r1)
     add r3, r30, r0
     stw r4, 0x64(r3)
-    b lbl_fn_801F7DF0_00000960
-lbl_fn_801F7DF0_0000091C:
+    b lbl_save_backup_formatEntry_00000960
+lbl_save_backup_formatEntry_0000091C:
     addi r7, r7, 0xc
     addi r6, r6, 0x1
-    bdnz lbl_fn_801F7DF0_000008DC
-lbl_fn_801F7DF0_00000928:
+    bdnz lbl_save_backup_formatEntry_000008DC
+lbl_save_backup_formatEntry_00000928:
     lwz r0, 0x58(r30)
     mulli r0, r0, 0xc
     add r0, r30, r0
     addic. r3, r0, 0x5c
-    beq lbl_fn_801F7DF0_00000954
+    beq lbl_save_backup_formatEntry_00000954
     lwz r0, 0x20(r1)
     stw r0, 0x0(r3)
     lwz r0, 0x24(r1)
     stw r0, 0x4(r3)
     lwz r0, 0x28(r1)
     stw r0, 0x8(r3)
-lbl_fn_801F7DF0_00000954:
+lbl_save_backup_formatEntry_00000954:
     lwz r3, 0x58(r30)
     addi r0, r3, 0x1
     stw r0, 0x58(r30)
-lbl_fn_801F7DF0_00000960:
+lbl_save_backup_formatEntry_00000960:
     li r3, 0x3
     li r0, 0x2
     stb r3, 0x14(r1)
@@ -746,45 +746,45 @@ lbl_fn_801F7DF0_00000960:
     stfs f30, 0x1c(r1)
     mtctr r8
     cmplwi r8, 0x0
-    ble lbl_fn_801F7DF0_000009F4
-lbl_fn_801F7DF0_000009A8:
+    ble lbl_save_backup_formatEntry_000009F4
+lbl_save_backup_formatEntry_000009A8:
     lbz r0, 0x5c(r7)
     extsb r0, r0
     cmpw r5, r0
-    bne lbl_fn_801F7DF0_000009E8
+    bne lbl_save_backup_formatEntry_000009E8
     lbz r0, 0x5d(r7)
     extsb r0, r0
     cmpw r4, r0
-    bne lbl_fn_801F7DF0_000009E8
+    bne lbl_save_backup_formatEntry_000009E8
     lwz r0, 0x60(r7)
     cmplw r3, r0
-    bne lbl_fn_801F7DF0_000009E8
+    bne lbl_save_backup_formatEntry_000009E8
     mulli r0, r6, 0xc
     lwz r4, 0x1c(r1)
     add r3, r30, r0
     stw r4, 0x64(r3)
-    b lbl_fn_801F7DF0_00000A2C
-lbl_fn_801F7DF0_000009E8:
+    b lbl_save_backup_formatEntry_00000A2C
+lbl_save_backup_formatEntry_000009E8:
     addi r7, r7, 0xc
     addi r6, r6, 0x1
-    bdnz lbl_fn_801F7DF0_000009A8
-lbl_fn_801F7DF0_000009F4:
+    bdnz lbl_save_backup_formatEntry_000009A8
+lbl_save_backup_formatEntry_000009F4:
     lwz r0, 0x58(r30)
     mulli r0, r0, 0xc
     add r0, r30, r0
     addic. r3, r0, 0x5c
-    beq lbl_fn_801F7DF0_00000A20
+    beq lbl_save_backup_formatEntry_00000A20
     lwz r0, 0x14(r1)
     stw r0, 0x0(r3)
     lwz r0, 0x18(r1)
     stw r0, 0x4(r3)
     lwz r0, 0x1c(r1)
     stw r0, 0x8(r3)
-lbl_fn_801F7DF0_00000A20:
+lbl_save_backup_formatEntry_00000A20:
     lwz r3, 0x58(r30)
     addi r0, r3, 0x1
     stw r0, 0x58(r30)
-lbl_fn_801F7DF0_00000A2C:
+lbl_save_backup_formatEntry_00000A2C:
     li r0, 0x3
     stb r0, 0x8(r1)
     mr r3, r31
@@ -801,45 +801,45 @@ lbl_fn_801F7DF0_00000A2C:
     stfs f31, 0x10(r1)
     mtctr r8
     cmplwi r8, 0x0
-    ble lbl_fn_801F7DF0_00000ABC
-lbl_fn_801F7DF0_00000A70:
+    ble lbl_save_backup_formatEntry_00000ABC
+lbl_save_backup_formatEntry_00000A70:
     lbz r0, 0x5c(r7)
     extsb r0, r0
     cmpw r5, r0
-    bne lbl_fn_801F7DF0_00000AB0
+    bne lbl_save_backup_formatEntry_00000AB0
     lbz r0, 0x5d(r7)
     extsb r0, r0
     cmpw r4, r0
-    bne lbl_fn_801F7DF0_00000AB0
+    bne lbl_save_backup_formatEntry_00000AB0
     lwz r0, 0x60(r7)
     cmplw r3, r0
-    bne lbl_fn_801F7DF0_00000AB0
+    bne lbl_save_backup_formatEntry_00000AB0
     mulli r0, r6, 0xc
     lwz r4, 0x10(r1)
     add r3, r30, r0
     stw r4, 0x64(r3)
-    b lbl_fn_801F7DF0_00000AF4
-lbl_fn_801F7DF0_00000AB0:
+    b lbl_save_backup_formatEntry_00000AF4
+lbl_save_backup_formatEntry_00000AB0:
     addi r7, r7, 0xc
     addi r6, r6, 0x1
-    bdnz lbl_fn_801F7DF0_00000A70
-lbl_fn_801F7DF0_00000ABC:
+    bdnz lbl_save_backup_formatEntry_00000A70
+lbl_save_backup_formatEntry_00000ABC:
     lwz r0, 0x58(r30)
     mulli r0, r0, 0xc
     add r0, r30, r0
     addic. r3, r0, 0x5c
-    beq lbl_fn_801F7DF0_00000AE8
+    beq lbl_save_backup_formatEntry_00000AE8
     lwz r0, 0x8(r1)
     stw r0, 0x0(r3)
     lwz r0, 0xc(r1)
     stw r0, 0x4(r3)
     lwz r0, 0x10(r1)
     stw r0, 0x8(r3)
-lbl_fn_801F7DF0_00000AE8:
+lbl_save_backup_formatEntry_00000AE8:
     lwz r3, 0x58(r30)
     addi r0, r3, 0x1
     stw r0, 0x58(r30)
-lbl_fn_801F7DF0_00000AF4:
+lbl_save_backup_formatEntry_00000AF4:
     lwz r0, 0x54(r1)
     lfd f31, 0x48(r1)
     lfd f30, 0x40(r1)

@@ -30,7 +30,7 @@ extern void save_createWorkerTask(void);
 extern void save_computeCrc32(void);
 extern void save_calculateBlockCrc(void);
 extern void save_writeBackupSlot(void);
-extern void fn_801F7DF0(void);
+extern void save_backup_formatEntry(void);
 extern void save_findEntryByName(void);
 extern void save_formatSlotString(void);
 extern void thread_findQueueTaskByName(void);
@@ -552,7 +552,7 @@ lbl_fn_80589AF8_000005B4:
     lwz r3, 0x5b74(r28)
     fmr f2, f1
     fmr f3, f1
-    bl fn_801F7DF0
+    bl save_backup_formatEntry
     lwz r3, 0x5b0c(r31)
     lwz r0, 0x5c2c(r31)
     add r4, r27, r3
@@ -606,7 +606,7 @@ lbl_fn_80589AF8_000006F8:
     lwz r3, 0x5b74(r28)
     fmr f2, f1
     fmr f3, f1
-    bl fn_801F7DF0
+    bl save_backup_formatEntry
     b lbl_fn_80589AF8_000007BC
 lbl_fn_80589AF8_00000714:
     lwz r3, 0x4(r23)

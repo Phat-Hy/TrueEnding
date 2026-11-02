@@ -21,7 +21,7 @@ extern void boss_triggerEventAction(void);
 extern void mem_free(void);
 extern void map_debugLog(void);
 extern void fn_800C3094(void);
-extern void fn_800CB480(void);
+extern void morph_releaseRef(void);
 extern void fn_800CF680(void);
 extern void shadow_dispatchCallback(void);
 extern void shadow_initProjectionContext(void);
@@ -514,7 +514,7 @@ asm void fn_8047FAD0(void)
     li r4, 0x1e
     bl fn_8004B1EC
     addi r3, r30, 0x1f28
-    bl fn_800CB480
+    bl morph_releaseRef
     stw r31, 0x1f34(r30)
 lbl_fn_8047FAD0_000004D4:
     lbz r0, lbl_8087EFEE

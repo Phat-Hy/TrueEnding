@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void _restgpr_24(void);
 extern void _savegpr_24(void);
-extern void fn_80010374(void);
+extern void actor_dispatchByType(void);
 extern void fn_80010B68(void);
 extern void fn_80012A1C(void);
 extern void compass_findWaypointIndex(void);
@@ -150,7 +150,7 @@ lbl_fn_8011375C_00000128:
 lbl_fn_8011375C_00000160:
     lwz r4, 0x210(r31)
     addi r3, r1, 0x2c
-    bl fn_80010374
+    bl actor_dispatchByType
     addi r4, r1, 0x2c
     lfs f2, 0x34(r1)
     addi r3, r1, 0x8
@@ -324,7 +324,7 @@ lbl_fn_801139E4_000003A4:
 lbl_fn_801139E4_000003DC:
     lwz r4, 0x240(r31)
     addi r3, r1, 0x2c
-    bl fn_80010374
+    bl actor_dispatchByType
     addi r4, r1, 0x2c
     lfs f2, 0x34(r1)
     addi r3, r1, 0x8
@@ -538,7 +538,7 @@ lbl_fn_80113CD4_000006B8:
 lbl_fn_80113CD4_000006F0:
     lwz r4, 0x210(r30)
     addi r3, r1, 0x68
-    bl fn_80010374
+    bl actor_dispatchByType
     addi r4, r1, 0x68
     lfs f2, 0x70(r1)
     addi r3, r1, 0x44
@@ -633,7 +633,7 @@ lbl_fn_80113CD4_00000818:
 lbl_fn_80113CD4_00000850:
     lwz r4, 0x240(r30)
     addi r3, r1, 0x2c
-    bl fn_80010374
+    bl actor_dispatchByType
     addi r4, r1, 0x2c
     lfs f2, 0x34(r1)
     addi r3, r1, 0x8
@@ -799,7 +799,7 @@ lbl_fn_801140A0_00000A78:
 lbl_fn_801140A0_00000AB0:
     lwz r4, 0x210(r30)
     addi r3, r1, 0x68
-    bl fn_80010374
+    bl actor_dispatchByType
     addi r4, r1, 0x68
     lfs f2, 0x70(r1)
     addi r3, r1, 0x44
@@ -894,7 +894,7 @@ lbl_fn_801140A0_00000BD8:
 lbl_fn_801140A0_00000C10:
     lwz r4, 0x240(r30)
     addi r3, r1, 0x2c
-    bl fn_80010374
+    bl actor_dispatchByType
     addi r4, r1, 0x2c
     lfs f2, 0x34(r1)
     addi r3, r1, 0x8

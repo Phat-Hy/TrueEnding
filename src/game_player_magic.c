@@ -3,7 +3,7 @@
 
 /* External function declarations */
 extern void math_wrapAngle(void);
-extern void fn_80013404(void);
+extern void math_absf(void);
 extern void sys_getMainManager(void);
 extern void msg_getMessageById(void);
 extern void msg_getMessageString(void);
@@ -1346,7 +1346,7 @@ lbl_magic_dispatchActionCommand_0000118C:
     li r5, 0x4
     li r6, 0x0
     bl msg_formatWindowLayout
-    bl fn_80013404
+    bl math_absf
     lfs f0, lbl_80881830
     fcmpo cr0, f1, f0
     ble lbl_magic_dispatchActionCommand_000011D0

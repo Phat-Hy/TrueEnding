@@ -6,7 +6,7 @@ extern void _restgpr_23(void);
 extern void _restgpr_26(void);
 extern void _savegpr_23(void);
 extern void _savegpr_26(void);
-extern void fn_80010374(void);
+extern void actor_dispatchByType(void);
 extern void fn_8001296C(void);
 extern void fn_80012AC4(void);
 extern void player_stepMovement(void);
@@ -1198,7 +1198,7 @@ lbl_fn_8055DBF8_00000E94:
 lbl_fn_8055DBF8_00000EC8:
     mr r4, r24
     addi r3, r1, 0x28
-    bl fn_80010374
+    bl actor_dispatchByType
     lis r4, lbl_807C7030@ha
     lfs f4, 0x30(r1)
     addi r4, r4, lbl_807C7030@l

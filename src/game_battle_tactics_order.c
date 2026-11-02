@@ -29,7 +29,7 @@ extern void morph_reset(void);
 extern void fn_800CB36C(void);
 extern void ref_releaseHandle(void);
 extern void morph_updateWeights(void);
-extern void fn_800CB480(void);
+extern void morph_releaseRef(void);
 extern void fn_800CB518(void);
 extern void morph_updateMesh(void);
 extern void morph_resetTargetWeight(void);
@@ -2110,7 +2110,7 @@ lbl_fn_803F1508_00001A68:
     addi r4, r22, 0xc
     bl morph_updateWeights
     addi r3, r22, 0xc
-    bl fn_800CB480
+    bl morph_releaseRef
     b lbl_fn_803F1508_00001AA8
 lbl_fn_803F1508_00001A9C:
     addi r22, r22, 0x10

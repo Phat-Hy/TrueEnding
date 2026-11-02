@@ -30,7 +30,7 @@ extern void saveSlot_readSummary(void);
 extern void save_computeCrc32(void);
 extern void save_calculateBlockCrc(void);
 extern void save_writeBackupSlot(void);
-extern void fn_801F7DF0(void);
+extern void save_backup_formatEntry(void);
 extern void save_findEntryByName(void);
 extern void profile_getMetricValue(void);
 extern void perf_getMetricValue(void);
@@ -1856,7 +1856,7 @@ lbl_fn_801D70EC_000017F0:
     fmuls f1, f30, f3
     fmuls f3, f30, f0
     fmuls f2, f30, f2
-    bl fn_801F7DF0
+    bl save_backup_formatEntry
     lwz r3, lbl_8087F4F0
     lwz r4, 0x8(r25)
     bl fn_80444828

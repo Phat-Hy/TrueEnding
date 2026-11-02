@@ -84,7 +84,7 @@ void fn_80491414(void);
 void fn_80491418(void);
 void fn_80491440(void);
 void fn_804914BC(void);
-void fn_80491528(void);
+void coliseum_spawnEnemyGroup(void);
 void fn_804918A4(void);
 void fn_80491D50(void);
 void fn_80491DF8(void);
@@ -1018,7 +1018,7 @@ lbl_fn_804914BC_00000C94:
     blr
 }
 
-asm void fn_80491528(void)
+asm void coliseum_spawnEnemyGroup(void)
 {
     nofralloc
     stwu r1, -0x80(r1)
@@ -1040,68 +1040,68 @@ asm void fn_80491528(void)
     li r27, 0x0
     lis r26, lbl_80775BC8@ha
     li r24, 0x1
-    b lbl_fn_80491528_00000EA4
-lbl_fn_80491528_00000CF4:
+    b lbl_coliseum_spawnEnemyGroup_00000EA4
+lbl_coliseum_spawnEnemyGroup_00000CF4:
     lwz r3, 0x14c(r29)
     lwz r5, 0x0(r17)
     cmpwi r3, 0x0
-    bne lbl_fn_80491528_00000D10
+    bne lbl_coliseum_spawnEnemyGroup_00000D10
     lwz r0, 0x48(r5)
     cmpwi r0, 0x6
-    beq lbl_fn_80491528_00000EA0
-lbl_fn_80491528_00000D10:
+    beq lbl_coliseum_spawnEnemyGroup_00000EA0
+lbl_coliseum_spawnEnemyGroup_00000D10:
     cmpwi r3, 0x0
-    beq lbl_fn_80491528_00000D24
+    beq lbl_coliseum_spawnEnemyGroup_00000D24
     lwz r0, 0x48(r5)
     cmpw r3, r0
-    bne lbl_fn_80491528_00000EA0
-lbl_fn_80491528_00000D24:
+    bne lbl_coliseum_spawnEnemyGroup_00000EA0
+lbl_coliseum_spawnEnemyGroup_00000D24:
     lwz r0, 0xf8(r5)
     cmpwi r0, 0x0
-    bne lbl_fn_80491528_00000EA0
+    bne lbl_coliseum_spawnEnemyGroup_00000EA0
     lwz r0, lbl_8087F610
     cmpwi r0, 0x0
-    beq lbl_fn_80491528_00000D48
+    beq lbl_coliseum_spawnEnemyGroup_00000D48
     lwz r0, 0x48(r5)
     cmpwi r0, 0x0
-    beq lbl_fn_80491528_00000EA0
-lbl_fn_80491528_00000D48:
+    beq lbl_coliseum_spawnEnemyGroup_00000EA0
+lbl_coliseum_spawnEnemyGroup_00000D48:
     lwz r19, 0xc4(r5)
     cmpwi r19, 0x0
-    beq lbl_fn_80491528_00000D68
+    beq lbl_coliseum_spawnEnemyGroup_00000D68
     lwz r3, 0x108(r5)
     lwz r0, 0x10c(r5)
     cmpw r3, r0
-    beq lbl_fn_80491528_00000D68
-    b lbl_fn_80491528_00000DA4
-lbl_fn_80491528_00000D68:
+    beq lbl_coliseum_spawnEnemyGroup_00000D68
+    b lbl_coliseum_spawnEnemyGroup_00000DA4
+lbl_coliseum_spawnEnemyGroup_00000D68:
     lwz r4, 0x108(r5)
     li r3, 0x0
     cmpwi r4, 0x0
-    blt lbl_fn_80491528_00000D88
+    blt lbl_coliseum_spawnEnemyGroup_00000D88
     lwz r0, 0xa0(r5)
     cmpw r4, r0
-    bge lbl_fn_80491528_00000D88
+    bge lbl_coliseum_spawnEnemyGroup_00000D88
     li r3, 0x1
-lbl_fn_80491528_00000D88:
+lbl_coliseum_spawnEnemyGroup_00000D88:
     cmpwi r3, 0x0
-    beq lbl_fn_80491528_00000DA0
+    beq lbl_coliseum_spawnEnemyGroup_00000DA0
     slwi r0, r4, 2
     add r3, r5, r0
     lwz r19, 0xa4(r3)
-    b lbl_fn_80491528_00000DA4
-lbl_fn_80491528_00000DA0:
+    b lbl_coliseum_spawnEnemyGroup_00000DA4
+lbl_coliseum_spawnEnemyGroup_00000DA0:
     li r19, 0x0
-lbl_fn_80491528_00000DA4:
+lbl_coliseum_spawnEnemyGroup_00000DA4:
     cmpwi r19, 0x0
-    beq lbl_fn_80491528_00000EA0
+    beq lbl_coliseum_spawnEnemyGroup_00000EA0
     lwz r18, 0x58(r19)
-    b lbl_fn_80491528_00000E88
-lbl_fn_80491528_00000DB4:
+    b lbl_coliseum_spawnEnemyGroup_00000E88
+lbl_coliseum_spawnEnemyGroup_00000DB4:
     lwz r0, 0x0(r30)
     lwz r21, 0x0(r18)
     cmpwi r0, 0x0
-    bne lbl_fn_80491528_00000E68
+    bne lbl_coliseum_spawnEnemyGroup_00000E68
     stw r28, 0x2c(r1)
     addi r3, r26, lbl_80775BC8@l
     stb r27, 0xc(r1)
@@ -1117,19 +1117,19 @@ lbl_fn_80491528_00000DB4:
     stw r25, 0x1c(r1)
     bl mem_free
     cmpwi r3, 0x0
-    beq lbl_fn_80491528_00000E14
+    beq lbl_coliseum_spawnEnemyGroup_00000E14
     stw r24, 0x4(r3)
     stw r24, 0x8(r3)
     stw r23, 0x0(r3)
     stw r15, 0xc(r3)
-lbl_fn_80491528_00000E14:
+lbl_coliseum_spawnEnemyGroup_00000E14:
     cmpwi r27, 0x0
     stw r3, 0x34(r1)
     stw r27, 0x18(r1)
-    beq lbl_fn_80491528_00000E2C
+    beq lbl_coliseum_spawnEnemyGroup_00000E2C
     li r3, 0x0
     bl mem_getAllocSize
-lbl_fn_80491528_00000E2C:
+lbl_coliseum_spawnEnemyGroup_00000E2C:
     lwz r3, 0x30(r1)
     addi r4, r26, lbl_80775BC8@l
     bl strcpy
@@ -1137,15 +1137,15 @@ lbl_fn_80491528_00000E2C:
     addi r3, r1, 0x2c
     bl sky_renderStub
     cmpwi r20, 0x0
-    beq lbl_fn_80491528_00000E68
+    beq lbl_coliseum_spawnEnemyGroup_00000E68
     addic. r3, r20, 0x4
-    beq lbl_fn_80491528_00000E68
-    beq lbl_fn_80491528_00000E68
+    beq lbl_coliseum_spawnEnemyGroup_00000E68
+    beq lbl_coliseum_spawnEnemyGroup_00000E68
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_80491528_00000E68
+    beq lbl_coliseum_spawnEnemyGroup_00000E68
     bl msl_releaseRefCount
-lbl_fn_80491528_00000E68:
+lbl_coliseum_spawnEnemyGroup_00000E68:
     lwz r6, 0x0(r30)
     mr r4, r21
     mr r5, r31
@@ -1154,22 +1154,22 @@ lbl_fn_80491528_00000E68:
     mtctr r12
     bctrl
     addi r18, r18, 0x4
-lbl_fn_80491528_00000E88:
+lbl_coliseum_spawnEnemyGroup_00000E88:
     lwz r0, 0x5c(r19)
     lwz r3, 0x58(r19)
     slwi r0, r0, 2
     add r0, r3, r0
     cmplw r18, r0
-    bne lbl_fn_80491528_00000DB4
-lbl_fn_80491528_00000EA0:
+    bne lbl_coliseum_spawnEnemyGroup_00000DB4
+lbl_coliseum_spawnEnemyGroup_00000EA0:
     addi r17, r17, 0x4
-lbl_fn_80491528_00000EA4:
+lbl_coliseum_spawnEnemyGroup_00000EA4:
     lwz r0, 0x48(r29)
     slwi r0, r0, 2
     add r3, r29, r0
     addi r0, r3, 0x4c
     cmplw r17, r0
-    bne lbl_fn_80491528_00000CF4
+    bne lbl_coliseum_spawnEnemyGroup_00000CF4
     lis r22, lbl_80775B60@ha
     lis r27, lbl_80775B98@ha
     lis r28, lbl_80775B30@ha
@@ -1183,19 +1183,19 @@ lbl_fn_80491528_00000EA4:
     li r23, 0x0
     lis r24, lbl_80775BC8@ha
     li r26, 0x1
-    b lbl_fn_80491528_00001000
-lbl_fn_80491528_00000EF4:
+    b lbl_coliseum_spawnEnemyGroup_00001000
+lbl_coliseum_spawnEnemyGroup_00000EF4:
     lwz r3, 0x150(r29)
     lwzx r16, r3, r19
     cmpwi r16, 0x0
-    beq lbl_fn_80491528_00000FF8
+    beq lbl_coliseum_spawnEnemyGroup_00000FF8
     lwz r18, 0x58(r16)
-    b lbl_fn_80491528_00000FE0
-lbl_fn_80491528_00000F0C:
+    b lbl_coliseum_spawnEnemyGroup_00000FE0
+lbl_coliseum_spawnEnemyGroup_00000F0C:
     lwz r0, 0x0(r30)
     lwz r20, 0x0(r18)
     cmpwi r0, 0x0
-    bne lbl_fn_80491528_00000FC0
+    bne lbl_coliseum_spawnEnemyGroup_00000FC0
     stw r22, 0x20(r1)
     addi r3, r24, lbl_80775BC8@l
     stb r23, 0x8(r1)
@@ -1211,19 +1211,19 @@ lbl_fn_80491528_00000F0C:
     stw r25, 0x14(r1)
     bl mem_free
     cmpwi r3, 0x0
-    beq lbl_fn_80491528_00000F6C
+    beq lbl_coliseum_spawnEnemyGroup_00000F6C
     stw r26, 0x4(r3)
     stw r26, 0x8(r3)
     stw r27, 0x0(r3)
     stw r15, 0xc(r3)
-lbl_fn_80491528_00000F6C:
+lbl_coliseum_spawnEnemyGroup_00000F6C:
     cmpwi r23, 0x0
     stw r3, 0x28(r1)
     stw r23, 0x10(r1)
-    beq lbl_fn_80491528_00000F84
+    beq lbl_coliseum_spawnEnemyGroup_00000F84
     li r3, 0x0
     bl mem_getAllocSize
-lbl_fn_80491528_00000F84:
+lbl_coliseum_spawnEnemyGroup_00000F84:
     lwz r3, 0x24(r1)
     addi r4, r24, lbl_80775BC8@l
     bl strcpy
@@ -1231,15 +1231,15 @@ lbl_fn_80491528_00000F84:
     addi r3, r1, 0x20
     bl sky_renderStub
     cmpwi r21, 0x0
-    beq lbl_fn_80491528_00000FC0
+    beq lbl_coliseum_spawnEnemyGroup_00000FC0
     addic. r3, r21, 0x4
-    beq lbl_fn_80491528_00000FC0
-    beq lbl_fn_80491528_00000FC0
+    beq lbl_coliseum_spawnEnemyGroup_00000FC0
+    beq lbl_coliseum_spawnEnemyGroup_00000FC0
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_80491528_00000FC0
+    beq lbl_coliseum_spawnEnemyGroup_00000FC0
     bl msl_releaseRefCount
-lbl_fn_80491528_00000FC0:
+lbl_coliseum_spawnEnemyGroup_00000FC0:
     lwz r6, 0x0(r30)
     mr r4, r20
     mr r5, r31
@@ -1248,20 +1248,20 @@ lbl_fn_80491528_00000FC0:
     mtctr r12
     bctrl
     addi r18, r18, 0x4
-lbl_fn_80491528_00000FE0:
+lbl_coliseum_spawnEnemyGroup_00000FE0:
     lwz r0, 0x5c(r16)
     lwz r3, 0x58(r16)
     slwi r0, r0, 2
     add r0, r3, r0
     cmplw r18, r0
-    bne lbl_fn_80491528_00000F0C
-lbl_fn_80491528_00000FF8:
+    bne lbl_coliseum_spawnEnemyGroup_00000F0C
+lbl_coliseum_spawnEnemyGroup_00000FF8:
     addi r19, r19, 0x4
     addi r17, r17, 0x1
-lbl_fn_80491528_00001000:
+lbl_coliseum_spawnEnemyGroup_00001000:
     lwz r0, 0x154(r29)
     cmplw r17, r0
-    blt lbl_fn_80491528_00000EF4
+    blt lbl_coliseum_spawnEnemyGroup_00000EF4
     lmw r15, 0x3c(r1)
     lwz r0, 0x84(r1)
     mtlr r0

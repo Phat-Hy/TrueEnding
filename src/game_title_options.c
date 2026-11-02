@@ -10,7 +10,7 @@ extern void talk_copyUtf16String(void);
 extern void skill_calculateDamage(void);
 extern void fn_8006BA8C(void);
 extern void boss_triggerEventAction(void);
-extern void fn_8006F420(void);
+extern void script_executeCommand(void);
 extern void str_assignBuffer(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
@@ -1531,7 +1531,7 @@ lbl_fn_803B35FC_00001254:
     mr r3, r26
     addi r4, r1, 0x8
     li r6, 0x10
-    bl fn_8006F420
+    bl script_executeCommand
     addi r3, r1, 0x8
     bl fn_80209120
     stw r3, 0xc(r30)
@@ -1542,7 +1542,7 @@ lbl_fn_803B35FC_00001254:
     mr r3, r26
     addi r4, r1, 0x8
     li r6, 0x10
-    bl fn_8006F420
+    bl script_executeCommand
     addi r0, r30, 0x10
     cmplw r27, r0
     beq lbl_fn_803B35FC_000012C8

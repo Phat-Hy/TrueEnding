@@ -38,7 +38,7 @@ extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_getData(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_80491528(void);
+extern void coliseum_spawnEnemyGroup(void);
 extern void node_getParentNode(void);
 extern void spectate_getRootNode(void);
 extern void fn_8053B02C(void);
@@ -269,7 +269,7 @@ lbl_fn_805628E0_0000017C:
     lwz r3, lbl_8087F558
     mr r5, r31
     addi r4, r1, 0x50
-    bl fn_80491528
+    bl coliseum_spawnEnemyGroup
     addic. r3, r1, 0x50
     beq lbl_fn_805628E0_000001C8
     lwz r4, 0x50(r1)

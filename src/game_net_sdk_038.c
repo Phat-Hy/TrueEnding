@@ -19,7 +19,7 @@ extern void srand(void);
 extern void strcmp(void);
 extern void atoi(void);
 extern void net_formatIpAddress(void);
-extern void fn_806A4264(void);
+extern void net_castU16(void);
 extern void fn_806A426C(void);
 extern void net_truncateU16(void);
 extern void net_pollActiveSockets(void);
@@ -1038,7 +1038,7 @@ lbl_fn_806EF340_00000C30:
     b lbl_fn_806EF340_00000C78
 lbl_fn_806EF340_00000C60:
     lhz r3, 0x12(r1)
-    bl fn_806A4264
+    bl net_castU16
     clrlwi r26, r3, 16
 lbl_fn_806EF340_00000C6C:
     stw r29, 0x0(r23)

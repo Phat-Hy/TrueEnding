@@ -32,7 +32,7 @@ extern void skin_applyWeights(void);
 extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void morph_updateWeights(void);
-extern void fn_800CB480(void);
+extern void morph_releaseRef(void);
 extern void fn_800CB518(void);
 extern void fn_800CB5B4(void);
 extern void morph_updateMesh(void);
@@ -585,7 +585,7 @@ lbl_fn_8035FF94_0000058C:
     bl fn_8004B1EC
     lwz r3, 0xb8(r27)
     addi r3, r3, 0x8
-    bl fn_800CB480
+    bl morph_releaseRef
     b lbl_fn_8035FF94_000005CC
 lbl_fn_8035FF94_000005A8:
     lwz r0, 0x180(r27)
@@ -596,7 +596,7 @@ lbl_fn_8035FF94_000005A8:
     bl fn_8004B1EC
     lwz r3, 0xb8(r27)
     addi r3, r3, 0x8
-    bl fn_800CB480
+    bl morph_releaseRef
 lbl_fn_8035FF94_000005CC:
     li r0, 0x1
     stw r0, 0x180(r27)
@@ -1068,7 +1068,7 @@ lbl_fn_80360780_00000BEC:
     bl fn_8004B1EC
     lwz r3, 0xb4(r29)
     addi r3, r3, 0x8
-    bl fn_800CB480
+    bl morph_releaseRef
     li r31, 0x0
     stw r31, 0x120(r29)
     lwz r3, 0xb8(r29)
@@ -1076,7 +1076,7 @@ lbl_fn_80360780_00000BEC:
     bl fn_8004B1EC
     lwz r3, 0xb8(r29)
     addi r3, r3, 0x8
-    bl fn_800CB480
+    bl morph_releaseRef
     stw r31, 0x160(r29)
 lbl_fn_80360780_00000C34:
     lwz r0, 0x24(r1)

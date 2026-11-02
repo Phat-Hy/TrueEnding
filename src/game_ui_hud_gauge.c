@@ -15,7 +15,7 @@ extern void mtx_multVec(void);
 extern void vec3_addAssign(void);
 extern void vec3_sub(void);
 extern void math_wrapAngle(void);
-extern void fn_80013404(void);
+extern void math_absf(void);
 extern void vec3_add(void);
 extern void fn_80013484(void);
 extern void collision_testLineSegment(void);
@@ -2161,7 +2161,7 @@ lbl_fn_801C346C_00001C50:
     lfs f0, lbl_80882760
     fmr f29, f1
     fmuls f1, f0, f31
-    bl fn_80013404
+    bl math_absf
     bl fn_801C1060
     fcmpo cr0, f29, f1
     bge lbl_fn_801C346C_00001D40
@@ -2181,21 +2181,21 @@ lbl_fn_801C346C_00001C50:
     ble lbl_fn_801C346C_00001CD4
     lfs f0, lbl_80882760
     fmuls f1, f0, f31
-    bl fn_80013404
+    bl math_absf
     lfs f0, lbl_80882760
     fadds f28, f28, f1
     fmuls f1, f0, f31
-    bl fn_80013404
+    bl math_absf
     fsubs f1, f29, f1
     b lbl_fn_801C346C_00001CF4
 lbl_fn_801C346C_00001CD4:
     lfs f0, lbl_80882760
     fmuls f1, f0, f31
-    bl fn_80013404
+    bl math_absf
     lfs f0, lbl_80882760
     fsubs f28, f28, f1
     fmuls f1, f0, f31
-    bl fn_80013404
+    bl math_absf
     fadds f1, f29, f1
 lbl_fn_801C346C_00001CF4:
     bl fn_801C1060

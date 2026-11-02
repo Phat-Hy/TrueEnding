@@ -9,7 +9,7 @@ extern void _savegpr_14(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void fn_8006F2F0(void);
-extern void fn_8006F420(void);
+extern void script_executeCommand(void);
 extern void fn_800DC97C(void);
 extern void battle_canTargetActor(void);
 extern void net_getPacketManager(void);
@@ -730,7 +730,7 @@ lbl_fn_804DC454_00000884:
     li r6, 0x11
     addi r29, r5, 0x430
     addi r5, r29, 0x1c0
-    bl fn_8006F420
+    bl script_executeCommand
     lwz r4, lbl_8087F628
     addis r3, r4, 0x1
     lbz r0, -0x3deb(r3)
@@ -786,7 +786,7 @@ lbl_fn_804DC454_00000954:
     lwz r5, 0x2c(r1)
 lbl_fn_804DC454_00000958:
     slwi r6, r6, 1
-    bl fn_8006F420
+    bl script_executeCommand
     lwz r0, 0x18(r1)
     srwi. r0, r0, 31
     beq lbl_fn_804DC454_00000974
@@ -860,7 +860,7 @@ lbl_fn_804DC688_00000A28:
     addi r4, r1, 0x40
     addi r5, r31, 0x1c0
     li r6, 0x11
-    bl fn_8006F420
+    bl script_executeCommand
     b lbl_fn_804DC688_00000A60
 lbl_fn_804DC688_00000A58:
     li r0, 0x0
@@ -892,7 +892,7 @@ lbl_fn_804DC688_00000AB0:
     lwz r5, 0x1c(r1)
 lbl_fn_804DC688_00000AB4:
     slwi r6, r6, 1
-    bl fn_8006F420
+    bl script_executeCommand
     lwz r0, 0x8(r1)
     srwi. r0, r0, 31
     beq lbl_fn_804DC688_00000AD0
@@ -1052,7 +1052,7 @@ lbl_fn_804DC85C_00000CB4:
     lwz r5, 0x14(r1)
 lbl_fn_804DC85C_00000CB8:
     slwi r6, r6, 1
-    bl fn_8006F420
+    bl script_executeCommand
     lwz r0, 0x18(r1)
     srwi. r0, r0, 31
     beq lbl_fn_804DC85C_00000CD4

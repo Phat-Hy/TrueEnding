@@ -31,7 +31,7 @@ void fn_8058FE90(void);
 void fn_8058FEB8(void);
 void fn_8058FEC8(void);
 void fn_8058FED4(void);
-void fn_8058FEE8(void);
+void string_copyHash(void);
 void hash_advanceIterator(void);
 u32 hash_getHashValue(const void*);
 void fn_8058FF0C(void);
@@ -1299,7 +1299,7 @@ asm void fn_8058FED4(void)
     blr
 }
 
-asm void fn_8058FEE8(void)
+asm void string_copyHash(void)
 {
     nofralloc
     lwz r0, 0x0(r4)
@@ -1430,10 +1430,10 @@ lbl_fn_8058FF1C_00001368:
     bl fn_80590AAC
     mr r4, r27
     addi r3, r1, 0x40
-    bl fn_8058FEE8
+    bl string_copyHash
     addi r3, r1, 0x3c
     addi r4, r1, 0x38
-    bl fn_8058FEE8
+    bl string_copyHash
     b lbl_fn_8058FF1C_000013D4
 lbl_fn_8058FF1C_000013CC:
     addi r3, r1, 0x40
@@ -1545,7 +1545,7 @@ lbl_fn_8058FF1C_00001524:
     bl hash_advanceIterator
     mr r4, r28
     addi r3, r1, 0x3c
-    bl fn_8058FEE8
+    bl string_copyHash
     addi r3, r1, 0x3c
     bl fn_8058FF0C
     bl hash_getHashValue
@@ -1645,7 +1645,7 @@ lbl_fn_8058FF1C_00001660:
 lbl_fn_8058FF1C_000016CC:
     mr r3, r27
     addi r4, r1, 0x40
-    bl fn_8058FEE8
+    bl string_copyHash
     b lbl_fn_8058FF1C_00001268
 lbl_fn_8058FF1C_000016DC:
     mr r3, r28
@@ -1667,7 +1667,7 @@ lbl_fn_8058FF1C_000016DC:
     bl fn_8059057C
     mr r3, r27
     addi r4, r1, 0x40
-    bl fn_8058FEE8
+    bl string_copyHash
     b lbl_fn_8058FF1C_00001268
 lbl_fn_8058FF1C_00001730:
     lwz r4, 0x0(r28)
@@ -1680,7 +1680,7 @@ lbl_fn_8058FF1C_00001730:
     bl fn_8059057C
     mr r3, r28
     addi r4, r1, 0x40
-    bl fn_8058FEE8
+    bl string_copyHash
     b lbl_fn_8058FF1C_00001268
 lbl_fn_8058FF1C_00001760:
     lmw r27, 0x4c(r1)
@@ -1878,10 +1878,10 @@ lbl_fn_8059057C_000019C8:
     bl fn_80590AAC
     mr r4, r27
     addi r3, r1, 0x40
-    bl fn_8058FEE8
+    bl string_copyHash
     addi r3, r1, 0x3c
     addi r4, r1, 0x38
-    bl fn_8058FEE8
+    bl string_copyHash
     b lbl_fn_8059057C_00001A34
 lbl_fn_8059057C_00001A2C:
     addi r3, r1, 0x40
@@ -1993,7 +1993,7 @@ lbl_fn_8059057C_00001B84:
     bl hash_advanceIterator
     mr r4, r28
     addi r3, r1, 0x3c
-    bl fn_8058FEE8
+    bl string_copyHash
     addi r3, r1, 0x3c
     bl fn_8058FF0C
     bl hash_getHashValue
@@ -2093,7 +2093,7 @@ lbl_fn_8059057C_00001CC0:
 lbl_fn_8059057C_00001D2C:
     mr r3, r27
     addi r4, r1, 0x40
-    bl fn_8058FEE8
+    bl string_copyHash
     b lbl_fn_8059057C_000018C8
 lbl_fn_8059057C_00001D3C:
     mr r3, r28
@@ -2115,7 +2115,7 @@ lbl_fn_8059057C_00001D3C:
     bl fn_8059057C
     mr r3, r27
     addi r4, r1, 0x40
-    bl fn_8058FEE8
+    bl string_copyHash
     b lbl_fn_8059057C_000018C8
 lbl_fn_8059057C_00001D90:
     lwz r4, 0x0(r28)
@@ -2128,7 +2128,7 @@ lbl_fn_8059057C_00001D90:
     bl fn_8059057C
     mr r3, r28
     addi r4, r1, 0x40
-    bl fn_8058FEE8
+    bl string_copyHash
     b lbl_fn_8059057C_000018C8
 lbl_fn_8059057C_00001DC0:
     lmw r27, 0x4c(r1)

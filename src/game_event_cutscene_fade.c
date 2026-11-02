@@ -10,7 +10,7 @@ extern void sound_releaseChannel(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void node_destroy(void);
-extern void fn_800CB480(void);
+extern void morph_releaseRef(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
 extern void atn_LH_Texture_destructAndFree(void);
@@ -1592,7 +1592,7 @@ lbl_fn_8047EFD8_00001484:
     li r4, 0x3c
     bl fn_8004B1EC
     addi r3, r29, 0x1f28
-    bl fn_800CB480
+    bl morph_releaseRef
 lbl_fn_8047EFD8_00001498:
     li r0, -0x1
     stw r0, 0x2378(r29)
@@ -2023,7 +2023,7 @@ lbl_fn_8047F580_000019B4:
     li r4, 0x3c
     bl fn_8004B1EC
     addi r3, r30, 0x1f28
-    bl fn_800CB480
+    bl morph_releaseRef
     mr r3, r31
     bl fn_8054FBCC
     mr r3, r31

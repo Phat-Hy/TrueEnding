@@ -6,7 +6,7 @@ extern void _restgpr_23(void);
 extern void _restgpr_27(void);
 extern void _savegpr_23(void);
 extern void _savegpr_27(void);
-extern void fn_80010374(void);
+extern void actor_dispatchByType(void);
 extern void fn_8001260C(void);
 extern void fn_8001296C(void);
 extern void item_testLineOfSight(void);
@@ -31,7 +31,7 @@ extern void fn_80487064(void);
 extern void fn_8048E9E0(void);
 extern void fn_8048EE78(void);
 extern void fn_8048F184(void);
-extern void fn_80491528(void);
+extern void coliseum_spawnEnemyGroup(void);
 extern void fn_804A0614(void);
 extern void spectate_getRootNode(void);
 extern void fn_805381F4(void);
@@ -343,7 +343,7 @@ lbl_fn_80560FEC_0000030C:
 lbl_fn_80560FEC_00000324:
     mr r4, r27
     addi r3, r1, 0x28
-    bl fn_80010374
+    bl actor_dispatchByType
     lwz r0, 0x20(r27)
     cmpwi r0, 0x6
     bne lbl_fn_80560FEC_00000364
@@ -1707,7 +1707,7 @@ lbl_fn_80561BD4_000015B0:
     lwz r3, lbl_8087F558
     addi r4, r1, 0xe0
     addi r5, r1, 0x148
-    bl fn_80491528
+    bl coliseum_spawnEnemyGroup
     addic. r3, r1, 0xe0
     beq lbl_fn_80561BD4_000015FC
     lwz r4, 0xe0(r1)

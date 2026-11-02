@@ -54,7 +54,7 @@ extern void battle_assignFieldProperty(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_destructor(void);
-extern void fn_80491528(void);
+extern void coliseum_spawnEnemyGroup(void);
 extern void PSVECSquareMag(void);
 extern void strcmp(void);
 extern void std_cos(void);
@@ -903,7 +903,7 @@ lbl_fn_804227A4_00000A50:
     lwz r3, lbl_8087F558
     addi r4, r1, 0x8
     li r5, 0x0
-    bl fn_80491528
+    bl coliseum_spawnEnemyGroup
     addic. r3, r1, 0x8
     beq lbl_fn_804227A4_00000A9C
     lwz r4, 0x8(r1)
@@ -1052,7 +1052,7 @@ lbl_fn_804229A8_00000C40:
     lwz r3, lbl_8087F558
     addi r4, r1, 0x14
     addi r5, r31, 0xf8
-    bl fn_80491528
+    bl coliseum_spawnEnemyGroup
     addic. r3, r1, 0x14
     beq lbl_fn_804229A8_00000C8C
     lwz r4, 0x14(r1)
@@ -1210,7 +1210,7 @@ lbl_fn_80422BF4_00000E6C:
     lwz r3, lbl_8087F558
     addi r4, r1, 0x38
     addi r5, r31, 0xf8
-    bl fn_80491528
+    bl coliseum_spawnEnemyGroup
     addic. r3, r1, 0x38
     beq lbl_fn_80422BF4_00000EB8
     lwz r4, 0x38(r1)

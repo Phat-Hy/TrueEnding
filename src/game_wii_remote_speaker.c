@@ -8,7 +8,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_21(void);
 extern void _savegpr_25(void);
 extern void _savegpr_27(void);
-extern void fn_80010374(void);
+extern void actor_dispatchByType(void);
 extern void fn_800112E0(void);
 extern void fn_800119C0(void);
 extern void fn_80011E98(void);
@@ -1198,7 +1198,7 @@ lbl_fn_8055408C_00000F2C:
     stfs f0, 0x148(r1)
     psq_st f1, 0x0(r5), 0, 0
     stfs f2, 0x13c(r1)
-    bl fn_80010374
+    bl actor_dispatchByType
     mr r3, r30
     bl fn_8001296C
     cmpwi r3, 0x0
@@ -1249,7 +1249,7 @@ lbl_fn_8055408C_00000FCC:
     bne lbl_fn_8055408C_0000141C
     mr r4, r31
     addi r3, r1, 0xbc
-    bl fn_80010374
+    bl actor_dispatchByType
     lfs f3, 0x130(r1)
     addi r3, r1, 0x11c
     lfs f0, 0xc4(r1)
@@ -2018,7 +2018,7 @@ lbl_fn_80554DF0_00001AC4:
     beq lbl_fn_80554DF0_00001C84
     mr r4, r31
     addi r3, r1, 0x5c
-    bl fn_80010374
+    bl actor_dispatchByType
     mr r3, r31
     bl fn_8001296C
     cmpwi r3, 0x0

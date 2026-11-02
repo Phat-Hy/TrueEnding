@@ -14,7 +14,7 @@ extern void str_findChar(void);
 extern void boss_testAiFlag(void);
 extern void task_isValidQueueRange(void);
 extern void fn_801F465C(void);
-extern void fn_801F4B4C(void);
+extern void save_initSlotData(void);
 extern void save_formatSlotTitle(void);
 extern void fn_801F8FE4(void);
 extern void fn_801F90E0(void);
@@ -1519,7 +1519,7 @@ lbl_fn_803D83A8_00001494:
     stfs f7, 0x154(r1)
     stfs f10, 0x15c(r1)
     lwz r3, 0x2564(r15)
-    bl fn_801F4B4C
+    bl save_initSlotData
     lfs f0, 0x26e8(r15)
     addi r4, r14, 0x11ff
     stfs f0, 0x140(r1)
@@ -1531,7 +1531,7 @@ lbl_fn_803D83A8_00001494:
     lfs f0, 0x26f4(r15)
     stfs f0, 0x14c(r1)
     lwz r3, 0x2564(r15)
-    bl fn_801F4B4C
+    bl save_initSlotData
     b lbl_fn_803D83A8_00001760
 lbl_fn_803D83A8_0000150C:
     lfs f0, 0x2704(r15)
@@ -1550,7 +1550,7 @@ lbl_fn_803D83A8_0000150C:
     stfs f7, 0x134(r1)
     stfs f10, 0x13c(r1)
     lwz r3, 0x2564(r15)
-    bl fn_801F4B4C
+    bl save_initSlotData
     lfs f0, 0x26f8(r15)
     addi r4, r14, 0x11ff
     stfs f0, 0x120(r1)
@@ -1562,7 +1562,7 @@ lbl_fn_803D83A8_0000150C:
     lfs f0, 0x2704(r15)
     stfs f0, 0x12c(r1)
     lwz r3, 0x2564(r15)
-    bl fn_801F4B4C
+    bl save_initSlotData
     b lbl_fn_803D83A8_00001760
 lbl_fn_803D83A8_00001584:
     lfs f0, 0x2714(r15)
@@ -1581,7 +1581,7 @@ lbl_fn_803D83A8_00001584:
     stfs f7, 0x114(r1)
     stfs f10, 0x11c(r1)
     lwz r3, 0x2564(r15)
-    bl fn_801F4B4C
+    bl save_initSlotData
     lfs f0, 0x2708(r15)
     addi r4, r14, 0x11ff
     stfs f0, 0x100(r1)
@@ -1593,7 +1593,7 @@ lbl_fn_803D83A8_00001584:
     lfs f0, 0x2714(r15)
     stfs f0, 0x10c(r1)
     lwz r3, 0x2564(r15)
-    bl fn_801F4B4C
+    bl save_initSlotData
     b lbl_fn_803D83A8_00001760
 lbl_fn_803D83A8_000015FC:
     lfs f0, 0x2724(r15)
@@ -1612,7 +1612,7 @@ lbl_fn_803D83A8_000015FC:
     stfs f7, 0xf4(r1)
     stfs f10, 0xfc(r1)
     lwz r3, 0x2564(r15)
-    bl fn_801F4B4C
+    bl save_initSlotData
     lfs f0, 0x2718(r15)
     addi r4, r14, 0x11ff
     stfs f0, 0xe0(r1)
@@ -1624,7 +1624,7 @@ lbl_fn_803D83A8_000015FC:
     lfs f0, 0x2724(r15)
     stfs f0, 0xec(r1)
     lwz r3, 0x2564(r15)
-    bl fn_801F4B4C
+    bl save_initSlotData
     b lbl_fn_803D83A8_00001760
 lbl_fn_803D83A8_00001674:
     lfs f0, 0x26e4(r15)
@@ -1643,7 +1643,7 @@ lbl_fn_803D83A8_00001674:
     stfs f7, 0xd4(r1)
     stfs f10, 0xdc(r1)
     lwz r3, 0x2564(r15)
-    bl fn_801F4B4C
+    bl save_initSlotData
     lfs f0, 0x26d8(r15)
     addi r4, r14, 0x11ff
     stfs f0, 0xc0(r1)
@@ -1655,7 +1655,7 @@ lbl_fn_803D83A8_00001674:
     lfs f0, 0x26e4(r15)
     stfs f0, 0xcc(r1)
     lwz r3, 0x2564(r15)
-    bl fn_801F4B4C
+    bl save_initSlotData
     b lbl_fn_803D83A8_00001760
 lbl_fn_803D83A8_000016EC:
     lfs f0, 0x26d4(r15)
@@ -1674,7 +1674,7 @@ lbl_fn_803D83A8_000016EC:
     stfs f7, 0xb4(r1)
     stfs f10, 0xbc(r1)
     lwz r3, 0x2564(r15)
-    bl fn_801F4B4C
+    bl save_initSlotData
     lfs f0, 0x26c8(r15)
     addi r4, r14, 0x11ff
     stfs f0, 0xa0(r1)
@@ -1686,7 +1686,7 @@ lbl_fn_803D83A8_000016EC:
     lfs f0, 0x26d4(r15)
     stfs f0, 0xac(r1)
     lwz r3, 0x2564(r15)
-    bl fn_801F4B4C
+    bl save_initSlotData
 lbl_fn_803D83A8_00001760:
     lwz r3, 0x2564(r15)
     lfs f7, 0xa0(r3)

@@ -21,7 +21,7 @@ extern void atoi(void);
 extern void fn_8068B1FC(void);
 extern void net_formatIpAddress(void);
 extern void fn_806A4260(void);
-extern void fn_806A4264(void);
+extern void net_castU16(void);
 extern void fn_806A426C(void);
 extern void net_truncateU16(void);
 extern void net_bufferGetCount(void);
@@ -197,7 +197,7 @@ asm void fn_806FD090(void)
     stw r0, 0xc(r1)
     bl net_formatIpAddress
     lhz r3, 0x10(r28)
-    bl fn_806A4264
+    bl net_castU16
     lbz r0, 0x13(r28)
     cmpwi r0, 0x0
     bne lbl_fn_806FD090_00000184
@@ -216,7 +216,7 @@ asm void fn_806FD090(void)
     lwz r0, 0x8(r31)
     stb r0, 0x79(r1)
     lhz r3, 0x2(r29)
-    bl fn_806A4264
+    bl net_castU16
     lwz r29, 0x4(r29)
     li r0, 0x2
     lwz r30, 0x18(r31)
@@ -258,7 +258,7 @@ lbl_fn_806FD090_000001D0:
     lwz r0, 0xc(r28)
     stw r0, 0x3c(r31)
     lhz r3, 0x10(r28)
-    bl fn_806A4264
+    bl net_castU16
     lwz r12, 0xc(r31)
     li r29, 0x0
     sth r3, 0x40(r31)
@@ -399,7 +399,7 @@ lbl_fn_806FD2D0_000003D4:
     li r0, 0x3
     stb r0, 0x7(r4)
     lhz r3, 0x2(r5)
-    bl fn_806A4264
+    bl net_castU16
     lwz r30, 0x4(r30)
     li r0, 0x2
     lwz r31, 0x18(r31)
@@ -453,7 +453,7 @@ asm void fn_806FD420(void)
     stw r0, 0x14(r1)
     bl net_formatIpAddress
     lhz r3, 0x2(r30)
-    bl fn_806A4264
+    bl net_castU16
     cmplwi r27, 0x5
     beq lbl_fn_806FD420_000004B4
     cmplwi r27, 0x7
@@ -514,7 +514,7 @@ lbl_fn_806FD420_00000560:
     stw r0, 0x8(r1)
     bl net_formatIpAddress
     lhz r3, 0x2(r30)
-    bl fn_806A4264
+    bl net_castU16
     lwz r0, 0x1c(r31)
     cmpwi r0, 0x4
     blt lbl_fn_806FD420_0000086C
@@ -523,11 +523,11 @@ lbl_fn_806FD420_00000560:
     stw r0, 0xc(r1)
     bl net_formatIpAddress
     lhz r3, 0x2(r30)
-    bl fn_806A4264
+    bl net_castU16
     lwz r0, 0x4(r30)
     stw r0, 0x3c(r31)
     lhz r3, 0x2(r30)
-    bl fn_806A4264
+    bl net_castU16
     sth r3, 0x40(r31)
     li r29, 0x1
     lis r4, lbl_807C5D00@ha
@@ -2242,7 +2242,7 @@ asm void fn_806FECA0(void)
 {
     nofralloc
     lhz r3, 0x4(r3)
-    b fn_806A4264
+    b net_castU16
 }
 
 u16 fn_806FECB0(void *obj)
@@ -2283,7 +2283,7 @@ asm void fn_806FED10(void)
 {
     nofralloc
     lhz r3, 0xc(r3)
-    b fn_806A4264
+    b net_castU16
 }
 
 void fn_806FED20(void *obj, void *val)
@@ -2507,7 +2507,7 @@ lbl_fn_806FEF30_00002018:
     li r5, 0x2
     bl memcpy
     lhz r3, 0x8(r1)
-    bl fn_806A4264
+    bl net_castU16
     addi r30, r30, 0x2
     sth r3, 0x8(r1)
     mr r25, r30

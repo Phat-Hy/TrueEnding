@@ -91,7 +91,7 @@ void fn_8008991C(void);
 void fn_8008995C(void);
 void fn_8008999C(void);
 void fn_800899DC(void);
-u32 fn_80089ACC(const u32 *p);
+u32 area_getAreaId(const u32 *p);
 void fn_80089AD4(void);
 void fn_80089B5C(void);
 void fn_80089C28(void);
@@ -705,7 +705,7 @@ lbl_fn_800899DC_0000072C:
     blr
 }
 
-u32 fn_80089ACC(const u32 *p)
+u32 area_getAreaId(const u32 *p)
 {
     return *p;
 }

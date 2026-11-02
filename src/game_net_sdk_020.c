@@ -11,7 +11,7 @@ extern void _savegpr_25(void);
 extern void snprintf(void);
 extern void strncmp(void);
 extern void net_formatIpAddress(void);
-extern void fn_806A4264(void);
+extern void net_castU16(void);
 extern void net_checkConnectionSession(void);
 extern void net_formatLog(void);
 extern void fn_806A9CA0(void);
@@ -2009,7 +2009,7 @@ lbl_fn_806CA040_000019D8:
     cmpwi r29, 0x0
     beq lbl_fn_806CA040_00001A18
     lhz r3, 0x2(r29)
-    bl fn_806A4264
+    bl net_castU16
     mr r0, r3
     lwz r3, 0x4(r29)
     clrlwi r4, r0, 16
@@ -2030,7 +2030,7 @@ lbl_fn_806CA040_00001A18:
     stw r0, 0x670(r3)
     lwz r25, lbl_80860898@l(r31)
     lhz r3, 0x2(r29)
-    bl fn_806A4264
+    bl net_castU16
     sth r3, 0x674(r25)
     addi r4, r30, 0x2854
     li r3, 0x40
@@ -2305,7 +2305,7 @@ lbl_fn_806CA040_00001E24:
     stw r0, 0x670(r3)
     lwz r25, lbl_80860898@l(r4)
     lhz r3, 0x2(r29)
-    bl fn_806A4264
+    bl net_castU16
     sth r3, 0x674(r25)
 lbl_fn_806CA040_00001E5C:
     bl OSGetTime
