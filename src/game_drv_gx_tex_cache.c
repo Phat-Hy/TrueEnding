@@ -94,7 +94,7 @@ extern void GXSetCurrentMtx(void);
 extern void fn_80619920(void);
 extern void fn_806199D0(void);
 extern void fn_8061A0F0(void);
-extern void fn_8061A100(void);
+extern void gx_displayList_invokeVtableMethod(void);
 extern void fn_8061A110(void);
 extern void fn_80625BF0(void);
 extern void fn_80625C90(void);
@@ -837,7 +837,7 @@ asm void fn_805C3C60(void)
     lis r5, lbl_807980D4@ha
     mr r4, r3
     lwz r3, lbl_807980D4@l(r5)
-    b fn_8061A100
+    b gx_displayList_invokeVtableMethod
 }
 
 asm void fn_805C3C70(void)

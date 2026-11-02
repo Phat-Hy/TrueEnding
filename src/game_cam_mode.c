@@ -35,7 +35,7 @@ extern void kpad_getClampData(void);
 extern void fn_803761BC(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
-extern void fn_804EB1B0(void);
+extern void credits_checkRollState(void);
 extern void PSMTXRotRad(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
@@ -387,7 +387,7 @@ asm void camera_updateTargetMode(void)
     cmpwi r0, 0x0
     beq lbl_camera_updateTargetMode_000003A8
     mr r3, r0
-    bl fn_804EB1B0
+    bl credits_checkRollState
     cmpwi r3, 0x0
     beq lbl_camera_updateTargetMode_00000498
 lbl_camera_updateTargetMode_000003A8:

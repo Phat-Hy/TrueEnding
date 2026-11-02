@@ -23,7 +23,7 @@ extern void fn_804AC79C(void);
 extern void fn_804AC7EC(void);
 extern void fn_804AC83C(void);
 extern void fn_804ACAF8(void);
-extern void fn_804ACD10(void);
+extern void net_coop_updateScoreRecord(void);
 extern void fn_804ACDBC(void);
 extern void fn_804AD1EC(void);
 extern void fn_804AD738(void);
@@ -47,7 +47,7 @@ extern void fn_804DE000(void);
 extern void fn_804E8A84(void);
 extern void fn_804EA5E0(void);
 extern void fn_804EAFD4(void);
-extern void fn_804EB1B0(void);
+extern void credits_checkRollState(void);
 extern void fn_804EB270(void);
 extern void fn_804EB2DC(void);
 extern void net_getLocalPlayerAid(void);
@@ -488,7 +488,7 @@ lbl_fn_804BDD68_00000538:
     bl fn_804BE610
     b lbl_fn_804BDD68_00000968
     lwz r3, lbl_8087F610
-    bl fn_804EB1B0
+    bl credits_checkRollState
     cmpwi r3, 0x0
     beq lbl_fn_804BDD68_00000968
     lwz r3, lbl_8087F5F0
@@ -988,7 +988,7 @@ asm void fn_804BE610(void)
     bl net_getLocalPlayerAid
     mr r31, r3
     lwz r3, lbl_8087F610
-    bl fn_804EB1B0
+    bl credits_checkRollState
     cmpwi r3, 0x0
     bne lbl_fn_804BE610_00000D58
     lwz r3, lbl_8087F610
@@ -1015,7 +1015,7 @@ lbl_fn_804BE610_00000CDC:
     li r5, 0x1
     bl fn_804AC83C
     lwz r3, lbl_8087F588
-    bl fn_804ACD10
+    bl net_coop_updateScoreRecord
     lwz r4, lbl_8087F86C
     lwz r3, lbl_8087F588
     lwz r4, 0x7dc(r4)
@@ -1046,7 +1046,7 @@ lbl_fn_804BE610_00000D4C:
     stw r0, 0xe78(r27)
 lbl_fn_804BE610_00000D58:
     lwz r3, lbl_8087F610
-    bl fn_804EB1B0
+    bl credits_checkRollState
     cmpwi r3, 0x0
     bne lbl_fn_804BE610_00000D74
     mr r3, r27
@@ -1226,7 +1226,7 @@ lbl_fn_804BE610_00000FCC:
     b lbl_fn_804BE610_000013F0
 lbl_fn_804BE610_00000FDC:
     lwz r3, lbl_8087F610
-    bl fn_804EB1B0
+    bl credits_checkRollState
     cmpwi r3, 0x0
     beq lbl_fn_804BE610_00000FF4
     li r0, 0x0
@@ -1499,7 +1499,7 @@ lbl_fn_804BE610_0000139C:
     cmpw r28, r0
     beq lbl_fn_804BE610_000013F0
     lwz r3, lbl_8087F610
-    bl fn_804EB1B0
+    bl credits_checkRollState
     cmpwi r3, 0x1
     bne lbl_fn_804BE610_000013C4
     lwz r0, 0x0(r30)
@@ -1540,7 +1540,7 @@ asm void fn_804BEDB8(void)
     stw r28, 0x10(r1)
     lwz r31, lbl_8087EF70
     lwz r3, lbl_8087F610
-    bl fn_804EB1B0
+    bl credits_checkRollState
     cmpwi r3, 0x0
     bne lbl_fn_804BEDB8_00001444
     mr r3, r29
@@ -1619,7 +1619,7 @@ lbl_fn_804BEDB8_00001534:
     li r28, 0x0
 lbl_fn_804BEDB8_00001550:
     lwz r3, lbl_8087F610
-    bl fn_804EB1B0
+    bl credits_checkRollState
     cmpwi r3, 0x0
     bne lbl_fn_804BEDB8_00001620
     lwz r3, lbl_8087F610
@@ -1646,7 +1646,7 @@ lbl_fn_804BEDB8_000015A4:
     li r5, 0x1
     bl fn_804AC83C
     lwz r3, lbl_8087F588
-    bl fn_804ACD10
+    bl net_coop_updateScoreRecord
     lwz r4, lbl_8087F86C
     lwz r3, lbl_8087F588
     lwz r4, 0x7dc(r4)
@@ -1679,7 +1679,7 @@ lbl_fn_804BEDB8_00001620:
     cmpwi r28, 0x1
     bne lbl_fn_804BEDB8_0000189C
     lwz r3, lbl_8087F610
-    bl fn_804EB1B0
+    bl credits_checkRollState
     cmpwi r3, 0x0
     beq lbl_fn_804BEDB8_000018B0
     lwz r4, lbl_8087F628
@@ -1737,7 +1737,7 @@ lbl_fn_804BEDB8_000016E4:
     li r5, 0x1
     bl fn_804AC83C
     lwz r3, lbl_8087F588
-    bl fn_804ACD10
+    bl net_coop_updateScoreRecord
     lwz r4, lbl_8087F86C
     lwz r3, lbl_8087F588
     lwz r4, 0x7dc(r4)
@@ -1890,7 +1890,7 @@ lbl_fn_804BEDB8_000018E4:
     bl fn_804E8A84
 lbl_fn_804BEDB8_00001908:
     lwz r3, lbl_8087F610
-    bl fn_804EB1B0
+    bl credits_checkRollState
     cmpwi r3, 0x0
     beq lbl_fn_804BEDB8_00001920
     li r0, 0x0
@@ -2045,7 +2045,7 @@ lbl_fn_804BEDB8_00001B10:
     li r5, 0x1
     bl fn_804AC83C
     lwz r3, lbl_8087F588
-    bl fn_804ACD10
+    bl net_coop_updateScoreRecord
     lwz r4, lbl_8087F86C
     lwz r3, lbl_8087F588
     lwz r4, 0x7dc(r4)

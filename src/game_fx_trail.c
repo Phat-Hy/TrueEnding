@@ -21,7 +21,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void wcs_vformat(void);
 extern void vec3_scale(void);
 extern void viewport_getGlobalContext(void);
-extern void fn_800F7FA8(void);
+extern void viewport_initAudioInstances(void);
 extern void math_lerpf(void);
 extern void system_getNextSequenceId(void);
 extern void viewport_updateCulling(void);
@@ -422,7 +422,7 @@ lbl_fn_8028CB38_00000418:
     bl viewport_getGlobalContext
     mr r4, r31
     li r5, 0x3e8
-    bl fn_800F7FA8
+    bl viewport_initAudioInstances
     bl viewport_getGlobalContext
     addi r4, r31, 0x155c
     addi r5, r31, 0xb0
@@ -472,7 +472,7 @@ lbl_fn_8028CB38_00000498:
     bl viewport_getGlobalContext
     mr r4, r31
     li r5, 0x3e8
-    bl fn_800F7FA8
+    bl viewport_initAudioInstances
     bl viewport_getGlobalContext
     stw r30, 0x8(r1)
     li r0, -0x1

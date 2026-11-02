@@ -100,7 +100,7 @@ void fn_800F7F80(void);
 u32 viewport_getFlag(void);
 void fn_800F7F98(void *p, u32 val);
 u32 viewport_getGlobalContext(void);
-void fn_800F7FA8(void);
+void viewport_initAudioInstances(void);
 u32 fn_800F7FB4(const void *p);
 void fn_800F7FBC(void);
 void vec3_normalize(void);
@@ -313,7 +313,7 @@ lbl_fn_800F72F4_00000254:
     bl viewport_getGlobalContext
     mr r4, r29
     li r5, 0x0
-    bl fn_800F7FA8
+    bl viewport_initAudioInstances
     bl viewport_getGlobalContext
     li r23, 0x0
     stw r23, 0x8(r1)
@@ -966,7 +966,7 @@ lbl_fn_800F72F4_00000C1C:
     bl viewport_getGlobalContext
     mr r4, r29
     li r5, 0x0
-    bl fn_800F7FA8
+    bl viewport_initAudioInstances
     bl viewport_getGlobalContext
     li r28, 0x0
     stw r28, 0x8(r1)
@@ -1058,7 +1058,7 @@ u32 viewport_getGlobalContext(void)
     return lbl_8087F3C0;
 }
 
-asm void fn_800F7FA8(void)
+asm void viewport_initAudioInstances(void)
 {
     nofralloc
     mr r3, r4

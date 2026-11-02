@@ -8,7 +8,7 @@ extern void _restgpr_26(void);
 extern void _savegpr_25(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
-extern void fn_8000E18C(void);
+extern void sys_vector_pushBack(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void ui_drawColoredQuad(void);
@@ -741,7 +741,7 @@ lbl_fn_802DE27C_0000087C:
     beq lbl_fn_802DE27C_000008A0
     addi r3, r31, 0x15f4
     addi r4, r1, 0x14
-    bl fn_8000E18C
+    bl sys_vector_pushBack
 lbl_fn_802DE27C_000008A0:
     lwz r0, 0x14(r1)
     cmpwi r0, 0x0

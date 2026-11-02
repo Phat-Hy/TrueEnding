@@ -32,7 +32,7 @@ extern void fn_804AC79C(void);
 extern void fn_804AC7EC(void);
 extern void fn_804AC96C(void);
 extern void fn_804ACAF8(void);
-extern void fn_804ACD10(void);
+extern void net_coop_updateScoreRecord(void);
 extern void fn_804ACDBC(void);
 extern void fn_804AD000(void);
 extern void fn_804C54FC(void);
@@ -40,7 +40,7 @@ extern void fn_804CEF84(void);
 extern void fn_804CF078(void);
 extern void fn_804D8250(void);
 extern void fn_804D9C18(void);
-extern void fn_804EB1B0(void);
+extern void credits_checkRollState(void);
 extern void net_getLocalPlayerAid(void);
 extern void fn_804FB624(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -1094,7 +1094,7 @@ lbl_fn_804CDE1C_00000D38:
     li r6, 0x0
     bl fn_804AC96C
     lwz r3, lbl_8087F588
-    bl fn_804ACD10
+    bl net_coop_updateScoreRecord
     lwz r4, lbl_8087F1E4
     lwz r3, lbl_8087F588
     lwz r4, 0xdf4(r4)
@@ -1533,7 +1533,7 @@ asm void fn_804CE61C(void)
     cmpwi r0, 0x6
     bne lbl_fn_804CE61C_00001398
     lwz r3, lbl_8087F610
-    bl fn_804EB1B0
+    bl credits_checkRollState
     cmpwi r3, 0x0
     beq lbl_fn_804CE61C_00001388
     lwz r28, lbl_8087F610
@@ -1582,7 +1582,7 @@ lbl_fn_804CE61C_000013EC:
     cmpwi r3, 0x2
     bne lbl_fn_804CE61C_00001438
     lwz r3, lbl_8087F610
-    bl fn_804EB1B0
+    bl credits_checkRollState
     cmpwi r3, 0x1
     bne lbl_fn_804CE61C_00001428
     lwz r28, lbl_8087F610

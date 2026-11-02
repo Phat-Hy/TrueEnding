@@ -42,7 +42,7 @@ extern void fn_806DB690(void);
 extern void net_bindSessionCallback(void);
 extern void fn_806EACC0(void);
 extern void fn_806EAD00(void);
-extern void fn_806EEDC0(void);
+extern void net_packet_formatHeader(void);
 extern void fn_806FBDB0(void);
 extern void fn_806FC5D0(void);
 extern void fn_806FC900(void);
@@ -1954,7 +1954,7 @@ lbl_fn_806BC4C0_00001ACC:
     lwz r3, 0x4(r26)
     li r4, 0x0
     li r5, 0x0
-    bl fn_806EEDC0
+    bl net_packet_formatHeader
     mr r4, r3
     lwz r3, 0x704(r25)
     lhz r5, 0x2(r26)
@@ -2305,7 +2305,7 @@ lbl_fn_806BC860_00001F70:
     mr r3, r27
     li r4, 0x0
     li r5, 0x0
-    bl fn_806EEDC0
+    bl net_packet_formatHeader
     lbz r7, 0x11(r1)
     mr r4, r3
     lwz r3, 0x704(r20)

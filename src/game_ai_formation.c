@@ -20,7 +20,7 @@ extern void ref_releaseHandle(void);
 extern void fn_800E41FC(void);
 extern void vec3_scale(void);
 extern void viewport_getGlobalContext(void);
-extern void fn_800F7FA8(void);
+extern void viewport_initAudioInstances(void);
 extern void fn_800F84D0(void);
 extern void system_getNextSequenceId(void);
 extern void vec3_sqMag(void);
@@ -398,7 +398,7 @@ asm void fn_80265B00(void)
     bl viewport_getGlobalContext
     addi r4, r31, 0x15a0
     li r5, 0x0
-    bl fn_800F7FA8
+    bl viewport_initAudioInstances
     bl viewport_getGlobalContext
     li r4, 0x2
     bl fn_800F84D0
@@ -569,7 +569,7 @@ lbl_fn_80265B00_00000598:
     bl viewport_getGlobalContext
     mr r4, r31
     li r5, 0xc8
-    bl fn_800F7FA8
+    bl viewport_initAudioInstances
     bl viewport_getGlobalContext
     addi r4, r31, 0x15c4
     addi r5, r31, 0xb0
@@ -1552,7 +1552,7 @@ lbl_fn_80266A24_0000139C:
     bl viewport_getGlobalContext
     mr r4, r30
     li r5, 0x65
-    bl fn_800F7FA8
+    bl viewport_initAudioInstances
     lwz r0, 0xc(r31)
     rlwinm r3, r0, 0, 1, 1
     subis r0, r3, 0x4000
@@ -1654,7 +1654,7 @@ lbl_fn_80266A24_00001514:
     bl viewport_getGlobalContext
     li r4, 0x0
     li r5, 0x0
-    bl fn_800F7FA8
+    bl viewport_initAudioInstances
     bl viewport_getGlobalContext
     addi r4, r30, 0x1588
     addi r5, r30, 0xb0
@@ -1738,7 +1738,7 @@ lbl_fn_80266A24_00001664:
     bl viewport_getGlobalContext
     mr r4, r30
     li r5, 0x65
-    bl fn_800F7FA8
+    bl viewport_initAudioInstances
     addi r3, r30, 0x7d4
     li r4, 0x20
     bl actor_testBitFlag
@@ -1759,7 +1759,7 @@ lbl_fn_80266A24_000016C4:
     bl viewport_getGlobalContext
     mr r4, r30
     li r5, 0x65
-    bl fn_800F7FA8
+    bl viewport_initAudioInstances
     bl equip_getGlobalManager
     li r4, 0x395
     li r5, 0x0

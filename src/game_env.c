@@ -7,7 +7,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_8000D844(void);
-extern void fn_8000E18C(void);
+extern void sys_vector_pushBack(void);
 extern void str_assignBuffer(void);
 extern void mem_free(void);
 extern void atn_Task_destructor(void);
@@ -251,7 +251,7 @@ lbl_fn_800DAB68_00000290:
 lbl_fn_800DAB68_000002A0:
     addi r3, r28, 0x84
     addi r4, r1, 0x10
-    bl fn_8000E18C
+    bl sys_vector_pushBack
     mr r4, r29
     addi r3, r28, 0x48
     bl fn_800DAD6C
@@ -260,7 +260,7 @@ lbl_fn_800DAB68_000002A0:
     bl fn_800DAD3C
     addi r3, r28, 0x54
     la r4, lbl_8087D940
-    bl fn_8000E18C
+    bl sys_vector_pushBack
     addi r3, r1, 0x14
     bl fn_800D94E4
     li r30, 0x0

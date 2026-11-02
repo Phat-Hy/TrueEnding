@@ -36,7 +36,7 @@ extern void proj_getMatrix(void);
 extern void fn_800F530C(void);
 extern void viewport_getFlag(void);
 extern void viewport_getGlobalContext(void);
-extern void fn_800F7FA8(void);
+extern void viewport_initAudioInstances(void);
 extern void phys_scaleGravity(void);
 extern void fn_80112960(void);
 extern void fn_80114AA0(void);
@@ -256,7 +256,7 @@ extern void fn_804EA8BC(void);
 extern void fn_804EAA54(void);
 extern void fn_804EAA88(void);
 extern void fn_804EAFD4(void);
-extern void fn_804EB1B0(void);
+extern void credits_checkRollState(void);
 extern void fn_804EB3D0(void);
 extern void fn_804EB5DC(void);
 extern void net_getLocalPlayerAid(void);
@@ -3143,7 +3143,7 @@ lbl_fn_804D25D4_000026E0:
     li r0, 0x1
     stb r0, lbl_8087F614
     bl viewport_getFlag
-    bl fn_804EB1B0
+    bl credits_checkRollState
     cmpwi r3, 0x1
     bne lbl_fn_804D25D4_00002744
     bl net_getFriendManager
@@ -3180,7 +3180,7 @@ lbl_fn_804D25D4_00002744:
 lbl_fn_804D25D4_00002778:
     bne lbl_fn_804D25D4_000027E0
     bl viewport_getFlag
-    bl fn_804EB1B0
+    bl credits_checkRollState
     cmpwi r3, 0x0
     beq lbl_fn_804D25D4_000027BC
     lbz r0, lbl_8087F614
@@ -5013,7 +5013,7 @@ lbl_fn_804D25D4_00004220:
     bl viewport_getGlobalContext
     mr r4, r24
     li r5, 0x0
-    bl fn_800F7FA8
+    bl viewport_initAudioInstances
     bl viewport_getGlobalContext
     addis r4, r24, 0x1
     li r5, 0x0
@@ -5193,7 +5193,7 @@ lbl_fn_804D25D4_000044F8:
     lwz r0, 0xd8(r3)
     stw r0, 0xb0(r3)
     mr r3, r24
-    bl fn_804EB1B0
+    bl credits_checkRollState
     cmpwi r3, 0x0
     bne lbl_fn_804D25D4_00004568
     lwz r4, 0xd8(r20)

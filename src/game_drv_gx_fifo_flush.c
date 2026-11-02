@@ -34,7 +34,7 @@ extern void GXSetNumTevStages(void);
 extern void GXSetTevAlphaIn(void);
 extern void GXLoadPosMtxImm(void);
 extern void fn_8061A0F0(void);
-extern void fn_8061A100(void);
+extern void gx_displayList_invokeVtableMethod(void);
 
 /* External data declarations */
 extern u8 lbl_80764138[];
@@ -883,7 +883,7 @@ lbl_fn_805C0820_00000A88:
     cmpwi r3, 0x0
     beq lbl_fn_805C0820_00000AAC
     mr r4, r31
-    bl fn_8061A100
+    bl gx_displayList_invokeVtableMethod
     b lbl_fn_805C0820_00000AB4
 lbl_fn_805C0820_00000AAC:
     mr r3, r31
@@ -1058,7 +1058,7 @@ lbl_fn_805C0A60_00000CD8:
     cmpwi r3, 0x0
     beq lbl_fn_805C0A60_00000CFC
     mr r4, r31
-    bl fn_8061A100
+    bl gx_displayList_invokeVtableMethod
     b lbl_fn_805C0A60_00000D04
 lbl_fn_805C0A60_00000CFC:
     mr r3, r31
@@ -1372,10 +1372,10 @@ lbl_fn_805C0EB0_00001118:
     cmpwi r3, 0x0
     beq lbl_fn_805C0EB0_00001148
     lwz r4, 0x4(r31)
-    bl fn_8061A100
+    bl gx_displayList_invokeVtableMethod
     lwz r3, 0x14(r29)
     mr r4, r31
-    bl fn_8061A100
+    bl gx_displayList_invokeVtableMethod
     b lbl_fn_805C0EB0_00001170
 lbl_fn_805C0EB0_00001148:
     lwz r3, 0x4(r31)
@@ -1415,7 +1415,7 @@ lbl_fn_805C0EB0_000011B0:
     cmpwi r3, 0x0
     beq lbl_fn_805C0EB0_000011D4
     mr r4, r31
-    bl fn_8061A100
+    bl gx_displayList_invokeVtableMethod
     b lbl_fn_805C0EB0_000011DC
 lbl_fn_805C0EB0_000011D4:
     mr r3, r31
@@ -1774,10 +1774,10 @@ lbl_fn_805C13C0_00001644:
     cmpwi r3, 0x0
     beq lbl_fn_805C13C0_00001698
     lwz r4, 0x4(r27)
-    bl fn_8061A100
+    bl gx_displayList_invokeVtableMethod
     lwz r3, 0x14(r26)
     mr r4, r27
-    bl fn_8061A100
+    bl gx_displayList_invokeVtableMethod
     b lbl_fn_805C13C0_000016C0
 lbl_fn_805C13C0_00001698:
     lwz r3, 0x4(r27)

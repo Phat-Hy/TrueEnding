@@ -24,7 +24,7 @@ extern void morph_dispatchTargetUpdate(void);
 extern void atn_Task_setActive(void);
 extern void fn_800F29D0(void);
 extern void viewport_getGlobalContext(void);
-extern void fn_800F7FA8(void);
+extern void viewport_initAudioInstances(void);
 extern void vec3_normalize(void);
 extern void fn_800F80A8(void);
 extern void fn_800F80B8(void);
@@ -736,7 +736,7 @@ lbl_fn_8031E8BC_000008C0:
     bl viewport_getGlobalContext
     mr r4, r29
     li r5, 0x0
-    bl fn_800F7FA8
+    bl viewport_initAudioInstances
     bl viewport_getGlobalContext
     li r0, 0x0
     stw r0, 0x8(r1)

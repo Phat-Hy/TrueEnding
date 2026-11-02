@@ -24,7 +24,7 @@ extern void thread_findTaskById(void);
 extern void thread_dispatchToQueue(void);
 extern void fn_804C4530(void);
 extern void fn_804E4A24(void);
-extern void fn_804EB1B0(void);
+extern void credits_checkRollState(void);
 extern void fn_8050BA6C(void);
 extern void net_getInterfaceHandle(void);
 extern void net_isSessionActive(void);
@@ -256,7 +256,7 @@ asm void fn_804C2C14(void)
     stw r0, 0x24(r1)
     stw r31, 0x1c(r1)
     lwz r3, lbl_8087F610
-    bl fn_804EB1B0
+    bl credits_checkRollState
     cmpwi r3, 0x0
     beq lbl_fn_804C2C14_000002A8
     li r3, 0x0

@@ -72,7 +72,7 @@ extern void fn_806EACC0(void);
 extern void fn_806EACE0(void);
 extern void fn_806EACF0(void);
 extern void fn_806EAD10(void);
-extern void fn_806EEDC0(void);
+extern void net_packet_formatHeader(void);
 
 /* External data declarations */
 extern u8 lbl_807C2AE0[];
@@ -191,7 +191,7 @@ lbl_fn_806D9890_0000006C:
     bl fn_806EAC90
     clrlwi r4, r27, 16
     addi r5, r1, 0x20
-    bl fn_806EEDC0
+    bl net_packet_formatHeader
     lwz r3, 0x4(r26)
     mr r4, r25
     bl fn_806D5C90
@@ -302,7 +302,7 @@ asm void fn_806D9AB0(void)
     bl fn_806EAC90
     clrlwi r4, r30, 16
     addi r5, r1, 0x8
-    bl fn_806EEDC0
+    bl net_packet_formatHeader
     lwz r3, 0x8(r29)
     bl net_bufferGetCount
     mr r31, r3
@@ -376,7 +376,7 @@ asm void fn_806D9BB0(void)
     bl fn_806EAC90
     clrlwi r4, r30, 16
     addi r5, r1, 0x8
-    bl fn_806EEDC0
+    bl net_packet_formatHeader
     cmpwi r27, 0x10
     blt lbl_fn_806D9BB0_000003F8
     mr r4, r26
@@ -459,7 +459,7 @@ asm void fn_806D9CE0(void)
     mr r3, r27
     mr r4, r28
     addi r5, r1, 0x8
-    bl fn_806EEDC0
+    bl net_packet_formatHeader
     lwz r12, 0x28(r31)
     mr r3, r27
     mr r4, r28
@@ -502,7 +502,7 @@ asm void fn_806D9D80(void)
     mr r4, r27
     addi r31, r31, lbl_80860F58@l
     addi r5, r1, 0x24
-    bl fn_806EEDC0
+    bl net_packet_formatHeader
     cmpwi r30, 0x10
     blt lbl_fn_806D9D80_000005C8
     mr r4, r29
@@ -547,7 +547,7 @@ lbl_fn_806D9D80_000005C8:
     mr r3, r26
     mr r4, r27
     addi r5, r1, 0x24
-    bl fn_806EEDC0
+    bl net_packet_formatHeader
     lwz r12, 0x20(r31)
     mr r3, r26
     mr r4, r27
@@ -622,7 +622,7 @@ lbl_fn_806D9EF0_000006B0:
     stw r9, 0x18(r29)
     stw r10, 0x1c(r29)
     stw r0, 0x20(r29)
-    bl fn_806EEDC0
+    bl net_packet_formatHeader
     lis r7, fn_806D96A0@ha
     mr r3, r29
     mr r5, r31
@@ -820,7 +820,7 @@ lbl_fn_806DA120_00000994:
     mr r3, r27
     mr r4, r28
     addi r5, r1, 0x2c
-    bl fn_806EEDC0
+    bl net_packet_formatHeader
     lis r3, fn_806D9740@ha
     lis r4, fn_806D9890@ha
     lis r7, fn_806D9AB0@ha
@@ -931,7 +931,7 @@ lbl_fn_806DA330_00000AFC:
     mr r3, r24
     mr r4, r29
     addi r5, r1, 0x14
-    bl fn_806EEDC0
+    bl net_packet_formatHeader
     li r3, 0x4
     b lbl_fn_806DA330_00000BCC
 lbl_fn_806DA330_00000B44:

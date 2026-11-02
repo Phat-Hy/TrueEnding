@@ -9,7 +9,7 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void vec3_copy(void);
 extern void fn_8000D760(void);
-extern void fn_8000E18C(void);
+extern void sys_vector_pushBack(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void menu_initWindowBuffer(void);
@@ -1218,7 +1218,7 @@ lbl_fn_80293E30_00000F14:
     stw r3, 0x1c(r1)
     addi r3, r27, 0x1504
     addi r4, r1, 0x1c
-    bl fn_8000E18C
+    bl sys_vector_pushBack
     lwz r0, 0x1c(r1)
     cmpwi r0, 0x0
     bne lbl_fn_80293E30_00000F14
@@ -1237,7 +1237,7 @@ lbl_fn_80293E30_00000F58:
     stw r3, 0x18(r1)
     addi r3, r27, 0x1510
     addi r4, r1, 0x18
-    bl fn_8000E18C
+    bl sys_vector_pushBack
     lwz r0, 0x18(r1)
     cmpwi r0, 0x0
     bne lbl_fn_80293E30_00000F58
@@ -1318,7 +1318,7 @@ lbl_fn_80293E30_00001078:
     stw r3, 0x8(r1)
     addi r3, r27, 0x1570
     addi r4, r1, 0x8
-    bl fn_8000E18C
+    bl sys_vector_pushBack
     lwz r0, 0x8(r1)
     cmpwi r0, 0x0
     bne lbl_fn_80293E30_00001078

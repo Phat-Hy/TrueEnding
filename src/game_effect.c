@@ -76,7 +76,7 @@ void fn_8003CCD4(void);
 s32 fn_8003CDA8(void);
 void fn_8003CDB0(void);
 void fn_8003D084(void);
-void fn_8003D298(void);
+void effect_createEmitter(void);
 void fn_8003D3F8(void);
 void fn_8003D6E8(void);
 void effect_testLifetime(void);
@@ -4213,7 +4213,7 @@ lbl_fn_8003D084_00003930:
     blr
 }
 
-asm void fn_8003D298(void)
+asm void effect_createEmitter(void)
 {
     nofralloc
     stwu r1, -0x40(r1)
@@ -4229,32 +4229,32 @@ asm void fn_8003D298(void)
     mr r3, r31
     bl fn_8001BF64
     cmpwi r3, 0x0
-    ble lbl_fn_8003D298_000039B8
+    ble lbl_effect_createEmitter_000039B8
     mr r3, r31
     bl fn_8001BF58
     cmpwi r3, 0x0
-    beq lbl_fn_8003D298_000039A4
+    beq lbl_effect_createEmitter_000039A4
     lis r3, lbl_807C6A40@ha
     li r0, 0x1
     stw r0, lbl_807C6A40@l(r3)
     li r0, 0xa
-    b lbl_fn_8003D298_000039BC
-lbl_fn_8003D298_000039A4:
+    b lbl_effect_createEmitter_000039BC
+lbl_effect_createEmitter_000039A4:
     lis r3, lbl_807C6A40@ha
     li r0, 0x1
     stw r0, lbl_807C6A40@l(r3)
     li r0, 0x1
-    b lbl_fn_8003D298_000039BC
-lbl_fn_8003D298_000039B8:
+    b lbl_effect_createEmitter_000039BC
+lbl_effect_createEmitter_000039B8:
     li r0, -0x1
-lbl_fn_8003D298_000039BC:
+lbl_effect_createEmitter_000039BC:
     cmpwi r0, 0xa
-    bne lbl_fn_8003D298_00003A20
+    bne lbl_effect_createEmitter_00003A20
     lis r3, lbl_807C68C0@ha
     addi r3, r3, lbl_807C68C0@l
     lwz r0, 0x58(r3)
     cmpw r0, r29
-    bge lbl_fn_8003D298_00003A18
+    bge lbl_effect_createEmitter_00003A18
     li r0, 0x0
     stw r0, 0x24(r1)
     addi r4, r1, 0x18
@@ -4270,18 +4270,18 @@ lbl_fn_8003D298_000039BC:
     li r0, 0x1
     stw r0, lbl_807C6A40@l(r3)
     li r3, 0xa
-    b lbl_fn_8003D298_00003A8C
-lbl_fn_8003D298_00003A18:
+    b lbl_effect_createEmitter_00003A8C
+lbl_effect_createEmitter_00003A18:
     li r3, -0x1
-    b lbl_fn_8003D298_00003A8C
-lbl_fn_8003D298_00003A20:
+    b lbl_effect_createEmitter_00003A8C
+lbl_effect_createEmitter_00003A20:
     cmpwi r0, 0x1
-    bne lbl_fn_8003D298_00003A88
+    bne lbl_effect_createEmitter_00003A88
     lis r3, lbl_807C68C0@ha
     addi r3, r3, lbl_807C68C0@l
     lwz r0, 0x58(r3)
     cmpw r0, r30
-    bge lbl_fn_8003D298_00003A80
+    bge lbl_effect_createEmitter_00003A80
     li r8, 0x0
     li r0, 0xf
     stw r8, 0x14(r1)
@@ -4298,13 +4298,13 @@ lbl_fn_8003D298_00003A20:
     li r0, 0x1
     stw r0, lbl_807C6A40@l(r3)
     li r3, 0x1
-    b lbl_fn_8003D298_00003A8C
-lbl_fn_8003D298_00003A80:
+    b lbl_effect_createEmitter_00003A8C
+lbl_effect_createEmitter_00003A80:
     li r3, -0x1
-    b lbl_fn_8003D298_00003A8C
-lbl_fn_8003D298_00003A88:
+    b lbl_effect_createEmitter_00003A8C
+lbl_effect_createEmitter_00003A88:
     li r3, -0x1
-lbl_fn_8003D298_00003A8C:
+lbl_effect_createEmitter_00003A8C:
     lwz r0, 0x44(r1)
     lwz r31, 0x3c(r1)
     lwz r30, 0x38(r1)

@@ -46,7 +46,7 @@ extern void cam_updateLookAtMatrix(void);
 extern void cam_evalLookAtMatrix(void);
 extern void proj_getMatrix(void);
 extern void viewport_getGlobalContext(void);
-extern void fn_800F7FA8(void);
+extern void viewport_initAudioInstances(void);
 extern void skill_findNodeById(void);
 extern void equip_getGlobalManager(void);
 extern void magic_getOffset6C(void);
@@ -1620,7 +1620,7 @@ lbl_fn_80339760_000013E0:
     bl viewport_getGlobalContext
     addi r4, r31, 0x1680
     li r5, 0x0
-    bl fn_800F7FA8
+    bl viewport_initAudioInstances
     bl viewport_getGlobalContext
     addi r4, r31, 0x1680
     addi r5, r31, 0xb0
@@ -1790,7 +1790,7 @@ lbl_fn_80339760_0000163C:
     bl viewport_getGlobalContext
     addi r4, r31, 0x1610
     li r5, 0x0
-    bl fn_800F7FA8
+    bl viewport_initAudioInstances
     lfs f1, lbl_80885238
     addi r3, r1, 0x8
     fmr f2, f1

@@ -37,7 +37,7 @@ extern void fn_803E3384(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_805A4984(void);
+extern void string_parseQuotedToken(void);
 extern void PSVECMag(void);
 extern void printf(void);
 extern void strcmp(void);
@@ -517,7 +517,7 @@ lbl_fn_802AC8E8_000005F0:
     mr r3, r29
     addi r4, r29, 0x1a84
     addi r5, r1, 0x44
-    bl fn_805A4984
+    bl string_parseQuotedToken
     b lbl_fn_802AC8E8_00000718
 lbl_fn_802AC8E8_00000618:
     mr r3, r30
@@ -528,7 +528,7 @@ lbl_fn_802AC8E8_00000618:
     mr r3, r29
     addi r4, r29, 0x1a8c
     addi r5, r1, 0x44
-    bl fn_805A4984
+    bl string_parseQuotedToken
     b lbl_fn_802AC8E8_00000718
 lbl_fn_802AC8E8_00000640:
     mr r3, r30

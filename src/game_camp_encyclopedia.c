@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void dtor_80013D60(void);
 extern void fn_8000D760(void);
-extern void fn_8000E18C(void);
+extern void sys_vector_pushBack(void);
 extern void sys_copyString(void);
 extern void sys_calcBufferOffset(void);
 extern void str_initFromCStr(void);
@@ -1847,7 +1847,7 @@ lbl_fn_803C74E0_00001748:
     stw r3, 0x8(r1)
     addi r3, r1, 0xc
     addi r4, r1, 0x8
-    bl fn_8000E18C
+    bl sys_vector_pushBack
     addi r3, r1, 0x90
     bl cam_updateLookAtMatrix
 lbl_fn_803C74E0_00001770:

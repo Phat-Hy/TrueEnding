@@ -102,7 +102,7 @@ extern u32 lbl_80880678;
 extern u32 lbl_8088067C;
 
 /* Function declarations */
-void fn_8000E18C(void);
+void sys_vector_pushBack(void);
 void fn_8000E474(void);
 void fn_8000E5D0(void);
 void fn_8000E6B0(void);
@@ -119,7 +119,7 @@ void fn_8000F1EC(void);
 void fn_8000FAE4(void);
 void fn_8000FAE8(void);
 
-asm void fn_8000E18C(void)
+asm void sys_vector_pushBack(void)
 {
     nofralloc
     stwu r1, -0x40(r1)
@@ -134,7 +134,7 @@ asm void fn_8000E18C(void)
     lwz r6, 0x4(r3)
     lwz r5, 0x8(r3)
     cmplw r6, r5
-    bge lbl_fn_8000E18C_00000054
+    bge lbl_sys_vector_pushBack_00000054
     addi r5, r6, 0x1
     stw r5, 0x4(r3)
     subi r0, r5, 0x1
@@ -142,13 +142,13 @@ asm void fn_8000E18C(void)
     slwi r0, r0, 2
     lwz r4, 0x0(r4)
     stwx r4, r3, r0
-    b lbl_fn_8000E18C_000002C8
-lbl_fn_8000E18C_00000054:
+    b lbl_sys_vector_pushBack_000002C8
+lbl_sys_vector_pushBack_00000054:
     lis r3, 0x4000
     subi r0, r3, 0x1
     subf r0, r5, r0
     cmplwi r0, 0x1
-    bge lbl_fn_8000E18C_00000088
+    bge lbl_sys_vector_pushBack_00000088
     lis r3, __files@ha
     lis r4, lbl_8072F924@ha
     addi r3, r3, __files@l
@@ -157,7 +157,7 @@ lbl_fn_8000E18C_00000054:
     crclr 6
     bl printf
     bl abort
-lbl_fn_8000E18C_00000088:
+lbl_sys_vector_pushBack_00000088:
     li r5, 0x0
     addi r4, r29, 0x8
     lis r3, 0x4000
@@ -174,7 +174,7 @@ lbl_fn_8000E18C_00000088:
     subf r0, r31, r0
     cmplw r3, r0
     stw r3, 0x10(r1)
-    ble lbl_fn_8000E18C_000000EC
+    ble lbl_sys_vector_pushBack_000000EC
     lis r3, __files@ha
     lis r4, lbl_8072F924@ha
     addi r3, r3, __files@l
@@ -183,11 +183,11 @@ lbl_fn_8000E18C_00000088:
     crclr 6
     bl printf
     bl abort
-lbl_fn_8000E18C_000000EC:
+lbl_sys_vector_pushBack_000000EC:
     lis r3, 0x1555
     addi r0, r3, 0x5555
     cmplw r31, r0
-    bge lbl_fn_8000E18C_0000013C
+    bge lbl_sys_vector_pushBack_0000013C
     addi r5, r31, 0x1
     lis r3, 0xcccd
     slwi r4, r5, 2
@@ -199,37 +199,37 @@ lbl_fn_8000E18C_000000EC:
     srwi r4, r4, 2
     stw r4, 0x8(r1)
     cmplw r4, r0
-    bge lbl_fn_8000E18C_00000130
+    bge lbl_sys_vector_pushBack_00000130
     addi r3, r1, 0x10
-lbl_fn_8000E18C_00000130:
+lbl_sys_vector_pushBack_00000130:
     lwz r0, 0x0(r3)
     add r31, r31, r0
-    b lbl_fn_8000E18C_00000180
-lbl_fn_8000E18C_0000013C:
+    b lbl_sys_vector_pushBack_00000180
+lbl_sys_vector_pushBack_0000013C:
     lis r3, 0x2aab
     subi r0, r3, 0x5556
     cmplw r31, r0
-    bge lbl_fn_8000E18C_00000178
+    bge lbl_sys_vector_pushBack_00000178
     addi r3, r31, 0x1
     lwz r0, 0x10(r1)
     srwi r3, r3, 1
     stw r3, 0xc(r1)
     cmplw r3, r0
     addi r3, r1, 0xc
-    bge lbl_fn_8000E18C_0000016C
+    bge lbl_sys_vector_pushBack_0000016C
     addi r3, r1, 0x10
-lbl_fn_8000E18C_0000016C:
+lbl_sys_vector_pushBack_0000016C:
     lwz r0, 0x0(r3)
     add r31, r31, r0
-    b lbl_fn_8000E18C_00000180
-lbl_fn_8000E18C_00000178:
+    b lbl_sys_vector_pushBack_00000180
+lbl_sys_vector_pushBack_00000178:
     lis r3, 0x4000
     subi r31, r3, 0x1
-lbl_fn_8000E18C_00000180:
+lbl_sys_vector_pushBack_00000180:
     lis r3, 0x4000
     subi r0, r3, 0x1
     cmplw r31, r0
-    ble lbl_fn_8000E18C_000001B0
+    ble lbl_sys_vector_pushBack_000001B0
     lis r3, __files@ha
     lis r4, lbl_8072F924@ha
     addi r3, r3, __files@l
@@ -238,12 +238,12 @@ lbl_fn_8000E18C_00000180:
     crclr 6
     bl printf
     bl abort
-lbl_fn_8000E18C_000001B0:
+lbl_sys_vector_pushBack_000001B0:
     slwi r3, r31, 2
     bl mem_free
     cmpwi r3, 0x0
     mr r28, r3
-    bne lbl_fn_8000E18C_000001E4
+    bne lbl_sys_vector_pushBack_000001E4
     lis r3, __files@ha
     lis r4, lbl_80775A88@ha
     addi r3, r3, __files@l
@@ -252,7 +252,7 @@ lbl_fn_8000E18C_000001B0:
     crclr 6
     bl printf
     bl abort
-lbl_fn_8000E18C_000001E4:
+lbl_sys_vector_pushBack_000001E4:
     lwz r0, 0x18(r1)
     stw r28, 0x14(r1)
     slwi r3, r0, 2
@@ -304,13 +304,13 @@ lbl_fn_8000E18C_000001E4:
     lwz r0, 0x18(r1)
     stw r0, 0x4(r29)
     stw r4, 0x18(r1)
-    beq lbl_fn_8000E18C_000002C8
+    beq lbl_sys_vector_pushBack_000002C8
     lwz r3, 0x14(r1)
     cmpwi r3, 0x0
-    beq lbl_fn_8000E18C_000002C8
+    beq lbl_sys_vector_pushBack_000002C8
     stw r4, 0x18(r1)
     bl dtor_80084684
-lbl_fn_8000E18C_000002C8:
+lbl_sys_vector_pushBack_000002C8:
     lwz r0, 0x44(r1)
     lwz r31, 0x3c(r1)
     lwz r30, 0x38(r1)
@@ -399,10 +399,10 @@ lbl_fn_8000E474_0000039C:
     stw r3, 0xc(r1)
     addi r3, r27, 0x164
     addi r4, r1, 0xc
-    bl fn_8000E18C
+    bl sys_vector_pushBack
     addi r3, r27, 0x17c
     addi r4, r1, 0xc
-    bl fn_8000E18C
+    bl sys_vector_pushBack
     addi r31, r31, 0x4
     addi r29, r29, 0x1
 lbl_fn_8000E474_00000420:
@@ -676,10 +676,10 @@ lbl_fn_8000E820_00000740:
     stw r3, 0xc(r1)
     addi r3, r30, 0x164
     addi r4, r1, 0xc
-    bl fn_8000E18C
+    bl sys_vector_pushBack
     addi r3, r30, 0x17c
     addi r4, r1, 0xc
-    bl fn_8000E18C
+    bl sys_vector_pushBack
     addi r29, r29, 0x4
     addi r28, r28, 0x1
 lbl_fn_8000E820_000007C4:

@@ -9,7 +9,7 @@ extern void _savegpr_25(void);
 extern void dtor_80084684(void);
 extern void vec3_copy(void);
 extern void fn_8000D760(void);
-extern void fn_8000E18C(void);
+extern void sys_vector_pushBack(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void menu_initWindowBuffer(void);
@@ -1584,7 +1584,7 @@ lbl_fn_8029CF00_000014C4:
     stw r3, 0x28(r1)
     addi r3, r31, 0x1508
     addi r4, r1, 0x28
-    bl fn_8000E18C
+    bl sys_vector_pushBack
     lwz r0, 0x28(r1)
     cmpwi r0, 0x0
     bne lbl_fn_8029CF00_000014C4
@@ -1603,7 +1603,7 @@ lbl_fn_8029CF00_00001508:
     stw r3, 0x24(r1)
     addi r3, r31, 0x1514
     addi r4, r1, 0x24
-    bl fn_8000E18C
+    bl sys_vector_pushBack
     lwz r0, 0x24(r1)
     cmpwi r0, 0x0
     bne lbl_fn_8029CF00_00001508
@@ -1622,7 +1622,7 @@ lbl_fn_8029CF00_0000154C:
     stw r3, 0x20(r1)
     addi r3, r31, 0x1520
     addi r4, r1, 0x20
-    bl fn_8000E18C
+    bl sys_vector_pushBack
     lwz r0, 0x20(r1)
     cmpwi r0, 0x0
     bne lbl_fn_8029CF00_0000154C
@@ -1641,7 +1641,7 @@ lbl_fn_8029CF00_00001590:
     stw r3, 0x1c(r1)
     addi r3, r31, 0x152c
     addi r4, r1, 0x1c
-    bl fn_8000E18C
+    bl sys_vector_pushBack
     lwz r0, 0x1c(r1)
     cmpwi r0, 0x0
     bne lbl_fn_8029CF00_00001590
@@ -1660,7 +1660,7 @@ lbl_fn_8029CF00_000015D4:
     stw r3, 0x18(r1)
     addi r3, r31, 0x1538
     addi r4, r1, 0x18
-    bl fn_8000E18C
+    bl sys_vector_pushBack
     lwz r0, 0x18(r1)
     cmpwi r0, 0x0
     bne lbl_fn_8029CF00_000015D4
@@ -1679,7 +1679,7 @@ lbl_fn_8029CF00_00001618:
     stw r3, 0x14(r1)
     addi r3, r31, 0x1544
     addi r4, r1, 0x14
-    bl fn_8000E18C
+    bl sys_vector_pushBack
     lwz r0, 0x14(r1)
     cmpwi r0, 0x0
     bne lbl_fn_8029CF00_00001618
@@ -1756,7 +1756,7 @@ lbl_fn_8029CF00_0000172C:
     stw r3, 0x8(r1)
     addi r3, r31, 0x15b4
     addi r4, r1, 0x8
-    bl fn_8000E18C
+    bl sys_vector_pushBack
     lwz r0, 0x8(r1)
     cmpwi r0, 0x0
     bne lbl_fn_8029CF00_0000172C

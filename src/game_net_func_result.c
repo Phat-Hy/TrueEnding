@@ -40,7 +40,7 @@ extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_804AC83C(void);
-extern void fn_804ACD10(void);
+extern void net_coop_updateScoreRecord(void);
 extern void fn_804AD000(void);
 extern void fn_804D147C(void);
 extern void fn_8050541C(void);
@@ -514,7 +514,7 @@ lbl_fn_80505974_0000056C:
     li r5, 0x0
     bl fn_804AD000
     lwz r3, lbl_8087F588
-    bl fn_804ACD10
+    bl net_coop_updateScoreRecord
     li r0, 0x4
     stw r0, 0x25ac(r28)
 lbl_fn_80505974_00000584:

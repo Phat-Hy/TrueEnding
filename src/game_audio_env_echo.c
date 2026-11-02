@@ -18,7 +18,7 @@ extern void atn_Model_findBoneIndex(void);
 extern void fn_800E932C(void);
 extern void vec3_scale(void);
 extern void viewport_getGlobalContext(void);
-extern void fn_800F7FA8(void);
+extern void viewport_initAudioInstances(void);
 extern void viewport_getNextSequenceId(void);
 extern void fn_800F80A8(void);
 extern void fn_800F80B8(void);
@@ -1160,7 +1160,7 @@ lbl_fn_8031958C_00000E08:
     bl viewport_getGlobalContext
     mr r4, r31
     li r5, 0x3e9
-    bl fn_800F7FA8
+    bl viewport_initAudioInstances
     bl viewport_getGlobalContext
     li r0, 0x0
     stw r0, 0x8(r1)

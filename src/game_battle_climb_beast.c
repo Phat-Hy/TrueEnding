@@ -92,7 +92,7 @@ extern void fn_803FBC34(void);
 extern void fn_804093B4(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
-extern void fn_804EB1B0(void);
+extern void credits_checkRollState(void);
 extern void PSVECNormalize(void);
 extern void PSVECMag(void);
 extern void strcmp(void);
@@ -790,7 +790,7 @@ lbl_fn_803FA5C8_0000084C:
     cmpwi r3, 0x0
     beq lbl_fn_803FA5C8_000008B0
     bl viewport_getFlag
-    bl fn_804EB1B0
+    bl credits_checkRollState
     cmpwi r3, 0x0
     bne lbl_fn_803FA5C8_000008B0
     lwz r3, 0x4d0(r31)
@@ -1379,7 +1379,7 @@ asm void fn_803FAEB4(void)
     lwz r3, lbl_8087F610
     cmpwi r3, 0x0
     beq lbl_fn_803FAEB4_000010D0
-    bl fn_804EB1B0
+    bl credits_checkRollState
     cmpwi r3, 0x0
     beq lbl_fn_803FAEB4_000010D0
     li r31, 0x1
@@ -1469,7 +1469,7 @@ lbl_fn_803FAF8C_000011E0:
     lwz r3, lbl_8087F610
     cmpwi r3, 0x0
     beq lbl_fn_803FAF8C_0000120C
-    bl fn_804EB1B0
+    bl credits_checkRollState
     cmpwi r3, 0x0
     bne lbl_fn_803FAF8C_0000120C
     lwz r0, 0x0(r31)

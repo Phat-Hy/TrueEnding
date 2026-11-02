@@ -6,7 +6,7 @@ extern void __files(void);
 extern void _restgpr_26(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
-extern void fn_8000E18C(void);
+extern void sys_vector_pushBack(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void mem_alloc(void);
@@ -1350,10 +1350,10 @@ lbl_fn_8000DB24_0000107C:
     stw r3, 0xc(r1)
     addi r3, r26, 0x164
     addi r4, r1, 0xc
-    bl fn_8000E18C
+    bl sys_vector_pushBack
     addi r3, r26, 0x17c
     addi r4, r1, 0xc
-    bl fn_8000E18C
+    bl sys_vector_pushBack
     addi r31, r31, 0x4
     addi r29, r29, 0x1
 lbl_fn_8000DB24_00001100:

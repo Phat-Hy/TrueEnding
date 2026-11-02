@@ -51,7 +51,7 @@ extern void cam_destroyMsgHandle(void);
 extern void proj_getGlobalManager(void);
 extern void vec3_scale(void);
 extern void viewport_getGlobalContext(void);
-extern void fn_800F7FA8(void);
+extern void viewport_initAudioInstances(void);
 extern void viewport_getNextSequenceId(void);
 extern void fn_800F80A8(void);
 extern void fn_800F80B8(void);
@@ -2055,7 +2055,7 @@ lbl_fn_8041766C_000019F0:
     bl viewport_getGlobalContext
     mr r4, r26
     li r5, 0x1
-    bl fn_800F7FA8
+    bl viewport_initAudioInstances
     mulli r19, r19, 0xc
     bl viewport_getGlobalContext
     add r4, r24, r19
@@ -2066,7 +2066,7 @@ lbl_fn_8041766C_000019F0:
     bl viewport_getGlobalContext
     mr r4, r26
     li r5, 0x2
-    bl fn_800F7FA8
+    bl viewport_initAudioInstances
     bl viewport_getGlobalContext
     add r4, r24, r19
     lfs f1, lbl_80886490
@@ -2446,7 +2446,7 @@ lbl_fn_8041766C_00001EF8:
     bl viewport_getGlobalContext
     mr r4, r25
     li r5, 0x0
-    bl fn_800F7FA8
+    bl viewport_initAudioInstances
     bl viewport_getGlobalContext
     mr r5, r25
     addi r4, r24, 0x2438

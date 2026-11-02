@@ -183,7 +183,7 @@ void fn_805FD190(void);
 void fn_805FD310(void);
 void fn_805FD3F0(void);
 void fn_805FD580(void);
-void fn_805FD5B0(void);
+void dvd_prepareDriveReset(void);
 void fn_805FD8D0(void);
 void dvd_execCommand(void);
 void fn_805FE860(void);
@@ -462,7 +462,7 @@ lbl_0374:
     mtctr r12
     bctrl 
 lbl_03b4:
-    bl fn_805FD5B0
+    bl dvd_prepareDriveReset
     b lbl_044c
 lbl_03bc:
     bl OSDisableInterrupts
@@ -587,7 +587,7 @@ lbl_0548:
     mtctr r12
     bctrl 
 lbl_0578:
-    bl fn_805FD5B0
+    bl dvd_prepareDriveReset
 lbl_057c:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
@@ -889,7 +889,7 @@ lbl_0970:
     mtctr r12
     bctrl 
 lbl_098c:
-    bl fn_805FD5B0
+    bl dvd_prepareDriveReset
     li r0, 0x1
     b lbl_099c
 lbl_0998:
@@ -1421,7 +1421,7 @@ lbl_110c:
     mtctr r12
     bctrl 
 lbl_1128:
-    bl fn_805FD5B0
+    bl dvd_prepareDriveReset
     li r0, 0x1
     b lbl_1138
 lbl_1134:
@@ -2060,7 +2060,7 @@ lbl_1a40:
     mtctr r12
     bctrl 
 lbl_1a5c:
-    bl fn_805FD5B0
+    bl dvd_prepareDriveReset
     li r0, 0x1
     b lbl_1a6c
 lbl_1a68:
@@ -2302,7 +2302,7 @@ lbl_1da8:
     mtctr r12
     bctrl 
 lbl_1dc4:
-    bl fn_805FD5B0
+    bl dvd_prepareDriveReset
     li r0, 0x1
     b lbl_1dd4
 lbl_1dd0:
@@ -2414,7 +2414,7 @@ lbl_1f34:
     mtctr r12
     bctrl 
 lbl_1f50:
-    bl fn_805FD5B0
+    bl dvd_prepareDriveReset
     li r0, 0x1
     b lbl_1f60
 lbl_1f5c:
@@ -2603,7 +2603,7 @@ asm void fn_805FCA70(void) {
     mtctr r12
     bctrl 
 lbl_2204:
-    bl fn_805FD5B0
+    bl dvd_prepareDriveReset
     b lbl_2254
     li r0, 0x0
     stw r0, MotorState_8087FD70
@@ -2727,7 +2727,7 @@ lbl_23b8:
     mtctr r12
     bctrl 
 lbl_23d4:
-    bl fn_805FD5B0
+    bl dvd_prepareDriveReset
     li r0, 0x1
     b lbl_23e4
 lbl_23e0:
@@ -3001,7 +3001,7 @@ lbl_2798:
     mtctr r12
     bctrl 
 lbl_27b4:
-    bl fn_805FD5B0
+    bl dvd_prepareDriveReset
     li r0, 0x1
     b lbl_27c4
 lbl_27c0:
@@ -3116,7 +3116,7 @@ lbl_2930:
     mtctr r12
     bctrl 
 lbl_294c:
-    bl fn_805FD5B0
+    bl dvd_prepareDriveReset
     li r0, 0x1
     b lbl_295c
 lbl_2958:
@@ -3375,7 +3375,7 @@ asm void fn_805FD580(void) {
 }
 
 
-asm void fn_805FD5B0(void) {
+asm void dvd_prepareDriveReset(void) {
     nofralloc
     stwu r1, -0x10(r1)
     mflr r0
@@ -3415,7 +3415,7 @@ lbl_2d28:
     mtctr r12
     bctrl 
 lbl_2d6c:
-    bl fn_805FD5B0
+    bl dvd_prepareDriveReset
     b lbl_2fe8
 lbl_2d74:
     lwz r0, 0x8(r3)
@@ -3686,7 +3686,7 @@ lbl_30cc:
     mtctr r12
     bctrl 
 lbl_3150:
-    bl fn_805FD5B0
+    bl dvd_prepareDriveReset
     b lbl_3598
 lbl_3158:
     li r3, 0x0
@@ -3814,7 +3814,7 @@ lbl_31b0:
     mtctr r12
     bctrl 
 lbl_3340:
-    bl fn_805FD5B0
+    bl dvd_prepareDriveReset
     b lbl_3598
 lbl_3348:
     li r3, 0x0
@@ -4078,7 +4078,7 @@ lbl_36f4:
     mtctr r12
     bctrl 
 lbl_3710:
-    bl fn_805FD5B0
+    bl dvd_prepareDriveReset
     li r0, 0x1
     b lbl_3720
 lbl_371c:
@@ -4186,7 +4186,7 @@ lbl_3874:
     mtctr r12
     bctrl 
 lbl_3890:
-    bl fn_805FD5B0
+    bl dvd_prepareDriveReset
     b lbl_3f74
 lbl_3898:
     clrlwi. r0, r31, 31
@@ -4220,7 +4220,7 @@ lbl_38d8:
     mtctr r12
     bctrl 
 lbl_3908:
-    bl fn_805FD5B0
+    bl dvd_prepareDriveReset
     b lbl_3f74
 lbl_3910:
     lwz r0, lbl_8087FD84
@@ -4243,7 +4243,7 @@ lbl_3910:
     mtctr r12
     bctrl 
 lbl_395c:
-    bl fn_805FD5B0
+    bl dvd_prepareDriveReset
     b lbl_3f74
 lbl_3964:
     lwz r0, lbl_8087FD10
@@ -4272,7 +4272,7 @@ lbl_39a8:
     mtctr r12
     bctrl 
 lbl_39c4:
-    bl fn_805FD5B0
+    bl dvd_prepareDriveReset
     li r0, 0x1
     b lbl_39d4
 lbl_39d0:
@@ -4329,7 +4329,7 @@ lbl_3a60:
     mtctr r12
     bctrl 
 lbl_3a90:
-    bl fn_805FD5B0
+    bl dvd_prepareDriveReset
     b lbl_3f74
 lbl_3a98:
     lwz r0, lbl_8087FD84
@@ -4365,7 +4365,7 @@ lbl_3ad8:
     mtctr r12
     bctrl 
 lbl_3b08:
-    bl fn_805FD5B0
+    bl dvd_prepareDriveReset
     b lbl_3f74
 lbl_3b10:
     lwz r0, lbl_8087FD84
@@ -4398,7 +4398,7 @@ lbl_3b10:
 lbl_3b7c:
     li r0, 0x0
     stw r0, lbl_8087FD18
-    bl fn_805FD5B0
+    bl dvd_prepareDriveReset
     b lbl_3f74
 lbl_3b8c:
     bl OSDisableInterrupts
@@ -4465,7 +4465,7 @@ lbl_3c50:
     mtctr r12
     bctrl 
 lbl_3c7c:
-    bl fn_805FD5B0
+    bl dvd_prepareDriveReset
     b lbl_3f74
 lbl_3c84:
     lwz r4, lbl_8087FD84
@@ -4513,7 +4513,7 @@ lbl_3cf4:
     mtctr r12
     bctrl 
 lbl_3d20:
-    bl fn_805FD5B0
+    bl dvd_prepareDriveReset
     b lbl_3f74
 lbl_3d28:
     lwz r4, lbl_8087FD84
@@ -4577,7 +4577,7 @@ lbl_3dc8:
     mtctr r12
     bctrl 
 lbl_3df4:
-    bl fn_805FD5B0
+    bl dvd_prepareDriveReset
     b lbl_3f74
 lbl_3dfc:
     lwz r31, lbl_8087FD90
@@ -4593,7 +4593,7 @@ lbl_3dfc:
     mtctr r12
     bctrl 
 lbl_3e2c:
-    bl fn_805FD5B0
+    bl dvd_prepareDriveReset
     b lbl_3f74
 lbl_3e34:
     lwz r0, lbl_8087FD84
@@ -4653,7 +4653,7 @@ lbl_3eec:
     mtctr r12
     bctrl 
 lbl_3f08:
-    bl fn_805FD5B0
+    bl dvd_prepareDriveReset
     li r0, 0x1
     b lbl_3f18
 lbl_3f14:
@@ -4674,7 +4674,7 @@ lbl_3f18:
     mtctr r12
     bctrl 
 lbl_3f50:
-    bl fn_805FD5B0
+    bl dvd_prepareDriveReset
     b lbl_3f74
 lbl_3f58:
     li r3, 0x27
@@ -4745,7 +4745,7 @@ lbl_4010:
     lwz r0, lbl_8087FD04
     cmpwi r0, 0x0
     bne lbl_404c
-    bl fn_805FD5B0
+    bl dvd_prepareDriveReset
 lbl_404c:
     mr r3, r30
     bl OSRestoreInterrupts
@@ -4808,7 +4808,7 @@ lbl_40f8:
     lwz r0, lbl_8087FD04
     cmpwi r0, 0x0
     bne lbl_4134
-    bl fn_805FD5B0
+    bl dvd_prepareDriveReset
 lbl_4134:
     mr r3, r30
     bl OSRestoreInterrupts
@@ -4957,7 +4957,7 @@ asm void fn_805FEBB0(void) {
     cmpwi r0, 0x0
     beq lbl_4314
     stw r4, lbl_8087FD08
-    bl fn_805FD5B0
+    bl dvd_prepareDriveReset
 lbl_4314:
     mr r3, r31
     bl OSRestoreInterrupts
@@ -5087,7 +5087,7 @@ lbl_44d0:
     mtctr r12
     bctrl 
 lbl_44ec:
-    bl fn_805FD5B0
+    bl dvd_prepareDriveReset
     b lbl_466c
 lbl_44f4:
     lwz r0, lbl_8087FD10
@@ -5172,7 +5172,7 @@ lbl_45f8:
     mtctr r12
     bctrl 
 lbl_4614:
-    bl fn_805FD5B0
+    bl dvd_prepareDriveReset
     b lbl_466c
     lis r3, lbl_807D0EA0@ha
     li r0, 0xa
@@ -5195,7 +5195,7 @@ lbl_464c:
     mtctr r12
     bctrl 
 lbl_4668:
-    bl fn_805FD5B0
+    bl dvd_prepareDriveReset
 lbl_466c:
     mr r3, r31
     bl OSRestoreInterrupts
@@ -5499,7 +5499,7 @@ lbl_4a34:
     cmpwi r0, 0x0
     beq lbl_4a58
     stw r4, lbl_8087FD08
-    bl fn_805FD5B0
+    bl dvd_prepareDriveReset
 lbl_4a58:
     mr r3, r31
     bl OSRestoreInterrupts
@@ -5566,7 +5566,7 @@ void __DVDPrepareReset(void) {
         lbl_8087FD04 = 0;
         if (lbl_8087FD08) {
             lbl_8087FD08 = 0;
-            fn_805FD5B0();
+            dvd_prepareDriveReset();
         }
         OSRestoreInterrupts(level2);
         OSRestoreInterrupts(enabled);

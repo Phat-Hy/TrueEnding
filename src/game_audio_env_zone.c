@@ -21,7 +21,7 @@ extern void morph_updateMesh(void);
 extern void sound_playSpatialEffect(void);
 extern void vec3_scale(void);
 extern void viewport_getGlobalContext(void);
-extern void fn_800F7FA8(void);
+extern void viewport_initAudioInstances(void);
 extern void vec3_normalize(void);
 extern void viewport_getNextSequenceId(void);
 extern void system_getNextSequenceId(void);
@@ -1085,7 +1085,7 @@ asm void fn_8031D350(void)
     bl viewport_getGlobalContext
     mr r4, r31
     li r5, 0x65
-    bl fn_800F7FA8
+    bl viewport_initAudioInstances
     bl viewport_getGlobalContext
     addi r4, r31, 0x1598
     addi r5, r31, 0xb0

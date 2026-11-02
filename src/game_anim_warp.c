@@ -25,7 +25,7 @@ extern void atn_Task_setActive(void);
 extern void wcs_vformat(void);
 extern void vec3_scale(void);
 extern void viewport_getGlobalContext(void);
-extern void fn_800F7FA8(void);
+extern void viewport_initAudioInstances(void);
 extern void fn_800F80B8(void);
 extern void fn_800F8290(void);
 extern void hurtbox_dispatchHitEvent(void);
@@ -1765,7 +1765,7 @@ lbl_fn_80279280_0000174C:
     bl viewport_getGlobalContext
     li r4, 0x0
     li r5, 0x0
-    bl fn_800F7FA8
+    bl viewport_initAudioInstances
     addi r3, r1, 0x18
     addi r4, r25, 0x10
     bl vec3_toEulerAngles
@@ -1785,7 +1785,7 @@ lbl_fn_80279280_0000174C:
     bl viewport_getGlobalContext
     mr r4, r25
     li r5, 0x66
-    bl fn_800F7FA8
+    bl viewport_initAudioInstances
     lwz r3, 0x88(r25)
     bl scene_getRootNode
     mr r29, r3
@@ -1797,7 +1797,7 @@ lbl_fn_80279280_0000174C:
     bl viewport_getGlobalContext
     mr r4, r25
     li r5, 0x67
-    bl fn_800F7FA8
+    bl viewport_initAudioInstances
     lwz r3, 0x88(r25)
     bl scene_getRootNode
     mr r29, r3

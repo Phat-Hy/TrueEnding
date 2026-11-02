@@ -58,7 +58,7 @@ extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_804A04AC(void);
 extern void rand_Mersenne_constructor(void);
-extern void fn_805A4984(void);
+extern void string_parseQuotedToken(void);
 extern void world_setFlagByType(void);
 extern void fn_805A4A58(void);
 extern void PSMTXConcat(void);
@@ -879,7 +879,7 @@ lbl_fn_802D0594_00000AB0:
     mr r3, r29
     addi r4, r29, 0x166c
     addi r5, r1, 0x14
-    bl fn_805A4984
+    bl string_parseQuotedToken
     b lbl_fn_802D0594_00000C5C
 lbl_fn_802D0594_00000AD8:
     mr r3, r30
@@ -890,7 +890,7 @@ lbl_fn_802D0594_00000AD8:
     mr r3, r29
     addi r4, r29, 0x1678
     addi r5, r1, 0x14
-    bl fn_805A4984
+    bl string_parseQuotedToken
     b lbl_fn_802D0594_00000C5C
 lbl_fn_802D0594_00000B00:
     mr r3, r30
@@ -901,7 +901,7 @@ lbl_fn_802D0594_00000B00:
     mr r3, r29
     addi r4, r29, 0x1680
     addi r5, r1, 0x14
-    bl fn_805A4984
+    bl string_parseQuotedToken
     b lbl_fn_802D0594_00000C5C
 lbl_fn_802D0594_00000B28:
     mr r3, r30
@@ -912,7 +912,7 @@ lbl_fn_802D0594_00000B28:
     mr r3, r29
     addi r4, r29, 0x1688
     addi r5, r1, 0x14
-    bl fn_805A4984
+    bl string_parseQuotedToken
     b lbl_fn_802D0594_00000C5C
 lbl_fn_802D0594_00000B50:
     mr r3, r30
@@ -923,7 +923,7 @@ lbl_fn_802D0594_00000B50:
     mr r3, r29
     addi r4, r29, 0x1690
     addi r5, r1, 0x14
-    bl fn_805A4984
+    bl string_parseQuotedToken
     b lbl_fn_802D0594_00000C5C
 lbl_fn_802D0594_00000B78:
     mr r3, r30
@@ -934,7 +934,7 @@ lbl_fn_802D0594_00000B78:
     mr r3, r29
     addi r4, r29, 0x1698
     addi r5, r1, 0x14
-    bl fn_805A4984
+    bl string_parseQuotedToken
     b lbl_fn_802D0594_00000C5C
 lbl_fn_802D0594_00000BA0:
     mr r3, r30
@@ -945,7 +945,7 @@ lbl_fn_802D0594_00000BA0:
     mr r3, r29
     addi r4, r29, 0x16a0
     addi r5, r1, 0x14
-    bl fn_805A4984
+    bl string_parseQuotedToken
     b lbl_fn_802D0594_00000C5C
 lbl_fn_802D0594_00000BC8:
     mr r3, r30

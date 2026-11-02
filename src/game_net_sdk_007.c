@@ -45,7 +45,7 @@ extern void fn_806EA8A0(void);
 extern void fn_806EA920(void);
 extern void fn_806EAAD0(void);
 extern void fn_806EAC00(void);
-extern void fn_806EEDC0(void);
+extern void net_packet_formatHeader(void);
 extern void fn_806EF470(void);
 extern void fn_806EF5B0(void);
 extern void fn_806EF930(void);
@@ -2420,7 +2420,7 @@ lbl_fn_806A8290_00001DFC:
     beq lbl_fn_806A8290_00001F20
     li r4, 0x0
     li r5, 0x0
-    bl fn_806EEDC0
+    bl net_packet_formatHeader
     lis r4, lbl_807BD150@ha
     mr r5, r3
     addi r4, r4, lbl_807BD150@l
@@ -2910,7 +2910,7 @@ lbl_fn_806A8290_00002534:
 lbl_fn_806A8290_00002538:
     li r4, 0x3039
     li r5, 0x0
-    bl fn_806EEDC0
+    bl net_packet_formatHeader
     lwz r6, 0x4(r31)
     mr r5, r3
     mr r4, r24
@@ -2990,7 +2990,7 @@ lbl_fn_806A8290_00002650:
 lbl_fn_806A8290_00002654:
     li r4, 0x3039
     li r5, 0x0
-    bl fn_806EEDC0
+    bl net_packet_formatHeader
     lwz r6, 0x4(r31)
     mr r5, r3
     mr r4, r25

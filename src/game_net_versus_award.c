@@ -32,7 +32,7 @@ extern void fn_804C0A40(void);
 extern void fn_804C2994(void);
 extern void fn_804EA538(void);
 extern void fn_804EA5E0(void);
-extern void fn_804EB1B0(void);
+extern void credits_checkRollState(void);
 extern void fn_804EB270(void);
 extern void net_getLocalPlayerAid(void);
 extern void fn_804FA7CC(void);
@@ -105,7 +105,7 @@ asm void fn_804C0F88(void)
     stw r29, 0x214(r1)
     mr r29, r3
     lwz r3, lbl_8087F610
-    bl fn_804EB1B0
+    bl credits_checkRollState
     lwz r4, lbl_8087F588
     neg r0, r3
     or r3, r0, r3
@@ -1694,7 +1694,7 @@ lbl_fn_804C23E4_00001658:
     slwi r0, r3, 2
     add r31, r29, r0
     mr r3, r27
-    bl fn_804EB1B0
+    bl credits_checkRollState
     lwz r4, 0xdd4(r31)
     mr r5, r3
     mr r3, r27
@@ -1719,7 +1719,7 @@ lbl_fn_804C23E4_000016C0:
     stw r0, 0xe54(r29)
     li r30, 0x0
     lwz r3, lbl_8087F610
-    bl fn_804EB1B0
+    bl credits_checkRollState
     cmpwi r3, 0x0
     beq lbl_fn_804C23E4_0000183C
     bl rand
@@ -1879,7 +1879,7 @@ lbl_fn_804C23E4_000018D4:
     slwi r0, r30, 2
     add r30, r29, r0
     mr r3, r27
-    bl fn_804EB1B0
+    bl credits_checkRollState
     lwz r4, 0xdd4(r30)
     mr r5, r3
     mr r3, r27

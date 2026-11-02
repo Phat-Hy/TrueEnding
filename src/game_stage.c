@@ -19,7 +19,7 @@ extern void entity_checkActorType(void);
 extern void fn_8001BF4C(void);
 extern void fn_8001C068(void);
 extern void fn_8003CDB0(void);
-extern void fn_8003D298(void);
+extern void effect_createEmitter(void);
 extern void effect_testLifetime(void);
 extern void rand(void);
 
@@ -283,7 +283,7 @@ asm void fn_800202BC(void)
     addi r31, r30, lbl_807C6A40@l
     lwz r3, 0x24(r31)
     lwz r4, 0x28(r31)
-    bl fn_8003D298
+    bl effect_createEmitter
     cmpwi r3, 0x1
     bne lbl_fn_800202BC_00000270
     li r0, 0x1
@@ -509,7 +509,7 @@ lbl_fn_8002055C_0000051C:
     addi r31, r30, lbl_807C6A40@l
     lwz r3, 0x24(r31)
     lwz r4, 0x28(r31)
-    bl fn_8003D298
+    bl effect_createEmitter
     cmpwi r3, 0x1
     bne lbl_fn_8002055C_0000056C
     li r0, 0x1
@@ -588,7 +588,7 @@ asm void fn_800206B8(void)
     addi r4, r30, lbl_807C6A40@l
     lwz r3, 0x24(r4)
     lwz r4, 0x28(r4)
-    bl fn_8003D298
+    bl effect_createEmitter
     cmpwi r3, 0xa
     bne lbl_fn_800206B8_0000066C
     li r0, 0x1
@@ -1763,7 +1763,7 @@ lbl_fn_80021594_00001608:
     addi r4, r28, lbl_807C6A40@l
     lwz r3, 0x24(r4)
     lwz r4, 0x28(r4)
-    bl fn_8003D298
+    bl effect_createEmitter
     cmpwi r3, 0x1
     bne lbl_fn_80021594_0000163C
     li r0, 0x1
@@ -1896,7 +1896,7 @@ lbl_fn_80021594_000017FC:
 lbl_fn_80021594_00001808:
     lwz r3, 0x24(r30)
     lwz r4, 0x28(r30)
-    bl fn_8003D298
+    bl effect_createEmitter
     cmpwi r3, 0x1
     bne lbl_fn_80021594_0000182C
     li r0, 0x1
@@ -2106,7 +2106,7 @@ lbl_fn_80021AFC_00001AE4:
     addi r4, r31, lbl_807C6A40@l
     lwz r3, 0x24(r4)
     lwz r4, 0x28(r4)
-    bl fn_8003D298
+    bl effect_createEmitter
     cmpwi r3, 0x1
     bne lbl_fn_80021AFC_00001B10
     li r0, 0x1
@@ -2414,7 +2414,7 @@ lbl_fn_80021E40_00001EF0:
     addi r4, r28, lbl_807C6A40@l
     lwz r3, 0x24(r4)
     lwz r4, 0x28(r4)
-    bl fn_8003D298
+    bl effect_createEmitter
     cmpwi r3, 0x1
     bne lbl_fn_80021E40_00001F24
     li r0, 0x1
@@ -2547,7 +2547,7 @@ lbl_fn_80021E40_000020E4:
 lbl_fn_80021E40_000020F0:
     lwz r3, 0x24(r30)
     lwz r4, 0x28(r30)
-    bl fn_8003D298
+    bl effect_createEmitter
     cmpwi r3, 0x1
     bne lbl_fn_80021E40_00002114
     li r0, 0x1
@@ -2757,7 +2757,7 @@ lbl_fn_800223E4_000023CC:
     addi r4, r31, lbl_807C6A40@l
     lwz r3, 0x24(r4)
     lwz r4, 0x28(r4)
-    bl fn_8003D298
+    bl effect_createEmitter
     cmpwi r3, 0x1
     bne lbl_fn_800223E4_000023F8
     li r0, 0x1

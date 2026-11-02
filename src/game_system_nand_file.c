@@ -19,7 +19,7 @@ extern void fn_800EFD04(void);
 extern void fn_800EFDA0(void);
 extern void vec3_scale(void);
 extern void viewport_getGlobalContext(void);
-extern void fn_800F7FA8(void);
+extern void viewport_initAudioInstances(void);
 extern void math_lerpf(void);
 extern void system_getNextSequenceId(void);
 extern void viewport_updateCulling(void);
@@ -150,7 +150,7 @@ asm void fn_80348FF4(void)
     bl viewport_getGlobalContext
     mr r4, r31
     li r5, 0x3e8
-    bl fn_800F7FA8
+    bl viewport_initAudioInstances
     bl viewport_getGlobalContext
     lis r6, lbl_807C7030@ha
     lfs f1, lbl_80885398
@@ -195,7 +195,7 @@ lbl_fn_80348FF4_000000B4:
     bl viewport_getGlobalContext
     mr r4, r31
     li r5, 0x3e8
-    bl fn_800F7FA8
+    bl viewport_initAudioInstances
     bl viewport_getGlobalContext
     li r30, 0x0
     stw r30, 0x8(r1)

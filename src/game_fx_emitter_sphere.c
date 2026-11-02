@@ -10,7 +10,7 @@ extern void dtor_80084684(void);
 extern void vec3_copy(void);
 extern void fn_8000D760(void);
 extern void scene_transformPoint(void);
-extern void fn_8000E18C(void);
+extern void sys_vector_pushBack(void);
 extern void vec3_toEulerAngles(void);
 extern void vec3_sub(void);
 extern void actor_validateIndex(void);
@@ -1715,7 +1715,7 @@ lbl_fn_802885EC_000016CC:
     stw r3, 0x10(r1)
     addi r3, r31, 0x15ec
     addi r4, r1, 0x10
-    bl fn_8000E18C
+    bl sys_vector_pushBack
     lwz r0, 0x10(r1)
     cmpwi r0, 0x0
     bne lbl_fn_802885EC_000016CC
@@ -1733,7 +1733,7 @@ lbl_fn_802885EC_0000170C:
     stw r3, 0x10(r1)
     addi r3, r31, 0x15f8
     addi r4, r1, 0x10
-    bl fn_8000E18C
+    bl sys_vector_pushBack
     lwz r0, 0x10(r1)
     cmpwi r0, 0x0
     bne lbl_fn_802885EC_0000170C
@@ -1751,7 +1751,7 @@ lbl_fn_802885EC_0000174C:
     stw r3, 0x10(r1)
     addi r3, r31, 0x1604
     addi r4, r1, 0x10
-    bl fn_8000E18C
+    bl sys_vector_pushBack
     lwz r0, 0x10(r1)
     cmpwi r0, 0x0
     bne lbl_fn_802885EC_0000174C
@@ -1769,7 +1769,7 @@ lbl_fn_802885EC_0000178C:
     stw r3, 0x10(r1)
     addi r3, r31, 0x1610
     addi r4, r1, 0x10
-    bl fn_8000E18C
+    bl sys_vector_pushBack
     lwz r0, 0x10(r1)
     cmpwi r0, 0x0
     bne lbl_fn_802885EC_0000178C
@@ -1787,7 +1787,7 @@ lbl_fn_802885EC_000017CC:
     stw r3, 0x10(r1)
     addi r3, r31, 0x161c
     addi r4, r1, 0x10
-    bl fn_8000E18C
+    bl sys_vector_pushBack
     lwz r0, 0x10(r1)
     cmpwi r0, 0x0
     bne lbl_fn_802885EC_000017CC

@@ -14,7 +14,7 @@ extern void res_registerResource(void);
 extern void world_getGlobalFlag(void);
 extern void dvd_showDiskErrorDialog(void);
 extern void fn_804AC83C(void);
-extern void fn_804ACD10(void);
+extern void net_coop_updateScoreRecord(void);
 extern void fn_804ACE68(void);
 extern void fn_804AD1EC(void);
 extern void net_getPacketManager(void);
@@ -646,7 +646,7 @@ lbl_fn_804FAD4C_0000071C:
     lwz r3, lbl_8087F588
     bl fn_804ACE68
     lwz r3, lbl_8087F588
-    bl fn_804ACD10
+    bl net_coop_updateScoreRecord
     lwz r3, lbl_8087F588
     mr r4, r31
     bl fn_804AD1EC

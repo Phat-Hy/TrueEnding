@@ -48,7 +48,7 @@ extern void atn_LoadHandle_isLoading(void);
 extern void rand_Mersenne_constructor(void);
 extern void rand_Mersenne_init(void);
 extern void fn_805A3D6C(void);
-extern void fn_805A4984(void);
+extern void string_parseQuotedToken(void);
 extern void atn_Anim_startLayerAnimation(void);
 extern void fn_805A5224(void);
 extern void PSVECSquareMag(void);
@@ -1252,7 +1252,7 @@ lbl_fn_80310C64_00000FFC:
     mr r3, r29
     addi r4, r29, 0x15b0
     addi r5, r1, 0x8
-    bl fn_805A4984
+    bl string_parseQuotedToken
 lbl_fn_80310C64_00001020:
     addi r3, r1, 0x8
     bl talk_scanQuotedString

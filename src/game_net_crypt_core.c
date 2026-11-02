@@ -33,7 +33,7 @@ extern void fn_804AC79C(void);
 extern void fn_804AC7EC(void);
 extern void fn_804AC96C(void);
 extern void fn_804ACAF8(void);
-extern void fn_804ACD10(void);
+extern void net_coop_updateScoreRecord(void);
 extern void fn_804ACDBC(void);
 extern void fn_804AD000(void);
 extern void net_queue_transitionState(void);
@@ -2005,7 +2005,7 @@ lbl_fn_804B2934_00001B50:
     li r5, 0x0
     bl fn_804AD000
     lwz r3, lbl_8087F588
-    bl fn_804ACD10
+    bl net_coop_updateScoreRecord
     li r0, 0x2
     stw r0, 0x154(r31)
     b lbl_fn_804B2934_00001CAC

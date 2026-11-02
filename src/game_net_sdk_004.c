@@ -130,7 +130,7 @@ void fn_806A123C(void);
 void *fn_806A1240(void *p);
 void *fn_806A1248(void *p);
 void *fn_806A1250(void *p);
-void *fn_806A1258(void *p);
+void *net_getSessionContext(void *p);
 void fn_806A1260(void);
 void fn_806A1270(void);
 void fn_806A1288(void);
@@ -183,7 +183,7 @@ asm void fn_806A02C0(void)
     beq lbl_fn_806A02C0_000000B4
     bl net_initSubsystem
     mr r30, r3
-    bl fn_806A1258
+    bl net_getSessionContext
     mr r29, r3
     mr r4, r31
     bl fn_806A0DB4
@@ -277,7 +277,7 @@ asm void fn_806A0414(void)
     mr r28, r4
     bl net_initSubsystem
     mr r31, r3
-    bl fn_806A1258
+    bl net_getSessionContext
     mr r4, r30
     bl fn_806A0DBC
     mr r30, r3
@@ -334,7 +334,7 @@ asm void fn_806A04D8(void)
     mr r28, r4
     bl net_initSubsystem
     mr r31, r3
-    bl fn_806A1258
+    bl net_getSessionContext
     mr r4, r30
     bl fn_806A0DBC
     mr r30, r3
@@ -385,7 +385,7 @@ asm void fn_806A059C(void)
     stw r31, 0xc(r1)
     mr r31, r3
     bl net_initSubsystem
-    bl fn_806A1258
+    bl net_getSessionContext
     mr r4, r31
     bl fn_806A0DA4
     cmpwi r3, 0x0
@@ -437,7 +437,7 @@ asm void fn_806A0638(void)
     stw r30, 0x8(r1)
     mr r30, r3
     bl net_initSubsystem
-    bl fn_806A1258
+    bl net_getSessionContext
     mr r31, r3
     mr r4, r30
     bl fn_806A0DAC
@@ -478,7 +478,7 @@ asm void fn_806A06BC(void)
     stw r30, 0x18(r1)
     mr r30, r3
     bl net_initSubsystem
-    bl fn_806A1258
+    bl net_getSessionContext
     mr r4, r30
     bl fn_806A0DAC
     cmpwi r3, 0x0
@@ -509,7 +509,7 @@ asm void fn_806A0724(void)
     stw r31, 0xc(r1)
     mr r31, r3
     bl net_initSubsystem
-    bl fn_806A1258
+    bl net_getSessionContext
     mr r4, r31
     bl fn_806A0E00
     cmpwi r3, 0x0
@@ -543,7 +543,7 @@ asm void fn_806A0784(void)
     stw r30, 0x8(r1)
     mr r30, r3
     bl net_initSubsystem
-    bl fn_806A1258
+    bl net_getSessionContext
     mr r4, r30
     bl fn_806A0DBC
     cmpwi r3, 0x0
@@ -578,7 +578,7 @@ asm void fn_806A07E0(void)
     mr r27, r7
     addi r30, r30, lbl_807BC628@l
     bl net_initSubsystem
-    bl fn_806A1258
+    bl net_getSessionContext
     mr r4, r31
     bl fn_806A0DBC
     cmpwi r3, 0x0
@@ -679,7 +679,7 @@ asm void fn_806A0950(void)
     addi r31, r31, lbl_807BC628@l
     bl net_initSubsystem
     mr r30, r3
-    bl fn_806A1258
+    bl net_getSessionContext
     mr r4, r27
     bl fn_806A0DBC
     mr r29, r3
@@ -764,7 +764,7 @@ asm void fn_806A0A78(void)
     stw r31, 0xc(r1)
     mr r31, r3
     bl net_initSubsystem
-    bl fn_806A1258
+    bl net_getSessionContext
     mr r4, r31
     bl fn_806A0DBC
     cmpwi r3, 0x0
@@ -795,7 +795,7 @@ asm void fn_806A0AD8(void)
     stw r31, 0xc(r1)
     mr r31, r3
     bl net_initSubsystem
-    bl fn_806A1258
+    bl net_getSessionContext
     mr r4, r31
     bl fn_806A0DBC
     cmpwi r3, 0x0
@@ -1405,7 +1405,7 @@ void *fn_806A1250(void *p)
     return (u8 *)p + 0x840;
 }
 
-void *fn_806A1258(void *p)
+void *net_getSessionContext(void *p)
 {
     return (u8 *)p + 0x80c;
 }

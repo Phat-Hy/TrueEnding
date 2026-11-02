@@ -7,7 +7,7 @@ extern void _savegpr_17(void);
 extern void dtor_80013D60(void);
 extern void vec3_copy(void);
 extern void fn_8000D760(void);
-extern void fn_8000E18C(void);
+extern void sys_vector_pushBack(void);
 extern void sys_copyString(void);
 extern void sys_calcBufferOffset(void);
 extern void vec3_add(void);
@@ -1336,7 +1336,7 @@ lbl_fn_803C3894_00001158:
     stw r3, 0xc(r1)
     addi r3, r1, 0xb8
     addi r4, r1, 0xc
-    bl fn_8000E18C
+    bl sys_vector_pushBack
     addi r3, r1, 0x248
     bl cam_updateLookAtMatrix
 lbl_fn_803C3894_00001180:
@@ -1538,7 +1538,7 @@ lbl_fn_803C3894_00001458:
     stw r3, 0x8(r1)
     addi r3, r1, 0xa0
     addi r4, r1, 0x8
-    bl fn_8000E18C
+    bl sys_vector_pushBack
     addi r3, r1, 0x1e0
     bl cam_updateLookAtMatrix
 lbl_fn_803C3894_00001480:

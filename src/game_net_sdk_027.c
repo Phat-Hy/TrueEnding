@@ -50,7 +50,7 @@ extern void fn_806D5C90(void);
 extern void fn_806D5E60(void);
 extern void fn_806EAC90(void);
 extern void fn_806EACA0(void);
-extern void fn_806EEDC0(void);
+extern void net_packet_formatHeader(void);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
 
@@ -2515,7 +2515,7 @@ lbl_fn_806D9740_00001F24:
     bl fn_806EAC90
     clrlwi r4, r29, 16
     addi r5, r1, 0x14
-    bl fn_806EEDC0
+    bl net_packet_formatHeader
     lwz r3, 0x8(r28)
     bl net_bufferGetCount
     mr r29, r3

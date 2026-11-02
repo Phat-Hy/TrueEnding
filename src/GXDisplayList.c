@@ -34,7 +34,7 @@ void fn_8061A010(void);
 void fn_8061A0D0(void);
 void fn_8061A0E0(void);
 void fn_8061A0F0(void);
-void fn_8061A100(void);
+void gx_displayList_invokeVtableMethod(void);
 void fn_8061A110(void);
 void fn_8061A130(void);
 void fn_8061A150(void);
@@ -126,7 +126,7 @@ asm void fn_8061A0F0(void)
     bctr
 }
 
-asm void fn_8061A100(void)
+asm void gx_displayList_invokeVtableMethod(void)
 {
     nofralloc
     lwz r5, 0x0(r3)

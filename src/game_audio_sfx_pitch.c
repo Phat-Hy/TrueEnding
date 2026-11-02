@@ -31,7 +31,7 @@ extern void proj_getGlobalManager(void);
 extern void fn_800F7260(void);
 extern void vec3_scale(void);
 extern void viewport_getGlobalContext(void);
-extern void fn_800F7FA8(void);
+extern void viewport_initAudioInstances(void);
 extern void vec3_normalize(void);
 extern void viewport_getNextSequenceId(void);
 extern void system_getNextSequenceId(void);
@@ -99,7 +99,7 @@ extern void rand_Mersenne_init(void);
 extern void fn_805A3D6C(void);
 extern void fn_805A40BC(void);
 extern void fn_805A4258(void);
-extern void fn_805A4984(void);
+extern void string_parseQuotedToken(void);
 extern void world_setFlagByType(void);
 extern void atn_Anim_startLayerAnimation(void);
 extern void PSVECSquareMag(void);
@@ -698,7 +698,7 @@ lbl_fn_80313AAC_00000784:
     mr r3, r31
     addi r4, r31, 0x162c
     addi r5, r1, 0x28
-    bl fn_805A4984
+    bl string_parseQuotedToken
     b lbl_fn_80313AAC_000008BC
 lbl_fn_80313AAC_000007AC:
     mr r3, r29
@@ -2394,7 +2394,7 @@ lbl_fn_80314BD8_00001F5C:
     bl viewport_getGlobalContext
     li r4, 0x0
     li r5, 0x0
-    bl fn_800F7FA8
+    bl viewport_initAudioInstances
     bl viewport_getGlobalContext
     lfs f1, lbl_80884D20
     addi r4, r30, 0x1620

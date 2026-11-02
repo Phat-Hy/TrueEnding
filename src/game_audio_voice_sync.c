@@ -55,7 +55,7 @@ extern void fn_805A3D6C(void);
 extern void fn_805A40BC(void);
 extern void fn_805A4258(void);
 extern void fn_805A45FC(void);
-extern void fn_805A4984(void);
+extern void string_parseQuotedToken(void);
 extern void world_setFlagByType(void);
 extern void atn_Anim_startLayerAnimation(void);
 extern void PSMTXRotRad(void);
@@ -632,7 +632,7 @@ lbl_fn_80306078_000006D8:
     mr r3, r31
     addi r4, r31, 0x1558
     addi r5, r1, 0x8
-    bl fn_805A4984
+    bl string_parseQuotedToken
     b lbl_fn_80306078_00000884
 lbl_fn_80306078_00000700:
     mr r3, r28
@@ -643,7 +643,7 @@ lbl_fn_80306078_00000700:
     mr r3, r31
     addi r4, r31, 0x1560
     addi r5, r1, 0x8
-    bl fn_805A4984
+    bl string_parseQuotedToken
     b lbl_fn_80306078_00000884
 lbl_fn_80306078_00000728:
     mr r3, r28
@@ -711,7 +711,7 @@ lbl_fn_80306078_000007F0:
     mr r3, r31
     addi r4, r31, 0x1568
     addi r5, r1, 0x8
-    bl fn_805A4984
+    bl string_parseQuotedToken
     b lbl_fn_80306078_00000884
 lbl_fn_80306078_00000818:
     mr r3, r28

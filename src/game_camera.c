@@ -8,7 +8,7 @@ extern void fn_8001BD14(void);
 extern void entity_isActive(void);
 extern void entity_checkActorType(void);
 extern void fn_8003CDB0(void);
-extern void fn_8003D298(void);
+extern void effect_createEmitter(void);
 extern void effect_testLifetime(void);
 extern void rand(void);
 
@@ -1193,7 +1193,7 @@ asm void fn_8001FCB4(void)
     addi r30, r31, lbl_807C6A40@l
     lwz r3, 0x24(r30)
     lwz r4, 0x28(r30)
-    bl fn_8003D298
+    bl effect_createEmitter
     cmpwi r3, 0x1
     bne lbl_fn_8001FCB4_00000F0C
     li r0, 0x1

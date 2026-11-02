@@ -36,7 +36,7 @@ extern void fn_804AC734(void);
 extern void fn_804AC83C(void);
 extern void fn_804AC96C(void);
 extern void fn_804ACAF8(void);
-extern void fn_804ACD10(void);
+extern void net_coop_updateScoreRecord(void);
 extern void fn_804ACDBC(void);
 extern void fn_804AD000(void);
 extern void fn_804AD1EC(void);
@@ -1276,7 +1276,7 @@ lbl_fn_804B6F08_0000103C:
     li r5, 0x1
     bl fn_804AC83C
     lwz r3, lbl_8087F588
-    bl fn_804ACD10
+    bl net_coop_updateScoreRecord
     lwz r4, lbl_8087F86C
     lwz r3, lbl_8087F588
     lwz r4, 0x804(r4)
@@ -1400,7 +1400,7 @@ lbl_fn_804B6F08_00001228:
     li r6, 0x0
     bl fn_804AC96C
     lwz r3, lbl_8087F588
-    bl fn_804ACD10
+    bl net_coop_updateScoreRecord
     lwz r5, lbl_8087F588
     li r0, 0x40
     addi r3, r1, 0x24
@@ -2097,7 +2097,7 @@ lbl_fn_804B79F4_00001BA0:
     li r5, 0x1
     bl fn_804AC83C
     lwz r3, lbl_8087F588
-    bl fn_804ACD10
+    bl net_coop_updateScoreRecord
     lwz r4, lbl_8087F86C
     lwz r3, lbl_8087F588
     lwz r4, 0x7fc(r4)
@@ -2122,7 +2122,7 @@ lbl_fn_804B79F4_00001C04:
     li r5, 0x1
     bl fn_804AC83C
     lwz r3, lbl_8087F588
-    bl fn_804ACD10
+    bl net_coop_updateScoreRecord
     lwz r4, lbl_8087F86C
     lwz r3, lbl_8087F588
     lwz r4, 0x79c(r4)

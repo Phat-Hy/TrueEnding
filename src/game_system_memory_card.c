@@ -42,7 +42,7 @@ extern void atn_LoadHandle_isLoading(void);
 extern void fn_8059C2AC(void);
 extern void rand_Mersenne_constructor(void);
 extern void fn_805A3D6C(void);
-extern void fn_805A4984(void);
+extern void string_parseQuotedToken(void);
 extern void fn_805A49E8(void);
 extern void world_setFlagByType(void);
 extern void PSMTXRotRad(void);
@@ -891,7 +891,7 @@ lbl_fn_80355DD8_00000AD0:
     mr r3, r31
     addi r4, r31, 0x1664
     addi r5, r1, 0x1c
-    bl fn_805A4984
+    bl string_parseQuotedToken
     b lbl_fn_80355DD8_00000C5C
 lbl_fn_80355DD8_00000AF8:
     mr r3, r27
@@ -902,7 +902,7 @@ lbl_fn_80355DD8_00000AF8:
     mr r3, r31
     addi r4, r31, 0x166c
     addi r5, r1, 0x1c
-    bl fn_805A4984
+    bl string_parseQuotedToken
     b lbl_fn_80355DD8_00000C5C
 lbl_fn_80355DD8_00000B20:
     mr r3, r27
@@ -913,7 +913,7 @@ lbl_fn_80355DD8_00000B20:
     mr r3, r31
     addi r4, r31, 0x1674
     addi r5, r1, 0x1c
-    bl fn_805A4984
+    bl string_parseQuotedToken
     b lbl_fn_80355DD8_00000C5C
 lbl_fn_80355DD8_00000B48:
     mr r3, r27
@@ -924,7 +924,7 @@ lbl_fn_80355DD8_00000B48:
     mr r3, r31
     addi r4, r31, 0x167c
     addi r5, r1, 0x1c
-    bl fn_805A4984
+    bl string_parseQuotedToken
     b lbl_fn_80355DD8_00000C5C
 lbl_fn_80355DD8_00000B70:
     mr r3, r27
@@ -935,7 +935,7 @@ lbl_fn_80355DD8_00000B70:
     mr r3, r31
     addi r4, r31, 0x1684
     addi r5, r1, 0x1c
-    bl fn_805A4984
+    bl string_parseQuotedToken
     b lbl_fn_80355DD8_00000C5C
 lbl_fn_80355DD8_00000B98:
     mr r3, r27
@@ -946,7 +946,7 @@ lbl_fn_80355DD8_00000B98:
     mr r3, r31
     addi r4, r31, 0x168c
     addi r5, r1, 0x1c
-    bl fn_805A4984
+    bl string_parseQuotedToken
     b lbl_fn_80355DD8_00000C5C
 lbl_fn_80355DD8_00000BC0:
     mr r3, r27
@@ -957,7 +957,7 @@ lbl_fn_80355DD8_00000BC0:
     mr r3, r31
     addi r4, r31, 0x1694
     addi r5, r1, 0x1c
-    bl fn_805A4984
+    bl string_parseQuotedToken
     b lbl_fn_80355DD8_00000C5C
 lbl_fn_80355DD8_00000BE8:
     mr r3, r27
@@ -968,7 +968,7 @@ lbl_fn_80355DD8_00000BE8:
     mr r3, r31
     addi r4, r31, 0x169c
     addi r5, r1, 0x1c
-    bl fn_805A4984
+    bl string_parseQuotedToken
     b lbl_fn_80355DD8_00000C5C
 lbl_fn_80355DD8_00000C10:
     mr r3, r27
@@ -979,7 +979,7 @@ lbl_fn_80355DD8_00000C10:
     mr r3, r31
     addi r4, r31, 0x16a4
     addi r5, r1, 0x1c
-    bl fn_805A4984
+    bl string_parseQuotedToken
     b lbl_fn_80355DD8_00000C5C
 lbl_fn_80355DD8_00000C38:
     mr r3, r27
@@ -990,7 +990,7 @@ lbl_fn_80355DD8_00000C38:
     mr r3, r31
     addi r4, r31, 0x16ac
     addi r5, r1, 0x1c
-    bl fn_805A4984
+    bl string_parseQuotedToken
 lbl_fn_80355DD8_00000C5C:
     addi r3, r1, 0x1c
     bl talk_scanQuotedString

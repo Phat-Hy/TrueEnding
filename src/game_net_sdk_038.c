@@ -93,7 +93,7 @@ void fn_806EEAD0(void);
 void fn_806EEBF0(void);
 void fn_806EEC40(void);
 void fn_806EED30(void);
-void fn_806EEDC0(void);
+void net_packet_formatHeader(void);
 void fn_806EEEC0(void);
 void fn_806EF050(void);
 void fn_806EF0C0(void);
@@ -562,7 +562,7 @@ lbl_fn_806EED30_000005D4:
     blr
 }
 
-asm void fn_806EEDC0(void)
+asm void net_packet_formatHeader(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -575,10 +575,10 @@ asm void fn_806EEDC0(void)
     stw r30, 0x18(r1)
     stw r29, 0x14(r1)
     mr r29, r4
-    beq lbl_fn_806EEDC0_00000620
+    beq lbl_net_packet_formatHeader_00000620
     mr r30, r5
-    b lbl_fn_806EEDC0_00000640
-lbl_fn_806EEDC0_00000620:
+    b lbl_net_packet_formatHeader_00000640
+lbl_net_packet_formatHeader_00000620:
     lis r6, lbl_80861FC4@ha
     lis r5, lbl_80861F98@ha
     lwz r0, lbl_80861FC4@l(r6)
@@ -587,11 +587,11 @@ lbl_fn_806EEDC0_00000620:
     stw r0, lbl_80861FC4@l(r6)
     mulli r0, r0, 0x16
     add r30, r5, r0
-lbl_fn_806EEDC0_00000640:
+lbl_net_packet_formatHeader_00000640:
     cmpwi r3, 0x0
-    beq lbl_fn_806EEDC0_0000069C
+    beq lbl_net_packet_formatHeader_0000069C
     cmpwi r4, 0x0
-    beq lbl_fn_806EEDC0_00000678
+    beq lbl_net_packet_formatHeader_00000678
     stw r3, 0xc(r1)
     addi r3, r1, 0xc
     bl net_formatIpAddress
@@ -601,8 +601,8 @@ lbl_fn_806EEDC0_00000640:
     addi r4, r31, 0x0
     crclr 6
     bl sprintf
-    b lbl_fn_806EEDC0_000006C4
-lbl_fn_806EEDC0_00000678:
+    b lbl_net_packet_formatHeader_000006C4
+lbl_net_packet_formatHeader_00000678:
     stw r3, 0x8(r1)
     addi r3, r1, 0x8
     bl net_formatIpAddress
@@ -611,20 +611,20 @@ lbl_fn_806EEDC0_00000678:
     addi r4, r31, 0x8
     crclr 6
     bl sprintf
-    b lbl_fn_806EEDC0_000006C4
-lbl_fn_806EEDC0_0000069C:
+    b lbl_net_packet_formatHeader_000006C4
+lbl_net_packet_formatHeader_0000069C:
     cmpwi r4, 0x0
-    beq lbl_fn_806EEDC0_000006BC
+    beq lbl_net_packet_formatHeader_000006BC
     mr r3, r30
     mr r5, r29
     addi r4, r31, 0xc
     crclr 6
     bl sprintf
-    b lbl_fn_806EEDC0_000006C4
-lbl_fn_806EEDC0_000006BC:
+    b lbl_net_packet_formatHeader_000006C4
+lbl_net_packet_formatHeader_000006BC:
     li r0, 0x0
     stb r0, 0x0(r30)
-lbl_fn_806EEDC0_000006C4:
+lbl_net_packet_formatHeader_000006C4:
     mr r3, r30
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)

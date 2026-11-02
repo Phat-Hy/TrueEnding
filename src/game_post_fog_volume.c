@@ -6,7 +6,7 @@ extern void __files(void);
 extern void _restgpr_25(void);
 extern void _savegpr_25(void);
 extern void dtor_80084684(void);
-extern void fn_8000E18C(void);
+extern void sys_vector_pushBack(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void menu_initWindowBuffer(void);
@@ -1291,7 +1291,7 @@ lbl_fn_802D7E80_000010D0:
     beq lbl_fn_802D7E80_000010F4
     addi r3, r31, 0x1648
     addi r4, r1, 0x10
-    bl fn_8000E18C
+    bl sys_vector_pushBack
 lbl_fn_802D7E80_000010F4:
     lwz r0, 0x10(r1)
     cmpwi r0, 0x0

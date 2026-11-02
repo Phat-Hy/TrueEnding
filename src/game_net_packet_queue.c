@@ -25,7 +25,7 @@ extern void fn_804A5CD8(void);
 extern void fn_804AC83C(void);
 extern void fn_804AC96C(void);
 extern void fn_804ACAF8(void);
-extern void fn_804ACD10(void);
+extern void net_coop_updateScoreRecord(void);
 extern void fn_804ACDBC(void);
 extern void fn_804AD000(void);
 extern void fn_804B3EFC(void);
@@ -441,7 +441,7 @@ lbl_net_queue_transitionState_000003E8:
     li r5, 0x0
     bl fn_804AC83C
     lwz r3, lbl_8087F588
-    bl fn_804ACD10
+    bl net_coop_updateScoreRecord
     lwz r4, lbl_8087F86C
     lwz r3, lbl_8087F588
     lwz r4, 0x77c(r4)
@@ -724,7 +724,7 @@ lbl_net_queue_transitionState_000008A4:
     li r5, 0x0
     bl fn_804AD000
     lwz r3, lbl_8087F588
-    bl fn_804ACD10
+    bl net_coop_updateScoreRecord
     lwz r3, lbl_8087F588
     lwz r0, 0x38(r3)
     ori r0, r0, 0x4
@@ -763,7 +763,7 @@ lbl_net_queue_transitionState_00000938:
     li r5, 0x0
     bl fn_804AD000
     lwz r3, lbl_8087F588
-    bl fn_804ACD10
+    bl net_coop_updateScoreRecord
     b lbl_net_queue_transitionState_00001894
 lbl_net_queue_transitionState_0000094C:
     li r0, 0x3
@@ -811,7 +811,7 @@ lbl_net_queue_transitionState_000009E0:
     li r5, 0x0
     bl fn_804AD000
     lwz r3, lbl_8087F588
-    bl fn_804ACD10
+    bl net_coop_updateScoreRecord
     b lbl_net_queue_transitionState_00001894
     mr r3, r30
     bl fn_804B6988
@@ -908,7 +908,7 @@ lbl_net_queue_transitionState_00000B44:
     li r5, 0x0
     bl fn_804AD000
     lwz r3, lbl_8087F588
-    bl fn_804ACD10
+    bl net_coop_updateScoreRecord
     lwz r3, lbl_8087F588
     lwz r0, 0x38(r3)
     ori r0, r0, 0x4
@@ -931,7 +931,7 @@ lbl_net_queue_transitionState_00000B44:
     li r5, 0x0
     bl fn_804AC83C
     lwz r3, lbl_8087F588
-    bl fn_804ACD10
+    bl net_coop_updateScoreRecord
     lwz r4, lbl_8087F86C
     lwz r3, lbl_8087F588
     lwz r4, 0x794(r4)

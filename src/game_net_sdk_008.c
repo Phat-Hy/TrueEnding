@@ -26,7 +26,7 @@ extern void fn_806EAAD0(void);
 extern void fn_806EABE0(void);
 extern void fn_806EAC00(void);
 extern void fn_806EAC90(void);
-extern void fn_806EEDC0(void);
+extern void net_packet_formatHeader(void);
 extern void fn_806EF930(void);
 extern void fn_806FFA10(void);
 
@@ -343,7 +343,7 @@ asm void fn_806A9000(void)
     stw r8, 0x8(r6)
     lwz r6, lbl_8085FF44@l(r31)
     stw r7, 0xc(r6)
-    bl fn_806EEDC0
+    bl net_packet_formatHeader
     mr r4, r3
     lis r7, fn_806A8F20@ha
     lwz r3, lbl_8085FF44@l(r31)
@@ -427,7 +427,7 @@ lbl_fn_806A9170_000004B8:
     bl fn_806EAC90
     li r4, 0x0
     li r5, 0x0
-    bl fn_806EEDC0
+    bl net_packet_formatHeader
     lis r4, lbl_807BD19C@ha
     mr r5, r3
     mr r6, r31
@@ -807,7 +807,7 @@ lbl_fn_806A9420_000009D4:
     mr r3, r25
     mr r4, r26
     li r5, 0x0
-    bl fn_806EEDC0
+    bl net_packet_formatHeader
     lis r4, lbl_8085FF40@ha
     mr r6, r3
     lwz r7, lbl_8085FF40@l(r4)

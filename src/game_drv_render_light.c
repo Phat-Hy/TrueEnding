@@ -62,7 +62,7 @@ extern void PSMTXScale(void);
 extern void GXLoadPosMtxImm(void);
 extern void GXSetCurrentMtx(void);
 extern void fn_8061A0F0(void);
-extern void fn_8061A100(void);
+extern void gx_displayList_invokeVtableMethod(void);
 extern void __construct_new_array(void);
 extern void __destroy_new_array(void);
 
@@ -1239,7 +1239,7 @@ asm void fn_805D3DD0(void)
     lis r3, lbl_807CA1F8@ha
     lwz r4, 0x28(r30)
     lwz r3, lbl_807CA1F8@l(r3)
-    bl fn_8061A100
+    bl gx_displayList_invokeVtableMethod
     li r0, 0x0
     stw r0, 0x28(r30)
 lbl_fn_805D3DD0_00000EE8:
@@ -1767,7 +1767,7 @@ asm void fn_805D4520(void)
     lis r3, lbl_807CA1F8@ha
     lwz r4, 0xe0(r30)
     lwz r3, lbl_807CA1F8@l(r3)
-    bl fn_8061A100
+    bl gx_displayList_invokeVtableMethod
     lbz r0, 0xfd(r30)
     rlwinm r0, r0, 0, 25, 23
     stb r0, 0xfd(r30)
@@ -1818,7 +1818,7 @@ lbl_fn_805D4520_000016A8:
     lis r3, lbl_807CA1F8@ha
     lwz r4, 0x28(r30)
     lwz r3, lbl_807CA1F8@l(r3)
-    bl fn_8061A100
+    bl gx_displayList_invokeVtableMethod
     li r0, 0x0
     stw r0, 0x28(r30)
 lbl_fn_805D4520_000016EC:

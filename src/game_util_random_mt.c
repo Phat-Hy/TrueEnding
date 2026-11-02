@@ -100,7 +100,7 @@ void fn_805A40BC(void);
 void fn_805A418C(void);
 void fn_805A4258(void);
 void fn_805A45FC(void);
-void fn_805A4984(void);
+void string_parseQuotedToken(void);
 
 void fn_805A2FD4(void) {
 }
@@ -1997,7 +1997,7 @@ lbl_fn_805A45FC_00001970:
     blr
 }
 
-asm void fn_805A4984(void)
+asm void string_parseQuotedToken(void)
 {
     nofralloc
     stwu r1, -0x10(r1)

@@ -26,7 +26,7 @@ extern void thread_dispatchToQueue(void);
 extern void net_initCoopSession(void);
 extern void fn_804AC734(void);
 extern void fn_804AC83C(void);
-extern void fn_804ACD10(void);
+extern void net_coop_updateScoreRecord(void);
 extern void fn_804AD1EC(void);
 extern void fn_804AD738(void);
 extern void fn_804BC628(void);
@@ -35,7 +35,7 @@ extern void fn_804C1370(void);
 extern void fn_804C1634(void);
 extern void fn_804DD9D0(void);
 extern void fn_804DE564(void);
-extern void fn_804EB1B0(void);
+extern void credits_checkRollState(void);
 extern void fn_804EB270(void);
 extern void net_getLocalPlayerAid(void);
 extern void fn_804F5B0C(void);
@@ -109,7 +109,7 @@ asm void fn_804BF550(void)
     stw r30, 0x28(r1)
     stw r29, 0x24(r1)
     lwz r3, lbl_8087F610
-    bl fn_804EB1B0
+    bl credits_checkRollState
     cmpwi r3, 0x0
     beq lbl_fn_804BF550_0000031C
     lwz r0, 0xd88(r31)
@@ -884,7 +884,7 @@ asm void fn_804C0094(void)
     bl _savegpr_26
     mr r31, r3
     lwz r3, lbl_8087F610
-    bl fn_804EB1B0
+    bl credits_checkRollState
     cmpwi r3, 0x1
     beq lbl_fn_804C0094_00000EC8
     lwz r3, lbl_8087F610
@@ -913,7 +913,7 @@ lbl_fn_804C0094_00000BB8:
     li r5, 0x1
     bl fn_804AC83C
     lwz r3, lbl_8087F588
-    bl fn_804ACD10
+    bl net_coop_updateScoreRecord
     lwz r4, lbl_8087F86C
     lwz r3, lbl_8087F588
     lwz r4, 0x814(r4)
@@ -961,7 +961,7 @@ lbl_fn_804C0094_00000C68:
     li r5, 0x1
     bl fn_804AC83C
     lwz r3, lbl_8087F588
-    bl fn_804ACD10
+    bl net_coop_updateScoreRecord
     lwz r3, lbl_8087F628
     li r4, 0xf4
     lwz r0, 0x25c(r3)
@@ -1238,7 +1238,7 @@ lbl_fn_804C0548_00001070:
     bl net_getLocalPlayerAid
     mr r30, r3
     lwz r3, lbl_8087F610
-    bl fn_804EB1B0
+    bl credits_checkRollState
     cmpwi r3, 0x1
     bne lbl_fn_804C0548_000010A0
     lwz r3, lbl_8087F610

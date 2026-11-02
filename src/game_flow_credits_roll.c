@@ -68,7 +68,7 @@ void fn_804EAA88(void);
 void fn_804EAEE4(void);
 void fn_804EAFD4(void);
 void fn_804EB014(void);
-void fn_804EB1B0(void);
+void credits_checkRollState(void);
 void fn_804EB270(void);
 void fn_804EB2DC(void);
 void fn_804EB3D0(void);
@@ -1645,7 +1645,7 @@ lbl_fn_804EB014_00001530:
     blr
 }
 
-asm void fn_804EB1B0(void)
+asm void credits_checkRollState(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1656,44 +1656,44 @@ asm void fn_804EB1B0(void)
     addis r3, r4, 0x1
     lbz r0, -0x3deb(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_804EB1B0_0000158C
+    bne lbl_credits_checkRollState_0000158C
     lwz r0, 0x1f8(r4)
     extrwi. r0, r0, 1, 12
-    beq lbl_fn_804EB1B0_00001580
+    beq lbl_credits_checkRollState_00001580
     li r31, 0x0
-    b lbl_fn_804EB1B0_000015A8
-lbl_fn_804EB1B0_00001580:
+    b lbl_credits_checkRollState_000015A8
+lbl_credits_checkRollState_00001580:
     bl net_getMyAid
     clrlwi r31, r3, 24
-    b lbl_fn_804EB1B0_000015A8
-lbl_fn_804EB1B0_0000158C:
+    b lbl_credits_checkRollState_000015A8
+lbl_credits_checkRollState_0000158C:
     lwz r0, 0x1f8(r4)
     extrwi. r0, r0, 1, 12
-    beq lbl_fn_804EB1B0_000015A0
+    beq lbl_credits_checkRollState_000015A0
     li r3, 0x0
-    b lbl_fn_804EB1B0_000015A4
-lbl_fn_804EB1B0_000015A0:
+    b lbl_credits_checkRollState_000015A4
+lbl_credits_checkRollState_000015A0:
     bl net_getSocket
-lbl_fn_804EB1B0_000015A4:
+lbl_credits_checkRollState_000015A4:
     clrlwi r31, r3, 24
-lbl_fn_804EB1B0_000015A8:
+lbl_credits_checkRollState_000015A8:
     lwz r4, lbl_8087F628
     addis r3, r4, 0x1
     lbz r0, -0x3deb(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_804EB1B0_000015DC
+    bne lbl_credits_checkRollState_000015DC
     lwz r0, 0x1f8(r4)
     extrwi. r0, r0, 1, 12
-    beq lbl_fn_804EB1B0_000015D0
+    beq lbl_credits_checkRollState_000015D0
     li r0, 0x0
-    b lbl_fn_804EB1B0_000015E0
-lbl_fn_804EB1B0_000015D0:
+    b lbl_credits_checkRollState_000015E0
+lbl_credits_checkRollState_000015D0:
     bl net_isSessionConnected
     clrlwi r0, r3, 24
-    b lbl_fn_804EB1B0_000015E0
-lbl_fn_804EB1B0_000015DC:
+    b lbl_credits_checkRollState_000015E0
+lbl_credits_checkRollState_000015DC:
     li r0, 0x0
-lbl_fn_804EB1B0_000015E0:
+lbl_credits_checkRollState_000015E0:
     clrlwi r3, r31, 24
     clrlwi r0, r0, 24
     subf r0, r3, r0

@@ -54,7 +54,7 @@ extern void GXSetTevOrder(void);
 extern void GXSetNumTevStages(void);
 extern void GXSetTevAlphaIn(void);
 extern void GXLoadTexMtxImm(void);
-extern void fn_8061A100(void);
+extern void gx_displayList_invokeVtableMethod(void);
 extern void strncpy(void);
 
 /* External data declarations */
@@ -1777,7 +1777,7 @@ lbl_fn_805D2C70_000017B0:
     bctrl
     lwz r3, lbl_807CA1F8@l(r29)
     mr r4, r28
-    bl fn_8061A100
+    bl gx_displayList_invokeVtableMethod
 lbl_fn_805D2C70_000017FC:
     cmplw r31, r30
     bne lbl_fn_805D2C70_000017B0
@@ -1801,7 +1801,7 @@ lbl_fn_805D2C70_000017FC:
     lis r3, lbl_807CA1F8@ha
     lwz r4, 0x28(r26)
     lwz r3, lbl_807CA1F8@l(r3)
-    bl fn_8061A100
+    bl gx_displayList_invokeVtableMethod
 lbl_fn_805D2C70_00001858:
     addic. r3, r26, 0x1c
     beq lbl_fn_805D2C70_00001868

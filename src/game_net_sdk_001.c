@@ -51,7 +51,7 @@ extern void fn_806A123C(void);
 extern void fn_806A1240(void);
 extern void fn_806A1248(void);
 extern void fn_806A1250(void);
-extern void fn_806A1258(void);
+extern void net_getSessionContext(void);
 extern void fn_806A1288(void);
 extern void fn_806A37F4(void);
 extern void fn_806A39B8(void);
@@ -232,7 +232,7 @@ asm void fn_8069A1B8(void)
     bl fn_806A1248
     mr r27, r3
     mr r3, r31
-    bl fn_806A1258
+    bl net_getSessionContext
     mr r26, r3
     mr r3, r31
     bl fn_806A1250
@@ -1998,7 +1998,7 @@ asm void fn_8069B8AC(void)
     stw r30, 0x18(r1)
     stw r29, 0x14(r1)
     mr r29, r4
-    bl fn_806A1258
+    bl net_getSessionContext
     mr r30, r3
     mr r4, r29
     bl fn_806A0DA4
@@ -2148,7 +2148,7 @@ asm void fn_8069BA88(void)
     bl fn_806A1250
     mr r30, r3
     mr r3, r28
-    bl fn_806A1258
+    bl net_getSessionContext
     lwz r0, 0x4(r27)
     mr r29, r3
     cmpwi r0, 0x0
@@ -2203,7 +2203,7 @@ asm void fn_8069BB48(void)
     bl fn_806A1248
     mr r31, r3
     mr r3, r27
-    bl fn_806A1258
+    bl net_getSessionContext
     lwz r29, 0x0(r31)
     mr r31, r3
     bl fn_8069AA08
@@ -2261,7 +2261,7 @@ asm void fn_8069BC0C(void)
     bl fn_806A1240
     mr r30, r3
     mr r3, r29
-    bl fn_806A1258
+    bl net_getSessionContext
     lwz r29, 0x0(r31)
     mr r31, r3
     bl fn_8069AA08

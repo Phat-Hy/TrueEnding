@@ -26,7 +26,7 @@ extern void fn_804D5F4C(void);
 extern void fn_804D634C(void);
 extern void net_voiceCodec_destroy(void);
 extern void fn_804DD15C(void);
-extern void fn_804EB1B0(void);
+extern void credits_checkRollState(void);
 extern void fn_804EF9B8(void);
 extern void fn_804EFC98(void);
 extern void fn_804EFE9C(void);
@@ -849,7 +849,7 @@ asm void fn_804EE044(void)
     rlwinm r0, r0, 0, 4, 2
     stw r0, 0xd0(r3)
     bl viewport_getFlag
-    bl fn_804EB1B0
+    bl credits_checkRollState
     cmpwi r3, 0x1
     bne lbl_fn_804EE044_00000998
     bl viewport_getFlag

@@ -158,7 +158,7 @@ void fn_804AC7EC(void);
 void fn_804AC83C(void);
 void fn_804AC96C(void);
 void fn_804ACAF8(void);
-void fn_804ACD10(void);
+void net_coop_updateScoreRecord(void);
 void fn_804ACDBC(void);
 void fn_804ACE68(void);
 void fn_804AD000(void);
@@ -1553,52 +1553,52 @@ lbl_fn_804ACAF8_000011DC:
     blr
 }
 
-asm void fn_804ACD10(void)
+asm void net_coop_updateScoreRecord(void)
 {
     nofralloc
     lwz r4, 0x4c(r3)
     subi r0, r4, 0x1
     cmplwi r0, 0x1
-    bgt lbl_fn_804ACD10_00001354
+    bgt lbl_net_coop_updateScoreRecord_00001354
     lwz r0, 0x50(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_804ACD10_00001314
+    bne lbl_net_coop_updateScoreRecord_00001314
     lwz r4, 0x54(r3)
     lwz r0, 0x38(r4)
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0x38(r4)
-    b lbl_fn_804ACD10_00001340
-lbl_fn_804ACD10_00001314:
+    b lbl_net_coop_updateScoreRecord_00001340
+lbl_net_coop_updateScoreRecord_00001314:
     cmpwi r0, 0x1
-    bne lbl_fn_804ACD10_00001330
+    bne lbl_net_coop_updateScoreRecord_00001330
     lwz r4, 0x58(r3)
     lwz r0, 0x38(r4)
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0x38(r4)
-    b lbl_fn_804ACD10_00001340
-lbl_fn_804ACD10_00001330:
+    b lbl_net_coop_updateScoreRecord_00001340
+lbl_net_coop_updateScoreRecord_00001330:
     lwz r4, 0x5c(r3)
     lwz r0, 0x38(r4)
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0x38(r4)
-lbl_fn_804ACD10_00001340:
+lbl_net_coop_updateScoreRecord_00001340:
     lwz r3, 0x68(r3)
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0x38(r3)
     blr
-lbl_fn_804ACD10_00001354:
+lbl_net_coop_updateScoreRecord_00001354:
     cmpwi r4, 0x0
     beqlr
     lwz r0, 0x50(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_804ACD10_0000137C
+    bne lbl_net_coop_updateScoreRecord_0000137C
     lwz r3, 0x60(r3)
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0x38(r3)
     blr
-lbl_fn_804ACD10_0000137C:
+lbl_net_coop_updateScoreRecord_0000137C:
     lwz r3, 0x64(r3)
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 30, 28

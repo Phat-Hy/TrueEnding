@@ -79,7 +79,7 @@ extern void fn_806A123C(void);
 extern void fn_806A1240(void);
 extern void fn_806A1248(void);
 extern void fn_806A1250(void);
-extern void fn_806A1258(void);
+extern void net_getSessionContext(void);
 extern void fn_806A1260(void);
 extern void fn_806A1270(void);
 
@@ -136,7 +136,7 @@ asm void fn_8069E1BC(void)
     mr r27, r3
     bl net_initSubsystem
     mr r25, r3
-    bl fn_806A1258
+    bl net_getSessionContext
     mr r30, r3
     mr r3, r25
     bl fn_806A1248
@@ -348,7 +348,7 @@ asm void fn_8069E480(void)
     bl fn_806A1248
     mr r31, r3
     mr r3, r25
-    bl fn_806A1258
+    bl net_getSessionContext
     lwz r4, 0x0(r31)
     mr r30, r3
     lwz r29, 0xc(r4)
@@ -453,7 +453,7 @@ asm void fn_8069E600(void)
     mr r28, r3
     bl net_initSubsystem
     mr r30, r3
-    bl fn_806A1258
+    bl net_getSessionContext
     mr r29, r3
     bl fn_8069AA08
     mr r3, r30
@@ -613,7 +613,7 @@ asm void fn_8069E80C(void)
     mr r30, r3
     mr r3, r29
     lwz r29, 0xc(r4)
-    bl fn_806A1258
+    bl net_getSessionContext
     lwz r0, 0x338(r31)
     mr r27, r3
     li r26, 0x0
@@ -738,7 +738,7 @@ asm void fn_8069E9C8(void)
     bl fn_806A1248
     mr r31, r3
     mr r3, r30
-    bl fn_806A1258
+    bl net_getSessionContext
     lwz r5, 0x0(r31)
     li r4, 0xa
     li r0, 0x0
@@ -835,7 +835,7 @@ asm void fn_8069EB1C(void)
     lwz r4, 0x0(r3)
     mr r3, r28
     lwz r29, 0xc(r4)
-    bl fn_806A1258
+    bl net_getSessionContext
     mr r26, r3
     mr r3, r28
     bl fn_806A123C
@@ -1172,7 +1172,7 @@ asm void fn_8069EFB8(void)
     mr r3, r23
     lwz r29, 0xc(r4)
     lwz r28, 0x2c(r29)
-    bl fn_806A1258
+    bl net_getSessionContext
     mr r27, r3
     mr r4, r29
     bl fn_806A0DA4
@@ -1547,7 +1547,7 @@ asm void fn_8069F4D4(void)
     bl fn_806A123C
     mr r27, r3
     mr r3, r17
-    bl fn_806A1258
+    bl net_getSessionContext
     mr r20, r3
     mr r4, r22
     bl fn_806A0DA4
@@ -2131,7 +2131,7 @@ asm void fn_8069FCC8(void)
     bl fn_806A123C
     mr r31, r3
     mr r3, r29
-    bl fn_806A1258
+    bl net_getSessionContext
     lis r30, 0x1
     mr r28, r3
     subi r3, r30, 0x7fa0
@@ -2213,7 +2213,7 @@ asm void fn_8069FE10(void)
     stw r30, 0x8(r1)
     bl net_initSubsystem
     mr r30, r3
-    bl fn_806A1258
+    bl net_getSessionContext
     mr r4, r31
     bl fn_806A0DB4
     cmpwi r3, 0x0
@@ -2260,7 +2260,7 @@ asm void fn_8069FE9C(void)
     stw r28, 0x10(r1)
     mr r28, r3
     bl net_initSubsystem
-    bl fn_806A1258
+    bl net_getSessionContext
     mr r31, r3
     mr r4, r28
     bl fn_806A0DB4
@@ -2303,7 +2303,7 @@ asm void fn_8069FF38(void)
     stw r30, 0x8(r1)
     mr r30, r3
     bl net_initSubsystem
-    bl fn_806A1258
+    bl net_getSessionContext
     mr r31, r3
     mr r4, r30
     bl fn_806A0DB4
@@ -2339,7 +2339,7 @@ asm void fn_8069FFAC(void)
     stw r31, 0xc(r1)
     mr r31, r3
     bl net_initSubsystem
-    bl fn_806A1258
+    bl net_getSessionContext
     mr r4, r31
     bl fn_806A0DB4
     cmpwi r3, 0x0
@@ -2443,7 +2443,7 @@ asm void fn_806A00DC(void)
     stw r28, 0x10(r1)
     mr r28, r3
     bl net_initSubsystem
-    bl fn_806A1258
+    bl net_getSessionContext
     mr r30, r3
     mr r4, r28
     bl fn_806A0DB4
