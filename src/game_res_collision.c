@@ -3,7 +3,7 @@
 
 /* External function declarations */
 extern void mem_free(void);
-extern void fn_800E1D5C(void);
+extern void particle_acquireRef(void);
 extern void fn_80242A8C(void);
 extern void fn_80242FF4(void);
 extern void std_string_append(void);
@@ -42,7 +42,7 @@ lbl_fn_8023D308_00000038:
     lwz r28, 0x0(r4)
     mr r4, r26
     addi r3, r1, 0x20
-    bl fn_800E1D5C
+    bl particle_acquireRef
     lwz r25, lbl_808803C0
     cmpwi r25, 0x0
     bne lbl_fn_8023D308_00000064
@@ -303,7 +303,7 @@ lbl_fn_8023D308_000003AC:
     mr r4, r26
     addi r3, r1, 0x18
     li r28, 0x0
-    bl fn_800E1D5C
+    bl particle_acquireRef
     lwz r30, lbl_808803C0
     cmpwi r30, 0x0
     bne lbl_fn_8023D308_000003DC
@@ -617,7 +617,7 @@ lbl_fn_8023D308_000007E0:
     lwz r25, 0x0(r4)
     mr r4, r26
     addi r3, r1, 0x10
-    bl fn_800E1D5C
+    bl particle_acquireRef
     lwz r28, lbl_808803C0
     cmpwi r28, 0x0
     bne lbl_fn_8023D308_0000080C
@@ -881,7 +881,7 @@ lbl_fn_8023DE24_00000B58:
     lwz r28, 0x0(r4)
     mr r4, r26
     addi r3, r1, 0x20
-    bl fn_800E1D5C
+    bl particle_acquireRef
     lwz r25, lbl_808803C0
     cmpwi r25, 0x0
     bne lbl_fn_8023DE24_00000B84
@@ -1143,7 +1143,7 @@ lbl_fn_8023DE24_00000ED0:
     mr r4, r26
     addi r3, r1, 0x18
     li r28, 0x0
-    bl fn_800E1D5C
+    bl particle_acquireRef
     lwz r30, lbl_808803C0
     cmpwi r30, 0x0
     bne lbl_fn_8023DE24_00000F00
@@ -1458,7 +1458,7 @@ lbl_fn_8023DE24_00001308:
     lwz r25, 0x0(r4)
     mr r4, r26
     addi r3, r1, 0x10
-    bl fn_800E1D5C
+    bl particle_acquireRef
     lwz r30, lbl_808803C0
     cmpwi r30, 0x0
     bne lbl_fn_8023DE24_00001334
@@ -1806,7 +1806,7 @@ lbl_fn_8023EA78_000017AC:
     lwz r28, 0x0(r4)
     mr r4, r26
     addi r3, r1, 0x20
-    bl fn_800E1D5C
+    bl particle_acquireRef
     lwz r25, lbl_808803C0
     cmpwi r25, 0x0
     bne lbl_fn_8023EA78_000017D8
@@ -2068,7 +2068,7 @@ lbl_fn_8023EA78_00001B24:
     mr r4, r26
     addi r3, r1, 0x18
     li r28, 0x0
-    bl fn_800E1D5C
+    bl particle_acquireRef
     lwz r30, lbl_808803C0
     cmpwi r30, 0x0
     bne lbl_fn_8023EA78_00001B54
@@ -2383,7 +2383,7 @@ lbl_fn_8023EA78_00001F5C:
     lwz r25, 0x0(r4)
     mr r4, r26
     addi r3, r1, 0x10
-    bl fn_800E1D5C
+    bl particle_acquireRef
     lwz r28, lbl_808803C0
     cmpwi r28, 0x0
     bne lbl_fn_8023EA78_00001F88

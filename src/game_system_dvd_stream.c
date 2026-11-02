@@ -16,7 +16,7 @@ extern void boss_dispatchActionTransition(void);
 extern void script_executeOpcode(void);
 extern void fn_80076FF8(void);
 extern void route_interpolatePath(void);
-extern void fn_80087858(void);
+extern void route_allocWaypoint(void);
 extern void node_createNamedChild(void);
 extern void msg_getMessageById(void);
 extern void msg_getMessageString(void);
@@ -1237,7 +1237,7 @@ lbl_fn_80378474_00000F7C:
     addi r5, r29, 0x204
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087858
+    bl route_allocWaypoint
     lwz r31, 0x1c(r1)
     mr r3, r29
     lwz r30, 0x18(r1)

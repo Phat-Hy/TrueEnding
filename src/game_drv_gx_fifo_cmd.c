@@ -52,7 +52,7 @@ void fn_805BEAD0(void);
 void fn_805BEB18(void);
 void fn_805BEB58(void);
 void fn_805BEC6C(void *p, u32 val);
-void fn_805BEC74(void);
+void gx_fifo_checkBufferActive(void);
 void fn_805BECA4(void);
 void fn_805BED54(void);
 void fn_805BEE08(void);
@@ -92,7 +92,7 @@ asm void fn_805BE380(void)
     bl fn_805BEC6C
     addi r3, r1, 0x30
     li r31, 0x8
-    bl fn_805BEC74
+    bl gx_fifo_checkBufferActive
     cmpwi r3, 0x0
     beq lbl_fn_805BE380_00000054
     lwz r3, 0x30(r1)
@@ -109,7 +109,7 @@ lbl_fn_805BE380_00000054:
     rlwimi r31, r0, 8, 24, 31
     rlwimi r31, r0, 24, 16, 23
     rlwimi r31, r0, 8, 8, 15
-    bl fn_805BEC74
+    bl gx_fifo_checkBufferActive
     cmpwi r3, 0x0
     beq lbl_fn_805BE380_00000094
     lwz r3, 0x30(r1)
@@ -173,7 +173,7 @@ lbl_fn_805BE380_000000F8:
     stw r3, 0x30(r1)
     addi r3, r1, 0x30
     li r27, 0x8
-    bl fn_805BEC74
+    bl gx_fifo_checkBufferActive
     cmpwi r3, 0x0
     beq lbl_fn_805BE380_00000184
     lwz r3, 0x30(r1)
@@ -196,7 +196,7 @@ lbl_fn_805BE380_00000184:
     stw r3, 0x14(r1)
     addi r3, r1, 0x14
     li r27, 0x8
-    bl fn_805BEC74
+    bl gx_fifo_checkBufferActive
     cmpwi r3, 0x0
     beq lbl_fn_805BE380_000001DC
     lwz r3, 0x14(r1)
@@ -216,7 +216,7 @@ lbl_fn_805BE380_000001DC:
     stw r3, 0x14(r1)
     addi r3, r1, 0x14
     li r27, 0x8
-    bl fn_805BEC74
+    bl gx_fifo_checkBufferActive
     cmpwi r3, 0x0
     beq lbl_fn_805BE380_00000228
     lwz r3, 0x14(r1)
@@ -236,7 +236,7 @@ lbl_fn_805BE380_00000228:
     stw r3, 0x14(r1)
     addi r3, r1, 0x14
     li r27, 0x8
-    bl fn_805BEC74
+    bl gx_fifo_checkBufferActive
     cmpwi r3, 0x0
     beq lbl_fn_805BE380_00000274
     lwz r3, 0x14(r1)
@@ -259,7 +259,7 @@ lbl_fn_805BE380_00000274:
     stw r3, 0x10(r1)
     addi r3, r1, 0x10
     li r27, 0x8
-    bl fn_805BEC74
+    bl gx_fifo_checkBufferActive
     cmpwi r3, 0x0
     beq lbl_fn_805BE380_000002CC
     lwz r3, 0x10(r1)
@@ -279,7 +279,7 @@ lbl_fn_805BE380_000002CC:
     stw r3, 0x10(r1)
     addi r3, r1, 0x10
     li r27, 0x8
-    bl fn_805BEC74
+    bl gx_fifo_checkBufferActive
     cmpwi r3, 0x0
     beq lbl_fn_805BE380_00000318
     lwz r3, 0x10(r1)
@@ -299,7 +299,7 @@ lbl_fn_805BE380_00000318:
     stw r3, 0x10(r1)
     addi r3, r1, 0x10
     li r27, 0x8
-    bl fn_805BEC74
+    bl gx_fifo_checkBufferActive
     cmpwi r3, 0x0
     beq lbl_fn_805BE380_00000364
     lwz r3, 0x10(r1)
@@ -322,7 +322,7 @@ lbl_fn_805BE380_00000364:
     stw r3, 0xc(r1)
     addi r3, r1, 0xc
     li r27, 0x8
-    bl fn_805BEC74
+    bl gx_fifo_checkBufferActive
     cmpwi r3, 0x0
     beq lbl_fn_805BE380_000003BC
     lwz r3, 0xc(r1)
@@ -342,7 +342,7 @@ lbl_fn_805BE380_000003BC:
     stw r3, 0xc(r1)
     addi r3, r1, 0xc
     li r27, 0x8
-    bl fn_805BEC74
+    bl gx_fifo_checkBufferActive
     cmpwi r3, 0x0
     beq lbl_fn_805BE380_00000408
     lwz r3, 0xc(r1)
@@ -362,7 +362,7 @@ lbl_fn_805BE380_00000408:
     stw r3, 0xc(r1)
     addi r3, r1, 0xc
     li r27, 0x8
-    bl fn_805BEC74
+    bl gx_fifo_checkBufferActive
     cmpwi r3, 0x0
     beq lbl_fn_805BE380_00000454
     lwz r3, 0xc(r1)
@@ -385,7 +385,7 @@ lbl_fn_805BE380_00000454:
     stw r3, 0x8(r1)
     addi r3, r1, 0x8
     li r27, 0x8
-    bl fn_805BEC74
+    bl gx_fifo_checkBufferActive
     cmpwi r3, 0x0
     beq lbl_fn_805BE380_000004AC
     lwz r3, 0x8(r1)
@@ -405,7 +405,7 @@ lbl_fn_805BE380_000004AC:
     stw r3, 0x8(r1)
     addi r3, r1, 0x8
     li r27, 0x8
-    bl fn_805BEC74
+    bl gx_fifo_checkBufferActive
     cmpwi r3, 0x0
     beq lbl_fn_805BE380_000004F8
     lwz r3, 0x8(r1)
@@ -425,7 +425,7 @@ lbl_fn_805BE380_000004F8:
     stw r3, 0x8(r1)
     addi r3, r1, 0x8
     li r27, 0x8
-    bl fn_805BEC74
+    bl gx_fifo_checkBufferActive
     cmpwi r3, 0x0
     beq lbl_fn_805BE380_00000544
     lwz r3, 0x8(r1)
@@ -715,22 +715,22 @@ void fn_805BEC6C(void *p, u32 val)
     *(u32 *)p = val;
 }
 
-asm void fn_805BEC74(void)
+asm void gx_fifo_checkBufferActive(void)
 {
     nofralloc
     lwz r3, 0x0(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_805BEC74_00000908
+    beq lbl_gx_fifo_checkBufferActive_00000908
     lhz r0, 0x6(r3)
-    b lbl_fn_805BEC74_0000090C
-lbl_fn_805BEC74_00000908:
+    b lbl_gx_fifo_checkBufferActive_0000090C
+lbl_gx_fifo_checkBufferActive_00000908:
     li r0, 0x0
-lbl_fn_805BEC74_0000090C:
+lbl_gx_fifo_checkBufferActive_0000090C:
     clrlwi. r0, r0, 31
-    beq lbl_fn_805BEC74_0000091C
+    beq lbl_gx_fifo_checkBufferActive_0000091C
     li r3, 0x1
     blr
-lbl_fn_805BEC74_0000091C:
+lbl_gx_fifo_checkBufferActive_0000091C:
     li r3, 0x0
     blr
 }

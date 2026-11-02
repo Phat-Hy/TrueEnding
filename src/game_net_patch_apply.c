@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void dtor_80013D60(void);
 extern void dtor_80084684(void);
-extern void fn_8000D760(void);
+extern void scene_destroyNode(void);
 extern void fn_8000F1EC(void);
 extern void fn_8001282C(void);
 extern void atn_LH_Binary_destructor(void);
@@ -1708,7 +1708,7 @@ asm void fn_8053E6E4(void)
     bl dtor_80013D60
     addi r3, r30, 0x5c
     li r4, -0x1
-    bl fn_8000D760
+    bl scene_destroyNode
     addi r3, r30, 0x48
     li r4, 0x0
     bl fn_80537784

@@ -8,7 +8,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_15(void);
 extern void _savegpr_21(void);
 extern void _savegpr_27(void);
-extern void fn_8004FF58(void);
+extern void geom_testSphereInFrustum(void);
 extern void fn_800502A8(void);
 extern void player_transformBoundingSphere(void);
 extern void fn_800629F0(void);
@@ -559,7 +559,7 @@ lbl_fn_803C221C_000006AC:
     stfs f2, 0x8(r18)
     psq_st f1, 0x0(r18), 0, 0
     stfs f0, 0xc(r18)
-    bl fn_8004FF58
+    bl geom_testSphereInFrustum
     cmpwi r3, 0x0
     beq lbl_fn_803C221C_000006F4
     lwz r0, 0x100(r30)
@@ -606,7 +606,7 @@ lbl_fn_803C221C_00000754:
     stfs f2, 0x8(r17)
     psq_st f1, 0x0(r17), 0, 0
     stfs f30, 0xc(r17)
-    bl fn_8004FF58
+    bl geom_testSphereInFrustum
     cmpwi r3, 0x0
     beq lbl_fn_803C221C_000007B0
     lwz r0, 0x7c(r30)
@@ -688,7 +688,7 @@ lbl_fn_803C221C_00000884:
     psq_st f1, 0x0(r28), 0, 0
     stfs f2, 0x8(r28)
     stfs f0, 0xc(r28)
-    bl fn_8004FF58
+    bl geom_testSphereInFrustum
     cmpwi r3, 0x0
     beq lbl_fn_803C221C_000009D8
     lwz r5, 0x134(r30)
@@ -809,7 +809,7 @@ lbl_fn_803C221C_00000A48:
     stfs f2, 0x8(r20)
     psq_st f1, 0x0(r20), 0, 0
     stfs f0, 0xc(r20)
-    bl fn_8004FF58
+    bl geom_testSphereInFrustum
     cmpwi r3, 0x0
     beq lbl_fn_803C221C_00000AAC
     lwz r3, 0x134(r30)
@@ -893,7 +893,7 @@ lbl_fn_803C221C_00000B80:
     stfs f2, 0x8(r27)
     psq_st f1, 0x0(r27), 0, 0
     stfs f0, 0xc(r27)
-    bl fn_8004FF58
+    bl geom_testSphereInFrustum
     cmpwi r3, 0x0
     beq lbl_fn_803C221C_00000C18
     lwz r0, 0x260(r1)
@@ -1120,7 +1120,7 @@ lbl_fn_803C221C_00000ED8:
     stfs f2, 0x8(r17)
     psq_st f1, 0x0(r17), 0, 0
     stfs f29, 0xc(r17)
-    bl fn_8004FF58
+    bl geom_testSphereInFrustum
     cmpwi r3, 0x0
     beq lbl_fn_803C221C_00000F30
     lwz r0, 0xb0(r30)
@@ -1403,7 +1403,7 @@ lbl_fn_803C221C_00001310:
     stfs f2, 0x8(r17)
     psq_st f1, 0x0(r17), 0, 0
     stfs f29, 0xc(r17)
-    bl fn_8004FF58
+    bl geom_testSphereInFrustum
     cmpwi r3, 0x0
     beq lbl_fn_803C221C_00001368
     lwz r0, 0xc8(r30)
@@ -1591,7 +1591,7 @@ lbl_fn_803C221C_000015D8:
     psq_st f1, 0x0(r22), 0, 0
     stfs f2, 0x8(r22)
     stfs f0, 0xc(r22)
-    bl fn_8004FF58
+    bl geom_testSphereInFrustum
     cmpwi r3, 0x0
     beq lbl_fn_803C221C_00001624
     lwz r0, 0xf8(r30)
@@ -1658,7 +1658,7 @@ lbl_fn_803C221C_000016D0:
     stfs f2, 0x8(r17)
     psq_st f1, 0x0(r17), 0, 0
     stfs f29, 0xc(r17)
-    bl fn_8004FF58
+    bl geom_testSphereInFrustum
     cmpwi r3, 0x0
     beq lbl_fn_803C221C_0000172C
     lwz r0, 0x108(r30)
@@ -1727,7 +1727,7 @@ lbl_fn_803C221C_000017D0:
     psq_st f1, 0x0(r17), 0, 0
     stfs f2, 0x8(r17)
     stfs f0, 0xc(r17)
-    bl fn_8004FF58
+    bl geom_testSphereInFrustum
     cmpwi r3, 0x0
     beq lbl_fn_803C221C_0000181C
     lwz r0, 0x110(r30)
@@ -1793,7 +1793,7 @@ lbl_fn_803C221C_000018C4:
     psq_st f1, 0x0(r19), 0, 0
     stfs f2, 0x8(r19)
     stfs f0, 0xc(r19)
-    bl fn_8004FF58
+    bl geom_testSphereInFrustum
     cmpwi r3, 0x0
     beq lbl_fn_803C221C_00001910
     lwz r0, 0x118(r30)

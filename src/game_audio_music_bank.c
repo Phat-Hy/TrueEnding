@@ -8,7 +8,7 @@ extern void _savegpr_24(void);
 extern void _savegpr_26(void);
 extern void vec3_set(void);
 extern void vec3_copy(void);
-extern void fn_800109E0(void);
+extern void math_mtxFromEulerAngles(void);
 extern void vec3_toEulerAngles(void);
 extern void mtx_multVec(void);
 extern void vec3_sub(void);
@@ -814,13 +814,13 @@ lbl_fn_8030AF10_0000095C:
     blt lbl_fn_8030AF10_0000095C
     addi r3, r1, 0x1c0
     addi r4, r31, 0x534
-    bl fn_800109E0
+    bl math_mtxFromEulerAngles
     addi r3, r1, 0x190
     addi r4, r31, 0x534
-    bl fn_800109E0
+    bl math_mtxFromEulerAngles
     addi r3, r1, 0x160
     addi r4, r31, 0x534
-    bl fn_800109E0
+    bl math_mtxFromEulerAngles
     lfs f1, lbl_80884BAC
     addi r3, r1, 0x100
     lfs f3, lbl_80884BE4
@@ -951,7 +951,7 @@ lbl_fn_8030AF10_00000B8C:
     addi r3, r1, 0x130
     addi r4, r1, 0xcc
     stfs f31, 0xd4(r1)
-    bl fn_800109E0
+    bl math_mtxFromEulerAngles
     lfs f1, lbl_80884BAC
     addi r3, r1, 0xc0
     lfs f3, lbl_80884BF4

@@ -14,7 +14,7 @@ extern void _savegpr_21(void);
 extern void _savegpr_25(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
-extern void fn_8004FF58(void);
+extern void geom_testSphereInFrustum(void);
 extern void fn_800C122C(void);
 extern void fn_802301EC(void);
 extern void fn_80230780(void);
@@ -921,7 +921,7 @@ lbl_fn_8022D478_00000BEC:
 lbl_fn_8022D478_00000C14:
     addi r3, r31, 0x204
     addi r4, r1, 0x38
-    bl fn_8004FF58
+    bl geom_testSphereInFrustum
     cmpwi r3, 0x0
     beq lbl_fn_8022D478_00000D60
     lwz r3, lbl_8087EFB4

@@ -8,7 +8,7 @@ extern void vec3_set(void);
 extern void vec3_copy(void);
 extern void vec3_mag(void);
 extern void vec3_assign(void);
-extern void fn_800109E0(void);
+extern void math_mtxFromEulerAngles(void);
 extern void vec3_toEulerAngles(void);
 extern void mtx_multVec(void);
 extern void vec3_addAssign(void);
@@ -290,7 +290,7 @@ lbl_fn_80382A1C_000001E4:
     bl vec3_set
     addi r3, r1, 0x228
     addi r4, r1, 0x128
-    bl fn_800109E0
+    bl math_mtxFromEulerAngles
     addi r3, r1, 0x11c
     addi r4, r1, 0x228
     bl mtx_multVec
@@ -383,7 +383,7 @@ lbl_fn_80382A1C_000001E4:
     bl vec3_copy
     addi r3, r1, 0x198
     addi r4, r1, 0x164
-    bl fn_800109E0
+    bl math_mtxFromEulerAngles
     addi r3, r1, 0x170
     addi r4, r1, 0x198
     bl mtx_multVec

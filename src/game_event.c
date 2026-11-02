@@ -20,7 +20,7 @@ extern void fn_8001C01C(void);
 extern void fn_8001C038(void);
 extern void fn_8001C068(void);
 extern void effect_createEmitter(void);
-extern void fn_8003D3F8(void);
+extern void effect_evaluateState(void);
 extern void effect_testLifetime(void);
 extern void rand(void);
 
@@ -707,7 +707,7 @@ lbl_fn_80030700_00000808:
 lbl_fn_80030700_0000080C:
     cmpwi r0, 0x6
     bne lbl_fn_80030700_00000874
-    bl fn_8003D3F8
+    bl effect_evaluateState
     cmpwi r3, 0x4
     bne lbl_fn_80030700_00000834
     lis r3, lbl_807C6A40@ha
@@ -1156,7 +1156,7 @@ lbl_fn_80030D2C_00000E38:
 lbl_fn_80030D2C_00000E54:
     cmpwi r0, 0x6
     bne lbl_fn_80030D2C_00000EBC
-    bl fn_8003D3F8
+    bl effect_evaluateState
     cmpwi r3, 0x6
     bne lbl_fn_80030D2C_00000E7C
     lis r3, lbl_807C6A40@ha
@@ -1330,7 +1330,7 @@ lbl_fn_80031004_0000108C:
     lwz r0, 0x18(r31)
     cmpwi r0, 0x0
     bne lbl_fn_80031004_000010EC
-    bl fn_8003D3F8
+    bl effect_evaluateState
     cmpwi r3, 0x6
     bne lbl_fn_80031004_000010B4
     li r0, 0x1
@@ -1786,7 +1786,7 @@ lbl_fn_80031688_000016A0:
     bl entity_isActive
     cmpwi r3, 0x0
     beq lbl_fn_80031688_00001718
-    bl fn_8003D3F8
+    bl effect_evaluateState
     cmpwi r3, 0x9
     bne lbl_fn_80031688_000016D8
     lis r3, lbl_807C6A40@ha
@@ -1912,7 +1912,7 @@ lbl_fn_800317AC_00001838:
 lbl_fn_800317AC_00001854:
     cmpwi r0, 0x6
     bne lbl_fn_800317AC_000018BC
-    bl fn_8003D3F8
+    bl effect_evaluateState
     cmpwi r3, 0x4
     bne lbl_fn_800317AC_0000187C
     lis r3, lbl_807C6A40@ha
@@ -2068,7 +2068,7 @@ lbl_fn_800319AC_00001A60:
 lbl_fn_800319AC_00001A64:
     cmpwi r0, 0x6
     bne lbl_fn_800319AC_00001ACC
-    bl fn_8003D3F8
+    bl effect_evaluateState
     cmpwi r3, 0x9
     bne lbl_fn_800319AC_00001A8C
     lis r3, lbl_807C6A40@ha
@@ -2272,7 +2272,7 @@ lbl_fn_80031CE0_00001CFC:
     bl entity_isActive
     cmpwi r3, 0x0
     beq lbl_fn_80031CE0_00001DA0
-    bl fn_8003D3F8
+    bl effect_evaluateState
     cmpwi r3, 0x9
     bne lbl_fn_80031CE0_00001D60
     li r0, 0x0
@@ -2410,7 +2410,7 @@ lbl_fn_80031E38_00001EC4:
 lbl_fn_80031E38_00001EE0:
     cmpwi r0, 0x6
     bne lbl_fn_80031E38_00001F74
-    bl fn_8003D3F8
+    bl effect_evaluateState
     cmpwi r3, 0x4
     bne lbl_fn_80031E38_00001F08
     lis r3, lbl_807C6A40@ha
@@ -2589,7 +2589,7 @@ lbl_fn_80032090_00002148:
 lbl_fn_80032090_0000214C:
     cmpwi r0, 0x6
     bne lbl_fn_80032090_000021E0
-    bl fn_8003D3F8
+    bl effect_evaluateState
     cmpwi r3, 0x9
     bne lbl_fn_80032090_000021A0
     li r0, 0x0
@@ -2882,7 +2882,7 @@ lbl_fn_80032470_0000251C:
     lwz r0, 0x2c(r3)
     cmpwi r0, 0x0
     beq lbl_fn_80032470_00002598
-    bl fn_8003D3F8
+    bl effect_evaluateState
     cmpwi r3, 0x6
     bne lbl_fn_80032470_00002558
     lis r3, lbl_807C6A40@ha
@@ -2928,7 +2928,7 @@ lbl_fn_80032470_00002598:
     li r3, 0x9
     b lbl_fn_80032470_00002648
 lbl_fn_80032470_000025DC:
-    bl fn_8003D3F8
+    bl effect_evaluateState
     cmpwi r3, 0x6
     bne lbl_fn_80032470_000025FC
     lis r3, lbl_807C6A40@ha
@@ -3104,7 +3104,7 @@ lbl_fn_80032768_00002810:
 lbl_fn_80032768_0000282C:
     cmpwi r0, 0x6
     bne lbl_fn_80032768_00002894
-    bl fn_8003D3F8
+    bl effect_evaluateState
     cmpwi r3, 0x9
     bne lbl_fn_80032768_00002854
     lis r3, lbl_807C6A40@ha
@@ -3317,7 +3317,7 @@ lbl_fn_800329B4_00002AF0:
 lbl_fn_800329B4_00002B0C:
     cmpwi r0, 0x6
     bne lbl_fn_800329B4_00002B74
-    bl fn_8003D3F8
+    bl effect_evaluateState
     cmpwi r3, 0x4
     bne lbl_fn_800329B4_00002B34
     lis r3, lbl_807C6A40@ha
@@ -3434,7 +3434,7 @@ lbl_fn_800329B4_00002C98:
 lbl_fn_800329B4_00002CB4:
     cmpwi r0, 0x6
     bne lbl_fn_800329B4_00002D1C
-    bl fn_8003D3F8
+    bl effect_evaluateState
     cmpwi r3, 0x4
     bne lbl_fn_800329B4_00002CDC
     lis r3, lbl_807C6A40@ha
@@ -4348,7 +4348,7 @@ lbl_fn_80033854_000038C0:
     li r3, 0x1
     b lbl_fn_80033854_00003938
 lbl_fn_80033854_000038D8:
-    bl fn_8003D3F8
+    bl effect_evaluateState
     cmpwi r3, 0x9
     bne lbl_fn_80033854_000038F4
     li r0, 0x1
@@ -4543,7 +4543,7 @@ lbl_fn_80033A54_00003B50:
 lbl_fn_80033A54_00003B6C:
     cmpwi r0, 0x6
     bne lbl_fn_80033A54_00003BD4
-    bl fn_8003D3F8
+    bl effect_evaluateState
     cmpwi r3, 0x6
     bne lbl_fn_80033A54_00003B94
     lis r3, lbl_807C6A40@ha
@@ -4717,7 +4717,7 @@ lbl_fn_80033CF4_00003D88:
 lbl_fn_80033CF4_00003DC0:
     cmpwi r0, 0x6
     bne lbl_fn_80033CF4_00003E28
-    bl fn_8003D3F8
+    bl effect_evaluateState
     cmpwi r3, 0x9
     bne lbl_fn_80033CF4_00003DE8
     lis r3, lbl_807C6A40@ha
@@ -4899,7 +4899,7 @@ lbl_fn_80033F98_00004008:
     li r3, 0x1
     b lbl_fn_80033F98_000040AC
 lbl_fn_80033F98_00004020:
-    bl fn_8003D3F8
+    bl effect_evaluateState
     cmpwi r3, 0x9
     bne lbl_fn_80033F98_00004068
     li r0, 0x0
@@ -5117,7 +5117,7 @@ lbl_fn_800341CC_000042C8:
 lbl_fn_800341CC_00004310:
     cmpwi r0, 0x6
     bne lbl_fn_800341CC_000043A4
-    bl fn_8003D3F8
+    bl effect_evaluateState
     cmpwi r3, 0x4
     bne lbl_fn_800341CC_00004338
     lis r3, lbl_807C6A40@ha
@@ -5321,7 +5321,7 @@ lbl_fn_800344C4_00004590:
 lbl_fn_800344C4_000045D8:
     cmpwi r0, 0x6
     bne lbl_fn_800344C4_0000466C
-    bl fn_8003D3F8
+    bl effect_evaluateState
     cmpwi r3, 0x9
     bne lbl_fn_800344C4_0000462C
     li r0, 0x0
@@ -5542,7 +5542,7 @@ lbl_fn_800347C0_000048B0:
     li r3, 0x1
     b lbl_fn_800347C0_00004A04
 lbl_fn_800347C0_000048C8:
-    bl fn_8003D3F8
+    bl effect_evaluateState
     cmpwi r3, 0x9
     bne lbl_fn_800347C0_000048E4
     li r0, 0x1
@@ -5604,7 +5604,7 @@ lbl_fn_800347C0_0000498C:
     li r3, 0x1
     b lbl_fn_800347C0_00004A04
 lbl_fn_800347C0_000049A4:
-    bl fn_8003D3F8
+    bl effect_evaluateState
     cmpwi r3, 0x9
     bne lbl_fn_800347C0_000049C0
     li r0, 0x1
@@ -5836,7 +5836,7 @@ lbl_fn_80034B20_00004CA0:
 lbl_fn_80034B20_00004CBC:
     cmpwi r0, 0x6
     bne lbl_fn_80034B20_00004D24
-    bl fn_8003D3F8
+    bl effect_evaluateState
     cmpwi r3, 0x4
     bne lbl_fn_80034B20_00004CE4
     lis r3, lbl_807C6A40@ha
@@ -5971,7 +5971,7 @@ lbl_fn_80034B20_00004E88:
 lbl_fn_80034B20_00004EA4:
     cmpwi r0, 0x6
     bne lbl_fn_80034B20_00004F0C
-    bl fn_8003D3F8
+    bl effect_evaluateState
     cmpwi r3, 0x4
     bne lbl_fn_80034B20_00004ECC
     lis r3, lbl_807C6A40@ha

@@ -13,7 +13,7 @@ extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
-extern void fn_80087858(void);
+extern void route_allocWaypoint(void);
 extern void route_createSegment(void);
 extern void route_createWaypoint(void);
 extern void node_createNamedChild(void);
@@ -797,7 +797,7 @@ lbl_fn_8037E9E0_0000090C:
     addi r5, r29, 0xa04
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087858
+    bl route_allocWaypoint
     mr r3, r30
     addi r4, r31, 0xd4
     addi r5, r29, 0xa08
@@ -881,7 +881,7 @@ lbl_fn_8037E9E0_0000090C:
     addi r5, r29, 0x514
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087858
+    bl route_allocWaypoint
     mr r3, r30
     addi r4, r31, 0x15a
     addi r5, r29, 0x518
@@ -928,7 +928,7 @@ asm void fn_8037ECF0(void)
     addi r5, r29, 0x4
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087858
+    bl route_allocWaypoint
     lfs f1, lbl_808859B4
     mr r3, r30
     lfs f2, lbl_808859B0
@@ -937,7 +937,7 @@ asm void fn_8037ECF0(void)
     addi r5, r29, 0x8
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087858
+    bl route_allocWaypoint
     lfs f1, lbl_808859B8
     mr r3, r30
     lfs f2, lbl_808859BC
@@ -1036,7 +1036,7 @@ asm void fn_8037ECF0(void)
     addi r5, r29, 0x34
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087858
+    bl route_allocWaypoint
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)

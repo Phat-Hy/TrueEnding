@@ -11,7 +11,7 @@ extern void mem_free(void);
 extern void fn_800E0A64(void);
 extern void fn_800E14A4(void);
 extern void fn_800E1A48(void);
-extern void fn_800E1D5C(void);
+extern void particle_acquireRef(void);
 extern void fn_80232ACC(void);
 extern void sound_initGlobalInstances(void);
 extern void fn_80232FF4(void);
@@ -376,7 +376,7 @@ lbl_fn_8023BA10_0000046C:
     beq lbl_fn_8023BA10_00000610
     lwz r4, 0x0(r30)
     addi r3, r1, 0x38
-    bl fn_800E1D5C
+    bl particle_acquireRef
     lwz r29, lbl_8087F3C4
     cmpwi r29, 0x0
     bne lbl_fn_8023BA10_000004A0
@@ -756,7 +756,7 @@ asm void fn_8023C0C0(void)
     beq lbl_fn_8023C0C0_00000FA4
     mr r4, r26
     addi r3, r1, 0x28
-    bl fn_800E1D5C
+    bl particle_acquireRef
     lwz r31, lbl_8087F3C8
     cmpwi r31, 0x0
     bne lbl_fn_8023C0C0_000009F8
@@ -1224,7 +1224,7 @@ lbl_fn_8023C6F4_00001010:
     lwz r28, 0x0(r4)
     mr r4, r26
     addi r3, r1, 0x20
-    bl fn_800E1D5C
+    bl particle_acquireRef
     lwz r25, lbl_808803C0
     cmpwi r25, 0x0
     bne lbl_fn_8023C6F4_0000103C
@@ -1485,7 +1485,7 @@ lbl_fn_8023C6F4_00001384:
     mr r4, r26
     addi r3, r1, 0x18
     li r28, 0x0
-    bl fn_800E1D5C
+    bl particle_acquireRef
     lwz r30, lbl_808803C0
     cmpwi r30, 0x0
     bne lbl_fn_8023C6F4_000013B4
@@ -1799,7 +1799,7 @@ lbl_fn_8023C6F4_000017B8:
     lwz r25, 0x0(r4)
     mr r4, r26
     addi r3, r1, 0x10
-    bl fn_800E1D5C
+    bl particle_acquireRef
     lwz r28, lbl_808803C0
     cmpwi r28, 0x0
     bne lbl_fn_8023C6F4_000017E4

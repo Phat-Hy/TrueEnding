@@ -81,7 +81,7 @@ void fn_8001011C(void);
 void actor_dispatchByType(void);
 void vec3_assign(void);
 void fn_80010490(void);
-void fn_800109E0(void);
+void math_mtxFromEulerAngles(void);
 void fn_80010B68(void);
 void vec3_toEulerAngles(void);
 void math_fabsf(void);
@@ -751,7 +751,7 @@ lbl_fn_80010490_00000894:
     blr
 }
 
-asm void fn_800109E0(void)
+asm void math_mtxFromEulerAngles(void)
 {
     nofralloc
     stwu r1, -0x130(r1)
@@ -777,7 +777,7 @@ asm void fn_800109E0(void)
     stfs f0, 0x28(r3)
     stfs f0, 0x14(r3)
     stfs f0, 0x0(r3)
-    beq lbl_fn_800109E0_00000974
+    beq lbl_math_mtxFromEulerAngles_00000974
     addi r3, r1, 0xc8
     li r4, 0x7a
     bl PSMTXRotRad
@@ -798,11 +798,11 @@ asm void fn_800109E0(void)
     psq_st f3, 0x10(r30), 0, 0
     psq_st f4, 0x18(r30), 0, 0
     psq_st f5, 0x20(r30), 0, 0
-lbl_fn_800109E0_00000974:
+lbl_math_mtxFromEulerAngles_00000974:
     lfs f0, lbl_80880668
     lfs f1, 0x4(r31)
     fcmpu cr0, f0, f1
-    beq lbl_fn_800109E0_000009D4
+    beq lbl_math_mtxFromEulerAngles_000009D4
     addi r3, r1, 0x68
     li r4, 0x79
     bl PSMTXRotRad
@@ -823,11 +823,11 @@ lbl_fn_800109E0_00000974:
     psq_st f3, 0x10(r30), 0, 0
     psq_st f4, 0x18(r30), 0, 0
     psq_st f5, 0x20(r30), 0, 0
-lbl_fn_800109E0_000009D4:
+lbl_math_mtxFromEulerAngles_000009D4:
     lfs f0, lbl_80880668
     lfs f1, 0x0(r31)
     fcmpu cr0, f0, f1
-    beq lbl_fn_800109E0_00000A34
+    beq lbl_math_mtxFromEulerAngles_00000A34
     addi r3, r1, 0x8
     li r4, 0x78
     bl PSMTXRotRad
@@ -848,7 +848,7 @@ lbl_fn_800109E0_000009D4:
     psq_st f3, 0x10(r30), 0, 0
     psq_st f4, 0x18(r30), 0, 0
     psq_st f5, 0x20(r30), 0, 0
-lbl_fn_800109E0_00000A34:
+lbl_math_mtxFromEulerAngles_00000A34:
     lwz r0, 0x134(r1)
     lwz r31, 0x12c(r1)
     lwz r30, 0x128(r1)
@@ -3579,7 +3579,7 @@ lbl_fn_80012D34_00002E24:
 lbl_fn_80012D34_00002E44:
     addi r3, r1, 0x248
     addi r4, r1, 0x14c
-    bl fn_800109E0
+    bl math_mtxFromEulerAngles
     addi r3, r1, 0x164
     addi r4, r1, 0x248
     bl mtx_multVec
@@ -3609,7 +3609,7 @@ lbl_fn_80012D34_00002E84:
     bl vec3_sub
     mr r4, r30
     addi r3, r1, 0x218
-    bl fn_800109E0
+    bl math_mtxFromEulerAngles
     addi r3, r1, 0x134
     addi r4, r1, 0x218
     bl mtx_multVec
@@ -3671,7 +3671,7 @@ lbl_fn_80012D34_00002F00:
     bl vec3_copy
     mr r4, r28
     addi r3, r1, 0x1e8
-    bl fn_800109E0
+    bl math_mtxFromEulerAngles
     addi r3, r1, 0x11c
     addi r4, r1, 0x1e8
     bl mtx_multVec
@@ -3723,7 +3723,7 @@ lbl_fn_80012D34_00003000:
     bl vec3_copy
     mr r4, r30
     addi r3, r1, 0x1b8
-    bl fn_800109E0
+    bl math_mtxFromEulerAngles
     addi r3, r1, 0x104
     addi r4, r1, 0x1b8
     bl mtx_multVec
@@ -3783,7 +3783,7 @@ lbl_fn_80012D34_00003120:
     bl vec3_sub
     mr r4, r30
     addi r3, r1, 0x188
-    bl fn_800109E0
+    bl math_mtxFromEulerAngles
     addi r3, r1, 0xd4
     addi r4, r1, 0x188
     bl mtx_multVec

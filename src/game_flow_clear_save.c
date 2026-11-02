@@ -80,7 +80,7 @@ extern void fn_804F4FC8(void);
 extern void fn_804F50C8(void);
 extern void fn_804FC0D8(void);
 extern void net_isMessageStateActive(void);
-extern void fn_8050DDE0(void);
+extern void net_p2p_flushPacketQueue(void);
 extern void net_p2p_readPayload(void);
 extern void fn_8050E414(void);
 extern void fn_8050E534(void);
@@ -1104,7 +1104,7 @@ lbl_fn_804EE044_00000D24:
     bl net_getPacketManager
     lwz r5, -0x664c(r30)
     mr r4, r31
-    bl fn_8050DDE0
+    bl net_p2p_flushPacketQueue
 lbl_fn_804EE044_00000D60:
     li r3, 0x0
 lbl_fn_804EE044_00000D64:

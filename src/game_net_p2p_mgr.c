@@ -7,7 +7,7 @@ extern void OSResumeThread(void);
 extern void OSWakeupThread(void);
 extern void __register_global_object(void);
 extern void net_voiceCodec_destroy(void);
-extern void fn_8050DDE0(void);
+extern void net_p2p_flushPacketQueue(void);
 extern void net_p2p_readPayload(void);
 extern void fn_8050EAE8(void);
 extern void fn_8050EAEC(void);
@@ -887,7 +887,7 @@ lbl_fn_8050B01C_00000A1C:
     lwz r3, lbl_8087F62C
     li r4, -0x1
     li r5, 0x1
-    bl fn_8050DDE0
+    bl net_p2p_flushPacketQueue
 lbl_fn_8050B01C_00000A60:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)

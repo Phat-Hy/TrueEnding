@@ -13,7 +13,7 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
-extern void fn_8004FF58(void);
+extern void geom_testSphereInFrustum(void);
 extern void boss_decodePhaseBitfield(void);
 extern void fn_80070B60(void);
 extern void fn_80079ECC(void);
@@ -285,7 +285,7 @@ lbl_atn_Model_drawNodes_000002AC:
     lwz r3, lbl_8087EFB4
     addi r4, r27, 0x30
     addi r3, r3, 0x418
-    bl fn_8004FF58
+    bl geom_testSphereInFrustum
     cmpwi r3, 0x0
     bne lbl_atn_Model_drawNodes_000002D4
     li r30, 0x0
@@ -505,7 +505,7 @@ lbl_hud_updateTargetReticle_0000057C:
     stb r0, 0x84(r30)
     lwz r3, lbl_8087EFB4
     addi r3, r3, 0x204
-    bl fn_8004FF58
+    bl geom_testSphereInFrustum
     cmpwi r3, 0x0
     bne lbl_hud_updateTargetReticle_000005DC
     lbz r0, 0x84(r30)
@@ -578,7 +578,7 @@ lbl_hud_updateTargetReticle_00000688:
     addi r3, r3, 0x204
     lfs f0, 0xc(r31)
     stfs f0, 0x34(r1)
-    bl fn_8004FF58
+    bl geom_testSphereInFrustum
     cmpwi r3, 0x0
     beq lbl_hud_updateTargetReticle_000006E8
     lbz r0, 0x84(r30)

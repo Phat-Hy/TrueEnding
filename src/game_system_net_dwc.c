@@ -15,7 +15,7 @@ extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void atn_Task_destructor(void);
 extern void sky_renderStub(void);
-extern void fn_800E1D5C(void);
+extern void particle_acquireRef(void);
 extern void fn_801360C4(void);
 extern void fn_801360D8(void);
 extern void fn_8023BA10(void);
@@ -114,7 +114,7 @@ asm void fn_80393BEC(void)
     stw r0, 0x34(r28)
     mr r4, r28
     addi r3, r1, 0x10
-    bl fn_800E1D5C
+    bl particle_acquireRef
     lwz r31, lbl_808803C0
     cmpwi r31, 0x0
     bne lbl_fn_80393BEC_00000098

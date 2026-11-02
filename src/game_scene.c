@@ -67,7 +67,7 @@ void fn_8000D3A8(void);
 void scene_traverseNode(void);
 void fn_8000D4D4(void);
 void fn_8000D528(void);
-void fn_8000D760(void);
+void scene_destroyNode(void);
 void fn_8000D7DC(void);
 void fn_8000D844(void);
 void fn_8000D8C0(void);
@@ -921,7 +921,7 @@ asm void fn_8000D528(void)
     blr
 }
 
-asm void fn_8000D760(void)
+asm void scene_destroyNode(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -932,24 +932,24 @@ asm void fn_8000D760(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    beq lbl_fn_8000D760_00000BF0
-    beq lbl_fn_8000D760_00000BE0
-    beq lbl_fn_8000D760_00000BE0
-    beq lbl_fn_8000D760_00000BE0
+    beq lbl_scene_destroyNode_00000BF0
+    beq lbl_scene_destroyNode_00000BE0
+    beq lbl_scene_destroyNode_00000BE0
+    beq lbl_scene_destroyNode_00000BE0
     lwz r4, 0x0(r3)
     cmpwi r4, 0x0
-    beq lbl_fn_8000D760_00000BE0
+    beq lbl_scene_destroyNode_00000BE0
     lwz r0, 0x4(r3)
     subf r0, r0, r0
     stw r0, 0x4(r3)
     mr r3, r4
     bl dtor_80084684
-lbl_fn_8000D760_00000BE0:
+lbl_scene_destroyNode_00000BE0:
     cmpwi r31, 0x0
-    ble lbl_fn_8000D760_00000BF0
+    ble lbl_scene_destroyNode_00000BF0
     mr r3, r30
     bl dtor_80084684
-lbl_fn_8000D760_00000BF0:
+lbl_scene_destroyNode_00000BF0:
     mr r3, r30
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)

@@ -14,7 +14,7 @@ extern void seq_stepPlaybackTimer(void);
 extern void fn_80075F58(void);
 extern void seq_bindSlotResource(void);
 extern void model_updateBoneTransforms(void);
-extern void fn_800BFB70(void);
+extern void motion_initTransform(void);
 extern void fn_800C0FBC(void);
 extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800D6BE0(void);
@@ -1083,7 +1083,7 @@ asm void fn_800D775C(void)
     li r6, 0x3
     bl GXSetTevAlphaIn
     lwz r3, lbl_8087EFB4
-    bl fn_800BFB70
+    bl motion_initTransform
     lwz r0, 0x74(r1)
     lwz r31, 0x6c(r1)
     mtlr r0
@@ -1222,7 +1222,7 @@ asm void fn_800D7D00(void)
     li r6, 0x3
     bl GXSetTevAlphaIn
     lwz r3, lbl_8087EFB4
-    bl fn_800BFB70
+    bl motion_initTransform
     lwz r0, 0x44(r1)
     lwz r31, 0x3c(r1)
     mtlr r0
@@ -1343,7 +1343,7 @@ asm void fn_800D7F18(void)
     li r6, 0x3
     bl GXSetTevAlphaIn
     lwz r3, lbl_8087EFB4
-    bl fn_800BFB70
+    bl motion_initTransform
     li r3, 0x0
     li r4, 0x0
     li r5, 0x1

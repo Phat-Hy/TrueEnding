@@ -20,7 +20,7 @@ extern void fn_8001BF58(void);
 extern void fn_8001BF64(void);
 extern void fn_8001C01C(void);
 extern void effect_createEmitter(void);
-extern void fn_8003D3F8(void);
+extern void effect_evaluateState(void);
 extern void fn_8003D6E8(void);
 extern void effect_testLifetime(void);
 extern void rand(void);
@@ -266,7 +266,7 @@ lbl_fn_80035030_000001D4:
 lbl_fn_80035030_000001F0:
     cmpwi r0, 0x6
     bne lbl_fn_80035030_00000258
-    bl fn_8003D3F8
+    bl effect_evaluateState
     cmpwi r3, 0x9
     bne lbl_fn_80035030_00000218
     lis r3, lbl_807C6A40@ha

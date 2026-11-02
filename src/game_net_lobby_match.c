@@ -20,7 +20,7 @@ extern void boss_decodePhaseBitfield(void);
 extern void fn_800709F4(void);
 extern void mem_alloc(void);
 extern void route_interpolatePath(void);
-extern void fn_80087858(void);
+extern void route_allocWaypoint(void);
 extern void node_createNamedChild(void);
 extern void area_updateZoneState(void);
 extern void map_getArchiveName(void);
@@ -1544,7 +1544,7 @@ lbl_fn_8049CA9C_0000134C:
     addi r4, r31, 0x20
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087858
+    bl route_allocWaypoint
     addi r27, r27, 0x1
     addi r29, r29, 0xc
     cmpwi r27, 0x2

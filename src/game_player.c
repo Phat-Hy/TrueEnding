@@ -32,7 +32,7 @@ extern u32 lbl_80880954;
 extern u32 lbl_80880958;
 
 /* Function declarations */
-void fn_8004FF58(void);
+void geom_testSphereInFrustum(void);
 void fn_800500FC(void);
 void fn_800502A8(void);
 void fn_80050420(void);
@@ -56,7 +56,7 @@ void fn_80052760(void);
 void fn_80053254(void);
 void fn_8005339C(void);
 
-asm void fn_8004FF58(void)
+asm void geom_testSphereInFrustum(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -78,97 +78,97 @@ asm void fn_8004FF58(void)
     lfs f3, 0x34(r30)
     fsubs f4, f6, f0
     fcmpo cr0, f4, f3
-    ble lbl_fn_8004FF58_00000058
+    ble lbl_geom_testSphereInFrustum_00000058
     li r3, 0x0
-    b lbl_fn_8004FF58_0000018C
-lbl_fn_8004FF58_00000058:
+    b lbl_geom_testSphereInFrustum_0000018C
+lbl_geom_testSphereInFrustum_00000058:
     fadds f4, f6, f0
     lfs f3, 0x38(r30)
     fcmpo cr0, f4, f3
-    bge lbl_fn_8004FF58_00000070
+    bge lbl_geom_testSphereInFrustum_00000070
     li r3, 0x0
-    b lbl_fn_8004FF58_0000018C
-lbl_fn_8004FF58_00000070:
+    b lbl_geom_testSphereInFrustum_0000018C
+lbl_geom_testSphereInFrustum_00000070:
     lwz r0, 0x30(r30)
     cmpwi r0, 0x0
-    beq lbl_fn_8004FF58_00000100
+    beq lbl_geom_testSphereInFrustum_00000100
     lfs f4, 0x8(r1)
     lfs f3, 0x48(r30)
     lfs f5, lbl_80880934
     fadds f3, f4, f3
     fadds f3, f0, f3
     fcmpo cr0, f3, f5
-    bge lbl_fn_8004FF58_000000A0
+    bge lbl_geom_testSphereInFrustum_000000A0
     li r3, 0x0
-    b lbl_fn_8004FF58_0000018C
-lbl_fn_8004FF58_000000A0:
+    b lbl_geom_testSphereInFrustum_0000018C
+lbl_geom_testSphereInFrustum_000000A0:
     fneg f4, f4
     lfs f3, 0x58(r30)
     fadds f3, f4, f3
     fadds f3, f0, f3
     fcmpo cr0, f3, f5
-    bge lbl_fn_8004FF58_000000C0
+    bge lbl_geom_testSphereInFrustum_000000C0
     li r3, 0x0
-    b lbl_fn_8004FF58_0000018C
-lbl_fn_8004FF58_000000C0:
+    b lbl_geom_testSphereInFrustum_0000018C
+lbl_geom_testSphereInFrustum_000000C0:
     lfs f4, 0xc(r1)
     lfs f3, 0x68(r30)
     fadds f3, f4, f3
     fadds f3, f0, f3
     fcmpo cr0, f3, f5
-    bge lbl_fn_8004FF58_000000E0
+    bge lbl_geom_testSphereInFrustum_000000E0
     li r3, 0x0
-    b lbl_fn_8004FF58_0000018C
-lbl_fn_8004FF58_000000E0:
+    b lbl_geom_testSphereInFrustum_0000018C
+lbl_geom_testSphereInFrustum_000000E0:
     fneg f4, f4
     lfs f3, 0x78(r30)
     fadds f3, f4, f3
     fadds f0, f0, f3
     fcmpo cr0, f0, f5
-    bge lbl_fn_8004FF58_00000188
+    bge lbl_geom_testSphereInFrustum_00000188
     li r3, 0x0
-    b lbl_fn_8004FF58_0000018C
-lbl_fn_8004FF58_00000100:
+    b lbl_geom_testSphereInFrustum_0000018C
+lbl_geom_testSphereInFrustum_00000100:
     lfs f3, 0x44(r30)
     lfs f5, 0x8(r1)
     fmuls f4, f6, f3
     lfs f3, 0x3c(r30)
     fmadds f3, f5, f3, f4
     fcmpo cr0, f3, f0
-    ble lbl_fn_8004FF58_00000124
+    ble lbl_geom_testSphereInFrustum_00000124
     li r3, 0x0
-    b lbl_fn_8004FF58_0000018C
-lbl_fn_8004FF58_00000124:
+    b lbl_geom_testSphereInFrustum_0000018C
+lbl_geom_testSphereInFrustum_00000124:
     lfs f4, 0x54(r30)
     lfs f3, 0x4c(r30)
     fmuls f4, f6, f4
     fmadds f3, f5, f3, f4
     fcmpo cr0, f3, f0
-    ble lbl_fn_8004FF58_00000144
+    ble lbl_geom_testSphereInFrustum_00000144
     li r3, 0x0
-    b lbl_fn_8004FF58_0000018C
-lbl_fn_8004FF58_00000144:
+    b lbl_geom_testSphereInFrustum_0000018C
+lbl_geom_testSphereInFrustum_00000144:
     lfs f3, 0x64(r30)
     lfs f5, 0xc(r1)
     fmuls f4, f6, f3
     lfs f3, 0x60(r30)
     fmadds f3, f5, f3, f4
     fcmpo cr0, f3, f0
-    ble lbl_fn_8004FF58_00000168
+    ble lbl_geom_testSphereInFrustum_00000168
     li r3, 0x0
-    b lbl_fn_8004FF58_0000018C
-lbl_fn_8004FF58_00000168:
+    b lbl_geom_testSphereInFrustum_0000018C
+lbl_geom_testSphereInFrustum_00000168:
     lfs f4, 0x74(r30)
     lfs f3, 0x70(r30)
     fmuls f4, f6, f4
     fmadds f3, f5, f3, f4
     fcmpo cr0, f3, f0
-    ble lbl_fn_8004FF58_00000188
+    ble lbl_geom_testSphereInFrustum_00000188
     li r3, 0x0
-    b lbl_fn_8004FF58_0000018C
-lbl_fn_8004FF58_00000188:
+    b lbl_geom_testSphereInFrustum_0000018C
+lbl_geom_testSphereInFrustum_00000188:
     li r3, 0x1
-lbl_fn_8004FF58_0000018C:
+lbl_geom_testSphereInFrustum_0000018C:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)

@@ -8,7 +8,7 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void ui_destroyWidget(void);
 extern void collision_queryGeometry(void);
-extern void fn_8004FF58(void);
+extern void geom_testSphereInFrustum(void);
 extern void mission_clearPathTracker(void);
 extern void mission_isObjectiveActive(void);
 extern void mission_updateObjectiveTarget(void);
@@ -1270,7 +1270,7 @@ lbl_fn_80407E8C_0000102C:
     psq_st f1, 0x0(r30), 0, 0
     stfs f2, 0x70(r1)
     stfs f31, 0x74(r1)
-    bl fn_8004FF58
+    bl geom_testSphereInFrustum
     cmpwi r3, 0x0
     beq lbl_fn_80407E8C_00001094
     li r3, 0x0
@@ -1283,7 +1283,7 @@ lbl_fn_80407E8C_00001094:
     psq_st f1, 0x0(r30), 0, 0
     stfs f2, 0x70(r1)
     stfs f31, 0x74(r1)
-    bl fn_8004FF58
+    bl geom_testSphereInFrustum
     cmpwi r3, 0x0
     beq lbl_fn_80407E8C_000010C4
     li r3, 0x0

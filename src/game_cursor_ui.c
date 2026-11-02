@@ -13,7 +13,7 @@ extern void town_registerInteractionPoint(void);
 extern void mem_alloc(void);
 extern void mem_getAllocSize(void);
 extern void route_interpolatePath(void);
-extern void fn_80087858(void);
+extern void route_allocWaypoint(void);
 extern void route_createSegment(void);
 extern void node_createNamedChild(void);
 extern void atn_Model_findBoneIndex(void);
@@ -754,7 +754,7 @@ lbl_fn_800A8A80_000008C4:
     addi r5, r28, 0x48
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087858
+    bl route_allocWaypoint
     lfs f1, lbl_80880D00
     mr r3, r29
     lfs f2, lbl_80880D04
@@ -763,7 +763,7 @@ lbl_fn_800A8A80_000008C4:
     addi r5, r28, 0x54
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087858
+    bl route_allocWaypoint
     mr r3, r30
     addi r4, r31, 0x21
     bl node_createNamedChild
@@ -775,7 +775,7 @@ lbl_fn_800A8A80_000008C4:
     addi r5, r28, 0x4c
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087858
+    bl route_allocWaypoint
     lfs f1, lbl_80880D00
     mr r3, r29
     lfs f2, lbl_80880D04
@@ -784,7 +784,7 @@ lbl_fn_800A8A80_000008C4:
     addi r5, r28, 0x58
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087858
+    bl route_allocWaypoint
     lfs f1, lbl_80880D0C
     mr r3, r30
     lfs f2, lbl_80880D10

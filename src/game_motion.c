@@ -57,7 +57,7 @@ void fn_800BF558(void);
 void fn_800BF9C4(void);
 void fn_800BFAC4(void);
 void motion_updateFogAdj(void);
-void fn_800BFB70(void);
+void motion_initTransform(void);
 void fn_800BFC18(void);
 void fn_800BFCB4(void);
 void fn_800C0508(void);
@@ -874,7 +874,7 @@ asm void motion_updateFogAdj(void)
     blr
 }
 
-asm void fn_800BFB70(void)
+asm void motion_initTransform(void)
 {
     nofralloc
     stwu r1, -0x70(r1)

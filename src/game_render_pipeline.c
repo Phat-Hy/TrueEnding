@@ -11,7 +11,7 @@ extern void vec3_set(void);
 extern void scene_transformPoint(void);
 extern void scene_getCamera(void);
 extern void scene_getRootNode(void);
-extern void fn_800109E0(void);
+extern void math_mtxFromEulerAngles(void);
 extern void mtx_multVec(void);
 extern void vec3_addAssign(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
@@ -1943,7 +1943,7 @@ lbl_fn_802A3D80_00001A34:
     bl vec3_set
     addi r3, r1, 0x108
     addi r4, r27, 0x534
-    bl fn_800109E0
+    bl math_mtxFromEulerAngles
     addi r3, r1, 0x20
     addi r4, r1, 0x108
     bl mtx_multVec
@@ -1985,7 +1985,7 @@ lbl_fn_802A3D80_00001A34:
     bl mtx_multVec
     addi r3, r1, 0x48
     addi r4, r27, 0x534
-    bl fn_800109E0
+    bl math_mtxFromEulerAngles
     addi r3, r1, 0x14
     addi r4, r1, 0x48
     bl mtx_multVec

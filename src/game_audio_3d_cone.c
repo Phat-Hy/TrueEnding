@@ -10,7 +10,7 @@ extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void node_destroy(void);
 extern void map_debugLog(void);
-extern void fn_80091CFC(void);
+extern void compass_findTargetByName(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Task_setActive(void);
@@ -1961,10 +1961,10 @@ lbl_fn_80322F74_00001AFC:
     addi r3, r31, 0xb0
     addi r30, r30, lbl_80749D10@l
     addi r4, r30, 0x16
-    bl fn_80091CFC
+    bl compass_findTargetByName
     addi r3, r31, 0xb0
     addi r4, r30, 0x1b
-    bl fn_80091CFC
+    bl compass_findTargetByName
     lbz r0, lbl_8087F400
     lis r4, lbl_80788B4C@ha
     lwzu r9, lbl_80788B4C@l(r4)

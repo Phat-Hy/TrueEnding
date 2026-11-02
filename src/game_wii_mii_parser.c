@@ -17,7 +17,7 @@ extern void mem_getAllocSize(void);
 extern void node_destroy(void);
 extern void map_debugLog(void);
 extern void minimap_renderOverlay(void);
-extern void fn_80091CFC(void);
+extern void compass_findTargetByName(void);
 extern void atn_Model_findBoneIndex(void);
 extern void compass_findWaypointIndex(void);
 extern void fn_80094F98(void);
@@ -844,10 +844,10 @@ lbl_fn_80566560_0000095C:
     addi r3, r31, 0xb0
     addi r30, r30, lbl_8075FE30@l
     addi r4, r30, 0x9
-    bl fn_80091CFC
+    bl compass_findTargetByName
     addi r3, r31, 0xb0
     addi r4, r30, 0xe
-    bl fn_80091CFC
+    bl compass_findTargetByName
     lbz r0, lbl_8087F990
     lis r4, lbl_807956C4@ha
     lwzu r9, lbl_807956C4@l(r4)

@@ -3,7 +3,7 @@
 
 /* External function declarations */
 extern void dtor_80013D60(void);
-extern void fn_8000D760(void);
+extern void scene_destroyNode(void);
 extern void sys_vector_pushBack(void);
 extern void sys_copyString(void);
 extern void sys_calcBufferOffset(void);
@@ -1960,7 +1960,7 @@ lbl_fn_803C74E0_000018E8:
     bl cam_bindRotationTarget
     addi r3, r1, 0xc
     li r4, -0x1
-    bl fn_8000D760
+    bl scene_destroyNode
     addi r3, r1, 0x18
     li r4, -0x1
     bl dtor_80013D60

@@ -10,7 +10,7 @@ extern void node_destroy(void);
 extern void fn_8008A76C(void);
 extern void area_updateZoneState(void);
 extern void map_debugLog(void);
-extern void fn_80091CFC(void);
+extern void compass_findTargetByName(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
@@ -1588,25 +1588,25 @@ lbl_camera_isObjectVisible_000015C8:
 lbl_camera_isObjectVisible_000015CC:
     mr r3, r22
     addi r4, r17, 0x1
-    bl fn_80091CFC
+    bl compass_findTargetByName
     mr r3, r22
     addi r4, r17, 0x6
-    bl fn_80091CFC
+    bl compass_findTargetByName
     mr r3, r22
     addi r4, r17, 0xf
-    bl fn_80091CFC
+    bl compass_findTargetByName
     mr r3, r22
     addi r4, r17, 0x17
-    bl fn_80091CFC
+    bl compass_findTargetByName
     mr r3, r22
     addi r4, r17, 0x21
-    bl fn_80091CFC
+    bl compass_findTargetByName
     mr r3, r22
     addi r4, r17, 0x2a
-    bl fn_80091CFC
+    bl compass_findTargetByName
     mr r3, r22
     addi r4, r17, 0x31
-    bl fn_80091CFC
+    bl compass_findTargetByName
 lbl_camera_isObjectVisible_00001620:
     addi r19, r19, 0x1
     addi r21, r21, 0x21c

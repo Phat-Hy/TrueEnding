@@ -16,7 +16,7 @@ extern void seq_bindSlotResource(void);
 extern void fn_800A96AC(void);
 extern void fn_800ACFC8(void);
 extern void fn_800BC2E0(void);
-extern void fn_800BFB70(void);
+extern void motion_initTransform(void);
 extern void fn_800C0508(void);
 extern void fn_800C0D4C(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
@@ -597,7 +597,7 @@ lbl_fn_800AD648_00000684:
     li r7, 0x1
     bl fn_80075F58
     lwz r3, lbl_8087EFB4
-    bl fn_800BFB70
+    bl motion_initTransform
     bl __GXFlushPixelEngine
     li r3, 0x0
     li r4, 0x0
@@ -737,7 +737,7 @@ asm void fn_800AD834(void)
     li r5, 0x0
     bl fn_80075F58
     lwz r3, lbl_8087EFB4
-    bl fn_800BFB70
+    bl motion_initTransform
     bl __GXFlushPixelEngine
 lbl_fn_800AD834_00000914:
     clrlslwi r5, r28, 17, 1
@@ -1057,7 +1057,7 @@ lbl_fn_800AD834_00000D20:
     li r5, 0x0
     bl fn_80075F58
     lwz r3, lbl_8087EFB4
-    bl fn_800BFB70
+    bl motion_initTransform
     bl __GXFlushPixelEngine
     clrlslwi r5, r15, 17, 1
     clrlslwi r6, r19, 17, 1
@@ -1258,7 +1258,7 @@ lbl_fn_800AD834_00000F00:
     li r7, 0x1
     bl fn_80075F58
     lwz r3, lbl_8087EFB4
-    bl fn_800BFB70
+    bl motion_initTransform
     bl __GXFlushPixelEngine
     li r3, 0x0
     li r4, 0x0
@@ -1412,7 +1412,7 @@ lbl_fn_800AD834_00000F00:
     li r6, 0x3
     bl GXSetTevAlphaIn
     lwz r3, lbl_8087EFB4
-    bl fn_800BFB70
+    bl motion_initTransform
     lwz r3, lbl_8087EFA8
     lwz r0, 0x3dc(r3)
     cmpwi r0, 0x0
@@ -1950,7 +1950,7 @@ lbl_fn_800AE568_000017F8:
     li r5, 0x0
     bl fn_80075F58
     lwz r3, lbl_8087EFB4
-    bl fn_800BFB70
+    bl motion_initTransform
     clrlwi r5, r29, 16
     clrlwi r6, r30, 16
     li r3, 0x0

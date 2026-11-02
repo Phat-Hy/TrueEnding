@@ -16,7 +16,7 @@ extern void talk_copySpeakerName(void);
 extern void mem_alloc(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
-extern void fn_80087858(void);
+extern void route_allocWaypoint(void);
 extern void route_createSegment(void);
 extern void route_createWaypoint(void);
 extern void zone_testPointInBounds(void);
@@ -1319,7 +1319,7 @@ lbl_fn_80418C4C_00000F48:
     addi r4, r31, 0x5f
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087858
+    bl route_allocWaypoint
     addi r21, r21, 0x1
     addi r26, r26, 0xc
     cmpwi r21, 0x2

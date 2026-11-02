@@ -24,7 +24,7 @@ extern void fn_800A96AC(void);
 extern void layout_drawPane(void);
 extern void fn_800AE568(void);
 extern void motion_updateFogAdj(void);
-extern void fn_800BFB70(void);
+extern void motion_initTransform(void);
 extern void fn_800BFC18(void);
 extern void fn_800C0508(void);
 extern void fn_800C1424(void);
@@ -791,7 +791,7 @@ lbl_fn_800AF544_00000990:
     bl fn_80075F58
 lbl_fn_800AF544_000009A8:
     lwz r3, lbl_8087EFB4
-    bl fn_800BFB70
+    bl motion_initTransform
     lwz r0, 0x8(r29)
     cmpwi r0, 0x0
     ble lbl_fn_800AF544_000009E8
@@ -1081,7 +1081,7 @@ lbl_fn_800AF544_00000C1C:
     li r5, 0x0
     bl fn_80075F58
     lwz r3, lbl_8087EFB4
-    bl fn_800BFB70
+    bl motion_initTransform
     lwz r3, lbl_8087EFA8
     lwz r0, 0x268(r3)
     cmpwi r0, 0x0
@@ -1630,7 +1630,7 @@ lbl_fn_800AFFEC_000014D0:
     li r5, 0x0
     bl fn_80075F58
     lwz r3, lbl_8087EFB4
-    bl fn_800BFB70
+    bl motion_initTransform
     clrlwi r5, r27, 16
     clrlwi r6, r26, 16
     li r3, 0x0

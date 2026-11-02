@@ -8,7 +8,7 @@ extern void _savegpr_15(void);
 extern void _savegpr_25(void);
 extern void dtor_80084684(void);
 extern void vec3_copy(void);
-extern void fn_8000D760(void);
+extern void scene_destroyNode(void);
 extern void sys_vector_pushBack(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
@@ -1073,11 +1073,11 @@ asm void fn_8029CB00(void)
     addi r3, r3, lbl_80785B38@l
     li r0, 0x2
     lis r4, fn_80288390@ha
-    lis r5, fn_8000D760@ha
+    lis r5, scene_destroyNode@ha
     stw r3, 0x0(r29)
     addi r3, r29, 0x1508
     addi r4, r4, fn_80288390@l
-    addi r5, r5, fn_8000D760@l
+    addi r5, r5, scene_destroyNode@l
     stw r28, 0x14d4(r29)
     li r6, 0xc
     li r7, 0x6

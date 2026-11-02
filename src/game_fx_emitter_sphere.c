@@ -8,7 +8,7 @@ extern void _savegpr_22(void);
 extern void _savegpr_25(void);
 extern void dtor_80084684(void);
 extern void vec3_copy(void);
-extern void fn_8000D760(void);
+extern void scene_destroyNode(void);
 extern void scene_transformPoint(void);
 extern void sys_vector_pushBack(void);
 extern void vec3_toEulerAngles(void);
@@ -907,11 +907,11 @@ asm void fn_80287E7C(void)
     bl res_MsgHandle_constructor
     lfs f0, lbl_80883A98
     lis r4, fn_80288390@ha
-    lis r5, fn_8000D760@ha
+    lis r5, scene_destroyNode@ha
     stfs f0, 0x15e4(r29)
     addi r3, r29, 0x15ec
     addi r4, r4, fn_80288390@l
-    addi r5, r5, fn_8000D760@l
+    addi r5, r5, scene_destroyNode@l
     li r6, 0xc
     li r7, 0x5
     bl __construct_new_array
@@ -1271,9 +1271,9 @@ lbl_fn_802883A4_00001060:
     li r4, 0x0
     bl atn_LoadHandle_destructor
 lbl_fn_802883A4_0000108C:
-    lis r4, fn_8000D760@ha
+    lis r4, scene_destroyNode@ha
     addi r3, r30, 0x15ec
-    addi r4, r4, fn_8000D760@l
+    addi r4, r4, scene_destroyNode@l
     li r5, 0xc
     li r6, 0x5
     bl __destroy_new_array

@@ -11,7 +11,7 @@ extern void vec3_set(void);
 extern void vec3_mag(void);
 extern void scene_getRootNode(void);
 extern void vec3_assign(void);
-extern void fn_800109E0(void);
+extern void math_mtxFromEulerAngles(void);
 extern void vec3_toEulerAngles(void);
 extern void mtx_multVec(void);
 extern void vec3_addAssign(void);
@@ -1082,7 +1082,7 @@ lbl_fn_8019FEC4_00000BC4:
     bl vec3_set
     addi r3, r1, 0x128
     addi r4, r1, 0xa0
-    bl fn_800109E0
+    bl math_mtxFromEulerAngles
     addi r3, r1, 0x94
     addi r4, r1, 0x128
     bl mtx_multVec
@@ -1200,7 +1200,7 @@ lbl_fn_8019FEC4_00000E3C:
     bl vec3_initValues
     addi r3, r1, 0xf8
     addi r4, r1, 0xac
-    bl fn_800109E0
+    bl math_mtxFromEulerAngles
     addi r3, r28, 0x8
     addi r4, r1, 0xf8
     bl mtx_multVec

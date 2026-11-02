@@ -5,7 +5,7 @@
 extern void dtor_80084684(void);
 extern void actor_dispatchMessage(void);
 extern void mem_free(void);
-extern void fn_800E1D5C(void);
+extern void particle_acquireRef(void);
 extern void fn_802407CC(void);
 extern void fn_802411B8(void);
 extern void fn_80241CB8(void);
@@ -66,7 +66,7 @@ asm void fn_8023F5E0(void)
     mr r29, r4
     mr r26, r6
     mr r4, r25
-    bl fn_800E1D5C
+    bl particle_acquireRef
     lwz r24, lbl_808803C0
     cmpwi r24, 0x0
     bne lbl_fn_8023F5E0_00000088
@@ -295,7 +295,7 @@ lbl_fn_8023F5E0_00000380:
     beq lbl_fn_8023F5E0_000004B0
     mr r4, r25
     addi r3, r1, 0x20
-    bl fn_800E1D5C
+    bl particle_acquireRef
     lwz r24, lbl_808803C0
     cmpwi r24, 0x0
     bne lbl_fn_8023F5E0_000003B4
@@ -662,7 +662,7 @@ asm void fn_8023FD90(void)
     stb r9, 0x2e(r1)
     sth r8, 0x30(r5)
     stw r0, 0x2c(r5)
-    bl fn_800E1D5C
+    bl particle_acquireRef
     lwz r25, lbl_808803C0
     cmpwi r25, 0x0
     bne lbl_fn_8023FD90_00000884
@@ -724,7 +724,7 @@ lbl_fn_8023FD90_0000091C:
     mr r4, r27
     addi r3, r1, 0x10
     li r30, 0x0
-    bl fn_800E1D5C
+    bl particle_acquireRef
     lwz r25, lbl_808803C0
     cmpwi r25, 0x0
     bne lbl_fn_8023FD90_00000964

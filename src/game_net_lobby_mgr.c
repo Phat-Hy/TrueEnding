@@ -13,7 +13,7 @@ extern void dtor_80013D60(void);
 extern void dtor_80084684(void);
 extern void vec3_set(void);
 extern void vec3_copy(void);
-extern void fn_800109E0(void);
+extern void math_mtxFromEulerAngles(void);
 extern void vec3_add(void);
 extern void str_initFromCStr(void);
 extern void menu_initWindowBuffer(void);
@@ -623,7 +623,7 @@ lbl_fn_804985E4_00000740:
     bl fn_80498EF8
     addi r3, r1, 0xe8
     addi r4, r1, 0x78
-    bl fn_800109E0
+    bl math_mtxFromEulerAngles
     addi r3, r1, 0x118
     addi r4, r1, 0xe8
     bl fn_801495E8

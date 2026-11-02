@@ -30,7 +30,7 @@ extern void fn_800E0D70(void);
 extern void fn_800E0F84(void);
 extern void fn_800E114C(void);
 extern void fn_800E19AC(void);
-extern void fn_800E1D5C(void);
+extern void particle_acquireRef(void);
 extern void fn_800E2778(void);
 extern void save_validateHeader(void);
 extern void task_findEntryById(void);
@@ -268,7 +268,7 @@ asm void fn_80242A8C(void)
     mr r26, r9
     mr r4, r27
     addi r3, r1, 0x18
-    bl fn_800E1D5C
+    bl particle_acquireRef
     or. r0, r15, r16
     bne lbl_fn_80242A8C_0000022C
     lwz r12, 0x0(r18)
@@ -665,7 +665,7 @@ asm void fn_80242FF4(void)
     mr r22, r7
     mr r4, r18
     addi r3, r1, 0x18
-    bl fn_800E1D5C
+    bl particle_acquireRef
     cmpwi r19, 0x0
     bne lbl_fn_80242FF4_00000790
     lwz r12, 0x0(r21)

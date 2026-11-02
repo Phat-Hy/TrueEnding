@@ -9,7 +9,7 @@ extern void sound_releaseChannel(void);
 extern void mem_alloc(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
-extern void fn_80087858(void);
+extern void route_allocWaypoint(void);
 extern void route_createSegment(void);
 extern void fn_80087BB4(void);
 extern void route_createWaypoint(void);
@@ -1431,7 +1431,7 @@ lbl_fn_800B9618_00001068:
     addi r5, r31, 0x74
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087858
+    bl route_allocWaypoint
     lfs f1, lbl_80880FB8
     mr r3, r25
     lfs f2, lbl_80881010
@@ -1672,7 +1672,7 @@ lbl_fn_800B9618_00001068:
     addi r5, r31, 0x38c
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087858
+    bl route_allocWaypoint
     lfs f1, lbl_80881068
     mr r3, r25
     lfs f2, lbl_8088106C
@@ -2119,7 +2119,7 @@ lbl_fn_800B9618_00001068:
     addi r5, r31, 0x420
     li r6, 0x0
     li r7, 0x0
-    bl fn_80087858
+    bl route_allocWaypoint
     addi r11, r1, 0x1b0
     mr r3, r31
     bl _restgpr_25

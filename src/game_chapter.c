@@ -7,7 +7,7 @@ extern void _restgpr_24(void);
 extern void _savegpr_23(void);
 extern void _savegpr_24(void);
 extern void dtor_80084684(void);
-extern void fn_8004FF58(void);
+extern void geom_testSphereInFrustum(void);
 extern void fn_8006FEBC(void);
 extern void fn_80072914(void);
 extern void gx_applyRenderState(void);
@@ -523,7 +523,7 @@ lbl_atn_LensFlare_draw_000005B8:
     psq_st f1, 0x0(r4), 0, 0
     lfs f0, 0x14(r30)
     stfs f0, 0x5c(r1)
-    bl fn_8004FF58
+    bl geom_testSphereInFrustum
     cmpwi r3, 0x0
     beq lbl_atn_LensFlare_draw_000007F4
     lfs f5, 0x5c(r1)

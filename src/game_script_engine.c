@@ -6,7 +6,7 @@ extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void mem_free(void);
-extern void fn_800E1D5C(void);
+extern void particle_acquireRef(void);
 extern void fn_800E2778(void);
 extern void fn_802428D8(void);
 extern void fn_80243514(void);
@@ -179,7 +179,7 @@ lbl_fn_802407CC_00000198:
     mr r29, r3
     mr r4, r24
     addi r3, r1, 0x50
-    bl fn_800E1D5C
+    bl particle_acquireRef
     lwz r27, lbl_808803C0
     cmpwi r27, 0x0
     bne lbl_fn_802407CC_000001D8
@@ -890,7 +890,7 @@ asm void fn_802411B8(void)
     mr r25, r4
     addi r3, r1, 0xa0
     mr r4, r26
-    bl fn_800E1D5C
+    bl particle_acquireRef
     lwz r27, lbl_808803C0
     cmpwi r27, 0x0
     bne lbl_fn_802411B8_00000B84
@@ -1698,7 +1698,7 @@ asm void fn_80241CB8(void)
     mr r25, r4
     addi r3, r1, 0x90
     mr r4, r24
-    bl fn_800E1D5C
+    bl particle_acquireRef
     lwz r26, lbl_808803C0
     cmpwi r26, 0x0
     bne lbl_fn_80241CB8_00001684

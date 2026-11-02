@@ -314,7 +314,7 @@ extern void fn_8050CEA0(void);
 extern void fn_8050CF18(void);
 extern void fn_8050CF20(void);
 extern void fn_8050CF94(void);
-extern void fn_8050DDE0(void);
+extern void net_p2p_flushPacketQueue(void);
 extern void fn_8050DE60(void);
 extern void net_p2p_readPayload(void);
 extern void fn_8050E61C(void);
@@ -3712,7 +3712,7 @@ lbl_fn_804D25D4_00002ED8:
     bl net_getPacketManager
     mr r4, r22
     li r5, 0x1
-    bl fn_8050DDE0
+    bl net_p2p_flushPacketQueue
 lbl_fn_804D25D4_00002F50:
     mr r3, r24
     li r4, 0x384
@@ -3815,7 +3815,7 @@ lbl_fn_804D25D4_00003054:
     bl net_getPacketManager
     li r4, -0x1
     li r5, 0x1
-    bl fn_8050DDE0
+    bl net_p2p_flushPacketQueue
     b lbl_fn_804D25D4_00004898
     mr r3, r24
     bl fn_804E9364
@@ -4506,7 +4506,7 @@ lbl_fn_804D25D4_00003A9C:
     bl net_getPacketManager
     mr r4, r25
     li r5, 0x1
-    bl fn_8050DDE0
+    bl net_p2p_flushPacketQueue
 lbl_fn_804D25D4_00003B10:
     mr r3, r24
     li r4, 0x2
@@ -4613,7 +4613,7 @@ lbl_fn_804D25D4_00003C54:
     bl net_getPacketManager
     li r4, -0x1
     li r5, 0x1
-    bl fn_8050DDE0
+    bl net_p2p_flushPacketQueue
     mr r3, r24
     li r4, 0x3
     bl fn_804D6010

@@ -46,7 +46,7 @@ extern void fn_805BEA38(void);
 extern void fn_805BEAD0(void);
 extern void fn_805BEB18(void);
 extern void fn_805BEC6C(void);
-extern void fn_805BEC74(void);
+extern void gx_fifo_checkBufferActive(void);
 extern void fn_805BECA4(void);
 extern void fn_805BED54(void);
 extern void fn_805BEE08(void);
@@ -1441,7 +1441,7 @@ lbl_fn_805BD4BC_00001290:
     bl fn_805BEC6C
     addi r3, r1, 0x1c
     li r22, 0x8
-    bl fn_805BEC74
+    bl gx_fifo_checkBufferActive
     cmpwi r3, 0x0
     beq lbl_fn_805BD4BC_000012DC
     lwz r3, 0x1c(r1)
@@ -1458,7 +1458,7 @@ lbl_fn_805BD4BC_000012DC:
     rlwimi r22, r0, 8, 24, 31
     rlwimi r22, r0, 24, 16, 23
     rlwimi r22, r0, 8, 8, 15
-    bl fn_805BEC74
+    bl gx_fifo_checkBufferActive
     cmpwi r3, 0x0
     beq lbl_fn_805BD4BC_0000131C
     lwz r3, 0x1c(r1)
@@ -1547,7 +1547,7 @@ lbl_fn_805BD4BC_00001420:
     bl fn_805BEC6C
     addi r3, r1, 0x18
     li r21, 0x8
-    bl fn_805BEC74
+    bl gx_fifo_checkBufferActive
     cmpwi r3, 0x0
     beq lbl_fn_805BD4BC_00001460
     lwz r3, 0x18(r1)
@@ -1560,7 +1560,7 @@ lbl_fn_805BD4BC_00001460:
     addi r3, r1, 0x18
     li r18, 0x8
     lwzx r22, r4, r21
-    bl fn_805BEC74
+    bl gx_fifo_checkBufferActive
     cmpwi r3, 0x0
     beq lbl_fn_805BD4BC_00001490
     lwz r3, 0x18(r1)
@@ -1808,7 +1808,7 @@ asm void fn_805BDE4C(void)
     bl fn_805BEC6C
     addi r3, r1, 0x18
     li r31, 0x8
-    bl fn_805BEC74
+    bl gx_fifo_checkBufferActive
     cmpwi r3, 0x0
     beq lbl_fn_805BDE4C_000017D4
     lwz r3, 0x18(r1)
@@ -1821,7 +1821,7 @@ lbl_fn_805BDE4C_000017D4:
     addi r3, r1, 0x18
     li r27, 0x8
     lwzx r31, r4, r31
-    bl fn_805BEC74
+    bl gx_fifo_checkBufferActive
     cmpwi r3, 0x0
     beq lbl_fn_805BDE4C_00001804
     lwz r3, 0x18(r1)
@@ -1870,7 +1870,7 @@ lbl_fn_805BDE4C_00001868:
     stw r3, 0x18(r1)
     addi r3, r1, 0x18
     li r27, 0x8
-    bl fn_805BEC74
+    bl gx_fifo_checkBufferActive
     cmpwi r3, 0x0
     beq lbl_fn_805BDE4C_000018B8
     lwz r3, 0x18(r1)
@@ -1893,7 +1893,7 @@ lbl_fn_805BDE4C_000018B8:
     stw r3, 0x14(r1)
     addi r3, r1, 0x14
     li r27, 0x8
-    bl fn_805BEC74
+    bl gx_fifo_checkBufferActive
     cmpwi r3, 0x0
     beq lbl_fn_805BDE4C_00001910
     lwz r3, 0x14(r1)
@@ -1913,7 +1913,7 @@ lbl_fn_805BDE4C_00001910:
     stw r3, 0x14(r1)
     addi r3, r1, 0x14
     li r27, 0x8
-    bl fn_805BEC74
+    bl gx_fifo_checkBufferActive
     cmpwi r3, 0x0
     beq lbl_fn_805BDE4C_0000195C
     lwz r3, 0x14(r1)
@@ -1933,7 +1933,7 @@ lbl_fn_805BDE4C_0000195C:
     stw r3, 0x14(r1)
     addi r3, r1, 0x14
     li r27, 0x8
-    bl fn_805BEC74
+    bl gx_fifo_checkBufferActive
     cmpwi r3, 0x0
     beq lbl_fn_805BDE4C_000019A8
     lwz r3, 0x14(r1)
@@ -1956,7 +1956,7 @@ lbl_fn_805BDE4C_000019A8:
     stw r3, 0x10(r1)
     addi r3, r1, 0x10
     li r27, 0x8
-    bl fn_805BEC74
+    bl gx_fifo_checkBufferActive
     cmpwi r3, 0x0
     beq lbl_fn_805BDE4C_00001A00
     lwz r3, 0x10(r1)
@@ -1976,7 +1976,7 @@ lbl_fn_805BDE4C_00001A00:
     stw r3, 0x10(r1)
     addi r3, r1, 0x10
     li r27, 0x8
-    bl fn_805BEC74
+    bl gx_fifo_checkBufferActive
     cmpwi r3, 0x0
     beq lbl_fn_805BDE4C_00001A4C
     lwz r3, 0x10(r1)
@@ -1996,7 +1996,7 @@ lbl_fn_805BDE4C_00001A4C:
     stw r3, 0x10(r1)
     addi r3, r1, 0x10
     li r27, 0x8
-    bl fn_805BEC74
+    bl gx_fifo_checkBufferActive
     cmpwi r3, 0x0
     beq lbl_fn_805BDE4C_00001A98
     lwz r3, 0x10(r1)
@@ -2019,7 +2019,7 @@ lbl_fn_805BDE4C_00001A98:
     stw r3, 0xc(r1)
     addi r3, r1, 0xc
     li r27, 0x8
-    bl fn_805BEC74
+    bl gx_fifo_checkBufferActive
     cmpwi r3, 0x0
     beq lbl_fn_805BDE4C_00001AF0
     lwz r3, 0xc(r1)
@@ -2039,7 +2039,7 @@ lbl_fn_805BDE4C_00001AF0:
     stw r3, 0xc(r1)
     addi r3, r1, 0xc
     li r27, 0x8
-    bl fn_805BEC74
+    bl gx_fifo_checkBufferActive
     cmpwi r3, 0x0
     beq lbl_fn_805BDE4C_00001B3C
     lwz r3, 0xc(r1)
@@ -2059,7 +2059,7 @@ lbl_fn_805BDE4C_00001B3C:
     stw r3, 0xc(r1)
     addi r3, r1, 0xc
     li r27, 0x8
-    bl fn_805BEC74
+    bl gx_fifo_checkBufferActive
     cmpwi r3, 0x0
     beq lbl_fn_805BDE4C_00001B88
     lwz r3, 0xc(r1)
@@ -2082,7 +2082,7 @@ lbl_fn_805BDE4C_00001B88:
     stw r3, 0x8(r1)
     addi r3, r1, 0x8
     li r27, 0x8
-    bl fn_805BEC74
+    bl gx_fifo_checkBufferActive
     cmpwi r3, 0x0
     beq lbl_fn_805BDE4C_00001BE0
     lwz r3, 0x8(r1)
@@ -2102,7 +2102,7 @@ lbl_fn_805BDE4C_00001BE0:
     stw r3, 0x8(r1)
     addi r3, r1, 0x8
     li r27, 0x8
-    bl fn_805BEC74
+    bl gx_fifo_checkBufferActive
     cmpwi r3, 0x0
     beq lbl_fn_805BDE4C_00001C2C
     lwz r3, 0x8(r1)
@@ -2122,7 +2122,7 @@ lbl_fn_805BDE4C_00001C2C:
     stw r3, 0x8(r1)
     addi r3, r1, 0x8
     li r27, 0x8
-    bl fn_805BEC74
+    bl gx_fifo_checkBufferActive
     cmpwi r3, 0x0
     beq lbl_fn_805BDE4C_00001C78
     lwz r3, 0x8(r1)

@@ -16,7 +16,7 @@ extern void mem_free(void);
 extern void node_destroy(void);
 extern void map_debugLog(void);
 extern void atn_Matrix_copy(void);
-extern void fn_80091CFC(void);
+extern void compass_findTargetByName(void);
 extern void atn_Model_findBoneIndex(void);
 extern void target_registerCandidate(void);
 extern void fn_80094B6C(void);
@@ -1220,10 +1220,10 @@ lbl_fn_8031ECDC_00000FC0:
     addi r3, r31, 0xb0
     addi r30, r30, lbl_80749A70@l
     addi r4, r30, 0x9
-    bl fn_80091CFC
+    bl compass_findTargetByName
     addi r3, r31, 0xb0
     addi r4, r30, 0xe
-    bl fn_80091CFC
+    bl compass_findTargetByName
     lbz r0, lbl_8087F3F8
     lis r4, lbl_807889E4@ha
     lwzu r9, lbl_807889E4@l(r4)

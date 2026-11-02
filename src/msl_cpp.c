@@ -14,7 +14,7 @@ extern void mem_free(void);
 extern void field_initGridPoints(void);
 extern void mem_getAllocSize(void);
 extern void fn_800E1A48(void);
-extern void fn_800E1D5C(void);
+extern void particle_acquireRef(void);
 extern void fn_800E2778(void);
 extern void fn_8067AF64(void);
 extern void fn_8067C590(void);
@@ -9079,7 +9079,7 @@ lbl_fn_8068E270_000073B4:
     stw r27, 0x34(r30)
     mr r4, r30
     addi r3, r31, 0x10
-    bl fn_800E1D5C
+    bl particle_acquireRef
     lwz r0, lbl_808803C4
     stb r27, 0x8(r31)
     cmpwi r0, 0x0
@@ -9287,7 +9287,7 @@ lbl_fn_8068E554_00007698:
     stw r27, 0x34(r30)
     mr r4, r30
     addi r3, r31, 0x10
-    bl fn_800E1D5C
+    bl particle_acquireRef
     lwz r0, lbl_808803C0
     stb r27, 0x8(r31)
     cmpwi r0, 0x0
@@ -9402,7 +9402,7 @@ lbl_fn_8068E6E8_0000782C:
     stw r27, 0x34(r30)
     mr r4, r30
     addi r3, r31, 0x10
-    bl fn_800E1D5C
+    bl particle_acquireRef
     lwz r0, lbl_808803C4
     stb r27, 0x8(r31)
     cmpwi r0, 0x0
@@ -9515,7 +9515,7 @@ lbl_fn_8068E878_000079BC:
     stw r27, 0x34(r30)
     mr r4, r30
     addi r3, r31, 0x10
-    bl fn_800E1D5C
+    bl particle_acquireRef
     lwz r0, lbl_808803C0
     stb r27, 0x8(r31)
     cmpwi r0, 0x0

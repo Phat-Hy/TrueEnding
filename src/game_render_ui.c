@@ -20,7 +20,7 @@ extern void fn_800B0A70(void);
 extern void fn_800B23C4(void);
 extern void fn_800B257C(void);
 extern void model_updateBoneTransforms(void);
-extern void fn_800BFB70(void);
+extern void motion_initTransform(void);
 extern void fn_800BFCB4(void);
 extern void fn_800C0508(void);
 extern void fn_800C1424(void);
@@ -656,7 +656,7 @@ lbl_fn_800B105C_000007B0:
     lwz r3, lbl_8087EEE0
     bl seq_stepPlaybackTimer
     lwz r3, lbl_8087EFB4
-    bl fn_800BFB70
+    bl motion_initTransform
     li r3, 0x0
     li r4, 0x1
     li r5, 0x0

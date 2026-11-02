@@ -8,7 +8,7 @@ extern void _savegpr_25(void);
 extern void _savegpr_27(void);
 extern void dtor_80013D60(void);
 extern void dtor_80084684(void);
-extern void fn_8000D760(void);
+extern void scene_destroyNode(void);
 extern void str_initFromCStr(void);
 extern void str_getData(void);
 extern void collision_testLineSegment(void);
@@ -1863,9 +1863,9 @@ lbl_fn_8034515C_00001804:
     li r4, 0x0
     bl atn_LoadHandle_destructor
 lbl_fn_8034515C_00001824:
-    lis r4, fn_8000D760@ha
+    lis r4, scene_destroyNode@ha
     addi r3, r29, 0x14ec
-    addi r4, r4, fn_8000D760@l
+    addi r4, r4, scene_destroyNode@l
     li r5, 0xc
     li r6, 0x9
     bl __destroy_new_array
@@ -1912,11 +1912,11 @@ asm void fn_80345384(void)
     stw r28, 0x14c4(r31)
     bl fn_8034585C
     lis r4, fn_80288390@ha
-    lis r5, fn_8000D760@ha
+    lis r5, scene_destroyNode@ha
     stw r28, 0x153c(r31)
     addi r3, r31, 0x1560
     addi r4, r4, fn_80288390@l
-    addi r5, r5, fn_8000D760@l
+    addi r5, r5, scene_destroyNode@l
     stw r28, 0x1550(r31)
     li r6, 0xc
     li r7, 0x9

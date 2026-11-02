@@ -7,7 +7,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_25(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8000D760(void);
+extern void scene_destroyNode(void);
 extern void scene_transformPoint(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
@@ -958,9 +958,9 @@ lbl_fn_802A4A04_00000AA4:
     stw r0, 0x4(r4)
     bl dtor_80084684
 lbl_fn_802A4A04_00000AD4:
-    lis r4, fn_8000D760@ha
+    lis r4, scene_destroyNode@ha
     addi r3, r30, 0x1508
-    addi r4, r4, fn_8000D760@l
+    addi r4, r4, scene_destroyNode@l
     li r5, 0xc
     li r6, 0x6
     bl __destroy_new_array

@@ -20,7 +20,7 @@ extern void net_getPacketManager(void);
 extern void net_voiceCodec_destroy(void);
 extern void fn_804FC7E4(void);
 extern void fn_8050BA6C(void);
-extern void fn_8050DDE0(void);
+extern void net_p2p_flushPacketQueue(void);
 extern void net_p2p_readPayload(void);
 extern void PSVECSquareMag(void);
 extern void printf(void);
@@ -987,7 +987,7 @@ asm void fn_804EA8BC(void)
     bl net_getPacketManager
     li r4, -0x1
     li r5, 0x1
-    bl fn_8050DDE0
+    bl net_p2p_flushPacketQueue
     lwz r4, lbl_8087F628
     addis r3, r4, 0x1
     lbz r0, -0x3deb(r3)

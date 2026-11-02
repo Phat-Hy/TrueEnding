@@ -44,7 +44,7 @@ void fn_800E19AC(void);
 void fn_800E1A48(void);
 u32 fn_800E1D4C(void);
 s32 fn_800E1D54(void);
-void fn_800E1D5C(void);
+void particle_acquireRef(void);
 void fn_800E1D88(void);
 void fn_800E1DE4(void);
 void fn_800E1E64(void);
@@ -1576,7 +1576,7 @@ s32 fn_800E1D54(void)
     return -1;
 }
 
-asm void fn_800E1D5C(void)
+asm void particle_acquireRef(void)
 {
     nofralloc
     lwz r4, 0x20(r4)

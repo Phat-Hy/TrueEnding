@@ -6,7 +6,7 @@ extern void __files(void);
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8000D760(void);
+extern void scene_destroyNode(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void collision_testLineSegment(void);
@@ -817,9 +817,9 @@ lbl_fn_80354398_000008D0:
     li r4, 0x0
     bl atn_LoadHandle_destructor
 lbl_fn_80354398_000008F0:
-    lis r4, fn_8000D760@ha
+    lis r4, scene_destroyNode@ha
     addi r3, r29, 0x1560
-    addi r4, r4, fn_8000D760@l
+    addi r4, r4, scene_destroyNode@l
     li r5, 0xc
     li r6, 0x9
     bl __destroy_new_array

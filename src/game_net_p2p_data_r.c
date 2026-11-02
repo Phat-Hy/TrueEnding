@@ -67,7 +67,7 @@ void fn_8050DBEC(void);
 void fn_8050DBF8(void);
 void fn_8050DC50(void);
 void fn_8050DC5C(void);
-void fn_8050DDE0(void);
+void net_p2p_flushPacketQueue(void);
 void fn_8050DE38(void);
 void fn_8050DE60(void);
 void fn_8050DEAC(void);
@@ -290,7 +290,7 @@ lbl_fn_8050DC5C_00000240:
     blr
 }
 
-asm void fn_8050DDE0(void)
+asm void net_p2p_flushPacketQueue(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -302,13 +302,13 @@ asm void fn_8050DDE0(void)
     mr r30, r4
     stw r29, 0x14(r1)
     mr r29, r3
-lbl_fn_8050DDE0_0000028C:
+lbl_net_p2p_flushPacketQueue_0000028C:
     mr r3, r29
     mr r4, r31
     mr r5, r30
     bl fn_8050DC5C
     cmpwi r3, 0x0
-    bne lbl_fn_8050DDE0_0000028C
+    bne lbl_net_p2p_flushPacketQueue_0000028C
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)

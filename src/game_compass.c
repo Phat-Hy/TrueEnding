@@ -51,7 +51,7 @@ void atn_Model_updateMatrices(void);
 void fn_80091A90(void);
 void *fn_80091C00(const void *p, u32 idx);
 void fn_80091C10(void);
-void fn_80091CFC(void);
+void compass_findTargetByName(void);
 void fn_800920B8(void);
 void fn_8009246C(void);
 void fn_80092768(void);
@@ -891,7 +891,7 @@ lbl_fn_80091C10_00000C18:
     blr
 }
 
-asm void fn_80091CFC(void)
+asm void compass_findTargetByName(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -906,55 +906,55 @@ asm void fn_80091CFC(void)
     bl str_findChar
     lwz r5, 0x16c(r28)
     cmpwi r5, 0x0
-    bne lbl_fn_80091CFC_00000C64
+    bne lbl_compass_findTargetByName_00000C64
     li r29, -0x1
-    b lbl_fn_80091CFC_00000CA4
-lbl_fn_80091CFC_00000C64:
+    b lbl_compass_findTargetByName_00000CA4
+lbl_compass_findTargetByName_00000C64:
     lwz r0, 0x44(r5)
     li r29, 0x0
     li r6, 0x0
     mtctr r0
     cmpwi r0, 0x0
-    ble lbl_fn_80091CFC_00000CA0
-lbl_fn_80091CFC_00000C7C:
+    ble lbl_compass_findTargetByName_00000CA0
+lbl_compass_findTargetByName_00000C7C:
     lwz r4, 0x48(r5)
     lwzx r4, r4, r6
     lwz r0, 0x14(r4)
     cmplw r3, r0
-    bne lbl_fn_80091CFC_00000C94
-    b lbl_fn_80091CFC_00000CA4
-lbl_fn_80091CFC_00000C94:
+    bne lbl_compass_findTargetByName_00000C94
+    b lbl_compass_findTargetByName_00000CA4
+lbl_compass_findTargetByName_00000C94:
     addi r6, r6, 0x4
     addi r29, r29, 0x1
-    bdnz lbl_fn_80091CFC_00000C7C
-lbl_fn_80091CFC_00000CA0:
+    bdnz lbl_compass_findTargetByName_00000C7C
+lbl_compass_findTargetByName_00000CA0:
     li r29, -0x1
-lbl_fn_80091CFC_00000CA4:
+lbl_compass_findTargetByName_00000CA4:
     cmpwi r29, 0x0
-    blt lbl_fn_80091CFC_00000FC4
+    blt lbl_compass_findTargetByName_00000FC4
     lwz r0, 0xcc(r28)
     li r3, 0x0
     mtctr r0
     cmplwi r0, 0x0
-    ble lbl_fn_80091CFC_00000CD8
-lbl_fn_80091CFC_00000CC0:
+    ble lbl_compass_findTargetByName_00000CD8
+lbl_compass_findTargetByName_00000CC0:
     lwz r4, 0xd4(r28)
     lwzx r0, r4, r3
     cmplw r29, r0
-    beq lbl_fn_80091CFC_00000FC4
+    beq lbl_compass_findTargetByName_00000FC4
     addi r3, r3, 0x4
-    bdnz lbl_fn_80091CFC_00000CC0
-lbl_fn_80091CFC_00000CD8:
+    bdnz lbl_compass_findTargetByName_00000CC0
+lbl_compass_findTargetByName_00000CD8:
     lwz r0, 0xd4(r28)
     cmpwi r0, 0x0
-    beq lbl_fn_80091CFC_00000CF0
+    beq lbl_compass_findTargetByName_00000CF0
     lwz r0, 0xd0(r28)
     cmpwi r0, 0x0
-    bne lbl_fn_80091CFC_00000E40
-lbl_fn_80091CFC_00000CF0:
+    bne lbl_compass_findTargetByName_00000E40
+lbl_compass_findTargetByName_00000CF0:
     lwz r0, 0xd0(r28)
     cmplwi r0, 0x8
-    bgt lbl_fn_80091CFC_00000F94
+    bgt lbl_compass_findTargetByName_00000F94
     li r3, 0x20
     li r4, 0x0
     la r5, lbl_8087D7E0
@@ -964,27 +964,27 @@ lbl_fn_80091CFC_00000CF0:
     lwz r0, 0xd4(r28)
     mr r31, r3
     cmpwi r0, 0x0
-    beq lbl_fn_80091CFC_00000E30
+    beq lbl_compass_findTargetByName_00000E30
     lwz r0, 0xcc(r28)
     li r4, 0x8
     cmplwi r0, 0x8
-    bge lbl_fn_80091CFC_00000D38
+    bge lbl_compass_findTargetByName_00000D38
     mr r4, r0
-lbl_fn_80091CFC_00000D38:
+lbl_compass_findTargetByName_00000D38:
     cmpwi r4, 0x0
     li r5, 0x0
-    beq lbl_fn_80091CFC_00000E28
+    beq lbl_compass_findTargetByName_00000E28
     cmplwi r4, 0x8
     subi r8, r4, 0x8
-    ble lbl_fn_80091CFC_00000DF8
+    ble lbl_compass_findTargetByName_00000DF8
     addi r0, r8, 0x7
     mr r7, r31
     srwi r0, r0, 3
     li r6, 0x0
     mtctr r0
     cmplwi r8, 0x0
-    ble lbl_fn_80091CFC_00000DF8
-lbl_fn_80091CFC_00000D6C:
+    ble lbl_compass_findTargetByName_00000DF8
+lbl_compass_findTargetByName_00000D6C:
     lwz r8, 0xd4(r28)
     addi r5, r5, 0x8
     lwzx r0, r8, r6
@@ -1019,36 +1019,36 @@ lbl_fn_80091CFC_00000D6C:
     lwz r0, 0x1c(r8)
     stw r0, 0x1c(r7)
     addi r7, r7, 0x20
-    bdnz lbl_fn_80091CFC_00000D6C
-lbl_fn_80091CFC_00000DF8:
+    bdnz lbl_compass_findTargetByName_00000D6C
+lbl_compass_findTargetByName_00000DF8:
     slwi r7, r5, 2
     subf r0, r5, r4
     add r6, r3, r7
     mtctr r0
     cmplw r5, r4
-    bge lbl_fn_80091CFC_00000E28
-lbl_fn_80091CFC_00000E10:
+    bge lbl_compass_findTargetByName_00000E28
+lbl_compass_findTargetByName_00000E10:
     lwz r3, 0xd4(r28)
     lwzx r0, r3, r7
     addi r7, r7, 0x4
     stw r0, 0x0(r6)
     addi r6, r6, 0x4
-    bdnz lbl_fn_80091CFC_00000E10
-lbl_fn_80091CFC_00000E28:
+    bdnz lbl_compass_findTargetByName_00000E10
+lbl_compass_findTargetByName_00000E28:
     lwz r3, 0xd4(r28)
     bl mem_getAllocSize
-lbl_fn_80091CFC_00000E30:
+lbl_compass_findTargetByName_00000E30:
     li r0, 0x8
     stw r31, 0xd4(r28)
     stw r0, 0xd0(r28)
-    b lbl_fn_80091CFC_00000F94
-lbl_fn_80091CFC_00000E40:
+    b lbl_compass_findTargetByName_00000F94
+lbl_compass_findTargetByName_00000E40:
     lwz r3, 0xcc(r28)
     cmplw r3, r0
-    blt lbl_fn_80091CFC_00000F94
+    blt lbl_compass_findTargetByName_00000F94
     slwi r31, r3, 1
     cmplw r0, r31
-    bgt lbl_fn_80091CFC_00000F94
+    bgt lbl_compass_findTargetByName_00000F94
     slwi r3, r31, 2
     li r4, 0x0
     la r5, lbl_8087D7E0
@@ -1058,27 +1058,27 @@ lbl_fn_80091CFC_00000E40:
     lwz r0, 0xd4(r28)
     mr r30, r3
     cmpwi r0, 0x0
-    beq lbl_fn_80091CFC_00000F8C
+    beq lbl_compass_findTargetByName_00000F8C
     lwz r0, 0xcc(r28)
     mr r4, r31
     cmplw r31, r0
-    ble lbl_fn_80091CFC_00000E94
+    ble lbl_compass_findTargetByName_00000E94
     mr r4, r0
-lbl_fn_80091CFC_00000E94:
+lbl_compass_findTargetByName_00000E94:
     cmpwi r4, 0x0
     li r5, 0x0
-    beq lbl_fn_80091CFC_00000F84
+    beq lbl_compass_findTargetByName_00000F84
     cmplwi r4, 0x8
     subi r8, r4, 0x8
-    ble lbl_fn_80091CFC_00000F54
+    ble lbl_compass_findTargetByName_00000F54
     addi r0, r8, 0x7
     mr r7, r30
     srwi r0, r0, 3
     li r6, 0x0
     mtctr r0
     cmplwi r8, 0x0
-    ble lbl_fn_80091CFC_00000F54
-lbl_fn_80091CFC_00000EC8:
+    ble lbl_compass_findTargetByName_00000F54
+lbl_compass_findTargetByName_00000EC8:
     lwz r8, 0xd4(r28)
     addi r5, r5, 0x8
     lwzx r0, r8, r6
@@ -1113,28 +1113,28 @@ lbl_fn_80091CFC_00000EC8:
     lwz r0, 0x1c(r8)
     stw r0, 0x1c(r7)
     addi r7, r7, 0x20
-    bdnz lbl_fn_80091CFC_00000EC8
-lbl_fn_80091CFC_00000F54:
+    bdnz lbl_compass_findTargetByName_00000EC8
+lbl_compass_findTargetByName_00000F54:
     slwi r7, r5, 2
     subf r0, r5, r4
     add r6, r3, r7
     mtctr r0
     cmplw r5, r4
-    bge lbl_fn_80091CFC_00000F84
-lbl_fn_80091CFC_00000F6C:
+    bge lbl_compass_findTargetByName_00000F84
+lbl_compass_findTargetByName_00000F6C:
     lwz r3, 0xd4(r28)
     lwzx r0, r3, r7
     addi r7, r7, 0x4
     stw r0, 0x0(r6)
     addi r6, r6, 0x4
-    bdnz lbl_fn_80091CFC_00000F6C
-lbl_fn_80091CFC_00000F84:
+    bdnz lbl_compass_findTargetByName_00000F6C
+lbl_compass_findTargetByName_00000F84:
     lwz r3, 0xd4(r28)
     bl mem_getAllocSize
-lbl_fn_80091CFC_00000F8C:
+lbl_compass_findTargetByName_00000F8C:
     stw r30, 0xd4(r28)
     stw r31, 0xd0(r28)
-lbl_fn_80091CFC_00000F94:
+lbl_compass_findTargetByName_00000F94:
     lwz r0, 0xcc(r28)
     addi r5, r1, 0x8
     lwz r3, 0xd4(r28)
@@ -1147,7 +1147,7 @@ lbl_fn_80091CFC_00000F94:
     slwi r0, r0, 2
     add r4, r3, r0
     bl fn_8009246C
-lbl_fn_80091CFC_00000FC4:
+lbl_compass_findTargetByName_00000FC4:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)

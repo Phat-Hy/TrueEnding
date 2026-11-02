@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void _restgpr_26(void);
 extern void _savegpr_26(void);
-extern void fn_8004FF58(void);
+extern void geom_testSphereInFrustum(void);
 extern void magic_updateCircleArea(void);
 extern void magic_castSpellCircle(void);
 extern void boss_recordDamage(void);
@@ -1376,7 +1376,7 @@ lbl_fn_8008D78C_0000128C:
     beq lbl_fn_8008D78C_0000161C
     addi r3, r31, 0x204
     addi r4, r1, 0xe0
-    bl fn_8004FF58
+    bl geom_testSphereInFrustum
     cmpwi r3, 0x0
     bne lbl_fn_8008D78C_0000161C
     lwz r3, 0x20c(r30)
@@ -1592,7 +1592,7 @@ lbl_fn_8008D78C_000015C8:
     addi r4, r1, 0xd0
     psq_st f1, 0x0(r28), 0, 0
     stfs f2, 0xd8(r1)
-    bl fn_8004FF58
+    bl geom_testSphereInFrustum
     cmpwi r3, 0x0
     beq lbl_fn_8008D78C_0000161C
     lwz r0, 0x20c(r30)
@@ -1841,7 +1841,7 @@ lbl_fn_8008D78C_00001964:
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0xc8(r1)
     stfs f0, 0xcc(r1)
-    bl fn_8004FF58
+    bl geom_testSphereInFrustum
     cmpwi r3, 0x0
     beq lbl_fn_8008D78C_000019C4
     lwz r0, 0x20c(r30)

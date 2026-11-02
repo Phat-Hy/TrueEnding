@@ -10,7 +10,7 @@ extern void _savegpr_14(void);
 extern void _savegpr_23(void);
 extern void _savegpr_24(void);
 extern void _savegpr_27(void);
-extern void fn_8004FF58(void);
+extern void geom_testSphereInFrustum(void);
 extern void fn_80070B60(void);
 extern void fn_80070C98(void);
 extern void gx_setRenderStateParam(void);
@@ -1008,7 +1008,7 @@ lbl_fn_8008EEDC_00000CBC:
     bl PSMTXMultVec
     mr r3, r18
     mr r4, r30
-    bl fn_8004FF58
+    bl geom_testSphereInFrustum
     cmpwi r3, 0x0
     beq lbl_fn_8008EEDC_00001288
     lfs f2, 0x60(r16)
@@ -2046,7 +2046,7 @@ lbl_atn_Model_draw_00001D5C:
 lbl_atn_Model_draw_00001DB8:
     mr r3, r29
     addi r4, r1, 0xe8
-    bl fn_8004FF58
+    bl geom_testSphereInFrustum
     cmpwi r3, 0x0
     bne lbl_atn_Model_draw_00001DD4
     li r3, 0x0

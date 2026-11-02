@@ -6,7 +6,7 @@ extern void _restgpr_17(void);
 extern void _savegpr_17(void);
 extern void dtor_80013D60(void);
 extern void vec3_copy(void);
-extern void fn_8000D760(void);
+extern void scene_destroyNode(void);
 extern void sys_vector_pushBack(void);
 extern void sys_copyString(void);
 extern void sys_calcBufferOffset(void);
@@ -1425,7 +1425,7 @@ lbl_fn_803C3894_00001224:
     bl cam_bindRotationTarget
     addi r3, r1, 0xb8
     li r4, -0x1
-    bl fn_8000D760
+    bl scene_destroyNode
     addi r3, r1, 0xc4
     li r4, -0x1
     bl dtor_80013D60
@@ -1608,7 +1608,7 @@ lbl_fn_803C3894_00001524:
     bl cam_bindRotationTarget
     addi r3, r1, 0xa0
     li r4, -0x1
-    bl fn_8000D760
+    bl scene_destroyNode
     addi r3, r1, 0xac
     li r4, -0x1
     bl dtor_80013D60

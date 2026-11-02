@@ -35,7 +35,7 @@ extern void sys_getMainManager(void);
 extern void fn_80093D98(void);
 extern void fn_80093E30(void);
 extern void fn_800A96AC(void);
-extern void fn_800BFB70(void);
+extern void motion_initTransform(void);
 extern void fn_800C0508(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
@@ -335,7 +335,7 @@ lbl_fn_804ABA2C_00000144:
     li r5, 0x0
     bl seq_bindSlotResource
     mr r3, r29
-    bl fn_800BFB70
+    bl motion_initTransform
     addi r3, r1, 0xc0
     bl fn_8005ED68
     addi r3, r1, 0xe0

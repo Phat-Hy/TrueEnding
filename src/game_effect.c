@@ -77,7 +77,7 @@ s32 fn_8003CDA8(void);
 void fn_8003CDB0(void);
 void fn_8003D084(void);
 void effect_createEmitter(void);
-void fn_8003D3F8(void);
+void effect_evaluateState(void);
 void fn_8003D6E8(void);
 void effect_testLifetime(void);
 void fn_8003DD50(void);
@@ -4314,7 +4314,7 @@ lbl_effect_createEmitter_00003A8C:
     blr
 }
 
-asm void fn_8003D3F8(void)
+asm void effect_evaluateState(void)
 {
     nofralloc
     stwu r1, -0x80(r1)
@@ -4335,11 +4335,11 @@ asm void fn_8003D3F8(void)
     lfd f0, 0x68(r1)
     fsubs f0, f0, f1
     fcmpo cr0, f2, f0
-    bge lbl_fn_8003D3F8_00003C10
+    bge lbl_effect_evaluateState_00003C10
     lwz r3, lbl_807C68C0@l(r30)
     bl entity_checkActorType
     cmpwi r3, 0x0
-    beq lbl_fn_8003D3F8_00003B44
+    beq lbl_effect_evaluateState_00003B44
     li r0, 0x0
     stw r0, 0x64(r1)
     addi r4, r1, 0x58
@@ -4355,26 +4355,26 @@ asm void fn_8003D3F8(void)
     li r0, 0x1
     stw r0, lbl_807C6A40@l(r3)
     li r3, 0x9
-    b lbl_fn_8003D3F8_00003D80
-lbl_fn_8003D3F8_00003B44:
+    b lbl_effect_evaluateState_00003D80
+lbl_effect_evaluateState_00003B44:
     lfs f1, 0x1c(r31)
     lfs f0, lbl_80880798
     fcmpo cr0, f1, f0
     mfcr r0
     srwi. r0, r0, 31
-    beq lbl_fn_8003D3F8_00003B78
+    beq lbl_effect_evaluateState_00003B78
     lwz r3, lbl_807C68C0@l(r30)
     bl fn_8001B5DC
     cmpwi r3, 0x0
-    ble lbl_fn_8003D3F8_00003B78
+    ble lbl_effect_evaluateState_00003B78
     stw r3, 0x64(r31)
     li r0, 0x1
-    b lbl_fn_8003D3F8_00003B7C
-lbl_fn_8003D3F8_00003B78:
+    b lbl_effect_evaluateState_00003B7C
+lbl_effect_evaluateState_00003B78:
     li r0, 0x0
-lbl_fn_8003D3F8_00003B7C:
+lbl_effect_evaluateState_00003B7C:
     cmpwi r0, 0x0
-    beq lbl_fn_8003D3F8_00003BD0
+    beq lbl_effect_evaluateState_00003BD0
     lis r3, lbl_807C68C0@ha
     li r8, 0x0
     addi r3, r3, lbl_807C68C0@l
@@ -4393,8 +4393,8 @@ lbl_fn_8003D3F8_00003B7C:
     li r0, 0x1
     stw r0, lbl_807C6A40@l(r3)
     li r3, 0x4
-    b lbl_fn_8003D3F8_00003D80
-lbl_fn_8003D3F8_00003BD0:
+    b lbl_effect_evaluateState_00003D80
+lbl_effect_evaluateState_00003BD0:
     li r0, 0x0
     stw r0, 0x44(r1)
     addi r4, r1, 0x38
@@ -4410,25 +4410,25 @@ lbl_fn_8003D3F8_00003BD0:
     li r0, 0x1
     stw r0, lbl_807C6A40@l(r3)
     li r3, 0x9
-    b lbl_fn_8003D3F8_00003D80
-lbl_fn_8003D3F8_00003C10:
+    b lbl_effect_evaluateState_00003D80
+lbl_effect_evaluateState_00003C10:
     lfs f0, lbl_80880798
     fcmpo cr0, f2, f0
     mfcr r0
     srwi. r0, r0, 31
-    beq lbl_fn_8003D3F8_00003C40
+    beq lbl_effect_evaluateState_00003C40
     lwz r3, lbl_807C68C0@l(r30)
     bl fn_8001B634
     cmpwi r3, 0x0
-    ble lbl_fn_8003D3F8_00003C40
+    ble lbl_effect_evaluateState_00003C40
     stw r3, 0x64(r31)
     li r0, 0x1
-    b lbl_fn_8003D3F8_00003C44
-lbl_fn_8003D3F8_00003C40:
+    b lbl_effect_evaluateState_00003C44
+lbl_effect_evaluateState_00003C40:
     li r0, 0x0
-lbl_fn_8003D3F8_00003C44:
+lbl_effect_evaluateState_00003C44:
     cmpwi r0, 0x0
-    beq lbl_fn_8003D3F8_00003C98
+    beq lbl_effect_evaluateState_00003C98
     lis r3, lbl_807C68C0@ha
     li r8, 0x0
     addi r3, r3, lbl_807C68C0@l
@@ -4447,8 +4447,8 @@ lbl_fn_8003D3F8_00003C44:
     li r0, 0x1
     stw r0, lbl_807C6A40@l(r3)
     li r3, 0x4
-    b lbl_fn_8003D3F8_00003D80
-lbl_fn_8003D3F8_00003C98:
+    b lbl_effect_evaluateState_00003D80
+lbl_effect_evaluateState_00003C98:
     lis r3, lbl_807C68C0@ha
     lfs f0, lbl_80880798
     addi r31, r3, lbl_807C68C0@l
@@ -4456,19 +4456,19 @@ lbl_fn_8003D3F8_00003C98:
     fcmpo cr0, f1, f0
     mfcr r0
     srwi. r0, r0, 31
-    beq lbl_fn_8003D3F8_00003CD4
+    beq lbl_effect_evaluateState_00003CD4
     lwz r3, lbl_807C68C0@l(r3)
     bl fn_8001B714
     cmpwi r3, 0x0
-    ble lbl_fn_8003D3F8_00003CD4
+    ble lbl_effect_evaluateState_00003CD4
     stw r3, 0x64(r31)
     li r0, 0x1
-    b lbl_fn_8003D3F8_00003CD8
-lbl_fn_8003D3F8_00003CD4:
+    b lbl_effect_evaluateState_00003CD8
+lbl_effect_evaluateState_00003CD4:
     li r0, 0x0
-lbl_fn_8003D3F8_00003CD8:
+lbl_effect_evaluateState_00003CD8:
     cmpwi r0, 0x0
-    beq lbl_fn_8003D3F8_00003D2C
+    beq lbl_effect_evaluateState_00003D2C
     lis r3, lbl_807C68C0@ha
     li r8, 0x0
     addi r3, r3, lbl_807C68C0@l
@@ -4487,13 +4487,13 @@ lbl_fn_8003D3F8_00003CD8:
     li r0, 0x1
     stw r0, lbl_807C6A40@l(r3)
     li r3, 0x4
-    b lbl_fn_8003D3F8_00003D80
-lbl_fn_8003D3F8_00003D2C:
+    b lbl_effect_evaluateState_00003D80
+lbl_effect_evaluateState_00003D2C:
     lis r3, lbl_807C68C0@ha
     addi r3, r3, lbl_807C68C0@l
     lwz r8, 0x20(r3)
     cmpwi r8, 0x0
-    beq lbl_fn_8003D3F8_00003D70
+    beq lbl_effect_evaluateState_00003D70
     li r3, 0x0
     li r0, 0x1e
     stw r3, 0x14(r1)
@@ -4506,12 +4506,12 @@ lbl_fn_8003D3F8_00003D2C:
     stw r0, 0xc(r1)
     stw r8, 0x8(r1)
     bl battle_getCharacterState
-lbl_fn_8003D3F8_00003D70:
+lbl_effect_evaluateState_00003D70:
     lis r3, lbl_807C6A40@ha
     li r0, 0x1
     stw r0, lbl_807C6A40@l(r3)
     li r3, 0x6
-lbl_fn_8003D3F8_00003D80:
+lbl_effect_evaluateState_00003D80:
     lwz r0, 0x84(r1)
     lwz r31, 0x7c(r1)
     lwz r30, 0x78(r1)

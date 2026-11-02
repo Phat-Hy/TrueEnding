@@ -11,7 +11,7 @@ extern void seq_stepPlaybackTimer(void);
 extern void fn_80075F58(void);
 extern void seq_bindSlotResource(void);
 extern void fn_800A96AC(void);
-extern void fn_800BFB70(void);
+extern void motion_initTransform(void);
 extern void fn_800BFC18(void);
 extern void fn_800C0508(void);
 extern void fn_800C1424(void);
@@ -478,7 +478,7 @@ lbl_layout_drawPane_0000054C:
     li r6, 0x3
     bl GXSetTevAlphaIn
     lwz r3, lbl_8087EFB4
-    bl fn_800BFB70
+    bl motion_initTransform
     clrlwi r5, r28, 16
     clrlwi r6, r29, 16
     li r3, 0x0
@@ -708,7 +708,7 @@ asm void fn_800A9E64(void)
     li r5, 0x0
     bl fn_80075F58
     lwz r3, lbl_8087EFB4
-    bl fn_800BFB70
+    bl motion_initTransform
     clrlwi r5, r21, 16
     clrlwi r6, r20, 16
     li r3, 0x0
@@ -760,7 +760,7 @@ asm void fn_800A9E64(void)
     li r5, 0x0
     bl fn_80075F58
     lwz r3, lbl_8087EFB4
-    bl fn_800BFB70
+    bl motion_initTransform
     lwz r3, lbl_8087EFA8
     li r23, 0x0
     lfs f28, lbl_80880D30
@@ -829,7 +829,7 @@ lbl_fn_800A9E64_00000A28:
     li r6, 0x3
     bl GXSetTevAlphaIn
     lwz r3, lbl_8087EFB4
-    bl fn_800BFB70
+    bl motion_initTransform
     addi r23, r23, 0x1
     addi r20, r20, 0x10
     cmpwi r23, 0x3
@@ -947,7 +947,7 @@ lbl_fn_800A9E64_00000A28:
     li r5, 0x0
     bl fn_80075F58
     lwz r3, lbl_8087EFB4
-    bl fn_800BFB70
+    bl motion_initTransform
     lwz r3, lbl_8087EEE0
     bl seq_stepPlaybackTimer
     li r3, 0x1
@@ -2154,7 +2154,7 @@ lbl_fn_800AAE2C_00001978:
     li r6, 0x3
     bl GXSetTevAlphaIn
     lwz r3, lbl_8087EFB4
-    bl fn_800BFB70
+    bl motion_initTransform
     li r3, 0x0
     li r4, 0x0
     li r5, 0x1

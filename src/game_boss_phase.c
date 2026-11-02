@@ -29,7 +29,7 @@ extern void area_updateZoneState(void);
 extern void map_getArchiveName(void);
 extern void map_processTrigger(void);
 extern void map_debugLog(void);
-extern void fn_80091CFC(void);
+extern void compass_findTargetByName(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_80092EC8(void);
 extern void target_pushPointToHistory(void);
@@ -950,43 +950,43 @@ lbl_boss_updatePhaseState_00000AE8:
     addi r3, r30, 0xb0
     addi r29, r29, lbl_80737A9C@l
     addi r4, r29, 0x56
-    bl fn_80091CFC
+    bl compass_findTargetByName
     addi r3, r30, 0xb0
     addi r4, r29, 0x5b
-    bl fn_80091CFC
+    bl compass_findTargetByName
     addi r3, r30, 0xb0
     addi r4, r29, 0x60
-    bl fn_80091CFC
+    bl compass_findTargetByName
     addi r3, r30, 0xb0
     addi r4, r29, 0x65
-    bl fn_80091CFC
+    bl compass_findTargetByName
     addi r3, r30, 0xb0
     addi r4, r29, 0x6c
-    bl fn_80091CFC
+    bl compass_findTargetByName
     addi r3, r30, 0xb0
     addi r4, r29, 0x72
-    bl fn_80091CFC
+    bl compass_findTargetByName
     addi r3, r30, 0xb0
     addi r4, r29, 0x80
-    bl fn_80091CFC
+    bl compass_findTargetByName
     addi r3, r30, 0xb0
     addi r4, r29, 0x8d
-    bl fn_80091CFC
+    bl compass_findTargetByName
     addi r3, r30, 0xb0
     addi r4, r29, 0x93
-    bl fn_80091CFC
+    bl compass_findTargetByName
     addi r3, r30, 0xb0
     addi r4, r29, 0x99
-    bl fn_80091CFC
+    bl compass_findTargetByName
     addi r3, r30, 0xb0
     addi r4, r29, 0xa3
-    bl fn_80091CFC
+    bl compass_findTargetByName
     lwz r0, 0x12a8(r30)
     extrwi. r0, r0, 1, 4
     beq lbl_boss_updatePhaseState_00000B8C
     addi r3, r30, 0xb0
     addi r4, r29, 0xad
-    bl fn_80091CFC
+    bl compass_findTargetByName
 lbl_boss_updatePhaseState_00000B8C:
     lwz r4, 0x50(r30)
     cmpwi r4, 0x1

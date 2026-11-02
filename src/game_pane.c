@@ -19,7 +19,7 @@ extern void dungeon_initGlobalContext(void);
 extern void town_registerInteractionPoint(void);
 extern void fn_800A96AC(void);
 extern void layout_drawPane(void);
-extern void fn_800BFB70(void);
+extern void motion_initTransform(void);
 extern void fn_800C0508(void);
 extern void fn_800C0D4C(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
@@ -479,7 +479,7 @@ lbl_fn_800AB774_00000514:
     li r6, 0x3
     bl GXSetTevAlphaIn
     lwz r3, lbl_8087EFB4
-    bl fn_800BFB70
+    bl motion_initTransform
     clrlwi r5, r29, 16
     clrlwi r6, r30, 16
     li r3, 0x0
@@ -704,7 +704,7 @@ lbl_fn_800ABD94_000006A0:
     li r5, 0x0
     bl fn_80075F58
     lwz r3, lbl_8087EFB4
-    bl fn_800BFB70
+    bl motion_initTransform
     clrlwi r5, r25, 16
     clrlwi r6, r26, 16
     li r3, 0x0
@@ -776,7 +776,7 @@ lbl_fn_800ABD94_000006A0:
     li r5, 0x0
     bl fn_80075F58
     lwz r3, lbl_8087EFB4
-    bl fn_800BFB70
+    bl motion_initTransform
     li r3, 0x2
     bl GXClearVtxDesc
     li r3, 0x0
@@ -1006,7 +1006,7 @@ lbl_fn_800ABD94_00000BC0:
     lwz r3, lbl_8087EEE0
     bl seq_stepPlaybackTimer
     lwz r3, lbl_8087EFB4
-    bl fn_800BFB70
+    bl motion_initTransform
     li r3, 0x0
     li r4, 0x4
     li r5, 0x1
@@ -1427,7 +1427,7 @@ lbl_fn_800AC6DC_000013DC:
     lwz r3, lbl_8087EEE0
     bl seq_stepPlaybackTimer
     lwz r3, lbl_8087EFB4
-    bl fn_800BFB70
+    bl motion_initTransform
     lwz r3, lbl_8087EFA8
     lwz r0, 0xd8(r3)
     cmpwi r0, 0x0

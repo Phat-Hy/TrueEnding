@@ -20,7 +20,7 @@ extern void entity_checkActorType(void);
 extern void fn_8001BEE0(void);
 extern void fn_8001C068(void);
 extern void fn_8003D084(void);
-extern void fn_8003D3F8(void);
+extern void effect_evaluateState(void);
 extern void effect_testLifetime(void);
 extern void rand(void);
 
@@ -216,7 +216,7 @@ lbl_fn_8002BA24_00000180:
     li r3, 0x4
     b lbl_fn_8002BA24_00000208
 lbl_fn_8002BA24_0000019C:
-    bl fn_8003D3F8
+    bl effect_evaluateState
     cmpwi r3, 0x9
     bne lbl_fn_8002BA24_000001BC
     lis r3, lbl_807C6A40@ha
@@ -458,7 +458,7 @@ lbl_fn_8002BCC8_000004C4:
 lbl_fn_8002BCC8_000004E0:
     cmpwi r0, 0x6
     bne lbl_fn_8002BCC8_00000548
-    bl fn_8003D3F8
+    bl effect_evaluateState
     cmpwi r3, 0x6
     bne lbl_fn_8002BCC8_00000508
     lis r3, lbl_807C6A40@ha
@@ -676,7 +676,7 @@ lbl_fn_8002C00C_0000079C:
 lbl_fn_8002C00C_000007D8:
     cmpwi r0, 0x6
     bne lbl_fn_8002C00C_00000840
-    bl fn_8003D3F8
+    bl effect_evaluateState
     cmpwi r3, 0x9
     bne lbl_fn_8002C00C_00000800
     lis r3, lbl_807C6A40@ha
@@ -903,7 +903,7 @@ lbl_fn_8002C354_00000AC4:
     li r3, 0x1
     b lbl_fn_8002C354_00000C94
 lbl_fn_8002C354_00000AE0:
-    bl fn_8003D3F8
+    bl effect_evaluateState
     cmpwi r3, 0x6
     bne lbl_fn_8002C354_00000B00
     lis r3, lbl_807C6A40@ha
@@ -1270,7 +1270,7 @@ lbl_fn_8002C7D8_00000FD4:
 lbl_fn_8002C7D8_00000FF0:
     cmpwi r0, 0x6
     bne lbl_fn_8002C7D8_00001058
-    bl fn_8003D3F8
+    bl effect_evaluateState
     cmpwi r3, 0x6
     bne lbl_fn_8002C7D8_00001018
     lis r3, lbl_807C6A40@ha
@@ -1658,7 +1658,7 @@ lbl_fn_8002CD34_00001540:
 lbl_fn_8002CD34_0000155C:
     cmpwi r0, 0x6
     bne lbl_fn_8002CD34_000015C4
-    bl fn_8003D3F8
+    bl effect_evaluateState
     cmpwi r3, 0x4
     bne lbl_fn_8002CD34_00001584
     lis r3, lbl_807C6A40@ha

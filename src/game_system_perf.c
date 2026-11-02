@@ -6,7 +6,7 @@ extern void dtor_80084684(void);
 extern void fn_8000FAE4(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
-extern void fn_8004FF58(void);
+extern void geom_testSphereInFrustum(void);
 extern void boss_lookupActionEntry(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
@@ -520,7 +520,7 @@ lbl_fn_80202E48_0000051C:
     mr r3, r29
     mr r4, r30
     stfs f0, 0x14(r1)
-    bl fn_8004FF58
+    bl geom_testSphereInFrustum
     cntlzw r0, r3
     srwi. r0, r0, 5
     bne lbl_fn_80202E48_000005B4

@@ -31,7 +31,7 @@ extern void layout_drawPane(void);
 extern void fn_800B448C(void);
 extern void fn_800B4694(void);
 extern void fn_800B47AC(void);
-extern void fn_800BFB70(void);
+extern void motion_initTransform(void);
 extern void fn_800C0508(void);
 extern void fn_80476194(void);
 extern void fn_804761B0(void);
@@ -1001,7 +1001,7 @@ asm void fn_800B2EA0(void)
     li r5, 0x0
     bl fn_80075F58
     lwz r3, lbl_8087EFB4
-    bl fn_800BFB70
+    bl motion_initTransform
     clrlslwi r5, r31, 17, 1
     clrlslwi r6, r30, 17, 1
     li r3, 0x0
@@ -1098,7 +1098,7 @@ asm void fn_800B2EA0(void)
     lwz r3, lbl_8087EEE0
     bl seq_stepPlaybackTimer
     lwz r3, lbl_8087EFB4
-    bl fn_800BFB70
+    bl motion_initTransform
     mr r3, r27
     bl fn_800B35F4
     addi r11, r1, 0x60

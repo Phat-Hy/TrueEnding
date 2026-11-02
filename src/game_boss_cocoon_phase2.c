@@ -36,7 +36,7 @@ extern void node_createNamedChild(void);
 extern void node_destroy(void);
 extern void map_debugLog(void);
 extern void atn_Matrix_copy(void);
-extern void fn_80091CFC(void);
+extern void compass_findTargetByName(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void motion_updateFogAdj(void);
@@ -1728,13 +1728,13 @@ lbl_fn_8045FE70_00001630:
     addi r3, r31, 0xb0
     addi r30, r30, lbl_80755188@l
     addi r4, r30, 0xb1
-    bl fn_80091CFC
+    bl compass_findTargetByName
     addi r3, r31, 0xb0
     addi r4, r30, 0xb6
-    bl fn_80091CFC
+    bl compass_findTargetByName
     addi r3, r31, 0xb0
     addi r4, r30, 0xbc
-    bl fn_80091CFC
+    bl compass_findTargetByName
     lfs f3, lbl_80886D68
     addi r4, r1, 0x118
     lfs f0, lbl_80886D6C

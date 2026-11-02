@@ -8,7 +8,7 @@ extern void _savegpr_27(void);
 extern void dtor_80013D60(void);
 extern void dtor_80084684(void);
 extern void vec3_set(void);
-extern void fn_8000D760(void);
+extern void scene_destroyNode(void);
 extern void scene_transformPoint(void);
 extern void scene_getCamera(void);
 extern void scene_getRootNode(void);
@@ -561,12 +561,12 @@ asm void fn_803388A4(void)
     li r28, 0x0
     addi r3, r3, lbl_80789388@l
     lis r4, fn_80288390@ha
-    lis r5, fn_8000D760@ha
+    lis r5, scene_destroyNode@ha
     stw r3, 0x0(r31)
     addi r3, r31, 0x14ec
     addi r4, r4, fn_80288390@l
     stw r28, 0x14b0(r31)
-    addi r5, r5, fn_8000D760@l
+    addi r5, r5, scene_destroyNode@l
     li r6, 0xc
     li r7, 0x9
     stw r28, 0x14b4(r31)

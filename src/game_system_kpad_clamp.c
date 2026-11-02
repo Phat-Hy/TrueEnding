@@ -10,7 +10,7 @@ extern void fn_8000D3A8(void);
 extern void scene_traverseNode(void);
 extern void scene_getRootNode(void);
 extern void vec3_assign(void);
-extern void fn_800109E0(void);
+extern void math_mtxFromEulerAngles(void);
 extern void mtx_multVec(void);
 extern void math_wrapAngle(void);
 extern void vec3_add(void);
@@ -804,7 +804,7 @@ lbl_fn_803729B4_00000890:
 lbl_fn_803729B4_000008B8:
     addi r3, r1, 0xc8
     addi r4, r1, 0x74
-    bl fn_800109E0
+    bl math_mtxFromEulerAngles
     addi r3, r1, 0x14
     addi r4, r1, 0x38
     addi r5, r1, 0xc8

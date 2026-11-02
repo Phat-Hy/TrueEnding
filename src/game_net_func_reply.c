@@ -22,7 +22,7 @@ extern void fn_8050D504(void);
 extern void fn_8050D5BC(void);
 extern void fn_8050D680(void);
 extern void fn_8050D72C(void);
-extern void fn_8050DDE0(void);
+extern void net_p2p_flushPacketQueue(void);
 extern void net_p2p_readPayload(void);
 extern void fn_8050E6D0(void);
 extern void fn_8050E6F8(void);
@@ -1204,7 +1204,7 @@ lbl_fn_80509B50_00000EB0:
     lwz r3, lbl_8087F62C
     li r4, -0x1
     li r5, 0x1
-    bl fn_8050DDE0
+    bl net_p2p_flushPacketQueue
     lwz r0, 0x1f8(r31)
     extrwi. r0, r0, 1, 9
     beq lbl_fn_80509B50_00000F6C
@@ -1248,7 +1248,7 @@ lbl_fn_80509B50_00000F6C:
     lwz r3, lbl_8087F62C
     li r4, -0x1
     li r5, 0x1
-    bl fn_8050DDE0
+    bl net_p2p_flushPacketQueue
     li r0, 0xc
     stw r0, 0xc8(r31)
 lbl_fn_80509B50_00000FAC:
@@ -1823,7 +1823,7 @@ asm void fn_8050A3D4(void)
     lwz r3, lbl_8087F62C
     li r4, -0x1
     li r5, 0x1
-    bl fn_8050DDE0
+    bl net_p2p_flushPacketQueue
 lbl_fn_8050A3D4_00001760:
     lwz r0, 0x1f8(r31)
     extrwi. r0, r0, 1, 9
@@ -1908,7 +1908,7 @@ lbl_fn_8050A4E4_00001848:
     lwz r3, lbl_8087F62C
     li r4, -0x1
     li r5, 0x1
-    bl fn_8050DDE0
+    bl net_p2p_flushPacketQueue
 lbl_fn_8050A4E4_00001884:
     lwz r0, 0x1f8(r31)
     extrwi. r0, r0, 1, 9

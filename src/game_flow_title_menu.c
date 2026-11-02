@@ -36,7 +36,7 @@ extern void net_isMessageStateActive(void);
 extern void fn_805012C8(void);
 extern void fn_80509B50(void);
 extern void fn_8050BA6C(void);
-extern void fn_8050DDE0(void);
+extern void net_p2p_flushPacketQueue(void);
 extern void net_p2p_readPayload(void);
 extern void rand(void);
 extern void net_getSocket(void);
@@ -409,7 +409,7 @@ lbl_fn_804DDD54_0000041C:
     bl net_getPacketManager
     li r4, -0x1
     li r5, 0x1
-    bl fn_8050DDE0
+    bl net_p2p_flushPacketQueue
 lbl_fn_804DDD54_00000454:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
@@ -545,7 +545,7 @@ lbl_fn_804DDE38_000005E8:
     bl net_getPacketManager
     li r4, -0x1
     li r5, 0x1
-    bl fn_8050DDE0
+    bl net_p2p_flushPacketQueue
 lbl_fn_804DDE38_00000614:
     li r3, 0x1
 lbl_fn_804DDE38_00000618:
@@ -775,7 +775,7 @@ lbl_fn_804DE000_000008DC:
     bl net_getPacketManager
     li r4, -0x1
     li r5, 0x1
-    bl fn_8050DDE0
+    bl net_p2p_flushPacketQueue
 lbl_fn_804DE000_0000090C:
     lwz r31, 0x1c(r1)
     li r3, 0x1
