@@ -104,7 +104,7 @@ void fn_80724BD0(void);
 void fn_80724BE0(void);
 void fn_80724C80(void);
 void net_packetDebugLog(void);
-void fn_80724E90(void);
+void net_logWarning(void);
 void fn_80725030(void);
 void fn_80725050(void);
 void fn_80725070(void);
@@ -856,7 +856,7 @@ lbl_net_packetDebugLog_00000934:
     blr
 }
 
-asm void fn_80724E90(void)
+asm void net_logWarning(void)
 {
     nofralloc
     stwu r1, -0x90(r1)
@@ -867,7 +867,7 @@ asm void fn_80724E90(void)
     mr r27, r3
     mr r28, r4
     mr r29, r5
-    bne cr1, lbl_fn_80724E90_000009E4
+    bne cr1, lbl_net_logWarning_000009E4
     stfd f1, 0x28(r1)
     stfd f2, 0x30(r1)
     stfd f3, 0x38(r1)
@@ -876,7 +876,7 @@ asm void fn_80724E90(void)
     stfd f6, 0x50(r1)
     stfd f7, 0x58(r1)
     stfd f8, 0x60(r1)
-lbl_fn_80724E90_000009E4:
+lbl_net_logWarning_000009E4:
     lwz r30, lbl_80880534
     addi r11, r1, 0x98
     addi r0, r1, 0x8
@@ -894,7 +894,7 @@ lbl_fn_80724E90_000009E4:
     stw r12, 0x68(r1)
     stw r11, 0x6c(r1)
     stw r0, 0x70(r1)
-    beq lbl_fn_80724E90_00000AF4
+    beq lbl_net_logWarning_00000AF4
     lis r4, lbl_807C6580@ha
     mr r3, r30
     mr r5, r27
@@ -911,26 +911,26 @@ lbl_fn_80724E90_000009E4:
     mr r3, r31
     bl fn_80723050
     subf. r0, r30, r3
-    bge lbl_fn_80724E90_00000A74
+    bge lbl_net_logWarning_00000A74
     li r0, 0x0
-lbl_fn_80724E90_00000A74:
+lbl_net_logWarning_00000A74:
     stw r0, 0x18(r31)
     lbz r0, lbl_8087EE38
     cmpwi r0, 0x0
-    beq lbl_fn_80724E90_00000B24
+    beq lbl_net_logWarning_00000B24
     lwz r0, lbl_80880534
     lwz r30, lbl_80880530
     cmpwi r0, 0x0
-    beq lbl_fn_80724E90_00000B24
+    beq lbl_net_logWarning_00000B24
     lbz r0, lbl_80880538
     cmpwi r0, 0x0
-    bne lbl_fn_80724E90_00000AB4
+    bne lbl_net_logWarning_00000AB4
     lis r3, lbl_8087D648@ha
     addi r3, r3, lbl_8087D648@l
     bl OSCreateAlarm
     li r0, 0x1
     stb r0, lbl_80880538
-lbl_fn_80724E90_00000AB4:
+lbl_net_logWarning_00000AB4:
     lis r31, lbl_8087D648@ha
     addi r31, r31, lbl_8087D648@l
     mr r3, r31
@@ -939,15 +939,15 @@ lbl_fn_80724E90_00000AB4:
     li r0, 0x1
     cmpwi r30, 0x0
     stb r0, 0x22(r3)
-    beq lbl_fn_80724E90_00000B24
+    beq lbl_net_logWarning_00000B24
     lis r7, fn_80725030@ha
     mr r3, r31
     mr r6, r30
     li r5, 0x0
     addi r7, r7, fn_80725030@l
     bl OSSetAlarm
-    b lbl_fn_80724E90_00000B24
-lbl_fn_80724E90_00000AF4:
+    b lbl_net_logWarning_00000B24
+lbl_net_logWarning_00000AF4:
     lis r3, lbl_807C6580@ha
     mr r4, r27
     mr r5, r28
@@ -960,7 +960,7 @@ lbl_fn_80724E90_00000AF4:
     la r3, lbl_8087EE3C
     crclr 6
     bl OSReport
-lbl_fn_80724E90_00000B24:
+lbl_net_logWarning_00000B24:
     addi r11, r1, 0x90
     bl _restgpr_27
     lwz r0, 0x94(r1)

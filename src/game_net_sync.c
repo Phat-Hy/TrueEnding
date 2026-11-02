@@ -35,7 +35,7 @@ extern void actor_getMovementFlags(void);
 extern void fn_801F0364(void);
 extern void fn_801F03AC(void);
 extern void fn_801F04FC(void);
-extern void fn_801F0544(void);
+extern void math_evaluateCurve1D(void);
 extern void fn_801FE89C(void);
 extern void fn_801FE91C(void);
 extern void fn_801FEA1C(void);
@@ -1444,7 +1444,7 @@ lbl_fn_801EC158_00001228:
 lbl_fn_801EC158_000012D4:
     mr r3, r27
     li r4, 0x0
-    bl fn_801F0544
+    bl math_evaluateCurve1D
     addi r29, r29, 0x1
     stfs f1, 0x48(r28)
     cmpwi r29, 0x5
@@ -1487,7 +1487,7 @@ lbl_fn_801EC158_000012D4:
 lbl_fn_801EC158_0000137C:
     mr r3, r27
     li r4, 0x0
-    bl fn_801F0544
+    bl math_evaluateCurve1D
     addi r29, r29, 0x1
     stfs f1, 0x80(r28)
     cmpwi r29, 0x4
@@ -1511,7 +1511,7 @@ lbl_fn_801EC158_0000137C:
     bl fn_801F04FC
     addi r3, r30, 0x94
     li r4, 0x0
-    bl fn_801F0544
+    bl math_evaluateCurve1D
     stfs f1, 0x9c(r30)
     mr r5, r31
     addi r3, r1, 0x8
@@ -1564,7 +1564,7 @@ lbl_fn_801EC158_0000137C:
 lbl_fn_801EC158_000014AC:
     mr r3, r28
     li r4, 0x0
-    bl fn_801F0544
+    bl math_evaluateCurve1D
     addi r29, r29, 0x1
     stfs f1, 0xdc(r27)
     cmpwi r29, 0x4
@@ -1588,7 +1588,7 @@ lbl_fn_801EC158_000014AC:
     bl fn_801F04FC
     addi r3, r30, 0xf0
     li r4, 0x0
-    bl fn_801F0544
+    bl math_evaluateCurve1D
     stfs f1, 0xf8(r30)
     addi r11, r1, 0x40
     mr r3, r30

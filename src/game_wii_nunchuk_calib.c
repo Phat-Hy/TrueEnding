@@ -25,7 +25,7 @@ extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
 extern void res_Shader_bindParams(void);
 extern void res_registerResource(void);
-extern void fn_804786F8(void);
+extern void cutscene_cam_getTargetIndex(void);
 extern void fn_8047F6B0(void);
 extern void fn_8047F850(void);
 extern void fn_8047F8A4(void);
@@ -780,7 +780,7 @@ lbl_fn_8055D818_0000095C:
     lwz r3, 0x18(r6)
     cmpwi r3, 0x0
     beq lbl_fn_8055D818_00000970
-    bl fn_804786F8
+    bl cutscene_cam_getTargetIndex
     b lbl_fn_8055D818_00000974
 lbl_fn_8055D818_00000970:
     li r3, 0x0

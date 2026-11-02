@@ -25,7 +25,7 @@ extern void env_updateAtmosphere(void);
 extern void wcs_parseInt(void);
 extern void fn_800E0908(void);
 extern void fn_80119ECC(void);
-extern void fn_8012AFE8(void);
+extern void enemy_nav_destroyElement(void);
 extern void fn_80209120(void);
 extern void event_findEntryById(void);
 extern void fn_8021E444(void);
@@ -580,9 +580,9 @@ lbl_fn_803B2A68_00000514:
 lbl_fn_803B2A68_00000584:
     addic. r3, r29, 0x539c
     beq lbl_fn_803B2A68_000005A0
-    lis r4, fn_8012AFE8@ha
+    lis r4, enemy_nav_destroyElement@ha
     li r5, 0x240
-    addi r4, r4, fn_8012AFE8@l
+    addi r4, r4, enemy_nav_destroyElement@l
     li r6, 0x7
     bl __destroy_new_array
 lbl_fn_803B2A68_000005A0:
@@ -709,9 +709,9 @@ lbl_fn_803B2A68_00000718:
 lbl_fn_803B2A68_00000764:
     addic. r3, r29, 0x539c
     beq lbl_fn_803B2A68_00000780
-    lis r4, fn_8012AFE8@ha
+    lis r4, enemy_nav_destroyElement@ha
     li r5, 0x240
-    addi r4, r4, fn_8012AFE8@l
+    addi r4, r4, enemy_nav_destroyElement@l
     li r6, 0x7
     bl __destroy_new_array
 lbl_fn_803B2A68_00000780:
@@ -800,9 +800,9 @@ asm void fn_803B2FBC(void)
 lbl_fn_803B2FBC_00000898:
     addic. r3, r31, 0x539c
     beq lbl_fn_803B2FBC_000008B4
-    lis r4, fn_8012AFE8@ha
+    lis r4, enemy_nav_destroyElement@ha
     li r5, 0x240
-    addi r4, r4, fn_8012AFE8@l
+    addi r4, r4, enemy_nav_destroyElement@l
     li r6, 0x7
     bl __destroy_new_array
 lbl_fn_803B2FBC_000008B4:

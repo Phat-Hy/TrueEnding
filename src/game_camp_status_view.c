@@ -10,7 +10,7 @@ extern void skill_findNodeBySlotId(void);
 extern void skill_findNodeById(void);
 extern void skill_findNodeByTag(void);
 extern void fn_8012AE50(void);
-extern void fn_8012AFE8(void);
+extern void enemy_nav_destroyElement(void);
 extern void fn_8012B3E8(void);
 extern void enemy_updateNavSteering(void);
 extern void enemy_updateAnimTimer(void);
@@ -1599,11 +1599,11 @@ asm void fn_803BAA90(void)
     stwu r1, -0x10(r1)
     mflr r0
     lis r4, fn_8012AE50@ha
-    lis r5, fn_8012AFE8@ha
+    lis r5, enemy_nav_destroyElement@ha
     stw r0, 0x14(r1)
     li r6, 0x240
     addi r4, r4, fn_8012AE50@l
-    addi r5, r5, fn_8012AFE8@l
+    addi r5, r5, enemy_nav_destroyElement@l
     stw r31, 0xc(r1)
     mr r31, r3
     li r7, 0x7

@@ -18,7 +18,7 @@ extern void fn_80350BF0(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
 extern void fn_80392D2C(void);
-extern void fn_804786F8(void);
+extern void cutscene_cam_getTargetIndex(void);
 extern void fn_805BDCC0(void);
 extern void fn_805BF208(void);
 extern void gx_evaluateVector3f(void);
@@ -1170,14 +1170,14 @@ lbl_fn_8034DE90_00000FC8:
     cmpwi r0, 0x2
     beq lbl_fn_8034DE90_00000FF8
     addi r3, r29, 0x1704
-    bl fn_804786F8
+    bl cutscene_cam_getTargetIndex
     li r4, 0x0
     bl fn_805BDCC0
     mr r30, r3
     b lbl_fn_8034DE90_0000100C
 lbl_fn_8034DE90_00000FF8:
     addi r3, r29, 0x170c
-    bl fn_804786F8
+    bl cutscene_cam_getTargetIndex
     li r4, 0x0
     bl fn_805BDCC0
     mr r30, r3

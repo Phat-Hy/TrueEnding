@@ -42,7 +42,7 @@ extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
 extern void bloom_processPasses(void);
-extern void fn_801F0544(void);
+extern void math_evaluateCurve1D(void);
 extern void save_validateHeader(void);
 extern void fn_801FEB9C(void);
 extern void res_MsgHandle_constructor(void);
@@ -2184,7 +2184,7 @@ lbl_spectateManager_update_00001D40:
     bl fn_801FEB9C
     li r4, 0x0
     addi r3, r3, 0x4
-    bl fn_801F0544
+    bl math_evaluateCurve1D
     lwz r3, 0x5c(r30)
     addi r4, r28, 0x16a
     stfs f1, 0x2f0(r30)
@@ -2192,7 +2192,7 @@ lbl_spectateManager_update_00001D40:
     bl fn_801FEB9C
     li r4, 0x0
     addi r3, r3, 0x4
-    bl fn_801F0544
+    bl math_evaluateCurve1D
     lwz r3, 0x5c(r30)
     addi r4, r28, 0x171
     stfs f1, 0x2f4(r30)
@@ -2200,7 +2200,7 @@ lbl_spectateManager_update_00001D40:
     bl fn_801FEB9C
     li r4, 0x0
     addi r3, r3, 0x4
-    bl fn_801F0544
+    bl math_evaluateCurve1D
     lwz r3, 0x5c(r30)
     addi r4, r28, 0x17a
     stfs f1, 0x2f8(r30)
@@ -2208,7 +2208,7 @@ lbl_spectateManager_update_00001D40:
     bl fn_801FEB9C
     li r4, 0x0
     addi r3, r3, 0x4
-    bl fn_801F0544
+    bl math_evaluateCurve1D
     lwz r3, 0x60(r30)
     addi r4, r28, 0x183
     stfs f1, 0x2fc(r30)
@@ -2216,7 +2216,7 @@ lbl_spectateManager_update_00001D40:
     bl fn_801FEB9C
     li r4, 0x0
     addi r3, r3, 0x4
-    bl fn_801F0544
+    bl math_evaluateCurve1D
     lwz r3, 0x60(r30)
     addi r4, r28, 0x18b
     stfs f1, 0x300(r30)
@@ -2224,7 +2224,7 @@ lbl_spectateManager_update_00001D40:
     bl fn_801FEB9C
     li r4, 0x0
     addi r3, r3, 0x4
-    bl fn_801F0544
+    bl math_evaluateCurve1D
     stfs f1, 0x304(r30)
     li r4, 0x0
     lwz r3, 0x5c(r30)

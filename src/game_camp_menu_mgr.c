@@ -20,7 +20,7 @@ extern void env_updateAtmosphere(void);
 extern void fn_800DFB40(void);
 extern void fn_800E0908(void);
 extern void fn_80124B60(void);
-extern void fn_801F0544(void);
+extern void math_evaluateCurve1D(void);
 extern void save_createWorkerTask(void);
 extern void save_getElapsedPlayTime(void);
 extern void fn_801F6C38(void);
@@ -1249,7 +1249,7 @@ asm void fn_803B710C(void)
     beq lbl_fn_803B710C_00001044
     li r4, 0x0
     addi r3, r3, 0x4
-    bl fn_801F0544
+    bl math_evaluateCurve1D
     fmr f31, f1
 lbl_fn_803B710C_00001044:
     lis r4, lbl_8074FD38@ha
@@ -1261,7 +1261,7 @@ lbl_fn_803B710C_00001044:
     beq lbl_fn_803B710C_00001070
     li r4, 0x0
     addi r3, r3, 0x4
-    bl fn_801F0544
+    bl math_evaluateCurve1D
     fmr f30, f1
 lbl_fn_803B710C_00001070:
     lwz r3, 0x4c(r29)

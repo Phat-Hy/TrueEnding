@@ -31,7 +31,7 @@ extern void fn_80392D2C(void);
 extern void fn_803E3384(void);
 extern void fn_8045ABB4(void);
 extern void fn_8045ECC4(void);
-extern void fn_804786F8(void);
+extern void cutscene_cam_getTargetIndex(void);
 extern void fn_805BDCC0(void);
 extern void fn_805BF208(void);
 extern void gx_evaluateVector3f(void);
@@ -250,7 +250,7 @@ asm void fn_8045D3A4(void)
     addi r3, r3, 0x1964
     stw r29, 0x434(r1)
     stw r28, 0x430(r1)
-    bl fn_804786F8
+    bl cutscene_cam_getTargetIndex
     li r4, 0x0
     bl fn_805BDCC0
     lfs f1, 0x2e4(r30)

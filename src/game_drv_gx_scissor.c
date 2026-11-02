@@ -34,9 +34,9 @@ extern void fn_805D8510(void);
 extern void fn_805D9190(void);
 extern void fn_805D93D0(void);
 extern void fn_805D93E0(void);
-extern void fn_805D9530(void);
+extern void gx_transform_setViewportSize(void);
 extern void fn_805D9540(void);
-extern void fn_805D9580(void);
+extern void gx_transform_getViewportWidth(void);
 extern void fn_805DDD90(void);
 extern void fn_805DDE50(void);
 extern void fn_805DDEC0(void);
@@ -243,7 +243,7 @@ lbl_fn_805D4E70_00000220:
 lbl_fn_805D4E70_00000224:
     stfs f1, 0xc(r24)
     mr r3, r25
-    bl fn_805D9580
+    bl gx_transform_getViewportWidth
     lfs f2, 0x8(r24)
     fmr f31, f1
     lfs f0, 0x0(r24)
@@ -593,7 +593,7 @@ asm void fn_805D5510(void)
     stfs f1, 0x4(r3)
     stfs f1, 0xc(r3)
     mr r3, r27
-    bl fn_805D9530
+    bl gx_transform_setViewportSize
     lfs f31, lbl_807645B0@l(r30)
     lis r31, lbl_80799228@ha
 lbl_fn_805D5510_00000704:

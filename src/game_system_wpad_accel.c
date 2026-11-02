@@ -35,7 +35,7 @@ extern void fn_803CB618(void);
 extern void fn_803CB820(void);
 extern void fn_803CE070(void);
 extern void fn_803E598C(void);
-extern void fn_804786F8(void);
+extern void cutscene_cam_getTargetIndex(void);
 extern void fn_80481654(void);
 extern void fn_80481668(void);
 extern void fn_8048169C(void);
@@ -516,7 +516,7 @@ lbl_fn_8036D2D0_00000560:
     mr r29, r3
     beq lbl_fn_8036D2D0_00000A34
     addi r3, r3, 0x34
-    bl fn_804786F8
+    bl cutscene_cam_getTargetIndex
     cmpwi r3, 0x0
     beq lbl_fn_8036D2D0_00000A34
     mr r5, r31
@@ -525,10 +525,10 @@ lbl_fn_8036D2D0_00000560:
     li r4, 0x2
     bl fn_80378610
     addi r3, r29, 0x3c
-    bl fn_804786F8
+    bl cutscene_cam_getTargetIndex
     mr r28, r3
     addi r3, r29, 0x34
-    bl fn_804786F8
+    bl cutscene_cam_getTargetIndex
     mr r4, r3
     mr r5, r28
     addi r3, r30, 0xd18
@@ -596,7 +596,7 @@ lbl_fn_8036D2D0_00000688:
     mr r29, r3
     beq lbl_fn_8036D2D0_00000A34
     addi r3, r3, 0x34
-    bl fn_804786F8
+    bl cutscene_cam_getTargetIndex
     cmpwi r3, 0x0
     beq lbl_fn_8036D2D0_00000A34
     mr r5, r31
@@ -605,10 +605,10 @@ lbl_fn_8036D2D0_00000688:
     li r4, 0x3
     bl fn_80378610
     addi r3, r29, 0x3c
-    bl fn_804786F8
+    bl cutscene_cam_getTargetIndex
     mr r28, r3
     addi r3, r29, 0x34
-    bl fn_804786F8
+    bl cutscene_cam_getTargetIndex
     mr r4, r3
     mr r5, r28
     addi r3, r30, 0xd18
@@ -689,7 +689,7 @@ lbl_fn_8036D2D0_000007E4:
     mr r28, r3
     beq lbl_fn_8036D2D0_00000A34
     addi r3, r3, 0x34
-    bl fn_804786F8
+    bl cutscene_cam_getTargetIndex
     cmpwi r3, 0x0
     beq lbl_fn_8036D2D0_00000A34
     mr r5, r31
@@ -698,10 +698,10 @@ lbl_fn_8036D2D0_000007E4:
     li r4, 0x2
     bl fn_80378610
     addi r3, r28, 0x3c
-    bl fn_804786F8
+    bl cutscene_cam_getTargetIndex
     mr r29, r3
     addi r3, r28, 0x34
-    bl fn_804786F8
+    bl cutscene_cam_getTargetIndex
     mr r4, r3
     mr r5, r29
     addi r3, r30, 0xd18
@@ -733,7 +733,7 @@ lbl_fn_8036D2D0_000007E4:
     psq_st f1, 0x0(r4), 0, 0
     addi r3, r28, 0x3c
     stfs f2, 0x101c(r30)
-    bl fn_804786F8
+    bl cutscene_cam_getTargetIndex
     cmpwi r3, 0x0
     beq lbl_fn_8036D2D0_000009D4
     lwz r3, 0xd1c(r31)
@@ -769,7 +769,7 @@ lbl_fn_8036D2D0_00000968:
     psq_st f1, 0x0(r5), 0, 0
     addi r3, r28, 0x3c
     stfs f2, 0x101c(r30)
-    bl fn_804786F8
+    bl cutscene_cam_getTargetIndex
     cmpwi r3, 0x0
     beq lbl_fn_8036D2D0_000009D4
     lfs f3, 0x530(r31)

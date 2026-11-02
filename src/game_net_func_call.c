@@ -21,7 +21,7 @@ extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
 extern void fn_80119ECC(void);
-extern void fn_8012AFE8(void);
+extern void enemy_nav_destroyElement(void);
 extern void save_validateHeader(void);
 extern void fn_803B33F8(void);
 extern void fn_803B3530(void);
@@ -325,9 +325,9 @@ asm void fn_80502368(void)
 lbl_fn_80502368_000002D0:
     addic. r3, r31, 0x539c
     beq lbl_fn_80502368_000002EC
-    lis r4, fn_8012AFE8@ha
+    lis r4, enemy_nav_destroyElement@ha
     li r5, 0x240
-    addi r4, r4, fn_8012AFE8@l
+    addi r4, r4, enemy_nav_destroyElement@l
     li r6, 0x7
     bl __destroy_new_array
 lbl_fn_80502368_000002EC:

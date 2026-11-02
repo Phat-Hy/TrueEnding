@@ -57,7 +57,7 @@ extern void fn_803EB4A8(void);
 extern void fn_8044D028(void);
 extern void fn_80450B28(void);
 extern void fn_80450B44(void);
-extern void fn_804786F8(void);
+extern void cutscene_cam_getTargetIndex(void);
 extern void fn_8047E528(void);
 extern void fn_8048169C(void);
 extern void fn_804A2F98(void);
@@ -2384,7 +2384,7 @@ lbl_fn_80371790_0000200C:
     cmplw r0, r3
     blt lbl_fn_80371790_000018BC
     addi r3, r15, 0x56dc
-    bl fn_804786F8
+    bl cutscene_cam_getTargetIndex
     mr r4, r3
     addi r3, r15, 0xd18
     li r5, 0x0

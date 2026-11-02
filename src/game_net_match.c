@@ -58,7 +58,7 @@ void player_syncPositionAndMotion(void);
 void fn_801F0364(void);
 void fn_801F03AC(void);
 void fn_801F04FC(void);
-void fn_801F0544(void);
+void math_evaluateCurve1D(void);
 void fn_801F0670(void);
 void fn_801F0758(void);
 void fn_801F0AC0(void);
@@ -457,7 +457,7 @@ lbl_fn_801EF894_00000554:
     li r4, 0x0
     add r31, r0, r30
     addi r3, r31, 0x4
-    bl fn_801F0544
+    bl math_evaluateCurve1D
     stfs f1, 0xc(r31)
     addi r30, r30, 0x10
     addi r29, r29, 0x1
@@ -1382,69 +1382,69 @@ lbl_fn_801F04FC_000011C8:
     blr
 }
 
-asm void fn_801F0544(void)
+asm void math_evaluateCurve1D(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
     lwz r5, 0x4(r3)
     cmpwi cr1, r5, 0x0
-    bne cr1, lbl_fn_801F0544_000011F0
+    bne cr1, lbl_math_evaluateCurve1D_000011F0
     lfs f1, lbl_80882C28
-    b lbl_fn_801F0544_000012FC
-lbl_fn_801F0544_000011F0:
+    b lbl_math_evaluateCurve1D_000012FC
+lbl_math_evaluateCurve1D_000011F0:
     cmpwi r5, 0x1
-    ble lbl_fn_801F0544_00001208
+    ble lbl_math_evaluateCurve1D_00001208
     lwz r6, 0x0(r3)
     lwz r0, 0x0(r6)
     cmpw r4, r0
-    bgt lbl_fn_801F0544_00001214
-lbl_fn_801F0544_00001208:
+    bgt lbl_math_evaluateCurve1D_00001214
+lbl_math_evaluateCurve1D_00001208:
     lwz r3, 0x0(r3)
     lfs f1, 0x4(r3)
-    b lbl_fn_801F0544_000012FC
-lbl_fn_801F0544_00001214:
+    b lbl_math_evaluateCurve1D_000012FC
+lbl_math_evaluateCurve1D_00001214:
     mr r8, r6
     li r7, 0x0
     li r9, 0x0
     li r3, 0x0
     mtctr r5
-    ble cr1, lbl_fn_801F0544_00001250
-lbl_fn_801F0544_0000122C:
+    ble cr1, lbl_math_evaluateCurve1D_00001250
+lbl_math_evaluateCurve1D_0000122C:
     lwzx r0, r6, r3
     mr r7, r8
     add r8, r6, r3
     cmpw r4, r0
-    bgt lbl_fn_801F0544_00001248
+    bgt lbl_math_evaluateCurve1D_00001248
     li r9, 0x1
-    b lbl_fn_801F0544_00001250
-lbl_fn_801F0544_00001248:
+    b lbl_math_evaluateCurve1D_00001250
+lbl_math_evaluateCurve1D_00001248:
     addi r3, r3, 0x8
-    bdnz lbl_fn_801F0544_0000122C
-lbl_fn_801F0544_00001250:
+    bdnz lbl_math_evaluateCurve1D_0000122C
+lbl_math_evaluateCurve1D_00001250:
     cmpwi r9, 0x0
-    bne lbl_fn_801F0544_00001260
+    bne lbl_math_evaluateCurve1D_00001260
     lfs f1, 0x4(r8)
-    b lbl_fn_801F0544_000012FC
-lbl_fn_801F0544_00001260:
+    b lbl_math_evaluateCurve1D_000012FC
+lbl_math_evaluateCurve1D_00001260:
     cmpwi r7, 0x0
     lfs f1, lbl_80882C28
-    beq lbl_fn_801F0544_0000127C
+    beq lbl_math_evaluateCurve1D_0000127C
     cmpwi r8, 0x0
-    bne lbl_fn_801F0544_0000127C
+    bne lbl_math_evaluateCurve1D_0000127C
     lfs f1, 0x4(r7)
-    b lbl_fn_801F0544_000012FC
-lbl_fn_801F0544_0000127C:
+    b lbl_math_evaluateCurve1D_000012FC
+lbl_math_evaluateCurve1D_0000127C:
     cmpwi r7, 0x0
-    bne lbl_fn_801F0544_00001294
+    bne lbl_math_evaluateCurve1D_00001294
     cmpwi r8, 0x0
-    beq lbl_fn_801F0544_00001294
+    beq lbl_math_evaluateCurve1D_00001294
     lfs f1, 0x4(r8)
-    b lbl_fn_801F0544_000012FC
-lbl_fn_801F0544_00001294:
+    b lbl_math_evaluateCurve1D_000012FC
+lbl_math_evaluateCurve1D_00001294:
     cmpwi r7, 0x0
-    beq lbl_fn_801F0544_000012FC
+    beq lbl_math_evaluateCurve1D_000012FC
     cmpwi r8, 0x0
-    beq lbl_fn_801F0544_000012FC
+    beq lbl_math_evaluateCurve1D_000012FC
     lwz r6, 0x0(r7)
     lis r3, 0x4330
     lwz r0, 0x0(r8)
@@ -1467,7 +1467,7 @@ lbl_fn_801F0544_00001294:
     fsubs f2, f2, f4
     fdivs f2, f3, f2
     fmadds f1, f2, f0, f1
-lbl_fn_801F0544_000012FC:
+lbl_math_evaluateCurve1D_000012FC:
     addi r1, r1, 0x20
     blr
 }

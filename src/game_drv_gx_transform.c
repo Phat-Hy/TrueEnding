@@ -66,12 +66,12 @@ void fn_805D9360(void);
 u8 fn_805D93D0(void *p);
 f32 fn_805D93E0(void *p);
 void fn_805D93F0(void);
-void fn_805D9530(void *p, f32 a, f32 b);
+void gx_transform_setViewportSize(void *p, f32 a, f32 b);
 void fn_805D9540(void *p, f32 a);
 void fn_805D9550(void *p, f32 a);
 void fn_805D9560(void *p, f32 val);
 void fn_805D9570(void *p, f32 val);
-f32 fn_805D9580(void *p);
+f32 gx_transform_getViewportWidth(void *p);
 f32 fn_805D9590(void *p);
 void fn_805D95A0(void);
 void fn_805D9830(void);
@@ -593,7 +593,7 @@ lbl_fn_805D93F0_00000674:
     blr
 }
 
-void fn_805D9530(void *p, f32 a, f32 b)
+void gx_transform_setViewportSize(void *p, f32 a, f32 b)
 {
     *(f32 *)((u8 *)p + 0x2c) = a;
     *(f32 *)((u8 *)p + 0x30) = b;
@@ -619,7 +619,7 @@ void fn_805D9570(void *p, f32 val)
     *(f32 *)((u8 *)p + 0x30) += val;
 }
 
-f32 fn_805D9580(void *p)
+f32 gx_transform_getViewportWidth(void *p)
 {
     return *(f32 *)((u8 *)p + 0x2c);
 }
@@ -2026,7 +2026,7 @@ lbl_fn_805DA800_000019D0:
     fadds f2, f1, f31
     mr r3, r31
     fmr f1, f30
-    bl fn_805D9530
+    bl gx_transform_setViewportSize
     li r3, 0x3
     b lbl_fn_805DA800_00001AC0
 lbl_fn_805DA800_00001A04:
@@ -2050,7 +2050,7 @@ lbl_fn_805DA800_00001A3C:
     fmr f31, f1
 lbl_fn_805DA800_00001A48:
     mr r3, r30
-    bl fn_805D9580
+    bl gx_transform_getViewportWidth
     lis r0, 0x4330
     xoris r3, r31, 0x8000
     stw r3, 0xc(r1)

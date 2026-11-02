@@ -14,12 +14,12 @@ extern void fn_805D8510(void);
 extern void fn_805D91A0(void);
 extern void fn_805D9360(void);
 extern void fn_805D93F0(void);
-extern void fn_805D9530(void);
+extern void gx_transform_setViewportSize(void);
 extern void fn_805D9540(void);
 extern void fn_805D9550(void);
 extern void fn_805D9560(void);
 extern void fn_805D9570(void);
-extern void fn_805D9580(void);
+extern void gx_transform_getViewportWidth(void);
 extern void fn_805D9590(void);
 extern void fn_805DA7B0(void);
 extern void fn_805DA7C0(void);
@@ -85,7 +85,7 @@ asm void fn_805DFA30(void)
     stfs f1, 0x8(r4)
     stfs f1, 0x4(r4)
     stfs f1, 0xc(r4)
-    bl fn_805D9530
+    bl gx_transform_setViewportSize
     lfs f31, lbl_80764630@l(r31)
 lbl_fn_805DFA30_00000050:
     stfs f31, 0x8(r1)
@@ -175,7 +175,7 @@ asm void fn_805DFB50(void)
     mr r28, r3
     mr r29, r4
     mr r30, r5
-    bl fn_805D9580
+    bl gx_transform_getViewportWidth
     stfs f1, 0xc(r1)
     mr r3, r28
     bl fn_805D9590
@@ -190,7 +190,7 @@ asm void fn_805DFB50(void)
     bl fn_805E0120
     fmr f29, f1
     mr r3, r28
-    bl fn_805D9580
+    bl gx_transform_getViewportWidth
     mr r3, r28
     bl fn_805D9590
     li r0, 0x0
@@ -308,7 +308,7 @@ lbl_fn_805DFB50_00000258:
     stw r0, 0x120(r1)
     lwz r0, 0x5c(r28)
     stw r0, 0x124(r1)
-    bl fn_805D9530
+    bl gx_transform_setViewportSize
     subf r4, r29, r31
     mr r5, r31
     srwi r0, r4, 31
@@ -393,7 +393,7 @@ lbl_fn_805DFB50_000003EC:
     stw r0, 0xc0(r1)
     lwz r0, 0x5c(r28)
     stw r0, 0xc4(r1)
-    bl fn_805D9530
+    bl gx_transform_setViewportSize
     subf r4, r29, r31
     mr r5, r31
     srwi r0, r4, 31
@@ -417,7 +417,7 @@ lbl_fn_805DFB50_000003EC:
     b lbl_fn_805DFB50_00000568
 lbl_fn_805DFB50_00000538:
     mr r3, r28
-    bl fn_805D9580
+    bl gx_transform_getViewportWidth
     lfs f0, 0x58(r1)
     fsubs f0, f1, f0
     fcmpo cr0, f29, f0
@@ -738,7 +738,7 @@ lbl_fn_805E0120_000008E0:
     stw r0, 0xf0(r1)
     lwz r0, 0x5c(r27)
     stw r0, 0xf4(r1)
-    bl fn_805D9530
+    bl gx_transform_setViewportSize
     mr r5, r30
     mr r6, r31
     addi r3, r1, 0x98
@@ -821,7 +821,7 @@ lbl_fn_805E0120_00000A30:
     stw r0, 0x90(r1)
     lwz r0, 0x5c(r27)
     stw r0, 0x94(r1)
-    bl fn_805D9530
+    bl gx_transform_setViewportSize
     mr r5, r30
     mr r6, r31
     addi r3, r1, 0x38

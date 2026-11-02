@@ -66,7 +66,7 @@ extern void fn_80721A60(void);
 extern void fn_80721B80(void);
 extern void fn_80721CA0(void);
 extern void net_packetDebugLog(void);
-extern void fn_80724E90(void);
+extern void net_logWarning(void);
 
 /* External data declarations */
 extern u8 lbl_807626F8[];
@@ -288,7 +288,7 @@ lbl_fn_805A1288_00000224:
     li r4, 0x5f0
     addi r5, r3, 0x877
     crclr 6
-    bl fn_80724E90
+    bl net_logWarning
 lbl_fn_805A1288_00000250:
     li r3, 0x9
     b lbl_fn_805A1288_000004C4
@@ -342,7 +342,7 @@ lbl_fn_805A1288_000002E0:
     li r4, 0x600
     addi r5, r3, 0x877
     crclr 6
-    bl fn_80724E90
+    bl net_logWarning
 lbl_fn_805A1288_0000030C:
     li r3, 0x9
     b lbl_fn_805A1288_000004C4
@@ -356,7 +356,7 @@ lbl_fn_805A1288_00000314:
     addi r5, r3, 0x8b7
     li r4, 0x609
     crclr 6
-    bl fn_80724E90
+    bl net_logWarning
 lbl_fn_805A1288_0000033C:
     mr r3, r18
     li r4, 0x0
@@ -519,7 +519,7 @@ lbl_fn_805A1764_0000053C:
     li r4, 0x670
     addi r5, r3, 0x943
     crclr 6
-    bl fn_80724E90
+    bl net_logWarning
 lbl_fn_805A1764_0000057C:
     li r3, 0x9
     b lbl_fn_805A1764_000007C4
@@ -565,7 +565,7 @@ lbl_fn_805A1764_000005E8:
     li r4, 0x67c
     addi r5, r3, 0x943
     crclr 6
-    bl fn_80724E90
+    bl net_logWarning
 lbl_fn_805A1764_0000061C:
     li r3, 0x9
     b lbl_fn_805A1764_000007C4
@@ -579,7 +579,7 @@ lbl_fn_805A1764_00000624:
     addi r5, r3, 0x986
     li r4, 0x685
     crclr 6
-    bl fn_80724E90
+    bl net_logWarning
 lbl_fn_805A1764_0000064C:
     mr r3, r23
     li r4, 0x0
@@ -869,7 +869,7 @@ lbl_fn_805A1C04_00000A0C:
     addi r3, r3, lbl_80762810@l
     addi r5, r3, 0x364
     crclr 6
-    bl fn_80724E90
+    bl net_logWarning
 lbl_fn_805A1C04_00000A34:
     li r0, 0x0
     b lbl_fn_805A1C04_00000A5C
@@ -898,7 +898,7 @@ lbl_fn_805A1C04_00000A6C:
     addi r3, r3, lbl_80762810@l
     addi r5, r3, 0x471
     crclr 6
-    bl fn_80724E90
+    bl net_logWarning
     b lbl_fn_805A1C04_00000AD4
 lbl_fn_805A1C04_00000A98:
     lwz r8, 0x0(r3)
@@ -927,7 +927,7 @@ lbl_fn_805A1C04_00000AD4:
     addi r3, r3, lbl_80762810@l
     addi r5, r3, 0x505
     crclr 6
-    bl fn_80724E90
+    bl net_logWarning
     b lbl_fn_805A1C04_00000B3C
 lbl_fn_805A1C04_00000B00:
     lwz r8, 0x0(r3)

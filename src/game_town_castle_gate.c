@@ -12,7 +12,7 @@ extern void env_updateAtmosphere(void);
 extern void str_findChar(void);
 extern void fn_80134250(void);
 extern void fn_80134270(void);
-extern void fn_801F0544(void);
+extern void math_evaluateCurve1D(void);
 extern void save_getElapsedPlayTime(void);
 extern void fn_801FEB9C(void);
 extern void thread_findAndNotify(void);
@@ -649,7 +649,7 @@ asm void fn_803D7270(void)
     slwi r0, r5, 3
     add r3, r3, r0
     addi r3, r3, 0x4
-    b fn_801F0544
+    b math_evaluateCurve1D
 }
 
 asm void fn_803D7280(void)

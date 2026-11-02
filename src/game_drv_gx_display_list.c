@@ -14,9 +14,9 @@ extern void fn_805D9190(void);
 extern void fn_805D91A0(void);
 extern void fn_805D93D0(void);
 extern void fn_805D93E0(void);
-extern void fn_805D9530(void);
+extern void gx_transform_setViewportSize(void);
 extern void fn_805D9540(void);
-extern void fn_805D9580(void);
+extern void gx_transform_getViewportWidth(void);
 extern void fn_805D9590(void);
 extern void fn_805DFA30(void);
 extern void fn_805DFB50(void);
@@ -1242,10 +1242,10 @@ lbl_fn_805DED70_00001014:
     bl fn_805D9590
     fmr f31, f1
     addi r3, r31, 0x78
-    bl fn_805D9580
+    bl gx_transform_getViewportWidth
     fmr f2, f31
     mr r3, r30
-    bl fn_805D9530
+    bl gx_transform_setViewportSize
     addi r3, r31, 0x78
     li r4, 0x0
     bl viewport_destroyContext
@@ -1363,10 +1363,10 @@ lbl_fn_805DEFA0_000011E8:
     bl fn_805D9590
     fmr f31, f1
     addi r3, r31, 0x8
-    bl fn_805D9580
+    bl gx_transform_getViewportWidth
     fmr f2, f31
     mr r3, r30
-    bl fn_805D9530
+    bl gx_transform_setViewportSize
     addi r3, r31, 0x8
     li r4, 0x0
     bl viewport_destroyContext
@@ -1457,10 +1457,10 @@ asm void fn_805DF170(void)
     bl fn_805D9590
     fmr f31, f1
     addi r3, r1, 0x8
-    bl fn_805D9580
+    bl gx_transform_getViewportWidth
     fmr f2, f31
     mr r3, r31
-    bl fn_805D9530
+    bl gx_transform_setViewportSize
     addi r3, r1, 0x8
     li r4, 0x0
     bl viewport_destroyContext
@@ -1553,10 +1553,10 @@ asm void fn_805DF2D0(void)
     bl fn_805D9590
     fmr f31, f1
     addi r3, r1, 0x8
-    bl fn_805D9580
+    bl gx_transform_getViewportWidth
     fmr f2, f31
     mr r3, r31
-    bl fn_805D9530
+    bl gx_transform_setViewportSize
     addi r3, r1, 0x8
     li r4, 0x0
     bl viewport_destroyContext
@@ -1698,7 +1698,7 @@ asm void fn_805DF4C0(void)
     lwz r0, 0x5c(r3)
     addi r3, r1, 0x18
     stw r0, 0x74(r1)
-    bl fn_805D9530
+    bl gx_transform_setViewportSize
     mr r5, r30
     mr r6, r31
     addi r3, r1, 0x18
@@ -1905,7 +1905,7 @@ lbl_fn_805DF630_00001A98:
 lbl_fn_805DF630_00001A9C:
     stfs f1, 0xc(r28)
     mr r3, r27
-    bl fn_805D9580
+    bl gx_transform_getViewportWidth
     cmpwi r25, 0x4
     fmr f31, f1
     bne lbl_fn_805DF630_00001ABC

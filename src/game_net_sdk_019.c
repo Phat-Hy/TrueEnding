@@ -30,7 +30,7 @@ extern void net_checkLinkStatus(void);
 extern void fn_806B4D20(void);
 extern void net_logSessionStatus(void);
 extern void fn_806BC4C0(void);
-extern void fn_806BC860(void);
+extern void dwc_registerMatchStatus(void);
 extern void fn_806C05F0(void);
 extern void fn_806C0980(void);
 extern void fn_806C10C0(void);
@@ -612,7 +612,7 @@ lbl_fn_806C50A0_00000788:
     addi r7, r1, 0x10
     li r3, 0xe
     li r8, 0x0
-    bl fn_806BC860
+    bl dwc_registerMatchStatus
     lis r4, lbl_80860898@ha
     lwz r4, lbl_80860898@l(r4)
     lbz r0, 0x15(r4)
@@ -809,7 +809,7 @@ lbl_fn_806C50A0_00000A38:
     addi r7, r1, 0xc
     li r3, 0xf
     li r8, 0x0
-    bl fn_806BC860
+    bl dwc_registerMatchStatus
     lwz r4, lbl_80860898@l(r27)
     lbz r0, 0x15(r4)
     cmpwi r0, 0x0
@@ -942,7 +942,7 @@ lbl_fn_806C50A0_00000C18:
     addi r7, r1, 0x8
     li r3, 0xf
     li r8, 0x0
-    bl fn_806BC860
+    bl dwc_registerMatchStatus
     lis r4, lbl_80860898@ha
     lwz r4, lbl_80860898@l(r4)
     lbz r0, 0x15(r4)
@@ -1094,7 +1094,7 @@ lbl_fn_806C57F0_00000E20:
     addi r7, r1, 0xc
     li r3, 0xe
     li r8, 0x0
-    bl fn_806BC860
+    bl dwc_registerMatchStatus
     lis r4, lbl_80860898@ha
     lwz r4, lbl_80860898@l(r4)
     lbz r0, 0x15(r4)
@@ -1234,7 +1234,7 @@ lbl_fn_806C57F0_00001010:
     addi r7, r1, 0x8
     li r3, 0xd
     li r8, 0x1
-    bl fn_806BC860
+    bl dwc_registerMatchStatus
     lwz r4, lbl_80860898@l(r30)
     lbz r0, 0x15(r4)
     cmpwi r0, 0x0
@@ -3756,7 +3756,7 @@ lbl_fn_806C6750_00003528:
     lhz r6, 0x66c(r3)
     li r3, 0x5
     li r8, 0x0
-    bl fn_806BC860
+    bl dwc_registerMatchStatus
     lwz r4, lbl_80860898@l(r26)
     li r0, 0x0
     stw r0, 0x7ac(r4)

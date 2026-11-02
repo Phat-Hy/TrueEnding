@@ -19,7 +19,7 @@ extern void env_updateAtmosphere(void);
 extern void str_findChar(void);
 extern void fn_800E0000(void);
 extern void actor_spawnActorWithId(void);
-extern void fn_801F0544(void);
+extern void math_evaluateCurve1D(void);
 extern void save_parseSlotStats(void);
 extern void save_getElapsedPlayTime(void);
 extern void fn_801F6C38(void);
@@ -1035,7 +1035,7 @@ asm void fn_804A473C(void)
     beq lbl_fn_804A473C_00000E18
     li r4, 0x0
     addi r3, r3, 0x4
-    bl fn_801F0544
+    bl math_evaluateCurve1D
     xoris r3, r29, 0x8000
     stw r3, 0xc(r1)
     lis r4, lbl_80757108@ha
@@ -1169,7 +1169,7 @@ asm void fn_804A4934(void)
     beq lbl_fn_804A4934_00000FDC
     li r4, 0x0
     addi r3, r3, 0x4
-    bl fn_801F0544
+    bl math_evaluateCurve1D
     xoris r3, r29, 0x8000
     stw r3, 0xc(r1)
     lis r4, lbl_80757108@ha

@@ -16,12 +16,12 @@ extern void fn_805D9360(void);
 extern void fn_805D93D0(void);
 extern void fn_805D93E0(void);
 extern void fn_805D93F0(void);
-extern void fn_805D9530(void);
+extern void gx_transform_setViewportSize(void);
 extern void fn_805D9540(void);
 extern void fn_805D9550(void);
 extern void fn_805D9560(void);
 extern void fn_805D9570(void);
-extern void fn_805D9580(void);
+extern void gx_transform_getViewportWidth(void);
 extern void fn_805D9590(void);
 extern void __ptmf_scall(void);
 extern u32 strlen(const char* str);
@@ -181,10 +181,10 @@ lbl_fn_805DC3B0_000000C4:
     bl fn_805D9590
     fmr f31, f1
     addi r3, r31, 0x78
-    bl fn_805D9580
+    bl gx_transform_getViewportWidth
     fmr f2, f31
     mr r3, r30
-    bl fn_805D9530
+    bl gx_transform_setViewportSize
     addi r3, r31, 0x78
     li r4, 0x0
     bl viewport_destroyContext
@@ -302,10 +302,10 @@ lbl_fn_805DC5E0_00000298:
     bl fn_805D9590
     fmr f31, f1
     addi r3, r31, 0x8
-    bl fn_805D9580
+    bl gx_transform_getViewportWidth
     fmr f2, f31
     mr r3, r30
-    bl fn_805D9530
+    bl gx_transform_setViewportSize
     addi r3, r31, 0x8
     li r4, 0x0
     bl viewport_destroyContext
@@ -396,10 +396,10 @@ asm void fn_805DC7B0(void)
     bl fn_805D9590
     fmr f31, f1
     addi r3, r1, 0x8
-    bl fn_805D9580
+    bl gx_transform_getViewportWidth
     fmr f2, f31
     mr r3, r31
-    bl fn_805D9530
+    bl gx_transform_setViewportSize
     addi r3, r1, 0x8
     li r4, 0x0
     bl viewport_destroyContext
@@ -492,10 +492,10 @@ asm void fn_805DC910(void)
     bl fn_805D9590
     fmr f31, f1
     addi r3, r1, 0x8
-    bl fn_805D9580
+    bl gx_transform_getViewportWidth
     fmr f2, f31
     mr r3, r31
-    bl fn_805D9530
+    bl gx_transform_setViewportSize
     addi r3, r1, 0x8
     li r4, 0x0
     bl viewport_destroyContext
@@ -637,7 +637,7 @@ asm void fn_805DCB00(void)
     lwz r0, 0x5c(r3)
     addi r3, r1, 0x18
     stw r0, 0x74(r1)
-    bl fn_805D9530
+    bl gx_transform_setViewportSize
     mr r5, r30
     mr r6, r31
     addi r3, r1, 0x18
@@ -844,7 +844,7 @@ lbl_fn_805DCC70_00000B48:
 lbl_fn_805DCC70_00000B4C:
     stfs f1, 0xc(r28)
     mr r3, r27
-    bl fn_805D9580
+    bl gx_transform_getViewportWidth
     cmpwi r25, 0x4
     fmr f31, f1
     bne lbl_fn_805DCC70_00000B6C
@@ -962,7 +962,7 @@ asm void fn_805DD050(void)
     stfs f1, 0x8(r4)
     stfs f1, 0x4(r4)
     stfs f1, 0xc(r4)
-    bl fn_805D9530
+    bl gx_transform_setViewportSize
     lfs f31, lbl_80764630@l(r31)
 lbl_fn_805DD050_00000CF0:
     stfs f31, 0x8(r1)
@@ -1051,7 +1051,7 @@ asm void fn_805DD170(void)
     mr r28, r3
     mr r29, r4
     mr r30, r5
-    bl fn_805D9580
+    bl gx_transform_getViewportWidth
     stfs f1, 0xc(r1)
     mr r3, r28
     bl fn_805D9590
@@ -1066,7 +1066,7 @@ asm void fn_805DD170(void)
     bl fn_805DD720
     fmr f29, f1
     mr r3, r28
-    bl fn_805D9580
+    bl gx_transform_getViewportWidth
     mr r3, r28
     bl fn_805D9590
     li r0, 0x0
@@ -1184,7 +1184,7 @@ lbl_fn_805DD170_00000EF8:
     stw r0, 0x120(r1)
     lwz r0, 0x5c(r28)
     stw r0, 0x124(r1)
-    bl fn_805D9530
+    bl gx_transform_setViewportSize
     subf r0, r29, r31
     mr r5, r31
     addi r3, r1, 0xc8
@@ -1266,7 +1266,7 @@ lbl_fn_805DD170_00001080:
     stw r0, 0xc0(r1)
     lwz r0, 0x5c(r28)
     stw r0, 0xc4(r1)
-    bl fn_805D9530
+    bl gx_transform_setViewportSize
     subf r0, r29, r31
     mr r5, r31
     addi r3, r1, 0x68
@@ -1287,7 +1287,7 @@ lbl_fn_805DD170_00001080:
     b lbl_fn_805DD170_000011F0
 lbl_fn_805DD170_000011C0:
     mr r3, r28
-    bl fn_805D9580
+    bl gx_transform_getViewportWidth
     lfs f0, 0x58(r1)
     fsubs f0, f1, f0
     fcmpo cr0, f29, f0
@@ -1605,7 +1605,7 @@ lbl_fn_805DD720_00001560:
     stw r0, 0xf0(r1)
     lwz r0, 0x5c(r27)
     stw r0, 0xf4(r1)
-    bl fn_805D9530
+    bl gx_transform_setViewportSize
     mr r5, r30
     mr r6, r31
     addi r3, r1, 0x98
@@ -1688,7 +1688,7 @@ lbl_fn_805DD720_000016B0:
     stw r0, 0x90(r1)
     lwz r0, 0x5c(r27)
     stw r0, 0x94(r1)
-    bl fn_805D9530
+    bl gx_transform_setViewportSize
     mr r5, r30
     mr r6, r31
     addi r3, r1, 0x38

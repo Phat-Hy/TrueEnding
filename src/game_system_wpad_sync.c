@@ -36,7 +36,7 @@ extern void fn_800EFF68(void);
 extern void fn_800F13BC(void);
 extern void fn_800F2C9C(void);
 extern void fn_80119ECC(void);
-extern void fn_8012AFE8(void);
+extern void enemy_nav_destroyElement(void);
 extern void fn_801823A8(void);
 extern void fn_801839FC(void);
 extern void fn_801E9398(void);
@@ -575,9 +575,9 @@ lbl_fn_80365708_000004DC:
 lbl_fn_80365708_00000514:
     addic. r3, r31, 0x539c
     beq lbl_fn_80365708_00000530
-    lis r4, fn_8012AFE8@ha
+    lis r4, enemy_nav_destroyElement@ha
     li r5, 0x240
-    addi r4, r4, fn_8012AFE8@l
+    addi r4, r4, enemy_nav_destroyElement@l
     li r6, 0x7
     bl __destroy_new_array
 lbl_fn_80365708_00000530:
@@ -1462,9 +1462,9 @@ lbl_world_Manager_destructor_000011C4:
     cmpwi r25, 0x0
     beq lbl_world_Manager_destructor_000011F4
     beq lbl_world_Manager_destructor_000011F4
-    lis r4, fn_8012AFE8@ha
+    lis r4, enemy_nav_destroyElement@ha
     mr r3, r25
-    addi r4, r4, fn_8012AFE8@l
+    addi r4, r4, enemy_nav_destroyElement@l
     li r5, 0x240
     li r6, 0x7
     bl __destroy_new_array

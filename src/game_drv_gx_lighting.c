@@ -17,9 +17,9 @@ extern void fn_805D9280(void);
 extern void fn_805D92F0(void);
 extern void fn_805D93D0(void);
 extern void fn_805D93E0(void);
-extern void fn_805D9530(void);
+extern void gx_transform_setViewportSize(void);
 extern void fn_805D9540(void);
-extern void fn_805D9580(void);
+extern void gx_transform_getViewportWidth(void);
 extern void fn_805D9590(void);
 extern void fn_805DD050(void);
 extern void fn_805DDD90(void);
@@ -96,7 +96,7 @@ asm void fn_805DA960(void)
 lbl_fn_805DA960_00000040:
     lwz r30, 0x0(r6)
     mr r3, r30
-    bl fn_805D9580
+    bl gx_transform_getViewportWidth
     stfs f1, 0x8(r27)
     mr r3, r30
     bl fn_805D9590
@@ -111,9 +111,9 @@ lbl_fn_805DA960_00000040:
     fadds f2, f1, f31
     mr r3, r31
     fmr f1, f30
-    bl fn_805D9530
+    bl gx_transform_setViewportSize
     mr r3, r30
-    bl fn_805D9580
+    bl gx_transform_getViewportWidth
     stfs f1, 0x0(r27)
     lwz r3, 0x0(r28)
     bl fn_805D92F0
@@ -139,7 +139,7 @@ lbl_fn_805DA960_00000040:
 lbl_fn_805DA960_000000E8:
     lwz r29, 0x0(r6)
     mr r3, r29
-    bl fn_805D9580
+    bl gx_transform_getViewportWidth
     stfs f1, 0x0(r27)
     lwz r30, 0x0(r28)
     mr r3, r30
@@ -161,7 +161,7 @@ lbl_fn_805DA960_00000130:
     fmr f31, f1
 lbl_fn_805DA960_0000013C:
     mr r3, r30
-    bl fn_805D9580
+    bl gx_transform_getViewportWidth
     lis r0, 0x4330
     xoris r3, r31, 0x8000
     stw r3, 0xc(r1)
@@ -189,7 +189,7 @@ lbl_fn_805DA960_0000013C:
     bl fn_805D9540
 lbl_fn_805DA960_000001A8:
     mr r3, r29
-    bl fn_805D9580
+    bl gx_transform_getViewportWidth
     stfs f1, 0x8(r27)
     mr r3, r29
     bl fn_805D9590
@@ -248,7 +248,7 @@ asm void fn_805DABA0(void)
     fadds f2, f1, f31
     mr r3, r31
     fmr f1, f30
-    bl fn_805D9530
+    bl gx_transform_setViewportSize
     lwz r0, 0x34(r1)
     psq_l f31, 0x28(r1), 0, 0
     lfd f31, 0x20(r1)
@@ -292,7 +292,7 @@ lbl_fn_805DAC10_0000030C:
     fmr f31, f1
 lbl_fn_805DAC10_00000318:
     mr r3, r30
-    bl fn_805D9580
+    bl gx_transform_getViewportWidth
     lis r0, 0x4330
     xoris r3, r31, 0x8000
     stw r3, 0xc(r1)
@@ -391,7 +391,7 @@ lbl_fn_805DAD60_00000440:
     fadds f2, f1, f31
     mr r3, r31
     fmr f1, f30
-    bl fn_805D9530
+    bl gx_transform_setViewportSize
     li r3, 0x3
     b lbl_fn_805DAD60_00000530
 lbl_fn_805DAD60_00000474:
@@ -415,7 +415,7 @@ lbl_fn_805DAD60_000004AC:
     fmr f31, f1
 lbl_fn_805DAD60_000004B8:
     mr r3, r30
-    bl fn_805D9580
+    bl gx_transform_getViewportWidth
     lis r0, 0x4330
     xoris r3, r31, 0x8000
     stw r3, 0xc(r1)
@@ -482,7 +482,7 @@ asm void fn_805DAEC0(void)
 lbl_fn_805DAEC0_000005A0:
     lwz r30, 0x0(r6)
     mr r3, r30
-    bl fn_805D9580
+    bl gx_transform_getViewportWidth
     stfs f1, 0x8(r27)
     mr r3, r30
     bl fn_805D9590
@@ -497,9 +497,9 @@ lbl_fn_805DAEC0_000005A0:
     fadds f2, f1, f31
     mr r3, r31
     fmr f1, f30
-    bl fn_805D9530
+    bl gx_transform_setViewportSize
     mr r3, r30
-    bl fn_805D9580
+    bl gx_transform_getViewportWidth
     stfs f1, 0x0(r27)
     lwz r3, 0x0(r28)
     bl fn_805D92F0
@@ -525,7 +525,7 @@ lbl_fn_805DAEC0_000005A0:
 lbl_fn_805DAEC0_00000648:
     lwz r29, 0x0(r6)
     mr r3, r29
-    bl fn_805D9580
+    bl gx_transform_getViewportWidth
     stfs f1, 0x0(r27)
     lwz r30, 0x0(r28)
     mr r3, r30
@@ -547,7 +547,7 @@ lbl_fn_805DAEC0_00000690:
     fmr f31, f1
 lbl_fn_805DAEC0_0000069C:
     mr r3, r30
-    bl fn_805D9580
+    bl gx_transform_getViewportWidth
     lis r0, 0x4330
     xoris r3, r31, 0x8000
     stw r3, 0xc(r1)
@@ -575,7 +575,7 @@ lbl_fn_805DAEC0_0000069C:
     bl fn_805D9540
 lbl_fn_805DAEC0_00000708:
     mr r3, r29
-    bl fn_805D9580
+    bl gx_transform_getViewportWidth
     stfs f1, 0x8(r27)
     mr r3, r29
     bl fn_805D9590
@@ -634,7 +634,7 @@ asm void fn_805DB100(void)
     fadds f2, f1, f31
     mr r3, r31
     fmr f1, f30
-    bl fn_805D9530
+    bl gx_transform_setViewportSize
     lwz r0, 0x34(r1)
     psq_l f31, 0x28(r1), 0, 0
     lfd f31, 0x20(r1)
@@ -678,7 +678,7 @@ lbl_fn_805DB170_0000086C:
     fmr f31, f1
 lbl_fn_805DB170_00000878:
     mr r3, r30
-    bl fn_805D9580
+    bl gx_transform_getViewportWidth
     lis r0, 0x4330
     xoris r3, r31, 0x8000
     stw r3, 0xc(r1)

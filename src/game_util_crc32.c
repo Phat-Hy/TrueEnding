@@ -36,7 +36,7 @@ extern void fn_805FA390(void);
 extern void strncpy(void);
 extern void fn_80716280(void);
 extern void net_packetDebugLog(void);
-extern void fn_80724E90(void);
+extern void net_logWarning(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -1943,7 +1943,7 @@ asm void fn_8059D8B4(void)
     li r4, 0x6b
     addi r5, r3, 0x41
     crclr 6
-    bl fn_80724E90
+    bl net_logWarning
     li r3, 0x0
     b lbl_fn_8059D8B4_000019A0
 lbl_fn_8059D8B4_00001884:
@@ -1957,7 +1957,7 @@ lbl_fn_8059D8B4_00001884:
     li r4, 0x4e
     addi r5, r3, 0x18
     crclr 6
-    bl fn_80724E90
+    bl net_logWarning
     li r0, 0x0
     b lbl_fn_8059D8B4_000018F4
 lbl_fn_8059D8B4_000018B8:
@@ -1972,7 +1972,7 @@ lbl_fn_8059D8B4_000018B8:
     addi r3, r3, lbl_807623A4@l
     addi r5, r3, 0x2d
     crclr 6
-    bl fn_80724E90
+    bl net_logWarning
     li r0, 0x0
     b lbl_fn_8059D8B4_000018F4
 lbl_fn_8059D8B4_000018F0:

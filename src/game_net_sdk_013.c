@@ -39,7 +39,7 @@ extern void fn_806BB6C0(void);
 extern void fn_806BBBA0(void);
 extern void net_logSessionStatus(void);
 extern void fn_806BC010(void);
-extern void fn_806BC860(void);
+extern void dwc_registerMatchStatus(void);
 extern void fn_806C05F0(void);
 extern void fn_806C0C20(void);
 extern void fn_806C10C0(void);
@@ -2948,7 +2948,7 @@ lbl_fn_806B5860_00002994:
     li r3, 0x6
     lhz r6, 0x80a(r8)
     lwz r8, 0x894(r8)
-    bl fn_806BC860
+    bl dwc_registerMatchStatus
     lwz r4, lbl_80860898@l(r28)
     lbz r0, 0x15(r4)
     cmpwi r0, 0x0
@@ -3221,7 +3221,7 @@ lbl_fn_806B5860_00002DAC:
     li r7, 0x0
     lhz r6, 0x66c(r24)
     li r8, 0x0
-    bl fn_806BC860
+    bl dwc_registerMatchStatus
     lwz r4, lbl_80860898@l(r28)
     lbz r0, 0x15(r4)
     cmpwi r0, 0x0

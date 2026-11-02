@@ -20,7 +20,7 @@ extern void actor_spawnActorWithId(void);
 extern void kpad_validateButtonIndex(void);
 extern void fn_80453DBC(void);
 extern void fn_804741C0(void);
-extern void fn_804786F8(void);
+extern void cutscene_cam_getTargetIndex(void);
 extern void fn_8047C7FC(void);
 extern void fn_80512C94(void);
 extern void fn_8052BBF0(void);
@@ -199,11 +199,11 @@ lbl_fn_8052DEF0_000001B0:
     li r0, 0x1
     stw r0, 0x11f8(r29)
     addi r3, r3, 0x5c
-    bl fn_804786F8
+    bl cutscene_cam_getTargetIndex
     lwz r4, 0x11f4(r29)
     stw r3, 0x454(r29)
     addi r3, r4, 0x5c
-    bl fn_804786F8
+    bl cutscene_cam_getTargetIndex
     li r4, 0x0
     bl fn_805BDCC0
     lfs f0, 0x1368(r29)
@@ -217,7 +217,7 @@ lbl_fn_8052DEF0_00000204:
     li r0, 0x0
     stw r0, 0x11f8(r29)
     addi r3, r3, 0x5c
-    bl fn_804786F8
+    bl cutscene_cam_getTargetIndex
     li r4, 0x0
     bl fn_805BDCC0
     lfs f1, lbl_80887AB0
@@ -234,7 +234,7 @@ lbl_fn_8052DEF0_00000204:
     stfs f2, 0x1204(r29)
     addi r3, r5, 0x5c
     psq_st f1, 0x0(r4), 0, 0
-    bl fn_804786F8
+    bl cutscene_cam_getTargetIndex
     li r4, 0x0
     bl fn_805BDCC0
     lfs f1, lbl_80887AB0
@@ -255,7 +255,7 @@ lbl_fn_8052DEF0_00000298:
     li r0, 0x1
     stw r0, 0x11f8(r29)
     addi r3, r3, 0x5c
-    bl fn_804786F8
+    bl cutscene_cam_getTargetIndex
     lfs f3, lbl_80887AB0
     lfs f0, 0x1368(r29)
     stw r3, 0x454(r29)

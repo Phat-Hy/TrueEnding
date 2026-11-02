@@ -88,9 +88,9 @@ void fn_80605540(void);
 void fn_806055A0(void);
 void fn_806056A0(void);
 void fn_806056C0(void);
-void fn_806056D0(void);
+void __VIDelay(void);
 void fn_80605760(void);
-void fn_80605AB0(void);
+void __VISendI2CData(void);
 void fn_80605FF0(void);
 void fn_80606090(void);
 void fn_806060D0(void);
@@ -1335,7 +1335,7 @@ asm void fn_806056C0(void)
     blr
 }
 
-asm void fn_806056D0(void)
+asm void __VIDelay(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -1348,7 +1348,7 @@ asm void fn_806056D0(void)
     bl __OSGetSystemTime
     mr r30, r4
     mr r31, r3
-lbl_fn_806056D0_1178:
+lbl___VIDelay_1178:
     bl __OSGetSystemTime
     subfc r7, r30, r4
     li r6, 0x1e6
@@ -1365,7 +1365,7 @@ lbl_fn_806056D0_1178:
     subfe r5, r5, r0
     subfe r5, r0, r0
     neg. r5, r5
-    bne lbl_fn_806056D0_1178
+    bne lbl___VIDelay_1178
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)
@@ -1606,7 +1606,7 @@ lbl_fn_80605760_1510:
     blr
 }
 
-asm void fn_80605AB0(void)
+asm void __VISendI2CData(void)
 {
     nofralloc
     stwu r1, -0x30(r1)
@@ -1619,11 +1619,11 @@ asm void fn_80605AB0(void)
     mr r26, r4
     mr r27, r5
     cmpwi r0, 0x0
-    bne lbl_fn_80605AB0_1568
+    bne lbl___VISendI2CData_1568
     li r0, 0x1
     stw r0, lbl_8087E828
     stw r0, lbl_8087FE90
-lbl_fn_80605AB0_1568:
+lbl___VISendI2CData_1568:
     bl OSDisableInterrupts
     lis r4, 0xcd80
     mr r28, r3
@@ -1637,23 +1637,23 @@ lbl_fn_80605AB0_1568:
     stw r0, 0xc0(r4)
     lwz r0, lbl_8087E828
     cmpwi r0, 0x0
-    bne lbl_fn_80605AB0_15b0
+    bne lbl___VISendI2CData_15b0
     lwz r0, 0xc0(r4)
     rlwinm r0, r0, 0, 17, 15
     stw r0, 0xc0(r4)
-    b lbl_fn_80605AB0_15c0
-lbl_fn_80605AB0_15b0:
+    b lbl___VISendI2CData_15c0
+lbl___VISendI2CData_15b0:
     lwz r0, 0xc0(r4)
     rlwinm r0, r0, 0, 17, 15
     ori r0, r0, 0x8000
     stw r0, 0xc0(r4)
-lbl_fn_80605AB0_15c0:
+lbl___VISendI2CData_15c0:
     bl __OSGetSystemTime
     mr r25, r4
     mr r24, r3
     li r23, 0x2
     li r22, 0x0
-lbl_fn_80605AB0_15d4:
+lbl___VISendI2CData_15d4:
     bl __OSGetSystemTime
     subfc r7, r25, r4
     li r6, 0x1e6
@@ -1669,13 +1669,13 @@ lbl_fn_80605AB0_15d4:
     subfe r5, r5, r0
     subfe r5, r0, r0
     neg. r5, r5
-    bne lbl_fn_80605AB0_15d4
+    bne lbl___VISendI2CData_15d4
     bl __OSGetSystemTime
     mr r25, r4
     mr r24, r3
     li r23, 0x2
     li r22, 0x0
-lbl_fn_80605AB0_1628:
+lbl___VISendI2CData_1628:
     bl __OSGetSystemTime
     subfc r7, r25, r4
     li r6, 0x1e6
@@ -1691,16 +1691,16 @@ lbl_fn_80605AB0_1628:
     subfe r5, r5, r0
     subfe r5, r0, r0
     neg. r5, r5
-    bne lbl_fn_80605AB0_1628
+    bne lbl___VISendI2CData_1628
     mr r3, r29
     bl fn_80605760
     cmpwi r3, 0x0
-    bne lbl_fn_80605AB0_1688
+    bne lbl___VISendI2CData_1688
     mr r3, r28
     bl OSRestoreInterrupts
     li r3, 0x0
-    b lbl_fn_80605AB0_1a4c
-lbl_fn_80605AB0_1688:
+    b lbl___VISendI2CData_1a4c
+lbl___VISendI2CData_1688:
     lis r31, 0xcd80
     li r24, 0x2
     lwz r0, 0xc4(r31)
@@ -1708,45 +1708,45 @@ lbl_fn_80605AB0_1688:
     rlwinm r0, r0, 0, 17, 15
     ori r0, r0, 0xc000
     stw r0, 0xc4(r31)
-    b lbl_fn_80605AB0_1908
-lbl_fn_80605AB0_16a8:
+    b lbl___VISendI2CData_1908
+lbl___VISendI2CData_16a8:
     lbz r29, 0x0(r26)
     li r30, 0x0
     addi r26, r26, 0x1
-lbl_fn_80605AB0_16b4:
+lbl___VISendI2CData_16b4:
     rlwinm. r0, r29, 0, 24, 24
-    beq lbl_fn_80605AB0_16ec
+    beq lbl___VISendI2CData_16ec
     lwz r0, lbl_8087E828
     cmpwi r0, 0x0
-    bne lbl_fn_80605AB0_16d8
+    bne lbl___VISendI2CData_16d8
     lwz r0, 0xc0(r31)
     rlwinm r0, r0, 0, 17, 15
     stw r0, 0xc0(r31)
-    b lbl_fn_80605AB0_1718
-lbl_fn_80605AB0_16d8:
+    b lbl___VISendI2CData_1718
+lbl___VISendI2CData_16d8:
     lwz r0, 0xc0(r31)
     rlwinm r0, r0, 0, 17, 15
     ori r0, r0, 0x8000
     stw r0, 0xc0(r31)
-    b lbl_fn_80605AB0_1718
-lbl_fn_80605AB0_16ec:
+    b lbl___VISendI2CData_1718
+lbl___VISendI2CData_16ec:
     lwz r0, lbl_8087E828
     cmpwi r0, 0x0
-    bne lbl_fn_80605AB0_170c
+    bne lbl___VISendI2CData_170c
     lwz r0, 0xc0(r31)
     rlwinm r0, r0, 0, 17, 15
     ori r0, r0, 0x8000
     stw r0, 0xc0(r31)
-    b lbl_fn_80605AB0_1718
-lbl_fn_80605AB0_170c:
+    b lbl___VISendI2CData_1718
+lbl___VISendI2CData_170c:
     lwz r0, 0xc0(r31)
     rlwinm r0, r0, 0, 17, 15
     stw r0, 0xc0(r31)
-lbl_fn_80605AB0_1718:
+lbl___VISendI2CData_1718:
     bl __OSGetSystemTime
     mr r23, r4
     mr r22, r3
-lbl_fn_80605AB0_1724:
+lbl___VISendI2CData_1724:
     bl __OSGetSystemTime
     subfc r7, r23, r4
     li r6, 0x1e6
@@ -1762,7 +1762,7 @@ lbl_fn_80605AB0_1724:
     subfe r5, r5, r0
     subfe r5, r0, r0
     neg. r5, r5
-    bne lbl_fn_80605AB0_1724
+    bne lbl___VISendI2CData_1724
     lwz r0, 0xc0(r31)
     rlwinm r0, r0, 0, 18, 16
     ori r0, r0, 0x4000
@@ -1770,7 +1770,7 @@ lbl_fn_80605AB0_1724:
     bl __OSGetSystemTime
     mr r22, r4
     mr r23, r3
-lbl_fn_80605AB0_1780:
+lbl___VISendI2CData_1780:
     bl __OSGetSystemTime
     subfc r7, r22, r4
     li r6, 0x1e6
@@ -1786,14 +1786,14 @@ lbl_fn_80605AB0_1780:
     subfe r5, r5, r0
     subfe r5, r0, r0
     neg. r5, r5
-    bne lbl_fn_80605AB0_1780
+    bne lbl___VISendI2CData_1780
     lwz r0, 0xc0(r31)
     addi r30, r30, 0x1
     cmpwi r30, 0x8
     clrlslwi r29, r29, 25, 1
     rlwinm r0, r0, 0, 18, 16
     stw r0, 0xc0(r31)
-    blt lbl_fn_80605AB0_16b4
+    blt lbl___VISendI2CData_16b4
     lwz r0, 0xc4(r31)
     rlwinm r0, r0, 0, 17, 15
     ori r0, r0, 0x4000
@@ -1801,7 +1801,7 @@ lbl_fn_80605AB0_1780:
     bl __OSGetSystemTime
     mr r30, r4
     mr r29, r3
-lbl_fn_80605AB0_17f8:
+lbl___VISendI2CData_17f8:
     bl __OSGetSystemTime
     subfc r7, r30, r4
     li r6, 0x1e6
@@ -1817,7 +1817,7 @@ lbl_fn_80605AB0_17f8:
     subfe r5, r5, r0
     subfe r5, r0, r0
     neg. r5, r5
-    bne lbl_fn_80605AB0_17f8
+    bne lbl___VISendI2CData_17f8
     lwz r0, 0xc0(r31)
     rlwinm r0, r0, 0, 18, 16
     ori r0, r0, 0x4000
@@ -1825,7 +1825,7 @@ lbl_fn_80605AB0_17f8:
     bl __OSGetSystemTime
     mr r30, r4
     mr r29, r3
-lbl_fn_80605AB0_1854:
+lbl___VISendI2CData_1854:
     bl __OSGetSystemTime
     subfc r7, r30, r4
     li r6, 0x1e6
@@ -1841,31 +1841,31 @@ lbl_fn_80605AB0_1854:
     subfe r5, r5, r0
     subfe r5, r0, r0
     neg. r5, r5
-    bne lbl_fn_80605AB0_1854
+    bne lbl___VISendI2CData_1854
     lwz r0, lbl_8087E828
     cmplwi r0, 0x1
-    bne lbl_fn_80605AB0_18bc
+    bne lbl___VISendI2CData_18bc
     lwz r0, 0xc8(r31)
     extrwi. r0, r0, 1, 16
-    beq lbl_fn_80605AB0_18bc
+    beq lbl___VISendI2CData_18bc
     mr r3, r28
     bl OSRestoreInterrupts
     li r3, 0x0
-    b lbl_fn_80605AB0_1a4c
-lbl_fn_80605AB0_18bc:
+    b lbl___VISendI2CData_1a4c
+lbl___VISendI2CData_18bc:
     lwz r0, lbl_8087E828
     cmpwi r0, 0x0
-    bne lbl_fn_80605AB0_18dc
+    bne lbl___VISendI2CData_18dc
     lwz r0, 0xc0(r31)
     rlwinm r0, r0, 0, 17, 15
     ori r0, r0, 0x8000
     stw r0, 0xc0(r31)
-    b lbl_fn_80605AB0_18e8
-lbl_fn_80605AB0_18dc:
+    b lbl___VISendI2CData_18e8
+lbl___VISendI2CData_18dc:
     lwz r0, 0xc0(r31)
     rlwinm r0, r0, 0, 17, 15
     stw r0, 0xc0(r31)
-lbl_fn_80605AB0_18e8:
+lbl___VISendI2CData_18e8:
     lwz r0, 0xc4(r31)
     subi r27, r27, 0x1
     rlwinm r0, r0, 0, 17, 15
@@ -1874,9 +1874,9 @@ lbl_fn_80605AB0_18e8:
     lwz r0, 0xc0(r31)
     rlwinm r0, r0, 0, 18, 16
     stw r0, 0xc0(r31)
-lbl_fn_80605AB0_1908:
+lbl___VISendI2CData_1908:
     cmpwi r27, 0x0
-    bne lbl_fn_80605AB0_16a8
+    bne lbl___VISendI2CData_16a8
     lis r3, 0xcd80
     lwz r0, 0xc4(r3)
     rlwinm r0, r0, 0, 17, 15
@@ -1884,23 +1884,23 @@ lbl_fn_80605AB0_1908:
     stw r0, 0xc4(r3)
     lwz r0, lbl_8087E828
     cmpwi r0, 0x0
-    bne lbl_fn_80605AB0_1944
+    bne lbl___VISendI2CData_1944
     lwz r0, 0xc0(r3)
     rlwinm r0, r0, 0, 17, 15
     ori r0, r0, 0x8000
     stw r0, 0xc0(r3)
-    b lbl_fn_80605AB0_1950
-lbl_fn_80605AB0_1944:
+    b lbl___VISendI2CData_1950
+lbl___VISendI2CData_1944:
     lwz r0, 0xc0(r3)
     rlwinm r0, r0, 0, 17, 15
     stw r0, 0xc0(r3)
-lbl_fn_80605AB0_1950:
+lbl___VISendI2CData_1950:
     bl __OSGetSystemTime
     mr r30, r4
     mr r29, r3
     li r27, 0x2
     li r26, 0x0
-lbl_fn_80605AB0_1964:
+lbl___VISendI2CData_1964:
     bl __OSGetSystemTime
     subfc r7, r30, r4
     li r6, 0x1e6
@@ -1916,7 +1916,7 @@ lbl_fn_80605AB0_1964:
     subfe r5, r5, r0
     subfe r5, r0, r0
     neg. r5, r5
-    bne lbl_fn_80605AB0_1964
+    bne lbl___VISendI2CData_1964
     lis r3, 0xcd80
     lwz r0, 0xc0(r3)
     rlwinm r0, r0, 0, 18, 16
@@ -1927,7 +1927,7 @@ lbl_fn_80605AB0_1964:
     mr r29, r3
     li r27, 0x2
     li r26, 0x0
-lbl_fn_80605AB0_19cc:
+lbl___VISendI2CData_19cc:
     bl __OSGetSystemTime
     subfc r7, r30, r4
     li r6, 0x1e6
@@ -1943,26 +1943,26 @@ lbl_fn_80605AB0_19cc:
     subfe r5, r5, r0
     subfe r5, r0, r0
     neg. r5, r5
-    bne lbl_fn_80605AB0_19cc
+    bne lbl___VISendI2CData_19cc
     lwz r0, lbl_8087E828
     cmpwi r0, 0x0
-    bne lbl_fn_80605AB0_1a2c
+    bne lbl___VISendI2CData_1a2c
     lis r3, 0xcd80
     lwz r0, 0xc0(r3)
     rlwinm r0, r0, 0, 17, 15
     stw r0, 0xc0(r3)
-    b lbl_fn_80605AB0_1a40
-lbl_fn_80605AB0_1a2c:
+    b lbl___VISendI2CData_1a40
+lbl___VISendI2CData_1a2c:
     lis r3, 0xcd80
     lwz r0, 0xc0(r3)
     rlwinm r0, r0, 0, 17, 15
     ori r0, r0, 0x8000
     stw r0, 0xc0(r3)
-lbl_fn_80605AB0_1a40:
+lbl___VISendI2CData_1a40:
     mr r3, r28
     bl OSRestoreInterrupts
     li r3, 0x1
-lbl_fn_80605AB0_1a4c:
+lbl___VISendI2CData_1a4c:
     addi r11, r1, 0x30
     bl _restgpr_22
     lwz r0, 0x34(r1)
@@ -2012,9 +2012,9 @@ lbl_fn_80605FF0_1ad4:
     li r3, 0xe0
     stb r0, 0x9(r1)
     li r5, 0x2
-    bl fn_80605AB0
+    bl __VISendI2CData
     li r3, 0x2
-    bl fn_806056D0
+    bl __VIDelay
     lwz r0, 0x14(r1)
     mtlr r0
     addi r1, r1, 0x10
@@ -2033,9 +2033,9 @@ asm void fn_80606090(void)
     stb r3, 0x9(r1)
     li r3, 0xe0
     stb r0, 0x8(r1)
-    bl fn_80605AB0
+    bl __VISendI2CData
     li r3, 0x2
-    bl fn_806056D0
+    bl __VIDelay
     lwz r0, 0x14(r1)
     mtlr r0
     addi r1, r1, 0x10
@@ -2060,9 +2060,9 @@ asm void fn_806060D0(void)
     li r5, 0x3
     stb r6, 0x9(r1)
     stb r0, 0xa(r1)
-    bl fn_80605AB0
+    bl __VISendI2CData
     li r3, 0x2
-    bl fn_806056D0
+    bl __VIDelay
     lwz r0, 0x14(r1)
     mtlr r0
     addi r1, r1, 0x10
@@ -2090,9 +2090,9 @@ asm void fn_80606130(void)
     stb r7, 0x8(r1)
     li r5, 0x3
     stb r0, 0xa(r1)
-    bl fn_80605AB0
+    bl __VISendI2CData
     li r3, 0x2
-    bl fn_806056D0
+    bl __VIDelay
     lwz r0, 0x14(r1)
     mtlr r0
     addi r1, r1, 0x10
@@ -2122,9 +2122,9 @@ asm void fn_806061A0(void)
     stb r7, 0xa(r1)
     stb r6, 0xb(r1)
     stb r0, 0xc(r1)
-    bl fn_80605AB0
+    bl __VISendI2CData
     li r3, 0x2
-    bl fn_806056D0
+    bl __VIDelay
     lwz r0, 0x14(r1)
     mtlr r0
     addi r1, r1, 0x10
@@ -2223,9 +2223,9 @@ lbl_fn_80606210_1d04:
     stb r7, 0x170(r1)
     stb r6, 0x171(r1)
     stb r0, 0x172(r1)
-    bl fn_80605AB0
+    bl __VISendI2CData
     li r3, 0x2
-    bl fn_806056D0
+    bl __VIDelay
     b lbl_fn_80606210_29e8
 lbl_fn_80606210_1dfc:
     addi r30, r3, 0x474
@@ -2286,9 +2286,9 @@ lbl_fn_80606210_1dfc:
     stb r7, 0x154(r1)
     stb r6, 0x155(r1)
     stb r0, 0x156(r1)
-    bl fn_80605AB0
+    bl __VISendI2CData
     li r3, 0x2
-    bl fn_806056D0
+    bl __VIDelay
     b lbl_fn_80606210_29e8
 lbl_fn_80606210_1ef4:
     addi r30, r3, 0x51c
@@ -2349,9 +2349,9 @@ lbl_fn_80606210_1ef4:
     stb r7, 0x138(r1)
     stb r6, 0x139(r1)
     stb r0, 0x13a(r1)
-    bl fn_80605AB0
+    bl __VISendI2CData
     li r3, 0x2
-    bl fn_806056D0
+    bl __VIDelay
     b lbl_fn_80606210_29e8
 lbl_fn_80606210_1fec:
     addi r30, r3, 0x4c8
@@ -2412,9 +2412,9 @@ lbl_fn_80606210_1fec:
     stb r7, 0x11c(r1)
     stb r6, 0x11d(r1)
     stb r0, 0x11e(r1)
-    bl fn_80605AB0
+    bl __VISendI2CData
     li r3, 0x2
-    bl fn_806056D0
+    bl __VIDelay
     b lbl_fn_80606210_29e8
 lbl_fn_80606210_20e4:
     lwz r0, lbl_8087E830
@@ -2486,9 +2486,9 @@ lbl_fn_80606210_210c:
     stb r7, 0x100(r1)
     stb r6, 0x101(r1)
     stb r0, 0x102(r1)
-    bl fn_80605AB0
+    bl __VISendI2CData
     li r3, 0x2
-    bl fn_806056D0
+    bl __VIDelay
     b lbl_fn_80606210_29e8
 lbl_fn_80606210_2204:
     addi r30, r3, 0x490
@@ -2549,9 +2549,9 @@ lbl_fn_80606210_2204:
     stb r7, 0xe4(r1)
     stb r6, 0xe5(r1)
     stb r0, 0xe6(r1)
-    bl fn_80605AB0
+    bl __VISendI2CData
     li r3, 0x2
-    bl fn_806056D0
+    bl __VIDelay
     b lbl_fn_80606210_29e8
 lbl_fn_80606210_22fc:
     addi r30, r3, 0x538
@@ -2612,9 +2612,9 @@ lbl_fn_80606210_22fc:
     stb r7, 0xc8(r1)
     stb r6, 0xc9(r1)
     stb r0, 0xca(r1)
-    bl fn_80605AB0
+    bl __VISendI2CData
     li r3, 0x2
-    bl fn_806056D0
+    bl __VIDelay
     b lbl_fn_80606210_29e8
 lbl_fn_80606210_23f4:
     addi r30, r3, 0x4e4
@@ -2675,9 +2675,9 @@ lbl_fn_80606210_23f4:
     stb r7, 0xac(r1)
     stb r6, 0xad(r1)
     stb r0, 0xae(r1)
-    bl fn_80605AB0
+    bl __VISendI2CData
     li r3, 0x2
-    bl fn_806056D0
+    bl __VIDelay
     b lbl_fn_80606210_29e8
 lbl_fn_80606210_24ec:
     lwz r0, lbl_8087E830
@@ -2749,9 +2749,9 @@ lbl_fn_80606210_2514:
     stb r7, 0x90(r1)
     stb r6, 0x91(r1)
     stb r0, 0x92(r1)
-    bl fn_80605AB0
+    bl __VISendI2CData
     li r3, 0x2
-    bl fn_806056D0
+    bl __VIDelay
     b lbl_fn_80606210_29e8
 lbl_fn_80606210_260c:
     addi r30, r3, 0x4ac
@@ -2812,9 +2812,9 @@ lbl_fn_80606210_260c:
     stb r7, 0x74(r1)
     stb r6, 0x75(r1)
     stb r0, 0x76(r1)
-    bl fn_80605AB0
+    bl __VISendI2CData
     li r3, 0x2
-    bl fn_806056D0
+    bl __VIDelay
     b lbl_fn_80606210_29e8
 lbl_fn_80606210_2704:
     addi r30, r3, 0x554
@@ -2875,9 +2875,9 @@ lbl_fn_80606210_2704:
     stb r7, 0x58(r1)
     stb r6, 0x59(r1)
     stb r0, 0x5a(r1)
-    bl fn_80605AB0
+    bl __VISendI2CData
     li r3, 0x2
-    bl fn_806056D0
+    bl __VIDelay
     b lbl_fn_80606210_29e8
 lbl_fn_80606210_27fc:
     addi r30, r3, 0x500
@@ -2938,9 +2938,9 @@ lbl_fn_80606210_27fc:
     stb r7, 0x3c(r1)
     stb r6, 0x3d(r1)
     stb r0, 0x3e(r1)
-    bl fn_80605AB0
+    bl __VISendI2CData
     li r3, 0x2
-    bl fn_806056D0
+    bl __VIDelay
     b lbl_fn_80606210_29e8
 lbl_fn_80606210_28f4:
     lis r29, lbl_807D1610@ha
@@ -3001,9 +3001,9 @@ lbl_fn_80606210_28f4:
     stb r7, 0x20(r1)
     stb r6, 0x21(r1)
     stb r0, 0x22(r1)
-    bl fn_80605AB0
+    bl __VISendI2CData
     li r3, 0x2
-    bl fn_806056D0
+    bl __VIDelay
 lbl_fn_80606210_29e8:
     lwz r0, 0x194(r1)
     lwz r31, 0x18c(r1)
@@ -3099,9 +3099,9 @@ asm void fn_80606F90(void)
     rlwinm r0, r0, 0, 24, 25
     stb r6, 0x28(r1)
     stb r0, 0x29(r1)
-    bl fn_80605AB0
+    bl __VISendI2CData
     li r3, 0x2
-    bl fn_806056D0
+    bl __VIDelay
     lwz r0, 0x34(r1)
     mtlr r0
     addi r1, r1, 0x30
@@ -3162,9 +3162,9 @@ lbl_fn_80607140_2bf4:
     addi r4, r1, 0x8
     li r3, 0xe0
     li r5, 0x2
-    bl fn_80605AB0
+    bl __VISendI2CData
     li r3, 0x2
-    bl fn_806056D0
+    bl __VIDelay
     lwz r0, 0x14(r1)
     mtlr r0
     addi r1, r1, 0x10
@@ -3189,9 +3189,9 @@ asm void fn_806071A0(void)
     ori r0, r0, 0x1
     stb r0, 0x9(r1)
     li r5, 0x2
-    bl fn_80605AB0
+    bl __VISendI2CData
     li r3, 0x2
-    bl fn_806056D0
+    bl __VIDelay
     b lbl_fn_806071A0_2c94
 lbl_fn_806071A0_2c6c:
     li r3, 0xa
@@ -3201,9 +3201,9 @@ lbl_fn_806071A0_2c6c:
     li r3, 0xe0
     li r5, 0x2
     stb r0, 0x9(r1)
-    bl fn_80605AB0
+    bl __VISendI2CData
     li r3, 0x2
-    bl fn_806056D0
+    bl __VIDelay
 lbl_fn_806071A0_2c94:
     lwz r0, 0x14(r1)
     mtlr r0
@@ -3234,9 +3234,9 @@ asm void __VISetRGBModeImm(void)
     stw r6, lbl_8087FEAC
     stb r0, 0x8(r1)
     stb r6, 0x9(r1)
-    bl fn_80605AB0
+    bl __VISendI2CData
     li r3, 0x2
-    bl fn_806056D0
+    bl __VIDelay
     lwz r0, 0x14(r1)
     mtlr r0
     addi r1, r1, 0x10
@@ -3260,18 +3260,18 @@ asm void fn_80607290(void)
     li r28, 0x1
     stb r0, 0x20(r1)
     stb r28, 0x21(r1)
-    bl fn_80605AB0
+    bl __VISendI2CData
     li r3, 0x2
-    bl fn_806056D0
+    bl __VIDelay
     li r0, 0x65
     stb r0, 0x1c(r1)
     addi r4, r1, 0x1c
     li r3, 0xe0
     stb r28, 0x1d(r1)
     li r5, 0x2
-    bl fn_80605AB0
+    bl __VISendI2CData
     li r3, 0x2
-    bl fn_806056D0
+    bl __VIDelay
     bl fn_806052C0
     lis r4, 0x8000
     lwz r0, 0xcc(r4)
@@ -3307,18 +3307,18 @@ lbl_fn_80607290_2dd0:
     li r3, 0xe0
     stb r0, 0x19(r1)
     li r5, 0x2
-    bl fn_80605AB0
+    bl __VISendI2CData
     li r3, 0x2
-    bl fn_806056D0
+    bl __VIDelay
     li r28, 0x0
     stb r28, 0x14(r1)
     addi r4, r1, 0x14
     li r3, 0xe0
     stb r28, 0x15(r1)
     li r5, 0x2
-    bl fn_80605AB0
+    bl __VISendI2CData
     li r3, 0x2
-    bl fn_806056D0
+    bl __VIDelay
     li r0, 0x8e
     li r3, 0x71
     stb r3, 0x2c(r1)
@@ -3327,9 +3327,9 @@ lbl_fn_80607290_2dd0:
     li r5, 0x3
     stb r0, 0x2d(r1)
     stb r0, 0x2e(r1)
-    bl fn_80605AB0
+    bl __VISendI2CData
     li r3, 0x2
-    bl fn_806056D0
+    bl __VIDelay
     li r3, 0x2
     li r0, 0x7
     stb r3, 0x10(r1)
@@ -3337,9 +3337,9 @@ lbl_fn_80607290_2dd0:
     li r3, 0xe0
     li r5, 0x2
     stb r0, 0x11(r1)
-    bl fn_80605AB0
+    bl __VISendI2CData
     li r3, 0x2
-    bl fn_806056D0
+    bl __VIDelay
     li r0, 0x5
     stb r28, lbl_8087E834
     addi r4, r1, 0x28
@@ -3350,9 +3350,9 @@ lbl_fn_80607290_2dd0:
     stb r0, 0x28(r1)
     stb r28, 0x29(r1)
     stb r28, 0x2a(r1)
-    bl fn_80605AB0
+    bl __VISendI2CData
     li r3, 0x2
-    bl fn_806056D0
+    bl __VIDelay
     lbz r0, lbl_8087E837
     cmpwi r0, 0x0
     bne lbl_fn_80607290_2ed8
@@ -3390,9 +3390,9 @@ lbl_fn_80607290_2ef8:
     stb r7, 0x24(r1)
     li r5, 0x3
     stb r0, 0x26(r1)
-    bl fn_80605AB0
+    bl __VISendI2CData
     li r3, 0x2
-    bl fn_806056D0
+    bl __VIDelay
     lbz r0, lbl_8087E83B
     cmpwi r0, 0x0
     bne lbl_fn_80607290_2f70
@@ -3432,9 +3432,9 @@ lbl_fn_80607290_2f90:
     stb r7, 0x32(r1)
     stb r6, 0x33(r1)
     stb r0, 0x34(r1)
-    bl fn_80605AB0
+    bl __VISendI2CData
     li r3, 0x2
-    bl fn_806056D0
+    bl __VIDelay
     lis r29, lbl_807D1610@ha
     lbzu r30, lbl_807D1610@l(r29)
     stb r30, 0x39(r1)
@@ -3493,9 +3493,9 @@ lbl_fn_80607290_2f90:
     stb r7, 0x50(r1)
     stb r6, 0x51(r1)
     stb r0, 0x52(r1)
-    bl fn_80605AB0
+    bl __VISendI2CData
     li r3, 0x2
-    bl fn_806056D0
+    bl __VIDelay
     lwz r0, lbl_8087FEA0
     cmpwi r0, 0x0
     beq lbl_fn_80607290_30f4
@@ -3517,9 +3517,9 @@ lbl_fn_80607290_30f4:
     ori r0, r0, 0x1
     stb r0, 0xd(r1)
     li r5, 0x2
-    bl fn_80605AB0
+    bl __VISendI2CData
     li r3, 0x2
-    bl fn_806056D0
+    bl __VIDelay
     b lbl_fn_80607290_315c
 lbl_fn_80607290_3134:
     li r3, 0xa
@@ -3529,9 +3529,9 @@ lbl_fn_80607290_3134:
     li r3, 0xe0
     li r5, 0x2
     stb r0, 0xd(r1)
-    bl fn_80605AB0
+    bl __VISendI2CData
     li r3, 0x2
-    bl fn_806056D0
+    bl __VIDelay
 lbl_fn_80607290_315c:
     li r3, 0x3
     li r0, 0x1
@@ -3540,9 +3540,9 @@ lbl_fn_80607290_315c:
     li r3, 0xe0
     li r5, 0x2
     stb r0, 0x9(r1)
-    bl fn_80605AB0
+    bl __VISendI2CData
     li r3, 0x2
-    bl fn_806056D0
+    bl __VIDelay
     lis r3, lbl_807ABF68@ha
     addi r3, r3, lbl_807ABF68@l
     addi r3, r3, 0x154

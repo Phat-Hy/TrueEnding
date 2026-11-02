@@ -29,7 +29,7 @@ extern void fn_801EFA38(void);
 extern void fn_801EFAB8(void);
 extern void fn_801F0364(void);
 extern void fn_801F03AC(void);
-extern void fn_801F0544(void);
+extern void math_evaluateCurve1D(void);
 extern void fn_801F0758(void);
 extern void fn_801F1098(void);
 extern void fn_801F3E20(void);
@@ -131,7 +131,7 @@ lbl_fn_801FEF40_00000068:
     mr r4, r28
     lwzx r29, r3, r26
     addi r3, r29, 0x4
-    bl fn_801F0544
+    bl math_evaluateCurve1D
     stfs f1, 0xc(r29)
     addi r30, r30, 0x1
     addi r26, r26, 0x4
@@ -150,7 +150,7 @@ lbl_fn_801FEF40_000000A0:
 lbl_fn_801FEF40_000000B0:
     mr r3, r30
     mr r4, r28
-    bl fn_801F0544
+    bl math_evaluateCurve1D
     addi r29, r29, 0x1
     stfs f1, 0x2c(r31)
     cmpwi r29, 0x5
@@ -174,7 +174,7 @@ lbl_fn_801FEF40_000000F4:
 lbl_fn_801FEF40_00000104:
     mr r3, r30
     mr r4, r28
-    bl fn_801F0544
+    bl math_evaluateCurve1D
     addi r29, r29, 0x1
     stfs f1, 0x24(r31)
     cmpwi r29, 0x4
@@ -198,7 +198,7 @@ lbl_fn_801FEF40_00000148:
 lbl_fn_801FEF40_00000158:
     mr r3, r30
     mr r4, r28
-    bl fn_801F0544
+    bl math_evaluateCurve1D
     addi r29, r29, 0x1
     stfs f1, 0x24(r31)
     cmpwi r29, 0x4

@@ -7,7 +7,7 @@ extern void _savegpr_25(void);
 extern void fn_800DC500(void);
 extern void fn_80119ECC(void);
 extern void fn_8012AE50(void);
-extern void fn_8012AFE8(void);
+extern void enemy_nav_destroyElement(void);
 extern void sys_findModuleById(void);
 extern void game_initGlobalDatabases(void);
 extern void assert_generateId(void);
@@ -887,11 +887,11 @@ lbl_fn_803BDB60_00000B54:
 lbl_fn_803BDB60_00000B60:
     addi r29, r31, 0x539c
     lis r4, fn_8012AE50@ha
-    lis r5, fn_8012AFE8@ha
+    lis r5, enemy_nav_destroyElement@ha
     li r6, 0x240
     mr r3, r29
     addi r4, r4, fn_8012AE50@l
-    addi r5, r5, fn_8012AFE8@l
+    addi r5, r5, enemy_nav_destroyElement@l
     li r7, 0x7
     bl __construct_new_array
     addi r5, r31, 0x638c

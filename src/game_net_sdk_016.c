@@ -25,7 +25,7 @@ extern void fn_806BAC80(void);
 extern void net_logSessionStatus(void);
 extern void fn_806BC010(void);
 extern void fn_806BC4C0(void);
-extern void fn_806BC860(void);
+extern void dwc_registerMatchStatus(void);
 extern void fn_806BFBA0(void);
 extern void fn_806C03B0(void);
 extern void fn_806C0980(void);
@@ -675,7 +675,7 @@ lbl_fn_806BCD40_000008E0:
     lwz r5, 0xb4(r1)
     addi r7, r1, 0xe0
     lhz r6, 0xbc(r1)
-    bl fn_806BC860
+    bl dwc_registerMatchStatus
     lis r4, lbl_80860898@ha
     lwz r4, lbl_80860898@l(r4)
     lbz r0, 0x15(r4)
@@ -2200,7 +2200,7 @@ lbl_fn_806BCD40_00001EF8:
     addi r7, r1, 0xc
     li r3, 0x9
     li r8, 0x1
-    bl fn_806BC860
+    bl dwc_registerMatchStatus
     lwz r4, lbl_80860898@l(r31)
     lbz r0, 0x15(r4)
     cmpwi r0, 0x0
@@ -2592,7 +2592,7 @@ lbl_fn_806BCD40_00002500:
     li r3, 0x41
     li r7, 0x0
     li r8, 0x0
-    bl fn_806BC860
+    bl dwc_registerMatchStatus
     lwz r4, lbl_80860898@l(r24)
     lbz r0, 0x15(r4)
     cmpwi r0, 0x0
@@ -2757,7 +2757,7 @@ lbl_fn_806BCD40_00002730:
     li r7, 0x0
     clrlwi r3, r0, 24
     li r8, 0x0
-    bl fn_806BC860
+    bl dwc_registerMatchStatus
     lis r4, lbl_80860898@ha
     lwz r4, lbl_80860898@l(r4)
     lbz r0, 0x15(r4)
@@ -2953,7 +2953,7 @@ lbl_fn_806BCD40_000029D0:
     li r3, 0x53
     li r7, 0x0
     li r8, 0x0
-    bl fn_806BC860
+    bl dwc_registerMatchStatus
     mr r16, r3
     mr r5, r29
     mr r6, r22

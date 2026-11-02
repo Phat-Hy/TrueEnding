@@ -374,7 +374,7 @@ void fn_804D1414(void);
 void fn_804D147C(void);
 void fn_804D14BC(void);
 u32 net_getFriendManager(void);
-void fn_804D16A0(void);
+void net_friend_setErrorCode(void);
 u32 fn_804D16D0(void);
 u32 fn_804D16D8(void);
 u32 fn_804D16E0(void);
@@ -598,7 +598,7 @@ u32 net_getFriendManager(void)
     return lbl_8087F628;
 }
 
-asm void fn_804D16A0(void)
+asm void net_friend_setErrorCode(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1996,7 +1996,7 @@ lbl_fn_804D25D4_00001610:
 lbl_fn_804D25D4_00001624:
     addi r3, r24, 0x4fc
     li r4, -0x1
-    bl fn_804D16A0
+    bl net_friend_setErrorCode
     li r21, 0x1
     bl net_getFriendManager
     bl fn_804D5FE4
@@ -2054,12 +2054,12 @@ lbl_fn_804D25D4_000016CC:
     bne lbl_fn_804D25D4_0000170C
     addi r3, r24, 0x4fc
     li r4, -0x2
-    bl fn_804D16A0
+    bl net_friend_setErrorCode
     b lbl_fn_804D25D4_00001718
 lbl_fn_804D25D4_0000170C:
     addi r3, r24, 0x4fc
     li r4, -0x3
-    bl fn_804D16A0
+    bl net_friend_setErrorCode
 lbl_fn_804D25D4_00001718:
     mr r3, r24
     li r4, 0x0
@@ -2067,7 +2067,7 @@ lbl_fn_804D25D4_00001718:
     b lbl_fn_804D25D4_00004898
     addi r3, r24, 0x4fc
     li r4, 0xa
-    bl fn_804D16A0
+    bl net_friend_setErrorCode
     bl fn_804D16D0
     addis r4, r24, 0x1
     lwz r4, -0x68a8(r4)
@@ -2085,7 +2085,7 @@ lbl_fn_804D25D4_00001718:
     bne lbl_fn_804D25D4_00004898
     addi r3, r24, 0x4fc
     li r4, 0x7
-    bl fn_804D16A0
+    bl net_friend_setErrorCode
     addis r3, r24, 0x1
     li r4, -0x1
     lwz r0, -0x68b0(r3)
@@ -2331,7 +2331,7 @@ lbl_fn_804D25D4_00001A8C:
     bl fn_8050CF20
     addi r3, r24, 0x4fc
     li r4, 0x4
-    bl fn_804D16A0
+    bl net_friend_setErrorCode
     b lbl_fn_804D25D4_00004898
     bl fn_8020A3E4
     li r4, 0x0
@@ -2343,7 +2343,7 @@ lbl_fn_804D25D4_00001A8C:
     bne lbl_fn_804D25D4_00004898
     addi r3, r24, 0x4fc
     li r4, 0x5
-    bl fn_804D16A0
+    bl net_friend_setErrorCode
     mr r3, r24
     li r4, 0x0
     bl fn_804D6040
@@ -2426,7 +2426,7 @@ lbl_fn_804D25D4_00001BEC:
     bl shockwave_freeEmitter
     addi r3, r24, 0x4fc
     li r4, 0x7
-    bl fn_804D16A0
+    bl net_friend_setErrorCode
     bl net_getFriendManager
     bl fn_804D6028
     bl fn_804D60E8
@@ -2536,7 +2536,7 @@ lbl_fn_804D25D4_00001DD0:
     bl fn_80509A9C
     addi r3, r24, 0x4fc
     li r4, 0x9
-    bl fn_804D16A0
+    bl net_friend_setErrorCode
     addis r3, r24, 0x1
     li r0, 0x0
     stw r0, -0x6894(r3)
@@ -2555,7 +2555,7 @@ lbl_fn_804D25D4_00001DD0:
     bne lbl_fn_804D25D4_00004898
     addi r3, r24, 0x4fc
     li r4, 0xa
-    bl fn_804D16A0
+    bl net_friend_setErrorCode
     li r0, 0x0
     stw r0, 0x53c(r24)
     bl net_getFriendManager
@@ -2739,7 +2739,7 @@ lbl_fn_804D25D4_000020E8:
     stb r23, 0xd53(r3)
     addi r3, r24, 0x4fc
     li r4, 0xc
-    bl fn_804D16A0
+    bl net_friend_setErrorCode
     li r22, 0xff
     bl viewport_getFlag
     addis r3, r3, 0x1
@@ -2841,7 +2841,7 @@ lbl_fn_804D25D4_00002274:
     bl fn_804DBD0C
     addi r3, r24, 0x4fc
     li r4, 0xa
-    bl fn_804D16A0
+    bl net_friend_setErrorCode
     li r21, 0x1
 lbl_fn_804D25D4_000022C4:
     cmpwi r21, 0x0
@@ -2978,7 +2978,7 @@ lbl_fn_804D25D4_00002478:
     beq lbl_fn_804D25D4_000024CC
     addi r3, r24, 0x4fc
     li r4, 0xe
-    bl fn_804D16A0
+    bl net_friend_setErrorCode
     addis r3, r24, 0x1
     li r0, 0x78
     stw r0, -0x6660(r3)
@@ -3238,7 +3238,7 @@ lbl_fn_804D25D4_00002834:
     bl fn_804D8614
     addi r3, r24, 0x4fc
     li r4, 0xf
-    bl fn_804D16A0
+    bl net_friend_setErrorCode
     bl fn_804814F0
     cmpwi r3, 0x0
     beq lbl_fn_804D25D4_00004898
@@ -3275,7 +3275,7 @@ lbl_fn_804D25D4_000028B4:
     bl fn_804D8914
     addi r3, r24, 0x4fc
     li r4, 0x10
-    bl fn_804D16A0
+    bl net_friend_setErrorCode
     b lbl_fn_804D25D4_00004898
 lbl_fn_804D25D4_000028F0:
     mr r3, r24
@@ -3306,7 +3306,7 @@ lbl_fn_804D25D4_00002928:
     bl fn_804D97F4
     addi r3, r24, 0x4fc
     li r4, 0x11
-    bl fn_804D16A0
+    bl net_friend_setErrorCode
     b lbl_fn_804D25D4_00004898
 lbl_fn_804D25D4_00002964:
     mr r3, r24
@@ -3349,7 +3349,7 @@ lbl_fn_804D25D4_0000299C:
 lbl_fn_804D25D4_000029F4:
     addi r3, r24, 0x4fc
     li r4, 0xd
-    bl fn_804D16A0
+    bl net_friend_setErrorCode
     b lbl_fn_804D25D4_00004898
 lbl_fn_804D25D4_00002A04:
     mr r3, r24
@@ -3383,7 +3383,7 @@ lbl_fn_804D25D4_00002A5C:
     beq lbl_fn_804D25D4_00002AA8
     addi r3, r24, 0x4fc
     li r4, 0x12
-    bl fn_804D16A0
+    bl net_friend_setErrorCode
     bl viewport_getGlobalContext
     cmpwi r3, 0x0
     beq lbl_fn_804D25D4_00004898
@@ -3434,7 +3434,7 @@ lbl_fn_804D25D4_00002B24:
     beq lbl_fn_804D25D4_00002B58
     addi r3, r24, 0x4fc
     li r4, 0x13
-    bl fn_804D16A0
+    bl net_friend_setErrorCode
     bl fn_804D16D0
     li r4, 0x15
     bl net_queue_transitionState
@@ -3631,7 +3631,7 @@ lbl_fn_804D25D4_00002DF4:
 lbl_fn_804D25D4_00002E0C:
     addi r3, r24, 0x4fc
     li r4, 0x1a
-    bl fn_804D16A0
+    bl net_friend_setErrorCode
     addi r3, r1, 0x18
     li r4, 0x1010
     bl fn_804D6414
@@ -3719,7 +3719,7 @@ lbl_fn_804D25D4_00002F50:
     bl fn_804D6388
     addi r3, r24, 0x4fc
     li r4, 0x1b
-    bl fn_804D16A0
+    bl net_friend_setErrorCode
     b lbl_fn_804D25D4_00004898
     bl fn_8020A3E4
     li r4, 0x0
@@ -3791,7 +3791,7 @@ lbl_fn_804D25D4_00003054:
     bne lbl_fn_804D25D4_00004898
     addi r3, r24, 0x4fc
     li r4, 0x1d
-    bl fn_804D16A0
+    bl net_friend_setErrorCode
     bl fn_804D16D0
     li r4, 0x10
     bl net_queue_transitionState
@@ -3824,7 +3824,7 @@ lbl_fn_804D25D4_00003054:
     blt lbl_fn_804D25D4_00003110
     addi r3, r24, 0x4fc
     li r4, 0x1c
-    bl fn_804D16A0
+    bl net_friend_setErrorCode
     li r0, 0x0
     stw r0, 0x558(r24)
     mr r3, r24
@@ -3889,7 +3889,7 @@ lbl_fn_804D25D4_00003110:
     stw r3, 0x5b8(r24)
     addi r3, r24, 0x4fc
     stw r27, 0x534(r24)
-    bl fn_804D16A0
+    bl net_friend_setErrorCode
     lwz r0, 0x540(r24)
     stw r0, 0x544(r24)
     bl net_getFriendManager
@@ -4921,7 +4921,7 @@ lbl_fn_804D25D4_0000410C:
     bne lbl_fn_804D25D4_0000414C
     addi r3, r24, 0x4fc
     li r4, 0x1f
-    bl fn_804D16A0
+    bl net_friend_setErrorCode
     addis r3, r24, 0x1
     li r0, 0x1
     stb r0, -0x6618(r3)
@@ -4941,7 +4941,7 @@ lbl_fn_804D25D4_0000414C:
     b lbl_fn_804D25D4_00004898
     addi r3, r24, 0x4fc
     li r4, 0x21
-    bl fn_804D16A0
+    bl net_friend_setErrorCode
     bl fn_804D16D8
     li r4, 0x4
     bl fn_804B50C0
@@ -4994,7 +4994,7 @@ lbl_fn_804D25D4_00004200:
 lbl_fn_804D25D4_00004220:
     addi r3, r24, 0x4fc
     li r4, 0x22
-    bl fn_804D16A0
+    bl net_friend_setErrorCode
     b lbl_fn_804D25D4_00004898
     bl viewport_getGlobalContext
     cmpwi r3, 0x0
@@ -5304,7 +5304,7 @@ lbl_fn_804D25D4_00004690:
 lbl_fn_804D25D4_000046CC:
     mr r4, r25
     addi r3, r24, 0x4fc
-    bl fn_804D16A0
+    bl net_friend_setErrorCode
 lbl_fn_804D25D4_000046D8:
     mr r3, r24
     bl fn_804E9364
@@ -5336,7 +5336,7 @@ lbl_fn_804D25D4_00004734:
 lbl_fn_804D25D4_00004740:
     addi r3, r24, 0x4fc
     li r4, 0x24
-    bl fn_804D16A0
+    bl net_friend_setErrorCode
     b lbl_fn_804D25D4_00004898
     bl fn_804D6684
     bl fn_804D5FA4
@@ -5344,11 +5344,11 @@ lbl_fn_804D25D4_00004740:
     bne lbl_fn_804D25D4_00004898
     addi r3, r24, 0x4fc
     li r4, 0x25
-    bl fn_804D16A0
+    bl net_friend_setErrorCode
     b lbl_fn_804D25D4_00004898
     addi r3, r24, 0x4fc
     li r4, 0x27
-    bl fn_804D16A0
+    bl net_friend_setErrorCode
     bl fn_804D16D0
     cmpwi r3, 0x0
     beq lbl_fn_804D25D4_00004898
@@ -5358,7 +5358,7 @@ lbl_fn_804D25D4_00004740:
     bne lbl_fn_804D25D4_000047A8
     addi r3, r24, 0x4fc
     li r4, 0x27
-    bl fn_804D16A0
+    bl net_friend_setErrorCode
     b lbl_fn_804D25D4_00004898
 lbl_fn_804D25D4_000047A8:
     bl fn_804D16D0
@@ -5367,12 +5367,12 @@ lbl_fn_804D25D4_000047A8:
     bne lbl_fn_804D25D4_000047C8
     addi r3, r24, 0x4fc
     li r4, 0x28
-    bl fn_804D16A0
+    bl net_friend_setErrorCode
     b lbl_fn_804D25D4_00004898
 lbl_fn_804D25D4_000047C8:
     addi r3, r24, 0x4fc
     li r4, 0x26
-    bl fn_804D16A0
+    bl net_friend_setErrorCode
     b lbl_fn_804D25D4_00004898
     addi r3, r24, 0x4fc
     bl fn_804D5F08
@@ -5413,7 +5413,7 @@ lbl_fn_804D25D4_00004840:
 lbl_fn_804D25D4_00004860:
     addi r3, r24, 0x4fc
     li r4, 0x29
-    bl fn_804D16A0
+    bl net_friend_setErrorCode
     b lbl_fn_804D25D4_00004898
     bl fn_804D6684
     bl fn_804D5FA4
@@ -5421,7 +5421,7 @@ lbl_fn_804D25D4_00004860:
     bne lbl_fn_804D25D4_00004898
     addi r3, r24, 0x4fc
     li r4, 0x2a
-    bl fn_804D16A0
+    bl net_friend_setErrorCode
     bl fn_804D16D0
     li r4, 0x12
     bl net_queue_transitionState

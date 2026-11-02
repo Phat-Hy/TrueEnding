@@ -19,7 +19,7 @@ extern void fn_801EC158(void);
 extern void fn_801EC6C0(void);
 extern void fn_801EC784(void);
 extern void fn_801F04FC(void);
-extern void fn_801F0544(void);
+extern void math_evaluateCurve1D(void);
 extern void fn_801FE99C(void);
 extern void wcslen(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -551,7 +551,7 @@ lbl_fn_801F94F4_000006CC:
     add r3, r30, r28
     li r4, 0x0
     addi r3, r3, 0x130
-    bl fn_801F0544
+    bl math_evaluateCurve1D
     addi r29, r29, 0x1
     add r3, r30, r27
     cmpwi r29, 0x4
@@ -596,7 +596,7 @@ lbl_fn_801F94F4_0000077C:
     add r3, r30, r31
     li r4, 0x0
     addi r3, r3, 0x164
-    bl fn_801F0544
+    bl math_evaluateCurve1D
     addi r29, r29, 0x1
     add r3, r30, r28
     cmpwi r29, 0x4

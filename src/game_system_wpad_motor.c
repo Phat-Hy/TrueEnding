@@ -46,7 +46,7 @@ extern void fn_8011FB98(void);
 extern void magic_dispatchActionCommand(void);
 extern void fn_80123C7C(void);
 extern void player_evaluateStatusCondition(void);
-extern void fn_8012AFE8(void);
+extern void enemy_nav_destroyElement(void);
 extern void battle_applyStatusEffect(void);
 extern void fn_8017AD44(void);
 extern void fn_80182890(void);
@@ -1911,9 +1911,9 @@ lbl_world_Manager_draw_00001770:
 lbl_world_Manager_draw_000017F0:
     addic. r3, r25, 0x539c
     beq lbl_world_Manager_draw_0000180C
-    lis r4, fn_8012AFE8@ha
+    lis r4, enemy_nav_destroyElement@ha
     li r5, 0x240
-    addi r4, r4, fn_8012AFE8@l
+    addi r4, r4, enemy_nav_destroyElement@l
     li r6, 0x7
     bl __destroy_new_array
 lbl_world_Manager_draw_0000180C:

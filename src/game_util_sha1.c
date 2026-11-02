@@ -55,7 +55,7 @@ extern void net_getGlobalContext(void);
 extern void fn_8071C8E0(void);
 extern void fn_807214D0(void);
 extern void net_packetDebugLog(void);
-extern void fn_80724E90(void);
+extern void net_logWarning(void);
 extern void fn_80725200(void);
 extern void net_listInsertNode(void);
 
@@ -231,7 +231,7 @@ lbl_fn_8059F72C_00000184:
     addi r5, r3, 0x259
     li r4, 0x1ba
     crclr 6
-    bl fn_80724E90
+    bl net_logWarning
 lbl_fn_8059F72C_000001BC:
     cmpwi r25, 0x0
     bne lbl_fn_8059F72C_000001CC
@@ -860,7 +860,7 @@ lbl_fn_805A0028_00000A30:
     addi r3, r3, lbl_80762810@l
     addi r5, r3, 0x311
     crclr 6
-    bl fn_80724E90
+    bl net_logWarning
 lbl_fn_805A0028_00000A58:
     li r3, 0x0
     b lbl_fn_805A0028_00000A80
@@ -908,7 +908,7 @@ lbl_fn_805A0028_00000AB8:
     li r4, 0x348
     addi r5, r3, 0x364
     crclr 6
-    bl fn_80724E90
+    bl net_logWarning
 lbl_fn_805A0028_00000AFC:
     li r30, 0x0
     b lbl_fn_805A0028_00000B24
@@ -990,7 +990,7 @@ lbl_fn_805A01DC_00000BE4:
     addi r3, r3, lbl_80762810@l
     addi r5, r3, 0x3b9
     crclr 6
-    bl fn_80724E90
+    bl net_logWarning
 lbl_fn_805A01DC_00000C0C:
     li r3, 0x0
     b lbl_fn_805A01DC_00000C34
@@ -1038,7 +1038,7 @@ lbl_fn_805A01DC_00000C6C:
     li r4, 0x37b
     addi r5, r3, 0x414
     crclr 6
-    bl fn_80724E90
+    bl net_logWarning
 lbl_fn_805A01DC_00000CB0:
     li r30, 0x0
     b lbl_fn_805A01DC_00000CD8
@@ -1232,7 +1232,7 @@ lbl_fn_805A03A4_00000F04:
     addi r5, r3, 0x674
     li r7, 0x3
     crclr 6
-    bl fn_80724E90
+    bl net_logWarning
     li r3, 0xa
     b lbl_fn_805A03A4_00001C14
 lbl_fn_805A03A4_00000F34:
@@ -1408,7 +1408,7 @@ lbl_fn_805A03A4_00001158:
     addi r3, r3, lbl_80796E34@l
     li r4, 0x85
     crclr 6
-    bl fn_80724E90
+    bl net_logWarning
 lbl_fn_805A03A4_000011A4:
     mr r3, r25
     li r4, 0x0
@@ -1494,7 +1494,7 @@ lbl_fn_805A03A4_00001298:
     li r4, 0x4c4
     addi r5, r3, 0x6c6
     crclr 6
-    bl fn_80724E90
+    bl net_logWarning
 lbl_fn_805A03A4_000012CC:
     bl net_getGlobalContext
     addi r3, r3, 0x354
@@ -1620,7 +1620,7 @@ lbl_fn_805A03A4_00001438:
     addi r3, r3, lbl_80796E88@l
     li r4, 0x85
     crclr 6
-    bl fn_80724E90
+    bl net_logWarning
 lbl_fn_805A03A4_00001484:
     mr r3, r29
     li r4, 0x0
@@ -1706,7 +1706,7 @@ lbl_fn_805A03A4_00001578:
     li r4, 0x4d8
     addi r5, r3, 0x706
     crclr 6
-    bl fn_80724E90
+    bl net_logWarning
 lbl_fn_805A03A4_000015AC:
     bl net_getGlobalContext
     addi r3, r3, 0x354
@@ -1832,7 +1832,7 @@ lbl_fn_805A03A4_00001718:
     addi r3, r3, lbl_80796EDC@l
     li r4, 0x85
     crclr 6
-    bl fn_80724E90
+    bl net_logWarning
 lbl_fn_805A03A4_00001764:
     mr r3, r29
     li r4, 0x0
@@ -1918,7 +1918,7 @@ lbl_fn_805A03A4_00001858:
     li r4, 0x4ec
     addi r5, r3, 0x747
     crclr 6
-    bl fn_80724E90
+    bl net_logWarning
 lbl_fn_805A03A4_0000188C:
     bl net_getGlobalContext
     addi r3, r3, 0x354

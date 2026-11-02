@@ -52,7 +52,7 @@ extern void fn_803CF734(void);
 extern void fn_803CFC58(void);
 extern void fn_80453DBC(void);
 extern void fn_804741C0(void);
-extern void fn_804786F8(void);
+extern void cutscene_cam_getTargetIndex(void);
 extern void fn_8047C7FC(void);
 extern void fn_804AB79C(void);
 extern void fn_804ABF20(void);
@@ -537,7 +537,7 @@ asm void fn_8052C684(void)
 {
     nofralloc
     addi r3, r3, 0x5c
-    b fn_804786F8
+    b cutscene_cam_getTargetIndex
 }
 
 asm void fn_8052C68C(void)

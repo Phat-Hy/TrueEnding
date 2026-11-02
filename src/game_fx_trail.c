@@ -31,7 +31,7 @@ extern void hurtbox_dispatchHitEvent(void);
 extern void phys_scaleGravity(void);
 extern void equip_getGlobalManager(void);
 extern void magic_getOffset6C(void);
-extern void fn_8012AFE8(void);
+extern void enemy_nav_destroyElement(void);
 extern void npc_updateDialogueTarget(void);
 extern void fn_80139F24(void);
 extern void fn_80139F3C(void);
@@ -1570,7 +1570,7 @@ lbl_fn_8028D5C8_000013DC:
     li r4, -0x1
     addi r0, r5, 0x1
     stw r0, 0x162c(r30)
-    bl fn_8012AFE8
+    bl enemy_nav_destroyElement
 lbl_fn_8028D5C8_00001574:
     lwz r0, 0x2dc(r30)
     cmpwi r0, 0x13f

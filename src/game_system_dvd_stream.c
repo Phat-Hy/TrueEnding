@@ -27,7 +27,7 @@ extern void actor_findSpawnTemplate(void);
 extern void actor_spawnActorWithId(void);
 extern void fn_80117914(void);
 extern void fn_80119ECC(void);
-extern void fn_8012AFE8(void);
+extern void enemy_nav_destroyElement(void);
 extern void saveSlot_readSummary(void);
 extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
@@ -582,9 +582,9 @@ lbl_fn_803775DC_0000062C:
 lbl_fn_803775DC_0000067C:
     addic. r3, r22, 0x539c
     beq lbl_fn_803775DC_00000698
-    lis r4, fn_8012AFE8@ha
+    lis r4, enemy_nav_destroyElement@ha
     li r5, 0x240
-    addi r4, r4, fn_8012AFE8@l
+    addi r4, r4, enemy_nav_destroyElement@l
     li r6, 0x7
     bl __destroy_new_array
 lbl_fn_803775DC_00000698:

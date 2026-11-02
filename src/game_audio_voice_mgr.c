@@ -26,7 +26,7 @@ extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
 extern void world_setGlobalFlag(void);
 extern void world_setLocalFlag(void);
-extern void fn_804786F8(void);
+extern void cutscene_cam_getTargetIndex(void);
 extern void fn_805BDCC0(void);
 extern void fn_805BF208(void);
 extern void gx_evaluateVector3f(void);
@@ -1197,7 +1197,7 @@ lbl_fn_803012AC_00001010:
     slwi r0, r0, 3
     add r3, r30, r0
     addi r3, r3, 0x1674
-    bl fn_804786F8
+    bl cutscene_cam_getTargetIndex
     li r4, 0x0
     bl fn_805BDCC0
     lwz r10, lbl_8087F430

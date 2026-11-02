@@ -26,7 +26,7 @@ extern void fn_8011B018(void);
 extern void fn_8011B3D8(void);
 extern void fn_8011B570(void);
 extern void fn_8011BBD0(void);
-extern void fn_8012AFE8(void);
+extern void enemy_nav_destroyElement(void);
 extern void fn_801F4F84(void);
 extern void thread_findQueueTaskByName(void);
 extern void thread_findAndNotify(void);
@@ -1734,9 +1734,9 @@ lbl_fn_8011999C_0000166C:
 lbl_fn_8011999C_000016A0:
     addic. r3, r29, 0x539c
     beq lbl_fn_8011999C_000016BC
-    lis r4, fn_8012AFE8@ha
+    lis r4, enemy_nav_destroyElement@ha
     li r5, 0x240
-    addi r4, r4, fn_8012AFE8@l
+    addi r4, r4, enemy_nav_destroyElement@l
     li r6, 0x7
     bl __destroy_new_array
 lbl_fn_8011999C_000016BC:

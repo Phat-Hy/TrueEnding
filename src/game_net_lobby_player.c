@@ -44,7 +44,7 @@ extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_getName(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void shockwave_freeEmitter(void);
-extern void fn_804786F8(void);
+extern void cutscene_cam_getTargetIndex(void);
 extern void fn_80491418(void);
 extern void fn_80491440(void);
 extern void fn_8049982C(void);
@@ -1309,7 +1309,7 @@ lbl_fn_8049DEE4_0000102C:
     lfs f31, lbl_80887164
 lbl_fn_8049DEE4_00001030:
     addi r3, r27, 0x68
-    bl fn_804786F8
+    bl cutscene_cam_getTargetIndex
     lwz r4, lbl_8087F430
     stw r3, 0x960(r4)
     stfs f31, 0x968(r4)

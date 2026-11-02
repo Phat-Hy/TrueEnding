@@ -123,7 +123,7 @@ void atn_LoadXsca_constructor(void);
 void atn_LoadXsca_destructor(void);
 void atn_LH_Xsca_onNotify(void);
 void fn_80478518(void);
-void fn_804786F8(void);
+void cutscene_cam_getTargetIndex(void);
 void fn_80478714(void);
 void fn_804787CC(void);
 void fn_804787EC(void);
@@ -1249,15 +1249,15 @@ lbl_fn_80478518_00000EA8:
     blr
 }
 
-asm void fn_804786F8(void)
+asm void cutscene_cam_getTargetIndex(void)
 {
     nofralloc
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_804786F8_00000EE0
+    beq lbl_cutscene_cam_getTargetIndex_00000EE0
     lwz r3, 0x5c(r3)
     blr
-lbl_fn_804786F8_00000EE0:
+lbl_cutscene_cam_getTargetIndex_00000EE0:
     li r3, 0x0
     blr
 }

@@ -54,7 +54,7 @@ void fn_8012AC40(void);
 void fn_8012AC64(void);
 void fn_8012AD20(void);
 void fn_8012AE50(void);
-void fn_8012AFE8(void);
+void enemy_nav_destroyElement(void);
 void fn_8012B028(void);
 void fn_8012B0B0(void);
 void fn_8012B3A8(void);
@@ -360,7 +360,7 @@ asm void fn_8012AE50(void)
     blr
 }
 
-asm void fn_8012AFE8(void)
+asm void enemy_nav_destroyElement(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -369,11 +369,11 @@ asm void fn_8012AFE8(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    beq lbl_fn_8012AFE8_00000440
+    beq lbl_enemy_nav_destroyElement_00000440
     cmpwi r4, 0x0
-    ble lbl_fn_8012AFE8_00000440
+    ble lbl_enemy_nav_destroyElement_00000440
     bl dtor_80084684
-lbl_fn_8012AFE8_00000440:
+lbl_enemy_nav_destroyElement_00000440:
     mr r3, r31
     lwz r31, 0xc(r1)
     lwz r0, 0x14(r1)

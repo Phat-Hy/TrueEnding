@@ -80,7 +80,7 @@ void fn_806BBBA0(void);
 void net_logSessionStatus(void);
 void fn_806BC010(void);
 void fn_806BC4C0(void);
-void fn_806BC860(void);
+void dwc_registerMatchStatus(void);
 
 asm void pad_03_806BAC78_text(void)
 {
@@ -1903,7 +1903,7 @@ lbl_fn_806BC4C0_000019D8:
     lwz r4, 0x0(r27)
     lwz r5, 0x4(r27)
     lhz r6, 0xc(r27)
-    bl fn_806BC860
+    bl dwc_registerMatchStatus
     lwz r4, lbl_80860898@l(r31)
     li r0, 0x0
     cmpwi r3, 0x0
@@ -2019,7 +2019,7 @@ lbl_fn_806BC4C0_00001BC8:
     blr
 }
 
-asm void fn_806BC860(void)
+asm void dwc_registerMatchStatus(void)
 {
     nofralloc
     stwu r1, -0x570(r1)
@@ -2039,10 +2039,10 @@ asm void fn_806BC860(void)
     li r4, 0x1
     bl fn_806B1680
     cmpwi r3, 0x0
-    bne lbl_fn_806BC860_00001C38
+    bne lbl_dwc_registerMatchStatus_00001C38
     li r0, 0x0
-    b lbl_fn_806BC860_00001C90
-lbl_fn_806BC860_00001C38:
+    b lbl_dwc_registerMatchStatus_00001C90
+lbl_dwc_registerMatchStatus_00001C38:
     lis r3, lbl_80860898@ha
     li r4, 0x0
     lwz r5, lbl_80860898@l(r3)
@@ -2050,28 +2050,28 @@ lbl_fn_806BC860_00001C38:
     mr r3, r5
     mtctr r0
     cmpwi r0, 0x0
-    ble lbl_fn_806BC860_00001C80
-lbl_fn_806BC860_00001C58:
+    ble lbl_dwc_registerMatchStatus_00001C80
+lbl_dwc_registerMatchStatus_00001C58:
     lwz r0, 0x60(r3)
     cmpw r26, r0
-    bne lbl_fn_806BC860_00001C74
+    bne lbl_dwc_registerMatchStatus_00001C74
     mulli r0, r4, 0x30
     add r3, r5, r0
     addi r3, r3, 0x60
-    b lbl_fn_806BC860_00001C84
-lbl_fn_806BC860_00001C74:
+    b lbl_dwc_registerMatchStatus_00001C84
+lbl_dwc_registerMatchStatus_00001C74:
     addi r3, r3, 0x30
     addi r4, r4, 0x1
-    bdnz lbl_fn_806BC860_00001C58
-lbl_fn_806BC860_00001C80:
+    bdnz lbl_dwc_registerMatchStatus_00001C58
+lbl_dwc_registerMatchStatus_00001C80:
     li r3, 0x0
-lbl_fn_806BC860_00001C84:
+lbl_dwc_registerMatchStatus_00001C84:
     neg r0, r3
     or r0, r0, r3
     srwi r0, r0, 31
-lbl_fn_806BC860_00001C90:
+lbl_dwc_registerMatchStatus_00001C90:
     cmpwi r0, 0x0
-    beq lbl_fn_806BC860_00001DC8
+    beq lbl_dwc_registerMatchStatus_00001DC8
     mr r5, r26
     addi r4, r31, 0xf18
     li r3, 0x4
@@ -2084,36 +2084,36 @@ lbl_fn_806BC860_00001C90:
     mr r3, r5
     mtctr r0
     cmpwi r0, 0x0
-    ble lbl_fn_806BC860_00001CF8
+    ble lbl_dwc_registerMatchStatus_00001CF8
     nop
-lbl_fn_806BC860_00001CD0:
+lbl_dwc_registerMatchStatus_00001CD0:
     lwz r0, 0x60(r3)
     cmpw r26, r0
-    bne lbl_fn_806BC860_00001CEC
+    bne lbl_dwc_registerMatchStatus_00001CEC
     mulli r0, r4, 0x30
     add r3, r5, r0
     addi r22, r3, 0x60
-    b lbl_fn_806BC860_00001CFC
-lbl_fn_806BC860_00001CEC:
+    b lbl_dwc_registerMatchStatus_00001CFC
+lbl_dwc_registerMatchStatus_00001CEC:
     addi r3, r3, 0x30
     addi r4, r4, 0x1
-    bdnz lbl_fn_806BC860_00001CD0
-lbl_fn_806BC860_00001CF8:
+    bdnz lbl_dwc_registerMatchStatus_00001CD0
+lbl_dwc_registerMatchStatus_00001CF8:
     li r22, 0x0
-lbl_fn_806BC860_00001CFC:
+lbl_dwc_registerMatchStatus_00001CFC:
     cmpwi r29, 0x0
     mr r23, r30
-    beq lbl_fn_806BC860_00001D24
+    beq lbl_dwc_registerMatchStatus_00001D24
     cmpwi r30, 0x0
-    beq lbl_fn_806BC860_00001D24
+    beq lbl_dwc_registerMatchStatus_00001D24
     mr r4, r29
     addi r3, r1, 0xb0
     slwi r5, r30, 2
     bl fn_806A9CA0
-    b lbl_fn_806BC860_00001D28
-lbl_fn_806BC860_00001D24:
+    b lbl_dwc_registerMatchStatus_00001D28
+lbl_dwc_registerMatchStatus_00001D24:
     li r23, 0x0
-lbl_fn_806BC860_00001D28:
+lbl_dwc_registerMatchStatus_00001D28:
     addi r3, r1, 0x9c
     addi r4, r31, 0xf30
     bl strcpy
@@ -2153,15 +2153,15 @@ lbl_fn_806BC860_00001D28:
     li r7, 0x0
     bl fn_806CE750
     li r19, 0x0
-    b lbl_fn_806BC860_00002024
-lbl_fn_806BC860_00001DC8:
+    b lbl_dwc_registerMatchStatus_00002024
+lbl_dwc_registerMatchStatus_00001DC8:
     lis r22, lbl_80860898@ha
     mr r4, r26
     lwz r3, lbl_80860898@l(r22)
     lwz r3, 0x0(r3)
     bl fn_806DB310
     cmpwi r3, 0x0
-    beq lbl_fn_806BC860_00001EC0
+    beq lbl_dwc_registerMatchStatus_00001EC0
     mr r5, r26
     addi r4, r31, 0xf68
     li r19, 0x0
@@ -2169,16 +2169,16 @@ lbl_fn_806BC860_00001DC8:
     crclr 6
     bl net_formatLog
     cmpwi r29, 0x0
-    beq lbl_fn_806BC860_00001E24
+    beq lbl_dwc_registerMatchStatus_00001E24
     cmpwi r30, 0x0
-    beq lbl_fn_806BC860_00001E24
+    beq lbl_dwc_registerMatchStatus_00001E24
     mr r3, r29
     slwi r4, r30, 2
     addi r5, r1, 0x330
     li r6, 0x200
     bl fn_806A6CA0
     mr r19, r3
-lbl_fn_806BC860_00001E24:
+lbl_dwc_registerMatchStatus_00001E24:
     lis r3, lbl_80860898@ha
     addi r23, r1, 0x330
     li r22, 0x0
@@ -2217,40 +2217,40 @@ lbl_fn_806BC860_00001E24:
     li r3, 0x40
     crclr 6
     bl net_formatLog
-    b lbl_fn_806BC860_00002024
-lbl_fn_806BC860_00001EC0:
+    b lbl_dwc_registerMatchStatus_00002024
+lbl_dwc_registerMatchStatus_00001EC0:
     cmpwi r27, 0x0
-    bne lbl_fn_806BC860_00001F2C
+    bne lbl_dwc_registerMatchStatus_00001F2C
     lwz r5, lbl_80860898@l(r22)
     li r3, 0x0
     lwz r0, 0x58(r5)
     mr r4, r5
     mtctr r0
     cmpwi r0, 0x0
-    ble lbl_fn_806BC860_00001F10
+    ble lbl_dwc_registerMatchStatus_00001F10
     nop
-lbl_fn_806BC860_00001EE8:
+lbl_dwc_registerMatchStatus_00001EE8:
     lwz r0, 0x60(r4)
     cmpw r26, r0
-    bne lbl_fn_806BC860_00001F04
+    bne lbl_dwc_registerMatchStatus_00001F04
     mulli r0, r3, 0x30
     add r3, r5, r0
     addi r3, r3, 0x60
-    b lbl_fn_806BC860_00001F14
-lbl_fn_806BC860_00001F04:
+    b lbl_dwc_registerMatchStatus_00001F14
+lbl_dwc_registerMatchStatus_00001F04:
     addi r4, r4, 0x30
     addi r3, r3, 0x1
-    bdnz lbl_fn_806BC860_00001EE8
-lbl_fn_806BC860_00001F10:
+    bdnz lbl_dwc_registerMatchStatus_00001EE8
+lbl_dwc_registerMatchStatus_00001F10:
     li r3, 0x0
-lbl_fn_806BC860_00001F14:
+lbl_dwc_registerMatchStatus_00001F14:
     lwz r27, 0x4(r3)
     addi r4, r31, 0xfd0
     lhz r28, 0xc(r3)
     li r3, 0x4
     crclr 6
     bl net_formatLog
-lbl_fn_806BC860_00001F2C:
+lbl_dwc_registerMatchStatus_00001F2C:
     mr r5, r27
     mr r6, r28
     addi r4, r31, 0xff0
@@ -2259,17 +2259,17 @@ lbl_fn_806BC860_00001F2C:
     bl net_formatLog
     cmpwi r29, 0x0
     mr r20, r30
-    beq lbl_fn_806BC860_00001F6C
+    beq lbl_dwc_registerMatchStatus_00001F6C
     cmpwi r30, 0x0
-    beq lbl_fn_806BC860_00001F6C
+    beq lbl_dwc_registerMatchStatus_00001F6C
     mr r4, r29
     addi r3, r1, 0x1c
     slwi r5, r30, 2
     bl fn_806A9CA0
-    b lbl_fn_806BC860_00001F70
-lbl_fn_806BC860_00001F6C:
+    b lbl_dwc_registerMatchStatus_00001F70
+lbl_dwc_registerMatchStatus_00001F6C:
     li r20, 0x0
-lbl_fn_806BC860_00001F70:
+lbl_dwc_registerMatchStatus_00001F70:
     addi r3, r1, 0x8
     addi r4, r31, 0xf30
     bl strcpy
@@ -2315,16 +2315,16 @@ lbl_fn_806BC860_00001F70:
     bl fn_806FFCA0
     cmpwi r3, 0x2
     mr r19, r3
-lbl_fn_806BC860_00002024:
+lbl_dwc_registerMatchStatus_00002024:
     cmplwi r25, 0x2
-    beq lbl_fn_806BC860_00002044
+    beq lbl_dwc_registerMatchStatus_00002044
     cmplwi r25, 0x6
-    beq lbl_fn_806BC860_00002044
+    beq lbl_dwc_registerMatchStatus_00002044
     addi r0, r25, 0xf8
     clrlwi r0, r0, 24
     cmplwi r0, 0x1
-    bgt lbl_fn_806BC860_000020A0
-lbl_fn_806BC860_00002044:
+    bgt lbl_dwc_registerMatchStatus_000020A0
+lbl_dwc_registerMatchStatus_00002044:
     lis r31, lbl_80860898@ha
     lwz r3, lbl_80860898@l(r31)
     stb r25, 0x808(r3)
@@ -2341,14 +2341,14 @@ lbl_fn_806BC860_00002044:
     cmpwi r29, 0x0
     stw r4, 0x89c(r5)
     stw r3, 0x898(r5)
-    beq lbl_fn_806BC860_000020A0
+    beq lbl_dwc_registerMatchStatus_000020A0
     cmpwi r30, 0x0
-    beq lbl_fn_806BC860_000020A0
+    beq lbl_dwc_registerMatchStatus_000020A0
     addi r3, r5, 0x810
     mr r4, r29
     slwi r5, r30, 2
     bl fn_806A9CA0
-lbl_fn_806BC860_000020A0:
+lbl_dwc_registerMatchStatus_000020A0:
     addi r11, r1, 0x570
     mr r3, r19
     bl _restgpr_19

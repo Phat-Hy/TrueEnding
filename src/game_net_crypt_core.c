@@ -18,7 +18,7 @@ extern void str_findChar(void);
 extern void wcs_vformat(void);
 extern void actor_spawnActorWithId(void);
 extern void magic_dispatchActionCommand(void);
-extern void fn_801F0544(void);
+extern void math_evaluateCurve1D(void);
 extern void save_parseSlotHeader(void);
 extern void save_formatSlotMetadata(void);
 extern void save_findSlotTask(void);
@@ -822,7 +822,7 @@ lbl_fn_804B1528_00000A58:
     bl fn_801FEC08
     li r4, 0x0
     addi r3, r3, 0x4
-    bl fn_801F0544
+    bl math_evaluateCurve1D
     lwz r4, 0x64(r31)
     fadds f31, f31, f1
     addi r3, r30, 0x413
