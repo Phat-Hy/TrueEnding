@@ -53,7 +53,7 @@ extern void fn_80116E6C(void);
 extern void equip_getGlobalManager(void);
 extern void magic_getOffset6C(void);
 extern void magic_getOffset244(void);
-extern void fn_80124C6C(void);
+extern void player_applyStatusEffect(void);
 extern void fn_80139ED0(void);
 extern void fn_80139EFC(void);
 extern void fn_80139F4C(void);
@@ -1745,7 +1745,7 @@ lbl_fn_803D2A6C_000014EC:
     mr r4, r3
     addi r3, r1, 0x258
     li r5, 0x0
-    bl fn_80124C6C
+    bl player_applyStatusEffect
     addi r3, r1, 0x3e8
     addi r4, r1, 0x258
     bl fn_803D7000
@@ -2628,7 +2628,7 @@ lbl_fn_803D2A6C_000021EC:
     mr r4, r3
     addi r3, r1, 0x1c8
     li r5, 0x0
-    bl fn_80124C6C
+    bl player_applyStatusEffect
     addi r3, r1, 0x3a8
     addi r4, r1, 0x1c8
     bl fn_803D7000
@@ -2645,7 +2645,7 @@ lbl_fn_803D2A6C_0000222C:
     mr r4, r3
     addi r3, r1, 0x1b8
     li r5, 0x8
-    bl fn_80124C6C
+    bl player_applyStatusEffect
     addi r3, r1, 0x3a8
     addi r4, r1, 0x1b8
     bl fn_803D7000

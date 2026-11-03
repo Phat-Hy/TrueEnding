@@ -107,7 +107,7 @@ extern u32 lbl_80881B7C;
 void fn_8017B3C0(void);
 void fn_8017B434(void);
 void fn_8017BC4C(void *p);
-void fn_8017BC58(void);
+void map_area_isNavigable(void);
 void fn_8017BDDC(void);
 void fn_8017C4C4(void);
 void fn_8017C52C(void);
@@ -732,7 +732,7 @@ void fn_8017BC4C(void *p)
     *(u32 *)((u8 *)p + 0x140c) = -1;
 }
 
-asm void fn_8017BC58(void)
+asm void map_area_isNavigable(void)
 {
     nofralloc
     lwz r7, 0x38(r3)
@@ -741,109 +741,109 @@ asm void fn_8017BC58(void)
     li r6, 0x0
     rlwinm r0, r7, 0, 29, 29
     cmplwi r0, 0x4
-    beq lbl_fn_8017BC58_000008C4
+    beq lbl_map_area_isNavigable_000008C4
     clrlwi r0, r7, 31
     cmplwi r0, 0x1
-    beq lbl_fn_8017BC58_000008C4
+    beq lbl_map_area_isNavigable_000008C4
     li r6, 0x1
-lbl_fn_8017BC58_000008C4:
+lbl_map_area_isNavigable_000008C4:
     cmpwi r6, 0x0
-    beq lbl_fn_8017BC58_000008E0
+    beq lbl_map_area_isNavigable_000008E0
     lwz r0, 0x7e0(r3)
     rlwinm r0, r0, 0, 26, 26
     cmplwi r0, 0x20
-    beq lbl_fn_8017BC58_000008E0
+    beq lbl_map_area_isNavigable_000008E0
     li r4, 0x1
-lbl_fn_8017BC58_000008E0:
+lbl_map_area_isNavigable_000008E0:
     cmpwi r4, 0x0
-    beq lbl_fn_8017BC58_00000914
+    beq lbl_map_area_isNavigable_00000914
     lwz r0, 0x55c(r3)
     li r4, 0x0
     cmpwi r0, 0x6
-    bne lbl_fn_8017BC58_00000908
+    bne lbl_map_area_isNavigable_00000908
     lwz r0, 0x560(r3)
     cmpwi r0, 0x1c
-    bne lbl_fn_8017BC58_00000908
+    bne lbl_map_area_isNavigable_00000908
     li r4, 0x1
-lbl_fn_8017BC58_00000908:
+lbl_map_area_isNavigable_00000908:
     cmpwi r4, 0x0
-    bne lbl_fn_8017BC58_00000914
+    bne lbl_map_area_isNavigable_00000914
     li r5, 0x1
-lbl_fn_8017BC58_00000914:
+lbl_map_area_isNavigable_00000914:
     cmpwi r5, 0x0
-    bne lbl_fn_8017BC58_00000924
+    bne lbl_map_area_isNavigable_00000924
     li r3, 0x0
     blr
-lbl_fn_8017BC58_00000924:
+lbl_map_area_isNavigable_00000924:
     lwz r0, 0x958(r3)
     rlwinm r0, r0, 0, 30, 30
     cmplwi r0, 0x2
-    bne lbl_fn_8017BC58_0000093C
+    bne lbl_map_area_isNavigable_0000093C
     li r3, 0x0
     blr
-lbl_fn_8017BC58_0000093C:
+lbl_map_area_isNavigable_0000093C:
     lwz r0, 0x55c(r3)
     cmpwi r0, 0x6
-    bne lbl_fn_8017BC58_00000A14
+    bne lbl_map_area_isNavigable_00000A14
     lwz r0, 0x560(r3)
     cmpwi r0, 0x3b
-    beq lbl_fn_8017BC58_00000A0C
-    bge lbl_fn_8017BC58_000009BC
+    beq lbl_map_area_isNavigable_00000A0C
+    bge lbl_map_area_isNavigable_000009BC
     cmpwi r0, 0x23
-    bge lbl_fn_8017BC58_0000098C
+    bge lbl_map_area_isNavigable_0000098C
     cmpwi r0, 0x1d
-    bge lbl_fn_8017BC58_00000980
+    bge lbl_map_area_isNavigable_00000980
     cmpwi r0, 0x17
-    beq lbl_fn_8017BC58_00000A0C
-    blt lbl_fn_8017BC58_00000A14
+    beq lbl_map_area_isNavigable_00000A0C
+    blt lbl_map_area_isNavigable_00000A14
     cmpwi r0, 0x1b
-    bge lbl_fn_8017BC58_00000A0C
-    b lbl_fn_8017BC58_00000A14
-lbl_fn_8017BC58_00000980:
+    bge lbl_map_area_isNavigable_00000A0C
+    b lbl_map_area_isNavigable_00000A14
+lbl_map_area_isNavigable_00000980:
     cmpwi r0, 0x1f
-    beq lbl_fn_8017BC58_00000A0C
-    b lbl_fn_8017BC58_00000A14
-lbl_fn_8017BC58_0000098C:
+    beq lbl_map_area_isNavigable_00000A0C
+    b lbl_map_area_isNavigable_00000A14
+lbl_map_area_isNavigable_0000098C:
     cmpwi r0, 0x34
-    bge lbl_fn_8017BC58_000009A8
+    bge lbl_map_area_isNavigable_000009A8
     cmpwi r0, 0x30
-    bge lbl_fn_8017BC58_00000A0C
+    bge lbl_map_area_isNavigable_00000A0C
     cmpwi r0, 0x25
-    bge lbl_fn_8017BC58_00000A14
-    b lbl_fn_8017BC58_00000A0C
-lbl_fn_8017BC58_000009A8:
+    bge lbl_map_area_isNavigable_00000A14
+    b lbl_map_area_isNavigable_00000A0C
+lbl_map_area_isNavigable_000009A8:
     cmpwi r0, 0x38
-    bge lbl_fn_8017BC58_00000A14
+    bge lbl_map_area_isNavigable_00000A14
     cmpwi r0, 0x36
-    bge lbl_fn_8017BC58_00000A0C
-    b lbl_fn_8017BC58_00000A14
-lbl_fn_8017BC58_000009BC:
+    bge lbl_map_area_isNavigable_00000A0C
+    b lbl_map_area_isNavigable_00000A14
+lbl_map_area_isNavigable_000009BC:
     cmpwi r0, 0x71
-    beq lbl_fn_8017BC58_00000A0C
-    bge lbl_fn_8017BC58_000009EC
+    beq lbl_map_area_isNavigable_00000A0C
+    bge lbl_map_area_isNavigable_000009EC
     cmpwi r0, 0x5a
-    beq lbl_fn_8017BC58_00000A0C
-    bge lbl_fn_8017BC58_000009E0
+    beq lbl_map_area_isNavigable_00000A0C
+    bge lbl_map_area_isNavigable_000009E0
     cmpwi r0, 0x3f
-    beq lbl_fn_8017BC58_00000A0C
-    b lbl_fn_8017BC58_00000A14
-lbl_fn_8017BC58_000009E0:
+    beq lbl_map_area_isNavigable_00000A0C
+    b lbl_map_area_isNavigable_00000A14
+lbl_map_area_isNavigable_000009E0:
     cmpwi r0, 0x6a
-    beq lbl_fn_8017BC58_00000A0C
-    b lbl_fn_8017BC58_00000A14
-lbl_fn_8017BC58_000009EC:
+    beq lbl_map_area_isNavigable_00000A0C
+    b lbl_map_area_isNavigable_00000A14
+lbl_map_area_isNavigable_000009EC:
     cmpwi r0, 0x8e
-    beq lbl_fn_8017BC58_00000A0C
-    bge lbl_fn_8017BC58_00000A14
+    beq lbl_map_area_isNavigable_00000A0C
+    bge lbl_map_area_isNavigable_00000A14
     cmpwi r0, 0x80
-    bge lbl_fn_8017BC58_00000A14
+    bge lbl_map_area_isNavigable_00000A14
     cmpwi r0, 0x7b
-    bge lbl_fn_8017BC58_00000A0C
-    b lbl_fn_8017BC58_00000A14
-lbl_fn_8017BC58_00000A0C:
+    bge lbl_map_area_isNavigable_00000A0C
+    b lbl_map_area_isNavigable_00000A14
+lbl_map_area_isNavigable_00000A0C:
     li r3, 0x0
     blr
-lbl_fn_8017BC58_00000A14:
+lbl_map_area_isNavigable_00000A14:
     li r3, 0x1
     blr
 }

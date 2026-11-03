@@ -4391,7 +4391,7 @@
 .endfn fn_803EC0F8
 
 # .text:0x3E00 | 0x803EC16C | size: 0x208
-.fn fn_803EC16C, global
+.fn dungeon_spawnEnemyWave, global
 /* 803EC16C 003E67CC  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 803EC170 003E67D0  7C 08 02 A6 */	mflr r0
 /* 803EC174 003E67D4  3C C0 10 62 */	lis r6, 0x1062
@@ -4524,7 +4524,7 @@
 /* 803EC368 003E69C8  7C 08 03 A6 */	mtlr r0
 /* 803EC36C 003E69CC  38 21 00 10 */	addi r1, r1, 0x10
 /* 803EC370 003E69D0  4E 80 00 20 */	blr
-.endfn fn_803EC16C
+.endfn dungeon_spawnEnemyWave
 
 # .text:0x4008 | 0x803EC374 | size: 0x1F4
 .fn fn_803EC374, global

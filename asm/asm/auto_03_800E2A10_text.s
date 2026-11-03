@@ -3835,16 +3835,16 @@
 .endfn fn_800E589C
 
 # .text:0x36EC | 0x800E60FC | size: 0x8
-.fn fn_800E60FC, global
+.fn decal_defaultCallback, global
 /* 800E60FC 000E075C  38 60 00 00 */	li r3, 0x0
 /* 800E6100 000E0760  4E 80 00 20 */	blr
-.endfn fn_800E60FC
+.endfn decal_defaultCallback
 
 # .text:0x36F4 | 0x800E6104 | size: 0x8
-.fn fn_800E6104, global
+.fn decal_getTargetActor, global
 /* 800E6104 000E0764  80 63 00 00 */	lwz r3, 0x0(r3)
 /* 800E6108 000E0768  4E 80 00 20 */	blr
-.endfn fn_800E6104
+.endfn decal_getTargetActor
 
 # .text:0x36FC | 0x800E610C | size: 0x1A0
 .fn fn_800E610C, global

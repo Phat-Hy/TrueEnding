@@ -116,8 +116,8 @@ extern u32 lbl_80881374;
 
 /* Function declarations */
 void fn_800E589C(void);
-u32 fn_800E60FC(void);
-void *fn_800E6104(void *obj);
+u32 decal_defaultCallback(void);
+void *decal_getTargetActor(void *obj);
 void fn_800E610C(void);
 void fn_800E62AC(void);
 
@@ -717,12 +717,12 @@ lbl_fn_800E589C_00000838:
     blr
 }
 
-u32 fn_800E60FC(void)
+u32 decal_defaultCallback(void)
 {
     return 0;
 }
 
-void *fn_800E6104(void *obj)
+void *decal_getTargetActor(void *obj)
 {
     return *(void **)(obj);
 }

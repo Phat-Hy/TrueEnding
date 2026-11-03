@@ -43,7 +43,7 @@ void fn_801248DC(void);
 void fn_80124B60(void);
 void fn_80124BE4(void);
 void fn_80124BFC(void);
-void fn_80124C6C(void);
+void player_applyStatusEffect(void);
 void fn_80124FFC(void);
 
 asm void fn_80123C7C(void)
@@ -1235,7 +1235,7 @@ lbl_fn_80124BFC_00000FD0:
     blr
 }
 
-asm void fn_80124C6C(void)
+asm void player_applyStatusEffect(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1244,7 +1244,7 @@ asm void fn_80124C6C(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bgt lbl_fn_80124C6C_00001354
+    bgt lbl_player_applyStatusEffect_00001354
     lis r4, jumptable_8077A5A8@ha
     slwi r0, r5, 2
     addi r4, r4, jumptable_8077A5A8@l
@@ -1258,14 +1258,14 @@ asm void fn_80124C6C(void)
     cmpwi r3, 0x0
     addi r4, r4, lbl_8077A3B0@l
     addi r3, r4, 0x128
-    bne lbl_fn_80124C6C_00001048
+    bne lbl_player_applyStatusEffect_00001048
     addi r3, r4, 0x8
-lbl_fn_80124C6C_00001048:
+lbl_player_applyStatusEffect_00001048:
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
     psq_st f2, 0x8(r31), 0, 0
     psq_st f1, 0x0(r31), 0, 0
-    b lbl_fn_80124C6C_0000136C
+    b lbl_player_applyStatusEffect_0000136C
     lwz r3, lbl_8087EF70
     li r4, 0x0
     bl msg_isWindowActive
@@ -1273,14 +1273,14 @@ lbl_fn_80124C6C_00001048:
     cmpwi r3, 0x0
     addi r4, r4, lbl_8077A3B0@l
     addi r3, r4, 0x140
-    bne lbl_fn_80124C6C_00001080
+    bne lbl_player_applyStatusEffect_00001080
     addi r3, r4, 0x20
-lbl_fn_80124C6C_00001080:
+lbl_player_applyStatusEffect_00001080:
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
     psq_st f2, 0x8(r31), 0, 0
     psq_st f1, 0x0(r31), 0, 0
-    b lbl_fn_80124C6C_0000136C
+    b lbl_player_applyStatusEffect_0000136C
     lwz r3, lbl_8087EF70
     li r4, 0x0
     bl msg_isWindowActive
@@ -1288,26 +1288,26 @@ lbl_fn_80124C6C_00001080:
     cmpwi r3, 0x0
     addi r4, r4, lbl_8077A3B0@l
     addi r3, r4, 0x128
-    bne lbl_fn_80124C6C_000010B8
+    bne lbl_player_applyStatusEffect_000010B8
     addi r3, r4, 0x8
-lbl_fn_80124C6C_000010B8:
+lbl_player_applyStatusEffect_000010B8:
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
     psq_st f2, 0x8(r31), 0, 0
     psq_st f1, 0x0(r31), 0, 0
-    b lbl_fn_80124C6C_0000136C
+    b lbl_player_applyStatusEffect_0000136C
     lwz r4, lbl_8087F9C0
     lwz r0, 0x28(r4)
     cmpwi r0, 0x0
-    bne lbl_fn_80124C6C_000010F8
+    bne lbl_player_applyStatusEffect_000010F8
     lis r4, lbl_8077A3B0@ha
     addi r4, r4, lbl_8077A3B0@l
     psq_l f1, 0x1e8(r4), 0, 0
     psq_l f2, 0x1f0(r4), 0, 0
     psq_st f2, 0x8(r3), 0, 0
     psq_st f1, 0x0(r3), 0, 0
-    b lbl_fn_80124C6C_0000136C
-lbl_fn_80124C6C_000010F8:
+    b lbl_player_applyStatusEffect_0000136C
+lbl_player_applyStatusEffect_000010F8:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     bl msg_isWindowActive
@@ -1315,14 +1315,14 @@ lbl_fn_80124C6C_000010F8:
     cmpwi r3, 0x0
     addi r4, r4, lbl_8077A3B0@l
     addi r3, r4, 0x128
-    bne lbl_fn_80124C6C_0000111C
+    bne lbl_player_applyStatusEffect_0000111C
     addi r3, r4, 0x8
-lbl_fn_80124C6C_0000111C:
+lbl_player_applyStatusEffect_0000111C:
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
     psq_st f2, 0x8(r31), 0, 0
     psq_st f1, 0x0(r31), 0, 0
-    b lbl_fn_80124C6C_0000136C
+    b lbl_player_applyStatusEffect_0000136C
     lwz r3, lbl_8087EF70
     li r4, 0x0
     bl msg_isWindowActive
@@ -1330,14 +1330,14 @@ lbl_fn_80124C6C_0000111C:
     cmpwi r3, 0x0
     addi r4, r4, lbl_8077A3B0@l
     addi r3, r4, 0x158
-    bne lbl_fn_80124C6C_00001154
+    bne lbl_player_applyStatusEffect_00001154
     addi r3, r4, 0xb0
-lbl_fn_80124C6C_00001154:
+lbl_player_applyStatusEffect_00001154:
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
     psq_st f2, 0x8(r31), 0, 0
     psq_st f1, 0x0(r31), 0, 0
-    b lbl_fn_80124C6C_0000136C
+    b lbl_player_applyStatusEffect_0000136C
     lwz r3, lbl_8087EF70
     li r4, 0x0
     bl msg_isWindowActive
@@ -1345,18 +1345,18 @@ lbl_fn_80124C6C_00001154:
     cmpwi r3, 0x0
     addi r4, r4, lbl_8077A3B0@l
     addi r3, r4, 0x1a0
-    bne lbl_fn_80124C6C_0000118C
+    bne lbl_player_applyStatusEffect_0000118C
     addi r3, r4, 0x20
-lbl_fn_80124C6C_0000118C:
+lbl_player_applyStatusEffect_0000118C:
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
     psq_st f2, 0x8(r31), 0, 0
     psq_st f1, 0x0(r31), 0, 0
-    b lbl_fn_80124C6C_0000136C
+    b lbl_player_applyStatusEffect_0000136C
     lwz r3, lbl_8087F9C0
     lwz r0, 0x34(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_80124C6C_000011E8
+    bne lbl_player_applyStatusEffect_000011E8
     lwz r3, lbl_8087EF70
     li r4, 0x0
     bl msg_isWindowActive
@@ -1364,15 +1364,15 @@ lbl_fn_80124C6C_0000118C:
     cmpwi r3, 0x0
     addi r4, r4, lbl_8077A3B0@l
     addi r3, r4, 0x188
-    bne lbl_fn_80124C6C_000011D4
+    bne lbl_player_applyStatusEffect_000011D4
     addi r3, r4, 0x38
-lbl_fn_80124C6C_000011D4:
+lbl_player_applyStatusEffect_000011D4:
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
     psq_st f2, 0x8(r31), 0, 0
     psq_st f1, 0x0(r31), 0, 0
-    b lbl_fn_80124C6C_0000136C
-lbl_fn_80124C6C_000011E8:
+    b lbl_player_applyStatusEffect_0000136C
+lbl_player_applyStatusEffect_000011E8:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     bl msg_isWindowActive
@@ -1380,14 +1380,14 @@ lbl_fn_80124C6C_000011E8:
     cmpwi r3, 0x0
     addi r4, r4, lbl_8077A3B0@l
     addi r3, r4, 0x1b8
-    bne lbl_fn_80124C6C_0000120C
+    bne lbl_player_applyStatusEffect_0000120C
     addi r3, r4, 0x50
-lbl_fn_80124C6C_0000120C:
+lbl_player_applyStatusEffect_0000120C:
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
     psq_st f2, 0x8(r31), 0, 0
     psq_st f1, 0x0(r31), 0, 0
-    b lbl_fn_80124C6C_0000136C
+    b lbl_player_applyStatusEffect_0000136C
     lwz r3, lbl_8087EF70
     li r4, 0x0
     bl msg_isWindowActive
@@ -1395,14 +1395,14 @@ lbl_fn_80124C6C_0000120C:
     cmpwi r3, 0x0
     addi r4, r4, lbl_8077A3B0@l
     addi r3, r4, 0x128
-    bne lbl_fn_80124C6C_00001244
+    bne lbl_player_applyStatusEffect_00001244
     addi r3, r4, 0x8
-lbl_fn_80124C6C_00001244:
+lbl_player_applyStatusEffect_00001244:
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
     psq_st f2, 0x8(r31), 0, 0
     psq_st f1, 0x0(r31), 0, 0
-    b lbl_fn_80124C6C_0000136C
+    b lbl_player_applyStatusEffect_0000136C
     lwz r3, lbl_8087EF70
     li r4, 0x0
     bl msg_isWindowActive
@@ -1410,21 +1410,21 @@ lbl_fn_80124C6C_00001244:
     cmpwi r3, 0x0
     addi r4, r4, lbl_8077A3B0@l
     addi r3, r4, 0x170
-    bne lbl_fn_80124C6C_0000127C
+    bne lbl_player_applyStatusEffect_0000127C
     addi r3, r4, 0x98
-lbl_fn_80124C6C_0000127C:
+lbl_player_applyStatusEffect_0000127C:
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
     psq_st f2, 0x8(r31), 0, 0
     psq_st f1, 0x0(r31), 0, 0
-    b lbl_fn_80124C6C_0000136C
+    b lbl_player_applyStatusEffect_0000136C
     lis r4, lbl_8077A3B0@ha
     addi r4, r4, lbl_8077A3B0@l
     psq_l f1, 0x98(r4), 0, 0
     psq_l f2, 0xa0(r4), 0, 0
     psq_st f2, 0x8(r3), 0, 0
     psq_st f1, 0x0(r3), 0, 0
-    b lbl_fn_80124C6C_0000136C
+    b lbl_player_applyStatusEffect_0000136C
     lwz r3, lbl_8087EF70
     li r4, 0x0
     bl msg_isWindowActive
@@ -1432,14 +1432,14 @@ lbl_fn_80124C6C_0000127C:
     cmpwi r3, 0x0
     addi r4, r4, lbl_8077A3B0@l
     addi r3, r4, 0x170
-    bne lbl_fn_80124C6C_000012D0
+    bne lbl_player_applyStatusEffect_000012D0
     addi r3, r4, 0x98
-lbl_fn_80124C6C_000012D0:
+lbl_player_applyStatusEffect_000012D0:
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
     psq_st f2, 0x8(r31), 0, 0
     psq_st f1, 0x0(r31), 0, 0
-    b lbl_fn_80124C6C_0000136C
+    b lbl_player_applyStatusEffect_0000136C
     lwz r3, lbl_8087EF70
     li r4, 0x0
     bl msg_isWindowActive
@@ -1447,14 +1447,14 @@ lbl_fn_80124C6C_000012D0:
     cmpwi r3, 0x0
     addi r4, r4, lbl_8077A3B0@l
     addi r3, r4, 0x188
-    bne lbl_fn_80124C6C_00001308
+    bne lbl_player_applyStatusEffect_00001308
     addi r3, r4, 0x38
-lbl_fn_80124C6C_00001308:
+lbl_player_applyStatusEffect_00001308:
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
     psq_st f2, 0x8(r31), 0, 0
     psq_st f1, 0x0(r31), 0, 0
-    b lbl_fn_80124C6C_0000136C
+    b lbl_player_applyStatusEffect_0000136C
     lwz r3, lbl_8087EF70
     li r4, 0x0
     bl msg_isWindowActive
@@ -1462,22 +1462,22 @@ lbl_fn_80124C6C_00001308:
     cmpwi r3, 0x0
     addi r4, r4, lbl_8077A3B0@l
     addi r3, r4, 0x1b8
-    bne lbl_fn_80124C6C_00001340
+    bne lbl_player_applyStatusEffect_00001340
     addi r3, r4, 0x50
-lbl_fn_80124C6C_00001340:
+lbl_player_applyStatusEffect_00001340:
     psq_l f1, 0x0(r3), 0, 0
     psq_l f2, 0x8(r3), 0, 0
     psq_st f2, 0x8(r31), 0, 0
     psq_st f1, 0x0(r31), 0, 0
-    b lbl_fn_80124C6C_0000136C
-lbl_fn_80124C6C_00001354:
+    b lbl_player_applyStatusEffect_0000136C
+lbl_player_applyStatusEffect_00001354:
     lis r4, lbl_8077A3B0@ha
     addi r4, r4, lbl_8077A3B0@l
     psq_l f1, 0x1e8(r4), 0, 0
     psq_l f2, 0x1f0(r4), 0, 0
     psq_st f2, 0x8(r3), 0, 0
     psq_st f1, 0x0(r3), 0, 0
-lbl_fn_80124C6C_0000136C:
+lbl_player_applyStatusEffect_0000136C:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0

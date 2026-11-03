@@ -166186,7 +166186,7 @@
 .endfn fn_80680D20
 
 # .text:0x8AD54 | 0x806813B4 | size: 0xC98
-.fn fn_806813B4, global
+.fn msl_vswscanf, global
 /* 806813B4 0067BA14  94 21 FF 50 */	stwu r1, -0xb0(r1)
 /* 806813B8 0067BA18  7C 08 02 A6 */	mflr r0
 /* 806813BC 0067BA1C  90 01 00 B4 */	stw r0, 0xb4(r1)
@@ -167098,7 +167098,7 @@
 /* 80682040 0067C6A0  7C 08 03 A6 */	mtlr r0
 /* 80682044 0067C6A4  38 21 00 B0 */	addi r1, r1, 0xb0
 /* 80682048 0067C6A8  4E 80 00 20 */	blr
-.endfn fn_806813B4
+.endfn msl_vswscanf
 
 # .text:0x8B9EC | 0x8068204C | size: 0x88
 .fn fn_8068204C, global
@@ -167227,7 +167227,7 @@
 /* 806821E4 0067C844  38 81 00 68 */	addi r4, r1, 0x68
 /* 806821E8 0067C848  38 C1 00 70 */	addi r6, r1, 0x70
 /* 806821EC 0067C84C  38 E0 00 00 */	li r7, 0x0
-/* 806821F0 0067C850  4B FF F1 C5 */	bl fn_806813B4
+/* 806821F0 0067C850  4B FF F1 C5 */	bl msl_vswscanf
 .L_806821F4:
 /* 806821F4 0067C854  80 01 00 84 */	lwz r0, 0x84(r1)
 /* 806821F8 0067C858  7C 08 03 A6 */	mtlr r0
@@ -171822,7 +171822,7 @@
 .endfn fn_8068573C
 
 # .text:0x8F86C | 0x80685ECC | size: 0x98C
-.fn fn_80685ECC, global
+.fn msl_vswprintf, global
 /* 80685ECC 0068052C  94 21 FB 30 */	stwu r1, -0x4d0(r1)
 /* 80685ED0 00680530  7C 08 02 A6 */	mflr r0
 /* 80685ED4 00680534  90 01 04 D4 */	stw r0, 0x4d4(r1)
@@ -172502,7 +172502,7 @@
 /* 8068684C 00680EAC  7C 08 03 A6 */	mtlr r0
 /* 80686850 00680EB0  38 21 04 D0 */	addi r1, r1, 0x4d0
 /* 80686854 00680EB4  4E 80 00 20 */	blr
-.endfn fn_80685ECC
+.endfn msl_vswprintf
 
 # .text:0x901F8 | 0x80686858 | size: 0x6C
 .fn fn_80686858, global
@@ -172581,7 +172581,7 @@
 /* 80686960 00680FC0  91 81 00 78 */	stw r12, 0x78(r1)
 /* 80686964 00680FC4  90 01 00 7C */	stw r0, 0x7c(r1)
 /* 80686968 00680FC8  93 E1 00 70 */	stw r31, 0x70(r1)
-/* 8068696C 00680FCC  4B FF F5 61 */	bl fn_80685ECC
+/* 8068696C 00680FCC  4B FF F5 61 */	bl msl_vswprintf
 /* 80686970 00680FD0  2C 03 00 00 */	cmpwi r3, 0x0
 /* 80686974 00680FD4  41 80 00 28 */	blt .L_8068699C
 /* 80686978 00680FD8  7C 03 E8 40 */	cmplw r3, r29
@@ -172623,7 +172623,7 @@
 /* 806869F0 00681050  90 81 00 0C */	stw r4, 0xc(r1)
 /* 806869F4 00681054  38 81 00 08 */	addi r4, r1, 0x8
 /* 806869F8 00681058  93 E1 00 10 */	stw r31, 0x10(r1)
-/* 806869FC 0068105C  4B FF F4 D1 */	bl fn_80685ECC
+/* 806869FC 0068105C  4B FF F4 D1 */	bl msl_vswprintf
 /* 80686A00 00681060  2C 03 00 00 */	cmpwi r3, 0x0
 /* 80686A04 00681064  41 80 00 28 */	blt .L_80686A2C
 /* 80686A08 00681068  7C 03 F0 40 */	cmplw r3, r30

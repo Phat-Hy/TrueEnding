@@ -81,7 +81,7 @@ extern u32 lbl_80881B0C;
 
 /* Function declarations */
 void fn_80152D10(void);
-void fn_80153004(void);
+void inventory_updateItemAttachment(void);
 void inventory_hasItem(void);
 void fn_80153698(void);
 void inventory_unequipItem(void);
@@ -305,7 +305,7 @@ lbl_fn_80152D10_000002A8:
     blr
 }
 
-asm void fn_80153004(void)
+asm void inventory_updateItemAttachment(void)
 {
     nofralloc
     stwu r1, -0x90(r1)
@@ -316,7 +316,7 @@ asm void fn_80153004(void)
     mr r30, r3
     lwz r0, lbl_8087F048
     cmpwi r0, 0x0
-    beq lbl_fn_80153004_00000370
+    beq lbl_inventory_updateItemAttachment_00000370
     mr r3, r0
     addi r4, r30, 0xb0
     bl fn_80107850
@@ -339,19 +339,19 @@ asm void fn_80153004(void)
     lwz r3, lbl_8087F048
     addi r4, r30, 0xb0
     bl fn_80108080
-lbl_fn_80153004_00000370:
+lbl_inventory_updateItemAttachment_00000370:
     lwz r3, lbl_8087F048
     cmpwi r3, 0x0
-    beq lbl_fn_80153004_00000384
+    beq lbl_inventory_updateItemAttachment_00000384
     addi r4, r30, 0xb0
     bl fn_801079B0
-lbl_fn_80153004_00000384:
+lbl_inventory_updateItemAttachment_00000384:
     lwz r3, 0x12a4(r30)
     extrwi. r0, r3, 1, 11
-    beq lbl_fn_80153004_0000046C
+    beq lbl_inventory_updateItemAttachment_0000046C
     lwz r0, 0x48(r30)
     cmpwi r0, 0x0
-    bne lbl_fn_80153004_0000046C
+    bne lbl_inventory_updateItemAttachment_0000046C
     rlwinm r0, r3, 0, 12, 10
     stw r0, 0x12a4(r30)
     extrwi r0, r3, 1, 12
@@ -404,34 +404,34 @@ lbl_fn_80153004_00000384:
     stw r4, 0x68(r1)
     stfs f0, 0x6c(r1)
     stfs f0, 0x370(r10)
-lbl_fn_80153004_0000046C:
+lbl_inventory_updateItemAttachment_0000046C:
     lwz r3, lbl_8087F048
     cmpwi r3, 0x0
-    beq lbl_fn_80153004_00000480
+    beq lbl_inventory_updateItemAttachment_00000480
     addi r4, r30, 0xb0
     bl fn_80107F10
-lbl_fn_80153004_00000480:
+lbl_inventory_updateItemAttachment_00000480:
     lwz r0, 0x58c(r30)
     cmpwi r0, 0x3
-    bne lbl_fn_80153004_00000658
+    bne lbl_inventory_updateItemAttachment_00000658
     lwz r31, 0x564(r30)
     li r0, 0x0
     lwz r3, 0x55c(r30)
     stw r0, 0x58c(r30)
     cmpw r3, r31
-    beq lbl_fn_80153004_00000654
+    beq lbl_inventory_updateItemAttachment_00000654
     cmpwi r3, 0x6
-    beq lbl_fn_80153004_000004B8
+    beq lbl_inventory_updateItemAttachment_000004B8
     cmpwi r3, 0x8
-    beq lbl_fn_80153004_000004B8
+    beq lbl_inventory_updateItemAttachment_000004B8
     stw r3, 0x564(r30)
-lbl_fn_80153004_000004B8:
+lbl_inventory_updateItemAttachment_000004B8:
     lwz r0, 0x55c(r30)
     cmpwi r0, 0x6
-    bne lbl_fn_80153004_00000654
+    bne lbl_inventory_updateItemAttachment_00000654
     lwz r0, 0xf80(r30)
     cmpwi r0, 0x0
-    bne lbl_fn_80153004_000004F0
+    bne lbl_inventory_updateItemAttachment_000004F0
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x70(r1)
@@ -439,8 +439,8 @@ lbl_fn_80153004_000004B8:
     lwz r0, 0x8(r5)
     stw r3, 0x74(r1)
     stw r0, 0x78(r1)
-    b lbl_fn_80153004_0000050C
-lbl_fn_80153004_000004F0:
+    b lbl_inventory_updateItemAttachment_0000050C
+lbl_inventory_updateItemAttachment_000004F0:
     lis r5, lbl_8077AD44@ha
     lwzu r4, lbl_8077AD44@l(r5)
     stw r4, 0x70(r1)
@@ -448,7 +448,7 @@ lbl_fn_80153004_000004F0:
     lwz r0, 0x8(r5)
     stw r3, 0x74(r1)
     stw r0, 0x78(r1)
-lbl_fn_80153004_0000050C:
+lbl_inventory_updateItemAttachment_0000050C:
     lwz r5, 0x70(r1)
     addi r3, r1, 0x14
     lwz r4, 0x74(r1)
@@ -458,26 +458,26 @@ lbl_fn_80153004_0000050C:
     stw r0, 0x1c(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_80153004_00000548
+    beq lbl_inventory_updateItemAttachment_00000548
     lwz r3, 0xf80(r30)
     lwz r12, 0x0(r3)
     lwz r12, 0x1c(r12)
     mtctr r12
     bctrl
-lbl_fn_80153004_00000548:
+lbl_inventory_updateItemAttachment_00000548:
     lwz r0, 0x55c(r30)
     cmpwi r0, 0x6
-    beq lbl_fn_80153004_00000624
+    beq lbl_inventory_updateItemAttachment_00000624
     cmpwi r0, 0x8
-    beq lbl_fn_80153004_00000560
+    beq lbl_inventory_updateItemAttachment_00000560
     stw r0, 0x564(r30)
-lbl_fn_80153004_00000560:
+lbl_inventory_updateItemAttachment_00000560:
     lwz r0, 0x55c(r30)
     cmpwi r0, 0x6
-    bne lbl_fn_80153004_00000624
+    bne lbl_inventory_updateItemAttachment_00000624
     lwz r0, 0xf80(r30)
     cmpwi r0, 0x0
-    bne lbl_fn_80153004_00000598
+    bne lbl_inventory_updateItemAttachment_00000598
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x7c(r1)
@@ -485,8 +485,8 @@ lbl_fn_80153004_00000560:
     lwz r0, 0x8(r5)
     stw r3, 0x80(r1)
     stw r0, 0x84(r1)
-    b lbl_fn_80153004_000005B4
-lbl_fn_80153004_00000598:
+    b lbl_inventory_updateItemAttachment_000005B4
+lbl_inventory_updateItemAttachment_00000598:
     lis r5, lbl_8077AD50@ha
     lwzu r4, lbl_8077AD50@l(r5)
     stw r4, 0x7c(r1)
@@ -494,7 +494,7 @@ lbl_fn_80153004_00000598:
     lwz r0, 0x8(r5)
     stw r3, 0x80(r1)
     stw r0, 0x84(r1)
-lbl_fn_80153004_000005B4:
+lbl_inventory_updateItemAttachment_000005B4:
     lwz r5, 0x7c(r1)
     addi r3, r1, 0x8
     lwz r4, 0x80(r1)
@@ -504,13 +504,13 @@ lbl_fn_80153004_000005B4:
     stw r0, 0x10(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_80153004_000005F0
+    beq lbl_inventory_updateItemAttachment_000005F0
     lwz r3, 0xf80(r30)
     lwz r12, 0x0(r3)
     lwz r12, 0x1c(r12)
     mtctr r12
     bctrl
-lbl_fn_80153004_000005F0:
+lbl_inventory_updateItemAttachment_000005F0:
     mr r3, r30
     li r4, 0x6
     bl actor_setState
@@ -518,28 +518,28 @@ lbl_fn_80153004_000005F0:
     li r0, 0x0
     cmpwi r3, 0x0
     stw r0, 0xf80(r30)
-    beq lbl_fn_80153004_00000624
+    beq lbl_inventory_updateItemAttachment_00000624
     lwz r12, 0x0(r3)
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-lbl_fn_80153004_00000624:
+lbl_inventory_updateItemAttachment_00000624:
     lwz r3, 0xf80(r30)
     li r4, 0x6
     li r0, 0x0
     stw r4, 0x55c(r30)
     cmpwi r3, 0x0
     stw r0, 0xf80(r30)
-    beq lbl_fn_80153004_00000654
+    beq lbl_inventory_updateItemAttachment_00000654
     lwz r12, 0x0(r3)
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-lbl_fn_80153004_00000654:
+lbl_inventory_updateItemAttachment_00000654:
     stw r31, 0x55c(r30)
-lbl_fn_80153004_00000658:
+lbl_inventory_updateItemAttachment_00000658:
     addi r3, r30, 0x7d4
     li r4, 0x40
     bl actor_testBitFlag
@@ -547,19 +547,19 @@ lbl_fn_80153004_00000658:
     stw r0, 0xf94(r30)
     lwz r3, lbl_8087F048
     cmpwi r3, 0x0
-    beq lbl_fn_80153004_0000068C
+    beq lbl_inventory_updateItemAttachment_0000068C
     addi r4, r30, 0xb0
     bl fn_80107BD8
     lwz r3, lbl_8087F048
     mr r4, r30
     bl fn_80107380
-lbl_fn_80153004_0000068C:
+lbl_inventory_updateItemAttachment_0000068C:
     lwz r3, lbl_8087F048
     cmpwi r3, 0x0
-    beq lbl_fn_80153004_000006A0
+    beq lbl_inventory_updateItemAttachment_000006A0
     addi r4, r30, 0xb0
     bl fn_80107D94
-lbl_fn_80153004_000006A0:
+lbl_inventory_updateItemAttachment_000006A0:
     lwz r0, 0x94(r1)
     lwz r31, 0x8c(r1)
     lwz r30, 0x88(r1)

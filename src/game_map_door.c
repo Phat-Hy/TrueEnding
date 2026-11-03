@@ -76,7 +76,7 @@ void fn_80187D04(void);
 void fn_80187E2C(void);
 void fn_80187FF4(void);
 void fn_80188060(void);
-void fn_80188064(void);
+void map_door_getDefaultOffset(void);
 u32 fn_80188080(void);
 u32 fn_80188088(void);
 void fn_80188090(void);
@@ -404,7 +404,7 @@ lbl_fn_80187FF4_0000040C:
 void fn_80188060(void) {
 }
 
-asm void fn_80188064(void)
+asm void map_door_getDefaultOffset(void)
 {
     nofralloc
     lis r4, lbl_807C7030@ha

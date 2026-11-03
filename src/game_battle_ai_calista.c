@@ -48,7 +48,7 @@ extern void kpad_validateButtonIndex(void);
 extern void fn_803CC6B4(void);
 extern void fn_803E3BE8(void);
 extern void fn_803E5E64(void);
-extern void fn_803EC16C(void);
+extern void dungeon_spawnEnemyWave(void);
 extern void task_destroyWorker(void);
 extern void task_updateWorker(void);
 extern void gmk_registerSlot(void);
@@ -337,7 +337,7 @@ lbl_fn_80431458_000002AC:
     bne lbl_fn_80431458_00000308
     mr r3, r25
     mr r5, r26
-    bl fn_803EC16C
+    bl dungeon_spawnEnemyWave
     stw r3, 0x28c(r28)
     li r4, 0x1
     bl atn_Task_setActive

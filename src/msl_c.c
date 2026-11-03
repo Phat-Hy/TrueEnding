@@ -147,7 +147,7 @@ void qsort(void);
 int rand(void);
 void srand(u32 seed);
 void fn_80680D20(void);
-void fn_806813B4(void);
+void msl_vswscanf(void);
 void fn_8068204C(void);
 void fn_806820D4(void);
 void fn_80682204(void);
@@ -179,7 +179,7 @@ void fn_80684F04(void);
 void fn_806851C0(void);
 void fn_80685614(void);
 void fn_8068573C(void);
-void fn_80685ECC(void);
+void msl_vswprintf(void);
 void fn_80686858(void);
 void swprintf(void);
 void vswprintf(void);
@@ -7340,7 +7340,7 @@ lbl_fn_80680D20_00005F38:
     blr
 }
 
-asm void fn_806813B4(void)
+asm void msl_vswscanf(void)
 {
     nofralloc
     stwu r1, -0xb0(r1)
@@ -7365,53 +7365,53 @@ asm void fn_806813B4(void)
     li r20, 0x0
     li r19, 0x0
     li r24, 0x1
-    b lbl_fn_806813B4_00006B88
-lbl_fn_806813B4_00005FA4:
+    b lbl_msl_vswscanf_00006B88
+lbl_msl_vswscanf_00005FA4:
     cmplwi r22, 0xff
     li r0, 0x1
-    bgt lbl_fn_806813B4_00005FB4
+    bgt lbl_msl_vswscanf_00005FB4
     li r0, 0x0
-lbl_fn_806813B4_00005FB4:
+lbl_msl_vswscanf_00005FB4:
     cmpwi r0, 0x0
-    beq lbl_fn_806813B4_00005FC4
+    beq lbl_msl_vswscanf_00005FC4
     li r0, 0x0
-    b lbl_fn_806813B4_00005FD8
-lbl_fn_806813B4_00005FC4:
+    b lbl_msl_vswscanf_00005FD8
+lbl_msl_vswscanf_00005FC4:
     lwz r3, 0x38(r23)
     slwi r0, r22, 1
     lwz r3, 0x8(r3)
     lhzx r0, r3, r0
     rlwinm r0, r0, 0, 23, 23
-lbl_fn_806813B4_00005FD8:
+lbl_msl_vswscanf_00005FD8:
     cmpwi r0, 0x0
-    beq lbl_fn_806813B4_000060B0
+    beq lbl_msl_vswscanf_000060B0
     lwz r4, 0x38(r23)
-lbl_fn_806813B4_00005FE4:
+lbl_msl_vswscanf_00005FE4:
     lbzu r0, 0x1(r17)
     li r3, 0x1
     extsb r0, r0
     cmplwi r0, 0xff
-    bgt lbl_fn_806813B4_00005FFC
+    bgt lbl_msl_vswscanf_00005FFC
     li r3, 0x0
-lbl_fn_806813B4_00005FFC:
+lbl_msl_vswscanf_00005FFC:
     cmpwi r3, 0x0
-    beq lbl_fn_806813B4_0000600C
+    beq lbl_msl_vswscanf_0000600C
     li r0, 0x0
-    b lbl_fn_806813B4_0000601C
-lbl_fn_806813B4_0000600C:
+    b lbl_msl_vswscanf_0000601C
+lbl_msl_vswscanf_0000600C:
     lwz r3, 0x8(r4)
     slwi r0, r0, 1
     lhzx r0, r3, r0
     rlwinm r0, r0, 0, 23, 23
-lbl_fn_806813B4_0000601C:
+lbl_msl_vswscanf_0000601C:
     cmpwi r0, 0x0
-    bne lbl_fn_806813B4_00005FE4
+    bne lbl_msl_vswscanf_00005FE4
     cmpwi r29, 0x0
-    bne lbl_fn_806813B4_00006B88
-    b lbl_fn_806813B4_00006034
-lbl_fn_806813B4_00006030:
+    bne lbl_msl_vswscanf_00006B88
+    b lbl_msl_vswscanf_00006034
+lbl_msl_vswscanf_00006030:
     addi r21, r21, 0x1
-lbl_fn_806813B4_00006034:
+lbl_msl_vswscanf_00006034:
     mr r12, r26
     mr r3, r27
     li r4, 0x0
@@ -7422,22 +7422,22 @@ lbl_fn_806813B4_00006034:
     stb r3, 0xc(r1)
     cmplwi r0, 0xff
     li r4, 0x1
-    bgt lbl_fn_806813B4_00006064
+    bgt lbl_msl_vswscanf_00006064
     li r4, 0x0
-lbl_fn_806813B4_00006064:
+lbl_msl_vswscanf_00006064:
     cmpwi r4, 0x0
-    beq lbl_fn_806813B4_00006074
+    beq lbl_msl_vswscanf_00006074
     li r0, 0x0
-    b lbl_fn_806813B4_00006088
-lbl_fn_806813B4_00006074:
+    b lbl_msl_vswscanf_00006088
+lbl_msl_vswscanf_00006074:
     lwz r4, 0x38(r23)
     slwi r0, r0, 1
     lwz r4, 0x8(r4)
     lhzx r0, r4, r0
     rlwinm r0, r0, 0, 23, 23
-lbl_fn_806813B4_00006088:
+lbl_msl_vswscanf_00006088:
     cmpwi r0, 0x0
-    bne lbl_fn_806813B4_00006030
+    bne lbl_msl_vswscanf_00006030
     clrlwi r4, r3, 24
     mr r12, r26
     mr r3, r27
@@ -7445,12 +7445,12 @@ lbl_fn_806813B4_00006088:
     extsb r4, r4
     mtctr r12
     bctrl
-    b lbl_fn_806813B4_00006B88
-lbl_fn_806813B4_000060B0:
+    b lbl_msl_vswscanf_00006B88
+lbl_msl_vswscanf_000060B0:
     cmpwi r22, 0x25
-    beq lbl_fn_806813B4_00006128
+    beq lbl_msl_vswscanf_00006128
     cmpwi r29, 0x0
-    bne lbl_fn_806813B4_00006128
+    bne lbl_msl_vswscanf_00006128
     mr r12, r26
     mr r3, r27
     li r4, 0x0
@@ -7461,7 +7461,7 @@ lbl_fn_806813B4_000060B0:
     clrlwi r0, r22, 24
     cmpw r0, r4
     stb r3, 0xc(r1)
-    beq lbl_fn_806813B4_0000611C
+    beq lbl_msl_vswscanf_0000611C
     clrlwi r4, r3, 24
     mr r12, r26
     mr r3, r27
@@ -7470,38 +7470,38 @@ lbl_fn_806813B4_000060B0:
     mtctr r12
     bctrl
     cmpwi r28, 0x0
-    beq lbl_fn_806813B4_00006B94
+    beq lbl_msl_vswscanf_00006B94
     li r29, 0x1
     addi r17, r17, 0x1
-    b lbl_fn_806813B4_00006B88
-lbl_fn_806813B4_0000611C:
+    b lbl_msl_vswscanf_00006B88
+lbl_msl_vswscanf_0000611C:
     addi r21, r21, 0x1
     addi r17, r17, 0x1
-    b lbl_fn_806813B4_00006B88
-lbl_fn_806813B4_00006128:
+    b lbl_msl_vswscanf_00006B88
+lbl_msl_vswscanf_00006128:
     mr r3, r17
     addi r4, r1, 0x20
     bl fn_80680D20
     lbz r0, 0x20(r1)
     mr r17, r3
     cmpwi r0, 0x0
-    bne lbl_fn_806813B4_00006164
+    bne lbl_msl_vswscanf_00006164
     lbz r0, 0x23(r1)
     cmplwi r0, 0x25
-    beq lbl_fn_806813B4_00006164
+    beq lbl_msl_vswscanf_00006164
     lwz r3, 0x8(r1)
     li r4, 0x1
     bl __va_arg
     lwz r22, 0x0(r3)
-    b lbl_fn_806813B4_00006168
-lbl_fn_806813B4_00006164:
+    b lbl_msl_vswscanf_00006168
+lbl_msl_vswscanf_00006164:
     li r22, 0x0
-lbl_fn_806813B4_00006168:
+lbl_msl_vswscanf_00006168:
     lbz r0, 0x23(r1)
     cmplwi r0, 0x6e
-    beq lbl_fn_806813B4_000061A8
+    beq lbl_msl_vswscanf_000061A8
     cmpwi r29, 0x0
-    bne lbl_fn_806813B4_000061A8
+    bne lbl_msl_vswscanf_000061A8
     mr r12, r26
     mr r3, r27
     li r4, 0x0
@@ -7509,15 +7509,15 @@ lbl_fn_806813B4_00006168:
     mtctr r12
     bctrl
     cmpwi r3, 0x0
-    beq lbl_fn_806813B4_000061A8
+    beq lbl_msl_vswscanf_000061A8
     cmpwi r28, 0x0
-    beq lbl_fn_806813B4_00006B94
+    beq lbl_msl_vswscanf_00006B94
     li r29, 0x1
-lbl_fn_806813B4_000061A8:
+lbl_msl_vswscanf_000061A8:
     lbz r3, 0x23(r1)
     subi r0, r3, 0x25
     cmplwi r0, 0x53
-    bgt lbl_fn_806813B4_00006B94
+    bgt lbl_msl_vswscanf_00006B94
     lis r3, jumptable_807BB718@ha
     slwi r0, r0, 2
     addi r3, r3, jumptable_807BB718@l
@@ -7525,24 +7525,24 @@ lbl_fn_806813B4_000061A8:
     mtctr r3
     bctr
     li r3, 0xa
-    b lbl_fn_806813B4_000061DC
+    b lbl_msl_vswscanf_000061DC
     li r3, 0x0
-lbl_fn_806813B4_000061DC:
+lbl_msl_vswscanf_000061DC:
     cmpwi r29, 0x0
-    beq lbl_fn_806813B4_000061FC
+    beq lbl_msl_vswscanf_000061FC
     li r0, 0x0
     stw r0, 0x5c(r1)
     li r0, 0x0
     li r16, 0x0
     stw r0, 0x58(r1)
-    b lbl_fn_806813B4_000062F0
-lbl_fn_806813B4_000061FC:
+    b lbl_msl_vswscanf_000062F0
+lbl_msl_vswscanf_000061FC:
     lbz r0, 0x22(r1)
     cmplwi r0, 0x7
-    beq lbl_fn_806813B4_00006210
+    beq lbl_msl_vswscanf_00006210
     cmplwi r0, 0x4
-    bne lbl_fn_806813B4_00006238
-lbl_fn_806813B4_00006210:
+    bne lbl_msl_vswscanf_00006238
+lbl_msl_vswscanf_00006210:
     lwz r4, 0x24(r1)
     mr r5, r26
     mr r6, r27
@@ -7552,8 +7552,8 @@ lbl_fn_806813B4_00006210:
     bl fn_80683FC4
     stw r4, 0x54(r1)
     stw r3, 0x50(r1)
-    b lbl_fn_806813B4_00006258
-lbl_fn_806813B4_00006238:
+    b lbl_msl_vswscanf_00006258
+lbl_msl_vswscanf_00006238:
     lwz r4, 0x24(r1)
     mr r5, r26
     mr r6, r27
@@ -7562,55 +7562,55 @@ lbl_fn_806813B4_00006238:
     addi r9, r1, 0x10
     bl fn_80683BB0
     mr r15, r3
-lbl_fn_806813B4_00006258:
+lbl_msl_vswscanf_00006258:
     lwz r3, 0x18(r1)
     cmpwi r3, 0x0
-    bne lbl_fn_806813B4_00006288
+    bne lbl_msl_vswscanf_00006288
     cmpwi r28, 0x0
-    beq lbl_fn_806813B4_00006B94
+    beq lbl_msl_vswscanf_00006B94
     li r0, 0x0
     stw r0, 0x5c(r1)
     li r0, 0x0
     li r29, 0x1
     stw r0, 0x58(r1)
     li r16, 0x0
-    b lbl_fn_806813B4_000062F0
-lbl_fn_806813B4_00006288:
+    b lbl_msl_vswscanf_000062F0
+lbl_msl_vswscanf_00006288:
     lbz r0, 0x22(r1)
     add r21, r21, r3
     cmplwi r0, 0x7
-    beq lbl_fn_806813B4_000062A0
+    beq lbl_msl_vswscanf_000062A0
     cmplwi r0, 0x4
-    bne lbl_fn_806813B4_000062DC
-lbl_fn_806813B4_000062A0:
+    bne lbl_msl_vswscanf_000062DC
+lbl_msl_vswscanf_000062A0:
     lwz r0, 0x14(r1)
     cmpwi r0, 0x0
-    beq lbl_fn_806813B4_000062C8
+    beq lbl_msl_vswscanf_000062C8
     lwz r0, 0x54(r1)
     subfic r0, r0, 0x0
     stw r0, 0x5c(r1)
     lwz r0, 0x50(r1)
     subfze r0, r0
     stw r0, 0x58(r1)
-    b lbl_fn_806813B4_000062F0
-lbl_fn_806813B4_000062C8:
+    b lbl_msl_vswscanf_000062F0
+lbl_msl_vswscanf_000062C8:
     lwz r0, 0x54(r1)
     stw r0, 0x5c(r1)
     lwz r0, 0x50(r1)
     stw r0, 0x58(r1)
-    b lbl_fn_806813B4_000062F0
-lbl_fn_806813B4_000062DC:
+    b lbl_msl_vswscanf_000062F0
+lbl_msl_vswscanf_000062DC:
     lwz r0, 0x14(r1)
     mr r16, r15
     cmpwi r0, 0x0
-    beq lbl_fn_806813B4_000062F0
+    beq lbl_msl_vswscanf_000062F0
     neg r16, r15
-lbl_fn_806813B4_000062F0:
+lbl_msl_vswscanf_000062F0:
     cmpwi r22, 0x0
-    beq lbl_fn_806813B4_0000637C
+    beq lbl_msl_vswscanf_0000637C
     lbz r0, 0x22(r1)
     cmplwi r0, 0x7
-    bgt lbl_fn_806813B4_00006370
+    bgt lbl_msl_vswscanf_00006370
     lis r3, jumptable_807BB6F8@ha
     slwi r0, r0, 2
     addi r3, r3, jumptable_807BB6F8@l
@@ -7618,54 +7618,54 @@ lbl_fn_806813B4_000062F0:
     mtctr r3
     bctr
     stw r16, 0x0(r22)
-    b lbl_fn_806813B4_00006370
+    b lbl_msl_vswscanf_00006370
     stb r16, 0x0(r22)
-    b lbl_fn_806813B4_00006370
+    b lbl_msl_vswscanf_00006370
     sth r16, 0x0(r22)
-    b lbl_fn_806813B4_00006370
+    b lbl_msl_vswscanf_00006370
     stw r16, 0x0(r22)
-    b lbl_fn_806813B4_00006370
+    b lbl_msl_vswscanf_00006370
     lwz r0, 0x5c(r1)
     stw r0, 0x4(r22)
     lwz r0, 0x58(r1)
     stw r0, 0x0(r22)
-    b lbl_fn_806813B4_00006370
+    b lbl_msl_vswscanf_00006370
     stw r16, 0x0(r22)
-    b lbl_fn_806813B4_00006370
+    b lbl_msl_vswscanf_00006370
     stw r16, 0x0(r22)
-    b lbl_fn_806813B4_00006370
+    b lbl_msl_vswscanf_00006370
     lwz r0, 0x5c(r1)
     stw r0, 0x4(r22)
     lwz r0, 0x58(r1)
     stw r0, 0x0(r22)
-lbl_fn_806813B4_00006370:
+lbl_msl_vswscanf_00006370:
     cmpwi r29, 0x0
-    bne lbl_fn_806813B4_0000637C
+    bne lbl_msl_vswscanf_0000637C
     addi r20, r20, 0x1
-lbl_fn_806813B4_0000637C:
+lbl_msl_vswscanf_0000637C:
     addi r19, r19, 0x1
-    b lbl_fn_806813B4_00006B88
+    b lbl_msl_vswscanf_00006B88
     li r3, 0x8
-    b lbl_fn_806813B4_00006398
+    b lbl_msl_vswscanf_00006398
     li r3, 0xa
-    b lbl_fn_806813B4_00006398
+    b lbl_msl_vswscanf_00006398
     li r3, 0x10
-lbl_fn_806813B4_00006398:
+lbl_msl_vswscanf_00006398:
     cmpwi r29, 0x0
-    beq lbl_fn_806813B4_000063B8
+    beq lbl_msl_vswscanf_000063B8
     li r0, 0x0
     stw r0, 0x54(r1)
     li r0, 0x0
     li r15, 0x0
     stw r0, 0x50(r1)
-    b lbl_fn_806813B4_00006488
-lbl_fn_806813B4_000063B8:
+    b lbl_msl_vswscanf_00006488
+lbl_msl_vswscanf_000063B8:
     lbz r0, 0x22(r1)
     cmplwi r0, 0x7
-    beq lbl_fn_806813B4_000063CC
+    beq lbl_msl_vswscanf_000063CC
     cmplwi r0, 0x4
-    bne lbl_fn_806813B4_000063F4
-lbl_fn_806813B4_000063CC:
+    bne lbl_msl_vswscanf_000063F4
+lbl_msl_vswscanf_000063CC:
     lwz r4, 0x24(r1)
     mr r5, r26
     mr r6, r27
@@ -7675,8 +7675,8 @@ lbl_fn_806813B4_000063CC:
     bl fn_80683FC4
     stw r4, 0x54(r1)
     stw r3, 0x50(r1)
-    b lbl_fn_806813B4_00006414
-lbl_fn_806813B4_000063F4:
+    b lbl_msl_vswscanf_00006414
+lbl_msl_vswscanf_000063F4:
     lwz r4, 0x24(r1)
     mr r5, r26
     mr r6, r27
@@ -7685,44 +7685,44 @@ lbl_fn_806813B4_000063F4:
     addi r9, r1, 0x10
     bl fn_80683BB0
     mr r15, r3
-lbl_fn_806813B4_00006414:
+lbl_msl_vswscanf_00006414:
     lwz r3, 0x18(r1)
     cmpwi r3, 0x0
-    bne lbl_fn_806813B4_00006444
+    bne lbl_msl_vswscanf_00006444
     cmpwi r28, 0x0
-    beq lbl_fn_806813B4_00006B94
+    beq lbl_msl_vswscanf_00006B94
     li r0, 0x0
     stw r0, 0x54(r1)
     li r0, 0x0
     li r29, 0x1
     stw r0, 0x50(r1)
     li r15, 0x0
-    b lbl_fn_806813B4_00006488
-lbl_fn_806813B4_00006444:
+    b lbl_msl_vswscanf_00006488
+lbl_msl_vswscanf_00006444:
     lwz r0, 0x14(r1)
     add r21, r21, r3
     cmpwi r0, 0x0
-    beq lbl_fn_806813B4_00006488
+    beq lbl_msl_vswscanf_00006488
     lbz r0, 0x22(r1)
     cmplwi r0, 0x7
-    bne lbl_fn_806813B4_00006478
+    bne lbl_msl_vswscanf_00006478
     lwz r0, 0x54(r1)
     subfic r0, r0, 0x0
     stw r0, 0x54(r1)
     lwz r0, 0x50(r1)
     subfze r0, r0
     stw r0, 0x50(r1)
-lbl_fn_806813B4_00006478:
+lbl_msl_vswscanf_00006478:
     lbz r0, 0x22(r1)
     cmplwi r0, 0x7
-    beq lbl_fn_806813B4_00006488
+    beq lbl_msl_vswscanf_00006488
     neg r15, r15
-lbl_fn_806813B4_00006488:
+lbl_msl_vswscanf_00006488:
     cmpwi r22, 0x0
-    beq lbl_fn_806813B4_00006514
+    beq lbl_msl_vswscanf_00006514
     lbz r0, 0x22(r1)
     cmplwi r0, 0x7
-    bgt lbl_fn_806813B4_00006508
+    bgt lbl_msl_vswscanf_00006508
     lis r3, jumptable_807BB6D8@ha
     slwi r0, r0, 2
     addi r3, r3, jumptable_807BB6D8@l
@@ -7730,39 +7730,39 @@ lbl_fn_806813B4_00006488:
     mtctr r3
     bctr
     stw r15, 0x0(r22)
-    b lbl_fn_806813B4_00006508
+    b lbl_msl_vswscanf_00006508
     stb r15, 0x0(r22)
-    b lbl_fn_806813B4_00006508
+    b lbl_msl_vswscanf_00006508
     sth r15, 0x0(r22)
-    b lbl_fn_806813B4_00006508
+    b lbl_msl_vswscanf_00006508
     stw r15, 0x0(r22)
-    b lbl_fn_806813B4_00006508
+    b lbl_msl_vswscanf_00006508
     lwz r0, 0x54(r1)
     stw r0, 0x4(r22)
     lwz r0, 0x50(r1)
     stw r0, 0x0(r22)
-    b lbl_fn_806813B4_00006508
+    b lbl_msl_vswscanf_00006508
     stw r15, 0x0(r22)
-    b lbl_fn_806813B4_00006508
+    b lbl_msl_vswscanf_00006508
     stw r15, 0x0(r22)
-    b lbl_fn_806813B4_00006508
+    b lbl_msl_vswscanf_00006508
     lwz r0, 0x54(r1)
     stw r0, 0x4(r22)
     lwz r0, 0x50(r1)
     stw r0, 0x0(r22)
-lbl_fn_806813B4_00006508:
+lbl_msl_vswscanf_00006508:
     cmpwi r29, 0x0
-    bne lbl_fn_806813B4_00006514
+    bne lbl_msl_vswscanf_00006514
     addi r20, r20, 0x1
-lbl_fn_806813B4_00006514:
+lbl_msl_vswscanf_00006514:
     addi r19, r19, 0x1
-    b lbl_fn_806813B4_00006B88
+    b lbl_msl_vswscanf_00006B88
     cmpwi r29, 0x0
-    beq lbl_fn_806813B4_00006530
+    beq lbl_msl_vswscanf_00006530
     lis r3, lbl_8087EC00@ha
     lfs f1, lbl_8087EC00@l(r3)
-    b lbl_fn_806813B4_00006570
-lbl_fn_806813B4_00006530:
+    b lbl_msl_vswscanf_00006570
+lbl_msl_vswscanf_00006530:
     lwz r3, 0x24(r1)
     mr r4, r26
     mr r5, r27
@@ -7771,101 +7771,101 @@ lbl_fn_806813B4_00006530:
     bl fn_80682830
     lwz r0, 0x18(r1)
     cmpwi r0, 0x0
-    bne lbl_fn_806813B4_0000656C
+    bne lbl_msl_vswscanf_0000656C
     cmpwi r28, 0x0
-    beq lbl_fn_806813B4_00006B94
+    beq lbl_msl_vswscanf_00006B94
     lis r3, lbl_8087EC00@ha
     li r29, 0x1
     lfs f1, lbl_8087EC00@l(r3)
-    b lbl_fn_806813B4_00006570
-lbl_fn_806813B4_0000656C:
+    b lbl_msl_vswscanf_00006570
+lbl_msl_vswscanf_0000656C:
     add r21, r21, r0
-lbl_fn_806813B4_00006570:
+lbl_msl_vswscanf_00006570:
     cmpwi r22, 0x0
-    beq lbl_fn_806813B4_000065BC
+    beq lbl_msl_vswscanf_000065BC
     lbz r0, 0x22(r1)
     cmpwi r0, 0x0
-    beq lbl_fn_806813B4_00006598
+    beq lbl_msl_vswscanf_00006598
     cmpwi r0, 0x8
-    beq lbl_fn_806813B4_000065A4
+    beq lbl_msl_vswscanf_000065A4
     cmpwi r0, 0x9
-    beq lbl_fn_806813B4_000065AC
-    b lbl_fn_806813B4_000065B0
-lbl_fn_806813B4_00006598:
+    beq lbl_msl_vswscanf_000065AC
+    b lbl_msl_vswscanf_000065B0
+lbl_msl_vswscanf_00006598:
     frsp f0, f1
     stfs f0, 0x0(r22)
-    b lbl_fn_806813B4_000065B0
-lbl_fn_806813B4_000065A4:
+    b lbl_msl_vswscanf_000065B0
+lbl_msl_vswscanf_000065A4:
     stfd f1, 0x0(r22)
-    b lbl_fn_806813B4_000065B0
-lbl_fn_806813B4_000065AC:
+    b lbl_msl_vswscanf_000065B0
+lbl_msl_vswscanf_000065AC:
     stfd f1, 0x0(r22)
-lbl_fn_806813B4_000065B0:
+lbl_msl_vswscanf_000065B0:
     cmpwi r29, 0x0
-    bne lbl_fn_806813B4_000065BC
+    bne lbl_msl_vswscanf_000065BC
     addi r20, r20, 0x1
-lbl_fn_806813B4_000065BC:
+lbl_msl_vswscanf_000065BC:
     addi r19, r19, 0x1
-    b lbl_fn_806813B4_00006B88
+    b lbl_msl_vswscanf_00006B88
     lbz r0, 0x21(r1)
     cmpwi r0, 0x0
-    bne lbl_fn_806813B4_000065D4
+    bne lbl_msl_vswscanf_000065D4
     stw r24, 0x24(r1)
-lbl_fn_806813B4_000065D4:
+lbl_msl_vswscanf_000065D4:
     cmpwi r22, 0x0
-    beq lbl_fn_806813B4_00006704
+    beq lbl_msl_vswscanf_00006704
     cmpwi r28, 0x0
-    beq lbl_fn_806813B4_000065F8
+    beq lbl_msl_vswscanf_000065F8
     lwz r3, 0x8(r1)
     li r31, 0x1
     li r4, 0x1
     bl __va_arg
     lwz r30, 0x0(r3)
-lbl_fn_806813B4_000065F8:
+lbl_msl_vswscanf_000065F8:
     cmpwi r29, 0x0
     li r0, 0x0
     stw r0, 0x18(r1)
-    beq lbl_fn_806813B4_0000661C
+    beq lbl_msl_vswscanf_0000661C
     cmpwi r30, 0x0
-    beq lbl_fn_806813B4_00006B88
+    beq lbl_msl_vswscanf_00006B88
     li r0, 0x0
     stb r0, 0x0(r22)
-    b lbl_fn_806813B4_00006B88
-lbl_fn_806813B4_0000661C:
+    b lbl_msl_vswscanf_00006B88
+lbl_msl_vswscanf_0000661C:
     stw r22, 0x4c(r1)
-    b lbl_fn_806813B4_00006660
-lbl_fn_806813B4_00006624:
+    b lbl_msl_vswscanf_00006660
+lbl_msl_vswscanf_00006624:
     lbz r0, 0x22(r1)
     stb r3, 0xc(r1)
     cmplwi r0, 0xa
-    bne lbl_fn_806813B4_0000664C
+    bne lbl_msl_vswscanf_0000664C
     mr r3, r22
     addi r4, r1, 0xc
     li r5, 0x1
     bl fn_8067DF20
     addi r22, r22, 0x2
-    b lbl_fn_806813B4_00006654
-lbl_fn_806813B4_0000664C:
+    b lbl_msl_vswscanf_00006654
+lbl_msl_vswscanf_0000664C:
     stb r3, 0x0(r22)
     addi r22, r22, 0x1
-lbl_fn_806813B4_00006654:
+lbl_msl_vswscanf_00006654:
     lwz r3, 0x18(r1)
     addi r0, r3, 0x1
     stw r0, 0x18(r1)
-lbl_fn_806813B4_00006660:
+lbl_msl_vswscanf_00006660:
     lwz r3, 0x24(r1)
     cmpwi r3, 0x0
     subi r3, r3, 0x1
     stw r3, 0x24(r1)
-    beq lbl_fn_806813B4_000066B4
+    beq lbl_msl_vswscanf_000066B4
     cmpwi r28, 0x0
-    beq lbl_fn_806813B4_00006690
+    beq lbl_msl_vswscanf_00006690
     xor r0, r30, r0
     cntlzw r0, r0
     slw r0, r30, r0
     srwi. r31, r0, 31
-    beq lbl_fn_806813B4_000066B4
-lbl_fn_806813B4_00006690:
+    beq lbl_msl_vswscanf_000066B4
+lbl_msl_vswscanf_00006690:
     mr r12, r26
     mr r3, r27
     li r4, 0x0
@@ -7874,45 +7874,45 @@ lbl_fn_806813B4_00006690:
     bctrl
     cmpwi r3, -0x1
     mr r18, r3
-    bne lbl_fn_806813B4_00006624
-lbl_fn_806813B4_000066B4:
+    bne lbl_msl_vswscanf_00006624
+lbl_msl_vswscanf_000066B4:
     lwz r0, 0x18(r1)
     stb r18, 0xc(r1)
     cmpwi r0, 0x0
-    beq lbl_fn_806813B4_000066D4
+    beq lbl_msl_vswscanf_000066D4
     cmpwi r28, 0x0
-    beq lbl_fn_806813B4_000066F8
+    beq lbl_msl_vswscanf_000066F8
     cmpwi r31, 0x0
-    bne lbl_fn_806813B4_000066F8
-lbl_fn_806813B4_000066D4:
+    bne lbl_msl_vswscanf_000066F8
+lbl_msl_vswscanf_000066D4:
     cmpwi r28, 0x0
-    beq lbl_fn_806813B4_00006B94
+    beq lbl_msl_vswscanf_00006B94
     cmpwi r30, 0x0
     li r29, 0x1
-    beq lbl_fn_806813B4_00006B88
+    beq lbl_msl_vswscanf_00006B88
     lwz r3, 0x4c(r1)
     li r0, 0x0
     stb r0, 0x0(r3)
-    b lbl_fn_806813B4_00006B88
-lbl_fn_806813B4_000066F8:
+    b lbl_msl_vswscanf_00006B88
+lbl_msl_vswscanf_000066F8:
     add r21, r21, r0
     addi r20, r20, 0x1
-    b lbl_fn_806813B4_00006768
-lbl_fn_806813B4_00006704:
+    b lbl_msl_vswscanf_00006768
+lbl_msl_vswscanf_00006704:
     li r0, 0x0
     stw r0, 0x18(r1)
-    b lbl_fn_806813B4_00006720
-lbl_fn_806813B4_00006710:
+    b lbl_msl_vswscanf_00006720
+lbl_msl_vswscanf_00006710:
     lwz r4, 0x18(r1)
     stb r3, 0xc(r1)
     addi r0, r4, 0x1
     stw r0, 0x18(r1)
-lbl_fn_806813B4_00006720:
+lbl_msl_vswscanf_00006720:
     lwz r3, 0x24(r1)
     cmpwi r3, 0x0
     subi r0, r3, 0x1
     stw r0, 0x24(r1)
-    beq lbl_fn_806813B4_00006758
+    beq lbl_msl_vswscanf_00006758
     mr r12, r26
     mr r3, r27
     li r4, 0x0
@@ -7921,21 +7921,21 @@ lbl_fn_806813B4_00006720:
     bctrl
     cmpwi r3, -0x1
     mr r18, r3
-    bne lbl_fn_806813B4_00006710
-lbl_fn_806813B4_00006758:
+    bne lbl_msl_vswscanf_00006710
+lbl_msl_vswscanf_00006758:
     lwz r0, 0x18(r1)
     stb r18, 0xc(r1)
     cmpwi r0, 0x0
-    beq lbl_fn_806813B4_00006B94
-lbl_fn_806813B4_00006768:
+    beq lbl_msl_vswscanf_00006B94
+lbl_msl_vswscanf_00006768:
     addi r19, r19, 0x1
-    b lbl_fn_806813B4_00006B88
+    b lbl_msl_vswscanf_00006B88
     cmpwi r29, 0x0
-    bne lbl_fn_806813B4_00006B88
-    b lbl_fn_806813B4_00006780
-lbl_fn_806813B4_0000677C:
+    bne lbl_msl_vswscanf_00006B88
+    b lbl_msl_vswscanf_00006780
+lbl_msl_vswscanf_0000677C:
     addi r21, r21, 0x1
-lbl_fn_806813B4_00006780:
+lbl_msl_vswscanf_00006780:
     mr r12, r26
     mr r3, r27
     li r4, 0x0
@@ -7946,40 +7946,40 @@ lbl_fn_806813B4_00006780:
     stb r3, 0xc(r1)
     cmplwi r0, 0xff
     li r4, 0x1
-    bgt lbl_fn_806813B4_000067B0
+    bgt lbl_msl_vswscanf_000067B0
     li r4, 0x0
-lbl_fn_806813B4_000067B0:
+lbl_msl_vswscanf_000067B0:
     cmpwi r4, 0x0
-    beq lbl_fn_806813B4_000067C0
+    beq lbl_msl_vswscanf_000067C0
     li r0, 0x0
-    b lbl_fn_806813B4_000067D4
-lbl_fn_806813B4_000067C0:
+    b lbl_msl_vswscanf_000067D4
+lbl_msl_vswscanf_000067C0:
     lwz r4, 0x38(r23)
     slwi r0, r0, 1
     lwz r4, 0x8(r4)
     lhzx r0, r4, r0
     rlwinm r0, r0, 0, 23, 23
-lbl_fn_806813B4_000067D4:
+lbl_msl_vswscanf_000067D4:
     cmpwi r0, 0x0
-    bne lbl_fn_806813B4_0000677C
+    bne lbl_msl_vswscanf_0000677C
     clrlwi r0, r3, 24
     extsb r4, r0
     cmpwi r4, 0x25
-    beq lbl_fn_806813B4_00006810
+    beq lbl_msl_vswscanf_00006810
     mr r12, r26
     mr r3, r27
     li r5, 0x1
     mtctr r12
     bctrl
     cmpwi r28, 0x0
-    beq lbl_fn_806813B4_00006B94
+    beq lbl_msl_vswscanf_00006B94
     li r29, 0x1
-    b lbl_fn_806813B4_00006B88
-lbl_fn_806813B4_00006810:
+    b lbl_msl_vswscanf_00006B88
+lbl_msl_vswscanf_00006810:
     addi r21, r21, 0x1
-    b lbl_fn_806813B4_00006B88
+    b lbl_msl_vswscanf_00006B88
     cmpwi r29, 0x0
-    bne lbl_fn_806813B4_000068BC
+    bne lbl_msl_vswscanf_000068BC
     mr r12, r26
     mr r3, r27
     li r4, 0x0
@@ -7987,8 +7987,8 @@ lbl_fn_806813B4_00006810:
     mtctr r12
     bctrl
     stb r3, 0xc(r1)
-    b lbl_fn_806813B4_00006860
-lbl_fn_806813B4_00006840:
+    b lbl_msl_vswscanf_00006860
+lbl_msl_vswscanf_00006840:
     mr r12, r26
     mr r3, r27
     li r4, 0x0
@@ -7997,58 +7997,58 @@ lbl_fn_806813B4_00006840:
     addi r21, r21, 0x1
     bctrl
     stb r3, 0xc(r1)
-lbl_fn_806813B4_00006860:
+lbl_msl_vswscanf_00006860:
     clrlwi r4, r3, 24
     li r3, 0x1
     extsb r0, r4
     cmplwi r0, 0xff
-    bgt lbl_fn_806813B4_00006878
+    bgt lbl_msl_vswscanf_00006878
     li r3, 0x0
-lbl_fn_806813B4_00006878:
+lbl_msl_vswscanf_00006878:
     cmpwi r3, 0x0
-    beq lbl_fn_806813B4_00006888
+    beq lbl_msl_vswscanf_00006888
     li r0, 0x0
-    b lbl_fn_806813B4_0000689C
-lbl_fn_806813B4_00006888:
+    b lbl_msl_vswscanf_0000689C
+lbl_msl_vswscanf_00006888:
     lwz r3, 0x38(r23)
     slwi r0, r0, 1
     lwz r3, 0x8(r3)
     lhzx r0, r3, r0
     rlwinm r0, r0, 0, 23, 23
-lbl_fn_806813B4_0000689C:
+lbl_msl_vswscanf_0000689C:
     cmpwi r0, 0x0
-    bne lbl_fn_806813B4_00006840
+    bne lbl_msl_vswscanf_00006840
     mr r12, r26
     mr r3, r27
     extsb r4, r4
     li r5, 0x1
     mtctr r12
     bctrl
-lbl_fn_806813B4_000068BC:
+lbl_msl_vswscanf_000068BC:
     cmpwi r22, 0x0
-    beq lbl_fn_806813B4_00006A50
+    beq lbl_msl_vswscanf_00006A50
     cmpwi r28, 0x0
-    beq lbl_fn_806813B4_000068E4
+    beq lbl_msl_vswscanf_000068E4
     lwz r3, 0x8(r1)
     li r31, 0x1
     li r4, 0x1
     bl __va_arg
     lwz r3, 0x0(r3)
     subi r30, r3, 0x1
-lbl_fn_806813B4_000068E4:
+lbl_msl_vswscanf_000068E4:
     cmpwi r29, 0x0
     li r0, 0x0
     stw r0, 0x18(r1)
-    beq lbl_fn_806813B4_00006908
+    beq lbl_msl_vswscanf_00006908
     cmpwi r30, 0x0
-    beq lbl_fn_806813B4_00006B88
+    beq lbl_msl_vswscanf_00006B88
     li r0, 0x0
     stb r0, 0x0(r22)
-    b lbl_fn_806813B4_00006B88
-lbl_fn_806813B4_00006908:
+    b lbl_msl_vswscanf_00006B88
+lbl_msl_vswscanf_00006908:
     stw r22, 0x48(r1)
-    b lbl_fn_806813B4_0000696C
-lbl_fn_806813B4_00006910:
+    b lbl_msl_vswscanf_0000696C
+lbl_msl_vswscanf_00006910:
     extrwi r0, r3, 5, 24
     clrlwi r5, r3, 29
     add r4, r25, r0
@@ -8057,38 +8057,38 @@ lbl_fn_806813B4_00006910:
     slw r4, r24, r5
     clrlwi r3, r3, 24
     and. r0, r4, r0
-    beq lbl_fn_806813B4_000069C4
+    beq lbl_msl_vswscanf_000069C4
     lbz r0, 0x22(r1)
     cmplwi r0, 0xa
-    bne lbl_fn_806813B4_00006958
+    bne lbl_msl_vswscanf_00006958
     mr r3, r22
     addi r4, r1, 0xc
     li r5, 0x1
     bl fn_8067DF20
     addi r22, r22, 0x2
-    b lbl_fn_806813B4_00006960
-lbl_fn_806813B4_00006958:
+    b lbl_msl_vswscanf_00006960
+lbl_msl_vswscanf_00006958:
     stb r3, 0x0(r22)
     addi r22, r22, 0x1
-lbl_fn_806813B4_00006960:
+lbl_msl_vswscanf_00006960:
     lwz r3, 0x18(r1)
     addi r0, r3, 0x1
     stw r0, 0x18(r1)
-lbl_fn_806813B4_0000696C:
+lbl_msl_vswscanf_0000696C:
     lwz r3, 0x24(r1)
     cmpwi r3, 0x0
     subi r3, r3, 0x1
     stw r3, 0x24(r1)
-    beq lbl_fn_806813B4_000069C4
+    beq lbl_msl_vswscanf_000069C4
     cmpwi r28, 0x0
-    beq lbl_fn_806813B4_000069A0
+    beq lbl_msl_vswscanf_000069A0
     subf r4, r0, r30
     orc r3, r30, r0
     srwi r0, r4, 1
     subf r0, r0, r3
     srwi. r31, r0, 31
-    beq lbl_fn_806813B4_000069C4
-lbl_fn_806813B4_000069A0:
+    beq lbl_msl_vswscanf_000069C4
+lbl_msl_vswscanf_000069A0:
     mr r12, r26
     mr r3, r27
     li r4, 0x0
@@ -8097,17 +8097,17 @@ lbl_fn_806813B4_000069A0:
     bctrl
     cmpwi r3, -0x1
     mr r18, r3
-    bne lbl_fn_806813B4_00006910
-lbl_fn_806813B4_000069C4:
+    bne lbl_msl_vswscanf_00006910
+lbl_msl_vswscanf_000069C4:
     lwz r3, 0x18(r1)
     stb r18, 0xc(r1)
     cmpwi r3, 0x0
-    beq lbl_fn_806813B4_000069E4
+    beq lbl_msl_vswscanf_000069E4
     cmpwi r28, 0x0
-    beq lbl_fn_806813B4_00006A24
+    beq lbl_msl_vswscanf_00006A24
     cmpwi r31, 0x0
-    bne lbl_fn_806813B4_00006A24
-lbl_fn_806813B4_000069E4:
+    bne lbl_msl_vswscanf_00006A24
+lbl_msl_vswscanf_000069E4:
     clrlwi r4, r18, 24
     mr r12, r26
     mr r3, r27
@@ -8116,33 +8116,33 @@ lbl_fn_806813B4_000069E4:
     mtctr r12
     bctrl
     cmpwi r28, 0x0
-    beq lbl_fn_806813B4_00006B94
+    beq lbl_msl_vswscanf_00006B94
     cmpwi r30, 0x0
     li r29, 0x1
-    beq lbl_fn_806813B4_00006B88
+    beq lbl_msl_vswscanf_00006B88
     lwz r3, 0x48(r1)
     li r0, 0x0
     stb r0, 0x0(r3)
-    b lbl_fn_806813B4_00006B88
-lbl_fn_806813B4_00006A24:
+    b lbl_msl_vswscanf_00006B88
+lbl_msl_vswscanf_00006A24:
     lbz r0, 0x22(r1)
     add r21, r21, r3
     cmplwi r0, 0xa
-    bne lbl_fn_806813B4_00006A40
+    bne lbl_msl_vswscanf_00006A40
     li r0, 0x0
     sth r0, 0x0(r22)
-    b lbl_fn_806813B4_00006A48
-lbl_fn_806813B4_00006A40:
+    b lbl_msl_vswscanf_00006A48
+lbl_msl_vswscanf_00006A40:
     li r0, 0x0
     stb r0, 0x0(r22)
-lbl_fn_806813B4_00006A48:
+lbl_msl_vswscanf_00006A48:
     addi r20, r20, 0x1
-    b lbl_fn_806813B4_00006AF4
-lbl_fn_806813B4_00006A50:
+    b lbl_msl_vswscanf_00006AF4
+lbl_msl_vswscanf_00006A50:
     li r0, 0x0
     stw r0, 0x18(r1)
-    b lbl_fn_806813B4_00006A88
-lbl_fn_806813B4_00006A5C:
+    b lbl_msl_vswscanf_00006A88
+lbl_msl_vswscanf_00006A5C:
     extrwi r0, r3, 5, 24
     clrlwi r5, r3, 29
     add r4, r25, r0
@@ -8150,16 +8150,16 @@ lbl_fn_806813B4_00006A5C:
     lbz r0, 0x8(r4)
     slw r3, r24, r5
     and. r0, r3, r0
-    beq lbl_fn_806813B4_00006AC0
+    beq lbl_msl_vswscanf_00006AC0
     lwz r3, 0x18(r1)
     addi r0, r3, 0x1
     stw r0, 0x18(r1)
-lbl_fn_806813B4_00006A88:
+lbl_msl_vswscanf_00006A88:
     lwz r3, 0x24(r1)
     cmpwi r3, 0x0
     subi r0, r3, 0x1
     stw r0, 0x24(r1)
-    beq lbl_fn_806813B4_00006AC0
+    beq lbl_msl_vswscanf_00006AC0
     mr r12, r26
     mr r3, r27
     li r4, 0x0
@@ -8168,12 +8168,12 @@ lbl_fn_806813B4_00006A88:
     bctrl
     cmpwi r3, -0x1
     mr r18, r3
-    bne lbl_fn_806813B4_00006A5C
-lbl_fn_806813B4_00006AC0:
+    bne lbl_msl_vswscanf_00006A5C
+lbl_msl_vswscanf_00006AC0:
     lwz r0, 0x18(r1)
     stb r18, 0xc(r1)
     cmpwi r0, 0x0
-    bne lbl_fn_806813B4_00006AF0
+    bne lbl_msl_vswscanf_00006AF0
     clrlwi r4, r18, 24
     mr r12, r26
     mr r3, r27
@@ -8181,13 +8181,13 @@ lbl_fn_806813B4_00006AC0:
     extsb r4, r4
     mtctr r12
     bctrl
-    b lbl_fn_806813B4_00006B88
-lbl_fn_806813B4_00006AF0:
+    b lbl_msl_vswscanf_00006B88
+lbl_msl_vswscanf_00006AF0:
     add r21, r21, r0
-lbl_fn_806813B4_00006AF4:
+lbl_msl_vswscanf_00006AF4:
     lwz r0, 0x24(r1)
     cmpwi r0, 0x0
-    blt lbl_fn_806813B4_00006B1C
+    blt lbl_msl_vswscanf_00006B1C
     lbz r4, 0xc(r1)
     mr r12, r26
     mr r3, r27
@@ -8195,44 +8195,44 @@ lbl_fn_806813B4_00006AF4:
     extsb r4, r4
     mtctr r12
     bctrl
-lbl_fn_806813B4_00006B1C:
+lbl_msl_vswscanf_00006B1C:
     addi r19, r19, 0x1
-    b lbl_fn_806813B4_00006B88
+    b lbl_msl_vswscanf_00006B88
     cmpwi r22, 0x0
-    beq lbl_fn_806813B4_00006B88
+    beq lbl_msl_vswscanf_00006B88
     lbz r0, 0x22(r1)
     cmpwi r0, 0x0
-    beq lbl_fn_806813B4_00006B5C
+    beq lbl_msl_vswscanf_00006B5C
     cmpwi r0, 0x2
-    beq lbl_fn_806813B4_00006B64
+    beq lbl_msl_vswscanf_00006B64
     cmpwi r0, 0x3
-    beq lbl_fn_806813B4_00006B6C
+    beq lbl_msl_vswscanf_00006B6C
     cmpwi r0, 0x1
-    beq lbl_fn_806813B4_00006B74
+    beq lbl_msl_vswscanf_00006B74
     cmpwi r0, 0x7
-    beq lbl_fn_806813B4_00006B7C
-    b lbl_fn_806813B4_00006B88
-lbl_fn_806813B4_00006B5C:
+    beq lbl_msl_vswscanf_00006B7C
+    b lbl_msl_vswscanf_00006B88
+lbl_msl_vswscanf_00006B5C:
     stw r21, 0x0(r22)
-    b lbl_fn_806813B4_00006B88
-lbl_fn_806813B4_00006B64:
+    b lbl_msl_vswscanf_00006B88
+lbl_msl_vswscanf_00006B64:
     sth r21, 0x0(r22)
-    b lbl_fn_806813B4_00006B88
-lbl_fn_806813B4_00006B6C:
+    b lbl_msl_vswscanf_00006B88
+lbl_msl_vswscanf_00006B6C:
     stw r21, 0x0(r22)
-    b lbl_fn_806813B4_00006B88
-lbl_fn_806813B4_00006B74:
+    b lbl_msl_vswscanf_00006B88
+lbl_msl_vswscanf_00006B74:
     stb r21, 0x0(r22)
-    b lbl_fn_806813B4_00006B88
-lbl_fn_806813B4_00006B7C:
+    b lbl_msl_vswscanf_00006B88
+lbl_msl_vswscanf_00006B7C:
     stw r21, 0x4(r22)
     srawi r0, r21, 31
     stw r0, 0x0(r22)
-lbl_fn_806813B4_00006B88:
+lbl_msl_vswscanf_00006B88:
     lbz r0, 0x0(r17)
     extsb. r22, r0
-    bne lbl_fn_806813B4_00005FA4
-lbl_fn_806813B4_00006B94:
+    bne lbl_msl_vswscanf_00005FA4
+lbl_msl_vswscanf_00006B94:
     mr r12, r26
     mr r3, r27
     li r4, 0x0
@@ -8240,14 +8240,14 @@ lbl_fn_806813B4_00006B94:
     mtctr r12
     bctrl
     cmpwi r3, 0x0
-    beq lbl_fn_806813B4_00006BC4
+    beq lbl_msl_vswscanf_00006BC4
     cmpwi r19, 0x0
-    bne lbl_fn_806813B4_00006BC4
+    bne lbl_msl_vswscanf_00006BC4
     li r3, -0x1
-    b lbl_fn_806813B4_00006BC8
-lbl_fn_806813B4_00006BC4:
+    b lbl_msl_vswscanf_00006BC8
+lbl_msl_vswscanf_00006BC4:
     mr r3, r20
-lbl_fn_806813B4_00006BC8:
+lbl_msl_vswscanf_00006BC8:
     addi r11, r1, 0xb0
     bl _restgpr_15
     lwz r0, 0xb4(r1)
@@ -8385,7 +8385,7 @@ lbl_fn_806820D4_00006D64:
     addi r4, r1, 0x68
     addi r6, r1, 0x70
     li r7, 0x0
-    bl fn_806813B4
+    bl msl_vswscanf
 lbl_fn_806820D4_00006D88:
     lwz r0, 0x84(r1)
     mtlr r0
@@ -12963,7 +12963,7 @@ lbl_fn_8068573C_0000AA3C:
     blr
 }
 
-asm void fn_80685ECC(void)
+asm void msl_vswprintf(void)
 {
     nofralloc
     stwu r1, -0x4d0(r1)
@@ -12984,46 +12984,46 @@ asm void fn_80685ECC(void)
     lis r15, jumptable_807BB948@ha
     li r14, 0x25
     sth r19, 0xc(r1)
-    b lbl_fn_80685ECC_0000B3C8
-lbl_fn_80685ECC_0000AAAC:
+    b lbl_msl_vswprintf_0000B3C8
+lbl_msl_vswprintf_0000AAAC:
     mr r3, r30
     li r4, 0x25
     bl wcschr
     cmpwi r3, 0x0
     mr r29, r3
-    bne lbl_fn_80685ECC_0000AB00
+    bne lbl_msl_vswprintf_0000AB00
     mr r3, r30
     bl wcslen
     cmpwi r3, 0x0
     mr r5, r3
     add r31, r31, r3
-    beq lbl_fn_80685ECC_0000B3D4
+    beq lbl_msl_vswprintf_0000B3D4
     mr r12, r20
     mr r3, r21
     mr r4, r30
     mtctr r12
     bctrl
     cmpwi r3, 0x0
-    bne lbl_fn_80685ECC_0000B3D4
+    bne lbl_msl_vswprintf_0000B3D4
     li r3, -0x1
-    b lbl_fn_80685ECC_0000B3D8
-lbl_fn_80685ECC_0000AB00:
+    b lbl_msl_vswprintf_0000B3D8
+lbl_msl_vswprintf_0000AB00:
     subf r3, r30, r3
     srwi r0, r3, 31
     add r0, r0, r3
     srawi. r5, r0, 1
     add r31, r31, r5
-    beq lbl_fn_80685ECC_0000AB3C
+    beq lbl_msl_vswprintf_0000AB3C
     mr r12, r20
     mr r3, r21
     mr r4, r30
     mtctr r12
     bctrl
     cmpwi r3, 0x0
-    bne lbl_fn_80685ECC_0000AB3C
+    bne lbl_msl_vswprintf_0000AB3C
     li r3, -0x1
-    b lbl_fn_80685ECC_0000B3D8
-lbl_fn_80685ECC_0000AB3C:
+    b lbl_msl_vswprintf_0000B3D8
+lbl_msl_vswprintf_0000AB3C:
     mr r3, r29
     mr r4, r22
     addi r5, r1, 0x70
@@ -13032,7 +13032,7 @@ lbl_fn_80685ECC_0000AB3C:
     mr r30, r3
     subi r0, r4, 0x25
     cmplwi r0, 0x53
-    bgt lbl_fn_80685ECC_0000B1F0
+    bgt lbl_msl_vswprintf_0000B1F0
     addi r3, r15, jumptable_807BB948@l
     slwi r0, r0, 2
     lwzx r3, r3, r0
@@ -13040,62 +13040,62 @@ lbl_fn_80685ECC_0000AB3C:
     bctr
     lbz r0, 0x74(r1)
     cmplwi r0, 0x3
-    bne lbl_fn_80685ECC_0000AB94
+    bne lbl_msl_vswprintf_0000AB94
     mr r3, r22
     li r4, 0x1
     bl __va_arg
     lwz r28, 0x0(r3)
-    b lbl_fn_80685ECC_0000AC1C
-lbl_fn_80685ECC_0000AB94:
+    b lbl_msl_vswprintf_0000AC1C
+lbl_msl_vswprintf_0000AB94:
     cmplwi r0, 0x4
-    bne lbl_fn_80685ECC_0000ABB4
+    bne lbl_msl_vswprintf_0000ABB4
     mr r3, r22
     li r4, 0x2
     bl __va_arg
     lwz r27, 0x0(r3)
     lwz r26, 0x4(r3)
-    b lbl_fn_80685ECC_0000AC1C
-lbl_fn_80685ECC_0000ABB4:
+    b lbl_msl_vswprintf_0000AC1C
+lbl_msl_vswprintf_0000ABB4:
     cmplwi r0, 0x6
-    bne lbl_fn_80685ECC_0000ABD4
+    bne lbl_msl_vswprintf_0000ABD4
     mr r3, r22
     li r4, 0x2
     bl __va_arg
     lwz r27, 0x0(r3)
     lwz r26, 0x4(r3)
-    b lbl_fn_80685ECC_0000AC1C
-lbl_fn_80685ECC_0000ABD4:
+    b lbl_msl_vswprintf_0000AC1C
+lbl_msl_vswprintf_0000ABD4:
     cmplwi r0, 0x7
-    bne lbl_fn_80685ECC_0000ABF0
+    bne lbl_msl_vswprintf_0000ABF0
     mr r3, r22
     li r4, 0x1
     bl __va_arg
     lwz r28, 0x0(r3)
-    b lbl_fn_80685ECC_0000AC1C
-lbl_fn_80685ECC_0000ABF0:
+    b lbl_msl_vswprintf_0000AC1C
+lbl_msl_vswprintf_0000ABF0:
     cmplwi r0, 0x8
-    bne lbl_fn_80685ECC_0000AC0C
+    bne lbl_msl_vswprintf_0000AC0C
     mr r3, r22
     li r4, 0x1
     bl __va_arg
     lwz r28, 0x0(r3)
-    b lbl_fn_80685ECC_0000AC1C
-lbl_fn_80685ECC_0000AC0C:
+    b lbl_msl_vswprintf_0000AC1C
+lbl_msl_vswprintf_0000AC0C:
     mr r3, r22
     li r4, 0x1
     bl __va_arg
     lwz r28, 0x0(r3)
-lbl_fn_80685ECC_0000AC1C:
+lbl_msl_vswprintf_0000AC1C:
     lbz r0, 0x74(r1)
     cmplwi r0, 0x2
-    bne lbl_fn_80685ECC_0000AC2C
+    bne lbl_msl_vswprintf_0000AC2C
     extsh r28, r28
-lbl_fn_80685ECC_0000AC2C:
+lbl_msl_vswprintf_0000AC2C:
     cmplwi r0, 0x4
-    beq lbl_fn_80685ECC_0000AC3C
+    beq lbl_msl_vswprintf_0000AC3C
     cmplwi r0, 0x6
-    bne lbl_fn_80685ECC_0000AC80
-lbl_fn_80685ECC_0000AC3C:
+    bne lbl_msl_vswprintf_0000AC80
+lbl_msl_vswprintf_0000AC3C:
     lwz r9, 0x70(r1)
     mr r4, r26
     lwz r8, 0x74(r1)
@@ -13111,9 +13111,9 @@ lbl_fn_80685ECC_0000AC3C:
     bl fn_80684F04
     cmpwi r3, 0x0
     mr r25, r3
-    beq lbl_fn_80685ECC_0000B1F0
-    b lbl_fn_80685ECC_0000ACBC
-lbl_fn_80685ECC_0000AC80:
+    beq lbl_msl_vswprintf_0000B1F0
+    b lbl_msl_vswprintf_0000ACBC
+lbl_msl_vswprintf_0000AC80:
     lwz r8, 0x70(r1)
     mr r3, r28
     lwz r7, 0x74(r1)
@@ -13128,71 +13128,71 @@ lbl_fn_80685ECC_0000AC80:
     bl fn_80684CC0
     cmpwi r3, 0x0
     mr r25, r3
-    beq lbl_fn_80685ECC_0000B1F0
-lbl_fn_80685ECC_0000ACBC:
+    beq lbl_msl_vswprintf_0000B1F0
+lbl_msl_vswprintf_0000ACBC:
     subf r3, r25, r16
     srwi r0, r3, 31
     add r0, r0, r3
     srawi r24, r0, 1
-    b lbl_fn_80685ECC_0000B234
+    b lbl_msl_vswprintf_0000B234
     lbz r0, 0x74(r1)
     cmplwi r0, 0x3
-    bne lbl_fn_80685ECC_0000ACF0
+    bne lbl_msl_vswprintf_0000ACF0
     mr r3, r22
     li r4, 0x1
     bl __va_arg
     lwz r28, 0x0(r3)
-    b lbl_fn_80685ECC_0000AD78
-lbl_fn_80685ECC_0000ACF0:
+    b lbl_msl_vswprintf_0000AD78
+lbl_msl_vswprintf_0000ACF0:
     cmplwi r0, 0x4
-    bne lbl_fn_80685ECC_0000AD10
+    bne lbl_msl_vswprintf_0000AD10
     mr r3, r22
     li r4, 0x2
     bl __va_arg
     lwz r27, 0x0(r3)
     lwz r26, 0x4(r3)
-    b lbl_fn_80685ECC_0000AD78
-lbl_fn_80685ECC_0000AD10:
+    b lbl_msl_vswprintf_0000AD78
+lbl_msl_vswprintf_0000AD10:
     cmplwi r0, 0x6
-    bne lbl_fn_80685ECC_0000AD30
+    bne lbl_msl_vswprintf_0000AD30
     mr r3, r22
     li r4, 0x2
     bl __va_arg
     lwz r27, 0x0(r3)
     lwz r26, 0x4(r3)
-    b lbl_fn_80685ECC_0000AD78
-lbl_fn_80685ECC_0000AD30:
+    b lbl_msl_vswprintf_0000AD78
+lbl_msl_vswprintf_0000AD30:
     cmplwi r0, 0x7
-    bne lbl_fn_80685ECC_0000AD4C
+    bne lbl_msl_vswprintf_0000AD4C
     mr r3, r22
     li r4, 0x1
     bl __va_arg
     lwz r28, 0x0(r3)
-    b lbl_fn_80685ECC_0000AD78
-lbl_fn_80685ECC_0000AD4C:
+    b lbl_msl_vswprintf_0000AD78
+lbl_msl_vswprintf_0000AD4C:
     cmplwi r0, 0x8
-    bne lbl_fn_80685ECC_0000AD68
+    bne lbl_msl_vswprintf_0000AD68
     mr r3, r22
     li r4, 0x1
     bl __va_arg
     lwz r28, 0x0(r3)
-    b lbl_fn_80685ECC_0000AD78
-lbl_fn_80685ECC_0000AD68:
+    b lbl_msl_vswprintf_0000AD78
+lbl_msl_vswprintf_0000AD68:
     mr r3, r22
     li r4, 0x1
     bl __va_arg
     lwz r28, 0x0(r3)
-lbl_fn_80685ECC_0000AD78:
+lbl_msl_vswprintf_0000AD78:
     lbz r0, 0x74(r1)
     cmplwi r0, 0x2
-    bne lbl_fn_80685ECC_0000AD88
+    bne lbl_msl_vswprintf_0000AD88
     clrlwi r28, r28, 16
-lbl_fn_80685ECC_0000AD88:
+lbl_msl_vswprintf_0000AD88:
     cmplwi r0, 0x4
-    beq lbl_fn_80685ECC_0000AD98
+    beq lbl_msl_vswprintf_0000AD98
     cmplwi r0, 0x6
-    bne lbl_fn_80685ECC_0000ADDC
-lbl_fn_80685ECC_0000AD98:
+    bne lbl_msl_vswprintf_0000ADDC
+lbl_msl_vswprintf_0000AD98:
     lwz r9, 0x70(r1)
     mr r4, r26
     lwz r8, 0x74(r1)
@@ -13208,9 +13208,9 @@ lbl_fn_80685ECC_0000AD98:
     bl fn_80684F04
     cmpwi r3, 0x0
     mr r25, r3
-    beq lbl_fn_80685ECC_0000B1F0
-    b lbl_fn_80685ECC_0000AE18
-lbl_fn_80685ECC_0000ADDC:
+    beq lbl_msl_vswprintf_0000B1F0
+    b lbl_msl_vswprintf_0000AE18
+lbl_msl_vswprintf_0000ADDC:
     lwz r8, 0x70(r1)
     mr r3, r28
     lwz r7, 0x74(r1)
@@ -13225,27 +13225,27 @@ lbl_fn_80685ECC_0000ADDC:
     bl fn_80684CC0
     cmpwi r3, 0x0
     mr r25, r3
-    beq lbl_fn_80685ECC_0000B1F0
-lbl_fn_80685ECC_0000AE18:
+    beq lbl_msl_vswprintf_0000B1F0
+lbl_msl_vswprintf_0000AE18:
     subf r3, r25, r16
     srwi r0, r3, 31
     add r0, r0, r3
     srawi r24, r0, 1
-    b lbl_fn_80685ECC_0000B234
+    b lbl_msl_vswprintf_0000B234
     lbz r0, 0x74(r1)
     cmplwi r0, 0x9
-    bne lbl_fn_80685ECC_0000AE4C
+    bne lbl_msl_vswprintf_0000AE4C
     mr r3, r22
     li r4, 0x3
     bl __va_arg
     lfd f1, 0x0(r3)
-    b lbl_fn_80685ECC_0000AE5C
-lbl_fn_80685ECC_0000AE4C:
+    b lbl_msl_vswprintf_0000AE5C
+lbl_msl_vswprintf_0000AE4C:
     mr r3, r22
     li r4, 0x3
     bl __va_arg
     lfd f1, 0x0(r3)
-lbl_fn_80685ECC_0000AE5C:
+lbl_msl_vswprintf_0000AE5C:
     lwz r7, 0x70(r1)
     addi r3, r1, 0x480
     lwz r6, 0x74(r1)
@@ -13259,26 +13259,26 @@ lbl_fn_80685ECC_0000AE5C:
     bl fn_8068573C
     cmpwi r3, 0x0
     mr r25, r3
-    beq lbl_fn_80685ECC_0000B1F0
+    beq lbl_msl_vswprintf_0000B1F0
     subf r3, r3, r16
     srwi r0, r3, 31
     add r0, r0, r3
     srawi r24, r0, 1
-    b lbl_fn_80685ECC_0000B234
+    b lbl_msl_vswprintf_0000B234
     lbz r0, 0x74(r1)
     cmplwi r0, 0x9
-    bne lbl_fn_80685ECC_0000AEC8
+    bne lbl_msl_vswprintf_0000AEC8
     mr r3, r22
     li r4, 0x3
     bl __va_arg
     lfd f1, 0x0(r3)
-    b lbl_fn_80685ECC_0000AED8
-lbl_fn_80685ECC_0000AEC8:
+    b lbl_msl_vswprintf_0000AED8
+lbl_msl_vswprintf_0000AEC8:
     mr r3, r22
     li r4, 0x3
     bl __va_arg
     lfd f1, 0x0(r3)
-lbl_fn_80685ECC_0000AED8:
+lbl_msl_vswprintf_0000AED8:
     lwz r7, 0x70(r1)
     addi r3, r1, 0x480
     lwz r6, 0x74(r1)
@@ -13292,195 +13292,195 @@ lbl_fn_80685ECC_0000AED8:
     bl fn_806851C0
     cmpwi r3, 0x0
     mr r25, r3
-    beq lbl_fn_80685ECC_0000B1F0
+    beq lbl_msl_vswprintf_0000B1F0
     subf r3, r3, r16
     srwi r0, r3, 31
     add r0, r0, r3
     srawi r24, r0, 1
-    b lbl_fn_80685ECC_0000B234
+    b lbl_msl_vswprintf_0000B234
     lbz r0, 0x74(r1)
     cmplwi r0, 0x5
-    bne lbl_fn_80685ECC_0000AFF8
+    bne lbl_msl_vswprintf_0000AFF8
     mr r3, r22
     li r4, 0x1
     bl __va_arg
     cmpwi r23, 0x0
     lwz r25, 0x0(r3)
-    beq lbl_fn_80685ECC_0000AF68
+    beq lbl_msl_vswprintf_0000AF68
     cmpwi r25, 0x0
-    bne lbl_fn_80685ECC_0000AF68
+    bne lbl_msl_vswprintf_0000AF68
     li r3, 0x0
     li r4, 0x0
     li r5, -0x1
     bl __msl_runtime_constraint_violation_s
     li r3, -0x1
-    b lbl_fn_80685ECC_0000B3D8
-lbl_fn_80685ECC_0000AF68:
+    b lbl_msl_vswprintf_0000B3D8
+lbl_msl_vswprintf_0000AF68:
     cmpwi r25, 0x0
-    bne lbl_fn_80685ECC_0000AF74
+    bne lbl_msl_vswprintf_0000AF74
     addi r25, r17, 0x6c
-lbl_fn_80685ECC_0000AF74:
+lbl_msl_vswprintf_0000AF74:
     lbz r0, 0x73(r1)
     cmpwi r0, 0x0
-    beq lbl_fn_80685ECC_0000AFAC
+    beq lbl_msl_vswprintf_0000AFAC
     lbz r0, 0x72(r1)
     lhz r3, 0x0(r25)
     addi r25, r25, 0x2
     cmpwi r0, 0x0
     clrlwi r24, r3, 24
-    beq lbl_fn_80685ECC_0000B234
+    beq lbl_msl_vswprintf_0000B234
     lwz r0, 0x7c(r1)
     cmpw r24, r0
-    ble lbl_fn_80685ECC_0000B234
+    ble lbl_msl_vswprintf_0000B234
     mr r24, r0
-    b lbl_fn_80685ECC_0000B234
-lbl_fn_80685ECC_0000AFAC:
+    b lbl_msl_vswprintf_0000B234
+lbl_msl_vswprintf_0000AFAC:
     lbz r0, 0x72(r1)
     cmpwi r0, 0x0
-    beq lbl_fn_80685ECC_0000AFE8
+    beq lbl_msl_vswprintf_0000AFE8
     lwz r24, 0x7c(r1)
     mr r3, r25
     li r4, 0x0
     mr r5, r24
     bl wmemchr
     cmpwi r3, 0x0
-    beq lbl_fn_80685ECC_0000B234
+    beq lbl_msl_vswprintf_0000B234
     subf r3, r25, r3
     srwi r0, r3, 31
     add r0, r0, r3
     srawi r24, r0, 1
-    b lbl_fn_80685ECC_0000B234
-lbl_fn_80685ECC_0000AFE8:
+    b lbl_msl_vswprintf_0000B234
+lbl_msl_vswprintf_0000AFE8:
     mr r3, r25
     bl wcslen
     mr r24, r3
-    b lbl_fn_80685ECC_0000B234
-lbl_fn_80685ECC_0000AFF8:
+    b lbl_msl_vswprintf_0000B234
+lbl_msl_vswprintf_0000AFF8:
     mr r3, r22
     li r4, 0x1
     bl __va_arg
     cmpwi r23, 0x0
     lwz r24, 0x0(r3)
-    beq lbl_fn_80685ECC_0000B030
+    beq lbl_msl_vswprintf_0000B030
     cmpwi r24, 0x0
-    bne lbl_fn_80685ECC_0000B030
+    bne lbl_msl_vswprintf_0000B030
     li r3, 0x0
     li r4, 0x0
     li r5, -0x1
     bl __msl_runtime_constraint_violation_s
     li r3, -0x1
-    b lbl_fn_80685ECC_0000B3D8
-lbl_fn_80685ECC_0000B030:
+    b lbl_msl_vswprintf_0000B3D8
+lbl_msl_vswprintf_0000B030:
     cmpwi r24, 0x0
-    bne lbl_fn_80685ECC_0000B03C
+    bne lbl_msl_vswprintf_0000B03C
     addi r24, r18, lbl_80765EA0@l
-lbl_fn_80685ECC_0000B03C:
+lbl_msl_vswprintf_0000B03C:
     lbz r0, 0x73(r1)
     cmpwi r0, 0x0
-    beq lbl_fn_80685ECC_0000B070
+    beq lbl_msl_vswprintf_0000B070
     lbz r0, 0x72(r1)
     lhz r3, 0x0(r25)
     cmpwi r0, 0x0
     clrlwi r25, r3, 24
-    beq lbl_fn_80685ECC_0000B0AC
+    beq lbl_msl_vswprintf_0000B0AC
     lwz r0, 0x7c(r1)
     cmpw r25, r0
-    ble lbl_fn_80685ECC_0000B0AC
+    ble lbl_msl_vswprintf_0000B0AC
     mr r25, r0
-    b lbl_fn_80685ECC_0000B0AC
-lbl_fn_80685ECC_0000B070:
+    b lbl_msl_vswprintf_0000B0AC
+lbl_msl_vswprintf_0000B070:
     lbz r0, 0x72(r1)
     cmpwi r0, 0x0
-    beq lbl_fn_80685ECC_0000B0A0
+    beq lbl_msl_vswprintf_0000B0A0
     lwz r25, 0x7c(r1)
     mr r3, r24
     li r4, 0x0
     mr r5, r25
     bl memchr
     cmpwi r3, 0x0
-    beq lbl_fn_80685ECC_0000B0AC
+    beq lbl_msl_vswprintf_0000B0AC
     subf r25, r24, r3
-    b lbl_fn_80685ECC_0000B0AC
-lbl_fn_80685ECC_0000B0A0:
+    b lbl_msl_vswprintf_0000B0AC
+lbl_msl_vswprintf_0000B0A0:
     mr r3, r24
     bl strlen
     mr r25, r3
-lbl_fn_80685ECC_0000B0AC:
+lbl_msl_vswprintf_0000B0AC:
     mr r4, r24
     mr r5, r25
     addi r3, r1, 0x80
     bl fn_8067DFA0
     cmpwi r3, 0x0
     mr r24, r3
-    blt lbl_fn_80685ECC_0000B1F0
+    blt lbl_msl_vswprintf_0000B1F0
     addi r25, r1, 0x80
-    b lbl_fn_80685ECC_0000B234
+    b lbl_msl_vswprintf_0000B234
     cmpwi r23, 0x0
-    beq lbl_fn_80685ECC_0000B0F0
+    beq lbl_msl_vswprintf_0000B0F0
     li r3, 0x0
     li r4, 0x0
     li r5, -0x1
     bl __msl_runtime_constraint_violation_s
     li r3, -0x1
-    b lbl_fn_80685ECC_0000B3D8
-lbl_fn_80685ECC_0000B0F0:
+    b lbl_msl_vswprintf_0000B3D8
+lbl_msl_vswprintf_0000B0F0:
     mr r3, r22
     li r4, 0x1
     bl __va_arg
     lbz r0, 0x74(r1)
     lwz r25, 0x0(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_80685ECC_0000B140
+    beq lbl_msl_vswprintf_0000B140
     cmpwi r0, 0x2
-    beq lbl_fn_80685ECC_0000B148
+    beq lbl_msl_vswprintf_0000B148
     cmpwi r0, 0x3
-    beq lbl_fn_80685ECC_0000B150
+    beq lbl_msl_vswprintf_0000B150
     cmpwi r0, 0x6
-    beq lbl_fn_80685ECC_0000B158
+    beq lbl_msl_vswprintf_0000B158
     cmpwi r0, 0x7
-    beq lbl_fn_80685ECC_0000B168
+    beq lbl_msl_vswprintf_0000B168
     cmpwi r0, 0x8
-    beq lbl_fn_80685ECC_0000B170
+    beq lbl_msl_vswprintf_0000B170
     cmpwi r0, 0x4
-    beq lbl_fn_80685ECC_0000B178
-    b lbl_fn_80685ECC_0000B3C8
-lbl_fn_80685ECC_0000B140:
+    beq lbl_msl_vswprintf_0000B178
+    b lbl_msl_vswprintf_0000B3C8
+lbl_msl_vswprintf_0000B140:
     stw r31, 0x0(r25)
-    b lbl_fn_80685ECC_0000B3C8
-lbl_fn_80685ECC_0000B148:
+    b lbl_msl_vswprintf_0000B3C8
+lbl_msl_vswprintf_0000B148:
     sth r31, 0x0(r25)
-    b lbl_fn_80685ECC_0000B3C8
-lbl_fn_80685ECC_0000B150:
+    b lbl_msl_vswprintf_0000B3C8
+lbl_msl_vswprintf_0000B150:
     stw r31, 0x0(r25)
-    b lbl_fn_80685ECC_0000B3C8
-lbl_fn_80685ECC_0000B158:
+    b lbl_msl_vswprintf_0000B3C8
+lbl_msl_vswprintf_0000B158:
     stw r31, 0x4(r25)
     srawi r0, r31, 31
     stw r0, 0x0(r25)
-    b lbl_fn_80685ECC_0000B3C8
-lbl_fn_80685ECC_0000B168:
+    b lbl_msl_vswprintf_0000B3C8
+lbl_msl_vswprintf_0000B168:
     stw r31, 0x0(r25)
-    b lbl_fn_80685ECC_0000B3C8
-lbl_fn_80685ECC_0000B170:
+    b lbl_msl_vswprintf_0000B3C8
+lbl_msl_vswprintf_0000B170:
     stw r31, 0x0(r25)
-    b lbl_fn_80685ECC_0000B3C8
-lbl_fn_80685ECC_0000B178:
+    b lbl_msl_vswprintf_0000B3C8
+lbl_msl_vswprintf_0000B178:
     stw r31, 0x4(r25)
     srawi r0, r31, 31
     stw r0, 0x0(r25)
-    b lbl_fn_80685ECC_0000B3C8
+    b lbl_msl_vswprintf_0000B3C8
     lbz r0, 0x74(r1)
     addi r25, r1, 0x80
     cmplwi r0, 0x5
-    bne lbl_fn_80685ECC_0000B1B4
+    bne lbl_msl_vswprintf_0000B1B4
     mr r3, r22
     li r4, 0x1
     bl __va_arg
     lwz r0, 0x0(r3)
     li r24, 0x1
     sth r0, 0x80(r1)
-    b lbl_fn_80685ECC_0000B234
-lbl_fn_80685ECC_0000B1B4:
+    b lbl_msl_vswprintf_0000B234
+lbl_msl_vswprintf_0000B1B4:
     mr r3, r22
     li r4, 0x1
     bl __va_arg
@@ -13491,51 +13491,51 @@ lbl_fn_80685ECC_0000B1B4:
     li r5, 0x1
     bl fn_8067DF20
     mr r24, r3
-    b lbl_fn_80685ECC_0000B234
+    b lbl_msl_vswprintf_0000B234
     sth r14, 0x80(r1)
     addi r25, r1, 0x80
     li r24, 0x1
-    b lbl_fn_80685ECC_0000B234
-lbl_fn_80685ECC_0000B1F0:
+    b lbl_msl_vswprintf_0000B234
+lbl_msl_vswprintf_0000B1F0:
     mr r3, r29
     bl wcslen
     cmpwi r3, 0x0
     mr r5, r3
     add r31, r31, r3
-    beq lbl_fn_80685ECC_0000B22C
+    beq lbl_msl_vswprintf_0000B22C
     mr r12, r20
     mr r3, r21
     mr r4, r29
     mtctr r12
     bctrl
     cmpwi r3, 0x0
-    bne lbl_fn_80685ECC_0000B22C
+    bne lbl_msl_vswprintf_0000B22C
     li r3, -0x1
-    b lbl_fn_80685ECC_0000B3D8
-lbl_fn_80685ECC_0000B22C:
+    b lbl_msl_vswprintf_0000B3D8
+lbl_msl_vswprintf_0000B22C:
     mr r3, r31
-    b lbl_fn_80685ECC_0000B3D8
-lbl_fn_80685ECC_0000B234:
+    b lbl_msl_vswprintf_0000B3D8
+lbl_msl_vswprintf_0000B234:
     lbz r0, 0x70(r1)
     mr r29, r24
     cmpwi r0, 0x0
-    beq lbl_fn_80685ECC_0000B348
+    beq lbl_msl_vswprintf_0000B348
     cmplwi r0, 0x2
     li r0, 0x20
-    bne lbl_fn_80685ECC_0000B254
+    bne lbl_msl_vswprintf_0000B254
     li r0, 0x30
-lbl_fn_80685ECC_0000B254:
+lbl_msl_vswprintf_0000B254:
     sth r0, 0xc(r1)
     lhz r3, 0x0(r25)
     cmplwi r3, 0x2b
-    beq lbl_fn_80685ECC_0000B274
+    beq lbl_msl_vswprintf_0000B274
     cmplwi r3, 0x2d
-    beq lbl_fn_80685ECC_0000B274
+    beq lbl_msl_vswprintf_0000B274
     cmplwi r3, 0x20
-    bne lbl_fn_80685ECC_0000B2AC
-lbl_fn_80685ECC_0000B274:
+    bne lbl_msl_vswprintf_0000B2AC
+lbl_msl_vswprintf_0000B274:
     cmplwi r0, 0x30
-    bne lbl_fn_80685ECC_0000B2AC
+    bne lbl_msl_vswprintf_0000B2AC
     mr r12, r20
     mr r3, r21
     mr r4, r25
@@ -13543,27 +13543,27 @@ lbl_fn_80685ECC_0000B274:
     mtctr r12
     bctrl
     cmpwi r3, 0x0
-    bne lbl_fn_80685ECC_0000B2A4
+    bne lbl_msl_vswprintf_0000B2A4
     li r3, -0x1
-    b lbl_fn_80685ECC_0000B3D8
-lbl_fn_80685ECC_0000B2A4:
+    b lbl_msl_vswprintf_0000B3D8
+lbl_msl_vswprintf_0000B2A4:
     addi r25, r25, 0x2
     subi r24, r24, 0x1
-lbl_fn_80685ECC_0000B2AC:
+lbl_msl_vswprintf_0000B2AC:
     lbz r0, 0x70(r1)
     cmplwi r0, 0x2
-    bne lbl_fn_80685ECC_0000B33C
+    bne lbl_msl_vswprintf_0000B33C
     lhz r0, 0x76(r1)
     cmplwi r0, 0x61
-    beq lbl_fn_80685ECC_0000B2CC
+    beq lbl_msl_vswprintf_0000B2CC
     cmplwi r0, 0x41
-    bne lbl_fn_80685ECC_0000B33C
-lbl_fn_80685ECC_0000B2CC:
+    bne lbl_msl_vswprintf_0000B33C
+lbl_msl_vswprintf_0000B2CC:
     cmpwi r24, 0x2
-    bge lbl_fn_80685ECC_0000B2DC
+    bge lbl_msl_vswprintf_0000B2DC
     li r3, -0x1
-    b lbl_fn_80685ECC_0000B3D8
-lbl_fn_80685ECC_0000B2DC:
+    b lbl_msl_vswprintf_0000B3D8
+lbl_msl_vswprintf_0000B2DC:
     mr r12, r20
     mr r3, r21
     mr r4, r25
@@ -13571,14 +13571,14 @@ lbl_fn_80685ECC_0000B2DC:
     mtctr r12
     bctrl
     cmpwi r3, 0x0
-    bne lbl_fn_80685ECC_0000B304
+    bne lbl_msl_vswprintf_0000B304
     li r3, -0x1
-    b lbl_fn_80685ECC_0000B3D8
-lbl_fn_80685ECC_0000B304:
+    b lbl_msl_vswprintf_0000B3D8
+lbl_msl_vswprintf_0000B304:
     subi r24, r24, 0x2
     addi r25, r25, 0x4
-    b lbl_fn_80685ECC_0000B33C
-lbl_fn_80685ECC_0000B310:
+    b lbl_msl_vswprintf_0000B33C
+lbl_msl_vswprintf_0000B310:
     mr r12, r20
     mr r3, r21
     addi r4, r1, 0xc
@@ -13586,18 +13586,18 @@ lbl_fn_80685ECC_0000B310:
     mtctr r12
     bctrl
     cmpwi r3, 0x0
-    bne lbl_fn_80685ECC_0000B338
+    bne lbl_msl_vswprintf_0000B338
     li r3, -0x1
-    b lbl_fn_80685ECC_0000B3D8
-lbl_fn_80685ECC_0000B338:
+    b lbl_msl_vswprintf_0000B3D8
+lbl_msl_vswprintf_0000B338:
     addi r29, r29, 0x1
-lbl_fn_80685ECC_0000B33C:
+lbl_msl_vswprintf_0000B33C:
     lwz r0, 0x78(r1)
     cmpw r29, r0
-    blt lbl_fn_80685ECC_0000B310
-lbl_fn_80685ECC_0000B348:
+    blt lbl_msl_vswprintf_0000B310
+lbl_msl_vswprintf_0000B348:
     cmpwi r24, 0x0
-    beq lbl_fn_80685ECC_0000B378
+    beq lbl_msl_vswprintf_0000B378
     mr r12, r20
     mr r3, r21
     mr r4, r25
@@ -13605,15 +13605,15 @@ lbl_fn_80685ECC_0000B348:
     mtctr r12
     bctrl
     cmpwi r3, 0x0
-    bne lbl_fn_80685ECC_0000B378
+    bne lbl_msl_vswprintf_0000B378
     li r3, -0x1
-    b lbl_fn_80685ECC_0000B3D8
-lbl_fn_80685ECC_0000B378:
+    b lbl_msl_vswprintf_0000B3D8
+lbl_msl_vswprintf_0000B378:
     lbz r0, 0x70(r1)
     cmpwi r0, 0x0
-    bne lbl_fn_80685ECC_0000B3C4
-    b lbl_fn_80685ECC_0000B3B8
-lbl_fn_80685ECC_0000B388:
+    bne lbl_msl_vswprintf_0000B3C4
+    b lbl_msl_vswprintf_0000B3B8
+lbl_msl_vswprintf_0000B388:
     mr r12, r20
     mr r3, r21
     sth r19, 0xa(r1)
@@ -13622,24 +13622,24 @@ lbl_fn_80685ECC_0000B388:
     mtctr r12
     bctrl
     cmpwi r3, 0x0
-    bne lbl_fn_80685ECC_0000B3B4
+    bne lbl_msl_vswprintf_0000B3B4
     li r3, -0x1
-    b lbl_fn_80685ECC_0000B3D8
-lbl_fn_80685ECC_0000B3B4:
+    b lbl_msl_vswprintf_0000B3D8
+lbl_msl_vswprintf_0000B3B4:
     addi r29, r29, 0x1
-lbl_fn_80685ECC_0000B3B8:
+lbl_msl_vswprintf_0000B3B8:
     lwz r0, 0x78(r1)
     cmpw r29, r0
-    blt lbl_fn_80685ECC_0000B388
-lbl_fn_80685ECC_0000B3C4:
+    blt lbl_msl_vswprintf_0000B388
+lbl_msl_vswprintf_0000B3C4:
     add r31, r31, r29
-lbl_fn_80685ECC_0000B3C8:
+lbl_msl_vswprintf_0000B3C8:
     lhz r0, 0x0(r30)
     cmpwi r0, 0x0
-    bne lbl_fn_80685ECC_0000AAAC
-lbl_fn_80685ECC_0000B3D4:
+    bne lbl_msl_vswprintf_0000AAAC
+lbl_msl_vswprintf_0000B3D4:
     mr r3, r31
-lbl_fn_80685ECC_0000B3D8:
+lbl_msl_vswprintf_0000B3D8:
     lmw r14, 0x488(r1)
     lwz r0, 0x4d4(r1)
     mtlr r0
@@ -13726,7 +13726,7 @@ lbl_swprintf_0000B4A0:
     stw r12, 0x78(r1)
     stw r0, 0x7c(r1)
     stw r31, 0x70(r1)
-    bl fn_80685ECC
+    bl msl_vswprintf
     cmpwi r3, 0x0
     blt lbl_swprintf_0000B530
     cmplw r3, r29
@@ -13769,7 +13769,7 @@ asm void vswprintf(void)
     stw r4, 0xc(r1)
     addi r4, r1, 0x8
     stw r31, 0x10(r1)
-    bl fn_80685ECC
+    bl msl_vswprintf
     cmpwi r3, 0x0
     blt lbl_vswprintf_0000B5C0
     cmplw r3, r30

@@ -15,7 +15,7 @@ extern void script_executeOpcode(void);
 extern void font_getGlyphEntryByIndex(void);
 extern void str_findChar(void);
 extern void actor_findSpawnTemplate(void);
-extern void fn_80124C6C(void);
+extern void player_applyStatusEffect(void);
 extern void fn_801EFA78(void);
 extern void save_parseSlotStats(void);
 extern void saveSlot_readSummary(void);
@@ -756,7 +756,7 @@ lbl_fn_804A5E40_000008DC:
     addi r3, r1, 0x38
     lwz r5, 0x20(r30)
     addi r4, r4, 0x48c
-    bl fn_80124C6C
+    bl player_applyStatusEffect
     lwz r0, 0x1cc(r27)
     addi r4, r31, 0x1e0
     addi r5, r1, 0x38
@@ -768,7 +768,7 @@ lbl_fn_804A5E40_000008DC:
     addi r3, r1, 0x28
     lwz r5, 0x20(r30)
     addi r4, r4, 0x48c
-    bl fn_80124C6C
+    bl player_applyStatusEffect
     lwz r0, 0x1cc(r27)
     addi r4, r31, 0x1e6
     addi r5, r1, 0x28
@@ -859,7 +859,7 @@ lbl_fn_804A5E40_000008DC:
     addi r3, r1, 0x18
     lwz r5, 0x20(r30)
     addi r4, r4, 0x48c
-    bl fn_80124C6C
+    bl player_applyStatusEffect
     lwz r0, 0x1cc(r27)
     addi r4, r31, 0x1e0
     addi r5, r1, 0x18
@@ -871,7 +871,7 @@ lbl_fn_804A5E40_000008DC:
     addi r3, r1, 0x8
     lwz r5, 0x20(r30)
     addi r4, r4, 0x48c
-    bl fn_80124C6C
+    bl player_applyStatusEffect
     lwz r0, 0x1cc(r27)
     addi r4, r31, 0x1e6
     addi r5, r1, 0x8

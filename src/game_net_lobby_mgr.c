@@ -39,7 +39,7 @@ extern void res_findResourceSlot(void);
 extern void fn_8023A184(void);
 extern void fn_8030B408(void);
 extern void fn_803830A0(void);
-extern void fn_803EC16C(void);
+extern void dungeon_spawnEnemyWave(void);
 extern void fn_803EDB0C(void);
 extern void fn_803EFDA4(void);
 extern void fn_803FFD10(void);
@@ -477,7 +477,7 @@ lbl_fn_804985E4_00000494:
     mr r3, r21
     mr r4, r25
     mr r5, r24
-    bl fn_803EC16C
+    bl dungeon_spawnEnemyWave
     cmpwi r3, 0x0
     mr r24, r3
     beq lbl_fn_804985E4_000005D0

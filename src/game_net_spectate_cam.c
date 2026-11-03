@@ -34,7 +34,7 @@ extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
 extern void bloom_processPasses(void);
 extern void fn_80117914(void);
-extern void fn_80124C6C(void);
+extern void player_applyStatusEffect(void);
 extern void save_parseSlotStats(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
@@ -2502,7 +2502,7 @@ lbl_spectateCamera_update_00002308:
     stw r0, 0x38(r4)
     lwz r4, lbl_8087F0A8
     addi r4, r4, 0x48c
-    bl fn_80124C6C
+    bl player_applyStatusEffect
     lis r30, lbl_8075D5B0@ha
     lwz r3, 0x54(r28)
     addi r30, r30, lbl_8075D5B0@l
@@ -2513,7 +2513,7 @@ lbl_spectateCamera_update_00002308:
     addi r3, r1, 0xc8
     li r5, 0x0
     addi r4, r4, 0x48c
-    bl fn_80124C6C
+    bl player_applyStatusEffect
     lwz r3, 0x54(r28)
     addi r4, r30, 0x231
     addi r5, r1, 0xc8
@@ -2522,7 +2522,7 @@ lbl_spectateCamera_update_00002308:
     addi r3, r1, 0xd8
     li r5, 0x0
     addi r4, r4, 0x48c
-    bl fn_80124C6C
+    bl player_applyStatusEffect
     lwz r3, 0x58(r28)
     addi r4, r30, 0x22b
     addi r5, r1, 0xd8
@@ -2531,7 +2531,7 @@ lbl_spectateCamera_update_00002308:
     addi r3, r1, 0xe8
     li r5, 0x0
     addi r4, r4, 0x48c
-    bl fn_80124C6C
+    bl player_applyStatusEffect
     lwz r3, 0x58(r28)
     addi r4, r30, 0x231
     addi r5, r1, 0xe8

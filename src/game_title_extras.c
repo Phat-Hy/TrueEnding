@@ -20,7 +20,7 @@ extern void fn_800DFB40(void);
 extern void fn_800E0000(void);
 extern void fn_800E0908(void);
 extern void fn_801248DC(void);
-extern void fn_80124C6C(void);
+extern void player_applyStatusEffect(void);
 extern void math_evaluateCurve1D(void);
 extern void save_createWorkerTask(void);
 extern void save_getElapsedPlayTime(void);
@@ -1518,7 +1518,7 @@ lbl_fn_803B5618_00001408:
     addi r3, r1, 0x28
     li r5, 0x0
     addi r4, r4, 0x48c
-    bl fn_80124C6C
+    bl player_applyStatusEffect
     addi r30, r1, 0x28
     lis r31, lbl_8074FD38@ha
     addi r5, r1, 0x18

@@ -12591,14 +12591,14 @@
 .obj lbl_80779B18, global
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 .endobj lbl_80779B18
 
 # .data:0x9684 | 0x80779B24 | size: 0xC
 .obj lbl_80779B24, global
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 .endobj lbl_80779B24
 
 # .data:0x9690 | 0x80779B30 | size: 0xC
@@ -12612,21 +12612,21 @@
 .obj lbl_80779B3C, global
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 .endobj lbl_80779B3C
 
 # .data:0x96A8 | 0x80779B48 | size: 0xC
 .obj lbl_80779B48, global
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 .endobj lbl_80779B48
 
 # .data:0x96B4 | 0x80779B54 | size: 0xC
 .obj lbl_80779B54, global
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 .endobj lbl_80779B54
 
 # .data:0x96C0 | 0x80779B60 | size: 0x8
@@ -12655,7 +12655,7 @@
 	.4byte fn_801513D0
 	.4byte fn_800E854C
 	.4byte fn_800E8630
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
@@ -12686,7 +12686,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
 	.4byte fn_8017C4C4
@@ -13587,58 +13587,58 @@
 
 # .data:0xA108 | 0x8077A5A8 | size: 0xD0
 .obj jumptable_8077A5A8, global
-	.4byte fn_80124C6C+0x34
-	.4byte fn_80124C6C+0x6C
-	.4byte fn_80124C6C+0xA4
-	.4byte fn_80124C6C+0x364
-	.4byte fn_80124C6C+0xDC
-	.4byte fn_80124C6C+0x364
-	.4byte fn_80124C6C+0x364
-	.4byte fn_80124C6C+0x178
-	.4byte fn_80124C6C+0x1B0
-	.4byte fn_80124C6C+0x364
-	.4byte fn_80124C6C+0x364
-	.4byte fn_80124C6C+0x364
-	.4byte fn_80124C6C+0x364
-	.4byte fn_80124C6C+0x364
-	.4byte fn_80124C6C+0x364
-	.4byte fn_80124C6C+0x364
-	.4byte fn_80124C6C+0x140
-	.4byte fn_80124C6C+0x364
-	.4byte fn_80124C6C+0x364
-	.4byte fn_80124C6C+0x364
-	.4byte fn_80124C6C+0x364
-	.4byte fn_80124C6C+0x364
-	.4byte fn_80124C6C+0x364
-	.4byte fn_80124C6C+0x364
-	.4byte fn_80124C6C+0x364
-	.4byte fn_80124C6C+0x364
-	.4byte fn_80124C6C+0x364
-	.4byte fn_80124C6C+0x364
-	.4byte fn_80124C6C+0x364
-	.4byte fn_80124C6C+0x364
-	.4byte fn_80124C6C+0x364
-	.4byte fn_80124C6C+0x364
-	.4byte fn_80124C6C+0x364
-	.4byte fn_80124C6C+0x364
-	.4byte fn_80124C6C+0x364
-	.4byte fn_80124C6C+0x364
-	.4byte fn_80124C6C+0x364
-	.4byte fn_80124C6C+0x364
-	.4byte fn_80124C6C+0x364
-	.4byte fn_80124C6C+0x230
-	.4byte fn_80124C6C+0x268
-	.4byte fn_80124C6C+0x230
-	.4byte fn_80124C6C+0x268
-	.4byte fn_80124C6C+0x2A0
-	.4byte fn_80124C6C+0x364
-	.4byte fn_80124C6C+0x364
-	.4byte fn_80124C6C+0x364
-	.4byte fn_80124C6C+0x364
-	.4byte fn_80124C6C+0x2BC
-	.4byte fn_80124C6C+0x364
-	.4byte fn_80124C6C+0x2F4
-	.4byte fn_80124C6C+0x32C
+	.4byte player_applyStatusEffect+0x34
+	.4byte player_applyStatusEffect+0x6C
+	.4byte player_applyStatusEffect+0xA4
+	.4byte player_applyStatusEffect+0x364
+	.4byte player_applyStatusEffect+0xDC
+	.4byte player_applyStatusEffect+0x364
+	.4byte player_applyStatusEffect+0x364
+	.4byte player_applyStatusEffect+0x178
+	.4byte player_applyStatusEffect+0x1B0
+	.4byte player_applyStatusEffect+0x364
+	.4byte player_applyStatusEffect+0x364
+	.4byte player_applyStatusEffect+0x364
+	.4byte player_applyStatusEffect+0x364
+	.4byte player_applyStatusEffect+0x364
+	.4byte player_applyStatusEffect+0x364
+	.4byte player_applyStatusEffect+0x364
+	.4byte player_applyStatusEffect+0x140
+	.4byte player_applyStatusEffect+0x364
+	.4byte player_applyStatusEffect+0x364
+	.4byte player_applyStatusEffect+0x364
+	.4byte player_applyStatusEffect+0x364
+	.4byte player_applyStatusEffect+0x364
+	.4byte player_applyStatusEffect+0x364
+	.4byte player_applyStatusEffect+0x364
+	.4byte player_applyStatusEffect+0x364
+	.4byte player_applyStatusEffect+0x364
+	.4byte player_applyStatusEffect+0x364
+	.4byte player_applyStatusEffect+0x364
+	.4byte player_applyStatusEffect+0x364
+	.4byte player_applyStatusEffect+0x364
+	.4byte player_applyStatusEffect+0x364
+	.4byte player_applyStatusEffect+0x364
+	.4byte player_applyStatusEffect+0x364
+	.4byte player_applyStatusEffect+0x364
+	.4byte player_applyStatusEffect+0x364
+	.4byte player_applyStatusEffect+0x364
+	.4byte player_applyStatusEffect+0x364
+	.4byte player_applyStatusEffect+0x364
+	.4byte player_applyStatusEffect+0x364
+	.4byte player_applyStatusEffect+0x230
+	.4byte player_applyStatusEffect+0x268
+	.4byte player_applyStatusEffect+0x230
+	.4byte player_applyStatusEffect+0x268
+	.4byte player_applyStatusEffect+0x2A0
+	.4byte player_applyStatusEffect+0x364
+	.4byte player_applyStatusEffect+0x364
+	.4byte player_applyStatusEffect+0x364
+	.4byte player_applyStatusEffect+0x364
+	.4byte player_applyStatusEffect+0x2BC
+	.4byte player_applyStatusEffect+0x364
+	.4byte player_applyStatusEffect+0x2F4
+	.4byte player_applyStatusEffect+0x32C
 .endobj jumptable_8077A5A8
 
 # .data:0xA1D8 | 0x8077A678 | size: 0x20
@@ -13729,29 +13729,29 @@
 	.4byte fn_80148CC4
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 .endobj lbl_8077A72C
 
 # .data:0xA2E0 | 0x8077A780 | size: 0x18
 .obj lbl_8077A780, global
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
 	.4byte fn_800C7CA4
@@ -13761,7 +13761,7 @@
 .obj lbl_8077A798, global
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 .endobj lbl_8077A798
 
 # .data:0xA304 | 0x8077A7A4 | size: 0xC
@@ -13802,115 +13802,115 @@
 .obj lbl_8077A80C, global
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 .endobj lbl_8077A80C
 
 # .data:0xA4D4 | 0x8077A974 | size: 0xC
 .obj lbl_8077A974, global
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 .endobj lbl_8077A974
 
 # .data:0xA4E0 | 0x8077A980 | size: 0xC
 .obj lbl_8077A980, global
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 .endobj lbl_8077A980
 
 # .data:0xA4EC | 0x8077A98C | size: 0xC
 .obj lbl_8077A98C, global
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 .endobj lbl_8077A98C
 
 # .data:0xA4F8 | 0x8077A998 | size: 0x108
@@ -13987,20 +13987,20 @@
 .obj lbl_8077AAA0, global
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 .endobj lbl_8077AAA0
 
 # .data:0xA624 | 0x8077AAC4 | size: 0xC
 .obj lbl_8077AAC4, global
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 .endobj lbl_8077AAC4
 
 # .data:0xA630 | 0x8077AAD0 | size: 0x214
@@ -14144,42 +14144,42 @@
 .obj lbl_8077ACE4, global
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 .endobj lbl_8077ACE4
 
 # .data:0xA8A4 | 0x8077AD44 | size: 0xC
 .obj lbl_8077AD44, global
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 .endobj lbl_8077AD44
 
 # .data:0xA8B0 | 0x8077AD50 | size: 0xC
 .obj lbl_8077AD50, global
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 .endobj lbl_8077AD50
 
 # .data:0xA8BC | 0x8077AD5C | size: 0x228
@@ -14328,1395 +14328,1395 @@
 .obj lbl_8077AF84, global
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 .endobj lbl_8077AF84
 
 # .data:0xAD54 | 0x8077B1F4 | size: 0xC
 .obj lbl_8077B1F4, global
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 .endobj lbl_8077B1F4
 
 # .data:0xAD60 | 0x8077B200 | size: 0xC
 .obj lbl_8077B200, global
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 .endobj lbl_8077B200
 
 # .data:0xAD6C | 0x8077B20C | size: 0x96C
 .obj lbl_8077B20C, global
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 .endobj lbl_8077B20C
 
 # .data:0xB6D8 | 0x8077BB78 | size: 0xC
 .obj lbl_8077BB78, global
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 .endobj lbl_8077BB78
 
 # .data:0xB6E4 | 0x8077BB84 | size: 0x1BC
 .obj lbl_8077BB84, global
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 .endobj lbl_8077BB84
 
 # .data:0xB8A0 | 0x8077BD40 | size: 0xC
 .obj lbl_8077BD40, global
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 .endobj lbl_8077BD40
 
 # .data:0xB8AC | 0x8077BD4C | size: 0x36C
 .obj lbl_8077BD4C, global
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 .endobj lbl_8077BD4C
 
 # .data:0xBC18 | 0x8077C0B8 | size: 0xC
 .obj lbl_8077C0B8, global
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 .endobj lbl_8077C0B8
 
 # .data:0xBC24 | 0x8077C0C4 | size: 0x60
 .obj lbl_8077C0C4, global
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 .endobj lbl_8077C0C4
 
 # .data:0xBC84 | 0x8077C124 | size: 0xC
 .obj lbl_8077C124, global
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 .endobj lbl_8077C124
 
 # .data:0xBC90 | 0x8077C130 | size: 0xC
 .obj lbl_8077C130, global
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 .endobj lbl_8077C130
 
 # .data:0xBC9C | 0x8077C13C | size: 0xC
 .obj lbl_8077C13C, global
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 .endobj lbl_8077C13C
 
 # .data:0xBCA8 | 0x8077C148 | size: 0xC
 .obj lbl_8077C148, global
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 .endobj lbl_8077C148
 
 # .data:0xBCB4 | 0x8077C154 | size: 0xC
 .obj lbl_8077C154, global
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 .endobj lbl_8077C154
 
 # .data:0xBCC0 | 0x8077C160 | size: 0xC
 .obj lbl_8077C160, global
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 .endobj lbl_8077C160
 
 # .data:0xBCCC | 0x8077C16C | size: 0xC
 .obj lbl_8077C16C, global
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 .endobj lbl_8077C16C
 
 # .data:0xBCD8 | 0x8077C178 | size: 0xC
 .obj lbl_8077C178, global
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 .endobj lbl_8077C178
 
 # .data:0xBCE4 | 0x8077C184 | size: 0xC
 .obj lbl_8077C184, global
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 .endobj lbl_8077C184
 
 # .data:0xBCF0 | 0x8077C190 | size: 0xC
 .obj lbl_8077C190, global
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 .endobj lbl_8077C190
 
 # .data:0xBCFC | 0x8077C19C | size: 0xC
 .obj lbl_8077C19C, global
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 .endobj lbl_8077C19C
 
 # .data:0xBD08 | 0x8077C1A8 | size: 0xC
 .obj lbl_8077C1A8, global
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 .endobj lbl_8077C1A8
 
 # .data:0xBD14 | 0x8077C1B4 | size: 0xC
 .obj lbl_8077C1B4, global
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 .endobj lbl_8077C1B4
 
 # .data:0xBD20 | 0x8077C1C0 | size: 0x210
 .obj lbl_8077C1C0, global
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 .endobj lbl_8077C1C0
 
 # .data:0xBF30 | 0x8077C3D0 | size: 0xC
@@ -15737,51 +15737,51 @@
 .obj lbl_8077C3E8, global
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 .endobj lbl_8077C3E8
 
 # .data:0xBF78 | 0x8077C418 | size: 0xC
 .obj lbl_8077C418, global
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 .endobj lbl_8077C418
 
 # .data:0xBF84 | 0x8077C424 | size: 0xC
 .obj lbl_8077C424, global
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 .endobj lbl_8077C424
 
 # .data:0xBF90 | 0x8077C430 | size: 0xC
 .obj lbl_8077C430, global
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 .endobj lbl_8077C430
 
 # .data:0xBF9C | 0x8077C43C | size: 0xC
 .obj lbl_8077C43C, global
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 .endobj lbl_8077C43C
 
 # .data:0xBFA8 | 0x8077C448 | size: 0x10
 .obj lbl_8077C448, global
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 .endobj lbl_8077C448
 
@@ -15811,7 +15811,7 @@
 	.4byte fn_801513D0
 	.4byte fn_80152A20
 	.4byte fn_80152D10
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
@@ -15842,7 +15842,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
 	.4byte fn_8017C4C4
@@ -16145,7 +16145,7 @@
 	.4byte fn_801513D0
 	.4byte fn_800E854C
 	.4byte fn_800E8630
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
@@ -16176,7 +16176,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
 	.4byte fn_8017C4C4
@@ -16263,7 +16263,7 @@
 	.4byte fn_801513D0
 	.4byte fn_800E854C
 	.4byte fn_800E8630
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
@@ -16294,7 +16294,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
 	.4byte fn_8017C4C4
@@ -16390,21 +16390,21 @@
 	.4byte fn_80188090
 	.4byte fn_80187E2C
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_80187FF4
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -16484,21 +16484,21 @@
 	.4byte fn_801895F4
 	.4byte fn_801894DC
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -16526,21 +16526,21 @@
 	.4byte fn_801895B4
 	.4byte fn_8018910C
 	.4byte fn_801891FC
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_801893F4
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -16568,21 +16568,21 @@
 	.4byte fn_80189574
 	.4byte fn_80188C70
 	.4byte fn_80188D3C
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -16610,21 +16610,21 @@
 	.4byte fn_80189534
 	.4byte fn_801881C4
 	.4byte fn_801883E8
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_80188BC4
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_801882EC
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -16686,7 +16686,7 @@
 	.4byte fn_8018EE84
 	.4byte fn_8018E5BC
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte fn_8018EBB0
 	.4byte fn_8018EB70
 	.4byte fn_801897B4
@@ -16700,7 +16700,7 @@
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -16730,7 +16730,7 @@
 	.4byte fn_8018EE44
 	.4byte fn_8018DD34
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte fn_8018EBB0
 	.4byte fn_8018E434
 	.4byte fn_801897B4
@@ -16744,7 +16744,7 @@
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -16774,7 +16774,7 @@
 	.4byte fn_8018EE04
 	.4byte fn_8018D840
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte fn_8018EBB0
 	.4byte fn_8018DA70
 	.4byte fn_801897B4
@@ -16788,7 +16788,7 @@
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -16818,7 +16818,7 @@
 	.4byte fn_8018EDC4
 	.4byte fn_8018D160
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte fn_8018EBB0
 	.4byte fn_8018D49C
 	.4byte fn_801897B4
@@ -16832,7 +16832,7 @@
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -16862,7 +16862,7 @@
 	.4byte fn_8018ED84
 	.4byte fn_8018CC74
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte fn_8018EBB0
 	.4byte fn_800E70A8
 	.4byte fn_801897B4
@@ -16876,7 +16876,7 @@
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -16906,7 +16906,7 @@
 	.4byte fn_8018ED44
 	.4byte fn_8018C84C
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte fn_8018EBB0
 	.4byte fn_8018CADC
 	.4byte fn_801897B4
@@ -16920,7 +16920,7 @@
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -16964,7 +16964,7 @@
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -17008,7 +17008,7 @@
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -17038,7 +17038,7 @@
 	.4byte fn_8018EC84
 	.4byte fn_8018B87C
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte fn_8018EBB0
 	.4byte fn_800E70A8
 	.4byte fn_801897B4
@@ -17052,7 +17052,7 @@
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -17082,21 +17082,21 @@
 	.4byte fn_8018EC44
 	.4byte fn_8018B610
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -17124,7 +17124,7 @@
 	.4byte fn_8018EC04
 	.4byte fn_8018B090
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte fn_8018EBB0
 	.4byte fn_800E70A8
 	.4byte fn_801897B4
@@ -17138,7 +17138,7 @@
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -17168,7 +17168,7 @@
 	.4byte fn_8018EBC4
 	.4byte fn_8018A4D0
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte fn_8018EBB0
 	.4byte fn_800E70A8
 	.4byte fn_801897B4
@@ -17182,7 +17182,7 @@
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -17212,7 +17212,7 @@
 	.4byte fn_8018A490
 	.4byte 0x00000000
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte fn_8018EBB0
 	.4byte fn_800E70A8
 	.4byte fn_801897B4
@@ -17226,7 +17226,7 @@
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -17374,21 +17374,21 @@
 	.4byte fn_80192538
 	.4byte fn_80192190
 	.4byte fn_80192198
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -17416,21 +17416,21 @@
 	.4byte fn_80191E38
 	.4byte fn_80191EA4
 	.4byte fn_80191FF8
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -17458,21 +17458,21 @@
 	.4byte fn_801924F8
 	.4byte fn_80191AF0
 	.4byte fn_80191B50
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -17500,21 +17500,21 @@
 	.4byte fn_801915B8
 	.4byte fn_8019163C
 	.4byte fn_80191828
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -17542,21 +17542,21 @@
 	.4byte fn_801924B8
 	.4byte fn_80190F40
 	.4byte fn_80190F90
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -17584,21 +17584,21 @@
 	.4byte fn_80190A2C
 	.4byte fn_80190AB0
 	.4byte fn_80190AB8
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -17626,21 +17626,21 @@
 	.4byte fn_80192478
 	.4byte fn_80190150
 	.4byte fn_80190270
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_80190844
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -17668,21 +17668,21 @@
 	.4byte fn_80192438
 	.4byte fn_8018FF64
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -17710,21 +17710,21 @@
 	.4byte fn_801923F8
 	.4byte fn_8018FAA4
 	.4byte fn_8018FB0C
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_8018FAAC
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -17752,21 +17752,21 @@
 	.4byte fn_801923B8
 	.4byte fn_8018F968
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -17794,21 +17794,21 @@
 	.4byte fn_80192378
 	.4byte fn_8018F090
 	.4byte fn_8018F254
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -17910,21 +17910,21 @@
 	.4byte fn_800E70AC
 	.4byte 0x00000000
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -18078,21 +18078,21 @@
 	.4byte fn_8019FE4C
 	.4byte fn_8019FEC4
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -18127,14 +18127,14 @@
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -18169,14 +18169,14 @@
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -18211,14 +18211,14 @@
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -18260,7 +18260,7 @@
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -18288,21 +18288,21 @@
 	.4byte fn_801A0A68
 	.4byte fn_8019E4A4
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -18330,21 +18330,21 @@
 	.4byte fn_801A0A28
 	.4byte fn_8019DBA4
 	.4byte fn_8019DF0C
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -18375,14 +18375,14 @@
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -18410,21 +18410,21 @@
 	.4byte fn_801A09A8
 	.4byte fn_8019C104
 	.4byte fn_8019C234
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -18452,21 +18452,21 @@
 	.4byte fn_801A0968
 	.4byte fn_8019BF8C
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -18494,21 +18494,21 @@
 	.4byte fn_801A0928
 	.4byte fn_8019BE14
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_8019BE88
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -18536,21 +18536,21 @@
 	.4byte fn_8019B630
 	.4byte fn_8019B6A8
 	.4byte fn_8019BA1C
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_8019BA08
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -18578,21 +18578,21 @@
 	.4byte fn_801A08E8
 	.4byte fn_8019B068
 	.4byte fn_8019B0F0
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -18620,21 +18620,21 @@
 	.4byte fn_801A08A8
 	.4byte fn_8019A8A8
 	.4byte fn_8019AC60
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -18662,21 +18662,21 @@
 	.4byte fn_801A0868
 	.4byte fn_8019A524
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -18711,14 +18711,14 @@
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -18753,14 +18753,14 @@
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -18795,14 +18795,14 @@
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -18830,21 +18830,21 @@
 	.4byte fn_801A07A8
 	.4byte fn_80198874
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -18872,21 +18872,21 @@
 	.4byte fn_801A0768
 	.4byte fn_80198400
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -18914,21 +18914,21 @@
 	.4byte fn_801A0728
 	.4byte fn_80197994
 	.4byte fn_80197A68
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_80197DC8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -18956,21 +18956,21 @@
 	.4byte fn_801A06E8
 	.4byte fn_801975F4
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -18994,21 +18994,21 @@
 	.4byte fn_801A06A8
 	.4byte fn_80196CD4
 	.4byte fn_801971B8
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_80197518
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -19032,21 +19032,21 @@
 	.4byte fn_801A0668
 	.4byte fn_80196A98
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -19070,21 +19070,21 @@
 	.4byte fn_801A0628
 	.4byte fn_80196A20
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -19112,21 +19112,21 @@
 	.4byte fn_801A05E8
 	.4byte fn_80196A18
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -19154,21 +19154,21 @@
 	.4byte fn_801A05A8
 	.4byte fn_80196548
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -19203,14 +19203,14 @@
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80196408
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_801A0418
 	.4byte fn_80147A10
@@ -19238,21 +19238,21 @@
 	.4byte fn_801A0528
 	.4byte fn_801953B8
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_801957D4
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_801A0420
 	.4byte fn_80147A10
@@ -19287,14 +19287,14 @@
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -19322,21 +19322,21 @@
 	.4byte fn_801A04A8
 	.4byte fn_80194334
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -19364,21 +19364,21 @@
 	.4byte fn_801A0468
 	.4byte fn_801937CC
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -19406,21 +19406,21 @@
 	.4byte fn_801A0428
 	.4byte fn_80192948
 	.4byte fn_80193074
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_8019355C
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -19651,21 +19651,21 @@
 	.4byte fn_801A222C
 	.4byte fn_801A1D9C
 	.4byte fn_801A2058
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_801A21A4
@@ -19695,21 +19695,21 @@
 	.4byte fn_801A21EC
 	.4byte fn_801A1854
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -19737,21 +19737,21 @@
 	.4byte fn_801A21AC
 	.4byte fn_801A0C54
 	.4byte fn_801A10CC
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_801A1548
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -19825,21 +19825,21 @@
 	.4byte fn_801A2CAC
 	.4byte fn_801A2B58
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -19867,21 +19867,21 @@
 	.4byte fn_801A2C6C
 	.4byte fn_801A2414
 	.4byte fn_801A24E4
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_801A24E0
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -19969,21 +19969,21 @@
 	.4byte fn_801A777C
 	.4byte fn_801A73A4
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_801A7644
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -20011,14 +20011,14 @@
 	.4byte fn_801A773C
 	.4byte fn_801A6CFC
 	.4byte fn_801A6F58
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte fn_801A4DB0
 	.4byte fn_801A6F54
 	.4byte fn_80158C9C
 	.4byte fn_801A4DDC
 	.4byte fn_801A4DC4
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
@@ -20055,14 +20055,14 @@
 	.4byte fn_801A76FC
 	.4byte fn_801A6364
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte fn_801A4DB0
 	.4byte fn_801A6734
 	.4byte fn_80158C9C
 	.4byte fn_801A4DDC
 	.4byte fn_801A4DC4
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
@@ -20099,14 +20099,14 @@
 	.4byte fn_801A76BC
 	.4byte fn_801A5BDC
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte fn_801A4DB0
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_801A4DDC
 	.4byte fn_801A4DC4
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
@@ -20143,14 +20143,14 @@
 	.4byte fn_801A5B9C
 	.4byte 0x00000000
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte fn_801A4DB0
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_801A4DDC
 	.4byte fn_801A4DC4
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
@@ -20185,21 +20185,21 @@
 	.4byte fn_801A767C
 	.4byte fn_801A34D4
 	.4byte fn_801A3DFC
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_801A21A4
@@ -20353,21 +20353,21 @@
 	.4byte fn_801AAB24
 	.4byte fn_801A90E4
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801AA95C
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -20395,21 +20395,21 @@
 	.4byte fn_801AAAE4
 	.4byte fn_801A8880
 	.4byte fn_801A8E68
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -20437,21 +20437,21 @@
 	.4byte fn_801AAAA4
 	.4byte fn_801AA8EC
 	.4byte fn_801AA94C
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -20479,21 +20479,21 @@
 	.4byte fn_801AAA64
 	.4byte fn_801AA230
 	.4byte fn_801AA550
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -20521,21 +20521,21 @@
 	.4byte fn_801AAA24
 	.4byte fn_801A9B80
 	.4byte fn_801A9E94
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -20563,21 +20563,21 @@
 	.4byte fn_801AA9E4
 	.4byte fn_801A8420
 	.4byte fn_801A84AC
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -20605,21 +20605,21 @@
 	.4byte fn_801AA9A4
 	.4byte fn_801A7E8C
 	.4byte fn_801A8080
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -20647,21 +20647,21 @@
 	.4byte fn_801AA964
 	.4byte fn_801A7870
 	.4byte fn_801A7A94
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -20766,14 +20766,14 @@
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -20843,21 +20843,21 @@
 	.4byte fn_801B06D0
 	.4byte fn_801AFF1C
 	.4byte fn_801B0300
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -20885,21 +20885,21 @@
 	.4byte fn_801B0690
 	.4byte fn_801AF97C
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -20927,21 +20927,21 @@
 	.4byte fn_801B0650
 	.4byte fn_801AF484
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -20969,21 +20969,21 @@
 	.4byte fn_801B0610
 	.4byte fn_801AF020
 	.4byte fn_801AF084
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_801AF250
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -21011,21 +21011,21 @@
 	.4byte fn_801B05D0
 	.4byte fn_801AE9A4
 	.4byte fn_801AEA04
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_801AEF40
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_801AEF54
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -21053,21 +21053,21 @@
 	.4byte fn_801B0590
 	.4byte fn_801AE8C8
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -21095,21 +21095,21 @@
 	.4byte fn_801B04F8
 	.4byte fn_801ADC14
 	.4byte fn_801AE4E8
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_801AE6D4
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -21137,21 +21137,21 @@
 	.4byte fn_801B04B8
 	.4byte fn_801AD2B4
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -21179,21 +21179,21 @@
 	.4byte fn_801B0478
 	.4byte fn_801ACE88
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -21221,21 +21221,21 @@
 	.4byte fn_801B0438
 	.4byte fn_801ACA74
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -21347,21 +21347,21 @@
 	.4byte fn_801B0D48
 	.4byte fn_801B0920
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -21389,21 +21389,21 @@
 	.4byte fn_801B0D08
 	.4byte fn_801B07D4
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801B0D00
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -21431,21 +21431,21 @@
 	.4byte fn_801B2848
 	.4byte fn_801B2560
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_801B26A4
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -21473,21 +21473,21 @@
 	.4byte fn_801B2808
 	.4byte fn_801B22AC
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_801B242C
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -21515,21 +21515,21 @@
 	.4byte fn_801B27C8
 	.4byte fn_801B1AAC
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -21557,21 +21557,21 @@
 	.4byte fn_801B2788
 	.4byte fn_801B19C8
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -21599,21 +21599,21 @@
 	.4byte fn_801B2748
 	.4byte fn_801B1624
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -21641,21 +21641,21 @@
 	.4byte fn_801B2708
 	.4byte fn_801B1230
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801B26C0
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -21683,21 +21683,21 @@
 	.4byte fn_801B26C8
 	.4byte fn_801B0ED0
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_801B11A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -21739,21 +21739,21 @@
 	.4byte fn_801B2E9C
 	.4byte fn_801B2E14
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -21781,21 +21781,21 @@
 	.4byte fn_801B2E5C
 	.4byte fn_801B2A30
 	.4byte fn_801B2A80
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -21823,21 +21823,21 @@
 	.4byte fn_801B2E1C
 	.4byte fn_801B2934
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -21877,21 +21877,21 @@
 	.4byte fn_801B405C
 	.4byte fn_801B3EEC
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -21921,21 +21921,21 @@
 	.4byte fn_801B3EAC
 	.4byte fn_801B3098
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -21977,21 +21977,21 @@
 	.4byte fn_801B525C
 	.4byte fn_801B507C
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -22019,21 +22019,21 @@
 	.4byte fn_801B521C
 	.4byte fn_801B4788
 	.4byte fn_801B47EC
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -22061,21 +22061,21 @@
 	.4byte fn_801B51DC
 	.4byte fn_801B44E8
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -22103,21 +22103,21 @@
 	.4byte fn_801B519C
 	.4byte fn_801B4344
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -22145,21 +22145,21 @@
 	.4byte fn_801B515C
 	.4byte fn_801B417C
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -22243,21 +22243,21 @@
 	.4byte fn_801B73B0
 	.4byte fn_801B7218
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -22285,21 +22285,21 @@
 	.4byte fn_801B7370
 	.4byte fn_801B6E70
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -22327,21 +22327,21 @@
 	.4byte fn_801B7330
 	.4byte fn_801B6278
 	.4byte fn_801B6494
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -22369,21 +22369,21 @@
 	.4byte fn_801B72F0
 	.4byte fn_801B5894
 	.4byte fn_801B5A2C
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -22411,21 +22411,21 @@
 	.4byte fn_801B72B0
 	.4byte fn_801B5370
 	.4byte fn_801B54E8
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -22495,21 +22495,21 @@
 	.4byte fn_801B7C90
 	.4byte fn_801B79D8
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -22537,21 +22537,21 @@
 	.4byte fn_801B7C50
 	.4byte fn_801B74FC
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_801B779C
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -22586,14 +22586,14 @@
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -22623,21 +22623,21 @@
 	.4byte fn_801B99D4
 	.4byte fn_801B7CD0
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -22667,21 +22667,21 @@
 	.4byte fn_801B9994
 	.4byte fn_801B7CD0
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -22711,21 +22711,21 @@
 	.4byte fn_801B9954
 	.4byte fn_801B7CD0
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -22755,21 +22755,21 @@
 	.4byte fn_801B9914
 	.4byte fn_801B7CD0
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -22799,21 +22799,21 @@
 	.4byte fn_801B98D4
 	.4byte fn_801B7CD0
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -22843,21 +22843,21 @@
 	.4byte fn_801B9894
 	.4byte fn_801B7CD0
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -22887,21 +22887,21 @@
 	.4byte fn_801B9854
 	.4byte fn_801B7F90
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -22931,21 +22931,21 @@
 	.4byte fn_801B7F50
 	.4byte fn_801B7CD0
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -22973,21 +22973,21 @@
 	.4byte fn_801BC248
 	.4byte fn_801BBF84
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -23015,21 +23015,21 @@
 	.4byte fn_801BC208
 	.4byte fn_801BBBDC
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -23057,21 +23057,21 @@
 	.4byte fn_801BC1C8
 	.4byte fn_801BB514
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -23106,14 +23106,14 @@
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_801BB138
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -23141,21 +23141,21 @@
 	.4byte fn_801BC578
 	.4byte fn_801BC4F4
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -23183,21 +23183,21 @@
 	.4byte fn_801BC538
 	.4byte fn_801BC3B4
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -23259,21 +23259,21 @@
 	.4byte fn_801C03DC
 	.4byte fn_801B3098
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -23303,14 +23303,14 @@
 	.4byte fn_801C039C
 	.4byte fn_801BE630
 	.4byte fn_801BFF28
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte fn_801C0280
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_801C0144
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
@@ -23345,21 +23345,21 @@
 	.4byte fn_801BC904
 	.4byte fn_801BC97C
 	.4byte fn_801BDA9C
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_801A21A4
@@ -23438,14 +23438,14 @@
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -23480,14 +23480,14 @@
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -23522,14 +23522,14 @@
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -23564,14 +23564,14 @@
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -23608,14 +23608,14 @@
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -23655,21 +23655,21 @@
 	.4byte fn_801A1D5C
 	.4byte 0x00000000
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_801A21A4
@@ -23683,21 +23683,21 @@
 	.4byte fn_801C46F8
 	.4byte fn_801C4500
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -23725,21 +23725,21 @@
 	.4byte fn_801C46B8
 	.4byte fn_801C40A4
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -23767,21 +23767,21 @@
 	.4byte fn_801C4678
 	.4byte fn_801C3F54
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -23817,21 +23817,21 @@
 	.4byte fn_801C6F50
 	.4byte fn_801C6464
 	.4byte fn_801C6CDC
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_801C6CC8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -23859,21 +23859,21 @@
 	.4byte fn_801C6F10
 	.4byte fn_801C5C50
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -23901,21 +23901,21 @@
 	.4byte fn_801C6ED0
 	.4byte fn_801C4F54
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -23963,21 +23963,21 @@
 	.4byte fn_801C78D8
 	.4byte fn_801C71A8
 	.4byte fn_801C7390
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_801C7350
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -24005,21 +24005,21 @@
 	.4byte fn_801C7898
 	.4byte fn_801C6F90
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_801C702C
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -24059,21 +24059,21 @@
 	.4byte fn_801C82B8
 	.4byte fn_801C815C
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -24101,21 +24101,21 @@
 	.4byte fn_801C8ED0
 	.4byte fn_801C8B88
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -24143,21 +24143,21 @@
 	.4byte fn_801C8E90
 	.4byte fn_801C87D8
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -24185,21 +24185,21 @@
 	.4byte fn_801C9384
 	.4byte fn_801C900C
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -24227,21 +24227,21 @@
 	.4byte fn_801C9AE4
 	.4byte fn_801C951C
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -24269,21 +24269,21 @@
 	.4byte fn_801C9F2C
 	.4byte fn_801C9C68
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -24358,14 +24358,14 @@
 	.4byte fn_80158D58
 	.4byte fn_801CBAC0
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_801CBFE4
 	.4byte fn_80147A10
@@ -24393,21 +24393,21 @@
 	.4byte fn_801CC02C
 	.4byte fn_801CB2D4
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_801CB41C
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -24435,21 +24435,21 @@
 	.4byte fn_801CBFEC
 	.4byte fn_801CA1E0
 	.4byte fn_801CAAF0
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_801CB2BC
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_801CB24C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_801A21A4
@@ -24526,7 +24526,7 @@
 	.4byte fn_801CCCFC
 	.4byte fn_800E854C
 	.4byte fn_800E8630
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
@@ -24557,7 +24557,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
 	.4byte fn_8017C4C4
@@ -26515,7 +26515,7 @@
 	.4byte fn_801513D0
 	.4byte fn_80152A20
 	.4byte fn_80152D10
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
@@ -26546,7 +26546,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
 	.4byte fn_8017C4C4
@@ -26907,7 +26907,7 @@
 	.4byte fn_80245ADC
 	.4byte fn_80245BBC
 	.4byte fn_800E8630
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
@@ -26938,7 +26938,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
 	.4byte fn_8017C4C4
@@ -26979,7 +26979,7 @@
 .obj lbl_80783E38, global
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 .endobj lbl_80783E38
 
@@ -27003,7 +27003,7 @@
 	.4byte fn_80247C1C
 	.4byte fn_80247C60
 	.4byte fn_800E8630
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
@@ -27034,7 +27034,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
 	.4byte fn_8017C4C4
@@ -27091,7 +27091,7 @@
 	.4byte fn_80249C14
 	.4byte fn_800E854C
 	.4byte fn_800E8630
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
@@ -27122,7 +27122,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
 	.4byte fn_8017C4C4
@@ -27179,7 +27179,7 @@
 	.4byte fn_801513D0
 	.4byte fn_800E854C
 	.4byte fn_8024A608
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
@@ -27210,7 +27210,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
 	.4byte fn_8017C4C4
@@ -27290,7 +27290,7 @@
 	.4byte fn_8024C46C
 	.4byte fn_8024CC78
 	.4byte fn_800E8630
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
@@ -27321,7 +27321,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
 	.4byte fn_8017C4C4
@@ -27365,21 +27365,21 @@
 	.4byte fn_802544F0
 	.4byte fn_80253F00
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -27420,7 +27420,7 @@
 	.4byte fn_80252A90
 	.4byte fn_80252C40
 	.4byte fn_80252E48
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_802529CC
@@ -27451,7 +27451,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
 	.4byte fn_8017C4C4
@@ -27508,7 +27508,7 @@
 	.4byte fn_805A4018
 	.4byte fn_80254C9C
 	.4byte fn_800E8630
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
@@ -27539,7 +27539,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
 	.4byte fn_8017C4C4
@@ -27642,7 +27642,7 @@
 	.4byte fn_80259604
 	.4byte fn_800E854C
 	.4byte fn_800E8630
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80257A94
 	.4byte fn_80257B50
 	.4byte fn_80258368
@@ -27673,7 +27673,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
 	.4byte fn_8017C4C4
@@ -27714,7 +27714,7 @@
 .obj lbl_807847D0, global
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 .endobj lbl_807847D0
 
@@ -27738,7 +27738,7 @@
 	.4byte fn_8025B5D8
 	.4byte fn_8025B7DC
 	.4byte fn_800E8630
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_8025C92C
 	.4byte fn_80148340
 	.4byte fn_801489CC
@@ -27769,7 +27769,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
 	.4byte fn_8017C4C4
@@ -27829,7 +27829,7 @@
 .obj lbl_8078494C, global
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 .endobj lbl_8078494C
 
 # .data:0x144B8 | 0x80784958 | size: 0xF8
@@ -27852,7 +27852,7 @@
 	.4byte fn_8025F7D0
 	.4byte fn_8025F8C8
 	.4byte fn_800E8630
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
@@ -27883,7 +27883,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
 	.4byte fn_8017C4C4
@@ -27924,7 +27924,7 @@
 .obj lbl_80784A88, global
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 .endobj lbl_80784A88
 
 # .data:0x145F4 | 0x80784A94 | size: 0x34
@@ -27964,7 +27964,7 @@
 	.4byte fn_80260EBC
 	.4byte fn_80260F88
 	.4byte fn_800E8630
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_802626E4
 	.4byte fn_80148340
 	.4byte fn_801489CC
@@ -27995,7 +27995,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
 	.4byte fn_8017C4C4
@@ -28052,7 +28052,7 @@
 	.4byte fn_80263580
 	.4byte fn_802639C8
 	.4byte fn_800E8630
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
@@ -28083,7 +28083,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
 	.4byte fn_8017C4C4
@@ -28205,7 +28205,7 @@
 	.4byte fn_80266254
 	.4byte fn_80266A24
 	.4byte fn_800E8630
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_8026FBB8
 	.4byte fn_80148340
 	.4byte fn_801489CC
@@ -28236,7 +28236,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
 	.4byte fn_8017C4C4
@@ -28318,7 +28318,7 @@
 	.4byte fn_80270774
 	.4byte fn_802709E0
 	.4byte fn_800E8630
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
@@ -28349,7 +28349,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
 	.4byte fn_8017C4C4
@@ -28445,7 +28445,7 @@
 	.4byte fn_80274268
 	.4byte fn_802744BC
 	.4byte fn_800E8630
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_80274518
@@ -28476,7 +28476,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
 	.4byte fn_8017C4C4
@@ -28596,7 +28596,7 @@
 	.4byte fn_8027AC38
 	.4byte fn_8027AF4C
 	.4byte fn_800E8630
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_8027B118
 	.4byte fn_80148340
 	.4byte fn_80274518
@@ -28627,7 +28627,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
 	.4byte fn_8017C4C4
@@ -28755,7 +28755,7 @@
 	.4byte fn_8027E410
 	.4byte fn_8027E678
 	.4byte fn_800E8630
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_8027E8EC
@@ -28786,7 +28786,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
 	.4byte fn_8017C4C4
@@ -28863,7 +28863,7 @@
 	.4byte fn_80283FD4
 	.4byte fn_8028429C
 	.4byte fn_800E8630
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
@@ -28894,7 +28894,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
 	.4byte fn_8017C4C4
@@ -28976,7 +28976,7 @@
 	.4byte fn_80289978
 	.4byte fn_80289C98
 	.4byte fn_800E8630
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_8028A024
 	.4byte fn_8028A5D4
@@ -29007,7 +29007,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_802936B4
 	.4byte fn_80293368
 	.4byte fn_8029350C
@@ -29103,7 +29103,7 @@
 	.4byte fn_802956D8
 	.4byte fn_80295988
 	.4byte fn_800E8630
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_80295BE4
 	.4byte fn_80295DB8
@@ -29134,7 +29134,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_8029CA84
 	.4byte fn_8029C728
 	.4byte fn_8029C8CC
@@ -29248,7 +29248,7 @@
 	.4byte fn_805A4018
 	.4byte fn_8029DEF8
 	.4byte fn_800E8630
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_8029E2AC
 	.4byte fn_8029E480
@@ -29279,7 +29279,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
 	.4byte fn_8017C4C4
@@ -29401,7 +29401,7 @@
 	.4byte fn_802A6D58
 	.4byte fn_802A6E80
 	.4byte fn_800E8630
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_802A7F9C
@@ -29432,7 +29432,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
 	.4byte fn_8017C4C4
@@ -29546,7 +29546,7 @@
 	.4byte fn_805A4018
 	.4byte fn_802ADF34
 	.4byte fn_800E8630
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_802AE0B8
 	.4byte fn_802AE558
@@ -29577,7 +29577,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
 	.4byte fn_8017C4C4
@@ -29764,7 +29764,7 @@
 	.4byte fn_802B3498
 	.4byte fn_802B3534
 	.4byte fn_800E8630
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_802B5134
@@ -29795,7 +29795,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
 	.4byte fn_8017C4C4
@@ -29900,7 +29900,7 @@
 	.4byte fn_805A4018
 	.4byte fn_802B7E60
 	.4byte fn_800E8630
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_802B9DB4
 	.4byte fn_802BA5E0
@@ -29931,7 +29931,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
 	.4byte fn_8017C4C4
@@ -30006,7 +30006,7 @@
 .obj lbl_8078655C, global
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 .endobj lbl_8078655C
 
 # .data:0x160C8 | 0x80786568 | size: 0x11C
@@ -30029,7 +30029,7 @@
 	.4byte fn_802BAFAC
 	.4byte fn_802BB104
 	.4byte fn_800E8630
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_802BBCDC
 	.4byte fn_802BC240
@@ -30060,7 +30060,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
 	.4byte fn_8017C4C4
@@ -30143,7 +30143,7 @@
 	.4byte fn_802C25C4
 	.4byte fn_802C2944
 	.4byte fn_800E8630
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_802C5068
 	.4byte fn_802C5D4C
@@ -30174,7 +30174,7 @@
 	.4byte fn_802C2AE8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
 	.4byte fn_8017C4C4
@@ -30251,7 +30251,7 @@
 	.4byte fn_802C881C
 	.4byte fn_802C8930
 	.4byte fn_800E8630
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_802C8A68
 	.4byte fn_802C92D4
@@ -30282,7 +30282,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
 	.4byte fn_8017C4C4
@@ -30339,7 +30339,7 @@
 	.4byte fn_802CCBD4
 	.4byte fn_802CCC24
 	.4byte fn_800E8630
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_802CE8EC
 	.4byte fn_802CED80
@@ -30370,7 +30370,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
 	.4byte fn_8017C4C4
@@ -30465,7 +30465,7 @@
 	.4byte fn_802CE430
 	.4byte fn_802CE504
 	.4byte fn_800E8630
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_802CE8EC
 	.4byte fn_802CED80
@@ -30496,7 +30496,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
 	.4byte fn_8017C4C4
@@ -30548,7 +30548,7 @@
 	.4byte fn_802D22A0
 	.4byte fn_802D2820
 	.4byte fn_800E8630
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_802D2844
 	.4byte fn_802D30DC
@@ -30579,7 +30579,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
 	.4byte fn_8017C4C4
@@ -30699,7 +30699,7 @@
 	.4byte fn_802D9248
 	.4byte fn_802D92CC
 	.4byte fn_800E8630
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_802D92E4
 	.4byte fn_802D977C
@@ -30730,7 +30730,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_802DDC3C
 	.4byte fn_802D9D5C
 	.4byte fn_802DA01C
@@ -30827,7 +30827,7 @@
 	.4byte fn_802DF96C
 	.4byte fn_802DFA78
 	.4byte fn_800E8630
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_802DFA9C
 	.4byte fn_802DFF3C
@@ -30858,7 +30858,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_802E1D50
 	.4byte fn_8017BDDC
 	.4byte fn_8017C4C4
@@ -30969,7 +30969,7 @@
 	.4byte fn_802E2E88
 	.4byte fn_802E2F24
 	.4byte fn_800E8630
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_802E315C
@@ -31000,7 +31000,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
 	.4byte fn_8017C4C4
@@ -31057,7 +31057,7 @@
 	.4byte fn_802E7120
 	.4byte fn_802E71B0
 	.4byte fn_800E8630
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_802E7298
@@ -31088,7 +31088,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
 	.4byte fn_8017C4C4
@@ -31155,7 +31155,7 @@
 	.4byte fn_802E9DEC
 	.4byte fn_802E9FC8
 	.4byte fn_800E8630
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
@@ -31186,7 +31186,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
 	.4byte fn_8017C4C4
@@ -31267,7 +31267,7 @@
 	.4byte fn_802EDDA0
 	.4byte fn_802EDED0
 	.4byte fn_800E8630
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
@@ -31298,7 +31298,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
 	.4byte fn_8017C4C4
@@ -31428,7 +31428,7 @@
 	.4byte fn_805A4018
 	.4byte fn_802EF0FC
 	.4byte fn_800E8630
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
@@ -31459,7 +31459,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
 	.4byte fn_8017C4C4
@@ -31556,7 +31556,7 @@
 	.4byte fn_802F2D1C
 	.4byte fn_802F2FA4
 	.4byte fn_800E8630
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
@@ -31587,7 +31587,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
 	.4byte fn_8017C4C4
@@ -31669,7 +31669,7 @@
 	.4byte fn_802F87E0
 	.4byte fn_802F8A60
 	.4byte fn_800E8630
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
@@ -31700,7 +31700,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
 	.4byte fn_8017C4C4
@@ -31775,7 +31775,7 @@
 	.4byte fn_802FDDAC
 	.4byte fn_802FE3E4
 	.4byte fn_802FF550
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_802FE630
 	.4byte fn_802FF2E4
@@ -31806,7 +31806,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
 	.4byte fn_8017C4C4
@@ -31927,7 +31927,7 @@
 	.4byte fn_805A4018
 	.4byte fn_803067E0
 	.4byte fn_800E8630
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_80308E6C
 	.4byte fn_80309698
@@ -31958,7 +31958,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
 	.4byte fn_8017C4C4
@@ -32131,7 +32131,7 @@
 	.4byte fn_8030B41C
 	.4byte fn_8030B5B0
 	.4byte fn_800E8630
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_8030D5C8
 	.4byte fn_8030D9F0
@@ -32162,7 +32162,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
 	.4byte fn_8017C4C4
@@ -32231,7 +32231,7 @@
 	.4byte fn_805A4018
 	.4byte fn_8030E36C
 	.4byte fn_800E8630
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
@@ -32262,7 +32262,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
 	.4byte fn_8017C4C4
@@ -32359,7 +32359,7 @@
 	.4byte fn_805A4018
 	.4byte fn_803111AC
 	.4byte fn_800E8630
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
@@ -32390,7 +32390,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
 	.4byte fn_8017C4C4
@@ -32511,7 +32511,7 @@
 	.4byte fn_805A4018
 	.4byte fn_80313FE8
 	.4byte fn_800E8630
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
@@ -32542,7 +32542,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
 	.4byte fn_8017C4C4
@@ -32632,7 +32632,7 @@
 	.4byte fn_80317110
 	.4byte fn_80317188
 	.4byte fn_800E8630
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
@@ -32663,7 +32663,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
 	.4byte fn_8017C4C4
@@ -32720,7 +32720,7 @@
 	.4byte fn_8031C534
 	.4byte fn_8031C584
 	.4byte fn_800E8630
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
@@ -32751,7 +32751,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
 	.4byte fn_8017C4C4
@@ -32820,7 +32820,7 @@
 .obj lbl_807889F0, global
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 .endobj lbl_807889F0
 
@@ -32856,7 +32856,7 @@
 	.4byte fn_8031FBFC
 	.4byte fn_800E854C
 	.4byte fn_800E8630
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_80321E20
 	.4byte fn_8032268C
@@ -32887,7 +32887,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
 	.4byte fn_8017C4C4
@@ -32968,7 +32968,7 @@
 .obj lbl_80788BB0, global
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 .endobj lbl_80788BB0
 
@@ -33004,7 +33004,7 @@
 	.4byte fn_80323CDC
 	.4byte fn_80323E50
 	.4byte fn_800E8630
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_80325F2C
 	.4byte fn_80326798
@@ -33035,7 +33035,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
 	.4byte fn_8017C4C4
@@ -33104,7 +33104,7 @@
 	.4byte fn_8032D5EC
 	.4byte fn_8032DAA0
 	.4byte fn_800E8630
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
@@ -33192,7 +33192,7 @@
 .obj lbl_80788E80, global
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 .endobj lbl_80788E80
 
@@ -33216,7 +33216,7 @@
 	.4byte fn_8032EDC4
 	.4byte fn_800E854C
 	.4byte fn_8032EF2C
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
@@ -33247,7 +33247,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
 	.4byte fn_8017C4C4
@@ -33304,7 +33304,7 @@
 	.4byte fn_803349EC
 	.4byte fn_80334A64
 	.4byte fn_800E8630
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
@@ -33438,7 +33438,7 @@
 .obj lbl_80789198, global
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 .endobj lbl_80789198
 
 # .data:0x18D04 | 0x807891A4 | size: 0x30
@@ -33477,7 +33477,7 @@
 	.4byte fn_805A4018
 	.4byte fn_80335788
 	.4byte fn_800E8630
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_803386FC
 	.4byte fn_80148340
 	.4byte fn_801489CC
@@ -33508,7 +33508,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
 	.4byte fn_8017C4C4
@@ -33606,7 +33606,7 @@
 	.4byte fn_80339F8C
 	.4byte fn_8033A154
 	.4byte fn_800E8630
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80344BD8
 	.4byte fn_8033ACB0
 	.4byte fn_8033BD74
@@ -33637,7 +33637,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
 	.4byte fn_8017C4C4
@@ -33756,7 +33756,7 @@
 	.4byte fn_80346990
 	.4byte fn_80346A34
 	.4byte fn_800E8630
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_80347218
 	.4byte fn_803482DC
@@ -33787,7 +33787,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
 	.4byte fn_80354194
@@ -33866,7 +33866,7 @@
 	.4byte fn_8035586C
 	.4byte fn_803558C8
 	.4byte fn_800E8630
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
@@ -34016,7 +34016,7 @@
 	.4byte fn_805A4018
 	.4byte fn_80357004
 	.4byte fn_800E8630
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
@@ -34047,7 +34047,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
 	.4byte fn_8017C4C4
@@ -34114,7 +34114,7 @@
 	.4byte fn_801513D0
 	.4byte fn_800E854C
 	.4byte fn_800E8630
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
@@ -34145,7 +34145,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
 	.4byte fn_8017C4C4
@@ -34164,7 +34164,7 @@
 .obj lbl_80789B00, global
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 .endobj lbl_80789B00
 
@@ -34175,21 +34175,21 @@
 	.4byte fn_8035DF08
 	.4byte fn_8035BDE8
 	.4byte fn_80192758
-	.4byte fn_80192578
+	.4byte map_stream_getChunkPos
 	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
-	.4byte fn_800E60FC
+	.4byte decal_defaultCallback
 	.4byte fn_8017A220
 	.4byte fn_8017A2F8
 	.4byte fn_801446E8
 	.4byte fn_80147A0C
 	.4byte fn_80188088
 	.4byte fn_80188080
-	.4byte fn_80188064
+	.4byte map_door_getDefaultOffset
 	.4byte fn_800EE5A4
 	.4byte fn_80151180
 	.4byte fn_80147A10
@@ -34230,7 +34230,7 @@
 	.4byte fn_8035D7D4
 	.4byte fn_800E854C
 	.4byte fn_8035DA0C
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
@@ -34261,7 +34261,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
 	.4byte fn_8017C4C4
@@ -34558,7 +34558,7 @@
 	.4byte fn_80365424
 	.4byte fn_800E854C
 	.4byte fn_800E8630
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
@@ -34589,7 +34589,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
 	.4byte fn_8017C4C4
@@ -37662,74 +37662,74 @@
 
 # .data:0x1C228 | 0x8078C6C8 | size: 0x110
 .obj jumptable_8078C6C8, global
-	.4byte fn_803EC16C+0x1F4
-	.4byte fn_803EC16C+0x54
-	.4byte fn_803EC16C+0x60
-	.4byte fn_803EC16C+0x1F4
-	.4byte fn_803EC16C+0x6C
-	.4byte fn_803EC16C+0x78
-	.4byte fn_803EC16C+0x1F4
-	.4byte fn_803EC16C+0x1F4
-	.4byte fn_803EC16C+0x1F4
-	.4byte fn_803EC16C+0x1F4
-	.4byte fn_803EC16C+0x84
-	.4byte fn_803EC16C+0x90
-	.4byte fn_803EC16C+0x1F4
-	.4byte fn_803EC16C+0x1F4
-	.4byte fn_803EC16C+0x1F4
-	.4byte fn_803EC16C+0x1F4
-	.4byte fn_803EC16C+0x9C
-	.4byte fn_803EC16C+0xA8
-	.4byte fn_803EC16C+0xB4
-	.4byte fn_803EC16C+0xC0
-	.4byte fn_803EC16C+0x1F4
-	.4byte fn_803EC16C+0xCC
-	.4byte fn_803EC16C+0xD8
-	.4byte fn_803EC16C+0x1F4
-	.4byte fn_803EC16C+0xE4
-	.4byte fn_803EC16C+0x1F4
-	.4byte fn_803EC16C+0x1F4
-	.4byte fn_803EC16C+0x1F4
-	.4byte fn_803EC16C+0xF0
-	.4byte fn_803EC16C+0x1F4
-	.4byte fn_803EC16C+0x1F4
-	.4byte fn_803EC16C+0x1F4
-	.4byte fn_803EC16C+0x1F4
-	.4byte fn_803EC16C+0xFC
-	.4byte fn_803EC16C+0x108
-	.4byte fn_803EC16C+0x1F4
-	.4byte fn_803EC16C+0x114
-	.4byte fn_803EC16C+0x120
-	.4byte fn_803EC16C+0x12C
-	.4byte fn_803EC16C+0x1F4
-	.4byte fn_803EC16C+0x138
-	.4byte fn_803EC16C+0x1F4
-	.4byte fn_803EC16C+0x1F4
-	.4byte fn_803EC16C+0x1F4
-	.4byte fn_803EC16C+0x1F4
-	.4byte fn_803EC16C+0x144
-	.4byte fn_803EC16C+0x150
-	.4byte fn_803EC16C+0x1F4
-	.4byte fn_803EC16C+0x15C
-	.4byte fn_803EC16C+0x1F4
-	.4byte fn_803EC16C+0x1F4
-	.4byte fn_803EC16C+0x1F4
-	.4byte fn_803EC16C+0x168
-	.4byte fn_803EC16C+0x174
-	.4byte fn_803EC16C+0x180
-	.4byte fn_803EC16C+0x18C
-	.4byte fn_803EC16C+0x198
-	.4byte fn_803EC16C+0x1A4
-	.4byte fn_803EC16C+0x1F4
-	.4byte fn_803EC16C+0x1F4
-	.4byte fn_803EC16C+0x1B0
-	.4byte fn_803EC16C+0x1BC
-	.4byte fn_803EC16C+0x1F4
-	.4byte fn_803EC16C+0x1C8
-	.4byte fn_803EC16C+0x1D4
-	.4byte fn_803EC16C+0x1E0
-	.4byte fn_803EC16C+0x1F4
-	.4byte fn_803EC16C+0x1EC
+	.4byte dungeon_spawnEnemyWave+0x1F4
+	.4byte dungeon_spawnEnemyWave+0x54
+	.4byte dungeon_spawnEnemyWave+0x60
+	.4byte dungeon_spawnEnemyWave+0x1F4
+	.4byte dungeon_spawnEnemyWave+0x6C
+	.4byte dungeon_spawnEnemyWave+0x78
+	.4byte dungeon_spawnEnemyWave+0x1F4
+	.4byte dungeon_spawnEnemyWave+0x1F4
+	.4byte dungeon_spawnEnemyWave+0x1F4
+	.4byte dungeon_spawnEnemyWave+0x1F4
+	.4byte dungeon_spawnEnemyWave+0x84
+	.4byte dungeon_spawnEnemyWave+0x90
+	.4byte dungeon_spawnEnemyWave+0x1F4
+	.4byte dungeon_spawnEnemyWave+0x1F4
+	.4byte dungeon_spawnEnemyWave+0x1F4
+	.4byte dungeon_spawnEnemyWave+0x1F4
+	.4byte dungeon_spawnEnemyWave+0x9C
+	.4byte dungeon_spawnEnemyWave+0xA8
+	.4byte dungeon_spawnEnemyWave+0xB4
+	.4byte dungeon_spawnEnemyWave+0xC0
+	.4byte dungeon_spawnEnemyWave+0x1F4
+	.4byte dungeon_spawnEnemyWave+0xCC
+	.4byte dungeon_spawnEnemyWave+0xD8
+	.4byte dungeon_spawnEnemyWave+0x1F4
+	.4byte dungeon_spawnEnemyWave+0xE4
+	.4byte dungeon_spawnEnemyWave+0x1F4
+	.4byte dungeon_spawnEnemyWave+0x1F4
+	.4byte dungeon_spawnEnemyWave+0x1F4
+	.4byte dungeon_spawnEnemyWave+0xF0
+	.4byte dungeon_spawnEnemyWave+0x1F4
+	.4byte dungeon_spawnEnemyWave+0x1F4
+	.4byte dungeon_spawnEnemyWave+0x1F4
+	.4byte dungeon_spawnEnemyWave+0x1F4
+	.4byte dungeon_spawnEnemyWave+0xFC
+	.4byte dungeon_spawnEnemyWave+0x108
+	.4byte dungeon_spawnEnemyWave+0x1F4
+	.4byte dungeon_spawnEnemyWave+0x114
+	.4byte dungeon_spawnEnemyWave+0x120
+	.4byte dungeon_spawnEnemyWave+0x12C
+	.4byte dungeon_spawnEnemyWave+0x1F4
+	.4byte dungeon_spawnEnemyWave+0x138
+	.4byte dungeon_spawnEnemyWave+0x1F4
+	.4byte dungeon_spawnEnemyWave+0x1F4
+	.4byte dungeon_spawnEnemyWave+0x1F4
+	.4byte dungeon_spawnEnemyWave+0x1F4
+	.4byte dungeon_spawnEnemyWave+0x144
+	.4byte dungeon_spawnEnemyWave+0x150
+	.4byte dungeon_spawnEnemyWave+0x1F4
+	.4byte dungeon_spawnEnemyWave+0x15C
+	.4byte dungeon_spawnEnemyWave+0x1F4
+	.4byte dungeon_spawnEnemyWave+0x1F4
+	.4byte dungeon_spawnEnemyWave+0x1F4
+	.4byte dungeon_spawnEnemyWave+0x168
+	.4byte dungeon_spawnEnemyWave+0x174
+	.4byte dungeon_spawnEnemyWave+0x180
+	.4byte dungeon_spawnEnemyWave+0x18C
+	.4byte dungeon_spawnEnemyWave+0x198
+	.4byte dungeon_spawnEnemyWave+0x1A4
+	.4byte dungeon_spawnEnemyWave+0x1F4
+	.4byte dungeon_spawnEnemyWave+0x1F4
+	.4byte dungeon_spawnEnemyWave+0x1B0
+	.4byte dungeon_spawnEnemyWave+0x1BC
+	.4byte dungeon_spawnEnemyWave+0x1F4
+	.4byte dungeon_spawnEnemyWave+0x1C8
+	.4byte dungeon_spawnEnemyWave+0x1D4
+	.4byte dungeon_spawnEnemyWave+0x1E0
+	.4byte dungeon_spawnEnemyWave+0x1F4
+	.4byte dungeon_spawnEnemyWave+0x1EC
 .endobj jumptable_8078C6C8
 
 # .data:0x1C338 | 0x8078C7D8 | size: 0xF8
@@ -40616,7 +40616,7 @@
 	.4byte fn_801513D0
 	.4byte fn_80152A20
 	.4byte fn_80152D10
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
@@ -40647,7 +40647,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
 	.4byte fn_8017C4C4
@@ -40944,7 +40944,7 @@
 	.4byte fn_801513D0
 	.4byte fn_80152A20
 	.4byte fn_80152D10
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
@@ -40975,7 +40975,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
 	.4byte fn_8017C4C4
@@ -41688,7 +41688,7 @@
 	.4byte fn_80452F0C
 	.4byte fn_80452F10
 	.4byte fn_800E8630
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
@@ -41719,7 +41719,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
 	.4byte fn_8017C4C4
@@ -41776,7 +41776,7 @@
 	.4byte fn_804549E8
 	.4byte fn_804549F8
 	.4byte fn_800E8630
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
@@ -41807,7 +41807,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
 	.4byte fn_8017C4C4
@@ -41891,7 +41891,7 @@
 .obj lbl_8078F7E0, global
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 .endobj lbl_8078F7E0
 
@@ -41915,7 +41915,7 @@
 	.4byte fn_80459358
 	.4byte fn_804596E8
 	.4byte fn_800E8630
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_80459FD0
 	.4byte fn_8045A8F0
@@ -41946,7 +41946,7 @@
 	.4byte fn_80459F24
 	.4byte fn_80459FB8
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_8045F914
 	.4byte fn_8045F6E0
 	.4byte fn_8017C4C4
@@ -42023,7 +42023,7 @@
 .obj lbl_8078F96C, global
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 .endobj lbl_8078F96C
 
 # .data:0x1F4D8 | 0x8078F978 | size: 0x8
@@ -42052,7 +42052,7 @@
 	.4byte fn_80460A94
 	.4byte fn_80460B48
 	.4byte fn_800E8630
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_80460F18
 	.4byte fn_80461398
@@ -42083,7 +42083,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
 	.4byte fn_8017C4C4
@@ -44932,7 +44932,7 @@
 	.4byte fn_801513D0
 	.4byte fn_800E854C
 	.4byte fn_800E8630
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
@@ -44963,7 +44963,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
 	.4byte fn_8017C4C4
@@ -49746,7 +49746,7 @@
 	.4byte fn_805473E0
 	.4byte fn_80547468
 	.4byte fn_800E8630
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
@@ -49777,7 +49777,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_80546A4C
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
 	.4byte fn_8017C4C4
@@ -49864,7 +49864,7 @@
 	.4byte fn_801513D0
 	.4byte fn_80152A20
 	.4byte fn_80152D10
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
@@ -49895,7 +49895,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
 	.4byte fn_8017C4C4
@@ -50026,7 +50026,7 @@
 	.4byte fn_801513D0
 	.4byte fn_800E854C
 	.4byte fn_800E8630
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
@@ -50057,7 +50057,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
 	.4byte fn_8017C4C4
@@ -51765,7 +51765,7 @@
 .obj lbl_807956D0, global
 	.4byte 0x00000000
 	.4byte 0xFFFFFFFF
-	.4byte fn_800E6104
+	.4byte decal_getTargetActor
 	.4byte 0x00000000
 .endobj lbl_807956D0
 
@@ -51801,7 +51801,7 @@
 	.4byte fn_80566F04
 	.4byte fn_800E854C
 	.4byte fn_800E8630
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
@@ -51832,7 +51832,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
 	.4byte fn_8017C4C4
@@ -54180,7 +54180,7 @@
 	.4byte fn_805A4018
 	.4byte fn_804F2C44
 	.4byte fn_800E8630
-	.4byte fn_80153004
+	.4byte inventory_updateItemAttachment
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
@@ -54211,7 +54211,7 @@
 	.4byte fn_8017B0F8
 	.4byte fn_800EF308
 	.4byte fn_800EF304
-	.4byte fn_8017BC58
+	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
 	.4byte fn_8017C4C4

@@ -16,7 +16,7 @@ extern void world_getGlobalFlag(void);
 extern void world_setGlobalFlag(void);
 extern void world_getLocalFlag(void);
 extern void fn_803BF898(void);
-extern void fn_803EC16C(void);
+extern void dungeon_spawnEnemyWave(void);
 extern void fn_803EC374(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
@@ -1516,17 +1516,17 @@ lbl_fn_803CA530_00001278:
     mr r3, r29
     subi r4, r4, 0x15a0
     li r5, 0x1
-    bl fn_803EC16C
+    bl dungeon_spawnEnemyWave
 lbl_fn_803CA530_000012C0:
     lis r31, 0x1
     mr r3, r29
     subi r4, r31, 0x11b8
     li r5, 0x1
-    bl fn_803EC16C
+    bl dungeon_spawnEnemyWave
     mr r3, r29
     subi r4, r31, 0x600
     li r5, 0x1
-    bl fn_803EC16C
+    bl dungeon_spawnEnemyWave
 lbl_fn_803CA530_000012E4:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
@@ -1723,7 +1723,7 @@ lbl_fn_803CA604_00001588:
     mr r3, r20
     mr r4, r21
     mr r5, r16
-    bl fn_803EC16C
+    bl dungeon_spawnEnemyWave
     cmpwi r3, 0x0
     mr r16, r3
     beq lbl_fn_803CA604_0000175C

@@ -22,7 +22,7 @@ extern void fn_800DAA3C(void);
 extern void fn_800DBC1C(void);
 extern void fn_800DBCC8(void);
 extern void fn_80122330(void);
-extern void fn_80124C6C(void);
+extern void player_applyStatusEffect(void);
 extern void inventory_calcTotalStats(void);
 extern void battle_applyStatusEffect(void);
 extern void battle_calcOutcomeBonus(void);
@@ -703,7 +703,7 @@ lbl_fn_802297AC_00000834:
     addi r4, r3, 0x48c
     addi r3, r1, 0x28
     li r5, 0x0
-    bl fn_80124C6C
+    bl player_applyStatusEffect
     addi r29, r1, 0x28
     lis r30, lbl_80742EA8@ha
     addi r5, r1, 0x18

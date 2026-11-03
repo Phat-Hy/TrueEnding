@@ -39,7 +39,7 @@ extern void fn_80168F3C(void);
 extern void fn_8016D74C(void);
 extern void actor_setState(void);
 extern void battle_generateLootDrops(void);
-extern void fn_8017BC58(void);
+extern void map_area_isNavigable(void);
 extern void fn_8018E438(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
@@ -214,7 +214,7 @@ asm void fn_80334AB0(void)
     li r3, 0x0
     blr
 lbl_fn_80334AB0_000000EC:
-    b fn_8017BC58
+    b map_area_isNavigable
     blr
 }
 

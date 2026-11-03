@@ -51907,7 +51907,7 @@
 .endfn fn_80152D10
 
 # .text:0x2DCE4 | 0x80153004 | size: 0x3C4
-.fn fn_80153004, global
+.fn inventory_updateItemAttachment, global
 /* 80153004 0014D664  94 21 FF 70 */	stwu r1, -0x90(r1)
 /* 80153008 0014D668  7C 08 02 A6 */	mflr r0
 /* 8015300C 0014D66C  90 01 00 94 */	stw r0, 0x94(r1)
@@ -52166,7 +52166,7 @@
 /* 801533BC 0014DA1C  7C 08 03 A6 */	mtlr r0
 /* 801533C0 0014DA20  38 21 00 90 */	addi r1, r1, 0x90
 /* 801533C4 0014DA24  4E 80 00 20 */	blr
-.endfn fn_80153004
+.endfn inventory_updateItemAttachment
 
 # .text:0x2E0A8 | 0x801533C8 | size: 0x2D0
 .fn inventory_hasItem, global
@@ -98185,7 +98185,7 @@
 .endfn fn_8017BC4C
 
 # .text:0x56938 | 0x8017BC58 | size: 0x184
-.fn fn_8017BC58, global
+.fn map_area_isNavigable, global
 /* 8017BC58 001762B8  80 E3 00 38 */	lwz r7, 0x38(r3)
 /* 8017BC5C 001762BC  38 A0 00 00 */	li r5, 0x0
 /* 8017BC60 001762C0  38 80 00 00 */	li r4, 0x0
@@ -98297,7 +98297,7 @@
 .L_8017BDD4:
 /* 8017BDD4 00176434  38 60 00 01 */	li r3, 0x1
 /* 8017BDD8 00176438  4E 80 00 20 */	blr
-.endfn fn_8017BC58
+.endfn map_area_isNavigable
 
 # .text:0x56ABC | 0x8017BDDC | size: 0x6E8
 .fn fn_8017BDDC, global
@@ -111874,7 +111874,7 @@
 .endfn fn_80188060
 
 # .text:0x62D44 | 0x80188064 | size: 0x1C
-.fn fn_80188064, global
+.fn map_door_getDefaultOffset, global
 /* 80188064 001826C4  3C 80 80 7C */	lis r4, lbl_807C7030@ha
 /* 80188068 001826C8  38 84 70 30 */	addi r4, r4, lbl_807C7030@l
 /* 8018806C 001826CC  E0 24 00 00 */	psq_l f1, 0x0(r4), 0, qr0
@@ -111882,7 +111882,7 @@
 /* 80188074 001826D4  D0 43 00 08 */	stfs f2, 0x8(r3)
 /* 80188078 001826D8  F0 23 00 00 */	psq_st f1, 0x0(r3), 0, qr0
 /* 8018807C 001826DC  4E 80 00 20 */	blr
-.endfn fn_80188064
+.endfn map_door_getDefaultOffset
 
 # .text:0x62D60 | 0x80188080 | size: 0x8
 .fn fn_80188080, global
@@ -123617,14 +123617,14 @@
 .endfn fn_80192538
 
 # .text:0x6D258 | 0x80192578 | size: 0x18
-.fn fn_80192578, global
+.fn map_stream_getChunkPos, global
 /* 80192578 0018CBD8  80 84 00 04 */	lwz r4, 0x4(r4)
 /* 8019257C 0018CBDC  E0 24 05 28 */	psq_l f1, 0x528(r4), 0, qr0
 /* 80192580 0018CBE0  C0 44 05 30 */	lfs f2, 0x530(r4)
 /* 80192584 0018CBE4  D0 43 00 08 */	stfs f2, 0x8(r3)
 /* 80192588 0018CBE8  F0 23 00 00 */	psq_st f1, 0x0(r3), 0, qr0
 /* 8019258C 0018CBEC  4E 80 00 20 */	blr
-.endfn fn_80192578
+.endfn map_stream_getChunkPos
 
 # .text:0x6D270 | 0x80192590 | size: 0x1C8
 .fn map_stream_buildTransformMtx, global

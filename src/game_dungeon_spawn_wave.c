@@ -150,7 +150,7 @@ void fn_803EBD6C(void);
 void fn_803EBE74(void);
 void fn_803EC0A4(void);
 void fn_803EC0F8(void);
-void fn_803EC16C(void);
+void dungeon_spawnEnemyWave(void);
 void fn_803EC374(void);
 
 asm void fn_803EAA7C(void)
@@ -1857,7 +1857,7 @@ lbl_fn_803EC0F8_000016E0:
     blr
 }
 
-asm void fn_803EC16C(void)
+asm void dungeon_spawnEnemyWave(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1870,12 +1870,12 @@ asm void fn_803EC16C(void)
     srawi r0, r0, 6
     srwi r6, r0, 31
     add. r0, r0, r6
-    bne lbl_fn_803EC16C_00001724
+    bne lbl_dungeon_spawnEnemyWave_00001724
     mr r0, r4
     mulli r4, r4, 0x3e8
-lbl_fn_803EC16C_00001724:
+lbl_dungeon_spawnEnemyWave_00001724:
     cmplwi r0, 0x43
-    bgt lbl_fn_803EC16C_000018E4
+    bgt lbl_dungeon_spawnEnemyWave_000018E4
     lis r6, jumptable_8078C6C8@ha
     slwi r0, r0, 2
     addi r6, r6, jumptable_8078C6C8@l
@@ -1884,109 +1884,109 @@ lbl_fn_803EC16C_00001724:
     bctr
     bl fn_803F1BB4
     mr r7, r3
-    b lbl_fn_803EC16C_000018E4
+    b lbl_dungeon_spawnEnemyWave_000018E4
     bl fn_803F471C
     mr r7, r3
-    b lbl_fn_803EC16C_000018E4
+    b lbl_dungeon_spawnEnemyWave_000018E4
     bl fn_803F69E4
     mr r7, r3
-    b lbl_fn_803EC16C_000018E4
+    b lbl_dungeon_spawnEnemyWave_000018E4
     bl fn_803F744C
     mr r7, r3
-    b lbl_fn_803EC16C_000018E4
+    b lbl_dungeon_spawnEnemyWave_000018E4
     bl fn_803FE390
     mr r7, r3
-    b lbl_fn_803EC16C_000018E4
+    b lbl_dungeon_spawnEnemyWave_000018E4
     bl fn_80400728
     mr r7, r3
-    b lbl_fn_803EC16C_000018E4
+    b lbl_dungeon_spawnEnemyWave_000018E4
     bl fn_80406754
     mr r7, r3
-    b lbl_fn_803EC16C_000018E4
+    b lbl_dungeon_spawnEnemyWave_000018E4
     bl fn_80408324
     mr r7, r3
-    b lbl_fn_803EC16C_000018E4
+    b lbl_dungeon_spawnEnemyWave_000018E4
     bl fn_804093B4
     mr r7, r3
-    b lbl_fn_803EC16C_000018E4
+    b lbl_dungeon_spawnEnemyWave_000018E4
     bl fn_803FE390
     mr r7, r3
-    b lbl_fn_803EC16C_000018E4
+    b lbl_dungeon_spawnEnemyWave_000018E4
     bl fn_8040DC30
     mr r7, r3
-    b lbl_fn_803EC16C_000018E4
+    b lbl_dungeon_spawnEnemyWave_000018E4
     bl fn_8040EC30
     mr r7, r3
-    b lbl_fn_803EC16C_000018E4
+    b lbl_dungeon_spawnEnemyWave_000018E4
     bl fn_8040FAC0
     mr r7, r3
-    b lbl_fn_803EC16C_000018E4
+    b lbl_dungeon_spawnEnemyWave_000018E4
     bl fn_80412AFC
     mr r7, r3
-    b lbl_fn_803EC16C_000018E4
+    b lbl_dungeon_spawnEnemyWave_000018E4
     bl fn_80418198
     mr r7, r3
-    b lbl_fn_803EC16C_000018E4
+    b lbl_dungeon_spawnEnemyWave_000018E4
     bl fn_80418EAC
     mr r7, r3
-    b lbl_fn_803EC16C_000018E4
+    b lbl_dungeon_spawnEnemyWave_000018E4
     bl fn_8041C09C
     mr r7, r3
-    b lbl_fn_803EC16C_000018E4
+    b lbl_dungeon_spawnEnemyWave_000018E4
     bl fn_8041CD54
     mr r7, r3
-    b lbl_fn_803EC16C_000018E4
+    b lbl_dungeon_spawnEnemyWave_000018E4
     bl fn_8041DDE4
     mr r7, r3
-    b lbl_fn_803EC16C_000018E4
+    b lbl_dungeon_spawnEnemyWave_000018E4
     bl fn_8041FF08
     mr r7, r3
-    b lbl_fn_803EC16C_000018E4
+    b lbl_dungeon_spawnEnemyWave_000018E4
     bl fn_8042335C
     mr r7, r3
-    b lbl_fn_803EC16C_000018E4
+    b lbl_dungeon_spawnEnemyWave_000018E4
     bl fn_80423F64
     mr r7, r3
-    b lbl_fn_803EC16C_000018E4
+    b lbl_dungeon_spawnEnemyWave_000018E4
     bl fn_80426108
     mr r7, r3
-    b lbl_fn_803EC16C_000018E4
+    b lbl_dungeon_spawnEnemyWave_000018E4
     bl fn_8042AFE4
     mr r7, r3
-    b lbl_fn_803EC16C_000018E4
+    b lbl_dungeon_spawnEnemyWave_000018E4
     bl fn_8042B56C
     mr r7, r3
-    b lbl_fn_803EC16C_000018E4
+    b lbl_dungeon_spawnEnemyWave_000018E4
     bl fn_8042C21C
     mr r7, r3
-    b lbl_fn_803EC16C_000018E4
+    b lbl_dungeon_spawnEnemyWave_000018E4
     bl fn_8042CE30
     mr r7, r3
-    b lbl_fn_803EC16C_000018E4
+    b lbl_dungeon_spawnEnemyWave_000018E4
     bl fn_8042D628
     mr r7, r3
-    b lbl_fn_803EC16C_000018E4
+    b lbl_dungeon_spawnEnemyWave_000018E4
     bl fn_8042E36C
     mr r7, r3
-    b lbl_fn_803EC16C_000018E4
+    b lbl_dungeon_spawnEnemyWave_000018E4
     bl fn_804310B0
     mr r7, r3
-    b lbl_fn_803EC16C_000018E4
+    b lbl_dungeon_spawnEnemyWave_000018E4
     bl fn_80432CF0
     mr r7, r3
-    b lbl_fn_803EC16C_000018E4
+    b lbl_dungeon_spawnEnemyWave_000018E4
     bl fn_80435CE4
     mr r7, r3
-    b lbl_fn_803EC16C_000018E4
+    b lbl_dungeon_spawnEnemyWave_000018E4
     bl fn_80436E34
     mr r7, r3
-    b lbl_fn_803EC16C_000018E4
+    b lbl_dungeon_spawnEnemyWave_000018E4
     bl fn_8043A770
     mr r7, r3
-    b lbl_fn_803EC16C_000018E4
+    b lbl_dungeon_spawnEnemyWave_000018E4
     bl fn_8043D594
     mr r7, r3
-lbl_fn_803EC16C_000018E4:
+lbl_dungeon_spawnEnemyWave_000018E4:
     lwz r0, 0x14(r1)
     mr r3, r7
     mtlr r0

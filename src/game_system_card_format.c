@@ -37,7 +37,7 @@ extern void res_MsgHandle_unload(void);
 extern void res_MsgHandle_update(void);
 extern void res_registerResource(void);
 extern void fn_8035DC58(void);
-extern void fn_803EC16C(void);
+extern void dungeon_spawnEnemyWave(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
@@ -994,7 +994,7 @@ lbl_fn_8035B534_00000C04:
     lwz r3, lbl_8087F4A0
     li r4, 0x4650
     lwz r5, 0x80(r31)
-    bl fn_803EC16C
+    bl dungeon_spawnEnemyWave
     stw r3, 0x1438(r31)
     li r5, 0x1
     lwz r12, 0x0(r3)
@@ -1066,7 +1066,7 @@ lbl_entity_Instance_constructor_00000D04:
     lwz r3, lbl_8087F4A0
     li r4, 0x4650
     lwz r5, 0x80(r31)
-    bl fn_803EC16C
+    bl dungeon_spawnEnemyWave
     stw r3, 0x1438(r31)
     li r5, 0x1
     lwz r4, 0x5c(r31)

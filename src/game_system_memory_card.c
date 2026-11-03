@@ -27,7 +27,7 @@ extern void party_initFormationSlots(void);
 extern void party_configureMemberSlot(void);
 extern void fn_8015ECC4(void);
 extern void actor_setState(void);
-extern void fn_8017BC58(void);
+extern void map_area_isNavigable(void);
 extern void task_findEntryById(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
@@ -254,7 +254,7 @@ asm void fn_80355938(void)
     li r3, 0x0
     blr
 lbl_fn_80355938_000001EC:
-    b fn_8017BC58
+    b map_area_isNavigable
     blr
 }
 

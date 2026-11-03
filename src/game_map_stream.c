@@ -106,7 +106,7 @@ void fn_80192478(void);
 void fn_801924B8(void);
 void fn_801924F8(void);
 void fn_80192538(void);
-void fn_80192578(void);
+void map_stream_getChunkPos(void);
 void map_stream_buildTransformMtx(void);
 void map_processStreamChunk(void);
 void fn_80192908(void);
@@ -1028,7 +1028,7 @@ lbl_fn_80192538_00000C00:
     blr
 }
 
-asm void fn_80192578(void)
+asm void map_stream_getChunkPos(void)
 {
     nofralloc
     lwz r4, 0x4(r4)

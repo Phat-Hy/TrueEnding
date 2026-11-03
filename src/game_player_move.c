@@ -20,7 +20,7 @@ extern void wcs_vformat(void);
 extern void actor_findSpawnTemplate(void);
 extern void actor_spawnActorWithId(void);
 extern void fn_8011BBD0(void);
-extern void fn_80124C6C(void);
+extern void player_applyStatusEffect(void);
 extern void save_parseSlotHeader(void);
 extern void save_parseSlotStats(void);
 extern void fn_801F4C14(void);
@@ -544,7 +544,7 @@ lbl_fn_8011A4D0_00000640:
     addi r3, r1, 0x30
     li r5, 0x0
     addi r4, r4, 0x48c
-    bl fn_80124C6C
+    bl player_applyStatusEffect
     lwz r3, 0x58(r29)
     addi r4, r31, 0x306
     addi r5, r1, 0x30
@@ -553,7 +553,7 @@ lbl_fn_8011A4D0_00000640:
     addi r3, r1, 0x20
     li r5, 0x0
     addi r4, r4, 0x48c
-    bl fn_80124C6C
+    bl player_applyStatusEffect
     lwz r3, 0x58(r29)
     addi r4, r31, 0x30c
     addi r5, r1, 0x20

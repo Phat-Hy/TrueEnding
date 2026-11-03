@@ -12,7 +12,7 @@ extern void motion_updateFogAdj(void);
 extern void str_findChar(void);
 extern void fn_800E0000(void);
 extern void magic_dispatchActionCommand(void);
-extern void fn_80124C6C(void);
+extern void player_applyStatusEffect(void);
 extern void save_parseSlotStats(void);
 extern void thread_findAndNotifySlot(void);
 extern void thread_dispatchToQueue(void);
@@ -2089,7 +2089,7 @@ lbl_fn_803DBD44_00001C78:
     li r5, 0x30
     lwz r4, lbl_8087F0A8
     addi r4, r4, 0x48c
-    bl fn_80124C6C
+    bl player_applyStatusEffect
     addi r20, r1, 0x78
     lis r19, lbl_807506A0@ha
     addi r5, r1, 0x38

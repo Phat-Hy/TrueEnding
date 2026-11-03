@@ -3363,7 +3363,7 @@
 .endfn fn_80124BFC
 
 # .text:0x2D6C | 0x80124C6C | size: 0x390
-.fn fn_80124C6C, global
+.fn player_applyStatusEffect, global
 /* 80124C6C 0011F2CC  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80124C70 0011F2D0  7C 08 02 A6 */	mflr r0
 /* 80124C74 0011F2D4  28 05 00 33 */	cmplwi r5, 0x33
@@ -3609,4 +3609,4 @@
 /* 80124FF0 0011F650  7C 08 03 A6 */	mtlr r0
 /* 80124FF4 0011F654  38 21 00 10 */	addi r1, r1, 0x10
 /* 80124FF8 0011F658  4E 80 00 20 */	blr
-.endfn fn_80124C6C
+.endfn player_applyStatusEffect

@@ -47,7 +47,7 @@ extern void fn_803C3894(void);
 extern void fn_803CA0F4(void);
 extern void fn_803CA604(void);
 extern void fn_803CAABC(void);
-extern void fn_803EC16C(void);
+extern void dungeon_spawnEnemyWave(void);
 extern void fn_803EC374(void);
 extern void fn_803EE374(void);
 extern void boss_releaseLaserTarget(void);
@@ -303,17 +303,17 @@ lbl_fn_803C01C0_0000023C:
     mr r3, r31
     subi r4, r4, 0x15a0
     li r5, 0x1
-    bl fn_803EC16C
+    bl dungeon_spawnEnemyWave
 lbl_fn_803C01C0_00000284:
     lis r30, 0x1
     mr r3, r31
     subi r4, r30, 0x11b8
     li r5, 0x1
-    bl fn_803EC16C
+    bl dungeon_spawnEnemyWave
     mr r3, r31
     subi r4, r30, 0x600
     li r5, 0x1
-    bl fn_803EC16C
+    bl dungeon_spawnEnemyWave
 lbl_fn_803C01C0_000002A8:
     mr r3, r31
     bl fn_803CA604
