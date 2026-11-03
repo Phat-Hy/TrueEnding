@@ -57,7 +57,7 @@ extern void fn_8059C2AC(void);
 extern void rand_Mersenne_constructor(void);
 extern void fn_805A3D6C(void);
 extern void string_parseQuotedToken(void);
-extern void fn_805A49E8(void);
+extern void world_getFlagScoped(void);
 extern void world_setFlagByType(void);
 extern void PSMTXRotRad(void);
 extern void PSMTX44Identity(void);
@@ -1070,7 +1070,7 @@ lbl_fn_80335600_00000C74:
     bl fn_8059C2AC
     mr r3, r29
     addi r4, r29, 0x1554
-    bl fn_805A49E8
+    bl world_getFlagScoped
     cmpwi r3, 0x0
     bne lbl_fn_80335600_00000CE0
     mr r3, r29
@@ -1099,7 +1099,7 @@ lbl_fn_80335600_00000CE8:
 lbl_fn_80335600_00000D24:
     mr r3, r29
     addi r4, r29, 0x154c
-    bl fn_805A49E8
+    bl world_getFlagScoped
     cmpwi r3, 0x0
     bne lbl_fn_80335600_00000D48
     mr r3, r29
@@ -1704,7 +1704,7 @@ lbl_fn_80335988_00001558:
     bne lbl_fn_80335988_00001610
     mr r3, r31
     addi r4, r31, 0x155c
-    bl fn_805A49E8
+    bl world_getFlagScoped
     cmpwi r3, 0x0
     bne lbl_fn_80335988_00001650
     mr r3, r31
@@ -1722,7 +1722,7 @@ lbl_fn_80335988_00001610:
     bl fn_80168F3C
     mr r3, r31
     addi r4, r31, 0x1544
-    bl fn_805A49E8
+    bl world_getFlagScoped
     cmpwi r3, 0x0
     bne lbl_fn_80335988_00001650
     mr r3, r31

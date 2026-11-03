@@ -18,7 +18,7 @@ extern void hurtbox_processHitDamage(void);
 extern void enemy_evalAnimTrack(void);
 extern void fn_80133FBC(void);
 extern void boss_findPartById(void);
-extern void fn_80134168(void);
+extern void battle_getActorStatTotal(void);
 extern void boss_testAiFlag(void);
 extern void fn_8015E1B8(void);
 extern void battle_canTargetActor(void);
@@ -870,7 +870,7 @@ asm void fn_8010CA3C(void)
     stw r31, 0x1c(r1)
     mr r31, r4
     li r4, 0x1b
-    bl fn_80134168
+    bl battle_getActorStatTotal
     xoris r3, r3, 0x8000
     lis r0, 0x4330
     stw r3, 0xc(r1)
@@ -976,7 +976,7 @@ lbl_fn_8010CB2C_00000BB4:
     addi r3, r30, 0x7d4
     li r4, 0x2b
     li r5, -0x1
-    bl fn_80134168
+    bl battle_getActorStatTotal
     xoris r3, r3, 0x8000
     lis r0, 0x4330
     stw r0, 0x8(r1)

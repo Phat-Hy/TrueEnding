@@ -5602,7 +5602,7 @@
 .endfn gap_03_80709AC8_text
 
 # .text:0x4790 | 0x80709AD0 | size: 0x1E8
-.fn fn_80709AD0, global
+.fn net_stream_readChunk, global
 /* 80709AD0 00704130  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 80709AD4 00704134  7C 08 02 A6 */	mflr r0
 /* 80709AD8 00704138  90 01 00 34 */	stw r0, 0x34(r1)
@@ -5733,7 +5733,7 @@
 /* 80709CAC 0070430C  7C 08 03 A6 */	mtlr r0
 /* 80709CB0 00704310  38 21 00 30 */	addi r1, r1, 0x30
 /* 80709CB4 00704314  4E 80 00 20 */	blr
-.endfn fn_80709AD0
+.endfn net_stream_readChunk
 
 # .text:0x4978 | 0x80709CB8 | size: 0x8
 .fn gap_03_80709CB8_text, global

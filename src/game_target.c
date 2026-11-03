@@ -5,7 +5,7 @@
 extern void _restgpr_23(void);
 extern void _savegpr_23(void);
 extern void dtor_80084684(void);
-extern void fn_8000FAE4(void);
+extern void sys_noopCallback(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void boss_recordDamage(void);
@@ -1438,9 +1438,9 @@ lbl_fn_80093F58_00001140:
     la r6, lbl_8087D80C
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_8000FAE4@ha
+    lis r4, sys_noopCallback@ha
     li r5, 0x0
-    addi r4, r4, fn_8000FAE4@l
+    addi r4, r4, sys_noopCallback@l
     li r6, 0x2c
     li r7, 0x8
     bl runtime_registerStaticObject
@@ -1552,9 +1552,9 @@ lbl_fn_80093F58_000012E0:
     addi r3, r3, 0x10
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_8000FAE4@ha
+    lis r4, sys_noopCallback@ha
     mr r7, r29
-    addi r4, r4, fn_8000FAE4@l
+    addi r4, r4, sys_noopCallback@l
     li r5, 0x0
     li r6, 0x2c
     bl runtime_registerStaticObject
@@ -1771,9 +1771,9 @@ lbl_fn_80094420_00001604:
     addi r3, r3, 0x10
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_8000FAE4@ha
+    lis r4, sys_noopCallback@ha
     mr r7, r29
-    addi r4, r4, fn_8000FAE4@l
+    addi r4, r4, sys_noopCallback@l
     li r5, 0x0
     li r6, 0x2c
     bl runtime_registerStaticObject

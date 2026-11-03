@@ -32,7 +32,7 @@ extern void fn_80133E24(void);
 extern void boss_findPartSlotById(void);
 extern void fn_80133F18(void);
 extern void fn_80133F6C(void);
-extern void fn_80134168(void);
+extern void battle_getActorStatTotal(void);
 extern void quest_getRewardItemSlot(void);
 extern void fn_801533C8(void);
 extern void battle_canTargetActor(void);
@@ -560,13 +560,13 @@ lbl_fn_800FDB20_000006A8:
     addi r3, r24, 0x7d4
     li r4, 0x43
     li r5, -0x1
-    bl fn_80134168
+    bl battle_getActorStatTotal
     cmpwi r3, 0xf
     ble lbl_fn_800FDB20_000006F8
     addi r3, r24, 0x7d4
     li r4, 0x43
     li r5, -0x1
-    bl fn_80134168
+    bl battle_getActorStatTotal
     lis r4, 0x6666
     addi r0, r3, 0xa
     addi r3, r4, 0x6667
@@ -1205,7 +1205,7 @@ lbl_fn_800FDF14_00000F9C:
     addi r3, r29, 0x7d4
     li r4, 0x4
     li r5, -0x1
-    bl fn_80134168
+    bl battle_getActorStatTotal
     xoris r0, r3, 0x8000
     stw r0, 0x3d4(r1)
     lfd f4, 0x8e8(r31)

@@ -37,7 +37,7 @@ extern void task_findEntryById(void);
 extern void fn_8021A888(void);
 extern void fn_8021A8D0(void);
 extern void fn_8021A918(void);
-extern void fn_8021A984(void);
+extern void actor_isCategory5(void);
 extern void world_getGlobalFlag(void);
 extern void world_setGlobalFlag(void);
 extern void kpad_validateButtonIndex(void);
@@ -1564,7 +1564,7 @@ lbl_fn_801BE630_00001544:
     bne lbl_fn_801BE630_0000158C
 lbl_fn_801BE630_0000155C:
     mr r3, r19
-    bl fn_8021A984
+    bl actor_isCategory5
     cmpwi r3, 0x0
     beq lbl_fn_801BE630_0000158C
     lwz r3, lbl_8087F430

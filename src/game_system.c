@@ -14,7 +14,7 @@ extern void scene_traverseNode(void);
 extern void fn_8000D8C0(void);
 extern void scene_transformPoint(void);
 extern void fn_8000D9F0(void);
-extern void fn_8000DB1C(void);
+extern void scene_getInstance(void);
 extern void fn_8000DB24(void);
 extern void fn_8000DD04(void);
 extern void scene_getRootNode(void);
@@ -116,7 +116,7 @@ void fn_8000ECC8(void);
 void fn_8000EDA8(void);
 void fn_8000EE8C(void);
 void fn_8000F1EC(void);
-void fn_8000FAE4(void);
+void sys_noopCallback(void);
 void fn_8000FAE8(void);
 
 asm void sys_vector_pushBack(void)
@@ -344,7 +344,7 @@ asm void fn_8000E474(void)
     cmpwi r3, 0x0
     mr r4, r3
     bne lbl_fn_8000E474_00000358
-    bl fn_8000DB1C
+    bl scene_getInstance
     lis r6, lbl_807C7030@ha
     lfs f1, lbl_80880668
     mr r4, r29
@@ -1477,9 +1477,9 @@ lbl_fn_8000F1EC_00001240:
     addi r3, r3, 0x10
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_8000FAE4@ha
+    lis r4, sys_noopCallback@ha
     mr r7, r15
-    addi r4, r4, fn_8000FAE4@l
+    addi r4, r4, sys_noopCallback@l
     li r5, 0x0
     li r6, 0x2c
     bl runtime_registerStaticObject
@@ -1956,7 +1956,7 @@ lbl_fn_8000F1EC_00001940:
     blr
 }
 
-void fn_8000FAE4(void)
+void sys_noopCallback(void)
 {
 }
 

@@ -10,7 +10,7 @@ extern void mtx_getTranslation(void);
 extern void vec3_copy(void);
 extern void vec3_mag(void);
 extern void fn_8000D844(void);
-extern void fn_8000DB1C(void);
+extern void scene_getInstance(void);
 extern void fn_8001011C(void);
 extern void actor_dispatchByType(void);
 extern void vec3_assign(void);
@@ -346,7 +346,7 @@ lbl_fn_80551198_00000304:
     fsubs f30, f0, f1
     bl fn_80551DFC
     mr r29, r3
-    bl fn_8000DB1C
+    bl scene_getInstance
     fmr f1, f30
     mr r4, r29
     bl fn_8048BD04
@@ -760,7 +760,7 @@ lbl_fn_80551198_00000920:
     fsubs f29, f0, f1
     bl fn_80551DFC
     mr r29, r3
-    bl fn_8000DB1C
+    bl scene_getInstance
     fmr f1, f29
     mr r4, r29
     bl fn_8048BD04

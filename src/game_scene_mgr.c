@@ -19,7 +19,7 @@ extern void colli_findDynamicSlot(void);
 extern void fn_80105A08(void);
 extern void fn_8010CA24(void);
 extern void player_evaluateStatusCondition(void);
-extern void fn_80134168(void);
+extern void battle_getActorStatTotal(void);
 extern void npc_updateTalkInteraction(void);
 extern void inventory_unequipItem(void);
 extern void debuff_clearStatus(void);
@@ -874,7 +874,7 @@ asm void fn_801A34D4(void)
     li r29, 0x0
     li r4, 0x2b
     li r5, -0x1
-    bl fn_80134168
+    bl battle_getActorStatTotal
     xoris r0, r3, 0x8000
     stw r0, 0xd4(r1)
     lis r3, lbl_8073A170@ha

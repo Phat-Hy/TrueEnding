@@ -20,7 +20,7 @@ extern void strcmp(void);
 extern void fn_806A70E0(void);
 extern void net_isConnectionActive(void);
 extern void net_checkConnectionSession(void);
-extern void fn_806A72E0(void);
+extern void dwc_allocHeader(void);
 extern void net_memFree(void);
 extern void net_formatLog(void);
 extern void fn_806A9CA0(void);
@@ -1841,14 +1841,14 @@ lbl_fn_806AEF90_00001828:
     li r3, 0x0
 lbl_fn_806AEF90_00001848:
     lis r5, lbl_8085FF90@ha
-    lis r7, fn_806A72E0@ha
+    lis r7, dwc_allocHeader@ha
     lwz r9, lbl_8085FF90@l(r5)
     lis r8, net_memFree@ha
     mr r5, r3
     mr r6, r4
     lwz r3, 0x10(r9)
     addi r4, r9, 0x255
-    addi r7, r7, fn_806A72E0@l
+    addi r7, r7, dwc_allocHeader@l
     addi r8, r8, net_memFree@l
     bl fn_806D0980
     lwz r0, 0x14(r1)
@@ -2237,7 +2237,7 @@ asm void fn_806AF6A0(void)
     bl net_formatLog
     li r3, 0x4
     li r4, 0x1498
-    bl fn_806A72E0
+    bl dwc_allocHeader
     stw r3, 0x0(r30)
     li r4, 0x0
     li r5, 0x1498

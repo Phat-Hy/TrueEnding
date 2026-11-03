@@ -90,7 +90,7 @@ extern void fn_80704890(void);
 extern void fn_807048A0(void);
 extern void fn_80704AD0(void);
 extern void fn_80704CC0(void);
-extern void fn_80709AD0(void);
+extern void net_stream_readChunk(void);
 extern void fn_8070DC00(void);
 extern void fn_8070DC10(void);
 extern void fn_8070DC20(void);
@@ -5938,7 +5938,7 @@ asm void fn_8004ADF4(void)
     cmpwi r3, 0x0
     beq lbl_fn_8004ADF4_00004C48
     li r4, 0x0
-    bl fn_80709AD0
+    bl net_stream_readChunk
 lbl_fn_8004ADF4_00004C48:
     addi r3, r30, 0x8
     bl morph_releaseRef
@@ -6224,7 +6224,7 @@ asm void sound_stopVoice(void)
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beqlr
-    b fn_80709AD0
+    b net_stream_readChunk
     blr
 }
 

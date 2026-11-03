@@ -39,7 +39,7 @@ extern void world_setLocalFlag(void);
 extern void world_startMapTransition(void);
 extern void world_reloadMapTransition(void);
 extern void fn_805A4258(void);
-extern void fn_805A49E8(void);
+extern void world_getFlagScoped(void);
 extern void world_setFlagByType(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
@@ -2040,7 +2040,7 @@ lbl_fn_80336C8C_00001C30:
     bne lbl_fn_80336C8C_00001C90
     mr r3, r30
     addi r4, r30, 0x1564
-    bl fn_805A49E8
+    bl world_getFlagScoped
     cmpwi r3, 0x0
     bne lbl_fn_80336C8C_00001C90
     mr r3, r30

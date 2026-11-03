@@ -5,7 +5,7 @@
 extern void vec3_set(void);
 extern void vec3_copy(void);
 extern void vec3_mag(void);
-extern void fn_8000DB1C(void);
+extern void scene_getInstance(void);
 extern void vec3_assign(void);
 extern void math_mtxFromEulerAngles(void);
 extern void vec3_toEulerAngles(void);
@@ -1319,11 +1319,11 @@ asm void fn_801162A4(void)
     mr r30, r4
     stw r29, 0x134(r1)
     mr r29, r3
-    bl fn_8000DB1C
+    bl scene_getInstance
     bl fn_80112F54
     cmpwi r3, 0x0
     beq lbl_fn_801162A4_00001164
-    bl fn_8000DB1C
+    bl scene_getInstance
     bl fn_80112F54
     bl fn_80116B98
     cmpwi r3, 0x0
@@ -1348,7 +1348,7 @@ lbl_fn_801162A4_00001164:
     b lbl_fn_801162A4_000012D0
     b lbl_fn_801162A4_000019C0
 lbl_fn_801162A4_000011A8:
-    bl fn_8000DB1C
+    bl scene_getInstance
     lwz r4, 0x290(r29)
     lfs f1, 0x294(r29)
     bl fn_8048BCA4
@@ -1407,7 +1407,7 @@ lbl_fn_801162A4_00001274:
     bl fn_80115704
     li r31, 0x0
 lbl_fn_801162A4_00001280:
-    bl fn_8000DB1C
+    bl scene_getInstance
     lwz r4, 0x290(r29)
     lfs f1, 0x294(r29)
     bl fn_8048BCA4

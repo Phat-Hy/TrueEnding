@@ -35,7 +35,7 @@ extern void fn_802A7910(void);
 extern void fn_802A7964(void);
 extern void dvd_showDiskErrorDialog(void);
 extern void atn_LoadHandle_destructor(void);
-extern void fn_804DA490(void);
+extern void net_setVoiceChannelState(void);
 extern void rand_Mersenne_init(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
@@ -1653,7 +1653,7 @@ lbl_fn_802B725C_000015F4:
     cmpwi r3, 0x0
     beq lbl_fn_802B725C_00001638
     li r4, 0x3
-    bl fn_804DA490
+    bl net_setVoiceChannelState
 lbl_fn_802B725C_00001638:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)

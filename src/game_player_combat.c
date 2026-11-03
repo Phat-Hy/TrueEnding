@@ -10,7 +10,7 @@ extern void _savegpr_14(void);
 extern void _savegpr_21(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
-extern void fn_8000FAE4(void);
+extern void sys_noopCallback(void);
 extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
@@ -1137,9 +1137,9 @@ lbl_fn_8011EF14_00000EBC:
     addi r3, r3, 0x10
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_8000FAE4@ha
+    lis r4, sys_noopCallback@ha
     mr r7, r14
-    addi r4, r4, fn_8000FAE4@l
+    addi r4, r4, sys_noopCallback@l
     li r5, 0x0
     li r6, 0x2c
     bl runtime_registerStaticObject

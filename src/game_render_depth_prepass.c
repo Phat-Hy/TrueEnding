@@ -77,7 +77,7 @@ extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_804DA490(void);
+extern void net_setVoiceChannelState(void);
 extern void rand_Mersenne_constructor(void);
 extern void rand_Mersenne_init(void);
 extern void fn_805A507C(void);
@@ -2098,7 +2098,7 @@ lbl_fn_802B3764_00001B4C:
     cmpwi r3, 0x0
     beq lbl_fn_802B3764_00001BD0
     li r4, 0x3
-    bl fn_804DA490
+    bl net_setVoiceChannelState
 lbl_fn_802B3764_00001BD0:
     addi r3, r31, 0x15d4
     lfs f2, 0x15dc(r31)
@@ -2146,7 +2146,7 @@ lbl_fn_802B3764_00001C04:
     cmpwi r3, 0x0
     beq lbl_fn_802B3764_00001C88
     li r4, 0x3
-    bl fn_804DA490
+    bl net_setVoiceChannelState
 lbl_fn_802B3764_00001C88:
     li r0, 0x2
     stw r0, 0x1518(r31)
@@ -2184,7 +2184,7 @@ lbl_fn_802B3764_00001C94:
     cmpwi r3, 0x0
     beq lbl_fn_802B3764_00001D18
     li r4, 0x3
-    bl fn_804DA490
+    bl net_setVoiceChannelState
 lbl_fn_802B3764_00001D18:
     addi r3, r31, 0x15d4
     lfs f2, 0x15dc(r31)
@@ -2232,7 +2232,7 @@ lbl_fn_802B3764_00001D4C:
     cmpwi r3, 0x0
     beq lbl_fn_802B3764_00001DD0
     li r4, 0x3
-    bl fn_804DA490
+    bl net_setVoiceChannelState
 lbl_fn_802B3764_00001DD0:
     addi r3, r31, 0x15d4
     lfs f2, 0x15dc(r31)

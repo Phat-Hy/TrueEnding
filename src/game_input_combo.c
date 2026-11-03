@@ -47,7 +47,7 @@ extern void world_setLocalFlag(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_804DA490(void);
+extern void net_setVoiceChannelState(void);
 extern void fn_804DA4A4(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
@@ -700,7 +700,7 @@ asm void fn_802EBF40(void)
     cmpwi r3, 0x0
     beq lbl_fn_802EBF40_0000086C
     li r4, 0x4
-    bl fn_804DA490
+    bl net_setVoiceChannelState
     lwz r3, lbl_8087F610
     li r4, 0x0
     bl fn_804DA4A4
@@ -756,7 +756,7 @@ asm void fn_802EC098(void)
     cmpwi r3, 0x0
     beq lbl_fn_802EC098_00000934
     li r4, 0x5
-    bl fn_804DA490
+    bl net_setVoiceChannelState
     lwz r3, lbl_8087F610
     li r4, 0x1
     bl fn_804DA4A4

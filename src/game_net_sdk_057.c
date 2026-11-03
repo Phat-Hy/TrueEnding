@@ -15,7 +15,7 @@ extern void OSUnlockMutex(void);
 extern void strcmp(void);
 extern void __construct_new_array(void);
 extern void __destroy_new_array(void);
-extern void fn_80709AD0(void);
+extern void net_stream_readChunk(void);
 extern void fn_8070A050(void);
 extern void fn_8070AF70(void);
 extern void fn_8070AF90(void);
@@ -2391,7 +2391,7 @@ lbl_fn_80717AA0_00001D88:
     lwz r31, 0x0(r31)
     subi r3, r3, 0xf8
     li r4, 0x0
-    bl fn_80709AD0
+    bl net_stream_readChunk
 lbl_fn_80717AA0_00001D9C:
     cmplw r31, r30
     bne lbl_fn_80717AA0_00001D88

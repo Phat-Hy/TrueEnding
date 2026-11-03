@@ -26,7 +26,7 @@ extern void OSLockMutex(void);
 extern void OSUnlockMutex(void);
 extern void __construct_new_array(void);
 extern void __destroy_new_array(void);
-extern void fn_80709AD0(void);
+extern void net_stream_readChunk(void);
 extern void fn_8070ABA0(void);
 extern void fn_8070AC20(void);
 extern void fn_8070AE60(void);
@@ -1412,7 +1412,7 @@ lbl_fn_805A03A4_00001158:
 lbl_fn_805A03A4_000011A4:
     mr r3, r25
     li r4, 0x0
-    bl fn_80709AD0
+    bl net_stream_readChunk
     addi r3, r15, 0x54
     bl OSLockMutex
 lbl_fn_805A03A4_000011B8:
@@ -1624,7 +1624,7 @@ lbl_fn_805A03A4_00001438:
 lbl_fn_805A03A4_00001484:
     mr r3, r29
     li r4, 0x0
-    bl fn_80709AD0
+    bl net_stream_readChunk
     addi r3, r15, 0x7c
     bl OSLockMutex
 lbl_fn_805A03A4_00001498:
@@ -1836,7 +1836,7 @@ lbl_fn_805A03A4_00001718:
 lbl_fn_805A03A4_00001764:
     mr r3, r29
     li r4, 0x0
-    bl fn_80709AD0
+    bl net_stream_readChunk
     addi r3, r15, 0xa4
     bl OSLockMutex
 lbl_fn_805A03A4_00001778:

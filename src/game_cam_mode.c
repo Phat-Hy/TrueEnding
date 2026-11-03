@@ -24,7 +24,7 @@ extern void fn_80207C00(void);
 extern void fn_80207C08(void);
 extern void fn_80207C34(void);
 extern void task_findEntryById(void);
-extern void fn_8021A984(void);
+extern void actor_isCategory5(void);
 extern void res_MsgHandle_ctor(void);
 extern void res_Resource_unload(void);
 extern void res_MsgHandle_constructor(void);
@@ -782,7 +782,7 @@ lbl_fn_800EE794_000008B0:
     cmpwi r26, 0x0
     beq lbl_fn_800EE794_0000093C
     mr r3, r26
-    bl fn_8021A984
+    bl actor_isCategory5
     cmpwi r3, 0x0
     beq lbl_fn_800EE794_0000093C
     lwz r0, 0xac(r26)
@@ -834,7 +834,7 @@ lbl_fn_800EE794_00000970:
     cmpwi r26, 0x0
     beq lbl_fn_800EE794_000009CC
     mr r3, r26
-    bl fn_8021A984
+    bl actor_isCategory5
     cmpwi r3, 0x0
     beq lbl_fn_800EE794_000009CC
     lwz r4, 0xac(r26)
@@ -889,7 +889,7 @@ lbl_fn_800EE794_00000A4C:
 lbl_fn_800EE794_00000A50:
     cmpwi r3, 0x0
     beq lbl_fn_800EE794_00000AAC
-    bl fn_8021A984
+    bl actor_isCategory5
     cmpwi r3, 0x0
     beq lbl_fn_800EE794_00000AAC
     lfs f3, 0x530(r30)

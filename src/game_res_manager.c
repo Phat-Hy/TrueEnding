@@ -11,7 +11,7 @@ extern void _savegpr_21(void);
 extern void _savegpr_24(void);
 extern void dtor_80013D60(void);
 extern void dtor_80084684(void);
-extern void fn_8000DB1C(void);
+extern void scene_getInstance(void);
 extern void fn_80012A1C(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
@@ -215,7 +215,7 @@ asm void fn_80223A10(void)
     addi r11, r1, 0x2a0
     bl _savegpr_21
     mr r31, r3
-    bl fn_8000DB1C
+    bl scene_getInstance
     bl fn_80112F54
     cmpwi r3, 0x0
     mr r28, r3
@@ -772,7 +772,7 @@ asm void fn_80224184(void)
     psq_st f31, 0x78(r1), 0, 0
     bl _savegpr_20
     mr r31, r3
-    bl fn_8000DB1C
+    bl scene_getInstance
     bl fn_80112F54
     cmpwi r3, 0x0
     mr r28, r3
@@ -1121,7 +1121,7 @@ asm void fn_80224638(void)
     psq_st f30, 0xa8(r1), 0, 0
     bl _savegpr_20
     mr r20, r3
-    bl fn_8000DB1C
+    bl scene_getInstance
     bl fn_80112F54
     cmpwi r3, 0x0
     mr r26, r3

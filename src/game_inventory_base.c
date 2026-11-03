@@ -14,7 +14,7 @@ extern void fn_80133E24(void);
 extern void boss_findPartSlotById(void);
 extern void fn_80133F6C(void);
 extern void boss_findPartById(void);
-extern void fn_80134168(void);
+extern void battle_getActorStatTotal(void);
 extern void boss_testAiFlag(void);
 extern void fn_80150460(void);
 extern void fn_8015076C(void);
@@ -996,7 +996,7 @@ lbl_inventory_applyItemStats_00000C80:
     li r4, 0x43
     li r5, -0x1
     addi r3, r3, 0x7d4
-    bl fn_80134168
+    bl battle_getActorStatTotal
     xoris r3, r3, 0x8000
     lis r0, 0x4330
     lis r4, lbl_80737808@ha

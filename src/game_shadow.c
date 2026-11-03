@@ -17,7 +17,7 @@ extern void fn_800D0F34(void);
 extern void fn_800D10B8(void);
 extern void fn_800D123C(void);
 extern void strcmp(void);
-extern void fn_80709AD0(void);
+extern void net_stream_readChunk(void);
 
 /* External data declarations */
 extern u8 lbl_80779678[];
@@ -642,7 +642,7 @@ lbl_fn_800CFD18_000007AC:
     cmpwi r3, 0x0
     beq lbl_fn_800CFD18_000007BC
     mr r4, r27
-    bl fn_80709AD0
+    bl net_stream_readChunk
 lbl_fn_800CFD18_000007BC:
     mr r3, r29
     rlwnm r4, r30, r31, 31, 31
@@ -1844,7 +1844,7 @@ lbl_fn_800D0C1C_00001734:
     cmpwi r3, 0x0
     beq lbl_fn_800D0C1C_00001768
     li r4, 0x0
-    bl fn_80709AD0
+    bl net_stream_readChunk
     b lbl_fn_800D0C1C_00001768
 lbl_fn_800D0C1C_0000175C:
     addi r5, r5, 0x14c

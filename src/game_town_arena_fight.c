@@ -10,7 +10,7 @@ extern void vec3_copy(void);
 extern void vec3_mag(void);
 extern void scene_transformPoint(void);
 extern void fn_8000D9F8(void);
-extern void fn_8000DB1C(void);
+extern void scene_getInstance(void);
 extern void scene_getCamera(void);
 extern void scene_getRootNode(void);
 extern void vec3_assign(void);
@@ -644,10 +644,10 @@ lbl_fn_803D2A6C_00000518:
     bl fn_803D6E24
     cmpwi r3, 0x8
     bne lbl_fn_803D2A6C_0000054C
-    bl fn_8000DB1C
+    bl scene_getInstance
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_0000054C
-    bl fn_8000DB1C
+    bl scene_getInstance
     bl fn_80481654
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_0000054C
@@ -658,10 +658,10 @@ lbl_fn_803D2A6C_0000054C:
     bl fn_803D6E24
     cmpwi r3, 0x8
     bne lbl_fn_803D2A6C_00000580
-    bl fn_8000DB1C
+    bl scene_getInstance
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_0000057C
-    bl fn_8000DB1C
+    bl scene_getInstance
     bl fn_80481654
     cmpwi r3, 0x0
     bne lbl_fn_803D2A6C_00000580

@@ -100,7 +100,7 @@ void fn_8021A888(void);
 void fn_8021A8D0(void);
 void fn_8021A918(void);
 void fn_8021A960(void);
-void fn_8021A984(void);
+void actor_isCategory5(void);
 void fn_8021A9A8(void);
 void fn_8021A9CC(void);
 void fn_8021AA48(void);
@@ -1296,7 +1296,7 @@ lbl_fn_8021A960_00001010:
     blr
 }
 
-asm void fn_8021A984(void)
+asm void actor_isCategory5(void)
 {
     nofralloc
     cmpwi r3, 0x0

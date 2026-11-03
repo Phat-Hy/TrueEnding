@@ -47,7 +47,7 @@ extern void fn_801CB130(void);
 extern void fn_801CB434(void);
 extern void str_appendString(void);
 extern void task_findEntryById(void);
-extern void fn_8021A984(void);
+extern void actor_isCategory5(void);
 extern void sound_initGlobalInstances(void);
 extern void res_Resource_destructor(void);
 extern void res_MsgHandle_constructor(void);
@@ -433,7 +433,7 @@ lbl_fn_802B9C5C_00000424:
 lbl_fn_802B9C5C_0000044C:
     cmpwi r4, 0x0
     beq lbl_fn_802B9C5C_000004CC
-    bl fn_8021A984
+    bl actor_isCategory5
     cmpwi r3, 0x0
     beq lbl_fn_802B9C5C_000004CC
     mr r3, r31

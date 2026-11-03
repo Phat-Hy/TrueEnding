@@ -21,7 +21,7 @@ extern void net_pollActiveSockets(void);
 extern void net_bufferGetCount(void);
 extern void net_bufferGetElement(void);
 extern void fn_806D5930(void);
-extern void fn_806D5C90(void);
+extern void net_array_removeAt(void);
 extern void net_socketConnect(void);
 extern void fn_806D7AA0(void);
 extern void net_socketClose(void);
@@ -319,7 +319,7 @@ lbl_fn_806F8B00_0000038C:
 lbl_fn_806F8B00_000003A4:
     lwz r3, 0x228(r28)
     mr r4, r23
-    bl fn_806D5C90
+    bl net_array_removeAt
 lbl_fn_806F8B00_000003B0:
     subi r23, r23, 0x1
 lbl_fn_806F8B00_000003B4:
@@ -881,7 +881,7 @@ lbl_fn_806F9160_00000B78:
 lbl_fn_806F9160_00000B90:
     lwz r3, 0x228(r30)
     mr r4, r18
-    bl fn_806D5C90
+    bl net_array_removeAt
 lbl_fn_806F9160_00000B9C:
     subi r18, r18, 0x1
 lbl_fn_806F9160_00000BA0:
@@ -1410,7 +1410,7 @@ lbl_fn_806F96F0_000012C0:
 lbl_fn_806F96F0_000012D8:
     lwz r3, 0x228(r28)
     mr r4, r27
-    bl fn_806D5C90
+    bl net_array_removeAt
 lbl_fn_806F96F0_000012E4:
     addi r11, r1, 0x630
     bl _restgpr_24
@@ -1759,7 +1759,7 @@ lbl_fn_806F9D60_0000178C:
 lbl_fn_806F9D60_000017AC:
     lwz r3, 0x228(r28)
     mr r4, r26
-    bl fn_806D5C90
+    bl net_array_removeAt
     b lbl_fn_806F9D60_00002478
 lbl_fn_806F9D60_000017BC:
     mr r3, r26
@@ -2023,7 +2023,7 @@ lbl_fn_806F9D60_00001B3C:
 lbl_fn_806F9D60_00001B5C:
     lwz r3, 0x228(r28)
     mr r4, r27
-    bl fn_806D5C90
+    bl net_array_removeAt
     b lbl_fn_806F9D60_00002478
 lbl_fn_806F9D60_00001B6C:
     mr r3, r26
@@ -2287,7 +2287,7 @@ lbl_fn_806F9D60_00001EEC:
 lbl_fn_806F9D60_00001F0C:
     lwz r3, 0x228(r28)
     mr r4, r27
-    bl fn_806D5C90
+    bl net_array_removeAt
     b lbl_fn_806F9D60_00002478
 lbl_fn_806F9D60_00001F1C:
     mr r3, r26
@@ -2676,7 +2676,7 @@ lbl_fn_806F9D60_00002454:
 lbl_fn_806F9D60_0000246C:
     lwz r3, 0x228(r28)
     mr r4, r26
-    bl fn_806D5C90
+    bl net_array_removeAt
 lbl_fn_806F9D60_00002478:
     addi r11, r1, 0xf30
     bl _restgpr_26

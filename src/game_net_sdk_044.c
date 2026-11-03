@@ -26,7 +26,7 @@ extern void net_socket_sendto(void);
 extern void fn_806D7E70(void);
 extern void fn_806D7EE0(void);
 extern void net_socket_getLastError(void);
-extern void fn_806D8060(void);
+extern void net_url_parseHost(void);
 extern void fn_806D8650(void);
 extern void fn_806D86F0(void);
 extern void fn_806D8850(void);
@@ -1781,7 +1781,7 @@ lbl_fn_806FC5D0_00001770:
     cmplwi r0, 0xffff
     bne lbl_fn_806FC5D0_000017A8
     mr r3, r23
-    bl fn_806D8060
+    bl net_url_parseHost
     cmpwi r3, 0x0
     bne lbl_fn_806FC5D0_0000179C
     li r3, 0x0
@@ -1815,7 +1815,7 @@ lbl_fn_806FC5D0_000017E8:
     cmplwi r0, 0xffff
     bne lbl_fn_806FC5D0_00001820
     mr r3, r23
-    bl fn_806D8060
+    bl net_url_parseHost
     cmpwi r3, 0x0
     bne lbl_fn_806FC5D0_00001814
     li r3, 0x0
@@ -1849,7 +1849,7 @@ lbl_fn_806FC5D0_00001860:
     cmplwi r0, 0xffff
     bne lbl_fn_806FC5D0_00001898
     mr r3, r23
-    bl fn_806D8060
+    bl net_url_parseHost
     cmpwi r3, 0x0
     bne lbl_fn_806FC5D0_0000188C
     li r3, 0x0

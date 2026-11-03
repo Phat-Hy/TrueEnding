@@ -6,7 +6,7 @@ extern void __files(void);
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8000DB1C(void);
+extern void scene_getInstance(void);
 extern void vec4_copy(void);
 extern void fn_8007A154(void);
 extern void mem_alloc(void);
@@ -900,7 +900,7 @@ asm void fn_8048F9B0(void)
     beq lbl_fn_8048F9B0_00000C38
     b lbl_fn_8048F9B0_00000C90
 lbl_fn_8048F9B0_00000BA4:
-    bl fn_8000DB1C
+    bl scene_getInstance
     bl fn_80484074
     mr r30, r3
     addi r3, r29, 0x1d1c
@@ -938,7 +938,7 @@ lbl_fn_8048F9B0_00000BA4:
     bl fn_8041D23C
     b lbl_fn_8048F9B0_00000C90
 lbl_fn_8048F9B0_00000C38:
-    bl fn_8000DB1C
+    bl scene_getInstance
     bl fn_80484074
     mr r30, r3
     mr r4, r29

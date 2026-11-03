@@ -8131,7 +8131,7 @@
 /* 804D4D44 004CF3A4  4B EA 87 7D */	bl fn_8037D4C0
 /* 804D4D48 004CF3A8  7F 03 C3 78 */	mr r3, r24
 /* 804D4D4C 004CF3AC  38 80 00 06 */	li r4, 0x6
-/* 804D4D50 004CF3B0  48 00 57 41 */	bl fn_804DA490
+/* 804D4D50 004CF3B0  48 00 57 41 */	bl net_setVoiceChannelState
 /* 804D4D54 004CF3B4  3C 78 00 01 */	addis r3, r24, 0x1
 /* 804D4D58 004CF3B8  38 00 00 01 */	li r0, 0x1
 /* 804D4D5C 004CF3BC  90 03 97 68 */	stw r0, -0x6898(r3)
@@ -14550,13 +14550,13 @@
 .endfn fn_804DA47C
 
 # .text:0xCB14 | 0x804DA490 | size: 0x14
-.fn fn_804DA490, global
+.fn net_setVoiceChannelState, global
 /* 804DA490 004D4AF0  80 6D 9E E8 */	lwz r3, lbl_8087F5A8@sda21(r0)
 /* 804DA494 004D4AF4  2C 03 00 00 */	cmpwi r3, 0x0
 /* 804DA498 004D4AF8  4D 82 00 20 */	beqlr
 /* 804DA49C 004D4AFC  4B FD C3 48 */	b fn_804B67E4
 /* 804DA4A0 004D4B00  4E 80 00 20 */	blr
-.endfn fn_804DA490
+.endfn net_setVoiceChannelState
 
 # .text:0xCB28 | 0x804DA4A4 | size: 0x1F0
 .fn fn_804DA4A4, global

@@ -28,7 +28,7 @@ extern void fn_802BC4EC(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
 extern void dvd_showDiskErrorDialog(void);
-extern void fn_804DA490(void);
+extern void net_setVoiceChannelState(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
@@ -785,7 +785,7 @@ lbl_fn_802BD480_00000880:
     cmpwi r3, 0x0
     beq lbl_fn_802BD480_00000950
     li r4, 0x5
-    bl fn_804DA490
+    bl net_setVoiceChannelState
 lbl_fn_802BD480_00000950:
     lwz r3, lbl_8087F448
     cmpwi r3, 0x0
@@ -834,7 +834,7 @@ lbl_fn_802BD480_00000978:
     cmpwi r3, 0x0
     beq lbl_fn_802BD480_00000CA0
     li r4, 0x2
-    bl fn_804DA490
+    bl net_setVoiceChannelState
     b lbl_fn_802BD480_00000CA0
 lbl_fn_802BD480_00000A10:
     lwz r0, 0x1528(r3)

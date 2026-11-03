@@ -11,7 +11,7 @@ extern void OSLockMutex(void);
 extern void OSUnlockMutex(void);
 extern void fn_80709870(void);
 extern void fn_80709950(void);
-extern void fn_80709AD0(void);
+extern void net_stream_readChunk(void);
 extern void fn_8070A9F0(void);
 extern void fn_8070AC10(void);
 extern void fn_8070C090(void);
@@ -1600,7 +1600,7 @@ asm void fn_80712FC0(void)
     bne lbl_fn_80712FC0_00001434
     mr r3, r31
     li r4, 0x0
-    bl fn_80709AD0
+    bl net_stream_readChunk
     b lbl_fn_80712FC0_00001460
 lbl_fn_80712FC0_00001434:
     addi r3, r5, 0x110

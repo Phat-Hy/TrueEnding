@@ -34,7 +34,7 @@ extern void fn_80133F18(void);
 extern void fn_80133F6C(void);
 extern void fn_80133FBC(void);
 extern void boss_findPartById(void);
-extern void fn_80134168(void);
+extern void battle_getActorStatTotal(void);
 extern void fn_80156120(void);
 extern void fn_8016ADF4(void);
 extern void task_isValidQueueRange(void);
@@ -1712,13 +1712,13 @@ lbl_fn_8003F538_000015E8:
     mr r3, r25
     li r4, 0x2d
     li r5, -0x1
-    bl fn_80134168
+    bl battle_getActorStatTotal
     cmpwi r3, 0x64
     bge lbl_fn_8003F538_00001628
     mr r3, r25
     li r4, 0x2d
     li r5, -0x1
-    bl fn_80134168
+    bl battle_getActorStatTotal
     b lbl_fn_8003F538_0000162C
 lbl_fn_8003F538_00001628:
     li r3, 0x64
@@ -1745,24 +1745,24 @@ lbl_fn_8003F538_00001660:
     mr r3, r25
     li r4, 0x45
     li r5, -0x1
-    bl fn_80134168
+    bl battle_getActorStatTotal
     cmplwi r30, 0x8
     beq lbl_fn_8003F538_0000169C
     mr r3, r25
     li r4, 0x45
     li r5, 0x9
-    bl fn_80134168
+    bl battle_getActorStatTotal
 lbl_fn_8003F538_0000169C:
     mr r3, r25
     li r4, 0x45
     li r5, -0x1
-    bl fn_80134168
+    bl battle_getActorStatTotal
     cmpwi r3, 0x64
     bge lbl_fn_8003F538_000016C8
     mr r3, r25
     li r4, 0x45
     li r5, -0x1
-    bl fn_80134168
+    bl battle_getActorStatTotal
     b lbl_fn_8003F538_000016CC
 lbl_fn_8003F538_000016C8:
     li r3, 0x64

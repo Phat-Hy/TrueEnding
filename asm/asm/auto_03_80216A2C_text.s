@@ -4580,7 +4580,7 @@
 .endfn fn_8021A960
 
 # .text:0x3F58 | 0x8021A984 | size: 0x24
-.fn fn_8021A984, global
+.fn actor_isCategory5, global
 /* 8021A984 00214FE4  2C 03 00 00 */	cmpwi r3, 0x0
 /* 8021A988 00214FE8  38 80 00 00 */	li r4, 0x0
 /* 8021A98C 00214FEC  41 82 00 14 */	beq .L_8021A9A0
@@ -4591,7 +4591,7 @@
 .L_8021A9A0:
 /* 8021A9A0 00215000  7C 83 23 78 */	mr r3, r4
 /* 8021A9A4 00215004  4E 80 00 20 */	blr
-.endfn fn_8021A984
+.endfn actor_isCategory5
 
 # .text:0x3F7C | 0x8021A9A8 | size: 0x24
 .fn fn_8021A9A8, global

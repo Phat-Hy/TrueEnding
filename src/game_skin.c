@@ -65,7 +65,7 @@ extern void abort(void);
 extern void msl_releaseRefCount(void);
 extern void runtime_registerStaticObject(void);
 extern void __ptmf_scall(void);
-extern void fn_80709AD0(void);
+extern void net_stream_readChunk(void);
 extern int sprintf(char* str, const char* format, ...);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
@@ -433,7 +433,7 @@ lbl_fn_800C32E0_00000340:
     cmpwi r3, 0x0
     beq lbl_fn_800C32E0_00000398
     li r4, 0x0
-    bl fn_80709AD0
+    bl net_stream_readChunk
     b lbl_fn_800C32E0_00000398
 lbl_fn_800C32E0_0000037C:
     fmr f1, f31
@@ -560,7 +560,7 @@ lbl_skin_applyWeights_00000504:
     cmpwi r3, 0x0
     beq lbl_skin_applyWeights_0000055C
     li r4, 0x0
-    bl fn_80709AD0
+    bl net_stream_readChunk
     b lbl_skin_applyWeights_0000055C
 lbl_skin_applyWeights_00000540:
     fmr f1, f31

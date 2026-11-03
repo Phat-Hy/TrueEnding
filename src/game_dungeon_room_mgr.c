@@ -14,7 +14,7 @@ extern void save_backup_formatEntry(void);
 extern void save_findEntryByName(void);
 extern void task_mapIdToQueue(void);
 extern void task_findEntryById(void);
-extern void fn_8021A984(void);
+extern void actor_isCategory5(void);
 extern void fn_8021A9CC(void);
 extern void wpad_getActiveDevice(void);
 extern void fn_803E0250(void);
@@ -666,7 +666,7 @@ lbl_fn_803DEE24_00000878:
     cmpwi r0, 0x2
     bne lbl_fn_803DEE24_000008DC
     mr r3, r31
-    bl fn_8021A984
+    bl actor_isCategory5
     cmpwi r3, 0x0
     beq lbl_fn_803DEE24_00000AD8
     lfs f0, 0x26c8(r27)
@@ -688,7 +688,7 @@ lbl_fn_803DEE24_00000878:
     b lbl_fn_803DEE24_00000AD8
 lbl_fn_803DEE24_000008DC:
     mr r3, r31
-    bl fn_8021A984
+    bl actor_isCategory5
     cmpwi r3, 0x0
     beq lbl_fn_803DEE24_00000934
     lfs f0, 0x26d8(r27)
@@ -855,7 +855,7 @@ asm void fn_803DF138(void)
     addi r31, r30, 0x80
 lbl_fn_803DF138_00000B48:
     mr r3, r31
-    bl fn_8021A984
+    bl actor_isCategory5
     cmpwi r3, 0x0
     beq lbl_fn_803DF138_00000B78
     lfs f2, lbl_80885D84
@@ -1107,7 +1107,7 @@ lbl_fn_803DF2DC_00000E94:
     b lbl_fn_803DF2DC_00000F54
 lbl_fn_803DF2DC_00000E9C:
     mr r3, r31
-    bl fn_8021A984
+    bl actor_isCategory5
     cmpwi r3, 0x0
     beq lbl_fn_803DF2DC_00000EC8
     lwz r3, lbl_8087F1E4

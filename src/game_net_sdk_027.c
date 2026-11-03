@@ -46,7 +46,7 @@ extern void fn_806A4D60(void);
 extern void net_pollActiveSockets(void);
 extern void net_bufferGetCount(void);
 extern void net_bufferGetElement(void);
-extern void fn_806D5C90(void);
+extern void net_array_removeAt(void);
 extern void fn_806D5E60(void);
 extern void fn_806EAC90(void);
 extern void fn_806EACA0(void);
@@ -101,7 +101,7 @@ void fn_806D7E70(void);
 void fn_806D7EE0(void);
 u32 net_socket_getLastError(void);
 void fn_806D7F30(void);
-void fn_806D8060(void);
+void net_url_parseHost(void);
 void fn_806D8560(void);
 void fn_806D85E0(void);
 void fn_806D8650(void);
@@ -778,7 +778,7 @@ lbl_fn_806D7F30_000007DC:
     blr
 }
 
-asm void fn_806D8060(void)
+asm void net_url_parseHost(void)
 {
     nofralloc
     stwu r1, -0x30(r1)
@@ -1601,7 +1601,7 @@ lbl_fn_806D8B70_0000134C:
     addi r3, r3, lbl_80860F38@l
     bl fn_806D8B00
     lwz r3, 0x0(r30)
-    bl fn_806D8060
+    bl net_url_parseHost
     cmpwi r3, 0x0
     beq lbl_fn_806D8B70_0000138C
     lwz r4, 0xc(r3)
@@ -2563,7 +2563,7 @@ lbl_fn_806D9740_00001FE4:
     mr r4, r3
     beq lbl_fn_806D9740_00002018
     lwz r3, 0x4(r28)
-    bl fn_806D5C90
+    bl net_array_removeAt
 lbl_fn_806D9740_00002018:
     addi r11, r1, 0x50
     bl _restgpr_25

@@ -6,7 +6,7 @@ extern void __files(void);
 extern void _restgpr_21(void);
 extern void _savegpr_21(void);
 extern void dtor_80084684(void);
-extern void fn_8000DB1C(void);
+extern void scene_getInstance(void);
 extern void party_updateFormation(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
@@ -1165,10 +1165,10 @@ lbl_fn_80489D08_00000EDC:
     lwz r0, 0xc(r30)
     cmpwi r0, 0x0
     beq lbl_fn_80489D08_00000F70
-    bl fn_8000DB1C
+    bl scene_getInstance
     cmpwi r3, 0x0
     beq lbl_fn_80489D08_00000F70
-    bl fn_8000DB1C
+    bl scene_getInstance
     bl fn_80112F54
     cmpwi r3, 0x0
     beq lbl_fn_80489D08_00000F70

@@ -12,7 +12,7 @@ extern void ref_releaseHandle(void);
 extern void fn_800EFBC4(void);
 extern void fn_800EFDA0(void);
 extern void fn_800EFE3C(void);
-extern void fn_80134168(void);
+extern void battle_getActorStatTotal(void);
 extern void fn_80210220(void);
 extern void task_mapIdToQueue(void);
 extern void sound_initGlobalInstances(void);
@@ -1764,13 +1764,13 @@ lbl_fn_801083D8_000016F4:
     addi r3, r30, 0x7d4
     li r4, 0x33
     li r5, -0x1
-    bl fn_80134168
+    bl battle_getActorStatTotal
     add. r0, r28, r3
     ble lbl_fn_801083D8_00001724
     addi r3, r30, 0x7d4
     li r4, 0x33
     li r5, -0x1
-    bl fn_80134168
+    bl battle_getActorStatTotal
     add r0, r28, r3
     b lbl_fn_801083D8_00001728
 lbl_fn_801083D8_00001724:

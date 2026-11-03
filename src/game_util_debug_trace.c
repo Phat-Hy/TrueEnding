@@ -33,7 +33,7 @@ extern void assert_formatLocation(void);
 extern void task_findEntryById(void);
 extern void fn_8021A4E0(void);
 extern void fn_8021A960(void);
-extern void fn_8021A984(void);
+extern void actor_isCategory5(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
@@ -833,7 +833,7 @@ lbl_fn_805989A8_000009C0:
     cmpwi r3, 0x0
     bne lbl_fn_805989A8_00000A84
     lwz r3, 0x4(r28)
-    bl fn_8021A984
+    bl actor_isCategory5
     cmpwi r3, 0x0
     beq lbl_fn_805989A8_00000C70
 lbl_fn_805989A8_00000A84:

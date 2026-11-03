@@ -76,7 +76,7 @@ u32 fn_8000D9F0(void *p);
 u32 fn_8000D9F8(void *p);
 void fn_8000DA00(void);
 void fn_8000DAF0(void);
-u32 fn_8000DB1C(void);
+u32 scene_getInstance(void);
 void fn_8000DB24(void);
 u32 scene_getCamera(void *p);
 void fn_8000DCFC(void *p, u32 val);
@@ -1234,7 +1234,7 @@ lbl_fn_8000DAF0_00000F44:
     b fn_803CC5E4
 }
 
-u32 fn_8000DB1C(void)
+u32 scene_getInstance(void)
 {
     return lbl_8087F540;
 }
@@ -1290,7 +1290,7 @@ lbl_fn_8000DB24_00000FE8:
     bne lbl_fn_8000DB24_00001004
     b lbl_fn_8000DB24_00001034
 lbl_fn_8000DB24_00001004:
-    bl fn_8000DB1C
+    bl scene_getInstance
     lis r6, lbl_807C7030@ha
     lfs f1, lbl_80880668
     mr r4, r29

@@ -22,7 +22,7 @@ extern void fn_80105DCC(void);
 extern void fn_80105F3C(void);
 extern void fn_8010607C(void);
 extern void fn_801070C8(void);
-extern void fn_80134168(void);
+extern void battle_getActorStatTotal(void);
 extern void npc_updateTalkInteraction(void);
 extern void quest_resetObjectiveBounds(void);
 extern void equip_applyToCharacter(void);
@@ -748,7 +748,7 @@ lbl_fn_801B79D8_0000084C:
     stw r3, 0x638(r6)
     lwz r3, 0x4(r29)
     addi r3, r3, 0x7d4
-    bl fn_80134168
+    bl battle_getActorStatTotal
     xoris r0, r3, 0x8000
     stw r0, 0x14(r1)
     lis r3, lbl_8073B1B8@ha

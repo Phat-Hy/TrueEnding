@@ -34,7 +34,7 @@ extern void fn_8012E540(void);
 extern void fn_8012F188(void);
 extern void actor_testBitFlag(void);
 extern void fn_801333A4(void);
-extern void fn_80134168(void);
+extern void battle_getActorStatTotal(void);
 extern void dialog_selectChoice(void);
 extern void fn_8014FD30(void);
 extern void fn_801533C8(void);
@@ -1888,7 +1888,7 @@ lbl_dialog_updateScriptState_00001968:
     addi r3, r28, 0x7d4
     li r4, 0x38
     li r5, -0x1
-    bl fn_80134168
+    bl battle_getActorStatTotal
     xoris r3, r3, 0x8000
     lis r0, 0x4330
     stw r3, 0x4bc(r1)

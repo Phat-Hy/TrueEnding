@@ -63,7 +63,7 @@ extern void battle_calcOutcomeBonus(void);
 extern void battle_updateActorStatus(void);
 extern void fn_801C0738(void);
 extern void thread_findAndNotify(void);
-extern void fn_8021A984(void);
+extern void actor_isCategory5(void);
 extern void fn_802328DC(void);
 extern void fn_8023A60C(void);
 extern void fn_8023A614(void);
@@ -1933,7 +1933,7 @@ lbl_fn_80373AE8_000018E0:
     lwz r3, 0x55b4(r31)
     cmpwi r3, 0x0
     beq lbl_fn_80373AE8_00001960
-    bl fn_8021A984
+    bl actor_isCategory5
     cmpwi r3, 0x0
     beq lbl_fn_80373AE8_00001960
     li r0, 0x1

@@ -21,7 +21,7 @@ extern void net_pollActiveSockets(void);
 extern void net_bufferGetCount(void);
 extern void net_bufferGetElement(void);
 extern void fn_806D5930(void);
-extern void fn_806D5C90(void);
+extern void net_array_removeAt(void);
 extern void fn_806D6250(void);
 extern void fn_806D64B0(void);
 extern void net_hashTable_remove(void);
@@ -33,7 +33,7 @@ extern void net_socketClose(void);
 extern void fn_806D7AE0(void);
 extern void fn_806D7C40(void);
 extern void net_socket_getLastError(void);
-extern void fn_806D8060(void);
+extern void net_url_parseHost(void);
 extern void fn_806D8560(void);
 extern void fn_806D8B20(void);
 extern void net_strdup(void);
@@ -216,7 +216,7 @@ lbl_fn_806E4240_00000100:
     bne lbl_fn_806E4240_0000012C
     lwz r3, 0x3c(r30)
     li r4, 0x0
-    bl fn_806D5C90
+    bl net_array_removeAt
 lbl_fn_806E4240_0000011C:
     lwz r3, 0x3c(r30)
     bl net_bufferGetCount
@@ -569,7 +569,7 @@ lbl_fn_806E4770_000005B0:
 lbl_fn_806E4770_000005E4:
     lwz r3, 0x3c(r30)
     li r4, 0x0
-    bl fn_806D5C90
+    bl net_array_removeAt
 lbl_fn_806E4770_000005F0:
     lwz r3, 0x3c(r30)
     bl net_bufferGetCount
@@ -2347,7 +2347,7 @@ lbl_fn_806E5F90_00001DF8:
     b lbl_fn_806E5F90_00001F14
 lbl_fn_806E5F90_00001E30:
     addi r3, r30, 0x0
-    bl fn_806D8060
+    bl net_url_parseHost
     cmpwi r3, 0x0
     mr r31, r3
     bne lbl_fn_806E5F90_00001E6C

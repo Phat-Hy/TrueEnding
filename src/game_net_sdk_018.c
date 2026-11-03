@@ -11,7 +11,7 @@ extern void _savegpr_25(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void snprintf(void);
-extern void fn_806A72E0(void);
+extern void dwc_allocHeader(void);
 extern void net_memFree(void);
 extern void net_formatLog(void);
 extern void net_formatString(void);
@@ -2232,7 +2232,7 @@ lbl_fn_806C4740_00001F4C:
     li r31, 0x1c
     li r3, 0x4
     li r4, 0x1c
-    bl fn_806A72E0
+    bl dwc_allocHeader
     cmpwi r3, 0x0
     beq lbl_fn_806C4740_00002298
     li r0, 0x0
@@ -2327,7 +2327,7 @@ lbl_fn_806C4740_000020B0:
     li r3, 0x4
     addi r31, r4, 0x8
     mr r4, r31
-    bl fn_806A72E0
+    bl dwc_allocHeader
     cmpwi r3, 0x0
     beq lbl_fn_806C4740_00002298
     rlwinm r4, r29, 24, 8, 15

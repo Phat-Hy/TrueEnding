@@ -45,7 +45,7 @@ extern void net_base64_encode(void);
 extern void fn_806A6E40(void);
 extern void net_isConnectionActive(void);
 extern void net_checkConnectionSession(void);
-extern void fn_806A72E0(void);
+extern void dwc_allocHeader(void);
 extern void net_memFree(void);
 extern void fn_806A75C0(void);
 extern void net_formatLog(void);
@@ -1918,7 +1918,7 @@ lbl_fn_806D2F50_00001A34:
     add r0, r29, r0
     slwi r4, r0, 2
     addi r4, r4, 0x29
-    bl fn_806A72E0
+    bl dwc_allocHeader
     cmpwi r3, 0x0
     mr r27, r3
     bne lbl_fn_806D2F50_00001A9C

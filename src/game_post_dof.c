@@ -58,7 +58,7 @@ extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
 extern void dvd_showDiskErrorDialog(void);
 extern void atn_LoadHandle_destructor(void);
-extern void fn_804DA490(void);
+extern void net_setVoiceChannelState(void);
 extern void rand_Mersenne_init(void);
 extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
@@ -581,7 +581,7 @@ lbl_fn_802C0458_000005A4:
     cmpwi r3, 0x0
     beq lbl_fn_802C0458_00000638
     li r4, 0x2
-    bl fn_804DA490
+    bl net_setVoiceChannelState
 lbl_fn_802C0458_00000638:
     lwz r0, 0x64(r1)
     psq_l f31, 0x58(r1), 0, 0
@@ -818,7 +818,7 @@ lbl_fn_802C07F8_00000964:
 lbl_fn_802C07F8_00000978:
     mr r3, r4
     li r4, 0x2
-    bl fn_804DA490
+    bl net_setVoiceChannelState
 lbl_fn_802C07F8_00000984:
     lbz r0, 0xd(r31)
     extsb. r0, r0
@@ -828,7 +828,7 @@ lbl_fn_802C07F8_00000984:
     bne lbl_fn_802C07F8_00000A2C
     lwz r3, lbl_8087F610
     li r4, 0x5
-    bl fn_804DA490
+    bl net_setVoiceChannelState
     lwz r0, 0x64(r1)
     li r5, 0x0
     li r4, -0x1

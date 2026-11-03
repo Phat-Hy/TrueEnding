@@ -29,7 +29,7 @@ extern void entity_Instance_constructor(void);
 extern void entity_Instance_destructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void rand_Mersenne_init(void);
-extern void fn_805A49E8(void);
+extern void world_getFlagScoped(void);
 extern void fn_805A5224(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
@@ -803,7 +803,7 @@ asm void fn_80309704(void)
 lbl_fn_80309704_00000A38:
     mr r3, r31
     addi r4, r4, 0x1558
-    bl fn_805A49E8
+    bl world_getFlagScoped
     cmpwi r3, 0x0
     ble lbl_fn_80309704_00000A70
     lwz r0, 0x624(r31)

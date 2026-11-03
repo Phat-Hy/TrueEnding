@@ -26,7 +26,7 @@ extern void fn_806D57A0(void);
 extern void net_pollActiveSockets(void);
 extern void net_bufferGetCount(void);
 extern void net_bufferGetElement(void);
-extern void fn_806D5C90(void);
+extern void net_array_removeAt(void);
 extern void fn_806D5E40(void);
 extern void fn_806D6140(void);
 extern void fn_806D62F0(void);
@@ -40,7 +40,7 @@ extern void net_checkSocketStatus(void);
 extern void fn_806D7C40(void);
 extern void fn_806D7D60(void);
 extern void fn_806D7EE0(void);
-extern void fn_806D8060(void);
+extern void net_url_parseHost(void);
 extern void net_strdup(void);
 extern void fn_806D8F10(void);
 extern void net_getTimestampMs(void);
@@ -1702,7 +1702,7 @@ asm void fn_807005E0(void)
     bctrl
     lwz r3, 0x4(r29)
     mr r4, r30
-    bl fn_806D5C90
+    bl net_array_removeAt
     lwz r4, 0x7d8(r29)
     cmpwi r4, 0x0
     bne lbl_fn_807005E0_00001528
@@ -2060,7 +2060,7 @@ lbl_fn_80700A00_000019A0:
     cmplwi r0, 0xffff
     bne lbl_fn_80700A00_000019F8
     addi r3, r1, 0x10
-    bl fn_806D8060
+    bl net_url_parseHost
     cmpwi r3, 0x0
     bne lbl_fn_80700A00_000019E4
     li r3, 0x2

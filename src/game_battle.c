@@ -64,7 +64,7 @@ extern void battle_canTargetActor(void);
 extern void actor_getMovementFlags(void);
 extern void task_lookupTagIndex(void);
 extern void task_findEntryById(void);
-extern void fn_8021A984(void);
+extern void actor_isCategory5(void);
 extern void world_getGlobalFlag(void);
 extern void craft_forgeUpgradeWeapon(void);
 extern void crowd_selectWaypointByWeight(void);
@@ -1390,7 +1390,7 @@ lbl_fn_80018240_00001194:
     cmpwi r3, 0x0
     beq lbl_fn_80018240_00001208
     lwz r3, 0x4(r31)
-    bl fn_8021A984
+    bl actor_isCategory5
     cmpwi r3, 0x0
     beq lbl_fn_80018240_00001208
     lfs f3, 0x530(r25)
@@ -2074,7 +2074,7 @@ lbl_fn_80018BAC_00001AC8:
 lbl_fn_80018BAC_00001AF0:
     cmpwi r4, 0x0
     beq lbl_fn_80018BAC_00001B24
-    bl fn_8021A984
+    bl actor_isCategory5
     cmpwi r3, 0x0
     beq lbl_fn_80018BAC_00001B24
     mr r3, r31

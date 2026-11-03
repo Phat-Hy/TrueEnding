@@ -19,7 +19,7 @@ extern void _savegpr_25(void);
 extern void snprintf(void);
 extern void net_isConnectionActive(void);
 extern void net_checkConnectionSession(void);
-extern void fn_806A72E0(void);
+extern void dwc_allocHeader(void);
 extern void net_memFree(void);
 extern void net_formatLog(void);
 extern void fn_806A9CA0(void);
@@ -741,7 +741,7 @@ lbl_fn_806B42B0_00000844:
     subf r16, r3, r0
     li r3, 0x4
     mr r4, r16
-    bl fn_806A72E0
+    bl dwc_allocHeader
     lis r17, lbl_80860140@ha
     cmpwi r3, 0x0
     stw r3, lbl_80860140@l(r17)

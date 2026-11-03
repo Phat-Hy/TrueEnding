@@ -18,7 +18,7 @@ extern void net_socketClose(void);
 extern void fn_806D7AE0(void);
 extern void net_socket_sendto(void);
 extern void fn_806D7EE0(void);
-extern void fn_806D8060(void);
+extern void net_url_parseHost(void);
 extern void fn_806D8F10(void);
 extern void net_getTimestampMs(void);
 extern void fn_806D9590(void);
@@ -43,7 +43,7 @@ void net_bufferGetElement(void);
 void fn_806D5930(void);
 void fn_806D5A60(void);
 void fn_806D5BE0(void);
-void fn_806D5C90(void);
+void net_array_removeAt(void);
 void fn_806D5D80(void);
 void fn_806D5E40(void);
 void fn_806D5E60(void);
@@ -458,7 +458,7 @@ lbl_fn_806D5BE0_000004D4:
     blr
 }
 
-asm void fn_806D5C90(void)
+asm void net_array_removeAt(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1171,7 +1171,7 @@ lbl_net_hashTable_remove_00000E3C:
     lwz r5, 0x0(r29)
     mr r4, r3
     lwzx r3, r5, r31
-    bl fn_806D5C90
+    bl net_array_removeAt
     li r3, 0x1
 lbl_net_hashTable_remove_00000E50:
     lwz r0, 0x24(r1)
@@ -2350,7 +2350,7 @@ lbl_fn_806D76E0_00001FD8:
     beq lbl_fn_806D76E0_00002000
     addi r3, r29, 0x48
 lbl_fn_806D76E0_00002000:
-    bl fn_806D8060
+    bl net_url_parseHost
     cmpwi r3, 0x0
     bne lbl_fn_806D76E0_00002014
     li r0, 0x0

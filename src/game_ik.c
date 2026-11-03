@@ -22,7 +22,7 @@ extern void PSMTXMultVec(void);
 extern void wcslen(void);
 extern void msl_releaseRefCount(void);
 extern void vec3_isNonZero(void);
-extern void fn_80709AD0(void);
+extern void net_stream_readChunk(void);
 extern void fn_8070AD40(void);
 extern void fn_8070AD50(void);
 extern void fn_8070AD60(void);
@@ -1716,7 +1716,7 @@ asm void fn_800C81CC(void)
     beq lbl_fn_800C81CC_00001540
     mr r3, r0
     li r4, 0x0
-    bl fn_80709AD0
+    bl net_stream_readChunk
 lbl_fn_800C81CC_00001540:
     addi r3, r30, 0x4
     bl fn_80717630
@@ -1778,7 +1778,7 @@ asm void fn_800C82A0(void)
     cmpwi r3, 0x0
     beq lbl_fn_800C82A0_000015FC
     li r4, 0x0
-    bl fn_80709AD0
+    bl net_stream_readChunk
 lbl_fn_800C82A0_000015FC:
     addi r3, r31, 0x4
     bl fn_80717630

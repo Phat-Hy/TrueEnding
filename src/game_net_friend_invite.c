@@ -232,7 +232,7 @@ extern void fn_804D9BF8(void);
 extern void fn_804DA2D4(void);
 extern void fn_804DA350(void);
 extern void fn_804DA39C(void);
-extern void fn_804DA490(void);
+extern void net_setVoiceChannelState(void);
 extern void fn_804DA4A4(void);
 extern void fn_804DB3B8(void);
 extern void fn_804DBD0C(void);
@@ -4382,7 +4382,7 @@ lbl_fn_804D25D4_000038F0:
     bl dvd_showDiskErrorDialog
     mr r3, r24
     li r4, 0x6
-    bl fn_804DA490
+    bl net_setVoiceChannelState
     addis r3, r24, 0x1
     li r0, 0x1
     stw r0, -0x6898(r3)

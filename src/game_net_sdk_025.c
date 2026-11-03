@@ -25,7 +25,7 @@ extern void wcscpy(void);
 extern void fn_80696324(void);
 extern void net_isConnectionActive(void);
 extern void net_checkConnectionSession(void);
-extern void fn_806A72E0(void);
+extern void dwc_allocHeader(void);
 extern void net_memFree(void);
 extern void fn_806A75C0(void);
 extern void net_formatLog(void);
@@ -125,7 +125,7 @@ asm void fn_806D35F0(void)
     mr r4, r31
     li r28, 0x0
     li r3, 0x8
-    bl fn_806A72E0
+    bl dwc_allocHeader
     cmpwi r3, 0x0
     mr r29, r3
     bne lbl_fn_806D35F0_00000058
@@ -917,7 +917,7 @@ lbl_fn_806D4050_00000AD0:
     slwi r0, r0, 2
     add r4, r4, r0
     addi r4, r4, 0x29
-    bl fn_806A72E0
+    bl dwc_allocHeader
     cmpwi r3, 0x0
     stw r3, 0x54(r30)
     bne lbl_fn_806D4050_00000BB0
@@ -1116,7 +1116,7 @@ lbl_fn_806D42F0_00000E58:
     addi r0, r30, 0x1
     li r3, 0x0
     slwi r4, r0, 1
-    bl fn_806A72E0
+    bl dwc_allocHeader
     cmpwi r3, 0x0
     stw r3, 0x4(r31)
     mr r24, r3
@@ -1159,13 +1159,13 @@ lbl_fn_806D42F0_00000EF0:
     blt lbl_fn_806D42F0_00000E90
 lbl_fn_806D42F0_00000EF8:
     lis r31, lbl_80860D90@ha
-    lis r6, fn_806A72E0@ha
+    lis r6, dwc_allocHeader@ha
     addi r31, r31, lbl_80860D90@l
     lis r7, net_memFree@ha
     lwz r3, 0x4(r31)
     slwi r4, r30, 1
     extsb r5, r29
-    addi r6, r6, fn_806A72E0@l
+    addi r6, r6, dwc_allocHeader@l
     addi r7, r7, net_memFree@l
     bl fn_806D0B40
     cmpwi r3, 0x1
@@ -2244,7 +2244,7 @@ asm void fn_806D5300(void)
     li r3, 0x7
     stw r5, 0x10(r1)
     stw r0, 0x14(r1)
-    bl fn_806A72E0
+    bl dwc_allocHeader
     cmpwi r3, 0x0
     mr r30, r3
     bne lbl_fn_806D5300_00001DBC
@@ -2348,7 +2348,7 @@ lbl_fn_806D5420_00001F0C:
     blt lbl_fn_806D5420_00001EE8
     addi r4, r3, 0x10
     li r3, 0x7
-    bl fn_806A72E0
+    bl dwc_allocHeader
     cmpwi r3, 0x0
     mr r29, r3
     bne lbl_fn_806D5420_00001F3C

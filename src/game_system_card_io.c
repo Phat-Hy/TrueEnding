@@ -25,7 +25,7 @@ extern void fn_8035A9F4(void);
 extern void fn_8035ACB8(void);
 extern void fn_8035ACF0(void);
 extern void fn_8059C2AC(void);
-extern void fn_805A49E8(void);
+extern void world_getFlagScoped(void);
 extern void world_setFlagByType(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
@@ -714,7 +714,7 @@ asm void fn_803579FC(void)
     bne lbl_fn_803579FC_0000094C
     mr r3, r31
     addi r4, r31, 0x16a4
-    bl fn_805A49E8
+    bl world_getFlagScoped
     cmpwi r3, 0x0
     bne lbl_fn_803579FC_000009A8
     mr r3, r31
@@ -727,7 +727,7 @@ lbl_fn_803579FC_0000094C:
     bne lbl_fn_803579FC_0000097C
     mr r3, r31
     addi r4, r31, 0x166c
-    bl fn_805A49E8
+    bl world_getFlagScoped
     cmpwi r3, 0x0
     bne lbl_fn_803579FC_000009A8
     mr r3, r31
@@ -740,7 +740,7 @@ lbl_fn_803579FC_0000097C:
     bne lbl_fn_803579FC_000009A8
     mr r3, r31
     addi r4, r31, 0x1684
-    bl fn_805A49E8
+    bl world_getFlagScoped
     cmpwi r3, 0x0
     bne lbl_fn_803579FC_000009A8
     mr r3, r31
@@ -827,7 +827,7 @@ lbl_fn_803579FC_00000A7C:
     b lbl_fn_803579FC_00000B90
     mr r3, r31
     addi r4, r31, 0x168c
-    bl fn_805A49E8
+    bl world_getFlagScoped
     cmpwi r3, 0x0
     bne lbl_fn_803579FC_00000AF8
     mr r3, r31

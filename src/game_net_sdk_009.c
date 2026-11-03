@@ -22,7 +22,7 @@ extern void fn_80698F30(void);
 extern void fn_80699020(void);
 extern void net_isConnectionActive(void);
 extern void net_checkConnectionSession(void);
-extern void fn_806A72E0(void);
+extern void dwc_allocHeader(void);
 extern void net_memFree(void);
 extern void net_formatLog(void);
 extern void fn_806AD8F0(void);
@@ -1118,7 +1118,7 @@ lbl_fn_806AC360_00000D90:
 lbl_fn_806AC360_00000DDC:
     slwi r4, r30, 2
     li r3, 0x4
-    bl fn_806A72E0
+    bl dwc_allocHeader
     lwz r4, 0x0(r31)
     stw r3, 0x60(r4)
     lwz r3, 0x0(r31)

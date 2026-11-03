@@ -29,7 +29,7 @@ extern void res_registerResource(void);
 extern void fn_802EBBA8(void);
 extern void fn_802EC280(void);
 extern void world_setLocalFlag(void);
-extern void fn_804DA490(void);
+extern void net_setVoiceChannelState(void);
 extern void fn_804DA4A4(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
@@ -361,7 +361,7 @@ asm void fn_802E9FC8(void)
     cmpwi r3, 0x0
     beq lbl_fn_802E9FC8_00000514
     li r4, 0x4
-    bl fn_804DA490
+    bl net_setVoiceChannelState
     lwz r3, lbl_8087F610
     li r4, 0x0
     bl fn_804DA4A4
@@ -1050,7 +1050,7 @@ lbl_fn_802EA994_00000D54:
     cmpwi r3, 0x0
     beq lbl_fn_802EA994_00000E94
     li r4, 0x5
-    bl fn_804DA490
+    bl net_setVoiceChannelState
     lwz r3, lbl_8087F610
     li r4, 0x1
     bl fn_804DA4A4

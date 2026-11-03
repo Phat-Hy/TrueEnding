@@ -23,7 +23,7 @@ extern void fn_8011D1FC(void);
 extern void fn_80133E24(void);
 extern void boss_findPartSlotById(void);
 extern void boss_findPartById(void);
-extern void fn_80134168(void);
+extern void battle_getActorStatTotal(void);
 extern void fn_801341B8(void);
 extern void fn_8014FCE8(void);
 extern void battle_canTargetActor(void);
@@ -1483,7 +1483,7 @@ asm void fn_8010B250(void)
     addi r3, r3, 0x7d4
     li r4, 0x37
     li r5, -0x1
-    bl fn_80134168
+    bl battle_getActorStatTotal
     cmpwi r3, 0x0
     mr r30, r3
     ble lbl_fn_8010B250_00001394

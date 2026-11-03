@@ -18,7 +18,7 @@ extern void task_findEntryById(void);
 extern void fn_8021A8D0(void);
 extern void fn_8021A918(void);
 extern void fn_8021A960(void);
-extern void fn_8021A984(void);
+extern void actor_isCategory5(void);
 extern void fn_8021A9A8(void);
 extern void kpad_validateButtonIndex(void);
 extern void fn_8059A268(void);
@@ -1715,7 +1715,7 @@ lbl_fn_80178BFC_00001628:
     li r27, 0x1
 lbl_fn_80178BFC_00001634:
     lwz r3, 0x0(r29)
-    bl fn_8021A984
+    bl actor_isCategory5
     cmpwi r3, 0x0
     beq lbl_fn_80178BFC_0000174C
     lwz r5, 0x10(r29)

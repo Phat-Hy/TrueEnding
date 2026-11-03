@@ -39,7 +39,7 @@ extern void fn_806AA690(void);
 extern void fn_806CF030(void);
 extern void fn_806D08E0(void);
 extern void fn_806D7A70(void);
-extern void fn_806D8060(void);
+extern void net_url_parseHost(void);
 extern void fn_806EA850(void);
 extern void fn_806EA8A0(void);
 extern void fn_806EA920(void);
@@ -139,7 +139,7 @@ void fn_806A7150(void);
 void fn_806A7250(void);
 u32 fn_806A72B0(void);
 void fn_806A72C0(void);
-void fn_806A72E0(void);
+void dwc_allocHeader(void);
 void fn_806A7370(void);
 void net_memFree(void);
 void fn_806A7420(void);
@@ -1144,7 +1144,7 @@ asm void fn_806A7250(void)
     bl fn_806D7A70
     lis r3, lbl_807BCE4C@ha
     addi r3, r3, lbl_807BCE4C@l
-    bl fn_806D8060
+    bl net_url_parseHost
     bl fn_806CF030
     lis r3, lbl_8085FF24@ha
     li r0, 0x0
@@ -1170,7 +1170,7 @@ asm void fn_806A72C0(void)
     blr
 }
 
-asm void fn_806A72E0(void)
+asm void dwc_allocHeader(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1981,7 +1981,7 @@ lbl_fn_806A7D40_00001834:
     stw r30, 0x14(r1)
     stw r24, 0x18(r1)
     stw r26, 0x20(r1)
-    bl fn_806A72E0
+    bl dwc_allocHeader
     cmpwi r3, 0x0
     bne lbl_fn_806A7D40_00001860
     li r26, 0x0
@@ -2035,7 +2035,7 @@ lbl_fn_806A7D40_00001904:
     ble lbl_fn_806A7D40_00001970
     mr r4, r28
     li r3, 0x6
-    bl fn_806A72E0
+    bl dwc_allocHeader
     cmpwi r3, 0x0
     mr r25, r3
     bne lbl_fn_806A7D40_0000196C
@@ -2301,7 +2301,7 @@ asm void fn_806A8200(void)
     li r4, 0x210
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
-    bl fn_806A72E0
+    bl dwc_allocHeader
     lis r31, lbl_8085FF40@ha
     li r4, 0x0
     stw r3, lbl_8085FF40@l(r31)

@@ -28,7 +28,7 @@ extern void task_findEntryById(void);
 extern void fn_8021A8D0(void);
 extern void fn_8021A918(void);
 extern void fn_8021A960(void);
-extern void fn_8021A984(void);
+extern void actor_isCategory5(void);
 extern void fn_8021A9CC(void);
 extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_ctor(void);
@@ -1595,7 +1595,7 @@ lbl_fn_8059B32C_00001478:
 lbl_fn_8059B32C_00001490:
     addi r3, r29, 0x80
 lbl_fn_8059B32C_00001494:
-    bl fn_8021A984
+    bl actor_isCategory5
     cmpwi r3, 0x0
     beq lbl_fn_8059B32C_000014AC
     mr r3, r29
@@ -1903,7 +1903,7 @@ lbl_fn_8059B670_000018A8:
     cmpwi r0, 0x0
     beq lbl_fn_8059B670_000018D0
     mr r3, r30
-    bl fn_8021A984
+    bl actor_isCategory5
     cmpwi r3, 0x0
     beq lbl_fn_8059B670_000018D0
     mr r3, r28

@@ -36,7 +36,7 @@ extern void fn_800CF5B4(void);
 extern void fn_800CF5D0(void);
 extern void fn_800D123C(void);
 extern void __destroy_new_array(void);
-extern void fn_80709AD0(void);
+extern void net_stream_readChunk(void);
 extern void fn_8070ABE0(void);
 extern void fn_80715D60(void);
 extern void fn_80715D70(void);
@@ -803,7 +803,7 @@ lbl_fn_800CE6E0_00000A08:
     cmpwi r3, 0x0
     beq lbl_fn_800CE6E0_00000A60
     li r4, 0x0
-    bl fn_80709AD0
+    bl net_stream_readChunk
 lbl_fn_800CE6E0_00000A60:
     addi r26, r26, 0x1
     addi r25, r25, 0x14c

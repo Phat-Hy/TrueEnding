@@ -14,7 +14,7 @@ extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
 extern void fn_805A4258(void);
-extern void fn_805A49E8(void);
+extern void world_getFlagScoped(void);
 extern void world_setFlagByType(void);
 extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
@@ -567,7 +567,7 @@ lbl_fn_80358A5C_000006C8:
     bne lbl_fn_80358A5C_00001EE8
     mr r3, r31
     addi r4, r31, 0x16ac
-    bl fn_805A49E8
+    bl world_getFlagScoped
     cmpwi r3, 0x0
     bne lbl_fn_80358A5C_00001EE8
     mr r3, r31
@@ -636,7 +636,7 @@ lbl_fn_80358A5C_00000824:
     bne lbl_fn_80358A5C_00001EE8
     mr r3, r31
     addi r4, r31, 0x16ac
-    bl fn_805A49E8
+    bl world_getFlagScoped
     cmpwi r3, 0x0
     bne lbl_fn_80358A5C_00001EE8
     mr r3, r31

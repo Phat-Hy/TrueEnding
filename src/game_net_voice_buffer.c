@@ -64,7 +64,7 @@ void fn_804DA350(void);
 void fn_804DA39C(void);
 void fn_804DA3F8(void);
 void fn_804DA47C(void);
-void fn_804DA490(void);
+void net_setVoiceChannelState(void);
 void fn_804DA4A4(void);
 void fn_804DA694(void);
 void fn_804DB1C8(void);
@@ -712,7 +712,7 @@ asm void fn_804DA47C(void)
     blr
 }
 
-asm void fn_804DA490(void)
+asm void net_setVoiceChannelState(void)
 {
     nofralloc
     lwz r3, lbl_8087F5A8

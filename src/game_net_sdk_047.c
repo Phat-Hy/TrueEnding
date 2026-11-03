@@ -24,7 +24,7 @@ extern void net_pollActiveSockets(void);
 extern void net_bufferGetCount(void);
 extern void net_bufferGetElement(void);
 extern void fn_806D5930(void);
-extern void fn_806D5C90(void);
+extern void net_array_removeAt(void);
 extern void fn_806D6140(void);
 extern void fn_806D64B0(void);
 extern void net_hashTable_remove(void);
@@ -2357,7 +2357,7 @@ lbl_fn_807031B0_00001EE4:
     bctrl
     lwz r3, 0x4(r30)
     mr r4, r26
-    bl fn_806D5C90
+    bl net_array_removeAt
     lwz r4, 0x7d8(r30)
     cmpwi r4, 0x0
     bne lbl_fn_807031B0_00001F38

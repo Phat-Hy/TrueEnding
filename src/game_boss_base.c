@@ -50,7 +50,7 @@ void fn_80133F6C(void);
 void fn_80133FBC(void);
 void fn_8013407C(void);
 void boss_findPartById(void);
-void fn_80134168(void);
+void battle_getActorStatTotal(void);
 void fn_801341B8(void);
 void fn_80134208(void);
 void fn_80134234(void);
@@ -1298,7 +1298,7 @@ lbl_boss_findPartById_00001054:
     blr
 }
 
-asm void fn_80134168(void)
+asm void battle_getActorStatTotal(void)
 {
     nofralloc
     lwz r0, 0x380(r3)

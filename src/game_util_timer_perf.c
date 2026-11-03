@@ -142,7 +142,7 @@ extern u32 lbl_80888290;
 extern u32 lbl_80888294;
 
 /* Function declarations */
-void fn_805A49E8(void);
+void world_getFlagScoped(void);
 void world_setFlagByType(void);
 void fn_805A4A58(void);
 void atn_Anim_startLayerAnimation(void);
@@ -157,7 +157,7 @@ void fn_805A620C(void);
 void fn_805A6270(void);
 void arms_destructorBase(void);
 
-asm void fn_805A49E8(void)
+asm void world_getFlagScoped(void)
 {
     nofralloc
     lwz r3, lbl_8087F430

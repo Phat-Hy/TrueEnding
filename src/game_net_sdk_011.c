@@ -63,7 +63,7 @@ extern void fn_806CE250(void);
 extern void fn_806CE6F0(void);
 extern void fn_806D76E0(void);
 extern void fn_806D7860(void);
-extern void fn_806D8060(void);
+extern void net_url_parseHost(void);
 extern void fn_806DA880(void);
 extern void fn_806DA8B0(void);
 extern void fn_806DA8D0(void);
@@ -543,19 +543,19 @@ lbl_fn_806AFDB0_000005B0:
     addi r3, r31, 0xf4
     add r4, r4, r0
     sth r5, 0x30(r4)
-    bl fn_806D8060
+    bl net_url_parseHost
     cmpwi r3, 0x0
     beq lbl_fn_806AFDB0_000007B0
     addi r3, r31, 0x110
-    bl fn_806D8060
+    bl net_url_parseHost
     cmpwi r3, 0x0
     beq lbl_fn_806AFDB0_000007B0
     addi r3, r31, 0x12c
-    bl fn_806D8060
+    bl net_url_parseHost
     cmpwi r3, 0x0
     beq lbl_fn_806AFDB0_000007B0
     addi r3, r31, 0x14c
-    bl fn_806D8060
+    bl net_url_parseHost
     cmpwi r3, 0x0
     beq lbl_fn_806AFDB0_000007B0
     lis r0, lbl_80862150@ha
@@ -567,7 +567,7 @@ lbl_fn_806AFDB0_000005B0:
     crclr 6
     bl sprintf
     addi r3, r1, 0x20
-    bl fn_806D8060
+    bl net_url_parseHost
     cmpwi r3, 0x0
     beq lbl_fn_806AFDB0_000007B0
     mr r5, r30
@@ -576,7 +576,7 @@ lbl_fn_806AFDB0_000005B0:
     crclr 6
     bl sprintf
     addi r3, r1, 0x20
-    bl fn_806D8060
+    bl net_url_parseHost
     cmpwi r3, 0x0
     beq lbl_fn_806AFDB0_000007B0
     mr r5, r30
@@ -585,7 +585,7 @@ lbl_fn_806AFDB0_000005B0:
     crclr 6
     bl sprintf
     addi r3, r1, 0x20
-    bl fn_806D8060
+    bl net_url_parseHost
     cmpwi r3, 0x0
     beq lbl_fn_806AFDB0_000007B0
     mr r5, r30
@@ -594,7 +594,7 @@ lbl_fn_806AFDB0_000005B0:
     crclr 6
     bl sprintf
     addi r3, r1, 0x20
-    bl fn_806D8060
+    bl net_url_parseHost
     cmpwi r3, 0x0
     beq lbl_fn_806AFDB0_000007B0
     mr r5, r30
@@ -603,7 +603,7 @@ lbl_fn_806AFDB0_000005B0:
     crclr 6
     bl sprintf
     addi r3, r1, 0x20
-    bl fn_806D8060
+    bl net_url_parseHost
     cmpwi r3, 0x0
     beq lbl_fn_806AFDB0_000007B0
     mr r5, r30
@@ -612,7 +612,7 @@ lbl_fn_806AFDB0_000005B0:
     crclr 6
     bl sprintf
     addi r3, r1, 0x20
-    bl fn_806D8060
+    bl net_url_parseHost
     cmpwi r3, 0x0
     beq lbl_fn_806AFDB0_000007B0
     mr r5, r30
@@ -621,7 +621,7 @@ lbl_fn_806AFDB0_000005B0:
     crclr 6
     bl sprintf
     addi r3, r1, 0x20
-    bl fn_806D8060
+    bl net_url_parseHost
     cmpwi r3, 0x0
     beq lbl_fn_806AFDB0_000007B0
     lis r4, lbl_807BB380@ha
@@ -666,7 +666,7 @@ lbl_fn_806AFDB0_00000764:
     crclr 6
     bl sprintf
     addi r3, r1, 0x20
-    bl fn_806D8060
+    bl net_url_parseHost
     cmpwi r3, 0x0
     bne lbl_fn_806AFDB0_000007C0
 lbl_fn_806AFDB0_000007B0:

@@ -12,7 +12,7 @@ extern void fn_801784BC(void);
 extern void battle_updateActorStatus(void);
 extern void fn_80179730(void);
 extern void fn_8021A960(void);
-extern void fn_8021A984(void);
+extern void actor_isCategory5(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot();
 extern void res_Shader_bindParams(void);
@@ -1406,7 +1406,7 @@ lbl_fn_8059D17C_00001180:
 lbl_fn_8059D17C_00001198:
     addi r3, r31, 0x80
 lbl_fn_8059D17C_0000119C:
-    bl fn_8021A984
+    bl actor_isCategory5
     cmpwi r3, 0x0
     beq lbl_fn_8059D17C_000011B4
     mr r3, r31
@@ -1509,7 +1509,7 @@ lbl_fn_8059D310_000012AC:
     addi r27, r30, 0x80
 lbl_fn_8059D310_000012EC:
     mr r3, r27
-    bl fn_8021A984
+    bl actor_isCategory5
     cmpwi r3, 0x0
     beq lbl_fn_8059D310_00001300
     addi r29, r29, 0x1
@@ -1708,7 +1708,7 @@ lbl_fn_8059D3B4_000015CC:
     cmpwi r3, 0x0
     bne lbl_fn_8059D3B4_000015EC
     mr r3, r24
-    bl fn_8021A984
+    bl actor_isCategory5
     cmpwi r3, 0x0
     beq lbl_fn_8059D3B4_00001714
 lbl_fn_8059D3B4_000015EC:

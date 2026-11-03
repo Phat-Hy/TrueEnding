@@ -20,7 +20,7 @@ extern void net_bufferGetCount(void);
 extern void net_bufferGetElement(void);
 extern void fn_806D5930(void);
 extern void fn_806D5BE0(void);
-extern void fn_806D5C90(void);
+extern void net_array_removeAt(void);
 extern void fn_806D5E60(void);
 extern void fn_806D63A0(void);
 extern void net_socketConnect(void);
@@ -194,7 +194,7 @@ lbl_fn_806D9890_0000006C:
     bl net_packet_formatHeader
     lwz r3, 0x4(r26)
     mr r4, r25
-    bl fn_806D5C90
+    bl net_array_removeAt
 lbl_fn_806D9890_000000E0:
     lwz r3, 0x8(r26)
     bl net_bufferGetCount
@@ -243,7 +243,7 @@ lbl_fn_806D9890_000000F8:
 lbl_fn_806D9890_0000018C:
     lwz r3, 0x20(r28)
     mr r4, r24
-    bl fn_806D5C90
+    bl net_array_removeAt
     b lbl_fn_806D9890_00000208
 lbl_fn_806D9890_0000019C:
     addi r25, r25, 0x1
@@ -1155,7 +1155,7 @@ lbl_fn_806DA660_00000E18:
     mr r4, r3
     beq lbl_fn_806DA660_00000E58
     lwz r3, 0x8(r31)
-    bl fn_806D5C90
+    bl net_array_removeAt
 lbl_fn_806DA660_00000E58:
     li r3, 0x0
 lbl_fn_806DA660_00000E5C:

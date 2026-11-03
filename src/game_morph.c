@@ -17,7 +17,7 @@ extern void fn_800CA3D4(void);
 extern void fn_8059E380(void);
 extern void PSVECMag(void);
 extern void __ptmf_scall(void);
-extern void fn_80709AD0(void);
+extern void net_stream_readChunk(void);
 extern void fn_80709F20(void);
 extern void fn_8070ABE0(void);
 extern void fn_8070AD70(void);
@@ -1550,7 +1550,7 @@ asm void morph_updateMesh(void)
     lwz r3, 0x4(r6)
     cmpwi r3, 0x0
     beq lbl_morph_updateMesh_000011D4
-    bl fn_80709AD0
+    bl net_stream_readChunk
 lbl_morph_updateMesh_000011D4:
     cmpwi r31, 0x0
     bne lbl_morph_updateMesh_000011FC
@@ -1696,7 +1696,7 @@ lbl_fn_800CB718_0000131C:
     cmpwi r3, 0x0
     beq lbl_fn_800CB718_00001330
     mr r4, r31
-    bl fn_80709AD0
+    bl net_stream_readChunk
 lbl_fn_800CB718_00001330:
     cntlzw r0, r31
     li r4, 0x1
@@ -1729,7 +1729,7 @@ asm void fn_800CB788(void)
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beq lbl_fn_800CB788_00001398
-    bl fn_80709AD0
+    bl net_stream_readChunk
 lbl_fn_800CB788_00001398:
     cntlzw r0, r31
     li r4, 0x1

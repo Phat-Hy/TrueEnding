@@ -14,7 +14,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void viewport_updateCulling(void);
-extern void fn_80134168(void);
+extern void battle_getActorStatTotal(void);
 extern void inventory_unequipItem(void);
 extern void fn_80154344(void);
 extern void inventory_calcTotalStats(void);
@@ -947,14 +947,14 @@ lbl_fn_801C7918_00000BA0:
 lbl_fn_801C7918_00000BB4:
     li r4, 0x43
     li r5, -0x1
-    bl fn_80134168
+    bl battle_getActorStatTotal
     cmpwi r3, 0x0
     ble lbl_fn_801C7918_00000C00
     lwz r3, 0x4(r28)
     li r4, 0x43
     li r5, -0x1
     addi r3, r3, 0x7d4
-    bl fn_80134168
+    bl battle_getActorStatTotal
     xoris r0, r3, 0x8000
     stw r0, 0xc4(r1)
     lis r3, lbl_8073B8F8@ha
@@ -1001,14 +1001,14 @@ lbl_fn_801C7918_00000C7C:
     addi r3, r4, 0x7d4
     li r4, 0x43
     li r5, -0x1
-    bl fn_80134168
+    bl battle_getActorStatTotal
     cmpwi r3, 0x0
     ble lbl_fn_801C7918_00000CE8
     lwz r3, 0x4(r28)
     li r4, 0x43
     li r5, -0x1
     addi r3, r3, 0x7d4
-    bl fn_80134168
+    bl battle_getActorStatTotal
     xoris r0, r3, 0x8000
     stw r0, 0xcc(r1)
     lis r3, lbl_8073B8F8@ha

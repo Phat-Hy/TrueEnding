@@ -34,7 +34,7 @@ extern void fn_806D7CB0(void);
 extern void fn_806D7D60(void);
 extern void fn_806D7EE0(void);
 extern void net_socket_getLastError(void);
-extern void fn_806D8060(void);
+extern void net_url_parseHost(void);
 extern void fn_806D8560(void);
 extern void net_strdup(void);
 extern void fn_806D8EB0(void);
@@ -2063,7 +2063,7 @@ lbl_fn_806DF2E0_00001AC4:
     cmplwi r0, 0xffff
     bne lbl_fn_806DF2E0_00001B3C
     addi r3, r30, 0x0
-    bl fn_806D8060
+    bl net_url_parseHost
     cmpwi r3, 0x0
     bne lbl_fn_806DF2E0_00001B28
     mr r3, r26

@@ -68,7 +68,7 @@ extern void fn_80549F18(void);
 extern void fn_80550CE4(void);
 extern void printf(void);
 extern void abort(void);
-extern void fn_80709AD0(void);
+extern void net_stream_readChunk(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
 
@@ -454,7 +454,7 @@ asm void fn_8047FABC(void)
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
     beqlr
-    b fn_80709AD0
+    b net_stream_readChunk
     blr
 }
 

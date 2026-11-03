@@ -7,7 +7,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_23(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8000FAE4(void);
+extern void sys_noopCallback(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_80016F48(void);
@@ -1149,7 +1149,7 @@ asm void fn_8008A00C(void)
     addi r28, r1, 0x1c
     addi r27, r1, 0x28
     lis r30, lbl_80732368@ha
-    lis r31, fn_8000FAE4@ha
+    lis r31, sys_noopCallback@ha
     li r25, 0x8
 lbl_fn_8008A00C_00000D3C:
     addi r3, r1, 0x34
@@ -1177,7 +1177,7 @@ lbl_fn_8008A00C_00000D78:
     la r6, lbl_8087D80C
     li r7, 0x0
     bl mem_realloc
-    addi r4, r31, fn_8000FAE4@l
+    addi r4, r31, sys_noopCallback@l
     li r5, 0x0
     li r6, 0x2c
     li r7, 0x8
@@ -1291,7 +1291,7 @@ lbl_fn_8008A00C_00000F10:
     li r7, 0x0
     bl mem_realloc
     mr r7, r26
-    addi r4, r31, fn_8000FAE4@l
+    addi r4, r31, sys_noopCallback@l
     li r5, 0x0
     li r6, 0x2c
     bl runtime_registerStaticObject

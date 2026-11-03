@@ -86,7 +86,7 @@ extern void fn_80161880(void);
 extern void fn_80176428(void);
 extern void task_lookupTagIndex(void);
 extern void task_findEntryById(void);
-extern void fn_8021A984(void);
+extern void actor_isCategory5(void);
 extern void world_getGlobalFlag(void);
 extern void craft_forgeUpgradeWeapon(void);
 extern void fn_80599C94(void);
@@ -1037,7 +1037,7 @@ lbl_fn_8001BF64_00000AFC:
 lbl_fn_8001BF64_00000B24:
     cmpwi r4, 0x0
     beq lbl_fn_8001BF64_00000B50
-    bl fn_8021A984
+    bl actor_isCategory5
     cmpwi r3, 0x0
     beq lbl_fn_8001BF64_00000B50
     mr r3, r31

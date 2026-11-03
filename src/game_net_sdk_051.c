@@ -61,7 +61,7 @@ void fn_80709830(void);
 void fn_80709870(void);
 void fn_80709950(void);
 void fn_80709AB0(void);
-void fn_80709AD0(void);
+void net_stream_readChunk(void);
 void fn_80709CC0(void);
 void fn_80709F20(void);
 void fn_8070A030(void);
@@ -405,7 +405,7 @@ asm void fn_80709AB0(void)
     blr
 }
 
-asm void fn_80709AD0(void)
+asm void net_stream_readChunk(void)
 {
     nofralloc
     stwu r1, -0x30(r1)

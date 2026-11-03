@@ -39,7 +39,7 @@ extern void math_u64DivMod(void);
 extern void fn_80708CF0(void);
 extern void fn_80708D30(void);
 extern void fn_80708D70(void);
-extern void fn_80709AD0(void);
+extern void net_stream_readChunk(void);
 extern void fn_8070AC90(void);
 extern void fn_8070ADA0(void);
 extern void fn_8070ADE0(void);
@@ -360,7 +360,7 @@ lbl_fn_805A1288_00000314:
 lbl_fn_805A1288_0000033C:
     mr r3, r18
     li r4, 0x0
-    bl fn_80709AD0
+    bl net_stream_readChunk
     lwz r4, 0x30(r24)
     mr r3, r25
     lwz r5, 0x8(r1)
@@ -583,7 +583,7 @@ lbl_fn_805A1764_00000624:
 lbl_fn_805A1764_0000064C:
     mr r3, r23
     li r4, 0x0
-    bl fn_80709AD0
+    bl net_stream_readChunk
     lhz r5, 0x4(r18)
     mr r3, r30
     lhz r6, 0x6(r18)

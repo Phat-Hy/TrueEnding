@@ -6,7 +6,7 @@ extern void _restgpr_23(void);
 extern void _restgpr_27(void);
 extern void _savegpr_23(void);
 extern void _savegpr_27(void);
-extern void fn_8000FAE4(void);
+extern void sys_noopCallback(void);
 extern void actor_dispatchByType(void);
 extern void fn_800112E0(void);
 extern void actor_getSkeletonNode(void);
@@ -148,9 +148,9 @@ lbl_fn_805553D8_000000C4:
     addi r3, r3, 0x10
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_8000FAE4@ha
+    lis r4, sys_noopCallback@ha
     mr r7, r23
-    addi r4, r4, fn_8000FAE4@l
+    addi r4, r4, sys_noopCallback@l
     li r5, 0x0
     li r6, 0x2c
     bl runtime_registerStaticObject
@@ -284,7 +284,7 @@ lbl_fn_805553D8_000002F4:
     blt lbl_fn_805553D8_0000029C
     li r24, 0x0
     li r23, 0x0
-    lis r31, fn_8000FAE4@ha
+    lis r31, sys_noopCallback@ha
     li r29, 0x8
     b lbl_fn_805553D8_00000760
 lbl_fn_805553D8_00000314:
@@ -346,7 +346,7 @@ lbl_fn_805553D8_000003C4:
     la r6, lbl_8087D80C
     li r7, 0x0
     bl mem_realloc
-    addi r4, r31, fn_8000FAE4@l
+    addi r4, r31, sys_noopCallback@l
     li r5, 0x0
     li r6, 0x2c
     li r7, 0x8
@@ -460,7 +460,7 @@ lbl_fn_805553D8_0000055C:
     li r7, 0x0
     bl mem_realloc
     mr r7, r30
-    addi r4, r31, fn_8000FAE4@l
+    addi r4, r31, sys_noopCallback@l
     li r5, 0x0
     li r6, 0x2c
     bl runtime_registerStaticObject

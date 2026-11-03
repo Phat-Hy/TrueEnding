@@ -9,7 +9,7 @@ extern void _savegpr_14(void);
 extern void _savegpr_24(void);
 extern void _savegpr_25(void);
 extern void dtor_80084684(void);
-extern void fn_8000FAE4(void);
+extern void sys_noopCallback(void);
 extern void fn_80012934(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
@@ -213,9 +213,9 @@ lbl_fn_80227434_00000130:
     addi r3, r3, 0x10
     li r7, 0x0
     bl mem_realloc
-    lis r4, fn_8000FAE4@ha
+    lis r4, sys_noopCallback@ha
     mr r7, r25
-    addi r4, r4, fn_8000FAE4@l
+    addi r4, r4, sys_noopCallback@l
     li r5, 0x0
     li r6, 0x2c
     bl runtime_registerStaticObject

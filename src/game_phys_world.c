@@ -9,7 +9,7 @@ extern void _savegpr_25(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void vec3_copy(void);
-extern void fn_8000DB1C(void);
+extern void scene_getInstance(void);
 extern void actor_dispatchByType(void);
 extern void fn_80010B68(void);
 extern void fn_80012A1C(void);
@@ -1184,7 +1184,7 @@ asm void fn_80112F5C(void)
     mr r30, r7
     mr r31, r8
     bl fn_801128C4
-    bl fn_8000DB1C
+    bl scene_getInstance
     mr r4, r31
     bl fn_8048B048
     stw r3, 0x290(r27)
@@ -1228,7 +1228,7 @@ asm void fn_80112F5C(void)
     bl fn_80112604
     lfs f0, lbl_808816B0
     stfs f0, 0x294(r27)
-    bl fn_8000DB1C
+    bl scene_getInstance
     lwz r4, 0x290(r27)
     lfs f1, 0x294(r27)
     bl fn_8048BCA4
@@ -1252,7 +1252,7 @@ asm void fn_80112F5C(void)
     mr r4, r3
     addi r3, r27, 0x234
     bl vec3_copy
-    bl fn_8000DB1C
+    bl scene_getInstance
     bl fn_801130F4
     cmpwi r3, 0x0
     beq lbl_fn_80112F5C_0000101C

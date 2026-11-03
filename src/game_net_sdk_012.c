@@ -17,7 +17,7 @@ extern void strcmp(void);
 extern void fn_8068446C(void);
 extern void net_isConnectionActive(void);
 extern void net_checkConnectionSession(void);
-extern void fn_806A72E0(void);
+extern void dwc_allocHeader(void);
 extern void net_memFree(void);
 extern void net_formatLog(void);
 extern void net_formatString(void);
@@ -2028,7 +2028,7 @@ lbl_fn_806B3220_00001A18:
     mr r4, r3
     li r3, 0x4
     addi r4, r4, 0x1
-    bl fn_806A72E0
+    bl dwc_allocHeader
     cmpwi r3, 0x0
     stw r3, 0x4(r27)
     bne lbl_fn_806B3220_00001C34
@@ -2335,7 +2335,7 @@ lbl_fn_806B3680_00001E7C:
     mr r4, r3
     li r3, 0x4
     addi r4, r4, 0x1
-    bl fn_806A72E0
+    bl dwc_allocHeader
     cmpwi r3, 0x0
     stw r3, 0x4(r27)
     bne lbl_fn_806B3680_00002098

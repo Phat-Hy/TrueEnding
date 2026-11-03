@@ -16,7 +16,7 @@ extern void atoi(void);
 extern void net_pollActiveSockets(void);
 extern void net_bufferGetCount(void);
 extern void net_bufferGetElement(void);
-extern void fn_806D5C90(void);
+extern void net_array_removeAt(void);
 extern void fn_806D64B0(void);
 extern void net_invokeChannelCallback(void);
 extern void net_socketConnect(void);
@@ -2479,7 +2479,7 @@ lbl_fn_806F87A0_00001FC4:
 lbl_fn_806F87A0_00001FDC:
     lwz r3, 0x228(r30)
     mr r4, r29
-    bl fn_806D5C90
+    bl net_array_removeAt
 lbl_fn_806F87A0_00001FE8:
     subi r29, r29, 0x1
 lbl_fn_806F87A0_00001FEC:

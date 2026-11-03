@@ -60,7 +60,7 @@ extern void fn_803E6850(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_804DA490(void);
+extern void net_setVoiceChannelState(void);
 extern void fn_804DA4A4(void);
 extern void rand_Mersenne_constructor(void);
 extern void rand_Mersenne_init(void);
@@ -1046,7 +1046,7 @@ asm void fn_802EDFE4(void)
     cmpwi r3, 0x0
     beq lbl_fn_802EDFE4_00000CBC
     li r4, 0x4
-    bl fn_804DA490
+    bl net_setVoiceChannelState
     lwz r3, lbl_8087F610
     li r4, 0x0
     bl fn_804DA4A4
@@ -1061,7 +1061,7 @@ lbl_fn_802EDFE4_00000CBC:
     cmpwi r3, 0x0
     beq lbl_fn_802EDFE4_00000CF4
     li r4, 0x5
-    bl fn_804DA490
+    bl net_setVoiceChannelState
     lwz r3, lbl_8087F610
     li r4, 0x1
     bl fn_804DA4A4

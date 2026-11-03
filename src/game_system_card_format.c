@@ -44,7 +44,7 @@ extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void rand_Mersenne_init(void);
-extern void fn_805A49E8(void);
+extern void world_getFlagScoped(void);
 extern void fn_805A5224(void);
 extern void fn_805A5378(void);
 extern void PSMTXConcat(void);
@@ -293,7 +293,7 @@ lbl_fn_8035AB78_00000254:
     mr r3, r28
     addi r30, r4, 0x158c
     mr r4, r30
-    bl fn_805A49E8
+    bl world_getFlagScoped
     cmpwi r3, 0x0
     bne lbl_fn_8035AB78_00000288
     lfs f0, 0x10(r30)

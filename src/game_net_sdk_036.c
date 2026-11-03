@@ -17,7 +17,7 @@ extern void net_bufferGetCount(void);
 extern void net_bufferGetElement(void);
 extern void fn_806D5930(void);
 extern void fn_806D5A60(void);
-extern void fn_806D5C90(void);
+extern void net_array_removeAt(void);
 extern void net_hashTable_remove(void);
 extern void fn_806D66B0(void);
 extern void net_socketClose(void);
@@ -671,7 +671,7 @@ lbl_fn_806EAD40_00000724:
 lbl_fn_806EAD40_00000738:
     lwz r3, 0x60(r28)
     mr r4, r30
-    bl fn_806D5C90
+    bl net_array_removeAt
 lbl_fn_806EAD40_00000744:
     cmpwi r30, 0x0
     subi r30, r30, 0x1
@@ -2024,7 +2024,7 @@ lbl_fn_806EBE60_000019D0:
     lwz r28, 0x4(r31)
     li r27, 0x0
     lwz r3, 0x5c(r30)
-    bl fn_806D5C90
+    bl net_array_removeAt
     lwz r3, 0x5c(r30)
     bl net_bufferGetCount
     mr r31, r3
