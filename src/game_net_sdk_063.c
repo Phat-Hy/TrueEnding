@@ -21,7 +21,7 @@ extern void GXSetCurrentMtx(void);
 extern void fn_80619920(void);
 extern void fn_806199D0(void);
 extern void fn_80619A00(void);
-extern void mem_heap_free(void);
+extern void mem_heap_free();
 extern void fn_80619B80(void);
 extern void fn_80619C60(void);
 extern void vswprintf(void);
@@ -48,7 +48,7 @@ extern void fn_807222E0(void);
 extern void fn_80725050(void);
 extern void fn_80725070(void);
 extern void fn_807250E0(void);
-extern void fn_80725150(void);
+extern void fn_80725150();
 extern void fn_80726B90(void);
 extern void fn_807274C0(void);
 extern void fn_80727A10(void);
@@ -87,9 +87,9 @@ void fn_80722DF0(void);
 void fn_80722E60(void);
 void fn_80722E70(void);
 void fn_80722E80(void);
-void fn_80722E90(void);
-void fn_80722EB0(void);
-void fn_80722ED0(void);
+u32 fn_80722E90(const void *p);
+u32 fn_80722EB0(const void *p);
+u32 fn_80722ED0(const void *p);
 void fn_80722EF0(void);
 void fn_80722F00(void);
 void fn_80722F10(void);
@@ -123,13 +123,13 @@ void fn_80723A00(void);
 void fn_80723B90(void);
 void fn_80723C50(void);
 void fn_80723CB0(void);
-void fn_80723D00(void);
-void fn_80723D10(void);
+void fn_80723D00(void *p);
+void fn_80723D10(void *p);
 void fn_80723D20(void);
 void fn_80723D60(void);
 void fn_80723D90(void);
 void fn_80723DF0(void);
-void fn_80723E40(void);
+void fn_80723E40(void *p);
 u32 fn_80723E50(void);
 void fn_80723E60(void);
 void fn_80723EF0(void);
@@ -881,34 +881,19 @@ asm void fn_80722E70(void)
 void fn_80722E80(void) {
 }
 
-asm void fn_80722E90(void)
+u32 fn_80722E90(const void *p)
 {
-    nofralloc
-    lbz r3, 0xce(r3)
-    neg r0, r3
-    or r0, r0, r3
-    srwi r3, r0, 31
-    blr
+    return *(const u8 *)((const u8 *)p + 0xce) != 0;
 }
 
-asm void fn_80722EB0(void)
+u32 fn_80722EB0(const void *p)
 {
-    nofralloc
-    lbz r3, 0xcd(r3)
-    neg r0, r3
-    or r0, r0, r3
-    srwi r3, r0, 31
-    blr
+    return *(const u8 *)((const u8 *)p + 0xcd) != 0;
 }
 
-asm void fn_80722ED0(void)
+u32 fn_80722ED0(const void *p)
 {
-    nofralloc
-    lbz r3, 0xcc(r3)
-    neg r0, r3
-    or r0, r0, r3
-    srwi r3, r0, 31
-    blr
+    return *(const u8 *)((const u8 *)p + 0xcc) != 0;
 }
 
 asm void fn_80722EF0(void)
@@ -1940,19 +1925,14 @@ lbl_fn_80723CB0_000018A8:
     blr
 }
 
-asm void fn_80723D00(void)
+void fn_80723D00(void *p)
 {
-    nofralloc
-    li r4, 0x0
-    addi r3, r3, 0x4
-    b fn_80725150
+    fn_80725150((u8 *)p + 4, 0);
 }
 
-asm void fn_80723D10(void)
+void fn_80723D10(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x4
-    b fn_80725150
+    fn_80725150((u8 *)p + 4);
 }
 
 asm void fn_80723D20(void)
@@ -2043,12 +2023,9 @@ asm void fn_80723DF0(void)
     blr
 }
 
-asm void fn_80723E40(void)
+void fn_80723E40(void *p)
 {
-    nofralloc
-    mr r4, r3
-    lwz r3, lbl_80880520
-    b mem_heap_free
+    mem_heap_free(lbl_80880520, p);
 }
 
 u32 fn_80723E50(void)

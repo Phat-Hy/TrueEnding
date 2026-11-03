@@ -7,8 +7,8 @@ extern void ICInvalidateRange(void);
 extern void OSDisableInterrupts(void);
 extern void OSEnableScheduler(void);
 extern void OSReport(const char* msg, ...);
-extern void OSResetSystem(void);
-extern void OSRestoreInterrupts(void);
+extern void OSResetSystem();
+extern void OSRestoreInterrupts();
 extern void __ArenaLo(void);
 extern void fn_80082490(void);
 extern void fn_8008263C(void);
@@ -84,7 +84,7 @@ void gdev_cc_peek(void);
 void gdev_cc_initinterrupts(void);
 void fn_80675190(void);
 void fn_80675194(void);
-void fn_806751C4(void);
+void fn_806751C4(void *p);
 u32 fn_806751CC(void *p);
 void fn_806751D4(void);
 void fn_806751F8(void);
@@ -113,14 +113,14 @@ void fn_80675EA0(void);
 void fn_80675EDC(void);
 void ReserveEXI2Port(void);
 void UnreserveEXI2Port(void);
-void TRK_board_display(void);
+void TRK_board_display(const void *s);
 void InitializeProgramEndTrap(void);
 void fn_80675FAC(void);
 void TRKInitializeEventQueue(void);
 void TRKGetNextEvent(void);
 void fn_806760EC(void);
 void fn_806761B8(void);
-void TRKDestructEvent(void);
+void TRKDestructEvent(void *p);
 void TRKInitializeNub(void);
 void TRKTerminateNub(void);
 void TRKNubWelcome(void);
@@ -143,7 +143,7 @@ void fn_80676E0C(void);
 void TRKInitializeMessageBuffers(void);
 void fn_80676E90(void);
 void TRKGetBuffer(void);
-void fn_80676F50(void);
+void fn_80676F50();
 void fn_80676F78(void);
 void fn_80676FA0(void);
 void fn_80676FD0(void);
@@ -463,11 +463,9 @@ asm void fn_80675194(void)
     blr
 }
 
-asm void fn_806751C4(void)
+void fn_806751C4(void *p)
 {
-    nofralloc
-    lwz r3, 0x0(r3)
-    b OSRestoreInterrupts
+    OSRestoreInterrupts(*(u32 *)p);
 }
 
 u32 fn_806751CC(void *p)
@@ -1242,13 +1240,9 @@ asm void TRKInitializeTarget(void)
     blr
 }
 
-asm void fn_80675C00(void)
+void fn_80675C00(void)
 {
-    nofralloc
-    li r3, 0x0
-    li r4, 0x0
-    li r5, 0x0
-    b OSResetSystem
+    OSResetSystem(0, 0, 0);
 }
 
 asm void TRKLoadContext(void)
@@ -1513,7 +1507,7 @@ asm void UnreserveEXI2Port(void)
     bctr
 }
 
-asm void TRK_board_display(void)
+asm void TRK_board_display(const void *s)
 {
     nofralloc
     lis r5, lbl_807BACF0@ha
@@ -1721,11 +1715,9 @@ asm void fn_806761B8(void)
     blr
 }
 
-asm void TRKDestructEvent(void)
+void TRKDestructEvent(void *p)
 {
-    nofralloc
-    lwz r3, 0x8(r3)
-    b fn_80676F50
+    fn_80676F50(*(void **)((u8 *)p + 8));
 }
 
 asm void TRKInitializeNub(void)
@@ -1795,12 +1787,9 @@ asm void TRKTerminateNub(void)
     blr
 }
 
-asm void TRKNubWelcome(void)
+void TRKNubWelcome(void)
 {
-    nofralloc
-    lis r3, lbl_807BADF8@ha
-    addi r3, r3, lbl_807BADF8@l
-    b TRK_board_display
+    TRK_board_display(lbl_807BADF8);
 }
 
 asm void TRKInitializeEndian(void)
@@ -2755,7 +2744,7 @@ lbl_TRKGetBuffer_00002030:
     blr
 }
 
-asm void fn_80676F50(void)
+asm void fn_80676F50()
 {
     nofralloc
     cmpwi r3, -0x1

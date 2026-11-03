@@ -110,14 +110,14 @@ void fn_806A0950(void);
 void fn_806A0A78(void);
 void fn_806A0AD8(void);
 void fn_806A0B48(void);
-void fn_806A0BC4(void);
+void *fn_806A0BC4(void *a, void *b, u32 flag);
 void fn_806A0CD4(void);
 void fn_806A0D04(void);
 void fn_806A0D34(void);
 void fn_806A0D6C(void);
-void fn_806A0DA4(void);
-void fn_806A0DAC(void);
-void fn_806A0DB4(void);
+void *fn_806A0DA4(void *a, void *b);
+void *fn_806A0DAC(void *a, void *b);
+void *fn_806A0DB4(void *a, void *b);
 void fn_806A0DBC(void);
 void fn_806A0E00(void);
 void fn_806A0E44(void);
@@ -145,12 +145,12 @@ void fn_806A1634(void);
 void fn_806A1724(void);
 void fn_806A18C4(void);
 void fn_806A1A80(void);
-void fn_806A1A90(void);
+void fn_806A1A90(u32 val);
 void fn_806A1AA0(void);
 void fn_806A1AB0(void);
 void fn_806A1AC0(void);
 void fn_806A1AD0(void);
-void fn_806A1AE0(void);
+void fn_806A1AE0();
 void fn_806A1C40(void);
 void fn_806A1CD8(void);
 void fn_806A1F5C(void);
@@ -858,7 +858,7 @@ lbl_fn_806A0B48_000008CC:
     blr
 }
 
-asm void fn_806A0BC4(void)
+asm void *fn_806A0BC4(void *a, void *b, u32 flag)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -1017,25 +1017,19 @@ lbl_fn_806A0D6C_00000AD4:
     blr
 }
 
-asm void fn_806A0DA4(void)
+void *fn_806A0DA4(void *a, void *b)
 {
-    nofralloc
-    li r5, 0x1
-    b fn_806A0BC4
+    return fn_806A0BC4(a, b, 1);
 }
 
-asm void fn_806A0DAC(void)
+void *fn_806A0DAC(void *a, void *b)
 {
-    nofralloc
-    li r5, 0x2
-    b fn_806A0BC4
+    return fn_806A0BC4(a, b, 2);
 }
 
-asm void fn_806A0DB4(void)
+void *fn_806A0DB4(void *a, void *b)
 {
-    nofralloc
-    li r5, 0x0
-    b fn_806A0BC4
+    return fn_806A0BC4(a, b, 0);
 }
 
 asm void fn_806A0DBC(void)
@@ -2057,52 +2051,32 @@ asm void fn_806A1A80(void)
     b fn_806A1AE0
 }
 
-asm void fn_806A1A90(void)
+void fn_806A1A90(u32 val)
 {
-    nofralloc
-    mr r5, r3
-    li r3, 0x0
-    li r4, 0x7
-    b fn_806A1AE0
+    fn_806A1AE0(0, 7, val);
 }
 
-asm void fn_806A1AA0(void)
+void fn_806A1AA0(void)
 {
-    nofralloc
-    li r3, 0x0
-    li r4, 0x8
-    li r5, 0x0
-    b fn_806A1AE0
+    fn_806A1AE0(0, 8, 0);
 }
 
-asm void fn_806A1AB0(void)
+void fn_806A1AB0(void)
 {
-    nofralloc
-    li r3, 0x0
-    li r4, 0x9
-    li r5, 0x0
-    b fn_806A1AE0
+    fn_806A1AE0(0, 9, 0);
 }
 
-asm void fn_806A1AC0(void)
+void fn_806A1AC0(void)
 {
-    nofralloc
-    li r3, 0x0
-    li r4, 0x1
-    li r5, 0x0
-    b fn_806A1AE0
+    fn_806A1AE0(0, 1, 0);
 }
 
-asm void fn_806A1AD0(void)
+void fn_806A1AD0(void)
 {
-    nofralloc
-    li r3, 0x0
-    li r4, 0x3
-    li r5, 0x0
-    b fn_806A1AE0
+    fn_806A1AE0(0, 3, 0);
 }
 
-asm void fn_806A1AE0(void)
+asm void fn_806A1AE0()
 {
     nofralloc
     stwu r1, -0x30(r1)
