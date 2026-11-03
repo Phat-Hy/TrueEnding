@@ -62,14 +62,14 @@ void fn_806301E8(void);
 void fn_8063024C(void);
 void fn_80630468(void);
 void fn_806305D8(void);
-void fn_806307C8(void);
+void fn_806307C8(u16 val);
 void fn_806307D8(void);
 void fn_806308DC(void);
 void fn_80630968(void);
-void fn_80630B94(void);
+void fn_80630B94(u16 val);
 void fn_80630BA4(void);
 void fn_80630C7C(void);
-void fn_80630CD8(void);
+u8 fn_80630CD8(void);
 void fn_80630CE8(void);
 void fn_80630D84(void);
 void fn_80630E20(void);
@@ -809,13 +809,9 @@ lbl_fn_806305D8_00000998:
     blr
 }
 
-asm void fn_806307C8(void)
+void fn_806307C8(u16 val)
 {
-    nofralloc
-    lis r4, lbl_80820018@ha
-    addi r4, r4, lbl_80820018@l
-    sth r3, 0x4c4(r4)
-    blr
+    *(u16 *)(lbl_80820018 + 0x4c4) = val;
 }
 
 asm void fn_806307D8(void)
@@ -1091,13 +1087,9 @@ lbl_fn_80630968_00000D64:
     blr
 }
 
-asm void fn_80630B94(void)
+void fn_80630B94(u16 val)
 {
-    nofralloc
-    lis r4, lbl_80820018@ha
-    addi r4, r4, lbl_80820018@l
-    sth r3, 0x4c6(r4)
-    blr
+    *(u16 *)(lbl_80820018 + 0x4c6) = val;
 }
 
 asm void fn_80630BA4(void)
@@ -1196,13 +1188,9 @@ lbl_fn_80630C7C_00000EB0:
     blr
 }
 
-asm void fn_80630CD8(void)
+u8 fn_80630CD8(void)
 {
-    nofralloc
-    lis r3, lbl_80820018@ha
-    addi r3, r3, lbl_80820018@l
-    lbz r3, 0x27bf(r3)
-    blr
+    return lbl_80820018[0x27bf];
 }
 
 asm void fn_80630CE8(void)

@@ -85,7 +85,7 @@ void fn_80633EC0(void);
 void fn_80633F70(void);
 void fn_80634020(void);
 void fn_806340B8(void);
-void fn_80634240(void);
+u8 fn_80634240(void);
 void fn_80634250(void);
 void fn_80634358(void);
 void fn_8063450C(void);
@@ -585,13 +585,9 @@ lbl_fn_806340B8_000005F0:
     blr
 }
 
-asm void fn_80634240(void)
+u8 fn_80634240(void)
 {
-    nofralloc
-    lis r3, lbl_80820018@ha
-    addi r3, r3, lbl_80820018@l
-    lbz r3, 0x1848(r3)
-    blr
+    return lbl_80820018[0x1848];
 }
 
 asm void fn_80634250(void)

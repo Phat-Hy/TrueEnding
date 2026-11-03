@@ -65,7 +65,7 @@ void fn_803D6E7C(void);
 u32 fn_803D6EA0(void *p);
 u32 fn_803D6EAC(void *p);
 void *fn_803D6EB8(void *p);
-void fn_803D6EC0(void);
+f32 fn_803D6EC0(const f32 *p);
 u32 fn_803D6ED4(void *p);
 u32 fn_803D6EDC(void *p);
 void fn_803D6EEC(void);
@@ -79,7 +79,7 @@ void town_triggerEventAction(void);
 void fn_803D6FD4(void *p, u32 val);
 void *fn_803D6FDC(void *p);
 u32 fn_803D6FE4(void *p);
-void fn_803D6FEC(void);
+void fn_803D6FEC(f32 *p, f32 a, f32 b, f32 c, f32 d);
 void fn_803D7000(void);
 void fn_803D7014(void);
 u32 fn_803D7028(const void *p);
@@ -224,14 +224,9 @@ void *fn_803D6EB8(void *p)
     return (u8 *)p + 0x624;
 }
 
-asm void fn_803D6EC0(void)
+f32 fn_803D6EC0(const f32 *p)
 {
-    nofralloc
-    lfs f1, 0x8(r3)
-    lfs f0, 0x0(r3)
-    fmuls f1, f1, f1
-    fmadds f1, f0, f0, f1
-    blr
+    return p[2] * p[2] + p[0] * p[0];
 }
 
 u32 fn_803D6ED4(void *p)
@@ -346,14 +341,12 @@ u32 fn_803D6FE4(void *p)
     return *(u32 *)((u8 *)p + 0x4);
 }
 
-asm void fn_803D6FEC(void)
+void fn_803D6FEC(f32 *p, f32 a, f32 b, f32 c, f32 d)
 {
-    nofralloc
-    stfs f1, 0x0(r3)
-    stfs f2, 0x4(r3)
-    stfs f3, 0x8(r3)
-    stfs f4, 0xc(r3)
-    blr
+    p[0] = a;
+    p[1] = b;
+    p[2] = c;
+    p[3] = d;
 }
 
 asm void fn_803D7000(void)

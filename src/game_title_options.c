@@ -32,9 +32,9 @@ extern void fn_8021E444(void);
 extern void fn_80366364(void);
 extern void world_getGlobalFlag(void);
 extern void world_getLocalFlag(void);
-extern void fn_803940E8(void);
-extern void fn_80394190(void);
-extern void fn_80394208(void);
+extern void fn_803940E8();
+extern void fn_80394190();
+extern void fn_80394208();
 extern void fn_803B80F4(void);
 extern void fn_803B8160(void);
 extern void fn_803B8200(void);
@@ -113,11 +113,11 @@ extern u32 lbl_80885C14;
 
 /* Function declarations */
 void fn_803B2780(void);
-void fn_803B27AC(void);
-void fn_803B27C0(void);
-void fn_803B27D4(void);
-void fn_803B27DC(void);
-void fn_803B27F0(void);
+void fn_803B27AC(void *p);
+void fn_803B27C0(void *p);
+void fn_803B27D4(void *p);
+void fn_803B27DC(void *p);
+void fn_803B27F0(void *p);
 void fn_803B27F8(void);
 void fn_803B2870(void);
 void fn_803B29A8(void);
@@ -159,48 +159,29 @@ lbl_fn_803B2780_00000014:
     blr
 }
 
-asm void fn_803B27AC(void)
+void fn_803B27AC(void *p)
 {
-    nofralloc
-    li r11, 0x3c
-    lwzx r11, r3, r11
-    add r3, r3, r11
-    subi r3, r3, 0xc
-    b fn_80394190
+    fn_80394190((u8 *)p + *(s32 *)((u8 *)p + 0x3c) - 0xc);
 }
 
-asm void fn_803B27C0(void)
+void fn_803B27C0(void *p)
 {
-    nofralloc
-    li r11, 0x3c
-    lwzx r11, r3, r11
-    add r3, r3, r11
-    subi r3, r3, 0x14
-    b fn_803940E8
+    fn_803940E8((u8 *)p + *(s32 *)((u8 *)p + 0x3c) - 0x14);
 }
 
-asm void fn_803B27D4(void)
+void fn_803B27D4(void *p)
 {
-    nofralloc
-    subi r3, r3, 0xc
-    b fn_803940E8
+    fn_803940E8((u8 *)p - 0xc);
 }
 
-asm void fn_803B27DC(void)
+void fn_803B27DC(void *p)
 {
-    nofralloc
-    li r11, 0x3c
-    lwzx r11, r3, r11
-    add r3, r3, r11
-    subi r3, r3, 0x4c
-    b fn_80394208
+    fn_80394208((u8 *)p + *(s32 *)((u8 *)p + 0x3c) - 0x4c);
 }
 
-asm void fn_803B27F0(void)
+void fn_803B27F0(void *p)
 {
-    nofralloc
-    subi r3, r3, 0xc
-    b fn_80394208
+    fn_80394208((u8 *)p - 0xc);
 }
 
 asm void fn_803B27F8(void)

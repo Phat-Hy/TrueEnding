@@ -13,13 +13,13 @@ extern void _savegpr_25(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void fn_805EC3B0(void);
-extern void fn_805EDC50(void);
+extern void fn_805EDC50();
 extern void fn_805EDC80(void);
 extern void fn_80626AA0(void);
 extern void scapi_getConfigItem(void);
 extern void scapi_cleanupContext(void);
 extern void fn_80626EC0(void);
-extern void fn_80626F10(void);
+extern void fn_80626F10();
 extern void fn_806270D0(void);
 extern void fn_80627180(void);
 extern void fn_806272C0(void);
@@ -130,7 +130,7 @@ void fn_80629600(void);
 void fn_80629650(void);
 void fn_80629670(void);
 void fn_806296E0(void);
-void fn_80629710(void);
+void fn_80629710(void *p);
 void fn_80629720(void);
 void fn_80629750(void);
 void bta_sys_logEvent(void);
@@ -1329,13 +1329,9 @@ asm void fn_806296E0(void)
     blr
 }
 
-asm void fn_80629710(void)
+void fn_80629710(void *p)
 {
-    nofralloc
-    mr r5, r3
-    li r3, 0x2
-    li r4, 0x0
-    b fn_80626F10
+    fn_80626F10(2, 0, p);
 }
 
 asm void fn_80629720(void)
@@ -1482,15 +1478,9 @@ asm void fn_806298D0(void)
     blr
 }
 
-asm void fn_806298F0(void)
+void fn_806298F0(void)
 {
-    nofralloc
-    lis r4, lbl_8081EAC0@ha
-    lis r3, fn_80629AA0@ha
-    addi r4, r4, lbl_8081EAC0@l
-    addi r3, r3, fn_80629AA0@l
-    addi r4, r4, 0x1000
-    b fn_805EDC50
+    fn_805EDC50(fn_80629AA0, (u8 *)lbl_8081EAC0 + 0x1000);
 }
 
 asm void fn_80629910(void)

@@ -74,7 +74,7 @@ extern void fn_80600EC0(void);
 extern void fn_80601130(void);
 extern void fn_80601340(void);
 extern void fn_806015E0(void);
-extern void fn_806018F0(void);
+extern void fn_806018F0();
 extern void fn_80601A90(void);
 extern void fn_80601D70(void);
 extern void fn_80601D80(void);
@@ -190,7 +190,7 @@ void fn_805FE860(void);
 void DVDInquiryAsync(void);
 void DVDGetCommandBlockStatus(void);
 void fn_805FEB00(void);
-void fn_805FEBA0(void);
+u32 fn_805FEBA0(u32 val);
 void fn_805FEBB0(void);
 void fn_805FEC00(void* a, void* b);
 void fn_805FEF70(void);
@@ -597,13 +597,8 @@ lbl_057c:
 }
 
 
-asm void fn_805FAE60(void) {
-    nofralloc
-    lis r5, fn_805FAD50@ha
-    li r3, 0x0
-    addi r5, r5, fn_805FAD50@l
-    li r4, 0x0
-    b fn_806018F0
+void fn_805FAE60(void) {
+    fn_806018F0(0, 0, fn_805FAD50);
 }
 
 
@@ -4934,12 +4929,10 @@ lbl_42a8:
 }
 
 
-asm void fn_805FEBA0(void) {
-    nofralloc
-    mr r0, r3
-    lwz r3, lbl_8087E7D4
-    stw r0, lbl_8087E7D4
-    blr 
+u32 fn_805FEBA0(u32 val) {
+    u32 old = lbl_8087E7D4;
+    lbl_8087E7D4 = val;
+    return old;
 }
 
 
@@ -5269,10 +5262,8 @@ lbl_4744:
 }
 
 
-asm void fn_805FF030(void) {
-    nofralloc
-    la r3, __DVDThreadQueue
-    b OSWakeupThread
+void fn_805FF030(void) {
+    OSWakeupThread((void *)&__DVDThreadQueue);
 }
 
 

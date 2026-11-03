@@ -15,7 +15,7 @@ extern void str_assignBuffer(void);
 extern void fn_8006FA4C(void);
 extern void mem_alloc(void);
 extern void skin_playAnimationByName(void);
-extern void fn_800C7F08(void);
+extern void fn_800C7F08();
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
@@ -104,12 +104,12 @@ u32 fn_80116B98(void *p);
 f32 fn_80116BA4(const void *p);
 void *fn_80116BAC(void *p);
 void fn_80116BB4(void);
-void fn_80116BB8(void);
+void fn_80116BB8(void *p, double val);
 u32 fn_80116BC8(void *p);
 void actor_calcSpawnTransform(void);
 u32 fn_80116E64(void);
 void *fn_80116E6C(void *p);
-void fn_80116E74(void);
+void fn_80116E74(void *p);
 void fn_80116E7C(void);
 u32 fn_80116EA8(void);
 void fn_80116EB0(void);
@@ -117,8 +117,8 @@ void fn_80116EB4(void);
 void fn_80116EB8(void);
 void actor_findSpawnTemplate(void);
 void fn_801170C8(void);
-void fn_80117200(void);
-void fn_80117214(void);
+u32 fn_80117200(u32 idx);
+u32 fn_80117214(u32 idx);
 void actor_spawnActorWithId(void);
 void fn_8011728C(void);
 void fn_801173A8(void);
@@ -154,13 +154,11 @@ void fn_80116BB4(void)
 {
 }
 
-asm void fn_80116BB8(void)
+void fn_80116BB8(void *p, double val)
 {
-    nofralloc
-    frsp f0, f1
-    stfs f1, 0x1fc(r3)
-    stfs f0, 0x50(r3)
-    blr
+    f32 f = (f32)val;
+    *(f32 *)((u8 *)p + 0x1fc) = val;
+    *(f32 *)((u8 *)p + 0x50) = f;
 }
 
 u32 fn_80116BC8(void *p)
@@ -348,11 +346,9 @@ void *fn_80116E6C(void *p)
     return (char *)p + 0x2c;
 }
 
-asm void fn_80116E74(void)
+void fn_80116E74(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x2984
-    b fn_800C7F08
+    fn_800C7F08((u8 *)p + 0x2984);
 }
 
 asm void fn_80116E7C(void)
@@ -637,24 +633,14 @@ lbl_fn_801170C8_0000063C:
     blr
 }
 
-asm void fn_80117200(void)
+u32 fn_80117200(u32 idx)
 {
-    nofralloc
-    lis r4, lbl_807369AC@ha
-    slwi r0, r3, 2
-    addi r4, r4, lbl_807369AC@l
-    lwzx r3, r4, r0
-    blr
+    return ((u32 *)lbl_807369AC)[idx];
 }
 
-asm void fn_80117214(void)
+u32 fn_80117214(u32 idx)
 {
-    nofralloc
-    lis r4, lbl_807369C0@ha
-    slwi r0, r3, 2
-    addi r4, r4, lbl_807369C0@l
-    lwzx r3, r4, r0
-    blr
+    return ((u32 *)lbl_807369C0)[idx];
 }
 
 asm void actor_spawnActorWithId(void)

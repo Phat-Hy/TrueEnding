@@ -136,15 +136,15 @@ void fn_806A1270(void);
 void fn_806A1288(void);
 void fn_806A12E8(void);
 void fn_806A1450(void);
-void fn_806A1488(void);
-void fn_806A149C(void);
-void fn_806A14B0(void);
+u32 fn_806A1488(void);
+u32 fn_806A149C(void);
+u32 fn_806A14B0(void);
 void fn_806A14C4(void);
 void NWC24SuspendScheduler(void);
 void fn_806A1634(void);
 void fn_806A1724(void);
 void fn_806A18C4(void);
-void fn_806A1A80(void);
+void fn_806A1A80(void *p);
 void fn_806A1A90(u32 val);
 void fn_806A1AA0(void);
 void fn_806A1AB0(void);
@@ -1585,34 +1585,19 @@ lbl_fn_806A1450_000011B8:
     blr
 }
 
-asm void fn_806A1488(void)
+u32 fn_806A1488(void)
 {
-    nofralloc
-    lwz r3, lbl_80880400
-    subi r0, r3, 0x1
-    cntlzw r0, r0
-    srwi r3, r0, 5
-    blr
+    return lbl_80880400 == 1;
 }
 
-asm void fn_806A149C(void)
+u32 fn_806A149C(void)
 {
-    nofralloc
-    lwz r3, lbl_80880400
-    subi r0, r3, 0x2
-    cntlzw r0, r0
-    srwi r3, r0, 5
-    blr
+    return lbl_80880400 == 2;
 }
 
-asm void fn_806A14B0(void)
+u32 fn_806A14B0(void)
 {
-    nofralloc
-    lwz r3, lbl_80880400
-    subi r0, r3, 0x3
-    cntlzw r0, r0
-    srwi r3, r0, 5
-    blr
+    return lbl_80880400 == 3;
 }
 
 asm void fn_806A14C4(void)
@@ -2042,13 +2027,9 @@ lbl_fn_806A18C4_000017A8:
     blr
 }
 
-asm void fn_806A1A80(void)
+void fn_806A1A80(void *p)
 {
-    nofralloc
-    mr r5, r3
-    li r3, 0x0
-    li r4, 0x6
-    b fn_806A1AE0
+    fn_806A1AE0(0, 6, p);
 }
 
 void fn_806A1A90(u32 val)

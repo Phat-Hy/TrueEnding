@@ -20,7 +20,7 @@ extern void fn_8067AF64(void);
 extern void fn_8067C590(void);
 extern void fn_8067D06C(void);
 extern void fn_8067D19C(void);
-extern void fn_8067D5C0(void);
+extern void fn_8067D5C0();
 extern void fn_8067D988(void);
 extern void fn_8067DABC(void);
 extern void fn_8067DB74(void);
@@ -390,9 +390,9 @@ void fn_8068C164(void);
 u32 fn_8068C220(void *p, u32 val);
 void fn_8068C230(void);
 void fn_8068C240(void);
-void fn_8068C370(void);
+void fn_8068C370(void *p);
 void dtor_8068C3E8(void);
-void fn_8068C440(void);
+void fn_8068C440(void *p);
 void fn_8068C4B8(void);
 void fn_8068C72C(void);
 void fn_8068C9A0(void);
@@ -426,11 +426,11 @@ u32 fn_8068EA38(void);
 void fn_8068EA40(void);
 s32 fn_8068EA68(void *p, s8 val);
 void fn_8068EA70(void);
-void fn_8068EAF8(void);
+void fn_8068EAF8(void *a, void *b);
 s32 fn_8068EB0C(void);
 s64 fn_8068EB14(void);
 void fn_8068EB20(void);
-void fn_8068EBA8(void);
+void fn_8068EBA8(void *a, void *b);
 s32 fn_8068EBBC(void);
 s64 fn_8068EBC4(void);
 void fn_8068EBD0(void);
@@ -478,8 +478,8 @@ void fn_80691C9C(void);
 u32 fn_80691CFC(void);
 void fn_80691D08(void);
 u32 fn_80691E1C(void);
-void fn_80691E28(void);
-void fn_80691E3C(void);
+void fn_80691E28(void *p);
+void fn_80691E3C(void *p);
 void fn_80691E50(void);
 void dtor_80691E68(void);
 void dtor_80691EE4(void);
@@ -6720,7 +6720,7 @@ lbl_fn_8068C240_0000545C:
     blr
 }
 
-asm void fn_8068C370(void)
+asm void fn_8068C370(void *p)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -6785,7 +6785,7 @@ lbl_dtor_8068C3E8_00005530:
     blr
 }
 
-asm void fn_8068C440(void)
+asm void fn_8068C440(void *p)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -9658,14 +9658,9 @@ lbl_fn_8068EA70_00007BF0:
     blr
 }
 
-asm void fn_8068EAF8(void)
+void fn_8068EAF8(void *a, void *b)
 {
-    nofralloc
-    mr r6, r3
-    mr r3, r4
-    lwz r6, 0x50(r6)
-    li r4, 0x1
-    b fn_8067D5C0
+    fn_8067D5C0(b, 1, *(void **)((u8 *)a + 0x50));
 }
 
 s32 fn_8068EB0C(void)
@@ -9721,14 +9716,9 @@ lbl_fn_8068EB20_00007CA0:
     blr
 }
 
-asm void fn_8068EBA8(void)
+void fn_8068EBA8(void *a, void *b)
 {
-    nofralloc
-    mr r6, r3
-    mr r3, r4
-    lwz r6, 0x50(r6)
-    li r4, 0x1
-    b fn_8067D5C0
+    fn_8067D5C0(b, 1, *(void **)((u8 *)a + 0x50));
 }
 
 s32 fn_8068EBBC(void)
@@ -13509,24 +13499,14 @@ u32 fn_80691E1C(void)
     return 0xffff;
 }
 
-asm void fn_80691E28(void)
+void fn_80691E28(void *p)
 {
-    nofralloc
-    li r11, 0x3c
-    lwzx r11, r3, r11
-    add r3, r3, r11
-    subi r3, r3, 0xc
-    b fn_8068C440
+    fn_8068C440((u8 *)p + *(s32 *)((u8 *)p + 0x3c) - 0xc);
 }
 
-asm void fn_80691E3C(void)
+void fn_80691E3C(void *p)
 {
-    nofralloc
-    li r11, 0x3c
-    lwzx r11, r3, r11
-    add r3, r3, r11
-    subi r3, r3, 0x8
-    b fn_8068C370
+    fn_8068C370((u8 *)p + *(s32 *)((u8 *)p + 0x3c) - 0x8);
 }
 
 void fn_80691E50(void)

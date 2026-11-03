@@ -40,17 +40,17 @@ extern void fn_8010EE78(void);
 extern void fn_80134250(void);
 extern void fn_80134270(void);
 extern void fn_8021A888(void);
-extern void sound_initGlobalInstances(void);
+extern void sound_initGlobalInstances();
 extern void res_Shader_findParameter(void);
 extern void res_findResourceSlot(void);
 extern void res_Shader_bindParams(void);
 extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
-extern void PSMTXTrans(void);
+extern void PSMTXTrans();
 extern void PSMTXScale(void);
 extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
-extern void PSVECNormalize(void);
+extern void PSVECNormalize();
 extern void rand(void);
 extern void std_atan2(void);
 extern void runtime_clampDouble(void);
@@ -100,16 +100,16 @@ u32 fn_800F7F80(void *p);
 u32 viewport_getFlag(void);
 void fn_800F7F98(void *p, u32 val);
 u32 viewport_getGlobalContext(void);
-void viewport_initAudioInstances(void);
+void viewport_initAudioInstances(void *unused, void *a, void *b);
 u32 fn_800F7FB4(const void *p);
-void fn_800F7FBC(void);
+void *fn_800F7FBC(void *p);
 void vec3_normalize(void);
-void viewport_getNextSequenceId(void);
+void viewport_getNextSequenceId(void *v);
 void fn_800F7FF8(void);
 void fn_800F8014(void);
 void *fn_800F8098(void *p);
 void *fn_800F80A0(void *p);
-void fn_800F80A8(void);
+void fn_800F80A8(void *mtx, const f32 *v);
 void fn_800F80B8(void);
 void fn_800F8290(void);
 void fn_800F831C(void);
@@ -119,7 +119,7 @@ void fn_800F84BC(void *p, f32 a, f32 b);
 void *fn_800F84C8(void *p);
 void fn_800F84D0(void *p, void *val);
 void fn_800F84D8(void);
-void math_lerpf(void);
+f32 math_lerpf(const f32 *a, const f32 *b, f32 t);
 void *fn_800F8538(void *p, s32 idx);
 void fn_800F8544(void);
 s32 system_getNextSequenceId(s32* obj);
@@ -1054,12 +1054,9 @@ u32 viewport_getGlobalContext(void)
     return lbl_8087F3C0;
 }
 
-asm void viewport_initAudioInstances(void)
+void viewport_initAudioInstances(void *unused, void *a, void *b)
 {
-    nofralloc
-    mr r3, r4
-    mr r4, r5
-    b sound_initGlobalInstances
+    sound_initGlobalInstances(a, b);
 }
 
 u32 fn_800F7FB4(const void *p)
@@ -1067,17 +1064,12 @@ u32 fn_800F7FB4(const void *p)
     return *(const u32 *)((const char *)p + 0x146c);
 }
 
-asm void fn_800F7FBC(void)
+void *fn_800F7FBC(void *p)
 {
-    nofralloc
-    lwz r0, 0x14a8(r3)
-    srwi. r0, r0, 31
-    beq lbl_fn_800F7FBC_00000D80
-    addi r3, r3, 0x148c
-    blr
-lbl_fn_800F7FBC_00000D80:
-    addi r3, r3, 0x600
-    blr
+    if (*(s32 *)((u8 *)p + 0x14a8) < 0) {
+        return (u8 *)p + 0x148c;
+    }
+    return (u8 *)p + 0x600;
 }
 
 asm void vec3_normalize(void)
@@ -1091,11 +1083,9 @@ asm void vec3_normalize(void)
     b PSVECNormalize
 }
 
-asm void viewport_getNextSequenceId(void)
+void viewport_getNextSequenceId(void *v)
 {
-    nofralloc
-    mr r4, r3
-    b PSVECNormalize
+    PSVECNormalize(v, v);
 }
 
 asm void fn_800F7FF8(void)
@@ -1159,13 +1149,9 @@ void *fn_800F80A0(void *p)
     return (char *)p + 0x100;
 }
 
-asm void fn_800F80A8(void)
+void fn_800F80A8(void *mtx, const f32 *v)
 {
-    nofralloc
-    lfs f1, 0x0(r4)
-    lfs f2, 0x4(r4)
-    lfs f3, 0x8(r4)
-    b PSMTXTrans
+    PSMTXTrans(mtx, v[0], v[1], v[2]);
 }
 
 asm void fn_800F80B8(void)
@@ -1508,14 +1494,9 @@ asm void fn_800F84D8(void)
     blr
 }
 
-asm void math_lerpf(void)
+f32 math_lerpf(const f32 *a, const f32 *b, f32 t)
 {
-    nofralloc
-    lfs f0, 0x0(r4)
-    lfs f2, 0x0(r3)
-    fsubs f0, f0, f2
-    fmadds f1, f1, f0, f2
-    blr
+    return t * (*b - *a) + *a;
 }
 
 void *fn_800F8538(void *p, s32 idx)

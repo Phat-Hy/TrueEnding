@@ -31,7 +31,7 @@ extern void fn_800D71D4(void);
 extern void fn_800D7254(void);
 extern void fn_800D81CC(void);
 extern void fn_800D82BC(void);
-extern void fn_800D8448(void);
+extern void fn_800D8448();
 extern void fn_800D8458(void);
 extern void fn_800D8568(void);
 extern void env_updateAtmosphere(void);
@@ -78,7 +78,7 @@ extern u32 lbl_80881220;
 extern u32 lbl_80881224;
 extern u32 lbl_80881228;
 extern u32 lbl_8088122C;
-extern u32 lbl_80881230;
+extern f32 lbl_80881230;
 extern u32 lbl_80881234;
 extern u32 lbl_80881238;
 extern u32 lbl_8088123C;
@@ -92,10 +92,10 @@ extern u32 lbl_80881250;
 void fn_800D8624(void);
 void fn_800D8698(void);
 void fn_800D87A4(void *p);
-void fn_800D87B0(void);
+void fn_800D87B0(void **p);
 void fn_800D87C4(void);
 void *fn_800D8808(void *p);
-void vec4_set(void);
+void vec4_set(f32 *p, f32 a, f32 b, f32 c, f32 d);
 void fn_800D8828(void);
 void fn_800D884C(void);
 void fn_800D8870(void);
@@ -119,7 +119,7 @@ void *fn_800D9880(const void *p, u32 idx);
 void fn_800D9890(void);
 void *fn_800D98B0(const void *p, u32 idx);
 void *fn_800D98C0(void *obj);
-void fn_800D98C8(void);
+void fn_800D98C8(f32 *p, f32 c);
 void fn_800D98DC(void);
 void fn_800D98F4(void);
 void fn_800D9918(void);
@@ -245,14 +245,11 @@ void fn_800D87A4(void *p)
     *(u32 *)p = 0;
 }
 
-asm void fn_800D87B0(void)
+void fn_800D87B0(void **p)
 {
-    nofralloc
-    lwz r3, 0x0(r3)
-    cmpwi r3, 0x0
-    beqlr
-    b fn_800D8448
-    blr
+    if (*p != 0) {
+        fn_800D8448(*p);
+    }
 }
 
 asm void fn_800D87C4(void)
@@ -283,14 +280,12 @@ void *fn_800D8808(void *p)
     return (u8 *)(*(void **)((u8 *)p + 0x0)) + 0x18c;
 }
 
-asm void vec4_set(void)
+void vec4_set(f32 *p, f32 a, f32 b, f32 c, f32 d)
 {
-    nofralloc
-    stfs f1, 0x0(r3)
-    stfs f2, 0x4(r3)
-    stfs f3, 0x8(r3)
-    stfs f4, 0xc(r3)
-    blr
+    p[0] = a;
+    p[1] = b;
+    p[2] = c;
+    p[3] = d;
 }
 
 asm void fn_800D8828(void)
@@ -1516,14 +1511,11 @@ void *fn_800D98C0(void *obj)
     return *(void **)((char *)obj + 4);
 }
 
-asm void fn_800D98C8(void)
+void fn_800D98C8(f32 *p, f32 c)
 {
-    nofralloc
-    lfs f0, lbl_80881230
-    stfs f0, 0x0(r3)
-    stfs f0, 0x4(r3)
-    stfs f1, 0x8(r3)
-    blr
+    p[0] = lbl_80881230;
+    p[1] = lbl_80881230;
+    p[2] = c;
 }
 
 asm void fn_800D98DC(void)
