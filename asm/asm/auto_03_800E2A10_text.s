@@ -14316,31 +14316,31 @@
 .endfn fn_800EF2F0
 
 # .text:0xC8F4 | 0x800EF304 | size: 0x4
-.fn fn_800EF304, global
+.fn chara_task_onUpdatePost, global
 /* 800EF304 000E9964  4E 80 00 20 */	blr
-.endfn fn_800EF304
+.endfn chara_task_onUpdatePost
 
 # .text:0xC8F8 | 0x800EF308 | size: 0x8
-.fn fn_800EF308, global
+.fn chara_task_isTargetable, global
 /* 800EF308 000E9968  38 60 00 01 */	li r3, 0x1
 /* 800EF30C 000E996C  4E 80 00 20 */	blr
-.endfn fn_800EF308
+.endfn chara_task_isTargetable
 
 # .text:0xC900 | 0x800EF310 | size: 0xC
-.fn fn_800EF310, global
+.fn chara_task_clearTarget, global
 /* 800EF310 000E9970  38 00 00 00 */	li r0, 0x0
 /* 800EF314 000E9974  90 03 00 00 */	stw r0, 0x0(r3)
 /* 800EF318 000E9978  4E 80 00 20 */	blr
-.endfn fn_800EF310
+.endfn chara_task_clearTarget
 
 # .text:0xC90C | 0x800EF31C | size: 0x8
-.fn fn_800EF31C, global
+.fn chara_task_isDead, global
 /* 800EF31C 000E997C  38 60 00 00 */	li r3, 0x0
 /* 800EF320 000E9980  4E 80 00 20 */	blr
-.endfn fn_800EF31C
+.endfn chara_task_isDead
 
 # .text:0xC914 | 0x800EF324 | size: 0x44
-.fn fn_800EF324, global
+.fn chara_task_calcEyePos, global
 /* 800EF324 000E9984  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 800EF328 000E9988  C0 82 8D 3C */	lfs f4, lbl_808812DC@sda21(r0)
 /* 800EF32C 000E998C  C0 62 8D A8 */	lfs f3, lbl_80881348@sda21(r0)
@@ -14358,13 +14358,13 @@
 /* 800EF35C 000E99BC  D0 43 00 08 */	stfs f2, 0x8(r3)
 /* 800EF360 000E99C0  38 21 00 20 */	addi r1, r1, 0x20
 /* 800EF364 000E99C4  4E 80 00 20 */	blr
-.endfn fn_800EF324
+.endfn chara_task_calcEyePos
 
 # .text:0xC958 | 0x800EF368 | size: 0x8
-.fn fn_800EF368, global
+.fn chara_task_getViewAngle, global
 /* 800EF368 000E99C8  C0 22 8E 0C */	lfs f1, lbl_808813AC@sda21(r0)
 /* 800EF36C 000E99CC  4E 80 00 20 */	blr
-.endfn fn_800EF368
+.endfn chara_task_getViewAngle
 
 # .text:0xC960 | 0x800EF370 | size: 0x1C
 .fn fn_800EF370, global
@@ -14378,13 +14378,13 @@
 .endfn fn_800EF370
 
 # .text:0xC97C | 0x800EF38C | size: 0x8
-.fn fn_800EF38C, global
+.fn chara_task_getScale, global
 /* 800EF38C 000E99EC  C0 22 8D 38 */	lfs f1, lbl_808812D8@sda21(r0)
 /* 800EF390 000E99F0  4E 80 00 20 */	blr
-.endfn fn_800EF38C
+.endfn chara_task_getScale
 
 # .text:0xC984 | 0x800EF394 | size: 0x44
-.fn fn_800EF394, global
+.fn chara_task_calcLockOnPos, global
 /* 800EF394 000E99F4  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 800EF398 000E99F8  C0 82 8D 3C */	lfs f4, lbl_808812DC@sda21(r0)
 /* 800EF39C 000E99FC  C0 62 8E 10 */	lfs f3, lbl_808813B0@sda21(r0)
@@ -14402,17 +14402,17 @@
 /* 800EF3CC 000E9A2C  D0 43 00 08 */	stfs f2, 0x8(r3)
 /* 800EF3D0 000E9A30  38 21 00 20 */	addi r1, r1, 0x20
 /* 800EF3D4 000E9A34  4E 80 00 20 */	blr
-.endfn fn_800EF394
+.endfn chara_task_calcLockOnPos
 
 # .text:0xC9C8 | 0x800EF3D8 | size: 0x4
-.fn fn_800EF3D8, global
+.fn chara_task_onDamage, global
 /* 800EF3D8 000E9A38  4E 80 00 20 */	blr
-.endfn fn_800EF3D8
+.endfn chara_task_onDamage
 
 # .text:0xC9CC | 0x800EF3DC | size: 0x4
-.fn fn_800EF3DC, global
+.fn chara_task_onDeath, global
 /* 800EF3DC 000E9A3C  4E 80 00 20 */	blr
-.endfn fn_800EF3DC
+.endfn chara_task_onDeath
 
 # .text:0xC9D0 | 0x800EF3E0 | size: 0x8
 .fn fn_800EF3E0, global

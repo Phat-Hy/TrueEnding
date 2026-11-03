@@ -12647,11 +12647,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_80147B04
 	.4byte fn_801437D0
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_8014BDB0
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_801513D0
 	.4byte fn_800E854C
 	.4byte fn_800E8630
@@ -12659,9 +12659,9 @@
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_80138D70
 	.4byte fn_800E8FAC
 	.4byte fn_800E8FB4
@@ -12677,15 +12677,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_80041A20
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -15803,11 +15803,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_80147B04
 	.4byte fn_801437D0
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_801388B8
 	.4byte fn_8014BDB0
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_801513D0
 	.4byte fn_80152A20
 	.4byte fn_80152D10
@@ -15815,9 +15815,9 @@
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_80138D70
 	.4byte fn_800E8FAC
 	.4byte fn_800E8FB4
@@ -15833,15 +15833,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_8017CB6C
 	.4byte fn_80041A20
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -16137,11 +16137,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_80147B04
 	.4byte fn_801437D0
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_8014BDB0
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_801513D0
 	.4byte fn_800E854C
 	.4byte fn_800E8630
@@ -16149,9 +16149,9 @@
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_80138D70
 	.4byte fn_8035B8B0
 	.4byte fn_8035BBCC
@@ -16167,15 +16167,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_80041A20
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -16255,11 +16255,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_80147B04
 	.4byte fn_801437D0
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_8014BDB0
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_801513D0
 	.4byte fn_800E854C
 	.4byte fn_800E8630
@@ -16267,9 +16267,9 @@
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_80138D70
 	.4byte fn_8035B8B0
 	.4byte fn_8035BBCC
@@ -16285,15 +16285,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_80041A20
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -24518,11 +24518,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_80147B04
 	.4byte fn_801437D0
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_8014BDB0
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_801CCCFC
 	.4byte fn_800E854C
 	.4byte fn_800E8630
@@ -24530,9 +24530,9 @@
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_80138D70
 	.4byte fn_8035B8B0
 	.4byte fn_8035BBCC
@@ -24548,15 +24548,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_80041A20
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -26507,11 +26507,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_80147B04
 	.4byte fn_801437D0
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_801388B8
 	.4byte fn_8014BDB0
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_801513D0
 	.4byte fn_80152A20
 	.4byte fn_80152D10
@@ -26519,9 +26519,9 @@
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_80138D70
 	.4byte fn_800E8FAC
 	.4byte fn_800E8FB4
@@ -26537,15 +26537,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_8017CB6C
 	.4byte fn_80041A20
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -26899,11 +26899,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_80147B04
 	.4byte fn_801437D0
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_8014BDB0
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_80245ADC
 	.4byte fn_80245BBC
 	.4byte fn_800E8630
@@ -26911,9 +26911,9 @@
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_80138D70
 	.4byte fn_80246450
 	.4byte fn_80246478
@@ -26929,15 +26929,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_80041A20
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -26995,11 +26995,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_80147B04
 	.4byte fn_801437D0
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_8014BDB0
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_80247C1C
 	.4byte fn_80247C60
 	.4byte fn_800E8630
@@ -27007,9 +27007,9 @@
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_80138D70
 	.4byte fn_8035B8B0
 	.4byte fn_8035BBCC
@@ -27025,15 +27025,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_80041A20
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -27083,11 +27083,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_80249D40
 	.4byte fn_801437D0
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_8014BDB0
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_80249C14
 	.4byte fn_800E854C
 	.4byte fn_800E8630
@@ -27095,9 +27095,9 @@
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_80138D70
 	.4byte fn_8035B8B0
 	.4byte fn_8035BBCC
@@ -27113,15 +27113,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_80041A20
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -27171,11 +27171,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_80147B04
 	.4byte fn_801437D0
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_8014BDB0
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_801513D0
 	.4byte fn_800E854C
 	.4byte fn_8024A608
@@ -27183,9 +27183,9 @@
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_80138D70
 	.4byte fn_8035B8B0
 	.4byte fn_8035BBCC
@@ -27201,15 +27201,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_80041A20
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -27282,11 +27282,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_80147B04
 	.4byte fn_8024CD24
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_8014BDB0
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_8024C46C
 	.4byte fn_8024CC78
 	.4byte fn_800E8630
@@ -27294,9 +27294,9 @@
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_80138D70
 	.4byte fn_8035B8B0
 	.4byte fn_8035BBCC
@@ -27312,15 +27312,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_80041A20
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -27412,11 +27412,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_80147B04
 	.4byte fn_801437D0
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_8014BDB0
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_80252A90
 	.4byte fn_80252C40
 	.4byte fn_80252E48
@@ -27424,9 +27424,9 @@
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_802529CC
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_80138D70
 	.4byte fn_8035B8B0
 	.4byte fn_8035BBCC
@@ -27442,15 +27442,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_80041A20
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -27500,11 +27500,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_80147B04
 	.4byte fn_8025589C
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_8014BDB0
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_805A4018
 	.4byte fn_80254C9C
 	.4byte fn_800E8630
@@ -27512,9 +27512,9 @@
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_80138D70
 	.4byte fn_8035B8B0
 	.4byte fn_8035BBCC
@@ -27530,15 +27530,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_80041A20
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -27634,11 +27634,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_80147B04
 	.4byte fn_801437D0
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_8014BDB0
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_80259604
 	.4byte fn_800E854C
 	.4byte fn_800E8630
@@ -27646,9 +27646,9 @@
 	.4byte fn_80257A94
 	.4byte fn_80257B50
 	.4byte fn_80258368
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_80257A14
 	.4byte fn_8035B8B0
 	.4byte fn_8035BBCC
@@ -27664,15 +27664,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_80041A20
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -27730,11 +27730,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_80147B04
 	.4byte fn_801437D0
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_8014BDB0
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_8025B5D8
 	.4byte fn_8025B7DC
 	.4byte fn_800E8630
@@ -27742,9 +27742,9 @@
 	.4byte fn_8025C92C
 	.4byte fn_80148340
 	.4byte fn_801489CC
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_80138D70
 	.4byte fn_8035B8B0
 	.4byte fn_8035BBCC
@@ -27760,15 +27760,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_80041A20
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -27844,11 +27844,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_80147B04
 	.4byte fn_801437D0
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_8014BDB0
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_8025F7D0
 	.4byte fn_8025F8C8
 	.4byte fn_800E8630
@@ -27856,9 +27856,9 @@
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_80138D70
 	.4byte fn_8035B8B0
 	.4byte fn_8035BBCC
@@ -27874,15 +27874,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_80041A20
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -27956,11 +27956,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_80147B04
 	.4byte fn_801437D0
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_8014BDB0
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_80260EBC
 	.4byte fn_80260F88
 	.4byte fn_800E8630
@@ -27968,9 +27968,9 @@
 	.4byte fn_802626E4
 	.4byte fn_80148340
 	.4byte fn_801489CC
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_80138D70
 	.4byte fn_8035B8B0
 	.4byte fn_8035BBCC
@@ -27986,15 +27986,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_802627E8
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -28044,11 +28044,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_80147B04
 	.4byte fn_801437D0
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_8014BDB0
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_80263580
 	.4byte fn_802639C8
 	.4byte fn_800E8630
@@ -28056,9 +28056,9 @@
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_80138D70
 	.4byte fn_8035B8B0
 	.4byte fn_8035BBCC
@@ -28074,15 +28074,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_80041A20
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -28197,11 +28197,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_80147B04
 	.4byte fn_801437D0
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_8014BDB0
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_80266254
 	.4byte fn_80266A24
 	.4byte fn_800E8630
@@ -28209,9 +28209,9 @@
 	.4byte fn_8026FBB8
 	.4byte fn_80148340
 	.4byte fn_801489CC
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_80267C0C
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_80138D70
 	.4byte fn_80267B60
 	.4byte fn_80267B88
@@ -28227,15 +28227,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80267CB4
 	.4byte fn_80267E7C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_80041A20
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -28310,11 +28310,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_80147B04
 	.4byte fn_801437D0
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_8014BDB0
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_80270774
 	.4byte fn_802709E0
 	.4byte fn_800E8630
@@ -28322,9 +28322,9 @@
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_80138D70
 	.4byte fn_8035B8B0
 	.4byte fn_8035BBCC
@@ -28340,15 +28340,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_80041A20
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -28437,11 +28437,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_80147B04
 	.4byte fn_801437D0
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_8014BDB0
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_80274268
 	.4byte fn_802744BC
 	.4byte fn_800E8630
@@ -28449,9 +28449,9 @@
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_80274518
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_80138D70
 	.4byte fn_8035B8B0
 	.4byte fn_8035BBCC
@@ -28467,15 +28467,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_80041A20
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -28588,11 +28588,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_80147B04
 	.4byte fn_801437D0
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_8014BDB0
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_8027AC38
 	.4byte fn_8027AF4C
 	.4byte fn_800E8630
@@ -28600,9 +28600,9 @@
 	.4byte fn_8027B118
 	.4byte fn_80148340
 	.4byte fn_80274518
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_80138D70
 	.4byte fn_8035B8B0
 	.4byte fn_8035BBCC
@@ -28618,15 +28618,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_80041A20
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -28747,11 +28747,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_80147B04
 	.4byte fn_801437D0
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_8014BDB0
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_8027E410
 	.4byte fn_8027E678
 	.4byte fn_800E8630
@@ -28759,9 +28759,9 @@
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_8027E8EC
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_80138D70
 	.4byte fn_8035B8B0
 	.4byte fn_8035BBCC
@@ -28777,15 +28777,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_80041A20
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -28855,11 +28855,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_80147B04
 	.4byte fn_801437D0
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_8014BDB0
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_80283FD4
 	.4byte fn_8028429C
 	.4byte fn_800E8630
@@ -28867,9 +28867,9 @@
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_80138D70
 	.4byte fn_8035B8B0
 	.4byte fn_8035BBCC
@@ -28885,15 +28885,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_80041A20
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -28968,11 +28968,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_80147B04
 	.4byte fn_801437D0
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_8014BDB0
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_80289978
 	.4byte fn_80289C98
 	.4byte fn_800E8630
@@ -28982,7 +28982,7 @@
 	.4byte fn_8028A5D4
 	.4byte fn_80291440
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_8028A97C
 	.4byte fn_8035B8B0
 	.4byte fn_8035BBCC
@@ -28998,15 +28998,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_80041A20
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_802936B4
 	.4byte fn_80293368
@@ -29095,11 +29095,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_80147B04
 	.4byte fn_801437D0
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_8014BDB0
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_802956D8
 	.4byte fn_80295988
 	.4byte fn_800E8630
@@ -29109,7 +29109,7 @@
 	.4byte fn_80295DB8
 	.4byte fn_8029BDC8
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_80296160
 	.4byte fn_8029A564
 	.4byte fn_8029A580
@@ -29125,15 +29125,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_80041A20
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_8029CA84
 	.4byte fn_8029C728
@@ -29240,11 +29240,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_80147B04
 	.4byte fn_8025589C
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_8014BDB0
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_805A4018
 	.4byte fn_8029DEF8
 	.4byte fn_800E8630
@@ -29252,9 +29252,9 @@
 	.4byte fn_80152A24
 	.4byte fn_8029E2AC
 	.4byte fn_8029E480
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_8029E848
 	.4byte fn_8035B8B0
 	.4byte fn_8035BBCC
@@ -29270,15 +29270,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_80041A20
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -29393,11 +29393,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_80147B04
 	.4byte fn_801437D0
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_8014BDB0
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_802A6D58
 	.4byte fn_802A6E80
 	.4byte fn_800E8630
@@ -29405,9 +29405,9 @@
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_802A7F9C
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_802A807C
 	.4byte fn_802A8140
 	.4byte fn_802A8148
@@ -29423,15 +29423,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_80041A20
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -29538,11 +29538,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_802AE674
 	.4byte fn_8025589C
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_802B1F2C
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_805A4018
 	.4byte fn_802ADF34
 	.4byte fn_800E8630
@@ -29550,9 +29550,9 @@
 	.4byte fn_80152A24
 	.4byte fn_802AE0B8
 	.4byte fn_802AE558
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_802AEAC4
 	.4byte fn_8035B8B0
 	.4byte fn_8035BBCC
@@ -29568,15 +29568,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_80041A20
-	.4byte fn_800EF324
+	.4byte chara_task_calcEyePos
 	.4byte fn_802B12C4
 	.4byte fn_802B12CC
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -29756,11 +29756,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_80147B04
 	.4byte fn_8025589C
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_8014BDB0
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_802B3498
 	.4byte fn_802B3534
 	.4byte fn_800E8630
@@ -29768,9 +29768,9 @@
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_802B5134
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_802B5214
 	.4byte fn_8035B8B0
 	.4byte fn_8035BBCC
@@ -29786,15 +29786,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_80041A20
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -29892,11 +29892,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_80147B04
 	.4byte fn_8025589C
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_802B9BC8
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_805A4018
 	.4byte fn_802B7E60
 	.4byte fn_800E8630
@@ -29904,9 +29904,9 @@
 	.4byte fn_80152A24
 	.4byte fn_802B9DB4
 	.4byte fn_802BA5E0
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_80138D70
 	.4byte fn_8035B8B0
 	.4byte fn_8035BBCC
@@ -29922,15 +29922,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_80041A20
-	.4byte fn_800EF324
+	.4byte chara_task_calcEyePos
 	.4byte fn_802BA64C
 	.4byte fn_802BA67C
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -30021,7 +30021,7 @@
 	.4byte fn_800EF3E0
 	.4byte fn_802BCE84
 	.4byte fn_802BCD3C
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_8014BDB0
 	.4byte fn_8013C564
@@ -30033,9 +30033,9 @@
 	.4byte fn_80152A24
 	.4byte fn_802BBCDC
 	.4byte fn_802BC240
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_802BB368
 	.4byte fn_8035B8B0
 	.4byte fn_8035BBCC
@@ -30051,15 +30051,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_80041A20
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -30135,11 +30135,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_80147B04
 	.4byte fn_802C2B68
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_8014BDB0
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_802C25C4
 	.4byte fn_802C2944
 	.4byte fn_800E8630
@@ -30147,9 +30147,9 @@
 	.4byte fn_80152A24
 	.4byte fn_802C5068
 	.4byte fn_802C5D4C
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_802C3DF8
 	.4byte fn_8035B8B0
 	.4byte fn_8035BBCC
@@ -30165,15 +30165,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_80041A20
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_802C2AE8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -30243,11 +30243,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_802C9388
 	.4byte fn_802C9750
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_8014BDB0
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_802C881C
 	.4byte fn_802C8930
 	.4byte fn_800E8630
@@ -30255,9 +30255,9 @@
 	.4byte fn_80152A24
 	.4byte fn_802C8A68
 	.4byte fn_802C92D4
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_802CCAAC
 	.4byte fn_8035B8B0
 	.4byte fn_8035BBCC
@@ -30273,15 +30273,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_80041A20
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -30331,11 +30331,11 @@
 	.4byte fn_802CFE78
 	.4byte fn_802CCD48
 	.4byte fn_801437D0
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_8014BDB0
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_802CCBD4
 	.4byte fn_802CCC24
 	.4byte fn_800E8630
@@ -30343,9 +30343,9 @@
 	.4byte fn_80152A24
 	.4byte fn_802CE8EC
 	.4byte fn_802CED80
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_80138D70
 	.4byte fn_8035B8B0
 	.4byte fn_8035BBCC
@@ -30361,15 +30361,15 @@
 	.4byte fn_800EF370
 	.4byte fn_802CE638
 	.4byte fn_802CE808
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_80041A20
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -30457,11 +30457,11 @@
 	.4byte fn_802CFE78
 	.4byte fn_802CEF60
 	.4byte fn_801437D0
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_8014BDB0
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_802CE430
 	.4byte fn_802CE504
 	.4byte fn_800E8630
@@ -30469,9 +30469,9 @@
 	.4byte fn_80152A24
 	.4byte fn_802CE8EC
 	.4byte fn_802CED80
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_80138D70
 	.4byte fn_8035B8B0
 	.4byte fn_8035BBCC
@@ -30487,15 +30487,15 @@
 	.4byte fn_800EF370
 	.4byte fn_802CE638
 	.4byte fn_802CE808
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_80041A20
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -30540,11 +30540,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_802D320C
 	.4byte fn_8025589C
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_8014BDB0
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_802D22A0
 	.4byte fn_802D2820
 	.4byte fn_800E8630
@@ -30552,9 +30552,9 @@
 	.4byte fn_80152A24
 	.4byte fn_802D2844
 	.4byte fn_802D30DC
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_802D32C8
 	.4byte fn_8035B8B0
 	.4byte fn_8035BBCC
@@ -30570,15 +30570,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_80041A20
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -30691,11 +30691,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_802D9834
 	.4byte fn_801437D0
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_8014BDB0
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_802D9248
 	.4byte fn_802D92CC
 	.4byte fn_800E8630
@@ -30703,9 +30703,9 @@
 	.4byte fn_80152A24
 	.4byte fn_802D92E4
 	.4byte fn_802D977C
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_80138D70
 	.4byte fn_8035B8B0
 	.4byte fn_8035BBCC
@@ -30721,15 +30721,15 @@
 	.4byte fn_802DDCDC
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_80041A20
-	.4byte fn_800EF324
+	.4byte chara_task_calcEyePos
 	.4byte fn_802D9938
 	.4byte fn_802D99D8
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_802DDC3C
 	.4byte fn_802D9D5C
@@ -30819,11 +30819,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_802DFFF4
 	.4byte fn_8025589C
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_8014BDB0
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_802DF96C
 	.4byte fn_802DFA78
 	.4byte fn_800E8630
@@ -30831,9 +30831,9 @@
 	.4byte fn_80152A24
 	.4byte fn_802DFA9C
 	.4byte fn_802DFF3C
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_80138D70
 	.4byte fn_8035B8B0
 	.4byte fn_8035BBCC
@@ -30849,15 +30849,15 @@
 	.4byte fn_802E1D30
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_80041A20
 	.4byte fn_802E1CA0
 	.4byte fn_802E0100
 	.4byte fn_802E01A0
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_802E1D50
 	.4byte fn_8017BDDC
@@ -30961,11 +30961,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_80147B04
 	.4byte fn_802E5970
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_8014BDB0
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_802E2E88
 	.4byte fn_802E2F24
 	.4byte fn_800E8630
@@ -30973,9 +30973,9 @@
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_802E315C
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_80138D70
 	.4byte fn_8035B8B0
 	.4byte fn_8035BBCC
@@ -30991,15 +30991,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_80041A20
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -31049,11 +31049,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_80147B04
 	.4byte fn_802E82F0
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_8014BDB0
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_802E7120
 	.4byte fn_802E71B0
 	.4byte fn_800E8630
@@ -31061,9 +31061,9 @@
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_802E7298
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_80138D70
 	.4byte fn_8035B8B0
 	.4byte fn_8035BBCC
@@ -31079,15 +31079,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_80041A20
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -31147,11 +31147,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_802EA27C
 	.4byte fn_8025589C
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_8014BDB0
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_802E9DEC
 	.4byte fn_802E9FC8
 	.4byte fn_800E8630
@@ -31159,9 +31159,9 @@
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_80138D70
 	.4byte fn_8035B8B0
 	.4byte fn_8035BBCC
@@ -31177,15 +31177,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_80041A20
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -31259,11 +31259,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_802EA27C
 	.4byte fn_8025589C
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_8014BDB0
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_802EDDA0
 	.4byte fn_802EDED0
 	.4byte fn_800E8630
@@ -31271,9 +31271,9 @@
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_80138D70
 	.4byte fn_8035B8B0
 	.4byte fn_8035BBCC
@@ -31289,15 +31289,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_80041A20
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -31420,11 +31420,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_80147B04
 	.4byte fn_8025589C
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_802F1490
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_805A4018
 	.4byte fn_802EF0FC
 	.4byte fn_800E8630
@@ -31432,9 +31432,9 @@
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_80138D70
 	.4byte fn_8035B8B0
 	.4byte fn_8035BBCC
@@ -31450,15 +31450,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_80041A20
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -31548,11 +31548,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_802F2AF8
 	.4byte fn_801437D0
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_8014BDB0
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_802F2D1C
 	.4byte fn_802F2FA4
 	.4byte fn_800E8630
@@ -31560,7 +31560,7 @@
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
 	.4byte fn_802F6E5C
 	.4byte fn_80138D70
@@ -31578,15 +31578,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_80041A20
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -31661,11 +31661,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_802F8678
 	.4byte fn_801437D0
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_8014BDB0
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_802F87E0
 	.4byte fn_802F8A60
 	.4byte fn_800E8630
@@ -31673,7 +31673,7 @@
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
 	.4byte fn_802FC848
 	.4byte fn_80138D70
@@ -31691,15 +31691,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_80041A20
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -31767,11 +31767,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_802FF604
 	.4byte fn_801437D0
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_8014BDB0
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_802FDDAC
 	.4byte fn_802FE3E4
 	.4byte fn_802FF550
@@ -31779,9 +31779,9 @@
 	.4byte fn_80152A24
 	.4byte fn_802FE630
 	.4byte fn_802FF2E4
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_802FF4B4
 	.4byte fn_8035B8B0
 	.4byte fn_8035BBCC
@@ -31797,15 +31797,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_80041A20
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -31919,11 +31919,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_80308D14
 	.4byte fn_8025589C
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_80309E6C
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_805A4018
 	.4byte fn_803067E0
 	.4byte fn_800E8630
@@ -31931,9 +31931,9 @@
 	.4byte fn_80152A24
 	.4byte fn_80308E6C
 	.4byte fn_80309698
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_80309704
 	.4byte fn_8035B8B0
 	.4byte fn_8035BBCC
@@ -31949,15 +31949,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_80041A20
-	.4byte fn_800EF324
+	.4byte chara_task_calcEyePos
 	.4byte fn_803097AC
 	.4byte fn_803098D0
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -32123,11 +32123,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_8030D348
 	.4byte fn_801437D0
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_8014BDB0
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_8030B41C
 	.4byte fn_8030B5B0
 	.4byte fn_800E8630
@@ -32135,9 +32135,9 @@
 	.4byte fn_80152A24
 	.4byte fn_8030D5C8
 	.4byte fn_8030D9F0
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_80138D70
 	.4byte fn_8035B8B0
 	.4byte fn_8035BBCC
@@ -32153,15 +32153,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_80041A20
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -32223,11 +32223,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_80147B04
 	.4byte fn_8025589C
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_80310098
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_805A4018
 	.4byte fn_8030E36C
 	.4byte fn_800E8630
@@ -32235,9 +32235,9 @@
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_80138D70
 	.4byte fn_8035B8B0
 	.4byte fn_8035BBCC
@@ -32253,15 +32253,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_80041A20
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -32351,11 +32351,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_80147B04
 	.4byte fn_8025589C
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_8031348C
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_805A4018
 	.4byte fn_803111AC
 	.4byte fn_800E8630
@@ -32363,9 +32363,9 @@
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_80138D70
 	.4byte fn_8035B8B0
 	.4byte fn_8035BBCC
@@ -32381,15 +32381,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_80041A20
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -32507,7 +32507,7 @@
 	.4byte fn_800EBF1C
 	.4byte fn_80316034
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_805A4018
 	.4byte fn_80313FE8
 	.4byte fn_800E8630
@@ -32515,9 +32515,9 @@
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_80138D70
 	.4byte fn_8035B8B0
 	.4byte fn_8035BBCC
@@ -32536,12 +32536,12 @@
 	.4byte fn_803161F0
 	.4byte fn_800EE494
 	.4byte fn_80041A20
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -32624,11 +32624,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_80147B04
 	.4byte fn_801437D0
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_8014BDB0
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_80317110
 	.4byte fn_80317188
 	.4byte fn_800E8630
@@ -32636,9 +32636,9 @@
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_80138D70
 	.4byte fn_8035B8B0
 	.4byte fn_8035BBCC
@@ -32654,15 +32654,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_80041A20
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -32712,11 +32712,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_80147B04
 	.4byte fn_801437D0
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_8014BDB0
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_8031C534
 	.4byte fn_8031C584
 	.4byte fn_800E8630
@@ -32724,9 +32724,9 @@
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_80138D70
 	.4byte fn_8035B8B0
 	.4byte fn_8035BBCC
@@ -32742,15 +32742,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_80041A20
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -32848,11 +32848,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_80321BCC
 	.4byte fn_8032130C
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_8014BDB0
 	.4byte fn_803209D0
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_8031FBFC
 	.4byte fn_800E854C
 	.4byte fn_800E8630
@@ -32860,9 +32860,9 @@
 	.4byte fn_80152A24
 	.4byte fn_80321E20
 	.4byte fn_8032268C
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_80138D70
 	.4byte fn_8035B8B0
 	.4byte fn_8035BBCC
@@ -32878,15 +32878,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_80041A20
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -32996,11 +32996,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_80325BA0
 	.4byte fn_803252E0
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_8014BDB0
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_80323CDC
 	.4byte fn_80323E50
 	.4byte fn_800E8630
@@ -33008,9 +33008,9 @@
 	.4byte fn_80152A24
 	.4byte fn_80325F2C
 	.4byte fn_80326798
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_80138D70
 	.4byte fn_8035B8B0
 	.4byte fn_8035BBCC
@@ -33026,15 +33026,15 @@
 	.4byte fn_8032418C
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_80041A20
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -33096,11 +33096,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_80147B04
 	.4byte fn_801437D0
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_8014BDB0
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_8032D5EC
 	.4byte fn_8032DAA0
 	.4byte fn_800E8630
@@ -33108,9 +33108,9 @@
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_80138D70
 	.4byte fn_8035B8B0
 	.4byte fn_8035BBCC
@@ -33126,15 +33126,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_80041A20
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte fn_8032DDC8
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -33208,11 +33208,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_80147B04
 	.4byte fn_801437D0
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_8014BDB0
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_8032EDC4
 	.4byte fn_800E854C
 	.4byte fn_8032EF2C
@@ -33220,9 +33220,9 @@
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_80138D70
 	.4byte fn_8035B8B0
 	.4byte fn_8035BBCC
@@ -33238,15 +33238,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_8032ECBC
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -33296,11 +33296,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_80147B04
 	.4byte fn_803349D8
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_8014BDB0
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_803349EC
 	.4byte fn_80334A64
 	.4byte fn_800E8630
@@ -33308,9 +33308,9 @@
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_80138D70
 	.4byte fn_8035B8B0
 	.4byte fn_8035BBCC
@@ -33326,15 +33326,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_80041A20
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte fn_80334AB0
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -33469,11 +33469,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_80147B04
 	.4byte fn_8025589C
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_80338568
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_805A4018
 	.4byte fn_80335788
 	.4byte fn_800E8630
@@ -33481,9 +33481,9 @@
 	.4byte fn_803386FC
 	.4byte fn_80148340
 	.4byte fn_801489CC
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_80138D70
 	.4byte fn_8035B8B0
 	.4byte fn_8035BBCC
@@ -33499,15 +33499,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_80338770
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -33598,11 +33598,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_80147B04
 	.4byte fn_8033C364
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_8014BDB0
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_80339F8C
 	.4byte fn_8033A154
 	.4byte fn_800E8630
@@ -33610,9 +33610,9 @@
 	.4byte fn_80344BD8
 	.4byte fn_8033ACB0
 	.4byte fn_8033BD74
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_8033BFE8
 	.4byte fn_80344BF4
 	.4byte fn_80344C1C
@@ -33628,15 +33628,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_80041A20
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -33748,11 +33748,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_80147B04
 	.4byte fn_801437D0
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_8014BDB0
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_80346990
 	.4byte fn_80346A34
 	.4byte fn_800E8630
@@ -33760,9 +33760,9 @@
 	.4byte fn_80152A24
 	.4byte fn_80347218
 	.4byte fn_803482DC
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_80348550
 	.4byte fn_8035B8B0
 	.4byte fn_8035BBCC
@@ -33778,15 +33778,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80353F50
 	.4byte fn_803540BC
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_80041A20
-	.4byte fn_800EF324
+	.4byte chara_task_calcEyePos
 	.4byte fn_80352EC8
 	.4byte fn_80352F88
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -33862,7 +33862,7 @@
 	.4byte fn_800EBF1C
 	.4byte fn_8014BDB0
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_8035586C
 	.4byte fn_803558C8
 	.4byte fn_800E8630
@@ -33870,9 +33870,9 @@
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_80138D70
 	.4byte fn_8035B8B0
 	.4byte fn_8035BBCC
@@ -33888,15 +33888,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_80041A20
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte fn_80355938
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -34008,11 +34008,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_80147B04
 	.4byte fn_8025589C
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_8035B034
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_805A4018
 	.4byte fn_80357004
 	.4byte fn_800E8630
@@ -34020,9 +34020,9 @@
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_80138D70
 	.4byte fn_8035B234
 	.4byte fn_8035B368
@@ -34038,15 +34038,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_80041A20
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -34106,11 +34106,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_80147B04
 	.4byte fn_801437D0
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_8014BDB0
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_801513D0
 	.4byte fn_800E854C
 	.4byte fn_800E8630
@@ -34118,9 +34118,9 @@
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_80138D70
 	.4byte fn_8035B8B0
 	.4byte fn_8035BBCC
@@ -34136,15 +34136,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_80041A20
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -34222,11 +34222,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_80147B04
 	.4byte fn_801437D0
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_8014BDB0
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_8035D7D4
 	.4byte fn_800E854C
 	.4byte fn_8035DA0C
@@ -34234,9 +34234,9 @@
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_80138D70
 	.4byte fn_8035B8B0
 	.4byte fn_8035BBCC
@@ -34252,15 +34252,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_8035D6B8
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -34550,11 +34550,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_80147B04
 	.4byte fn_801437D0
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_8014BDB0
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_80365424
 	.4byte fn_800E854C
 	.4byte fn_800E8630
@@ -34562,9 +34562,9 @@
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_80138D70
 	.4byte fn_800E8FAC
 	.4byte fn_800E8FB4
@@ -34580,15 +34580,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_80041A20
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -40608,11 +40608,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_80147B04
 	.4byte fn_801437D0
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_801388B8
 	.4byte fn_8014BDB0
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_801513D0
 	.4byte fn_80152A20
 	.4byte fn_80152D10
@@ -40620,9 +40620,9 @@
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_80138D70
 	.4byte fn_800E8FAC
 	.4byte fn_800E8FB4
@@ -40638,15 +40638,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_8017CB6C
 	.4byte fn_80041A20
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -40936,11 +40936,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_80147B04
 	.4byte fn_801437D0
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_801388B8
 	.4byte fn_8014BDB0
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_801513D0
 	.4byte fn_80152A20
 	.4byte fn_80152D10
@@ -40948,9 +40948,9 @@
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_80138D70
 	.4byte fn_800E8FAC
 	.4byte fn_800E8FB4
@@ -40966,15 +40966,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_8017CB6C
 	.4byte fn_80041A20
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -41680,11 +41680,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_80147B04
 	.4byte fn_801437D0
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_8014BDB0
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_80452F0C
 	.4byte fn_80452F10
 	.4byte fn_800E8630
@@ -41692,9 +41692,9 @@
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_80138D70
 	.4byte fn_8035B8B0
 	.4byte fn_8035BBCC
@@ -41710,15 +41710,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_80041A20
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -41768,11 +41768,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_80147B04
 	.4byte fn_801437D0
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_8014BDB0
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_804549E8
 	.4byte fn_804549F8
 	.4byte fn_800E8630
@@ -41780,9 +41780,9 @@
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_80454D08
 	.4byte fn_8035B8B0
 	.4byte fn_8035BBCC
@@ -41798,15 +41798,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_80041A20
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -41907,7 +41907,7 @@
 	.4byte fn_800EF3E0
 	.4byte fn_8045B594
 	.4byte fn_8045B40C
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_8014BDB0
 	.4byte fn_8013C564
@@ -41919,9 +41919,9 @@
 	.4byte fn_80152A24
 	.4byte fn_80459FD0
 	.4byte fn_8045A8F0
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_80459EBC
 	.4byte fn_8035B8B0
 	.4byte fn_8035BBCC
@@ -41937,15 +41937,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_80041A20
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_80459F24
 	.4byte fn_80459FB8
-	.4byte fn_800EF304
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_8045F914
 	.4byte fn_8045F6E0
@@ -42044,11 +42044,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_80461520
 	.4byte fn_804628B4
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_8014BDB0
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_80460A94
 	.4byte fn_80460B48
 	.4byte fn_800E8630
@@ -42056,9 +42056,9 @@
 	.4byte fn_80152A24
 	.4byte fn_80460F18
 	.4byte fn_80461398
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_80460EF0
 	.4byte fn_8035B8B0
 	.4byte fn_8035BBCC
@@ -42074,15 +42074,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_80041A20
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -44924,11 +44924,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_80147B04
 	.4byte fn_801437D0
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_8014BDB0
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_801513D0
 	.4byte fn_800E854C
 	.4byte fn_800E8630
@@ -44936,9 +44936,9 @@
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_80138D70
 	.4byte fn_8035B8B0
 	.4byte fn_8035BBCC
@@ -44954,15 +44954,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_80041A20
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -49738,11 +49738,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_80147B04
 	.4byte fn_801437D0
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_8014BDB0
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_805473E0
 	.4byte fn_80547468
 	.4byte fn_800E8630
@@ -49750,9 +49750,9 @@
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_80138D70
 	.4byte fn_8035B8B0
 	.4byte fn_8035BBCC
@@ -49768,14 +49768,14 @@
 	.4byte fn_800EF370
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_80041A20
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
+	.4byte chara_task_isTargetable
 	.4byte fn_80546A4C
 	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
@@ -49856,11 +49856,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_80147B04
 	.4byte fn_801437D0
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_801388B8
 	.4byte fn_8014BDB0
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_801513D0
 	.4byte fn_80152A20
 	.4byte fn_80152D10
@@ -49868,9 +49868,9 @@
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_80138D70
 	.4byte fn_800E8FAC
 	.4byte fn_800E8FB4
@@ -49886,15 +49886,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_8017CB6C
 	.4byte fn_80041A20
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -50018,11 +50018,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_80147B04
 	.4byte fn_801437D0
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_8014BDB0
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_801513D0
 	.4byte fn_800E854C
 	.4byte fn_800E8630
@@ -50030,9 +50030,9 @@
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_80138D70
 	.4byte fn_800E8FAC
 	.4byte fn_800E8FB4
@@ -50048,15 +50048,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_80041A20
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -51793,11 +51793,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_80568B9C
 	.4byte fn_805682DC
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_8014BDB0
 	.4byte fn_8056795C
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_80566F04
 	.4byte fn_800E854C
 	.4byte fn_800E8630
@@ -51805,9 +51805,9 @@
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_80138D70
 	.4byte fn_8035B8B0
 	.4byte fn_8035BBCC
@@ -51823,15 +51823,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_80041A20
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC
@@ -54172,11 +54172,11 @@
 	.4byte fn_800EF3E0
 	.4byte fn_80147B04
 	.4byte fn_8025589C
-	.4byte fn_800EF3DC
+	.4byte chara_task_onDeath
 	.4byte fn_800EBF1C
 	.4byte fn_8014BDB0
 	.4byte fn_8013C564
-	.4byte fn_800EF3D8
+	.4byte chara_task_onDamage
 	.4byte fn_805A4018
 	.4byte fn_804F2C44
 	.4byte fn_800E8630
@@ -54184,9 +54184,9 @@
 	.4byte fn_80152A24
 	.4byte fn_80148340
 	.4byte fn_801489CC
-	.4byte fn_800EF394
+	.4byte chara_task_calcLockOnPos
 	.4byte fn_801501F0
-	.4byte fn_800EF38C
+	.4byte chara_task_getScale
 	.4byte fn_80138D70
 	.4byte fn_8035B8B0
 	.4byte fn_8035BBCC
@@ -54202,15 +54202,15 @@
 	.4byte fn_800EF370
 	.4byte fn_80176B68
 	.4byte fn_80176D2C
-	.4byte fn_800EF368
+	.4byte chara_task_getViewAngle
 	.4byte fn_800EE494
 	.4byte fn_80041A20
-	.4byte fn_800EF324
-	.4byte fn_800EF31C
-	.4byte fn_800EF310
+	.4byte chara_task_calcEyePos
+	.4byte chara_task_isDead
+	.4byte chara_task_clearTarget
 	.4byte fn_8017B0F8
-	.4byte fn_800EF308
-	.4byte fn_800EF304
+	.4byte chara_task_isTargetable
+	.4byte chara_task_onUpdatePost
 	.4byte map_area_isNavigable
 	.4byte fn_800EF2F0
 	.4byte fn_8017BDDC

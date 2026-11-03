@@ -100,17 +100,17 @@ void fn_800EF270(void);
 f32 fn_800EF2AC(void);
 void fn_800EF2B4(void);
 void fn_800EF2F0(void);
-void fn_800EF304(void);
-u32 fn_800EF308(void);
-void fn_800EF310(void *p);
-u32 fn_800EF31C(void);
-void fn_800EF324(void);
-f32 fn_800EF368(void);
+void chara_task_onUpdatePost(void);
+u32 chara_task_isTargetable(void);
+void chara_task_clearTarget(void *p);
+u32 chara_task_isDead(void);
+void chara_task_calcEyePos(void);
+f32 chara_task_getViewAngle(void);
 void fn_800EF370(void);
-f32 fn_800EF38C(void);
-void fn_800EF394(void);
-void fn_800EF3D8(void);
-void fn_800EF3DC(void);
+f32 chara_task_getScale(void);
+void chara_task_calcLockOnPos(void);
+void chara_task_onDamage(void);
+void chara_task_onDeath(void);
 u32 fn_800EF3E0(void);
 void fn_800EF3E8(void);
 void cam_initStickBindings(void);
@@ -1508,26 +1508,26 @@ asm void fn_800EF2F0(void)
     blr
 }
 
-void fn_800EF304(void)
+void chara_task_onUpdatePost(void)
 {
 }
 
-u32 fn_800EF308(void)
+u32 chara_task_isTargetable(void)
 {
     return 1;
 }
 
-void fn_800EF310(void *p)
+void chara_task_clearTarget(void *p)
 {
     *(u32 *)p = 0;
 }
 
-u32 fn_800EF31C(void)
+u32 chara_task_isDead(void)
 {
     return 0;
 }
 
-asm void fn_800EF324(void)
+asm void chara_task_calcEyePos(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -1549,7 +1549,7 @@ asm void fn_800EF324(void)
     blr
 }
 
-f32 fn_800EF368(void)
+f32 chara_task_getViewAngle(void)
 {
     return *(f32 *)&lbl_808813AC;
 }
@@ -1566,12 +1566,12 @@ asm void fn_800EF370(void)
     blr
 }
 
-f32 fn_800EF38C(void)
+f32 chara_task_getScale(void)
 {
     return *(f32 *)&lbl_808812D8;
 }
 
-asm void fn_800EF394(void)
+asm void chara_task_calcLockOnPos(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -1593,11 +1593,11 @@ asm void fn_800EF394(void)
     blr
 }
 
-void fn_800EF3D8(void)
+void chara_task_onDamage(void)
 {
 }
 
-void fn_800EF3DC(void)
+void chara_task_onDeath(void)
 {
 }
 
