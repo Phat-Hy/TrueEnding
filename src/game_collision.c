@@ -3,7 +3,7 @@
 
 /* External function declarations */
 extern void battle_calcActorDistance(void);
-extern void fn_8001ADE8(void);
+extern void battle_calcTargetDistance(void);
 extern void battle_getCharacterState(void);
 extern void fn_8001B5DC(void);
 extern void fn_8001B634(void);
@@ -1129,7 +1129,7 @@ lbl_fn_80025E30_00000E58:
     li r3, 0x0
     b lbl_fn_80025E30_00000E70
 lbl_fn_80025E30_00000E60:
-    bl fn_8001ADE8
+    bl battle_calcTargetDistance
     fctiwz f0, f1
     stfd f0, 0x68(r1)
     lwz r3, 0x6c(r1)
@@ -1268,7 +1268,7 @@ lbl_fn_800261C0_00001044:
     li r3, 0x0
     b lbl_fn_800261C0_0000105C
 lbl_fn_800261C0_0000104C:
-    bl fn_8001ADE8
+    bl battle_calcTargetDistance
     fctiwz f0, f1
     stfd f0, 0x18(r1)
     lwz r3, 0x1c(r1)
@@ -1628,7 +1628,7 @@ lbl_fn_80026570_00001538:
     li r3, 0x0
     b lbl_fn_80026570_00001550
 lbl_fn_80026570_00001540:
-    bl fn_8001ADE8
+    bl battle_calcTargetDistance
     fctiwz f0, f1
     stfd f0, 0x88(r1)
     lwz r3, 0x8c(r1)
@@ -1915,7 +1915,7 @@ lbl_fn_80026AB8_00001940:
     li r4, 0x0
     b lbl_fn_80026AB8_00001958
 lbl_fn_80026AB8_00001948:
-    bl fn_8001ADE8
+    bl battle_calcTargetDistance
     fctiwz f0, f1
     stfd f0, 0x28(r1)
     lwz r4, 0x2c(r1)
@@ -2144,7 +2144,7 @@ lbl_fn_80026D78_00001C4C:
     li r4, 0x0
     b lbl_fn_80026D78_00001C64
 lbl_fn_80026D78_00001C54:
-    bl fn_8001ADE8
+    bl battle_calcTargetDistance
     fctiwz f0, f1
     stfd f0, 0x18(r1)
     lwz r4, 0x1c(r1)
@@ -2302,7 +2302,7 @@ lbl_fn_80026F30_00001E70:
     li r4, 0x0
     b lbl_fn_80026F30_00001E88
 lbl_fn_80026F30_00001E78:
-    bl fn_8001ADE8
+    bl battle_calcTargetDistance
     fctiwz f0, f1
     stfd f0, 0x28(r1)
     lwz r4, 0x2c(r1)
@@ -2365,7 +2365,7 @@ lbl_fn_800270B8_00001F40:
     li r4, 0x0
     b lbl_fn_800270B8_00001F58
 lbl_fn_800270B8_00001F48:
-    bl fn_8001ADE8
+    bl battle_calcTargetDistance
     fctiwz f0, f1
     stfd f0, 0x28(r1)
     lwz r4, 0x2c(r1)

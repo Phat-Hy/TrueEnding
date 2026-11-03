@@ -39,14 +39,14 @@ extern void fn_805FE860(void);
 
 /* Forward declarations */
 void __DVDFSInit(void);
-void fn_805F9EF0(void);
-void fn_805FA200(void);
-void fn_805FA270(void);
-void fn_805FA390(void);
+void DVDConvertPathToEntrynum(void);
+void DVDFastOpen(void);
+void DVDOpen(void);
+void DVDClose(void);
 void fn_805FA3C0(void);
-void fn_805FA4E0(void);
+void DVDReadAsyncPrio(void);
 void fn_805FA5B0(void);
-void fn_805FA5D0(void);
+void DVDReadPrio(void);
 void fn_805FA700(void);
 void fn_805FA710(void);
 void fn_805FA770(void);
@@ -71,7 +71,7 @@ asm void __DVDFSInit(void) {
 }
 
 
-asm void fn_805F9EF0(void) {
+asm void DVDConvertPathToEntrynum(void) {
     nofralloc
     stwu r1, -0x30(r1)
     mflr r0
@@ -308,7 +308,7 @@ lbl_0320:
 }
 
 
-asm void fn_805FA200(void) {
+asm void DVDFastOpen(void) {
     nofralloc
     cmpwi r3, 0x0
     blt lbl_0368
@@ -341,7 +341,7 @@ lbl_0370:
 }
 
 
-asm void fn_805FA270(void) {
+asm void DVDOpen(void) {
     nofralloc
     stwu r1, -0x90(r1)
     mflr r0
@@ -350,7 +350,7 @@ asm void fn_805FA270(void) {
     mr r31, r4
     stw r30, 0x88(r1)
     mr r30, r3
-    bl fn_805F9EF0
+    bl DVDConvertPathToEntrynum
     cmpwi r3, 0x0
     bge lbl_0468
     lwz r31, lbl_8087FCD0
@@ -425,7 +425,7 @@ lbl_04b8:
 }
 
 
-asm void fn_805FA390(void) {
+asm void DVDClose(void) {
     nofralloc
     stwu r1, -0x10(r1)
     mflr r0
@@ -523,7 +523,7 @@ lbl_05f8:
 }
 
 
-asm void fn_805FA4E0(void) {
+asm void DVDReadAsyncPrio(void) {
     nofralloc
     stwu r1, -0x20(r1)
     mflr r0
@@ -595,7 +595,7 @@ asm void fn_805FA5B0(void) {
 }
 
 
-asm void fn_805FA5D0(void) {
+asm void DVDReadPrio(void) {
     nofralloc
     stwu r1, -0x20(r1)
     mflr r0

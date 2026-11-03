@@ -11,7 +11,7 @@ extern void dtor_80084684(void);
 extern void fn_8006945C(void);
 extern void gx_drawScreenQuad(void);
 extern void seq_stepPlaybackTimer(void);
-extern void fn_80075F58(void);
+extern void seq_setViewportAndScissor(void);
 extern void seq_bindSlotResource(void);
 extern void model_updateBoneTransforms(void);
 extern void motion_initTransform(void);
@@ -499,7 +499,7 @@ lbl_tex_bakeCharacterTexture_000005B8:
     mr r7, r23
     li r4, 0x0
     li r5, 0x0
-    bl fn_80075F58
+    bl seq_setViewportAndScissor
     b lbl_tex_bakeCharacterTexture_000005FC
 lbl_tex_bakeCharacterTexture_000005E4:
     lwz r3, lbl_8087EEE0
@@ -507,7 +507,7 @@ lbl_tex_bakeCharacterTexture_000005E4:
     mr r7, r28
     li r4, 0x0
     li r5, 0x0
-    bl fn_80075F58
+    bl seq_setViewportAndScissor
 lbl_tex_bakeCharacterTexture_000005FC:
     lwz r3, 0x14(r15)
     lwzx r3, r3, r29

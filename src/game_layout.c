@@ -8,7 +8,7 @@ extern void _savegpr_19(void);
 extern void _savegpr_25(void);
 extern void fn_8005DF90(void);
 extern void seq_stepPlaybackTimer(void);
-extern void fn_80075F58(void);
+extern void seq_setViewportAndScissor(void);
 extern void seq_bindSlotResource(void);
 extern void fn_800A96AC(void);
 extern void motion_initTransform(void);
@@ -135,7 +135,7 @@ asm void layout_drawPane(void)
     mr r7, r29
     li r4, 0x0
     li r5, 0x0
-    bl fn_80075F58
+    bl seq_setViewportAndScissor
     cmpwi r25, 0x0
     bne lbl_layout_drawPane_0000009C
     addi r25, r1, 0x8c
@@ -702,7 +702,7 @@ asm void fn_800A9E64(void)
     mr r7, r29
     li r4, 0x0
     li r5, 0x0
-    bl fn_80075F58
+    bl seq_setViewportAndScissor
     lwz r3, lbl_8087EFB4
     bl motion_initTransform
     clrlwi r5, r21, 16
@@ -754,7 +754,7 @@ asm void fn_800A9E64(void)
     mr r7, r24
     li r4, 0x0
     li r5, 0x0
-    bl fn_80075F58
+    bl seq_setViewportAndScissor
     lwz r3, lbl_8087EFB4
     bl motion_initTransform
     lwz r3, lbl_8087EFA8
@@ -941,7 +941,7 @@ lbl_fn_800A9E64_00000A28:
     mr r7, r29
     li r4, 0x0
     li r5, 0x0
-    bl fn_80075F58
+    bl seq_setViewportAndScissor
     lwz r3, lbl_8087EFB4
     bl motion_initTransform
     lwz r3, lbl_8087EEE0

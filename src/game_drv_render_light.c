@@ -61,7 +61,7 @@ extern void PSMTXTransApply(void);
 extern void PSMTXScale(void);
 extern void GXLoadPosMtxImm(void);
 extern void GXSetCurrentMtx(void);
-extern void fn_8061A0F0(void);
+extern void gx_displayList_destroy(void);
 extern void gx_displayList_invokeVtableMethod(void);
 extern void __construct_new_array(void);
 extern void __destroy_new_array(void);
@@ -1176,7 +1176,7 @@ lbl_fn_805D3CA0_00000E04:
     lis r3, lbl_807CA1F8@ha
     li r4, 0x5c
     lwz r3, lbl_807CA1F8@l(r3)
-    bl fn_8061A0F0
+    bl gx_displayList_destroy
     cmpwi r3, 0x0
     beq lbl_fn_805D3CA0_00000E44
     lhz r0, 0x5c(r29)
@@ -1686,7 +1686,7 @@ lbl_fn_805D4260_000014E4:
     lis r3, lbl_807CA1F8@ha
     li r4, 0x18
     lwz r3, lbl_807CA1F8@l(r3)
-    bl fn_8061A0F0
+    bl gx_displayList_destroy
     cmpwi r3, 0x0
     beq lbl_fn_805D4260_00001558
     mr r31, r3
@@ -1705,7 +1705,7 @@ lbl_fn_805D4260_00001558:
     lis r3, lbl_807CA1F8@ha
     li r4, 0x5c
     lwz r3, lbl_807CA1F8@l(r3)
-    bl fn_8061A0F0
+    bl gx_displayList_destroy
     cmpwi r3, 0x0
     beq lbl_fn_805D4260_00001598
     lhz r0, 0x50(r29)

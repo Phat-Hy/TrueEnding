@@ -75,7 +75,7 @@ extern void fn_8059F878(void);
 extern void fn_805A1C04(void);
 extern void OSLockMutex(void);
 extern void OSUnlockMutex(void);
-extern void fn_805FA4E0(void);
+extern void DVDReadAsyncPrio(void);
 extern void fn_80607900(void);
 extern void fn_80607D70(void);
 extern void fn_806095E0(void);
@@ -2351,7 +2351,7 @@ lbl_fn_80047DCC_00001C1C:
     addi r3, r30, 0x19c
     addi r7, r7, fn_80047DBC@l
     li r8, 0x2
-    bl fn_805FA4E0
+    bl DVDReadAsyncPrio
     cmpwi r3, 0x0
     bne lbl_fn_80047DCC_00001D6C
 lbl_fn_80047DCC_00001C74:
@@ -2377,7 +2377,7 @@ lbl_fn_80047DCC_00001C88:
     addi r3, r30, 0x19c
     addi r7, r7, fn_80047DBC@l
     li r8, 0x2
-    bl fn_805FA4E0
+    bl DVDReadAsyncPrio
     cmpwi r3, 0x0
     bne lbl_fn_80047DCC_00001D6C
 lbl_fn_80047DCC_00001CD4:
@@ -2471,7 +2471,7 @@ lbl_fn_80047DCC_00001DB8:
     addi r3, r30, 0x19c
     addi r7, r7, fn_80047DBC@l
     li r8, 0x2
-    bl fn_805FA4E0
+    bl DVDReadAsyncPrio
     cmpwi r3, 0x0
     bne lbl_fn_80047DCC_0000208C
 lbl_fn_80047DCC_00001E20:
@@ -2497,7 +2497,7 @@ lbl_fn_80047DCC_00001E34:
     addi r3, r30, 0x19c
     addi r7, r7, fn_80047DBC@l
     li r8, 0x2
-    bl fn_805FA4E0
+    bl DVDReadAsyncPrio
     cmpwi r3, 0x0
     bne lbl_fn_80047DCC_0000208C
 lbl_fn_80047DCC_00001E80:
@@ -2573,7 +2573,7 @@ lbl_fn_80047DCC_00001F3C:
     addi r3, r30, 0x19c
     addi r7, r7, fn_80047DBC@l
     li r8, 0x2
-    bl fn_805FA4E0
+    bl DVDReadAsyncPrio
     cmpwi r3, 0x0
     bne lbl_fn_80047DCC_0000208C
 lbl_fn_80047DCC_00001F94:
@@ -2599,7 +2599,7 @@ lbl_fn_80047DCC_00001FA8:
     addi r3, r30, 0x19c
     addi r7, r7, fn_80047DBC@l
     li r8, 0x2
-    bl fn_805FA4E0
+    bl DVDReadAsyncPrio
     cmpwi r3, 0x0
     bne lbl_fn_80047DCC_0000208C
 lbl_fn_80047DCC_00001FF4:

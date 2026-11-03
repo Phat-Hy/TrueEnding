@@ -181,7 +181,7 @@ void fn_800748D8(void);
 void fn_80074B24(void);
 void gx_beginQuadBatch(void);
 void seq_stepPlaybackTimer(void);
-void fn_80075F58(void);
+void seq_setViewportAndScissor(void);
 void fn_800760BC(void);
 void fn_800760D0(void);
 void fn_800760E8(void);
@@ -4669,7 +4669,7 @@ asm void seq_stepPlaybackTimer(void)
     blr
 }
 
-asm void fn_80075F58(void)
+asm void seq_setViewportAndScissor(void)
 {
     nofralloc
     stwu r1, -0x30(r1)

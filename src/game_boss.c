@@ -31,10 +31,10 @@ extern void fn_8046CC90(void);
 extern void boss_loadWeakpointResource(void);
 extern void boss_bindArenaInteractions(void);
 extern void fn_8046F4D4(void);
-extern void fn_805F9EF0(void);
-extern void fn_805FA270(void);
-extern void fn_805FA390(void);
-extern void fn_805FA5D0(void);
+extern void DVDConvertPathToEntrynum(void);
+extern void DVDOpen(void);
+extern void DVDClose(void);
+extern void DVDReadPrio(void);
 extern void printf(void);
 extern void vsprintf(void);
 extern void strncpy(void);
@@ -128,7 +128,7 @@ void fn_8006BA38(void);
 void fn_8006BA54(void);
 u32 fn_8006BA6C(void);
 void fn_8006BA74(void);
-void fn_8006BA8C(void);
+void res_loadFile(void);
 void boss_triggerEventAction(void);
 void fn_8006BBCC(void);
 void atn_FileList_destructor(void);
@@ -2291,7 +2291,7 @@ lbl_boss_triggerEventSequence_00001D48:
 lbl_boss_triggerEventSequence_00001D60:
     lwz r3, 0x10(r1)
 lbl_boss_triggerEventSequence_00001D64:
-    bl fn_805F9EF0
+    bl DVDConvertPathToEntrynum
     lwz r0, 0x8(r1)
     subfic r4, r3, -0x1
     addi r3, r3, 0x1
@@ -3470,7 +3470,7 @@ asm void fn_8006BA74(void)
     blr
 }
 
-asm void fn_8006BA8C(void)
+asm void res_loadFile(void)
 {
     nofralloc
     stwu r1, -0x50(r1)
@@ -3482,22 +3482,22 @@ asm void fn_8006BA8C(void)
     mr r30, r4
     lwz r0, lbl_8087F518
     cmpwi r0, 0x0
-    beq lbl_fn_8006BA8C_00002D24
+    beq lbl_res_loadFile_00002D24
     cmpwi r5, 0x0
-    bne lbl_fn_8006BA8C_00002D24
+    bne lbl_res_loadFile_00002D24
     mr r4, r6
     mr r3, r0
     mr r5, r30
     li r6, 0x20
     bl boss_loadWeakpointResource
-    b lbl_fn_8006BA8C_00002DA4
-lbl_fn_8006BA8C_00002D24:
+    b lbl_res_loadFile_00002DA4
+lbl_res_loadFile_00002D24:
     mr r3, r6
     addi r4, r1, 0x8
     li r31, 0x0
-    bl fn_805FA270
+    bl DVDOpen
     cmpwi r3, 0x0
-    beq lbl_fn_8006BA8C_00002DA0
+    beq lbl_res_loadFile_00002DA0
     lwz r0, 0x3c(r1)
     stw r0, 0x0(r30)
     bl dungeon_initGlobalContext
@@ -3520,12 +3520,12 @@ lbl_fn_8006BA8C_00002D24:
     li r6, 0x0
     clrrwi r5, r0, 5
     li r7, 0x2
-    bl fn_805FA5D0
+    bl DVDReadPrio
     addi r3, r1, 0x8
-    bl fn_805FA390
-lbl_fn_8006BA8C_00002DA0:
+    bl DVDClose
+lbl_res_loadFile_00002DA0:
     mr r3, r31
-lbl_fn_8006BA8C_00002DA4:
+lbl_res_loadFile_00002DA4:
     lwz r0, 0x54(r1)
     lwz r31, 0x4c(r1)
     lwz r30, 0x48(r1)

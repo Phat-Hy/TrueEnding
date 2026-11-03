@@ -17,10 +17,10 @@ extern void fn_805E7480(void);
 extern void fn_805E7520(void);
 extern void PSMTXIdentity(void);
 extern void PSMTXMultVecArraySR(void);
-extern void fn_805FA270(void);
-extern void fn_805FA390(void);
-extern void fn_805FA4E0(void);
-extern void fn_805FA5D0(void);
+extern void DVDOpen(void);
+extern void DVDClose(void);
+extern void DVDReadAsyncPrio(void);
+extern void DVDReadPrio(void);
 extern void fn_805FEF70(void);
 extern void fn_806077A0(void);
 extern void fn_806077F0(void);
@@ -752,7 +752,7 @@ lbl_fn_805B5714_00000968:
     bl memset
     mr r3, r27
     mr r4, r29
-    bl fn_805FA270
+    bl DVDOpen
     cmpwi r3, 0x0
     bne lbl_fn_805B5714_000009A4
     li r3, 0x0
@@ -764,11 +764,11 @@ lbl_fn_805B5714_000009A4:
     li r5, 0x40
     li r6, 0x0
     li r7, 0x2
-    bl fn_805FA5D0
+    bl DVDReadPrio
     cmpwi r3, 0x0
     bge lbl_fn_805B5714_000009D8
     mr r3, r29
-    bl fn_805FA390
+    bl DVDClose
     li r3, 0x0
     b lbl_fn_805B5714_00000BB4
 lbl_fn_805B5714_000009D8:
@@ -783,7 +783,7 @@ lbl_fn_805B5714_000009D8:
     cmpwi r3, 0x0
     beq lbl_fn_805B5714_00000A10
     mr r3, r29
-    bl fn_805FA390
+    bl DVDClose
     li r3, 0x0
     b lbl_fn_805B5714_00000BB4
 lbl_fn_805B5714_00000A10:
@@ -792,7 +792,7 @@ lbl_fn_805B5714_00000A10:
     cmplwi r0, 0x1000
     beq lbl_fn_805B5714_00000A30
     mr r3, r29
-    bl fn_805FA390
+    bl DVDClose
     li r3, 0x0
     b lbl_fn_805B5714_00000BB4
 lbl_fn_805B5714_00000A30:
@@ -802,11 +802,11 @@ lbl_fn_805B5714_00000A30:
     li r5, 0x20
     mr r6, r28
     li r7, 0x2
-    bl fn_805FA5D0
+    bl DVDReadPrio
     cmpwi r3, 0x0
     bge lbl_fn_805B5714_00000A64
     mr r3, r29
-    bl fn_805FA390
+    bl DVDClose
     li r3, 0x0
     b lbl_fn_805B5714_00000BB4
 lbl_fn_805B5714_00000A64:
@@ -835,11 +835,11 @@ lbl_fn_805B5714_00000AAC:
     addi r4, r30, lbl_807C9C40@l
     li r5, 0x20
     li r7, 0x2
-    bl fn_805FA5D0
+    bl DVDReadPrio
     cmpwi r3, 0x0
     bge lbl_fn_805B5714_00000ADC
     mr r3, r29
-    bl fn_805FA390
+    bl DVDClose
     li r3, 0x0
     b lbl_fn_805B5714_00000BB4
 lbl_fn_805B5714_00000ADC:
@@ -855,11 +855,11 @@ lbl_fn_805B5714_00000AF4:
     addi r4, r30, lbl_807C9C40@l
     li r5, 0x20
     li r7, 0x2
-    bl fn_805FA5D0
+    bl DVDReadPrio
     cmpwi r3, 0x0
     bge lbl_fn_805B5714_00000B24
     mr r3, r29
-    bl fn_805FA390
+    bl DVDClose
     li r3, 0x0
     b lbl_fn_805B5714_00000BB4
 lbl_fn_805B5714_00000B24:
@@ -944,7 +944,7 @@ lbl_fn_805B59C0_00000C20:
     bne lbl_fn_805B59C0_00000C48
     li r0, 0x0
     stw r0, 0xa0(r3)
-    bl fn_805FA390
+    bl DVDClose
     li r3, 0x1
     b lbl_fn_805B59C0_00000C4C
 lbl_fn_805B59C0_00000C48:
@@ -1233,7 +1233,7 @@ lbl_fn_805B5CF4_00001024:
     li r8, 0x2
     add r4, r31, r0
     lwz r4, 0xd4(r4)
-    bl fn_805FA4E0
+    bl DVDReadAsyncPrio
     cmpwi r3, 0x1
     beq lbl_fn_805B5CF4_00001074
     li r0, 0x0
@@ -1289,7 +1289,7 @@ lbl_fn_805B5E80_000010FC:
     lwz r6, 0xa8(r3)
     add r4, r3, r0
     lwz r4, 0xd4(r4)
-    bl fn_805FA5D0
+    bl DVDReadPrio
     cmpwi r3, 0x0
     bge lbl_fn_805B5E80_0000113C
     addi r3, r28, lbl_807C9AA0@l
@@ -1665,7 +1665,7 @@ lbl_fn_805B6124_0000160C:
     li r8, 0x2
     add r4, r26, r0
     lwz r4, 0xd4(r4)
-    bl fn_805FA4E0
+    bl DVDReadAsyncPrio
     cmpwi r3, 0x1
     beq lbl_fn_805B6124_0000165C
     li r0, 0x0

@@ -14,7 +14,7 @@ extern void fn_80071D68(void);
 extern void fn_80071D74(void);
 extern void gx_drawScreenQuad(void);
 extern void seq_stepPlaybackTimer(void);
-extern void fn_80075F58(void);
+extern void seq_setViewportAndScissor(void);
 extern void gx_applyRenderState(void);
 extern void seq_bindSlotResource(void);
 extern void gx_setRenderStateParam(void);
@@ -999,7 +999,7 @@ asm void fn_800B2EA0(void)
     slwi r7, r30, 1
     li r4, 0x0
     li r5, 0x0
-    bl fn_80075F58
+    bl seq_setViewportAndScissor
     lwz r3, lbl_8087EFB4
     bl motion_initTransform
     clrlslwi r5, r31, 17, 1

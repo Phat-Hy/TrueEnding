@@ -93,7 +93,7 @@ extern void GXLoadPosMtxImm(void);
 extern void GXSetCurrentMtx(void);
 extern void fn_80619920(void);
 extern void fn_806199D0(void);
-extern void fn_8061A0F0(void);
+extern void gx_displayList_destroy(void);
 extern void gx_displayList_invokeVtableMethod(void);
 extern void fn_8061A110(void);
 extern void fn_80625BF0(void);
@@ -828,7 +828,7 @@ asm void fn_805C3C50(void)
     lis r5, lbl_807980D4@ha
     mr r4, r3
     lwz r3, lbl_807980D4@l(r5)
-    b fn_8061A0F0
+    b gx_displayList_destroy
 }
 
 asm void fn_805C3C60(void)

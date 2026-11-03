@@ -9,7 +9,7 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_8005DF90(void);
 extern void seq_stepPlaybackTimer(void);
-extern void fn_80075F58(void);
+extern void seq_setViewportAndScissor(void);
 extern void gx_applyRenderState(void);
 extern void seq_bindSlotResource(void);
 extern void gx_setRenderStateParam(void);
@@ -299,7 +299,7 @@ lbl_fn_800B0CD4_000000F0:
     stfs f6, 0x94(r1)
     stfs f6, 0x98(r1)
     stfs f3, 0x9c(r1)
-    bl fn_80075F58
+    bl seq_setViewportAndScissor
     lwz r3, lbl_8087EEE0
     addi r4, r1, 0x50
     lfs f1, lbl_80880E6C

@@ -8,7 +8,7 @@ extern void talk_parseDialogue(void);
 extern void talk_parseDialogueTokens(void);
 extern void talk_copyUtf16String(void);
 extern void skill_calculateDamage(void);
-extern void fn_8006BA8C(void);
+extern void res_loadFile(void);
 extern void boss_triggerEventAction(void);
 extern void script_executeCommand(void);
 extern void str_assignBuffer(void);
@@ -608,7 +608,7 @@ lbl_fn_803B2A68_000005DC:
     addi r3, r1, 0x118
     addi r4, r1, 0xc
     li r5, 0x0
-    bl fn_8006BA8C
+    bl res_loadFile
     lwz r5, 0x48(r31)
     mr r30, r3
     addi r3, r1, 0x118

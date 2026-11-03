@@ -30,9 +30,9 @@ extern void fn_8059E220(void);
 extern void fn_8059E244(void);
 extern void fn_8059E2F0(void);
 extern void fn_8059E740(void);
-extern void fn_805F9EF0(void);
-extern void fn_805FA200(void);
-extern void fn_805FA390(void);
+extern void DVDConvertPathToEntrynum(void);
+extern void DVDFastOpen(void);
+extern void DVDClose(void);
 extern void strncpy(void);
 extern void fn_80716280(void);
 extern void net_packetDebugLog(void);
@@ -1850,7 +1850,7 @@ asm void fn_8059D828(void)
     cmpwi r0, 0x0
     beq lbl_fn_8059D828_000017EC
     addi r3, r3, 0x14c
-    bl fn_805FA390
+    bl DVDClose
     li r0, 0x0
     stb r0, 0x188(r30)
 lbl_fn_8059D828_000017EC:
@@ -1885,7 +1885,7 @@ asm void fn_8059D8B4(void)
     stw r29, 0x114(r1)
     mr r29, r3
     mr r3, r30
-    bl fn_805F9EF0
+    bl DVDConvertPathToEntrynum
     cmpwi r3, 0x0
     mr r31, r3
     bge lbl_fn_8059D8B4_00001884
@@ -1900,7 +1900,7 @@ asm void fn_8059D8B4(void)
     b lbl_fn_8059D8B4_000019A0
 lbl_fn_8059D8B4_00001884:
     addi r4, r29, 0x14c
-    bl fn_805FA200
+    bl DVDFastOpen
     cmpwi r3, 0x0
     bne lbl_fn_8059D8B4_000018B8
     lis r3, lbl_807623A4@ha
@@ -2002,7 +2002,7 @@ asm void fn_8059DA44(void)
     cmpwi r0, 0x0
     beq lbl_fn_8059DA44_000019EC
     addi r3, r3, 0x14c
-    bl fn_805FA390
+    bl DVDClose
     li r0, 0x0
     stb r0, 0x188(r31)
 lbl_fn_8059DA44_000019EC:

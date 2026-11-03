@@ -17,7 +17,7 @@ extern void magic_updateCircleArea(void);
 extern void fn_8006FE08(void);
 extern void fn_800704DC(void);
 extern void seq_stepPlaybackTimer(void);
-extern void fn_80075F58(void);
+extern void seq_setViewportAndScissor(void);
 extern void dungeon_initGlobalContext(void);
 extern void town_registerInteractionPoint(void);
 extern void fn_800B3978(void);
@@ -139,7 +139,7 @@ lbl_fn_800B4054_00000024:
     li r5, 0x0
     li r6, 0x20
     li r7, 0x20
-    bl fn_80075F58
+    bl seq_setViewportAndScissor
     li r0, 0x0
     stw r0, 0x2c(r31)
     lwz r31, 0xc(r1)

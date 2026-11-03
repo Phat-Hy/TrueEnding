@@ -9,9 +9,9 @@ extern void fn_8059F72C(void);
 extern void OSInitMutex(void);
 extern void OSLockMutex(void);
 extern void OSUnlockMutex(void);
-extern void fn_805F9EF0(void);
-extern void fn_805FA4E0(void);
-extern void fn_805FA5D0(void);
+extern void DVDConvertPathToEntrynum(void);
+extern void DVDReadAsyncPrio(void);
+extern void DVDReadPrio(void);
 extern void strncpy(void);
 extern void strncat(void);
 extern void strrchr(void);
@@ -251,7 +251,7 @@ lbl_fn_8059DB5C_0000010C:
     b lbl_fn_8059DB5C_000001B0
 lbl_fn_8059DB5C_0000011C:
     mr r3, r29
-    bl fn_805F9EF0
+    bl DVDConvertPathToEntrynum
     cmpwi r3, 0x0
     mr r4, r3
     bge lbl_fn_8059DB5C_00000154
@@ -334,7 +334,7 @@ lbl_fn_8059DC68_00000214:
     li r5, 0x40
     li r6, 0x0
     li r8, 0x2
-    bl fn_805FA4E0
+    bl DVDReadAsyncPrio
     li r0, 0x0
     stw r0, lbl_8087EE80
 lbl_fn_8059DC68_00000244:
@@ -418,7 +418,7 @@ lbl_fn_8059DD4C_0000033C:
     addi r3, r28, 0x14c
     addi r7, r7, fn_80046398@l
     li r8, 0x2
-    bl fn_805FA4E0
+    bl DVDReadAsyncPrio
     li r0, 0x0
     stw r0, lbl_8087EE80
 lbl_fn_8059DD4C_00000360:
@@ -500,7 +500,7 @@ lbl_fn_8059DE68_00000458:
     mr r5, r31
     addi r3, r28, 0x14c
     li r7, 0x2
-    bl fn_805FA5D0
+    bl DVDReadPrio
     cmplw r3, r31
     beq lbl_fn_8059DE68_00000494
     lis r3, lbl_807623A4@ha

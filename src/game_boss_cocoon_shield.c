@@ -50,10 +50,10 @@ extern void fn_80470264(void);
 extern void boss_getOffset54(void);
 extern void boss_cocoon_setRushState(void);
 extern void atn_LoadHandle_getStatus(void);
-extern void fn_805F9EF0(void);
-extern void fn_805FA200(void);
-extern void fn_805FA390(void);
-extern void fn_805FA4E0(void);
+extern void DVDConvertPathToEntrynum(void);
+extern void DVDFastOpen(void);
+extern void DVDClose(void);
+extern void DVDReadAsyncPrio(void);
 extern void fn_806250D0(void);
 extern void fn_80625110(void);
 extern void CXUncompressAny(void);
@@ -550,7 +550,7 @@ lbl_atn_Arc_decompressEntry_000005F4:
     stw r0, 0x0(r29)
     addi r3, r29, 0x14
     stw r0, 0x4(r29)
-    bl fn_805FA390
+    bl DVDClose
     lwz r4, 0xc(r28)
     mr r3, r28
     subi r0, r4, 0x1
@@ -597,7 +597,7 @@ lbl_atn_Arc_decompressEntry_000006A0:
     stw r5, 0xc(r29)
     stw r30, 0x10(r29)
     lwz r3, 0x48(r3)
-    bl fn_805FA200
+    bl DVDFastOpen
     lwz r4, 0x8(r29)
     lis r7, fn_8046BBE0@ha
     stw r29, 0x40(r29)
@@ -608,7 +608,7 @@ lbl_atn_Arc_decompressEntry_000006A0:
     clrrwi r5, r0, 5
     addi r7, r7, fn_8046BBE0@l
     li r8, 0x2
-    bl fn_805FA4E0
+    bl DVDReadAsyncPrio
     cmpwi r3, 0x0
     bne lbl_atn_Arc_decompressEntry_00000738
     lwz r3, 0x0(r27)
@@ -619,7 +619,7 @@ lbl_atn_Arc_decompressEntry_000006A0:
     stw r30, 0x0(r29)
     addi r3, r29, 0x14
     stw r30, 0x4(r29)
-    bl fn_805FA390
+    bl DVDClose
     lwz r3, 0xc(r28)
     subi r0, r3, 0x1
     stw r0, 0xc(r28)
@@ -803,7 +803,7 @@ lbl_fn_8046BF88_00000974:
     stw r28, 0x10(r31)
     lwz r3, 0x54(r31)
     lwz r3, 0x48(r3)
-    bl fn_805FA200
+    bl DVDFastOpen
     stw r31, 0x40(r31)
     lis r7, fn_8046BBE0@ha
     addi r3, r31, 0x14
@@ -814,7 +814,7 @@ lbl_fn_8046BF88_00000974:
     addi r0, r5, 0x1f
     lwz r6, 0xc(r31)
     clrrwi r5, r0, 5
-    bl fn_805FA4E0
+    bl DVDReadAsyncPrio
     cmpwi r3, 0x0
     bne lbl_fn_8046BF88_00000A1C
     lwz r3, 0x0(r30)
@@ -825,7 +825,7 @@ lbl_fn_8046BF88_00000974:
     stw r28, 0x0(r31)
     addi r3, r31, 0x14
     stw r28, 0x4(r31)
-    bl fn_805FA390
+    bl DVDClose
     lwz r3, 0xc(r29)
     subi r0, r3, 0x1
     stw r0, 0xc(r29)
@@ -1024,7 +1024,7 @@ asm void atn_Arc_decompressChunk(void)
     cmpwi r0, 0x0
     beq lbl_atn_Arc_decompressChunk_00000CBC
     mr r3, r31
-    bl fn_805F9EF0
+    bl DVDConvertPathToEntrynum
     cmpwi r3, 0x0
     blt lbl_atn_Arc_decompressChunk_00000CBC
     li r19, 0x0
@@ -1218,13 +1218,13 @@ lbl_atn_Arc_decompressChunk_00000F24:
     lwz r27, 0xc(r3)
     addi r4, r1, 0x90
     lwz r3, 0x48(r30)
-    bl fn_805FA200
+    bl DVDFastOpen
     lwz r0, 0xc0(r1)
     li r25, 0x0
     addi r3, r1, 0x90
     rlwimi r25, r0, 2, 30, 31
     slwi r24, r0, 2
-    bl fn_805FA390
+    bl DVDClose
     b lbl_atn_Arc_decompressChunk_00000FAC
 lbl_atn_Arc_decompressChunk_00000FA0:
     lwz r21, 0x4(r21)
@@ -1235,7 +1235,7 @@ lbl_atn_Arc_decompressChunk_00000FAC:
     cmpwi r29, -0x1
     bne lbl_atn_Arc_decompressChunk_000010B0
     mr r3, r31
-    bl fn_805F9EF0
+    bl DVDConvertPathToEntrynum
     cmpwi r3, -0x1
     stw r3, 0x48(r30)
     bne lbl_atn_Arc_decompressChunk_00001080
@@ -1269,13 +1269,13 @@ lbl_atn_Arc_decompressChunk_00000FE0:
     lwz r27, 0xc(r3)
     addi r4, r1, 0x54
     lwz r3, 0x48(r30)
-    bl fn_805FA200
+    bl DVDFastOpen
     lwz r0, 0x84(r1)
     li r25, 0x0
     addi r3, r1, 0x54
     rlwimi r25, r0, 2, 30, 31
     slwi r24, r0, 2
-    bl fn_805FA390
+    bl DVDClose
     b lbl_atn_Arc_decompressChunk_00001068
 lbl_atn_Arc_decompressChunk_0000105C:
     lwz r21, 0x4(r21)
@@ -1294,14 +1294,14 @@ lbl_atn_Arc_decompressChunk_00001080:
     bne lbl_atn_Arc_decompressChunk_000010B0
     lwz r3, 0x48(r30)
     addi r4, r1, 0x18
-    bl fn_805FA200
+    bl DVDFastOpen
     lwz r0, 0x48(r1)
     li r25, 0x0
     lwz r28, 0x4c(r1)
     addi r3, r1, 0x18
     rlwimi r25, r0, 2, 30, 31
     slwi r24, r0, 2
-    bl fn_805FA390
+    bl DVDClose
 lbl_atn_Arc_decompressChunk_000010B0:
     stw r26, 0x18(r30)
     lis r21, lbl_80755608@ha
@@ -1466,7 +1466,7 @@ lbl_atn_Arc_decompressChunk_000012DC:
     stw r21, 0x10(r31)
     lwz r3, 0x54(r31)
     lwz r3, 0x48(r3)
-    bl fn_805FA200
+    bl DVDFastOpen
     stw r31, 0x40(r31)
     lis r7, fn_8046BBE0@ha
     addi r3, r31, 0x14
@@ -1477,7 +1477,7 @@ lbl_atn_Arc_decompressChunk_000012DC:
     addi r0, r5, 0x1f
     lwz r6, 0xc(r31)
     clrrwi r5, r0, 5
-    bl fn_805FA4E0
+    bl DVDReadAsyncPrio
     cmpwi r3, 0x0
     bne lbl_atn_Arc_decompressChunk_00001400
     lwz r3, 0x0(r30)
@@ -1488,7 +1488,7 @@ lbl_atn_Arc_decompressChunk_000012DC:
     stw r21, 0x0(r31)
     addi r3, r31, 0x14
     stw r21, 0x4(r31)
-    bl fn_805FA390
+    bl DVDClose
     lwz r3, 0xc(r29)
     subi r0, r3, 0x1
     stw r0, 0xc(r29)
@@ -1588,7 +1588,7 @@ asm void fn_8046CBC0(void)
 lbl_fn_8046CBC0_000014AC:
     lwz r3, 0x18(r1)
 lbl_fn_8046CBC0_000014B0:
-    bl fn_805F9EF0
+    bl DVDConvertPathToEntrynum
     lwz r0, 0x10(r1)
     subfic r4, r3, -0x1
     addi r3, r3, 0x1

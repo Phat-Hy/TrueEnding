@@ -4451,7 +4451,7 @@
 .endfn __DVDFSInit
 
 # .text:0x3890 | 0x805F9EF0 | size: 0x308
-.fn fn_805F9EF0, global
+.fn DVDConvertPathToEntrynum, global
 /* 805F9EF0 005F4550  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 805F9EF4 005F4554  7C 08 02 A6 */	mflr r0
 /* 805F9EF8 005F4558  90 01 00 34 */	stw r0, 0x34(r1)
@@ -4684,7 +4684,7 @@
 /* 805FA1EC 005F484C  7C 08 03 A6 */	mtlr r0
 /* 805FA1F0 005F4850  38 21 00 30 */	addi r1, r1, 0x30
 /* 805FA1F4 005F4854  4E 80 00 20 */	blr
-.endfn fn_805F9EF0
+.endfn DVDConvertPathToEntrynum
 
 # .text:0x3B98 | 0x805FA1F8 | size: 0x8
 .fn gap_03_805FA1F8_text, global
@@ -4694,7 +4694,7 @@
 .endfn gap_03_805FA1F8_text
 
 # .text:0x3BA0 | 0x805FA200 | size: 0x68
-.fn fn_805FA200, global
+.fn DVDFastOpen, global
 /* 805FA200 005F4860  2C 03 00 00 */	cmpwi r3, 0x0
 /* 805FA204 005F4864  41 80 00 24 */	blt .L_805FA228
 /* 805FA208 005F4868  80 0D A6 20 */	lwz r0, MaxEntryNum_8087FCE0@sda21(r0)
@@ -4723,7 +4723,7 @@
 /* 805FA25C 005F48BC  90 04 00 38 */	stw r0, 0x38(r4)
 /* 805FA260 005F48C0  90 04 00 0C */	stw r0, 0xc(r4)
 /* 805FA264 005F48C4  4E 80 00 20 */	blr
-.endfn fn_805FA200
+.endfn DVDFastOpen
 
 # .text:0x3C08 | 0x805FA268 | size: 0x8
 .fn gap_03_805FA268_text, global
@@ -4733,7 +4733,7 @@
 .endfn gap_03_805FA268_text
 
 # .text:0x3C10 | 0x805FA270 | size: 0x120
-.fn fn_805FA270, global
+.fn DVDOpen, global
 /* 805FA270 005F48D0  94 21 FF 70 */	stwu r1, -0x90(r1)
 /* 805FA274 005F48D4  7C 08 02 A6 */	mflr r0
 /* 805FA278 005F48D8  90 01 00 94 */	stw r0, 0x94(r1)
@@ -4741,7 +4741,7 @@
 /* 805FA280 005F48E0  7C 9F 23 78 */	mr r31, r4
 /* 805FA284 005F48E4  93 C1 00 88 */	stw r30, 0x88(r1)
 /* 805FA288 005F48E8  7C 7E 1B 78 */	mr r30, r3
-/* 805FA28C 005F48EC  4B FF FC 65 */	bl fn_805F9EF0
+/* 805FA28C 005F48EC  4B FF FC 65 */	bl DVDConvertPathToEntrynum
 /* 805FA290 005F48F0  2C 03 00 00 */	cmpwi r3, 0x0
 /* 805FA294 005F48F4  40 80 00 94 */	bge .L_805FA328
 /* 805FA298 005F48F8  83 ED A6 10 */	lwz r31, lbl_8087FCD0@sda21(r0)
@@ -4813,10 +4813,10 @@
 /* 805FA384 005F49E4  7C 08 03 A6 */	mtlr r0
 /* 805FA388 005F49E8  38 21 00 90 */	addi r1, r1, 0x90
 /* 805FA38C 005F49EC  4E 80 00 20 */	blr
-.endfn fn_805FA270
+.endfn DVDOpen
 
 # .text:0x3D30 | 0x805FA390 | size: 0x24
-.fn fn_805FA390, global
+.fn DVDClose, global
 /* 805FA390 005F49F0  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 805FA394 005F49F4  7C 08 02 A6 */	mflr r0
 /* 805FA398 005F49F8  90 01 00 14 */	stw r0, 0x14(r1)
@@ -4826,7 +4826,7 @@
 /* 805FA3A8 005F4A08  7C 08 03 A6 */	mtlr r0
 /* 805FA3AC 005F4A0C  38 21 00 10 */	addi r1, r1, 0x10
 /* 805FA3B0 005F4A10  4E 80 00 20 */	blr
-.endfn fn_805FA390
+.endfn DVDClose
 
 # .text:0x3D54 | 0x805FA3B4 | size: 0xC
 .fn gap_03_805FA3B4_text, global
@@ -4928,7 +4928,7 @@
 .endfn gap_03_805FA4D4_text
 
 # .text:0x3E80 | 0x805FA4E0 | size: 0xD0
-.fn fn_805FA4E0, global
+.fn DVDReadAsyncPrio, global
 /* 805FA4E0 005F4B40  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 805FA4E4 005F4B44  7C 08 02 A6 */	mflr r0
 /* 805FA4E8 005F4B48  90 01 00 24 */	stw r0, 0x24(r1)
@@ -4985,7 +4985,7 @@
 /* 805FA5A4 005F4C04  7C 08 03 A6 */	mtlr r0
 /* 805FA5A8 005F4C08  38 21 00 20 */	addi r1, r1, 0x20
 /* 805FA5AC 005F4C0C  4E 80 00 20 */	blr
-.endfn fn_805FA4E0
+.endfn DVDReadAsyncPrio
 
 # .text:0x3F50 | 0x805FA5B0 | size: 0x18
 .fn fn_805FA5B0, global
@@ -5005,7 +5005,7 @@
 .endfn gap_03_805FA5C8_text
 
 # .text:0x3F70 | 0x805FA5D0 | size: 0x128
-.fn fn_805FA5D0, global
+.fn DVDReadPrio, global
 /* 805FA5D0 005F4C30  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 805FA5D4 005F4C34  7C 08 02 A6 */	mflr r0
 /* 805FA5D8 005F4C38  90 01 00 24 */	stw r0, 0x24(r1)
@@ -5091,7 +5091,7 @@
 /* 805FA6EC 005F4D4C  7C 08 03 A6 */	mtlr r0
 /* 805FA6F0 005F4D50  38 21 00 20 */	addi r1, r1, 0x20
 /* 805FA6F4 005F4D54  4E 80 00 20 */	blr
-.endfn fn_805FA5D0
+.endfn DVDReadPrio
 
 # .text:0x4098 | 0x805FA6F8 | size: 0x8
 .fn gap_03_805FA6F8_text, global
@@ -43672,12 +43672,12 @@
 .endfn gap_03_8061A0E8_text
 
 # .text:0x23A90 | 0x8061A0F0 | size: 0x10
-.fn fn_8061A0F0, global
+.fn gx_displayList_destroy, global
 /* 8061A0F0 00614750  80 A3 00 00 */	lwz r5, 0x0(r3)
 /* 8061A0F4 00614754  81 85 00 00 */	lwz r12, 0x0(r5)
 /* 8061A0F8 00614758  7D 89 03 A6 */	mtctr r12
 /* 8061A0FC 0061475C  4E 80 04 20 */	bctr
-.endfn fn_8061A0F0
+.endfn gx_displayList_destroy
 
 # .text:0x23AA0 | 0x8061A100 | size: 0x10
 .fn fn_8061A100, global

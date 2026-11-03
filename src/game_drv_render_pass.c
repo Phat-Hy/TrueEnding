@@ -37,7 +37,7 @@ extern void fn_805D3910(void);
 extern void fn_805D3BA0(void);
 extern void fn_805D4240(void);
 extern void fn_805EC870(void);
-extern void fn_8061A0F0(void);
+extern void gx_displayList_destroy(void);
 extern void gx_displayList_invokeVtableMethod(void);
 extern void fn_80625BF0(void);
 extern void fn_80625F40(void);
@@ -953,7 +953,7 @@ asm void fn_805CCC80(void)
     lis r3, lbl_807CA1F8@ha
     clrlslwi r4, r6, 16, 2
     lwz r3, lbl_807CA1F8@l(r3)
-    bl fn_8061A0F0
+    bl gx_displayList_destroy
     cmpwi r3, 0x0
     stw r3, 0x14(r30)
     beq lbl_fn_805CCC80_00000BC8
@@ -989,7 +989,7 @@ lbl_fn_805CCC80_00000BC8:
     lis r3, lbl_807CA1F8@ha
     lwz r3, lbl_807CA1F8@l(r3)
     slwi r4, r0, 4
-    bl fn_8061A0F0
+    bl gx_displayList_destroy
     cmpwi r3, 0x0
     stw r3, 0x18(r30)
     beq lbl_fn_805CCC80_00000C40
@@ -2041,7 +2041,7 @@ lbl_fn_805CDAF0_000019D0:
     lis r3, lbl_807CA1F8@ha
     clrlslwi r4, r31, 24, 5
     lwz r3, lbl_807CA1F8@l(r3)
-    bl fn_8061A0F0
+    bl gx_displayList_destroy
     cmpwi r3, 0x0
     stw r3, 0x4(r30)
     beq lbl_fn_805CDAF0_000019F0

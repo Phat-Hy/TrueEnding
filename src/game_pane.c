@@ -13,7 +13,7 @@ extern void _savegpr_26(void);
 extern void fn_8005DF90(void);
 extern void fn_8005DFC8(void);
 extern void seq_stepPlaybackTimer(void);
-extern void fn_80075F58(void);
+extern void seq_setViewportAndScissor(void);
 extern void seq_bindSlotResource(void);
 extern void dungeon_initGlobalContext(void);
 extern void town_registerInteractionPoint(void);
@@ -155,7 +155,7 @@ asm void fn_800AB774(void)
     mr r7, r30
     li r4, 0x0
     li r5, 0x0
-    bl fn_80075F58
+    bl seq_setViewportAndScissor
     cmpwi r26, 0x0
     bne lbl_fn_800AB774_000000A8
     addi r26, r1, 0x30
@@ -698,7 +698,7 @@ lbl_fn_800ABD94_000006A0:
     mr r7, r27
     li r4, 0x0
     li r5, 0x0
-    bl fn_80075F58
+    bl seq_setViewportAndScissor
     lwz r3, lbl_8087EFB4
     bl motion_initTransform
     clrlwi r5, r25, 16
@@ -770,7 +770,7 @@ lbl_fn_800ABD94_000006A0:
     mr r7, r27
     li r4, 0x0
     li r5, 0x0
-    bl fn_80075F58
+    bl seq_setViewportAndScissor
     lwz r3, lbl_8087EFB4
     bl motion_initTransform
     li r3, 0x2

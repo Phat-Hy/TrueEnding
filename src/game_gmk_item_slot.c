@@ -15,7 +15,7 @@ extern void dtor_80084684(void);
 extern void ui_destroyWidget(void);
 extern void fn_8004A2CC(void);
 extern void fn_8005DFC8(void);
-extern void fn_8006BA8C(void);
+extern void res_loadFile(void);
 extern void boss_triggerEventAction(void);
 extern void fn_80071D74(void);
 extern void gx_drawScreenQuad(void);
@@ -951,7 +951,7 @@ lbl_fn_80440B2C_00000AEC:
     addi r3, r1, 0x10
     addi r4, r1, 0x8
     li r5, 0x0
-    bl fn_8006BA8C
+    bl res_loadFile
     mr r28, r3
     bl dungeon_initGlobalContext
     lis r30, lbl_80754520@ha
@@ -981,7 +981,7 @@ lbl_fn_80440B2C_00000AEC:
     addi r3, r1, 0x10
     addi r4, r1, 0x8
     li r5, 0x0
-    bl fn_8006BA8C
+    bl res_loadFile
     stw r3, 0x4(r31)
     mr r4, r28
     addi r3, r1, 0x10
@@ -992,7 +992,7 @@ lbl_fn_80440B2C_00000AEC:
     addi r3, r1, 0x10
     addi r4, r1, 0x8
     li r5, 0x0
-    bl fn_8006BA8C
+    bl res_loadFile
     stw r3, 0x8(r31)
     mr r4, r28
     addi r3, r1, 0x10
@@ -1003,7 +1003,7 @@ lbl_fn_80440B2C_00000AEC:
     addi r3, r1, 0x10
     addi r4, r1, 0x8
     li r5, 0x0
-    bl fn_8006BA8C
+    bl res_loadFile
     stw r3, 0xc(r31)
     lis r3, fn_80440B24@ha
     lfs f0, lbl_80886A44
@@ -1216,7 +1216,7 @@ lbl_fn_80440F64_00000E64:
     addi r3, r1, 0x10
     addi r4, r1, 0x8
     li r5, 0x0
-    bl fn_8006BA8C
+    bl res_loadFile
     mr r30, r3
     bl dungeon_initGlobalContext
     addi r7, r31, 0x95

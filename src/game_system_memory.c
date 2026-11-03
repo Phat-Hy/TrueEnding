@@ -19,7 +19,7 @@ extern void talk_parseDialogueTokens(void);
 extern void talk_copyUtf16String(void);
 extern void boss_decodePhaseBitfield(void);
 extern void fn_8006BA30(void);
-extern void fn_8006BA8C(void);
+extern void res_loadFile(void);
 extern void boss_triggerEventAction(void);
 extern void script_executeCommand(void);
 extern void str_assignBuffer(void);
@@ -629,7 +629,7 @@ asm void fn_80208BE8(void)
     addi r4, r1, 0x8
     stmw r27, 0xd8c(r1)
     stw r0, 0x8(r1)
-    bl fn_8006BA8C
+    bl res_loadFile
     lwz r0, 0x8(r1)
     mr r31, r3
     mr r4, r31
@@ -1146,7 +1146,7 @@ asm void fn_80209300(void)
     stmw r21, 0x644(r1)
     li r28, 0x0
     stw r28, 0x8(r1)
-    bl fn_8006BA8C
+    bl res_loadFile
     lis r4, lbl_807772D0@ha
     mr r31, r3
     addi r4, r4, lbl_807772D0@l

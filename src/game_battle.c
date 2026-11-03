@@ -165,7 +165,7 @@ void fn_8001A788(void);
 void fn_8001A8A4(void);
 void fn_8001AC54(void);
 void battle_calcActorDistance(void);
-void fn_8001ADE8(void);
+void battle_calcTargetDistance(void);
 void fn_8001AEBC(void);
 void battle_getCharacterState(void);
 
@@ -4527,7 +4527,7 @@ lbl_battle_calcActorDistance_00003CB0:
     blr
 }
 
-asm void fn_8001ADE8(void)
+asm void battle_calcTargetDistance(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -4536,42 +4536,42 @@ asm void fn_8001ADE8(void)
     stw r0, 0x24(r1)
     lwz r5, lbl_8087F430
     cmpwi r5, 0x0
-    beq lbl_fn_8001ADE8_00003CE4
+    beq lbl_battle_calcTargetDistance_00003CE4
     lwz r7, 0x10d8(r5)
-    b lbl_fn_8001ADE8_00003CE8
-lbl_fn_8001ADE8_00003CE4:
+    b lbl_battle_calcTargetDistance_00003CE8
+lbl_battle_calcTargetDistance_00003CE4:
     li r7, 0x0
-lbl_fn_8001ADE8_00003CE8:
+lbl_battle_calcTargetDistance_00003CE8:
     cmpwi r7, 0x0
-    beq lbl_fn_8001ADE8_00003D38
+    beq lbl_battle_calcTargetDistance_00003D38
     lwz r0, 0x78(r7)
     li r6, 0x0
     li r8, 0x0
     mtctr r0
     cmplwi r0, 0x0
-    ble lbl_fn_8001ADE8_00003D30
-lbl_fn_8001ADE8_00003D08:
+    ble lbl_battle_calcTargetDistance_00003D30
+lbl_battle_calcTargetDistance_00003D08:
     lwz r5, 0x7c(r7)
     lwzx r0, r5, r8
     cmpw r3, r0
-    bne lbl_fn_8001ADE8_00003D24
+    bne lbl_battle_calcTargetDistance_00003D24
     mulli r0, r6, 0x28
     add r5, r5, r0
-    b lbl_fn_8001ADE8_00003D3C
-lbl_fn_8001ADE8_00003D24:
+    b lbl_battle_calcTargetDistance_00003D3C
+lbl_battle_calcTargetDistance_00003D24:
     addi r8, r8, 0x28
     addi r6, r6, 0x1
-    bdnz lbl_fn_8001ADE8_00003D08
-lbl_fn_8001ADE8_00003D30:
+    bdnz lbl_battle_calcTargetDistance_00003D08
+lbl_battle_calcTargetDistance_00003D30:
     li r5, 0x0
-    b lbl_fn_8001ADE8_00003D3C
-lbl_fn_8001ADE8_00003D38:
+    b lbl_battle_calcTargetDistance_00003D3C
+lbl_battle_calcTargetDistance_00003D38:
     li r5, 0x0
-lbl_fn_8001ADE8_00003D3C:
+lbl_battle_calcTargetDistance_00003D3C:
     cmpwi r5, 0x0
-    beq lbl_fn_8001ADE8_00003D84
+    beq lbl_battle_calcTargetDistance_00003D84
     cmpwi r4, 0x0
-    beq lbl_fn_8001ADE8_00003D84
+    beq lbl_battle_calcTargetDistance_00003D84
     lfs f1, 0x530(r4)
     addi r3, r1, 0x8
     lfs f0, 0xc(r5)
@@ -4586,7 +4586,7 @@ lbl_fn_8001ADE8_00003D3C:
     stfs f0, 0x8(r1)
     stfs f4, 0x10(r1)
     bl PSVECMag
-lbl_fn_8001ADE8_00003D84:
+lbl_battle_calcTargetDistance_00003D84:
     lwz r0, 0x24(r1)
     mtlr r0
     addi r1, r1, 0x20

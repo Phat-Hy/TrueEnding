@@ -33,7 +33,7 @@ extern void atn_LoadHandle_isLoading(void);
 extern void shockwave_freeEmitter(void);
 extern void taskManager_updateTasks(void);
 extern void PSMTXMultVec(void);
-extern void fn_805F9EF0(void);
+extern void DVDConvertPathToEntrynum(void);
 extern void fn_805FA710(void);
 extern void fn_805FA770(void);
 extern void GXBegin(void);
@@ -177,7 +177,7 @@ asm void fn_8006C3F0(void)
     mr r3, r23
     addi r26, r1, 0x8
     stw r27, 0x8(r1)
-    bl fn_805F9EF0
+    bl DVDConvertPathToEntrynum
     cmpwi r3, 0x0
     blt lbl_fn_8006C3F0_00000364
     addi r4, r1, 0x18

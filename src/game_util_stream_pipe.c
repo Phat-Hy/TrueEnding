@@ -12,7 +12,7 @@ extern void entry_callCtors(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_800696B4(void);
-extern void fn_8006BA8C(void);
+extern void res_loadFile(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
@@ -643,7 +643,7 @@ asm void fn_8057D5F8(void)
     mr r3, r4
     addi r4, r31, 0x1cc
     li r5, 0x0
-    bl fn_8006BA8C
+    bl res_loadFile
     stw r3, 0x1d0(r31)
     mr r3, r31
     bl fn_80575F10

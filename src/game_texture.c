@@ -11,7 +11,7 @@ extern void fn_8005DFC8(void);
 extern void fn_8006FEBC(void);
 extern void gx_drawScreenQuad(void);
 extern void seq_stepPlaybackTimer(void);
-extern void fn_80075F58(void);
+extern void seq_setViewportAndScissor(void);
 extern void fn_80076174(void);
 extern void fn_800A9788(void);
 extern void fn_800A9794(void);
@@ -705,7 +705,7 @@ asm void fn_800B6994(void)
     mr r7, r30
     li r4, 0x0
     li r5, 0x0
-    bl fn_80075F58
+    bl seq_setViewportAndScissor
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)

@@ -30,7 +30,7 @@ extern void atn_LoadHandle_getStatus(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void shockwave_freeEmitter(void);
 extern void taskManager_updateTasks(void);
-extern void fn_805F9EF0(void);
+extern void DVDConvertPathToEntrynum(void);
 extern void memcmp(void);
 extern void printf(void);
 extern void strcmp(void);
@@ -1270,7 +1270,7 @@ lbl_fn_8046FA18_00000FC0:
     clrlwi. r0, r31, 31
     bne lbl_fn_8046FA18_00000FD4
     mr r3, r30
-    bl fn_805F9EF0
+    bl DVDConvertPathToEntrynum
     stw r3, 0x24(r29)
 lbl_fn_8046FA18_00000FD4:
     mr r3, r29

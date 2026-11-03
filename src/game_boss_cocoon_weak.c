@@ -40,7 +40,7 @@ extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_getStatus(void);
 extern void shockwave_freeEmitter(void);
 extern void taskManager_updateTasks(void);
-extern void fn_805F9EF0(void);
+extern void DVDConvertPathToEntrynum(void);
 extern void strncpy(void);
 extern void strcmp(void);
 extern void strrchr(void);
@@ -332,7 +332,7 @@ lbl_fn_8046D1EC_000002CC:
 lbl_fn_8046D1EC_00000338:
     lwz r3, 0x20(r1)
 lbl_fn_8046D1EC_0000033C:
-    bl fn_805F9EF0
+    bl DVDConvertPathToEntrynum
     lwz r0, 0x18(r1)
     subfic r4, r3, -0x1
     addi r3, r3, 0x1

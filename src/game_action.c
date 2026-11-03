@@ -6,7 +6,7 @@ extern void fn_8001A510(void);
 extern void fn_8001A65C(void);
 extern void fn_8001A8A4(void);
 extern void battle_calcActorDistance(void);
-extern void fn_8001ADE8(void);
+extern void battle_calcTargetDistance(void);
 extern void battle_getCharacterState(void);
 extern void fn_8001B5B4(void);
 extern void fn_8001B634(void);
@@ -3786,7 +3786,7 @@ lbl_fn_8002EB98_00003204:
     li r4, 0x0
     b lbl_fn_8002EB98_0000321C
 lbl_fn_8002EB98_0000320C:
-    bl fn_8001ADE8
+    bl battle_calcTargetDistance
     fctiwz f0, f1
     stfd f0, 0x28(r1)
     lwz r4, 0x2c(r1)
@@ -4015,7 +4015,7 @@ lbl_fn_8002EE58_00003510:
     li r4, 0x0
     b lbl_fn_8002EE58_00003528
 lbl_fn_8002EE58_00003518:
-    bl fn_8001ADE8
+    bl battle_calcTargetDistance
     fctiwz f0, f1
     stfd f0, 0x18(r1)
     lwz r4, 0x1c(r1)
@@ -4215,7 +4215,7 @@ lbl_fn_8002EFC4_000037D0:
     li r3, 0x0
     b lbl_fn_8002EFC4_000037E8
 lbl_fn_8002EFC4_000037D8:
-    bl fn_8001ADE8
+    bl battle_calcTargetDistance
     fctiwz f0, f1
     stfd f0, 0x68(r1)
     lwz r3, 0x6c(r1)
@@ -4354,7 +4354,7 @@ lbl_fn_8002F354_000039BC:
     li r3, 0x0
     b lbl_fn_8002F354_000039D4
 lbl_fn_8002F354_000039C4:
-    bl fn_8001ADE8
+    bl battle_calcTargetDistance
     fctiwz f0, f1
     stfd f0, 0x18(r1)
     lwz r3, 0x1c(r1)
@@ -4714,7 +4714,7 @@ lbl_fn_8002F704_00003EB0:
     li r3, 0x0
     b lbl_fn_8002F704_00003EC8
 lbl_fn_8002F704_00003EB8:
-    bl fn_8001ADE8
+    bl battle_calcTargetDistance
     fctiwz f0, f1
     stfd f0, 0x88(r1)
     lwz r3, 0x8c(r1)
@@ -5018,7 +5018,7 @@ lbl_fn_8002FC40_000042F0:
     li r4, 0x0
     b lbl_fn_8002FC40_00004308
 lbl_fn_8002FC40_000042F8:
-    bl fn_8001ADE8
+    bl battle_calcTargetDistance
     fctiwz f0, f1
     stfd f0, 0x18(r1)
     lwz r4, 0x1c(r1)
@@ -5080,7 +5080,7 @@ lbl_fn_8002FD54_000043BC:
     li r0, 0x0
     b lbl_fn_8002FD54_000043D4
 lbl_fn_8002FD54_000043C4:
-    bl fn_8001ADE8
+    bl battle_calcTargetDistance
     fctiwz f0, f1
     stfd f0, 0x28(r1)
     lwz r0, 0x2c(r1)
@@ -5189,7 +5189,7 @@ lbl_fn_8002FECC_00004538:
     li r0, 0x0
     b lbl_fn_8002FECC_00004550
 lbl_fn_8002FECC_00004540:
-    bl fn_8001ADE8
+    bl battle_calcTargetDistance
     fctiwz f0, f1
     stfd f0, 0x28(r1)
     lwz r0, 0x2c(r1)

@@ -10,7 +10,7 @@ extern void talk_setSpeakerName(void);
 extern void talk_parseDialogue(void);
 extern void talk_parseDialogueTokens(void);
 extern void talk_copyUtf16String(void);
-extern void fn_8006BA8C(void);
+extern void res_loadFile(void);
 extern void boss_triggerEventAction(void);
 extern void dungeon_initGlobalContext(void);
 extern void town_registerInteractionPoint(void);
@@ -99,7 +99,7 @@ asm void event_processScriptAction(void)
     lis r19, lbl_8073FA60@ha
     addi r3, r19, lbl_8073FA60@l
     stw r20, 0x10(r1)
-    bl fn_8006BA8C
+    bl res_loadFile
     lis r4, lbl_807772D0@ha
     mr r22, r3
     addi r4, r4, lbl_807772D0@l
@@ -632,7 +632,7 @@ lbl_fn_80211244_000007C0:
     lwz r3, lbl_80882EE4
     addi r4, r1, 0x10
     li r5, 0x0
-    bl fn_8006BA8C
+    bl res_loadFile
     lwz r0, 0x10(r1)
     lis r4, lbl_8077A090@ha
     addi r4, r4, lbl_8077A090@l

@@ -40,7 +40,7 @@ extern void gx_transform_getViewportWidth(void);
 extern void fn_805DDD90(void);
 extern void fn_805DDE50(void);
 extern void fn_805DDEC0(void);
-extern void fn_8061A0F0(void);
+extern void gx_displayList_destroy(void);
 extern void gx_displayList_invokeVtableMethod(void);
 extern void wcslen(void);
 extern void __construct_new_array(void);
@@ -417,7 +417,7 @@ asm void fn_805D52C0(void)
     lis r3, lbl_807CA1F8@ha
     mr r4, r31
     lwz r3, lbl_807CA1F8@l(r3)
-    bl fn_8061A0F0
+    bl gx_displayList_destroy
     cmpwi r3, 0x0
     stw r3, 0xd4(r30)
     beq lbl_fn_805D52C0_000004B4
@@ -756,7 +756,7 @@ lbl_fn_805D56B0_00000930:
     lis r3, lbl_807CA1F8@ha
     li r4, 0x5c
     lwz r3, lbl_807CA1F8@l(r3)
-    bl fn_8061A0F0
+    bl gx_displayList_destroy
     cmpwi r3, 0x0
     beq lbl_fn_805D56B0_0000096C
     lhz r0, 0x10(r27)
@@ -779,7 +779,7 @@ lbl_fn_805D56B0_0000096C:
     lis r31, lbl_807CA1F8@ha
     clrlslwi r4, r0, 24, 3
     lwz r3, lbl_807CA1F8@l(r31)
-    bl fn_8061A0F0
+    bl gx_displayList_destroy
     cmpwi r3, 0x0
     stw r3, 0xfc(r23)
     beq lbl_fn_805D56B0_00000A34
@@ -801,7 +801,7 @@ lbl_fn_805D56B0_000009BC:
     add r3, r0, r27
     stw r30, 0x4(r3)
     lwz r3, lbl_807CA1F8@l(r31)
-    bl fn_8061A0F0
+    bl gx_displayList_destroy
     cmpwi r3, 0x0
     beq lbl_fn_805D56B0_00000A1C
     lhz r0, 0x0(r22)

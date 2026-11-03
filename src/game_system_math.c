@@ -20,7 +20,7 @@ extern void talk_copyUtf16String(void);
 extern void boss_initActionStream(void);
 extern void fn_8006B0C8(void);
 extern void boss_parseStateCondition(void);
-extern void fn_8006BA8C(void);
+extern void res_loadFile(void);
 extern void boss_triggerEventAction(void);
 extern void gimmick_initObject(void);
 extern void mem_alloc(void);
@@ -446,13 +446,13 @@ asm void fn_8020C0BC(void)
     addi r3, r27, 0x1
     addi r4, r1, 0xc
     li r5, 0x0
-    bl fn_8006BA8C
+    bl res_loadFile
     stw r31, 0x8(r1)
     mr r30, r3
     addi r3, r27, 0x1a
     addi r4, r1, 0x8
     li r5, 0x0
-    bl fn_8006BA8C
+    bl res_loadFile
     lwz r0, 0xc(r1)
     lis r4, lbl_8077A090@ha
     addi r4, r4, lbl_8077A090@l

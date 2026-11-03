@@ -16,7 +16,7 @@ extern void sound_stopVoice(void);
 extern void fn_8006A204(void);
 extern void fn_8006A900(void);
 extern void boss_triggerEventSequence(void);
-extern void fn_8006BA8C(void);
+extern void res_loadFile(void);
 extern void boss_triggerEventAction(void);
 extern void mem_free(void);
 extern void map_debugLog(void);
@@ -1311,7 +1311,7 @@ asm void fn_804805F0(void)
     addi r3, r1, 0x1a8
     addi r4, r1, 0x40
     li r5, 0x0
-    bl fn_8006BA8C
+    bl res_loadFile
     mr r18, r3
     mr r3, r15
     mr r4, r21
@@ -1347,7 +1347,7 @@ asm void fn_804805F0(void)
     addi r3, r1, 0x1a8
     addi r4, r1, 0x40
     li r5, 0x0
-    bl fn_8006BA8C
+    bl res_loadFile
     mr r14, r3
     lwz r3, 0x1a6c(r15)
     lwz r5, 0x40(r1)
@@ -1371,7 +1371,7 @@ lbl_fn_804805F0_0000109C:
     addi r3, r1, 0x1a8
     addi r4, r1, 0x40
     li r5, 0x0
-    bl fn_8006BA8C
+    bl res_loadFile
     mr r14, r3
     lwz r3, 0x1a6c(r15)
     lwz r5, 0x40(r1)

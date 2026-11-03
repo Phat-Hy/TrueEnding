@@ -11,7 +11,7 @@ extern void talk_setSpeakerName(void);
 extern void talk_parseDialogue(void);
 extern void talk_parseDialogueTokens(void);
 extern void talk_copyUtf16String(void);
-extern void fn_8006BA8C(void);
+extern void res_loadFile(void);
 extern void boss_triggerEventAction(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
@@ -125,7 +125,7 @@ asm void fn_8021996C(void)
     lis r28, lbl_80742540@ha
     addi r3, r28, lbl_80742540@l
     stw r29, 0x10(r1)
-    bl fn_8006BA8C
+    bl res_loadFile
     lis r4, lbl_807772D0@ha
     mr r31, r3
     addi r4, r4, lbl_807772D0@l
@@ -326,7 +326,7 @@ lbl_fn_80219C30_00000304:
     lwz r3, lbl_80882F60
     addi r4, r1, 0x10
     li r5, 0x0
-    bl fn_8006BA8C
+    bl res_loadFile
     lwz r0, 0x10(r1)
     lis r4, lbl_8077A090@ha
     addi r4, r4, lbl_8077A090@l

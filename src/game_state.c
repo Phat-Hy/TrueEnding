@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void fn_8001A444(void);
 extern void battle_calcActorDistance(void);
-extern void fn_8001ADE8(void);
+extern void battle_calcTargetDistance(void);
 extern void fn_8001AEBC(void);
 extern void battle_getCharacterState(void);
 extern void fn_8001B4A4(void);
@@ -2244,7 +2244,7 @@ asm void fn_80036BE8(void)
     b lbl_fn_80036BE8_00001CD0
 lbl_fn_80036BE8_00001CBC:
     li r3, 0x2
-    bl fn_8001ADE8
+    bl battle_calcTargetDistance
     fctiwz f0, f1
     stfd f0, 0x18(r1)
     lwz r4, 0x1c(r1)

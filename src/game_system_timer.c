@@ -9,7 +9,7 @@ extern void dtor_80084684(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
-extern void fn_8006BA8C(void);
+extern void res_loadFile(void);
 extern void boss_triggerEventAction(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
@@ -297,7 +297,7 @@ asm void fn_8020F248(void)
     addi r4, r1, 0x8
     lwz r3, lbl_80882EA0
     li r5, 0x0
-    bl fn_8006BA8C
+    bl res_loadFile
     cmpwi r3, 0x0
     mr r25, r3
     beq lbl_fn_8020F248_0000070C

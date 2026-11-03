@@ -33,7 +33,7 @@ extern void GXSetTevOrder(void);
 extern void GXSetNumTevStages(void);
 extern void GXSetTevAlphaIn(void);
 extern void GXLoadPosMtxImm(void);
-extern void fn_8061A0F0(void);
+extern void gx_displayList_destroy(void);
 extern void gx_displayList_invokeVtableMethod(void);
 
 /* External data declarations */
@@ -987,7 +987,7 @@ asm void fn_805C0980(void)
     cmpwi r3, 0x0
     beq lbl_fn_805C0980_00000C24
     li r4, 0x10
-    bl fn_8061A0F0
+    bl gx_displayList_destroy
     cmpwi r3, 0x0
     beq lbl_fn_805C0980_00000C14
     stw r31, 0x0(r3)
@@ -1540,11 +1540,11 @@ lbl_fn_805C10E0_0000134C:
     cmpwi r3, 0x0
     beq lbl_fn_805C10E0_000013CC
     li r4, 0x30
-    bl fn_8061A0F0
+    bl gx_displayList_destroy
     mr r29, r3
     lwz r3, 0x14(r28)
     li r4, 0x10
-    bl fn_8061A0F0
+    bl gx_displayList_destroy
     cmpwi r29, 0x0
     mr r21, r3
     beq lbl_fn_805C10E0_000013B4

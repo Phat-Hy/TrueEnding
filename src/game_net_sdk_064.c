@@ -24,10 +24,10 @@ extern void fn_805EE150(void);
 extern void OSInitMutex(void);
 extern void PSMTXIdentity(void);
 extern void PSMTXMultVecArraySR(void);
-extern void fn_805FA200(void);
-extern void fn_805FA390(void);
-extern void fn_805FA4E0(void);
-extern void fn_805FA5D0(void);
+extern void DVDFastOpen(void);
+extern void DVDClose(void);
+extern void DVDReadAsyncPrio(void);
+extern void DVDReadPrio(void);
 extern void fn_805FEC00(void);
 extern void fn_805FEF70(void);
 extern void fn_806036E0(void);
@@ -2028,7 +2028,7 @@ asm void fn_80725E00(void)
 lbl_fn_80725E00_00001978:
     mr r3, r4
     addi r4, r31, 0x28
-    bl fn_805FA200
+    bl DVDFastOpen
     cmpwi r3, 0x0
     beq lbl_fn_80725E00_000019B4
     lwz r0, 0x5c(r31)
@@ -2184,7 +2184,7 @@ asm void fn_80726070(void)
     cmpwi r0, 0x0
     beq lbl_fn_80726070_00001BBC
     addi r3, r3, 0x28
-    bl fn_805FA390
+    bl DVDClose
     li r0, 0x0
     stb r0, 0x4(r31)
 lbl_fn_80726070_00001BBC:
@@ -2219,7 +2219,7 @@ asm void fn_807260C0(void)
 lbl_fn_807260C0_00001C18:
     lwz r7, 0x68(r3)
     addi r3, r3, 0x28
-    bl fn_805FA5D0
+    bl DVDReadPrio
     cmpwi r3, 0x0
     mr r31, r3
     ble lbl_fn_807260C0_00001C3C
@@ -2283,7 +2283,7 @@ lbl_fn_80726150_00001CF4:
     mr r6, r11
     addi r3, r3, 0x28
     addi r7, r7, fn_80725DA0@l
-    bl fn_805FA4E0
+    bl DVDReadAsyncPrio
     neg r0, r3
     or r0, r0, r3
     srwi. r29, r0, 31
@@ -2324,7 +2324,7 @@ asm void fn_80726250(void)
 lbl_fn_80726250_00001D90:
     lwz r7, 0x68(r3)
     addi r3, r3, 0x28
-    b fn_805FA5D0
+    b DVDReadPrio
 }
 
 asm void fn_80726290(void)
@@ -2355,7 +2355,7 @@ lbl_fn_80726290_00001DEC:
     mr r6, r11
     addi r3, r3, 0x28
     addi r7, r7, fn_80725DA0@l
-    bl fn_805FA4E0
+    bl DVDReadAsyncPrio
     neg r0, r3
     or r0, r0, r3
     srwi r3, r0, 31

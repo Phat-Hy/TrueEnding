@@ -19,7 +19,7 @@ extern void fn_805D7D60(void);
 extern void fn_805D9BE0(void);
 extern void fn_80616360(void);
 extern void fn_80616EF0(void);
-extern void fn_8061A0F0(void);
+extern void gx_displayList_destroy(void);
 extern void gx_displayList_invokeVtableMethod(void);
 extern void strncpy(void);
 extern void __construct_new_array(void);
@@ -71,7 +71,7 @@ lbl_fn_805CF6E0_00000050:
     mr r31, r4
     lwz r3, lbl_807CA1F8@l(r3)
     li r4, 0xd4
-    bl fn_8061A0F0
+    bl gx_displayList_destroy
     cmpwi r3, 0x0
     beq lbl_fn_805CF6E0_0000007C
     beq lbl_fn_805CF6E0_000001E8
@@ -94,7 +94,7 @@ lbl_fn_805CF6E0_00000084:
     stw r7, 0x3c(r1)
     stw r6, 0x40(r1)
     stw r0, 0x44(r1)
-    bl fn_8061A0F0
+    bl gx_displayList_destroy
     cmpwi r3, 0x0
     beq lbl_fn_805CF6E0_000000D4
     beq lbl_fn_805CF6E0_000001E8
@@ -118,7 +118,7 @@ lbl_fn_805CF6E0_000000DC:
     stw r7, 0x2c(r1)
     stw r6, 0x30(r1)
     stw r0, 0x34(r1)
-    bl fn_8061A0F0
+    bl gx_displayList_destroy
     cmpwi r3, 0x0
     beq lbl_fn_805CF6E0_0000012C
     beq lbl_fn_805CF6E0_000001E8
@@ -142,7 +142,7 @@ lbl_fn_805CF6E0_00000134:
     stw r7, 0x1c(r1)
     stw r6, 0x20(r1)
     stw r0, 0x24(r1)
-    bl fn_8061A0F0
+    bl gx_displayList_destroy
     cmpwi r3, 0x0
     beq lbl_fn_805CF6E0_00000184
     beq lbl_fn_805CF6E0_000001E8
@@ -166,7 +166,7 @@ lbl_fn_805CF6E0_0000018C:
     stw r7, 0xc(r1)
     stw r6, 0x10(r1)
     stw r0, 0x14(r1)
-    bl fn_8061A0F0
+    bl gx_displayList_destroy
     cmpwi r3, 0x0
     beq lbl_fn_805CF6E0_000001DC
     beq lbl_fn_805CF6E0_000001E8
@@ -1724,7 +1724,7 @@ lbl_fn_805D0E60_00001884:
     lwz r3, lbl_807CA1F8@l(r7)
     add r0, r5, r0
     add r4, r4, r0
-    bl fn_8061A0F0
+    bl gx_displayList_destroy
     cmpwi r3, 0x0
     stw r3, 0x58(r20)
     beq lbl_fn_805D0E60_00001E00

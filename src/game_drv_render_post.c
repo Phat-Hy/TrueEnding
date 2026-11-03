@@ -45,7 +45,7 @@ extern void fn_806177B0(void);
 extern void GXSetTevOrder(void);
 extern void GXSetNumTevStages(void);
 extern void GXSetTevAlphaIn(void);
-extern void fn_8061A0F0(void);
+extern void gx_displayList_destroy(void);
 extern void gx_displayList_invokeVtableMethod(void);
 extern void fn_80653DA0(void);
 extern void fn_80653EC0(void);
@@ -1093,7 +1093,7 @@ lbl_fn_805CE8F0_00000DE0:
     beq lbl_fn_805CE8F0_00000E44
     lwz r3, lbl_807CA1F8@l(r31)
     li r4, 0xc
-    bl fn_8061A0F0
+    bl gx_displayList_destroy
     cmpwi r3, 0x0
     beq lbl_fn_805CE8F0_00000E44
     mr r5, r3
@@ -1693,7 +1693,7 @@ lbl_fn_805CEF50_000015E8:
     lwz r3, lbl_807CA1F8@l(r29)
     li r18, 0x1
     li r4, 0xc
-    bl fn_8061A0F0
+    bl gx_displayList_destroy
     cmpwi r3, 0x0
     beq lbl_fn_805CEF50_00001628
     beq lbl_fn_805CEF50_0000162C
@@ -1718,7 +1718,7 @@ lbl_fn_805CEF50_00001634:
     lwz r21, 0x10(r30)
     li r4, 0x2c
     lwz r3, lbl_807CA1F8@l(r29)
-    bl fn_8061A0F0
+    bl gx_displayList_destroy
     cmpwi r3, 0x0
     beq lbl_fn_805CEF50_0000167C
     mr r4, r3
@@ -1807,7 +1807,7 @@ lbl_fn_805CF260_00001730:
 lbl_fn_805CF260_00001780:
     lwz r3, lbl_807CA1F8@l(r31)
     li r4, 0x20
-    bl fn_8061A0F0
+    bl gx_displayList_destroy
     cmpwi r3, 0x0
     beq lbl_fn_805CF260_000017A8
     mr r30, r3

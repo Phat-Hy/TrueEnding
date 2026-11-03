@@ -11,7 +11,7 @@ extern void _savegpr_24(void);
 extern void _savegpr_25(void);
 extern void fn_8005DF90(void);
 extern void seq_stepPlaybackTimer(void);
-extern void fn_80075F58(void);
+extern void seq_setViewportAndScissor(void);
 extern void seq_bindSlotResource(void);
 extern void fn_800A96AC(void);
 extern void fn_800ACFC8(void);
@@ -595,7 +595,7 @@ lbl_fn_800AD648_00000684:
     li r5, 0x0
     li r6, 0x1
     li r7, 0x1
-    bl fn_80075F58
+    bl seq_setViewportAndScissor
     lwz r3, lbl_8087EFB4
     bl motion_initTransform
     bl __GXFlushPixelEngine
@@ -735,7 +735,7 @@ asm void fn_800AD834(void)
     slwi r7, r27, 1
     li r4, 0x0
     li r5, 0x0
-    bl fn_80075F58
+    bl seq_setViewportAndScissor
     lwz r3, lbl_8087EFB4
     bl motion_initTransform
     bl __GXFlushPixelEngine
@@ -1055,7 +1055,7 @@ lbl_fn_800AD834_00000D20:
     slwi r7, r19, 1
     li r4, 0x0
     li r5, 0x0
-    bl fn_80075F58
+    bl seq_setViewportAndScissor
     lwz r3, lbl_8087EFB4
     bl motion_initTransform
     bl __GXFlushPixelEngine
@@ -1256,7 +1256,7 @@ lbl_fn_800AD834_00000F00:
     li r5, 0x0
     li r6, 0x40
     li r7, 0x1
-    bl fn_80075F58
+    bl seq_setViewportAndScissor
     lwz r3, lbl_8087EFB4
     bl motion_initTransform
     bl __GXFlushPixelEngine
@@ -1948,7 +1948,7 @@ lbl_fn_800AE568_000017F8:
     mr r7, r30
     li r4, 0x0
     li r5, 0x0
-    bl fn_80075F58
+    bl seq_setViewportAndScissor
     lwz r3, lbl_8087EFB4
     bl motion_initTransform
     clrlwi r5, r29, 16
