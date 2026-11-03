@@ -66,7 +66,7 @@ extern u32 lbl_80880BB0;
 /* Function declarations */
 void fn_8007B078(void);
 void fn_8007B100(void);
-void fn_8007B260(void);
+void dialogue_parseCommandScript(void);
 void fn_8007C018(void);
 void fn_8007C0D4(void);
 void fn_8007C0D8(void);
@@ -218,7 +218,7 @@ lbl_fn_8007B100_000001CC:
     blr
 }
 
-asm void fn_8007B260(void)
+asm void dialogue_parseCommandScript(void)
 {
     nofralloc
     stwu r1, -0x110(r1)
@@ -266,52 +266,52 @@ asm void fn_8007B260(void)
     lfs f31, lbl_80880BA0
     lis r31, lbl_80731B9C@ha
     lis r14, jumptable_80778420@ha
-    b lbl_fn_8007B260_00000EDC
-lbl_fn_8007B260_000002A0:
+    b lbl_dialogue_parseCommandScript_00000EDC
+lbl_dialogue_parseCommandScript_000002A0:
     lbz r0, 0x2(r21)
     cmpwi r0, 0x4d
-    bne lbl_fn_8007B260_000002E0
+    bne lbl_dialogue_parseCommandScript_000002E0
     lbz r0, 0x3(r21)
     cmpwi r0, 0x42
-    bne lbl_fn_8007B260_000002E0
+    bne lbl_dialogue_parseCommandScript_000002E0
     lbz r0, 0x4(r21)
     cmpwi r0, 0x5f
-    bne lbl_fn_8007B260_000002E0
+    bne lbl_dialogue_parseCommandScript_000002E0
     lwz r0, 0x2c(r1)
     mr r4, r24
     addi r5, r1, 0x2c
     add r3, r21, r0
     bl str_nextToken
     mr r21, r3
-    b lbl_fn_8007B260_00000EC4
-lbl_fn_8007B260_000002E0:
+    b lbl_dialogue_parseCommandScript_00000EC4
+lbl_dialogue_parseCommandScript_000002E0:
     lwz r22, 0x2c(r1)
     addi r25, r31, lbl_80731B9C@l
     li r29, 0x0
-    b lbl_fn_8007B260_00000324
-lbl_fn_8007B260_000002F0:
+    b lbl_dialogue_parseCommandScript_00000324
+lbl_dialogue_parseCommandScript_000002F0:
     mr r3, r23
     bl strlen
     cmpw r3, r22
-    bne lbl_fn_8007B260_0000031C
+    bne lbl_dialogue_parseCommandScript_0000031C
     mr r3, r21
     mr r4, r23
     mr r5, r22
     bl strncmp
     cmpwi r3, 0x0
-    bne lbl_fn_8007B260_0000031C
-    b lbl_fn_8007B260_00000334
-lbl_fn_8007B260_0000031C:
+    bne lbl_dialogue_parseCommandScript_0000031C
+    b lbl_dialogue_parseCommandScript_00000334
+lbl_dialogue_parseCommandScript_0000031C:
     addi r25, r25, 0x4
     addi r29, r29, 0x1
-lbl_fn_8007B260_00000324:
+lbl_dialogue_parseCommandScript_00000324:
     lwz r23, 0x0(r25)
     cmpwi r23, 0x0
-    bne lbl_fn_8007B260_000002F0
+    bne lbl_dialogue_parseCommandScript_000002F0
     li r29, -0x1
-lbl_fn_8007B260_00000334:
+lbl_dialogue_parseCommandScript_00000334:
     cmplwi r29, 0xe
-    bgt lbl_fn_8007B260_00000EC4
+    bgt lbl_dialogue_parseCommandScript_00000EC4
     addi r3, r14, jumptable_80778420@l
     slwi r0, r29, 2
     lwzx r3, r3, r0
@@ -321,23 +321,23 @@ lbl_fn_8007B260_00000334:
     lbz r0, 0x1(r3)
     extsb r0, r0
     cmpwi r0, 0xa
-    beq lbl_fn_8007B260_0000036C
+    beq lbl_dialogue_parseCommandScript_0000036C
     cmpwi r0, 0xd
-    bne lbl_fn_8007B260_000003F8
-lbl_fn_8007B260_0000036C:
+    bne lbl_dialogue_parseCommandScript_000003F8
+lbl_dialogue_parseCommandScript_0000036C:
     cmpwi r27, 0x0
-    beq lbl_fn_8007B260_00000384
+    beq lbl_dialogue_parseCommandScript_00000384
     mr r3, r27
     bl strlen
     mr r23, r3
-    b lbl_fn_8007B260_00000388
-lbl_fn_8007B260_00000384:
+    b lbl_dialogue_parseCommandScript_00000388
+lbl_dialogue_parseCommandScript_00000384:
     li r23, 0x0
-lbl_fn_8007B260_00000388:
+lbl_dialogue_parseCommandScript_00000388:
     cmpwi r27, 0x0
-    beq lbl_fn_8007B260_000003E0
+    beq lbl_dialogue_parseCommandScript_000003E0
     cmpwi r23, 0x0
-    beq lbl_fn_8007B260_000003E0
+    beq lbl_dialogue_parseCommandScript_000003E0
     addi r3, r23, 0x1
     li r4, 0x1
     la r5, lbl_8087D790
@@ -351,29 +351,29 @@ lbl_fn_8007B260_00000388:
     stbx r30, r22, r23
     lwz r3, 0x0(r15)
     cmpwi r3, 0x0
-    beq lbl_fn_8007B260_000003D8
+    beq lbl_dialogue_parseCommandScript_000003D8
     bl mem_getAllocSize
     stw r30, 0x0(r15)
-lbl_fn_8007B260_000003D8:
+lbl_dialogue_parseCommandScript_000003D8:
     stw r22, 0x0(r15)
-    b lbl_fn_8007B260_00000EC4
-lbl_fn_8007B260_000003E0:
+    b lbl_dialogue_parseCommandScript_00000EC4
+lbl_dialogue_parseCommandScript_000003E0:
     lwz r3, 0x0(r15)
     cmpwi r3, 0x0
-    beq lbl_fn_8007B260_00000EC4
+    beq lbl_dialogue_parseCommandScript_00000EC4
     bl mem_getAllocSize
     stw r30, 0x0(r15)
-    b lbl_fn_8007B260_00000EC4
-lbl_fn_8007B260_000003F8:
+    b lbl_dialogue_parseCommandScript_00000EC4
+lbl_dialogue_parseCommandScript_000003F8:
     mr r4, r24
     addi r5, r1, 0x2c
     bl str_nextToken
     cmpwi r3, 0x0
     lwz r22, 0x2c(r1)
     mr r21, r3
-    beq lbl_fn_8007B260_00000464
+    beq lbl_dialogue_parseCommandScript_00000464
     cmpwi r22, 0x0
-    beq lbl_fn_8007B260_00000464
+    beq lbl_dialogue_parseCommandScript_00000464
     addi r3, r22, 0x1
     li r4, 0x1
     la r5, lbl_8087D790
@@ -387,26 +387,26 @@ lbl_fn_8007B260_000003F8:
     stbx r30, r23, r22
     lwz r3, 0x0(r15)
     cmpwi r3, 0x0
-    beq lbl_fn_8007B260_0000045C
+    beq lbl_dialogue_parseCommandScript_0000045C
     bl mem_getAllocSize
     stw r30, 0x0(r15)
-lbl_fn_8007B260_0000045C:
+lbl_dialogue_parseCommandScript_0000045C:
     stw r23, 0x0(r15)
-    b lbl_fn_8007B260_00000478
-lbl_fn_8007B260_00000464:
+    b lbl_dialogue_parseCommandScript_00000478
+lbl_dialogue_parseCommandScript_00000464:
     lwz r3, 0x0(r15)
     cmpwi r3, 0x0
-    beq lbl_fn_8007B260_00000478
+    beq lbl_dialogue_parseCommandScript_00000478
     bl mem_getAllocSize
     stw r30, 0x0(r15)
-lbl_fn_8007B260_00000478:
+lbl_dialogue_parseCommandScript_00000478:
     lwz r23, 0x0(r15)
     cmpwi r23, 0x0
-    beq lbl_fn_8007B260_00000488
-    b lbl_fn_8007B260_0000048C
-lbl_fn_8007B260_00000488:
+    beq lbl_dialogue_parseCommandScript_00000488
+    b lbl_dialogue_parseCommandScript_0000048C
+lbl_dialogue_parseCommandScript_00000488:
     la r23, lbl_8087EF00
-lbl_fn_8007B260_0000048C:
+lbl_dialogue_parseCommandScript_0000048C:
     stw r30, 0x30(r1)
     mr r3, r23
     stw r30, 0x34(r1)
@@ -430,83 +430,83 @@ lbl_fn_8007B260_0000048C:
     bl fn_8006AC08
     lwz r0, 0x30(r1)
     srwi. r0, r0, 31
-    beq lbl_fn_8007B260_000004F4
+    beq lbl_dialogue_parseCommandScript_000004F4
     lwz r3, 0x38(r1)
     bl dtor_80084684
-lbl_fn_8007B260_000004F4:
+lbl_dialogue_parseCommandScript_000004F4:
     mr r3, r27
     bl strlen
     lwz r0, 0x3c(r1)
     mr r22, r3
     stw r3, 0x18(r1)
     srwi. r0, r0, 31
-    bne lbl_fn_8007B260_0000051C
+    bne lbl_dialogue_parseCommandScript_0000051C
     lbz r0, 0x3c(r1)
     clrlwi r4, r0, 25
-    b lbl_fn_8007B260_00000520
-lbl_fn_8007B260_0000051C:
+    b lbl_dialogue_parseCommandScript_00000520
+lbl_dialogue_parseCommandScript_0000051C:
     lwz r4, 0x40(r1)
-lbl_fn_8007B260_00000520:
+lbl_dialogue_parseCommandScript_00000520:
     lwz r0, 0x3c(r1)
     stw r4, 0x1c(r1)
     srwi. r0, r0, 31
-    bne lbl_fn_8007B260_00000540
+    bne lbl_dialogue_parseCommandScript_00000540
     lbz r0, 0x3c(r1)
     mr r3, r26
     clrlwi r0, r0, 25
-    b lbl_fn_8007B260_00000548
-lbl_fn_8007B260_00000540:
+    b lbl_dialogue_parseCommandScript_00000548
+lbl_dialogue_parseCommandScript_00000540:
     lwz r3, 0x44(r1)
     lwz r0, 0x40(r1)
-lbl_fn_8007B260_00000548:
+lbl_dialogue_parseCommandScript_00000548:
     cmplw r4, r0
     stw r0, 0x14(r1)
     addi r4, r1, 0x14
-    bge lbl_fn_8007B260_0000055C
+    bge lbl_dialogue_parseCommandScript_0000055C
     addi r4, r1, 0x1c
-lbl_fn_8007B260_0000055C:
+lbl_dialogue_parseCommandScript_0000055C:
     lwz r0, 0x0(r4)
     mr r4, r27
     stw r0, 0x10(r1)
     addi r5, r1, 0x10
     cmplw r22, r0
-    bge lbl_fn_8007B260_00000578
+    bge lbl_dialogue_parseCommandScript_00000578
     addi r5, r1, 0x18
-lbl_fn_8007B260_00000578:
+lbl_dialogue_parseCommandScript_00000578:
     lwz r5, 0x0(r5)
     bl memcmp
     cmpwi r3, 0x0
-    bne lbl_fn_8007B260_000005AC
+    bne lbl_dialogue_parseCommandScript_000005AC
     lwz r0, 0x10(r1)
     cmplw r0, r22
-    bge lbl_fn_8007B260_0000059C
+    bge lbl_dialogue_parseCommandScript_0000059C
     li r3, -0x1
-    b lbl_fn_8007B260_000005AC
-lbl_fn_8007B260_0000059C:
-    bne lbl_fn_8007B260_000005A8
+    b lbl_dialogue_parseCommandScript_000005AC
+lbl_dialogue_parseCommandScript_0000059C:
+    bne lbl_dialogue_parseCommandScript_000005A8
     li r3, 0x0
-    b lbl_fn_8007B260_000005AC
-lbl_fn_8007B260_000005A8:
+    b lbl_dialogue_parseCommandScript_000005AC
+lbl_dialogue_parseCommandScript_000005A8:
     li r3, 0x1
-lbl_fn_8007B260_000005AC:
+lbl_dialogue_parseCommandScript_000005AC:
     cmpwi r3, 0x0
-    beq lbl_fn_8007B260_00000648
+    beq lbl_dialogue_parseCommandScript_00000648
     lwz r0, 0x3c(r1)
     srwi. r0, r0, 31
-    bne lbl_fn_8007B260_000005CC
+    bne lbl_dialogue_parseCommandScript_000005CC
     lbz r0, 0x3c(r1)
     clrlwi r3, r0, 25
-    b lbl_fn_8007B260_000005D0
-lbl_fn_8007B260_000005CC:
+    b lbl_dialogue_parseCommandScript_000005D0
+lbl_dialogue_parseCommandScript_000005CC:
     lwz r3, 0x40(r1)
-lbl_fn_8007B260_000005D0:
+lbl_dialogue_parseCommandScript_000005D0:
     cmpwi r21, 0x0
     lwz r0, 0x2c(r1)
     addi r3, r3, 0x1
     subf r22, r3, r0
-    beq lbl_fn_8007B260_00000634
+    beq lbl_dialogue_parseCommandScript_00000634
     cmpwi r22, 0x0
-    beq lbl_fn_8007B260_00000634
+    beq lbl_dialogue_parseCommandScript_00000634
     addi r3, r22, 0x1
     li r4, 0x1
     la r5, lbl_8087D790
@@ -520,25 +520,25 @@ lbl_fn_8007B260_000005D0:
     stbx r30, r23, r22
     lwz r3, 0x0(r15)
     cmpwi r3, 0x0
-    beq lbl_fn_8007B260_0000062C
+    beq lbl_dialogue_parseCommandScript_0000062C
     bl mem_getAllocSize
     stw r30, 0x0(r15)
-lbl_fn_8007B260_0000062C:
+lbl_dialogue_parseCommandScript_0000062C:
     stw r23, 0x0(r15)
-    b lbl_fn_8007B260_00000648
-lbl_fn_8007B260_00000634:
+    b lbl_dialogue_parseCommandScript_00000648
+lbl_dialogue_parseCommandScript_00000634:
     lwz r3, 0x0(r15)
     cmpwi r3, 0x0
-    beq lbl_fn_8007B260_00000648
+    beq lbl_dialogue_parseCommandScript_00000648
     bl mem_getAllocSize
     stw r30, 0x0(r15)
-lbl_fn_8007B260_00000648:
+lbl_dialogue_parseCommandScript_00000648:
     lwz r0, 0x3c(r1)
     srwi. r0, r0, 31
-    beq lbl_fn_8007B260_00000EC4
+    beq lbl_dialogue_parseCommandScript_00000EC4
     lwz r3, 0x44(r1)
     bl dtor_80084684
-    b lbl_fn_8007B260_00000EC4
+    b lbl_dialogue_parseCommandScript_00000EC4
     mr r4, r24
     add r3, r21, r22
     addi r5, r1, 0x2c
@@ -548,7 +548,7 @@ lbl_fn_8007B260_00000648:
     lwz r0, 0x8(r15)
     fmr f30, f1
     cmpwi r0, 0x0
-    bne lbl_fn_8007B260_000006C0
+    bne lbl_dialogue_parseCommandScript_000006C0
     li r3, 0x14
     li r4, 0x6
     la r5, lbl_8087D780
@@ -556,15 +556,15 @@ lbl_fn_8007B260_00000648:
     li r7, 0x0
     bl mem_alloc
     cmpwi r3, 0x0
-    beq lbl_fn_8007B260_000006BC
+    beq lbl_dialogue_parseCommandScript_000006BC
     stfs f25, 0x0(r3)
     stfs f26, 0x4(r3)
     stfs f27, 0x8(r3)
     stfs f28, 0xc(r3)
     stfs f29, 0x10(r3)
-lbl_fn_8007B260_000006BC:
+lbl_dialogue_parseCommandScript_000006BC:
     stw r3, 0x8(r15)
-lbl_fn_8007B260_000006C0:
+lbl_dialogue_parseCommandScript_000006C0:
     lwz r3, 0x8(r15)
     mr r4, r24
     addi r5, r1, 0x2c
@@ -577,7 +577,7 @@ lbl_fn_8007B260_000006C0:
     lwz r0, 0x8(r15)
     fmr f30, f1
     cmpwi r0, 0x0
-    bne lbl_fn_8007B260_0000072C
+    bne lbl_dialogue_parseCommandScript_0000072C
     li r3, 0x14
     li r4, 0x6
     la r5, lbl_8087D780
@@ -585,18 +585,18 @@ lbl_fn_8007B260_000006C0:
     li r7, 0x0
     bl mem_alloc
     cmpwi r3, 0x0
-    beq lbl_fn_8007B260_00000728
+    beq lbl_dialogue_parseCommandScript_00000728
     stfs f25, 0x0(r3)
     stfs f26, 0x4(r3)
     stfs f27, 0x8(r3)
     stfs f28, 0xc(r3)
     stfs f29, 0x10(r3)
-lbl_fn_8007B260_00000728:
+lbl_dialogue_parseCommandScript_00000728:
     stw r3, 0x8(r15)
-lbl_fn_8007B260_0000072C:
+lbl_dialogue_parseCommandScript_0000072C:
     lwz r3, 0x8(r15)
     stfs f30, 0x4(r3)
-    b lbl_fn_8007B260_00000EC4
+    b lbl_dialogue_parseCommandScript_00000EC4
     mr r4, r24
     add r3, r21, r22
     addi r5, r1, 0x2c
@@ -606,7 +606,7 @@ lbl_fn_8007B260_0000072C:
     lwz r0, 0x8(r15)
     fmr f30, f1
     cmpwi r0, 0x0
-    bne lbl_fn_8007B260_00000798
+    bne lbl_dialogue_parseCommandScript_00000798
     li r3, 0x14
     li r4, 0x6
     la r5, lbl_8087D780
@@ -614,18 +614,18 @@ lbl_fn_8007B260_0000072C:
     li r7, 0x0
     bl mem_alloc
     cmpwi r3, 0x0
-    beq lbl_fn_8007B260_00000794
+    beq lbl_dialogue_parseCommandScript_00000794
     stfs f25, 0x0(r3)
     stfs f26, 0x4(r3)
     stfs f27, 0x8(r3)
     stfs f28, 0xc(r3)
     stfs f29, 0x10(r3)
-lbl_fn_8007B260_00000794:
+lbl_dialogue_parseCommandScript_00000794:
     stw r3, 0x8(r15)
-lbl_fn_8007B260_00000798:
+lbl_dialogue_parseCommandScript_00000798:
     lwz r3, 0x8(r15)
     stfs f30, 0x8(r3)
-    b lbl_fn_8007B260_00000EC4
+    b lbl_dialogue_parseCommandScript_00000EC4
     mr r4, r24
     add r3, r21, r22
     addi r5, r1, 0x2c
@@ -635,7 +635,7 @@ lbl_fn_8007B260_00000798:
     lwz r0, 0x8(r15)
     fmr f30, f1
     cmpwi r0, 0x0
-    bne lbl_fn_8007B260_00000804
+    bne lbl_dialogue_parseCommandScript_00000804
     li r3, 0x14
     li r4, 0x6
     la r5, lbl_8087D780
@@ -643,15 +643,15 @@ lbl_fn_8007B260_00000798:
     li r7, 0x0
     bl mem_alloc
     cmpwi r3, 0x0
-    beq lbl_fn_8007B260_00000800
+    beq lbl_dialogue_parseCommandScript_00000800
     stfs f25, 0x0(r3)
     stfs f26, 0x4(r3)
     stfs f27, 0x8(r3)
     stfs f28, 0xc(r3)
     stfs f29, 0x10(r3)
-lbl_fn_8007B260_00000800:
+lbl_dialogue_parseCommandScript_00000800:
     stw r3, 0x8(r15)
-lbl_fn_8007B260_00000804:
+lbl_dialogue_parseCommandScript_00000804:
     lwz r3, 0x8(r15)
     mr r4, r24
     addi r5, r1, 0x2c
@@ -664,7 +664,7 @@ lbl_fn_8007B260_00000804:
     lwz r0, 0x8(r15)
     fmr f30, f1
     cmpwi r0, 0x0
-    bne lbl_fn_8007B260_00000870
+    bne lbl_dialogue_parseCommandScript_00000870
     li r3, 0x14
     li r4, 0x6
     la r5, lbl_8087D780
@@ -672,18 +672,18 @@ lbl_fn_8007B260_00000804:
     li r7, 0x0
     bl mem_alloc
     cmpwi r3, 0x0
-    beq lbl_fn_8007B260_0000086C
+    beq lbl_dialogue_parseCommandScript_0000086C
     stfs f25, 0x0(r3)
     stfs f26, 0x4(r3)
     stfs f27, 0x8(r3)
     stfs f28, 0xc(r3)
     stfs f29, 0x10(r3)
-lbl_fn_8007B260_0000086C:
+lbl_dialogue_parseCommandScript_0000086C:
     stw r3, 0x8(r15)
-lbl_fn_8007B260_00000870:
+lbl_dialogue_parseCommandScript_00000870:
     lwz r3, 0x8(r15)
     stfs f30, 0x10(r3)
-    b lbl_fn_8007B260_00000EC4
+    b lbl_dialogue_parseCommandScript_00000EC4
     mr r4, r24
     add r3, r21, r22
     addi r5, r1, 0x2c
@@ -693,7 +693,7 @@ lbl_fn_8007B260_00000870:
     subi r0, r3, 0x1
     cntlzw r0, r0
     srwi r20, r0, 5
-    b lbl_fn_8007B260_00000EC4
+    b lbl_dialogue_parseCommandScript_00000EC4
     mr r4, r24
     add r3, r21, r22
     addi r5, r1, 0x2c
@@ -703,7 +703,7 @@ lbl_fn_8007B260_00000870:
     subi r0, r3, 0x1
     cntlzw r0, r0
     srwi r19, r0, 5
-    b lbl_fn_8007B260_00000EC4
+    b lbl_dialogue_parseCommandScript_00000EC4
     mr r4, r24
     add r3, r21, r22
     addi r5, r1, 0x2c
@@ -713,7 +713,7 @@ lbl_fn_8007B260_00000870:
     subi r0, r3, 0x1
     cntlzw r0, r0
     srwi r18, r0, 5
-    b lbl_fn_8007B260_00000EC4
+    b lbl_dialogue_parseCommandScript_00000EC4
     mr r4, r24
     add r3, r21, r22
     addi r5, r1, 0x2c
@@ -723,7 +723,7 @@ lbl_fn_8007B260_00000870:
     subi r0, r3, 0x1
     cntlzw r0, r0
     srwi r17, r0, 5
-    b lbl_fn_8007B260_00000EC4
+    b lbl_dialogue_parseCommandScript_00000EC4
     mr r4, r24
     add r3, r21, r22
     addi r5, r1, 0x2c
@@ -733,7 +733,7 @@ lbl_fn_8007B260_00000870:
     lwz r0, 0xc(r15)
     fmr f30, f1
     cmpwi r0, 0x0
-    bne lbl_fn_8007B260_0000097C
+    bne lbl_dialogue_parseCommandScript_0000097C
     li r3, 0x14
     li r4, 0x6
     la r5, lbl_8087D788
@@ -741,15 +741,15 @@ lbl_fn_8007B260_00000870:
     li r7, 0x0
     bl mem_alloc
     cmpwi r3, 0x0
-    beq lbl_fn_8007B260_00000978
+    beq lbl_dialogue_parseCommandScript_00000978
     stfs f25, 0x0(r3)
     stfs f26, 0x4(r3)
     stfs f27, 0x8(r3)
     stfs f28, 0xc(r3)
     stfs f29, 0x10(r3)
-lbl_fn_8007B260_00000978:
+lbl_dialogue_parseCommandScript_00000978:
     stw r3, 0xc(r15)
-lbl_fn_8007B260_0000097C:
+lbl_dialogue_parseCommandScript_0000097C:
     lwz r3, 0xc(r15)
     mr r4, r24
     addi r5, r1, 0x2c
@@ -762,7 +762,7 @@ lbl_fn_8007B260_0000097C:
     lwz r0, 0xc(r15)
     fmr f30, f1
     cmpwi r0, 0x0
-    bne lbl_fn_8007B260_000009E8
+    bne lbl_dialogue_parseCommandScript_000009E8
     li r3, 0x14
     li r4, 0x6
     la r5, lbl_8087D788
@@ -770,18 +770,18 @@ lbl_fn_8007B260_0000097C:
     li r7, 0x0
     bl mem_alloc
     cmpwi r3, 0x0
-    beq lbl_fn_8007B260_000009E4
+    beq lbl_dialogue_parseCommandScript_000009E4
     stfs f25, 0x0(r3)
     stfs f26, 0x4(r3)
     stfs f27, 0x8(r3)
     stfs f28, 0xc(r3)
     stfs f29, 0x10(r3)
-lbl_fn_8007B260_000009E4:
+lbl_dialogue_parseCommandScript_000009E4:
     stw r3, 0xc(r15)
-lbl_fn_8007B260_000009E8:
+lbl_dialogue_parseCommandScript_000009E8:
     lwz r3, 0xc(r15)
     stfs f30, 0x4(r3)
-    b lbl_fn_8007B260_00000EC4
+    b lbl_dialogue_parseCommandScript_00000EC4
     mr r4, r24
     add r3, r21, r22
     addi r5, r1, 0x2c
@@ -791,7 +791,7 @@ lbl_fn_8007B260_000009E8:
     lwz r0, 0xc(r15)
     fmr f30, f1
     cmpwi r0, 0x0
-    bne lbl_fn_8007B260_00000A54
+    bne lbl_dialogue_parseCommandScript_00000A54
     li r3, 0x14
     li r4, 0x6
     la r5, lbl_8087D788
@@ -799,18 +799,18 @@ lbl_fn_8007B260_000009E8:
     li r7, 0x0
     bl mem_alloc
     cmpwi r3, 0x0
-    beq lbl_fn_8007B260_00000A50
+    beq lbl_dialogue_parseCommandScript_00000A50
     stfs f25, 0x0(r3)
     stfs f26, 0x4(r3)
     stfs f27, 0x8(r3)
     stfs f28, 0xc(r3)
     stfs f29, 0x10(r3)
-lbl_fn_8007B260_00000A50:
+lbl_dialogue_parseCommandScript_00000A50:
     stw r3, 0xc(r15)
-lbl_fn_8007B260_00000A54:
+lbl_dialogue_parseCommandScript_00000A54:
     lwz r3, 0xc(r15)
     stfs f30, 0x8(r3)
-    b lbl_fn_8007B260_00000EC4
+    b lbl_dialogue_parseCommandScript_00000EC4
     mr r4, r24
     add r3, r21, r22
     addi r5, r1, 0x2c
@@ -820,7 +820,7 @@ lbl_fn_8007B260_00000A54:
     lwz r0, 0xc(r15)
     fmr f30, f1
     cmpwi r0, 0x0
-    bne lbl_fn_8007B260_00000AC0
+    bne lbl_dialogue_parseCommandScript_00000AC0
     li r3, 0x14
     li r4, 0x6
     la r5, lbl_8087D788
@@ -828,15 +828,15 @@ lbl_fn_8007B260_00000A54:
     li r7, 0x0
     bl mem_alloc
     cmpwi r3, 0x0
-    beq lbl_fn_8007B260_00000ABC
+    beq lbl_dialogue_parseCommandScript_00000ABC
     stfs f25, 0x0(r3)
     stfs f26, 0x4(r3)
     stfs f27, 0x8(r3)
     stfs f28, 0xc(r3)
     stfs f29, 0x10(r3)
-lbl_fn_8007B260_00000ABC:
+lbl_dialogue_parseCommandScript_00000ABC:
     stw r3, 0xc(r15)
-lbl_fn_8007B260_00000AC0:
+lbl_dialogue_parseCommandScript_00000AC0:
     lwz r3, 0xc(r15)
     mr r4, r24
     addi r5, r1, 0x2c
@@ -849,7 +849,7 @@ lbl_fn_8007B260_00000AC0:
     lwz r0, 0xc(r15)
     fmr f30, f1
     cmpwi r0, 0x0
-    bne lbl_fn_8007B260_00000B2C
+    bne lbl_dialogue_parseCommandScript_00000B2C
     li r3, 0x14
     li r4, 0x6
     la r5, lbl_8087D788
@@ -857,24 +857,24 @@ lbl_fn_8007B260_00000AC0:
     li r7, 0x0
     bl mem_alloc
     cmpwi r3, 0x0
-    beq lbl_fn_8007B260_00000B28
+    beq lbl_dialogue_parseCommandScript_00000B28
     stfs f25, 0x0(r3)
     stfs f26, 0x4(r3)
     stfs f27, 0x8(r3)
     stfs f28, 0xc(r3)
     stfs f29, 0x10(r3)
-lbl_fn_8007B260_00000B28:
+lbl_dialogue_parseCommandScript_00000B28:
     stw r3, 0xc(r15)
-lbl_fn_8007B260_00000B2C:
+lbl_dialogue_parseCommandScript_00000B2C:
     lwz r3, 0xc(r15)
     stfs f30, 0x10(r3)
-    b lbl_fn_8007B260_00000EC4
+    b lbl_dialogue_parseCommandScript_00000EC4
     mr r4, r24
     add r3, r21, r22
     addi r5, r1, 0x2c
     bl str_nextToken
     mr r21, r3
-    b lbl_fn_8007B260_00000EC4
+    b lbl_dialogue_parseCommandScript_00000EC4
     mr r4, r24
     add r3, r21, r22
     addi r5, r1, 0x2c
@@ -886,7 +886,7 @@ lbl_fn_8007B260_00000B2C:
     stfd f0, 0x48(r1)
     lwz r0, 0x4c(r1)
     stw r0, 0x3c(r16)
-    b lbl_fn_8007B260_00000EC4
+    b lbl_dialogue_parseCommandScript_00000EC4
     mr r4, r24
     add r3, r21, r22
     addi r5, r1, 0x2c
@@ -904,12 +904,12 @@ lbl_fn_8007B260_00000B2C:
     stb r5, 0x29(r1)
     stb r4, 0x2a(r1)
     stb r0, 0x2b(r1)
-    bne lbl_fn_8007B260_00000C3C
+    bne lbl_dialogue_parseCommandScript_00000C3C
     lbz r0, 0x0(r3)
     extsb r3, r0
     subi r0, r3, 0x41
     cmplwi r0, 0x31
-    bgt lbl_fn_8007B260_00000C14
+    bgt lbl_dialogue_parseCommandScript_00000C14
     lis r3, jumptable_80778358@ha
     slwi r0, r0, 2
     addi r3, r3, jumptable_80778358@l
@@ -917,34 +917,34 @@ lbl_fn_8007B260_00000B2C:
     mtctr r3
     bctr
     li r3, 0x0
-    b lbl_fn_8007B260_00000C18
+    b lbl_dialogue_parseCommandScript_00000C18
     li r3, 0x1
-    b lbl_fn_8007B260_00000C18
+    b lbl_dialogue_parseCommandScript_00000C18
     li r3, 0x2
-    b lbl_fn_8007B260_00000C18
+    b lbl_dialogue_parseCommandScript_00000C18
     li r3, 0x3
-    b lbl_fn_8007B260_00000C18
-lbl_fn_8007B260_00000C14:
+    b lbl_dialogue_parseCommandScript_00000C18
+lbl_dialogue_parseCommandScript_00000C14:
     li r3, 0x0
-lbl_fn_8007B260_00000C18:
+lbl_dialogue_parseCommandScript_00000C18:
     lbz r0, 0x10(r15)
     cmpwi r0, 0x3
-    bne lbl_fn_8007B260_00000C2C
+    bne lbl_dialogue_parseCommandScript_00000C2C
     stb r3, 0x2b(r1)
-    b lbl_fn_8007B260_00000E9C
-lbl_fn_8007B260_00000C2C:
+    b lbl_dialogue_parseCommandScript_00000E9C
+lbl_dialogue_parseCommandScript_00000C2C:
     stb r3, 0x2a(r1)
     stb r3, 0x29(r1)
     stb r3, 0x28(r1)
-    b lbl_fn_8007B260_00000E9C
-lbl_fn_8007B260_00000C3C:
+    b lbl_dialogue_parseCommandScript_00000E9C
+lbl_dialogue_parseCommandScript_00000C3C:
     cmpwi r7, 0x3
-    bne lbl_fn_8007B260_00000D44
+    bne lbl_dialogue_parseCommandScript_00000D44
     lbz r0, 0x0(r3)
     extsb r4, r0
     subi r0, r4, 0x41
     cmplwi r0, 0x31
-    bgt lbl_fn_8007B260_00000C90
+    bgt lbl_dialogue_parseCommandScript_00000C90
     lis r4, jumptable_80778290@ha
     slwi r0, r0, 2
     addi r4, r4, jumptable_80778290@l
@@ -952,22 +952,22 @@ lbl_fn_8007B260_00000C3C:
     mtctr r4
     bctr
     li r4, 0x0
-    b lbl_fn_8007B260_00000C94
+    b lbl_dialogue_parseCommandScript_00000C94
     li r4, 0x1
-    b lbl_fn_8007B260_00000C94
+    b lbl_dialogue_parseCommandScript_00000C94
     li r4, 0x2
-    b lbl_fn_8007B260_00000C94
+    b lbl_dialogue_parseCommandScript_00000C94
     li r4, 0x3
-    b lbl_fn_8007B260_00000C94
-lbl_fn_8007B260_00000C90:
+    b lbl_dialogue_parseCommandScript_00000C94
+lbl_dialogue_parseCommandScript_00000C90:
     li r4, 0x0
-lbl_fn_8007B260_00000C94:
+lbl_dialogue_parseCommandScript_00000C94:
     lbz r0, 0x1(r3)
     stb r4, 0x28(r1)
     extsb r4, r0
     subi r0, r4, 0x41
     cmplwi r0, 0x31
-    bgt lbl_fn_8007B260_00000CE4
+    bgt lbl_dialogue_parseCommandScript_00000CE4
     lis r4, jumptable_807781C8@ha
     slwi r0, r0, 2
     addi r4, r4, jumptable_807781C8@l
@@ -975,22 +975,22 @@ lbl_fn_8007B260_00000C94:
     mtctr r4
     bctr
     li r4, 0x0
-    b lbl_fn_8007B260_00000CE8
+    b lbl_dialogue_parseCommandScript_00000CE8
     li r4, 0x1
-    b lbl_fn_8007B260_00000CE8
+    b lbl_dialogue_parseCommandScript_00000CE8
     li r4, 0x2
-    b lbl_fn_8007B260_00000CE8
+    b lbl_dialogue_parseCommandScript_00000CE8
     li r4, 0x3
-    b lbl_fn_8007B260_00000CE8
-lbl_fn_8007B260_00000CE4:
+    b lbl_dialogue_parseCommandScript_00000CE8
+lbl_dialogue_parseCommandScript_00000CE4:
     li r4, 0x0
-lbl_fn_8007B260_00000CE8:
+lbl_dialogue_parseCommandScript_00000CE8:
     lbz r0, 0x2(r3)
     stb r4, 0x29(r1)
     extsb r3, r0
     subi r0, r3, 0x41
     cmplwi r0, 0x31
-    bgt lbl_fn_8007B260_00000D38
+    bgt lbl_dialogue_parseCommandScript_00000D38
     lis r3, jumptable_80778100@ha
     slwi r0, r0, 2
     addi r3, r3, jumptable_80778100@l
@@ -998,26 +998,26 @@ lbl_fn_8007B260_00000CE8:
     mtctr r3
     bctr
     li r0, 0x0
-    b lbl_fn_8007B260_00000D3C
+    b lbl_dialogue_parseCommandScript_00000D3C
     li r0, 0x1
-    b lbl_fn_8007B260_00000D3C
+    b lbl_dialogue_parseCommandScript_00000D3C
     li r0, 0x2
-    b lbl_fn_8007B260_00000D3C
+    b lbl_dialogue_parseCommandScript_00000D3C
     li r0, 0x3
-    b lbl_fn_8007B260_00000D3C
-lbl_fn_8007B260_00000D38:
+    b lbl_dialogue_parseCommandScript_00000D3C
+lbl_dialogue_parseCommandScript_00000D38:
     li r0, 0x0
-lbl_fn_8007B260_00000D3C:
+lbl_dialogue_parseCommandScript_00000D3C:
     stb r0, 0x2a(r1)
-    b lbl_fn_8007B260_00000E9C
-lbl_fn_8007B260_00000D44:
+    b lbl_dialogue_parseCommandScript_00000E9C
+lbl_dialogue_parseCommandScript_00000D44:
     cmpwi r7, 0x4
-    bne lbl_fn_8007B260_00000E9C
+    bne lbl_dialogue_parseCommandScript_00000E9C
     lbz r0, 0x0(r3)
     extsb r4, r0
     subi r0, r4, 0x41
     cmplwi r0, 0x31
-    bgt lbl_fn_8007B260_00000D98
+    bgt lbl_dialogue_parseCommandScript_00000D98
     lis r4, jumptable_80778038@ha
     slwi r0, r0, 2
     addi r4, r4, jumptable_80778038@l
@@ -1025,22 +1025,22 @@ lbl_fn_8007B260_00000D44:
     mtctr r4
     bctr
     li r4, 0x0
-    b lbl_fn_8007B260_00000D9C
+    b lbl_dialogue_parseCommandScript_00000D9C
     li r4, 0x1
-    b lbl_fn_8007B260_00000D9C
+    b lbl_dialogue_parseCommandScript_00000D9C
     li r4, 0x2
-    b lbl_fn_8007B260_00000D9C
+    b lbl_dialogue_parseCommandScript_00000D9C
     li r4, 0x3
-    b lbl_fn_8007B260_00000D9C
-lbl_fn_8007B260_00000D98:
+    b lbl_dialogue_parseCommandScript_00000D9C
+lbl_dialogue_parseCommandScript_00000D98:
     li r4, 0x0
-lbl_fn_8007B260_00000D9C:
+lbl_dialogue_parseCommandScript_00000D9C:
     lbz r0, 0x1(r3)
     stb r4, 0x28(r1)
     extsb r4, r0
     subi r0, r4, 0x41
     cmplwi r0, 0x31
-    bgt lbl_fn_8007B260_00000DEC
+    bgt lbl_dialogue_parseCommandScript_00000DEC
     lis r4, jumptable_80777F70@ha
     slwi r0, r0, 2
     addi r4, r4, jumptable_80777F70@l
@@ -1048,22 +1048,22 @@ lbl_fn_8007B260_00000D9C:
     mtctr r4
     bctr
     li r4, 0x0
-    b lbl_fn_8007B260_00000DF0
+    b lbl_dialogue_parseCommandScript_00000DF0
     li r4, 0x1
-    b lbl_fn_8007B260_00000DF0
+    b lbl_dialogue_parseCommandScript_00000DF0
     li r4, 0x2
-    b lbl_fn_8007B260_00000DF0
+    b lbl_dialogue_parseCommandScript_00000DF0
     li r4, 0x3
-    b lbl_fn_8007B260_00000DF0
-lbl_fn_8007B260_00000DEC:
+    b lbl_dialogue_parseCommandScript_00000DF0
+lbl_dialogue_parseCommandScript_00000DEC:
     li r4, 0x0
-lbl_fn_8007B260_00000DF0:
+lbl_dialogue_parseCommandScript_00000DF0:
     lbz r0, 0x2(r3)
     stb r4, 0x29(r1)
     extsb r4, r0
     subi r0, r4, 0x41
     cmplwi r0, 0x31
-    bgt lbl_fn_8007B260_00000E40
+    bgt lbl_dialogue_parseCommandScript_00000E40
     lis r4, jumptable_80777EA8@ha
     slwi r0, r0, 2
     addi r4, r4, jumptable_80777EA8@l
@@ -1071,22 +1071,22 @@ lbl_fn_8007B260_00000DF0:
     mtctr r4
     bctr
     li r4, 0x0
-    b lbl_fn_8007B260_00000E44
+    b lbl_dialogue_parseCommandScript_00000E44
     li r4, 0x1
-    b lbl_fn_8007B260_00000E44
+    b lbl_dialogue_parseCommandScript_00000E44
     li r4, 0x2
-    b lbl_fn_8007B260_00000E44
+    b lbl_dialogue_parseCommandScript_00000E44
     li r4, 0x3
-    b lbl_fn_8007B260_00000E44
-lbl_fn_8007B260_00000E40:
+    b lbl_dialogue_parseCommandScript_00000E44
+lbl_dialogue_parseCommandScript_00000E40:
     li r4, 0x0
-lbl_fn_8007B260_00000E44:
+lbl_dialogue_parseCommandScript_00000E44:
     lbz r0, 0x3(r3)
     stb r4, 0x2a(r1)
     extsb r3, r0
     subi r0, r3, 0x41
     cmplwi r0, 0x31
-    bgt lbl_fn_8007B260_00000E94
+    bgt lbl_dialogue_parseCommandScript_00000E94
     lis r3, jumptable_80777DE0@ha
     slwi r0, r0, 2
     addi r3, r3, jumptable_80777DE0@l
@@ -1094,18 +1094,18 @@ lbl_fn_8007B260_00000E44:
     mtctr r3
     bctr
     li r0, 0x0
-    b lbl_fn_8007B260_00000E98
+    b lbl_dialogue_parseCommandScript_00000E98
     li r0, 0x1
-    b lbl_fn_8007B260_00000E98
+    b lbl_dialogue_parseCommandScript_00000E98
     li r0, 0x2
-    b lbl_fn_8007B260_00000E98
+    b lbl_dialogue_parseCommandScript_00000E98
     li r0, 0x3
-    b lbl_fn_8007B260_00000E98
-lbl_fn_8007B260_00000E94:
+    b lbl_dialogue_parseCommandScript_00000E98
+lbl_dialogue_parseCommandScript_00000E94:
     li r0, 0x0
-lbl_fn_8007B260_00000E98:
+lbl_dialogue_parseCommandScript_00000E98:
     stb r0, 0x2b(r1)
-lbl_fn_8007B260_00000E9C:
+lbl_dialogue_parseCommandScript_00000E9C:
     lwz r0, 0x28(r1)
     stw r0, 0x20(r1)
     lbz r5, 0x20(r1)
@@ -1116,47 +1116,47 @@ lbl_fn_8007B260_00000E9C:
     stb r4, 0x39(r16)
     stb r3, 0x3a(r16)
     stb r0, 0x3b(r16)
-lbl_fn_8007B260_00000EC4:
+lbl_dialogue_parseCommandScript_00000EC4:
     lwz r0, 0x2c(r1)
     mr r4, r24
     addi r5, r1, 0x2c
     add r3, r21, r0
     bl str_nextToken
     mr r21, r3
-lbl_fn_8007B260_00000EDC:
+lbl_dialogue_parseCommandScript_00000EDC:
     lbz r0, 0x0(r21)
     cmpwi r0, 0x9
-    bne lbl_fn_8007B260_00000EF4
+    bne lbl_dialogue_parseCommandScript_00000EF4
     lbz r0, 0x1(r21)
     cmpwi r0, 0x9
-    beq lbl_fn_8007B260_000002A0
-lbl_fn_8007B260_00000EF4:
+    beq lbl_dialogue_parseCommandScript_000002A0
+lbl_dialogue_parseCommandScript_00000EF4:
     cmpwi r20, 0x0
     li r0, 0x0
     stb r0, 0x12(r15)
-    beq lbl_fn_8007B260_00000F10
+    beq lbl_dialogue_parseCommandScript_00000F10
     li r0, 0x1
     stb r0, 0x12(r15)
-    b lbl_fn_8007B260_00000F20
-lbl_fn_8007B260_00000F10:
+    b lbl_dialogue_parseCommandScript_00000F20
+lbl_dialogue_parseCommandScript_00000F10:
     cmpwi r18, 0x0
-    beq lbl_fn_8007B260_00000F20
+    beq lbl_dialogue_parseCommandScript_00000F20
     li r0, 0x2
     stb r0, 0x12(r15)
-lbl_fn_8007B260_00000F20:
+lbl_dialogue_parseCommandScript_00000F20:
     cmpwi r19, 0x0
     li r0, 0x0
     stb r0, 0x13(r15)
-    beq lbl_fn_8007B260_00000F3C
+    beq lbl_dialogue_parseCommandScript_00000F3C
     li r0, 0x1
     stb r0, 0x13(r15)
-    b lbl_fn_8007B260_00000F4C
-lbl_fn_8007B260_00000F3C:
+    b lbl_dialogue_parseCommandScript_00000F4C
+lbl_dialogue_parseCommandScript_00000F3C:
     cmpwi r17, 0x0
-    beq lbl_fn_8007B260_00000F4C
+    beq lbl_dialogue_parseCommandScript_00000F4C
     li r0, 0x2
     stb r0, 0x13(r15)
-lbl_fn_8007B260_00000F4C:
+lbl_dialogue_parseCommandScript_00000F4C:
     psq_l f31, 0x108(r1), 0, 0
     mr r3, r21
     lfd f31, 0x100(r1)

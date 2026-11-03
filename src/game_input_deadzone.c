@@ -37,7 +37,7 @@ extern void quest_getGlobalManager(void);
 extern void quest_resetActiveObjectiveSlots(void);
 extern void quest_resetObjectiveBounds(void);
 extern void dialog_renderWindow(void);
-extern void fn_801533C8(void);
+extern void inventory_hasItem(void);
 extern void equip_applyToCharacter(void);
 extern void party_configureMemberSlot(void);
 extern void fn_80163E70(void);
@@ -1654,7 +1654,7 @@ lbl_fn_802F0328_000015E4:
     lwz r3, 0x14d4(r31)
     li r5, 0x0
     lwz r4, 0x14c8(r31)
-    bl fn_801533C8
+    bl inventory_hasItem
     cmpwi r3, 0x0
     beq lbl_fn_802F0328_00001684
 lbl_fn_802F0328_00001648:

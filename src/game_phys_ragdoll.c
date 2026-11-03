@@ -17,7 +17,7 @@ extern void fn_80101434(void);
 extern void fn_8010D7B4(void);
 extern void fn_8010F4BC(void);
 extern void boss_updatePhaseState(void);
-extern void fn_8015076C(void);
+extern void dialog_event_executeAction(void);
 extern void task_findEntryById(void);
 extern void fn_8021A960(void);
 extern void fn_8023A02C(void);
@@ -1526,7 +1526,7 @@ lbl_fn_80110858_00001504:
     stfs f7, 0x130(r1)
     lwz r3, 0x9c(r28)
     lwz r4, 0x7c(r28)
-    bl fn_8015076C
+    bl dialog_event_executeAction
 lbl_fn_80110858_0000156C:
     addi r4, r1, 0x264
     lwz r3, 0x9c(r28)

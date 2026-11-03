@@ -40,7 +40,7 @@ extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void PSVECNormalize(void);
 extern void fn_806052C0(void);
-extern void fn_80615E00(void);
+extern void GXGetTexBufferSize(void);
 extern void GXInitLightObj(void);
 extern void GXClampLightAngle(void);
 extern void fn_806249F0(void);
@@ -1217,7 +1217,7 @@ asm void fn_800BC468(void)
     stw r29, 0x14(r1)
     mr r29, r4
     li r4, 0x1
-    bl fn_80615E00
+    bl GXGetTexBufferSize
     lwz r0, 0x550(r30)
     mr r30, r3
     cmpwi r0, 0x0
@@ -1339,7 +1339,7 @@ asm void fn_800BC618(void)
     li r5, 0x3
     li r6, 0x0
     li r7, 0x0
-    bl fn_80615E00
+    bl GXGetTexBufferSize
     lwz r28, 0x52c(r29)
     mr r27, r3
     cmpwi r28, 0x0

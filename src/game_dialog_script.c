@@ -37,7 +37,7 @@ extern void fn_801333A4(void);
 extern void battle_getActorStatTotal(void);
 extern void dialog_selectChoice(void);
 extern void fn_8014FD30(void);
-extern void fn_801533C8(void);
+extern void inventory_hasItem(void);
 extern void party_evalFormationState(void);
 extern void actor_setState(void);
 extern void fn_80178BFC(void);
@@ -2236,7 +2236,7 @@ lbl_dialog_updateScriptState_00001E54:
     mr r3, r29
     mr r4, r30
     mr r5, r31
-    bl fn_801533C8
+    bl inventory_hasItem
     cmpwi r3, 0x0
     bne lbl_dialog_updateScriptState_00001EA8
     addi r3, r1, 0x58
@@ -2395,7 +2395,7 @@ lbl_dialog_updateScriptState_0000208C:
     mr r3, r29
     mr r4, r30
     mr r5, r31
-    bl fn_801533C8
+    bl inventory_hasItem
     cmpwi r3, 0x0
     bne lbl_dialog_updateScriptState_000020E0
     addi r3, r1, 0x58

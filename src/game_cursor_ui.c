@@ -45,7 +45,7 @@ extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECDotProduct(void);
 extern void PSVECCrossProduct(void);
-extern void fn_80615E00(void);
+extern void GXGetTexBufferSize(void);
 extern void __destroy_new_array(void);
 extern u32 strlen(const char* str);
 
@@ -1644,7 +1644,7 @@ asm void fn_800A96AC(void)
     mr r30, r3
     clrlwi r3, r4, 16
     clrlwi r4, r0, 16
-    bl fn_80615E00
+    bl GXGetTexBufferSize
     lwz r12, 0x48(r30)
     mr r31, r3
     lis r5, lbl_80732AF4@ha

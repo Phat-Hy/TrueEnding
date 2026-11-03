@@ -4724,7 +4724,7 @@
 .endfn fn_8007B100
 
 # .text:0x41D4 | 0x8007B260 | size: 0xDB8
-.fn fn_8007B260, global
+.fn dialogue_parseCommandScript, global
 /* 8007B260 000758C0  94 21 FE F0 */	stwu r1, -0x110(r1)
 /* 8007B264 000758C4  7C 08 02 A6 */	mflr r0
 /* 8007B268 000758C8  90 01 01 14 */	stw r0, 0x114(r1)
@@ -5682,7 +5682,7 @@
 /* 8007C00C 0007666C  7C 08 03 A6 */	mtlr r0
 /* 8007C010 00076670  38 21 01 10 */	addi r1, r1, 0x110
 /* 8007C014 00076674  4E 80 00 20 */	blr
-.endfn fn_8007B260
+.endfn dialogue_parseCommandScript
 
 # .text:0x4F8C | 0x8007C018 | size: 0xBC
 .fn fn_8007C018, global
@@ -6149,7 +6149,7 @@
 /* 8007C67C 00076CDC  9B 41 01 23 */	stb r26, 0x123(r1)
 /* 8007C680 00076CE0  9B 61 01 24 */	stb r27, 0x124(r1)
 /* 8007C684 00076CE4  9B 61 01 25 */	stb r27, 0x125(r1)
-/* 8007C688 00076CE8  4B FF EB D9 */	bl fn_8007B260
+/* 8007C688 00076CE8  4B FF EB D9 */	bl dialogue_parseCommandScript
 /* 8007C68C 00076CEC  80 01 01 08 */	lwz r0, 0x108(r1)
 /* 8007C690 00076CF0  7C 70 1B 78 */	mr r16, r3
 /* 8007C694 00076CF4  93 41 00 9C */	stw r26, 0x9c(r1)

@@ -85,7 +85,7 @@ extern u32 lbl_80889194;
 
 /* Function declarations */
 void pad_03_8070FACC_text(void);
-void fn_8070FAD0(void);
+void net_packetDispatch(void);
 void fn_80710440(void);
 void fn_80710460(void);
 void fn_807105D0(void);
@@ -135,7 +135,7 @@ asm void pad_03_8070FACC_text(void)
     opword 0x00000000
 }
 
-asm void fn_8070FAD0(void)
+asm void net_packetDispatch(void)
 {
     nofralloc
     stwu r1, -0x40(r1)
@@ -152,10 +152,10 @@ asm void fn_8070FAD0(void)
     stw r0, 0x10(r1)
     mr r29, r7
     addi r31, r4, 0x1c
-    bgt lbl_fn_8070FAD0_00000668
+    bgt lbl_net_packetDispatch_00000668
     subi r0, r5, 0x81
     cmplwi r0, 0x7c
-    bgt lbl_fn_8070FAD0_00000950
+    bgt lbl_net_packetDispatch_00000950
     lis r3, jumptable_807C5F78@ha
     slwi r0, r0, 2
     addi r3, r3, jumptable_807C5F78@l
@@ -163,34 +163,34 @@ asm void fn_8070FAD0(void)
     mtctr r3
     bctr
     cmpwi r6, 0x3ff
-    ble lbl_fn_8070FAD0_00000074
+    ble lbl_net_packetDispatch_00000074
     li r0, 0x3ff
-    b lbl_fn_8070FAD0_0000007C
-lbl_fn_8070FAD0_00000074:
+    b lbl_net_packetDispatch_0000007C
+lbl_net_packetDispatch_00000074:
     srawi r0, r6, 31
     andc r0, r6, r0
-lbl_fn_8070FAD0_0000007C:
+lbl_net_packetDispatch_0000007C:
     sth r0, 0xec(r27)
-    b lbl_fn_8070FAD0_00000950
+    b lbl_net_packetDispatch_00000950
     stb r6, 0xea(r27)
-    b lbl_fn_8070FAD0_00000950
+    b lbl_net_packetDispatch_00000950
     lis r0, 0x1
     cmpw r6, r0
-    bge lbl_fn_8070FAD0_00000950
+    bge lbl_net_packetDispatch_00000950
     clrlwi r0, r6, 16
     stw r0, 0x38(r31)
-    b lbl_fn_8070FAD0_00000950
+    b lbl_net_packetDispatch_00000950
     mr r3, r28
     mr r4, r25
     bl fn_80714390
-    b lbl_fn_8070FAD0_00000950
+    b lbl_net_packetDispatch_00000950
     lha r4, 0x56(r31)
     lha r3, 0x58(r31)
     cmpw r3, r4
-    blt lbl_fn_8070FAD0_000000CC
+    blt lbl_net_packetDispatch_000000CC
     lbz r3, 0x55(r31)
-    b lbl_fn_8070FAD0_000000E8
-lbl_fn_8070FAD0_000000CC:
+    b lbl_net_packetDispatch_000000E8
+lbl_net_packetDispatch_000000CC:
     lbz r5, 0x54(r31)
     lbz r0, 0x55(r31)
     subf r0, r5, r0
@@ -198,29 +198,29 @@ lbl_fn_8070FAD0_000000CC:
     divw r0, r0, r4
     add r0, r5, r0
     clrlwi r3, r0, 24
-lbl_fn_8070FAD0_000000E8:
+lbl_net_packetDispatch_000000E8:
     li r0, 0x0
     stb r3, 0x54(r31)
     stb r6, 0x55(r31)
     sth r7, 0x56(r31)
     sth r0, 0x58(r31)
-    b lbl_fn_8070FAD0_00000950
+    b lbl_net_packetDispatch_00000950
     stb r6, 0x6c(r31)
-    b lbl_fn_8070FAD0_00000950
+    b lbl_net_packetDispatch_00000950
     stb r6, 0x6d(r31)
-    b lbl_fn_8070FAD0_00000950
+    b lbl_net_packetDispatch_00000950
     stb r6, 0xe8(r27)
-    b lbl_fn_8070FAD0_00000950
+    b lbl_net_packetDispatch_00000950
     stb r6, 0x70(r31)
-    b lbl_fn_8070FAD0_00000950
+    b lbl_net_packetDispatch_00000950
     lha r5, 0x68(r31)
     lha r4, 0x6a(r31)
     cmpw r4, r5
-    blt lbl_fn_8070FAD0_0000013C
+    blt lbl_net_packetDispatch_0000013C
     lbz r0, 0x67(r31)
     extsb r3, r0
-    b lbl_fn_8070FAD0_00000160
-lbl_fn_8070FAD0_0000013C:
+    b lbl_net_packetDispatch_00000160
+lbl_net_packetDispatch_0000013C:
     lbz r8, 0x66(r31)
     lbz r0, 0x67(r31)
     extsb r3, r8
@@ -230,23 +230,23 @@ lbl_fn_8070FAD0_0000013C:
     divw r0, r0, r5
     add r0, r8, r0
     extsb r3, r0
-lbl_fn_8070FAD0_00000160:
+lbl_net_packetDispatch_00000160:
     li r0, 0x0
     stb r3, 0x66(r31)
     stb r6, 0x67(r31)
     sth r7, 0x68(r31)
     sth r0, 0x6a(r31)
-    b lbl_fn_8070FAD0_00000950
+    b lbl_net_packetDispatch_00000950
     stb r6, 0x6e(r31)
-    b lbl_fn_8070FAD0_00000950
+    b lbl_net_packetDispatch_00000950
     lha r5, 0x5c(r31)
     lha r4, 0x5e(r31)
     cmpw r4, r5
-    blt lbl_fn_8070FAD0_0000019C
+    blt lbl_net_packetDispatch_0000019C
     lbz r0, 0x5b(r31)
     extsb r4, r0
-    b lbl_fn_8070FAD0_000001C0
-lbl_fn_8070FAD0_0000019C:
+    b lbl_net_packetDispatch_000001C0
+lbl_net_packetDispatch_0000019C:
     lbz r8, 0x5a(r31)
     lbz r0, 0x5b(r31)
     extsb r3, r8
@@ -256,25 +256,25 @@ lbl_fn_8070FAD0_0000019C:
     divw r0, r0, r5
     add r0, r8, r0
     extsb r4, r0
-lbl_fn_8070FAD0_000001C0:
+lbl_net_packetDispatch_000001C0:
     subi r3, r6, 0x40
     li r0, 0x0
     stb r4, 0x5a(r31)
     stb r3, 0x5b(r31)
     sth r7, 0x5c(r31)
     sth r0, 0x5e(r31)
-    b lbl_fn_8070FAD0_00000950
+    b lbl_net_packetDispatch_00000950
     subi r0, r6, 0x40
     stb r0, 0x6f(r31)
-    b lbl_fn_8070FAD0_00000950
+    b lbl_net_packetDispatch_00000950
     lha r5, 0x62(r31)
     lha r4, 0x64(r31)
     cmpw r4, r5
-    blt lbl_fn_8070FAD0_00000204
+    blt lbl_net_packetDispatch_00000204
     lbz r0, 0x61(r31)
     extsb r3, r0
-    b lbl_fn_8070FAD0_00000228
-lbl_fn_8070FAD0_00000204:
+    b lbl_net_packetDispatch_00000228
+lbl_net_packetDispatch_00000204:
     lbz r8, 0x60(r31)
     lbz r0, 0x61(r31)
     extsb r3, r8
@@ -284,22 +284,22 @@ lbl_fn_8070FAD0_00000204:
     divw r0, r0, r5
     add r0, r8, r0
     extsb r3, r0
-lbl_fn_8070FAD0_00000228:
+lbl_net_packetDispatch_00000228:
     li r0, 0x0
     stb r3, 0x60(r31)
     stb r6, 0x61(r31)
     sth r7, 0x62(r31)
     sth r0, 0x64(r31)
-    b lbl_fn_8070FAD0_00000950
+    b lbl_net_packetDispatch_00000950
     stb r6, 0x71(r31)
-    b lbl_fn_8070FAD0_00000950
+    b lbl_net_packetDispatch_00000950
     neg r0, r6
     or r0, r0, r6
     srwi r0, r0, 31
     stb r0, 0x9(r31)
-    b lbl_fn_8070FAD0_00000950
+    b lbl_net_packetDispatch_00000950
     stb r6, 0x73(r31)
-    b lbl_fn_8070FAD0_00000950
+    b lbl_net_packetDispatch_00000950
     clrlwi r0, r6, 24
     stw r0, 0xc(r1)
     lfd f2, lbl_80889180
@@ -308,7 +308,7 @@ lbl_fn_8070FAD0_00000228:
     fsubs f1, f1, f2
     fmuls f0, f1, f0
     stfs f0, 0x3c(r31)
-    b lbl_fn_8070FAD0_00000950
+    b lbl_net_packetDispatch_00000950
     clrlwi r0, r6, 24
     stw r0, 0x14(r1)
     lfd f2, lbl_80889180
@@ -317,15 +317,15 @@ lbl_fn_8070FAD0_00000228:
     fsubs f1, f1, f2
     fmuls f0, f0, f1
     stfs f0, 0x40(r31)
-    b lbl_fn_8070FAD0_00000950
+    b lbl_net_packetDispatch_00000950
     stb r6, 0x4c(r31)
-    b lbl_fn_8070FAD0_00000950
+    b lbl_net_packetDispatch_00000950
     stb r6, 0x48(r31)
-    b lbl_fn_8070FAD0_00000950
+    b lbl_net_packetDispatch_00000950
     slwi r0, r6, 2
     add r0, r0, r6
     stw r0, 0x44(r31)
-    b lbl_fn_8070FAD0_00000950
+    b lbl_net_packetDispatch_00000950
     xoris r0, r6, 0x8000
     stw r0, 0xc(r1)
     lfd f2, lbl_80889188
@@ -334,25 +334,25 @@ lbl_fn_8070FAD0_00000228:
     fsubs f1, f1, f2
     fmuls f0, f1, f0
     stfs f0, 0x50(r31)
-    b lbl_fn_8070FAD0_00000950
+    b lbl_net_packetDispatch_00000950
     stb r6, 0x74(r31)
-    b lbl_fn_8070FAD0_00000950
+    b lbl_net_packetDispatch_00000950
     stb r6, 0x75(r31)
-    b lbl_fn_8070FAD0_00000950
+    b lbl_net_packetDispatch_00000950
     stb r6, 0x76(r31)
-    b lbl_fn_8070FAD0_00000950
+    b lbl_net_packetDispatch_00000950
     stb r6, 0x77(r31)
-    b lbl_fn_8070FAD0_00000950
+    b lbl_net_packetDispatch_00000950
     clrlwi r0, r6, 24
     sth r0, 0x78(r31)
-    b lbl_fn_8070FAD0_00000950
+    b lbl_net_packetDispatch_00000950
     li r0, 0xff
     stb r0, 0x74(r31)
     stb r0, 0x75(r31)
     stb r0, 0x76(r31)
     stb r0, 0x77(r31)
     sth r0, 0x78(r31)
-    b lbl_fn_8070FAD0_00000950
+    b lbl_net_packetDispatch_00000950
     clrlwi r4, r6, 24
     li r3, 0x40
     subi r0, r4, 0x40
@@ -361,7 +361,7 @@ lbl_fn_8070FAD0_00000228:
     subf r0, r0, r3
     srwi r0, r0, 31
     stb r0, 0x30(r31)
-    b lbl_fn_8070FAD0_00000950
+    b lbl_net_packetDispatch_00000950
     neg r0, r6
     mr r3, r28
     or r0, r0, r6
@@ -371,29 +371,29 @@ lbl_fn_8070FAD0_00000228:
     bl fn_80713B80
     mr r3, r28
     bl fn_80714230
-    b lbl_fn_8070FAD0_00000950
+    b lbl_net_packetDispatch_00000950
     neg r0, r6
     or r0, r0, r6
     srwi. r0, r0, 31
     stb r0, 0xb(r31)
-    beq lbl_fn_8070FAD0_00000950
+    beq lbl_net_packetDispatch_00000950
     mr r3, r28
     li r4, -0x1
     bl fn_80713B80
     mr r3, r28
     bl fn_80714230
-    b lbl_fn_8070FAD0_00000950
+    b lbl_net_packetDispatch_00000950
     lbz r3, 0x70(r31)
     li r0, 0x1
     stb r0, 0x2f(r31)
     add r0, r6, r3
     stb r0, 0x72(r31)
-    b lbl_fn_8070FAD0_00000950
+    b lbl_net_packetDispatch_00000950
     neg r0, r6
     or r0, r0, r6
     srwi r0, r0, 31
     stb r0, 0x2f(r31)
-    b lbl_fn_8070FAD0_00000950
+    b lbl_net_packetDispatch_00000950
     subi r0, r6, 0x40
     lfd f2, lbl_80889188
     xoris r0, r0, 0x8000
@@ -403,9 +403,9 @@ lbl_fn_8070FAD0_00000228:
     fsubs f1, f1, f2
     fmuls f0, f1, f0
     stfs f0, 0x80(r31)
-    b lbl_fn_8070FAD0_00000950
+    b lbl_net_packetDispatch_00000950
     stb r6, 0x7e(r31)
-    b lbl_fn_8070FAD0_00000950
+    b lbl_net_packetDispatch_00000950
     xoris r0, r6, 0x8000
     stw r0, 0xc(r1)
     lfd f2, lbl_80889188
@@ -414,57 +414,57 @@ lbl_fn_8070FAD0_00000228:
     fsubs f1, f1, f2
     fdivs f0, f1, f0
     stfs f0, 0x84(r31)
-    b lbl_fn_8070FAD0_00000950
+    b lbl_net_packetDispatch_00000950
     stb r6, 0x7b(r31)
-    b lbl_fn_8070FAD0_00000950
+    b lbl_net_packetDispatch_00000950
     stb r6, 0x7c(r31)
-    b lbl_fn_8070FAD0_00000950
+    b lbl_net_packetDispatch_00000950
     stb r6, 0x7d(r31)
-    b lbl_fn_8070FAD0_00000950
+    b lbl_net_packetDispatch_00000950
     stb r6, 0x7a(r31)
-    b lbl_fn_8070FAD0_00000950
+    b lbl_net_packetDispatch_00000950
     lbz r0, lbl_808804C8
     cmpwi r0, 0x0
-    beq lbl_fn_8070FAD0_00000950
+    beq lbl_net_packetDispatch_00000950
     cmpwi r6, 0x20
-    bge lbl_fn_8070FAD0_00000478
+    bge lbl_net_packetDispatch_00000478
     mr r3, r27
     mr r4, r25
     bl fn_807125D0
     mr r4, r3
-    b lbl_fn_8070FAD0_00000498
-lbl_fn_8070FAD0_00000478:
+    b lbl_net_packetDispatch_00000498
+lbl_net_packetDispatch_00000478:
     cmpwi r6, 0x30
-    bge lbl_fn_8070FAD0_00000490
+    bge lbl_net_packetDispatch_00000490
     mr r3, r28
     subi r4, r6, 0x20
     bl fn_80714500
-    b lbl_fn_8070FAD0_00000494
-lbl_fn_8070FAD0_00000490:
+    b lbl_net_packetDispatch_00000494
+lbl_net_packetDispatch_00000490:
     li r3, 0x0
-lbl_fn_8070FAD0_00000494:
+lbl_net_packetDispatch_00000494:
     mr r4, r3
-lbl_fn_8070FAD0_00000498:
+lbl_net_packetDispatch_00000498:
     cmpwi r25, 0x20
-    blt lbl_fn_8070FAD0_000004A8
+    blt lbl_net_packetDispatch_000004A8
     subi r7, r25, 0x20
-    b lbl_fn_8070FAD0_000004B8
-lbl_fn_8070FAD0_000004A8:
+    b lbl_net_packetDispatch_000004B8
+lbl_net_packetDispatch_000004A8:
     cmpwi r25, 0x10
     mr r7, r25
-    blt lbl_fn_8070FAD0_000004B8
+    blt lbl_net_packetDispatch_000004B8
     subi r7, r25, 0x10
-lbl_fn_8070FAD0_000004B8:
+lbl_net_packetDispatch_000004B8:
     cmpwi r25, 0x20
-    blt lbl_fn_8070FAD0_000004C8
+    blt lbl_net_packetDispatch_000004C8
     la r6, lbl_8087EE18
-    b lbl_fn_8070FAD0_000004D8
-lbl_fn_8070FAD0_000004C8:
+    b lbl_net_packetDispatch_000004D8
+lbl_net_packetDispatch_000004C8:
     cmpwi r25, 0x10
     la r6, lbl_8087EE20
-    blt lbl_fn_8070FAD0_000004D8
+    blt lbl_net_packetDispatch_000004D8
     la r6, lbl_8087EE1C
-lbl_fn_8070FAD0_000004D8:
+lbl_net_packetDispatch_000004D8:
     lis r3, lbl_807C5F50@ha
     lha r9, 0x0(r4)
     lbz r5, 0x4(r28)
@@ -473,15 +473,15 @@ lbl_fn_8070FAD0_000004D8:
     addi r3, r3, lbl_807C5F50@l
     crclr 6
     bl OSReport
-    b lbl_fn_8070FAD0_00000950
+    b lbl_net_packetDispatch_00000950
     mr r3, r27
     mr r4, r25
     bl fn_80712480
     cmpwi r3, 0x0
     mr r27, r3
-    beq lbl_fn_8070FAD0_00000950
+    beq lbl_net_packetDispatch_00000950
     cmplw r3, r28
-    beq lbl_fn_8070FAD0_00000950
+    beq lbl_net_packetDispatch_00000950
     bl fn_80713850
     lwz r4, 0x0(r31)
     mr r3, r27
@@ -489,14 +489,14 @@ lbl_fn_8070FAD0_000004D8:
     bl fn_80713820
     mr r3, r27
     bl fn_80713830
-    b lbl_fn_8070FAD0_00000950
+    b lbl_net_packetDispatch_00000950
     lwz r0, 0x0(r31)
     add r0, r0, r6
     stw r0, 0x4(r31)
-    b lbl_fn_8070FAD0_00000950
+    b lbl_net_packetDispatch_00000950
     lbz r0, 0x24(r31)
     cmplwi r0, 0x3
-    bge lbl_fn_8070FAD0_00000950
+    bge lbl_net_packetDispatch_00000950
     clrlslwi r0, r0, 24, 3
     lwz r3, 0x4(r31)
     add r4, r31, r0
@@ -509,10 +509,10 @@ lbl_fn_8070FAD0_000004D8:
     stb r3, 0x24(r31)
     add r0, r0, r6
     stw r0, 0x4(r31)
-    b lbl_fn_8070FAD0_00000950
+    b lbl_net_packetDispatch_00000950
     li r4, 0x0
-    b lbl_fn_8070FAD0_000005BC
-lbl_fn_8070FAD0_00000594:
+    b lbl_net_packetDispatch_000005BC
+lbl_net_packetDispatch_00000594:
     lbz r3, 0x24(r31)
     subi r0, r3, 0x1
     stb r0, 0x24(r31)
@@ -520,22 +520,22 @@ lbl_fn_8070FAD0_00000594:
     add r3, r31, r0
     lbz r0, 0xc(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_8070FAD0_000005BC
+    bne lbl_net_packetDispatch_000005BC
     addi r4, r3, 0xc
-    b lbl_fn_8070FAD0_000005C8
-lbl_fn_8070FAD0_000005BC:
+    b lbl_net_packetDispatch_000005C8
+lbl_net_packetDispatch_000005BC:
     lbz r0, 0x24(r31)
     cmpwi r0, 0x0
-    bne lbl_fn_8070FAD0_00000594
-lbl_fn_8070FAD0_000005C8:
+    bne lbl_net_packetDispatch_00000594
+lbl_net_packetDispatch_000005C8:
     cmpwi r4, 0x0
-    beq lbl_fn_8070FAD0_00000950
+    beq lbl_net_packetDispatch_00000950
     lwz r0, 0x4(r4)
     stw r0, 0x4(r31)
-    b lbl_fn_8070FAD0_00000950
+    b lbl_net_packetDispatch_00000950
     lbz r0, 0x24(r31)
     cmplwi r0, 0x3
-    bge lbl_fn_8070FAD0_00000950
+    bge lbl_net_packetDispatch_00000950
     clrlslwi r0, r0, 24, 3
     lwz r3, 0x4(r31)
     add r4, r31, r0
@@ -546,211 +546,211 @@ lbl_fn_8070FAD0_000005C8:
     lbz r3, 0x24(r31)
     addi r0, r3, 0x1
     stb r0, 0x24(r31)
-    b lbl_fn_8070FAD0_00000950
+    b lbl_net_packetDispatch_00000950
     lbz r3, 0x24(r31)
     cmpwi r3, 0x0
-    beq lbl_fn_8070FAD0_00000950
+    beq lbl_net_packetDispatch_00000950
     subi r4, r3, 0x1
     slwi r0, r4, 3
     add r3, r31, r0
     lbz r0, 0xc(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_8070FAD0_00000950
+    beq lbl_net_packetDispatch_00000950
     lbz r5, 0xd(r3)
     cmpwi r5, 0x0
-    beq lbl_fn_8070FAD0_00000658
+    beq lbl_net_packetDispatch_00000658
     subi r5, r5, 0x1
     clrlwi. r0, r5, 24
-    bne lbl_fn_8070FAD0_00000658
+    bne lbl_net_packetDispatch_00000658
     stb r4, 0x24(r31)
-    b lbl_fn_8070FAD0_00000950
-lbl_fn_8070FAD0_00000658:
+    b lbl_net_packetDispatch_00000950
+lbl_net_packetDispatch_00000658:
     stb r5, 0xd(r3)
     lwz r0, 0x10(r3)
     stw r0, 0x4(r31)
-    b lbl_fn_8070FAD0_00000950
-lbl_fn_8070FAD0_00000668:
+    b lbl_net_packetDispatch_00000950
+lbl_net_packetDispatch_00000668:
     cmplwi r5, 0xffff
-    bgt lbl_fn_8070FAD0_00000950
+    bgt lbl_net_packetDispatch_00000950
     rlwinm r0, r5, 0, 24, 27
     clrlwi r26, r5, 24
     cmplwi r0, 0x80
     li r30, 0x0
-    beq lbl_fn_8070FAD0_0000068C
+    beq lbl_net_packetDispatch_0000068C
     cmplwi r0, 0x90
-    bne lbl_fn_8070FAD0_000006CC
-lbl_fn_8070FAD0_0000068C:
+    bne lbl_net_packetDispatch_000006CC
+lbl_net_packetDispatch_0000068C:
     cmpwi r6, 0x20
-    bge lbl_fn_8070FAD0_000006A4
+    bge lbl_net_packetDispatch_000006A4
     mr r3, r27
     mr r4, r25
     bl fn_807125D0
-    b lbl_fn_8070FAD0_000006C0
-lbl_fn_8070FAD0_000006A4:
+    b lbl_net_packetDispatch_000006C0
+lbl_net_packetDispatch_000006A4:
     cmpwi r6, 0x30
-    bge lbl_fn_8070FAD0_000006BC
+    bge lbl_net_packetDispatch_000006BC
     mr r3, r28
     subi r4, r6, 0x20
     bl fn_80714500
-    b lbl_fn_8070FAD0_000006C0
-lbl_fn_8070FAD0_000006BC:
+    b lbl_net_packetDispatch_000006C0
+lbl_net_packetDispatch_000006BC:
     li r3, 0x0
-lbl_fn_8070FAD0_000006C0:
+lbl_net_packetDispatch_000006C0:
     cmpwi r3, 0x0
     mr r30, r3
-    beq lbl_fn_8070FAD0_00000950
-lbl_fn_8070FAD0_000006CC:
+    beq lbl_net_packetDispatch_00000950
+lbl_net_packetDispatch_000006CC:
     cmpwi r26, 0x8a
-    beq lbl_fn_8070FAD0_00000864
-    bge lbl_fn_8070FAD0_0000072C
+    beq lbl_net_packetDispatch_00000864
+    bge lbl_net_packetDispatch_0000072C
     cmpwi r26, 0x84
-    beq lbl_fn_8070FAD0_000007B0
-    bge lbl_fn_8070FAD0_00000708
+    beq lbl_net_packetDispatch_000007B0
+    bge lbl_net_packetDispatch_00000708
     cmpwi r26, 0x81
-    beq lbl_fn_8070FAD0_00000780
-    bge lbl_fn_8070FAD0_000006FC
+    beq lbl_net_packetDispatch_00000780
+    bge lbl_net_packetDispatch_000006FC
     cmpwi r26, 0x80
-    bge lbl_fn_8070FAD0_00000778
-    b lbl_fn_8070FAD0_00000950
-lbl_fn_8070FAD0_000006FC:
+    bge lbl_net_packetDispatch_00000778
+    b lbl_net_packetDispatch_00000950
+lbl_net_packetDispatch_000006FC:
     cmpwi r26, 0x83
-    bge lbl_fn_8070FAD0_000007A0
-    b lbl_fn_8070FAD0_00000790
-lbl_fn_8070FAD0_00000708:
+    bge lbl_net_packetDispatch_000007A0
+    b lbl_net_packetDispatch_00000790
+lbl_net_packetDispatch_00000708:
     cmpwi r26, 0x87
-    beq lbl_fn_8070FAD0_00000834
-    bge lbl_fn_8070FAD0_00000720
+    beq lbl_net_packetDispatch_00000834
+    bge lbl_net_packetDispatch_00000720
     cmpwi r26, 0x86
-    bge lbl_fn_8070FAD0_000007F4
-    b lbl_fn_8070FAD0_000007C8
-lbl_fn_8070FAD0_00000720:
+    bge lbl_net_packetDispatch_000007F4
+    b lbl_net_packetDispatch_000007C8
+lbl_net_packetDispatch_00000720:
     cmpwi r26, 0x89
-    bge lbl_fn_8070FAD0_00000854
-    b lbl_fn_8070FAD0_00000844
-lbl_fn_8070FAD0_0000072C:
+    bge lbl_net_packetDispatch_00000854
+    b lbl_net_packetDispatch_00000844
+lbl_net_packetDispatch_0000072C:
     cmpwi r26, 0x93
-    beq lbl_fn_8070FAD0_000008E8
-    bge lbl_fn_8070FAD0_0000075C
+    beq lbl_net_packetDispatch_000008E8
+    bge lbl_net_packetDispatch_0000075C
     cmpwi r26, 0x90
-    beq lbl_fn_8070FAD0_00000894
-    bge lbl_fn_8070FAD0_00000750
+    beq lbl_net_packetDispatch_00000894
+    bge lbl_net_packetDispatch_00000750
     cmpwi r26, 0x8c
-    bge lbl_fn_8070FAD0_00000950
-    b lbl_fn_8070FAD0_00000874
-lbl_fn_8070FAD0_00000750:
+    bge lbl_net_packetDispatch_00000950
+    b lbl_net_packetDispatch_00000874
+lbl_net_packetDispatch_00000750:
     cmpwi r26, 0x92
-    bge lbl_fn_8070FAD0_000008C8
-    b lbl_fn_8070FAD0_000008AC
-lbl_fn_8070FAD0_0000075C:
+    bge lbl_net_packetDispatch_000008C8
+    b lbl_net_packetDispatch_000008AC
+lbl_net_packetDispatch_0000075C:
     cmpwi r26, 0xe0
-    beq lbl_fn_8070FAD0_00000940
-    bge lbl_fn_8070FAD0_00000950
+    beq lbl_net_packetDispatch_00000940
+    bge lbl_net_packetDispatch_00000950
     cmpwi r26, 0x95
-    beq lbl_fn_8070FAD0_00000924
-    bge lbl_fn_8070FAD0_00000950
-    b lbl_fn_8070FAD0_00000904
-lbl_fn_8070FAD0_00000778:
+    beq lbl_net_packetDispatch_00000924
+    bge lbl_net_packetDispatch_00000950
+    b lbl_net_packetDispatch_00000904
+lbl_net_packetDispatch_00000778:
     sth r29, 0x0(r30)
-    b lbl_fn_8070FAD0_00000950
-lbl_fn_8070FAD0_00000780:
+    b lbl_net_packetDispatch_00000950
+lbl_net_packetDispatch_00000780:
     lha r0, 0x0(r30)
     add r0, r0, r29
     sth r0, 0x0(r30)
-    b lbl_fn_8070FAD0_00000950
-lbl_fn_8070FAD0_00000790:
+    b lbl_net_packetDispatch_00000950
+lbl_net_packetDispatch_00000790:
     lha r0, 0x0(r30)
     subf r0, r29, r0
     sth r0, 0x0(r30)
-    b lbl_fn_8070FAD0_00000950
-lbl_fn_8070FAD0_000007A0:
+    b lbl_net_packetDispatch_00000950
+lbl_net_packetDispatch_000007A0:
     lha r0, 0x0(r30)
     mullw r0, r0, r29
     sth r0, 0x0(r30)
-    b lbl_fn_8070FAD0_00000950
-lbl_fn_8070FAD0_000007B0:
+    b lbl_net_packetDispatch_00000950
+lbl_net_packetDispatch_000007B0:
     cmpwi r29, 0x0
-    beq lbl_fn_8070FAD0_00000950
+    beq lbl_net_packetDispatch_00000950
     lha r0, 0x0(r30)
     divw r0, r0, r29
     sth r0, 0x0(r30)
-    b lbl_fn_8070FAD0_00000950
-lbl_fn_8070FAD0_000007C8:
+    b lbl_net_packetDispatch_00000950
+lbl_net_packetDispatch_000007C8:
     cmpwi r29, 0x0
-    blt lbl_fn_8070FAD0_000007E0
+    blt lbl_net_packetDispatch_000007E0
     lha r0, 0x0(r30)
     slw r0, r0, r29
     sth r0, 0x0(r30)
-    b lbl_fn_8070FAD0_00000950
-lbl_fn_8070FAD0_000007E0:
+    b lbl_net_packetDispatch_00000950
+lbl_net_packetDispatch_000007E0:
     lha r3, 0x0(r30)
     neg r0, r29
     sraw r0, r3, r0
     sth r0, 0x0(r30)
-    b lbl_fn_8070FAD0_00000950
-lbl_fn_8070FAD0_000007F4:
+    b lbl_net_packetDispatch_00000950
+lbl_net_packetDispatch_000007F4:
     cmpwi r29, 0x0
     li r26, 0x0
-    bge lbl_fn_8070FAD0_0000080C
+    bge lbl_net_packetDispatch_0000080C
     neg r0, r29
     li r26, 0x1
     extsh r29, r0
-lbl_fn_8070FAD0_0000080C:
+lbl_net_packetDispatch_0000080C:
     bl fn_807210F0
     clrlwi r3, r3, 16
     addi r0, r29, 0x1
     mullw r3, r3, r0
     cmpwi r26, 0x0
     srawi r3, r3, 16
-    beq lbl_fn_8070FAD0_0000082C
+    beq lbl_net_packetDispatch_0000082C
     neg r3, r3
-lbl_fn_8070FAD0_0000082C:
+lbl_net_packetDispatch_0000082C:
     sth r3, 0x0(r30)
-    b lbl_fn_8070FAD0_00000950
-lbl_fn_8070FAD0_00000834:
+    b lbl_net_packetDispatch_00000950
+lbl_net_packetDispatch_00000834:
     lha r0, 0x0(r30)
     and r0, r0, r29
     sth r0, 0x0(r30)
-    b lbl_fn_8070FAD0_00000950
-lbl_fn_8070FAD0_00000844:
+    b lbl_net_packetDispatch_00000950
+lbl_net_packetDispatch_00000844:
     lha r0, 0x0(r30)
     or r0, r0, r29
     sth r0, 0x0(r30)
-    b lbl_fn_8070FAD0_00000950
-lbl_fn_8070FAD0_00000854:
+    b lbl_net_packetDispatch_00000950
+lbl_net_packetDispatch_00000854:
     lha r0, 0x0(r30)
     xor r0, r0, r29
     sth r0, 0x0(r30)
-    b lbl_fn_8070FAD0_00000950
-lbl_fn_8070FAD0_00000864:
+    b lbl_net_packetDispatch_00000950
+lbl_net_packetDispatch_00000864:
     clrlwi r0, r29, 16
     nor r0, r0, r0
     sth r0, 0x0(r30)
-    b lbl_fn_8070FAD0_00000950
-lbl_fn_8070FAD0_00000874:
+    b lbl_net_packetDispatch_00000950
+lbl_net_packetDispatch_00000874:
     cmpwi r29, 0x0
-    beq lbl_fn_8070FAD0_00000950
+    beq lbl_net_packetDispatch_00000950
     lha r3, 0x0(r30)
     divw r0, r3, r29
     mullw r0, r0, r29
     subf r0, r0, r3
     sth r0, 0x0(r30)
-    b lbl_fn_8070FAD0_00000950
-lbl_fn_8070FAD0_00000894:
+    b lbl_net_packetDispatch_00000950
+lbl_net_packetDispatch_00000894:
     lha r0, 0x0(r30)
     subf r0, r0, r29
     cntlzw r0, r0
     srwi r0, r0, 5
     stb r0, 0x8(r31)
-    b lbl_fn_8070FAD0_00000950
-lbl_fn_8070FAD0_000008AC:
+    b lbl_net_packetDispatch_00000950
+lbl_net_packetDispatch_000008AC:
     lha r0, 0x0(r30)
     srwi r3, r29, 31
     srawi r4, r0, 31
     subfc r0, r29, r0
     adde r0, r4, r3
     stb r0, 0x8(r31)
-    b lbl_fn_8070FAD0_00000950
-lbl_fn_8070FAD0_000008C8:
+    b lbl_net_packetDispatch_00000950
+lbl_net_packetDispatch_000008C8:
     lha r4, 0x0(r30)
     xor r0, r4, r29
     srawi r3, r0, 1
@@ -758,16 +758,16 @@ lbl_fn_8070FAD0_000008C8:
     subf r0, r0, r3
     srwi r0, r0, 31
     stb r0, 0x8(r31)
-    b lbl_fn_8070FAD0_00000950
-lbl_fn_8070FAD0_000008E8:
+    b lbl_net_packetDispatch_00000950
+lbl_net_packetDispatch_000008E8:
     lha r0, 0x0(r30)
     srawi r4, r29, 31
     srwi r3, r0, 31
     subfc r0, r0, r29
     adde r0, r4, r3
     stb r0, 0x8(r31)
-    b lbl_fn_8070FAD0_00000950
-lbl_fn_8070FAD0_00000904:
+    b lbl_net_packetDispatch_00000950
+lbl_net_packetDispatch_00000904:
     lha r0, 0x0(r30)
     xor r0, r29, r0
     srawi r3, r0, 1
@@ -775,21 +775,21 @@ lbl_fn_8070FAD0_00000904:
     subf r0, r0, r3
     srwi r0, r0, 31
     stb r0, 0x8(r31)
-    b lbl_fn_8070FAD0_00000950
-lbl_fn_8070FAD0_00000924:
+    b lbl_net_packetDispatch_00000950
+lbl_net_packetDispatch_00000924:
     lha r0, 0x0(r30)
     subf r3, r0, r29
     subf r0, r29, r0
     or r0, r3, r0
     srwi r0, r0, 31
     stb r0, 0x8(r31)
-    b lbl_fn_8070FAD0_00000950
-lbl_fn_8070FAD0_00000940:
+    b lbl_net_packetDispatch_00000950
+lbl_net_packetDispatch_00000940:
     mr r3, r27
     mr r5, r28
     clrlwi r4, r25, 16
     bl fn_80712220
-lbl_fn_8070FAD0_00000950:
+lbl_net_packetDispatch_00000950:
     addi r11, r1, 0x40
     bl _restgpr_25
     lwz r0, 0x44(r1)

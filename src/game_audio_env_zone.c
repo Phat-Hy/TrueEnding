@@ -33,7 +33,7 @@ extern void quest_getGlobalManager(void);
 extern void quest_resetActiveObjectiveSlots(void);
 extern void dialog_renderWindow(void);
 extern void inventory_applyItemStats(void);
-extern void fn_801533C8(void);
+extern void inventory_hasItem(void);
 extern void actor_setState(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
@@ -824,7 +824,7 @@ lbl_fn_8031CA30_000009F0:
     mr r5, r30
     lwz r28, 0xc(r6)
     mr r3, r28
-    bl fn_801533C8
+    bl inventory_hasItem
     cmpwi r3, 0x0
     bne lbl_fn_8031CA30_00000CFC
     lfs f7, 0x120(r1)

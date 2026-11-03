@@ -34,7 +34,7 @@ extern void fn_80133F18(void);
 extern void fn_80133F6C(void);
 extern void battle_getActorStatTotal(void);
 extern void quest_getRewardItemSlot(void);
-extern void fn_801533C8(void);
+extern void inventory_hasItem(void);
 extern void battle_canTargetActor(void);
 extern void battle_evalDropTable(void);
 extern void fn_801799BC(void);
@@ -447,7 +447,7 @@ asm void fn_800FDB20(void)
     mr r3, r25
     mr r4, r28
     mr r5, r27
-    bl fn_801533C8
+    bl inventory_hasItem
     cmpwi r3, 0x0
     beq lbl_fn_800FDB20_00000520
     li r3, 0x0

@@ -41,7 +41,7 @@ extern void rand_scaleRangeInt(void);
 extern void rand_stepEntropy(void);
 extern void time_ticksToSeconds(void);
 extern void event_findEntryById(void);
-extern void fn_8021C6A4(void);
+extern void thread_pool_dispatchTask(void);
 extern void world_getGlobalFlag(void);
 extern void gmk_findSlotByIndex(void);
 extern void fn_80444BE8(void);
@@ -1101,7 +1101,7 @@ lbl_fn_805811E0_00000DB8:
     cmpwi r4, 0x0
     beq lbl_fn_805811E0_00000DF0
     addi r3, r1, 0x88
-    bl fn_8021C6A4
+    bl thread_pool_dispatchTask
     cmpwi r3, 0x0
     beq lbl_fn_805811E0_00000DF0
     lwz r3, 0x98(r25)

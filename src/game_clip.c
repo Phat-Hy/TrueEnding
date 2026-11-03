@@ -22,7 +22,7 @@ extern void fn_800FBE70(void);
 extern void fn_800FCD24(void);
 extern void fn_800FD658(void);
 extern void quest_getRewardItemSlot(void);
-extern void fn_801533C8(void);
+extern void inventory_hasItem(void);
 extern void fn_80154E38(void);
 extern void battle_canTargetActor(void);
 extern void fn_80178668(void);
@@ -1238,7 +1238,7 @@ lbl_fn_800FB4B0_00001044:
     mr r3, r30
     mr r4, r25
     mr r5, r24
-    bl fn_801533C8
+    bl inventory_hasItem
     cmpwi r3, 0x0
     beq lbl_fn_800FB4B0_0000106C
     mr r3, r24
@@ -1360,7 +1360,7 @@ lbl_fn_800FB4B0_0000120C:
     mr r3, r30
     mr r4, r25
     mr r5, r24
-    bl fn_801533C8
+    bl inventory_hasItem
     cmpwi r3, 0x0
     beq lbl_fn_800FB4B0_00001234
     mr r3, r24
@@ -1651,7 +1651,7 @@ asm void fn_800FBA9C(void)
     mr r4, r7
     mr r3, r30
     mr r5, r31
-    bl fn_801533C8
+    bl inventory_hasItem
     cmpwi r3, 0x0
     beq lbl_fn_800FBA9C_00001644
     li r3, -0x1

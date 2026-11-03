@@ -28,7 +28,7 @@ extern void PSMTXMultVec(void);
 extern void PSMTXMultVecArray(void);
 extern void PSVECDotProduct(void);
 extern void PSVECCrossProduct(void);
-extern void fn_80615E00(void);
+extern void GXGetTexBufferSize(void);
 extern void GXInitLightObj(void);
 extern void GXClampLightAngle(void);
 extern void memcmp(void);
@@ -187,7 +187,7 @@ lbl_fn_800B4134_0000010C:
     li r5, 0x1
     li r6, 0x0
     li r7, 0x0
-    bl fn_80615E00
+    bl GXGetTexBufferSize
     mr r29, r3
     bl dungeon_initGlobalContext
     lis r6, lbl_80732E48@ha

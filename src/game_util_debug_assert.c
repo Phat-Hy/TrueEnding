@@ -30,7 +30,7 @@ extern void event_findEntryById(void);
 extern void fn_80211770(void);
 extern void fn_80212840(void);
 extern void fn_80212C34(void);
-extern void fn_8021C6A4(void);
+extern void thread_pool_dispatchTask(void);
 extern void world_getGlobalFlag(void);
 extern void gmk_findSlotByIndex(void);
 extern void net_initCoopSession(void);
@@ -2135,7 +2135,7 @@ lbl_fn_80597558_00001E08:
     cmpwi r4, 0x0
     beq lbl_fn_80597558_00001E74
     addi r3, r1, 0x128
-    bl fn_8021C6A4
+    bl thread_pool_dispatchTask
     cmpwi r3, 0x0
     beq lbl_fn_80597558_00001E74
     addis r6, r22, 0x2

@@ -34,7 +34,7 @@ extern void world_setGlobalFlag(void);
 extern void fn_8037C69C(void);
 extern void fat_dispatchFsRequest(void);
 extern void nwc24_transitionDataState(void);
-extern void fn_8038F52C(void);
+extern void net_syncPlayerActorState(void);
 extern void fn_8039328C(void);
 extern void fn_803C0F48(void);
 extern void craft_forgeUpgradeWeapon(void);
@@ -1801,7 +1801,7 @@ asm void fn_8036CC90(void)
     lwz r4, lbl_8087F8A0
     lwz r30, 0x48(r4)
     mr r4, r30
-    bl fn_8038F52C
+    bl net_syncPlayerActorState
     lwz r0, 0x868(r31)
     cmpwi r0, 0x6
     beq lbl_fn_8036CC90_000018C4

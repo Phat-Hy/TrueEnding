@@ -34,7 +34,7 @@ extern void GXSetTexCopyDst(void);
 extern void GXCopyTex(void);
 extern void GXInitLightDistAttn(void);
 extern void GXInitLightSpot(void);
-extern void fn_80615E00(void);
+extern void GXGetTexBufferSize(void);
 extern void GXInitLightObj(void);
 extern void GXClampLightAngle(void);
 extern void GXDrawDone(void);
@@ -1090,7 +1090,7 @@ asm void fn_800AC5F4(void)
     stw r0, 0x74(r3)
     stw r0, 0x78(r3)
     li r3, 0x100
-    bl fn_80615E00
+    bl GXGetTexBufferSize
     mr r31, r3
     bl dungeon_initGlobalContext
     lis r7, lbl_80732C00@ha
@@ -1684,7 +1684,7 @@ lbl_fn_800ACCB8_000017A4:
     li r5, 0x1
     li r6, 0x0
     li r7, 0x0
-    bl fn_80615E00
+    bl GXGetTexBufferSize
     mr r26, r3
     lwz r3, 0x68(r27)
     li r4, 0x1

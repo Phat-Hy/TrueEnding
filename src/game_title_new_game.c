@@ -27,7 +27,7 @@ extern void world_getGlobalFlag(void);
 extern void fn_8037F690(void);
 extern void fn_803935FC(void);
 extern void fn_8039BC0C(void);
-extern void fn_8039CF8C(void);
+extern void net_coop_processPacket(void);
 extern void fn_803AC3D8(void);
 extern void fn_803AD148(void);
 extern void fn_803E3050(void);
@@ -2728,7 +2728,7 @@ lbl_fn_803AF83C_0000257C:
     mr r3, r23
     mr r4, r29
     addi r5, r29, 0xd0
-    bl fn_8039CF8C
+    bl net_coop_processPacket
     cmpwi r3, 0x0
     bne lbl_fn_803AF83C_0000259C
     stw r19, 0x8c(r23)

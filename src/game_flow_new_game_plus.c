@@ -28,7 +28,7 @@ extern void boss_findPartSlotById(void);
 extern void fn_80133F18(void);
 extern void quest_getRewardItemSlot(void);
 extern void fn_80150460(void);
-extern void fn_8015076C(void);
+extern void dialog_event_executeAction(void);
 extern void party_configureMemberSlot(void);
 extern void fn_801681B0(void);
 extern void fn_8016D0A0(void);
@@ -247,7 +247,7 @@ lbl_fn_804EF9B8_000001F4:
     lwz r4, 0x1c(r28)
     li r9, 0x0
     lwz r7, 0x20(r28)
-    bl fn_8015076C
+    bl dialog_event_executeAction
     lbz r0, lbl_8087EE74
     extsb. r0, r0
     bne lbl_fn_804EF9B8_00000260

@@ -121,7 +121,7 @@ void fn_80150178(void);
 void fn_801501F0(void);
 void fn_80150460(void);
 void fn_8015061C(void);
-void fn_8015076C(void);
+void dialog_event_executeAction(void);
 void fn_8015115C(void *p, u32 a, u32 b);
 u32 fn_80151168(void *p, u32 mask);
 u32 fn_80151180(void);
@@ -1248,7 +1248,7 @@ lbl_fn_8015061C_00000F04:
     blr
 }
 
-asm void fn_8015076C(void)
+asm void dialog_event_executeAction(void)
 {
     nofralloc
     stwu r1, -0x230(r1)
@@ -1279,10 +1279,10 @@ asm void fn_8015076C(void)
     cmpwi r28, 0x0
     stw r26, 0x13c(r1)
     stw r27, 0x140(r1)
-    beq lbl_fn_8015076C_00000FB4
+    beq lbl_dialog_event_executeAction_00000FB4
     lwz r0, 0x80(r28)
     srwi. r0, r0, 31
-    beq lbl_fn_8015076C_00000FB4
+    beq lbl_dialog_event_executeAction_00000FB4
     lfs f1, lbl_808819F8
     addi r3, r1, 0xbc
     addi r4, r28, 0x28
@@ -1293,7 +1293,7 @@ asm void fn_8015076C(void)
     lwz r0, 0x140(r1)
     oris r0, r0, 0x1
     stw r0, 0x140(r1)
-lbl_fn_8015076C_00000FB4:
+lbl_dialog_event_executeAction_00000FB4:
     bl fn_8014F8F4
     mr r5, r23
     addi r6, r1, 0x120
@@ -1302,22 +1302,22 @@ lbl_fn_8015076C_00000FB4:
     mr r3, r23
     bl fn_80139EBC
     cmpwi r3, 0x0
-    beq lbl_fn_8015076C_00000FE0
+    beq lbl_dialog_event_executeAction_00000FE0
     mr r3, r23
     bl fn_80175A38
-lbl_fn_8015076C_00000FE0:
+lbl_dialog_event_executeAction_00000FE0:
     addi r3, r23, 0x6d0
     bl fn_8015121C
     cmpwi r3, 0x0
-    bne lbl_fn_8015076C_000018D4
+    bne lbl_dialog_event_executeAction_000018D4
     mr r3, r23
     bl fn_80148334
     cmpwi r3, 0x0
-    beq lbl_fn_8015076C_00001030
+    beq lbl_dialog_event_executeAction_00001030
     rlwinm r3, r27, 0, 3, 3
     subis r0, r3, 0x1000
     cmplwi r0, 0x0
-    beq lbl_fn_8015076C_00001030
+    beq lbl_dialog_event_executeAction_00001030
     mr r4, r24
     mr r5, r26
     addi r3, r1, 0x18
@@ -1325,8 +1325,8 @@ lbl_fn_8015076C_00000FE0:
     mr r4, r3
     addi r3, r23, 0x6d0
     bl fn_8015123C
-    b lbl_fn_8015076C_000018D4
-lbl_fn_8015076C_00001030:
+    b lbl_dialog_event_executeAction_000018D4
+lbl_dialog_event_executeAction_00001030:
     mr r3, r25
     bl vec3_sqMag
     fmr f30, f1
@@ -1335,94 +1335,94 @@ lbl_fn_8015076C_00001030:
     lwz r4, 0x55c(r23)
     mr r31, r3
     cmpwi r4, 0x6
-    bne lbl_fn_8015076C_000010C0
+    bne lbl_dialog_event_executeAction_000010C0
     lwz r0, 0x560(r23)
     cmpwi r0, 0x79
-    beq lbl_fn_8015076C_000010BC
-    bge lbl_fn_8015076C_00001098
+    beq lbl_dialog_event_executeAction_000010BC
+    bge lbl_dialog_event_executeAction_00001098
     cmpwi r0, 0x2e
-    beq lbl_fn_8015076C_000010BC
-    bge lbl_fn_8015076C_00001084
+    beq lbl_dialog_event_executeAction_000010BC
+    bge lbl_dialog_event_executeAction_00001084
     cmpwi r0, 0x25
-    bge lbl_fn_8015076C_000010C0
+    bge lbl_dialog_event_executeAction_000010C0
     cmpwi r0, 0x23
-    bge lbl_fn_8015076C_000010BC
-    b lbl_fn_8015076C_000010C0
-lbl_fn_8015076C_00001084:
+    bge lbl_dialog_event_executeAction_000010BC
+    b lbl_dialog_event_executeAction_000010C0
+lbl_dialog_event_executeAction_00001084:
     cmpwi r0, 0x36
-    bge lbl_fn_8015076C_000010C0
+    bge lbl_dialog_event_executeAction_000010C0
     cmpwi r0, 0x34
-    bge lbl_fn_8015076C_000010BC
-    b lbl_fn_8015076C_000010C0
-lbl_fn_8015076C_00001098:
+    bge lbl_dialog_event_executeAction_000010BC
+    b lbl_dialog_event_executeAction_000010C0
+lbl_dialog_event_executeAction_00001098:
     cmpwi r0, 0x8a
-    beq lbl_fn_8015076C_000010BC
-    bge lbl_fn_8015076C_000010B0
+    beq lbl_dialog_event_executeAction_000010BC
+    bge lbl_dialog_event_executeAction_000010B0
     cmpwi r0, 0x84
-    beq lbl_fn_8015076C_000010BC
-    b lbl_fn_8015076C_000010C0
-lbl_fn_8015076C_000010B0:
+    beq lbl_dialog_event_executeAction_000010BC
+    b lbl_dialog_event_executeAction_000010C0
+lbl_dialog_event_executeAction_000010B0:
     cmpwi r0, 0x8e
-    beq lbl_fn_8015076C_000010BC
-    b lbl_fn_8015076C_000010C0
-lbl_fn_8015076C_000010BC:
+    beq lbl_dialog_event_executeAction_000010BC
+    b lbl_dialog_event_executeAction_000010C0
+lbl_dialog_event_executeAction_000010BC:
     lfs f30, lbl_8088196C
-lbl_fn_8015076C_000010C0:
+lbl_dialog_event_executeAction_000010C0:
     rlwinm r30, r27, 0, 28, 28
     cmplwi r30, 0x8
-    beq lbl_fn_8015076C_00001108
+    beq lbl_dialog_event_executeAction_00001108
     cmpwi r4, 0x6
-    bne lbl_fn_8015076C_00001108
+    bne lbl_dialog_event_executeAction_00001108
     lwz r0, 0x560(r23)
     cmpwi r0, 0x1e
-    bne lbl_fn_8015076C_00001108
+    bne lbl_dialog_event_executeAction_00001108
     lwz r3, 0x638(r23)
     cmpwi r3, 0x0
-    beq lbl_fn_8015076C_00001108
+    beq lbl_dialog_event_executeAction_00001108
     lbz r0, 0x1(r3)
     extsb r0, r0
     cmpwi r0, 0x1
-    beq lbl_fn_8015076C_00001104
+    beq lbl_dialog_event_executeAction_00001104
     cmpwi r0, 0x4
-    bne lbl_fn_8015076C_00001108
-lbl_fn_8015076C_00001104:
+    bne lbl_dialog_event_executeAction_00001108
+lbl_dialog_event_executeAction_00001104:
     lfs f30, lbl_8088196C
-lbl_fn_8015076C_00001108:
+lbl_dialog_event_executeAction_00001108:
     mr r3, r23
     bl fn_8017B16C
     cmpwi r3, 0x0
-    beq lbl_fn_8015076C_00001158
+    beq lbl_dialog_event_executeAction_00001158
     lwz r0, 0x55c(r23)
     cmpwi r0, 0x6
-    bne lbl_fn_8015076C_00001158
+    bne lbl_dialog_event_executeAction_00001158
     lwz r0, 0x560(r23)
     cmpwi r0, 0x1d
-    beq lbl_fn_8015076C_00001138
+    beq lbl_dialog_event_executeAction_00001138
     cmpwi r0, 0x1f
-    bne lbl_fn_8015076C_00001158
-lbl_fn_8015076C_00001138:
+    bne lbl_dialog_event_executeAction_00001158
+lbl_dialog_event_executeAction_00001138:
     lwz r0, 0x674(r23)
     cmpwi r0, 0x0
-    blt lbl_fn_8015076C_00001158
+    blt lbl_dialog_event_executeAction_00001158
     mr r3, r23
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
     bl dialog_selectChoice
-lbl_fn_8015076C_00001158:
+lbl_dialog_event_executeAction_00001158:
     bl equip_getGlobalManager
     li r4, 0x67
     bl world_getGlobalFlag
     cmpwi r3, 0x0
-    beq lbl_fn_8015076C_000012D0
+    beq lbl_dialog_event_executeAction_000012D0
     mr r3, r23
     bl fn_800F7F80
     cmpwi r3, 0x0
-    beq lbl_fn_8015076C_000012D0
+    beq lbl_dialog_event_executeAction_000012D0
     addi r3, r23, 0x7d4
     bl fn_80139F4C
     cmpwi r3, 0x0
-    bne lbl_fn_8015076C_000012D0
+    bne lbl_dialog_event_executeAction_000012D0
     addi r3, r1, 0x198
     bl quest_resetActiveObjectiveSlots
     lfs f1, lbl_8088196C
@@ -1460,11 +1460,11 @@ lbl_fn_8015076C_00001158:
     li r9, 0x0
     bl collision_testLineSegment
     cmpwi r3, 0x0
-    beq lbl_fn_8015076C_000012D0
+    beq lbl_dialog_event_executeAction_000012D0
     lwz r0, 0x1d4(r1)
     rlwinm r0, r0, 0, 29, 29
     cmplwi r0, 0x4
-    bne lbl_fn_8015076C_000012D0
+    bne lbl_dialog_event_executeAction_000012D0
     lfs f1, lbl_8088196C
     addi r3, r1, 0x80
     lfs f2, lbl_808819F8
@@ -1477,10 +1477,10 @@ lbl_fn_8015076C_00001158:
     bl debuff_clearStatus
     lwz r0, 0x1208(r23)
     cmpwi r0, 0x0
-    beq lbl_fn_8015076C_00001270
+    beq lbl_dialog_event_executeAction_00001270
     mr r3, r23
     bl battle_calcOutcomeBonus
-lbl_fn_8015076C_00001270:
+lbl_dialog_event_executeAction_00001270:
     addi r3, r1, 0x5c
     addi r4, r1, 0x1c0
     bl vec3_assign
@@ -1504,30 +1504,30 @@ lbl_fn_8015076C_00001270:
     mr r4, r3
     addi r3, r23, 0x6d0
     bl fn_8015123C
-    b lbl_fn_8015076C_000018D4
-lbl_fn_8015076C_000012D0:
+    b lbl_dialog_event_executeAction_000018D4
+lbl_dialog_event_executeAction_000012D0:
     lwz r3, 0x1208(r23)
     lwz r4, 0x58c(r23)
     neg r0, r3
     or r0, r0, r3
     cmpwi r4, 0x3
     srwi r29, r0, 31
-    beq lbl_fn_8015076C_000017C0
+    beq lbl_dialog_event_executeAction_000017C0
     cmpwi r4, 0x4
-    beq lbl_fn_8015076C_000017C0
+    beq lbl_dialog_event_executeAction_000017C0
     mr r3, r23
     bl fn_8013A158
     cmpwi r3, 0x0
-    beq lbl_fn_8015076C_0000130C
+    beq lbl_dialog_event_executeAction_0000130C
     lfs f31, lbl_808819F8
-    b lbl_fn_8015076C_00001310
-lbl_fn_8015076C_0000130C:
+    b lbl_dialog_event_executeAction_00001310
+lbl_dialog_event_executeAction_0000130C:
     lfs f31, lbl_80881A50
-lbl_fn_8015076C_00001310:
+lbl_dialog_event_executeAction_00001310:
     lwz r0, 0x137c(r23)
     rlwinm r0, r0, 0, 30, 30
     cmplwi r0, 0x2
-    bne lbl_fn_8015076C_00001400
+    bne lbl_dialog_event_executeAction_00001400
     addi r3, r1, 0xe0
     addi r4, r23, 0x534
     bl vec3_assign
@@ -1571,34 +1571,34 @@ lbl_fn_8015076C_00001310:
     li r9, 0x0
     bl collision_testLineSegment
     cmpwi r3, 0x0
-    beq lbl_fn_8015076C_000013E8
+    beq lbl_dialog_event_executeAction_000013E8
     addi r3, r1, 0x20
     addi r4, r1, 0x170
     bl vec3_toEulerAngles
     addi r3, r1, 0xe0
     addi r4, r1, 0x20
     bl vec3_copy
-lbl_fn_8015076C_000013E8:
+lbl_dialog_event_executeAction_000013E8:
     mr r3, r23
     bl debuff_clearStatus
     mr r3, r23
     addi r4, r1, 0xe0
     bl fn_801698E4
-    b lbl_fn_8015076C_000017C0
-lbl_fn_8015076C_00001400:
+    b lbl_dialog_event_executeAction_000017C0
+lbl_dialog_event_executeAction_00001400:
     cmpwi r28, 0x0
-    beq lbl_fn_8015076C_00001454
+    beq lbl_dialog_event_executeAction_00001454
     lwz r3, 0x8(r28)
     li r4, 0x4000
     addi r3, r3, 0x90
     bl fn_80151168
     cmpwi r3, 0x0
-    beq lbl_fn_8015076C_00001454
+    beq lbl_dialog_event_executeAction_00001454
     addi r3, r23, 0x7d4
     li r4, 0x4000
     bl fn_8013A16C
     cmpwi r3, 0x0
-    beq lbl_fn_8015076C_00001454
+    beq lbl_dialog_event_executeAction_00001454
     lwz r6, 0x8(r28)
     mr r3, r23
     mr r4, r25
@@ -1606,23 +1606,23 @@ lbl_fn_8015076C_00001400:
     lwz r0, 0xac(r6)
     extrwi r6, r0, 1, 22
     bl fn_801681B0
-    b lbl_fn_8015076C_000017C0
-lbl_fn_8015076C_00001454:
+    b lbl_dialog_event_executeAction_000017C0
+lbl_dialog_event_executeAction_00001454:
     cmpwi r28, 0x0
-    beq lbl_fn_8015076C_000014BC
+    beq lbl_dialog_event_executeAction_000014BC
     lwz r3, 0x0(r28)
     cmpwi r3, 0x0
-    beq lbl_fn_8015076C_000014BC
+    beq lbl_dialog_event_executeAction_000014BC
     bl proj_getMatrix
     li r4, 0x18
     bl boss_findPartSlotById
     cmpwi r3, 0x0
-    beq lbl_fn_8015076C_000014BC
+    beq lbl_dialog_event_executeAction_000014BC
     addi r3, r23, 0x7d4
     li r4, 0x4000
     bl fn_8013A16C
     cmpwi r3, 0x0
-    beq lbl_fn_8015076C_000014BC
+    beq lbl_dialog_event_executeAction_000014BC
     lwz r3, 0x0(r28)
     bl proj_getMatrix
     li r4, 0x18
@@ -1633,155 +1633,155 @@ lbl_fn_8015076C_00001454:
     mr r4, r25
     li r6, 0x0
     bl fn_801681B0
-    b lbl_fn_8015076C_000017C0
-lbl_fn_8015076C_000014BC:
+    b lbl_dialog_event_executeAction_000017C0
+lbl_dialog_event_executeAction_000014BC:
     rlwinm r0, r27, 0, 21, 21
     cmplwi r0, 0x400
-    beq lbl_fn_8015076C_000017C0
+    beq lbl_dialog_event_executeAction_000017C0
     clrlwi r0, r27, 31
     cmplwi r0, 0x1
-    beq lbl_fn_8015076C_000017C0
+    beq lbl_dialog_event_executeAction_000017C0
     rlwinm r0, r27, 0, 26, 26
     cmplwi r0, 0x20
-    bne lbl_fn_8015076C_00001530
+    bne lbl_dialog_event_executeAction_00001530
     lwz r0, 0x12a4(r23)
     srwi. r0, r0, 31
-    bne lbl_fn_8015076C_000017C0
+    bne lbl_dialog_event_executeAction_000017C0
     mr r3, r23
     bl proj_getMatrix
     li r4, 0x10
     addi r3, r3, 0xe8
     bl fn_801404E0
     cmpwi r3, 0x0
-    bne lbl_fn_8015076C_000017C0
+    bne lbl_dialog_event_executeAction_000017C0
     lwz r0, 0x55c(r23)
     cmpwi r0, 0x6
-    bne lbl_fn_8015076C_00001520
+    bne lbl_dialog_event_executeAction_00001520
     lwz r0, 0x560(r23)
     cmpwi r0, 0x17
-    beq lbl_fn_8015076C_000017C0
-lbl_fn_8015076C_00001520:
+    beq lbl_dialog_event_executeAction_000017C0
+lbl_dialog_event_executeAction_00001520:
     mr r3, r23
     mr r4, r25
     bl fn_8015E1B8
-    b lbl_fn_8015076C_000017C0
-lbl_fn_8015076C_00001530:
+    b lbl_dialog_event_executeAction_000017C0
+lbl_dialog_event_executeAction_00001530:
     cmplwi r30, 0x8
-    bne lbl_fn_8015076C_000015E0
+    bne lbl_dialog_event_executeAction_000015E0
     lwz r0, 0x12a4(r23)
     srwi. r0, r0, 31
-    bne lbl_fn_8015076C_000017C0
+    bne lbl_dialog_event_executeAction_000017C0
     mr r3, r23
     bl proj_getMatrix
     li r4, 0x10
     addi r3, r3, 0xe8
     bl fn_801404E0
     cmpwi r3, 0x0
-    bne lbl_fn_8015076C_000017C0
+    bne lbl_dialog_event_executeAction_000017C0
     lwz r0, 0x55c(r23)
     cmpwi r0, 0x6
-    bne lbl_fn_8015076C_00001578
+    bne lbl_dialog_event_executeAction_00001578
     lwz r0, 0x560(r23)
     cmpwi r0, 0x17
-    beq lbl_fn_8015076C_000017C0
-lbl_fn_8015076C_00001578:
+    beq lbl_dialog_event_executeAction_000017C0
+lbl_dialog_event_executeAction_00001578:
     rlwinm r0, r27, 0, 18, 18
     cmplwi r0, 0x2000
-    bne lbl_fn_8015076C_00001594
+    bne lbl_dialog_event_executeAction_00001594
     mr r3, r23
     mr r4, r25
     bl fn_8015DEC0
-    b lbl_fn_8015076C_000017C0
-lbl_fn_8015076C_00001594:
+    b lbl_dialog_event_executeAction_000017C0
+lbl_dialog_event_executeAction_00001594:
     cmpwi r28, 0x0
     lfs f1, lbl_80881994
-    beq lbl_fn_8015076C_000015BC
+    beq lbl_dialog_event_executeAction_000015BC
     lwz r3, 0x8(r28)
     lwz r0, 0xac(r3)
     rlwinm r3, r0, 0, 2, 2
     subis r0, r3, 0x2000
     cmplwi r0, 0x0
-    bne lbl_fn_8015076C_000015BC
+    bne lbl_dialog_event_executeAction_000015BC
     lfs f1, lbl_808819A4
-lbl_fn_8015076C_000015BC:
+lbl_dialog_event_executeAction_000015BC:
     cmpwi r28, 0x0
     mr r3, r23
     mr r4, r25
-    beq lbl_fn_8015076C_000015D4
+    beq lbl_dialog_event_executeAction_000015D4
     lwz r5, 0x0(r28)
-    b lbl_fn_8015076C_000015D8
-lbl_fn_8015076C_000015D4:
+    b lbl_dialog_event_executeAction_000015D8
+lbl_dialog_event_executeAction_000015D4:
     li r5, 0x0
-lbl_fn_8015076C_000015D8:
+lbl_dialog_event_executeAction_000015D8:
     bl fn_8015D8C0
-    b lbl_fn_8015076C_000017C0
-lbl_fn_8015076C_000015E0:
+    b lbl_dialog_event_executeAction_000017C0
+lbl_dialog_event_executeAction_000015E0:
     cmpwi r28, 0x0
-    beq lbl_fn_8015076C_0000162C
+    beq lbl_dialog_event_executeAction_0000162C
     lwz r3, 0x8(r28)
     lis r4, 0x2
     addi r3, r3, 0x90
     bl fn_80151168
     cmpwi r3, 0x0
-    beq lbl_fn_8015076C_0000162C
+    beq lbl_dialog_event_executeAction_0000162C
     addi r3, r23, 0x7d4
     lis r4, 0x2
     bl fn_8013A16C
     cmpwi r3, 0x0
-    beq lbl_fn_8015076C_0000162C
+    beq lbl_dialog_event_executeAction_0000162C
     lwz r4, 0x8(r28)
     mr r3, r23
     lwz r0, 0xac(r4)
     extrwi r4, r0, 1, 22
     bl fn_80168824
-    b lbl_fn_8015076C_000017C0
-lbl_fn_8015076C_0000162C:
+    b lbl_dialog_event_executeAction_000017C0
+lbl_dialog_event_executeAction_0000162C:
     fmuls f0, f31, f31
     fcmpo cr0, f30, f0
-    bgt lbl_fn_8015076C_00001648
+    bgt lbl_dialog_event_executeAction_00001648
     rlwinm r3, r27, 0, 15, 15
     subis r0, r3, 0x1
     cmplwi r0, 0x0
-    bne lbl_fn_8015076C_000016A4
-lbl_fn_8015076C_00001648:
+    bne lbl_dialog_event_executeAction_000016A4
+lbl_dialog_event_executeAction_00001648:
     mr r3, r23
     bl debuff_clearStatus
     lwz r0, 0x55c(r23)
     cmpwi r0, 0x6
-    bne lbl_fn_8015076C_00001668
+    bne lbl_dialog_event_executeAction_00001668
     lwz r0, 0x560(r23)
     cmpwi r0, 0x17
-    beq lbl_fn_8015076C_0000168C
-lbl_fn_8015076C_00001668:
+    beq lbl_dialog_event_executeAction_0000168C
+lbl_dialog_event_executeAction_00001668:
     cmpwi r28, 0x0
     mr r3, r23
     mr r4, r25
-    beq lbl_fn_8015076C_00001680
+    beq lbl_dialog_event_executeAction_00001680
     lwz r5, 0x58(r28)
-    b lbl_fn_8015076C_00001684
-lbl_fn_8015076C_00001680:
+    b lbl_dialog_event_executeAction_00001684
+lbl_dialog_event_executeAction_00001680:
     li r5, -0x1
-lbl_fn_8015076C_00001684:
+lbl_dialog_event_executeAction_00001684:
     li r6, 0x0
     bl party_configureMemberSlot
-lbl_fn_8015076C_0000168C:
+lbl_dialog_event_executeAction_0000168C:
     lwz r3, 0xd1c(r23)
     cmpwi r3, 0x0
-    beq lbl_fn_8015076C_000017C0
+    beq lbl_dialog_event_executeAction_000017C0
     mr r4, r23
     bl fn_8016F5EC
-    b lbl_fn_8015076C_000017C0
-lbl_fn_8015076C_000016A4:
+    b lbl_dialog_event_executeAction_000017C0
+lbl_dialog_event_executeAction_000016A4:
     lfs f0, lbl_80881B10
     fcmpo cr0, f30, f0
-    ble lbl_fn_8015076C_000017BC
+    ble lbl_dialog_event_executeAction_000017BC
     lwz r0, 0x55c(r23)
     li r27, 0x1
     cmpwi r0, 0x6
-    bne lbl_fn_8015076C_00001740
+    bne lbl_dialog_event_executeAction_00001740
     lwz r0, 0x560(r23)
     cmplwi r0, 0x84
-    bgt lbl_fn_8015076C_00001740
+    bgt lbl_dialog_event_executeAction_00001740
     lis r3, jumptable_8077AAD0@ha
     slwi r0, r0, 2
     addi r3, r3, jumptable_8077AAD0@l
@@ -1789,19 +1789,19 @@ lbl_fn_8015076C_000016A4:
     mtctr r3
     bctr
     li r27, 0x0
-    b lbl_fn_8015076C_00001740
+    b lbl_dialog_event_executeAction_00001740
     lwz r3, 0x1208(r23)
     cmpwi r3, 0x0
-    beq lbl_fn_8015076C_00001740
+    beq lbl_dialog_event_executeAction_00001740
     bl fn_8013A18C
     cmpwi r3, 0x0
-    beq lbl_fn_8015076C_00001740
+    beq lbl_dialog_event_executeAction_00001740
     li r27, 0x0
-    b lbl_fn_8015076C_00001740
+    b lbl_dialog_event_executeAction_00001740
     addi r3, r23, 0xf80
     bl fn_8013A248
     cmpwi r3, 0x0
-    bne lbl_fn_8015076C_0000173C
+    bne lbl_dialog_event_executeAction_0000173C
     addi r3, r23, 0xf80
     bl fn_8013A214
     lwz r12, 0x0(r3)
@@ -1809,76 +1809,76 @@ lbl_fn_8015076C_000016A4:
     mtctr r12
     bctrl
     cmpwi r3, 0x0
-    bne lbl_fn_8015076C_00001740
-lbl_fn_8015076C_0000173C:
+    bne lbl_dialog_event_executeAction_00001740
+lbl_dialog_event_executeAction_0000173C:
     li r27, 0x0
-lbl_fn_8015076C_00001740:
+lbl_dialog_event_executeAction_00001740:
     lwz r0, 0x12a4(r23)
     srwi. r0, r0, 31
-    beq lbl_fn_8015076C_0000176C
+    beq lbl_dialog_event_executeAction_0000176C
     mr r3, r23
     bl fn_800F7F80
     cmpwi r3, 0x0
-    beq lbl_fn_8015076C_0000176C
+    beq lbl_dialog_event_executeAction_0000176C
     lfs f0, lbl_80881B14
     fcmpo cr0, f30, f0
-    bge lbl_fn_8015076C_0000176C
+    bge lbl_dialog_event_executeAction_0000176C
     li r27, 0x0
-lbl_fn_8015076C_0000176C:
+lbl_dialog_event_executeAction_0000176C:
     cmpwi r27, 0x0
-    beq lbl_fn_8015076C_000017B4
+    beq lbl_dialog_event_executeAction_000017B4
     mr r3, r23
     bl debuff_clearStatus
     cmpwi r28, 0x0
     mr r3, r23
     mr r4, r25
-    beq lbl_fn_8015076C_00001794
+    beq lbl_dialog_event_executeAction_00001794
     lwz r5, 0x54(r28)
-    b lbl_fn_8015076C_00001798
-lbl_fn_8015076C_00001794:
+    b lbl_dialog_event_executeAction_00001798
+lbl_dialog_event_executeAction_00001794:
     li r5, -0x1
-lbl_fn_8015076C_00001798:
+lbl_dialog_event_executeAction_00001798:
     bl party_initFormationSlots
     lwz r3, 0xd1c(r23)
     cmpwi r3, 0x0
-    beq lbl_fn_8015076C_000017C0
+    beq lbl_dialog_event_executeAction_000017C0
     mr r4, r23
     bl fn_8016F5EC
-    b lbl_fn_8015076C_000017C0
-lbl_fn_8015076C_000017B4:
+    b lbl_dialog_event_executeAction_000017C0
+lbl_dialog_event_executeAction_000017B4:
     li r29, 0x0
-    b lbl_fn_8015076C_000017C0
-lbl_fn_8015076C_000017BC:
+    b lbl_dialog_event_executeAction_000017C0
+lbl_dialog_event_executeAction_000017BC:
     li r29, 0x0
-lbl_fn_8015076C_000017C0:
+lbl_dialog_event_executeAction_000017C0:
     cmpwi r29, 0x0
-    beq lbl_fn_8015076C_000017D0
+    beq lbl_dialog_event_executeAction_000017D0
     mr r3, r23
     bl battle_calcOutcomeBonus
-lbl_fn_8015076C_000017D0:
+lbl_dialog_event_executeAction_000017D0:
     cmpwi r31, 0x0
-    beq lbl_fn_8015076C_000018B8
+    beq lbl_dialog_event_executeAction_000018B8
     mr r3, r23
     bl fn_80160324
     cmpwi r3, 0x0
-    bne lbl_fn_8015076C_000018B8
+    bne lbl_dialog_event_executeAction_000018B8
     addi r3, r23, 0x7d4
     bl fn_80134270
     cmpwi r3, 0x0
-    bne lbl_fn_8015076C_00001818
+    bne lbl_dialog_event_executeAction_00001818
     addi r3, r23, 0x7d4
     bl fn_80134290
     cmpwi r3, 0x0
-    bne lbl_fn_8015076C_00001818
+    bne lbl_dialog_event_executeAction_00001818
     addi r3, r23, 0x7d4
     bl fn_801342B0
     cmpwi r3, 0x0
-    beq lbl_fn_8015076C_000018AC
-lbl_fn_8015076C_00001818:
+    beq lbl_dialog_event_executeAction_000018AC
+lbl_dialog_event_executeAction_00001818:
     addi r3, r23, 0x7d4
     bl fn_80151188
     cmpwi r3, 0x0
-    beq lbl_fn_8015076C_000018A4
+    beq lbl_dialog_event_executeAction_000018A4
     addi r3, r1, 0x104
     li r4, 0x2
     bl fn_80151194
@@ -1897,28 +1897,28 @@ lbl_fn_8015076C_00001818:
     mr r3, r23
     bl fn_80140518
     cmpwi r3, 0x0
-    bne lbl_fn_8015076C_00001884
+    bne lbl_dialog_event_executeAction_00001884
     mr r3, r23
     bl fn_8013A158
     cmpwi r3, 0x0
-    beq lbl_fn_8015076C_000018AC
-lbl_fn_8015076C_00001884:
+    beq lbl_dialog_event_executeAction_000018AC
+lbl_dialog_event_executeAction_00001884:
     mr r3, r23
     bl fn_800F7FB4
     cmpwi r3, 0x0
-    bgt lbl_fn_8015076C_000018AC
+    bgt lbl_dialog_event_executeAction_000018AC
     mr r3, r23
     addi r4, r1, 0x104
     bl fn_801511C4
-    b lbl_fn_8015076C_000018AC
-lbl_fn_8015076C_000018A4:
+    b lbl_dialog_event_executeAction_000018AC
+lbl_dialog_event_executeAction_000018A4:
     li r0, 0x1e
     stw r0, 0xf0c(r23)
-lbl_fn_8015076C_000018AC:
+lbl_dialog_event_executeAction_000018AC:
     bl fn_80151210
     mr r4, r23
     bl fn_80151204
-lbl_fn_8015076C_000018B8:
+lbl_dialog_event_executeAction_000018B8:
     mr r4, r24
     mr r5, r26
     addi r3, r1, 0x8
@@ -1926,7 +1926,7 @@ lbl_fn_8015076C_000018B8:
     mr r4, r3
     addi r3, r23, 0x6d0
     bl fn_8015123C
-lbl_fn_8015076C_000018D4:
+lbl_dialog_event_executeAction_000018D4:
     addi r11, r1, 0x210
     psq_l f31, 0x228(r1), 0, 0
     lfd f31, 0x220(r1)

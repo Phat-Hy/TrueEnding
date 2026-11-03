@@ -29,7 +29,7 @@ extern void GXSetTexCopySrc(void);
 extern void GXSetTexCopyDst(void);
 extern void GXCopyTex(void);
 extern void GXInitLightDistAttn(void);
-extern void fn_80615E00(void);
+extern void GXGetTexBufferSize(void);
 extern void fn_806163C0(void);
 extern void fn_806163E0(void);
 extern void fn_80616400(void);
@@ -102,14 +102,14 @@ asm void fn_800D6E48(void)
     clrlwi r4, r6, 16
     li r5, 0x6
     li r6, 0x0
-    bl fn_80615E00
+    bl GXGetTexBufferSize
     mr r31, r3
     clrlwi r3, r26, 16
     clrlwi r4, r27, 16
     li r5, 0xe
     li r6, 0x0
     li r7, 0x0
-    bl fn_80615E00
+    bl GXGetTexBufferSize
     lwz r4, lbl_8087EF8C
     li r0, 0x0
     lis r16, lbl_80734740@ha
@@ -451,7 +451,7 @@ lbl_tex_bakeCharacterTexture_00000504:
     lwz r0, 0x40(r4)
     clrlwi r3, r3, 16
     clrlwi r4, r0, 16
-    bl fn_80615E00
+    bl GXGetTexBufferSize
     mr r18, r3
     mr r3, r19
     mr r5, r18
@@ -472,7 +472,7 @@ lbl_tex_bakeCharacterTexture_00000558:
     li r5, 0x6
     li r6, 0x0
     li r7, 0x0
-    bl fn_80615E00
+    bl GXGetTexBufferSize
     addi r0, r3, 0x1f
     stw r19, 0x0(r30)
     srawi r0, r0, 5
@@ -558,7 +558,7 @@ lbl_tex_bakeCharacterTexture_00000684:
     clrlwi r4, r23, 16
     li r6, 0x0
     li r7, 0x0
-    bl fn_80615E00
+    bl GXGetTexBufferSize
     srawi r24, r24, 1
     add r22, r22, r3
     srawi r23, r23, 1
@@ -586,7 +586,7 @@ lbl_tex_bakeCharacterTexture_00000704:
     clrlwi r4, r22, 16
     li r6, 0x0
     li r7, 0x0
-    bl fn_80615E00
+    bl GXGetTexBufferSize
     lwz r3, 0xc(r15)
     bl fn_80616400
     mr r5, r3
@@ -594,7 +594,7 @@ lbl_tex_bakeCharacterTexture_00000704:
     clrlwi r4, r22, 16
     li r6, 0x0
     li r7, 0x0
-    bl fn_80615E00
+    bl GXGetTexBufferSize
     mr r16, r3
     mr r3, r19
     mr r5, r20
@@ -618,7 +618,7 @@ lbl_tex_bakeCharacterTexture_00000704:
     clrlwi r4, r28, 16
     li r6, 0x0
     li r7, 0x0
-    bl fn_80615E00
+    bl GXGetTexBufferSize
     lwz r4, 0x10(r15)
     lwz r27, 0x28(r4)
     add r27, r27, r23

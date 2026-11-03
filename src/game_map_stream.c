@@ -107,7 +107,7 @@ void fn_801924B8(void);
 void fn_801924F8(void);
 void fn_80192538(void);
 void fn_80192578(void);
-void fn_80192590(void);
+void map_stream_buildTransformMtx(void);
 void map_processStreamChunk(void);
 void fn_80192908(void);
 void fn_80192948(void);
@@ -1039,7 +1039,7 @@ asm void fn_80192578(void)
     blr
 }
 
-asm void fn_80192590(void)
+asm void map_stream_buildTransformMtx(void)
 {
     nofralloc
     stwu r1, -0x180(r1)
@@ -1067,7 +1067,7 @@ asm void fn_80192590(void)
     stfs f0, 0x138(r1)
     lfs f1, 0x53c(r30)
     fcmpu cr0, f7, f1
-    beq lbl_fn_80192590_00000CE8
+    beq lbl_map_stream_buildTransformMtx_00000CE8
     addi r3, r1, 0x48
     li r4, 0x7a
     bl PSMTXRotRad
@@ -1088,11 +1088,11 @@ asm void fn_80192590(void)
     psq_st f4, 0x18(r31), 0, 0
     psq_st f5, 0x20(r31), 0, 0
     psq_st f6, 0x28(r31), 0, 0
-lbl_fn_80192590_00000CE8:
+lbl_map_stream_buildTransformMtx_00000CE8:
     lfs f0, lbl_80881FB0
     lfs f1, 0x538(r30)
     fcmpu cr0, f0, f1
-    beq lbl_fn_80192590_00000D48
+    beq lbl_map_stream_buildTransformMtx_00000D48
     addi r3, r1, 0xa8
     li r4, 0x79
     bl PSMTXRotRad
@@ -1113,11 +1113,11 @@ lbl_fn_80192590_00000CE8:
     psq_st f4, 0x18(r31), 0, 0
     psq_st f5, 0x20(r31), 0, 0
     psq_st f6, 0x28(r31), 0, 0
-lbl_fn_80192590_00000D48:
+lbl_map_stream_buildTransformMtx_00000D48:
     lfs f0, lbl_80881FB0
     lfs f1, 0x534(r30)
     fcmpu cr0, f0, f1
-    beq lbl_fn_80192590_00000DA8
+    beq lbl_map_stream_buildTransformMtx_00000DA8
     addi r3, r1, 0x108
     li r4, 0x78
     bl PSMTXRotRad
@@ -1138,7 +1138,7 @@ lbl_fn_80192590_00000D48:
     psq_st f4, 0x18(r31), 0, 0
     psq_st f5, 0x20(r31), 0, 0
     psq_st f6, 0x28(r31), 0, 0
-lbl_fn_80192590_00000DA8:
+lbl_map_stream_buildTransformMtx_00000DA8:
     lfs f0, lbl_80881FB0
     addi r6, r1, 0x8
     stfs f0, 0x8(r1)

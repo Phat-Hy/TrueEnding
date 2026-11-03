@@ -15,7 +15,7 @@ extern void hurtbox_testCollisionLayer(void);
 extern void fn_8010B250(void);
 extern void fn_80134234(void);
 extern void quest_getRewardItemSlot(void);
-extern void fn_801533C8(void);
+extern void inventory_hasItem(void);
 extern void fn_80154E38(void);
 extern void fn_8016F368(void);
 extern void battle_canTargetActor(void);
@@ -73,7 +73,7 @@ asm void fn_800FBE70(void)
     mr r24, r10
     mr r3, r25
     mr r5, r26
-    bl fn_801533C8
+    bl inventory_hasItem
     cmpwi r3, 0x0
     beq lbl_fn_800FBE70_00000064
     li r3, -0x1
@@ -307,7 +307,7 @@ asm void fn_800FC1D0(void)
     mr r27, r10
     mr r3, r29
     mr r5, r30
-    bl fn_801533C8
+    bl inventory_hasItem
     cmpwi r3, 0x0
     beq lbl_fn_800FC1D0_000003B4
     li r3, -0x1

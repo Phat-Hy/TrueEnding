@@ -33,7 +33,7 @@ extern void profile_getMetricValue(void);
 extern void fn_8020787C(void);
 extern void fn_80219EB4(void);
 extern void fn_80219EBC(void);
-extern void fn_8021C6A4(void);
+extern void thread_pool_dispatchTask(void);
 extern void world_getGlobalFlag(void);
 extern void fn_804446BC(void);
 extern void fn_804A4CE4(void);
@@ -150,7 +150,7 @@ lbl_fn_801E7D78_000000A4:
     beq lbl_fn_801E7D78_000000C0
     mr r3, r28
     mr r4, r27
-    bl fn_8021C6A4
+    bl thread_pool_dispatchTask
     cmpwi r3, 0x0
     bne lbl_fn_801E7D78_000000CC
 lbl_fn_801E7D78_000000C0:
@@ -238,7 +238,7 @@ lbl_fn_801E7EA8_000001D4:
     beq lbl_fn_801E7EA8_000001F0
     mr r3, r28
     mr r4, r27
-    bl fn_8021C6A4
+    bl thread_pool_dispatchTask
     cmpwi r3, 0x0
     bne lbl_fn_801E7EA8_000001FC
 lbl_fn_801E7EA8_000001F0:

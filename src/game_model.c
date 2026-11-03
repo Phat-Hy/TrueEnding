@@ -32,7 +32,7 @@ extern void fn_800D5F68(void);
 extern void sky_renderStub(void);
 extern void fn_805ED390(void);
 extern void PSMTXConcat(void);
-extern void fn_80615E00(void);
+extern void GXGetTexBufferSize(void);
 extern void GXInitLightObj(void);
 extern void GXClampLightAngle(void);
 extern void msl_releaseRefCount(void);
@@ -148,7 +148,7 @@ asm void fn_800BD9C0(void)
     lwz r30, 0x3c(r3)
     clrlwi r4, r29, 16
     clrlwi r3, r30, 16
-    bl fn_80615E00
+    bl GXGetTexBufferSize
     mr r28, r3
     bl dungeon_initGlobalContext
     lis r31, lbl_807336B0@ha

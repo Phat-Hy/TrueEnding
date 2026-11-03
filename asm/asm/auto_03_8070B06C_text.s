@@ -6040,7 +6040,7 @@
 .endfn gap_03_8070FACC_text
 
 # .text:0x4A64 | 0x8070FAD0 | size: 0x964
-.fn fn_8070FAD0, global
+.fn net_packetDispatch, global
 /* 8070FAD0 0070A130  94 21 FF C0 */	stwu r1, -0x40(r1)
 /* 8070FAD4 0070A134  7C 08 02 A6 */	mflr r0
 /* 8070FAD8 0070A138  90 01 00 44 */	stw r0, 0x44(r1)
@@ -6699,7 +6699,7 @@
 /* 80710428 0070AA88  7C 08 03 A6 */	mtlr r0
 /* 8071042C 0070AA8C  38 21 00 40 */	addi r1, r1, 0x40
 /* 80710430 0070AA90  4E 80 00 20 */	blr
-.endfn fn_8070FAD0
+.endfn net_packetDispatch
 
 # .text:0x53C8 | 0x80710434 | size: 0xC
 .fn gap_03_80710434_text, global

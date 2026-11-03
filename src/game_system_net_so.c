@@ -107,7 +107,7 @@ extern u32 lbl_80885AC0;
 void fn_8038E540(void);
 void fn_8038E9B0(void);
 void fn_8038EF94(void);
-void fn_8038F52C(void);
+void net_syncPlayerActorState(void);
 
 asm void fn_8038E540(void)
 {
@@ -1178,7 +1178,7 @@ lbl_fn_8038EF94_00000F70:
     blr
 }
 
-asm void fn_8038F52C(void)
+asm void net_syncPlayerActorState(void)
 {
     nofralloc
     stwu r1, -0x250(r1)
@@ -1198,45 +1198,45 @@ asm void fn_8038F52C(void)
     mr r29, r3
     lwz r0, 0x7fc(r3)
     cmpwi r0, 0x6
-    beq lbl_fn_8038F52C_00001DE4
+    beq lbl_net_syncPlayerActorState_00001DE4
     cmpwi r0, 0x13
-    beq lbl_fn_8038F52C_00001DE4
+    beq lbl_net_syncPlayerActorState_00001DE4
     mr r3, r30
     bl fn_8013C3A8
     cmpwi r3, 0x0
-    beq lbl_fn_8038F52C_0000107C
+    beq lbl_net_syncPlayerActorState_0000107C
     mr r3, r30
     bl fn_8038B648
     cmpwi r3, 0x0
-    beq lbl_fn_8038F52C_0000106C
+    beq lbl_net_syncPlayerActorState_0000106C
     mr r3, r29
     li r4, 0x3
     bl nwc24_transitionDataState
-    b lbl_fn_8038F52C_00001DE4
-lbl_fn_8038F52C_0000106C:
+    b lbl_net_syncPlayerActorState_00001DE4
+lbl_net_syncPlayerActorState_0000106C:
     mr r3, r29
     li r4, 0x2
     bl nwc24_transitionDataState
-    b lbl_fn_8038F52C_00001DE4
-lbl_fn_8038F52C_0000107C:
+    b lbl_net_syncPlayerActorState_00001DE4
+lbl_net_syncPlayerActorState_0000107C:
     mr r3, r30
     bl fn_801479D8
     cmpwi r3, 0x0
-    beq lbl_fn_8038F52C_0000109C
+    beq lbl_net_syncPlayerActorState_0000109C
     mr r3, r29
     li r4, 0x4
     bl nwc24_transitionDataState
-    b lbl_fn_8038F52C_00001DE4
-lbl_fn_8038F52C_0000109C:
+    b lbl_net_syncPlayerActorState_00001DE4
+lbl_net_syncPlayerActorState_0000109C:
     mr r3, r30
     bl fn_80267B20
     cmpwi r3, 0x6
-    bne lbl_fn_8038F52C_00001CFC
+    bne lbl_net_syncPlayerActorState_00001CFC
     mr r3, r30
     bl fn_80267B28
     subi r0, r3, 0x4
     cmplwi r0, 0x89
-    bgt lbl_fn_8038F52C_00001CF0
+    bgt lbl_net_syncPlayerActorState_00001CF0
     lis r3, jumptable_8078A558@ha
     slwi r0, r0, 2
     addi r3, r3, jumptable_8078A558@l
@@ -1246,7 +1246,7 @@ lbl_fn_8038F52C_0000109C:
     mr r3, r29
     li r4, 0x5
     bl nwc24_transitionDataState
-    b lbl_fn_8038F52C_00001DE4
+    b lbl_net_syncPlayerActorState_00001DE4
     mr r3, r30
     bl fn_800F84C8
     li r4, 0x0
@@ -1288,11 +1288,11 @@ lbl_fn_8038F52C_0000109C:
     li r4, 0x0
     li r5, 0x0
     bl fat_dispatchFsRequest
-    b lbl_fn_8038F52C_00001DE4
+    b lbl_net_syncPlayerActorState_00001DE4
     mr r3, r30
     bl fn_80387540
     cmpwi r3, 0x0
-    beq lbl_fn_8038F52C_000011D0
+    beq lbl_net_syncPlayerActorState_000011D0
     mr r3, r30
     bl fn_80387540
     lwz r12, 0x0(r3)
@@ -1300,32 +1300,32 @@ lbl_fn_8038F52C_0000109C:
     mtctr r12
     bctrl
     cmpwi r3, 0x0
-    beq lbl_fn_8038F52C_000011D0
+    beq lbl_net_syncPlayerActorState_000011D0
     mr r3, r29
     li r4, 0x4
     bl nwc24_transitionDataState
-    b lbl_fn_8038F52C_00001DE4
-lbl_fn_8038F52C_000011D0:
+    b lbl_net_syncPlayerActorState_00001DE4
+lbl_net_syncPlayerActorState_000011D0:
     mr r3, r29
     li r4, 0x5
     bl nwc24_transitionDataState
-    b lbl_fn_8038F52C_00001DE4
+    b lbl_net_syncPlayerActorState_00001DE4
     mr r3, r30
     bl fn_80339F6C
     cmpwi r3, 0x0
-    beq lbl_fn_8038F52C_00001DE4
+    beq lbl_net_syncPlayerActorState_00001DE4
     mr r3, r30
     bl fn_80339F6C
     lbz r0, 0x2(r3)
     cmpwi r0, 0x4
-    bne lbl_fn_8038F52C_00001DE4
+    bne lbl_net_syncPlayerActorState_00001DE4
     mr r3, r29
     bl fn_80390374
-    b lbl_fn_8038F52C_00001DE4
+    b lbl_net_syncPlayerActorState_00001DE4
     mr r3, r29
     li r4, 0x7
     bl nwc24_transitionDataState
-    b lbl_fn_8038F52C_00001DE4
+    b lbl_net_syncPlayerActorState_00001DE4
     mr r3, r29
     bl fn_80390374
     lfs f1, lbl_80885904
@@ -1333,24 +1333,24 @@ lbl_fn_8038F52C_000011D0:
     li r4, 0x0
     li r5, 0x1
     bl fat_dispatchFsRequest
-    b lbl_fn_8038F52C_00001DE4
+    b lbl_net_syncPlayerActorState_00001DE4
     mr r3, r29
     bl fn_80390374
     mr r3, r30
     bl fn_80382A00
     cmpwi r3, 0x2
-    bne lbl_fn_8038F52C_00001268
+    bne lbl_net_syncPlayerActorState_00001268
     mr r3, r30
     bl party_evalFormationState
     cmpwi r3, 0x0
-    bne lbl_fn_8038F52C_00001DE4
-lbl_fn_8038F52C_00001268:
+    bne lbl_net_syncPlayerActorState_00001DE4
+lbl_net_syncPlayerActorState_00001268:
     lfs f1, lbl_80885904
     mr r3, r29
     li r4, 0x0
     li r5, 0x0
     bl fat_dispatchFsRequest
-    b lbl_fn_8038F52C_00001DE4
+    b lbl_net_syncPlayerActorState_00001DE4
     addi r3, r1, 0x190
     addi r4, r29, 0x51c
     bl fn_8037E964
@@ -1369,7 +1369,7 @@ lbl_fn_8038F52C_00001268:
     li r4, 0x0
     li r5, 0x0
     bl fat_dispatchFsRequest
-    b lbl_fn_8038F52C_00001DE4
+    b lbl_net_syncPlayerActorState_00001DE4
     mr r3, r29
     bl fn_80390374
     bl actor_getStreamPipe
@@ -1380,19 +1380,19 @@ lbl_fn_8038F52C_00001268:
     li r4, 0x0
     li r5, 0x0
     bl fat_dispatchFsRequest
-    b lbl_fn_8038F52C_00001DE4
+    b lbl_net_syncPlayerActorState_00001DE4
     mr r3, r29
     li r4, 0xd
     bl nwc24_transitionDataState
-    b lbl_fn_8038F52C_00001DE4
+    b lbl_net_syncPlayerActorState_00001DE4
     mr r3, r29
     li r4, 0xe
     bl nwc24_transitionDataState
-    b lbl_fn_8038F52C_00001DE4
+    b lbl_net_syncPlayerActorState_00001DE4
     mr r3, r29
     li r4, 0xf
     bl nwc24_transitionDataState
-    b lbl_fn_8038F52C_00001DE4
+    b lbl_net_syncPlayerActorState_00001DE4
     mr r3, r29
     li r4, 0x14
     bl nwc24_transitionDataState
@@ -1401,7 +1401,7 @@ lbl_fn_8038F52C_00001268:
     li r4, 0x1
     li r5, 0x1
     bl fat_dispatchFsRequest
-    b lbl_fn_8038F52C_00001DE4
+    b lbl_net_syncPlayerActorState_00001DE4
     mr r3, r29
     bl fn_80390374
     lfs f1, lbl_80885904
@@ -1409,7 +1409,7 @@ lbl_fn_8038F52C_00001268:
     li r4, 0x1
     li r5, 0x1
     bl fat_dispatchFsRequest
-    b lbl_fn_8038F52C_00001DE4
+    b lbl_net_syncPlayerActorState_00001DE4
     addi r3, r1, 0x154
     addi r4, r29, 0x51c
     bl fn_8037E964
@@ -1430,7 +1430,7 @@ lbl_fn_8038F52C_00001268:
     li r4, 0x0
     li r5, 0x0
     bl fat_dispatchFsRequest
-    b lbl_fn_8038F52C_00001DE4
+    b lbl_net_syncPlayerActorState_00001DE4
     mr r3, r30
     bl fn_800F84C8
     li r4, 0x0
@@ -1449,7 +1449,7 @@ lbl_fn_8038F52C_00001268:
     li r4, 0x0
     bl fn_80139F2C
     cmpwi r3, 0x16e
-    bne lbl_fn_8038F52C_000014CC
+    bne lbl_net_syncPlayerActorState_000014CC
     lfs f1, lbl_80885974
     bl phys_scaleGravity
     fneg f0, f1
@@ -1459,58 +1459,58 @@ lbl_fn_8038F52C_00001268:
     lfs f0, lbl_80885AA8
     stfs f1, 0x20(r1)
     fcmpo cr0, f30, f0
-    ble lbl_fn_8038F52C_00001474
+    ble lbl_net_syncPlayerActorState_00001474
     lfs f1, lbl_80885A98
     lfs f0, lbl_808858FC
     fsubs f2, f30, f1
     lfs f1, lbl_808858F8
     fmuls f0, f2, f0
     fcmpo cr0, f1, f0
-    bge lbl_fn_8038F52C_00001454
-    b lbl_fn_8038F52C_00001458
-lbl_fn_8038F52C_00001454:
+    bge lbl_net_syncPlayerActorState_00001454
+    b lbl_net_syncPlayerActorState_00001458
+lbl_net_syncPlayerActorState_00001454:
     fmr f1, f0
-lbl_fn_8038F52C_00001458:
+lbl_net_syncPlayerActorState_00001458:
     addi r3, r1, 0x24
     addi r4, r1, 0x20
     bl math_lerpf
     lfs f0, 0x120(r1)
     fadds f0, f0, f1
     stfs f0, 0x120(r1)
-    b lbl_fn_8038F52C_000014B8
-lbl_fn_8038F52C_00001474:
+    b lbl_net_syncPlayerActorState_000014B8
+lbl_net_syncPlayerActorState_00001474:
     lfs f0, lbl_80885AAC
     fcmpo cr0, f30, f0
-    ble lbl_fn_8038F52C_000014B8
+    ble lbl_net_syncPlayerActorState_000014B8
     fsubs f2, f30, f0
     lfs f0, lbl_80885A3C
     lfs f1, lbl_808858F8
     fdivs f0, f2, f0
     fcmpo cr0, f1, f0
-    bge lbl_fn_8038F52C_0000149C
-    b lbl_fn_8038F52C_000014A0
-lbl_fn_8038F52C_0000149C:
+    bge lbl_net_syncPlayerActorState_0000149C
+    b lbl_net_syncPlayerActorState_000014A0
+lbl_net_syncPlayerActorState_0000149C:
     fmr f1, f0
-lbl_fn_8038F52C_000014A0:
+lbl_net_syncPlayerActorState_000014A0:
     addi r4, r1, 0x24
     la r3, lbl_8087DD04
     bl math_lerpf
     lfs f0, 0x120(r1)
     fadds f0, f0, f1
     stfs f0, 0x120(r1)
-lbl_fn_8038F52C_000014B8:
+lbl_net_syncPlayerActorState_000014B8:
     lfs f1, 0x11c(r1)
     lfs f0, lbl_80885A10
     fmuls f0, f1, f0
     stfs f0, 0x11c(r1)
-    b lbl_fn_8038F52C_0000193C
-lbl_fn_8038F52C_000014CC:
+    b lbl_net_syncPlayerActorState_0000193C
+lbl_net_syncPlayerActorState_000014CC:
     mr r3, r30
     bl fn_800F84C8
     li r4, 0x0
     bl fn_80139F2C
     cmpwi r3, 0x170
-    bne lbl_fn_8038F52C_000016D8
+    bne lbl_net_syncPlayerActorState_000016D8
     lfs f1, lbl_80885914
     bl phys_scaleGravity
     fneg f0, f1
@@ -1520,65 +1520,65 @@ lbl_fn_8038F52C_000014CC:
     lfs f0, lbl_80885AA8
     stfs f1, 0x18(r1)
     fcmpo cr0, f30, f0
-    ble lbl_fn_8038F52C_0000154C
+    ble lbl_net_syncPlayerActorState_0000154C
     lfs f1, lbl_80885A98
     lfs f0, lbl_808858FC
     fsubs f2, f30, f1
     lfs f1, lbl_808858F8
     fmuls f0, f2, f0
     fcmpo cr0, f1, f0
-    bge lbl_fn_8038F52C_0000152C
-    b lbl_fn_8038F52C_00001530
-lbl_fn_8038F52C_0000152C:
+    bge lbl_net_syncPlayerActorState_0000152C
+    b lbl_net_syncPlayerActorState_00001530
+lbl_net_syncPlayerActorState_0000152C:
     fmr f1, f0
-lbl_fn_8038F52C_00001530:
+lbl_net_syncPlayerActorState_00001530:
     addi r3, r1, 0x1c
     addi r4, r1, 0x18
     bl math_lerpf
     lfs f0, 0x120(r1)
     fadds f0, f0, f1
     stfs f0, 0x120(r1)
-    b lbl_fn_8038F52C_00001590
-lbl_fn_8038F52C_0000154C:
+    b lbl_net_syncPlayerActorState_00001590
+lbl_net_syncPlayerActorState_0000154C:
     lfs f0, lbl_80885AAC
     fcmpo cr0, f30, f0
-    ble lbl_fn_8038F52C_00001590
+    ble lbl_net_syncPlayerActorState_00001590
     fsubs f2, f30, f0
     lfs f0, lbl_80885A3C
     lfs f1, lbl_808858F8
     fdivs f0, f2, f0
     fcmpo cr0, f1, f0
-    bge lbl_fn_8038F52C_00001574
-    b lbl_fn_8038F52C_00001578
-lbl_fn_8038F52C_00001574:
+    bge lbl_net_syncPlayerActorState_00001574
+    b lbl_net_syncPlayerActorState_00001578
+lbl_net_syncPlayerActorState_00001574:
     fmr f1, f0
-lbl_fn_8038F52C_00001578:
+lbl_net_syncPlayerActorState_00001578:
     addi r4, r1, 0x1c
     la r3, lbl_8087DD08
     bl math_lerpf
     lfs f0, 0x120(r1)
     fadds f0, f0, f1
     stfs f0, 0x120(r1)
-lbl_fn_8038F52C_00001590:
+lbl_net_syncPlayerActorState_00001590:
     lfs f0, lbl_80885AB0
     fsubs f0, f31, f0
     fcmpo cr0, f30, f0
-    ble lbl_fn_8038F52C_00001634
+    ble lbl_net_syncPlayerActorState_00001634
     fsubs f1, f30, f0
     lfs f0, lbl_80885A94
     lfs f2, lbl_808858E8
     fdivs f0, f1, f0
     fcmpo cr0, f2, f0
-    ble lbl_fn_8038F52C_000015BC
-    b lbl_fn_8038F52C_000015C0
-lbl_fn_8038F52C_000015BC:
+    ble lbl_net_syncPlayerActorState_000015BC
+    b lbl_net_syncPlayerActorState_000015C0
+lbl_net_syncPlayerActorState_000015BC:
     fmr f2, f0
-lbl_fn_8038F52C_000015C0:
+lbl_net_syncPlayerActorState_000015C0:
     lfs f29, lbl_808858F8
     fcmpo cr0, f29, f2
-    bge lbl_fn_8038F52C_000015D0
-    b lbl_fn_8038F52C_000015F8
-lbl_fn_8038F52C_000015D0:
+    bge lbl_net_syncPlayerActorState_000015D0
+    b lbl_net_syncPlayerActorState_000015F8
+lbl_net_syncPlayerActorState_000015D0:
     lfs f1, lbl_80885AB0
     lfs f0, lbl_80885A94
     fsubs f1, f31, f1
@@ -1586,11 +1586,11 @@ lbl_fn_8038F52C_000015D0:
     fsubs f1, f30, f1
     fdivs f0, f1, f0
     fcmpo cr0, f29, f0
-    ble lbl_fn_8038F52C_000015F4
-    b lbl_fn_8038F52C_000015F8
-lbl_fn_8038F52C_000015F4:
+    ble lbl_net_syncPlayerActorState_000015F4
+    b lbl_net_syncPlayerActorState_000015F8
+lbl_net_syncPlayerActorState_000015F4:
     fmr f29, f0
-lbl_fn_8038F52C_000015F8:
+lbl_net_syncPlayerActorState_000015F8:
     fmr f1, f29
     addi r4, r1, 0x124
     la r3, lbl_8087DD0C
@@ -1605,35 +1605,35 @@ lbl_fn_8038F52C_000015F8:
     stfs f0, 0xc(r1)
     bl math_lerpf
     stfs f1, 0x14c(r1)
-    b lbl_fn_8038F52C_000016C4
-lbl_fn_8038F52C_00001634:
+    b lbl_net_syncPlayerActorState_000016C4
+lbl_net_syncPlayerActorState_00001634:
     lfs f1, lbl_808858F4
     lfs f0, lbl_80885914
     fsubs f1, f30, f1
     lfs f2, lbl_808858F8
     fdivs f0, f1, f0
     fcmpo cr0, f2, f0
-    bge lbl_fn_8038F52C_00001654
-    b lbl_fn_8038F52C_00001658
-lbl_fn_8038F52C_00001654:
+    bge lbl_net_syncPlayerActorState_00001654
+    b lbl_net_syncPlayerActorState_00001658
+lbl_net_syncPlayerActorState_00001654:
     fmr f2, f0
-lbl_fn_8038F52C_00001658:
+lbl_net_syncPlayerActorState_00001658:
     lfs f29, lbl_808858E8
     fcmpo cr0, f29, f2
-    ble lbl_fn_8038F52C_00001668
-    b lbl_fn_8038F52C_0000168C
-lbl_fn_8038F52C_00001668:
+    ble lbl_net_syncPlayerActorState_00001668
+    b lbl_net_syncPlayerActorState_0000168C
+lbl_net_syncPlayerActorState_00001668:
     lfs f1, lbl_808858F4
     lfs f0, lbl_80885914
     fsubs f1, f30, f1
     lfs f29, lbl_808858F8
     fdivs f0, f1, f0
     fcmpo cr0, f29, f0
-    bge lbl_fn_8038F52C_00001688
-    b lbl_fn_8038F52C_0000168C
-lbl_fn_8038F52C_00001688:
+    bge lbl_net_syncPlayerActorState_00001688
+    b lbl_net_syncPlayerActorState_0000168C
+lbl_net_syncPlayerActorState_00001688:
     fmr f29, f0
-lbl_fn_8038F52C_0000168C:
+lbl_net_syncPlayerActorState_0000168C:
     fmr f1, f29
     addi r3, r1, 0x124
     la r4, lbl_8087DD10
@@ -1648,13 +1648,13 @@ lbl_fn_8038F52C_0000168C:
     stfs f0, 0x8(r1)
     bl math_lerpf
     stfs f1, 0x14c(r1)
-lbl_fn_8038F52C_000016C4:
+lbl_net_syncPlayerActorState_000016C4:
     lfs f1, 0x11c(r1)
     lfs f0, lbl_80885A24
     fmuls f0, f1, f0
     stfs f0, 0x11c(r1)
-    b lbl_fn_8038F52C_0000193C
-lbl_fn_8038F52C_000016D8:
+    b lbl_net_syncPlayerActorState_0000193C
+lbl_net_syncPlayerActorState_000016D8:
     lfs f1, lbl_8088594C
     bl phys_scaleGravity
     fneg f0, f1
@@ -1665,22 +1665,22 @@ lbl_fn_8038F52C_000016D8:
     stfs f1, 0x10(r1)
     fsubs f0, f31, f0
     fcmpo cr0, f30, f0
-    ble lbl_fn_8038F52C_000017B0
+    ble lbl_net_syncPlayerActorState_000017B0
     fsubs f1, f30, f0
     lfs f0, lbl_80885AB4
     lfs f2, lbl_808858E8
     fdivs f0, f1, f0
     fcmpo cr0, f2, f0
-    ble lbl_fn_8038F52C_00001720
-    b lbl_fn_8038F52C_00001724
-lbl_fn_8038F52C_00001720:
+    ble lbl_net_syncPlayerActorState_00001720
+    b lbl_net_syncPlayerActorState_00001724
+lbl_net_syncPlayerActorState_00001720:
     fmr f2, f0
-lbl_fn_8038F52C_00001724:
+lbl_net_syncPlayerActorState_00001724:
     lfs f1, lbl_808858F8
     fcmpo cr0, f1, f2
-    bge lbl_fn_8038F52C_00001734
-    b lbl_fn_8038F52C_0000175C
-lbl_fn_8038F52C_00001734:
+    bge lbl_net_syncPlayerActorState_00001734
+    b lbl_net_syncPlayerActorState_0000175C
+lbl_net_syncPlayerActorState_00001734:
     lfs f1, lbl_80885914
     lfs f0, lbl_80885AB4
     fsubs f2, f31, f1
@@ -1688,11 +1688,11 @@ lbl_fn_8038F52C_00001734:
     fsubs f2, f30, f2
     fdivs f0, f2, f0
     fcmpo cr0, f1, f0
-    ble lbl_fn_8038F52C_00001758
-    b lbl_fn_8038F52C_0000175C
-lbl_fn_8038F52C_00001758:
+    ble lbl_net_syncPlayerActorState_00001758
+    b lbl_net_syncPlayerActorState_0000175C
+lbl_net_syncPlayerActorState_00001758:
     fmr f1, f0
-lbl_fn_8038F52C_0000175C:
+lbl_net_syncPlayerActorState_0000175C:
     la r3, lbl_8087DD14
     la r4, lbl_8087DD18
     bl math_lerpf
@@ -1706,31 +1706,31 @@ lbl_fn_8038F52C_0000175C:
     stfs f3, 0x118(r1)
     fdivs f0, f2, f0
     fcmpo cr0, f1, f0
-    bge lbl_fn_8038F52C_00001798
-    b lbl_fn_8038F52C_0000179C
-lbl_fn_8038F52C_00001798:
+    bge lbl_net_syncPlayerActorState_00001798
+    b lbl_net_syncPlayerActorState_0000179C
+lbl_net_syncPlayerActorState_00001798:
     fmr f1, f0
-lbl_fn_8038F52C_0000179C:
+lbl_net_syncPlayerActorState_0000179C:
     addi r3, r29, 0x480
     addi r4, r1, 0x120
     bl math_lerpf
     stfs f1, 0x120(r1)
-    b lbl_fn_8038F52C_0000193C
-lbl_fn_8038F52C_000017B0:
+    b lbl_net_syncPlayerActorState_0000193C
+lbl_net_syncPlayerActorState_000017B0:
     lfs f0, lbl_80885AA8
     fcmpo cr0, f30, f0
-    ble lbl_fn_8038F52C_0000186C
+    ble lbl_net_syncPlayerActorState_0000186C
     lfs f1, lbl_80885A98
     lfs f0, lbl_808858FC
     fsubs f2, f30, f1
     lfs f1, lbl_808858F8
     fmuls f0, f2, f0
     fcmpo cr0, f1, f0
-    bge lbl_fn_8038F52C_000017DC
-    b lbl_fn_8038F52C_000017E0
-lbl_fn_8038F52C_000017DC:
+    bge lbl_net_syncPlayerActorState_000017DC
+    b lbl_net_syncPlayerActorState_000017E0
+lbl_net_syncPlayerActorState_000017DC:
     fmr f1, f0
-lbl_fn_8038F52C_000017E0:
+lbl_net_syncPlayerActorState_000017E0:
     addi r3, r1, 0x14
     addi r4, r1, 0x10
     bl math_lerpf
@@ -1743,62 +1743,62 @@ lbl_fn_8038F52C_000017E0:
     fdivs f0, f2, f0
     stfs f1, 0x120(r1)
     fcmpo cr0, f3, f0
-    ble lbl_fn_8038F52C_00001818
-    b lbl_fn_8038F52C_0000181C
-lbl_fn_8038F52C_00001818:
+    ble lbl_net_syncPlayerActorState_00001818
+    b lbl_net_syncPlayerActorState_0000181C
+lbl_net_syncPlayerActorState_00001818:
     fmr f3, f0
-lbl_fn_8038F52C_0000181C:
+lbl_net_syncPlayerActorState_0000181C:
     lfs f1, lbl_808858F8
     fcmpo cr0, f1, f3
-    bge lbl_fn_8038F52C_0000182C
-    b lbl_fn_8038F52C_00001850
-lbl_fn_8038F52C_0000182C:
+    bge lbl_net_syncPlayerActorState_0000182C
+    b lbl_net_syncPlayerActorState_00001850
+lbl_net_syncPlayerActorState_0000182C:
     lfs f1, lbl_80885AA8
     lfs f0, lbl_80885930
     fsubs f2, f30, f1
     lfs f1, lbl_808858E8
     fdivs f0, f2, f0
     fcmpo cr0, f1, f0
-    ble lbl_fn_8038F52C_0000184C
-    b lbl_fn_8038F52C_00001850
-lbl_fn_8038F52C_0000184C:
+    ble lbl_net_syncPlayerActorState_0000184C
+    b lbl_net_syncPlayerActorState_00001850
+lbl_net_syncPlayerActorState_0000184C:
     fmr f1, f0
-lbl_fn_8038F52C_00001850:
+lbl_net_syncPlayerActorState_00001850:
     la r3, lbl_8087DD1C
     la r4, lbl_8087DD20
     bl math_lerpf
     lfs f0, 0x118(r1)
     fmuls f0, f0, f1
     stfs f0, 0x118(r1)
-    b lbl_fn_8038F52C_0000193C
-lbl_fn_8038F52C_0000186C:
+    b lbl_net_syncPlayerActorState_0000193C
+lbl_net_syncPlayerActorState_0000186C:
     lfs f1, lbl_80885AAC
     lfs f0, lbl_80885A3C
     fsubs f1, f30, f1
     lfs f2, lbl_808858E8
     fdivs f0, f1, f0
     fcmpo cr0, f2, f0
-    ble lbl_fn_8038F52C_0000188C
-    b lbl_fn_8038F52C_00001890
-lbl_fn_8038F52C_0000188C:
+    ble lbl_net_syncPlayerActorState_0000188C
+    b lbl_net_syncPlayerActorState_00001890
+lbl_net_syncPlayerActorState_0000188C:
     fmr f2, f0
-lbl_fn_8038F52C_00001890:
+lbl_net_syncPlayerActorState_00001890:
     lfs f1, lbl_808858F8
     fcmpo cr0, f1, f2
-    bge lbl_fn_8038F52C_000018A0
-    b lbl_fn_8038F52C_000018C4
-lbl_fn_8038F52C_000018A0:
+    bge lbl_net_syncPlayerActorState_000018A0
+    b lbl_net_syncPlayerActorState_000018C4
+lbl_net_syncPlayerActorState_000018A0:
     lfs f1, lbl_80885AAC
     lfs f0, lbl_80885A3C
     fsubs f2, f30, f1
     lfs f1, lbl_808858E8
     fdivs f0, f2, f0
     fcmpo cr0, f1, f0
-    ble lbl_fn_8038F52C_000018C0
-    b lbl_fn_8038F52C_000018C4
-lbl_fn_8038F52C_000018C0:
+    ble lbl_net_syncPlayerActorState_000018C0
+    b lbl_net_syncPlayerActorState_000018C4
+lbl_net_syncPlayerActorState_000018C0:
     fmr f1, f0
-lbl_fn_8038F52C_000018C4:
+lbl_net_syncPlayerActorState_000018C4:
     addi r4, r1, 0x14
     la r3, lbl_8087DD24
     bl math_lerpf
@@ -1809,32 +1809,32 @@ lbl_fn_8038F52C_000018C4:
     fadds f1, f2, f1
     fcmpo cr0, f3, f0
     stfs f1, 0x120(r1)
-    ble lbl_fn_8038F52C_000018F4
-    b lbl_fn_8038F52C_000018F8
-lbl_fn_8038F52C_000018F4:
+    ble lbl_net_syncPlayerActorState_000018F4
+    b lbl_net_syncPlayerActorState_000018F8
+lbl_net_syncPlayerActorState_000018F4:
     fmr f3, f0
-lbl_fn_8038F52C_000018F8:
+lbl_net_syncPlayerActorState_000018F8:
     lfs f1, lbl_808858F8
     fcmpo cr0, f1, f3
-    bge lbl_fn_8038F52C_00001908
-    b lbl_fn_8038F52C_00001924
-lbl_fn_8038F52C_00001908:
+    bge lbl_net_syncPlayerActorState_00001908
+    b lbl_net_syncPlayerActorState_00001924
+lbl_net_syncPlayerActorState_00001908:
     lfs f0, lbl_80885930
     lfs f1, lbl_808858E8
     fdivs f0, f30, f0
     fcmpo cr0, f1, f0
-    ble lbl_fn_8038F52C_00001920
-    b lbl_fn_8038F52C_00001924
-lbl_fn_8038F52C_00001920:
+    ble lbl_net_syncPlayerActorState_00001920
+    b lbl_net_syncPlayerActorState_00001924
+lbl_net_syncPlayerActorState_00001920:
     fmr f1, f0
-lbl_fn_8038F52C_00001924:
+lbl_net_syncPlayerActorState_00001924:
     la r3, lbl_8087DD28
     la r4, lbl_8087DD2C
     bl math_lerpf
     lfs f0, 0x118(r1)
     fmuls f0, f0, f1
     stfs f0, 0x118(r1)
-lbl_fn_8038F52C_0000193C:
+lbl_net_syncPlayerActorState_0000193C:
     lfs f1, lbl_8088593C
     addi r3, r29, 0x46c
     addi r5, r1, 0x118
@@ -1845,11 +1845,11 @@ lbl_fn_8038F52C_0000193C:
     fneg f1, f1
     lfs f0, 0x120(r1)
     fcmpo cr0, f1, f0
-    ble lbl_fn_8038F52C_00001974
+    ble lbl_net_syncPlayerActorState_00001974
     lfs f1, lbl_80885AA4
     bl phys_scaleGravity
     fneg f0, f1
-lbl_fn_8038F52C_00001974:
+lbl_net_syncPlayerActorState_00001974:
     stfs f0, 0x480(r29)
     mr r3, r29
     li r31, 0x1
@@ -1867,7 +1867,7 @@ lbl_fn_8038F52C_00001974:
     li r4, 0x0
     li r5, 0x1
     bl fat_dispatchFsRequest
-    b lbl_fn_8038F52C_00001DE4
+    b lbl_net_syncPlayerActorState_00001DE4
     addi r3, r1, 0xdc
     addi r4, r29, 0x51c
     bl fn_8037E964
@@ -1887,7 +1887,7 @@ lbl_fn_8038F52C_00001974:
     mr r3, r29
     li r31, 0x1
     bl fn_80390374
-    b lbl_fn_8038F52C_00001DE4
+    b lbl_net_syncPlayerActorState_00001DE4
     addi r3, r1, 0xa0
     addi r4, r29, 0x51c
     bl fn_8037E964
@@ -1907,7 +1907,7 @@ lbl_fn_8038F52C_00001974:
     mr r3, r29
     li r31, 0x1
     bl fn_80390374
-    b lbl_fn_8038F52C_00001DE4
+    b lbl_net_syncPlayerActorState_00001DE4
     addi r3, r1, 0x64
     addi r4, r29, 0x51c
     bl fn_8037E964
@@ -1917,20 +1917,20 @@ lbl_fn_8038F52C_00001974:
     bl npc_updateDialogueTarget
     lfs f0, lbl_80885ABC
     fcmpo cr0, f1, f0
-    bge lbl_fn_8038F52C_00001A98
+    bge lbl_net_syncPlayerActorState_00001A98
     lfs f1, 0x64(r1)
     lfs f0, lbl_80885A24
     fmuls f0, f1, f0
     stfs f0, 0x64(r1)
-    b lbl_fn_8038F52C_00001B80
-lbl_fn_8038F52C_00001A98:
+    b lbl_net_syncPlayerActorState_00001B80
+lbl_net_syncPlayerActorState_00001A98:
     mr r3, r30
     bl fn_800F84C8
     li r4, 0x0
     bl npc_updateDialogueTarget
     lfs f0, lbl_80885AC0
     fcmpo cr0, f1, f0
-    ble lbl_fn_8038F52C_00001B1C
+    ble lbl_net_syncPlayerActorState_00001B1C
     mr r3, r30
     bl fn_800F84C8
     li r4, 0x0
@@ -1942,9 +1942,9 @@ lbl_fn_8038F52C_00001A98:
     lfs f1, lbl_808858F8
     fnmsubs f0, f2, f3, f0
     fcmpo cr0, f1, f0
-    ble lbl_fn_8038F52C_00001AE8
-    b lbl_fn_8038F52C_00001B0C
-lbl_fn_8038F52C_00001AE8:
+    ble lbl_net_syncPlayerActorState_00001AE8
+    b lbl_net_syncPlayerActorState_00001B0C
+lbl_net_syncPlayerActorState_00001AE8:
     mr r3, r30
     bl fn_800F84C8
     li r4, 0x0
@@ -1954,12 +1954,12 @@ lbl_fn_8038F52C_00001AE8:
     fsubs f1, f1, f0
     lfs f0, lbl_80885A50
     fnmsubs f1, f2, f1, f0
-lbl_fn_8038F52C_00001B0C:
+lbl_net_syncPlayerActorState_00001B0C:
     lfs f0, 0x64(r1)
     fmuls f0, f0, f1
     stfs f0, 0x64(r1)
-    b lbl_fn_8038F52C_00001B80
-lbl_fn_8038F52C_00001B1C:
+    b lbl_net_syncPlayerActorState_00001B80
+lbl_net_syncPlayerActorState_00001B1C:
     mr r3, r30
     bl fn_800F84C8
     li r4, 0x0
@@ -1971,9 +1971,9 @@ lbl_fn_8038F52C_00001B1C:
     lfs f1, lbl_80885A50
     fmadds f0, f2, f3, f0
     fcmpo cr0, f1, f0
-    bge lbl_fn_8038F52C_00001B50
-    b lbl_fn_8038F52C_00001B74
-lbl_fn_8038F52C_00001B50:
+    bge lbl_net_syncPlayerActorState_00001B50
+    b lbl_net_syncPlayerActorState_00001B74
+lbl_net_syncPlayerActorState_00001B50:
     mr r3, r30
     bl fn_800F84C8
     li r4, 0x0
@@ -1983,11 +1983,11 @@ lbl_fn_8038F52C_00001B50:
     fsubs f1, f1, f0
     lfs f0, lbl_80885A24
     fmadds f1, f2, f1, f0
-lbl_fn_8038F52C_00001B74:
+lbl_net_syncPlayerActorState_00001B74:
     lfs f0, 0x64(r1)
     fmuls f0, f0, f1
     stfs f0, 0x64(r1)
-lbl_fn_8038F52C_00001B80:
+lbl_net_syncPlayerActorState_00001B80:
     lfs f1, lbl_8088593C
     addi r3, r29, 0x46c
     addi r5, r1, 0x64
@@ -2005,7 +2005,7 @@ lbl_fn_8038F52C_00001B80:
     li r4, 0x0
     li r5, 0x0
     bl fat_dispatchFsRequest
-    b lbl_fn_8038F52C_00001DE4
+    b lbl_net_syncPlayerActorState_00001DE4
     addi r3, r1, 0x28
     addi r4, r29, 0x51c
     bl fn_8037E964
@@ -2020,7 +2020,7 @@ lbl_fn_8038F52C_00001B80:
     li r4, 0x0
     bl npc_updateDialogueTarget
     fcmpo cr0, f1, f30
-    ble lbl_fn_8038F52C_00001C98
+    ble lbl_net_syncPlayerActorState_00001C98
     mr r3, r30
     bl fn_800F84C8
     li r4, 0x0
@@ -2036,9 +2036,9 @@ lbl_fn_8038F52C_00001B80:
     lfs f1, lbl_808858F8
     fmuls f0, f2, f0
     fcmpo cr0, f1, f0
-    bge lbl_fn_8038F52C_00001C48
-    b lbl_fn_8038F52C_00001C7C
-lbl_fn_8038F52C_00001C48:
+    bge lbl_net_syncPlayerActorState_00001C48
+    b lbl_net_syncPlayerActorState_00001C7C
+lbl_net_syncPlayerActorState_00001C48:
     mr r3, r30
     bl fn_800F84C8
     li r4, 0x0
@@ -2052,20 +2052,20 @@ lbl_fn_8038F52C_00001C48:
     fsubs f1, f1, f30
     lfs f0, lbl_80885A34
     fmuls f1, f1, f0
-lbl_fn_8038F52C_00001C7C:
+lbl_net_syncPlayerActorState_00001C7C:
     la r3, lbl_8087DD30
     la r4, lbl_8087DD34
     bl math_lerpf
     lfs f0, 0x28(r1)
     fmuls f0, f0, f1
     stfs f0, 0x28(r1)
-    b lbl_fn_8038F52C_00001CA8
-lbl_fn_8038F52C_00001C98:
+    b lbl_net_syncPlayerActorState_00001CA8
+lbl_net_syncPlayerActorState_00001C98:
     lfs f1, 0x28(r1)
     lfs f0, lbl_80885A24
     fmuls f0, f1, f0
     stfs f0, 0x28(r1)
-lbl_fn_8038F52C_00001CA8:
+lbl_net_syncPlayerActorState_00001CA8:
     lfs f1, lbl_8088593C
     addi r3, r29, 0x46c
     addi r5, r1, 0x28
@@ -2083,85 +2083,85 @@ lbl_fn_8038F52C_00001CA8:
     li r4, 0x0
     li r5, 0x0
     bl fat_dispatchFsRequest
-    b lbl_fn_8038F52C_00001DE4
-lbl_fn_8038F52C_00001CF0:
+    b lbl_net_syncPlayerActorState_00001DE4
+lbl_net_syncPlayerActorState_00001CF0:
     mr r3, r29
     bl fn_80390374
-    b lbl_fn_8038F52C_00001DE4
-lbl_fn_8038F52C_00001CFC:
+    b lbl_net_syncPlayerActorState_00001DE4
+lbl_net_syncPlayerActorState_00001CFC:
     bl fn_803830A0
     cmpwi r3, 0x0
-    beq lbl_fn_8038F52C_00001D30
+    beq lbl_net_syncPlayerActorState_00001D30
     bl proj_getGlobalManager
     bl fn_80116BAC
     li r4, 0x24
     bl player_evaluateStatusCondition
     cmpwi r3, 0x0
-    beq lbl_fn_8038F52C_00001D30
+    beq lbl_net_syncPlayerActorState_00001D30
     mr r3, r29
     li r4, 0x9
     bl nwc24_transitionDataState
-    b lbl_fn_8038F52C_00001DE4
-lbl_fn_8038F52C_00001D30:
+    b lbl_net_syncPlayerActorState_00001DE4
+lbl_net_syncPlayerActorState_00001D30:
     bl fn_803903C4
     cmpwi r3, 0x0
-    beq lbl_fn_8038F52C_00001D5C
+    beq lbl_net_syncPlayerActorState_00001D5C
     bl fn_803903C4
     bl fn_803903CC
     cmpwi r3, 0x0
-    beq lbl_fn_8038F52C_00001D5C
+    beq lbl_net_syncPlayerActorState_00001D5C
     mr r3, r29
     li r4, 0x8
     bl nwc24_transitionDataState
-    b lbl_fn_8038F52C_00001DE4
-lbl_fn_8038F52C_00001D5C:
+    b lbl_net_syncPlayerActorState_00001DE4
+lbl_net_syncPlayerActorState_00001D5C:
     bl equip_getGlobalManager
     cmpwi r3, 0x0
-    beq lbl_fn_8038F52C_00001DDC
+    beq lbl_net_syncPlayerActorState_00001DDC
     bl equip_getGlobalManager
     bl npc_getDialogController
     cmpwi r3, 0x0
-    beq lbl_fn_8038F52C_00001DDC
+    beq lbl_net_syncPlayerActorState_00001DDC
     bl equip_getGlobalManager
     bl npc_getDialogController
     mr r4, r30
     bl fn_803C2048
     cmpwi r3, 0x0
-    beq lbl_fn_8038F52C_00001DD0
+    beq lbl_net_syncPlayerActorState_00001DD0
     lwz r0, 0x2c(r3)
     cmpwi r0, 0x1
-    bne lbl_fn_8038F52C_00001DAC
+    bne lbl_net_syncPlayerActorState_00001DAC
     mr r3, r29
     li r4, 0xa
     bl nwc24_transitionDataState
-    b lbl_fn_8038F52C_00001DE4
-lbl_fn_8038F52C_00001DAC:
+    b lbl_net_syncPlayerActorState_00001DE4
+lbl_net_syncPlayerActorState_00001DAC:
     cmpwi r0, 0x2
-    bne lbl_fn_8038F52C_00001DC4
+    bne lbl_net_syncPlayerActorState_00001DC4
     mr r3, r29
     li r4, 0xb
     bl nwc24_transitionDataState
-    b lbl_fn_8038F52C_00001DE4
-lbl_fn_8038F52C_00001DC4:
+    b lbl_net_syncPlayerActorState_00001DE4
+lbl_net_syncPlayerActorState_00001DC4:
     mr r3, r29
     bl fn_80390374
-    b lbl_fn_8038F52C_00001DE4
-lbl_fn_8038F52C_00001DD0:
+    b lbl_net_syncPlayerActorState_00001DE4
+lbl_net_syncPlayerActorState_00001DD0:
     mr r3, r29
     bl fn_80390374
-    b lbl_fn_8038F52C_00001DE4
-lbl_fn_8038F52C_00001DDC:
+    b lbl_net_syncPlayerActorState_00001DE4
+lbl_net_syncPlayerActorState_00001DDC:
     mr r3, r29
     bl fn_80390374
-lbl_fn_8038F52C_00001DE4:
+lbl_net_syncPlayerActorState_00001DE4:
     cmpwi r31, 0x0
-    bne lbl_fn_8038F52C_00001E00
+    bne lbl_net_syncPlayerActorState_00001E00
     lwz r0, 0x46c(r29)
     cmpwi r0, 0x4
-    beq lbl_fn_8038F52C_00001E00
+    beq lbl_net_syncPlayerActorState_00001E00
     addi r3, r29, 0x46c
     bl fn_8032EC94
-lbl_fn_8038F52C_00001E00:
+lbl_net_syncPlayerActorState_00001E00:
     lwz r0, 0x254(r1)
     psq_l f31, 0x248(r1), 0, 0
     lfd f31, 0x240(r1)

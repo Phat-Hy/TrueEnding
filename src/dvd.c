@@ -184,7 +184,7 @@ void fn_805FD310(void);
 void fn_805FD3F0(void);
 void fn_805FD580(void);
 void dvd_prepareDriveReset(void);
-void fn_805FD8D0(void);
+void dvd_stateReady(void);
 void dvd_execCommand(void);
 void fn_805FE860(void);
 void DVDInquiryAsync(void);
@@ -2314,7 +2314,7 @@ lbl_1dd4:
     li r0, 0x1
     stw r0, 0xc(r3)
     lwz r3, lbl_8087FD90
-    bl fn_805FD8D0
+    bl dvd_stateReady
     b lbl_1e10
 lbl_1df4:
     li r3, 0x27
@@ -2611,7 +2611,7 @@ lbl_2204:
     li r0, 0x1
     stw r0, 0xc(r3)
     lwz r3, lbl_8087FD90
-    bl fn_805FD8D0
+    bl dvd_stateReady
     b lbl_2254
     lwz r0, __OSInIPL
     cmpwi r0, 0x0
@@ -2739,7 +2739,7 @@ lbl_23e4:
     li r0, 0x1
     stw r0, 0xc(r3)
     lwz r3, lbl_8087FD90
-    bl fn_805FD8D0
+    bl dvd_stateReady
     b lbl_24a8
 lbl_2404:
     li r3, 0x0
@@ -3013,7 +3013,7 @@ lbl_27c4:
     li r0, 0x1
     stw r0, 0xc(r3)
     lwz r3, lbl_8087FD90
-    bl fn_805FD8D0
+    bl dvd_stateReady
     b lbl_28a8
 lbl_27e4:
     li r3, 0x0
@@ -3128,7 +3128,7 @@ lbl_295c:
     li r0, 0x1
     stw r0, 0xc(r3)
     lwz r3, lbl_8087FD90
-    bl fn_805FD8D0
+    bl dvd_stateReady
     b lbl_2a20
 lbl_297c:
     li r3, 0x0
@@ -3584,7 +3584,7 @@ lbl_2fd0:
     li r0, 0x1
     stw r0, 0xc(r3)
     lwz r3, lbl_8087FD90
-    bl fn_805FD8D0
+    bl dvd_stateReady
     b lbl_2fe8
 lbl_2fe4:
     bl fn_805FCA70
@@ -3597,16 +3597,16 @@ lbl_2fe8:
 }
 
 
-asm void fn_805FD8D0(void) {
+asm void dvd_stateReady(void) {
     nofralloc
     stwu r1, -0x30(r1)
     mflr r0
     stw r0, 0x34(r1)
     addi r11, r1, 0x30
     bl _savegpr_26
-    lis r4, fn_805FD8D0@ha
+    lis r4, dvd_stateReady@ha
     mr r29, r3
-    addi r4, r4, fn_805FD8D0@l
+    addi r4, r4, dvd_stateReady@l
     stw r4, lbl_8087FD94
     lwz r30, 0x8(r3)
     cmplwi r30, 0x2a
@@ -4450,7 +4450,7 @@ lbl_3c28:
     lwz r0, 0x5de0(r4)
     cmpwi r0, 0x0
     bne lbl_3c50
-    bl fn_805FD8D0
+    bl dvd_stateReady
     b lbl_3f74
 lbl_3c50:
     addi r0, r30, 0x4b20
@@ -4498,7 +4498,7 @@ lbl_3cd0:
     lwz r0, 0x14(r3)
     cmplw r4, r0
     beq lbl_3cf4
-    bl fn_805FD8D0
+    bl dvd_stateReady
     b lbl_3f74
 lbl_3cf4:
     addi r0, r30, 0x4b20

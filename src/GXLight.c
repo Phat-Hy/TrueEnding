@@ -50,7 +50,7 @@ void fn_80615B60(void);
 void fn_80615C40(void);
 void GXInitLightDistAttn(void);
 void GXInitLightSpot(void);
-void fn_80615E00(void);
+void GXGetTexBufferSize(void);
 void fn_80615F30(void);
 void GXInitLightObj(void);
 void fn_80616200(void);
@@ -578,11 +578,11 @@ lbl_GXInitLightSpot_000006D8:
     blr
 }
 
-asm void fn_80615E00(void)
+asm void GXGetTexBufferSize(void)
 {
     nofralloc
     cmplwi r5, 0x3c
-    bgt lbl_fn_80615E00_00000744
+    bgt lbl_GXGetTexBufferSize_00000744
     lis r8, jumptable_807B0B98@ha
     slwi r0, r5, 2
     addi r8, r8, jumptable_807B0B98@l
@@ -591,37 +591,37 @@ asm void fn_80615E00(void)
     bctr
     li r10, 0x3
     li r0, 0x3
-    b lbl_fn_80615E00_0000074C
+    b lbl_GXGetTexBufferSize_0000074C
     li r10, 0x3
     li r0, 0x2
-    b lbl_fn_80615E00_0000074C
+    b lbl_GXGetTexBufferSize_0000074C
     li r10, 0x2
     li r0, 0x2
-    b lbl_fn_80615E00_0000074C
-lbl_fn_80615E00_00000744:
+    b lbl_GXGetTexBufferSize_0000074C
+lbl_GXGetTexBufferSize_00000744:
     li r0, 0x0
     li r10, 0x0
-lbl_fn_80615E00_0000074C:
+lbl_GXGetTexBufferSize_0000074C:
     cmplwi r5, 0x6
-    beq lbl_fn_80615E00_0000075C
+    beq lbl_GXGetTexBufferSize_0000075C
     cmplwi r5, 0x16
-    bne lbl_fn_80615E00_00000764
-lbl_fn_80615E00_0000075C:
+    bne lbl_GXGetTexBufferSize_00000764
+lbl_GXGetTexBufferSize_0000075C:
     li r11, 0x40
-    b lbl_fn_80615E00_00000768
-lbl_fn_80615E00_00000764:
+    b lbl_GXGetTexBufferSize_00000768
+lbl_GXGetTexBufferSize_00000764:
     li r11, 0x20
-lbl_fn_80615E00_00000768:
+lbl_GXGetTexBufferSize_00000768:
     cmplwi r6, 0x1
-    bne lbl_fn_80615E00_000007F0
+    bne lbl_GXGetTexBufferSize_000007F0
     li r5, 0x1
     li r12, 0x0
     slw r8, r5, r10
     slw r9, r5, r0
     mtctr r7
     cmplwi r7, 0x0
-    ble lbl_fn_80615E00_0000081C
-lbl_fn_80615E00_0000078C:
+    ble lbl_GXGetTexBufferSize_0000081C
+lbl_GXGetTexBufferSize_0000078C:
     add r6, r3, r8
     add r5, r4, r9
     subi r6, r6, 0x1
@@ -632,25 +632,25 @@ lbl_fn_80615E00_0000078C:
     sraw r5, r5, r0
     mullw r5, r6, r5
     add r12, r12, r5
-    bne lbl_fn_80615E00_000007C0
+    bne lbl_GXGetTexBufferSize_000007C0
     cmplwi r4, 0x1
-    beq lbl_fn_80615E00_0000081C
-lbl_fn_80615E00_000007C0:
+    beq lbl_GXGetTexBufferSize_0000081C
+lbl_GXGetTexBufferSize_000007C0:
     cmplwi r3, 0x1
     li r5, 0x1
-    ble lbl_fn_80615E00_000007D0
+    ble lbl_GXGetTexBufferSize_000007D0
     extrwi r5, r3, 15, 16
-lbl_fn_80615E00_000007D0:
+lbl_GXGetTexBufferSize_000007D0:
     cmplwi r4, 0x1
     clrlwi r3, r5, 16
     li r5, 0x1
-    ble lbl_fn_80615E00_000007E4
+    ble lbl_GXGetTexBufferSize_000007E4
     extrwi r5, r4, 15, 16
-lbl_fn_80615E00_000007E4:
+lbl_GXGetTexBufferSize_000007E4:
     clrlwi r4, r5, 16
-    bdnz lbl_fn_80615E00_0000078C
-    b lbl_fn_80615E00_0000081C
-lbl_fn_80615E00_000007F0:
+    bdnz lbl_GXGetTexBufferSize_0000078C
+    b lbl_GXGetTexBufferSize_0000081C
+lbl_GXGetTexBufferSize_000007F0:
     li r6, 0x1
     slw r5, r6, r10
     add r5, r3, r5
@@ -662,7 +662,7 @@ lbl_fn_80615E00_000007F0:
     subi r3, r3, 0x1
     sraw r0, r3, r0
     mullw r12, r4, r0
-lbl_fn_80615E00_0000081C:
+lbl_GXGetTexBufferSize_0000081C:
     mr r3, r12
     blr
 }

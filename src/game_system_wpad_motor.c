@@ -94,7 +94,7 @@ extern void fn_8037D684(void);
 extern void fat_dispatchFsRequest(void);
 extern void fn_8037F744(void);
 extern void nwc24_transitionDataState(void);
-extern void fn_8038F52C(void);
+extern void net_syncPlayerActorState(void);
 extern void fn_80390A88(void);
 extern void fn_803933A4(void);
 extern void fn_803AB96C(void);
@@ -2895,7 +2895,7 @@ lbl_world_Manager_draw_000025EC:
     cmpwi r0, 0x5
     bne lbl_world_Manager_draw_0000260C
     addi r3, r28, 0x6c
-    bl fn_8038F52C
+    bl net_syncPlayerActorState
     addi r3, r28, 0x6c
     bl fn_8037F744
     b lbl_world_Manager_draw_00002614

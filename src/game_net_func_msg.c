@@ -27,7 +27,7 @@ extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
 extern void thread_dispatchToQueue(void);
 extern void assert_formatLocation(void);
-extern void fn_8021C6A4(void);
+extern void thread_pool_dispatchTask(void);
 extern void fn_80450A5C(void);
 extern void net_getLocalPlayerAid(void);
 extern void PSMTXRotRad(void);
@@ -3473,7 +3473,7 @@ lbl_fn_8050158C_00002224:
     bl memset
     addi r3, r1, 0x60
     addi r4, r21, 0xc4
-    bl fn_8021C6A4
+    bl thread_pool_dispatchTask
     addi r3, r20, 0xd8
     bl str_findChar
     mr r4, r3

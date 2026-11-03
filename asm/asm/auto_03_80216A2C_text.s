@@ -6687,7 +6687,7 @@
 .endfn fn_8021C3F4
 
 # .text:0x5C78 | 0x8021C6A4 | size: 0x4D8
-.fn fn_8021C6A4, global
+.fn thread_pool_dispatchTask, global
 /* 8021C6A4 00216D04  94 21 FB E0 */	stwu r1, -0x420(r1)
 /* 8021C6A8 00216D08  7C 08 02 A6 */	mflr r0
 /* 8021C6AC 00216D0C  2C 04 00 00 */	cmpwi r4, 0x0
@@ -7028,4 +7028,4 @@
 /* 8021CB70 002171D0  7C 08 03 A6 */	mtlr r0
 /* 8021CB74 002171D4  38 21 04 20 */	addi r1, r1, 0x420
 /* 8021CB78 002171D8  4E 80 00 20 */	blr
-.endfn fn_8021C6A4
+.endfn thread_pool_dispatchTask

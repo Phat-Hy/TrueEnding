@@ -82,7 +82,7 @@ extern u32 lbl_80881B0C;
 /* Function declarations */
 void fn_80152D10(void);
 void fn_80153004(void);
-void fn_801533C8(void);
+void inventory_hasItem(void);
 void fn_80153698(void);
 void inventory_unequipItem(void);
 void fn_80153B44(void);
@@ -568,7 +568,7 @@ lbl_fn_80153004_000006A0:
     blr
 }
 
-asm void fn_801533C8(void)
+asm void inventory_hasItem(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -583,121 +583,121 @@ asm void fn_801533C8(void)
     slwi r0, r0, 3
     add r6, r3, r0
     addi r6, r6, 0x6d4
-    b lbl_fn_801533C8_00000704
-lbl_fn_801533C8_000006EC:
+    b lbl_inventory_hasItem_00000704
+lbl_inventory_hasItem_000006EC:
     lwz r0, 0x0(r7)
     cmpw r0, r4
-    bne lbl_fn_801533C8_00000700
+    bne lbl_inventory_hasItem_00000700
     li r3, 0x1
-    b lbl_fn_801533C8_00000970
-lbl_fn_801533C8_00000700:
+    b lbl_inventory_hasItem_00000970
+lbl_inventory_hasItem_00000700:
     addi r7, r7, 0x8
-lbl_fn_801533C8_00000704:
+lbl_inventory_hasItem_00000704:
     cmplw r7, r6
-    bne lbl_fn_801533C8_000006EC
+    bne lbl_inventory_hasItem_000006EC
     lwz r4, lbl_8087F430
     lwz r0, 0x54e4(r4)
     cmpwi r0, 0x9
-    bne lbl_fn_801533C8_00000724
+    bne lbl_inventory_hasItem_00000724
     li r3, 0x1
-    b lbl_fn_801533C8_00000970
-lbl_fn_801533C8_00000724:
+    b lbl_inventory_hasItem_00000970
+lbl_inventory_hasItem_00000724:
     lwz r8, 0x38(r3)
     li r6, 0x0
     li r4, 0x0
     li r7, 0x0
     rlwinm r0, r8, 0, 29, 29
     cmplwi r0, 0x4
-    beq lbl_fn_801533C8_00000750
+    beq lbl_inventory_hasItem_00000750
     clrlwi r0, r8, 31
     cmplwi r0, 0x1
-    beq lbl_fn_801533C8_00000750
+    beq lbl_inventory_hasItem_00000750
     li r7, 0x1
-lbl_fn_801533C8_00000750:
+lbl_inventory_hasItem_00000750:
     cmpwi r7, 0x0
-    beq lbl_fn_801533C8_0000076C
+    beq lbl_inventory_hasItem_0000076C
     lwz r0, 0x7e0(r3)
     rlwinm r0, r0, 0, 26, 26
     cmplwi r0, 0x20
-    beq lbl_fn_801533C8_0000076C
+    beq lbl_inventory_hasItem_0000076C
     li r4, 0x1
-lbl_fn_801533C8_0000076C:
+lbl_inventory_hasItem_0000076C:
     cmpwi r4, 0x0
-    beq lbl_fn_801533C8_000007A0
+    beq lbl_inventory_hasItem_000007A0
     lwz r0, 0x55c(r3)
     li r4, 0x0
     cmpwi r0, 0x6
-    bne lbl_fn_801533C8_00000794
+    bne lbl_inventory_hasItem_00000794
     lwz r0, 0x560(r3)
     cmpwi r0, 0x1c
-    bne lbl_fn_801533C8_00000794
+    bne lbl_inventory_hasItem_00000794
     li r4, 0x1
-lbl_fn_801533C8_00000794:
+lbl_inventory_hasItem_00000794:
     cmpwi r4, 0x0
-    bne lbl_fn_801533C8_000007A0
+    bne lbl_inventory_hasItem_000007A0
     li r6, 0x1
-lbl_fn_801533C8_000007A0:
+lbl_inventory_hasItem_000007A0:
     cmpwi r6, 0x0
-    bne lbl_fn_801533C8_000007B0
+    bne lbl_inventory_hasItem_000007B0
     li r3, 0x1
-    b lbl_fn_801533C8_00000970
-lbl_fn_801533C8_000007B0:
+    b lbl_inventory_hasItem_00000970
+lbl_inventory_hasItem_000007B0:
     lwz r0, 0x12a8(r3)
     extrwi. r0, r0, 1, 22
-    beq lbl_fn_801533C8_000007C4
+    beq lbl_inventory_hasItem_000007C4
     li r3, 0x1
-    b lbl_fn_801533C8_00000970
-lbl_fn_801533C8_000007C4:
+    b lbl_inventory_hasItem_00000970
+lbl_inventory_hasItem_000007C4:
     lwz r6, 0x48(r3)
     li r0, 0x1
     cmpwi r6, 0x1
-    beq lbl_fn_801533C8_000007E0
+    beq lbl_inventory_hasItem_000007E0
     cmpwi r6, 0x4
-    beq lbl_fn_801533C8_000007E0
+    beq lbl_inventory_hasItem_000007E0
     li r0, 0x0
-lbl_fn_801533C8_000007E0:
+lbl_inventory_hasItem_000007E0:
     cmpwi r0, 0x0
-    beq lbl_fn_801533C8_0000080C
+    beq lbl_inventory_hasItem_0000080C
     cmpwi r5, 0x0
-    beq lbl_fn_801533C8_00000804
+    beq lbl_inventory_hasItem_00000804
     lwz r0, 0xac(r5)
     rlwinm r4, r0, 0, 14, 14
     subis r0, r4, 0x2
     cmplwi r0, 0x0
-    beq lbl_fn_801533C8_0000080C
-lbl_fn_801533C8_00000804:
+    beq lbl_inventory_hasItem_0000080C
+lbl_inventory_hasItem_00000804:
     li r3, 0x1
-    b lbl_fn_801533C8_00000970
-lbl_fn_801533C8_0000080C:
+    b lbl_inventory_hasItem_00000970
+lbl_inventory_hasItem_0000080C:
     lwz r0, 0x54c(r3)
     rlwinm r0, r0, 0, 29, 29
     cmplwi r0, 0x4
-    bne lbl_fn_801533C8_00000824
+    bne lbl_inventory_hasItem_00000824
     li r3, 0x1
-    b lbl_fn_801533C8_00000970
-lbl_fn_801533C8_00000824:
+    b lbl_inventory_hasItem_00000970
+lbl_inventory_hasItem_00000824:
     lwz r0, 0x6d0(r3)
     cmplwi r0, 0x20
-    blt lbl_fn_801533C8_00000838
+    blt lbl_inventory_hasItem_00000838
     li r3, 0x1
-    b lbl_fn_801533C8_00000970
-lbl_fn_801533C8_00000838:
+    b lbl_inventory_hasItem_00000970
+lbl_inventory_hasItem_00000838:
     cmpwi r5, 0x0
-    beq lbl_fn_801533C8_00000858
+    beq lbl_inventory_hasItem_00000858
     lwz r0, 0xac(r5)
     rlwinm r0, r0, 0, 17, 17
     cmpwi r0, 0x4000
-    bne lbl_fn_801533C8_00000858
+    bne lbl_inventory_hasItem_00000858
     li r3, 0x0
-    b lbl_fn_801533C8_00000970
-lbl_fn_801533C8_00000858:
+    b lbl_inventory_hasItem_00000970
+lbl_inventory_hasItem_00000858:
     lwz r0, 0x55c(r3)
     cmpwi r0, 0x6
-    bne lbl_fn_801533C8_0000095C
+    bne lbl_inventory_hasItem_0000095C
     lwz r4, 0x560(r3)
     subi r0, r4, 0x5
     cmplwi r0, 0x89
-    bgt lbl_fn_801533C8_0000096C
+    bgt lbl_inventory_hasItem_0000096C
     lis r4, jumptable_8077AD5C@ha
     slwi r0, r0, 2
     addi r4, r4, jumptable_8077AD5C@l
@@ -705,67 +705,67 @@ lbl_fn_801533C8_00000858:
     mtctr r4
     bctr
     cmpwi r6, 0x2
-    beq lbl_fn_801533C8_0000096C
+    beq lbl_inventory_hasItem_0000096C
     li r3, 0x1
-    b lbl_fn_801533C8_00000970
+    b lbl_inventory_hasItem_00000970
     li r3, 0x1
-    b lbl_fn_801533C8_00000970
+    b lbl_inventory_hasItem_00000970
     cmpwi r6, 0x0
-    bne lbl_fn_801533C8_0000096C
+    bne lbl_inventory_hasItem_0000096C
     li r3, 0x1
-    b lbl_fn_801533C8_00000970
+    b lbl_inventory_hasItem_00000970
     cmpwi r5, 0x0
-    beq lbl_fn_801533C8_000008DC
+    beq lbl_inventory_hasItem_000008DC
     mr r3, r31
     bl fn_8021A8D0
     cmpwi r3, 0x0
-    bne lbl_fn_801533C8_0000096C
+    bne lbl_inventory_hasItem_0000096C
     mr r3, r31
     bl fn_8021A918
     cmpwi r3, 0x0
-    bne lbl_fn_801533C8_0000096C
-lbl_fn_801533C8_000008DC:
+    bne lbl_inventory_hasItem_0000096C
+lbl_inventory_hasItem_000008DC:
     li r3, 0x1
-    b lbl_fn_801533C8_00000970
+    b lbl_inventory_hasItem_00000970
     cmpwi r5, 0x0
-    beq lbl_fn_801533C8_0000091C
+    beq lbl_inventory_hasItem_0000091C
     mr r3, r31
     bl fn_8021A8D0
     cmpwi r3, 0x0
-    bne lbl_fn_801533C8_0000096C
+    bne lbl_inventory_hasItem_0000096C
     mr r3, r31
     bl fn_8021A918
     cmpwi r3, 0x0
-    bne lbl_fn_801533C8_0000096C
+    bne lbl_inventory_hasItem_0000096C
     mr r3, r31
     bl fn_8021A888
     cmpwi r3, 0x0
-    bne lbl_fn_801533C8_0000096C
-lbl_fn_801533C8_0000091C:
+    bne lbl_inventory_hasItem_0000096C
+lbl_inventory_hasItem_0000091C:
     lwz r0, 0x958(r30)
     rlwinm r0, r0, 0, 23, 23
     cmplwi r0, 0x100
-    beq lbl_fn_801533C8_0000096C
+    beq lbl_inventory_hasItem_0000096C
     li r3, 0x1
-    b lbl_fn_801533C8_00000970
+    b lbl_inventory_hasItem_00000970
     lwz r4, lbl_8087F9C0
     lwz r0, 0x28(r4)
     cmpwi r0, 0x0
-    bne lbl_fn_801533C8_0000096C
+    bne lbl_inventory_hasItem_0000096C
     lfs f1, 0x2e4(r3)
     lfs f0, lbl_80881B0C
     fcmpo cr0, f1, f0
     mfcr r3
     srwi r3, r3, 31
-    b lbl_fn_801533C8_00000970
-lbl_fn_801533C8_0000095C:
+    b lbl_inventory_hasItem_00000970
+lbl_inventory_hasItem_0000095C:
     cmpwi r0, 0x5
-    bne lbl_fn_801533C8_0000096C
+    bne lbl_inventory_hasItem_0000096C
     li r3, 0x1
-    b lbl_fn_801533C8_00000970
-lbl_fn_801533C8_0000096C:
+    b lbl_inventory_hasItem_00000970
+lbl_inventory_hasItem_0000096C:
     li r3, 0x0
-lbl_fn_801533C8_00000970:
+lbl_inventory_hasItem_00000970:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)

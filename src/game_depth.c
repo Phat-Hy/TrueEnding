@@ -30,7 +30,7 @@ extern void fn_80478158(void);
 extern void PSMTXConcat(void);
 extern void PSVECNormalize(void);
 extern void PSVECCrossProduct(void);
-extern void fn_80615E00(void);
+extern void GXGetTexBufferSize(void);
 extern void GXInitLightObj(void);
 extern void GXClampLightAngle(void);
 extern void fn_806163B0(void);
@@ -315,7 +315,7 @@ lbl_fn_800D5A3C_000003D4:
     li r5, 0x4
     li r6, 0x0
     li r7, 0x0
-    bl fn_80615E00
+    bl GXGetTexBufferSize
     mr r31, r3
     bl dungeon_initGlobalContext
     lis r7, lbl_80734638@ha
@@ -396,7 +396,7 @@ lbl_fn_800D5B58_000004F4:
     clrlwi r4, r27, 16
     srwi r6, r0, 31
     clrlwi r7, r29, 24
-    bl fn_80615E00
+    bl GXGetTexBufferSize
     mr r30, r3
     bl dungeon_initGlobalContext
     lis r7, lbl_80734638@ha

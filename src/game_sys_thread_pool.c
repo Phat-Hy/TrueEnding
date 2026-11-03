@@ -62,7 +62,7 @@ void fn_8021BE80(void);
 void fn_8021BE98(void);
 void fn_8021BFA0(void);
 void fn_8021C3F4(void);
-void fn_8021C6A4(void);
+void thread_pool_dispatchTask(void);
 void fn_8021CB7C(void);
 void fn_8021CC50(void);
 
@@ -1475,7 +1475,7 @@ lbl_fn_8021C3F4_0000137C:
     blr
 }
 
-asm void fn_8021C6A4(void)
+asm void thread_pool_dispatchTask(void)
 {
     nofralloc
     stwu r1, -0x420(r1)
@@ -1487,7 +1487,7 @@ asm void fn_8021C6A4(void)
     mr r30, r4
     stw r29, 0x414(r1)
     mr r29, r3
-    beq lbl_fn_8021C6A4_00001864
+    beq lbl_thread_pool_dispatchTask_00001864
     lwz r9, lbl_8087F2F8
     li r6, 0x0
     lwz r0, lbl_8087F2FC
@@ -1497,38 +1497,38 @@ asm void fn_8021C6A4(void)
     lwz r8, 0x0(r4)
     mtctr r0
     cmplwi r0, 0x0
-    ble lbl_fn_8021C6A4_00001440
-lbl_fn_8021C6A4_000013FC:
+    ble lbl_thread_pool_dispatchTask_00001440
+lbl_thread_pool_dispatchTask_000013FC:
     lwz r0, 0x0(r7)
     cmpw r8, r0
-    bne lbl_fn_8021C6A4_00001434
+    bne lbl_thread_pool_dispatchTask_00001434
     lwz r0, 0x4(r7)
     cmpw r3, r0
-    bne lbl_fn_8021C6A4_00001434
+    bne lbl_thread_pool_dispatchTask_00001434
     cmpwi r5, 0x0
-    beq lbl_fn_8021C6A4_00001428
+    beq lbl_thread_pool_dispatchTask_00001428
     lwz r0, 0x8(r7)
     cmpw r5, r0
-    bne lbl_fn_8021C6A4_00001434
-lbl_fn_8021C6A4_00001428:
+    bne lbl_thread_pool_dispatchTask_00001434
+lbl_thread_pool_dispatchTask_00001428:
     mulli r0, r6, 0x14
     add r31, r9, r0
-    b lbl_fn_8021C6A4_00001444
-lbl_fn_8021C6A4_00001434:
+    b lbl_thread_pool_dispatchTask_00001444
+lbl_thread_pool_dispatchTask_00001434:
     addi r7, r7, 0x14
     addi r6, r6, 0x1
-    bdnz lbl_fn_8021C6A4_000013FC
-lbl_fn_8021C6A4_00001440:
+    bdnz lbl_thread_pool_dispatchTask_000013FC
+lbl_thread_pool_dispatchTask_00001440:
     li r31, 0x0
-lbl_fn_8021C6A4_00001444:
+lbl_thread_pool_dispatchTask_00001444:
     cmpwi r31, 0x0
-    beq lbl_fn_8021C6A4_000016B8
+    beq lbl_thread_pool_dispatchTask_000016B8
     lwz r6, 0xc(r31)
     lhz r0, 0x0(r6)
     cmpwi r0, 0x0
-    beq lbl_fn_8021C6A4_000016B8
+    beq lbl_thread_pool_dispatchTask_000016B8
     cmplwi r8, 0x47
-    bgt lbl_fn_8021C6A4_0000149C
+    bgt lbl_thread_pool_dispatchTask_0000149C
     lis r3, jumptable_807833B4@ha
     slwi r0, r8, 2
     addi r3, r3, jumptable_807833B4@l
@@ -1536,20 +1536,20 @@ lbl_fn_8021C6A4_00001444:
     mtctr r3
     bctr
     li r0, 0x6
-    b lbl_fn_8021C6A4_000014A8
+    b lbl_thread_pool_dispatchTask_000014A8
     li r0, 0x7
-    b lbl_fn_8021C6A4_000014A8
+    b lbl_thread_pool_dispatchTask_000014A8
     li r0, 0x3
-    b lbl_fn_8021C6A4_000014A8
+    b lbl_thread_pool_dispatchTask_000014A8
     li r0, 0x1
-    b lbl_fn_8021C6A4_000014A8
-lbl_fn_8021C6A4_0000149C:
+    b lbl_thread_pool_dispatchTask_000014A8
+lbl_thread_pool_dispatchTask_0000149C:
     li r0, 0x2
-    b lbl_fn_8021C6A4_000014A8
+    b lbl_thread_pool_dispatchTask_000014A8
     li r0, 0x0
-lbl_fn_8021C6A4_000014A8:
+lbl_thread_pool_dispatchTask_000014A8:
     cmplwi r0, 0x7
-    bgt lbl_fn_8021C6A4_00001648
+    bgt lbl_thread_pool_dispatchTask_00001648
     lis r3, jumptable_80783394@ha
     slwi r0, r0, 2
     addi r3, r3, jumptable_80783394@l
@@ -1560,7 +1560,7 @@ lbl_fn_8021C6A4_000014A8:
     mr r4, r6
     crclr 6
     bl wcs_vformat
-    b lbl_fn_8021C6A4_00001648
+    b lbl_thread_pool_dispatchTask_00001648
     lwz r0, 0x4(r4)
     lis r4, lbl_807C8008@ha
     addi r4, r4, lbl_807C8008@l
@@ -1571,14 +1571,14 @@ lbl_fn_8021C6A4_000014A8:
     add r5, r5, r0
     lwz r5, 0x8(r5)
     cmpwi r5, 0x0
-    beq lbl_fn_8021C6A4_0000150C
-    b lbl_fn_8021C6A4_00001510
-lbl_fn_8021C6A4_0000150C:
+    beq lbl_thread_pool_dispatchTask_0000150C
+    b lbl_thread_pool_dispatchTask_00001510
+lbl_thread_pool_dispatchTask_0000150C:
     la r5, lbl_808813D0
-lbl_fn_8021C6A4_00001510:
+lbl_thread_pool_dispatchTask_00001510:
     crclr 6
     bl wcs_vformat
-    b lbl_fn_8021C6A4_00001648
+    b lbl_thread_pool_dispatchTask_00001648
     lwz r5, lbl_8087F2E8
     slwi r0, r8, 3
     mr r3, r29
@@ -1586,20 +1586,20 @@ lbl_fn_8021C6A4_00001510:
     add r5, r5, r0
     lwz r5, 0x4(r5)
     cmpwi r5, 0x0
-    beq lbl_fn_8021C6A4_00001540
-    b lbl_fn_8021C6A4_00001544
-lbl_fn_8021C6A4_00001540:
+    beq lbl_thread_pool_dispatchTask_00001540
+    b lbl_thread_pool_dispatchTask_00001544
+lbl_thread_pool_dispatchTask_00001540:
     la r5, lbl_808813D0
-lbl_fn_8021C6A4_00001544:
+lbl_thread_pool_dispatchTask_00001544:
     crclr 6
     bl wcs_vformat
-    b lbl_fn_8021C6A4_00001648
+    b lbl_thread_pool_dispatchTask_00001648
     lwz r5, 0x4(r30)
     mr r3, r29
     mr r4, r6
     crclr 6
     bl wcs_vformat
-    b lbl_fn_8021C6A4_00001648
+    b lbl_thread_pool_dispatchTask_00001648
     lis r3, 0x51ec
     lwz r0, 0x4(r30)
     subi r4, r3, 0x7ae1
@@ -1612,7 +1612,7 @@ lbl_fn_8021C6A4_00001544:
     addi r5, r5, 0x1
     crclr 6
     bl wcs_vformat
-    b lbl_fn_8021C6A4_00001648
+    b lbl_thread_pool_dispatchTask_00001648
     lwz r5, 0x4(r30)
     mr r3, r29
     mr r4, r6
@@ -1622,7 +1622,7 @@ lbl_fn_8021C6A4_00001544:
     addi r5, r5, 0x1
     crclr 6
     bl wcs_vformat
-    b lbl_fn_8021C6A4_00001648
+    b lbl_thread_pool_dispatchTask_00001648
     lwz r4, 0x4(r30)
     lis r0, 0x4330
     stw r0, 0x408(r1)
@@ -1638,7 +1638,7 @@ lbl_fn_8021C6A4_00001544:
     fdivs f1, f1, f0
     crset 6
     bl wcs_vformat
-    b lbl_fn_8021C6A4_00001648
+    b lbl_thread_pool_dispatchTask_00001648
     lwz r4, 0x4(r30)
     lis r0, 0x4330
     stw r0, 0x408(r1)
@@ -1656,17 +1656,17 @@ lbl_fn_8021C6A4_00001544:
     fadds f1, f0, f1
     crset 6
     bl wcs_vformat
-lbl_fn_8021C6A4_00001648:
+lbl_thread_pool_dispatchTask_00001648:
     lwz r0, 0x10(r31)
     cmpwi r0, 0x0
-    beq lbl_fn_8021C6A4_000016B0
+    beq lbl_thread_pool_dispatchTask_000016B0
     bl fn_8006BA30
     cmpwi r3, 0x2
-    beq lbl_fn_8021C6A4_0000166C
+    beq lbl_thread_pool_dispatchTask_0000166C
     bl fn_8006BA30
     cmpwi r3, 0x3
-    bne lbl_fn_8021C6A4_00001690
-lbl_fn_8021C6A4_0000166C:
+    bne lbl_thread_pool_dispatchTask_00001690
+lbl_thread_pool_dispatchTask_0000166C:
     lis r4, lbl_807834D4@ha
     lwz r6, 0x10(r30)
     addi r4, r4, lbl_807834D4@l
@@ -1675,8 +1675,8 @@ lbl_fn_8021C6A4_0000166C:
     addi r4, r4, 0x16
     crclr 6
     bl wcs_vformat
-    b lbl_fn_8021C6A4_000016B0
-lbl_fn_8021C6A4_00001690:
+    b lbl_thread_pool_dispatchTask_000016B0
+lbl_thread_pool_dispatchTask_00001690:
     lis r4, lbl_807834D4@ha
     lwz r6, 0x10(r30)
     addi r4, r4, lbl_807834D4@l
@@ -1685,12 +1685,12 @@ lbl_fn_8021C6A4_00001690:
     addi r4, r4, 0x2a
     crclr 6
     bl wcs_vformat
-lbl_fn_8021C6A4_000016B0:
+lbl_thread_pool_dispatchTask_000016B0:
     li r3, 0x1
-    b lbl_fn_8021C6A4_00001868
-lbl_fn_8021C6A4_000016B8:
+    b lbl_thread_pool_dispatchTask_00001868
+lbl_thread_pool_dispatchTask_000016B8:
     cmpwi r4, 0x0
-    beq lbl_fn_8021C6A4_0000185C
+    beq lbl_thread_pool_dispatchTask_0000185C
     addi r3, r1, 0x8
     li r4, 0x0
     li r5, 0x200
@@ -1700,19 +1700,19 @@ lbl_fn_8021C6A4_000016B8:
     li r5, 0x200
     bl memset
     cmpwi r30, 0x0
-    beq lbl_fn_8021C6A4_000016FC
+    beq lbl_thread_pool_dispatchTask_000016FC
     lwz r4, 0x8(r30)
     addi r3, r1, 0x8
     lwz r5, 0xc(r30)
     bl fn_8021BFA0
-    b lbl_fn_8021C6A4_00001700
-lbl_fn_8021C6A4_000016FC:
+    b lbl_thread_pool_dispatchTask_00001700
+lbl_thread_pool_dispatchTask_000016FC:
     li r3, 0x0
-lbl_fn_8021C6A4_00001700:
+lbl_thread_pool_dispatchTask_00001700:
     cmpwi r3, 0x0
-    beq lbl_fn_8021C6A4_0000185C
+    beq lbl_thread_pool_dispatchTask_0000185C
     cmpwi r30, 0x0
-    beq lbl_fn_8021C6A4_00001800
+    beq lbl_thread_pool_dispatchTask_00001800
     lwz r6, 0x0(r30)
     lwz r3, lbl_8087F2E8
     slwi r0, r6, 3
@@ -1720,13 +1720,13 @@ lbl_fn_8021C6A4_00001700:
     add r3, r3, r0
     lwz r4, 0x4(r3)
     cmpwi r4, 0x0
-    beq lbl_fn_8021C6A4_00001734
-    b lbl_fn_8021C6A4_00001738
-lbl_fn_8021C6A4_00001734:
+    beq lbl_thread_pool_dispatchTask_00001734
+    b lbl_thread_pool_dispatchTask_00001738
+lbl_thread_pool_dispatchTask_00001734:
     la r4, lbl_808813D0
-lbl_fn_8021C6A4_00001738:
+lbl_thread_pool_dispatchTask_00001738:
     cmplwi r6, 0x47
-    bgt lbl_fn_8021C6A4_000017E4
+    bgt lbl_thread_pool_dispatchTask_000017E4
     lis r3, jumptable_80783274@ha
     slwi r0, r6, 2
     addi r3, r3, jumptable_80783274@l
@@ -1747,12 +1747,12 @@ lbl_fn_8021C6A4_00001738:
     crset 6
     bl wcs_vformat
     li r0, 0x1
-    b lbl_fn_8021C6A4_00001804
+    b lbl_thread_pool_dispatchTask_00001804
     addi r3, r1, 0x208
     crclr 6
     bl wcs_vformat
     li r0, 0x1
-    b lbl_fn_8021C6A4_00001804
+    b lbl_thread_pool_dispatchTask_00001804
     lis r6, lbl_807C8008@ha
     addi r3, r1, 0x208
     addi r6, r6, lbl_807C8008@l
@@ -1761,31 +1761,31 @@ lbl_fn_8021C6A4_00001738:
     add r5, r5, r0
     lwz r5, 0x8(r5)
     cmpwi r5, 0x0
-    beq lbl_fn_8021C6A4_000017D0
-    b lbl_fn_8021C6A4_000017D4
-lbl_fn_8021C6A4_000017D0:
+    beq lbl_thread_pool_dispatchTask_000017D0
+    b lbl_thread_pool_dispatchTask_000017D4
+lbl_thread_pool_dispatchTask_000017D0:
     la r5, lbl_808813D0
-lbl_fn_8021C6A4_000017D4:
+lbl_thread_pool_dispatchTask_000017D4:
     crclr 6
     bl wcs_vformat
     li r0, 0x1
-    b lbl_fn_8021C6A4_00001804
-lbl_fn_8021C6A4_000017E4:
+    b lbl_thread_pool_dispatchTask_00001804
+lbl_thread_pool_dispatchTask_000017E4:
     addi r3, r1, 0x208
     crclr 6
     bl wcs_vformat
     li r0, 0x1
-    b lbl_fn_8021C6A4_00001804
+    b lbl_thread_pool_dispatchTask_00001804
     li r0, 0x0
-    b lbl_fn_8021C6A4_00001804
-lbl_fn_8021C6A4_00001800:
+    b lbl_thread_pool_dispatchTask_00001804
+lbl_thread_pool_dispatchTask_00001800:
     li r0, 0x0
-lbl_fn_8021C6A4_00001804:
+lbl_thread_pool_dispatchTask_00001804:
     cmpwi r0, 0x0
-    beq lbl_fn_8021C6A4_0000185C
+    beq lbl_thread_pool_dispatchTask_0000185C
     lhz r0, 0x8(r1)
     cmpwi r0, 0x0
-    beq lbl_fn_8021C6A4_0000183C
+    beq lbl_thread_pool_dispatchTask_0000183C
     lis r4, lbl_807834D4@ha
     mr r3, r29
     addi r4, r4, lbl_807834D4@l
@@ -1794,23 +1794,23 @@ lbl_fn_8021C6A4_00001804:
     addi r6, r1, 0x208
     crclr 6
     bl wcs_vformat
-    b lbl_fn_8021C6A4_00001854
-lbl_fn_8021C6A4_0000183C:
+    b lbl_thread_pool_dispatchTask_00001854
+lbl_thread_pool_dispatchTask_0000183C:
     lis r4, lbl_807834D4@ha
     mr r3, r29
     addi r4, r4, lbl_807834D4@l
     addi r5, r1, 0x208
     crclr 6
     bl wcs_vformat
-lbl_fn_8021C6A4_00001854:
+lbl_thread_pool_dispatchTask_00001854:
     li r3, 0x1
-    b lbl_fn_8021C6A4_00001868
-lbl_fn_8021C6A4_0000185C:
+    b lbl_thread_pool_dispatchTask_00001868
+lbl_thread_pool_dispatchTask_0000185C:
     li r3, 0x0
-    b lbl_fn_8021C6A4_00001868
-lbl_fn_8021C6A4_00001864:
+    b lbl_thread_pool_dispatchTask_00001868
+lbl_thread_pool_dispatchTask_00001864:
     li r3, 0x0
-lbl_fn_8021C6A4_00001868:
+lbl_thread_pool_dispatchTask_00001868:
     lwz r0, 0x424(r1)
     lwz r31, 0x41c(r1)
     lwz r30, 0x418(r1)

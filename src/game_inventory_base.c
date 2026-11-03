@@ -17,7 +17,7 @@ extern void boss_findPartById(void);
 extern void battle_getActorStatTotal(void);
 extern void boss_testAiFlag(void);
 extern void fn_80150460(void);
-extern void fn_8015076C(void);
+extern void dialog_event_executeAction(void);
 extern void party_evalTacticCondition(void);
 extern void actor_setState(void);
 extern void fn_801C8938(void);
@@ -834,7 +834,7 @@ lbl_inventory_applyItemStats_00000A38:
     mr r9, r27
     addi r5, r27, 0x10
     addi r6, r27, 0x1c
-    bl fn_8015076C
+    bl dialog_event_executeAction
 lbl_inventory_applyItemStats_00000A64:
     lwz r3, 0x8(r27)
     rlwinm r0, r29, 0, 26, 26
@@ -1045,7 +1045,7 @@ lbl_inventory_applyItemStats_00000D3C:
     mr r9, r27
     addi r5, r27, 0x10
     addi r6, r27, 0x1c
-    bl fn_8015076C
+    bl dialog_event_executeAction
 lbl_inventory_applyItemStats_00000D68:
     lwz r5, 0x8(r27)
     extrwi r3, r29, 1, 28
@@ -1416,7 +1416,7 @@ lbl_inventory_applyItemStats_00001298:
     mr r9, r27
     addi r5, r27, 0x10
     addi r6, r27, 0x1c
-    bl fn_8015076C
+    bl dialog_event_executeAction
 lbl_inventory_applyItemStats_000012C4:
     lwz r3, 0x8(r27)
     li r0, -0x1

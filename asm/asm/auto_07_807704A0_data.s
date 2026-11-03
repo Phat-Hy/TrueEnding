@@ -9621,453 +9621,453 @@
 
 # .data:0x7940 | 0x80777DE0 | size: 0xC8
 .obj jumptable_80777DE0, global
-	.4byte fn_8007B260+0xCA4
-	.4byte fn_8007B260+0xC9C
-	.4byte fn_8007B260+0xCAC
-	.4byte fn_8007B260+0xCAC
-	.4byte fn_8007B260+0xCAC
-	.4byte fn_8007B260+0xCAC
-	.4byte fn_8007B260+0xC94
-	.4byte fn_8007B260+0xCAC
-	.4byte fn_8007B260+0xCAC
-	.4byte fn_8007B260+0xCAC
-	.4byte fn_8007B260+0xCAC
-	.4byte fn_8007B260+0xCAC
-	.4byte fn_8007B260+0xCAC
-	.4byte fn_8007B260+0xCAC
-	.4byte fn_8007B260+0xCAC
-	.4byte fn_8007B260+0xCAC
-	.4byte fn_8007B260+0xCAC
-	.4byte fn_8007B260+0xC8C
-	.4byte fn_8007B260+0xCAC
-	.4byte fn_8007B260+0xCAC
-	.4byte fn_8007B260+0xCAC
-	.4byte fn_8007B260+0xCAC
-	.4byte fn_8007B260+0xCAC
-	.4byte fn_8007B260+0xCAC
-	.4byte fn_8007B260+0xCAC
-	.4byte fn_8007B260+0xCAC
-	.4byte fn_8007B260+0xCAC
-	.4byte fn_8007B260+0xCAC
-	.4byte fn_8007B260+0xCAC
-	.4byte fn_8007B260+0xCAC
-	.4byte fn_8007B260+0xCAC
-	.4byte fn_8007B260+0xCAC
-	.4byte fn_8007B260+0xCA4
-	.4byte fn_8007B260+0xC9C
-	.4byte fn_8007B260+0xCAC
-	.4byte fn_8007B260+0xCAC
-	.4byte fn_8007B260+0xCAC
-	.4byte fn_8007B260+0xCAC
-	.4byte fn_8007B260+0xC94
-	.4byte fn_8007B260+0xCAC
-	.4byte fn_8007B260+0xCAC
-	.4byte fn_8007B260+0xCAC
-	.4byte fn_8007B260+0xCAC
-	.4byte fn_8007B260+0xCAC
-	.4byte fn_8007B260+0xCAC
-	.4byte fn_8007B260+0xCAC
-	.4byte fn_8007B260+0xCAC
-	.4byte fn_8007B260+0xCAC
-	.4byte fn_8007B260+0xCAC
-	.4byte fn_8007B260+0xC8C
+	.4byte dialogue_parseCommandScript+0xCA4
+	.4byte dialogue_parseCommandScript+0xC9C
+	.4byte dialogue_parseCommandScript+0xCAC
+	.4byte dialogue_parseCommandScript+0xCAC
+	.4byte dialogue_parseCommandScript+0xCAC
+	.4byte dialogue_parseCommandScript+0xCAC
+	.4byte dialogue_parseCommandScript+0xC94
+	.4byte dialogue_parseCommandScript+0xCAC
+	.4byte dialogue_parseCommandScript+0xCAC
+	.4byte dialogue_parseCommandScript+0xCAC
+	.4byte dialogue_parseCommandScript+0xCAC
+	.4byte dialogue_parseCommandScript+0xCAC
+	.4byte dialogue_parseCommandScript+0xCAC
+	.4byte dialogue_parseCommandScript+0xCAC
+	.4byte dialogue_parseCommandScript+0xCAC
+	.4byte dialogue_parseCommandScript+0xCAC
+	.4byte dialogue_parseCommandScript+0xCAC
+	.4byte dialogue_parseCommandScript+0xC8C
+	.4byte dialogue_parseCommandScript+0xCAC
+	.4byte dialogue_parseCommandScript+0xCAC
+	.4byte dialogue_parseCommandScript+0xCAC
+	.4byte dialogue_parseCommandScript+0xCAC
+	.4byte dialogue_parseCommandScript+0xCAC
+	.4byte dialogue_parseCommandScript+0xCAC
+	.4byte dialogue_parseCommandScript+0xCAC
+	.4byte dialogue_parseCommandScript+0xCAC
+	.4byte dialogue_parseCommandScript+0xCAC
+	.4byte dialogue_parseCommandScript+0xCAC
+	.4byte dialogue_parseCommandScript+0xCAC
+	.4byte dialogue_parseCommandScript+0xCAC
+	.4byte dialogue_parseCommandScript+0xCAC
+	.4byte dialogue_parseCommandScript+0xCAC
+	.4byte dialogue_parseCommandScript+0xCA4
+	.4byte dialogue_parseCommandScript+0xC9C
+	.4byte dialogue_parseCommandScript+0xCAC
+	.4byte dialogue_parseCommandScript+0xCAC
+	.4byte dialogue_parseCommandScript+0xCAC
+	.4byte dialogue_parseCommandScript+0xCAC
+	.4byte dialogue_parseCommandScript+0xC94
+	.4byte dialogue_parseCommandScript+0xCAC
+	.4byte dialogue_parseCommandScript+0xCAC
+	.4byte dialogue_parseCommandScript+0xCAC
+	.4byte dialogue_parseCommandScript+0xCAC
+	.4byte dialogue_parseCommandScript+0xCAC
+	.4byte dialogue_parseCommandScript+0xCAC
+	.4byte dialogue_parseCommandScript+0xCAC
+	.4byte dialogue_parseCommandScript+0xCAC
+	.4byte dialogue_parseCommandScript+0xCAC
+	.4byte dialogue_parseCommandScript+0xCAC
+	.4byte dialogue_parseCommandScript+0xC8C
 .endobj jumptable_80777DE0
 
 # .data:0x7A08 | 0x80777EA8 | size: 0xC8
 .obj jumptable_80777EA8, global
-	.4byte fn_8007B260+0xC50
-	.4byte fn_8007B260+0xC48
-	.4byte fn_8007B260+0xC58
-	.4byte fn_8007B260+0xC58
-	.4byte fn_8007B260+0xC58
-	.4byte fn_8007B260+0xC58
-	.4byte fn_8007B260+0xC40
-	.4byte fn_8007B260+0xC58
-	.4byte fn_8007B260+0xC58
-	.4byte fn_8007B260+0xC58
-	.4byte fn_8007B260+0xC58
-	.4byte fn_8007B260+0xC58
-	.4byte fn_8007B260+0xC58
-	.4byte fn_8007B260+0xC58
-	.4byte fn_8007B260+0xC58
-	.4byte fn_8007B260+0xC58
-	.4byte fn_8007B260+0xC58
-	.4byte fn_8007B260+0xC38
-	.4byte fn_8007B260+0xC58
-	.4byte fn_8007B260+0xC58
-	.4byte fn_8007B260+0xC58
-	.4byte fn_8007B260+0xC58
-	.4byte fn_8007B260+0xC58
-	.4byte fn_8007B260+0xC58
-	.4byte fn_8007B260+0xC58
-	.4byte fn_8007B260+0xC58
-	.4byte fn_8007B260+0xC58
-	.4byte fn_8007B260+0xC58
-	.4byte fn_8007B260+0xC58
-	.4byte fn_8007B260+0xC58
-	.4byte fn_8007B260+0xC58
-	.4byte fn_8007B260+0xC58
-	.4byte fn_8007B260+0xC50
-	.4byte fn_8007B260+0xC48
-	.4byte fn_8007B260+0xC58
-	.4byte fn_8007B260+0xC58
-	.4byte fn_8007B260+0xC58
-	.4byte fn_8007B260+0xC58
-	.4byte fn_8007B260+0xC40
-	.4byte fn_8007B260+0xC58
-	.4byte fn_8007B260+0xC58
-	.4byte fn_8007B260+0xC58
-	.4byte fn_8007B260+0xC58
-	.4byte fn_8007B260+0xC58
-	.4byte fn_8007B260+0xC58
-	.4byte fn_8007B260+0xC58
-	.4byte fn_8007B260+0xC58
-	.4byte fn_8007B260+0xC58
-	.4byte fn_8007B260+0xC58
-	.4byte fn_8007B260+0xC38
+	.4byte dialogue_parseCommandScript+0xC50
+	.4byte dialogue_parseCommandScript+0xC48
+	.4byte dialogue_parseCommandScript+0xC58
+	.4byte dialogue_parseCommandScript+0xC58
+	.4byte dialogue_parseCommandScript+0xC58
+	.4byte dialogue_parseCommandScript+0xC58
+	.4byte dialogue_parseCommandScript+0xC40
+	.4byte dialogue_parseCommandScript+0xC58
+	.4byte dialogue_parseCommandScript+0xC58
+	.4byte dialogue_parseCommandScript+0xC58
+	.4byte dialogue_parseCommandScript+0xC58
+	.4byte dialogue_parseCommandScript+0xC58
+	.4byte dialogue_parseCommandScript+0xC58
+	.4byte dialogue_parseCommandScript+0xC58
+	.4byte dialogue_parseCommandScript+0xC58
+	.4byte dialogue_parseCommandScript+0xC58
+	.4byte dialogue_parseCommandScript+0xC58
+	.4byte dialogue_parseCommandScript+0xC38
+	.4byte dialogue_parseCommandScript+0xC58
+	.4byte dialogue_parseCommandScript+0xC58
+	.4byte dialogue_parseCommandScript+0xC58
+	.4byte dialogue_parseCommandScript+0xC58
+	.4byte dialogue_parseCommandScript+0xC58
+	.4byte dialogue_parseCommandScript+0xC58
+	.4byte dialogue_parseCommandScript+0xC58
+	.4byte dialogue_parseCommandScript+0xC58
+	.4byte dialogue_parseCommandScript+0xC58
+	.4byte dialogue_parseCommandScript+0xC58
+	.4byte dialogue_parseCommandScript+0xC58
+	.4byte dialogue_parseCommandScript+0xC58
+	.4byte dialogue_parseCommandScript+0xC58
+	.4byte dialogue_parseCommandScript+0xC58
+	.4byte dialogue_parseCommandScript+0xC50
+	.4byte dialogue_parseCommandScript+0xC48
+	.4byte dialogue_parseCommandScript+0xC58
+	.4byte dialogue_parseCommandScript+0xC58
+	.4byte dialogue_parseCommandScript+0xC58
+	.4byte dialogue_parseCommandScript+0xC58
+	.4byte dialogue_parseCommandScript+0xC40
+	.4byte dialogue_parseCommandScript+0xC58
+	.4byte dialogue_parseCommandScript+0xC58
+	.4byte dialogue_parseCommandScript+0xC58
+	.4byte dialogue_parseCommandScript+0xC58
+	.4byte dialogue_parseCommandScript+0xC58
+	.4byte dialogue_parseCommandScript+0xC58
+	.4byte dialogue_parseCommandScript+0xC58
+	.4byte dialogue_parseCommandScript+0xC58
+	.4byte dialogue_parseCommandScript+0xC58
+	.4byte dialogue_parseCommandScript+0xC58
+	.4byte dialogue_parseCommandScript+0xC38
 .endobj jumptable_80777EA8
 
 # .data:0x7AD0 | 0x80777F70 | size: 0xC8
 .obj jumptable_80777F70, global
-	.4byte fn_8007B260+0xBFC
-	.4byte fn_8007B260+0xBF4
-	.4byte fn_8007B260+0xC04
-	.4byte fn_8007B260+0xC04
-	.4byte fn_8007B260+0xC04
-	.4byte fn_8007B260+0xC04
-	.4byte fn_8007B260+0xBEC
-	.4byte fn_8007B260+0xC04
-	.4byte fn_8007B260+0xC04
-	.4byte fn_8007B260+0xC04
-	.4byte fn_8007B260+0xC04
-	.4byte fn_8007B260+0xC04
-	.4byte fn_8007B260+0xC04
-	.4byte fn_8007B260+0xC04
-	.4byte fn_8007B260+0xC04
-	.4byte fn_8007B260+0xC04
-	.4byte fn_8007B260+0xC04
-	.4byte fn_8007B260+0xBE4
-	.4byte fn_8007B260+0xC04
-	.4byte fn_8007B260+0xC04
-	.4byte fn_8007B260+0xC04
-	.4byte fn_8007B260+0xC04
-	.4byte fn_8007B260+0xC04
-	.4byte fn_8007B260+0xC04
-	.4byte fn_8007B260+0xC04
-	.4byte fn_8007B260+0xC04
-	.4byte fn_8007B260+0xC04
-	.4byte fn_8007B260+0xC04
-	.4byte fn_8007B260+0xC04
-	.4byte fn_8007B260+0xC04
-	.4byte fn_8007B260+0xC04
-	.4byte fn_8007B260+0xC04
-	.4byte fn_8007B260+0xBFC
-	.4byte fn_8007B260+0xBF4
-	.4byte fn_8007B260+0xC04
-	.4byte fn_8007B260+0xC04
-	.4byte fn_8007B260+0xC04
-	.4byte fn_8007B260+0xC04
-	.4byte fn_8007B260+0xBEC
-	.4byte fn_8007B260+0xC04
-	.4byte fn_8007B260+0xC04
-	.4byte fn_8007B260+0xC04
-	.4byte fn_8007B260+0xC04
-	.4byte fn_8007B260+0xC04
-	.4byte fn_8007B260+0xC04
-	.4byte fn_8007B260+0xC04
-	.4byte fn_8007B260+0xC04
-	.4byte fn_8007B260+0xC04
-	.4byte fn_8007B260+0xC04
-	.4byte fn_8007B260+0xBE4
+	.4byte dialogue_parseCommandScript+0xBFC
+	.4byte dialogue_parseCommandScript+0xBF4
+	.4byte dialogue_parseCommandScript+0xC04
+	.4byte dialogue_parseCommandScript+0xC04
+	.4byte dialogue_parseCommandScript+0xC04
+	.4byte dialogue_parseCommandScript+0xC04
+	.4byte dialogue_parseCommandScript+0xBEC
+	.4byte dialogue_parseCommandScript+0xC04
+	.4byte dialogue_parseCommandScript+0xC04
+	.4byte dialogue_parseCommandScript+0xC04
+	.4byte dialogue_parseCommandScript+0xC04
+	.4byte dialogue_parseCommandScript+0xC04
+	.4byte dialogue_parseCommandScript+0xC04
+	.4byte dialogue_parseCommandScript+0xC04
+	.4byte dialogue_parseCommandScript+0xC04
+	.4byte dialogue_parseCommandScript+0xC04
+	.4byte dialogue_parseCommandScript+0xC04
+	.4byte dialogue_parseCommandScript+0xBE4
+	.4byte dialogue_parseCommandScript+0xC04
+	.4byte dialogue_parseCommandScript+0xC04
+	.4byte dialogue_parseCommandScript+0xC04
+	.4byte dialogue_parseCommandScript+0xC04
+	.4byte dialogue_parseCommandScript+0xC04
+	.4byte dialogue_parseCommandScript+0xC04
+	.4byte dialogue_parseCommandScript+0xC04
+	.4byte dialogue_parseCommandScript+0xC04
+	.4byte dialogue_parseCommandScript+0xC04
+	.4byte dialogue_parseCommandScript+0xC04
+	.4byte dialogue_parseCommandScript+0xC04
+	.4byte dialogue_parseCommandScript+0xC04
+	.4byte dialogue_parseCommandScript+0xC04
+	.4byte dialogue_parseCommandScript+0xC04
+	.4byte dialogue_parseCommandScript+0xBFC
+	.4byte dialogue_parseCommandScript+0xBF4
+	.4byte dialogue_parseCommandScript+0xC04
+	.4byte dialogue_parseCommandScript+0xC04
+	.4byte dialogue_parseCommandScript+0xC04
+	.4byte dialogue_parseCommandScript+0xC04
+	.4byte dialogue_parseCommandScript+0xBEC
+	.4byte dialogue_parseCommandScript+0xC04
+	.4byte dialogue_parseCommandScript+0xC04
+	.4byte dialogue_parseCommandScript+0xC04
+	.4byte dialogue_parseCommandScript+0xC04
+	.4byte dialogue_parseCommandScript+0xC04
+	.4byte dialogue_parseCommandScript+0xC04
+	.4byte dialogue_parseCommandScript+0xC04
+	.4byte dialogue_parseCommandScript+0xC04
+	.4byte dialogue_parseCommandScript+0xC04
+	.4byte dialogue_parseCommandScript+0xC04
+	.4byte dialogue_parseCommandScript+0xBE4
 .endobj jumptable_80777F70
 
 # .data:0x7B98 | 0x80778038 | size: 0xC8
 .obj jumptable_80778038, global
-	.4byte fn_8007B260+0xBA8
-	.4byte fn_8007B260+0xBA0
-	.4byte fn_8007B260+0xBB0
-	.4byte fn_8007B260+0xBB0
-	.4byte fn_8007B260+0xBB0
-	.4byte fn_8007B260+0xBB0
-	.4byte fn_8007B260+0xB98
-	.4byte fn_8007B260+0xBB0
-	.4byte fn_8007B260+0xBB0
-	.4byte fn_8007B260+0xBB0
-	.4byte fn_8007B260+0xBB0
-	.4byte fn_8007B260+0xBB0
-	.4byte fn_8007B260+0xBB0
-	.4byte fn_8007B260+0xBB0
-	.4byte fn_8007B260+0xBB0
-	.4byte fn_8007B260+0xBB0
-	.4byte fn_8007B260+0xBB0
-	.4byte fn_8007B260+0xB90
-	.4byte fn_8007B260+0xBB0
-	.4byte fn_8007B260+0xBB0
-	.4byte fn_8007B260+0xBB0
-	.4byte fn_8007B260+0xBB0
-	.4byte fn_8007B260+0xBB0
-	.4byte fn_8007B260+0xBB0
-	.4byte fn_8007B260+0xBB0
-	.4byte fn_8007B260+0xBB0
-	.4byte fn_8007B260+0xBB0
-	.4byte fn_8007B260+0xBB0
-	.4byte fn_8007B260+0xBB0
-	.4byte fn_8007B260+0xBB0
-	.4byte fn_8007B260+0xBB0
-	.4byte fn_8007B260+0xBB0
-	.4byte fn_8007B260+0xBA8
-	.4byte fn_8007B260+0xBA0
-	.4byte fn_8007B260+0xBB0
-	.4byte fn_8007B260+0xBB0
-	.4byte fn_8007B260+0xBB0
-	.4byte fn_8007B260+0xBB0
-	.4byte fn_8007B260+0xB98
-	.4byte fn_8007B260+0xBB0
-	.4byte fn_8007B260+0xBB0
-	.4byte fn_8007B260+0xBB0
-	.4byte fn_8007B260+0xBB0
-	.4byte fn_8007B260+0xBB0
-	.4byte fn_8007B260+0xBB0
-	.4byte fn_8007B260+0xBB0
-	.4byte fn_8007B260+0xBB0
-	.4byte fn_8007B260+0xBB0
-	.4byte fn_8007B260+0xBB0
-	.4byte fn_8007B260+0xB90
+	.4byte dialogue_parseCommandScript+0xBA8
+	.4byte dialogue_parseCommandScript+0xBA0
+	.4byte dialogue_parseCommandScript+0xBB0
+	.4byte dialogue_parseCommandScript+0xBB0
+	.4byte dialogue_parseCommandScript+0xBB0
+	.4byte dialogue_parseCommandScript+0xBB0
+	.4byte dialogue_parseCommandScript+0xB98
+	.4byte dialogue_parseCommandScript+0xBB0
+	.4byte dialogue_parseCommandScript+0xBB0
+	.4byte dialogue_parseCommandScript+0xBB0
+	.4byte dialogue_parseCommandScript+0xBB0
+	.4byte dialogue_parseCommandScript+0xBB0
+	.4byte dialogue_parseCommandScript+0xBB0
+	.4byte dialogue_parseCommandScript+0xBB0
+	.4byte dialogue_parseCommandScript+0xBB0
+	.4byte dialogue_parseCommandScript+0xBB0
+	.4byte dialogue_parseCommandScript+0xBB0
+	.4byte dialogue_parseCommandScript+0xB90
+	.4byte dialogue_parseCommandScript+0xBB0
+	.4byte dialogue_parseCommandScript+0xBB0
+	.4byte dialogue_parseCommandScript+0xBB0
+	.4byte dialogue_parseCommandScript+0xBB0
+	.4byte dialogue_parseCommandScript+0xBB0
+	.4byte dialogue_parseCommandScript+0xBB0
+	.4byte dialogue_parseCommandScript+0xBB0
+	.4byte dialogue_parseCommandScript+0xBB0
+	.4byte dialogue_parseCommandScript+0xBB0
+	.4byte dialogue_parseCommandScript+0xBB0
+	.4byte dialogue_parseCommandScript+0xBB0
+	.4byte dialogue_parseCommandScript+0xBB0
+	.4byte dialogue_parseCommandScript+0xBB0
+	.4byte dialogue_parseCommandScript+0xBB0
+	.4byte dialogue_parseCommandScript+0xBA8
+	.4byte dialogue_parseCommandScript+0xBA0
+	.4byte dialogue_parseCommandScript+0xBB0
+	.4byte dialogue_parseCommandScript+0xBB0
+	.4byte dialogue_parseCommandScript+0xBB0
+	.4byte dialogue_parseCommandScript+0xBB0
+	.4byte dialogue_parseCommandScript+0xB98
+	.4byte dialogue_parseCommandScript+0xBB0
+	.4byte dialogue_parseCommandScript+0xBB0
+	.4byte dialogue_parseCommandScript+0xBB0
+	.4byte dialogue_parseCommandScript+0xBB0
+	.4byte dialogue_parseCommandScript+0xBB0
+	.4byte dialogue_parseCommandScript+0xBB0
+	.4byte dialogue_parseCommandScript+0xBB0
+	.4byte dialogue_parseCommandScript+0xBB0
+	.4byte dialogue_parseCommandScript+0xBB0
+	.4byte dialogue_parseCommandScript+0xBB0
+	.4byte dialogue_parseCommandScript+0xB90
 .endobj jumptable_80778038
 
 # .data:0x7C60 | 0x80778100 | size: 0xC8
 .obj jumptable_80778100, global
-	.4byte fn_8007B260+0xB48
-	.4byte fn_8007B260+0xB40
-	.4byte fn_8007B260+0xB50
-	.4byte fn_8007B260+0xB50
-	.4byte fn_8007B260+0xB50
-	.4byte fn_8007B260+0xB50
-	.4byte fn_8007B260+0xB38
-	.4byte fn_8007B260+0xB50
-	.4byte fn_8007B260+0xB50
-	.4byte fn_8007B260+0xB50
-	.4byte fn_8007B260+0xB50
-	.4byte fn_8007B260+0xB50
-	.4byte fn_8007B260+0xB50
-	.4byte fn_8007B260+0xB50
-	.4byte fn_8007B260+0xB50
-	.4byte fn_8007B260+0xB50
-	.4byte fn_8007B260+0xB50
-	.4byte fn_8007B260+0xB30
-	.4byte fn_8007B260+0xB50
-	.4byte fn_8007B260+0xB50
-	.4byte fn_8007B260+0xB50
-	.4byte fn_8007B260+0xB50
-	.4byte fn_8007B260+0xB50
-	.4byte fn_8007B260+0xB50
-	.4byte fn_8007B260+0xB50
-	.4byte fn_8007B260+0xB50
-	.4byte fn_8007B260+0xB50
-	.4byte fn_8007B260+0xB50
-	.4byte fn_8007B260+0xB50
-	.4byte fn_8007B260+0xB50
-	.4byte fn_8007B260+0xB50
-	.4byte fn_8007B260+0xB50
-	.4byte fn_8007B260+0xB48
-	.4byte fn_8007B260+0xB40
-	.4byte fn_8007B260+0xB50
-	.4byte fn_8007B260+0xB50
-	.4byte fn_8007B260+0xB50
-	.4byte fn_8007B260+0xB50
-	.4byte fn_8007B260+0xB38
-	.4byte fn_8007B260+0xB50
-	.4byte fn_8007B260+0xB50
-	.4byte fn_8007B260+0xB50
-	.4byte fn_8007B260+0xB50
-	.4byte fn_8007B260+0xB50
-	.4byte fn_8007B260+0xB50
-	.4byte fn_8007B260+0xB50
-	.4byte fn_8007B260+0xB50
-	.4byte fn_8007B260+0xB50
-	.4byte fn_8007B260+0xB50
-	.4byte fn_8007B260+0xB30
+	.4byte dialogue_parseCommandScript+0xB48
+	.4byte dialogue_parseCommandScript+0xB40
+	.4byte dialogue_parseCommandScript+0xB50
+	.4byte dialogue_parseCommandScript+0xB50
+	.4byte dialogue_parseCommandScript+0xB50
+	.4byte dialogue_parseCommandScript+0xB50
+	.4byte dialogue_parseCommandScript+0xB38
+	.4byte dialogue_parseCommandScript+0xB50
+	.4byte dialogue_parseCommandScript+0xB50
+	.4byte dialogue_parseCommandScript+0xB50
+	.4byte dialogue_parseCommandScript+0xB50
+	.4byte dialogue_parseCommandScript+0xB50
+	.4byte dialogue_parseCommandScript+0xB50
+	.4byte dialogue_parseCommandScript+0xB50
+	.4byte dialogue_parseCommandScript+0xB50
+	.4byte dialogue_parseCommandScript+0xB50
+	.4byte dialogue_parseCommandScript+0xB50
+	.4byte dialogue_parseCommandScript+0xB30
+	.4byte dialogue_parseCommandScript+0xB50
+	.4byte dialogue_parseCommandScript+0xB50
+	.4byte dialogue_parseCommandScript+0xB50
+	.4byte dialogue_parseCommandScript+0xB50
+	.4byte dialogue_parseCommandScript+0xB50
+	.4byte dialogue_parseCommandScript+0xB50
+	.4byte dialogue_parseCommandScript+0xB50
+	.4byte dialogue_parseCommandScript+0xB50
+	.4byte dialogue_parseCommandScript+0xB50
+	.4byte dialogue_parseCommandScript+0xB50
+	.4byte dialogue_parseCommandScript+0xB50
+	.4byte dialogue_parseCommandScript+0xB50
+	.4byte dialogue_parseCommandScript+0xB50
+	.4byte dialogue_parseCommandScript+0xB50
+	.4byte dialogue_parseCommandScript+0xB48
+	.4byte dialogue_parseCommandScript+0xB40
+	.4byte dialogue_parseCommandScript+0xB50
+	.4byte dialogue_parseCommandScript+0xB50
+	.4byte dialogue_parseCommandScript+0xB50
+	.4byte dialogue_parseCommandScript+0xB50
+	.4byte dialogue_parseCommandScript+0xB38
+	.4byte dialogue_parseCommandScript+0xB50
+	.4byte dialogue_parseCommandScript+0xB50
+	.4byte dialogue_parseCommandScript+0xB50
+	.4byte dialogue_parseCommandScript+0xB50
+	.4byte dialogue_parseCommandScript+0xB50
+	.4byte dialogue_parseCommandScript+0xB50
+	.4byte dialogue_parseCommandScript+0xB50
+	.4byte dialogue_parseCommandScript+0xB50
+	.4byte dialogue_parseCommandScript+0xB50
+	.4byte dialogue_parseCommandScript+0xB50
+	.4byte dialogue_parseCommandScript+0xB30
 .endobj jumptable_80778100
 
 # .data:0x7D28 | 0x807781C8 | size: 0xC8
 .obj jumptable_807781C8, global
-	.4byte fn_8007B260+0xAF4
-	.4byte fn_8007B260+0xAEC
-	.4byte fn_8007B260+0xAFC
-	.4byte fn_8007B260+0xAFC
-	.4byte fn_8007B260+0xAFC
-	.4byte fn_8007B260+0xAFC
-	.4byte fn_8007B260+0xAE4
-	.4byte fn_8007B260+0xAFC
-	.4byte fn_8007B260+0xAFC
-	.4byte fn_8007B260+0xAFC
-	.4byte fn_8007B260+0xAFC
-	.4byte fn_8007B260+0xAFC
-	.4byte fn_8007B260+0xAFC
-	.4byte fn_8007B260+0xAFC
-	.4byte fn_8007B260+0xAFC
-	.4byte fn_8007B260+0xAFC
-	.4byte fn_8007B260+0xAFC
-	.4byte fn_8007B260+0xADC
-	.4byte fn_8007B260+0xAFC
-	.4byte fn_8007B260+0xAFC
-	.4byte fn_8007B260+0xAFC
-	.4byte fn_8007B260+0xAFC
-	.4byte fn_8007B260+0xAFC
-	.4byte fn_8007B260+0xAFC
-	.4byte fn_8007B260+0xAFC
-	.4byte fn_8007B260+0xAFC
-	.4byte fn_8007B260+0xAFC
-	.4byte fn_8007B260+0xAFC
-	.4byte fn_8007B260+0xAFC
-	.4byte fn_8007B260+0xAFC
-	.4byte fn_8007B260+0xAFC
-	.4byte fn_8007B260+0xAFC
-	.4byte fn_8007B260+0xAF4
-	.4byte fn_8007B260+0xAEC
-	.4byte fn_8007B260+0xAFC
-	.4byte fn_8007B260+0xAFC
-	.4byte fn_8007B260+0xAFC
-	.4byte fn_8007B260+0xAFC
-	.4byte fn_8007B260+0xAE4
-	.4byte fn_8007B260+0xAFC
-	.4byte fn_8007B260+0xAFC
-	.4byte fn_8007B260+0xAFC
-	.4byte fn_8007B260+0xAFC
-	.4byte fn_8007B260+0xAFC
-	.4byte fn_8007B260+0xAFC
-	.4byte fn_8007B260+0xAFC
-	.4byte fn_8007B260+0xAFC
-	.4byte fn_8007B260+0xAFC
-	.4byte fn_8007B260+0xAFC
-	.4byte fn_8007B260+0xADC
+	.4byte dialogue_parseCommandScript+0xAF4
+	.4byte dialogue_parseCommandScript+0xAEC
+	.4byte dialogue_parseCommandScript+0xAFC
+	.4byte dialogue_parseCommandScript+0xAFC
+	.4byte dialogue_parseCommandScript+0xAFC
+	.4byte dialogue_parseCommandScript+0xAFC
+	.4byte dialogue_parseCommandScript+0xAE4
+	.4byte dialogue_parseCommandScript+0xAFC
+	.4byte dialogue_parseCommandScript+0xAFC
+	.4byte dialogue_parseCommandScript+0xAFC
+	.4byte dialogue_parseCommandScript+0xAFC
+	.4byte dialogue_parseCommandScript+0xAFC
+	.4byte dialogue_parseCommandScript+0xAFC
+	.4byte dialogue_parseCommandScript+0xAFC
+	.4byte dialogue_parseCommandScript+0xAFC
+	.4byte dialogue_parseCommandScript+0xAFC
+	.4byte dialogue_parseCommandScript+0xAFC
+	.4byte dialogue_parseCommandScript+0xADC
+	.4byte dialogue_parseCommandScript+0xAFC
+	.4byte dialogue_parseCommandScript+0xAFC
+	.4byte dialogue_parseCommandScript+0xAFC
+	.4byte dialogue_parseCommandScript+0xAFC
+	.4byte dialogue_parseCommandScript+0xAFC
+	.4byte dialogue_parseCommandScript+0xAFC
+	.4byte dialogue_parseCommandScript+0xAFC
+	.4byte dialogue_parseCommandScript+0xAFC
+	.4byte dialogue_parseCommandScript+0xAFC
+	.4byte dialogue_parseCommandScript+0xAFC
+	.4byte dialogue_parseCommandScript+0xAFC
+	.4byte dialogue_parseCommandScript+0xAFC
+	.4byte dialogue_parseCommandScript+0xAFC
+	.4byte dialogue_parseCommandScript+0xAFC
+	.4byte dialogue_parseCommandScript+0xAF4
+	.4byte dialogue_parseCommandScript+0xAEC
+	.4byte dialogue_parseCommandScript+0xAFC
+	.4byte dialogue_parseCommandScript+0xAFC
+	.4byte dialogue_parseCommandScript+0xAFC
+	.4byte dialogue_parseCommandScript+0xAFC
+	.4byte dialogue_parseCommandScript+0xAE4
+	.4byte dialogue_parseCommandScript+0xAFC
+	.4byte dialogue_parseCommandScript+0xAFC
+	.4byte dialogue_parseCommandScript+0xAFC
+	.4byte dialogue_parseCommandScript+0xAFC
+	.4byte dialogue_parseCommandScript+0xAFC
+	.4byte dialogue_parseCommandScript+0xAFC
+	.4byte dialogue_parseCommandScript+0xAFC
+	.4byte dialogue_parseCommandScript+0xAFC
+	.4byte dialogue_parseCommandScript+0xAFC
+	.4byte dialogue_parseCommandScript+0xAFC
+	.4byte dialogue_parseCommandScript+0xADC
 .endobj jumptable_807781C8
 
 # .data:0x7DF0 | 0x80778290 | size: 0xC8
 .obj jumptable_80778290, global
-	.4byte fn_8007B260+0xAA0
-	.4byte fn_8007B260+0xA98
-	.4byte fn_8007B260+0xAA8
-	.4byte fn_8007B260+0xAA8
-	.4byte fn_8007B260+0xAA8
-	.4byte fn_8007B260+0xAA8
-	.4byte fn_8007B260+0xA90
-	.4byte fn_8007B260+0xAA8
-	.4byte fn_8007B260+0xAA8
-	.4byte fn_8007B260+0xAA8
-	.4byte fn_8007B260+0xAA8
-	.4byte fn_8007B260+0xAA8
-	.4byte fn_8007B260+0xAA8
-	.4byte fn_8007B260+0xAA8
-	.4byte fn_8007B260+0xAA8
-	.4byte fn_8007B260+0xAA8
-	.4byte fn_8007B260+0xAA8
-	.4byte fn_8007B260+0xA88
-	.4byte fn_8007B260+0xAA8
-	.4byte fn_8007B260+0xAA8
-	.4byte fn_8007B260+0xAA8
-	.4byte fn_8007B260+0xAA8
-	.4byte fn_8007B260+0xAA8
-	.4byte fn_8007B260+0xAA8
-	.4byte fn_8007B260+0xAA8
-	.4byte fn_8007B260+0xAA8
-	.4byte fn_8007B260+0xAA8
-	.4byte fn_8007B260+0xAA8
-	.4byte fn_8007B260+0xAA8
-	.4byte fn_8007B260+0xAA8
-	.4byte fn_8007B260+0xAA8
-	.4byte fn_8007B260+0xAA8
-	.4byte fn_8007B260+0xAA0
-	.4byte fn_8007B260+0xA98
-	.4byte fn_8007B260+0xAA8
-	.4byte fn_8007B260+0xAA8
-	.4byte fn_8007B260+0xAA8
-	.4byte fn_8007B260+0xAA8
-	.4byte fn_8007B260+0xA90
-	.4byte fn_8007B260+0xAA8
-	.4byte fn_8007B260+0xAA8
-	.4byte fn_8007B260+0xAA8
-	.4byte fn_8007B260+0xAA8
-	.4byte fn_8007B260+0xAA8
-	.4byte fn_8007B260+0xAA8
-	.4byte fn_8007B260+0xAA8
-	.4byte fn_8007B260+0xAA8
-	.4byte fn_8007B260+0xAA8
-	.4byte fn_8007B260+0xAA8
-	.4byte fn_8007B260+0xA88
+	.4byte dialogue_parseCommandScript+0xAA0
+	.4byte dialogue_parseCommandScript+0xA98
+	.4byte dialogue_parseCommandScript+0xAA8
+	.4byte dialogue_parseCommandScript+0xAA8
+	.4byte dialogue_parseCommandScript+0xAA8
+	.4byte dialogue_parseCommandScript+0xAA8
+	.4byte dialogue_parseCommandScript+0xA90
+	.4byte dialogue_parseCommandScript+0xAA8
+	.4byte dialogue_parseCommandScript+0xAA8
+	.4byte dialogue_parseCommandScript+0xAA8
+	.4byte dialogue_parseCommandScript+0xAA8
+	.4byte dialogue_parseCommandScript+0xAA8
+	.4byte dialogue_parseCommandScript+0xAA8
+	.4byte dialogue_parseCommandScript+0xAA8
+	.4byte dialogue_parseCommandScript+0xAA8
+	.4byte dialogue_parseCommandScript+0xAA8
+	.4byte dialogue_parseCommandScript+0xAA8
+	.4byte dialogue_parseCommandScript+0xA88
+	.4byte dialogue_parseCommandScript+0xAA8
+	.4byte dialogue_parseCommandScript+0xAA8
+	.4byte dialogue_parseCommandScript+0xAA8
+	.4byte dialogue_parseCommandScript+0xAA8
+	.4byte dialogue_parseCommandScript+0xAA8
+	.4byte dialogue_parseCommandScript+0xAA8
+	.4byte dialogue_parseCommandScript+0xAA8
+	.4byte dialogue_parseCommandScript+0xAA8
+	.4byte dialogue_parseCommandScript+0xAA8
+	.4byte dialogue_parseCommandScript+0xAA8
+	.4byte dialogue_parseCommandScript+0xAA8
+	.4byte dialogue_parseCommandScript+0xAA8
+	.4byte dialogue_parseCommandScript+0xAA8
+	.4byte dialogue_parseCommandScript+0xAA8
+	.4byte dialogue_parseCommandScript+0xAA0
+	.4byte dialogue_parseCommandScript+0xA98
+	.4byte dialogue_parseCommandScript+0xAA8
+	.4byte dialogue_parseCommandScript+0xAA8
+	.4byte dialogue_parseCommandScript+0xAA8
+	.4byte dialogue_parseCommandScript+0xAA8
+	.4byte dialogue_parseCommandScript+0xA90
+	.4byte dialogue_parseCommandScript+0xAA8
+	.4byte dialogue_parseCommandScript+0xAA8
+	.4byte dialogue_parseCommandScript+0xAA8
+	.4byte dialogue_parseCommandScript+0xAA8
+	.4byte dialogue_parseCommandScript+0xAA8
+	.4byte dialogue_parseCommandScript+0xAA8
+	.4byte dialogue_parseCommandScript+0xAA8
+	.4byte dialogue_parseCommandScript+0xAA8
+	.4byte dialogue_parseCommandScript+0xAA8
+	.4byte dialogue_parseCommandScript+0xAA8
+	.4byte dialogue_parseCommandScript+0xA88
 .endobj jumptable_80778290
 
 # .data:0x7EB8 | 0x80778358 | size: 0xC8
 .obj jumptable_80778358, global
-	.4byte fn_8007B260+0xA24
-	.4byte fn_8007B260+0xA1C
-	.4byte fn_8007B260+0xA2C
-	.4byte fn_8007B260+0xA2C
-	.4byte fn_8007B260+0xA2C
-	.4byte fn_8007B260+0xA2C
-	.4byte fn_8007B260+0xA14
-	.4byte fn_8007B260+0xA2C
-	.4byte fn_8007B260+0xA2C
-	.4byte fn_8007B260+0xA2C
-	.4byte fn_8007B260+0xA2C
-	.4byte fn_8007B260+0xA2C
-	.4byte fn_8007B260+0xA2C
-	.4byte fn_8007B260+0xA2C
-	.4byte fn_8007B260+0xA2C
-	.4byte fn_8007B260+0xA2C
-	.4byte fn_8007B260+0xA2C
-	.4byte fn_8007B260+0xA0C
-	.4byte fn_8007B260+0xA2C
-	.4byte fn_8007B260+0xA2C
-	.4byte fn_8007B260+0xA2C
-	.4byte fn_8007B260+0xA2C
-	.4byte fn_8007B260+0xA2C
-	.4byte fn_8007B260+0xA2C
-	.4byte fn_8007B260+0xA2C
-	.4byte fn_8007B260+0xA2C
-	.4byte fn_8007B260+0xA2C
-	.4byte fn_8007B260+0xA2C
-	.4byte fn_8007B260+0xA2C
-	.4byte fn_8007B260+0xA2C
-	.4byte fn_8007B260+0xA2C
-	.4byte fn_8007B260+0xA2C
-	.4byte fn_8007B260+0xA24
-	.4byte fn_8007B260+0xA1C
-	.4byte fn_8007B260+0xA2C
-	.4byte fn_8007B260+0xA2C
-	.4byte fn_8007B260+0xA2C
-	.4byte fn_8007B260+0xA2C
-	.4byte fn_8007B260+0xA14
-	.4byte fn_8007B260+0xA2C
-	.4byte fn_8007B260+0xA2C
-	.4byte fn_8007B260+0xA2C
-	.4byte fn_8007B260+0xA2C
-	.4byte fn_8007B260+0xA2C
-	.4byte fn_8007B260+0xA2C
-	.4byte fn_8007B260+0xA2C
-	.4byte fn_8007B260+0xA2C
-	.4byte fn_8007B260+0xA2C
-	.4byte fn_8007B260+0xA2C
-	.4byte fn_8007B260+0xA0C
+	.4byte dialogue_parseCommandScript+0xA24
+	.4byte dialogue_parseCommandScript+0xA1C
+	.4byte dialogue_parseCommandScript+0xA2C
+	.4byte dialogue_parseCommandScript+0xA2C
+	.4byte dialogue_parseCommandScript+0xA2C
+	.4byte dialogue_parseCommandScript+0xA2C
+	.4byte dialogue_parseCommandScript+0xA14
+	.4byte dialogue_parseCommandScript+0xA2C
+	.4byte dialogue_parseCommandScript+0xA2C
+	.4byte dialogue_parseCommandScript+0xA2C
+	.4byte dialogue_parseCommandScript+0xA2C
+	.4byte dialogue_parseCommandScript+0xA2C
+	.4byte dialogue_parseCommandScript+0xA2C
+	.4byte dialogue_parseCommandScript+0xA2C
+	.4byte dialogue_parseCommandScript+0xA2C
+	.4byte dialogue_parseCommandScript+0xA2C
+	.4byte dialogue_parseCommandScript+0xA2C
+	.4byte dialogue_parseCommandScript+0xA0C
+	.4byte dialogue_parseCommandScript+0xA2C
+	.4byte dialogue_parseCommandScript+0xA2C
+	.4byte dialogue_parseCommandScript+0xA2C
+	.4byte dialogue_parseCommandScript+0xA2C
+	.4byte dialogue_parseCommandScript+0xA2C
+	.4byte dialogue_parseCommandScript+0xA2C
+	.4byte dialogue_parseCommandScript+0xA2C
+	.4byte dialogue_parseCommandScript+0xA2C
+	.4byte dialogue_parseCommandScript+0xA2C
+	.4byte dialogue_parseCommandScript+0xA2C
+	.4byte dialogue_parseCommandScript+0xA2C
+	.4byte dialogue_parseCommandScript+0xA2C
+	.4byte dialogue_parseCommandScript+0xA2C
+	.4byte dialogue_parseCommandScript+0xA2C
+	.4byte dialogue_parseCommandScript+0xA24
+	.4byte dialogue_parseCommandScript+0xA1C
+	.4byte dialogue_parseCommandScript+0xA2C
+	.4byte dialogue_parseCommandScript+0xA2C
+	.4byte dialogue_parseCommandScript+0xA2C
+	.4byte dialogue_parseCommandScript+0xA2C
+	.4byte dialogue_parseCommandScript+0xA14
+	.4byte dialogue_parseCommandScript+0xA2C
+	.4byte dialogue_parseCommandScript+0xA2C
+	.4byte dialogue_parseCommandScript+0xA2C
+	.4byte dialogue_parseCommandScript+0xA2C
+	.4byte dialogue_parseCommandScript+0xA2C
+	.4byte dialogue_parseCommandScript+0xA2C
+	.4byte dialogue_parseCommandScript+0xA2C
+	.4byte dialogue_parseCommandScript+0xA2C
+	.4byte dialogue_parseCommandScript+0xA2C
+	.4byte dialogue_parseCommandScript+0xA2C
+	.4byte dialogue_parseCommandScript+0xA0C
 .endobj jumptable_80778358
 
 # .data:0x7F80 | 0x80778420 | size: 0x3C
 .obj jumptable_80778420, global
-	.4byte fn_8007B260+0x168
-	.4byte fn_8007B260+0x478
-	.4byte fn_8007B260+0x550
-	.4byte fn_8007B260+0x5BC
-	.4byte fn_8007B260+0x694
-	.4byte fn_8007B260+0x6BC
-	.4byte fn_8007B260+0x6E4
-	.4byte fn_8007B260+0x70C
-	.4byte fn_8007B260+0x734
-	.4byte fn_8007B260+0x80C
-	.4byte fn_8007B260+0x878
-	.4byte fn_8007B260+0x878
-	.4byte fn_8007B260+0x950
-	.4byte fn_8007B260+0x968
-	.4byte fn_8007B260+0x998
+	.4byte dialogue_parseCommandScript+0x168
+	.4byte dialogue_parseCommandScript+0x478
+	.4byte dialogue_parseCommandScript+0x550
+	.4byte dialogue_parseCommandScript+0x5BC
+	.4byte dialogue_parseCommandScript+0x694
+	.4byte dialogue_parseCommandScript+0x6BC
+	.4byte dialogue_parseCommandScript+0x6E4
+	.4byte dialogue_parseCommandScript+0x70C
+	.4byte dialogue_parseCommandScript+0x734
+	.4byte dialogue_parseCommandScript+0x80C
+	.4byte dialogue_parseCommandScript+0x878
+	.4byte dialogue_parseCommandScript+0x878
+	.4byte dialogue_parseCommandScript+0x950
+	.4byte dialogue_parseCommandScript+0x968
+	.4byte dialogue_parseCommandScript+0x998
 .endobj jumptable_80778420
 
 # .data:0x7FBC | 0x8077845C | size: 0x58
@@ -14005,139 +14005,139 @@
 
 # .data:0xA630 | 0x8077AAD0 | size: 0x214
 .obj jumptable_8077AAD0, global
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x7D8
-	.4byte fn_8015076C+0x7D8
-	.4byte fn_8015076C+0x7D8
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x7D8
-	.4byte fn_8015076C+0x7D8
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x7D8
-	.4byte fn_8015076C+0x7D8
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x800
-	.4byte fn_8015076C+0x7D8
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x7D8
-	.4byte fn_8015076C+0x7D8
-	.4byte fn_8015076C+0x7D8
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x7D8
-	.4byte fn_8015076C+0x7D8
-	.4byte fn_8015076C+0x7D8
-	.4byte fn_8015076C+0x7D8
-	.4byte fn_8015076C+0x7D8
-	.4byte fn_8015076C+0x7D8
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x7E0
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x7D8
-	.4byte fn_8015076C+0x7D8
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x7D8
-	.4byte fn_8015076C+0x7D8
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x7D8
-	.4byte fn_8015076C+0x7D8
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x7D8
-	.4byte fn_8015076C+0x7D8
-	.4byte fn_8015076C+0x7D8
-	.4byte fn_8015076C+0x7D8
-	.4byte fn_8015076C+0x7D8
-	.4byte fn_8015076C+0x7D8
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x7D8
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x7D8
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x7D8
-	.4byte fn_8015076C+0x7D8
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x7D8
-	.4byte fn_8015076C+0x7D8
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x7D8
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x7D8
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x7D8
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x7D8
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x7D8
-	.4byte fn_8015076C+0x7D8
-	.4byte fn_8015076C+0x7D8
-	.4byte fn_8015076C+0x7D8
-	.4byte fn_8015076C+0x7D8
-	.4byte fn_8015076C+0x7D8
-	.4byte fn_8015076C+0x7D8
-	.4byte fn_8015076C+0x7D8
-	.4byte fn_8015076C+0x7D8
-	.4byte fn_8015076C+0x7D8
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x7D8
-	.4byte fn_8015076C+0x7D8
-	.4byte fn_8015076C+0x7D8
-	.4byte fn_8015076C+0x7D8
-	.4byte fn_8015076C+0x7D8
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x7D8
-	.4byte fn_8015076C+0x834
-	.4byte fn_8015076C+0x7D8
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x7D8
+	.4byte dialog_event_executeAction+0x7D8
+	.4byte dialog_event_executeAction+0x7D8
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x7D8
+	.4byte dialog_event_executeAction+0x7D8
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x7D8
+	.4byte dialog_event_executeAction+0x7D8
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x800
+	.4byte dialog_event_executeAction+0x7D8
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x7D8
+	.4byte dialog_event_executeAction+0x7D8
+	.4byte dialog_event_executeAction+0x7D8
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x7D8
+	.4byte dialog_event_executeAction+0x7D8
+	.4byte dialog_event_executeAction+0x7D8
+	.4byte dialog_event_executeAction+0x7D8
+	.4byte dialog_event_executeAction+0x7D8
+	.4byte dialog_event_executeAction+0x7D8
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x7E0
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x7D8
+	.4byte dialog_event_executeAction+0x7D8
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x7D8
+	.4byte dialog_event_executeAction+0x7D8
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x7D8
+	.4byte dialog_event_executeAction+0x7D8
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x7D8
+	.4byte dialog_event_executeAction+0x7D8
+	.4byte dialog_event_executeAction+0x7D8
+	.4byte dialog_event_executeAction+0x7D8
+	.4byte dialog_event_executeAction+0x7D8
+	.4byte dialog_event_executeAction+0x7D8
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x7D8
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x7D8
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x7D8
+	.4byte dialog_event_executeAction+0x7D8
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x7D8
+	.4byte dialog_event_executeAction+0x7D8
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x7D8
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x7D8
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x7D8
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x7D8
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x7D8
+	.4byte dialog_event_executeAction+0x7D8
+	.4byte dialog_event_executeAction+0x7D8
+	.4byte dialog_event_executeAction+0x7D8
+	.4byte dialog_event_executeAction+0x7D8
+	.4byte dialog_event_executeAction+0x7D8
+	.4byte dialog_event_executeAction+0x7D8
+	.4byte dialog_event_executeAction+0x7D8
+	.4byte dialog_event_executeAction+0x7D8
+	.4byte dialog_event_executeAction+0x7D8
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x7D8
+	.4byte dialog_event_executeAction+0x7D8
+	.4byte dialog_event_executeAction+0x7D8
+	.4byte dialog_event_executeAction+0x7D8
+	.4byte dialog_event_executeAction+0x7D8
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x7D8
+	.4byte dialog_event_executeAction+0x834
+	.4byte dialog_event_executeAction+0x7D8
 .endobj jumptable_8077AAD0
 
 # .data:0xA844 | 0x8077ACE4 | size: 0x60
@@ -14184,144 +14184,144 @@
 
 # .data:0xA8BC | 0x8077AD5C | size: 0x228
 .obj jumptable_8077AD5C, global
-	.4byte fn_801533C8+0x27C
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x1EC
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x1D4
-	.4byte fn_801533C8+0x1E4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x22C
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x1E4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x1E4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x1E4
-	.4byte fn_801533C8+0x1E4
-	.4byte fn_801533C8+0x1E4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x1E4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x1E4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x1E4
-	.4byte fn_801533C8+0x1E4
-	.4byte fn_801533C8+0x1E4
-	.4byte fn_801533C8+0x1E4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x1E4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x1E4
-	.4byte fn_801533C8+0x1E4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x1E4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x1E4
-	.4byte fn_801533C8+0x1E4
-	.4byte fn_801533C8+0x1E4
-	.4byte fn_801533C8+0x1E4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x1E4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x1E4
-	.4byte fn_801533C8+0x1E4
-	.4byte fn_801533C8+0x1EC
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x1FC
-	.4byte fn_801533C8+0x1E4
-	.4byte fn_801533C8+0x1E4
-	.4byte fn_801533C8+0x1E4
-	.4byte fn_801533C8+0x1E4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x2B4
-	.4byte fn_801533C8+0x1E4
-	.4byte fn_801533C8+0x1E4
-	.4byte fn_801533C8+0x1D4
-	.4byte fn_801533C8+0x1E4
+	.4byte inventory_hasItem+0x27C
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x1EC
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x1D4
+	.4byte inventory_hasItem+0x1E4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x22C
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x1E4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x1E4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x1E4
+	.4byte inventory_hasItem+0x1E4
+	.4byte inventory_hasItem+0x1E4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x1E4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x1E4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x1E4
+	.4byte inventory_hasItem+0x1E4
+	.4byte inventory_hasItem+0x1E4
+	.4byte inventory_hasItem+0x1E4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x1E4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x1E4
+	.4byte inventory_hasItem+0x1E4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x1E4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x1E4
+	.4byte inventory_hasItem+0x1E4
+	.4byte inventory_hasItem+0x1E4
+	.4byte inventory_hasItem+0x1E4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x1E4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x1E4
+	.4byte inventory_hasItem+0x1E4
+	.4byte inventory_hasItem+0x1EC
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x1FC
+	.4byte inventory_hasItem+0x1E4
+	.4byte inventory_hasItem+0x1E4
+	.4byte inventory_hasItem+0x1E4
+	.4byte inventory_hasItem+0x1E4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x2B4
+	.4byte inventory_hasItem+0x1E4
+	.4byte inventory_hasItem+0x1E4
+	.4byte inventory_hasItem+0x1D4
+	.4byte inventory_hasItem+0x1E4
 .endobj jumptable_8077AD5C
 
 # .data:0xAAE4 | 0x8077AF84 | size: 0x270
@@ -16391,7 +16391,7 @@
 	.4byte fn_80187E2C
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_80187FF4
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -16485,7 +16485,7 @@
 	.4byte fn_801894DC
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -16527,7 +16527,7 @@
 	.4byte fn_8018910C
 	.4byte fn_801891FC
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_801893F4
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -16569,7 +16569,7 @@
 	.4byte fn_80188C70
 	.4byte fn_80188D3C
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -16611,7 +16611,7 @@
 	.4byte fn_801881C4
 	.4byte fn_801883E8
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_80188BC4
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -17083,7 +17083,7 @@
 	.4byte fn_8018B610
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -17375,7 +17375,7 @@
 	.4byte fn_80192190
 	.4byte fn_80192198
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -17417,7 +17417,7 @@
 	.4byte fn_80191EA4
 	.4byte fn_80191FF8
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -17459,7 +17459,7 @@
 	.4byte fn_80191AF0
 	.4byte fn_80191B50
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -17501,7 +17501,7 @@
 	.4byte fn_8019163C
 	.4byte fn_80191828
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -17543,7 +17543,7 @@
 	.4byte fn_80190F40
 	.4byte fn_80190F90
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -17585,7 +17585,7 @@
 	.4byte fn_80190AB0
 	.4byte fn_80190AB8
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -17627,7 +17627,7 @@
 	.4byte fn_80190150
 	.4byte fn_80190270
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_80190844
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -17669,7 +17669,7 @@
 	.4byte fn_8018FF64
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -17711,7 +17711,7 @@
 	.4byte fn_8018FAA4
 	.4byte fn_8018FB0C
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_8018FAAC
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -17753,7 +17753,7 @@
 	.4byte fn_8018F968
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -17795,7 +17795,7 @@
 	.4byte fn_8018F090
 	.4byte fn_8018F254
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -17911,7 +17911,7 @@
 	.4byte 0x00000000
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -18079,7 +18079,7 @@
 	.4byte fn_8019FEC4
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -18121,7 +18121,7 @@
 	.4byte fn_8019F998
 	.4byte fn_8019FC6C
 	.4byte fn_8019FBE0
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -18163,7 +18163,7 @@
 	.4byte fn_8019F398
 	.4byte fn_8019F5BC
 	.4byte fn_8019F530
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -18205,7 +18205,7 @@
 	.4byte fn_8019EC68
 	.4byte fn_80192758
 	.4byte fn_8019EF70
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -18247,7 +18247,7 @@
 	.4byte fn_8019E670
 	.4byte fn_80192758
 	.4byte fn_8019EAF0
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -18289,7 +18289,7 @@
 	.4byte fn_8019E4A4
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -18331,7 +18331,7 @@
 	.4byte fn_8019DBA4
 	.4byte fn_8019DF0C
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -18369,7 +18369,7 @@
 	.4byte fn_8019D98C
 	.4byte fn_80192758
 	.4byte fn_8019DA3C
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -18411,7 +18411,7 @@
 	.4byte fn_8019C104
 	.4byte fn_8019C234
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -18453,7 +18453,7 @@
 	.4byte fn_8019BF8C
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -18495,7 +18495,7 @@
 	.4byte fn_8019BE14
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_8019BE88
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -18537,7 +18537,7 @@
 	.4byte fn_8019B6A8
 	.4byte fn_8019BA1C
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_8019BA08
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -18579,7 +18579,7 @@
 	.4byte fn_8019B068
 	.4byte fn_8019B0F0
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -18621,7 +18621,7 @@
 	.4byte fn_8019A8A8
 	.4byte fn_8019AC60
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -18663,7 +18663,7 @@
 	.4byte fn_8019A524
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -18705,7 +18705,7 @@
 	.4byte fn_80199AFC
 	.4byte fn_8019A0C4
 	.4byte fn_8019A020
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -18747,7 +18747,7 @@
 	.4byte fn_80199450
 	.4byte fn_80192758
 	.4byte fn_80199760
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -18789,7 +18789,7 @@
 	.4byte fn_8019905C
 	.4byte fn_80192758
 	.4byte fn_80199334
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -18831,7 +18831,7 @@
 	.4byte fn_80198874
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -18873,7 +18873,7 @@
 	.4byte fn_80198400
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -18915,7 +18915,7 @@
 	.4byte fn_80197994
 	.4byte fn_80197A68
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_80197DC8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -18957,7 +18957,7 @@
 	.4byte fn_801975F4
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -18995,7 +18995,7 @@
 	.4byte fn_80196CD4
 	.4byte fn_801971B8
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_80197518
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -19033,7 +19033,7 @@
 	.4byte fn_80196A98
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -19071,7 +19071,7 @@
 	.4byte fn_80196A20
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -19113,7 +19113,7 @@
 	.4byte fn_80196A18
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -19155,7 +19155,7 @@
 	.4byte fn_80196548
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -19197,7 +19197,7 @@
 	.4byte fn_80195AD0
 	.4byte fn_80192758
 	.4byte fn_801963F4
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_8019640C
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -19239,7 +19239,7 @@
 	.4byte fn_801953B8
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_801957D4
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -19281,7 +19281,7 @@
 	.4byte fn_80194790
 	.4byte fn_80192758
 	.4byte fn_80194D5C
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -19323,7 +19323,7 @@
 	.4byte fn_80194334
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -19365,7 +19365,7 @@
 	.4byte fn_801937CC
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -19407,7 +19407,7 @@
 	.4byte fn_80192948
 	.4byte fn_80193074
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_8019355C
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -19652,7 +19652,7 @@
 	.4byte fn_801A1D9C
 	.4byte fn_801A2058
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -19696,7 +19696,7 @@
 	.4byte fn_801A1854
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -19738,7 +19738,7 @@
 	.4byte fn_801A0C54
 	.4byte fn_801A10CC
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_801A1548
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -19826,7 +19826,7 @@
 	.4byte fn_801A2B58
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -19868,7 +19868,7 @@
 	.4byte fn_801A2414
 	.4byte fn_801A24E4
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_801A24E0
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -19970,7 +19970,7 @@
 	.4byte fn_801A73A4
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_801A7644
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -20186,7 +20186,7 @@
 	.4byte fn_801A34D4
 	.4byte fn_801A3DFC
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -20354,7 +20354,7 @@
 	.4byte fn_801A90E4
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -20396,7 +20396,7 @@
 	.4byte fn_801A8880
 	.4byte fn_801A8E68
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -20438,7 +20438,7 @@
 	.4byte fn_801AA8EC
 	.4byte fn_801AA94C
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -20480,7 +20480,7 @@
 	.4byte fn_801AA230
 	.4byte fn_801AA550
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -20522,7 +20522,7 @@
 	.4byte fn_801A9B80
 	.4byte fn_801A9E94
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -20564,7 +20564,7 @@
 	.4byte fn_801A8420
 	.4byte fn_801A84AC
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -20606,7 +20606,7 @@
 	.4byte fn_801A7E8C
 	.4byte fn_801A8080
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -20648,7 +20648,7 @@
 	.4byte fn_801A7870
 	.4byte fn_801A7A94
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -20760,7 +20760,7 @@
 	.4byte fn_801AAC48
 	.4byte fn_801AB294
 	.4byte fn_801AC2FC
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -20844,7 +20844,7 @@
 	.4byte fn_801AFF1C
 	.4byte fn_801B0300
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -20886,7 +20886,7 @@
 	.4byte fn_801AF97C
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -20928,7 +20928,7 @@
 	.4byte fn_801AF484
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -20970,7 +20970,7 @@
 	.4byte fn_801AF020
 	.4byte fn_801AF084
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_801AF250
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -21012,7 +21012,7 @@
 	.4byte fn_801AE9A4
 	.4byte fn_801AEA04
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_801AEF40
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -21054,7 +21054,7 @@
 	.4byte fn_801AE8C8
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -21096,7 +21096,7 @@
 	.4byte fn_801ADC14
 	.4byte fn_801AE4E8
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_801AE6D4
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -21138,7 +21138,7 @@
 	.4byte fn_801AD2B4
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -21180,7 +21180,7 @@
 	.4byte fn_801ACE88
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -21222,7 +21222,7 @@
 	.4byte fn_801ACA74
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -21348,7 +21348,7 @@
 	.4byte fn_801B0920
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -21390,7 +21390,7 @@
 	.4byte fn_801B07D4
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -21432,7 +21432,7 @@
 	.4byte fn_801B2560
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_801B26A4
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -21474,7 +21474,7 @@
 	.4byte fn_801B22AC
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_801B242C
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -21516,7 +21516,7 @@
 	.4byte fn_801B1AAC
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -21558,7 +21558,7 @@
 	.4byte fn_801B19C8
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -21600,7 +21600,7 @@
 	.4byte fn_801B1624
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -21642,7 +21642,7 @@
 	.4byte fn_801B1230
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -21684,7 +21684,7 @@
 	.4byte fn_801B0ED0
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_801B11A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -21740,7 +21740,7 @@
 	.4byte fn_801B2E14
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -21782,7 +21782,7 @@
 	.4byte fn_801B2A30
 	.4byte fn_801B2A80
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -21824,7 +21824,7 @@
 	.4byte fn_801B2934
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -21878,7 +21878,7 @@
 	.4byte fn_801B3EEC
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -21922,7 +21922,7 @@
 	.4byte fn_801B3098
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -21978,7 +21978,7 @@
 	.4byte fn_801B507C
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -22020,7 +22020,7 @@
 	.4byte fn_801B4788
 	.4byte fn_801B47EC
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -22062,7 +22062,7 @@
 	.4byte fn_801B44E8
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -22104,7 +22104,7 @@
 	.4byte fn_801B4344
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -22146,7 +22146,7 @@
 	.4byte fn_801B417C
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -22244,7 +22244,7 @@
 	.4byte fn_801B7218
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -22286,7 +22286,7 @@
 	.4byte fn_801B6E70
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -22328,7 +22328,7 @@
 	.4byte fn_801B6278
 	.4byte fn_801B6494
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -22370,7 +22370,7 @@
 	.4byte fn_801B5894
 	.4byte fn_801B5A2C
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -22412,7 +22412,7 @@
 	.4byte fn_801B5370
 	.4byte fn_801B54E8
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -22496,7 +22496,7 @@
 	.4byte fn_801B79D8
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -22538,7 +22538,7 @@
 	.4byte fn_801B74FC
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_801B779C
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -22580,7 +22580,7 @@
 	.4byte fn_801B9598
 	.4byte fn_80192758
 	.4byte fn_801B9814
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -22624,7 +22624,7 @@
 	.4byte fn_801B7CD0
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -22668,7 +22668,7 @@
 	.4byte fn_801B7CD0
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -22712,7 +22712,7 @@
 	.4byte fn_801B7CD0
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -22756,7 +22756,7 @@
 	.4byte fn_801B7CD0
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -22800,7 +22800,7 @@
 	.4byte fn_801B7CD0
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -22844,7 +22844,7 @@
 	.4byte fn_801B7CD0
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -22888,7 +22888,7 @@
 	.4byte fn_801B7F90
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -22932,7 +22932,7 @@
 	.4byte fn_801B7CD0
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -22974,7 +22974,7 @@
 	.4byte fn_801BBF84
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -23016,7 +23016,7 @@
 	.4byte fn_801BBBDC
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -23058,7 +23058,7 @@
 	.4byte fn_801BB514
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -23100,7 +23100,7 @@
 	.4byte fn_801B9DE4
 	.4byte fn_80192758
 	.4byte fn_801BAC74
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -23142,7 +23142,7 @@
 	.4byte fn_801BC4F4
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -23184,7 +23184,7 @@
 	.4byte fn_801BC3B4
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -23260,7 +23260,7 @@
 	.4byte fn_801B3098
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -23346,7 +23346,7 @@
 	.4byte fn_801BC97C
 	.4byte fn_801BDA9C
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -23432,7 +23432,7 @@
 	.4byte fn_801C2870
 	.4byte fn_801C2CC0
 	.4byte fn_801C2CA8
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -23474,7 +23474,7 @@
 	.4byte fn_801C1B50
 	.4byte fn_80192758
 	.4byte fn_801C1DB4
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -23516,7 +23516,7 @@
 	.4byte fn_801C1084
 	.4byte fn_80192758
 	.4byte fn_801C1518
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -23558,7 +23558,7 @@
 	.4byte fn_801C074C
 	.4byte fn_80192758
 	.4byte fn_801C0C08
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -23602,7 +23602,7 @@
 	.4byte fn_801C074C
 	.4byte fn_80192758
 	.4byte fn_801C0C08
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -23656,7 +23656,7 @@
 	.4byte 0x00000000
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -23684,7 +23684,7 @@
 	.4byte fn_801C4500
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -23726,7 +23726,7 @@
 	.4byte fn_801C40A4
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -23768,7 +23768,7 @@
 	.4byte fn_801C3F54
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -23818,7 +23818,7 @@
 	.4byte fn_801C6464
 	.4byte fn_801C6CDC
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_801C6CC8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -23860,7 +23860,7 @@
 	.4byte fn_801C5C50
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -23902,7 +23902,7 @@
 	.4byte fn_801C4F54
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -23964,7 +23964,7 @@
 	.4byte fn_801C71A8
 	.4byte fn_801C7390
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_801C7350
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -24006,7 +24006,7 @@
 	.4byte fn_801C6F90
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_801C702C
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -24060,7 +24060,7 @@
 	.4byte fn_801C815C
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -24102,7 +24102,7 @@
 	.4byte fn_801C8B88
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -24144,7 +24144,7 @@
 	.4byte fn_801C87D8
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -24186,7 +24186,7 @@
 	.4byte fn_801C900C
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -24228,7 +24228,7 @@
 	.4byte fn_801C951C
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -24270,7 +24270,7 @@
 	.4byte fn_801C9C68
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -24394,7 +24394,7 @@
 	.4byte fn_801CB2D4
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_801CB41C
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -24436,7 +24436,7 @@
 	.4byte fn_801CA1E0
 	.4byte fn_801CAAF0
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_801CB2BC
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -25916,166 +25916,166 @@
 
 # .data:0x12DD4 | 0x80783274 | size: 0x120
 .obj jumptable_80783274, global
-	.4byte fn_8021C6A4+0x44C
-	.4byte fn_8021C6A4+0x438
-	.4byte fn_8021C6A4+0x438
-	.4byte fn_8021C6A4+0x3AC
-	.4byte fn_8021C6A4+0x3E8
-	.4byte fn_8021C6A4+0x3E8
-	.4byte fn_8021C6A4+0x438
-	.4byte fn_8021C6A4+0x3E8
-	.4byte fn_8021C6A4+0x3E8
-	.4byte fn_8021C6A4+0x438
-	.4byte fn_8021C6A4+0x3E8
-	.4byte fn_8021C6A4+0x438
-	.4byte fn_8021C6A4+0x438
-	.4byte fn_8021C6A4+0x438
-	.4byte fn_8021C6A4+0x438
-	.4byte fn_8021C6A4+0x438
-	.4byte fn_8021C6A4+0x438
-	.4byte fn_8021C6A4+0x438
-	.4byte fn_8021C6A4+0x438
-	.4byte fn_8021C6A4+0x438
-	.4byte fn_8021C6A4+0x438
-	.4byte fn_8021C6A4+0x438
-	.4byte fn_8021C6A4+0x438
-	.4byte fn_8021C6A4+0x438
-	.4byte fn_8021C6A4+0x438
-	.4byte fn_8021C6A4+0x438
-	.4byte fn_8021C6A4+0x438
-	.4byte fn_8021C6A4+0x3E8
-	.4byte fn_8021C6A4+0x3E8
-	.4byte fn_8021C6A4+0x3E8
-	.4byte fn_8021C6A4+0x3E8
-	.4byte fn_8021C6A4+0x3E8
-	.4byte fn_8021C6A4+0x3E8
-	.4byte fn_8021C6A4+0x3E8
-	.4byte fn_8021C6A4+0x438
-	.4byte fn_8021C6A4+0x438
-	.4byte fn_8021C6A4+0x3E8
-	.4byte fn_8021C6A4+0x438
-	.4byte fn_8021C6A4+0x438
-	.4byte fn_8021C6A4+0x438
-	.4byte fn_8021C6A4+0x438
-	.4byte fn_8021C6A4+0x438
-	.4byte fn_8021C6A4+0x438
-	.4byte fn_8021C6A4+0x3E8
-	.4byte fn_8021C6A4+0x3E8
-	.4byte fn_8021C6A4+0x3E8
-	.4byte fn_8021C6A4+0x438
-	.4byte fn_8021C6A4+0x438
-	.4byte fn_8021C6A4+0x438
-	.4byte fn_8021C6A4+0x438
-	.4byte fn_8021C6A4+0x438
-	.4byte fn_8021C6A4+0x3E8
-	.4byte fn_8021C6A4+0x3E8
-	.4byte fn_8021C6A4+0x3E8
-	.4byte fn_8021C6A4+0x3E8
-	.4byte fn_8021C6A4+0x3E8
-	.4byte fn_8021C6A4+0x3E8
-	.4byte fn_8021C6A4+0x3E8
-	.4byte fn_8021C6A4+0x3E8
-	.4byte fn_8021C6A4+0x3E8
-	.4byte fn_8021C6A4+0x438
-	.4byte fn_8021C6A4+0x438
-	.4byte fn_8021C6A4+0x438
-	.4byte fn_8021C6A4+0x3FC
-	.4byte fn_8021C6A4+0x438
-	.4byte fn_8021C6A4+0x438
-	.4byte fn_8021C6A4+0x3E8
-	.4byte fn_8021C6A4+0x3AC
-	.4byte fn_8021C6A4+0x438
-	.4byte fn_8021C6A4+0x3E8
-	.4byte fn_8021C6A4+0x3E8
-	.4byte fn_8021C6A4+0x3E8
+	.4byte thread_pool_dispatchTask+0x44C
+	.4byte thread_pool_dispatchTask+0x438
+	.4byte thread_pool_dispatchTask+0x438
+	.4byte thread_pool_dispatchTask+0x3AC
+	.4byte thread_pool_dispatchTask+0x3E8
+	.4byte thread_pool_dispatchTask+0x3E8
+	.4byte thread_pool_dispatchTask+0x438
+	.4byte thread_pool_dispatchTask+0x3E8
+	.4byte thread_pool_dispatchTask+0x3E8
+	.4byte thread_pool_dispatchTask+0x438
+	.4byte thread_pool_dispatchTask+0x3E8
+	.4byte thread_pool_dispatchTask+0x438
+	.4byte thread_pool_dispatchTask+0x438
+	.4byte thread_pool_dispatchTask+0x438
+	.4byte thread_pool_dispatchTask+0x438
+	.4byte thread_pool_dispatchTask+0x438
+	.4byte thread_pool_dispatchTask+0x438
+	.4byte thread_pool_dispatchTask+0x438
+	.4byte thread_pool_dispatchTask+0x438
+	.4byte thread_pool_dispatchTask+0x438
+	.4byte thread_pool_dispatchTask+0x438
+	.4byte thread_pool_dispatchTask+0x438
+	.4byte thread_pool_dispatchTask+0x438
+	.4byte thread_pool_dispatchTask+0x438
+	.4byte thread_pool_dispatchTask+0x438
+	.4byte thread_pool_dispatchTask+0x438
+	.4byte thread_pool_dispatchTask+0x438
+	.4byte thread_pool_dispatchTask+0x3E8
+	.4byte thread_pool_dispatchTask+0x3E8
+	.4byte thread_pool_dispatchTask+0x3E8
+	.4byte thread_pool_dispatchTask+0x3E8
+	.4byte thread_pool_dispatchTask+0x3E8
+	.4byte thread_pool_dispatchTask+0x3E8
+	.4byte thread_pool_dispatchTask+0x3E8
+	.4byte thread_pool_dispatchTask+0x438
+	.4byte thread_pool_dispatchTask+0x438
+	.4byte thread_pool_dispatchTask+0x3E8
+	.4byte thread_pool_dispatchTask+0x438
+	.4byte thread_pool_dispatchTask+0x438
+	.4byte thread_pool_dispatchTask+0x438
+	.4byte thread_pool_dispatchTask+0x438
+	.4byte thread_pool_dispatchTask+0x438
+	.4byte thread_pool_dispatchTask+0x438
+	.4byte thread_pool_dispatchTask+0x3E8
+	.4byte thread_pool_dispatchTask+0x3E8
+	.4byte thread_pool_dispatchTask+0x3E8
+	.4byte thread_pool_dispatchTask+0x438
+	.4byte thread_pool_dispatchTask+0x438
+	.4byte thread_pool_dispatchTask+0x438
+	.4byte thread_pool_dispatchTask+0x438
+	.4byte thread_pool_dispatchTask+0x438
+	.4byte thread_pool_dispatchTask+0x3E8
+	.4byte thread_pool_dispatchTask+0x3E8
+	.4byte thread_pool_dispatchTask+0x3E8
+	.4byte thread_pool_dispatchTask+0x3E8
+	.4byte thread_pool_dispatchTask+0x3E8
+	.4byte thread_pool_dispatchTask+0x3E8
+	.4byte thread_pool_dispatchTask+0x3E8
+	.4byte thread_pool_dispatchTask+0x3E8
+	.4byte thread_pool_dispatchTask+0x3E8
+	.4byte thread_pool_dispatchTask+0x438
+	.4byte thread_pool_dispatchTask+0x438
+	.4byte thread_pool_dispatchTask+0x438
+	.4byte thread_pool_dispatchTask+0x3FC
+	.4byte thread_pool_dispatchTask+0x438
+	.4byte thread_pool_dispatchTask+0x438
+	.4byte thread_pool_dispatchTask+0x3E8
+	.4byte thread_pool_dispatchTask+0x3AC
+	.4byte thread_pool_dispatchTask+0x438
+	.4byte thread_pool_dispatchTask+0x3E8
+	.4byte thread_pool_dispatchTask+0x3E8
+	.4byte thread_pool_dispatchTask+0x3E8
 .endobj jumptable_80783274
 
 # .data:0x12EF4 | 0x80783394 | size: 0x20
 .obj jumptable_80783394, global
-	.4byte fn_8021C6A4+0x11C
-	.4byte fn_8021C6A4+0x130
-	.4byte fn_8021C6A4+0x170
-	.4byte fn_8021C6A4+0x1A4
-	.4byte fn_8021C6A4+0x1BC
-	.4byte fn_8021C6A4+0x1F0
-	.4byte fn_8021C6A4+0x218
-	.4byte fn_8021C6A4+0x258
+	.4byte thread_pool_dispatchTask+0x11C
+	.4byte thread_pool_dispatchTask+0x130
+	.4byte thread_pool_dispatchTask+0x170
+	.4byte thread_pool_dispatchTask+0x1A4
+	.4byte thread_pool_dispatchTask+0x1BC
+	.4byte thread_pool_dispatchTask+0x1F0
+	.4byte thread_pool_dispatchTask+0x218
+	.4byte thread_pool_dispatchTask+0x258
 .endobj jumptable_80783394
 
 # .data:0x12F14 | 0x807833B4 | size: 0x120
 .obj jumptable_807833B4, global
-	.4byte fn_8021C6A4+0xF8
-	.4byte fn_8021C6A4+0xF0
-	.4byte fn_8021C6A4+0xF0
-	.4byte fn_8021C6A4+0xD0
-	.4byte fn_8021C6A4+0xE0
-	.4byte fn_8021C6A4+0xD8
-	.4byte fn_8021C6A4+0xF0
-	.4byte fn_8021C6A4+0xE0
-	.4byte fn_8021C6A4+0xE0
-	.4byte fn_8021C6A4+0xF0
-	.4byte fn_8021C6A4+0xE0
-	.4byte fn_8021C6A4+0xF0
-	.4byte fn_8021C6A4+0xF0
-	.4byte fn_8021C6A4+0xF0
-	.4byte fn_8021C6A4+0xF0
-	.4byte fn_8021C6A4+0xF0
-	.4byte fn_8021C6A4+0xF0
-	.4byte fn_8021C6A4+0xF0
-	.4byte fn_8021C6A4+0xF0
-	.4byte fn_8021C6A4+0xF0
-	.4byte fn_8021C6A4+0xF0
-	.4byte fn_8021C6A4+0xF0
-	.4byte fn_8021C6A4+0xF0
-	.4byte fn_8021C6A4+0xF0
-	.4byte fn_8021C6A4+0xF0
-	.4byte fn_8021C6A4+0xF0
-	.4byte fn_8021C6A4+0xF0
-	.4byte fn_8021C6A4+0xE0
-	.4byte fn_8021C6A4+0xE0
-	.4byte fn_8021C6A4+0xE0
-	.4byte fn_8021C6A4+0xE0
-	.4byte fn_8021C6A4+0xE0
-	.4byte fn_8021C6A4+0xD8
-	.4byte fn_8021C6A4+0xD8
-	.4byte fn_8021C6A4+0xF0
-	.4byte fn_8021C6A4+0xE0
-	.4byte fn_8021C6A4+0xE0
-	.4byte fn_8021C6A4+0xF0
-	.4byte fn_8021C6A4+0xF0
-	.4byte fn_8021C6A4+0xF0
-	.4byte fn_8021C6A4+0xF0
-	.4byte fn_8021C6A4+0xF0
-	.4byte fn_8021C6A4+0xF0
-	.4byte fn_8021C6A4+0xE0
-	.4byte fn_8021C6A4+0xE0
-	.4byte fn_8021C6A4+0xE0
-	.4byte fn_8021C6A4+0xF0
-	.4byte fn_8021C6A4+0xF0
-	.4byte fn_8021C6A4+0xF0
-	.4byte fn_8021C6A4+0xF0
-	.4byte fn_8021C6A4+0xF0
-	.4byte fn_8021C6A4+0xE0
-	.4byte fn_8021C6A4+0xE0
-	.4byte fn_8021C6A4+0xE0
-	.4byte fn_8021C6A4+0xE0
-	.4byte fn_8021C6A4+0xE0
-	.4byte fn_8021C6A4+0xE0
-	.4byte fn_8021C6A4+0xE0
-	.4byte fn_8021C6A4+0xE0
-	.4byte fn_8021C6A4+0xE0
-	.4byte fn_8021C6A4+0xF0
-	.4byte fn_8021C6A4+0xF0
-	.4byte fn_8021C6A4+0xF0
-	.4byte fn_8021C6A4+0xE8
-	.4byte fn_8021C6A4+0xF0
-	.4byte fn_8021C6A4+0xF0
-	.4byte fn_8021C6A4+0xD8
-	.4byte fn_8021C6A4+0xD0
-	.4byte fn_8021C6A4+0xD8
-	.4byte fn_8021C6A4+0xE0
-	.4byte fn_8021C6A4+0xF0
-	.4byte fn_8021C6A4+0xE0
+	.4byte thread_pool_dispatchTask+0xF8
+	.4byte thread_pool_dispatchTask+0xF0
+	.4byte thread_pool_dispatchTask+0xF0
+	.4byte thread_pool_dispatchTask+0xD0
+	.4byte thread_pool_dispatchTask+0xE0
+	.4byte thread_pool_dispatchTask+0xD8
+	.4byte thread_pool_dispatchTask+0xF0
+	.4byte thread_pool_dispatchTask+0xE0
+	.4byte thread_pool_dispatchTask+0xE0
+	.4byte thread_pool_dispatchTask+0xF0
+	.4byte thread_pool_dispatchTask+0xE0
+	.4byte thread_pool_dispatchTask+0xF0
+	.4byte thread_pool_dispatchTask+0xF0
+	.4byte thread_pool_dispatchTask+0xF0
+	.4byte thread_pool_dispatchTask+0xF0
+	.4byte thread_pool_dispatchTask+0xF0
+	.4byte thread_pool_dispatchTask+0xF0
+	.4byte thread_pool_dispatchTask+0xF0
+	.4byte thread_pool_dispatchTask+0xF0
+	.4byte thread_pool_dispatchTask+0xF0
+	.4byte thread_pool_dispatchTask+0xF0
+	.4byte thread_pool_dispatchTask+0xF0
+	.4byte thread_pool_dispatchTask+0xF0
+	.4byte thread_pool_dispatchTask+0xF0
+	.4byte thread_pool_dispatchTask+0xF0
+	.4byte thread_pool_dispatchTask+0xF0
+	.4byte thread_pool_dispatchTask+0xF0
+	.4byte thread_pool_dispatchTask+0xE0
+	.4byte thread_pool_dispatchTask+0xE0
+	.4byte thread_pool_dispatchTask+0xE0
+	.4byte thread_pool_dispatchTask+0xE0
+	.4byte thread_pool_dispatchTask+0xE0
+	.4byte thread_pool_dispatchTask+0xD8
+	.4byte thread_pool_dispatchTask+0xD8
+	.4byte thread_pool_dispatchTask+0xF0
+	.4byte thread_pool_dispatchTask+0xE0
+	.4byte thread_pool_dispatchTask+0xE0
+	.4byte thread_pool_dispatchTask+0xF0
+	.4byte thread_pool_dispatchTask+0xF0
+	.4byte thread_pool_dispatchTask+0xF0
+	.4byte thread_pool_dispatchTask+0xF0
+	.4byte thread_pool_dispatchTask+0xF0
+	.4byte thread_pool_dispatchTask+0xF0
+	.4byte thread_pool_dispatchTask+0xE0
+	.4byte thread_pool_dispatchTask+0xE0
+	.4byte thread_pool_dispatchTask+0xE0
+	.4byte thread_pool_dispatchTask+0xF0
+	.4byte thread_pool_dispatchTask+0xF0
+	.4byte thread_pool_dispatchTask+0xF0
+	.4byte thread_pool_dispatchTask+0xF0
+	.4byte thread_pool_dispatchTask+0xF0
+	.4byte thread_pool_dispatchTask+0xE0
+	.4byte thread_pool_dispatchTask+0xE0
+	.4byte thread_pool_dispatchTask+0xE0
+	.4byte thread_pool_dispatchTask+0xE0
+	.4byte thread_pool_dispatchTask+0xE0
+	.4byte thread_pool_dispatchTask+0xE0
+	.4byte thread_pool_dispatchTask+0xE0
+	.4byte thread_pool_dispatchTask+0xE0
+	.4byte thread_pool_dispatchTask+0xE0
+	.4byte thread_pool_dispatchTask+0xF0
+	.4byte thread_pool_dispatchTask+0xF0
+	.4byte thread_pool_dispatchTask+0xF0
+	.4byte thread_pool_dispatchTask+0xE8
+	.4byte thread_pool_dispatchTask+0xF0
+	.4byte thread_pool_dispatchTask+0xF0
+	.4byte thread_pool_dispatchTask+0xD8
+	.4byte thread_pool_dispatchTask+0xD0
+	.4byte thread_pool_dispatchTask+0xD8
+	.4byte thread_pool_dispatchTask+0xE0
+	.4byte thread_pool_dispatchTask+0xF0
+	.4byte thread_pool_dispatchTask+0xE0
 .endobj jumptable_807833B4
 
 # .data:0x13034 | 0x807834D4 | size: 0x3C
@@ -27366,7 +27366,7 @@
 	.4byte fn_80253F00
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -34176,7 +34176,7 @@
 	.4byte fn_8035BDE8
 	.4byte fn_80192758
 	.4byte fn_80192578
-	.4byte fn_80192590
+	.4byte map_stream_buildTransformMtx
 	.4byte fn_800E70A8
 	.4byte fn_80158C9C
 	.4byte fn_80158D58
@@ -35072,144 +35072,144 @@
 
 # .data:0x1A0B8 | 0x8078A558 | size: 0x228
 .obj jumptable_8078A558, global
-	.4byte fn_8038F52C+0x2E0
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0x234
-	.4byte fn_8038F52C+0x380
-	.4byte fn_8038F52C+0x380
-	.4byte fn_8038F52C+0x224
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xEC
-	.4byte fn_8038F52C+0xFC
-	.4byte fn_8038F52C+0x224
-	.4byte fn_8038F52C+0x224
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0x254
-	.4byte fn_8038F52C+0x234
-	.4byte fn_8038F52C+0x234
-	.4byte fn_8038F52C+0x234
-	.4byte fn_8038F52C+0x234
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0x1A4
-	.4byte fn_8038F52C+0x1F4
-	.4byte fn_8038F52C+0x1F4
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xEC
-	.4byte fn_8038F52C+0xEC
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0x294
-	.4byte fn_8038F52C+0x234
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0x2E0
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0x2E0
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0x234
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0x31C
-	.4byte fn_8038F52C+0x32C
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0x33C
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0x234
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0x380
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0x360
-	.4byte fn_8038F52C+0x360
-	.4byte fn_8038F52C+0x360
-	.4byte fn_8038F52C+0x30C
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0x30C
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0x9D0
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xDF8
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xA70
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0xA20
-	.4byte fn_8038F52C+0xBDC
-	.4byte fn_8038F52C+0xD04
-	.4byte fn_8038F52C+0x3D4
+	.4byte net_syncPlayerActorState+0x2E0
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0x234
+	.4byte net_syncPlayerActorState+0x380
+	.4byte net_syncPlayerActorState+0x380
+	.4byte net_syncPlayerActorState+0x224
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xEC
+	.4byte net_syncPlayerActorState+0xFC
+	.4byte net_syncPlayerActorState+0x224
+	.4byte net_syncPlayerActorState+0x224
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0x254
+	.4byte net_syncPlayerActorState+0x234
+	.4byte net_syncPlayerActorState+0x234
+	.4byte net_syncPlayerActorState+0x234
+	.4byte net_syncPlayerActorState+0x234
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0x1A4
+	.4byte net_syncPlayerActorState+0x1F4
+	.4byte net_syncPlayerActorState+0x1F4
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xEC
+	.4byte net_syncPlayerActorState+0xEC
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0x294
+	.4byte net_syncPlayerActorState+0x234
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0x2E0
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0x2E0
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0x234
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0x31C
+	.4byte net_syncPlayerActorState+0x32C
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0x33C
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0x234
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0x380
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0x360
+	.4byte net_syncPlayerActorState+0x360
+	.4byte net_syncPlayerActorState+0x360
+	.4byte net_syncPlayerActorState+0x30C
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0x30C
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0x9D0
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xDF8
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xA70
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0xA20
+	.4byte net_syncPlayerActorState+0xBDC
+	.4byte net_syncPlayerActorState+0xD04
+	.4byte net_syncPlayerActorState+0x3D4
 .endobj jumptable_8078A558
 
 # .data:0x1A2E0 | 0x8078A780 | size: 0x8
@@ -35602,116 +35602,116 @@
 
 # .data:0x1A8A0 | 0x8078AD40 | size: 0x1B8
 .obj jumptable_8078AD40, global
-	.4byte fn_8039CF8C+0x190
-	.4byte fn_8039CF8C+0x174
-	.4byte fn_8039CF8C+0x190
-	.4byte fn_8039CF8C+0x174
-	.4byte fn_8039CF8C+0x174
-	.4byte fn_8039CF8C+0x174
-	.4byte fn_8039CF8C+0x190
-	.4byte fn_8039CF8C+0x174
-	.4byte fn_8039CF8C+0x174
-	.4byte fn_8039CF8C+0x190
-	.4byte fn_8039CF8C+0x190
-	.4byte fn_8039CF8C+0x190
-	.4byte fn_8039CF8C+0x190
-	.4byte fn_8039CF8C+0x174
-	.4byte fn_8039CF8C+0x190
-	.4byte fn_8039CF8C+0x174
-	.4byte fn_8039CF8C+0x174
-	.4byte fn_8039CF8C+0x174
-	.4byte fn_8039CF8C+0x190
-	.4byte fn_8039CF8C+0x190
-	.4byte fn_8039CF8C+0x174
-	.4byte fn_8039CF8C+0x190
-	.4byte fn_8039CF8C+0x190
-	.4byte fn_8039CF8C+0x190
-	.4byte fn_8039CF8C+0x190
-	.4byte fn_8039CF8C+0x174
-	.4byte fn_8039CF8C+0x190
-	.4byte fn_8039CF8C+0x190
-	.4byte fn_8039CF8C+0x174
-	.4byte fn_8039CF8C+0x174
-	.4byte fn_8039CF8C+0x174
-	.4byte fn_8039CF8C+0x174
-	.4byte fn_8039CF8C+0x190
-	.4byte fn_8039CF8C+0x190
-	.4byte fn_8039CF8C+0x190
-	.4byte fn_8039CF8C+0x190
-	.4byte fn_8039CF8C+0x174
-	.4byte fn_8039CF8C+0x190
-	.4byte fn_8039CF8C+0x190
-	.4byte fn_8039CF8C+0x174
-	.4byte fn_8039CF8C+0x174
-	.4byte fn_8039CF8C+0x174
-	.4byte fn_8039CF8C+0x190
-	.4byte fn_8039CF8C+0x174
-	.4byte fn_8039CF8C+0x174
-	.4byte fn_8039CF8C+0x174
-	.4byte fn_8039CF8C+0x174
-	.4byte fn_8039CF8C+0x190
-	.4byte fn_8039CF8C+0x190
-	.4byte fn_8039CF8C+0x190
-	.4byte fn_8039CF8C+0x190
-	.4byte fn_8039CF8C+0x190
-	.4byte fn_8039CF8C+0x190
-	.4byte fn_8039CF8C+0x190
-	.4byte fn_8039CF8C+0x190
-	.4byte fn_8039CF8C+0x190
-	.4byte fn_8039CF8C+0x174
-	.4byte fn_8039CF8C+0x174
-	.4byte fn_8039CF8C+0x174
-	.4byte fn_8039CF8C+0x190
-	.4byte fn_8039CF8C+0x174
-	.4byte fn_8039CF8C+0x174
-	.4byte fn_8039CF8C+0x174
-	.4byte fn_8039CF8C+0x190
-	.4byte fn_8039CF8C+0x190
-	.4byte fn_8039CF8C+0x190
-	.4byte fn_8039CF8C+0x190
-	.4byte fn_8039CF8C+0x190
-	.4byte fn_8039CF8C+0x190
-	.4byte fn_8039CF8C+0x190
-	.4byte fn_8039CF8C+0x190
-	.4byte fn_8039CF8C+0x190
-	.4byte fn_8039CF8C+0x190
-	.4byte fn_8039CF8C+0x190
-	.4byte fn_8039CF8C+0x190
-	.4byte fn_8039CF8C+0x190
-	.4byte fn_8039CF8C+0x190
-	.4byte fn_8039CF8C+0x190
-	.4byte fn_8039CF8C+0x190
-	.4byte fn_8039CF8C+0x174
-	.4byte fn_8039CF8C+0x190
-	.4byte fn_8039CF8C+0x190
-	.4byte fn_8039CF8C+0x190
-	.4byte fn_8039CF8C+0x174
-	.4byte fn_8039CF8C+0x190
-	.4byte fn_8039CF8C+0x190
-	.4byte fn_8039CF8C+0x174
-	.4byte fn_8039CF8C+0x190
-	.4byte fn_8039CF8C+0x190
-	.4byte fn_8039CF8C+0x190
-	.4byte fn_8039CF8C+0x190
-	.4byte fn_8039CF8C+0x174
-	.4byte fn_8039CF8C+0x174
-	.4byte fn_8039CF8C+0x174
-	.4byte fn_8039CF8C+0x174
-	.4byte fn_8039CF8C+0x174
-	.4byte fn_8039CF8C+0x174
-	.4byte fn_8039CF8C+0x174
-	.4byte fn_8039CF8C+0x190
-	.4byte fn_8039CF8C+0x190
-	.4byte fn_8039CF8C+0x190
-	.4byte fn_8039CF8C+0x174
-	.4byte fn_8039CF8C+0x190
-	.4byte fn_8039CF8C+0x190
-	.4byte fn_8039CF8C+0x190
-	.4byte fn_8039CF8C+0x190
-	.4byte fn_8039CF8C+0x174
-	.4byte fn_8039CF8C+0x190
-	.4byte fn_8039CF8C+0x174
-	.4byte fn_8039CF8C+0x174
+	.4byte net_coop_processPacket+0x190
+	.4byte net_coop_processPacket+0x174
+	.4byte net_coop_processPacket+0x190
+	.4byte net_coop_processPacket+0x174
+	.4byte net_coop_processPacket+0x174
+	.4byte net_coop_processPacket+0x174
+	.4byte net_coop_processPacket+0x190
+	.4byte net_coop_processPacket+0x174
+	.4byte net_coop_processPacket+0x174
+	.4byte net_coop_processPacket+0x190
+	.4byte net_coop_processPacket+0x190
+	.4byte net_coop_processPacket+0x190
+	.4byte net_coop_processPacket+0x190
+	.4byte net_coop_processPacket+0x174
+	.4byte net_coop_processPacket+0x190
+	.4byte net_coop_processPacket+0x174
+	.4byte net_coop_processPacket+0x174
+	.4byte net_coop_processPacket+0x174
+	.4byte net_coop_processPacket+0x190
+	.4byte net_coop_processPacket+0x190
+	.4byte net_coop_processPacket+0x174
+	.4byte net_coop_processPacket+0x190
+	.4byte net_coop_processPacket+0x190
+	.4byte net_coop_processPacket+0x190
+	.4byte net_coop_processPacket+0x190
+	.4byte net_coop_processPacket+0x174
+	.4byte net_coop_processPacket+0x190
+	.4byte net_coop_processPacket+0x190
+	.4byte net_coop_processPacket+0x174
+	.4byte net_coop_processPacket+0x174
+	.4byte net_coop_processPacket+0x174
+	.4byte net_coop_processPacket+0x174
+	.4byte net_coop_processPacket+0x190
+	.4byte net_coop_processPacket+0x190
+	.4byte net_coop_processPacket+0x190
+	.4byte net_coop_processPacket+0x190
+	.4byte net_coop_processPacket+0x174
+	.4byte net_coop_processPacket+0x190
+	.4byte net_coop_processPacket+0x190
+	.4byte net_coop_processPacket+0x174
+	.4byte net_coop_processPacket+0x174
+	.4byte net_coop_processPacket+0x174
+	.4byte net_coop_processPacket+0x190
+	.4byte net_coop_processPacket+0x174
+	.4byte net_coop_processPacket+0x174
+	.4byte net_coop_processPacket+0x174
+	.4byte net_coop_processPacket+0x174
+	.4byte net_coop_processPacket+0x190
+	.4byte net_coop_processPacket+0x190
+	.4byte net_coop_processPacket+0x190
+	.4byte net_coop_processPacket+0x190
+	.4byte net_coop_processPacket+0x190
+	.4byte net_coop_processPacket+0x190
+	.4byte net_coop_processPacket+0x190
+	.4byte net_coop_processPacket+0x190
+	.4byte net_coop_processPacket+0x190
+	.4byte net_coop_processPacket+0x174
+	.4byte net_coop_processPacket+0x174
+	.4byte net_coop_processPacket+0x174
+	.4byte net_coop_processPacket+0x190
+	.4byte net_coop_processPacket+0x174
+	.4byte net_coop_processPacket+0x174
+	.4byte net_coop_processPacket+0x174
+	.4byte net_coop_processPacket+0x190
+	.4byte net_coop_processPacket+0x190
+	.4byte net_coop_processPacket+0x190
+	.4byte net_coop_processPacket+0x190
+	.4byte net_coop_processPacket+0x190
+	.4byte net_coop_processPacket+0x190
+	.4byte net_coop_processPacket+0x190
+	.4byte net_coop_processPacket+0x190
+	.4byte net_coop_processPacket+0x190
+	.4byte net_coop_processPacket+0x190
+	.4byte net_coop_processPacket+0x190
+	.4byte net_coop_processPacket+0x190
+	.4byte net_coop_processPacket+0x190
+	.4byte net_coop_processPacket+0x190
+	.4byte net_coop_processPacket+0x190
+	.4byte net_coop_processPacket+0x190
+	.4byte net_coop_processPacket+0x174
+	.4byte net_coop_processPacket+0x190
+	.4byte net_coop_processPacket+0x190
+	.4byte net_coop_processPacket+0x190
+	.4byte net_coop_processPacket+0x174
+	.4byte net_coop_processPacket+0x190
+	.4byte net_coop_processPacket+0x190
+	.4byte net_coop_processPacket+0x174
+	.4byte net_coop_processPacket+0x190
+	.4byte net_coop_processPacket+0x190
+	.4byte net_coop_processPacket+0x190
+	.4byte net_coop_processPacket+0x190
+	.4byte net_coop_processPacket+0x174
+	.4byte net_coop_processPacket+0x174
+	.4byte net_coop_processPacket+0x174
+	.4byte net_coop_processPacket+0x174
+	.4byte net_coop_processPacket+0x174
+	.4byte net_coop_processPacket+0x174
+	.4byte net_coop_processPacket+0x174
+	.4byte net_coop_processPacket+0x190
+	.4byte net_coop_processPacket+0x190
+	.4byte net_coop_processPacket+0x190
+	.4byte net_coop_processPacket+0x174
+	.4byte net_coop_processPacket+0x190
+	.4byte net_coop_processPacket+0x190
+	.4byte net_coop_processPacket+0x190
+	.4byte net_coop_processPacket+0x190
+	.4byte net_coop_processPacket+0x174
+	.4byte net_coop_processPacket+0x190
+	.4byte net_coop_processPacket+0x174
+	.4byte net_coop_processPacket+0x174
 .endobj jumptable_8078AD40
 
 # .data:0x1AA58 | 0x8078AEF8 | size: 0x4C

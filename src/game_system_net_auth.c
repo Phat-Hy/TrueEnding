@@ -24,7 +24,7 @@ extern void fn_8039AF50(void);
 extern void fn_8039B2BC(void);
 extern void fn_8039B7B0(void);
 extern void fn_8039C7F0(void);
-extern void fn_8039CF8C(void);
+extern void net_coop_processPacket(void);
 extern void fn_803AB428(void);
 extern void fn_803AD750(void);
 extern void fn_803ADC90(void);
@@ -2005,7 +2005,7 @@ lbl_fn_80398704_00001AC4:
     beq lbl_fn_80398704_00001AE0
     lwz r4, 0x94(r28)
     mr r3, r28
-    bl fn_8039CF8C
+    bl net_coop_processPacket
     b lbl_fn_80398704_00001AE4
 lbl_fn_80398704_00001AE0:
     li r3, 0x1
@@ -2057,7 +2057,7 @@ lbl_fn_80398704_00001B04:
     beq lbl_fn_80398704_00001BCC
     lwz r4, 0x5c(r1)
     mr r3, r28
-    bl fn_8039CF8C
+    bl net_coop_processPacket
     cmpwi r3, 0x0
     bne lbl_fn_80398704_00001BCC
     lwz r3, 0x64(r1)

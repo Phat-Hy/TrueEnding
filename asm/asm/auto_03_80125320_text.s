@@ -45941,7 +45941,7 @@
 /* 8014DC0C 0014826C  7F A3 EB 78 */	mr r3, r29
 /* 8014DC10 00148270  7F C4 F3 78 */	mr r4, r30
 /* 8014DC14 00148274  7F E5 FB 78 */	mr r5, r31
-/* 8014DC18 00148278  48 00 57 B1 */	bl fn_801533C8
+/* 8014DC18 00148278  48 00 57 B1 */	bl inventory_hasItem
 /* 8014DC1C 0014827C  2C 03 00 00 */	cmpwi r3, 0x0
 /* 8014DC20 00148280  40 82 00 38 */	bne .L_8014DC58
 /* 8014DC24 00148284  38 61 00 58 */	addi r3, r1, 0x58
@@ -46100,7 +46100,7 @@
 /* 8014DE44 001484A4  7F A3 EB 78 */	mr r3, r29
 /* 8014DE48 001484A8  7F C4 F3 78 */	mr r4, r30
 /* 8014DE4C 001484AC  7F E5 FB 78 */	mr r5, r31
-/* 8014DE50 001484B0  48 00 55 79 */	bl fn_801533C8
+/* 8014DE50 001484B0  48 00 55 79 */	bl inventory_hasItem
 /* 8014DE54 001484B4  2C 03 00 00 */	cmpwi r3, 0x0
 /* 8014DE58 001484B8  40 82 00 38 */	bne .L_8014DE90
 /* 8014DE5C 001484BC  38 61 00 58 */	addi r3, r1, 0x58
@@ -49005,7 +49005,7 @@
 .endfn fn_8015061C
 
 # .text:0x2B44C | 0x8015076C | size: 0x9F0
-.fn fn_8015076C, global
+.fn dialog_event_executeAction, global
 /* 8015076C 0014ADCC  94 21 FD D0 */	stwu r1, -0x230(r1)
 /* 80150770 0014ADD0  7C 08 02 A6 */	mflr r0
 /* 80150774 0014ADD4  90 01 02 34 */	stw r0, 0x234(r1)
@@ -49692,7 +49692,7 @@
 /* 80151150 0014B7B0  7C 08 03 A6 */	mtlr r0
 /* 80151154 0014B7B4  38 21 02 30 */	addi r1, r1, 0x230
 /* 80151158 0014B7B8  4E 80 00 20 */	blr
-.endfn fn_8015076C
+.endfn dialog_event_executeAction
 
 # .text:0x2BE3C | 0x8015115C | size: 0xC
 .fn fn_8015115C, global
@@ -50505,7 +50505,7 @@
 /* 80151C18 0014C278  7F 69 DB 78 */	mr r9, r27
 /* 80151C1C 0014C27C  38 BB 00 10 */	addi r5, r27, 0x10
 /* 80151C20 0014C280  38 DB 00 1C */	addi r6, r27, 0x1c
-/* 80151C24 0014C284  4B FF EB 49 */	bl fn_8015076C
+/* 80151C24 0014C284  4B FF EB 49 */	bl dialog_event_executeAction
 .L_80151C28:
 /* 80151C28 0014C288  80 7B 00 08 */	lwz r3, 0x8(r27)
 /* 80151C2C 0014C28C  57 A0 06 B4 */	rlwinm r0, r29, 0, 26, 26
@@ -50716,7 +50716,7 @@
 /* 80151F1C 0014C57C  7F 69 DB 78 */	mr r9, r27
 /* 80151F20 0014C580  38 BB 00 10 */	addi r5, r27, 0x10
 /* 80151F24 0014C584  38 DB 00 1C */	addi r6, r27, 0x1c
-/* 80151F28 0014C588  4B FF E8 45 */	bl fn_8015076C
+/* 80151F28 0014C588  4B FF E8 45 */	bl dialog_event_executeAction
 .L_80151F2C:
 /* 80151F2C 0014C58C  80 BB 00 08 */	lwz r5, 0x8(r27)
 /* 80151F30 0014C590  57 A3 EF FE */	extrwi r3, r29, 1, 28
@@ -51087,7 +51087,7 @@
 /* 80152478 0014CAD8  7F 69 DB 78 */	mr r9, r27
 /* 8015247C 0014CADC  38 BB 00 10 */	addi r5, r27, 0x10
 /* 80152480 0014CAE0  38 DB 00 1C */	addi r6, r27, 0x1c
-/* 80152484 0014CAE4  4B FF E2 E9 */	bl fn_8015076C
+/* 80152484 0014CAE4  4B FF E2 E9 */	bl dialog_event_executeAction
 .L_80152488:
 /* 80152488 0014CAE8  80 7B 00 08 */	lwz r3, 0x8(r27)
 /* 8015248C 0014CAEC  38 00 FF FF */	li r0, -0x1
@@ -52169,7 +52169,7 @@
 .endfn fn_80153004
 
 # .text:0x2E0A8 | 0x801533C8 | size: 0x2D0
-.fn fn_801533C8, global
+.fn inventory_hasItem, global
 /* 801533C8 0014DA28  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 801533CC 0014DA2C  7C 08 02 A6 */	mflr r0
 /* 801533D0 0014DA30  38 E3 06 D4 */	addi r7, r3, 0x6d4
@@ -52371,7 +52371,7 @@
 /* 8015368C 0014DCEC  7C 08 03 A6 */	mtlr r0
 /* 80153690 0014DCF0  38 21 00 10 */	addi r1, r1, 0x10
 /* 80153694 0014DCF4  4E 80 00 20 */	blr
-.endfn fn_801533C8
+.endfn inventory_hasItem
 
 # .text:0x2E378 | 0x80153698 | size: 0x348
 .fn fn_80153698, global
@@ -123627,7 +123627,7 @@
 .endfn fn_80192578
 
 # .text:0x6D270 | 0x80192590 | size: 0x1C8
-.fn fn_80192590, global
+.fn map_stream_buildTransformMtx, global
 /* 80192590 0018CBF0  94 21 FE 80 */	stwu r1, -0x180(r1)
 /* 80192594 0018CBF4  7C 08 02 A6 */	mflr r0
 /* 80192598 0018CBF8  C0 E2 9A 10 */	lfs f7, lbl_80881FB0@sda21(r0)
@@ -123745,7 +123745,7 @@
 /* 8019274C 0018CDAC  7C 08 03 A6 */	mtlr r0
 /* 80192750 0018CDB0  38 21 01 80 */	addi r1, r1, 0x180
 /* 80192754 0018CDB4  4E 80 00 20 */	blr
-.endfn fn_80192590
+.endfn map_stream_buildTransformMtx
 
 # .text:0x6D438 | 0x80192758 | size: 0x1B0
 .fn fn_80192758, global

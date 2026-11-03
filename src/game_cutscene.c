@@ -10,7 +10,7 @@ extern void actor_dispatchMessage(void);
 extern void boss_recordDamage(void);
 extern void str_nextToken(void);
 extern void fn_8007AA64(void);
-extern void fn_8007B260(void);
+extern void dialogue_parseCommandScript(void);
 extern void fn_8007C0D8(void);
 extern void fn_8007E9EC(void);
 extern void fn_8007EA24(void);
@@ -210,7 +210,7 @@ lbl_fn_8007C46C_000001E0:
     stb r26, 0x123(r1)
     stb r27, 0x124(r1)
     stb r27, 0x125(r1)
-    bl fn_8007B260
+    bl dialogue_parseCommandScript
     lwz r0, 0x108(r1)
     mr r16, r3
     stw r26, 0x9c(r1)

@@ -55,7 +55,7 @@ void fn_8039C7F0(void);
 void fn_8039CC24(void);
 void fn_8039CCB4(void);
 void fn_8039CCD0(void);
-void fn_8039CF8C(void);
+void net_coop_processPacket(void);
 void fn_8039D178(void);
 void fn_8039D1E8(void);
 void fn_8039D274(void);
@@ -665,7 +665,7 @@ lbl_fn_8039CCD0_00000794:
     blr
 }
 
-asm void fn_8039CF8C(void)
+asm void net_coop_processPacket(void)
 {
     nofralloc
     stwu r1, -0x40(r1)
@@ -679,18 +679,18 @@ asm void fn_8039CF8C(void)
     lwz r30, 0xcc(r4)
     li r4, 0x0
     cmpwi r30, 0x0
-    beq lbl_fn_8039CF8C_00000890
+    beq lbl_net_coop_processPacket_00000890
     cmplwi r30, 0x8
     subi r5, r30, 0x8
-    ble lbl_fn_8039CF8C_00000864
+    ble lbl_net_coop_processPacket_00000864
     addi r0, r5, 0x7
     lis r3, lbl_8074ED24@ha
     srwi r0, r0, 3
     addi r3, r3, lbl_8074ED24@l
     mtctr r0
     cmplwi r5, 0x0
-    ble lbl_fn_8039CF8C_00000864
-lbl_fn_8039CF8C_000007F4:
+    ble lbl_net_coop_processPacket_00000864
+lbl_net_coop_processPacket_000007F4:
     lwz r0, 0x0(r29)
     addi r4, r4, 0x8
     slwi r0, r0, 2
@@ -718,21 +718,21 @@ lbl_fn_8039CF8C_000007F4:
     slwi r0, r0, 2
     lwzx r0, r3, r0
     add r29, r5, r0
-    bdnz lbl_fn_8039CF8C_000007F4
-lbl_fn_8039CF8C_00000864:
+    bdnz lbl_net_coop_processPacket_000007F4
+lbl_net_coop_processPacket_00000864:
     lis r3, lbl_8074ED24@ha
     subf r0, r4, r30
     addi r3, r3, lbl_8074ED24@l
     mtctr r0
     cmplw r4, r30
-    bge lbl_fn_8039CF8C_00000890
-lbl_fn_8039CF8C_0000087C:
+    bge lbl_net_coop_processPacket_00000890
+lbl_net_coop_processPacket_0000087C:
     lwz r0, 0x0(r29)
     slwi r0, r0, 2
     lwzx r0, r3, r0
     add r29, r29, r0
-    bdnz lbl_fn_8039CF8C_0000087C
-lbl_fn_8039CF8C_00000890:
+    bdnz lbl_net_coop_processPacket_0000087C
+lbl_net_coop_processPacket_00000890:
     lis r25, lbl_8074F0B0@ha
     lis r31, lbl_8074ED24@ha
     addi r25, r25, lbl_8074F0B0@l
@@ -740,28 +740,28 @@ lbl_fn_8039CF8C_00000890:
     addi r31, r31, lbl_8074ED24@l
     li r24, 0x0
     lis r23, jumptable_8078AD40@ha
-    b lbl_fn_8039CF8C_00000968
-lbl_fn_8039CF8C_000008B0:
+    b lbl_net_coop_processPacket_00000968
+lbl_net_coop_processPacket_000008B0:
     cmpwi r27, 0x0
-    beq lbl_fn_8039CF8C_00000970
+    beq lbl_net_coop_processPacket_00000970
     cmplw r27, r29
-    bge lbl_fn_8039CF8C_00000970
+    bge lbl_net_coop_processPacket_00000970
     stw r27, 0x90(r26)
     lwz r0, 0x4(r27)
     clrlwi r0, r0, 31
     cmplwi r0, 0x1
-    bne lbl_fn_8039CF8C_000008F0
+    bne lbl_net_coop_processPacket_000008F0
     lwz r0, 0x0(r27)
     slwi r0, r0, 2
     stw r24, 0xc(r1)
     lwzx r0, r31, r0
     add r0, r27, r0
     stw r0, 0x8(r1)
-    b lbl_fn_8039CF8C_0000094C
-lbl_fn_8039CF8C_000008F0:
+    b lbl_net_coop_processPacket_0000094C
+lbl_net_coop_processPacket_000008F0:
     lwz r0, 0x0(r27)
     cmplwi r0, 0x6d
-    bgt lbl_fn_8039CF8C_0000092C
+    bgt lbl_net_coop_processPacket_0000092C
     addi r3, r23, jumptable_8078AD40@l
     slwi r0, r0, 2
     lwzx r3, r3, r0
@@ -769,12 +769,12 @@ lbl_fn_8039CF8C_000008F0:
     bctr
     lwz r0, 0xe8(r26)
     cmpwi r0, 0x0
-    ble lbl_fn_8039CF8C_0000092C
+    ble lbl_net_coop_processPacket_0000092C
     lwz r3, lbl_8087F540
     bl fn_8047F580
     stw r24, 0xe8(r26)
     stw r24, 0xec(r26)
-lbl_fn_8039CF8C_0000092C:
+lbl_net_coop_processPacket_0000092C:
     lwz r0, 0x0(r27)
     mr r3, r26
     mr r5, r27
@@ -783,21 +783,21 @@ lbl_fn_8039CF8C_0000092C:
     add r12, r25, r0
     bl __ptmf_scall
     nop
-lbl_fn_8039CF8C_0000094C:
+lbl_net_coop_processPacket_0000094C:
     lwz r0, 0xc(r1)
     cmpwi r0, 0x0
-    beq lbl_fn_8039CF8C_00000960
+    beq lbl_net_coop_processPacket_00000960
     li r3, 0x0
-    b lbl_fn_8039CF8C_00000974
-lbl_fn_8039CF8C_00000960:
+    b lbl_net_coop_processPacket_00000974
+lbl_net_coop_processPacket_00000960:
     lwz r27, 0x8(r1)
     addi r28, r28, 0x1
-lbl_fn_8039CF8C_00000968:
+lbl_net_coop_processPacket_00000968:
     cmplw r28, r30
-    blt lbl_fn_8039CF8C_000008B0
-lbl_fn_8039CF8C_00000970:
+    blt lbl_net_coop_processPacket_000008B0
+lbl_net_coop_processPacket_00000970:
     li r3, 0x1
-lbl_fn_8039CF8C_00000974:
+lbl_net_coop_processPacket_00000974:
     lmw r23, 0x1c(r1)
     lwz r0, 0x44(r1)
     mtlr r0
