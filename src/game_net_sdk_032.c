@@ -13,7 +13,7 @@ extern void _savegpr_25(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void strcat(void);
-extern void strcmp(void);
+extern int strcmp(const char *s1, const char *s2);
 extern void strncmp(void);
 extern void strstr(void);
 extern void atoi(void);
@@ -78,7 +78,7 @@ void fn_806E2E10(void);
 void fn_806E2EF0(void);
 void fn_806E2F40(void);
 void fn_806E2FB0(void);
-void fn_806E2FF0(void);
+int fn_806E2FF0(const void *a, const void *b);
 void fn_806E3000(void);
 void fn_806E30A0(void);
 void fn_806E3160(void);
@@ -1234,12 +1234,9 @@ lbl_fn_806E2FB0_00000FD0:
     blr
 }
 
-asm void fn_806E2FF0(void)
+int fn_806E2FF0(const void *a, const void *b)
 {
-    nofralloc
-    lwz r3, 0x0(r3)
-    lwz r4, 0x0(r4)
-    b strcmp
+    return strcmp(*(const char **)a, *(const char **)b);
 }
 
 asm void fn_806E3000(void)

@@ -31,7 +31,7 @@ extern void fn_801698E4(void);
 extern void battle_calcExpPosition(void);
 extern void actor_getMovementFlags(void);
 extern void world_getGlobalFlag(void);
-extern void fn_803ABFD4(void);
+extern void fn_803ABFD4(void *p);
 extern void fn_803AC088(void);
 extern void fn_803B3B38(void);
 extern void dungeon_findArenaNodeByCoords(void);
@@ -96,7 +96,7 @@ void fn_803CC6B4(void);
 void fn_803CC6D0(void);
 void fn_803CC718(void);
 void fn_803CC754(void);
-void fn_803CC774(void);
+void fn_803CC774(void *p);
 void fn_803CC77C(void);
 
 asm void fn_803CAED0(void)
@@ -1815,11 +1815,9 @@ asm void fn_803CC754(void)
     blr
 }
 
-asm void fn_803CC774(void)
+void fn_803CC774(void *p)
 {
-    nofralloc
-    lwz r3, 0x134(r3)
-    b fn_803ABFD4
+    fn_803ABFD4(*(void **)((u8 *)p + 0x134));
 }
 
 asm void fn_803CC77C(void)

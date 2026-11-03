@@ -29,7 +29,7 @@ extern void DVDClose(void);
 extern void DVDReadAsyncPrio(void);
 extern void DVDReadPrio(void);
 extern void fn_805FEC00(void);
-extern void fn_805FEF70(void);
+extern void fn_805FEF70(void *p);
 extern void fn_806036E0(void);
 extern void fn_80603730(void);
 extern void fn_80618290(void);
@@ -131,7 +131,7 @@ u32 fn_80725C60(void);
 u32 fn_80725C70(void);
 void fn_80725C80(void);
 void fn_80725C90(void);
-void fn_80725D00(void);
+void fn_80725D00(void *p);
 void fn_80725D90(void);
 void fn_80725DA0(void);
 void fn_80725DD0(void);
@@ -143,8 +143,8 @@ void fn_807260C0(void);
 void fn_80726150(void);
 void fn_80726250(void);
 void fn_80726290(void);
-void fn_80726310(void);
-void fn_80726320(void);
+void fn_80726310(void *p);
+void fn_80726320(void *p);
 void fn_80726330(void);
 u32 fn_80726390(void);
 u32 fn_807263A0(void *p);
@@ -1900,7 +1900,7 @@ lbl_fn_80725C90_000017FC:
     blr
 }
 
-asm void fn_80725D00(void)
+asm void fn_80725D00(void *p)
 {
     nofralloc
     cmpwi r5, 0x0
@@ -2350,18 +2350,14 @@ lbl_fn_80726290_00001DEC:
     blr
 }
 
-asm void fn_80726310(void)
+void fn_80726310(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x14
-    b fn_80725D00
+    fn_80725D00((u8 *)p + 0x14);
 }
 
-asm void fn_80726320(void)
+void fn_80726320(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x28
-    b fn_805FEF70
+    fn_805FEF70((u8 *)p + 0x28);
 }
 
 asm void fn_80726330(void)

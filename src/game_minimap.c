@@ -26,7 +26,7 @@ extern void atn_LoadHandle_getName(void);
 extern void fn_80476130(void);
 extern void fn_80476194(void);
 extern void fn_804761B0(void);
-extern void PSMTXConcat(void);
+extern void PSMTXConcat();
 extern void PSMTXMultVec(void);
 extern void PSVECMag(void);
 extern void runtime_registerStaticObject(void);
@@ -58,7 +58,7 @@ void atn_AABB_getMax(void);
 void atn_AABB_getMin(void);
 void atn_Matrix_copy_2(void);
 void atn_Matrix_copy(void);
-void atn_Matrix_concat(void);
+void atn_Matrix_concat(void *a, void *b, void *c);
 void minimap_renderOverlay(void);
 void fn_8008D6C0(void);
 void *fn_8008D784(void *p);
@@ -451,13 +451,9 @@ asm void atn_Matrix_copy(void)
     blr
 }
 
-asm void atn_Matrix_concat(void)
+void atn_Matrix_concat(void *a, void *b, void *c)
 {
-    nofralloc
-    mr r0, r3
-    mr r3, r5
-    mr r5, r0
-    b PSMTXConcat
+    PSMTXConcat(c, b, a);
 }
 
 asm void minimap_renderOverlay(void)

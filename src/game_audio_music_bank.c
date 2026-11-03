@@ -113,7 +113,7 @@ extern u32 lbl_80884C2C;
 void fn_8030A6A0(void);
 void fn_8030A848(void);
 void fn_8030AF10(void);
-void fn_8030B408(void);
+void fn_8030B408(f32 *p, f32 a, f32 b, f32 c, f32 d);
 void fn_8030B41C(void);
 void fn_8030B5B0(void);
 void fn_8030B74C(void);
@@ -1038,14 +1038,12 @@ lbl_fn_8030AF10_00000D38:
     blr
 }
 
-asm void fn_8030B408(void)
+void fn_8030B408(f32 *p, f32 a, f32 b, f32 c, f32 d)
 {
-    nofralloc
-    stfs f1, 0x0(r3)
-    stfs f2, 0x4(r3)
-    stfs f3, 0x8(r3)
-    stfs f4, 0xc(r3)
-    blr
+    p[0] = a;
+    p[1] = b;
+    p[2] = c;
+    p[3] = d;
 }
 
 asm void fn_8030B41C(void)

@@ -21,7 +21,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void skeleton_getGlobalManager(void);
 extern void fn_800C16C0(void);
 extern void fn_800C1814(void);
-extern void fn_800C1990(void);
+extern void fn_800C1990(void *p);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void morph_updateWeights(void);
@@ -130,7 +130,7 @@ void fn_80422960(void);
 void fn_804229A8(void);
 void fn_80422BF4(void);
 void fn_80422F6C(void);
-void fn_80422F70(void);
+void fn_80422F70(void *p);
 void fn_80422F78(void);
 void fn_804230FC(void);
 void fn_80423160(void);
@@ -1399,11 +1399,9 @@ void fn_80422F6C(void)
 {
 }
 
-asm void fn_80422F70(void)
+void fn_80422F70(void *p)
 {
-    nofralloc
-    addi r3, r3, 0xf8
-    b fn_800C1990
+    fn_800C1990((u8 *)p + 0xf8);
 }
 
 asm void fn_80422F78(void)

@@ -26,7 +26,7 @@ extern void map_processTrigger(void);
 extern void atn_Model_findBoneIndex(void);
 extern void target_pushPointToHistory(void);
 extern void fn_80095D44(void);
-extern void lockon_updateTarget(void);
+extern void lockon_updateTarget(void *p, int a, int b);
 extern void cursor_Object_constructor(void);
 extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -115,7 +115,7 @@ void fn_80412B80(void);
 void fn_80412D94(void *p);
 void fn_80412DA8(void);
 void fn_80412E5C(void);
-void fn_80412E94(void);
+void fn_80412E94(void *p);
 void fn_80412EA0(void);
 void fn_80412F08(void *p);
 void fn_80412F18(void *p);
@@ -574,12 +574,9 @@ asm void fn_80412E5C(void)
     blr
 }
 
-asm void fn_80412E94(void)
+void fn_80412E94(void *p)
 {
-    nofralloc
-    li r4, 0x8
-    li r5, 0x20
-    b lockon_updateTarget
+    lockon_updateTarget(p, 8, 0x20);
 }
 
 asm void fn_80412EA0(void)

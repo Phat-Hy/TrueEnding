@@ -49,7 +49,7 @@ extern void fn_806EA050(void);
 extern void fn_806EA180(void);
 extern void fn_806EA3E0(void);
 extern void net_abortConnection(void);
-extern void fn_806EA790(void);
+extern void fn_806EA790(void *p);
 extern void fn_806EBE60(void);
 extern void fn_806EC4B0(void);
 extern void fn_806EE8B0(void);
@@ -84,7 +84,7 @@ void fn_806EE030(void);
 void fn_806EE0F0(void);
 void fn_806EE1E0(void);
 void fn_806EE200(void);
-void fn_806EE240(void);
+void fn_806EE240(void **p);
 void fn_806EE250(void);
 void fn_806EE2A0(void);
 void fn_806EE4E0(void);
@@ -2036,11 +2036,9 @@ lbl_fn_806EE200_00001AA4:
     blr
 }
 
-asm void fn_806EE240(void)
+void fn_806EE240(void **p)
 {
-    nofralloc
-    lwz r3, 0x0(r3)
-    b fn_806EA790
+    fn_806EA790(*p);
 }
 
 asm void fn_806EE250(void)

@@ -22,7 +22,7 @@ extern void route_interpolatePath(void);
 extern void route_createSegment(void);
 extern void route_createWaypoint(void);
 extern void node_createNamedChild(void);
-extern void fn_8008A4E0(void);
+extern void fn_8008A4E0();
 extern void fn_8008A76C(void);
 extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
@@ -142,7 +142,7 @@ void fn_80316034(void);
 f32 fn_803161F0(void);
 void fn_803161F8(void);
 void fn_803165E0(void);
-void fn_803165E4(void);
+void fn_803165E4(void *p);
 void fn_803165EC(void);
 void fn_80316A68(void);
 void fn_80316E38(void);
@@ -1213,11 +1213,9 @@ void fn_803165E0(void)
 {
 }
 
-asm void fn_803165E4(void)
+void fn_803165E4(void *p)
 {
-    nofralloc
-    li r4, 0x9
-    b fn_8008A4E0
+    fn_8008A4E0(p, 9);
 }
 
 asm void fn_803165EC(void)

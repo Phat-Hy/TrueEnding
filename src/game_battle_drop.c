@@ -11,7 +11,7 @@ extern void ref_releaseHandle(void);
 extern void morph_updateWeights(void);
 extern void fn_800CB5B4(void);
 extern void morph_updateMesh(void);
-extern void fn_801248DC(void);
+extern void fn_801248DC(void *p, int a);
 extern void fn_8012E244(void);
 extern void actor_setState(void);
 extern void task_findEntryById(void);
@@ -210,13 +210,9 @@ lbl_fn_80178018_000001A8:
     blr
 }
 
-asm void fn_80178078(void)
+void fn_80178078(void)
 {
-    nofralloc
-    lwz r3, lbl_8087F0A8
-    li r4, 0x0
-    addi r3, r3, 0x48c
-    b fn_801248DC
+    fn_801248DC((u8 *)lbl_8087F0A8 + 0x48c, 0);
 }
 
 asm void fn_80178088(void)

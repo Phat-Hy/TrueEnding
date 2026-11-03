@@ -17,7 +17,7 @@ extern void talk_copySpeakerName(void);
 extern void mem_alloc(void);
 extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
-extern void minimap_renderOverlay(void);
+extern void minimap_renderOverlay(void *p);
 extern void atn_Model_findBoneIndex(void);
 extern void target_pushPointToHistory(void);
 extern void lockon_updateTarget(void);
@@ -119,7 +119,7 @@ void fn_804119D4(void);
 void fn_80411AA8(void);
 void fn_80411AF4(void);
 void fn_80411BC4(void);
-void fn_804120B8(void);
+void fn_804120B8(void *p);
 void fn_804120C0(void);
 
 asm void fn_80410DE0(void)
@@ -1461,11 +1461,9 @@ lbl_fn_80411BC4_000012B8:
     blr
 }
 
-asm void fn_804120B8(void)
+void fn_804120B8(void *p)
 {
-    nofralloc
-    addi r3, r3, 0xf4
-    b minimap_renderOverlay
+    minimap_renderOverlay((u8 *)p + 0xf4);
 }
 
 asm void fn_804120C0(void)

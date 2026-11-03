@@ -98,12 +98,12 @@ void fn_80714390(void);
 void fn_80714500(void);
 void fn_80714520(void);
 void fn_80714930(void);
-void fn_807149C0(void);
+void fn_807149C0(void *src, void *dst);
 void fn_80714AA0(void);
 void fn_80714C50(void);
-void fn_80714CA0(void);
-void fn_80714CE0(void);
-void fn_80714CF0(void);
+void fn_80714CA0(void *src, void *dst);
+void fn_80714CE0(void *src, void *dst);
+void fn_80714CF0(void *src, void *dst);
 void fn_80714D00(void);
 void fn_80714E40(void);
 void fn_80714FA0(void);
@@ -1094,7 +1094,7 @@ asm void fn_80714930(void)
     blr
 }
 
-asm void fn_807149C0(void)
+asm void fn_807149C0(void *src, void *dst)
 {
     nofralloc
     stwu r1, -0x30(r1)
@@ -1302,7 +1302,7 @@ lbl_fn_80714C50_0000106C:
     blr
 }
 
-asm void fn_80714CA0(void)
+asm void fn_80714CA0(void *src, void *dst)
 {
     nofralloc
     lfs f0, 0x64(r3)
@@ -1322,18 +1322,14 @@ asm void fn_80714CA0(void)
     blr
 }
 
-asm void fn_80714CE0(void)
+void fn_80714CE0(void *src, void *dst)
 {
-    nofralloc
-    subi r3, r3, 0x54
-    b fn_80714CA0
+    fn_80714CA0((u8 *)src - 0x54, dst);
 }
 
-asm void fn_80714CF0(void)
+void fn_80714CF0(void *src, void *dst)
 {
-    nofralloc
-    subi r3, r3, 0x54
-    b fn_807149C0
+    fn_807149C0((u8 *)src - 0x54, dst);
 }
 
 asm void fn_80714D00(void)

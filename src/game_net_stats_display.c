@@ -54,7 +54,7 @@ extern void world_setLocalFlag(void);
 extern void fn_803E2A30(void);
 extern void fn_803E3384(void);
 extern void atn_LoadHandle_destructor(void);
-extern void fn_8053E6E4(void);
+extern void fn_8053E6E4(void *p);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
@@ -120,7 +120,7 @@ extern u32 lbl_80887D34;
 
 /* Function declarations */
 void fn_80545CEC(void);
-void fn_80545FFC(void);
+void fn_80545FFC(void *p);
 void fn_80546004(void);
 void fn_805460D0(void);
 void fn_8054616C(void);
@@ -333,11 +333,9 @@ asm void fn_80545CEC(void)
     blr
 }
 
-asm void fn_80545FFC(void)
+void fn_80545FFC(void *p)
 {
-    nofralloc
-    subi r3, r3, 0x48
-    b fn_8053E6E4
+    fn_8053E6E4((u8 *)p - 0x48);
 }
 
 asm void fn_80546004(void)

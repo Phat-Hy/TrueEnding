@@ -175,7 +175,7 @@ void fn_8043C508(void);
 void fn_8043CA58(void);
 void fn_8043CF58(void);
 void fn_8043D568(void);
-void fn_8043D580(void);
+void fn_8043D580(void *p, u32 val);
 void fn_8043D594(void);
 void fn_8043D618(void);
 void fn_8043D6E4(void *p);
@@ -1477,14 +1477,10 @@ lbl_fn_8043D568_00001244:
     blr
 }
 
-asm void fn_8043D580(void)
+void fn_8043D580(void *p, u32 val)
 {
-    nofralloc
-    lwz r0, 0xfc(r3)
-    stw r4, 0x2d4(r3)
-    oris r0, r0, 0x1
-    stw r0, 0xfc(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x2d4) = val;
+    *(u32 *)((u8 *)p + 0xfc) |= 0x10000;
 }
 
 asm void fn_8043D594(void)

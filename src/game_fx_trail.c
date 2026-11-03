@@ -55,7 +55,7 @@ extern void fn_80290AB4(void);
 extern void fn_802913B0(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
-extern void PSMTXRotRad(void);
+extern void PSMTXRotRad();
 extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
@@ -123,7 +123,7 @@ extern u32 lbl_80883BA4;
 /* Function declarations */
 void fn_8028C834(void);
 void fn_8028CB38(void);
-void fn_8028CFB0(void);
+void fn_8028CFB0(void *m, f32 rad);
 void fn_8028CFB8(void);
 void fn_8028CFE0(void);
 void fn_8028D5C8(void);
@@ -637,11 +637,9 @@ lbl_fn_8028CB38_00000758:
     blr
 }
 
-asm void fn_8028CFB0(void)
+void fn_8028CFB0(void *m, f32 rad)
 {
-    nofralloc
-    li r4, 0x78
-    b PSMTXRotRad
+    PSMTXRotRad(m, 'x', rad);
 }
 
 asm void fn_8028CFB8(void)

@@ -28,7 +28,7 @@ extern void fn_80070C98(void);
 extern void fn_80070D04(void);
 extern void fn_80077160(void);
 extern void fn_800774D4(void);
-extern void fn_80077534(void);
+extern void fn_80077534(void *p);
 extern void mem_alloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_8009E690(void);
@@ -149,7 +149,7 @@ void fn_80496C3C(void);
 void fn_80496CC0(void);
 void fn_80496E00(void);
 void fn_80496E94(void);
-void fn_80496EDC(void);
+void fn_80496EDC(void *p);
 void fn_80496EE4(void);
 void fn_80496EE8(void);
 void fn_80496F6C(void);
@@ -1412,11 +1412,9 @@ lbl_fn_80496E94_00001020:
     blr
 }
 
-asm void fn_80496EDC(void)
+void fn_80496EDC(void *p)
 {
-    nofralloc
-    lwz r3, 0x50(r3)
-    b fn_80077534
+    fn_80077534(*(void **)((u8 *)p + 0x50));
 }
 
 void fn_80496EE4(void)

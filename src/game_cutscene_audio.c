@@ -37,7 +37,7 @@ extern void clip_calculateFrustum(void);
 extern void equip_getGlobalManager(void);
 extern void magic_getOffset6C(void);
 extern void path_getFollowerNode(void);
-extern void actor_testBitFlag(void);
+extern int actor_testBitFlag(void *p, u32 flag);
 extern void boss_updatePhaseState(void);
 extern void npc_calcTargetDistance(void);
 extern void npc_getGlobalManager(void);
@@ -173,7 +173,7 @@ void *fn_8032ECA8(void *p, u32 idx);
 void fn_8032ECB8(void);
 void fn_8032ECBC(void);
 void fn_8032EDC4(void);
-void fn_8032EF2C(void);
+int fn_8032EF2C(void *p);
 void fn_8032EF38(void);
 void fn_8032F0EC(void);
 void fn_8032F204(void);
@@ -1604,12 +1604,9 @@ lbl_fn_8032EDC4_00001474:
     blr
 }
 
-asm void fn_8032EF2C(void)
+int fn_8032EF2C(void *p)
 {
-    nofralloc
-    li r4, 0x20
-    addi r3, r3, 0x7d4
-    b actor_testBitFlag
+    return actor_testBitFlag((u8 *)p + 0x7d4, 0x20);
 }
 
 asm void fn_8032EF38(void)

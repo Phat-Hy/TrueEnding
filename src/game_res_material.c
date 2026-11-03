@@ -15,7 +15,7 @@ extern void particle_acquireRef(void);
 extern void fn_80232ACC(void);
 extern void sound_initGlobalInstances(void);
 extern void fn_80232FF4(void);
-extern void fn_802346AC(void);
+extern void fn_802346AC(void *p);
 extern void fn_802347DC(void);
 extern void fn_80234958(void);
 extern void res_findResourceSlot(void);
@@ -43,7 +43,7 @@ extern u32 lbl_80880390;
 extern u32 lbl_808803C0;
 
 /* Function declarations */
-void fn_8023B71C(void);
+void fn_8023B71C(void *dummy, void *p);
 void fn_8023B724(void);
 void dtor_8023B9D0(void);
 void fn_8023BA10(void);
@@ -51,11 +51,9 @@ void fn_8023C080(void);
 void fn_8023C0C0(void);
 void fn_8023C6F4(void);
 
-asm void fn_8023B71C(void)
+void fn_8023B71C(void *dummy, void *p)
 {
-    nofralloc
-    mr r3, r4
-    b fn_802346AC
+    fn_802346AC(p);
 }
 
 asm void fn_8023B724(void)

@@ -44,7 +44,7 @@ extern void fn_802A4170(void);
 extern void fn_802A4184(void);
 extern void fn_802A42CC(void);
 extern void PSMTXConcat(void);
-extern void PSMTXRotRad(void);
+extern void PSMTXRotRad();
 extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
@@ -95,7 +95,7 @@ void fn_802A3520(void);
 void fn_802A35B0(void);
 u32 fn_802A36B0(void *p);
 void fn_802A36B8(void);
-void fn_802A3D64(void);
+void fn_802A3D64(void *m, f32 rad);
 void fn_802A3D6C(void);
 void fn_802A3D80(void);
 
@@ -1814,11 +1814,9 @@ lbl_fn_802A36B8_000018B4:
     blr
 }
 
-asm void fn_802A3D64(void)
+void fn_802A3D64(void *m, f32 rad)
 {
-    nofralloc
-    li r4, 0x7a
-    b PSMTXRotRad
+    PSMTXRotRad(m, 'z', rad);
 }
 
 asm void fn_802A3D6C(void)

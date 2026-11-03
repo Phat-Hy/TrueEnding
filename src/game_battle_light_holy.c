@@ -23,7 +23,7 @@ extern void map_processTrigger(void);
 extern void lockon_updateTarget(void);
 extern void cursor_Object_constructor(void);
 extern void fn_800C1814(void);
-extern void fn_800C1990(void);
+extern void fn_800C1990(void *p);
 extern void skin_playAnimationByName(void);
 extern void skin_applyWeights(void);
 extern void morph_reset(void);
@@ -103,7 +103,7 @@ extern u32 lbl_80886610;
 
 /* Function declarations */
 void fn_80420490(void);
-void fn_80420494(void);
+void fn_80420494(void *p);
 void fn_8042049C(void);
 void fn_804208E4(void);
 void fn_80420934(void);
@@ -138,11 +138,9 @@ void fn_80420490(void)
 {
 }
 
-asm void fn_80420494(void)
+void fn_80420494(void *p)
 {
-    nofralloc
-    addi r3, r3, 0xfc
-    b fn_800C1990
+    fn_800C1990((u8 *)p + 0xfc);
 }
 
 asm void fn_8042049C(void)

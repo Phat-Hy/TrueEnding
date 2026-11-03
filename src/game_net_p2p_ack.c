@@ -68,7 +68,7 @@ void fn_805112FC(void);
 void net_p2p_updateMetricRecord(void);
 void fn_805114D8(void);
 void fn_805115D4(void);
-void fn_80511668(void);
+void fn_80511668(int x);
 void fn_8051166C(void);
 void fn_80511708(void);
 void fn_80511710(void);
@@ -575,7 +575,7 @@ lbl_fn_805115D4_0000068C:
     blr
 }
 
-void fn_80511668(void) {
+void fn_80511668(int x) {
 }
 
 asm void fn_8051166C(void)
@@ -624,18 +624,14 @@ lbl_fn_8051166C_00000730:
     blr
 }
 
-asm void fn_80511708(void)
+void fn_80511708(void)
 {
-    nofralloc
-    li r3, 0x4
-    b fn_80511668
+    fn_80511668(4);
 }
 
-asm void fn_80511710(void)
+void fn_80511710(void)
 {
-    nofralloc
-    li r3, 0x2
-    b fn_80511668
+    fn_80511668(2);
 }
 
 asm void fn_80511718(void)

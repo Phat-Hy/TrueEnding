@@ -52,7 +52,8 @@ extern void fn_803CF734(void);
 extern void town_entity_isActive(void);
 extern void fn_80453DBC(void);
 extern void fn_804741C0(void);
-extern void cutscene_cam_getTargetIndex(void);
+extern void *cutscene_cam_getTargetIndex(void *p);
+extern void *memcpy(void *dst, const void *src, u32 n);
 extern void fn_8047C7FC(void);
 extern void fn_804AB79C(void);
 extern void fn_804ABF20(void);
@@ -101,10 +102,10 @@ void fn_8052C10C(void);
 u32 fn_8052C650(void *p);
 u32 fn_8052C658(void);
 u32 fn_8052C660(void *p);
-void fn_8052C668(void);
+void *fn_8052C668(void *dst, const void *src);
 void fn_8052C670(void *p, u32 val);
 void fn_8052C678(void *p);
-void fn_8052C684(void);
+void *fn_8052C684(void *p);
 void fn_8052C68C(void);
 void fn_8052C6A8(void);
 void fn_8052C6C4(void *p);
@@ -516,11 +517,9 @@ u32 fn_8052C660(void *p)
     return *(u32 *)((u8 *)p + 0x1424);
 }
 
-asm void fn_8052C668(void)
+void *fn_8052C668(void *dst, const void *src)
 {
-    nofralloc
-    li r5, 0x240
-    b memcpy
+    return memcpy(dst, src, 0x240);
 }
 
 void fn_8052C670(void *p, u32 val)
@@ -533,11 +532,9 @@ void fn_8052C678(void *p)
     *(u32 *)((u8 *)p + 0x380) = 0;
 }
 
-asm void fn_8052C684(void)
+void *fn_8052C684(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x5c
-    b cutscene_cam_getTargetIndex
+    return cutscene_cam_getTargetIndex((u8 *)p + 0x5c);
 }
 
 asm void fn_8052C68C(void)

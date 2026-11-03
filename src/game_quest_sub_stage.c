@@ -13,7 +13,7 @@ extern void fn_800791B4(void);
 extern void fn_8007A154(void);
 extern void mem_free(void);
 extern void skeleton_getGlobalManager(void);
-extern void skeleton_getBoneByIndex(void);
+extern void *skeleton_getBoneByIndex(void *p, int idx);
 extern void fn_800CF680(void);
 extern void fn_800DAA3C(void);
 extern void fn_803606CC(void);
@@ -62,13 +62,13 @@ extern u32 lbl_80887010;
 /* Function declarations */
 void fn_80483644(void);
 void fn_80483714(void);
-void fn_80483E80(void);
+void fn_80483E80(void *p, void *arg);
 void fn_80483E94(void);
 void fn_80483F70(void);
-void fn_80484074(void);
+void *fn_80484074(void *p);
 void fn_80484088(void);
 void fn_804846FC(void);
-void fn_804848C4(void);
+void *fn_804848C4(void *p);
 void fn_804848D0(void);
 void fn_80484A78(void);
 void fn_80484BF4(void);
@@ -640,14 +640,11 @@ lbl_fn_80483714_0000081C:
     blr
 }
 
-asm void fn_80483E80(void)
+void fn_80483E80(void *p, void *arg)
 {
-    nofralloc
-    li r0, 0x0
-    stw r4, 0x0(r3)
-    stw r0, 0x4(r3)
-    stb r0, 0x8(r3)
-    blr
+    *(void **)p = arg;
+    *(u32 *)((u8 *)p + 4) = 0;
+    *(u8 *)((u8 *)p + 8) = 0;
 }
 
 asm void fn_80483E94(void)
@@ -788,14 +785,10 @@ lbl_fn_80483F70_00000A18:
     blr
 }
 
-asm void fn_80484074(void)
+void *fn_80484074(void *p)
 {
-    nofralloc
-    lwz r0, 0x1a38(r3)
-    mulli r0, r0, 0x65c
-    add r3, r3, r0
-    addi r3, r3, 0xc8
-    blr
+    u32 idx = *(u32 *)((u8 *)p + 0x1a38);
+    return (u8 *)p + 0xc8 + idx * 0x65c;
 }
 
 asm void fn_80484088(void)
@@ -1372,12 +1365,9 @@ lbl_fn_804846FC_00001268:
     blr
 }
 
-asm void fn_804848C4(void)
+void *fn_804848C4(void *p)
 {
-    nofralloc
-    lwz r3, 0x2fc(r3)
-    li r4, 0x0
-    b skeleton_getBoneByIndex
+    return skeleton_getBoneByIndex(*(void **)((u8 *)p + 0x2fc), 0);
 }
 
 asm void fn_804848D0(void)

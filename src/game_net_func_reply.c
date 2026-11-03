@@ -30,8 +30,8 @@ extern void fn_8050E7E0(void);
 extern void fn_8050E998(void);
 extern void fn_8050EB8C(void);
 extern void OSInitMutex(void);
-extern void OSLockMutex(void);
-extern void OSUnlockMutex(void);
+extern void OSLockMutex(void *mutex);
+extern void OSUnlockMutex(void *mutex);
 extern void fn_80624D40(void);
 extern void strcat(void);
 extern void wcscpy(void);
@@ -83,8 +83,8 @@ void fn_80508DA0(void);
 void fn_80508F0C(void);
 void fn_80508FB0(void);
 void fn_80509300(void);
-void fn_80509A8C(void);
-void fn_80509A94(void);
+void fn_80509A8C(void *p);
+void fn_80509A94(void *p);
 void fn_80509A9C(void);
 void fn_80509AFC(void);
 void fn_80509B24(void);
@@ -1091,18 +1091,14 @@ lbl_fn_80509300_00000DA8:
     blr
 }
 
-asm void fn_80509A8C(void)
+void fn_80509A8C(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x414
-    b OSLockMutex
+    OSLockMutex((u8 *)p + 0x414);
 }
 
-asm void fn_80509A94(void)
+void fn_80509A94(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x414
-    b OSUnlockMutex
+    OSUnlockMutex((u8 *)p + 0x414);
 }
 
 asm void fn_80509A9C(void)

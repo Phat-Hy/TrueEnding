@@ -5,7 +5,7 @@
 extern void OSCreateThread(void);
 extern void OSInitThreadQueue(void);
 extern void OSIsThreadSuspended(void);
-extern void OSIsThreadTerminated(void);
+extern int OSIsThreadTerminated(void *thread);
 extern void OSResumeThread(void);
 extern void OSSleepThread(void);
 extern void OSSleepTicks(void);
@@ -96,7 +96,7 @@ void fn_8050CCD4(void);
 void fn_8050CDAC(void);
 void fn_8050CDD4(void);
 void fn_8050CEA0(void);
-void fn_8050CF18(void);
+int fn_8050CF18(void *p);
 void fn_8050CF20(void);
 void fn_8050CF94(void);
 void fn_8050CFCC(void);
@@ -1110,11 +1110,9 @@ lbl_fn_8050CEA0_00000D90:
     blr
 }
 
-asm void fn_8050CF18(void)
+int fn_8050CF18(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x8
-    b OSIsThreadTerminated
+    return OSIsThreadTerminated((u8 *)p + 8);
 }
 
 asm void fn_8050CF20(void)

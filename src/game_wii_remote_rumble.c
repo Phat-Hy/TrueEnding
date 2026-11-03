@@ -59,7 +59,7 @@ extern void fn_80541BDC(void);
 extern void fn_80541CF4(void);
 extern void fn_8055A404(void);
 extern void PSMTXConcat(void);
-extern void PSMTXTranspose(void);
+extern void PSMTXTranspose();
 extern void PSMTXRotRad(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
@@ -105,7 +105,7 @@ void fn_80551E2C(void);
 void fn_80551E40(void);
 void fn_80551E54(void);
 u32 fn_80551E90(void *p);
-void fn_80551E98(void);
+void fn_80551E98(void *m);
 void fn_80551EA0(void);
 u32 fn_80552028(void *p);
 void fn_80552030(void);
@@ -1101,11 +1101,9 @@ u32 fn_80551E90(void *p)
     return *(u32 *)((u8 *)p + 0x20);
 }
 
-asm void fn_80551E98(void)
+void fn_80551E98(void *m)
 {
-    nofralloc
-    mr r4, r3
-    b PSMTXTranspose
+    PSMTXTranspose(m, m);
 }
 
 asm void fn_80551EA0(void)

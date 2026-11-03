@@ -103,7 +103,7 @@ extern u32 lbl_80884C54;
 extern u32 lbl_80884C58;
 
 /* Function declarations */
-void fn_8030C190(void);
+void *fn_8030C190(void *p, s32 idx);
 void fn_8030C1A4(void);
 void fn_8030C490(void);
 void fn_8030CA38(void);
@@ -116,14 +116,9 @@ void fn_8030D9F0(void);
 void fn_8030DA1C(void);
 void fn_8030DA20(void);
 
-asm void fn_8030C190(void)
+void *fn_8030C190(void *p, s32 idx)
 {
-    nofralloc
-    subi r0, r4, 0x1
-    lwz r3, 0x9c(r3)
-    mulli r0, r0, 0x30
-    add r3, r3, r0
-    blr
+    return (u8 *)*(u32 *)((u8 *)p + 0x9c) + (idx - 1) * 0x30;
 }
 
 asm void fn_8030C1A4(void)

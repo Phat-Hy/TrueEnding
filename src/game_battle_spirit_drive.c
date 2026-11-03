@@ -100,7 +100,7 @@ extern u32 lbl_80886154;
 void fn_804003E0(void);
 void fn_804006E0(void);
 void fn_804006FC(void);
-void fn_80400714(void);
+void fn_80400714(void *p, u32 val);
 void fn_80400728(void);
 void fn_80400818(void);
 void fn_80400904(void);
@@ -341,14 +341,10 @@ lbl_fn_804006FC_0000032C:
     blr
 }
 
-asm void fn_80400714(void)
+void fn_80400714(void *p, u32 val)
 {
-    nofralloc
-    lwz r0, 0xf8(r3)
-    stw r4, 0x2d0(r3)
-    oris r0, r0, 0x1
-    stw r0, 0xf8(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x2d0) = val;
+    *(u32 *)((u8 *)p + 0xf8) |= 0x10000;
 }
 
 asm void fn_80400728(void)

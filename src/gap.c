@@ -62,9 +62,9 @@ void fn_8063BAE8(void);
 void fn_8063BCD4(void);
 void fn_8063BECC(void);
 void fn_8063BFDC(void);
-void fn_8063C110(void);
-void fn_8063C2E8(void);
-void fn_8063C2F4(void);
+void fn_8063C110(int a, void *b);
+void fn_8063C2E8(void *p);
+void fn_8063C2F4(void *p);
 void fn_8063C300(void);
 void fn_8063C518(void);
 void fn_8063C6CC(void);
@@ -937,7 +937,7 @@ lbl_fn_8063BFDC_00000AB4:
     blr
 }
 
-asm void fn_8063C110(void)
+asm void fn_8063C110(int a, void *b)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -1070,20 +1070,14 @@ lbl_fn_8063C110_00000C8C:
     blr
 }
 
-asm void fn_8063C2E8(void)
+void fn_8063C2E8(void *p)
 {
-    nofralloc
-    mr r4, r3
-    li r3, 0x0
-    b fn_8063C110
+    fn_8063C110(0, p);
 }
 
-asm void fn_8063C2F4(void)
+void fn_8063C2F4(void *p)
 {
-    nofralloc
-    mr r4, r3
-    li r3, 0x1
-    b fn_8063C110
+    fn_8063C110(1, p);
 }
 
 asm void fn_8063C300(void)

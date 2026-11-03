@@ -16,8 +16,8 @@ extern void _savegpr_26(void);
 extern void fn_805E96D0(void);
 extern void OSLockMutex(void);
 extern void OSUnlockMutex(void);
-extern void fn_80619A00(void);
-extern void mem_heap_free(void);
+extern void fn_80619A00();
+extern void mem_heap_free();
 
 /* External data declarations */
 
@@ -31,12 +31,12 @@ extern u32 lbl_80888800;
 
 /* Function declarations */
 void fn_8061A010(void);
-void fn_8061A0D0(void);
-void fn_8061A0E0(void);
+void fn_8061A0D0(void *p, void *arg);
+void fn_8061A0E0(void *p);
 void gx_displayList_destroy(void);
 void gx_displayList_invokeVtableMethod(void);
-void fn_8061A110(void);
-void fn_8061A130(void);
+void fn_8061A110(void *p, void *a, void *b);
+void fn_8061A130(void *p, u16 val);
 void fn_8061A150(void);
 void fn_8061A1C0(void);
 void fn_8061A230(void);
@@ -101,20 +101,14 @@ lbl_fn_8061A010_00000098:
     blr
 }
 
-asm void fn_8061A0D0(void)
+void fn_8061A0D0(void *p, void *arg)
 {
-    nofralloc
-    mr r5, r3
-    lwz r3, 0x4(r3)
-    lwz r5, 0x8(r5)
-    b fn_80619A00
+    fn_80619A00(*(void **)((u8 *)p + 4), arg, *(void **)((u8 *)p + 8));
 }
 
-asm void fn_8061A0E0(void)
+void fn_8061A0E0(void *p)
 {
-    nofralloc
-    lwz r3, 0x4(r3)
-    b mem_heap_free
+    mem_heap_free(*(void **)((u8 *)p + 4));
 }
 
 asm void gx_displayList_destroy(void)
@@ -135,27 +129,20 @@ asm void gx_displayList_invokeVtableMethod(void)
     bctr
 }
 
-asm void fn_8061A110(void)
+void fn_8061A110(void *p, void *a, void *b)
 {
-    nofralloc
-    la r6, lbl_80888800
-    li r0, 0x0
-    stw r6, 0x0(r3)
-    stw r4, 0x4(r3)
-    stw r5, 0x8(r3)
-    stw r0, 0xc(r3)
-    blr
+    *(void **)((u8 *)p + 0) = &lbl_80888800;
+    *(void **)((u8 *)p + 4) = a;
+    *(void **)((u8 *)p + 8) = b;
+    *(u32 *)((u8 *)p + 0xc) = 0;
 }
 
-asm void fn_8061A130(void)
+void fn_8061A130(void *p, u16 val)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, 0x0(r3)
-    stw r0, 0x4(r3)
-    sth r0, 0x8(r3)
-    sth r4, 0xa(r3)
-    blr
+    *(u32 *)((u8 *)p + 0) = 0;
+    *(u32 *)((u8 *)p + 4) = 0;
+    *(u16 *)((u8 *)p + 8) = 0;
+    *(u16 *)((u8 *)p + 0xa) = val;
 }
 
 asm void fn_8061A150(void)

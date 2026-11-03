@@ -70,7 +70,7 @@ extern void GXDrawDone(void);
 extern void GXSetZCompLoc(void);
 extern void GXSetZMode(void);
 extern void GXSetBlendMode(void);
-extern void fn_80618290(void);
+extern void fn_80618290(void *p, int mode);
 extern void GXSetViewport(void);
 extern void GXSetScissor(void);
 extern void fn_80624830(void);
@@ -156,8 +156,8 @@ void fn_800713D4(void);
 void fn_8007192C(void);
 void gx_syncFrameFifo(void);
 void fn_80071D60(void *p, u32 val);
-void fn_80071D68(void);
-void fn_80071D74(void);
+void fn_80071D68(void *unused, void *p);
+void fn_80071D74(void *unused, void *p);
 void fn_80071D80(void);
 
 asm void script_executeOpcode(void)
@@ -3385,20 +3385,14 @@ void fn_80071D60(void *p, u32 val)
     *(u32 *)((u8 *)p + 0xcc) = val;
 }
 
-asm void fn_80071D68(void)
+void fn_80071D68(void *unused, void *p)
 {
-    nofralloc
-    mr r3, r4
-    li r4, 0x0
-    b fn_80618290
+    fn_80618290(p, 0);
 }
 
-asm void fn_80071D74(void)
+void fn_80071D74(void *unused, void *p)
 {
-    nofralloc
-    mr r3, r4
-    li r4, 0x1
-    b fn_80618290
+    fn_80618290(p, 1);
 }
 
 asm void fn_80071D80(void)

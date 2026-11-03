@@ -49,7 +49,7 @@ extern void map_isAreaCombatActive(void);
 extern void fn_801A1BE4(void);
 extern void task_findEntryById(void);
 extern void world_getGlobalFlag(void);
-extern void PSMTXRotRad(void);
+extern void PSMTXRotRad();
 extern void PSMTX44Identity(void);
 extern void std_atan2(void);
 extern void msl_releaseRefCount(void);
@@ -107,7 +107,7 @@ void fn_80139F3C(void *p, u32 idx, f32 val);
 u32 fn_80139F4C(void *p);
 void *fn_80139F58(void *p);
 void fn_80139F60(void);
-void mtx_rotYRad(void);
+void mtx_rotYRad(void *m, f32 rad);
 u32 fn_8013A144(void *p);
 u32 fn_8013A150(void *p);
 u32 fn_8013A158(void *p);
@@ -984,11 +984,9 @@ lbl_fn_80139F60_00000BB0:
     blr
 }
 
-asm void mtx_rotYRad(void)
+void mtx_rotYRad(void *m, f32 rad)
 {
-    nofralloc
-    li r4, 0x79
-    b PSMTXRotRad
+    PSMTXRotRad(m, 'y', rad);
 }
 
 u32 fn_8013A144(void *p)

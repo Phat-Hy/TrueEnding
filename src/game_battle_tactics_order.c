@@ -125,8 +125,8 @@ void *fn_803F0614(const void *p, u32 idx);
 void *fn_803F0624(const void *p, u32 idx);
 u32 fn_803F0634(const void *p);
 void fn_803F063C(void);
-void fn_803F0688(void);
-void fn_803F069C(void);
+void *fn_803F0688(void **p);
+void *fn_803F069C(void *p);
 void fn_803F06B0(void);
 void fn_803F0764(void);
 void fn_803F10AC(void);
@@ -887,24 +887,18 @@ asm void fn_803F063C(void)
     blr
 }
 
-asm void fn_803F0688(void)
+void *fn_803F0688(void **p)
 {
-    nofralloc
-    lwz r4, 0x0(r3)
-    addi r0, r4, 0x28
-    stw r0, 0x0(r3)
-    mr r3, r4
-    blr
+    void *cur = *p;
+    *p = (u8 *)cur + 0x28;
+    return cur;
 }
 
-asm void fn_803F069C(void)
+void *fn_803F069C(void *p)
 {
-    nofralloc
-    lwz r0, 0x4(r3)
-    lwz r3, 0x0(r3)
-    mulli r0, r0, 0x28
-    add r3, r3, r0
-    blr
+    u32 idx = *(u32 *)((u8 *)p + 4);
+    u8 *base = *(u8 **)p;
+    return base + idx * 0x28;
 }
 
 asm void fn_803F06B0(void)
