@@ -169,7 +169,7 @@ void fn_80670640(void);
 void fn_80670660(void);
 void fn_80670680(void);
 void fn_80670BD0(void);
-void fn_80670C50(void);
+u32 fn_80670C50(void);
 void fn_80670C70(void);
 void fn_806710B0(void);
 void fn_80671200(void);
@@ -2719,15 +2719,12 @@ lbl_fn_80670BD0_00002164:
     blr
 }
 
-asm void fn_80670C50(void)
+u32 fn_80670C50(void)
 {
-    nofralloc
-    lwz r3, lbl_808802C0
-    li r0, 0x0
-    stb r0, lbl_808802C4
-    addi r0, r3, 0x1
-    stw r0, lbl_808802C0
-    blr
+    u32 val = lbl_808802C0;
+    *(u8 *)&lbl_808802C4 = 0;
+    lbl_808802C0 = val + 1;
+    return val;
 }
 
 asm void fn_80670C70(void)

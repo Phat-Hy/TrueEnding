@@ -13,7 +13,7 @@ extern void font_mapErrorCode(void);
 extern void atn_Task_destructor(void);
 extern void str_skipWhitespace(void);
 extern void fn_800DDA70(void);
-extern void fn_800DDD18(void);
+extern void fn_800DDD18();
 extern void fn_800DEEDC(void);
 extern void fn_800DEF04(void);
 extern void fn_800DEF2C(void);
@@ -21,8 +21,8 @@ extern void fn_800DEF54(void);
 extern void fn_800DEF7C(void);
 extern void fn_800DEF94(void);
 extern void fn_800DEFAC(void);
-extern void fn_800DF16C(void);
-extern void fn_800DF1D0(void);
+extern void fn_800DF16C();
+extern void fn_800DF1D0();
 extern void fn_8061E270(void);
 extern void fn_8061E850(void);
 extern void fn_8061E940(void);
@@ -476,11 +476,9 @@ lbl_fn_800A5508_00000538:
     blr
 }
 
-asm void fn_800A5554(void)
+void fn_800A5554(void)
 {
-    nofralloc
-    lwz r3, lbl_8087F018
-    b fn_800DDD18
+    fn_800DDD18(lbl_8087F018);
 }
 
 asm void msg_getMessageById(void)
@@ -941,18 +939,14 @@ lbl_fn_800A5AA4_00000B04:
     blr
 }
 
-asm void fn_800A5B30(void)
+void fn_800A5B30(void)
 {
-    nofralloc
-    lwz r3, lbl_8087F018
-    b fn_800DF16C
+    fn_800DF16C(lbl_8087F018);
 }
 
-asm void fn_800A5B38(void)
+void fn_800A5B38(void)
 {
-    nofralloc
-    lwz r3, lbl_8087F018
-    b fn_800DF1D0
+    fn_800DF1D0(lbl_8087F018);
 }
 
 asm void fn_800A5B40(void)

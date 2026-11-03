@@ -10,12 +10,12 @@ extern void _restgpr_26(void);
 extern void _savegpr_21(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
-extern void fn_80709630(void);
+extern void fn_80709630();
 extern void fn_8070D240(void);
 extern void fn_8070EE90(void);
 extern void fn_8070EFE0(void);
 extern void fn_8070F130(void);
-extern void fn_80717630(void);
+extern void fn_80717630();
 extern void fn_80717C00(void);
 extern void fn_80717C10(void);
 extern void fn_807180A0(void);
@@ -50,7 +50,7 @@ extern u32 lbl_80889090;
 /* Function declarations */
 void pad_03_807096F4_text(void);
 void fn_80709700(void);
-void fn_807097C0(void);
+void fn_807097C0(void *p);
 void fn_807097D0(void *p, u32 idx, f32 val);
 f32 fn_807097E0(void *p, u32 idx);
 void fn_807097F0(void *p, u8 a, f32 val);
@@ -60,7 +60,7 @@ f32 fn_80709820(void *p, u32 idx);
 void fn_80709830(void);
 void fn_80709870(void);
 void fn_80709950(void);
-void fn_80709AB0(void);
+void fn_80709AB0(void *p);
 void net_stream_readChunk(void);
 void fn_80709CC0(void);
 void fn_80709F20(void);
@@ -97,8 +97,8 @@ void fn_8070AF30(void);
 void fn_8070AF64(void);
 BOOL fn_8070AF70(const void *p);
 BOOL fn_8070AF90(const void *p);
-void fn_8070AFB0(void);
-void fn_8070AFC0(void);
+void fn_8070AFB0(void *p);
+void fn_8070AFC0(void *p);
 void fn_8070AFD0(void);
 void fn_8070B010(void);
 void *fn_8070B050(void);
@@ -180,11 +180,9 @@ lbl_fn_80709700_00000094:
     blr
 }
 
-asm void fn_807097C0(void)
+void fn_807097C0(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x4
-    b fn_80709630
+    fn_80709630((u8 *)p + 4);
 }
 
 void fn_807097D0(void *p, u32 idx, f32 val)
@@ -394,15 +392,11 @@ lbl_fn_80709950_00000350:
     blr
 }
 
-asm void fn_80709AB0(void)
+void fn_80709AB0(void *p)
 {
-    nofralloc
-    lbz r0, 0x85(r3)
-    cmpwi r0, 0x0
-    bnelr
-    li r0, 0x1
-    stb r0, 0x84(r3)
-    blr
+    if (*(u8 *)((u8 *)p + 0x85) == 0) {
+        *(u8 *)((u8 *)p + 0x84) = 1;
+    }
 }
 
 asm void net_stream_readChunk(void)
@@ -1891,18 +1885,14 @@ BOOL fn_8070AF90(const void *p)
     return *(const u32 *)((const u8 *)p + 0xc) != 0;
 }
 
-asm void fn_8070AFB0(void)
+void fn_8070AFB0(void *p)
 {
-    nofralloc
-    lwz r3, 0x8(r3)
-    b fn_80717630
+    fn_80717630(*(void **)((u8 *)p + 8));
 }
 
-asm void fn_8070AFC0(void)
+void fn_8070AFC0(void *p)
 {
-    nofralloc
-    lwz r3, 0xc(r3)
-    b fn_80717630
+    fn_80717630(*(void **)((u8 *)p + 0xc));
 }
 
 asm void fn_8070AFD0(void)

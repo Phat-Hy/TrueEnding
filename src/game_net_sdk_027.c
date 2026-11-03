@@ -21,8 +21,8 @@ extern void OSUnlockMutex(void);
 extern void fn_8067AEC4(void);
 extern void fn_8067AF64(void);
 extern void fn_8067B094(void);
-extern void fn_8067B3AC(void);
-extern void memcmp(void);
+extern void fn_8067B3AC();
+extern int memcmp();
 extern void strcmp(void);
 extern void strncmp(void);
 extern void fn_806A38C8(void);
@@ -43,7 +43,7 @@ extern void fn_806A4260(void);
 extern void fn_806A47D4(void);
 extern void fn_806A4C5C(void);
 extern void fn_806A4D60(void);
-extern void net_pollActiveSockets(void);
+extern void net_pollActiveSockets();
 extern void net_bufferGetCount(void);
 extern void net_bufferGetElement(void);
 extern void net_array_removeAt(void);
@@ -82,7 +82,7 @@ void fn_806D7860(void);
 void fn_806D7A30(void);
 void fn_806D7A40(void);
 void fn_806D7A50(void);
-void fn_806D7A60(void);
+void fn_806D7A60(u32 a, u32 b);
 void fn_806D7A70(void);
 void net_socketConnect(void);
 void fn_806D7AA0(void);
@@ -131,9 +131,9 @@ void fn_806D8FE0(void);
 void fn_806D9060(void);
 void fn_806D9380(void);
 void fn_806D9590(void);
-void fn_806D9610(void);
-void fn_806D9620(void);
-void fn_806D9630(void);
+void fn_806D9610(void *p);
+int fn_806D9620(const void *a, const void *b);
+int fn_806D9630(const void *a, const void *b);
 void fn_806D9640(void);
 void fn_806D9680(void);
 void fn_806D96A0(void);
@@ -287,13 +287,9 @@ void fn_806D7A50(void)
     fn_8067B094();
 }
 
-asm void fn_806D7A60(void)
+void fn_806D7A60(u32 a, u32 b)
 {
-    nofralloc
-    mr r0, r3
-    divwu r3, r4, r3
-    mr r4, r0
-    b fn_8067B3AC
+    fn_8067B3AC(b / a, a);
 }
 
 asm void fn_806D7A70(void)
@@ -2373,27 +2369,19 @@ lbl_fn_806D9590_00001D70:
     blr
 }
 
-asm void fn_806D9610(void)
+void fn_806D9610(void *p)
 {
-    nofralloc
-    lwz r3, 0x20(r3)
-    b net_pollActiveSockets
+    net_pollActiveSockets(*(void **)((u8 *)p + 0x20));
 }
 
-asm void fn_806D9620(void)
+int fn_806D9620(const void *a, const void *b)
 {
-    nofralloc
-    li r5, 0x10
-    b memcmp
+    return memcmp(a, b, 0x10);
 }
 
-asm void fn_806D9630(void)
+int fn_806D9630(const void *a, const void *b)
 {
-    nofralloc
-    li r5, 0x10
-    addi r3, r3, 0x10
-    addi r4, r4, 0x10
-    b memcmp
+    return memcmp((const u8 *)a + 0x10, (const u8 *)b + 0x10, 0x10);
 }
 
 asm void fn_806D9640(void)

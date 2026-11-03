@@ -39,7 +39,7 @@ extern void strstr(void);
 extern void __destroy_arr(void);
 extern void fn_806ABCF0(void);
 extern void fn_806CF0E0(void);
-extern void fn_806CF160(void);
+extern void fn_806CF160();
 extern void fn_806CF1B0(void);
 extern void fn_806CFAC0(void);
 extern void fn_806D0030(void);
@@ -48,7 +48,7 @@ extern void fn_806D0060(void);
 /* External data declarations */
 extern u8 lbl_8075B2B8[];
 extern u8 lbl_80790000[];
-extern u8 lbl_807931A0[];
+extern u32 lbl_807931A0[];
 extern u8 lbl_807931B4[];
 extern u8 lbl_807932B8[];
 
@@ -70,15 +70,15 @@ void fn_8050F768(void);
 void fn_8050F7DC(void);
 void fn_8050F85C(void);
 void fn_8050F86C(void);
-void fn_8050F8A4(void);
-void fn_8050F8B4(void);
+void fn_8050F8A4(void *p, int idx);
+u32 fn_8050F8B4(void *unused, int idx);
 void fn_8050F8C8(void);
 void fn_8050F940(void);
 void fn_8050FA80(void);
 void fn_8050FB3C(void);
 void fn_8050FC08(void);
 void fn_8050FC8C(void);
-void fn_8050FD24(void);
+u32 fn_8050FD24(void *p);
 void fn_8050FD3C(void);
 void p2p_sendDataPacket(void);
 void fn_80510080(void);
@@ -343,23 +343,14 @@ asm void fn_8050F86C(void)
     blr
 }
 
-asm void fn_8050F8A4(void)
+void fn_8050F8A4(void *p, int idx)
 {
-    nofralloc
-    mulli r0, r4, 0xc
-    add r3, r3, r0
-    addi r3, r3, 0x40
-    b fn_806CF160
+    fn_806CF160((u8 *)p + idx * 12 + 0x40);
 }
 
-asm void fn_8050F8B4(void)
+u32 fn_8050F8B4(void *unused, int idx)
 {
-    nofralloc
-    lis r3, lbl_807931A0@ha
-    slwi r0, r4, 2
-    addi r3, r3, lbl_807931A0@l
-    lwzx r3, r3, r0
-    blr
+    return lbl_807931A0[idx];
 }
 
 asm void fn_8050F8C8(void)
@@ -691,15 +682,10 @@ lbl_fn_8050FC8C_00000750:
     blr
 }
 
-asm void fn_8050FD24(void)
+u32 fn_8050FD24(void *p)
 {
-    nofralloc
-    lwz r4, 0x48(r3)
-    lwz r0, 0x11f0(r4)
-    subf r0, r0, r3
-    cntlzw r0, r0
-    srwi r3, r0, 5
-    blr
+    void *r4 = *(void **)((u8 *)p + 0x48);
+    return *(void **)((u8 *)r4 + 0x11f0) == p;
 }
 
 asm void fn_8050FD3C(void)

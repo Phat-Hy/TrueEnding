@@ -80,11 +80,11 @@ extern u32 lbl_80889348;
 void pad_03_80722438_text(void);
 void fn_80722440(void);
 void fn_80722500(void);
-void fn_80722570(void);
+void fn_80722570();
 void fn_80722820(void);
 void fn_807229E0(void);
 void fn_80722DF0(void);
-void fn_80722E60(void);
+void fn_80722E60(void *p);
 void fn_80722E70(void *p);
 void fn_80722E80(void *p);
 u32 fn_80722E90(const void *p);
@@ -94,8 +94,8 @@ void fn_80722EF0(void *p);
 void fn_80722F00(void *p);
 void fn_80722F10(void *p);
 void fn_80722F20(void *p);
-void fn_80722F30(void);
-void fn_80722F40(void);
+void fn_80722F30(void *p);
+void fn_80722F40(void *p);
 void fn_80722F50(void);
 void fn_80722FE0(void);
 void fn_80723050(void);
@@ -241,7 +241,7 @@ lbl_fn_80722500_00000124:
     blr
 }
 
-asm void fn_80722570(void)
+asm void fn_80722570(void *p)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -864,9 +864,9 @@ lbl_fn_80722DF0_000009F8:
     blr
 }
 
-void fn_80722E60(void)
+void fn_80722E60(void *p)
 {
-    fn_80722570();
+    fn_80722570(p);
 }
 
 asm void fn_80722E70(void *p)
@@ -916,18 +916,14 @@ void fn_80722F20(void *p)
     fn_80722E70((u8 *)p - 0xc0);
 }
 
-asm void fn_80722F30(void)
+void fn_80722F30(void *p)
 {
-    nofralloc
-    subi r3, r3, 0xc0
-    b fn_80722E60
+    fn_80722E60((u8 *)p - 0xc0);
 }
 
-asm void fn_80722F40(void)
+void fn_80722F40(void *p)
 {
-    nofralloc
-    subi r3, r3, 0xc0
-    b fn_80721540
+    fn_80721540((u8 *)p - 0xc0);
 }
 
 asm void fn_80722F50(void)

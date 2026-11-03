@@ -119,7 +119,7 @@ void fn_80675FAC(void);
 void TRKInitializeEventQueue(void);
 void TRKGetNextEvent(void);
 void fn_806760EC(void);
-void fn_806761B8(void);
+void fn_806761B8(void *p, u32 val);
 void TRKDestructEvent(void *p);
 void TRKInitializeNub(void);
 void TRKTerminateNub(void);
@@ -171,10 +171,10 @@ void fn_80678534(void);
 void fn_80678600(void);
 void fn_80678668(void);
 void fn_806786D0(void);
-void fn_806786D4(void);
-void fn_806786DC(void);
+void fn_806786D4(void *a, void *b, void *c, void *d);
+void fn_806786DC(void *a, void *b, void *c, void *d);
 void fn_806786E4(void);
-void fn_80678754(void);
+void fn_80678754();
 void fn_80678800(void);
 void fn_80678808(void);
 void fn_80678810(void);
@@ -199,7 +199,7 @@ u32 fn_80679944(void);
 void TRKTargetSupportRequest(void);
 u32 TRKTargetStopped(void);
 void TRKTargetSetStopped(u32 val);
-void fn_80679B68(void);
+u32 fn_80679B68(void);
 void fn_80679B80(void);
 void fn_80679C5C(void);
 void fn_80679D04(void);
@@ -1704,15 +1704,11 @@ lbl_fn_806760EC_00001280:
     blr
 }
 
-asm void fn_806761B8(void)
+void fn_806761B8(void *p, u32 val)
 {
-    nofralloc
-    li r5, 0x0
-    li r0, -0x1
-    stw r4, 0x0(r3)
-    stw r5, 0x4(r3)
-    stw r0, 0x8(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x0) = val;
+    *(u32 *)((u8 *)p + 0x4) = 0;
+    *(s32 *)((u8 *)p + 0x8) = -1;
 }
 
 void TRKDestructEvent(void *p)
@@ -4511,18 +4507,14 @@ void fn_806786D0(void)
     fn_806786E4();
 }
 
-asm void fn_806786D4(void)
+void fn_806786D4(void *a, void *b, void *c, void *d)
 {
-    nofralloc
-    li r7, 0xd1
-    b fn_80678754
+    fn_80678754(a, b, c, d, 0xd1);
 }
 
-asm void fn_806786DC(void)
+void fn_806786DC(void *a, void *b, void *c, void *d)
 {
-    nofralloc
-    li r7, 0xd0
-    b fn_80678754
+    fn_80678754(a, b, c, d, 0xd0);
 }
 
 asm void fn_806786E4(void)
@@ -4563,7 +4555,7 @@ lbl_fn_806786E4_00003828:
     blr
 }
 
-asm void fn_80678754(void)
+asm void fn_80678754(void *a, void *b, void *c, void *d, u32 cmd)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -6047,15 +6039,10 @@ void TRKTargetSetStopped(u32 val)
     *(u32 *)((u8 *)&gTRKState + 0x98) = val;
 }
 
-asm void fn_80679B68(void)
+u32 fn_80679B68(void)
 {
-    nofralloc
-    lis r4, gTRKState@ha
-    li r0, 0x1
-    addi r4, r4, gTRKState@l
-    li r3, 0x0
-    stw r0, 0x98(r4)
-    blr
+    *(u32 *)((u8 *)&gTRKState + 0x98) = 1;
+    return 0;
 }
 
 asm void fn_80679B80(void)

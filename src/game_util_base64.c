@@ -27,10 +27,10 @@ extern void fn_8059E320(void);
 extern void fn_8059E358(void);
 extern void fn_8059E388(void);
 extern void fn_8059E3B8(void);
-extern void fn_8059EB20(void);
+extern void fn_8059EB20();
 extern void fn_805A0028(void);
 extern void fn_805A01DC(void);
-extern void fn_805A0390(void);
+extern void fn_805A0390();
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSVECNormalize(void);
@@ -119,10 +119,10 @@ void fn_805A1DE8(void);
 void fn_805A1E8C(void);
 void fn_805A1F30(void);
 void fn_805A20A8(void);
-void fn_805A21C4(void);
-void fn_805A222C(void);
-void fn_805A2234(void);
-void fn_805A223C(void);
+void fn_805A21C4(void *p);
+void fn_805A222C(void *p);
+void fn_805A2234(void *p);
+void fn_805A223C(void *p);
 void fn_805A2244(void);
 void fn_805A2408(void);
 void fn_805A2438(void);
@@ -1258,7 +1258,7 @@ lbl_fn_805A20A8_00000F28:
     blr
 }
 
-asm void fn_805A21C4(void)
+asm void fn_805A21C4(void *p)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1290,25 +1290,19 @@ lbl_fn_805A21C4_00000F80:
     blr
 }
 
-asm void fn_805A222C(void)
+void fn_805A222C(void *p)
 {
-    nofralloc
-    subi r3, r3, 0xc
-    b fn_805A21C4
+    fn_805A21C4((u8 *)p - 0xc);
 }
 
-asm void fn_805A2234(void)
+void fn_805A2234(void *p)
 {
-    nofralloc
-    subi r3, r3, 0xc
-    b fn_805A0390
+    fn_805A0390((u8 *)p - 0xc);
 }
 
-asm void fn_805A223C(void)
+void fn_805A223C(void *p)
 {
-    nofralloc
-    subi r3, r3, 0xc
-    b fn_8059EB20
+    fn_8059EB20((u8 *)p - 0xc);
 }
 
 asm void fn_805A2244(void)

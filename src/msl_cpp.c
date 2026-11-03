@@ -469,8 +469,8 @@ void fn_8069172C(void);
 void fn_8069194C(void);
 void dtor_80691AC0(void);
 void fn_80691B44(void);
-void fn_80691B48(void);
-void fn_80691B60(void);
+void fn_80691B48(void *p);
+void fn_80691B60(void *p);
 u32 fn_80691B78(void);
 void fn_80691B80(void);
 u32 fn_80691C90(void);
@@ -483,7 +483,7 @@ void fn_80691E3C(void);
 void fn_80691E50(void);
 void dtor_80691E68(void);
 void dtor_80691EE4(void);
-void fn_80691F24(void);
+void fn_80691F24(void *p, int flag);
 void std_string_append(void);
 void fn_806926D4(void);
 void fn_8069293C(void);
@@ -529,7 +529,7 @@ void fn_806945A4(void);
 void fn_80694790(void);
 void fn_80694C38(void);
 void fn_806950E0(void);
-void fn_8069512C(void);
+void fn_8069512C(void *p);
 void dtor_80695138(void);
 void fn_8069519C(void);
 void fn_80695230(void);
@@ -13285,26 +13285,18 @@ lbl_dtor_80691AC0_0000AC34:
 void fn_80691B44(void) {
 }
 
-asm void fn_80691B48(void)
+void fn_80691B48(void *p)
 {
-    nofralloc
-    li r4, -0x1
-    li r0, 0x0
-    stw r4, 0x4(r3)
-    stw r4, 0x0(r3)
-    stw r0, 0x8(r3)
-    blr
+    *(s32 *)((u8 *)p + 4) = -1;
+    *(s32 *)((u8 *)p + 0) = -1;
+    *(u32 *)((u8 *)p + 8) = 0;
 }
 
-asm void fn_80691B60(void)
+void fn_80691B60(void *p)
 {
-    nofralloc
-    li r4, -0x1
-    li r0, 0x0
-    stw r4, 0x4(r3)
-    stw r4, 0x0(r3)
-    stw r0, 0x8(r3)
-    blr
+    *(s32 *)((u8 *)p + 4) = -1;
+    *(s32 *)((u8 *)p + 0) = -1;
+    *(u32 *)((u8 *)p + 8) = 0;
 }
 
 u32 fn_80691B78(void)
@@ -13537,15 +13529,11 @@ asm void fn_80691E3C(void)
     b fn_8068C370
 }
 
-asm void fn_80691E50(void)
+void fn_80691E50(void)
 {
-    nofralloc
-    lwz r0, lbl_808803A0
-    cmpwi r0, 0x0
-    beqlr
-    li r0, 0x0
-    stw r0, lbl_808803A0
-    blr
+    if (lbl_808803A0 != 0) {
+        lbl_808803A0 = 0;
+    }
 }
 
 asm void dtor_80691E68(void)
@@ -13608,7 +13596,7 @@ lbl_dtor_80691EE4_0000B018:
     blr
 }
 
-asm void fn_80691F24(void)
+asm void fn_80691F24(void *p, int flag)
 {
     nofralloc
     stwu r1, -0x80(r1)
@@ -17315,12 +17303,9 @@ lbl_fn_806950E0_0000E224:
     blr
 }
 
-asm void fn_8069512C(void)
+void fn_8069512C(void *p)
 {
-    nofralloc
-    lwz r3, 0xc(r3)
-    li r4, 0x1
-    b fn_80691F24
+    fn_80691F24(*(void **)((u8 *)p + 0xc), 1);
 }
 
 asm void dtor_80695138(void)

@@ -42,7 +42,7 @@ extern void fn_806CB8F0(void);
 extern void fn_806CCB40(void);
 extern void fn_806CCCB0(void);
 extern void fn_806CCED0(void);
-extern void fn_806EAAD0(void);
+extern void fn_806EAAD0();
 extern void fn_806EABD0(void);
 extern void fn_806EAC50(void);
 extern void fn_806EACD0(void);
@@ -82,13 +82,13 @@ void fn_806CD450(u32 val);
 void fn_806CD460(void);
 void fn_806CD4E0(void);
 void fn_806CD540(void);
-void fn_806CD560(void);
+void fn_806CD560();
 void fn_806CD5E0(void);
 void fn_806CD610(void);
-void fn_806CD620(void);
+void fn_806CD620(void *cb);
 void fn_806CD740(void);
-void fn_806CD870(void);
-void fn_806CD880(void);
+void fn_806CD870(void *p);
+void fn_806CD880(void *p, int flag);
 void fn_806CDA90(void);
 void fn_806CDAB0(void);
 void fn_806CDD00(void);
@@ -314,15 +314,12 @@ asm void fn_806CD5E0(void)
     blr
 }
 
-asm void fn_806CD610(void)
+void fn_806CD610(void)
 {
-    nofralloc
-    lis r3, fn_806EAAD0@ha
-    addi r3, r3, fn_806EAAD0@l
-    b fn_806CD620
+    fn_806CD620(fn_806EAAD0);
 }
 
-asm void fn_806CD620(void)
+asm void fn_806CD620(void *cb)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -493,14 +490,12 @@ lbl_fn_806CD740_00000490:
     blr
 }
 
-asm void fn_806CD870(void)
+void fn_806CD870(void *p)
 {
-    nofralloc
-    li r4, 0x1
-    b fn_806CD880
+    fn_806CD880(p, 1);
 }
 
-asm void fn_806CD880(void)
+asm void fn_806CD880(void *p, int flag)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -1554,13 +1549,10 @@ asm void fn_806CE660(void)
     blr
 }
 
-asm void fn_806CE6F0(void)
+void fn_806CE6F0(void)
 {
-    nofralloc
-    lis r3, lbl_808608A8@ha
-    li r0, 0x0
-    stw r0, lbl_808608A8@l(r3)
-    b fn_806CD560
+    *(u32 *)lbl_808608A8 = 0;
+    fn_806CD560();
 }
 
 asm void fn_806CE700(void)

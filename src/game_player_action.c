@@ -71,7 +71,7 @@ void player_resetActionState(void);
 void fn_8011BF3C(void);
 void fn_8011BF94(void);
 void fn_8011C044(void);
-void fn_8011C074(void);
+void fn_8011C074(void *p, void *arg2, int flag);
 void fn_8011C2D4(void);
 void fn_8011C314(void);
 void fn_8011C378(void);
@@ -83,12 +83,12 @@ void fn_8011C650(void);
 void fn_8011C6C4(void);
 void fn_8011C7C0(void);
 void fn_8011C850(void);
-void fn_8011C8E4(void);
+void fn_8011C8E4(void *p, void *arg2);
 void fn_8011C8EC(void);
 void fn_8011C92C(void);
 void fn_8011C97C(void);
-void fn_8011C9F8(void);
-void fn_8011CA00(void);
+void fn_8011C9F8(void *p, void *arg2);
+void fn_8011CA00(void *p, void *arg2);
 void fn_8011CA08(void);
 void fn_8011CA5C(void);
 void fn_8011CAE4(void);
@@ -914,7 +914,7 @@ asm void fn_8011C044(void)
     b enemy_resetTargetTracker
 }
 
-asm void fn_8011C074(void)
+asm void fn_8011C074(void *p, void *arg2, int flag)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -1546,11 +1546,9 @@ lbl_fn_8011C850_0000135C:
     blr
 }
 
-asm void fn_8011C8E4(void)
+void fn_8011C8E4(void *p, void *arg2)
 {
-    nofralloc
-    li r5, 0xa
-    b fn_8011C074
+    fn_8011C074(p, arg2, 0xa);
 }
 
 asm void fn_8011C8EC(void)
@@ -1635,18 +1633,14 @@ asm void fn_8011C97C(void)
     blr
 }
 
-asm void fn_8011C9F8(void)
+void fn_8011C9F8(void *p, void *arg2)
 {
-    nofralloc
-    li r5, 0xe
-    b fn_8011C074
+    fn_8011C074(p, arg2, 0xe);
 }
 
-asm void fn_8011CA00(void)
+void fn_8011CA00(void *p, void *arg2)
 {
-    nofralloc
-    li r5, 0x10
-    b fn_8011C074
+    fn_8011C074(p, arg2, 0x10);
 }
 
 asm void fn_8011CA08(void)

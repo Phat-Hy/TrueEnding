@@ -42,8 +42,8 @@ extern void fn_80237784(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_unload(void);
-extern void fn_80239AB8(void);
-extern void fn_80239D1C(void);
+extern void fn_80239AB8();
+extern void fn_80239D1C();
 extern void entity_Instance_constructor(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
@@ -99,8 +99,8 @@ void fn_802435B8(void);
 s32 fn_80243650(const void *p);
 void fn_8024365C(void);
 void fn_80243700(void);
-void fn_8024372C(void);
-void fn_80243734(void);
+void fn_8024372C(void *p);
+void fn_80243734(void *p);
 void fn_8024373C(void);
 void fn_80243758(void);
 void fn_802437B4(void *p);
@@ -1201,18 +1201,14 @@ lbl_fn_80243700_00000E3C:
     blr
 }
 
-asm void fn_8024372C(void)
+void fn_8024372C(void *p)
 {
-    nofralloc
-    subi r3, r3, 0x48
-    b fn_80239D1C
+    fn_80239D1C((u8 *)p - 0x48);
 }
 
-asm void fn_80243734(void)
+void fn_80243734(void *p)
 {
-    nofralloc
-    subi r3, r3, 0x48
-    b fn_80239AB8
+    fn_80239AB8((u8 *)p - 0x48);
 }
 
 asm void fn_8024373C(void)

@@ -35,12 +35,12 @@ extern void fn_8070C650(void);
 extern void fn_8070C770(void);
 extern void fn_8070C780(void);
 extern void fn_8070C8B0(void);
-extern void fn_8070EE90(void);
-extern void fn_8070EFE0(void);
-extern void fn_8070F070(void);
+extern void fn_8070EE90();
+extern void fn_8070EFE0();
+extern void fn_8070F070();
 extern void fn_8070F0D0(void);
 extern void fn_8070F130(void);
-extern void fn_8070F440(void);
+extern void fn_8070F440();
 extern void fn_80712220(void);
 extern void fn_80712480(void);
 extern void fn_807125D0(void);
@@ -53,7 +53,7 @@ extern void fn_80713B80(void);
 extern void fn_80714230(void);
 extern void fn_80714390(void);
 extern void fn_80714500(void);
-extern void fn_80714520(void);
+extern void fn_80714520();
 extern void net_getGlobalContext(void);
 extern void fn_80718D70(void);
 extern void fn_807210F0(void);
@@ -86,17 +86,17 @@ extern u32 lbl_80889194;
 /* Function declarations */
 void pad_03_8070FACC_text(void);
 void net_packetDispatch(void);
-void fn_80710440(void);
+void fn_80710440(void *a, void *b, void *c, void *d, void *e, void *f);
 void fn_80710460(void);
 void fn_807105D0(void);
 void fn_80710610(void);
-void fn_80710650(void);
+void fn_80710650(void *p, void *arg2);
 void fn_80710670(void);
 void fn_807106D0(void);
 void fn_80710740(void);
-void fn_807107B0(void);
-void fn_807107C0(void);
-void fn_807107D0(void);
+void fn_807107B0(void *p, void *arg2);
+void fn_807107C0(void *p, void *arg2);
+void fn_807107D0(void *p, void *arg2);
 void fn_807107E0(void);
 void fn_80710810(void);
 void fn_807108E0(void);
@@ -798,15 +798,9 @@ lbl_net_packetDispatch_00000950:
     blr
 }
 
-asm void fn_80710440(void)
+void fn_80710440(void *a, void *b, void *c, void *d, void *e, void *f)
 {
-    nofralloc
-    mr r3, r4
-    mr r4, r5
-    mr r5, r6
-    mr r6, r7
-    mr r7, r8
-    b fn_80714520
+    fn_80714520(b, c, d, e, f);
 }
 
 asm void fn_80710460(void)
@@ -957,14 +951,9 @@ asm void fn_80710610(void)
     blr
 }
 
-asm void fn_80710650(void)
+void fn_80710650(void *p, void *arg2)
 {
-    nofralloc
-    mr r0, r3
-    lwz r3, 0xcc(r3)
-    mr r5, r4
-    mr r4, r0
-    b fn_8070F440
+    fn_8070F440(*(void **)((u8 *)p + 0xcc), p, arg2);
 }
 
 asm void fn_80710670(void)
@@ -1061,26 +1050,19 @@ lbl_fn_80710740_00000CC4:
     blr
 }
 
-asm void fn_807107B0(void)
+void fn_807107B0(void *p, void *arg2)
 {
-    nofralloc
-    li r6, 0xd0
-    addi r3, r3, 0x8
-    b fn_8070EE90
+    fn_8070EE90((u8 *)p + 8, arg2, 0xd0);
 }
 
-asm void fn_807107C0(void)
+void fn_807107C0(void *p, void *arg2)
 {
-    nofralloc
-    addi r3, r3, 0x8
-    b fn_8070EFE0
+    fn_8070EFE0((u8 *)p + 8, arg2);
 }
 
-asm void fn_807107D0(void)
+void fn_807107D0(void *p, void *arg2)
 {
-    nofralloc
-    addi r3, r3, 0x8
-    b fn_8070F070
+    fn_8070F070((u8 *)p + 8, arg2);
 }
 
 asm void fn_807107E0(void)

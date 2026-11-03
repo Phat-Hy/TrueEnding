@@ -25,7 +25,7 @@ extern void seq_stepPlaybackTimer(void);
 extern void fn_800760BC(void);
 extern void fn_800760D0(void);
 extern void seq_bindSlotResource(void);
-extern void gx_setRenderStateParam(void);
+extern void gx_setRenderStateParam();
 extern void fn_80076FF8(void);
 extern void fn_8007FAF0(void);
 extern void mem_alloc(void);
@@ -53,7 +53,7 @@ extern void fn_80316F9C(void);
 extern void fn_803D6FEC(void);
 extern void gfx_getDevice(void);
 extern void fn_803D71CC(void);
-extern void fn_804A83E4(void);
+extern void fn_804A83E4();
 extern void fn_804A88C8(void);
 extern void fn_804A893C(void);
 extern void fn_804A9E44(void);
@@ -67,9 +67,9 @@ extern void fn_804A9E94(void);
 extern void fn_804A9E9C(void);
 extern void fn_804A9EA4(void);
 extern void fn_804A9EAC(void);
-extern void fn_804AB060(void);
+extern void fn_804AB060();
 extern void fn_804AB79C(void);
-extern void __GXSetVtxDesc(void);
+extern void __GXSetVtxDesc();
 extern void GXClearVtxDesc(void);
 extern void __GXFlushPixelEngine(void);
 extern void GXSetTexCopySrc(void);
@@ -123,7 +123,7 @@ extern u32 lbl_808872FC;
 extern u32 lbl_80887300;
 
 /* Function declarations */
-void fn_804ABA2C(void);
+void fn_804ABA2C();
 void *fn_804ABEE4(void *obj);
 u32 fn_804ABEEC(u32 *p, s32 idx);
 void *fn_804ABEF8(void *obj);
@@ -131,8 +131,8 @@ void fn_804ABF00(void *obj, void *val);
 u32 fn_804ABF08(void *p);
 void fn_804ABF14(void *p);
 u32 fn_804ABF20(void);
-void fn_804ABF28(void);
-void fn_804ABF34(void);
+void fn_804ABF28(void *p, u32 val);
+void fn_804ABF34(void *a, void *b, void *c, void *d);
 void fn_804ABF40(void);
 void *fn_804ABF44(void *obj);
 void fn_804ABF4C(void);
@@ -141,13 +141,13 @@ void fn_804ABF84(void);
 void *fn_804AC3C8(void *obj);
 void *fn_804AC3D0(void *obj);
 void *fn_804AC3D8(const void *p, u32 idx);
-void fn_804AC3E8(void);
-void fn_804AC3F8(void);
-void fn_804AC408(void);
-void fn_804AC410(void);
-void fn_804AC418(void);
-void fn_804AC420(void);
-void fn_804AC428(void);
+void fn_804AC3E8();
+void fn_804AC3F8();
+void fn_804AC408(void *p);
+void fn_804AC410(void *p);
+void fn_804AC418(void *p);
+void fn_804AC420(void *p);
+void fn_804AC428(void *p);
 void fn_804AC430(void);
 void fn_804AC488(void);
 void fn_804AC588(void);
@@ -164,7 +164,7 @@ void fn_804ACE68(void);
 void fn_804AD000(void);
 void fn_804AD1EC(void);
 
-asm void fn_804ABA2C(void)
+asm void fn_804ABA2C(void *p)
 {
     nofralloc
     stwu r1, -0x380(r1)
@@ -509,20 +509,14 @@ u32 fn_804ABF20(void)
     return lbl_8087EF8C;
 }
 
-asm void fn_804ABF28(void)
+void fn_804ABF28(void *p, u32 val)
 {
-    nofralloc
-    mr r5, r4
-    li r4, 0x3
-    b gx_setRenderStateParam
+    gx_setRenderStateParam(p, 3, val);
 }
 
-asm void fn_804ABF34(void)
+void fn_804ABF34(void *a, void *b, void *c, void *d)
 {
-    nofralloc
-    li r7, 0x0
-    li r8, 0x7d
-    b __GXSetVtxDesc
+    __GXSetVtxDesc(a, b, c, d, 0, 0x7d);
 }
 
 void fn_804ABF40(void) {
@@ -852,7 +846,7 @@ void *fn_804AC3D8(const void *p, u32 idx)
     return (u8 *)*(const void **)((const u8 *)p + 0x4) + (idx << 2);
 }
 
-asm void fn_804AC3E8(void)
+asm void fn_804AC3E8(void *p)
 {
     nofralloc
     lwzu r12, 0x208(r3)
@@ -861,7 +855,7 @@ asm void fn_804AC3E8(void)
     bctr
 }
 
-asm void fn_804AC3F8(void)
+asm void fn_804AC3F8(void *p)
 {
     nofralloc
     lwzu r12, 0x208(r3)
@@ -870,39 +864,29 @@ asm void fn_804AC3F8(void)
     bctr
 }
 
-asm void fn_804AC408(void)
+void fn_804AC408(void *p)
 {
-    nofralloc
-    subi r3, r3, 0x48
-    b fn_804AC3F8
+    fn_804AC3F8((u8 *)p - 0x48);
 }
 
-asm void fn_804AC410(void)
+void fn_804AC410(void *p)
 {
-    nofralloc
-    subi r3, r3, 0x48
-    b fn_804AB060
+    fn_804AB060((u8 *)p - 0x48);
 }
 
-asm void fn_804AC418(void)
+void fn_804AC418(void *p)
 {
-    nofralloc
-    subi r3, r3, 0x48
-    b fn_804ABA2C
+    fn_804ABA2C((u8 *)p - 0x48);
 }
 
-asm void fn_804AC420(void)
+void fn_804AC420(void *p)
 {
-    nofralloc
-    subi r3, r3, 0x48
-    b fn_804AC3E8
+    fn_804AC3E8((u8 *)p - 0x48);
 }
 
-asm void fn_804AC428(void)
+void fn_804AC428(void *p)
 {
-    nofralloc
-    subi r3, r3, 0x48
-    b fn_804A83E4
+    fn_804A83E4((u8 *)p - 0x48);
 }
 
 asm void fn_804AC430(void)

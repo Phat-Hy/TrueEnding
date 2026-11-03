@@ -16,7 +16,7 @@ extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void compass_findWaypointIndex(void);
 extern void model_updateBoneTransforms(void);
-extern void fn_8022BEAC(void);
+extern void fn_8022BEAC();
 extern void fn_8022C3F0(void);
 extern void fn_8022FAC4(void);
 extern void fn_80232AC4(void);
@@ -28,7 +28,7 @@ extern void fn_80232B98(void);
 extern void fn_80232BEC(void);
 extern void fn_80232D04(void);
 extern void fn_80232E48(void);
-extern void fn_80232ED4(void);
+extern void fn_80232ED4();
 extern void fn_80232F84(void);
 extern void fn_80232FF4(void);
 extern void fn_802330A4(void);
@@ -42,7 +42,7 @@ extern void fn_802346F0(void);
 extern void fn_80234764(void);
 extern void fn_802347DC(void);
 extern void fn_802348E4(void);
-extern void fn_8023686C(void);
+extern void fn_8023686C();
 extern void fn_802368B0(void);
 extern void fn_80239AB4(void);
 extern void atn_LoadHandle_getName(void);
@@ -61,12 +61,12 @@ extern u32 lbl_8087DC1C;
 extern u32 lbl_8087EFA8;
 extern u32 lbl_8087EFB4;
 extern u32 lbl_80883160;
-extern u32 lbl_80883164;
+extern const f32 lbl_80883164;
 extern u32 lbl_80883168;
 
 /* Function declarations */
 void fn_80239BD0(void);
-void fn_80239C14(void);
+void fn_80239C14(void *p);
 void fn_80239C20(void);
 void fn_80239C6C(void);
 void fn_80239D1C(void);
@@ -81,10 +81,10 @@ void fn_8023A254(void);
 void fn_8023A2A8(void);
 void fn_8023A340(void);
 void fn_8023A5A8(void);
-void fn_8023A60C(void);
+void fn_8023A60C(void *p);
 void fn_8023A614(void);
 void fn_8023A664(void);
-void fn_8023A678(void);
+void fn_8023A678(void *p);
 void res_Shader_bindParams(void);
 void res_registerResource(void);
 void fn_8023AE34(void);
@@ -111,12 +111,9 @@ asm void fn_80239BD0(void)
     blr
 }
 
-asm void fn_80239C14(void)
+void fn_80239C14(void *p)
 {
-    nofralloc
-    lfs f1, lbl_80883164
-    addi r3, r3, 0x4c
-    b fn_8023686C
+    fn_8023686C((u8 *)p + 0x4c, lbl_80883164);
 }
 
 asm void fn_80239C20(void)
@@ -884,11 +881,9 @@ lbl_fn_8023A5A8_00000A20:
     blr
 }
 
-asm void fn_8023A60C(void)
+void fn_8023A60C(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x4c
-    b fn_80232ED4
+    fn_80232ED4((u8 *)p + 0x4c);
 }
 
 asm void fn_8023A614(void)
@@ -926,11 +921,9 @@ asm void fn_8023A664(void)
     bctr
 }
 
-asm void fn_8023A678(void)
+void fn_8023A678(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x4c
-    b fn_8022BEAC
+    fn_8022BEAC((u8 *)p + 0x4c);
 }
 
 asm void res_Shader_bindParams(void)
