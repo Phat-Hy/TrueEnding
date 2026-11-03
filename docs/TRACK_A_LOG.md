@@ -1180,3 +1180,13 @@ Measurement discipline (this cost most of the session, so it is written down):
     the end and expect the same number as the pristine tree at that artifact state. This session verified
     the four names are matching-neutral in exactly that way (17,992 before and after, renamed-symbol split
     and pristine-symbol split both 17,992).
+
+Correction to the paragraph above, after checking the branch history: the 18,017 -> 17,992 shift is not a
+split-artifact effect. This worktree was fast-forwarded mid-session from `44b3c55c` to `44effb39`, which
+carries 11 commits (Batches 89-94 plus five decompile batches, 611 `asm void` bodies converted to C). Session
+start measured 7,424,972 B / 18,017 fn on `44b3c55c`; the same worktree after the fast-forward measures
+7,424,564 B / 17,992 fn. The 540 B / 25-function gap therefore belongs to those conversion batches (a handful
+of conversions that are byte-fuzzy, not byte-exact - invisible in the rounded 99.29 %). The four names in this
+session are matching-neutral regardless: at a fixed HEAD and fixed split artifacts the count is 17,992 both
+with the rename applied and with it reverted. Also note the worktree is being driven concurrently by another
+Track A agent - before committing, re-check `git log --oneline -1`.

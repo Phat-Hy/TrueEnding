@@ -304,7 +304,10 @@ copy is 287 kpx, so two of them alone would be 40% of the measured area.
   setup calls it as `(obj, buf, w, h, fmt, wrapS, wrapT, mipmap)`. `0x80616250` (`GXClampLightAngle`) is the
   matching `GXInitTexObjLOD`. The GX-light names between `0x80615D20` and `0x806166E0` were assigned by
   pattern and are shifted; do not cite them without reading the body.
-* **The progress line in §0 is stale.** A clean rebuild of `origin/track-a` (`44b3c55c`) measures
-  `7,424,972 / 7,477,608 B (18,017 / 18,155 functions)`, not `7,425,512 / 18,054`: 540 B / 37 functions were
-  lost by a commit after that number was recorded, and the loss is invisible in the `99.30%` line because it
-  also rounds to 99.30. Naming cannot move this number, so the gap is pre-existing and needs its own bisect.
+* **The progress line in §0 is stale, and it moved again mid-session.** `44b3c55c` measures
+  `7,424,972 / 7,477,608 B (18,017 functions)` here, not `7,425,512 / 18,054`; `44effb39` - Batches 89-94
+  plus five decompile batches, 611 `asm void` conversions - measures `7,424,564 B (17,992 functions)`.
+  Both are 99.29-99.30 %, i.e. the losses are invisible in the rounded line. A rename cannot move the
+  number (verified: same HEAD, same split artifacts, rename applied and reverted both give 17,992), so the
+  gap belongs to those conversion batches - a handful of conversions that are byte-*fuzzy* rather than
+  byte-exact - and it needs its own bisect before more batches land on top of it.
