@@ -35566,10 +35566,10 @@
 .endfn fn_801437D0
 
 # .text:0x1F3C8 | 0x801446E8 | size: 0x8
-.fn fn_801446E8, global
+.fn ctrl_base_isTargetable, global
 /* 801446E8 0013ED48  38 60 00 00 */	li r3, 0x0
 /* 801446EC 0013ED4C  4E 80 00 20 */	blr
-.endfn fn_801446E8
+.endfn ctrl_base_isTargetable
 
 # .text:0x1F3D0 | 0x801446F0 | size: 0x20
 .fn fn_801446F0, global
@@ -39115,15 +39115,15 @@
 .endfn fn_80147A08
 
 # .text:0x226EC | 0x80147A0C | size: 0x4
-.fn fn_80147A0C, global
+.fn ctrl_base_onTargetChanged, global
 /* 80147A0C 0014206C  4E 80 00 20 */	blr
-.endfn fn_80147A0C
+.endfn ctrl_base_onTargetChanged
 
 # .text:0x226F0 | 0x80147A10 | size: 0x8
-.fn fn_80147A10, global
+.fn ctrl_base_getInteractionRadius, global
 /* 80147A10 00142070  38 60 00 00 */	li r3, 0x0
 /* 80147A14 00142074  4E 80 00 20 */	blr
-.endfn fn_80147A10
+.endfn ctrl_base_getInteractionRadius
 
 # .text:0x226F8 | 0x80147A18 | size: 0xEC
 .fn fn_80147A18, global
@@ -49712,10 +49712,10 @@
 .endfn fn_80151168
 
 # .text:0x2BE60 | 0x80151180 | size: 0x8
-.fn fn_80151180, global
+.fn ctrl_base_calcBounds, global
 /* 80151180 0014B7E0  38 60 00 00 */	li r3, 0x0
 /* 80151184 0014B7E4  4E 80 00 20 */	blr
-.endfn fn_80151180
+.endfn ctrl_base_calcBounds
 
 # .text:0x2BE68 | 0x80151188 | size: 0xC
 .fn fn_80151188, global
@@ -96288,10 +96288,10 @@
 .endfn fn_8017A160
 
 # .text:0x54F00 | 0x8017A220 | size: 0x8
-.fn fn_8017A220, global
+.fn ctrl_base_getOrientation, global
 /* 8017A220 00174880  38 60 00 00 */	li r3, 0x0
 /* 8017A224 00174884  4E 80 00 20 */	blr
-.endfn fn_8017A220
+.endfn ctrl_base_getOrientation
 
 # .text:0x54F08 | 0x8017A228 | size: 0xD0
 .fn fn_8017A228, global
@@ -96354,10 +96354,10 @@
 .endfn fn_8017A228
 
 # .text:0x54FD8 | 0x8017A2F8 | size: 0x8
-.fn fn_8017A2F8, global
+.fn ctrl_base_getActiveVoiceId, global
 /* 8017A2F8 00174958  38 60 FF FF */	li r3, -0x1
 /* 8017A2FC 0017495C  4E 80 00 20 */	blr
-.endfn fn_8017A2F8
+.endfn ctrl_base_getActiveVoiceId
 
 # .text:0x54FE0 | 0x8017A300 | size: 0x3C
 .fn fn_8017A300, global
@@ -111869,9 +111869,9 @@
 .endfn fn_80187FF4
 
 # .text:0x62D40 | 0x80188060 | size: 0x4
-.fn fn_80188060, global
+.fn ctrl_base_canWarp, global
 /* 80188060 001826C0  4E 80 00 20 */	blr
-.endfn fn_80188060
+.endfn ctrl_base_canWarp
 
 # .text:0x62D44 | 0x80188064 | size: 0x1C
 .fn map_door_getDefaultOffset, global
@@ -111885,16 +111885,16 @@
 .endfn map_door_getDefaultOffset
 
 # .text:0x62D60 | 0x80188080 | size: 0x8
-.fn fn_80188080, global
+.fn ctrl_base_preUpdateStatus, global
 /* 80188080 001826E0  38 60 00 00 */	li r3, 0x0
 /* 80188084 001826E4  4E 80 00 20 */	blr
-.endfn fn_80188080
+.endfn ctrl_base_preUpdateStatus
 
 # .text:0x62D68 | 0x80188088 | size: 0x8
-.fn fn_80188088, global
+.fn ctrl_base_getSquadState, global
 /* 80188088 001826E8  38 60 00 00 */	li r3, 0x0
 /* 8018808C 001826EC  4E 80 00 20 */	blr
-.endfn fn_80188088
+.endfn ctrl_base_getSquadState
 
 # .text:0x62D70 | 0x80188090 | size: 0x40
 .fn fn_80188090, global

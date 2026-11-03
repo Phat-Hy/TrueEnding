@@ -75,10 +75,10 @@ void fn_80187CC0(void);
 void fn_80187D04(void);
 void fn_80187E2C(void);
 void fn_80187FF4(void);
-void fn_80188060(void);
+void ctrl_base_canWarp(void);
 void map_door_getDefaultOffset(void);
-u32 fn_80188080(void);
-u32 fn_80188088(void);
+u32 ctrl_base_preUpdateStatus(void);
+u32 ctrl_base_getSquadState(void);
 void fn_80188090(void);
 void fn_801880D0(void);
 void fn_801881C4(void);
@@ -401,7 +401,7 @@ lbl_fn_80187FF4_0000040C:
     blr
 }
 
-void fn_80188060(void) {
+void ctrl_base_canWarp(void) {
 }
 
 asm void map_door_getDefaultOffset(void)
@@ -416,12 +416,12 @@ asm void map_door_getDefaultOffset(void)
     blr
 }
 
-u32 fn_80188080(void)
+u32 ctrl_base_preUpdateStatus(void)
 {
     return 0;
 }
 
-u32 fn_80188088(void)
+u32 ctrl_base_getSquadState(void)
 {
     return 0;
 }

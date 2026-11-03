@@ -90,7 +90,7 @@ void fn_800EE180(void);
 void camera_updateTargetMode(void);
 void fn_800EE494(void);
 void fn_800EE4D8(void);
-u32 fn_800EE5A4(void);
+u32 ctrl_base_getCollisionTarget(void);
 void fn_800EE5AC(void);
 void fn_800EE640(void);
 void fn_800EE794(void);
@@ -545,7 +545,7 @@ lbl_fn_800EE4D8_000005A8:
     blr
 }
 
-u32 fn_800EE5A4(void)
+u32 ctrl_base_getCollisionTarget(void)
 {
     return 0;
 }

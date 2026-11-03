@@ -124,7 +124,7 @@ void fn_8015061C(void);
 void dialog_event_executeAction(void);
 void fn_8015115C(void *p, u32 a, u32 b);
 u32 fn_80151168(void *p, u32 mask);
-u32 fn_80151180(void);
+u32 ctrl_base_calcBounds(void);
 u32 fn_80151188(void *p);
 void fn_80151194(void);
 
@@ -1950,7 +1950,7 @@ u32 fn_80151168(void *p, u32 mask)
     return (*(u32 *)p & mask) == mask;
 }
 
-u32 fn_80151180(void)
+u32 ctrl_base_calcBounds(void)
 {
     return 0;
 }

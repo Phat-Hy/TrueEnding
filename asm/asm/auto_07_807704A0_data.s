@@ -16398,17 +16398,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077CC80
 
 # .data:0xC840 | 0x8077CCE0 | size: 0x10
@@ -16492,17 +16492,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077CD48
 
 # .data:0xC908 | 0x8077CDA8 | size: 0x10
@@ -16534,17 +16534,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077CDC0
 
 # .data:0xC980 | 0x8077CE20 | size: 0x10
@@ -16576,17 +16576,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077CE38
 
 # .data:0xC9F8 | 0x8077CE98 | size: 0x10
@@ -16618,17 +16618,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
 	.4byte fn_801882EC
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077CEB0
 
 # .data:0xCA70 | 0x8077CF10 | size: 0x10
@@ -16696,15 +16696,15 @@
 	.4byte fn_801899B0
 	.4byte fn_80189A30
 	.4byte fn_80189A8C
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 	.4byte fn_80189B28
 .endobj lbl_8077CF80
 
@@ -16740,15 +16740,15 @@
 	.4byte fn_801899B0
 	.4byte fn_80189A30
 	.4byte fn_80189A8C
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 	.4byte fn_80189B28
 .endobj lbl_8077D000
 
@@ -16784,15 +16784,15 @@
 	.4byte fn_801899B0
 	.4byte fn_80189A30
 	.4byte fn_80189A8C
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 	.4byte fn_80189B28
 .endobj lbl_8077D080
 
@@ -16828,15 +16828,15 @@
 	.4byte fn_801899B0
 	.4byte fn_80189A30
 	.4byte fn_80189A8C
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 	.4byte fn_80189B28
 .endobj lbl_8077D100
 
@@ -16872,15 +16872,15 @@
 	.4byte fn_801899B0
 	.4byte fn_80189A30
 	.4byte fn_80189A8C
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 	.4byte fn_80189B28
 .endobj lbl_8077D180
 
@@ -16916,15 +16916,15 @@
 	.4byte fn_801899B0
 	.4byte fn_80189A30
 	.4byte fn_80189A8C
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 	.4byte fn_80189B28
 .endobj lbl_8077D200
 
@@ -16960,15 +16960,15 @@
 	.4byte fn_801899B0
 	.4byte fn_80189A30
 	.4byte fn_80189A8C
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 	.4byte fn_80189B28
 .endobj lbl_8077D280
 
@@ -17004,15 +17004,15 @@
 	.4byte fn_801899B0
 	.4byte fn_80189A30
 	.4byte fn_80189A8C
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 	.4byte fn_80189B28
 .endobj lbl_8077D300
 
@@ -17048,15 +17048,15 @@
 	.4byte fn_801899B0
 	.4byte fn_80189A30
 	.4byte fn_80189A8C
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 	.4byte fn_80189B28
 .endobj lbl_8077D380
 
@@ -17090,17 +17090,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077D400
 
 # .data:0xCFC0 | 0x8077D460 | size: 0x10
@@ -17134,15 +17134,15 @@
 	.4byte fn_801899B0
 	.4byte fn_80189A30
 	.4byte fn_80189A8C
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 	.4byte fn_80189B28
 .endobj lbl_8077D478
 
@@ -17178,15 +17178,15 @@
 	.4byte fn_801899B0
 	.4byte fn_80189A30
 	.4byte fn_80189A8C
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 	.4byte fn_80189B28
 .endobj lbl_8077D4F8
 
@@ -17222,15 +17222,15 @@
 	.4byte fn_801899B0
 	.4byte fn_80189A30
 	.4byte fn_80189A8C
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 	.4byte fn_80189B28
 .endobj lbl_8077D578
 
@@ -17382,17 +17382,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077D6B0
 
 # .data:0xD270 | 0x8077D710 | size: 0x10
@@ -17424,17 +17424,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077D728
 
 # .data:0xD2E8 | 0x8077D788 | size: 0x10
@@ -17466,17 +17466,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077D7A0
 
 # .data:0xD360 | 0x8077D800 | size: 0x10
@@ -17508,17 +17508,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077D818
 
 # .data:0xD3D8 | 0x8077D878 | size: 0x10
@@ -17550,17 +17550,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077D890
 
 # .data:0xD450 | 0x8077D8F0 | size: 0x10
@@ -17592,17 +17592,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077D908
 
 # .data:0xD4C8 | 0x8077D968 | size: 0x10
@@ -17634,17 +17634,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077D980
 
 # .data:0xD540 | 0x8077D9E0 | size: 0x10
@@ -17676,17 +17676,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077D9F8
 
 # .data:0xD5B8 | 0x8077DA58 | size: 0x10
@@ -17718,17 +17718,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077DA70
 
 # .data:0xD630 | 0x8077DAD0 | size: 0x10
@@ -17760,17 +17760,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077DAE8
 
 # .data:0xD6A8 | 0x8077DB48 | size: 0x10
@@ -17802,17 +17802,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077DB60
 
 # .data:0xD720 | 0x8077DBC0 | size: 0x10
@@ -17918,17 +17918,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077DC90
 
 # .data:0xD850 | 0x8077DCF0 | size: 0xC
@@ -18086,17 +18086,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077DE00
 
 # .data:0xD9C0 | 0x8077DE60 | size: 0x10
@@ -18128,17 +18128,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077DE78
 
 # .data:0xDA38 | 0x8077DED8 | size: 0x10
@@ -18170,17 +18170,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077DEF0
 
 # .data:0xDAB0 | 0x8077DF50 | size: 0x10
@@ -18212,17 +18212,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077DF68
 
 # .data:0xDB28 | 0x8077DFC8 | size: 0x10
@@ -18254,17 +18254,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte fn_801A0410
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077DFE0
 
 # .data:0xDBA0 | 0x8077E040 | size: 0x10
@@ -18296,17 +18296,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077E058
 
 # .data:0xDC18 | 0x8077E0B8 | size: 0x10
@@ -18338,17 +18338,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077E0D0
 
 # .data:0xDC90 | 0x8077E130 | size: 0x10
@@ -18376,17 +18376,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077E140
 
 # .data:0xDD08 | 0x8077E1A8 | size: 0x10
@@ -18418,17 +18418,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077E1C0
 
 # .data:0xDD80 | 0x8077E220 | size: 0x10
@@ -18460,17 +18460,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077E238
 
 # .data:0xDDF8 | 0x8077E298 | size: 0x10
@@ -18502,17 +18502,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077E2B0
 
 # .data:0xDE70 | 0x8077E310 | size: 0x10
@@ -18544,17 +18544,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077E328
 
 # .data:0xDEE8 | 0x8077E388 | size: 0x10
@@ -18586,17 +18586,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077E3A0
 
 # .data:0xDF60 | 0x8077E400 | size: 0x10
@@ -18628,17 +18628,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077E418
 
 # .data:0xDFD8 | 0x8077E478 | size: 0x10
@@ -18670,17 +18670,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077E490
 
 # .data:0xE050 | 0x8077E4F0 | size: 0x10
@@ -18712,17 +18712,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077E508
 
 # .data:0xE0C8 | 0x8077E568 | size: 0x10
@@ -18754,17 +18754,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077E580
 
 # .data:0xE140 | 0x8077E5E0 | size: 0x10
@@ -18796,17 +18796,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077E5F8
 
 # .data:0xE1B8 | 0x8077E658 | size: 0x10
@@ -18838,17 +18838,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077E670
 
 # .data:0xE230 | 0x8077E6D0 | size: 0x10
@@ -18880,17 +18880,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077E6E8
 
 # .data:0xE2A8 | 0x8077E748 | size: 0x10
@@ -18922,17 +18922,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077E760
 
 # .data:0xE320 | 0x8077E7C0 | size: 0x10
@@ -18964,17 +18964,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077E7D8
 
 # .data:0xE398 | 0x8077E838 | size: 0x10
@@ -19002,17 +19002,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077E848
 
 # .data:0xE410 | 0x8077E8B0 | size: 0x10
@@ -19040,17 +19040,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077E8C0
 
 # .data:0xE488 | 0x8077E928 | size: 0x10
@@ -19078,17 +19078,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077E938
 
 # .data:0xE500 | 0x8077E9A0 | size: 0x10
@@ -19120,17 +19120,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077E9B8
 
 # .data:0xE578 | 0x8077EA18 | size: 0x10
@@ -19162,17 +19162,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077EA30
 
 # .data:0xE5F0 | 0x8077EA90 | size: 0x10
@@ -19204,17 +19204,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
 	.4byte fn_80196408
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
+	.4byte ctrl_base_getCollisionTarget
 	.4byte fn_801A0418
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077EAA8
 
 # .data:0xE668 | 0x8077EB08 | size: 0x10
@@ -19246,17 +19246,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
+	.4byte ctrl_base_getCollisionTarget
 	.4byte fn_801A0420
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077EB20
 
 # .data:0xE6E0 | 0x8077EB80 | size: 0x10
@@ -19288,17 +19288,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077EB98
 
 # .data:0xE758 | 0x8077EBF8 | size: 0x10
@@ -19330,17 +19330,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077EC10
 
 # .data:0xE7D0 | 0x8077EC70 | size: 0x10
@@ -19372,17 +19372,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077EC88
 
 # .data:0xE848 | 0x8077ECE8 | size: 0x10
@@ -19414,17 +19414,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077ED00
 
 # .data:0xE8C0 | 0x8077ED60 | size: 0x10
@@ -19659,17 +19659,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
 	.4byte fn_801A21A4
-	.4byte fn_80188060
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077EFD0
 
 # .data:0xEB90 | 0x8077F030 | size: 0x18
@@ -19703,17 +19703,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077F050
 
 # .data:0xEC10 | 0x8077F0B0 | size: 0x10
@@ -19745,17 +19745,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077F0C8
 
 # .data:0xEC88 | 0x8077F128 | size: 0x10
@@ -19833,17 +19833,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077F198
 
 # .data:0xED58 | 0x8077F1F8 | size: 0x10
@@ -19875,17 +19875,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077F210
 
 # .data:0xEDD0 | 0x8077F270 | size: 0x10
@@ -19977,17 +19977,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077F308
 
 # .data:0xEEC8 | 0x8077F368 | size: 0x10
@@ -20019,17 +20019,17 @@
 	.4byte fn_801A4DC4
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
 	.4byte fn_801A766C
 	.4byte fn_801A7664
 	.4byte fn_801A7650
-	.4byte fn_800EE5A4
+	.4byte ctrl_base_getCollisionTarget
 	.4byte fn_801A7648
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077F380
 
 # .data:0xEF40 | 0x8077F3E0 | size: 0x18
@@ -20063,17 +20063,17 @@
 	.4byte fn_801A4DC4
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
 	.4byte fn_801A766C
 	.4byte fn_801A7664
 	.4byte fn_801A7650
-	.4byte fn_800EE5A4
+	.4byte ctrl_base_getCollisionTarget
 	.4byte fn_801A7648
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077F400
 
 # .data:0xEFC0 | 0x8077F460 | size: 0x18
@@ -20107,17 +20107,17 @@
 	.4byte fn_801A4DC4
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
 	.4byte fn_801A766C
 	.4byte fn_801A7664
 	.4byte fn_801A7650
-	.4byte fn_800EE5A4
+	.4byte ctrl_base_getCollisionTarget
 	.4byte fn_801A7648
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077F480
 
 # .data:0xF040 | 0x8077F4E0 | size: 0x18
@@ -20151,17 +20151,17 @@
 	.4byte fn_801A4DC4
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
 	.4byte fn_801A766C
 	.4byte fn_801A7664
 	.4byte fn_801A7650
-	.4byte fn_800EE5A4
+	.4byte ctrl_base_getCollisionTarget
 	.4byte fn_801A7648
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077F500
 
 # .data:0xF0C0 | 0x8077F560 | size: 0x10
@@ -20193,17 +20193,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
 	.4byte fn_801A21A4
-	.4byte fn_80188060
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077F578
 
 # .data:0xF138 | 0x8077F5D8 | size: 0x18
@@ -20361,17 +20361,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
 	.4byte fn_801AA95C
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077F6F8
 
 # .data:0xF2B8 | 0x8077F758 | size: 0x10
@@ -20403,17 +20403,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077F770
 
 # .data:0xF330 | 0x8077F7D0 | size: 0x10
@@ -20445,17 +20445,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077F7E8
 
 # .data:0xF3A8 | 0x8077F848 | size: 0x10
@@ -20487,17 +20487,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077F860
 
 # .data:0xF420 | 0x8077F8C0 | size: 0x10
@@ -20529,17 +20529,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077F8D8
 
 # .data:0xF498 | 0x8077F938 | size: 0x10
@@ -20571,17 +20571,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077F950
 
 # .data:0xF510 | 0x8077F9B0 | size: 0x10
@@ -20613,17 +20613,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077F9C8
 
 # .data:0xF588 | 0x8077FA28 | size: 0x10
@@ -20655,17 +20655,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077FA40
 
 # .data:0xF600 | 0x8077FAA0 | size: 0x10
@@ -20767,17 +20767,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077FB60
 
 # .data:0xF720 | 0x8077FBC0 | size: 0x10
@@ -20851,17 +20851,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077FC40
 
 # .data:0xF800 | 0x8077FCA0 | size: 0x10
@@ -20893,17 +20893,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077FCB8
 
 # .data:0xF878 | 0x8077FD18 | size: 0x10
@@ -20935,17 +20935,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077FD30
 
 # .data:0xF8F0 | 0x8077FD90 | size: 0x10
@@ -20977,17 +20977,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077FDA8
 
 # .data:0xF968 | 0x8077FE08 | size: 0x10
@@ -21019,17 +21019,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
 	.4byte fn_801AEF54
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077FE20
 
 # .data:0xF9E0 | 0x8077FE80 | size: 0x10
@@ -21061,17 +21061,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077FE98
 
 # .data:0xFA58 | 0x8077FEF8 | size: 0x10
@@ -21103,17 +21103,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077FF10
 
 # .data:0xFAD0 | 0x8077FF70 | size: 0x10
@@ -21145,17 +21145,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_8077FF88
 
 # .data:0xFB48 | 0x8077FFE8 | size: 0x10
@@ -21187,17 +21187,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_80780000
 
 # .data:0xFBC0 | 0x80780060 | size: 0x10
@@ -21229,17 +21229,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_80780078
 
 # .data:0xFC38 | 0x807800D8 | size: 0x10
@@ -21355,17 +21355,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_80780240
 
 # .data:0xFE00 | 0x807802A0 | size: 0x10
@@ -21397,17 +21397,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
 	.4byte fn_801B0D00
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_807802B8
 
 # .data:0xFE78 | 0x80780318 | size: 0x10
@@ -21439,17 +21439,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_80780330
 
 # .data:0xFEF0 | 0x80780390 | size: 0x10
@@ -21481,17 +21481,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_807803A8
 
 # .data:0xFF68 | 0x80780408 | size: 0x10
@@ -21523,17 +21523,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_80780420
 
 # .data:0xFFE0 | 0x80780480 | size: 0x10
@@ -21565,17 +21565,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_80780498
 
 # .data:0x10058 | 0x807804F8 | size: 0x10
@@ -21607,17 +21607,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_80780510
 
 # .data:0x100D0 | 0x80780570 | size: 0x10
@@ -21649,17 +21649,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
 	.4byte fn_801B26C0
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_80780588
 
 # .data:0x10148 | 0x807805E8 | size: 0x10
@@ -21691,17 +21691,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_80780600
 
 # .data:0x101C0 | 0x80780660 | size: 0x10
@@ -21747,17 +21747,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_80780690
 
 # .data:0x10250 | 0x807806F0 | size: 0x10
@@ -21789,17 +21789,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_80780708
 
 # .data:0x102C8 | 0x80780768 | size: 0x10
@@ -21831,17 +21831,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_80780780
 
 # .data:0x10340 | 0x807807E0 | size: 0x10
@@ -21885,17 +21885,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_80780818
 
 # .data:0x103D8 | 0x80780878 | size: 0x18
@@ -21929,17 +21929,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_80780898
 
 # .data:0x10458 | 0x807808F8 | size: 0x10
@@ -21985,17 +21985,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_80780928
 
 # .data:0x104E8 | 0x80780988 | size: 0x10
@@ -22027,17 +22027,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_807809A0
 
 # .data:0x10560 | 0x80780A00 | size: 0x10
@@ -22069,17 +22069,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_80780A18
 
 # .data:0x105D8 | 0x80780A78 | size: 0x10
@@ -22111,17 +22111,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_80780A90
 
 # .data:0x10650 | 0x80780AF0 | size: 0x10
@@ -22153,17 +22153,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_80780B08
 
 # .data:0x106C8 | 0x80780B68 | size: 0x10
@@ -22251,17 +22251,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_80780C00
 
 # .data:0x107C0 | 0x80780C60 | size: 0x10
@@ -22293,17 +22293,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_80780C78
 
 # .data:0x10838 | 0x80780CD8 | size: 0x10
@@ -22335,17 +22335,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_80780CF0
 
 # .data:0x108B0 | 0x80780D50 | size: 0x10
@@ -22377,17 +22377,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_80780D68
 
 # .data:0x10928 | 0x80780DC8 | size: 0x10
@@ -22419,17 +22419,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_80780DE0
 
 # .data:0x109A0 | 0x80780E40 | size: 0x10
@@ -22503,17 +22503,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_80780ED0
 
 # .data:0x10A90 | 0x80780F30 | size: 0x10
@@ -22545,17 +22545,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_80780F48
 
 # .data:0x10B08 | 0x80780FA8 | size: 0x10
@@ -22587,17 +22587,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_80780FC0
 
 # .data:0x10B80 | 0x80781020 | size: 0x18
@@ -22631,17 +22631,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_80781040
 
 # .data:0x10C00 | 0x807810A0 | size: 0x18
@@ -22675,17 +22675,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_807810C0
 
 # .data:0x10C80 | 0x80781120 | size: 0x18
@@ -22719,17 +22719,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_80781140
 
 # .data:0x10D00 | 0x807811A0 | size: 0x18
@@ -22763,17 +22763,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_807811C0
 
 # .data:0x10D80 | 0x80781220 | size: 0x18
@@ -22807,17 +22807,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_80781240
 
 # .data:0x10E00 | 0x807812A0 | size: 0x18
@@ -22851,17 +22851,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_807812C0
 
 # .data:0x10E80 | 0x80781320 | size: 0x18
@@ -22895,17 +22895,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_80781340
 
 # .data:0x10F00 | 0x807813A0 | size: 0x18
@@ -22939,17 +22939,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_807813C0
 
 # .data:0x10F80 | 0x80781420 | size: 0x10
@@ -22981,17 +22981,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_80781438
 
 # .data:0x10FF8 | 0x80781498 | size: 0x10
@@ -23023,17 +23023,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_807814B0
 
 # .data:0x11070 | 0x80781510 | size: 0x10
@@ -23065,17 +23065,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_80781528
 
 # .data:0x110E8 | 0x80781588 | size: 0x10
@@ -23107,17 +23107,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
 	.4byte fn_801BB138
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_807815A0
 
 # .data:0x11160 | 0x80781600 | size: 0x10
@@ -23149,17 +23149,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_80781618
 
 # .data:0x111D8 | 0x80781678 | size: 0x10
@@ -23191,17 +23191,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_80781690
 
 # .data:0x11250 | 0x807816F0 | size: 0x10
@@ -23267,17 +23267,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_80781740
 
 # .data:0x11300 | 0x807817A0 | size: 0x18
@@ -23311,17 +23311,17 @@
 	.4byte fn_801C0144
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
 	.4byte fn_801C0360
 	.4byte fn_801C0358
 	.4byte fn_801C0344
 	.4byte fn_801C01E0
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_807817C0
 
 # .data:0x11380 | 0x80781820 | size: 0x10
@@ -23353,15 +23353,15 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
 	.4byte fn_801A21A4
 	.4byte fn_801C038C
 .endobj lbl_80781838
@@ -23439,17 +23439,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_80781910
 
 # .data:0x114D0 | 0x80781970 | size: 0x10
@@ -23481,17 +23481,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_80781988
 
 # .data:0x11548 | 0x807819E8 | size: 0x10
@@ -23523,17 +23523,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_80781A00
 
 # .data:0x115C0 | 0x80781A60 | size: 0x10
@@ -23565,17 +23565,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 	.4byte fn_801C0D04
 .endobj lbl_80781A78
 
@@ -23609,17 +23609,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 	.4byte fn_801C0C04
 .endobj lbl_80781AF8
 
@@ -23663,17 +23663,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
 	.4byte fn_801A21A4
-	.4byte fn_80188060
+	.4byte ctrl_base_canWarp
 .endobj lbl_80781B90
 
 # .data:0x11750 | 0x80781BF0 | size: 0x60
@@ -23691,17 +23691,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_80781BF0
 
 # .data:0x117B0 | 0x80781C50 | size: 0x10
@@ -23733,17 +23733,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_80781C68
 
 # .data:0x11828 | 0x80781CC8 | size: 0x10
@@ -23775,17 +23775,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_80781CE0
 
 # .data:0x118A0 | 0x80781D40 | size: 0x10
@@ -23825,17 +23825,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_80781D68
 
 # .data:0x11928 | 0x80781DC8 | size: 0x10
@@ -23867,17 +23867,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_80781DE0
 
 # .data:0x119A0 | 0x80781E40 | size: 0x10
@@ -23909,17 +23909,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_80781E58
 
 # .data:0x11A18 | 0x80781EB8 | size: 0x10
@@ -23971,17 +23971,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_80781EF0
 
 # .data:0x11AB0 | 0x80781F50 | size: 0x10
@@ -24013,17 +24013,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_80781F68
 
 # .data:0x11B28 | 0x80781FC8 | size: 0x10
@@ -24067,17 +24067,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_80782000
 
 # .data:0x11BC0 | 0x80782060 | size: 0x10
@@ -24109,17 +24109,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_80782078
 
 # .data:0x11C38 | 0x807820D8 | size: 0x10
@@ -24151,17 +24151,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_807820F0
 
 # .data:0x11CB0 | 0x80782150 | size: 0x10
@@ -24193,17 +24193,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_80782168
 
 # .data:0x11D28 | 0x807821C8 | size: 0x10
@@ -24235,17 +24235,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_807821E0
 
 # .data:0x11DA0 | 0x80782240 | size: 0x10
@@ -24277,17 +24277,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_80782258
 
 # .data:0x11E18 | 0x807822B8 | size: 0x10
@@ -24359,17 +24359,17 @@
 	.4byte fn_801CBAC0
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
+	.4byte ctrl_base_getCollisionTarget
 	.4byte fn_801CBFE4
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_80782310
 
 # .data:0x11ED0 | 0x80782370 | size: 0x10
@@ -24401,17 +24401,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_80782388
 
 # .data:0x11F48 | 0x807823E8 | size: 0x10
@@ -24443,17 +24443,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
 	.4byte fn_801CB24C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
 	.4byte fn_801A21A4
-	.4byte fn_80188060
+	.4byte ctrl_base_canWarp
 .endobj lbl_80782400
 
 # .data:0x11FC0 | 0x80782460 | size: 0x18
@@ -27373,17 +27373,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_80784340
 
 # .data:0x13F00 | 0x807843A0 | size: 0x10
@@ -34183,17 +34183,17 @@
 	.4byte fn_80158E14
 	.4byte fn_800FCD1C
 	.4byte decal_defaultCallback
-	.4byte fn_8017A220
-	.4byte fn_8017A2F8
-	.4byte fn_801446E8
-	.4byte fn_80147A0C
-	.4byte fn_80188088
-	.4byte fn_80188080
+	.4byte ctrl_base_getOrientation
+	.4byte ctrl_base_getActiveVoiceId
+	.4byte ctrl_base_isTargetable
+	.4byte ctrl_base_onTargetChanged
+	.4byte ctrl_base_getSquadState
+	.4byte ctrl_base_preUpdateStatus
 	.4byte map_door_getDefaultOffset
-	.4byte fn_800EE5A4
-	.4byte fn_80151180
-	.4byte fn_80147A10
-	.4byte fn_80188060
+	.4byte ctrl_base_getCollisionTarget
+	.4byte ctrl_base_calcBounds
+	.4byte ctrl_base_getInteractionRadius
+	.4byte ctrl_base_canWarp
 .endobj lbl_80789B10
 
 # .data:0x196D0 | 0x80789B70 | size: 0x10

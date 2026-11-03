@@ -79,8 +79,8 @@ u32 fn_801479D8(void *p);
 void fn_801479E4(void);
 void *fn_80147A00(void *p);
 void fn_80147A08(void);
-void fn_80147A0C(void);
-u32 fn_80147A10(void);
+void ctrl_base_onTargetChanged(void);
+u32 ctrl_base_getInteractionRadius(void);
 void fn_80147A18(void);
 void fn_80147B04(void);
 u32 fn_80148334(void *p);
@@ -118,10 +118,10 @@ void fn_80147A08(void)
     PSMTXQuat();
 }
 
-void fn_80147A0C(void) {
+void ctrl_base_onTargetChanged(void) {
 }
 
-u32 fn_80147A10(void)
+u32 ctrl_base_getInteractionRadius(void)
 {
     return 0;
 }

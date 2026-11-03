@@ -128,14 +128,14 @@ extern u32 lbl_80881AA4;
 extern u32 lbl_80881AA8;
 
 /* Function declarations */
-u32 fn_801446E8(void);
+u32 ctrl_base_isTargetable(void);
 void quest_resetObjectiveBounds(void *p);
 void quest_evaluateConditions(void);
 void fn_80144ED4(void);
 void fn_80144F4C(void);
 void quest_updateFlow(void);
 
-u32 fn_801446E8(void)
+u32 ctrl_base_isTargetable(void)
 {
     return 0;
 }

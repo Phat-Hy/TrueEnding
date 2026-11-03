@@ -13359,10 +13359,10 @@
 .endfn fn_800EE4D8
 
 # .text:0xBB94 | 0x800EE5A4 | size: 0x8
-.fn fn_800EE5A4, global
+.fn ctrl_base_getCollisionTarget, global
 /* 800EE5A4 000E8C04  38 60 00 00 */	li r3, 0x0
 /* 800EE5A8 000E8C08  4E 80 00 20 */	blr
-.endfn fn_800EE5A4
+.endfn ctrl_base_getCollisionTarget
 
 # .text:0xBB9C | 0x800EE5AC | size: 0x94
 .fn fn_800EE5AC, global

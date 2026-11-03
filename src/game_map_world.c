@@ -77,9 +77,9 @@ void fn_80179EBC(void);
 void fn_80179F98(void *p, u32 val);
 void fn_80179FA8(void);
 void fn_8017A160(void);
-u32 fn_8017A220(void);
+u32 ctrl_base_getOrientation(void);
 void fn_8017A228(void);
-s32 fn_8017A2F8(void);
+s32 ctrl_base_getActiveVoiceId(void);
 void fn_8017A300(void);
 void fn_8017A33C(void);
 void fn_8017A450(void);
@@ -745,7 +745,7 @@ lbl_fn_8017A160_00000850:
     blr
 }
 
-u32 fn_8017A220(void)
+u32 ctrl_base_getOrientation(void)
 {
     return 0;
 }
@@ -811,7 +811,7 @@ lbl_fn_8017A228_00000924:
     blr
 }
 
-s32 fn_8017A2F8(void)
+s32 ctrl_base_getActiveVoiceId(void)
 {
     return -1;
 }
