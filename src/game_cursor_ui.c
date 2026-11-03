@@ -113,7 +113,7 @@ void fn_800A9330(void);
 void fn_800A93C4(void);
 void fn_800A9450(void);
 void fn_800A9558(void);
-void fn_800A96AC(void);
+void gx_allocTextureBuffer(void);
 void fn_800A9738(void);
 void fn_800A9788(void *p);
 void fn_800A9794(void);
@@ -1629,7 +1629,7 @@ lbl_fn_800A9558_00001498:
     blr
 }
 
-asm void fn_800A96AC(void)
+asm void gx_allocTextureBuffer(void)
 {
     nofralloc
     stwu r1, -0x10(r1)

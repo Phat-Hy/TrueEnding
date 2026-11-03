@@ -17,10 +17,10 @@ extern void seq_setViewportAndScissor(void);
 extern void seq_bindSlotResource(void);
 extern void dungeon_initGlobalContext(void);
 extern void town_registerInteractionPoint(void);
-extern void fn_800A96AC(void);
+extern void gx_allocTextureBuffer(void);
 extern void layout_drawPane(void);
 extern void motion_initTransform(void);
-extern void fn_800C0508(void);
+extern void gx_captureEfbToTexture(void);
 extern void fn_800C0D4C(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void atn_LH_Texture_destructAndFree(void);
@@ -564,7 +564,7 @@ lbl_fn_800ABD94_000006A0:
     addze r22, r0
     mr r4, r23
     mr r5, r22
-    bl fn_800A96AC
+    bl gx_allocTextureBuffer
     mr r24, r3
     lis r29, lbl_807C7440@ha
     mr r4, r24
@@ -596,7 +596,7 @@ lbl_fn_800ABD94_000006A0:
     li r6, 0x6
     mr r4, r27
     mr r5, r28
-    bl fn_800A96AC
+    bl gx_allocTextureBuffer
     mr r21, r3
     addi r3, r1, 0x40
     mr r4, r21
@@ -623,7 +623,7 @@ lbl_fn_800ABD94_000006A0:
     mr r4, r28
     mr r5, r27
     li r6, 0x6
-    bl fn_800A96AC
+    bl gx_allocTextureBuffer
     mr r20, r3
     addi r3, r1, 0x20
     mr r4, r20
@@ -1154,7 +1154,7 @@ asm void fn_800AC6DC(void)
     mr r4, r28
     mr r5, r27
     li r6, 0x6
-    bl fn_800A96AC
+    bl gx_allocTextureBuffer
     mr r26, r3
     addi r3, r29, 0x8
     mr r4, r26
@@ -1179,7 +1179,7 @@ asm void fn_800AC6DC(void)
     mr r4, r28
     mr r5, r27
     li r6, 0x6
-    bl fn_800A96AC
+    bl gx_allocTextureBuffer
     mr r25, r3
     addi r3, r29, 0x28
     mr r4, r25
@@ -1204,7 +1204,7 @@ asm void fn_800AC6DC(void)
     bl GXDrawDone
     lwz r3, lbl_8087EFB4
     li r4, 0x0
-    bl fn_800C0508
+    bl gx_captureEfbToTexture
     clrlwi r5, r31, 16
     clrlwi r6, r30, 16
     li r3, 0x0

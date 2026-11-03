@@ -13,11 +13,11 @@ extern void fn_8005DF90(void);
 extern void seq_stepPlaybackTimer(void);
 extern void seq_setViewportAndScissor(void);
 extern void seq_bindSlotResource(void);
-extern void fn_800A96AC(void);
+extern void gx_allocTextureBuffer(void);
 extern void fn_800ACFC8(void);
 extern void fn_800BC2E0(void);
 extern void motion_initTransform(void);
-extern void fn_800C0508(void);
+extern void gx_captureEfbToTexture(void);
 extern void fn_800C0D4C(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void atn_LH_Texture_destructAndFree(void);
@@ -640,7 +640,7 @@ asm void fn_800AD834(void)
     bl __GXFlushPixelEngine
     lwz r3, lbl_8087EFB4
     li r4, 0x0
-    bl fn_800C0508
+    bl gx_captureEfbToTexture
     li r3, 0x0
     li r4, 0x0
     li r5, 0x1
@@ -754,7 +754,7 @@ lbl_fn_800AD834_00000914:
     mr r4, r28
     mr r5, r27
     li r6, 0x1
-    bl fn_800A96AC
+    bl gx_allocTextureBuffer
     stw r3, 0x100(r1)
     addi r30, r26, 0x38
     mr r4, r3
@@ -1102,7 +1102,7 @@ lbl_fn_800AD834_00000E44:
     mr r4, r15
     mr r5, r19
     li r6, 0x1
-    bl fn_800A96AC
+    bl gx_allocTextureBuffer
     stw r3, 0x0(r16)
     li r4, 0x1
     bl GXCopyTex

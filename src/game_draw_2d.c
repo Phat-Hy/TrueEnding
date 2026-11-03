@@ -26,13 +26,13 @@ extern void route_createSegment(void);
 extern void route_createWaypoint(void);
 extern void fn_80088AF4(void);
 extern void node_createNamedChild(void);
-extern void fn_800A96AC(void);
+extern void gx_allocTextureBuffer(void);
 extern void layout_drawPane(void);
 extern void fn_800B448C(void);
 extern void fn_800B4694(void);
 extern void fn_800B47AC(void);
 extern void motion_initTransform(void);
-extern void fn_800C0508(void);
+extern void gx_captureEfbToTexture(void);
 extern void fn_80476194(void);
 extern void fn_804761B0(void);
 extern void PSMTXMultVecArraySR(void);
@@ -909,7 +909,7 @@ asm void fn_800B2EA0(void)
     bl __GXFlushPixelEngine
     lwz r3, lbl_8087EFB4
     li r4, 0x1
-    bl fn_800C0508
+    bl gx_captureEfbToTexture
     srawi r0, r31, 2
     lwz r3, lbl_8087EF8C
     addze r31, r0
@@ -918,7 +918,7 @@ asm void fn_800B2EA0(void)
     addze r30, r0
     mr r4, r31
     mr r5, r30
-    bl fn_800A96AC
+    bl gx_allocTextureBuffer
     mr r29, r3
     addi r3, r1, 0x28
     mr r4, r29
@@ -943,7 +943,7 @@ asm void fn_800B2EA0(void)
     mr r4, r31
     mr r5, r30
     li r6, 0x6
-    bl fn_800A96AC
+    bl gx_allocTextureBuffer
     mr r28, r3
     addi r3, r1, 0x8
     mr r4, r28

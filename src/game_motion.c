@@ -60,8 +60,8 @@ void motion_updateFogAdj(void);
 void motion_initTransform(void);
 void fn_800BFC18(void);
 void fn_800BFCB4(void);
-void fn_800C0508(void);
-void fn_800C0590(void);
+void gx_captureEfbToTexture(void);
+void gx_captureEfbToTextureFmt(void);
 void fn_800C06B0(void);
 void fn_800C08B0(void);
 void fn_800C0900(void);
@@ -1563,7 +1563,7 @@ lbl_fn_800BFCB4_000011A8:
     blr
 }
 
-asm void fn_800C0508(void)
+asm void gx_captureEfbToTexture(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -1602,7 +1602,7 @@ asm void fn_800C0508(void)
     blr
 }
 
-asm void fn_800C0590(void)
+asm void gx_captureEfbToTextureFmt(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -1631,7 +1631,7 @@ asm void fn_800C0590(void)
     bl GXCopyTex
     bl __GXFlushPixelEngine
     cmpwi r29, 0x16
-    beq lbl_fn_800C0590_00001560
+    beq lbl_gx_captureEfbToTextureFmt_00001560
     lwz r4, 0x79c(r27)
     addi r3, r27, 0x77c
     clrlwi r5, r31, 16
@@ -1651,8 +1651,8 @@ asm void fn_800C0590(void)
     li r7, 0x0
     li r8, 0x0
     bl GXClampLightAngle
-    b lbl_fn_800C0590_000015AC
-lbl_fn_800C0590_00001560:
+    b lbl_gx_captureEfbToTextureFmt_000015AC
+lbl_gx_captureEfbToTextureFmt_00001560:
     lwz r4, 0x79c(r27)
     addi r3, r27, 0x77c
     clrlwi r5, r31, 16
@@ -1672,7 +1672,7 @@ lbl_fn_800C0590_00001560:
     li r7, 0x0
     li r8, 0x0
     bl GXClampLightAngle
-lbl_fn_800C0590_000015AC:
+lbl_gx_captureEfbToTextureFmt_000015AC:
     addi r11, r1, 0x20
     bl _restgpr_27
     lwz r0, 0x24(r1)

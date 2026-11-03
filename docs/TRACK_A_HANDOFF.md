@@ -222,3 +222,89 @@ functions and moved that number by **zero on the routines Track B touches** — 
 leverage on the port. The queue's top five alone cover 2 785 logged hits.
 
 Take the top 10-15 of that list first, then alternate one A2-style conversion per batch.
+
+## 8. The EFB-copy path, mapped from the binary (2026-11-03)
+
+Track B's cave frame spends 13-26 ms/frame inside `d3d11_efb_copy_to_guest`: **249-255 calls per frame,
+~1.4 Mpx in total** (`DEEPSEEK_HARNESS_HANDOVER.md` §5c.46 §9). "Which guest function issues those copies"
+is therefore the most valuable name left on the board. This section is the static map, plus the one-run
+experiment that turns it into an answer.
+
+### 8.1 Every guest EFB copy site
+
+`GXCopyTex` is `0x80615560` (already named; the split asm labels it `fn_80615560`). The retail DOL has
+exactly **30 direct `bl` sites**, each mapped to its owning function extent in `config/symbols.txt`:
+
+| site | owning function | site | owning function |
+|---|---|---|---|
+| `0x80071DE4` | `gx_copyEfbRectToTexObj` (was `fn_80071D80`) | `0x800AD818` | `fn_800AD648+0x1D0` |
+| `0x800A9E20` | `layout_drawPane+0x604` | `0x800ADA9C` | `fn_800AD834+0x268` |
+| `0x800AA08C` | `fn_800A9E64+0x228` | `0x800ADEF8` | `fn_800AD834+0x6C4` **loop** |
+| `0x800AA0C0` | `fn_800A9E64+0x25C` | `0x800ADF50` | `fn_800AD834+0x71C` **loop** |
+| `0x800AA190` | `fn_800A9E64+0x32C` | `0x800AE1DC` | `fn_800AD834+0x9A8` |
+| `0x800AA398` | `fn_800A9E64+0x534` | `0x800AEC48` | `fn_800AE568+0x6E0` |
+| `0x800ABD40` | `fn_800AB774+0x5CC` | `0x800AF980` | `fn_800AF544+0x43C` |
+| `0x800ABF90` | `fn_800ABD94+0x1FC` | `0x800B055C` | `fn_800AFFEC+0x570` |
+| `0x800ABFC4` | `fn_800ABD94+0x230` | `0x800B11C8` | `fn_800B105C+0x16C` |
+| `0x800AC094` | `fn_800ABD94+0x300` | `0x800B3084` | `fn_800B2EA0+0x1E4` |
+| `0x800AC828` | `fn_800AC6DC+0x14C` | `0x800B384C` | `fn_800B3770+0xDC` |
+| `0x800B6AB8` | `fn_800B6A00+0xB8` | `0x800B8ED8` | `fn_800B8964+0x574` |
+| `0x800B8FCC` | `fn_800B8F40+0x8C` | `0x800B9024` | `fn_800B8F40+0xE4` |
+| `0x800C0568` | `gx_captureEfbToTexture+0x60` | `0x800C05EC` | `gx_captureEfbToTextureFmt+0x5C` |
+| `0x800D74D4` | `tex_bakeCharacterTexture+0x25C` **loop** | `0x804ABC24` | `fn_804ABA2C+0x1F8` |
+
+`GXCopyDisp` (`0x80615420`) has two: `0x8007188C` (`fn_800713D4+0x4B8`) and `0x80071CB8`
+(`gx_syncFrameFifo+0x1BC`) - that is the frame-present path, not the 255.
+
+### 8.2 Only four sites are per-item, and those are where 255/frame can come from
+
+1. **`atn_Model_updateAnimation` (`0x800BDBC8`, called once per frame from `main+0x224`).** At
+   `0x800BE94C-0x800BE978` it walks a texture-copy request table - count at `0x910(manager)`, 8-byte
+   entries at `0x914` = `{texObj, slotIndex}` - and for every entry whose slot equals the model slot it is
+   currently updating (`r24 = 0..0x14`) calls `gx_copyEfbRectToTexObj(manager, texObj)`: **one GXCopyTex per
+   entry**. This is the only loop in the binary that copies once per queued entry.
+2. **`layout_drawPane` (`0x800A981C`)** copies the pane's own rectangle
+   (`GXSetTexCopySrc(0,0,w,h)` at `0x800A9E00`, `GXCopyTex` at `0x800A9E20`) and is itself called once per
+   pane from `fn_800AF544`'s loops (`0x800AFA4C-0x800AFA90`, count at `0xc(r29)`).
+3. **`fn_800AD834`** loop `0x800ADDF4-0x800ADFEC`: a mip chain - width and height are quartered each
+   iteration (`srawi r19,r19,2`), copies at `0x800ADEF8`/`0x800ADF50`, cap of 8 slots.
+4. **`tex_bakeCharacterTexture` (`0x800D7278`)** loop `0x800D73A0-0x800D7518`, one copy per bake step.
+
+### 8.3 The one-run experiment that settles which one
+
+Track B's hook is at the guest **BP 0x52** write, i.e. inside guest `GXCopyTex`. The guest's LR at that
+moment is the return address of the `bl GXCopyTex` - **exactly one of the 30 site addresses in 8.1**.
+Log `ctx->lr` there for the cave window (if `GXCopyTex` has already clobbered LR through its own calls,
+walk `ctx->gpr[1]` one frame up instead), then look the value up in the table:
+
+* `0x80071DE4` -> the copies come from `atn_Model_updateAnimation`'s queue flush (path 1);
+* `0x800A9E20` -> per-pane HUD copies from `layout_drawPane` (path 2);
+* `0x800ADEF8` / `0x800ADF50` -> a per-effect mip chain (path 3).
+
+### 8.4 The area arithmetic already narrows it
+
+255 calls at ~1.4 Mpx/frame is an average of **~5 500 px per copy ~= 80x56 = 640x448 / 8**, with at most one
+full-screen copy. So the hot copies are **many small regions**, which exonerates the two
+`gx_captureEfbToTexture*` helpers (single full-screen captures) and points at path 1 or path 2. A 640x448
+copy is 287 kpx, so two of them alone would be 40% of the measured area.
+
+### 8.5 Names added this session (4, all verified from their bodies)
+
+| address | name | evidence |
+|---|---|---|
+| `0x80071D80` | `gx_copyEfbRectToTexObj` | `GXSetTexCopySrc(0,0,w,h)` from `src+0x3c/0x40`; `GXSetTexCopyDst(w,h,GXGetTexObjFmt(dst),0)`; `GXCopyTex(dst->data@0x28, clear)`; `__GXFlushPixelEngine` |
+| `0x800A96AC` | `gx_allocTextureBuffer` | `GXGetTexBufferSize(w,h,fmt,mip)` -> `alloc(size, 0x20, type 6)` via the manager vtable -> `DCInvalidateRange`; 11 call sites, all copy setup |
+| `0x800C0508` | `gx_captureEfbToTexture` | full framebuffer rect from the GX state object (`lbl_8087EEE0+0x3c/0x40`), fmt 6 (RGBA8), into `obj+0x774` |
+| `0x800C0590` | `gx_captureEfbToTextureFmt` | same full-screen capture, caller-supplied format, into `obj+0x79c` |
+
+### 8.6 Two corrections to carry forward
+
+* **`GXInitLightObj` at `0x80615FF0` is not a light function.** Its body is `memset(obj, 0, 0x20)` plus
+  `rlwimi` packing of the wrap/format fields - a 0x20-byte `GXTexObj`, i.e. **`GXInitTexObj`**. Every copy
+  setup calls it as `(obj, buf, w, h, fmt, wrapS, wrapT, mipmap)`. `0x80616250` (`GXClampLightAngle`) is the
+  matching `GXInitTexObjLOD`. The GX-light names between `0x80615D20` and `0x806166E0` were assigned by
+  pattern and are shifted; do not cite them without reading the body.
+* **The progress line in §0 is stale.** A clean rebuild of `origin/track-a` (`44b3c55c`) measures
+  `7,424,972 / 7,477,608 B (18,017 / 18,155 functions)`, not `7,425,512 / 18,054`: 540 B / 37 functions were
+  lost by a commit after that number was recorded, and the loss is invisible in the `99.30%` line because it
+  also rounds to 99.30. Naming cannot move this number, so the gap is pre-existing and needs its own bisect.

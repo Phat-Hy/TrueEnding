@@ -20,13 +20,13 @@ extern void town_registerInteractionPoint(void);
 extern void town_updateInteractionPoints(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_800A96AC(void);
+extern void gx_allocTextureBuffer(void);
 extern void layout_drawPane(void);
 extern void fn_800AE568(void);
 extern void motion_updateFogAdj(void);
 extern void motion_initTransform(void);
 extern void fn_800BFC18(void);
-extern void fn_800C0508(void);
+extern void gx_captureEfbToTexture(void);
 extern void fn_800C1424(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void fn_800D594C(void);
@@ -578,7 +578,7 @@ lbl_fn_800AF544_0000065C:
     mr r4, r27
     mr r5, r26
     mr r6, r23
-    bl fn_800A96AC
+    bl gx_allocTextureBuffer
     mr r28, r3
     mr r7, r23
     mr r4, r28
@@ -603,7 +603,7 @@ lbl_fn_800AF544_0000065C:
     mr r4, r27
     mr r5, r26
     mr r6, r23
-    bl fn_800A96AC
+    bl gx_allocTextureBuffer
     mr r22, r3
     mr r7, r23
     mr r4, r22
@@ -626,7 +626,7 @@ lbl_fn_800AF544_0000065C:
     bl GXClampLightAngle
     lwz r3, lbl_8087EFB4
     li r4, 0x1
-    bl fn_800C0508
+    bl gx_captureEfbToTexture
     lwz r0, 0x14(r29)
     cmpwi r0, 0x0
     beq lbl_fn_800AF544_00000790
@@ -1574,7 +1574,7 @@ lbl_fn_800AFFEC_000014C0:
 lbl_fn_800AFFEC_000014D0:
     lwz r3, lbl_8087EFB4
     li r4, 0x1
-    bl fn_800C0508
+    bl gx_captureEfbToTexture
     lwz r6, lbl_8087EEE0
     li r3, 0x1
     lwz r4, 0x94(r28)

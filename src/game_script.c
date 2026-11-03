@@ -158,7 +158,7 @@ void gx_syncFrameFifo(void);
 void fn_80071D60(void *p, u32 val);
 void fn_80071D68(void *unused, void *p);
 void fn_80071D74(void *unused, void *p);
-void fn_80071D80(void);
+void gx_copyEfbRectToTexObj(void);
 
 asm void script_executeOpcode(void)
 {
@@ -3395,7 +3395,7 @@ void fn_80071D74(void *unused, void *p)
     fn_80618290(p, 1);
 }
 
-asm void fn_80071D80(void)
+asm void gx_copyEfbRectToTexObj(void)
 {
     nofralloc
     stwu r1, -0x10(r1)

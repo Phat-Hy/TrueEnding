@@ -10,7 +10,7 @@ extern void _savegpr_27(void);
 extern void fn_8006144C(void);
 extern void fn_8007192C(void);
 extern void gx_syncFrameFifo(void);
-extern void fn_80071D80(void);
+extern void gx_copyEfbRectToTexObj(void);
 extern void seq_stepPlaybackTimer(void);
 extern void fn_8007A100(void);
 extern void fn_8007A4CC(void);
@@ -1200,7 +1200,7 @@ lbl_atn_Model_updateAnimation_00001004:
     bne lbl_atn_Model_updateAnimation_0000101C
     lwz r4, 0x914(r25)
     mr r3, r26
-    bl fn_80071D80
+    bl gx_copyEfbRectToTexObj
 lbl_atn_Model_updateAnimation_0000101C:
     addi r25, r25, 0x8
     addi r27, r27, 0x1

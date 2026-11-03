@@ -10,10 +10,10 @@ extern void fn_8005DF90(void);
 extern void seq_stepPlaybackTimer(void);
 extern void seq_setViewportAndScissor(void);
 extern void seq_bindSlotResource(void);
-extern void fn_800A96AC(void);
+extern void gx_allocTextureBuffer(void);
 extern void motion_initTransform(void);
 extern void fn_800BFC18(void);
-extern void fn_800C0508(void);
+extern void gx_captureEfbToTexture(void);
 extern void fn_800C1424(void);
 extern void PSMTXTrans(void);
 extern void __GXSetVtxDesc(void);
@@ -544,7 +544,7 @@ asm void fn_800A9E64(void)
     divw r24, r30, r0
     mr r4, r25
     mr r5, r24
-    bl fn_800A96AC
+    bl gx_allocTextureBuffer
     mr r27, r3
     addi r3, r22, 0x4
     mr r4, r27
@@ -569,7 +569,7 @@ asm void fn_800A9E64(void)
     mr r4, r25
     mr r5, r24
     li r6, 0x6
-    bl fn_800A96AC
+    bl gx_allocTextureBuffer
     mr r26, r3
     addi r3, r22, 0x24
     mr r4, r26
@@ -600,7 +600,7 @@ asm void fn_800A9E64(void)
     li r6, 0x6
     mr r4, r21
     mr r5, r20
-    bl fn_800A96AC
+    bl gx_allocTextureBuffer
     mr r23, r3
     addi r3, r1, 0x50
     mr r4, r23
@@ -627,7 +627,7 @@ asm void fn_800A9E64(void)
     mr r4, r28
     mr r5, r29
     li r6, 0x6
-    bl fn_800A96AC
+    bl gx_allocTextureBuffer
     mr r19, r3
     addi r3, r1, 0x30
     mr r4, r19
@@ -1585,7 +1585,7 @@ asm void fn_800AAE2C(void)
     stw r0, 0x100(r1)
     lwz r3, lbl_8087EFB4
     stw r0, 0x108(r1)
-    bl fn_800C0508
+    bl gx_captureEfbToTexture
     bl GXDrawDone
     li r3, 0x1
     bl GXClearVtxDesc

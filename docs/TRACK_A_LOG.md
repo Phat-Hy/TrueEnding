@@ -1139,3 +1139,44 @@ and_stepEntropy
 et_isSessionActive, skeleton_getBoneByIndex, map_getArchiveName, ec3_addAssign, morph_hasActiveWeight, quest_getGlobalManager, arrier_formatCountdownTimer
 Progress: 99.30% matched (7,425,512 / 7,477,608 bytes), 18,054 / 18,155 functions matched.
 Bit-identical DOL hash verified: orig/main.dol: OK.
+
+## Session 2026-11-03 - the EFB-copy path, named (4 names, 0 conversions)
+
+Subject:  track-a: name 4 EFB-copy path routines (covers the GXCopyTex caller table) progress 99.29% -> 99.29%
+
+Context: Track B's cave frame spends 13-26 ms/frame inside `d3d11_efb_copy_to_guest`, 249-255 calls per
+frame. This session mapped every guest `GXCopyTex` site and named the four helpers on that path. The full
+map (30 call sites, the four per-item loops, and the one-run experiment that identifies the hot one) is
+appended to `TRACK_A_HANDOFF.md` section 8 - read that before touching the copy path.
+
+Names applied (evidence: the body, cited by address):
+  - gx_copyEfbRectToTexObj   (fn_80071D80,  0x84 B) - GXSetTexCopySrc(0,0,w,h) from src+0x3c/0x40,
+    GXSetTexCopyDst(w,h,GXGetTexObjFmt(dst),0), GXCopyTex(dst->data@0x28, clear), __GXFlushPixelEngine.
+    Called once per queued copy request from atn_Model_updateAnimation (+0x788..+0x7B0).
+  - gx_allocTextureBuffer    (fn_800A96AC,  0x8C B) - GXGetTexBufferSize -> alloc(size,0x20,type 6) via
+    the manager vtable -> DCInvalidateRange. 11 call sites, all in copy setup.
+  - gx_captureEfbToTexture   (fn_800C0508,  0x88 B) - full framebuffer rect from the GX state object
+    (lbl_8087EEE0+0x3c/0x40), fmt 6 (RGBA8), into obj+0x774.
+  - gx_captureEfbToTextureFmt(fn_800C0590,         ) - same full-screen capture, caller format, obj+0x79c.
+
+Corrections recorded for Track B:
+  - `GXInitLightObj` (0x80615FF0) is mis-named: its body is memset(obj,0,0x20) + rlwimi packing of the
+    wrap/format fields, i.e. GXInitTexObj; 0x80616250 (`GXClampLightAngle`) is GXInitTexObjLOD. The GX-light
+    names in 0x80615D20..0x806166E0 were assigned by pattern; do not cite them without reading the body.
+  - The cave's "hot PCs" (PSMTXConcat, PSVECMag, _savegpr_27/_restgpr_27, __fill_mem,
+    atn_SmallAllocator_allocate+0x68) are library/EABI leaves: a flat PC histogram measures callees, so they
+    say nothing about the game's own code. Caller attribution is needed, not more leaf names.
+
+Measurement discipline (this cost most of the session, so it is written down):
+  - The brief's baseline `7,425,512 B / 18,054 fn` is NOT reproducible from `origin/track-a`. A clean
+    configure + split + build of the pristine tip measures **7,424,564 B / 17,992 fn (99.29%)**, DOL still
+    byte-identical (`orig/main.dol: OK`), data 800 B.
+  - `build/SLSEXJ/obj` + `build/SLSEXJ/asm` are produced by the split with `--no-update`, so they persist
+    across renames; running `python configure.py` and forcing a split moved the matched-function count by
+    25 (18,017 -> 17,992) **with no source change**. The metric is therefore sensitive to which split
+    artifacts are on disk.
+  - Practical rule for the next rename batch: measure `progress`, apply the names, rebuild WITHOUT
+    re-running configure/split, and require the number to be identical; then regenerate the split once at
+    the end and expect the same number as the pristine tree at that artifact state. This session verified
+    the four names are matching-neutral in exactly that way (17,992 before and after, renamed-symbol split
+    and pristine-symbol split both 17,992).

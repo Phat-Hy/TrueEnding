@@ -33,7 +33,7 @@
 /* 800B66F0 000B0D50  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 800B66F4 000B0D54  7C 7F 1B 78 */	mr r31, r3
 /* 800B66F8 000B0D58  80 6D 98 F4 */	lwz r3, lbl_8087EFB4@sda21(r0)
-/* 800B66FC 000B0D5C  48 00 9E 0D */	bl fn_800C0508
+/* 800B66FC 000B0D5C  48 00 9E 0D */	bl gx_captureEfbToTexture
 /* 800B6700 000B0D60  7F E3 FB 78 */	mr r3, r31
 /* 800B6704 000B0D64  4B FF CC A5 */	bl fn_800B33A8
 /* 800B6708 000B0D68  80 01 00 14 */	lwz r0, 0x14(r1)
@@ -136,7 +136,7 @@
 /* 800B6840 000B0EA0  80 6D 98 F4 */	lwz r3, lbl_8087EFB4@sda21(r0)
 /* 800B6844 000B0EA4  38 80 00 00 */	li r4, 0x0
 /* 800B6848 000B0EA8  38 A0 00 13 */	li r5, 0x13
-/* 800B684C 000B0EAC  48 00 9D 45 */	bl fn_800C0590
+/* 800B684C 000B0EAC  48 00 9D 45 */	bl gx_captureEfbToTextureFmt
 /* 800B6850 000B0EB0  80 01 00 14 */	lwz r0, 0x14(r1)
 /* 800B6854 000B0EB4  7C 08 03 A6 */	mtlr r0
 /* 800B6858 000B0EB8  38 21 00 10 */	addi r1, r1, 0x10
@@ -2382,7 +2382,7 @@
 /* 800B89D8 000B3038  80 6D 98 CC */	lwz r3, lbl_8087EF8C@sda21(r0)
 /* 800B89DC 000B303C  7F C5 F3 78 */	mr r5, r30
 /* 800B89E0 000B3040  98 0D 98 F0 */	stb r0, lbl_8087EFB0@sda21(r0)
-/* 800B89E4 000B3044  4B FF 0C C9 */	bl fn_800A96AC
+/* 800B89E4 000B3044  4B FF 0C C9 */	bl gx_allocTextureBuffer
 /* 800B89E8 000B3048  90 7D 04 5C */	stw r3, 0x45c(r29)
 /* 800B89EC 000B304C  7C 64 1B 78 */	mr r4, r3
 /* 800B89F0 000B3050  38 7D 04 60 */	addi r3, r29, 0x460
@@ -8780,7 +8780,7 @@
 /* 800BE958 000B8FB8  40 82 00 10 */	bne .L_800BE968
 /* 800BE95C 000B8FBC  80 99 09 14 */	lwz r4, 0x914(r25)
 /* 800BE960 000B8FC0  7F 43 D3 78 */	mr r3, r26
-/* 800BE964 000B8FC4  4B FB 34 1D */	bl fn_80071D80
+/* 800BE964 000B8FC4  4B FB 34 1D */	bl gx_copyEfbRectToTexObj
 .L_800BE968:
 /* 800BE968 000B8FC8  3B 39 00 08 */	addi r25, r25, 0x8
 /* 800BE96C 000B8FCC  3B 7B 00 01 */	addi r27, r27, 0x1
@@ -10782,7 +10782,7 @@
 .endfn fn_800BFCB4
 
 # .text:0x9E64 | 0x800C0508 | size: 0x88
-.fn fn_800C0508, global
+.fn gx_captureEfbToTexture, global
 /* 800C0508 000BAB68  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 800C050C 000BAB6C  7C 08 02 A6 */	mflr r0
 /* 800C0510 000BAB70  90 01 00 24 */	stw r0, 0x24(r1)
@@ -10817,10 +10817,10 @@
 /* 800C0584 000BABE4  7C 08 03 A6 */	mtlr r0
 /* 800C0588 000BABE8  38 21 00 20 */	addi r1, r1, 0x20
 /* 800C058C 000BABEC  4E 80 00 20 */	blr
-.endfn fn_800C0508
+.endfn gx_captureEfbToTexture
 
 # .text:0x9EEC | 0x800C0590 | size: 0x120
-.fn fn_800C0590, global
+.fn gx_captureEfbToTextureFmt, global
 /* 800C0590 000BABF0  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 800C0594 000BABF4  7C 08 02 A6 */	mflr r0
 /* 800C0598 000BABF8  90 01 00 24 */	stw r0, 0x24(r1)
@@ -10895,7 +10895,7 @@
 /* 800C06A4 000BAD04  7C 08 03 A6 */	mtlr r0
 /* 800C06A8 000BAD08  38 21 00 20 */	addi r1, r1, 0x20
 /* 800C06AC 000BAD0C  4E 80 00 20 */	blr
-.endfn fn_800C0590
+.endfn gx_captureEfbToTextureFmt
 
 # .text:0xA00C | 0x800C06B0 | size: 0x200
 .fn fn_800C06B0, global

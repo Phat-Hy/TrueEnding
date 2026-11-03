@@ -17,8 +17,8 @@ extern void fn_800A9788(void);
 extern void fn_800A9794(void);
 extern void fn_800B33A8(void);
 extern void fn_800B3454(void);
-extern void fn_800C0508(void);
-extern void fn_800C0590(void);
+extern void gx_captureEfbToTexture(void);
+extern void gx_captureEfbToTextureFmt(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800D5B58(void);
@@ -474,7 +474,7 @@ asm void fn_800B66E0(void)
     stw r31, 0xc(r1)
     mr r31, r3
     lwz r3, lbl_8087EFB4
-    bl fn_800C0508
+    bl gx_captureEfbToTexture
     mr r3, r31
     bl fn_800B33A8
     lwz r0, 0x14(r1)
@@ -581,7 +581,7 @@ asm void fn_800B67F8(void)
     lwz r3, lbl_8087EFB4
     li r4, 0x0
     li r5, 0x13
-    bl fn_800C0590
+    bl gx_captureEfbToTextureFmt
     lwz r0, 0x14(r1)
     mtlr r0
     addi r1, r1, 0x10

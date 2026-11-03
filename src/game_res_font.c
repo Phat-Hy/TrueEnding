@@ -22,7 +22,7 @@ extern void radar_addBlipEntry(void);
 extern void fn_80094D88(void);
 extern void fn_80094F14(void);
 extern void motion_updateFogAdj(void);
-extern void fn_800C0508(void);
+extern void gx_captureEfbToTexture(void);
 extern void fn_800C06B0(void);
 extern void fn_800C08B0(void);
 extern void skeleton_getBoneByIndex(void);
@@ -1517,7 +1517,7 @@ asm void fn_80235BF8(void)
     bl fn_80072914
     lwz r3, lbl_8087EFB4
     li r4, 0x0
-    bl fn_800C0508
+    bl gx_captureEfbToTexture
     li r3, 0x1
     bl GXInitLightDistAttn
     li r3, 0x2

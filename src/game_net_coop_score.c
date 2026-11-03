@@ -34,9 +34,9 @@ extern void area_getAreaId(void);
 extern void sys_getMainManager(void);
 extern void fn_80093D98(void);
 extern void fn_80093E30(void);
-extern void fn_800A96AC(void);
+extern void gx_allocTextureBuffer(void);
 extern void motion_initTransform(void);
-extern void fn_800C0508(void);
+extern void gx_captureEfbToTexture(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
@@ -214,7 +214,7 @@ lbl_fn_804ABA2C_00000048:
     mr r30, r3
     mr r3, r29
     li r4, 0x1
-    bl fn_800C0508
+    bl gx_captureEfbToTexture
     bl gfx_getDevice
     subi r4, r26, 0x100
     subi r5, r27, 0x100
@@ -260,7 +260,7 @@ lbl_fn_804ABA2C_00000144:
     li r4, 0x100
     li r5, 0x100
     li r6, 0x4
-    bl fn_800A96AC
+    bl gx_allocTextureBuffer
     mr r25, r3
     addi r3, r1, 0xa0
     mr r4, r25

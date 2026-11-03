@@ -54507,7 +54507,7 @@
 .endfn fn_80071D74
 
 # .text:0x30300 | 0x80071D80 | size: 0x84
-.fn fn_80071D80, global
+.fn gx_copyEfbRectToTexObj, global
 /* 80071D80 0006C3E0  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80071D84 0006C3E4  7C 08 02 A6 */	mflr r0
 /* 80071D88 0006C3E8  90 01 00 14 */	stw r0, 0x14(r1)
@@ -54541,7 +54541,7 @@
 /* 80071DF8 0006C458  7C 08 03 A6 */	mtlr r0
 /* 80071DFC 0006C45C  38 21 00 10 */	addi r1, r1, 0x10
 /* 80071E00 0006C460  4E 80 00 20 */	blr
-.endfn fn_80071D80
+.endfn gx_copyEfbRectToTexObj
 
 # .text:0x30384 | 0x80071E04 | size: 0xB10
 .fn fn_80071E04, global

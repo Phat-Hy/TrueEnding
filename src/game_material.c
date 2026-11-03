@@ -21,7 +21,7 @@ extern void fn_80071D74(void);
 extern void gx_drawScreenQuad(void);
 extern void seq_stepPlaybackTimer(void);
 extern void gx_setRenderStateParam(void);
-extern void fn_800A96AC(void);
+extern void gx_allocTextureBuffer(void);
 extern void fn_800B6C70(void);
 extern void model_updateBoneTransforms(void);
 extern void fn_800C1424(void);
@@ -1730,7 +1730,7 @@ asm void fn_800B8964(void)
     lwz r3, lbl_8087EF8C
     mr r5, r30
     stb r0, lbl_8087EFB0
-    bl fn_800A96AC
+    bl gx_allocTextureBuffer
     stw r3, 0x45c(r29)
     mr r4, r3
     addi r3, r29, 0x460

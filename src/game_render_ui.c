@@ -15,14 +15,14 @@ extern void seq_bindSlotResource(void);
 extern void gx_setRenderStateParam(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_800A96AC(void);
+extern void gx_allocTextureBuffer(void);
 extern void fn_800B0A70(void);
 extern void fn_800B23C4(void);
 extern void fn_800B257C(void);
 extern void model_updateBoneTransforms(void);
 extern void motion_initTransform(void);
 extern void fn_800BFCB4(void);
-extern void fn_800C0508(void);
+extern void gx_captureEfbToTexture(void);
 extern void fn_800C1424(void);
 extern void PSMTXTranspose(void);
 extern void PSMTXInverse(void);
@@ -395,7 +395,7 @@ lbl_fn_800B105C_000003C0:
     mr r4, r29
     mr r5, r28
     srawi r26, r28, 1
-    bl fn_800A96AC
+    bl gx_allocTextureBuffer
     mr r25, r3
     addi r3, r31, 0x60
     mr r4, r25
@@ -430,7 +430,7 @@ lbl_fn_800B105C_000003C0:
     bl fn_80615190
     lwz r3, lbl_8087EFB4
     li r4, 0x1
-    bl fn_800C0508
+    bl gx_captureEfbToTexture
     lwz r5, lbl_8087EEE0
     addi r3, r1, 0x10
     subi r4, r30, 0x1
