@@ -18,10 +18,10 @@ extern void strncmp(void);
 extern void strstr(void);
 extern void msl_atol(void);
 extern void atoi(void);
-extern void fn_8068B1FC(void);
+extern void fn_8068B1FC();
 extern void net_formatIpAddress(void);
 extern void fn_806A4260(void);
-extern void net_castU16(void);
+extern u32 net_castU16();
 extern void net_sdk_noop(void);
 extern void net_truncateU16(void);
 extern void net_bufferGetCount(void);
@@ -31,7 +31,7 @@ extern void fn_806D63A0(void);
 extern void fn_806D6420(void);
 extern void fn_806D64B0(void);
 extern void net_invokeChannelCallback(void);
-extern void net_socketClose(void);
+extern void net_socketClose();
 extern void fn_806D7AE0(void);
 extern void net_checkSocketStatus(void);
 extern void fn_806D7CF0(void);
@@ -95,8 +95,8 @@ void fn_806FE5C0(void);
 void fn_806FE740(void);
 void fn_806FE760(void);
 void fn_806FE7B0(void);
-void fn_806FE820(void);
-void fn_806FE830(void);
+void fn_806FE820(void **a, void **b);
+void fn_806FE830(void **a);
 void net_http_initConnection(void);
 void fn_806FE8B0(void);
 void fn_806FE900(void);
@@ -107,12 +107,12 @@ void SBServerGetIntValue(void);
 void fn_806FEBD0(void);
 void fn_806FEC60(void);
 void *fn_806FEC90(void *obj);
-void fn_806FECA0(void);
+u32 fn_806FECA0(void *p);
 u16 fn_806FECB0(void *obj);
 u32 fn_806FECC0(const void *p);
 void fn_806FECD0(void);
 void *fn_806FED00(void *obj);
-void fn_806FED10(void);
+u32 fn_806FED10(void *p);
 void fn_806FED20(void *obj, void *val);
 void *fn_806FED30(void *obj);
 void fn_806FED40(void);
@@ -1883,19 +1883,14 @@ lbl_fn_806FE7B0_00001830:
     blr
 }
 
-asm void fn_806FE820(void)
+void fn_806FE820(void **a, void **b)
 {
-    nofralloc
-    lwz r3, 0x0(r3)
-    lwz r4, 0x0(r4)
-    b fn_8068B1FC
+    fn_8068B1FC(*a, *b);
 }
 
-asm void fn_806FE830(void)
+void fn_806FE830(void **a)
 {
-    nofralloc
-    lwz r3, 0x0(r3)
-    b net_socketClose
+    net_socketClose(*a);
 }
 
 asm void net_http_initConnection(void)
@@ -2238,11 +2233,9 @@ void *fn_806FEC90(void *obj)
     return *(void **)(obj);
 }
 
-asm void fn_806FECA0(void)
+u32 fn_806FECA0(void *p)
 {
-    nofralloc
-    lhz r3, 0x4(r3)
-    b net_castU16
+    return net_castU16(*(u16 *)((u8 *)p + 4));
 }
 
 u16 fn_806FECB0(void *obj)
@@ -2276,11 +2269,9 @@ void *fn_806FED00(void *obj)
     return *(void **)((char *)obj + 8);
 }
 
-asm void fn_806FED10(void)
+u32 fn_806FED10(void *p)
 {
-    nofralloc
-    lhz r3, 0xc(r3)
-    b net_castU16
+    return net_castU16(*(u16 *)((u8 *)p + 0xc));
 }
 
 void fn_806FED20(void *obj, void *val)

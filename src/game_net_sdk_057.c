@@ -6,7 +6,7 @@ extern void __register_global_object(void);
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_80046784(void);
+extern void fn_80046784();
 extern void fn_8059E378(void);
 extern void fn_805A03A4(void);
 extern void OSInitMutex(void);
@@ -30,8 +30,8 @@ extern void fn_8070CF70(void);
 extern void fn_8070D180(void);
 extern void fn_8070D360(void);
 extern void fn_8070D380(void);
-extern void fn_8070D490(void);
-extern void fn_8070D630(void);
+extern void fn_8070D490();
+extern void fn_8070D630();
 extern void fn_8070D720(void);
 extern void fn_8070D850(void);
 extern void fn_8070D900(void);
@@ -39,7 +39,7 @@ extern void fn_8070D9D0(void);
 extern void fn_8070EE90(void);
 extern void fn_8070F0D0(void);
 extern void fn_8070F130(void);
-extern void fn_807157D0(void);
+extern void fn_807157D0();
 extern void fn_80717EA0(void);
 extern void net_getGlobalContext(void);
 extern void net_calcStreamOffset(void);
@@ -78,13 +78,13 @@ void fn_80715E90(void *p, u32 val);
 void fn_80715EA0(void);
 void fn_80715EF0(void);
 void fn_80715F30(void);
-void fn_80715F70(void);
-void fn_80715FE0(void);
+void fn_80715F70();
+void fn_80715FE0();
 void fn_80716000(void);
 void fn_80716030(void);
-void fn_80716040(void);
-void fn_80716050(void);
-void fn_80716060(void);
+void fn_80716040(void *p);
+void fn_80716050(void *p);
+void fn_80716060(void *p);
 void fn_80716070(void);
 void fn_80716130(void);
 void fn_807161E0(void);
@@ -120,8 +120,8 @@ void fn_807175E0(void);
 void fn_80717630(void);
 void fn_80717680(void);
 void fn_807176D0(void);
-void fn_80717740(void);
-void fn_80717750(void);
+void fn_80717740(void *p);
+void fn_80717750(void *p);
 void fn_80717760(void);
 void fn_807177D0(void);
 void fn_80717840(void);
@@ -297,7 +297,7 @@ asm void fn_80715F30(void)
     blr
 }
 
-asm void fn_80715F70(void)
+asm void fn_80715F70(void *p)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -332,7 +332,7 @@ lbl_fn_80715F70_00000270:
     blr
 }
 
-asm void fn_80715FE0(void)
+asm void fn_80715FE0(void *p)
 {
     nofralloc
     cmpwi r4, 0x0
@@ -357,33 +357,24 @@ asm void fn_80716000(void)
     blr
 }
 
-asm void fn_80716030(void)
+void fn_80716030(void)
 {
-    nofralloc
-    lis r3, lbl_808632A8@ha
-    addi r3, r3, lbl_808632A8@l
-    b fn_807157D0
+    fn_807157D0(lbl_808632A8);
 }
 
-asm void fn_80716040(void)
+void fn_80716040(void *p)
 {
-    nofralloc
-    subi r3, r3, 0x4
-    b fn_80715FE0
+    fn_80715FE0((u8 *)p - 4);
 }
 
-asm void fn_80716050(void)
+void fn_80716050(void *p)
 {
-    nofralloc
-    subi r3, r3, 0x4
-    b fn_80715F70
+    fn_80715F70((u8 *)p - 4);
 }
 
-asm void fn_80716060(void)
+void fn_80716060(void *p)
 {
-    nofralloc
-    subi r3, r3, 0x4
-    b fn_80046784
+    fn_80046784((u8 *)p - 4);
 }
 
 asm void fn_80716070(void)
@@ -2119,18 +2110,14 @@ lbl_fn_807176D0_000019C8:
     blr
 }
 
-asm void fn_80717740(void)
+void fn_80717740(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x1c
-    b fn_8070D490
+    fn_8070D490((u8 *)p + 0x1c);
 }
 
-asm void fn_80717750(void)
+void fn_80717750(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x1c
-    b fn_8070D630
+    fn_8070D630((u8 *)p + 0x1c);
 }
 
 asm void fn_80717760(void)

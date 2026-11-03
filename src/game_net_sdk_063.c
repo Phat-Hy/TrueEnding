@@ -43,8 +43,8 @@ extern void net_getGlobalContext(void);
 extern void fn_80718D70(void);
 extern void fn_8071EDB0(void);
 extern void fn_8071EFB0(void);
-extern void fn_80721540(void);
-extern void fn_807222E0(void);
+extern void fn_80721540();
+extern void fn_807222E0();
 extern void fn_80725050(void);
 extern void fn_80725070(void);
 extern void fn_807250E0(void);
@@ -85,15 +85,15 @@ void fn_80722820(void);
 void fn_807229E0(void);
 void fn_80722DF0(void);
 void fn_80722E60(void);
-void fn_80722E70(void);
-void fn_80722E80(void);
+void fn_80722E70(void *p);
+void fn_80722E80(void *p);
 u32 fn_80722E90(const void *p);
 u32 fn_80722EB0(const void *p);
 u32 fn_80722ED0(const void *p);
-void fn_80722EF0(void);
-void fn_80722F00(void);
-void fn_80722F10(void);
-void fn_80722F20(void);
+void fn_80722EF0(void *p);
+void fn_80722F00(void *p);
+void fn_80722F10(void *p);
+void fn_80722F20(void *p);
 void fn_80722F30(void);
 void fn_80722F40(void);
 void fn_80722F50(void);
@@ -869,7 +869,7 @@ void fn_80722E60(void)
     fn_80722570();
 }
 
-asm void fn_80722E70(void)
+asm void fn_80722E70(void *p)
 {
     nofralloc
     lwz r12, 0x0(r3)
@@ -878,7 +878,7 @@ asm void fn_80722E70(void)
     bctr
 }
 
-void fn_80722E80(void) {
+void fn_80722E80(void *p) {
 }
 
 u32 fn_80722E90(const void *p)
@@ -896,32 +896,24 @@ u32 fn_80722ED0(const void *p)
     return *(const u8 *)((const u8 *)p + 0xcc) != 0;
 }
 
-asm void fn_80722EF0(void)
+void fn_80722EF0(void *p)
 {
-    nofralloc
-    subi r3, r3, 0xb4
-    b fn_80722E80
+    fn_80722E80((u8 *)p - 0xb4);
 }
 
-asm void fn_80722F00(void)
+void fn_80722F00(void *p)
 {
-    nofralloc
-    subi r3, r3, 0xb4
-    b fn_807222E0
+    fn_807222E0((u8 *)p - 0xb4);
 }
 
-asm void fn_80722F10(void)
+void fn_80722F10(void *p)
 {
-    nofralloc
-    subi r3, r3, 0xb4
-    b fn_80721540
+    fn_80721540((u8 *)p - 0xb4);
 }
 
-asm void fn_80722F20(void)
+void fn_80722F20(void *p)
 {
-    nofralloc
-    subi r3, r3, 0xc0
-    b fn_80722E70
+    fn_80722E70((u8 *)p - 0xc0);
 }
 
 asm void fn_80722F30(void)

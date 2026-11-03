@@ -41,14 +41,14 @@ extern void fn_8070AC10(void);
 extern void fn_8070F0D0(void);
 extern void fn_8070F130(void);
 extern void fn_80719AA0(void);
-extern void fn_80719C50(void);
+extern void fn_80719C50();
 extern void fn_80719D50(void);
 extern void fn_80719F70(void);
 extern void fn_8071A000(void);
 extern void fn_8071AAF0(void);
 extern void fn_8071ADF0(void);
-extern void fn_8071B350(void);
-extern void fn_8071B840(void);
+extern void fn_8071B350();
+extern void fn_8071B840();
 extern void fn_8071E680(void);
 extern void fn_8071EA40(void);
 extern void fn_8071F270(void);
@@ -90,16 +90,16 @@ void fn_8071C5E0(void);
 void fn_8071C630(void);
 void fn_8071C700(void);
 void fn_8071C790(void);
-void fn_8071C840(void);
-void fn_8071C850(void);
-void fn_8071C860(void);
+void fn_8071C840(void *p);
+void fn_8071C850(void *p);
+void fn_8071C860(void *p);
 u8 fn_8071C870(void *p);
 u8 fn_8071C880(void *p);
 u8 fn_8071C890(void *p);
-void fn_8071C8A0(void);
-void fn_8071C8B0(void);
-void fn_8071C8C0(void);
-void fn_8071C8D0(void);
+void fn_8071C8A0(void *p);
+void fn_8071C8B0(void *p);
+void fn_8071C8C0(void *p);
+void fn_8071C8D0(void *p);
 void fn_8071C8E0(void);
 void fn_8071C9A0(void);
 void fn_8071CAE0(void);
@@ -111,14 +111,14 @@ void fn_8071CE70(void);
 void fn_8071CF10(void);
 void fn_8071CF70(void);
 BOOL fn_8071D060(const void *p);
-void fn_8071D080(void);
+void fn_8071D080(void *p);
 void *fn_8071D090(void *p);
 void *fn_8071D0A0(void *p);
 u8 fn_8071D0B0(void *p);
 void *fn_8071D0C0(void);
 void fn_8071D0D0(void);
 void fn_8071D0E0(void);
-void fn_8071D1E0(void);
+void fn_8071D1E0();
 void fn_8071D220(void);
 void fn_8071D260(void);
 void fn_8071D300(void);
@@ -132,7 +132,7 @@ void fn_8071D760(void);
 void fn_8071D860(void);
 void net_waitForEvent(void);
 void fn_8071D9C0(void);
-void fn_8071DA10(void);
+void fn_8071DA10(void *p);
 void fn_8071DA30(void);
 void fn_8071DAB0(void);
 void fn_8071DB80(void);
@@ -786,17 +786,17 @@ lbl_fn_8071C790_000008A4:
     blr
 }
 
-void fn_8071C840(void)
+void fn_8071C840(void *p)
 {
-    fn_8071B350();
+    fn_8071B350(p);
 }
 
-void fn_8071C850(void)
+void fn_8071C850(void *p)
 {
-    fn_8071B840();
+    fn_8071B840(p);
 }
 
-asm void fn_8071C860(void)
+asm void fn_8071C860(void *p)
 {
     nofralloc
     lwz r12, 0x0(r3)
@@ -820,32 +820,24 @@ u8 fn_8071C890(void *p)
     return *(u8 *)((u8 *)p + 0x101);
 }
 
-asm void fn_8071C8A0(void)
+void fn_8071C8A0(void *p)
 {
-    nofralloc
-    subi r3, r3, 0xb4
-    b fn_8071C860
+    fn_8071C860((u8 *)p - 0xb4);
 }
 
-asm void fn_8071C8B0(void)
+void fn_8071C8B0(void *p)
 {
-    nofralloc
-    subi r3, r3, 0xb4
-    b fn_8071C850
+    fn_8071C850((u8 *)p - 0xb4);
 }
 
-asm void fn_8071C8C0(void)
+void fn_8071C8C0(void *p)
 {
-    nofralloc
-    subi r3, r3, 0xb4
-    b fn_8071C840
+    fn_8071C840((u8 *)p - 0xb4);
 }
 
-asm void fn_8071C8D0(void)
+void fn_8071C8D0(void *p)
 {
-    nofralloc
-    subi r3, r3, 0xb4
-    b fn_80719C50
+    fn_80719C50((u8 *)p - 0xb4);
 }
 
 asm void fn_8071C8E0(void)
@@ -1401,11 +1393,9 @@ BOOL fn_8071D060(const void *p)
     return *(const u32 *)((const u8 *)p + 0xe28) != 0;
 }
 
-asm void fn_8071D080(void)
+void fn_8071D080(void *p)
 {
-    nofralloc
-    lwz r3, 0xe28(r3)
-    b fn_8071D1E0
+    fn_8071D1E0(*(void **)((u8 *)p + 0xe28));
 }
 
 void *fn_8071D090(void *p)
@@ -2129,14 +2119,11 @@ asm void fn_8071D9C0(void)
     blr
 }
 
-asm void fn_8071DA10(void)
+void fn_8071DA10(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, 0x318(r3)
-    stb r0, 0x31c(r3)
-    stb r0, 0x31d(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x318) = 0;
+    *(u8 *)((u8 *)p + 0x31c) = 0;
+    *(u8 *)((u8 *)p + 0x31d) = 0;
 }
 
 asm void fn_8071DA30(void)

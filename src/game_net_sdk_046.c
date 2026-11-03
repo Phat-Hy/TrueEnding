@@ -24,7 +24,7 @@ extern void net_sdk_noop(void);
 extern void net_truncateU16(void);
 extern void fn_806D57A0(void);
 extern void net_pollActiveSockets(void);
-extern void net_bufferGetCount(void);
+extern u32 net_bufferGetCount();
 extern void net_bufferGetElement(void);
 extern void net_array_removeAt(void);
 extern void fn_806D5E40(void);
@@ -104,7 +104,7 @@ void fn_806FF570(void *p, u32 a, u16 b);
 void fn_806FF580(void *obj, void *val);
 void fn_806FF590(void *obj, u8 val);
 u8 fn_806FF5A0(void *obj);
-void fn_806FF5B0(void);
+u32 fn_806FF5B0(u32 val);
 void fn_806FF5D0(void);
 void fn_806FF820(void);
 void fn_806FF920(void);
@@ -118,8 +118,8 @@ void fn_806FFD80(void);
 void fn_806FFDD0(void);
 void fn_806FFE10(void);
 void fn_806FFE50(void);
-void fn_806FFEA0(void);
-void fn_806FFEB0(void);
+void fn_806FFEA0(void *p);
+void fn_806FFEB0(void *p);
 void fn_806FFEC0(void);
 void *fn_806FFF50(void *obj);
 void fn_806FFF60(void);
@@ -130,8 +130,8 @@ void fn_80700330(void);
 void fn_807003D0(void);
 void fn_80700550(void);
 void fn_807005E0(void);
-void fn_80700680(void);
-void fn_80700690(void);
+u32 fn_80700680(void *p);
+void fn_80700690(void *p);
 void fn_807006C0(void);
 void fn_807007A0(void);
 void fn_80700830(void);
@@ -485,15 +485,9 @@ u8 fn_806FF5A0(void *obj)
     return *(u8 *)((char *)obj + 0x14);
 }
 
-asm void fn_806FF5B0(void)
+u32 fn_806FF5B0(u32 val)
 {
-    nofralloc
-    lis r4, lbl_80862AF8@ha
-    lwz r0, lbl_80862AF8@l(r4)
-    subf r0, r3, r0
-    cntlzw r0, r0
-    srwi r3, r0, 5
-    blr
+    return val == *(u32 *)lbl_80862AF8;
 }
 
 asm void fn_806FF5D0(void)
@@ -1149,18 +1143,14 @@ lbl_fn_806FFE50_00000D58:
     blr
 }
 
-asm void fn_806FFEA0(void)
+void fn_806FFEA0(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x60
-    b fn_80700690
+    fn_80700690((u8 *)p + 0x60);
 }
 
-asm void fn_806FFEB0(void)
+void fn_806FFEB0(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x60
-    b fn_80700680
+    fn_80700680((u8 *)p + 0x60);
 }
 
 asm void fn_806FFEC0(void)
@@ -1724,14 +1714,12 @@ lbl_fn_807005E0_00001530:
     blr
 }
 
-asm void fn_80700680(void)
+u32 fn_80700680(void *p)
 {
-    nofralloc
-    lwz r3, 0x4(r3)
-    b net_bufferGetCount
+    return net_bufferGetCount(*(void **)((u8 *)p + 4));
 }
 
-asm void fn_80700690(void)
+asm void fn_80700690(void *p)
 {
     nofralloc
     stwu r1, -0x10(r1)

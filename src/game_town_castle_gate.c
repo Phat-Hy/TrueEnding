@@ -12,9 +12,9 @@ extern void env_updateAtmosphere(void);
 extern void str_findChar(void);
 extern void fn_80134250(void);
 extern void fn_80134270(void);
-extern void math_evaluateCurve1D(void);
+extern f32 math_evaluateCurve1D();
 extern void save_getElapsedPlayTime(void);
-extern void fn_801FEB9C(void);
+extern void fn_801FEB9C();
 extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
 extern void thread_dispatchToQueue(void);
@@ -69,7 +69,7 @@ void fn_803D6EC0(void);
 u32 fn_803D6ED4(void *p);
 u32 fn_803D6EDC(void *p);
 void fn_803D6EEC(void);
-void fn_803D6EF0(void);
+void fn_803D6EF0(void *p);
 void fn_803D6EF8(void);
 void fn_803D6F44(void);
 void *fn_803D6F60(void *p);
@@ -116,7 +116,7 @@ void fn_803D7204(void);
 void *fn_803D7224(void *p, u32 idx);
 void fn_803D7234(void);
 void *fn_803D7260(void *p, u32 idx);
-void fn_803D7270(void);
+f32 fn_803D7270(void *p, u32 b, u32 idx);
 void fn_803D7280(void);
 void fn_803D72C0(void);
 void fn_803D72FC(void);
@@ -247,11 +247,9 @@ u32 fn_803D6EDC(void *p)
 void fn_803D6EEC(void) {
 }
 
-asm void fn_803D6EF0(void)
+void fn_803D6EF0(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x58
-    b fn_801FEB9C
+    fn_801FEB9C((u8 *)p + 0x58);
 }
 
 asm void fn_803D6EF8(void)
@@ -623,13 +621,9 @@ void *fn_803D7260(void *p, u32 idx)
     return (u8 *)p + (idx << 2) + 4;
 }
 
-asm void fn_803D7270(void)
+f32 fn_803D7270(void *p, u32 b, u32 idx)
 {
-    nofralloc
-    slwi r0, r5, 3
-    add r3, r3, r0
-    addi r3, r3, 0x4
-    b math_evaluateCurve1D
+    return math_evaluateCurve1D((u8 *)p + idx * 8 + 4, b);
 }
 
 asm void fn_803D7280(void)

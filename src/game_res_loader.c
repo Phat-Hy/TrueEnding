@@ -44,9 +44,9 @@ extern void task_lookupTagIndex(void);
 extern void fn_802251F8(void);
 extern void fn_802253E4(void);
 extern void fn_80225C80(void);
-extern void fn_80226320(void);
+extern void fn_80226320();
 extern void fn_80226B28(void);
-extern void fn_80226B48(void);
+extern void fn_80226B48();
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void wcslen(void);
@@ -102,15 +102,15 @@ void fn_80227434(void);
 void fn_80227A94(void);
 void fn_80227D2C(void);
 void fn_80227F78(void);
-void fn_80227F98(void);
-void fn_80227FA8(void);
+void fn_80227F98(void *p);
+void fn_80227FA8(void *p);
 u32 fn_80227FB8(void *p);
-void fn_80227FC0(void);
-void fn_8022808C(void);
-void fn_80228094(void);
-void fn_8022809C(void);
-void fn_802280A4(void);
-void fn_802280AC(void);
+void fn_80227FC0(void *p);
+void fn_8022808C(void *p);
+void fn_80228094(void *p);
+void fn_8022809C(void *p);
+void fn_802280A4(void *p);
+void fn_802280AC(void *p);
 void fn_802280B4(void);
 void fn_802288D0(void);
 void fn_80228928(void);
@@ -941,7 +941,7 @@ asm void fn_80227F78(void)
     blr
 }
 
-asm void fn_80227F98(void)
+asm void fn_80227F98(void *p)
 {
     nofralloc
     lwzu r12, 0xb0(r3)
@@ -950,7 +950,7 @@ asm void fn_80227F98(void)
     bctr
 }
 
-asm void fn_80227FA8(void)
+asm void fn_80227FA8(void *p)
 {
     nofralloc
     lwzu r12, 0xb0(r3)
@@ -964,7 +964,7 @@ u32 fn_80227FB8(void *p)
     return *(u32 *)p;
 }
 
-asm void fn_80227FC0(void)
+asm void fn_80227FC0(void *p)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -1024,39 +1024,29 @@ lbl_fn_80227FC0_00000C38:
     blr
 }
 
-asm void fn_8022808C(void)
+void fn_8022808C(void *p)
 {
-    nofralloc
-    subi r3, r3, 0x1424
-    b fn_80227FA8
+    fn_80227FA8((u8 *)p - 0x1424);
 }
 
-asm void fn_80228094(void)
+void fn_80228094(void *p)
 {
-    nofralloc
-    subi r3, r3, 0x1424
-    b fn_80226320
+    fn_80226320((u8 *)p - 0x1424);
 }
 
-asm void fn_8022809C(void)
+void fn_8022809C(void *p)
 {
-    nofralloc
-    subi r3, r3, 0x1424
-    b fn_80226B48
+    fn_80226B48((u8 *)p - 0x1424);
 }
 
-asm void fn_802280A4(void)
+void fn_802280A4(void *p)
 {
-    nofralloc
-    subi r3, r3, 0x1424
-    b fn_80227F98
+    fn_80227F98((u8 *)p - 0x1424);
 }
 
-asm void fn_802280AC(void)
+void fn_802280AC(void *p)
 {
-    nofralloc
-    subi r3, r3, 0x1424
-    b fn_80227FC0
+    fn_80227FC0((u8 *)p - 0x1424);
 }
 
 asm void fn_802280B4(void)

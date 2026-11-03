@@ -9,13 +9,13 @@ extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_800489F4(void);
-extern void fn_80048F8C(void);
-extern void fn_80049268(void);
+extern void fn_80048F8C();
+extern void fn_80049268();
 extern void fn_8004937C(void);
-extern void fn_80049654(void);
+extern void fn_80049654();
 extern void fn_800496C0(void);
-extern void fn_800498A4(void);
-extern void fn_800498D4(void);
+extern void fn_800498A4();
+extern void fn_800498D4();
 extern void snd_findSoundNodeByName(void);
 extern void fn_80049C3C(void);
 extern void fn_80049D74(void);
@@ -110,8 +110,8 @@ extern u32 lbl_8088114C;
 
 /* Function declarations */
 void fn_800C3094(void);
-void fn_800C310C(void);
-void fn_800C3118(void);
+void fn_800C310C(void *p);
+void fn_800C3118(void *p);
 void fn_800C3124(void);
 void fn_800C317C(void);
 void fn_800C3184(void);
@@ -187,20 +187,14 @@ lbl_fn_800C3094_00000064:
     blr
 }
 
-asm void fn_800C310C(void)
+void fn_800C310C(void *p)
 {
-    nofralloc
-    mr r4, r3
-    lwz r3, lbl_8087EE90
-    b fn_80048F8C
+    fn_80048F8C(lbl_8087EE90, p);
 }
 
-asm void fn_800C3118(void)
+void fn_800C3118(void *p)
 {
-    nofralloc
-    mr r4, r3
-    lwz r3, lbl_8087EE90
-    b fn_80049268
+    fn_80049268(lbl_8087EE90, p);
 }
 
 asm void fn_800C3124(void)
@@ -231,11 +225,9 @@ lbl_fn_800C3124_000000D4:
     blr
 }
 
-asm void fn_800C317C(void)
+void fn_800C317C(void)
 {
-    nofralloc
-    lwz r3, lbl_8087EE90
-    b fn_80049654
+    fn_80049654(lbl_8087EE90);
 }
 
 asm void fn_800C3184(void)
@@ -269,18 +261,14 @@ lbl_fn_800C3184_0000013C:
     blr
 }
 
-asm void fn_800C31E4(void)
+void fn_800C31E4(void)
 {
-    nofralloc
-    lwz r3, lbl_8087EE90
-    b fn_800498A4
+    fn_800498A4(lbl_8087EE90);
 }
 
-asm void fn_800C31EC(void)
+void fn_800C31EC(void)
 {
-    nofralloc
-    lwz r3, lbl_8087EE90
-    b fn_800498D4
+    fn_800498D4(lbl_8087EE90);
 }
 
 asm void skin_playAnimationByName(void)

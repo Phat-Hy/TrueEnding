@@ -19,7 +19,7 @@ extern void fn_806D5930(void);
 extern void fn_806D5A60(void);
 extern void net_array_removeAt(void);
 extern void net_hashTable_remove(void);
-extern void fn_806D66B0(void);
+extern void fn_806D66B0();
 extern void net_socketClose(void);
 extern void net_getTimestampMs(void);
 extern void fn_806D8F80(void);
@@ -66,7 +66,7 @@ extern u8 lbl_807C4334[];
 
 /* Function declarations */
 void pad_03_806EA68C_text(void);
-void fn_806EA690(void);
+void fn_806EA690(void *p, int flag);
 void net_abortConnection(void);
 void fn_806EA790(void);
 void fn_806EA840(void);
@@ -78,10 +78,10 @@ void fn_806EA910(void);
 void fn_806EA920(void);
 void fn_806EAAD0(void);
 void fn_806EABD0(void);
-void fn_806EABE0(void);
-void fn_806EABF0(void);
-void fn_806EAC00(void);
-void fn_806EAC20(void);
+void fn_806EABE0(void *p);
+void fn_806EABF0(void **p);
+void fn_806EAC00(void *p);
+void fn_806EAC20(void **p);
 void net_bindSessionCallback(void);
 void fn_806EAC50(void);
 void *fn_806EAC90(void *obj);
@@ -99,7 +99,7 @@ void fn_806EAD40(void);
 void fn_806EAE70(void);
 void fn_806EB1B0(void);
 void fn_806EB4C0(void);
-void fn_806EBC90(void);
+s32 fn_806EBC90(void *a, void *b);
 void fn_806EBCB0(void);
 void fn_806EBE60(void);
 void fn_806EC2C0(void);
@@ -111,7 +111,7 @@ asm void pad_03_806EA68C_text(void)
     opword 0x00000000
 }
 
-asm void fn_806EA690(void)
+asm void fn_806EA690(void *p, int flag)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -510,37 +510,24 @@ void fn_806EABD0(void)
     fn_806EDE80();
 }
 
-asm void fn_806EABE0(void)
+void fn_806EABE0(void *p)
 {
-    nofralloc
-    li r4, 0x1
-    b fn_806EA690
+    fn_806EA690(p, 1);
 }
 
-asm void fn_806EABF0(void)
+void fn_806EABF0(void **p)
 {
-    nofralloc
-    lwz r3, 0x0(r3)
-    li r4, 0x0
-    b fn_806EA690
+    fn_806EA690(*p, 0);
 }
 
-asm void fn_806EAC00(void)
+void fn_806EAC00(void *p)
 {
-    nofralloc
-    lis r4, fn_806EABF0@ha
-    lwz r3, 0xc(r3)
-    addi r4, r4, fn_806EABF0@l
-    li r5, 0x0
-    b fn_806D66B0
+    fn_806D66B0(*(void **)((u8 *)p + 0xc), fn_806EABF0, 0);
 }
 
-asm void fn_806EAC20(void)
+void fn_806EAC20(void **p)
 {
-    nofralloc
-    lwz r3, 0x0(r3)
-    li r4, 0x1
-    b fn_806EA690
+    fn_806EA690(*p, 1);
 }
 
 asm void net_bindSessionCallback(void)
@@ -1745,14 +1732,9 @@ lbl_fn_806EB4C0_000015E0:
     blr
 }
 
-asm void fn_806EBC90(void)
+s32 fn_806EBC90(void *a, void *b)
 {
-    nofralloc
-    lhz r4, 0xc(r4)
-    lhz r0, 0xc(r3)
-    subf r0, r4, r0
-    extsh r3, r0
-    blr
+    return (s16)(*(u16 *)((u8 *)a + 0xc) - *(u16 *)((u8 *)b + 0xc));
 }
 
 asm void fn_806EBCB0(void)
